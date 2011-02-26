@@ -1,5 +1,5 @@
 # Hungarian translation of gnome-control-center.
-# Copyright (C) 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 Free Software Foundation, Inc.
+# Copyright (C) 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-control-center package.
 #
 # Szabolcs Ban <shooby at gnome dot hu>, 1998, 1999, 2000.
@@ -8,16 +8,17 @@
 # Andras Timar <timar at gnome dot hu>, 2001, 2002, 2003.
 # Gabor Sari <saga at gnome dot hu>, 2003.
 # Laszlo Dvornik <dvornik at gnome dot hu>, 2004.
-# Gabor Kelemen <kelemeng at gnome dot hu>, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
+# Gabor Kelemen <kelemeng at gnome dot hu>, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011.
 # Mate ORY <orymate at gmail d0t com>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-29 10:59+0200\n"
-"PO-Revision-Date: 2010-07-29 17:00+0200\n"
+"POT-Creation-Date: 2011-02-26 03:03+0100\n"
+"PO-Revision-Date: 2011-02-26 03:03+0100\n"
 "Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
 "Language-Team: Hungarian <gnome at fsf dot hu>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,6 +60,44 @@ msgid ""
 msgstr ""
 "További asztali témák letöltésére használt URL. Ha nincs megadva, a "
 "hivatkozás nem jelenik meg."
+
+#: ../libgnome-control-center/cc-lockbutton.c:347
+#: ../panels/screen/screen.ui.h:13
+msgid "Lock"
+msgstr "Zárolás"
+
+#: ../libgnome-control-center/cc-lockbutton.c:356
+#: ../panels/network/network.ui.h:23
+msgid "Unlock"
+msgstr "Feloldás"
+
+#: ../libgnome-control-center/cc-lockbutton.c:365
+msgid "Locked"
+msgstr "Zárolva"
+
+#: ../libgnome-control-center/cc-lockbutton.c:374
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+"Az ablak zárolva.\n"
+"Kattintson a változtatások megakadályozásához"
+
+#: ../libgnome-control-center/cc-lockbutton.c:383
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+"Az ablak zárolva.\n"
+"Kattintson a változtatáshoz"
+
+#: ../libgnome-control-center/cc-lockbutton.c:392
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
+"A rendszer házirendje megakadályozza a változtatásokat.\n"
+"Keresse meg a rendszergazdát."
 
 #: ../libgnome-control-center/gconf-property-editor.c:134
 msgid "Key"
@@ -131,7 +170,7 @@ msgstr ""
 "Kiosztandó visszahívás, amikor a tulajdonságszerkesztő objektum adatai "
 "törlendők"
 
-#: ../libgnome-control-center/gconf-property-editor.c:1406
+#: ../libgnome-control-center/gconf-property-editor.c:1473
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -143,7 +182,7 @@ msgstr ""
 "\n"
 "Tegye elérhetővé a fájlt, vagy válasszon másik háttérképet."
 
-#: ../libgnome-control-center/gconf-property-editor.c:1414
+#: ../libgnome-control-center/gconf-property-editor.c:1481
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -156,585 +195,309 @@ msgstr ""
 "\n"
 "Válasszon egy másik képet helyette."
 
-#: ../libgnome-control-center/gconf-property-editor.c:1536
+#: ../libgnome-control-center/gconf-property-editor.c:1603
 msgid "Please select an image."
 msgstr "Válasszon egy képet."
 
-#: ../libgnome-control-center/gconf-property-editor.c:1541
+#: ../libgnome-control-center/gconf-property-editor.c:1608
 msgid "_Select"
 msgstr "_Kijelölés"
 
-#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:1
-msgid "Date And Time"
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "Háttér"
+
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:2
+msgid "Change the background"
+msgstr "Háttér megváltoztatása"
+
+#. Translators: those are keywords for the background control-center panel
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:4
+msgid "Wallpaper;Screen;Desktop;"
+msgstr "Háttérkép;Képernyő;Asztal;"
+
+#: ../panels/background/background.ui.h:1
+msgid "Center"
+msgstr "Középre"
+
+#. This refers to a slideshow background
+#: ../panels/background/background.ui.h:3
+msgid "Changes throughout the day"
+msgstr "Nap közben változik"
+
+#: ../panels/background/background.ui.h:4
+msgid "Fill"
+msgstr "Kitöltés"
+
+#: ../panels/background/background.ui.h:5
+msgid "Scale"
+msgstr "Méretezés"
+
+#: ../panels/background/background.ui.h:6
+msgid "Span"
+msgstr "Nyújtás"
+
+#: ../panels/background/background.ui.h:7
+msgid "Tile"
+msgstr "Mozaik"
+
+#: ../panels/background/background.ui.h:8
+#: ../panels/universal-access/uap.ui.h:83
+msgid "Zoom"
+msgstr "Nagyítás"
+
+#: ../panels/background/bg-colors-source.c:46
+msgid "Horizontal Gradient"
+msgstr "Vízszintes színátmenet"
+
+#: ../panels/background/bg-colors-source.c:47
+msgid "Vertical Gradient"
+msgstr "Függőleges színátmenet"
+
+#: ../panels/background/bg-colors-source.c:48
+msgid "Solid Color"
+msgstr "Homogén szín"
+
+#: ../panels/background/cc-background-panel.c:960
+#: ../panels/user-accounts/um-photo-dialog.c:216
+#: ../panels/user-accounts/data/photo-dialog.ui.h:2
+msgid "Browse for more pictures"
+msgstr "További képek tallózása"
+
+#: ../panels/background/cc-background-panel.c:1051
+msgid "Current background"
+msgstr "Jelenlegi háttér"
+
+#: ../panels/background/cc-background-panel.c:1115
+msgid "Wallpapers"
+msgstr "Háttérképek"
+
+#: ../panels/background/cc-background-panel.c:1122
+msgid "Pictures Folder"
+msgstr "Képek mappa"
+
+#: ../panels/background/cc-background-panel.c:1129
+msgid "Colors & Gradients"
+msgstr "Színek és átmenetek"
+
+#: ../panels/background/cc-background-panel.c:1137
+msgid "Flickr"
+msgstr "Flickr"
+
+#: ../panels/background/cc-background-item.c:148
+msgid "multiple sizes"
+msgstr "több méret"
+
+#. translators: 100 × 100px
+#. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
+#: ../panels/background/cc-background-item.c:152
+#, c-format
+msgid "%d × %d"
+msgstr "%d × %d"
+
+#: ../panels/background/cc-background-item.c:255
+msgid "No Desktop Background"
+msgstr "Nincs asztalháttér"
+
+#: ../panels/common/gdm-languages.c:709
+msgid "Unspecified"
+msgstr "Nincs megadva"
+
+#: ../panels/datetime/datetime.ui.h:1
+msgid "16"
+msgstr "16"
+
+#: ../panels/datetime/datetime.ui.h:2
+msgid "2010"
+msgstr "2010"
+
+#: ../panels/datetime/datetime.ui.h:3
+msgid "22"
+msgstr "22"
+
+#: ../panels/datetime/datetime.ui.h:4
+msgid "24-Hour Time"
+msgstr "24 órás idő"
+
+#: ../panels/datetime/datetime.ui.h:5
+msgid "45"
+msgstr "45"
+
+#: ../panels/datetime/datetime.ui.h:6
+msgid ":"
+msgstr ":"
+
+#: ../panels/datetime/datetime.ui.h:7
+msgid "AM"
+msgstr "DE"
+
+#: ../panels/datetime/datetime.ui.h:8
+msgid "April"
+msgstr "Április"
+
+#: ../panels/datetime/datetime.ui.h:9
+msgid "August"
+msgstr "Augusztus"
+
+#: ../panels/datetime/datetime.ui.h:10
+msgid "City:"
+msgstr "Város:"
+
+#: ../panels/datetime/datetime.ui.h:11
+msgid "December"
+msgstr "December"
+
+#: ../panels/datetime/datetime.ui.h:12
+msgid "February"
+msgstr "Február"
+
+#: ../panels/datetime/datetime.ui.h:13
+msgid "January"
+msgstr "Január"
+
+#: ../panels/datetime/datetime.ui.h:14
+msgid "July"
+msgstr "Július"
+
+#: ../panels/datetime/datetime.ui.h:15
+msgid "June"
+msgstr "Június"
+
+#: ../panels/datetime/datetime.ui.h:16
+msgid "March"
+msgstr "Március"
+
+#: ../panels/datetime/datetime.ui.h:17
+msgid "May"
+msgstr "Május"
+
+#: ../panels/datetime/datetime.ui.h:18
+msgid "Network Time"
+msgstr "Hálózati idő"
+
+#: ../panels/datetime/datetime.ui.h:19
+msgid "November"
+msgstr "November"
+
+#: ../panels/datetime/datetime.ui.h:20
+msgid "October"
+msgstr "Október"
+
+#: ../panels/datetime/datetime.ui.h:21
+msgid "Region:"
+msgstr "Régió:"
+
+#: ../panels/datetime/datetime.ui.h:22
+msgid "September"
+msgstr "Szeptember"
+
+#. Translators: those are keywords for the date and time control-center panel
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
+msgid "Clock;Timezone;Location;"
+msgstr "Óra;Időzóna;Hely;"
+
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:3
+msgid "Date and Time"
 msgstr "Dátum és idő"
 
-#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:4
 msgid "Date and Time preferences panel"
 msgstr "Dátum és idő beállításai"
 
-#: ../panels/default-applications/gnome-default-applications-panel.desktop.in.in.h:1
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:17
-msgid "Preferred Applications"
-msgstr "Alapértelmezett alkalmazások"
-
-#: ../panels/default-applications/gnome-default-applications-panel.desktop.in.in.h:2
-msgid "Select your default applications"
-msgstr "Alapértelmezett alkalmazások kiválasztása"
-
-#: ../panels/default-applications/gnome-at-session.desktop.in.in.h:1
-msgid "Start the preferred visual assistive technology"
-msgstr "Az előnyben részesített vizuális akadálymentesítés indítása"
-
-#: ../panels/default-applications/gnome-at-session.desktop.in.in.h:2
-msgid "Visual Assistance"
-msgstr "Vizuális segítség"
-
-#: ../panels/default-applications/gnome-da-capplet.c:99
-#: ../panels/default-applications/gnome-da-capplet.c:363
-#: ../panels/default-applications/gnome-da-capplet.c:384
-#, c-format
-msgid "Error saving configuration: %s"
-msgstr "Hiba történt a beállítások mentése közben: %s"
-
-#: ../panels/default-applications/gnome-da-capplet.c:692
-msgid "Custom"
-msgstr "Egyéni"
-
-#: ../panels/default-applications/gnome-da-capplet.c:723
-msgid "Could not load the main interface"
-msgstr "A fő kezelőfelület nem tölthető be"
-
-#: ../panels/default-applications/gnome-da-capplet.c:725
-msgid "Please make sure that the applet is properly installed"
-msgstr "Ellenőrizze, hogy ez a kisalkalmazás megfelelően van-e telepítve"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:1
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:1
-#: ../panels/mouse/gnome-mouse-properties.ui.h:1
-msgid "Accessibility"
-msgstr "Akadálymentesítés"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:3
-#, no-c-format
-msgid "All %s occurrences will be replaced with actual link"
-msgstr "A %s minden előfordulása tényleges linkkel lesz helyettesítve"
-
-#.
-#. * vim: sw=2 ts=8 cindent noai bs=2
-#.
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:4
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:1
-msgid "C_ommand:"
-msgstr "Pa_rancs:"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:5
-msgid "Co_mmand:"
-msgstr "_Parancs:"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:6
-msgid "E_xecute flag:"
-msgstr "_Futtatási jelző:"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:7
-msgid "Image Viewer"
-msgstr "Képmegjelenítő"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:8
-msgid "Instant Messenger"
-msgstr "Azonnali üzenetküldő"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:9
-msgid "Internet"
-msgstr "Internet"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:10
-msgid "Mail Reader"
-msgstr "Levelezőprogram"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:11
-msgid "Mobility"
-msgstr "Mobilitás"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:12
-msgid "Multimedia"
-msgstr "Multimédia"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:13
-msgid "Multimedia Player"
-msgstr "Zenelejátszó"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:14
-msgid "Open link in new _tab"
-msgstr "_Hivatkozás megnyitása új fülön"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:15
-msgid "Open link in new _window"
-msgstr "Hivatkozás megnyitása új _ablakban"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:16
-msgid "Open link with web browser _default"
-msgstr "Hivatkozás megnyitása az alapértelmezett _webböngészővel"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:18
-msgid "Run at st_art"
-msgstr "Futtatás in_dításkor"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:19
-msgid "Run in t_erminal"
-msgstr "Futtatás t_erminálban"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:20
-msgid "System"
-msgstr "Rendszer"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:21
-msgid "Terminal Emulator"
-msgstr "Terminálemulátor"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:22
-msgid "Text Editor"
-msgstr "Szövegszerkesztő"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:23
-msgid "Video Player"
-msgstr "Videolejátszó"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:24
-msgid "Visual"
-msgstr "Vizuális"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:25
-msgid "Web Browser"
-msgstr "Webböngésző"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:26
-msgid "_Run at start"
-msgstr "Futtatás in_dításkor"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:1
-msgid "Balsa"
-msgstr "Balsa"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:2
-msgid "Banshee Music Player"
-msgstr "Banshee zenelejátszó"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:3
-msgid "Claws Mail"
-msgstr "Claws Mail"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:4
-#: ../panels/universal-access/uap.ui.h:31
-msgid "Dasher"
-msgstr "Dasher"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:5
-msgid "Debian Sensible Browser"
-msgstr "Debian környezetérzékeny böngésző"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:6
-msgid "Debian Terminal Emulator"
-msgstr "Debian terminálemulátor"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:7
-msgid "ETerm"
-msgstr "ETerm"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:8
-msgid "Encompass"
-msgstr "Encompass"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:9
-msgid "Epiphany Web Browser"
-msgstr "Epiphany webböngésző"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:10
-msgid "Evolution Mail Reader"
-msgstr "Evolution"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:11
-msgid "Firebird"
-msgstr "Firebird"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:12
-msgid "Firefox"
-msgstr "Firefox"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:13
-msgid "GNOME Magnifier without Screen Reader"
-msgstr "GNOME nagyító képernyőolvasó nélkül"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:14
-msgid "GNOME OnScreen Keyboard"
-msgstr "GNOME képernyő-billentyűzet"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:15
-msgid "GNOME Terminal"
-msgstr "GNOME Terminál"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:16
-msgid "Galeon"
-msgstr "Galeon"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:17
-msgid "Gnopernicus"
-msgstr "Gnopernicus"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:18
-msgid "Gnopernicus with Magnifier"
-msgstr "Gnopernicus nagyítóval"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:19
-msgid "Iceape"
-msgstr "Iceape"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:20
-msgid "Iceape Mail"
-msgstr "Iceape levelező"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:21
-msgid "Icedove"
-msgstr "Icedove"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:22
-msgid "Iceweasel"
-msgstr "Iceweasel"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:23
-msgid "KDE Magnifier without Screen Reader"
-msgstr "KDE nagyító képernyőolvasó nélkül"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:24
-msgid "KMail"
-msgstr "KMail"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:25
-msgid "Konqueror"
-msgstr "Konqueror"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:26
-msgid "Konsole"
-msgstr "Konsole"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:27
-msgid "Linux Screen Reader"
-msgstr "Linux képernyőolvasó"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:28
-msgid "Linux Screen Reader with Magnifier"
-msgstr "Linux képernyőolvasó nagyítóval"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:29
-msgid "Listen"
-msgstr "Listen"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:30
-msgid "Midori"
-msgstr "Midori"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:31
-msgid "Mozilla"
-msgstr "Mozilla"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:32
-msgid "Mozilla 1.6"
-msgstr "Mozilla 1.6"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:33
-msgid "Mozilla Mail"
-msgstr "Mozilla Mail"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:34
-msgid "Mozilla Thunderbird"
-msgstr "Mozilla Thunderbird"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:35
-msgid "Muine Music Player"
-msgstr "Muine zenelejátszó"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:36
-msgid "Mutt"
-msgstr "Mutt"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:37
-msgid "NXterm"
-msgstr "NXterm"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:38
-msgid "Netscape Communicator"
-msgstr "Netscape Communicator"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:39
-msgid "Opera"
-msgstr "Opera"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:40
-msgid "Orca"
-msgstr "Orca"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:41
-msgid "Orca with Magnifier"
-msgstr "Orca nagyítóval"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:42
-msgid "RXVT"
-msgstr "RXVT"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:43
-msgid "Rhythmbox Music Player"
-msgstr "Rhythmbox zenelejátszó"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:44
-msgid "SeaMonkey"
-msgstr "SeaMonkey"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:45
-msgid "SeaMonkey Mail"
-msgstr "SeaMonkey levelező"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:46
-msgid "Standard XTerminal"
-msgstr "Szabványos X-terminál"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:47
-msgid "Sylpheed"
-msgstr "Sylpheed"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:48
-msgid "Sylpheed-Claws"
-msgstr "Sylpheed-Claws"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:49
-msgid "Terminator"
-msgstr "Terminator"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:50
-msgid "Thunderbird"
-msgstr "Thunderbird"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:51
-msgid "Totem Movie Player"
-msgstr "Totem filmlejátszó"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:52
-msgid "aterm"
-msgstr "aterm"
-
 #: ../panels/display/display-capplet.ui.h:1
-msgid "Include _panel"
-msgstr "_Panel felvétele"
-
-#: ../panels/display/display-capplet.ui.h:2
-#: ../panels/display/xrandr-capplet.c:320
 msgid "Left"
 msgstr "Balra"
 
-#: ../panels/display/display-capplet.ui.h:3
-msgid "Make Default"
-msgstr "Beállítás alapértelmezettként"
-
-#: ../panels/display/display-capplet.ui.h:4
-#: ../panels/display/xrandr-capplet.c:523
+#: ../panels/display/display-capplet.ui.h:2
+#: ../panels/display/xrandr-capplet.c:497
 msgid "Monitor"
 msgstr "Monitor"
 
-#: ../panels/display/display-capplet.ui.h:5
-#: ../panels/display/xrandr-capplet.c:319
-#: ../panels/display/xrandr-capplet.c:358
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/display/display-capplet.ui.h:3
+#: ../panels/display/xrandr-capplet.c:333
+#: ../panels/display/xrandr-capplet.c:372
+#: ../panels/universal-access/uap.ui.h:53
 msgid "Normal"
 msgstr "Normál"
 
-#: ../panels/display/display-capplet.ui.h:6
-#: ../panels/universal-access/uap.ui.h:61
-msgid "Off"
-msgstr "Ki"
+#: ../panels/display/display-capplet.ui.h:4
+msgid "Note: may limit resolution options"
+msgstr "Megjegyzés: a felbontási lehetőségeket korlátozhatja"
 
-#: ../panels/display/display-capplet.ui.h:7
-#: ../panels/universal-access/uap.ui.h:62
-msgid "On"
-msgstr "Be"
-
-#: ../panels/display/display-capplet.ui.h:8
-msgid "Panel icon"
-msgstr "Panelikon"
-
-#: ../panels/display/display-capplet.ui.h:9
+#: ../panels/display/display-capplet.ui.h:5
 msgid "R_otation:"
 msgstr "_Forgatás:"
 
-#: ../panels/display/display-capplet.ui.h:10
-msgid "Re_fresh rate:"
-msgstr "F_rissítési frekvencia:"
-
-#: ../panels/display/display-capplet.ui.h:11
-#: ../panels/display/xrandr-capplet.c:321
+#: ../panels/display/display-capplet.ui.h:6
 msgid "Right"
 msgstr "Jobbra"
 
-#: ../panels/display/display-capplet.ui.h:12
-msgid "Sa_me image in all monitors"
-msgstr "A_zonos kép minden monitoron"
-
-#: ../panels/display/display-capplet.ui.h:13
+#: ../panels/display/display-capplet.ui.h:7
 msgid "Upside-down"
 msgstr "Fejjel lefelé"
 
-#: ../panels/display/display-capplet.ui.h:14
-msgid "_Detect monitors"
-msgstr "_Monitorok felismerése"
+#: ../panels/display/display-capplet.ui.h:8
+msgid "_Detect Displays"
+msgstr "_Kijelzők felismerése"
 
-#: ../panels/display/display-capplet.ui.h:15
+#. Note that mirror is a verb in this string
+#: ../panels/display/display-capplet.ui.h:10
+msgid "_Mirror displays"
+msgstr "Kijelzők _tükrözése"
+
+#: ../panels/display/display-capplet.ui.h:11
 msgid "_Resolution:"
 msgstr "_Felbontás:"
 
-#: ../panels/display/display-capplet.ui.h:16
-msgid "_Show monitors in panel"
-msgstr "Mo_nitorok megjelenítése a panelen"
-
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:1
-msgid "Change resolution and position of monitors"
-msgstr "Monitorok felbontásának és elhelyezésének módosítása"
+msgid "Change resolution and position of monitors and projectors"
+msgstr "Monitorok és projektorok felbontásának és elhelyezésének módosítása"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
-msgid "Monitors"
-msgstr "Monitorok"
+msgid "Displays"
+msgstr "Kijelzők"
 
-#: ../panels/display/gnome-display-properties-install-systemwide.c:44
-#, c-format
-msgid ""
-"Usage: %s SOURCE_FILE DEST_NAME\n"
-"\n"
-"This program installs a RANDR profile for multi-monitor setups into\n"
-"a systemwide location.  The resulting profile will get used when\n"
-"the RANDR plug-in gets run in gnome-settings-daemon.\n"
-"\n"
-"SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
-"xml\n"
-"\n"
-"DEST_NAME - relative name for the installed file.  This will get put in\n"
-"            the systemwide directory for RANDR configurations,\n"
-"            so the result will typically be %s/DEST_NAME\n"
-msgstr ""
-"Használat: %s FORRÁS_FÁJL CÉL_NÉV\n"
-"\n"
-"Ez a program egy RANDR profilt telepít többmonitoros gépekhez egy\n"
-"rendszerszintű helyre. Az eredményül kapott profil akkor kerül "
-"felhasználásra\n"
-"amikor a gnome-settings-daemon futtatja a RANDR bővítményt.\n"
-"\n"
-"FORRÁS_FÁJL – egy teljes útvonalnév, általában /home/felhasználó/.config/"
-"monitors.xml\n"
-"\n"
-"CÉL_NÉV – a telepített fájl relatív neve. Ez kerül a RANDR beállítások\n"
-"            rendszerszintű könyvtárába, így az eredmény általában\n"
-"            %s/CÉL_NÉV\n"
+#. Translators: those are keywords for the display control-center panel
+#: ../panels/display/gnome-display-panel.desktop.in.in.h:4
+msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
+msgstr "Panel;Projektor;xrandr;Képernyő;Felbontás;Frissítés;"
 
-#. Translators: only able to install RANDR profiles as root
-#: ../panels/display/gnome-display-properties-install-systemwide.c:151
-msgid "This program can only be used by the root user"
-msgstr "Ezt a programot csak a root felhasználó használhatja"
+#: ../panels/display/xrandr-capplet.c:334
+msgid "Anti-Clockwise"
+msgstr "Óra járásával ellentétes"
 
-#: ../panels/display/gnome-display-properties-install-systemwide.c:168
-msgid "The source filename must be absolute"
-msgstr "A forrásfájl nevének abszolútnak kell lennie"
+#: ../panels/display/xrandr-capplet.c:335
+msgid "Clockwise"
+msgstr "Óra járása szerinti"
 
-#. Translators: first %s is a filename; second %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:179
-#, c-format
-msgid "Could not open %s: %s\n"
-msgstr "%s nem nyitható meg: %s\n"
-
-#. Translators: first %s is a filename; second %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:188
-#, c-format
-msgid "Could not get information for %s: %s\n"
-msgstr "A(z) %s információi nem kérhetők le: %s\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:195
-#, c-format
-msgid "%s must be a regular file\n"
-msgstr "%s szabályos fájl kell legyen\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:204
-msgid "This program must only be run through pkexec(1)"
-msgstr "Ezt a programot a pkexec(1) segítségével kell futtatni"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:209
-msgid "PKEXEC_UID must be set to an integer value"
-msgstr "A PKEXEC_UID egész érték kell legyen"
-
-#. Translators: we are complaining that a file must be really owned by the user who called this program
-#: ../panels/display/gnome-display-properties-install-systemwide.c:215
-#, c-format
-msgid "%s must be owned by you\n"
-msgstr "%s az Ön tulajdona kell legyen\n"
-
-#. Translators: here we are saying that a plain filename must look like "filename", not like "some_dir/filename"
-#: ../panels/display/gnome-display-properties-install-systemwide.c:223
-#, c-format
-msgid "%s must not have any directory components\n"
-msgstr "%s nem tartalmazhat könyvtár-összetevőket\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:231
-#, c-format
-msgid "%s must be a directory\n"
-msgstr "%s könyvtár kell legyen\n"
-
-#. Translators: the first %s/%s is a directory/filename; the last %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:242
-#, c-format
-msgid "Could not open %s/%s: %s\n"
-msgstr "%s/%s nem nyitható meg: %s\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:262
-#, c-format
-msgid "Could not rename %s to %s: %s\n"
-msgstr "%s nem nevezhető át (erre: %s): %s\n"
-
-#: ../panels/display/org.gnome.randr.policy.in.h:1
-msgid ""
-"Authentication is required to install multi-monitor settings for all users"
-msgstr ""
-"Hitelesítés szükséges többmonitoros beállítások telepítéséhez az összes "
-"felhasználó számára"
-
-#: ../panels/display/org.gnome.randr.policy.in.h:2
-msgid "Install multi-monitor settings for the whole system"
-msgstr "Többmonitoros beállítások telepítése az egész rendszer számára"
-
-#: ../panels/display/xrandr-capplet.c:322
-msgid "Upside Down"
-msgstr "Fejjel lefelé"
-
-#: ../panels/display/xrandr-capplet.c:364
-#, c-format
-msgid "%d Hz"
-msgstr "%d Hz"
+#: ../panels/display/xrandr-capplet.c:336
+msgid "180 Degrees"
+msgstr "180 fok"
 
 #. Translators:  this is the feature where what you see on your laptop's
 #. * screen is the same as your external monitor.  Here, "Mirror" is being
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:512
-#: ../panels/display/xrandr-capplet.c:1658
-msgid "Mirror Screens"
-msgstr ""
-"Képernyők\n"
-"tükrözése"
+#: ../panels/display/xrandr-capplet.c:473
+msgid "Mirror Displays"
+msgstr "Tükrözött kijelzők"
 
-#: ../panels/display/xrandr-capplet.c:514
+#: ../panels/display/xrandr-capplet.c:603
 #, c-format
-msgid "Monitor: %s"
-msgstr "Monitor: %s"
+msgid "%d x %d (%s)"
+msgstr "%d × %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:592
+#: ../panels/display/xrandr-capplet.c:605
 #, c-format
 msgid "%d x %d"
-msgstr "%d x %d"
+msgstr "%d × %d"
 
-#: ../panels/display/xrandr-capplet.c:1514
+#: ../panels/display/xrandr-capplet.c:1518
+msgid "Drag to change primary display."
+msgstr "Húzza az elsődleges kijelző módosításához."
+
+#: ../panels/display/xrandr-capplet.c:1576
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
@@ -742,90 +505,390 @@ msgstr ""
 "Válassza ki a monitort a tulajdonságai módosításához, húzza az "
 "elhelyezésének megváltoztatásához."
 
-#: ../panels/display/xrandr-capplet.c:2079
+#: ../panels/display/xrandr-capplet.c:1966
+msgid "%a %R"
+msgstr "%a %R"
+
+#: ../panels/display/xrandr-capplet.c:1968
+msgid "%a %l:%M %p"
+msgstr "%a, %k.%M"
+
+#: ../panels/display/xrandr-capplet.c:2214
 msgid "Could not save the monitor configuration"
 msgstr "A monitor beállításai nem menthetők"
 
-#: ../panels/display/xrandr-capplet.c:2102
+#: ../panels/display/xrandr-capplet.c:2239
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 "Nem kérhető le a munkamenetbusz a képernyő beállításainak alkalmazásakor"
 
-#: ../panels/display/xrandr-capplet.c:2147
+#: ../panels/display/xrandr-capplet.c:2284
 msgid "Could not detect displays"
 msgstr "A kijelzők nem ismerhetők fel"
 
-#: ../panels/display/xrandr-capplet.c:2322
-msgid "The monitor configuration has been saved"
-msgstr "A monitorbeállítások mentve"
-
-#: ../panels/display/xrandr-capplet.c:2324
-msgid "This configuration will be used the next time someone logs in."
-msgstr "A beállítások a következő bejelentkezés után kerülnek felhasználásra."
-
-#: ../panels/display/xrandr-capplet.c:2358
-msgid "Could not set the default configuration for monitors"
-msgstr "A monitor alapértelmezett beállításai nem állíthatók be"
-
-#: ../panels/display/xrandr-capplet.c:2416
+#: ../panels/display/xrandr-capplet.c:2479
 msgid "Could not get screen information"
 msgstr "A képernyő-információk nem kérhetők le"
 
-#: ../panels/keybindings/00-multimedia-key.xml.in.h:1
-msgid "Sound"
-msgstr "Hang"
+#. translators: This is the type of architecture, for example:
+#. * "64-bit" or "32-bit"
+#: ../panels/info/cc-info-panel.c:479
+#, c-format
+msgid "%d-bit"
+msgstr "%d bit"
 
-#: ../panels/keybindings/01-desktop-key.xml.in.h:1
-msgid "Desktop"
-msgstr "Asztali környezet"
+#: ../panels/info/cc-info-panel.c:493
+#, c-format
+msgid "%u byte"
+msgid_plural "%u bytes"
+msgstr[0] "%u bájt"
+msgstr[1] "%u bájt"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:21
+#: ../panels/info/cc-info-panel.c:501
+#, c-format
+msgid "%.1f KB"
+msgstr "%.1f KB"
+
+#: ../panels/info/cc-info-panel.c:506
+#, c-format
+msgid "%.1f MB"
+msgstr "%.1f MB"
+
+#: ../panels/info/cc-info-panel.c:511
+#, c-format
+msgid "%.1f GB"
+msgstr "%.1f GB"
+
+#: ../panels/info/cc-info-panel.c:516
+#, c-format
+msgid "%.1f TB"
+msgstr "%.1f TB"
+
+#: ../panels/info/cc-info-panel.c:521
+#, c-format
+msgid "%.1f PB"
+msgstr "%.1f PB"
+
+#: ../panels/info/cc-info-panel.c:526
+#, c-format
+msgid "%.1f EB"
+msgstr "%.1f EB"
+
+#: ../panels/info/cc-info-panel.c:637
+msgid "Unknown model"
+msgstr "Ismeretlen modell"
+
+#: ../panels/info/cc-info-panel.c:720
+msgid "The next login will attempt to use the standard experience."
+msgstr ""
+"A következő bejelentkezés az általános megjelenést próbálja majd használni."
+
+#: ../panels/info/cc-info-panel.c:722
+msgid ""
+"The next login will use the fallback mode intended for unsupported graphics "
+"hardware."
+msgstr ""
+"A következő bejelentkezés a nem támogatott hardverhez tervezett tartalék "
+"megjelenést próbálja majd használni."
+
+#. translators: The hardware is not able to run GNOME 3's
+#. * shell, so we use the GNOME "Fallback" session
+#: ../panels/info/cc-info-panel.c:771
+msgctxt "Experience"
+msgid "Fallback"
+msgstr "Tartalék"
+
+#. translators: The hardware is able to run GNOME 3's
+#. * shell, also called "Standard" experience
+#: ../panels/info/cc-info-panel.c:777
+msgctxt "Experience"
+msgid "Standard"
+msgstr "Általános"
+
+#: ../panels/info/cc-info-panel.c:909
+#: ../panels/keyboard/keyboard-shortcuts.c:1711
+msgid "Section"
+msgstr "Szakasz"
+
+#: ../panels/info/cc-info-panel.c:918 ../panels/info/info.ui.h:14
+msgid "Overview"
+msgstr "Áttekintés"
+
+#: ../panels/info/cc-info-panel.c:924 ../panels/info/info.ui.h:3
+msgid "Default Applications"
+msgstr "Alapértelmezett alkalmazások"
+
+#: ../panels/info/cc-info-panel.c:929 ../panels/info/info.ui.h:9
+msgid "Graphics"
+msgstr "Grafika"
+
+#: ../panels/info/cc-info-panel.c:954
+#, c-format
+msgid "Version %s"
+msgstr "%s verzió"
+
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:1
+msgid "System Info"
+msgstr "Rendszerinformációk"
+
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:2
+msgid "System Information"
+msgstr "Rendszerinformációk"
+
+#. Translators: those are keywords for the System Information panel
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:4
+msgid "device;system;information;memory;processor;version;"
+msgstr "eszköz;rendszer;információ;memória;processzor;verzió;"
+
+#: ../panels/info/info.ui.h:1
+msgid "Calendar"
+msgstr "Naptár"
+
+#: ../panels/info/info.ui.h:2
+msgid "Chipset"
+msgstr "Lapkakészlet"
+
+#: ../panels/info/info.ui.h:4
+msgid "Device name"
+msgstr "Eszköz neve"
+
+#: ../panels/info/info.ui.h:5
+msgid "Disk"
+msgstr "Lemez"
+
+#: ../panels/info/info.ui.h:6
+msgid "Experience"
+msgstr "Felület"
+
+#. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
+#: ../panels/info/info.ui.h:8
+msgid "Forced Fallback Mode"
+msgstr "Tartalék mód kényszerítése"
+
+#: ../panels/info/info.ui.h:10
+msgid "Mail"
+msgstr "Levelek"
+
+#: ../panels/info/info.ui.h:11
+msgid "Memory"
+msgstr "Memória"
+
+#: ../panels/info/info.ui.h:12
+msgid "Music"
+msgstr "Zene"
+
+#: ../panels/info/info.ui.h:13
+msgid "OS type"
+msgstr "Operációs rendszer"
+
+#: ../panels/info/info.ui.h:15
+msgid "Photos"
+msgstr "Fényképek"
+
+#: ../panels/info/info.ui.h:16
+msgid "Processor"
+msgstr "Processzor"
+
+#: ../panels/info/info.ui.h:17
+msgid "Updates Available"
+msgstr "Elérhető frissítések"
+
+#: ../panels/info/info.ui.h:18
+msgid "Video"
+msgstr "Videó"
+
+#: ../panels/info/info.ui.h:19
+msgid "Web"
+msgstr "Web"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:1
+msgid "Eject"
+msgstr "Kiadás"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:2
+msgid "Launch media player"
+msgstr "Médialejátszó indítása"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:3
+msgid "Next track"
+msgstr "Következő szám"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:4
+msgid "Pause playback"
+msgstr "Lejátszás szüneteltetése"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:5
+msgid "Play (or play/pause)"
+msgstr "Lejátszás (vagy lejátszás/szünet)"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:6
+msgid "Previous track"
+msgstr "Előző szám"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:7
+msgid "Sound and Media"
+msgstr "Hang és média"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:8
+msgid "Stop playback"
+msgstr "Lejátszás leállítása"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:9
+msgid "Volume down"
+msgstr "Halkítás"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:10
+msgid "Volume mute"
+msgstr "Némítás"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:11
+msgid "Volume up"
+msgstr "Hangosítás"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:1
+msgid "Home folder"
+msgstr "Saját mappa"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:2
+msgid "Launch calculator"
+msgstr "Számológép indítása"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:3
+msgid "Launch email client"
+msgstr "E-mail kliens indítása"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:4
+msgid "Launch help browser"
+msgstr "Súgóböngésző indítása"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:5
+msgid "Launch web browser"
+msgstr "Webböngésző indítása"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:6
+msgid "Launchers"
+msgstr "Parancsikonok"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:7
+msgid "Search"
+msgstr "Keresés"
+
+#: ../panels/keyboard/01-system.xml.in.h:1
+msgid "Lock screen"
+msgstr "Képernyő zárolása"
+
+#: ../panels/keyboard/01-system.xml.in.h:2
+msgid "Log out"
+msgstr "Kijelentkezés"
+
+#: ../panels/keyboard/01-system.xml.in.h:3
+msgid "System"
+msgstr "Rendszer"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:1
+msgid "Decrease text size"
+msgstr "Szövegméret csökkentése"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:2
+msgid "Increase text size"
+msgstr "Szövegméret növelése"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:3
+msgid "Magnifier zoom in"
+msgstr "Nagyítás"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:4
+msgid "Magnifier zoom out"
+msgstr "Kicsinyítés"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:5
+msgid "Toggle contrast"
+msgstr "Kontraszt be/ki"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:6
+msgid "Toggle magnifier"
+msgstr "Nagyító be/ki"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:7
+msgid "Toggle on-screen keyboard"
+msgstr "Képernyő-billentyűzet be/ki"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:8
+msgid "Toggle screen reader"
+msgstr "Képernyőolvasó be/ki"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:9
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
+msgid "Universal Access"
+msgstr "Akadálymentesítés"
+
+#: ../panels/keyboard/eggcellrendererkeys.c:21
 msgid "New shortcut..."
 msgstr "Új gyorsbillentyű…"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:163
-#: ../panels/keybindings/eggcellrendererkeys.c:164
+#: ../panels/keyboard/eggcellrendererkeys.c:164
+#: ../panels/keyboard/eggcellrendererkeys.c:165
 msgid "Accelerator key"
 msgstr "Gyorsbillentyű"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:173
-#: ../panels/keybindings/eggcellrendererkeys.c:174
+#: ../panels/keyboard/eggcellrendererkeys.c:174
+#: ../panels/keyboard/eggcellrendererkeys.c:175
 msgid "Accelerator modifiers"
 msgstr "Gyorsbillentyű-módosítók"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:182
-#: ../panels/keybindings/eggcellrendererkeys.c:183
+#: ../panels/keyboard/eggcellrendererkeys.c:183
+#: ../panels/keyboard/eggcellrendererkeys.c:184
 msgid "Accelerator keycode"
 msgstr "Gyorsbillentyű billentyűkód"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:193
+#: ../panels/keyboard/eggcellrendererkeys.c:194
 msgid "Accel Mode"
 msgstr "Gyorsítómód"
 
-#: ../panels/keybindings/eggcellrendererkeys.c:194
+#: ../panels/keyboard/eggcellrendererkeys.c:195
 msgid "The type of accelerator."
 msgstr "A gyorsbillentyű típusa."
 
-#: ../panels/keybindings/eggcellrendererkeys.c:242
-#: ../panels/keybindings/gnome-keybinding-properties.c:100
-#: ../typing-break/drwright.c:498
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/eggcellrendererkeys.c:243
+#: ../panels/keyboard/keyboard-shortcuts.c:1150
+#: ../panels/sound/gvc-mixer-control.c:1091
+#: ../panels/user-accounts/um-fingerprint-dialog.c:177
+#: ../panels/user-accounts/um-fingerprint-dialog.c:178
 msgid "Disabled"
 msgstr "Tiltva"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:181
-msgid "<Unknown Action>"
-msgstr "<Ismeretlen művelet>"
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
+msgid "Change keyboard settings"
+msgstr "Billentyűzetbeállítások módosítása"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:931
-#: ../panels/keybindings/gnome-keybinding-properties.c:1562
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+msgid "Keyboard"
+msgstr "Billentyűzet"
+
+#. Translators: those are keywords for the keyboard control-center panel
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:4
+msgid "Shortcut;Repeat;Blink;"
+msgstr "Gyorsbillentyű;Ismétlés;Villogás"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:643
+#: ../panels/keyboard/keyboard-shortcuts.c:925
+#: ../panels/keyboard/keyboard-shortcuts.c:1503
+#: ../panels/keyboard/keyboard-shortcuts.c:1507
 msgid "Custom Shortcuts"
 msgstr "Egyéni gyorsbillentyűk"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1073
+#: ../panels/keyboard/keyboard-shortcuts.c:777
+msgid "<Unknown Action>"
+msgstr "<Ismeretlen művelet>"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1176
 msgid "Error saving the new shortcut"
 msgstr "Hiba történt az új gyorsbillentyű mentése közben"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1152
+#: ../panels/keyboard/keyboard-shortcuts.c:1289
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -837,7 +900,7 @@ msgstr ""
 "Próbálkozzon a Control, Alt vagy Shift billentyűk valamelyikének egyidejű "
 "lenyomásával."
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1182
+#: ../panels/keyboard/keyboard-shortcuts.c:1319
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -846,7 +909,7 @@ msgstr ""
 "A gyorsbillentyű („%s”) már használatban van erre:\n"
 "„%s”"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1188
+#: ../panels/keyboard/keyboard-shortcuts.c:1324
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
@@ -854,763 +917,1509 @@ msgstr ""
 "Ha a gyorsbillentyűt a(z) „%s” funkcióhoz rendeli, akkor a(z) „%s” "
 "gyorsbillentyű letiltásra kerül."
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1196
+#: ../panels/keyboard/keyboard-shortcuts.c:1330
 msgid "_Reassign"
 msgstr "_Társítás"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1316
-#, c-format
-msgid "Error unsetting accelerator in configuration database: %s"
-msgstr ""
-"Hiba történt a gyorsbillentyű törlésekor a konfigurációs adatbázisban: %s"
-
-#: ../panels/keybindings/gnome-keybinding-properties.c:1517
+#: ../panels/keyboard/keyboard-shortcuts.c:1442
 msgid "Too many custom shortcuts"
 msgstr "Túl sok egyéni gyorsbillentyű"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1849
+#: ../panels/keyboard/keyboard-shortcuts.c:1764
 msgid "Action"
 msgstr "Művelet"
 
-#: ../panels/keybindings/gnome-keybinding-properties.c:1871
+#: ../panels/keyboard/keyboard-shortcuts.c:1787
 msgid "Shortcut"
 msgstr "Gyorsbillentyű"
 
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:2
-msgid "Custom Shortcut"
-msgstr "Egyéni gyorsbillentyű"
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
+msgid "C_ommand:"
+msgstr "Pa_rancs:"
 
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:3
-#: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:2
-msgid "Keyboard Shortcuts"
-msgstr "Gyorsbillentyűk"
-
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:4
-msgid ""
-"To edit a shortcut key, click on the corresponding row and type a new key "
-"combination, or press backspace to clear."
-msgstr ""
-"Gyorsbillentyű szerkesztéséhez kattintson a megfelelő sorra és nyomja le az "
-"új gyorsbillentyűt, vagy nyomja meg a Backspace billentyűt a törléshez."
-
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:5
-msgid "_Name:"
-msgstr "_Név:"
-
-#: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:1
-msgid "Assign shortcut keys to commands"
-msgstr "Gyorsbillentyűk parancsokhoz rendelése"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:1
-msgid "Beep when _accessibility features are turned on or off"
-msgstr ""
-"_Hangjelzés az akadálymentesítési szolgáltatások ki- vagy bekapcsolásakor"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:2
-msgid "Beep when a _modifier key is pressed"
-msgstr "Hangjelzés _módosító billentyű lenyomásakor"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:3
-msgid "Beep when a _toggle key is pressed"
-msgstr "Hangjelzés _váltóbillentyű lenyomásakor"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:4
-msgid "Beep when a key is pr_essed"
-msgstr "Hangjelzés billentyű le_nyomásakor"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:5
-msgid "Beep when a key is reje_cted"
-msgstr "Hangjelzés billentyű el_utasításakor"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:6
-msgid "Beep when key is _accepted"
-msgstr "Hangjelzés billentyű _elfogadásakor"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:7
-msgid "Beep when key is _rejected"
-msgstr "Hangjelzés billentyű elut_asításakor"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:8
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:4
-#: ../panels/universal-access/uap.ui.h:17
-msgid "Bounce Keys"
-msgstr "Billentyűszűrés"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:9
-msgid "Flash _window titlebar"
-msgstr "Ablak címsorának meg_villantása"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:10
-msgid "Flash entire _screen"
-msgstr "_Teljes képernyő megvillantása"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:11
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:14
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
-msgid "General"
-msgstr "Általános"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:12
-msgid "Keyboard Accessibility Audio Feedback"
-msgstr "Billentyűzet hangos akadálymentesítési visszajelzése"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:13
-msgid "Show _visual feedback for the alert sound"
-msgstr "Figyelmeztető hang vi_zuális jelzése"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:14
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:39
-#: ../panels/universal-access/uap.ui.h:76
-msgid "Slow Keys"
-msgstr "Lassú billentyűk"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:15
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:40
-#: ../panels/universal-access/uap.ui.h:80
-msgid "Sticky Keys"
-msgstr "Ragadós billentyűk"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:16
-msgid "Visual cues for sounds"
-msgstr "Vizuális jelzések hangokra"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:2
-msgid "All_ow postponing of breaks"
-msgstr "Szünetek felfüggesztésének _engedélyezése"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:3
-msgid "Audio _Feedback..."
-msgstr "_Hangos visszajelzés…"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:5
-msgid "Check if breaks are allowed to be postponed"
-msgstr "Jelölje be, ha a szünetek felfüggesztése engedélyezett"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:6
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "Cursor Blinking"
 msgstr "Villogó kurzor"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:7
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 msgid "Cursor _blinks in text fields"
 msgstr "A kurzor _villogjon a szövegmezőkben"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:8
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
+#: ../panels/mouse/gnome-mouse-properties.ui.h:1
+#: ../panels/universal-access/uap.ui.h:23
 msgid "Cursor blinks speed"
 msgstr "Kurzor villogásának sebessége"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:9
-#: ../panels/mouse/gnome-mouse-properties.ui.h:5
-#: ../panels/universal-access/uap.ui.h:30
-msgid "D_elay:"
-msgstr "Késlel_tetés:"
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
+msgid "Custom Shortcut"
+msgstr "Egyéni gyorsbillentyű"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:10
-msgid "Disa_ble sticky keys if two keys are pressed together"
-msgstr "Ragadós billentyűk letiltása _két billentyű egyidejű lenyomásakor"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:11
-msgid "Duration of the break when typing is disallowed"
-msgstr "Szünet időtartama, ha a gépelés le van tiltva"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:12
-msgid "Duration of work before forcing a break"
-msgstr "Szünet kényszerítése előtti munkaidő hossza"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:13
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#. fast acceleration
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
 msgid "Fast"
 msgstr "Gyors"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+msgid "General"
+msgstr "Általános"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid "Key presses _repeat when key is held down"
 msgstr "Billentyű _ismétlése nyomva tartáskor"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:16
-msgid "Keyboard Preferences"
-msgstr "Billentyűzet beállításai"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:17
-msgid "Keyboard _model:"
-msgstr "Billentyűzet_modell:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:18
-msgid "Layouts"
-msgstr "Kiosztások"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:19
-msgid "List of keyboard layouts selected for usage"
-msgstr "A használatra kijelölt billentyűzetkiosztások listája"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:20
-msgid ""
-"Lock screen after a certain duration to help prevent repetitive keyboard use "
-"injuries"
-msgstr ""
-"A képernyő zárolása bizonyos időtartam után, az ismétlődő billentyűzet-"
-"használat miatti sérülések megelőzéséért"
-
 #. long delay
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:21
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Long"
 msgstr "Hosszú"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:22
-#: ../panels/universal-access/uap.ui.h:56
-msgid "Mouse Keys"
-msgstr "Egérbillentyűk"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:23
-msgid "Move _Down"
-msgstr "M_ozgatás le"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:24
-msgid "Move _Up"
-msgstr "Mozgatás _fel"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:25
-msgid "Move the selected keyboard layout down in the list"
-msgstr "A kijelölt billentyűzetkiosztás lefelé mozgatása a listában"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:26
-msgid "Move the selected keyboard layout up in the list"
-msgstr "A kijelölt billentyűzetkiosztás felfelé mozgatása a listában"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:27
-msgid "New windows u_se active window's layout"
-msgstr "A_z új ablakok az aktív ablakok elrendezését használják"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:28
-msgid "Print a diagram of the selected keyboard layout"
-msgstr "A kijelölt billentyűzetkiosztás rajzának nyomtatása"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:29
-msgid "Remove the selected keyboard layout from the list"
-msgstr "A kijelölt billentyűzetkiosztás eltávolítása a listából"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:30
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 msgid "Repeat Keys"
 msgstr "Billentyűk ismétlése"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:31
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
 msgid "Repeat keys speed"
 msgstr "Billentyűk ismétlésének sebessége"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:32
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+msgid "S_peed:"
+msgstr "S_ebesség:"
+
+#. short delay
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:24
+#: ../panels/universal-access/uap.ui.h:63
+msgid "Short"
+msgstr "Rövid"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+msgid "Shortcuts"
+msgstr "Gyorsbillentyűk"
+
+#. slow acceleration
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
+#: ../panels/mouse/gnome-mouse-properties.ui.h:26
+msgid "Slow"
+msgstr "Lassú"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
+msgid ""
+"To edit a shortcut, click the row and hold down the new keys or press "
+"Backspace to clear."
+msgstr ""
+"Gyorsbillentyű szerkesztéséhez kattintson a sorra, és nyomja le az új "
+"billentyűket, vagy a Backspace billentyűt a törléshez."
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
+msgid "_Delay:"
+msgstr "_Késleltetés:"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
+msgid "_Name:"
+msgstr "_Név:"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
+msgid "_Speed:"
+msgstr "_Sebesség:"
+
+#: ../panels/media/cc-media-panel.c:322
+msgid "Ask what to do"
+msgstr "Kérdezze meg, mi a teendő"
+
+#: ../panels/media/cc-media-panel.c:326 ../panels/power/power.ui.h:6
+msgid "Do nothing"
+msgstr "Ne tegyen semmit"
+
+#: ../panels/media/cc-media-panel.c:330
+msgid "Open folder"
+msgstr "Mappa megnyitása"
+
+#: ../panels/media/cc-media-panel.c:441
+msgid "Select an application for audio CDs"
+msgstr "Válasszon alkalmazást CD-khez"
+
+#: ../panels/media/cc-media-panel.c:442
+msgid "Select an application for video DVDs"
+msgstr "Válasszon alkalmazást videó DVD-khez"
+
+#: ../panels/media/cc-media-panel.c:443
+msgid "Select an application to run when a music player is connected"
+msgstr "Válassza ki a zenelejátszó csatlakoztatásakor futtatandó alkalmazást"
+
+#: ../panels/media/cc-media-panel.c:444
+msgid "Select an application to run when a camera is connected"
+msgstr "Válassza ki a fényképezőgép csatlakoztatásakor futtatandó alkalmazást"
+
+#: ../panels/media/cc-media-panel.c:445
+msgid "Select an application for software CDs"
+msgstr "Válasszon alkalmazást szoftver CD-khez"
+
+#. translators: these strings are duplicates of shared-mime-info
+#. * strings, just here to fix capitalization of the English originals.
+#. * If the shared-mime-info translation works for your language,
+#. * simply leave these untranslated.
+#.
+#: ../panels/media/cc-media-panel.c:457
+msgid "audio DVD"
+msgstr "hang DVD"
+
+#: ../panels/media/cc-media-panel.c:458
+msgid "blank Blu-ray disc"
+msgstr "üres Blu-Ray lemez"
+
+#: ../panels/media/cc-media-panel.c:459
+msgid "blank CD disc"
+msgstr "üres CD-lemez"
+
+#: ../panels/media/cc-media-panel.c:460
+msgid "blank DVD disc"
+msgstr "üres DVD-lemez"
+
+#: ../panels/media/cc-media-panel.c:461
+msgid "blank HD DVD disc"
+msgstr "üres HD DVD-lemez"
+
+#: ../panels/media/cc-media-panel.c:462
+msgid "Blu-ray video disc"
+msgstr "Blu-ray videolemez"
+
+#: ../panels/media/cc-media-panel.c:463
+msgid "e-book reader"
+msgstr "e-könyvolvasó"
+
+#: ../panels/media/cc-media-panel.c:464
+msgid "HD DVD video disc"
+msgstr "HD DVD videolemez"
+
+#: ../panels/media/cc-media-panel.c:465
+msgid "Picture CD"
+msgstr "Picture CD"
+
+#: ../panels/media/cc-media-panel.c:466
+msgid "Super Video CD"
+msgstr "Super Video CD"
+
+#: ../panels/media/cc-media-panel.c:467
+msgid "Video CD"
+msgstr "Video CD"
+
+#: ../panels/media/gnome-media-properties.ui.h:1
+msgid "Acti_on:"
+msgstr "_Művelet:"
+
+#: ../panels/media/gnome-media-properties.ui.h:2
+msgid "CD _audio:"
+msgstr "CD _hang:"
+
+#: ../panels/media/gnome-media-properties.ui.h:3
+msgid "Media and Autorun"
+msgstr "Adathordozók és automatikus futtatás"
+
+#: ../panels/media/gnome-media-properties.ui.h:4
+msgid "Select how media should be handled"
+msgstr "Válassza ki az adathordozók kezelésének módját"
+
+#: ../panels/media/gnome-media-properties.ui.h:5
+msgid "Select how other media should be handled"
+msgstr "Válassza ki az egyéb adathordozók kezelésének módját"
+
+#: ../panels/media/gnome-media-properties.ui.h:6
+msgid "_DVD video:"
+msgstr "_DVD videó:"
+
+#: ../panels/media/gnome-media-properties.ui.h:7
+msgid "_Music player:"
+msgstr "_Zenelejátszó:"
+
+#: ../panels/media/gnome-media-properties.ui.h:8
+msgid "_Never prompt or start programs on media insertion"
+msgstr ""
+"Soha _ne kérdezzen vagy indítson programokat adathordozó behelyezésekor"
+
+#: ../panels/media/gnome-media-properties.ui.h:9
+msgid "_Other Media..."
+msgstr "_Egyéb adathordozók…"
+
+#: ../panels/media/gnome-media-properties.ui.h:10
+msgid "_Photos:"
+msgstr "_Fényképek:"
+
+#: ../panels/media/gnome-media-properties.ui.h:11
+msgid "_Software:"
+msgstr "S_zoftver:"
+
+#: ../panels/media/gnome-media-properties.ui.h:12
+msgid "_Type:"
+msgstr "_Típus:"
+
+#: ../panels/media/gnome-media-panel.desktop.in.in.h:1
+msgid "Configure media and autorun preferences"
+msgstr "Adathordozók- és automatikus futtatás beállításai"
+
+#: ../panels/media/gnome-media-panel.desktop.in.in.h:2
+msgid "Removable Media"
+msgstr "Cserélhető adathordozók"
+
+#. Translators: those are keywords for the media control-center panel
+#: ../panels/media/gnome-media-panel.desktop.in.in.h:4
+msgid "cd;dvd;usb;audio;video;disc;"
+msgstr "cd;dvd;usb;audio;video;lemez;"
+
+#. Translators: The printer is low on toner
+#: ../panels/printers/cc-printers-panel.c:261
+msgid "Low on toner"
+msgstr "A festékkazetta kifogyóban"
+
+#. Translators: The printer has no toner left
+#: ../panels/printers/cc-printers-panel.c:263
+msgid "Out of toner"
+msgstr "A festékkazetta kifogyott"
+
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/cc-printers-panel.c:266
+msgid "Low on developer"
+msgstr "Az előhívó kifogyóban"
+
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/cc-printers-panel.c:269
+msgid "Out of developer"
+msgstr "Az előhívó kifogyott"
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/cc-printers-panel.c:271
+msgid "Low on a marker supply"
+msgstr "A tintapatron kifogyóban"
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/cc-printers-panel.c:273
+msgid "Out of a marker supply"
+msgstr "A tintapatron kifogyott"
+
+#. Translators: One or more covers on the printer are open
+#: ../panels/printers/cc-printers-panel.c:275
+msgid "Open cover"
+msgstr "Fedél nyitva"
+
+#. Translators: One or more doors on the printer are open
+#: ../panels/printers/cc-printers-panel.c:277
+msgid "Open door"
+msgstr "Ajtó nyitva"
+
+#. Translators: At least one input tray is low on media
+#: ../panels/printers/cc-printers-panel.c:279
+msgid "Low on paper"
+msgstr "Kevés a papír"
+
+#. Translators: At least one input tray is empty
+#: ../panels/printers/cc-printers-panel.c:281
+msgid "Out of paper"
+msgstr "Kifogyott a papír"
+
+#. Translators: The printer is offline
+#: ../panels/printers/cc-printers-panel.c:283
+msgctxt "printer state"
+msgid "Offline"
+msgstr "Kikapcsolva"
+
+#. Translators: Someone has paused the Printer
+#: ../panels/printers/cc-printers-panel.c:285
+msgctxt "printer state"
+msgid "Paused"
+msgstr "Szüneteltetve"
+
+#. Translators: The printer marker supply waste receptacle is almost full
+#: ../panels/printers/cc-printers-panel.c:287
+msgid "Waste receptacle almost full"
+msgstr "A hulladékgyűjtő majdnem tele"
+
+#. Translators: The printer marker supply waste receptacle is full
+#: ../panels/printers/cc-printers-panel.c:289
+msgid "Waste receptacle full"
+msgstr "A hulladékgyűjtő tele"
+
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/cc-printers-panel.c:291
+msgid "The optical photo conductor is near end of life"
+msgstr "Az optikai fotovezető közel jár az élete végéhez"
+
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/cc-printers-panel.c:293
+msgid "The optical photo conductor is no longer functioning"
+msgstr "Az optikai fotovezető már nem működik"
+
+#. Translators: Printer's state (can start new job without waiting)
+#: ../panels/printers/cc-printers-panel.c:430
+msgctxt "printer state"
+msgid "Ready"
+msgstr "Kész"
+
+#. Translators: Printer's state (jobs are processing)
+#: ../panels/printers/cc-printers-panel.c:434
+msgctxt "printer state"
+msgid "Processing"
+msgstr "Feldolgozás"
+
+#. Translators: Printer's state (no jobs can be processed)
+#: ../panels/printers/cc-printers-panel.c:438
+msgctxt "printer state"
+msgid "Stopped"
+msgstr "Leállítva"
+
+#. Translators: Toner supply
+#: ../panels/printers/cc-printers-panel.c:536
+msgid "Toner Level"
+msgstr "Festékkazettaszint"
+
+#. Translators: Ink supply
+#: ../panels/printers/cc-printers-panel.c:539
+msgid "Ink Level"
+msgstr "Tintaszint"
+
+#. Translators: By supply we mean ink, toner, staples, water, ...
+#: ../panels/printers/cc-printers-panel.c:542
+msgid "Supply Level"
+msgstr "Kellékszint"
+
+#. Translators: there is n active print jobs on this printer
+#: ../panels/printers/cc-printers-panel.c:557
+#, c-format
+msgid "%u active"
+msgid_plural "%u active"
+msgstr[0] "%u aktív"
+msgstr[1] "%u aktív"
+
+#. Translators: Job's state (job is waiting to be printed)
+#: ../panels/printers/cc-printers-panel.c:1024
+msgctxt "print job"
+msgid "Pending"
+msgstr "Függőben"
+
+#. Translators: Job's state (job is held for printing)
+#: ../panels/printers/cc-printers-panel.c:1028
+msgctxt "print job"
+msgid "Held"
+msgstr "Visszatartva"
+
+#. Translators: Job's state (job is currently printing)
+#: ../panels/printers/cc-printers-panel.c:1032
+msgctxt "print job"
+msgid "Processing"
+msgstr "Feldolgozás"
+
+#. Translators: Job's state (job has been stopped)
+#: ../panels/printers/cc-printers-panel.c:1036
+msgctxt "print job"
+msgid "Stopped"
+msgstr "Leállítva"
+
+#. Translators: Job's state (job has been canceled)
+#: ../panels/printers/cc-printers-panel.c:1040
+msgctxt "print job"
+msgid "Canceled"
+msgstr "Megszakítva"
+
+#. Translators: Job's state (job has aborted due to error)
+#: ../panels/printers/cc-printers-panel.c:1044
+msgctxt "print job"
+msgid "Aborted"
+msgstr "Félbeszakítva"
+
+#. Translators: Job's state (job has completed successfully)
+#: ../panels/printers/cc-printers-panel.c:1048
+msgctxt "print job"
+msgid "Completed"
+msgstr "Befejezve"
+
+#. Translators: Name of column showing titles of print jobs
+#: ../panels/printers/cc-printers-panel.c:1140
+msgid "Job Title"
+msgstr "Feladat neve"
+
+#. Translators: Name of column showing statuses of print jobs
+#: ../panels/printers/cc-printers-panel.c:1149
+msgid "Job State"
+msgstr "Feladat állapota"
+
+#. Translators: Name of column showing times of creation of print jobs
+#: ../panels/printers/cc-printers-panel.c:1155
+msgid "Time"
+msgstr "Idő"
+
+#. Translators: Program cannot connect to DBus' system bus
+#: ../panels/printers/cc-printers-panel.c:1345
+#, c-format
+msgid "Could not connect to system bus: %s"
+msgstr "Nem lehet csatlakozni a rendszerbuszhoz: %s"
+
+#. Translators: Name of job which makes printer to print test page
+#: ../panels/printers/cc-printers-panel.c:2055
+msgid "Test page"
+msgstr "Tesztoldal"
+
+#. Translators: Name of job which makes printer to clean its heads
+#: ../panels/printers/cc-printers-panel.c:2063
+msgid "Clean print heads"
+msgstr "Nyomtatófejek tisztítása"
+
+#. Translators: An error has occured during execution of a CUPS maintenance command
+#: ../panels/printers/cc-printers-panel.c:2068
+msgid "An error has occured during a maintenance command."
+msgstr "Hiba történt a karbantartási parancs során."
+
+#. Translators: The XML file containing user interface can not be loaded
+#: ../panels/printers/cc-printers-panel.c:2195
+#, c-format
+msgid "Could not load ui: %s"
+msgstr "A felület nem tölthető be: %s"
+
+#: ../panels/printers/gnome-printers-panel.desktop.in.in.h:1
+msgid "Change printer settings"
+msgstr "Nyomtatóbeállítások módosítása"
+
+#. Translators: those are keywords for the printing control-center panel
+#: ../panels/printers/gnome-printers-panel.desktop.in.in.h:3
+msgid "Printer;Queue;Print;Paper;Ink;Toner;"
+msgstr "Nyomtató;Sor;Nyomtatás;Papír;Tinta;Festékkazetta;"
+
+#: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
+msgid "Printers"
+msgstr "Nyomtatók"
+
+#: ../panels/printers/printers.ui.h:1
+msgid "---"
+msgstr "---"
+
+#. Translators: This tab contains list of active print jobs of the selected printer
+#: ../panels/printers/printers.ui.h:3
+msgid "Active Print Jobs"
+msgstr "Aktív nyomtatási feladatok"
+
+#: ../panels/printers/printers.ui.h:4
+msgid "Allowed users"
+msgstr "Engedélyezett felhasználók"
+
+#. Translators: Switch back to printer's info tab
+#: ../panels/printers/printers.ui.h:6
+msgid "Back"
+msgstr "Vissza"
+
+#. Translators: This checkbox is checked when the default printer is selected.
+#: ../panels/printers/printers.ui.h:8
+#: ../panels/region/gnome-region-panel-xkbot.c:229
+#: ../panels/sound/gvc-sound-theme-chooser.c:581
+msgid "Default"
+msgstr "Alapértelmezett"
+
+#: ../panels/printers/printers.ui.h:9
+msgid "IP Address"
+msgstr "IP-cím"
+
+#: ../panels/printers/printers.ui.h:10
+msgid "Info"
+msgstr "Információ"
+
+#: ../panels/printers/printers.ui.h:11
+msgid "Jobs"
+msgstr "Feladatok"
+
+#. Translators: Location of the printer (e.g. Lab, 1st floor,...).
+#: ../panels/printers/printers.ui.h:13
+msgid "Location"
+msgstr "Hely"
+
+#: ../panels/printers/printers.ui.h:14
+msgid "Model"
+msgstr "Modell"
+
+#. Translators: This button opens printer's options tab
+#: ../panels/printers/printers.ui.h:16
+msgid "Options"
+msgstr "Beállítások"
+
+#. Translators: This button executes command which prints test page.
+#: ../panels/printers/printers.ui.h:18
+msgid "Print Test Page"
+msgstr "Tesztoldal nyomtatása"
+
+#: ../panels/printers/printers.ui.h:19
+msgid "Printer"
+msgstr "Nyomtató"
+
+#. Translators: This tab contains list of active print jobs of the selected printer
+#: ../panels/printers/printers.ui.h:21
+msgid "Printer Options"
+msgstr "Nyomtatóbeállítások"
+
+#: ../panels/printers/printers.ui.h:22
+msgid "Printing..."
+msgstr "Nyomtatás…"
+
+#. Tanslators: Switch to tab containing printer's jobs
+#: ../panels/printers/printers.ui.h:24
+msgid "Show"
+msgstr "Megjelenítés"
+
+#. Translators: By supply we mean ink, toner, staples, water, ...
+#: ../panels/printers/printers.ui.h:26
+msgid "Supply"
+msgstr "Kellékek"
+
+#: ../panels/region/gnome-region-panel.ui.h:1
+msgid "Allow different layouts for each window"
+msgstr "Az egyes ablakok kiosztása eltérhet"
+
+#: ../panels/region/gnome-region-panel.ui.h:2
+msgid "Install languages..."
+msgstr "Nyelvek telepítése…"
+
+#: ../panels/region/gnome-region-panel.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "Language"
+msgstr "Nyelv"
+
+#: ../panels/region/gnome-region-panel.ui.h:4
+msgid "Layouts"
+msgstr "Kiosztások"
+
+#: ../panels/region/gnome-region-panel.ui.h:5
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:4
+msgid "Region and Language"
+msgstr "Terület és nyelv"
+
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
 msgstr ""
 "A jelenlegi billentyűzetkiosztás-beállítások cseréje az alapértelmezettekre"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:34
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid "Reset to De_faults"
 msgstr "Alapértelmezések _visszaállítása"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:35
-msgid "S_peed:"
-msgstr "S_ebesség:"
+#: ../panels/region/gnome-region-panel.ui.h:9
+msgid "Select a display language"
+msgstr "Válasszon megjelenítési nyelvet"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:36
-msgid "Select a keyboard layout to be added to the list"
-msgstr "Válassza ki a listához adandó billentyűzetkiosztást"
+#: ../panels/region/gnome-region-panel.ui.h:10
+msgid "Use default layout in new windows"
+msgstr "Alapkiosztás használata új ablakokban"
 
-#. short delay
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:37
-#: ../panels/mouse/gnome-mouse-properties.ui.h:27
-#: ../panels/universal-access/uap.ui.h:73
-msgid "Short"
-msgstr "Rövid"
+#: ../panels/region/gnome-region-panel.ui.h:11
+msgid "Use previous window's layout in new windows"
+msgstr "Előző ablak kiosztásának használata új ablakokban"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:38
-#: ../panels/mouse/gnome-mouse-properties.ui.h:30
-msgid "Slow"
-msgstr "Lassú"
+#: ../panels/region/gnome-region-panel.ui.h:12
+msgid "Use same layout in all windows"
+msgstr "Ugyanaz a kiosztás minden ablakban"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:41
-msgid "Typing Break"
-msgstr "Gépelési szünet"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:42
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "View and edit keyboard layout options"
 msgstr "Billentyűzetkiosztás beállításainak megjelenítése és szerkesztése"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:43
-#: ../panels/mouse/gnome-mouse-properties.ui.h:37
-msgid "_Acceleration:"
-msgstr "_Gyorsítás:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:44
-msgid "_Accessibility features can be toggled with keyboard shortcuts"
-msgstr ""
-"Az _akadálymentesítési szolgáltatások gyorsbillentyűkkel kapcsolhatók be és "
-"ki"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:45
-msgid "_Add..."
-msgstr "Hozzá_adás…"
-
-# itt az időtartam kifejezőbb
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:46
-msgid "_Break interval lasts:"
-msgstr "Szünet _időtartama:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:47
-#: ../panels/mouse/gnome-mouse-properties.ui.h:38
-msgid "_Delay:"
-msgstr "_Késleltetés:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:48
-msgid "_Ignore fast duplicate keypresses"
-msgstr "Ismételt _leütések figyelmen kívül hagyása"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:49
-msgid "_Lock screen to enforce typing break"
-msgstr "Képernyő záro_lása a gépelési szünet kikényszerítéséhez"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:50
-msgid "_Only accept long keypresses"
-msgstr "_Csak a hosszan lenyomott billentyűk elfogadása"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:51
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "_Options..."
 msgstr "B_eállítások…"
 
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:52
-msgid "_Pointer can be controlled using the keypad"
-msgstr "A m_utató irányítható a numerikus billentyűzetről"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:53
-msgid "_Separate layout for each window"
-msgstr "Külön _kiosztás minden ablaknak"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:54
-msgid "_Simulate simultaneous keypresses"
-msgstr "_Egyidejű billentyűlenyomások szimulálása"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:55
-msgid "_Speed:"
-msgstr "_Sebesség:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:56
-msgid "_Type to test settings:"
-msgstr "Beállítások ki_próbálása:"
-
-# itt az időtartam kifejezőbb
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:57
-msgid "_Work interval lasts:"
-msgstr "_Munka időtartama:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:58
-msgid "minutes"
-msgstr "perc"
-
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:1
-msgid "By _country"
-msgstr "_Ország szerint"
-
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:2
-msgid "By _language"
-msgstr "_Nyelv szerint"
-
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:3
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
 msgid "Choose a Layout"
 msgstr "Válasszon egy kiosztást"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:4
-msgid "Preview:"
-msgstr "Előnézet:"
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
+msgid "Preview"
+msgstr "Előnézet"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:5
-msgid "_Country:"
-msgstr "_Ország:"
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
+msgid "Select an input source to add"
+msgstr "Válasszon egy hozzáadni kívánt beviteli forrást"
 
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:6
-msgid "_Language:"
-msgstr "Nye_lv:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:7
-msgid "_Variants:"
-msgstr "_Változatok:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:1
-msgid "Choose a Keyboard Model"
-msgstr "Válasszon ki egy billentyűzetmodellt"
-
-#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:2
-msgid "_Models:"
-msgstr "_Modellek:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:3
-msgid "_Vendors:"
-msgstr "S_zállítók:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-options-dialog.ui.h:1
+#: ../panels/region/gnome-region-panel-options-dialog.ui.h:1
 msgid "Keyboard Layout Options"
 msgstr "Billentyűzetkiosztás beállításai"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkb.c:81
-msgid "Unknown"
-msgstr "Ismeretlen"
-
-#: ../panels/keyboard/gnome-keyboard-properties-xkblt.c:241
+#: ../panels/region/gnome-region-panel-xkblt.c:220
 msgid "Layout"
 msgstr "Kiosztás"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:166
-msgid "Vendors"
-msgstr "Szállítók"
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:1
+msgid "Change your region and language settings"
+msgstr "Területi és nyelvi beállítások módosítása"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:232
-msgid "Models"
-msgstr "Modellek"
-
-#: ../panels/keyboard/gnome-keyboard-properties-xkbot.c:233
-#: ../panels/network/gnome-network-properties.c:582
-msgid "Default"
-msgstr "Alapértelmezett"
-
-#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
-msgid "Keyboard"
-msgstr "Billentyűzet"
-
-#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
-msgid "Set your keyboard preferences"
-msgstr "Billentyűzet beállításai"
-
-#: ../panels/mouse/capplet-stock-icons.c:66
-#, c-format
-msgid "Unable to load stock icon '%s'\n"
-msgstr "Nem sikerült betölteni a(z) „%s” alapértelmezett ikont\n"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:90
-msgid "gesture|Move left"
-msgstr "Mozdulat balra"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:95
-msgid "gesture|Move right"
-msgstr "Mozdulat jobbra"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:100
-msgid "gesture|Move up"
-msgstr "Mozdulat fel"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:105
-msgid "gesture|Move down"
-msgstr "Mozdulat le"
-
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:110
-msgid "gesture|Disabled"
-msgstr "Tiltva"
+#. Translators: those are keywords for the region control-center panel
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:3
+msgid "Language;Layout;Keyboard;"
+msgstr "Nyelv;kiosztás;billentyűzet;"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
-msgid "Choose type of click _beforehand"
-msgstr "Kattintás típusának kiválasztása _előzetesen"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgid "Choose type of click with mo_use gestures"
-msgstr "Kattintás tí_pusának kiválasztása egérmozdulatokkal"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:6
-msgid "D_ouble click:"
-msgstr "_Dupla kattintás:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
-msgid "D_rag click:"
-msgstr "_Húzás:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
 msgid "Disable _touchpad while typing"
 msgstr "É_rintőtábla kikapcsolása gépelés közben"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:3
 msgid "Double-Click Timeout"
 msgstr "Dupla kattintás időköze"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
 msgid "Drag and Drop"
 msgstr "Fogd és vidd"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
-msgid "Dwell Click"
-msgstr "Elidőzési kattintás"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
 msgid "Enable _mouse clicks with touchpad"
 msgstr "_Egérkattintások engedélyezése érintőtáblával"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "Enable h_orizontal scrolling"
 msgstr "_Vízszintes görgetés engedélyezése"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
-#: ../panels/universal-access/uap.ui.h:40
+#. high sensitivity
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#: ../panels/universal-access/uap.ui.h:34
 msgid "High"
 msgstr "Magas"
 
 #. large threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/universal-access/uap.ui.h:43
 msgid "Large"
 msgstr "Nagy"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Locate Pointer"
 msgstr "Mutató kiemelése"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
-#: ../panels/universal-access/uap.ui.h:54
+#. low sensitivity
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Low"
 msgstr "Alacsony"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:21
-msgid "Mouse Orientation"
-msgstr "Egér elhelyezkedése"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:22
-msgid "Mouse Preferences"
-msgstr "Egér beállításai"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:23
-msgid "Pointer Speed"
-msgstr "Mutató sebessége"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:24
-msgid "Scrolling"
-msgstr "Görgetés"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:25
-msgid "Seco_ndary click:"
-msgstr "_Másodlagos kattintás:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:26
-msgid "Sh_ow position of pointer when the Control key is pressed"
-msgstr "A m_utató helyének megjelenítése a Ctrl billentyű megnyomásakor"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:28
-msgid "Show click type _window"
-msgstr "Kattintás típ_usa ablak megjelenítése"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:29
-#: ../panels/universal-access/uap.ui.h:75
-msgid "Simulated Secondary Click"
-msgstr "Szimulált másodlagos kattintás"
-
-#. small threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
-#: ../panels/universal-access/uap.ui.h:78
-msgid "Small"
-msgstr "Kicsi"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:32
-msgid "Thr_eshold:"
-msgstr "_Küszöbszint:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:33
-msgid ""
-"To test your double-click settings, try to double-click on the light bulb."
-msgstr ""
-"A dupla kattintás beállításainak teszteléséhez próbáljon duplán kattintani a "
-"villanykörtére."
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:34
-msgid "Touchpad"
-msgstr "Érintőtábla"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:35
-msgid "Two-_finger scrolling"
-msgstr "_Kétujjas görgetés"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:36
-msgid "You can also use the Dwell Click panel applet to choose the click type."
-msgstr ""
-"A kattintás típusát az Elidőzési kattintás kisalkalmazásban is "
-"kiválaszthatja."
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:39
-msgid "_Disabled"
-msgstr "_Tiltva"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:40
-msgid "_Edge scrolling"
-msgstr "Görgetés a s_zélen"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:41
-msgid "_Initiate click when stopping pointer movement"
-msgstr "Kattintás ke_zdeményezése a mutató mozgásának leállásakor"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:42
-msgid "_Left-handed"
-msgstr "B_alkezes"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:43
-#: ../panels/universal-access/uap.ui.h:98
-msgid "_Motion threshold:"
-msgstr "M_ozgás küszöbszintje:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:44
-msgid "_Right-handed"
-msgstr "J_obbkezes"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:45
-msgid "_Sensitivity:"
-msgstr "Érzéke_nység:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:46
-msgid "_Single click:"
-msgstr "E_gy kattintás:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:47
-msgid "_Timeout:"
-msgstr "_Időtúllépés:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:48
-msgid "_Trigger secondary click by holding down the primary button"
-msgstr "Másodlagos kattintás _aktiválása az elsődleges gomb nyomva tartásával"
-
-#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Mouse"
 msgstr "Egér"
 
-#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:2
-msgid "Set your mouse preferences"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
+msgid "Mouse Orientation"
+msgstr "Egér elhelyezkedése"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+msgid "Mouse Preferences"
 msgstr "Egér beállításai"
 
-#: ../panels/network/gnome-network-properties.c:700
-#: ../panels/network/gnome-network-properties.c:851
-msgid "New Location..."
-msgstr "Új hely…"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:21
+msgid "Pointer Speed"
+msgstr "Mutató sebessége"
 
-#: ../panels/network/gnome-network-properties.c:817
-msgid "Location already exists"
-msgstr "A hely már létezik"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:22
+msgid "Scrolling"
+msgstr "Görgetés"
 
-#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
-msgid "Network Proxy"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:23
+msgid "Sh_ow position of pointer when the Control key is pressed"
+msgstr "A m_utató helyének megjelenítése a Ctrl billentyű megnyomásakor"
+
+#. small threshold
+#: ../panels/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/universal-access/uap.ui.h:67
+msgid "Small"
+msgstr "Kicsi"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:29
+msgid "Thr_eshold:"
+msgstr "_Küszöbszint:"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:30
+msgid "To test your settings, try to double-click on the face."
+msgstr "A beállítások teszteléséhez próbáljon duplán kattintani az arcra."
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:31
+msgid "Touchpad"
+msgstr "Érintőtábla"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:32
+msgid "Two-_finger scrolling"
+msgstr "_Kétujjas görgetés"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:33
+msgid "_Acceleration:"
+msgstr "_Gyorsítás:"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:34
+msgid "_Disabled"
+msgstr "_Tiltva"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:35
+msgid "_Edge scrolling"
+msgstr "Görgetés a s_zélen"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:36
+msgid "_Left-handed"
+msgstr "B_alkezes"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:37
+msgid "_Right-handed"
+msgstr "J_obbkezes"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:38
+msgid "_Sensitivity:"
+msgstr "Érzéke_nység:"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:39
+msgid "_Timeout:"
+msgstr "_Időtúllépés:"
+
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
+msgid "Mouse and Touchpad"
+msgstr "Egér és érintőtábla"
+
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:2
+msgid "Set your mouse and touchpad preferences"
+msgstr "Egér és érintőtábla beállításai"
+
+#. Translators: those are keywords for the mouse and touchpad control-center panel
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
+msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
+msgstr "Érintőtábla;Tapipad;Mutató;Kattintás;Koppintás;Dupla;Gomb;Hanyattegér;"
+
+#: ../panels/network/cc-network-panel.c:962
+msgid "Network proxy"
 msgstr "Hálózati proxy"
 
+#: ../panels/network/cc-network-panel.c:971
+msgid "Set the system proxy settings"
+msgstr "Rendszer proxybeállításai"
+
+#. TRANSLATORS: the user is running a NM that is too new and API compatible
+#: ../panels/network/cc-network-panel.c:1115
+msgid "The running NetworkManager version is not compatible (too new)."
+msgstr "A futó Hálózatkezelő verziója nem kompatibilis (túl új)."
+
+#. TRANSLATORS: the user is running a NM that is too old and API compatible
+#: ../panels/network/cc-network-panel.c:1121
+msgid "The running NetworkManager version is not compatible (too old)."
+msgstr "A futó Hálózatkezelő verziója nem kompatibilis (túl régi)."
+
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+msgid "Network"
+msgstr "Hálózat"
+
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
-msgid "Set your network proxy preferences"
-msgstr "Hálózati proxy beállításai"
+msgid "Network settings"
+msgstr "Hálózati beállítások"
 
-#: ../panels/network/gnome-network-properties.ui.h:1
-msgid "<b>Di_rect internet connection</b>"
-msgstr "<b>_Közvetlen internetkapcsolat</b>"
+#. Translators: those are keywords for the network control-center panel
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:4
+msgid "Network;Wireless;IP;LAN;"
+msgstr "Hálózat;Vezeték nélküli;IP;LAN;"
 
-#: ../panels/network/gnome-network-properties.ui.h:2
-msgid "<b>_Automatic proxy configuration</b>"
-msgstr "<b>_Automatikus proxybeállítás</b>"
+#: ../panels/network/network.ui.h:1
+msgid "Airplane Mode"
+msgstr "Repülő mód"
 
-#: ../panels/network/gnome-network-properties.ui.h:3
-msgid "<b>_Manual proxy configuration</b>"
-msgstr "<b>Ké_zi proxybeállítás</b>"
+#: ../panels/network/network.ui.h:2
+msgid "Configuration URL:"
+msgstr "Konfigurációs URL:"
 
-#: ../panels/network/gnome-network-properties.ui.h:4
-msgid "<b>_Use authentication</b>"
-msgstr "<b>_Hitelesítés használata</b>"
+#: ../panels/network/network.ui.h:3
+msgid "DNS:"
+msgstr "DNS:"
 
-#: ../panels/network/gnome-network-properties.ui.h:5
-msgid "Autoconfiguration _URL:"
-msgstr "Autokonfigurációs _URL:"
+#: ../panels/network/network.ui.h:4
+msgid "Default Route:"
+msgstr "Alapértelmezett útvonal:"
 
-#: ../panels/network/gnome-network-properties.ui.h:6
-msgid "C_reate"
-msgstr "_Létrehozás"
+#: ../panels/network/network.ui.h:5
+msgid "FTP Proxy:"
+msgstr "FTP-proxy:"
 
-#: ../panels/network/gnome-network-properties.ui.h:7
-msgid "Create New Location"
-msgstr "Új hely létrehozása"
+#: ../panels/network/network.ui.h:6
+msgid "Gateway:"
+msgstr "Átjáró:"
 
-#: ../panels/network/gnome-network-properties.ui.h:8
-msgid "HTTP Proxy Details"
-msgstr "HTTP-proxy beállításai"
+#: ../panels/network/network.ui.h:7
+msgid "Group Name:"
+msgstr "Csoportnév:"
 
-#: ../panels/network/gnome-network-properties.ui.h:9
-msgid "H_TTP proxy:"
-msgstr "_HTTP-proxy:"
+#: ../panels/network/network.ui.h:8
+msgid "Group Password:"
+msgstr "Csoportjelszó:"
 
-#: ../panels/network/gnome-network-properties.ui.h:10
-msgid "Ignore Host List"
-msgstr "Mellőzött kiszolgálók listája"
+#: ../panels/network/network.ui.h:9
+msgid "HTTP Proxy:"
+msgstr "HTTP-proxy:"
 
-#: ../panels/network/gnome-network-properties.ui.h:11
-msgid "Ignored Hosts"
-msgstr "Mellőzött kiszolgálók"
+#: ../panels/network/network.ui.h:10
+msgid "Hardware Address:"
+msgstr "Hardvercím:"
 
-#: ../panels/network/gnome-network-properties.ui.h:12
-msgid "Location:"
-msgstr "Hely:"
+#: ../panels/network/network.ui.h:11
+msgid "IMEI:"
+msgstr "IMEI:"
 
-#: ../panels/network/gnome-network-properties.ui.h:13
-msgid "Network Proxy Preferences"
-msgstr "Hálózati proxy beállításai"
+#: ../panels/network/network.ui.h:12
+msgid "IP Address:"
+msgstr "IP-cím:"
 
-#: ../panels/network/gnome-network-properties.ui.h:14
-msgid "Port:"
-msgstr "Port:"
+#: ../panels/network/network.ui.h:13
+msgid "IPv4 Address:"
+msgstr "IPv4-cím:"
 
-#: ../panels/network/gnome-network-properties.ui.h:15
-msgid "Proxy Configuration"
-msgstr "Proxy beállításai"
+#: ../panels/network/network.ui.h:14
+msgid "IPv6 Address:"
+msgstr "IPv6-cím:"
 
-#: ../panels/network/gnome-network-properties.ui.h:16
-msgid "S_ocks host:"
-msgstr "S_ocks kiszolgáló:"
+#: ../panels/network/network.ui.h:15
+msgid "Method:"
+msgstr "Módszer:"
 
-#: ../panels/network/gnome-network-properties.ui.h:17
-msgid "The location already exists."
-msgstr "A hely már létezik."
+#: ../panels/network/network.ui.h:16
+msgid "Network Name:"
+msgstr "Hálózatnév:"
 
-#: ../panels/network/gnome-network-properties.ui.h:18
-msgid "U_sername:"
-msgstr "_Felhasználónév:"
+#: ../panels/network/network.ui.h:17
+msgid "Provider:"
+msgstr "Szolgáltató:"
 
-#: ../panels/network/gnome-network-properties.ui.h:19
-msgid "_Delete Location"
-msgstr "Hely _törlése"
+#: ../panels/network/network.ui.h:18
+msgid "Secure HTTP Proxy:"
+msgstr "Biztonságos HTTP-proxy:"
 
-#: ../panels/network/gnome-network-properties.ui.h:20
-msgid "_Details"
-msgstr "_Részletek"
+#: ../panels/network/network.ui.h:19
+msgid "Security:"
+msgstr "Biztonság:"
 
-#: ../panels/network/gnome-network-properties.ui.h:21
-msgid "_FTP proxy:"
-msgstr "_FTP-proxy:"
+#: ../panels/network/network.ui.h:20
+msgid "Socks Host:"
+msgstr "Socks kiszolgáló:"
 
-#: ../panels/network/gnome-network-properties.ui.h:22
-msgid "_Location name:"
-msgstr "_Hely neve:"
+#: ../panels/network/network.ui.h:21
+msgid "Speed:"
+msgstr "Sebesség:"
 
-#: ../panels/network/gnome-network-properties.ui.h:23
-msgid "_Password:"
-msgstr "_Jelszó:"
+#: ../panels/network/network.ui.h:22
+msgid "Subnet Mask:"
+msgstr "Alhálózati maszk:"
 
-#: ../panels/network/gnome-network-properties.ui.h:24
-msgid "_Secure HTTP proxy:"
-msgstr "Bi_ztonságos HTTP-proxy:"
+#: ../panels/network/network.ui.h:24
+msgid "Username:"
+msgstr "Felhasználónév:"
 
-#: ../panels/network/gnome-network-properties.ui.h:25
-msgid "_Use the same proxy for all protocols"
-msgstr "_Ugyanazon proxy használata minden protokollhoz"
+#: ../panels/network/network.ui.h:25
+msgctxt "proxy method"
+msgid "Automatic"
+msgstr "Automatikus"
 
-#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:1
-msgid "Universal Access"
-msgstr "Akadálymentesítés"
+#: ../panels/network/network.ui.h:26
+msgctxt "proxy method"
+msgid "Manual"
+msgstr "Kézi"
 
+#: ../panels/network/network.ui.h:27
+msgctxt "proxy method"
+msgid "None"
+msgstr "Nincs"
+
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:64 ../panels/network/panel-common.c:136
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:68
+msgid "Wired"
+msgstr "Vezetékes"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:72
+msgid "Wireless"
+msgstr "Vezeték nélküli"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:77
+msgid "Mobile broadband"
+msgstr "Mobil széles sáv"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:81
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:85
+msgid "Mesh"
+msgstr "Háló"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:140
+msgid "Ad-hoc"
+msgstr "Eseti"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:144
+msgid "Infrastructure"
+msgstr "Kiépített"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:162
+msgid "Status unknown"
+msgstr "Ismeretlen állapot"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:166
+msgid "Unmanaged"
+msgstr "Felügyeletlen"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:170
+msgid "Unavailable"
+msgstr "Nem érhető el"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:174
+msgid "Disconnected"
+msgstr "Bontva"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:178
+msgid "Preparing connection"
+msgstr "Kapcsolat előkészítése"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:182
+msgid "Configuring connection"
+msgstr "Kapcsolat beállítása"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:186
+msgid "Authenticating"
+msgstr "Hitelesítés"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:190
+msgid "Getting network address"
+msgstr "Hálózati cím lekérése"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:194
+msgid "Checking network address"
+msgstr "Hálózati cím ellenőrzése"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:198
+msgid "Connected"
+msgstr "Kapcsolódva"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:202
+msgid "Disconnecting"
+msgstr "Bontás"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:206
+msgid "Failed to connect"
+msgstr "A kapcsolódás meghiúsult"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:210
+msgid "Status unknown (missing)"
+msgstr "Ismeretlen állapot (hiányzik)"
+
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:1
+msgid "Power"
+msgstr "Energia"
+
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:2
+msgid "Power management settings"
+msgstr "Energiagazdálkodás beállításai"
+
+#. Translators: those are keywords for the power control-center panel
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:4
+msgid "Power;Sleep;Suspend;Hibernate;Battery;"
+msgstr "Energia;Alvás;Felfüggesztés;Hibernálás;Akkumulátor;"
+
+#: ../panels/power/cc-power-panel.c:151
+msgid "Unknown time"
+msgstr "Ismeretlen idő"
+
+#: ../panels/power/cc-power-panel.c:157
+#, c-format
+msgid "%i minute"
+msgid_plural "%i minutes"
+msgstr[0] "%i perc"
+msgstr[1] "%i perc"
+
+#: ../panels/power/cc-power-panel.c:169
+#, c-format
+msgid "%i hour"
+msgid_plural "%i hours"
+msgstr[0] "%i óra"
+msgstr[1] "%i óra"
+
+#. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
+#. * Swap order with "%2$s %2$i %1$s %1$i if needed
+#: ../panels/power/cc-power-panel.c:177
+#, c-format
+msgid "%i %s %i %s"
+msgstr "%i %s, %i %s"
+
+#: ../panels/power/cc-power-panel.c:178
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "óra"
+msgstr[1] "óra"
+
+#: ../panels/power/cc-power-panel.c:179
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "perc"
+msgstr[1] "perc"
+
+#: ../panels/power/cc-power-panel.c:251
+msgid "Battery charging"
+msgstr "Az akkumulátor töltődik"
+
+#: ../panels/power/cc-power-panel.c:254
+msgid "Battery discharging"
+msgstr "Az akkumulátor kisül"
+
+#: ../panels/power/cc-power-panel.c:265
+msgid "UPS charging"
+msgstr "A szünetmentes táp töltődik"
+
+#: ../panels/power/cc-power-panel.c:268
+msgid "UPS discharging"
+msgstr "A szünetmentes táp kisül"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#: ../panels/power/cc-power-panel.c:286
+#, c-format
+msgid "%s until charged (%.0lf%%)"
+msgstr "%s a feltöltésig (%.0lf%%)"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#: ../panels/power/cc-power-panel.c:292
+#, c-format
+msgid "%s until empty (%.0lf%%)"
+msgstr "%s a lemerülésig (%.0lf%%)"
+
+#. TRANSLATORS: %1 is a percentage value. Note: this string is only
+#. * used when we don't have a time value
+#: ../panels/power/cc-power-panel.c:300
+#, c-format
+msgid "%.0lf%% charged"
+msgstr "%.0lf%% feltöltve"
+
+#: ../panels/power/power.ui.h:1 ../panels/screen/screen.ui.h:1
+msgid "1 hour"
+msgstr "1 óra"
+
+#: ../panels/power/power.ui.h:2 ../panels/screen/screen.ui.h:3
+msgid "10 minutes"
+msgstr "10 perc"
+
+#: ../panels/power/power.ui.h:3 ../panels/screen/screen.ui.h:6
+msgid "30 minutes"
+msgstr "30 perc"
+
+#: ../panels/power/power.ui.h:4 ../panels/screen/screen.ui.h:7
+msgid "5 minutes"
+msgstr "5 perc"
+
+#: ../panels/power/power.ui.h:5
+msgid "Ask me"
+msgstr "Kérdezzen"
+
+#: ../panels/power/power.ui.h:7
+msgid "Hibernate"
+msgstr "Hibernálás"
+
+#: ../panels/power/power.ui.h:8
+msgid "On AC power:"
+msgstr "Hálózaton:"
+
+#: ../panels/power/power.ui.h:9
+msgid "On battery power:"
+msgstr "Akkumulátoron:"
+
+#: ../panels/power/power.ui.h:10
+msgid "Put the computer to sleep when inactive:"
+msgstr "Számítógép altatása, ha inaktív:"
+
+#: ../panels/power/power.ui.h:11
+msgid "Shutdown"
+msgstr "Leállítás"
+
+#: ../panels/power/power.ui.h:12
+msgid "Suspend"
+msgstr "Felfüggesztés"
+
+#: ../panels/power/power.ui.h:13
+msgid "When power is critically low:"
+msgstr "Ha az áramellátás kritikusan gyenge:"
+
+#: ../panels/power/power.ui.h:14
+msgid "When the power button is pressed:"
+msgstr "A bekapcsológomb megnyomásakor:"
+
+#: ../panels/power/power.ui.h:15
+msgid "When the sleep button is pressed:"
+msgstr "Az alvás gomb megnyomásakor:"
+
+#. Translators: those are keywords for the brightness and lock control-center panel
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
+msgid "Brightness;Lock;Dim;Blank;Monitor;"
+msgstr "Fényerő;Zárolás;Halványítás;Elsötétítés;Monitor;"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
+msgid "Screen"
+msgstr "Képernyő"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
+msgid "Screen brightness and lock settings"
+msgstr "Képernyő fényerő- és zárolási beállításai"
+
+#: ../panels/screen/screen.ui.h:2
+msgid "1 minute"
+msgstr "1 perc"
+
+#: ../panels/screen/screen.ui.h:4
+msgid "2 minutes"
+msgstr "2 perc"
+
+#: ../panels/screen/screen.ui.h:5
+msgid "3 minutes"
+msgstr "3 perc"
+
+#: ../panels/screen/screen.ui.h:8
+msgid "Brightness"
+msgstr "Fényerő"
+
+#: ../panels/screen/screen.ui.h:9
+msgid "Dim screen to save power"
+msgstr "Spórolás a képernyő elhalványításával"
+
+#. To translators: This asks whether you want to lock the screen (through the screensaver) when you're detected to be physically in your home (your house, etc.)
+#: ../panels/screen/screen.ui.h:11
+msgid "Don't lock when at home"
+msgstr "Ne zárolja, ha otthon vagyok"
+
+#: ../panels/screen/screen.ui.h:12
+msgid "Locations..."
+msgstr "Helyek…"
+
+#: ../panels/screen/screen.ui.h:14
+msgid "Lock screen after:"
+msgstr "Képernyő zárolása:"
+
+#: ../panels/screen/screen.ui.h:15
+msgid "Screen turns off"
+msgstr "Képernyő kikapcsol"
+
+#: ../panels/screen/screen.ui.h:16
+msgid "Turn off after:"
+msgstr "Kikapcsolás:"
+
+#: ../panels/sound/applet-main.c:49
+msgid "Enable debugging code"
+msgstr "Hibakeresési kód engedélyezése"
+
+#: ../panels/sound/applet-main.c:50
+msgid "Version of this application"
+msgstr "Ezen alkalmazás verziója"
+
+#: ../panels/sound/applet-main.c:62
+msgid " — GNOME Volume Control Applet"
+msgstr " – GNOME hangerőszabályzó kisalkalmazás"
+
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1923
+msgid "Output"
+msgstr "Kimenet"
+
+#: ../panels/sound/gvc-applet.c:278
+msgid "Sound Output Volume"
+msgstr "Hangkimenet hangereje"
+
+#: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1840
+msgid "Input"
+msgstr "Bemenet"
+
+#: ../panels/sound/gvc-applet.c:284
+msgid "Microphone Volume"
+msgstr "Mikrofon hangereje"
+
+#: ../panels/sound/gvc-balance-bar.c:111
+msgctxt "balance"
+msgid "Left"
+msgstr "Bal"
+
+#: ../panels/sound/gvc-balance-bar.c:112
+msgctxt "balance"
+msgid "Right"
+msgstr "Jobb"
+
+#: ../panels/sound/gvc-balance-bar.c:115
+msgctxt "balance"
+msgid "Rear"
+msgstr "Hátsó"
+
+#: ../panels/sound/gvc-balance-bar.c:116
+msgctxt "balance"
+msgid "Front"
+msgstr "Első"
+
+#: ../panels/sound/gvc-balance-bar.c:119
+msgctxt "balance"
+msgid "Minimum"
+msgstr "Minimum"
+
+#: ../panels/sound/gvc-balance-bar.c:120
+msgctxt "balance"
+msgid "Maximum"
+msgstr "Maximum"
+
+#: ../panels/sound/gvc-balance-bar.c:295
+msgid "_Balance:"
+msgstr "_Egyensúly:"
+
+#: ../panels/sound/gvc-balance-bar.c:298
+msgid "_Fade:"
+msgstr "_Elhalás:"
+
+#: ../panels/sound/gvc-balance-bar.c:301
+msgid "_Subwoofer:"
+msgstr "_Mélysugárzó:"
+
+#: ../panels/sound/gvc-channel-bar.c:602 ../panels/sound/gvc-channel-bar.c:611
+msgctxt "volume"
+msgid "100%"
+msgstr "100%"
+
+#: ../panels/sound/gvc-channel-bar.c:606
+msgctxt "volume"
+msgid "Unamplified"
+msgstr "Erősítetlen"
+
+#: ../panels/sound/gvc-channel-bar.c:900
+msgid "Mute"
+msgstr "Némítás"
+
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1631
+msgid "_Profile:"
+msgstr "_Profil:"
+
+#. translators:
+#. * The number of sound outputs on a particular device
+#: ../panels/sound/gvc-mixer-control.c:1098
+#, c-format
+msgid "%u Output"
+msgid_plural "%u Outputs"
+msgstr[0] "%u kimenet"
+msgstr[1] "%u kimenet"
+
+#. translators:
+#. * The number of sound inputs on a particular device
+#: ../panels/sound/gvc-mixer-control.c:1108
+#, c-format
+msgid "%u Input"
+msgid_plural "%u Inputs"
+msgstr[0] "%u bemenet"
+msgstr[1] "%u bemenet"
+
+#: ../panels/sound/gvc-mixer-control.c:1406
+msgid "System Sounds"
+msgstr "Rendszerhangok"
+
+#: ../panels/sound/gvc-mixer-dialog.c:317
+#: ../panels/sound/gvc-mixer-dialog.c:618
+msgid "Co_nnector:"
+msgstr "_Csatlakozó:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:531
+msgid "Peak detect"
+msgstr "Csúcsérzékelés"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1507
+#: ../panels/sound/gvc-mixer-dialog.c:1719
+#: ../panels/sound/gvc-sound-theme-chooser.c:591
+msgid "Name"
+msgstr "Név"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1525
+msgid "Device"
+msgstr "Eszköz"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1573
+#, c-format
+msgid "Speaker Testing for %s"
+msgstr "Hangszóróteszt ehhez: %s"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1632
+msgid "Test Speakers"
+msgstr "Hangszórók tesztelése"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1763
+msgid "_Output volume: "
+msgstr "_Kimeneti hangerő: "
+
+#: ../panels/sound/gvc-mixer-dialog.c:1777
+msgid "Sound Effects"
+msgstr "Hangeffektusok"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1784
+msgid "_Alert volume: "
+msgstr "_Riasztás hangereje: "
+
+#: ../panels/sound/gvc-mixer-dialog.c:1797
+msgid "Hardware"
+msgstr "Hardver"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1802
+msgid "C_hoose a device to configure:"
+msgstr "_Válassza ki a beállítandó eszközt:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1829
+#: ../panels/sound/gvc-mixer-dialog.c:1952
+msgid "Settings for the selected device:"
+msgstr "Kiválasztott eszköz beállításai:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1847
+msgid "_Input volume: "
+msgstr "B_emeneti hangerő: "
+
+#: ../panels/sound/gvc-mixer-dialog.c:1870
+msgid "Input level:"
+msgstr "Bemeneti szint:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1896
+msgid "C_hoose a device for sound input:"
+msgstr "Válasszon _hangbemeneti eszközt:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1928
+msgid "C_hoose a device for sound output:"
+msgstr "Válasszon ha_ngkimeneti eszközt:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1963
+msgid "Applications"
+msgstr "Alkalmazások"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1967
+msgid "No application is currently playing or recording audio."
+msgstr "Jelenleg nincs hangot lejátszó vagy felvevő alkalmazás."
+
+#: ../panels/sound/gvc-speaker-test.c:221
+msgid "Stop"
+msgstr "Leállítás"
+
+#: ../panels/sound/gvc-speaker-test.c:221
+#: ../panels/sound/gvc-speaker-test.c:333
+msgid "Test"
+msgstr "Teszt"
+
+#: ../panels/sound/gvc-speaker-test.c:229
+msgid "Subwoofer"
+msgstr "Mélysugárzó"
+
+#: ../panels/sound/gvc-stream-status-icon.c:236
+#, c-format
+msgid "Failed to start Sound Preferences: %s"
+msgstr "A Hangbeállítások indítása meghiúsult: %s"
+
+#: ../panels/sound/gvc-stream-status-icon.c:262
+msgid "_Mute"
+msgstr "_Némítás"
+
+#: ../panels/sound/gvc-stream-status-icon.c:271
+msgid "_Sound Preferences"
+msgstr "_Hangbeállítások"
+
+#: ../panels/sound/gvc-stream-status-icon.c:455
+msgid "Muted"
+msgstr "Némítva"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:188
+msgid "Built-in"
+msgstr "Beépített"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:451
+#: ../panels/sound/gvc-sound-theme-chooser.c:463
+#: ../panels/sound/gvc-sound-theme-chooser.c:475
+msgid "Sound Preferences"
+msgstr "Hangok beállításai"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:454
+#: ../panels/sound/gvc-sound-theme-chooser.c:465
+#: ../panels/sound/gvc-sound-theme-chooser.c:477
+msgid "Testing event sound"
+msgstr "Eseményhang tesztelése"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:582
+msgid "From theme"
+msgstr "Témából"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:764
+msgid "C_hoose an alert sound:"
+msgstr "Válasszon _riasztáshangot:"
+
+#: ../panels/sound/sound-theme-file-utils.c:292
+msgid "Custom"
+msgstr "Egyéni"
+
+#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:1
+msgid "Show desktop volume control"
+msgstr "Hangerőszabályzó megjelenítése"
+
+#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:2
+msgid "Volume Control"
+msgstr "Hangerőszabályzó"
+
+#. Translators: those are keywords for the sound control-center panel
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
+msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;"
+msgstr "Kártya;Mikrofon;Hangerő;Elhalás;Egyensúly;Bluetooth;Fejhallgató;"
+
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:3
+msgid "Change sound volume and sound events"
+msgstr "Hangerő és hangesemények módosítása"
+
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
+msgid "Sound"
+msgstr "Hang"
+
+#. Translators: This is the name of an audio file that sounds like the bark of a dog.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:3
+msgid "Bark"
+msgstr "Ugatás"
+
+#. Translators: This is the name of an audio file that sounds like a water drip.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:6
+msgid "Drip"
+msgstr "Vízcsepp"
+
+#. Translators: This is the name of an audio file that sounds like tapping glass.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:9
+msgid "Glass"
+msgstr "Üveg"
+
+#. Translators: This is the name of an audio file that sounds sort of like a submarine sonar ping.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:12
+msgid "Sonar"
+msgstr "Szonár"
+
+#. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
+msgid "Keyboard;Mouse;a11y;Accessibility;"
+msgstr "Billentyűzet;Egér;a11y;Akadálymentesítés;"
+
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
 msgstr "Akadálymentesítés beállításai"
 
@@ -1639,7 +2448,7 @@ msgstr "<span size=\"x-large\">Nagy</span>"
 
 #: ../panels/universal-access/uap.ui.h:9
 msgid "<span size=\"x-large\">Low</span>"
-msgstr "<span size=\"x-large\">Alacson</span>"
+msgstr "<span size=\"x-large\">Alacsony</span>"
 
 #: ../panels/universal-access/uap.ui.h:10
 msgid "<span size=\"x-large\">Normal</span>"
@@ -1650,608 +2459,927 @@ msgid "Acceptance delay:"
 msgstr "Elfogadás késleltetése:"
 
 #: ../panels/universal-access/uap.ui.h:12
-msgid "Accessibility features can be turned on or off with keyboard shortcuts"
-msgstr ""
-"Az akadálymentesítési szolgáltatások gyorsbillentyűkkel kapcsolhatók be és ki"
-
-#: ../panels/universal-access/uap.ui.h:13
 msgid "Beep when Caps and Num Lock are used"
 msgstr "Hangjelzés a Caps és Num Lock használatakor"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:13
 msgid "Beep when a key is"
 msgstr "Hangjelzés billentyű"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:14
 msgid "Beep when a key is rejected"
 msgstr "Hangjelzés billentyű elutasításakor"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Beep when a modifer key is pressed"
 msgstr "Hangjelzés módosító billentyű lenyomásakor"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:16
+msgid "Bounce Keys"
+msgstr "Billentyűszűrés"
+
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Caribou"
 msgstr "Caribou"
 
-#: ../panels/universal-access/uap.ui.h:19
-msgid "Change constrast:"
+#: ../panels/universal-access/uap.ui.h:18
+msgid "Change contrast:"
 msgstr "Kontraszt módosítása:"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:19
 msgid "Closed Captioning"
 msgstr "Zárt feliratozás"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:20
 msgid "Contrast:"
 msgstr "Kontraszt:"
 
-#: ../panels/universal-access/uap.ui.h:22
-msgid "Control the pointer using the keypad."
-msgstr "A mutató irányítása a numerikus billentyűzetről."
+#: ../panels/universal-access/uap.ui.h:21
+msgid "Control the pointer using the keypad"
+msgstr "A mutató irányítása a numerikus billentyűzetről"
 
-#: ../panels/universal-access/uap.ui.h:23
+#: ../panels/universal-access/uap.ui.h:22
 msgid "Control the pointer using the video camera."
 msgstr "A mutató irányítása a videokamera használatával."
 
 #: ../panels/universal-access/uap.ui.h:24
-msgid "Ctrl+Alt+-"
-msgstr "Ctrl+Alt+-"
+msgid "D_elay:"
+msgstr "Késlel_tetés:"
 
 #: ../panels/universal-access/uap.ui.h:25
-msgid "Ctrl+Alt+0"
-msgstr "Ctrl+Alt+0"
+msgid "Dasher"
+msgstr "Dasher"
 
 #: ../panels/universal-access/uap.ui.h:26
-msgid "Ctrl+Alt+4"
-msgstr "Ctrl+Alt+4"
-
-#: ../panels/universal-access/uap.ui.h:27
-msgid "Ctrl+Alt+8"
-msgstr "Ctrl+Alt+8"
-
-#: ../panels/universal-access/uap.ui.h:28
-msgid "Ctrl+Alt+="
-msgstr "Ctrl+Alt+="
-
-#: ../panels/universal-access/uap.ui.h:32
 msgid "Decrease size:"
 msgstr "Méret csökkentése:"
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Disable if two keys are pressed together"
 msgstr "Letiltás két billentyű egyidejű lenyomásakor"
 
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Display"
 msgstr "Megjelenítés"
 
-#: ../panels/universal-access/uap.ui.h:35
-msgid "Display a textual description of speech and sounds."
-msgstr "A beszéd és hangok szöveges leírásának megjelenítése."
+#: ../panels/universal-access/uap.ui.h:29
+msgid "Display a textual description of speech and sounds"
+msgstr "A beszéd és hangok szöveges leírásának megjelenítése"
 
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Flash the entire screen"
 msgstr "Teljes képernyő megvillantása"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Flash the window title"
 msgstr "Ablak címsorának megvillantása"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:32
 msgid "GOK"
 msgstr "GOK"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Hearing"
 msgstr "Hallás"
 
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/universal-access/uap.ui.h:35
 msgid "High/Inverse"
 msgstr "Nagy/inverz"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:36
 msgid "HighContrast"
 msgstr "Nagy kontraszt"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:37
 msgid "HighContrastInverse"
 msgstr "Nagy kontraszt és inverz"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:38
 msgid "Hover Click"
 msgstr "Rámutatási kattintás"
 
-#: ../panels/universal-access/uap.ui.h:45
-msgid "I need assistance with:"
-msgstr "Segítségre van szükségem a következőhöz:"
-
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Ignores fast duplicate keypresses"
 msgstr "Ismételt leütések figyelmen kívül hagyása"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Increase size:"
 msgstr "Méret növelése:"
 
-#: ../panels/universal-access/uap.ui.h:48
-msgid "Keyboard Settings..."
-msgstr "Billentyűzetbeállítások…"
+#: ../panels/universal-access/uap.ui.h:41
+msgid "Keyboard Settings"
+msgstr "Billentyűzetbeállítások"
 
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Larger"
 msgstr "Nagyobb"
 
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:48
 msgid "LowContrast"
 msgstr "Alacsony kontraszt"
 
-#: ../panels/universal-access/uap.ui.h:57
-msgid "Mouse Settings..."
-msgstr "Egérbeállítások…"
+#: ../panels/universal-access/uap.ui.h:49
+msgid "Mouse Keys"
+msgstr "Egérbillentyűk"
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:50
+msgid "Mouse Settings"
+msgstr "Egérbeállítások"
+
+#: ../panels/universal-access/uap.ui.h:51
 msgid "Nomon"
 msgstr "Nomon"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:52
 msgid "None"
 msgstr "Nincs"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:54
 msgid "On screen keyboard"
 msgstr "Képernyő-billentyűzet"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:55
 msgid "OnBoard"
 msgstr "OnBoard"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Options..."
 msgstr "Beállítások…"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:57
 msgid "Pointing and Clicking"
 msgstr "Mutatás és kattintás"
 
-#: ../panels/universal-access/uap.ui.h:67
-msgid "Puts a delay between when a key is pressed and when it is accepted."
-msgstr "Késleltetés a billentyűk lenyomása és elfogadása között."
+#: ../panels/universal-access/uap.ui.h:58
+msgid "Puts a delay between when a key is pressed and when it is accepted"
+msgstr "Késleltetés a billentyűk lenyomása és elfogadása között"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Screen Reader"
 msgstr "Képernyőolvasó"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:60
+msgid "Screen keyboard"
+msgstr "Képernyő-billentyűzet"
+
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Seeing"
 msgstr "Látás"
 
+#: ../panels/universal-access/uap.ui.h:64
+msgid "Simulated Secondary Click"
+msgstr "Szimulált másodlagos kattintás"
+
+#: ../panels/universal-access/uap.ui.h:65
+msgid "Slow Keys"
+msgstr "Lassú billentyűk"
+
+#: ../panels/universal-access/uap.ui.h:68
+msgid "Sound Settings"
+msgstr "Hangbeállítások"
+
+#: ../panels/universal-access/uap.ui.h:69
+msgid "Sticky Keys"
+msgstr "Ragadós billentyűk"
+
 #: ../panels/universal-access/uap.ui.h:70
-msgid "Shift+Ctrl+Alt+-"
-msgstr "Shift+Ctrl+Alt+-"
-
-#: ../panels/universal-access/uap.ui.h:71
-msgid "Shift+Ctrl+Alt+="
-msgstr "Shift+Ctrl+Alt+="
-
-#: ../panels/universal-access/uap.ui.h:74
-msgid "Show Universal Access status"
-msgstr "Akadálymentesítés állapotának megjelenítése"
-
-#: ../panels/universal-access/uap.ui.h:79
-msgid "Sound Settings..."
-msgstr "Hangbeállítások…"
-
-#: ../panels/universal-access/uap.ui.h:81
 msgid "Test flash"
 msgstr "Villanás tesztelése"
 
-#: ../panels/universal-access/uap.ui.h:82
-msgid "Test:"
-msgstr "Tesztelés:"
-
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Text size:"
 msgstr "Szövegméret:"
 
-#: ../panels/universal-access/uap.ui.h:84
-msgid "Treats a sequence of modifier keys as a key combination."
-msgstr "A módosítóbillentyűk sorozatát billentyűkombinációként kezeli."
+#: ../panels/universal-access/uap.ui.h:72
+msgid "Treats a sequence of modifier keys as a key combination"
+msgstr "A módosítóbillentyűk sorozatát billentyűkombinációként kezeli"
 
-#: ../panels/universal-access/uap.ui.h:85
-msgid "Trigger a click when the pointer hovers."
-msgstr "Kattintás kezdeményezése a mutató mozgásának megállásakor."
+#: ../panels/universal-access/uap.ui.h:73
+msgid "Trigger a click when the pointer hovers"
+msgstr "Kattintás kezdeményezése a mutató mozgásának megállásakor"
 
-#: ../panels/universal-access/uap.ui.h:86
-msgid "Trigger a secondary click by holding down the primary button."
-msgstr "Másodlagos kattintás aktiválása az elsődleges gomb nyomva tartásával."
+#: ../panels/universal-access/uap.ui.h:74
+msgid "Trigger a secondary click by holding down the primary button"
+msgstr "Másodlagos kattintás aktiválása az elsődleges gomb nyomva tartásával"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:75
+msgid "Turn on accessibility features from the keyboard"
+msgstr "Akadálymentesítési szolgáltatások bekapcsolása a billentyűzetről"
+
+#: ../panels/universal-access/uap.ui.h:76
 msgid "Turn on or off:"
 msgstr "Be- vagy kikapcsolás:"
 
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:77
 msgid "Type here to test settings"
 msgstr "A beállítások kipróbálásához gépeljen itt"
 
-#: ../panels/universal-access/uap.ui.h:89
+#: ../panels/universal-access/uap.ui.h:78
 msgid "Typing"
 msgstr "Gépelés"
 
-#: ../panels/universal-access/uap.ui.h:90
+#: ../panels/universal-access/uap.ui.h:79
 msgid "Typing Assistant"
 msgstr "Gépelési asszisztens"
 
-#: ../panels/universal-access/uap.ui.h:91
-msgid "Use a visual indication when an alert sound occurs."
-msgstr "Vizuális jelzés használata figyelmeztető hang esetén."
+#: ../panels/universal-access/uap.ui.h:80
+msgid "Use a visual indication when an alert sound occurs"
+msgstr "Vizuális jelzés használata figyelmeztető hang esetén"
 
-#: ../panels/universal-access/uap.ui.h:92
-msgid "Use an alternative form of text input"
-msgstr "Alternatív szövegbeviteli módszer használata"
-
-#: ../panels/universal-access/uap.ui.h:93
+#: ../panels/universal-access/uap.ui.h:81
 msgid "Video Mouse"
 msgstr "Videoegér"
 
-#: ../panels/universal-access/uap.ui.h:94
+#: ../panels/universal-access/uap.ui.h:82
 msgid "Visual Alerts"
 msgstr "Vizuális figyelmeztetések"
 
-#: ../panels/universal-access/uap.ui.h:95
-msgid "Zoom"
-msgstr "Nagyítás"
-
-#: ../panels/universal-access/uap.ui.h:96
+#: ../panels/universal-access/uap.ui.h:84
 msgid "Zoom in:"
 msgstr "Nagyítás:"
 
-#: ../panels/universal-access/uap.ui.h:97
+#: ../panels/universal-access/uap.ui.h:85
 msgid "Zoom out:"
 msgstr "Kicsinyítés:"
 
-#: ../panels/universal-access/uap.ui.h:99
+#: ../panels/universal-access/uap.ui.h:86
+msgid "_Motion threshold:"
+msgstr "M_ozgás küszöbszintje:"
+
+#: ../panels/universal-access/uap.ui.h:87
 msgid "accepted"
 msgstr "elfogadásakor"
 
-#: ../panels/universal-access/uap.ui.h:100
+#: ../panels/universal-access/uap.ui.h:88
 msgid "pressed"
 msgstr "lenyomásakor"
 
-#: ../panels/universal-access/uap.ui.h:101
+#: ../panels/universal-access/uap.ui.h:89
 msgid "rejected"
 msgstr "visszautasításakor"
 
-#: ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../panels/user-accounts/run-passwd.c:426
+msgid "Authentication failed"
+msgstr "A hitelesítés meghiúsult"
+
+#: ../panels/user-accounts/run-passwd.c:506
+#: ../panels/user-accounts/um-password-dialog.c:375
+#, c-format
+msgid "The new password is too short"
+msgstr "Az új jelszó túl rövid"
+
+#: ../panels/user-accounts/run-passwd.c:512
+#, c-format
+msgid "The new password is too simple"
+msgstr "Az új jelszó túl egyszerű"
+
+#: ../panels/user-accounts/run-passwd.c:518
+#, c-format
+msgid "The old and new passwords are too similar"
+msgstr "A régi és az új jelszó túlságosan hasonlít egymáshoz"
+
+#: ../panels/user-accounts/run-passwd.c:521
+#, c-format
+msgid "The new password has already been used recently."
+msgstr "Az új jelszót nemrég használta."
+
+#: ../panels/user-accounts/run-passwd.c:524
+#, c-format
+msgid "The new password must contain numeric or special characters"
+msgstr ""
+"Az új jelszónak számokat vagy speciális karaktereket is tartalmaznia kell"
+
+#: ../panels/user-accounts/run-passwd.c:528
+#, c-format
+msgid "The old and new passwords are the same"
+msgstr "A régi és az új jelszó ugyanaz"
+
+#: ../panels/user-accounts/run-passwd.c:532
+#, c-format
+msgid "Your password has been changed since you initially authenticated!"
+msgstr "A jelszava megváltozott az első hitelesítés óta."
+
+#: ../panels/user-accounts/run-passwd.c:536
+#, c-format
+msgid "The new password does not contain enough different characters"
+msgstr "Az új jelszó nem tartalmaz elég eltérő karaktert"
+
+#: ../panels/user-accounts/run-passwd.c:540
+#, c-format
+msgid "Unknown error"
+msgstr "Ismeretlen hiba"
+
+#: ../panels/user-accounts/um-account-dialog.c:78
+msgid "Failed to create user"
+msgstr "A felhasználó létrehozása meghiúsult"
+
+#: ../panels/user-accounts/um-account-dialog.c:185
+#, c-format
+msgid "A user with the username '%s' already exists"
+msgstr "Már létezik „%s” felhasználónevű felhasználó"
+
+#: ../panels/user-accounts/um-account-dialog.c:189
+#, c-format
+msgid "The username is too long"
+msgstr "A felhasználónév túl hosszú"
+
+#: ../panels/user-accounts/um-account-dialog.c:192
+msgid "The username cannot start with a '-'"
+msgstr "A felhasználónév nem kezdődhet „-” karakterrel"
+
+#: ../panels/user-accounts/um-account-dialog.c:195
+msgid ""
+"The username must consist of:\n"
+" ➣ letters from the English alphabet\n"
+" ➣ digits\n"
+" ➣ any of the characters '.', '-' and '_'"
+msgstr ""
+"A felhasználónév a következőket tartalmazhatja:\n"
+" ➣ az angol ábécé betűi\n"
+" ➣ számjegyek\n"
+" ➣ a következő karakterek bármelyike: „.” „,” „-” „_”"
+
+#: ../panels/user-accounts/um-account-type.c:35
+#: ../panels/user-accounts/data/account-dialog.ui.h:2
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
+msgctxt "Account type"
+msgid "Standard"
+msgstr "Szabványos"
+
+#: ../panels/user-accounts/um-account-type.c:37
+#: ../panels/user-accounts/data/account-dialog.ui.h:1
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
+msgctxt "Account type"
+msgid "Administrator"
+msgstr "Rendszergazda"
+
+#: ../panels/user-accounts/um-account-type.c:39
+#: ../panels/user-accounts/data/account-dialog.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
+msgctxt "Account type"
+msgid "Supervised"
+msgstr "Felügyelt"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:107
+msgid ""
+"You are not allowed to access the device. Contact your system administrator."
+msgstr "Nem jogosult az eszköz elérésére. Keresse meg a rendszergazdáját."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:109
+msgid "The device is already in use."
+msgstr "Az eszköz már használatban van."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:111
+msgid "An internal error occurred."
+msgstr "Belső hiba történt."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:181
+#: ../panels/user-accounts/um-fingerprint-dialog.c:182
+msgid "Enabled"
+msgstr "Engedélyezve"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:224
+msgid "Delete registered fingerprints?"
+msgstr "Törli a regisztrált ujjlenyomatokat?"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:228
+msgid "_Delete Fingerprints"
+msgstr "Ujjlenyomatok _törlése"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:235
+msgid ""
+"Do you want to delete your registered fingerprints so fingerprint login is "
+"disabled?"
+msgstr ""
+"Törölni kívánja a regisztrált ujjlenyomatokat, ezzel letiltva az "
+"ujjlenyomatos bejelentkezést?"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:363
+msgid "Done!"
+msgstr "Kész!"
+
+#. translators:
+#. * The variable is the name of the device, for example:
+#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
+#: ../panels/user-accounts/um-fingerprint-dialog.c:409
+#: ../panels/user-accounts/um-fingerprint-dialog.c:431
+#, c-format
+msgid "Could not access '%s' device"
+msgstr "Az eszköz („%s”) nem érhető el"
+
+#. translators:
+#. * The variable is the name of the device, for example:
+#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
+#: ../panels/user-accounts/um-fingerprint-dialog.c:480
+#, c-format
+msgid "Could not start finger capture on '%s' device"
+msgstr "Nem indítható az ujjak beolvasása az eszközön („%s”)"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:549
+msgid "Could not access any fingerprint readers"
+msgstr "Nem érhető el ujjlenyomat-olvasó"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:550
+msgid "Please contact your system administrator for help."
+msgstr "Segítségért keresse meg rendszergazdáját."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:587
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:1
+msgid "Enable Fingerprint Login"
+msgstr "Ujjlenyomatos bejelentkezés engedélyezése"
+
+#. translators:
+#. * The variable is the name of the device, for example:
+#. * "To enable fingerprint login, you need to save one of your fingerprints, using the
+#. * 'Digital Persona U.are.U 4000/4000B' device."
+#.
+#: ../panels/user-accounts/um-fingerprint-dialog.c:621
+#, c-format
+msgid ""
+"To enable fingerprint login, you need to save one of your fingerprints, "
+"using the '%s' device."
+msgstr ""
+"Az ujjlenyomatos bejelentkezés engedélyezéséhez a(z) „%s” eszköz "
+"segítségével el kell mentenie az egyik ujjlenyomatát."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:629
+#, c-format
+msgid ""
+"Enrolling fingerprints for\n"
+"<b><big>%s</big></b>"
+msgstr ""
+"Ujjlenyomatok regisztrálása\n"
+"<b><big>%s</big></b> számára"
+
+#: ../panels/user-accounts/um-language-dialog.c:180
+msgid "Other..."
+msgstr "Egyéb…"
+
+#: ../panels/user-accounts/um-password-dialog.c:179
+msgid "More choices..."
+msgstr "További lehetőségek…"
+
+#: ../panels/user-accounts/um-password-dialog.c:285
+msgid "Please choose another password."
+msgstr "Válasszon másik jelszót."
+
+#: ../panels/user-accounts/um-password-dialog.c:294
+msgid "Please type your current password again."
+msgstr "Írja be újra jelenlegi jelszavát."
+
+#: ../panels/user-accounts/um-password-dialog.c:300
+msgid "Password could not be changed"
+msgstr "A jelszót nem sikerült megváltoztatni"
+
+#: ../panels/user-accounts/um-password-dialog.c:372
+msgid "You need to enter a new password"
+msgstr "Meg kell adnia egy új jelszót"
+
+#: ../panels/user-accounts/um-password-dialog.c:381
+msgid "You need to confirm the password"
+msgstr "Meg kell erősítenie a jelszót"
+
+#: ../panels/user-accounts/um-password-dialog.c:384
+msgid "The passwords do not match"
+msgstr "A jelszavak nem egyeznek"
+
+#: ../panels/user-accounts/um-password-dialog.c:390
+msgid "You need to enter your current password"
+msgstr "Újra be kell írnia jelenlegi jelszavát"
+
+#: ../panels/user-accounts/um-password-dialog.c:393
+msgid "The current password is not correct"
+msgstr "A jelenlegi jelszó helytelen"
+
+#: ../panels/user-accounts/um-password-dialog.c:466
+#: ../panels/user-accounts/um-password-dialog.c:683
+msgctxt "Password strength"
+msgid "Too short"
+msgstr "Túl rövid"
+
+#: ../panels/user-accounts/um-password-dialog.c:469
+#: ../panels/user-accounts/um-password-dialog.c:684
+msgctxt "Password strength"
+msgid "Weak"
+msgstr "Gyenge"
+
+#: ../panels/user-accounts/um-password-dialog.c:471
+#: ../panels/user-accounts/um-password-dialog.c:685
+msgctxt "Password strength"
+msgid "Fair"
+msgstr "Elfogadható"
+
+#: ../panels/user-accounts/um-password-dialog.c:473
+#: ../panels/user-accounts/um-password-dialog.c:686
+msgctxt "Password strength"
+msgid "Good"
+msgstr "Jó"
+
+#: ../panels/user-accounts/um-password-dialog.c:475
+#: ../panels/user-accounts/um-password-dialog.c:687
+msgctxt "Password strength"
+msgid "Strong"
+msgstr "Erős"
+
+#: ../panels/user-accounts/um-password-dialog.c:514
+msgid "Passwords do not match"
+msgstr "A jelszavak nem egyeznek"
+
+#: ../panels/user-accounts/um-password-dialog.c:540
+msgid "Wrong password"
+msgstr "Hibás jelszó"
+
+#: ../panels/user-accounts/um-photo-dialog.c:97
+#: ../panels/user-accounts/data/language-chooser.ui.h:2
+#: ../panels/user-accounts/data/photo-dialog.ui.h:8
+msgid "Select"
+msgstr "Kijelölés"
+
+#: ../panels/user-accounts/um-photo-dialog.c:429
+msgid "Disable image"
+msgstr "Tiltva"
+
+#: ../panels/user-accounts/um-photo-dialog.c:447
+msgid "Take a photo..."
+msgstr "Fénykép készítése…"
+
+#: ../panels/user-accounts/um-photo-dialog.c:465
+msgid "Browse for more pictures..."
+msgstr "További képek tallózása…"
+
+#: ../panels/user-accounts/um-photo-dialog.c:690
+#, c-format
+msgid "Used by %s"
+msgstr "%s használja"
+
+#: ../panels/user-accounts/um-user-manager.c:430
+#, c-format
+msgid "A user with name '%s' already exists."
+msgstr "Már létezik „%s” nevű felhasználó."
+
+#: ../panels/user-accounts/um-user-manager.c:525
+msgid "This user does not exist."
+msgstr "Ez a felhasználó nem létezik."
+
+#: ../panels/user-accounts/um-user-panel.c:357
+msgid "Failed to delete user"
+msgstr "A felhasználó törlése meghiúsult"
+
+#: ../panels/user-accounts/um-user-panel.c:417
+msgid "You cannot delete your own account."
+msgstr "Nem törölheti saját fiókját."
+
+#: ../panels/user-accounts/um-user-panel.c:426
+#, c-format
+msgid "%s is still logged in"
+msgstr "%s még be van jelentkezve"
+
+#: ../panels/user-accounts/um-user-panel.c:430
+msgid ""
+"Deleting a user while they are logged in can leave the system in an "
+"inconsistent state."
+msgstr ""
+"A bejelentkezett felhasználók törlése a rendszert inkonzisztens állapotban "
+"hagyhatja."
+
+#: ../panels/user-accounts/um-user-panel.c:439
+#, c-format
+msgid "Do you want to keep %s's files?"
+msgstr "Meg szeretné tartani %s fájljait?"
+
+#: ../panels/user-accounts/um-user-panel.c:443
+msgid ""
+"It is possible to keep the home directory, mail spool and temporary files "
+"around when deleting a user account."
+msgstr ""
+"Felhasználói fiók törlésekor lehetősége van a saját könyvtár, a levelezési "
+"várólista és az ideiglenes fájlok megtartására."
+
+#: ../panels/user-accounts/um-user-panel.c:446
+msgid "_Delete Files"
+msgstr "Fájlok _törlése"
+
+#: ../panels/user-accounts/um-user-panel.c:447
+msgid "_Keep Files"
+msgstr "Fájlok _megtartása"
+
+#: ../panels/user-accounts/um-user-panel.c:448
+msgid "_Cancel"
+msgstr "Mé_gse"
+
+#: ../panels/user-accounts/um-user-panel.c:498
+msgctxt "Password mode"
+msgid "Account disabled"
+msgstr "Fiók letiltva"
+
+#: ../panels/user-accounts/um-user-panel.c:506
+msgctxt "Password mode"
+msgid "To be set at next login"
+msgstr "Következő belépéskor állítandó be"
+
+#: ../panels/user-accounts/um-user-panel.c:509
+msgctxt "Password mode"
+msgid "None"
+msgstr "Nincs"
+
+#: ../panels/user-accounts/um-user-panel.c:831
+msgid "Failed to contact the accounts service"
+msgstr "A fiókszolgáltatás nem érhető el"
+
+#: ../panels/user-accounts/um-user-panel.c:833
+msgid "Please make sure that the AccountService is installed and enabled."
+msgstr "Győződjön meg róla, hogy az AccountService telepítve van és fut."
+
+#: ../panels/user-accounts/um-user-panel.c:866
+msgid ""
+"To make changes,\n"
+"click the * icon first"
+msgstr ""
+"A módosítások végrehajtásához\n"
+"előbb kattintson a * ikonra"
+
+#: ../panels/user-accounts/um-user-panel.c:904
+msgid "Create a user"
+msgstr "Felhasználó létrehozása"
+
+#: ../panels/user-accounts/um-user-panel.c:915
+#: ../panels/user-accounts/um-user-panel.c:1214
+msgid ""
+"To create a user,\n"
+"click the * icon first"
+msgstr ""
+"Felhasználó létrehozásához\n"
+"előbb kattintson a * ikonra"
+
+#: ../panels/user-accounts/um-user-panel.c:924
+msgid "Delete the selected user"
+msgstr "Kijelölt felhasználó törlése"
+
+#: ../panels/user-accounts/um-user-panel.c:936
+#: ../panels/user-accounts/um-user-panel.c:1219
+msgid ""
+"To delete the selected user,\n"
+"click the * icon first"
+msgstr ""
+"A kijelölt felhasználó törléséhez\n"
+"előbb kattintson a * ikonra"
+
+#: ../panels/user-accounts/um-user-panel.c:1114
+msgid "My Account"
+msgstr "Saját fiók"
+
+#: ../panels/user-accounts/um-user-panel.c:1124
+msgid "Other Accounts"
+msgstr "Más fiókok"
+
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
+msgid "Add or remove users"
+msgstr "Felhasználók hozzáadása vagy eltávolítása"
+
+#. Translators: those are keywords for the user accounts control-center panel
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:3
+msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
+msgstr "Bejelentkezés;Név;Ujjlenyomat;Avatar;Logó;Arckép;Jelszó;"
+
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
+msgid "User Accounts"
+msgstr "Felhasználói fiókok"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:4
+msgid "Cr_eate"
+msgstr "_Létrehozás"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:5
+msgid "Create new account"
+msgstr "Új fiók létrehozása"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
+msgid "_Account Type"
+msgstr "_Fióktípus"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:7
+msgid "_Full name"
+msgstr "_Teljes név"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:8
+msgid "_Username"
+msgstr "_Felhasználónév"
+
+#: ../panels/user-accounts/data/language-chooser.ui.h:1
+#: ../panels/user-accounts/data/photo-dialog.ui.h:3
+msgid "Cancel"
+msgstr "Mégse"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:1
+msgid ""
+"<a href=\"http://wolfram.org/writing/howto/password.html\">How to choose a "
+"strong password</a>"
+msgstr ""
+"<a href=\"http://wolfram.org/writing/howto/password.html\">Hogyan választhat "
+"erős jelszót</a>"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:2
+msgid ""
+"<small>This hint may be displayed at the login screen.  It will be visible "
+"to all users of this system.  Do <b>not</b> include the password here.</"
+"small>"
+msgstr ""
+"<small>Ez a tipp megjelenhet a bejelentkezési képernyőn. A rendszer minden "
+"felhasználója számára látható lesz. A jelszót <b>ne</b> írja bele.</small>"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:3
+msgid "C_onfirm password"
+msgstr "_Jelszó megerősítése"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:4
+msgid "Ch_ange"
+msgstr "Mó_dosítás"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:5
+msgid "Changing password for"
+msgstr "Jelszó módosítása"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:6
+msgid "Choose a generated password"
+msgstr "Válasszon generált jelszót"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:7
+msgid "Choose password at next login"
+msgstr "Jelszó kiválasztása következő bejelentkezéskor"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:8
+msgid "Current _password"
+msgstr "Jele_nlegi jelszó"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:9
+msgid "Disable this account"
+msgstr "Ezen fiók letiltása"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:10
+msgid "Enable this account"
+msgstr "Ezen fiók engedélyezése"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:11
+msgid "Fair"
+msgstr "Elfogadható"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:12
+msgid "Log in without a password"
+msgstr "Bejelentkezés jelszó nélkül"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:13
+msgid "Set a password now"
+msgstr "Jelszó beállítása most"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:14
+msgid "_Action"
+msgstr "_Művelet"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:15
+msgid "_Hint"
+msgstr "_Javaslat"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:16
+msgid "_New password"
+msgstr "Új jels_zó"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:17
+msgid "_Show password"
+msgstr "_Jelszó megjelenítése"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:1
+msgid "Browse"
+msgstr "Tallózás"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:4
+msgid "Changing photo for:"
+msgstr "Fénykép módosítása:"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:5
+msgid ""
+"Choose a picture that will be shown at the login screen for this account."
+msgstr ""
+"Válasszon egy képet, amely a bejelentkezési képernyőn ehhez a fiókhoz "
+"megjelenik."
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:6
+msgid "Gallery"
+msgstr "Galéria"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:7
+msgid "Photograph"
+msgstr "Fénykép"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:9
+msgid "Take a photograph"
+msgstr "Fénykép készítése"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
+msgid "Account Information"
+msgstr "Fiókinformációk"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
+msgid "Account type"
+msgstr "Fióktípus"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+msgid "Automatic Login"
+msgstr "Automatikus bejelentkezés"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+msgid "Fingerprint Login"
+msgstr "Ujjlenyomatos bejelentkezés"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+msgid "Login Options"
+msgstr "Bejelentkezési beállítások"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
+msgid "Password"
+msgstr "Jelszó"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:2
+msgid "Left index finger"
+msgstr "Bal mutatóujj"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:3
+msgid "Left little finger"
+msgstr "Bal kisujj"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:4
+msgid "Left middle finger"
+msgstr "Bal középső ujj"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:5
+msgid "Left ring finger"
+msgstr "Bal gyűrűsujj"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:6
+msgid "Left thumb"
+msgstr "Bal hüvelykujj"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:7
+msgid "Other finger: "
+msgstr "Más ujj: "
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:8
+msgid "Right index finger"
+msgstr "Jobb mutatóujj"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:9
+msgid "Right little finger"
+msgstr "Jobb kisujj"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:10
+msgid "Right middle finger"
+msgstr "Jobb középső ujj"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:11
+msgid "Right ring finger"
+msgstr "Jobb gyűrűsujj"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:12
+msgid "Right thumb"
+msgstr "Jobb hüvelykujj"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:13
+msgid ""
+"Your fingerprint was successfully saved. You should now be able to log in "
+"using your fingerprint reader."
+msgstr ""
+"Az ujjlenyomata sikeresen mentve. Mostantól bejelentkezhet az ujjlenyomat-"
+"olvasója segítségével."
+
+#: ../shell/control-center.c:47
+msgid "Show the overview"
+msgstr "Áttekintés megjelenítése"
+
+#: ../shell/control-center.c:48
+msgid "Panel to display"
+msgstr "Megjelenítendő panel"
+
+#: ../shell/control-center.c:65
+msgid "- System Settings"
+msgstr "– Rendszerbeállítások"
+
+#: ../shell/control-center.c:72
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Adja ki a(z) „%s --help” parancsot az elérhető parancssori kapcsolók teljes "
+"listájáért.\n"
+
+#: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:1
+msgid "System Settings"
+msgstr "Rendszerbeállítások"
+
 #: ../shell/gnomecc.directory.in.h:1
 msgid "Control Center"
 msgstr "Vezérlőközpont"
 
-#: ../shell/gnome-control-center.desktop.in.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "A GNOME beállítóeszköze"
-
-#: ../typing-break/drw-break-window.c:194
-msgid "_Postpone Break"
-msgstr "_Szünet elhalasztása"
-
-#: ../typing-break/drw-break-window.c:250
-msgid "Take a break!"
-msgstr "Tartson szünetet!"
-
-#: ../typing-break/drwright.c:136
-msgid "_Take a Break"
-msgstr "_Szünet tartása"
-
-#: ../typing-break/drwright.c:507
-#, c-format
-msgid "Take a break now (next in %dm)"
-msgstr "Tartson szünetet most (a következő %d perc múlva)"
-
-#: ../typing-break/drwright.c:509
-#, c-format
-msgid "%d minute until the next break"
-msgid_plural "%d minutes until the next break"
-msgstr[0] "%d perc van hátra a következő szünetig"
-msgstr[1] "%d perc van hátra a következő szünetig"
-
-#: ../typing-break/drwright.c:515
-#, c-format
-msgid "Take a break now (next in less than one minute)"
-msgstr "Tartson szünetet most (a következő egy percen belül)"
-
-#: ../typing-break/drwright.c:517
-#, c-format
-msgid "Less than one minute until the next break"
-msgstr "Kevesebb mint egy perc van hátra a következő szünetig"
-
-#: ../typing-break/drwright.c:614
-#, c-format
-msgid ""
-"Unable to bring up the typing break properties dialog with the following "
-"error: %s"
-msgstr ""
-"A következő hiba miatt nem hozható fel a gépelési szünet tulajdonságai "
-"párbeszédablak: %s"
-
-#: ../typing-break/drwright.c:631
-msgid "Written by Richard Hult <richard@imendio.com>"
-msgstr "Írta: Richard Hult <richard@imendio.com>"
-
-#: ../typing-break/drwright.c:632
-msgid "Eye candy added by Anders Carlsson"
-msgstr "A csinosításokat Anders Carlsson végezte"
-
-# FIXME ezt szebben
-#: ../typing-break/drwright.c:641
-msgid "A computer break reminder."
-msgstr "Emlékeztető gépelési szünet tartására."
-
-#: ../typing-break/drwright.c:643
-msgid "translator-credits"
-msgstr ""
-"Dvornik László <dvornik at gnome dot hu>\n"
-"Kelemen Gábor <kelemeng at gnome dot hu>\n"
-"Tímár András <timar at gnome dot hu>"
-
-#: ../typing-break/main.c:63
-msgid "Enable debugging code"
-msgstr "Hibakeresési kód engedélyezése"
-
-#: ../typing-break/main.c:65
-msgid "Don't check whether the notification area exists"
-msgstr "Ne ellenőrizze az értesítési terület létezését"
-
-#: ../typing-break/main.c:91
-msgid "Typing Monitor"
-msgstr "Gépelésfigyelő"
-
-#: ../typing-break/main.c:108
-msgid ""
-"The typing monitor uses the notification area to display information. You "
-"don't seem to have a notification area on your panel. You can add it by "
-"right-clicking on your panel and choosing 'Add to panel', selecting "
-"'Notification area' and clicking 'Add'."
-msgstr ""
-"A gépelésfigyelő az értesítési területet használja információk "
-"megjelenítésére. Úgy tűnik, az Ön paneljén nincs értesítési terület. A panel "
-"helyi menüjében a „Hozzáadás” pont alatt az „Értesítési terület” elemet "
-"kiválasztva hozzáadhatja a panelhez."
-
-#: ../font-viewer/fontilus.schemas.in.h:1
-msgid "If set to true, then OpenType fonts will be thumbnailed."
-msgstr "Ha igazra van állítva, az OpenType betűkészletekből bélyegkép készül."
-
-#: ../font-viewer/fontilus.schemas.in.h:2
-msgid "If set to true, then PCF fonts will be thumbnailed."
-msgstr "Ha igazra van állítva, a PCF betűkészletekből bélyegkép készül."
-
-#: ../font-viewer/fontilus.schemas.in.h:3
-msgid "If set to true, then TrueType fonts will be thumbnailed."
-msgstr "Ha igazra van állítva, a TrueType betűkészletekből bélyegkép készül."
-
-#: ../font-viewer/fontilus.schemas.in.h:4
-msgid "If set to true, then Type1 fonts will be thumbnailed."
-msgstr "Ha igazra van állítva, a Type1 betűkészletekből bélyegkép készül."
-
-#: ../font-viewer/fontilus.schemas.in.h:5
-msgid ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
-msgstr ""
-"Állítsa ezt a kulcsot az OpenType betűkészletekből bélyegkép készítésére "
-"használt parancsra."
-
-#: ../font-viewer/fontilus.schemas.in.h:6
-msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr ""
-"Állítsa ezt a kulcsot a PCF betűkészletekből bélyegkép készítésére használt "
-"parancsra."
-
-#: ../font-viewer/fontilus.schemas.in.h:7
-msgid ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
-msgstr ""
-"Állítsa ezt a kulcsot a TrueType betűkészletekből bélyegkép készítésére "
-"használt parancsra."
-
-#: ../font-viewer/fontilus.schemas.in.h:8
-msgid "Set this key to the command used to create thumbnails for Type1 fonts."
-msgstr ""
-"Állítsa ezt a kulcsot a Type1 betűkészletekből bélyegkép készítésére "
-"használt parancsra."
-
-#: ../font-viewer/fontilus.schemas.in.h:9
-msgid "Thumbnail command for OpenType fonts"
-msgstr "OpenType betűkészletek bélyegkép-parancsa"
-
-#: ../font-viewer/fontilus.schemas.in.h:10
-msgid "Thumbnail command for PCF fonts"
-msgstr "PCF betűkészletek bélyegkép-parancsa"
-
-#: ../font-viewer/fontilus.schemas.in.h:11
-msgid "Thumbnail command for TrueType fonts"
-msgstr "TrueType betűkészletek bélyegkép-parancsa"
-
-#: ../font-viewer/fontilus.schemas.in.h:12
-msgid "Thumbnail command for Type1 fonts"
-msgstr "Type1 betűkészletek bélyegkép-parancsa"
-
-#: ../font-viewer/fontilus.schemas.in.h:13
-msgid "Whether to thumbnail OpenType fonts"
-msgstr "Bélyegkép készítése OpenType betűkészletekből"
-
-#: ../font-viewer/fontilus.schemas.in.h:14
-msgid "Whether to thumbnail PCF fonts"
-msgstr "Bélyegkép készítése PCF betűkészletekből"
-
-#: ../font-viewer/fontilus.schemas.in.h:15
-msgid "Whether to thumbnail TrueType fonts"
-msgstr "Bélyegkép készítése TrueType betűkészletekből"
-
-#: ../font-viewer/fontilus.schemas.in.h:16
-msgid "Whether to thumbnail Type1 fonts"
-msgstr "Bélyegkép készítése Type1 betűkészletekből"
-
-#: ../font-viewer/font-view.c:297
-msgid "Name:"
-msgstr "Név:"
-
-#: ../font-viewer/font-view.c:300
-msgid "Style:"
-msgstr "Stílus:"
-
-#: ../font-viewer/font-view.c:313
-msgid "Type:"
-msgstr "Típus:"
-
-#: ../font-viewer/font-view.c:317
-msgid "Size:"
-msgstr "Méret:"
-
-#: ../font-viewer/font-view.c:361 ../font-viewer/font-view.c:374
-msgid "Version:"
-msgstr "Verzió:"
-
-#: ../font-viewer/font-view.c:365 ../font-viewer/font-view.c:376
-msgid "Copyright:"
-msgstr "Copyright:"
-
-#: ../font-viewer/font-view.c:369
-msgid "Description:"
-msgstr "Leírás:"
-
-#: ../font-viewer/font-view.c:453
-msgid "Installed"
-msgstr "Telepítve"
-
-#: ../font-viewer/font-view.c:456
-msgid "Install Failed"
-msgstr "A telepítés meghiúsult"
-
-#: ../font-viewer/font-view.c:526
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "Használat: %s betűkészletfájl\n"
-
-#: ../font-viewer/font-view.c:597
-msgid "I_nstall Font"
-msgstr "Betűkészlet _telepítése"
-
-#: ../font-viewer/gnome-font-viewer.desktop.in.in.h:1
-msgid "Font Viewer"
-msgstr "Betűkészlet-megjelenítő"
-
-#: ../font-viewer/gnome-font-viewer.desktop.in.in.h:2
-msgid "Preview fonts"
-msgstr "Betűkészletek előnézete"
-
-#: ../font-viewer/font-thumbnailer.c:245
-msgid "Text to thumbnail (default: Aa)"
-msgstr "Bélyegkép szövege (alapértelmezés: Aa)"
-
-#: ../font-viewer/font-thumbnailer.c:245
-msgid "TEXT"
-msgstr "SZÖVEG"
-
-#: ../font-viewer/font-thumbnailer.c:247
-msgid "Font size (default: 64)"
-msgstr "Betűméret (alapértelmezett: 64)"
-
-#: ../font-viewer/font-thumbnailer.c:247
-msgid "SIZE"
-msgstr "MÉRET"
-
-#: ../font-viewer/font-thumbnailer.c:249
-msgid "FONT-FILE OUTPUT-FILE"
-msgstr "BETŰKÉSZLETFÁJL KIMENETIFÁJL"
-
-#: ../font-viewer/font-thumbnailer.c:268
-#, c-format
-msgid "Error parsing arguments: %s\n"
-msgstr "Hiba történt a paraméterek feldolgozása közben: %s\n"
-
-#: ../examples/gnome-example-panel.desktop.in.in.h:1
-msgid "Example Panel"
-msgstr "Példapanel"
-
-#: ../examples/gnome-example-panel.desktop.in.in.h:2
-msgid "Example preferences panel"
-msgstr "Példa beállítópanel"
-
-#: ../shell/shell.ui.h:1
-msgid "System Settings"
-msgstr "Rendszerbeállítások"
-
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "Min_den beállítás"
-
-#~ msgid "Close the control-center when a task is activated"
-#~ msgstr "Vezérlőközpont bezárása egy feladat aktiválásakor"
-
-#~ msgid "Exit shell on add or remove action performed"
-#~ msgstr ""
-#~ "Hozzáadás vagy eltávolítás művelet után kilépés a parancsértelmezőbe"
-
-#~ msgid "Exit shell on help action performed"
-#~ msgstr "Súgó művelet után kilépés a parancsértelmezőbe"
-
-#~ msgid "Exit shell on start action performed"
-#~ msgstr "Indítás művelet után kilépés a parancsértelmezőbe"
-
-#~ msgid "Exit shell on upgrade or uninstall action performed"
-#~ msgstr ""
-#~ "Frissítés vagy eltávolítás művelet után kilépés a parancsértelmezőbe"
-
-#~ msgid ""
-#~ "Indicates whether to close the shell when a help action is performed."
-#~ msgstr ""
-#~ "Azt jelzi, hogy be kell-e zárni a parancsértelmezőt egy súgóművelet "
-#~ "elvégzése után."
-
-#~ msgid ""
-#~ "Indicates whether to close the shell when a start action is performed."
-#~ msgstr ""
-#~ "Azt jelzi, hogy be kell-e zárni a parancsértelmezőt egy indítási művelet "
-#~ "elvégzése után."
-
-#~ msgid ""
-#~ "Indicates whether to close the shell when an add or remove action is "
-#~ "performed."
-#~ msgstr ""
-#~ "Azt jelzi, hogy be kell-e zárni a parancsértelmezőt egy hozzáadás vagy "
-#~ "eltávolítás művelet elvégzése után."
-
-#~ msgid ""
-#~ "Indicates whether to close the shell when an upgrade or uninstall action "
-#~ "is performed."
-#~ msgstr ""
-#~ "Azt jelzi, hogy be kell-e zárni a parancsértelmezőt egy frissítés vagy "
-#~ "eltávolítás művelet elvégzése után."
-
-#~ msgid "Task names and associated .desktop files"
-#~ msgstr "Feladatnevek és hozzájuk tartozó .desktop fájlok"
-
-#~ msgid ""
-#~ "The task name to be displayed in the control-center followed by a \";\" "
-#~ "separator then the filename of an associated .desktop file to launch for "
-#~ "that task."
-#~ msgstr ""
-#~ "A vezérlőközpontban megjelenő (ezért lefordítandó) feladatnév, amelyet "
-#~ "egy „;” elválasztó követ, majd a feladathoz elindítandó .desktop fájl "
-#~ "fájlneve."
-
-#~ msgid ""
-#~ "[Change Theme;gtk-theme-selector.desktop,Set Preferred Applications;"
-#~ "default-applications.desktop,Add Printer;gnome-cups-manager.desktop]"
-#~ msgstr ""
-#~ "[Téma módosítása;gtk-theme-selector.desktop,Alapértelmezett alkalmazások "
-#~ "beállítása;default-applications.desktop,Nyomtató felvétele;gnome-cups-"
-#~ "manager.desktop]"
-
-#~ msgid ""
-#~ "if true, the control-center will close when a \"Common Task\" is "
-#~ "activated."
-#~ msgstr ""
-#~ "Ha igaz, a vezérlőközpont automatikusan bezárul egy „Gyakori feladat” "
-#~ "aktiválásakor."
