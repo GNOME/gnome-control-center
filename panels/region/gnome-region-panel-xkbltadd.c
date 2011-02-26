@@ -65,6 +65,26 @@ xkb_preview_destroy_callback (GtkWidget * widget)
 	preview_dialog = NULL;
 }
 
+static gboolean
+xkb_layout_chooser_selection_dupe (GtkBuilder * chooser_dialog)
+{
+	gchar *selected_id =
+	    (gchar *) xkb_layout_chooser_get_selected_id (chooser_dialog);
+	gchar **layouts_list, **pl;
+	gboolean rv = FALSE;
+	if (selected_id == NULL)
+		return rv;
+	layouts_list = pl = xkb_layouts_get_selected_list ();
+	while (pl && *pl) {
+		if (!g_ascii_strcasecmp (*pl++, selected_id)) {
+			rv = TRUE;
+			break;
+		}
+	}
+	g_strfreev (layouts_list);
+	return rv;
+}
+
 static void
 xkb_layout_chooser_response (GtkDialog * dialog,
 			     gint response, GtkBuilder * chooser_dialog)
@@ -280,7 +300,9 @@ xkb_layout_chooser_selection_changed (GtkTreeSelection * selection,
 	GtkWidget *add_button = CWID ("btnOk");
 	GtkWidget *preview_button = CWID ("btnPreview");
 	gboolean anything_selected = g_list_length (selected_layouts) == 1;
-	gtk_widget_set_sensitive (add_button, anything_selected);
+	gboolean dupe = xkb_layout_chooser_selection_dupe (chooser_dialog);
+
+	gtk_widget_set_sensitive (add_button, anything_selected && !dupe);
 	gtk_widget_set_sensitive (preview_button, anything_selected);
 }
 
