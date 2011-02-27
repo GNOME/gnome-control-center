@@ -26,24 +26,31 @@
 #include <gtk/gtk.h>
 
 #include "panel-common.h"
+#include "nm-device-modem.h"
 
 /**
- * panel_device_type_to_icon_name:
+ * panel_device_to_icon_name:
  **/
 const gchar *
-panel_device_type_to_icon_name (NMDeviceType type)
+panel_device_to_icon_name (NMDevice *device)
 {
         const gchar *value = NULL;
-        switch (type) {
+        NMDeviceModemCapabilities caps;
+        switch (nm_device_get_device_type (device)) {
         case NM_DEVICE_TYPE_ETHERNET:
                 value = "network-wired";
                 break;
         case NM_DEVICE_TYPE_WIFI:
-        case NM_DEVICE_TYPE_GSM:
-        case NM_DEVICE_TYPE_CDMA:
         case NM_DEVICE_TYPE_BT:
         case NM_DEVICE_TYPE_OLPC_MESH:
                 value = "network-wireless";
+                break;
+        case NM_DEVICE_TYPE_MODEM:
+                caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
+                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
+                    (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
+                        value = "network-wireless";
+                }
                 break;
         default:
                 break;
@@ -52,13 +59,14 @@ panel_device_type_to_icon_name (NMDeviceType type)
 }
 
 /**
- * panel_device_type_to_localized_string:
+ * panel_device_to_localized_string:
  **/
 const gchar *
-panel_device_type_to_localized_string (NMDeviceType type)
+panel_device_to_localized_string (NMDevice *device)
 {
         const gchar *value = NULL;
-        switch (type) {
+        NMDeviceModemCapabilities caps;
+        switch (nm_device_get_device_type (device)) {
         case NM_DEVICE_TYPE_UNKNOWN:
                 /* TRANSLATORS: device type */
                 value = _("Unknown");
@@ -71,10 +79,13 @@ panel_device_type_to_localized_string (NMDeviceType type)
                 /* TRANSLATORS: device type */
                 value = _("Wireless");
                 break;
-        case NM_DEVICE_TYPE_GSM:
-        case NM_DEVICE_TYPE_CDMA:
-                /* TRANSLATORS: device type */
-                value = _("Mobile broadband");
+        case NM_DEVICE_TYPE_MODEM:
+                caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
+                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
+                    (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
+                        /* TRANSLATORS: device type */
+                        value = _("Mobile broadband");
+                }
                 break;
         case NM_DEVICE_TYPE_BT:
                 /* TRANSLATORS: device type */
@@ -91,24 +102,28 @@ panel_device_type_to_localized_string (NMDeviceType type)
 }
 
 /**
- * panel_device_type_to_sortable_string:
+ * panel_device_to_sortable_string:
  *
  * Try to return order of approximate connection speed.
  **/
 const gchar *
-panel_device_type_to_sortable_string (NMDeviceType type)
+panel_device_to_sortable_string (NMDevice *device)
 {
         const gchar *value = NULL;
-        switch (type) {
+        NMDeviceModemCapabilities caps;
+        switch (nm_device_get_device_type (device)) {
         case NM_DEVICE_TYPE_ETHERNET:
                 value = "1";
                 break;
         case NM_DEVICE_TYPE_WIFI:
                 value = "2";
                 break;
-        case NM_DEVICE_TYPE_GSM:
-        case NM_DEVICE_TYPE_CDMA:
-                value = "3";
+        case NM_DEVICE_TYPE_MODEM:
+                caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
+                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
+                    (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
+                        value = "3";
+                }
                 break;
         case NM_DEVICE_TYPE_BT:
                 value = "4";

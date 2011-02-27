@@ -28,6 +28,7 @@
 #include "nm-client.h"
 #include "nm-device.h"
 #include "nm-device-ethernet.h"
+#include "nm-device-modem.h"
 #include "nm-device-wifi.h"
 #include "nm-utils.h"
 #include "nm-active-connection.h"
@@ -376,8 +377,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 
         /* do we have to get additonal data from ModemManager */
         type = nm_device_get_device_type (device);
-        if (type == NM_DEVICE_TYPE_GSM ||
-            type == NM_DEVICE_TYPE_CDMA) {
+        if (type == NM_DEVICE_TYPE_MODEM) {
                 g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
                                           G_DBUS_PROXY_FLAGS_NONE,
                                           NULL,
@@ -400,15 +400,15 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 
         /* make title a bit bigger */
         title = g_strdup_printf ("<span size=\"large\">%s</span>",
-                                 panel_device_type_to_localized_string (nm_device_get_device_type (device)));
+                                 panel_device_to_localized_string (device));
 
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                             "liststore_devices"));
         gtk_list_store_append (liststore_devices, &iter);
         gtk_list_store_set (liststore_devices,
                             &iter,
-                            PANEL_DEVICES_COLUMN_ICON, panel_device_type_to_icon_name (nm_device_get_device_type (device)),
-                            PANEL_DEVICES_COLUMN_SORT, panel_device_type_to_sortable_string (nm_device_get_device_type (device)),
+                            PANEL_DEVICES_COLUMN_ICON, panel_device_to_icon_name (device),
+                            PANEL_DEVICES_COLUMN_SORT, panel_device_to_sortable_string (device),
                             PANEL_DEVICES_COLUMN_TITLE, title,
                             PANEL_DEVICES_COLUMN_ID, nm_device_get_udi (device),
                             PANEL_DEVICES_COLUMN_TOOLTIP, NULL,
@@ -729,14 +729,14 @@ nm_device_refresh_item_ui (CcNetworkPanel *panel, NMDevice *device)
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "image_device"));
         gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-                                      panel_device_type_to_icon_name (type),
+                                      panel_device_to_icon_name (device),
                                       GTK_ICON_SIZE_DIALOG);
 
         /* set device kind */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "label_device"));
         gtk_label_set_label (GTK_LABEL (widget),
-                             panel_device_type_to_localized_string (type));
+                             panel_device_to_localized_string (device));
 
 
         /* set device state */
@@ -754,10 +754,13 @@ nm_device_refresh_item_ui (CcNetworkPanel *panel, NMDevice *device)
         } else if (type == NM_DEVICE_TYPE_WIFI) {
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
                 sub_pane = "wireless";
-        } else if (type == NM_DEVICE_TYPE_GSM ||
-                   type == NM_DEVICE_TYPE_CDMA) {
-                gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 4);
-                sub_pane = "mobilebb";
+        } else if (type == NM_DEVICE_TYPE_MODEM) {
+                NMDeviceModemCapabilities caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
+                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
+                    (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
+                        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 4);
+                        sub_pane = "mobilebb";
+                }
         }
         if (sub_pane == NULL)
                 goto out;
@@ -824,30 +827,33 @@ nm_device_refresh_item_ui (CcNetworkPanel *panel, NMDevice *device)
                                           active_ap);
                 }
 
-        } else if (type == NM_DEVICE_TYPE_GSM ||
-                   type == NM_DEVICE_TYPE_CDMA) {
+        } else if (type == NM_DEVICE_TYPE_MODEM) {
+                NMDeviceModemCapabilities caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
 
-                /* IMEI */
-                str = g_object_get_data (G_OBJECT (device),
-                                         "ControlCenter::EquipmentIdentifier");
-                panel_set_widget_data (panel,
-                                       sub_pane,
-                                       "imei",
-                                       str);
+                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
+                    (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
+                        /* IMEI */
+                        str = g_object_get_data (G_OBJECT (device),
+                                                 "ControlCenter::EquipmentIdentifier");
+                        panel_set_widget_data (panel,
+                                               sub_pane,
+                                               "imei",
+                                               str);
 
-                /* operator name */
-                str = g_object_get_data (G_OBJECT (device),
-                                         "ControlCenter::OperatorName");
-                panel_set_widget_data (panel,
-                                       sub_pane,
-                                       "provider",
-                                       str);
+                        /* operator name */
+                        str = g_object_get_data (G_OBJECT (device),
+                                                 "ControlCenter::OperatorName");
+                        panel_set_widget_data (panel,
+                                              sub_pane,
+                                              "provider",
+                                               str);
 
-                /* device speed */
-                panel_set_widget_data (panel,
-                                       sub_pane,
-                                       "speed",
-                                       NULL);
+                        /* device speed */
+                        panel_set_widget_data (panel,
+                                               sub_pane,
+                                               "speed",
+                                               NULL);
+                }
         }
 
         /* get IP4 parameters */
