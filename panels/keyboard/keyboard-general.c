@@ -24,6 +24,29 @@
 static GSettings *keyboard_settings = NULL;
 static GSettings *interface_settings = NULL;
 
+static gboolean
+get_rate (GValue   *value,
+          GVariant *variant,
+          gpointer  user_data)
+{
+  int rate;
+
+  rate = g_variant_get_int32 (variant);
+  g_value_set_double (value, 1 / (gdouble) rate / 1000);
+  return TRUE;
+}
+
+static GVariant *
+set_rate (const GValue       *value,
+          const GVariantType *expected_type,
+          gpointer            user_data)
+{
+  gdouble rate;
+
+  rate = g_value_get_double (value);
+  return g_variant_new_int32 ((1 / rate) * 1000);
+}
+
 void
 keyboard_general_init (CcPanel *panel, GtkBuilder *builder)
 {
@@ -39,9 +62,10 @@ keyboard_general_init (CcPanel *panel, GtkBuilder *builder)
   g_settings_bind (keyboard_settings, "delay",
                    gtk_range_get_adjustment (GTK_RANGE (gtk_builder_get_object (builder, "repeat_delay_scale"))), "value",
                    G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (keyboard_settings, "rate",
-                   gtk_range_get_adjustment (GTK_RANGE (gtk_builder_get_object (builder, "repeat_speed_scale"))), "value",
-                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind_with_mapping (keyboard_settings, "rate",
+                                gtk_range_get_adjustment (GTK_RANGE (gtk_builder_get_object (builder, "repeat_speed_scale"))), "value",
+                                G_SETTINGS_BIND_DEFAULT,
+                                get_rate, set_rate, NULL, NULL);
 
   g_settings_bind (interface_settings, "cursor-blink",
                    gtk_builder_get_object (builder, "cursor_toggle"), "active",
