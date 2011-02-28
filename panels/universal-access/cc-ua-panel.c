@@ -402,6 +402,8 @@ dpi_notify_cb (GSettings   *settings,
 
   /* get current value from screen */
   x_dpi = get_dpi_from_x_server ();
+  if (conf_value == 0.0)
+    conf_value = x_dpi;
 
   /* find the closest match in the combobox model */
   distance = 1e6;
@@ -572,6 +574,7 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
 
+  dpi_notify_cb (priv->font_settings, "dpi", self);
   g_signal_connect (priv->font_settings, "changed", G_CALLBACK (dpi_notify_cb), self);
 
   g_signal_connect (WID (priv->builder, "seeing_contrast_combobox"), "changed",
