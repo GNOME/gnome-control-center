@@ -264,7 +264,8 @@ xkb_layout_description_utf8 (const gchar * visible)
 	char *l, *sl, *v, *sv;
 	if (gkbd_keyboard_config_get_descriptions
 	    (config_registry, visible, &sl, &l, &sv, &v))
-		visible = gkbd_keyboard_config_format_full_layout (l, v);
+		visible =
+		    gkbd_keyboard_config_format_full_description (l, v);
 	return g_strstrip (g_strdup (visible));
 }
 
