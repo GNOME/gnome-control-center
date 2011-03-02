@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
 "cgi?product=gnome-control-center&component=general\n"
-"POT-Creation-Date: 2011-02-26 00:34+0000\n"
-"PO-Revision-Date: 2011-02-26 20:18+0530\n"
+"POT-Creation-Date: 2011-03-02 00:20+0000\n"
+"PO-Revision-Date: 2011-03-02 18:27+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
 "MIME-Version: 1.0\n"
@@ -238,7 +238,6 @@ msgid "Tile"
 msgstr "ਟਾਈਲ"
 
 #: ../panels/background/background.ui.h:8
-#: ../panels/universal-access/uap.ui.h:83
 msgid "Zoom"
 msgstr "ਜ਼ੂਮ"
 
@@ -412,7 +411,7 @@ msgstr "ਮਾਨੀਟਰ"
 #: ../panels/display/display-capplet.ui.h:3
 #: ../panels/display/xrandr-capplet.c:333
 #: ../panels/display/xrandr-capplet.c:372
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Normal"
 msgstr "ਆਮ"
 
@@ -523,59 +522,72 @@ msgstr "ਡਿਸਪਲੇਅ ਖੋਜੇ ਨਹੀਂ ਜਾ ਸਕੇ"
 msgid "Could not get screen information"
 msgstr "ਸਕਰੀਨ ਜਾਣਕਾਰੀ ਲਈ ਨਹੀਂ ਜਾ ਸਕੀ"
 
+#. Translators: VESA is an techncial acronym, don't translate it.
+#: ../panels/info/cc-info-panel.c:364
+#, c-format
+msgid "VESA: %s"
+msgstr "VESA: %s"
+
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
+#: ../panels/info/cc-info-panel.c:388 ../panels/network/panel-common.c:72
+#: ../panels/network/panel-common.c:151
+msgid "Unknown"
+msgstr "ਅਣਜਾਣ"
+
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:479
+#: ../panels/info/cc-info-panel.c:526
 #, c-format
 msgid "%d-bit"
 msgstr "%d-ਬਿੱਟ"
 
-#: ../panels/info/cc-info-panel.c:493
+#: ../panels/info/cc-info-panel.c:540
 #, c-format
 msgid "%u byte"
 msgid_plural "%u bytes"
 msgstr[0] "%u ਬਾਈਟ"
 msgstr[1] "%u ਬਾਈਟ"
 
-#: ../panels/info/cc-info-panel.c:501
+#: ../panels/info/cc-info-panel.c:548
 #, c-format
 msgid "%.1f KB"
 msgstr "%.1f KB"
 
-#: ../panels/info/cc-info-panel.c:506
+#: ../panels/info/cc-info-panel.c:553
 #, c-format
 msgid "%.1f MB"
 msgstr "%.1f MB"
 
-#: ../panels/info/cc-info-panel.c:511
+#: ../panels/info/cc-info-panel.c:558
 #, c-format
 msgid "%.1f GB"
 msgstr "%.1f GB"
 
-#: ../panels/info/cc-info-panel.c:516
+#: ../panels/info/cc-info-panel.c:563
 #, c-format
 msgid "%.1f TB"
 msgstr "%.1f TB"
 
-#: ../panels/info/cc-info-panel.c:521
+#: ../panels/info/cc-info-panel.c:568
 #, c-format
 msgid "%.1f PB"
 msgstr "%.1f PB"
 
-#: ../panels/info/cc-info-panel.c:526
+#: ../panels/info/cc-info-panel.c:573
 #, c-format
 msgid "%.1f EB"
 msgstr "%.1f EB"
 
-#: ../panels/info/cc-info-panel.c:637
+#: ../panels/info/cc-info-panel.c:684
 msgid "Unknown model"
 msgstr "ਅਣਜਾਣ ਮਾਡਲ"
 
-#: ../panels/info/cc-info-panel.c:720
+#: ../panels/info/cc-info-panel.c:767
 msgid "The next login will attempt to use the standard experience."
 msgstr "ਅਗਲਾ ਲਾਗਇਨ ਸਟੈਂਡਰਡ ਤਜਰਬੇ ਨੂੰ ਵਰਤਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੇਗਾ।"
 
-#: ../panels/info/cc-info-panel.c:722
+#: ../panels/info/cc-info-panel.c:769
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
@@ -583,36 +595,36 @@ msgstr "ਅਗਲੀ ਵਾਰ ਲਾਗਇਨ ਗ਼ੈਰ-ਸਹਾਇਕ ਗ�
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:771
+#: ../panels/info/cc-info-panel.c:811
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "ਫਾਲਬੈਕ"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:777
+#: ../panels/info/cc-info-panel.c:817
 msgctxt "Experience"
 msgid "Standard"
 msgstr "ਸਟੈਂਡਰਡ"
 
-#: ../panels/info/cc-info-panel.c:909
+#: ../panels/info/cc-info-panel.c:949
 #: ../panels/keyboard/keyboard-shortcuts.c:1711
 msgid "Section"
 msgstr "ਭਾਗ"
 
-#: ../panels/info/cc-info-panel.c:918 ../panels/info/info.ui.h:14
+#: ../panels/info/cc-info-panel.c:958 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "ਸੰਖੇਪ"
 
-#: ../panels/info/cc-info-panel.c:924 ../panels/info/info.ui.h:3
+#: ../panels/info/cc-info-panel.c:964 ../panels/info/info.ui.h:3
 msgid "Default Applications"
 msgstr "ਡਿਫਾਲਟ ਐਪਲੀਕੇਸ਼ਨ"
 
-#: ../panels/info/cc-info-panel.c:929 ../panels/info/info.ui.h:9
+#: ../panels/info/cc-info-panel.c:969 ../panels/info/info.ui.h:9
 msgid "Graphics"
 msgstr "ਗਰਾਫਿਕਸ"
 
-#: ../panels/info/cc-info-panel.c:954
+#: ../panels/info/cc-info-panel.c:994
 #, c-format
 msgid "Version %s"
 msgstr "ਵਰਜਨ %s"
@@ -938,7 +950,7 @@ msgstr "ਟੈਕਸਟ ਖੇਤਰਾਂ ਵਿੱਚ ਕਰਸਰ ਝਪਕ�
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 #: ../panels/mouse/gnome-mouse-properties.ui.h:1
-#: ../panels/universal-access/uap.ui.h:23
+#: ../panels/universal-access/uap.ui.h:21
 msgid "Cursor blinks speed"
 msgstr "ਕਰਸਰ ਝਪਕਣ ਗਤੀ"
 
@@ -964,7 +976,7 @@ msgstr "ਸਵਿੱਚ-ਦਹਰਾਉ, ਜਦੋ ਕਿ ਸਵਿੱਚ ਨੂ
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Long"
 msgstr "ਲੰਮਾ"
 
@@ -983,7 +995,7 @@ msgstr "ਸਪੀਡ(_p):"
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Short"
 msgstr "ਛੋਟਾ"
 
@@ -1569,13 +1581,12 @@ msgstr "ਹਰੀਜੱਟਲ ਸਕਰੋਲਿੰਗ ਯੋਗ(_o)"
 
 #. high sensitivity
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
-#: ../panels/universal-access/uap.ui.h:34
 msgid "High"
 msgstr "ਉੱਚ"
 
 #. large threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:13
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Large"
 msgstr "ਵੱਡਾ"
 
@@ -1585,7 +1596,6 @@ msgstr "ਪੁਆਇੰਟਰ ਲੱਭੋ"
 
 #. low sensitivity
 #: ../panels/mouse/gnome-mouse-properties.ui.h:17
-#: ../panels/universal-access/uap.ui.h:47
 msgid "Low"
 msgstr "ਘੱਟ"
 
@@ -1615,7 +1625,7 @@ msgstr "ਜਦੋਂ ਕੰਟਰੋਲ ਸਵਿੱਚ ਦੱਬੀ ਜਾਵ�
 
 #. small threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:28
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:58
 msgid "Small"
 msgstr "ਛੋਟਾ"
 
@@ -1679,21 +1689,21 @@ msgstr ""
 "ਡਬਲ;"
 "ਬਟਨ;ਟਰੈਕਬਾਲ;"
 
-#: ../panels/network/cc-network-panel.c:962
+#: ../panels/network/cc-network-panel.c:968
 msgid "Network proxy"
 msgstr "ਨੈੱਟਵਰਕ ਪਰਾਕਸੀ"
 
-#: ../panels/network/cc-network-panel.c:971
+#: ../panels/network/cc-network-panel.c:977
 msgid "Set the system proxy settings"
 msgstr "ਸਿਸਟਮ ਪਰਾਕਸੀ ਸੈਟਿੰਗ ਸੈੱਟ ਕਰੋ"
 
 #. TRANSLATORS: the user is running a NM that is too new and API compatible
-#: ../panels/network/cc-network-panel.c:1115
+#: ../panels/network/cc-network-panel.c:1121
 msgid "The running NetworkManager version is not compatible (too new)."
 msgstr "ਚੱਲ ਰਿਹਾ ਨੈੱਟਵਰਕਮੈਨੇਜਰ ਵਰਜਨ ਅਨੁਕੂਲ ਨਹੀਂ ਹੈ (ਬਹੁਤ ਨਵਾਂ ਹੈ)।"
 
 #. TRANSLATORS: the user is running a NM that is too old and API compatible
-#: ../panels/network/cc-network-panel.c:1121
+#: ../panels/network/cc-network-panel.c:1127
 msgid "The running NetworkManager version is not compatible (too old)."
 msgstr "ਚੱਲ ਰਿਹਾ ਨੈੱਟਵਰਕਮੈਨੇਜਰ ਵਰਜਨ ਅਨੁਕੂਲ ਨਹੀਂ ਹੈ (ਬਹੁਤ ਪੁਰਾਣਾ ਹੈ)।"
 
@@ -1818,111 +1828,102 @@ msgid "None"
 msgstr "ਕੋਈ ਨਹੀਂ"
 
 #. TRANSLATORS: device type
-#. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:64 ../panels/network/panel-common.c:136
-msgid "Unknown"
-msgstr "ਅਣਜਾਣ"
-
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:68
+#: ../panels/network/panel-common.c:76
 msgid "Wired"
 msgstr "ਤਾਰ ਵਾਲਾ"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:72
+#: ../panels/network/panel-common.c:80
 msgid "Wireless"
 msgstr "ਬੇਤਾਰ"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:77
+#: ../panels/network/panel-common.c:87
 msgid "Mobile broadband"
 msgstr "ਮੋਬਾਇਲ ਬਰਾਡਬੈਂਡ"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:81
+#: ../panels/network/panel-common.c:92
 msgid "Bluetooth"
 msgstr "ਬਲਿਊਟੁੱਥ"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:85
+#: ../panels/network/panel-common.c:96
 msgid "Mesh"
 msgstr "ਮੇਸ਼"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:140
+#: ../panels/network/panel-common.c:155
 msgid "Ad-hoc"
 msgstr "ਐਡ-ਹਾਕ"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:144
+#: ../panels/network/panel-common.c:159
 msgid "Infrastructure"
 msgstr "ਇੰਫਰਾਸਟੱਕਚਰ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:162
+#: ../panels/network/panel-common.c:177
 msgid "Status unknown"
 msgstr "ਹਾਲਤ ਅਣਜਾਣ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:166
+#: ../panels/network/panel-common.c:181
 msgid "Unmanaged"
 msgstr "ਬਿਨ-ਪਰਬੰਧ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:170
+#: ../panels/network/panel-common.c:185
 msgid "Unavailable"
 msgstr "ਨਾ-ਉਪਲੱਬਧ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:174
+#: ../panels/network/panel-common.c:189
 msgid "Disconnected"
 msgstr "ਡਿਸ-ਕੁਨੈਕਟ ਹੈ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:178
+#: ../panels/network/panel-common.c:193
 msgid "Preparing connection"
 msgstr "ਕੁਨੈਕਸ਼ਨ ਤਿਆਰ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:182
+#: ../panels/network/panel-common.c:197
 msgid "Configuring connection"
 msgstr "ਕੁਨੈਕਸ਼ਨ ਸੰਰਚਨਾ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:186
+#: ../panels/network/panel-common.c:201
 msgid "Authenticating"
 msgstr "ਪਰਮਾਣਿਕਤਾ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:190
+#: ../panels/network/panel-common.c:205
 msgid "Getting network address"
 msgstr "ਨੈੱਟਵਰਕ ਐਡਰੈੱਸ ਲਿਆ ਜਾ ਰਿਹਾ ਹੈ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:194
-#| msgid "Getting network address"
+#: ../panels/network/panel-common.c:209
 msgid "Checking network address"
 msgstr "ਨੈੱਟਵਰਕ ਐਡਰੈੱਸ ਚੈੱਕ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:198
+#: ../panels/network/panel-common.c:213
 msgid "Connected"
 msgstr "ਕੁਨੈਕਟ ਹੈ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:202
-#| msgid "Disconnected"
+#: ../panels/network/panel-common.c:217
 msgid "Disconnecting"
 msgstr "ਡਿਸ-ਕੁਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:206
+#: ../panels/network/panel-common.c:221
 msgid "Failed to connect"
 msgstr "ਕੁਨੈਕਟ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:210
-#| msgid "Status unknown"
+#: ../panels/network/panel-common.c:225
 msgid "Status unknown (missing)"
 msgstr "ਹਾਲਤ ਅਣਜਾਣ (ਗੁੰਮ)"
 
@@ -2411,6 +2412,12 @@ msgstr "ਕੱਚ"
 msgid "Sonar"
 msgstr "ਸੋਨਰ"
 
+#: ../panels/universal-access/cc-ua-panel.c:555
+#: ../panels/universal-access/cc-ua-panel.c:560
+#| msgid "New shortcut..."
+msgid "No shortcut set"
+msgstr "ਸ਼ਾਰਟਕੱਟ ਸੈੱਟ ਨਹੀਂ ਹੈ"
+
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Keyboard;Mouse;a11y;Accessibility;"
@@ -2435,289 +2442,316 @@ msgstr "੧੨੫%"
 msgid "150%"
 msgstr "੧੫੦%"
 
-#: ../panels/universal-access/uap.ui.h:7
-msgid "<span size=\"x-large\">High/Inverse</span>"
-msgstr "<span size=\"x-large\">ਉੱਚ/ਉਲਟ</span>"
-
 #: ../panels/universal-access/uap.ui.h:8
-msgid "<span size=\"x-large\">High</span>"
-msgstr "<span size=\"x-large\">ਉੱਚ</span>"
+#, no-c-format
+msgid "75%"
+msgstr "75%"
 
 #: ../panels/universal-access/uap.ui.h:9
-msgid "<span size=\"x-large\">Low</span>"
-msgstr "<span size=\"x-large\">ਘੱਟ</span>"
-
-#: ../panels/universal-access/uap.ui.h:10
-msgid "<span size=\"x-large\">Normal</span>"
-msgstr "<span size=\"x-large\">ਸਧਾਰਨ</span>"
-
-#: ../panels/universal-access/uap.ui.h:11
 msgid "Acceptance delay:"
 msgstr "ਮਨਜ਼ੂਰ ਦੇਰੀ:"
 
-#: ../panels/universal-access/uap.ui.h:12
+#: ../panels/universal-access/uap.ui.h:10
 msgid "Beep when Caps and Num Lock are used"
 msgstr "ਬੀਪ, ਜਦੋਂ ਕਿ ਕੈਪਸ ਤੇ ਨਮ ਲਾਕ ਵਰਤੇ ਜਾਣ"
 
-#: ../panels/universal-access/uap.ui.h:13
+#: ../panels/universal-access/uap.ui.h:11
 msgid "Beep when a key is"
 msgstr "ਬੀਪ, ਜਦੋਂ ਸਵਿੱਚ ਹੋਵੇ"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:12
 msgid "Beep when a key is rejected"
 msgstr "ਬੀਪ, ਜੇਕਰ ਸਵਿੱਚ ਰੱਦ ਹੋਵੇ"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:13
 msgid "Beep when a modifer key is pressed"
 msgstr "ਬੀਪ, ਜਦੋਂ ਕਿ  ਮੋਡੀਫਾਇਰ ਸਵਿੱਚ ਦੱਬੀ ਜਾਵੇ"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:14
 msgid "Bounce Keys"
 msgstr "ਬਾਊਂਸ ਸਵਿੱਚਾਂ"
 
-#: ../panels/universal-access/uap.ui.h:17
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Caribou"
 msgstr "ਕਰੀਬੋਊ"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:16
 msgid "Change contrast:"
 msgstr "ਕੰਨਟਰਾਸਟ ਬਦਲੋ:"
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Closed Captioning"
 msgstr "ਬੰਦ ਹੋਈ ਸੁਰਖੀ"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:18
 msgid "Contrast:"
 msgstr "ਕਨਟਰਾਸਟ:"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:19
 msgid "Control the pointer using the keypad"
 msgstr "ਕੀਪੈਡ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਪੁਆਇੰਟਰ ਕੰਟਰੋਲ ਕਰੋ"
 
-#: ../panels/universal-access/uap.ui.h:22
+#: ../panels/universal-access/uap.ui.h:20
 msgid "Control the pointer using the video camera."
 msgstr "ਵਿਡੀਓ ਕੈਮਰੇ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਪੁਆਇੰਟਰ ਕੰਟਰੋਲ ਕਰੋ।"
 
-#: ../panels/universal-access/uap.ui.h:24
+#: ../panels/universal-access/uap.ui.h:22
 msgid "D_elay:"
 msgstr "ਡਿਲੇਅ(_e):"
 
-#: ../panels/universal-access/uap.ui.h:25
+#: ../panels/universal-access/uap.ui.h:23
 msgid "Dasher"
 msgstr "ਡੈਸ਼ਰ"
 
-#: ../panels/universal-access/uap.ui.h:26
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Decrease size:"
 msgstr "ਆਕਾਰ ਘਟਾਓ:"
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Disable if two keys are pressed together"
 msgstr "ਜੇਕਰ ਦੋ ਸਵਿੱਚਾਂ ਇਕੱਠੀਆਂ ਦਬਾਈਆਂ ਜਾਣ ਤਾਂ ਬੰਦ ਕਰੋ"
 
-#: ../panels/universal-access/uap.ui.h:28
-msgid "Display"
-msgstr "ਡਿਸਪਲੇਅ"
-
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:26
 msgid "Display a textual description of speech and sounds"
 msgstr "ਸਪੀਚ ਤੇ ਸਾਊਂਡ ਦੇ ਵੇਰਵੇ ਲਈ ਟੈਕਸਟ ਵੇਖਾਓ।"
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Flash the entire screen"
 msgstr "ਪੂਰੀ ਸਕਰੀਨ ਝਲਕਾਓ"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Flash the window title"
 msgstr "ਵਿੰਡੋ ਟਾਈਟਲ ਝਲਕਾਓ"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:29
 msgid "GOK"
 msgstr "GOK"
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Hearing"
 msgstr "ਸੁਣਨ"
 
-#: ../panels/universal-access/uap.ui.h:35
-msgid "High/Inverse"
-msgstr "ਉੱਚ/ਉਲਟ"
-
-#: ../panels/universal-access/uap.ui.h:36
-msgid "HighContrast"
-msgstr "ਵੱਧ-ਗੂੜ੍ਹਾ"
-
-#: ../panels/universal-access/uap.ui.h:37
-msgid "HighContrastInverse"
-msgstr "ਵੱਧ-ਗੂੜਾ-ਉਲਟ"
-
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Hover Click"
 msgstr "ਹੋਵਰ ਕਲਿੱਕ"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Ignores fast duplicate keypresses"
 msgstr "ਤੇਜ਼ ਡੁਪਲੀਕੇਟ ਸਵਿੱਚ-ਦੱਬਣਾ ਅਣਡਿੱਠਾ"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Increase size:"
 msgstr "ਆਕਾਰ ਵਧਾਓ:"
 
-#: ../panels/universal-access/uap.ui.h:41
-#| msgid "Keyboard Settings..."
+#: ../panels/universal-access/uap.ui.h:34
 msgid "Keyboard Settings"
 msgstr "ਕੀ-ਬੋਰਡ ਸੈਟਿੰਗ"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:37
 msgid "Larger"
 msgstr "ਹੋਰ ਵੱਡਾ"
 
-#: ../panels/universal-access/uap.ui.h:48
-msgid "LowContrast"
-msgstr "ਘੱਟ-ਗੂੜ੍ਹਾ"
-
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Mouse Keys"
 msgstr "ਮਾਊਸ ਸਵਿੱਚਾਂ"
 
-#: ../panels/universal-access/uap.ui.h:50
-#| msgid "Mouse Settings..."
+#: ../panels/universal-access/uap.ui.h:41
 msgid "Mouse Settings"
 msgstr "ਮਾਊਸ ਸੈਟਿੰਗ"
 
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Nomon"
 msgstr "ਨੋਮੋਨ"
 
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "ਕੋਈ ਨਹੀਂ"
 
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:45
 msgid "On screen keyboard"
 msgstr "ਆਨ-ਸਕਰੀਨ ਕੀਬੋਰਡ"
 
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:46
 msgid "OnBoard"
 msgstr "ਆਨ-ਬੋਰਡ"
 
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Options..."
 msgstr "ਚੋਣਾਂ..."
 
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Pointing and Clicking"
 msgstr "ਪੁਆਇੰਟ ਤੇ ਕਲਿੱਕ ਕਰਨਾ"
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "ਸਵਿੱਚ ਦੱਬਣ ਤੇ ਇਹ ਮਨਜ਼ੂਰ ਕਰਨ 'ਚ ਦੇਰੀ ਕਰੋ"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Screen Reader"
 msgstr "ਸਕਰੀਨ ਰੀਡਰ"
 
-#: ../panels/universal-access/uap.ui.h:60
-#| msgid "On screen keyboard"
+#: ../panels/universal-access/uap.ui.h:51
 msgid "Screen keyboard"
 msgstr "ਸਕਰੀਨ ਕੀਬੋਰਡ"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Seeing"
 msgstr "ਵੇਖਣਾ"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Simulated Secondary Click"
 msgstr "ਸੈਕੰਡਰੀ ਕਲਿੱਕ ਦੀ ਨਕਲ"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Slow Keys"
 msgstr "ਹੌਲੀ-ਸਵਿੱਚਾਂ"
 
-#: ../panels/universal-access/uap.ui.h:68
-#| msgid "Sound Settings..."
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Sound Settings"
 msgstr "ਸਾਊਂਡ ਸੈਟਿੰਗ"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Sticky Keys"
 msgstr "ਸਟਿੱਕੀ ਸਵਿੱਚਾਂ"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Test flash"
 msgstr "ਫਲੈਸ਼ ਟੈਸਟ"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Text size:"
 msgstr "ਸ਼ਬਦ ਆਕਾਰ:"
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "ਮਾਡੀਫਾਇਰ ਸਵਿੱਚਾਂ ਦੀ ਲੜੀ ਨੂੰ ਸਵਿੱਚ ਕੰਬੀਨੇਸ਼ਨ ਵਜੋਂ ਮੰਨੋ।"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Trigger a click when the pointer hovers"
 msgstr "ਜਦੋਂ ਪੁਆਇੰਟਰ ਗਤੀ ਨੂੰ ਰੋਕਣਾ ਹੋਵੇ ਤਾਂ ਕਲਿੱਕ ਚਲਾਓ"
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "ਪ੍ਰਾਈਮਰੀ ਬਟਨ ਨੂੰ ਹੋਲਡ ਕਰਕੇ ਰੱਖੋ, ਜਦੋਂ ਸੈਕੰਡਰੀ ਕਲਿੱਕ ਚਲਾਓ।"
 
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Turn on accessibility features from the keyboard"
 msgstr "ਕੀਬੋਰਡ ਤੋਂ ਅਸੈਸਬਿਲਟੀ ਫੀਚਰ ਚਾਲੂ ਕਰੋ"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Turn on or off:"
 msgstr "ਚਾਲੂ ਜਾਂ ਬੰਦ:"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Type here to test settings"
 msgstr "ਸੈਟਿੰਗ ਟੈਸਟ ਕਰਨ ਲਈ ਇੱਥੇ ਲਿਖੋ"
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Typing"
 msgstr "ਲਿਖਣਾ"
 
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Typing Assistant"
 msgstr "ਲਿਖਣ ਸਹਾਇਕ"
 
-#: ../panels/universal-access/uap.ui.h:80
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "ਜਦੋਂ ਚੇਤਾਵਨੀ ਸਾਊਂਡ ਹੋਵੇ ਤਾਂ ਦਿੱਖ ਸੰਕੇਤਕ ਵਰਤੋਂ"
 
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Video Mouse"
 msgstr "ਵਿਡੀਓ ਮਾਊਸ"
 
-#: ../panels/universal-access/uap.ui.h:82
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Visual Alerts"
 msgstr "ਦਿੱਖ ਚੇਤਾਵਨੀ"
 
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:74
 msgid "Zoom in:"
 msgstr "ਜ਼ੂਮ ਇਨ:"
 
-#: ../panels/universal-access/uap.ui.h:85
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Zoom out:"
 msgstr "ਜ਼ੂਮ ਆਉਟ:"
 
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:76
 msgid "_Motion threshold:"
 msgstr "ਮੋਸ਼ਨ ਥਰੈਸ਼ਹੋਲਡ(_M):"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:77
 msgid "accepted"
 msgstr "ਮਨਜ਼ੂਰ ਕੀਤਾ"
 
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:78
 msgid "pressed"
 msgstr "ਦੱਬਿਆ"
 
-#: ../panels/universal-access/uap.ui.h:89
+#: ../panels/universal-access/uap.ui.h:79
 msgid "rejected"
 msgstr "ਰੱਦ ਕੀਤਾ"
+
+#: ../panels/universal-access/uap.ui.h:80
+#| msgid "<span size=\"x-large\">High/Inverse</span>"
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">High/Inverse</span>"
+msgstr "<span size=\"x-large\">ਉੱਚ/ਉਲਟ</span>"
+
+#: ../panels/universal-access/uap.ui.h:81
+#| msgid "<span size=\"x-large\">High</span>"
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">High</span>"
+msgstr "<span size=\"x-large\">ਵੱਧ</span>"
+
+#: ../panels/universal-access/uap.ui.h:82
+#| msgid "<span size=\"x-large\">Low</span>"
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">Low</span>"
+msgstr "<span size=\"x-large\">ਘੱਟ</span>"
+
+#: ../panels/universal-access/uap.ui.h:83
+#| msgid "<span size=\"x-large\">Normal</span>"
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">Normal</span>"
+msgstr "<span size=\"x-large\">ਸਧਾਰਨ</span>"
+
+#: ../panels/universal-access/uap.ui.h:84
+#| msgid "High"
+msgctxt "universal access, contrast"
+msgid "High"
+msgstr "ਉੱਚ"
+
+#: ../panels/universal-access/uap.ui.h:85
+#| msgid "High/Inverse"
+msgctxt "universal access, contrast"
+msgid "High/Inverse"
+msgstr "ਉੱਚ/ਉਲਟ"
+
+#: ../panels/universal-access/uap.ui.h:86
+#| msgid "Low"
+msgctxt "universal access, contrast"
+msgid "Low"
+msgstr "ਘੱਟ"
+
+#: ../panels/universal-access/uap.ui.h:87
+#| msgid "Normal"
+msgctxt "universal access, contrast"
+msgid "Normal"
+msgstr "ਆਮ"
+
+#. Translators: this refers to theme contrast and font size
+#: ../panels/universal-access/uap.ui.h:89
+#| msgid "Display"
+msgctxt "universal access, seeing"
+msgid "Display"
+msgstr "ਡਿਸਪਲੇਅ"
+
+#. Translators: this refers to screen magnifier
+#: ../panels/universal-access/uap.ui.h:91
+#| msgid "Zoom"
+msgctxt "universal access, seeing"
+msgid "Zoom"
+msgstr "ਜ਼ੂਮ"
 
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
@@ -3157,17 +3191,14 @@ msgid "Create new account"
 msgstr "ਨਵਾਂ ਅਕਾਊਂਟ ਬਣਾਓ"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
-#| msgid "_Account Type:"
 msgid "_Account Type"
 msgstr "ਅਕਾਊਂਟ ਕਿਸਮ(_A)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#| msgid "_Full name:"
 msgid "_Full name"
 msgstr "ਪੂਰਾ ਨਾਂ(_F)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#| msgid "_Username:"
 msgid "_Username"
 msgstr "ਯੂਜ਼ਰ ਨਾਂ(_U)"
 
@@ -3195,7 +3226,6 @@ msgstr ""
 "ਵੇਖਾਈ ਦੇਵੇਗਾ। ਇਸ ਵਿੱਚ ਪਾਸਵਰਡ ਸ਼ਾਮਲ <b>ਨਾ</b> ਕਰੋ ਜੀ।</small>"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:3
-#| msgid "C_onfirm password:"
 msgid "C_onfirm password"
 msgstr "ਪਾਸਵਰਡ ਪੁਸ਼ਟੀ(_o)"
 
@@ -3204,7 +3234,6 @@ msgid "Ch_ange"
 msgstr "ਬਦਲੋ(_a)"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:5
-#| msgid "Changing password for:"
 msgid "Changing password for"
 msgstr "ਇਸ ਲਈ ਪਾਸਵਰਡ ਬਦਲਿਆ ਜਾ ਰਿਹਾ ਹੈ"
 
@@ -3217,7 +3246,6 @@ msgid "Choose password at next login"
 msgstr "ਅਗਲੇ ਲਾਗਇਨ ਸਮੇਂ ਪਾਸਵਰਡ ਚੁਣੋ"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:8
-#| msgid "Current _password:"
 msgid "Current _password"
 msgstr "ਮੌਜੂਦਾ ਪਾਸਵਰਡ(_p)"
 
@@ -3242,17 +3270,14 @@ msgid "Set a password now"
 msgstr "ਹੁਣੇ ਪਾਸਵਰਡ ਦਿਓ"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:14
-#| msgid "_Action:"
 msgid "_Action"
 msgstr "ਐਕਸ਼ਨ(_A)"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:15
-#| msgid "_Hint:"
 msgid "_Hint"
 msgstr "ਇਸ਼ਾਰਾ(_H)"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:16
-#| msgid "_New password:"
 msgid "_New password"
 msgstr "ਨਵਾਂ ਪਾਸਵਰਡ(_N)"
 
@@ -3290,17 +3315,14 @@ msgid "Account Information"
 msgstr "ਅਕਾਊਂਟ ਜਾਣਕਾਰੀ"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
-#| msgid "Account type:"
 msgid "Account type"
 msgstr "ਅਕਾਊਂਟ  ਕਿਸਮ"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
-#| msgid "Automatic Login:"
 msgid "Automatic Login"
 msgstr "ਆਟੋਮੈਟਿਕ ਲਾਗਇਨ"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
-#| msgid "Fingerprint Login:"
 msgid "Fingerprint Login"
 msgstr "ਫਿੰਗਰਪਰਿੰਟ ਲਾਗਇਨ"
 
@@ -3309,7 +3331,6 @@ msgid "Login Options"
 msgstr "ਲਾਗਇਨ ਚੋਣ"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
-#| msgid "Password:"
 msgid "Password"
 msgstr "ਪਾਸਵਰਡ"
 
@@ -3398,6 +3419,15 @@ msgstr "ਕੰਟਰੋਲ ਕੇਂਦਰ"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
+
+#~ msgid "HighContrast"
+#~ msgstr "ਵੱਧ-ਗੂੜ੍ਹਾ"
+
+#~ msgid "HighContrastInverse"
+#~ msgstr "ਵੱਧ-ਗੂੜਾ-ਉਲਟ"
+
+#~ msgid "LowContrast"
+#~ msgstr "ਘੱਟ-ਗੂੜ੍ਹਾ"
 
 #~| msgid "Printer"
 #~ msgid "Driver"
