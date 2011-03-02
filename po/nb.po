@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.91.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-20 12:19+0100\n"
-"PO-Revision-Date: 2011-02-20 12:21+0100\n"
+"POT-Creation-Date: 2011-03-02 18:40+0100\n"
+"PO-Revision-Date: 2011-03-02 18:45+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -54,6 +54,44 @@ msgid ""
 msgstr ""
 "URL for henting av skrivebordstema. Hvis den settes til en tom streng vil "
 "ikke lenken vises."
+
+#: ../libgnome-control-center/cc-lockbutton.c:347
+#: ../panels/screen/screen.ui.h:13
+msgid "Lock"
+msgstr "Lås"
+
+#: ../libgnome-control-center/cc-lockbutton.c:356
+#: ../panels/network/network.ui.h:23
+msgid "Unlock"
+msgstr "Lås opp"
+
+#: ../libgnome-control-center/cc-lockbutton.c:365
+msgid "Locked"
+msgstr "Låst"
+
+#: ../libgnome-control-center/cc-lockbutton.c:374
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+"Dialogen er låst opp.\n"
+"Klikk for å forhindre videre endringer"
+
+#: ../libgnome-control-center/cc-lockbutton.c:383
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+"Dialogen er låst.\n"
+"Klikk for å gjøre endringer"
+
+#: ../libgnome-control-center/cc-lockbutton.c:392
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
+"Systemregler forhindrer endringer.\n"
+"Kontakt din systemadministrator for hjelp."
 
 #: ../libgnome-control-center/gconf-property-editor.c:134
 msgid "Key"
@@ -203,7 +241,6 @@ msgid "Tile"
 msgstr "Flislegg"
 
 #: ../panels/background/background.ui.h:8
-#: ../panels/universal-access/uap.ui.h:90
 msgid "Zoom"
 msgstr "Zoom"
 
@@ -352,54 +389,6 @@ msgstr "Region:"
 msgid "September"
 msgstr "September"
 
-#: ../panels/datetime/dt-lockbutton.c:347
-#: ../panels/printers/pp-lockbutton.c:347 ../panels/screen/screen.ui.h:13
-#: ../panels/user-accounts/um-lockbutton.c:347
-msgid "Lock"
-msgstr "Lås"
-
-#: ../panels/datetime/dt-lockbutton.c:356
-#: ../panels/printers/pp-lockbutton.c:356 ../panels/network/network.ui.h:23
-#: ../panels/user-accounts/um-lockbutton.c:356
-msgid "Unlock"
-msgstr "Lås opp"
-
-#: ../panels/datetime/dt-lockbutton.c:365
-#: ../panels/printers/pp-lockbutton.c:365
-#: ../panels/user-accounts/um-lockbutton.c:365
-msgid "Locked"
-msgstr "Låst"
-
-#: ../panels/datetime/dt-lockbutton.c:374
-#: ../panels/printers/pp-lockbutton.c:374
-#: ../panels/user-accounts/um-lockbutton.c:374
-msgid ""
-"Dialog is unlocked.\n"
-"Click to prevent further changes"
-msgstr ""
-"Dialogen er låst opp.\n"
-"Klikk for å forhindre videre endringer"
-
-#: ../panels/datetime/dt-lockbutton.c:383
-#: ../panels/printers/pp-lockbutton.c:383
-#: ../panels/user-accounts/um-lockbutton.c:383
-msgid ""
-"Dialog is locked.\n"
-"Click to make changes"
-msgstr ""
-"Dialogen er låst.\n"
-"Klikk for å gjøre endringer"
-
-#: ../panels/datetime/dt-lockbutton.c:392
-#: ../panels/printers/pp-lockbutton.c:392
-#: ../panels/user-accounts/um-lockbutton.c:392
-msgid ""
-"System policy prevents changes.\n"
-"Contact your system administrator"
-msgstr ""
-"Systemregler forhindrer endringer.\n"
-"Kontakt din systemadministrator for hjelp."
-
 #. Translators: those are keywords for the date and time control-center panel
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
 msgid "Clock;Timezone;Location;"
@@ -418,14 +407,14 @@ msgid "Left"
 msgstr "Venstre"
 
 #: ../panels/display/display-capplet.ui.h:2
-#: ../panels/display/xrandr-capplet.c:497
+#: ../panels/display/xrandr-capplet.c:491
 msgid "Monitor"
 msgstr "Skjerm"
 
 #: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/xrandr-capplet.c:333
-#: ../panels/display/xrandr-capplet.c:372
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/display/xrandr-capplet.c:327
+#: ../panels/display/xrandr-capplet.c:366
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Normal"
 msgstr "Normal"
 
@@ -471,15 +460,15 @@ msgstr "Skjermer"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Panel;Prosjektor;xrandr;Skjerm;Oppløsning;Oppdater;"
 
-#: ../panels/display/xrandr-capplet.c:334
+#: ../panels/display/xrandr-capplet.c:328
 msgid "Anti-Clockwise"
 msgstr "Mot klokken"
 
-#: ../panels/display/xrandr-capplet.c:335
+#: ../panels/display/xrandr-capplet.c:329
 msgid "Clockwise"
 msgstr "Med klokken"
 
-#: ../panels/display/xrandr-capplet.c:336
+#: ../panels/display/xrandr-capplet.c:330
 msgid "180 Degrees"
 msgstr "180 grader"
 
@@ -488,25 +477,25 @@ msgstr "180 grader"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:473
+#: ../panels/display/xrandr-capplet.c:467
 msgid "Mirror Displays"
 msgstr "Speil skjermer"
 
-#: ../panels/display/xrandr-capplet.c:603
+#: ../panels/display/xrandr-capplet.c:597
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d x %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:605
+#: ../panels/display/xrandr-capplet.c:599
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1518
+#: ../panels/display/xrandr-capplet.c:1500
 msgid "Drag to change primary display."
 msgstr "Dra for å bytte primær skjerm."
 
-#: ../panels/display/xrandr-capplet.c:1576
+#: ../panels/display/xrandr-capplet.c:1558
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
@@ -514,120 +503,135 @@ msgstr ""
 "Velg en skjerm for å endre egenskaper for denne. Dra den rundt for å bytte "
 "plassering."
 
-#: ../panels/display/xrandr-capplet.c:1966
+#: ../panels/display/xrandr-capplet.c:1947
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/xrandr-capplet.c:1968
+#: ../panels/display/xrandr-capplet.c:1949
 msgid "%a %l:%M %p"
 msgstr "%a %H.%M"
 
-#: ../panels/display/xrandr-capplet.c:2214
+#: ../panels/display/xrandr-capplet.c:2195
 msgid "Could not save the monitor configuration"
 msgstr "Kunne ikke lagre skjermkonfigurasjon"
 
-#: ../panels/display/xrandr-capplet.c:2239
+#: ../panels/display/xrandr-capplet.c:2220
 msgid "Could not get session bus while applying display configuration"
 msgstr "Kunne ikke finne øktbussen under aktivering av skjermkonfigurasjon"
 
-#: ../panels/display/xrandr-capplet.c:2284
+#: ../panels/display/xrandr-capplet.c:2265
 msgid "Could not detect displays"
 msgstr "Kunne ikke søke etter skjermer"
 
-#: ../panels/display/xrandr-capplet.c:2479
+#: ../panels/display/xrandr-capplet.c:2460
 msgid "Could not get screen information"
 msgstr "Fant ikke informasjon om skjermen"
 
+#. Translators: VESA is an techncial acronym, don't translate it.
+#: ../panels/info/cc-info-panel.c:366
+#, c-format
+msgid "VESA: %s"
+msgstr "VESA: %s"
+
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
+#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:72
+#: ../panels/network/panel-common.c:151
+msgid "Unknown"
+msgstr "Ukjent"
+
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:502
+#: ../panels/info/cc-info-panel.c:528
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:516
+#: ../panels/info/cc-info-panel.c:542
 #, c-format
 msgid "%u byte"
 msgid_plural "%u bytes"
 msgstr[0] "%u byte"
 msgstr[1] "%u bytes"
 
-#: ../panels/info/cc-info-panel.c:524
+#: ../panels/info/cc-info-panel.c:550
 #, c-format
 msgid "%.1f KB"
 msgstr "%.1f KB"
 
-#: ../panels/info/cc-info-panel.c:529
+#: ../panels/info/cc-info-panel.c:555
 #, c-format
 msgid "%.1f MB"
 msgstr "%.1f MB"
 
-#: ../panels/info/cc-info-panel.c:534
+#: ../panels/info/cc-info-panel.c:560
 #, c-format
 msgid "%.1f GB"
 msgstr "%.1f GB"
 
-#: ../panels/info/cc-info-panel.c:539
+#: ../panels/info/cc-info-panel.c:565
 #, c-format
 msgid "%.1f TB"
 msgstr "%.1f TB"
 
-#: ../panels/info/cc-info-panel.c:544
+#: ../panels/info/cc-info-panel.c:570
 #, c-format
 msgid "%.1f PB"
 msgstr "%.1f PB"
 
-#: ../panels/info/cc-info-panel.c:549
+#: ../panels/info/cc-info-panel.c:575
 #, c-format
 msgid "%.1f EB"
 msgstr "%.1f EB"
 
-#: ../panels/info/cc-info-panel.c:660
+#: ../panels/info/cc-info-panel.c:686
 msgid "Unknown model"
 msgstr "Ukjent modell"
 
-#: ../panels/info/cc-info-panel.c:743
+#: ../panels/info/cc-info-panel.c:769
 msgid "The next login will attempt to use the standard experience."
 msgstr "Neste pålogging vil forsøke å bruke standard brukeropplevelse."
 
-#: ../panels/info/cc-info-panel.c:745
+#: ../panels/info/cc-info-panel.c:771
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
-msgstr "Neste pålogging vil bruke reserveløsning ment for grafikkmaskinvare som ikke er støttet."
+msgstr ""
+"Neste pålogging vil bruke reserveløsning ment for grafikkmaskinvare som ikke "
+"er støttet."
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:794
+#: ../panels/info/cc-info-panel.c:813
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "Reserveløsning"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:800
+#: ../panels/info/cc-info-panel.c:819
 msgctxt "Experience"
 msgid "Standard"
 msgstr "Standard"
 
-#: ../panels/info/cc-info-panel.c:932
+#: ../panels/info/cc-info-panel.c:951
 #: ../panels/keyboard/keyboard-shortcuts.c:1711
 msgid "Section"
 msgstr "Seksjon"
 
-#: ../panels/info/cc-info-panel.c:941 ../panels/info/info.ui.h:15
+#: ../panels/info/cc-info-panel.c:960 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "Oversikt"
 
-#: ../panels/info/cc-info-panel.c:947 ../panels/info/info.ui.h:3
+#: ../panels/info/cc-info-panel.c:966 ../panels/info/info.ui.h:3
 msgid "Default Applications"
 msgstr "Forvalgte programmer"
 
-#: ../panels/info/cc-info-panel.c:952 ../panels/info/info.ui.h:10
+#: ../panels/info/cc-info-panel.c:971 ../panels/info/info.ui.h:9
 msgid "Graphics"
 msgstr "Grafikk"
 
-#: ../panels/info/cc-info-panel.c:977
+#: ../panels/info/cc-info-panel.c:996
 #, c-format
 msgid "Version %s"
 msgstr "Versjon %s"
@@ -662,51 +666,47 @@ msgid "Disk"
 msgstr "Disk"
 
 #: ../panels/info/info.ui.h:6
-msgid "Driver"
-msgstr "Driver"
-
-#: ../panels/info/info.ui.h:7
 msgid "Experience"
 msgstr "Opplevelse"
 
 #. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
-#: ../panels/info/info.ui.h:9
+#: ../panels/info/info.ui.h:8
 msgid "Forced Fallback Mode"
 msgstr "Tvungen bruk av reserveløsning"
 
-#: ../panels/info/info.ui.h:11
+#: ../panels/info/info.ui.h:10
 msgid "Mail"
 msgstr "E-post"
 
-#: ../panels/info/info.ui.h:12
+#: ../panels/info/info.ui.h:11
 msgid "Memory"
 msgstr "Minne"
 
-#: ../panels/info/info.ui.h:13
+#: ../panels/info/info.ui.h:12
 msgid "Music"
 msgstr "Musikk"
 
-#: ../panels/info/info.ui.h:14
+#: ../panels/info/info.ui.h:13
 msgid "OS type"
 msgstr "Type operativsystem"
 
-#: ../panels/info/info.ui.h:16
+#: ../panels/info/info.ui.h:15
 msgid "Photos"
 msgstr "Fotografier"
 
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:16
 msgid "Processor"
 msgstr "Prosessor"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:17
 msgid "Updates Available"
 msgstr "Oppdateringer tilgjengelig"
 
-#: ../panels/info/info.ui.h:19
+#: ../panels/info/info.ui.h:18
 msgid "Video"
 msgstr "Video"
 
-#: ../panels/info/info.ui.h:20
+#: ../panels/info/info.ui.h:19
 msgid "Web"
 msgstr "Web"
 
@@ -803,22 +803,30 @@ msgid "Increase text size"
 msgstr "Større tekststørrelse"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:3
+msgid "Magnifier zoom in"
+msgstr "Zoom inn med forstørrelsesglass"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:4
+msgid "Magnifier zoom out"
+msgstr "Zoom ut med forstørrelsesglass"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:5
 msgid "Toggle contrast"
 msgstr "Endre kontrast"
 
-#: ../panels/keyboard/50-accessibility.xml.in.h:4
+#: ../panels/keyboard/50-accessibility.xml.in.h:6
 msgid "Toggle magnifier"
 msgstr "Slå av/på forstørrelsesglass"
 
-#: ../panels/keyboard/50-accessibility.xml.in.h:5
+#: ../panels/keyboard/50-accessibility.xml.in.h:7
 msgid "Toggle on-screen keyboard"
 msgstr "Slå av/på tastatur på skjermen"
 
-#: ../panels/keyboard/50-accessibility.xml.in.h:6
+#: ../panels/keyboard/50-accessibility.xml.in.h:8
 msgid "Toggle screen reader"
 msgstr "Slå av/på skjermleser"
 
-#: ../panels/keyboard/50-accessibility.xml.in.h:7
+#: ../panels/keyboard/50-accessibility.xml.in.h:9
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
 msgid "Universal Access"
 msgstr "Universell tilgang"
@@ -853,7 +861,7 @@ msgstr "Type hurtigtast."
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/keyboard-shortcuts.c:1141
+#: ../panels/keyboard/keyboard-shortcuts.c:1152
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -874,22 +882,22 @@ msgstr "Tastatur"
 msgid "Shortcut;Repeat;Blink;"
 msgstr "Snarvei;Repetisjon;Blinking;"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:643
-#: ../panels/keyboard/keyboard-shortcuts.c:916
-#: ../panels/keyboard/keyboard-shortcuts.c:1503
-#: ../panels/keyboard/keyboard-shortcuts.c:1507
+#: ../panels/keyboard/keyboard-shortcuts.c:645
+#: ../panels/keyboard/keyboard-shortcuts.c:927
+#: ../panels/keyboard/keyboard-shortcuts.c:1505
+#: ../panels/keyboard/keyboard-shortcuts.c:1509
 msgid "Custom Shortcuts"
 msgstr "Egendefinerte snarveier"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:768
+#: ../panels/keyboard/keyboard-shortcuts.c:779
 msgid "<Unknown Action>"
 msgstr "<Ukjent handling>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1167
+#: ../panels/keyboard/keyboard-shortcuts.c:1178
 msgid "Error saving the new shortcut"
 msgstr "Feil under lagring av ny snarvei"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1282
+#: ../panels/keyboard/keyboard-shortcuts.c:1291
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -901,7 +909,7 @@ msgstr ""
 "Vennligst prøv med en tastekombinasjon som inkluderer Control, Alt eller "
 "Shift."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1314
+#: ../panels/keyboard/keyboard-shortcuts.c:1321
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -910,26 +918,26 @@ msgstr ""
 "Snarvei «%s» er allerede brukt for\n"
 "«%s»"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1320
+#: ../panels/keyboard/keyboard-shortcuts.c:1326
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr ""
 "Hvis du omfordeler snarveien til «%s» vil snarveien for «%s» bli slått av."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1328
+#: ../panels/keyboard/keyboard-shortcuts.c:1332
 msgid "_Reassign"
 msgstr "_Omfordel"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1442
+#: ../panels/keyboard/keyboard-shortcuts.c:1444
 msgid "Too many custom shortcuts"
 msgstr "For mange egendefinerte snarveier"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1761
+#: ../panels/keyboard/keyboard-shortcuts.c:1764
 msgid "Action"
 msgstr "Handling"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1784
+#: ../panels/keyboard/keyboard-shortcuts.c:1787
 msgid "Shortcut"
 msgstr "Snarvei"
 
@@ -947,7 +955,7 @@ msgstr "Markøren _blinker i tekstfelt"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 #: ../panels/mouse/gnome-mouse-properties.ui.h:1
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:21
 msgid "Cursor blinks speed"
 msgstr "Hastighet for blinkende markør"
 
@@ -973,7 +981,7 @@ msgstr "Tastetrykk _repeteres når tasten holdes nede"
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Long"
 msgstr "Lang"
 
@@ -992,7 +1000,7 @@ msgstr "_Hastighet:"
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Short"
 msgstr "Kort"
 
@@ -1169,124 +1177,124 @@ msgid "cd;dvd;usb;audio;video;disc;"
 msgstr "cd;dvd;usb;lyd;video;plate;"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:228
+#: ../panels/printers/cc-printers-panel.c:261
 msgid "Low on toner"
 msgstr "Lite toner"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:230
+#: ../panels/printers/cc-printers-panel.c:263
 msgid "Out of toner"
 msgstr "Ikke mer toner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:233
+#: ../panels/printers/cc-printers-panel.c:266
 msgid "Low on developer"
 msgstr "Lite utvikler"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:236
+#: ../panels/printers/cc-printers-panel.c:269
 msgid "Out of developer"
 msgstr "Ikke mer utvikler"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:238
+#: ../panels/printers/cc-printers-panel.c:271
 msgid "Low on a marker supply"
 msgstr ""
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:240
+#: ../panels/printers/cc-printers-panel.c:273
 msgid "Out of a marker supply"
 msgstr ""
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:242
+#: ../panels/printers/cc-printers-panel.c:275
 msgid "Open cover"
 msgstr "Åpne lokket"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:244
+#: ../panels/printers/cc-printers-panel.c:277
 msgid "Open door"
 msgstr "Åpne døren"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:246
+#: ../panels/printers/cc-printers-panel.c:279
 msgid "Low on paper"
 msgstr "Lite papir"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:248
+#: ../panels/printers/cc-printers-panel.c:281
 msgid "Out of paper"
 msgstr "Ikke mer papir"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:250
+#: ../panels/printers/cc-printers-panel.c:283
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Frakoblet"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:252
+#: ../panels/printers/cc-printers-panel.c:285
 msgctxt "printer state"
 msgid "Paused"
 msgstr "På pause"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:254
+#: ../panels/printers/cc-printers-panel.c:287
 msgid "Waste receptacle almost full"
 msgstr ""
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:256
+#: ../panels/printers/cc-printers-panel.c:289
 msgid "Waste receptacle full"
 msgstr ""
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:258
+#: ../panels/printers/cc-printers-panel.c:291
 msgid "The optical photo conductor is near end of life"
 msgstr ""
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:260
+#: ../panels/printers/cc-printers-panel.c:293
 msgid "The optical photo conductor is no longer functioning"
 msgstr ""
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:352
+#: ../panels/printers/cc-printers-panel.c:430
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Klar"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:356
+#: ../panels/printers/cc-printers-panel.c:434
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Prosesserer"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:360
+#: ../panels/printers/cc-printers-panel.c:438
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Stoppet"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:458
+#: ../panels/printers/cc-printers-panel.c:536
 msgid "Toner Level"
 msgstr "Tonernivå"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:461
+#: ../panels/printers/cc-printers-panel.c:539
 msgid "Ink Level"
 msgstr "Blekknivå"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:464
+#: ../panels/printers/cc-printers-panel.c:542
 msgid "Supply Level"
 msgstr ""
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:479
+#: ../panels/printers/cc-printers-panel.c:557
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -1294,85 +1302,85 @@ msgstr[0] "%u aktiv"
 msgstr[1] "%u aktive"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:940
+#: ../panels/printers/cc-printers-panel.c:1024
 msgctxt "print job"
 msgid "Pending"
 msgstr "Utestående"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:944
+#: ../panels/printers/cc-printers-panel.c:1028
 msgctxt "print job"
 msgid "Held"
 msgstr "På hold"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:948
+#: ../panels/printers/cc-printers-panel.c:1032
 msgctxt "print job"
 msgid "Processing"
 msgstr "Prosesserer"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:952
+#: ../panels/printers/cc-printers-panel.c:1036
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Stoppet"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:956
+#: ../panels/printers/cc-printers-panel.c:1040
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Avbrutt"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:960
+#: ../panels/printers/cc-printers-panel.c:1044
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Avbrutt med feil"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:964
+#: ../panels/printers/cc-printers-panel.c:1048
 msgctxt "print job"
 msgid "Completed"
 msgstr "Fullført"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1056
+#: ../panels/printers/cc-printers-panel.c:1140
 msgid "Job Title"
 msgstr "Jobbtittel"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1065
+#: ../panels/printers/cc-printers-panel.c:1149
 msgid "Job State"
 msgstr "Tilstand for jobb"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1071
+#: ../panels/printers/cc-printers-panel.c:1155
 msgid "Time"
 msgstr "Tid"
 
 #. Translators: Program cannot connect to DBus' system bus
-#: ../panels/printers/cc-printers-panel.c:1261
+#: ../panels/printers/cc-printers-panel.c:1345
 #, c-format
 msgid "Could not connect to system bus: %s"
 msgstr "Kunne ikke koble til systembussen: %s"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:1971
+#: ../panels/printers/cc-printers-panel.c:2055
 msgid "Test page"
 msgstr "Testside"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/cc-printers-panel.c:1979
+#: ../panels/printers/cc-printers-panel.c:2063
 msgid "Clean print heads"
 msgstr "Rens utskriftshodene"
 
 #. Translators: An error has occured during execution of a CUPS maintenance command
-#: ../panels/printers/cc-printers-panel.c:1984
+#: ../panels/printers/cc-printers-panel.c:2068
 msgid "An error has occured during a maintenance command."
 msgstr "En feil har oppstått under en vedlikeholdskommando."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2110
+#: ../panels/printers/cc-printers-panel.c:2195
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Klarte ikke å laste brukergrensesnitt: %s"
@@ -1478,6 +1486,7 @@ msgid "Install languages..."
 msgstr "Installer språk …"
 
 #: ../panels/region/gnome-region-panel.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "Language"
 msgstr "Språk"
 
@@ -1577,13 +1586,12 @@ msgstr "Aktiver h_orisontal rulling"
 
 #. high sensitivity
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
-#: ../panels/universal-access/uap.ui.h:39
 msgid "High"
 msgstr "Høy"
 
 #. large threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:13
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Large"
 msgstr "Stor"
 
@@ -1593,7 +1601,6 @@ msgstr "Finn peker"
 
 #. low sensitivity
 #: ../panels/mouse/gnome-mouse-properties.ui.h:17
-#: ../panels/universal-access/uap.ui.h:52
 msgid "Low"
 msgstr "Lav"
 
@@ -1623,7 +1630,7 @@ msgstr "Vis pekerens p_osisjon når Ctrl trykkes ned"
 
 #. small threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:28
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:58
 msgid "Small"
 msgstr "Liten"
 
@@ -1684,122 +1691,23 @@ msgstr "Sett dine brukervalg for mus og pekeplate"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Styrepute;Peker;Klikk;Tapp;Dobbel;Knapp;Styrekule;"
 
-#: ../panels/network/cc-network-panel.c:819
+#: ../panels/network/cc-network-panel.c:969
 msgid "Network proxy"
 msgstr "Nettverksproxy"
 
-#: ../panels/network/cc-network-panel.c:828
+#: ../panels/network/cc-network-panel.c:978
 msgid "Set the system proxy settings"
 msgstr "Systeminnstillinger for proxy"
 
-#. TRANSLATORS: device type
-#. TRANSLATORS: AP type
-#. TRANSLATORS: device type
-#. TRANSLATORS: AP type
-#: ../panels/network/nm-device.c:117 ../panels/network/nm-access-point.c:65
-#: ../panels/network/panel-common.c:65 ../panels/network/panel-common.c:138
-msgid "Unknown"
-msgstr "Ukjent"
+#. TRANSLATORS: the user is running a NM that is too new and API compatible
+#: ../panels/network/cc-network-panel.c:1122
+msgid "The running NetworkManager version is not compatible (too new)."
+msgstr "Kjørende versjon av NetworkManager er ikke kompatibel (for ny)."
 
-#. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:121 ../panels/network/panel-common.c:69
-msgid "Wired"
-msgstr "Kablet"
-
-#. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:125 ../panels/network/panel-common.c:73
-msgid "Wireless"
-msgstr "Trådløs"
-
-#. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:130 ../panels/network/panel-common.c:78
-msgid "Mobile broadband"
-msgstr "Mobilt bredbånd"
-
-#. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:134 ../panels/network/panel-common.c:82
-msgid "Bluetooth"
-msgstr "Blåtann"
-
-#. TRANSLATORS: device type
-#: ../panels/network/nm-device.c:138 ../panels/network/panel-common.c:86
-msgid "Mesh"
-msgstr "Mesh"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:190 ../panels/network/panel-common.c:164
-msgid "Status unknown"
-msgstr "Ukjent status"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:194 ../panels/network/panel-common.c:168
-msgid "Unmanaged"
-msgstr "Ikke administrert"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:198 ../panels/network/panel-common.c:172
-msgid "Unavailable"
-msgstr "Ikke tilgjengelig"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:202 ../panels/network/panel-common.c:176
-msgid "Disconnected"
-msgstr "Frakoblet"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:206 ../panels/network/panel-common.c:180
-msgid "Preparing connection"
-msgstr "Forbereder tilkobling"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:210 ../panels/network/panel-common.c:184
-msgid "Configuring connection"
-msgstr "Konfigurerer tilkobling"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:214 ../panels/network/panel-common.c:188
-msgid "Authenticating"
-msgstr "Autentiserer"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:218 ../panels/network/panel-common.c:192
-msgid "Getting network address"
-msgstr "Henter nettverksadresse"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:222 ../panels/network/panel-common.c:196
-msgid "Connected"
-msgstr "Tilkoblet"
-
-#. TRANSLATORS: device status
-#: ../panels/network/nm-device.c:226 ../panels/network/panel-common.c:200
-msgid "Failed to connect"
-msgstr "Klarte ikke å koble til"
-
-#: ../panels/network/nm-device.c:837
-#, c-format
-msgid "%i kb/s"
-msgstr "%i kb/s"
-
-#: ../panels/network/nm-device.c:839 ../panels/network/nm-device.c:856
-#, c-format
-msgid "%i Mb/s"
-msgstr "%i Mb/s"
-
-#: ../panels/network/nm-device.c:858
-#, c-format
-msgid "%i Gb/s"
-msgstr "%i Gb/s"
-
-#. TRANSLATORS: AP type
-#: ../panels/network/nm-access-point.c:69 ../panels/network/panel-common.c:142
-msgid "Ad-hoc"
-msgstr "Ad-hoc"
-
-#. TRANSLATORS: AP type
-#: ../panels/network/nm-access-point.c:73 ../panels/network/panel-common.c:146
-msgid "Infrastructure"
-msgstr "Infrastruktur"
+#. TRANSLATORS: the user is running a NM that is too old and API compatible
+#: ../panels/network/cc-network-panel.c:1128
+msgid "The running NetworkManager version is not compatible (too old)."
+msgstr "Kjørende versjon av NetworkManager er ikke kompatibel (for gammel)."
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 msgid "Network"
@@ -1921,6 +1829,106 @@ msgctxt "proxy method"
 msgid "None"
 msgstr "Ingen"
 
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:76
+msgid "Wired"
+msgstr "Kablet"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:80
+msgid "Wireless"
+msgstr "Trådløs"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:87
+msgid "Mobile broadband"
+msgstr "Mobilt bredbånd"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:92
+msgid "Bluetooth"
+msgstr "Blåtann"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:96
+msgid "Mesh"
+msgstr "Mesh"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:155
+msgid "Ad-hoc"
+msgstr "Ad-hoc"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:159
+msgid "Infrastructure"
+msgstr "Infrastruktur"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:177
+msgid "Status unknown"
+msgstr "Ukjent status"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:181
+msgid "Unmanaged"
+msgstr "Ikke administrert"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:185
+msgid "Unavailable"
+msgstr "Ikke tilgjengelig"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:189
+msgid "Disconnected"
+msgstr "Frakoblet"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:193
+msgid "Preparing connection"
+msgstr "Forbereder tilkobling"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:197
+msgid "Configuring connection"
+msgstr "Konfigurerer tilkobling"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:201
+msgid "Authenticating"
+msgstr "Autentiserer"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:205
+msgid "Getting network address"
+msgstr "Henter nettverksadresse"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:209
+msgid "Checking network address"
+msgstr "Sjekker nettverksadresse"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:213
+msgid "Connected"
+msgstr "Tilkoblet"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:217
+msgid "Disconnecting"
+msgstr "Kobler fra"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:221
+msgid "Failed to connect"
+msgstr "Klarte ikke å koble til"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:225
+msgid "Status unknown (missing)"
+msgstr "Ukjent status (mangler)"
+
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
 msgstr "Strøm"
@@ -1934,18 +1942,18 @@ msgstr "Innstillinger for strømstyring"
 msgid "Power;Sleep;Suspend;Hibernate;Battery;"
 msgstr "Strøm;Sove;Hvile;Dvale;Batteri;"
 
-#: ../panels/power/cc-power-panel.c:151
+#: ../panels/power/cc-power-panel.c:153
 msgid "Unknown time"
 msgstr "Ukjent tid"
 
-#: ../panels/power/cc-power-panel.c:157
+#: ../panels/power/cc-power-panel.c:159
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minutt"
 msgstr[1] "%i minutter"
 
-#: ../panels/power/cc-power-panel.c:169
+#: ../panels/power/cc-power-panel.c:171
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -1954,54 +1962,54 @@ msgstr[1] "%i timer"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:177
+#: ../panels/power/cc-power-panel.c:179
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:178
+#: ../panels/power/cc-power-panel.c:180
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "time"
 msgstr[1] "timer"
 
-#: ../panels/power/cc-power-panel.c:179
+#: ../panels/power/cc-power-panel.c:181
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minutt"
 msgstr[1] "minutter"
 
-#: ../panels/power/cc-power-panel.c:251
+#: ../panels/power/cc-power-panel.c:253
 msgid "Battery charging"
 msgstr "Batteriet lader"
 
-#: ../panels/power/cc-power-panel.c:254
+#: ../panels/power/cc-power-panel.c:256
 msgid "Battery discharging"
 msgstr "Batteriet lades ut"
 
-#: ../panels/power/cc-power-panel.c:265
+#: ../panels/power/cc-power-panel.c:267
 msgid "UPS charging"
 msgstr "UPS lader"
 
-#: ../panels/power/cc-power-panel.c:268
+#: ../panels/power/cc-power-panel.c:270
 msgid "UPS discharging"
 msgstr "UPS lades ut"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:286
+#: ../panels/power/cc-power-panel.c:288
 #, c-format
 msgid "%s until charged (%.0lf%%)"
 msgstr "%s før fullt ladet (%.0lf%%)"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:292
+#: ../panels/power/cc-power-panel.c:294
 #, c-format
 msgid "%s until empty (%.0lf%%)"
 msgstr "%s igjen før det er tomt (%.0lf%%)"
 
 #. TRANSLATORS: %1 is a percentage value. Note: this string is only
 #. * used when we don't have a time value
-#: ../panels/power/cc-power-panel.c:300
+#: ../panels/power/cc-power-panel.c:302
 #, c-format
 msgid "%.0lf%% charged"
 msgstr "%.0lf%% ladet"
@@ -2406,6 +2414,11 @@ msgstr "Glass"
 msgid "Sonar"
 msgstr "Sonar"
 
+#: ../panels/universal-access/cc-ua-panel.c:555
+#: ../panels/universal-access/cc-ua-panel.c:560
+msgid "No shortcut set"
+msgstr "Ingen snarvei satt"
+
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Keyboard;Mouse;a11y;Accessibility;"
@@ -2430,313 +2443,306 @@ msgstr "125%"
 msgid "150%"
 msgstr "150%"
 
-#: ../panels/universal-access/uap.ui.h:7
-msgid "<span size=\"x-large\">High/Inverse</span>"
-msgstr "<span size=\"x-large\">Høy/Invers</span>"
-
 #: ../panels/universal-access/uap.ui.h:8
-msgid "<span size=\"x-large\">High</span>"
-msgstr "<span size=\"x-large\">Høy</span>"
+#, no-c-format
+msgid "75%"
+msgstr "75%"
 
 #: ../panels/universal-access/uap.ui.h:9
-msgid "<span size=\"x-large\">Low</span>"
-msgstr "<span size=\"x-large\">Lav</span>"
-
-#: ../panels/universal-access/uap.ui.h:10
-msgid "<span size=\"x-large\">Normal</span>"
-msgstr "<span size=\"x-large\">Normal</span>"
-
-#: ../panels/universal-access/uap.ui.h:11
 msgid "Acceptance delay:"
 msgstr "Pause før aksept:"
 
-#: ../panels/universal-access/uap.ui.h:12
+#: ../panels/universal-access/uap.ui.h:10
 msgid "Beep when Caps and Num Lock are used"
 msgstr "Pip når Caps og Num Lock er i bruk"
 
-#: ../panels/universal-access/uap.ui.h:13
+#: ../panels/universal-access/uap.ui.h:11
 msgid "Beep when a key is"
 msgstr "Pip når en tast"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:12
 msgid "Beep when a key is rejected"
 msgstr "Pip når en tast avvises"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:13
 msgid "Beep when a modifer key is pressed"
 msgstr "Pip når endringstast er trykket ned"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:14
 msgid "Bounce Keys"
 msgstr "Sprettetaster"
 
-#: ../panels/universal-access/uap.ui.h:17
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Caribou"
 msgstr "Caribou"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:16
 msgid "Change contrast:"
 msgstr "Endre kontrast:"
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Closed Captioning"
 msgstr "Lukket bildetekst"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:18
 msgid "Contrast:"
 msgstr "Kontrast:"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:19
 msgid "Control the pointer using the keypad"
 msgstr "Kontroller peker med det numeriske tastaturet"
 
-#: ../panels/universal-access/uap.ui.h:22
+#: ../panels/universal-access/uap.ui.h:20
 msgid "Control the pointer using the video camera."
 msgstr "Kontroller pekeren med videokamera."
 
-#: ../panels/universal-access/uap.ui.h:23
-msgid "Ctrl+Alt+-"
-msgstr "Ctrl+Alt+-"
-
-#: ../panels/universal-access/uap.ui.h:24
-msgid "Ctrl+Alt+0"
-msgstr "Ctrl+Alt+0"
-
-#: ../panels/universal-access/uap.ui.h:25
-msgid "Ctrl+Alt+4"
-msgstr "Ctrl+Alt+4"
-
-#: ../panels/universal-access/uap.ui.h:26
-msgid "Ctrl+Alt+8"
-msgstr "Ctrl+Alt+8"
-
-#: ../panels/universal-access/uap.ui.h:27
-msgid "Ctrl+Alt+="
-msgstr "Ctrl+Alt+="
-
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:22
 msgid "D_elay:"
 msgstr "Paus_e:"
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:23
 msgid "Dasher"
 msgstr "Dasher"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Decrease size:"
 msgstr "Mindre størrelse:"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Disable if two keys are pressed together"
 msgstr "Slå av hvis to taster trykkes ned samtidig"
 
-#: ../panels/universal-access/uap.ui.h:33
-msgid "Display"
-msgstr "Vis"
-
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:26
 msgid "Display a textual description of speech and sounds"
 msgstr "Vis en tekstlig beskrivelse av tale og lyder"
 
-#: ../panels/universal-access/uap.ui.h:35
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Flash the entire screen"
 msgstr "La hele skjermen blinke"
 
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Flash the window title"
 msgstr "La tittelfeltet i vinduet blinke"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:29
 msgid "GOK"
 msgstr "GOK"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Hearing"
 msgstr "Hørsel"
 
-#: ../panels/universal-access/uap.ui.h:40
-msgid "High/Inverse"
-msgstr "Høy/omvendt"
-
-#: ../panels/universal-access/uap.ui.h:41
-msgid "HighContrast"
-msgstr "Høy kontrast"
-
-#: ../panels/universal-access/uap.ui.h:42
-msgid "HighContrastInverse"
-msgstr "Høy kontrast omvendt"
-
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Hover Click"
 msgstr "Dwell-klikk"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Ignores fast duplicate keypresses"
 msgstr "Ignorer raskt dupliserte tastaturtrykk"
 
-#: ../panels/universal-access/uap.ui.h:45
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Increase size:"
 msgstr "Større størrelse:"
 
-#: ../panels/universal-access/uap.ui.h:46
-msgid "Keyboard Settings..."
-msgstr "Innstillinger for tastatur …"
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Keyboard Settings"
+msgstr "Innstillinger for tastatur"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:37
 msgid "Larger"
 msgstr "Større"
 
-#: ../panels/universal-access/uap.ui.h:53
-msgid "LowContrast"
-msgstr "Lav kontrast"
-
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Mouse Keys"
 msgstr "Mustaster"
 
-#: ../panels/universal-access/uap.ui.h:55
-msgid "Mouse Settings..."
-msgstr "Innstillinger for mus …"
+#: ../panels/universal-access/uap.ui.h:41
+msgid "Mouse Settings"
+msgstr "Innstillinger for mus"
 
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Nomon"
 msgstr "Nomon"
 
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "Ingen"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:45
 msgid "On screen keyboard"
 msgstr "Tastatur på skjermen"
 
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:46
 msgid "OnBoard"
 msgstr "OnBoard"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Options..."
 msgstr "Alternativer …"
 
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Pointing and Clicking"
 msgstr "Pek og klikk"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "Setter inn en pause fra en tast trykkes ned til den godtas"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Screen Reader"
 msgstr "Skjermleser"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:51
+msgid "Screen keyboard"
+msgstr "Tastatur på skjermen"
+
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Seeing"
 msgstr "Syn"
 
-#: ../panels/universal-access/uap.ui.h:66
-msgid "Shift+Ctrl+Alt+-"
-msgstr "Shift+Ctrl+Alt+-"
-
-#: ../panels/universal-access/uap.ui.h:67
-msgid "Shift+Ctrl+Alt+="
-msgstr "Shift+Ctrl+Alt+="
-
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Simulated Secondary Click"
 msgstr "Simulert andreklikk"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Slow Keys"
 msgstr "Trege taster"
 
-#: ../panels/universal-access/uap.ui.h:74
-msgid "Sound Settings..."
-msgstr "Innstillinger for lyd …"
+#: ../panels/universal-access/uap.ui.h:59
+msgid "Sound Settings"
+msgstr "Innstillinger for lyd"
 
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Sticky Keys"
 msgstr "Klebrige taster"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Test flash"
 msgstr "Test blinking"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Text size:"
 msgstr "Tekststørrelse:"
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Behandler en sekvens med endringstaster som en tastekombinasjon"
 
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Trigger a click when the pointer hovers"
 msgstr "Initier klikk når pekeren henger over et punkt"
 
-#: ../panels/universal-access/uap.ui.h:80
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Utløs sekundærklikk ved å holde nede primærknappen"
 
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Turn on accessibility features from the keyboard"
 msgstr "Slå når funksjoner for tilgjengelighet fra tastaturet"
 
-#: ../panels/universal-access/uap.ui.h:82
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Turn on or off:"
 msgstr "Slå på eller av:"
 
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Type here to test settings"
 msgstr "Skriv her for å prøve ut innstillinger"
 
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Typing"
 msgstr "Skriving"
 
-#: ../panels/universal-access/uap.ui.h:85
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Typing Assistant"
 msgstr "Skriveassistent"
 
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "Bruk en visuell indikasjon når en varsellyd spilles av"
 
-#: ../panels/universal-access/uap.ui.h:87
-msgid "Use an alternative form of text input"
-msgstr "Bruk en alternativ form for inndata for tekst"
-
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Video Mouse"
 msgstr "Videomus"
 
-#: ../panels/universal-access/uap.ui.h:89
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Visual Alerts"
 msgstr "Synlige varsel"
 
-#: ../panels/universal-access/uap.ui.h:91
+#: ../panels/universal-access/uap.ui.h:74
 msgid "Zoom in:"
 msgstr "Zoom inn:"
 
-#: ../panels/universal-access/uap.ui.h:92
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Zoom out:"
 msgstr "Zoom ut:"
 
-#: ../panels/universal-access/uap.ui.h:93
+#: ../panels/universal-access/uap.ui.h:76
 msgid "_Motion threshold:"
 msgstr "_Terskel for bevegelse:"
 
-#: ../panels/universal-access/uap.ui.h:94
+#: ../panels/universal-access/uap.ui.h:77
 msgid "accepted"
 msgstr "godtatt"
 
-#: ../panels/universal-access/uap.ui.h:95
+#: ../panels/universal-access/uap.ui.h:78
 msgid "pressed"
 msgstr "trykket"
 
-#: ../panels/universal-access/uap.ui.h:96
+#: ../panels/universal-access/uap.ui.h:79
 msgid "rejected"
 msgstr "avvist"
+
+#: ../panels/universal-access/uap.ui.h:80
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">High/Inverse</span>"
+msgstr "<span size=\"x-large\">Høy/omvendt</span>"
+
+#: ../panels/universal-access/uap.ui.h:81
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">High</span>"
+msgstr "<span size=\"x-large\">Høy</span>"
+
+#: ../panels/universal-access/uap.ui.h:82
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">Low</span>"
+msgstr "<span size=\"x-large\">Lav</span>"
+
+#: ../panels/universal-access/uap.ui.h:83
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">Normal</span>"
+msgstr "<span size=\"x-large\">Normal</span>"
+
+#: ../panels/universal-access/uap.ui.h:84
+msgctxt "universal access, contrast"
+msgid "High"
+msgstr "Høy"
+
+#: ../panels/universal-access/uap.ui.h:85
+msgctxt "universal access, contrast"
+msgid "High/Inverse"
+msgstr "Høy/omvendt"
+
+#: ../panels/universal-access/uap.ui.h:86
+msgctxt "universal access, contrast"
+msgid "Low"
+msgstr "Lav"
+
+#: ../panels/universal-access/uap.ui.h:87
+msgctxt "universal access, contrast"
+msgid "Normal"
+msgstr "Normal"
+
+#. Translators: this refers to theme contrast and font size
+#: ../panels/universal-access/uap.ui.h:89
+msgctxt "universal access, seeing"
+msgid "Display"
+msgstr "Vis"
+
+#. Translators: this refers to screen magnifier
+#: ../panels/universal-access/uap.ui.h:91
+msgctxt "universal access, seeing"
+msgid "Zoom"
+msgstr "Zoom"
 
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
@@ -2820,21 +2826,21 @@ msgstr ""
 
 #: ../panels/user-accounts/um-account-type.c:35
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgctxt "Account type"
 msgid "Standard"
 msgstr "Standard"
 
 #: ../panels/user-accounts/um-account-type.c:37
 #: ../panels/user-accounts/data/account-dialog.ui.h:1
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgctxt "Account type"
 msgid "Administrator"
 msgstr "Administrator"
 
 #: ../panels/user-accounts/um-account-type.c:39
 #: ../panels/user-accounts/data/account-dialog.ui.h:3
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
 msgctxt "Account type"
 msgid "Supervised"
 msgstr "Overvåket"
@@ -3086,30 +3092,30 @@ msgstr "_Behold filer"
 msgid "_Cancel"
 msgstr "A_vbryt"
 
-#: ../panels/user-accounts/um-user-panel.c:472
+#: ../panels/user-accounts/um-user-panel.c:498
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Konto deaktivert"
 
-#: ../panels/user-accounts/um-user-panel.c:481
+#: ../panels/user-accounts/um-user-panel.c:506
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Settes ved neste innlogging"
 
-#: ../panels/user-accounts/um-user-panel.c:484
+#: ../panels/user-accounts/um-user-panel.c:509
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ingen"
 
-#: ../panels/user-accounts/um-user-panel.c:806
+#: ../panels/user-accounts/um-user-panel.c:831
 msgid "Failed to contact the accounts service"
 msgstr "Klarte ikke å kontakte kontotjenesten"
 
-#: ../panels/user-accounts/um-user-panel.c:808
+#: ../panels/user-accounts/um-user-panel.c:833
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Sjekk at kontotjenesten er installert og aktivert."
 
-#: ../panels/user-accounts/um-user-panel.c:841
+#: ../panels/user-accounts/um-user-panel.c:866
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -3117,12 +3123,12 @@ msgstr ""
 "Klikk på *-ikonet\n"
 "for å gjøre endringer"
 
-#: ../panels/user-accounts/um-user-panel.c:879
+#: ../panels/user-accounts/um-user-panel.c:904
 msgid "Create a user"
 msgstr "Lag en bruker"
 
-#: ../panels/user-accounts/um-user-panel.c:890
-#: ../panels/user-accounts/um-user-panel.c:1189
+#: ../panels/user-accounts/um-user-panel.c:915
+#: ../panels/user-accounts/um-user-panel.c:1214
 msgid ""
 "To create a user,\n"
 "click the * icon first"
@@ -3130,12 +3136,12 @@ msgstr ""
 "Klikk på *-ikonet\n"
 "for å lage en bruker"
 
-#: ../panels/user-accounts/um-user-panel.c:899
+#: ../panels/user-accounts/um-user-panel.c:924
 msgid "Delete the selected user"
 msgstr "Slett valgt bruker"
 
-#: ../panels/user-accounts/um-user-panel.c:911
-#: ../panels/user-accounts/um-user-panel.c:1194
+#: ../panels/user-accounts/um-user-panel.c:936
+#: ../panels/user-accounts/um-user-panel.c:1219
 msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
@@ -3143,11 +3149,11 @@ msgstr ""
 "Klikk på *-ikonet\n"
 "for å slette valgt bruker"
 
-#: ../panels/user-accounts/um-user-panel.c:1089
+#: ../panels/user-accounts/um-user-panel.c:1114
 msgid "My Account"
 msgstr "Min konto"
 
-#: ../panels/user-accounts/um-user-panel.c:1099
+#: ../panels/user-accounts/um-user-panel.c:1124
 msgid "Other Accounts"
 msgstr "Andre kontoer"
 
@@ -3173,16 +3179,16 @@ msgid "Create new account"
 msgstr "Lag ny konto"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
-msgid "_Account Type:"
-msgstr "Type _konto:"
+msgid "_Account Type"
+msgstr "Type _konto"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-msgid "_Full name:"
+msgid "_Full name"
 msgstr "_Fullt navn"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-msgid "_Username:"
-msgstr "Br_ukernavn:"
+msgid "_Username"
+msgstr "Br_ukernavn"
 
 #: ../panels/user-accounts/data/language-chooser.ui.h:1
 #: ../panels/user-accounts/data/photo-dialog.ui.h:3
@@ -3207,16 +3213,16 @@ msgstr ""
 "for alle brukere på dette systemet. <b>Ikke</b> ta med passord her.</small>"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:3
-msgid "C_onfirm password:"
-msgstr "B_ekreft passord:"
+msgid "C_onfirm password"
+msgstr "B_ekreft passord"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:4
 msgid "Ch_ange"
 msgstr "_Bytt"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:5
-msgid "Changing password for:"
-msgstr "Bytter passord for:"
+msgid "Changing password for"
+msgstr "Bytter passord for"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:6
 msgid "Choose a generated password"
@@ -3227,8 +3233,8 @@ msgid "Choose password at next login"
 msgstr "Velg passord ved neste pålogging"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:8
-msgid "Current _password:"
-msgstr "Gjeldende _passord:"
+msgid "Current _password"
+msgstr "Gjeldende _passord"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:9
 msgid "Disable this account"
@@ -3251,16 +3257,16 @@ msgid "Set a password now"
 msgstr "Sett et passord nå"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:14
-msgid "_Action:"
-msgstr "H_andling:"
+msgid "_Action"
+msgstr "H_andling"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:15
-msgid "_Hint:"
-msgstr "_Hint:"
+msgid "_Hint"
+msgstr "_Hint"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:16
-msgid "_New password:"
-msgstr "_Nytt passord:"
+msgid "_New password"
+msgstr "_Nytt passord"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:17
 msgid "_Show password"
@@ -3295,29 +3301,25 @@ msgstr "Ta et bilde"
 msgid "Account Information"
 msgstr "Kontoinformasjon"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
-msgid "Account type:"
-msgstr "Kontotype:"
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
+msgid "Account type"
+msgstr "Type konto"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
-msgid "Automatic Login:"
-msgstr "Automatisk pålogging:"
+msgid "Automatic Login"
+msgstr "Automatisk pålogging"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
-msgid "Fingerprint Login:"
-msgstr "Innlogging med fingeravtrykk:"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
-msgid "Language:"
-msgstr "Språk:"
+msgid "Fingerprint Login"
+msgstr "Innlogging med fingeravtrykk"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
 msgid "Login Options"
 msgstr "Alternativer for pålogging"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
-msgid "Password:"
-msgstr "Passord:"
+msgid "Password"
+msgstr "Passord"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:2
 msgid "Left index finger"
