@@ -22,6 +22,8 @@
  *
  */
 
+#include <config.h>
+
 #include <math.h>
 #include "cc-ua-panel.h"
 
