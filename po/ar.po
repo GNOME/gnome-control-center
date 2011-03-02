@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-01 16:38+0200\n"
-"PO-Revision-Date: 2011-03-01 16:38+0300\n"
+"POT-Creation-Date: 2011-03-02 17:35+0200\n"
+"PO-Revision-Date: 2011-03-02 17:35+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -232,8 +232,9 @@ msgstr "موسّعة"
 msgid "Tile"
 msgstr "مبلّطة"
 
+#. Translators: this refers to screen magnifier
 #: ../panels/background/background.ui.h:8
-#: ../panels/universal-access/uap.ui.h:82
+#: ../panels/universal-access/uap.ui.h:84
 msgid "Zoom"
 msgstr "التقريب"
 
@@ -407,7 +408,7 @@ msgstr "الشاشة"
 #: ../panels/display/display-capplet.ui.h:3
 #: ../panels/display/xrandr-capplet.c:333
 #: ../panels/display/xrandr-capplet.c:372
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:53
 msgid "Normal"
 msgstr "طبيعي"
 
@@ -518,14 +519,27 @@ msgstr "تعذّر اكتشاف أجهزة العرض"
 msgid "Could not get screen information"
 msgstr "تعذّرت معرفة معلومات الشاشة"
 
+#. Translators: VESA is an techncial acronym, don't translate it.
+#: ../panels/info/cc-info-panel.c:364
+#, c-format
+msgid "VESA: %s"
+msgstr "VESA: %s"
+
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
+#: ../panels/info/cc-info-panel.c:388 ../panels/network/panel-common.c:72
+#: ../panels/network/panel-common.c:151
+msgid "Unknown"
+msgstr "غير معروف"
+
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:479
+#: ../panels/info/cc-info-panel.c:526
 #, c-format
 msgid "%d-bit"
 msgstr "%d بتة"
 
-#: ../panels/info/cc-info-panel.c:493
+#: ../panels/info/cc-info-panel.c:540
 #, c-format
 msgid "%u byte"
 msgid_plural "%u bytes"
@@ -536,45 +550,45 @@ msgstr[3] "%u بايت"
 msgstr[4] "%u بايت"
 msgstr[5] "%u بايت"
 
-#: ../panels/info/cc-info-panel.c:501
+#: ../panels/info/cc-info-panel.c:548
 #, c-format
 msgid "%.1f KB"
 msgstr "%.1f ك.بايت"
 
-#: ../panels/info/cc-info-panel.c:506
+#: ../panels/info/cc-info-panel.c:553
 #, c-format
 msgid "%.1f MB"
 msgstr "%.1f م.بايت"
 
-#: ../panels/info/cc-info-panel.c:511
+#: ../panels/info/cc-info-panel.c:558
 #, c-format
 msgid "%.1f GB"
 msgstr "%.1f ج.بايت"
 
-#: ../panels/info/cc-info-panel.c:516
+#: ../panels/info/cc-info-panel.c:563
 #, c-format
 msgid "%.1f TB"
 msgstr "%.1f ت.بايت"
 
-#: ../panels/info/cc-info-panel.c:521
+#: ../panels/info/cc-info-panel.c:568
 #, c-format
 msgid "%.1f PB"
 msgstr "%.1f ب.بايت"
 
-#: ../panels/info/cc-info-panel.c:526
+#: ../panels/info/cc-info-panel.c:573
 #, c-format
 msgid "%.1f EB"
 msgstr "%.1f إ.بايت"
 
-#: ../panels/info/cc-info-panel.c:637
+#: ../panels/info/cc-info-panel.c:684
 msgid "Unknown model"
-msgstr "طِراز مجهول"
+msgstr "طِراز غير معروف"
 
-#: ../panels/info/cc-info-panel.c:720
+#: ../panels/info/cc-info-panel.c:767
 msgid "The next login will attempt to use the standard experience."
 msgstr "الولوج التالي سيحاول استخدام الواجهة الاعتيادية."
 
-#: ../panels/info/cc-info-panel.c:722
+#: ../panels/info/cc-info-panel.c:769
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
@@ -583,36 +597,36 @@ msgstr ""
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:771
+#: ../panels/info/cc-info-panel.c:811
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "تقليدية"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:777
+#: ../panels/info/cc-info-panel.c:817
 msgctxt "Experience"
 msgid "Standard"
 msgstr "اعتيادية"
 
-#: ../panels/info/cc-info-panel.c:909
+#: ../panels/info/cc-info-panel.c:949
 #: ../panels/keyboard/keyboard-shortcuts.c:1711
 msgid "Section"
 msgstr "القسم"
 
-#: ../panels/info/cc-info-panel.c:918 ../panels/info/info.ui.h:14
+#: ../panels/info/cc-info-panel.c:958 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "عام"
 
-#: ../panels/info/cc-info-panel.c:924 ../panels/info/info.ui.h:3
+#: ../panels/info/cc-info-panel.c:964 ../panels/info/info.ui.h:3
 msgid "Default Applications"
 msgstr "التطبيقات المبدئية"
 
-#: ../panels/info/cc-info-panel.c:929 ../panels/info/info.ui.h:9
+#: ../panels/info/cc-info-panel.c:969 ../panels/info/info.ui.h:9
 msgid "Graphics"
 msgstr "الرسوميات"
 
-#: ../panels/info/cc-info-panel.c:954
+#: ../panels/info/cc-info-panel.c:994
 #, c-format
 msgid "Version %s"
 msgstr "الإصدارة %s"
@@ -872,7 +886,7 @@ msgstr "اختصار مخصص"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:777
 msgid "<Unknown Action>"
-msgstr "<إجراء مجهول>"
+msgstr "<إجراء غير معروف>"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1176
 msgid "Error saving the new shortcut"
@@ -959,7 +973,7 @@ msgstr "_تكرار نقر المفتاح عند الضغط عليه"
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Long"
 msgstr "طويل"
 
@@ -978,7 +992,7 @@ msgstr "ال_سرعة:"
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Short"
 msgstr "قصير"
 
@@ -1566,13 +1580,13 @@ msgstr "فعّل اللف الأ_فقي"
 
 #. high sensitivity
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:37
 msgid "High"
 msgstr "عال"
 
 #. large threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:13
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Large"
 msgstr "كبير"
 
@@ -1582,7 +1596,7 @@ msgstr "حدد موقع المؤشر"
 
 #. low sensitivity
 #: ../panels/mouse/gnome-mouse-properties.ui.h:17
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Low"
 msgstr "منخفض"
 
@@ -1612,7 +1626,7 @@ msgstr "أ_ظهر موقع الفأرة عند ضغط مفتاح Ctrl"
 
 #. small threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:28
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Small"
 msgstr "صغير"
 
@@ -1776,7 +1790,7 @@ msgstr "الطريقة:"
 msgid "Network Name:"
 msgstr "اسم الشبكة:"
 
-#: ../panels/network/network.ui.h:19 ../panels/universal-access/uap.ui.h:51
+#: ../panels/network/network.ui.h:19 ../panels/universal-access/uap.ui.h:52
 msgid "None"
 msgstr "لا شيء"
 
@@ -1807,12 +1821,6 @@ msgstr "قناع الشبكة الفرعية:"
 #: ../panels/network/network.ui.h:27
 msgid "Username:"
 msgstr "اسم المستخدم:"
-
-#. TRANSLATORS: device type
-#. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:72 ../panels/network/panel-common.c:151
-msgid "Unknown"
-msgstr "مجهول"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:76
@@ -1852,7 +1860,7 @@ msgstr "مركزية"
 #. TRANSLATORS: device status
 #: ../panels/network/panel-common.c:177
 msgid "Status unknown"
-msgstr "الحالة مجهولة"
+msgstr "الحالة غير معروفة"
 
 #. TRANSLATORS: device status
 #: ../panels/network/panel-common.c:181
@@ -2537,187 +2545,188 @@ msgstr "قلل الحجم:"
 msgid "Disable if two keys are pressed together"
 msgstr "عطِّل إذا ضُغط مفتاحان في آن واحد"
 
-#: ../panels/universal-access/uap.ui.h:30
+#. Translators: this refers to theme contrast and font size
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Display"
 msgstr "جهاز العرض"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Display a textual description of speech and sounds"
 msgstr "اعرض وصفا نصيا للكلام والصوت"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Flash the entire screen"
 msgstr "أومض كل الشاشة"
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:34
 msgid "Flash the window title"
 msgstr "أومض عنوان النافذة"
 
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:35
 msgid "GOK"
 msgstr "GOK"
 
-#: ../panels/universal-access/uap.ui.h:35
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Hearing"
 msgstr "السمع"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:38
 msgid "High/Inverse"
 msgstr "عال\\معكوس"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Hover Click"
 msgstr "النقر السلبي"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Ignores fast duplicate keypresses"
 msgstr "تجاهل الضغطات المكررة السريعة للمفاتيح"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:41
 msgid "Increase size:"
 msgstr "كبّر الحجم:"
 
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Keyboard Settings"
 msgstr "إعدادات لوحة المفاتيح"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:45
 msgid "Larger"
 msgstr "أكبر"
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Mouse Keys"
 msgstr "مفاتيح الفأرة"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Mouse Settings"
 msgstr "إعدادات الفأرة"
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:51
 msgid "Nomon"
 msgstr "Nomon"
 
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/uap.ui.h:54
 msgid "On screen keyboard"
 msgstr "لوحة مفاتيح على الشاشة"
 
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:55
 msgid "OnBoard"
 msgstr "OnBoard"
 
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Options..."
 msgstr "الخيارات..."
 
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:57
 msgid "Pointing and Clicking"
 msgstr "التأشير والنقر"
 
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:58
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "تضع تأخيرا بين ضغط المفتاح وقبوله"
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Screen Reader"
 msgstr "قارئ الشاشة"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Screen keyboard"
 msgstr "لوحة مفاتيح على الشاشة"
 
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Seeing"
 msgstr "النظر"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Simulated Secondary Click"
 msgstr "محاكاة النقر الثانوي"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Slow Keys"
 msgstr "مفاتيح بطيئة"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Sound Settings"
 msgstr "إعدادات الصوت"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Sticky Keys"
 msgstr "مفاتيح ملتصقة"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Test flash"
 msgstr "وميض للاختبار"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Text size:"
 msgstr "حجم النص:"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "تعتبر تتابعا من المفاتيح المُغيِّرة كما لو كان اختصارا"
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Trigger a click when the pointer hovers"
 msgstr "ابتدئ نقرة عند حومان المؤشر"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:74
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "ابتدئ نقرة ثانوية عن طريق الاستمرار بضغط الزر الأولي"
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Turn on accessibility features from the keyboard"
 msgstr "شغِّل خصائص الإتاحة من لوحة المفاتيح"
 
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:76
 msgid "Turn on or off:"
 msgstr "شغِّل أو عطِّل:"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:77
 msgid "Type here to test settings"
 msgstr "اكتب هنا لاختبار الإعدادات"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:78
 msgid "Typing"
 msgstr "الكتابة"
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:79
 msgid "Typing Assistant"
 msgstr "مساعدة الكتابة"
 
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:80
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "أظهر مؤشرا بصريا عند حدوث تنبيه صوتي"
 
-#: ../panels/universal-access/uap.ui.h:80
+#: ../panels/universal-access/uap.ui.h:81
 msgid "Video Mouse"
 msgstr "فأرة الفديو"
 
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:82
 msgid "Visual Alerts"
 msgstr "التنبيهات البصرية"
 
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:85
 msgid "Zoom in:"
 msgstr "قرّب:"
 
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:86
 msgid "Zoom out:"
 msgstr "بعّد:"
 
-#: ../panels/universal-access/uap.ui.h:85
+#: ../panels/universal-access/uap.ui.h:87
 msgid "_Motion threshold:"
 msgstr "عتبة الحر_كة:"
 
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:88
 msgid "accepted"
 msgstr "قُبِلَ"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:89
 msgid "pressed"
 msgstr "ضُغِطَ"
 
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:90
 msgid "rejected"
 msgstr "رُفِضَ"
 
