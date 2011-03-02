@@ -140,10 +140,8 @@ static void
 cc_shell_category_view_constructed (GObject *object)
 {
   CcShellCategoryViewPrivate *priv = CC_SHELL_CATEGORY_VIEW (object)->priv;
-  GtkWidget *iconview, *vbox, *self;
+  GtkWidget *iconview, *vbox;
   GtkWidget *alignment;
-
-  self = GTK_WIDGET (object);
 
   iconview = cc_shell_item_view_new ();
   gtk_icon_view_set_model (GTK_ICON_VIEW (iconview), priv->model);

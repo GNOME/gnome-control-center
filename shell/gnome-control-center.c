@@ -643,7 +643,6 @@ fill_model (GnomeControlCenter *shell)
 static void
 load_panel_plugins (GnomeControlCenter *shell)
 {
-  GType panel_type;
   GList *modules;
 
   /* only allow this function to be run once to prevent modules being loaded
@@ -653,7 +652,7 @@ load_panel_plugins (GnomeControlCenter *shell)
     return;
 
   /* make sure the base type is registered */
-  panel_type = g_type_from_name ("CcPanel");
+  g_type_from_name ("CcPanel");
 
   shell->priv->extension_point
     = g_io_extension_point_register (CC_SHELL_PANEL_EXTENSION_POINT);
