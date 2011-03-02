@@ -18,6 +18,7 @@
  *
  */
 
+#include <config.h>
 #include <glib/gi18n.h>
 #include <arpa/inet.h>
 #include <stdlib.h>
