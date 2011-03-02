@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-27 23:00+0200\n"
-"PO-Revision-Date: 2011-02-27 23:01+0200\n"
+"POT-Creation-Date: 2011-03-02 20:00+0200\n"
+"PO-Revision-Date: 2011-03-02 20:02+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -240,7 +240,6 @@ msgid "Tile"
 msgstr "פרישה"
 
 #: ../panels/background/background.ui.h:8
-#: ../panels/universal-access/uap.ui.h:83
 msgid "Zoom"
 msgstr "תקריב"
 
@@ -414,7 +413,7 @@ msgstr "צג"
 #: ../panels/display/display-capplet.ui.h:3
 #: ../panels/display/xrandr-capplet.c:333
 #: ../panels/display/xrandr-capplet.c:372
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Normal"
 msgstr "רגיל"
 
@@ -526,59 +525,72 @@ msgstr "לא ניתן לזהות את הצגים"
 msgid "Could not get screen information"
 msgstr "לא ניתן לקבל את פרטי הצג"
 
+#. Translators: VESA is an techncial acronym, don't translate it.
+#: ../panels/info/cc-info-panel.c:364
+#, c-format
+msgid "VESA: %s"
+msgstr "VESA: %s"
+
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
+#: ../panels/info/cc-info-panel.c:388 ../panels/network/panel-common.c:72
+#: ../panels/network/panel-common.c:151
+msgid "Unknown"
+msgstr "לא ידוע"
+
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:479
+#: ../panels/info/cc-info-panel.c:526
 #, c-format
 msgid "%d-bit"
 msgstr "%d-סיביות"
 
-#: ../panels/info/cc-info-panel.c:493
+#: ../panels/info/cc-info-panel.c:540
 #, c-format
 msgid "%u byte"
 msgid_plural "%u bytes"
 msgstr[0] "בית אחד"
 msgstr[1] "%u בתים"
 
-#: ../panels/info/cc-info-panel.c:501
+#: ../panels/info/cc-info-panel.c:548
 #, c-format
 msgid "%.1f KB"
 msgstr "%.1f ק״ב"
 
-#: ../panels/info/cc-info-panel.c:506
+#: ../panels/info/cc-info-panel.c:553
 #, c-format
 msgid "%.1f MB"
 msgstr "%.1f מ״ב"
 
-#: ../panels/info/cc-info-panel.c:511
+#: ../panels/info/cc-info-panel.c:558
 #, c-format
 msgid "%.1f GB"
 msgstr "%.1f ג״ב"
 
-#: ../panels/info/cc-info-panel.c:516
+#: ../panels/info/cc-info-panel.c:563
 #, c-format
 msgid "%.1f TB"
 msgstr "%.1f ט״ב"
 
-#: ../panels/info/cc-info-panel.c:521
+#: ../panels/info/cc-info-panel.c:568
 #, c-format
 msgid "%.1f PB"
 msgstr "%.1f פ״ב"
 
-#: ../panels/info/cc-info-panel.c:526
+#: ../panels/info/cc-info-panel.c:573
 #, c-format
 msgid "%.1f EB"
 msgstr "%.1f א״ב"
 
-#: ../panels/info/cc-info-panel.c:637
+#: ../panels/info/cc-info-panel.c:684
 msgid "Unknown model"
 msgstr "דגם לא ידוע"
 
-#: ../panels/info/cc-info-panel.c:720
+#: ../panels/info/cc-info-panel.c:767
 msgid "The next login will attempt to use the standard experience."
 msgstr "בכניסה הבאה יתבצע ניסיון להשתמש בחוויה הרגילה."
 
-#: ../panels/info/cc-info-panel.c:722
+#: ../panels/info/cc-info-panel.c:769
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
@@ -586,36 +598,36 @@ msgstr "בכניסה הבאה יעשה שימוש במצב השחזור המיו
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:771
+#: ../panels/info/cc-info-panel.c:811
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "שחזור"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:777
+#: ../panels/info/cc-info-panel.c:817
 msgctxt "Experience"
 msgid "Standard"
 msgstr "רגיל"
 
-#: ../panels/info/cc-info-panel.c:909
+#: ../panels/info/cc-info-panel.c:949
 #: ../panels/keyboard/keyboard-shortcuts.c:1711
 msgid "Section"
 msgstr "אגף"
 
-#: ../panels/info/cc-info-panel.c:918 ../panels/info/info.ui.h:14
+#: ../panels/info/cc-info-panel.c:958 ../panels/info/info.ui.h:14
 msgid "Overview"
 msgstr "סקירה"
 
-#: ../panels/info/cc-info-panel.c:924 ../panels/info/info.ui.h:3
+#: ../panels/info/cc-info-panel.c:964 ../panels/info/info.ui.h:3
 msgid "Default Applications"
 msgstr "יישומי בררת המחדל"
 
-#: ../panels/info/cc-info-panel.c:929 ../panels/info/info.ui.h:9
+#: ../panels/info/cc-info-panel.c:969 ../panels/info/info.ui.h:9
 msgid "Graphics"
 msgstr "גרפיקה"
 
-#: ../panels/info/cc-info-panel.c:954
+#: ../panels/info/cc-info-panel.c:994
 #, c-format
 msgid "Version %s"
 msgstr "גרסה %s"
@@ -937,7 +949,7 @@ msgstr "סמן מה_בהב בשדות טקסט"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 #: ../panels/mouse/gnome-mouse-properties.ui.h:1
-#: ../panels/universal-access/uap.ui.h:23
+#: ../panels/universal-access/uap.ui.h:21
 msgid "Cursor blinks speed"
 msgstr "מהירות הבהוב הסמן"
 
@@ -963,7 +975,7 @@ msgstr "לחיצת המקש _חוזרת כאשר המקש נשאר לחוץ"
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Long"
 msgstr "ארוך"
 
@@ -982,7 +994,7 @@ msgstr "_מהירות:"
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Short"
 msgstr "קצר"
 
@@ -1568,13 +1580,12 @@ msgstr "ה_פעלת גלילה אופקית"
 
 #. high sensitivity
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
-#: ../panels/universal-access/uap.ui.h:34
 msgid "High"
 msgstr "גבוה"
 
 #. large threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:13
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Large"
 msgstr "גדול"
 
@@ -1584,7 +1595,6 @@ msgstr "איתור סמן"
 
 #. low sensitivity
 #: ../panels/mouse/gnome-mouse-properties.ui.h:17
-#: ../panels/universal-access/uap.ui.h:47
 msgid "Low"
 msgstr "נמוך"
 
@@ -1614,7 +1624,7 @@ msgstr "ה_צגת מיקום הסמן בעת לחיצה על Ctrl"
 
 #. small threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:28
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:58
 msgid "Small"
 msgstr "קטן"
 
@@ -1675,21 +1685,21 @@ msgstr "הגדרת העדפות העכבר ומשטח המגע שלך"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "משטח מגע;סמן;לחיצה;טפיחה;כפולה;לחצן;כדור שליטה;"
 
-#: ../panels/network/cc-network-panel.c:962
+#: ../panels/network/cc-network-panel.c:968
 msgid "Network proxy"
 msgstr "מתווך הרשת"
 
-#: ../panels/network/cc-network-panel.c:971
+#: ../panels/network/cc-network-panel.c:977
 msgid "Set the system proxy settings"
 msgstr "הגדרת תצורת מתווך המערכת"
 
 #. TRANSLATORS: the user is running a NM that is too new and API compatible
-#: ../panels/network/cc-network-panel.c:1115
+#: ../panels/network/cc-network-panel.c:1121
 msgid "The running NetworkManager version is not compatible (too new)."
 msgstr "הגרסה הפעילה של NetworkManager אינה נתמכת (חדשה מדי)."
 
 #. TRANSLATORS: the user is running a NM that is too old and API compatible
-#: ../panels/network/cc-network-panel.c:1121
+#: ../panels/network/cc-network-panel.c:1127
 msgid "The running NetworkManager version is not compatible (too old)."
 msgstr "הגרסה הפעילה של NetworkManager אינה נתמכת (ישנה מדי)."
 
@@ -1814,108 +1824,102 @@ msgid "None"
 msgstr "ללא"
 
 #. TRANSLATORS: device type
-#. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:64 ../panels/network/panel-common.c:136
-msgid "Unknown"
-msgstr "לא ידוע"
-
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:68
+#: ../panels/network/panel-common.c:76
 msgid "Wired"
 msgstr "קווי"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:72
+#: ../panels/network/panel-common.c:80
 msgid "Wireless"
 msgstr "אלחוטי"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:77
+#: ../panels/network/panel-common.c:87
 msgid "Mobile broadband"
 msgstr "רשת סלולרית"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:81
+#: ../panels/network/panel-common.c:92
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:85
+#: ../panels/network/panel-common.c:96
 msgid "Mesh"
 msgstr "סריג"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:140
+#: ../panels/network/panel-common.c:155
 msgid "Ad-hoc"
 msgstr "ייעודית"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:144
+#: ../panels/network/panel-common.c:159
 msgid "Infrastructure"
 msgstr "תשתית"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:162
+#: ../panels/network/panel-common.c:177
 msgid "Status unknown"
 msgstr "המצב אינו ידוע"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:166
+#: ../panels/network/panel-common.c:181
 msgid "Unmanaged"
 msgstr "לא מנוהל"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:170
+#: ../panels/network/panel-common.c:185
 msgid "Unavailable"
 msgstr "לא זמין"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:174
+#: ../panels/network/panel-common.c:189
 msgid "Disconnected"
 msgstr "מנותק"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:178
+#: ../panels/network/panel-common.c:193
 msgid "Preparing connection"
 msgstr "החיבור בהכנות"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:182
+#: ../panels/network/panel-common.c:197
 msgid "Configuring connection"
 msgstr "החיבור מוגדר"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:186
+#: ../panels/network/panel-common.c:201
 msgid "Authenticating"
 msgstr "בהליכי אימות"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:190
+#: ../panels/network/panel-common.c:205
 msgid "Getting network address"
 msgstr "כתובת הרשת מתקבלת"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:194
+#: ../panels/network/panel-common.c:209
 msgid "Checking network address"
 msgstr "כתובת הרשת נבדקת"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:198
+#: ../panels/network/panel-common.c:213
 msgid "Connected"
 msgstr "מחובר"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:202
+#: ../panels/network/panel-common.c:217
 msgid "Disconnecting"
 msgstr "מתבצע ניתוק"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:206
+#: ../panels/network/panel-common.c:221
 msgid "Failed to connect"
 msgstr "אירע כשל בעת החיבור"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:210
+#: ../panels/network/panel-common.c:225
 msgid "Status unknown (missing)"
 msgstr "המצב אינו ידוע (חסר)"
 
@@ -2404,6 +2408,11 @@ msgstr "זכוכית"
 msgid "Sonar"
 msgstr "רדאר"
 
+#: ../panels/universal-access/cc-ua-panel.c:555
+#: ../panels/universal-access/cc-ua-panel.c:560
+msgid "No shortcut set"
+msgstr "לא הוגדר קיצור דרך"
+
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Keyboard;Mouse;a11y;Accessibility;"
@@ -2428,285 +2437,306 @@ msgstr "125%"
 msgid "150%"
 msgstr "150%"
 
-#: ../panels/universal-access/uap.ui.h:7
-msgid "<span size=\"x-large\">High/Inverse</span>"
-msgstr "<span size=\"x-large\">גבוהה/הפוכה</span>"
-
 #: ../panels/universal-access/uap.ui.h:8
-msgid "<span size=\"x-large\">High</span>"
-msgstr "<span size=\"x-large\">גבוהה</span>"
+#, no-c-format
+msgid "75%"
+msgstr "75%"
 
 #: ../panels/universal-access/uap.ui.h:9
-msgid "<span size=\"x-large\">Low</span>"
-msgstr "<span size=\"x-large\">נמוכה</span>"
-
-#: ../panels/universal-access/uap.ui.h:10
-msgid "<span size=\"x-large\">Normal</span>"
-msgstr "<span size=\"x-large\">רגילה</span>"
-
-#: ../panels/universal-access/uap.ui.h:11
 msgid "Acceptance delay:"
 msgstr "השהיית קבלה:"
 
-#: ../panels/universal-access/uap.ui.h:12
+#: ../panels/universal-access/uap.ui.h:10
 msgid "Beep when Caps and Num Lock are used"
 msgstr "צפצוף בעת השימוש ב־Caps Lock וב־Num Lock"
 
-#: ../panels/universal-access/uap.ui.h:13
+#: ../panels/universal-access/uap.ui.h:11
 msgid "Beep when a key is"
 msgstr "צפצוף בעת ביצוע פעולה על מקש"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:12
 msgid "Beep when a key is rejected"
 msgstr "צפצוף בעת דחיית לחיצת מקש"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:13
 msgid "Beep when a modifer key is pressed"
 msgstr "צפצוף בעת לחיצה על מקשי החלפה"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:14
 msgid "Bounce Keys"
 msgstr "מקשים קופצים"
 
-#: ../panels/universal-access/uap.ui.h:17
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Caribou"
 msgstr "Caribou"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:16
 msgid "Change contrast:"
 msgstr "שינוי הבהירות:"
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Closed Captioning"
 msgstr "כתוביות סיוע"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:18
 msgid "Contrast:"
 msgstr "ניגודיות:"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:19
 msgid "Control the pointer using the keypad"
 msgstr "שליטה על סמן העכבר באמצעות לחצני העכבר."
 
-#: ../panels/universal-access/uap.ui.h:22
+#: ../panels/universal-access/uap.ui.h:20
 msgid "Control the pointer using the video camera."
 msgstr "שליטה על סמן העכבר באמצעות מצלמת וידאו."
 
-#: ../panels/universal-access/uap.ui.h:24
+#: ../panels/universal-access/uap.ui.h:22
 msgid "D_elay:"
 msgstr "ה_שהיה:"
 
-#: ../panels/universal-access/uap.ui.h:25
+#: ../panels/universal-access/uap.ui.h:23
 msgid "Dasher"
 msgstr "Dasher"
 
-#: ../panels/universal-access/uap.ui.h:26
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Decrease size:"
 msgstr "הקטנת הגודל:"
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Disable if two keys are pressed together"
 msgstr "נטרול אם שני מקשים נלחצים ביחד"
 
-#: ../panels/universal-access/uap.ui.h:28
-msgid "Display"
-msgstr "תצוגה"
-
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:26
 msgid "Display a textual description of speech and sounds"
 msgstr "הצגת תיאור מילולי של דיבור וצלילים."
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Flash the entire screen"
 msgstr "הבהוב המסך כולו"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Flash the window title"
 msgstr "הבהוב כותרת החלון"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:29
 msgid "GOK"
 msgstr "GOK"
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Hearing"
 msgstr "שמיעה"
 
-#: ../panels/universal-access/uap.ui.h:35
-msgid "High/Inverse"
-msgstr "גבוהה/הפוכה"
-
-#: ../panels/universal-access/uap.ui.h:36
-msgid "HighContrast"
-msgstr "ניגודיות_גבוהה"
-
-#: ../panels/universal-access/uap.ui.h:37
-msgid "HighContrastInverse"
-msgstr "ניגודית_גבוהה_הפוכה"
-
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Hover Click"
 msgstr "לחיצה במעבר מעל"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Ignores fast duplicate keypresses"
 msgstr "התעלמות מלחיצות מקשים כפולות מהירות"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Increase size:"
 msgstr "הגדלת הגודל"
 
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/universal-access/uap.ui.h:34
 msgid "Keyboard Settings"
 msgstr "הגדרות המקלדת"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:37
 msgid "Larger"
 msgstr "גדול יותר"
 
-#: ../panels/universal-access/uap.ui.h:48
-msgid "LowContrast"
-msgstr "ניגודיות_נמוכה"
-
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Mouse Keys"
 msgstr "מקשי עכבר"
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:41
 msgid "Mouse Settings"
 msgstr "הגדרות העכבר"
 
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Nomon"
 msgstr "Nomon"
 
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "ללא"
 
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:45
 msgid "On screen keyboard"
 msgstr "מקלדת על המסך"
 
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:46
 msgid "OnBoard"
 msgstr "OnBoard"
 
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Options..."
 msgstr "אפשרויות..."
 
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Pointing and Clicking"
 msgstr "הצבעה ולחיצה"
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "הוספת השהיה בין לחיצת המקש לבין קבלת הלחיצה."
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Screen Reader"
 msgstr "מקריא מסך"
 
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:51
 msgid "Screen keyboard"
 msgstr "מקלדת על המסך"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Seeing"
 msgstr "ראייה"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Simulated Secondary Click"
 msgstr "לחיצה שנייה מדומה"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Slow Keys"
 msgstr "מקשים אטיים"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Sound Settings"
 msgstr "הגדרות שמע"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Sticky Keys"
 msgstr "מקשים דביקים"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Test flash"
 msgstr "בדיקת ההבהוב"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Text size:"
 msgstr "גודל הטקסט:"
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "התייחסות לרצף של מקשי החלפה כצירוף מקשים."
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Trigger a click when the pointer hovers"
 msgstr "הפעלת לחיצה כאשר העכבר עובר מעל."
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "הפעלת לחיצה משנית על ידי החזקת הלחצן הראשי"
 
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Turn on accessibility features from the keyboard"
 msgstr "הפעלת תכונות נגישות מהמקלדת"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Turn on or off:"
 msgstr "הפעלה או כיבוי:"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Type here to test settings"
 msgstr "ניתן לכתוב כאן כדי לבדוק את ההגדרות"
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Typing"
 msgstr "הקלדה"
 
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Typing Assistant"
 msgstr "מסייע ההקלדה"
 
-#: ../panels/universal-access/uap.ui.h:80
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "שימוש בחיווי חזותי כאשר מושמע צליל התראה."
 
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Video Mouse"
 msgstr "עכבר בווידאו"
 
-#: ../panels/universal-access/uap.ui.h:82
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Visual Alerts"
 msgstr "התראות חזותיות"
 
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:74
 msgid "Zoom in:"
 msgstr "התקרבות:"
 
-#: ../panels/universal-access/uap.ui.h:85
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Zoom out:"
 msgstr "התרחקות:"
 
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:76
 msgid "_Motion threshold:"
 msgstr "_סף תנועה:"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:77
 msgid "accepted"
 msgstr "התקבל"
 
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:78
 msgid "pressed"
 msgstr "נלחץ"
 
-#: ../panels/universal-access/uap.ui.h:89
+#: ../panels/universal-access/uap.ui.h:79
 msgid "rejected"
 msgstr "נדחה"
+
+#: ../panels/universal-access/uap.ui.h:80
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">High/Inverse</span>"
+msgstr "<span size=\"x-large\">גבוהה/הפוכה</span>"
+
+#: ../panels/universal-access/uap.ui.h:81
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">High</span>"
+msgstr "<span size=\"x-large\">גבוהה</span>"
+
+#: ../panels/universal-access/uap.ui.h:82
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">Low</span>"
+msgstr "<span size=\"x-large\">נמוכה</span>"
+
+#: ../panels/universal-access/uap.ui.h:83
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">Normal</span>"
+msgstr "<span size=\"x-large\">רגילה</span>"
+
+#: ../panels/universal-access/uap.ui.h:84
+msgctxt "universal access, contrast"
+msgid "High"
+msgstr "גבוהה"
+
+#: ../panels/universal-access/uap.ui.h:85
+msgctxt "universal access, contrast"
+msgid "High/Inverse"
+msgstr "גבוהה/הפוכה"
+
+#: ../panels/universal-access/uap.ui.h:86
+msgctxt "universal access, contrast"
+msgid "Low"
+msgstr "נמוכה"
+
+#: ../panels/universal-access/uap.ui.h:87
+msgctxt "universal access, contrast"
+msgid "Normal"
+msgstr "רגילה"
+
+#. Translators: this refers to theme contrast and font size
+#: ../panels/universal-access/uap.ui.h:89
+msgctxt "universal access, seeing"
+msgid "Display"
+msgstr "תצוגה"
+
+#. Translators: this refers to screen magnifier
+#: ../panels/universal-access/uap.ui.h:91
+msgctxt "universal access, seeing"
+msgid "Zoom"
+msgstr "תקריב"
 
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
@@ -3367,6 +3397,15 @@ msgstr "לוח בקרה"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_כל ההגדרות"
+
+#~ msgid "HighContrast"
+#~ msgstr "ניגודיות_גבוהה"
+
+#~ msgid "HighContrastInverse"
+#~ msgstr "ניגודית_גבוהה_הפוכה"
+
+#~ msgid "LowContrast"
+#~ msgstr "ניגודיות_נמוכה"
 
 #~ msgid "Driver"
 #~ msgstr "מנהל התקן"
