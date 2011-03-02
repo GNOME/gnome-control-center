@@ -251,7 +251,6 @@ add_key (GtkWidget *widget,
   GtkComboBox *box = GTK_COMBO_BOX (widget);
   GtkTreeModel *model = gtk_combo_box_get_model (box);
   GtkListStore *store = GTK_LIST_STORE (model);
-  gboolean retval;
 
   info.text = text;
   info.found = FALSE;
@@ -270,11 +269,6 @@ add_key (GtkWidget *widget,
                                          5, rotation,
                                          -1);
 
-      retval = TRUE;
-    }
-  else
-    {
-      retval = FALSE;
     }
 }
 
@@ -682,8 +676,6 @@ rebuild_resolution_combo (App *app)
 static void
 rebuild_gui (App *app)
 {
-  gboolean sensitive;
-
   /* We would break spectacularly if we recursed, so
    * just assert if that happens
    */
@@ -691,21 +683,11 @@ rebuild_gui (App *app)
 
   app->ignore_gui_changes = TRUE;
 
-  sensitive = app->current_output ? TRUE : FALSE;
-
-#if 0
-  g_debug ("rebuild gui, is on: %d", app->current_output->on);
-#endif
-
   rebuild_mirror_screens (app);
   rebuild_current_monitor_label (app);
   rebuild_on_off_radios (app);
   rebuild_resolution_combo (app);
   rebuild_rotation_combo (app);
-
-#if 0
-  g_debug ("sensitive: %d, on: %d", sensitive, gnome_rr_output_info_is_active (app->current_output));
-#endif
 
   app->ignore_gui_changes = FALSE;
 }
