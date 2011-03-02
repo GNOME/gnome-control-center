@@ -137,12 +137,14 @@ AC_ARG_ENABLE([cups],
               [enable_cups=yes])
 
 if test x"$enable_cups" != x"no" ; then
+  AC_PROG_SED
+
   AC_PATH_PROG(CUPS_CONFIG, cups-config,
                AC_MSG_ERROR([cups-config not found but CUPS support requested]))
 
   CUPS_API_VERSION=`$CUPS_CONFIG --api-version`
-  CUPS_API_MAJOR=`echo $ECHO_N $CUPS_API_VERSION | sed -e "s/\./\n/g" | sed -n "1p"`
-  CUPS_API_MINOR=`echo $ECHO_N $CUPS_API_VERSION | sed -e "s/\./\n/g" | sed -n "2p"`
+  CUPS_API_MAJOR=`echo $ECHO_N $CUPS_API_VERSION | cut -d . -f 1`
+  CUPS_API_MINOR=`echo $ECHO_N $CUPS_API_VERSION | cut -d . -f 2`
 
   AC_CHECK_HEADERS([cups/cups.h cups/http.h cups/ipp.h],,
                    AC_MSG_ERROR([CUPS headers not found but CUPS support requested]))
@@ -152,7 +154,9 @@ if test x"$enable_cups" != x"no" ; then
     AC_MSG_ERROR([CUPS 1.4 or newer not found, but CUPS support requested])
   fi
 
-  CUPS_LIBS=-lcups
+  CUPS_CFLAGS=`$CUPS_CONFIG --cflags | $SED -e '/-O\w*//g' -e 's/-m\w*//g'`
+  CUPS_LIBS=`$CUPS_CONFIG --libs`
+  AC_SUBST(CUPS_CFLAGS)
   AC_SUBST(CUPS_LIBS)
 fi
 
