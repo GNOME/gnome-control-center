@@ -488,7 +488,7 @@ media_panel_setup (CcMediaPanel *self)
 
   for (l = content_types; l != NULL; l = l->next) {
     char *content_type = l->data;
-    char *description;
+    char *description = NULL;
     GIcon *icon;
 
     if (!g_str_has_prefix (content_type, "x-content/"))
