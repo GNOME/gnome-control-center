@@ -392,17 +392,12 @@ update_timezone (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv = self->priv;
   GtkWidget *widget;
-  time_t t;
-  struct tm *ltime;
   gchar **split;
   GtkTreeIter iter;
   GtkTreeModel *model;
 
   /* tz.c updates the local timezone, which means the spin buttons can be
    * updated with the current time of the new location */
-
-  t = time (NULL);
-  ltime = localtime (&t);
 
   split = g_strsplit (priv->current_location->zone, "/", 2);
 

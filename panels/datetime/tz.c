@@ -193,37 +193,6 @@ tz_location_get_utc_offset (TzLocation *loc)
 	return offset;
 }
 
-gint
-tz_location_set_locally (TzLocation *loc)
-{
-	time_t curtime;
-	struct tm *curzone;
-	gboolean is_dst = FALSE;
-	gint correction = 0;
-
-	g_return_val_if_fail (loc != NULL, 0);
-	g_return_val_if_fail (loc->zone != NULL, 0);
-	
-	curtime = time (NULL);
-	curzone = localtime (&curtime);
-	is_dst = curzone->tm_isdst;
-
-	setenv ("TZ", loc->zone, 1);
-#if 0
-	curtime = time (NULL);
-	curzone = localtime (&curtime);
-
-	if (!is_dst && curzone->tm_isdst) {
-		correction = (60 * 60);
-	}
-	else if (is_dst && !curzone->tm_isdst) {
-		correction = 0;
-	}
-#endif
-
-	return correction;
-}
-
 TzInfo *
 tz_info_from_location (TzLocation *loc)
 {

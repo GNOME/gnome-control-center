@@ -423,7 +423,6 @@ get_system_timezone_async (GetTimezoneFunc callback,
 gboolean
 get_using_ntp (void)
 {
-	static gboolean can_use_cache = FALSE;
 	static gboolean is_using_cache = FALSE;
 	static time_t   last_refreshed = 0;
 	time_t          now;
@@ -450,7 +449,6 @@ get_using_ntp (void)
 				       G_TYPE_BOOLEAN, &cu,
 				       G_TYPE_BOOLEAN, &iu,
 				       G_TYPE_INVALID)) {
-			can_use_cache = cu;
 			is_using_cache = iu;
 			last_refreshed = now;
 		}
