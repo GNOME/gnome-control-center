@@ -168,6 +168,9 @@ if test x"$with_cheese" != x"no" ; then
    if test x${have_cheese} = xyes; then
      AC_DEFINE(HAVE_CHEESE, 1, [Define to 1 to enable cheese webcam support])
    fi
+   if test x${with_cheese} = xyes && test x${have_cheese} = xno; then
+     AC_MSG_ERROR([Cheese configured but not found])
+   fi
 fi
 
 # This is a hard-dependency for the region and user-accounts panels
