@@ -45,7 +45,6 @@ struct _CcUaPanelPrivate
   GSettings *interface_settings;
   GSettings *kb_settings;
   GSettings *mouse_settings;
-  GSettings *font_settings;
   GSettings *application_settings;
   GSettings *mediakeys_settings;
 
@@ -127,12 +126,6 @@ cc_ua_panel_dispose (GObject *object)
     {
       g_object_unref (priv->mouse_settings);
       priv->mouse_settings = NULL;
-    }
-
-  if (priv->font_settings)
-    {
-      g_object_unref (priv->font_settings);
-      priv->font_settings = NULL;
     }
 
   if (priv->application_settings)
@@ -308,79 +301,12 @@ gconf_on_off_peditor_new (CcUaPanelPrivate  *priv,
 #define CONTRAST_MODEL_THEME_COLUMN 3
 #define DPI_MODEL_FACTOR_COLUMN 2
 
-/* The following two functions taken from gsd-a11y-preferences-dialog.c
- *
- * Copyright (C)  2008 William Jon McCann <jmccann@redhat.com>
- *
- * Licensed under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- */
-/* X servers sometimes lie about the screen's physical dimensions, so we cannot
- * compute an accurate DPI value.  When this happens, the user gets fonts that
- * are too huge or too tiny.  So, we see what the server returns:  if it reports
- * something outside of the range [DPI_LOW_REASONABLE_VALUE,
- * DPI_HIGH_REASONABLE_VALUE], then we assume that it is lying and we use
- * DPI_FALLBACK instead.
- *
- * See get_dpi_from_x_server() below, and also
- * https://bugzilla.novell.com/show_bug.cgi?id=217790
- */
-#define DPI_LOW_REASONABLE_VALUE 50
-#define DPI_HIGH_REASONABLE_VALUE 500
-#define DPI_DEFAULT        96
-
-static gdouble
-dpi_from_pixels_and_mm (gint pixels,
-                        gint mm)
-{
-  if (mm >= 1)
-    return pixels / (mm / 25.4);
-  else
-    return 0;
-}
-
-static gdouble
-get_dpi_from_x_server ()
-{
-  GdkScreen *screen;
-  gdouble dpi;
-
-  screen = gdk_screen_get_default ();
-
-  if (screen)
-    {
-      gdouble width_dpi, height_dpi;
-
-      width_dpi = dpi_from_pixels_and_mm (gdk_screen_get_width (screen),
-                                          gdk_screen_get_width_mm (screen));
-      height_dpi = dpi_from_pixels_and_mm (gdk_screen_get_height (screen),
-                                           gdk_screen_get_height_mm (screen));
-
-      if (width_dpi < DPI_LOW_REASONABLE_VALUE
-          || width_dpi > DPI_HIGH_REASONABLE_VALUE
-          || height_dpi < DPI_LOW_REASONABLE_VALUE
-          || height_dpi > DPI_HIGH_REASONABLE_VALUE)
-        {
-          dpi = DPI_DEFAULT;
-        }
-      else
-        {
-          dpi = (width_dpi + height_dpi) / 2.0;
-        }
-    }
-  else
-    dpi = DPI_DEFAULT;
-
-  return dpi;
-}
-
-static void dpi_combo_box_changed (GtkComboBox *box, CcUaPanel *panel);
+static void text_scaling_factor_combo_box_changed (GtkComboBox *box, CcUaPanel *panel);
 
 static void
-dpi_notify_cb (GSettings   *settings,
-               const gchar *key,
-               CcUaPanel   *panel)
+text_scaling_factor_notify_cb (GSettings   *settings,
+			       const gchar *key,
+			       CcUaPanel   *panel)
 {
   CcUaPanelPrivate *priv = panel->priv;
   GtkTreeIter iter;
@@ -388,22 +314,16 @@ dpi_notify_cb (GSettings   *settings,
   GtkWidget *combo;
   gboolean valid;
   gdouble conf_value;
-  gdouble x_dpi;
   GtkTreeIter best;
   gdouble distance;
 
-  if (!g_str_equal (key, "dpi"))
+  if (!g_str_equal (key, "text-scaling-factor"))
     return;
 
   conf_value = g_settings_get_double (settings, key);
 
   combo = WID (priv->builder, "seeing_text_size_combobox");
   model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-
-  /* get current value from screen */
-  x_dpi = get_dpi_from_x_server ();
-  if (conf_value == 0.0)
-    conf_value = x_dpi;
 
   /* find the closest match in the combobox model */
   distance = 1e6;
@@ -417,7 +337,7 @@ dpi_notify_cb (GSettings   *settings,
                           DPI_MODEL_FACTOR_COLUMN, &factor,
                           -1);
 
-      d = fabs (conf_value - factor * x_dpi);
+      d = fabs (conf_value - factor);
       if (d < distance)
         {
           best = iter;
@@ -427,14 +347,14 @@ dpi_notify_cb (GSettings   *settings,
       valid = gtk_tree_model_iter_next (model, &iter);
     }
 
-  g_signal_handlers_block_by_func (combo, dpi_combo_box_changed, panel);
+  g_signal_handlers_block_by_func (combo, text_scaling_factor_combo_box_changed, panel);
   gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &best);
-  g_signal_handlers_unblock_by_func (combo, dpi_combo_box_changed, panel);
+  g_signal_handlers_unblock_by_func (combo, text_scaling_factor_combo_box_changed, panel);
 }
 
 static void
-dpi_combo_box_changed (GtkComboBox *box,
-                       CcUaPanel *panel)
+text_scaling_factor_combo_box_changed (GtkComboBox *box,
+				       CcUaPanel *panel)
 {
   CcUaPanelPrivate *priv = panel->priv;
   GtkTreeIter iter;
@@ -447,16 +367,9 @@ dpi_combo_box_changed (GtkComboBox *box,
                       -1);
 
   if (factor == 1.0)
-    g_settings_reset (priv->font_settings, "dpi");
+    g_settings_reset (priv->interface_settings, "text-scaling-factor");
   else
-    {
-      gdouble x_dpi, u_dpi;
-
-      x_dpi = get_dpi_from_x_server ();
-      u_dpi = (gdouble) factor * x_dpi;
-
-      g_settings_set_double (priv->font_settings, "dpi", u_dpi);
-    }
+    g_settings_set_double (priv->interface_settings, "text-scaling-factor", factor);
 }
 
 
@@ -574,14 +487,14 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
 
-  dpi_notify_cb (priv->font_settings, "dpi", self);
-  g_signal_connect (priv->font_settings, "changed", G_CALLBACK (dpi_notify_cb), self);
+  text_scaling_factor_notify_cb (priv->interface_settings, "text-scaling-factor", self);
+  g_signal_connect (priv->interface_settings, "changed::text-scaling-factor", G_CALLBACK (text_scaling_factor_notify_cb), self);
 
   g_signal_connect (WID (priv->builder, "seeing_contrast_combobox"), "changed",
                     G_CALLBACK (contrast_combobox_changed_cb), self);
 
   g_signal_connect (WID (priv->builder, "seeing_text_size_combobox"), "changed",
-                    G_CALLBACK (dpi_combo_box_changed), self);
+                    G_CALLBACK (text_scaling_factor_combo_box_changed), self);
 
   g_settings_bind (priv->kb_settings, "togglekeys-enable",
                    WID (priv->builder, "seeing_enable_toggle_keys_checkbutton"), "active",
@@ -850,7 +763,6 @@ cc_ua_panel_init (CcUaPanel *self)
 
   priv->kb_settings = g_settings_new ("org.gnome.desktop.a11y.keyboard");
   priv->mouse_settings = g_settings_new ("org.gnome.desktop.a11y.mouse");
-  priv->font_settings = g_settings_new ("org.gnome.settings-daemon.plugins.xsettings");
   priv->application_settings = g_settings_new ("org.gnome.desktop.a11y.applications");
   priv->mediakeys_settings = g_settings_new ("org.gnome.settings-daemon.plugins.media-keys");
 
