@@ -160,11 +160,14 @@ AM_CONDITIONAL(BUILD_PRINTERS, [test x"$enable_cups" = x"yes"])
 # Optional dependency for the user accounts panel
 AC_ARG_WITH([cheese],
             AS_HELP_STRING([--with-cheese], [enable cheese webcam support]),,
-            with_cheese=yes)
+            with_cheese=auto)
 
 if test x"$with_cheese" != x"no" ; then
-   PKG_CHECK_MODULES(CHEESE, gstreamer-0.10 cheese-gtk >= 2.29.90)
-   AC_DEFINE(HAVE_CHEESE, 1, [Define to 1 to enable cheese webcam support])
+   PKG_CHECK_MODULES(CHEESE, gstreamer-0.10 cheese-gtk >= 2.29.90, [have_cheese=yes], [have_cheese=no])
+   AM_CONDITIONAL(BUILD_CHEESE, test x${have_cheese} = xyes)
+   if test x${have_cheese} = xyes; then
+     AC_DEFINE(HAVE_CHEESE, 1, [Define to 1 to enable cheese webcam support])
+   fi
 fi
 
 # This is a hard-dependency for the region and user-accounts panels

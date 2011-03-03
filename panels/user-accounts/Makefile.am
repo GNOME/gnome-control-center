@@ -16,8 +16,11 @@ AM_CPPFLAGS =						\
 	-I$(srcdir)/../common/				\
 	$(PANEL_CFLAGS)					\
 	$(USER_ACCOUNTS_PANEL_CFLAGS)			\
-	$(CHEESE_CFLAGS)				\
 	$(DISABLE_DEPRECATED)
+
+if BUILD_CHEESE
+AM_CPPFLAGS += $(CHEESE_CFLAGS)
+endif
 
 MARSHALFILES = marshal.c marshal.h
 BUILT_SOURCES = $(MARSHALFILES)
@@ -67,10 +70,13 @@ libuser_accounts_la_SOURCES =		\
 libuser_accounts_la_LIBADD = 		\
 	$(PANEL_LIBS)			\
 	$(USER_ACCOUNTS_PANEL_LIBS)	\
-	$(CHEESE_LIBS)			\
 	$(top_builddir)/panels/common/liblanguage.la \
 	-lcrypt				\
 	-lm
+
+if BUILD_CHEESE
+libuser_accounts_la_LIBADD += $(CHEESE_LIBS)
+endif
 
 libuser_accounts_la_LDFLAGS = $(PANEL_LDFLAGS)
 
