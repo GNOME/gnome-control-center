@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-18 17:02+0200\n"
-"PO-Revision-Date: 2011-03-05 16:06+0300\n"
+"POT-Creation-Date: 2011-03-05 16:29+0200\n"
+"PO-Revision-Date: 2011-03-05 17:09+0300\n"
 "Last-Translator: Korostil Daniel <ted.korostiled@gmail.com>\n"
 "Language-Team: translation@linux.org.ua\n"
 "Language: uk\n"
@@ -56,6 +56,44 @@ msgstr ""
 "URL за яким можна отримати додаткові теми. Якщо вказано порожній рядок, "
 "посилання не буде виводитись."
 
+#: ../libgnome-control-center/cc-lockbutton.c:347
+#: ../panels/screen/screen.ui.h:13
+msgid "Lock"
+msgstr "Заблокувати"
+
+#: ../libgnome-control-center/cc-lockbutton.c:356
+#: ../panels/network/network.ui.h:23
+msgid "Unlock"
+msgstr "Розблокувати"
+
+#: ../libgnome-control-center/cc-lockbutton.c:365
+msgid "Locked"
+msgstr "Заблоковано"
+
+#: ../libgnome-control-center/cc-lockbutton.c:374
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+"Вікно заблоковано.\n"
+"Натисніть, щоб запобігти подальших змін"
+
+#: ../libgnome-control-center/cc-lockbutton.c:383
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+"Вікно заблоковано.\n"
+"Натисніть, щоб унести зміни"
+
+#: ../libgnome-control-center/cc-lockbutton.c:392
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
+"Системна політика забороняє зміни.\n"
+"Зв'яжіться з системним адміністратором"
+
 #: ../libgnome-control-center/gconf-property-editor.c:134
 msgid "Key"
 msgstr "Ключ"
@@ -100,7 +138,8 @@ msgstr "Зворотний виклик при перетворенні з ві�
 #: ../libgnome-control-center/gconf-property-editor.c:160
 msgid ""
 "Callback to be issued when data are to be converted to GConf from the widget"
-msgstr "Робити цей зворотний виклик, коли дані перетворюються з віджета у GConf"
+msgstr ""
+"Робити цей зворотний виклик, коли дані перетворюються з віджета у GConf"
 
 #: ../libgnome-control-center/gconf-property-editor.c:165
 msgid "UI Control"
@@ -128,7 +167,7 @@ msgstr ""
 "Робити цей зворотній виклик, коли дані об'єкта редактора властивостей "
 "звільнюються"
 
-#: ../libgnome-control-center/gconf-property-editor.c:1406
+#: ../libgnome-control-center/gconf-property-editor.c:1473
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -141,7 +180,7 @@ msgstr ""
 "Перевірте, чи він існує, та спробуйте ще раз, або виберіть інше зображення "
 "для тла."
 
-#: ../libgnome-control-center/gconf-property-editor.c:1414
+#: ../libgnome-control-center/gconf-property-editor.c:1481
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -154,11 +193,11 @@ msgstr ""
 "\n"
 "Виберіть замість нього інший файл."
 
-#: ../libgnome-control-center/gconf-property-editor.c:1536
+#: ../libgnome-control-center/gconf-property-editor.c:1603
 msgid "Please select an image."
 msgstr "Будь ласка, виберіть зображення."
 
-#: ../libgnome-control-center/gconf-property-editor.c:1541
+#: ../libgnome-control-center/gconf-property-editor.c:1608
 msgid "_Select"
 msgstr "_Вибрати"
 
@@ -172,8 +211,8 @@ msgstr "Змінити тло"
 
 #. Translators: those are keywords for the background control-center panel
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:4
-msgid "Wallpaper;Screen;"
-msgstr "Шпалери;Екран;"
+msgid "Wallpaper;Screen;Desktop;"
+msgstr "Шпалери;Екран;Стільниця;"
 
 #: ../panels/background/background.ui.h:1
 msgid "Center"
@@ -201,56 +240,65 @@ msgid "Tile"
 msgstr "Черепицею"
 
 #: ../panels/background/background.ui.h:8
-#: ../panels/universal-access/uap.ui.h:93
 msgid "Zoom"
 msgstr "Масштаб"
 
-#: ../panels/background/bg-colors-source.c:44
+#: ../panels/background/bg-colors-source.c:46
 msgid "Horizontal Gradient"
 msgstr "Горизонтальний градієнт"
 
-#: ../panels/background/bg-colors-source.c:45
+#: ../panels/background/bg-colors-source.c:47
 msgid "Vertical Gradient"
 msgstr "Вертикальний градієнт"
 
-#: ../panels/background/bg-colors-source.c:46
+#: ../panels/background/bg-colors-source.c:48
 msgid "Solid Color"
 msgstr "Суцільний колір"
 
-#: ../panels/background/cc-background-panel.c:747
-msgid "Wallpapers"
-msgstr "Шпалери"
+#: ../panels/background/cc-background-panel.c:960
+#: ../panels/user-accounts/um-photo-dialog.c:216
+#: ../panels/user-accounts/data/photo-dialog.ui.h:2
+msgid "Browse for more pictures"
+msgstr "Огляд інших зображень"
 
-#: ../panels/background/cc-background-panel.c:755
-msgid "Pictures Folder"
-msgstr "Тека із зображеннями"
-
-#: ../panels/background/cc-background-panel.c:763
-msgid "Colors & Gradients"
-msgstr "Кольори та градієнти"
-
-#: ../panels/background/cc-background-panel.c:772
-msgid "Flickr"
-msgstr "Flickr"
-
-#: ../panels/background/cc-background-panel.c:833
+#: ../panels/background/cc-background-panel.c:1051
 msgid "Current background"
 msgstr "Поточне тло"
 
-#: ../panels/background/gnome-wp-info.c:59
-msgid "No Desktop Background"
-msgstr "Без тла стільниці"
+#: ../panels/background/cc-background-panel.c:1115
+msgid "Wallpapers"
+msgstr "Шпалери"
 
-#: ../panels/background/gnome-wp-item.c:277
+#: ../panels/background/cc-background-panel.c:1122
+msgid "Pictures Folder"
+msgstr "Тека із зображеннями"
+
+#: ../panels/background/cc-background-panel.c:1129
+msgid "Colors & Gradients"
+msgstr "Кольори та градієнти"
+
+#: ../panels/background/cc-background-panel.c:1137
+msgid "Flickr"
+msgstr "Flickr"
+
+#: ../panels/background/cc-background-item.c:148
 msgid "multiple sizes"
 msgstr "декілька розмірів"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/gnome-wp-item.c:285
+#: ../panels/background/cc-background-item.c:152
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
+
+#: ../panels/background/cc-background-item.c:255
+msgid "No Desktop Background"
+msgstr "Без тла стільниці"
+
+#: ../panels/common/gdm-languages.c:709
+msgid "Unspecified"
+msgstr "Не вказано"
 
 #: ../panels/datetime/datetime.ui.h:1
 msgid "16"
@@ -354,19 +402,18 @@ msgid "Date and Time preferences panel"
 msgstr "Панель налаштування дати і часу"
 
 #: ../panels/display/display-capplet.ui.h:1
-#: ../panels/display/xrandr-capplet.c:316
 msgid "Left"
 msgstr "Обернений наліво"
 
 #: ../panels/display/display-capplet.ui.h:2
-#: ../panels/display/xrandr-capplet.c:479
+#: ../panels/display/xrandr-capplet.c:491
 msgid "Monitor"
 msgstr "Монітор"
 
 #: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/xrandr-capplet.c:315
-#: ../panels/display/xrandr-capplet.c:354
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/display/xrandr-capplet.c:327
+#: ../panels/display/xrandr-capplet.c:366
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Normal"
 msgstr "Звичайний"
 
@@ -379,7 +426,6 @@ msgid "R_otation:"
 msgstr "_Поворот:"
 
 #: ../panels/display/display-capplet.ui.h:6
-#: ../panels/display/xrandr-capplet.c:317
 msgid "Right"
 msgstr "Обернений направо"
 
@@ -413,34 +459,42 @@ msgstr "Екрани"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Панель;Проектори;xrandr;Екран;Роздільність;Оновлення;"
 
-#: ../panels/display/xrandr-capplet.c:318
-msgid "Upside Down"
-msgstr "Зверху вниз"
+#: ../panels/display/xrandr-capplet.c:328
+msgid "Anti-Clockwise"
+msgstr "Проти годинникової стрілки"
+
+#: ../panels/display/xrandr-capplet.c:329
+msgid "Clockwise"
+msgstr "За годинниковою стрілкою"
+
+#: ../panels/display/xrandr-capplet.c:330
+msgid "180 Degrees"
+msgstr "180 градусів"
 
 #. Translators:  this is the feature where what you see on your laptop's
 #. * screen is the same as your external monitor.  Here, "Mirror" is being
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:455
+#: ../panels/display/xrandr-capplet.c:467
 msgid "Mirror Displays"
 msgstr "Дзеркальні покази"
 
-#: ../panels/display/xrandr-capplet.c:580
+#: ../panels/display/xrandr-capplet.c:597
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d x %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:582
+#: ../panels/display/xrandr-capplet.c:599
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1492
+#: ../panels/display/xrandr-capplet.c:1500
 msgid "Drag to change primary display."
 msgstr "Перетягніть для зміни головного екрана."
 
-#: ../panels/display/xrandr-capplet.c:1550
+#: ../panels/display/xrandr-capplet.c:1558
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
@@ -448,42 +502,141 @@ msgstr ""
 "Виберіть монітор для зміни його параметрів; перетягніть його для зміни його "
 "розташування."
 
-#: ../panels/display/xrandr-capplet.c:1935
+#: ../panels/display/xrandr-capplet.c:1947
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/xrandr-capplet.c:1937
+#: ../panels/display/xrandr-capplet.c:1949
 msgid "%a %l:%M %p"
 msgstr "%a %k:%M"
 
-#: ../panels/display/xrandr-capplet.c:2222
+#: ../panels/display/xrandr-capplet.c:2195
 msgid "Could not save the monitor configuration"
 msgstr "Не вдалось зберегти налаштування монітора"
 
-#: ../panels/display/xrandr-capplet.c:2245
+#: ../panels/display/xrandr-capplet.c:2220
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 "Не вдалось отримати доступ до системної шини повідомлень для зміни "
 "налаштувань екрана"
 
-#: ../panels/display/xrandr-capplet.c:2290
+#: ../panels/display/xrandr-capplet.c:2265
 msgid "Could not detect displays"
 msgstr "Не вдалось визначити екрани"
 
-#: ../panels/display/xrandr-capplet.c:2494
+#: ../panels/display/xrandr-capplet.c:2460
 msgid "Could not get screen information"
 msgstr "Не вдалось отримати інформацію про екран"
 
+#. Translators: VESA is an techncial acronym, don't translate it.
+#: ../panels/info/cc-info-panel.c:366
+#, c-format
+msgid "VESA: %s"
+msgstr "VESA: %s"
+
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
+#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:72
+#: ../panels/network/panel-common.c:151
+msgid "Unknown"
+msgstr "Невідома"
+
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:245
+#: ../panels/info/cc-info-panel.c:528
 #, c-format
 msgid "%d-bit"
 msgstr "%d-ох бітний"
 
-#: ../panels/info/cc-info-panel.c:293
+#: ../panels/info/cc-info-panel.c:542
+#, c-format
+msgid "%u byte"
+msgid_plural "%u bytes"
+msgstr[0] "%u байт"
+msgstr[1] "%u байти"
+msgstr[2] "%u байтів"
+
+#: ../panels/info/cc-info-panel.c:550
+#, c-format
+msgid "%.1f KB"
+msgstr "%.1f КБ"
+
+#: ../panels/info/cc-info-panel.c:555
+#, c-format
+msgid "%.1f MB"
+msgstr "%.1f МБ"
+
+#: ../panels/info/cc-info-panel.c:560
+#, c-format
+msgid "%.1f GB"
+msgstr "%.1f ГБ"
+
+#: ../panels/info/cc-info-panel.c:565
+#, c-format
+msgid "%.1f TB"
+msgstr "%.1f ТБ"
+
+#: ../panels/info/cc-info-panel.c:570
+#, c-format
+msgid "%.1f PB"
+msgstr "%.1f ПБ"
+
+#: ../panels/info/cc-info-panel.c:575
+#, c-format
+msgid "%.1f EB"
+msgstr "%.1f ЕБ"
+
+#: ../panels/info/cc-info-panel.c:686
 msgid "Unknown model"
 msgstr "Невідома модель"
+
+#: ../panels/info/cc-info-panel.c:769
+msgid "The next login will attempt to use the standard experience."
+msgstr "При наступному вході буде здійснено стандартно."
+
+#: ../panels/info/cc-info-panel.c:771
+msgid ""
+"The next login will use the fallback mode intended for unsupported graphics "
+"hardware."
+msgstr ""
+"Наступний вхід використає запасний режим, призначений для непідтримуваних "
+"відеоплат."
+
+#. translators: The hardware is not able to run GNOME 3's
+#. * shell, so we use the GNOME "Fallback" session
+#: ../panels/info/cc-info-panel.c:813
+msgctxt "Experience"
+msgid "Fallback"
+msgstr "Запас"
+
+#. translators: The hardware is able to run GNOME 3's
+#. * shell, also called "Standard" experience
+#: ../panels/info/cc-info-panel.c:819
+msgctxt "Experience"
+msgid "Standard"
+msgstr "Стандартно"
+
+#: ../panels/info/cc-info-panel.c:951
+#: ../panels/keyboard/keyboard-shortcuts.c:1711
+msgid "Section"
+msgstr "Вибір"
+
+#: ../panels/info/cc-info-panel.c:960 ../panels/info/info.ui.h:14
+msgid "Overview"
+msgstr "Огляд"
+
+#: ../panels/info/cc-info-panel.c:966 ../panels/info/info.ui.h:2
+msgid "Default Applications"
+msgstr "Типові програми"
+
+#: ../panels/info/cc-info-panel.c:971 ../panels/info/info.ui.h:9
+msgid "Graphics"
+msgstr "Графіка"
+
+#: ../panels/info/cc-info-panel.c:996
+#, c-format
+msgid "Version %s"
+msgstr "Версія %s"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
 msgid "System Info"
@@ -495,16 +648,193 @@ msgstr "Системна інформація"
 
 #. Translators: those are keywords for the System Information panel
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
-msgid "device;system;information;memory;processor;version;"
-msgstr "пристрій;система;інформація;пам'ять;процесор;версія;"
+msgid ""
+"device;system;information;memory;processor;version;default;application;"
+"fallback;"
+msgstr ""
+"пристрій;система;інформація;пам'ять;процесор;версія;типово;програма;запас;"
 
-#: ../panels/keyboard/00-multimedia-key.xml.in.h:1
+#: ../panels/info/info.ui.h:1
+msgid "Calendar"
+msgstr "Календар"
+
+#: ../panels/info/info.ui.h:3
+msgid "Device name"
+msgstr "Назва пристрою"
+
+#: ../panels/info/info.ui.h:4
+msgid "Disk"
+msgstr "Диск"
+
+#: ../panels/info/info.ui.h:5
+msgid "Driver"
+msgstr "Драйвер"
+
+#: ../panels/info/info.ui.h:6
+msgid "Experience"
+msgstr "Робота"
+
+#. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
+#: ../panels/info/info.ui.h:8
+msgid "Forced Fallback Mode"
+msgstr "Примусовий запасний режим"
+
+#: ../panels/info/info.ui.h:10
+msgid "Mail"
+msgstr "Пошта"
+
+#: ../panels/info/info.ui.h:11
+msgid "Memory"
+msgstr "Пам'ять"
+
+#: ../panels/info/info.ui.h:12
+msgid "Music"
+msgstr "Музика"
+
+#: ../panels/info/info.ui.h:13
+msgid "OS type"
+msgstr "Тип ОС"
+
+#: ../panels/info/info.ui.h:15
+msgid "Photos"
+msgstr "Фотографії:"
+
+#: ../panels/info/info.ui.h:16
+msgid "Processor"
+msgstr "Процесор"
+
+#: ../panels/info/info.ui.h:17
+msgid "Updates Available"
+msgstr "Доступні оновлення"
+
+#: ../panels/info/info.ui.h:18
+msgid "Video"
+msgstr "Відео"
+
+#: ../panels/info/info.ui.h:19
+msgid "Web"
+msgstr "Інтернет"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:1
+msgid "Eject"
+msgstr "Витягнути"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:2
+msgid "Launch media player"
+msgstr "Запустити програвач"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:3
+msgid "Next track"
+msgstr "Наступна доріжка"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:4
+msgid "Pause playback"
+msgstr "Призупинити відтворення"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:5
+msgid "Play (or play/pause)"
+msgstr "Грати (або грати/зупинити)"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:6
+msgid "Previous track"
+msgstr "Попередня доріжка"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:7
 msgid "Sound and Media"
 msgstr "Звук та відео"
 
-#: ../panels/keyboard/01-desktop-key.xml.in.h:1
-msgid "Launchers and Actions"
-msgstr "Запуск і дії"
+#: ../panels/keyboard/00-multimedia.xml.in.h:8
+msgid "Stop playback"
+msgstr "Зупинити відтворення"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:9
+msgid "Volume down"
+msgstr "Тихіше"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:10
+msgid "Volume mute"
+msgstr "Прибрати звук"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:11
+msgid "Volume up"
+msgstr "Гучніше"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:1
+msgid "Home folder"
+msgstr "Домівка"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:2
+msgid "Launch calculator"
+msgstr "Запустити калькулятор"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:3
+msgid "Launch email client"
+msgstr "Запустити поштовий клієнт"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:4
+msgid "Launch help browser"
+msgstr "Запустити переглядача довідки"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:5
+msgid "Launch web browser"
+msgstr "Запустити переглядача тенет"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:6
+msgid "Launchers"
+msgstr "Пускач"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:7
+msgid "Search"
+msgstr "Пошук"
+
+#: ../panels/keyboard/01-system.xml.in.h:1
+msgid "Lock screen"
+msgstr "Заблокувати екран"
+
+#: ../panels/keyboard/01-system.xml.in.h:2
+msgid "Log out"
+msgstr "Вийти"
+
+#: ../panels/keyboard/01-system.xml.in.h:3
+msgid "System"
+msgstr "Система"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:1
+msgid "Decrease text size"
+msgstr "Зменшити розмір тексту"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:2
+msgid "Increase text size"
+msgstr "Збільшити розмір тексту"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:3
+msgid "Magnifier zoom in"
+msgstr "Зблизити лупу"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:4
+msgid "Magnifier zoom out"
+msgstr "Віддалити лупу"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:5
+msgid "Toggle contrast"
+msgstr "Змінити контраст"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:6
+msgid "Toggle magnifier"
+msgstr "Змінити лупу"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:7
+msgid "Toggle on-screen keyboard"
+msgstr "Змінити екранну клавіатуру"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:8
+msgid "Toggle screen reader"
+msgstr "Змінити зчитувача екрану"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:9
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
+msgid "Universal Access"
+msgstr "Універсальний доступ"
 
 #: ../panels/keyboard/eggcellrendererkeys.c:21
 msgid "New shortcut..."
@@ -536,11 +866,10 @@ msgstr "Тип акселератора."
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/keyboard-shortcuts.c:1140
+#: ../panels/keyboard/keyboard-shortcuts.c:1152
 #: ../panels/sound/gvc-mixer-control.c:1091
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
-#: ../panels/user-accounts/um-login-options.c:355
 msgid "Disabled"
 msgstr "Вимкнено"
 
@@ -558,22 +887,23 @@ msgstr "Клавіатура"
 msgid "Shortcut;Repeat;Blink;"
 msgstr "Скорочення;Повтори;Блимання"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:659
-#: ../panels/keyboard/keyboard-shortcuts.c:1544
-#: ../panels/keyboard/keyboard-shortcuts.c:1548
+#: ../panels/keyboard/keyboard-shortcuts.c:645
+#: ../panels/keyboard/keyboard-shortcuts.c:927
+#: ../panels/keyboard/keyboard-shortcuts.c:1505
+#: ../panels/keyboard/keyboard-shortcuts.c:1509
 msgid "Custom Shortcuts"
 msgstr "Власне скорочення"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:767
+#: ../panels/keyboard/keyboard-shortcuts.c:779
 msgid "<Unknown Action>"
 msgstr "<Невідома дія>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1166
+#: ../panels/keyboard/keyboard-shortcuts.c:1178
 msgid "Error saving the new shortcut"
 msgstr "Помилка при збереженні нового скорочення"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1276
-#, c-format, 
+#: ../panels/keyboard/keyboard-shortcuts.c:1291
+#, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
 "using this key.\n"
@@ -581,10 +911,9 @@ msgid ""
 msgstr ""
 "Скорочення «%s» не можна використовувати, оскільки використання цієї клавіші "
 "для звичайного вводу стане неможливим.\n"
-"Будь ласка, спробуйте з такими клавішами, як Control, Alt чи Shift "
-"одночасно."
+"Будь ласка, спробуйте з такими клавішами, як Control, Alt чи Shift одночасно."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1306
+#: ../panels/keyboard/keyboard-shortcuts.c:1321
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -593,34 +922,25 @@ msgstr ""
 "Скорочення «%s» вже використовується для\n"
 "«%s»"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1312
+#: ../panels/keyboard/keyboard-shortcuts.c:1326
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Після перепризначення скорочення «%s» на «%s», його буде вимкнено."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1320
+#: ../panels/keyboard/keyboard-shortcuts.c:1332
 msgid "_Reassign"
 msgstr "_Перепризначити"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1440
-#, c-format
-msgid "Error unsetting accelerator in configuration database: %s"
-msgstr "Помилка звільнення прискорювача у базі даних налаштувань: %s"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1498
+#: ../panels/keyboard/keyboard-shortcuts.c:1444
 msgid "Too many custom shortcuts"
 msgstr "Надто багато скорочень"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1706
-msgid "Section"
-msgstr "Вибір"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1737
+#: ../panels/keyboard/keyboard-shortcuts.c:1764
 msgid "Action"
 msgstr "Дія"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1759
+#: ../panels/keyboard/keyboard-shortcuts.c:1787
 msgid "Shortcut"
 msgstr "Скорочення"
 
@@ -637,8 +957,8 @@ msgid "Cursor _blinks in text fields"
 msgstr "Курсор _блимає у полях вводу тексту"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/mouse/gnome-mouse-properties.ui.h:1
+#: ../panels/universal-access/uap.ui.h:21
 msgid "Cursor blinks speed"
 msgstr "Швидкість блимання курсору"
 
@@ -648,13 +968,12 @@ msgstr "Власне скорочення"
 
 #. fast acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
-#: ../panels/region/gnome-region-panel.ui.h:1
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
 msgid "Fast"
 msgstr "Швидко"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "General"
 msgstr "Загальне"
 
@@ -664,9 +983,8 @@ msgstr "_Повторення клавіатури при утримуванні
 
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
-#: ../panels/region/gnome-region-panel.ui.h:5
-#: ../panels/mouse/gnome-mouse-properties.ui.h:25
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Long"
 msgstr "Більше"
 
@@ -684,9 +1002,8 @@ msgstr "_Швидкість:"
 
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
-#: ../panels/region/gnome-region-panel.ui.h:19
-#: ../panels/mouse/gnome-mouse-properties.ui.h:35
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/mouse/gnome-mouse-properties.ui.h:24
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Short"
 msgstr "Менше"
 
@@ -696,8 +1013,7 @@ msgstr "Скорочення"
 
 #. slow acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
-#: ../panels/region/gnome-region-panel.ui.h:20
-#: ../panels/mouse/gnome-mouse-properties.ui.h:39
+#: ../panels/mouse/gnome-mouse-properties.ui.h:26
 msgid "Slow"
 msgstr "Повільно"
 
@@ -710,8 +1026,6 @@ msgstr ""
 "клавіші , або натисніть Backspace для очищення."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
-#: ../panels/region/gnome-region-panel.ui.h:24
-#: ../panels/mouse/gnome-mouse-properties.ui.h:49
 msgid "_Delay:"
 msgstr "_Затримка:"
 
@@ -720,29 +1034,89 @@ msgid "_Name:"
 msgstr "_Назва:"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
-#: ../panels/region/gnome-region-panel.ui.h:28
 msgid "_Speed:"
 msgstr "Ш_видкість:"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
-msgid "add-toolbutton"
-msgstr "add-toolbutton"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
-msgid "remove-toolbutton"
-msgstr "remove-toolbutton"
 
 #: ../panels/media/cc-media-panel.c:322
 msgid "Ask what to do"
 msgstr "Питати що робити"
 
-#: ../panels/media/cc-media-panel.c:328
-msgid "Do Nothing"
+#: ../panels/media/cc-media-panel.c:326 ../panels/power/power.ui.h:6
+msgid "Do nothing"
 msgstr "Нічого не робити"
 
-#: ../panels/media/cc-media-panel.c:334
-msgid "Open Folder"
+#: ../panels/media/cc-media-panel.c:330
+msgid "Open folder"
 msgstr "Відкрити теку"
+
+#: ../panels/media/cc-media-panel.c:441
+msgid "Select an application for audio CDs"
+msgstr "Вибрати програму для звукових CD"
+
+#: ../panels/media/cc-media-panel.c:442
+msgid "Select an application for video DVDs"
+msgstr "Вибрати програму для відео DVD"
+
+#: ../panels/media/cc-media-panel.c:443
+msgid "Select an application to run when a music player is connected"
+msgstr "Вибрати програму для запуску, коли музичний програвач під'єднано"
+
+#: ../panels/media/cc-media-panel.c:444
+msgid "Select an application to run when a camera is connected"
+msgstr "Вибрати програму для запуску, коли камеру під'єднано"
+
+#: ../panels/media/cc-media-panel.c:445
+msgid "Select an application for software CDs"
+msgstr "Вибрати програму для програмного CD"
+
+#. translators: these strings are duplicates of shared-mime-info
+#. * strings, just here to fix capitalization of the English originals.
+#. * If the shared-mime-info translation works for your language,
+#. * simply leave these untranslated.
+#.
+#: ../panels/media/cc-media-panel.c:457
+msgid "audio DVD"
+msgstr "audio DVD"
+
+#: ../panels/media/cc-media-panel.c:458
+msgid "blank Blu-ray disc"
+msgstr "blank Blu-ray disc"
+
+#: ../panels/media/cc-media-panel.c:459
+msgid "blank CD disc"
+msgstr "blank CD disc"
+
+#: ../panels/media/cc-media-panel.c:460
+msgid "blank DVD disc"
+msgstr "blank DVD disc"
+
+#: ../panels/media/cc-media-panel.c:461
+msgid "blank HD DVD disc"
+msgstr "blank HD DVD disc"
+
+#: ../panels/media/cc-media-panel.c:462
+msgid "Blu-ray video disc"
+msgstr "Blu-ray video disc"
+
+#: ../panels/media/cc-media-panel.c:463
+msgid "e-book reader"
+msgstr "e-book reader"
+
+#: ../panels/media/cc-media-panel.c:464
+msgid "HD DVD video disc"
+msgstr "HD DVD video disc"
+
+#: ../panels/media/cc-media-panel.c:465
+msgid "Picture CD"
+msgstr "Picture CD"
+
+#: ../panels/media/cc-media-panel.c:466
+msgid "Super Video CD"
+msgstr "Super Video CD"
+
+#: ../panels/media/cc-media-panel.c:467
+msgid "Video CD"
+msgstr "Video CD"
 
 #: ../panels/media/gnome-media-properties.ui.h:1
 msgid "Acti_on:"
@@ -800,150 +1174,217 @@ msgstr "Налаштування носія та автозапуску"
 msgid "Removable Media"
 msgstr "Змінний носій"
 
-#: ../panels/printers/cc-printers-panel.c:174
+#. Translators: those are keywords for the media control-center panel
+#: ../panels/media/gnome-media-panel.desktop.in.in.h:4
+msgid "cd;dvd;usb;audio;video;disc;"
+msgstr "cd;dvd;usb;звук;відео;диск;"
+
+#. Translators: The printer is low on toner
+#: ../panels/printers/cc-printers-panel.c:261
 msgid "Low on toner"
 msgstr "Закінчується тонер"
 
-#: ../panels/printers/cc-printers-panel.c:175
+#. Translators: The printer has no toner left
+#: ../panels/printers/cc-printers-panel.c:263
 msgid "Out of toner"
 msgstr "Вичерпався тонер"
 
-#. Translators: "Developer" like on photo development context
-#: ../panels/printers/cc-printers-panel.c:177
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/cc-printers-panel.c:266
 msgid "Low on developer"
 msgstr "Закінчується проявник"
 
-#. Translators: "Developer" like on photo development context
-#: ../panels/printers/cc-printers-panel.c:179
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/cc-printers-panel.c:269
 msgid "Out of developer"
 msgstr "Вичерпався проявник"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:181
+#: ../panels/printers/cc-printers-panel.c:271
 msgid "Low on a marker supply"
 msgstr "Закінчується фарба"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:183
+#: ../panels/printers/cc-printers-panel.c:273
 msgid "Out of a marker supply"
 msgstr "Вичерпано фарбу"
 
-#: ../panels/printers/cc-printers-panel.c:184
+#. Translators: One or more covers on the printer are open
+#: ../panels/printers/cc-printers-panel.c:275
 msgid "Open cover"
 msgstr "Відкрита кришка"
 
-#: ../panels/printers/cc-printers-panel.c:185
+#. Translators: One or more doors on the printer are open
+#: ../panels/printers/cc-printers-panel.c:277
 msgid "Open door"
 msgstr "Відкриті двері"
 
-#: ../panels/printers/cc-printers-panel.c:186
+#. Translators: At least one input tray is low on media
+#: ../panels/printers/cc-printers-panel.c:279
 msgid "Low on paper"
 msgstr "Закінчується папір"
 
-#: ../panels/printers/cc-printers-panel.c:187
+#. Translators: At least one input tray is empty
+#: ../panels/printers/cc-printers-panel.c:281
 msgid "Out of paper"
 msgstr "Вичерпано папір"
 
-#: ../panels/printers/cc-printers-panel.c:188
+#. Translators: The printer is offline
+#: ../panels/printers/cc-printers-panel.c:283
+msgctxt "printer state"
 msgid "Offline"
 msgstr "Вимкнено"
 
-#: ../panels/printers/cc-printers-panel.c:189
-#: ../panels/printers/cc-printers-panel.c:287
+#. Translators: Someone has paused the Printer
+#: ../panels/printers/cc-printers-panel.c:285
+msgctxt "printer state"
 msgid "Paused"
 msgstr "Призупинено"
 
-#: ../panels/printers/cc-printers-panel.c:190
+#. Translators: The printer marker supply waste receptacle is almost full
+#: ../panels/printers/cc-printers-panel.c:287
 msgid "Waste receptacle almost full"
 msgstr "Майже повністю витрачено запас"
 
-#: ../panels/printers/cc-printers-panel.c:191
+#. Translators: The printer marker supply waste receptacle is full
+#: ../panels/printers/cc-printers-panel.c:289
 msgid "Waste receptacle full"
 msgstr "Повністю витрачено запас"
 
-#: ../panels/printers/cc-printers-panel.c:192
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/cc-printers-panel.c:291
 msgid "The optical photo conductor is near end of life"
 msgstr "Оптичний фотопровідник близький до виходу з ладу"
 
-#: ../panels/printers/cc-printers-panel.c:193
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/cc-printers-panel.c:293
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Оптичний фотопровідник вийшов з ладу"
 
-#: ../panels/printers/cc-printers-panel.c:281
-msgid "Idle"
-msgstr "Застій"
+#. Translators: Printer's state (can start new job without waiting)
+#: ../panels/printers/cc-printers-panel.c:430
+msgctxt "printer state"
+msgid "Ready"
+msgstr "Готовий"
 
-#: ../panels/printers/cc-printers-panel.c:284
-#: ../panels/printers/cc-printers-panel.c:671
+#. Translators: Printer's state (jobs are processing)
+#: ../panels/printers/cc-printers-panel.c:434
+msgctxt "printer state"
 msgid "Processing"
 msgstr "Оброблення"
 
-#: ../panels/printers/cc-printers-panel.c:665
-msgid "Pending"
-msgstr "Очікування"
-
-#: ../panels/printers/cc-printers-panel.c:668
-msgid "Held"
-msgstr "Затримано"
-
-#: ../panels/printers/cc-printers-panel.c:674
+#. Translators: Printer's state (no jobs can be processed)
+#: ../panels/printers/cc-printers-panel.c:438
+msgctxt "printer state"
 msgid "Stopped"
 msgstr "Зупинено"
 
-#: ../panels/printers/cc-printers-panel.c:677
+#. Translators: Toner supply
+#: ../panels/printers/cc-printers-panel.c:536
+msgid "Toner Level"
+msgstr "Рівень тонера"
+
+#. Translators: Ink supply
+#: ../panels/printers/cc-printers-panel.c:539
+msgid "Ink Level"
+msgstr "Рівень чорнила"
+
+#. Translators: By supply we mean ink, toner, staples, water, ...
+#: ../panels/printers/cc-printers-panel.c:542
+msgid "Supply Level"
+msgstr "Рівень постачання"
+
+#. Translators: there is n active print jobs on this printer
+#: ../panels/printers/cc-printers-panel.c:557
+#, c-format
+msgid "%u active"
+msgid_plural "%u active"
+msgstr[0] "%u активний"
+msgstr[1] "%u активних"
+msgstr[2] "%u активних"
+
+#. Translators: Job's state (job is waiting to be printed)
+#: ../panels/printers/cc-printers-panel.c:1024
+msgctxt "print job"
+msgid "Pending"
+msgstr "Очікування"
+
+#. Translators: Job's state (job is held for printing)
+#: ../panels/printers/cc-printers-panel.c:1028
+msgctxt "print job"
+msgid "Held"
+msgstr "Затримано"
+
+#. Translators: Job's state (job is currently printing)
+#: ../panels/printers/cc-printers-panel.c:1032
+msgctxt "print job"
+msgid "Processing"
+msgstr "Оброблення"
+
+#. Translators: Job's state (job has been stopped)
+#: ../panels/printers/cc-printers-panel.c:1036
+msgctxt "print job"
+msgid "Stopped"
+msgstr "Зупинено"
+
+#. Translators: Job's state (job has been canceled)
+#: ../panels/printers/cc-printers-panel.c:1040
+msgctxt "print job"
 msgid "Canceled"
 msgstr "Скасовано"
 
-#: ../panels/printers/cc-printers-panel.c:680
+#. Translators: Job's state (job has aborted due to error)
+#: ../panels/printers/cc-printers-panel.c:1044
+msgctxt "print job"
 msgid "Aborted"
-msgstr "Перервано"
+msgstr "Припинено"
 
-#: ../panels/printers/cc-printers-panel.c:683
+#. Translators: Job's state (job has completed successfully)
+#: ../panels/printers/cc-printers-panel.c:1048
+msgctxt "print job"
 msgid "Completed"
 msgstr "Завершено"
 
-#: ../panels/printers/cc-printers-panel.c:773
+#. Translators: Name of column showing titles of print jobs
+#: ../panels/printers/cc-printers-panel.c:1140
 msgid "Job Title"
 msgstr "Назва завдання"
 
-#: ../panels/printers/cc-printers-panel.c:780
+#. Translators: Name of column showing statuses of print jobs
+#: ../panels/printers/cc-printers-panel.c:1149
 msgid "Job State"
 msgstr "Стан завдання"
 
-#: ../panels/printers/cc-printers-panel.c:785
-msgid "User"
-msgstr "Користувач"
-
-#: ../panels/printers/cc-printers-panel.c:790
+#. Translators: Name of column showing times of creation of print jobs
+#: ../panels/printers/cc-printers-panel.c:1155
 msgid "Time"
 msgstr "Час"
 
-#: ../panels/printers/cc-printers-panel.c:973
+#. Translators: Program cannot connect to DBus' system bus
+#: ../panels/printers/cc-printers-panel.c:1345
 #, c-format
 msgid "Could not connect to system bus: %s"
 msgstr "Неможливо з'єднатися із системною шиною: %s"
 
-#: ../panels/printers/cc-printers-panel.c:1448
-msgid "PrintSelfTestPage"
-msgstr "PrintSelfTestPage"
-
-#: ../panels/printers/cc-printers-panel.c:1449
+#. Translators: Name of job which makes printer to print test page
+#: ../panels/printers/cc-printers-panel.c:2055
 msgid "Test page"
 msgstr "Тестова сторінка"
 
-#: ../panels/printers/cc-printers-panel.c:1455
-msgid "Clean all"
-msgstr "Очистити все"
+#. Translators: Name of job which makes printer to clean its heads
+#: ../panels/printers/cc-printers-panel.c:2063
+msgid "Clean print heads"
+msgstr "Очищення головок принтера"
 
-#: ../panels/printers/cc-printers-panel.c:1456
-msgid "Clean print heads command"
-msgstr "Команда очищення головок принтера"
-
-#: ../panels/printers/cc-printers-panel.c:1458
+#. Translators: An error has occured during execution of a CUPS maintenance command
+#: ../panels/printers/cc-printers-panel.c:2068
 msgid "An error has occured during a maintenance command."
 msgstr "Помилка при виконанні команди обслуговування принтера."
 
-#: ../panels/printers/cc-printers-panel.c:1493
+#. Translators: The XML file containing user interface can not be loaded
+#: ../panels/printers/cc-printers-panel.c:2195
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Не вдалось завантажити інтерфейс: %s"
@@ -954,8 +1395,8 @@ msgstr "Змінити налаштування принтера"
 
 #. Translators: those are keywords for the printing control-center panel
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:3
-msgid "Foo;Bar;Baz;"
-msgstr "Foo;Bar;Baz;"
+msgid "Printer;Queue;Print;Paper;Ink;Toner;"
+msgstr "Принтер;Черга;Друк;Папір;Чорнило;Тонер;"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
 msgid "Printers"
@@ -965,222 +1406,156 @@ msgstr "Принтери"
 msgid "---"
 msgstr "---"
 
-#: ../panels/printers/printers.ui.h:2
-#: ../panels/user-accounts/data/language-chooser.ui.h:1
-#: ../panels/user-accounts/data/photo-dialog.ui.h:3
-msgid "Cancel"
-msgstr "Скасувати"
-
+#. Translators: This tab contains list of active print jobs of the selected printer
 #: ../panels/printers/printers.ui.h:3
-msgid "Clean Print Heads"
-msgstr "Очищення головок принтера"
+msgid "Active Print Jobs"
+msgstr "Чинні завдання принтера"
 
 #: ../panels/printers/printers.ui.h:4
-#: ../panels/region/gnome-region-panel-xkbot.c:227
-#: ../panels/sound/gvc-sound-theme-chooser.c:589
+msgid "Allowed users"
+msgstr "Дозволені користувачі"
+
+#. Translators: Switch back to printer's info tab
+#: ../panels/printers/printers.ui.h:6
+msgid "Back"
+msgstr "Назад"
+
+#. Translators: This checkbox is checked when the default printer is selected.
+#: ../panels/printers/printers.ui.h:8
+#: ../panels/region/gnome-region-panel-xkbot.c:229
+#: ../panels/sound/gvc-sound-theme-chooser.c:581
 msgid "Default"
 msgstr "Типовий"
 
-#: ../panels/printers/printers.ui.h:5
-msgid "Description:"
-msgstr "Опис:"
-
-#: ../panels/printers/printers.ui.h:6
-msgid "Disable Printer"
-msgstr "Вимкнути принтер"
-
-#: ../panels/printers/printers.ui.h:7
-msgid "Hold"
-msgstr "Затримати"
-
-#: ../panels/printers/printers.ui.h:8
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:18
-msgid "Location:"
-msgstr "Адреса:"
-
 #: ../panels/printers/printers.ui.h:9
+msgid "IP Address"
+msgstr "Адреса IP"
+
+#: ../panels/printers/printers.ui.h:10
+msgid "Info"
+msgstr "Інформація"
+
+#: ../panels/printers/printers.ui.h:11
+msgid "Jobs"
+msgstr "Завдання"
+
+#. Translators: Location of the printer (e.g. Lab, 1st floor,...).
+#: ../panels/printers/printers.ui.h:13
+msgid "Location"
+msgstr "Адреса"
+
+#: ../panels/printers/printers.ui.h:14
+msgid "Model"
+msgstr "Модель"
+
+#. Translators: This button opens printer's options tab
+#: ../panels/printers/printers.ui.h:16
+msgid "Options"
+msgstr "Параметри"
+
+#. Translators: This button executes command which prints test page.
+#: ../panels/printers/printers.ui.h:18
 msgid "Print Test Page"
 msgstr "Надрукувати тестову сторінку"
 
-#: ../panels/printers/printers.ui.h:10
-msgid "Printer Jobs"
-msgstr "Завдання принтера"
+#: ../panels/printers/printers.ui.h:19
+msgid "Printer"
+msgstr "Принтер"
 
-#: ../panels/printers/printers.ui.h:11
-msgid "Release"
-msgstr "Випустити"
+#. Translators: This tab contains list of active print jobs of the selected printer
+#: ../panels/printers/printers.ui.h:21
+msgid "Printer Options"
+msgstr "Параметри принтера"
 
-#: ../panels/printers/printers.ui.h:12
-msgid "Share with these users:"
-msgstr "Поділитись з цими користувачами:"
+#: ../panels/printers/printers.ui.h:22
+msgid "Printing..."
+msgstr "Друкування…"
 
-#: ../panels/printers/printers.ui.h:13
-msgid "Show / hide printer's jobs"
-msgstr "Показати / сховати завдання принтера"
+#. Tanslators: Switch to tab containing printer's jobs
+#: ../panels/printers/printers.ui.h:24
+msgid "Show"
+msgstr "Показати"
 
-#: ../panels/printers/printers.ui.h:14
-msgid "Status:"
-msgstr "Стан:"
+#. Translators: By supply we mean ink, toner, staples, water, ...
+#: ../panels/printers/printers.ui.h:26
+msgid "Supply"
+msgstr "Постачання"
 
-#: ../panels/printers/printers.ui.h:15
-msgid "Supply:"
-msgstr "Постачання:"
+#: ../panels/region/gnome-region-panel.ui.h:1
+msgid "Allow different layouts for each window"
+msgstr "Дозволити окрему розкладку для кожного вікна"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
-msgid "Keyboard _model:"
-msgstr "_Модель клавіатури:"
+msgid "Install languages..."
+msgstr "Встановити мови…"
 
 #: ../panels/region/gnome-region-panel.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "Language"
+msgstr "Мова"
+
+#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Layouts"
 msgstr "Розкладки"
 
-#: ../panels/region/gnome-region-panel.ui.h:4
-msgid "List of keyboard layouts selected for usage"
-msgstr "Список вибраних розкладок "
-
-#: ../panels/region/gnome-region-panel.ui.h:6
-#: ../panels/universal-access/uap.ui.h:54
-msgid "Mouse Keys"
-msgstr "Кнопки миші"
-
-#: ../panels/region/gnome-region-panel.ui.h:7
-msgid "Move _Down"
-msgstr "Перемістити в_низ"
-
-#: ../panels/region/gnome-region-panel.ui.h:8
-msgid "Move _Up"
-msgstr "Перемістити в_гору"
-
-#: ../panels/region/gnome-region-panel.ui.h:9
-msgid "Move the selected keyboard layout down in the list"
-msgstr "Перемістити вибрану розкладку вниз по списку"
-
-#: ../panels/region/gnome-region-panel.ui.h:10
-msgid "Move the selected keyboard layout up in the list"
-msgstr "Перемістити вибрану розкладку вверх по списку"
-
-#: ../panels/region/gnome-region-panel.ui.h:11
-msgid "New windows u_se active window's layout"
-msgstr "Нові вікна _використовують чинну розкладку"
-
-#: ../panels/region/gnome-region-panel.ui.h:12
-msgid "Print a diagram of the selected keyboard layout"
-msgstr "Показати діаграму вибраної розкладки"
-
-#: ../panels/region/gnome-region-panel.ui.h:13
+#: ../panels/region/gnome-region-panel.ui.h:5
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
 msgstr "Регіон та мова"
 
-#: ../panels/region/gnome-region-panel.ui.h:14
-msgid "Remove the selected keyboard layout from the list"
-msgstr "Вилучити вибрану розкладку зі списку"
-
-#: ../panels/region/gnome-region-panel.ui.h:15
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
 msgstr "Замінити поточні налаштування розкладки на типові "
 
-#: ../panels/region/gnome-region-panel.ui.h:17
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid "Reset to De_faults"
 msgstr "_Типові значення"
 
-#: ../panels/region/gnome-region-panel.ui.h:18
-msgid "Select a keyboard layout to be added to the list"
-msgstr "Виберіть розкладку клавіатури, щоб додати її до списку"
+#: ../panels/region/gnome-region-panel.ui.h:9
+msgid "Select a display language"
+msgstr "Вибрати мову показу"
 
-#: ../panels/region/gnome-region-panel.ui.h:21
+#: ../panels/region/gnome-region-panel.ui.h:10
+msgid "Use default layout in new windows"
+msgstr "Використовувати типову розкладку в новому вікні"
+
+#: ../panels/region/gnome-region-panel.ui.h:11
+msgid "Use previous window's layout in new windows"
+msgstr "Використовувати розкладку попереднього вікна в новому"
+
+#: ../panels/region/gnome-region-panel.ui.h:12
+msgid "Use same layout in all windows"
+msgstr "Використовувати однакові розкладки у всіх вікнах"
+
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "View and edit keyboard layout options"
 msgstr "Перегляд та зміна параметрів розкладки клавіатури"
 
-#: ../panels/region/gnome-region-panel.ui.h:22
-#: ../panels/mouse/gnome-mouse-properties.ui.h:48
-msgid "_Acceleration:"
-msgstr "_Акселератори:"
-
-#: ../panels/region/gnome-region-panel.ui.h:23
-msgid "_Add..."
-msgstr "_Додати…"
-
-#: ../panels/region/gnome-region-panel.ui.h:25
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "_Options..."
 msgstr "_Параметри…"
 
-#: ../panels/region/gnome-region-panel.ui.h:26
-msgid "_Pointer can be controlled using the keypad"
-msgstr "_Дозволити керування вказівником миші з клавіатури"
-
-#: ../panels/region/gnome-region-panel.ui.h:27
-msgid "_Separate layout for each window"
-msgstr "Окрема _розкладка для кожного вікна"
-
-#: ../panels/region/gnome-region-panel.ui.h:29
-msgid "_Type to test settings:"
-msgstr "П_оле для перевірки налаштувань:"
-
 #: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
-msgid "By _country"
-msgstr "За _країною"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
-msgid "By _language"
-msgstr "За _мовою"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
 msgid "Choose a Layout"
 msgstr "Виберіть розкладку"
 
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:4
-msgid "Preview:"
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
+msgid "Preview"
 msgstr "Перегляд"
 
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:5
-msgid "_Country:"
-msgstr "К_раїна:"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:6
-msgid "_Language:"
-msgstr "_Мова:"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:7
-msgid "_Variants:"
-msgstr "Вар_іанти:"
-
-#: ../panels/region/gnome-region-panel-model-chooser.ui.h:1
-msgid "Choose a Keyboard Model"
-msgstr "Виберіть модель клавіатури"
-
-#: ../panels/region/gnome-region-panel-model-chooser.ui.h:2
-msgid "_Models:"
-msgstr "_Моделі:"
-
-#: ../panels/region/gnome-region-panel-model-chooser.ui.h:3
-msgid "_Vendors:"
-msgstr "Виро_бники:"
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
+msgid "Select an input source to add"
+msgstr "Вибрати джерело, щоб додати"
 
 #: ../panels/region/gnome-region-panel-options-dialog.ui.h:1
 msgid "Keyboard Layout Options"
 msgstr "Параметри розкладки клавіатури"
 
-#. TRANSLATORS: device type
-#. TRANSLATORS: AP type
-#: ../panels/region/gnome-region-panel-xkb.c:70
-#: ../panels/network/panel-common.c:65 ../panels/network/panel-common.c:138
-msgid "Unknown"
-msgstr "Невідома"
-
-#: ../panels/region/gnome-region-panel-xkblt.c:218
+#: ../panels/region/gnome-region-panel-xkblt.c:220
 msgid "Layout"
 msgstr "Розкладка"
-
-#: ../panels/region/gnome-region-panel-xkbmc.c:163
-msgid "Vendors"
-msgstr "Виробники"
-
-#: ../panels/region/gnome-region-panel-xkbmc.c:229
-msgid "Models"
-msgstr "Моделі"
 
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:1
 msgid "Change your region and language settings"
@@ -1188,186 +1563,123 @@ msgstr "Налаштувати ваш регіон і мову"
 
 #. Translators: those are keywords for the region control-center panel
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:3
-msgid "Language;Layout;"
-msgstr "Мова;Розкладка;"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:1
-msgid "Accessibility"
-msgstr "Доступність"
+msgid "Language;Layout;Keyboard;"
+msgstr "Мова;Розкладка;Клавіатура;"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
-msgid "Choose type of click _beforehand"
-msgstr "Виберіть тип _завчасного клацання"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgid "Choose type of click with mo_use gestures"
-msgstr "Виберіть тип клацання з використанням _жестів мишею"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:5
-#: ../panels/universal-access/uap.ui.h:29
-msgid "D_elay:"
-msgstr "За_тримка:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:6
-msgid "D_ouble click:"
-msgstr "П_одвійне клацання:"
-
-#. click to initiate drag-and-drop (like normally click and hold)
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
-msgid "D_rag click:"
-msgstr "Клацання для пе_ретягування:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Disable _touchpad while typing"
 msgstr "_Вимикати сенсорну панель під час набирання"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:3
 msgid "Double-Click Timeout"
 msgstr "Затримка подвійного клацання"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
 msgid "Drag and Drop"
 msgstr "Перетягування"
 
-#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
-msgid "Dwell Click"
-msgstr "Клацання при наведенні"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
 msgid "Enable _mouse clicks with touchpad"
 msgstr "Увімкнути _клацання по сенсорній панелі"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "Enable h_orizontal scrolling"
 msgstr "Увімкнути _горизонтальну прокрутку"
 
 #. high sensitivity
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
 msgid "High"
 msgstr "Висока"
 
 #. large threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:22
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Large"
 msgstr "Великий"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:23
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Locate Pointer"
 msgstr "Пошук вказівника миші"
 
 #. low sensitivity
-#: ../panels/mouse/gnome-mouse-properties.ui.h:27
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Low"
 msgstr "Низька"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+msgid "Mouse"
+msgstr "Миша"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
 msgid "Mouse Orientation"
 msgstr "Орієнтація миші"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:29
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
 msgid "Mouse Preferences"
 msgstr "Налаштування миші"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:30
+#: ../panels/mouse/gnome-mouse-properties.ui.h:21
 msgid "Pointer Speed"
 msgstr "Швидкість вказівника"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
+#: ../panels/mouse/gnome-mouse-properties.ui.h:22
 msgid "Scrolling"
 msgstr "Прокрутка"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:32
-msgid "Seco_ndary click:"
-msgstr "Клацання др_угою кнопкою:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:33
+#: ../panels/mouse/gnome-mouse-properties.ui.h:23
 msgid "Sh_ow position of pointer when the Control key is pressed"
 msgstr "По_казувати позицію вказівника при натисканні клавіші Ctrl"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:36
-msgid "Show click type _window"
-msgstr "Показувати _вікно типу клацання"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:37
-#: ../panels/universal-access/uap.ui.h:73
-msgid "Simulated Secondary Click"
-msgstr "Імітація клацання другою кнопкою"
-
 #. small threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:41
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/universal-access/uap.ui.h:58
 msgid "Small"
 msgstr "Малий"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:42
+#: ../panels/mouse/gnome-mouse-properties.ui.h:29
 msgid "Thr_eshold:"
 msgstr "_Поріг:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:43
+#: ../panels/mouse/gnome-mouse-properties.ui.h:30
 msgid "To test your settings, try to double-click on the face."
 msgstr ""
 "Для перевірки налаштувань, спробуйте виконати подвійне клацання на лиці."
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:44
+#: ../panels/mouse/gnome-mouse-properties.ui.h:31
 msgid "Touchpad"
 msgstr "Сенсорний пристрій"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:45
+#: ../panels/mouse/gnome-mouse-properties.ui.h:32
 msgid "Two-_finger scrolling"
 msgstr "Прокручування _двома пальцями"
 
-#. Dwell Click = Clicking without hardware buttons (by letting the pointer sit on the click target for a certain amount of time)
-#: ../panels/mouse/gnome-mouse-properties.ui.h:47
-msgid "You can also use the Dwell Click panel applet to choose the click type."
-msgstr ""
-"Також можна використовувати аплет панелі клацання при наведенні для вибору "
-"типу клацання."
+#: ../panels/mouse/gnome-mouse-properties.ui.h:33
+msgid "_Acceleration:"
+msgstr "_Акселератори:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:50
+#: ../panels/mouse/gnome-mouse-properties.ui.h:34
 msgid "_Disabled"
 msgstr "_Вимкнено"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:51
+#: ../panels/mouse/gnome-mouse-properties.ui.h:35
 msgid "_Edge scrolling"
 msgstr "_Прокрутка з краю"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:52
-msgid "_Initiate click when stopping pointer movement"
-msgstr "_Ініціювати клацання при зупинці вказівника миші"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:53
+#: ../panels/mouse/gnome-mouse-properties.ui.h:36
 msgid "_Left-handed"
 msgstr "Під _ліву руку"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:54
-#: ../panels/universal-access/uap.ui.h:96
-msgid "_Motion threshold:"
-msgstr "_Поріг руху:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:55
+#: ../panels/mouse/gnome-mouse-properties.ui.h:37
 msgid "_Right-handed"
 msgstr "Під _праву руку"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:56
+#: ../panels/mouse/gnome-mouse-properties.ui.h:38
 msgid "_Sensitivity:"
 msgstr "_Чутливість:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:57
-msgid "_Single click:"
-msgstr "_Одиночне клацання:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:58
+#: ../panels/mouse/gnome-mouse-properties.ui.h:39
 msgid "_Timeout:"
 msgstr "За_тримка"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:59
-msgid "_Trigger secondary click by holding down the primary button"
-msgstr ""
-"_Ініціювати клацання другою кнопкою при утриманні натисненою основної кнопки"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse and Touchpad"
@@ -1382,114 +1694,23 @@ msgstr "Встановлення налаштувань миші та сенсо
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Сенсор;Вказівник;Клік;Стукіт;Подвійний;Кнопка;Кулька;"
 
-#: ../panels/network/cc-network-panel.c:1062
-#: ../panels/network/cc-network-panel.c:1084
-#, c-format
-msgid "%i Mb/s"
-msgstr "%i Мб/с"
-
-#: ../panels/network/cc-network-panel.c:1064
-#, c-format
-msgid "%i Gb/s"
-msgstr "%i Гб/с"
-
-#: ../panels/network/cc-network-panel.c:1082
-#, c-format
-msgid "%i kb/s"
-msgstr "%i кб/с"
-
-#: ../panels/network/cc-network-panel.c:1739
+#: ../panels/network/cc-network-panel.c:969
 msgid "Network proxy"
 msgstr "Мережева проксі"
 
-#: ../panels/network/cc-network-panel.c:1748
+#: ../panels/network/cc-network-panel.c:978
 msgid "Set the system proxy settings"
 msgstr "Налаштувати системне проксі"
 
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:69
-msgid "Wired"
-msgstr "Дротовий"
+#. TRANSLATORS: the user is running a NM that is too new and API compatible
+#: ../panels/network/cc-network-panel.c:1122
+msgid "The running NetworkManager version is not compatible (too new)."
+msgstr "Запущена версія NetworkManager не сумісна (надто нова)."
 
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:73
-msgid "Wireless"
-msgstr "Бездротовий"
-
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:78
-msgid "Mobile broadband"
-msgstr "Мобільна радіомережа"
-
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:82
-msgid "Bluetooth"
-msgstr "Bluetooth"
-
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:86
-msgid "Mesh"
-msgstr "Сітка"
-
-#. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:142
-msgid "Ad-hoc"
-msgstr "Спеціальне"
-
-#. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:146
-msgid "Infrastructure"
-msgstr "Інфраструктура"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:164
-msgid "Status unknown"
-msgstr "Стан невідомий"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:168
-msgid "Unmanaged"
-msgstr "Некерований"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:172
-msgid "Unavailable"
-msgstr "Недоступний"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:176
-msgid "Disconnected"
-msgstr "Від'єднаний"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:180
-msgid "Preparing connection"
-msgstr "Підготовлення з'єднання"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:184
-msgid "Configuring connection"
-msgstr "Налаштування з'єднання"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:188
-msgid "Authenticating"
-msgstr "Автентифікація"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:192
-msgid "Getting network address"
-msgstr "Отримання мережевої адреси"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:196
-msgid "Connected"
-msgstr "З'єднано"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:200
-msgid "Failed to connect"
-msgstr "Помилка з'єднання"
+#. TRANSLATORS: the user is running a NM that is too old and API compatible
+#: ../panels/network/cc-network-panel.c:1128
+msgid "The running NetworkManager version is not compatible (too old)."
+msgstr "Запущена версія NetworkManager не сумісна (надто стара)."
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 msgid "Network"
@@ -1592,14 +1813,124 @@ msgstr "Швидкість:"
 msgid "Subnet Mask:"
 msgstr "Маска мережі:"
 
-#: ../panels/network/network.ui.h:23
-#: ../panels/user-accounts/um-lockbutton.c:364
-msgid "Unlock"
-msgstr "Розблокувати"
-
 #: ../panels/network/network.ui.h:24
 msgid "Username:"
 msgstr "Користувач:"
+
+#: ../panels/network/network.ui.h:25
+msgctxt "proxy method"
+msgid "Automatic"
+msgstr "Автоматично"
+
+#: ../panels/network/network.ui.h:26
+msgctxt "proxy method"
+msgid "Manual"
+msgstr "Вручну"
+
+#: ../panels/network/network.ui.h:27
+msgctxt "proxy method"
+msgid "None"
+msgstr "Немає"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:76
+msgid "Wired"
+msgstr "Дротовий"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:80
+msgid "Wireless"
+msgstr "Бездротовий"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:87
+msgid "Mobile broadband"
+msgstr "Мобільна радіомережа"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:92
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:96
+msgid "Mesh"
+msgstr "Сітка"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:155
+msgid "Ad-hoc"
+msgstr "Спеціальне"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:159
+msgid "Infrastructure"
+msgstr "Інфраструктура"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:177
+msgid "Status unknown"
+msgstr "Стан невідомий"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:181
+msgid "Unmanaged"
+msgstr "Некерований"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:185
+msgid "Unavailable"
+msgstr "Недоступний"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:189
+msgid "Disconnected"
+msgstr "Від'єднаний"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:193
+msgid "Preparing connection"
+msgstr "Підготовлення з'єднання"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:197
+msgid "Configuring connection"
+msgstr "Налаштування з'єднання"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:201
+msgid "Authenticating"
+msgstr "Автентифікація"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:205
+msgid "Getting network address"
+msgstr "Отримання мережевої адреси"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:209
+msgid "Checking network address"
+msgstr "Перевіряння мережевої адреси"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:213
+msgid "Connected"
+msgstr "З'єднано"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:217
+msgid "Disconnecting"
+msgstr "Від'єднання"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:221
+msgid "Failed to connect"
+msgstr "Помилка з'єднання"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:225
+msgid "Status unknown (missing)"
+msgstr "Стан невідомий (немає)"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -1611,14 +1942,14 @@ msgstr "Налаштувати керування живлення"
 
 #. Translators: those are keywords for the power control-center panel
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
-msgid "Power;Sleep;Suspend;Hibernate;"
-msgstr "Живлення;Сон;Призупинити;Приспати;"
+msgid "Power;Sleep;Suspend;Hibernate;Battery;"
+msgstr "Живлення;Сон;Призупинити;Приспати;Батарея;"
 
-#: ../panels/power/cc-power-panel.c:151
+#: ../panels/power/cc-power-panel.c:153
 msgid "Unknown time"
 msgstr "Час невідомий"
 
-#: ../panels/power/cc-power-panel.c:157
+#: ../panels/power/cc-power-panel.c:159
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -1626,7 +1957,7 @@ msgstr[0] "%i хвилина"
 msgstr[1] "%i хвилини"
 msgstr[2] "%i хвилин"
 
-#: ../panels/power/cc-power-panel.c:169
+#: ../panels/power/cc-power-panel.c:171
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -1636,64 +1967,120 @@ msgstr[2] "%i годин"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:177
+#: ../panels/power/cc-power-panel.c:179
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:178
+#: ../panels/power/cc-power-panel.c:180
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "година"
 msgstr[1] "години"
 msgstr[2] "годин"
 
-#: ../panels/power/cc-power-panel.c:179
+#: ../panels/power/cc-power-panel.c:181
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "хвилина"
 msgstr[1] "хвилини"
 msgstr[2] "хвилин"
 
-#: ../panels/power/cc-power-panel.c:251
+#: ../panels/power/cc-power-panel.c:253
 msgid "Battery charging"
 msgstr "Заряджання батареї"
 
-#: ../panels/power/cc-power-panel.c:254
+#: ../panels/power/cc-power-panel.c:256
 msgid "Battery discharging"
 msgstr "Розряджання батареї"
 
-#: ../panels/power/cc-power-panel.c:265
+#: ../panels/power/cc-power-panel.c:267
 msgid "UPS charging"
 msgstr "Заряджання UPS"
 
-#: ../panels/power/cc-power-panel.c:268
+#: ../panels/power/cc-power-panel.c:270
 msgid "UPS discharging"
 msgstr "Розряджання UPS"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:286
+#: ../panels/power/cc-power-panel.c:288
 #, c-format
 msgid "%s until charged (%.0lf%%)"
 msgstr "%s до повного заряду (%.0lf%%)"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:292
+#: ../panels/power/cc-power-panel.c:294
 #, c-format
 msgid "%s until empty (%.0lf%%)"
 msgstr "%s до повного розряду (%.0lf%%)"
 
 #. TRANSLATORS: %1 is a percentage value. Note: this string is only
 #. * used when we don't have a time value
-#: ../panels/power/cc-power-panel.c:300
+#: ../panels/power/cc-power-panel.c:302
 #, c-format
 msgid "%.0lf%% charged"
 msgstr "%.0lf%% заряджено"
 
+#: ../panels/power/power.ui.h:1 ../panels/screen/screen.ui.h:1
+msgid "1 hour"
+msgstr "1 година"
+
+#: ../panels/power/power.ui.h:2 ../panels/screen/screen.ui.h:3
+msgid "10 minutes"
+msgstr "10 хвилин"
+
+#: ../panels/power/power.ui.h:3 ../panels/screen/screen.ui.h:6
+msgid "30 minutes"
+msgstr "30 хвилин"
+
+#: ../panels/power/power.ui.h:4 ../panels/screen/screen.ui.h:7
+msgid "5 minutes"
+msgstr "5 хвилин"
+
+#: ../panels/power/power.ui.h:5
+msgid "Ask me"
+msgstr "Запитувати мене"
+
+#: ../panels/power/power.ui.h:7
+msgid "Hibernate"
+msgstr "Приспати"
+
+#: ../panels/power/power.ui.h:8
+msgid "On AC power:"
+msgstr "Через шнур:"
+
+#: ../panels/power/power.ui.h:9
+msgid "On battery power:"
+msgstr "Від батареї:"
+
+#: ../panels/power/power.ui.h:10
+msgid "Put the computer to sleep when inactive:"
+msgstr "Виберіть комп'ютер, щоб приспати, коли неактивний:"
+
+#: ../panels/power/power.ui.h:11
+msgid "Shutdown"
+msgstr "Вимкнути"
+
+#: ../panels/power/power.ui.h:12
+msgid "Suspend"
+msgstr "Призупинити"
+
+#: ../panels/power/power.ui.h:13
+msgid "When power is critically low:"
+msgstr "Коли живлення критично мало:"
+
+#: ../panels/power/power.ui.h:14
+msgid "When the power button is pressed:"
+msgstr "Коли кнопку живлення натиснуто:"
+
+#: ../panels/power/power.ui.h:15
+msgid "When the sleep button is pressed:"
+msgstr "Коли кнопку сну натиснуто:"
+
 #. Translators: those are keywords for the brightness and lock control-center panel
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
-msgid "Brightness;Lock;Dim;Blank;"
-msgstr "Яскравість;Блокування;Притлумлення;Очищення;"
+msgid "Brightness;Lock;Dim;Blank;Monitor;"
+msgstr "Яскравість;Блокування;Притлумлення;Очищення;Монітор;"
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
 msgid "Screen"
@@ -1702,6 +2089,47 @@ msgstr "Екран"
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
 msgid "Screen brightness and lock settings"
 msgstr "Яскравість екрана та налаштування блокування"
+
+#: ../panels/screen/screen.ui.h:2
+msgid "1 minute"
+msgstr "1 хвилина"
+
+#: ../panels/screen/screen.ui.h:4
+msgid "2 minutes"
+msgstr "2 хвилини"
+
+#: ../panels/screen/screen.ui.h:5
+msgid "3 minutes"
+msgstr "3 хвилини"
+
+#: ../panels/screen/screen.ui.h:8
+msgid "Brightness"
+msgstr "Яскравість"
+
+#: ../panels/screen/screen.ui.h:9
+msgid "Dim screen to save power"
+msgstr "Зменшити яскравість екрана для збереження енергії"
+
+#. To translators: This asks whether you want to lock the screen (through the screensaver) when you're detected to be physically in your home (your house, etc.)
+#: ../panels/screen/screen.ui.h:11
+msgid "Don't lock when at home"
+msgstr "Не блокувати, коли вдома"
+
+#: ../panels/screen/screen.ui.h:12
+msgid "Locations..."
+msgstr "Місце…"
+
+#: ../panels/screen/screen.ui.h:14
+msgid "Lock screen after:"
+msgstr "Заблокувати екран після:"
+
+#: ../panels/screen/screen.ui.h:15
+msgid "Screen turns off"
+msgstr "Екран вимикається"
+
+#: ../panels/screen/screen.ui.h:16
+msgid "Turn off after:"
+msgstr "Вимкнути після:"
 
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
@@ -1715,7 +2143,7 @@ msgstr "Версія цієї програми"
 msgid " — GNOME Volume Control Applet"
 msgstr " — аплет керування гучністю у GNOME"
 
-#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1922
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1923
 msgid "Output"
 msgstr "Вивід"
 
@@ -1723,7 +2151,7 @@ msgstr "Вивід"
 msgid "Sound Output Volume"
 msgstr "Гучність виводу звуку"
 
-#: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1839
+#: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1840
 msgid "Input"
 msgstr "Вхід"
 
@@ -1787,7 +2215,7 @@ msgstr "Без підсилення"
 msgid "Mute"
 msgstr "Приглушити"
 
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1630
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1631
 msgid "_Profile:"
 msgstr "_Профіль:"
 
@@ -1825,8 +2253,8 @@ msgid "Peak detect"
 msgstr "Виявлення піків"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1507
-#: ../panels/sound/gvc-mixer-dialog.c:1718
-#: ../panels/sound/gvc-sound-theme-chooser.c:599
+#: ../panels/sound/gvc-mixer-dialog.c:1719
+#: ../panels/sound/gvc-sound-theme-chooser.c:591
 msgid "Name"
 msgstr "Назва"
 
@@ -1839,56 +2267,56 @@ msgstr "Пристрій"
 msgid "Speaker Testing for %s"
 msgstr "Випробовування динаміків для %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1631
+#: ../panels/sound/gvc-mixer-dialog.c:1632
 msgid "Test Speakers"
 msgstr "Випробувати динаміки"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1762
+#: ../panels/sound/gvc-mixer-dialog.c:1763
 msgid "_Output volume: "
 msgstr "Гучність в_иводу: "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1776
+#: ../panels/sound/gvc-mixer-dialog.c:1777
 msgid "Sound Effects"
 msgstr "Звукові ефекти"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1783
+#: ../panels/sound/gvc-mixer-dialog.c:1784
 msgid "_Alert volume: "
 msgstr "Гучність _попередження:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1796
+#: ../panels/sound/gvc-mixer-dialog.c:1797
 msgid "Hardware"
 msgstr "Обладнання"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1801
+#: ../panels/sound/gvc-mixer-dialog.c:1802
 msgid "C_hoose a device to configure:"
 msgstr "_Виберіть пристрій для налаштовування:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1828
-#: ../panels/sound/gvc-mixer-dialog.c:1951
+#: ../panels/sound/gvc-mixer-dialog.c:1829
+#: ../panels/sound/gvc-mixer-dialog.c:1952
 msgid "Settings for the selected device:"
 msgstr "Налаштування вибраного пристрою:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1846
+#: ../panels/sound/gvc-mixer-dialog.c:1847
 msgid "_Input volume: "
 msgstr "Гучність в_ходу:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1869
+#: ../panels/sound/gvc-mixer-dialog.c:1870
 msgid "Input level:"
 msgstr "Рівень входу:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1895
+#: ../panels/sound/gvc-mixer-dialog.c:1896
 msgid "C_hoose a device for sound input:"
 msgstr "в_иберіть пристрій для прийому звуку:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1927
+#: ../panels/sound/gvc-mixer-dialog.c:1928
 msgid "C_hoose a device for sound output:"
 msgstr "_Виберіть пристрій для виведення звуку:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1962
+#: ../panels/sound/gvc-mixer-dialog.c:1963
 msgid "Applications"
 msgstr "Програми"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1966
+#: ../panels/sound/gvc-mixer-dialog.c:1967
 msgid "No application is currently playing or recording audio."
 msgstr "Немає програм, котрі зараз відтворюють або записують звук."
 
@@ -1922,27 +2350,27 @@ msgstr "Н_алаштування звуку"
 msgid "Muted"
 msgstr "Приглушено"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:189
+#: ../panels/sound/gvc-sound-theme-chooser.c:188
 msgid "Built-in"
 msgstr "Вбудовано"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:459
-#: ../panels/sound/gvc-sound-theme-chooser.c:471
-#: ../panels/sound/gvc-sound-theme-chooser.c:483
+#: ../panels/sound/gvc-sound-theme-chooser.c:451
+#: ../panels/sound/gvc-sound-theme-chooser.c:463
+#: ../panels/sound/gvc-sound-theme-chooser.c:475
 msgid "Sound Preferences"
 msgstr "Налаштування звук"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:462
-#: ../panels/sound/gvc-sound-theme-chooser.c:473
-#: ../panels/sound/gvc-sound-theme-chooser.c:485
+#: ../panels/sound/gvc-sound-theme-chooser.c:454
+#: ../panels/sound/gvc-sound-theme-chooser.c:465
+#: ../panels/sound/gvc-sound-theme-chooser.c:477
 msgid "Testing event sound"
 msgstr "Випробування звуку події"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:590
+#: ../panels/sound/gvc-sound-theme-chooser.c:582
 msgid "From theme"
 msgstr "З теми"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:778
+#: ../panels/sound/gvc-sound-theme-chooser.c:764
 msgid "C_hoose an alert sound:"
 msgstr "В_иберіть звук попередження:"
 
@@ -1995,14 +2423,15 @@ msgstr "Скло"
 msgid "Sonar"
 msgstr "Сонар"
 
+#: ../panels/universal-access/cc-ua-panel.c:468
+#: ../panels/universal-access/cc-ua-panel.c:473
+msgid "No shortcut set"
+msgstr "Не вказано жодного скорочення"
+
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Keyboard;Mouse;a11y;Accessibility;"
 msgstr "Клавіатура;Миша;Доступність;"
-
-#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
-msgid "Universal Access"
-msgstr "Універсальний доступ"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
@@ -2023,320 +2452,313 @@ msgstr "125%"
 msgid "150%"
 msgstr "150%"
 
-#: ../panels/universal-access/uap.ui.h:7
-msgid "<span size=\"x-large\">High/Inverse</span>"
-msgstr "<span size=\"x-large\">Висока/інвертувати</span>"
-
 #: ../panels/universal-access/uap.ui.h:8
-msgid "<span size=\"x-large\">High</span>"
-msgstr "<span size=\"x-large\">Висока</span>"
+#, no-c-format
+msgid "75%"
+msgstr "75%"
 
 #: ../panels/universal-access/uap.ui.h:9
-msgid "<span size=\"x-large\">Low</span>"
-msgstr "<span size=\"x-large\">Низька</span>"
-
-#: ../panels/universal-access/uap.ui.h:10
-msgid "<span size=\"x-large\">Normal</span>"
-msgstr "<span size=\"x-large\">Звичайна</span>"
-
-#: ../panels/universal-access/uap.ui.h:11
 msgid "Acceptance delay:"
 msgstr "Допустима затримка:"
 
-#: ../panels/universal-access/uap.ui.h:12
+#: ../panels/universal-access/uap.ui.h:10
 msgid "Beep when Caps and Num Lock are used"
 msgstr "Подавати сигнал при використанні CapsLock та NumLock"
 
-#: ../panels/universal-access/uap.ui.h:13
+#: ../panels/universal-access/uap.ui.h:11
 msgid "Beep when a key is"
 msgstr "Подавати сигнал, коли клавішу"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:12
 msgid "Beep when a key is rejected"
 msgstr "Подавати сигнал, коли клавішу відпущено"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:13
 msgid "Beep when a modifer key is pressed"
 msgstr "Подавати сигнал, коли модифікатор натиснуто"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:14
 msgid "Bounce Keys"
 msgstr "Пружні клавіші"
 
-#: ../panels/universal-access/uap.ui.h:17
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Caribou"
 msgstr "КАРІБУ"
 
-#: ../panels/universal-access/uap.ui.h:18
-msgid "Change constrast:"
+#: ../panels/universal-access/uap.ui.h:16
+msgid "Change contrast:"
 msgstr "Змінити контраст:"
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Closed Captioning"
 msgstr "Субтитри"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:18
 msgid "Contrast:"
 msgstr "Контраст:"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:19
 msgid "Control the pointer using the keypad"
 msgstr "Керування вказівником миші з клавіатури"
 
-#: ../panels/universal-access/uap.ui.h:22
+#: ../panels/universal-access/uap.ui.h:20
 msgid "Control the pointer using the video camera."
 msgstr "Керування вказівником з використанням відеокамери."
 
+#: ../panels/universal-access/uap.ui.h:22
+msgid "D_elay:"
+msgstr "За_тримка:"
+
 #: ../panels/universal-access/uap.ui.h:23
-msgid "Ctrl+Alt+-"
-msgstr "Ctrl+Alt+-"
-
-#: ../panels/universal-access/uap.ui.h:24
-msgid "Ctrl+Alt+0"
-msgstr "Ctrl+Alt+0"
-
-#: ../panels/universal-access/uap.ui.h:25
-msgid "Ctrl+Alt+4"
-msgstr "Ctrl+Alt+4"
-
-#: ../panels/universal-access/uap.ui.h:26
-msgid "Ctrl+Alt+8"
-msgstr "Ctrl+Alt+8"
-
-#: ../panels/universal-access/uap.ui.h:27
-msgid "Ctrl+Alt+="
-msgstr "Ctrl+Alt+="
-
-#: ../panels/universal-access/uap.ui.h:30
 msgid "Dasher"
 msgstr "Dasher"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Decrease size:"
 msgstr "Зменшити розмір:"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Disable if two keys are pressed together"
 msgstr "Вимкнено, якщо дві клавіші натиснуто одночасно"
 
-#: ../panels/universal-access/uap.ui.h:33
-msgid "Display"
-msgstr "Показати"
-
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:26
 msgid "Display a textual description of speech and sounds"
 msgstr "Показати текстовий опис мовлення та звуків"
 
-#: ../panels/universal-access/uap.ui.h:35
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Flash the entire screen"
 msgstr "Блимання всього екрана"
 
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Flash the window title"
 msgstr "Блимання заголовку вікна"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:29
 msgid "GOK"
 msgstr "GOK"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Hearing"
 msgstr "Слухання"
 
-#: ../panels/universal-access/uap.ui.h:40
-msgid "High/Inverse"
-msgstr "Висока/інвертувати"
-
-#: ../panels/universal-access/uap.ui.h:41
-msgid "HighContrast"
-msgstr "Високийконтраст"
-
-#: ../panels/universal-access/uap.ui.h:42
-msgid "HighContrastInverse"
-msgstr "ВисокийКонтрастІнвертування"
-
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Hover Click"
 msgstr "Клацання при наведенні"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Ignores fast duplicate keypresses"
 msgstr "Ігнорувати швидкі повторні натискання клавіш"
 
-#: ../panels/universal-access/uap.ui.h:45
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Increase size:"
 msgstr "Збільшити розмір:"
 
-#: ../panels/universal-access/uap.ui.h:46
-msgid "Keyboard Settings..."
-msgstr "Налаштування клавіатури…"
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Keyboard Settings"
+msgstr "Налаштування клавіатури"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:37
 msgid "Larger"
 msgstr "Великий"
 
-#: ../panels/universal-access/uap.ui.h:53
-msgid "LowContrast"
-msgstr "НизькийКонтаст"
+#: ../panels/universal-access/uap.ui.h:40
+msgid "Mouse Keys"
+msgstr "Кнопки миші"
 
-#: ../panels/universal-access/uap.ui.h:55
-msgid "Mouse Settings..."
-msgstr "Налаштування миші…"
+#: ../panels/universal-access/uap.ui.h:41
+msgid "Mouse Settings"
+msgstr "Налаштування миші"
 
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Nomon"
 msgstr "Nomon"
 
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "Немає"
 
-#: ../panels/universal-access/uap.ui.h:59
-msgid "Off"
-msgstr "Вимкнено"
-
-#: ../panels/universal-access/uap.ui.h:60
-msgid "On"
-msgstr "Увімкнено"
-
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:45
 msgid "On screen keyboard"
 msgstr "Екранна клавіатура"
 
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:46
 msgid "OnBoard"
 msgstr "Бортова"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Options..."
 msgstr "Параметри…"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Pointing and Clicking"
 msgstr "Вказівник і натискання"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "Вказує затримку між натиском і прийняттям клавіші"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Screen Reader"
 msgstr "Зчитувач екрана"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:51
+msgid "Screen keyboard"
+msgstr "Екранна клавіатура"
+
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Seeing"
 msgstr "Область"
 
-#: ../panels/universal-access/uap.ui.h:68
-msgid "Shift+Ctrl+Alt+-"
-msgstr "Shift+Ctrl+Alt+-"
+#: ../panels/universal-access/uap.ui.h:55
+msgid "Simulated Secondary Click"
+msgstr "Імітація клацання другою кнопкою"
 
-#: ../panels/universal-access/uap.ui.h:69
-msgid "Shift+Ctrl+Alt+="
-msgstr "Shift+Ctrl+Alt+="
-
-#: ../panels/universal-access/uap.ui.h:72
-msgid "Show Universal Access status"
-msgstr "Показати ста універсального доступу"
-
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Slow Keys"
 msgstr "Повільні клавіші"
 
-#: ../panels/universal-access/uap.ui.h:77
-msgid "Sound Settings..."
-msgstr "Налаштування звуку…"
+#: ../panels/universal-access/uap.ui.h:59
+msgid "Sound Settings"
+msgstr "Налаштування звуку"
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Sticky Keys"
 msgstr "Липкі клавіші"
 
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Test flash"
 msgstr "Випробувати спалах"
 
-#: ../panels/universal-access/uap.ui.h:80
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Text size:"
 msgstr "Розмір тесту:"
 
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Обробляє послідовність клавіш-модифікаторів як комбінації"
 
-#: ../panels/universal-access/uap.ui.h:82
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Trigger a click when the pointer hovers"
 msgstr "Увімкнути клацання при зупинці вказівника миші"
 
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Увімкнути подвійне клацання при утриманні натисненою основної кнопки"
 
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Turn on accessibility features from the keyboard"
 msgstr "Увімкнути функцій доступності з клавіатури"
 
-#: ../panels/universal-access/uap.ui.h:85
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Turn on or off:"
 msgstr "Увімкнути або вимкнути:"
 
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Type here to test settings"
 msgstr "Поле для випробування налаштувань:"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Typing"
 msgstr "Набір"
 
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Typing Assistant"
 msgstr "Асистент з набору на клавіатурі"
 
-#: ../panels/universal-access/uap.ui.h:89
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "Використовувати візуальний індикатор, коли виникає звук попередження"
 
-#: ../panels/universal-access/uap.ui.h:90
-msgid "Use an alternative form of text input"
-msgstr "Використовувати альтернативну форму вводу тексту"
-
-#: ../panels/universal-access/uap.ui.h:91
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Video Mouse"
 msgstr "Відео миші"
 
-#: ../panels/universal-access/uap.ui.h:92
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Visual Alerts"
 msgstr "Візуальне попередження"
 
-#: ../panels/universal-access/uap.ui.h:94
+#: ../panels/universal-access/uap.ui.h:74
 msgid "Zoom in:"
 msgstr "Наблизити:"
 
-#: ../panels/universal-access/uap.ui.h:95
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Zoom out:"
 msgstr "Віддалити:"
 
-#: ../panels/universal-access/uap.ui.h:97
+#: ../panels/universal-access/uap.ui.h:76
+msgid "_Motion threshold:"
+msgstr "_Поріг руху:"
+
+#: ../panels/universal-access/uap.ui.h:77
 msgid "accepted"
 msgstr "прийнято"
 
-#: ../panels/universal-access/uap.ui.h:98
+#: ../panels/universal-access/uap.ui.h:78
 msgid "pressed"
 msgstr "натиснуто"
 
-#: ../panels/universal-access/uap.ui.h:99
+#: ../panels/universal-access/uap.ui.h:79
 msgid "rejected"
 msgstr "відхилено"
 
-#: ../panels/user-accounts/gdm-languages.c:613
-msgid "Unspecified"
-msgstr "Не вказано"
+#: ../panels/universal-access/uap.ui.h:80
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">High/Inverse</span>"
+msgstr "<span size=\"x-large\">Висока/інвертувати</span>"
+
+#: ../panels/universal-access/uap.ui.h:81
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">High</span>"
+msgstr "<span size=\"x-large\">Висока</span>"
+
+#: ../panels/universal-access/uap.ui.h:82
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">Low</span>"
+msgstr "<span size=\"x-large\">Низька</span>"
+
+#: ../panels/universal-access/uap.ui.h:83
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">Normal</span>"
+msgstr "<span size=\"x-large\">Звичайна</span>"
+
+#: ../panels/universal-access/uap.ui.h:84
+msgctxt "universal access, contrast"
+msgid "High"
+msgstr "Висока"
+
+#: ../panels/universal-access/uap.ui.h:85
+msgctxt "universal access, contrast"
+msgid "High/Inverse"
+msgstr "Висока/інвертувати"
+
+#: ../panels/universal-access/uap.ui.h:86
+msgctxt "universal access, contrast"
+msgid "Low"
+msgstr "Низька"
+
+#: ../panels/universal-access/uap.ui.h:87
+msgctxt "universal access, contrast"
+msgid "Normal"
+msgstr "Звичайний"
+
+#. Translators: this refers to theme contrast and font size
+#: ../panels/universal-access/uap.ui.h:89
+msgctxt "universal access, seeing"
+msgid "Display"
+msgstr "Показати"
+
+#. Translators: this refers to screen magnifier
+#: ../panels/universal-access/uap.ui.h:91
+msgctxt "universal access, seeing"
+msgid "Zoom"
+msgstr "Масштаб"
 
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
 msgstr "Помилка при автентифікації"
 
 #: ../panels/user-accounts/run-passwd.c:506
-#: ../panels/user-accounts/um-password-dialog.c:378
+#: ../panels/user-accounts/um-password-dialog.c:375
 #, c-format
 msgid "The new password is too short"
 msgstr "Новий пароль надто короткий"
@@ -2413,21 +2835,21 @@ msgstr ""
 
 #: ../panels/user-accounts/um-account-type.c:35
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgctxt "Account type"
 msgid "Standard"
 msgstr "Стандартно"
 
 #: ../panels/user-accounts/um-account-type.c:37
 #: ../panels/user-accounts/data/account-dialog.ui.h:1
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgctxt "Account type"
 msgid "Administrator"
 msgstr "Адміністратор"
 
 #: ../panels/user-accounts/um-account-type.c:39
 #: ../panels/user-accounts/data/account-dialog.ui.h:3
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
 msgctxt "Account type"
 msgid "Supervised"
 msgstr "Нагляд"
@@ -2488,15 +2910,15 @@ msgstr "Не вдалось отримати доступ до пристрою 
 msgid "Could not start finger capture on '%s' device"
 msgstr "Не вдалось почати сканування відбитків пальців на пристрої «%s»"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:550
+#: ../panels/user-accounts/um-fingerprint-dialog.c:549
 msgid "Could not access any fingerprint readers"
 msgstr "Не вдалось знайти пристрої сканування відбитків"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:551
+#: ../panels/user-accounts/um-fingerprint-dialog.c:550
 msgid "Please contact your system administrator for help."
 msgstr "Зв'яжіться з системним адміністратором за допомогою."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:588
+#: ../panels/user-accounts/um-fingerprint-dialog.c:587
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Enable Fingerprint Login"
 msgstr "Увімкнути вхід у систему за відбитком"
@@ -2505,7 +2927,8 @@ msgstr "Увімкнути вхід у систему за відбитком"
 #. * The variable is the name of the device, for example:
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
-#: ../panels/user-accounts/um-fingerprint-dialog.c:625
+#.
+#: ../panels/user-accounts/um-fingerprint-dialog.c:621
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -2514,7 +2937,7 @@ msgstr ""
 "Щоб увімкнути вхід через відбитки пальців, треба зняти один або декілька "
 "зразків, використовуючи пристрій «%s»"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:633
+#: ../panels/user-accounts/um-fingerprint-dialog.c:629
 #, c-format
 msgid ""
 "Enrolling fingerprints for\n"
@@ -2523,113 +2946,81 @@ msgstr ""
 "Зарахування відбитків для\n"
 "<b><big>%s</big></b>"
 
-#: ../panels/user-accounts/um-language-dialog.c:328
+#: ../panels/user-accounts/um-language-dialog.c:180
 msgid "Other..."
 msgstr "Інше…"
 
-#: ../panels/user-accounts/um-lockbutton.c:355
-msgid "Lock"
-msgstr "Заблокувати"
-
-#: ../panels/user-accounts/um-lockbutton.c:373
-msgid "Locked"
-msgstr "Заблоковано"
-
-#: ../panels/user-accounts/um-lockbutton.c:382
-msgid ""
-"Dialog is unlocked.\n"
-"Click to prevent further changes"
-msgstr ""
-"Вікно заблоковано.\n"
-"Натисніть, щоб запобігти подальших змін"
-
-#: ../panels/user-accounts/um-lockbutton.c:391
-msgid ""
-"Dialog is locked.\n"
-"Click to make changes"
-msgstr ""
-"Вікно заблоковано.\n"
-"Натисніть, щоб унести зміни"
-
-#: ../panels/user-accounts/um-lockbutton.c:400
-msgid ""
-"System policy prevents changes.\n"
-"Contact your system administrator"
-msgstr ""
-"Системна політика забороняє зміни.\n"
-"Зв'яжіться з системним адміністратором"
-
-#: ../panels/user-accounts/um-password-dialog.c:182
+#: ../panels/user-accounts/um-password-dialog.c:179
 msgid "More choices..."
 msgstr "Більше варіантів…"
 
-#: ../panels/user-accounts/um-password-dialog.c:288
+#: ../panels/user-accounts/um-password-dialog.c:285
 msgid "Please choose another password."
 msgstr "Будь ласка, виберіть інший пароль."
 
-#: ../panels/user-accounts/um-password-dialog.c:297
+#: ../panels/user-accounts/um-password-dialog.c:294
 msgid "Please type your current password again."
 msgstr "Будь ласка, введіть поточний пароль ще раз."
 
-#: ../panels/user-accounts/um-password-dialog.c:303
+#: ../panels/user-accounts/um-password-dialog.c:300
 msgid "Password could not be changed"
 msgstr "Пароль неможливо змінити"
 
-#: ../panels/user-accounts/um-password-dialog.c:375
+#: ../panels/user-accounts/um-password-dialog.c:372
 msgid "You need to enter a new password"
 msgstr "Потрібно ввести новий пароль"
 
-#: ../panels/user-accounts/um-password-dialog.c:384
+#: ../panels/user-accounts/um-password-dialog.c:381
 msgid "You need to confirm the password"
 msgstr "Потрібно підтвердити пароль"
 
-#: ../panels/user-accounts/um-password-dialog.c:387
+#: ../panels/user-accounts/um-password-dialog.c:384
 msgid "The passwords do not match"
 msgstr "Паролі не збігаються"
 
-#: ../panels/user-accounts/um-password-dialog.c:393
+#: ../panels/user-accounts/um-password-dialog.c:390
 msgid "You need to enter your current password"
 msgstr "Потрібно ввести поточний пароль"
 
-#: ../panels/user-accounts/um-password-dialog.c:396
+#: ../panels/user-accounts/um-password-dialog.c:393
 msgid "The current password is not correct"
 msgstr "Поточний пароль некоректний"
 
-#: ../panels/user-accounts/um-password-dialog.c:469
-#: ../panels/user-accounts/um-password-dialog.c:686
+#: ../panels/user-accounts/um-password-dialog.c:466
+#: ../panels/user-accounts/um-password-dialog.c:683
 msgctxt "Password strength"
 msgid "Too short"
 msgstr "Надто короткий"
 
-#: ../panels/user-accounts/um-password-dialog.c:472
-#: ../panels/user-accounts/um-password-dialog.c:687
+#: ../panels/user-accounts/um-password-dialog.c:469
+#: ../panels/user-accounts/um-password-dialog.c:684
 msgctxt "Password strength"
 msgid "Weak"
 msgstr "Слабкий"
 
-#: ../panels/user-accounts/um-password-dialog.c:474
-#: ../panels/user-accounts/um-password-dialog.c:688
+#: ../panels/user-accounts/um-password-dialog.c:471
+#: ../panels/user-accounts/um-password-dialog.c:685
 msgctxt "Password strength"
 msgid "Fair"
 msgstr "Прийнятний"
 
-#: ../panels/user-accounts/um-password-dialog.c:476
-#: ../panels/user-accounts/um-password-dialog.c:689
+#: ../panels/user-accounts/um-password-dialog.c:473
+#: ../panels/user-accounts/um-password-dialog.c:686
 msgctxt "Password strength"
 msgid "Good"
 msgstr "Непоганий"
 
-#: ../panels/user-accounts/um-password-dialog.c:478
-#: ../panels/user-accounts/um-password-dialog.c:690
+#: ../panels/user-accounts/um-password-dialog.c:475
+#: ../panels/user-accounts/um-password-dialog.c:687
 msgctxt "Password strength"
 msgid "Strong"
 msgstr "Сильний"
 
-#: ../panels/user-accounts/um-password-dialog.c:517
+#: ../panels/user-accounts/um-password-dialog.c:514
 msgid "Passwords do not match"
 msgstr "Паролі не збігаються"
 
-#: ../panels/user-accounts/um-password-dialog.c:543
+#: ../panels/user-accounts/um-password-dialog.c:540
 msgid "Wrong password"
 msgstr "Неправильний пароль"
 
@@ -2638,11 +3029,6 @@ msgstr "Неправильний пароль"
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
 msgid "Select"
 msgstr "Вибрати"
-
-#: ../panels/user-accounts/um-photo-dialog.c:216
-#: ../panels/user-accounts/data/photo-dialog.ui.h:2
-msgid "Browse for more pictures"
-msgstr "Огляд інших зображень"
 
 #: ../panels/user-accounts/um-photo-dialog.c:429
 msgid "Disable image"
@@ -2656,7 +3042,7 @@ msgstr "Зробити фотографію…"
 msgid "Browse for more pictures..."
 msgstr "Вибрати інші зображення…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:693
+#: ../panels/user-accounts/um-photo-dialog.c:690
 #, c-format
 msgid "Used by %s"
 msgstr "Використовується %s"
@@ -2670,20 +3056,20 @@ msgstr "Користувач «%s» вже існує."
 msgid "This user does not exist."
 msgstr "Користувач не існує."
 
-#: ../panels/user-accounts/um-user-panel.c:352
+#: ../panels/user-accounts/um-user-panel.c:357
 msgid "Failed to delete user"
 msgstr "Помилка при вилученні користувача"
 
-#: ../panels/user-accounts/um-user-panel.c:412
+#: ../panels/user-accounts/um-user-panel.c:417
 msgid "You cannot delete your own account."
 msgstr "Неможливо вилучити власний обліковий запис."
 
-#: ../panels/user-accounts/um-user-panel.c:421
+#: ../panels/user-accounts/um-user-panel.c:426
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s досі у системі"
 
-#: ../panels/user-accounts/um-user-panel.c:425
+#: ../panels/user-accounts/um-user-panel.c:430
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -2691,12 +3077,12 @@ msgstr ""
 "Вилучивши користувача, коли він у системі, змусить його покинути систему в "
 "нестійкому стані."
 
-#: ../panels/user-accounts/um-user-panel.c:434
+#: ../panels/user-accounts/um-user-panel.c:439
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Зберегти файли користувача %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:438
+#: ../panels/user-accounts/um-user-panel.c:443
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -2704,42 +3090,42 @@ msgstr ""
 "Можна утримати домашній каталог, поштову скриньку та тимчасові файли, коли "
 "обліковий запис користувача буде вилучатись."
 
-#: ../panels/user-accounts/um-user-panel.c:441
+#: ../panels/user-accounts/um-user-panel.c:446
 msgid "_Delete Files"
 msgstr "В_илучити файли"
 
-#: ../panels/user-accounts/um-user-panel.c:442
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "_Keep Files"
 msgstr "З_берегти файли"
 
-#: ../panels/user-accounts/um-user-panel.c:443
+#: ../panels/user-accounts/um-user-panel.c:448
 msgid "_Cancel"
 msgstr "_Скасувати"
 
-#: ../panels/user-accounts/um-user-panel.c:467
+#: ../panels/user-accounts/um-user-panel.c:498
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Обліковий запис вимкнено"
 
-#: ../panels/user-accounts/um-user-panel.c:476
+#: ../panels/user-accounts/um-user-panel.c:506
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Буде встановлено при наступному вході"
 
-#: ../panels/user-accounts/um-user-panel.c:479
+#: ../panels/user-accounts/um-user-panel.c:509
 msgctxt "Password mode"
 msgid "None"
 msgstr "Немає"
 
-#: ../panels/user-accounts/um-user-panel.c:821
+#: ../panels/user-accounts/um-user-panel.c:831
 msgid "Failed to contact the accounts service"
 msgstr "Не вдалось зв'язатись зі службою облікових записів"
 
-#: ../panels/user-accounts/um-user-panel.c:823
+#: ../panels/user-accounts/um-user-panel.c:833
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Будь ласка, переконайтесь, що AccountService встановлено та ввімкнено."
 
-#: ../panels/user-accounts/um-user-panel.c:856
+#: ../panels/user-accounts/um-user-panel.c:866
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -2747,13 +3133,12 @@ msgstr ""
 "Щоб унести зміни,\n"
 "натисніть спочатку на піктограму *"
 
-#: ../panels/user-accounts/um-user-panel.c:894
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+#: ../panels/user-accounts/um-user-panel.c:904
 msgid "Create a user"
 msgstr "Створити користувача"
 
-#: ../panels/user-accounts/um-user-panel.c:905
-#: ../panels/user-accounts/um-user-panel.c:1181
+#: ../panels/user-accounts/um-user-panel.c:915
+#: ../panels/user-accounts/um-user-panel.c:1214
 msgid ""
 "To create a user,\n"
 "click the * icon first"
@@ -2761,13 +3146,12 @@ msgstr ""
 "Щоб створити користувач,\n"
 "натисніть спочатку на піктограму *"
 
-#: ../panels/user-accounts/um-user-panel.c:914
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
+#: ../panels/user-accounts/um-user-panel.c:924
 msgid "Delete the selected user"
 msgstr "Вилучити вибраного користувача"
 
-#: ../panels/user-accounts/um-user-panel.c:926
-#: ../panels/user-accounts/um-user-panel.c:1186
+#: ../panels/user-accounts/um-user-panel.c:936
+#: ../panels/user-accounts/um-user-panel.c:1219
 msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
@@ -2775,11 +3159,11 @@ msgstr ""
 "Щоб вилучити вибраного користувача,\n"
 "натисніть спочатку на піктограму *"
 
-#: ../panels/user-accounts/um-user-panel.c:1090
+#: ../panels/user-accounts/um-user-panel.c:1114
 msgid "My Account"
 msgstr "Мій обліковий запис"
 
-#: ../panels/user-accounts/um-user-panel.c:1099
+#: ../panels/user-accounts/um-user-panel.c:1124
 msgid "Other Accounts"
 msgstr "Інші облікові записи"
 
@@ -2805,24 +3189,29 @@ msgid "Create new account"
 msgstr "Створити новий обліковий запис"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
-msgid "_Account Type:"
-msgstr "Тип _облікового запису:"
+msgid "_Account Type"
+msgstr "Тип _облікового запису"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-msgid "_Full name:"
-msgstr "_Повне ім'я:"
+msgid "_Full name"
+msgstr "_Повне ім'я"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-msgid "_Username:"
-msgstr "_Користувач:"
+msgid "_Username"
+msgstr "_Користувач"
+
+#: ../panels/user-accounts/data/language-chooser.ui.h:1
+#: ../panels/user-accounts/data/photo-dialog.ui.h:3
+msgid "Cancel"
+msgstr "Скасувати"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
 msgid ""
 "<a href=\"http://wolfram.org/writing/howto/password.html\">How to choose a "
 "strong password</a>"
 msgstr ""
-"<a href=\"http://wolfram.org/writing/howto/password.html\">Як вибрати сильний "
-"пароль</a>"
+"<a href=\"http://wolfram.org/writing/howto/password.html\">Як вибрати "
+"сильний пароль</a>"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 msgid ""
@@ -2834,16 +3223,16 @@ msgstr ""
 "всіх користувачів цієї системи.<b>Не</b> вписуйте пароль сюди.</small>"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:3
-msgid "C_onfirm password:"
-msgstr "_Підтвердити пароль:"
+msgid "C_onfirm password"
+msgstr "_Підтвердити пароль"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:4
 msgid "Ch_ange"
 msgstr "З_мінити"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:5
-msgid "Changing password for:"
-msgstr "Змінити пароль для:"
+msgid "Changing password for"
+msgstr "Зміна паролю для"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:6
 msgid "Choose a generated password"
@@ -2854,8 +3243,8 @@ msgid "Choose password at next login"
 msgstr "Вибрати пароль при наступному вході"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:8
-msgid "Current _password:"
-msgstr "_Поточний пароль:"
+msgid "Current _password"
+msgstr "_Поточний пароль"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:9
 msgid "Disable this account"
@@ -2878,16 +3267,16 @@ msgid "Set a password now"
 msgstr "Вкажіть пароль зараз"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:14
-msgid "_Action:"
-msgstr "_Дія:"
+msgid "_Action"
+msgstr "_Дія"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:15
-msgid "_Hint:"
-msgstr "_Підказка:"
+msgid "_Hint"
+msgstr "_Підказка"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:16
-msgid "_New password:"
-msgstr "_Новий пароль:"
+msgid "_New password"
+msgstr "_Новий пароль"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:17
 msgid "_Show password"
@@ -2920,83 +3309,28 @@ msgid "Take a photograph"
 msgstr "Зробити фотографію"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
-msgid ""
-"A guest account will allow anyone to temporarily log in to this computer "
-"without a password.  For security, remote logins to this account are not "
-"allowed.\n"
-"\n"
-"<b>When the guest user logs out, all files and data associated with the "
-"account will be deleted.</b>"
-msgstr ""
-"Гостьовий обліковий запис дозволяє всім тимчасово увійти в систему без "
-"паролю. Для безпеки, віддалені входи заборонено.\n"
-"\n"
-"<b>Коли гість виходить, усі файли та дані, пов'язані з його обліковим "
-"записом,  вилучаються.</b>"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgid "Account Information"
 msgstr "Інформація про обліковий запис"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
-msgid "Account type:"
-msgstr "Тип облікового запису:"
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
+msgid "Account type"
+msgstr "Тип облікового запису"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+msgid "Automatic Login"
+msgstr "Автоматичний вхід"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+msgid "Fingerprint Login"
+msgstr "Вхід через відбитки пальців"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
-msgid "Accounts"
-msgstr "Облікові записи"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
-msgid "Address Book Card:"
-msgstr "Картка адресної книги:"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
-msgid "Allow guests to log in to this computer"
-msgstr "Дозволити гостям входити до системи"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
-msgid "Automatic Login:"
-msgstr "Автоматичний вхід:"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:15
-msgid "E-mail address:"
-msgstr "Адреса електронної пошти:"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:16
-msgid "Fingerprint Login:"
-msgstr "Вхід через відбитки пальців:"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:17
-msgid "Language:"
-msgstr "Мова:"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:19
 msgid "Login Options"
 msgstr "Параметри входу"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:20
-msgid "Open"
-msgstr "Відкрити"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:21
-msgid "Password:"
-msgstr "Пароль:"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:22
-msgid "Restrictions:"
-msgstr "Обмеження:"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:23
-msgid "Show Shutdown, Suspend and Restart actions"
-msgstr "Показувати дії вимкнення, призупинення та перезавантаження"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:24
-msgid "Show list of users"
-msgstr "Показувати список користувачів"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:25
-msgid "Show password hints"
-msgstr "Показувати підказки до паролів"
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
+msgid "Password"
+msgstr "Пароль"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:2
 msgid "Left index finger"
@@ -3083,3 +3417,253 @@ msgstr "Центр керування"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_Усі параметри"
+
+#~ msgid "Upside Down"
+#~ msgstr "Зверху вниз"
+
+#~ msgid "Error unsetting accelerator in configuration database: %s"
+#~ msgstr "Помилка звільнення прискорювача у базі даних налаштувань: %s"
+
+#~ msgid "add-toolbutton"
+#~ msgstr "add-toolbutton"
+
+#~ msgid "remove-toolbutton"
+#~ msgstr "remove-toolbutton"
+
+#~ msgid "Idle"
+#~ msgstr "Застій"
+
+#~ msgid "User"
+#~ msgstr "Користувач"
+
+#~ msgid "PrintSelfTestPage"
+#~ msgstr "PrintSelfTestPage"
+
+#~ msgid "Clean all"
+#~ msgstr "Очистити все"
+
+#~ msgid "Clean print heads command"
+#~ msgstr "Команда очищення головок принтера"
+
+#~ msgid "Foo;Bar;Baz;"
+#~ msgstr "Foo;Bar;Baz;"
+
+#~ msgid "Description:"
+#~ msgstr "Опис:"
+
+#~ msgid "Disable Printer"
+#~ msgstr "Вимкнути принтер"
+
+#~ msgid "Hold"
+#~ msgstr "Затримати"
+
+#~ msgid "Release"
+#~ msgstr "Випустити"
+
+#~ msgid "Share with these users:"
+#~ msgstr "Поділитись з цими користувачами:"
+
+#~ msgid "Show / hide printer's jobs"
+#~ msgstr "Показати / сховати завдання принтера"
+
+#~ msgid "Status:"
+#~ msgstr "Стан:"
+
+#~ msgid "Keyboard _model:"
+#~ msgstr "_Модель клавіатури:"
+
+#~ msgid "List of keyboard layouts selected for usage"
+#~ msgstr "Список вибраних розкладок "
+
+#~ msgid "Move _Down"
+#~ msgstr "Перемістити в_низ"
+
+#~ msgid "Move _Up"
+#~ msgstr "Перемістити в_гору"
+
+#~ msgid "Move the selected keyboard layout down in the list"
+#~ msgstr "Перемістити вибрану розкладку вниз по списку"
+
+#~ msgid "Move the selected keyboard layout up in the list"
+#~ msgstr "Перемістити вибрану розкладку вверх по списку"
+
+#~ msgid "New windows u_se active window's layout"
+#~ msgstr "Нові вікна _використовують чинну розкладку"
+
+#~ msgid "Print a diagram of the selected keyboard layout"
+#~ msgstr "Показати діаграму вибраної розкладки"
+
+#~ msgid "Remove the selected keyboard layout from the list"
+#~ msgstr "Вилучити вибрану розкладку зі списку"
+
+#~ msgid "Select a keyboard layout to be added to the list"
+#~ msgstr "Виберіть розкладку клавіатури, щоб додати її до списку"
+
+#~ msgid "_Add..."
+#~ msgstr "_Додати…"
+
+#~ msgid "_Pointer can be controlled using the keypad"
+#~ msgstr "_Дозволити керування вказівником миші з клавіатури"
+
+#~ msgid "_Type to test settings:"
+#~ msgstr "П_оле для перевірки налаштувань:"
+
+#~ msgid "By _country"
+#~ msgstr "За _країною"
+
+#~ msgid "By _language"
+#~ msgstr "За _мовою"
+
+#~ msgid "_Country:"
+#~ msgstr "К_раїна:"
+
+#~ msgid "_Language:"
+#~ msgstr "_Мова:"
+
+#~ msgid "_Variants:"
+#~ msgstr "Вар_іанти:"
+
+#~ msgid "Choose a Keyboard Model"
+#~ msgstr "Виберіть модель клавіатури"
+
+#~ msgid "_Models:"
+#~ msgstr "_Моделі:"
+
+#~ msgid "_Vendors:"
+#~ msgstr "Виро_бники:"
+
+#~ msgid "Vendors"
+#~ msgstr "Виробники"
+
+#~ msgid "Accessibility"
+#~ msgstr "Доступність"
+
+#~ msgid "Choose type of click _beforehand"
+#~ msgstr "Виберіть тип _завчасного клацання"
+
+#~ msgid "Choose type of click with mo_use gestures"
+#~ msgstr "Виберіть тип клацання з використанням _жестів мишею"
+
+#~ msgid "D_ouble click:"
+#~ msgstr "П_одвійне клацання:"
+
+#~ msgid "D_rag click:"
+#~ msgstr "Клацання для пе_ретягування:"
+
+#~ msgid "Dwell Click"
+#~ msgstr "Клацання при наведенні"
+
+#~ msgid "Seco_ndary click:"
+#~ msgstr "Клацання др_угою кнопкою:"
+
+#~ msgid "Show click type _window"
+#~ msgstr "Показувати _вікно типу клацання"
+
+#~ msgid ""
+#~ "You can also use the Dwell Click panel applet to choose the click type."
+#~ msgstr ""
+#~ "Також можна використовувати аплет панелі клацання при наведенні для "
+#~ "вибору типу клацання."
+
+#~ msgid "_Initiate click when stopping pointer movement"
+#~ msgstr "_Ініціювати клацання при зупинці вказівника миші"
+
+#~ msgid "_Single click:"
+#~ msgstr "_Одиночне клацання:"
+
+#~ msgid "_Trigger secondary click by holding down the primary button"
+#~ msgstr ""
+#~ "_Ініціювати клацання другою кнопкою при утриманні натисненою основної "
+#~ "кнопки"
+
+#~ msgid "%i Mb/s"
+#~ msgstr "%i Мб/с"
+
+#~ msgid "%i Gb/s"
+#~ msgstr "%i Гб/с"
+
+#~ msgid "%i kb/s"
+#~ msgstr "%i кб/с"
+
+#~ msgid "Ctrl+Alt+-"
+#~ msgstr "Ctrl+Alt+-"
+
+#~ msgid "Ctrl+Alt+0"
+#~ msgstr "Ctrl+Alt+0"
+
+#~ msgid "Ctrl+Alt+4"
+#~ msgstr "Ctrl+Alt+4"
+
+#~ msgid "Ctrl+Alt+8"
+#~ msgstr "Ctrl+Alt+8"
+
+#~ msgid "Ctrl+Alt+="
+#~ msgstr "Ctrl+Alt+="
+
+#~ msgid "HighContrast"
+#~ msgstr "Високийконтраст"
+
+#~ msgid "HighContrastInverse"
+#~ msgstr "ВисокийКонтрастІнвертування"
+
+#~ msgid "LowContrast"
+#~ msgstr "НизькийКонтаст"
+
+#~ msgid "Off"
+#~ msgstr "Вимкнено"
+
+#~ msgid "On"
+#~ msgstr "Увімкнено"
+
+#~ msgid "Shift+Ctrl+Alt+-"
+#~ msgstr "Shift+Ctrl+Alt+-"
+
+#~ msgid "Shift+Ctrl+Alt+="
+#~ msgstr "Shift+Ctrl+Alt+="
+
+#~ msgid "Show Universal Access status"
+#~ msgstr "Показати ста універсального доступу"
+
+#~ msgid "Use an alternative form of text input"
+#~ msgstr "Використовувати альтернативну форму вводу тексту"
+
+#~ msgid ""
+#~ "A guest account will allow anyone to temporarily log in to this computer "
+#~ "without a password.  For security, remote logins to this account are not "
+#~ "allowed.\n"
+#~ "\n"
+#~ "<b>When the guest user logs out, all files and data associated with the "
+#~ "account will be deleted.</b>"
+#~ msgstr ""
+#~ "Гостьовий обліковий запис дозволяє всім тимчасово увійти в систему без "
+#~ "паролю. Для безпеки, віддалені входи заборонено.\n"
+#~ "\n"
+#~ "<b>Коли гість виходить, усі файли та дані, пов'язані з його обліковим "
+#~ "записом,  вилучаються.</b>"
+
+#~ msgid "Accounts"
+#~ msgstr "Облікові записи"
+
+#~ msgid "Address Book Card:"
+#~ msgstr "Картка адресної книги:"
+
+#~ msgid "Allow guests to log in to this computer"
+#~ msgstr "Дозволити гостям входити до системи"
+
+#~ msgid "E-mail address:"
+#~ msgstr "Адреса електронної пошти:"
+
+#~ msgid "Open"
+#~ msgstr "Відкрити"
+
+#~ msgid "Restrictions:"
+#~ msgstr "Обмеження:"
+
+#~ msgid "Show Shutdown, Suspend and Restart actions"
+#~ msgstr "Показувати дії вимкнення, призупинення та перезавантаження"
+
+#~ msgid "Show list of users"
+#~ msgstr "Показувати список користувачів"
+
+#~ msgid "Show password hints"
+#~ msgstr "Показувати підказки до паролів"
