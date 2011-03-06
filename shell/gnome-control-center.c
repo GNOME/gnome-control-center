@@ -61,7 +61,9 @@ struct _GnomeControlCenterPrivate
   GtkWidget  *window;
   GtkWidget  *search_entry;
 
+  GMenuTree  *menu_tree;
   GtkListStore *store;
+  GHashTable *category_views;
 
   GtkTreeModel *search_filter;
   GtkWidget *search_view;
@@ -556,31 +558,52 @@ setup_search (GnomeControlCenter *shell)
 }
 
 static void
-fill_model (GnomeControlCenter *shell)
+maybe_add_category_view (GnomeControlCenter *shell,
+                         const char         *name)
+{
+  GtkTreeModel *filter;
+  GtkWidget *categoryview;
+
+  if (g_hash_table_lookup (shell->priv->category_views, name) != NULL)
+    return;
+
+  /* create new category view for this category */
+  filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (shell->priv->store),
+                                      NULL);
+  gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter),
+                                          (GtkTreeModelFilterVisibleFunc) category_filter_func,
+                                          g_strdup (name), g_free);
+
+  categoryview = cc_shell_category_view_new (name, filter);
+  gtk_box_pack_start (GTK_BOX (shell->priv->main_vbox), categoryview, FALSE, TRUE, 0);
+
+  g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
+                    "desktop-item-activated",
+                    G_CALLBACK (item_activated_cb), shell);
+
+  gtk_widget_show (categoryview);
+
+  g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
+                    "focus-in-event",
+                    G_CALLBACK (category_focus_in), shell);
+  g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
+                    "focus-out-event",
+                    G_CALLBACK (category_focus_out), shell);
+  g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
+                    "keynav-failed",
+                    G_CALLBACK (keynav_failed), shell);
+
+  g_hash_table_insert (shell->priv->category_views, g_strdup (name), categoryview);
+}
+
+static void
+reload_menu (GnomeControlCenter *shell)
 {
   GSList *list, *l;
   GMenuTreeDirectory *d;
-  GMenuTree *tree;
 
-  GnomeControlCenterPrivate *priv = shell->priv;
-
-  gtk_container_set_border_width (GTK_CONTAINER (shell->priv->main_vbox), 10);
-  gtk_container_set_focus_vadjustment (GTK_CONTAINER (shell->priv->main_vbox),
-                                       gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (shell->priv->scrolled_window)));
-
-  tree = gmenu_tree_lookup (MENUDIR "/gnomecc.menu", 0);
-
-  if (!tree)
-    {
-      g_warning ("Could not find control center menu");
-      return;
-    }
-
-  d = gmenu_tree_get_root_directory (tree);
-
+  d = gmenu_tree_get_root_directory (shell->priv->menu_tree);
   list = gmenu_tree_directory_get_contents (d);
-
-  priv->store = (GtkListStore *) cc_shell_model_new ();
 
   for (l = list; l; l = l->next)
     {
@@ -589,44 +612,20 @@ fill_model (GnomeControlCenter *shell)
 
       if (type == GMENU_TREE_ITEM_DIRECTORY)
         {
-          GtkTreeModel *filter;
-          GtkWidget *categoryview;
           GSList *contents, *f;
           const gchar *dir_name;
 
           contents = gmenu_tree_directory_get_contents (l->data);
           dir_name = gmenu_tree_directory_get_name (l->data);
 
-          /* create new category view for this category */
-          filter = gtk_tree_model_filter_new (GTK_TREE_MODEL (priv->store),
-                                              NULL);
-          gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter),
-                                                  (GtkTreeModelFilterVisibleFunc) category_filter_func,
-                                                  g_strdup (dir_name), g_free);
-
-          categoryview = cc_shell_category_view_new (dir_name, filter);
-          gtk_box_pack_start (GTK_BOX (shell->priv->main_vbox), categoryview, FALSE, TRUE, 0);
-          g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
-                            "desktop-item-activated",
-                            G_CALLBACK (item_activated_cb), shell);
-          gtk_widget_show (categoryview);
-          g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
-                           "focus-in-event",
-                           G_CALLBACK (category_focus_in), shell);
-          g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
-                           "focus-out-event",
-                           G_CALLBACK (category_focus_out), shell);
-          g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
-                           "keynav-failed",
-                           G_CALLBACK (keynav_failed), shell);
-
+          maybe_add_category_view (shell, dir_name);
 
           /* add the items from this category to the model */
           for (f = contents; f; f = f->next)
             {
               if (gmenu_tree_item_get_type (f->data) == GMENU_TREE_ITEM_ENTRY)
                 {
-                  cc_shell_model_add_item (CC_SHELL_MODEL (priv->store),
+                  cc_shell_model_add_item (CC_SHELL_MODEL (shell->priv->store),
                                            dir_name,
                                            f->data);
                 }
@@ -637,7 +636,38 @@ fill_model (GnomeControlCenter *shell)
     }
 
   g_slist_free (list);
+}
 
+static void
+on_menu_changed (GMenuTree          *monitor,
+                 GnomeControlCenter *shell)
+{
+  gtk_list_store_clear (shell->priv->store);
+  reload_menu (shell);
+}
+
+static void
+setup_model (GnomeControlCenter *shell)
+{
+  GnomeControlCenterPrivate *priv = shell->priv;
+
+  gtk_container_set_border_width (GTK_CONTAINER (shell->priv->main_vbox), 10);
+  gtk_container_set_focus_vadjustment (GTK_CONTAINER (shell->priv->main_vbox),
+                                       gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (shell->priv->scrolled_window)));
+
+  priv->store = (GtkListStore *) cc_shell_model_new ();
+  priv->category_views = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  priv->menu_tree = gmenu_tree_lookup (MENUDIR "/gnomecc.menu", 0);
+
+  if (priv->menu_tree == NULL)
+    {
+      g_warning ("Could not find control center menu");
+      return;
+    }
+
+  reload_menu (shell);
+
+  gmenu_tree_add_monitor (priv->menu_tree, (GMenuTreeChangedFunc)on_menu_changed, shell);
 }
 
 static void
@@ -852,6 +882,17 @@ gnome_control_center_finalize (GObject *object)
       priv->default_window_icon = NULL;
     }
 
+  if (priv->menu_tree)
+    {
+      gmenu_tree_remove_monitor (priv->menu_tree, (GMenuTreeChangedFunc)on_menu_changed, object);
+      g_object_unref (priv->menu_tree);
+    }
+
+  if (priv->category_views)
+    {
+      g_hash_table_destroy (priv->category_views);
+    }
+
   G_OBJECT_CLASS (gnome_control_center_parent_class)->finalize (object);
 }
 
@@ -1016,7 +1057,7 @@ gnome_control_center_init (GnomeControlCenter *self)
                     "clicked", G_CALLBACK (home_button_clicked_cb), self);
 
   /* load the available settings panels */
-  fill_model (self);
+  setup_model (self);
 
   /* load the panels that are implemented as plugins */
   load_panel_plugins (self);
