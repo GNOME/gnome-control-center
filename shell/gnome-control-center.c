@@ -885,7 +885,7 @@ gnome_control_center_finalize (GObject *object)
   if (priv->menu_tree)
     {
       gmenu_tree_remove_monitor (priv->menu_tree, (GMenuTreeChangedFunc)on_menu_changed, object);
-      g_object_unref (priv->menu_tree);
+      gmenu_tree_unref (priv->menu_tree);
     }
 
   if (priv->category_views)
