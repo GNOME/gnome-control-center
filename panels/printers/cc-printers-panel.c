@@ -33,6 +33,8 @@
 #include <math.h>
 
 #include "cc-lockbutton.h"
+#include "pp-new-printer-dialog.h"
+#include "pp-utils.h"
 
 G_DEFINE_DYNAMIC_TYPE (CcPrintersPanel, cc_printers_panel, CC_TYPE_PANEL)
 
@@ -70,6 +72,8 @@ struct _CcPrintersPanelPrivate
   GdkRGBA background_color;
 
   GPermission *permission;
+
+  PpNewPrinterDialog *pp_new_printer_dialog;
 
   gpointer dummy;
 };
@@ -170,32 +174,6 @@ cc_printers_panel_class_init (CcPrintersPanelClass *klass)
 static void
 cc_printers_panel_class_finalize (CcPrintersPanelClass *klass)
 {
-}
-
-gchar *
-get_ppd_attribute (const gchar *printer_name, const gchar *attribute_name)
-{
-  gchar *file_name = NULL;
-  ppd_file_t *ppd_file = NULL;
-  ppd_attr_t *ppd_attr = NULL;
-  gchar *result = NULL;
-
-  file_name = cupsGetPPD (printer_name);
-
-  if (file_name)
-    {
-      ppd_file = ppdOpenFile (file_name);
-      if (ppd_file)
-        {
-          ppd_attr = ppdFindAttr (ppd_file, attribute_name, NULL);
-          if (ppd_attr != NULL)
-            result = g_strdup (ppd_attr->value);
-          ppdClose (ppd_file);
-        }
-      g_unlink (file_name);
-    }
-
-  return result;
 }
 
 enum
@@ -1168,73 +1146,6 @@ enum
   ALLOWED_USERS_N_COLUMNS
 };
 
-static int
-ccGetAllowedUsers (gchar ***allowed_users, char *printer_name)
-{
-  const char * const   attrs[1] = { "requesting-user-name-allowed" };
-  http_t              *http;
-  ipp_t               *request = NULL;
-  gchar              **users = NULL;
-  ipp_t               *response;
-  char                 uri[HTTP_MAX_URI + 1];
-  int                  num_allowed_users = 0;
-
-  http = httpConnectEncrypt (cupsServer (),
-                             ippPort (),
-                             cupsEncryption ());
-
-  if (http || !allowed_users)
-    {
-      request = ippNewRequest (IPP_GET_PRINTER_ATTRIBUTES);
-
-      g_snprintf (uri, sizeof (uri), "ipp://localhost/printers/%s", printer_name);
-      ippAddString (request,
-                    IPP_TAG_OPERATION,
-                    IPP_TAG_URI,
-                    "printer-uri",
-                    NULL,
-                    uri);
-      ippAddStrings (request,
-                     IPP_TAG_OPERATION,
-                     IPP_TAG_KEYWORD,
-                     "requested-attributes",
-                     1,
-                     NULL,
-                     attrs);
-
-      response = cupsDoRequest (http, request, "/");
-      if (response)
-        {
-          ipp_attribute_t *attr = NULL;
-          ipp_attribute_t *allowed = NULL;
-
-          for (attr = response->attrs; attr != NULL; attr = attr->next)
-            {
-              if (attr->group_tag == IPP_TAG_PRINTER &&
-                  attr->value_tag == IPP_TAG_NAME &&
-                  !g_strcmp0 (attr->name, "requesting-user-name-allowed"))
-                allowed = attr;
-            }
-
-          if (allowed && allowed->num_values > 0)
-            {
-              int i;
-
-              num_allowed_users = allowed->num_values;
-              users = g_new (gchar*, num_allowed_users);
-
-              for (i = 0; i < num_allowed_users; i ++)
-                users[i] = g_strdup (allowed->values[i].string.text);
-            }
-          ippDelete(response);
-        }
-       httpClose (http);
-     }
-
-  *allowed_users = users;
-  return num_allowed_users;
-}
-
 static void
 actualize_allowed_users_list (CcPrintersPanel *self)
 {
@@ -1330,33 +1241,6 @@ populate_allowed_users_list (CcPrintersPanel *self)
                     "changed", G_CALLBACK (allowed_users_selection_changed_cb), self);
 }
 
-static DBusGProxy *
-get_dbus_proxy ()
-{
-  DBusGConnection *system_bus;
-  DBusGProxy      *proxy;
-  GError          *error;
-
-  error = NULL;
-  system_bus = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
-  if (system_bus == NULL)
-    {
-      /* Translators: Program cannot connect to DBus' system bus */
-      g_warning (_("Could not connect to system bus: %s"),
-                 error->message);
-      g_error_free (error);
-      return NULL;
-    }
-
-  error = NULL;
-
-  proxy = dbus_g_proxy_new_for_name (system_bus,
-                                     MECHANISM_BUS,
-                                     "/",
-                                     MECHANISM_BUS);
-  return proxy;
-}
-
 static void
 job_process_cb (GtkButton *button,
                 gpointer   user_data)
@@ -1378,7 +1262,10 @@ job_process_cb (GtkButton *button,
 
   if (id >= 0)
     {
-      proxy = get_dbus_proxy ();
+      proxy = get_dbus_proxy (MECHANISM_BUS,
+                              "/",
+                              MECHANISM_BUS,
+                              TRUE);
 
       if (!proxy)
         return;
@@ -1471,7 +1358,10 @@ printer_disable_cb (GObject    *gobject,
 
   if (name)
     {
-      proxy = get_dbus_proxy ();
+      proxy = get_dbus_proxy (MECHANISM_BUS,
+                              "/",
+                              MECHANISM_BUS,
+                              TRUE);
 
       if (!proxy)
         return;
@@ -1718,7 +1608,10 @@ allowed_user_remove_cb (GtkToolButton *button,
 
   if (name && printer_name)
     {
-      proxy = get_dbus_proxy ();
+      proxy = get_dbus_proxy (MECHANISM_BUS,
+                              "/",
+                              MECHANISM_BUS,
+                              TRUE);
 
       if (!proxy)
         return;
@@ -1788,7 +1681,10 @@ allowed_user_add_cb (GtkCellRendererText *renderer,
 
   if (new_text && new_text[0] != '\0' && printer_name)
     {
-      proxy = get_dbus_proxy ();
+      proxy = get_dbus_proxy (MECHANISM_BUS,
+                              "/",
+                              MECHANISM_BUS,
+                              TRUE);
 
       if (!proxy)
         return;
@@ -1889,7 +1785,10 @@ printer_set_default_cb (GtkToggleButton *button,
 
   if (name)
     {
-      proxy = get_dbus_proxy ();
+      proxy = get_dbus_proxy (MECHANISM_BUS,
+                              "/",
+                              MECHANISM_BUS,
+                              TRUE);
 
       if (!proxy)
         return;
@@ -1923,6 +1822,58 @@ printer_set_default_cb (GtkToggleButton *button,
 }
 
 static void
+new_printer_dialog_response_cb (GtkDialog *dialog,
+                                gint       response_id,
+                                gpointer   user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  pp_new_printer_dialog_free (priv->pp_new_printer_dialog);
+  priv->pp_new_printer_dialog = NULL;
+
+  if (response_id == GTK_RESPONSE_OK)
+    actualize_printers_list (self);
+  else if (response_id == GTK_RESPONSE_REJECT)
+    {
+      GtkWidget *message_dialog;
+
+      message_dialog = gtk_message_dialog_new (NULL,
+                                               0,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+      /* Translators: Addition of the new printer failed. */
+                                               _("Failed to add new printer."));
+      g_signal_connect (message_dialog,
+                        "response",
+                        G_CALLBACK (gtk_widget_destroy),
+                        NULL);
+      gtk_widget_show (message_dialog);
+    }
+}
+
+static void
+printer_add_cb (GtkToolButton *toolbutton,
+                gpointer       user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  GtkWidget              *widget;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "main-vbox");
+
+  priv->pp_new_printer_dialog = pp_new_printer_dialog_new (
+    GTK_WINDOW (gtk_widget_get_toplevel (widget)),
+    new_printer_dialog_response_cb,
+    self);
+}
+
+static void
 printer_remove_cb (GtkToolButton *toolbutton,
                    gpointer       user_data)
 {
@@ -1942,7 +1893,10 @@ printer_remove_cb (GtkToolButton *toolbutton,
 
   if (name)
     {
-      proxy = get_dbus_proxy ();
+      proxy = get_dbus_proxy (MECHANISM_BUS,
+                              "/",
+                              MECHANISM_BUS,
+                              TRUE);
 
       if (!proxy)
         return;
@@ -1964,67 +1918,6 @@ printer_remove_cb (GtkToolButton *toolbutton,
       else
         actualize_printers_list (self);
   }
-}
-
-static ipp_t *
-execute_maintenance_command (const char *printer_name,
-                             const char *command,
-                             const char *title)
-{
-  http_t *http;
-  GError *error = NULL;
-  ipp_t  *request = NULL;
-  ipp_t  *response = NULL;
-  char    uri[HTTP_MAX_URI + 1];
-  int     fd = -1;
-
-  http = httpConnectEncrypt (cupsServer (),
-                             ippPort (),
-                             cupsEncryption ());
-
-  if (http)
-    {
-      request = ippNewRequest (IPP_PRINT_JOB);
-
-      g_snprintf (uri,
-                  sizeof (uri),
-                  "ipp://localhost/printers/%s",
-                  printer_name);
-
-      ippAddString (request,
-                    IPP_TAG_OPERATION,
-                    IPP_TAG_URI,
-                    "printer-uri",
-                    NULL,
-                    uri);
-
-      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME, "job-name",
-                    NULL, title);
-
-      ippAddString (request, IPP_TAG_JOB, IPP_TAG_MIMETYPE, "document-format",
-                    NULL, "application/vnd.cups-command");
-
-      gchar *file_name = NULL;
-      fd = g_file_open_tmp ("ccXXXXXX", &file_name, &error);
-
-      if (fd != -1 && !error)
-        {
-          FILE *file;
-
-          file = fdopen (fd, "w");
-          fprintf (file, "#CUPS-COMMAND\n");
-          fprintf (file, "%s\n", command);
-          fclose (file);
-
-          response = cupsDoFileRequest (http, request, "/", file_name);
-          g_unlink (file_name);
-        }
-
-      g_free (file_name);
-      httpClose (http);
-    }
-
-  return response;
 }
 
 static void
@@ -2185,6 +2078,8 @@ cc_printers_panel_init (CcPrintersPanel *self)
   priv->num_allowed_users = 0;
   priv->current_allowed_user = -1;
 
+  priv->pp_new_printer_dialog = NULL;
+
   gtk_builder_add_objects_from_file (priv->builder,
                                      DATADIR"/printers.ui",
                                      objects, &error);
@@ -2213,6 +2108,10 @@ cc_printers_panel_init (CcPrintersPanel *self)
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "job-release-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (job_process_cb), self);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "printer-add-button");
+  g_signal_connect (widget, "clicked", G_CALLBACK (printer_add_cb), self);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "printer-remove-button");

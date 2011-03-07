@@ -2,6 +2,7 @@ cappletname = printers
 
 uidir = $(pkgdatadir)/ui/printers
 dist_ui_DATA = \
+	new-printer-dialog.ui	\
 	printers.ui
 
 INCLUDES = 						\
@@ -17,6 +18,10 @@ ccpanels_LTLIBRARIES = libprinters.la
 
 libprinters_la_SOURCES =		\
 	printers-module.c	\
+	pp-utils.c	\
+	pp-utils.h	\
+	pp-new-printer-dialog.c	\
+	pp-new-printer-dialog.h	\
 	cc-printers-panel.c	\
 	cc-printers-panel.h
 
