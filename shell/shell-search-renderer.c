@@ -148,7 +148,10 @@ shell_search_renderer_set_layout (ShellSearchRenderer *cell, GtkWidget *widget)
 
   full_string = priv->search_target;
 
-  needle = g_utf8_casefold (priv->search_string, -1);
+  if (priv->search_string != NULL)
+    needle = g_utf8_casefold (priv->search_string, -1);
+  else
+    needle = NULL;
   haystack = g_utf8_casefold (full_string, -1);
 
   /* clear any previous attributes */
