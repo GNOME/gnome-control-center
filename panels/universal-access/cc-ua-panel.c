@@ -30,7 +30,7 @@
 #include <gconf/gconf-client.h>
 
 #include "eggaccelerators.h"
-#include "gconf-property-editor.h"
+#include "libgnome-control-center/gconf-property-editor.h"
 
 #define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
 

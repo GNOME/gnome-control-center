@@ -1,4 +1,4 @@
-m4_define([gnome_control_center_version], 2.91.90)
+m4_define([gnome_control_center_version], 2.91.91)
 AC_INIT([gnome-control-center], [gnome_control_center_version],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center])
 
@@ -212,7 +212,7 @@ dnl =======================================
 PANELS_DIR="${libdir}/control-center-1/panels"
 AC_SUBST(PANELS_DIR)
 
-PANEL_CFLAGS="-I\$(top_srcdir)/libgnome-control-center/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-cc-panel\\\"\""
+PANEL_CFLAGS="-I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-cc-panel\\\"\""
 AC_SUBST(PANEL_CFLAGS)
 
 PANEL_LIBS="\$(top_builddir)/libgnome-control-center/libgnome-control-center.la"

@@ -32,7 +32,7 @@
 
 #include <math.h>
 
-#include "cc-lockbutton.h"
+#include "libgnome-control-center/cc-lockbutton.h"
 #include "pp-new-printer-dialog.h"
 #include "pp-utils.h"
 

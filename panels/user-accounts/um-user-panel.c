@@ -47,7 +47,7 @@
 #include "um-editable-button.h"
 #include "um-editable-entry.h"
 #include "um-editable-combo.h"
-#include "cc-lockbutton.h"
+#include "libgnome-control-center/cc-lockbutton.h"
 
 #include "um-account-dialog.h"
 #include "um-language-dialog.h"

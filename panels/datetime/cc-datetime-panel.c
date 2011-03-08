@@ -24,7 +24,7 @@
 #include <sys/time.h>
 #include "cc-timezone-map.h"
 #include "set-timezone.h"
-#include "cc-lockbutton.h"
+#include "libgnome-control-center/cc-lockbutton.h"
 #include "date-endian.h"
 
 #include <gsettings-desktop-schemas/gdesktop-enums.h>

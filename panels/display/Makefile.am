@@ -49,7 +49,8 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-display-panel.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
-INCLUDES   = $(DISPLAY_PANEL_CFLAGS) \
+INCLUDES   = $(PANEL_CFLAGS) \
+	     $(DISPLAY_PANEL_CFLAGS) \
 	     -DSBINDIR="\"$(sbindir)\"" \
 	     -DUIDIR="\"$(uidir)\"" \
 	     -DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
