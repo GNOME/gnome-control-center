@@ -95,6 +95,8 @@ libdate_time_la_SOURCES =	\
 	cc-timezone-map.h	\
 	set-timezone.c		\
 	set-timezone.h		\
+	date-endian.c		\
+	date-endian.h		\
 	tz.c tz.h
 
 libdate_time_la_LIBADD = $(PANEL_LIBS) $(DATETIME_PANEL_LIBS)

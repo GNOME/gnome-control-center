@@ -25,6 +25,7 @@
 #include "cc-timezone-map.h"
 #include "set-timezone.h"
 #include "cc-lockbutton.h"
+#include "date-endian.h"
 
 #include <gsettings-desktop-schemas/gdesktop-enums.h>
 #include <string.h>
@@ -743,6 +744,40 @@ on_permission_changed (GPermission *permission,
 }
 
 static void
+reorder_date_widget (DateEndianess           endianess,
+		     CcDateTimePanelPrivate *priv)
+{
+  GtkWidget *month, *day, *year;
+  GtkBox *box;
+
+  if (endianess == DATE_ENDIANESS_MIDDLE)
+    return;
+
+  month = W ("month-combobox");
+  day = W ("day-spinbutton");
+  year = W("year-spinbutton");
+
+  box = GTK_BOX (W("table1"));
+
+  switch (endianess) {
+  case DATE_ENDIANESS_LITTLE:
+    gtk_box_reorder_child (box, month, 0);
+    gtk_box_reorder_child (box, day, 0);
+    gtk_box_reorder_child (box, year, -1);
+    break;
+  case DATE_ENDIANESS_BIG:
+    gtk_box_reorder_child (box, month, 0);
+    gtk_box_reorder_child (box, year, 0);
+    gtk_box_reorder_child (box, day, -1);
+    break;
+  case DATE_ENDIANESS_MIDDLE:
+    /* Let's please GCC */
+    g_assert_not_reached ();
+    break;
+  }
+}
+
+static void
 cc_date_time_panel_init (CcDateTimePanel *self)
 {
   CcDateTimePanelPrivate *priv;
@@ -760,6 +795,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   int ret;
   GtkWidget *lockbutton;
   GPermission *permission;
+  DateEndianess endianess;
 
   priv = self->priv = DATE_TIME_PANEL_PRIVATE (self);
 
@@ -792,6 +828,8 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 
   /* set up date editing widgets */
   priv->date = g_date_time_new_now_local ();
+  endianess = date_endian_get_default ();
+  reorder_date_widget (endianess, priv);
 
   gtk_combo_box_set_active (GTK_COMBO_BOX (W ("month-combobox")),
                             g_date_time_get_month (priv->date) - 1);
