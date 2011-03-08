@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.91.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-02 18:40+0100\n"
-"PO-Revision-Date: 2011-03-02 18:45+0100\n"
+"POT-Creation-Date: 2011-03-08 12:19+0100\n"
+"PO-Revision-Date: 2011-03-08 12:21+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -623,7 +623,7 @@ msgstr "Seksjon"
 msgid "Overview"
 msgstr "Oversikt"
 
-#: ../panels/info/cc-info-panel.c:966 ../panels/info/info.ui.h:3
+#: ../panels/info/cc-info-panel.c:966 ../panels/info/info.ui.h:2
 msgid "Default Applications"
 msgstr "Forvalgte programmer"
 
@@ -646,24 +646,26 @@ msgstr "Systeminformasjon"
 
 #. Translators: those are keywords for the System Information panel
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
-msgid "device;system;information;memory;processor;version;"
-msgstr "enhet;system;informasjon;minne;prosessor;versjon;"
+msgid ""
+"device;system;information;memory;processor;version;default;application;"
+"fallback;"
+msgstr "enhet;system;informasjon;minne;prosessor;versjon;forvalg;program;reserveløsning;"
 
 #: ../panels/info/info.ui.h:1
 msgid "Calendar"
 msgstr "Kalender"
 
-#: ../panels/info/info.ui.h:2
-msgid "Chipset"
-msgstr "Brikkesett"
-
-#: ../panels/info/info.ui.h:4
+#: ../panels/info/info.ui.h:3
 msgid "Device name"
 msgstr "Navn på enhet"
 
-#: ../panels/info/info.ui.h:5
+#: ../panels/info/info.ui.h:4
 msgid "Disk"
 msgstr "Disk"
+
+#: ../panels/info/info.ui.h:5
+msgid "Driver"
+msgstr "Driver"
 
 #: ../panels/info/info.ui.h:6
 msgid "Experience"
@@ -1177,124 +1179,124 @@ msgid "cd;dvd;usb;audio;video;disc;"
 msgstr "cd;dvd;usb;lyd;video;plate;"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:261
+#: ../panels/printers/cc-printers-panel.c:239
 msgid "Low on toner"
 msgstr "Lite toner"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:263
+#: ../panels/printers/cc-printers-panel.c:241
 msgid "Out of toner"
 msgstr "Ikke mer toner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:266
+#: ../panels/printers/cc-printers-panel.c:244
 msgid "Low on developer"
 msgstr "Lite utvikler"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:269
+#: ../panels/printers/cc-printers-panel.c:247
 msgid "Out of developer"
 msgstr "Ikke mer utvikler"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:271
+#: ../panels/printers/cc-printers-panel.c:249
 msgid "Low on a marker supply"
-msgstr ""
+msgstr "Lite farge igjen"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:273
+#: ../panels/printers/cc-printers-panel.c:251
 msgid "Out of a marker supply"
-msgstr ""
+msgstr "Tom for farge"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:275
+#: ../panels/printers/cc-printers-panel.c:253
 msgid "Open cover"
 msgstr "Åpne lokket"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:277
+#: ../panels/printers/cc-printers-panel.c:255
 msgid "Open door"
 msgstr "Åpne døren"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:279
+#: ../panels/printers/cc-printers-panel.c:257
 msgid "Low on paper"
 msgstr "Lite papir"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:281
+#: ../panels/printers/cc-printers-panel.c:259
 msgid "Out of paper"
 msgstr "Ikke mer papir"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:283
+#: ../panels/printers/cc-printers-panel.c:261
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Frakoblet"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:285
+#: ../panels/printers/cc-printers-panel.c:263
 msgctxt "printer state"
 msgid "Paused"
 msgstr "På pause"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:287
+#: ../panels/printers/cc-printers-panel.c:265
 msgid "Waste receptacle almost full"
 msgstr ""
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:289
+#: ../panels/printers/cc-printers-panel.c:267
 msgid "Waste receptacle full"
 msgstr ""
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:291
+#: ../panels/printers/cc-printers-panel.c:269
 msgid "The optical photo conductor is near end of life"
 msgstr ""
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:293
+#: ../panels/printers/cc-printers-panel.c:271
 msgid "The optical photo conductor is no longer functioning"
 msgstr ""
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:430
+#: ../panels/printers/cc-printers-panel.c:408
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Klar"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:434
+#: ../panels/printers/cc-printers-panel.c:412
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Prosesserer"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:438
+#: ../panels/printers/cc-printers-panel.c:416
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Stoppet"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:536
+#: ../panels/printers/cc-printers-panel.c:514
 msgid "Toner Level"
 msgstr "Tonernivå"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:539
+#: ../panels/printers/cc-printers-panel.c:517
 msgid "Ink Level"
 msgstr "Blekknivå"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:542
+#: ../panels/printers/cc-printers-panel.c:520
 msgid "Supply Level"
-msgstr ""
+msgstr "Beholdningsnivå"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:557
+#: ../panels/printers/cc-printers-panel.c:535
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -1302,85 +1304,84 @@ msgstr[0] "%u aktiv"
 msgstr[1] "%u aktive"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1024
+#: ../panels/printers/cc-printers-panel.c:1002
 msgctxt "print job"
 msgid "Pending"
 msgstr "Utestående"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1028
+#: ../panels/printers/cc-printers-panel.c:1006
 msgctxt "print job"
 msgid "Held"
 msgstr "På hold"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1032
+#: ../panels/printers/cc-printers-panel.c:1010
 msgctxt "print job"
 msgid "Processing"
 msgstr "Prosesserer"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1036
+#: ../panels/printers/cc-printers-panel.c:1014
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Stoppet"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1040
+#: ../panels/printers/cc-printers-panel.c:1018
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Avbrutt"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1044
+#: ../panels/printers/cc-printers-panel.c:1022
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Avbrutt med feil"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1048
+#: ../panels/printers/cc-printers-panel.c:1026
 msgctxt "print job"
 msgid "Completed"
 msgstr "Fullført"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1140
+#: ../panels/printers/cc-printers-panel.c:1118
 msgid "Job Title"
 msgstr "Jobbtittel"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1149
+#: ../panels/printers/cc-printers-panel.c:1127
 msgid "Job State"
 msgstr "Tilstand for jobb"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1155
+#: ../panels/printers/cc-printers-panel.c:1133
 msgid "Time"
 msgstr "Tid"
 
-#. Translators: Program cannot connect to DBus' system bus
-#: ../panels/printers/cc-printers-panel.c:1345
-#, c-format
-msgid "Could not connect to system bus: %s"
-msgstr "Kunne ikke koble til systembussen: %s"
+#. Translators: Addition of the new printer failed.
+#: ../panels/printers/cc-printers-panel.c:1848
+msgid "Failed to add new printer."
+msgstr "Klarte ikke å legge til ny skriver."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2055
+#: ../panels/printers/cc-printers-panel.c:1948
 msgid "Test page"
 msgstr "Testside"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/cc-printers-panel.c:2063
+#: ../panels/printers/cc-printers-panel.c:1956
 msgid "Clean print heads"
 msgstr "Rens utskriftshodene"
 
 #. Translators: An error has occured during execution of a CUPS maintenance command
-#: ../panels/printers/cc-printers-panel.c:2068
+#: ../panels/printers/cc-printers-panel.c:1961
 msgid "An error has occured during a maintenance command."
 msgstr "En feil har oppstått under en vedlikeholdskommando."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2195
+#: ../panels/printers/cc-printers-panel.c:2090
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Klarte ikke å laste brukergrensesnitt: %s"
@@ -1397,6 +1398,34 @@ msgstr "Skriver;Kø;Utskrift;Papir;Blekk;Toner;"
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
 msgid "Printers"
 msgstr "Skrivere"
+
+#. Translators: Column of devices which can be installed
+#: ../panels/printers/pp-new-printer-dialog.c:552
+#: ../panels/printers/pp-new-printer-dialog.c:557
+msgid "Devices"
+msgstr "Enheter"
+
+#. Translators: Local means local printers
+#: ../panels/printers/pp-new-printer-dialog.c:582
+msgid "Local"
+msgstr "Lokal"
+
+#. Translators: Network means network printers
+#: ../panels/printers/pp-new-printer-dialog.c:584
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+msgid "Network"
+msgstr "Nettverk"
+
+#. Translators: Device types column (network or local)
+#: ../panels/printers/pp-new-printer-dialog.c:625
+msgid "Device types"
+msgstr "Typer enhet"
+
+#. Translators: Name of job which makes printer to autoconfigure itself
+#: ../panels/printers/pp-new-printer-dialog.c:778
+#: ../panels/printers/pp-new-printer-dialog.c:944
+msgid "Automatic configuration"
+msgstr "Automatisk konfigurasjon"
 
 #: ../panels/printers/printers.ui.h:1
 msgid "---"
@@ -1475,7 +1504,7 @@ msgstr "Vis"
 #. Translators: By supply we mean ink, toner, staples, water, ...
 #: ../panels/printers/printers.ui.h:26
 msgid "Supply"
-msgstr ""
+msgstr "Beholdning"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
 msgid "Allow different layouts for each window"
@@ -1708,10 +1737,6 @@ msgstr "Kjørende versjon av NetworkManager er ikke kompatibel (for ny)."
 #: ../panels/network/cc-network-panel.c:1128
 msgid "The running NetworkManager version is not compatible (too old)."
 msgstr "Kjørende versjon av NetworkManager er ikke kompatibel (for gammel)."
-
-#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
-msgid "Network"
-msgstr "Nettverk"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Network settings"
@@ -2414,8 +2439,8 @@ msgstr "Glass"
 msgid "Sonar"
 msgstr "Sonar"
 
-#: ../panels/universal-access/cc-ua-panel.c:555
-#: ../panels/universal-access/cc-ua-panel.c:560
+#: ../panels/universal-access/cc-ua-panel.c:470
+#: ../panels/universal-access/cc-ua-panel.c:475
 msgid "No shortcut set"
 msgstr "Ingen snarvei satt"
 
@@ -2638,7 +2663,7 @@ msgstr "Utløs sekundærklikk ved å holde nede primærknappen"
 
 #: ../panels/universal-access/uap.ui.h:66
 msgid "Turn on accessibility features from the keyboard"
-msgstr "Slå når funksjoner for tilgjengelighet fra tastaturet"
+msgstr "Slå på funksjoner for tilgjengelighet fra tastaturet"
 
 #: ../panels/universal-access/uap.ui.h:67
 msgid "Turn on or off:"
