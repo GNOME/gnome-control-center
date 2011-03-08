@@ -828,7 +828,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 
   /* set up date editing widgets */
   priv->date = g_date_time_new_now_local ();
-  endianess = date_endian_get_default ();
+  endianess = date_endian_get_default (FALSE);
   reorder_date_widget (endianess, priv);
 
   gtk_combo_box_set_active (GTK_COMBO_BOX (W ("month-combobox")),

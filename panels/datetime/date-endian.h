@@ -26,5 +26,7 @@ typedef enum {
   DATE_ENDIANESS_MIDDLE  /* Middle-endian (month, day, year), e.g. 04/05/03 */
 } DateEndianess;
 
-DateEndianess date_endian_get_default (void);
-DateEndianess date_endian_get_for_lang (const char *lang);
+DateEndianess date_endian_get_default  (gboolean verbose);
+DateEndianess date_endian_get_for_lang (const char *lang,
+					gboolean    verbose);
+const char  * date_endian_to_string    (DateEndianess endianess);
