@@ -38,7 +38,7 @@
 #include "cc-background-xml.h"
 
 #define WP_PATH_ID "org.gnome.desktop.background"
-#define WP_FILE_KEY "picture-filename"
+#define WP_URI_KEY "picture-uri"
 #define WP_OPTIONS_KEY "picture-options"
 #define WP_SHADING_KEY "color-shading-type"
 #define WP_PCOLOR_KEY "primary-color"
@@ -539,7 +539,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
   if ((flags & CC_BACKGROUND_ITEM_HAS_URI) && uri == NULL)
     {
       g_settings_set_enum (priv->settings, WP_OPTIONS_KEY, G_DESKTOP_BACKGROUND_STYLE_NONE);
-      g_settings_set_string (priv->settings, WP_FILE_KEY, "");
+      g_settings_set_string (priv->settings, WP_URI_KEY, "");
     }
   else if (cc_background_item_get_source_url (item) != NULL &&
 	   cc_background_item_get_needs_download (item))
@@ -571,6 +571,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
       gdk_pixbuf_fill (pixbuf, 0x00000000);
       gdk_pixbuf_save (pixbuf, dest_path, "png", NULL, NULL);
       g_object_unref (pixbuf);
+      g_free (dest_path);
 
       if (priv->copy_cancellable)
         {
@@ -603,7 +604,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
       dest_uri = g_file_get_uri (dest);
       g_object_unref (dest);
 
-      g_settings_set_string (priv->settings, WP_FILE_KEY, dest_path);
+      g_settings_set_string (priv->settings, WP_URI_KEY, dest_uri);
       g_object_set (G_OBJECT (item),
 		    "uri", dest_uri,
 		    "needs-download", FALSE,
@@ -617,10 +618,7 @@ backgrounds_changed_cb (GtkIconView       *icon_view,
     }
   else
     {
-      char *filename;
-      filename = g_filename_from_uri (uri, NULL, NULL);
-      g_settings_set_string (priv->settings, WP_FILE_KEY, filename);
-      g_free (filename);
+      g_settings_set_string (priv->settings, WP_URI_KEY, uri);
     }
 
   /* Also set the placement if we have a URI and the previous value was none */
@@ -1019,7 +1017,7 @@ load_current_bg (CcBackgroundPanel *self)
 {
   CcBackgroundPanelPrivate *priv;
   CcBackgroundItem *saved, *configured;
-  gchar *uri, *pcolor, *scolor, *path;
+  gchar *uri, *pcolor, *scolor;
 
   priv = self->priv;
 
@@ -1029,17 +1027,17 @@ load_current_bg (CcBackgroundPanel *self)
   g_free (uri);
 
   /* initalise the current background information from settings */
-  path = g_settings_get_string (priv->settings, WP_FILE_KEY);
-  if (path && *path == '\0')
+  uri = g_settings_get_string (priv->settings, WP_URI_KEY);
+  if (uri && *uri == '\0')
     {
+      g_free (uri);
       uri = NULL;
     }
   else
     {
       GFile *file;
 
-      file = g_file_new_for_commandline_arg (path);
-      uri = g_file_get_uri (file);
+      file = g_file_new_for_commandline_arg (uri);
       g_object_unref (file);
     }
   configured = cc_background_item_new (uri);
