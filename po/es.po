@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&component=general\n"
-"POT-Creation-Date: 2011-03-07 18:17+0000\n"
-"PO-Revision-Date: 2011-03-07 19:25+0100\n"
+"POT-Creation-Date: 2011-03-08 09:42+0000\n"
+"PO-Revision-Date: 2011-03-09 09:52+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1378,7 +1378,6 @@ msgstr "Hora"
 
 #. Translators: Addition of the new printer failed.
 #: ../panels/printers/cc-printers-panel.c:1848
-#| msgid "Failed to create user"
 msgid "Failed to add new printer."
 msgstr "Falló al añadir una impresora nueva."
 
@@ -1415,6 +1414,38 @@ msgstr "Impresora;Cola;Imprimir;Papel;Tinta;Tóner;"
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
 msgid "Printers"
 msgstr "Impresoras"
+
+#. Translators: Column of devices which can be installed
+#: ../panels/printers/pp-new-printer-dialog.c:552
+#: ../panels/printers/pp-new-printer-dialog.c:557
+#| msgid "Device"
+msgid "Devices"
+msgstr "Dispositivos"
+
+#. Translators: Local means local printers
+#: ../panels/printers/pp-new-printer-dialog.c:582
+#| msgid "Lock"
+msgid "Local"
+msgstr "Local"
+
+#. Translators: Network means network printers
+#: ../panels/printers/pp-new-printer-dialog.c:584
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+msgid "Network"
+msgstr "Red"
+
+#. Translators: Device types column (network or local)
+#: ../panels/printers/pp-new-printer-dialog.c:625
+#| msgid "Device name"
+msgid "Device types"
+msgstr "Tipos de dispositivos"
+
+#. Translators: Name of job which makes printer to autoconfigure itself
+#: ../panels/printers/pp-new-printer-dialog.c:778
+#: ../panels/printers/pp-new-printer-dialog.c:944
+#| msgid "<b>_Automatic proxy configuration</b>"
+msgid "Automatic configuration"
+msgstr "Configuración automática"
 
 #: ../panels/printers/printers.ui.h:1
 msgid "---"
@@ -1728,10 +1759,6 @@ msgstr ""
 msgid "The running NetworkManager version is not compatible (too old)."
 msgstr ""
 "La versión de NetworkManager en ejecución no es compatible (muy antigua)"
-
-#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
-msgid "Network"
-msgstr "Red"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Network settings"
@@ -3103,8 +3130,8 @@ msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
-"Es posible mantener la carpeta personal, el «spool» del correo y los "
-"archivos temporales al eliminar una cuenta de usuario."
+"Es posible mantener la carpeta personal, el «spool» del correo y los archivos "
+"temporales al eliminar una cuenta de usuario."
 
 #: ../panels/user-accounts/um-user-panel.c:446
 msgid "_Delete Files"
@@ -4052,9 +4079,6 @@ msgstr "_Todas las configuraciones"
 
 #~ msgid "<b>Di_rect internet connection</b>"
 #~ msgstr "<b>Conexión _directa a Internet</b>"
-
-#~ msgid "<b>_Automatic proxy configuration</b>"
-#~ msgstr "<b>Configuración _automática del proxy</b>"
 
 #~ msgid "<b>_Manual proxy configuration</b>"
 #~ msgstr "<b>Configuración _manual del proxy</b>"
@@ -6153,5 +6177,4 @@ msgstr "_Todas las configuraciones"
 #~ msgstr "No hay establecido ningún grupo para el URI «%s»"
 
 #~ msgid "No application with name '%s' registered a bookmark for '%s'"
-#~ msgstr ""
-#~ "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
+#~ msgstr "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
