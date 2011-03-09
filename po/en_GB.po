@@ -2,15 +2,15 @@
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Robert Brady <rwb197@ecs.soton.ac.uk>
 # Gareth Owen <gowen72@yahoo.com>, David Lodge <dave@cirt.net>, 2004.
-# Bruce Cowan <bruce@bcowan.me.uk>, 2009, 2010.
+# Bruce Cowan <bruce@bcowan.me.uk>, 2009, 2010, 2011.
 # Philip Withnall <philip@tecnocode.co.uk>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-09-01 09:47+0100\n"
-"PO-Revision-Date: 2010-08-31 16:49+0100\n"
-"Last-Translator: Philip Withnall <philip@tecnocode.co.uk>\n"
+"POT-Creation-Date: 2011-03-09 16:54+0000\n"
+"PO-Revision-Date: 2011-03-09 16:54+0100\n"
+"Last-Translator: Bruce Cowan <bruce@bcowan.me.uk>\n"
 "Language-Team: British English <en@li.org>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
@@ -54,6 +54,44 @@ msgid ""
 msgstr ""
 "URL for where to get more desktop themes. If set to an empty string the link "
 "will not appear."
+
+#: ../libgnome-control-center/cc-lockbutton.c:347
+#: ../panels/screen/screen.ui.h:13
+msgid "Lock"
+msgstr "Lock"
+
+#: ../libgnome-control-center/cc-lockbutton.c:356
+#: ../panels/network/network.ui.h:23
+msgid "Unlock"
+msgstr "Unlock"
+
+#: ../libgnome-control-center/cc-lockbutton.c:365
+msgid "Locked"
+msgstr "Locked"
+
+#: ../libgnome-control-center/cc-lockbutton.c:374
+msgid ""
+"Dialog is unlocked.\n"
+"Click to prevent further changes"
+msgstr ""
+"Dialogue is unlocked.\n"
+"Click to prevent further changes"
+
+#: ../libgnome-control-center/cc-lockbutton.c:383
+msgid ""
+"Dialog is locked.\n"
+"Click to make changes"
+msgstr ""
+"Dialogue is locked.\n"
+"Click to make changes"
+
+#: ../libgnome-control-center/cc-lockbutton.c:392
+msgid ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
+msgstr ""
+"System policy prevents changes.\n"
+"Contact your system administrator"
 
 #: ../libgnome-control-center/gconf-property-editor.c:134
 msgid "Key"
@@ -125,7 +163,7 @@ msgstr "Property editor data freeing callback"
 msgid "Callback to be issued when property editor object data is to be freed"
 msgstr "Callback to be issued when property editor object data is to be freed"
 
-#: ../libgnome-control-center/gconf-property-editor.c:1406
+#: ../libgnome-control-center/gconf-property-editor.c:1473
 #, c-format
 msgid ""
 "Couldn't find the file '%s'.\n"
@@ -138,7 +176,7 @@ msgstr ""
 "Please make sure it exists and try again, or choose a different background "
 "picture."
 
-#: ../libgnome-control-center/gconf-property-editor.c:1414
+#: ../libgnome-control-center/gconf-property-editor.c:1481
 #, c-format
 msgid ""
 "I don't know how to open the file '%s'.\n"
@@ -151,581 +189,308 @@ msgstr ""
 "\n"
 "Please select a different picture instead."
 
-#: ../libgnome-control-center/gconf-property-editor.c:1536
+#: ../libgnome-control-center/gconf-property-editor.c:1603
 msgid "Please select an image."
 msgstr "Please select an image."
 
-#: ../libgnome-control-center/gconf-property-editor.c:1541
+#: ../libgnome-control-center/gconf-property-editor.c:1608
 msgid "_Select"
 msgstr "_Select"
 
-#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:1
-msgid "Date And Time"
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "Background"
+
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:2
+msgid "Change the background"
+msgstr "Change the background"
+
+#. Translators: those are keywords for the background control-center panel
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:4
+msgid "Wallpaper;Screen;Desktop;"
+msgstr "Wallpaper;Screen;Desktop;"
+
+#: ../panels/background/background.ui.h:1
+msgid "Center"
+msgstr "Centre"
+
+#. This refers to a slideshow background
+#: ../panels/background/background.ui.h:3
+msgid "Changes throughout the day"
+msgstr "Changes throughout the day"
+
+#: ../panels/background/background.ui.h:4
+msgid "Fill"
+msgstr "Fill"
+
+#: ../panels/background/background.ui.h:5
+msgid "Scale"
+msgstr "Scale"
+
+#: ../panels/background/background.ui.h:6
+msgid "Span"
+msgstr "Span"
+
+#: ../panels/background/background.ui.h:7
+msgid "Tile"
+msgstr "Tile"
+
+#: ../panels/background/background.ui.h:8
+msgid "Zoom"
+msgstr "Zoom"
+
+#: ../panels/background/bg-colors-source.c:46
+msgid "Horizontal Gradient"
+msgstr "Horizontal Gradient"
+
+#: ../panels/background/bg-colors-source.c:47
+msgid "Vertical Gradient"
+msgstr "Vertical Gradient"
+
+#: ../panels/background/bg-colors-source.c:48
+msgid "Solid Color"
+msgstr "Solid Colour"
+
+#: ../panels/background/cc-background-panel.c:958
+#: ../panels/user-accounts/um-photo-dialog.c:216
+#: ../panels/user-accounts/data/photo-dialog.ui.h:2
+msgid "Browse for more pictures"
+msgstr "Browse for more pictures"
+
+#: ../panels/background/cc-background-panel.c:1049
+msgid "Current background"
+msgstr "Current background"
+
+#: ../panels/background/cc-background-panel.c:1113
+msgid "Wallpapers"
+msgstr "Wallpapers"
+
+#: ../panels/background/cc-background-panel.c:1120
+msgid "Pictures Folder"
+msgstr "Pictures Folder"
+
+#: ../panels/background/cc-background-panel.c:1127
+msgid "Colors & Gradients"
+msgstr "Colours & Gradients"
+
+#: ../panels/background/cc-background-panel.c:1135
+msgid "Flickr"
+msgstr "Flickr"
+
+#: ../panels/background/cc-background-item.c:148
+msgid "multiple sizes"
+msgstr "multiple sizes"
+
+#. translators: 100 × 100px
+#. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
+#: ../panels/background/cc-background-item.c:152
+#, c-format
+msgid "%d × %d"
+msgstr "%d × %d"
+
+#: ../panels/background/cc-background-item.c:255
+msgid "No Desktop Background"
+msgstr "No Desktop Background"
+
+#: ../panels/common/gdm-languages.c:709
+msgid "Unspecified"
+msgstr "Unspecified"
+
+#: ../panels/datetime/datetime.ui.h:1
+msgid "16"
+msgstr "16"
+
+#: ../panels/datetime/datetime.ui.h:2
+msgid "2010"
+msgstr "2010"
+
+#: ../panels/datetime/datetime.ui.h:3
+msgid "22"
+msgstr "22"
+
+#: ../panels/datetime/datetime.ui.h:4
+msgid "24-Hour Time"
+msgstr "24-Hour Time"
+
+#: ../panels/datetime/datetime.ui.h:5
+msgid "45"
+msgstr "45"
+
+#: ../panels/datetime/datetime.ui.h:6
+msgid ":"
+msgstr ":"
+
+#: ../panels/datetime/datetime.ui.h:7
+msgid "AM"
+msgstr "AM"
+
+#: ../panels/datetime/datetime.ui.h:8
+msgid "April"
+msgstr "April"
+
+#: ../panels/datetime/datetime.ui.h:9
+msgid "August"
+msgstr "August"
+
+#: ../panels/datetime/datetime.ui.h:10
+msgid "City:"
+msgstr "City:"
+
+#: ../panels/datetime/datetime.ui.h:11
+msgid "December"
+msgstr "December"
+
+#: ../panels/datetime/datetime.ui.h:12
+msgid "February"
+msgstr "February"
+
+#: ../panels/datetime/datetime.ui.h:13
+msgid "January"
+msgstr "January"
+
+#: ../panels/datetime/datetime.ui.h:14
+msgid "July"
+msgstr "July"
+
+#: ../panels/datetime/datetime.ui.h:15
+msgid "June"
+msgstr "June"
+
+#: ../panels/datetime/datetime.ui.h:16
+msgid "March"
+msgstr "March"
+
+#: ../panels/datetime/datetime.ui.h:17
+msgid "May"
+msgstr "May"
+
+#: ../panels/datetime/datetime.ui.h:18
+msgid "Network Time"
+msgstr "Network Time"
+
+#: ../panels/datetime/datetime.ui.h:19
+msgid "November"
+msgstr "November"
+
+#: ../panels/datetime/datetime.ui.h:20
+msgid "October"
+msgstr "October"
+
+#: ../panels/datetime/datetime.ui.h:21
+msgid "Region:"
+msgstr "Region:"
+
+#: ../panels/datetime/datetime.ui.h:22
+msgid "September"
+msgstr "September"
+
+#. Translators: those are keywords for the date and time control-center panel
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
+msgid "Clock;Timezone;Location;"
+msgstr "Clock;Timezone;Location;"
+
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:3
+msgid "Date and Time"
 msgstr "Date and Time"
 
-#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
+#: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:4
 msgid "Date and Time preferences panel"
 msgstr "Date and Time preferences panel"
 
-#: ../panels/default-applications/gnome-default-applications-panel.desktop.in.in.h:1
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:17
-msgid "Preferred Applications"
-msgstr "Preferred Applications"
-
-#: ../panels/default-applications/gnome-default-applications-panel.desktop.in.in.h:2
-msgid "Select your default applications"
-msgstr "Select your default applications"
-
-#: ../panels/default-applications/gnome-at-session.desktop.in.in.h:1
-msgid "Start the preferred visual assistive technology"
-msgstr "Start the preferred visual assistive technology"
-
-#: ../panels/default-applications/gnome-at-session.desktop.in.in.h:2
-msgid "Visual Assistance"
-msgstr "Visual Assistance"
-
-#: ../panels/default-applications/gnome-da-capplet.c:99
-#: ../panels/default-applications/gnome-da-capplet.c:363
-#: ../panels/default-applications/gnome-da-capplet.c:384
-#, c-format
-msgid "Error saving configuration: %s"
-msgstr "Error saving configuration: %s"
-
-#: ../panels/default-applications/gnome-da-capplet.c:692
-msgid "Custom"
-msgstr "Custom"
-
-#: ../panels/default-applications/gnome-da-capplet.c:723
-msgid "Could not load the main interface"
-msgstr "Could not load the main interface"
-
-#: ../panels/default-applications/gnome-da-capplet.c:725
-msgid "Please make sure that the applet is properly installed"
-msgstr "Please make sure that the applet is properly installed"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:1
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:1
-#: ../panels/mouse/gnome-mouse-properties.ui.h:1
-msgid "Accessibility"
-msgstr "Accessibility"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:3
-#, no-c-format
-msgid "All %s occurrences will be replaced with actual link"
-msgstr "All %s occurrences will be replaced with actual link"
-
-#.
-#. * vim: sw=2 ts=8 cindent noai bs=2
-#.
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:4
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:1
-msgid "C_ommand:"
-msgstr "C_ommand:"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:5
-msgid "Co_mmand:"
-msgstr "Co_mmand:"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:6
-msgid "E_xecute flag:"
-msgstr "E_xecute flag:"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:7
-msgid "Image Viewer"
-msgstr "Image Viewer"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:8
-msgid "Instant Messenger"
-msgstr "Instant Messenger"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:9
-msgid "Internet"
-msgstr "Internet"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:10
-msgid "Mail Reader"
-msgstr "Mail Reader"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:11
-msgid "Mobility"
-msgstr "Mobility"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:12
-msgid "Multimedia"
-msgstr "Multimedia"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:13
-msgid "Multimedia Player"
-msgstr "Multimedia Player"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:14
-msgid "Open link in new _tab"
-msgstr "Open link in new _tab"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:15
-msgid "Open link in new _window"
-msgstr "Open link in new _window"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:16
-msgid "Open link with web browser _default"
-msgstr "Open link with web browser _default"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:18
-msgid "Run at st_art"
-msgstr "Run at st_art"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:19
-msgid "Run in t_erminal"
-msgstr "Run in t_erminal"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:20
-msgid "System"
-msgstr "System"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:21
-msgid "Terminal Emulator"
-msgstr "Terminal Emulator"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:22
-msgid "Text Editor"
-msgstr "Text Editor"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:23
-msgid "Video Player"
-msgstr "Video Player"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:24
-msgid "Visual"
-msgstr "Visual"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:25
-msgid "Web Browser"
-msgstr "Web Browser"
-
-#: ../panels/default-applications/gnome-default-applications-properties.ui.h:26
-msgid "_Run at start"
-msgstr "_Run at start"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:1
-msgid "Balsa"
-msgstr "Balsa"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:2
-msgid "Banshee Music Player"
-msgstr "Banshee Music Player"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:3
-msgid "Claws Mail"
-msgstr "Claws Mail"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:4
-#: ../panels/universal-access/uap.ui.h:31
-msgid "Dasher"
-msgstr "Dasher"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:5
-msgid "Debian Sensible Browser"
-msgstr "Debian Sensible Browser"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:6
-msgid "Debian Terminal Emulator"
-msgstr "Debian Terminal Emulator"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:7
-msgid "ETerm"
-msgstr "ETerm"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:8
-msgid "Encompass"
-msgstr "Encompass"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:9
-msgid "Epiphany Web Browser"
-msgstr "Epiphany Web Browser"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:10
-msgid "Evolution Mail Reader"
-msgstr "Evolution Mail Reader"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:11
-msgid "Firebird"
-msgstr "Firebird"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:12
-msgid "Firefox"
-msgstr "Firefox"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:13
-msgid "GNOME Magnifier without Screen Reader"
-msgstr "GNOME Magnifier without Screen Reader"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:14
-msgid "GNOME OnScreen Keyboard"
-msgstr "GNOME OnScreen Keyboard"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:15
-msgid "GNOME Terminal"
-msgstr "GNOME Terminal"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:16
-msgid "Galeon"
-msgstr "Galeon"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:17
-msgid "Gnopernicus"
-msgstr "Gnopernicus"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:18
-msgid "Gnopernicus with Magnifier"
-msgstr "Gnopernicus with Magnifier"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:19
-msgid "Iceape"
-msgstr "Iceape"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:20
-msgid "Iceape Mail"
-msgstr "Iceape Mail"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:21
-msgid "Icedove"
-msgstr "Icedove"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:22
-msgid "Iceweasel"
-msgstr "Iceweasel"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:23
-msgid "KDE Magnifier without Screen Reader"
-msgstr "KDE Magnifier without Screen Reader"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:24
-msgid "KMail"
-msgstr "KMail"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:25
-msgid "Konqueror"
-msgstr "Konqueror"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:26
-msgid "Konsole"
-msgstr "Konsole"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:27
-msgid "Linux Screen Reader"
-msgstr "Linux Screen Reader"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:28
-msgid "Linux Screen Reader with Magnifier"
-msgstr "Linux Screen Reader with Magnifier"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:29
-msgid "Listen"
-msgstr "Listen"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:30
-msgid "Midori"
-msgstr "Midori"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:31
-msgid "Mozilla"
-msgstr "Mozilla"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:32
-msgid "Mozilla 1.6"
-msgstr "Mozilla 1.6"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:33
-msgid "Mozilla Mail"
-msgstr "Mozilla Mail"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:34
-msgid "Mozilla Thunderbird"
-msgstr "Mozilla Thunderbird"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:35
-msgid "Muine Music Player"
-msgstr "Muine Music Player"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:36
-msgid "Mutt"
-msgstr "Mutt"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:37
-msgid "NXterm"
-msgstr "NXterm"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:38
-msgid "Netscape Communicator"
-msgstr "Netscape Communicator"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:39
-msgid "Opera"
-msgstr "Opera"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:40
-msgid "Orca"
-msgstr "Orca"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:41
-msgid "Orca with Magnifier"
-msgstr "Orca with Magnifier"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:42
-msgid "RXVT"
-msgstr "RXVT"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:43
-msgid "Rhythmbox Music Player"
-msgstr "Rhythmbox Music Player"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:44
-msgid "SeaMonkey"
-msgstr "SeaMonkey"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:45
-msgid "SeaMonkey Mail"
-msgstr "SeaMonkey Mail"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:46
-msgid "Standard XTerminal"
-msgstr "Standard XTerminal"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:47
-msgid "Sylpheed"
-msgstr "Sylpheed"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:48
-msgid "Sylpheed-Claws"
-msgstr "Sylpheed-Claws"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:49
-msgid "Terminator"
-msgstr "Terminator"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:50
-msgid "Thunderbird"
-msgstr "Thunderbird"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:51
-msgid "Totem Movie Player"
-msgstr "Totem Movie Player"
-
-#: ../panels/default-applications/gnome-default-applications.xml.in.h:52
-msgid "aterm"
-msgstr "aterm"
-
 #: ../panels/display/display-capplet.ui.h:1
-msgid "Include _panel"
-msgstr "Include _panel"
-
-#: ../panels/display/display-capplet.ui.h:2
-#: ../panels/display/xrandr-capplet.c:320
 msgid "Left"
 msgstr "Left"
 
-#: ../panels/display/display-capplet.ui.h:3
-msgid "Make Default"
-msgstr "Make Default"
-
-#: ../panels/display/display-capplet.ui.h:4
-#: ../panels/display/xrandr-capplet.c:523
+#: ../panels/display/display-capplet.ui.h:2
+#: ../panels/display/xrandr-capplet.c:491
 msgid "Monitor"
 msgstr "Monitor"
 
-#: ../panels/display/display-capplet.ui.h:5
-#: ../panels/display/xrandr-capplet.c:319
-#: ../panels/display/xrandr-capplet.c:358
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/display/display-capplet.ui.h:3
+#: ../panels/display/xrandr-capplet.c:327
+#: ../panels/display/xrandr-capplet.c:366
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Normal"
 msgstr "Normal"
 
-#: ../panels/display/display-capplet.ui.h:6
-#: ../panels/universal-access/uap.ui.h:61
-msgid "Off"
-msgstr "Off"
+#: ../panels/display/display-capplet.ui.h:4
+msgid "Note: may limit resolution options"
+msgstr "Note: may limit resolution options"
 
-#: ../panels/display/display-capplet.ui.h:7
-#: ../panels/universal-access/uap.ui.h:62
-msgid "On"
-msgstr "On"
-
-#: ../panels/display/display-capplet.ui.h:8
-msgid "Panel icon"
-msgstr "Panel icon"
-
-#: ../panels/display/display-capplet.ui.h:9
+#: ../panels/display/display-capplet.ui.h:5
 msgid "R_otation:"
 msgstr "R_otation:"
 
-#: ../panels/display/display-capplet.ui.h:10
-msgid "Re_fresh rate:"
-msgstr "Re_fresh rate:"
-
-#: ../panels/display/display-capplet.ui.h:11
-#: ../panels/display/xrandr-capplet.c:321
+#: ../panels/display/display-capplet.ui.h:6
 msgid "Right"
 msgstr "Right"
 
-#: ../panels/display/display-capplet.ui.h:12
-msgid "Sa_me image in all monitors"
-msgstr "Sa_me image in all monitors"
-
-#: ../panels/display/display-capplet.ui.h:13
+#: ../panels/display/display-capplet.ui.h:7
 msgid "Upside-down"
 msgstr "Upside-down"
 
-#: ../panels/display/display-capplet.ui.h:14
-msgid "_Detect monitors"
-msgstr "_Detect monitors"
+#: ../panels/display/display-capplet.ui.h:8
+msgid "_Detect Displays"
+msgstr "_Detect Displays"
 
-#: ../panels/display/display-capplet.ui.h:15
+#. Note that mirror is a verb in this string
+#: ../panels/display/display-capplet.ui.h:10
+msgid "_Mirror displays"
+msgstr "_Mirror displays"
+
+#: ../panels/display/display-capplet.ui.h:11
 msgid "_Resolution:"
 msgstr "_Resolution:"
 
-#: ../panels/display/display-capplet.ui.h:16
-msgid "_Show monitors in panel"
-msgstr "_Show monitors in panel"
-
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:1
-msgid "Change resolution and position of monitors"
-msgstr "Change resolution and position of monitors"
+msgid "Change resolution and position of monitors and projectors"
+msgstr "Change resolution and position of monitors and projectors"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
-msgid "Monitors"
-msgstr "Monitors"
+msgid "Displays"
+msgstr "Displays"
 
-#: ../panels/display/gnome-display-properties-install-systemwide.c:44
-#, c-format
-msgid ""
-"Usage: %s SOURCE_FILE DEST_NAME\n"
-"\n"
-"This program installs a RANDR profile for multi-monitor setups into\n"
-"a systemwide location.  The resulting profile will get used when\n"
-"the RANDR plug-in gets run in gnome-settings-daemon.\n"
-"\n"
-"SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
-"xml\n"
-"\n"
-"DEST_NAME - relative name for the installed file.  This will get put in\n"
-"            the systemwide directory for RANDR configurations,\n"
-"            so the result will typically be %s/DEST_NAME\n"
-msgstr ""
-"Usage: %s SOURCE_FILE DEST_NAME\n"
-"\n"
-"This program installs a RANDR profile for multi-monitor setups into\n"
-"a systemwide location.  The resulting profile will get used when\n"
-"the RANDR plug-in gets run in gnome-settings-daemon.\n"
-"\n"
-"SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
-"xml\n"
-"\n"
-"DEST_NAME - relative name for the installed file.  This will get put in\n"
-"            the systemwide directory for RANDR configurations,\n"
-"            so the result will typically be %s/DEST_NAME\n"
+#. Translators: those are keywords for the display control-center panel
+#: ../panels/display/gnome-display-panel.desktop.in.in.h:4
+msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
+msgstr "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 
-#. Translators: only able to install RANDR profiles as root
-#: ../panels/display/gnome-display-properties-install-systemwide.c:151
-msgid "This program can only be used by the root user"
-msgstr "This program can only be used by the root user"
+#: ../panels/display/xrandr-capplet.c:328
+msgid "Anti-Clockwise"
+msgstr "Anti-Clockwise"
 
-#: ../panels/display/gnome-display-properties-install-systemwide.c:168
-msgid "The source filename must be absolute"
-msgstr "The source filename must be absolute"
+#: ../panels/display/xrandr-capplet.c:329
+msgid "Clockwise"
+msgstr "Clockwise"
 
-#. Translators: first %s is a filename; second %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:179
-#, c-format
-msgid "Could not open %s: %s\n"
-msgstr "Could not open %s: %s\n"
-
-#. Translators: first %s is a filename; second %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:188
-#, c-format
-msgid "Could not get information for %s: %s\n"
-msgstr "Could not get information for %s: %s\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:195
-#, c-format
-msgid "%s must be a regular file\n"
-msgstr "%s must be a regular file\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:204
-msgid "This program must only be run through pkexec(1)"
-msgstr "This program must only be run through pkexec(1)"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:209
-msgid "PKEXEC_UID must be set to an integer value"
-msgstr "PKEXEC_UID must be set to an integer value"
-
-#. Translators: we are complaining that a file must be really owned by the user who called this program
-#: ../panels/display/gnome-display-properties-install-systemwide.c:215
-#, c-format
-msgid "%s must be owned by you\n"
-msgstr "%s must be owned by you\n"
-
-#. Translators: here we are saying that a plain filename must look like "filename", not like "some_dir/filename"
-#: ../panels/display/gnome-display-properties-install-systemwide.c:223
-#, c-format
-msgid "%s must not have any directory components\n"
-msgstr "%s must not have any directory components\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:231
-#, c-format
-msgid "%s must be a directory\n"
-msgstr "%s must be a directory\n"
-
-#. Translators: the first %s/%s is a directory/filename; the last %s is an error message
-#: ../panels/display/gnome-display-properties-install-systemwide.c:242
-#, c-format
-msgid "Could not open %s/%s: %s\n"
-msgstr "Could not open %s/%s: %s\n"
-
-#: ../panels/display/gnome-display-properties-install-systemwide.c:262
-#, c-format
-msgid "Could not rename %s to %s: %s\n"
-msgstr "Could not rename %s to %s: %s\n"
-
-#: ../panels/display/org.gnome.randr.policy.in.h:1
-msgid ""
-"Authentication is required to install multi-monitor settings for all users"
-msgstr ""
-"Authentication is required to install multi-monitor settings for all users"
-
-#: ../panels/display/org.gnome.randr.policy.in.h:2
-msgid "Install multi-monitor settings for the whole system"
-msgstr "Install multi-monitor settings for the whole system"
-
-#: ../panels/display/xrandr-capplet.c:322
-msgid "Upside Down"
-msgstr "Upside Down"
-
-#: ../panels/display/xrandr-capplet.c:364
-#, c-format
-msgid "%d Hz"
-msgstr "%d Hz"
+#: ../panels/display/xrandr-capplet.c:330
+msgid "180 Degrees"
+msgstr "180 Degrees"
 
 #. Translators:  this is the feature where what you see on your laptop's
 #. * screen is the same as your external monitor.  Here, "Mirror" is being
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:512
-#: ../panels/display/xrandr-capplet.c:1658
-msgid "Mirror Screens"
-msgstr "Mirror Screens"
+#: ../panels/display/xrandr-capplet.c:467
+msgid "Mirror Displays"
+msgstr "Mirror Displays"
 
-#: ../panels/display/xrandr-capplet.c:514
+#: ../panels/display/xrandr-capplet.c:597
 #, c-format
-msgid "Monitor: %s"
-msgstr "Monitor: %s"
+msgid "%d x %d (%s)"
+msgstr "%d x %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:592
+#: ../panels/display/xrandr-capplet.c:599
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1514
+#: ../panels/display/xrandr-capplet.c:1500
+msgid "Drag to change primary display."
+msgstr "Drag to change primary display."
+
+#: ../panels/display/xrandr-capplet.c:1558
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
@@ -733,865 +498,1954 @@ msgstr ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
 
-#: ../panels/display/xrandr-capplet.c:2079
+#: ../panels/display/xrandr-capplet.c:1947
+msgid "%a %R"
+msgstr "%a %R"
+
+#: ../panels/display/xrandr-capplet.c:1949
+msgid "%a %l:%M %p"
+msgstr "%a %H:%M"
+
+#: ../panels/display/xrandr-capplet.c:2195
 msgid "Could not save the monitor configuration"
 msgstr "Could not save the monitor configuration"
 
-#: ../panels/display/xrandr-capplet.c:2102
+#: ../panels/display/xrandr-capplet.c:2220
 msgid "Could not get session bus while applying display configuration"
 msgstr "Could not get session bus while applying display configuration"
 
-#: ../panels/display/xrandr-capplet.c:2147
+#: ../panels/display/xrandr-capplet.c:2265
 msgid "Could not detect displays"
 msgstr "Could not detect displays"
 
-#: ../panels/display/xrandr-capplet.c:2322
-msgid "The monitor configuration has been saved"
-msgstr "The monitor configuration has been saved"
-
-#: ../panels/display/xrandr-capplet.c:2324
-msgid "This configuration will be used the next time someone logs in."
-msgstr "This configuration will be used the next time someone logs in."
-
-#: ../panels/display/xrandr-capplet.c:2358
-msgid "Could not set the default configuration for monitors"
-msgstr "Could not set the default configuration for monitors"
-
-#: ../panels/display/xrandr-capplet.c:2416
+#: ../panels/display/xrandr-capplet.c:2460
 msgid "Could not get screen information"
 msgstr "Could not get screen information"
 
-#: ../panels/keybindings/00-multimedia-key.xml.in.h:1
-msgid "Sound"
-msgstr "Sound"
-
-#: ../panels/keybindings/01-desktop-key.xml.in.h:1
-msgid "Desktop"
-msgstr "Desktop"
-
-#: ../panels/keybindings/eggcellrendererkeys.c:21
-msgid "New shortcut..."
-msgstr "New shortcut…"
-
-#: ../panels/keybindings/eggcellrendererkeys.c:163
-#: ../panels/keybindings/eggcellrendererkeys.c:164
-msgid "Accelerator key"
-msgstr "Accelerator key"
-
-#: ../panels/keybindings/eggcellrendererkeys.c:173
-#: ../panels/keybindings/eggcellrendererkeys.c:174
-msgid "Accelerator modifiers"
-msgstr "Accelerator modifiers"
-
-#: ../panels/keybindings/eggcellrendererkeys.c:182
-#: ../panels/keybindings/eggcellrendererkeys.c:183
-msgid "Accelerator keycode"
-msgstr "Accelerator keycode"
-
-#: ../panels/keybindings/eggcellrendererkeys.c:193
-msgid "Accel Mode"
-msgstr "Accel Mode"
-
-#: ../panels/keybindings/eggcellrendererkeys.c:194
-msgid "The type of accelerator."
-msgstr "The type of accelerator."
-
-#: ../panels/keybindings/eggcellrendererkeys.c:242
-#: ../panels/keybindings/gnome-keybinding-properties.c:100
-#: ../typing-break/drwright.c:498
-msgid "Disabled"
-msgstr "Disabled"
-
-#: ../panels/keybindings/gnome-keybinding-properties.c:181
-msgid "<Unknown Action>"
-msgstr "<Unknown Action>"
-
-#: ../panels/keybindings/gnome-keybinding-properties.c:931
-#: ../panels/keybindings/gnome-keybinding-properties.c:1562
-msgid "Custom Shortcuts"
-msgstr "Custom Shortcuts"
-
-#: ../panels/keybindings/gnome-keybinding-properties.c:1073
-msgid "Error saving the new shortcut"
-msgstr "Error saving the new shortcut"
-
-#: ../panels/keybindings/gnome-keybinding-properties.c:1152
+#. Translators: VESA is an techncial acronym, don't translate it.
+#: ../panels/info/cc-info-panel.c:366
 #, c-format
-msgid ""
-"The shortcut \"%s\" cannot be used because it will become impossible to type "
-"using this key.\n"
-"Please try with a key such as Control, Alt or Shift at the same time."
-msgstr ""
-"The shortcut \"%s\" cannot be used because it will become impossible to type "
-"using this key.\n"
-"Please try with a key such as Control, Alt or Shift at the same time."
-
-#: ../panels/keybindings/gnome-keybinding-properties.c:1182
-#, c-format
-msgid ""
-"The shortcut \"%s\" is already used for\n"
-"\"%s\""
-msgstr ""
-"The shortcut \"%s\" is already used for\n"
-"\"%s\""
-
-#: ../panels/keybindings/gnome-keybinding-properties.c:1188
-#, c-format
-msgid ""
-"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
-msgstr ""
-"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
-
-#: ../panels/keybindings/gnome-keybinding-properties.c:1196
-msgid "_Reassign"
-msgstr "_Reassign"
-
-#: ../panels/keybindings/gnome-keybinding-properties.c:1316
-#, c-format
-msgid "Error unsetting accelerator in configuration database: %s"
-msgstr "Error unsetting accelerator in configuration database: %s"
-
-#: ../panels/keybindings/gnome-keybinding-properties.c:1517
-msgid "Too many custom shortcuts"
-msgstr "Too many custom shortcuts"
-
-#: ../panels/keybindings/gnome-keybinding-properties.c:1849
-msgid "Action"
-msgstr "Action"
-
-#: ../panels/keybindings/gnome-keybinding-properties.c:1871
-msgid "Shortcut"
-msgstr "Shortcut"
-
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:2
-msgid "Custom Shortcut"
-msgstr "Custom Shortcut"
-
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:3
-#: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:2
-msgid "Keyboard Shortcuts"
-msgstr "Keyboard Shortcuts"
-
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:4
-msgid ""
-"To edit a shortcut key, click on the corresponding row and type a new key "
-"combination, or press backspace to clear."
-msgstr ""
-"To edit a shortcut key, click on the corresponding row and type a new key "
-"combination, or press backspace to clear."
-
-#: ../panels/keybindings/gnome-keybinding-properties.ui.h:5
-msgid "_Name:"
-msgstr "_Name:"
-
-#: ../panels/keybindings/gnome-keybindings-panel.desktop.in.in.h:1
-msgid "Assign shortcut keys to commands"
-msgstr "Assign shortcut keys to commands"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:1
-msgid "Beep when _accessibility features are turned on or off"
-msgstr "Beep when _accessibility features are turned on or off"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:2
-msgid "Beep when a _modifier key is pressed"
-msgstr "Beep when a _modifier key is pressed"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:3
-msgid "Beep when a _toggle key is pressed"
-msgstr "Beep when a _toggle key is pressed"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:4
-msgid "Beep when a key is pr_essed"
-msgstr "Beep when a key is pr_essed"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:5
-msgid "Beep when a key is reje_cted"
-msgstr "Beep when a key is reje_cted"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:6
-msgid "Beep when key is _accepted"
-msgstr "Beep when key is _accepted"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:7
-msgid "Beep when key is _rejected"
-msgstr "Beep when key is _rejected"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:8
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:4
-#: ../panels/universal-access/uap.ui.h:17
-msgid "Bounce Keys"
-msgstr "Bounce Keys"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:9
-msgid "Flash _window titlebar"
-msgstr "Flash _window titlebar"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:10
-msgid "Flash entire _screen"
-msgstr "Flash entire _screen"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:11
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:14
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
-msgid "General"
-msgstr "General"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:12
-msgid "Keyboard Accessibility Audio Feedback"
-msgstr "Keyboard Accessibility Audio Feedback"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:13
-msgid "Show _visual feedback for the alert sound"
-msgstr "Show _visual feedback for the alert sound"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:14
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:39
-#: ../panels/universal-access/uap.ui.h:76
-msgid "Slow Keys"
-msgstr "Slow Keys"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:15
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:40
-#: ../panels/universal-access/uap.ui.h:80
-msgid "Sticky Keys"
-msgstr "Sticky Keys"
-
-#: ../panels/keyboard/gnome-keyboard-properties-a11y-notifications.ui.h:16
-msgid "Visual cues for sounds"
-msgstr "Visual cues for sounds"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:2
-msgid "All_ow postponing of breaks"
-msgstr "All_ow postponing of breaks"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:3
-msgid "Audio _Feedback..."
-msgstr "Audio _Feedback…"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:5
-msgid "Check if breaks are allowed to be postponed"
-msgstr "Check if breaks are allowed to be postponed"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:6
-msgid "Cursor Blinking"
-msgstr "Cursor Blinking"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:7
-msgid "Cursor _blinks in text fields"
-msgstr "Cursor _blinks in text fields"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:8
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
-#: ../panels/universal-access/uap.ui.h:29
-msgid "Cursor blinks speed"
-msgstr "Cursor blinks speed"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:9
-#: ../panels/mouse/gnome-mouse-properties.ui.h:5
-#: ../panels/universal-access/uap.ui.h:30
-msgid "D_elay:"
-msgstr "D_elay:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:10
-msgid "Disa_ble sticky keys if two keys are pressed together"
-msgstr "Disa_ble sticky keys if two keys are pressed together"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:11
-msgid "Duration of the break when typing is disallowed"
-msgstr "Duration of the break when typing is disallowed"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:12
-msgid "Duration of work before forcing a break"
-msgstr "Duration of work before forcing a break"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:13
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
-msgid "Fast"
-msgstr "Fast"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:15
-msgid "Key presses _repeat when key is held down"
-msgstr "Key presses _repeat when key is held down"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:16
-msgid "Keyboard Preferences"
-msgstr "Keyboard Preferences"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:17
-msgid "Keyboard _model:"
-msgstr "Keyboard _model:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:18
-msgid "Layouts"
-msgstr "Layouts"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:19
-msgid "List of keyboard layouts selected for usage"
-msgstr "List of keyboard layouts selected for usage"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:20
-msgid ""
-"Lock screen after a certain duration to help prevent repetitive keyboard use "
-"injuries"
-msgstr ""
-"Lock screen after a certain duration to help prevent repetitive keyboard use "
-"injuries"
-
-#. long delay
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:21
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
-#: ../panels/universal-access/uap.ui.h:53
-msgid "Long"
-msgstr "Long"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:22
-#: ../panels/universal-access/uap.ui.h:56
-msgid "Mouse Keys"
-msgstr "Mouse Keys"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:23
-msgid "Move _Down"
-msgstr "Move _Down"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:24
-msgid "Move _Up"
-msgstr "Move _Up"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:25
-msgid "Move the selected keyboard layout down in the list"
-msgstr "Move the selected keyboard layout down in the list"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:26
-msgid "Move the selected keyboard layout up in the list"
-msgstr "Move the selected keyboard layout up in the list"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:27
-msgid "New windows u_se active window's layout"
-msgstr "New windows u_se active window's layout"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:28
-msgid "Print a diagram of the selected keyboard layout"
-msgstr "Print a diagram of the selected keyboard layout"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:29
-msgid "Remove the selected keyboard layout from the list"
-msgstr "Remove the selected keyboard layout from the list"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:30
-msgid "Repeat Keys"
-msgstr "Repeat Keys"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:31
-msgid "Repeat keys speed"
-msgstr "Repeat keys speed"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:32
-msgid ""
-"Replace the current keyboard layout settings with the\n"
-"default settings"
-msgstr ""
-"Replace the current keyboard layout settings with the\n"
-"default settings"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:34
-msgid "Reset to De_faults"
-msgstr "Reset to De_faults"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:35
-msgid "S_peed:"
-msgstr "S_peed:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:36
-msgid "Select a keyboard layout to be added to the list"
-msgstr "Select a keyboard layout to be added to the list"
-
-#. short delay
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:37
-#: ../panels/mouse/gnome-mouse-properties.ui.h:27
-#: ../panels/universal-access/uap.ui.h:73
-msgid "Short"
-msgstr "Short"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:38
-#: ../panels/mouse/gnome-mouse-properties.ui.h:30
-msgid "Slow"
-msgstr "Slow"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:41
-msgid "Typing Break"
-msgstr "Typing Break"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:42
-msgid "View and edit keyboard layout options"
-msgstr "View and edit keyboard layout options"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:43
-#: ../panels/mouse/gnome-mouse-properties.ui.h:37
-msgid "_Acceleration:"
-msgstr "_Acceleration:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:44
-msgid "_Accessibility features can be toggled with keyboard shortcuts"
-msgstr "_Accessibility features can be toggled with keyboard shortcuts"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:45
-msgid "_Add..."
-msgstr "_Add…"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:46
-msgid "_Break interval lasts:"
-msgstr "_Break interval lasts:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:47
-#: ../panels/mouse/gnome-mouse-properties.ui.h:38
-msgid "_Delay:"
-msgstr "_Delay:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:48
-msgid "_Ignore fast duplicate keypresses"
-msgstr "_Ignore fast duplicate keypresses"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:49
-msgid "_Lock screen to enforce typing break"
-msgstr "_Lock screen to enforce typing break"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:50
-msgid "_Only accept long keypresses"
-msgstr "_Only accept long keypresses"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:51
-msgid "_Options..."
-msgstr "_Options…"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:52
-msgid "_Pointer can be controlled using the keypad"
-msgstr "_Pointer can be controlled using the keypad"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:53
-msgid "_Separate layout for each window"
-msgstr "_Separate layout for each window"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:54
-msgid "_Simulate simultaneous keypresses"
-msgstr "_Simulate simultaneous keypresses"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:55
-msgid "_Speed:"
-msgstr "_Speed:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:56
-msgid "_Type to test settings:"
-msgstr "_Type to test settings:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:57
-msgid "_Work interval lasts:"
-msgstr "_Work interval lasts:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-dialog.ui.h:58
-msgid "minutes"
-msgstr "minutes"
-
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:1
-msgid "By _country"
-msgstr "By _country"
-
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:2
-msgid "By _language"
-msgstr "By _language"
-
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:3
-msgid "Choose a Layout"
-msgstr "Choose a Layout"
-
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:4
-msgid "Preview:"
-msgstr "Preview:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:5
-msgid "_Country:"
-msgstr "_Country:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:6
-msgid "_Language:"
-msgstr "_Language:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-layout-chooser.ui.h:7
-msgid "_Variants:"
-msgstr "_Variants:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:1
-msgid "Choose a Keyboard Model"
-msgstr "Choose a Keyboard Model"
-
-#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:2
-msgid "_Models:"
-msgstr "_Models:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-model-chooser.ui.h:3
-msgid "_Vendors:"
-msgstr "_Vendors:"
-
-#: ../panels/keyboard/gnome-keyboard-properties-options-dialog.ui.h:1
-msgid "Keyboard Layout Options"
-msgstr "Keyboard Layout Options"
-
-#: ../panels/keyboard/gnome-keyboard-properties-xkb.c:81
+msgid "VESA: %s"
+msgstr "VESA: %s"
+
+#. TRANSLATORS: device type
+#. TRANSLATORS: AP type
+#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:72
+#: ../panels/network/panel-common.c:151
 msgid "Unknown"
 msgstr "Unknown"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkblt.c:241
-msgid "Layout"
-msgstr "Layout"
+#. translators: This is the type of architecture, for example:
+#. * "64-bit" or "32-bit"
+#: ../panels/info/cc-info-panel.c:528
+#, c-format
+msgid "%d-bit"
+msgstr "%d-bit"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:166
-msgid "Vendors"
-msgstr "Vendors"
+#: ../panels/info/cc-info-panel.c:542
+#, c-format
+msgid "%u byte"
+msgid_plural "%u bytes"
+msgstr[0] "%u byte"
+msgstr[1] "%u bytes"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbmc.c:232
-msgid "Models"
-msgstr "Models"
+#: ../panels/info/cc-info-panel.c:550
+#, c-format
+msgid "%.1f KB"
+msgstr "%.1f KB"
 
-#: ../panels/keyboard/gnome-keyboard-properties-xkbot.c:233
-#: ../panels/network/gnome-network-properties.c:582
-msgid "Default"
-msgstr "Default"
+#: ../panels/info/cc-info-panel.c:555
+#, c-format
+msgid "%.1f MB"
+msgstr "%.1f MB"
+
+#: ../panels/info/cc-info-panel.c:560
+#, c-format
+msgid "%.1f GB"
+msgstr "%.1f GB"
+
+#: ../panels/info/cc-info-panel.c:565
+#, c-format
+msgid "%.1f TB"
+msgstr "%.1f TB"
+
+#: ../panels/info/cc-info-panel.c:570
+#, c-format
+msgid "%.1f PB"
+msgstr "%.1f PB"
+
+#: ../panels/info/cc-info-panel.c:575
+#, c-format
+msgid "%.1f EB"
+msgstr "%.1f EB"
+
+#: ../panels/info/cc-info-panel.c:686
+msgid "Unknown model"
+msgstr "Unknown model"
+
+#: ../panels/info/cc-info-panel.c:769
+msgid "The next login will attempt to use the standard experience."
+msgstr "The next login will attempt to use the standard experience."
+
+#: ../panels/info/cc-info-panel.c:771
+msgid ""
+"The next login will use the fallback mode intended for unsupported graphics "
+"hardware."
+msgstr ""
+"The next login will use the fallback mode intended for unsupported graphics "
+"hardware."
+
+#. translators: The hardware is not able to run GNOME 3's
+#. * shell, so we use the GNOME "Fallback" session
+#: ../panels/info/cc-info-panel.c:813
+msgctxt "Experience"
+msgid "Fallback"
+msgstr "Fallback"
+
+#. translators: The hardware is able to run GNOME 3's
+#. * shell, also called "Standard" experience
+#: ../panels/info/cc-info-panel.c:819
+msgctxt "Experience"
+msgid "Standard"
+msgstr "Standard"
+
+#: ../panels/info/cc-info-panel.c:951
+#: ../panels/keyboard/keyboard-shortcuts.c:1711
+msgid "Section"
+msgstr "Section"
+
+#: ../panels/info/cc-info-panel.c:960 ../panels/info/info.ui.h:14
+msgid "Overview"
+msgstr "Overview"
+
+#: ../panels/info/cc-info-panel.c:966 ../panels/info/info.ui.h:2
+msgid "Default Applications"
+msgstr "Default Applications"
+
+#: ../panels/info/cc-info-panel.c:971 ../panels/info/info.ui.h:9
+msgid "Graphics"
+msgstr "Graphics"
+
+#: ../panels/info/cc-info-panel.c:996
+#, c-format
+msgid "Version %s"
+msgstr "Version %s"
+
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:1
+msgid "System Info"
+msgstr "System Info"
+
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:2
+msgid "System Information"
+msgstr "System Information"
+
+#. Translators: those are keywords for the System Information panel
+#: ../panels/info/gnome-info-panel.desktop.in.in.h:4
+msgid ""
+"device;system;information;memory;processor;version;default;application;"
+"fallback;"
+msgstr ""
+"device;system;information;memory;processor;version;default;application;"
+"fallback;"
+
+#: ../panels/info/info.ui.h:1
+msgid "Calendar"
+msgstr "Calendar"
+
+#: ../panels/info/info.ui.h:3
+msgid "Device name"
+msgstr "Device name"
+
+#: ../panels/info/info.ui.h:4
+msgid "Disk"
+msgstr "Disk"
+
+#: ../panels/info/info.ui.h:5
+msgid "Driver"
+msgstr "Driver"
+
+#: ../panels/info/info.ui.h:6
+msgid "Experience"
+msgstr "Experience"
+
+#. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
+#: ../panels/info/info.ui.h:8
+msgid "Forced Fallback Mode"
+msgstr "Forced Fallback Mode"
+
+#: ../panels/info/info.ui.h:10
+msgid "Mail"
+msgstr "Mail"
+
+#: ../panels/info/info.ui.h:11
+msgid "Memory"
+msgstr "Memory"
+
+#: ../panels/info/info.ui.h:12
+msgid "Music"
+msgstr "Music"
+
+#: ../panels/info/info.ui.h:13
+msgid "OS type"
+msgstr "OS type"
+
+#: ../panels/info/info.ui.h:15
+msgid "Photos"
+msgstr "Photos"
+
+#: ../panels/info/info.ui.h:16
+msgid "Processor"
+msgstr "Processor"
+
+#: ../panels/info/info.ui.h:17
+msgid "Updates Available"
+msgstr "Updates Available"
+
+#: ../panels/info/info.ui.h:18
+msgid "Video"
+msgstr "Video"
+
+#: ../panels/info/info.ui.h:19
+msgid "Web"
+msgstr "Web"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:1
+msgid "Eject"
+msgstr "Eject"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:2
+msgid "Launch media player"
+msgstr "Launch media player"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:3
+msgid "Next track"
+msgstr "Next track"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:4
+msgid "Pause playback"
+msgstr "Pause playback"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:5
+msgid "Play (or play/pause)"
+msgstr "Play (or play/pause)"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:6
+msgid "Previous track"
+msgstr "Previous track"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:7
+msgid "Sound and Media"
+msgstr "Sound and Media"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:8
+msgid "Stop playback"
+msgstr "Stop playback"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:9
+msgid "Volume down"
+msgstr "Volume down"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:10
+msgid "Volume mute"
+msgstr "Volume mute"
+
+#: ../panels/keyboard/00-multimedia.xml.in.h:11
+msgid "Volume up"
+msgstr "Volume up"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:1
+msgid "Home folder"
+msgstr "Home folder"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:2
+msgid "Launch calculator"
+msgstr "Launch calculator"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:3
+msgid "Launch email client"
+msgstr "Launch e-mail client"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:4
+msgid "Launch help browser"
+msgstr "Launch help browser"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:5
+msgid "Launch web browser"
+msgstr "Launch web browser"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:6
+msgid "Launchers"
+msgstr "Launchers"
+
+#: ../panels/keyboard/01-launchers.xml.in.h:7
+msgid "Search"
+msgstr "Search"
+
+#: ../panels/keyboard/01-system.xml.in.h:1
+msgid "Lock screen"
+msgstr "Lock screen"
+
+#: ../panels/keyboard/01-system.xml.in.h:2
+msgid "Log out"
+msgstr "Log out"
+
+#: ../panels/keyboard/01-system.xml.in.h:3
+msgid "System"
+msgstr "System"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:1
+msgid "Decrease text size"
+msgstr "Decrease text size"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:2
+msgid "Increase text size"
+msgstr "Increase text size"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:3
+msgid "Magnifier zoom in"
+msgstr "Magnifier zoom in"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:4
+msgid "Magnifier zoom out"
+msgstr "Magnifier zoom out"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:5
+msgid "Toggle contrast"
+msgstr "Toggle contrast"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:6
+msgid "Toggle magnifier"
+msgstr "Toggle magnifier"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:7
+msgid "Toggle on-screen keyboard"
+msgstr "Toggle on-screen keyboard"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:8
+msgid "Toggle screen reader"
+msgstr "Toggle screen reader"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:9
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
+msgid "Universal Access"
+msgstr "Universal Access"
+
+#: ../panels/keyboard/eggcellrendererkeys.c:21
+msgid "New shortcut..."
+msgstr "New shortcut…"
+
+#: ../panels/keyboard/eggcellrendererkeys.c:164
+#: ../panels/keyboard/eggcellrendererkeys.c:165
+msgid "Accelerator key"
+msgstr "Accelerator key"
+
+#: ../panels/keyboard/eggcellrendererkeys.c:174
+#: ../panels/keyboard/eggcellrendererkeys.c:175
+msgid "Accelerator modifiers"
+msgstr "Accelerator modifiers"
+
+#: ../panels/keyboard/eggcellrendererkeys.c:183
+#: ../panels/keyboard/eggcellrendererkeys.c:184
+msgid "Accelerator keycode"
+msgstr "Accelerator keycode"
+
+#: ../panels/keyboard/eggcellrendererkeys.c:194
+msgid "Accel Mode"
+msgstr "Accel Mode"
+
+#: ../panels/keyboard/eggcellrendererkeys.c:195
+msgid "The type of accelerator."
+msgstr "The type of accelerator."
+
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/eggcellrendererkeys.c:243
+#: ../panels/keyboard/keyboard-shortcuts.c:1152
+#: ../panels/sound/gvc-mixer-control.c:1091
+#: ../panels/user-accounts/um-fingerprint-dialog.c:177
+#: ../panels/user-accounts/um-fingerprint-dialog.c:178
+msgid "Disabled"
+msgstr "Disabled"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
+msgid "Change keyboard settings"
+msgstr "Change keyboard settings"
+
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
 msgid "Keyboard"
 msgstr "Keyboard"
 
-#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
-msgid "Set your keyboard preferences"
-msgstr "Set your keyboard preferences"
+#. Translators: those are keywords for the keyboard control-center panel
+#: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:4
+msgid "Shortcut;Repeat;Blink;"
+msgstr "Shortcut;Repeat;Blink;"
 
-#: ../panels/mouse/capplet-stock-icons.c:66
+#: ../panels/keyboard/keyboard-shortcuts.c:645
+#: ../panels/keyboard/keyboard-shortcuts.c:927
+#: ../panels/keyboard/keyboard-shortcuts.c:1505
+#: ../panels/keyboard/keyboard-shortcuts.c:1509
+msgid "Custom Shortcuts"
+msgstr "Custom Shortcuts"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:779
+msgid "<Unknown Action>"
+msgstr "<Unknown Action>"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1178
+msgid "Error saving the new shortcut"
+msgstr "Error saving the new shortcut"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1291
 #, c-format
-msgid "Unable to load stock icon '%s'\n"
-msgstr "Unable to load stock icon '%s'\n"
+msgid ""
+"The shortcut \"%s\" cannot be used because it will become impossible to type "
+"using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time."
+msgstr ""
+"The shortcut \"%s\" cannot be used because it will become impossible to type "
+"using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time."
 
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:90
-msgid "gesture|Move left"
-msgstr "Move left"
+#: ../panels/keyboard/keyboard-shortcuts.c:1321
+#, c-format
+msgid ""
+"The shortcut \"%s\" is already used for\n"
+"\"%s\""
+msgstr ""
+"The shortcut \"%s\" is already used for\n"
+"\"%s\""
 
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:95
-msgid "gesture|Move right"
-msgstr "Move right"
+#: ../panels/keyboard/keyboard-shortcuts.c:1326
+#, c-format
+msgid ""
+"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgstr ""
+"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:100
-msgid "gesture|Move up"
-msgstr "Move up"
+#: ../panels/keyboard/keyboard-shortcuts.c:1332
+msgid "_Reassign"
+msgstr "_Reassign"
 
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:105
-msgid "gesture|Move down"
-msgstr "Move down"
+#: ../panels/keyboard/keyboard-shortcuts.c:1444
+msgid "Too many custom shortcuts"
+msgstr "Too many custom shortcuts"
 
-#. Translators: this is the gesture to trigger/choose the click type.
-#. Don't include the prefix "gesture|" in the translation.
-#: ../panels/mouse/gnome-mouse-accessibility.c:110
-msgid "gesture|Disabled"
-msgstr "Disabled"
+#: ../panels/keyboard/keyboard-shortcuts.c:1764
+msgid "Action"
+msgstr "Action"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1787
+msgid "Shortcut"
+msgstr "Shortcut"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
+msgid "C_ommand:"
+msgstr "C_ommand:"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+msgid "Cursor Blinking"
+msgstr "Cursor Blinking"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+msgid "Cursor _blinks in text fields"
+msgstr "Cursor _blinks in text fields"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
+#: ../panels/mouse/gnome-mouse-properties.ui.h:1
+#: ../panels/universal-access/uap.ui.h:21
+msgid "Cursor blinks speed"
+msgstr "Cursor blinks speed"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
+msgid "Custom Shortcut"
+msgstr "Custom Shortcut"
+
+#. fast acceleration
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+msgid "Fast"
+msgstr "Fast"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+msgid "General"
+msgstr "General"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
+msgid "Key presses _repeat when key is held down"
+msgstr "Key presses _repeat when key is held down"
+
+#. long delay
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/universal-access/uap.ui.h:39
+msgid "Long"
+msgstr "Long"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
+msgid "Repeat Keys"
+msgstr "Repeat Keys"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+msgid "Repeat keys speed"
+msgstr "Repeat keys speed"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+msgid "S_peed:"
+msgstr "S_peed:"
+
+#. short delay
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:24
+#: ../panels/universal-access/uap.ui.h:54
+msgid "Short"
+msgstr "Short"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+msgid "Shortcuts"
+msgstr "Shortcuts"
+
+#. slow acceleration
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
+#: ../panels/mouse/gnome-mouse-properties.ui.h:26
+msgid "Slow"
+msgstr "Slow"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
+msgid ""
+"To edit a shortcut, click the row and hold down the new keys or press "
+"Backspace to clear."
+msgstr ""
+"To edit a shortcut, click the row and hold down the new keys or press "
+"Backspace to clear."
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
+msgid "_Delay:"
+msgstr "_Delay:"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
+msgid "_Name:"
+msgstr "_Name:"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
+msgid "_Speed:"
+msgstr "_Speed:"
+
+#: ../panels/media/cc-media-panel.c:322
+msgid "Ask what to do"
+msgstr "Ask what to do"
+
+#: ../panels/media/cc-media-panel.c:326 ../panels/power/power.ui.h:6
+msgid "Do nothing"
+msgstr "Do nothing"
+
+#: ../panels/media/cc-media-panel.c:330
+msgid "Open folder"
+msgstr "Open folder"
+
+#: ../panels/media/cc-media-panel.c:441
+msgid "Select an application for audio CDs"
+msgstr "Select an application for audio CDs"
+
+#: ../panels/media/cc-media-panel.c:442
+msgid "Select an application for video DVDs"
+msgstr "Select an application for video DVDs"
+
+#: ../panels/media/cc-media-panel.c:443
+msgid "Select an application to run when a music player is connected"
+msgstr "Select an application to run when a music player is connected"
+
+#: ../panels/media/cc-media-panel.c:444
+msgid "Select an application to run when a camera is connected"
+msgstr "Select an application to run when a camera is connected"
+
+#: ../panels/media/cc-media-panel.c:445
+msgid "Select an application for software CDs"
+msgstr "Select an application for software CDs"
+
+#. translators: these strings are duplicates of shared-mime-info
+#. * strings, just here to fix capitalization of the English originals.
+#. * If the shared-mime-info translation works for your language,
+#. * simply leave these untranslated.
+#.
+#: ../panels/media/cc-media-panel.c:457
+msgid "audio DVD"
+msgstr "audio DVD"
+
+#: ../panels/media/cc-media-panel.c:458
+msgid "blank Blu-ray disc"
+msgstr "blank Blu-ray disc"
+
+#: ../panels/media/cc-media-panel.c:459
+msgid "blank CD disc"
+msgstr "blank CD disc"
+
+#: ../panels/media/cc-media-panel.c:460
+msgid "blank DVD disc"
+msgstr "blank DVD disc"
+
+#: ../panels/media/cc-media-panel.c:461
+msgid "blank HD DVD disc"
+msgstr "blank HD DVD disc"
+
+#: ../panels/media/cc-media-panel.c:462
+msgid "Blu-ray video disc"
+msgstr "Blu-ray video disc"
+
+#: ../panels/media/cc-media-panel.c:463
+msgid "e-book reader"
+msgstr "e-book reader"
+
+#: ../panels/media/cc-media-panel.c:464
+msgid "HD DVD video disc"
+msgstr "HD DVD video disc"
+
+#: ../panels/media/cc-media-panel.c:465
+msgid "Picture CD"
+msgstr "Picture CD"
+
+#: ../panels/media/cc-media-panel.c:466
+msgid "Super Video CD"
+msgstr "Super Video CD"
+
+#: ../panels/media/cc-media-panel.c:467
+msgid "Video CD"
+msgstr "Video CD"
+
+#: ../panels/media/gnome-media-properties.ui.h:1
+msgid "Acti_on:"
+msgstr "Acti_on:"
+
+#: ../panels/media/gnome-media-properties.ui.h:2
+msgid "CD _audio:"
+msgstr "CD _audio:"
+
+#: ../panels/media/gnome-media-properties.ui.h:3
+msgid "Media and Autorun"
+msgstr "Media and Autorun"
+
+#: ../panels/media/gnome-media-properties.ui.h:4
+msgid "Select how media should be handled"
+msgstr "Select how media should be handled"
+
+#: ../panels/media/gnome-media-properties.ui.h:5
+msgid "Select how other media should be handled"
+msgstr "Select how other media should be handled"
+
+#: ../panels/media/gnome-media-properties.ui.h:6
+msgid "_DVD video:"
+msgstr "_DVD video:"
+
+#: ../panels/media/gnome-media-properties.ui.h:7
+msgid "_Music player:"
+msgstr "_Music player:"
+
+#: ../panels/media/gnome-media-properties.ui.h:8
+msgid "_Never prompt or start programs on media insertion"
+msgstr "_Never prompt or start programs on media insertion"
+
+#: ../panels/media/gnome-media-properties.ui.h:9
+msgid "_Other Media..."
+msgstr "_Other Media…"
+
+#: ../panels/media/gnome-media-properties.ui.h:10
+msgid "_Photos:"
+msgstr "_Photos:"
+
+#: ../panels/media/gnome-media-properties.ui.h:11
+msgid "_Software:"
+msgstr "_Software:"
+
+#: ../panels/media/gnome-media-properties.ui.h:12
+msgid "_Type:"
+msgstr "_Type:"
+
+#: ../panels/media/gnome-media-panel.desktop.in.in.h:1
+msgid "Configure media and autorun preferences"
+msgstr "Configure media and autorun preferences"
+
+#: ../panels/media/gnome-media-panel.desktop.in.in.h:2
+msgid "Removable Media"
+msgstr "Removable Media"
+
+#. Translators: those are keywords for the media control-center panel
+#: ../panels/media/gnome-media-panel.desktop.in.in.h:4
+msgid "cd;dvd;usb;audio;video;disc;"
+msgstr "cd;dvd;usb;audio;video;disc;"
+
+#. Translators: The printer is low on toner
+#: ../panels/printers/cc-printers-panel.c:239
+msgid "Low on toner"
+msgstr "Low on toner"
+
+#. Translators: The printer has no toner left
+#: ../panels/printers/cc-printers-panel.c:241
+msgid "Out of toner"
+msgstr "Out of toner"
+
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/cc-printers-panel.c:244
+msgid "Low on developer"
+msgstr "Low on developer"
+
+#. Translators: "Developer" is a chemical for photo development,
+#. * http://en.wikipedia.org/wiki/Photographic_developer
+#: ../panels/printers/cc-printers-panel.c:247
+msgid "Out of developer"
+msgstr "Out of developer"
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/cc-printers-panel.c:249
+msgid "Low on a marker supply"
+msgstr "Low on a marker supply"
+
+#. Translators: "marker" is one color bin of the printer
+#: ../panels/printers/cc-printers-panel.c:251
+msgid "Out of a marker supply"
+msgstr "Out of a marker supply"
+
+#. Translators: One or more covers on the printer are open
+#: ../panels/printers/cc-printers-panel.c:253
+msgid "Open cover"
+msgstr "Open cover"
+
+#. Translators: One or more doors on the printer are open
+#: ../panels/printers/cc-printers-panel.c:255
+msgid "Open door"
+msgstr "Open door"
+
+#. Translators: At least one input tray is low on media
+#: ../panels/printers/cc-printers-panel.c:257
+msgid "Low on paper"
+msgstr "Low on paper"
+
+#. Translators: At least one input tray is empty
+#: ../panels/printers/cc-printers-panel.c:259
+msgid "Out of paper"
+msgstr "Out of paper"
+
+#. Translators: The printer is offline
+#: ../panels/printers/cc-printers-panel.c:261
+msgctxt "printer state"
+msgid "Offline"
+msgstr "Offline"
+
+#. Translators: Someone has paused the Printer
+#: ../panels/printers/cc-printers-panel.c:263
+msgctxt "printer state"
+msgid "Paused"
+msgstr "Paused"
+
+#. Translators: The printer marker supply waste receptacle is almost full
+#: ../panels/printers/cc-printers-panel.c:265
+msgid "Waste receptacle almost full"
+msgstr "Waste receptacle almost full"
+
+#. Translators: The printer marker supply waste receptacle is full
+#: ../panels/printers/cc-printers-panel.c:267
+msgid "Waste receptacle full"
+msgstr "Waste receptacle full"
+
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/cc-printers-panel.c:269
+msgid "The optical photo conductor is near end of life"
+msgstr "The optical photo conductor is near end of life"
+
+#. Translators: Optical photo conductors are used in laser printers
+#: ../panels/printers/cc-printers-panel.c:271
+msgid "The optical photo conductor is no longer functioning"
+msgstr "The optical photo conductor is no longer functioning"
+
+#. Translators: Printer's state (can start new job without waiting)
+#: ../panels/printers/cc-printers-panel.c:408
+msgctxt "printer state"
+msgid "Ready"
+msgstr "Ready"
+
+#. Translators: Printer's state (jobs are processing)
+#: ../panels/printers/cc-printers-panel.c:412
+msgctxt "printer state"
+msgid "Processing"
+msgstr "Processing"
+
+#. Translators: Printer's state (no jobs can be processed)
+#: ../panels/printers/cc-printers-panel.c:416
+msgctxt "printer state"
+msgid "Stopped"
+msgstr "Stopped"
+
+#. Translators: Toner supply
+#: ../panels/printers/cc-printers-panel.c:514
+msgid "Toner Level"
+msgstr "Toner Level"
+
+#. Translators: Ink supply
+#: ../panels/printers/cc-printers-panel.c:517
+msgid "Ink Level"
+msgstr "Ink Level"
+
+#. Translators: By supply we mean ink, toner, staples, water, ...
+#: ../panels/printers/cc-printers-panel.c:520
+msgid "Supply Level"
+msgstr "Supply Level"
+
+#. Translators: there is n active print jobs on this printer
+#: ../panels/printers/cc-printers-panel.c:535
+#, c-format
+msgid "%u active"
+msgid_plural "%u active"
+msgstr[0] "%u active"
+msgstr[1] "%u active"
+
+#. Translators: Job's state (job is waiting to be printed)
+#: ../panels/printers/cc-printers-panel.c:1002
+msgctxt "print job"
+msgid "Pending"
+msgstr "Pending"
+
+#. Translators: Job's state (job is held for printing)
+#: ../panels/printers/cc-printers-panel.c:1006
+msgctxt "print job"
+msgid "Held"
+msgstr "Held"
+
+#. Translators: Job's state (job is currently printing)
+#: ../panels/printers/cc-printers-panel.c:1010
+msgctxt "print job"
+msgid "Processing"
+msgstr "Processing"
+
+#. Translators: Job's state (job has been stopped)
+#: ../panels/printers/cc-printers-panel.c:1014
+msgctxt "print job"
+msgid "Stopped"
+msgstr "Stopped"
+
+#. Translators: Job's state (job has been canceled)
+#: ../panels/printers/cc-printers-panel.c:1018
+msgctxt "print job"
+msgid "Canceled"
+msgstr "Cancelled"
+
+#. Translators: Job's state (job has aborted due to error)
+#: ../panels/printers/cc-printers-panel.c:1022
+msgctxt "print job"
+msgid "Aborted"
+msgstr "Aborted"
+
+#. Translators: Job's state (job has completed successfully)
+#: ../panels/printers/cc-printers-panel.c:1026
+msgctxt "print job"
+msgid "Completed"
+msgstr "Completed"
+
+#. Translators: Name of column showing titles of print jobs
+#: ../panels/printers/cc-printers-panel.c:1118
+msgid "Job Title"
+msgstr "Job Title"
+
+#. Translators: Name of column showing statuses of print jobs
+#: ../panels/printers/cc-printers-panel.c:1127
+msgid "Job State"
+msgstr "Job State"
+
+#. Translators: Name of column showing times of creation of print jobs
+#: ../panels/printers/cc-printers-panel.c:1133
+msgid "Time"
+msgstr "Time"
+
+#. Translators: Addition of the new printer failed.
+#: ../panels/printers/cc-printers-panel.c:1848
+msgid "Failed to add new printer."
+msgstr "Failed to add new printer."
+
+#. Translators: Name of job which makes printer to print test page
+#: ../panels/printers/cc-printers-panel.c:1948
+msgid "Test page"
+msgstr "Test page"
+
+#. Translators: Name of job which makes printer to clean its heads
+#: ../panels/printers/cc-printers-panel.c:1956
+msgid "Clean print heads"
+msgstr "Clean print heads"
+
+#. Translators: An error has occured during execution of a CUPS maintenance command
+#: ../panels/printers/cc-printers-panel.c:1961
+msgid "An error has occured during a maintenance command."
+msgstr "An error has occurred during a maintenance command."
+
+#. Translators: The XML file containing user interface can not be loaded
+#: ../panels/printers/cc-printers-panel.c:2090
+#, c-format
+msgid "Could not load ui: %s"
+msgstr "Could not load ui: %s"
+
+#: ../panels/printers/gnome-printers-panel.desktop.in.in.h:1
+msgid "Change printer settings"
+msgstr "Change printer settings"
+
+#. Translators: those are keywords for the printing control-center panel
+#: ../panels/printers/gnome-printers-panel.desktop.in.in.h:3
+msgid "Printer;Queue;Print;Paper;Ink;Toner;"
+msgstr "Printer;Queue;Print;Paper;Ink;Toner;"
+
+#: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
+msgid "Printers"
+msgstr "Printers"
+
+#. Translators: Column of devices which can be installed
+#: ../panels/printers/pp-new-printer-dialog.c:552
+#: ../panels/printers/pp-new-printer-dialog.c:557
+msgid "Devices"
+msgstr "Devices"
+
+#. Translators: Local means local printers
+#: ../panels/printers/pp-new-printer-dialog.c:582
+msgid "Local"
+msgstr "Local"
+
+#. Translators: Network means network printers
+#: ../panels/printers/pp-new-printer-dialog.c:584
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+msgid "Network"
+msgstr "Network"
+
+#. Translators: Device types column (network or local)
+#: ../panels/printers/pp-new-printer-dialog.c:625
+msgid "Device types"
+msgstr "Device types"
+
+#. Translators: Name of job which makes printer to autoconfigure itself
+#: ../panels/printers/pp-new-printer-dialog.c:778
+#: ../panels/printers/pp-new-printer-dialog.c:944
+msgid "Automatic configuration"
+msgstr "Automatic configuration"
+
+#: ../panels/printers/printers.ui.h:1
+msgid "---"
+msgstr "---"
+
+#. Translators: This tab contains list of active print jobs of the selected printer
+#: ../panels/printers/printers.ui.h:3
+msgid "Active Print Jobs"
+msgstr "Active Print Jobs"
+
+#: ../panels/printers/printers.ui.h:4
+msgid "Allowed users"
+msgstr "Allowed users"
+
+#. Translators: Switch back to printer's info tab
+#: ../panels/printers/printers.ui.h:6
+msgid "Back"
+msgstr "Back"
+
+#. Translators: This checkbox is checked when the default printer is selected.
+#: ../panels/printers/printers.ui.h:8
+#: ../panels/region/gnome-region-panel-xkbot.c:229
+#: ../panels/sound/gvc-sound-theme-chooser.c:581
+msgid "Default"
+msgstr "Default"
+
+#: ../panels/printers/printers.ui.h:9
+msgid "IP Address"
+msgstr "IP Address"
+
+#: ../panels/printers/printers.ui.h:10
+msgid "Info"
+msgstr "Info"
+
+#: ../panels/printers/printers.ui.h:11
+msgid "Jobs"
+msgstr "Jobs"
+
+#. Translators: Location of the printer (e.g. Lab, 1st floor,...).
+#: ../panels/printers/printers.ui.h:13
+msgid "Location"
+msgstr "Location"
+
+#: ../panels/printers/printers.ui.h:14
+msgid "Model"
+msgstr "Model"
+
+#. Translators: This button opens printer's options tab
+#: ../panels/printers/printers.ui.h:16
+msgid "Options"
+msgstr "Options"
+
+#. Translators: This button executes command which prints test page.
+#: ../panels/printers/printers.ui.h:18
+msgid "Print Test Page"
+msgstr "Print Test Page"
+
+#: ../panels/printers/printers.ui.h:19
+msgid "Printer"
+msgstr "Printer"
+
+#. Translators: This tab contains list of active print jobs of the selected printer
+#: ../panels/printers/printers.ui.h:21
+msgid "Printer Options"
+msgstr "Printer Options"
+
+#: ../panels/printers/printers.ui.h:22
+msgid "Printing..."
+msgstr "Printing…"
+
+#. Tanslators: Switch to tab containing printer's jobs
+#: ../panels/printers/printers.ui.h:24
+msgid "Show"
+msgstr "Show"
+
+#. Translators: By supply we mean ink, toner, staples, water, ...
+#: ../panels/printers/printers.ui.h:26
+msgid "Supply"
+msgstr "Supply"
+
+#: ../panels/region/gnome-region-panel.ui.h:1
+msgid "Allow different layouts for each window"
+msgstr "Allow different layouts for each window"
+
+#: ../panels/region/gnome-region-panel.ui.h:2
+msgid "Install languages..."
+msgstr "Install languages…"
+
+#: ../panels/region/gnome-region-panel.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "Language"
+msgstr "Language"
+
+#: ../panels/region/gnome-region-panel.ui.h:4
+msgid "Layouts"
+msgstr "Layouts"
+
+#: ../panels/region/gnome-region-panel.ui.h:5
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:4
+msgid "Region and Language"
+msgstr "Region and Language"
+
+#: ../panels/region/gnome-region-panel.ui.h:6
+msgid ""
+"Replace the current keyboard layout settings with the\n"
+"default settings"
+msgstr ""
+"Replace the current keyboard layout settings with the\n"
+"default settings"
+
+#: ../panels/region/gnome-region-panel.ui.h:8
+msgid "Reset to De_faults"
+msgstr "Reset to De_faults"
+
+#: ../panels/region/gnome-region-panel.ui.h:9
+msgid "Select a display language"
+msgstr "Select a display language"
+
+#: ../panels/region/gnome-region-panel.ui.h:10
+msgid "Use default layout in new windows"
+msgstr "Use default layout in new windows"
+
+#: ../panels/region/gnome-region-panel.ui.h:11
+msgid "Use previous window's layout in new windows"
+msgstr "Use previous window's layout in new windows"
+
+#: ../panels/region/gnome-region-panel.ui.h:12
+msgid "Use same layout in all windows"
+msgstr "Use same layout in all windows"
+
+#: ../panels/region/gnome-region-panel.ui.h:13
+msgid "View and edit keyboard layout options"
+msgstr "View and edit keyboard layout options"
+
+#: ../panels/region/gnome-region-panel.ui.h:14
+msgid "_Options..."
+msgstr "_Options…"
+
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
+msgid "Choose a Layout"
+msgstr "Choose a Layout"
+
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
+msgid "Preview"
+msgstr "Preview"
+
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
+msgid "Select an input source to add"
+msgstr "Select an input source to add"
+
+#: ../panels/region/gnome-region-panel-options-dialog.ui.h:1
+msgid "Keyboard Layout Options"
+msgstr "Keyboard Layout Options"
+
+#: ../panels/region/gnome-region-panel-xkblt.c:220
+msgid "Layout"
+msgstr "Layout"
+
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:1
+msgid "Change your region and language settings"
+msgstr "Change your region and language settings"
+
+#. Translators: those are keywords for the region control-center panel
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:3
+msgid "Language;Layout;Keyboard;"
+msgstr "Language;Layout;Keyboard;"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
-msgid "Choose type of click _beforehand"
-msgstr "Choose type of click _beforehand"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgid "Choose type of click with mo_use gestures"
-msgstr "Choose type of click with mo_use gestures"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:6
-msgid "D_ouble click:"
-msgstr "D_ouble click:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
-msgid "D_rag click:"
-msgstr "D_rag click:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
 msgid "Disable _touchpad while typing"
 msgstr "Disable _touchpad while typing"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:3
 msgid "Double-Click Timeout"
 msgstr "Double-Click Timeout"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
 msgid "Drag and Drop"
 msgstr "Drag and Drop"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
-msgid "Dwell Click"
-msgstr "Dwell Click"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
 msgid "Enable _mouse clicks with touchpad"
 msgstr "Enable _mouse clicks with touchpad"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "Enable h_orizontal scrolling"
 msgstr "Enable h_orizontal scrolling"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
-#: ../panels/universal-access/uap.ui.h:40
+#. high sensitivity
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
 msgid "High"
 msgstr "High"
 
 #. large threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Large"
 msgstr "Large"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Locate Pointer"
 msgstr "Locate Pointer"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
-#: ../panels/universal-access/uap.ui.h:54
+#. low sensitivity
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Low"
 msgstr "Low"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:21
-msgid "Mouse Orientation"
-msgstr "Mouse Orientation"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:22
-msgid "Mouse Preferences"
-msgstr "Mouse Preferences"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:23
-msgid "Pointer Speed"
-msgstr "Pointer Speed"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:24
-msgid "Scrolling"
-msgstr "Scrolling"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:25
-msgid "Seco_ndary click:"
-msgstr "Seco_ndary click:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:26
-msgid "Sh_ow position of pointer when the Control key is pressed"
-msgstr "Sh_ow position of pointer when the Control key is pressed"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:28
-msgid "Show click type _window"
-msgstr "Show click type _window"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:29
-#: ../panels/universal-access/uap.ui.h:75
-msgid "Simulated Secondary Click"
-msgstr "Simulated Secondary Click"
-
-#. small threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
-#: ../panels/universal-access/uap.ui.h:78
-msgid "Small"
-msgstr "Small"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:32
-msgid "Thr_eshold:"
-msgstr "Thr_eshold:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:33
-msgid ""
-"To test your double-click settings, try to double-click on the light bulb."
-msgstr ""
-"To test your double-click settings, try to double-click on the light bulb."
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:34
-msgid "Touchpad"
-msgstr "Touchpad"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:35
-msgid "Two-_finger scrolling"
-msgstr "Two-_finger scrolling"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:36
-msgid "You can also use the Dwell Click panel applet to choose the click type."
-msgstr ""
-"You can also use the Dwell Click panel applet to choose the click type."
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:39
-msgid "_Disabled"
-msgstr "_Disabled"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:40
-msgid "_Edge scrolling"
-msgstr "_Edge scrolling"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:41
-msgid "_Initiate click when stopping pointer movement"
-msgstr "_Initiate click when stopping pointer movement"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:42
-msgid "_Left-handed"
-msgstr "_Left-handed"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:43
-#: ../panels/universal-access/uap.ui.h:98
-msgid "_Motion threshold:"
-msgstr "_Motion threshold:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:44
-msgid "_Right-handed"
-msgstr "_Right-handed"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:45
-msgid "_Sensitivity:"
-msgstr "_Sensitivity:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:46
-msgid "_Single click:"
-msgstr "_Single click:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:47
-msgid "_Timeout:"
-msgstr "_Timeout:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:48
-msgid "_Trigger secondary click by holding down the primary button"
-msgstr "_Trigger secondary click by holding down the primary button"
-
-#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Mouse"
 msgstr "Mouse"
 
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
+msgid "Mouse Orientation"
+msgstr "Mouse Orientation"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+msgid "Mouse Preferences"
+msgstr "Mouse Preferences"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:21
+msgid "Pointer Speed"
+msgstr "Pointer Speed"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:22
+msgid "Scrolling"
+msgstr "Scrolling"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:23
+msgid "Sh_ow position of pointer when the Control key is pressed"
+msgstr "Sh_ow position of pointer when the Control key is pressed"
+
+#. small threshold
+#: ../panels/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/universal-access/uap.ui.h:58
+msgid "Small"
+msgstr "Small"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:29
+msgid "Thr_eshold:"
+msgstr "Thr_eshold:"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:30
+msgid "To test your settings, try to double-click on the face."
+msgstr "To test your settings, try to double-click on the face."
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:31
+msgid "Touchpad"
+msgstr "Touchpad"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:32
+msgid "Two-_finger scrolling"
+msgstr "Two-_finger scrolling"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:33
+msgid "_Acceleration:"
+msgstr "_Acceleration:"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:34
+msgid "_Disabled"
+msgstr "_Disabled"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:35
+msgid "_Edge scrolling"
+msgstr "_Edge scrolling"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:36
+msgid "_Left-handed"
+msgstr "_Left-handed"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:37
+msgid "_Right-handed"
+msgstr "_Right-handed"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:38
+msgid "_Sensitivity:"
+msgstr "_Sensitivity:"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:39
+msgid "_Timeout:"
+msgstr "_Timeout:"
+
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
+msgid "Mouse and Touchpad"
+msgstr "Mouse and Touchpad"
+
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:2
-msgid "Set your mouse preferences"
-msgstr "Set your mouse preferences"
+msgid "Set your mouse and touchpad preferences"
+msgstr "Set your mouse and touchpad preferences"
 
-#: ../panels/network/gnome-network-properties.c:700
-#: ../panels/network/gnome-network-properties.c:851
-msgid "New Location..."
-msgstr "New Location…"
+#. Translators: those are keywords for the mouse and touchpad control-center panel
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
+msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
+msgstr "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 
-#: ../panels/network/gnome-network-properties.c:817
-msgid "Location already exists"
-msgstr "Location already exists"
+#: ../panels/network/cc-network-panel.c:969
+msgid "Network proxy"
+msgstr "Network proxy"
 
-#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
-msgid "Network Proxy"
-msgstr "Network Proxy"
+#: ../panels/network/cc-network-panel.c:978
+msgid "Set the system proxy settings"
+msgstr "Set the system proxy settings"
+
+#. TRANSLATORS: the user is running a NM that is too new and API compatible
+#: ../panels/network/cc-network-panel.c:1122
+msgid "The running NetworkManager version is not compatible (too new)."
+msgstr "The running NetworkManager version is not compatible (too new)."
+
+#. TRANSLATORS: the user is running a NM that is too old and API compatible
+#: ../panels/network/cc-network-panel.c:1128
+msgid "The running NetworkManager version is not compatible (too old)."
+msgstr "The running NetworkManager version is not compatible (too old)."
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
-msgid "Set your network proxy preferences"
-msgstr "Set your network proxy preferences"
+msgid "Network settings"
+msgstr "Network settings"
 
-#: ../panels/network/gnome-network-properties.ui.h:1
-msgid "<b>Di_rect internet connection</b>"
-msgstr "<b>Di_rect internet connection</b>"
+#. Translators: those are keywords for the network control-center panel
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:4
+msgid "Network;Wireless;IP;LAN;"
+msgstr "Network;Wireless;IP;LAN;"
 
-#: ../panels/network/gnome-network-properties.ui.h:2
-msgid "<b>_Automatic proxy configuration</b>"
-msgstr "<b>_Automatic proxy configuration</b>"
+#: ../panels/network/network.ui.h:1
+msgid "Airplane Mode"
+msgstr "Aeroplane Mode"
 
-#: ../panels/network/gnome-network-properties.ui.h:3
-msgid "<b>_Manual proxy configuration</b>"
-msgstr "<b>_Manual proxy configuration</b>"
+#: ../panels/network/network.ui.h:2
+msgid "Configuration URL:"
+msgstr "Configuration URL:"
 
-#: ../panels/network/gnome-network-properties.ui.h:4
-msgid "<b>_Use authentication</b>"
-msgstr "<b>_Use authentication</b>"
+#: ../panels/network/network.ui.h:3
+msgid "DNS:"
+msgstr "DNS:"
 
-#: ../panels/network/gnome-network-properties.ui.h:5
-msgid "Autoconfiguration _URL:"
-msgstr "Autoconfiguration _URL:"
+#: ../panels/network/network.ui.h:4
+msgid "Default Route:"
+msgstr "Default Route:"
 
-#: ../panels/network/gnome-network-properties.ui.h:6
-msgid "C_reate"
-msgstr "C_reate"
+#: ../panels/network/network.ui.h:5
+msgid "FTP Proxy:"
+msgstr "FTP Proxy:"
 
-#: ../panels/network/gnome-network-properties.ui.h:7
-msgid "Create New Location"
-msgstr "Create New Location"
+#: ../panels/network/network.ui.h:6
+msgid "Gateway:"
+msgstr "Gateway:"
 
-#: ../panels/network/gnome-network-properties.ui.h:8
-msgid "HTTP Proxy Details"
-msgstr "HTTP Proxy Details"
+#: ../panels/network/network.ui.h:7
+msgid "Group Name:"
+msgstr "Group Name:"
 
-#: ../panels/network/gnome-network-properties.ui.h:9
-msgid "H_TTP proxy:"
-msgstr "H_TTP proxy:"
+#: ../panels/network/network.ui.h:8
+msgid "Group Password:"
+msgstr "Group Password:"
 
-#: ../panels/network/gnome-network-properties.ui.h:10
-msgid "Ignore Host List"
-msgstr "Ignore Host List"
+#: ../panels/network/network.ui.h:9
+msgid "HTTP Proxy:"
+msgstr "HTTP Proxy:"
 
-#: ../panels/network/gnome-network-properties.ui.h:11
-msgid "Ignored Hosts"
-msgstr "Ignored Hosts"
+#: ../panels/network/network.ui.h:10
+msgid "Hardware Address:"
+msgstr "Hardware Address:"
 
-#: ../panels/network/gnome-network-properties.ui.h:12
-msgid "Location:"
-msgstr "Location:"
+#: ../panels/network/network.ui.h:11
+msgid "IMEI:"
+msgstr "IMEI:"
 
-#: ../panels/network/gnome-network-properties.ui.h:13
-msgid "Network Proxy Preferences"
-msgstr "Network Proxy Preferences"
+#: ../panels/network/network.ui.h:12
+msgid "IP Address:"
+msgstr "IP Address:"
 
-#: ../panels/network/gnome-network-properties.ui.h:14
-msgid "Port:"
-msgstr "Port:"
+#: ../panels/network/network.ui.h:13
+msgid "IPv4 Address:"
+msgstr "IPv4 Address:"
 
-#: ../panels/network/gnome-network-properties.ui.h:15
-msgid "Proxy Configuration"
-msgstr "Proxy Configuration"
+#: ../panels/network/network.ui.h:14
+msgid "IPv6 Address:"
+msgstr "IPv6 Address:"
 
-#: ../panels/network/gnome-network-properties.ui.h:16
-msgid "S_ocks host:"
-msgstr "S_ocks host:"
+#: ../panels/network/network.ui.h:15
+msgid "Method:"
+msgstr "Method:"
 
-#: ../panels/network/gnome-network-properties.ui.h:17
-msgid "The location already exists."
-msgstr "The location already exists."
+#: ../panels/network/network.ui.h:16
+msgid "Network Name:"
+msgstr "Network Name:"
 
-#: ../panels/network/gnome-network-properties.ui.h:18
-msgid "U_sername:"
-msgstr "U_sername:"
+#: ../panels/network/network.ui.h:17
+msgid "Provider:"
+msgstr "Provider:"
 
-#: ../panels/network/gnome-network-properties.ui.h:19
-msgid "_Delete Location"
-msgstr "_Delete Location"
+#: ../panels/network/network.ui.h:18
+msgid "Secure HTTP Proxy:"
+msgstr "Secure HTTP Proxy:"
 
-#: ../panels/network/gnome-network-properties.ui.h:20
-msgid "_Details"
-msgstr "_Details"
+#: ../panels/network/network.ui.h:19
+msgid "Security:"
+msgstr "Security:"
 
-#: ../panels/network/gnome-network-properties.ui.h:21
-msgid "_FTP proxy:"
-msgstr "_FTP proxy:"
+#: ../panels/network/network.ui.h:20
+msgid "Socks Host:"
+msgstr "Socks Host:"
 
-#: ../panels/network/gnome-network-properties.ui.h:22
-msgid "_Location name:"
-msgstr "_Location name:"
+#: ../panels/network/network.ui.h:21
+msgid "Speed:"
+msgstr "Speed:"
 
-#: ../panels/network/gnome-network-properties.ui.h:23
-msgid "_Password:"
-msgstr "_Password:"
+#: ../panels/network/network.ui.h:22
+msgid "Subnet Mask:"
+msgstr "Subnet Mask:"
 
-#: ../panels/network/gnome-network-properties.ui.h:24
-msgid "_Secure HTTP proxy:"
-msgstr "_Secure HTTP proxy:"
+#: ../panels/network/network.ui.h:24
+msgid "Username:"
+msgstr "Username:"
 
-#: ../panels/network/gnome-network-properties.ui.h:25
-msgid "_Use the same proxy for all protocols"
-msgstr "_Use the same proxy for all protocols"
+#: ../panels/network/network.ui.h:25
+msgctxt "proxy method"
+msgid "Automatic"
+msgstr "Automatic"
 
-#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:1
-msgid "Universal Access"
-msgstr "Universal Access"
+#: ../panels/network/network.ui.h:26
+msgctxt "proxy method"
+msgid "Manual"
+msgstr "Manual"
 
+#: ../panels/network/network.ui.h:27
+msgctxt "proxy method"
+msgid "None"
+msgstr "None"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:76
+msgid "Wired"
+msgstr "Wired"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:80
+msgid "Wireless"
+msgstr "Wireless"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:87
+msgid "Mobile broadband"
+msgstr "Mobile broadband"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:92
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:96
+msgid "Mesh"
+msgstr "Mesh"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:155
+msgid "Ad-hoc"
+msgstr "Ad-hoc"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:159
+msgid "Infrastructure"
+msgstr "Infrastructure"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:177
+msgid "Status unknown"
+msgstr "Status unknown"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:181
+msgid "Unmanaged"
+msgstr "Unmanaged"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:185
+msgid "Unavailable"
+msgstr "Unavailable"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:189
+msgid "Disconnected"
+msgstr "Disconnected"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:193
+msgid "Preparing connection"
+msgstr "Preparing connection"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:197
+msgid "Configuring connection"
+msgstr "Configuring connection"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:201
+msgid "Authenticating"
+msgstr "Authenticating"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:205
+msgid "Getting network address"
+msgstr "Getting network address"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:209
+msgid "Checking network address"
+msgstr "Checking network address"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:213
+msgid "Connected"
+msgstr "Connected"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:217
+msgid "Disconnecting"
+msgstr "Disconnecting"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:221
+msgid "Failed to connect"
+msgstr "Failed to connect"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:225
+msgid "Status unknown (missing)"
+msgstr "Status unknown (missing)"
+
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:1
+msgid "Power"
+msgstr "Power"
+
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:2
+msgid "Power management settings"
+msgstr "Power management settings"
+
+#. Translators: those are keywords for the power control-center panel
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:4
+msgid "Power;Sleep;Suspend;Hibernate;Battery;"
+msgstr "Power;Sleep;Suspend;Hibernate;Battery;"
+
+#: ../panels/power/cc-power-panel.c:153
+msgid "Unknown time"
+msgstr "Unknown time"
+
+#: ../panels/power/cc-power-panel.c:159
+#, c-format
+msgid "%i minute"
+msgid_plural "%i minutes"
+msgstr[0] "%i minute"
+msgstr[1] "%i minutes"
+
+#: ../panels/power/cc-power-panel.c:171
+#, c-format
+msgid "%i hour"
+msgid_plural "%i hours"
+msgstr[0] "%i hour"
+msgstr[1] "%i hours"
+
+#. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
+#. * Swap order with "%2$s %2$i %1$s %1$i if needed
+#: ../panels/power/cc-power-panel.c:179
+#, c-format
+msgid "%i %s %i %s"
+msgstr "%i %s %i %s"
+
+#: ../panels/power/cc-power-panel.c:180
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "hour"
+msgstr[1] "hours"
+
+#: ../panels/power/cc-power-panel.c:181
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "minute"
+msgstr[1] "minutes"
+
+#: ../panels/power/cc-power-panel.c:253
+msgid "Battery charging"
+msgstr "Battery charging"
+
+#: ../panels/power/cc-power-panel.c:256
+msgid "Battery discharging"
+msgstr "Battery discharging"
+
+#: ../panels/power/cc-power-panel.c:267
+msgid "UPS charging"
+msgstr "UPS charging"
+
+#: ../panels/power/cc-power-panel.c:270
+msgid "UPS discharging"
+msgstr "UPS discharging"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#: ../panels/power/cc-power-panel.c:288
+#, c-format
+msgid "%s until charged (%.0lf%%)"
+msgstr "%s until charged (%.0lf%%)"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#: ../panels/power/cc-power-panel.c:294
+#, c-format
+msgid "%s until empty (%.0lf%%)"
+msgstr "%s until empty (%.0lf%%)"
+
+#. TRANSLATORS: %1 is a percentage value. Note: this string is only
+#. * used when we don't have a time value
+#: ../panels/power/cc-power-panel.c:302
+#, c-format
+msgid "%.0lf%% charged"
+msgstr "%.0lf%% charged"
+
+#: ../panels/power/power.ui.h:1 ../panels/screen/screen.ui.h:1
+msgid "1 hour"
+msgstr "1 hour"
+
+#: ../panels/power/power.ui.h:2 ../panels/screen/screen.ui.h:3
+msgid "10 minutes"
+msgstr "10 minutes"
+
+#: ../panels/power/power.ui.h:3 ../panels/screen/screen.ui.h:6
+msgid "30 minutes"
+msgstr "30 minutes"
+
+#: ../panels/power/power.ui.h:4 ../panels/screen/screen.ui.h:7
+msgid "5 minutes"
+msgstr "5 minutes"
+
+#: ../panels/power/power.ui.h:5
+msgid "Ask me"
+msgstr "Ask me"
+
+#: ../panels/power/power.ui.h:7
+msgid "Hibernate"
+msgstr "Hibernate"
+
+#: ../panels/power/power.ui.h:8
+msgid "On AC power:"
+msgstr "On AC power:"
+
+#: ../panels/power/power.ui.h:9
+msgid "On battery power:"
+msgstr "On battery power:"
+
+#: ../panels/power/power.ui.h:10
+msgid "Put the computer to sleep when inactive:"
+msgstr "Put the computer to sleep when inactive:"
+
+#: ../panels/power/power.ui.h:11
+msgid "Shutdown"
+msgstr "Shutdown"
+
+#: ../panels/power/power.ui.h:12
+msgid "Suspend"
+msgstr "Suspend"
+
+#: ../panels/power/power.ui.h:13
+msgid "When power is critically low:"
+msgstr "When power is critically low:"
+
+#: ../panels/power/power.ui.h:14
+msgid "When the power button is pressed:"
+msgstr "When the power button is pressed:"
+
+#: ../panels/power/power.ui.h:15
+msgid "When the sleep button is pressed:"
+msgstr "When the sleep button is pressed:"
+
+#. Translators: those are keywords for the brightness and lock control-center panel
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
+msgid "Brightness;Lock;Dim;Blank;Monitor;"
+msgstr "Brightness;Lock;Dim;Blank;Monitor;"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
+msgid "Screen"
+msgstr "Screen"
+
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
+msgid "Screen brightness and lock settings"
+msgstr "Screen brightness and lock settings"
+
+#: ../panels/screen/screen.ui.h:2
+msgid "1 minute"
+msgstr "1 minute"
+
+#: ../panels/screen/screen.ui.h:4
+msgid "2 minutes"
+msgstr "2 minutes"
+
+#: ../panels/screen/screen.ui.h:5
+msgid "3 minutes"
+msgstr "3 minutes"
+
+#: ../panels/screen/screen.ui.h:8
+msgid "Brightness"
+msgstr "Brightness"
+
+#: ../panels/screen/screen.ui.h:9
+msgid "Dim screen to save power"
+msgstr "Dim screen to save power"
+
+#. To translators: This asks whether you want to lock the screen (through the screensaver) when you're detected to be physically in your home (your house, etc.)
+#: ../panels/screen/screen.ui.h:11
+msgid "Don't lock when at home"
+msgstr "Don't lock when at home"
+
+#: ../panels/screen/screen.ui.h:12
+msgid "Locations..."
+msgstr "Locations…"
+
+#: ../panels/screen/screen.ui.h:14
+msgid "Lock screen after:"
+msgstr "Lock screen after:"
+
+#: ../panels/screen/screen.ui.h:15
+msgid "Screen turns off"
+msgstr "Screen turns off"
+
+#: ../panels/screen/screen.ui.h:16
+msgid "Turn off after:"
+msgstr "Turn off after:"
+
+#: ../panels/sound/applet-main.c:49
+msgid "Enable debugging code"
+msgstr "Enable debugging code"
+
+#: ../panels/sound/applet-main.c:50
+msgid "Version of this application"
+msgstr "Version of this application"
+
+#: ../panels/sound/applet-main.c:62
+msgid " — GNOME Volume Control Applet"
+msgstr " — GNOME Volume Control Applet"
+
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1923
+msgid "Output"
+msgstr "Output"
+
+#: ../panels/sound/gvc-applet.c:278
+msgid "Sound Output Volume"
+msgstr "Sound Output Volume"
+
+#: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1840
+msgid "Input"
+msgstr "Input"
+
+#: ../panels/sound/gvc-applet.c:284
+msgid "Microphone Volume"
+msgstr "Microphone Volume"
+
+#: ../panels/sound/gvc-balance-bar.c:111
+msgctxt "balance"
+msgid "Left"
+msgstr "Left"
+
+#: ../panels/sound/gvc-balance-bar.c:112
+msgctxt "balance"
+msgid "Right"
+msgstr "Right"
+
+#: ../panels/sound/gvc-balance-bar.c:115
+msgctxt "balance"
+msgid "Rear"
+msgstr "Rear"
+
+#: ../panels/sound/gvc-balance-bar.c:116
+msgctxt "balance"
+msgid "Front"
+msgstr "Front"
+
+#: ../panels/sound/gvc-balance-bar.c:119
+msgctxt "balance"
+msgid "Minimum"
+msgstr "Minimum"
+
+#: ../panels/sound/gvc-balance-bar.c:120
+msgctxt "balance"
+msgid "Maximum"
+msgstr "Maximum"
+
+#: ../panels/sound/gvc-balance-bar.c:295
+msgid "_Balance:"
+msgstr "_Balance:"
+
+#: ../panels/sound/gvc-balance-bar.c:298
+msgid "_Fade:"
+msgstr "_Fade:"
+
+#: ../panels/sound/gvc-balance-bar.c:301
+msgid "_Subwoofer:"
+msgstr "_Subwoofer:"
+
+#: ../panels/sound/gvc-channel-bar.c:602 ../panels/sound/gvc-channel-bar.c:611
+msgctxt "volume"
+msgid "100%"
+msgstr "100%"
+
+#: ../panels/sound/gvc-channel-bar.c:606
+msgctxt "volume"
+msgid "Unamplified"
+msgstr "Unamplified"
+
+#: ../panels/sound/gvc-channel-bar.c:900
+msgid "Mute"
+msgstr "Mute"
+
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1631
+msgid "_Profile:"
+msgstr "_Profile:"
+
+#. translators:
+#. * The number of sound outputs on a particular device
+#: ../panels/sound/gvc-mixer-control.c:1098
+#, c-format
+msgid "%u Output"
+msgid_plural "%u Outputs"
+msgstr[0] "%u Output"
+msgstr[1] "%u Outputs"
+
+#. translators:
+#. * The number of sound inputs on a particular device
+#: ../panels/sound/gvc-mixer-control.c:1108
+#, c-format
+msgid "%u Input"
+msgid_plural "%u Inputs"
+msgstr[0] "%u Input"
+msgstr[1] "%u Inputs"
+
+#: ../panels/sound/gvc-mixer-control.c:1406
+msgid "System Sounds"
+msgstr "System Sounds"
+
+#: ../panels/sound/gvc-mixer-dialog.c:317
+#: ../panels/sound/gvc-mixer-dialog.c:618
+msgid "Co_nnector:"
+msgstr "Co_nnector:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:531
+msgid "Peak detect"
+msgstr "Peak detect"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1507
+#: ../panels/sound/gvc-mixer-dialog.c:1719
+#: ../panels/sound/gvc-sound-theme-chooser.c:591
+msgid "Name"
+msgstr "Name"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1525
+msgid "Device"
+msgstr "Device"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1573
+#, c-format
+msgid "Speaker Testing for %s"
+msgstr "Speaker Testing for %s"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1632
+msgid "Test Speakers"
+msgstr "Test Speakers"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1763
+msgid "_Output volume: "
+msgstr "_Output volume: "
+
+#: ../panels/sound/gvc-mixer-dialog.c:1777
+msgid "Sound Effects"
+msgstr "Sound Effects"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1784
+msgid "_Alert volume: "
+msgstr "_Alert volume: "
+
+#: ../panels/sound/gvc-mixer-dialog.c:1797
+msgid "Hardware"
+msgstr "Hardware"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1802
+msgid "C_hoose a device to configure:"
+msgstr "C_hoose a device to configure:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1829
+#: ../panels/sound/gvc-mixer-dialog.c:1952
+msgid "Settings for the selected device:"
+msgstr "Settings for the selected device:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1847
+msgid "_Input volume: "
+msgstr "_Input volume: "
+
+#: ../panels/sound/gvc-mixer-dialog.c:1870
+msgid "Input level:"
+msgstr "Input level:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1896
+msgid "C_hoose a device for sound input:"
+msgstr "C_hoose a device for sound input:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1928
+msgid "C_hoose a device for sound output:"
+msgstr "C_hoose a device for sound output:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1963
+msgid "Applications"
+msgstr "Applications"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1967
+msgid "No application is currently playing or recording audio."
+msgstr "No application is currently playing or recording audio."
+
+#: ../panels/sound/gvc-speaker-test.c:221
+msgid "Stop"
+msgstr "Stop"
+
+#: ../panels/sound/gvc-speaker-test.c:221
+#: ../panels/sound/gvc-speaker-test.c:333
+msgid "Test"
+msgstr "Test"
+
+#: ../panels/sound/gvc-speaker-test.c:229
+msgid "Subwoofer"
+msgstr "Subwoofer"
+
+#: ../panels/sound/gvc-stream-status-icon.c:236
+#, c-format
+msgid "Failed to start Sound Preferences: %s"
+msgstr "Failed to start Sound Preferences: %s"
+
+#: ../panels/sound/gvc-stream-status-icon.c:262
+msgid "_Mute"
+msgstr "_Mute"
+
+#: ../panels/sound/gvc-stream-status-icon.c:271
+msgid "_Sound Preferences"
+msgstr "_Sound Preferences"
+
+#: ../panels/sound/gvc-stream-status-icon.c:455
+msgid "Muted"
+msgstr "Muted"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:188
+msgid "Built-in"
+msgstr "Built-in"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:451
+#: ../panels/sound/gvc-sound-theme-chooser.c:463
+#: ../panels/sound/gvc-sound-theme-chooser.c:475
+msgid "Sound Preferences"
+msgstr "Sound Preferences"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:454
+#: ../panels/sound/gvc-sound-theme-chooser.c:465
+#: ../panels/sound/gvc-sound-theme-chooser.c:477
+msgid "Testing event sound"
+msgstr "Testing event sound"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:582
+msgid "From theme"
+msgstr "From theme"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:764
+msgid "C_hoose an alert sound:"
+msgstr "C_hoose an alert sound:"
+
+#: ../panels/sound/sound-theme-file-utils.c:292
+msgid "Custom"
+msgstr "Custom"
+
+#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:1
+msgid "Show desktop volume control"
+msgstr "Show desktop volume control"
+
+#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:2
+msgid "Volume Control"
+msgstr "Volume Control"
+
+#. Translators: those are keywords for the sound control-center panel
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
+msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;"
+msgstr "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;"
+
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:3
+msgid "Change sound volume and sound events"
+msgstr "Change sound volume and sound events"
+
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
+msgid "Sound"
+msgstr "Sound"
+
+#. Translators: This is the name of an audio file that sounds like the bark of a dog.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:3
+msgid "Bark"
+msgstr "Bark"
+
+#. Translators: This is the name of an audio file that sounds like a water drip.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:6
+msgid "Drip"
+msgstr "Drip"
+
+#. Translators: This is the name of an audio file that sounds like tapping glass.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:9
+msgid "Glass"
+msgstr "Glass"
+
+#. Translators: This is the name of an audio file that sounds sort of like a submarine sonar ping.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:12
+msgid "Sonar"
+msgstr "Sonar"
+
+#: ../panels/universal-access/cc-ua-panel.c:470
+#: ../panels/universal-access/cc-ua-panel.c:475
+msgid "No shortcut set"
+msgstr "No shortcut set"
+
+#. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
+msgid "Keyboard;Mouse;a11y;Accessibility;"
+msgstr "Keyboard;Mouse;a11y;Accessibility;"
+
+#: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
 msgstr "Universal Access Preferences"
 
@@ -1610,554 +2464,1807 @@ msgstr "125%"
 msgid "150%"
 msgstr "150%"
 
-#: ../panels/universal-access/uap.ui.h:7
-msgid "<span size=\"x-large\">High/Inverse</span>"
-msgstr "<span size=\"x-large\">High/Inverse</span>"
-
 #: ../panels/universal-access/uap.ui.h:8
-msgid "<span size=\"x-large\">High</span>"
-msgstr "<span size=\"x-large\">High</span>"
+#, no-c-format
+msgid "75%"
+msgstr "75%"
 
 #: ../panels/universal-access/uap.ui.h:9
-msgid "<span size=\"x-large\">Low</span>"
-msgstr "<span size=\"x-large\">Low</span>"
-
-#: ../panels/universal-access/uap.ui.h:10
-msgid "<span size=\"x-large\">Normal</span>"
-msgstr "<span size=\"x-large\">Normal</span>"
-
-#: ../panels/universal-access/uap.ui.h:11
 msgid "Acceptance delay:"
 msgstr "Acceptance delay:"
 
-#: ../panels/universal-access/uap.ui.h:12
-msgid "Accessibility features can be turned on or off with keyboard shortcuts"
-msgstr "Accessibility features can be turned on or off with keyboard shortcuts"
-
-#: ../panels/universal-access/uap.ui.h:13
+#: ../panels/universal-access/uap.ui.h:10
 msgid "Beep when Caps and Num Lock are used"
 msgstr "Beep when Caps and Num Lock are used"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:11
 msgid "Beep when a key is"
 msgstr "Beep when a key is"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:12
 msgid "Beep when a key is rejected"
 msgstr "Beep when a key is rejected"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:13
 msgid "Beep when a modifer key is pressed"
 msgstr "Beep when a modifer key is pressed"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:14
+msgid "Bounce Keys"
+msgstr "Bounce Keys"
+
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Caribou"
 msgstr "Caribou"
 
-#: ../panels/universal-access/uap.ui.h:19
-msgid "Change constrast:"
-msgstr "Change constrast:"
+#: ../panels/universal-access/uap.ui.h:16
+msgid "Change contrast:"
+msgstr "Change contrast:"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Closed Captioning"
 msgstr "Closed Captioning"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:18
 msgid "Contrast:"
 msgstr "Contrast:"
 
-#: ../panels/universal-access/uap.ui.h:22
-msgid "Control the pointer using the keypad."
-msgstr "Control the pointer using the keypad."
+#: ../panels/universal-access/uap.ui.h:19
+msgid "Control the pointer using the keypad"
+msgstr "Control the pointer using the keypad"
 
-#: ../panels/universal-access/uap.ui.h:23
+#: ../panels/universal-access/uap.ui.h:20
 msgid "Control the pointer using the video camera."
 msgstr "Control the pointer using the video camera."
 
+#: ../panels/universal-access/uap.ui.h:22
+msgid "D_elay:"
+msgstr "D_elay:"
+
+#: ../panels/universal-access/uap.ui.h:23
+msgid "Dasher"
+msgstr "Dasher"
+
 #: ../panels/universal-access/uap.ui.h:24
-msgid "Ctrl+Alt+-"
-msgstr "Ctrl+Alt+-"
-
-#: ../panels/universal-access/uap.ui.h:25
-msgid "Ctrl+Alt+0"
-msgstr "Ctrl+Alt+0"
-
-#: ../panels/universal-access/uap.ui.h:26
-msgid "Ctrl+Alt+4"
-msgstr "Ctrl+Alt+4"
-
-#: ../panels/universal-access/uap.ui.h:27
-msgid "Ctrl+Alt+8"
-msgstr "Ctrl+Alt+8"
-
-#: ../panels/universal-access/uap.ui.h:28
-msgid "Ctrl+Alt+="
-msgstr "Ctrl+Alt+="
-
-#: ../panels/universal-access/uap.ui.h:32
 msgid "Decrease size:"
 msgstr "Decrease size:"
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Disable if two keys are pressed together"
 msgstr "Disable if two keys are pressed together"
 
-#: ../panels/universal-access/uap.ui.h:34
-msgid "Display"
-msgstr "Display"
+#: ../panels/universal-access/uap.ui.h:26
+msgid "Display a textual description of speech and sounds"
+msgstr "Display a textual description of speech and sounds"
 
-#: ../panels/universal-access/uap.ui.h:35
-msgid "Display a textual description of speech and sounds."
-msgstr "Display a textual description of speech and sounds."
-
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Flash the entire screen"
 msgstr "Flash the entire screen"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Flash the window title"
 msgstr "Flash the window title"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:29
 msgid "GOK"
 msgstr "GOK"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Hearing"
 msgstr "Hearing"
 
-#: ../panels/universal-access/uap.ui.h:41
-msgid "High/Inverse"
-msgstr "High/Inverse"
-
-#: ../panels/universal-access/uap.ui.h:42
-msgid "HighContrast"
-msgstr "HighContrast"
-
-#: ../panels/universal-access/uap.ui.h:43
-msgid "HighContrastInverse"
-msgstr "HighContrastInverse"
-
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Hover Click"
 msgstr "Hover Click"
 
-#: ../panels/universal-access/uap.ui.h:45
-msgid "I need assistance with:"
-msgstr "I need assistance with:"
-
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Ignores fast duplicate keypresses"
 msgstr "Ignores fast duplicate keypresses"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Increase size:"
 msgstr "Increase size:"
 
-#: ../panels/universal-access/uap.ui.h:48
-msgid "Keyboard Settings..."
-msgstr "Keyboard Settings…"
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Keyboard Settings"
+msgstr "Keyboard Settings"
 
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:37
 msgid "Larger"
 msgstr "Larger"
 
-#: ../panels/universal-access/uap.ui.h:55
-msgid "LowContrast"
-msgstr "LowContrast"
+#: ../panels/universal-access/uap.ui.h:40
+msgid "Mouse Keys"
+msgstr "Mouse Keys"
 
-#: ../panels/universal-access/uap.ui.h:57
-msgid "Mouse Settings..."
-msgstr "Mouse Settings…"
+#: ../panels/universal-access/uap.ui.h:41
+msgid "Mouse Settings"
+msgstr "Mouse Settings"
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Nomon"
 msgstr "Nomon"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "None"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:45
 msgid "On screen keyboard"
 msgstr "On-screen keyboard"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:46
 msgid "OnBoard"
 msgstr "OnBoard"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Options..."
 msgstr "Options…"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Pointing and Clicking"
 msgstr "Pointing and Clicking"
 
-#: ../panels/universal-access/uap.ui.h:67
-msgid "Puts a delay between when a key is pressed and when it is accepted."
-msgstr "Puts a delay between when a key is pressed and when it is accepted."
+#: ../panels/universal-access/uap.ui.h:49
+msgid "Puts a delay between when a key is pressed and when it is accepted"
+msgstr "Puts a delay between when a key is pressed and when it is accepted"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Screen Reader"
 msgstr "Screen Reader"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:51
+msgid "Screen keyboard"
+msgstr "Screen keyboard"
+
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Seeing"
 msgstr "Seeing"
 
-#: ../panels/universal-access/uap.ui.h:70
-msgid "Shift+Ctrl+Alt+-"
-msgstr "Shift+Ctrl+Alt+-"
+#: ../panels/universal-access/uap.ui.h:55
+msgid "Simulated Secondary Click"
+msgstr "Simulated Secondary Click"
 
-#: ../panels/universal-access/uap.ui.h:71
-msgid "Shift+Ctrl+Alt+="
-msgstr "Shift+Ctrl+Alt+="
+#: ../panels/universal-access/uap.ui.h:56
+msgid "Slow Keys"
+msgstr "Slow Keys"
 
-#: ../panels/universal-access/uap.ui.h:74
-msgid "Show Universal Access status"
-msgstr "Show Universal Access status"
+#: ../panels/universal-access/uap.ui.h:59
+msgid "Sound Settings"
+msgstr "Sound Settings"
 
-#: ../panels/universal-access/uap.ui.h:79
-msgid "Sound Settings..."
-msgstr "Sound Settings…"
+#: ../panels/universal-access/uap.ui.h:60
+msgid "Sticky Keys"
+msgstr "Sticky Keys"
 
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Test flash"
 msgstr "Test flash"
 
-#: ../panels/universal-access/uap.ui.h:82
-msgid "Test:"
-msgstr "Test:"
-
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Text size:"
 msgstr "Text size:"
 
-#: ../panels/universal-access/uap.ui.h:84
-msgid "Treats a sequence of modifier keys as a key combination."
-msgstr "Treats a sequence of modifier keys as a key combination."
+#: ../panels/universal-access/uap.ui.h:63
+msgid "Treats a sequence of modifier keys as a key combination"
+msgstr "Treats a sequence of modifier keys as a key combination"
 
-#: ../panels/universal-access/uap.ui.h:85
-msgid "Trigger a click when the pointer hovers."
-msgstr "Trigger a click when the pointer hovers."
+#: ../panels/universal-access/uap.ui.h:64
+msgid "Trigger a click when the pointer hovers"
+msgstr "Trigger a click when the pointer hovers"
 
-#: ../panels/universal-access/uap.ui.h:86
-msgid "Trigger a secondary click by holding down the primary button."
-msgstr "Trigger a secondary click by holding down the primary button."
+#: ../panels/universal-access/uap.ui.h:65
+msgid "Trigger a secondary click by holding down the primary button"
+msgstr "Trigger a secondary click by holding down the primary button"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:66
+msgid "Turn on accessibility features from the keyboard"
+msgstr "Turn on accessibility features from the keyboard"
+
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Turn on or off:"
 msgstr "Turn on or off:"
 
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Type here to test settings"
 msgstr "Type here to test settings"
 
-#: ../panels/universal-access/uap.ui.h:89
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Typing"
 msgstr "Typing"
 
-#: ../panels/universal-access/uap.ui.h:90
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Typing Assistant"
 msgstr "Typing Assistant"
 
-#: ../panels/universal-access/uap.ui.h:91
-msgid "Use a visual indication when an alert sound occurs."
-msgstr "Use a visual indication when an alert sound occurs."
+#: ../panels/universal-access/uap.ui.h:71
+msgid "Use a visual indication when an alert sound occurs"
+msgstr "Use a visual indication when an alert sound occurs"
 
-#: ../panels/universal-access/uap.ui.h:92
-msgid "Use an alternative form of text input"
-msgstr "Use an alternative form of text input"
-
-#: ../panels/universal-access/uap.ui.h:93
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Video Mouse"
 msgstr "Video Mouse"
 
-#: ../panels/universal-access/uap.ui.h:94
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Visual Alerts"
 msgstr "Visual Alerts"
 
-#: ../panels/universal-access/uap.ui.h:95
-msgid "Zoom"
-msgstr "Zoom"
-
-#: ../panels/universal-access/uap.ui.h:96
+#: ../panels/universal-access/uap.ui.h:74
 msgid "Zoom in:"
 msgstr "Zoom in:"
 
-#: ../panels/universal-access/uap.ui.h:97
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Zoom out:"
 msgstr "Zoom out:"
 
-#: ../panels/universal-access/uap.ui.h:99
+#: ../panels/universal-access/uap.ui.h:76
+msgid "_Motion threshold:"
+msgstr "_Motion threshold:"
+
+#: ../panels/universal-access/uap.ui.h:77
 msgid "accepted"
 msgstr "accepted"
 
-#: ../panels/universal-access/uap.ui.h:100
+#: ../panels/universal-access/uap.ui.h:78
 msgid "pressed"
 msgstr "pressed"
 
-#: ../panels/universal-access/uap.ui.h:101
+#: ../panels/universal-access/uap.ui.h:79
 msgid "rejected"
 msgstr "rejected"
 
-#: ../shell/gnome-control-center.desktop.in.in.h:1
+#: ../panels/universal-access/uap.ui.h:80
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">High/Inverse</span>"
+msgstr "<span size=\"x-large\">High/Inverse</span>"
+
+#: ../panels/universal-access/uap.ui.h:81
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">High</span>"
+msgstr "<span size=\"x-large\">High</span>"
+
+#: ../panels/universal-access/uap.ui.h:82
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">Low</span>"
+msgstr "<span size=\"x-large\">Low</span>"
+
+#: ../panels/universal-access/uap.ui.h:83
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">Normal</span>"
+msgstr "<span size=\"x-large\">Normal</span>"
+
+#: ../panels/universal-access/uap.ui.h:84
+msgctxt "universal access, contrast"
+msgid "High"
+msgstr "High"
+
+#: ../panels/universal-access/uap.ui.h:85
+msgctxt "universal access, contrast"
+msgid "High/Inverse"
+msgstr "High/Inverse"
+
+#: ../panels/universal-access/uap.ui.h:86
+msgctxt "universal access, contrast"
+msgid "Low"
+msgstr "Low"
+
+#: ../panels/universal-access/uap.ui.h:87
+msgctxt "universal access, contrast"
+msgid "Normal"
+msgstr "Normal"
+
+#. Translators: this refers to theme contrast and font size
+#: ../panels/universal-access/uap.ui.h:89
+msgctxt "universal access, seeing"
+msgid "Display"
+msgstr "Display"
+
+#. Translators: this refers to screen magnifier
+#: ../panels/universal-access/uap.ui.h:91
+msgctxt "universal access, seeing"
+msgid "Zoom"
+msgstr "Zoom"
+
+#: ../panels/user-accounts/run-passwd.c:426
+msgid "Authentication failed"
+msgstr "Authentication failed"
+
+#: ../panels/user-accounts/run-passwd.c:506
+#: ../panels/user-accounts/um-password-dialog.c:375
+#, c-format
+msgid "The new password is too short"
+msgstr "The new password is too short"
+
+#: ../panels/user-accounts/run-passwd.c:512
+#, c-format
+msgid "The new password is too simple"
+msgstr "The new password is too simple"
+
+#: ../panels/user-accounts/run-passwd.c:518
+#, c-format
+msgid "The old and new passwords are too similar"
+msgstr "The old and new passwords are too similar"
+
+#: ../panels/user-accounts/run-passwd.c:521
+#, c-format
+msgid "The new password has already been used recently."
+msgstr "The new password has already been used recently."
+
+#: ../panels/user-accounts/run-passwd.c:524
+#, c-format
+msgid "The new password must contain numeric or special characters"
+msgstr "The new password must contain numeric or special characters"
+
+#: ../panels/user-accounts/run-passwd.c:528
+#, c-format
+msgid "The old and new passwords are the same"
+msgstr "The old and new passwords are the same"
+
+#: ../panels/user-accounts/run-passwd.c:532
+#, c-format
+msgid "Your password has been changed since you initially authenticated!"
+msgstr "Your password has been changed since you initially authenticated!"
+
+#: ../panels/user-accounts/run-passwd.c:536
+#, c-format
+msgid "The new password does not contain enough different characters"
+msgstr "The new password does not contain enough different characters"
+
+#: ../panels/user-accounts/run-passwd.c:540
+#, c-format
+msgid "Unknown error"
+msgstr "Unknown error"
+
+#: ../panels/user-accounts/um-account-dialog.c:78
+msgid "Failed to create user"
+msgstr "Failed to create user"
+
+#: ../panels/user-accounts/um-account-dialog.c:185
+#, c-format
+msgid "A user with the username '%s' already exists"
+msgstr "A user with the username '%s' already exists"
+
+#: ../panels/user-accounts/um-account-dialog.c:189
+#, c-format
+msgid "The username is too long"
+msgstr "The username is too long"
+
+#: ../panels/user-accounts/um-account-dialog.c:192
+msgid "The username cannot start with a '-'"
+msgstr "The username cannot start with a '-'"
+
+#: ../panels/user-accounts/um-account-dialog.c:195
+msgid ""
+"The username must consist of:\n"
+" ➣ letters from the English alphabet\n"
+" ➣ digits\n"
+" ➣ any of the characters '.', '-' and '_'"
+msgstr ""
+"The username must consist of:\n"
+" ➣ letters from the English alphabet\n"
+" ➣ digits\n"
+" ➣ any of the characters '.', '-' and '_'"
+
+#: ../panels/user-accounts/um-account-type.c:35
+#: ../panels/user-accounts/data/account-dialog.ui.h:2
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
+msgctxt "Account type"
+msgid "Standard"
+msgstr "Standard"
+
+#: ../panels/user-accounts/um-account-type.c:37
+#: ../panels/user-accounts/data/account-dialog.ui.h:1
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
+msgctxt "Account type"
+msgid "Administrator"
+msgstr "Administrator"
+
+#: ../panels/user-accounts/um-account-type.c:39
+#: ../panels/user-accounts/data/account-dialog.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
+msgctxt "Account type"
+msgid "Supervised"
+msgstr "Supervised"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:107
+msgid ""
+"You are not allowed to access the device. Contact your system administrator."
+msgstr ""
+"You are not allowed to access the device. Contact your system administrator."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:109
+msgid "The device is already in use."
+msgstr "The device is already in use."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:111
+msgid "An internal error occurred."
+msgstr "An internal error occurred."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:181
+#: ../panels/user-accounts/um-fingerprint-dialog.c:182
+msgid "Enabled"
+msgstr "Enabled"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:224
+msgid "Delete registered fingerprints?"
+msgstr "Delete registered fingerprints?"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:228
+msgid "_Delete Fingerprints"
+msgstr "_Delete Fingerprints"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:235
+msgid ""
+"Do you want to delete your registered fingerprints so fingerprint login is "
+"disabled?"
+msgstr ""
+"Do you want to delete your registered fingerprints so fingerprint login is "
+"disabled?"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:363
+msgid "Done!"
+msgstr "Done!"
+
+#. translators:
+#. * The variable is the name of the device, for example:
+#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
+#: ../panels/user-accounts/um-fingerprint-dialog.c:409
+#: ../panels/user-accounts/um-fingerprint-dialog.c:431
+#, c-format
+msgid "Could not access '%s' device"
+msgstr "Could not access '%s' device"
+
+#. translators:
+#. * The variable is the name of the device, for example:
+#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
+#: ../panels/user-accounts/um-fingerprint-dialog.c:480
+#, c-format
+msgid "Could not start finger capture on '%s' device"
+msgstr "Could not start finger capture on '%s' device"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:549
+msgid "Could not access any fingerprint readers"
+msgstr "Could not access any fingerprint readers"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:550
+msgid "Please contact your system administrator for help."
+msgstr "Please contact your system administrator for help."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:587
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:1
+msgid "Enable Fingerprint Login"
+msgstr "Enable Fingerprint Login"
+
+#. translators:
+#. * The variable is the name of the device, for example:
+#. * "To enable fingerprint login, you need to save one of your fingerprints, using the
+#. * 'Digital Persona U.are.U 4000/4000B' device."
+#.
+#: ../panels/user-accounts/um-fingerprint-dialog.c:621
+#, c-format
+msgid ""
+"To enable fingerprint login, you need to save one of your fingerprints, "
+"using the '%s' device."
+msgstr ""
+"To enable fingerprint login, you need to save one of your fingerprints, "
+"using the '%s' device."
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:629
+#, c-format
+msgid ""
+"Enrolling fingerprints for\n"
+"<b><big>%s</big></b>"
+msgstr ""
+"Enrolling fingerprints for\n"
+"<b><big>%s</big></b>"
+
+#: ../panels/user-accounts/um-language-dialog.c:180
+msgid "Other..."
+msgstr "Other…"
+
+#: ../panels/user-accounts/um-password-dialog.c:179
+msgid "More choices..."
+msgstr "More choices…"
+
+#: ../panels/user-accounts/um-password-dialog.c:285
+msgid "Please choose another password."
+msgstr "Please choose another password."
+
+#: ../panels/user-accounts/um-password-dialog.c:294
+msgid "Please type your current password again."
+msgstr "Please type your current password again."
+
+#: ../panels/user-accounts/um-password-dialog.c:300
+msgid "Password could not be changed"
+msgstr "Password could not be changed"
+
+#: ../panels/user-accounts/um-password-dialog.c:372
+msgid "You need to enter a new password"
+msgstr "You need to enter a new password"
+
+#: ../panels/user-accounts/um-password-dialog.c:381
+msgid "You need to confirm the password"
+msgstr "You need to confirm the password"
+
+#: ../panels/user-accounts/um-password-dialog.c:384
+msgid "The passwords do not match"
+msgstr "The passwords do not match"
+
+#: ../panels/user-accounts/um-password-dialog.c:390
+msgid "You need to enter your current password"
+msgstr "You need to enter your current password"
+
+#: ../panels/user-accounts/um-password-dialog.c:393
+msgid "The current password is not correct"
+msgstr "The current password is not correct"
+
+#: ../panels/user-accounts/um-password-dialog.c:466
+#: ../panels/user-accounts/um-password-dialog.c:683
+msgctxt "Password strength"
+msgid "Too short"
+msgstr "Too short"
+
+#: ../panels/user-accounts/um-password-dialog.c:469
+#: ../panels/user-accounts/um-password-dialog.c:684
+msgctxt "Password strength"
+msgid "Weak"
+msgstr "Weak"
+
+#: ../panels/user-accounts/um-password-dialog.c:471
+#: ../panels/user-accounts/um-password-dialog.c:685
+msgctxt "Password strength"
+msgid "Fair"
+msgstr "Fair"
+
+#: ../panels/user-accounts/um-password-dialog.c:473
+#: ../panels/user-accounts/um-password-dialog.c:686
+msgctxt "Password strength"
+msgid "Good"
+msgstr "Good"
+
+#: ../panels/user-accounts/um-password-dialog.c:475
+#: ../panels/user-accounts/um-password-dialog.c:687
+msgctxt "Password strength"
+msgid "Strong"
+msgstr "Strong"
+
+#: ../panels/user-accounts/um-password-dialog.c:514
+msgid "Passwords do not match"
+msgstr "Passwords do not match"
+
+#: ../panels/user-accounts/um-password-dialog.c:540
+msgid "Wrong password"
+msgstr "Wrong password"
+
+#: ../panels/user-accounts/um-photo-dialog.c:97
+#: ../panels/user-accounts/data/language-chooser.ui.h:2
+#: ../panels/user-accounts/data/photo-dialog.ui.h:8
+msgid "Select"
+msgstr "Select"
+
+#: ../panels/user-accounts/um-photo-dialog.c:429
+msgid "Disable image"
+msgstr "Disable image"
+
+#: ../panels/user-accounts/um-photo-dialog.c:447
+msgid "Take a photo..."
+msgstr "Take a photo…"
+
+#: ../panels/user-accounts/um-photo-dialog.c:465
+msgid "Browse for more pictures..."
+msgstr "Browse for more pictures…"
+
+#: ../panels/user-accounts/um-photo-dialog.c:690
+#, c-format
+msgid "Used by %s"
+msgstr "Used by %s"
+
+#: ../panels/user-accounts/um-user-manager.c:430
+#, c-format
+msgid "A user with name '%s' already exists."
+msgstr "A user with name '%s' already exists."
+
+#: ../panels/user-accounts/um-user-manager.c:525
+msgid "This user does not exist."
+msgstr "This user does not exist."
+
+#: ../panels/user-accounts/um-user-panel.c:357
+msgid "Failed to delete user"
+msgstr "Failed to delete user"
+
+#: ../panels/user-accounts/um-user-panel.c:417
+msgid "You cannot delete your own account."
+msgstr "You cannot delete your own account."
+
+#: ../panels/user-accounts/um-user-panel.c:426
+#, c-format
+msgid "%s is still logged in"
+msgstr "%s is still logged in"
+
+#: ../panels/user-accounts/um-user-panel.c:430
+msgid ""
+"Deleting a user while they are logged in can leave the system in an "
+"inconsistent state."
+msgstr ""
+"Deleting a user while they are logged in can leave the system in an "
+"inconsistent state."
+
+#: ../panels/user-accounts/um-user-panel.c:439
+#, c-format
+msgid "Do you want to keep %s's files?"
+msgstr "Do you want to keep %s's files?"
+
+#: ../panels/user-accounts/um-user-panel.c:443
+msgid ""
+"It is possible to keep the home directory, mail spool and temporary files "
+"around when deleting a user account."
+msgstr ""
+"It is possible to keep the home directory, mail spool and temporary files "
+"around when deleting a user account."
+
+#: ../panels/user-accounts/um-user-panel.c:446
+msgid "_Delete Files"
+msgstr "_Delete Files"
+
+#: ../panels/user-accounts/um-user-panel.c:447
+msgid "_Keep Files"
+msgstr "_Keep Files"
+
+#: ../panels/user-accounts/um-user-panel.c:448
+msgid "_Cancel"
+msgstr "_Cancel"
+
+#: ../panels/user-accounts/um-user-panel.c:498
+msgctxt "Password mode"
+msgid "Account disabled"
+msgstr "Account disabled"
+
+#: ../panels/user-accounts/um-user-panel.c:506
+msgctxt "Password mode"
+msgid "To be set at next login"
+msgstr "To be set at next login"
+
+#: ../panels/user-accounts/um-user-panel.c:509
+msgctxt "Password mode"
+msgid "None"
+msgstr "None"
+
+#: ../panels/user-accounts/um-user-panel.c:831
+msgid "Failed to contact the accounts service"
+msgstr "Failed to contact the accounts service"
+
+#: ../panels/user-accounts/um-user-panel.c:833
+msgid "Please make sure that the AccountService is installed and enabled."
+msgstr "Please make sure that the AccountService is installed and enabled."
+
+#: ../panels/user-accounts/um-user-panel.c:866
+msgid ""
+"To make changes,\n"
+"click the * icon first"
+msgstr ""
+"To make changes,\n"
+"click the * icon first"
+
+#: ../panels/user-accounts/um-user-panel.c:904
+msgid "Create a user"
+msgstr "Create a user"
+
+#: ../panels/user-accounts/um-user-panel.c:915
+#: ../panels/user-accounts/um-user-panel.c:1214
+msgid ""
+"To create a user,\n"
+"click the * icon first"
+msgstr ""
+"To create a user,\n"
+"click the * icon first"
+
+#: ../panels/user-accounts/um-user-panel.c:924
+msgid "Delete the selected user"
+msgstr "Delete the selected user"
+
+#: ../panels/user-accounts/um-user-panel.c:936
+#: ../panels/user-accounts/um-user-panel.c:1219
+msgid ""
+"To delete the selected user,\n"
+"click the * icon first"
+msgstr ""
+"To delete the selected user,\n"
+"click the * icon first"
+
+#: ../panels/user-accounts/um-user-panel.c:1114
+msgid "My Account"
+msgstr "My Account"
+
+#: ../panels/user-accounts/um-user-panel.c:1124
+msgid "Other Accounts"
+msgstr "Other Accounts"
+
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
+msgid "Add or remove users"
+msgstr "Add or remove users"
+
+#. Translators: those are keywords for the user accounts control-center panel
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:3
+msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
+msgstr "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
+
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
+msgid "User Accounts"
+msgstr "User Accounts"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:4
+msgid "Cr_eate"
+msgstr "Cr_eate"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:5
+msgid "Create new account"
+msgstr "Create new account"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
+msgid "_Account Type"
+msgstr "_Account Type"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:7
+msgid "_Full name"
+msgstr "_Full name"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:8
+msgid "_Username"
+msgstr "_Username"
+
+#: ../panels/user-accounts/data/language-chooser.ui.h:1
+#: ../panels/user-accounts/data/photo-dialog.ui.h:3
+msgid "Cancel"
+msgstr "Cancel"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:1
+msgid ""
+"<a href=\"http://wolfram.org/writing/howto/password.html\">How to choose a "
+"strong password</a>"
+msgstr ""
+"<a href=\"http://wolfram.org/writing/howto/password.html\">How to choose a "
+"strong password</a>"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:2
+msgid ""
+"<small>This hint may be displayed at the login screen.  It will be visible "
+"to all users of this system.  Do <b>not</b> include the password here.</"
+"small>"
+msgstr ""
+"<small>This hint may be displayed at the login screen.  It will be visible "
+"to all users of this system.  Do <b>not</b> include the password here.</"
+"small>"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:3
+msgid "C_onfirm password"
+msgstr "C_onfirm password"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:4
+msgid "Ch_ange"
+msgstr "Ch_ange"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:5
+msgid "Changing password for"
+msgstr "Changing password for"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:6
+msgid "Choose a generated password"
+msgstr "Choose a generated password"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:7
+msgid "Choose password at next login"
+msgstr "Choose password at next login"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:8
+msgid "Current _password"
+msgstr "Current _password"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:9
+msgid "Disable this account"
+msgstr "Disable this account"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:10
+msgid "Enable this account"
+msgstr "Enable this account"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:11
+msgid "Fair"
+msgstr "Fair"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:12
+msgid "Log in without a password"
+msgstr "Log in without a password"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:13
+msgid "Set a password now"
+msgstr "Set a password now"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:14
+msgid "_Action"
+msgstr "_Action"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:15
+msgid "_Hint"
+msgstr "_Hint"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:16
+msgid "_New password"
+msgstr "_New password"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:17
+msgid "_Show password"
+msgstr "_Show password"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:1
+msgid "Browse"
+msgstr "Browse"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:4
+msgid "Changing photo for:"
+msgstr "Changing photo for:"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:5
+msgid ""
+"Choose a picture that will be shown at the login screen for this account."
+msgstr ""
+"Choose a picture that will be shown at the login screen for this account."
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:6
+msgid "Gallery"
+msgstr "Gallery"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:7
+msgid "Photograph"
+msgstr "Photograph"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:9
+msgid "Take a photograph"
+msgstr "Take a photograph"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
+msgid "Account Information"
+msgstr "Account Information"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
+msgid "Account type"
+msgstr "Account type"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+msgid "Automatic Login"
+msgstr "Automatic Login"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+msgid "Fingerprint Login"
+msgstr "Fingerprint Login"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+msgid "Login Options"
+msgstr "Login Options"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
+msgid "Password"
+msgstr "Password"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:2
+msgid "Left index finger"
+msgstr "Left index finger"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:3
+msgid "Left little finger"
+msgstr "Left little finger"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:4
+msgid "Left middle finger"
+msgstr "Left middle finger"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:5
+msgid "Left ring finger"
+msgstr "Left ring finger"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:6
+msgid "Left thumb"
+msgstr "Left thumb"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:7
+msgid "Other finger: "
+msgstr "Other finger: "
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:8
+msgid "Right index finger"
+msgstr "Right index finger"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:9
+msgid "Right little finger"
+msgstr "Right little finger"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:10
+msgid "Right middle finger"
+msgstr "Right middle finger"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:11
+msgid "Right ring finger"
+msgstr "Right ring finger"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:12
+msgid "Right thumb"
+msgstr "Right thumb"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:13
+msgid ""
+"Your fingerprint was successfully saved. You should now be able to log in "
+"using your fingerprint reader."
+msgstr ""
+"Your fingerprint was successfully saved. You should now be able to log in "
+"using your fingerprint reader."
+
+#: ../shell/control-center.c:47
+msgid "Show the overview"
+msgstr "Show the overview"
+
+#: ../shell/control-center.c:48
+msgid "Panel to display"
+msgstr "Panel to display"
+
+#: ../shell/control-center.c:65
+msgid "- System Settings"
+msgstr "- System Settings"
+
+#: ../shell/control-center.c:72
+#, c-format
+msgid ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+msgstr ""
+"%s\n"
+"Run '%s --help' to see a full list of available command line options.\n"
+
+#: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:1
+msgid "System Settings"
+msgstr "System Settings"
+
 #: ../shell/gnomecc.directory.in.h:1
 msgid "Control Center"
 msgstr "Control Centre"
 
-#: ../shell/gnome-control-center.desktop.in.in.h:2
-msgid "The GNOME configuration tool"
-msgstr "The GNOME configuration tool"
-
-#: ../typing-break/drw-break-window.c:194
-msgid "_Postpone Break"
-msgstr "_Postpone Break"
-
-#: ../typing-break/drw-break-window.c:250
-msgid "Take a break!"
-msgstr "Take a break!"
-
-#: ../typing-break/drwright.c:136
-msgid "_Take a Break"
-msgstr "_Take a Break"
-
-#: ../typing-break/drwright.c:507
-#, c-format
-msgid "Take a break now (next in %dm)"
-msgstr "Take a break now (next in %dm)"
-
-#: ../typing-break/drwright.c:509
-#, c-format
-msgid "%d minute until the next break"
-msgid_plural "%d minutes until the next break"
-msgstr[0] "%d minute until the next break"
-msgstr[1] "%d minutes until the next break"
-
-#: ../typing-break/drwright.c:515
-#, c-format
-msgid "Take a break now (next in less than one minute)"
-msgstr "Take a break now (next in less than one minute)"
-
-#: ../typing-break/drwright.c:517
-#, c-format
-msgid "Less than one minute until the next break"
-msgstr "Less than one minute until the next break"
-
-#: ../typing-break/drwright.c:614
-#, c-format
-msgid ""
-"Unable to bring up the typing break properties dialog with the following "
-"error: %s"
-msgstr ""
-"Unable to bring up the typing break properties dialogue with the following "
-"error: %s"
-
-#: ../typing-break/drwright.c:631
-msgid "Written by Richard Hult <richard@imendio.com>"
-msgstr "Written by Richard Hult <richard@imendio.com>"
-
-#: ../typing-break/drwright.c:632
-msgid "Eye candy added by Anders Carlsson"
-msgstr "Eye candy added by Anders Carlsson"
-
-#: ../typing-break/drwright.c:641
-msgid "A computer break reminder."
-msgstr "A computer break reminder."
-
-#: ../typing-break/drwright.c:643
-msgid "translator-credits"
-msgstr ""
-"David Lodge <dave@cirt.net>\n"
-"Philip Withnall <philip@tecnocode.co.uk>\n"
-"Bruce Cowan <bruce@bcowan.me.uk>"
-
-#: ../typing-break/main.c:63
-msgid "Enable debugging code"
-msgstr "Enable debugging code"
-
-#: ../typing-break/main.c:65
-msgid "Don't check whether the notification area exists"
-msgstr "Don't check whether the notification area exists"
-
-#: ../typing-break/main.c:91
-msgid "Typing Monitor"
-msgstr "Typing Monitor"
-
-#: ../typing-break/main.c:108
-msgid ""
-"The typing monitor uses the notification area to display information. You "
-"don't seem to have a notification area on your panel. You can add it by "
-"right-clicking on your panel and choosing 'Add to panel', selecting "
-"'Notification area' and clicking 'Add'."
-msgstr ""
-"The typing monitor uses the notification area to display information. You "
-"don't seem to have a notification area on your panel. You can add it by "
-"right-clicking on your panel and choosing 'Add to panel', selecting "
-"'Notification area' and clicking 'Add'."
-
-#: ../font-viewer/fontilus.schemas.in.h:1
-msgid "If set to true, then OpenType fonts will be thumbnailed."
-msgstr "If set to true, then OpenType fonts will be thumbnailed."
-
-#: ../font-viewer/fontilus.schemas.in.h:2
-msgid "If set to true, then PCF fonts will be thumbnailed."
-msgstr "If set to true, then PCF fonts will be thumbnailed."
-
-#: ../font-viewer/fontilus.schemas.in.h:3
-msgid "If set to true, then TrueType fonts will be thumbnailed."
-msgstr "If set to true, then TrueType fonts will be thumbnailed."
-
-#: ../font-viewer/fontilus.schemas.in.h:4
-msgid "If set to true, then Type1 fonts will be thumbnailed."
-msgstr "If set to true, then Type1 fonts will be thumbnailed."
-
-#: ../font-viewer/fontilus.schemas.in.h:5
-msgid ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
-msgstr ""
-"Set this key to the command used to create thumbnails for OpenType fonts."
-
-#: ../font-viewer/fontilus.schemas.in.h:6
-msgid "Set this key to the command used to create thumbnails for PCF fonts."
-msgstr "Set this key to the command used to create thumbnails for PCF fonts."
-
-#: ../font-viewer/fontilus.schemas.in.h:7
-msgid ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
-msgstr ""
-"Set this key to the command used to create thumbnails for TrueType fonts."
-
-#: ../font-viewer/fontilus.schemas.in.h:8
-msgid "Set this key to the command used to create thumbnails for Type1 fonts."
-msgstr "Set this key to the command used to create thumbnails for Type1 fonts."
-
-#: ../font-viewer/fontilus.schemas.in.h:9
-msgid "Thumbnail command for OpenType fonts"
-msgstr "Thumbnail command for OpenType fonts"
-
-#: ../font-viewer/fontilus.schemas.in.h:10
-msgid "Thumbnail command for PCF fonts"
-msgstr "Thumbnail command for PCF fonts"
-
-#: ../font-viewer/fontilus.schemas.in.h:11
-msgid "Thumbnail command for TrueType fonts"
-msgstr "Thumbnail command for TrueType fonts"
-
-#: ../font-viewer/fontilus.schemas.in.h:12
-msgid "Thumbnail command for Type1 fonts"
-msgstr "Thumbnail command for Type1 fonts"
-
-#: ../font-viewer/fontilus.schemas.in.h:13
-msgid "Whether to thumbnail OpenType fonts"
-msgstr "Whether to thumbnail OpenType fonts"
-
-#: ../font-viewer/fontilus.schemas.in.h:14
-msgid "Whether to thumbnail PCF fonts"
-msgstr "Whether to thumbnail PCF fonts"
-
-#: ../font-viewer/fontilus.schemas.in.h:15
-msgid "Whether to thumbnail TrueType fonts"
-msgstr "Whether to thumbnail TrueType fonts"
-
-#: ../font-viewer/fontilus.schemas.in.h:16
-msgid "Whether to thumbnail Type1 fonts"
-msgstr "Whether to thumbnail Type1 fonts"
-
-#: ../font-viewer/font-view.c:297
-msgid "Name:"
-msgstr "Name:"
-
-#: ../font-viewer/font-view.c:300
-msgid "Style:"
-msgstr "Style:"
-
-#: ../font-viewer/font-view.c:313
-msgid "Type:"
-msgstr "Type:"
-
-#: ../font-viewer/font-view.c:317
-msgid "Size:"
-msgstr "Size:"
-
-#: ../font-viewer/font-view.c:361 ../font-viewer/font-view.c:374
-msgid "Version:"
-msgstr "Version:"
-
-#: ../font-viewer/font-view.c:365 ../font-viewer/font-view.c:376
-msgid "Copyright:"
-msgstr "Copyright:"
-
-#: ../font-viewer/font-view.c:369
-msgid "Description:"
-msgstr "Description:"
-
-#: ../font-viewer/font-view.c:453
-msgid "Installed"
-msgstr "Installed"
-
-#: ../font-viewer/font-view.c:456
-msgid "Install Failed"
-msgstr "Install Failed"
-
-#: ../font-viewer/font-view.c:526
-#, c-format
-msgid "usage: %s fontfile\n"
-msgstr "usage: %s fontfile\n"
-
-#: ../font-viewer/font-view.c:597
-msgid "I_nstall Font"
-msgstr "I_nstall Font"
-
-#: ../font-viewer/gnome-font-viewer.desktop.in.in.h:1
-msgid "Font Viewer"
-msgstr "Font Viewer"
-
-#: ../font-viewer/gnome-font-viewer.desktop.in.in.h:2
-msgid "Preview fonts"
-msgstr "Preview fonts"
-
-#: ../font-viewer/font-thumbnailer.c:245
-msgid "Text to thumbnail (default: Aa)"
-msgstr "Text to thumbnail (default: Aa)"
-
-#: ../font-viewer/font-thumbnailer.c:245
-msgid "TEXT"
-msgstr "TEXT"
-
-#: ../font-viewer/font-thumbnailer.c:247
-msgid "Font size (default: 64)"
-msgstr "Font size (default: 64)"
-
-#: ../font-viewer/font-thumbnailer.c:247
-msgid "SIZE"
-msgstr "SIZE"
-
-#: ../font-viewer/font-thumbnailer.c:249
-msgid "FONT-FILE OUTPUT-FILE"
-msgstr "FONT-FILE OUTPUT-FILE"
-
-#: ../font-viewer/font-thumbnailer.c:268
-#, c-format
-msgid "Error parsing arguments: %s\n"
-msgstr "Error parsing arguments: %s\n"
-
-#: ../examples/gnome-example-panel.desktop.in.in.h:1
-msgid "Example Panel"
-msgstr "Example Panel"
-
-#: ../examples/gnome-example-panel.desktop.in.in.h:2
-msgid "Example preferences panel"
-msgstr "Example preferences panel"
-
-#: ../shell/shell.ui.h:1
-msgid "System Settings"
-msgstr "System Settings"
-
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_All Settings"
+
+#~ msgid "More Info"
+#~ msgstr "More Info"
+
+#~ msgid "Error unsetting accelerator in configuration database: %s"
+#~ msgstr "Error unsetting accelerator in configuration database: %s"
+
+#~ msgctxt "printer state"
+#~ msgid "Idle"
+#~ msgstr "Idle"
+
+#~ msgid "User"
+#~ msgstr "User"
+
+#~ msgid "Could not connect to system bus: %s"
+#~ msgstr "Could not connect to system bus: %s"
+
+#~ msgid "%i kb/s"
+#~ msgstr "%i kb/s"
+
+#~ msgid "%i Mb/s"
+#~ msgstr "%i Mb/s"
+
+#~ msgid "%i Gb/s"
+#~ msgstr "%i Gb/s"
+
+#~ msgid "Ctrl+Alt+-"
+#~ msgstr "Ctrl+Alt+-"
+
+#~ msgid "Ctrl+Alt+0"
+#~ msgstr "Ctrl+Alt+0"
+
+#~ msgid "Ctrl+Alt+4"
+#~ msgstr "Ctrl+Alt+4"
+
+#~ msgid "Ctrl+Alt+8"
+#~ msgstr "Ctrl+Alt+8"
+
+#~ msgid "Ctrl+Alt+="
+#~ msgstr "Ctrl+Alt+="
+
+#~ msgid "HighContrast"
+#~ msgstr "HighContrast"
+
+#~ msgid "HighContrastInverse"
+#~ msgstr "HighContrastInverse"
+
+#~ msgid "LowContrast"
+#~ msgstr "LowContrast"
+
+#~ msgid "Off"
+#~ msgstr "Off"
+
+#~ msgid "On"
+#~ msgstr "On"
+
+#~ msgid "Shift+Ctrl+Alt+-"
+#~ msgstr "Shift+Ctrl+Alt+-"
+
+#~ msgid "Shift+Ctrl+Alt+="
+#~ msgstr "Shift+Ctrl+Alt+="
+
+#~ msgid "Use an alternative form of text input"
+#~ msgstr "Use an alternative form of text input"
+
+#~ msgid "Language:"
+#~ msgstr "Language:"
+
+#~ msgid "Preferred Applications"
+#~ msgstr "Preferred Applications"
+
+#~ msgid "Start the preferred visual assistive technology"
+#~ msgstr "Start the preferred visual assistive technology"
+
+#~ msgid "Visual Assistance"
+#~ msgstr "Visual Assistance"
+
+#~ msgid "Error saving configuration: %s"
+#~ msgstr "Error saving configuration: %s"
+
+#~ msgid "Could not load the main interface"
+#~ msgstr "Could not load the main interface"
+
+#~ msgid "Accessibility"
+#~ msgstr "Accessibility"
+
+#~ msgid "All %s occurrences will be replaced with actual link"
+#~ msgstr "All %s occurrences will be replaced with actual link"
+
+#~ msgid "Co_mmand:"
+#~ msgstr "Co_mmand:"
+
+#~ msgid "E_xecute flag:"
+#~ msgstr "E_xecute flag:"
+
+#~ msgid "Image Viewer"
+#~ msgstr "Image Viewer"
+
+#~ msgid "Instant Messenger"
+#~ msgstr "Instant Messenger"
+
+#~ msgid "Internet"
+#~ msgstr "Internet"
+
+#~ msgid "Mail Reader"
+#~ msgstr "Mail Reader"
+
+#~ msgid "Mobility"
+#~ msgstr "Mobility"
+
+#~ msgid "Multimedia"
+#~ msgstr "Multimedia"
+
+#~ msgid "Open link in new _tab"
+#~ msgstr "Open link in new _tab"
+
+#~ msgid "Open link in new _window"
+#~ msgstr "Open link in new _window"
+
+#~ msgid "Open link with web browser _default"
+#~ msgstr "Open link with web browser _default"
+
+#~ msgid "Run at st_art"
+#~ msgstr "Run at st_art"
+
+#~ msgid "Run in t_erminal"
+#~ msgstr "Run in t_erminal"
+
+#~ msgid "Terminal Emulator"
+#~ msgstr "Terminal Emulator"
+
+#~ msgid "Text Editor"
+#~ msgstr "Text Editor"
+
+#~ msgid "Video Player"
+#~ msgstr "Video Player"
+
+#~ msgid "Visual"
+#~ msgstr "Visual"
+
+#~ msgid "_Run at start"
+#~ msgstr "_Run at start"
+
+#~ msgid "Balsa"
+#~ msgstr "Balsa"
+
+#~ msgid "Banshee Music Player"
+#~ msgstr "Banshee Music Player"
+
+#~ msgid "Claws Mail"
+#~ msgstr "Claws Mail"
+
+#~ msgid "Debian Sensible Browser"
+#~ msgstr "Debian Sensible Browser"
+
+#~ msgid "Debian Terminal Emulator"
+#~ msgstr "Debian Terminal Emulator"
+
+#~ msgid "ETerm"
+#~ msgstr "ETerm"
+
+#~ msgid "Encompass"
+#~ msgstr "Encompass"
+
+#~ msgid "Epiphany Web Browser"
+#~ msgstr "Epiphany Web Browser"
+
+#~ msgid "Evolution Mail Reader"
+#~ msgstr "Evolution Mail Reader"
+
+#~ msgid "Firebird"
+#~ msgstr "Firebird"
+
+#~ msgid "Firefox"
+#~ msgstr "Firefox"
+
+#~ msgid "GNOME Magnifier without Screen Reader"
+#~ msgstr "GNOME Magnifier without Screen Reader"
+
+#~ msgid "GNOME OnScreen Keyboard"
+#~ msgstr "GNOME OnScreen Keyboard"
+
+#~ msgid "GNOME Terminal"
+#~ msgstr "GNOME Terminal"
+
+#~ msgid "Galeon"
+#~ msgstr "Galeon"
+
+#~ msgid "Gnopernicus"
+#~ msgstr "Gnopernicus"
+
+#~ msgid "Gnopernicus with Magnifier"
+#~ msgstr "Gnopernicus with Magnifier"
+
+#~ msgid "Iceape"
+#~ msgstr "Iceape"
+
+#~ msgid "Iceape Mail"
+#~ msgstr "Iceape Mail"
+
+#~ msgid "Icedove"
+#~ msgstr "Icedove"
+
+#~ msgid "Iceweasel"
+#~ msgstr "Iceweasel"
+
+#~ msgid "KDE Magnifier without Screen Reader"
+#~ msgstr "KDE Magnifier without Screen Reader"
+
+#~ msgid "Konqueror"
+#~ msgstr "Konqueror"
+
+#~ msgid "Konsole"
+#~ msgstr "Konsole"
+
+#~ msgid "Linux Screen Reader"
+#~ msgstr "Linux Screen Reader"
+
+#~ msgid "Linux Screen Reader with Magnifier"
+#~ msgstr "Linux Screen Reader with Magnifier"
+
+#~ msgid "Listen"
+#~ msgstr "Listen"
+
+#~ msgid "Midori"
+#~ msgstr "Midori"
+
+#~ msgid "Mozilla"
+#~ msgstr "Mozilla"
+
+#~ msgid "Mozilla 1.6"
+#~ msgstr "Mozilla 1.6"
+
+#~ msgid "Mozilla Mail"
+#~ msgstr "Mozilla Mail"
+
+#~ msgid "Mozilla Thunderbird"
+#~ msgstr "Mozilla Thunderbird"
+
+#~ msgid "Muine Music Player"
+#~ msgstr "Muine Music Player"
+
+#~ msgid "Mutt"
+#~ msgstr "Mutt"
+
+#~ msgid "NXterm"
+#~ msgstr "NXterm"
+
+#~ msgid "Netscape Communicator"
+#~ msgstr "Netscape Communicator"
+
+#~ msgid "Opera"
+#~ msgstr "Opera"
+
+#~ msgid "Orca"
+#~ msgstr "Orca"
+
+#~ msgid "Orca with Magnifier"
+#~ msgstr "Orca with Magnifier"
+
+#~ msgid "RXVT"
+#~ msgstr "RXVT"
+
+#~ msgid "Rhythmbox Music Player"
+#~ msgstr "Rhythmbox Music Player"
+
+#~ msgid "SeaMonkey"
+#~ msgstr "SeaMonkey"
+
+#~ msgid "SeaMonkey Mail"
+#~ msgstr "SeaMonkey Mail"
+
+#~ msgid "Sylpheed"
+#~ msgstr "Sylpheed"
+
+#~ msgid "Sylpheed-Claws"
+#~ msgstr "Sylpheed-Claws"
+
+#~ msgid "Thunderbird"
+#~ msgstr "Thunderbird"
+
+#~ msgid "Totem Movie Player"
+#~ msgstr "Totem Movie Player"
+
+#~ msgid "aterm"
+#~ msgstr "aterm"
+
+#~ msgid "Include _panel"
+#~ msgstr "Include _panel"
+
+#~ msgid "Make Default"
+#~ msgstr "Make Default"
+
+#~ msgid "Panel icon"
+#~ msgstr "Panel icon"
+
+#~ msgid "Re_fresh rate:"
+#~ msgstr "Re_fresh rate:"
+
+#~ msgid "Sa_me image in all monitors"
+#~ msgstr "Sa_me image in all monitors"
+
+#~ msgid "_Detect monitors"
+#~ msgstr "_Detect monitors"
+
+#~ msgid "_Show monitors in panel"
+#~ msgstr "_Show monitors in panel"
+
+#~ msgid "Monitors"
+#~ msgstr "Monitors"
+
+#~ msgid ""
+#~ "Usage: %s SOURCE_FILE DEST_NAME\n"
+#~ "\n"
+#~ "This program installs a RANDR profile for multi-monitor setups into\n"
+#~ "a systemwide location.  The resulting profile will get used when\n"
+#~ "the RANDR plug-in gets run in gnome-settings-daemon.\n"
+#~ "\n"
+#~ "SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
+#~ "xml\n"
+#~ "\n"
+#~ "DEST_NAME - relative name for the installed file.  This will get put in\n"
+#~ "            the systemwide directory for RANDR configurations,\n"
+#~ "            so the result will typically be %s/DEST_NAME\n"
+#~ msgstr ""
+#~ "Usage: %s SOURCE_FILE DEST_NAME\n"
+#~ "\n"
+#~ "This program installs a RANDR profile for multi-monitor setups into\n"
+#~ "a systemwide location.  The resulting profile will get used when\n"
+#~ "the RANDR plug-in gets run in gnome-settings-daemon.\n"
+#~ "\n"
+#~ "SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
+#~ "xml\n"
+#~ "\n"
+#~ "DEST_NAME - relative name for the installed file.  This will get put in\n"
+#~ "            the systemwide directory for RANDR configurations,\n"
+#~ "            so the result will typically be %s/DEST_NAME\n"
+
+#~ msgid "This program can only be used by the root user"
+#~ msgstr "This program can only be used by the root user"
+
+#~ msgid "The source filename must be absolute"
+#~ msgstr "The source filename must be absolute"
+
+#~ msgid "Could not get information for %s: %s\n"
+#~ msgstr "Could not get information for %s: %s\n"
+
+#~ msgid "%s must be a regular file\n"
+#~ msgstr "%s must be a regular file\n"
+
+#~ msgid "This program must only be run through pkexec(1)"
+#~ msgstr "This program must only be run through pkexec(1)"
+
+#~ msgid "PKEXEC_UID must be set to an integer value"
+#~ msgstr "PKEXEC_UID must be set to an integer value"
+
+#~ msgid "%s must be owned by you\n"
+#~ msgstr "%s must be owned by you\n"
+
+#~ msgid "%s must not have any directory components\n"
+#~ msgstr "%s must not have any directory components\n"
+
+#~ msgid "%s must be a directory\n"
+#~ msgstr "%s must be a directory\n"
+
+#~ msgid "Could not open %s/%s: %s\n"
+#~ msgstr "Could not open %s/%s: %s\n"
+
+#~ msgid ""
+#~ "Authentication is required to install multi-monitor settings for all users"
+#~ msgstr ""
+#~ "Authentication is required to install multi-monitor settings for all users"
+
+#~ msgid "Install multi-monitor settings for the whole system"
+#~ msgstr "Install multi-monitor settings for the whole system"
+
+#~ msgid "Upside Down"
+#~ msgstr "Upside Down"
+
+#~ msgid "%d Hz"
+#~ msgstr "%d Hz"
+
+#~ msgid "Mirror Screens"
+#~ msgstr "Mirror Screens"
+
+#~ msgid "Monitor: %s"
+#~ msgstr "Monitor: %s"
+
+#~ msgid "The monitor configuration has been saved"
+#~ msgstr "The monitor configuration has been saved"
+
+#~ msgid "This configuration will be used the next time someone logs in."
+#~ msgstr "This configuration will be used the next time someone logs in."
+
+#~ msgid "Could not set the default configuration for monitors"
+#~ msgstr "Could not set the default configuration for monitors"
+
+#~ msgid "Desktop"
+#~ msgstr "Desktop"
+
+#~ msgid "Keyboard Shortcuts"
+#~ msgstr "Keyboard Shortcuts"
+
+#~ msgid "Assign shortcut keys to commands"
+#~ msgstr "Assign shortcut keys to commands"
+
+#~ msgid "Beep when a _modifier key is pressed"
+#~ msgstr "Beep when a _modifier key is pressed"
+
+#~ msgid "Beep when a _toggle key is pressed"
+#~ msgstr "Beep when a _toggle key is pressed"
+
+#~ msgid "Beep when a key is pr_essed"
+#~ msgstr "Beep when a key is pr_essed"
+
+#~ msgid "Beep when a key is reje_cted"
+#~ msgstr "Beep when a key is reje_cted"
+
+#~ msgid "Beep when key is _accepted"
+#~ msgstr "Beep when key is _accepted"
+
+#~ msgid "Beep when key is _rejected"
+#~ msgstr "Beep when key is _rejected"
+
+#~ msgid "Flash _window titlebar"
+#~ msgstr "Flash _window titlebar"
+
+#~ msgid "Flash entire _screen"
+#~ msgstr "Flash entire _screen"
+
+#~ msgid "Keyboard Accessibility Audio Feedback"
+#~ msgstr "Keyboard Accessibility Audio Feedback"
+
+#~ msgid "Show _visual feedback for the alert sound"
+#~ msgstr "Show _visual feedback for the alert sound"
+
+#~ msgid "Visual cues for sounds"
+#~ msgstr "Visual cues for sounds"
+
+#~ msgid "All_ow postponing of breaks"
+#~ msgstr "All_ow postponing of breaks"
+
+#~ msgid "Audio _Feedback..."
+#~ msgstr "Audio _Feedback…"
+
+#~ msgid "Check if breaks are allowed to be postponed"
+#~ msgstr "Check if breaks are allowed to be postponed"
+
+#~ msgid "Disa_ble sticky keys if two keys are pressed together"
+#~ msgstr "Disa_ble sticky keys if two keys are pressed together"
+
+#~ msgid "Duration of the break when typing is disallowed"
+#~ msgstr "Duration of the break when typing is disallowed"
+
+#~ msgid "Duration of work before forcing a break"
+#~ msgstr "Duration of work before forcing a break"
+
+#~ msgid "Keyboard Preferences"
+#~ msgstr "Keyboard Preferences"
+
+#~ msgid "Keyboard _model:"
+#~ msgstr "Keyboard _model:"
+
+#~ msgid "List of keyboard layouts selected for usage"
+#~ msgstr "List of keyboard layouts selected for usage"
+
+#~ msgid ""
+#~ "Lock screen after a certain duration to help prevent repetitive keyboard "
+#~ "use injuries"
+#~ msgstr ""
+#~ "Lock screen after a certain duration to help prevent repetitive keyboard "
+#~ "use injuries"
+
+#~ msgid "Move _Down"
+#~ msgstr "Move _Down"
+
+#~ msgid "Move _Up"
+#~ msgstr "Move _Up"
+
+#~ msgid "Move the selected keyboard layout down in the list"
+#~ msgstr "Move the selected keyboard layout down in the list"
+
+#~ msgid "Move the selected keyboard layout up in the list"
+#~ msgstr "Move the selected keyboard layout up in the list"
+
+#~ msgid "New windows u_se active window's layout"
+#~ msgstr "New windows u_se active window's layout"
+
+#~ msgid "Print a diagram of the selected keyboard layout"
+#~ msgstr "Print a diagram of the selected keyboard layout"
+
+#~ msgid "Remove the selected keyboard layout from the list"
+#~ msgstr "Remove the selected keyboard layout from the list"
+
+#~ msgid "Select a keyboard layout to be added to the list"
+#~ msgstr "Select a keyboard layout to be added to the list"
+
+#~ msgid "Typing Break"
+#~ msgstr "Typing Break"
+
+#~ msgid "_Accessibility features can be toggled with keyboard shortcuts"
+#~ msgstr "_Accessibility features can be toggled with keyboard shortcuts"
+
+#~ msgid "_Add..."
+#~ msgstr "_Add…"
+
+#~ msgid "_Break interval lasts:"
+#~ msgstr "_Break interval lasts:"
+
+#~ msgid "_Ignore fast duplicate keypresses"
+#~ msgstr "_Ignore fast duplicate keypresses"
+
+#~ msgid "_Lock screen to enforce typing break"
+#~ msgstr "_Lock screen to enforce typing break"
+
+#~ msgid "_Only accept long keypresses"
+#~ msgstr "_Only accept long keypresses"
+
+#~ msgid "_Pointer can be controlled using the keypad"
+#~ msgstr "_Pointer can be controlled using the keypad"
+
+#~ msgid "_Simulate simultaneous keypresses"
+#~ msgstr "_Simulate simultaneous keypresses"
+
+#~ msgid "_Type to test settings:"
+#~ msgstr "_Type to test settings:"
+
+#~ msgid "_Work interval lasts:"
+#~ msgstr "_Work interval lasts:"
+
+#~ msgid "By _language"
+#~ msgstr "By _language"
+
+#~ msgid "Preview:"
+#~ msgstr "Preview:"
+
+#~ msgid "_Variants:"
+#~ msgstr "_Variants:"
+
+#~ msgid "Choose a Keyboard Model"
+#~ msgstr "Choose a Keyboard Model"
+
+#~ msgid "_Models:"
+#~ msgstr "_Models:"
+
+#~ msgid "_Vendors:"
+#~ msgstr "_Vendors:"
+
+#~ msgid "Vendors"
+#~ msgstr "Vendors"
+
+#~ msgid "Set your keyboard preferences"
+#~ msgstr "Set your keyboard preferences"
+
+#~ msgid "Unable to load stock icon '%s'\n"
+#~ msgstr "Unable to load stock icon '%s'\n"
+
+#~ msgid "gesture|Move left"
+#~ msgstr "Move left"
+
+#~ msgid "gesture|Move right"
+#~ msgstr "Move right"
+
+#~ msgid "gesture|Move up"
+#~ msgstr "Move up"
+
+#~ msgid "gesture|Move down"
+#~ msgstr "Move down"
+
+#~ msgid "gesture|Disabled"
+#~ msgstr "Disabled"
+
+#~ msgid "Choose type of click _beforehand"
+#~ msgstr "Choose type of click _beforehand"
+
+#~ msgid "Choose type of click with mo_use gestures"
+#~ msgstr "Choose type of click with mo_use gestures"
+
+#~ msgid "D_ouble click:"
+#~ msgstr "D_ouble click:"
+
+#~ msgid "D_rag click:"
+#~ msgstr "D_rag click:"
+
+#~ msgid "Dwell Click"
+#~ msgstr "Dwell Click"
+
+#~ msgid "Seco_ndary click:"
+#~ msgstr "Seco_ndary click:"
+
+#~ msgid "Show click type _window"
+#~ msgstr "Show click type _window"
+
+#~ msgid ""
+#~ "You can also use the Dwell Click panel applet to choose the click type."
+#~ msgstr ""
+#~ "You can also use the Dwell Click panel applet to choose the click type."
+
+#~ msgid "_Initiate click when stopping pointer movement"
+#~ msgstr "_Initiate click when stopping pointer movement"
+
+#~ msgid "_Single click:"
+#~ msgstr "_Single click:"
+
+#~ msgid "_Trigger secondary click by holding down the primary button"
+#~ msgstr "_Trigger secondary click by holding down the primary button"
+
+#~ msgid "Location already exists"
+#~ msgstr "Location already exists"
+
+#~ msgid "Set your network proxy preferences"
+#~ msgstr "Set your network proxy preferences"
+
+#~ msgid "<b>Di_rect internet connection</b>"
+#~ msgstr "<b>Di_rect internet connection</b>"
+
+#~ msgid "<b>_Manual proxy configuration</b>"
+#~ msgstr "<b>_Manual proxy configuration</b>"
+
+#~ msgid "<b>_Use authentication</b>"
+#~ msgstr "<b>_Use authentication</b>"
+
+#~ msgid "HTTP Proxy Details"
+#~ msgstr "HTTP Proxy Details"
+
+#~ msgid "Ignore Host List"
+#~ msgstr "Ignore Host List"
+
+#~ msgid "Ignored Hosts"
+#~ msgstr "Ignored Hosts"
+
+#~ msgid "Network Proxy Preferences"
+#~ msgstr "Network Proxy Preferences"
+
+#~ msgid "Port:"
+#~ msgstr "Port:"
+
+#~ msgid "Proxy Configuration"
+#~ msgstr "Proxy Configuration"
+
+#~ msgid "The location already exists."
+#~ msgstr "The location already exists."
+
+#~ msgid "_Delete Location"
+#~ msgstr "_Delete Location"
+
+#~ msgid "_Details"
+#~ msgstr "_Details"
+
+#~ msgid "_Location name:"
+#~ msgstr "_Location name:"
+
+#~ msgid "_Use the same proxy for all protocols"
+#~ msgstr "_Use the same proxy for all protocols"
+
+#~ msgid ""
+#~ "Accessibility features can be turned on or off with keyboard shortcuts"
+#~ msgstr ""
+#~ "Accessibility features can be turned on or off with keyboard shortcuts"
+
+#~ msgid "I need assistance with:"
+#~ msgstr "I need assistance with:"
+
+#~ msgid "Show Universal Access status"
+#~ msgstr "Show Universal Access status"
+
+#~ msgid "The GNOME configuration tool"
+#~ msgstr "The GNOME configuration tool"
+
+#~ msgid "_Postpone Break"
+#~ msgstr "_Postpone Break"
+
+#~ msgid "_Take a Break"
+#~ msgstr "_Take a Break"
+
+#~ msgid "Take a break now (next in %dm)"
+#~ msgstr "Take a break now (next in %dm)"
+
+#~ msgid "%d minute until the next break"
+#~ msgid_plural "%d minutes until the next break"
+#~ msgstr[0] "%d minute until the next break"
+#~ msgstr[1] "%d minutes until the next break"
+
+#~ msgid "Take a break now (next in less than one minute)"
+#~ msgstr "Take a break now (next in less than one minute)"
+
+#~ msgid "Less than one minute until the next break"
+#~ msgstr "Less than one minute until the next break"
+
+#~ msgid ""
+#~ "Unable to bring up the typing break properties dialog with the following "
+#~ "error: %s"
+#~ msgstr ""
+#~ "Unable to bring up the typing break properties dialogue with the "
+#~ "following error: %s"
+
+#~ msgid "Written by Richard Hult <richard@imendio.com>"
+#~ msgstr "Written by Richard Hult <richard@imendio.com>"
+
+#~ msgid "Eye candy added by Anders Carlsson"
+#~ msgstr "Eye candy added by Anders Carlsson"
+
+#~ msgid "A computer break reminder."
+#~ msgstr "A computer break reminder."
+
+#~ msgid "translator-credits"
+#~ msgstr ""
+#~ "David Lodge <dave@cirt.net>\n"
+#~ "Philip Withnall <philip@tecnocode.co.uk>\n"
+#~ "Bruce Cowan <bruce@bcowan.me.uk>"
+
+#~ msgid "Don't check whether the notification area exists"
+#~ msgstr "Don't check whether the notification area exists"
+
+#~ msgid "Typing Monitor"
+#~ msgstr "Typing Monitor"
+
+#~ msgid ""
+#~ "The typing monitor uses the notification area to display information. You "
+#~ "don't seem to have a notification area on your panel. You can add it by "
+#~ "right-clicking on your panel and choosing 'Add to panel', selecting "
+#~ "'Notification area' and clicking 'Add'."
+#~ msgstr ""
+#~ "The typing monitor uses the notification area to display information. You "
+#~ "don't seem to have a notification area on your panel. You can add it by "
+#~ "right-clicking on your panel and choosing 'Add to panel', selecting "
+#~ "'Notification area' and clicking 'Add'."
+
+#~ msgid "If set to true, then OpenType fonts will be thumbnailed."
+#~ msgstr "If set to true, then OpenType fonts will be thumbnailed."
+
+#~ msgid "If set to true, then PCF fonts will be thumbnailed."
+#~ msgstr "If set to true, then PCF fonts will be thumbnailed."
+
+#~ msgid "If set to true, then TrueType fonts will be thumbnailed."
+#~ msgstr "If set to true, then TrueType fonts will be thumbnailed."
+
+#~ msgid "If set to true, then Type1 fonts will be thumbnailed."
+#~ msgstr "If set to true, then Type1 fonts will be thumbnailed."
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for OpenType fonts."
+#~ msgstr ""
+#~ "Set this key to the command used to create thumbnails for OpenType fonts."
+
+#~ msgid "Set this key to the command used to create thumbnails for PCF fonts."
+#~ msgstr ""
+#~ "Set this key to the command used to create thumbnails for PCF fonts."
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for TrueType fonts."
+#~ msgstr ""
+#~ "Set this key to the command used to create thumbnails for TrueType fonts."
+
+#~ msgid ""
+#~ "Set this key to the command used to create thumbnails for Type1 fonts."
+#~ msgstr ""
+#~ "Set this key to the command used to create thumbnails for Type1 fonts."
+
+#~ msgid "Thumbnail command for OpenType fonts"
+#~ msgstr "Thumbnail command for OpenType fonts"
+
+#~ msgid "Thumbnail command for PCF fonts"
+#~ msgstr "Thumbnail command for PCF fonts"
+
+#~ msgid "Thumbnail command for TrueType fonts"
+#~ msgstr "Thumbnail command for TrueType fonts"
+
+#~ msgid "Thumbnail command for Type1 fonts"
+#~ msgstr "Thumbnail command for Type1 fonts"
+
+#~ msgid "Whether to thumbnail OpenType fonts"
+#~ msgstr "Whether to thumbnail OpenType fonts"
+
+#~ msgid "Whether to thumbnail PCF fonts"
+#~ msgstr "Whether to thumbnail PCF fonts"
+
+#~ msgid "Whether to thumbnail TrueType fonts"
+#~ msgstr "Whether to thumbnail TrueType fonts"
+
+#~ msgid "Whether to thumbnail Type1 fonts"
+#~ msgstr "Whether to thumbnail Type1 fonts"
+
+#~ msgid "Style:"
+#~ msgstr "Style:"
+
+#~ msgid "Size:"
+#~ msgstr "Size:"
+
+#~ msgid "Copyright:"
+#~ msgstr "Copyright:"
+
+#~ msgid "Description:"
+#~ msgstr "Description:"
+
+#~ msgid "Installed"
+#~ msgstr "Installed"
+
+#~ msgid "Install Failed"
+#~ msgstr "Install Failed"
+
+#~ msgid "usage: %s fontfile\n"
+#~ msgstr "usage: %s fontfile\n"
+
+#~ msgid "I_nstall Font"
+#~ msgstr "I_nstall Font"
+
+#~ msgid "Font Viewer"
+#~ msgstr "Font Viewer"
+
+#~ msgid "Preview fonts"
+#~ msgstr "Preview fonts"
+
+#~ msgid "Text to thumbnail (default: Aa)"
+#~ msgstr "Text to thumbnail (default: Aa)"
+
+#~ msgid "TEXT"
+#~ msgstr "TEXT"
+
+#~ msgid "Font size (default: 64)"
+#~ msgstr "Font size (default: 64)"
+
+#~ msgid "SIZE"
+#~ msgstr "SIZE"
+
+#~ msgid "FONT-FILE OUTPUT-FILE"
+#~ msgstr "FONT-FILE OUTPUT-FILE"
+
+#~ msgid "Error parsing arguments: %s\n"
+#~ msgstr "Error parsing arguments: %s\n"
+
+#~ msgid "Example Panel"
+#~ msgstr "Example Panel"
+
+#~ msgid "Example preferences panel"
+#~ msgstr "Example preferences panel"
 
 #~ msgid "Image/label border"
 #~ msgstr "Image/label border"
@@ -2289,17 +4396,8 @@ msgstr "_All Settings"
 #~ msgid "About Me"
 #~ msgstr "About Me"
 
-#~ msgid "Address"
-#~ msgstr "Address"
-
-#~ msgid "C_ity:"
-#~ msgstr "C_ity:"
-
 #~ msgid "C_ompany:"
 #~ msgstr "C_ompany:"
-
-#~ msgid "Cale_ndar:"
-#~ msgstr "Cale_ndar:"
 
 #~ msgid "Change Passwo_rd..."
 #~ msgstr "Change Passwo_rd…"
@@ -2324,9 +4422,6 @@ msgstr "_All Settings"
 
 #~ msgid "Enable _Fingerprint Login..."
 #~ msgstr "Enable _Fingerprint Login…"
-
-#~ msgid "Full Name"
-#~ msgstr "Full Name"
 
 #~ msgid "Hom_e:"
 #~ msgstr "Hom_e:"
@@ -2367,9 +4462,6 @@ msgstr "_All Settings"
 #~ msgid "User name:"
 #~ msgstr "User name:"
 
-#~ msgid "Web"
-#~ msgstr "Web"
-
 #~ msgid "Web _log:"
 #~ msgstr "Web _log:"
 
@@ -2385,14 +4477,8 @@ msgstr "_All Settings"
 #~ msgid "ZIP/_Postal code:"
 #~ msgstr "_Post code:"
 
-#~ msgid "_Address:"
-#~ msgstr "_Address:"
-
 #~ msgid "_Department:"
 #~ msgstr "_Department:"
-
-#~ msgid "_GroupWise:"
-#~ msgstr "_GroupWise:"
 
 #~ msgid "_Home page:"
 #~ msgstr "_Home page:"
@@ -2403,17 +4489,8 @@ msgstr "_All Settings"
 #~ msgid "_Manager:"
 #~ msgstr "_Manager:"
 
-#~ msgid "_Mobile:"
-#~ msgstr "_Mobile:"
-
-#~ msgid "_Profession:"
-#~ msgstr "_Profession:"
-
 #~ msgid "_State/Province:"
 #~ msgstr "_County:"
-
-#~ msgid "_Title:"
-#~ msgstr "_Title:"
 
 #~ msgid "_Work:"
 #~ msgstr "_Work:"
@@ -2430,105 +4507,14 @@ msgstr "_All Settings"
 #~ msgid "Set your personal information"
 #~ msgstr "Set your personal information"
 
-#~ msgid ""
-#~ "You are not allowed to access the device. Contact your system "
-#~ "administrator."
-#~ msgstr ""
-#~ "You are not allowed to access the device. Contact your system "
-#~ "administrator."
-
-#~ msgid "The device is already in use."
-#~ msgstr "The device is already in use."
-
-#~ msgid "An internal error occured"
-#~ msgstr "An internal error occurred"
-
-#~ msgid "Delete registered fingerprints?"
-#~ msgstr "Delete registered fingerprints?"
-
-#~ msgid "_Delete Fingerprints"
-#~ msgstr "_Delete Fingerprints"
-
-#~ msgid ""
-#~ "Do you want to delete your registered fingerprints so fingerprint login "
-#~ "is disabled?"
-#~ msgstr ""
-#~ "Do you want to delete your registered fingerprints so fingerprint login "
-#~ "is disabled?"
-
-#~ msgid "Done!"
-#~ msgstr "Done!"
-
-#~ msgid "Could not access '%s' device"
-#~ msgstr "Could not access '%s' device"
-
-#~ msgid "Could not start finger capture on '%s' device"
-#~ msgstr "Could not start finger capture on '%s' device"
-
-#~ msgid "Could not access any fingerprint readers"
-#~ msgstr "Could not access any fingerprint readers"
-
-#~ msgid "Please contact your system administrator for help."
-#~ msgstr "Please contact your system administrator for help."
-
-#~ msgid "Enable Fingerprint Login"
-#~ msgstr "Enable Fingerprint Login"
-
-#~ msgid ""
-#~ "To enable fingerprint login, you need to save one of your fingerprints, "
-#~ "using the '%s' device."
-#~ msgstr ""
-#~ "To enable fingerprint login, you need to save one of your fingerprints, "
-#~ "using the '%s' device."
-
 #~ msgid "Swipe finger on reader"
 #~ msgstr "Swipe finger on reader"
 
 #~ msgid "Place finger on reader"
 #~ msgstr "Place finger on reader"
 
-#~ msgid "Left index finger"
-#~ msgstr "Left index finger"
-
-#~ msgid "Left little finger"
-#~ msgstr "Left little finger"
-
-#~ msgid "Left middle finger"
-#~ msgstr "Left middle finger"
-
-#~ msgid "Left ring finger"
-#~ msgstr "Left ring finger"
-
-#~ msgid "Left thumb"
-#~ msgstr "Left thumb"
-
-#~ msgid "Other finger: "
-#~ msgstr "Other finger: "
-
-#~ msgid "Right index finger"
-#~ msgstr "Right index finger"
-
-#~ msgid "Right little finger"
-#~ msgstr "Right little finger"
-
-#~ msgid "Right middle finger"
-#~ msgstr "Right middle finger"
-
-#~ msgid "Right ring finger"
-#~ msgstr "Right ring finger"
-
-#~ msgid "Right thumb"
-#~ msgstr "Right thumb"
-
 #~ msgid "Select finger"
 #~ msgstr "Select finger"
-
-#~ msgid ""
-#~ "Your fingerprint was successfully saved. You should now be able to log in "
-#~ "using your fingerprint reader."
-#~ msgstr ""
-#~ "Your fingerprint was successfully saved. You should now be able to log in "
-#~ "using your fingerprint reader."
 
 #~ msgid "Child exited unexpectedly"
 #~ msgstr "Child exited unexpectedly"
@@ -2539,42 +4525,8 @@ msgstr "_All Settings"
 #~ msgid "Could not shutdown backend_stdout IO channel: %s"
 #~ msgstr "Could not shutdown backend_stdout IO channel: %s"
 
-#~ msgid "Authenticated!"
-#~ msgstr "Authenticated!"
-
-#~ msgid ""
-#~ "Your password has been changed since you initially authenticated! Please "
-#~ "re-authenticate."
-#~ msgstr ""
-#~ "Your password has been changed since you initially authenticated! Please "
-#~ "re-authenticate."
-
-#~ msgid "That password was incorrect."
-#~ msgstr "That password was incorrect."
-
-#~ msgid "Your password has been changed."
-#~ msgstr "Your password has been changed."
-
 #~ msgid "System error: %s."
 #~ msgstr "System error: %s."
-
-#~ msgid "The password is too short."
-#~ msgstr "The password is too short."
-
-#~ msgid "The password is too simple."
-#~ msgstr "The password is too simple."
-
-#~ msgid "The old and new passwords are too similar."
-#~ msgstr "The old and new passwords are too similar."
-
-#~ msgid "The new password must contain numeric or special character(s)."
-#~ msgstr "The new password must contain numeric or special character(s)."
-
-#~ msgid "The old and new passwords are the same."
-#~ msgstr "The old and new passwords are the same."
-
-#~ msgid "The new password has already been used recently."
-#~ msgstr "The new password has already been used recently."
 
 #~ msgid "Unable to launch %s: %s"
 #~ msgstr "Unable to launch %s: %s"
@@ -2591,9 +4543,6 @@ msgstr "_All Settings"
 #~ msgid "Click <b>Change password</b> to change your password."
 #~ msgstr "Click <b>Change password</b> to change your password."
 
-#~ msgid "Please type your password in the <b>New password</b> field."
-#~ msgstr "Please type your password in the <b>New password</b> field."
-
 #~ msgid ""
 #~ "Please type your password again in the <b>Retype new password</b> field."
 #~ msgstr ""
@@ -2605,14 +4554,8 @@ msgstr "_All Settings"
 #~ msgid "Change pa_ssword"
 #~ msgstr "Change pa_ssword"
 
-#~ msgid "Change password"
-#~ msgstr "Change password"
-
 #~ msgid "Change your password"
 #~ msgstr "Change your password"
-
-#~ msgid "Current _password:"
-#~ msgstr "Current _password:"
 
 #~ msgid ""
 #~ "To change your password, enter your current password in the field below "
@@ -2624,15 +4567,6 @@ msgstr "_All Settings"
 #~ "and click <b>Authenticate</b>.\n"
 #~ "After you have authenticated, enter your new password, retype it for "
 #~ "verification and click <b>Change password</b>."
-
-#~ msgid "_Authenticate"
-#~ msgstr "_Authenticate"
-
-#~ msgid "_New password:"
-#~ msgstr "_New password:"
-
-#~ msgid "_Retype new password:"
-#~ msgstr "_Retype new password:"
 
 #~ msgid "Accessible Lo_gin"
 #~ msgstr "Accessible Lo_gin"
@@ -2670,9 +4604,6 @@ msgstr "_All Settings"
 
 #~ msgid "_Enable assistive technologies"
 #~ msgstr "_Enable assistive technologies"
-
-#~ msgid "_Keyboard Accessibility"
-#~ msgstr "_Keyboard Accessibility"
 
 #~ msgid "_Mouse Accessibility"
 #~ msgstr "_Mouse Accessibility"
@@ -2752,9 +4683,6 @@ msgstr "_All Settings"
 #~ msgid "[WALLPAPER...]"
 #~ msgstr "[WALLPAPER…]"
 
-#~ msgid "Default Pointer"
-#~ msgstr "Default Pointer"
-
 #~ msgid "Install"
 #~ msgstr "Install"
 
@@ -2810,9 +4738,6 @@ msgstr "_All Settings"
 #~ msgid "Appearance Preferences"
 #~ msgstr "Appearance Preferences"
 
-#~ msgid "Background"
-#~ msgstr "Background"
-
 #~ msgid "Best _shapes"
 #~ msgstr "Best _shapes"
 
@@ -2824,9 +4749,6 @@ msgstr "_All Settings"
 
 #~ msgid "C_ustomize..."
 #~ msgstr "C_ustomise…"
-
-#~ msgid "Center"
-#~ msgstr "Centre"
 
 #~ msgid "Changing your cursor theme takes effect the next time you log in."
 #~ msgstr "Changing your cursor theme takes effect the next time you log in."
@@ -2861,12 +4783,6 @@ msgstr "_All Settings"
 #~ msgid "Gra_yscale"
 #~ msgstr "Gre_yscale"
 
-#~ msgid "Hinting"
-#~ msgstr "Hinting"
-
-#~ msgid "Horizontal gradient"
-#~ msgstr "Horizontal gradient"
-
 #~ msgid "Icons"
 #~ msgstr "Icons"
 
@@ -2879,9 +4795,6 @@ msgstr "_All Settings"
 #~ msgid "Open a dialog to specify the color"
 #~ msgstr "Open a dialogue to specify the colour"
 
-#~ msgid "Pointer"
-#~ msgstr "Pointer"
-
 #~ msgid "R_esolution:"
 #~ msgstr "R_esolution:"
 
@@ -2890,21 +4803,6 @@ msgstr "_All Settings"
 
 #~ msgid "Save _As..."
 #~ msgstr "Save _As…"
-
-#~ msgid "Save _background image"
-#~ msgstr "Save _background image"
-
-#~ msgid "Scale"
-#~ msgstr "Scale"
-
-#~ msgid "Smoothing"
-#~ msgstr "Smoothing"
-
-#~ msgid "Solid color"
-#~ msgstr "Solid colour"
-
-#~ msgid "Span"
-#~ msgstr "Span"
 
 #~ msgid "Stretch"
 #~ msgstr "Stretch"
@@ -2936,14 +4834,8 @@ msgstr "_All Settings"
 #~ msgid "Theme"
 #~ msgstr "Theme"
 
-#~ msgid "Tile"
-#~ msgstr "Tile"
-
 #~ msgid "VB_GR"
 #~ msgstr "VB_GR"
-
-#~ msgid "Vertical gradient"
-#~ msgstr "Vertical gradient"
 
 #~ msgid "Window Border"
 #~ msgstr "Window Border"
@@ -2965,9 +4857,6 @@ msgstr "_All Settings"
 
 #~ msgid "_Full"
 #~ msgstr "_Full"
-
-#~ msgid "_Input boxes:"
-#~ msgstr "_Input boxes:"
 
 #~ msgid "_Install..."
 #~ msgstr "_Install…"
@@ -3029,20 +4918,11 @@ msgstr "_All Settings"
 #~ msgid "Gnome Theme Package"
 #~ msgstr "Gnome Theme Package"
 
-#~ msgid "No Desktop Background"
-#~ msgstr "No Desktop Background"
-
 #~ msgid "Slide Show"
 #~ msgstr "Slide Show"
 
 #~ msgid "Image"
 #~ msgstr "Image"
-
-#~ msgid "multiple sizes"
-#~ msgstr "multiple sizes"
-
-#~ msgid "%d %s by %d %s"
-#~ msgstr "%d %s by %d %s"
 
 #~ msgid "pixel"
 #~ msgid_plural "pixels"
@@ -3109,9 +4989,6 @@ msgstr "_All Settings"
 
 #~ msgid "GNOME Theme %s correctly installed"
 #~ msgstr "GNOME Theme %s correctly installed"
-
-#~ msgid "Failed to create temporary directory"
-#~ msgstr "Failed to create temporary directory"
 
 #~ msgid "New themes have been successfully installed."
 #~ msgstr "New themes have been successfully installed."
@@ -3267,9 +5144,6 @@ msgstr "_All Settings"
 #~ msgstr ""
 #~ "Specify the name of the page to show (internet|multimedia|system|a11y)"
 
-#~ msgid "- GNOME Default Applications"
-#~ msgstr "- GNOME Default Applications"
-
 #~ msgid "Monitor Preferences"
 #~ msgstr "Monitor Preferences"
 
@@ -3286,9 +5160,6 @@ msgstr "_All Settings"
 
 #~ msgid "- GNOME Keyboard Preferences"
 #~ msgstr "- GNOME Keyboard Preferences"
-
-#~ msgid "_Show..."
-#~ msgstr "_Show…"
 
 #~ msgid "Specify the name of the page to show (general|accessibility)"
 #~ msgstr "Specify the name of the page to show (general|accessibility)"
@@ -3350,17 +5221,11 @@ msgstr "_All Settings"
 #~ msgid "Window manager \"%s\" has not registered a configuration tool\n"
 #~ msgstr "Window manager \"%s\" has not registered a configuration tool\n"
 
-#~ msgid "Maximize"
-#~ msgstr "Maximise"
-
 #~ msgid "Maximize Vertically"
 #~ msgstr "Maximise Vertically"
 
 #~ msgid "Maximize Horizontally"
 #~ msgstr "Maximise Horizontally"
-
-#~ msgid "Minimize"
-#~ msgstr "Minimise"
 
 #~ msgid "Roll up"
 #~ msgstr "Roll up"
@@ -3451,9 +5316,6 @@ msgstr "_All Settings"
 #~ msgid "No matches found."
 #~ msgstr "No matches found."
 
-#~ msgid "Other"
-#~ msgstr "Other"
-
 #~ msgid "Start %s"
 #~ msgstr "Start %s"
 
@@ -3494,12 +5356,6 @@ msgstr "_All Settings"
 #~ msgid "File System"
 #~ msgstr "File System"
 
-#~ msgid "Network Servers"
-#~ msgstr "Network Servers"
-
-#~ msgid "Search"
-#~ msgstr "Search"
-
 #~ msgid "<b>Open</b>"
 #~ msgstr "<b>Open</b>"
 
@@ -3524,9 +5380,6 @@ msgstr "_All Settings"
 #~ msgid "Open with \"%s\""
 #~ msgstr "Open with \"%s\""
 
-#~ msgid "Open with Default Application"
-#~ msgstr "Open with Default Application"
-
 #~ msgid "Open in File Manager"
 #~ msgstr "Open in File Manager"
 
@@ -3547,9 +5400,6 @@ msgstr "_All Settings"
 
 #~ msgid "Yesterday %l:%M %p"
 #~ msgstr "Yesterday %H:%M"
-
-#~ msgid "%a %l:%M %p"
-#~ msgstr "%a %H:%M"
 
 #~ msgid "%b %d %l:%M %p"
 #~ msgstr "%d %b %H:%M"
@@ -3575,9 +5425,6 @@ msgstr "_All Settings"
 #~ msgid "Drag the monitors to set their place"
 #~ msgstr "Drag the monitors to set their place"
 
-#~ msgid "_Mirror screens"
-#~ msgstr "_Mirror screens"
-
 #~ msgid "Change screen resolution"
 #~ msgstr "Change screen resolution"
 
@@ -3592,9 +5439,6 @@ msgstr "_All Settings"
 
 #~ msgid "Menus and Toolbars"
 #~ msgstr "Menus and Toolbars"
-
-#~ msgid "Preview"
-#~ msgstr "Preview"
 
 #~ msgid "Show _icons in menus"
 #~ msgstr "Show _icons in menus"
@@ -3680,12 +5524,6 @@ msgstr "_All Settings"
 
 #~ msgid "C_ut"
 #~ msgstr "C_ut"
-
-#~ msgid "New File"
-#~ msgstr "New File"
-
-#~ msgid "Open File"
-#~ msgstr "Open File"
 
 #~ msgid "Save File"
 #~ msgstr "Save File"
@@ -3824,9 +5662,6 @@ msgstr "_All Settings"
 #~ msgid "<b>_Wallpaper</b>"
 #~ msgstr "<b>_Wallpaper</b>"
 
-#~ msgid "No Wallpaper"
-#~ msgstr "No Wallpaper"
-
 #~ msgid "Monitor Resolution Settings"
 #~ msgstr "Monitor Resolution Settings"
 
@@ -3836,20 +5671,8 @@ msgstr "_All Settings"
 #~ msgid "Retrieve and store legacy settings"
 #~ msgstr "Retrieve and store legacy settings"
 
-#~ msgid "Enable sound and associate sounds with events"
-#~ msgstr "Enable sound and associate sounds with events"
-
 #~ msgid "Unknown Volume Control %d"
 #~ msgstr "Unknown Volume Control %d"
-
-#~ msgid "Failed to construct test pipeline for '%s'"
-#~ msgstr "Failed to construct test pipeline for '%s'"
-
-#~ msgid "Not connected"
-#~ msgstr "Not connected"
-
-#~ msgid "Autodetect"
-#~ msgstr "Autodetect"
 
 #~ msgid "ALSA - Advanced Linux Sound Architecture"
 #~ msgstr "ALSA - Advanced Linux Sound Architecture"
@@ -3896,17 +5719,8 @@ msgstr "_All Settings"
 #~ msgid "Click OK to finish."
 #~ msgstr "Click OK to finish."
 
-#~ msgid "Devices"
-#~ msgstr "Devices"
-
-#~ msgid "Play _alert sound"
-#~ msgstr "Play _alert sound"
-
 #~ msgid "Play _sound effects when buttons are clicked"
 #~ msgstr "Play _sound effects when buttons are clicked"
-
-#~ msgid "S_ound playback:"
-#~ msgstr "S_ound playback:"
 
 #~ msgid ""
 #~ "Select the device and tracks to control with the keyboard. Use the Shift "
@@ -3921,27 +5735,17 @@ msgstr "_All Settings"
 #~ msgid "Sou_nd capture:"
 #~ msgstr "Sou_nd capture:"
 
-#~ msgid "Sound Preferences"
-#~ msgstr "Sound Preferences"
-
 #~ msgid "Sounds"
 #~ msgstr "Sounds"
 
 #~ msgid "Testing Pipeline"
 #~ msgstr "Testing Pipeline"
 
-#~ msgid "_Device:"
-#~ msgstr "_Device:"
-
 #~ msgid "_Play alerts and sound effects"
 #~ msgstr "_Play alerts and sound effects"
 
 #~ msgid "_Sound playback:"
 #~ msgstr "_Sound playback:"
-
-#~ msgctxt "Sound event"
-#~ msgid "Alert sound"
-#~ msgstr "Alert sound"
 
 #~ msgctxt "Sound event"
 #~ msgid "Windows and Buttons"
@@ -4007,30 +5811,14 @@ msgstr "_All Settings"
 #~ msgid "Error"
 #~ msgstr "Error"
 
-#~ msgctxt "Sound event"
-#~ msgid "Battery warning"
-#~ msgstr "Battery warning"
-
-#~ msgid "Testing event sound"
-#~ msgstr "Testing event sound"
-
 #~ msgid "Select Sound File"
 #~ msgstr "Select Sound File"
-
-#~ msgid "Sound files"
-#~ msgstr "Sound files"
 
 #~ msgid "Custom..."
 #~ msgstr "Custom…"
 
-#~ msgid "Lock Screen"
-#~ msgstr "Lock Screen"
-
 #~ msgid "Logout"
 #~ msgstr "Logout"
-
-#~ msgid "Shutdown"
-#~ msgstr "Shutdown"
 
 #~ msgid "Enable support for GNOME assistive technologies at login"
 #~ msgstr "Enable support for GNOME assistive technologies at login"
@@ -4079,9 +5867,6 @@ msgstr "_All Settings"
 
 #~ msgid "Keep Resolution"
 #~ msgstr "Keep Resolution"
-
-#~ msgid "Do you want to keep this resolution?"
-#~ msgstr "Do you want to keep this resolution?"
 
 #~ msgid "Use _Previous Resolution"
 #~ msgstr "Use _Previous Resolution"
@@ -4145,9 +5930,6 @@ msgstr "_All Settings"
 #~ msgid "No valid bookmark file found in data dirs"
 #~ msgstr "No valid bookmark file found in data dirs"
 
-#~ msgid "A bookmark for URI '%s' already exists"
-#~ msgstr "A bookmark for URI '%s' already exists"
-
 #~ msgid "No bookmark found for URI '%s'"
 #~ msgstr "No bookmark found for URI '%s'"
 
@@ -4184,17 +5966,11 @@ msgstr "_All Settings"
 #~ "You may want to install the gnome-audio package for a set of default "
 #~ "sounds."
 
-#~ msgid "The sound file for this event does not exist."
-#~ msgstr "The sound file for this event does not exist."
-
 #~ msgid "The file %s is not a valid wav file"
 #~ msgstr "The file %s is not a valid wav file"
 
 #~ msgid "Select sound file..."
 #~ msgstr "Select sound file…"
-
-#~ msgid "Set as Application Font"
-#~ msgstr "Set as Application Font"
 
 #~ msgid "Sets the default application font"
 #~ msgstr "Sets the default application font"
@@ -4226,9 +6002,6 @@ msgstr "_All Settings"
 
 #~ msgid "Window border theme"
 #~ msgstr "Window border theme"
-
-#~ msgid "Icon theme"
-#~ msgstr "Icon theme"
 
 #~ msgid "If set to true, then installed themes will be thumbnailed."
 #~ msgstr "If set to true, then installed themes will be thumbnailed."
@@ -4263,9 +6036,6 @@ msgstr "_All Settings"
 
 #~ msgid "[FILE]"
 #~ msgstr "[FILE]"
-
-#~ msgid "Apply theme"
-#~ msgstr "Apply theme"
 
 #~ msgid "Sets the default theme"
 #~ msgstr "Sets the default theme"
@@ -4391,9 +6161,6 @@ msgstr "_All Settings"
 #~ msgid "The file format is invalid."
 #~ msgstr "The file format is invalid."
 
-#~ msgid "Connecting..."
-#~ msgstr "Connecting…"
-
 #~ msgid "Autostart the preferred AT"
 #~ msgstr "Autostart the preferred AT"
 
@@ -4492,9 +6259,6 @@ msgstr "_All Settings"
 
 #~ msgid "_Activate"
 #~ msgstr "_Activate"
-
-#~ msgid "_Deactivate"
-#~ msgstr "_Deactivate"
 
 #~ msgid "Do_n't activate"
 #~ msgstr "Do_n't activate"
@@ -4618,9 +6382,6 @@ msgstr "_All Settings"
 #~ "\n"
 #~ "Which set would you like to use?"
 
-#~ msgid "Use X settings"
-#~ msgstr "Use X settings"
-
 #~ msgid "Keep GNOME settings"
 #~ msgstr "Keep GNOME settings"
 
@@ -4710,9 +6471,6 @@ msgstr "_All Settings"
 #~ msgid "Height if applier is a preview: Defaults to 48."
 #~ msgstr "Height if applier is a preview: Defaults to 48."
 
-#~ msgid "Screen"
-#~ msgstr "Screen"
-
 #~ msgid "Screen on which BGApplier is to draw"
 #~ msgstr "Screen on which BGApplier is to draw"
 
@@ -4730,20 +6488,11 @@ msgstr "_All Settings"
 #~ msgid "E-mail's shortcut."
 #~ msgstr "Shortcut for e-mail."
 
-#~ msgid "Home folder"
-#~ msgstr "Home folder"
-
 #~ msgid "Home folder's shortcut."
 #~ msgstr "Shortcut for home folder."
 
-#~ msgid "Launch help browser"
-#~ msgstr "Launch help browser"
-
 #~ msgid "Launch help browser's shortcut."
 #~ msgstr "Shortcut for Launch help browser."
-
-#~ msgid "Launch web browser"
-#~ msgstr "Launch web browser"
 
 #~ msgid "Launch web browser's shortcut."
 #~ msgstr "shortcut for launch web browser."
@@ -4754,23 +6503,14 @@ msgstr "_All Settings"
 #~ msgid "Log out's shortcut."
 #~ msgstr "shortcut for log out."
 
-#~ msgid "Media player"
-#~ msgstr "Media player"
-
 #~ msgid "Media player key's shortcut."
 #~ msgstr "Shortcut key for media player."
 
 #~ msgid "Next track key's shortcut."
 #~ msgstr "Shortcut for next track key."
 
-#~ msgid "Pause"
-#~ msgstr "Pause"
-
 #~ msgid "Pause key's shortcut."
 #~ msgstr "Shortcut for the pause kay."
-
-#~ msgid "Play (or play/pause)"
-#~ msgstr "Play (or play/pause)"
 
 #~ msgid "Play (or play/pause) key's shortcut."
 #~ msgstr "Shortcut for the play (or play/pause) key."
@@ -4781,32 +6521,17 @@ msgstr "_All Settings"
 #~ msgid "Search's shortcut."
 #~ msgstr "Shortcut for search."
 
-#~ msgid "Skip to next track"
-#~ msgstr "Skip to next track"
-
-#~ msgid "Skip to previous track"
-#~ msgstr "Skip to previous track"
-
 #~ msgid "Sleep"
 #~ msgstr "Sleep"
 
 #~ msgid "Sleep's shortcut."
 #~ msgstr "Sleep's shortcut."
 
-#~ msgid "Stop playback key"
-#~ msgstr "Stop playback key"
-
 #~ msgid "Stop playback key's shortcut."
 #~ msgstr "Shortcut for the stop playback key."
 
-#~ msgid "Volume down"
-#~ msgstr "Volume down"
-
 #~ msgid "Volume down's shortcut."
 #~ msgstr "Shortcut for volume down."
-
-#~ msgid "Volume mute"
-#~ msgstr "Volume mute"
 
 #~ msgid "Volume mute's shortcut."
 #~ msgstr "Shortcut for volume mute."
@@ -4816,9 +6541,6 @@ msgstr "_All Settings"
 
 #~ msgid "Volume step as percentage of volume."
 #~ msgstr "Volume step as percentage of volume."
-
-#~ msgid "Volume up"
-#~ msgstr "Volume up"
 
 #~ msgid "Volume up's shortcut."
 #~ msgstr "Shortcut for volume up."
@@ -4834,12 +6556,6 @@ msgstr "_All Settings"
 
 #~ msgid "Start screensaver"
 #~ msgstr "Start screensaver"
-
-#~ msgid "Change your Desktop Background settings"
-#~ msgstr "Change your Desktop Background settings"
-
-#~ msgid "Desktop Background Preferences"
-#~ msgstr "Desktop Background Preferences"
 
 #~ msgid "_Add Wallpaper"
 #~ msgstr "_Add Wallpaper"
@@ -4864,9 +6580,6 @@ msgstr "_All Settings"
 
 #~ msgid "Select fonts for the desktop"
 #~ msgstr "Select fonts for the desktop"
-
-#~ msgid "Unknown Pointer"
-#~ msgstr "Unknown Pointer"
 
 #~ msgid "The default pointer that ships with X"
 #~ msgstr "The default pointer that ships with X"
@@ -4940,9 +6653,6 @@ msgstr "_All Settings"
 #~ msgid "This theme suggests a font and a background:"
 #~ msgstr "This theme suggests a font and a background:"
 
-#~ msgid "_Install Theme..."
-#~ msgstr "_Install Theme…"
-
 #~ msgid "_Save Theme..."
 #~ msgstr "_Save Theme…"
 
@@ -4964,17 +6674,11 @@ msgstr "_All Settings"
 #~ msgid "Medium"
 #~ msgstr "Medium"
 
-#~ msgid "<b>Applications</b>"
-#~ msgstr "<b>Applications</b>"
-
 #~ msgid "<b>Support</b>"
 #~ msgstr "<b>Support</b>"
 
 #~ msgid "Start these assistive technologies every time you log in:"
 #~ msgstr "Start these assistive technologies every time you log in:"
-
-#~ msgid "_Magnifier"
-#~ msgstr "_Magnifier"
 
 #~ msgid ""
 #~ "No Assistive Technology is available on your system.  The 'gok' package "
@@ -5011,9 +6715,6 @@ msgstr "_All Settings"
 #~ msgid "A_vailable layouts:"
 #~ msgstr "A_vailable layouts:"
 
-#~ msgid "Help Unavailable"
-#~ msgstr "Help Unavailable"
-
 #~ msgid "Sound & Video Preferences"
 #~ msgstr "Sound & Video Preferences"
 
@@ -5035,9 +6736,6 @@ msgstr "_All Settings"
 
 #~ msgid "_Enable custom colors"
 #~ msgstr "_Enable custom colours"
-
-#~ msgid "GNOME Control Center"
-#~ msgstr "GNOME Control Centre"
 
 #~ msgid ""
 #~ "<span weight=\"bold\" size=\"larger\">The theme \"%s\" has been installed."
@@ -5072,9 +6770,6 @@ msgstr "_All Settings"
 #~ msgid "no layout"
 #~ msgstr "no layout"
 
-#~ msgid "no options"
-#~ msgstr "no options"
-
 #~ msgid "No description."
 #~ msgstr "No description."
 
@@ -5090,17 +6785,11 @@ msgstr "_All Settings"
 #~ msgid "Activate more plugins"
 #~ msgstr "Activate more plugins"
 
-#~ msgid "Active _plugins:"
-#~ msgstr "Active _plugins:"
-
 #~ msgid "Add Plugin"
 #~ msgstr "Add Plugin"
 
 #~ msgid "Configure the selected plugin"
 #~ msgstr "Configure the selected plugin"
-
-#~ msgid "Deactivate selected plugin"
-#~ msgstr "Deactivate selected plugin"
 
 #~ msgid "Decrease the plugin priority"
 #~ msgstr "Decrease the plugin priority"
@@ -5272,9 +6961,6 @@ msgstr "_All Settings"
 
 #~ msgid "Brightness down's shortcut."
 #~ msgstr "Brightness down's shortcut."
-
-#~ msgid "Brightness up"
-#~ msgstr "Brightness up"
 
 #~ msgid "Brightness up's shortcut."
 #~ msgstr "Brightness up's shortcut."
