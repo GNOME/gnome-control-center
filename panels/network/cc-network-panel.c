@@ -1126,11 +1126,10 @@ panel_check_network_manager_version (CcNetworkPanel *panel)
 
                 /* TRANSLATORS: the user is running a NM that is too old and API compatible */
                 message = _("The running NetworkManager version is not compatible (too old).");
-        }
-
         /* nothing to do */
-        if (message == NULL)
+        } else {
                 goto out;
+        }
 
         /* do modal dialog */
         ret = FALSE;
