@@ -5,20 +5,20 @@
 # Andraž Tori <andraz.tori1@guest.arnes.si>, 2004.
 # Matjaž Horvat <m@owca.info>, 2005 - 2006.
 # Matic Žgur <mr.zgur@gmail.com>, 2006 - 2007.
-# Matej Urbančič <mateju@svn.gnome.org>, 2007 - 2010.
+# Matej Urbančič <mateju@svn.gnome.org>, 2007 - 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&component=general\n"
-"POT-Creation-Date: 2011-03-08 12:24+0000\n"
-"PO-Revision-Date: 2011-03-09 10:35+0100\n"
-"Last-Translator: Andrej Žnidaršič <andrej.znidarsic@gmail.com>\n"
+"POT-Creation-Date: 2011-03-10 14:55+0000\n"
+"PO-Revision-Date: 2011-03-10 16:56+0100\n"
+"Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);\n"
 "X-Poedit-Language: Slovenian\n"
 "X-Poedit-Country: SLOVENIA\n"
@@ -236,29 +236,29 @@ msgstr "Navpični preliv"
 msgid "Solid Color"
 msgstr "Polna barva"
 
-#: ../panels/background/cc-background-panel.c:960
+#: ../panels/background/cc-background-panel.c:958
 #: ../panels/user-accounts/um-photo-dialog.c:216
 #: ../panels/user-accounts/data/photo-dialog.ui.h:2
 msgid "Browse for more pictures"
 msgstr "Brskanje med več slikami"
 
-#: ../panels/background/cc-background-panel.c:1051
+#: ../panels/background/cc-background-panel.c:1049
 msgid "Current background"
 msgstr "Trenutno ozadje"
 
-#: ../panels/background/cc-background-panel.c:1115
+#: ../panels/background/cc-background-panel.c:1113
 msgid "Wallpapers"
 msgstr "Ozadja namizja"
 
-#: ../panels/background/cc-background-panel.c:1122
+#: ../panels/background/cc-background-panel.c:1120
 msgid "Pictures Folder"
 msgstr "Mapa slik"
 
-#: ../panels/background/cc-background-panel.c:1129
+#: ../panels/background/cc-background-panel.c:1127
 msgid "Colors & Gradients"
 msgstr "Barve in prelivi"
 
-#: ../panels/background/cc-background-panel.c:1137
+#: ../panels/background/cc-background-panel.c:1135
 msgid "Flickr"
 msgstr "Flickr"
 
@@ -1690,21 +1690,47 @@ msgstr "Nastavite svoje možnosti miške in sledilne ploščice"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Sledilna ploščica;Kazalnik;Klik;Udarjanje;Dvojni;Gumb;Sledilna kroglica;"
 
-#: ../panels/network/cc-network-panel.c:969
+#. TRANSLATORS: this WEP WiFi security
+#: ../panels/network/cc-network-panel.c:718
+msgid "WEP"
+msgstr "WEP"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/cc-network-panel.c:722
+msgid "WPA"
+msgstr "WPA"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/cc-network-panel.c:726
+msgid "WPA2"
+msgstr "WPA2"
+
+#. TRANSLATORS: this Enterprise WiFi security
+#: ../panels/network/cc-network-panel.c:731
+msgid "Enterprise"
+msgstr "Podjetniški"
+
+#. TRANSLATORS: this no (!) WiFi security
+#: ../panels/network/cc-network-panel.c:737
+#: ../panels/universal-access/uap.ui.h:43
+msgid "None"
+msgstr "Brez"
+
+#: ../panels/network/cc-network-panel.c:1022
 msgid "Network proxy"
 msgstr "Omrežni posredniški strežnik"
 
-#: ../panels/network/cc-network-panel.c:978
+#: ../panels/network/cc-network-panel.c:1031
 msgid "Set the system proxy settings"
 msgstr "Nastavi sistemske posredniške nastavitve"
 
 #. TRANSLATORS: the user is running a NM that is too new and API compatible
-#: ../panels/network/cc-network-panel.c:1122
+#: ../panels/network/cc-network-panel.c:1175
 msgid "The running NetworkManager version is not compatible (too new)."
 msgstr "Različica NetworkManager v teku ni združljiva (prenova)."
 
 #. TRANSLATORS: the user is running a NM that is too old and API compatible
-#: ../panels/network/cc-network-panel.c:1128
+#: ../panels/network/cc-network-panel.c:1181
 msgid "The running NetworkManager version is not compatible (too old)."
 msgstr "Različica NetworkManager v teku ni združljiva (prestara)."
 
@@ -2578,10 +2604,6 @@ msgstr "Nastavitve miške"
 #: ../panels/universal-access/uap.ui.h:42
 msgid "Nomon"
 msgstr "Nomon"
-
-#: ../panels/universal-access/uap.ui.h:43
-msgid "None"
-msgstr "Brez"
 
 #: ../panels/universal-access/uap.ui.h:45
 msgid "On screen keyboard"
@@ -4986,8 +5008,8 @@ msgstr "_Vse nastavitve"
 #~ "This theme will not look as intended because the required window manager "
 #~ "theme '%s' is not installed."
 #~ msgstr ""
-#~ "Tema ne bo prikazana pravilno, saj zahtevana tema upravljalnika namizja "
-#~ "'%s' ni nameščena."
+#~ "Tema ne bo prikazana pravilno, saj zahtevana tema upravljalnika namizja '%"
+#~ "s' ni nameščena."
 
 #~ msgid ""
 #~ "This theme will not look as intended because the required icon theme '%s' "
