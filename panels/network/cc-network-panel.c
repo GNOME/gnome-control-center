@@ -36,6 +36,8 @@
 #include "nm-vpn-connection.h"
 #include "nm-setting-ip4-config.h"
 #include "nm-setting-ip6-config.h"
+#include "nm-setting-connection.h"
+#include "nm-setting-vpn.h"
 
 #include "panel-common.h"
 #include "panel-cell-renderer-mode.h"
@@ -62,7 +64,7 @@ enum {
         PANEL_DEVICES_COLUMN_ID,
         PANEL_DEVICES_COLUMN_SORT,
         PANEL_DEVICES_COLUMN_TOOLTIP,
-        PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE,
+        PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, /* needs to be a custom object */
         PANEL_DEVICES_COLUMN_LAST
 };
 
@@ -1155,21 +1157,72 @@ manager_running (NMClient *client, GParamSpec *pspec, gpointer user_data)
 }
 
 static void
-notify_connections_read_cb (NMRemoteSettings *settings,
-                            GParamSpec *pspec,
-                            gpointer user_data)
+panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
 {
-        CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
+        gchar *title;
+        gchar *title_markup;
+        GtkListStore *liststore_devices;
+        GtkTreeIter iter;
+        NMSettingVPN *setting;
+
+        /*
+         * key=IKE DH Group, value=dh2
+         * key=xauth-password-type, value=ask
+         * key=ipsec-secret-type, value=save
+         * key=IPSec gateway, value=66.187.233.252
+         * key=NAT Traversal Mode, value=natt
+         * key=IPSec ID, value=rh-vpn
+         * key=Xauth username, value=rhughes
+         */
+
+        setting = NM_SETTING_VPN (nm_connection_get_setting_by_name (connection, "vpn"));
+
+        /* TODO: add as a virtual object */
+        nm_setting_vpn_get_data_item (setting, "IPSec gateway");
+
+        liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
+                                            "liststore_devices"));
+        title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (connection));
+        title_markup = g_strdup_printf ("<span size=\"large\">%s</span>",
+                                        title);
+
+        gtk_list_store_append (liststore_devices, &iter);
+        gtk_list_store_set (liststore_devices,
+                            &iter,
+                            PANEL_DEVICES_COLUMN_ICON, "network-workgroup",
+                            PANEL_DEVICES_COLUMN_TITLE, title_markup,
+                            PANEL_DEVICES_COLUMN_ID, NULL,
+                            PANEL_DEVICES_COLUMN_SORT, "5",
+                            PANEL_DEVICES_COLUMN_TOOLTIP, _("Virtual private network"),
+                            PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, NULL,
+                            -1);
+        g_free (title);
+        g_free (title_markup);
+}
+
+static void
+notify_connections_read_cb (NMRemoteSettings *settings,
+                            CcNetworkPanel *panel)
+{
         GSList *list, *iter;
+        NMConnection *candidate;
+        NMSettingConnection *s_con;
+        const gchar *type;
 
         list = nm_remote_settings_list_connections (settings);
         g_debug ("%p has %i remote connections",
                  panel, g_slist_length (list));
         for (iter = list; iter; iter = g_slist_next (iter)) {
-                NMConnection *candidate = NM_CONNECTION (iter->data);
-                /* we can't actually test this yet as VPN support in
-                 * NetworkManager 0.9 is currently broken */
-                g_debug ("TODO: add %s", nm_connection_get_path (candidate));
+                candidate = NM_CONNECTION (iter->data);
+                s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (candidate,
+                                                                          NM_TYPE_SETTING_CONNECTION));
+                type = nm_setting_connection_get_connection_type (s_con);
+                if (g_strcmp0 (type, "vpn") != 0)
+                        continue;
+                g_debug ("add %s remote connection: %s",
+                         type,
+                         nm_connection_get_path (candidate));
+                panel_add_vpn_device (panel, candidate);
         }
 }
 
@@ -1421,7 +1474,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
                 g_error_free (error);
         }
         remote_settings = nm_remote_settings_new (bus);
-        g_signal_connect (remote_settings, "notify::" NM_REMOTE_SETTINGS_CONNECTIONS_READ,
+        g_signal_connect (remote_settings, NM_REMOTE_SETTINGS_CONNECTIONS_READ,
                           G_CALLBACK (notify_connections_read_cb), panel);
 
         /* is the user compiling against a new version, but running an
