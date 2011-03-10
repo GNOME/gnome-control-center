@@ -953,6 +953,11 @@ nm_device_refresh_item_ui (CcNetworkPanel *panel, NMDevice *device)
                                        "ip6",
                                        nm_dhcp6_config_get_one_option (config_dhcp6,
                                                                        "ip_address"));
+        } else {
+                panel_set_widget_data (panel,
+                                       sub_pane,
+                                       "ip6",
+                                        NULL);
         }
 out:
         if (aps_unique != NULL)
