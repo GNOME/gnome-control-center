@@ -35,6 +35,7 @@
 #include "nm-active-connection.h"
 #include "nm-vpn-connection.h"
 #include "nm-setting-ip4-config.h"
+#include "nm-setting-ip6-config.h"
 
 #include "panel-common.h"
 #include "panel-cell-renderer-mode.h"
@@ -739,6 +740,31 @@ get_ap_security_string (NMAccessPoint *ap)
         return g_string_free (str, FALSE);
 }
 
+static gchar *
+get_ipv6_config_address_as_string (NMIP6Config *ip6_config)
+{
+        const GSList *list;
+        const struct in6_addr *addr;
+        gchar *str = NULL;
+        gchar tmp[1024];
+        NMIP6Address *address;
+
+        /* get address */
+        list = nm_ip6_config_get_addresses (ip6_config);
+        if (list == NULL)
+                goto out;
+
+        /* we only care about one address */
+        address = list->data;
+        addr = nm_ip6_address_get_address (address);
+        if (addr == NULL)
+                goto out;
+        inet_ntop (AF_INET6, addr, tmp, sizeof(tmp));
+        str = g_strdup (tmp);
+out:
+        return str;
+}
+
 static void
 nm_device_refresh_item_ui (CcNetworkPanel *panel, NMDevice *device)
 {
@@ -757,7 +783,7 @@ nm_device_refresh_item_ui (CcNetworkPanel *panel, NMDevice *device)
         NMDeviceState state;
         NMDeviceType type;
         NMDHCP4Config *config_dhcp4 = NULL;
-        NMDHCP6Config *config_dhcp6 = NULL;
+        NMIP6Config *ip6_config = NULL;
 
         /* we have a new device */
         g_debug ("selected device is: %s", nm_device_get_udi (device));
@@ -944,15 +970,16 @@ nm_device_refresh_item_ui (CcNetworkPanel *panel, NMDevice *device)
         }
 
         /* get IP6 parameters */
-        if (0) config_dhcp6 = nm_device_get_dhcp6_config (device);
-        if (config_dhcp6 != NULL) {
+        ip6_config = nm_device_get_ip6_config (device);
+        if (ip6_config != NULL) {
 
                 /* IPv6 address */
+                str_tmp = get_ipv6_config_address_as_string (ip6_config);
                 panel_set_widget_data (panel,
                                        sub_pane,
                                        "ip6",
-                                       nm_dhcp6_config_get_one_option (config_dhcp6,
-                                                                       "ip_address"));
+                                       str_tmp);
+                g_free (str_tmp);
         } else {
                 panel_set_widget_data (panel,
                                        sub_pane,
