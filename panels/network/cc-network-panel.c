@@ -1412,6 +1412,14 @@ cc_network_panel_init (CcNetworkPanel *panel)
                                                      "notebook_types"));
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (widget), FALSE);
 
+        /* hide stuff that doesn't work yet */
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "devices_toolbar"));
+        gtk_widget_hide (widget);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "button_unlock"));
+        gtk_widget_hide (widget);
+
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "vbox1"));
         gtk_widget_reparent (widget, (GtkWidget *) panel);
