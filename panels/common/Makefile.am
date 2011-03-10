@@ -30,7 +30,8 @@ libshortcuts_la_SOURCES =		\
 	eggaccelerators.c
 
 libshortcuts_la_LIBADD =		\
-	$(PANEL_LIBS)
+	$(PANEL_LIBS)			\
+	$(LIBSHORTCUTS_LIBS)
 
 libshortcuts_la_LDFLAGS = $(PANEL_LDFLAGS)
 
