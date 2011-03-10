@@ -1098,7 +1098,7 @@ panel_check_network_manager_version (CcNetworkPanel *panel)
 {
         const gchar *message;
         const gchar *version;
-        gchar **split;
+        gchar **split = NULL;
         GtkWidget *dialog;
         GtkWindow *window = NULL;
         guint major = 0;
