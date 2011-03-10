@@ -302,6 +302,7 @@ panel_get_registration_info_cb (GObject *source_object, GAsyncResult *res, gpoin
         guint registration_status;
         GVariant *result = NULL;
         gchar *operator_name = NULL;
+        gchar *operator_name_safe = NULL;
         NMDevice *device = (NMDevice *) user_data;
 
         result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
@@ -317,14 +318,17 @@ panel_get_registration_info_cb (GObject *source_object, GAsyncResult *res, gpoin
                        &registration_status,
                        &operator_code,
                        &operator_name);
+        if (operator_name != NULL && operator_name[0] != '\0')
+                operator_name_safe = g_strescape (operator_name, NULL);
 
         /* save */
         g_object_set_data_full (G_OBJECT (device),
                                 "ControlCenter::OperatorName",
-                                g_strdup (operator_name),
+                                operator_name_safe,
                                 g_free);
 
         g_free (operator_name);
+        g_free (operator_name_safe);
         g_free (operator_code);
         g_variant_unref (result);
 }
