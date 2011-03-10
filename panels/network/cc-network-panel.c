@@ -695,6 +695,46 @@ panel_get_strongest_unique_aps (const GPtrArray *aps)
         return aps_unique;
 }
 
+static gchar *
+get_ap_security_string (NMAccessPoint *ap)
+{
+        NM80211ApSecurityFlags wpa_flags, rsn_flags;
+        NM80211ApFlags flags;
+        GString *str;
+
+        flags = nm_access_point_get_flags (ap);
+        wpa_flags = nm_access_point_get_wpa_flags (ap);
+        rsn_flags = nm_access_point_get_rsn_flags (ap);
+
+        str = g_string_new ("");
+        if ((flags & NM_802_11_AP_FLAGS_PRIVACY) &&
+            (wpa_flags == NM_802_11_AP_SEC_NONE) &&
+            (rsn_flags == NM_802_11_AP_SEC_NONE)) {
+                /* TRANSLATORS: this WEP WiFi security */
+                g_string_append_printf (str, "%s, ", _("WEP"));
+        }
+        if (wpa_flags != NM_802_11_AP_SEC_NONE) {
+                /* TRANSLATORS: this WPA WiFi security */
+                g_string_append_printf (str, "%s, ", _("WPA"));
+        }
+        if (rsn_flags != NM_802_11_AP_SEC_NONE) {
+                /* TRANSLATORS: this WPA WiFi security */
+                g_string_append_printf (str, "%s, ", _("WPA2"));
+        }
+        if ((wpa_flags & NM_802_11_AP_SEC_KEY_MGMT_802_1X) ||
+            (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_802_1X)) {
+                /* TRANSLATORS: this Enterprise WiFi security */
+                g_string_append_printf (str, "%s, ", _("Enterprise"));
+        }
+        if (str->len > 0)
+                g_string_set_size (str, str->len - 2);
+        else {
+                /* TRANSLATORS: this no (!) WiFi security */
+                g_string_append (str, _("None"));
+        }
+        return g_string_free (str, FALSE);
+}
+
 static void
 nm_device_refresh_item_ui (CcNetworkPanel *panel, NMDevice *device)
 {
@@ -806,17 +846,21 @@ nm_device_refresh_item_ui (CcNetworkPanel *panel, NMDevice *device)
                                        "mac",
                                        str);
                 /* security */
-                str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (device));
+                active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (device));
+                if (active_ap != NULL)
+                        str_tmp = get_ap_security_string (active_ap);
+                else
+                        str_tmp = NULL;
                 panel_set_widget_data (panel,
                                        sub_pane,
                                        "security",
-                                       NULL); /* FIXME */
+                                       str_tmp);
+                g_free (str_tmp);
 
                 /* populate access point dropdown */
                 liststore_wireless_network = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                                              "liststore_wireless_network"));
                 gtk_list_store_clear (liststore_wireless_network);
-                active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (device));
                 aps = nm_device_wifi_get_access_points (NM_DEVICE_WIFI (device));
                 if (aps == NULL)
                         return;
