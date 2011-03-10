@@ -836,7 +836,7 @@ nm_device_refresh_item_ui (CcNetworkPanel *panel, NMDevice *device)
 
                 /* speed */
                 str_tmp = g_strdup_printf ("%d Mb/s",
-                                           nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (device)));
+                                           nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (device)) / 1000);
                 panel_set_widget_data (panel,
                                        sub_pane,
                                        "speed",
