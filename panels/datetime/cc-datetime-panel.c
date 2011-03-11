@@ -749,13 +749,14 @@ on_permission_changed (GPermission *permission,
 {
   CcDateTimePanelPrivate *priv = CC_DATE_TIME_PANEL (data)->priv;
   gboolean allowed;
-  GtkWidget *vbox;
 
   allowed = g_permission_get_allowed (permission);
 
-  vbox = (GtkWidget*) gtk_builder_get_object (priv->builder, "vbox");
-
-  gtk_widget_set_sensitive (vbox, allowed);
+  /* All the widgets but the lock button and the 24h setting */
+  gtk_widget_set_sensitive (W("map-vbox"), allowed);
+  gtk_widget_set_sensitive (W("hbox2"), allowed);
+  gtk_widget_set_sensitive (W("alignment2"), allowed);
+  gtk_widget_set_sensitive (W("table1"), allowed);
 }
 
 static void
