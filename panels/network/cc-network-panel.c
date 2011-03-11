@@ -791,6 +791,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NMDevice *device)
         GtkListStore *liststore_wireless_network;
         GtkWidget *widget;
         guint i;
+        guint speed;
         NMAccessPoint *ap;
         NMAccessPoint *active_ap;
         NMDeviceState state;
@@ -861,8 +862,11 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NMDevice *device)
         if (type == NM_DEVICE_TYPE_ETHERNET) {
 
                 /* speed */
-                str_tmp = g_strdup_printf ("%d Mb/sec",
-                                           nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (device)));
+                speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (device));
+                if (speed  > 0)
+                        str_tmp = g_strdup_printf ("%d Mb/sec", speed);
+                else
+                        str_tmp = NULL;
                 panel_set_widget_data (panel,
                                        sub_pane,
                                        "speed",
@@ -879,8 +883,12 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NMDevice *device)
         } else if (type == NM_DEVICE_TYPE_WIFI) {
 
                 /* speed */
-                str_tmp = g_strdup_printf ("%d Mb/s",
-                                           nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (device)) / 1000);
+                speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (device));
+                if (speed > 0)
+                        str_tmp = g_strdup_printf ("%d Mb/s",
+                                                   speed / 1000);
+                else
+                        str_tmp = NULL;
                 panel_set_widget_data (panel,
                                        sub_pane,
                                        "speed",
