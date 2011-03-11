@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
 "cgi?product=gnome-control-center&component=general\n"
-"POT-Creation-Date: 2011-03-07 16:19+0000\n"
-"PO-Revision-Date: 2011-03-08 08:40+0530\n"
+"POT-Creation-Date: 2011-03-10 18:31+0000\n"
+"PO-Revision-Date: 2011-03-11 07:29+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
 "MIME-Version: 1.0\n"
@@ -253,29 +253,29 @@ msgstr "ਵਰਟੀਕਲ ਗਰੇਡੀਐਂਟ"
 msgid "Solid Color"
 msgstr "ਗੂੜ੍ਹਾ ਰੰਗ"
 
-#: ../panels/background/cc-background-panel.c:960
+#: ../panels/background/cc-background-panel.c:958
 #: ../panels/user-accounts/um-photo-dialog.c:216
 #: ../panels/user-accounts/data/photo-dialog.ui.h:2
 msgid "Browse for more pictures"
 msgstr "ਹੋਰ ਤਸਵੀਰਾਂ ਵੇਖੋ"
 
-#: ../panels/background/cc-background-panel.c:1051
+#: ../panels/background/cc-background-panel.c:1049
 msgid "Current background"
 msgstr "ਮੌਜੂਦਾ ਬੈਕਗਰਾਊਂਡ"
 
-#: ../panels/background/cc-background-panel.c:1115
+#: ../panels/background/cc-background-panel.c:1113
 msgid "Wallpapers"
 msgstr "ਵਾਲਪੇਪਰ"
 
-#: ../panels/background/cc-background-panel.c:1122
+#: ../panels/background/cc-background-panel.c:1120
 msgid "Pictures Folder"
 msgstr "ਤਸਵੀਰ ਫੋਲਡਰ"
 
-#: ../panels/background/cc-background-panel.c:1129
+#: ../panels/background/cc-background-panel.c:1127
 msgid "Colors & Gradients"
 msgstr "ਰੰਗ ਤੇ ਗਰੇਡੀਐਂਟ"
 
-#: ../panels/background/cc-background-panel.c:1137
+#: ../panels/background/cc-background-panel.c:1135
 msgid "Flickr"
 msgstr "ਫਲਿੱਕਰ"
 
@@ -639,7 +639,6 @@ msgstr "ਸਿਸਟਮ ਜਾਣਕਾਰੀ"
 
 #. Translators: those are keywords for the System Information panel
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
-#| msgid "device;system;information;memory;processor;version;"
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
 "fallback;"
@@ -1359,7 +1358,6 @@ msgstr "ਸਮਾਂ"
 
 #. Translators: Addition of the new printer failed.
 #: ../panels/printers/cc-printers-panel.c:1848
-#| msgid "Failed to create user"
 msgid "Failed to add new printer."
 msgstr "ਨਵਾਂ ਪਰਿੰਟਰ ਜੋੜਨ ਲਈ ਫੇਲ੍ਹ।"
 
@@ -1396,6 +1394,38 @@ msgstr "Printer;Queue;Print;Paper;Ink;Toner;"
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
 msgid "Printers"
 msgstr "ਪਰਿੰਟਰ"
+
+#. Translators: Column of devices which can be installed
+#: ../panels/printers/pp-new-printer-dialog.c:552
+#: ../panels/printers/pp-new-printer-dialog.c:557
+#| msgid "Device"
+msgid "Devices"
+msgstr "ਜੰਤਰ"
+
+#. Translators: Local means local printers
+#: ../panels/printers/pp-new-printer-dialog.c:582
+#| msgid "Lock"
+msgid "Local"
+msgstr "ਲੋਕਲ"
+
+#. Translators: Network means network printers
+#: ../panels/printers/pp-new-printer-dialog.c:584
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+msgid "Network"
+msgstr "ਨੈੱਟਵਰਕ"
+
+#. Translators: Device types column (network or local)
+#: ../panels/printers/pp-new-printer-dialog.c:625
+#| msgid "Device name"
+msgid "Device types"
+msgstr "ਜੰਤਰ ਕਿਸਮ"
+
+#. Translators: Name of job which makes printer to autoconfigure itself
+#: ../panels/printers/pp-new-printer-dialog.c:778
+#: ../panels/printers/pp-new-printer-dialog.c:944
+#| msgid "<b>_Automatic proxy configuration</b>"
+msgid "Automatic configuration"
+msgstr "ਆਟੋਮੈਟਿਕ ਸੰਰਚਨਾ"
 
 #: ../panels/printers/printers.ui.h:1
 msgid "---"
@@ -1693,27 +1723,58 @@ msgstr ""
 "ਡਬਲ;"
 "ਬਟਨ;ਟਰੈਕਬਾਲ;"
 
-#: ../panels/network/cc-network-panel.c:969
+#. TRANSLATORS: this WEP WiFi security
+#: ../panels/network/cc-network-panel.c:721
+msgid "WEP"
+msgstr "WEP"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/cc-network-panel.c:725
+msgid "WPA"
+msgstr "WPA"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/cc-network-panel.c:729
+msgid "WPA2"
+msgstr "WPA2"
+
+#. TRANSLATORS: this Enterprise WiFi security
+#: ../panels/network/cc-network-panel.c:734
+msgid "Enterprise"
+msgstr "ਇੰਟਰਪ੍ਰਾਈਜ਼"
+
+#. TRANSLATORS: this no (!) WiFi security
+#: ../panels/network/cc-network-panel.c:740
+#: ../panels/universal-access/uap.ui.h:43
+msgid "None"
+msgstr "ਕੋਈ ਨਹੀਂ"
+
+#: ../panels/network/cc-network-panel.c:1051
 msgid "Network proxy"
 msgstr "ਨੈੱਟਵਰਕ ਪਰਾਕਸੀ"
 
-#: ../panels/network/cc-network-panel.c:978
+#: ../panels/network/cc-network-panel.c:1060
 msgid "Set the system proxy settings"
 msgstr "ਸਿਸਟਮ ਪਰਾਕਸੀ ਸੈਟਿੰਗ ਸੈੱਟ ਕਰੋ"
 
+#: ../panels/network/cc-network-panel.c:1185
+#, c-format
+msgid "%s VPN"
+msgstr "%s VPN"
+
+#: ../panels/network/cc-network-panel.c:1196
+msgid "Virtual private network"
+msgstr "ਵੁਰਚੁਅਲ ਪ੍ਰਾਈਵੇਟ ਨੈੱਟਵਰਕ"
+
 #. TRANSLATORS: the user is running a NM that is too new and API compatible
-#: ../panels/network/cc-network-panel.c:1122
+#: ../panels/network/cc-network-panel.c:1255
 msgid "The running NetworkManager version is not compatible (too new)."
 msgstr "ਚੱਲ ਰਿਹਾ ਨੈੱਟਵਰਕਮੈਨੇਜਰ ਵਰਜਨ ਅਨੁਕੂਲ ਨਹੀਂ ਹੈ (ਬਹੁਤ ਨਵਾਂ ਹੈ)।"
 
 #. TRANSLATORS: the user is running a NM that is too old and API compatible
-#: ../panels/network/cc-network-panel.c:1128
+#: ../panels/network/cc-network-panel.c:1261
 msgid "The running NetworkManager version is not compatible (too old)."
 msgstr "ਚੱਲ ਰਿਹਾ ਨੈੱਟਵਰਕਮੈਨੇਜਰ ਵਰਜਨ ਅਨੁਕੂਲ ਨਹੀਂ ਹੈ (ਬਹੁਤ ਪੁਰਾਣਾ ਹੈ)।"
-
-#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
-msgid "Network"
-msgstr "ਨੈੱਟਵਰਕ"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Network settings"
@@ -2416,8 +2477,8 @@ msgstr "ਕੱਚ"
 msgid "Sonar"
 msgstr "ਸੋਨਰ"
 
-#: ../panels/universal-access/cc-ua-panel.c:468
-#: ../panels/universal-access/cc-ua-panel.c:473
+#: ../panels/universal-access/cc-ua-panel.c:470
+#: ../panels/universal-access/cc-ua-panel.c:475
 msgid "No shortcut set"
 msgstr "ਸ਼ਾਰਟਕੱਟ ਸੈੱਟ ਨਹੀਂ ਹੈ"
 
@@ -2565,10 +2626,6 @@ msgstr "ਮਾਊਸ ਸੈਟਿੰਗ"
 #: ../panels/universal-access/uap.ui.h:42
 msgid "Nomon"
 msgstr "ਨੋਮੋਨ"
-
-#: ../panels/universal-access/uap.ui.h:43
-msgid "None"
-msgstr "ਕੋਈ ਨਹੀਂ"
 
 #: ../panels/universal-access/uap.ui.h:45
 msgid "On screen keyboard"
@@ -4018,9 +4075,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ(_A)"
 
 #~ msgid "<b>Di_rect internet connection</b>"
 #~ msgstr "<b>ਸਿੱਧਾ ਇੰਟਰਨੈੱਟ ਕੁਨੈਕਸ਼ਨ(_R)</b>"
-
-#~ msgid "<b>_Automatic proxy configuration</b>"
-#~ msgstr "<b>ਆਟੋਮੈਟਿਕ ਪਰਾਕਸੀ ਸੰਰਚਨਾ(_A)</b>"
 
 #~ msgid "<b>_Manual proxy configuration</b>"
 #~ msgstr "<b>ਦਸਤੀ ਪਰਾਕਸੀ ਸੰਰਚਨਾ(_M)</b>"
