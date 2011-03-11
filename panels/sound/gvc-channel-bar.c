@@ -449,7 +449,7 @@ gvc_channel_bar_scroll (GvcChannelBar *bar, GdkScrollDirection direction)
                 /* Switch side scroll to vertical */
                 if (direction == GDK_SCROLL_RIGHT)
                         direction = GDK_SCROLL_UP;
-                else if (GDK_SCROLL_LEFT)
+                else if (direction == GDK_SCROLL_LEFT)
                         direction = GDK_SCROLL_DOWN;
         }
 
