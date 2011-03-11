@@ -330,14 +330,18 @@ set_idle_delay_from_dpms (CcScreenPanel *self,
     off_delay = (guint) value;
 
   g_settings_get (self->priv->lock_settings, "lock-delay", "u", &lock_delay);
-  /* convert to seconds */
-  lock_delay *= 60;
 
-  lock_delay = lock_delay_to_absolute (self, lock_delay);
-
-  idle_delay = off_delay;
   if (lock_delay > 0)
-    idle_delay = MIN (lock_delay, off_delay);
+    {
+      /* convert to seconds */
+      lock_delay *= 60;
+
+      lock_delay = lock_delay_to_absolute (self, lock_delay);
+
+      idle_delay = MIN (lock_delay, off_delay);
+    }
+  else
+    idle_delay = off_delay;
 
   idle_delay /= 60;
 
