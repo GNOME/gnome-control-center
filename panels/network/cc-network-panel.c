@@ -372,6 +372,20 @@ out:
 }
 
 static void
+device_state_notify_changed_cb (NMDevice *device,
+                                GParamSpec *pspec,
+                                gpointer user_data)
+{
+        CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
+
+        /* only refresh the selected device */
+        if (g_strcmp0 (panel->priv->current_device,
+                       nm_device_get_udi (device)) == 0) {
+                nm_device_refresh_device_ui (panel, device);
+        }
+}
+
+static void
 panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 {
         GtkListStore *liststore_devices;
@@ -387,6 +401,8 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 
         g_ptr_array_add (panel->priv->devices,
                          g_object_ref (device));
+        g_signal_connect (G_OBJECT (device), "notify::state",
+                          (GCallback) device_state_notify_changed_cb, panel);
 
         /* do we have to get additonal data from ModemManager */
         type = nm_device_get_device_type (device);
@@ -583,6 +599,7 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
         }
 }
 
+#if 0
 static gchar *
 ip4_address_as_string (guint32 ip)
 {
@@ -655,6 +672,7 @@ panel_show_ip4_config (NMIP4Config *cfg)
                 }
         }
 }
+#endif
 
 static GPtrArray *
 panel_get_strongest_unique_aps (const GPtrArray *aps)
@@ -855,9 +873,11 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NMDevice *device)
         if (sub_pane == NULL)
                 goto out;
 
+#if 0
         /* FIXME? should we need to do something with this? */
         if (state == NM_DEVICE_STATE_ACTIVATED)
                 panel_show_ip4_config (nm_device_get_ip4_config (device));
+#endif
 
         if (type == NM_DEVICE_TYPE_ETHERNET) {
 
@@ -1220,26 +1240,10 @@ active_connections_changed (NMClient *client, GParamSpec *pspec, gpointer user_d
 }
 
 static void
-device_state_notify_changed_cb (NMDevice *device,
-                                GParamSpec *pspec,
-                                gpointer user_data)
-{
-        CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
-
-        /* only refresh the selected device */
-        if (g_strcmp0 (panel->priv->current_device,
-                       nm_device_get_udi (device)) == 0) {
-                nm_device_refresh_device_ui (panel, device);
-        }
-}
-
-static void
 device_added_cb (NMClient *client, NMDevice *device, CcNetworkPanel *panel)
 {
         g_debug ("New device added");
         panel_add_device (panel, device);
-        g_signal_connect (G_OBJECT (device), "notify::state",
-                          (GCallback) device_state_notify_changed_cb, NULL);
 }
 
 static void

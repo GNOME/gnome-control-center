@@ -35,10 +35,24 @@ struct _NetDevicePrivate
 
 G_DEFINE_TYPE (NetDevice, net_device, NET_TYPE_OBJECT)
 
+static void
+state_changed_cb (NMDevice *device,
+                  NMDeviceState new_state,
+                  NMDeviceState old_state,
+                  NMDeviceStateReason reason,
+                  NetDevice *net_device)
+{
+        net_object_emit_changed (NET_OBJECT (net_device));
+}
+
 void
 net_device_set_nm_device (NetDevice *device, NMDevice *nm_device)
 {
         device->priv->nm_device = g_object_ref (nm_device);
+        g_signal_connect (nm_device,
+                          "state-changed",
+                          G_CALLBACK (state_changed_cb),
+                          device);
 }
 
 NMDevice *
