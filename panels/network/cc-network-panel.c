@@ -517,6 +517,8 @@ panel_set_widget_data (CcNetworkPanel *panel,
         /* hide the parent bix if there is no value */
         hbox_id = g_strdup_printf ("hbox_%s_%s", sub_pane, widget_suffix);
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, hbox_id));
+        if (widget == NULL)
+                goto out;
         if (value == NULL) {
                 gtk_widget_hide (widget);
                 goto out;
@@ -968,6 +970,32 @@ nm_device_refresh_item_ui (CcNetworkPanel *panel, NMDevice *device)
                                                "subnet",
                                                nm_dhcp4_config_get_one_option (config_dhcp4,
                                                                                "subnet_mask"));
+                }
+        } else {
+                /* IPv4 address */
+                panel_set_widget_data (panel,
+                                       sub_pane,
+                                       "ip4",
+                                       NULL);
+
+                /* IPv4 DNS */
+                panel_set_widget_data (panel,
+                                       sub_pane,
+                                       "dns",
+                                       NULL);
+
+                /* IPv4 route */
+                panel_set_widget_data (panel,
+                                       sub_pane,
+                                       "route",
+                                       NULL);
+
+                /* IPv4 netmask */
+                if (type == NM_DEVICE_TYPE_ETHERNET) {
+                        panel_set_widget_data (panel,
+                                               sub_pane,
+                                               "subnet",
+                                               NULL);
                 }
         }
 
