@@ -827,8 +827,13 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NMDevice *device)
         state = nm_device_get_state (device);
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "label_status"));
-        gtk_label_set_label (GTK_LABEL (widget),
-                             panel_device_state_to_localized_string (state));
+        str = panel_device_state_to_localized_string (state);
+        if (nm_device_get_device_type (device) == NM_DEVICE_TYPE_ETHERNET &&
+            state == NM_DEVICE_STATE_DISCONNECTED) {
+                /* TRANSLATORS: this is a wired connection that is disconnected */
+                str = _("Unplugged");
+        }
+        gtk_label_set_label (GTK_LABEL (widget), str);
 
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "notebook_types"));
