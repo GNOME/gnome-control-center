@@ -35,10 +35,17 @@ const gchar *
 panel_device_to_icon_name (NMDevice *device)
 {
         const gchar *value = NULL;
+        NMDeviceState state;
         NMDeviceModemCapabilities caps;
         switch (nm_device_get_device_type (device)) {
         case NM_DEVICE_TYPE_ETHERNET:
-                value = "network-wired";
+                state = nm_device_get_state (device);
+                if (state == NM_DEVICE_STATE_DISCONNECTED) {
+                        /* TODO: we really want network-wired-disconnected */
+                        value = "network-offline";
+                } else {
+                        value = "network-wired";
+                }
                 break;
         case NM_DEVICE_TYPE_WIFI:
         case NM_DEVICE_TYPE_BT:
