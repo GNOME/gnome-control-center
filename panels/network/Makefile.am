@@ -16,6 +16,12 @@ libnetwork_la_SOURCES =					\
 	network-module.c				\
 	panel-common.c					\
 	panel-common.h					\
+	net-object.c					\
+	net-object.h					\
+	net-device.c					\
+	net-device.h					\
+	net-vpn.c					\
+	net-vpn.h					\
 	panel-cell-renderer-mode.c			\
 	panel-cell-renderer-mode.h			\
 	panel-cell-renderer-signal.c			\

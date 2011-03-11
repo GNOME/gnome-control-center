@@ -39,6 +39,10 @@
 #include "nm-setting-connection.h"
 #include "nm-setting-vpn.h"
 
+#include "net-object.h"
+#include "net-device.h"
+#include "net-vpn.h"
+
 #include "panel-common.h"
 #include "panel-cell-renderer-mode.h"
 #include "panel-cell-renderer-signal.h"
@@ -64,7 +68,7 @@ enum {
         PANEL_DEVICES_COLUMN_ID,
         PANEL_DEVICES_COLUMN_SORT,
         PANEL_DEVICES_COLUMN_TOOLTIP,
-        PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, /* needs to be a custom object */
+        PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE,
         PANEL_DEVICES_COLUMN_LAST
 };
 
@@ -77,7 +81,7 @@ enum {
         PANEL_WIRELESS_COLUMN_LAST
 };
 
-static void     nm_device_refresh_item_ui               (CcNetworkPanel *panel, NMDevice *device);
+static void     nm_device_refresh_device_ui               (CcNetworkPanel *panel, NMDevice *device);
 
 static void
 cc_network_panel_get_property (GObject    *object,
@@ -374,6 +378,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         GtkTreeIter iter;
         gchar *title = NULL;
         NMDeviceType type;
+        NetDevice *net_device;
         CcNetworkPanelPrivate *priv = panel->priv;
 
         g_debug ("device %s type %i",
@@ -412,6 +417,8 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                             "liststore_devices"));
+        net_device = net_device_new ();
+        net_device_set_nm_device (net_device, device);
         gtk_list_store_append (liststore_devices, &iter);
         gtk_list_store_set (liststore_devices,
                             &iter,
@@ -420,7 +427,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                             PANEL_DEVICES_COLUMN_TITLE, title,
                             PANEL_DEVICES_COLUMN_ID, nm_device_get_udi (device),
                             PANEL_DEVICES_COLUMN_TOOLTIP, NULL,
-                            PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, device,
+                            PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, net_device,
                             -1);
         g_free (title);
 }
@@ -517,8 +524,10 @@ panel_set_widget_data (CcNetworkPanel *panel,
         /* hide the parent bix if there is no value */
         hbox_id = g_strdup_printf ("hbox_%s_%s", sub_pane, widget_suffix);
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, hbox_id));
-        if (widget == NULL)
+        if (widget == NULL) {
+                g_warning ("no %s widget", hbox_id);
                 goto out;
+        }
         if (value == NULL) {
                 gtk_widget_hide (widget);
                 goto out;
@@ -770,7 +779,7 @@ out:
 }
 
 static void
-nm_device_refresh_item_ui (CcNetworkPanel *panel, NMDevice *device)
+nm_device_refresh_device_ui (CcNetworkPanel *panel, NMDevice *device)
 {
         CcNetworkPanelPrivate *priv = panel->priv;
         const gchar *str;
@@ -1022,12 +1031,55 @@ out:
 }
 
 static void
+nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
+{
+        GtkWidget *widget;
+        const gchar *sub_pane = "vpn";
+        CcNetworkPanelPrivate *priv = panel->priv;
+
+        /* Hide the header: TODO: confirm with designers */
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                     "hbox_device_header"));
+        gtk_widget_set_visible (widget, FALSE);
+
+        /* use proxy note page */
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                     "notebook_types"));
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 3);
+
+        /* gateway */
+        panel_set_widget_data (panel,
+                               sub_pane,
+                               "gateway",
+                                net_vpn_get_gateway (vpn));
+
+        /* groupname */
+        panel_set_widget_data (panel,
+                               sub_pane,
+                               "groupname",
+                                net_vpn_get_id (vpn));
+
+        /* username */
+        panel_set_widget_data (panel,
+                               sub_pane,
+                               "username",
+                                net_vpn_get_username (vpn));
+
+        /* password */
+        panel_set_widget_data (panel,
+                               sub_pane,
+                               "group_password",
+                                net_vpn_get_password (vpn));
+}
+
+static void
 nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *panel)
 {
         GtkTreeIter iter;
         GtkTreeModel *model;
         GtkWidget *widget;
         NMDevice *device;
+        NetObject *object;
         CcNetworkPanelPrivate *priv = panel->priv;
 
         /* will only work in single or browse selection mode! */
@@ -1038,11 +1090,11 @@ nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *pan
 
         /* get id */
         gtk_tree_model_get (model, &iter,
-                            PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, &device,
+                            PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, &object,
                             -1);
 
         /* this is the proxy settings device */
-        if (device == NULL) {
+        if (object == NULL) {
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                              "hbox_device_header"));
                 gtk_widget_set_visible (widget, FALSE);
@@ -1056,12 +1108,22 @@ nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *pan
                 goto out;
         }
 
+        /* VPN */
+        if (NET_IS_VPN (object)) {
+                nm_device_refresh_vpn_ui (panel, NET_VPN (object));
+                /* save so we ignore */
+                g_free (priv->current_device);
+                priv->current_device = NULL;
+                goto out;
+        }
+
         /* save so we can update */
         g_free (priv->current_device);
+        device = net_device_get_nm_device (NET_DEVICE (object));
         priv->current_device = g_strdup (nm_device_get_udi (device));
 
         /* refresh device */
-        nm_device_refresh_item_ui (panel, device);
+        nm_device_refresh_device_ui (panel, device);
 out:
         return;
 }
@@ -1135,7 +1197,7 @@ device_state_notify_changed_cb (NMDevice *device,
         /* only refresh the selected device */
         if (g_strcmp0 (panel->priv->current_device,
                        nm_device_get_udi (device)) == 0) {
-                nm_device_refresh_item_ui (panel, device);
+                nm_device_refresh_device_ui (panel, device);
         }
 }
 
@@ -1191,23 +1253,11 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         gchar *title_markup;
         GtkListStore *liststore_devices;
         GtkTreeIter iter;
-        NMSettingVPN *setting;
+        NetVpn *net_vpn;
 
-        /*
-         * key=IKE DH Group, value=dh2
-         * key=xauth-password-type, value=ask
-         * key=ipsec-secret-type, value=save
-         * key=IPSec gateway, value=66.187.233.252
-         * key=NAT Traversal Mode, value=natt
-         * key=IPSec ID, value=rh-vpn
-         * key=Xauth username, value=rhughes
-         */
-
-        setting = NM_SETTING_VPN (nm_connection_get_setting_by_name (connection, "vpn"));
-
-        /* TODO: add as a virtual object */
-        nm_setting_vpn_get_data_item (setting, "IPSec gateway");
-
+        /* add as a virtual object */
+        net_vpn = net_vpn_new ();
+        net_vpn_set_connection (net_vpn, connection);
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
                                             "liststore_devices"));
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (connection));
@@ -1222,7 +1272,7 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
                             PANEL_DEVICES_COLUMN_ID, NULL,
                             PANEL_DEVICES_COLUMN_SORT, "5",
                             PANEL_DEVICES_COLUMN_TOOLTIP, _("Virtual private network"),
-                            PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, NULL,
+                            PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, net_vpn,
                             -1);
         g_free (title);
         g_free (title_markup);
