@@ -339,18 +339,6 @@ change_date (CcDateTimePanel *self)
 }
 
 static void
-location_changed_cb (CcTimezoneMap   *map,
-                     TzLocation      *location,
-                     CcDateTimePanel *self)
-{
-  g_debug ("location changed");
-
-  self->priv->current_location = location;
-
-  queue_set_timezone (self);
-}
-
-static void
 region_changed_cb (GtkComboBox     *box,
                    CcDateTimePanel *self)
 {
@@ -452,6 +440,33 @@ update_timezone (CcDateTimePanel *self)
   while (gtk_tree_model_iter_next (model, &iter));
 
   g_strfreev (split);
+}
+
+static void
+location_changed_cb (CcTimezoneMap   *map,
+                     TzLocation      *location,
+                     CcDateTimePanel *self)
+{
+  CcDateTimePanelPrivate *priv = self->priv;
+  GtkWidget *region_combo, *city_combo;
+
+  g_debug ("location changed to %s/%s", location->country, location->zone);
+
+  self->priv->current_location = location;
+
+  /* Update the combo boxes */
+  region_combo = W("region_combobox");
+  city_combo = W("city_combobox");
+
+  g_signal_handlers_block_by_func (region_combo, region_changed_cb, self);
+  g_signal_handlers_block_by_func (city_combo, city_changed_cb, self);
+
+  update_timezone (self);
+
+  g_signal_handlers_unblock_by_func (region_combo, region_changed_cb, self);
+  g_signal_handlers_unblock_by_func (city_combo, city_changed_cb, self);
+
+  queue_set_timezone (self);
 }
 
 static void
