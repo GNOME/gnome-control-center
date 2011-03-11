@@ -40,9 +40,8 @@ panel_device_to_icon_name (NMDevice *device)
         switch (nm_device_get_device_type (device)) {
         case NM_DEVICE_TYPE_ETHERNET:
                 state = nm_device_get_state (device);
-                if (state == NM_DEVICE_STATE_DISCONNECTED) {
-                        /* TODO: we really want network-wired-disconnected */
-                        value = "network-offline";
+                if (state == NM_DEVICE_STATE_UNAVAILABLE) {
+                        value = "network-wired-disconnected";
                 } else {
                         value = "network-wired";
                 }

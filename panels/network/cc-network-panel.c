@@ -830,7 +830,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NMDevice *device)
                                                      "label_status"));
         str = panel_device_state_to_localized_string (state);
         if (nm_device_get_device_type (device) == NM_DEVICE_TYPE_ETHERNET &&
-            state == NM_DEVICE_STATE_DISCONNECTED) {
+            (state == NM_DEVICE_STATE_UNAVAILABLE)) {
                 /* TRANSLATORS: this is a wired connection that is disconnected */
                 str = _("Unplugged");
         }
