@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-09 00:41+0200\n"
-"PO-Revision-Date: 2011-03-09 00:41+0300\n"
+"POT-Creation-Date: 2011-03-11 15:07+0200\n"
+"PO-Revision-Date: 2011-03-11 15:07+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -250,29 +250,29 @@ msgstr "تدرج رأسي"
 msgid "Solid Color"
 msgstr "لون سادة"
 
-#: ../panels/background/cc-background-panel.c:960
+#: ../panels/background/cc-background-panel.c:958
 #: ../panels/user-accounts/um-photo-dialog.c:216
 #: ../panels/user-accounts/data/photo-dialog.ui.h:2
 msgid "Browse for more pictures"
 msgstr "تصفّح لمزيد من الصور"
 
-#: ../panels/background/cc-background-panel.c:1051
+#: ../panels/background/cc-background-panel.c:1049
 msgid "Current background"
 msgstr "الخلفية الحالية"
 
-#: ../panels/background/cc-background-panel.c:1115
+#: ../panels/background/cc-background-panel.c:1113
 msgid "Wallpapers"
 msgstr "خلفيات"
 
-#: ../panels/background/cc-background-panel.c:1122
+#: ../panels/background/cc-background-panel.c:1120
 msgid "Pictures Folder"
 msgstr "مجلّد صور"
 
-#: ../panels/background/cc-background-panel.c:1129
+#: ../panels/background/cc-background-panel.c:1127
 msgid "Colors & Gradients"
 msgstr "ألوان وتدرجات"
 
-#: ../panels/background/cc-background-panel.c:1137
+#: ../panels/background/cc-background-panel.c:1135
 msgid "Flickr"
 msgstr "فلِكَر"
 
@@ -1716,21 +1716,56 @@ msgstr "اضبط تفضيلات الفأرة ولوحة اللمس"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "فأرة;مؤشر;نقر;مزدوج;زر;لمس;"
 
-#: ../panels/network/cc-network-panel.c:969
+#. TRANSLATORS: this WEP WiFi security
+#: ../panels/network/cc-network-panel.c:732
+msgid "WEP"
+msgstr ""
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/cc-network-panel.c:736
+msgid "WPA"
+msgstr ""
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/cc-network-panel.c:740
+msgid "WPA2"
+msgstr ""
+
+#. TRANSLATORS: this Enterprise WiFi security
+#: ../panels/network/cc-network-panel.c:745
+msgid "Enterprise"
+msgstr ""
+
+#. TRANSLATORS: this no (!) WiFi security
+#: ../panels/network/cc-network-panel.c:751 ../panels/network/network.ui.h:19
+#: ../panels/universal-access/uap.ui.h:52
+msgid "None"
+msgstr "لا شيء"
+
+#: ../panels/network/cc-network-panel.c:1160
 msgid "Network proxy"
 msgstr "وسيط الشبكة"
 
-#: ../panels/network/cc-network-panel.c:978
+#: ../panels/network/cc-network-panel.c:1169
 msgid "Set the system proxy settings"
 msgstr "اضبط إعدادات وسيط الشبكة"
 
+#: ../panels/network/cc-network-panel.c:1282
+#, c-format
+msgid "%s VPN"
+msgstr "ش‌خ‌ف %s"
+
+#: ../panels/network/cc-network-panel.c:1294
+msgid "Virtual private network"
+msgstr "شبكة خاصة افتراضية"
+
 #. TRANSLATORS: the user is running a NM that is too new and API compatible
-#: ../panels/network/cc-network-panel.c:1122
+#: ../panels/network/cc-network-panel.c:1353
 msgid "The running NetworkManager version is not compatible (too new)."
 msgstr "نسخة NetworkManager التي تعمل غير متوافقة (حديثة جدا)"
 
 #. TRANSLATORS: the user is running a NM that is too old and API compatible
-#: ../panels/network/cc-network-panel.c:1128
+#: ../panels/network/cc-network-panel.c:1359
 msgid "The running NetworkManager version is not compatible (too old)."
 msgstr "نسخة NetworkManager التي تعمل غير متوافقة (قديمة جدا)"
 
@@ -1815,10 +1850,6 @@ msgstr "الطريقة:"
 msgid "Network Name:"
 msgstr "اسم الشبكة:"
 
-#: ../panels/network/network.ui.h:19 ../panels/universal-access/uap.ui.h:52
-msgid "None"
-msgstr "لا شيء"
-
 #: ../panels/network/network.ui.h:20
 msgid "Provider:"
 msgstr "مقدم الخدمة:"
@@ -1883,7 +1914,8 @@ msgid "Infrastructure"
 msgstr "مركزية"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:177
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:177 ../panels/network/panel-common.c:241
 msgid "Status unknown"
 msgstr "الحالة غير معروفة"
 
@@ -1898,7 +1930,8 @@ msgid "Unavailable"
 msgstr "غير متاح"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:189
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:189 ../panels/network/panel-common.c:269
 msgid "Disconnected"
 msgstr "غير متّصل"
 
@@ -1913,12 +1946,14 @@ msgid "Configuring connection"
 msgstr "يضبط الاتصال"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:201
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:201 ../panels/network/panel-common.c:249
 msgid "Authenticating"
 msgstr "يستوثق"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:205
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:205 ../panels/network/panel-common.c:257
 msgid "Getting network address"
 msgstr "يجلب عنوان الشبكة"
 
@@ -1943,9 +1978,30 @@ msgid "Failed to connect"
 msgstr "فشل في الاتصال"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:225
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:225 ../panels/network/panel-common.c:273
 msgid "Status unknown (missing)"
 msgstr "الحالة غير معروفة"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:245
+msgid "Preparing"
+msgstr "يُجهّز"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:253
+msgid "Connecting"
+msgstr "يتّصل"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:261
+msgid "Active"
+msgstr "نشِط"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:265
+msgid "Failed"
+msgstr "فشِل"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -3497,9 +3553,6 @@ msgstr "_كل الإعدادات"
 #~ msgctxt "printer state"
 #~ msgid "Idle"
 #~ msgstr "ساكنة"
-
-#~ msgid "0 active"
-#~ msgstr "لا مهام نشطة"
 
 #~ msgid "New windows u_se active window's layout"
 #~ msgstr "النوافذ الجديدة تستخدم _تخطيط النافذة النشطة"
