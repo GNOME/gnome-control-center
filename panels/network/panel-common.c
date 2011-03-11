@@ -227,3 +227,51 @@ panel_device_state_to_localized_string (NMDeviceState type)
         }
         return value;
 }
+
+/**
+ * panel_vpn_state_to_localized_string:
+ **/
+const gchar *
+panel_vpn_state_to_localized_string (NMVPNConnectionState type)
+{
+        const gchar *value = NULL;
+        switch (type) {
+        case NM_DEVICE_STATE_UNKNOWN:
+                /* TRANSLATORS: VPN status */
+                value = _("Status unknown");
+                break;
+        case NM_VPN_CONNECTION_STATE_PREPARE:
+                /* TRANSLATORS: VPN status */
+                value = _("Preparing");
+                break;
+        case NM_VPN_CONNECTION_STATE_NEED_AUTH:
+                /* TRANSLATORS: VPN status */
+                value = _("Authenticating");
+                break;
+        case NM_VPN_CONNECTION_STATE_CONNECT:
+                /* TRANSLATORS: VPN status */
+                value = _("Connecting");
+                break;
+        case NM_VPN_CONNECTION_STATE_IP_CONFIG_GET:
+                /* TRANSLATORS: VPN status */
+                value = _("Getting network address");
+                break;
+        case NM_VPN_CONNECTION_STATE_ACTIVATED:
+                /* TRANSLATORS: VPN status */
+                value = _("Active");
+                break;
+        case NM_VPN_CONNECTION_STATE_FAILED:
+                /* TRANSLATORS: VPN status */
+                value = _("Failed");
+                break;
+        case NM_VPN_CONNECTION_STATE_DISCONNECTED:
+                /* TRANSLATORS: VPN status */
+                value = _("Disconnected");
+                break;
+        default:
+                /* TRANSLATORS: VPN status */
+                value = _("Status unknown (missing)");
+                break;
+        }
+        return value;
+}

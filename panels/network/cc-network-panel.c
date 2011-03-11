@@ -1035,17 +1035,36 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
 {
         GtkWidget *widget;
         const gchar *sub_pane = "vpn";
+        const gchar *status;
         CcNetworkPanelPrivate *priv = panel->priv;
 
-        /* Hide the header: TODO: confirm with designers */
+        /* show the header */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "hbox_device_header"));
-        gtk_widget_set_visible (widget, FALSE);
+        gtk_widget_set_visible (widget, TRUE);
 
         /* use proxy note page */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "notebook_types"));
         gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 3);
+
+        /* set VPN icon */
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                     "image_device"));
+        gtk_image_set_from_icon_name (GTK_IMAGE (widget),
+                                      "network-workgroup",
+                                      GTK_ICON_SIZE_DIALOG);
+
+        /* use title */
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                     "label_device"));
+        gtk_label_set_label (GTK_LABEL (widget), net_object_get_title (NET_OBJECT (vpn)));
+
+        /* use status */
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                     "label_status"));
+        status = panel_vpn_state_to_localized_string (net_vpn_get_state (vpn));
+        gtk_label_set_label (GTK_LABEL (widget), status);
 
         /* gateway */
         panel_set_widget_data (panel,
@@ -1264,6 +1283,7 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         title_markup = g_strdup_printf ("<span size=\"large\">%s</span>",
                                         title);
 
+        net_object_set_title (NET_OBJECT (net_vpn), title);
         gtk_list_store_append (liststore_devices, &iter);
         gtk_list_store_set (liststore_devices,
                             &iter,

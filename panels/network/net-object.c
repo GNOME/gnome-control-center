@@ -30,7 +30,7 @@
 
 struct _NetObjectPrivate
 {
-        guint                            dummy;
+        gchar                           *title;
 };
 
 enum {
@@ -49,13 +49,28 @@ net_object_emit_changed (NetObject *object)
         g_signal_emit (object, signals[SIGNAL_CHANGED], 0);
 }
 
+const gchar *
+net_object_get_title (NetObject *object)
+{
+        NetObjectPrivate *priv = object->priv;
+        return priv->title;
+}
+
+void
+net_object_set_title (NetObject *object, const gchar *title)
+{
+        NetObjectPrivate *priv = object->priv;
+        priv->title = g_strdup (title);
+}
+
 static void
 net_object_finalize (GObject *object)
 {
-#if 0
-        NetObject *object = NET_OBJECT (object);
-        NetObjectPrivate *priv = object->priv;
-#endif
+        NetObject *nm_object = NET_OBJECT (object);
+        NetObjectPrivate *priv = nm_object->priv;
+
+        g_free (priv->title);
+
         G_OBJECT_CLASS (net_object_parent_class)->finalize (object);
 }
 

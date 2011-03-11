@@ -24,8 +24,10 @@
 
 #include <glib-object.h>
 
+#include "NetworkManagerVPN.h"
 #include "net-object.h"
 #include "nm-connection.h"
+#include "nm-vpn-connection.h"
 
 G_BEGIN_DECLS
 
@@ -59,6 +61,7 @@ const gchar     *net_vpn_get_gateway            (NetVpn         *vpn);
 const gchar     *net_vpn_get_id                 (NetVpn         *vpn);
 const gchar     *net_vpn_get_username           (NetVpn         *vpn);
 const gchar     *net_vpn_get_password           (NetVpn         *vpn);
+NMVPNConnectionState net_vpn_get_state          (NetVpn         *vpn);
 
 G_END_DECLS
 

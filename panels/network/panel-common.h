@@ -24,6 +24,7 @@
 
 #include <glib-object.h>
 #include <NetworkManager.h>
+#include <NetworkManagerVPN.h>
 #include <nm-device.h>
 
 G_BEGIN_DECLS
@@ -33,6 +34,7 @@ const gchar     *panel_device_to_localized_string          (NMDevice *device);
 const gchar     *panel_device_to_sortable_string           (NMDevice *device);
 const gchar     *panel_ap_mode_to_localized_string              (NM80211Mode mode);
 const gchar     *panel_device_state_to_localized_string         (NMDeviceState type);
+const gchar     *panel_vpn_state_to_localized_string         (NMVPNConnectionState type);
 
 G_END_DECLS
 

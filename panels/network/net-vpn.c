@@ -32,9 +32,19 @@
 struct _NetVpnPrivate
 {
         NMSettingVPN            *setting;
+        NMConnection            *connection;
 };
 
 G_DEFINE_TYPE (NetVpn, net_vpn, NET_TYPE_OBJECT)
+
+static void
+connection_state_changed_cb (NMVPNConnection *connection,
+                             NMVPNConnectionState state,
+                             NMVPNConnectionStateReason reason,
+                             NetVpn *vpn)
+{
+        net_object_emit_changed (NET_OBJECT (vpn));
+}
 
 void
 net_vpn_set_connection (NetVpn *vpn, NMConnection *connection)
@@ -49,7 +59,23 @@ net_vpn_set_connection (NetVpn *vpn, NMConnection *connection)
          * key=IPSec ID, value=rh-vpn
          * key=Xauth username, value=rhughes
          */
+        priv->connection = g_object_ref (connection);
+        if (NM_IS_VPN_CONNECTION (priv->connection)) {
+                g_signal_connect (priv->connection,
+                                  NM_VPN_CONNECTION_VPN_STATE,
+                                  G_CALLBACK (connection_state_changed_cb),
+                                  vpn);
+        }
         priv->setting = NM_SETTING_VPN (nm_connection_get_setting_by_name (connection, "vpn"));
+}
+
+NMVPNConnectionState
+net_vpn_get_state (NetVpn *vpn)
+{
+        NetVpnPrivate *priv = vpn->priv;
+        if (!NM_IS_VPN_CONNECTION (priv->connection))
+                return NM_VPN_CONNECTION_STATE_DISCONNECTED;
+        return nm_vpn_connection_get_vpn_state (NM_VPN_CONNECTION (priv->connection));
 }
 
 const gchar *
@@ -86,6 +112,7 @@ net_vpn_finalize (GObject *object)
         NetVpn *vpn = NET_VPN (object);
         NetVpnPrivate *priv = vpn->priv;
 
+        g_object_unref (priv->connection);
         g_object_unref (priv->setting);
 
         G_OBJECT_CLASS (net_vpn_parent_class)->finalize (object);

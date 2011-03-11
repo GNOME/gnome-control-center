@@ -51,6 +51,9 @@ struct _NetObjectClass
 
 GType            net_object_get_type                    (void);
 NetObject       *net_object_new                         (void);
+const gchar     *net_object_get_title                   (NetObject      *object);
+void             net_object_set_title                   (NetObject      *object,
+                                                         const gchar    *title);
 void             net_object_emit_changed                (NetObject      *object);
 
 G_END_DECLS
