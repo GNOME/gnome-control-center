@@ -32,10 +32,11 @@
 #include <canberra-gtk.h>
 
 #include "gvc-channel-bar.h"
+#include "gvc-mixer-control.h"
 
 #define SCALE_SIZE 128
-#define ADJUSTMENT_MAX_NORMAL 65536.0 /* PA_VOLUME_NORM */
-#define ADJUSTMENT_MAX_AMPLIFIED 98304.0 /* 1.5 * ADJUSTMENT_MAX_NORMAL */
+#define ADJUSTMENT_MAX_NORMAL gvc_mixer_control_get_vol_max_norm(NULL)
+#define ADJUSTMENT_MAX_AMPLIFIED gvc_mixer_control_get_vol_max_amplified(NULL)
 #define ADJUSTMENT_MAX (bar->priv->is_amplified ? ADJUSTMENT_MAX_AMPLIFIED : ADJUSTMENT_MAX_NORMAL)
 #define SCROLLSTEP (ADJUSTMENT_MAX / 100.0 * 5.0)
 
