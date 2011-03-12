@@ -1,20 +1,21 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="2.20"/>
-  <!-- interface-naming-policy project-wide -->
-  <object class="GtkListStore" id="liststore_wireless_network">
-    <columns>
-      <!-- column-name id -->
-      <column type="gchararray"/>
-      <!-- column-name title -->
-      <column type="gchararray"/>
-      <!-- column-name sortable -->
-      <column type="gchararray"/>
-      <!-- column-name strength -->
-      <column type="guint"/>
-      <!-- column-name mode -->
-      <column type="guint"/>
-    </columns>
+  <object class="GtkAdjustment" id="adjustment_proxy_port_ftp">
+    <property name="upper">65535</property>
+    <property name="step_increment">1</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_proxy_port_http">
+    <property name="upper">65535</property>
+    <property name="step_increment">1</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_proxy_port_https">
+    <property name="upper">65535</property>
+    <property name="step_increment">1</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_proxy_port_socks">
+    <property name="upper">65535</property>
+    <property name="step_increment">1</property>
   </object>
   <object class="GtkListStore" id="liststore_devices">
     <columns>
@@ -32,33 +33,69 @@
       <column type="gpointer"/>
     </columns>
   </object>
+  <object class="GtkListStore" id="liststore_proxy_method">
+    <columns>
+      <!-- column-name text -->
+      <column type="gchararray"/>
+      <!-- column-name type -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes" context="proxy method">None</col>
+        <col id="1">0</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="proxy method">Manual</col>
+        <col id="1">1</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="proxy method">Automatic</col>
+        <col id="1">2</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="liststore_wireless_network">
+    <columns>
+      <!-- column-name id -->
+      <column type="gchararray"/>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+      <!-- column-name sortable -->
+      <column type="gchararray"/>
+      <!-- column-name strength -->
+      <column type="guint"/>
+      <!-- column-name mode -->
+      <column type="guint"/>
+    </columns>
+  </object>
   <object class="GtkWindow" id="window1">
+    <property name="can_focus">False</property>
     <child>
       <object class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
+        <property name="can_focus">False</property>
         <property name="border_width">10</property>
         <property name="spacing">12</property>
-
         <child>
           <object class="GtkVBox" id="vbox2">
             <property name="visible">True</property>
-            <property name="orientation">vertical</property>
+            <property name="can_focus">False</property>
             <property name="spacing">3</property>
             <child>
               <object class="GtkHBox" id="hbox2">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkVBox" id="vbox10">
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
+                    <property name="can_focus">False</property>
                     <child>
                       <object class="GtkScrolledWindow" id="devices_scrolledwindow">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="hscrollbar_policy">never</property>
-                        <property name="vscrollbar_policy">automatic</property>
                         <property name="shadow_type">in</property>
                         <child>
                           <object class="GtkTreeView" id="treeview_devices">
@@ -69,22 +106,30 @@
                             <property name="search_column">2</property>
                             <property name="show_expanders">False</property>
                             <property name="tooltip_column">4</property>
+                            <child internal-child="selection">
+                              <object class="GtkTreeSelection" id="treeview-selection1"/>
+                            </child>
                           </object>
                         </child>
                       </object>
                       <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
                     <child>
                       <object class="GtkToolbar" id="devices_toolbar">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="show_arrow">False</property>
                         <property name="icon_size">1</property>
                         <child>
                           <object class="GtkToolButton" id="add_toolbutton">
                             <property name="visible">True</property>
-                            <property name="label" translatable="no">add-toolbutton</property>
+                            <property name="can_focus">False</property>
+                            <property name="use_action_appearance">False</property>
+                            <property name="label">add-toolbutton</property>
                             <property name="use_underline">True</property>
                             <property name="icon_name">list-add-symbolic</property>
                           </object>
@@ -96,7 +141,9 @@
                         <child>
                           <object class="GtkToolButton" id="remove_toolbutton">
                             <property name="visible">True</property>
-                            <property name="label" translatable="no">remove-toolbutton</property>
+                            <property name="can_focus">False</property>
+                            <property name="use_action_appearance">False</property>
+                            <property name="label">remove-toolbutton</property>
                             <property name="use_underline">True</property>
                             <property name="icon_name">list-remove-symbolic</property>
                           </object>
@@ -108,43 +155,40 @@
                       </object>
                       <packing>
                         <property name="expand">False</property>
+                        <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkVBox" id="vbox3">
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
+                    <property name="can_focus">False</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkAlignment" id="alignment_header">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="left_padding">21</property>
                         <child>
                           <object class="GtkHBox" id="hbox_device_header">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="spacing">9</property>
                             <child>
                               <object class="GtkHBox" id="hbox3">
                                 <property name="visible">True</property>
-                                <child>
-                                  <object class="GtkLabel" id="label1">
-                                    <property name="visible">True</property>
-                                    <property name="label"> </property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
+                                <property name="can_focus">False</property>
                                 <child>
                                   <object class="GtkImage" id="image_device">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="stock">gtk-preferences</property>
                                     <property name="icon-size">6</property>
                                   </object>
@@ -153,6 +197,18 @@
                                     <property name="fill">False</property>
                                     <property name="pack_type">end</property>
                                     <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="label1">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="label"> </property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
                                   </packing>
                                 </child>
                               </object>
@@ -165,18 +221,20 @@
                             <child>
                               <object class="GtkVBox" id="vbox4">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
+                                <property name="can_focus">False</property>
                                 <property name="spacing">3</property>
                                 <child>
                                   <object class="GtkHBox" id="hbox4">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <child>
                                       <object class="GtkLabel" id="label_device">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">Wired</property>
                                         <attributes>
                                           <attribute name="weight" value="bold"/>
-                                          <attribute name="scale" value="1.200000"/>
+                                          <attribute name="scale" value="1.2"/>
                                         </attributes>
                                       </object>
                                       <packing>
@@ -195,9 +253,11 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox5">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <child>
                                       <object class="GtkLabel" id="label_status">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">Cable unplugged</property>
                                       </object>
                                       <packing>
@@ -215,21 +275,32 @@
                                 </child>
                               </object>
                               <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
                                 <property name="position">1</property>
                               </packing>
                             </child>
                           </object>
                         </child>
                       </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
                     </child>
                     <child>
                       <object class="GtkHBox" id="hbox6">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <child>
                           <object class="GtkLabel" id="label7">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                           </object>
                           <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">0</property>
                           </packing>
                         </child>
@@ -241,19 +312,22 @@
                             <child>
                               <object class="GtkVBox" id="vbox6">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
+                                <property name="can_focus">False</property>
                                 <property name="border_width">12</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkHBox" id="hbox_wired_mac">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox18">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label19">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Hardware Address:</property>
                                           </object>
                                           <packing>
@@ -273,6 +347,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_wired_mac">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">AA:BB:CC:DD:55:66:77:88</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -292,13 +367,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_wired_speed">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox20">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label21">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Speed:</property>
                                           </object>
                                           <packing>
@@ -318,6 +396,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_wired_speed">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">1 Mb/s</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -337,13 +416,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_wired_ip4">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox24">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label25">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">IPv4 Address:</property>
                                           </object>
                                           <packing>
@@ -363,6 +445,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_wired_ip4">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">127.0.0.1</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -382,13 +465,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_wired_ip6">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox924">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label925">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">IPv6 Address:</property>
                                           </object>
                                           <packing>
@@ -408,6 +494,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_wired_ip6">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">::1</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -427,13 +514,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_wired_subnet">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox13">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label2">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Subnet Mask:</property>
                                           </object>
                                           <packing>
@@ -453,6 +543,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_wired_subnet">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">127.0.0.1</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -472,13 +563,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_wired_route">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox19">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label3">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Default Route:</property>
                                           </object>
                                           <packing>
@@ -498,6 +592,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_wired_route">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">127.0.0.1</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -517,15 +612,18 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_wired_dns">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox21">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label4">
                                             <property name="visible">True</property>
-                                            <property name="label" translatable="yes">DNS:</property>
+                                            <property name="can_focus">False</property>
                                             <property name="yalign">0</property>
+                                            <property name="label" translatable="yes">DNS:</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -544,6 +642,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_wired_dns">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">127.0.0.1</property>
                                         <property name="wrap">True</property>
                                         <property name="selectable">True</property>
@@ -561,11 +660,36 @@
                                     <property name="position">6</property>
                                   </packing>
                                 </child>
+                                <child>
+                                  <object class="GtkAlignment" id="alignment1">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="xalign">1</property>
+                                    <property name="yalign">1</property>
+                                    <property name="xscale">0</property>
+                                    <property name="yscale">0</property>
+                                    <child>
+                                      <object class="GtkButton" id="button_wired_options">
+                                        <property name="label" translatable="yes">Options</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">True</property>
+                                        <property name="use_action_appearance">False</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">True</property>
+                                    <property name="fill">True</property>
+                                    <property name="pack_type">end</property>
+                                    <property name="position">7</property>
+                                  </packing>
+                                </child>
                               </object>
                             </child>
                             <child type="tab">
                               <object class="GtkLabel" id="label5">
                                 <property name="visible">True</property>
+                                <property name="can_focus">False</property>
                                 <property name="label">wired</property>
                               </object>
                               <packing>
@@ -575,19 +699,22 @@
                             <child>
                               <object class="GtkVBox" id="vbox5">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
+                                <property name="can_focus">False</property>
                                 <property name="border_width">12</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkHBox" id="hbox_wireless_mac">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox9">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label6">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Hardware Address:</property>
                                           </object>
                                           <packing>
@@ -607,6 +734,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_wireless_mac">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">AA:BB:CC:DD:55:66:77:88</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -626,13 +754,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_wireless_speed">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox10">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label9">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Speed:</property>
                                           </object>
                                           <packing>
@@ -652,6 +783,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_wireless_speed">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">1 Mb/s</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -671,13 +803,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_wireless_security">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox12">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label11">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Security:</property>
                                           </object>
                                           <packing>
@@ -697,6 +832,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_wireless_security">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">WPA</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -716,13 +852,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox15">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox16">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label15">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Network Name:</property>
                                           </object>
                                           <packing>
@@ -742,11 +881,19 @@
                                     <child>
                                       <object class="GtkComboBox" id="combobox_network_name">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="model">liststore_wireless_network</property>
                                         <property name="has_entry">True</property>
                                         <property name="entry_text_column">1</property>
+                                        <child internal-child="entry">
+                                          <object class="GtkEntry" id="comboboxentry-entry2">
+                                            <property name="can_focus">False</property>
+                                          </object>
+                                        </child>
                                       </object>
                                       <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -760,13 +907,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_wireless_ip4">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox14">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label13">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">IPv4 Address:</property>
                                           </object>
                                           <packing>
@@ -786,6 +936,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_wireless_ip4">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">127.0.0.1</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -805,13 +956,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_wireless_ip6">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox914">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label913">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">IPv6 Address:</property>
                                           </object>
                                           <packing>
@@ -831,6 +985,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_wireless_ip6">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">::1</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -850,13 +1005,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_wireless_route">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox23">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label8">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Default Route:</property>
                                           </object>
                                           <packing>
@@ -876,6 +1034,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_wireless_route">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">127.0.0.1</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -895,15 +1054,18 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_wireless_dns">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox25">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label10">
                                             <property name="visible">True</property>
-                                            <property name="label" translatable="yes">DNS:</property>
+                                            <property name="can_focus">False</property>
                                             <property name="yalign">0</property>
+                                            <property name="label" translatable="yes">DNS:</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -922,6 +1084,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_wireless_dns">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">127.0.0.1</property>
                                         <property name="wrap">True</property>
                                         <property name="selectable">True</property>
@@ -939,6 +1102,30 @@
                                     <property name="position">7</property>
                                   </packing>
                                 </child>
+                                <child>
+                                  <object class="GtkAlignment" id="alignment2">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="xalign">1</property>
+                                    <property name="yalign">1</property>
+                                    <property name="xscale">0</property>
+                                    <property name="yscale">0</property>
+                                    <child>
+                                      <object class="GtkButton" id="button_wireless_options">
+                                        <property name="label" translatable="yes">Options</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">True</property>
+                                        <property name="use_action_appearance">False</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">True</property>
+                                    <property name="fill">True</property>
+                                    <property name="pack_type">end</property>
+                                    <property name="position">8</property>
+                                  </packing>
+                                </child>
                               </object>
                               <packing>
                                 <property name="position">1</property>
@@ -947,6 +1134,7 @@
                             <child type="tab">
                               <object class="GtkLabel" id="label16">
                                 <property name="visible">True</property>
+                                <property name="can_focus">False</property>
                                 <property name="label">wireless</property>
                               </object>
                               <packing>
@@ -957,19 +1145,22 @@
                             <child>
                               <object class="GtkVBox" id="vbox7">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
+                                <property name="can_focus">False</property>
                                 <property name="border_width">12</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkHBox" id="hbox_mobilebb_imei">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox22">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label20">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">IMEI:</property>
                                           </object>
                                           <packing>
@@ -989,6 +1180,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_mobilebb_imei">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">1234567890</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -1008,13 +1200,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_mobilebb_speed">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox26">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label23">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Speed:</property>
                                           </object>
                                           <packing>
@@ -1034,6 +1229,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_mobilebb_speed">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">1 Mb/s</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -1053,13 +1249,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_mobilebb_provider">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox28">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label26">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Provider:</property>
                                           </object>
                                           <packing>
@@ -1079,6 +1278,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_mobilebb_provider">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">SuperTel Supremo</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -1098,13 +1298,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_mobilebb_ip4">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox30">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label28">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">IP Address:</property>
                                           </object>
                                           <packing>
@@ -1124,6 +1327,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_mobilebb_ip4">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">127.0.0.1</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -1140,6 +1344,30 @@
                                     <property name="position">3</property>
                                   </packing>
                                 </child>
+                                <child>
+                                  <object class="GtkAlignment" id="alignment3">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="xalign">1</property>
+                                    <property name="yalign">1</property>
+                                    <property name="xscale">0</property>
+                                    <property name="yscale">0</property>
+                                    <child>
+                                      <object class="GtkButton" id="button_mobile_options">
+                                        <property name="label" translatable="yes">Options</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">True</property>
+                                        <property name="use_action_appearance">False</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">True</property>
+                                    <property name="fill">True</property>
+                                    <property name="pack_type">end</property>
+                                    <property name="position">4</property>
+                                  </packing>
+                                </child>
                               </object>
                               <packing>
                                 <property name="position">2</property>
@@ -1148,6 +1376,7 @@
                             <child type="tab">
                               <object class="GtkLabel" id="label17">
                                 <property name="visible">True</property>
+                                <property name="can_focus">False</property>
                                 <property name="label">mobilebb</property>
                               </object>
                               <packing>
@@ -1158,19 +1387,22 @@
                             <child>
                               <object class="GtkVBox" id="vbox9">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
+                                <property name="can_focus">False</property>
                                 <property name="border_width">12</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkHBox" id="hbox_vpn_gateway">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox39">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label38">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Gateway:</property>
                                           </object>
                                           <packing>
@@ -1190,6 +1422,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_vpn_gateway">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">AA:BB:CC:DD:55:66:77:88</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -1209,13 +1442,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_vpn_groupname">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox41">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label40">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Group Name:</property>
                                           </object>
                                           <packing>
@@ -1235,6 +1471,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_vpn_groupname">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">SEKRIT</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -1254,13 +1491,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_vpn_group_password">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox43">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label42">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Group Password:</property>
                                           </object>
                                           <packing>
@@ -1280,6 +1520,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_vpn_group_password">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">***********</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -1299,13 +1540,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_vpn_username">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox45">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label44">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Username:</property>
                                           </object>
                                           <packing>
@@ -1325,6 +1569,7 @@
                                     <child>
                                       <object class="GtkLabel" id="label_vpn_username">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="label">smithy</property>
                                         <property name="selectable">True</property>
                                       </object>
@@ -1341,6 +1586,30 @@
                                     <property name="position">3</property>
                                   </packing>
                                 </child>
+                                <child>
+                                  <object class="GtkAlignment" id="alignment4">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="xalign">1</property>
+                                    <property name="yalign">1</property>
+                                    <property name="xscale">0</property>
+                                    <property name="yscale">0</property>
+                                    <child>
+                                      <object class="GtkButton" id="button_vpn_options">
+                                        <property name="label" translatable="yes">Options</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="receives_default">True</property>
+                                        <property name="use_action_appearance">False</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">True</property>
+                                    <property name="fill">True</property>
+                                    <property name="pack_type">end</property>
+                                    <property name="position">4</property>
+                                  </packing>
+                                </child>
                               </object>
                               <packing>
                                 <property name="position">2</property>
@@ -1349,6 +1618,7 @@
                             <child type="tab">
                               <object class="GtkLabel" id="label55">
                                 <property name="visible">True</property>
+                                <property name="can_focus">False</property>
                                 <property name="label">vpn</property>
                               </object>
                               <packing>
@@ -1359,19 +1629,22 @@
                             <child>
                               <object class="GtkVBox" id="vbox8">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
+                                <property name="can_focus">False</property>
                                 <property name="border_width">12</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkHBox" id="hbox1">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox31">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label18">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Method:</property>
                                           </object>
                                           <packing>
@@ -1391,9 +1664,11 @@
                                     <child>
                                       <object class="GtkComboBoxText" id="combobox_proxy_mode">
                                         <property name="visible">True</property>
-                                        <property name="model">liststore_proxy_method</property>
+                                        <property name="can_focus">False</property>
                                       </object>
                                       <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -1407,13 +1682,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_proxy_url">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox33">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label31">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Configuration URL:</property>
                                           </object>
                                           <packing>
@@ -1437,6 +1715,8 @@
                                         <property name="invisible_char">●</property>
                                       </object>
                                       <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
@@ -1450,13 +1730,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_proxy_http">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox35">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label33">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">HTTP Proxy:</property>
                                           </object>
                                           <packing>
@@ -1493,6 +1776,8 @@
                                         <property name="adjustment">adjustment_proxy_port_http</property>
                                       </object>
                                       <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
                                         <property name="position">2</property>
                                       </packing>
                                     </child>
@@ -1506,13 +1791,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_proxy_shttp">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox37">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label35">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Secure HTTP Proxy:</property>
                                           </object>
                                           <packing>
@@ -1549,6 +1837,8 @@
                                         <property name="adjustment">adjustment_proxy_port_https</property>
                                       </object>
                                       <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
                                         <property name="position">2</property>
                                       </packing>
                                     </child>
@@ -1562,13 +1852,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_proxy_ftp">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox47">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label30">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">FTP Proxy:</property>
                                           </object>
                                           <packing>
@@ -1605,6 +1898,8 @@
                                         <property name="adjustment">adjustment_proxy_port_ftp</property>
                                       </object>
                                       <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
                                         <property name="position">2</property>
                                       </packing>
                                     </child>
@@ -1618,13 +1913,16 @@
                                 <child>
                                   <object class="GtkHBox" id="hbox_proxy_socks">
                                     <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
                                     <property name="spacing">9</property>
                                     <child>
                                       <object class="GtkHBox" id="hbox49">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkLabel" id="label47">
                                             <property name="visible">True</property>
+                                            <property name="can_focus">False</property>
                                             <property name="label" translatable="yes">Socks Host:</property>
                                           </object>
                                           <packing>
@@ -1661,6 +1959,8 @@
                                         <property name="adjustment">adjustment_proxy_port_socks</property>
                                       </object>
                                       <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
                                         <property name="position">2</property>
                                       </packing>
                                     </child>
@@ -1679,6 +1979,7 @@
                             <child type="tab">
                               <object class="GtkLabel" id="label46">
                                 <property name="visible">True</property>
+                                <property name="can_focus">False</property>
                                 <property name="label">proxy</property>
                               </object>
                               <packing>
@@ -1692,6 +1993,7 @@
                             <child type="tab">
                               <object class="GtkLabel" id="label37">
                                 <property name="visible">True</property>
+                                <property name="can_focus">False</property>
                                 <property name="label">other</property>
                               </object>
                               <packing>
@@ -1701,46 +2003,61 @@
                             </child>
                           </object>
                           <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkLabel" id="label56">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                           </object>
                           <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
                             <property name="position">2</property>
                           </packing>
                         </child>
                       </object>
                       <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
                 </child>
               </object>
               <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
                 <property name="position">0</property>
               </packing>
             </child>
           </object>
           <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
         </child>
         <child>
           <object class="GtkHBox" id="hbox54">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <child>
               <object class="GtkButton" id="button_unlock">
                 <property name="label" translatable="yes">Unlock</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1751,10 +2068,12 @@
             <child>
               <object class="GtkHBox" id="hbox_flight_mode">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="spacing">3</property>
                 <child>
                   <object class="GtkLabel" id="label_flight_mode">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Airplane Mode</property>
                   </object>
                   <packing>
@@ -1779,12 +2098,15 @@
                 </child>
               </object>
               <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
                 <property name="position">1</property>
               </packing>
             </child>
           </object>
           <packing>
             <property name="expand">False</property>
+            <property name="fill">True</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -1824,47 +2146,5 @@
       <widget name="hbox23"/>
       <widget name="hbox25"/>
     </widgets>
-  </object>
-  <object class="GtkListStore" id="liststore_proxy_method">
-    <columns>
-      <!-- column-name text -->
-      <column type="gchararray"/>
-      <!-- column-name type -->
-      <column type="gint"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes" context="proxy method">None</col>
-        <col id="1">0</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="proxy method">Manual</col>
-        <col id="1">1</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="proxy method">Automatic</col>
-        <col id="1">2</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkAdjustment" id="adjustment_proxy_port_http">
-    <property name="lower">0</property>
-    <property name="upper">65535</property>
-    <property name="step_increment">1</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment_proxy_port_https">
-    <property name="lower">0</property>
-    <property name="upper">65535</property>
-    <property name="step_increment">1</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment_proxy_port_ftp">
-    <property name="lower">0</property>
-    <property name="upper">65535</property>
-    <property name="step_increment">1</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment_proxy_port_socks">
-    <property name="lower">0</property>
-    <property name="upper">65535</property>
-    <property name="step_increment">1</property>
   </object>
 </interface>
