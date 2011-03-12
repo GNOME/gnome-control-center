@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-10 20:29+0200\n"
-"PO-Revision-Date: 2011-03-10 20:32+0300\n"
+"POT-Creation-Date: 2011-03-12 23:37+0200\n"
+"PO-Revision-Date: 2011-03-12 23:49+0300\n"
 "Last-Translator: Korostil Daniel <ted.korostiled@gmail.com>\n"
 "Language-Team: translation@linux.org.ua\n"
 "Language: uk\n"
@@ -62,7 +62,7 @@ msgid "Lock"
 msgstr "Заблокувати"
 
 #: ../libgnome-control-center/cc-lockbutton.c:356
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:18
 msgid "Unlock"
 msgstr "Розблокувати"
 
@@ -536,8 +536,8 @@ msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:72
-#: ../panels/network/panel-common.c:151
+#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:78
+#: ../panels/network/panel-common.c:157
 msgid "Unknown"
 msgstr "Невідома"
 
@@ -1476,7 +1476,7 @@ msgid "Model"
 msgstr "Модель"
 
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:16
+#: ../panels/printers/printers.ui.h:16 ../panels/network/network.ui.h:13
 msgid "Options"
 msgstr "Параметри"
 
@@ -1722,46 +1722,60 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Сенсор;Вказівник;Клік;Стукіт;Подвійний;Кнопка;Кулька;"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:718
+#: ../panels/network/cc-network-panel.c:750
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:722
+#: ../panels/network/cc-network-panel.c:754
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:726
+#: ../panels/network/cc-network-panel.c:758
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:731
+#: ../panels/network/cc-network-panel.c:763
 msgid "Enterprise"
 msgstr "Enterprise"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:737
+#: ../panels/network/cc-network-panel.c:769
 #: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "Немає"
 
-#: ../panels/network/cc-network-panel.c:1022
+#. TRANSLATORS: this is a wired connection that is disconnected
+#: ../panels/network/cc-network-panel.c:853
+msgid "Unplugged"
+msgstr "Від'єднано"
+
+#: ../panels/network/cc-network-panel.c:1193
 msgid "Network proxy"
 msgstr "Мережева проксі"
 
-#: ../panels/network/cc-network-panel.c:1031
+#: ../panels/network/cc-network-panel.c:1202
 msgid "Set the system proxy settings"
 msgstr "Налаштувати системне проксі"
 
+#: ../panels/network/cc-network-panel.c:1299
+#, c-format
+msgid "%s VPN"
+msgstr "%s VPN"
+
+#: ../panels/network/cc-network-panel.c:1311
+msgid "Virtual private network"
+msgstr "Віртуальна приватна мережа"
+
 #. TRANSLATORS: the user is running a NM that is too new and API compatible
-#: ../panels/network/cc-network-panel.c:1175
+#: ../panels/network/cc-network-panel.c:1370
 msgid "The running NetworkManager version is not compatible (too new)."
 msgstr "Запущена версія NetworkManager не сумісна (надто нова)."
 
 #. TRANSLATORS: the user is running a NM that is too old and API compatible
-#: ../panels/network/cc-network-panel.c:1181
+#: ../panels/network/cc-network-panel.c:1376
 msgid "The running NetworkManager version is not compatible (too old)."
 msgstr "Запущена версія NetworkManager не сумісна (надто стара)."
 
@@ -1775,211 +1789,240 @@ msgid "Network;Wireless;IP;LAN;"
 msgstr "Мережа;Бездротова;IP;LAN;"
 
 #: ../panels/network/network.ui.h:1
-msgid "Airplane Mode"
-msgstr "Режим у літаку"
+msgid "Air_plane Mode"
+msgstr "Режим у _літаку"
 
 #: ../panels/network/network.ui.h:2
-msgid "Configuration URL:"
-msgstr "Налаштування URL:"
-
-#: ../panels/network/network.ui.h:3
 msgid "DNS:"
 msgstr "DNS:"
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:3
 msgid "Default Route:"
 msgstr "Типовий маршрут:"
 
-#: ../panels/network/network.ui.h:5
-msgid "FTP Proxy:"
-msgstr "Проксі FTP:"
-
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:4
 msgid "Gateway:"
 msgstr "Шлюз:"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:5
 msgid "Group Name:"
 msgstr "Назва групи:"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:6
 msgid "Group Password:"
 msgstr "Пароль групи:"
 
-#: ../panels/network/network.ui.h:9
-msgid "HTTP Proxy:"
-msgstr "Проксі HTTP:"
+#: ../panels/network/network.ui.h:7
+msgid "H_TTPS Proxy:"
+msgstr "П_роксі HTTP:"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:8
 msgid "Hardware Address:"
 msgstr "Апаратна адреса:"
 
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:9
 msgid "IMEI:"
 msgstr "IMEI:"
 
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:10
 msgid "IP Address:"
 msgstr "Адреса IP:"
 
-#: ../panels/network/network.ui.h:13
+#: ../panels/network/network.ui.h:11
 msgid "IPv4 Address:"
 msgstr "Адреса IPv4:"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:12
 msgid "IPv6 Address:"
 msgstr "Адреса IPv6:"
 
-#: ../panels/network/network.ui.h:15
-msgid "Method:"
-msgstr "Спосіб:"
-
-#: ../panels/network/network.ui.h:16
-msgid "Network Name:"
-msgstr "Назва мережі:"
-
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:14
 msgid "Provider:"
 msgstr "Провайдер:"
 
-#: ../panels/network/network.ui.h:18
-msgid "Secure HTTP Proxy:"
-msgstr "Безпечний проксі HTTP"
-
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:15
 msgid "Security:"
 msgstr "Безпека:"
 
-#: ../panels/network/network.ui.h:20
-msgid "Socks Host:"
-msgstr "Вузол Socks:"
-
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:16
 msgid "Speed:"
 msgstr "Швидкість:"
 
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:17
 msgid "Subnet Mask:"
 msgstr "Маска мережі:"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:19
 msgid "Username:"
 msgstr "Користувач:"
 
+#: ../panels/network/network.ui.h:20
+msgid "_Configuration URL:"
+msgstr "_Налаштування URL:"
+
+#: ../panels/network/network.ui.h:21
+msgid "_FTP Proxy:"
+msgstr "Пр_оксі FTP:"
+
+#: ../panels/network/network.ui.h:22
+msgid "_HTTP Proxy:"
+msgstr "П_роксі HTTP:"
+
+#: ../panels/network/network.ui.h:23
+msgid "_Method:"
+msgstr "_Спосіб:"
+
+#: ../panels/network/network.ui.h:24
+msgid "_Network Name:"
+msgstr "Назва _мережі:"
+
 #: ../panels/network/network.ui.h:25
+msgid "_Options"
+msgstr "_Параметри"
+
+#: ../panels/network/network.ui.h:26
+msgid "_Socks Host:"
+msgstr "_Вузол Socks:"
+
+#: ../panels/network/network.ui.h:27
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "Автоматично"
 
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:28
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "Вручну"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:29
 msgctxt "proxy method"
 msgid "None"
 msgstr "Немає"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:76
+#: ../panels/network/panel-common.c:82
 msgid "Wired"
 msgstr "Дротовий"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:80
+#: ../panels/network/panel-common.c:86
 msgid "Wireless"
 msgstr "Бездротовий"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:87
+#: ../panels/network/panel-common.c:93
 msgid "Mobile broadband"
 msgstr "Мобільна радіомережа"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:92
+#: ../panels/network/panel-common.c:98
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:96
+#: ../panels/network/panel-common.c:102
 msgid "Mesh"
 msgstr "Сітка"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:155
+#: ../panels/network/panel-common.c:161
 msgid "Ad-hoc"
 msgstr "Спеціальне"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:159
+#: ../panels/network/panel-common.c:165
 msgid "Infrastructure"
 msgstr "Інфраструктура"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:177
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:183 ../panels/network/panel-common.c:247
 msgid "Status unknown"
 msgstr "Стан невідомий"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:181
+#: ../panels/network/panel-common.c:187
 msgid "Unmanaged"
 msgstr "Некерований"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:185
+#: ../panels/network/panel-common.c:191
 msgid "Unavailable"
 msgstr "Недоступний"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:189
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:195 ../panels/network/panel-common.c:275
 msgid "Disconnected"
 msgstr "Від'єднаний"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:193
+#: ../panels/network/panel-common.c:199
 msgid "Preparing connection"
 msgstr "Підготовлення з'єднання"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:197
+#: ../panels/network/panel-common.c:203
 msgid "Configuring connection"
 msgstr "Налаштування з'єднання"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:201
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:207 ../panels/network/panel-common.c:255
 msgid "Authenticating"
 msgstr "Автентифікація"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:205
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:211 ../panels/network/panel-common.c:263
 msgid "Getting network address"
 msgstr "Отримання мережевої адреси"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:209
+#: ../panels/network/panel-common.c:215
 msgid "Checking network address"
 msgstr "Перевіряння мережевої адреси"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:213
+#: ../panels/network/panel-common.c:219
 msgid "Connected"
 msgstr "З'єднано"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:217
+#: ../panels/network/panel-common.c:223
 msgid "Disconnecting"
 msgstr "Від'єднання"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:221
+#: ../panels/network/panel-common.c:227
 msgid "Failed to connect"
 msgstr "Помилка з'єднання"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:225
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:231 ../panels/network/panel-common.c:279
 msgid "Status unknown (missing)"
 msgstr "Стан невідомий (немає)"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:251
+msgid "Preparing"
+msgstr "Підготовлення"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:259
+msgid "Connecting"
+msgstr "З'єднання"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:267
+msgid "Active"
+msgstr "Активний"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:271
+msgid "Failed"
+msgstr "Помилка"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -2250,17 +2293,17 @@ msgstr "_Згасання:"
 msgid "_Subwoofer:"
 msgstr "_Низькочастотний динамік:"
 
-#: ../panels/sound/gvc-channel-bar.c:602 ../panels/sound/gvc-channel-bar.c:611
+#: ../panels/sound/gvc-channel-bar.c:603 ../panels/sound/gvc-channel-bar.c:612
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: ../panels/sound/gvc-channel-bar.c:606
+#: ../panels/sound/gvc-channel-bar.c:607
 msgctxt "volume"
 msgid "Unamplified"
 msgstr "Без підсилення"
 
-#: ../panels/sound/gvc-channel-bar.c:900
+#: ../panels/sound/gvc-channel-bar.c:901
 msgid "Mute"
 msgstr "Приглушити"
 
@@ -3462,6 +3505,9 @@ msgstr "Центр керування"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_Усі параметри"
+
+#~ msgid "Secure HTTP Proxy:"
+#~ msgstr "Безпечний проксі HTTP"
 
 #~ msgid "Could not connect to system bus: %s"
 #~ msgstr "Неможливо з'єднатися із системною шиною: %s"
