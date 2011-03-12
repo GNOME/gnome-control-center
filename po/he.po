@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-11 08:42+0200\n"
-"PO-Revision-Date: 2011-03-11 08:43+0200\n"
+"POT-Creation-Date: 2011-03-12 06:17+0200\n"
+"PO-Revision-Date: 2011-03-12 06:18+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -533,8 +533,8 @@ msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:72
-#: ../panels/network/panel-common.c:151
+#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:78
+#: ../panels/network/panel-common.c:157
 msgid "Unknown"
 msgstr "לא ידוע"
 
@@ -1715,55 +1715,60 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "משטח מגע;סמן;לחיצה;טפיחה;כפולה;לחצן;כדור שליטה;"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:721
+#: ../panels/network/cc-network-panel.c:750
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:725
+#: ../panels/network/cc-network-panel.c:754
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:729
+#: ../panels/network/cc-network-panel.c:758
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:734
+#: ../panels/network/cc-network-panel.c:763
 msgid "Enterprise"
 msgstr "ארגוני"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:740
+#: ../panels/network/cc-network-panel.c:769
 #: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "ללא"
 
-#: ../panels/network/cc-network-panel.c:1051
+#. TRANSLATORS: this is a wired connection that is disconnected
+#: ../panels/network/cc-network-panel.c:853
+msgid "Unplugged"
+msgstr "הכבל מנותק"
+
+#: ../panels/network/cc-network-panel.c:1193
 msgid "Network proxy"
 msgstr "מתווך הרשת"
 
-#: ../panels/network/cc-network-panel.c:1060
+#: ../panels/network/cc-network-panel.c:1202
 msgid "Set the system proxy settings"
 msgstr "הגדרת תצורת מתווך המערכת"
 
-#: ../panels/network/cc-network-panel.c:1185
+#: ../panels/network/cc-network-panel.c:1299
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: ../panels/network/cc-network-panel.c:1196
+#: ../panels/network/cc-network-panel.c:1311
 msgid "Virtual private network"
 msgstr "רשת וירטואלית פרטית"
 
 #. TRANSLATORS: the user is running a NM that is too new and API compatible
-#: ../panels/network/cc-network-panel.c:1255
+#: ../panels/network/cc-network-panel.c:1370
 msgid "The running NetworkManager version is not compatible (too new)."
 msgstr "הגרסה הפעילה של NetworkManager אינה נתמכת (חדשה מדי)."
 
 #. TRANSLATORS: the user is running a NM that is too old and API compatible
-#: ../panels/network/cc-network-panel.c:1261
+#: ../panels/network/cc-network-panel.c:1376
 msgid "The running NetworkManager version is not compatible (too old)."
 msgstr "הגרסה הפעילה של NetworkManager אינה נתמכת (ישנה מדי)."
 
@@ -1884,104 +1889,129 @@ msgid "None"
 msgstr "ללא"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:76
+#: ../panels/network/panel-common.c:82
 msgid "Wired"
 msgstr "קווי"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:80
+#: ../panels/network/panel-common.c:86
 msgid "Wireless"
 msgstr "אלחוטי"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:87
+#: ../panels/network/panel-common.c:93
 msgid "Mobile broadband"
 msgstr "רשת סלולרית"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:92
+#: ../panels/network/panel-common.c:98
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:96
+#: ../panels/network/panel-common.c:102
 msgid "Mesh"
 msgstr "סריג"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:155
+#: ../panels/network/panel-common.c:161
 msgid "Ad-hoc"
 msgstr "ייעודית"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:159
+#: ../panels/network/panel-common.c:165
 msgid "Infrastructure"
 msgstr "תשתית"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:177
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:183 ../panels/network/panel-common.c:247
 msgid "Status unknown"
 msgstr "המצב אינו ידוע"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:181
+#: ../panels/network/panel-common.c:187
 msgid "Unmanaged"
 msgstr "לא מנוהל"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:185
+#: ../panels/network/panel-common.c:191
 msgid "Unavailable"
 msgstr "לא זמין"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:189
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:195 ../panels/network/panel-common.c:275
 msgid "Disconnected"
 msgstr "מנותק"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:193
+#: ../panels/network/panel-common.c:199
 msgid "Preparing connection"
 msgstr "החיבור בהכנות"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:197
+#: ../panels/network/panel-common.c:203
 msgid "Configuring connection"
 msgstr "החיבור מוגדר"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:201
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:207 ../panels/network/panel-common.c:255
 msgid "Authenticating"
 msgstr "בהליכי אימות"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:205
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:211 ../panels/network/panel-common.c:263
 msgid "Getting network address"
 msgstr "כתובת הרשת מתקבלת"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:209
+#: ../panels/network/panel-common.c:215
 msgid "Checking network address"
 msgstr "כתובת הרשת נבדקת"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:213
+#: ../panels/network/panel-common.c:219
 msgid "Connected"
 msgstr "מחובר"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:217
+#: ../panels/network/panel-common.c:223
 msgid "Disconnecting"
 msgstr "מתבצע ניתוק"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:221
+#: ../panels/network/panel-common.c:227
 msgid "Failed to connect"
 msgstr "אירע כשל בעת החיבור"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:225
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:231 ../panels/network/panel-common.c:279
 msgid "Status unknown (missing)"
 msgstr "המצב אינו ידוע (חסר)"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:251
+msgid "Preparing"
+msgstr "בהכנות"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:259
+msgid "Connecting"
+msgstr "בהתחברות"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:267
+msgid "Active"
+msgstr "פעיל"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:271
+msgid "Failed"
+msgstr "אירע כשל"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -2248,17 +2278,17 @@ msgstr "_עמעום:"
 msgid "_Subwoofer:"
 msgstr "_סאבוופר:"
 
-#: ../panels/sound/gvc-channel-bar.c:602 ../panels/sound/gvc-channel-bar.c:611
+#: ../panels/sound/gvc-channel-bar.c:603 ../panels/sound/gvc-channel-bar.c:612
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: ../panels/sound/gvc-channel-bar.c:606
+#: ../panels/sound/gvc-channel-bar.c:607
 msgctxt "volume"
 msgid "Unamplified"
 msgstr "ללא הגברה"
 
-#: ../panels/sound/gvc-channel-bar.c:900
+#: ../panels/sound/gvc-channel-bar.c:901
 msgid "Mute"
 msgstr "השתקה"
 
@@ -3522,9 +3552,6 @@ msgstr "_כל ההגדרות"
 
 #~ msgid "Idle"
 #~ msgstr "בהמתנה"
-
-#~ msgid "0 active"
-#~ msgstr "0 פעילות"
 
 #~ msgid "List of keyboard layouts selected for usage"
 #~ msgstr "רשימת פריסות המקלדת שנבחרו לשימוש"
@@ -5547,9 +5574,6 @@ msgstr "_כל ההגדרות"
 
 #~ msgid "Hide on start (useful to preload the shell)"
 #~ msgstr "Hide on start (useful to preload the shell)"
-
-#~ msgid "Filter"
-#~ msgstr "מסנן"
 
 #~ msgid "Groups"
 #~ msgstr "קבוצות"
