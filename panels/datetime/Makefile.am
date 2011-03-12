@@ -34,6 +34,7 @@ dist_ui_DATA = \
 	data/timezone_12.png \
 	data/timezone_12.75.png \
 	data/timezone_13.png \
+	data/timezone_14.png \
 	data/timezone_-2.png \
 	data/timezone_2.png \
 	data/timezone_-3.png \
@@ -56,6 +57,7 @@ dist_ui_DATA = \
 	data/timezone_7.png \
 	data/timezone_-8.png \
 	data/timezone_8.png \
+	data/timezone_8.75.png \
 	data/timezone_-9.png \
 	data/timezone_9.png \
 	data/timezone_-9.5.png \
@@ -84,9 +86,8 @@ test_endianess_CFLAGS = $(DATETIME_PANEL_CFLAGS)
 
 all-local: check-local
 
-# FIXME remove "|| :" when we have all the necessary pixmaps
 check-local: test-timezone test-endianess
-	$(builddir)/test-timezone $(srcdir)/data || :
+	$(builddir)/test-timezone $(srcdir)/data
 	$(builddir)/test-endianess
 
 ccpanelsdir = $(PANELS_DIR)
