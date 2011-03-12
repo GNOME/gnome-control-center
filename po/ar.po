@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-11 15:07+0200\n"
-"PO-Revision-Date: 2011-03-11 15:07+0300\n"
+"POT-Creation-Date: 2011-03-12 22:36+0200\n"
+"PO-Revision-Date: 2011-03-12 22:36+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -61,7 +61,7 @@ msgid "Lock"
 msgstr "أوصِد"
 
 #: ../libgnome-control-center/cc-lockbutton.c:356
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:21
 msgid "Unlock"
 msgstr "افتح"
 
@@ -527,8 +527,8 @@ msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:72
-#: ../panels/network/panel-common.c:151
+#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:78
+#: ../panels/network/panel-common.c:157
 msgid "Unknown"
 msgstr "غير معروف"
 
@@ -1470,7 +1470,7 @@ msgid "Model"
 msgstr "الطراز"
 
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:16
+#: ../panels/printers/printers.ui.h:16 ../panels/network/network.ui.h:16
 msgid "Options"
 msgstr "الخيارات"
 
@@ -1717,55 +1717,60 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "فأرة;مؤشر;نقر;مزدوج;زر;لمس;"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:732
+#: ../panels/network/cc-network-panel.c:750
 msgid "WEP"
 msgstr ""
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:736
+#: ../panels/network/cc-network-panel.c:754
 msgid "WPA"
 msgstr ""
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:740
+#: ../panels/network/cc-network-panel.c:758
 msgid "WPA2"
 msgstr ""
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:745
+#: ../panels/network/cc-network-panel.c:763
 msgid "Enterprise"
 msgstr ""
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:751 ../panels/network/network.ui.h:19
+#: ../panels/network/cc-network-panel.c:769 ../panels/network/network.ui.h:15
 #: ../panels/universal-access/uap.ui.h:52
 msgid "None"
 msgstr "لا شيء"
 
-#: ../panels/network/cc-network-panel.c:1160
+#. TRANSLATORS: this is a wired connection that is disconnected
+#: ../panels/network/cc-network-panel.c:853
+msgid "Unplugged"
+msgstr "غير مُوصّل"
+
+#: ../panels/network/cc-network-panel.c:1193
 msgid "Network proxy"
 msgstr "وسيط الشبكة"
 
-#: ../panels/network/cc-network-panel.c:1169
+#: ../panels/network/cc-network-panel.c:1202
 msgid "Set the system proxy settings"
 msgstr "اضبط إعدادات وسيط الشبكة"
 
-#: ../panels/network/cc-network-panel.c:1282
+#: ../panels/network/cc-network-panel.c:1299
 #, c-format
 msgid "%s VPN"
 msgstr "ش‌خ‌ف %s"
 
-#: ../panels/network/cc-network-panel.c:1294
+#: ../panels/network/cc-network-panel.c:1311
 msgid "Virtual private network"
 msgstr "شبكة خاصة افتراضية"
 
 #. TRANSLATORS: the user is running a NM that is too new and API compatible
-#: ../panels/network/cc-network-panel.c:1353
+#: ../panels/network/cc-network-panel.c:1370
 msgid "The running NetworkManager version is not compatible (too new)."
 msgstr "نسخة NetworkManager التي تعمل غير متوافقة (حديثة جدا)"
 
 #. TRANSLATORS: the user is running a NM that is too old and API compatible
-#: ../panels/network/cc-network-panel.c:1359
+#: ../panels/network/cc-network-panel.c:1376
 msgid "The running NetworkManager version is not compatible (too old)."
 msgstr "نسخة NetworkManager التي تعمل غير متوافقة (قديمة جدا)"
 
@@ -1779,227 +1784,231 @@ msgid "Network;Wireless;IP;LAN;"
 msgstr "شبكة;لاسلكي;"
 
 #: ../panels/network/network.ui.h:1
-msgid "Airplane Mode"
-msgstr "وضع الطائرة"
+msgid "Air_plane Mode"
+msgstr "و_ضع الطائرة"
 
 #: ../panels/network/network.ui.h:2
 msgid "Automatic"
 msgstr "تلقائي"
 
 #: ../panels/network/network.ui.h:3
-msgid "Configuration URL:"
-msgstr "مسار الإعداد:"
-
-#: ../panels/network/network.ui.h:4
 msgid "DNS:"
 msgstr "نظام أسماء النطاقات (DNS):"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:4
 msgid "Default Route:"
 msgstr "السبيل المبدئي:"
 
-#: ../panels/network/network.ui.h:6
-msgid "FTP Proxy:"
-msgstr "وسيط FTP:"
-
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:5
 msgid "Gateway:"
 msgstr "البوّابة:"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:6
 msgid "Group Name:"
 msgstr "اسم المجموعة:"
 
-#: ../panels/network/network.ui.h:9
+#: ../panels/network/network.ui.h:7
 msgid "Group Password:"
 msgstr "كلمة سر المجموعة:"
 
-#: ../panels/network/network.ui.h:10
-msgid "HTTP Proxy:"
-msgstr "وسيط HTTP:"
+#: ../panels/network/network.ui.h:8
+msgid "H_TTPS Proxy:"
+msgstr "وسيط H_TTPS:"
 
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:9
 msgid "Hardware Address:"
 msgstr "عنوان العتاد:"
 
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:10
 msgid "IMEI:"
 msgstr "معرّف المعدات المحمولة الدولي (IMEI):"
 
-#: ../panels/network/network.ui.h:13
+#: ../panels/network/network.ui.h:11
 msgid "IP Address:"
 msgstr "عنوان IP:"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:12
 msgid "IPv4 Address:"
 msgstr "عنوان IPv4:"
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:13
 msgid "IPv6 Address:"
 msgstr "عنوان IPv6:"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:14
 msgid "Manual"
 msgstr "يدوي"
 
 #: ../panels/network/network.ui.h:17
-msgid "Method:"
-msgstr "الطريقة:"
-
-#: ../panels/network/network.ui.h:18
-msgid "Network Name:"
-msgstr "اسم الشبكة:"
-
-#: ../panels/network/network.ui.h:20
 msgid "Provider:"
 msgstr "مقدم الخدمة:"
 
-#: ../panels/network/network.ui.h:21
-msgid "Secure HTTP Proxy:"
-msgstr "وسيط HTTP الآمن:"
-
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:18
 msgid "Security:"
 msgstr "الأمن:"
 
-#: ../panels/network/network.ui.h:23
-msgid "Socks Host:"
-msgstr "مستضيف Socks:"
-
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:19
 msgid "Speed:"
 msgstr "السرعة:"
 
-#: ../panels/network/network.ui.h:25
+#: ../panels/network/network.ui.h:20
 msgid "Subnet Mask:"
 msgstr "قناع الشبكة الفرعية:"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:22
 msgid "Username:"
 msgstr "اسم المستخدم:"
 
+#: ../panels/network/network.ui.h:23
+msgid "_Configuration URL:"
+msgstr "م_سار الإعداد:"
+
+#: ../panels/network/network.ui.h:24
+msgid "_FTP Proxy:"
+msgstr "وسيط _FTP:"
+
+#: ../panels/network/network.ui.h:25
+msgid "_HTTP Proxy:"
+msgstr "وسيط _HTTP:"
+
+#: ../panels/network/network.ui.h:26
+msgid "_Method:"
+msgstr "ال_طريقة:"
+
+#: ../panels/network/network.ui.h:27
+msgid "_Network Name:"
+msgstr "اسم ال_شبكة:"
+
+#: ../panels/network/network.ui.h:28
+msgid "_Options"
+msgstr "ال_خيارات"
+
+#: ../panels/network/network.ui.h:29
+msgid "_Socks Host:"
+msgstr "مستضيف _Socks:"
+
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:76
+#: ../panels/network/panel-common.c:82
 msgid "Wired"
 msgstr "سلكية"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:80
+#: ../panels/network/panel-common.c:86
 msgid "Wireless"
 msgstr "لاسلكية"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:87
+#: ../panels/network/panel-common.c:93
 msgid "Mobile broadband"
 msgstr "هاتف محمول"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:92
+#: ../panels/network/panel-common.c:98
 msgid "Bluetooth"
 msgstr "بلوتوث"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:96
+#: ../panels/network/panel-common.c:102
 msgid "Mesh"
 msgstr "عُرَوِيّة"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:155
+#: ../panels/network/panel-common.c:161
 msgid "Ad-hoc"
 msgstr "لا مركزية"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:159
+#: ../panels/network/panel-common.c:165
 msgid "Infrastructure"
 msgstr "مركزية"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:177 ../panels/network/panel-common.c:241
+#: ../panels/network/panel-common.c:183 ../panels/network/panel-common.c:247
 msgid "Status unknown"
 msgstr "الحالة غير معروفة"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:181
+#: ../panels/network/panel-common.c:187
 msgid "Unmanaged"
 msgstr "غير مُدار"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:185
+#: ../panels/network/panel-common.c:191
 msgid "Unavailable"
 msgstr "غير متاح"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:189 ../panels/network/panel-common.c:269
+#: ../panels/network/panel-common.c:195 ../panels/network/panel-common.c:275
 msgid "Disconnected"
 msgstr "غير متّصل"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:193
+#: ../panels/network/panel-common.c:199
 msgid "Preparing connection"
 msgstr "يُجهّز الاتصال"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:197
+#: ../panels/network/panel-common.c:203
 msgid "Configuring connection"
 msgstr "يضبط الاتصال"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:201 ../panels/network/panel-common.c:249
+#: ../panels/network/panel-common.c:207 ../panels/network/panel-common.c:255
 msgid "Authenticating"
 msgstr "يستوثق"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:205 ../panels/network/panel-common.c:257
+#: ../panels/network/panel-common.c:211 ../panels/network/panel-common.c:263
 msgid "Getting network address"
 msgstr "يجلب عنوان الشبكة"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:209
+#: ../panels/network/panel-common.c:215
 msgid "Checking network address"
 msgstr "يتحقق من عنوان الشبكة"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:213
+#: ../panels/network/panel-common.c:219
 msgid "Connected"
 msgstr "متّصل"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:217
+#: ../panels/network/panel-common.c:223
 msgid "Disconnecting"
 msgstr "يقطع الاتصال"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:221
+#: ../panels/network/panel-common.c:227
 msgid "Failed to connect"
 msgstr "فشل في الاتصال"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:225 ../panels/network/panel-common.c:273
+#: ../panels/network/panel-common.c:231 ../panels/network/panel-common.c:279
 msgid "Status unknown (missing)"
 msgstr "الحالة غير معروفة"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:245
+#: ../panels/network/panel-common.c:251
 msgid "Preparing"
 msgstr "يُجهّز"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:253
+#: ../panels/network/panel-common.c:259
 msgid "Connecting"
 msgstr "يتّصل"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:261
+#: ../panels/network/panel-common.c:267
 msgid "Active"
 msgstr "نشِط"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:265
+#: ../panels/network/panel-common.c:271
 msgid "Failed"
 msgstr "فشِل"
 
@@ -2284,17 +2293,17 @@ msgstr "ال_تلاشي:"
 msgid "_Subwoofer:"
 msgstr "_سماعات كبيرة:"
 
-#: ../panels/sound/gvc-channel-bar.c:602 ../panels/sound/gvc-channel-bar.c:611
+#: ../panels/sound/gvc-channel-bar.c:603 ../panels/sound/gvc-channel-bar.c:612
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: ../panels/sound/gvc-channel-bar.c:606
+#: ../panels/sound/gvc-channel-bar.c:607
 msgctxt "volume"
 msgid "Unamplified"
 msgstr "غير مكبّر"
 
-#: ../panels/sound/gvc-channel-bar.c:900
+#: ../panels/sound/gvc-channel-bar.c:901
 msgid "Mute"
 msgstr "أصمِت"
 
@@ -3473,6 +3482,9 @@ msgstr "مركز التحكّم"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_كل الإعدادات"
+
+#~ msgid "Secure HTTP Proxy:"
+#~ msgstr "وسيط HTTP الآمن:"
 
 #~ msgid "Could not connect to system bus: %s"
 #~ msgstr "تعذّر الاتصال بناقل النظام: %s"
