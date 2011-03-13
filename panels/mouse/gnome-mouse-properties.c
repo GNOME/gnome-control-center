@@ -149,6 +149,29 @@ orientation_radio_button_release_event (GtkWidget   *widget,
 }
 
 static void
+setup_scrollmethod_radios (GtkBuilder *dialog)
+{
+        GsdTouchpadScrollMethod method;
+
+        method = g_settings_get_enum (touchpad_settings, "scroll-method");
+
+        switch (method) {
+        case GSD_TOUCHPAD_SCROLL_METHOD_EDGE_SCROLLING:
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("scroll_edge_radio")), TRUE);
+                break;
+        case GSD_TOUCHPAD_SCROLL_METHOD_TWO_FINGER_SCROLLING:
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("scroll_twofinger_radio")), TRUE);
+                break;
+        case GSD_TOUCHPAD_SCROLL_METHOD_DISABLED:
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("scroll_disabled_radio")), TRUE);
+                break;
+        }
+
+        gtk_widget_set_sensitive (WID ("horiz_scroll_toggle"),
+                                  !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (WID ("scroll_disabled_radio"))));
+}
+
+static void
 scrollmethod_changed_event (GtkToggleButton *button, GtkBuilder *dialog)
 {
 	GsdTouchpadScrollMethod method;
@@ -288,7 +311,7 @@ setup_dialog (GtkBuilder *dialog)
 				  G_CALLBACK (scrollmethod_changed_event), dialog);
 
 		synaptics_check_capabilities (dialog);
-		scrollmethod_changed_event (GTK_TOGGLE_BUTTON (WID ("scroll_disabled_radio")), dialog);
+		setup_scrollmethod_radios (dialog);
 	}
 
 }
