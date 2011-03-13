@@ -129,6 +129,13 @@ xkb_layout_chooser_response (GtkDialog * dialog,
 								  G_CALLBACK
 								  (xkb_preview_destroy_callback),
 								  NULL);
+						/* Put into the separate group to avoid conflict
+						   with modal parent */
+						gtk_window_group_add_window
+						    (gtk_window_group_new
+						     (),
+						     GTK_WINDOW
+						     (preview_dialog));
 					};
 					gkbd_keyboard_drawing_dialog_set_layout
 					    (preview_dialog,
