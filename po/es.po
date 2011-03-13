@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"control-center&component=general\n"
-"POT-Creation-Date: 2011-03-10 18:31+0000\n"
-"PO-Revision-Date: 2011-03-11 09:52+0100\n"
+"control-center&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-03-12 20:13+0000\n"
+"PO-Revision-Date: 2011-03-13 12:10+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -70,7 +70,7 @@ msgid "Lock"
 msgstr "Bloquear"
 
 #: ../libgnome-control-center/cc-lockbutton.c:356
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:18
 msgid "Unlock"
 msgstr "Desbloquear"
 
@@ -547,8 +547,8 @@ msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:72
-#: ../panels/network/panel-common.c:151
+#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:78
+#: ../panels/network/panel-common.c:157
 msgid "Unknown"
 msgstr "Desconocido"
 
@@ -1490,7 +1490,7 @@ msgid "Model"
 msgstr "Modelo"
 
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:16
+#: ../panels/printers/printers.ui.h:16 ../panels/network/network.ui.h:13
 msgid "Options"
 msgstr "Opciones"
 
@@ -1737,56 +1737,61 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "trackpad;puntero;pulsar;doble;botón;trackball;"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:721
+#: ../panels/network/cc-network-panel.c:750
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:725
+#: ../panels/network/cc-network-panel.c:754
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:729
+#: ../panels/network/cc-network-panel.c:758
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:734
+#: ../panels/network/cc-network-panel.c:763
 msgid "Enterprise"
 msgstr "Empresa"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:740
+#: ../panels/network/cc-network-panel.c:769
 #: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "Ninguna"
 
-#: ../panels/network/cc-network-panel.c:1051
+#. TRANSLATORS: this is a wired connection that is disconnected
+#: ../panels/network/cc-network-panel.c:853
+msgid "Unplugged"
+msgstr "Desconectado"
+
+#: ../panels/network/cc-network-panel.c:1193
 msgid "Network proxy"
 msgstr "Proxy de la red"
 
-#: ../panels/network/cc-network-panel.c:1060
+#: ../panels/network/cc-network-panel.c:1202
 msgid "Set the system proxy settings"
 msgstr "Configurar los ajustes del proxy del sistema"
 
-#: ../panels/network/cc-network-panel.c:1185
+#: ../panels/network/cc-network-panel.c:1299
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
 
-#: ../panels/network/cc-network-panel.c:1196
+#: ../panels/network/cc-network-panel.c:1311
 msgid "Virtual private network"
 msgstr "Red privada virtual"
 
 #. TRANSLATORS: the user is running a NM that is too new and API compatible
-#: ../panels/network/cc-network-panel.c:1255
+#: ../panels/network/cc-network-panel.c:1370
 msgid "The running NetworkManager version is not compatible (too new)."
 msgstr ""
 "La versión de NetworkManager en ejecución no es compatible (muy reciente)"
 
 #. TRANSLATORS: the user is running a NM that is too old and API compatible
-#: ../panels/network/cc-network-panel.c:1261
+#: ../panels/network/cc-network-panel.c:1376
 msgid "The running NetworkManager version is not compatible (too old)."
 msgstr ""
 "La versión de NetworkManager en ejecución no es compatible (muy antigua)"
@@ -1801,211 +1806,253 @@ msgid "Network;Wireless;IP;LAN;"
 msgstr "red;inalámbrica;ip;lan;"
 
 #: ../panels/network/network.ui.h:1
-msgid "Airplane Mode"
-msgstr "Modo avión"
+#| msgid "Airplane Mode"
+msgid "Air_plane Mode"
+msgstr "Modo a_vión"
 
 #: ../panels/network/network.ui.h:2
-msgid "Configuration URL:"
-msgstr "URL de configuración:"
-
-#: ../panels/network/network.ui.h:3
 msgid "DNS:"
 msgstr "DNS:"
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:3
 msgid "Default Route:"
 msgstr "Ruta predeterminada:"
 
-#: ../panels/network/network.ui.h:5
-msgid "FTP Proxy:"
-msgstr "Proxy para FTP:"
-
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:4
 msgid "Gateway:"
 msgstr "Puerta de enlace:"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:5
 msgid "Group Name:"
 msgstr "Nombre del grupo:"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:6
 msgid "Group Password:"
 msgstr "Contraseña del grupo:"
 
-#: ../panels/network/network.ui.h:9
-msgid "HTTP Proxy:"
-msgstr "Proxy para HTTP:"
+#: ../panels/network/network.ui.h:7
+#| msgid "HTTP Proxy:"
+msgid "H_TTPS Proxy:"
+msgstr "Proxy para H_TTPS:"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:8
 msgid "Hardware Address:"
 msgstr "Dirección física:"
 
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:9
 msgid "IMEI:"
 msgstr "IMEI:"
 
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:10
 msgid "IP Address:"
 msgstr "Dirección IP:"
 
-#: ../panels/network/network.ui.h:13
+#: ../panels/network/network.ui.h:11
 msgid "IPv4 Address:"
 msgstr "Dirección IPv4:"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:12
 msgid "IPv6 Address:"
 msgstr "Dirección IPv6:"
 
-#: ../panels/network/network.ui.h:15
-msgid "Method:"
-msgstr "Método:"
-
-#: ../panels/network/network.ui.h:16
-msgid "Network Name:"
-msgstr "Nombre de red:"
-
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:14
 msgid "Provider:"
 msgstr "Proveedor:"
 
-#: ../panels/network/network.ui.h:18
-msgid "Secure HTTP Proxy:"
-msgstr "Proxy para HTTP seguro:"
-
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:15
 msgid "Security:"
 msgstr "Seguridad:"
 
-#: ../panels/network/network.ui.h:20
-msgid "Socks Host:"
-msgstr "Servidor socks:"
-
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:16
 msgid "Speed:"
 msgstr "Velocidad:"
 
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:17
 msgid "Subnet Mask:"
 msgstr "Máscara de subred:"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:19
 msgid "Username:"
 msgstr "Nombre de usuario:"
 
+#: ../panels/network/network.ui.h:20
+#| msgid "Configuration URL:"
+msgid "_Configuration URL:"
+msgstr "URL de _configuración:"
+
+#: ../panels/network/network.ui.h:21
+#| msgid "FTP Proxy:"
+msgid "_FTP Proxy:"
+msgstr "Proxy para _FTP:"
+
+#: ../panels/network/network.ui.h:22
+#| msgid "HTTP Proxy:"
+msgid "_HTTP Proxy:"
+msgstr "Proxy para _HTTP:"
+
+#: ../panels/network/network.ui.h:23
+#| msgid "Method:"
+msgid "_Method:"
+msgstr "_Método:"
+
+#: ../panels/network/network.ui.h:24
+#| msgid "Network Name:"
+msgid "_Network Name:"
+msgstr "_Nombre de red:"
+
 #: ../panels/network/network.ui.h:25
+#| msgid "Options"
+msgid "_Options"
+msgstr "_Opciones"
+
+#: ../panels/network/network.ui.h:26
+#| msgid "Socks Host:"
+msgid "_Socks Host:"
+msgstr "_Servidor socks:"
+
+#: ../panels/network/network.ui.h:27
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "Automático"
 
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:28
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "Manual"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:29
 msgctxt "proxy method"
 msgid "None"
 msgstr "Ninguno"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:76
+#: ../panels/network/panel-common.c:82
 msgid "Wired"
 msgstr "Cableada"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:80
+#: ../panels/network/panel-common.c:86
 msgid "Wireless"
 msgstr "Inalámbrica"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:87
+#: ../panels/network/panel-common.c:93
 msgid "Mobile broadband"
 msgstr "Banda ancha móvil"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:92
+#: ../panels/network/panel-common.c:98
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:96
+#: ../panels/network/panel-common.c:102
 msgid "Mesh"
 msgstr "Malla"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:155
+#: ../panels/network/panel-common.c:161
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:159
+#: ../panels/network/panel-common.c:165
 msgid "Infrastructure"
 msgstr "Infraestructura"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:177
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:183 ../panels/network/panel-common.c:247
 msgid "Status unknown"
 msgstr "Estado desconocido"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:181
+#: ../panels/network/panel-common.c:187
 msgid "Unmanaged"
 msgstr "Sin gestionar"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:185
+#: ../panels/network/panel-common.c:191
 msgid "Unavailable"
 msgstr "No disponible"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:189
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:195 ../panels/network/panel-common.c:275
 msgid "Disconnected"
 msgstr "Desconectada"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:193
+#: ../panels/network/panel-common.c:199
 msgid "Preparing connection"
 msgstr "Preparando la conexión"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:197
+#: ../panels/network/panel-common.c:203
 msgid "Configuring connection"
 msgstr "Configurando la conexión"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:201
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:207 ../panels/network/panel-common.c:255
 msgid "Authenticating"
 msgstr "Autenticando"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:205
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:211 ../panels/network/panel-common.c:263
 msgid "Getting network address"
 msgstr "Obteniendo dirección de red"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:209
+#: ../panels/network/panel-common.c:215
 msgid "Checking network address"
 msgstr "Comprobando dirección de red"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:213
+#: ../panels/network/panel-common.c:219
 msgid "Connected"
 msgstr "Conectado"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:217
+#: ../panels/network/panel-common.c:223
 msgid "Disconnecting"
 msgstr "Desconectando"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:221
+#: ../panels/network/panel-common.c:227
 msgid "Failed to connect"
 msgstr "Falló al conectar"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:225
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:231 ../panels/network/panel-common.c:279
 msgid "Status unknown (missing)"
 msgstr "Estado desconocido (ausente)"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:251
+#| msgid "Hearing"
+msgid "Preparing"
+msgstr "Preparando"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:259
+#| msgid "Disconnecting"
+msgid "Connecting"
+msgstr "Conectando"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:267
+#| msgid "0 active"
+msgid "Active"
+msgstr "Activa"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:271
+#| msgid "_File"
+msgid "Failed"
+msgstr "Falló"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -2272,17 +2319,17 @@ msgstr "_Desvanecimiento:"
 msgid "_Subwoofer:"
 msgstr "_Subwoofer:"
 
-#: ../panels/sound/gvc-channel-bar.c:602 ../panels/sound/gvc-channel-bar.c:611
+#: ../panels/sound/gvc-channel-bar.c:603 ../panels/sound/gvc-channel-bar.c:612
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: ../panels/sound/gvc-channel-bar.c:606
+#: ../panels/sound/gvc-channel-bar.c:607
 msgctxt "volume"
 msgid "Unamplified"
 msgstr "Sin amplificar"
 
-#: ../panels/sound/gvc-channel-bar.c:900
+#: ../panels/sound/gvc-channel-bar.c:901
 msgid "Mute"
 msgstr "Silenciar"
 
@@ -3157,8 +3204,8 @@ msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
-"Es posible mantener la carpeta personal, el «spool» del correo y los archivos "
-"temporales al eliminar una cuenta de usuario."
+"Es posible mantener la carpeta personal, el «spool» del correo y los "
+"archivos temporales al eliminar una cuenta de usuario."
 
 #: ../panels/user-accounts/um-user-panel.c:446
 msgid "_Delete Files"
@@ -3490,6 +3537,9 @@ msgstr "Centro de control"
 msgid "_All Settings"
 msgstr "_Todas las configuraciones"
 
+#~ msgid "Secure HTTP Proxy:"
+#~ msgstr "Proxy para HTTP seguro:"
+
 #~ msgid "Could not connect to system bus: %s"
 #~ msgstr "No se pudo conectar con el bus del sistema: %s"
 
@@ -3570,9 +3620,6 @@ msgstr "_Todas las configuraciones"
 
 #~ msgid "Idle"
 #~ msgstr "Inactiva"
-
-#~ msgid "0 active"
-#~ msgstr "0 activos"
 
 #~ msgid "New windows u_se active window's layout"
 #~ msgstr "Las ventanas nuevas u_san la distribución de la ventana activa"
@@ -5888,9 +5935,6 @@ msgstr "_Todas las configuraciones"
 #~ msgid "_Editable menu shortcut keys"
 #~ msgstr "Aceleradores de menú _editables"
 
-#~ msgid "_File"
-#~ msgstr "_Archivo"
-
 #~ msgid "New windows get layout \"foobar\""
 #~ msgstr "Las nuevas ventanas obtienen la distribución «foobar»"
 
@@ -6204,4 +6248,5 @@ msgstr "_Todas las configuraciones"
 #~ msgstr "No hay establecido ningún grupo para el URI «%s»"
 
 #~ msgid "No application with name '%s' registered a bookmark for '%s'"
-#~ msgstr "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
+#~ msgstr ""
+#~ "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
