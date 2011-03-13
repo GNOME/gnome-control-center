@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.91.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-08 12:19+0100\n"
-"PO-Revision-Date: 2011-03-08 12:21+0100\n"
+"POT-Creation-Date: 2011-03-13 16:24+0100\n"
+"PO-Revision-Date: 2011-03-13 16:26+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -61,7 +61,7 @@ msgid "Lock"
 msgstr "Lås"
 
 #: ../libgnome-control-center/cc-lockbutton.c:356
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:18
 msgid "Unlock"
 msgstr "Lås opp"
 
@@ -256,29 +256,29 @@ msgstr "Vertikal gradient"
 msgid "Solid Color"
 msgstr "Helfylt farge"
 
-#: ../panels/background/cc-background-panel.c:960
+#: ../panels/background/cc-background-panel.c:958
 #: ../panels/user-accounts/um-photo-dialog.c:216
 #: ../panels/user-accounts/data/photo-dialog.ui.h:2
 msgid "Browse for more pictures"
 msgstr "Se etter flere bilder"
 
-#: ../panels/background/cc-background-panel.c:1051
+#: ../panels/background/cc-background-panel.c:1049
 msgid "Current background"
 msgstr "Nåværende bakgrunn"
 
-#: ../panels/background/cc-background-panel.c:1115
+#: ../panels/background/cc-background-panel.c:1113
 msgid "Wallpapers"
 msgstr "Bakgrunner"
 
-#: ../panels/background/cc-background-panel.c:1122
+#: ../panels/background/cc-background-panel.c:1120
 msgid "Pictures Folder"
 msgstr "Bildemappe"
 
-#: ../panels/background/cc-background-panel.c:1129
+#: ../panels/background/cc-background-panel.c:1127
 msgid "Colors & Gradients"
 msgstr "Farger og gradienter"
 
-#: ../panels/background/cc-background-panel.c:1137
+#: ../panels/background/cc-background-panel.c:1135
 msgid "Flickr"
 msgstr "Flickr"
 
@@ -535,8 +535,8 @@ msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:72
-#: ../panels/network/panel-common.c:151
+#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:78
+#: ../panels/network/panel-common.c:157
 msgid "Unknown"
 msgstr "Ukjent"
 
@@ -649,7 +649,9 @@ msgstr "Systeminformasjon"
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
 "fallback;"
-msgstr "enhet;system;informasjon;minne;prosessor;versjon;forvalg;program;reserveløsning;"
+msgstr ""
+"enhet;system;informasjon;minne;prosessor;versjon;forvalg;program;"
+"reserveløsning;"
 
 #: ../panels/info/info.ui.h:1
 msgid "Calendar"
@@ -1474,7 +1476,7 @@ msgid "Model"
 msgstr "Modell"
 
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:16
+#: ../panels/printers/printers.ui.h:16 ../panels/network/network.ui.h:13
 msgid "Options"
 msgstr "Alternativer"
 
@@ -1720,21 +1722,61 @@ msgstr "Sett dine brukervalg for mus og pekeplate"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Styrepute;Peker;Klikk;Tapp;Dobbel;Knapp;Styrekule;"
 
-#: ../panels/network/cc-network-panel.c:969
+#. TRANSLATORS: this WEP WiFi security
+#: ../panels/network/cc-network-panel.c:750
+msgid "WEP"
+msgstr "WEP"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/cc-network-panel.c:754
+msgid "WPA"
+msgstr "WPA"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/cc-network-panel.c:758
+msgid "WPA2"
+msgstr "WPA2"
+
+#. TRANSLATORS: this Enterprise WiFi security
+#: ../panels/network/cc-network-panel.c:763
+msgid "Enterprise"
+msgstr "Enterprise"
+
+#. TRANSLATORS: this no (!) WiFi security
+#: ../panels/network/cc-network-panel.c:769
+#: ../panels/universal-access/uap.ui.h:43
+msgid "None"
+msgstr "Ingen"
+
+#. TRANSLATORS: this is a wired connection that is disconnected
+#: ../panels/network/cc-network-panel.c:853
+msgid "Unplugged"
+msgstr "Koblet fra"
+
+#: ../panels/network/cc-network-panel.c:1193
 msgid "Network proxy"
 msgstr "Nettverksproxy"
 
-#: ../panels/network/cc-network-panel.c:978
+#: ../panels/network/cc-network-panel.c:1202
 msgid "Set the system proxy settings"
 msgstr "Systeminnstillinger for proxy"
 
+#: ../panels/network/cc-network-panel.c:1299
+#, c-format
+msgid "%s VPN"
+msgstr "%s VPN"
+
+#: ../panels/network/cc-network-panel.c:1311
+msgid "Virtual private network"
+msgstr "Virtuelt privat nettverk"
+
 #. TRANSLATORS: the user is running a NM that is too new and API compatible
-#: ../panels/network/cc-network-panel.c:1122
+#: ../panels/network/cc-network-panel.c:1370
 msgid "The running NetworkManager version is not compatible (too new)."
 msgstr "Kjørende versjon av NetworkManager er ikke kompatibel (for ny)."
 
 #. TRANSLATORS: the user is running a NM that is too old and API compatible
-#: ../panels/network/cc-network-panel.c:1128
+#: ../panels/network/cc-network-panel.c:1376
 msgid "The running NetworkManager version is not compatible (too old)."
 msgstr "Kjørende versjon av NetworkManager er ikke kompatibel (for gammel)."
 
@@ -1748,211 +1790,240 @@ msgid "Network;Wireless;IP;LAN;"
 msgstr "Nettverk;Trådløs;IP;LAN;"
 
 #: ../panels/network/network.ui.h:1
-msgid "Airplane Mode"
-msgstr "Flymodus"
+msgid "Air_plane Mode"
+msgstr "Fly_modus"
 
 #: ../panels/network/network.ui.h:2
-msgid "Configuration URL:"
-msgstr "Konfigurasjons-URL:"
-
-#: ../panels/network/network.ui.h:3
 msgid "DNS:"
 msgstr "DNS:"
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:3
 msgid "Default Route:"
 msgstr "Forvalgt rute:"
 
-#: ../panels/network/network.ui.h:5
-msgid "FTP Proxy:"
-msgstr "FTP-proxy:"
-
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:4
 msgid "Gateway:"
 msgstr "Portner:"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:5
 msgid "Group Name:"
 msgstr "Gruppenavn:"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:6
 msgid "Group Password:"
 msgstr "Gruppepassord:"
 
-#: ../panels/network/network.ui.h:9
-msgid "HTTP Proxy:"
-msgstr "HTTP-proxy:"
+#: ../panels/network/network.ui.h:7
+msgid "H_TTPS Proxy:"
+msgstr "H_TTP-proxy:"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:8
 msgid "Hardware Address:"
 msgstr "Maskinvareadresse:"
 
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:9
 msgid "IMEI:"
 msgstr "IMEI:"
 
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:10
 msgid "IP Address:"
 msgstr "IP-adresse:"
 
-#: ../panels/network/network.ui.h:13
+#: ../panels/network/network.ui.h:11
 msgid "IPv4 Address:"
 msgstr "IPv4-adresse:"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:12
 msgid "IPv6 Address:"
 msgstr "IPv6-adresse:"
 
-#: ../panels/network/network.ui.h:15
-msgid "Method:"
-msgstr "Metode:"
-
-#: ../panels/network/network.ui.h:16
-msgid "Network Name:"
-msgstr "Nettverksnavn:"
-
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:14
 msgid "Provider:"
 msgstr "Tilbyder:"
 
-#: ../panels/network/network.ui.h:18
-msgid "Secure HTTP Proxy:"
-msgstr "Sikker HTTP-proxy:"
-
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:15
 msgid "Security:"
 msgstr "Sikkerhet:"
 
-#: ../panels/network/network.ui.h:20
-msgid "Socks Host:"
-msgstr "Socks-vert:"
-
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:16
 msgid "Speed:"
 msgstr "Hastighet:"
 
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:17
 msgid "Subnet Mask:"
 msgstr "Subnettmaske:"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:19
 msgid "Username:"
 msgstr "Brukernavn:"
 
+#: ../panels/network/network.ui.h:20
+msgid "_Configuration URL:"
+msgstr "_Konfigurasjons-URL:"
+
+#: ../panels/network/network.ui.h:21
+msgid "_FTP Proxy:"
+msgstr "_FTP-proxy:"
+
+#: ../panels/network/network.ui.h:22
+msgid "_HTTP Proxy:"
+msgstr "_HTTP-proxy:"
+
+#: ../panels/network/network.ui.h:23
+msgid "_Method:"
+msgstr "_Metode:"
+
+#: ../panels/network/network.ui.h:24
+msgid "_Network Name:"
+msgstr "_Nettverksnavn:"
+
 #: ../panels/network/network.ui.h:25
+msgid "_Options"
+msgstr "A_lternativer"
+
+#: ../panels/network/network.ui.h:26
+msgid "_Socks Host:"
+msgstr "_Socks-vert:"
+
+#: ../panels/network/network.ui.h:27
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "Automatisk"
 
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:28
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "Manuell"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:29
 msgctxt "proxy method"
 msgid "None"
 msgstr "Ingen"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:76
+#: ../panels/network/panel-common.c:82
 msgid "Wired"
 msgstr "Kablet"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:80
+#: ../panels/network/panel-common.c:86
 msgid "Wireless"
 msgstr "Trådløs"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:87
+#: ../panels/network/panel-common.c:93
 msgid "Mobile broadband"
 msgstr "Mobilt bredbånd"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:92
+#: ../panels/network/panel-common.c:98
 msgid "Bluetooth"
 msgstr "Blåtann"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:96
+#: ../panels/network/panel-common.c:102
 msgid "Mesh"
 msgstr "Mesh"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:155
+#: ../panels/network/panel-common.c:161
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:159
+#: ../panels/network/panel-common.c:165
 msgid "Infrastructure"
 msgstr "Infrastruktur"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:177
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:183 ../panels/network/panel-common.c:247
 msgid "Status unknown"
 msgstr "Ukjent status"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:181
+#: ../panels/network/panel-common.c:187
 msgid "Unmanaged"
 msgstr "Ikke administrert"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:185
+#: ../panels/network/panel-common.c:191
 msgid "Unavailable"
 msgstr "Ikke tilgjengelig"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:189
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:195 ../panels/network/panel-common.c:275
 msgid "Disconnected"
 msgstr "Frakoblet"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:193
+#: ../panels/network/panel-common.c:199
 msgid "Preparing connection"
 msgstr "Forbereder tilkobling"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:197
+#: ../panels/network/panel-common.c:203
 msgid "Configuring connection"
 msgstr "Konfigurerer tilkobling"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:201
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:207 ../panels/network/panel-common.c:255
 msgid "Authenticating"
 msgstr "Autentiserer"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:205
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:211 ../panels/network/panel-common.c:263
 msgid "Getting network address"
 msgstr "Henter nettverksadresse"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:209
+#: ../panels/network/panel-common.c:215
 msgid "Checking network address"
 msgstr "Sjekker nettverksadresse"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:213
+#: ../panels/network/panel-common.c:219
 msgid "Connected"
 msgstr "Tilkoblet"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:217
+#: ../panels/network/panel-common.c:223
 msgid "Disconnecting"
 msgstr "Kobler fra"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:221
+#: ../panels/network/panel-common.c:227
 msgid "Failed to connect"
 msgstr "Klarte ikke å koble til"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:225
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:231 ../panels/network/panel-common.c:279
 msgid "Status unknown (missing)"
 msgstr "Ukjent status (mangler)"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:251
+msgid "Preparing"
+msgstr "Forbereder"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:259
+msgid "Connecting"
+msgstr "Kobler til"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:267
+msgid "Active"
+msgstr "Aktiv"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:271
+msgid "Failed"
+msgstr "Feilet"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -2219,17 +2290,17 @@ msgstr "_Fade:"
 msgid "_Subwoofer:"
 msgstr "_Basselement:"
 
-#: ../panels/sound/gvc-channel-bar.c:602 ../panels/sound/gvc-channel-bar.c:611
+#: ../panels/sound/gvc-channel-bar.c:603 ../panels/sound/gvc-channel-bar.c:612
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: ../panels/sound/gvc-channel-bar.c:606
+#: ../panels/sound/gvc-channel-bar.c:607
 msgctxt "volume"
 msgid "Unamplified"
 msgstr "Ikke forsterket"
 
-#: ../panels/sound/gvc-channel-bar.c:900
+#: ../panels/sound/gvc-channel-bar.c:901
 msgid "Mute"
 msgstr "Demp"
 
@@ -2588,10 +2659,6 @@ msgstr "Innstillinger for mus"
 #: ../panels/universal-access/uap.ui.h:42
 msgid "Nomon"
 msgstr "Nomon"
-
-#: ../panels/universal-access/uap.ui.h:43
-msgid "None"
-msgstr "Ingen"
 
 #: ../panels/universal-access/uap.ui.h:45
 msgid "On screen keyboard"
