@@ -2,7 +2,7 @@
 # Copyright (C) 1998-2011 Free Software Foundation, Inc.
 # Yukihiro Nakai <Nakai@abricot.co.jp>, 1998
 # Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1999
-# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2000, 2009, 2010.
+# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2000, 2009, 2010-2011.
 # Akira TAGOH <tagoh@gnome.gr.jp>, 2001.
 # Takeshi AIHANA <takeshi.aihana@gmail.com>, 2003-2008.
 # KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>, 2003.
@@ -12,15 +12,14 @@
 # Jiro Matsuzawa <matsuzawa.jr@gmail.com>, 2010-2011.
 # Kiyotaka NISHIBORI <ml.nishibori.kiyotaka@gmail.com>, 2011.
 #
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"control-center&component=general\n"
-"POT-Creation-Date: 2011-03-04 01:15+0000\n"
-"PO-Revision-Date: 2011-03-07 00:25+0900\n"
-"Last-Translator: Jiro Matsuzawa <matsuzawa.jr@gmail.com>\n"
+"control-center&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-03-12 20:13+0000\n"
+"PO-Revision-Date: 2011-03-10 00:24+0900\n"
+"Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -67,36 +66,40 @@ msgstr ""
 #: ../libgnome-control-center/cc-lockbutton.c:347
 #: ../panels/screen/screen.ui.h:13
 msgid "Lock"
-msgstr ""
+msgstr "ロック"
 
 #: ../libgnome-control-center/cc-lockbutton.c:356
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:18
 msgid "Unlock"
-msgstr ""
+msgstr "ロック解除"
 
 #: ../libgnome-control-center/cc-lockbutton.c:365
 msgid "Locked"
-msgstr ""
+msgstr "ロック中"
 
 #: ../libgnome-control-center/cc-lockbutton.c:374
 msgid ""
 "Dialog is unlocked.\n"
 "Click to prevent further changes"
 msgstr ""
+"ダイアログのロックが解除されています。\n"
+"これ以上変更しないようにするにはクリックしてください"
 
 #: ../libgnome-control-center/cc-lockbutton.c:383
 msgid ""
 "Dialog is locked.\n"
 "Click to make changes"
 msgstr ""
+"ダイアログがロックされています。\n"
+"変更するにはクリックしてください"
 
 #: ../libgnome-control-center/cc-lockbutton.c:392
-#, fuzzy
-#| msgid "Please contact your system administrator for help."
 msgid ""
 "System policy prevents changes.\n"
 "Contact your system administrator"
-msgstr "システム管理者に連絡してください。"
+msgstr ""
+"システムのポリシーにより変更できませんでした。\n"
+"システム管理者に連絡してください。"
 
 #: ../libgnome-control-center/gconf-property-editor.c:134
 msgid "Key"
@@ -212,10 +215,8 @@ msgstr "背景を変更する"
 
 #. Translators: those are keywords for the background control-center panel
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:4
-#, fuzzy
-#| msgid "Wallpapers"
 msgid "Wallpaper;Screen;Desktop;"
-msgstr "壁紙"
+msgstr "壁紙;スクリーン;デスクトップ;"
 
 #: ../panels/background/background.ui.h:1
 msgid "Center"
@@ -249,48 +250,40 @@ msgid "Zoom"
 msgstr "ズーム"
 
 #: ../panels/background/bg-colors-source.c:46
-#, fuzzy
-#| msgid "Horizontal gradient"
 msgid "Horizontal Gradient"
 msgstr "横方向にグラデーション"
 
 #: ../panels/background/bg-colors-source.c:47
-#, fuzzy
-#| msgid "Vertical gradient"
 msgid "Vertical Gradient"
 msgstr "縦方向にグラデーション"
 
 #: ../panels/background/bg-colors-source.c:48
-#, fuzzy
-#| msgid "Solid color"
 msgid "Solid Color"
 msgstr "単色"
 
-#: ../panels/background/cc-background-panel.c:960
+#: ../panels/background/cc-background-panel.c:958
 #: ../panels/user-accounts/um-photo-dialog.c:216
 #: ../panels/user-accounts/data/photo-dialog.ui.h:2
 msgid "Browse for more pictures"
-msgstr ""
+msgstr "より多くの画像を参照"
 
-#: ../panels/background/cc-background-panel.c:1051
-#, fuzzy
-#| msgid "Change the background"
+#: ../panels/background/cc-background-panel.c:1049
 msgid "Current background"
-msgstr "背景を変更する"
+msgstr "現在の背景"
 
-#: ../panels/background/cc-background-panel.c:1115
+#: ../panels/background/cc-background-panel.c:1113
 msgid "Wallpapers"
 msgstr "壁紙"
 
-#: ../panels/background/cc-background-panel.c:1122
+#: ../panels/background/cc-background-panel.c:1120
 msgid "Pictures Folder"
 msgstr "ピクチャフォルダ"
 
-#: ../panels/background/cc-background-panel.c:1129
+#: ../panels/background/cc-background-panel.c:1127
 msgid "Colors & Gradients"
-msgstr ""
+msgstr "色とグラデーション"
 
-#: ../panels/background/cc-background-panel.c:1137
+#: ../panels/background/cc-background-panel.c:1135
 msgid "Flickr"
 msgstr "Flickr"
 
@@ -301,10 +294,9 @@ msgstr "複数のサイズ"
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
 #: ../panels/background/cc-background-item.c:152
-#, fuzzy, c-format
-#| msgid "%d x %d"
+#, c-format
 msgid "%d × %d"
-msgstr "%d x %d"
+msgstr "%d × %d"
 
 #: ../panels/background/cc-background-item.c:255
 msgid "No Desktop Background"
@@ -312,7 +304,7 @@ msgstr "デスクトップの背景ではありません"
 
 #: ../panels/common/gdm-languages.c:709
 msgid "Unspecified"
-msgstr ""
+msgstr "未指定"
 
 #: ../panels/datetime/datetime.ui.h:1
 msgid "16"
@@ -328,7 +320,7 @@ msgstr "22"
 
 #: ../panels/datetime/datetime.ui.h:4
 msgid "24-Hour Time"
-msgstr ""
+msgstr "24時制"
 
 #: ../panels/datetime/datetime.ui.h:5
 msgid "45"
@@ -383,10 +375,8 @@ msgid "May"
 msgstr "5月"
 
 #: ../panels/datetime/datetime.ui.h:18
-#, fuzzy
-#| msgid "Network Servers"
 msgid "Network Time"
-msgstr "ネットワーク・サーバ"
+msgstr "ネットワーク時間"
 
 #: ../panels/datetime/datetime.ui.h:19
 msgid "November"
@@ -410,8 +400,6 @@ msgid "Clock;Timezone;Location;"
 msgstr ""
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:3
-#, fuzzy
-#| msgid "Date And Time"
 msgid "Date and Time"
 msgstr "日付と時刻"
 
@@ -436,10 +424,8 @@ msgid "Normal"
 msgstr "標準"
 
 #: ../panels/display/display-capplet.ui.h:4
-#, fuzzy
-#| msgid "<i>Note: may limit resolution options</i>"
 msgid "Note: may limit resolution options"
-msgstr "<i>注意: 解像度の選択を制限することがあります</i>"
+msgstr "注意: 解像度の選択を制限することがあります"
 
 #: ../panels/display/display-capplet.ui.h:5
 msgid "R_otation:"
@@ -454,31 +440,23 @@ msgid "Upside-down"
 msgstr "逆さま"
 
 #: ../panels/display/display-capplet.ui.h:8
-#, fuzzy
-#| msgid "Display"
 msgid "_Detect Displays"
-msgstr "ディスプレイ"
+msgstr "ディスプレイの検出(_D)"
 
 #. Note that mirror is a verb in this string
 #: ../panels/display/display-capplet.ui.h:10
-#, fuzzy
-#| msgid "_Mirror screens"
 msgid "_Mirror displays"
-msgstr "複数の画面をミラーする(_M)"
+msgstr "複数のディスプレイをミラーする(_M)"
 
 #: ../panels/display/display-capplet.ui.h:11
 msgid "_Resolution:"
 msgstr "解像度(_R):"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:1
-#, fuzzy
-#| msgid "Change resolution and position of monitors"
 msgid "Change resolution and position of monitors and projectors"
-msgstr "モニタの解像度と位置を変更する"
+msgstr "モニタやプロジェクターの解像度と位置を変更する"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
-#, fuzzy
-#| msgid "Display"
 msgid "Displays"
 msgstr "ディスプレイ"
 
@@ -489,15 +467,15 @@ msgstr ""
 
 #: ../panels/display/xrandr-capplet.c:328
 msgid "Anti-Clockwise"
-msgstr ""
+msgstr "反時計回り"
 
 #: ../panels/display/xrandr-capplet.c:329
 msgid "Clockwise"
-msgstr ""
+msgstr "時計回り"
 
 #: ../panels/display/xrandr-capplet.c:330
 msgid "180 Degrees"
-msgstr ""
+msgstr "180度"
 
 #. Translators:  this is the feature where what you see on your laptop's
 #. * screen is the same as your external monitor.  Here, "Mirror" is being
@@ -505,16 +483,13 @@ msgstr ""
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
 #: ../panels/display/xrandr-capplet.c:467
-#, fuzzy
-#| msgid "Display"
 msgid "Mirror Displays"
-msgstr "ディスプレイ"
+msgstr "ディスプレイをミラー"
 
 #: ../panels/display/xrandr-capplet.c:597
-#, fuzzy, c-format
-#| msgid "%d x %d"
+#, c-format
 msgid "%d x %d (%s)"
-msgstr "%d x %d"
+msgstr "%d x %d (%s)"
 
 #: ../panels/display/xrandr-capplet.c:599
 #, c-format
@@ -560,12 +535,12 @@ msgstr "スクリーンの情報を取得できませんでした"
 #: ../panels/info/cc-info-panel.c:366
 #, c-format
 msgid "VESA: %s"
-msgstr ""
+msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:72
-#: ../panels/network/panel-common.c:151
+#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:78
+#: ../panels/network/panel-common.c:157
 msgid "Unknown"
 msgstr "不明"
 
@@ -574,49 +549,47 @@ msgstr "不明"
 #: ../panels/info/cc-info-panel.c:528
 #, c-format
 msgid "%d-bit"
-msgstr ""
+msgstr "%d ビット"
 
 #: ../panels/info/cc-info-panel.c:542
 #, c-format
 msgid "%u byte"
 msgid_plural "%u bytes"
-msgstr[0] ""
+msgstr[0] "%u バイト"
 
 #: ../panels/info/cc-info-panel.c:550
 #, c-format
 msgid "%.1f KB"
-msgstr ""
+msgstr "%.1f KB"
 
 #: ../panels/info/cc-info-panel.c:555
 #, c-format
 msgid "%.1f MB"
-msgstr ""
+msgstr "%.1f MB"
 
 #: ../panels/info/cc-info-panel.c:560
 #, c-format
 msgid "%.1f GB"
-msgstr ""
+msgstr "%.1f GB"
 
 #: ../panels/info/cc-info-panel.c:565
 #, c-format
 msgid "%.1f TB"
-msgstr ""
+msgstr "%.1f TB"
 
 #: ../panels/info/cc-info-panel.c:570
 #, c-format
 msgid "%.1f PB"
-msgstr ""
+msgstr "%.1f PB"
 
 #: ../panels/info/cc-info-panel.c:575
 #, c-format
 msgid "%.1f EB"
-msgstr ""
+msgstr "%.1f EB"
 
 #: ../panels/info/cc-info-panel.c:686
-#, fuzzy
-#| msgid "Unknown"
 msgid "Unknown model"
-msgstr "不明"
+msgstr "不明なモデル"
 
 #: ../panels/info/cc-info-panel.c:769
 msgid "The next login will attempt to use the standard experience."
@@ -631,39 +604,29 @@ msgstr ""
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
 #: ../panels/info/cc-info-panel.c:813
-#, fuzzy
-#| msgid "Callback"
 msgctxt "Experience"
 msgid "Fallback"
-msgstr "コールバック"
+msgstr "フォールバック"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
 #: ../panels/info/cc-info-panel.c:819
-#, fuzzy
-#| msgid "Standard XTerminal"
 msgctxt "Experience"
 msgid "Standard"
-msgstr "標準のX端末"
+msgstr "標準"
 
 #: ../panels/info/cc-info-panel.c:951
 #: ../panels/keyboard/keyboard-shortcuts.c:1711
-#, fuzzy
-#| msgid "Action"
 msgid "Section"
-msgstr "操作"
+msgstr "セクション"
 
 #: ../panels/info/cc-info-panel.c:960 ../panels/info/info.ui.h:14
-#, fuzzy
-#| msgid "_Overwrite"
 msgid "Overview"
-msgstr "置き換える(_O)"
+msgstr "概要"
 
 #: ../panels/info/cc-info-panel.c:966 ../panels/info/info.ui.h:2
-#, fuzzy
-#| msgid "- GNOME Default Applications"
 msgid "Default Applications"
-msgstr "- GNOME のデフォルトのアプリ"
+msgstr "デフォルトのアプリ"
 
 #: ../panels/info/cc-info-panel.c:971 ../panels/info/info.ui.h:9
 msgid "Graphics"
@@ -675,16 +638,12 @@ msgid "Version %s"
 msgstr ""
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
-#, fuzzy
-#| msgid "System"
 msgid "System Info"
-msgstr "システム"
+msgstr "システム情報"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:2
-#, fuzzy
-#| msgid "System Settings"
 msgid "System Information"
-msgstr "システムの設定"
+msgstr "システムの情報"
 
 #. Translators: those are keywords for the System Information panel
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
@@ -694,30 +653,24 @@ msgid ""
 msgstr ""
 
 #: ../panels/info/info.ui.h:1
-#, fuzzy
-#| msgid "Cale_ndar:"
 msgid "Calendar"
-msgstr "カレンダ(_N):"
+msgstr "カレンダ"
 
 #: ../panels/info/info.ui.h:3
-#, fuzzy
-#| msgid "December"
 msgid "Device name"
-msgstr "12月"
+msgstr "デバイス名"
 
 #: ../panels/info/info.ui.h:4
 msgid "Disk"
-msgstr ""
+msgstr "ディスク"
 
 #: ../panels/info/info.ui.h:5
 msgid "Driver"
-msgstr ""
+msgstr "ドライバ"
 
 #: ../panels/info/info.ui.h:6
-#, fuzzy
-#| msgid "Appearance"
 msgid "Experience"
-msgstr "外観の設定"
+msgstr ""
 
 #. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
 #: ../panels/info/info.ui.h:8
@@ -725,162 +678,132 @@ msgid "Forced Fallback Mode"
 msgstr ""
 
 #: ../panels/info/info.ui.h:10
-#, fuzzy
-#| msgid "KMail"
 msgid "Mail"
-msgstr "KMail"
+msgstr "メール"
 
 #: ../panels/info/info.ui.h:11
 msgid "Memory"
-msgstr ""
+msgstr "メモリ"
 
 #: ../panels/info/info.ui.h:12
 msgid "Music"
-msgstr ""
+msgstr "音楽"
 
 #: ../panels/info/info.ui.h:13
-#, fuzzy
-#| msgid "Style:"
 msgid "OS type"
-msgstr "スタイル:"
+msgstr "OS 種別"
 
 #: ../panels/info/info.ui.h:15
 msgid "Photos"
-msgstr ""
+msgstr "写真"
 
 #: ../panels/info/info.ui.h:16
-#, fuzzy
-#| msgid "_Profession:"
 msgid "Processor"
-msgstr "職業(_P):"
+msgstr "プロセッサ"
 
 #: ../panels/info/info.ui.h:17
 msgid "Updates Available"
-msgstr ""
+msgstr "更新が利用可能"
 
 #: ../panels/info/info.ui.h:18
-#, fuzzy
-#| msgid "Video Mouse"
 msgid "Video"
-msgstr "ビデオマウス"
+msgstr "ビデオ"
 
 #: ../panels/info/info.ui.h:19
 msgid "Web"
 msgstr "ウェブ"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:1
-#, fuzzy
-#| msgid "rejected"
 msgid "Eject"
-msgstr "拒否された"
+msgstr "取り出し"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:2
-#, fuzzy
-#| msgid "Multimedia Player"
 msgid "Launch media player"
-msgstr "マルチメディア・プレイヤー"
+msgstr "メディア・プレイヤーを起動"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:3
 msgid "Next track"
-msgstr ""
+msgstr "次のトラック"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:4
 msgid "Pause playback"
-msgstr ""
+msgstr "再生を一時停止"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:5
 msgid "Play (or play/pause)"
-msgstr ""
+msgstr "再生 (あるいは再生/一時停止)"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:6
 msgid "Previous track"
-msgstr ""
+msgstr "前のトラック"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:7
 msgid "Sound and Media"
-msgstr ""
+msgstr "音とメディア"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:8
 msgid "Stop playback"
-msgstr ""
+msgstr "再生を停止"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:9
-#, fuzzy
-#| msgid "UI Control"
 msgid "Volume down"
-msgstr "UI コントロール"
+msgstr "音量を下げる"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:10
-#, fuzzy
-#| msgid "UI Control"
 msgid "Volume mute"
-msgstr "UI コントロール"
+msgstr "無音にする"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:11
-#, fuzzy
-#| msgid "Roll up"
 msgid "Volume up"
-msgstr "巻き上げる"
+msgstr "音量を上げる"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:1
 msgid "Home folder"
-msgstr ""
+msgstr "ホーム・フォルダ"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:2
 msgid "Launch calculator"
-msgstr ""
+msgstr "計算機を起動"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:3
 msgid "Launch email client"
-msgstr ""
+msgstr "Emacs Client を起動"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:4
 msgid "Launch help browser"
-msgstr ""
+msgstr "ヘルプ・ブラウザを起動"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:5
-#, fuzzy
-#| msgid "Epiphany Web Browser"
 msgid "Launch web browser"
-msgstr "Epiphany ウェブ・ブラウザ"
+msgstr "ウェブ・ブラウザを起動"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:6
 msgid "Launchers"
 msgstr ""
 
 #: ../panels/keyboard/01-launchers.xml.in.h:7
-#, fuzzy
-#| msgid "March"
 msgid "Search"
-msgstr "3月"
+msgstr "検索"
 
 #: ../panels/keyboard/01-system.xml.in.h:1
-#, fuzzy
-#| msgid "_Mirror screens"
 msgid "Lock screen"
-msgstr "複数の画面をミラーする(_M)"
+msgstr "画面をロック"
 
 #: ../panels/keyboard/01-system.xml.in.h:2
-#, fuzzy
-#| msgid "Layout"
 msgid "Log out"
-msgstr "レイアウト"
+msgstr "ログアウト"
 
 #: ../panels/keyboard/01-system.xml.in.h:3
 msgid "System"
 msgstr "システム"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:1
-#, fuzzy
-#| msgid "Decrease size:"
 msgid "Decrease text size"
-msgstr "サイズの縮小:"
+msgstr "文字サイズを縮小"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:2
-#, fuzzy
-#| msgid "Increase size:"
 msgid "Increase text size"
-msgstr "サイズの拡大:"
+msgstr "文字サイズを拡大"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:3
 msgid "Magnifier zoom in"
@@ -891,26 +814,20 @@ msgid "Magnifier zoom out"
 msgstr ""
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:5
-#, fuzzy
-#| msgid "Best co_ntrast"
 msgid "Toggle contrast"
-msgstr "最適なコントラスト(_N)"
+msgstr "コントラストの切り替え"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:6
 msgid "Toggle magnifier"
-msgstr ""
+msgstr "拡大鏡の切り替え"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:7
-#, fuzzy
-#| msgid "On screen keyboard"
 msgid "Toggle on-screen keyboard"
-msgstr "オンスクリーン・キーボード"
+msgstr "オンスクリーン・キーボードの切り替え"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:8
-#, fuzzy
-#| msgid "Screen Reader"
 msgid "Toggle screen reader"
-msgstr "スクリーン・リーダ"
+msgstr "スクリーン・リーダの切り替え"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:9
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
@@ -955,10 +872,8 @@ msgid "Disabled"
 msgstr "無効"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
-#, fuzzy
-#| msgid "Keyboard Settings..."
 msgid "Change keyboard settings"
-msgstr "キーボードの設定..."
+msgstr "キーボードの設定を変更する"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
@@ -1093,8 +1008,6 @@ msgid "Short"
 msgstr "短い"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
-#, fuzzy
-#| msgid "Shortcut"
 msgid "Shortcuts"
 msgstr "ショートカット"
 
@@ -1105,16 +1018,12 @@ msgid "Slow"
 msgstr "遅い"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
-#, fuzzy
-#| msgid ""
-#| "To edit a shortcut key, click on the corresponding row and type a new key "
-#| "combination, or press backspace to clear."
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
 msgstr ""
-"キーボード・ショートカットを編集する際は、対応する操作をクリックして新しい"
-"キーの組み合わせを押下してください ([BS] キーで取り消します)"
+"ショートカットを編集するには、対応する行をクリックし、新しいキーの組み合わせ"
+"を押すか、[BS] キーで取り消してください。"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
 msgid "_Delay:"
@@ -1130,43 +1039,35 @@ msgstr "速度(_S):"
 
 #: ../panels/media/cc-media-panel.c:322
 msgid "Ask what to do"
-msgstr ""
+msgstr "どうするか尋ねる。"
 
 #: ../panels/media/cc-media-panel.c:326 ../panels/power/power.ui.h:6
-#, fuzzy
-#| msgid "Smoothing"
 msgid "Do nothing"
-msgstr "滑らかさの補正 (スムージング)"
+msgstr "なにもしない"
 
 #: ../panels/media/cc-media-panel.c:330
 msgid "Open folder"
-msgstr ""
+msgstr "フォルダを開く"
 
 #: ../panels/media/cc-media-panel.c:441
-#, fuzzy
-#| msgid "Select your default applications"
 msgid "Select an application for audio CDs"
-msgstr "デフォルトで使用するアプリケーションを設定します"
+msgstr "オーディオCD用のアプリケーションを選択"
 
 #: ../panels/media/cc-media-panel.c:442
-#, fuzzy
-#| msgid "Select your default applications"
 msgid "Select an application for video DVDs"
-msgstr "デフォルトで使用するアプリケーションを設定します"
+msgstr "ビデオDVD用のアプリケーションを選択"
 
 #: ../panels/media/cc-media-panel.c:443
 msgid "Select an application to run when a music player is connected"
-msgstr ""
+msgstr "ミュージック・プレイヤーが接続された時に実行するアプリケーションを選択"
 
 #: ../panels/media/cc-media-panel.c:444
 msgid "Select an application to run when a camera is connected"
-msgstr ""
+msgstr "カメラが接続された時に起動するアプリケーションを選択"
 
 #: ../panels/media/cc-media-panel.c:445
-#, fuzzy
-#| msgid "Select your default applications"
 msgid "Select an application for software CDs"
-msgstr "デフォルトで使用するアプリケーションを設定します"
+msgstr "ソフトウェアの CD を開くアプリケーションを選択してください"
 
 #. translators: these strings are duplicates of shared-mime-info
 #. * strings, just here to fix capitalization of the English originals.
@@ -1206,34 +1107,28 @@ msgid "HD DVD video disc"
 msgstr ""
 
 #: ../panels/media/cc-media-panel.c:465
-#, fuzzy
-#| msgid "Pictures Folder"
 msgid "Picture CD"
-msgstr "ピクチャフォルダ"
+msgstr ""
 
 #: ../panels/media/cc-media-panel.c:466
 msgid "Super Video CD"
 msgstr ""
 
 #: ../panels/media/cc-media-panel.c:467
-#, fuzzy
-#| msgid "Video Mouse"
 msgid "Video CD"
-msgstr "ビデオマウス"
+msgstr ""
 
 #: ../panels/media/gnome-media-properties.ui.h:1
-#, fuzzy
-#| msgid "Action"
 msgid "Acti_on:"
-msgstr "操作"
+msgstr "アクション(_O):"
 
 #: ../panels/media/gnome-media-properties.ui.h:2
 msgid "CD _audio:"
-msgstr ""
+msgstr "CD オーディオ(_A)"
 
 #: ../panels/media/gnome-media-properties.ui.h:3
 msgid "Media and Autorun"
-msgstr ""
+msgstr "メディアと自動実行"
 
 #: ../panels/media/gnome-media-properties.ui.h:4
 msgid "Select how media should be handled"
@@ -1245,49 +1140,39 @@ msgstr ""
 
 #: ../panels/media/gnome-media-properties.ui.h:6
 msgid "_DVD video:"
-msgstr ""
+msgstr "DVD ビデオ(_D):"
 
 #: ../panels/media/gnome-media-properties.ui.h:7
-#, fuzzy
-#| msgid "Muine Music Player"
 msgid "_Music player:"
-msgstr "Muine 楽曲プレイヤー"
+msgstr "音楽プレイヤー(_M):"
 
 #: ../panels/media/gnome-media-properties.ui.h:8
 msgid "_Never prompt or start programs on media insertion"
-msgstr ""
+msgstr "メディア挿入時にどうするか尋ねたり、プログラムを実行したりしない(_N)"
 
 #: ../panels/media/gnome-media-properties.ui.h:9
-#, fuzzy
-#| msgid "Other"
 msgid "_Other Media..."
-msgstr "その他"
+msgstr "他のメディア(_O)..."
 
 #: ../panels/media/gnome-media-properties.ui.h:10
-#, fuzzy
-#| msgid "_Yahoo:"
 msgid "_Photos:"
-msgstr "Yahoo(_Y):"
+msgstr "写真(_P):"
 
 #: ../panels/media/gnome-media-properties.ui.h:11
 msgid "_Software:"
-msgstr ""
+msgstr "ソフトウェア(_S):"
 
 #: ../panels/media/gnome-media-properties.ui.h:12
-#, fuzzy
-#| msgid "Type:"
 msgid "_Type:"
-msgstr "種類:"
+msgstr "種類(_T):"
 
 #: ../panels/media/gnome-media-panel.desktop.in.in.h:1
-#, fuzzy
-#| msgid "Set your mouse and touchpad preferences"
 msgid "Configure media and autorun preferences"
-msgstr "マウスとタッチパッドを設定します"
+msgstr "メディアや自動実行の設定を変更する"
 
 #: ../panels/media/gnome-media-panel.desktop.in.in.h:2
 msgid "Removable Media"
-msgstr ""
+msgstr "リムーバブルメディア"
 
 #. Translators: those are keywords for the media control-center panel
 #: ../panels/media/gnome-media-panel.desktop.in.in.h:4
@@ -1295,249 +1180,216 @@ msgid "cd;dvd;usb;audio;video;disc;"
 msgstr ""
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:261
-#, fuzzy
-#| msgid "Locate Pointer"
+#: ../panels/printers/cc-printers-panel.c:239
 msgid "Low on toner"
-msgstr "ポインタの位置"
+msgstr "トナーの残量が少ないです"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:263
+#: ../panels/printers/cc-printers-panel.c:241
 msgid "Out of toner"
-msgstr ""
+msgstr "トナーが空です"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:266
+#: ../panels/printers/cc-printers-panel.c:244
 msgid "Low on developer"
-msgstr ""
+msgstr "現像液が少ないです"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:269
+#: ../panels/printers/cc-printers-panel.c:247
 msgid "Out of developer"
-msgstr ""
+msgstr "現像液が空です"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:271
+#: ../panels/printers/cc-printers-panel.c:249
 msgid "Low on a marker supply"
 msgstr ""
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:273
+#: ../panels/printers/cc-printers-panel.c:251
 msgid "Out of a marker supply"
 msgstr ""
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:275
+#: ../panels/printers/cc-printers-panel.c:253
 msgid "Open cover"
-msgstr ""
+msgstr "カバーが開いています"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:277
-#, fuzzy
-#| msgid "Vendors"
+#: ../panels/printers/cc-printers-panel.c:255
 msgid "Open door"
-msgstr "ベンダー"
+msgstr "扉が開いています"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:279
+#: ../panels/printers/cc-printers-panel.c:257
 msgid "Low on paper"
-msgstr ""
+msgstr "紙が少なくなっています"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:281
+#: ../panels/printers/cc-printers-panel.c:259
 msgid "Out of paper"
-msgstr ""
+msgstr "紙が空です"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:283
-#, fuzzy
-#| msgid "Off"
+#: ../panels/printers/cc-printers-panel.c:261
 msgctxt "printer state"
 msgid "Offline"
-msgstr "無効"
+msgstr "オフライン"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:285
+#: ../panels/printers/cc-printers-panel.c:263
 msgctxt "printer state"
 msgid "Paused"
-msgstr ""
+msgstr "一時停止中"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:287
+#: ../panels/printers/cc-printers-panel.c:265
 msgid "Waste receptacle almost full"
 msgstr ""
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:289
+#: ../panels/printers/cc-printers-panel.c:267
 msgid "Waste receptacle full"
 msgstr ""
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:291
+#: ../panels/printers/cc-printers-panel.c:269
 msgid "The optical photo conductor is near end of life"
 msgstr ""
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:293
+#: ../panels/printers/cc-printers-panel.c:271
 msgid "The optical photo conductor is no longer functioning"
 msgstr ""
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:430
-#, fuzzy
-#| msgid "Red"
+#: ../panels/printers/cc-printers-panel.c:408
 msgctxt "printer state"
 msgid "Ready"
-msgstr "赤"
+msgstr "準備完了"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:434
-#, fuzzy
-#| msgid "_Profession:"
+#: ../panels/printers/cc-printers-panel.c:412
 msgctxt "printer state"
 msgid "Processing"
-msgstr "職業(_P):"
+msgstr "処理中"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:438
+#: ../panels/printers/cc-printers-panel.c:416
 msgctxt "printer state"
 msgid "Stopped"
-msgstr ""
+msgstr "停止中"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:536
+#: ../panels/printers/cc-printers-panel.c:514
 msgid "Toner Level"
-msgstr ""
+msgstr "トナーの量"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:539
-#, fuzzy
-#| msgid "_Input boxes:"
+#: ../panels/printers/cc-printers-panel.c:517
 msgid "Ink Level"
-msgstr "入力ボックス(_I):"
+msgstr "インクの量"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:542
+#: ../panels/printers/cc-printers-panel.c:520
 msgid "Supply Level"
-msgstr ""
+msgstr "サプライの量"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:557
+#: ../panels/printers/cc-printers-panel.c:535
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
-msgstr[0] ""
+msgstr[0] "%u 個がアクティブ"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1024
-#, fuzzy
-#| msgid "Seeing"
+#: ../panels/printers/cc-printers-panel.c:1002
 msgctxt "print job"
 msgid "Pending"
-msgstr "視覚"
+msgstr ""
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1028
-#, fuzzy
-#| msgid "Help"
+#: ../panels/printers/cc-printers-panel.c:1006
 msgctxt "print job"
 msgid "Held"
-msgstr "ヘルプ"
+msgstr ""
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1032
-#, fuzzy
-#| msgid "_Profession:"
+#: ../panels/printers/cc-printers-panel.c:1010
 msgctxt "print job"
 msgid "Processing"
-msgstr "職業(_P):"
+msgstr ""
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1036
+#: ../panels/printers/cc-printers-panel.c:1014
 msgctxt "print job"
 msgid "Stopped"
 msgstr ""
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1040
-#, fuzzy
-#| msgid "accepted"
+#: ../panels/printers/cc-printers-panel.c:1018
 msgctxt "print job"
 msgid "Canceled"
-msgstr "認識された"
+msgstr "キャンセルされました"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1044
-#, fuzzy
-#| msgid "About Me"
+#: ../panels/printers/cc-printers-panel.c:1022
 msgctxt "print job"
 msgid "Aborted"
-msgstr "個人情報"
+msgstr ""
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1048
+#: ../panels/printers/cc-printers-panel.c:1026
 msgctxt "print job"
 msgid "Completed"
 msgstr ""
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1140
-#, fuzzy
-#| msgid "_Title:"
+#: ../panels/printers/cc-printers-panel.c:1118
 msgid "Job Title"
-msgstr "役職(_T):"
+msgstr "ジョブ名"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1149
+#: ../panels/printers/cc-printers-panel.c:1127
 msgid "Job State"
-msgstr ""
+msgstr "ジョブの状態"
 
 # FIXME
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1155
-#, fuzzy
-#| msgid "Tile"
+#: ../panels/printers/cc-printers-panel.c:1133
 msgid "Time"
-msgstr "並べる"
+msgstr "時刻"
 
-#. Translators: Program cannot connect to DBus' system bus
-#: ../panels/printers/cc-printers-panel.c:1345
-#, fuzzy, c-format
-#| msgid "Could not rename %s to %s: %s\n"
-msgid "Could not connect to system bus: %s"
-msgstr "%s を %s に名前を変更することができません: %s\n"
+#. Translators: Addition of the new printer failed.
+#: ../panels/printers/cc-printers-panel.c:1848
+msgid "Failed to add new printer."
+msgstr "新しいプリンタを追加できませんでした。"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2055
-#, fuzzy
-#| msgid "Test flash"
+#: ../panels/printers/cc-printers-panel.c:1948
 msgid "Test page"
-msgstr "動作確認"
+msgstr "テストページ"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/cc-printers-panel.c:2063
+#: ../panels/printers/cc-printers-panel.c:1956
 msgid "Clean print heads"
 msgstr ""
 
 #. Translators: An error has occured during execution of a CUPS maintenance command
-#: ../panels/printers/cc-printers-panel.c:2068
+#: ../panels/printers/cc-printers-panel.c:1961
 msgid "An error has occured during a maintenance command."
 msgstr ""
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2195
-#, fuzzy, c-format
-#| msgid "Could not open %s: %s\n"
+#: ../panels/printers/cc-printers-panel.c:2090
+#, c-format
 msgid "Could not load ui: %s"
-msgstr "'%s' をオープンできません: %s\n"
+msgstr "ui ファイルを読み込めませんでした: %s"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:1
-#, fuzzy
-#| msgid "Keyboard Settings..."
 msgid "Change printer settings"
-msgstr "キーボードの設定..."
+msgstr "プリンタの設定を変更する"
 
 #. Translators: those are keywords for the printing control-center panel
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:3
@@ -1545,14 +1397,40 @@ msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr ""
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
-#, fuzzy
-#| msgid "Pointer"
 msgid "Printers"
-msgstr "ポインタ"
+msgstr "プリンタ"
+
+#. Translators: Column of devices which can be installed
+#: ../panels/printers/pp-new-printer-dialog.c:552
+#: ../panels/printers/pp-new-printer-dialog.c:557
+msgid "Devices"
+msgstr "デバイス"
+
+#. Translators: Local means local printers
+#: ../panels/printers/pp-new-printer-dialog.c:582
+msgid "Local"
+msgstr "ローカル"
+
+#. Translators: Network means network printers
+#: ../panels/printers/pp-new-printer-dialog.c:584
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+msgid "Network"
+msgstr "ネットワーク"
+
+#. Translators: Device types column (network or local)
+#: ../panels/printers/pp-new-printer-dialog.c:625
+msgid "Device types"
+msgstr "デバイスの種類"
+
+#. Translators: Name of job which makes printer to autoconfigure itself
+#: ../panels/printers/pp-new-printer-dialog.c:778
+#: ../panels/printers/pp-new-printer-dialog.c:944
+msgid "Automatic configuration"
+msgstr "自動設定"
 
 #: ../panels/printers/printers.ui.h:1
 msgid "---"
-msgstr ""
+msgstr "---"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
 #: ../panels/printers/printers.ui.h:3
@@ -1565,10 +1443,8 @@ msgstr ""
 
 #. Translators: Switch back to printer's info tab
 #: ../panels/printers/printers.ui.h:6
-#, fuzzy
-#| msgid "Black"
 msgid "Back"
-msgstr "黒"
+msgstr "戻る"
 
 #. Translators: This checkbox is checked when the default printer is selected.
 #: ../panels/printers/printers.ui.h:8
@@ -1578,97 +1454,71 @@ msgid "Default"
 msgstr "デフォルト"
 
 #: ../panels/printers/printers.ui.h:9
-#, fuzzy
-#| msgid "Address"
 msgid "IP Address"
-msgstr "住所"
+msgstr "IP アドレス"
 
 #: ../panels/printers/printers.ui.h:10
 msgid "Info"
-msgstr ""
+msgstr "情報"
 
 #: ../panels/printers/printers.ui.h:11
-#, fuzzy
-#| msgid "Job"
 msgid "Jobs"
-msgstr "仕事"
+msgstr "ジョブ"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
 #: ../panels/printers/printers.ui.h:13
-#, fuzzy
-#| msgid "Location:"
 msgid "Location"
-msgstr "場所:"
+msgstr "場所"
 
 #: ../panels/printers/printers.ui.h:14
-#, fuzzy
-#| msgid "Models"
 msgid "Model"
 msgstr "型式"
 
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:16
-#, fuzzy
-#| msgid "Options..."
+#: ../panels/printers/printers.ui.h:16 ../panels/network/network.ui.h:13
 msgid "Options"
-msgstr "オプション..."
+msgstr "オプション"
 
 #. Translators: This button executes command which prints test page.
 #: ../panels/printers/printers.ui.h:18
 msgid "Print Test Page"
-msgstr ""
+msgstr "テストページを印刷"
 
 #: ../panels/printers/printers.ui.h:19
-#, fuzzy
-#| msgid "Pointer"
 msgid "Printer"
-msgstr "ポインタ"
+msgstr "プリンタ"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
 #: ../panels/printers/printers.ui.h:21
-#, fuzzy
-#| msgid "Options..."
 msgid "Printer Options"
-msgstr "オプション..."
+msgstr "プリンタのオプション"
 
 #: ../panels/printers/printers.ui.h:22
-#, fuzzy
-#| msgid "Hinting"
 msgid "Printing..."
-msgstr "線幅の補正 (ヒンティング)"
+msgstr "印刷中..."
 
 #. Tanslators: Switch to tab containing printer's jobs
 #: ../panels/printers/printers.ui.h:24
-#, fuzzy
-#| msgid "Slow"
 msgid "Show"
-msgstr "遅い"
+msgstr "表示"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
 #: ../panels/printers/printers.ui.h:26
-#, fuzzy
-#| msgid "July"
 msgid "Supply"
-msgstr "7月"
+msgstr "サプライ"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
-#, fuzzy
-#| msgid "_Separate layout for each window"
 msgid "Allow different layouts for each window"
-msgstr "ウィンドウ毎に別のレイアウト(_S)"
+msgstr "ウィンドウ毎に別のレイアウトを許可"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
-#, fuzzy
-#| msgid "_Install..."
 msgid "Install languages..."
-msgstr "インストール(_I)..."
+msgstr "言語をインストール..."
 
 #: ../panels/region/gnome-region-panel.ui.h:3
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
-#, fuzzy
-#| msgid "_Language:"
 msgid "Language"
-msgstr "言語(_L):"
+msgstr "言語"
 
 #: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Layouts"
@@ -1691,23 +1541,19 @@ msgstr "デフォルトに戻す(_F)"
 
 #: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Select a display language"
-msgstr ""
+msgstr "表示言語を選択"
 
 #: ../panels/region/gnome-region-panel.ui.h:10
-#, fuzzy
-#| msgid "_Separate layout for each window"
 msgid "Use default layout in new windows"
-msgstr "ウィンドウ毎に別のレイアウト(_S)"
+msgstr "新しいウィンドウのデフォルトのレイアウト"
 
 #: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Use previous window's layout in new windows"
 msgstr ""
 
 #: ../panels/region/gnome-region-panel.ui.h:12
-#, fuzzy
-#| msgid "_Separate layout for each window"
 msgid "Use same layout in all windows"
-msgstr "ウィンドウ毎に別のレイアウト(_S)"
+msgstr "すべてのウィンドウで同じレイアウトを使う"
 
 #: ../panels/region/gnome-region-panel.ui.h:13
 msgid "View and edit keyboard layout options"
@@ -1722,10 +1568,8 @@ msgid "Choose a Layout"
 msgstr "レイアウトの選択"
 
 #: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
-#, fuzzy
-#| msgid "Preview:"
 msgid "Preview"
-msgstr "プレビュー:"
+msgstr "プレビュー"
 
 #: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
 msgid "Select an input source to add"
@@ -1745,10 +1589,8 @@ msgstr ""
 
 #. Translators: those are keywords for the region control-center panel
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:3
-#, fuzzy
-#| msgid "_Language:"
 msgid "Language;Layout;Keyboard;"
-msgstr "言語(_L):"
+msgstr ""
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
 msgid "Disable _touchpad while typing"
@@ -1791,10 +1633,8 @@ msgid "Low"
 msgstr "低い"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:18
-#, fuzzy
-#| msgid "Mouse Keys"
 msgid "Mouse"
-msgstr "マウス・キー"
+msgstr "マウス"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:19
 msgid "Mouse Orientation"
@@ -1828,8 +1668,6 @@ msgstr "しきい値(_E):"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:30
 #, fuzzy
-#| msgid ""
-#| "To test your double-click settings, try to double-click on the light bulb."
 msgid "To test your settings, try to double-click on the face."
 msgstr ""
 "ダブルクリックの設定を確認する場合は電球をダブルクリックしてみてください。"
@@ -1883,39 +1721,67 @@ msgstr "マウスとタッチパッドを設定します"
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr ""
 
-#: ../panels/network/cc-network-panel.c:969
-#, fuzzy
-#| msgid "Network Proxy"
+#. TRANSLATORS: this WEP WiFi security
+#: ../panels/network/cc-network-panel.c:750
+msgid "WEP"
+msgstr ""
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/cc-network-panel.c:754
+msgid "WPA"
+msgstr ""
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/cc-network-panel.c:758
+msgid "WPA2"
+msgstr ""
+
+#. TRANSLATORS: this Enterprise WiFi security
+#: ../panels/network/cc-network-panel.c:763
+msgid "Enterprise"
+msgstr ""
+
+#. TRANSLATORS: this no (!) WiFi security
+#: ../panels/network/cc-network-panel.c:769
+#: ../panels/universal-access/uap.ui.h:43
+msgid "None"
+msgstr "何もしない"
+
+#. TRANSLATORS: this is a wired connection that is disconnected
+#: ../panels/network/cc-network-panel.c:853
+msgid "Unplugged"
+msgstr ""
+
+#: ../panels/network/cc-network-panel.c:1193
 msgid "Network proxy"
 msgstr "ネットワークプロキシ"
 
-#: ../panels/network/cc-network-panel.c:978
-#, fuzzy
-#| msgid "System Settings"
+#: ../panels/network/cc-network-panel.c:1202
 msgid "Set the system proxy settings"
-msgstr "システムの設定"
+msgstr "システムのプロキシを設定する"
+
+#: ../panels/network/cc-network-panel.c:1299
+#, c-format
+msgid "%s VPN"
+msgstr ""
+
+#: ../panels/network/cc-network-panel.c:1311
+msgid "Virtual private network"
+msgstr ""
 
 #. TRANSLATORS: the user is running a NM that is too new and API compatible
-#: ../panels/network/cc-network-panel.c:1122
+#: ../panels/network/cc-network-panel.c:1370
 msgid "The running NetworkManager version is not compatible (too new)."
 msgstr ""
 
 #. TRANSLATORS: the user is running a NM that is too old and API compatible
-#: ../panels/network/cc-network-panel.c:1128
+#: ../panels/network/cc-network-panel.c:1376
 msgid "The running NetworkManager version is not compatible (too old)."
 msgstr ""
 
-#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
-#, fuzzy
-#| msgid "Network Proxy"
-msgid "Network"
-msgstr "ネットワークプロキシ"
-
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
-#, fuzzy
-#| msgid "Network Servers"
 msgid "Network settings"
-msgstr "ネットワーク・サーバ"
+msgstr "ネットワークの設定"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
@@ -1924,270 +1790,268 @@ msgstr ""
 
 #: ../panels/network/network.ui.h:1
 #, fuzzy
-#| msgid "Accel Mode"
-msgid "Airplane Mode"
-msgstr "アクセラレータのモード"
+#| msgid "Airplane Mode"
+msgid "Air_plane Mode"
+msgstr "航空機モード"
 
 #: ../panels/network/network.ui.h:2
-#, fuzzy
-#| msgid "Autoconfiguration _URL:"
-msgid "Configuration URL:"
-msgstr "自動設定する URL(_U):"
+msgid "DNS:"
+msgstr "DNS:"
 
 #: ../panels/network/network.ui.h:3
-msgid "DNS:"
-msgstr ""
+msgid "Default Route:"
+msgstr "デフォルトルータ:"
 
 #: ../panels/network/network.ui.h:4
-#, fuzzy
-#| msgid "Default Pointer"
-msgid "Default Route:"
-msgstr "デフォルトのポインタ"
+msgid "Gateway:"
+msgstr "ゲートウェイ:"
 
 #: ../panels/network/network.ui.h:5
-#, fuzzy
-#| msgid "_FTP proxy:"
-msgid "FTP Proxy:"
-msgstr "FTP プロキシ(_F):"
+msgid "Group Name:"
+msgstr "グループ名:"
 
 #: ../panels/network/network.ui.h:6
-msgid "Gateway:"
-msgstr ""
+msgid "Group Password:"
+msgstr "グループのパスワード:"
 
 #: ../panels/network/network.ui.h:7
 #, fuzzy
-#| msgid "_GroupWise:"
-msgid "Group Name:"
-msgstr "GroupWise(_G):"
+#| msgid "HTTP Proxy:"
+msgid "H_TTPS Proxy:"
+msgstr "HTTP プロキシ:"
 
 #: ../panels/network/network.ui.h:8
-#, fuzzy
-#| msgid "_Password:"
-msgid "Group Password:"
-msgstr "パスワード(_P):"
+msgid "Hardware Address:"
+msgstr "ハードウェア・アドレス:"
 
 #: ../panels/network/network.ui.h:9
-#, fuzzy
-#| msgid "H_TTP proxy:"
-msgid "HTTP Proxy:"
-msgstr "HTTP プロキシ(_T):"
+msgid "IMEI:"
+msgstr "IMEI:"
 
 #: ../panels/network/network.ui.h:10
-#, fuzzy
-#| msgid "A_ddress:"
-msgid "Hardware Address:"
-msgstr "住所(_D):"
+msgid "IP Address:"
+msgstr "IP アドレス:"
 
 #: ../panels/network/network.ui.h:11
-msgid "IMEI:"
-msgstr ""
+msgid "IPv4 Address:"
+msgstr "IPv4 アドレス"
 
 #: ../panels/network/network.ui.h:12
-#, fuzzy
-#| msgid "A_ddress:"
-msgid "IP Address:"
-msgstr "住所(_D):"
-
-#: ../panels/network/network.ui.h:13
-#, fuzzy
-#| msgid "A_ddress:"
-msgid "IPv4 Address:"
-msgstr "住所(_D):"
+msgid "IPv6 Address:"
+msgstr "IPv6 アドレス:"
 
 #: ../panels/network/network.ui.h:14
-#, fuzzy
-#| msgid "A_ddress:"
-msgid "IPv6 Address:"
-msgstr "住所(_D):"
+msgid "Provider:"
+msgstr "プロバイダ:"
 
 #: ../panels/network/network.ui.h:15
-#, fuzzy
-#| msgid "Month:"
-msgid "Method:"
-msgstr "月:"
+msgid "Security:"
+msgstr "セキュリティ:"
 
 #: ../panels/network/network.ui.h:16
-#, fuzzy
-#| msgid "Network Servers"
-msgid "Network Name:"
-msgstr "ネットワーク・サーバ"
+msgid "Speed:"
+msgstr "速度:"
 
 #: ../panels/network/network.ui.h:17
-#, fuzzy
-#| msgid "Preview:"
-msgid "Provider:"
-msgstr "プレビュー:"
-
-#: ../panels/network/network.ui.h:18
-#, fuzzy
-#| msgid "_Secure HTTP proxy:"
-msgid "Secure HTTP Proxy:"
-msgstr "SSL プロキシ(_S):"
+msgid "Subnet Mask:"
+msgstr "サブネットマスク:"
 
 #: ../panels/network/network.ui.h:19
-msgid "Security:"
-msgstr ""
+msgid "Username:"
+msgstr "ユーザ名:"
 
 #: ../panels/network/network.ui.h:20
 #, fuzzy
-#| msgid "S_ocks host:"
-msgid "Socks Host:"
-msgstr "Socks ホスト(_O):"
+#| msgid "Configuration URL:"
+msgid "_Configuration URL:"
+msgstr "設定 URL:"
 
 #: ../panels/network/network.ui.h:21
 #, fuzzy
-#| msgid "S_peed:"
-msgid "Speed:"
-msgstr "速度(_P):"
+#| msgid "FTP Proxy:"
+msgid "_FTP Proxy:"
+msgstr "FTP プロキシ:"
 
 #: ../panels/network/network.ui.h:22
-msgid "Subnet Mask:"
-msgstr ""
+#, fuzzy
+#| msgid "HTTP Proxy:"
+msgid "_HTTP Proxy:"
+msgstr "HTTP プロキシ:"
+
+#: ../panels/network/network.ui.h:23
+#, fuzzy
+#| msgid "Thr_eshold:"
+msgid "_Method:"
+msgstr "しきい値(_E):"
 
 #: ../panels/network/network.ui.h:24
 #, fuzzy
-#| msgid "U_sername:"
-msgid "Username:"
-msgstr "ユーザ名(_S):"
+#| msgid "Network Name:"
+msgid "_Network Name:"
+msgstr "ネットワーク名:"
 
 #: ../panels/network/network.ui.h:25
-msgctxt "proxy method"
-msgid "Automatic"
-msgstr ""
+#, fuzzy
+#| msgid "Options"
+msgid "_Options"
+msgstr "オプション"
 
 #: ../panels/network/network.ui.h:26
 #, fuzzy
-#| msgid "January"
-msgctxt "proxy method"
-msgid "Manual"
-msgstr "1月"
+#| msgid "Socks Host:"
+msgid "_Socks Host:"
+msgstr "Socks ホスト:"
 
 #: ../panels/network/network.ui.h:27
-#, fuzzy
-#| msgid "None"
+msgctxt "proxy method"
+msgid "Automatic"
+msgstr "自動"
+
+#: ../panels/network/network.ui.h:28
+msgctxt "proxy method"
+msgid "Manual"
+msgstr "手動"
+
+#: ../panels/network/network.ui.h:29
 msgctxt "proxy method"
 msgid "None"
-msgstr "何もしない"
+msgstr "使わない"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:76
-#, fuzzy
-#| msgid "Firebird"
+#: ../panels/network/panel-common.c:82
 msgid "Wired"
-msgstr "Firebird"
+msgstr "有線"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:80
+#: ../panels/network/panel-common.c:86
 msgid "Wireless"
-msgstr ""
+msgstr "無線"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:87
+#: ../panels/network/panel-common.c:93
 msgid "Mobile broadband"
-msgstr ""
+msgstr "モバイル・ブロードバンド"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:92
-#, fuzzy
-#| msgid "Blue"
+#: ../panels/network/panel-common.c:98
 msgid "Bluetooth"
-msgstr "青"
+msgstr "Bluetooth"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:96
-#, fuzzy
-#| msgid "Models"
+#: ../panels/network/panel-common.c:102
 msgid "Mesh"
-msgstr "型式"
+msgstr "メッシュ"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:155
+#: ../panels/network/panel-common.c:161
 msgid "Ad-hoc"
-msgstr ""
+msgstr "アドホック"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:159
+#: ../panels/network/panel-common.c:165
 msgid "Infrastructure"
-msgstr ""
+msgstr "インフラストラクチャ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:177
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:183 ../panels/network/panel-common.c:247
 msgid "Status unknown"
 msgstr ""
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:181
+#: ../panels/network/panel-common.c:187
 msgid "Unmanaged"
 msgstr ""
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:185
+#: ../panels/network/panel-common.c:191
 msgid "Unavailable"
 msgstr ""
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:189
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:195 ../panels/network/panel-common.c:275
 msgid "Disconnected"
 msgstr ""
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:193
+#: ../panels/network/panel-common.c:199
 msgid "Preparing connection"
-msgstr ""
+msgstr "接続の準備中"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:197
+#: ../panels/network/panel-common.c:203
 msgid "Configuring connection"
-msgstr ""
+msgstr "接続の設定中"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:201
-#, fuzzy
-#| msgid "_Authenticate"
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:207 ../panels/network/panel-common.c:255
 msgid "Authenticating"
-msgstr "認証(_A)"
+msgstr "認証中"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:205
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:211 ../panels/network/panel-common.c:263
 msgid "Getting network address"
-msgstr ""
+msgstr "ネットワークのアドレスを取得中"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:209
+#: ../panels/network/panel-common.c:215
 msgid "Checking network address"
-msgstr ""
+msgstr "ネットワークのアドレスを確認中"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:213
-#, fuzzy
-#| msgid "Co_untry:"
+#: ../panels/network/panel-common.c:219
 msgid "Connected"
-msgstr "国(_U):"
+msgstr "接続"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:217
-#, fuzzy
-#| msgid "Hinting"
+#: ../panels/network/panel-common.c:223
 msgid "Disconnecting"
-msgstr "線幅の補正 (ヒンティング)"
+msgstr "切断中"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:221
-#, fuzzy
-#| msgid "Failed to create temporary directory"
+#: ../panels/network/panel-common.c:227
 msgid "Failed to connect"
-msgstr "作業フォルダの生成に失敗しました"
+msgstr "接続できませんでした"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:225
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:231 ../panels/network/panel-common.c:279
 msgid "Status unknown (missing)"
 msgstr ""
 
-#: ../panels/power/gnome-power-panel.desktop.in.in.h:1
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:251
 #, fuzzy
-#| msgid "Pointer"
+#| msgid "Hearing"
+msgid "Preparing"
+msgstr "聴覚"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:259
+#, fuzzy
+#| msgid "Disconnecting"
+msgid "Connecting"
+msgstr "切断中"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:267
+#, fuzzy
+#| msgid "Action"
+msgid "Active"
+msgstr "操作"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:271
+#, fuzzy
+msgid "Failed"
+msgstr "無効"
+
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
-msgstr "ポインタ"
+msgstr ""
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:2
 msgid "Power management settings"
@@ -2200,13 +2064,11 @@ msgstr ""
 
 #: ../panels/power/cc-power-panel.c:153
 #, fuzzy
-#| msgid "Unknown"
 msgid "Unknown time"
 msgstr "不明"
 
 #: ../panels/power/cc-power-panel.c:159
 #, fuzzy, c-format
-#| msgid "minutes"
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "分"
@@ -2221,20 +2083,17 @@ msgstr[0] ""
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
 #: ../panels/power/cc-power-panel.c:179
 #, fuzzy, c-format
-#| msgid "%d %s by %d %s"
 msgid "%i %s %i %s"
 msgstr "%d %s x %d %s"
 
 #: ../panels/power/cc-power-panel.c:180
 #, fuzzy
-#| msgid "Short"
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "短い"
 
 #: ../panels/power/cc-power-panel.c:181
 #, fuzzy
-#| msgid "minutes"
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "分"
@@ -2276,25 +2135,21 @@ msgstr ""
 
 #: ../panels/power/power.ui.h:1 ../panels/screen/screen.ui.h:1
 #, fuzzy
-#| msgid "12 hour format"
 msgid "1 hour"
 msgstr "12 時制"
 
 #: ../panels/power/power.ui.h:2 ../panels/screen/screen.ui.h:3
 #, fuzzy
-#| msgid "minutes"
 msgid "10 minutes"
 msgstr "分"
 
 #: ../panels/power/power.ui.h:3 ../panels/screen/screen.ui.h:6
 #, fuzzy
-#| msgid "minutes"
 msgid "30 minutes"
 msgstr "分"
 
 #: ../panels/power/power.ui.h:4 ../panels/screen/screen.ui.h:7
 #, fuzzy
-#| msgid "minutes"
 msgid "5 minutes"
 msgstr "分"
 
@@ -2324,7 +2179,6 @@ msgstr ""
 
 #: ../panels/power/power.ui.h:12
 #, fuzzy
-#| msgid "Sound"
 msgid "Suspend"
 msgstr "サウンド"
 
@@ -2346,32 +2200,24 @@ msgid "Brightness;Lock;Dim;Blank;Monitor;"
 msgstr ""
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
-#, fuzzy
-#| msgid "Screen Reader"
 msgid "Screen"
-msgstr "スクリーン・リーダ"
+msgstr "スクリーン"
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
 msgid "Screen brightness and lock settings"
 msgstr ""
 
 #: ../panels/screen/screen.ui.h:2
-#, fuzzy
-#| msgid "minutes"
 msgid "1 minute"
-msgstr "分"
+msgstr "1 分"
 
 #: ../panels/screen/screen.ui.h:4
-#, fuzzy
-#| msgid "minutes"
 msgid "2 minutes"
-msgstr "分"
+msgstr "2 分"
 
 #: ../panels/screen/screen.ui.h:5
-#, fuzzy
-#| msgid "minutes"
 msgid "3 minutes"
-msgstr "分"
+msgstr "3 分"
 
 #: ../panels/screen/screen.ui.h:8
 msgid "Brightness"
@@ -2387,10 +2233,8 @@ msgid "Don't lock when at home"
 msgstr ""
 
 #: ../panels/screen/screen.ui.h:12
-#, fuzzy
-#| msgid "New Location..."
 msgid "Locations..."
-msgstr "新しい場所..."
+msgstr "場所..."
 
 #: ../panels/screen/screen.ui.h:14
 msgid "Lock screen after:"
@@ -2402,7 +2246,6 @@ msgstr ""
 
 #: ../panels/screen/screen.ui.h:16
 #, fuzzy
-#| msgid "Turn on or off:"
 msgid "Turn off after:"
 msgstr "ON/OFF の切り替え:"
 
@@ -2412,7 +2255,6 @@ msgstr "デバッグ・モードにする"
 
 #: ../panels/sound/applet-main.c:50
 #, fuzzy
-#| msgid "Open with Default Application"
 msgid "Version of this application"
 msgstr "デフォルトのアプリで開く"
 
@@ -2421,10 +2263,8 @@ msgid " — GNOME Volume Control Applet"
 msgstr ""
 
 #: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1923
-#, fuzzy
-#| msgid "Mutt"
 msgid "Output"
-msgstr "Mutt"
+msgstr "出力"
 
 #: ../panels/sound/gvc-applet.c:278
 msgid "Sound Output Volume"
@@ -2432,91 +2272,71 @@ msgstr ""
 
 #: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1840
 msgid "Input"
-msgstr ""
+msgstr "入力"
 
 #: ../panels/sound/gvc-applet.c:284
 msgid "Microphone Volume"
 msgstr ""
 
 #: ../panels/sound/gvc-balance-bar.c:111
-#, fuzzy
-#| msgid "Left"
 msgctxt "balance"
 msgid "Left"
-msgstr "左回り"
+msgstr "左"
 
 #: ../panels/sound/gvc-balance-bar.c:112
-#, fuzzy
-#| msgid "Right"
 msgctxt "balance"
 msgid "Right"
-msgstr "右回り"
+msgstr "右"
 
 #: ../panels/sound/gvc-balance-bar.c:115
-#, fuzzy
-#| msgid "Year:"
 msgctxt "balance"
 msgid "Rear"
-msgstr "年:"
+msgstr "リア"
 
 #: ../panels/sound/gvc-balance-bar.c:116
-#, fuzzy
-#| msgid "Fonts"
 msgctxt "balance"
 msgid "Front"
-msgstr "フォント"
+msgstr "フロント"
 
 #: ../panels/sound/gvc-balance-bar.c:119
-#, fuzzy
-#| msgid "Minimize"
 msgctxt "balance"
 msgid "Minimum"
-msgstr "最小化する"
+msgstr "最小"
 
 #: ../panels/sound/gvc-balance-bar.c:120
-#, fuzzy
-#| msgid "Maximize"
 msgctxt "balance"
 msgid "Maximum"
-msgstr "最大化する"
+msgstr "最大"
 
 #: ../panels/sound/gvc-balance-bar.c:295
 msgid "_Balance:"
-msgstr ""
+msgstr "バランス(_B):"
 
 #: ../panels/sound/gvc-balance-bar.c:298
-#, fuzzy
-#| msgid "_Name:"
 msgid "_Fade:"
-msgstr "名前(_N):"
+msgstr "フェード(_F):"
 
 #: ../panels/sound/gvc-balance-bar.c:301
 msgid "_Subwoofer:"
-msgstr ""
+msgstr "サブウーファ(_S):"
 
-#: ../panels/sound/gvc-channel-bar.c:602 ../panels/sound/gvc-channel-bar.c:611
-#, fuzzy
-#| msgid "100%"
+#: ../panels/sound/gvc-channel-bar.c:603 ../panels/sound/gvc-channel-bar.c:612
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: ../panels/sound/gvc-channel-bar.c:606
+#: ../panels/sound/gvc-channel-bar.c:607
 msgctxt "volume"
 msgid "Unamplified"
 msgstr ""
 
-#: ../panels/sound/gvc-channel-bar.c:900
-#, fuzzy
-#| msgid "Mutt"
+#: ../panels/sound/gvc-channel-bar.c:901
 msgid "Mute"
-msgstr "Mutt"
+msgstr "無音"
 
 #: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1631
-#, fuzzy
-#| msgid "_Mobile:"
 msgid "_Profile:"
-msgstr "携帯(_M):"
+msgstr "プロファイル(_P):"
 
 #. translators:
 #. * The number of sound outputs on a particular device
@@ -2536,16 +2356,13 @@ msgstr[0] ""
 
 #: ../panels/sound/gvc-mixer-control.c:1406
 #, fuzzy
-#| msgid "System Settings"
 msgid "System Sounds"
 msgstr "システムの設定"
 
 #: ../panels/sound/gvc-mixer-dialog.c:317
 #: ../panels/sound/gvc-mixer-dialog.c:618
-#, fuzzy
-#| msgid "Co_untry:"
 msgid "Co_nnector:"
-msgstr "国(_U):"
+msgstr "コネクタ(_N):"
 
 #: ../panels/sound/gvc-mixer-dialog.c:531
 msgid "Peak detect"
@@ -2555,7 +2372,6 @@ msgstr ""
 #: ../panels/sound/gvc-mixer-dialog.c:1719
 #: ../panels/sound/gvc-sound-theme-chooser.c:591
 #, fuzzy
-#| msgid "Name:"
 msgid "Name"
 msgstr "名前:"
 
@@ -2578,7 +2394,6 @@ msgstr ""
 
 #: ../panels/sound/gvc-mixer-dialog.c:1777
 #, fuzzy
-#| msgid "Sound Settings..."
 msgid "Sound Effects"
 msgstr "音の設定..."
 
@@ -2600,16 +2415,12 @@ msgid "Settings for the selected device:"
 msgstr ""
 
 #: ../panels/sound/gvc-mixer-dialog.c:1847
-#, fuzzy
-#| msgid "_Input boxes:"
 msgid "_Input volume: "
-msgstr "入力ボックス(_I):"
+msgstr "入力のボリューム(_I):"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1870
-#, fuzzy
-#| msgid "_Input boxes:"
 msgid "Input level:"
-msgstr "入力ボックス(_I):"
+msgstr "入力レベル:"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1896
 msgid "C_hoose a device for sound input:"
@@ -2620,10 +2431,8 @@ msgid "C_hoose a device for sound output:"
 msgstr ""
 
 #: ../panels/sound/gvc-mixer-dialog.c:1963
-#, fuzzy
-#| msgid "_Application font:"
 msgid "Applications"
-msgstr "アプリケーション(_A):"
+msgstr "アプリケーション"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1967
 msgid "No application is currently playing or recording audio."
@@ -2635,14 +2444,12 @@ msgstr ""
 
 #: ../panels/sound/gvc-speaker-test.c:221
 #: ../panels/sound/gvc-speaker-test.c:333
-#, fuzzy
-#| msgid "Test:"
 msgid "Test"
-msgstr "テスト:"
+msgstr "テスト"
 
 #: ../panels/sound/gvc-speaker-test.c:229
 msgid "Subwoofer"
-msgstr ""
+msgstr "サブウーファ"
 
 #: ../panels/sound/gvc-stream-status-icon.c:236
 #, c-format
@@ -2650,22 +2457,17 @@ msgid "Failed to start Sound Preferences: %s"
 msgstr ""
 
 #: ../panels/sound/gvc-stream-status-icon.c:262
-#, fuzzy
-#| msgid "Mutt"
 msgid "_Mute"
-msgstr "Mutt"
+msgstr "無音(_M)"
 
 #: ../panels/sound/gvc-stream-status-icon.c:271
 #, fuzzy
-#| msgid "Mouse Preferences"
 msgid "_Sound Preferences"
 msgstr "マウスの設定"
 
 #: ../panels/sound/gvc-stream-status-icon.c:455
-#, fuzzy
-#| msgid "Mutt"
 msgid "Muted"
-msgstr "Mutt"
+msgstr "無音"
 
 #: ../panels/sound/gvc-sound-theme-chooser.c:188
 msgid "Built-in"
@@ -2675,7 +2477,6 @@ msgstr ""
 #: ../panels/sound/gvc-sound-theme-chooser.c:463
 #: ../panels/sound/gvc-sound-theme-chooser.c:475
 #, fuzzy
-#| msgid "Mouse Preferences"
 msgid "Sound Preferences"
 msgstr "マウスの設定"
 
@@ -2691,7 +2492,6 @@ msgstr ""
 
 #: ../panels/sound/gvc-sound-theme-chooser.c:764
 #, fuzzy
-#| msgid "Choose a Layout"
 msgid "C_hoose an alert sound:"
 msgstr "レイアウトの選択"
 
@@ -2705,7 +2505,6 @@ msgstr ""
 
 #: ../panels/sound/data/gnome-sound-applet.desktop.in.h:2
 #, fuzzy
-#| msgid "UI Control"
 msgid "Volume Control"
 msgstr "UI コントロール"
 
@@ -2726,7 +2525,6 @@ msgstr "サウンド"
 #. You might want to translate it into the equivalent words of your language.
 #: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:3
 #, fuzzy
-#| msgid "Black"
 msgid "Bark"
 msgstr "黒"
 
@@ -2746,21 +2544,18 @@ msgstr ""
 #. You might want to translate it into the equivalent words of your language.
 #: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:12
 #, fuzzy
-#| msgid "Sound"
 msgid "Sonar"
 msgstr "サウンド"
 
-#: ../panels/universal-access/cc-ua-panel.c:468
-#: ../panels/universal-access/cc-ua-panel.c:473
+#: ../panels/universal-access/cc-ua-panel.c:470
+#: ../panels/universal-access/cc-ua-panel.c:475
 #, fuzzy
-#| msgid "New shortcut..."
 msgid "No shortcut set"
 msgstr "新しいショートカット..."
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 #, fuzzy
-#| msgid "_Keyboard Accessibility"
 msgid "Keyboard;Mouse;a11y;Accessibility;"
 msgstr "キーボードのアクセシビリティ(_K)"
 
@@ -2818,7 +2613,6 @@ msgstr "Caribou"
 
 #: ../panels/universal-access/uap.ui.h:16
 #, fuzzy
-#| msgid "Change constrast:"
 msgid "Change contrast:"
 msgstr "コントラストの変更:"
 
@@ -2889,7 +2683,6 @@ msgstr "サイズの拡大:"
 
 #: ../panels/universal-access/uap.ui.h:34
 #, fuzzy
-#| msgid "Keyboard Settings..."
 msgid "Keyboard Settings"
 msgstr "キーボードの設定..."
 
@@ -2903,17 +2696,12 @@ msgstr "マウス・キー"
 
 #: ../panels/universal-access/uap.ui.h:41
 #, fuzzy
-#| msgid "Mouse Settings..."
 msgid "Mouse Settings"
 msgstr "マウスの設定..."
 
 #: ../panels/universal-access/uap.ui.h:42
 msgid "Nomon"
 msgstr "Nomon"
-
-#: ../panels/universal-access/uap.ui.h:43
-msgid "None"
-msgstr "何もしない"
 
 #: ../panels/universal-access/uap.ui.h:45
 msgid "On screen keyboard"
@@ -2941,7 +2729,6 @@ msgstr "スクリーン・リーダ"
 
 #: ../panels/universal-access/uap.ui.h:51
 #, fuzzy
-#| msgid "On screen keyboard"
 msgid "Screen keyboard"
 msgstr "オンスクリーン・キーボード"
 
@@ -2951,8 +2738,7 @@ msgstr "視覚"
 
 #: ../panels/universal-access/uap.ui.h:55
 msgid "Simulated Secondary Click"
-msgstr ""
-"第二ボタンのクリックの模擬(右利き用は右ボタン、左利き用は左ボタンに該当)"
+msgstr "副ボタンのクリックの代替"
 
 #: ../panels/universal-access/uap.ui.h:56
 msgid "Slow Keys"
@@ -2960,7 +2746,6 @@ msgstr "スロー・キー"
 
 #: ../panels/universal-access/uap.ui.h:59
 #, fuzzy
-#| msgid "Sound Settings..."
 msgid "Sound Settings"
 msgstr "音の設定..."
 
@@ -2991,7 +2776,6 @@ msgstr "第一ボタンを押したままにすると第二ボタンのクリッ
 
 #: ../panels/universal-access/uap.ui.h:66
 #, fuzzy
-#| msgid "Beep when _accessibility features are turned on or off"
 msgid "Turn on accessibility features from the keyboard"
 msgstr "アクセシビリティ機能の ON/OFF を切り替えたらビープ音を鳴らす(_A)"
 
@@ -3049,56 +2833,48 @@ msgstr "拒否された"
 
 #: ../panels/universal-access/uap.ui.h:80
 #, fuzzy
-#| msgid "<span size=\"x-large\">High/Inverse</span>"
 msgctxt "universal access, contrast"
 msgid "<span size=\"x-large\">High/Inverse</span>"
 msgstr "<span size=\"x-large\">高い/反転</span>"
 
 #: ../panels/universal-access/uap.ui.h:81
 #, fuzzy
-#| msgid "<span size=\"x-large\">High</span>"
 msgctxt "universal access, contrast"
 msgid "<span size=\"x-large\">High</span>"
 msgstr "<span size=\"x-large\">高い</span>"
 
 #: ../panels/universal-access/uap.ui.h:82
 #, fuzzy
-#| msgid "<span size=\"x-large\">Low</span>"
 msgctxt "universal access, contrast"
 msgid "<span size=\"x-large\">Low</span>"
 msgstr "<span size=\"x-large\">低い</span>"
 
 #: ../panels/universal-access/uap.ui.h:83
 #, fuzzy
-#| msgid "<span size=\"x-large\">Normal</span>"
 msgctxt "universal access, contrast"
 msgid "<span size=\"x-large\">Normal</span>"
 msgstr "<span size=\"x-large\">標準</span>"
 
 #: ../panels/universal-access/uap.ui.h:84
 #, fuzzy
-#| msgid "High"
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "高い"
 
 #: ../panels/universal-access/uap.ui.h:85
 #, fuzzy
-#| msgid "High/Inverse"
 msgctxt "universal access, contrast"
 msgid "High/Inverse"
 msgstr "高い/反転"
 
 #: ../panels/universal-access/uap.ui.h:86
 #, fuzzy
-#| msgid "Low"
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "低い"
 
 #: ../panels/universal-access/uap.ui.h:87
 #, fuzzy
-#| msgid "Normal"
 msgctxt "universal access, contrast"
 msgid "Normal"
 msgstr "標準"
@@ -3106,7 +2882,6 @@ msgstr "標準"
 #. Translators: this refers to theme contrast and font size
 #: ../panels/universal-access/uap.ui.h:89
 #, fuzzy
-#| msgid "Display"
 msgctxt "universal access, seeing"
 msgid "Display"
 msgstr "ディスプレイ"
@@ -3114,33 +2889,28 @@ msgstr "ディスプレイ"
 #. Translators: this refers to screen magnifier
 #: ../panels/universal-access/uap.ui.h:91
 #, fuzzy
-#| msgid "Zoom"
 msgctxt "universal access, seeing"
 msgid "Zoom"
 msgstr "ズーム"
 
 #: ../panels/user-accounts/run-passwd.c:426
 #, fuzzy
-#| msgid "Authenticated!"
 msgid "Authentication failed"
 msgstr "認証が完了しました!"
 
 #: ../panels/user-accounts/run-passwd.c:506
 #: ../panels/user-accounts/um-password-dialog.c:375
 #, fuzzy, c-format
-#| msgid "The password is too short."
 msgid "The new password is too short"
 msgstr "パスワードが短すぎます。"
 
 #: ../panels/user-accounts/run-passwd.c:512
 #, fuzzy, c-format
-#| msgid "The password is too simple."
 msgid "The new password is too simple"
 msgstr "パスワードが簡単すぎます。"
 
 #: ../panels/user-accounts/run-passwd.c:518
 #, fuzzy, c-format
-#| msgid "The old and new passwords are too similar."
 msgid "The old and new passwords are too similar"
 msgstr "両方のパスワードが類似しています。"
 
@@ -3151,21 +2921,16 @@ msgstr "新しいパスワードは最近、既に使われています。"
 
 #: ../panels/user-accounts/run-passwd.c:524
 #, fuzzy, c-format
-#| msgid "The new password must contain numeric or special character(s)."
 msgid "The new password must contain numeric or special characters"
 msgstr "新しいパスワードには数字または特殊文字を含めるようにしてください。"
 
 #: ../panels/user-accounts/run-passwd.c:528
 #, fuzzy, c-format
-#| msgid "The old and new passwords are the same."
 msgid "The old and new passwords are the same"
 msgstr "両方のパスワードが同じです。"
 
 #: ../panels/user-accounts/run-passwd.c:532
 #, fuzzy, c-format
-#| msgid ""
-#| "Your password has been changed since you initially authenticated! Please "
-#| "re-authenticate."
 msgid "Your password has been changed since you initially authenticated!"
 msgstr ""
 "初めて認証を行ってから既にパスワードが変更されています。もう一度パスワードを"
@@ -3173,19 +2938,16 @@ msgstr ""
 
 #: ../panels/user-accounts/run-passwd.c:536
 #, fuzzy, c-format
-#| msgid "The new password must contain numeric or special character(s)."
 msgid "The new password does not contain enough different characters"
 msgstr "新しいパスワードには数字または特殊文字を含めるようにしてください。"
 
 #: ../panels/user-accounts/run-passwd.c:540
 #, fuzzy, c-format
-#| msgid "Unknown"
 msgid "Unknown error"
 msgstr "不明"
 
 #: ../panels/user-accounts/um-account-dialog.c:78
 #, fuzzy
-#| msgid "Failed to create temporary directory"
 msgid "Failed to create user"
 msgstr "作業フォルダの生成に失敗しました"
 
@@ -3196,7 +2958,6 @@ msgstr ""
 
 #: ../panels/user-accounts/um-account-dialog.c:189
 #, fuzzy, c-format
-#| msgid "The password is too short."
 msgid "The username is too long"
 msgstr "パスワードが短すぎます。"
 
@@ -3216,7 +2977,6 @@ msgstr ""
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 #, fuzzy
-#| msgid "Standard XTerminal"
 msgctxt "Account type"
 msgid "Standard"
 msgstr "標準のX端末"
@@ -3225,7 +2985,6 @@ msgstr "標準のX端末"
 #: ../panels/user-accounts/data/account-dialog.ui.h:1
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 #, fuzzy
-#| msgid "Terminator"
 msgctxt "Account type"
 msgid "Administrator"
 msgstr "Terminator"
@@ -3248,14 +3007,12 @@ msgstr "そのデバイスは使用中です"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:111
 #, fuzzy
-#| msgid "An internal error occured"
 msgid "An internal error occurred."
 msgstr "システム内部のエラーが発生しました"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:181
 #: ../panels/user-accounts/um-fingerprint-dialog.c:182
 #, fuzzy
-#| msgid "Disabled"
 msgid "Enabled"
 msgstr "無効"
 
@@ -3330,7 +3087,6 @@ msgstr ""
 
 #: ../panels/user-accounts/um-language-dialog.c:180
 #, fuzzy
-#| msgid "Other"
 msgid "Other..."
 msgstr "その他"
 
@@ -3344,19 +3100,16 @@ msgstr ""
 
 #: ../panels/user-accounts/um-password-dialog.c:294
 #, fuzzy
-#| msgid "Please type your password in the <b>New password</b> field."
 msgid "Please type your current password again."
 msgstr "パスワードを<b>新しいパスワード</b>のエントリに入力してください。"
 
 #: ../panels/user-accounts/um-password-dialog.c:300
 #, fuzzy
-#| msgid "Your password has been changed."
 msgid "Password could not be changed"
 msgstr "パスワードが変更されています。"
 
 #: ../panels/user-accounts/um-password-dialog.c:372
 #, fuzzy
-#| msgid "_Retype new password:"
 msgid "You need to enter a new password"
 msgstr "パスワードの確認(_R):"
 
@@ -3366,7 +3119,6 @@ msgstr ""
 
 #: ../panels/user-accounts/um-password-dialog.c:384
 #, fuzzy
-#| msgid "The password is too short."
 msgid "The passwords do not match"
 msgstr "パスワードが短すぎます。"
 
@@ -3376,7 +3128,6 @@ msgstr ""
 
 #: ../panels/user-accounts/um-password-dialog.c:393
 #, fuzzy
-#| msgid "That password was incorrect."
 msgid "The current password is not correct"
 msgstr "そのパスワードは間違っています。"
 
@@ -3395,7 +3146,6 @@ msgstr ""
 #: ../panels/user-accounts/um-password-dialog.c:471
 #: ../panels/user-accounts/um-password-dialog.c:685
 #, fuzzy
-#| msgid "Flickr"
 msgctxt "Password strength"
 msgid "Fair"
 msgstr "Flickr"
@@ -3409,7 +3159,6 @@ msgstr ""
 #: ../panels/user-accounts/um-password-dialog.c:475
 #: ../panels/user-accounts/um-password-dialog.c:687
 #, fuzzy
-#| msgid "Scrolling"
 msgctxt "Password strength"
 msgid "Strong"
 msgstr "スクロール"
@@ -3420,27 +3169,23 @@ msgstr ""
 
 #: ../panels/user-accounts/um-password-dialog.c:540
 #, fuzzy
-#| msgid "Change password"
 msgid "Wrong password"
 msgstr "パスワードの変更"
 
 #: ../panels/user-accounts/um-photo-dialog.c:97
 #: ../panels/user-accounts/data/language-chooser.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#, fuzzy
-#| msgid "_Select"
 msgid "Select"
-msgstr "選択(_S)"
+msgstr "選択"
 
 #: ../panels/user-accounts/um-photo-dialog.c:429
 #, fuzzy
-#| msgid "Disabled"
 msgid "Disable image"
 msgstr "無効"
 
 #: ../panels/user-accounts/um-photo-dialog.c:447
 msgid "Take a photo..."
-msgstr ""
+msgstr "写真を撮る..."
 
 #: ../panels/user-accounts/um-photo-dialog.c:465
 msgid "Browse for more pictures..."
@@ -3453,7 +3198,6 @@ msgstr ""
 
 #: ../panels/user-accounts/um-user-manager.c:430
 #, fuzzy, c-format
-#| msgid "The location already exists."
 msgid "A user with name '%s' already exists."
 msgstr "その場所は既に登録済みです。"
 
@@ -3493,13 +3237,11 @@ msgstr ""
 
 #: ../panels/user-accounts/um-user-panel.c:446
 #, fuzzy
-#| msgid "_Delete Fingerprints"
 msgid "_Delete Files"
 msgstr "削除する(_D)"
 
 #: ../panels/user-accounts/um-user-panel.c:447
 #, fuzzy
-#| msgid "All Files"
 msgid "_Keep Files"
 msgstr "すべてのファイル"
 
@@ -3519,7 +3261,6 @@ msgstr ""
 
 #: ../panels/user-accounts/um-user-panel.c:509
 #, fuzzy
-#| msgid "None"
 msgctxt "Password mode"
 msgid "None"
 msgstr "何もしない"
@@ -3530,7 +3271,6 @@ msgstr ""
 
 #: ../panels/user-accounts/um-user-panel.c:833
 #, fuzzy
-#| msgid "Please make sure that the applet is properly installed"
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "そのアプレットが適切にインストールされているか確認してください"
 
@@ -3542,7 +3282,6 @@ msgstr ""
 
 #: ../panels/user-accounts/um-user-panel.c:904
 #, fuzzy
-#| msgid "C_reate"
 msgid "Create a user"
 msgstr "作成する(_R)"
 
@@ -3566,7 +3305,6 @@ msgstr ""
 
 #: ../panels/user-accounts/um-user-panel.c:1114
 #, fuzzy
-#| msgid "By _country"
 msgid "My Account"
 msgstr "国別(_C)"
 
@@ -3585,37 +3323,31 @@ msgstr ""
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
 #, fuzzy
-#| msgid "seconds"
 msgid "User Accounts"
 msgstr "秒"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
 #, fuzzy
-#| msgid "C_reate"
 msgid "Cr_eate"
 msgstr "作成する(_R)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:5
 #, fuzzy
-#| msgid "Create New Location"
 msgid "Create new account"
 msgstr "新しい場所の作成"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 #, fuzzy
-#| msgid "_Country:"
 msgid "_Account Type"
 msgstr "国(_C):"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
 #, fuzzy
-#| msgid "Full Name"
 msgid "_Full name"
 msgstr "氏名"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
 #, fuzzy
-#| msgid "U_sername:"
 msgid "_Username"
 msgstr "ユーザ名(_S):"
 
@@ -3639,25 +3371,21 @@ msgstr ""
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:3
 #, fuzzy
-#| msgid "_New password:"
 msgid "C_onfirm password"
 msgstr "新しいパスワード(_N):"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:4
 #, fuzzy
-#| msgid "Change set"
 msgid "Ch_ange"
 msgstr "変更セット"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:5
 #, fuzzy
-#| msgid "Change password"
 msgid "Changing password for"
 msgstr "パスワードの変更"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:6
 #, fuzzy
-#| msgid "Change password"
 msgid "Choose a generated password"
 msgstr "パスワードの変更"
 
@@ -3667,7 +3395,6 @@ msgstr ""
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:8
 #, fuzzy
-#| msgid "Current _password:"
 msgid "Current _password"
 msgstr "現在のパスワード(_P):"
 
@@ -3681,7 +3408,6 @@ msgstr ""
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:11
 #, fuzzy
-#| msgid "Flickr"
 msgid "Fair"
 msgstr "Flickr"
 
@@ -3691,39 +3417,28 @@ msgstr ""
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:13
 #, fuzzy
-#| msgid "_New password:"
 msgid "Set a password now"
 msgstr "新しいパスワード(_N):"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:14
-#, fuzzy
-#| msgid "Action"
 msgid "_Action"
-msgstr "操作"
+msgstr "アクション(_A)"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:15
-#, fuzzy
-#| msgid "_Variants:"
 msgid "_Hint"
-msgstr "系列(_V):"
+msgstr "ヒント(_H)"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:16
-#, fuzzy
-#| msgid "_New password:"
 msgid "_New password"
-msgstr "新しいパスワード(_N):"
+msgstr "新しいパスワード(_N)"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:17
-#, fuzzy
-#| msgid "_New password:"
 msgid "_Show password"
-msgstr "新しいパスワード(_N):"
+msgstr "パスワードを表示(_S)"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:1
-#, fuzzy
-#| msgid "Web Browser"
 msgid "Browse"
-msgstr "ウェブ・ブラウザ"
+msgstr "参照"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:4
 msgid "Changing photo for:"
@@ -3736,7 +3451,6 @@ msgstr ""
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:6
 #, fuzzy
-#| msgid "Galeon"
 msgid "Gallery"
 msgstr "Galeon"
 
@@ -3746,7 +3460,6 @@ msgstr ""
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
 #, fuzzy
-#| msgid "Take a break!"
 msgid "Take a photograph"
 msgstr "一休みしてください!"
 
@@ -3756,7 +3469,6 @@ msgstr ""
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
 #, fuzzy
-#| msgid "_Country:"
 msgid "Account type"
 msgstr "国(_C):"
 
@@ -3766,21 +3478,17 @@ msgstr ""
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 #, fuzzy
-#| msgid "Enable Fingerprint Login"
 msgid "Fingerprint Login"
 msgstr "指紋認証を有効にする"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
 #, fuzzy
-#| msgid "Options..."
 msgid "Login Options"
 msgstr "オプション..."
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
-#, fuzzy
-#| msgid "_Password:"
 msgid "Password"
-msgstr "パスワード(_P):"
+msgstr "パスワード"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:2
 msgid "Left index finger"
@@ -3844,7 +3552,6 @@ msgstr ""
 
 #: ../shell/control-center.c:65
 #, fuzzy
-#| msgid "System Settings"
 msgid "- System Settings"
 msgstr "システムの設定"
 
@@ -3867,2026 +3574,12 @@ msgstr "コントロール・センター"
 msgid "_All Settings"
 msgstr "すべての設定(_A)"
 
-#~ msgid "Butter"
-#~ msgstr "バター"
-
-#~ msgid "Orange"
-#~ msgstr "オレンジ"
-
-#~ msgid "Chocolate"
-#~ msgstr "チョコレート"
-
-#~ msgid "Chameleon"
-#~ msgstr "カメレオン"
-
-#~ msgid "Plum"
-#~ msgstr "プラム"
-
-#~ msgid "Aluminium"
-#~ msgstr "アルミニウム"
-
-#~ msgid "Gray"
-#~ msgstr "グレー"
-
-#~ msgid "Colors"
-#~ msgstr "色"
-
-#~ msgid "Slide Show"
-#~ msgstr "スライドショー"
-
-#~ msgid "Image"
-#~ msgstr "画像"
-
-#~ msgid "pixel"
-#~ msgid_plural "pixels"
-#~ msgstr[0] "ピクセル"
-
-#~ msgid ""
-#~ "<b>%s</b>\n"
-#~ "%s, %s\n"
-#~ "Folder: %s"
-#~ msgstr ""
-#~ "<b>%s</b>\n"
-#~ "%s, %s\n"
-#~ "フォルダ: %s"
-
-#~ msgid ""
-#~ "<b>%s</b>\n"
-#~ "%s\n"
-#~ "Folder: %s"
-#~ msgstr ""
-#~ "<b>%s</b>\n"
-#~ "%s\n"
-#~ "フォルダ: %s"
-
-#~ msgid "Image missing"
-#~ msgstr "画像がありません"
-
-#~ msgid "24 hour format"
-#~ msgstr "24 時制"
-
-#~ msgid "Day:"
-#~ msgstr "日:"
-
-#~ msgid "Set time automatically"
-#~ msgstr "時刻を自動的に設定"
-
-#~ msgid "Year:"
-#~ msgstr "年:"
-
-#~ msgid "Preferred Applications"
-#~ msgstr "お気に入りのアプリ"
-
-#~ msgid "Start the preferred visual assistive technology"
-#~ msgstr "お気に入りの視覚支援技術を起動します"
-
-#~ msgid "Visual Assistance"
-#~ msgstr "視覚支援"
-
-#~ msgid "Error setting default browser: %s"
-#~ msgstr "デフォルトのブラウザを設定する際にエラーが発生しました: %s"
-
-#~ msgid "Error setting default mailer: %s"
-#~ msgstr "デフォルトのメーラーを設定する際にエラーが発生しました: %s"
-
-#~ msgid "Could not load the main interface"
-#~ msgstr "メインのインタフェースを読み込めませんでした"
-
-#~ msgid "Please make sure that the applet is properly installed"
-#~ msgstr "そのアプレットが適切にインストールされているか確認してください"
-
-#~ msgid "Accessibility"
-#~ msgstr "アクセシビリティ"
-
-#~ msgid "All %s occurrences will be replaced with actual link"
-#~ msgstr "%s という文字はすべて実際のリンクに置き換えられます"
-
-#~ msgid "Co_mmand:"
-#~ msgstr "コマンド(_M):"
-
-#~ msgid "E_xecute flag:"
-#~ msgstr "起動オプション(_X):"
-
-#~ msgid "Instant Messenger"
-#~ msgstr "インスタント・メッセンジャー"
-
-#~ msgid "Internet"
-#~ msgstr "インターネット"
-
-#~ msgid "Mail Reader"
-#~ msgstr "メール・クライアント"
-
-#~ msgid "Mobility"
-#~ msgstr "操作支援"
-
-#~ msgid "Run at st_art"
-#~ msgstr "ログインしたら起動する(_A)"
-
-#~ msgid "Run in t_erminal"
-#~ msgstr "端末内で起動する(_E)"
-
-#~ msgid "Terminal Emulator"
-#~ msgstr "端末エミュレータ"
-
-#~ msgid "Text Editor"
-#~ msgstr "テキスト・エディタ"
-
-#~ msgid "Visual"
-#~ msgstr "視覚支援"
-
-#~ msgid "Web Browser"
-#~ msgstr "ウェブ・ブラウザ"
-
-#~ msgid "_Run at start"
-#~ msgstr "ログインしたら起動する(_R)"
-
-#~ msgid "Banshee Music Player"
-#~ msgstr "Banshee 楽曲プレイヤー"
-
-#~ msgid "Debian Terminal Emulator"
-#~ msgstr "Debian 端末エミュレータ"
-
-#~ msgid "ETerm"
-#~ msgstr "ETerm"
-
-#~ msgid "GNOME Magnifier without Screen Reader"
-#~ msgstr "GNOME 拡大鏡 (スクリーン・リーダなし)"
-
-#~ msgid "GNOME OnScreen Keyboard"
-#~ msgstr "GNOME オンスクリーン・キーボード"
-
-#~ msgid "GNOME Terminal"
-#~ msgstr "GNOME 端末"
-
-#~ msgid "Gnopernicus"
-#~ msgstr "Gnopernicus"
-
-#~ msgid "Gnopernicus with Magnifier"
-#~ msgstr "Gnopernicus (拡大鏡あり)"
-
-#~ msgid "KDE Magnifier without Screen Reader"
-#~ msgstr "KDE の拡大鏡 (スクリーン・リーダーなし)"
-
-#~ msgid "Konsole"
-#~ msgstr "Konsole"
-
-#~ msgid "Linux Screen Reader"
-#~ msgstr "Linux スクリーン・リーダ"
-
-#~ msgid "Linux Screen Reader with Magnifier"
-#~ msgstr "Linux スクリーン・リーダ (拡大鏡あり)"
-
-#~ msgid "Listen"
-#~ msgstr "Listen"
-
-#~ msgid "NXterm"
-#~ msgstr "NXterm"
-
-#~ msgid "Orca"
-#~ msgstr "Orca"
-
-#~ msgid "Orca with Magnifier"
-#~ msgstr "Orca (拡大鏡あり)"
-
-#~ msgid "RXVT"
-#~ msgstr "RXVT"
-
-#~ msgid "Rhythmbox Music Player"
-#~ msgstr "Rhythmbox 楽曲プレイヤー"
-
-#~ msgid "Standard XTerminal"
-#~ msgstr "標準のX端末"
-
-#~ msgid "Terminator"
-#~ msgstr "Terminator"
-
-#~ msgid "Totem Movie Player"
-#~ msgstr "Totem 動画プレイヤー"
-
-#~ msgid "aterm"
-#~ msgstr "aterm"
-
-#~ msgid "On"
-#~ msgstr "有効"
-
-#~ msgid "_Detect monitors"
-#~ msgstr "モニタの検出(_D)"
-
-#~ msgid "_Mirror Screens"
-#~ msgstr "画面をミラー(_M)"
-
-#~ msgid "Upside Down"
-#~ msgstr "逆さま"
-
-#~ msgid "Mirror Screens"
-#~ msgstr "複数の画面をミラーする"
-
-#~ msgid "Desktop"
-#~ msgstr "デスクトップ"
-
-#~ msgid "Error unsetting accelerator in configuration database: %s"
-#~ msgstr "設定データベースのアクセラレータの設定を解除する際にエラー: %s"
-
-#~ msgid "Keyboard _model:"
-#~ msgstr "キーボードの型式(_M):"
-
-#~ msgid "List of keyboard layouts selected for usage"
-#~ msgstr "使用するよう選択されたキーボードのレイアウトの一覧"
-
-#~ msgid "Move _Down"
-#~ msgstr "下に移動(_D)"
-
-#~ msgid "Move _Up"
-#~ msgstr "上に移動(_U)"
-
-#~ msgid "Move the selected keyboard layout down in the list"
-#~ msgstr "選択したキーボードレイアウトを一覧の下へ移動する"
-
-#~ msgid "Move the selected keyboard layout up in the list"
-#~ msgstr "選択したキーボードレイアウトを一覧の上へ移動する"
-
-# FIXME
-#~ msgid "New windows u_se active window's layout"
-#~ msgstr "新しいウィンドウは有効なウィンドウレイアウトを使う(_S)"
-
-#~ msgid "Print a diagram of the selected keyboard layout"
-#~ msgstr "選択したキーボードレイアウトの図を印刷"
-
-#~ msgid "Remove the selected keyboard layout from the list"
-#~ msgstr "選択したキーボードレイアウトを一覧から削除する"
-
-#~ msgid "Select a keyboard layout to be added to the list"
-#~ msgstr "一覧に追加するキーボードのレイアウトを選択する"
-
-#~ msgid "_Add..."
-#~ msgstr "追加(_A)..."
-
-#~ msgid "_Pointer can be controlled using the keypad"
-#~ msgstr "キーボードでポインタを制御できるようにする(_P)"
-
-#~ msgid "_Type to test settings:"
-#~ msgstr "設定の確認(_T):"
-
-#~ msgid "By _country"
-#~ msgstr "国別(_C)"
-
-#~ msgid "By _language"
-#~ msgstr "言語別(_L)"
-
-#~ msgid "_Country:"
-#~ msgstr "国(_C):"
-
-#~ msgid "_Language:"
-#~ msgstr "言語(_L):"
-
-#~ msgid "_Variants:"
-#~ msgstr "系列(_V):"
-
-#~ msgid "Choose a Keyboard Model"
-#~ msgstr "キーボードの型式の選択"
-
-#~ msgid "_Models:"
-#~ msgstr "型式(_M):"
-
-#~ msgid "_Vendors:"
-#~ msgstr "ベンダー(_V):"
-
-#~ msgid "Choose type of click _beforehand"
-#~ msgstr "予めクリックの種類を選択しておく(_B)"
-
-#~ msgid "Choose type of click with mo_use gestures"
-#~ msgstr "マウス・ジェスチャでクリックの種類を選択する(_U)"
-
-#~ msgid "D_ouble click:"
-#~ msgstr "ダブルクリック(_O):"
-
-#~ msgid "D_rag click:"
-#~ msgstr "ドラッグ・クリック(_R):"
-
-# See also ja.po of mousetweak
-#~ msgid "Dwell Click"
-#~ msgstr "自動クリック"
-
-#~ msgid "Seco_ndary click:"
-#~ msgstr "第二ボタンのクリック(_N):"
-
-#~ msgid "Show click type _window"
-#~ msgstr "種類を表すウィンドウを表示する(_W)"
-
-#~ msgid ""
-#~ "You can also use the Dwell Click panel applet to choose the click type."
-#~ msgstr ""
-#~ "自動クリックのパネル・アプレットを使ってクリックの種類を選択することも可能"
-#~ "です。"
-
-#~ msgid "_Initiate click when stopping pointer movement"
-#~ msgstr "ポインタの移動を停止してクリックを始める(_I)"
-
-#~ msgid "_Single click:"
-#~ msgstr "シングルクリック(_S):"
-
-#~ msgid "_Trigger secondary click by holding down the primary button"
-#~ msgstr "第一ボタンを押したままにすると第二ボタンのクリックとみなす(_T)"
-
-#~ msgid "Location already exists"
-#~ msgstr "その場所は既に登録済みです"
-
-#~ msgid "Set your network proxy preferences"
-#~ msgstr "お使いのネットワークプロキシを設定します"
+#~ msgid "Secure HTTP Proxy:"
+#~ msgstr "セキュア HTTP プロキシ:"
 
 #, fuzzy
-#~| msgid "Location:"
-#~ msgid "Web;Location;"
-#~ msgstr "場所:"
+#~ msgid "Could not connect to system bus: %s"
+#~ msgstr "%s を %s に名前を変更することができません: %s\n"
 
-#~ msgid "<b>Di_rect internet connection</b>"
-#~ msgstr "<b>インターネットに直接接続する(_R)</b>"
-
-#~ msgid "<b>_Automatic proxy configuration</b>"
-#~ msgstr "<b>自動的にプロキシの設定を行う(_A)</b>"
-
-#~ msgid "<b>_Manual proxy configuration</b>"
-#~ msgstr "<b>マニュアルでプロキシの設定を行う(_M)</b>"
-
-#~ msgid "<b>_Use authentication</b>"
-#~ msgstr "<b>認証を行う(_U)</b>"
-
-#~ msgid "C_reate"
-#~ msgstr "作成する(_R)"
-
-#~ msgid "Create New Location"
-#~ msgstr "新しい場所の作成"
-
-#~ msgid "HTTP Proxy Details"
-#~ msgstr "HTTP プロキシの詳細"
-
-#~ msgid "Ignore Host List"
-#~ msgstr "無視するホストの一覧"
-
-#~ msgid "Ignored Hosts"
-#~ msgstr "無視するホスト"
-
-#~ msgid "Network Proxy Preferences"
-#~ msgstr "ネットワークプロキシの設定"
-
-#~ msgid "Port:"
-#~ msgstr "ポート:"
-
-#~ msgid "Proxy Configuration"
-#~ msgstr "プロキシの設定"
-
-#~ msgid "The location already exists."
-#~ msgstr "その場所は既に登録済みです。"
-
-#~ msgid "_Delete Location"
-#~ msgstr "場所の削除(_D)"
-
-#~ msgid "_Details"
-#~ msgstr "詳細(_D)"
-
-#~ msgid "_Location name:"
-#~ msgstr "場所の名前(_L):"
-
-#~ msgid "_Password:"
-#~ msgstr "パスワード(_P):"
-
-#~ msgid "_Use the same proxy for all protocols"
-#~ msgstr "すべてのプロトコルで同じプロキシを使う(_U)"
-
-#, fuzzy
-#~| msgid "seconds"
-#~ msgid "No sounds"
-#~ msgstr "秒"
-
-#, fuzzy
-#~| msgid "Alert Buttons"
-#~ msgctxt "Sound event"
-#~ msgid "Alert sound"
-#~ msgstr "警告ボタン"
-
-#, fuzzy
-#~| msgid "Windows"
-#~ msgctxt "Sound event"
-#~ msgid "Window minimised"
-#~ msgstr "ウィンドウ"
-
-#, fuzzy
-#~| msgid "Desktop"
-#~ msgctxt "Sound event"
-#~ msgid "Desktop"
-#~ msgstr "デスクトップ"
-
-#, fuzzy
-#~| msgid "Long"
-#~ msgctxt "Sound event"
-#~ msgid "Login"
-#~ msgstr "長い"
-
-#, fuzzy
-#~| msgid "Visual Alerts"
-#~ msgctxt "Sound event"
-#~ msgid "Alerts"
-#~ msgstr "視覚警告"
-
-#, fuzzy
-#~| msgid "_Selected items:"
-#~ msgid "Select Sound File"
-#~ msgstr "選択したアイテム(_S):"
-
-#, fuzzy
-#~| msgid "Copying files"
-#~ msgid "Sound files"
-#~ msgstr "ファイルのコピー"
-
-#, fuzzy
-#~| msgid "Custom"
-#~ msgid "Custom…"
-#~ msgstr "その他"
-
-#~ msgid "Ctrl+Alt+-"
-#~ msgstr "Ctrl+Alt+-"
-
-#~ msgid "Ctrl+Alt+0"
-#~ msgstr "Ctrl+Alt+0"
-
-#~ msgid "Ctrl+Alt+4"
-#~ msgstr "Ctrl+Alt+4"
-
-#~ msgid "Ctrl+Alt+8"
-#~ msgstr "Ctrl+Alt+8"
-
-#~ msgid "Ctrl+Alt+="
-#~ msgstr "Ctrl+Alt+="
-
-#~ msgid "HighContrast"
-#~ msgstr "ハイコントラスト"
-
-#~ msgid "HighContrastInverse"
-#~ msgstr "ハイコントラスト反転"
-
-#~ msgid "I need assistance with:"
-#~ msgstr "次の支援技術の設定を行う:"
-
-#~ msgid "LowContrast"
-#~ msgstr "ローコントラスト"
-
-#~ msgid "Shift+Ctrl+Alt+-"
-#~ msgstr "Shift+Ctrl+Alt+-"
-
-#~ msgid "Shift+Ctrl+Alt+="
-#~ msgstr "Shift+Ctrl+Alt+="
-
-#~ msgid "Show Universal Access status"
-#~ msgstr "ユニバーサル・アクセスのステータスを表示する"
-
-#~ msgid "Use an alternative form of text input"
-#~ msgstr "代替の入力手段を使用する"
-
-#, fuzzy
-#~| msgid "About %s"
-#~ msgid "Accounts"
+#~ msgid "About %s"
 #~ msgstr "\"%s\" さんの情報"
-
-#, fuzzy
-#~| msgid "On"
-#~ msgid "Open"
-#~ msgstr "有効"
-
-#, fuzzy
-#~| msgid "Description:"
-#~ msgid "Restrictions:"
-#~ msgstr "説明:"
-
-#, fuzzy
-#~| msgid "The password is too short."
-#~ msgid "Show password hints"
-#~ msgstr "パスワードが短すぎます。"
-
-#~ msgid "Example Panel"
-#~ msgstr "サンプルのパネル"
-
-#~ msgid "Example preferences panel"
-#~ msgstr "サンプルの設定パネル"
-
-#~ msgid "Balsa"
-#~ msgstr "Balsa"
-
-#~ msgid "Claws Mail"
-#~ msgstr "Claws メール"
-
-#~ msgid "Debian Sensible Browser"
-#~ msgstr "Debian Sensible ブラウザ"
-
-#~ msgid "Encompass"
-#~ msgstr "Encompass"
-
-#~ msgid "Evolution Mail Reader"
-#~ msgstr "Evolution メール・クライアント"
-
-#~ msgid "Firefox"
-#~ msgstr "Firefox"
-
-#~ msgid "Iceape"
-#~ msgstr "Iceape"
-
-#~ msgid "Iceape Mail"
-#~ msgstr "Iceape のメール"
-
-#~ msgid "Icedove"
-#~ msgstr "Icedove"
-
-#~ msgid "Iceweasel"
-#~ msgstr "Iceweasel"
-
-#~ msgid "Konqueror"
-#~ msgstr "Konqueror"
-
-#~ msgid "Midori"
-#~ msgstr "Midori"
-
-#~ msgid "Mozilla"
-#~ msgstr "Mozilla"
-
-#~ msgid "Mozilla 1.6"
-#~ msgstr "Mozilla 1.6"
-
-#~ msgid "Mozilla Mail"
-#~ msgstr "Mozilla メール"
-
-#~ msgid "Mozilla Thunderbird"
-#~ msgstr "Mozilla Thunderbird"
-
-#~ msgid "Netscape Communicator"
-#~ msgstr "Netscape Communicator"
-
-#~ msgid "SeaMonkey"
-#~ msgstr "SeaMonkey"
-
-#~ msgid "SeaMonkey Mail"
-#~ msgstr "SeaMonkey メール"
-
-#~ msgid "Sylpheed"
-#~ msgstr "Sylpheed"
-
-#~ msgid "Sylpheed-Claws"
-#~ msgstr "Sylpheed-Claws"
-
-#~ msgid "Thunderbird"
-#~ msgstr "Thunderbird"
-
-#~ msgid "Re_fresh rate:"
-#~ msgstr "リフレッシュ・レート(_F):"
-
-#~ msgid "_Include Top Menu Bar"
-#~ msgstr "トップメニューバーを含める(_I)"
-
-#~ msgid "Monitors"
-#~ msgstr "モニタ"
-
-#~ msgid "%d Hz"
-#~ msgstr "%d Hz"
-
-#~ msgid "Monitor: %s"
-#~ msgstr "モニタ: %s"
-
-#~ msgid "Keyboard Shortcuts"
-#~ msgstr "キーボード・ショートカット"
-
-#~ msgid "Assign shortcut keys to commands"
-#~ msgstr "コマンドにショートカット・キーを割り当てます"
-
-#~ msgid "Beep when a _modifier key is pressed"
-#~ msgstr "修飾キーを押下したらビープ音を鳴らす(_M)"
-
-#~ msgid "Beep when a _toggle key is pressed"
-#~ msgstr "トグル・キーを押下したらビープ音を鳴らす(_T)"
-
-#~ msgid "Beep when a key is pr_essed"
-#~ msgstr "何かキーを押下したらビープ音を鳴らす(_E)"
-
-#~ msgid "Beep when a key is reje_cted"
-#~ msgstr "キーの押下が拒否されたらビープ音を鳴らす(_C)"
-
-#~ msgid "Beep when key is _accepted"
-#~ msgstr "キー押下が受け入れられたビープ音を鳴らす(_A)"
-
-#~ msgid "Beep when key is _rejected"
-#~ msgstr "キーの押下が拒否されたらビープ音を鳴らす(_R)"
-
-#~ msgid "Flash _window titlebar"
-#~ msgstr "ウィンドウのタイトルバーを点滅させる(_W)"
-
-#~ msgid "Flash entire _screen"
-#~ msgstr "画面全体を点滅させる(_S)"
-
-#~ msgid "Keyboard Accessibility Audio Feedback"
-#~ msgstr "キーボード・アクセシビリティのサウンド・フィードバック"
-
-#~ msgid "Show _visual feedback for the alert sound"
-#~ msgstr "警告音を視覚的なフィードバックで表現する(_V)"
-
-#~ msgid "Visual cues for sounds"
-#~ msgstr "視覚的な置き換え"
-
-#~ msgid "Audio _Feedback..."
-#~ msgstr "サウンドのフィードバック(_F)..."
-
-#~ msgid "Disa_ble sticky keys if two keys are pressed together"
-#~ msgstr "二つのキーが同時に押下されたらステッキー・キーを無効にする(_B)"
-
-#~ msgid "Keyboard Preferences"
-#~ msgstr "キーボードの設定"
-
-#~ msgid "_Accessibility features can be toggled with keyboard shortcuts"
-#~ msgstr "キーボードからアクセシビリティの機能を切り替えられるようにする(_A)"
-
-#~ msgid "_Ignore fast duplicate keypresses"
-#~ msgstr "重複したキーを素早く押下した場合は無視する(_I)"
-
-#~ msgid "_Only accept long keypresses"
-#~ msgstr "長いキー押下のみ受け入れる(_O)"
-
-#~ msgid "_Simulate simultaneous keypresses"
-#~ msgstr "同時にキーを押下した状態を模擬する(_S)"
-
-#~ msgid "Set your keyboard preferences"
-#~ msgstr "お使いのキーボードを設定します"
-
-#~ msgid "Unable to load stock icon '%s'\n"
-#~ msgstr "ストック・アイコンの '%s' を読み込めません\n"
-
-#~ msgid "gesture|Move left"
-#~ msgstr "左へ移動する"
-
-#~ msgid "gesture|Move right"
-#~ msgstr "右へ移動する"
-
-#~ msgid "gesture|Move up"
-#~ msgstr "上へ移動する"
-
-#~ msgid "gesture|Move down"
-#~ msgstr "下へ移動する"
-
-#~ msgid "gesture|Disabled"
-#~ msgstr "無効"
-
-#, fuzzy
-#~ msgid ""
-#~ "Accessibility features can be turned on or off with keyboard shortcuts"
-#~ msgstr "キーボードからアクセシビリティの機能を切り替えられるようにする"
-
-#~ msgid "Error saving configuration: %s"
-#~ msgstr "設定情報を保存する際にエラーが発生しました: %s"
-
-#~ msgid "Image Viewer"
-#~ msgstr "画像ビューア"
-
-#~ msgid "Multimedia"
-#~ msgstr "マルチメディア"
-
-#~ msgid "Open link in new _tab"
-#~ msgstr "リンク先を新しいタブで開く(_T)"
-
-#~ msgid "Open link in new _window"
-#~ msgstr "リンク先を新しいウィンドウで開く(_W)"
-
-#~ msgid "Open link with web browser _default"
-#~ msgstr "リンク先をウェブ・ブラウザのデフォルト操作で開く(_D)"
-
-#~ msgid "Video Player"
-#~ msgstr "ビデオ・プレイヤー"
-
-#~ msgid "Include _panel"
-#~ msgstr "パネルを含める(_P)"
-
-#~ msgid ""
-#~ "Usage: %s SOURCE_FILE DEST_NAME\n"
-#~ "\n"
-#~ "This program installs a RANDR profile for multi-monitor setups into\n"
-#~ "a systemwide location.  The resulting profile will get used when\n"
-#~ "the RANDR plug-in gets run in gnome-settings-daemon.\n"
-#~ "\n"
-#~ "SOURCE_FILE - a full pathname, typically /home/username/.config/monitors."
-#~ "xml\n"
-#~ "\n"
-#~ "DEST_NAME - relative name for the installed file.  This will get put in\n"
-#~ "            the systemwide directory for RANDR configurations,\n"
-#~ "            so the result will typically be %s/DEST_NAME\n"
-#~ msgstr ""
-#~ "使用法: %s ソースファイル インストール名\n"
-#~ "\n"
-#~ "このプログラムは RANDR プロファイルをマルチモニタ用の設定として\n"
-#~ "システム全体で利用する場所にインストールします。インストールしたものは\n"
-#~ "RANDR プラグインが gnome-settings-daemon で実行された時に使用されます。\n"
-#~ "\n"
-#~ "ソースファイル - フルパス名。一般例: /home/username/.config/monitors.xml\n"
-#~ "\n"
-#~ "インストール名 - インストールされるファイルの相対パス名。\n"
-#~ "               RANDR の設定用にシステム全体で使用されるディレクトリに置か"
-#~ "れ、\n"
-#~ "               普通は %s/インストール名 のようになります\n"
-
-#~ msgid "This program can only be used by the root user"
-#~ msgstr "このプログラムは root ユーザのみが使用できます"
-
-#~ msgid "The source filename must be absolute"
-#~ msgstr "ソースのファイル名は絶対パスである必要があります"
-
-#~ msgid "Could not get information for %s: %s\n"
-#~ msgstr "%s の情報を取得できませんでした: %s\n"
-
-#~ msgid "%s must be a regular file\n"
-#~ msgstr "%s は普通のファイルである必要があります\n"
-
-#~ msgid "This program must only be run through pkexec(1)"
-#~ msgstr "このプログラムは pkexec(1) 経由で実行する必要があります"
-
-#~ msgid "PKEXEC_UID must be set to an integer value"
-#~ msgstr "PKEXEC_UID に整数値を設定しなくてはなりません"
-
-#~ msgid "%s must be owned by you\n"
-#~ msgstr "%s はあなたによって所有されてなくてはなりません\n"
-
-#~ msgid "%s must not have any directory components\n"
-#~ msgstr "%s にはディレクトリ名が含まれていてはいけません\n"
-
-#~ msgid "%s must be a directory\n"
-#~ msgstr "%s はディレクトリでなくてはなりません\n"
-
-#~ msgid "Could not open %s/%s: %s\n"
-#~ msgstr "%s/%s をオープンできませんでした: %s\n"
-
-#~ msgid ""
-#~ "Authentication is required to install multi-monitor settings for all users"
-#~ msgstr "マルチモニタの設定をすべてのユーザに対して行うには、認証が必要です"
-
-#~ msgid "Install multi-monitor settings for the whole system"
-#~ msgstr "システム全体にマルチモニタの設定をインストールする"
-
-#~ msgid "All_ow postponing of breaks"
-#~ msgstr "一休みの延長を許可する(_O)"
-
-#~ msgid "Check if breaks are allowed to be postponed"
-#~ msgstr "一休みの延長を可能にする場合は有効にしてください"
-
-#~ msgid "Duration of the break when typing is disallowed"
-#~ msgstr "入力を禁止して一休みする時間です"
-
-#~ msgid "Duration of work before forcing a break"
-#~ msgstr "強制的に一休みに入るまでの時間です"
-
-#~ msgid ""
-#~ "Lock screen after a certain duration to help prevent repetitive keyboard "
-#~ "use injuries"
-#~ msgstr "キー入力のリピート防止のため一休み中は画面をロックします"
-
-#~ msgid "Typing Break"
-#~ msgstr "一休み"
-
-#~ msgid "_Break interval lasts:"
-#~ msgstr "一休みする時間(_B):"
-
-#~ msgid "_Lock screen to enforce typing break"
-#~ msgstr "一休みに入ったら強制的に画面をロックする(_L)"
-
-#~ msgid "_Work interval lasts:"
-#~ msgstr "一休みの警告を出すまでの時間(_W):"
-
-#~ msgid "_Postpone Break"
-#~ msgstr "中断を延長する(_P)"
-
-#~ msgid "_Take a Break"
-#~ msgstr "一休みする(_T)"
-
-#~ msgid "Take a break now (next in %dm)"
-#~ msgstr "さあ、一休みしましょう (次は %d分)"
-
-#~ msgid "%d minute until the next break"
-#~ msgid_plural "%d minutes until the next break"
-#~ msgstr[0] "次の一休みまで %d分あります"
-
-#~ msgid "Take a break now (next in less than one minute)"
-#~ msgstr "さあ、一休みしましょう (次は一分以内です)"
-
-#~ msgid "Less than one minute until the next break"
-#~ msgstr "次の一休みまで 1分を切りました"
-
-#~ msgid ""
-#~ "Unable to bring up the typing break properties dialog with the following "
-#~ "error: %s"
-#~ msgstr ""
-#~ "次のエラーにより \"キー入力の一休み設定ダイアログ\" を開けませんでした: %s"
-
-#~ msgid "Written by Richard Hult <richard@imendio.com>"
-#~ msgstr "作者: Richard Hult <richard@imendio.com>"
-
-#~ msgid "Eye candy added by Anders Carlsson"
-#~ msgstr "目玉のキャンディの提供: Anders Carlsson"
-
-#~ msgid "A computer break reminder."
-#~ msgstr "コンピュータの一休み催促ツールです。"
-
-#~ msgid "translator-credits"
-#~ msgstr ""
-#~ "Yukihiro Nakai <Nakai@abricot.co.jp>\n"
-#~ "Eiichiro ITANI <emu@ceres.dti.ne.jp>\n"
-#~ "草野 貴之 <AE5T-KSN@asahi-net.or.jp>\n"
-#~ "Akira TAGOH <tagoh@gnome.gr.jp>\n"
-#~ "相花 毅 <takeshi.aihana@gmail.com>\n"
-#~ "KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>\n"
-#~ "Satoru SATOH <ss@gnome.gr.jp>\n"
-#~ "やまね ひでき <henrich@debian.or.jp>\n"
-#~ "日本GNOMEユーザー会 <http://www.gnome.gr.jp/>"
-
-#~ msgid "Don't check whether the notification area exists"
-#~ msgstr "通知スペースが存在しているかどうかを確認しない"
-
-#~ msgid "Typing Monitor"
-#~ msgstr "タイピングの監視"
-
-#~ msgid ""
-#~ "The typing monitor uses the notification area to display information. You "
-#~ "don't seem to have a notification area on your panel. You can add it by "
-#~ "right-clicking on your panel and choosing 'Add to panel', selecting "
-#~ "'Notification area' and clicking 'Add'."
-#~ msgstr ""
-#~ "GNOME 一休み催促ツールは情報を表示するために通知スペースを利用しますが、お"
-#~ "使いのパネルには通知スペースが無いようです。通知スペースはパネルの上で右ク"
-#~ "リックして \"パネルへ追加\" を選択して、ダイアログから [通知スペース] のエ"
-#~ "ントリを選択して \"追加\" ボタンをクリックしてください。"
-
-#~ msgid "Image/label border"
-#~ msgstr "画像/ラベルの境界線"
-
-#~ msgid "Width of border around the label and image in the alert dialog"
-#~ msgstr "警告ダイアログに表示するラベルと画像の回りに追加する境界線の幅です"
-
-#~ msgid "Alert Type"
-#~ msgstr "警告の種類"
-
-#~ msgid "The type of alert"
-#~ msgstr "警告ダイアログの種類です"
-
-#~ msgid "The buttons shown in the alert dialog"
-#~ msgstr "警告ダイアログに表示するボタンです"
-
-#~ msgid "Show more _details"
-#~ msgstr "詳細表示(_D)"
-
-#~ msgid "Select Image"
-#~ msgstr "画像の選択"
-
-#~ msgid "No Image"
-#~ msgstr "画像なし"
-
-#~ msgid "Images"
-#~ msgstr "画像"
-
-#~ msgid ""
-#~ "There was an error while trying to get the addressbook information\n"
-#~ "Evolution Data Server can't handle the protocol"
-#~ msgstr ""
-#~ "アドレス帳の情報を取得する際にエラーが発生しました。\n"
-#~ "Evolution データ・サーバでは扱えないプロトコルです。"
-
-#~ msgid "Unable to open address book"
-#~ msgstr "アドレス帳を開けません"
-
-#~ msgid "A_IM/iChat:"
-#~ msgstr "AIM/iChat(_I):"
-
-#~ msgid "C_ompany:"
-#~ msgstr "会社(_O):"
-
-#~ msgid "Change Passwo_rd..."
-#~ msgstr "パスワードの変更(_R)..."
-
-#~ msgid "Ci_ty:"
-#~ msgstr "市(_T):"
-
-#~ msgid "Cou_ntry:"
-#~ msgstr "国(_N):"
-
-#~ msgid "Disable _Fingerprint Login..."
-#~ msgstr "指紋認証を無効にする(_F)..."
-
-#~ msgid "Email"
-#~ msgstr "メール"
-
-#~ msgid "Enable _Fingerprint Login..."
-#~ msgstr "指紋認証を有効にする(_F)..."
-
-#~ msgid "Hom_e:"
-#~ msgstr "自宅(_E):"
-
-#~ msgid "Home"
-#~ msgstr "ホーム"
-
-#~ msgid "IC_Q:"
-#~ msgstr "ICQ(_Q):"
-
-#~ msgid "Instant Messaging"
-#~ msgstr "インスタント・メッセンジャー"
-
-#~ msgid "M_SN:"
-#~ msgstr "MSN(_S):"
-
-#~ msgid "P.O. _box:"
-#~ msgstr "郵便番号(_B):"
-
-#~ msgid "P._O. box:"
-#~ msgstr "郵便番号(_O):"
-
-#~ msgid "Personal Info"
-#~ msgstr "個人情報"
-
-#~ msgid "Select your photo"
-#~ msgstr "写真を選択してください"
-
-#~ msgid "State/Pro_vince:"
-#~ msgstr "県/州(_V):"
-
-#~ msgid "Telephone"
-#~ msgstr "電話"
-
-#~ msgid "User name:"
-#~ msgstr "ユーザ名:"
-
-#~ msgid "Web _log:"
-#~ msgstr "ブログ(_L):"
-
-#~ msgid "Wor_k:"
-#~ msgstr "仕事(_K):"
-
-#~ msgid "Work"
-#~ msgstr "仕事"
-
-#~ msgid "Work _fax:"
-#~ msgstr "仕事の FAX 番号(_F):"
-
-#~ msgid "ZIP/_Postal code:"
-#~ msgstr "ZIP/郵便番号(_P):"
-
-#~ msgid "_Address:"
-#~ msgstr "住所(_A):"
-
-#~ msgid "_Department:"
-#~ msgstr "担当部署(_D):"
-
-#~ msgid "_Home page:"
-#~ msgstr "ホームページ(_H):"
-
-#~ msgid "_Home:"
-#~ msgstr "自宅(_H):"
-
-#~ msgid "_Manager:"
-#~ msgstr "マネージャ(_M):"
-
-#~ msgid "_State/Province:"
-#~ msgstr "県/州(_S):"
-
-#~ msgid "_Work:"
-#~ msgstr "仕事(_W):"
-
-#~ msgid "_XMPP:"
-#~ msgstr "XMPP(_X):"
-
-#~ msgid "_ZIP/Postal code:"
-#~ msgstr "ZIP/郵便番号(_Z):"
-
-#~ msgid "Set your personal information"
-#~ msgstr "自分の情報を管理します"
-
-#~ msgid "Swipe finger on reader"
-#~ msgstr "リーダーに指を通してください"
-
-#~ msgid "Place finger on reader"
-#~ msgstr "リーダーに指を置いてください"
-
-#~ msgid "Select finger"
-#~ msgstr "指の選択"
-
-#~ msgid "Child exited unexpectedly"
-#~ msgstr "子プロセスが強制終了しました"
-
-#~ msgid "Could not shutdown backend_stdin IO channel: %s"
-#~ msgstr "backend_stdin IO チャンネルを終了できませんでした: %s"
-
-#~ msgid "Could not shutdown backend_stdout IO channel: %s"
-#~ msgstr "backend_stdout IO チャンネルを終了できませんでした: %s"
-
-#~ msgid "System error: %s."
-#~ msgstr "システム・エラーです: %s"
-
-#~ msgid "Unable to launch %s: %s"
-#~ msgstr "%s を起動できません: %s"
-
-#~ msgid "Unable to launch backend"
-#~ msgstr "バンクエンドのプログラムを起動できません"
-
-#~ msgid "A system error has occurred"
-#~ msgstr "システム・エラーが発生しました"
-
-#~ msgid "Checking password..."
-#~ msgstr "パスワードの確認中..."
-
-#~ msgid "Click <b>Change password</b> to change your password."
-#~ msgstr ""
-#~ "パスワードを変更する場合は<b>パスワードの変更</b>をクリックしてください。"
-
-#~ msgid ""
-#~ "Please type your password again in the <b>Retype new password</b> field."
-#~ msgstr ""
-#~ "もう一度パスワードを<b>新しいパスワードの確認</b>エントリに入力してくださ"
-#~ "い。"
-
-#~ msgid "The two passwords are not equal."
-#~ msgstr "パスワードが一致しませんでした。"
-
-#~ msgid "Change pa_ssword"
-#~ msgstr "パスワードの変更(_S)"
-
-#~ msgid "Change your password"
-#~ msgstr "パスワードの変更"
-
-#~ msgid ""
-#~ "To change your password, enter your current password in the field below "
-#~ "and click <b>Authenticate</b>.\n"
-#~ "After you have authenticated, enter your new password, retype it for "
-#~ "verification and click <b>Change password</b>."
-#~ msgstr ""
-#~ "パスワードを変更する場合は、この下のエントリに現在のパスワードを入力して"
-#~ "<b>認証</b>ボタンをクリックしてください。\n"
-#~ "認証後に新しいパスワードを入力し、もう一度パスワードを入力して妥当性を検証"
-#~ "してから<b>パスワードの変更</b>ボタンをクリックしてください。"
-
-#~ msgid "Accessible Lo_gin"
-#~ msgstr "アクセシビリティ対応のログイン(_G)"
-
-#~ msgid "Assistive Technologies"
-#~ msgstr "支援技術"
-
-#~ msgid "Assistive Technologies Preferences"
-#~ msgstr "支援技術の設定"
-
-#~ msgid ""
-#~ "Changes to enable assistive technologies will not take effect until your "
-#~ "next log in."
-#~ msgstr "支援技術を有効にするには、もう一度ログインし直す必要があります。"
-
-#~ msgid "Close and _Log Out"
-#~ msgstr "閉じてログアウトする(_L)"
-
-#~ msgid "Jump to Preferred Applications dialog"
-#~ msgstr "お気に入りのアプリを設定します"
-
-#~ msgid "Jump to the Accessible Login dialog"
-#~ msgstr "アクセシビリティ対応のログイン・ダイアログを開きます"
-
-#~ msgid "Jump to the Keyboard Accessibility dialog"
-#~ msgstr "キーボードのアクセシビリティを設定します"
-
-#~ msgid "Jump to the Mouse Accessibility dialog"
-#~ msgstr "マウスのアクセシビリティを設定します"
-
-#~ msgid "Preferences"
-#~ msgstr "設定"
-
-#~ msgid "_Enable assistive technologies"
-#~ msgstr "支援技術を有効にする(_E)"
-
-#~ msgid "_Mouse Accessibility"
-#~ msgstr "マウスのアクセシビリティ(_M)"
-
-#~ msgid "_Preferred Applications"
-#~ msgstr "お気に入りのアプリ(_P)"
-
-#~ msgid "Choose which accessibility features to enable when you log in"
-#~ msgstr ""
-#~ "ログインした時にアクセシビリティの機能を有効にするかどうかを選択します"
-
-#~ msgid "All files"
-#~ msgstr "すべてのファイル"
-
-#~ msgid "Font may be too large"
-#~ msgstr "フォントが大きすぎるようです"
-
-#~ msgid ""
-#~ "The font selected is %d point large, and may make it difficult to "
-#~ "effectively use the computer.  It is recommended that you select a size "
-#~ "smaller than %d."
-#~ msgid_plural ""
-#~ "The font selected is %d points large, and may make it difficult to "
-#~ "effectively use the computer. It is recommended that you select a size "
-#~ "smaller than %d."
-#~ msgstr[0] ""
-#~ "選択したフォントの大きさは %dポイントですが、コンピュータで効果的に使用す"
-#~ "るのは困難です。%dより小さいフォントを選択することをお薦めします。"
-
-#~ msgid ""
-#~ "The font selected is %d point large, and may make it difficult to "
-#~ "effectively use the computer.  It is recommended that you select a "
-#~ "smaller sized font."
-#~ msgid_plural ""
-#~ "The font selected is %d points large, and may make it difficult to "
-#~ "effectively use the computer. It is recommended that you select a smaller "
-#~ "sized font."
-#~ msgstr[0] ""
-#~ "選択したフォントの大きさは %dポイントですが、コンピュータで効果的に使用す"
-#~ "るのは困難です。より小さいフォントを選択することをお薦めします。"
-
-#~ msgid "Use previous font"
-#~ msgstr "以前のフォントを使用する"
-
-#~ msgid "Use selected font"
-#~ msgstr "選択したフォントを使用する"
-
-#~ msgid "Could not load user interface file: %s"
-#~ msgstr "ユーザ・インタフェース・ファイルを読み込めませんでした: %s"
-
-#~ msgid "Specify the filename of a theme to install"
-#~ msgstr "インストールするテーマ・ファイルを指定する"
-
-#~ msgid "filename"
-#~ msgstr "FILENAME"
-
-#~ msgid ""
-#~ "Specify the name of the page to show (theme|background|fonts|interface)"
-#~ msgstr "表示するページの名前を指定する (theme|background|fonts|interface)"
-
-#~ msgid "page"
-#~ msgstr "PAGE"
-
-#~ msgid "[WALLPAPER...]"
-#~ msgstr "[壁紙...]"
-
-#~ msgid "Install"
-#~ msgstr "インストール"
-
-#~ msgid ""
-#~ "This theme will not look as intended because the required GTK+ theme "
-#~ "engine '%s' is not installed."
-#~ msgstr ""
-#~ "このテーマを利用するには、別途 '%s' というウィンドウ・マネージャのテーマが"
-#~ "必要です。"
-
-#~ msgid "Apply Background"
-#~ msgstr "背景の適用"
-
-#~ msgid "Apply Font"
-#~ msgstr "フォントの適用"
-
-#~ msgid "Revert Font"
-#~ msgstr "元に戻す"
-
-#~ msgid ""
-#~ "The current theme suggests a background and a font. Also, the last "
-#~ "applied font suggestion can be reverted."
-#~ msgstr ""
-#~ "このテーマには使用が推奨されている背景とフォントがあります。最後に適用した"
-#~ "フォントから推奨フォントに戻すことも可能です。"
-
-#~ msgid ""
-#~ "The current theme suggests a background. Also, the last applied font "
-#~ "suggestion can be reverted."
-#~ msgstr ""
-#~ "このテーマには使用が推奨されている背景があります。最後に適用したフォントか"
-#~ "ら推奨フォントに戻すことも可能です。"
-
-#~ msgid "The current theme suggests a background and a font."
-#~ msgstr "このテーマは推奨する背景とフォントの情報を提供しています。"
-
-#~ msgid ""
-#~ "The current theme suggests a font. Also, the last applied font suggestion "
-#~ "can be reverted."
-#~ msgstr ""
-#~ "このテーマには使用が推奨されているフォントがあります。最後に適用したフォン"
-#~ "トから推奨フォントに戻すことも可能です。"
-
-#~ msgid "The current theme suggests a background."
-#~ msgstr "このテーマは推奨する背景の情報を提供しています。"
-
-#~ msgid "The last applied font suggestion can be reverted."
-#~ msgstr "最後に適用したフォントから推奨フォントに戻すことも可能です。"
-
-#~ msgid "The current theme suggests a font."
-#~ msgstr "このテーマは推奨するフォントの情報を提供しています。"
-
-#~ msgid "Best _shapes"
-#~ msgstr "最適なシェイプ(_S)"
-
-#~ msgid "C_olors:"
-#~ msgstr "色(_O):"
-
-#~ msgid "C_ustomize..."
-#~ msgstr "カスタマイズ(_U)..."
-
-#~ msgid "Changing your cursor theme takes effect the next time you log in."
-#~ msgstr "次回ログインするまで変更したカーソル・テーマは提供されません。"
-
-#~ msgid "Controls"
-#~ msgstr "コントロール"
-
-#~ msgid "Customize Theme"
-#~ msgstr "テーマのカスタマイズ"
-
-#~ msgid "D_etails..."
-#~ msgstr "詳細(_E)..."
-
-#~ msgid "Des_ktop font:"
-#~ msgstr "デスクトップ(_K):"
-
-#~ msgid "Font Rendering Details"
-#~ msgstr "レンダリングの詳細"
-
-#~ msgid "Get more backgrounds online"
-#~ msgstr "追加の背景をネットから入手する"
-
-#~ msgid "Get more themes online"
-#~ msgstr "追加のテーマをネットから入手する"
-
-#~ msgid "Gra_yscale"
-#~ msgstr "グレースケール(_Y)"
-
-#~ msgid "Icons"
-#~ msgstr "アイコン"
-
-#~ msgid "Icons only"
-#~ msgstr "アイコンのみ"
-
-#~ msgid "N_one"
-#~ msgstr "なし(_O)"
-
-#~ msgid "Open a dialog to specify the color"
-#~ msgstr "色を指定するダイアログを開きます"
-
-#~ msgid "R_esolution:"
-#~ msgstr "解像度(_E):"
-
-#~ msgid "Save Theme As..."
-#~ msgstr "テーマを別名で保存..."
-
-#~ msgid "Save _As..."
-#~ msgstr "別名で保存(_A)..."
-
-#~ msgid "Stretch"
-#~ msgstr "引き伸ばす"
-
-#~ msgid "Sub_pixel (LCDs)"
-#~ msgstr "サブピクセル (LCDs)(_P)"
-
-#~ msgid "Sub_pixel smoothing (LCDs)"
-#~ msgstr "サブピクセルのスムージング (LCDs)(_P)"
-
-#~ msgid "Subpixel Order"
-#~ msgstr "サブピクセルの順番"
-
-#~ msgid "Text"
-#~ msgstr "文字列"
-
-#~ msgid "Text below items"
-#~ msgstr "アイコンの下にラベル"
-
-#~ msgid "Text beside items"
-#~ msgstr "アイコンの横にラベル"
-
-#~ msgid "Text only"
-#~ msgstr "ラベルのみ"
-
-#~ msgid "The current controls theme does not support color schemes."
-#~ msgstr "このコントロールのテーマは色のスキーマをサポートしていません。"
-
-#~ msgid "Theme"
-#~ msgstr "テーマ"
-
-#~ msgid "VB_GR"
-#~ msgstr "VBGR(_G)"
-
-#~ msgid "Window Border"
-#~ msgstr "ウィンドウの境界"
-
-#~ msgid "_BGR"
-#~ msgstr "BGR(_B)"
-
-#~ msgid "_Description:"
-#~ msgstr "説明(_D):"
-
-#~ msgid "_Document font:"
-#~ msgstr "ドキュメント(_D):"
-
-#~ msgid "_Fixed width font:"
-#~ msgstr "固定幅のフォント(_F):"
-
-#~ msgid "_Full"
-#~ msgstr "すべて(_F)"
-
-#~ msgid "_Medium"
-#~ msgstr "中間(_M)"
-
-#~ msgid "_Monochrome"
-#~ msgstr "モノクロ(_M)"
-
-#~ msgid "_None"
-#~ msgstr "なし(_N)"
-
-#~ msgid "_RGB"
-#~ msgstr "RGB(_R)"
-
-#~ msgid "_Reset to Defaults"
-#~ msgstr "デフォルトに戻す(_R)"
-
-#~ msgid "_Size:"
-#~ msgstr "サイズ(_S):"
-
-#~ msgid "_Slight"
-#~ msgstr "細身(_S)"
-
-#~ msgid "_Style:"
-#~ msgstr "スタイル(_S):"
-
-#~ msgid "_Tooltips:"
-#~ msgstr "ツールチップ(_T):"
-
-#~ msgid "_VRGB"
-#~ msgstr "VRGB(_V)"
-
-#~ msgid "_Window title font:"
-#~ msgstr "ウィンドウのタイトル(_W):"
-
-#~ msgid "_Windows:"
-#~ msgstr "ウィンドウ(_W):"
-
-#~ msgid "dots per inch"
-#~ msgstr "ドット/インチ"
-
-#~ msgid "Customize the look of the desktop"
-#~ msgstr "デスクトップの見映えを設定します"
-
-#~ msgid "Installs themes packages for various parts of the desktop"
-#~ msgstr ""
-#~ "デスクトップのさまざまな部分に適用するテーマ・パッケージをインストールしま"
-#~ "す"
-
-#~ msgid "Theme Installer"
-#~ msgstr "テーマのインストーラ"
-
-#~ msgid "Gnome Theme Package"
-#~ msgstr "GNOME のテーマ・パッケージ"
-
-#~ msgid "Cannot install theme"
-#~ msgstr "テーマをインストールできません"
-
-#~ msgid "The %s utility is not installed."
-#~ msgstr "%s というユーティリティがインストールされていません。"
-
-#~ msgid "There was a problem while extracting the theme."
-#~ msgstr "テーマを展開している最中に問題が発生しました。"
-
-#~ msgid "There was an error installing the selected file"
-#~ msgstr "選択したファイルをインストールする際にエラーが発生しました"
-
-#~ msgid "\"%s\" does not appear to be a valid theme."
-#~ msgstr "\"%s\" はテーマとして妥当なファイルではないようです。"
-
-#~ msgid ""
-#~ "\"%s\" does not appear to be a valid theme. It may be a theme engine "
-#~ "which you need to compile."
-#~ msgstr ""
-#~ "\"%s\" はテーマとして妥当なファイルではないようです (おそらくコンパイルが"
-#~ "必要なテーマ・エンジンと思われます)。"
-
-#~ msgid "Installation for theme \"%s\" failed."
-#~ msgstr "\"%s\" というテーマのインストールに失敗しました。"
-
-#~ msgid "The theme \"%s\" has been installed."
-#~ msgstr "\"%s\" というテーマをインストールしました。"
-
-#~ msgid "Would you like to apply it now, or keep your current theme?"
-#~ msgstr "今すぐ適用しますか? それとも現在のテーマを使用し続けますか?"
-
-#~ msgid "Keep Current Theme"
-#~ msgstr "現在のテーマのまま"
-
-#~ msgid "Apply New Theme"
-#~ msgstr "新しいテーマの適用"
-
-#~ msgid "GNOME Theme %s correctly installed"
-#~ msgstr "GNOME のテーマ \"%s\" のインストールが完了しました"
-
-#~ msgid "New themes have been successfully installed."
-#~ msgstr "新しいテーマのインストールが完了しました。"
-
-#~ msgid "No theme file location specified to install"
-#~ msgstr "インストールするテーマ・ファイルのパス名が指定されていません"
-
-#~ msgid ""
-#~ "Insufficient permissions to install the theme in:\n"
-#~ "%s"
-#~ msgstr ""
-#~ "テーマをインストールするために必要な権限が適当ではありません:\n"
-#~ "%s"
-
-#~ msgid "Select Theme"
-#~ msgstr "テーマの選択"
-
-#~ msgid "Theme Packages"
-#~ msgstr "テーマのパッケージ"
-
-#~ msgid "Theme name must be present"
-#~ msgstr "テーマの名前を指定してください"
-
-#~ msgid "The theme already exists. Would you like to replace it?"
-#~ msgstr "既にテーマが存在していますが、置き換えてもよろしいですか?"
-
-#~ msgid "Would you like to delete this theme?"
-#~ msgstr "このテーマを削除しますか?"
-
-#~ msgid "Theme cannot be deleted"
-#~ msgstr "テーマを削除できません"
-
-#~ msgid "Could not install theme engine"
-#~ msgstr "テーマ・エンジンをインストールできません"
-
-#~ msgid ""
-#~ "Unable to start the settings manager 'gnome-settings-daemon'.\n"
-#~ "Without the GNOME settings manager running, some preferences may not take "
-#~ "effect. This could indicate a problem with DBus, or a non-GNOME (e.g. "
-#~ "KDE) settings manager may already be active and conflicting with the "
-#~ "GNOME settings manager."
-#~ msgstr ""
-#~ "GNOME 設定マネージャ ('gnome-settings-daemon') を起動することができませ"
-#~ "ん。\n"
-#~ "設定マネージャを起動しないと、いくつかの設定が反映されません。これは DBus "
-#~ "の問題、あるいは GNOME ではない (KDE などの) 別の設定マネージャが既に起動"
-#~ "されていて GNOME 設定マネージャと衝突していることが原因かもしれません。"
-
-#~ msgid "There was an error displaying help: %s"
-#~ msgstr "次のヘルプを表示する際にエラーが発生しました: %s"
-
-#~ msgid "Copying file: %u of %u"
-#~ msgstr "ファイルのコピー中: %u / %u"
-
-#~ msgid "Copying '%s'"
-#~ msgstr "'%s' をコピーしています"
-
-#~ msgid "Parent Window"
-#~ msgstr "親ウィンドウ"
-
-#~ msgid "Parent window of the dialog"
-#~ msgstr "ダイアログの親ウィンドウ"
-
-#~ msgid "From URI"
-#~ msgstr "URI から"
-
-#~ msgid "URI currently transferring from"
-#~ msgstr "現在 URI から転送中です"
-
-#~ msgid "To URI"
-#~ msgstr "URI へ"
-
-#~ msgid "URI currently transferring to"
-#~ msgstr "現在 URI へ転送中です"
-
-#~ msgid "Fraction completed"
-#~ msgstr "一部完了しました"
-
-#~ msgid "Fraction of transfer currently completed"
-#~ msgstr "転送の一部が完了しました"
-
-#~ msgid "Current URI index"
-#~ msgstr "現在の URI インデックス"
-
-#~ msgid "Current URI index - starts from 1"
-#~ msgstr "現在の URI インデックス - 1番目から開始します"
-
-#~ msgid "Total URIs"
-#~ msgstr "URI の合計"
-
-#~ msgid "Total number of URIs"
-#~ msgstr "URI の合計です"
-
-#~ msgid "File '%s' already exists. Do you want to overwrite it?"
-#~ msgstr "'%s' というファイルは既に存在しますが、置き換えますか?"
-
-#~ msgid "_Skip"
-#~ msgstr "スキップする(_S)"
-
-#~ msgid "Overwrite _All"
-#~ msgstr "すべて置き換える(_A)"
-
-#~ msgid "Default Pointer - Current"
-#~ msgstr "デフォルトのポインタ - 使用中"
-
-#~ msgid "White Pointer"
-#~ msgstr "白いポインタ"
-
-#~ msgid "White Pointer - Current"
-#~ msgstr "白いポインタ - 使用中"
-
-#~ msgid "Large Pointer"
-#~ msgstr "大きなポインタ"
-
-#~ msgid "Large Pointer - Current"
-#~ msgstr "大きなポインタ - 使用中"
-
-#~ msgid "Large White Pointer - Current"
-#~ msgstr "大きな白いポインタ - 使用中"
-
-#~ msgid "Large White Pointer"
-#~ msgstr "大きな白いポインタ"
-
-#~ msgid ""
-#~ "This theme will not look as intended because the required GTK+ theme '%s' "
-#~ "is not installed."
-#~ msgstr ""
-#~ "このテーマは、必要となる GTK+ のテーマ (%s) がインストールされていないた"
-#~ "め、意図したようには正しく表示されないでしょう。"
-
-#~ msgid ""
-#~ "This theme will not look as intended because the required window manager "
-#~ "theme '%s' is not installed."
-#~ msgstr ""
-#~ "このテーマは、必要となるウィンドウ・マネージャのテーマ (%s) がインストール"
-#~ "されていないため、意図したようには正しく表示されないでしょう。"
-
-#~ msgid ""
-#~ "This theme will not look as intended because the required icon theme '%s' "
-#~ "is not installed."
-#~ msgstr ""
-#~ "このテーマは、必要となるアイコン・テーマ (%s) がインストールされていないた"
-#~ "め、意図したようには正しく表示されないでしょう。"
-
-#~ msgid ""
-#~ "Specify the name of the page to show (internet|multimedia|system|a11y)"
-#~ msgstr "表示するページの名前を指定する (internet|multimedia|system|a11y)"
-
-#~ msgid "Opera"
-#~ msgstr "Opera"
-
-#~ msgid "Make Default"
-#~ msgstr "デフォルトにする"
-
-#~ msgid "Monitor Preferences"
-#~ msgstr "モニタの設定"
-
-# See also ja.po of mousetweak
-#~ msgid "Panel icon"
-#~ msgstr "パネルのアイコン"
-
-#~ msgid "Sa_me image in all monitors"
-#~ msgstr "すべてのモニタで同じ画像(_M)"
-
-#~ msgid "_Show monitors in panel"
-#~ msgstr "モニタをパネルに表示する(_S)"
-
-#~ msgid "The monitor configuration has been saved"
-#~ msgstr "モニタの設定が保存されました"
-
-#~ msgid "This configuration will be used the next time someone logs in."
-#~ msgstr "この設定は次回ログインした時に使われます"
-
-#~ msgid "Could not set the default configuration for monitors"
-#~ msgstr "モニタのデフォルトの設定ができませんでした"
-
-#~ msgid ""
-#~ "Just apply settings and quit (compatibility only; now handled by daemon)"
-#~ msgstr "設定を適用して終了する (互換性のみ; 現在はデーモン管理下)"
-
-#~ msgid "Start the page with the typing break settings showing"
-#~ msgstr "入力中断設定を表示させてページを開始します"
-
-#~ msgid "Start the page with the accessibility settings showing"
-#~ msgstr "アクセシビリティの設定を表示させてページを開始します"
-
-#~ msgid "- GNOME Keyboard Preferences"
-#~ msgstr "- キーボードの設定"
-
-#~ msgid "_Show..."
-#~ msgstr "表示(_S)..."
-
-#~ msgid "Specify the name of the page to show (general|accessibility)"
-#~ msgstr "表示するページの名前を指定する (general|accessibility)"
-
-#~ msgid "- GNOME Mouse Preferences"
-#~ msgstr "- 効果音の設定"
-
-#~ msgid "Cannot start the preferences application for your window manager"
-#~ msgstr "お使いのウィンドウ・マネージャの設定ツールを起動できません"
-
-#~ msgid "_Alt"
-#~ msgstr "[ALT] キー(_A)"
-
-#~ msgid "H_yper"
-#~ msgstr "[Hyper] キー(_Y)"
-
-#~ msgid "S_uper (or \"Windows logo\")"
-#~ msgstr "[Windows] /スーパー・キー(_U)"
-
-#~ msgid "_Meta"
-#~ msgstr "[Meta] キー(_M)"
-
-#~ msgid "Movement Key"
-#~ msgstr "ウィンドウの移動"
-
-#~ msgid "Titlebar Action"
-#~ msgstr "タイトルバーのアクション"
-
-#~ msgid "To move a window, press-and-hold this key then grab the window:"
-#~ msgstr "ウィンドウをつかんで移動する際に使用する修飾キー:"
-
-#~ msgid "Window Preferences"
-#~ msgstr "ウィンドウの設定"
-
-#~ msgid "Window Selection"
-#~ msgstr "ウィンドウの選択"
-
-#~ msgid "_Double-click titlebar to perform this action:"
-#~ msgstr "タイトルバーのダブル・クリックで実行するアクション(_D):"
-
-#~ msgid "_Interval before raising:"
-#~ msgstr "前面に出すまでの時間(_I):"
-
-#~ msgid "_Raise selected windows after an interval"
-#~ msgstr "マウスが移動した先のウィンドウを前面に出す(_R)"
-
-#~ msgid "_Select windows when the mouse moves over them"
-#~ msgstr "マウスが移動した先のウィンドウを選択する(_S)"
-
-#~ msgid "Set your window properties"
-#~ msgstr "ウィンドウのプロパティを設定します"
-
-#~ msgid "Window manager \"%s\" has not registered a configuration tool\n"
-#~ msgstr ""
-#~ "お使いのウィンドウ・マネージャ \"%s\" には設定ツールが登録されていませ"
-#~ "ん。\n"
-
-#~ msgid "Maximize Vertically"
-#~ msgstr "縦方向に最大化する"
-
-#~ msgid "Maximize Horizontally"
-#~ msgstr "横方向に最大化する"
-
-#~ msgid "key not found [%s]\n"
-#~ msgstr "キーが見つかりませんでした [%s]\n"
-
-#~ msgid "Hide on start (useful to preload the shell)"
-#~ msgstr "実行時に非表示 (シェルをあらかじめ読み込む時に有効)"
-
-#~ msgid "Filter"
-#~ msgstr "フィルタ"
-
-#~ msgid "Groups"
-#~ msgstr "グループ"
-
-#~ msgid "Common Tasks"
-#~ msgstr "よく利用するタスク"
-
-#~ msgid "Close the control-center when a task is activated"
-#~ msgstr "タスクを起動したらコントロール・センターを閉じる"
-
-#~ msgid "Exit shell on add or remove action performed"
-#~ msgstr "追加または削除を行ったらシェルを終了する"
-
-#~ msgid "Exit shell on help action performed"
-#~ msgstr "ヘルプを表示したらシェルを終了する"
-
-#~ msgid "Exit shell on start action performed"
-#~ msgstr "タスクを起動したらシェルを終了する"
-
-#~ msgid "Exit shell on upgrade or uninstall action performed"
-#~ msgstr "アップグレードまたはアンインストールを行ったらシェルを終了する"
-
-#~ msgid ""
-#~ "Indicates whether to close the shell when a help action is performed."
-#~ msgstr "ヘルプを表示したらシェルを閉じるかどうかです。"
-
-#~ msgid ""
-#~ "Indicates whether to close the shell when a start action is performed."
-#~ msgstr "タスクを起動したらシェルを閉じるかどうかです。"
-
-#~ msgid ""
-#~ "Indicates whether to close the shell when an add or remove action is "
-#~ "performed."
-#~ msgstr "追加または削除を行ったらシェルを閉じるかどうかです。"
-
-#~ msgid ""
-#~ "Indicates whether to close the shell when an upgrade or uninstall action "
-#~ "is performed."
-#~ msgstr ""
-#~ "アップグレードまたはアンインストールを行ったらシェルを閉じるかどうかです。"
-
-#~ msgid "Task names and associated .desktop files"
-#~ msgstr "タスクの名前とそれに対応する .desktop ファイル"
-
-#~ msgid ""
-#~ "The task name to be displayed in the control-center followed by a \";\" "
-#~ "separator then the filename of an associated .desktop file to launch for "
-#~ "that task."
-#~ msgstr ""
-#~ "コントロール・センターの中に表示するタスクの名前です。その後ろに \";\" で"
-#~ "区切ってタスクを起動する際に使用する .desktop ファイルを指定します。"
-
-#~ msgid ""
-#~ "[Change Theme;gtk-theme-selector.desktop,Set Preferred Applications;"
-#~ "default-applications.desktop,Add Printer;gnome-cups-manager.desktop]"
-#~ msgstr ""
-#~ "[外観の設定;gnome-appearance-properties.desktop,お気に入りのアプリ;"
-#~ "default-applications.desktop,プリンタの追加;gnome-cups-manager.desktop]"
-
-#~ msgid ""
-#~ "if true, the control-center will close when a \"Common Task\" is "
-#~ "activated."
-#~ msgstr ""
-#~ "TRUE にすると、\"共通なタスク\" を起動するとコントロール・センターを閉じま"
-#~ "す。"
-
-#~ msgid "The GNOME configuration tool"
-#~ msgstr "GNOME デスクトップの設定ツールです"
-
-#~ msgid "If set to true, then OpenType fonts will be thumbnailed."
-#~ msgstr "TRUE にすると、OpenType のフォントをサムネイル表示します。"
-
-#~ msgid "If set to true, then PCF fonts will be thumbnailed."
-#~ msgstr "TRUE にすると、PCF のフォントをサムネイル表示します。"
-
-#~ msgid "If set to true, then TrueType fonts will be thumbnailed."
-#~ msgstr "TRUE にすると、TrueType のフォントをサムネイル表示します。"
-
-#~ msgid "If set to true, then Type1 fonts will be thumbnailed."
-#~ msgstr "TRUE にすると、Type1 のフォントをサムネイル表示します。"
-
-#~ msgid ""
-#~ "Set this key to the command used to create thumbnails for OpenType fonts."
-#~ msgstr ""
-#~ "OpenType のフォントのサムネイルを生成する際に使用するコマンドを指定してく"
-#~ "ださい。"
-
-#~ msgid "Set this key to the command used to create thumbnails for PCF fonts."
-#~ msgstr ""
-#~ "PCF のフォントのサムネイルを生成する際に使用するコマンドを指定してくださ"
-#~ "い。"
-
-#~ msgid ""
-#~ "Set this key to the command used to create thumbnails for TrueType fonts."
-#~ msgstr ""
-#~ "TrueType のフォントのサムネイルを生成する際に使用するコマンドを指定してく"
-#~ "ださい。"
-
-#~ msgid ""
-#~ "Set this key to the command used to create thumbnails for Type1 fonts."
-#~ msgstr ""
-#~ "Type1 のフォントのサムネイルを生成する際に使用するコマンドを指定してくださ"
-#~ "い。"
-
-#~ msgid "Thumbnail command for OpenType fonts"
-#~ msgstr "OpenType のサムネイルを生成するコマンド"
-
-#~ msgid "Thumbnail command for PCF fonts"
-#~ msgstr "PCF のサムネイルを生成するコマンド"
-
-#~ msgid "Thumbnail command for TrueType fonts"
-#~ msgstr "TrueType のサムネイルを生成するコマンド"
-
-#~ msgid "Thumbnail command for Type1 fonts"
-#~ msgstr "Type1 のサムネイルを生成するコマンド"
-
-#~ msgid "Whether to thumbnail OpenType fonts"
-#~ msgstr "OpenType のフォントをサムネイル表示するかどうか"
-
-#~ msgid "Whether to thumbnail PCF fonts"
-#~ msgstr "PCF のフォントをサムネイル表示するかどうか"
-
-#~ msgid "Whether to thumbnail TrueType fonts"
-#~ msgstr "TrueType のフォントをサムネイル表示するかどうか"
-
-#~ msgid "Whether to thumbnail Type1 fonts"
-#~ msgstr "Type1 のフォントをサムネイル表示するかどうか"
-
-#~ msgid "Size:"
-#~ msgstr "サイズ:"
-
-#~ msgid "Copyright:"
-#~ msgstr "著作権:"
-
-#~ msgid "Installed"
-#~ msgstr "インストール済"
-
-#~ msgid "Install Failed"
-#~ msgstr "インストール失敗"
-
-#~ msgid "usage: %s fontfile\n"
-#~ msgstr "用法: %s フォント・ファイル\n"
-
-#~ msgid "I_nstall Font"
-#~ msgstr "フォントのインストール(_N)"
-
-#~ msgid "Font Viewer"
-#~ msgstr "フォント・ビューア"
-
-#~ msgid "Preview fonts"
-#~ msgstr "いろいろなフォントをプレビューします"
-
-#~ msgid "Text to thumbnail (default: Aa)"
-#~ msgstr "サムネイル表示する文字列 (デフォルトは Aa)"
-
-#~ msgid "TEXT"
-#~ msgstr "TEXT"
-
-#~ msgid "Font size (default: 64)"
-#~ msgstr "フォントのサイズ (デフォルトは 64)"
-
-#~ msgid "SIZE"
-#~ msgstr "SIZE"
-
-#~ msgid "FONT-FILE OUTPUT-FILE"
-#~ msgstr "フォント・ファイル 出力先のファイル"
-
-#~ msgid "Your filter \"%s\" does not match any items."
-#~ msgstr "フィルタ \"%s\" が、どのアイテムともマッチしません"
-
-#~ msgid "No matches found."
-#~ msgstr "どれもマッチしませんでした。"
-
-#~ msgid "Start %s"
-#~ msgstr "%sを起動する"
-
-#~ msgid "Upgrade"
-#~ msgstr "アップグレード"
-
-#~ msgid "Uninstall"
-#~ msgstr "アンインストール"
-
-#~ msgid "Remove from Favorites"
-#~ msgstr "お気に入りから削除する"
-
-#~ msgid "Add to Favorites"
-#~ msgstr "お気に入りに追加する"
-
-#~ msgid "Remove from Startup Programs"
-#~ msgstr "自動起動するプログラムから削除する"
-
-#~ msgid "Add to Startup Programs"
-#~ msgstr "自動起動するプログラムに追加する"
-
-#~ msgid "New Spreadsheet"
-#~ msgstr "新しいスプレッドシート"
-
-#~ msgid "New Document"
-#~ msgstr "新しいドキュメント"
-
-#~ msgctxt "Home folder"
-#~ msgid "Home"
-#~ msgstr "ホーム"
-
-#~ msgid "Documents"
-#~ msgstr "ドキュメント"
-
-#~ msgid "File System"
-#~ msgstr "ファイルシステム"
-
-#~ msgid "<b>Open</b>"
-#~ msgstr "<b>開く</b>"
-
-#~ msgid "Rename..."
-#~ msgstr "名前の変更..."
-
-#~ msgid "Send To..."
-#~ msgstr "送る..."
-
-#~ msgid "Move to Trash"
-#~ msgstr "ゴミ箱へ移動する"
-
-#~ msgid "Delete"
-#~ msgstr "削除する"
-
-#~ msgid "Are you sure you want to permanently delete \"%s\"?"
-#~ msgstr "本当に \"%s\" を完全に削除してもよろしいですか?"
-
-#~ msgid "If you delete an item, it is permanently lost."
-#~ msgstr "アイテムを削除してしまうと、元に戻すことはできません。"
-
-#~ msgid "Open with \"%s\""
-#~ msgstr "\"%s\" で開く"
-
-#~ msgid "Open in File Manager"
-#~ msgstr "ファイル・マネージャで開く"
-
-#~ msgid "Remove from recent menu"
-#~ msgstr "最近開いた、のメニューから削除する"
-
-#~ msgid "Purge all the recent items"
-#~ msgstr "最近開いたアイテムをすべて抹消"
-
-#~ msgid "?"
-#~ msgstr "?"
-
-#~ msgid "%l:%M %p"
-#~ msgstr "%p%l:%M"
-
-#~ msgid "Today %l:%M %p"
-#~ msgstr "今日の%p%l:%M"
-
-#~ msgid "Yesterday %l:%M %p"
-#~ msgstr "昨日の%p%l:%M"
-
-#~ msgid "%b %d %l:%M %p"
-#~ msgstr "%B%e日 %p%l:%M"
-
-#~ msgid "%b %d %Y"
-#~ msgstr "%Y年%B%e日"
-
-#~ msgid "Find Now"
-#~ msgstr "検索する"
-
-#~ msgid "<b>Open %s</b>"
-#~ msgstr "<b>%s を開く</b>"
-
-#~ msgid "Remove from System Items"
-#~ msgstr "システムのアイテムから削除する"
-
-#~ msgid "Place your left thumb on %s"
-#~ msgstr "%s の上に左の親指を置いてください"
-
-#~ msgid "Swipe your left thumb on %s"
-#~ msgstr "%s の上に左の親指を通してください"
-
-#~ msgid "Place your left index finger on %s"
-#~ msgstr "%s の上に左の人差し指を置いてください"
-
-#~ msgid "Swipe your left index finger on %s"
-#~ msgstr "%s の上に左の人差し指を通してください"
-
-#~ msgid "Place your left middle finger on %s"
-#~ msgstr "%s の上に左の中指を置いてください"
-
-#~ msgid "Swipe your left middle finger on %s"
-#~ msgstr "%s の上に左の中指を通してください"
-
-#~ msgid "Place your left ring finger on %s"
-#~ msgstr "%s の上に左の薬指を置いてください"
-
-#~ msgid "Swipe your left ring finger on %s"
-#~ msgstr "%s の上に左の薬指を通してください"
-
-#~ msgid "Place your left little finger on %s"
-#~ msgstr "%s の上に左の小指を置いてください"
-
-#~ msgid "Swipe your left little finger on %s"
-#~ msgstr "%s の上に左の小指を通してください"
-
-#~ msgid "Place your right thumb on %s"
-#~ msgstr "%s の上に右の親指を置いてください"
-
-#~ msgid "Swipe your right thumb on %s"
-#~ msgstr "%s の上に右の親指を通してください"
-
-#~ msgid "Place your right index finger on %s"
-#~ msgstr "%s の上に右の人差し指を置いてください"
-
-#~ msgid "Swipe your right index finger on %s"
-#~ msgstr "%s の上に右の人差し指を通してください"
-
-#~ msgid "Place your right middle finger on %s"
-#~ msgstr "%s の上に右の中指を置いてください"
-
-#~ msgid "Swipe your right middle finger on %s"
-#~ msgstr "%s の上に右の中指を通してください"
-
-#~ msgid "Place your right ring finger on %s"
-#~ msgstr "%s の上に右の薬指を置いてください"
-
-#~ msgid "Swipe your right ring finger on %s"
-#~ msgstr "%s の上に右の薬指を通してください"
-
-#~ msgid "Place your right little finger on %s"
-#~ msgstr "%s の上に右の小指を置いてください"
-
-#~ msgid "Swipe your right little finger on %s"
-#~ msgstr "%s の上に右の小指を通してください"
-
-#~ msgid "Place your finger on the reader again"
-#~ msgstr "もう一度リーダーの上に指をおいてください"
-
-#~ msgid "Swipe your finger again"
-#~ msgstr "もう一度指を通してください"
-
-#~ msgid "Swipe was too short, try again"
-#~ msgstr "通す時間が短すぎます (もう一度試してみてください)"
-
-#~ msgid "Your finger was not centered, try swiping your finger again"
-#~ msgstr "指の中央を認識できませんでした (もう一度指を通してください)"
-
-#~ msgid "Remove your finger, and try swiping your finger again"
-#~ msgstr "いったん指を外して、もう一度通してください"
-
-#~ msgid "_Jabber:"
-#~ msgstr "Jabber(_J):"
-
-#~ msgid "Display Preferences"
-#~ msgstr "ディスプレイの設定"
-
-#~ msgid "Drag the monitors to set their place"
-#~ msgstr "モニタをドラッグして場所を指定してください"
-
-#~ msgid "Change screen resolution"
-#~ msgstr "画面の解像度を変更します"
