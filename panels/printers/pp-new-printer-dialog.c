@@ -50,7 +50,7 @@
 #define ALLOWED_CHARACTERS "abcdefghijklmnopqrtsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_/"
 
 static void pp_new_printer_dialog_hide (PpNewPrinterDialog *pp);
-static void actualize_devices_list (PpNewPrinterDialog *pp, gboolean get_devices);
+static void actualize_devices_list (PpNewPrinterDialog *pp);
 
 enum
 {
@@ -198,32 +198,57 @@ store_device_parameter (gpointer key,
 }
 
 static void
-devices_get (PpNewPrinterDialog *pp)
+devices_get_cb (GObject *source_object,
+                GAsyncResult *res,
+                gpointer user_data)
 {
-  DBusGProxy *proxy;
-  GError     *error = NULL;
-  char       *ret_error = NULL;
-  gint        i, j;
+  PpNewPrinterDialog *pp = (PpNewPrinterDialog *) user_data;
+  GHashTable         *devices = NULL;
+  GtkWidget          *widget = NULL;
+  GVariant           *dg_output = NULL;
+  GError             *error = NULL;
+  char               *ret_error = NULL;
+  gint                i, j;
 
-  proxy = get_dbus_proxy (MECHANISM_BUS,
-                          "/",
-                          MECHANISM_BUS,
-                          TRUE);
+  dg_output = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
+                                        res,
+                                        &error);
 
-  if (!proxy)
-    return;
+  if (dg_output && g_variant_n_children (dg_output) == 2)
+    {
+      GVariant *devices_variant = NULL;
 
-  GHashTable *devices = NULL;
-  dbus_g_proxy_call (proxy, "DevicesGet", &error,
-                     G_TYPE_INT, 60,
-                     G_TYPE_STRING, CUPS_INCLUDE_ALL,
-                     G_TYPE_STRING, CUPS_EXCLUDE_NONE,
-                     G_TYPE_INVALID,
-                     G_TYPE_STRING, &ret_error,
-                     DBUS_TYPE_G_STRING_STRING_HASHTABLE, &devices,
-                     G_TYPE_INVALID);
+      g_variant_get (dg_output, "(&s@a{ss})",
+                     &ret_error,
+                     &devices_variant);
 
-  g_object_unref (proxy);
+      if (devices_variant)
+        {
+          if (g_variant_is_of_type (devices_variant, G_VARIANT_TYPE ("a{ss}")))
+            {
+              GVariantIter *iter;
+              GVariant *item;
+              g_variant_get (devices_variant,
+                             "a{ss}",
+                             &iter);
+              devices = g_hash_table_new (g_str_hash, g_str_equal);
+              while ((item = g_variant_iter_next_value (iter)))
+                {
+                  gchar *key;
+                  gchar *value;
+                  g_variant_get (item,
+                                 "{ss}",
+                                 &key,
+                                 &value);
+  
+                  g_hash_table_insert (devices, key, value);
+                }
+            }
+          g_variant_unref (devices_variant);
+        }
+      g_variant_unref (dg_output);
+    }
+  g_object_unref (source_object);
 
   if (error || (ret_error && ret_error[0] != '\0'))
     {
@@ -306,9 +331,73 @@ devices_get (PpNewPrinterDialog *pp)
         }
 
       g_hash_table_destroy (devices);
+      actualize_devices_list (pp);
     }
 
+  widget = (GtkWidget*)
+    gtk_builder_get_object (pp->builder, "get-devices-status-label");
+  gtk_label_set_text (GTK_LABEL (widget), " ");
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (pp->builder, "spinner");
+  gtk_spinner_stop (GTK_SPINNER (widget));
+  gtk_widget_set_sensitive (widget, FALSE);
+
   g_clear_error (&error);
+}
+
+static void
+devices_get (PpNewPrinterDialog *pp)
+{
+  GDBusProxy *proxy;
+  GError     *error = NULL;
+  GVariant        *dg_input = NULL;
+  GVariantBuilder *in_include = NULL;
+  GVariantBuilder *in_exclude = NULL;
+  GtkWidget *widget = NULL;
+
+  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                         G_DBUS_PROXY_FLAGS_NONE,
+                                         NULL,
+                                         MECHANISM_BUS,
+                                         "/",
+                                         MECHANISM_BUS,
+                                         NULL,
+                                         &error);
+
+  if (proxy)
+    {
+      in_include = g_variant_builder_new (G_VARIANT_TYPE ("as"));
+      in_exclude = g_variant_builder_new (G_VARIANT_TYPE ("as"));
+
+      dg_input = g_variant_new ("(iiasas)",
+                                0,
+                                60,
+                                in_include,
+                                in_exclude);
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (pp->builder, "get-devices-status-label");
+      gtk_label_set_text (GTK_LABEL (widget), _("Getting devices..."));
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (pp->builder, "spinner");
+      gtk_spinner_start (GTK_SPINNER (widget));
+      gtk_widget_set_sensitive (widget, TRUE);
+
+      g_dbus_proxy_call (proxy,
+                         "DevicesGet",
+                         dg_input,
+                         G_DBUS_CALL_FLAGS_NONE,
+                         60000,
+                         NULL,
+                         devices_get_cb,
+                         pp);
+
+      g_variant_builder_unref (in_exclude);
+      g_variant_builder_unref (in_include);
+      g_variant_unref (dg_input);
+    }
 }
 
 static void
@@ -460,11 +549,11 @@ search_address_cb (GtkToggleButton *togglebutton,
       pp->num_devices = length;
     }
 
-  actualize_devices_list (pp, FALSE);
+  actualize_devices_list (pp);
 }
 
 static void
-actualize_devices_list (PpNewPrinterDialog *pp, gboolean get_devices)
+actualize_devices_list (PpNewPrinterDialog *pp)
 {
   GtkListStore *network_store;
   GtkListStore *local_store;
@@ -472,9 +561,6 @@ actualize_devices_list (PpNewPrinterDialog *pp, gboolean get_devices)
   GtkTreeView  *local_treeview;
   GtkTreeIter   iter;
   gint          i;
-
-  if (get_devices)
-    devices_get (pp);
 
   network_treeview = (GtkTreeView*)
     gtk_builder_get_object (pp->builder, "network-devices-treeview");
@@ -516,15 +602,15 @@ actualize_devices_list (PpNewPrinterDialog *pp, gboolean get_devices)
   gtk_tree_view_set_model (network_treeview, GTK_TREE_MODEL (network_store));
   gtk_tree_view_set_model (local_treeview, GTK_TREE_MODEL (local_store));
 
-  gtk_tree_model_get_iter_first ((GtkTreeModel *) network_store, &iter);
-  gtk_tree_selection_select_iter (
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (network_treeview)),
-    &iter);
+  if (gtk_tree_model_get_iter_first ((GtkTreeModel *) network_store, &iter))
+    gtk_tree_selection_select_iter (
+      gtk_tree_view_get_selection (GTK_TREE_VIEW (network_treeview)),
+      &iter);
 
-  gtk_tree_model_get_iter_first ((GtkTreeModel *) local_store, &iter);
-  gtk_tree_selection_select_iter (
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (local_treeview)),
-    &iter);
+  if (gtk_tree_model_get_iter_first ((GtkTreeModel *) local_store, &iter))
+    gtk_tree_selection_select_iter (
+      gtk_tree_view_get_selection (GTK_TREE_VIEW (local_treeview)),
+      &iter);
 
   g_object_unref (network_store);
   g_object_unref (local_store);
@@ -544,7 +630,8 @@ populate_devices_list (PpNewPrinterDialog *pp)
   local_treeview = (GtkWidget*)
     gtk_builder_get_object (pp->builder, "local-devices-treeview");
 
-  actualize_devices_list (pp, TRUE);
+  actualize_devices_list (pp);
+  devices_get (pp);
 
   renderer = gtk_cell_renderer_text_new ();
 
