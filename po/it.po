@@ -5,20 +5,22 @@
 # Christopher R. Gabriel, 2001, 2002.
 # Alessio Dessì <alkex@inwind.it>, 2003, 2004, 2005, 2006, 2007.
 # Milo Casagrande <milo@ubuntu.com>, 2009.
-# Luca Ferretti <elle.uca@infinito.it>, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011.
+# Luca Ferretti <lferrett@gnome.org>, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.9x\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-11 22:33+0100\n"
-"PO-Revision-Date: 2011-03-11 22:49+0100\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
+"control-center&keywords=I18N+L10N&component=general\n"
+"POT-Creation-Date: 2011-03-14 17:36+0000\n"
+"PO-Revision-Date: 2011-03-14 21:10+0100\n"
 "Last-Translator: Luca Ferretti <lferrett@gnome.org>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
-"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8 bit\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 # (ndt) titolo
 #: ../gnome-control-center.schemas.in.h:1
@@ -63,7 +65,7 @@ msgid "Lock"
 msgstr "Blocco"
 
 #: ../libgnome-control-center/cc-lockbutton.c:356
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:18
 msgid "Unlock"
 msgstr "Sblocca"
 
@@ -1432,33 +1434,79 @@ msgstr "Stampante;Coda;Stampa;Carta;Inchostro;Toner;"
 msgid "Printers"
 msgstr "Stampanti"
 
+#: ../panels/printers/new-printer-dialog.ui.h:1
+msgid " "
+msgstr ""
+
+#: ../panels/printers/new-printer-dialog.ui.h:2
+#| msgid "_Add..."
+msgid "Add"
+msgstr "Aggiungi"
+
+#: ../panels/printers/new-printer-dialog.ui.h:3
+#| msgid "Disable Printer"
+msgid "Add a New Printer"
+msgstr "Aggiunta nuova stampante"
+
+#: ../panels/printers/new-printer-dialog.ui.h:4
+#| msgid "IP Address"
+msgid "Address"
+msgstr "Indirizzo"
+
+# FIXME!!
+#: ../panels/printers/new-printer-dialog.ui.h:5
+#: ../panels/user-accounts/data/language-chooser.ui.h:1
+#: ../panels/user-accounts/data/photo-dialog.ui.h:3
+msgid "Cancel"
+msgstr "Annulla"
+
+#: ../panels/printers/new-printer-dialog.ui.h:6
+msgid "Search by Address"
+msgstr "Cerca per indirizzo"
+
+#: ../panels/printers/new-printer-dialog.ui.h:7
+msgid "page 1"
+msgstr ""
+
+#: ../panels/printers/new-printer-dialog.ui.h:8
+msgid "page 2"
+msgstr ""
+
+#: ../panels/printers/new-printer-dialog.ui.h:9
+msgid "page 3"
+msgstr ""
+
+#: ../panels/printers/pp-new-printer-dialog.c:381
+msgid "Getting devices..."
+msgstr "Recupero dispositivi..."
+
 #. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:552
-#: ../panels/printers/pp-new-printer-dialog.c:557
+#: ../panels/printers/pp-new-printer-dialog.c:639
+#: ../panels/printers/pp-new-printer-dialog.c:644
 msgid "Devices"
 msgstr "Dispositivi"
 
 # FIXME: contesto
 #. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:582
+#: ../panels/printers/pp-new-printer-dialog.c:669
 msgid "Local"
 msgstr "Locale"
 
 # FIXME contesto
 #. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:584
+#: ../panels/printers/pp-new-printer-dialog.c:671
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 msgid "Network"
 msgstr "Rete"
 
 #. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:625
+#: ../panels/printers/pp-new-printer-dialog.c:712
 msgid "Device types"
 msgstr "Tipi dispositivo"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:778
-#: ../panels/printers/pp-new-printer-dialog.c:944
+#: ../panels/printers/pp-new-printer-dialog.c:865
+#: ../panels/printers/pp-new-printer-dialog.c:1031
 msgid "Automatic configuration"
 msgstr "Configurazione automatica"
 
@@ -1514,7 +1562,7 @@ msgstr "Modello"
 
 # FIXME: accel
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:16
+#: ../panels/printers/printers.ui.h:16 ../panels/network/network.ui.h:13
 msgid "Options"
 msgstr "Opzioni"
 
@@ -1712,7 +1760,9 @@ msgstr "S_oglia:"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:30
 msgid "To test your settings, try to double-click on the face."
-msgstr "Per controllare le proprie impostazioni, provare a fare doppio-clic qui a destra."
+msgstr ""
+"Per controllare le proprie impostazioni, provare a fare doppio-clic qui a "
+"destra."
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:31
 msgid "Touchpad"
@@ -1835,109 +1885,123 @@ msgid "Network;Wireless;IP;LAN;"
 msgstr "Rete;Network;Wireless;IP;LAN;Ethernet"
 
 #: ../panels/network/network.ui.h:1
-msgid "Airplane Mode"
-msgstr "Modalità aeroplano"
+#| msgid "Airplane Mode"
+msgid "Air_plane Mode"
+msgstr "Modalità aero_plano"
 
 #: ../panels/network/network.ui.h:2
-msgid "Configuration URL:"
-msgstr "URL di configurazione:"
-
-#: ../panels/network/network.ui.h:3
 msgid "DNS:"
 msgstr "DNS:"
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:3
 msgid "Default Route:"
 msgstr "Instradamento predefinito:"
 
-#: ../panels/network/network.ui.h:5
-msgid "FTP Proxy:"
-msgstr "Proxy FTP:"
-
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:4
 msgid "Gateway:"
 msgstr "Gateway:"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:5
 msgid "Group Name:"
 msgstr "Nome gruppo:"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:6
 msgid "Group Password:"
 msgstr "Password gruppo:"
 
-#: ../panels/network/network.ui.h:9
-msgid "HTTP Proxy:"
-msgstr "Proxy HTTP:"
+#: ../panels/network/network.ui.h:7
+#| msgid "HTTP Proxy:"
+msgid "H_TTPS Proxy:"
+msgstr "Proxy H_TTP:"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:8
 msgid "Hardware Address:"
 msgstr "Indirizzo hardware:"
 
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:9
 msgid "IMEI:"
 msgstr "IMEI:"
 
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:10
 msgid "IP Address:"
 msgstr "Indirizzo IP:"
 
-#: ../panels/network/network.ui.h:13
+#: ../panels/network/network.ui.h:11
 msgid "IPv4 Address:"
 msgstr "Indirizzo IPv4:"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:12
 msgid "IPv6 Address:"
 msgstr "Indirizzo IPv6:"
 
-#: ../panels/network/network.ui.h:15
-msgid "Method:"
-msgstr "Metodo:"
-
-#: ../panels/network/network.ui.h:16
-msgid "Network Name:"
-msgstr "Nome della rete:"
-
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:14
 msgid "Provider:"
 msgstr "Provider:"
 
-#: ../panels/network/network.ui.h:18
-msgid "Secure HTTP Proxy:"
-msgstr "Proxy secure HTTP:"
-
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:15
 msgid "Security:"
 msgstr "Sicurezza:"
 
-# FIXME
-#: ../panels/network/network.ui.h:20
-msgid "Socks Host:"
-msgstr "Host SOCKS:"
-
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:16
 msgid "Speed:"
 msgstr "Velocità:"
 
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:17
 msgid "Subnet Mask:"
 msgstr "Maschera sottorete:"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:19
 msgid "Username:"
 msgstr "Nome utente:"
 
+#: ../panels/network/network.ui.h:20
+#| msgid "Configuration URL:"
+msgid "_Configuration URL:"
+msgstr "URL di _configurazione:"
+
+#: ../panels/network/network.ui.h:21
+#| msgid "FTP Proxy:"
+msgid "_FTP Proxy:"
+msgstr "Proxy _FTP:"
+
+#: ../panels/network/network.ui.h:22
+#| msgid "HTTP Proxy:"
+msgid "_HTTP Proxy:"
+msgstr "Proxy _HTTP:"
+
+#: ../panels/network/network.ui.h:23
+#| msgid "Method:"
+msgid "_Method:"
+msgstr "_Metodo:"
+
+#: ../panels/network/network.ui.h:24
+#| msgid "Network Name:"
+msgid "_Network Name:"
+msgstr "_Nome della rete:"
+
+# FIXME: accel
 #: ../panels/network/network.ui.h:25
+#| msgid "Options"
+msgid "_Options"
+msgstr "_Opzioni"
+
+# FIXME
+#: ../panels/network/network.ui.h:26
+#| msgid "Socks Host:"
+msgid "_Socks Host:"
+msgstr "Host _SOCKS:"
+
+#: ../panels/network/network.ui.h:27
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "Automatico"
 
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:28
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "Manuale"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:29
 msgctxt "proxy method"
 msgid "None"
 msgstr "Nessuno"
@@ -3228,7 +3292,9 @@ msgstr "Mantenere i file di %s?"
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
-msgstr "È possibile mantenere la directory home, gli spool di posta e i vari file temporanei quando si elimina un account utente."
+msgstr ""
+"È possibile mantenere la directory home, gli spool di posta e i vari file "
+"temporanei quando si elimina un account utente."
 
 #: ../panels/user-accounts/um-user-panel.c:446
 msgid "_Delete Files"
@@ -3345,12 +3411,6 @@ msgstr "Nome _completo"
 msgid "_Username"
 msgstr "Nome _utente"
 
-# FIXME!!
-#: ../panels/user-accounts/data/language-chooser.ui.h:1
-#: ../panels/user-accounts/data/photo-dialog.ui.h:3
-msgid "Cancel"
-msgstr "Annulla"
-
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
 msgid ""
 "<a href=\"http://wolfram.org/writing/howto/password.html\">How to choose a "
@@ -3364,7 +3424,10 @@ msgid ""
 "<small>This hint may be displayed at the login screen.  It will be visible "
 "to all users of this system.  Do <b>not</b> include the password here.</"
 "small>"
-msgstr "<small>È possibile visualizzare questo suggerimento nella schermata di accesso. Sarà visibile a tutti gli utenti del sistema. <b>NON</b> includere la password in tale suggerimento.</small>"
+msgstr ""
+"<small>È possibile visualizzare questo suggerimento nella schermata di "
+"accesso. Sarà visibile a tutti gli utenti del sistema. <b>NON</b> includere "
+"la password in tale suggerimento.</small>"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:3
 msgid "C_onfirm password"
@@ -3564,6 +3627,9 @@ msgstr "Centro di controllo"
 msgid "_All Settings"
 msgstr "_Tutte le impostazioni"
 
+#~ msgid "Secure HTTP Proxy:"
+#~ msgstr "Proxy secure HTTP:"
+
 #~ msgid "Chipset"
 #~ msgstr "Chipset"
 
@@ -3630,9 +3696,6 @@ msgstr "_Tutte le impostazioni"
 #~ msgid "Description:"
 #~ msgstr "Descrizione:"
 
-#~ msgid "Disable Printer"
-#~ msgstr "Disabilita stampante"
-
 #~ msgid "Hold"
 #~ msgstr "Trattieni"
 
@@ -3671,9 +3734,6 @@ msgstr "_Tutte le impostazioni"
 
 #~ msgid "Select a keyboard layout to be added to the list"
 #~ msgstr "Seleziona una disposizione di tastiera da aggiungere all'elenco"
-
-#~ msgid "_Add..."
-#~ msgstr "A_ggiungi..."
 
 #~ msgid "Choose a Keyboard Model"
 #~ msgstr "Scegliere un modello di tastera"
