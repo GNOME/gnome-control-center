@@ -60,6 +60,7 @@ struct _CcNetworkPanelPrivate
         GSettings       *proxy_settings;
         GtkBuilder      *builder;
         NMClient        *client;
+        gboolean         updating_device;
 };
 
 enum {
@@ -796,6 +797,96 @@ out:
         return str;
 }
 
+static NMDevice *
+find_device_by_udi (CcNetworkPanel *panel,
+                    const gchar    *udi)
+{
+        gint i;
+        NMDevice *device;
+
+        for (i=0; i<panel->priv->devices->len; i++) {
+                device = g_ptr_array_index (panel->priv->devices, i);
+                if (g_strcmp0 (udi, nm_device_get_udi (device)) == 0) {
+                        return device;
+                }
+        }
+
+        return NULL;
+}
+
+static void
+device_off_toggled (GtkSwitch      *sw,
+                    GParamSpec     *pspec,
+                    CcNetworkPanel *panel)
+{
+        NMDevice *device;
+        gboolean active;
+
+        if (panel->priv->updating_device)
+                return;
+
+        active = gtk_switch_get_active (sw);
+
+        device = find_device_by_udi (panel, panel->priv->current_device);
+
+        switch (nm_device_get_device_type (device)) {
+        case NM_DEVICE_TYPE_WIFI:
+                nm_client_wireless_set_enabled (panel->priv->client, active);
+                break;
+        case NM_DEVICE_TYPE_WIMAX:
+                nm_client_wimax_set_enabled (panel->priv->client, active);
+                break;
+        default: ;
+                /* FIXME: handle other device types */
+        }
+}
+
+static void
+wireless_enabled_toggled (NMClient       *client,
+                          GParamSpec     *pspec,
+                          CcNetworkPanel *panel)
+{
+        gboolean enabled;
+        GtkSwitch *sw;
+        NMDevice *device;
+
+        device = find_device_by_udi (panel, panel->priv->current_device);
+
+        if (nm_device_get_device_type (device) != NM_DEVICE_TYPE_WIFI)
+                return;
+
+        enabled = nm_client_wireless_get_enabled (client);
+        sw = GTK_SWITCH (gtk_builder_get_object (panel->priv->builder,
+                                                 "device_off_switch"));
+
+        panel->priv->updating_device = TRUE;
+        gtk_switch_set_active (sw, enabled);
+        panel->priv->updating_device = FALSE;
+}
+
+static void
+wimax_enabled_toggled (NMClient       *client,
+                       GParamSpec     *pspec,
+                      CcNetworkPanel *panel)
+{
+        gboolean enabled;
+        GtkSwitch *sw;
+        NMDevice *device;
+
+        device = find_device_by_udi (panel, panel->priv->current_device);
+
+        if (nm_device_get_device_type (device) != NM_DEVICE_TYPE_WIMAX)
+                return;
+
+        enabled = nm_client_wimax_get_enabled (client);
+        sw = GTK_SWITCH (gtk_builder_get_object (panel->priv->builder,
+                                                 "device_off_switch"));
+
+        panel->priv->updating_device = TRUE;
+        gtk_switch_set_active (sw, enabled);
+        panel->priv->updating_device = FALSE;
+}
+
 static void
 nm_device_refresh_device_ui (CcNetworkPanel *panel, NMDevice *device)
 {
@@ -808,6 +899,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NMDevice *device)
         GHashTable *options = NULL;
         GtkListStore *liststore_wireless_network;
         GtkWidget *widget;
+        GtkWidget *sw;
         guint i;
         guint speed;
         NMAccessPoint *ap;
@@ -853,6 +945,23 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NMDevice *device)
                 str = _("Unplugged");
         }
         gtk_label_set_label (GTK_LABEL (widget), str);
+
+        sw = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                 "device_off_switch"));
+        /* keep this in sync with the signal handler setup in cc_network_panel_init */
+        switch (type) {
+        case NM_DEVICE_TYPE_WIFI:
+                gtk_widget_show (sw);
+                wireless_enabled_toggled (priv->client, NULL, panel);
+                break;
+        case NM_DEVICE_TYPE_WIMAX:
+                gtk_widget_show (sw);
+                wimax_enabled_toggled (priv->client, NULL, panel);
+                break;
+        default:
+                gtk_widget_hide (sw);
+                break;
+        }
 
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "notebook_types"));
@@ -1075,6 +1184,10 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "hbox_device_header"));
         gtk_widget_set_visible (widget, TRUE);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                     "device_off_switch"));
+        gtk_widget_set_visible (widget, FALSE);
 
         /* use proxy note page */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
@@ -1561,6 +1674,15 @@ cc_network_panel_init (CcNetworkPanel *panel)
                           G_CALLBACK (device_added_cb), panel);
         g_signal_connect (panel->priv->client, "device-removed",
                           G_CALLBACK (device_removed_cb), panel);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "device_off_switch"));
+        g_signal_connect (widget, "notify::active",
+                          G_CALLBACK (device_off_toggled), panel);
+        g_signal_connect (panel->priv->client, "notify::wireless-enabled",
+                          G_CALLBACK (wireless_enabled_toggled), panel);
+        g_signal_connect (panel->priv->client, "notify::wimax-enabled",
+                          G_CALLBACK (wimax_enabled_toggled), panel);
 
         /* disable for now, until we can remove connections without
          * segfaulting NM... */
