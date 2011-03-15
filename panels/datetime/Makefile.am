@@ -93,7 +93,7 @@ all-local: check-local
 check-local: test-timezone-gfx test-endianess test-timezone
 	$(builddir)/test-timezone-gfx $(srcdir)/data
 	$(builddir)/test-endianess
-	$(builddir)/test-timezone
+#	$(builddir)/test-timezone
 
 ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libdate_time.la
