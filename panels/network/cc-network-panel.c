@@ -380,6 +380,7 @@ device_state_notify_changed_cb (NMDevice *device,
 {
         CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
 
+        g_debug ("NMDevice::notify::state %s", nm_device_get_udi (device));
         /* only refresh the selected device */
         if (g_strcmp0 (panel->priv->current_device,
                        nm_device_get_udi (device)) == 0) {
@@ -1177,18 +1178,25 @@ static void
 nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
 {
         GtkWidget *widget;
+        GtkWidget *sw;
         const gchar *sub_pane = "vpn";
         const gchar *status;
         CcNetworkPanelPrivate *priv = panel->priv;
+        const GPtrArray *acs;
+        NMActiveConnection *a;
+        gint i;
+        const gchar *path;
+        const gchar *apath;
+        NMVPNConnectionState state;
 
         /* show the header */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "hbox_device_header"));
-        gtk_widget_set_visible (widget, TRUE);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "device_off_switch"));
         gtk_widget_set_visible (widget, FALSE);
+
+        sw = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                 "device_off_switch"));
+        gtk_widget_set_visible (sw, TRUE);
 
         /* use proxy note page */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
@@ -1208,10 +1216,27 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
         gtk_label_set_label (GTK_LABEL (widget), net_object_get_title (NET_OBJECT (vpn)));
 
         /* use status */
+        state = net_vpn_get_state (vpn);
+
+        acs = nm_client_get_active_connections (priv->client);
+        path = nm_connection_get_path (net_vpn_get_connection (vpn));
+        for (i = 0; i < acs->len; i++) {
+                a = (NMActiveConnection*)acs->pdata[i];
+
+                apath = nm_active_connection_get_connection (a);
+                if (NM_IS_VPN_CONNECTION (a) && strcmp (apath, path) == 0) {
+                        state = nm_vpn_connection_get_vpn_state (NM_VPN_CONNECTION (a));
+                        break;
+                }
+        }
+
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "label_status"));
-        status = panel_vpn_state_to_localized_string (net_vpn_get_state (vpn));
+        status = panel_vpn_state_to_localized_string (state);
         gtk_label_set_label (GTK_LABEL (widget), status);
+        priv->updating_device = TRUE;
+        gtk_switch_set_active (GTK_SWITCH (sw), state == NM_VPN_CONNECTION_STATE_ACTIVATED);
+        priv->updating_device = FALSE;
 
         /* gateway */
         panel_set_widget_data (panel,
@@ -1276,10 +1301,10 @@ nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *pan
 
         /* VPN */
         if (NET_IS_VPN (object)) {
-                nm_device_refresh_vpn_ui (panel, NET_VPN (object));
                 /* save so we ignore */
                 g_free (priv->current_device);
                 priv->current_device = NULL;
+                nm_device_refresh_vpn_ui (panel, NET_VPN (object));
                 goto out;
         }
 
@@ -1408,6 +1433,7 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         /* add as a virtual object */
         net_vpn = net_vpn_new ();
         net_vpn_set_connection (net_vpn, connection);
+
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
                                             "liststore_devices"));
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (connection));
@@ -1448,8 +1474,8 @@ notify_connections_read_cb (NMRemoteSettings *settings,
                 type = nm_setting_connection_get_connection_type (s_con);
                 if (g_strcmp0 (type, "vpn") != 0)
                         continue;
-                g_debug ("add %s remote connection: %s",
-                         type,
+                g_debug ("add %s/%s remote connection: %s",
+                         type, g_type_name_from_instance ((GTypeInstance*)candidate),
                          nm_connection_get_path (candidate));
                 panel_add_vpn_device (panel, candidate);
         }
