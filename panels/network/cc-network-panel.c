@@ -54,13 +54,14 @@ G_DEFINE_DYNAMIC_TYPE (CcNetworkPanel, cc_network_panel, CC_TYPE_PANEL)
 
 struct _CcNetworkPanelPrivate
 {
-        GCancellable    *cancellable;
-        gchar           *current_device;
-        GPtrArray       *devices;
-        GSettings       *proxy_settings;
-        GtkBuilder      *builder;
-        NMClient        *client;
-        gboolean         updating_device;
+        GCancellable     *cancellable;
+        gchar            *current_device;
+        GPtrArray        *devices;
+        GSettings        *proxy_settings;
+        GtkBuilder       *builder;
+        NMClient         *client;
+        NMRemoteSettings *remote_settings;
+        gboolean          updating_device;
 };
 
 enum {
@@ -1522,7 +1523,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
         GtkTreeSelection *selection;
         GtkTreeSortable *sortable;
         GtkWidget *widget;
-        NMRemoteSettings *remote_settings;
 
         panel->priv = NETWORK_PANEL_PRIVATE (panel);
 
@@ -1710,8 +1710,8 @@ cc_network_panel_init (CcNetworkPanel *panel)
                            error->message);
                 g_error_free (error);
         }
-        remote_settings = nm_remote_settings_new (bus);
-        g_signal_connect (remote_settings, NM_REMOTE_SETTINGS_CONNECTIONS_READ,
+        panel->priv->remote_settings = nm_remote_settings_new (bus);
+        g_signal_connect (panel->priv->remote_settings, NM_REMOTE_SETTINGS_CONNECTIONS_READ,
                           G_CALLBACK (notify_connections_read_cb), panel);
 
         /* is the user compiling against a new version, but running an
