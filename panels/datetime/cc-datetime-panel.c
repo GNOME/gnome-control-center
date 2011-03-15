@@ -33,6 +33,8 @@
 #include <libintl.h>
 #include <polkit/polkit.h>
 
+/* FIXME: This should be "Etc/GMT" instead */
+#define DEFAULT_TZ "Europe/London"
 #define GETTEXT_PACKAGE_TIMEZONES GETTEXT_PACKAGE "-timezones"
 
 G_DEFINE_DYNAMIC_TYPE (CcDateTimePanel, cc_date_time_panel, CC_TYPE_PANEL)
@@ -482,7 +484,11 @@ get_timezone_cb (CcDateTimePanel *self,
     }
   else
     {
-      cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->priv->map), timezone);
+      if (!cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->priv->map), timezone))
+        {
+          g_warning ("Timezone '%s' is unhandled, setting %s as default", timezone, DEFAULT_TZ);
+          cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->priv->map), DEFAULT_TZ);
+        }
       self->priv->current_location = cc_timezone_map_get_location (CC_TIMEZONE_MAP (self->priv->map));
       update_timezone (self);
     }
