@@ -920,17 +920,19 @@ new_printer_add_button_cb (GtkButton *button,
                   device_ids[0] = pp->devices[device_id].device_id;
                   device_ids[1] = NULL;
 
-                  dbus_g_proxy_call (proxy, "InstallPrinterDrivers", &error,
-
+                  dbus_g_proxy_call_with_timeout (proxy,
+                    "InstallPrinterDrivers",
+                    3600000,
+                    &error,
 #ifdef GDK_WINDOWING_X11
-                                     G_TYPE_UINT, GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (pp->dialog))),
+                    G_TYPE_UINT, GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (pp->dialog))),
 #else
-                                     G_TYPE_UINT, 0,
+                    G_TYPE_UINT, 0,
 #endif
-                                     G_TYPE_STRV, device_ids,
-                                     G_TYPE_STRING, "hide-finished",
-                                     G_TYPE_INVALID,
-                                     G_TYPE_INVALID);
+                    G_TYPE_STRV, device_ids,
+                    G_TYPE_STRING, "hide-finished",
+                    G_TYPE_INVALID,
+                    G_TYPE_INVALID);
 
                   g_object_unref (proxy);
 
