@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-12 23:37+0200\n"
-"PO-Revision-Date: 2011-03-12 23:49+0300\n"
+"POT-Creation-Date: 2011-03-15 06:38+0200\n"
+"PO-Revision-Date: 2011-03-15 06:40+0300\n"
 "Last-Translator: Korostil Daniel <ted.korostiled@gmail.com>\n"
 "Language-Team: translation@linux.org.ua\n"
 "Language: uk\n"
@@ -867,7 +867,7 @@ msgstr "Тип акселератора."
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
 #: ../panels/keyboard/keyboard-shortcuts.c:1152
-#: ../panels/sound/gvc-mixer-control.c:1091
+#: ../panels/sound/gvc-mixer-control.c:1084
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
 msgid "Disabled"
@@ -1401,31 +1401,73 @@ msgstr "Принтер;Черга;Друк;Папір;Чорнило;Тонер;
 msgid "Printers"
 msgstr "Принтери"
 
+#: ../panels/printers/new-printer-dialog.ui.h:1
+msgid " "
+msgstr " "
+
+#: ../panels/printers/new-printer-dialog.ui.h:2
+msgid "Add"
+msgstr "Додати"
+
+#: ../panels/printers/new-printer-dialog.ui.h:3
+msgid "Add a New Printer"
+msgstr "Додати принтер"
+
+#: ../panels/printers/new-printer-dialog.ui.h:4
+msgid "Address"
+msgstr "Адреса"
+
+#: ../panels/printers/new-printer-dialog.ui.h:5
+#: ../panels/user-accounts/data/language-chooser.ui.h:1
+#: ../panels/user-accounts/data/photo-dialog.ui.h:3
+msgid "Cancel"
+msgstr "Скасувати"
+
+#: ../panels/printers/new-printer-dialog.ui.h:6
+msgid "Search by Address"
+msgstr "Пошук за адресою"
+
+#: ../panels/printers/new-printer-dialog.ui.h:7
+msgid "page 1"
+msgstr "сторінка 1"
+
+#: ../panels/printers/new-printer-dialog.ui.h:8
+msgid "page 2"
+msgstr "сторінка 2"
+
+#: ../panels/printers/new-printer-dialog.ui.h:9
+msgid "page 3"
+msgstr "сторінка 3"
+
+#: ../panels/printers/pp-new-printer-dialog.c:381
+msgid "Getting devices..."
+msgstr "Отримання пристроїв…"
+
 #. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:552
-#: ../panels/printers/pp-new-printer-dialog.c:557
+#: ../panels/printers/pp-new-printer-dialog.c:639
+#: ../panels/printers/pp-new-printer-dialog.c:644
 msgid "Devices"
 msgstr "Пристрої"
 
 #. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:582
+#: ../panels/printers/pp-new-printer-dialog.c:669
 msgid "Local"
 msgstr "Локальні"
 
 #. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:584
+#: ../panels/printers/pp-new-printer-dialog.c:671
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 msgid "Network"
 msgstr "Мережа"
 
 #. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:625
+#: ../panels/printers/pp-new-printer-dialog.c:712
 msgid "Device types"
 msgstr "Тип пристрою"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:778
-#: ../panels/printers/pp-new-printer-dialog.c:944
+#: ../panels/printers/pp-new-printer-dialog.c:865
+#: ../panels/printers/pp-new-printer-dialog.c:1031
 msgid "Automatic configuration"
 msgstr "Автоматичні налаштування"
 
@@ -1722,60 +1764,60 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Сенсор;Вказівник;Клік;Стукіт;Подвійний;Кнопка;Кулька;"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:750
+#: ../panels/network/cc-network-panel.c:751
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:754
+#: ../panels/network/cc-network-panel.c:755
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:758
+#: ../panels/network/cc-network-panel.c:759
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:763
+#: ../panels/network/cc-network-panel.c:764
 msgid "Enterprise"
 msgstr "Enterprise"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:769
+#: ../panels/network/cc-network-panel.c:770
 #: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "Немає"
 
 #. TRANSLATORS: this is a wired connection that is disconnected
-#: ../panels/network/cc-network-panel.c:853
+#: ../panels/network/cc-network-panel.c:945
 msgid "Unplugged"
 msgstr "Від'єднано"
 
-#: ../panels/network/cc-network-panel.c:1193
+#: ../panels/network/cc-network-panel.c:1306
 msgid "Network proxy"
 msgstr "Мережева проксі"
 
-#: ../panels/network/cc-network-panel.c:1202
+#: ../panels/network/cc-network-panel.c:1315
 msgid "Set the system proxy settings"
 msgstr "Налаштувати системне проксі"
 
-#: ../panels/network/cc-network-panel.c:1299
+#: ../panels/network/cc-network-panel.c:1412
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: ../panels/network/cc-network-panel.c:1311
+#: ../panels/network/cc-network-panel.c:1424
 msgid "Virtual private network"
 msgstr "Віртуальна приватна мережа"
 
 #. TRANSLATORS: the user is running a NM that is too new and API compatible
-#: ../panels/network/cc-network-panel.c:1370
+#: ../panels/network/cc-network-panel.c:1483
 msgid "The running NetworkManager version is not compatible (too new)."
 msgstr "Запущена версія NetworkManager не сумісна (надто нова)."
 
 #. TRANSLATORS: the user is running a NM that is too old and API compatible
-#: ../panels/network/cc-network-panel.c:1376
+#: ../panels/network/cc-network-panel.c:1489
 msgid "The running NetworkManager version is not compatible (too old)."
 msgstr "Запущена версія NetworkManager не сумісна (надто стара)."
 
@@ -2313,7 +2355,7 @@ msgstr "_Профіль:"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1098
+#: ../panels/sound/gvc-mixer-control.c:1091
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -2323,7 +2365,7 @@ msgstr[2] "%u виводів"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1108
+#: ../panels/sound/gvc-mixer-control.c:1101
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
@@ -2331,7 +2373,7 @@ msgstr[0] "%u вхід"
 msgstr[1] "%u входи"
 msgstr[2] "%u входів"
 
-#: ../panels/sound/gvc-mixer-control.c:1406
+#: ../panels/sound/gvc-mixer-control.c:1399
 msgid "System Sounds"
 msgstr "Системі звуки"
 
@@ -3288,11 +3330,6 @@ msgstr "_Повне ім'я"
 msgid "_Username"
 msgstr "_Користувач"
 
-#: ../panels/user-accounts/data/language-chooser.ui.h:1
-#: ../panels/user-accounts/data/photo-dialog.ui.h:3
-msgid "Cancel"
-msgstr "Скасувати"
-
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
 msgid ""
 "<a href=\"http://wolfram.org/writing/howto/password.html\">How to choose a "
@@ -3545,9 +3582,6 @@ msgstr "_Усі параметри"
 #~ msgid "Description:"
 #~ msgstr "Опис:"
 
-#~ msgid "Disable Printer"
-#~ msgstr "Вимкнути принтер"
-
 #~ msgid "Hold"
 #~ msgstr "Затримати"
 
@@ -3592,9 +3626,6 @@ msgstr "_Усі параметри"
 
 #~ msgid "Select a keyboard layout to be added to the list"
 #~ msgstr "Виберіть розкладку клавіатури, щоб додати її до списку"
-
-#~ msgid "_Add..."
-#~ msgstr "_Додати…"
 
 #~ msgid "_Pointer can be controlled using the keypad"
 #~ msgstr "_Дозволити керування вказівником миші з клавіатури"
