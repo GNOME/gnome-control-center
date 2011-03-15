@@ -154,7 +154,7 @@ if test x"$enable_cups" != x"no" ; then
     AC_MSG_ERROR([CUPS 1.4 or newer not found, but CUPS support requested])
   fi
 
-  CUPS_CFLAGS=`$CUPS_CONFIG --cflags | $SED -e '/-O\w*//g' -e 's/-m\w*//g'`
+  CUPS_CFLAGS=`$CUPS_CONFIG --cflags | $SED -e 's/-O\w*//g' -e 's/-m\w*//g'`
   CUPS_LIBS=`$CUPS_CONFIG --libs`
   AC_SUBST(CUPS_CFLAGS)
   AC_SUBST(CUPS_LIBS)
