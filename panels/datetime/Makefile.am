@@ -74,11 +74,11 @@ AM_CPPFLAGS =						\
 	-DDATADIR="\"$(uidir)\""			\
 	$(NULL)
 
-noinst_PROGRAMS = test-timezone test-endianess
+noinst_PROGRAMS = test-timezone-gfx test-endianess
 
-test_timezone_SOURCES = test-timezone.c tz.c tz.h
-test_timezone_LDADD = $(DATETIME_PANEL_LIBS)
-test_timezone_CFLAGS = $(DATETIME_PANEL_CFLAGS)
+test_timezone_gfx_SOURCES = test-timezone-gfx.c tz.c tz.h
+test_timezone_gfx_LDADD = $(DATETIME_PANEL_LIBS)
+test_timezone_gfx_CFLAGS = $(DATETIME_PANEL_CFLAGS)
 
 test_endianess_SOURCES = test-endianess.c date-endian.c date-endian.h
 test_endianess_LDADD = $(DATETIME_PANEL_LIBS)
@@ -86,8 +86,8 @@ test_endianess_CFLAGS = $(DATETIME_PANEL_CFLAGS)
 
 all-local: check-local
 
-check-local: test-timezone test-endianess
-	$(builddir)/test-timezone $(srcdir)/data
+check-local: test-timezone-gfx test-endianess
+	$(builddir)/test-timezone-gfx $(srcdir)/data
 	$(builddir)/test-endianess
 
 ccpanelsdir = $(PANELS_DIR)
