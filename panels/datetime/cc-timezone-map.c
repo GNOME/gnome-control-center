@@ -24,6 +24,7 @@
 
 #include "cc-timezone-map.h"
 #include <math.h>
+#include <string.h>
 #include "tz.h"
 
 G_DEFINE_TYPE (CcTimezoneMap, cc_timezone_map, GTK_TYPE_WIDGET)
@@ -636,6 +637,26 @@ cc_timezone_map_new (void)
   return g_object_new (CC_TYPE_TIMEZONE_MAP, NULL);
 }
 
+static char *
+get_clean_tz (CcTimezoneMap *map,
+	      const char    *tz)
+{
+	char *ret;
+	const char *timezone;
+
+	if (g_str_has_prefix (tz, "right/"))
+		timezone = tz + strlen ("right/");
+	else if (g_str_has_prefix (tz, "posix/"))
+		timezone = tz + strlen ("posix/");
+	else
+		timezone = tz;
+
+	ret = g_hash_table_lookup (map->priv->alias_db, timezone);
+	if (ret == NULL)
+		return g_strdup (timezone);
+	return g_strdup (ret);
+}
+
 gboolean
 cc_timezone_map_set_timezone (CcTimezoneMap *map,
                               const gchar   *timezone)
@@ -645,7 +666,7 @@ cc_timezone_map_set_timezone (CcTimezoneMap *map,
   char *real_tz;
   gboolean ret;
 
-  real_tz = g_hash_table_lookup (map->priv->alias_db, timezone);
+  real_tz = get_clean_tz (map, timezone);
 
   locations = tz_get_locations (map->priv->tzdb);
   ret = FALSE;
@@ -664,6 +685,8 @@ cc_timezone_map_set_timezone (CcTimezoneMap *map,
 
   if (ret)
     gtk_widget_queue_draw (GTK_WIDGET (map));
+
+  g_free (real_tz);
 
   return ret;
 }
