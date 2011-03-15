@@ -69,6 +69,12 @@ net_vpn_set_connection (NetVpn *vpn, NMConnection *connection)
         priv->setting = NM_SETTING_VPN (nm_connection_get_setting_by_name (connection, "vpn"));
 }
 
+NMConnection *
+net_vpn_get_connection (NetVpn *vpn)
+{
+        return vpn->priv->connection;
+}
+
 NMVPNConnectionState
 net_vpn_get_state (NetVpn *vpn)
 {
