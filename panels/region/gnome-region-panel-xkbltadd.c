@@ -45,31 +45,16 @@ static GtkWidget *preview_dialog = NULL;
 #define RESPONSE_PREVIEW 1
 
 static void
-xkl_layout_chooser_add_default_switcher_if_necessary (gchar **
-						      layouts_list)
-{
-	gchar **options_list = xkb_options_get_selected_list ();
-	gboolean was_appended;
-
-	options_list =
-	    gkbd_keyboard_config_add_default_switch_option_if_necessary
-	    (layouts_list, options_list, &was_appended);
-	if (was_appended)
-		xkb_options_set_selected_list (options_list);
-	g_strfreev (options_list);
-}
-
-static void
 xkb_preview_destroy_callback (GtkWidget * widget)
 {
 	preview_dialog = NULL;
 }
 
 static gboolean
-xkb_layout_chooser_selection_dupe (GtkBuilder * chooser_dialog)
+xkb_layout_chooser_selection_dupe (GtkDialog *dialog)
 {
 	gchar *selected_id =
-	    (gchar *) xkb_layout_chooser_get_selected_id (chooser_dialog);
+	    (gchar *) xkb_layout_chooser_get_selected_id (dialog);
 	gchar **layouts_list, **pl;
 	gboolean rv = FALSE;
 	if (selected_id == NULL)
@@ -85,38 +70,18 @@ xkb_layout_chooser_selection_dupe (GtkBuilder * chooser_dialog)
 	return rv;
 }
 
-static void
-xkb_layout_chooser_response (GtkDialog * dialog,
-			     gint response, GtkBuilder * chooser_dialog)
+void
+xkb_layout_chooser_response (GtkDialog  *dialog,
+			     gint        response)
 {
 	switch (response)
 	case GTK_RESPONSE_OK:{
-			gchar *selected_id = (gchar *)
-			    xkb_layout_chooser_get_selected_id
-			    (chooser_dialog);
-
-			if (selected_id != NULL) {
-				gchar **layouts_list =
-				    xkb_layouts_get_selected_list ();
-
-				layouts_list =
-				    gkbd_strv_append (layouts_list,
-						      g_strdup
-						      (selected_id));
-
-				xkb_layouts_set_selected_list
-				    (layouts_list);
-
-				xkl_layout_chooser_add_default_switcher_if_necessary
-				    (layouts_list);
-
-				g_strfreev (layouts_list);
-			}
+			/* Handled by the main code */
 			break;
 	case RESPONSE_PREVIEW:{
 				gchar *selected_id = (gchar *)
 				    xkb_layout_chooser_get_selected_id
-				    (chooser_dialog);
+				    (dialog);
 
 				if (selected_id != NULL) {
 					if (preview_dialog == NULL) {
@@ -307,7 +272,7 @@ xkb_layout_chooser_selection_changed (GtkTreeSelection * selection,
 	GtkWidget *add_button = CWID ("btnOk");
 	GtkWidget *preview_button = CWID ("btnPreview");
 	gboolean anything_selected = g_list_length (selected_layouts) == 1;
-	gboolean dupe = xkb_layout_chooser_selection_dupe (chooser_dialog);
+	gboolean dupe = xkb_layout_chooser_selection_dupe (GTK_DIALOG (CWID("xkb_layout_chooser")));
 
 	gtk_widget_set_sensitive (add_button, anything_selected && !dupe);
 	gtk_widget_set_sensitive (preview_button, anything_selected);
@@ -359,7 +324,7 @@ xkb_filter_layouts (GtkTreeModel * model,
 	return rv;
 }
 
-void
+GtkWidget *
 xkb_layout_choose (GtkBuilder * dialog)
 {
 	GtkBuilder *chooser_dialog = gtk_builder_new ();
@@ -376,6 +341,7 @@ xkb_layout_choose (GtkBuilder * dialog)
 	xkb_filtered_layouts_list = CWID ("xkb_filtered_layouts_list");
 	xkb_layout_filter = CWID ("xkb_layout_filter");
 
+	g_object_set_data (G_OBJECT (chooser), "xkb_filtered_layouts_list", xkb_filtered_layouts_list);
 	visible_column =
 	    gtk_tree_view_column_new_with_attributes ("Layout",
 						      gtk_cell_renderer_text_new
@@ -396,11 +362,6 @@ xkb_layout_choose (GtkBuilder * dialog)
 				  G_CALLBACK
 				  (xkb_layout_filter_changed),
 				  chooser_dialog);
-
-	g_signal_connect (G_OBJECT (chooser),
-			  "response",
-			  G_CALLBACK (xkb_layout_chooser_response),
-			  chooser_dialog);
 
 	selection =
 	    gtk_tree_view_get_selection (GTK_TREE_VIEW
@@ -438,14 +399,16 @@ xkb_layout_choose (GtkBuilder * dialog)
 	gtk_widget_grab_focus (xkb_layout_filter);
 
 	gtk_widget_show (chooser);
+
+	return chooser;
 }
 
 gchar *
-xkb_layout_chooser_get_selected_id (GtkBuilder * chooser_dialog)
+xkb_layout_chooser_get_selected_id (GtkDialog *dialog)
 {
 	GtkTreeModel *filtered_list_model;
 	GtkWidget *xkb_filtered_layouts_list =
-	    CWID ("xkb_filtered_layouts_list");
+		g_object_get_data (G_OBJECT (dialog), "xkb_filtered_layouts_list");
 	GtkTreeIter viter;
 	gchar *v_id;
 	GtkTreeSelection *selection =

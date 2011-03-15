@@ -62,19 +62,6 @@ xkb_layout_preview_create_widget (GtkBuilder * chooserDialog)
 }
 
 void
-xkb_layout_preview_update (GtkBuilder * chooser_dialog)
-{
-#ifdef HAVE_X11_EXTENSIONS_XKB_H
-	GtkWidget *chooser = CWID ("xkb_layout_chooser");
-	GtkWidget *kbdraw =
-	    GTK_WIDGET (g_object_get_data (G_OBJECT (chooser), "kbdraw"));
-	gchar *id = xkb_layout_chooser_get_selected_id (chooser_dialog);
-	xkb_layout_preview_set_drawing_layout (kbdraw, id);
-	g_free (id);
-#endif
-}
-
-void
 xkb_layout_preview_set_drawing_layout (GtkWidget * kbdraw,
 				       const gchar * id)
 {

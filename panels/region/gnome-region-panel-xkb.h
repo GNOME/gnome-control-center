@@ -60,7 +60,9 @@ extern void enable_disable_restoring (GtkBuilder * dialog);
 
 extern void preview_toggled (GtkBuilder * dialog, GtkWidget * button);
 
-extern void xkb_layout_choose (GtkBuilder * dialog);
+extern GtkWidget *xkb_layout_choose (GtkBuilder * dialog);
+
+extern void xkb_layout_chooser_response (GtkDialog *dialog, gint response_id);
 
 extern gchar **xkb_layouts_get_selected_list (void);
 
@@ -84,8 +86,7 @@ extern void xkb_layout_preview_update (GtkBuilder * chooser_dialog);
 extern void xkb_layout_preview_set_drawing_layout (GtkWidget * kbdraw,
 						   const gchar * id);
 
-extern gchar *xkb_layout_chooser_get_selected_id (GtkBuilder *
-						  chooser_dialog);
+extern gchar *xkb_layout_chooser_get_selected_id (GtkDialog *dialog);
 
 extern void xkb_save_default_group (gint group_no);
 
