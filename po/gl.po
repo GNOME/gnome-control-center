@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-15 11:50+0100\n"
-"PO-Revision-Date: 2011-03-15 12:04+0100\n"
+"POT-Creation-Date: 2011-03-16 11:32+0100\n"
+"PO-Revision-Date: 2011-03-16 11:55+0100\n"
 "Last-Translator: Fran Diéguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician <gnome-l10n-gl@gnome.org>\n"
 "Language: gl\n"
@@ -71,7 +71,7 @@ msgid "Lock"
 msgstr "Bloquear"
 
 #: ../libgnome-control-center/cc-lockbutton.c:356
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:22
 msgid "Unlock"
 msgstr "Desbloquear"
 
@@ -1480,7 +1480,7 @@ msgstr "Tipos de dispositivo"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
 #: ../panels/printers/pp-new-printer-dialog.c:865
-#: ../panels/printers/pp-new-printer-dialog.c:1031
+#: ../panels/printers/pp-new-printer-dialog.c:1033
 msgid "Automatic configuration"
 msgstr "Configuración automática"
 
@@ -1531,7 +1531,7 @@ msgid "Model"
 msgstr "Modelo"
 
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:16 ../panels/network/network.ui.h:13
+#: ../panels/printers/printers.ui.h:16
 msgid "Options"
 msgstr "Opcións"
 
@@ -1618,6 +1618,7 @@ msgid "View and edit keyboard layout options"
 msgstr "Ver e editar as opcións de disposición do teclado"
 
 #: ../panels/region/gnome-region-panel.ui.h:14
+#: ../panels/network/network.ui.h:32
 msgid "_Options..."
 msgstr "_Opcións…"
 
@@ -1637,7 +1638,7 @@ msgstr "Seleccione a orixe da entrada a engadir"
 msgid "Keyboard Layout Options"
 msgstr "Opcións de disposición do teclado"
 
-#: ../panels/region/gnome-region-panel-xkblt.c:220
+#: ../panels/region/gnome-region-panel-xkblt.c:222
 msgid "Layout"
 msgstr "Disposición"
 
@@ -1778,61 +1779,61 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Trackpad;Punteiro;Clic;Toque;Dobre;Pulsación;Botón;"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:751
+#: ../panels/network/cc-network-panel.c:757
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:755
+#: ../panels/network/cc-network-panel.c:761
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:759
+#: ../panels/network/cc-network-panel.c:765
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:764
+#: ../panels/network/cc-network-panel.c:770
 msgid "Enterprise"
 msgstr "Empresarial"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:770
+#: ../panels/network/cc-network-panel.c:776
 #: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "Ningunha"
 
 #. TRANSLATORS: this is a wired connection that is disconnected
-#: ../panels/network/cc-network-panel.c:945
+#: ../panels/network/cc-network-panel.c:1027
 msgid "Unplugged"
 msgstr "Desconectado"
 
-#: ../panels/network/cc-network-panel.c:1306
+#: ../panels/network/cc-network-panel.c:1443
 msgid "Network proxy"
 msgstr "Proxy da rede"
 
-#: ../panels/network/cc-network-panel.c:1315
+#: ../panels/network/cc-network-panel.c:1452
 msgid "Set the system proxy settings"
 msgstr "Configurar os axustes do proxy do sistema"
 
-#: ../panels/network/cc-network-panel.c:1412
+#: ../panels/network/cc-network-panel.c:1553
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
 
-#: ../panels/network/cc-network-panel.c:1424
+#: ../panels/network/cc-network-panel.c:1565
 msgid "Virtual private network"
 msgstr "Rede privada virtual"
 
 #. TRANSLATORS: the user is running a NM that is too new and API compatible
-#: ../panels/network/cc-network-panel.c:1483
+#: ../panels/network/cc-network-panel.c:1624
 msgid "The running NetworkManager version is not compatible (too new)."
 msgstr ""
 "A versión do NetworkManager en execución non é compatíbel (moi recente)"
 
 #. TRANSLATORS: the user is running a NM that is too old and API compatible
-#: ../panels/network/cc-network-panel.c:1489
+#: ../panels/network/cc-network-panel.c:1630
 msgid "The running NetworkManager version is not compatible (too old)."
 msgstr "A versión do NetworkManager en execución non é compatíbel (moi antiga)"
 
@@ -1850,121 +1851,141 @@ msgid "Air_plane Mode"
 msgstr "Modo a_vión"
 
 #: ../panels/network/network.ui.h:2
+msgid "Create..."
+msgstr "Crear…"
+
+#: ../panels/network/network.ui.h:3
 msgid "DNS:"
 msgstr "DNS:"
 
-#: ../panels/network/network.ui.h:3
+#: ../panels/network/network.ui.h:4
+msgid "DSL"
+msgstr "DSL"
+
+#: ../panels/network/network.ui.h:5
 msgid "Default Route:"
 msgstr "Ruta predeterminada:"
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:6
 msgid "Gateway:"
 msgstr "Pasarela:"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:7
 msgid "Group Name:"
 msgstr "Nome do grupo:"
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:8
 msgid "Group Password:"
 msgstr "Contrasinal do grupo:"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:9
 msgid "H_TTPS Proxy:"
 msgstr "Proxy para H_TTPS:"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:10
 msgid "Hardware Address:"
 msgstr "Enderezo hardware:"
 
-#: ../panels/network/network.ui.h:9
+#: ../panels/network/network.ui.h:11
 msgid "IMEI:"
 msgstr "IMEI:"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:12
 msgid "IP Address:"
 msgstr "Enderezo de IP:"
 
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:13
 msgid "IPv4 Address:"
 msgstr "Enderezo IPv4:"
 
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:14
 msgid "IPv6 Address:"
 msgstr "Enderezo IPv6:"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:15
+msgid "Interface:"
+msgstr "Interface:"
+
+#: ../panels/network/network.ui.h:16
+msgid "Mobile Broadband"
+msgstr "Banda larga móbil"
+
+#: ../panels/network/network.ui.h:17
 msgid "Provider:"
 msgstr "Fornecedor:"
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:18
 msgid "Security:"
 msgstr "Seguranza:"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:19
+msgid "Select the interface to use for the new service"
+msgstr "Seleccione a interface a usar para o novo servizo"
+
+#: ../panels/network/network.ui.h:20
 msgid "Speed:"
 msgstr "Velocidade:"
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:21
 msgid "Subnet Mask:"
 msgstr "Máscara de rede:"
 
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:23
 msgid "Username:"
 msgstr "Nome de usuario:"
 
-#: ../panels/network/network.ui.h:20
-msgid "_Configuration URL:"
-msgstr "URL de _configuración:"
-
-#: ../panels/network/network.ui.h:21
-msgid "_FTP Proxy:"
-msgstr "Proxy para _FTP:"
-
-#: ../panels/network/network.ui.h:22
-msgid "_HTTP Proxy:"
-msgstr "Proxy para _HTTP:"
-
-#: ../panels/network/network.ui.h:23
-msgid "_Method:"
-msgstr "_Método:"
-
 #: ../panels/network/network.ui.h:24
-msgid "_Network Name:"
-msgstr "_Nome da rede:"
-
-#: ../panels/network/network.ui.h:25
-msgid "_Options"
-msgstr "_Opcións"
-
-#: ../panels/network/network.ui.h:26
-msgid "_Socks Host:"
-msgstr "_Servidor de socks:"
-
-#: ../panels/network/network.ui.h:27
-msgctxt "proxy method"
-msgid "Automatic"
-msgstr "Automático"
-
-#: ../panels/network/network.ui.h:28
-msgctxt "proxy method"
-msgid "Manual"
-msgstr "Manual"
-
-#: ../panels/network/network.ui.h:29
-msgctxt "proxy method"
-msgid "None"
-msgstr "Ningún"
+msgid "VPN"
+msgstr "VPN"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:82
+#: ../panels/network/network.ui.h:25 ../panels/network/panel-common.c:82
 msgid "Wired"
 msgstr "Con fíos"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:86
+#: ../panels/network/network.ui.h:26 ../panels/network/panel-common.c:86
 msgid "Wireless"
 msgstr "Sen fíos"
+
+#: ../panels/network/network.ui.h:27
+msgid "_Configuration URL:"
+msgstr "URL de _configuración:"
+
+#: ../panels/network/network.ui.h:28
+msgid "_FTP Proxy:"
+msgstr "Proxy para _FTP:"
+
+#: ../panels/network/network.ui.h:29
+msgid "_HTTP Proxy:"
+msgstr "Proxy para _HTTP:"
+
+#: ../panels/network/network.ui.h:30
+msgid "_Method:"
+msgstr "_Método:"
+
+#: ../panels/network/network.ui.h:31
+msgid "_Network Name:"
+msgstr "_Nome da rede:"
+
+#: ../panels/network/network.ui.h:33
+msgid "_Socks Host:"
+msgstr "_Servidor de socks:"
+
+#: ../panels/network/network.ui.h:34
+msgctxt "proxy method"
+msgid "Automatic"
+msgstr "Automático"
+
+#: ../panels/network/network.ui.h:35
+msgctxt "proxy method"
+msgid "Manual"
+msgstr "Manual"
+
+#: ../panels/network/network.ui.h:36
+msgctxt "proxy method"
+msgid "None"
+msgstr "Ningún"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:93
@@ -3558,6 +3579,9 @@ msgstr "Centro de control"
 msgid "_All Settings"
 msgstr "_Todas as configuracións"
 
+#~ msgid "_Options"
+#~ msgstr "_Opcións"
+
 #~ msgid "More Info"
 #~ msgstr "Información do sistema"
 
@@ -3878,9 +3902,6 @@ msgstr "_Todas as configuracións"
 #~ msgid "Instant Messenger"
 #~ msgstr "Mensaxaría instantánea"
 
-#~ msgid "Internet"
-#~ msgstr "Internet"
-
 #~ msgid "Mail Reader"
 #~ msgstr "Lector de correo"
 
@@ -4071,9 +4092,6 @@ msgstr "_Todas as configuracións"
 
 #~ msgid "Autoconfiguration _URL:"
 #~ msgstr "_URL de configuración automática:"
-
-#~ msgid "C_reate"
-#~ msgstr "C_rear"
 
 #~ msgid "Create New Location"
 #~ msgstr "Crear unha localización nova"
