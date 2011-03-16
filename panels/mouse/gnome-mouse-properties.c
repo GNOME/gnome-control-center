@@ -26,6 +26,7 @@
 
 #include <glib/gi18n.h>
 #include <string.h>
+#include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <gnome-settings-daemon/gsd-enums.h>
 #include <math.h>
@@ -55,6 +56,9 @@ enum
 static gint double_click_state = DOUBLE_CLICK_TEST_OFF;
 static GSettings *mouse_settings = NULL;
 static GSettings *touchpad_settings = NULL;
+static GdkDeviceManager *device_manager = NULL;
+static guint device_added_id = 0;
+static guint device_removed_id = 0;
 
 /* Double Click handling */
 
@@ -354,6 +358,14 @@ dialog_response_cb (GtkDialog *dialog, gint response_id, gpointer user_data)
 */
 }
 
+static void
+device_changed (GdkDeviceManager *device_manager,
+		GdkDevice        *device,
+		GtkBuilder       *dialog)
+{
+	gtk_widget_set_visible (WID ("touchpad_vbox"), touchpad_is_present ());
+}
+
 GtkWidget *
 gnome_mouse_properties_init (GtkBuilder *dialog)
 {
@@ -361,6 +373,12 @@ gnome_mouse_properties_init (GtkBuilder *dialog)
 
 	mouse_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.mouse");
 	touchpad_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.touchpad");
+
+	device_manager = gdk_display_get_device_manager (gdk_display_get_default ());
+	g_signal_connect (device_manager, "device-added",
+			  G_CALLBACK (device_changed), dialog);
+	g_signal_connect (device_manager, "device-removed",
+			  G_CALLBACK (device_changed), dialog);
 
 	create_dialog (dialog);
 
@@ -387,5 +405,12 @@ gnome_mouse_properties_dispose (GtkWidget *widget)
 	if (touchpad_settings != NULL) {
 		g_object_unref (touchpad_settings);
 		touchpad_settings = NULL;
+	}
+	if (device_manager != NULL) {
+		g_signal_handler_disconnect (device_manager, device_added_id);
+		device_added_id = 0;
+		g_signal_handler_disconnect (device_manager, device_removed_id);
+		device_removed_id = 0;
+		device_manager = NULL;
 	}
 }
