@@ -66,7 +66,7 @@ net_vpn_set_connection (NetVpn *vpn, NMConnection *connection)
                                   G_CALLBACK (connection_state_changed_cb),
                                   vpn);
         }
-        priv->setting = NM_SETTING_VPN (nm_connection_get_setting_by_name (connection, "vpn"));
+        priv->setting = NM_SETTING_VPN (g_object_ref (nm_connection_get_setting_by_name (connection, "vpn")));
 }
 
 NMConnection *
