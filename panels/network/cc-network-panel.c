@@ -1028,12 +1028,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
         state = nm_device_get_state (nm_device);
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "label_status"));
-        str = panel_device_state_to_localized_string (state);
-        if (type == NM_DEVICE_TYPE_ETHERNET &&
-            (state == NM_DEVICE_STATE_UNAVAILABLE)) {
-                /* TRANSLATORS: this is a wired connection that is disconnected */
-                str = _("Unplugged");
-        }
+        str = panel_device_state_to_localized_string (type, state);
         gtk_label_set_label (GTK_LABEL (widget), str);
 
         /* set up the options button */

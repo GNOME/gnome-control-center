@@ -174,10 +174,10 @@ panel_ap_mode_to_localized_string (NM80211Mode mode)
  * panel_device_state_to_localized_string:
  **/
 const gchar *
-panel_device_state_to_localized_string (NMDeviceState type)
+panel_device_state_to_localized_string (NMDeviceType type, NMDeviceState state)
 {
         const gchar *value = NULL;
-        switch (type) {
+        switch (state) {
         case NM_DEVICE_STATE_UNKNOWN:
                 /* TRANSLATORS: device status */
                 value = _("Status unknown");
@@ -188,31 +188,25 @@ panel_device_state_to_localized_string (NMDeviceState type)
                 break;
         case NM_DEVICE_STATE_UNAVAILABLE:
                 /* TRANSLATORS: device status */
-                value = _("Unavailable");
+                if (type == NM_DEVICE_TYPE_ETHERNET)
+                        value = _("Cable unplugged");
+                else
+                        value = _("Unavailable");
                 break;
         case NM_DEVICE_STATE_DISCONNECTED:
                 /* TRANSLATORS: device status */
                 value = _("Disconnected");
                 break;
         case NM_DEVICE_STATE_PREPARE:
-                /* TRANSLATORS: device status */
-                value = _("Preparing connection");
-                break;
         case NM_DEVICE_STATE_CONFIG:
+        case NM_DEVICE_STATE_IP_CONFIG:
+        case NM_DEVICE_STATE_IP_CHECK:
                 /* TRANSLATORS: device status */
-                value = _("Configuring connection");
+                value = _("Connecting");
                 break;
         case NM_DEVICE_STATE_NEED_AUTH:
                 /* TRANSLATORS: device status */
-                value = _("Authenticating");
-                break;
-        case NM_DEVICE_STATE_IP_CONFIG:
-                /* TRANSLATORS: device status */
-                value = _("Getting network address");
-                break;
-        case NM_DEVICE_STATE_IP_CHECK:
-                /* TRANSLATORS: device status */
-                value = _("Checking network address");
+                value = _("Authentication required");
                 break;
         case NM_DEVICE_STATE_ACTIVATED:
                 /* TRANSLATORS: device status */
@@ -224,7 +218,7 @@ panel_device_state_to_localized_string (NMDeviceState type)
                 break;
         case NM_DEVICE_STATE_FAILED:
                 /* TRANSLATORS: device status */
-                value = _("Failed to connect");
+                value = _("Connection failed");
                 break;
         default:
                 /* TRANSLATORS: device status */
