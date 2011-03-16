@@ -66,7 +66,6 @@ enum {
         PANEL_DEVICES_COLUMN_ICON,
         PANEL_DEVICES_COLUMN_TITLE,
         PANEL_DEVICES_COLUMN_SORT,
-        PANEL_DEVICES_COLUMN_TOOLTIP,
         PANEL_DEVICES_COLUMN_OBJECT,
         PANEL_DEVICES_COLUMN_LAST
 };
@@ -504,7 +503,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                             PANEL_DEVICES_COLUMN_ICON, panel_device_to_icon_name (device),
                             PANEL_DEVICES_COLUMN_SORT, panel_device_to_sortable_string (device),
                             PANEL_DEVICES_COLUMN_TITLE, title,
-                            PANEL_DEVICES_COLUMN_TOOLTIP, NULL,
                             PANEL_DEVICES_COLUMN_OBJECT, net_device,
                             -1);
         g_free (title);
@@ -1464,7 +1462,6 @@ panel_add_proxy_device (CcNetworkPanel *panel)
                             PANEL_DEVICES_COLUMN_ICON, "preferences-system-network",
                             PANEL_DEVICES_COLUMN_TITLE, title,
                             PANEL_DEVICES_COLUMN_SORT, "9",
-                            PANEL_DEVICES_COLUMN_TOOLTIP, _("Set the system proxy settings"),
                             PANEL_DEVICES_COLUMN_OBJECT, NULL,
                             -1);
         g_free (title);
@@ -1617,7 +1614,6 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
                             PANEL_DEVICES_COLUMN_ICON, "network-workgroup",
                             PANEL_DEVICES_COLUMN_TITLE, title_markup,
                             PANEL_DEVICES_COLUMN_SORT, "5",
-                            PANEL_DEVICES_COLUMN_TOOLTIP, _("Virtual private network"),
                             PANEL_DEVICES_COLUMN_OBJECT, net_vpn,
                             -1);
         g_free (title);
