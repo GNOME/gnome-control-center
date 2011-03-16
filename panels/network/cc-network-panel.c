@@ -1552,6 +1552,39 @@ manager_running (NMClient *client, GParamSpec *pspec, gpointer user_data)
         select_first_device (panel);
 }
 
+static NetObject *
+find_in_model_by_id (CcNetworkPanel *panel, const gchar *id)
+{
+        gboolean ret;
+        gchar *id_tmp;
+        GtkTreeIter iter;
+        GtkTreeModel *model;
+        NetObject *object = NULL;
+
+        /* find in model */
+        model = GTK_TREE_MODEL (gtk_builder_get_object (panel->priv->builder,
+                                                        "liststore_devices"));
+        ret = gtk_tree_model_get_iter_first (model, &iter);
+        if (!ret)
+                goto out;
+
+        /* get the other elements */
+        ret = FALSE;
+        do {
+                gtk_tree_model_get (model, &iter,
+                                    PANEL_DEVICES_COLUMN_ID, &id_tmp,
+                                    -1);
+                if (g_strcmp0 (id_tmp, id) == 0) {
+                        gtk_tree_model_get (model, &iter,
+                                            PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, &object,
+                                            -1);
+                }
+                g_free (id_tmp);
+        } while (object == NULL && gtk_tree_model_iter_next (model, &iter));
+out:
+        return object;
+}
+
 static void
 panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
 {
@@ -1560,6 +1593,12 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         GtkListStore *liststore_devices;
         GtkTreeIter iter;
         NetVpn *net_vpn;
+        const gchar *id;
+
+        /* does already exist */
+        id = nm_connection_get_path (connection);
+        if (find_in_model_by_id (panel, id) != NULL)
+                return;
 
         /* add as a virtual object */
         net_vpn = net_vpn_new ();
@@ -1577,7 +1616,7 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
                             &iter,
                             PANEL_DEVICES_COLUMN_ICON, "network-workgroup",
                             PANEL_DEVICES_COLUMN_TITLE, title_markup,
-                            PANEL_DEVICES_COLUMN_ID, NULL,
+                            PANEL_DEVICES_COLUMN_ID, id,
                             PANEL_DEVICES_COLUMN_SORT, "5",
                             PANEL_DEVICES_COLUMN_TOOLTIP, _("Virtual private network"),
                             PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, net_vpn,
@@ -1587,28 +1626,44 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
 }
 
 static void
+add_connection (CcNetworkPanel *panel,
+                NMConnection *connection)
+{
+        NMSettingConnection *s_con;
+        const gchar *type;
+
+        s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (connection,
+                                                                  NM_TYPE_SETTING_CONNECTION));
+        type = nm_setting_connection_get_connection_type (s_con);
+        if (g_strcmp0 (type, "vpn") != 0)
+                return;
+        g_debug ("add %s/%s remote connection: %s",
+                 type, g_type_name_from_instance ((GTypeInstance*)connection),
+                 nm_connection_get_path (connection));
+        panel_add_vpn_device (panel, connection);
+}
+
+static void
+notify_new_connection_cb (NMRemoteSettings *settings,
+                          NMRemoteConnection *connection,
+                          CcNetworkPanel *panel)
+{
+        add_connection (panel, NM_CONNECTION (connection));
+}
+
+static void
 notify_connections_read_cb (NMRemoteSettings *settings,
                             CcNetworkPanel *panel)
 {
         GSList *list, *iter;
-        NMConnection *candidate;
-        NMSettingConnection *s_con;
-        const gchar *type;
+        NMConnection *connection;
 
         list = nm_remote_settings_list_connections (settings);
         g_debug ("%p has %i remote connections",
                  panel, g_slist_length (list));
         for (iter = list; iter; iter = g_slist_next (iter)) {
-                candidate = NM_CONNECTION (iter->data);
-                s_con = NM_SETTING_CONNECTION (nm_connection_get_setting (candidate,
-                                                                          NM_TYPE_SETTING_CONNECTION));
-                type = nm_setting_connection_get_connection_type (s_con);
-                if (g_strcmp0 (type, "vpn") != 0)
-                        continue;
-                g_debug ("add %s/%s remote connection: %s",
-                         type, g_type_name_from_instance ((GTypeInstance*)candidate),
-                         nm_connection_get_path (candidate));
-                panel_add_vpn_device (panel, candidate);
+                connection = NM_CONNECTION (iter->data);
+                add_connection (panel, connection);
         }
 }
 
@@ -1701,7 +1756,7 @@ edit_connection (GtkButton *button, CcNetworkPanel *panel)
 }
 
 static void
-add_connection (GtkToolButton *button, CcNetworkPanel *panel)
+add_connection_cb (GtkToolButton *button, CcNetworkPanel *panel)
 {
         GtkWidget *dialog;
         gint response;
@@ -1954,7 +2009,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "add_toolbutton"));
         g_signal_connect (widget, "clicked",
-                          G_CALLBACK (add_connection), panel);
+                          G_CALLBACK (add_connection_cb), panel);
 
         /* disable for now, until we actually show removable connections */
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
@@ -1985,6 +2040,8 @@ cc_network_panel_init (CcNetworkPanel *panel)
         panel->priv->remote_settings = nm_remote_settings_new (bus);
         g_signal_connect (panel->priv->remote_settings, NM_REMOTE_SETTINGS_CONNECTIONS_READ,
                           G_CALLBACK (notify_connections_read_cb), panel);
+        g_signal_connect (panel->priv->remote_settings, NM_REMOTE_SETTINGS_NEW_CONNECTION,
+                          G_CALLBACK (notify_new_connection_cb), panel);
 
         /* is the user compiling against a new version, but running an
          * old daemon version? */
