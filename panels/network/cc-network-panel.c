@@ -1670,13 +1670,58 @@ edit_connection (GtkButton *button, CcNetworkPanel *panel)
         }
 
         uuid = nm_connection_get_uuid (c);
+
         cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
+        g_debug ("Launching '%s'\n", cmdline);
+
         error = NULL;
         if (!g_spawn_command_line_async (cmdline, &error)) {
                 g_warning ("Failed to launch nm-connection-editor: %s", error->message);
                 g_error_free (error);
         }
+
         g_free (cmdline);
+}
+
+static void
+add_connection (GtkToolButton *button, CcNetworkPanel *panel)
+{
+        GtkWidget *dialog;
+        gint response;
+
+        dialog = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "connection_type_dialog"));
+        gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (panel))));
+
+        response = gtk_dialog_run (GTK_DIALOG (dialog));
+
+        gtk_widget_hide (dialog);
+
+        if (response == GTK_RESPONSE_OK) {
+                GtkComboBox *combo;
+                GtkTreeModel *model;
+                GtkTreeIter iter;
+                gchar *type;
+                gchar *cmdline;
+                GError *error;
+
+                combo = GTK_COMBO_BOX (gtk_builder_get_object (panel->priv->builder,
+                                                               "connection_type_combo"));
+                model = gtk_combo_box_get_model (combo);
+                gtk_combo_box_get_active_iter (combo, &iter);
+                gtk_tree_model_get (model, &iter, 1, &type, -1);
+
+                cmdline = g_strdup_printf ("nm-connection-editor --create --type %s", type);
+                g_debug ("Launching '%s'\n", cmdline);
+
+                error = NULL;
+                if (!g_spawn_command_line_async (cmdline, &error)) {
+                        g_warning ("Failed to launch nm-connection-editor: %s", error->message);
+                        g_error_free (error);
+                }
+                g_free (cmdline);
+                g_free (type);
+        }
 }
 
 static void
@@ -1870,17 +1915,21 @@ cc_network_panel_init (CcNetworkPanel *panel)
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (edit_connection), panel);
 
-        /* disable for now, until we can remove connections without
-         * segfaulting NM... */
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "add_toolbutton"));
-        gtk_widget_set_sensitive (widget, FALSE);
+        g_signal_connect (widget, "clicked",
+                          G_CALLBACK (add_connection), panel);
+
+        /* disable for now, until we actually show removable connections */
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "remove_toolbutton"));
         gtk_widget_set_sensitive (widget, FALSE);
+
+        /* nothing to unlock yet */
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "button_unlock"));
         gtk_widget_set_sensitive (widget, FALSE);
+
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "switch_flight_mode"));
         ret = nm_client_wireless_get_enabled (panel->priv->client);
@@ -1916,9 +1965,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (widget), FALSE);
 
         /* hide stuff that doesn't work yet */
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "devices_toolbar"));
-        gtk_widget_hide (widget);
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "button_unlock"));
         gtk_widget_hide (widget);
