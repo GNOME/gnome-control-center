@@ -1658,13 +1658,33 @@ notify_connections_read_cb (NMRemoteSettings *settings,
 }
 
 static gboolean
+display_version_warning_idle (CcNetworkPanel *panel)
+{
+        GtkWidget  *dialog;
+        GtkWindow  *window;
+        const char *message;
+
+        /* TRANSLATORS: the user is running a NM that is not API compatible */
+        message = _("The system network services are not compatible with this version.");
+
+        window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (panel)));
+        dialog = gtk_message_dialog_new (window,
+                                         GTK_DIALOG_MODAL,
+                                         GTK_MESSAGE_ERROR,
+                                         GTK_BUTTONS_CLOSE,
+                                         "%s",
+                                         message);
+        gtk_dialog_run (GTK_DIALOG (dialog));
+        gtk_widget_destroy (dialog);
+
+        return FALSE;
+}
+
+static gboolean
 panel_check_network_manager_version (CcNetworkPanel *panel)
 {
-        const gchar *message;
         const gchar *version;
         gchar **split = NULL;
-        GtkWidget *dialog;
-        GtkWindow *window = NULL;
         guint major = 0;
         guint micro = 0;
         guint minor = 0;
@@ -1679,33 +1699,14 @@ panel_check_network_manager_version (CcNetworkPanel *panel)
                 micro = atoi (split[2]);
         }
 
-        /* is it too new */
-        if (major > 0 || major > 9) {
+        /* is it too new or old */
+        if (major > 0 || major > 9 || (minor <= 8 && micro < 992)) {
+                ret = FALSE;
 
-                /* TRANSLATORS: the user is running a NM that is too new and API compatible */
-                message = _("The running NetworkManager version is not compatible (too new).");
-
-        /* is it new enough */
-        } else if (minor <= 8 && micro < 992) {
-
-                /* TRANSLATORS: the user is running a NM that is too old and API compatible */
-                message = _("The running NetworkManager version is not compatible (too old).");
-        /* nothing to do */
-        } else {
-                goto out;
+                /* do modal dialog in idle so we don't block startup */
+                g_idle_add ((GSourceFunc)display_version_warning_idle, panel);
         }
 
-        /* do modal dialog */
-        ret = FALSE;
-        dialog = gtk_message_dialog_new (window,
-                                         GTK_DIALOG_MODAL,
-                                         GTK_MESSAGE_ERROR,
-                                         GTK_BUTTONS_CLOSE,
-                                         "%s",
-                                         message);
-        gtk_dialog_run (GTK_DIALOG (dialog));
-        gtk_widget_destroy (dialog);
-out:
         g_strfreev (split);
         return ret;
 }
@@ -1806,6 +1807,23 @@ remove_connection (GtkToolButton *button, CcNetworkPanel *panel)
 }
 
 static void
+on_toplevel_map (GtkWidget      *widget,
+                 CcNetworkPanel *panel)
+{
+        gboolean ret;
+
+        /* is the user compiling against a new version, but running an
+         * old daemon version? */
+        ret = panel_check_network_manager_version (panel);
+        if (ret) {
+                manager_running (panel->priv->client, NULL, panel);
+        } else {
+                /* just select the proxy settings */
+                select_first_device (panel);
+        }
+}
+
+static void
 cc_network_panel_init (CcNetworkPanel *panel)
 {
         DBusGConnection *bus = NULL;
@@ -1820,6 +1838,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
         GtkTreeSelection *selection;
         GtkTreeSortable *sortable;
         GtkWidget *widget;
+        GtkWidget *toplevel;
 
         panel->priv = NETWORK_PANEL_PRIVATE (panel);
 
@@ -2032,15 +2051,8 @@ cc_network_panel_init (CcNetworkPanel *panel)
         g_signal_connect (panel->priv->remote_settings, NM_REMOTE_SETTINGS_NEW_CONNECTION,
                           G_CALLBACK (notify_new_connection_cb), panel);
 
-        /* is the user compiling against a new version, but running an
-         * old daemon version? */
-        ret = panel_check_network_manager_version (panel);
-        if (ret) {
-                manager_running (panel->priv->client, NULL, panel);
-        } else {
-                /* just select the proxy settings */
-                select_first_device (panel);
-        }
+        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (panel));
+        g_signal_connect_after (toplevel, "map", G_CALLBACK (on_toplevel_map), panel);
 
         /* hide implementation details */
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
