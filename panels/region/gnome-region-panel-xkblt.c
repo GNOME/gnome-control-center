@@ -184,7 +184,6 @@ xkb_layouts_row_inserted (GtkTreeModel *tree_model,
 			  GtkTreeIter  *iter,
 			  GtkBuilder   *dialog)
 {
-	g_message ("row inserted");
 	update_layouts_list (tree_model, dialog);
 }
 
@@ -193,7 +192,6 @@ xkb_layouts_row_deleted (GtkTreeModel *tree_model,
 			 GtkTreePath  *path,
 			 GtkBuilder   *dialog)
 {
-	g_message ("row deleted");
 	update_layouts_list (tree_model, dialog);
 }
 
@@ -204,7 +202,6 @@ xkb_layouts_row_reordered (GtkTreeModel *tree_model,
 			   gpointer      new_order,
 			   GtkBuilder   *dialog)
 {
-	g_message ("row reordered");
 	update_layouts_list (tree_model, dialog);
 }
 
@@ -323,6 +320,21 @@ xkb_layouts_fill_selected_tree (GtkBuilder * dialog)
 }
 
 static void
+add_default_switcher_if_necessary ()
+{
+	gchar **layouts_list = xkb_layouts_get_selected_list();
+	gchar **options_list = xkb_options_get_selected_list ();
+	gboolean was_appended;
+
+	options_list =
+	    gkbd_keyboard_config_add_default_switch_option_if_necessary
+	    (layouts_list, options_list, &was_appended);
+	if (was_appended)
+		xkb_options_set_selected_list (options_list);
+	g_strfreev (options_list);
+}
+
+static void
 chooser_response (GtkDialog  *chooser,
 		  int         response_id,
 		  GtkBuilder *dialog)
@@ -339,6 +351,7 @@ chooser_response (GtkDialog  *chooser,
 						   SEL_LAYOUT_TREE_COL_ID, id,
 						   SEL_LAYOUT_TREE_COL_ENABLED, TRUE,
 						   -1);
+		add_default_switcher_if_necessary ();
 	}
 
 	xkb_layout_chooser_response (chooser, response_id);
