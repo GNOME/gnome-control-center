@@ -1400,6 +1400,11 @@ refresh_ui (CcNetworkPanel *panel)
                                                              "notebook_types"));
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 2);
 
+                /* we shoulnd't be able to delete the proxy device */
+                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                             "remove_toolbutton"));
+                gtk_widget_set_sensitive (widget, FALSE);
+
                 /* save so we ignore */
                 g_free (priv->current_device);
                 priv->current_device = NULL;
@@ -1412,8 +1417,18 @@ refresh_ui (CcNetworkPanel *panel)
                 g_free (priv->current_device);
                 priv->current_device = NULL;
                 nm_device_refresh_vpn_ui (panel, NET_VPN (object));
+
+                /* we're able to remove the VPN connection */
+                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                             "remove_toolbutton"));
+                gtk_widget_set_sensitive (widget, TRUE);
                 goto out;
         }
+
+        /* we're not yet able to remove the connection */
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                     "remove_toolbutton"));
+        gtk_widget_set_sensitive (widget, FALSE);
 
         /* save so we can update */
         g_free (priv->current_device);
@@ -1727,6 +1742,25 @@ add_connection (GtkToolButton *button, CcNetworkPanel *panel)
 }
 
 static void
+remove_connection (GtkToolButton *button, CcNetworkPanel *panel)
+{
+        NetDevice *object;
+        NMConnection *connection;
+
+        /* get current device */
+        object = get_selected_composite_device (panel);
+        if (object == NULL)
+                return;
+
+        /* VPN */
+        if (NET_IS_VPN (object)) {
+                connection = net_vpn_get_connection (NET_VPN (object));
+                nm_remote_connection_delete (NM_REMOTE_CONNECTION (connection), NULL, panel);
+                return;
+        }
+}
+
+static void
 cc_network_panel_init (CcNetworkPanel *panel)
 {
         DBusGConnection *bus = NULL;
@@ -1925,7 +1959,8 @@ cc_network_panel_init (CcNetworkPanel *panel)
         /* disable for now, until we actually show removable connections */
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "remove_toolbutton"));
-        gtk_widget_set_sensitive (widget, FALSE);
+        g_signal_connect (widget, "clicked",
+                          G_CALLBACK (remove_connection), panel);
 
         /* nothing to unlock yet */
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
