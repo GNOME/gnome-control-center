@@ -357,8 +357,7 @@ dialog_response_cb (GtkDialog *dialog, gint response_id, gpointer user_data)
 GtkWidget *
 gnome_mouse_properties_init (GtkBuilder *dialog)
 {
-	GtkWidget      *dialog_win, *w;
-	gchar *start_page = NULL;
+	GtkWidget      *dialog_win;
 
 	mouse_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.mouse");
 	touchpad_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.touchpad");
@@ -371,26 +370,6 @@ gnome_mouse_properties_init (GtkBuilder *dialog)
 		dialog_win = WID ("mouse_properties_dialog");
 		g_signal_connect (dialog_win, "response",
 				  G_CALLBACK (dialog_response_cb), NULL);
-
-		if (start_page != NULL) {
-			gchar *page_name;
-
-			page_name = g_strconcat (start_page, "_vbox", NULL);
-			g_free (start_page);
-
-			w = WID (page_name);
-			if (w != NULL) {
-				GtkNotebook *nb;
-				gint pindex;
-
-				nb = GTK_NOTEBOOK (WID ("prefs_widget"));
-				pindex = gtk_notebook_page_num (nb, w);
-				if (pindex != -1)
-					gtk_notebook_set_current_page (nb, pindex);
-			}
-			g_free (page_name);
-		}
-
 	} else {
 		dialog_win = NULL;
 	}
