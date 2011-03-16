@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-15 08:33+0100\n"
-"PO-Revision-Date: 2011-03-15 10:32+0100\n"
+"POT-Creation-Date: 2011-03-16 07:34+0100\n"
+"PO-Revision-Date: 2011-03-16 07:34+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -53,7 +53,7 @@ msgid "Lock"
 msgstr "Lås"
 
 #: ../libgnome-control-center/cc-lockbutton.c:356
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:22
 msgid "Unlock"
 msgstr "Lås upp"
 
@@ -1430,7 +1430,7 @@ msgstr "Enhetstyper"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
 #: ../panels/printers/pp-new-printer-dialog.c:865
-#: ../panels/printers/pp-new-printer-dialog.c:1031
+#: ../panels/printers/pp-new-printer-dialog.c:1033
 msgid "Automatic configuration"
 msgstr "Automatisk konfiguration"
 
@@ -1482,7 +1482,6 @@ msgstr "Modell"
 
 #. Translators: This button opens printer's options tab
 #: ../panels/printers/printers.ui.h:16
-#: ../panels/network/network.ui.h:13
 msgid "Options"
 msgstr "Alternativ"
 
@@ -1569,6 +1568,7 @@ msgid "View and edit keyboard layout options"
 msgstr "Visa och redigera alternativ för tangentbordslayout"
 
 #: ../panels/region/gnome-region-panel.ui.h:14
+#: ../panels/network/network.ui.h:32
 msgid "_Options..."
 msgstr "A_lternativ..."
 
@@ -1588,7 +1588,7 @@ msgstr "Välj en inmatningskälla att lägga till"
 msgid "Keyboard Layout Options"
 msgstr "Alternativ för tangentbordslayout"
 
-#: ../panels/region/gnome-region-panel-xkblt.c:220
+#: ../panels/region/gnome-region-panel-xkblt.c:222
 msgid "Layout"
 msgstr "Layout"
 
@@ -1730,60 +1730,60 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Pekplatta;Muspekare;Klick;Tap;Dubbel;Knapp;Trackball;"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:751
+#: ../panels/network/cc-network-panel.c:757
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:755
+#: ../panels/network/cc-network-panel.c:761
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:759
+#: ../panels/network/cc-network-panel.c:765
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:764
+#: ../panels/network/cc-network-panel.c:770
 msgid "Enterprise"
 msgstr "Enterprise"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:770
+#: ../panels/network/cc-network-panel.c:776
 #: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "Ingen"
 
 #. TRANSLATORS: this is a wired connection that is disconnected
-#: ../panels/network/cc-network-panel.c:945
+#: ../panels/network/cc-network-panel.c:1027
 msgid "Unplugged"
 msgstr "Ej ansluten"
 
-#: ../panels/network/cc-network-panel.c:1306
+#: ../panels/network/cc-network-panel.c:1443
 msgid "Network proxy"
 msgstr "Nätverksproxyserver"
 
-#: ../panels/network/cc-network-panel.c:1315
+#: ../panels/network/cc-network-panel.c:1452
 msgid "Set the system proxy settings"
 msgstr "Ställ in systemets proxyinställningar"
 
-#: ../panels/network/cc-network-panel.c:1412
+#: ../panels/network/cc-network-panel.c:1553
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: ../panels/network/cc-network-panel.c:1424
+#: ../panels/network/cc-network-panel.c:1565
 msgid "Virtual private network"
 msgstr "Virtuellt privat nätverk"
 
 #. TRANSLATORS: the user is running a NM that is too new and API compatible
-#: ../panels/network/cc-network-panel.c:1483
+#: ../panels/network/cc-network-panel.c:1624
 msgid "The running NetworkManager version is not compatible (too new)."
 msgstr "Den körande versionen av Nätverkshanterare är inte kompatibel (för ny)."
 
 #. TRANSLATORS: the user is running a NM that is too old and API compatible
-#: ../panels/network/cc-network-panel.c:1489
+#: ../panels/network/cc-network-panel.c:1630
 msgid "The running NetworkManager version is not compatible (too old)."
 msgstr "Den körande versionen av Nätverkshanterare är inte kompatibel (för gammal)."
 
@@ -1801,121 +1801,143 @@ msgid "Air_plane Mode"
 msgstr "Fly_gplansläge"
 
 #: ../panels/network/network.ui.h:2
+msgid "Create..."
+msgstr "Skapa..."
+
+#: ../panels/network/network.ui.h:3
 msgid "DNS:"
 msgstr "DNS:"
 
-#: ../panels/network/network.ui.h:3
+#: ../panels/network/network.ui.h:4
+msgid "DSL"
+msgstr "DSL"
+
+#: ../panels/network/network.ui.h:5
 msgid "Default Route:"
 msgstr "Standardrutt:"
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:6
 msgid "Gateway:"
 msgstr "Gateway:"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:7
 msgid "Group Name:"
 msgstr "Gruppnamn:"
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:8
 msgid "Group Password:"
 msgstr "Grupplösenord:"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:9
 msgid "H_TTPS Proxy:"
 msgstr "HTTP_S-proxyserver:"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:10
 msgid "Hardware Address:"
 msgstr "Maskinvaruadress:"
 
-#: ../panels/network/network.ui.h:9
+#: ../panels/network/network.ui.h:11
 msgid "IMEI:"
 msgstr "IMEI:"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:12
 msgid "IP Address:"
 msgstr "IP-adress:"
 
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:13
 msgid "IPv4 Address:"
 msgstr "IPv4-adress:"
 
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:14
 msgid "IPv6 Address:"
 msgstr "IPv6-adress:"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:15
+msgid "Interface:"
+msgstr "Gränssnitt:"
+
+#: ../panels/network/network.ui.h:16
+msgid "Mobile Broadband"
+msgstr "Mobilt bredband"
+
+#: ../panels/network/network.ui.h:17
 msgid "Provider:"
 msgstr "Leverantör:"
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:18
 msgid "Security:"
 msgstr "Säkerhet:"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:19
+msgid "Select the interface to use for the new service"
+msgstr "Välj det gränssnitt att använda för den nya tjänsten"
+
+#: ../panels/network/network.ui.h:20
 msgid "Speed:"
 msgstr "Hastighet:"
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:21
 msgid "Subnet Mask:"
 msgstr "Delnätsmask:"
 
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:23
 msgid "Username:"
 msgstr "Användarnamn:"
 
-#: ../panels/network/network.ui.h:20
-msgid "_Configuration URL:"
-msgstr "_URL för konfiguration:"
-
-#: ../panels/network/network.ui.h:21
-msgid "_FTP Proxy:"
-msgstr "_FTP-proxyserver:"
-
-#: ../panels/network/network.ui.h:22
-msgid "_HTTP Proxy:"
-msgstr "_HTTP-proxyserver:"
-
-#: ../panels/network/network.ui.h:23
-msgid "_Method:"
-msgstr "_Metod:"
-
 #: ../panels/network/network.ui.h:24
-msgid "_Network Name:"
-msgstr "Nät_verksnamn:"
-
-#: ../panels/network/network.ui.h:25
-msgid "_Options"
-msgstr "A_lternativ"
-
-#: ../panels/network/network.ui.h:26
-msgid "_Socks Host:"
-msgstr "So_cks-värd:"
-
-#: ../panels/network/network.ui.h:27
-msgctxt "proxy method"
-msgid "Automatic"
-msgstr "Automatiskt"
-
-#: ../panels/network/network.ui.h:28
-msgctxt "proxy method"
-msgid "Manual"
-msgstr "Manuell"
-
-#: ../panels/network/network.ui.h:29
-msgctxt "proxy method"
-msgid "None"
-msgstr "Ingen"
+msgid "VPN"
+msgstr "VPN"
 
 #. TRANSLATORS: device type
+#: ../panels/network/network.ui.h:25
 #: ../panels/network/panel-common.c:82
 msgid "Wired"
 msgstr "Trådat"
 
 #. TRANSLATORS: device type
+#: ../panels/network/network.ui.h:26
 #: ../panels/network/panel-common.c:86
 msgid "Wireless"
 msgstr "Trådlöst"
+
+#: ../panels/network/network.ui.h:27
+msgid "_Configuration URL:"
+msgstr "_URL för konfiguration:"
+
+#: ../panels/network/network.ui.h:28
+msgid "_FTP Proxy:"
+msgstr "_FTP-proxyserver:"
+
+#: ../panels/network/network.ui.h:29
+msgid "_HTTP Proxy:"
+msgstr "_HTTP-proxyserver:"
+
+#: ../panels/network/network.ui.h:30
+msgid "_Method:"
+msgstr "_Metod:"
+
+#: ../panels/network/network.ui.h:31
+msgid "_Network Name:"
+msgstr "Nät_verksnamn:"
+
+#: ../panels/network/network.ui.h:33
+msgid "_Socks Host:"
+msgstr "So_cks-värd:"
+
+#: ../panels/network/network.ui.h:34
+msgctxt "proxy method"
+msgid "Automatic"
+msgstr "Automatiskt"
+
+#: ../panels/network/network.ui.h:35
+msgctxt "proxy method"
+msgid "Manual"
+msgstr "Manuell"
+
+#: ../panels/network/network.ui.h:36
+msgctxt "proxy method"
+msgid "None"
+msgstr "Ingen"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:93
@@ -3483,6 +3505,8 @@ msgstr "Kontrollpanel"
 msgid "_All Settings"
 msgstr "_Alla inställningar"
 
+#~ msgid "_Options"
+#~ msgstr "A_lternativ"
 #~ msgid "Secure HTTP Proxy:"
 #~ msgstr "Proxyserver för säker HTTP:"
 #~ msgid "Could not connect to system bus: %s"
@@ -3761,8 +3785,6 @@ msgstr "_Alla inställningar"
 #~ msgstr "<b>_Manuell konfiguration av proxyserver</b>"
 #~ msgid "<b>_Use authentication</b>"
 #~ msgstr "<b>_Använd autentisering</b>"
-#~ msgid "C_reate"
-#~ msgstr "Ska_pa"
 #~ msgid "Create New Location"
 #~ msgstr "Skapa ny plats"
 #~ msgid "HTTP Proxy Details"
@@ -4911,8 +4933,6 @@ msgstr "_Alla inställningar"
 #~ msgstr "Redigera"
 #~ msgid "Fill screen"
 #~ msgstr "Fyll skärmen"
-#~ msgid "Interface"
-#~ msgstr "Gränssnitt"
 #~ msgid "Menus and Toolbars"
 #~ msgstr "Menyer och verktygsrader"
 #~ msgid "Show _icons in menus"
