@@ -26,4 +26,5 @@
 #include <gtk/gtk.h>
 
 GtkWidget *gnome_mouse_properties_init (GtkBuilder *dialog);
+void       gnome_mouse_properties_dispose (GtkWidget *widget);
 

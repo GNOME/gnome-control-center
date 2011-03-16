@@ -397,3 +397,16 @@ gnome_mouse_properties_init (GtkBuilder *dialog)
 
 	return dialog_win;
 }
+
+void
+gnome_mouse_properties_dispose (GtkWidget *widget)
+{
+	if (mouse_settings != NULL) {
+		g_object_unref (mouse_settings);
+		mouse_settings = NULL;
+	}
+	if (touchpad_settings != NULL) {
+		g_object_unref (touchpad_settings);
+		touchpad_settings = NULL;
+	}
+}
