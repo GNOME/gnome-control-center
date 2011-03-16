@@ -285,35 +285,33 @@ setup_dialog (GtkBuilder *dialog)
 
 	/* Trackpad page */
 	if (touchpad_is_present () == FALSE)
-		gtk_notebook_remove_page (GTK_NOTEBOOK (WID ("prefs_widget")), -1);
-	else {
-		g_settings_bind (touchpad_settings, "disable-while-typing",
-				 WID ("disable_w_typing_toggle"), "active",
-				 G_SETTINGS_BIND_DEFAULT);
-		g_settings_bind (touchpad_settings, "tap-to-click",
-				 WID ("tap_to_click_toggle"), "active",
-				 G_SETTINGS_BIND_DEFAULT);
-		g_settings_bind (touchpad_settings, "horiz-scroll-enabled",
-				 WID ("horiz_scroll_toggle"), "active",
-				 G_SETTINGS_BIND_DEFAULT);
-		g_settings_bind (touchpad_settings, "motion-acceleration",
-				 gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad_accel_scale"))), "value",
-				 G_SETTINGS_BIND_DEFAULT);
-		g_settings_bind (touchpad_settings, "motion-threshold",
-				 gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad_sensitivity_scale"))), "value",
-				 G_SETTINGS_BIND_DEFAULT);
+		gtk_widget_hide (WID ("touchpad_vbox"));
 
-		g_signal_connect (WID ("scroll_disabled_radio"), "toggled",
-				  G_CALLBACK (scrollmethod_changed_event), dialog);
-		g_signal_connect (WID ("scroll_edge_radio"), "toggled",
-				  G_CALLBACK (scrollmethod_changed_event), dialog);
-		g_signal_connect (WID ("scroll_twofinger_radio"), "toggled",
-				  G_CALLBACK (scrollmethod_changed_event), dialog);
+	g_settings_bind (touchpad_settings, "disable-while-typing",
+			 WID ("disable_w_typing_toggle"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (touchpad_settings, "tap-to-click",
+			 WID ("tap_to_click_toggle"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (touchpad_settings, "horiz-scroll-enabled",
+			 WID ("horiz_scroll_toggle"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (touchpad_settings, "motion-acceleration",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad_accel_scale"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (touchpad_settings, "motion-threshold",
+			 gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad_sensitivity_scale"))), "value",
+			 G_SETTINGS_BIND_DEFAULT);
 
-		synaptics_check_capabilities (dialog);
-		setup_scrollmethod_radios (dialog);
-	}
+	g_signal_connect (WID ("scroll_disabled_radio"), "toggled",
+			  G_CALLBACK (scrollmethod_changed_event), dialog);
+	g_signal_connect (WID ("scroll_edge_radio"), "toggled",
+			  G_CALLBACK (scrollmethod_changed_event), dialog);
+	g_signal_connect (WID ("scroll_twofinger_radio"), "toggled",
+			  G_CALLBACK (scrollmethod_changed_event), dialog);
 
+	synaptics_check_capabilities (dialog);
+	setup_scrollmethod_radios (dialog);
 }
 
 /* Construct the dialog */
