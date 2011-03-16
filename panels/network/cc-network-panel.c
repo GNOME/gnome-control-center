@@ -816,6 +816,29 @@ find_device_by_udi (CcNetworkPanel *panel,
         return NULL;
 }
 
+static NetDevice *
+get_selected_composite_device (CcNetworkPanel *panel)
+{
+        GtkWidget *widget;
+        GtkTreeSelection *selection;
+        GtkTreeModel *model;
+        GtkTreeIter iter;
+        NetDevice *device = NULL;
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "treeview_devices"));
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+        if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
+                return NULL;
+        }
+
+        gtk_tree_model_get (model, &iter,
+                            PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, &device,
+                            -1);
+
+        return device;
+}
+
 static void
 device_off_toggled (GtkSwitch      *sw,
                     GParamSpec     *pspec,
@@ -828,6 +851,38 @@ device_off_toggled (GtkSwitch      *sw,
                 return;
 
         active = gtk_switch_get_active (sw);
+
+        if (panel->priv->current_device == NULL) {
+                /* Must be VPN, proxy has no off switch */
+                NetDevice *net_dev = get_selected_composite_device (panel);
+
+                if (NET_IS_VPN (net_dev)) {
+                        NMConnection *connection;
+                        const gchar *path;
+
+                        connection = net_vpn_get_connection (NET_VPN (net_dev));
+                        path = nm_connection_get_path (connection);
+                        if (active)
+                                nm_client_activate_connection (panel->priv->client,
+                                                               path, NULL, NULL, NULL, NULL);
+                        else {
+                                NMActiveConnection *a;
+                                const GPtrArray *acs;
+                                gint i;
+
+                                acs = nm_client_get_active_connections (panel->priv->client);
+                                for (i = 0; i < acs->len; i++) {
+                                        a = (NMActiveConnection*)acs->pdata[i];
+                                        if (strcmp (nm_active_connection_get_connection (a), path) == 0) {
+                                                nm_client_deactivate_connection (panel->priv->client, a);
+                                                break;
+                                        }
+                                }
+                        }
+                }
+
+                return;
+        }
 
         device = find_device_by_udi (panel, panel->priv->current_device);
 
@@ -1196,7 +1251,7 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
 
         sw = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                  "device_off_switch"));
-        gtk_widget_set_visible (sw, FALSE);
+        gtk_widget_set_visible (sw, TRUE);
 
         /* use proxy note page */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
