@@ -26,6 +26,7 @@
 
 #include "net-vpn.h"
 #include "nm-setting-vpn.h"
+#include "nm-remote-connection.h"
 
 #define NET_VPN_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_VPN, NetVpnPrivate))
 
@@ -33,17 +34,35 @@ struct _NetVpnPrivate
 {
         NMSettingVPN            *setting;
         NMConnection            *connection;
+        gboolean                 valid;
 };
 
 G_DEFINE_TYPE (NetVpn, net_vpn, NET_TYPE_OBJECT)
 
 static void
-connection_state_changed_cb (NMVPNConnection *connection,
-                             NMVPNConnectionState state,
-                             NMVPNConnectionStateReason reason,
-                             NetVpn *vpn)
+connection_vpn_state_changed_cb (NMVPNConnection *connection,
+                                 NMVPNConnectionState state,
+                                 NMVPNConnectionStateReason reason,
+                                 NetVpn *vpn)
 {
         net_object_emit_changed (NET_OBJECT (vpn));
+}
+
+static void
+connection_changed_cb (NMConnection *connection,
+                       NetVpn *vpn)
+{
+        net_object_emit_changed (NET_OBJECT (vpn));
+}
+
+static void
+connection_removed_cb (NMConnection *connection,
+                       NetVpn *vpn)
+{
+        if (vpn->priv->setting == NULL)
+                return;
+        net_object_emit_removed (NET_OBJECT (vpn));
+        vpn->priv->setting = NULL;
 }
 
 void
@@ -60,10 +79,18 @@ net_vpn_set_connection (NetVpn *vpn, NMConnection *connection)
          * key=Xauth username, value=rhughes
          */
         priv->connection = g_object_ref (connection);
+        g_signal_connect (priv->connection,
+                          NM_REMOTE_CONNECTION_REMOVED,
+                          G_CALLBACK (connection_removed_cb),
+                          vpn);
+        g_signal_connect (priv->connection,
+                          NM_REMOTE_CONNECTION_UPDATED,
+                          G_CALLBACK (connection_changed_cb),
+                          vpn);
         if (NM_IS_VPN_CONNECTION (priv->connection)) {
                 g_signal_connect (priv->connection,
                                   NM_VPN_CONNECTION_VPN_STATE,
-                                  G_CALLBACK (connection_state_changed_cb),
+                                  G_CALLBACK (connection_vpn_state_changed_cb),
                                   vpn);
         }
         priv->setting = NM_SETTING_VPN (g_object_ref (nm_connection_get_setting_by_name (connection, "vpn")));
@@ -119,7 +146,8 @@ net_vpn_finalize (GObject *object)
         NetVpnPrivate *priv = vpn->priv;
 
         g_object_unref (priv->connection);
-        g_object_unref (priv->setting);
+        if (priv->setting != NULL)
+                g_object_unref (priv->setting);
 
         G_OBJECT_CLASS (net_vpn_parent_class)->finalize (object);
 }

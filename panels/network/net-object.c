@@ -30,11 +30,13 @@
 
 struct _NetObjectPrivate
 {
+        gchar                           *id;
         gchar                           *title;
 };
 
 enum {
         SIGNAL_CHANGED,
+        SIGNAL_REMOVED,
         SIGNAL_LAST
 };
 
@@ -45,22 +47,44 @@ void
 net_object_emit_changed (NetObject *object)
 {
         g_return_if_fail (NET_IS_OBJECT (object));
-        g_debug ("NetObject: emit 'changed'");
+        g_debug ("NetObject: %s emit 'changed'", object->priv->id);
         g_signal_emit (object, signals[SIGNAL_CHANGED], 0);
+}
+
+void
+net_object_emit_removed (NetObject *object)
+{
+        g_return_if_fail (NET_IS_OBJECT (object));
+        g_debug ("NetObject: %s emit 'removed'", object->priv->id);
+        g_signal_emit (object, signals[SIGNAL_REMOVED], 0);
+}
+
+const gchar *
+net_object_get_id (NetObject *object)
+{
+        g_return_val_if_fail (NET_IS_OBJECT (object), NULL);
+        return object->priv->id;
+}
+
+void
+net_object_set_id (NetObject *object, const gchar *id)
+{
+        g_return_if_fail (NET_IS_OBJECT (object));
+        object->priv->id = g_strdup (id);
 }
 
 const gchar *
 net_object_get_title (NetObject *object)
 {
-        NetObjectPrivate *priv = object->priv;
-        return priv->title;
+        g_return_val_if_fail (NET_IS_OBJECT (object), NULL);
+        return object->priv->title;
 }
 
 void
 net_object_set_title (NetObject *object, const gchar *title)
 {
-        NetObjectPrivate *priv = object->priv;
-        priv->title = g_strdup (title);
+        g_return_if_fail (NET_IS_OBJECT (object));
+        object->priv->title = g_strdup (title);
 }
 
 static void
@@ -69,6 +93,7 @@ net_object_finalize (GObject *object)
         NetObject *nm_object = NET_OBJECT (object);
         NetObjectPrivate *priv = nm_object->priv;
 
+        g_free (priv->id);
         g_free (priv->title);
 
         G_OBJECT_CLASS (net_object_parent_class)->finalize (object);
@@ -80,11 +105,14 @@ net_object_class_init (NetObjectClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         object_class->finalize = net_object_finalize;
 
-        /**
-         * NetObject::changed:
-         **/
         signals[SIGNAL_CHANGED] =
                 g_signal_new ("changed",
+                              G_TYPE_FROM_CLASS (object_class), G_SIGNAL_RUN_LAST,
+                              G_STRUCT_OFFSET (NetObjectClass, changed),
+                              NULL, NULL, g_cclosure_marshal_VOID__VOID,
+                              G_TYPE_NONE, 0);
+        signals[SIGNAL_REMOVED] =
+                g_signal_new ("removed",
                               G_TYPE_FROM_CLASS (object_class), G_SIGNAL_RUN_LAST,
                               G_STRUCT_OFFSET (NetObjectClass, changed),
                               NULL, NULL, g_cclosure_marshal_VOID__VOID,
