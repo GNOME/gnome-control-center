@@ -32,6 +32,7 @@ G_DEFINE_DYNAMIC_TYPE (CcMousePanel, cc_mouse_panel, CC_TYPE_PANEL)
 struct _CcMousePanelPrivate
 {
   GtkBuilder *builder;
+  GtkWidget  *widget;
 };
 
 
@@ -66,6 +67,12 @@ cc_mouse_panel_dispose (GObject *object)
 {
   CcMousePanelPrivate *priv = CC_MOUSE_PANEL (object)->priv;
 
+  if (priv->widget)
+    {
+      gnome_mouse_properties_dispose (priv->widget);
+      priv->widget = NULL;
+    }
+
   if (priv->builder)
     {
       g_object_unref (priv->builder);
@@ -73,12 +80,6 @@ cc_mouse_panel_dispose (GObject *object)
     }
 
   G_OBJECT_CLASS (cc_mouse_panel_parent_class)->dispose (object);
-}
-
-static void
-cc_mouse_panel_finalize (GObject *object)
-{
-  G_OBJECT_CLASS (cc_mouse_panel_parent_class)->finalize (object);
 }
 
 static void
@@ -91,7 +92,6 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   object_class->get_property = cc_mouse_panel_get_property;
   object_class->set_property = cc_mouse_panel_set_property;
   object_class->dispose = cc_mouse_panel_dispose;
-  object_class->finalize = cc_mouse_panel_finalize;
 }
 
 static void
@@ -119,7 +119,7 @@ cc_mouse_panel_init (CcMousePanel *self)
       return;
     }
 
-  gnome_mouse_properties_init (priv->builder);
+  priv->widget = gnome_mouse_properties_init (priv->builder);
 
   prefs_widget = (GtkWidget*) gtk_builder_get_object (priv->builder,
                                                       "prefs_widget");
