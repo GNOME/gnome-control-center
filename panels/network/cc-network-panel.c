@@ -885,17 +885,19 @@ device_off_toggled (GtkSwitch      *sw,
 
                 if (NET_IS_VPN (net_dev)) {
                         NMConnection *connection;
-                        const gchar *path;
 
                         connection = net_vpn_get_connection (NET_VPN (net_dev));
-                        path = nm_connection_get_path (connection);
                         if (active)
                                 nm_client_activate_connection (panel->priv->client,
-                                                               path, NULL, NULL, NULL, NULL);
+                                                               connection, NULL, NULL,
+                                                               NULL, NULL);
                         else {
+                                const gchar *path;
                                 NMActiveConnection *a;
                                 const GPtrArray *acs;
                                 gint i;
+
+                                path = nm_connection_get_path (connection);
 
                                 acs = nm_client_get_active_connections (panel->priv->client);
                                 for (i = 0; i < acs->len; i++) {
