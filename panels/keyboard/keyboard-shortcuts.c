@@ -87,6 +87,7 @@ static GtkWidget *custom_shortcut_command_entry = NULL;
 static GHashTable *kb_system_sections = NULL;
 static GHashTable *kb_apps_sections = NULL;
 static GHashTable *kb_user_sections = NULL;
+static guint workspace_num_notify_id = 0;
 
 static void
 free_key_array (GPtrArray *keys)
@@ -1794,10 +1795,10 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
 
   gconf_client_add_dir (client, GCONF_BINDING_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
   gconf_client_add_dir (client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-  gconf_client_notify_add (client,
-                           "/apps/metacity/general/num_workspaces",
-                           (GConfClientNotifyFunc) key_entry_controlling_key_changed,
-                           builder, NULL, NULL);
+  workspace_num_notify_id = gconf_client_notify_add (client,
+                                                     "/apps/metacity/general/num_workspaces",
+                                                     (GConfClientNotifyFunc) key_entry_controlling_key_changed,
+                                                     builder, NULL, NULL);
 
   model = gtk_list_store_new (DETAIL_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
   gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model),
@@ -1918,6 +1919,14 @@ keyboard_shortcuts_dispose (CcPanel *panel)
         {
           g_hash_table_destroy (kb_user_sections);
           kb_user_sections = NULL;
+        }
+      if (workspace_num_notify_id != 0)
+        {
+          GConfClient *client;
+          client = gconf_client_get_default ();
+          gconf_client_notify_remove (client, workspace_num_notify_id);
+          workspace_num_notify_id = 0;
+          g_object_unref (client);
         }
     }
 }
