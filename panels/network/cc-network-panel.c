@@ -1192,11 +1192,11 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
         /* show the header */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "hbox_device_header"));
-        gtk_widget_set_visible (widget, FALSE);
+        gtk_widget_set_visible (widget, TRUE);
 
         sw = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                  "device_off_switch"));
-        gtk_widget_set_visible (sw, TRUE);
+        gtk_widget_set_visible (sw, FALSE);
 
         /* use proxy note page */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
