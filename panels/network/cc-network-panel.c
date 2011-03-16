@@ -131,6 +131,10 @@ cc_network_panel_dispose (GObject *object)
                 g_object_unref (priv->client);
                 priv->client = NULL;
         }
+        if (priv->remote_settings != NULL) {
+                g_object_unref (priv->remote_settings);
+                priv->remote_settings = NULL;
+        }
 
         G_OBJECT_CLASS (cc_network_panel_parent_class)->dispose (object);
 }
@@ -1319,14 +1323,19 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
 }
 
 static void
-nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *panel)
+refresh_ui (CcNetworkPanel *panel)
 {
+        GtkTreeSelection *selection;
         GtkTreeIter iter;
         GtkTreeModel *model;
         GtkWidget *widget;
         NMDevice *device;
-        NetObject *object;
+        NetDevice *object = NULL;
         CcNetworkPanelPrivate *priv = panel->priv;
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "treeview_devices"));
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
 
         /* will only work in single or browse selection mode! */
         if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
@@ -1334,10 +1343,7 @@ nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *pan
                 goto out;
         }
 
-        /* get id */
-        gtk_tree_model_get (model, &iter,
-                            PANEL_DEVICES_COLUMN_COMPOSITE_DEVICE, &object,
-                            -1);
+        object = get_selected_composite_device (panel);
 
         /* this is the proxy settings device */
         if (object == NULL) {
@@ -1372,6 +1378,12 @@ nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *pan
         nm_device_refresh_device_ui (panel, device);
 out:
         return;
+}
+
+static void
+nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *panel)
+{
+        refresh_ui (panel);
 }
 
 static void
@@ -1414,6 +1426,7 @@ cc_network_panel_notify_enable_active_cb (GtkSwitch *sw,
 static void
 active_connections_changed (NMClient *client, GParamSpec *pspec, gpointer user_data)
 {
+        CcNetworkPanel *panel = user_data;
         const GPtrArray *connections;
         int i, j;
 
@@ -1431,6 +1444,8 @@ active_connections_changed (NMClient *client, GParamSpec *pspec, gpointer user_d
                 if (NM_IS_VPN_CONNECTION (connection))
                         g_debug ("           VPN base connection: %s", nm_active_connection_get_specific_object (connection));
         }
+
+        refresh_ui (panel);
 }
 
 static void
