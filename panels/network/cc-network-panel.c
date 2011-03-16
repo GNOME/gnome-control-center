@@ -843,6 +843,29 @@ get_selected_composite_device (CcNetworkPanel *panel)
         return device;
 }
 
+static NMConnection *
+find_connection_for_device (CcNetworkPanel *panel,
+                            NMDevice       *device)
+{
+        const GPtrArray *connections;
+        const GPtrArray *devices;
+        NMActiveConnection *c;
+        gint i;
+
+        connections = nm_client_get_active_connections (panel->priv->client);
+
+        for (i = 0; i < connections->len; i++) {
+                c = (NMActiveConnection *)connections->pdata[i];
+
+                devices = nm_active_connection_get_devices (c);
+                if (devices->pdata[0] == device) {
+                        return (NMConnection *)nm_remote_settings_get_connection_by_path (panel->priv->remote_settings, nm_active_connection_get_connection (c));
+                }
+        }
+
+        return NULL;
+}
+
 static void
 device_off_toggled (GtkSwitch      *sw,
                     GParamSpec     *pspec,
@@ -977,9 +1000,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NMDevice *device)
         gtk_widget_set_visible (widget, TRUE);
 
         type = nm_device_get_device_type (device);
-        g_debug ("device %s type %i",
-                 nm_device_get_udi (device),
-                 type);
+        g_debug ("device %s type %i", nm_device_get_udi (device), type);
 
         /* set device icon */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
@@ -1000,13 +1021,31 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NMDevice *device)
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "label_status"));
         str = panel_device_state_to_localized_string (state);
-        if (nm_device_get_device_type (device) == NM_DEVICE_TYPE_ETHERNET &&
+        if (type == NM_DEVICE_TYPE_ETHERNET &&
             (state == NM_DEVICE_STATE_UNAVAILABLE)) {
                 /* TRANSLATORS: this is a wired connection that is disconnected */
                 str = _("Unplugged");
         }
         gtk_label_set_label (GTK_LABEL (widget), str);
 
+        /* set up the options button */
+        switch (type) {
+        case NM_DEVICE_TYPE_ETHERNET:
+                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                             "button_wired_options"));
+                gtk_widget_set_sensitive (widget, state == NM_DEVICE_STATE_ACTIVATED);
+                break;
+        case NM_DEVICE_TYPE_WIFI:
+                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                             "button_wireless_options"));
+                gtk_widget_set_sensitive (widget, state == NM_DEVICE_STATE_ACTIVATED);
+                break;
+                break;
+        default:
+                break;
+        }
+
+        /* set up the device on/off switch */
         sw = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                  "device_off_switch"));
         /* keep this in sync with the signal handler setup in cc_network_panel_init */
@@ -1256,6 +1295,11 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
         sw = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                  "device_off_switch"));
         gtk_widget_set_visible (sw, TRUE);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "button_vpn_options"));
+        gtk_widget_set_visible (widget, TRUE);
+        gtk_widget_set_sensitive (widget, TRUE);
 
         /* use proxy note page */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
@@ -1605,6 +1649,37 @@ out:
 }
 
 static void
+edit_connection (GtkButton *button, CcNetworkPanel *panel)
+{
+        NMConnection *c;
+        const gchar *uuid;
+        gchar *cmdline;
+        GError *error;
+        NetDevice *net_dev;
+        NMDevice *device;
+
+        net_dev = get_selected_composite_device (panel);
+        if (net_dev == NULL)
+                return;
+        else if (NET_IS_VPN (net_dev)) {
+                c = net_vpn_get_connection (NET_VPN (net_dev));
+        }
+        else {
+                device = net_device_get_nm_device (net_dev);
+                c = find_connection_for_device (panel, device);
+        }
+
+        uuid = nm_connection_get_uuid (c);
+        cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
+        error = NULL;
+        if (!g_spawn_command_line_async (cmdline, &error)) {
+                g_warning ("Failed to launch nm-connection-editor: %s", error->message);
+                g_error_free (error);
+        }
+        g_free (cmdline);
+}
+
+static void
 cc_network_panel_init (CcNetworkPanel *panel)
 {
         DBusGConnection *bus = NULL;
@@ -1779,6 +1854,21 @@ cc_network_panel_init (CcNetworkPanel *panel)
                           G_CALLBACK (wireless_enabled_toggled), panel);
         g_signal_connect (panel->priv->client, "notify::wimax-enabled",
                           G_CALLBACK (wimax_enabled_toggled), panel);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "button_wired_options"));
+        g_signal_connect (widget, "clicked",
+                          G_CALLBACK (edit_connection), panel);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "button_wireless_options"));
+        g_signal_connect (widget, "clicked",
+                          G_CALLBACK (edit_connection), panel);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "button_vpn_options"));
+        g_signal_connect (widget, "clicked",
+                          G_CALLBACK (edit_connection), panel);
 
         /* disable for now, until we can remove connections without
          * segfaulting NM... */
