@@ -1096,7 +1096,8 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                 /* speed */
                 speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (nm_device));
                 if (speed  > 0)
-                        str_tmp = g_strdup_printf ("%d Mb/sec", speed);
+                        /* Translators: network device speed */
+                        str_tmp = g_strdup_printf (_("%d Mb/s"), speed);
                 else
                         str_tmp = NULL;
                 panel_set_widget_data (panel,
@@ -1117,7 +1118,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                 /* speed */
                 speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (nm_device));
                 if (speed > 0)
-                        str_tmp = g_strdup_printf ("%d Mb/s",
+                        str_tmp = g_strdup_printf (_("%d Mb/s"),
                                                    speed / 1000);
                 else
                         str_tmp = NULL;
