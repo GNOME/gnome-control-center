@@ -776,6 +776,8 @@ _shell_set_active_panel_from_id (CcShell      *shell,
     }
   else
     {
+      gtk_notebook_remove_page (GTK_NOTEBOOK (priv->notebook), CAPPLET_PAGE);
+
       activate_panel (GNOME_CONTROL_CENTER (shell), start_id, desktop, name,
                       icon_name);
 
