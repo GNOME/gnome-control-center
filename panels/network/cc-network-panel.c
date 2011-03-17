@@ -38,6 +38,7 @@
 #include "nm-setting-ip6-config.h"
 #include "nm-setting-connection.h"
 #include "nm-setting-vpn.h"
+#include "nm-setting-wireless.h"
 
 #include "net-object.h"
 #include "net-device.h"
