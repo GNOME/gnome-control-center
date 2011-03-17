@@ -627,7 +627,7 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
         CcNetworkPanelPrivate *priv = panel->priv;
         const GByteArray *ssid;
         const gchar *ssid_text;
-        const gchar *bssid;
+        const gchar *object_path;
         GtkListStore *liststore_wireless_network;
         GtkTreeIter treeiter;
         GtkWidget *widget;
@@ -640,11 +640,11 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
         liststore_wireless_network = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                                      "liststore_wireless_network"));
 
-        bssid = nm_access_point_get_bssid (ap);
+        object_path = nm_object_get_path (NM_OBJECT (ap));
         gtk_list_store_append (liststore_wireless_network, &treeiter);
         gtk_list_store_set (liststore_wireless_network,
                             &treeiter,
-                            PANEL_WIRELESS_COLUMN_ID, bssid,
+                            PANEL_WIRELESS_COLUMN_ID, object_path,
                             PANEL_WIRELESS_COLUMN_TITLE, ssid_text,
                             PANEL_WIRELESS_COLUMN_SORT, ssid_text,
                             PANEL_WIRELESS_COLUMN_STRENGTH, nm_access_point_get_strength (ap),
@@ -654,7 +654,8 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
         /* is this what we're on already? */
         if (active == NULL)
                 return;
-        if (g_strcmp0 (bssid, nm_access_point_get_bssid (active)) == 0) {
+        if (g_strcmp0 (object_path,
+                       nm_object_get_path (NM_OBJECT (active))) == 0) {
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                              "combobox_network_name"));
                 gtk_combo_box_set_active_iter (GTK_COMBO_BOX (widget), &treeiter);
@@ -1175,6 +1176,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                         gtk_widget_show (widget);
                         liststore_wireless_network = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                                                      "liststore_wireless_network"));
+                        priv->updating_device = TRUE;
                         gtk_list_store_clear (liststore_wireless_network);
                         aps = nm_device_wifi_get_access_points (NM_DEVICE_WIFI (nm_device));
                         aps_unique = panel_get_strongest_unique_aps (aps);
@@ -1183,6 +1185,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                                 ap = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, i));
                                 add_access_point (panel, ap, active_ap);
                         }
+                        priv->updating_device = FALSE;
 
                         g_ptr_array_unref (aps_unique);
                 }
@@ -1870,6 +1873,93 @@ on_toplevel_map (GtkWidget      *widget,
         }
 }
 
+
+static void
+wireless_ap_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
+{
+        const GByteArray *ssid;
+        const gchar *ssid_tmp;
+        gboolean ret;
+        gchar *object_path = NULL;
+        gchar *ssid_target = NULL;
+        GSList *list, *l;
+        GtkTreeIter iter;
+        GtkTreeModel *model;
+        NetObject *object;
+        NMConnection *connection;
+        NMConnection *connection_activate = NULL;
+        NMDevice *device;
+        NMSettingWireless *setting_wireless;
+
+        if (panel->priv->updating_device)
+                goto out;
+
+        ret = gtk_combo_box_get_active_iter (combo_box, &iter);
+        if (!ret)
+                goto out;
+
+        object = get_selected_object (panel);
+        if (object == NULL)
+                goto out;
+
+        device = net_device_get_nm_device (NET_DEVICE (object));
+        if (device == NULL)
+                goto out;
+
+        /* get entry */
+        model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo_box));
+        gtk_tree_model_get (model, &iter,
+                            PANEL_WIRELESS_COLUMN_ID, &object_path,
+                            PANEL_WIRELESS_COLUMN_TITLE, &ssid_target,
+                            -1);
+        g_debug ("try to connect to WIFI network %s [%s]",
+                 ssid_target, object_path);
+
+        /* look for an existing connection we can use */
+        list = nm_remote_settings_list_connections (panel->priv->remote_settings);
+        g_debug ("%i existing remote connections available",
+                 g_slist_length (list));
+        list = nm_device_filter_connections (device, list);
+        g_debug ("%i suitable remote connections to check",
+                 g_slist_length (list));
+        for (l = list; l; l = g_slist_next (l)) {
+                connection = NM_CONNECTION (l->data);
+                setting_wireless = nm_connection_get_setting_wireless (connection);
+                if (!NM_IS_SETTING_WIRELESS (setting_wireless))
+                        continue;
+                ssid = nm_setting_wireless_get_ssid (setting_wireless);
+                if (ssid == NULL)
+                        continue;
+                ssid_tmp = nm_utils_escape_ssid (ssid->data, ssid->len);
+                if (g_strcmp0 (ssid_target, ssid_tmp) == 0) {
+                        g_debug ("we found an existing connection %s to activate!",
+                                 nm_connection_get_id (connection));
+                        connection_activate = connection;
+                        break;
+                }
+        }
+
+        /* activate the connection */
+        if (connection_activate != NULL) {
+                nm_client_activate_connection (panel->priv->client,
+                                               connection_activate, NULL, NULL,
+                                               NULL, NULL);
+                goto out;
+        }
+
+        /* create one, as it's missing */
+        g_debug ("no existing connection found for %s, creating",
+                 ssid_target);
+        nm_client_add_and_activate_connection (panel->priv->client,
+                                               NULL,
+                                               device,
+                                               object_path,
+                                               NULL, NULL);
+out:
+        g_free (ssid_target);
+        g_free (object_path);
+}
+
 static void
 cc_network_panel_init (CcNetworkPanel *panel)
 {
@@ -2002,6 +2092,9 @@ cc_network_panel_init (CcNetworkPanel *panel)
         /* setup wireless combobox model */
         combobox = GTK_COMBO_BOX (gtk_builder_get_object (panel->priv->builder,
                                                           "combobox_network_name"));
+        g_signal_connect (combobox, "changed",
+                          G_CALLBACK (wireless_ap_changed_cb),
+                          panel);
 
         renderer = panel_cell_renderer_mode_new ();
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
