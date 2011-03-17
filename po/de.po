@@ -19,16 +19,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-03-16 21:44+0000\n"
-"PO-Revision-Date: 2011-03-17 13:21+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-03-17 13:25+0100\n"
+"PO-Revision-Date: 2011-03-17 13:27+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: KAider 0.1\n"
 "X-Poedit-Language: German\n"
@@ -71,7 +70,7 @@ msgstr ""
 "Zeichenkette leer lässt, erscheint kein Link."
 
 #: ../libgnome-control-center/cc-lockbutton.c:347
-#: ../panels/screen/screen.ui.h:13
+#: ../panels/screen/screen.ui.h:14
 msgid "Lock"
 msgstr "Sperren"
 
@@ -1493,7 +1492,8 @@ msgstr "Zurück"
 msgid "Default"
 msgstr "Vorgabe"
 
-#: ../panels/printers/printers.ui.h:9
+#: ../panels/printers/printers.ui.h:9 ../panels/network/cc-network-panel.c:1304
+#: ../panels/network/cc-network-panel.c:1307 ../panels/network/network.ui.h:12
 msgid "IP Address"
 msgstr "IP-Adresse"
 
@@ -1766,64 +1766,64 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Trackpad;Zeiger;Mauszeiger;Klick;Doppelklick;Maustaste;Trackball;"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:798
+#: ../panels/network/cc-network-panel.c:812
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:802
+#: ../panels/network/cc-network-panel.c:816
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:806
+#: ../panels/network/cc-network-panel.c:820
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:811
+#: ../panels/network/cc-network-panel.c:825
 msgid "Enterprise"
 msgstr "Enterprise"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:817
+#: ../panels/network/cc-network-panel.c:831
 #: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "Keine"
 
-#. TRANSLATORS: this is a wired connection that is disconnected
-#: ../panels/network/cc-network-panel.c:1037
-msgid "Unplugged"
-msgstr "Nicht angeschlossen"
+#. Translators: network device speed
+#: ../panels/network/cc-network-panel.c:1113
+#: ../panels/network/cc-network-panel.c:1138
+#, c-format
+msgid "%d Mb/s"
+msgstr "%d Mbit/s"
 
-#: ../panels/network/cc-network-panel.c:1459
+#: ../panels/network/cc-network-panel.c:1300 ../panels/network/network.ui.h:13
+msgid "IPv4 Address"
+msgstr "IPv4-Adresse"
+
+#: ../panels/network/cc-network-panel.c:1301 ../panels/network/network.ui.h:14
+msgid "IPv6 Address"
+msgstr "IPv6-Adresse"
+
+#: ../panels/network/cc-network-panel.c:1435
+msgid "Proxy"
+msgstr "Proxy"
+
+#: ../panels/network/cc-network-panel.c:1498
 msgid "Network proxy"
 msgstr "Netzwerk-Proxy"
 
-#: ../panels/network/cc-network-panel.c:1467
-msgid "Set the system proxy settings"
-msgstr "Systemweite Proxy-Einstellungen festlegen"
-
-#: ../panels/network/cc-network-panel.c:1609
+#: ../panels/network/cc-network-panel.c:1647
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: ../panels/network/cc-network-panel.c:1620
-msgid "Virtual private network"
-msgstr "Virtuelles privates Netzwerk"
-
-#. TRANSLATORS: the user is running a NM that is too new and API compatible
-#: ../panels/network/cc-network-panel.c:1695
-msgid "The running NetworkManager version is not compatible (too new)."
+#. TRANSLATORS: the user is running a NM that is not API compatible
+#: ../panels/network/cc-network-panel.c:1714
+msgid "The system network services are not compatible with this version."
 msgstr ""
-"Die Version des laufenden Netzwerk-Managers ist nicht kompatibel (zu neu)."
-
-#. TRANSLATORS: the user is running a NM that is too old and API compatible
-#: ../panels/network/cc-network-panel.c:1701
-msgid "The running NetworkManager version is not compatible (too old)."
-msgstr ""
-"Die Version des laufenden Netzwerk-Managers ist nicht kompatibel (zu alt)."
+"Die Netzwerkdienste des Systems sind mit dieser Version nicht kompatibel."
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Network settings"
@@ -1843,84 +1843,72 @@ msgid "Create..."
 msgstr "Erstellen …"
 
 #: ../panels/network/network.ui.h:3
-msgid "DNS:"
-msgstr "DNS:"
+msgid "DNS"
+msgstr "DNS"
 
 #: ../panels/network/network.ui.h:4
 msgid "DSL"
 msgstr "DSL"
 
 #: ../panels/network/network.ui.h:5
-msgid "Default Route:"
-msgstr "Vorgaberoute:"
+msgid "Default Route"
+msgstr "Vorgaberoute"
 
 #: ../panels/network/network.ui.h:6
-msgid "Gateway:"
-msgstr "Gateway:"
+msgid "Gateway"
+msgstr "Gateway"
 
 #: ../panels/network/network.ui.h:7
-msgid "Group Name:"
-msgstr "Gruppenname:"
+msgid "Group Name"
+msgstr "Gruppenname"
 
 #: ../panels/network/network.ui.h:8
-msgid "Group Password:"
-msgstr "Gruppenpasswort:"
+msgid "Group Password"
+msgstr "Gruppenpasswort"
 
 #: ../panels/network/network.ui.h:9
-msgid "H_TTPS Proxy:"
-msgstr "H_TTPS-Proxy:"
+msgid "H_TTPS Proxy"
+msgstr "H_TTPS-Proxy"
 
 #: ../panels/network/network.ui.h:10
-msgid "Hardware Address:"
-msgstr "Hardware-Adresse:"
+msgid "Hardware Address"
+msgstr "Hardware-Adresse"
 
 #: ../panels/network/network.ui.h:11
-msgid "IMEI:"
-msgstr "IMEI:"
-
-#: ../panels/network/network.ui.h:12
-msgid "IP Address:"
-msgstr "IP-Adresse:"
-
-#: ../panels/network/network.ui.h:13
-msgid "IPv4 Address:"
-msgstr "IPv4-Adresse:"
-
-#: ../panels/network/network.ui.h:14
-msgid "IPv6 Address:"
-msgstr "IPv6-Adresse:"
+msgid "IMEI"
+msgstr "IMEI"
 
 #: ../panels/network/network.ui.h:15
-msgid "Interface:"
-msgstr "Schnittstelle:"
+msgid "Interface"
+msgstr "Schnittstelle"
 
 #: ../panels/network/network.ui.h:16
 msgid "Mobile Broadband"
 msgstr "Mobiles Breitband"
 
 #: ../panels/network/network.ui.h:17
-msgid "Provider:"
-msgstr "Dienstanbieter:"
+msgid "Provider"
+msgstr "Dienstanbieter"
 
 #: ../panels/network/network.ui.h:18
-msgid "Security:"
-msgstr "Sicherheit:"
+msgid "Security"
+msgstr "Sicherheit"
 
 #: ../panels/network/network.ui.h:19
 msgid "Select the interface to use for the new service"
 msgstr "Schnittstelle für das neue Gerät auswählen"
 
 #: ../panels/network/network.ui.h:20
-msgid "Speed:"
-msgstr "Geschwindigkeit:"
+msgid "Speed"
+msgstr "Geschwindigkeit"
 
 #: ../panels/network/network.ui.h:21
-msgid "Subnet Mask:"
-msgstr "Subnetz-Maske:"
+msgid "Subnet Mask"
+msgstr "Subnetz-Maske"
 
 #: ../panels/network/network.ui.h:23
-msgid "Username:"
-msgstr "Benutzername:"
+msgid "Username"
+msgstr "Benutzername"
 
 #: ../panels/network/network.ui.h:24
 msgid "VPN"
@@ -1937,28 +1925,28 @@ msgid "Wireless"
 msgstr "Drahtlos"
 
 #: ../panels/network/network.ui.h:27
-msgid "_Configuration URL:"
-msgstr "_Konfigurationsadresse:"
+msgid "_Configuration URL"
+msgstr "_Konfigurationsadresse"
 
 #: ../panels/network/network.ui.h:28
-msgid "_FTP Proxy:"
-msgstr "_FTP-Proxy:"
+msgid "_FTP Proxy"
+msgstr "_FTP-Proxy"
 
 #: ../panels/network/network.ui.h:29
-msgid "_HTTP Proxy:"
-msgstr "_HTTP-Proxy:"
+msgid "_HTTP Proxy"
+msgstr "_HTTP-Proxy"
 
 #: ../panels/network/network.ui.h:30
-msgid "_Method:"
-msgstr "_Methode:"
+msgid "_Method"
+msgstr "_Methode"
 
 #: ../panels/network/network.ui.h:31
-msgid "_Network Name:"
-msgstr "_Netzwerkname:"
+msgid "_Network Name"
+msgstr "_Netzwerkname"
 
 #: ../panels/network/network.ui.h:33
-msgid "_Socks Host:"
-msgstr "_SOCKS-Rechner:"
+msgid "_Socks Host"
+msgstr "_SOCKS-Rechner"
 
 #: ../panels/network/network.ui.h:34
 msgctxt "proxy method"
@@ -2002,7 +1990,7 @@ msgstr "Infrastruktur"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:183 ../panels/network/panel-common.c:247
+#: ../panels/network/panel-common.c:183 ../panels/network/panel-common.c:241
 msgid "Status unknown"
 msgstr "Status unbekannt"
 
@@ -2011,84 +1999,58 @@ msgstr "Status unbekannt"
 msgid "Unmanaged"
 msgstr "Nicht verwaltet"
 
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:191
+#: ../panels/network/panel-common.c:192
+msgid "Cable unplugged"
+msgstr "Kabel nicht angeschlossen"
+
+#: ../panels/network/panel-common.c:194
 msgid "Unavailable"
 msgstr "Nicht verfügbar"
 
 #. TRANSLATORS: device status
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:195 ../panels/network/panel-common.c:275
+#: ../panels/network/panel-common.c:198
 msgid "Disconnected"
 msgstr "Verbindung getrennt"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:199
-msgid "Preparing connection"
-msgstr "Verbindung wird vorbereitet"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:203
-msgid "Configuring connection"
-msgstr "Verbindung wird konfiguriert"
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:205 ../panels/network/panel-common.c:247
+msgid "Connecting"
+msgstr "Verbindung wird hergestellt"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:207 ../panels/network/panel-common.c:255
-msgid "Authenticating"
-msgstr "Legitimierung"
+#: ../panels/network/panel-common.c:209 ../panels/network/panel-common.c:251
+msgid "Authentication required"
+msgstr "Legitimierung erforderlich"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:211 ../panels/network/panel-common.c:263
-msgid "Getting network address"
-msgstr "Netzwerkadresse wird ermittelt"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:215
-msgid "Checking network address"
-msgstr "Netzwerkadresse wird geprüft"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:219
+#: ../panels/network/panel-common.c:213 ../panels/network/panel-common.c:255
 msgid "Connected"
 msgstr "Verbunden"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:223
+#: ../panels/network/panel-common.c:217
 msgid "Disconnecting"
 msgstr "Verbindung wird getrennt"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:227
-msgid "Failed to connect"
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:221 ../panels/network/panel-common.c:259
+msgid "Connection failed"
 msgstr "Verbindung fehlgeschlagen"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:231 ../panels/network/panel-common.c:279
+#: ../panels/network/panel-common.c:225 ../panels/network/panel-common.c:267
 msgid "Status unknown (missing)"
 msgstr "Status unbekannt (fehlt)"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:251
-msgid "Preparing"
-msgstr "Vorbereitung läuft"
-
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:259
-msgid "Connecting"
-msgstr "Verbindung wird hergestellt"
-
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:267
-msgid "Active"
-msgstr "Aktiv"
-
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:271
-msgid "Failed"
-msgstr "Fehlgeschlagen"
+#: ../panels/network/panel-common.c:263
+msgid "Not connected"
+msgstr "Nicht verbunden"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -2188,7 +2150,7 @@ msgstr "10 Minuten"
 msgid "30 minutes"
 msgstr "30 Minuten"
 
-#: ../panels/power/power.ui.h:4 ../panels/screen/screen.ui.h:7
+#: ../panels/power/power.ui.h:4 ../panels/screen/screen.ui.h:8
 msgid "5 minutes"
 msgstr "5 Minuten"
 
@@ -2258,32 +2220,36 @@ msgstr "2 Minuten"
 msgid "3 minutes"
 msgstr "3 Minuten"
 
-#: ../panels/screen/screen.ui.h:8
+#: ../panels/screen/screen.ui.h:7
+msgid "30 seconds"
+msgstr "30 Sekunden"
+
+#: ../panels/screen/screen.ui.h:9
 msgid "Brightness"
 msgstr "Helligkeit"
 
-#: ../panels/screen/screen.ui.h:9
+#: ../panels/screen/screen.ui.h:10
 msgid "Dim screen to save power"
 msgstr "Bildschirm abdunkeln, um Energie zu sparen"
 
 #. To translators: This asks whether you want to lock the screen (through the screensaver) when you're detected to be physically in your home (your house, etc.)
-#: ../panels/screen/screen.ui.h:11
+#: ../panels/screen/screen.ui.h:12
 msgid "Don't lock when at home"
 msgstr "Nicht sperren, wenn zu Hause"
 
-#: ../panels/screen/screen.ui.h:12
+#: ../panels/screen/screen.ui.h:13
 msgid "Locations..."
 msgstr "Orte …"
 
-#: ../panels/screen/screen.ui.h:14
+#: ../panels/screen/screen.ui.h:15
 msgid "Lock screen after:"
 msgstr "Bildschirm sperren nach:"
 
-#: ../panels/screen/screen.ui.h:15
+#: ../panels/screen/screen.ui.h:16
 msgid "Screen turns off"
 msgstr "Bildschirm schaltet ab"
 
-#: ../panels/screen/screen.ui.h:16
+#: ../panels/screen/screen.ui.h:17
 msgid "Turn off after:"
 msgstr "Abschalten nach:"
 
@@ -3579,3 +3545,46 @@ msgstr "Kontrollzentrum"
 msgid "_All Settings"
 msgstr "_Alle Einstellungen"
 
+#~ msgid "Set the system proxy settings"
+#~ msgstr "Systemweite Proxy-Einstellungen festlegen"
+
+#~ msgid "Virtual private network"
+#~ msgstr "Virtuelles privates Netzwerk"
+
+#~ msgid "The running NetworkManager version is not compatible (too new)."
+#~ msgstr ""
+#~ "Die Version des laufenden Netzwerk-Managers ist nicht kompatibel (zu neu)."
+
+#~ msgid "The running NetworkManager version is not compatible (too old)."
+#~ msgstr ""
+#~ "Die Version des laufenden Netzwerk-Managers ist nicht kompatibel (zu alt)."
+
+#~ msgid "IP Address:"
+#~ msgstr "IP-Adresse:"
+
+#~ msgid "Preparing connection"
+#~ msgstr "Verbindung wird vorbereitet"
+
+#~ msgid "Configuring connection"
+#~ msgstr "Verbindung wird konfiguriert"
+
+#~ msgid "Authenticating"
+#~ msgstr "Legitimierung"
+
+#~ msgid "Getting network address"
+#~ msgstr "Netzwerkadresse wird ermittelt"
+
+#~ msgid "Checking network address"
+#~ msgstr "Netzwerkadresse wird geprüft"
+
+#~ msgid "Failed to connect"
+#~ msgstr "Verbindung fehlgeschlagen"
+
+#~ msgid "Preparing"
+#~ msgstr "Vorbereitung läuft"
+
+#~ msgid "Active"
+#~ msgstr "Aktiv"
+
+#~ msgid "Failed"
+#~ msgstr "Fehlgeschlagen"
