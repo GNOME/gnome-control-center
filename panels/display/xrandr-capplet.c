@@ -171,6 +171,8 @@ on_screen_changed (GnomeRRScreen *scr,
   }
 
   app->labeler = gnome_rr_labeler_new (app->current_configuration);
+  if (gtk_widget_has_focus (app->panel))
+     gnome_rr_labeler_show (app->labeler);
 
   select_current_output_from_dialog_position (app);
 }
@@ -2373,6 +2375,26 @@ get_output_for_window (GnomeRRConfig *configuration, GdkWindow *window)
 			       win_rect.y + win_rect.height / 2);
 }
 
+static gboolean
+dialog_focus_in_cb (GtkWidget *widget, GdkEvent *event, gpointer data)
+{
+  App *app = data;
+
+  if (app->labeler)
+    gnome_rr_labeler_show (app->labeler);
+  return FALSE;
+}
+
+static gboolean
+dialog_focus_out_cb (GtkWidget *widget, GdkEvent *event, gpointer data)
+{
+  App *app = data;
+
+  if (app->labeler)
+    gnome_rr_labeler_hide (app->labeler);
+  return FALSE;
+}
+
 static void
 on_toplevel_realized (GtkWidget *widget,
                       App       *app)
@@ -2476,6 +2498,10 @@ run_application (void)
   app->clock_settings = g_settings_new (CLOCK_SCHEMA);
 
   app->panel = _gtk_builder_get_widget (builder, "display-panel");
+  g_signal_connect_after (app->panel, "focus-in-event",
+                          G_CALLBACK (dialog_focus_in_cb), app);
+  g_signal_connect_after (app->panel, "focus-out-event",
+                          G_CALLBACK (dialog_focus_out_cb), app);
 
   if (!app->panel)
     g_warning ("Missing display-panel object");
