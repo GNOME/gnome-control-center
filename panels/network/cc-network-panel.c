@@ -1352,7 +1352,7 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "image_device"));
         gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-                                      "network-workgroup",
+                                      "network-vpn",
                                       GTK_ICON_SIZE_DIALOG);
 
         /* use title */
@@ -1645,7 +1645,7 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         gtk_list_store_append (liststore_devices, &iter);
         gtk_list_store_set (liststore_devices,
                             &iter,
-                            PANEL_DEVICES_COLUMN_ICON, "network-workgroup",
+                            PANEL_DEVICES_COLUMN_ICON, "network-vpn",
                             PANEL_DEVICES_COLUMN_TITLE, title_markup,
                             PANEL_DEVICES_COLUMN_SORT, "5",
                             PANEL_DEVICES_COLUMN_OBJECT, net_vpn,
