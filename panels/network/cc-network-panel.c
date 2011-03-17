@@ -759,28 +759,28 @@ panel_get_strongest_unique_aps (const GPtrArray *aps)
 
                         /* get already added list */
                         for (j=0; j<aps_unique->len; j++) {
-                                ap_tmp = NM_ACCESS_POINT (g_ptr_array_index (aps, j));
+                                ap_tmp = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, j));
                                 ssid_tmp = nm_access_point_get_ssid (ap_tmp);
         
                                 /* is this the same type and data? */
-                                if (ssid->len != ssid_tmp->len)
-                                continue;
-                                if (memcmp (ssid->data, ssid_tmp->data, ssid_tmp->len) != 0)
-                                        continue;
-                                g_debug ("found duplicate: %s",
-                                         nm_utils_escape_ssid (ssid_tmp->data,
-                                                               ssid_tmp->len));
+                                if (nm_utils_same_ssid (ssid, ssid_tmp, TRUE)) {
 
-                                /* the new access point is stronger */
-                                if (nm_access_point_get_strength (ap) >
-                                    nm_access_point_get_strength (ap_tmp)) {
-                                        g_debug ("removing %s",
+                                        g_debug ("found duplicate: %s",
                                                  nm_utils_escape_ssid (ssid_tmp->data,
                                                                        ssid_tmp->len));
-                                        g_ptr_array_remove (aps_unique, ap_tmp);
-                                        break;
-                                } else {
-                                        add_ap = FALSE;
+
+                                        /* the new access point is stronger */
+                                        if (nm_access_point_get_strength (ap) >
+                                            nm_access_point_get_strength (ap_tmp)) {
+                                                g_debug ("removing %s",
+                                                         nm_utils_escape_ssid (ssid_tmp->data,
+                                                                               ssid_tmp->len));
+                                                g_ptr_array_remove (aps_unique, ap_tmp);
+                                                add_ap = TRUE;
+                                        } else {
+                                                add_ap = FALSE;
+                                        }
+
                                         break;
                                 }
                         }
