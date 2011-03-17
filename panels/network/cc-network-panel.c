@@ -1018,15 +1018,10 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
 
         /* we have a new device */
         nm_device = net_device_get_nm_device (device);
-        g_debug ("selected device is: %s", nm_device_get_udi (nm_device));
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "hbox_device_header"));
-        gtk_widget_set_visible (widget, TRUE);
-
         type = nm_device_get_device_type (nm_device);
         g_debug ("device %s type %i", nm_device_get_udi (nm_device), type);
 
-        /* set device icon */
+        /* set header icon */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "image_device"));
         gtk_image_set_from_icon_name (GTK_IMAGE (widget),
@@ -1329,11 +1324,6 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
         const gchar *apath;
         NMVPNConnectionState state;
 
-        /* show the header */
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "hbox_device_header"));
-        gtk_widget_set_visible (widget, TRUE);
-
         sw = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                  "device_off_switch"));
         gtk_widget_set_visible (sw, TRUE);
@@ -1432,12 +1422,29 @@ refresh_ui (CcNetworkPanel *panel)
 
         /* this is the proxy settings device */
         if (object == NULL) {
+
+                /* set header to something sane */
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "hbox_device_header"));
-                gtk_widget_set_visible (widget, FALSE);
+                                                             "image_device"));
+                gtk_image_set_from_icon_name (GTK_IMAGE (widget),
+                                              "preferences-system-network",
+                                              GTK_ICON_SIZE_DIALOG);
+                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                             "label_device"));
+                gtk_label_set_label (GTK_LABEL (widget),
+                                     _("Proxy"));
+                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                             "label_status"));
+                gtk_label_set_label (GTK_LABEL (widget), "");
+
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                              "notebook_types"));
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 2);
+
+                /* hide the slider until we get some more detail in the mockup */
+                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                             "device_off_switch"));
+                gtk_widget_hide (widget);
 
                 /* we shoulnd't be able to delete the proxy device */
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
