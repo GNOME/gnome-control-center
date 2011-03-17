@@ -241,32 +241,26 @@ panel_vpn_state_to_localized_string (NMVPNConnectionState type)
                 value = _("Status unknown");
                 break;
         case NM_VPN_CONNECTION_STATE_PREPARE:
-                /* TRANSLATORS: VPN status */
-                value = _("Preparing");
-                break;
-        case NM_VPN_CONNECTION_STATE_NEED_AUTH:
-                /* TRANSLATORS: VPN status */
-                value = _("Authenticating");
-                break;
         case NM_VPN_CONNECTION_STATE_CONNECT:
+        case NM_VPN_CONNECTION_STATE_IP_CONFIG_GET:
                 /* TRANSLATORS: VPN status */
                 value = _("Connecting");
                 break;
-        case NM_VPN_CONNECTION_STATE_IP_CONFIG_GET:
+        case NM_VPN_CONNECTION_STATE_NEED_AUTH:
                 /* TRANSLATORS: VPN status */
-                value = _("Getting network address");
+                value = _("Authentication required");
                 break;
         case NM_VPN_CONNECTION_STATE_ACTIVATED:
                 /* TRANSLATORS: VPN status */
-                value = _("Active");
+                value = _("Connected");
                 break;
         case NM_VPN_CONNECTION_STATE_FAILED:
                 /* TRANSLATORS: VPN status */
-                value = _("Failed");
+                value = _("Connection failed");
                 break;
         case NM_VPN_CONNECTION_STATE_DISCONNECTED:
                 /* TRANSLATORS: VPN status */
-                value = _("Disconnected");
+                value = _("Not connected");
                 break;
         default:
                 /* TRANSLATORS: VPN status */
