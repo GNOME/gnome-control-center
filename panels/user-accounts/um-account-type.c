@@ -35,8 +35,6 @@ um_account_type_get_name (UmAccountType account_type)
                 return C_("Account type", "Standard");
         case UM_ACCOUNT_TYPE_ADMINISTRATOR:
                 return C_("Account type", "Administrator");
-        case UM_ACCOUNT_TYPE_SUPERVISED:
-                return C_("Account type", "Supervised");
         default:
                 g_assert_not_reached ();
         }

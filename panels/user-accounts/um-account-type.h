@@ -26,8 +26,7 @@ G_BEGIN_DECLS
 
 typedef enum {
   UM_ACCOUNT_TYPE_STANDARD,
-  UM_ACCOUNT_TYPE_ADMINISTRATOR,
-  UM_ACCOUNT_TYPE_SUPERVISED
+  UM_ACCOUNT_TYPE_ADMINISTRATOR
 } UmAccountType;
 
 const gchar *um_account_type_get_name (UmAccountType account_type);
