@@ -606,6 +606,21 @@ out:
 }
 
 static void
+panel_set_widget_heading (CcNetworkPanel *panel,
+                          const gchar *sub_pane,
+                          const gchar *widget_suffix,
+                          const gchar *heading)
+{
+        gchar *label_id = NULL;
+        GtkWidget *widget;
+
+        label_id = g_strdup_printf ("heading_%s_%s", sub_pane, widget_suffix);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, label_id));
+        gtk_label_set_label (GTK_LABEL (widget), heading);
+        g_free (label_id);
+}
+
+static void
 add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *active)
 {
         CcNetworkPanelPrivate *priv = panel->priv;
@@ -998,6 +1013,8 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
         NMDHCP4Config *config_dhcp4 = NULL;
         NMIP6Config *ip6_config = NULL;
         NMDevice *nm_device;
+        gboolean has_ip4;
+        gboolean has_ip6;
 
         /* we have a new device */
         nm_device = net_device_get_nm_device (device);
@@ -1211,11 +1228,13 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                               NULL);
 
                 /* IPv4 address */
+                str = nm_dhcp4_config_get_one_option (config_dhcp4,
+                                                      "ip_address");
                 panel_set_widget_data (panel,
                                        sub_pane,
                                        "ip4",
-                                       nm_dhcp4_config_get_one_option (config_dhcp4,
-                                                                       "ip_address"));
+                                       str);
+                has_ip4 = str != NULL;
 
                 /* IPv4 DNS */
                 panel_set_widget_data (panel,
@@ -1245,6 +1264,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                                        sub_pane,
                                        "ip4",
                                        NULL);
+                has_ip4 = FALSE;
 
                 /* IPv4 DNS */
                 panel_set_widget_data (panel,
@@ -1273,16 +1293,23 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
 
                 /* IPv6 address */
                 str_tmp = get_ipv6_config_address_as_string (ip6_config);
-                panel_set_widget_data (panel,
-                                       sub_pane,
-                                       "ip6",
-                                       str_tmp);
+                panel_set_widget_data (panel, sub_pane, "ip6", str_tmp);
+                has_ip6 = str_tmp != NULL;
                 g_free (str_tmp);
         } else {
-                panel_set_widget_data (panel,
-                                       sub_pane,
-                                       "ip6",
-                                        NULL);
+                panel_set_widget_data (panel, sub_pane, "ip6", NULL);
+                has_ip6 = FALSE;
+        }
+
+        if (has_ip4 && has_ip6) {
+                panel_set_widget_heading (panel, sub_pane, "ip4", _("IPv4 Address"));
+                panel_set_widget_heading (panel, sub_pane, "ip6", _("IPv6 Address"));
+        }
+        else if (has_ip4) {
+                panel_set_widget_heading (panel, sub_pane, "ip4", _("IP Address"));
+        }
+        else if (has_ip6) {
+                panel_set_widget_heading (panel, sub_pane, "ip6", _("IP Address"));
         }
 out: ;
 }
