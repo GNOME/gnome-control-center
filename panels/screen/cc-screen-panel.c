@@ -286,7 +286,6 @@ lock_delay_to_relative (CcScreenPanel *self,
   /* convert to relative units */
   idle_delay = 0;
   g_settings_get (self->priv->session_settings, "idle-delay", "u", &idle_delay);
-  idle_delay *= 60;
 
   if (idle_delay > value)
     new = 0;
@@ -308,7 +307,6 @@ lock_delay_to_absolute (CcScreenPanel *self,
   /* convert to absolute units */
   idle_delay = 0;
   g_settings_get (self->priv->session_settings, "idle-delay", "u", &idle_delay);
-  idle_delay *= 60;
 
   new += idle_delay;
 
@@ -333,17 +331,12 @@ set_idle_delay_from_dpms (CcScreenPanel *self,
 
   if (lock_delay > 0)
     {
-      /* convert to seconds */
-      lock_delay *= 60;
-
       lock_delay = lock_delay_to_absolute (self, lock_delay);
 
       idle_delay = MIN (lock_delay, off_delay);
     }
   else
     idle_delay = off_delay;
-
-  idle_delay /= 60;
 
   g_settings_set (self->priv->session_settings, "idle-delay", "u", idle_delay);
 }
@@ -362,8 +355,6 @@ set_idle_delay_from_lock (CcScreenPanel *self,
     idle_delay = MIN (value, off_delay);
   else
     idle_delay = off_delay;
-
-  idle_delay /= 60;
 
   g_settings_set (self->priv->session_settings, "idle-delay", "u", idle_delay);
 }
@@ -414,10 +405,6 @@ lock_combo_changed_cb (GtkWidget *widget, CcScreenPanel *self)
                       1, &absolute,
                       -1);
   relative = lock_delay_to_relative (self, absolute);
-
-  /* convert to minutes */
-  if (relative > 0)
-    relative /= 60;
 
   g_settings_set (self->priv->lock_settings, "lock-delay", "u", relative);
 
@@ -485,9 +472,6 @@ set_lock_value_for_combo (GtkComboBox *combo_box, CcScreenPanel *self)
 
   /* try to make the UI match the lock setting */
   g_settings_get (self->priv->lock_settings, "lock-delay", "u", &value);
-
-  /* convert to seconds */
-  value *= 60;
 
   if (value > 0)
     value = lock_delay_to_absolute (self, value);
