@@ -725,8 +725,8 @@ panel_get_strongest_unique_aps (const GPtrArray *aps)
 {
         const GByteArray *ssid;
         const GByteArray *ssid_tmp;
-        gboolean add_ap;
         GPtrArray *aps_unique = NULL;
+        gboolean add_ap;
         guint i;
         guint j;
         NMAccessPoint *ap;
@@ -735,45 +735,46 @@ panel_get_strongest_unique_aps (const GPtrArray *aps)
         /* we will have multiple entries for typical hotspots, just
          * filter to the one with the strongest signal */
         aps_unique = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
-        for (i = 0; i < aps->len; i++) {
-                ap = NM_ACCESS_POINT (g_ptr_array_index (aps, i));
-                ssid = nm_access_point_get_ssid (ap);
-                add_ap = TRUE;
+        if (aps != NULL)
+                for (i = 0; i < aps->len; i++) {
+                        ap = NM_ACCESS_POINT (g_ptr_array_index (aps, i));
+                        ssid = nm_access_point_get_ssid (ap);
+                        add_ap = TRUE;
 
-                /* get already added list */
-                for (j=0; j<aps_unique->len; j++) {
-                        ap_tmp = NM_ACCESS_POINT (g_ptr_array_index (aps, j));
-                        ssid_tmp = nm_access_point_get_ssid (ap_tmp);
-
-                        /* is this the same type and data? */
-                        if (ssid->len != ssid_tmp->len)
+                        /* get already added list */
+                        for (j=0; j<aps_unique->len; j++) {
+                                ap_tmp = NM_ACCESS_POINT (g_ptr_array_index (aps, j));
+                                ssid_tmp = nm_access_point_get_ssid (ap_tmp);
+        
+                                /* is this the same type and data? */
+                                if (ssid->len != ssid_tmp->len)
                                 continue;
-                        if (memcmp (ssid->data, ssid_tmp->data, ssid_tmp->len) != 0)
-                                continue;
-                        g_debug ("found duplicate: %s",
-                                 nm_utils_escape_ssid (ssid_tmp->data,
-                                                       ssid_tmp->len));
-
-                        /* the new access point is stronger */
-                        if (nm_access_point_get_strength (ap) >
-                            nm_access_point_get_strength (ap_tmp)) {
-                                g_debug ("removing %s",
+                                if (memcmp (ssid->data, ssid_tmp->data, ssid_tmp->len) != 0)
+                                        continue;
+                                g_debug ("found duplicate: %s",
                                          nm_utils_escape_ssid (ssid_tmp->data,
                                                                ssid_tmp->len));
-                                g_ptr_array_remove (aps_unique, ap_tmp);
-                                break;
-                        } else {
-                                add_ap = FALSE;
-                                break;
+
+                                /* the new access point is stronger */
+                                if (nm_access_point_get_strength (ap) >
+                                    nm_access_point_get_strength (ap_tmp)) {
+                                        g_debug ("removing %s",
+                                                 nm_utils_escape_ssid (ssid_tmp->data,
+                                                                       ssid_tmp->len));
+                                        g_ptr_array_remove (aps_unique, ap_tmp);
+                                        break;
+                                } else {
+                                        add_ap = FALSE;
+                                        break;
+                                }
+                        }
+                        if (add_ap) {
+                                g_debug ("adding %s",
+                                         nm_utils_escape_ssid (ssid->data,
+                                                               ssid->len));
+                                g_ptr_array_add (aps_unique, g_object_ref (ap));
                         }
                 }
-                if (add_ap) {
-                        g_debug ("adding %s",
-                                 nm_utils_escape_ssid (ssid->data,
-                                                       ssid->len));
-                        g_ptr_array_add (aps_unique, g_object_ref (ap));
-                }
-        }
         return aps_unique;
 }
 
@@ -983,8 +984,6 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
         CcNetworkPanelPrivate *priv = panel->priv;
         const gchar *str;
         const gchar *sub_pane = NULL;
-        const GPtrArray *aps;
-        GPtrArray *aps_unique = NULL;
         gchar *str_tmp;
         GHashTable *options = NULL;
         GtkListStore *liststore_wireless_network;
@@ -1095,11 +1094,13 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
 
                 /* speed */
                 speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (nm_device));
-                if (speed  > 0)
+                if (state == NM_DEVICE_STATE_UNAVAILABLE)
+                        str_tmp = NULL;
+                else if (speed  > 0)
                         /* Translators: network device speed */
                         str_tmp = g_strdup_printf (_("%d Mb/s"), speed);
                 else
-                        str_tmp = NULL;
+                        str_tmp = g_strdup ("");
                 panel_set_widget_data (panel,
                                        sub_pane,
                                        "speed",
@@ -1114,14 +1115,18 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                                        str);
 
         } else if (type == NM_DEVICE_TYPE_WIFI) {
+                const GPtrArray *aps;
+                GPtrArray *aps_unique = NULL;
 
                 /* speed */
                 speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (nm_device));
-                if (speed > 0)
+                if (state == NM_DEVICE_STATE_UNAVAILABLE)
+                        str_tmp = NULL;
+                else if (speed > 0)
                         str_tmp = g_strdup_printf (_("%d Mb/s"),
                                                    speed / 1000);
                 else
-                        str_tmp = NULL;
+                        str_tmp = g_strdup ("");
                 panel_set_widget_data (panel,
                                        sub_pane,
                                        "speed",
@@ -1136,29 +1141,37 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                                        str);
                 /* security */
                 active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (nm_device));
-                if (active_ap != NULL)
+                if (state == NM_DEVICE_STATE_UNAVAILABLE)
+                        str_tmp = NULL;
+                else if (active_ap != NULL)
                         str_tmp = get_ap_security_string (active_ap);
                 else
-                        str_tmp = NULL;
+                        str_tmp = g_strdup ("");
                 panel_set_widget_data (panel,
                                        sub_pane,
                                        "security",
                                        str_tmp);
                 g_free (str_tmp);
 
+                widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                             "hbox_wireless_ssid"));
                 /* populate access point dropdown */
-                liststore_wireless_network = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
-                                                             "liststore_wireless_network"));
-                gtk_list_store_clear (liststore_wireless_network);
-                aps = nm_device_wifi_get_access_points (NM_DEVICE_WIFI (nm_device));
-                if (aps == NULL)
-                        return;
-                aps_unique = panel_get_strongest_unique_aps (aps);
-                for (i = 0; i < aps_unique->len; i++) {
-                        ap = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, i));
-                        add_access_point (panel,
-                                          ap,
-                                          active_ap);
+                if (state == NM_DEVICE_STATE_UNAVAILABLE)
+                        gtk_widget_hide (widget);
+                else {
+                        gtk_widget_show (widget);
+                        liststore_wireless_network = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
+                                                                     "liststore_wireless_network"));
+                        gtk_list_store_clear (liststore_wireless_network);
+                        aps = nm_device_wifi_get_access_points (NM_DEVICE_WIFI (nm_device));
+                        aps_unique = panel_get_strongest_unique_aps (aps);
+
+                        for (i = 0; i < aps_unique->len; i++) {
+                                ap = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, i));
+                                add_access_point (panel, ap, active_ap);
+                        }
+
+                        g_ptr_array_unref (aps_unique);
                 }
 
         } else if (type == NM_DEVICE_TYPE_MODEM) {
@@ -1271,9 +1284,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                                        "ip6",
                                         NULL);
         }
-out:
-        if (aps_unique != NULL)
-                g_ptr_array_unref (aps_unique);
+out: ;
 }
 
 static void
