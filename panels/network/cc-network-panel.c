@@ -626,7 +626,7 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
         CcNetworkPanelPrivate *priv = panel->priv;
         const GByteArray *ssid;
         const gchar *ssid_text;
-        const gchar *hw_address;
+        const gchar *bssid;
         GtkListStore *liststore_wireless_network;
         GtkTreeIter treeiter;
         GtkWidget *widget;
@@ -639,11 +639,11 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
         liststore_wireless_network = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                                      "liststore_wireless_network"));
 
-        hw_address = nm_access_point_get_hw_address (ap);
+        bssid = nm_access_point_get_bssid (ap);
         gtk_list_store_append (liststore_wireless_network, &treeiter);
         gtk_list_store_set (liststore_wireless_network,
                             &treeiter,
-                            PANEL_WIRELESS_COLUMN_ID, hw_address,
+                            PANEL_WIRELESS_COLUMN_ID, bssid,
                             PANEL_WIRELESS_COLUMN_TITLE, ssid_text,
                             PANEL_WIRELESS_COLUMN_SORT, ssid_text,
                             PANEL_WIRELESS_COLUMN_STRENGTH, nm_access_point_get_strength (ap),
@@ -653,7 +653,7 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
         /* is this what we're on already? */
         if (active == NULL)
                 return;
-        if (g_strcmp0 (hw_address, nm_access_point_get_hw_address (active)) == 0) {
+        if (g_strcmp0 (bssid, nm_access_point_get_bssid (active)) == 0) {
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                              "combobox_network_name"));
                 gtk_combo_box_set_active_iter (GTK_COMBO_BOX (widget), &treeiter);
