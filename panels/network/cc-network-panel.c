@@ -616,7 +616,8 @@ panel_set_widget_heading (CcNetworkPanel *panel,
 
         label_id = g_strdup_printf ("heading_%s_%s", sub_pane, widget_suffix);
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, label_id));
-        gtk_label_set_label (GTK_LABEL (widget), heading);
+        if (widget)
+                gtk_label_set_label (GTK_LABEL (widget), heading);
         g_free (label_id);
 }
 
