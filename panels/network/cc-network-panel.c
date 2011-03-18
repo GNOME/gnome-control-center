@@ -161,10 +161,56 @@ cc_network_panel_class_finalize (CcNetworkPanelClass *klass)
 }
 
 static void
+check_wpad_warning (CcNetworkPanel *panel)
+{
+        GtkWidget *widget;
+        gchar *autoconfig_url = NULL;
+        GString *string = NULL;
+        gboolean ret = FALSE;
+        guint mode;
+
+        string = g_string_new ("");
+
+        /* check we're using 'Automatic' */
+        mode = g_settings_get_enum (panel->priv->proxy_settings, "mode");
+        if (mode != 2)
+                goto out;
+
+        /* see if the PAC is blank */
+        autoconfig_url = g_settings_get_string (panel->priv->proxy_settings,
+                                                "autoconfig-url");
+        ret = autoconfig_url == NULL ||
+              autoconfig_url[0] == '\0';
+        if (!ret)
+                goto out;
+
+        g_string_append (string, "<small>");
+
+        /* TRANSLATORS: this is when the use leaves the PAC textbox blank */
+        g_string_append (string, _("Web Proxy Autodiscovery is used when a Configuration URL is not provided."));
+
+        g_string_append (string, " ");
+
+        /* TRANSLATORS: WPAD is bad: if you enable it on an untrusted
+         * network, then anyone else on that network can tell your
+         * machine that it should proxy all of your web traffic
+         * through them. */
+        g_string_append (string, _("This is not recommended for untrusted public networks."));
+        g_string_append (string, "</small>");
+out:
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "label_proxy_warning"));
+        gtk_label_set_markup (GTK_LABEL (widget), string->str);
+        g_free (autoconfig_url);
+        g_string_free (string, TRUE);
+}
+
+static void
 panel_settings_changed (GSettings      *settings,
                         const gchar    *key,
                         CcNetworkPanel *panel)
 {
+        check_wpad_warning (panel);
 }
 
 static NetObject *
@@ -213,6 +259,9 @@ panel_proxy_mode_combo_setup_widgets (CcNetworkPanel *panel, guint value)
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "hbox_proxy_socks"));
         gtk_widget_set_visible (widget, value == 1);
+
+        /* perhaps show the wpad warning */
+        check_wpad_warning (panel);
 }
 
 static void
