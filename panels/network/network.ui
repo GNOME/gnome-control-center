@@ -316,17 +316,6 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkLabel" id="label7">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                          </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
                           <object class="GtkNotebook" id="notebook_types">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
@@ -1884,6 +1873,12 @@
                                       </packing>
                                     </child>
                                     <child>
+                                      <object class="GtkBox" id="hbox_proxy_url_entry">
+                                        <property name="orientation">horizontal</property>
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
+                                        <property name="spacing">9</property>
+                                    <child>
                                       <object class="GtkEntry" id="entry_proxy_http">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
@@ -1909,6 +1904,15 @@
                                         <property name="position">2</property>
                                       </packing>
                                     </child>
+
+                                      </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">2</property>
+                                      </packing>
+                                    </child>
+
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -2305,6 +2309,13 @@
       <widget name="label35"/>
       <widget name="label30"/>
       <widget name="label47"/>
+    </widgets>
+  </object>
+  <object class="GtkSizeGroup" id="sizegroup3">
+    <widgets>
+      <widget name="combobox_proxy_mode"/>
+      <widget name="entry_proxy_url"/>
+      <widget name="hbox_proxy_url_entry"/>
     </widgets>
   </object>
   <object class="GtkListStore" id="liststore1">
