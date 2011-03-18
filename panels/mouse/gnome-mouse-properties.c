@@ -59,6 +59,7 @@ static GSettings *touchpad_settings = NULL;
 static GdkDeviceManager *device_manager = NULL;
 static guint device_added_id = 0;
 static guint device_removed_id = 0;
+static gboolean changing_scroll = FALSE;
 
 /* Double Click handling */
 
@@ -181,6 +182,9 @@ scrollmethod_changed_event (GtkToggleButton *button, GtkBuilder *dialog)
 	GsdTouchpadScrollMethod method;
 	GtkToggleButton *disabled = GTK_TOGGLE_BUTTON (WID ("scroll_disabled_radio"));
 
+	if (changing_scroll)
+		return;
+
 	gtk_widget_set_sensitive (WID ("horiz_scroll_toggle"),
 				  !gtk_toggle_button_get_active (disabled));
 
@@ -226,7 +230,6 @@ synaptics_check_capabilities (GtkBuilder *dialog)
 			/* Property data is booleans for has_left, has_middle, has_right, has_double, has_triple.
 			 * Newer drivers (X.org/kerrnel) will also include has_pressure and has_width. */
 			if (!data[0]) {
-				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (WID ("tap_to_click_toggle")), TRUE);
 				gtk_widget_set_sensitive (WID ("tap_to_click_toggle"), FALSE);
 			}
 
@@ -308,17 +311,17 @@ setup_dialog (GtkBuilder *dialog)
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad_sensitivity_scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
 
+	if (touchpad_present) {
+		synaptics_check_capabilities (dialog);
+		setup_scrollmethod_radios (dialog);
+	}
+
 	g_signal_connect (WID ("scroll_disabled_radio"), "toggled",
 			  G_CALLBACK (scrollmethod_changed_event), dialog);
 	g_signal_connect (WID ("scroll_edge_radio"), "toggled",
 			  G_CALLBACK (scrollmethod_changed_event), dialog);
 	g_signal_connect (WID ("scroll_twofinger_radio"), "toggled",
 			  G_CALLBACK (scrollmethod_changed_event), dialog);
-
-	if (touchpad_present) {
-		synaptics_check_capabilities (dialog);
-		setup_scrollmethod_radios (dialog);
-	}
 }
 
 /* Construct the dialog */
@@ -372,8 +375,10 @@ device_changed (GdkDeviceManager *device_manager,
 	gtk_widget_set_visible (WID ("touchpad_vbox"), present);
 
 	if (present) {
+		changing_scroll = TRUE;
 		synaptics_check_capabilities (dialog);
 		setup_scrollmethod_radios (dialog);
+		changing_scroll = FALSE;
 	}
 }
 
