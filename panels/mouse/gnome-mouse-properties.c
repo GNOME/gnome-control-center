@@ -248,7 +248,8 @@ synaptics_check_capabilities (GtkBuilder *dialog)
 static void
 setup_dialog (GtkBuilder *dialog)
 {
-	GtkRadioButton    *radio;
+	GtkRadioButton *radio;
+	gboolean        touchpad_present;
 
 	/* Orientation radio buttons */
 	radio = GTK_RADIO_BUTTON (WID ("left_handed_radio"));
@@ -288,8 +289,8 @@ setup_dialog (GtkBuilder *dialog)
 			 G_SETTINGS_BIND_DEFAULT);
 
 	/* Trackpad page */
-	if (touchpad_is_present () == FALSE)
-		gtk_widget_hide (WID ("touchpad_vbox"));
+	touchpad_present = touchpad_is_present ();
+	gtk_widget_set_visible (WID ("touchpad_vbox"), touchpad_present);
 
 	g_settings_bind (touchpad_settings, "disable-while-typing",
 			 WID ("disable_w_typing_toggle"), "active",
@@ -314,8 +315,10 @@ setup_dialog (GtkBuilder *dialog)
 	g_signal_connect (WID ("scroll_twofinger_radio"), "toggled",
 			  G_CALLBACK (scrollmethod_changed_event), dialog);
 
-	synaptics_check_capabilities (dialog);
-	setup_scrollmethod_radios (dialog);
+	if (touchpad_present) {
+		synaptics_check_capabilities (dialog);
+		setup_scrollmethod_radios (dialog);
+	}
 }
 
 /* Construct the dialog */
@@ -363,7 +366,15 @@ device_changed (GdkDeviceManager *device_manager,
 		GdkDevice        *device,
 		GtkBuilder       *dialog)
 {
-	gtk_widget_set_visible (WID ("touchpad_vbox"), touchpad_is_present ());
+	gboolean present;
+
+	present = touchpad_is_present ();
+	gtk_widget_set_visible (WID ("touchpad_vbox"), present);
+
+	if (present) {
+		synaptics_check_capabilities (dialog);
+		setup_scrollmethod_radios (dialog);
+	}
 }
 
 GtkWidget *
