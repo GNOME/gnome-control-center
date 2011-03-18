@@ -1035,10 +1035,23 @@ on_clone_changed (GtkWidget *box, gpointer data)
 }
 
 static void
-get_geometry (GnomeRROutputInfo *output, int *w, int *h)
+apply_rotation_to_geometry (GnomeRROutputInfo *output, int *w, int *h)
 {
   GnomeRRRotation rotation;
 
+  rotation = gnome_rr_output_info_get_rotation (output);
+  if ((rotation & GNOME_RR_ROTATION_90) || (rotation & GNOME_RR_ROTATION_270))
+    {
+      int tmp;
+      tmp = *h;
+      *h = *w;
+      *w = tmp;
+    }
+}
+
+static void
+get_geometry (GnomeRROutputInfo *output, int *w, int *h)
+{
   if (gnome_rr_output_info_is_active (output))
     {
       gnome_rr_output_info_get_geometry (output, NULL, NULL, w, h);
@@ -1049,14 +1062,7 @@ get_geometry (GnomeRROutputInfo *output, int *w, int *h)
       *w = gnome_rr_output_info_get_preferred_width (output);
     }
 
-  rotation = gnome_rr_output_info_get_rotation (output);
-  if ((rotation & GNOME_RR_ROTATION_90) || (rotation & GNOME_RR_ROTATION_270))
-    {
-      int tmp;
-      tmp = *h;
-      *h = *w;
-      *w = tmp;
-    }
+  apply_rotation_to_geometry (output, w, h);
 }
 
 #define SPACE 15
@@ -1164,6 +1170,8 @@ list_edges_for_output (GnomeRROutputInfo *output, GArray *edges)
   int x, y, w, h;
 
   gnome_rr_output_info_get_geometry (output, &x, &y, &w, &h);
+
+  apply_rotation_to_geometry (output, &w, &h);
 
   /* Top, Bottom, Left, Right */
   add_edge (output, x, y, x + w, y, edges);
@@ -1362,6 +1370,8 @@ static void
 get_output_rect (GnomeRROutputInfo *output, GdkRectangle *rect)
 {
   gnome_rr_output_info_get_geometry (output, &rect->x, &rect->y, &rect->width, &rect->height);
+
+  apply_rotation_to_geometry (output, &rect->width, &rect->height);
 }
 
 static gboolean
