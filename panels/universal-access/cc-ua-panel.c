@@ -631,10 +631,10 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
   settings_on_off_editor_new (priv, priv->kb_settings, "stickykeys-enable", w, sticky_keys_section);
 
   w = WID (priv->builder, "typing_sticky_keys_disable_two_keys_checkbutton");
-  g_settings_bind (priv->kb_settings, "stickykeys-two-key-off", w, "active", G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (priv->kb_settings, "stickykeys-two-key-off", w, "active", G_SETTINGS_BIND_NO_SENSITIVITY);
 
   w = WID (priv->builder, "typing_sticky_keys_beep_modifier_checkbutton");
-  g_settings_bind (priv->kb_settings, "stickykeys-modifier-beep", w, "active", G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (priv->kb_settings, "stickykeys-modifier-beep", w, "active", G_SETTINGS_BIND_NO_SENSITIVITY);
 
   /* slow keys */
   w = WID (priv->builder, "typing_slow_keys_switch");
@@ -664,7 +664,7 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   w = WID (priv->builder, "typing_bounce_keys_beep_rejected_checkbutton");
-  g_settings_bind (priv->kb_settings, "bouncekeys-beep-reject", w, "active", G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (priv->kb_settings, "bouncekeys-beep-reject", w, "active", G_SETTINGS_BIND_NO_SENSITIVITY);
 
   g_signal_connect (WID (priv->builder, "typing_keyboard_preferences_button"),
                     "clicked",
