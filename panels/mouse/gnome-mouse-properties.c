@@ -375,10 +375,10 @@ gnome_mouse_properties_init (GtkBuilder *dialog)
 	touchpad_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.touchpad");
 
 	device_manager = gdk_display_get_device_manager (gdk_display_get_default ());
-	g_signal_connect (device_manager, "device-added",
-			  G_CALLBACK (device_changed), dialog);
-	g_signal_connect (device_manager, "device-removed",
-			  G_CALLBACK (device_changed), dialog);
+	device_added_id = g_signal_connect (device_manager, "device-added",
+					    G_CALLBACK (device_changed), dialog);
+	device_removed_id = g_signal_connect (device_manager, "device-removed",
+					      G_CALLBACK (device_changed), dialog);
 
 	create_dialog (dialog);
 
