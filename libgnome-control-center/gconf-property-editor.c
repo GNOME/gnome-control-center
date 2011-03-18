@@ -447,8 +447,9 @@ peditor_boolean_widget_changed (GConfPropertyEditor *peditor,
 }
 
 static void
-peditor_switch_widget_changed (GConfPropertyEditor *peditor,
-				GtkSwitch         *sw)
+peditor_switch_widget_changed (GtkSwitch *sw,
+                               GParamSpec *pspec,
+                               GConfPropertyEditor *peditor)
 {
 	GConfValue *value, *value_wid;
 
@@ -522,8 +523,8 @@ gconf_peditor_new_switch (GConfChangeSet *changeset,
 
 	va_end (var_args);
 
-	g_signal_connect_swapped (sw, "notify::active",
-				  (GCallback) peditor_switch_widget_changed, peditor);
+	g_signal_connect (sw, "notify::active",
+                          (GCallback) peditor_switch_widget_changed, peditor);
 
 	return peditor;
 }
