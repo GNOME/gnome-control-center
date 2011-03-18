@@ -26,7 +26,7 @@
 #include <glib/gstdio.h>
 #include <polkit/polkit.h>
 #include <dbus/dbus-glib.h>
-#include <gsettings-desktop-schemas/gdesktop-enums.h>
+#include <gdesktop-enums.h>
 
 #include <cups/cups.h>
 

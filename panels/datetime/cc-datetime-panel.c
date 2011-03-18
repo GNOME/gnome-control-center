@@ -27,7 +27,7 @@
 #include "libgnome-control-center/cc-lockbutton.h"
 #include "date-endian.h"
 
-#include <gsettings-desktop-schemas/gdesktop-enums.h>
+#include <gdesktop-enums.h>
 #include <string.h>
 #include <stdlib.h>
 #include <libintl.h>
