@@ -207,6 +207,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   GtkWidget              *widget;
   gboolean                test_page_command_available = FALSE;
   gboolean                sensitive;
+  gboolean                is_local = TRUE;
   gchar                  *printer_make_and_model = NULL;
   gchar                  *printer_model = NULL;
   gchar                  *reason = NULL;
@@ -215,8 +216,10 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   gchar                 **printer_reasons = NULL;
   gchar                  *marker_types = NULL;
   gchar                  *printer_name = NULL;
+  gchar                  *printer_type = NULL;
   gchar                  *active_jobs = NULL;
   gchar                  *supply_type = NULL;
+  gchar                  *printer_uri = NULL;
   gchar                  *location = NULL;
   gchar                  *status = NULL;
   guint                   num_jobs;
@@ -320,6 +323,10 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
             printer_commands = priv->dests[priv->current_dest].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-make-and-model") == 0)
             printer_make_and_model = priv->dests[priv->current_dest].options[i].value;
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-uri-supported") == 0)
+            printer_uri = priv->dests[priv->current_dest].options[i].value;
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-type") == 0)
+            printer_type = priv->dests[priv->current_dest].options[i].value;
         }
 
       if (priv->dest_model_names[priv->current_dest] == NULL)
@@ -478,6 +485,44 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
         }
       else
         gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
+
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-ip-address-label");
+
+      if (printer_type)
+        {
+          cups_ptype_t type;
+          type = atoi (printer_type);
+          is_local = !(type & (CUPS_PRINTER_REMOTE | CUPS_PRINTER_IMPLICIT));
+        }
+
+      if (is_local)
+        {
+          gtk_label_set_text (GTK_LABEL (widget), "localhost");
+        }
+      else
+        {
+          if (printer_uri)
+            {
+              char scheme[HTTP_MAX_URI],
+              userpass[HTTP_MAX_URI],
+              server[HTTP_MAX_URI],
+              resource[HTTP_MAX_URI];
+              int port;
+
+              httpSeparateURI(HTTP_URI_CODING_ALL, printer_uri, scheme, sizeof(scheme), userpass,
+                              sizeof(userpass), server, sizeof(server), &port, resource,
+                              sizeof(resource));
+
+              if (server[0] != '\0')
+                gtk_label_set_text (GTK_LABEL (widget), server);
+              else
+                gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
+            }
+          else
+            gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
+        }
 
 
       widget = (GtkWidget*)
