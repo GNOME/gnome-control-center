@@ -486,6 +486,7 @@ cc_screen_panel_init (CcScreenPanel *self)
                     G_CALLBACK (lock_combo_changed_cb),
                     self);
 
+  widget = WID ("screen_lock_hbox");
   g_settings_bind (self->priv->lock_settings,
                    "lock-enabled",
                    widget, "sensitive",
