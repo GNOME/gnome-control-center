@@ -413,6 +413,12 @@ object_removed_cb (NetObject *object, CcNetworkPanel *panel)
         NetObject *object_tmp;
         GtkTreeIter iter;
         GtkTreeModel *model;
+        GtkWidget *widget;
+        GtkTreeSelection *selection;
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "treeview_devices"));
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
 
         /* remove device from model */
         model = GTK_TREE_MODEL (gtk_builder_get_object (panel->priv->builder,
@@ -428,8 +434,11 @@ object_removed_cb (NetObject *object, CcNetworkPanel *panel)
                                     -1);
                 if (g_strcmp0 (net_object_get_id (object),
                                net_object_get_id (object_tmp)) == 0) {
-                        gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
                         g_object_unref (object_tmp);
+                        if (!gtk_list_store_remove (GTK_LIST_STORE (model), &iter))
+                                gtk_tree_model_get_iter_first (model, &iter);
+                        gtk_tree_selection_select_iter (selection, &iter);
+
                         break;
                 }
                 g_object_unref (object_tmp);
@@ -2074,6 +2083,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
                                                      "treeview_devices"));
         panel_add_devices_columns (panel, GTK_TREE_VIEW (widget));
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+        gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
         g_signal_connect (selection, "changed",
                           G_CALLBACK (nm_devices_treeview_clicked_cb), panel);
 
