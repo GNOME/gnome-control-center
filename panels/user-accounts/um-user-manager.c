@@ -226,6 +226,8 @@ user_deleted_handler (DBusGProxy *proxy,
         UmUser *user;
 
         user = g_hash_table_lookup (manager->user_by_object_path, object_path);
+        if (!user)
+                return;
         g_object_ref (user);
         g_signal_handlers_disconnect_by_func (user, user_changed_handler, manager);
 
