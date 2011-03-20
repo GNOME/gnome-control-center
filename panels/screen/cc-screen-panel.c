@@ -33,6 +33,7 @@ struct _CcScreenPanelPrivate
   GSettings     *lock_settings;
   GSettings     *gsd_settings;
   GSettings     *session_settings;
+  GSettings     *lockdown_settings;
   GCancellable  *cancellable;
   GtkBuilder    *builder;
   GDBusProxy    *proxy;
@@ -86,6 +87,11 @@ cc_screen_panel_dispose (GObject *object)
       g_object_unref (priv->session_settings);
       priv->session_settings = NULL;
     }
+  if (priv->lockdown_settings)
+    {
+      g_object_unref (priv->lockdown_settings);
+      priv->lockdown_settings = NULL;
+    }
   if (priv->cancellable != NULL)
     {
       g_object_unref (priv->cancellable);
@@ -120,6 +126,28 @@ on_lock_settings_changed (GSettings     *settings,
 {
   if (g_str_equal (key, "lock-delay") == FALSE)
     return;
+}
+
+static void
+update_lock_screen_sensitivity (CcScreenPanel *self)
+{
+  GtkWidget *widget;
+  gboolean   locked;
+
+  widget = WID ("screen_lock_main_box");
+  locked = g_settings_get_boolean (self->priv->lockdown_settings, "disable-lock-screen");
+  gtk_widget_set_sensitive (widget, !locked);
+}
+
+static void
+on_lockdown_settings_changed (GSettings     *settings,
+                              const char    *key,
+                              CcScreenPanel *panel)
+{
+  if (g_str_equal (key, "disable-lock-screen") == FALSE)
+    return;
+
+  update_lock_screen_sensitivity (panel);
 }
 
 static void
@@ -457,6 +485,11 @@ cc_screen_panel_init (CcScreenPanel *self)
                     self);
   self->priv->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
   self->priv->session_settings = g_settings_new ("org.gnome.desktop.session");
+  self->priv->lockdown_settings = g_settings_new ("org.gnome.desktop.lockdown");
+  g_signal_connect (self->priv->lockdown_settings,
+                    "changed",
+                    G_CALLBACK (on_lockdown_settings_changed),
+                    self);
 
   /* bind the auto dim checkbox */
   widget = WID ("screen_auto_reduce_checkbutton");
@@ -491,6 +524,8 @@ cc_screen_panel_init (CcScreenPanel *self)
                    "lock-enabled",
                    widget, "sensitive",
                    G_SETTINGS_BIND_GET);
+
+  update_lock_screen_sensitivity (self);
 
   widget = WID ("screen_vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
