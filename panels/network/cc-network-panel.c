@@ -2452,7 +2452,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
                          G_SETTINGS_BIND_DEFAULT);
 
         /* bind the proxy values */
-        settings_tmp = g_settings_new ("org.gnome.system.proxy.http");
+        settings_tmp = g_settings_get_child (panel->priv->proxy_settings, "http");
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "entry_proxy_http"));
         g_settings_bind (settings_tmp, "host",
@@ -2466,7 +2466,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
         g_object_unref (settings_tmp);
 
         /* bind the proxy values */
-        settings_tmp = g_settings_new ("org.gnome.system.proxy.https");
+        settings_tmp = g_settings_get_child (panel->priv->proxy_settings, "https");
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "entry_proxy_https"));
         g_settings_bind (settings_tmp, "host",
@@ -2480,7 +2480,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
         g_object_unref (settings_tmp);
 
         /* bind the proxy values */
-        settings_tmp = g_settings_new ("org.gnome.system.proxy.ftp");
+        settings_tmp = g_settings_get_child (panel->priv->proxy_settings, "ftp");
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "entry_proxy_ftp"));
         g_settings_bind (settings_tmp, "host",
@@ -2494,7 +2494,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
         g_object_unref (settings_tmp);
 
         /* bind the proxy values */
-        settings_tmp = g_settings_new ("org.gnome.system.proxy.socks");
+        settings_tmp = g_settings_get_child (panel->priv->proxy_settings, "socks");
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "entry_proxy_socks"));
         g_settings_bind (settings_tmp, "host",
