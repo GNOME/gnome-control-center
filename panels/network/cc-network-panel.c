@@ -1770,6 +1770,7 @@ static gboolean
 display_version_warning_idle (CcNetworkPanel *panel)
 {
         GtkWidget  *dialog;
+        GtkWidget  *image;
         GtkWindow  *window;
         const char *message;
 
@@ -1783,6 +1784,10 @@ display_version_warning_idle (CcNetworkPanel *panel)
                                          GTK_BUTTONS_CLOSE,
                                          "%s",
                                          message);
+        image = gtk_image_new_from_icon_name ("computer-fail", GTK_ICON_SIZE_DIALOG);
+        gtk_widget_show (image);
+        gtk_message_dialog_set_image (GTK_MESSAGE_DIALOG (dialog), image);
+
         gtk_dialog_run (GTK_DIALOG (dialog));
         gtk_widget_destroy (dialog);
 
