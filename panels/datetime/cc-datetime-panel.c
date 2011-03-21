@@ -853,6 +853,10 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   endianess = date_endian_get_default (FALSE);
   reorder_date_widget (endianess, priv);
 
+  /* Force the direction for the time, so that the time
+   * is presented correctly for RTL languages */
+  gtk_widget_set_direction (W("table2"), GTK_TEXT_DIR_LTR);
+
   gtk_combo_box_set_active (GTK_COMBO_BOX (W ("month-combobox")),
                             g_date_time_get_month (priv->date) - 1);
   g_signal_connect (G_OBJECT (W("month-combobox")), "changed",
