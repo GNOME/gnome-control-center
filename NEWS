@@ -1,4 +1,138 @@
 =============================
+Version 2.91.92 (2011-03-21)
+=============================
+
+Common:
+- Bump GTK+ dep to 3.0.2 (Matthias Clasen) (#644182)
+- Fix linking of libshortcuts against X (Frédéric Péters) (#644410)
+- Improve CUPS detection (Saleem Abdulrasool) (#644064)
+- Set the 'inline-toolbar' style class to toolbars which need it (Cosimo Cecchi) (#645059)
+
+Background:
+- Use new picture-uri GSettings key (Bastien Nocera) (#633983)
+
+Date and Time:
+- Change combobox when map is clicked (Bastien Nocera)
+- Make 24h setting changeable without unlocking (Bastien Nocera) (#643891)
+- Add missing timezone files (Frédéric Péters) (#630261)
+- Add hacks to support more timezones (Bastien Nocera)
+- Don't crash when the timezone is unknown (Bastien Nocera)
+
+Display:
+- Fix dragging rotated monitors (Alexander Larsson) (#641345)
+
+Info:
+- Use dim labels (William Jon McCann)
+
+Keyboard:
+- Fix crasher when num workspace changes (Bastien Nocera) (#644784)
+- Mark the scales as insensitive when the checkboxes are off (Cosimo Cecchi) (#645151)
+- Correct labels for blinking speed (Bastien Nocera) (#645314)
+
+Mouse:
+- Don't destroy the touchpad tab (Bastien Nocera)
+- Check caps of the touchpad when added (Bastien Nocera)
+- Make sure we fit within our minimum vertical size (William Jon McCann)
+- Don't reset scrolling method on start (Bastien Nocera) (#642474)
+
+Network:
+- Show the wireless security currently being used (Richard Hughes)
+- Do not show a provider string for mobile broadband devices when not connected (Richard Hughes)
+- Do not show the IPv6 address if nm_device_get_dhcp6_config() failed (Richard Hughes)
+- nm_device_wifi_get_bitrate() returns values in kb/s, not Mb/s (Richard Hughes)
+- Hide UI controls that are not connected up to anything yet (Richard Hughes)
+- Display the IPv6 address if one is provided for the device (Richard Hughes)
+- Never show the loop device if IP4 data isn't available (Richard Hughes)
+- Use an abstract device so we can get the VPN connection data (Richard Hughes)
+- Show the VPN connection state in the panel header (Richard Hughes)
+- A disconnected wired connection is 'Unplugged', not 'Disconnected' (Richard Hughes)
+- Display a different icon if the wired ethernet device is disconnected (Richard Hughes)
+- Do not show a speed of zero for any device (Richard Hughes)
+- Ensure we refresh the UI if coldplug devices are changed (Richard Hughes)
+- Add Option buttons (Matthias Clasen)
+- Fix some alignment and focus issues (Matthias Clasen)
+- Add a device off switch (Matthias Clasen)
+- Implement and show on/off switch for wireless/wimax (Matthias Clasen)
+- Refresh UI when active connections change (Matthias Clasen)
+- Add Option buttons to allow editing connections (Matthias Clasen)
+- Watch for new VPN connections being added and add them to the panel (Richard Hughes)
+- Drop tooltips on the device list (Matthias Clasen) (#644964)
+- Use dim-label style class for labels (Matthias Clasen) (#644964)
+- Fix version compatibility warning dialog (William Jon McCann) (#644973)
+- Avoid header pixel noise and inconsistent spacing (Matthias Clasen) (#644954, #644955)
+
+Printers:
+- Attach 'add printer' dialog to toplevel (Matthias Clasen) (#644213)
+- Call cupsGetDevices() asynchronously (Marek Kasik) (#644212)
+- Use dim-label to accentuate values (William Jon McCann)
+- Set longer timeout for installation of printer driver (Marek Kasik)
+- Don't sort printers by usage (Marek Kasik)
+- Handle no printers situation better (Marek Kasik) (#641421)
+- Show IP address of printer (Marek Kasik)
+- Change text about unavailability of CUPS (Marek Kasik) (#641421)
+- Fix alignment in secondary notebook pages (William Jon McCann)
+- Show computer-fail icon when can not connect to CUPS (Marek Kasik) (#641421)
+
+Region:
+- Using separate window group to avoid modal shadowing (Sergey Udaltsov)
+- Stop layout add dialogue from "jumping" (Bastien Nocera)
+- Make drag'n'drop work (Bastien Nocera)
+
+Screen:
+- Fix the delay acrobatics (Matthias Clasen) (#644403)
+- Drop converting between seconds and minutes (William Jon McCann)
+- Set the label as insensitive when Lock is off (Cosimo Cecchi) (#645149)
+- Honor disable-lock-screen setting (William Jon McCann)
+
+Shell:
+- Fix resizing when switching from panel to panel (Gerd Kohlberger) (#636596)
+
+Sound:
+- Fix scroll event handling of channel bars (Matthias Clasen) (#644462)
+- Fix ordering of typedefs (Bastien Nocera)
+- Use upstream value for amplified volume (Colin Guthrie) (#644292)
+- Add introspection info for new GIcon function (Florian Müllner)
+- Remove old support code for PA < 0.9.15 (Bastien Nocera)
+
+Universal access:
+- Set the name to the right hboxes (Cosimo Cecchi) (#645135)
+- Use NO_SENSITIVITY flag for g_settings_bind() (Cosimo Cecchi) (#645171)
+
+User accounts:
+- Use dim-label class instead of hardcoded color (William Jon McCann)
+- Update cheeese minimum requirements (Bastien Nocera)
+- Nuke supervised accounts (David Zeuthen)
+- Don't warn if there are no faces pixmaps (Bastien Nocera) (#645347)
+
+Translations:
+- ar (Khaled Hosny)
+- cz (Ondrej Kopka)
+- de (Mario Blättermann)
+- en_GB (Bruce Cowan)
+- es (Daniel Mustieles, Jorge González)
+- et (Mattias Põldaru)
+- gl (Fran Diéguez)
+- he (Yaron Shahrabani)
+- hu (Gabor Kelemen)
+- it (Luca Ferretti)
+- ja (Takayuki KUSANO)
+- ko (Changwoo Ryu)
+- lt (Gintautas Miliauskas)
+- lv (Rudolfs Mazurs)
+- nb (Kjartan Maraas)
+- pa (A S Alam)
+- pl (Piotr Drąg)
+- pt (Duarte Loreto)
+- pt_BR (Hugo Vaz Sampaio)
+- sl (Andrej Žnidaršič, Matej Urbančič)
+- sr (Мирослав Николић)
+- sv (Daniel Nylander)
+- uk (Daniel Korostil)
+- zh_CN (Aron Xu)
+- zh_HK (Chao-Hsiung Liao)
+- zh_TW (Chao-Hsiung Liao)
+
+=============================
 Version 2.91.91 (2011-03-08)
 =============================
 
