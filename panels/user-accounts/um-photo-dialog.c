@@ -372,45 +372,61 @@ setup_photo_popup (UmPhotoDialog *um)
 {
         GtkWidget *menu, *menuitem, *image;
         guint x, y;
+        const gchar * const * dirs;
+        guint i;
         GDir *dir;
         const char *face;
-        GError *error;
         gboolean none_item_shown;
+        gboolean added_faces;
 
         menu = gtk_menu_new ();
 
         x = 0;
         y = 0;
-        none_item_shown = FALSE;
+        none_item_shown = added_faces = FALSE;
 
-        error = NULL;
-        dir = g_dir_open (DATADIR "/pixmaps/faces", 0, &error);
-        if (dir == NULL) {
-                g_warning ("Failed to load faces: %s", error->message);
-                g_error_free (error);
-                goto skip_faces;
-        }
+        dirs = g_get_system_data_dirs ();
+        for (i = 0; dirs[i] != NULL; i++) {
+                char *path;
 
-        while ((face = g_dir_read_name (dir)) != NULL) {
-                char *filename;
-
-                filename = g_build_filename (DATADIR "/pixmaps/faces", face, NULL);
-                menuitem = menu_item_for_filename (um, filename);
-                g_free (filename);
-                if (menuitem == NULL)
+                path = g_build_filename (dirs[i], "pixmaps", "faces", NULL);
+                g_message ("trying to open %s", path);
+                dir = g_dir_open (path, 0, NULL);
+                if (dir == NULL) {
+                        g_free (path);
                         continue;
-
-                gtk_menu_attach (GTK_MENU (menu), GTK_WIDGET (menuitem),
-                                 x, x + 1, y, y + 1);
-                gtk_widget_show (menuitem);
-
-                x++;
-                if (x >= ROW_SPAN - 1) {
-                        y++;
-                        x = 0;
                 }
+
+                while ((face = g_dir_read_name (dir)) != NULL) {
+                        char *filename;
+
+                        added_faces = TRUE;
+
+                        filename = g_build_filename (path, face, NULL);
+                        menuitem = menu_item_for_filename (um, filename);
+                        g_free (filename);
+                        if (menuitem == NULL)
+                                continue;
+
+                        gtk_menu_attach (GTK_MENU (menu), GTK_WIDGET (menuitem),
+                                         x, x + 1, y, y + 1);
+                        gtk_widget_show (menuitem);
+
+                        x++;
+                        if (x >= ROW_SPAN - 1) {
+                                y++;
+                                x = 0;
+                        }
+                }
+                g_dir_close (dir);
+                g_free (path);
+
+                if (added_faces)
+                        break;
         }
-        g_dir_close (dir);
+
+        if (!added_faces)
+                goto skip_faces;
 
         image = gtk_image_new_from_icon_name ("avatar-default", GTK_ICON_SIZE_DIALOG);
         menuitem = gtk_menu_item_new ();
@@ -425,15 +441,15 @@ setup_photo_popup (UmPhotoDialog *um)
         y++;
 
 skip_faces:
-	if (!none_item_shown) {
-		menuitem = gtk_menu_item_new_with_label (_("Disable image"));
-		gtk_menu_attach (GTK_MENU (menu), GTK_WIDGET (menuitem),
-				 0, ROW_SPAN - 1, y, y + 1);
-		g_signal_connect (G_OBJECT (menuitem), "activate",
-				  G_CALLBACK (none_icon_selected), um);
-		gtk_widget_show (menuitem);
-		y++;
-	}
+        if (!none_item_shown) {
+                menuitem = gtk_menu_item_new_with_label (_("Disable image"));
+                gtk_menu_attach (GTK_MENU (menu), GTK_WIDGET (menuitem),
+                                 0, ROW_SPAN - 1, y, y + 1);
+                g_signal_connect (G_OBJECT (menuitem), "activate",
+                                  G_CALLBACK (none_icon_selected), um);
+                gtk_widget_show (menuitem);
+                y++;
+        }
 
         /* Separator */
         menuitem = gtk_separator_menu_item_new ();
