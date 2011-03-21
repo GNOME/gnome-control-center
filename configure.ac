@@ -382,6 +382,7 @@ panels/universal-access/gnome-universal-access-panel.desktop.in
 panels/user-accounts/Makefile
 panels/user-accounts/data/Makefile
 panels/user-accounts/data/gnome-user-accounts-panel.desktop.in
+panels/user-accounts/data/faces/Makefile
 panels/user-accounts/data/icons/Makefile
 po/Makefile.in
 shell/Makefile
