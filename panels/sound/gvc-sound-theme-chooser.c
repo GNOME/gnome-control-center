@@ -45,7 +45,7 @@ struct GvcSoundThemeChooserPrivate
         GtkWidget *treeview;
         GtkWidget *selection_box;
         GConfClient *client;
-        guint sounds_dir_id;
+        GSettings *sound_settings;
         guint metacity_dir_id;
         char *current_theme;
         char *current_parent;
@@ -57,10 +57,11 @@ static void     gvc_sound_theme_chooser_finalize   (GObject            *object);
 
 G_DEFINE_TYPE (GvcSoundThemeChooser, gvc_sound_theme_chooser, GTK_TYPE_VBOX)
 
-#define KEY_SOUNDS_DIR             "/desktop/gnome/sound"
-#define EVENT_SOUNDS_KEY           KEY_SOUNDS_DIR "/event_sounds"
-#define INPUT_SOUNDS_KEY           KEY_SOUNDS_DIR "/input_feedback_sounds"
-#define SOUND_THEME_KEY            KEY_SOUNDS_DIR "/theme_name"
+#define KEY_SOUNDS_SCHEMA          "org.gnome.desktop.sound"
+#define EVENT_SOUNDS_KEY           "event-sounds"
+#define INPUT_SOUNDS_KEY           "input-feedback-sounds"
+#define SOUND_THEME_KEY            "theme-name"
+
 #define KEY_METACITY_DIR           "/apps/metacity/general"
 #define AUDIO_BELL_KEY             KEY_METACITY_DIR "/audible_bell"
 
@@ -321,13 +322,13 @@ save_theme_name (GvcSoundThemeChooser *chooser,
 
         /* special case for no sounds */
         if (strcmp (theme_name, NO_SOUNDS_THEME_NAME) == 0) {
-                gconf_client_set_bool (chooser->priv->client, EVENT_SOUNDS_KEY, FALSE, NULL);
+                g_settings_set_boolean (chooser->priv->sound_settings, EVENT_SOUNDS_KEY, FALSE);
                 return;
         } else {
-                gconf_client_set_bool (chooser->priv->client, EVENT_SOUNDS_KEY, TRUE, NULL);
+                g_settings_set_boolean (chooser->priv->sound_settings, EVENT_SOUNDS_KEY, TRUE);
         }
 
-        gconf_client_set_string (chooser->priv->client, SOUND_THEME_KEY, theme_name, NULL);
+        g_settings_set_string (chooser->priv->sound_settings, SOUND_THEME_KEY, theme_name);
 }
 
 static gboolean
@@ -657,11 +658,11 @@ update_theme (GvcSoundThemeChooser *chooser)
         gboolean     events_enabled;
         char        *last_theme;
 
-        events_enabled = gconf_client_get_bool (chooser->priv->client, EVENT_SOUNDS_KEY, NULL);
+        events_enabled = g_settings_get_boolean (chooser->priv->sound_settings, EVENT_SOUNDS_KEY);
 
         last_theme = chooser->priv->current_theme;
         if (events_enabled) {
-                chooser->priv->current_theme = gconf_client_get_string (chooser->priv->client, SOUND_THEME_KEY, NULL);
+                chooser->priv->current_theme = g_settings_get_string (chooser->priv->sound_settings, SOUND_THEME_KEY);
         } else {
                 chooser->priv->current_theme = g_strdup (NO_SOUNDS_THEME_NAME);
         }
@@ -707,6 +708,20 @@ gvc_sound_theme_chooser_class_init (GvcSoundThemeChooserClass *klass)
 }
 
 static void
+on_sound_settings_changed (GSettings            *settings,
+                           const char           *key,
+                           GvcSoundThemeChooser *chooser)
+{
+        if (strcmp (key, EVENT_SOUNDS_KEY) == 0) {
+                update_theme (chooser);
+        } else if (strcmp (key, SOUND_THEME_KEY) == 0) {
+                update_theme (chooser);
+        } else if (strcmp (key, INPUT_SOUNDS_KEY) == 0) {
+                update_theme (chooser);
+        }
+}
+
+static void
 on_key_changed (GConfClient          *client,
                 guint                 cnxn_id,
                 GConfEntry           *entry,
@@ -716,18 +731,11 @@ on_key_changed (GConfClient          *client,
 
         key = gconf_entry_get_key (entry);
 
-        if (! g_str_has_prefix (key, KEY_SOUNDS_DIR)
-            && ! g_str_has_prefix (key, KEY_METACITY_DIR)) {
+        if (! g_str_has_prefix (key, KEY_METACITY_DIR)) {
                 return;
         }
 
-        if (strcmp (key, EVENT_SOUNDS_KEY) == 0) {
-                update_theme (chooser);
-        } else if (strcmp (key, SOUND_THEME_KEY) == 0) {
-                update_theme (chooser);
-        } else if (strcmp (key, INPUT_SOUNDS_KEY) == 0) {
-                update_theme (chooser);
-        } else if (strcmp (key, AUDIO_BELL_KEY) == 0) {
+        if (strcmp (key, AUDIO_BELL_KEY) == 0) {
                 update_theme (chooser);
         }
 }
@@ -760,6 +768,7 @@ gvc_sound_theme_chooser_init (GvcSoundThemeChooser *chooser)
         chooser->priv = GVC_SOUND_THEME_CHOOSER_GET_PRIVATE (chooser);
 
         chooser->priv->client = gconf_client_get_default ();
+        chooser->priv->sound_settings = g_settings_new (KEY_SOUNDS_SCHEMA);
 
         str = g_strdup_printf ("<b>%s</b>", _("C_hoose an alert sound:"));
         chooser->priv->selection_box = box = gtk_frame_new (str);
@@ -792,13 +801,8 @@ gvc_sound_theme_chooser_init (GvcSoundThemeChooser *chooser)
         gtk_container_add (GTK_CONTAINER (scrolled_window), chooser->priv->treeview);
         gtk_container_add (GTK_CONTAINER (alignment), scrolled_window);
 
-        gconf_client_add_dir (chooser->priv->client, KEY_SOUNDS_DIR,
-                              GCONF_CLIENT_PRELOAD_ONELEVEL,
-                              NULL);
-        chooser->priv->sounds_dir_id = gconf_client_notify_add (chooser->priv->client,
-                                                                KEY_SOUNDS_DIR,
-                                                                (GConfClientNotifyFunc)on_key_changed,
-                                                                chooser, NULL, NULL);
+        g_signal_connect (G_OBJECT (chooser->priv->sound_settings), "changed",
+                          G_CALLBACK (on_sound_settings_changed), chooser);
         gconf_client_add_dir (chooser->priv->client, KEY_METACITY_DIR,
                               GCONF_CLIENT_PRELOAD_ONELEVEL,
                               NULL);
@@ -806,7 +810,6 @@ gvc_sound_theme_chooser_init (GvcSoundThemeChooser *chooser)
                                                                   KEY_METACITY_DIR,
                                                                   (GConfClientNotifyFunc)on_key_changed,
                                                                   chooser, NULL, NULL);
-
 }
 
 static void
@@ -820,17 +823,13 @@ gvc_sound_theme_chooser_finalize (GObject *object)
         sound_theme_chooser = GVC_SOUND_THEME_CHOOSER (object);
 
         if (sound_theme_chooser->priv != NULL) {
-                if (sound_theme_chooser->priv->sounds_dir_id > 0) {
-                        gconf_client_notify_remove (sound_theme_chooser->priv->client,
-                                                    sound_theme_chooser->priv->sounds_dir_id);
-                        sound_theme_chooser->priv->sounds_dir_id = 0;
-                }
                 if (sound_theme_chooser->priv->metacity_dir_id > 0) {
                         gconf_client_notify_remove (sound_theme_chooser->priv->client,
                                                     sound_theme_chooser->priv->metacity_dir_id);
                         sound_theme_chooser->priv->metacity_dir_id = 0;
                 }
                 g_object_unref (sound_theme_chooser->priv->client);
+                g_object_unref (sound_theme_chooser->priv->sound_settings);
                 sound_theme_chooser->priv->client = NULL;
         }
 
