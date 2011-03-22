@@ -390,7 +390,6 @@ setup_photo_popup (UmPhotoDialog *um)
                 char *path;
 
                 path = g_build_filename (dirs[i], "pixmaps", "faces", NULL);
-                g_message ("trying to open %s", path);
                 dir = g_dir_open (path, 0, NULL);
                 if (dir == NULL) {
                         g_free (path);
