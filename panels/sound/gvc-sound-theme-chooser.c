@@ -68,6 +68,7 @@ G_DEFINE_TYPE (GvcSoundThemeChooser, gvc_sound_theme_chooser, GTK_TYPE_VBOX)
 #define DEFAULT_ALERT_ID        "__default"
 #define CUSTOM_THEME_NAME       "__custom"
 #define NO_SOUNDS_THEME_NAME    "__no_sounds"
+#define DEFAULT_THEME           "freedesktop"
 
 enum {
         THEME_DISPLAY_COL,
@@ -317,7 +318,7 @@ save_theme_name (GvcSoundThemeChooser *chooser,
 {
         /* If the name is empty, use "freedesktop" */
         if (theme_name == NULL || *theme_name == '\0') {
-                theme_name = "freedesktop";
+                theme_name = DEFAULT_THEME;
         }
 
         /* special case for no sounds */
@@ -413,7 +414,10 @@ update_alert (GvcSoundThemeChooser *chooser,
                 /* remove custom just in case */
                 remove_custom = TRUE;
         } else if (! is_custom && ! is_default) {
-                create_custom_theme (chooser->priv->current_parent);
+                if (chooser->priv->current_parent)
+                        create_custom_theme (chooser->priv->current_parent);
+                else
+                        create_custom_theme (DEFAULT_THEME);
                 save_alert_sounds (chooser, alert_id);
                 add_custom = TRUE;
         } else if (is_custom && is_default) {
@@ -669,8 +673,13 @@ update_theme (GvcSoundThemeChooser *chooser)
 
         if (g_strcmp0 (last_theme, chooser->priv->current_theme) != 0) {
                 g_free (chooser->priv->current_parent);
-                load_theme_name (chooser->priv->current_theme,
-                                 &chooser->priv->current_parent);
+                if (load_theme_name (chooser->priv->current_theme,
+                                     &chooser->priv->current_parent) == FALSE) {
+                        g_free (chooser->priv->current_theme);
+                        chooser->priv->current_theme = g_strdup (DEFAULT_THEME);
+                        load_theme_name (DEFAULT_THEME,
+                                         &chooser->priv->current_parent);
+                }
         }
         g_free (last_theme);
 
