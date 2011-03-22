@@ -33,7 +33,6 @@
 
 #include "cc-sound-panel.h"
 #include "gvc-mixer-dialog.h"
-#include "gvc-log.h"
 
 G_DEFINE_DYNAMIC_TYPE (CcSoundPanel, cc_sound_panel, CC_TYPE_PANEL)
 
@@ -72,9 +71,6 @@ cc_sound_panel_finalize (GObject *object)
 static void
 cc_sound_panel_init (CcSoundPanel *self)
 {
-        gvc_log_init ();
-        gvc_log_set_debug (TRUE);
-
         gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
                                            ICON_DATA_DIR);
         gtk_window_set_default_icon_name ("multimedia-volume-control");

@@ -48,8 +48,6 @@ libgnomevolumecontrol_la_SOURCES =		\
 	gvc-mixer-control-private.h		\
 	gvc-channel-bar.h			\
 	gvc-channel-bar.c			\
-	gvc-log.h				\
-	gvc-log.c				\
 	gvc-pulseaudio-fake.h			\
 	$(NULL)
 
@@ -64,6 +62,8 @@ gnome_sound_applet_SOURCES =			\
 	gvc-stream-status-icon.c		\
 	gvc-applet.h				\
 	gvc-applet.c				\
+	gvc-log.h				\
+	gvc-log.c				\
 	applet-main.c				\
 	$(NULL)
 

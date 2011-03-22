@@ -16,6 +16,8 @@ cc-shell-marshal.c: cc-shell-marshal.list
 
 gnome_control_center_SOURCES =			\
 	control-center.c			\
+	cc-shell-log.c				\
+	cc-shell-log.h				\
 	gnome-control-center.c			\
 	gnome-control-center.h			\
 	shell-search-renderer.c			\

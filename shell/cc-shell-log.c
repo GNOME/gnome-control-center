@@ -24,8 +24,7 @@
 #include <glib.h>
 #include <glib/gstdio.h>
 
-#include "gvc-log.h"
-
+#include "cc-shell-log.h"
 
 static int log_levels = G_LOG_LEVEL_CRITICAL |
                         G_LOG_LEVEL_ERROR    |
@@ -35,7 +34,7 @@ static int log_levels = G_LOG_LEVEL_CRITICAL |
                         G_LOG_LEVEL_DEBUG;
 
 static void
-gvc_log_default_handler (const gchar    *log_domain,
+cc_shell_log_default_handler (const gchar    *log_domain,
                          GLogLevelFlags  log_level,
                          const gchar    *message,
                          gpointer        unused_data)
@@ -47,13 +46,13 @@ gvc_log_default_handler (const gchar    *log_domain,
 }
 
 void
-gvc_log_init (void)
+cc_shell_log_init (void)
 {
-        g_log_set_default_handler (gvc_log_default_handler, NULL);
+        g_log_set_default_handler (cc_shell_log_default_handler, NULL);
 }
 
 void
-gvc_log_set_debug (gboolean debug)
+cc_shell_log_set_debug (gboolean debug)
 {
         if (debug) {
                 log_levels |= (G_LOG_LEVEL_DEBUG | G_LOG_LEVEL_INFO);

@@ -29,6 +29,8 @@
 #include <gtk/gtk.h>
 #include <string.h>
 
+#include "cc-shell-log.h"
+
 G_GNUC_NORETURN static gboolean
 option_version_cb (const gchar *option_name,
                    const gchar *value,
@@ -41,9 +43,11 @@ option_version_cb (const gchar *option_name,
 
 static char **start_panels = NULL;
 static gboolean show_overview = FALSE;
+static gboolean verbose = FALSE;
 
 const GOptionEntry all_options[] = {
   { "version", 0, G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, option_version_cb, NULL, NULL },
+  { "verbose", 'v', 0, G_OPTION_ARG_NONE, &verbose, N_("Enable verbose mode"), NULL },
   { "overview", 'o', 0, G_OPTION_ARG_NONE, &show_overview, N_("Show the overview"), NULL },
   { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &start_panels, N_("Panel to display"), NULL },
   { NULL } /* end the list */
@@ -76,6 +80,8 @@ application_command_line_cb (GApplication  *application,
       exit (1);
     }
   g_option_context_free (context);
+
+  cc_shell_log_set_debug (verbose);
 
   gnome_control_center_show (shell, GTK_APPLICATION (application));
 
@@ -139,6 +145,7 @@ main (int argc, char **argv)
 
   g_thread_init (NULL);
   gtk_init (&argc, &argv);
+  cc_shell_log_init ();
 
   shell = gnome_control_center_new ();
 
