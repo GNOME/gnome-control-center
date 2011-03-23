@@ -2224,7 +2224,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
 
   /* Add unlock button */
   priv->permission = (GPermission *)polkit_permission_new_sync (
-    "org.opensuse.cupspkhelper.mechanism.printeraddremove", NULL, NULL, NULL);
+    "org.opensuse.cupspkhelper.mechanism.all-edit", NULL, NULL, NULL);
   if (priv->permission != NULL)
     {
       widget = cc_lock_button_new (priv->permission);
