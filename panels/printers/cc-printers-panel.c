@@ -73,6 +73,8 @@ struct _CcPrintersPanelPrivate
 
   GPermission *permission;
 
+  GSettings *lockdown_settings;
+
   PpNewPrinterDialog *pp_new_printer_dialog;
 
   gpointer dummy;
@@ -147,6 +149,12 @@ cc_printers_panel_dispose (GObject *object)
     {
       g_object_unref (priv->builder);
       priv->builder = NULL;
+    }
+
+  if (priv->lockdown_settings)
+    {
+      g_object_unref (priv->lockdown_settings);
+      priv->lockdown_settings = NULL;
     }
 
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->dispose (object);
@@ -2009,7 +2017,8 @@ on_permission_changed (GPermission *permission,
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
-  is_authorized = g_permission_get_allowed (G_PERMISSION (priv->permission));
+  is_authorized = g_permission_get_allowed (G_PERMISSION (priv->permission)) &&
+    !g_settings_get_boolean (priv->lockdown_settings, "disable-print-setup");
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-add-button");
   gtk_widget_set_sensitive (widget, is_authorized);
@@ -2031,6 +2040,25 @@ on_permission_changed (GPermission *permission,
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "allowed-user-remove-button");
   gtk_widget_set_sensitive (widget, is_authorized);
+}
+
+static void
+on_lockdown_settings_changed (GSettings  *settings,
+                              const char *key,
+                              gpointer    user_data)
+{
+  CcPrintersPanelPrivate  *priv;
+  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
+
+  if (g_str_equal (key, "disable-print-setup") == FALSE)
+    return;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  gtk_widget_set_sensitive (priv->lock_button,
+    !g_settings_get_boolean (priv->lockdown_settings, "disable-print-setup"));
+
+  on_permission_changed (priv->permission, NULL, user_data);
 }
 
 static void
@@ -2188,6 +2216,12 @@ cc_printers_panel_init (CcPrintersPanel *self)
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "printer-options-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (switch_to_options_cb), self);
+
+  priv->lockdown_settings = g_settings_new ("org.gnome.desktop.lockdown");
+  g_signal_connect (priv->lockdown_settings,
+                    "changed",
+                    G_CALLBACK (on_lockdown_settings_changed),
+                    self);
 
 
   /* Set junctions */
