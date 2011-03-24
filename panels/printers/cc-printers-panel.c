@@ -2006,6 +2006,129 @@ printer_maintenance_cb (GtkButton *button,
 }
 
 static void
+test_page_cb (GtkButton *button,
+              gpointer   user_data)
+{
+  CcPrintersPanelPrivate  *priv;
+  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
+  cups_ptype_t             type = 0;
+  const gchar             *printer_type = NULL;
+  gchar                   *printer_name = NULL;
+  gint                     i;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  if (priv->current_dest >= 0 &&
+      priv->current_dest < priv->num_dests &&
+      priv->dests != NULL)
+    {
+      printer_name = priv->dests[priv->current_dest].name;
+      printer_type = cupsGetOption ("printer-type",
+                                    priv->dests[priv->current_dest].num_options,
+                                    priv->dests[priv->current_dest].options);
+      if (printer_type)
+        type = atoi (printer_type);
+    }
+
+  if (printer_name)
+    {
+      const gchar  *const dirs[] = { "/usr/share/cups",
+                                     "/usr/local/share/cups",
+                                     NULL };
+      const gchar  *testprint[] = { "%s/data/testprint",
+                                    "%s/data/testprint.ps",
+                                    NULL };
+      const gchar **pattern;
+      const gchar  *datadir = NULL;
+      http_t       *http = NULL;
+      gchar        *printer_uri = NULL;
+      gchar        *filename = NULL;
+      gchar        *resource = NULL;
+      ipp_t        *response;
+      ipp_t        *request;
+
+      if ((datadir = getenv ("CUPS_DATADIR")) != NULL)
+        {
+          for (pattern = testprint; *pattern != NULL; pattern++)
+            {
+              filename = g_strdup_printf (*pattern, datadir);
+              if (g_access (filename, R_OK) == 0)
+                break;
+              else
+                {
+                  g_free (filename);
+                  filename = NULL;
+                }
+            }
+        }
+      else
+        {
+          for (i = 0; (datadir = dirs[i]) != NULL && filename == NULL; i++)
+            {
+              for (pattern = testprint; *pattern != NULL; pattern++)
+                {
+                  filename = g_strdup_printf (*pattern, datadir);
+                  if (g_access (filename, R_OK) == 0)
+                    break;
+                  else
+                    {
+                      g_free (filename);
+                      filename = NULL;
+                    }
+                }
+            }
+        }
+
+      if (filename)
+        {
+          if (type & CUPS_PRINTER_CLASS)
+            {
+              printer_uri = g_strdup_printf ("ipp://localhost/classes/%s", printer_name);
+              resource = g_strdup_printf ("/classes/%s", printer_name);
+            }
+          else
+            {
+              printer_uri = g_strdup_printf ("ipp://localhost/printers/%s", printer_name);
+              resource = g_strdup_printf ("/printers/%s", printer_name);
+            }
+
+          http = httpConnectEncrypt (cupsServer (), ippPort (), cupsEncryption ());
+          if (http)
+            {
+              request = ippNewRequest (IPP_PRINT_JOB);
+              ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
+                            "printer-uri", NULL, printer_uri);
+              ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
+                            "requesting-user-name", NULL, cupsUser ());
+              ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
+              /* Translators: Name of job which makes printer to print test page */
+                            "job-name", NULL, _("Test page"));
+              response = cupsDoFileRequest (http, request, resource, filename);
+              httpClose (http);
+            }
+
+          g_free (filename);
+          g_free (printer_uri);
+          g_free (resource);
+        }
+      else
+        {
+          response = execute_maintenance_command (printer_name,
+                                                  "PrintSelfTestPage",
+          /* Translators: Name of job which makes printer to print test page */
+                                                  _("Test page"));
+        }
+
+      if (response)
+        {
+          if (response->state == IPP_ERROR)
+            g_warning ("An error has occured during printing of test page.");
+          ippDelete (response);
+        }
+    }
+}
+
+static void
 on_permission_changed (GPermission *permission,
                        GParamSpec  *pspec,
                        gpointer     data)
@@ -2199,7 +2322,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
 
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "print-test-page-button");
-  g_signal_connect (widget, "clicked", G_CALLBACK (printer_maintenance_cb), self);
+  g_signal_connect (widget, "clicked", G_CALLBACK (test_page_cb), self);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "back-button-1");
