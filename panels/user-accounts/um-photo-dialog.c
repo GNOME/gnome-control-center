@@ -97,6 +97,7 @@ um_photo_dialog_crop (UmPhotoDialog *um,
                                               _("Select"),
                                               GTK_RESPONSE_ACCEPT,
                                               NULL);
+        gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
         gtk_window_set_icon_name (GTK_WINDOW (dialog), "system-users");
 
