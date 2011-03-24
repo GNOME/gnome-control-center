@@ -115,9 +115,9 @@ update_pixbufs (UmCropArea *area)
                                                      allocation.width, allocation.height);
 
                 gtk_style_context_get_background_color (context, gtk_style_context_get_state (context), &color);
-                pixel = (((gint)(color.red * 255)) << 16) |
-                        (((gint)(color.green * 255)) << 8) |
-                         ((gint)(color.blue * 255));
+                pixel = (((gint)(color.red * 1.0)) << 16) |
+                        (((gint)(color.green * 1.0)) << 8) |
+                         ((gint)(color.blue * 1.0));
                 gdk_pixbuf_fill (area->priv->pixbuf, pixel);
 
                 width = gdk_pixbuf_get_width (area->priv->browse_pixbuf);
