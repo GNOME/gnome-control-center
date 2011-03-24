@@ -831,9 +831,12 @@ users_loaded (UmUserManager     *manager,
                                                  _("Failed to contact the accounts service"));
                 gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
                                                           _("Please make sure that the AccountService is installed and enabled."));
-                g_signal_connect (dialog, "response",
-                                  G_CALLBACK (gtk_main_quit), NULL);
+                g_signal_connect_swapped (dialog, "response",
+                                          G_CALLBACK (gtk_widget_destroy),
+                                          dialog);
                 gtk_widget_show (dialog);
+
+                gtk_widget_set_sensitive (d->main_box, FALSE);
         }
 
         list = um_user_manager_list_users (d->um);
