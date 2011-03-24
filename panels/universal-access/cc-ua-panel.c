@@ -507,6 +507,11 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                               WID (priv->builder, "seeing_zoom_switch"),
                               NULL);
 
+  settings_on_off_editor_new (priv, priv->application_settings,
+                              "screen-reader-enabled",
+                              WID (priv->builder, "seeing_reader_switch"),
+                              NULL);
+
   cc_ua_panel_set_shortcut_label (self, "seeing_contrast_toggle_keybinding_label", "toggle-contrast");
   cc_ua_panel_set_shortcut_label (self, "seeing_increase_size_keybinding_label", "increase-text-size");
   cc_ua_panel_set_shortcut_label (self, "seeing_decrease_size_keybinding_label", "decrease-text-size");
