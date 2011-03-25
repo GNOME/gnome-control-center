@@ -47,6 +47,7 @@
 #include "panel-common.h"
 #include "panel-cell-renderer-mode.h"
 #include "panel-cell-renderer-signal.h"
+#include "panel-cell-renderer-security.h"
 
 G_DEFINE_DYNAMIC_TYPE (CcNetworkPanel, cc_network_panel, CC_TYPE_PANEL)
 
@@ -77,6 +78,7 @@ enum {
         PANEL_WIRELESS_COLUMN_SORT,
         PANEL_WIRELESS_COLUMN_STRENGTH,
         PANEL_WIRELESS_COLUMN_MODE,
+        PANEL_WIRELESS_COLUMN_SECURITY,
         PANEL_WIRELESS_COLUMN_LAST
 };
 
@@ -680,6 +682,36 @@ panel_set_widget_heading (CcNetworkPanel *panel,
         g_free (label_id);
 }
 
+static guint
+get_access_point_security (NMAccessPoint *ap)
+{
+        NM80211ApFlags flags;
+        NM80211ApSecurityFlags wpa_flags;
+        NM80211ApSecurityFlags rsn_flags;
+        guint type;
+
+        flags = nm_access_point_get_flags (ap);
+        wpa_flags = nm_access_point_get_wpa_flags (ap);
+        rsn_flags = nm_access_point_get_rsn_flags (ap);
+
+        if (!(flags & NM_802_11_AP_FLAGS_PRIVACY) &&
+            wpa_flags == NM_802_11_AP_SEC_NONE &&
+            rsn_flags == NM_802_11_AP_SEC_NONE)
+                type = NM_AP_SEC_NONE;
+        else if ((flags & NM_802_11_AP_FLAGS_PRIVACY) &&
+                 wpa_flags == NM_802_11_AP_SEC_NONE &&
+                 rsn_flags == NM_802_11_AP_SEC_NONE)
+                type = NM_AP_SEC_WEP;
+        else if (!(flags & NM_802_11_AP_FLAGS_PRIVACY) &&
+                 wpa_flags != NM_802_11_AP_SEC_NONE &&
+                 rsn_flags != NM_802_11_AP_SEC_NONE)
+                type = NM_AP_SEC_WPA;
+        else
+                type = NM_AP_SEC_WPA2;
+
+        return type;
+}
+
 static void
 add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *active)
 {
@@ -708,6 +740,7 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
                             PANEL_WIRELESS_COLUMN_SORT, ssid_text,
                             PANEL_WIRELESS_COLUMN_STRENGTH, nm_access_point_get_strength (ap),
                             PANEL_WIRELESS_COLUMN_MODE, nm_access_point_get_mode (ap),
+                            PANEL_WIRELESS_COLUMN_SECURITY, get_access_point_security (ap),
                             -1);
 
         /* is this what we're on already? */
@@ -2162,11 +2195,21 @@ cc_network_panel_init (CcNetworkPanel *panel)
                           panel);
 
         renderer = panel_cell_renderer_mode_new ();
+        gtk_cell_renderer_set_padding (renderer, 4, 0);
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
                                     renderer,
                                     FALSE);
         gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
                                         "mode", PANEL_WIRELESS_COLUMN_MODE,
+                                        NULL);
+
+        renderer = panel_cell_renderer_security_new ();
+        gtk_cell_renderer_set_padding (renderer, 4, 0);
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
+                                    renderer,
+                                    FALSE);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
+                                        "security", PANEL_WIRELESS_COLUMN_SECURITY,
                                         NULL);
 
         /* sort networks in drop down */
@@ -2177,6 +2220,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
                                               GTK_SORT_ASCENDING);
 
         renderer = panel_cell_renderer_signal_new ();
+        gtk_cell_renderer_set_padding (renderer, 4, 0);
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
                                     renderer,
                                     FALSE);

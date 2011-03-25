@@ -24,6 +24,8 @@ libnetwork_la_SOURCES =					\
 	net-vpn.h					\
 	panel-cell-renderer-mode.c			\
 	panel-cell-renderer-mode.h			\
+	panel-cell-renderer-security.c			\
+	panel-cell-renderer-security.h			\
 	panel-cell-renderer-signal.c			\
 	panel-cell-renderer-signal.h			\
 	cc-network-panel.c				\
