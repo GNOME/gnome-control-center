@@ -21,10 +21,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-03-21 16:07+0000\n"
-"PO-Revision-Date: 2011-03-23 20:58+0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-03-25 04:27+0000\n"
+"PO-Revision-Date: 2011-03-25 04:29+0000\n"
 "Last-Translator: Aron Xu <happyaron.xu@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -69,7 +68,7 @@ msgid "Lock"
 msgstr "锁定"
 
 #: ../libgnome-control-center/cc-lockbutton.c:356
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:25
 msgid "Unlock"
 msgstr "解锁"
 
@@ -239,7 +238,9 @@ msgstr "适合宽度"
 msgid "Tile"
 msgstr "平铺"
 
+#. Translators: this refers to screen magnifier
 #: ../panels/background/background.ui.h:8
+#: ../panels/universal-access/uap.ui.h:84
 msgid "Zoom"
 msgstr "缩放"
 
@@ -256,7 +257,7 @@ msgid "Solid Color"
 msgstr "纯色"
 
 #: ../panels/background/cc-background-panel.c:958
-#: ../panels/user-accounts/um-photo-dialog.c:216
+#: ../panels/user-accounts/um-photo-dialog.c:217
 #: ../panels/user-accounts/data/photo-dialog.ui.h:2
 msgid "Browse for more pictures"
 msgstr "浏览更多图片"
@@ -394,7 +395,7 @@ msgstr "显示器"
 #: ../panels/display/display-capplet.ui.h:3
 #: ../panels/display/xrandr-capplet.c:327
 #: ../panels/display/xrandr-capplet.c:366
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:53
 msgid "Normal"
 msgstr "普通"
 
@@ -624,9 +625,9 @@ msgstr "系统信息"
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
 "fallback;"
-msgstr "设备;系统;信息;主存;处理器;版本;默认;应用程序;备用;"
-"device;system;information;memory;processor;version;default;application;"
-"fallback;"
+msgstr ""
+"设备;系统;信息;主存;处理器;版本;默认;应用程序;备用;device;system;information;"
+"memory;processor;version;default;application;fallback;"
 
 #: ../panels/info/info.ui.h:1
 msgid "Calendar"
@@ -931,7 +932,7 @@ msgstr "文本域中光标闪烁(_B)"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 #: ../panels/mouse/gnome-mouse-properties.ui.h:1
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Cursor blinks speed"
 msgstr "光标闪烁速度"
 
@@ -957,7 +958,7 @@ msgstr "按住某一键时重复该键(_R)"
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 #: ../panels/mouse/gnome-mouse-properties.ui.h:14
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Long"
 msgstr "长"
 
@@ -976,7 +977,7 @@ msgstr "速度(_P)："
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 #: ../panels/mouse/gnome-mouse-properties.ui.h:22
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Short"
 msgstr "短"
 
@@ -1154,214 +1155,216 @@ msgid "cd;dvd;usb;audio;video;disc;"
 msgstr "cd;dvd;usb;audio;video;disc;光盘;"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:251
+#: ../panels/printers/cc-printers-panel.c:259
 msgid "Low on toner"
 msgstr "墨粉不足"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:253
+#: ../panels/printers/cc-printers-panel.c:261
 msgid "Out of toner"
 msgstr "墨粉用尽"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:256
+#: ../panels/printers/cc-printers-panel.c:264
 msgid "Low on developer"
 msgstr "显影剂不足"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:259
+#: ../panels/printers/cc-printers-panel.c:267
 msgid "Out of developer"
 msgstr "显影剂用尽"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:261
+#: ../panels/printers/cc-printers-panel.c:269
 msgid "Low on a marker supply"
 msgstr "标记墨水不足"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:263
+#: ../panels/printers/cc-printers-panel.c:271
 msgid "Out of a marker supply"
 msgstr "标记墨水用尽"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:265
+#: ../panels/printers/cc-printers-panel.c:273
 msgid "Open cover"
 msgstr "打开上盖"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:267
+#: ../panels/printers/cc-printers-panel.c:275
 msgid "Open door"
 msgstr "打开后门"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:269
+#: ../panels/printers/cc-printers-panel.c:277
 msgid "Low on paper"
 msgstr "纸张不足"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:271
+#: ../panels/printers/cc-printers-panel.c:279
 msgid "Out of paper"
 msgstr "纸张用尽"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:273
+#: ../panels/printers/cc-printers-panel.c:281
 msgctxt "printer state"
 msgid "Offline"
 msgstr "离线"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:275
+#: ../panels/printers/cc-printers-panel.c:283
 msgctxt "printer state"
 msgid "Paused"
 msgstr "已暂停"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:277
+#: ../panels/printers/cc-printers-panel.c:285
 msgid "Waste receptacle almost full"
 msgstr "废粉仓将满"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:279
+#: ../panels/printers/cc-printers-panel.c:287
 msgid "Waste receptacle full"
 msgstr "废粉仓已满"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:281
+#: ../panels/printers/cc-printers-panel.c:289
 msgid "The optical photo conductor is near end of life"
 msgstr "感光鼓接近使用寿命"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:283
+#: ../panels/printers/cc-printers-panel.c:291
 msgid "The optical photo conductor is no longer functioning"
 msgstr "感光鼓无法工作"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:429
+#: ../panels/printers/cc-printers-panel.c:437
 msgctxt "printer state"
 msgid "Ready"
 msgstr "就绪"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:433
+#: ../panels/printers/cc-printers-panel.c:441
 msgctxt "printer state"
 msgid "Processing"
 msgstr "正在处理"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:437
+#: ../panels/printers/cc-printers-panel.c:445
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "已停止"
 
 # 以下几个level似乎译为“量”更好
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:573
+#: ../panels/printers/cc-printers-panel.c:581
 msgid "Toner Level"
 msgstr "碳粉量"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:576
+#: ../panels/printers/cc-printers-panel.c:584
 msgid "Ink Level"
 msgstr "墨水量"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:579
+#: ../panels/printers/cc-printers-panel.c:587
 msgid "Supply Level"
 msgstr "耗材量"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:594
+#: ../panels/printers/cc-printers-panel.c:602
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
 msgstr[0] "%u 个活动任务"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:744
+#: ../panels/printers/cc-printers-panel.c:752
 msgid "No printers available"
 msgstr "无可用打印机"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1035
+#: ../panels/printers/cc-printers-panel.c:1043
 msgctxt "print job"
 msgid "Pending"
 msgstr "等待中"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1039
+#: ../panels/printers/cc-printers-panel.c:1047
 msgctxt "print job"
 msgid "Held"
 msgstr "挂起"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1043
+#: ../panels/printers/cc-printers-panel.c:1051
 msgctxt "print job"
 msgid "Processing"
 msgstr "处理中"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1047
+#: ../panels/printers/cc-printers-panel.c:1055
 msgctxt "print job"
 msgid "Stopped"
 msgstr "已停止"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1051
+#: ../panels/printers/cc-printers-panel.c:1059
 msgctxt "print job"
 msgid "Canceled"
 msgstr "已取消"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1055
+#: ../panels/printers/cc-printers-panel.c:1063
 msgctxt "print job"
 msgid "Aborted"
 msgstr "已中止"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1059
+#: ../panels/printers/cc-printers-panel.c:1067
 msgctxt "print job"
 msgid "Completed"
 msgstr "已完成"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1151
+#: ../panels/printers/cc-printers-panel.c:1159
 msgid "Job Title"
 msgstr "任务标题"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1160
+#: ../panels/printers/cc-printers-panel.c:1168
 msgid "Job State"
 msgstr "任务状态"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1166
+#: ../panels/printers/cc-printers-panel.c:1174
 msgid "Time"
 msgstr "时间"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1881
+#: ../panels/printers/cc-printers-panel.c:1889
 msgid "Failed to add new printer."
 msgstr "添加新打印机失败。"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:1981
+#: ../panels/printers/cc-printers-panel.c:1989
+#: ../panels/printers/cc-printers-panel.c:2105
+#: ../panels/printers/cc-printers-panel.c:2119
 msgid "Test page"
 msgstr "测试页"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/cc-printers-panel.c:1989
+#: ../panels/printers/cc-printers-panel.c:1997
 msgid "Clean print heads"
 msgstr "清洗喷嘴"
 
 #. Translators: An error has occured during execution of a CUPS maintenance command
-#: ../panels/printers/cc-printers-panel.c:1994
+#: ../panels/printers/cc-printers-panel.c:2002
 msgid "An error has occured during a maintenance command."
 msgstr "执行维护命令时发生错误。"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2118
+#: ../panels/printers/cc-printers-panel.c:2269
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "无法装入界面：%s"
@@ -1459,13 +1462,13 @@ msgstr "后退"
 #. Translators: This checkbox is checked when the default printer is selected.
 #: ../panels/printers/printers.ui.h:10
 #: ../panels/region/gnome-region-panel-xkbot.c:229
-#: ../panels/sound/gvc-sound-theme-chooser.c:581
+#: ../panels/sound/gvc-sound-theme-chooser.c:586
 msgid "Default"
 msgstr "默认"
 
 #: ../panels/printers/printers.ui.h:11
 #: ../panels/network/cc-network-panel.c:1367
-#: ../panels/network/cc-network-panel.c:1370 ../panels/network/network.ui.h:12
+#: ../panels/network/cc-network-panel.c:1370 ../panels/network/network.ui.h:13
 msgid "IP Address"
 msgstr "IP 地址"
 
@@ -1515,8 +1518,7 @@ msgstr "显示"
 msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
-msgstr ""
-"对不起，系统打印服务似乎不可用。"
+msgstr "对不起，系统打印服务似乎不可用。"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
 #: ../panels/printers/printers.ui.h:30
@@ -1532,7 +1534,7 @@ msgid "Install languages..."
 msgstr "安装语言..."
 
 #: ../panels/region/gnome-region-panel.ui.h:3
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "Language"
 msgstr "语言"
 
@@ -1576,7 +1578,7 @@ msgid "View and edit keyboard layout options"
 msgstr "查看并编辑键盘布局选项"
 
 #: ../panels/region/gnome-region-panel.ui.h:14
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network.ui.h:35
 msgid "_Options..."
 msgstr "选项(_O)..."
 
@@ -1631,17 +1633,19 @@ msgstr "启用水平滚动(_O)"
 
 #. high sensitivity
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#: ../panels/universal-access/uap.ui.h:37
 msgid "High"
 msgstr "高"
 
 #. large threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:13
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Large"
 msgstr "大"
 
 #. low sensitivity
 #: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Low"
 msgstr "低"
 
@@ -1667,7 +1671,7 @@ msgstr "按住 Ctrl 键时显示指针位置(_O)"
 
 #. small threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:26
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Small"
 msgstr "小"
 
@@ -1763,8 +1767,8 @@ msgid "Enterprise"
 msgstr "企业"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:892
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/network/cc-network-panel.c:892 ../panels/network/network.ui.h:19
+#: ../panels/universal-access/uap.ui.h:52
 msgid "None"
 msgstr "无"
 
@@ -1775,11 +1779,11 @@ msgstr "无"
 msgid "%d Mb/s"
 msgstr "%d Mb/秒"
 
-#: ../panels/network/cc-network-panel.c:1363 ../panels/network/network.ui.h:13
+#: ../panels/network/cc-network-panel.c:1363 ../panels/network/network.ui.h:14
 msgid "IPv4 Address"
 msgstr "IPv4 地址"
 
-#: ../panels/network/cc-network-panel.c:1364 ../panels/network/network.ui.h:14
+#: ../panels/network/cc-network-panel.c:1364 ../panels/network/network.ui.h:15
 msgid "IPv6 Address"
 msgstr "IPv6 地址"
 
@@ -1815,129 +1819,122 @@ msgid "Air_plane Mode"
 msgstr "飞行模式(_P)"
 
 #: ../panels/network/network.ui.h:2
+msgid "Automatic"
+msgstr "自动"
+
+#: ../panels/network/network.ui.h:3
 msgid "Create..."
 msgstr "创建..."
 
-#: ../panels/network/network.ui.h:3
+#: ../panels/network/network.ui.h:4
 msgid "DNS"
 msgstr "DNS"
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:5
 msgid "DSL"
 msgstr "DSL"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:6
 msgid "Default Route"
 msgstr "默认路由"
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:7
 msgid "Gateway"
 msgstr "网关"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:8
 msgid "Group Name"
 msgstr "组名称"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:9
 msgid "Group Password"
 msgstr "组密码"
 
-#: ../panels/network/network.ui.h:9
+#: ../panels/network/network.ui.h:10
 msgid "H_TTPS Proxy"
 msgstr "H_TTP 代理"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:11
 msgid "Hardware Address"
 msgstr "硬件地址"
 
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:12
 msgid "IMEI"
 msgstr "IMEI"
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:16
 msgid "Interface"
 msgstr "接口"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:17
+msgid "Manual"
+msgstr "手动"
+
+#: ../panels/network/network.ui.h:18
 msgid "Mobile Broadband"
 msgstr "移动宽带"
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:20
 msgid "Provider"
 msgstr "提供商"
 
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:21
 msgid "Security"
 msgstr "安全性"
 
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:22
 msgid "Select the interface to use for the new service"
 msgstr "选择用于新服务的接口"
 
-#: ../panels/network/network.ui.h:20
+#: ../panels/network/network.ui.h:23
 msgid "Speed"
 msgstr "速度"
 
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:24
 msgid "Subnet Mask"
 msgstr "子网掩码"
 
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:26
 msgid "Username"
 msgstr "用户名"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:27
 msgid "VPN"
 msgstr "VPN"
 
 #. TRANSLATORS: device type
-#: ../panels/network/network.ui.h:25 ../panels/network/panel-common.c:82
+#: ../panels/network/network.ui.h:28 ../panels/network/panel-common.c:82
 msgid "Wired"
 msgstr "有线"
 
 #. TRANSLATORS: device type
-#: ../panels/network/network.ui.h:26 ../panels/network/panel-common.c:86
+#: ../panels/network/network.ui.h:29 ../panels/network/panel-common.c:86
 msgid "Wireless"
 msgstr "无线"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:30
 msgid "_Configuration URL"
 msgstr "配置 URL(_C)"
 
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network.ui.h:31
 msgid "_FTP Proxy"
 msgstr "_FTP 代理"
 
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network.ui.h:32
 msgid "_HTTP Proxy"
 msgstr "_HTTP 代理"
 
-#: ../panels/network/network.ui.h:30
+#: ../panels/network/network.ui.h:33
 msgid "_Method"
 msgstr "方法(_M)"
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network.ui.h:34
 msgid "_Network Name"
 msgstr "网络名称(_N)"
 
-#: ../panels/network/network.ui.h:33
+#: ../panels/network/network.ui.h:36
 msgid "_Socks Host"
 msgstr "_Socks 主机"
-
-#: ../panels/network/network.ui.h:34
-msgctxt "proxy method"
-msgid "Automatic"
-msgstr "自动"
-
-#: ../panels/network/network.ui.h:35
-msgctxt "proxy method"
-msgid "Manual"
-msgstr "手动"
-
-#: ../panels/network/network.ui.h:36
-msgctxt "proxy method"
-msgid "None"
-msgstr "无"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:93
@@ -2342,7 +2339,7 @@ msgstr "峰值检测"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1507
 #: ../panels/sound/gvc-mixer-dialog.c:1719
-#: ../panels/sound/gvc-sound-theme-chooser.c:591
+#: ../panels/sound/gvc-sound-theme-chooser.c:596
 msgid "Name"
 msgstr "名称"
 
@@ -2438,27 +2435,27 @@ msgstr "声音首选项(_S)"
 msgid "Muted"
 msgstr "已静音"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:188
+#: ../panels/sound/gvc-sound-theme-chooser.c:190
 msgid "Built-in"
 msgstr "内置"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:451
-#: ../panels/sound/gvc-sound-theme-chooser.c:463
-#: ../panels/sound/gvc-sound-theme-chooser.c:475
+#: ../panels/sound/gvc-sound-theme-chooser.c:456
+#: ../panels/sound/gvc-sound-theme-chooser.c:468
+#: ../panels/sound/gvc-sound-theme-chooser.c:480
 msgid "Sound Preferences"
 msgstr "声音首选项"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:454
-#: ../panels/sound/gvc-sound-theme-chooser.c:465
-#: ../panels/sound/gvc-sound-theme-chooser.c:477
+#: ../panels/sound/gvc-sound-theme-chooser.c:459
+#: ../panels/sound/gvc-sound-theme-chooser.c:470
+#: ../panels/sound/gvc-sound-theme-chooser.c:482
 msgid "Testing event sound"
 msgstr "测试事件声音"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:582
+#: ../panels/sound/gvc-sound-theme-chooser.c:587
 msgid "From theme"
 msgstr "来自主题"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:764
+#: ../panels/sound/gvc-sound-theme-chooser.c:782
 msgid "C_hoose an alert sound:"
 msgstr "选择警告声音(_H)："
 
@@ -2546,296 +2543,269 @@ msgid "75%"
 msgstr "75%"
 
 #: ../panels/universal-access/uap.ui.h:9
-msgid "Acceptance delay:"
-msgstr "可接受延迟："
-
-#: ../panels/universal-access/uap.ui.h:10
-msgid "Beep when Caps and Num Lock are used"
-msgstr "当使用 Caps Lock 键或 Num Lock 键时发出蜂鸣声"
-
-#: ../panels/universal-access/uap.ui.h:11
-msgid "Beep when a key is"
-msgstr "发出蜂鸣声当使用键"
-
-#: ../panels/universal-access/uap.ui.h:12
-msgid "Beep when a key is rejected"
-msgstr "当某个键被拒绝时发出蜂鸣声"
-
-#: ../panels/universal-access/uap.ui.h:13
-msgid "Beep when a modifer key is pressed"
-msgstr "当按下修饰键时发出蜂鸣声"
-
-#: ../panels/universal-access/uap.ui.h:14
-msgid "Bounce Keys"
-msgstr "回弹键"
-
-#: ../panels/universal-access/uap.ui.h:15
-msgid "Caribou"
-msgstr "Caribou"
-
-#: ../panels/universal-access/uap.ui.h:16
-msgid "Change contrast:"
-msgstr "改变对比度："
-
-#: ../panels/universal-access/uap.ui.h:17
-msgid "Closed Captioning"
-msgstr "闭合注释"
-
-#: ../panels/universal-access/uap.ui.h:18
-msgid "Contrast:"
-msgstr "对比度："
-
-#: ../panels/universal-access/uap.ui.h:19
-msgid "Control the pointer using the keypad"
-msgstr "使用小键盘控制鼠标指针。"
-
-#: ../panels/universal-access/uap.ui.h:20
-msgid "Control the pointer using the video camera."
-msgstr "使用摄像头控制鼠标指针"
-
-#: ../panels/universal-access/uap.ui.h:22
-msgid "D_elay:"
-msgstr "延时(_E)："
-
-#: ../panels/universal-access/uap.ui.h:23
-msgid "Dasher"
-msgstr "Dasher"
-
-#: ../panels/universal-access/uap.ui.h:24
-msgid "Decrease size:"
-msgstr "减少大小："
-
-#: ../panels/universal-access/uap.ui.h:25
-msgid "Disable if two keys are pressed together"
-msgstr "若同时按下两个键则禁用"
-
-#: ../panels/universal-access/uap.ui.h:26
-msgid "Display a textual description of speech and sounds"
-msgstr "显示语音和声音的文字描述。"
-
-#: ../panels/universal-access/uap.ui.h:27
-msgid "Flash the entire screen"
-msgstr "闪烁整个屏幕"
-
-#: ../panels/universal-access/uap.ui.h:28
-msgid "Flash the window title"
-msgstr "闪烁窗口标题栏"
-
-#: ../panels/universal-access/uap.ui.h:29
-msgid "GOK"
-msgstr "GNOME 屏幕键盘"
-
-#: ../panels/universal-access/uap.ui.h:30
-msgid "Hearing"
-msgstr "听觉"
-
-#: ../panels/universal-access/uap.ui.h:31
-msgid "Hover Click"
-msgstr "悬停点击"
-
-#: ../panels/universal-access/uap.ui.h:32
-msgid "Ignores fast duplicate keypresses"
-msgstr "忽略快速重复按键"
-
-#: ../panels/universal-access/uap.ui.h:33
-msgid "Increase size:"
-msgstr "增加大小："
-
-#: ../panels/universal-access/uap.ui.h:34
-msgid "Keyboard Settings"
-msgstr "键盘设置"
-
-#: ../panels/universal-access/uap.ui.h:37
-msgid "Larger"
-msgstr "较大"
-
-#: ../panels/universal-access/uap.ui.h:40
-msgid "Mouse Keys"
-msgstr "鼠标键"
-
-#: ../panels/universal-access/uap.ui.h:41
-msgid "Mouse Settings"
-msgstr "鼠标设置"
-
-#: ../panels/universal-access/uap.ui.h:42
-msgid "Nomon"
-msgstr "日冕定位"
-
-#: ../panels/universal-access/uap.ui.h:45
-msgid "On screen keyboard"
-msgstr "屏幕键盘"
-
-#: ../panels/universal-access/uap.ui.h:46
-msgid "OnBoard"
-msgstr "板载"
-
-#: ../panels/universal-access/uap.ui.h:47
-msgid "Options..."
-msgstr "选项..."
-
-#: ../panels/universal-access/uap.ui.h:48
-msgid "Pointing and Clicking"
-msgstr "指向和单击"
-
-#: ../panels/universal-access/uap.ui.h:49
-msgid "Puts a delay between when a key is pressed and when it is accepted"
-msgstr "当某键按下和接收之间插入延迟"
-
-#: ../panels/universal-access/uap.ui.h:50
-msgid "Screen Reader"
-msgstr "屏幕阅读器"
-
-#: ../panels/universal-access/uap.ui.h:51
-msgid "Screen keyboard"
-msgstr "屏幕键盘"
-
-#: ../panels/universal-access/uap.ui.h:52
-msgid "Seeing"
-msgstr "视觉"
-
-#: ../panels/universal-access/uap.ui.h:55
-msgid "Simulated Secondary Click"
-msgstr "模拟再次点击"
-
-#: ../panels/universal-access/uap.ui.h:56
-msgid "Slow Keys"
-msgstr "慢速键"
-
-#: ../panels/universal-access/uap.ui.h:59
-msgid "Sound Settings"
-msgstr "声音设置"
-
-#: ../panels/universal-access/uap.ui.h:60
-msgid "Sticky Keys"
-msgstr "粘滞键"
-
-#: ../panels/universal-access/uap.ui.h:61
-msgid "Test flash"
-msgstr "文字闪烁"
-
-#: ../panels/universal-access/uap.ui.h:62
-msgid "Text size:"
-msgstr "文字大小："
-
-#: ../panels/universal-access/uap.ui.h:63
-msgid "Treats a sequence of modifier keys as a key combination"
-msgstr "将一串修改过的键当作一个组合键"
-
-#: ../panels/universal-access/uap.ui.h:64
-msgid "Trigger a click when the pointer hovers"
-msgstr "指针悬停时执行点击。"
-
-#: ../panels/universal-access/uap.ui.h:65
-msgid "Trigger a secondary click by holding down the primary button"
-msgstr "按住鼠标主键不放时触发次击"
-
-#: ../panels/universal-access/uap.ui.h:66
-msgid "Turn on accessibility features from the keyboard"
-msgstr "打开键盘辅助功能特性"
-
-#: ../panels/universal-access/uap.ui.h:67
-msgid "Turn on or off:"
-msgstr "打开或关闭："
-
-#: ../panels/universal-access/uap.ui.h:68
-msgid "Type here to test settings"
-msgstr "在此输入字符以测试设置"
-
-#: ../panels/universal-access/uap.ui.h:69
-msgid "Typing"
-msgstr "打字"
-
-#: ../panels/universal-access/uap.ui.h:70
-msgid "Typing Assistant"
-msgstr "打字助手"
-
-#: ../panels/universal-access/uap.ui.h:71
-msgid "Use a visual indication when an alert sound occurs"
-msgstr "当警告声发生时使用视觉提示"
-
-#: ../panels/universal-access/uap.ui.h:72
-msgid "Video Mouse"
-msgstr "视频鼠标"
-
-#: ../panels/universal-access/uap.ui.h:73
-msgid "Visual Alerts"
-msgstr "视觉警告"
-
-#: ../panels/universal-access/uap.ui.h:74
-msgid "Zoom in:"
-msgstr "放大："
-
-#: ../panels/universal-access/uap.ui.h:75
-msgid "Zoom out:"
-msgstr "缩小："
-
-#: ../panels/universal-access/uap.ui.h:76
-msgid "_Motion threshold:"
-msgstr "运动阈值(_M)："
-
-#: ../panels/universal-access/uap.ui.h:77
-msgid "accepted"
-msgstr "已接受"
-
-#: ../panels/universal-access/uap.ui.h:78
-msgid "pressed"
-msgstr "已按下"
-
-#: ../panels/universal-access/uap.ui.h:79
-msgid "rejected"
-msgstr "已拒绝"
-
-#: ../panels/universal-access/uap.ui.h:80
-msgctxt "universal access, contrast"
 msgid "<span size=\"x-large\">High/Inverse</span>"
 msgstr "<span size=\"x-large\">高/反色</span>"
 
-#: ../panels/universal-access/uap.ui.h:81
-msgctxt "universal access, contrast"
+#: ../panels/universal-access/uap.ui.h:10
 msgid "<span size=\"x-large\">High</span>"
 msgstr "<span size=\"x-large\">高</span>"
 
-#: ../panels/universal-access/uap.ui.h:82
-msgctxt "universal access, contrast"
+#: ../panels/universal-access/uap.ui.h:11
 msgid "<span size=\"x-large\">Low</span>"
 msgstr "<span size=\"x-large\">低</span>"
 
-#: ../panels/universal-access/uap.ui.h:83
-msgctxt "universal access, contrast"
+#: ../panels/universal-access/uap.ui.h:12
 msgid "<span size=\"x-large\">Normal</span>"
 msgstr "<span size=\"x-large\">正常</span>"
 
-#: ../panels/universal-access/uap.ui.h:84
-msgctxt "universal access, contrast"
-msgid "High"
-msgstr "高"
+#: ../panels/universal-access/uap.ui.h:13
+msgid "Acceptance delay:"
+msgstr "可接受延迟："
 
-#: ../panels/universal-access/uap.ui.h:85
-msgctxt "universal access, contrast"
-msgid "High/Inverse"
-msgstr "高/反色"
+#: ../panels/universal-access/uap.ui.h:14
+msgid "Beep when Caps and Num Lock are used"
+msgstr "当使用 Caps Lock 键或 Num Lock 键时发出蜂鸣声"
 
-#: ../panels/universal-access/uap.ui.h:86
-msgctxt "universal access, contrast"
-msgid "Low"
-msgstr "低"
+#: ../panels/universal-access/uap.ui.h:15
+msgid "Beep when a key is"
+msgstr "发出蜂鸣声当使用键"
 
-#: ../panels/universal-access/uap.ui.h:87
-msgctxt "universal access, contrast"
-msgid "Normal"
-msgstr "普通"
+#: ../panels/universal-access/uap.ui.h:16
+msgid "Beep when a key is rejected"
+msgstr "当某个键被拒绝时发出蜂鸣声"
+
+#: ../panels/universal-access/uap.ui.h:17
+msgid "Beep when a modifer key is pressed"
+msgstr "当按下修饰键时发出蜂鸣声"
+
+#: ../panels/universal-access/uap.ui.h:18
+msgid "Bounce Keys"
+msgstr "回弹键"
+
+#: ../panels/universal-access/uap.ui.h:19
+msgid "Caribou"
+msgstr "Caribou"
+
+#: ../panels/universal-access/uap.ui.h:20
+msgid "Change contrast:"
+msgstr "改变对比度："
+
+#: ../panels/universal-access/uap.ui.h:21
+msgid "Closed Captioning"
+msgstr "闭合注释"
+
+#: ../panels/universal-access/uap.ui.h:22
+msgid "Contrast:"
+msgstr "对比度："
+
+#: ../panels/universal-access/uap.ui.h:23
+msgid "Control the pointer using the keypad"
+msgstr "使用小键盘控制鼠标指针。"
+
+#: ../panels/universal-access/uap.ui.h:24
+msgid "Control the pointer using the video camera."
+msgstr "使用摄像头控制鼠标指针"
+
+#: ../panels/universal-access/uap.ui.h:26
+msgid "D_elay:"
+msgstr "延时(_E)："
+
+#: ../panels/universal-access/uap.ui.h:27
+msgid "Dasher"
+msgstr "Dasher"
+
+#: ../panels/universal-access/uap.ui.h:28
+msgid "Decrease size:"
+msgstr "减少大小："
+
+#: ../panels/universal-access/uap.ui.h:29
+msgid "Disable if two keys are pressed together"
+msgstr "若同时按下两个键则禁用"
 
 #. Translators: this refers to theme contrast and font size
-#: ../panels/universal-access/uap.ui.h:89
-msgctxt "universal access, seeing"
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Display"
 msgstr "显示"
 
-#. Translators: this refers to screen magnifier
-#: ../panels/universal-access/uap.ui.h:91
-msgctxt "universal access, seeing"
-msgid "Zoom"
-msgstr "缩放"
+#: ../panels/universal-access/uap.ui.h:32
+msgid "Display a textual description of speech and sounds"
+msgstr "显示语音和声音的文字描述。"
+
+#: ../panels/universal-access/uap.ui.h:33
+msgid "Flash the entire screen"
+msgstr "闪烁整个屏幕"
+
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Flash the window title"
+msgstr "闪烁窗口标题栏"
+
+#: ../panels/universal-access/uap.ui.h:35
+msgid "GOK"
+msgstr "GNOME 屏幕键盘"
+
+#: ../panels/universal-access/uap.ui.h:36
+msgid "Hearing"
+msgstr "听觉"
+
+#: ../panels/universal-access/uap.ui.h:38
+msgid "High/Inverse"
+msgstr "高/反色"
+
+#: ../panels/universal-access/uap.ui.h:39
+msgid "Hover Click"
+msgstr "悬停点击"
+
+#: ../panels/universal-access/uap.ui.h:40
+msgid "Ignores fast duplicate keypresses"
+msgstr "忽略快速重复按键"
+
+#: ../panels/universal-access/uap.ui.h:41
+msgid "Increase size:"
+msgstr "增加大小："
+
+#: ../panels/universal-access/uap.ui.h:42
+msgid "Keyboard Settings"
+msgstr "键盘设置"
+
+#: ../panels/universal-access/uap.ui.h:45
+msgid "Larger"
+msgstr "较大"
+
+#: ../panels/universal-access/uap.ui.h:49
+msgid "Mouse Keys"
+msgstr "鼠标键"
+
+#: ../panels/universal-access/uap.ui.h:50
+msgid "Mouse Settings"
+msgstr "鼠标设置"
+
+#: ../panels/universal-access/uap.ui.h:51
+msgid "Nomon"
+msgstr "日冕定位"
+
+#: ../panels/universal-access/uap.ui.h:54
+msgid "On screen keyboard"
+msgstr "屏幕键盘"
+
+#: ../panels/universal-access/uap.ui.h:55
+msgid "OnBoard"
+msgstr "板载"
+
+#: ../panels/universal-access/uap.ui.h:56
+msgid "Options..."
+msgstr "选项..."
+
+#: ../panels/universal-access/uap.ui.h:57
+msgid "Pointing and Clicking"
+msgstr "指向和单击"
+
+#: ../panels/universal-access/uap.ui.h:58
+msgid "Puts a delay between when a key is pressed and when it is accepted"
+msgstr "当某键按下和接收之间插入延迟"
+
+#: ../panels/universal-access/uap.ui.h:59
+msgid "Screen Reader"
+msgstr "屏幕阅读器"
+
+#: ../panels/universal-access/uap.ui.h:60
+msgid "Screen keyboard"
+msgstr "屏幕键盘"
+
+#: ../panels/universal-access/uap.ui.h:61
+msgid "Seeing"
+msgstr "视觉"
+
+#: ../panels/universal-access/uap.ui.h:64
+msgid "Simulated Secondary Click"
+msgstr "模拟再次点击"
+
+#: ../panels/universal-access/uap.ui.h:65
+msgid "Slow Keys"
+msgstr "慢速键"
+
+#: ../panels/universal-access/uap.ui.h:68
+msgid "Sound Settings"
+msgstr "声音设置"
+
+#: ../panels/universal-access/uap.ui.h:69
+msgid "Sticky Keys"
+msgstr "粘滞键"
+
+#: ../panels/universal-access/uap.ui.h:70
+msgid "Test flash"
+msgstr "文字闪烁"
+
+#: ../panels/universal-access/uap.ui.h:71
+msgid "Text size:"
+msgstr "文字大小："
+
+#: ../panels/universal-access/uap.ui.h:72
+msgid "Treats a sequence of modifier keys as a key combination"
+msgstr "将一串修改过的键当作一个组合键"
+
+#: ../panels/universal-access/uap.ui.h:73
+msgid "Trigger a click when the pointer hovers"
+msgstr "指针悬停时执行点击。"
+
+#: ../panels/universal-access/uap.ui.h:74
+msgid "Trigger a secondary click by holding down the primary button"
+msgstr "按住鼠标主键不放时触发次击"
+
+#: ../panels/universal-access/uap.ui.h:75
+msgid "Turn on accessibility features from the keyboard"
+msgstr "打开键盘辅助功能特性"
+
+#: ../panels/universal-access/uap.ui.h:76
+msgid "Turn on or off:"
+msgstr "打开或关闭："
+
+#: ../panels/universal-access/uap.ui.h:77
+msgid "Type here to test settings"
+msgstr "在此输入字符以测试设置"
+
+#: ../panels/universal-access/uap.ui.h:78
+msgid "Typing"
+msgstr "打字"
+
+#: ../panels/universal-access/uap.ui.h:79
+msgid "Typing Assistant"
+msgstr "打字助手"
+
+#: ../panels/universal-access/uap.ui.h:80
+msgid "Use a visual indication when an alert sound occurs"
+msgstr "当警告声发生时使用视觉提示"
+
+#: ../panels/universal-access/uap.ui.h:81
+msgid "Video Mouse"
+msgstr "视频鼠标"
+
+#: ../panels/universal-access/uap.ui.h:82
+msgid "Visual Alerts"
+msgstr "视觉警告"
+
+#: ../panels/universal-access/uap.ui.h:85
+msgid "Zoom in:"
+msgstr "放大："
+
+#: ../panels/universal-access/uap.ui.h:86
+msgid "Zoom out:"
+msgstr "缩小："
+
+#: ../panels/universal-access/uap.ui.h:87
+msgid "_Motion threshold:"
+msgstr "运动阈值(_M)："
+
+#: ../panels/universal-access/uap.ui.h:88
+msgid "accepted"
+msgstr "已接受"
+
+#: ../panels/universal-access/uap.ui.h:89
+msgid "pressed"
+msgstr "已按下"
+
+#: ../panels/universal-access/uap.ui.h:90
+msgid "rejected"
+msgstr "已拒绝"
 
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
@@ -2918,15 +2888,11 @@ msgstr ""
 " ➣ “.”、“-”或“_”"
 
 #: ../panels/user-accounts/um-account-type.c:35
-#: ../panels/user-accounts/data/account-dialog.ui.h:2
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgctxt "Account type"
 msgid "Standard"
 msgstr "标准"
 
 #: ../panels/user-accounts/um-account-type.c:37
-#: ../panels/user-accounts/data/account-dialog.ui.h:1
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgctxt "Account type"
 msgid "Administrator"
 msgstr "管理员"
@@ -3248,13 +3214,23 @@ msgstr "登录;名称;指纹;头像;标志;密码;"
 msgid "User Accounts"
 msgstr "用户帐户"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:3
+#: ../panels/user-accounts/data/account-dialog.ui.h:1
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
+msgid "Administrator"
+msgstr "管理员"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:2
 msgid "Cr_eate"
 msgstr "创建(_E)"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:4
+#: ../panels/user-accounts/data/account-dialog.ui.h:3
 msgid "Create new account"
 msgstr "创建新帐户"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:4
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+msgid "Standard"
+msgstr "标准"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:5
 msgid "_Account Type"
@@ -3378,19 +3354,19 @@ msgstr "帐户信息"
 msgid "Account type"
 msgstr "帐户类型"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgid "Automatic Login"
 msgstr "自动登录"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
 msgid "Fingerprint Login"
 msgstr "指纹登录"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "Login Options"
 msgstr "登录选项"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "Password"
 msgstr "密码"
 
@@ -3444,19 +3420,23 @@ msgid ""
 "using your fingerprint reader."
 msgstr "您的指纹已成功保存。您现在应该可以使用指纹读取器登录了。"
 
-#: ../shell/control-center.c:47
+#: ../shell/control-center.c:50
+msgid "Enable verbose mode"
+msgstr "启用详细模式"
+
+#: ../shell/control-center.c:51
 msgid "Show the overview"
 msgstr "显示摘要"
 
-#: ../shell/control-center.c:48
+#: ../shell/control-center.c:52
 msgid "Panel to display"
 msgstr "显示面板"
 
-#: ../shell/control-center.c:65
+#: ../shell/control-center.c:69
 msgid "- System Settings"
 msgstr "- 系统设置"
 
-#: ../shell/control-center.c:72
+#: ../shell/control-center.c:76
 #, c-format
 msgid ""
 "%s\n"
@@ -3476,6 +3456,26 @@ msgstr "控制中心"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "全部设置(_A)"
+
+#~ msgctxt "proxy method"
+#~ msgid "None"
+#~ msgstr "无"
+
+#~ msgctxt "universal access, contrast"
+#~ msgid "High"
+#~ msgstr "高"
+
+#~ msgctxt "universal access, contrast"
+#~ msgid "Low"
+#~ msgstr "低"
+
+#~ msgctxt "universal access, contrast"
+#~ msgid "Normal"
+#~ msgstr "普通"
+
+#~ msgctxt "universal access, seeing"
+#~ msgid "Zoom"
+#~ msgstr "缩放"
 
 #~ msgid "Select a display language"
 #~ msgstr "选择界面显示语言"
