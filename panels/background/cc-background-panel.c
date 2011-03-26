@@ -1077,6 +1077,22 @@ load_current_bg (CcBackgroundPanel *self)
 }
 
 static void
+scrolled_realize_cb (GtkWidget         *scrolled,
+                     CcBackgroundPanel *self)
+{
+  /* FIXME, hack for https://bugzilla.gnome.org/show_bug.cgi?id=645649 */
+  GdkScreen *screen;
+  GdkRectangle rect;
+  int monitor;
+
+  screen = gtk_widget_get_screen (scrolled);
+  monitor = gdk_screen_get_monitor_at_window (screen, gtk_widget_get_window (scrolled));
+  gdk_screen_get_monitor_geometry (screen, monitor, &rect);
+  if (rect.height <= 768)
+    g_object_set (G_OBJECT (scrolled), "height-request", 280, NULL);
+}
+
+static void
 cc_background_panel_init (CcBackgroundPanel *self)
 {
   CcBackgroundPanelPrivate *priv;
@@ -1101,6 +1117,10 @@ cc_background_panel_init (CcBackgroundPanel *self)
       g_error_free (err);
       return;
     }
+
+  /* See shell_notify_cb for details */
+  g_signal_connect (WID ("scrolledwindow1"), "realize",
+                    G_CALLBACK (scrolled_realize_cb), self);
 
   priv->settings = g_settings_new (WP_PATH_ID);
   g_settings_delay (priv->settings);
