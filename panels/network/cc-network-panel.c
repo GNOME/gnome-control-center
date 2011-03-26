@@ -245,21 +245,49 @@ panel_proxy_mode_combo_setup_widgets (CcNetworkPanel *panel, guint value)
 
         /* hide or show the PAC text box */
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "hbox_proxy_url"));
+                                                     "heading_proxy_url"));
+        gtk_widget_set_visible (widget, value == 2);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "entry_proxy_url"));
         gtk_widget_set_visible (widget, value == 2);
 
         /* hide or show the manual entry text boxes */
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "hbox_proxy_http"));
+                                                     "heading_proxy_http"));
         gtk_widget_set_visible (widget, value == 1);
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "hbox_proxy_shttp"));
+                                                     "entry_proxy_http"));
         gtk_widget_set_visible (widget, value == 1);
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "hbox_proxy_ftp"));
+                                                     "spinbutton_proxy_http"));
+        gtk_widget_set_visible (widget, value == 1);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "heading_proxy_https"));
         gtk_widget_set_visible (widget, value == 1);
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "hbox_proxy_socks"));
+                                                     "entry_proxy_https"));
+        gtk_widget_set_visible (widget, value == 1);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "spinbutton_proxy_https"));
+        gtk_widget_set_visible (widget, value == 1);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "heading_proxy_ftp"));
+        gtk_widget_set_visible (widget, value == 1);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "entry_proxy_ftp"));
+        gtk_widget_set_visible (widget, value == 1);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "spinbutton_proxy_ftp"));
+        gtk_widget_set_visible (widget, value == 1);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "heading_proxy_socks"));
+        gtk_widget_set_visible (widget, value == 1);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "entry_proxy_socks"));
+        gtk_widget_set_visible (widget, value == 1);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "spinbutton_proxy_socks"));
         gtk_widget_set_visible (widget, value == 1);
 
         /* perhaps show the wpad warning */
@@ -639,31 +667,30 @@ panel_set_widget_data (CcNetworkPanel *panel,
                        const gchar *widget_suffix,
                        const gchar *value)
 {
-        gchar *hbox_id;
+        gchar *heading_id;
         gchar *label_id = NULL;
+        GtkWidget *heading;
         GtkWidget *widget;
         CcNetworkPanelPrivate *priv = panel->priv;
 
-        /* hide the parent bix if there is no value */
-        hbox_id = g_strdup_printf ("hbox_%s_%s", sub_pane, widget_suffix);
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, hbox_id));
-        if (widget == NULL) {
-                g_warning ("no %s widget", hbox_id);
-                goto out;
-        }
-        if (value == NULL) {
-                gtk_widget_hide (widget);
-                goto out;
-        }
-
-        /* there exists a value */
-        gtk_widget_show (widget);
+        /* hide the row if there is no value */
+        heading_id = g_strdup_printf ("heading_%s_%s", sub_pane, widget_suffix);
         label_id = g_strdup_printf ("label_%s_%s", sub_pane, widget_suffix);
+        heading = GTK_WIDGET (gtk_builder_get_object (priv->builder, heading_id));
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, label_id));
-        gtk_label_set_label (GTK_LABEL (widget), value);
-out:
-        g_free (hbox_id);
+        g_assert (heading != NULL);
+        g_free (heading_id);
         g_free (label_id);
+
+        if (value == NULL) {
+                gtk_widget_hide (heading);
+                gtk_widget_hide (widget);
+        } else {
+                /* there exists a value */
+                gtk_widget_show (heading);
+                gtk_widget_show (widget);
+                gtk_label_set_label (GTK_LABEL (widget), value);
+        }
 }
 
 static void
@@ -749,7 +776,7 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
         if (g_strcmp0 (object_path,
                        nm_object_get_path (NM_OBJECT (active))) == 0) {
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "combobox_network_name"));
+                                                             "combobox_wireless_network_name"));
                 gtk_combo_box_set_active_iter (GTK_COMBO_BOX (widget), &treeiter);
         }
 }
@@ -1081,7 +1108,7 @@ wireless_enabled_toggled (NMClient       *client,
 
         enabled = nm_client_wireless_get_enabled (client);
         sw = GTK_SWITCH (gtk_builder_get_object (panel->priv->builder,
-                                                 "device_off_switch"));
+                                                 "device_wireless_off_switch"));
 
         panel->priv->updating_device = TRUE;
         gtk_switch_set_active (sw, enabled);
@@ -1108,7 +1135,7 @@ wimax_enabled_toggled (NMClient       *client,
 
         enabled = nm_client_wimax_get_enabled (client);
         sw = GTK_SWITCH (gtk_builder_get_object (panel->priv->builder,
-                                                 "device_off_switch"));
+                                                 "device_wimax_off_switch"));
 
         panel->priv->updating_device = TRUE;
         gtk_switch_set_active (sw, enabled);
@@ -1135,6 +1162,249 @@ update_off_switch_from_device_state (GtkSwitch *sw, NMDeviceState state, CcNetwo
 }
 
 static void
+refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_name)
+{
+        GtkWidget *widget;
+        char *wid_name;
+        const char *str;
+        NMDeviceState state;
+        NMDeviceType type;
+
+        type = nm_device_get_device_type (device);
+
+        /* set header icon */
+        wid_name = g_strdup_printf ("image_%s_device", page_name);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
+        g_free (wid_name);
+        gtk_image_set_from_icon_name (GTK_IMAGE (widget),
+                                      panel_device_to_icon_name (device),
+                                      GTK_ICON_SIZE_DIALOG);
+
+        /* set device kind */
+        wid_name = g_strdup_printf ("label_%s_device", page_name);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
+        g_free (wid_name);
+        gtk_label_set_label (GTK_LABEL (widget),
+                             panel_device_to_localized_string (device));
+
+
+        /* set device state */
+        state = nm_device_get_state (device);
+        wid_name = g_strdup_printf ("label_%s_status", page_name);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
+        g_free (wid_name);
+        str = panel_device_state_to_localized_string (type, state);
+        gtk_label_set_label (GTK_LABEL (widget), str);
+
+
+        /* set up the device on/off switch */
+        wid_name = g_strdup_printf ("device_%s_off_switch", page_name);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
+        g_free (wid_name);
+
+        /* keep this in sync with the signal handler setup in cc_network_panel_init */
+        switch (type) {
+        case NM_DEVICE_TYPE_ETHERNET:
+                gtk_widget_set_visible (widget,
+                                        state != NM_DEVICE_STATE_UNAVAILABLE
+                                        && state != NM_DEVICE_STATE_UNMANAGED);
+                update_off_switch_from_device_state (GTK_SWITCH (widget), state, panel);
+                break;
+        case NM_DEVICE_TYPE_WIFI:
+                gtk_widget_show (widget);
+                wireless_enabled_toggled (panel->priv->client, NULL, panel);
+                break;
+        case NM_DEVICE_TYPE_WIMAX:
+                gtk_widget_show (widget);
+                wimax_enabled_toggled (panel->priv->client, NULL, panel);
+                break;
+        default:
+                gtk_widget_hide (widget);
+                break;
+        }
+
+        /* set up options button */
+        wid_name = g_strdup_printf ("button_%s_options", page_name);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
+        g_free (wid_name);
+        if (widget != NULL) {
+                gtk_widget_set_sensitive (widget, state == NM_DEVICE_STATE_ACTIVATED);
+        }
+}
+
+static void
+device_refresh_ethernet_ui (CcNetworkPanel *panel, NetDevice *device)
+{
+        guint speed;
+        NMDeviceState state;
+        const char *str;
+        gchar *str_tmp;
+        NMDevice *nm_device;
+
+        nm_device = net_device_get_nm_device (device);
+        state = nm_device_get_state (nm_device);
+
+        refresh_header_ui (panel, nm_device, "wired");
+
+        /* speed */
+        speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (nm_device));
+        if (state == NM_DEVICE_STATE_UNAVAILABLE)
+                str_tmp = NULL;
+        else if (speed  > 0)
+                /* Translators: network device speed */
+                str_tmp = g_strdup_printf (_("%d Mb/s"), speed);
+        else
+                str_tmp = g_strdup ("");
+        panel_set_widget_data (panel,
+                               "wired",
+                               "speed",
+                               str_tmp);
+        g_free (str_tmp);
+
+        /* device MAC */
+        str = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (nm_device));
+        panel_set_widget_data (panel,
+                               "wired",
+                               "mac",
+                               str);
+
+}
+
+static void
+device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
+{
+        GtkWidget *widget;
+        guint speed;
+        const GPtrArray *aps;
+        GPtrArray *aps_unique = NULL;
+        GtkWidget *heading;
+        NMDeviceState state;
+        NMAccessPoint *ap;
+        NMAccessPoint *active_ap;
+        const char *str;
+        gchar *str_tmp;
+        GtkListStore *liststore_wireless_network;
+        guint i;
+        NMDevice *nm_device;
+
+        nm_device = net_device_get_nm_device (device);
+        state = nm_device_get_state (nm_device);
+
+        refresh_header_ui (panel, nm_device, "wireless");
+
+        /* speed */
+        speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (nm_device));
+        if (state == NM_DEVICE_STATE_UNAVAILABLE)
+                str_tmp = NULL;
+        else if (speed > 0)
+                str_tmp = g_strdup_printf (_("%d Mb/s"),
+                                           speed / 1000);
+        else
+                str_tmp = g_strdup ("");
+        panel_set_widget_data (panel,
+                               "wireless",
+                               "speed",
+                               str_tmp);
+        g_free (str_tmp);
+
+        /* device MAC */
+        str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (nm_device));
+        panel_set_widget_data (panel,
+                               "wireless",
+                               "mac",
+                               str);
+        /* security */
+        active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (nm_device));
+        if (state == NM_DEVICE_STATE_UNAVAILABLE)
+                str_tmp = NULL;
+        else if (active_ap != NULL)
+                str_tmp = get_ap_security_string (active_ap);
+        else
+                str_tmp = g_strdup ("");
+        panel_set_widget_data (panel,
+                               "wireless",
+                               "security",
+                               str_tmp);
+        g_free (str_tmp);
+
+        heading = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                      "heading_wireless_network_name"));
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "combobox_wireless_network_name"));
+        /* populate access point dropdown */
+        if (state == NM_DEVICE_STATE_UNAVAILABLE) {
+                gtk_widget_hide (heading);
+                gtk_widget_hide (widget);
+        } else {
+                gtk_widget_show (heading);
+                gtk_widget_show (widget);
+                liststore_wireless_network = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
+                                                                                     "liststore_wireless_network"));
+                panel->priv->updating_device = TRUE;
+                gtk_list_store_clear (liststore_wireless_network);
+                aps = nm_device_wifi_get_access_points (NM_DEVICE_WIFI (nm_device));
+                aps_unique = panel_get_strongest_unique_aps (aps);
+
+                for (i = 0; i < aps_unique->len; i++) {
+                        ap = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, i));
+                        add_access_point (panel, ap, active_ap);
+                }
+                panel->priv->updating_device = FALSE;
+
+                g_ptr_array_unref (aps_unique);
+        }
+
+}
+
+static void
+device_refresh_wimax_ui (CcNetworkPanel *panel, NetDevice *device)
+{
+        NMDevice *nm_device;
+
+        nm_device = net_device_get_nm_device (device);
+        refresh_header_ui (panel, nm_device, "wimax");
+}
+
+static void
+device_refresh_modem_ui (CcNetworkPanel *panel, NetDevice *device)
+{
+        NMDeviceModemCapabilities caps;
+        NMDevice *nm_device;
+        const char *str;
+
+        nm_device = net_device_get_nm_device (device);
+
+        refresh_header_ui (panel, nm_device, "mobilebb");
+
+        caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
+
+        if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
+            (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
+                /* IMEI */
+                str = g_object_get_data (G_OBJECT (device),
+                                         "ControlCenter::EquipmentIdentifier");
+                panel_set_widget_data (panel,
+                                       "mobilebb",
+                                       "imei",
+                                       str);
+
+                /* operator name */
+                str = g_object_get_data (G_OBJECT (device),
+                                         "ControlCenter::OperatorName");
+                panel_set_widget_data (panel,
+                                       "mobilebb",
+                                       "provider",
+                                       str);
+
+                /* device speed */
+                panel_set_widget_data (panel,
+                                       "mobilebb",
+                                       "speed",
+                                       NULL);
+        }
+}
+
+static void
 nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
 {
         CcNetworkPanelPrivate *priv = panel->priv;
@@ -1142,14 +1412,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
         const gchar *sub_pane = NULL;
         gchar *str_tmp;
         GHashTable *options = NULL;
-        GtkListStore *liststore_wireless_network;
         GtkWidget *widget;
-        GtkWidget *sw;
-        guint i;
-        guint speed;
-        NMAccessPoint *ap;
-        NMAccessPoint *active_ap;
-        NMDeviceState state;
         NMDeviceType type;
         NMDHCP4Config *config_dhcp4 = NULL;
         NMIP6Config *ip6_config = NULL;
@@ -1162,205 +1425,40 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
         type = nm_device_get_device_type (nm_device);
         g_debug ("device %s type %i", nm_device_get_udi (nm_device), type);
 
-        /* set header icon */
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "image_device"));
-        gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-                                      panel_device_to_icon_name (nm_device),
-                                      GTK_ICON_SIZE_DIALOG);
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "notebook_types"));
 
-        /* set device kind */
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "label_device"));
-        gtk_label_set_label (GTK_LABEL (widget),
-                             panel_device_to_localized_string (nm_device));
-
-
-        /* set device state */
-        state = nm_device_get_state (nm_device);
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "label_status"));
-        str = panel_device_state_to_localized_string (type, state);
-        gtk_label_set_label (GTK_LABEL (widget), str);
-
-        /* set up the options button */
         switch (type) {
         case NM_DEVICE_TYPE_ETHERNET:
-                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "button_wired_options"));
-                gtk_widget_set_sensitive (widget, state == NM_DEVICE_STATE_ACTIVATED);
-                break;
-        case NM_DEVICE_TYPE_WIFI:
-                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "button_wireless_options"));
-                gtk_widget_set_sensitive (widget, state == NM_DEVICE_STATE_ACTIVATED);
-                break;
-        default:
-                break;
-        }
-
-        /* set up the device on/off switch */
-        sw = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                 "device_off_switch"));
-        /* keep this in sync with the signal handler setup in cc_network_panel_init */
-        switch (type) {
-        case NM_DEVICE_TYPE_ETHERNET:
-                gtk_widget_set_visible (sw, state != NM_DEVICE_STATE_UNAVAILABLE &&
-                                            state != NM_DEVICE_STATE_UNMANAGED);
-                update_off_switch_from_device_state (GTK_SWITCH (sw), state, panel);
-                break;
-        case NM_DEVICE_TYPE_WIFI:
-                gtk_widget_show (sw);
-                wireless_enabled_toggled (priv->client, NULL, panel);
-                break;
-        case NM_DEVICE_TYPE_WIMAX:
-                gtk_widget_show (sw);
-                wimax_enabled_toggled (priv->client, NULL, panel);
-                break;
-        default:
-                gtk_widget_hide (sw);
-                break;
-        }
-
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "notebook_types"));
-        if (type == NM_DEVICE_TYPE_ETHERNET) {
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 0);
                 sub_pane = "wired";
-        } else if (type == NM_DEVICE_TYPE_WIFI) {
+                device_refresh_ethernet_ui (panel, device);
+                break;
+        case NM_DEVICE_TYPE_WIFI:
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
                 sub_pane = "wireless";
-        } else if (type == NM_DEVICE_TYPE_MODEM) {
-                NMDeviceModemCapabilities caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
-                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
-                    (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
-                        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 4);
-                        sub_pane = "mobilebb";
+                device_refresh_wifi_ui (panel, device);
+                break;
+        case NM_DEVICE_TYPE_WIMAX:
+                device_refresh_wimax_ui (panel, device);
+                break;
+        case NM_DEVICE_TYPE_MODEM:
+                {
+                        NMDeviceModemCapabilities caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
+                        if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
+                            (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
+                                gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 4);
+                                sub_pane = "mobilebb";
+                                device_refresh_modem_ui (panel, device);
+                        }
                 }
+                break;
+        default:
+                g_assert_not_reached ();
+                break;
         }
+
         if (sub_pane == NULL)
                 goto out;
-
-#if 0
-        /* FIXME? should we need to do something with this? */
-        if (state == NM_DEVICE_STATE_ACTIVATED)
-                panel_show_ip4_config (nm_device_get_ip4_config (nm_device));
-#endif
-
-        if (type == NM_DEVICE_TYPE_ETHERNET) {
-
-                /* speed */
-                speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (nm_device));
-                if (state == NM_DEVICE_STATE_UNAVAILABLE)
-                        str_tmp = NULL;
-                else if (speed  > 0)
-                        /* Translators: network device speed */
-                        str_tmp = g_strdup_printf (_("%d Mb/s"), speed);
-                else
-                        str_tmp = g_strdup ("");
-                panel_set_widget_data (panel,
-                                       sub_pane,
-                                       "speed",
-                                       str_tmp);
-                g_free (str_tmp);
-
-                /* device MAC */
-                str = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (nm_device));
-                panel_set_widget_data (panel,
-                                       sub_pane,
-                                       "mac",
-                                       str);
-
-        } else if (type == NM_DEVICE_TYPE_WIFI) {
-                const GPtrArray *aps;
-                GPtrArray *aps_unique = NULL;
-
-                /* speed */
-                speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (nm_device));
-                if (state == NM_DEVICE_STATE_UNAVAILABLE)
-                        str_tmp = NULL;
-                else if (speed > 0)
-                        str_tmp = g_strdup_printf (_("%d Mb/s"),
-                                                   speed / 1000);
-                else
-                        str_tmp = g_strdup ("");
-                panel_set_widget_data (panel,
-                                       sub_pane,
-                                       "speed",
-                                       str_tmp);
-                g_free (str_tmp);
-
-                /* device MAC */
-                str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (nm_device));
-                panel_set_widget_data (panel,
-                                       sub_pane,
-                                       "mac",
-                                       str);
-                /* security */
-                active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (nm_device));
-                if (state == NM_DEVICE_STATE_UNAVAILABLE)
-                        str_tmp = NULL;
-                else if (active_ap != NULL)
-                        str_tmp = get_ap_security_string (active_ap);
-                else
-                        str_tmp = g_strdup ("");
-                panel_set_widget_data (panel,
-                                       sub_pane,
-                                       "security",
-                                       str_tmp);
-                g_free (str_tmp);
-
-                widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                             "hbox_wireless_ssid"));
-                /* populate access point dropdown */
-                if (state == NM_DEVICE_STATE_UNAVAILABLE)
-                        gtk_widget_hide (widget);
-                else {
-                        gtk_widget_show (widget);
-                        liststore_wireless_network = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
-                                                                     "liststore_wireless_network"));
-                        priv->updating_device = TRUE;
-                        gtk_list_store_clear (liststore_wireless_network);
-                        aps = nm_device_wifi_get_access_points (NM_DEVICE_WIFI (nm_device));
-                        aps_unique = panel_get_strongest_unique_aps (aps);
-
-                        for (i = 0; i < aps_unique->len; i++) {
-                                ap = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, i));
-                                add_access_point (panel, ap, active_ap);
-                        }
-                        priv->updating_device = FALSE;
-
-                        g_ptr_array_unref (aps_unique);
-                }
-
-        } else if (type == NM_DEVICE_TYPE_MODEM) {
-                NMDeviceModemCapabilities caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
-
-                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
-                    (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
-                        /* IMEI */
-                        str = g_object_get_data (G_OBJECT (nm_device),
-                                                 "ControlCenter::EquipmentIdentifier");
-                        panel_set_widget_data (panel,
-                                               sub_pane,
-                                               "imei",
-                                               str);
-
-                        /* operator name */
-                        str = g_object_get_data (G_OBJECT (nm_device),
-                                                 "ControlCenter::OperatorName");
-                        panel_set_widget_data (panel,
-                                              sub_pane,
-                                              "provider",
-                                               str);
-
-                        /* device speed */
-                        panel_set_widget_data (panel,
-                                               sub_pane,
-                                               "speed",
-                                               NULL);
-                }
-        }
 
         /* get IP4 parameters */
         config_dhcp4 = nm_device_get_dhcp4_config (nm_device);
@@ -1374,7 +1472,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                                                       "ip_address");
                 panel_set_widget_data (panel,
                                        sub_pane,
-                                       "ip4",
+                                       "ipv4",
                                        str);
                 has_ip4 = str != NULL;
 
@@ -1404,7 +1502,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                 /* IPv4 address */
                 panel_set_widget_data (panel,
                                        sub_pane,
-                                       "ip4",
+                                       "ipv4",
                                        NULL);
                 has_ip4 = FALSE;
 
@@ -1435,23 +1533,23 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
 
                 /* IPv6 address */
                 str_tmp = get_ipv6_config_address_as_string (ip6_config);
-                panel_set_widget_data (panel, sub_pane, "ip6", str_tmp);
+                panel_set_widget_data (panel, sub_pane, "ipv6", str_tmp);
                 has_ip6 = str_tmp != NULL;
                 g_free (str_tmp);
         } else {
-                panel_set_widget_data (panel, sub_pane, "ip6", NULL);
+                panel_set_widget_data (panel, sub_pane, "ipv6", NULL);
                 has_ip6 = FALSE;
         }
 
         if (has_ip4 && has_ip6) {
-                panel_set_widget_heading (panel, sub_pane, "ip4", _("IPv4 Address"));
-                panel_set_widget_heading (panel, sub_pane, "ip6", _("IPv6 Address"));
+                panel_set_widget_heading (panel, sub_pane, "ipv4", _("IPv4 Address"));
+                panel_set_widget_heading (panel, sub_pane, "ipv6", _("IPv6 Address"));
         }
         else if (has_ip4) {
-                panel_set_widget_heading (panel, sub_pane, "ip4", _("IP Address"));
+                panel_set_widget_heading (panel, sub_pane, "ipv4", _("IP Address"));
         }
         else if (has_ip6) {
-                panel_set_widget_heading (panel, sub_pane, "ip6", _("IP Address"));
+                panel_set_widget_heading (panel, sub_pane, "ipv6", _("IP Address"));
         }
 out: ;
 }
@@ -1472,7 +1570,7 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
         NMVPNConnectionState state;
 
         sw = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                 "device_off_switch"));
+                                                 "device_vpn_off_switch"));
         gtk_widget_set_visible (sw, TRUE);
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
@@ -1487,14 +1585,14 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
 
         /* set VPN icon */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "image_device"));
+                                                     "image_vpn_device"));
         gtk_image_set_from_icon_name (GTK_IMAGE (widget),
                                       "network-vpn",
                                       GTK_ICON_SIZE_DIALOG);
 
         /* use title */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "label_device"));
+                                                     "label_vpn_device"));
         gtk_label_set_label (GTK_LABEL (widget), net_object_get_title (NET_OBJECT (vpn)));
 
         /* use status */
@@ -1513,7 +1611,7 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
         }
 
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "label_status"));
+                                                     "label_vpn_status"));
         status = panel_vpn_state_to_localized_string (state);
         gtk_label_set_label (GTK_LABEL (widget), status);
         priv->updating_device = TRUE;
@@ -1531,7 +1629,7 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
         /* groupname */
         panel_set_widget_data (panel,
                                sub_pane,
-                               "groupname",
+                               "group_name",
                                 net_vpn_get_id (vpn));
 
         /* username */
@@ -1574,26 +1672,27 @@ refresh_ui (CcNetworkPanel *panel)
 
                 /* set header to something sane */
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "image_device"));
+                                                             "image_proxy_device"));
                 gtk_image_set_from_icon_name (GTK_IMAGE (widget),
                                               "preferences-system-network",
                                               GTK_ICON_SIZE_DIALOG);
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "label_device"));
+                                                             "label_proxy_device"));
                 gtk_label_set_label (GTK_LABEL (widget),
                                      _("Proxy"));
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "label_status"));
+                                                             "label_proxy_status"));
                 gtk_label_set_label (GTK_LABEL (widget), "");
 
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                              "notebook_types"));
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 2);
 
-                /* hide the slider until we get some more detail in the mockup */
+                /* hide the switch until we get some more detail in the mockup */
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "device_off_switch"));
-                gtk_widget_hide (widget);
+                                                             "device_proxy_off_switch"));
+                if (widget != NULL)
+                        gtk_widget_hide (widget);
 
                 /* we shoulnd't be able to delete the proxy device */
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
@@ -1984,6 +2083,7 @@ add_connection_cb (GtkToolButton *button, CcNetworkPanel *panel)
                                                                "connection_type_combo"));
                 model = gtk_combo_box_get_model (combo);
                 gtk_combo_box_get_active_iter (combo, &iter);
+                type = NULL;
                 gtk_tree_model_get (model, &iter, 1, &type, -1);
 
                 cmdline = g_strdup_printf ("nm-connection-editor --create --type %s", type);
@@ -2258,7 +2358,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
         /* setup wireless combobox model */
         combobox = GTK_COMBO_BOX (gtk_builder_get_object (panel->priv->builder,
-                                                          "combobox_network_name"));
+                                                          "combobox_wireless_network_name"));
         g_signal_connect (combobox, "changed",
                           G_CALLBACK (wireless_ap_changed_cb),
                           panel);
@@ -2309,9 +2409,26 @@ cc_network_panel_init (CcNetworkPanel *panel)
                           G_CALLBACK (device_removed_cb), panel);
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "device_off_switch"));
+                                                     "device_wired_off_switch"));
         g_signal_connect (widget, "notify::active",
                           G_CALLBACK (device_off_toggled), panel);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "device_wireless_off_switch"));
+        g_signal_connect (widget, "notify::active",
+                          G_CALLBACK (device_off_toggled), panel);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "device_mobilebb_off_switch"));
+        g_signal_connect (widget, "notify::active",
+                          G_CALLBACK (device_off_toggled), panel);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "device_vpn_off_switch"));
+        g_signal_connect (widget, "notify::active",
+                          G_CALLBACK (device_off_toggled), panel);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "device_proxy_off_switch"));
+        g_signal_connect (widget, "notify::active",
+                          G_CALLBACK (device_off_toggled), panel);
+
         g_signal_connect (panel->priv->client, "notify::wireless-enabled",
                           G_CALLBACK (wireless_enabled_toggled), panel);
         g_signal_connect (panel->priv->client, "notify::wimax-enabled",
