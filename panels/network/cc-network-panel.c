@@ -1980,6 +1980,7 @@ wireless_ap_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
         gchar *object_path = NULL;
         gchar *ssid_target = NULL;
         GSList *list, *l;
+        GSList *filtered;
         GtkTreeIter iter;
         GtkTreeModel *model;
         NetObject *object;
@@ -2016,10 +2017,10 @@ wireless_ap_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
         list = nm_remote_settings_list_connections (panel->priv->remote_settings);
         g_debug ("%i existing remote connections available",
                  g_slist_length (list));
-        list = nm_device_filter_connections (device, list);
+        filtered = nm_device_filter_connections (device, list);
         g_debug ("%i suitable remote connections to check",
-                 g_slist_length (list));
-        for (l = list; l; l = g_slist_next (l)) {
+                 g_slist_length (filtered));
+        for (l = filtered; l; l = g_slist_next (l)) {
                 connection = NM_CONNECTION (l->data);
                 setting_wireless = nm_connection_get_setting_wireless (connection);
                 if (!NM_IS_SETTING_WIRELESS (setting_wireless))
@@ -2035,6 +2036,9 @@ wireless_ap_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
                         break;
                 }
         }
+
+        g_slist_free (list);
+        g_slist_free (filtered);
 
         /* activate the connection */
         if (connection_activate != NULL) {
