@@ -1021,6 +1021,34 @@ device_off_toggled (GtkSwitch      *sw,
         if (NET_IS_DEVICE (object)) {
                 device = net_device_get_nm_device (NET_DEVICE (object));
                 switch (nm_device_get_device_type (device)) {
+                case NM_DEVICE_TYPE_ETHERNET:
+                        if (active) {
+                                GSList *list, *filtered;
+
+                                /* look for an existing connection we can use */
+                                list = nm_remote_settings_list_connections (panel->priv->remote_settings);
+                                filtered = nm_device_filter_connections (device, list);
+                                if (filtered) {
+                                        nm_client_activate_connection (panel->priv->client,
+                                                                       (NMConnection *)filtered->data,
+                                                                       device,
+                                                                       NULL,
+                                                                       NULL, NULL);
+                                }
+                                else {
+                                        nm_client_add_and_activate_connection (panel->priv->client,
+                                                                               NULL,
+                                                                               device,
+                                                                               NULL,
+                                                                               NULL, NULL);
+                                }
+
+                                g_slist_free (list);
+                                g_slist_free (filtered);
+                        } else {
+                                nm_device_disconnect (device, NULL, NULL);
+                        }
+                        break;
                 case NM_DEVICE_TYPE_WIFI:
                         nm_client_wireless_set_enabled (panel->priv->client, active);
                         break;
@@ -1088,6 +1116,25 @@ wimax_enabled_toggled (NMClient       *client,
 }
 
 static void
+update_off_switch_from_device_state (GtkSwitch *sw, NMDeviceState state, CcNetworkPanel *panel)
+{
+        panel->priv->updating_device = TRUE;
+        switch (state) {
+                case NM_DEVICE_STATE_UNMANAGED:
+                case NM_DEVICE_STATE_UNAVAILABLE:
+                case NM_DEVICE_STATE_DISCONNECTED:
+                case NM_DEVICE_STATE_DEACTIVATING:
+                case NM_DEVICE_STATE_FAILED:
+                        gtk_switch_set_active (sw, FALSE);
+                        break;
+                default:
+                        gtk_switch_set_active (sw, TRUE);
+                        break;
+        }
+        panel->priv->updating_device = FALSE;
+}
+
+static void
 nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
 {
         CcNetworkPanelPrivate *priv = panel->priv;
@@ -1148,7 +1195,6 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                                                              "button_wireless_options"));
                 gtk_widget_set_sensitive (widget, state == NM_DEVICE_STATE_ACTIVATED);
                 break;
-                break;
         default:
                 break;
         }
@@ -1158,6 +1204,11 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                                                  "device_off_switch"));
         /* keep this in sync with the signal handler setup in cc_network_panel_init */
         switch (type) {
+        case NM_DEVICE_TYPE_ETHERNET:
+                gtk_widget_set_visible (sw, state != NM_DEVICE_STATE_UNAVAILABLE &&
+                                            state != NM_DEVICE_STATE_UNMANAGED);
+                update_off_switch_from_device_state (GTK_SWITCH (sw), state, panel);
+                break;
         case NM_DEVICE_TYPE_WIFI:
                 gtk_widget_show (sw);
                 wireless_enabled_toggled (priv->client, NULL, panel);
