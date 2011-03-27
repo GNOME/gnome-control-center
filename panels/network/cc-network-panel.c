@@ -1517,7 +1517,9 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
         status = panel_vpn_state_to_localized_string (state);
         gtk_label_set_label (GTK_LABEL (widget), status);
         priv->updating_device = TRUE;
-        gtk_switch_set_active (GTK_SWITCH (sw), state == NM_VPN_CONNECTION_STATE_ACTIVATED);
+        gtk_switch_set_active (GTK_SWITCH (sw),
+                               state != NM_VPN_CONNECTION_STATE_FAILED &&
+                               state != NM_VPN_CONNECTION_STATE_DISCONNECTED);
         priv->updating_device = FALSE;
 
         /* gateway */
@@ -1668,6 +1670,12 @@ cc_network_panel_notify_enable_active_cb (GtkSwitch *sw,
 }
 
 static void
+connection_state_changed (NMActiveConnection *c, GParamSpec *pspec, CcNetworkPanel *panel)
+{
+        refresh_ui (panel);
+}
+
+static void
 active_connections_changed (NMClient *client, GParamSpec *pspec, gpointer user_data)
 {
         CcNetworkPanel *panel = user_data;
@@ -1687,6 +1695,12 @@ active_connections_changed (NMClient *client, GParamSpec *pspec, gpointer user_d
                         g_debug ("           %s", nm_device_get_udi (g_ptr_array_index (devices, j)));
                 if (NM_IS_VPN_CONNECTION (connection))
                         g_debug ("           VPN base connection: %s", nm_active_connection_get_specific_object (connection));
+
+                if (g_object_get_data (G_OBJECT (connection), "has-state-changed-handler") == NULL) {
+                        g_signal_connect_object (connection, "notify::state",
+                                                 G_CALLBACK (connection_state_changed), panel, 0);
+                        g_object_set_data (G_OBJECT (connection), "has-state-changed-handler", GINT_TO_POINTER (TRUE));
+                }
         }
 
         refresh_ui (panel);
