@@ -83,6 +83,7 @@ enum {
 };
 
 static void     refresh_ui      (CcNetworkPanel *panel);
+static NetObject *find_in_model_by_id (CcNetworkPanel *panel, const gchar *id);
 
 static void
 cc_network_panel_get_property (GObject    *object,
@@ -547,6 +548,10 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         NetDevice *net_device;
         CcNetworkPanelPrivate *priv = panel->priv;
 
+        /* do we have an existing object with this id? */
+        if (find_in_model_by_id (panel, nm_device_get_udi (device)) != NULL)
+                goto out;
+
         g_debug ("device %s type %i",
                  nm_device_get_udi (device),
                  nm_device_get_device_type (device));
@@ -594,6 +599,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                             PANEL_DEVICES_COLUMN_TITLE, title,
                             PANEL_DEVICES_COLUMN_OBJECT, net_device,
                             -1);
+out:
         g_free (title);
 }
 
@@ -1599,14 +1605,16 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
         state = net_vpn_get_state (vpn);
 
         acs = nm_client_get_active_connections (priv->client);
-        path = nm_connection_get_path (net_vpn_get_connection (vpn));
-        for (i = 0; i < acs->len; i++) {
-                a = (NMActiveConnection*)acs->pdata[i];
+        if (acs != NULL) {
+                path = nm_connection_get_path (net_vpn_get_connection (vpn));
+                for (i = 0; i < acs->len; i++) {
+                        a = (NMActiveConnection*)acs->pdata[i];
 
-                apath = nm_active_connection_get_connection (a);
-                if (NM_IS_VPN_CONNECTION (a) && strcmp (apath, path) == 0) {
-                        state = nm_vpn_connection_get_vpn_state (NM_VPN_CONNECTION (a));
-                        break;
+                        apath = nm_active_connection_get_connection (a);
+                        if (NM_IS_VPN_CONNECTION (a) && strcmp (apath, path) == 0) {
+                                state = nm_vpn_connection_get_vpn_state (NM_VPN_CONNECTION (a));
+                                break;
+                        }
                 }
         }
 
@@ -1825,12 +1833,17 @@ manager_running (NMClient *client, GParamSpec *pspec, gpointer user_data)
         const GPtrArray *devices;
         int i;
         NMDevice *device_tmp;
+        GtkListStore *liststore_devices;
         CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
 
-        /* TODO: clear all devices we added */
+        /* clear all devices we added */
         if (!nm_client_get_manager_running (client)) {
                 g_debug ("NM disappeared");
-                return;
+                liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
+                                                    "liststore_devices"));
+                gtk_list_store_clear (liststore_devices);
+                panel_add_proxy_device (panel);
+                goto out;
         }
 
         g_debug ("coldplugging devices");
@@ -1843,7 +1856,7 @@ manager_running (NMClient *client, GParamSpec *pspec, gpointer user_data)
                 device_tmp = g_ptr_array_index (devices, i);
                 panel_add_device (panel, device_tmp);
         }
-
+out:
         /* select the first device */
         select_first_device (panel);
 }
