@@ -485,6 +485,9 @@ cc_background_xml_load_xml (CcBackgroundXml *xml,
 {
 	g_return_val_if_fail (CC_IS_BACKGROUND_XML (xml), FALSE);
 
+	if (g_file_test (filename, G_FILE_TEST_IS_REGULAR) == FALSE)
+		return NULL;
+
 	return cc_background_xml_load_xml_internal (xml, filename, FALSE);
 }
 
