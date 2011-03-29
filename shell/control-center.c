@@ -110,6 +110,7 @@ application_command_line_cb (GApplication  *application,
     }
 
   gnome_control_center_present (shell);
+  gdk_notify_startup_complete ();
 
   g_strfreev (argv);
   if (start_panels != NULL)
