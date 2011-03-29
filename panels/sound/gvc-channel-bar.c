@@ -316,7 +316,7 @@ gvc_channel_bar_set_low_icon_name   (GvcChannelBar *bar,
                 bar->priv->low_icon_name = g_strdup (name);
                 gtk_image_set_from_icon_name (GTK_IMAGE (bar->priv->low_image),
                                               bar->priv->low_icon_name,
-                                              GTK_ICON_SIZE_BUTTON);
+                                              GTK_ICON_SIZE_MENU);
                 g_object_notify (G_OBJECT (bar), "low-icon-name");
         }
 }
@@ -332,7 +332,7 @@ gvc_channel_bar_set_high_icon_name  (GvcChannelBar *bar,
                 bar->priv->high_icon_name = g_strdup (name);
                 gtk_image_set_from_icon_name (GTK_IMAGE (bar->priv->high_image),
                                               bar->priv->high_icon_name,
-                                              GTK_ICON_SIZE_BUTTON);
+                                              GTK_ICON_SIZE_MENU);
                 g_object_notify (G_OBJECT (bar), "high-icon-name");
         }
 }
@@ -617,8 +617,8 @@ gvc_channel_bar_set_is_amplified (GvcChannelBar *bar, gboolean amplified)
 
                 g_free (str);
                 gtk_alignment_set (GTK_ALIGNMENT (bar->priv->mute_box), 0.5, 0, 0, 0);
-                gtk_misc_set_alignment (GTK_MISC (bar->priv->low_image), 0.5, 0);
-                gtk_misc_set_alignment (GTK_MISC (bar->priv->high_image), 0.5, 0);
+                gtk_misc_set_alignment (GTK_MISC (bar->priv->low_image), 0.5, 0.15);
+                gtk_misc_set_alignment (GTK_MISC (bar->priv->high_image), 0.5, 0.15);
                 gtk_misc_set_alignment (GTK_MISC (bar->priv->label), 0, 0);
         } else {
                 gtk_alignment_set (GTK_ALIGNMENT (bar->priv->mute_box), 0.5, 0.5, 0, 0);
@@ -908,10 +908,10 @@ gvc_channel_bar_init (GvcChannelBar *bar)
         gtk_container_add (GTK_CONTAINER (bar->priv->mute_box), bar->priv->mute_button);
 
         bar->priv->low_image = gtk_image_new_from_icon_name ("audio-volume-low-symbolic",
-                                                             GTK_ICON_SIZE_BUTTON);
+                                                             GTK_ICON_SIZE_MENU);
         gtk_widget_set_no_show_all (bar->priv->low_image, TRUE);
         bar->priv->high_image = gtk_image_new_from_icon_name ("audio-volume-high-symbolic",
-                                                              GTK_ICON_SIZE_BUTTON);
+                                                              GTK_ICON_SIZE_MENU);
         gtk_widget_set_no_show_all (bar->priv->high_image, TRUE);
 
         bar->priv->image = gtk_image_new ();
