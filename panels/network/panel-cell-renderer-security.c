@@ -68,7 +68,17 @@ panel_cell_renderer_set_name (PanelCellRendererSecurity *renderer)
             renderer->security != NM_AP_SEC_NONE)
                 icon_name = "network-wireless-encrypted-symbolic";
 
-        g_object_set (renderer, "icon-name", icon_name, NULL);
+        if (icon_name != NULL) {
+                g_object_set (renderer,
+                              "icon-name", icon_name,
+                              "visible", TRUE,
+                              NULL);
+        } else {
+                g_object_set (renderer,
+                              "icon-name", NULL,
+                              "visible", FALSE,
+                              NULL);
+        }
 }
 
 /**
