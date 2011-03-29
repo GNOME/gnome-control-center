@@ -213,14 +213,11 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   GtkTreeModel           *model;
   GtkTreeIter             iter;
   GtkWidget              *widget;
-  gboolean                test_page_command_available = FALSE;
   gboolean                sensitive;
   gboolean                is_local = TRUE;
   gchar                  *printer_make_and_model = NULL;
   gchar                  *printer_model = NULL;
   gchar                  *reason = NULL;
-  gchar                 **available_commands = NULL;
-  gchar                  *printer_commands = NULL;
   gchar                 **printer_reasons = NULL;
   gchar                  *marker_types = NULL;
   gchar                  *printer_name = NULL;
@@ -327,8 +324,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
             reason = priv->dests[id].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-types") == 0)
             marker_types = priv->dests[priv->current_dest].options[i].value;
-          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-commands") == 0)
-            printer_commands = priv->dests[priv->current_dest].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-make-and-model") == 0)
             printer_make_and_model = priv->dests[priv->current_dest].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-uri-supported") == 0)
@@ -551,22 +546,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       gtk_widget_set_sensitive (widget, sensitive);
 
 
-      if (printer_commands)
-        {
-          available_commands = g_strsplit (printer_commands, ",", -1);
-          for (i = 0; i < g_strv_length (available_commands); i++)
-            {
-              if (g_strcmp0 (available_commands[i], "PrintSelfTestPage") == 0)
-                test_page_command_available = TRUE;
-            }
-          g_strfreev (available_commands);
-        }
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "print-test-page-button");
-      gtk_widget_set_sensitive (widget, test_page_command_available);
-
-
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "supply-drawing-area");
       gtk_widget_set_size_request (widget, -1, SUPPLY_BAR_HEIGHT);
@@ -609,6 +588,10 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       else
         gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
 
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "print-test-page-button");
+      gtk_widget_set_sensitive (widget, TRUE);
 
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-options-button");
@@ -1959,50 +1942,6 @@ printer_remove_cb (GtkToolButton *toolbutton,
       else
         actualize_printers_list (self);
   }
-}
-
-static void
-printer_maintenance_cb (GtkButton *button,
-                        gpointer   user_data)
-{
-  CcPrintersPanelPrivate  *priv;
-  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
-  ipp_t                   *response = NULL;
-  gchar                   *printer_name = NULL;
-
-  priv = PRINTERS_PANEL_PRIVATE (self);
-
-  if (priv->current_dest >= 0 &&
-      priv->current_dest < priv->num_dests &&
-      priv->dests != NULL)
-    printer_name = priv->dests[priv->current_dest].name;
-
-  if (printer_name)
-    {
-      if ((GtkButton*) gtk_builder_get_object (priv->builder,
-                                               "print-test-page-button")
-                       == button)
-        {
-          response = execute_maintenance_command (printer_name,
-                                                  "PrintSelfTestPage",
-          /* Translators: Name of job which makes printer to print test page */
-                                                  _("Test page"));
-        }
-      else if ((GtkButton*) gtk_builder_get_object (priv->builder,
-                                                    "clean-print-heads-button")
-                            == button)
-        response = execute_maintenance_command (printer_name,
-                                                "Clean all",
-          /* Translators: Name of job which makes printer to clean its heads */
-                                                _("Clean print heads"));
-      if (response)
-        {
-          if (response->state == IPP_ERROR)
-            /* Translators: An error has occured during execution of a CUPS maintenance command */
-            g_warning (_("An error has occured during a maintenance command."));
-          ippDelete(response);
-        }
-    }
 }
 
 static void
