@@ -106,7 +106,7 @@ enum_string_to_value (GType type,
 		}
 		g_warning ("Unhandled value '%s' for enum '%s'",
 			   string, G_FLAGS_CLASS_TYPE_NAME (eclass));
-		g_assert_not_reached ();
+		return 0;
 	}
 
 	return value->value;
