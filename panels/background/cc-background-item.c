@@ -156,12 +156,26 @@ update_size (CcBackgroundItem *item)
 	}
 }
 
+static GdkPixbuf *
+render_at_size (GnomeBG *bg,
+                gint width,
+                gint height)
+{
+        GdkPixbuf *pixbuf;
+
+        pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, width, height);
+        gnome_bg_draw (bg, pixbuf, gdk_screen_get_default (), FALSE);
+
+        return pixbuf;
+}
+
 GIcon *
 cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                                         GnomeDesktopThumbnailFactory *thumbs,
                                         int                           width,
                                         int                           height,
-                                        int                           frame)
+                                        int                           frame,
+                                        gboolean                      force_size)
 {
         GdkPixbuf *pixbuf = NULL;
         GIcon *icon = NULL;
@@ -171,19 +185,31 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
 
         set_bg_properties (item);
 
-        if (frame >= 0)
-                pixbuf = gnome_bg_create_frame_thumbnail (item->priv->bg,
-                                                          thumbs,
-                                                          gdk_screen_get_default (),
-                                                          width,
-                                                          height,
-                                                          frame);
-        else
-                pixbuf = gnome_bg_create_thumbnail (item->priv->bg,
-                                                    thumbs,
-                                                    gdk_screen_get_default(),
-                                                    width,
-                                                    height);
+        if (force_size) {
+                /* FIXME: this doesn't play nice with slideshow stepping at all,
+                 * because it will always render the current slideshow frame, which
+                 * might not be what we want.
+                 * We're lacking an API to draw a high-res GnomeBG manually choosing
+                 * the slideshow frame though, so we can't do much better than this
+                 * for now.
+                 */
+                pixbuf = render_at_size (item->priv->bg, width, height);
+        } else {
+                if (frame >= 0) {
+                        pixbuf = gnome_bg_create_frame_thumbnail (item->priv->bg,
+                                                                  thumbs,
+                                                                  gdk_screen_get_default (),
+                                                                  width,
+                                                                  height,
+                                                                  frame);
+                } else {
+                        pixbuf = gnome_bg_create_thumbnail (item->priv->bg,
+                                                            thumbs,
+                                                            gdk_screen_get_default (),
+                                                            width,
+                                                            height);
+                }
+        }
 
         if (pixbuf != NULL
             && frame != -2
@@ -217,7 +243,7 @@ cc_background_item_get_thumbnail (CcBackgroundItem             *item,
                                   int                           width,
                                   int                           height)
 {
-        return cc_background_item_get_frame_thumbnail (item, thumbs, width, height, -1);
+        return cc_background_item_get_frame_thumbnail (item, thumbs, width, height, -1, FALSE);
 }
 
 static void

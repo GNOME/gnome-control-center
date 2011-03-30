@@ -79,7 +79,8 @@ GIcon     *        cc_background_item_get_frame_thumbnail (CcBackgroundItem     
                                                            GnomeDesktopThumbnailFactory *thumbs,
                                                            int                           width,
                                                            int                           height,
-                                                           int                           frame);
+                                                           int                           frame,
+                                                           gboolean                      force_size);
 
 GDesktopBackgroundStyle   cc_background_item_get_placement  (CcBackgroundItem *item);
 GDesktopBackgroundShading cc_background_item_get_shading    (CcBackgroundItem *item);

@@ -701,10 +701,10 @@ preview_draw_cb (GtkWidget         *widget,
     {
       GIcon *icon;
       icon = cc_background_item_get_frame_thumbnail (priv->current_background,
-                                                priv->thumb_factory,
-                                                preview_width,
-                                                preview_height,
-                                                -2);
+                                                     priv->thumb_factory,
+                                                     preview_width,
+                                                     preview_height,
+                                                     -2, TRUE);
       pixbuf = GDK_PIXBUF (icon);
     }
 
