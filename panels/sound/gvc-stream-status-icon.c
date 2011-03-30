@@ -169,7 +169,6 @@ popup_dock (GvcStreamStatusIcon *icon,
 
         gtk_widget_show_all (icon->priv->dock);
 
-
         /* grab focus */
         gtk_grab_add (icon->priv->dock);
 
@@ -338,45 +337,6 @@ popdown_dock (GvcStreamStatusIcon *icon)
 
         /* hide again */
         gtk_widget_hide (icon->priv->dock);
-}
-
-/* This is called when the grab is broken for
- * either the dock, or the scale itself */
-static void
-gvc_icon_grab_notify (GvcStreamStatusIcon *icon,
-                      gboolean             was_grabbed)
-{
-        if (was_grabbed != FALSE) {
-                return;
-        }
-
-        if (!gtk_widget_has_grab (icon->priv->dock)) {
-                return;
-        }
-
-        if (gtk_widget_is_ancestor (gtk_grab_get_current (), icon->priv->dock)) {
-                return;
-        }
-
-        popdown_dock (icon);
-}
-
-static void
-on_dock_grab_notify (GtkWidget           *widget,
-                     gboolean             was_grabbed,
-                     GvcStreamStatusIcon *icon)
-{
-        gvc_icon_grab_notify (icon, was_grabbed);
-}
-
-static gboolean
-on_dock_grab_broken_event (GtkWidget           *widget,
-                           gboolean             was_grabbed,
-                           GvcStreamStatusIcon *icon)
-{
-        gvc_icon_grab_notify (icon, FALSE);
-
-        return FALSE;
 }
 
 static gboolean
@@ -667,14 +627,6 @@ gvc_stream_status_icon_constructor (GType                  type,
         g_signal_connect (icon->priv->dock,
                           "scroll-event",
                           G_CALLBACK (on_dock_scroll_event),
-                          icon);
-        g_signal_connect (icon->priv->dock,
-                          "grab-notify",
-                          G_CALLBACK (on_dock_grab_notify),
-                          icon);
-        g_signal_connect (icon->priv->dock,
-                          "grab-broken-event",
-                          G_CALLBACK (on_dock_grab_broken_event),
                           icon);
 
         gtk_window_set_decorated (GTK_WINDOW (icon->priv->dock), FALSE);
