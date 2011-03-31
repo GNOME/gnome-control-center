@@ -552,6 +552,11 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         if (find_in_model_by_id (panel, nm_device_get_udi (device)) != NULL)
                 goto out;
 
+        /* we don't support bluetooth devices yet -- no mockup */
+        type = nm_device_get_device_type (device);
+        if (type == NM_DEVICE_TYPE_BT)
+                goto out;
+
         g_debug ("device %s type %i",
                  nm_device_get_udi (device),
                  nm_device_get_device_type (device));
@@ -559,7 +564,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                           (GCallback) device_state_notify_changed_cb, panel);
 
         /* do we have to get additonal data from ModemManager */
-        type = nm_device_get_device_type (device);
         if (type == NM_DEVICE_TYPE_MODEM) {
                 g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
                                           G_DBUS_PROXY_FLAGS_NONE,
