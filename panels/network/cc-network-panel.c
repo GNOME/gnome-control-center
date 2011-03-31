@@ -1203,7 +1203,7 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
         wid_name = g_strdup_printf ("label_%s_status", page_name);
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
         g_free (wid_name);
-        str = panel_device_state_to_localized_string (type, state);
+        str = panel_device_state_to_localized_string (device);
         gtk_label_set_label (GTK_LABEL (widget), str);
 
 

@@ -26,6 +26,7 @@
 #include <gtk/gtk.h>
 
 #include "panel-common.h"
+#include "nm-device-ethernet.h"
 #include "nm-device-modem.h"
 
 /**
@@ -174,8 +175,14 @@ panel_ap_mode_to_localized_string (NM80211Mode mode)
  * panel_device_state_to_localized_string:
  **/
 const gchar *
-panel_device_state_to_localized_string (NMDeviceType type, NMDeviceState state)
+panel_device_state_to_localized_string (NMDevice *device)
 {
+        NMDeviceType type;
+        NMDeviceState state;
+
+        type = nm_device_get_device_type (device);
+        state = nm_device_get_state (device);
+
         const gchar *value = NULL;
         switch (state) {
         case NM_DEVICE_STATE_UNKNOWN:
@@ -188,7 +195,10 @@ panel_device_state_to_localized_string (NMDeviceType type, NMDeviceState state)
                 break;
         case NM_DEVICE_STATE_UNAVAILABLE:
                 /* TRANSLATORS: device status */
-                if (type == NM_DEVICE_TYPE_ETHERNET)
+                if (nm_device_get_firmware_missing (device))
+                        value = _("Firmware missing");
+                else if (type == NM_DEVICE_TYPE_ETHERNET &&
+                         !nm_device_ethernet_get_carrier (NM_DEVICE_ETHERNET (device)))
                         value = _("Cable unplugged");
                 else
                         value = _("Unavailable");
