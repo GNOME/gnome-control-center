@@ -1359,6 +1359,13 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
                         ap = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, i));
                         add_access_point (panel, ap, active_ap);
                 }
+                if (active_ap == NULL) {
+                        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                                     "combobox_wireless_network_name"));
+                        gtk_combo_box_set_active_iter (GTK_COMBO_BOX (widget), NULL);
+                        gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (widget))), "");
+                }
+
                 panel->priv->updating_device = FALSE;
 
                 g_ptr_array_unref (aps_unique);
@@ -2152,6 +2159,29 @@ on_toplevel_map (GtkWidget      *widget,
         }
 }
 
+static void
+connection_activate_cb (NMClient *client,
+                        NMActiveConnection *connection,
+                        GError *error,
+                        gpointer user_data)
+{
+        CcNetworkPanel *panel = user_data;
+
+        if (connection == NULL) {
+                /* failed to activate */
+                refresh_ui (panel);
+        }
+}
+
+static void
+connection_add_activate_cb (NMClient *client,
+                            NMActiveConnection *connection,
+                            const char *path,
+                            GError *error,
+                            gpointer user_data)
+{
+        connection_activate_cb (client, connection, error, user_data);
+}
 
 static void
 wireless_ap_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
@@ -2225,8 +2255,9 @@ wireless_ap_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
         /* activate the connection */
         if (connection_activate != NULL) {
                 nm_client_activate_connection (panel->priv->client,
-                                               connection_activate, NULL, NULL,
-                                               NULL, NULL);
+                                               connection_activate,
+                                               device, NULL,
+                                               connection_activate_cb, panel);
                 goto out;
         }
 
@@ -2235,9 +2266,8 @@ wireless_ap_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
                  ssid_target);
         nm_client_add_and_activate_connection (panel->priv->client,
                                                NULL,
-                                               device,
-                                               object_path,
-                                               NULL, NULL);
+                                               device, object_path,
+                                               connection_add_activate_cb, panel);
 out:
         g_free (ssid_target);
         g_free (object_path);
