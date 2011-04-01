@@ -1,7 +1,6 @@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
-SUBDIRS = po libgnome-control-center shell panels \
-	  help docs
+SUBDIRS = po libgnome-control-center shell panels help
 DIST_SUBDIRS = po help shell docs panels libgnome-control-center
 
 schemasdir   = @GCONF_SCHEMA_FILE_DIR@

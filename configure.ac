@@ -258,9 +258,6 @@ AC_ARG_ENABLE(update-mimedb,
                    enable_update_mimedb=yes)
 AM_CONDITIONAL(ENABLE_UPDATE_MIMEDB, test x$enable_update_mimedb = xyes)
 
-# check for gtk-doc
-GTK_DOC_CHECK([1.9])
-
 CONTROL_CENTER_VERSION=gnome_control_center_version
 AC_SUBST(CONTROL_CENTER_VERSION)
 
@@ -315,10 +312,6 @@ fi
 
 AC_CONFIG_FILES([
 Makefile
-docs/Makefile
-docs/reference/Makefile
-docs/reference/libgnome-control-center/Makefile
-docs/reference/libgnome-control-center/version.xml
 help/Makefile
 libgnome-control-center/Makefile
 libgnome-control-center/libgnome-control-center.pc
