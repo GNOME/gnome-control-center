@@ -83,6 +83,7 @@ struct _CcPrintersPanelPrivate
 static void actualize_jobs_list (CcPrintersPanel *self);
 static void actualize_printers_list (CcPrintersPanel *self);
 static void actualize_allowed_users_list (CcPrintersPanel *self);
+static void actualize_sensitivity (gpointer user_data);
 static void printer_disable_cb (GObject *gobject, GParamSpec *pspec, gpointer user_data);
 static void printer_set_default_cb (GtkToggleButton *button, gpointer user_data);
 
@@ -211,6 +212,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   GtkTreeModel           *model;
+  cups_ptype_t            type = 0;
   GtkTreeIter             iter;
   GtkWidget              *widget;
   gboolean                sensitive;
@@ -495,7 +497,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
       if (printer_type)
         {
-          cups_ptype_t type;
           type = atoi (printer_type);
           is_local = !(type & (CUPS_PRINTER_REMOTE | CUPS_PRINTER_IMPLICIT));
         }
@@ -587,23 +588,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
         }
       else
         gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
-
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "print-test-page-button");
-      gtk_widget_set_sensitive (widget, TRUE);
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-options-button");
-      gtk_widget_set_sensitive (widget, TRUE);
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-jobs-button");
-      gtk_widget_set_sensitive (widget, TRUE);
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-icon");
-      gtk_widget_set_sensitive (widget, TRUE);
     }
   else
     {
@@ -644,23 +628,9 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-jobs-label");
       gtk_label_set_text (GTK_LABEL (widget), "");
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "print-test-page-button");
-      gtk_widget_set_sensitive (widget, FALSE);
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-options-button");
-      gtk_widget_set_sensitive (widget, FALSE);
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-jobs-button");
-      gtk_widget_set_sensitive (widget, FALSE);
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "printer-icon");
-      gtk_widget_set_sensitive (widget, FALSE);
     }
+
+  actualize_sensitivity (self);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "job-release-button");
@@ -2068,19 +2038,36 @@ test_page_cb (GtkButton *button,
 }
 
 static void
-on_permission_changed (GPermission *permission,
-                       GParamSpec  *pspec,
-                       gpointer     data)
+actualize_sensitivity (gpointer user_data)
 {
   CcPrintersPanelPrivate  *priv;
-  CcPrintersPanel         *self = (CcPrintersPanel*) data;
+  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
+  cups_ptype_t             type = 0;
   GtkWidget               *widget;
   gboolean                 is_authorized;
+  gboolean                 is_discovered = FALSE;
+  gboolean                 printer_selected;
+  gint                     i;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
   is_authorized = g_permission_get_allowed (G_PERMISSION (priv->permission)) &&
     !g_settings_get_boolean (priv->lockdown_settings, "disable-print-setup");
+
+  printer_selected = priv->current_dest >= 0 &&
+                     priv->current_dest < priv->num_dests &&
+                     priv->dests != NULL;
+
+  if (printer_selected)
+    for (i = 0; i < priv->dests[priv->current_dest].num_options; i++)
+      {
+        if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-type") == 0)
+          {
+            type = atoi (priv->dests[priv->current_dest].options[i].value);
+            is_discovered = type & CUPS_PRINTER_DISCOVERED;
+            break;
+          }
+      }
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-add-button");
   gtk_widget_set_sensitive (widget, is_authorized);
@@ -2089,7 +2076,7 @@ on_permission_changed (GPermission *permission,
   gtk_widget_set_sensitive (widget, is_authorized);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-remove-button");
-  gtk_widget_set_sensitive (widget, is_authorized);
+  gtk_widget_set_sensitive (widget, !is_discovered && is_authorized);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-disable-switch");
   gtk_widget_set_sensitive (widget, is_authorized);
@@ -2102,6 +2089,26 @@ on_permission_changed (GPermission *permission,
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "allowed-user-remove-button");
   gtk_widget_set_sensitive (widget, is_authorized);
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "print-test-page-button");
+  gtk_widget_set_sensitive (widget, printer_selected);
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-options-button");
+  gtk_widget_set_sensitive (widget, printer_selected);
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-jobs-button");
+  gtk_widget_set_sensitive (widget, printer_selected);
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-icon");
+  gtk_widget_set_sensitive (widget, printer_selected);
+}
+
+static void
+on_permission_changed (GPermission *permission,
+                       GParamSpec  *pspec,
+                       gpointer     data)
+{
+  actualize_sensitivity (data);
 }
 
 static void
