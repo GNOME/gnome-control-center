@@ -13,15 +13,17 @@
 # Tino Meinen <tino.meinen@gmail.com>, 2004, 2006, 2007, 2009.
 # Wouter Bolsterlee <wbolster@gnome.org>, 2006, 2008, 2011.
 #
-# Desktop - werkblad
-# Wallpaper - achtergrond
+# desktop                  - werkblad
+# enroll (fingerprint)     - (vingerafruk) nemen
+# modifier keys            - optietoetsen
+# wallpaper                - achtergrond
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-25 00:28+0100\n"
-"PO-Revision-Date: 2011-03-25 00:28+0100\n"
+"POT-Creation-Date: 2011-04-02 19:52+0200\n"
+"PO-Revision-Date: 2011-04-02 19:53+0200\n"
 "Last-Translator: Wouter Bolsterlee <wbolster@gnome.org>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "Language: nl\n"
@@ -29,39 +31,42 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Dutch\n"
-"X-Poedit-Country: NETHERLANDS\n"
 
 #: ../gnome-control-center.schemas.in.h:1
 msgid "Current network location"
 msgstr "Actuele netwerk-locatie"
 
 #: ../gnome-control-center.schemas.in.h:2
-#, fuzzy
 msgid "More backgrounds URL"
-msgstr "_Achtergrondafbeelding opslaan"
+msgstr "URL voor meer achtergrondafbeeldingen"
 
 #: ../gnome-control-center.schemas.in.h:3
 msgid "More themes URL"
-msgstr ""
+msgstr "URL voor meer thema's"
 
 #: ../gnome-control-center.schemas.in.h:4
 msgid ""
 "Set this to your current location name. This is used to determine the "
 "appropriate network proxy configuration."
 msgstr ""
+"Stel dit in op de naam van de huidige locatie. Dit wordt gebruikt voor het "
+"selecteren van de juiste instellingen voor de netwerk-proxy."
 
 #: ../gnome-control-center.schemas.in.h:5
 msgid ""
 "URL for where to get more desktop backgrounds. If set to an empty string the "
 "link will not appear."
 msgstr ""
+"URL waar meer bureaubladachtergronden gevonden kunnen worden. Indien leeg "
+"gelaten wordt de verwijzing niet getoond."
 
 #: ../gnome-control-center.schemas.in.h:6
 msgid ""
 "URL for where to get more desktop themes. If set to an empty string the link "
 "will not appear."
 msgstr ""
+"URL waar meer bureaubladthema's gevonden kunnen worden. Indien leeg gelaten "
+"wordt de verwijzing niet getoond."
 
 #: ../libgnome-control-center/cc-lockbutton.c:347
 #: ../panels/screen/screen.ui.h:14
@@ -69,7 +74,7 @@ msgid "Lock"
 msgstr "Vergrendelen"
 
 #: ../libgnome-control-center/cc-lockbutton.c:356
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:20
 msgid "Unlock"
 msgstr "Ontgrendelen"
 
@@ -94,11 +99,12 @@ msgstr ""
 "Klik om wijzigingen te maken."
 
 #: ../libgnome-control-center/cc-lockbutton.c:392
-#, fuzzy
 msgid ""
 "System policy prevents changes.\n"
 "Contact your system administrator"
-msgstr "Neem contact op met uw systeembeheerder voor hulp."
+msgstr ""
+"Systeempolicy verhindert de wijzigingen.\n"
+"Neem contact op met uw systeembeheerder voor hulp."
 
 #: ../libgnome-control-center/gconf-property-editor.c:134
 msgid "Key"
@@ -215,9 +221,8 @@ msgid "Background"
 msgstr "Achtergrond"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:2
-#, fuzzy
 msgid "Change the background"
-msgstr "_Achtergrondafbeelding opslaan"
+msgstr "Achtergrond wijzigen"
 
 #. Translators: those are keywords for the background control-center panel
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:4
@@ -241,9 +246,10 @@ msgstr "Vullen"
 msgid "Scale"
 msgstr "Schalen"
 
+# ??? (Wouter Bolsterlee)
 #: ../panels/background/background.ui.h:6
 msgid "Span"
-msgstr ""
+msgstr "Opspannen"
 
 #: ../panels/background/background.ui.h:7
 msgid "Tile"
@@ -275,19 +281,19 @@ msgstr "Bladeren naar meer afbeeldingen"
 msgid "Current background"
 msgstr "Huidige achtergrond"
 
-#: ../panels/background/cc-background-panel.c:1113
+#: ../panels/background/cc-background-panel.c:1133
 msgid "Wallpapers"
 msgstr "Achtergrondafbeeldingen"
 
-#: ../panels/background/cc-background-panel.c:1120
+#: ../panels/background/cc-background-panel.c:1140
 msgid "Pictures Folder"
 msgstr "Afbeeldingenmap"
 
-#: ../panels/background/cc-background-panel.c:1127
+#: ../panels/background/cc-background-panel.c:1147
 msgid "Colors & Gradients"
 msgstr "Kleuren en kleurverlopen"
 
-#: ../panels/background/cc-background-panel.c:1135
+#: ../panels/background/cc-background-panel.c:1155
 msgid "Flickr"
 msgstr "Flickr"
 
@@ -302,7 +308,7 @@ msgstr "meerdere groottes"
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: ../panels/background/cc-background-item.c:255
+#: ../panels/background/cc-background-item.c:281
 msgid "No Desktop Background"
 msgstr "Geen werkbladachtergrond"
 
@@ -360,9 +366,8 @@ msgid "May"
 msgstr "Mei"
 
 #: ../panels/datetime/datetime.ui.h:14
-#, fuzzy
 msgid "Network Time"
-msgstr "Netwerkservers"
+msgstr "Netwerktijd"
 
 #: ../panels/datetime/datetime.ui.h:15
 msgid "November"
@@ -412,7 +417,7 @@ msgstr "Normaal"
 
 #: ../panels/display/display-capplet.ui.h:4
 msgid "Note: may limit resolution options"
-msgstr ""
+msgstr "Lat op: dit kan de resolutie-opties beperken"
 
 # draaiing/rotatie
 #: ../panels/display/display-capplet.ui.h:5
@@ -443,7 +448,7 @@ msgstr "_Resolutie:"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:1
 msgid "Change resolution and position of monitors and projectors"
-msgstr ""
+msgstr "Resolutie en positie van monitors en projectors wijzigen"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
 msgid "Displays"
@@ -452,19 +457,19 @@ msgstr "Schermen"
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:4
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
-msgstr ""
+msgstr "Paneel;Projector;xrandr;Scherm;Resolutie;Monitor"
 
 #: ../panels/display/xrandr-capplet.c:328
 msgid "Anti-Clockwise"
-msgstr ""
+msgstr "Tegen de klok in"
 
 #: ../panels/display/xrandr-capplet.c:329
 msgid "Clockwise"
-msgstr ""
+msgstr "Met de klok mee"
 
 #: ../panels/display/xrandr-capplet.c:330
 msgid "180 Degrees"
-msgstr ""
+msgstr "180 graden"
 
 #. Translators:  this is the feature where what you see on your laptop's
 #. * screen is the same as your external monitor.  Here, "Mirror" is being
@@ -473,7 +478,7 @@ msgstr ""
 #.
 #: ../panels/display/xrandr-capplet.c:467
 msgid "Mirror Displays"
-msgstr ""
+msgstr "Gespiegelde schermen"
 
 #: ../panels/display/xrandr-capplet.c:597
 #, c-format
@@ -487,21 +492,23 @@ msgstr "%d × %d"
 
 #: ../panels/display/xrandr-capplet.c:1510
 msgid "Drag to change primary display."
-msgstr ""
+msgstr "Versleep om het primaire scherm te veranderen."
 
 #: ../panels/display/xrandr-capplet.c:1568
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
 msgstr ""
+"Kies een monitor om de eigenschappen aan te passen; versleep om de positie "
+"aan te passen."
 
 #: ../panels/display/xrandr-capplet.c:1957
 msgid "%a %R"
-msgstr ""
+msgstr "%a, %R"
 
 #: ../panels/display/xrandr-capplet.c:1959
 msgid "%a %l:%M %p"
-msgstr "%a %k:%M"
+msgstr "%a, %l:%M %P"
 
 #: ../panels/display/xrandr-capplet.c:2205
 msgid "Could not save the monitor configuration"
@@ -526,12 +533,12 @@ msgstr "Kon informatie over het scherm niet verkrijgen"
 #: ../panels/info/cc-info-panel.c:366
 #, c-format
 msgid "VESA: %s"
-msgstr ""
+msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:78
-#: ../panels/network/panel-common.c:157
+#: ../panels/info/cc-info-panel.c:390 ../panels/network/panel-common.c:79
+#: ../panels/network/panel-common.c:158
 msgid "Unknown"
 msgstr "Onbekend"
 
@@ -540,100 +547,98 @@ msgstr "Onbekend"
 #: ../panels/info/cc-info-panel.c:528
 #, c-format
 msgid "%d-bit"
-msgstr ""
+msgstr "%d-bit"
 
 #: ../panels/info/cc-info-panel.c:542
 #, c-format
 msgid "%u byte"
 msgid_plural "%u bytes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u byte"
+msgstr[1] "%u bytes"
 
 #: ../panels/info/cc-info-panel.c:550
 #, c-format
 msgid "%.1f KB"
-msgstr ""
+msgstr "%.1f KB"
 
 #: ../panels/info/cc-info-panel.c:555
 #, c-format
 msgid "%.1f MB"
-msgstr ""
+msgstr "%.1f MB"
 
 #: ../panels/info/cc-info-panel.c:560
 #, c-format
 msgid "%.1f GB"
-msgstr ""
+msgstr "%.1f GB"
 
 #: ../panels/info/cc-info-panel.c:565
 #, c-format
 msgid "%.1f TB"
-msgstr ""
+msgstr "%.1f TB"
 
 #: ../panels/info/cc-info-panel.c:570
 #, c-format
 msgid "%.1f PB"
-msgstr ""
+msgstr "%.1f PB"
 
 #: ../panels/info/cc-info-panel.c:575
 #, c-format
 msgid "%.1f EB"
-msgstr ""
+msgstr "%.1f EB"
 
 #: ../panels/info/cc-info-panel.c:686
-#, fuzzy
 msgid "Unknown model"
-msgstr "Onbekend"
+msgstr "Onbekend model"
 
 #: ../panels/info/cc-info-panel.c:769
 msgid "The next login will attempt to use the standard experience."
 msgstr ""
+"Bij de volgende aanmelding zal geprobeerd worden de standaardomgeving te "
+"gebruiken."
 
 #: ../panels/info/cc-info-panel.c:771
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
 msgstr ""
+"Bij de volgende aanmelding zal de fallback-modus, bedoeld voor niet-"
+"ondersteunde grafische kaarten, gebruikt worden."
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
 #: ../panels/info/cc-info-panel.c:813
-#, fuzzy
 msgctxt "Experience"
 msgid "Fallback"
-msgstr "Terugzetten"
+msgstr "Fallback"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
 #: ../panels/info/cc-info-panel.c:819
-#, fuzzy
 msgctxt "Experience"
 msgid "Standard"
-msgstr "Standaard X-terminalvenster"
+msgstr "Standaard"
 
 #: ../panels/info/cc-info-panel.c:951
 #: ../panels/keyboard/keyboard-shortcuts.c:1712
-#, fuzzy
 msgid "Section"
-msgstr "Actie"
+msgstr "Sectie"
 
 #: ../panels/info/cc-info-panel.c:960 ../panels/info/info.ui.h:14
-#, fuzzy
 msgid "Overview"
-msgstr "_Overschrijven"
+msgstr "Overzicht"
 
 #: ../panels/info/cc-info-panel.c:966 ../panels/info/info.ui.h:2
-#, fuzzy
 msgid "Default Applications"
-msgstr "- Gnome standaardprogrammas"
+msgstr "Standaardtoepassingen"
 
 #: ../panels/info/cc-info-panel.c:971 ../panels/info/info.ui.h:9
 msgid "Graphics"
-msgstr ""
+msgstr "Grafisch"
 
 #: ../panels/info/cc-info-panel.c:996
-#, fuzzy, c-format
+#, c-format
 msgid "Version %s"
-msgstr "Versie:"
+msgstr "Versie %s"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
 msgid "System Info"
@@ -641,7 +646,7 @@ msgstr "Systeeminformatie"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:2
 msgid "System Information"
-msgstr ""
+msgstr "Systeeminformatie"
 
 #. Translators: those are keywords for the System Information panel
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
@@ -649,6 +654,8 @@ msgid ""
 "device;system;information;memory;processor;version;default;application;"
 "fallback;"
 msgstr ""
+"apparaat;systeem;informatie;geheugen;processor;versie;standaard;toepassing;"
+"fallback"
 
 #: ../panels/info/info.ui.h:1
 msgid "Calendar"
@@ -666,14 +673,15 @@ msgstr "Schijf"
 msgid "Driver"
 msgstr "Driver"
 
+# Vrij vertaald (Wouter Bolsterlee)
 #: ../panels/info/info.ui.h:6
 msgid "Experience"
-msgstr ""
+msgstr "Omgeving"
 
 #. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
 #: ../panels/info/info.ui.h:8
 msgid "Forced Fallback Mode"
-msgstr ""
+msgstr "Geforceerde fallback-modus"
 
 #: ../panels/info/info.ui.h:10
 msgid "Mail"
@@ -716,9 +724,8 @@ msgid "Eject"
 msgstr "Uitwerpen"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:2
-#, fuzzy
 msgid "Launch media player"
-msgstr "Multimediaspeler"
+msgstr "Mediaspeler starten"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:3
 msgid "Next track"
@@ -738,7 +745,7 @@ msgstr "Vorige track"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:7
 msgid "Sound and Media"
-msgstr ""
+msgstr "Geluid en media"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:8
 msgid "Stop playback"
@@ -806,35 +813,32 @@ msgstr "Grotere tekst"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:3
 msgid "Magnifier zoom in"
-msgstr ""
+msgstr "Inzoomen met vergrootglas"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:4
 msgid "Magnifier zoom out"
-msgstr ""
+msgstr "Uitzoomen met vergrootglas"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:5
-#, fuzzy
 msgid "Toggle contrast"
-msgstr "Beste co_ntrast"
+msgstr "Contrast in- of uitschakelen"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:6
 msgid "Toggle magnifier"
-msgstr ""
+msgstr "Vergrootglas in- of uitschakelen"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:7
-#, fuzzy
 msgid "Toggle on-screen keyboard"
-msgstr "Toetsenbord op scherm"
+msgstr "Toetsenbord op scherm in- of uitschakelen"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:8
-#, fuzzy
 msgid "Toggle screen reader"
-msgstr "Linux-schermlezer"
+msgstr "Schermlezer in- of uitschakelen"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:9
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
 msgid "Universal Access"
-msgstr ""
+msgstr "Universele toegang"
 
 #: ../panels/keyboard/eggcellrendererkeys.c:21
 msgid "New shortcut..."
@@ -875,7 +879,7 @@ msgstr "Uitgeschakeld"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 msgid "Change keyboard settings"
-msgstr ""
+msgstr "Toetsenbordinstellingen wijzigen"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
@@ -885,7 +889,7 @@ msgstr "Toetsenbord"
 #. Translators: those are keywords for the keyboard control-center panel
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:4
 msgid "Shortcut;Repeat;Blink;"
-msgstr ""
+msgstr "Sneltoets;Herhalen;Knipperen"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:646
 #: ../panels/keyboard/keyboard-shortcuts.c:928
@@ -1011,9 +1015,8 @@ msgid "Short"
 msgstr "Kort"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
-#, fuzzy
 msgid "Shortcuts"
-msgstr "Sneltoets"
+msgstr "Sneltoetsen"
 
 #. slow acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
@@ -1022,13 +1025,12 @@ msgid "Slow"
 msgstr "Traag"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
-#, fuzzy
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
 msgstr ""
 "Om een sneltoets te bewerken, klikt u op de corresponderende rij en voert u "
-"een nieuwe toetscombinatie in, of drukt u op Backspace om hem te wissen."
+"een nieuwe toetscombinatie in of drukt u op Backspace om hem te wissen."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
 msgid "_Delay:"
@@ -1044,39 +1046,36 @@ msgstr "Sn_elheid:"
 
 #: ../panels/media/cc-media-panel.c:322
 msgid "Ask what to do"
-msgstr ""
+msgstr "Vragen wat te doen"
 
 #: ../panels/media/cc-media-panel.c:326 ../panels/power/power.ui.h:6
-#, fuzzy
 msgid "Do nothing"
-msgstr "Gladmaken"
+msgstr "Niets doen"
 
 #: ../panels/media/cc-media-panel.c:330
 msgid "Open folder"
-msgstr ""
+msgstr "Map openen"
 
 #: ../panels/media/cc-media-panel.c:441
-#, fuzzy
 msgid "Select an application for audio CDs"
-msgstr "Uw standaardtoepassingen selecteren"
+msgstr "Selecteer een toepassing voor audio-cd's"
 
 #: ../panels/media/cc-media-panel.c:442
-#, fuzzy
 msgid "Select an application for video DVDs"
-msgstr "Uw standaardtoepassingen selecteren"
+msgstr "Selecteer een toepassing voor video-dvd's"
 
 #: ../panels/media/cc-media-panel.c:443
 msgid "Select an application to run when a music player is connected"
 msgstr ""
+"Selecteer de te starten toepassing als een muziekspeler wordt aangesloten"
 
 #: ../panels/media/cc-media-panel.c:444
 msgid "Select an application to run when a camera is connected"
-msgstr ""
+msgstr "Selecteer de te starten toepassing als een camera wordt aangesloten"
 
 #: ../panels/media/cc-media-panel.c:445
-#, fuzzy
 msgid "Select an application for software CDs"
-msgstr "Uw standaardtoepassingen selecteren"
+msgstr "Selecteer een toepassing voor software-cd's"
 
 #. translators: these strings are duplicates of shared-mime-info
 #. * strings, just here to fix capitalization of the English originals.
@@ -1085,31 +1084,31 @@ msgstr "Uw standaardtoepassingen selecteren"
 #.
 #: ../panels/media/cc-media-panel.c:457
 msgid "audio DVD"
-msgstr ""
+msgstr "audio-dvd"
 
 #: ../panels/media/cc-media-panel.c:458
 msgid "blank Blu-ray disc"
-msgstr ""
+msgstr "lege Blu-ray-schijf"
 
 #: ../panels/media/cc-media-panel.c:459
 msgid "blank CD disc"
-msgstr ""
+msgstr "lege cd"
 
 #: ../panels/media/cc-media-panel.c:460
 msgid "blank DVD disc"
-msgstr ""
+msgstr "lege dvd"
 
 #: ../panels/media/cc-media-panel.c:461
 msgid "blank HD DVD disc"
-msgstr ""
+msgstr "lege hd-dvd"
 
 #: ../panels/media/cc-media-panel.c:462
 msgid "Blu-ray video disc"
-msgstr ""
+msgstr "Blu-ray-videoschijf"
 
 #: ../panels/media/cc-media-panel.c:463
 msgid "e-book reader"
-msgstr ""
+msgstr "e-book-lezer"
 
 #: ../panels/media/cc-media-panel.c:464
 msgid "HD DVD video disc"
@@ -1121,7 +1120,7 @@ msgstr "Picture-cd"
 
 #: ../panels/media/cc-media-panel.c:466
 msgid "Super Video CD"
-msgstr ""
+msgstr "Super-video-cd"
 
 #: ../panels/media/cc-media-panel.c:467
 msgid "Video CD"
@@ -1133,32 +1132,32 @@ msgstr "A_ctie"
 
 #: ../panels/media/gnome-media-properties.ui.h:2
 msgid "CD _audio:"
-msgstr ""
+msgstr "_Audio-cd:"
 
 #: ../panels/media/gnome-media-properties.ui.h:3
 msgid "Media and Autorun"
-msgstr ""
+msgstr "Media en automatisch afspelen"
 
 #: ../panels/media/gnome-media-properties.ui.h:4
 msgid "Select how media should be handled"
-msgstr ""
+msgstr "Kies hoe met media omgegaan moet worden"
 
 #: ../panels/media/gnome-media-properties.ui.h:5
 msgid "Select how other media should be handled"
-msgstr ""
+msgstr "Kies hoe met andere media omgegaan moet worden"
 
 #: ../panels/media/gnome-media-properties.ui.h:6
 msgid "_DVD video:"
 msgstr "_Dvd-video:"
 
 #: ../panels/media/gnome-media-properties.ui.h:7
-#, fuzzy
 msgid "_Music player:"
-msgstr "Muine muziekspeler"
+msgstr "_Muziekspeler:"
 
 #: ../panels/media/gnome-media-properties.ui.h:8
 msgid "_Never prompt or start programs on media insertion"
 msgstr ""
+"_Nooit vragen en ook geen toepassingen starten als media ingevoerd worden"
 
 #: ../panels/media/gnome-media-properties.ui.h:9
 msgid "_Other Media..."
@@ -1173,13 +1172,12 @@ msgid "_Software:"
 msgstr "_Software:"
 
 #: ../panels/media/gnome-media-properties.ui.h:12
-#, fuzzy
 msgid "_Type:"
-msgstr "Type:"
+msgstr "_Type:"
 
 #: ../panels/media/gnome-media-panel.desktop.in.in.h:1
 msgid "Configure media and autorun preferences"
-msgstr ""
+msgstr "Voorkeuren media en voor automatisch starten instellen"
 
 #: ../panels/media/gnome-media-panel.desktop.in.in.h:2
 msgid "Removable Media"
@@ -1188,253 +1186,237 @@ msgstr "Verwisselbare media"
 #. Translators: those are keywords for the media control-center panel
 #: ../panels/media/gnome-media-panel.desktop.in.in.h:4
 msgid "cd;dvd;usb;audio;video;disc;"
-msgstr ""
+msgstr "cd;dvd;usb;audio;video;disc;schijfje"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:259
+#: ../panels/printers/cc-printers-panel.c:258
 msgid "Low on toner"
-msgstr ""
+msgstr "Weinig toner"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:261
+#: ../panels/printers/cc-printers-panel.c:260
 msgid "Out of toner"
-msgstr ""
+msgstr "Geen toner meer"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:264
+#: ../panels/printers/cc-printers-panel.c:263
 msgid "Low on developer"
-msgstr ""
+msgstr "Weinig developer (voor ontwikkelen)"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:267
+#: ../panels/printers/cc-printers-panel.c:266
 msgid "Out of developer"
-msgstr ""
+msgstr "Geen developer meer (voor ontwikkelen)"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:269
+#: ../panels/printers/cc-printers-panel.c:268
 msgid "Low on a marker supply"
-msgstr ""
+msgstr "Weinig marker-voorraad meer"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:271
+#: ../panels/printers/cc-printers-panel.c:270
 msgid "Out of a marker supply"
-msgstr ""
+msgstr "Geen marker meer"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:273
+#: ../panels/printers/cc-printers-panel.c:272
 msgid "Open cover"
-msgstr ""
+msgstr "Klep open"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:275
+#: ../panels/printers/cc-printers-panel.c:274
 msgid "Open door"
-msgstr ""
+msgstr "Deur open"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:277
+#: ../panels/printers/cc-printers-panel.c:276
 msgid "Low on paper"
-msgstr ""
+msgstr "Weinig papier"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:279
+#: ../panels/printers/cc-printers-panel.c:278
 msgid "Out of paper"
-msgstr ""
+msgstr "Geen papier meer"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:281
+#: ../panels/printers/cc-printers-panel.c:280
 msgctxt "printer state"
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:283
+#: ../panels/printers/cc-printers-panel.c:282
 msgctxt "printer state"
 msgid "Paused"
-msgstr ""
+msgstr "Gepauzeerd"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:285
+#: ../panels/printers/cc-printers-panel.c:284
 msgid "Waste receptacle almost full"
-msgstr ""
+msgstr "Afvalbakje bijna vol"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:287
+#: ../panels/printers/cc-printers-panel.c:286
 msgid "Waste receptacle full"
-msgstr ""
+msgstr "Afvalbakje vol"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:289
+#: ../panels/printers/cc-printers-panel.c:288
 msgid "The optical photo conductor is near end of life"
 msgstr ""
+"De optische lichtgevoelige geleider (optical photo conductor) is bijna niet "
+"meer te gebruiken."
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:291
+#: ../panels/printers/cc-printers-panel.c:290
 msgid "The optical photo conductor is no longer functioning"
 msgstr ""
+"De optische lichtgevoelige geleider (optical photo conductor) functioneert "
+"niet meer."
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:437
+#: ../panels/printers/cc-printers-panel.c:434
 msgctxt "printer state"
 msgid "Ready"
-msgstr ""
+msgstr "Gereed"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:441
-#, fuzzy
+#: ../panels/printers/cc-printers-panel.c:438
 msgctxt "printer state"
 msgid "Processing"
-msgstr "B_eroep:"
+msgstr "Verwerken"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:445
+#: ../panels/printers/cc-printers-panel.c:442
 msgctxt "printer state"
 msgid "Stopped"
-msgstr ""
+msgstr "Gestopt"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:581
+#: ../panels/printers/cc-printers-panel.c:561
 msgid "Toner Level"
-msgstr ""
+msgstr "Toner-niveau"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:584
+#: ../panels/printers/cc-printers-panel.c:564
 msgid "Ink Level"
-msgstr ""
+msgstr "Inkt-niveau"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:587
+#: ../panels/printers/cc-printers-panel.c:567
 msgid "Supply Level"
-msgstr ""
+msgstr "Voorraad-niveau"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:602
+#: ../panels/printers/cc-printers-panel.c:582
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u actief"
+msgstr[1] "%u actief"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:752
+#: ../panels/printers/cc-printers-panel.c:705
 msgid "No printers available"
-msgstr ""
+msgstr "Geen printers beschikbaar"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1043
+#: ../panels/printers/cc-printers-panel.c:996
 msgctxt "print job"
 msgid "Pending"
-msgstr ""
+msgstr "Wachten"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1047
+#: ../panels/printers/cc-printers-panel.c:1000
 msgctxt "print job"
 msgid "Held"
-msgstr ""
+msgstr "Vastgehouden"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1051
-#, fuzzy
+#: ../panels/printers/cc-printers-panel.c:1004
 msgctxt "print job"
 msgid "Processing"
-msgstr "B_eroep:"
+msgstr "Verwerken"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1055
+#: ../panels/printers/cc-printers-panel.c:1008
 msgctxt "print job"
 msgid "Stopped"
-msgstr ""
+msgstr "Gestopt"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1059
+#: ../panels/printers/cc-printers-panel.c:1012
 msgctxt "print job"
 msgid "Canceled"
-msgstr ""
+msgstr "Geannuleerd"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1063
+#: ../panels/printers/cc-printers-panel.c:1016
 msgctxt "print job"
 msgid "Aborted"
-msgstr ""
+msgstr "Afgebroken"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1067
+#: ../panels/printers/cc-printers-panel.c:1020
 msgctxt "print job"
 msgid "Completed"
-msgstr ""
+msgstr "Voltooid"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1159
-#, fuzzy
+#: ../panels/printers/cc-printers-panel.c:1112
 msgid "Job Title"
-msgstr "_Titel:"
+msgstr "Naam van taak"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1168
+#: ../panels/printers/cc-printers-panel.c:1121
 msgid "Job State"
-msgstr ""
+msgstr "Status van taak"
 
 # Is dit intervaltijd uit de dubbelklik-pref of iets anders?
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1174
-#, fuzzy
+#: ../panels/printers/cc-printers-panel.c:1127
 msgid "Time"
-msgstr "In_tervaltijd:"
+msgstr "Tijd"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1889
+#: ../panels/printers/cc-printers-panel.c:1842
 msgid "Failed to add new printer."
-msgstr ""
+msgstr "Kon nieuwe printer niet toevoegen"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:1989
-#: ../panels/printers/cc-printers-panel.c:2105
-#: ../panels/printers/cc-printers-panel.c:2119
-#, fuzzy
+#: ../panels/printers/cc-printers-panel.c:2014
+#: ../panels/printers/cc-printers-panel.c:2028
 msgid "Test page"
-msgstr "pagina"
-
-#. Translators: Name of job which makes printer to clean its heads
-#: ../panels/printers/cc-printers-panel.c:1997
-msgid "Clean print heads"
-msgstr ""
-
-#. Translators: An error has occured during execution of a CUPS maintenance command
-#: ../panels/printers/cc-printers-panel.c:2002
-msgid "An error has occured during a maintenance command."
-msgstr ""
+msgstr "Testpagina"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2269
-#, fuzzy, c-format
+#: ../panels/printers/cc-printers-panel.c:2215
+#, c-format
 msgid "Could not load ui: %s"
-msgstr "Kon geen toegang krijgen tot het ‘%s’-apparaat"
+msgstr "Kon ui niet laden: %s"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:1
-#, fuzzy
 msgid "Change printer settings"
-msgstr "Wijzigingenset"
+msgstr "Printerinstellingen aanpassen"
 
 #. Translators: those are keywords for the printing control-center panel
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:3
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
-msgstr ""
+msgstr "Printer;Wachtrij;Printen;Papier;Inkt;Toner;"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
-#, fuzzy
 msgid "Printers"
-msgstr "Muisaanwijzer"
+msgstr "Printers"
 
 #: ../panels/printers/new-printer-dialog.ui.h:1
-#, fuzzy
 msgid "Add"
-msgstr "Adres"
+msgstr "Toevoegen"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#, fuzzy
 msgid "Add a New Printer"
-msgstr "Grote muisaanwijzer"
+msgstr "Nieuwe printer toevoegen"
 
 #: ../panels/printers/new-printer-dialog.ui.h:3
 msgid "Address"
@@ -1444,68 +1426,66 @@ msgstr "Adres"
 #: ../panels/user-accounts/data/language-chooser.ui.h:1
 #: ../panels/user-accounts/data/photo-dialog.ui.h:3
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 #: ../panels/printers/new-printer-dialog.ui.h:5
 msgid "Search by Address"
-msgstr ""
+msgstr "Op adres zoeken"
 
 #: ../panels/printers/pp-new-printer-dialog.c:381
 msgid "Getting devices..."
-msgstr ""
+msgstr "Apparaten ophalen…"
 
 #. Translators: Column of devices which can be installed
 #: ../panels/printers/pp-new-printer-dialog.c:639
 #: ../panels/printers/pp-new-printer-dialog.c:644
 msgid "Devices"
-msgstr ""
+msgstr "Apparaten"
 
 #. Translators: Local means local printers
 #: ../panels/printers/pp-new-printer-dialog.c:669
 msgid "Local"
-msgstr ""
+msgstr "Lokaal"
 
 #. Translators: Network means network printers
 #: ../panels/printers/pp-new-printer-dialog.c:671
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
-#, fuzzy
 msgid "Network"
-msgstr "Netwerkproxy"
+msgstr "Netwerk"
 
 #. Translators: Device types column (network or local)
 #: ../panels/printers/pp-new-printer-dialog.c:712
 msgid "Device types"
-msgstr ""
+msgstr "Apparaattypes"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
 #: ../panels/printers/pp-new-printer-dialog.c:865
 #: ../panels/printers/pp-new-printer-dialog.c:1033
-#, fuzzy
 msgid "Automatic configuration"
-msgstr "<b>_Automatische proxyconfiguratie</b>"
+msgstr "Automatische configuratie"
 
 #: ../panels/printers/printers.ui.h:1
 msgid "---"
-msgstr ""
+msgstr "---"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
 #: ../panels/printers/printers.ui.h:3
 msgid "Active Print Jobs"
-msgstr ""
+msgstr "Actieve printtaken"
 
 #. Translators: This button adds new printer.
 #: ../panels/printers/printers.ui.h:5
 msgid "Add New Printer"
-msgstr ""
+msgstr "Nieuwe printer toevoegen"
 
 #: ../panels/printers/printers.ui.h:6
 msgid "Allowed users"
-msgstr ""
+msgstr "Toegestane gebruikers"
 
 #. Translators: Switch back to printer's info tab
 #: ../panels/printers/printers.ui.h:8
 msgid "Back"
-msgstr ""
+msgstr "Terug"
 
 #. Translators: This checkbox is checked when the default printer is selected.
 #: ../panels/printers/printers.ui.h:10
@@ -1515,59 +1495,51 @@ msgid "Default"
 msgstr "Standaard"
 
 #: ../panels/printers/printers.ui.h:11
-#: ../panels/network/cc-network-panel.c:1367
-#: ../panels/network/cc-network-panel.c:1370 ../panels/network/network.ui.h:12
-#, fuzzy
+#: ../panels/network/cc-network-panel.c:1566
+#: ../panels/network/cc-network-panel.c:1569 ../panels/network/network.ui.h:11
 msgid "IP Address"
-msgstr "Adres"
+msgstr "Ip-adres"
 
 #: ../panels/printers/printers.ui.h:12
 msgid "Jobs"
-msgstr ""
+msgstr "Taken"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
 #: ../panels/printers/printers.ui.h:14
-#, fuzzy
 msgid "Location"
-msgstr "Locatie:"
+msgstr "Locatie"
 
 #: ../panels/printers/printers.ui.h:15
-#, fuzzy
 msgid "Model"
-msgstr "Modellen"
+msgstr "Model"
 
 #. Translators: This button opens printer's options tab
 #: ../panels/printers/printers.ui.h:17
-#, fuzzy
 msgid "Options"
-msgstr "_Opties…"
+msgstr "Opties"
 
 #. Translators: This button executes command which prints test page.
 #: ../panels/printers/printers.ui.h:19
 msgid "Print Test Page"
-msgstr ""
+msgstr "Testpagina afdrukken"
 
 #: ../panels/printers/printers.ui.h:20
-#, fuzzy
 msgid "Printer"
-msgstr "Muisaanwijzer"
+msgstr "Printer"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
 #: ../panels/printers/printers.ui.h:22
-#, fuzzy
 msgid "Printer Options"
-msgstr "Titelbalkactie"
+msgstr "Printeropties"
 
 #: ../panels/printers/printers.ui.h:23
-#, fuzzy
 msgid "Printing..."
-msgstr "Vormhints"
+msgstr "Afdrukken…"
 
 #. Tanslators: Switch to tab containing printer's jobs
 #: ../panels/printers/printers.ui.h:25
-#, fuzzy
 msgid "Show"
-msgstr "_Tonen…"
+msgstr "Tonen"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
 #: ../panels/printers/printers.ui.h:27
@@ -1575,27 +1547,26 @@ msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
 msgstr ""
+"Helaas, de systeemservice voor\n"
+"afdrukken is niet beschikbaar."
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
 #: ../panels/printers/printers.ui.h:30
 msgid "Supply"
-msgstr ""
+msgstr "Voorraad"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
-#, fuzzy
 msgid "Allow different layouts for each window"
-msgstr "Aparte _groep voor elk venster"
+msgstr "Aparte indeling voor elk venster toestaan"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
-#, fuzzy
 msgid "Install languages..."
-msgstr "I_nstalleren"
+msgstr "Talen installeren…"
 
 #: ../panels/region/gnome-region-panel.ui.h:3
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
-#, fuzzy
 msgid "Language"
-msgstr "_Taal:"
+msgstr "Taal"
 
 #: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Layouts"
@@ -1604,13 +1575,15 @@ msgstr "Indelingen"
 #: ../panels/region/gnome-region-panel.ui.h:5
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
-msgstr ""
+msgstr "Regio en taal"
 
 #: ../panels/region/gnome-region-panel.ui.h:6
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
 msgstr ""
+"De huidige instellingen van de toetsenbordindeling\n"
+"overschrijven met de standaardinstellingen."
 
 #: ../panels/region/gnome-region-panel.ui.h:8
 msgid "Reset to De_faults"
@@ -1619,27 +1592,26 @@ msgstr "Terug naar stan_daardinstellingen"
 #: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Select a display language (change will be applied next time you log in)"
 msgstr ""
+"Kies een taal (wijziging wordt bij de volgende keer aanmelden toegepast)"
 
 #: ../panels/region/gnome-region-panel.ui.h:10
-#, fuzzy
 msgid "Use default layout in new windows"
-msgstr "Aparte _groep voor elk venster"
+msgstr "Standaardindeling voor nieuwe vensters gebruiken"
 
 #: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Use previous window's layout in new windows"
-msgstr ""
+msgstr "Indeling van vorige venster voor nieuwe vensters gebruiken"
 
 #: ../panels/region/gnome-region-panel.ui.h:12
-#, fuzzy
 msgid "Use same layout in all windows"
-msgstr "Aparte _groep voor elk venster"
+msgstr "Zelfde indeling voor elk venster gebruiken"
 
 #: ../panels/region/gnome-region-panel.ui.h:13
 msgid "View and edit keyboard layout options"
 msgstr "Toetsenbordindelingsopties bekijken en aanpassen"
 
 #: ../panels/region/gnome-region-panel.ui.h:14
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network.ui.h:28
 msgid "_Options..."
 msgstr "_Opties…"
 
@@ -1648,13 +1620,12 @@ msgid "Choose a Layout"
 msgstr "Kies een indeling"
 
 #: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
-#, fuzzy
 msgid "Preview"
-msgstr "Voorbeeld:"
+msgstr "Voorbeeld"
 
 #: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
 msgid "Select an input source to add"
-msgstr ""
+msgstr "Kies de toe te voegen invoerbron"
 
 #: ../panels/region/gnome-region-panel-options-dialog.ui.h:1
 msgid "Keyboard Layout Options"
@@ -1666,16 +1637,16 @@ msgstr "Indeling"
 
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:1
 msgid "Change your region and language settings"
-msgstr ""
+msgstr "Regionale en taalinstellingen wijzigen"
 
 #. Translators: those are keywords for the region control-center panel
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:3
 msgid "Language;Layout;Keyboard;"
-msgstr ""
+msgstr "Taal;Indeling;Toetsenbord;"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
 msgid "Disable _touchpad while typing"
-msgstr ""
+msgstr "_Touchpad uitschakelen tijdens het typen"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:3
 msgid "Double-Click Timeout"
@@ -1687,11 +1658,11 @@ msgstr "Slepen en Neerzetten"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
 msgid "Enable _mouse clicks with touchpad"
-msgstr ""
+msgstr "_Muiskliks met touchpad inschakelen"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "Enable h_orizontal scrolling"
-msgstr ""
+msgstr "H_orizontaal schuiven inschakelen"
 
 #. high sensitivity
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
@@ -1723,7 +1694,7 @@ msgstr "Aanwijzersnelheid"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:20
 msgid "Scrolling"
-msgstr ""
+msgstr "Schuiven"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:21
 msgid "Sh_ow position of pointer when the Control key is pressed"
@@ -1740,11 +1711,8 @@ msgid "Thr_eshold:"
 msgstr "_Drempelwaarde:"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:28
-#, fuzzy
 msgid "To test your settings, try to double-click on the face."
-msgstr ""
-"Probeer op het lampje te dubbelklikken om uw dubbelklikinstellingen te "
-"testen."
+msgstr "Dubbelklik op het gezichtje om de instellingen te testen."
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:29
 msgid "Touchpad"
@@ -1784,578 +1752,543 @@ msgid "_Timeout:"
 msgstr "In_tervaltijd:"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
-#, fuzzy
 msgid "Mouse and Touchpad"
-msgstr "Touchpad"
+msgstr "Muis en touchpad"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:2
-#, fuzzy
 msgid "Set your mouse and touchpad preferences"
-msgstr "Uw muisvoorkeuren instellen"
+msgstr "Voorkeuren voor muis en touchpad instellen"
 
 #. Translators: those are keywords for the mouse and touchpad control-center panel
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
-msgstr ""
+msgstr "Trackpad;Aanwijzer;Klikken;Dubbel;Knop;Trackball;Touchpad;"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/cc-network-panel.c:190
+#: ../panels/network/cc-network-panel.c:193
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgstr ""
+"Automatisch ontdekken van de web-proxy wordt gebruikt als er geen "
+"configuratie-url is opgegeven."
 
 #. TRANSLATORS: WPAD is bad: if you enable it on an untrusted
 #. * network, then anyone else on that network can tell your
 #. * machine that it should proxy all of your web traffic
 #. * through them.
-#: ../panels/network/cc-network-panel.c:198
+#: ../panels/network/cc-network-panel.c:201
 msgid "This is not recommended for untrusted public networks."
-msgstr ""
+msgstr "Dit wordt afgeraden voor niet te vertrouwen publieke netwerken."
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:873
+#: ../panels/network/cc-network-panel.c:943
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:877
+#: ../panels/network/cc-network-panel.c:947
 msgid "WPA"
-msgstr ""
+msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:881
+#: ../panels/network/cc-network-panel.c:951
 msgid "WPA2"
-msgstr ""
+msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:886
+#: ../panels/network/cc-network-panel.c:956
 msgid "Enterprise"
-msgstr ""
+msgstr "Enterprise"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:892
+#: ../panels/network/cc-network-panel.c:962
 #: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "Geen"
 
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1174
-#: ../panels/network/cc-network-panel.c:1199
+#: ../panels/network/cc-network-panel.c:1265
+#: ../panels/network/cc-network-panel.c:1310
 #, c-format
 msgid "%d Mb/s"
-msgstr ""
+msgstr "%d Mb/s"
 
-#: ../panels/network/cc-network-panel.c:1363 ../panels/network/network.ui.h:13
-#, fuzzy
+#: ../panels/network/cc-network-panel.c:1562 ../panels/network/network.ui.h:12
 msgid "IPv4 Address"
-msgstr "Adres"
+msgstr "IPv4-adres"
 
-#: ../panels/network/cc-network-panel.c:1364 ../panels/network/network.ui.h:14
-#, fuzzy
+#: ../panels/network/cc-network-panel.c:1563 ../panels/network/network.ui.h:13
 msgid "IPv6 Address"
-msgstr "Adres"
+msgstr "IPv6-adres"
 
-#: ../panels/network/cc-network-panel.c:1498
-#, fuzzy
+#: ../panels/network/cc-network-panel.c:1701
 msgid "Proxy"
-msgstr "_FTP-proxy:"
+msgstr "Proxy"
 
-#: ../panels/network/cc-network-panel.c:1561
-#, fuzzy
+#: ../panels/network/cc-network-panel.c:1765
 msgid "Network proxy"
 msgstr "Netwerkproxy"
 
-#: ../panels/network/cc-network-panel.c:1710
+#: ../panels/network/cc-network-panel.c:1931
 #, c-format
 msgid "%s VPN"
-msgstr ""
+msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1778
+#: ../panels/network/cc-network-panel.c:1999
 msgid "The system network services are not compatible with this version."
 msgstr ""
+"De netwerkdiensten van het systeem zijn niet compatibel met deze versie."
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
-#, fuzzy
 msgid "Network settings"
-msgstr "Netwerkservers"
+msgstr "Netwerkinstellingen"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
 msgid "Network;Wireless;IP;LAN;"
-msgstr ""
+msgstr "Netwerk;Draadloos;IP;LAN;"
 
 #: ../panels/network/network.ui.h:1
 msgid "Air_plane Mode"
-msgstr ""
+msgstr "_Vliegtuig-modus"
 
 #: ../panels/network/network.ui.h:2
-#, fuzzy
 msgid "Create..."
-msgstr "Aan_maken"
+msgstr "Aanmaken…"
 
 #: ../panels/network/network.ui.h:3
 msgid "DNS"
 msgstr "DNS"
 
 #: ../panels/network/network.ui.h:4
-msgid "DSL"
-msgstr "DSL"
+msgid "Default Route"
+msgstr "Standaardroute"
 
 #: ../panels/network/network.ui.h:5
-#, fuzzy
-msgid "Default Route"
-msgstr "Standaard muisaanwijzer"
-
-#: ../panels/network/network.ui.h:6
 msgid "Gateway"
 msgstr "Gateway"
 
-#: ../panels/network/network.ui.h:7
-#, fuzzy
+#: ../panels/network/network.ui.h:6
 msgid "Group Name"
-msgstr "Volledige naam"
+msgstr "Groepsnaam"
+
+#: ../panels/network/network.ui.h:7
+msgid "Group Password"
+msgstr "Groepswachtwoord:"
 
 #: ../panels/network/network.ui.h:8
-#, fuzzy
-msgid "Group Password"
-msgstr "_Wachtwoord:"
+msgid "H_TTPS Proxy"
+msgstr "H_TTPS-proxy"
 
 #: ../panels/network/network.ui.h:9
-#, fuzzy
-msgid "H_TTPS Proxy"
-msgstr "HTT_P-proxy:"
+msgid "Hardware Address"
+msgstr "Hardware-adres"
 
 #: ../panels/network/network.ui.h:10
-#, fuzzy
-msgid "Hardware Address"
-msgstr "Adres"
-
-#: ../panels/network/network.ui.h:11
 msgid "IMEI"
 msgstr "IMEI"
 
-#: ../panels/network/network.ui.h:15
-#, fuzzy
+#: ../panels/network/network.ui.h:14
 msgid "Interface"
-msgstr "Internet"
+msgstr "Interface"
 
-#: ../panels/network/network.ui.h:16
-msgid "Mobile Broadband"
-msgstr "Mobiel breedband"
-
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:15
 msgid "Provider"
 msgstr "Provider"
 
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:16
 msgid "Security"
 msgstr "Beveiliging"
 
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:17
 msgid "Select the interface to use for the new service"
-msgstr ""
+msgstr "Kies de te gebruiken interface voor de nieuwe service"
 
-#: ../panels/network/network.ui.h:20
+#: ../panels/network/network.ui.h:18
 msgid "Speed"
 msgstr "Snelheid"
 
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:19
 msgid "Subnet Mask"
 msgstr "Subnet-masker"
 
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:21
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:22
 msgid "VPN"
 msgstr "VPN"
 
-#. TRANSLATORS: device type
-#: ../panels/network/network.ui.h:25 ../panels/network/panel-common.c:82
-msgid "Wired"
-msgstr "Bekabeld"
+#: ../panels/network/network.ui.h:23
+msgid "_Configuration URL"
+msgstr "_Configuratie-URL:"
 
-#. TRANSLATORS: device type
-#: ../panels/network/network.ui.h:26 ../panels/network/panel-common.c:86
-msgid "Wireless"
-msgstr "Draadloos"
+#: ../panels/network/network.ui.h:24
+msgid "_FTP Proxy"
+msgstr "_FTP-proxy"
+
+#: ../panels/network/network.ui.h:25
+msgid "_HTTP Proxy"
+msgstr "_HTTP-proxy"
+
+#: ../panels/network/network.ui.h:26
+msgid "_Method"
+msgstr "_Methode"
 
 #: ../panels/network/network.ui.h:27
-#, fuzzy
-msgid "_Configuration URL"
-msgstr "Autoconfiguratie-_URL:"
-
-#: ../panels/network/network.ui.h:28
-#, fuzzy
-msgid "_FTP Proxy"
-msgstr "_FTP-proxy:"
+msgid "_Network Name"
+msgstr "_Netwerknaam"
 
 #: ../panels/network/network.ui.h:29
-#, fuzzy
-msgid "_HTTP Proxy"
-msgstr "HTT_P-proxy:"
+msgid "_Socks Host"
+msgstr "S_ocks-host:"
 
 #: ../panels/network/network.ui.h:30
-#, fuzzy
-msgid "_Method"
-msgstr "_Meta"
-
-#: ../panels/network/network.ui.h:31
-#, fuzzy
-msgid "_Network Name"
-msgstr "Netwerkservers"
-
-#: ../panels/network/network.ui.h:33
-#, fuzzy
-msgid "_Socks Host"
-msgstr "S_ocks-hostnaam:"
-
-#: ../panels/network/network.ui.h:34
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "Automatisch"
 
-#: ../panels/network/network.ui.h:35
+#: ../panels/network/network.ui.h:31
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "Handmatig"
 
-#: ../panels/network/network.ui.h:36
+#: ../panels/network/network.ui.h:32
 msgctxt "proxy method"
 msgid "None"
 msgstr "Geen"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:93
+#: ../panels/network/panel-common.c:83
+msgid "Wired"
+msgstr "Bekabeld"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:87
+msgid "Wireless"
+msgstr "Draadloos"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:94
 msgid "Mobile broadband"
 msgstr "Mobiel breedband"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:98
+#: ../panels/network/panel-common.c:99
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:102
+#: ../panels/network/panel-common.c:103
 msgid "Mesh"
 msgstr "Mesh"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:161
+#: ../panels/network/panel-common.c:162
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:165
+#: ../panels/network/panel-common.c:166
 msgid "Infrastructure"
 msgstr "Infrastructure"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:183 ../panels/network/panel-common.c:241
+#: ../panels/network/panel-common.c:190 ../panels/network/panel-common.c:251
 msgid "Status unknown"
 msgstr "Onbekende status"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:187
+#: ../panels/network/panel-common.c:194
 msgid "Unmanaged"
 msgstr "Niet-gemanaged"
 
-#: ../panels/network/panel-common.c:192
+#: ../panels/network/panel-common.c:199
+msgid "Firmware missing"
+msgstr "Firmware ontbreekt"
+
+#: ../panels/network/panel-common.c:202
 msgid "Cable unplugged"
 msgstr "Kabel niet verbonden"
 
-#: ../panels/network/panel-common.c:194
+#: ../panels/network/panel-common.c:204
 msgid "Unavailable"
 msgstr "Niet beschikbaar"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:198
+#: ../panels/network/panel-common.c:208
 msgid "Disconnected"
 msgstr "Niet verbonden"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:205 ../panels/network/panel-common.c:247
+#: ../panels/network/panel-common.c:215 ../panels/network/panel-common.c:257
 msgid "Connecting"
 msgstr "Verbinden"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:209 ../panels/network/panel-common.c:251
-#, fuzzy
+#: ../panels/network/panel-common.c:219 ../panels/network/panel-common.c:261
 msgid "Authentication required"
-msgstr "Wachtwoordcontrole voltooid!"
+msgstr "Authenticatie vereist"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:213 ../panels/network/panel-common.c:255
+#: ../panels/network/panel-common.c:223 ../panels/network/panel-common.c:265
 msgid "Connected"
-msgstr ""
+msgstr "Verbonden"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:217
-#, fuzzy
+#: ../panels/network/panel-common.c:227
 msgid "Disconnecting"
-msgstr "Vormhints"
+msgstr "Verbinding verbreken"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:221 ../panels/network/panel-common.c:259
+#: ../panels/network/panel-common.c:231 ../panels/network/panel-common.c:269
 msgid "Connection failed"
-msgstr ""
+msgstr "Verbinding mislukt"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:225 ../panels/network/panel-common.c:267
+#: ../panels/network/panel-common.c:235 ../panels/network/panel-common.c:277
 msgid "Status unknown (missing)"
-msgstr ""
+msgstr "Onbekende status (ontbreekt)"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:263
+#: ../panels/network/panel-common.c:273
 msgid "Not connected"
-msgstr ""
+msgstr "Niet verbonden"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
-msgstr ""
+msgstr "Energie"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:2
 msgid "Power management settings"
-msgstr ""
+msgstr "Energievoorkeuren"
 
 #. Translators: those are keywords for the power control-center panel
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
 msgid "Power;Sleep;Suspend;Hibernate;Battery;"
-msgstr ""
+msgstr "Energie;Slaapstand;Pauzestand;Accu;Stroom;"
 
 #: ../panels/power/cc-power-panel.c:153
-#, fuzzy
 msgid "Unknown time"
-msgstr "Onbekend"
+msgstr "Onbekende tijd"
 
 #: ../panels/power/cc-power-panel.c:159
-#, fuzzy, c-format
+#, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
-msgstr[0] "minuten"
-msgstr[1] "minuten"
+msgstr[0] "%i minuut"
+msgstr[1] "%i minuten"
 
 #: ../panels/power/cc-power-panel.c:171
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i uur"
+msgstr[1] "%i uur"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
 #: ../panels/power/cc-power-panel.c:179
-#, fuzzy, c-format
+#, c-format
 msgid "%i %s %i %s"
-msgstr "%d %s bij %d %s"
+msgstr "%i %s %i %s"
 
 #: ../panels/power/cc-power-panel.c:180
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "uur"
+msgstr[1] "uur"
 
 #: ../panels/power/cc-power-panel.c:181
-#, fuzzy
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "minuten"
+msgstr[0] "minuut"
 msgstr[1] "minuten"
 
 #: ../panels/power/cc-power-panel.c:253
 msgid "Battery charging"
-msgstr ""
+msgstr "Accu laadt op"
 
 #: ../panels/power/cc-power-panel.c:256
 msgid "Battery discharging"
-msgstr ""
+msgstr "Accu ontlaadt"
 
 #: ../panels/power/cc-power-panel.c:267
 msgid "UPS charging"
-msgstr ""
+msgstr "UPS laadt op"
 
 #: ../panels/power/cc-power-panel.c:270
 msgid "UPS discharging"
-msgstr ""
+msgstr "UPS ontlaadt"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #: ../panels/power/cc-power-panel.c:288
 #, c-format
 msgid "%s until charged (%.0lf%%)"
-msgstr ""
+msgstr "%s tot opgeladen (%.0lf%%)"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #: ../panels/power/cc-power-panel.c:294
 #, c-format
 msgid "%s until empty (%.0lf%%)"
-msgstr ""
+msgstr "%s tot leeg (%.0lf%%)"
 
 #. TRANSLATORS: %1 is a percentage value. Note: this string is only
 #. * used when we don't have a time value
 #: ../panels/power/cc-power-panel.c:302
 #, c-format
 msgid "%.0lf%% charged"
-msgstr ""
+msgstr "%.0lf%% opgeladen"
 
 #: ../panels/power/power.ui.h:1 ../panels/screen/screen.ui.h:1
 msgid "1 hour"
-msgstr ""
+msgstr "1 uur"
 
 #: ../panels/power/power.ui.h:2 ../panels/screen/screen.ui.h:3
-#, fuzzy
 msgid "10 minutes"
-msgstr "minuten"
+msgstr "10 minuten"
 
 #: ../panels/power/power.ui.h:3 ../panels/screen/screen.ui.h:6
-#, fuzzy
 msgid "30 minutes"
-msgstr "minuten"
+msgstr "30 minuten"
 
 #: ../panels/power/power.ui.h:4 ../panels/screen/screen.ui.h:8
-#, fuzzy
 msgid "5 minutes"
-msgstr "minuten"
+msgstr "5 minuten"
 
 #: ../panels/power/power.ui.h:5
 msgid "Ask me"
-msgstr ""
+msgstr "Mij vragen"
 
 #: ../panels/power/power.ui.h:7
 msgid "Hibernate"
-msgstr ""
+msgstr "Slaapstand"
 
 #: ../panels/power/power.ui.h:8
 msgid "On AC power:"
-msgstr ""
+msgstr "Op netstroom:"
 
 #: ../panels/power/power.ui.h:9
 msgid "On battery power:"
-msgstr ""
+msgstr "Op accustroom:"
 
 #: ../panels/power/power.ui.h:10
 msgid "Put the computer to sleep when inactive:"
-msgstr ""
+msgstr "De computer in slaapstand zetten bij inactiviteit:"
 
 #: ../panels/power/power.ui.h:11
 msgid "Shutdown"
-msgstr ""
+msgstr "Afsluiten"
 
 #: ../panels/power/power.ui.h:12
 msgid "Suspend"
-msgstr ""
+msgstr "Pauzestand"
 
 #: ../panels/power/power.ui.h:13
 msgid "When power is critically low:"
-msgstr ""
+msgstr "Als de accustroom kritiek laag is:"
 
 #: ../panels/power/power.ui.h:14
 msgid "When the power button is pressed:"
-msgstr ""
+msgstr "Als de aan-/uitknop wordt ingedrukt:"
 
 #: ../panels/power/power.ui.h:15
 msgid "When the sleep button is pressed:"
-msgstr ""
+msgstr "Als de slaapstand-knop wordt ingedrukt:"
 
 #. Translators: those are keywords for the brightness and lock control-center panel
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
 msgid "Brightness;Lock;Dim;Blank;Monitor;"
-msgstr ""
+msgstr "Helderheid;Vergrendelen;Ontgrendelen;Dimmen;Zwart;Monitor;"
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
-#, fuzzy
 msgid "Screen"
-msgstr "Gespiegelde schermen"
+msgstr "Scherm"
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
 msgid "Screen brightness and lock settings"
-msgstr ""
+msgstr "Schermhelderheid en instellingen voor vergrendelen"
 
 #: ../panels/screen/screen.ui.h:2
-#, fuzzy
 msgid "1 minute"
-msgstr "minuten"
+msgstr "1 minuut"
 
 #: ../panels/screen/screen.ui.h:4
-#, fuzzy
 msgid "2 minutes"
-msgstr "minuten"
+msgstr "2 minuten"
 
 #: ../panels/screen/screen.ui.h:5
-#, fuzzy
 msgid "3 minutes"
-msgstr "minuten"
+msgstr "3 minuten"
 
 #: ../panels/screen/screen.ui.h:7
-#, fuzzy
 msgid "30 seconds"
-msgstr "seconden"
+msgstr "30 seconden"
 
 #: ../panels/screen/screen.ui.h:9
 msgid "Brightness"
-msgstr ""
+msgstr "Helderheid"
 
 #: ../panels/screen/screen.ui.h:10
 msgid "Dim screen to save power"
-msgstr ""
+msgstr "Scherm dimmen om stroom te sparen"
 
 #. To translators: This asks whether you want to lock the screen (through the screensaver) when you're detected to be physically in your home (your house, etc.)
 #: ../panels/screen/screen.ui.h:12
 msgid "Don't lock when at home"
-msgstr ""
+msgstr "Niet vergrendelen op thuislocatie"
 
 #: ../panels/screen/screen.ui.h:13
-#, fuzzy
 msgid "Locations..."
-msgstr "Nieuwe locatie…"
+msgstr "Locaties…"
 
 #: ../panels/screen/screen.ui.h:15
 msgid "Lock screen after:"
-msgstr ""
+msgstr "Scherm vergrendelen na:"
 
 #: ../panels/screen/screen.ui.h:16
 msgid "Screen turns off"
-msgstr ""
+msgstr "Scherm uitschakelen"
 
 #: ../panels/screen/screen.ui.h:17
 msgid "Turn off after:"
-msgstr ""
+msgstr "Scherm uitschakelen na:"
 
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
 msgstr "Debugging-code inschakelen"
 
 #: ../panels/sound/applet-main.c:50
-#, fuzzy
 msgid "Version of this application"
-msgstr "Openen met standaardprogramma"
+msgstr "Versie van deze toepassing"
 
 #: ../panels/sound/applet-main.c:62
 msgid " — GNOME Volume Control Applet"
-msgstr ""
+msgstr " — Gnome-applet voor het instellen van het volume"
 
 #: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1923
 msgid "Output"
-msgstr ""
+msgstr "Output"
 
 #: ../panels/sound/gvc-applet.c:278
 msgid "Sound Output Volume"
-msgstr ""
+msgstr "Weergavevolume"
 
 #: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1840
 msgid "Input"
-msgstr ""
+msgstr "Input"
 
 #: ../panels/sound/gvc-applet.c:284
 msgid "Microphone Volume"
-msgstr ""
+msgstr "Microfoonvolume"
 
 #: ../panels/sound/gvc-balance-bar.c:111
 msgctxt "balance"
@@ -2378,47 +2311,44 @@ msgid "Front"
 msgstr "Voor"
 
 #: ../panels/sound/gvc-balance-bar.c:119
-#, fuzzy
 msgctxt "balance"
 msgid "Minimum"
-msgstr "Minimaliseren"
+msgstr "Minimum"
 
 #: ../panels/sound/gvc-balance-bar.c:120
-#, fuzzy
 msgctxt "balance"
 msgid "Maximum"
-msgstr "Maximaliseren"
+msgstr "Maximum"
 
 #: ../panels/sound/gvc-balance-bar.c:295
 msgid "_Balance:"
-msgstr ""
+msgstr "_Balans"
 
 #: ../panels/sound/gvc-balance-bar.c:298
 msgid "_Fade:"
-msgstr ""
+msgstr "_Fade:"
 
 #: ../panels/sound/gvc-balance-bar.c:301
 msgid "_Subwoofer:"
-msgstr ""
+msgstr "_Subwoofer:"
 
 #: ../panels/sound/gvc-channel-bar.c:603 ../panels/sound/gvc-channel-bar.c:612
 msgctxt "volume"
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 #: ../panels/sound/gvc-channel-bar.c:607
 msgctxt "volume"
 msgid "Unamplified"
-msgstr ""
+msgstr "Onversterkt"
 
 #: ../panels/sound/gvc-channel-bar.c:901
 msgid "Mute"
-msgstr ""
+msgstr "Dempen"
 
 #: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1631
-#, fuzzy
 msgid "_Profile:"
-msgstr "_Mobiel:"
+msgstr "_Profiel:"
 
 #. translators:
 #. * The number of sound outputs on a particular device
@@ -2426,8 +2356,8 @@ msgstr "_Mobiel:"
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u output"
+msgstr[1] "%u outputs"
 
 #. translators:
 #. * The number of sound inputs on a particular device
@@ -2435,123 +2365,117 @@ msgstr[1] ""
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u input"
+msgstr[1] "%u inputs"
 
 #: ../panels/sound/gvc-mixer-control.c:1399
-#, fuzzy
 msgid "System Sounds"
-msgstr "Systeem"
+msgstr "Systeemgeluiden"
 
 #: ../panels/sound/gvc-mixer-dialog.c:317
 #: ../panels/sound/gvc-mixer-dialog.c:618
 msgid "Co_nnector:"
-msgstr ""
+msgstr "Co_nnector"
 
 #: ../panels/sound/gvc-mixer-dialog.c:531
 msgid "Peak detect"
-msgstr ""
+msgstr "Piekdetectie"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1507
 #: ../panels/sound/gvc-mixer-dialog.c:1719
 #: ../panels/sound/gvc-sound-theme-chooser.c:596
-#, fuzzy
 msgid "Name"
-msgstr "Naam:"
+msgstr "Naam"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1525
 msgid "Device"
-msgstr ""
+msgstr "Apparaat"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1573
 #, c-format
 msgid "Speaker Testing for %s"
-msgstr ""
+msgstr "Speakers testen voor %s"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1632
 msgid "Test Speakers"
-msgstr ""
+msgstr "Speakers testen"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1763
 msgid "_Output volume: "
-msgstr ""
+msgstr "_Waargavevolume: "
 
 #: ../panels/sound/gvc-mixer-dialog.c:1777
 msgid "Sound Effects"
-msgstr ""
+msgstr "Geluidseffecten"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1784
 msgid "_Alert volume: "
-msgstr ""
+msgstr "_Alert-volume: "
 
 #: ../panels/sound/gvc-mixer-dialog.c:1797
 msgid "Hardware"
-msgstr ""
+msgstr "Hardware"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1802
 msgid "C_hoose a device to configure:"
-msgstr ""
+msgstr "_Kies te configureren apparaat:"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1829
 #: ../panels/sound/gvc-mixer-dialog.c:1952
 msgid "Settings for the selected device:"
-msgstr ""
+msgstr "Instellingen voor het gekozen apparaat:"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1847
-#, fuzzy
 msgid "_Input volume: "
-msgstr "I_nvoervelden:"
+msgstr "_Opnamevolume:"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1870
-#, fuzzy
 msgid "Input level:"
-msgstr "I_nvoervelden:"
+msgstr "Opnameniveau:"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1896
 msgid "C_hoose a device for sound input:"
-msgstr ""
+msgstr "K_ies een apparaat voor geluidsopname:"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1928
 msgid "C_hoose a device for sound output:"
-msgstr ""
+msgstr "K_ies een apparaat voor geluidsweergave:"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1963
-#, fuzzy
 msgid "Applications"
-msgstr "_Toepassingslettertype:"
+msgstr "Toepassingen"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1967
 msgid "No application is currently playing or recording audio."
-msgstr ""
+msgstr "Er zijn momenteel geen toepassingen die audio opneemt of afspelen."
 
 #: ../panels/sound/gvc-speaker-test.c:221
 msgid "Stop"
-msgstr ""
+msgstr "Stoppen"
 
 #: ../panels/sound/gvc-speaker-test.c:221
 #: ../panels/sound/gvc-speaker-test.c:333
 msgid "Test"
-msgstr ""
+msgstr "Testen"
 
 #: ../panels/sound/gvc-speaker-test.c:229
 msgid "Subwoofer"
-msgstr ""
+msgstr "Subwoofer"
 
-#: ../panels/sound/gvc-stream-status-icon.c:236
+#: ../panels/sound/gvc-stream-status-icon.c:235
 #, c-format
 msgid "Failed to start Sound Preferences: %s"
-msgstr ""
+msgstr "Kon geluidsvoorkeuren niet starten: %s"
 
-#: ../panels/sound/gvc-stream-status-icon.c:262
+#: ../panels/sound/gvc-stream-status-icon.c:261
 msgid "_Mute"
 msgstr "_Dempen"
 
-#: ../panels/sound/gvc-stream-status-icon.c:271
-#, fuzzy
+#: ../panels/sound/gvc-stream-status-icon.c:270
 msgid "_Sound Preferences"
-msgstr "Muisvoorkeuren"
+msgstr "_Geluidsvoorkeuren"
 
-#: ../panels/sound/gvc-stream-status-icon.c:455
+#: ../panels/sound/gvc-stream-status-icon.c:415
 msgid "Muted"
 msgstr "Gedempt"
 
@@ -2562,24 +2486,22 @@ msgstr "Ingebouwd"
 #: ../panels/sound/gvc-sound-theme-chooser.c:456
 #: ../panels/sound/gvc-sound-theme-chooser.c:468
 #: ../panels/sound/gvc-sound-theme-chooser.c:480
-#, fuzzy
 msgid "Sound Preferences"
-msgstr "Muisvoorkeuren"
+msgstr "Geluidsvoorkeuren"
 
 #: ../panels/sound/gvc-sound-theme-chooser.c:459
 #: ../panels/sound/gvc-sound-theme-chooser.c:470
 #: ../panels/sound/gvc-sound-theme-chooser.c:482
 msgid "Testing event sound"
-msgstr ""
+msgstr "Evenementgeluid testen"
 
 #: ../panels/sound/gvc-sound-theme-chooser.c:587
 msgid "From theme"
-msgstr ""
+msgstr "Van thema"
 
 #: ../panels/sound/gvc-sound-theme-chooser.c:782
-#, fuzzy
 msgid "C_hoose an alert sound:"
-msgstr "Kies een indeling"
+msgstr "_Kies een evenementgeluid:"
 
 #: ../panels/sound/sound-theme-file-utils.c:292
 msgid "Custom"
@@ -2587,21 +2509,20 @@ msgstr "Aangepast"
 
 #: ../panels/sound/data/gnome-sound-applet.desktop.in.h:1
 msgid "Show desktop volume control"
-msgstr ""
+msgstr "Volumeregeling voor werkomgeving tonen"
 
 #: ../panels/sound/data/gnome-sound-applet.desktop.in.h:2
-#, fuzzy
 msgid "Volume Control"
-msgstr "UI Regelaar"
+msgstr "Volumeregeling"
 
 #. Translators: those are keywords for the sound control-center panel
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
 msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;"
-msgstr ""
+msgstr "Kaart;Microfoon;Volume;Fade;Balans;Bluetooth;Headset;"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:3
 msgid "Change sound volume and sound events"
-msgstr ""
+msgstr "Geluidsvolume en geluidseffecten wijzigen"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
 msgid "Sound"
@@ -2611,86 +2532,79 @@ msgstr "Geluid"
 #. You might want to translate it into the equivalent words of your language.
 #: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:3
 msgid "Bark"
-msgstr ""
+msgstr "Blaffen"
 
 #. Translators: This is the name of an audio file that sounds like a water drip.
 #. You might want to translate it into the equivalent words of your language.
 #: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:6
 msgid "Drip"
-msgstr ""
+msgstr "Druppelen"
 
 #. Translators: This is the name of an audio file that sounds like tapping glass.
 #. You might want to translate it into the equivalent words of your language.
 #: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:9
 msgid "Glass"
-msgstr ""
+msgstr "Glas"
 
 #. Translators: This is the name of an audio file that sounds sort of like a submarine sonar ping.
 #. You might want to translate it into the equivalent words of your language.
 #: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:12
 msgid "Sonar"
-msgstr ""
+msgstr "Sonar"
 
 #: ../panels/universal-access/cc-ua-panel.c:470
 #: ../panels/universal-access/cc-ua-panel.c:475
-#, fuzzy
 msgid "No shortcut set"
-msgstr "Nieuwe sneltoets…"
+msgstr "Geen sneltoets ingesteld"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
-#, fuzzy
 msgid "Keyboard;Mouse;a11y;Accessibility;"
-msgstr "Toetsen_bord-toegankelijkheid"
+msgstr "Toetsenbord;Muis;a11y;Accessibility;Toegankelijkheid;"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
-#, fuzzy
 msgid "Universal Access Preferences"
-msgstr "Uiterlijk-voorkeuren"
+msgstr "Voorkeuren voor universele toegang"
 
 #: ../panels/universal-access/uap.ui.h:2
 #, no-c-format
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 #: ../panels/universal-access/uap.ui.h:4
 #, no-c-format
 msgid "125%"
-msgstr ""
+msgstr "125%"
 
 #: ../panels/universal-access/uap.ui.h:6
 #, no-c-format
 msgid "150%"
-msgstr ""
+msgstr "150%"
 
 #: ../panels/universal-access/uap.ui.h:8
 #, no-c-format
 msgid "75%"
-msgstr ""
+msgstr "75%"
 
 #: ../panels/universal-access/uap.ui.h:9
 msgid "Acceptance delay:"
-msgstr ""
+msgstr "Vertraging voor accepteren:"
 
 #: ../panels/universal-access/uap.ui.h:10
-#, fuzzy
 msgid "Beep when Caps and Num Lock are used"
-msgstr "Piepen wanneer een t_oets wordt ingedrukt"
+msgstr "Piepen wanneer Caps Lock en Num Lock worden ingedrukt"
 
 #: ../panels/universal-access/uap.ui.h:11
-#, fuzzy
 msgid "Beep when a key is"
-msgstr "Piepen wanneer een t_oets wordt ingedrukt"
+msgstr "Piepen wanneer een toets is"
 
 #: ../panels/universal-access/uap.ui.h:12
-#, fuzzy
 msgid "Beep when a key is rejected"
-msgstr "Piepen wanneer toets is ge_weigerd"
+msgstr "Piepen wanneer toets is geweigerd"
 
 #: ../panels/universal-access/uap.ui.h:13
-#, fuzzy
 msgid "Beep when a modifer key is pressed"
-msgstr "_Piepen wanneer optietoets wordt ingedrukt"
+msgstr "Piepen wanneer optietoets wordt ingedrukt"
 
 #: ../panels/universal-access/uap.ui.h:14
 msgid "Bounce Keys"
@@ -2698,30 +2612,29 @@ msgstr "Springende toetsen"
 
 #: ../panels/universal-access/uap.ui.h:15
 msgid "Caribou"
-msgstr ""
+msgstr "Caribou"
 
 #: ../panels/universal-access/uap.ui.h:16
-#, fuzzy
 msgid "Change contrast:"
-msgstr "Wijzigingenset"
+msgstr "Contrast wijzigen:"
 
+# Niet helemaal juist, want CC is meer dan ondertiteling, maar bij gebrek aan een betere term… (Wouter Bolsterlee)
 #: ../panels/universal-access/uap.ui.h:17
 msgid "Closed Captioning"
-msgstr ""
+msgstr "Ondertiteling"
 
 #: ../panels/universal-access/uap.ui.h:18
-#, fuzzy
 msgid "Contrast:"
-msgstr "Contactinformatie"
+msgstr "Contrast:"
 
 #: ../panels/universal-access/uap.ui.h:19
-#, fuzzy
 msgid "Control the pointer using the keypad"
-msgstr "De _muisaanwijzer is bestuurbaar met het nummerblok"
+msgstr ""
+"De muisaanwijzer besturen met het numerieke gedeelte van het toetsenbord"
 
 #: ../panels/universal-access/uap.ui.h:20
 msgid "Control the pointer using the video camera."
-msgstr ""
+msgstr "De muisaanwijzer besturen met de videocamera."
 
 #: ../panels/universal-access/uap.ui.h:22
 msgid "D_elay:"
@@ -2733,111 +2646,97 @@ msgstr "Dasher"
 
 #: ../panels/universal-access/uap.ui.h:24
 msgid "Decrease size:"
-msgstr ""
+msgstr "Verkleinen:"
 
 #: ../panels/universal-access/uap.ui.h:25
-#, fuzzy
 msgid "Disable if two keys are pressed together"
-msgstr ""
-"PlakToetsen uitschake_len wanneer twee toetsen tegelijkertijd worden "
-"ingedrukt"
+msgstr "Uitschakelen wanneer twee toetsen tegelijkertijd worden ingedrukt"
 
 #: ../panels/universal-access/uap.ui.h:26
 msgid "Display a textual description of speech and sounds"
-msgstr ""
+msgstr "Tekstuele beschrijving van spraak en geluiden weergeven"
 
 #: ../panels/universal-access/uap.ui.h:27
-#, fuzzy
 msgid "Flash the entire screen"
-msgstr "Hele _scherm laten knipperen"
+msgstr "Hele scherm laten knipperen"
 
 # laten knipperen/oplichten
 #: ../panels/universal-access/uap.ui.h:28
-#, fuzzy
 msgid "Flash the window title"
-msgstr "_Titelbalk laten knipperen"
+msgstr "Titelbalk laten knipperen"
 
 #: ../panels/universal-access/uap.ui.h:29
 msgid "GOK"
-msgstr ""
+msgstr "GOK"
 
 #: ../panels/universal-access/uap.ui.h:30
-#, fuzzy
 msgid "Hearing"
-msgstr "Weergave"
+msgstr "Gehoor"
 
 #: ../panels/universal-access/uap.ui.h:31
-#, fuzzy
 msgid "Hover Click"
 msgstr "ZweefKlik"
 
 #: ../panels/universal-access/uap.ui.h:32
-#, fuzzy
 msgid "Ignores fast duplicate keypresses"
-msgstr "Snel opeenvolgende dubbele toetsaanslagen ne_geren"
+msgstr "Snel opeenvolgende dubbele toetsaanslagen negeren"
 
 #: ../panels/universal-access/uap.ui.h:33
 msgid "Increase size:"
-msgstr ""
+msgstr "Vergroten:"
 
 #: ../panels/universal-access/uap.ui.h:34
-#, fuzzy
 msgid "Keyboard Settings"
-msgstr "Sneltoetsen"
+msgstr "Toetsenbordinstellingen"
 
 #: ../panels/universal-access/uap.ui.h:37
-#, fuzzy
 msgid "Larger"
-msgstr "Groot"
+msgstr "Groter"
 
 #: ../panels/universal-access/uap.ui.h:40
 msgid "Mouse Keys"
-msgstr "MuisToetsen"
+msgstr "Muistoetsen"
 
 #: ../panels/universal-access/uap.ui.h:41
-#, fuzzy
 msgid "Mouse Settings"
-msgstr "Muis-oriëntatie"
+msgstr "Muisinstellingen"
 
 #: ../panels/universal-access/uap.ui.h:42
 msgid "Nomon"
-msgstr ""
+msgstr "Nomon"
 
 #: ../panels/universal-access/uap.ui.h:45
-#, fuzzy
 msgid "On screen keyboard"
 msgstr "Toetsenbord op scherm"
 
 #: ../panels/universal-access/uap.ui.h:46
 msgid "OnBoard"
-msgstr ""
+msgstr "OnBoard"
 
 #: ../panels/universal-access/uap.ui.h:47
-#, fuzzy
 msgid "Options..."
-msgstr "_Opties…"
+msgstr "Opties…"
 
 #: ../panels/universal-access/uap.ui.h:48
 msgid "Pointing and Clicking"
-msgstr ""
+msgstr "Aanwijzen en klikken"
 
 #: ../panels/universal-access/uap.ui.h:49
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr ""
+"Een vertraging inbouwen tussen het aanslaan en accepteren van een toets"
 
 #: ../panels/universal-access/uap.ui.h:50
-#, fuzzy
 msgid "Screen Reader"
-msgstr "Linux-schermlezer"
+msgstr "Schermlezer"
 
 #: ../panels/universal-access/uap.ui.h:51
-#, fuzzy
 msgid "Screen keyboard"
 msgstr "Toetsenbord op scherm"
 
 #: ../panels/universal-access/uap.ui.h:52
 msgid "Seeing"
-msgstr ""
+msgstr "Zicht"
 
 #: ../panels/universal-access/uap.ui.h:55
 msgid "Simulated Secondary Click"
@@ -2849,7 +2748,7 @@ msgstr "Trage Toetsen"
 
 #: ../panels/universal-access/uap.ui.h:59
 msgid "Sound Settings"
-msgstr ""
+msgstr "Geluidsinstellingen"
 
 #: ../panels/universal-access/uap.ui.h:60
 msgid "Sticky Keys"
@@ -2857,71 +2756,63 @@ msgstr "PlakToetsen"
 
 #: ../panels/universal-access/uap.ui.h:61
 msgid "Test flash"
-msgstr ""
+msgstr "Knipperen testen"
 
 #: ../panels/universal-access/uap.ui.h:62
 msgid "Text size:"
-msgstr ""
+msgstr "Tekstgrootte:"
 
 #: ../panels/universal-access/uap.ui.h:63
 msgid "Treats a sequence of modifier keys as a key combination"
-msgstr ""
+msgstr "Een opeenvolging van optietoetsen als een toetsencombinatie behandelen"
 
 #: ../panels/universal-access/uap.ui.h:64
-#, fuzzy
 msgid "Trigger a click when the pointer hovers"
-msgstr "_Klik beginnen bij stoppen van muisbeweging"
+msgstr "Klikken als muisbeweging stopt"
 
 #: ../panels/universal-access/uap.ui.h:65
-#, fuzzy
 msgid "Trigger a secondary click by holding down the primary button"
-msgstr "Se_cundaire klik activeren door de primaire knop ingedrukt te houden"
+msgstr "Tweede keer klikken als de primaire knop ingedrukt gehouden wordt"
 
 #: ../panels/universal-access/uap.ui.h:66
-#, fuzzy
 msgid "Turn on accessibility features from the keyboard"
-msgstr "Piepen wanneer _toegankelijkheidsfuncties aan- of uitgezet worden"
+msgstr "_Toegankelijkheidsfuncties van het toetsenbord inschakelen"
 
 #: ../panels/universal-access/uap.ui.h:67
 msgid "Turn on or off:"
-msgstr ""
+msgstr "In- of uitschakelen:"
 
 #: ../panels/universal-access/uap.ui.h:68
-#, fuzzy
 msgid "Type here to test settings"
-msgstr "_Tik iets in om de instellingen te testen:"
+msgstr "Typ hier om de instellingen te testen"
 
 #: ../panels/universal-access/uap.ui.h:69
-#, fuzzy
 msgid "Typing"
-msgstr "Tikpauze"
+msgstr "Typen"
 
 #: ../panels/universal-access/uap.ui.h:70
-#, fuzzy
 msgid "Typing Assistant"
-msgstr "A_ssistent:"
+msgstr "Typ-assistent:"
 
 #: ../panels/universal-access/uap.ui.h:71
 msgid "Use a visual indication when an alert sound occurs"
-msgstr ""
+msgstr "Visuele indicatie tonen als er een alerteringsgeluid klinkt"
 
 #: ../panels/universal-access/uap.ui.h:72
-#, fuzzy
 msgid "Video Mouse"
-msgstr "Muis"
+msgstr "Video-muis"
 
 #: ../panels/universal-access/uap.ui.h:73
-#, fuzzy
 msgid "Visual Alerts"
-msgstr "Visueel"
+msgstr "Visuele alertering"
 
 #: ../panels/universal-access/uap.ui.h:74
 msgid "Zoom in:"
-msgstr ""
+msgstr "Inzoomen:"
 
 #: ../panels/universal-access/uap.ui.h:75
 msgid "Zoom out:"
-msgstr ""
+msgstr "Uitzoomen:"
 
 #: ../panels/universal-access/uap.ui.h:76
 msgid "_Motion threshold:"
@@ -2929,38 +2820,37 @@ msgstr "Be_wegingsdrempel:"
 
 #: ../panels/universal-access/uap.ui.h:77
 msgid "accepted"
-msgstr ""
+msgstr "geaccepteerd"
 
 #: ../panels/universal-access/uap.ui.h:78
 msgid "pressed"
-msgstr ""
+msgstr "ingedrukt"
 
 #: ../panels/universal-access/uap.ui.h:79
 msgid "rejected"
-msgstr ""
+msgstr "geweigerd"
 
 #: ../panels/universal-access/uap.ui.h:80
 msgctxt "universal access, contrast"
 msgid "<span size=\"x-large\">High/Inverse</span>"
-msgstr ""
+msgstr "<span size=\"x-large\">Hoog/geïnverteerd</span>"
 
 #: ../panels/universal-access/uap.ui.h:81
 msgctxt "universal access, contrast"
 msgid "<span size=\"x-large\">High</span>"
-msgstr ""
+msgstr "<span size=\"x-large\">Hoog</span>"
 
 #: ../panels/universal-access/uap.ui.h:82
 msgctxt "universal access, contrast"
 msgid "<span size=\"x-large\">Low</span>"
-msgstr ""
+msgstr "<span size=\"x-large\">Laag</span>"
 
 #: ../panels/universal-access/uap.ui.h:83
 msgctxt "universal access, contrast"
 msgid "<span size=\"x-large\">Normal</span>"
-msgstr ""
+msgstr "<span size=\"x-large\">Normaal</span>"
 
 #: ../panels/universal-access/uap.ui.h:84
-#, fuzzy
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Hoog"
@@ -2968,17 +2858,15 @@ msgstr "Hoog"
 #: ../panels/universal-access/uap.ui.h:85
 msgctxt "universal access, contrast"
 msgid "High/Inverse"
-msgstr ""
+msgstr "Hoog/geïnverteerd"
 
 #: ../panels/universal-access/uap.ui.h:86
-#, fuzzy
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Laag"
 
 # algemeen/normaal
 #: ../panels/universal-access/uap.ui.h:87
-#, fuzzy
 msgctxt "universal access, contrast"
 msgid "Normal"
 msgstr "Normaal"
@@ -2987,92 +2875,81 @@ msgstr "Normaal"
 #: ../panels/universal-access/uap.ui.h:89
 msgctxt "universal access, seeing"
 msgid "Display"
-msgstr ""
+msgstr "Weergave"
 
 #. Translators: this refers to screen magnifier
 #: ../panels/universal-access/uap.ui.h:91
 msgctxt "universal access, seeing"
 msgid "Zoom"
-msgstr ""
+msgstr "Zoomen"
 
-# dit verschijnt onderaan het 'Change password' dialoog
-# wanneer het juiste huidige wachtwoord is ingetypt en
-# gecontroleerd. De vertaling mag ook wat langer zijn (tino)
-# Het huidige wachtwoord was juist/gecontroleerd/
-# U heeft het juiste wachtwoord ingevuld/Correct!/
-# Aanmeldingscontrole uitgevoerd/Controle voltooid/
-# Wachtwoordcontrole correct!/
 #: ../panels/user-accounts/run-passwd.c:426
-#, fuzzy
 msgid "Authentication failed"
-msgstr "Wachtwoordcontrole voltooid!"
+msgstr "Authenticatie mislukt!"
 
 #: ../panels/user-accounts/run-passwd.c:506
 #: ../panels/user-accounts/um-password-dialog.c:375
-#, fuzzy, c-format
+#, c-format
 msgid "The new password is too short"
-msgstr "het wachtwoord is te kort."
+msgstr "Het nieuwe wachtwoord is te kort"
 
 #: ../panels/user-accounts/run-passwd.c:512
-#, fuzzy, c-format
+#, c-format
 msgid "The new password is too simple"
-msgstr "Het wachtwoord is te eenvoudig."
+msgstr "Het nieuwe wachtwoord is te eenvoudig"
 
 #: ../panels/user-accounts/run-passwd.c:518
-#, fuzzy, c-format
+#, c-format
 msgid "The old and new passwords are too similar"
-msgstr "Het oude en nieuwe wachtwoord lijken teveel op elkaar."
+msgstr "Het oude en nieuwe wachtwoord lijken teveel op elkaar"
 
 #: ../panels/user-accounts/run-passwd.c:521
-#, fuzzy, c-format
+#, c-format
 msgid "The new password has already been used recently."
-msgstr "De twee wachtwoorden zijn niet gelijk."
+msgstr "Het nieuwe wachtwoord is recentelijk al gebruikt"
 
 #: ../panels/user-accounts/run-passwd.c:524
-#, fuzzy, c-format
+#, c-format
 msgid "The new password must contain numeric or special characters"
-msgstr "Het nieuwe wachtwoord moet numerieke of speciale tekens bevatten."
+msgstr "Het nieuwe wachtwoord moet numerieke of speciale tekens bevatten"
 
 #: ../panels/user-accounts/run-passwd.c:528
-#, fuzzy, c-format
+#, c-format
 msgid "The old and new passwords are the same"
-msgstr "Het oude en nieuwe wachtwoord zijn hetzelfde."
+msgstr "Het oude en nieuwe wachtwoord zijn hetzelfde"
 
 #: ../panels/user-accounts/run-passwd.c:532
-#, fuzzy, c-format
+#, c-format
 msgid "Your password has been changed since you initially authenticated!"
-msgstr ""
-"Uw wachtwoord is gewijzigd sinds de vorige wachtwoordcontrole! Voer de "
-"wachtwoordcontrole opnieuw uit."
+msgstr "Uw wachtwoord is gewijzigd sinds de vorige wachtwoordcontrole!"
 
 #: ../panels/user-accounts/run-passwd.c:536
-#, fuzzy, c-format
+#, c-format
 msgid "The new password does not contain enough different characters"
-msgstr "Het nieuwe wachtwoord moet numerieke of speciale tekens bevatten."
+msgstr "Het nieuwe wachtwoord bevat niet genoeg verschillende tekens."
 
 #: ../panels/user-accounts/run-passwd.c:540
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown error"
-msgstr "Onbekend"
+msgstr "Onbekende fout"
 
 #: ../panels/user-accounts/um-account-dialog.c:78
-#, fuzzy
 msgid "Failed to create user"
-msgstr "Aanmaken tijdelijke map mislukt"
+msgstr "Aanmaken van gebruiker mislukt"
 
 #: ../panels/user-accounts/um-account-dialog.c:185
 #, c-format
 msgid "A user with the username '%s' already exists"
-msgstr ""
+msgstr "Er bestaat al een gebruiker met de naam ‘%s’"
 
 #: ../panels/user-accounts/um-account-dialog.c:189
-#, fuzzy, c-format
+#, c-format
 msgid "The username is too long"
-msgstr "het wachtwoord is te kort."
+msgstr "De gebruikersnaam is te lang."
 
 #: ../panels/user-accounts/um-account-dialog.c:192
 msgid "The username cannot start with a '-'"
-msgstr ""
+msgstr "De gebruikersnaam mag niet met een ‘-’ beginnen"
 
 #: ../panels/user-accounts/um-account-dialog.c:195
 msgid ""
@@ -3081,22 +2958,24 @@ msgid ""
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
 msgstr ""
+"De gebruikersnaam kan bestaan uit:\n"
+" ➣ letters uit het alfabet\n"
+" ➣ cijfers\n"
+" ➣ de tekens ‘.’, ‘-’ en ‘_’"
 
 #: ../panels/user-accounts/um-account-type.c:35
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
-#, fuzzy
 msgctxt "Account type"
 msgid "Standard"
-msgstr "Standaard X-terminalvenster"
+msgstr "Standaard"
 
 #: ../panels/user-accounts/um-account-type.c:37
 #: ../panels/user-accounts/data/account-dialog.ui.h:1
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
-#, fuzzy
 msgctxt "Account type"
 msgid "Administrator"
-msgstr "Terminator"
+msgstr "Beheerder"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:107
 msgid ""
@@ -3109,15 +2988,13 @@ msgid "The device is already in use."
 msgstr "Het apparaat is al in gebruik."
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:111
-#, fuzzy
 msgid "An internal error occurred."
 msgstr "Er is een interne fout opgetreden"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:181
 #: ../panels/user-accounts/um-fingerprint-dialog.c:182
-#, fuzzy
 msgid "Enabled"
-msgstr "Uitgeschakeld"
+msgstr "Ingeschakeld"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:224
 msgid "Delete registered fingerprints?"
@@ -3190,6 +3067,8 @@ msgid ""
 "Enrolling fingerprints for\n"
 "<b><big>%s</big></b>"
 msgstr ""
+"Vingerafdrukken opnemen voor\n"
+"<b><big>%s</big></b>"
 
 #: ../panels/user-accounts/um-language-dialog.c:180
 msgid "Other..."
@@ -3204,37 +3083,32 @@ msgid "Please choose another password."
 msgstr "Kies een ander wachtwoord."
 
 #: ../panels/user-accounts/um-password-dialog.c:294
-#, fuzzy
 msgid "Please type your current password again."
-msgstr "Vul uw wachtwoord in bij het veld <b>Nieuw wachtwoord</b>."
+msgstr "Vul uw wachtwoord opnieuw in."
 
 #: ../panels/user-accounts/um-password-dialog.c:300
-#, fuzzy
 msgid "Password could not be changed"
-msgstr "Uw wachtwoord is gewijzigd."
+msgstr "Wachtwoord kon niet gewijzigd worden."
 
 #: ../panels/user-accounts/um-password-dialog.c:372
-#, fuzzy
 msgid "You need to enter a new password"
-msgstr "Wachtwoord no_gmaals intypen:"
+msgstr "Er moet een nieuw wachtwoord opgegeven worden"
 
 #: ../panels/user-accounts/um-password-dialog.c:381
 msgid "You need to confirm the password"
-msgstr ""
+msgstr "Het wachtwoord moet bevestigd worden"
 
 #: ../panels/user-accounts/um-password-dialog.c:384
-#, fuzzy
 msgid "The passwords do not match"
-msgstr "het wachtwoord is te kort."
+msgstr "De wachtwoorden komen niet overeen"
 
 #: ../panels/user-accounts/um-password-dialog.c:390
 msgid "You need to enter your current password"
-msgstr ""
+msgstr "Het huidige wachtwoord moet opgegeven worden"
 
 #: ../panels/user-accounts/um-password-dialog.c:393
-#, fuzzy
 msgid "The current password is not correct"
-msgstr "Dat wachtwoord was onjuist."
+msgstr "Het huidige wachtwoord was onjuist"
 
 #: ../panels/user-accounts/um-password-dialog.c:466
 #: ../panels/user-accounts/um-password-dialog.c:683
@@ -3272,9 +3146,8 @@ msgstr "Wachtwoorden komen niet overeen"
 
 # venstertitel
 #: ../panels/user-accounts/um-password-dialog.c:540
-#, fuzzy
 msgid "Wrong password"
-msgstr "Wachtwoord wijzigen"
+msgstr "Verkeerde wachtwoord"
 
 #: ../panels/user-accounts/um-photo-dialog.c:97
 #: ../panels/user-accounts/data/language-chooser.ui.h:2
@@ -3326,6 +3199,8 @@ msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr ""
+"Het verwijderen van een gebruiker die nog aangemeld is, kan leiden tot een "
+"inconsistent systeem."
 
 #: ../panels/user-accounts/um-user-panel.c:439
 #, c-format
@@ -3337,56 +3212,56 @@ msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
+"Het is mogelijk om de persoonlijke map, de e-mailmap en de tijdelijke "
+"bestanden te bewaren als een account verwijderd wordt."
 
 #: ../panels/user-accounts/um-user-panel.c:446
-#, fuzzy
 msgid "_Delete Files"
-msgstr "Bestanden ver_wijderen"
+msgstr "Bestanden _verwijderen"
 
 #: ../panels/user-accounts/um-user-panel.c:447
-#, fuzzy
 msgid "_Keep Files"
-msgstr "Alle bestanden"
+msgstr "Bestanden be_waren"
 
 #: ../panels/user-accounts/um-user-panel.c:448
 msgid "_Cancel"
-msgstr ""
+msgstr "_Annuleren"
 
 #: ../panels/user-accounts/um-user-panel.c:498
 msgctxt "Password mode"
 msgid "Account disabled"
-msgstr ""
+msgstr "Account uitgeschakeld"
 
 #: ../panels/user-accounts/um-user-panel.c:506
 msgctxt "Password mode"
 msgid "To be set at next login"
-msgstr ""
+msgstr "In te stellen bij volgende keer aanmelden"
 
 #: ../panels/user-accounts/um-user-panel.c:509
-#, fuzzy
 msgctxt "Password mode"
 msgid "None"
 msgstr "Geen"
 
 #: ../panels/user-accounts/um-user-panel.c:831
 msgid "Failed to contact the accounts service"
-msgstr ""
+msgstr "Kon de accounts-service niet benaderen"
 
 #: ../panels/user-accounts/um-user-panel.c:833
-#, fuzzy
 msgid "Please make sure that the AccountService is installed and enabled."
-msgstr "Zorg ervoor dat het applet correct is geïnstalleerd"
+msgstr ""
+"Zorg ervoor dat het de AccountService geïnstalleerd in ingeschakeld is."
 
 #: ../panels/user-accounts/um-user-panel.c:866
 msgid ""
 "To make changes,\n"
 "click the * icon first"
 msgstr ""
+"Klik op het het *-pictogram\n"
+"om wijzigingen te maken"
 
 #: ../panels/user-accounts/um-user-panel.c:904
-#, fuzzy
 msgid "Create a user"
-msgstr "Aan_maken"
+msgstr "Gebruiker aanmaken"
 
 #: ../panels/user-accounts/um-user-panel.c:915
 #: ../panels/user-accounts/um-user-panel.c:1214
@@ -3394,10 +3269,12 @@ msgid ""
 "To create a user,\n"
 "click the * icon first"
 msgstr ""
+"Klik op het het *-pictogram\n"
+"om een gebruiker aan te maken"
 
 #: ../panels/user-accounts/um-user-panel.c:924
 msgid "Delete the selected user"
-msgstr ""
+msgstr "De geselecteerde gebruiker verwijderen"
 
 #: ../panels/user-accounts/um-user-panel.c:936
 #: ../panels/user-accounts/um-user-panel.c:1219
@@ -3405,59 +3282,57 @@ msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
 msgstr ""
+"Klik op het het *-pictogram om de geselecteerde\n"
+"gebruiker te verwijderen"
 
 #: ../panels/user-accounts/um-user-panel.c:1114
-#, fuzzy
 msgid "My Account"
-msgstr "Op la_nd:"
+msgstr "Mijn account"
 
 #: ../panels/user-accounts/um-user-panel.c:1124
 msgid "Other Accounts"
-msgstr ""
+msgstr "Andere accounts"
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
 msgid "Add or remove users"
-msgstr ""
+msgstr "Gebruikers toevoegen of verwijderen"
 
 #. Translators: those are keywords for the user accounts control-center panel
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:3
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
-msgstr ""
+msgstr "Login;Aanmelden;Inloggen;Vingerafdruk;Avatar;Gezicht;Logo;Wachtwoord;"
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
 msgid "User Accounts"
-msgstr ""
+msgstr "Gebruikersaccount"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:3
-#, fuzzy
 msgid "Cr_eate"
 msgstr "Aan_maken"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
-#, fuzzy
 msgid "Create new account"
-msgstr "Nieuwe locatie aanmaken"
+msgstr "Nieuw account aanmaken"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:5
-#, fuzzy
 msgid "_Account Type"
-msgstr "Type waarschuwing"
+msgstr "_Account-type"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
-#, fuzzy
 msgid "_Full name"
-msgstr "Volledige naam"
+msgstr "_Volledige naam"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
-#, fuzzy
 msgid "_Username"
-msgstr "_Gebruikersnaam:"
+msgstr "_Gebruikersnaam"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
 msgid ""
 "<a href=\"http://wolfram.org/writing/howto/password.html\">How to choose a "
 "strong password</a>"
 msgstr ""
+"<a href=\"http://wolfram.org/writing/howto/password.html\">Hoe kies ik een "
+"sterk wachtwoord?</a>"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:2
 msgid ""
@@ -3465,141 +3340,131 @@ msgid ""
 "to all users of this system.  Do <b>not</b> include the password here.</"
 "small>"
 msgstr ""
+"<small>Deze hint kan getoond worden bij het aanmeldscherm en is zichtbaar "
+"voor alle gebruikers van dit systeem. Zorg ervoor dat het wachtwoord hier "
+"<b>niet</b> is opgenomen!</small>"
 
 # venstertitel
 #: ../panels/user-accounts/data/password-dialog.ui.h:3
-#, fuzzy
 msgid "C_onfirm password"
-msgstr "Wachtwoord wijzigen"
+msgstr "Wachtwoord _bevestigen"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:4
-#, fuzzy
 msgid "Ch_ange"
-msgstr "Wijzigingenset"
+msgstr "_Wijzigen"
 
 # venstertitel
 #: ../panels/user-accounts/data/password-dialog.ui.h:5
-#, fuzzy
 msgid "Changing password for"
-msgstr "Wachtwoord wijzigen"
+msgstr "Wachtwoord wijzigen voor"
 
 # venstertitel
 #: ../panels/user-accounts/data/password-dialog.ui.h:6
-#, fuzzy
 msgid "Choose a generated password"
-msgstr "Wachtwoord wijzigen"
+msgstr "Een gegenereerd wachtwoord kiezen"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:7
 msgid "Choose password at next login"
-msgstr ""
+msgstr "Een wachtwoord kiezen bij de volgende keer aanmelden"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:8
-#, fuzzy
 msgid "Current _password"
 msgstr "_Huidige wachtwoord:"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:9
 msgid "Disable this account"
-msgstr ""
+msgstr "Account uitschakelen"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:10
 msgid "Enable this account"
-msgstr ""
+msgstr "Account inschakelen"
 
+# ??? (Wouter Bolsterlee)
 #: ../panels/user-accounts/data/password-dialog.ui.h:11
 msgid "Fair"
-msgstr ""
+msgstr "Acceptabel"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:12
 msgid "Log in without a password"
-msgstr ""
+msgstr "Aanmelden zonder wachtwoord"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:13
-#, fuzzy
 msgid "Set a password now"
-msgstr "_Nieuw wachtwoord:"
+msgstr "Nu een wachtwoord instellen"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:14
-#, fuzzy
 msgid "_Action"
-msgstr "Actie"
+msgstr "_Actie"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:15
-#, fuzzy
 msgid "_Hint"
-msgstr "Vormhints"
+msgstr "_Hint"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:16
-#, fuzzy
 msgid "_New password"
-msgstr "_Nieuw wachtwoord:"
+msgstr "_Nieuw wachtwoord"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:17
-#, fuzzy
 msgid "_Show password"
-msgstr "_Nieuw wachtwoord:"
+msgstr "Wachtwoord _tonen"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:1
-#, fuzzy
 msgid "Browse"
-msgstr "Webbrowser"
+msgstr "Bladeren"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:4
 msgid "Changing photo for:"
-msgstr ""
+msgstr "Foto wijzigen voor:"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:5
 msgid ""
 "Choose a picture that will be shown at the login screen for this account."
 msgstr ""
+"Kies een afbeelding die bij het aanmeldscherm getoond wordt voor dit account."
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:6
 msgid "Gallery"
-msgstr ""
+msgstr "Galerij"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:7
 msgid "Photograph"
-msgstr ""
+msgstr "Foto"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
-#, fuzzy
 msgid "Take a photograph"
-msgstr "Neem even pauze!"
+msgstr "Foto nemen"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
 msgid "Account Information"
-msgstr ""
+msgstr "Account-informatie"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
 msgid "Account type"
-msgstr ""
+msgstr "Account-type"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
 msgid "Automatic Login"
-msgstr ""
+msgstr "Automatisch aanmelden"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
-#, fuzzy
 msgid "Fingerprint Login"
-msgstr "Vingerafdrukaanmelding aanzetten"
+msgstr "Aanmelden met vingerafdruk"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "Login Options"
-msgstr ""
+msgstr "Aanmeldopties"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
-#, fuzzy
 msgid "Password"
-msgstr "_Wachtwoord:"
+msgstr "Wachtwoord"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:2
 msgid "Left index finger"
 msgstr "Linker wijsvinger"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:3
-#, fuzzy
 msgid "Left little finger"
-msgstr "Linker wijsvinger"
+msgstr "Linker pink"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:4
 msgid "Left middle finger"
@@ -3622,9 +3487,8 @@ msgid "Right index finger"
 msgstr "Rechter wijsvinger"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#, fuzzy
 msgid "Right little finger"
-msgstr "Rechter wijsvinger"
+msgstr "Rechter pink"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:10
 msgid "Right middle finger"
@@ -3646,17 +3510,16 @@ msgstr ""
 "Uw vingerafdruk is opgeslagen. U kunt nu aanmelden via uw vingerafdruklezer."
 
 #: ../shell/control-center.c:50
-#, fuzzy
 msgid "Enable verbose mode"
-msgstr "Debugging-code inschakelen"
+msgstr "Verbose-modus inschakelen"
 
 #: ../shell/control-center.c:51
 msgid "Show the overview"
-msgstr ""
+msgstr "Overzicht tonen"
 
 #: ../shell/control-center.c:52
 msgid "Panel to display"
-msgstr ""
+msgstr "Te tonen paneel"
 
 #: ../shell/control-center.c:69
 msgid "- System Settings"
@@ -3668,10 +3531,13 @@ msgid ""
 "%s\n"
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
+"%s\n"
+"Gebruik ‘%s --help’ voor een volledige lijst van beschikbaare opties voor de "
+"opdrachtregel.\n"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:1
 msgid "System Settings"
-msgstr ""
+msgstr "Systeeminstellingen"
 
 #: ../shell/gnomecc.directory.in.h:1
 msgid "Control Center"
@@ -3679,7 +3545,13 @@ msgstr "Configuratiecentrum"
 
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
-msgstr ""
+msgstr "_Alle instellingen"
+
+#~ msgid "DSL"
+#~ msgstr "DSL"
+
+#~ msgid "Mobile Broadband"
+#~ msgstr "Mobiel breedband"
 
 #~ msgid "Image/label border"
 #~ msgstr "Rand afbeelding/opschrift"
@@ -5526,7 +5398,3 @@ msgstr ""
 
 #~ msgid "<b>Work</b>"
 #~ msgstr "<b>Werk</b>"
-
-msgid "Firmware missing"
-msgstr "firmware ontbreekt"
-
