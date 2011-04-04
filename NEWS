@@ -1,3 +1,75 @@
+==========================
+Version 3.0.0 (2011-04-04)
+==========================
+
+Background:
+- Don't show errors when loading default bg (Bastien Nocera) (#646056)
+- Don't use the GnomeBG thumbnails for the preview area (Cosimo Cecchi) (#646180)
+- Don't assert() for typos in XML files (Bastien Nocera) (#646250)
+
+Common:
+- Remove API reference, as it's incomplete and going away for next cycle (Rodrigo Moya)
+- Fix build on fresh checkouts (Florian Müllner)
+
+Keyboard:
+- Set repeat-interval correctly (Bastien Nocera) (#646241)
+- Bump gnome-settings-daemon requirement (Bastien Nocera)
+
+Network:
+- Use symbolic icon for ad-hoc wireless connections (Cosimo Cecchi) (#646140)
+- Hide the security cell renderer if there's no icon to display (Cosimo Cecchi) (#646140)
+- Do not add bluetooth devices to the panel to avoid asserting the control-center (Richard Hughes)
+- Fix build against NetworkManager on Debian (Matthias Clasen) (#646349)
+- Reset the network name combo when disconnected (Matthias Clasen) (#646031)
+- Display more detailed status for unavailable devices (Matthias Clasen) (#646027)
+- Make creating vpn connections work again (Matthias Clasen)
+
+Printers:
+- Make "Print Test Page" button always sensitive (Marek Kasik)
+- Do not delete browsed printers (Marek Kasik)
+
+Region:
+- Make the layout options modal (Cosimo Cecchi) (#646183)
+
+Shell:
+- Turn off spinner cursor when launched (Bastien Nocera) (#646045)
+
+Sound:
+- Make the volume icons smaller and center them properly in the bar (Cosimo Cecchi) (#646153)
+- Make sound applet work again in fallback (Bastien Nocera) (#646044)
+
+Universal Access:
+- Don't incorrectly mark some hboxes as insensitive (Cosimo Cecchi) (#646240)
+
+Translations:
+- af (Friedel Wolff)
+- ar (Khaled Hosny)
+- bn (Jamil Ahmed)
+- ca (Jordi Serratosa)
+- cz (Marek Černocký)
+- da (Ask H. Larsen)
+- de (Wolfgang Stöggl)
+- el (George Stefanakis, Simos Xenitellis)
+- en_GB (Bruce Cowan)
+- eu (Iñaki Larrañaga Murgoitio)
+- gu (Sweta Kothari)
+- hi (Rajesh Ranjan)
+- hu (Gabor Kelemen)
+- it (Luca Ferretti)
+- ja (Jiro Matsuzawa, Takayuki KUSANO)
+- kn (Shankar Prasad)
+- ko (Changwoo Ryu)
+- lt (Gintautas Miliauskas)
+- nb (Kjartan Maraas)
+- nl (Wouter Bolsterlee)
+- pl (Piotr Drąg)
+- pt (Duarte Loreto)
+- ta (Dr.T.Vasudevan)
+- te (krishnababu k)
+- tr (Baris Cicek)
+- zh_HK (Chao-Hsiung Liao)
+- zh_TW (Chao-Hsiung Liao)
+
 =============================
 Version 2.91.93 (2011-03-28)
 =============================
@@ -5,7 +77,6 @@ Version 2.91.93 (2011-03-28)
 Common:
 - Add a --verbose option to the shell
 - Make sure the desktop file uses categories that show up in menus
-
 
 Date & Time:
 - Fix time widget ordering in RTL locales
