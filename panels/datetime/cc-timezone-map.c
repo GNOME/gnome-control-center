@@ -281,15 +281,10 @@ cc_timezone_map_realize (GtkWidget *widget)
   window = gdk_window_new (gtk_widget_get_parent_window (widget), &attr,
                            GDK_WA_X | GDK_WA_Y);
 
-  gtk_widget_set_style (widget,
-                        gtk_style_attach (gtk_widget_get_style (widget),
-                                          window));
-
-  gdk_window_set_user_data (window, widget);
-
   cursor = gdk_cursor_new (GDK_HAND2);
   gdk_window_set_cursor (window, cursor);
 
+  gdk_window_set_user_data (window, widget);
   gtk_widget_set_window (widget, window);
 }
 
