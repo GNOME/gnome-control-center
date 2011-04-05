@@ -39,8 +39,14 @@ int main (int argc, char **argv)
 	}
 
 	dir = g_dir_open ("/usr/share/i18n/locales/", 0, NULL);
-	if (dir == NULL)
-		return 1;
+	if (dir == NULL) {
+		/* Try with /usr/share/locale/
+		 * https://bugzilla.gnome.org/show_bug.cgi?id=646780 */
+		dir = g_dir_open ("/usr/share/locale/", 0, NULL);
+		if (dir == NULL) {
+			return 1;
+		}
+	}
 
 	while ((name = g_dir_read_name (dir)) != NULL)
 		print_endianess (name);
