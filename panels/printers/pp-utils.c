@@ -383,3 +383,100 @@ get_ppd_attribute (const gchar *printer_name, const gchar *attribute_name)
 
   return result;
 }
+
+/* Cancels subscription of given id */
+void
+cancel_cups_subscription (gint id)
+{
+  http_t *http;
+  ipp_t  *request;
+
+  if (id >= 0 &&
+      ((http = httpConnectEncrypt (cupsServer (), ippPort (),
+                                  cupsEncryption ())) != NULL)) {
+    request = ippNewRequest (IPP_CANCEL_SUBSCRIPTION);
+    ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
+                 "printer-uri", NULL, "/");
+    ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
+                 "requesting-user-name", NULL, cupsUser ());
+    ippAddInteger (request, IPP_TAG_OPERATION, IPP_TAG_INTEGER,
+                  "notify-subscription-id", id);
+    ippDelete (cupsDoRequest (http, request, "/"));
+    httpClose (http);
+  }
+}
+
+/* Returns id of renewed subscription or new id */
+gint
+renew_cups_subscription (gint id,
+                         const char * const *events,
+                         gint num_events,
+                         gint lease_duration)
+{
+  ipp_attribute_t              *attr = NULL;
+  http_t                       *http;
+  ipp_t                        *request;
+  ipp_t                        *response = NULL;
+  gint                          result = -1;
+
+  if ((http = httpConnectEncrypt (cupsServer (), ippPort (),
+                                  cupsEncryption ())) == NULL) {
+    g_debug ("Connection to CUPS server \'%s\' failed.", cupsServer ());
+  }
+  else {
+    if (id >= 0) {
+      request = ippNewRequest (IPP_RENEW_SUBSCRIPTION);
+      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
+                   "printer-uri", NULL, "/");
+      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
+                   "requesting-user-name", NULL, cupsUser ());
+      ippAddInteger (request, IPP_TAG_OPERATION, IPP_TAG_INTEGER,
+                    "notify-subscription-id", id);
+      ippAddInteger (request, IPP_TAG_SUBSCRIPTION, IPP_TAG_INTEGER,
+                    "notify-lease-duration", lease_duration);
+      response = cupsDoRequest (http, request, "/");
+      if (response != NULL &&
+          response->request.status.status_code <= IPP_OK_CONFLICT) {
+        if ((attr = ippFindAttribute (response, "notify-lease-duration",
+                                      IPP_TAG_INTEGER)) == NULL)
+          g_debug ("No notify-lease-duration in response!\n");
+        else
+          if (attr->values[0].integer == lease_duration)
+            result = id;
+      }
+    }
+
+    if (result < 0) {
+      request = ippNewRequest (IPP_CREATE_PRINTER_SUBSCRIPTION);
+      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
+                    "printer-uri", NULL, "/");
+      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
+                    "requesting-user-name", NULL, cupsUser ());
+      ippAddStrings (request, IPP_TAG_SUBSCRIPTION, IPP_TAG_KEYWORD,
+                     "notify-events", num_events, NULL, events);
+      ippAddString (request, IPP_TAG_SUBSCRIPTION, IPP_TAG_KEYWORD,
+                    "notify-pull-method", NULL, "ippget");
+      ippAddString (request, IPP_TAG_SUBSCRIPTION, IPP_TAG_URI,
+                    "notify-recipient-uri", NULL, "dbus://");
+      ippAddInteger (request, IPP_TAG_SUBSCRIPTION, IPP_TAG_INTEGER,
+                     "notify-lease-duration", lease_duration);
+      response = cupsDoRequest (http, request, "/");
+
+      if (response != NULL &&
+          response->request.status.status_code <= IPP_OK_CONFLICT) {
+        if ((attr = ippFindAttribute (response, "notify-subscription-id",
+                                      IPP_TAG_INTEGER)) == NULL)
+          g_debug ("No notify-subscription-id in response!\n");
+        else
+          result = attr->values[0].integer;
+      }
+    }
+
+    if (response)
+      ippDelete (response);
+
+    httpClose (http);
+  }
+
+  return result;
+}

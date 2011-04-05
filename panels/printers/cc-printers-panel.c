@@ -50,6 +50,13 @@ G_DEFINE_DYNAMIC_TYPE (CcPrintersPanel, cc_printers_panel, CC_TYPE_PANEL)
 #define CLOCK_SCHEMA "org.gnome.desktop.interface"
 #define CLOCK_FORMAT_KEY "clock-format"
 
+#define RENEW_INTERVAL        500
+#define SUBSCRIPTION_DURATION 600
+
+#define CUPS_DBUS_NAME      "org.cups.cupsd.Notifier"
+#define CUPS_DBUS_PATH      "/org/cups/cupsd/Notifier"
+#define CUPS_DBUS_INTERFACE "org.cups.cupsd.Notifier"
+
 struct _CcPrintersPanelPrivate
 {
   GtkBuilder *builder;
@@ -77,6 +84,10 @@ struct _CcPrintersPanelPrivate
 
   PpNewPrinterDialog *pp_new_printer_dialog;
 
+  GDBusProxy      *cups_proxy;
+  GDBusConnection *cups_bus_connection;
+  gint             subscription_id;
+
   gpointer dummy;
 };
 
@@ -86,6 +97,7 @@ static void actualize_allowed_users_list (CcPrintersPanel *self);
 static void actualize_sensitivity (gpointer user_data);
 static void printer_disable_cb (GObject *gobject, GParamSpec *pspec, gpointer user_data);
 static void printer_set_default_cb (GtkToggleButton *button, gpointer user_data);
+static void detach_from_cups_notifier (gpointer data);
 
 static void
 cc_printers_panel_get_property (GObject    *object,
@@ -158,6 +170,8 @@ cc_printers_panel_dispose (GObject *object)
       priv->lockdown_settings = NULL;
     }
 
+  detach_from_cups_notifier (CC_PRINTERS_PANEL (object));
+
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->dispose (object);
 }
 
@@ -183,6 +197,199 @@ cc_printers_panel_class_init (CcPrintersPanelClass *klass)
 static void
 cc_printers_panel_class_finalize (CcPrintersPanelClass *klass)
 {
+}
+
+static void
+on_cups_notification (GDBusConnection *connection,
+                      const char      *sender_name,
+                      const char      *object_path,
+                      const char      *interface_name,
+                      const char      *signal_name,
+                      GVariant        *parameters,
+                      gpointer         user_data)
+{
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanelPrivate *priv;
+  gboolean                printer_is_accepting_jobs;
+  gchar                  *printer_name = NULL;
+  gchar                  *text = NULL;
+  gchar                  *printer_uri = NULL;
+  gchar                  *printer_state_reasons = NULL;
+  gchar                  *job_state_reasons = NULL;
+  gchar                  *job_name = NULL;
+  guint                   job_id;
+  gint                    printer_state;
+  gint                    job_state;
+  gint                    job_impressions_completed;
+  static const char * const requested_attrs[] = {
+    "job-printer-uri",
+    "job-originating-user-name"};
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  if (g_strcmp0 (signal_name, "PrinterAdded") != 0 &&
+      g_strcmp0 (signal_name, "PrinterDeleted") != 0 &&
+      g_strcmp0 (signal_name, "PrinterStateChanged") != 0 &&
+      g_strcmp0 (signal_name, "JobCreated") != 0 &&
+      g_strcmp0 (signal_name, "JobCompleted") != 0)
+    return;
+
+  if (g_variant_n_children (parameters) == 1)
+    g_variant_get (parameters, "(&s)", &text);
+  else if (g_variant_n_children (parameters) == 6)
+    {
+      g_variant_get (parameters, "(&s&s&su&sb)",
+                     &text,
+                     &printer_uri,
+                     &printer_name,
+                     &printer_state,
+                     &printer_state_reasons,
+                     &printer_is_accepting_jobs);
+    }
+  else if (g_variant_n_children (parameters) == 11)
+    {
+      g_variant_get (parameters, "(&s&s&su&sbuu&s&su)",
+                     &text,
+                     &printer_uri,
+                     &printer_name,
+                     &printer_state,
+                     &printer_state_reasons,
+                     &printer_is_accepting_jobs,
+                     &job_id,
+                     &job_state,
+                     &job_state_reasons,
+                     &job_name,
+                     &job_impressions_completed);
+    }
+
+  if (g_strcmp0 (signal_name, "PrinterAdded") == 0 ||
+      g_strcmp0 (signal_name, "PrinterDeleted") == 0 ||
+      g_strcmp0 (signal_name, "PrinterStateChanged") == 0)
+    actualize_printers_list (self);
+  else if (g_strcmp0 (signal_name, "JobCreated") == 0 ||
+           g_strcmp0 (signal_name, "JobCompleted") == 0)
+    {
+      http_t *http;
+      gchar  *job_uri;
+      ipp_t  *request, *response;
+
+      job_uri = g_strdup_printf ("ipp://localhost/jobs/%d", job_id);
+      if ((http = httpConnectEncrypt (cupsServer (), ippPort (),
+                                     cupsEncryption ())) != NULL)
+        {
+          request = ippNewRequest(IPP_GET_JOB_ATTRIBUTES);
+          ippAddString(request, IPP_TAG_OPERATION, IPP_TAG_URI,
+                       "job-uri", NULL, job_uri);
+          ippAddStrings (request, IPP_TAG_OPERATION, IPP_TAG_KEYWORD,
+                         "requested-attributes", G_N_ELEMENTS (requested_attrs), NULL, requested_attrs);
+          response = cupsDoRequest(http, request, "/");
+
+          if (response)
+            {
+              if (response->request.status.status_code <= IPP_OK_CONFLICT)
+                {
+                  ipp_attribute_t *attr_username = NULL;
+                  ipp_attribute_t *attr_printer_uri = NULL;
+
+                  attr_username = ippFindAttribute(response, "job-originating-user-name", IPP_TAG_NAME);
+                  attr_printer_uri = ippFindAttribute(response, "job-printer-uri", IPP_TAG_URI);
+                  if (attr_username && attr_printer_uri &&
+                      g_strcmp0 (attr_username->values[0].string.text, cupsUser ()) == 0 &&
+                      g_strrstr (attr_printer_uri->values[0].string.text, "/") != 0 &&
+                      priv->current_dest >= 0 &&
+                      priv->current_dest < priv->num_dests &&
+                      priv->dests != NULL &&
+                      g_strcmp0 (g_strrstr (attr_printer_uri->values[0].string.text, "/") + 1,
+                                 priv->dests[priv->current_dest].name) == 0)
+                    actualize_jobs_list (self);
+                }
+              ippDelete(response);
+            }
+          httpClose (http);
+        }
+      g_free (job_uri);
+    }
+}
+
+static gboolean
+renew_subscription (gpointer data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) data;
+  static const char * const events[] = {
+          "printer-added",
+          "printer-deleted",
+          "printer-state-changed",
+          "job-created",
+          "job-completed"};
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  priv->subscription_id = renew_cups_subscription (priv->subscription_id,
+                                                   events,
+                                                   G_N_ELEMENTS (events),
+                                                   SUBSCRIPTION_DURATION);
+
+  return TRUE;
+}
+
+static void
+attach_to_cups_notifier (gpointer data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) data;
+  GError                 *error = NULL;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  renew_subscription (self);
+  g_timeout_add_seconds (RENEW_INTERVAL, renew_subscription, self);
+
+  error = NULL;
+  priv->cups_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                    0,
+                                                    NULL,
+                                                    CUPS_DBUS_NAME,
+                                                    CUPS_DBUS_PATH,
+                                                    CUPS_DBUS_INTERFACE,
+                                                    NULL,
+                                                    &error);
+
+  if (error)
+    {
+      g_warning ("%s", error->message);
+      return;
+    }
+
+  priv->cups_bus_connection = g_dbus_proxy_get_connection (priv->cups_proxy);
+
+  g_dbus_connection_signal_subscribe (priv->cups_bus_connection,
+                                      NULL,
+                                      CUPS_DBUS_INTERFACE,
+                                      NULL,
+                                      CUPS_DBUS_PATH,
+                                      NULL,
+                                      0,
+                                      on_cups_notification,
+                                      self,
+                                      NULL);
+}
+
+static void
+detach_from_cups_notifier (gpointer data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) data;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  cancel_cups_subscription (priv->subscription_id);
+  priv->subscription_id = -1;
+
+  if (priv->cups_proxy != NULL) {
+    g_object_unref (priv->cups_proxy);
+    priv->cups_proxy = NULL;
+  }
 }
 
 enum
@@ -943,7 +1150,10 @@ actualize_jobs_list (CcPrintersPanel *self)
   GtkTreeView            *treeview;
   GtkTreeIter             iter;
   GSettings              *settings;
-  int                     i;
+  GtkWidget              *widget;
+  gchar                  *active_jobs;
+  gint                    num_jobs;
+  gint                    i;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -959,7 +1169,24 @@ actualize_jobs_list (CcPrintersPanel *self)
   if (priv->current_dest >= 0 &&
       priv->current_dest < priv->num_dests &&
       priv->dests != NULL)
-    priv->num_jobs = cupsGetJobs (&priv->jobs, priv->dests[priv->current_dest].name, 1, CUPS_WHICHJOBS_ACTIVE);
+    {
+      priv->num_jobs = cupsGetJobs (&priv->jobs, priv->dests[priv->current_dest].name, 1, CUPS_WHICHJOBS_ACTIVE);
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-jobs-label");
+
+      num_jobs = priv->num_jobs < 0 ? 0 : (guint) priv->num_jobs;
+      /* Translators: there is n active print jobs on this printer */
+      active_jobs = g_strdup_printf (ngettext ("%u active", "%u active", num_jobs), num_jobs);
+
+      if (active_jobs)
+        {
+          gtk_label_set_text (GTK_LABEL (widget), active_jobs);
+          g_free (active_jobs);
+        }
+      else
+        gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
+    }
 
   store = gtk_list_store_new (JOB_N_COLUMNS, G_TYPE_INT, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
@@ -2205,6 +2432,10 @@ cc_printers_panel_init (CcPrintersPanel *self)
 
   priv->pp_new_printer_dialog = NULL;
 
+  priv->subscription_id = -1;
+  priv->cups_proxy = NULL;
+  priv->cups_bus_connection = NULL;
+
   gtk_builder_add_objects_from_file (priv->builder,
                                      DATADIR"/printers.ui",
                                      objects, &error);
@@ -2349,6 +2580,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   populate_printers_list (self);
   populate_jobs_list (self);
   populate_allowed_users_list (self);
+  attach_to_cups_notifier (self);
 
   gtk_container_add (GTK_CONTAINER (self), top_widget);
   gtk_widget_show_all (GTK_WIDGET (self));

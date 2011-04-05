@@ -54,6 +54,13 @@ int         ccGetAllowedUsers (gchar      ***allowed_users,
 gchar      *get_ppd_attribute (const gchar *printer_name,
                                const gchar *attribute_name);
 
+void        cancel_cups_subscription (gint id);
+
+gint        renew_cups_subscription (gint id,
+                                     const char * const *events,
+                                     gint num_events,
+                                     gint lease_duration);
+
 G_END_DECLS
 
 #endif /* __PP_UTILS_H */
