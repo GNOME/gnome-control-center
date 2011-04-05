@@ -2278,7 +2278,10 @@ actualize_sensitivity (gpointer user_data)
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
-  is_authorized = g_permission_get_allowed (G_PERMISSION (priv->permission)) &&
+  is_authorized =
+    priv->permission &&
+    g_permission_get_allowed (G_PERMISSION (priv->permission)) &&
+    priv->lockdown_settings &&
     !g_settings_get_boolean (priv->lockdown_settings, "disable-print-setup");
 
   printer_selected = priv->current_dest >= 0 &&
@@ -2436,6 +2439,10 @@ cc_printers_panel_init (CcPrintersPanel *self)
   priv->cups_proxy = NULL;
   priv->cups_bus_connection = NULL;
 
+  priv->lock_button = NULL;
+  priv->permission = NULL;
+  priv->lockdown_settings = NULL;
+
   gtk_builder_add_objects_from_file (priv->builder,
                                      DATADIR"/printers.ui",
                                      objects, &error);
@@ -2518,10 +2525,11 @@ cc_printers_panel_init (CcPrintersPanel *self)
   g_signal_connect (widget, "clicked", G_CALLBACK (switch_to_options_cb), self);
 
   priv->lockdown_settings = g_settings_new ("org.gnome.desktop.lockdown");
-  g_signal_connect (priv->lockdown_settings,
-                    "changed",
-                    G_CALLBACK (on_lockdown_settings_changed),
-                    self);
+  if (priv->lockdown_settings)
+    g_signal_connect (priv->lockdown_settings,
+                      "changed",
+                      G_CALLBACK (on_lockdown_settings_changed),
+                      self);
 
 
   /* Set junctions */
@@ -2571,6 +2579,10 @@ cc_printers_panel_init (CcPrintersPanel *self)
       on_permission_changed (priv->permission, NULL, self);
       priv->lock_button = widget;
     }
+  else
+    g_warning ("Your system does not have the cups-pk-helper's policy \
+\"org.opensuse.cupspkhelper.mechanism.all-edit\" installed. \
+Please check your installation");
 
 
   gtk_style_context_get_background_color (gtk_widget_get_style_context (top_widget),
