@@ -688,7 +688,10 @@ panel_set_widget_data (CcNetworkPanel *panel,
         label_id = g_strdup_printf ("label_%s_%s", sub_pane, widget_suffix);
         heading = GTK_WIDGET (gtk_builder_get_object (priv->builder, heading_id));
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, label_id));
-        g_assert (heading != NULL);
+        if (heading == NULL || widget == NULL) {
+                g_critical ("no widgets %s, %s found", heading_id, label_id);
+                return;
+        }
         g_free (heading_id);
         g_free (label_id);
 
