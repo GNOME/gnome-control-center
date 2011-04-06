@@ -65,6 +65,12 @@ panel_cell_renderer_set_name (PanelCellRendererSignal *renderer)
         const gchar *icon_name = NULL;
         GIcon *icon;
 
+        /* the 'Other...' entry */
+        if (renderer->signal == 0) {
+                g_object_set (renderer, "gicon", NULL, NULL);
+                return;
+        }
+
         if (renderer->signal < 20)
                 icon_name = "network-wireless-signal-none-symbolic";
         else if (renderer->signal < 40)

@@ -794,6 +794,32 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
         }
 }
 
+static void
+add_access_point_other (CcNetworkPanel *panel)
+{
+        CcNetworkPanelPrivate *priv = panel->priv;
+        GtkListStore *liststore_wireless_network;
+        GtkTreeIter treeiter;
+
+        liststore_wireless_network = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
+                                                     "liststore_wireless_network"));
+
+        gtk_list_store_append (liststore_wireless_network, &treeiter);
+        gtk_list_store_set (liststore_wireless_network,
+                            &treeiter,
+                            PANEL_WIRELESS_COLUMN_ID, "ap-other...",
+                            /* TRANSLATORS: this is when the access point is not listed
+                             * in the dropdown (or hidden) and the user has to select
+                             * another entry manually */
+                            PANEL_WIRELESS_COLUMN_TITLE, C_("Wireless access point", "Other..."),
+                            /* always last */
+                            PANEL_WIRELESS_COLUMN_SORT, "",
+                            PANEL_WIRELESS_COLUMN_STRENGTH, 0,
+                            PANEL_WIRELESS_COLUMN_MODE, NM_802_11_MODE_UNKNOWN,
+                            PANEL_WIRELESS_COLUMN_SECURITY, NM_AP_SEC_UNKNOWN,
+                            -1);
+}
+
 #if 0
 static gchar *
 ip4_address_as_string (guint32 ip)
@@ -1362,6 +1388,7 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
                         ap = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, i));
                         add_access_point (panel, ap, active_ap);
                 }
+                add_access_point_other (panel);
                 if (active_ap == NULL) {
                         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                                      "combobox_wireless_network_name"));
@@ -2187,6 +2214,61 @@ connection_add_activate_cb (NMClient *client,
 }
 
 static void
+connect_to_hidden_network_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+{
+        GError *error = NULL;
+        GVariant *result = NULL;
+
+        result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
+        if (result == NULL) {
+                g_warning ("failed to connect to hidden network: %s",
+                           error->message);
+                g_error_free (error);
+                return;
+        }
+}
+
+static void
+connect_to_hidden_network (CcNetworkPanel *panel)
+{
+        GDBusProxy *proxy;
+        GVariant *res = NULL;
+        GError *error = NULL;
+
+        /* connect to NM applet */
+        proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                               G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES |
+                                               G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS,
+                                               NULL,
+                                               "org.gnome.network_manager_applet",
+                                               "/org/gnome/network_manager_applet",
+                                               "org.gnome.network_manager_applet",
+                                               panel->priv->cancellable,
+                                               &error);
+        if (proxy == NULL) {
+                g_warning ("failed to connect to NM applet: %s",
+                           error->message);
+                g_error_free (error);
+                goto out;
+        }
+
+        /* try to show the hidden network UI */
+        g_dbus_proxy_call (proxy,
+                           "ConnectToHiddenNetwork",
+                           NULL,
+                           G_DBUS_CALL_FLAGS_NONE,
+                           5000, /* don't wait forever */
+                           panel->priv->cancellable,
+                           connect_to_hidden_network_cb,
+                           panel);
+out:
+        if (proxy != NULL)
+                g_object_unref (proxy);
+        if (res != NULL)
+                g_variant_unref (res);
+}
+
+static void
 wireless_ap_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
 {
         const GByteArray *ssid;
@@ -2227,6 +2309,10 @@ wireless_ap_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
                             -1);
         g_debug ("try to connect to WIFI network %s [%s]",
                  ssid_target, object_path);
+        if (g_strcmp0 (object_path, "ap-other...") == 0) {
+                connect_to_hidden_network (panel);
+                goto out;
+        }
 
         /* look for an existing connection we can use */
         list = nm_remote_settings_list_connections (panel->priv->remote_settings);
@@ -2274,6 +2360,42 @@ wireless_ap_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
 out:
         g_free (ssid_target);
         g_free (object_path);
+}
+
+static gint
+wireless_ap_model_sort_cb (GtkTreeModel *model,
+                           GtkTreeIter *a,
+                           GtkTreeIter *b,
+                           gpointer user_data)
+{
+        gchar *str_a;
+        gchar *str_b;
+        gint retval;
+
+        gtk_tree_model_get (model, a,
+                            PANEL_WIRELESS_COLUMN_SORT, &str_a,
+                            -1);
+        gtk_tree_model_get (model, b,
+                            PANEL_WIRELESS_COLUMN_SORT, &str_b,
+                            -1);
+
+        /* special case blank entries to the bottom */
+        if (g_strcmp0 (str_a, "") == 0) {
+                retval = 1;
+                goto out;
+        }
+        if (g_strcmp0 (str_b, "") == 0) {
+                retval = -1;
+                goto out;
+        }
+
+        /* case sensitive search like before */
+        g_debug ("compare %s with %s", str_a, str_b);
+        retval = g_strcmp0 (str_a, str_b);
+out:
+        g_free (str_a);
+        g_free (str_b);
+        return retval;
 }
 
 static void
@@ -2437,6 +2559,11 @@ cc_network_panel_init (CcNetworkPanel *panel)
         gtk_tree_sortable_set_sort_column_id (sortable,
                                               PANEL_WIRELESS_COLUMN_SORT,
                                               GTK_SORT_ASCENDING);
+        gtk_tree_sortable_set_sort_func (sortable,
+                                         PANEL_WIRELESS_COLUMN_SORT,
+                                         wireless_ap_model_sort_cb,
+                                         sortable,
+                                         NULL);
 
         renderer = panel_cell_renderer_signal_new ();
         gtk_cell_renderer_set_padding (renderer, 4, 0);
