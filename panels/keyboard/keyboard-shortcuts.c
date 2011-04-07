@@ -675,9 +675,29 @@ reload_sections (GtkBuilder *builder)
   shortcut_model = gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (builder, "shortcut_treeview")));
   /* FIXME: get current selection and keep it after refreshing */
 
-  /* Clear previous models */
+  /* Clear previous models and hash tables */
   gtk_list_store_clear (GTK_LIST_STORE (section_model));
   gtk_list_store_clear (GTK_LIST_STORE (shortcut_model));
+  if (kb_system_sections != NULL)
+    g_hash_table_destroy (kb_system_sections);
+  kb_system_sections = g_hash_table_new_full (g_str_hash,
+                                              g_str_equal,
+                                              g_free,
+                                              (GDestroyNotify) free_key_array);
+
+  if (kb_apps_sections != NULL)
+    g_hash_table_destroy (kb_apps_sections);
+  kb_apps_sections = g_hash_table_new_full (g_str_hash,
+                                            g_str_equal,
+                                            g_free,
+                                            (GDestroyNotify) free_key_array);
+
+  if (kb_user_sections != NULL)
+    g_hash_table_destroy (kb_user_sections);
+  kb_user_sections = g_hash_table_new_full (g_str_hash,
+                                            g_str_equal,
+                                            g_free,
+                                            (GDestroyNotify) free_key_array);
 
   /* Load WM keybindings */
   wm_keybindings = wm_common_get_current_keybindings ();
@@ -1872,19 +1892,6 @@ on_window_manager_change (const char *wm_name, GtkBuilder *builder)
 void
 keyboard_shortcuts_init (CcPanel *panel, GtkBuilder *builder)
 {
-  kb_system_sections = g_hash_table_new_full (g_str_hash,
-                                              g_str_equal,
-                                              g_free,
-                                              (GDestroyNotify) free_key_array);
-  kb_apps_sections = g_hash_table_new_full (g_str_hash,
-                                            g_str_equal,
-                                            g_free,
-                                            (GDestroyNotify) free_key_array);
-  kb_user_sections = g_hash_table_new_full (g_str_hash,
-                                            g_str_equal,
-                                            g_free,
-                                            (GDestroyNotify) free_key_array);
-
   wm_common_register_window_manager_change ((GFunc) on_window_manager_change,
                                             builder);
   setup_dialog (panel, builder);
