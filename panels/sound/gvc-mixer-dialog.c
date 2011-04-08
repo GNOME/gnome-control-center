@@ -232,6 +232,7 @@ update_output_settings (GvcMixerDialog *dialog)
         GvcMixerStream      *stream;
         const GvcChannelMap *map;
         const GList         *ports;
+        GtkAdjustment       *adj;
 
         g_debug ("Updating output settings");
         if (dialog->priv->output_balance_bar != NULL) {
@@ -265,6 +266,12 @@ update_output_settings (GvcMixerDialog *dialog)
                                          gvc_mixer_stream_get_base_volume (stream));
         gvc_channel_bar_set_is_amplified (GVC_CHANNEL_BAR (dialog->priv->output_bar),
                                           gvc_mixer_stream_get_can_decibel (stream));
+
+	/* Update the adjustment in case the previous bar wasn't decibel
+	 * capable, and we clipped it */
+        adj = GTK_ADJUSTMENT (gvc_channel_bar_get_adjustment (GVC_CHANNEL_BAR (dialog->priv->output_bar)));
+	gtk_adjustment_set_value (adj,
+				  gvc_mixer_stream_get_volume (stream));
 
         map = gvc_mixer_stream_get_channel_map (stream);
         if (map == NULL) {
@@ -586,8 +593,9 @@ stop_monitor_stream_for_source (GvcMixerDialog *dialog)
 static void
 update_input_settings (GvcMixerDialog *dialog)
 {
-        const GList *ports;
+        const GList    *ports;
         GvcMixerStream *stream;
+        GtkAdjustment  *adj;
 
         g_debug ("Updating input settings");
 
@@ -609,6 +617,12 @@ update_input_settings (GvcMixerDialog *dialog)
                                          gvc_mixer_stream_get_base_volume (stream));
         gvc_channel_bar_set_is_amplified (GVC_CHANNEL_BAR (dialog->priv->input_bar),
                                           gvc_mixer_stream_get_can_decibel (stream));
+
+	/* Update the adjustment in case the previous bar wasn't decibel
+	 * capable, and we clipped it */
+        adj = GTK_ADJUSTMENT (gvc_channel_bar_get_adjustment (GVC_CHANNEL_BAR (dialog->priv->input_bar)));
+	gtk_adjustment_set_value (adj,
+				  gvc_mixer_stream_get_volume (stream));
 
         ports = gvc_mixer_stream_get_ports (stream);
         if (ports != NULL) {
