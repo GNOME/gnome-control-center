@@ -598,14 +598,14 @@ get_primary_disc_info (void)
       if (g_str_has_prefix (mount_path, "/media/")
           || g_str_has_prefix (mount_path, g_get_home_dir ()))
         {
-          g_free (mount);
+          g_unix_mount_free (mount);
           continue;
         }
 
       if (statfs (mount_path, &buf) < 0)
         {
           g_warning ("Unable to stat / filesystem: %s", g_strerror (errno));
-          g_free (mount);
+          g_unix_mount_free (mount);
           continue;
         }
       else
@@ -613,7 +613,7 @@ get_primary_disc_info (void)
           total_bytes += (guint64) buf.f_blocks * buf.f_bsize;
         }
 
-      g_free (mount);
+      g_unix_mount_free (mount);
     }
   g_list_free (points);
 
