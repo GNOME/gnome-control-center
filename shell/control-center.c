@@ -44,11 +44,13 @@ option_version_cb (const gchar *option_name,
 static char **start_panels = NULL;
 static gboolean show_overview = FALSE;
 static gboolean verbose = FALSE;
+static gboolean show_help = FALSE;
 
 const GOptionEntry all_options[] = {
   { "version", 0, G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, option_version_cb, NULL, NULL },
   { "verbose", 'v', 0, G_OPTION_ARG_NONE, &verbose, N_("Enable verbose mode"), NULL },
   { "overview", 'o', 0, G_OPTION_ARG_NONE, &show_overview, N_("Show the overview"), NULL },
+  { "help", '?', 0, G_OPTION_ARG_NONE, &show_help, N_("Show help options"), NULL },
   { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &start_panels, N_("Panel to display"), NULL },
   { NULL } /* end the list */
 };
@@ -64,12 +66,18 @@ application_command_line_cb (GApplication  *application,
   GOptionContext *context;
   GError *error = NULL;
 
+  verbose = FALSE;
+  show_overview = FALSE;
+  show_help = FALSE;
+  start_panels = NULL;
+
   argv = g_application_command_line_get_arguments (command_line, &argc);
 
   context = g_option_context_new (N_("- System Settings"));
   g_option_context_add_main_entries (context, all_options, GETTEXT_PACKAGE);
   g_option_context_set_translation_domain(context, GETTEXT_PACKAGE);
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
+  g_option_context_set_help_enabled (context, FALSE);
 
   if (g_option_context_parse (context, &argc, &argv, &error) == FALSE)
     {
@@ -77,8 +85,20 @@ application_command_line_cb (GApplication  *application,
                error->message, argv[0]);
       g_error_free (error);
       g_option_context_free (context);
-      exit (1);
+      return 1;
     }
+
+  if (show_help)
+    {
+      gchar *help;
+
+      help = g_option_context_get_help (context, FALSE, NULL);
+      g_print (help);
+      g_free (help);
+      g_option_context_free (context);
+      return 0;
+    }
+
   g_option_context_free (context);
 
   cc_shell_log_set_debug (verbose);
