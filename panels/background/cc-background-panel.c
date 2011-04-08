@@ -857,7 +857,7 @@ file_chooser_response (GtkDialog         *chooser,
                        gint               response,
                        CcBackgroundPanel *panel)
 {
-  char *uri;
+  GSList *selected, *l;
 
   if (response != GTK_RESPONSE_ACCEPT)
     {
@@ -865,11 +865,16 @@ file_chooser_response (GtkDialog         *chooser,
       return;
     }
 
-  uri = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (chooser));
+  selected = gtk_file_chooser_get_uris (GTK_FILE_CHOOSER (chooser));
   gtk_widget_destroy (GTK_WIDGET (chooser));
 
-  add_custom_wallpaper (panel, uri);
-  g_free (uri);
+  for (l = selected; l != NULL; l = l->next)
+    {
+      char *uri = l->data;
+      add_custom_wallpaper (panel, uri);
+      g_free (uri);
+    }
+  g_slist_free (selected);
 }
 
 static void
@@ -962,6 +967,7 @@ add_button_clicked (GtkButton         *button,
 					 GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
 					 NULL);
   gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (chooser), filter);
+  gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (chooser), TRUE);
 
   gtk_window_set_modal (GTK_WINDOW (chooser), TRUE);
 
