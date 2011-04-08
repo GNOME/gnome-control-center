@@ -62,6 +62,11 @@ struct _CcInfoPanelPrivate
   gboolean       updates_available;
   gboolean       is_fallback;
 
+  /* Free space */
+  GList         *primary_mounts;
+  guint64        total_bytes;
+  GCancellable  *cancellable;
+
   GDBusConnection     *session_bus;
   GDBusProxy    *pk_proxy;
   GDBusProxy    *pk_transaction_proxy;
@@ -69,6 +74,8 @@ struct _CcInfoPanelPrivate
 
   GraphicsData  *graphics_data;
 };
+
+static void get_primary_disc_info_start (CcInfoPanel *self);
 
 typedef struct
 {
@@ -488,6 +495,11 @@ cc_info_panel_finalize (GObject *object)
 {
   CcInfoPanelPrivate *priv = CC_INFO_PANEL (object)->priv;
 
+  if (priv->cancellable != NULL)
+    {
+      g_cancellable_cancel (priv->cancellable);
+      priv->cancellable = NULL;
+    }
   g_free (priv->gnome_version);
   g_free (priv->gnome_date);
   g_free (priv->gnome_distributor);
@@ -577,21 +589,79 @@ format_size_for_display (goffset size)
     }
 }
 
-static char *
-get_primary_disc_info (void)
+static void
+query_done (GFile        *file,
+	    GAsyncResult *res,
+	    CcInfoPanel  *self)
 {
-  guint64       total_bytes;
+  GFileInfo *info;
+  GError *error = NULL;
+
+  self->priv->cancellable = NULL;
+  info = g_file_query_filesystem_info_finish (file, res, &error);
+  if (info == NULL)
+    {
+      char *path;
+      path = g_file_get_path (file);
+      g_warning ("Failed to get filesystem free space for '%s': %s", path, error->message);
+      g_free (path);
+      g_error_free (error);
+      return;
+    }
+
+  self->priv->total_bytes += g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_FILESYSTEM_FREE);
+  g_object_unref (info);
+
+  /* And onto the next element */
+  get_primary_disc_info_start (self);
+}
+
+static void
+get_primary_disc_info_start (CcInfoPanel *self)
+{
+  GUnixMountEntry *mount;
+  GFile *file;
+
+  if (self->priv->primary_mounts == NULL)
+    {
+      char *size;
+      GtkWidget *widget;
+
+      size = format_size_for_display (self->priv->total_bytes);
+      widget = WID (self->priv->builder, "disk_label");
+      gtk_label_set_text (GTK_LABEL (widget), size);
+      g_free (size);
+
+      return;
+    }
+
+  mount = self->priv->primary_mounts->data;
+  self->priv->primary_mounts = g_list_remove (self->priv->primary_mounts, mount);
+  file = g_file_new_for_path (g_unix_mount_get_mount_path (mount));
+  g_unix_mount_free (mount);
+
+  self->priv->cancellable = g_cancellable_new ();
+
+  g_file_query_filesystem_info_async (file,
+                                      G_FILE_ATTRIBUTE_FILESYSTEM_FREE,
+                                      0,
+                                      self->priv->cancellable,
+                                      (GAsyncReadyCallback) query_done,
+                                      self);
+  g_object_unref (file);
+}
+
+static void
+get_primary_disc_info (CcInfoPanel *self)
+{
   GList        *points;
   GList        *p;
-
-  total_bytes = 0;
 
   points = g_unix_mount_points_get (NULL);
   for (p = points; p != NULL; p = p->next)
     {
       GUnixMountEntry *mount = p->data;
       const char *mount_path;
-      struct statfs buf;
 
       mount_path = g_unix_mount_get_mount_path (mount);
 
@@ -602,22 +672,11 @@ get_primary_disc_info (void)
           continue;
         }
 
-      if (statfs (mount_path, &buf) < 0)
-        {
-          g_warning ("Unable to stat / filesystem: %s", g_strerror (errno));
-          g_unix_mount_free (mount);
-          continue;
-        }
-      else
-        {
-          total_bytes += (guint64) buf.f_blocks * buf.f_bsize;
-        }
-
-      g_unix_mount_free (mount);
+      self->priv->primary_mounts = g_list_prepend (self->priv->primary_mounts, mount);
     }
   g_list_free (points);
 
-  return format_size_for_display (total_bytes);
+  get_primary_disc_info_start (self);
 }
 
 static char *
@@ -1016,10 +1075,7 @@ info_panel_setup_overview (CcInfoPanel  *self)
   gtk_label_set_text (GTK_LABEL (widget), text ? text : "");
   g_free (text);
 
-  widget = WID (self->priv->builder, "disk_label");
-  text = get_primary_disc_info ();
-  gtk_label_set_text (GTK_LABEL (widget), text ? text : "");
-  g_free (text);
+  get_primary_disc_info (self);
 
   widget = WID (self->priv->builder, "graphics_label");
   gtk_label_set_markup (GTK_LABEL (widget), self->priv->graphics_data->hardware_string);
