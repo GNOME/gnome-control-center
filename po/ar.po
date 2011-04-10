@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-01 14:14+0200\n"
-"PO-Revision-Date: 2011-03-26 17:34+0300\n"
+"POT-Creation-Date: 2011-04-10 17:41+0200\n"
+"PO-Revision-Date: 2011-04-10 17:41+0300\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
@@ -250,29 +250,29 @@ msgstr "تدرج رأسي"
 msgid "Solid Color"
 msgstr "لون سادة"
 
-#: ../panels/background/cc-background-panel.c:958
+#: ../panels/background/cc-background-panel.c:963
 #: ../panels/user-accounts/um-photo-dialog.c:217
 #: ../panels/user-accounts/data/photo-dialog.ui.h:2
 msgid "Browse for more pictures"
 msgstr "تصفّح لمزيد من الصور"
 
-#: ../panels/background/cc-background-panel.c:1049
+#: ../panels/background/cc-background-panel.c:1055
 msgid "Current background"
 msgstr "الخلفية الحالية"
 
-#: ../panels/background/cc-background-panel.c:1133
+#: ../panels/background/cc-background-panel.c:1139
 msgid "Wallpapers"
 msgstr "خلفيات"
 
-#: ../panels/background/cc-background-panel.c:1140
+#: ../panels/background/cc-background-panel.c:1146
 msgid "Pictures Folder"
 msgstr "مجلّد صور"
 
-#: ../panels/background/cc-background-panel.c:1147
+#: ../panels/background/cc-background-panel.c:1153
 msgid "Colors & Gradients"
 msgstr "ألوان وتدرجات"
 
-#: ../panels/background/cc-background-panel.c:1155
+#: ../panels/background/cc-background-panel.c:1161
 msgid "Flickr"
 msgstr "فلِكَر"
 
@@ -591,7 +591,7 @@ msgid "Standard"
 msgstr "اعتيادية"
 
 #: ../panels/info/cc-info-panel.c:951
-#: ../panels/keyboard/keyboard-shortcuts.c:1712
+#: ../panels/keyboard/keyboard-shortcuts.c:1732
 msgid "Section"
 msgstr "القسم"
 
@@ -839,7 +839,7 @@ msgstr "نوع مفتاح الاختصار."
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/keyboard-shortcuts.c:1153
+#: ../panels/keyboard/keyboard-shortcuts.c:1173
 #: ../panels/sound/gvc-mixer-control.c:1084
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -861,21 +861,21 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "اختصار;تكرار;وميض;"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:646
-#: ../panels/keyboard/keyboard-shortcuts.c:928
-#: ../panels/keyboard/keyboard-shortcuts.c:1506
-#: ../panels/keyboard/keyboard-shortcuts.c:1510
+#: ../panels/keyboard/keyboard-shortcuts.c:948
+#: ../panels/keyboard/keyboard-shortcuts.c:1526
+#: ../panels/keyboard/keyboard-shortcuts.c:1530
 msgid "Custom Shortcuts"
 msgstr "اختصار مخصص"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:780
+#: ../panels/keyboard/keyboard-shortcuts.c:800
 msgid "<Unknown Action>"
 msgstr "<إجراء غير معروف>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1179
+#: ../panels/keyboard/keyboard-shortcuts.c:1199
 msgid "Error saving the new shortcut"
 msgstr "خطأ أثناء حفظ الاختصار الجديد"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1292
+#: ../panels/keyboard/keyboard-shortcuts.c:1312
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -885,7 +885,7 @@ msgstr ""
 "الاختصار \"%s\" لا يمكن استخدامه لأن الطباعة بهذا المفتاح ستصبح متعذرة.\n"
 "حاول رجاءً استخدام مفتاح مع Ctrl أو Alt أو Shift في نفس الوقت."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1322
+#: ../panels/keyboard/keyboard-shortcuts.c:1342
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -894,25 +894,25 @@ msgstr ""
 "الاختصار \"%s\" مستخدم في:\n"
 "\"%s\""
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1327
+#: ../panels/keyboard/keyboard-shortcuts.c:1347
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "إذا أعدت تعيين الاختصار \"%s\" فسيُعطّل الاختصار \"%s\"."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1333
+#: ../panels/keyboard/keyboard-shortcuts.c:1353
 msgid "_Reassign"
 msgstr "أعِد ال_تعيين"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1445
+#: ../panels/keyboard/keyboard-shortcuts.c:1465
 msgid "Too many custom shortcuts"
 msgstr "الكثير من الاختصارات المخصصة"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1765
+#: ../panels/keyboard/keyboard-shortcuts.c:1785
 msgid "Action"
 msgstr "الإجراء"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1788
+#: ../panels/keyboard/keyboard-shortcuts.c:1808
 msgid "Shortcut"
 msgstr "الاختصار"
 
@@ -1152,124 +1152,125 @@ msgid "cd;dvd;usb;audio;video;disc;"
 msgstr "اسطوانة;قرص;صوت;صورة;فديو;"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:256
+#: ../panels/printers/cc-printers-panel.c:465
 msgid "Low on toner"
 msgstr "الحبر قليل"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:258
+#: ../panels/printers/cc-printers-panel.c:467
 msgid "Out of toner"
 msgstr "نفد الحبر"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:261
+#: ../panels/printers/cc-printers-panel.c:470
 msgid "Low on developer"
 msgstr "المُحمِّض قليل"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:264
+#: ../panels/printers/cc-printers-panel.c:473
 msgid "Out of developer"
 msgstr "نفد المُحمِّض"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:266
+#: ../panels/printers/cc-printers-panel.c:475
 msgid "Low on a marker supply"
 msgstr "اللون قليل"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:268
+#: ../panels/printers/cc-printers-panel.c:477
 msgid "Out of a marker supply"
 msgstr "نفد اللون"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:270
+#: ../panels/printers/cc-printers-panel.c:479
 msgid "Open cover"
 msgstr "الغطاء مفتوح"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:272
+#: ../panels/printers/cc-printers-panel.c:481
 msgid "Open door"
 msgstr "الباب مفنوح"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:274
+#: ../panels/printers/cc-printers-panel.c:483
 msgid "Low on paper"
 msgstr "الورق قليل"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:276
+#: ../panels/printers/cc-printers-panel.c:485
 msgid "Out of paper"
 msgstr "نفد الورق"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:278
+#: ../panels/printers/cc-printers-panel.c:487
 msgctxt "printer state"
 msgid "Offline"
 msgstr "غير متصلة"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:280
+#: ../panels/printers/cc-printers-panel.c:489
 msgctxt "printer state"
 msgid "Paused"
 msgstr "مُلبثة"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:282
+#: ../panels/printers/cc-printers-panel.c:491
 msgid "Waste receptacle almost full"
 msgstr "حاوية النفايات على وشك الامتلاء"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:284
+#: ../panels/printers/cc-printers-panel.c:493
 msgid "Waste receptacle full"
 msgstr "حاوية النفايات ممتلئة"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:286
+#: ../panels/printers/cc-printers-panel.c:495
 msgid "The optical photo conductor is near end of life"
 msgstr "قاربت صلاحية المقاوم الضوئي على الانتهاء"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:288
+#: ../panels/printers/cc-printers-panel.c:497
 msgid "The optical photo conductor is no longer functioning"
 msgstr "لم يعد المقاوم الضوئي يعمل"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:432
+#: ../panels/printers/cc-printers-panel.c:641
 msgctxt "printer state"
 msgid "Ready"
 msgstr "جاهزة"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:436
+#: ../panels/printers/cc-printers-panel.c:645
 msgctxt "printer state"
 msgid "Processing"
 msgstr "تُعالِج"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:440
+#: ../panels/printers/cc-printers-panel.c:649
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "متوقفة"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:560
+#: ../panels/printers/cc-printers-panel.c:768
 msgid "Toner Level"
 msgstr "مستوى الحبر"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:563
+#: ../panels/printers/cc-printers-panel.c:771
 msgid "Ink Level"
 msgstr "مستوى الحبر"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:566
+#: ../panels/printers/cc-printers-panel.c:774
 msgid "Supply Level"
 msgstr "مستوى المداد"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:581
+#: ../panels/printers/cc-printers-panel.c:789
+#: ../panels/printers/cc-printers-panel.c:1180
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -1281,80 +1282,80 @@ msgstr[4] "%u نشطة"
 msgstr[5] "%u نشطة"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:735
+#: ../panels/printers/cc-printers-panel.c:912
 msgid "No printers available"
 msgstr "لا تتوفر أي طابعات"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1026
+#: ../panels/printers/cc-printers-panel.c:1223
 msgctxt "print job"
 msgid "Pending"
 msgstr "منتظرة"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1030
+#: ../panels/printers/cc-printers-panel.c:1227
 msgctxt "print job"
 msgid "Held"
 msgstr "مُعلَّقة"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1034
+#: ../panels/printers/cc-printers-panel.c:1231
 msgctxt "print job"
 msgid "Processing"
 msgstr "تُعالَج"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1038
+#: ../panels/printers/cc-printers-panel.c:1235
 msgctxt "print job"
 msgid "Stopped"
 msgstr "متوقفة"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1042
+#: ../panels/printers/cc-printers-panel.c:1239
 msgctxt "print job"
 msgid "Canceled"
 msgstr "ملغاة"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1046
+#: ../panels/printers/cc-printers-panel.c:1243
 msgctxt "print job"
 msgid "Aborted"
 msgstr "مُجهضَة"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1050
+#: ../panels/printers/cc-printers-panel.c:1247
 msgctxt "print job"
 msgid "Completed"
 msgstr "مُنجزَة"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1142
+#: ../panels/printers/cc-printers-panel.c:1339
 msgid "Job Title"
 msgstr "عنوان المهمة"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1151
+#: ../panels/printers/cc-printers-panel.c:1348
 msgid "Job State"
 msgstr "حالة المهمة"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1157
+#: ../panels/printers/cc-printers-panel.c:1354
 msgid "Time"
 msgstr "الوقت"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1872
+#: ../panels/printers/cc-printers-panel.c:2069
 msgid "Failed to add new printer."
 msgstr "تعذّر إضافة طابعة جديدة."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2044
-#: ../panels/printers/cc-printers-panel.c:2058
+#: ../panels/printers/cc-printers-panel.c:2241
+#: ../panels/printers/cc-printers-panel.c:2255
 msgid "Test page"
 msgstr "صفحة اختبار"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2208
+#: ../panels/printers/cc-printers-panel.c:2453
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "تعذّر تحميل الواجهة: %s"
@@ -1457,8 +1458,8 @@ msgid "Default"
 msgstr "المبدئي"
 
 #: ../panels/printers/printers.ui.h:11
-#: ../panels/network/cc-network-panel.c:1566
-#: ../panels/network/cc-network-panel.c:1569 ../panels/network/network.ui.h:12
+#: ../panels/network/cc-network-panel.c:1596
+#: ../panels/network/cc-network-panel.c:1599 ../panels/network/network.ui.h:12
 msgid "IP Address"
 msgstr "عنوان IP"
 
@@ -1738,62 +1739,70 @@ msgstr "يستخدم الاكتشاف التلقائي للوسيط في حال 
 msgid "This is not recommended for untrusted public networks."
 msgstr "لا يُنصَح بهذا مع الشبكات العامة غير الموثوقة"
 
+#. TRANSLATORS: this is when the access point is not listed
+#. * in the dropdown (or hidden) and the user has to select
+#. * another entry manually
+#: ../panels/network/cc-network-panel.c:814
+msgctxt "Wireless access point"
+msgid "Other..."
+msgstr "أخرى..."
+
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:943
+#: ../panels/network/cc-network-panel.c:972
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:947
+#: ../panels/network/cc-network-panel.c:976
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:951
+#: ../panels/network/cc-network-panel.c:980
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:956
+#: ../panels/network/cc-network-panel.c:985
 msgid "Enterprise"
 msgstr "Enterprise"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:962 ../panels/network/network.ui.h:17
+#: ../panels/network/cc-network-panel.c:991 ../panels/network/network.ui.h:17
 #: ../panels/universal-access/uap.ui.h:52
 msgid "None"
 msgstr "لا شيء"
 
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1265
-#: ../panels/network/cc-network-panel.c:1310
+#: ../panels/network/cc-network-panel.c:1294
+#: ../panels/network/cc-network-panel.c:1339
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d م.بايت\\ث"
 
-#: ../panels/network/cc-network-panel.c:1562 ../panels/network/network.ui.h:13
+#: ../panels/network/cc-network-panel.c:1592 ../panels/network/network.ui.h:13
 msgid "IPv4 Address"
 msgstr "عنوان IPv4"
 
-#: ../panels/network/cc-network-panel.c:1563 ../panels/network/network.ui.h:14
+#: ../panels/network/cc-network-panel.c:1593 ../panels/network/network.ui.h:14
 msgid "IPv6 Address"
 msgstr "عنوان IPv6"
 
-#: ../panels/network/cc-network-panel.c:1701
+#: ../panels/network/cc-network-panel.c:1731
 msgid "Proxy"
 msgstr "الوسيط"
 
-#: ../panels/network/cc-network-panel.c:1765
+#: ../panels/network/cc-network-panel.c:1795
 msgid "Network proxy"
 msgstr "وسيط الشبكة"
 
-#: ../panels/network/cc-network-panel.c:1931
+#: ../panels/network/cc-network-panel.c:1961
 #, c-format
 msgid "%s VPN"
 msgstr "ش‌خ‌ف %s"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1999
+#: ../panels/network/cc-network-panel.c:2029
 msgid "The system network services are not compatible with this version."
 msgstr "لا تتوافق خدمات الشبكة في النظام مع هذه الإصدارة."
 
@@ -2240,7 +2249,7 @@ msgstr "نسخة هذا التّطبيق"
 msgid " — GNOME Volume Control Applet"
 msgstr " — بريمج التحكم في شدة الصوت"
 
-#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1923
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1937
 msgid "Output"
 msgstr "المَخْرَج"
 
@@ -2248,7 +2257,7 @@ msgstr "المَخْرَج"
 msgid "Sound Output Volume"
 msgstr "شدة مَخْرَج الصوت"
 
-#: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1840
+#: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1854
 msgid "Input"
 msgstr "المَدخَل"
 
@@ -2312,7 +2321,7 @@ msgstr "غير مكبّر"
 msgid "Mute"
 msgstr "أصمِت"
 
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1631
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1645
 msgid "_Profile:"
 msgstr "ال_طور:"
 
@@ -2346,80 +2355,80 @@ msgstr[5] "%u مَدْخَل"
 msgid "System Sounds"
 msgstr "أصوات النظام"
 
-#: ../panels/sound/gvc-mixer-dialog.c:317
-#: ../panels/sound/gvc-mixer-dialog.c:618
+#: ../panels/sound/gvc-mixer-dialog.c:324
+#: ../panels/sound/gvc-mixer-dialog.c:632
 msgid "Co_nnector:"
 msgstr "المو_صّل:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:531
+#: ../panels/sound/gvc-mixer-dialog.c:538
 msgid "Peak detect"
 msgstr "التعرف على الذروة"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1507
-#: ../panels/sound/gvc-mixer-dialog.c:1719
+#: ../panels/sound/gvc-mixer-dialog.c:1521
+#: ../panels/sound/gvc-mixer-dialog.c:1733
 #: ../panels/sound/gvc-sound-theme-chooser.c:596
 msgid "Name"
 msgstr "الاسم"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1525
+#: ../panels/sound/gvc-mixer-dialog.c:1539
 msgid "Device"
 msgstr "الجهاز"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1573
+#: ../panels/sound/gvc-mixer-dialog.c:1587
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "اختبار سماعات %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1632
+#: ../panels/sound/gvc-mixer-dialog.c:1646
 msgid "Test Speakers"
 msgstr "اختبر السماعات"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1763
+#: ../panels/sound/gvc-mixer-dialog.c:1777
 msgid "_Output volume: "
 msgstr "شدة صوت الم_خْرَج:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1777
+#: ../panels/sound/gvc-mixer-dialog.c:1791
 msgid "Sound Effects"
 msgstr "المؤثرات الصوتية"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1784
+#: ../panels/sound/gvc-mixer-dialog.c:1798
 msgid "_Alert volume: "
 msgstr "شدة صوت التنبي_ه:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1797
+#: ../panels/sound/gvc-mixer-dialog.c:1811
 msgid "Hardware"
 msgstr "العتاد"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1802
+#: ../panels/sound/gvc-mixer-dialog.c:1816
 msgid "C_hoose a device to configure:"
 msgstr "ا_ختر جهازا لإعداده:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1829
-#: ../panels/sound/gvc-mixer-dialog.c:1952
+#: ../panels/sound/gvc-mixer-dialog.c:1843
+#: ../panels/sound/gvc-mixer-dialog.c:1966
 msgid "Settings for the selected device:"
 msgstr "إعدادات الجهاز المختار:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1847
+#: ../panels/sound/gvc-mixer-dialog.c:1861
 msgid "_Input volume: "
 msgstr "شدة صوت المَ_دْخَل:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1870
+#: ../panels/sound/gvc-mixer-dialog.c:1884
 msgid "Input level:"
 msgstr "مستوى المَدْخَل:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1896
+#: ../panels/sound/gvc-mixer-dialog.c:1910
 msgid "C_hoose a device for sound input:"
 msgstr "اخ_تر جهاز إدخال الصوت:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1928
+#: ../panels/sound/gvc-mixer-dialog.c:1942
 msgid "C_hoose a device for sound output:"
 msgstr "اخ_تر جهاز إخراج الصوت:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1963
+#: ../panels/sound/gvc-mixer-dialog.c:1977
 msgid "Applications"
 msgstr "التطبيقات"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1967
+#: ../panels/sound/gvc-mixer-dialog.c:1981
 msgid "No application is currently playing or recording audio."
 msgstr "لا تطبيقات تشغل أو تسجل صوتا حاليا."
 
@@ -3440,23 +3449,27 @@ msgid ""
 "using your fingerprint reader."
 msgstr "حُفظت بصمتك بنجاح. تستطيع الآن الولوج ببصمة أصبعك."
 
-#: ../shell/control-center.c:50
+#: ../shell/control-center.c:51
 msgid "Enable verbose mode"
 msgstr "فعّل الطور المسهِب"
 
-#: ../shell/control-center.c:51
+#: ../shell/control-center.c:52
 msgid "Show the overview"
 msgstr "اعرض الملخص"
 
-#: ../shell/control-center.c:52
+#: ../shell/control-center.c:53
+msgid "Show help options"
+msgstr "اعرض خيارات المساعدة"
+
+#: ../shell/control-center.c:54
 msgid "Panel to display"
 msgstr "لوحة لعرضها"
 
-#: ../shell/control-center.c:69
+#: ../shell/control-center.c:76
 msgid "- System Settings"
 msgstr " - إعدادات النظام"
 
-#: ../shell/control-center.c:76
+#: ../shell/control-center.c:84
 #, c-format
 msgid ""
 "%s\n"
@@ -3476,9 +3489,6 @@ msgstr "مركز التحكّم"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_كل الإعدادات"
-
-msgid "Show help options"
-msgstr "اعرض خيارات المساعدة"
 
 #~ msgid "Clean print heads"
 #~ msgstr "نظف رؤوس الطباعة"
