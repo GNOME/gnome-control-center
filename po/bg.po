@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-10 08:44+0300\n"
-"PO-Revision-Date: 2011-04-10 08:44+0300\n"
+"POT-Creation-Date: 2011-04-10 16:15+0300\n"
+"PO-Revision-Date: 2011-04-10 16:15+0300\n"
 "Last-Translator: Ivaylo Valkov <ivaylo@e-valkov.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "Language: bg\n"
@@ -1489,8 +1489,8 @@ msgid "Default"
 msgstr "По подразбиране"
 
 #: ../panels/printers/printers.ui.h:11
-#: ../panels/network/cc-network-panel.c:1569
-#: ../panels/network/cc-network-panel.c:1572 ../panels/network/network.ui.h:11
+#: ../panels/network/cc-network-panel.c:1596
+#: ../panels/network/cc-network-panel.c:1599 ../panels/network/network.ui.h:11
 msgid "IP Address"
 msgstr "Адрес по IP"
 
@@ -1777,62 +1777,70 @@ msgstr ""
 msgid "This is not recommended for untrusted public networks."
 msgstr "Не се препоръчва за недоверени общодостъпни мрежи."
 
+#. TRANSLATORS: this is when the access point is not listed
+#. * in the dropdown (or hidden) and the user has to select
+#. * another entry manually
+#: ../panels/network/cc-network-panel.c:814
+msgctxt "Wireless access point"
+msgid "Other..."
+msgstr "Друга…"
+
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:946
+#: ../panels/network/cc-network-panel.c:972
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:950
+#: ../panels/network/cc-network-panel.c:976
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:954
+#: ../panels/network/cc-network-panel.c:980
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:959
+#: ../panels/network/cc-network-panel.c:985
 msgid "Enterprise"
 msgstr "Корпоративна"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:965
+#: ../panels/network/cc-network-panel.c:991
 #: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "Без"
 
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1268
-#: ../panels/network/cc-network-panel.c:1313
+#: ../panels/network/cc-network-panel.c:1294
+#: ../panels/network/cc-network-panel.c:1339
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: ../panels/network/cc-network-panel.c:1565 ../panels/network/network.ui.h:12
+#: ../panels/network/cc-network-panel.c:1592 ../panels/network/network.ui.h:12
 msgid "IPv4 Address"
 msgstr "Адрес (IPv4)"
 
-#: ../panels/network/cc-network-panel.c:1566 ../panels/network/network.ui.h:13
+#: ../panels/network/cc-network-panel.c:1593 ../panels/network/network.ui.h:13
 msgid "IPv6 Address"
 msgstr "Адрес (IPv6)"
 
-#: ../panels/network/cc-network-panel.c:1704
+#: ../panels/network/cc-network-panel.c:1731
 msgid "Proxy"
 msgstr "Сървър-посредник"
 
-#: ../panels/network/cc-network-panel.c:1768
+#: ../panels/network/cc-network-panel.c:1795
 msgid "Network proxy"
 msgstr "Мрежов сървър-посредник"
 
-#: ../panels/network/cc-network-panel.c:1934
+#: ../panels/network/cc-network-panel.c:1961
 #, c-format
 msgid "%s VPN"
 msgstr "ВЧМ „%s“"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2002
+#: ../panels/network/cc-network-panel.c:2029
 msgid "The system network services are not compatible with this version."
 msgstr "Мрежовите услуги на системата не се поддържат в тази версия."
 
