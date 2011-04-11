@@ -68,6 +68,7 @@ const gchar   *um_user_get_password_hint   (UmUser   *user);
 const gchar   *um_user_get_icon_file       (UmUser   *user);
 gboolean       um_user_get_locked          (UmUser   *user);
 gboolean       um_user_get_automatic_login (UmUser   *user);
+gboolean       um_user_is_system_account   (UmUser   *user);
 
 void           um_user_set_user_name       (UmUser      *user,
                                             const gchar *user_name);

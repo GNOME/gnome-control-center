@@ -206,6 +206,11 @@ user_added_handler (DBusGProxy *proxy,
         if (!user)
                 return;
 
+        if (um_user_is_system_account (user)) {
+                g_object_unref (user);
+                return;
+        }
+
         add_user_to_dupe_ring (manager, user);
 
         g_signal_connect (user, "changed",

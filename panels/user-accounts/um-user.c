@@ -64,6 +64,7 @@ typedef struct {
         gchar          *icon_file;
         gboolean        locked;
         gboolean        automatic_login;
+        gboolean        system_account;
 } UserProperties;
 
 static void
@@ -105,6 +106,9 @@ collect_props (const gchar    *key,
         }
         else if (strcmp (key, "AutomaticLogin") == 0) {
                 props->automatic_login = g_value_get_boolean (value);
+        }
+        else if (strcmp (key, "SystemAccount") == 0) {
+                props->system_account = g_value_get_boolean (value);
         }
         else if (strcmp (key, "PasswordMode") == 0) {
                 props->password_mode = g_value_get_int (value);
@@ -666,13 +670,20 @@ um_user_get_locked (UmUser *user)
 
         return user->props->locked;
 }
-
 gboolean
 um_user_get_automatic_login (UmUser *user)
 {
         g_return_val_if_fail (UM_IS_USER (user), FALSE);
 
         return user->props->automatic_login;
+}
+
+gboolean
+um_user_is_system_account (UmUser *user)
+{
+        g_return_val_if_fail (UM_IS_USER (user), FALSE);
+
+        return user->props->system_account;
 }
 
 const gchar *
