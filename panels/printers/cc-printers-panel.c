@@ -1996,6 +1996,7 @@ printer_set_default_cb (GtkToggleButton *button,
   GError                 *error = NULL;
   char                   *ret_error = NULL;
   char                   *name = NULL;
+  const char             *cups_server;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -2006,35 +2007,54 @@ printer_set_default_cb (GtkToggleButton *button,
 
   if (name)
     {
-      proxy = get_dbus_proxy (MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              TRUE);
-
-      if (!proxy)
-        return;
-
-      dbus_g_proxy_call (proxy, "PrinterSetDefault", &error,
-                         G_TYPE_STRING, name,
-                         G_TYPE_INVALID,
-                         G_TYPE_STRING, &ret_error,
-                         G_TYPE_INVALID);
-
-      g_object_unref (proxy);
-
-      if (error || (ret_error && ret_error[0] != '\0'))
+      cups_server = cupsServer ();
+      if (g_ascii_strncasecmp (cups_server, "localhost", 9) == 0 ||
+          g_ascii_strncasecmp (cups_server, "127.0.0.1", 9) == 0 ||
+          g_ascii_strncasecmp (cups_server, "::1", 3) == 0 ||
+          cups_server[0] == '/')
         {
-          if (error)
-            g_warning ("%s", error->message);
+          /* Clean .cups/lpoptions before setting
+           * default printer on local CUPS server.
+           */
+          set_local_default_printer (NULL);
 
-          if (ret_error && ret_error[0] != '\0')
-            g_warning ("%s", ret_error);
+          proxy = get_dbus_proxy (MECHANISM_BUS,
+                                  "/",
+                                  MECHANISM_BUS,
+                                  TRUE);
 
+          if (!proxy)
+            return;
+
+          dbus_g_proxy_call (proxy, "PrinterSetDefault", &error,
+                             G_TYPE_STRING, name,
+                             G_TYPE_INVALID,
+                             G_TYPE_STRING, &ret_error,
+                             G_TYPE_INVALID);
+
+          g_object_unref (proxy);
+
+          if (error || (ret_error && ret_error[0] != '\0'))
+            {
+              if (error)
+                g_warning ("%s", error->message);
+
+              if (ret_error && ret_error[0] != '\0')
+                g_warning ("%s", ret_error);
+            }
+          else
+            actualize_printers_list (self);
+
+          g_clear_error (&error);
         }
       else
-        actualize_printers_list (self);
-
-      g_clear_error (&error);
+        /* Store default printer to .cups/lpoptions
+         * if we are connected to a remote CUPS server.
+         */
+        {
+          set_local_default_printer (name);
+          actualize_printers_list (self);
+        }
 
       g_signal_handlers_block_by_func (G_OBJECT (button), printer_set_default_cb, self);
       gtk_toggle_button_set_active (button, priv->dests[priv->current_dest].is_default);

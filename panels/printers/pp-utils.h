@@ -61,6 +61,8 @@ gint        renew_cups_subscription (gint id,
                                      gint num_events,
                                      gint lease_duration);
 
+void        set_local_default_printer (gchar *printer_name);
+
 G_END_DECLS
 
 #endif /* __PP_UTILS_H */

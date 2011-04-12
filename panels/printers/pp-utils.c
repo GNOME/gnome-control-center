@@ -480,3 +480,26 @@ renew_cups_subscription (gint id,
 
   return result;
 }
+
+/*  Set default destination in ~/.cups/lpoptions.
+ *  Unset default destination if "dest" is NULL.
+ */
+void
+set_local_default_printer (gchar *printer_name)
+{
+  cups_dest_t *dests = NULL;
+  int          num_dests = 0;
+  int          i;
+
+  num_dests = cupsGetDests (&dests);
+
+  for (i = 0; i < num_dests; i ++)
+    {
+      if (printer_name && g_strcmp0 (dests[i].name, printer_name) == 0)
+        dests[i].is_default = 1;
+      else
+        dests[i].is_default = 0;
+    }
+
+  cupsSetDests (num_dests, dests);
+}
