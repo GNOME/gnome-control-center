@@ -511,7 +511,30 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
   priv->current_dest = id;
 
-  actualize_jobs_list (self);
+  if (!(priv->current_dest >= 0 &&
+        priv->current_dest < priv->num_dests &&
+        priv->dests != NULL &&
+        priv->current_job >= 0 &&
+        priv->current_job < priv->num_jobs &&
+        priv->jobs != NULL &&
+        g_strcmp0 (priv->dests[priv->current_dest].name,
+                   priv->jobs[priv->current_job].dest) == 0))
+    {
+      actualize_jobs_list (self);
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "job-release-button");
+      gtk_widget_set_sensitive (widget, FALSE);
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "job-hold-button");
+      gtk_widget_set_sensitive (widget, FALSE);
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "job-cancel-button");
+      gtk_widget_set_sensitive (widget, FALSE);
+    }
+
   actualize_allowed_users_list (self);
 
   if (priv->current_dest >= 0 &&
@@ -838,18 +861,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
     }
 
   actualize_sensitivity (self);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "job-release-button");
-  gtk_widget_set_sensitive (widget, FALSE);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "job-hold-button");
-  gtk_widget_set_sensitive (widget, FALSE);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "job-cancel-button");
-  gtk_widget_set_sensitive (widget, FALSE);
 }
 
 static void
@@ -975,7 +986,17 @@ actualize_printers_list (CcPrintersPanel *self)
       g_free (default_icon_name);
     }
 
+  g_signal_handlers_block_by_func (
+    G_OBJECT (gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview))),
+    printer_selection_changed_cb,
+    self);
+
   gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (store));
+
+  g_signal_handlers_unblock_by_func (
+    G_OBJECT (gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview))),
+    printer_selection_changed_cb,
+    self);
 
   if (current_dest >= 0)
     {
@@ -1292,26 +1313,17 @@ job_selection_changed_cb (GtkTreeSelection *selection,
     {
       ipp_jstate_t job_state = priv->jobs[priv->current_job].state;
 
-      if (job_state == IPP_JOB_HELD)
-        {
-          widget = (GtkWidget*)
-            gtk_builder_get_object (priv->builder, "job-release-button");
-          gtk_widget_set_sensitive (widget, TRUE);
-        }
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "job-release-button");
+      gtk_widget_set_sensitive (widget, job_state == IPP_JOB_HELD);
 
-      if (job_state == IPP_JOB_PENDING)
-        {
-          widget = (GtkWidget*)
-            gtk_builder_get_object (priv->builder, "job-hold-button");
-          gtk_widget_set_sensitive (widget, TRUE);
-        }
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "job-hold-button");
+      gtk_widget_set_sensitive (widget, job_state == IPP_JOB_PENDING);
 
-      if (job_state < IPP_JOB_CANCELED)
-        {
-          widget = (GtkWidget*)
-            gtk_builder_get_object (priv->builder, "job-cancel-button");
-          gtk_widget_set_sensitive (widget, TRUE);
-        }
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "job-cancel-button");
+      gtk_widget_set_sensitive (widget, job_state < IPP_JOB_CANCELED);
     }
 }
 
