@@ -59,23 +59,33 @@ get_timezone_list (GList *tzs,
 int main (int argc, char **argv)
 {
 	CcTimezoneMap *map;
+	TzDB *tz_db;
 	GList *tzs, *l;
 	int ret = 0;
 
 	gtk_init (&argc, &argv);
 
 	map = cc_timezone_map_new ();
+	tz_db = tz_load_db ();
 	tzs = get_timezone_list (NULL, TZ_DIR, NULL);
 	for (l = tzs; l != NULL; l = l->next) {
 		char *timezone = l->data;
+		char *clean_tz;
 
-		if (cc_timezone_map_set_timezone (map, timezone) == FALSE) {
-			g_warning ("Failed to locate timezone '%s'", timezone);
+		clean_tz = tz_info_get_clean_name (tz_db, timezone);
+
+		if (cc_timezone_map_set_timezone (map, clean_tz) == FALSE) {
+			if (g_strcmp0 (clean_tz, timezone) == 0)
+				g_warning ("Failed to locate timezone '%s'", timezone);
+			else
+				g_warning ("Failed to locate timezone '%s' (alias for '%s')", timezone, clean_tz);
 			ret = 1;
 		}
 		g_free (timezone);
+		g_free (clean_tz);
 	}
 	g_list_free (tzs);
+	tz_db_free (tz_db);
 
 	return ret;
 }

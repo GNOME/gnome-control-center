@@ -41,7 +41,8 @@ typedef struct _TzInfo TzInfo;
 
 struct _TzDB
 {
-	GPtrArray *locations;
+	GPtrArray  *locations;
+	GHashTable *backward;
 };
 
 struct _TzLocation
@@ -72,6 +73,8 @@ struct _TzInfo
 
 TzDB      *tz_load_db                 (void);
 void       tz_db_free                 (TzDB *db);
+char *     tz_info_get_clean_name     (TzDB *tz_db,
+				       const char *tz);
 GPtrArray *tz_get_locations           (TzDB *db);
 void       tz_location_get_position   (TzLocation *loc,
 				       double *longitude, double *latitude);

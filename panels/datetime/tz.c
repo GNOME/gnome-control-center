@@ -39,7 +39,7 @@ static float convert_pos (gchar *pos, int digits);
 static int compare_country_names (const void *a, const void *b);
 static void sort_locations_by_country (GPtrArray *locations);
 static gchar * tz_data_file_get (void);
-
+static void load_backward_tz (TzDB *tz_db);
 
 /* ---------------- *
  * Public interface *
@@ -124,9 +124,12 @@ tz_load_db (void)
 	sort_locations_by_country (tz_db->locations);
 	
 	g_free (tz_data_file);
-	
+
+	/* Load up the hashtable of backward links */
+	load_backward_tz (tz_db);
+
 	return tz_db;
-}    
+}
 
 static void
 tz_location_free (TzLocation *loc)
@@ -143,6 +146,7 @@ tz_db_free (TzDB *db)
 {
 	g_ptr_array_foreach (db->locations, (GFunc) tz_location_free, NULL);
 	g_ptr_array_free (db->locations, TRUE);
+	g_hash_table_destroy (db->backward);
 	g_free (db);
 }
 
@@ -246,6 +250,26 @@ tz_info_free (TzInfo *tzinfo)
 	g_free (tzinfo);
 }
 
+char *
+tz_info_get_clean_name (TzDB *tz_db,
+			const char *tz)
+{
+	char *ret;
+	const char *timezone;
+
+	if (g_str_has_prefix (tz, "right/"))
+		timezone = tz + strlen ("right/");
+	else if (g_str_has_prefix (tz, "posix/"))
+		timezone = tz + strlen ("posix/");
+	else
+		timezone = tz;
+
+	ret = g_hash_table_lookup (tz_db->backward, timezone);
+	if (ret == NULL)
+		return g_strdup (timezone);
+	return g_strdup (ret);
+}
+
 /* ----------------- *
  * Private functions *
  * ----------------- */
@@ -317,3 +341,55 @@ sort_locations_by_country (GPtrArray *locations)
 	qsort (locations->pdata, locations->len, sizeof (gpointer),
 	       compare_country_names);
 }
+
+static void
+load_backward_tz (TzDB *tz_db)
+{
+  GError *error = NULL;
+  char **lines, *contents;
+  guint i;
+
+  tz_db->backward = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+
+  if (g_file_get_contents (GNOMECC_DATA_DIR "/datetime/backward", &contents, NULL, &error) == FALSE)
+    {
+      g_warning ("Failed to load 'backward' file: %s", error->message);
+      return;
+    }
+  lines = g_strsplit (contents, "\n", -1);
+  g_free (contents);
+  for (i = 0; lines[i] != NULL; i++)
+    {
+      char **items;
+      guint j;
+      char *real, *alias;
+
+      if (g_ascii_strncasecmp (lines[i], "Link\t", 5) != 0)
+        continue;
+
+      items = g_strsplit (lines[i], "\t", -1);
+      real = NULL;
+      alias = NULL;
+      /* Skip the "Link<tab>" part */
+      for (j = 1; items[j] != NULL; j++)
+        {
+          if (items[j][0] == '\0')
+            continue;
+          if (real == NULL)
+            {
+              real = items[j];
+              continue;
+            }
+          alias = items[j];
+          break;
+        }
+
+      if (real == NULL || alias == NULL)
+        g_warning ("Could not parse line: %s", lines[i]);
+
+      g_hash_table_insert (tz_db->backward, g_strdup (alias), g_strdup (real));
+      g_strfreev (items);
+    }
+  g_strfreev (lines);
+}
+
