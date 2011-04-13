@@ -1213,18 +1213,12 @@ typedef struct {
 } CcUniquenessData;
 
 static gboolean
-cb_check_for_uniqueness (GtkTreeModel   *model,
-                         GtkTreePath    *path,
-                         GtkTreeIter    *iter,
-                         CcUniquenessData *data)
+compare_keys_for_uniqueness (CcKeyboardItem   *element,
+                             CcUniquenessData *data)
 {
-  CcKeyboardItem *element;
   CcKeyboardItem *orig_item;
 
   orig_item = data->orig_item;
-  gtk_tree_model_get (orig_item->model, iter,
-                      DETAIL_KEYENTRY_COLUMN, &element,
-                      -1);
 
   /* no conflict for : blanks, different modifiers, or ourselves */
   if (element == NULL || data->new_mask != element->mask ||
@@ -1240,6 +1234,24 @@ cb_check_for_uniqueness (GtkTreeModel   *model,
   data->conflict_item = element;
 
   return TRUE;
+}
+
+static gboolean
+cb_check_for_uniqueness (gpointer          key,
+                         GPtrArray        *keys_array,
+                         CcUniquenessData *data)
+{
+  guint i;
+
+  for (i = 0; i < keys_array->len; i++)
+    {
+      CcKeyboardItem *item;
+
+      item = keys_array->pdata[i];
+      if (compare_keys_for_uniqueness (item, data))
+        return TRUE;
+    }
+  return FALSE;
 }
 
 static void
@@ -1280,9 +1292,17 @@ accel_edited_callback (GtkCellRendererText   *cell,
   data.conflict_item = NULL;
 
   if (keyval != 0 || keycode != 0) /* any number of shortcuts can be disabled */
-    gtk_tree_model_foreach (model,
-      (GtkTreeModelForeachFunc) cb_check_for_uniqueness,
-      &data);
+    {
+      BindingGroupType i;
+
+      for (i = BINDING_GROUP_SYSTEM; i <= BINDING_GROUP_USER && data.conflict_item == NULL; i++)
+        {
+          GHashTable *table;
+
+          table = get_hash_for_group (i);
+          g_hash_table_find (table, (GHRFunc) cb_check_for_uniqueness, &data);
+        }
+    }
 
   /* Check for unmodified keys */
   if (mask == 0 && keycode != 0)
