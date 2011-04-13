@@ -610,6 +610,8 @@ um_password_dialog_new (void)
         const gchar *filename;
         UmPasswordDialog *um;
         GtkWidget *widget;
+        const char *old_label;
+        char *label;
         gint len;
 
         builder = gtk_builder_new ();
@@ -649,6 +651,14 @@ um_password_dialog_new (void)
                           G_CALLBACK (accept_password_dialog), um);
         gtk_widget_grab_default (widget);
         um->ok_button = widget;
+
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "password-normal-strength-hints-label");
+        old_label = gtk_label_get_label (GTK_LABEL (widget));
+        label = g_strdup_printf ("<a href=\"%s\">%s</a>",
+                                 "ghelp:gnome-help?user-goodpassword",
+                                 old_label);
+        gtk_label_set_markup (GTK_LABEL (widget), label);
+        g_free (label);
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "show-password-checkbutton");
         g_signal_connect (widget, "toggled",
