@@ -110,7 +110,7 @@ free_key_array (GPtrArray *keys)
 }
 
 static GHashTable *
-get_hash_for_group (int group)
+get_hash_for_group (BindingGroupType group)
 {
   GHashTable *hash;
 
@@ -837,7 +837,7 @@ section_selection_changed (GtkTreeSelection *selection, gpointer data)
       GtkWidget *shortcut_treeview;
       GtkTreeModel *shortcut_model;
       gchar *description;
-      gint group;
+      BindingGroupType group;
       gint i;
 
       gtk_tree_model_get (model, &iter,
