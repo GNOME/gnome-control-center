@@ -250,18 +250,91 @@ tz_info_free (TzInfo *tzinfo)
 	g_free (tzinfo);
 }
 
+struct {
+	const char *orig;
+	const char *dest;
+} aliases[] = {
+	{ "Asia/Istanbul",  "Europe/Istanbul" },	/* Istanbul is in both Europe and Asia */
+	{ "Europe/Nicosia", "Asia/Nicosia" },		/* Ditto */
+	{ "EET",            "Europe/Istanbul" },	/* Same tz as the 2 above */
+	{ "HST",            "Pacific/Honolulu" },
+	{ "WET",            "Europe/Brussels" },	/* Other name for the mainland Europe tz */
+	{ "CET",            "Europe/Brussels" },	/* ditto */
+	{ "MET",            "Europe/Brussels" },
+	{ "Etc/Zulu",       "Etc/GMT" },
+	{ "Etc/UTC",        "Etc/GMT" },
+	{ "GMT",            "Etc/GMT" },
+	{ "Greenwich",      "Etc/GMT" },
+	{ "Etc/UCT",        "Etc/GMT" },
+	{ "Etc/GMT0",       "Etc/GMT" },
+	{ "Etc/GMT+0",      "Etc/GMT" },
+	{ "Etc/GMT-0",      "Etc/GMT" },
+	{ "Etc/Universal",  "Etc/GMT" },
+	{ "PST8PDT",        "America/Los_Angeles" },	/* Other name for the Atlantic tz */
+	{ "EST",            "America/New_York" },	/* Other name for the Eastern tz */
+	{ "EST5EDT",        "America/New_York" },	/* ditto */
+	{ "CST6CDT",        "America/Chicago" },	/* Other name for the Central tz */
+	{ "MST",            "America/Denver" },		/* Other name for the mountain tz */
+	{ "MST7MDT",        "America/Denver" },		/* ditto */
+};
+
+static gboolean
+compare_timezones (const char *a,
+		   const char *b)
+{
+	if (g_str_equal (a, b))
+		return TRUE;
+	if (strchr (b, '/') == NULL) {
+		char *prefixed;
+
+		prefixed = g_strdup_printf ("/%s", b);
+		if (g_str_has_suffix (a, prefixed)) {
+			g_free (prefixed);
+			return TRUE;
+		}
+		g_free (prefixed);
+	}
+
+	return FALSE;
+}
+
 char *
 tz_info_get_clean_name (TzDB *tz_db,
 			const char *tz)
 {
 	char *ret;
 	const char *timezone;
+	guint i;
+	gboolean replaced;
 
+	/* Remove useless prefixes */
 	if (g_str_has_prefix (tz, "right/"))
-		timezone = tz + strlen ("right/");
+		tz = tz + strlen ("right/");
 	else if (g_str_has_prefix (tz, "posix/"))
-		timezone = tz + strlen ("posix/");
-	else
+		tz = tz + strlen ("posix/");
+
+	/* Here start the crazies */
+	replaced = FALSE;
+
+	for (i = 0; i < G_N_ELEMENTS (aliases); i++) {
+		if (compare_timezones (tz, aliases[i].orig)) {
+			replaced = TRUE;
+			timezone = aliases[i].dest;
+			break;
+		}
+	}
+
+	/* Try again! */
+	if (!replaced) {
+		/* Ignore crazy solar times from the '80s */
+		if (g_str_has_prefix (tz, "Asia/Riyadh") ||
+		    g_str_has_prefix (tz, "Mideast/Riyadh")) {
+			timezone = "Asia/Riyadh";
+			replaced = TRUE;
+		}
+	}
+
+	if (!replaced)
 		timezone = tz;
 
 	ret = g_hash_table_lookup (tz_db->backward, timezone);
@@ -386,6 +459,11 @@ load_backward_tz (TzDB *tz_db)
 
       if (real == NULL || alias == NULL)
         g_warning ("Could not parse line: %s", lines[i]);
+
+      /* We don't need more than one name for it */
+      if (g_str_equal (real, "Etc/UTC") ||
+          g_str_equal (real, "Etc/UCT"))
+        real = "Etc/GMT";
 
       g_hash_table_insert (tz_db->backward, g_strdup (alias), g_strdup (real));
       g_strfreev (items);
