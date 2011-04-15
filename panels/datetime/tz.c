@@ -235,6 +235,8 @@ tz_info_from_location (TzLocation *loc)
 #endif
 
 	tzinfo->daylight = curzone->tm_isdst;
+
+	setenv ("TZ", "", 1);
 	
 	return tzinfo;
 }
