@@ -61,10 +61,12 @@ int main (int argc, char **argv)
 	CcTimezoneMap *map;
 	TzDB *tz_db;
 	GList *tzs, *l;
+	GHashTable *ht;
 	int ret = 0;
 
 	gtk_init (&argc, &argv);
 
+	ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 	map = cc_timezone_map_new ();
 	tz_db = tz_load_db ();
 	tzs = get_timezone_list (NULL, TZ_DIR, NULL);
@@ -75,17 +77,25 @@ int main (int argc, char **argv)
 		clean_tz = tz_info_get_clean_name (tz_db, timezone);
 
 		if (cc_timezone_map_set_timezone (map, clean_tz) == FALSE) {
-			if (g_strcmp0 (clean_tz, timezone) == 0)
-				g_warning ("Failed to locate timezone '%s'", timezone);
-			else
-				g_warning ("Failed to locate timezone '%s' (alias for '%s')", timezone, clean_tz);
-			ret = 1;
+			if (g_hash_table_lookup (ht, clean_tz) == NULL) {
+				if (g_strcmp0 (clean_tz, timezone) == 0)
+					g_print ("Failed to locate timezone '%s'\n", timezone);
+				else
+					g_print ("Failed to locate timezone '%s' (original name: '%s')\n", clean_tz, timezone);
+				g_hash_table_insert (ht, g_strdup (clean_tz), GINT_TO_POINTER (TRUE));
+			}
+			/* We don't warn for those two, we'll just fallback
+			 * in the panel code */
+			if (!g_str_equal (clean_tz, "posixrules") &&
+			    !g_str_equal (clean_tz, "Factory"))
+				ret = 1;
 		}
 		g_free (timezone);
 		g_free (clean_tz);
 	}
 	g_list_free (tzs);
 	tz_db_free (tz_db);
+	g_hash_table_destroy (ht);
 
 	return ret;
 }
