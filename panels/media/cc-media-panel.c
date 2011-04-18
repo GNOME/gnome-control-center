@@ -238,13 +238,6 @@ autorun_set_preferences (CcMediaPanel *self,
 }
 
 static void
-update_media_sensitivity (CcMediaPanel *self)
-{
-  gtk_widget_set_sensitive (GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "media_handling_vbox")),
-                            ! g_settings_get_boolean (self->priv->preferences, PREF_MEDIA_AUTORUN_NEVER));
-}
-
-static void
 custom_item_activated_cb (GtkAppChooserButton *button,
                           const gchar *item,
                           gpointer user_data)
@@ -556,7 +549,17 @@ media_panel_setup (CcMediaPanel *self)
                     G_CALLBACK (on_extra_options_button_clicked),
                     self);
 
-  update_media_sensitivity (self);
+  g_settings_bind (self->priv->preferences,
+                   PREF_MEDIA_AUTORUN_NEVER,
+                   gtk_builder_get_object (self->priv->builder, "media_autorun_never_checkbutton"),
+                   "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  g_settings_bind (self->priv->preferences,
+                   PREF_MEDIA_AUTORUN_NEVER,
+                   GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "media_handling_vbox")),
+                   "sensitive",
+                   G_SETTINGS_BIND_INVERT_BOOLEAN);
 }
 
 static void
