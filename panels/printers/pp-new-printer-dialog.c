@@ -112,6 +112,8 @@ struct _PpNewPrinterDialog {
 
   UserResponseCallback user_callback;
   gpointer             user_data;
+
+  GCancellable *cancellable;
 };
 
 static void
@@ -198,11 +200,11 @@ store_device_parameter (gpointer key,
 }
 
 static void
-devices_get_cb (GObject *source_object,
+devices_get_cb (GObject      *source_object,
                 GAsyncResult *res,
-                gpointer user_data)
+                gpointer      user_data)
 {
-  PpNewPrinterDialog *pp = (PpNewPrinterDialog *) user_data;
+  PpNewPrinterDialog *pp = user_data;
   GHashTable         *devices = NULL;
   GtkWidget          *widget = NULL;
   GVariant           *dg_output = NULL;
@@ -214,136 +216,145 @@ devices_get_cb (GObject *source_object,
                                         res,
                                         &error);
 
-  if (dg_output && g_variant_n_children (dg_output) == 2)
+  if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     {
-      GVariant *devices_variant = NULL;
-
-      g_variant_get (dg_output, "(&s@a{ss})",
-                     &ret_error,
-                     &devices_variant);
-
-      if (devices_variant)
+      if (dg_output && g_variant_n_children (dg_output) == 2)
         {
-          if (g_variant_is_of_type (devices_variant, G_VARIANT_TYPE ("a{ss}")))
+          GVariant *devices_variant = NULL;
+
+          g_variant_get (dg_output, "(&s@a{ss})",
+                         &ret_error,
+                         &devices_variant);
+
+          if (devices_variant)
             {
-              GVariantIter *iter;
-              GVariant *item;
-              g_variant_get (devices_variant,
-                             "a{ss}",
-                             &iter);
-              devices = g_hash_table_new (g_str_hash, g_str_equal);
-              while ((item = g_variant_iter_next_value (iter)))
+              if (g_variant_is_of_type (devices_variant, G_VARIANT_TYPE ("a{ss}")))
                 {
-                  gchar *key;
-                  gchar *value;
-                  g_variant_get (item,
-                                 "{ss}",
-                                 &key,
-                                 &value);
-  
-                  g_hash_table_insert (devices, key, value);
-                }
-            }
-          g_variant_unref (devices_variant);
-        }
-      g_variant_unref (dg_output);
-    }
-  g_object_unref (source_object);
-
-  if (error || (ret_error && ret_error[0] != '\0'))
-    {
-      if (error)
-        g_warning ("%s", error->message);
-
-      if (ret_error && ret_error[0] != '\0')
-        g_warning ("%s", ret_error);
-    }
-
-  free_devices (pp);
-  if (devices)
-    {
-      GList *keys;
-      GList *iter;
-      gchar *cut;
-      gint   max_index = -1;
-      gint   index;
-
-      keys = g_hash_table_get_keys (devices);
-      for (iter = keys; iter; iter = iter->next)
-        {
-          index = -1;
-
-          cut = g_strrstr ((gchar *)iter->data, ":");
-          if (cut)
-            index = atoi (cut + 1);
-
-          if (index > max_index)
-            max_index = index;
-        }
-
-      if (max_index >= 0)
-        {
-          pp->num_devices = max_index + 1;
-          pp->devices = g_new0 (CupsDevice, pp->num_devices);
-
-          g_hash_table_foreach (devices, store_device_parameter, pp);
-
-          /* Assign names to devices */
-          for (i = 0; i < pp->num_devices; i++)
-            {
-              gchar *name = NULL;
-
-              if (pp->devices[i].device_id)
-                {
-                  name = get_tag_value (pp->devices[i].device_id, "mdl");
-                  name = g_strcanon (name, ALLOWED_CHARACTERS, '-');
-                }
-              else if (pp->devices[i].device_info)
-                {
-                  name = g_strdup (pp->devices[i].device_info);
-                  name = g_strcanon (name, ALLOWED_CHARACTERS, '-');
-                }
-
-              pp->devices[i].display_name = name;
-            }
-
-          /* Set show bool
-           * Don't show duplicates.
-           * Show devices with device-id.
-           * Other preferences should apply here.
-           */
-          for (i = 0; i < pp->num_devices; i++)
-            {
-              for (j = 0; j < pp->num_devices; j++)
-                {
-                  if (i != j)
+                  GVariantIter *iter;
+                  GVariant *item;
+                  g_variant_get (devices_variant,
+                                 "a{ss}",
+                                 &iter);
+                  devices = g_hash_table_new (g_str_hash, g_str_equal);
+                  while ((item = g_variant_iter_next_value (iter)))
                     {
-                      if (g_strcmp0 (pp->devices[i].display_name, pp->devices[j].display_name) == 0)
+                      gchar *key;
+                      gchar *value;
+                      g_variant_get (item,
+                                     "{ss}",
+                                     &key,
+                                     &value);
+
+                      g_hash_table_insert (devices, key, value);
+                    }
+                }
+              g_variant_unref (devices_variant);
+            }
+          g_variant_unref (dg_output);
+        }
+      g_object_unref (source_object);
+
+      if (error || (ret_error && ret_error[0] != '\0'))
+        {
+          if (error)
+            g_warning ("%s", error->message);
+
+          if (ret_error && ret_error[0] != '\0')
+            g_warning ("%s", ret_error);
+        }
+
+      free_devices (pp);
+      if (devices)
+        {
+          GList *keys;
+          GList *iter;
+          gchar *cut;
+          gint   max_index = -1;
+          gint   index;
+
+          keys = g_hash_table_get_keys (devices);
+          for (iter = keys; iter; iter = iter->next)
+            {
+              index = -1;
+
+              cut = g_strrstr ((gchar *)iter->data, ":");
+              if (cut)
+                index = atoi (cut + 1);
+
+              if (index > max_index)
+                max_index = index;
+            }
+
+          if (max_index >= 0)
+            {
+              pp->num_devices = max_index + 1;
+              pp->devices = g_new0 (CupsDevice, pp->num_devices);
+
+              g_hash_table_foreach (devices, store_device_parameter, pp);
+
+              /* Assign names to devices */
+              for (i = 0; i < pp->num_devices; i++)
+                {
+                  gchar *name = NULL;
+
+                  if (pp->devices[i].device_id)
+                    {
+                      name = get_tag_value (pp->devices[i].device_id, "mdl");
+                      name = g_strcanon (name, ALLOWED_CHARACTERS, '-');
+                    }
+                  else if (pp->devices[i].device_info)
+                    {
+                      name = g_strdup (pp->devices[i].device_info);
+                      name = g_strcanon (name, ALLOWED_CHARACTERS, '-');
+                    }
+
+                  pp->devices[i].display_name = name;
+                }
+
+              /* Set show bool
+               * Don't show duplicates.
+               * Show devices with device-id.
+               * Other preferences should apply here.
+               */
+              for (i = 0; i < pp->num_devices; i++)
+                {
+                  for (j = 0; j < pp->num_devices; j++)
+                    {
+                      if (i != j)
                         {
-                          if (pp->devices[i].device_id && !pp->devices[j].show)
+                          if (g_strcmp0 (pp->devices[i].display_name, pp->devices[j].display_name) == 0)
                             {
-                              pp->devices[i].show = TRUE;
+                              if (pp->devices[i].device_id && !pp->devices[j].show)
+                                {
+                                  pp->devices[i].show = TRUE;
+                                }
                             }
                         }
                     }
                 }
             }
+
+          g_hash_table_destroy (devices);
+          actualize_devices_list (pp);
         }
 
-      g_hash_table_destroy (devices);
-      actualize_devices_list (pp);
+      widget = (GtkWidget*)
+        gtk_builder_get_object (pp->builder, "get-devices-status-label");
+      gtk_label_set_text (GTK_LABEL (widget), " ");
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (pp->builder, "spinner");
+      gtk_spinner_stop (GTK_SPINNER (widget));
+      gtk_widget_set_sensitive (widget, FALSE);
+
+      if (pp->cancellable != NULL)
+        {
+          g_object_unref (pp->cancellable);
+          pp->cancellable = NULL;
+        }
+
+      g_clear_error (&error);
     }
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (pp->builder, "get-devices-status-label");
-  gtk_label_set_text (GTK_LABEL (widget), " ");
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (pp->builder, "spinner");
-  gtk_spinner_stop (GTK_SPINNER (widget));
-  gtk_widget_set_sensitive (widget, FALSE);
-
-  g_clear_error (&error);
 }
 
 static void
@@ -385,12 +396,14 @@ devices_get (PpNewPrinterDialog *pp)
       gtk_spinner_start (GTK_SPINNER (widget));
       gtk_widget_set_sensitive (widget, TRUE);
 
+      pp->cancellable = g_cancellable_new ();
+
       g_dbus_proxy_call (proxy,
                          "DevicesGet",
                          dg_input,
                          G_DBUS_CALL_FLAGS_NONE,
                          60000,
-                         NULL,
+                         pp->cancellable,
                          devices_get_cb,
                          pp);
 
@@ -1101,6 +1114,8 @@ pp_new_printer_dialog_new (GtkWindow            *parent,
   pp->user_callback = user_callback;
   pp->user_data = user_data;
 
+  pp->cancellable = NULL;
+
   /* connect signals */
   g_signal_connect (pp->dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
@@ -1144,6 +1159,12 @@ pp_new_printer_dialog_free (PpNewPrinterDialog *pp)
 
   g_object_unref (pp->builder);
   pp->builder = NULL;
+
+  if (pp->cancellable)
+    {
+      g_cancellable_cancel (pp->cancellable);
+      g_object_unref (pp->cancellable);
+    }
 
   g_free (pp);
 }
