@@ -744,10 +744,12 @@ new_printer_add_button_cb (GtkButton *button,
   GtkTreeModel       *model;
   GtkTreeIter         iter;
   GtkWidget          *treeview;
+  gboolean            success = FALSE;
   gchar              *device_name = NULL;
   gchar              *ppd_name = NULL;
   gint                device_id = -1;
   gint                device_type = -1;
+  gint                i, j, k;
 
   treeview = (GtkWidget*)
     gtk_builder_get_object (pp->builder, "device-types-treeview");
@@ -834,61 +836,8 @@ new_printer_add_button_cb (GtkButton *button,
                           g_clear_error (&error);
                         }
                       else
-                        {
-                          ret_error = NULL;
+                        success = TRUE;
 
-                          dbus_g_proxy_call (proxy, "PrinterSetAcceptJobs", &error,
-                                             G_TYPE_STRING, pp->devices[device_id].display_name,
-                                             G_TYPE_BOOLEAN, TRUE,
-                                             G_TYPE_STRING, NULL,
-                                             G_TYPE_INVALID,
-                                             G_TYPE_STRING, &ret_error,
-                                             G_TYPE_INVALID);
-
-                          dbus_g_proxy_call (proxy, "PrinterSetEnabled", &error,
-                                             G_TYPE_STRING, pp->devices[device_id].display_name,
-                                             G_TYPE_BOOLEAN, TRUE,
-                                             G_TYPE_INVALID,
-                                             G_TYPE_STRING, &ret_error,
-                                             G_TYPE_INVALID);
-
-                          if (error || (ret_error && ret_error[0] != '\0'))
-                            {
-                              if (error)
-                                g_warning ("%s", error->message);
-
-                              if (ret_error && ret_error[0] != '\0')
-                                g_warning ("%s", ret_error);
-
-                              g_clear_error (&error);
-                            }
-                          else
-                            {
-                              if (g_strcmp0 (pp->devices[device_id].device_class, "direct") == 0)
-                                {
-                                  gchar *commands = get_dest_attr (pp->devices[device_id].display_name, "printer-commands");
-                                  gchar *commands_lowercase = g_ascii_strdown (commands, -1);
-                                  ipp_t *response = NULL;
-
-                                  if (g_strrstr (commands_lowercase, "AutoConfigure"))
-                                    {
-                                      response = execute_maintenance_command (pp->devices[device_id].display_name,
-                                                                              "AutoConfigure",
-                                      /* Translators: Name of job which makes printer to autoconfigure itself */
-                                                                              _("Automatic configuration"));
-                                      if (response)
-                                        {
-                                          if (response->state == IPP_ERROR)
-                                          /* Translators: An error has occured during execution of AutoConfigure CUPS maintenance command */
-                                            g_warning ("An error has occured during automatic configuration of new printer.");
-                                          ippDelete (response);
-                                        }
-                                    }
-                                  g_free (commands);
-                                  g_free (commands_lowercase);
-                                }
-                            }
-                        }
                       g_object_unref (proxy);
                     }
 
@@ -1002,63 +951,162 @@ new_printer_add_button_cb (GtkButton *button,
                       g_clear_error (&error);
                     }
                   else
-                    {
-                      ret_error = NULL;
+                    success = TRUE;
 
-                      dbus_g_proxy_call (proxy, "PrinterSetAcceptJobs", &error,
-                                         G_TYPE_STRING, pp->devices[device_id].display_name,
-                                         G_TYPE_BOOLEAN, TRUE,
-                                         G_TYPE_STRING, NULL,
-                                         G_TYPE_INVALID,
-                                         G_TYPE_STRING, &ret_error,
-                                         G_TYPE_INVALID);
-
-                      dbus_g_proxy_call (proxy, "PrinterSetEnabled", &error,
-                                         G_TYPE_STRING, pp->devices[device_id].display_name,
-                                         G_TYPE_BOOLEAN, TRUE,
-                                         G_TYPE_INVALID,
-                                         G_TYPE_STRING, &ret_error,
-                                         G_TYPE_INVALID);
-
-                      if (error || (ret_error && ret_error[0] != '\0'))
-                        {
-                          if (error)
-                            g_warning ("%s", error->message);
-
-                          if (ret_error && ret_error[0] != '\0')
-                            g_warning ("%s", ret_error);
-
-                          g_clear_error (&error);
-                        }
-                      else
-                        {
-                          if (g_strcmp0 (pp->devices[device_id].device_class, "direct") == 0)
-                            {
-                              gchar *commands = get_dest_attr (pp->devices[device_id].display_name, "printer-commands");
-                              gchar *commands_lowercase = g_ascii_strdown (commands, -1);
-                              ipp_t *response = NULL;
-
-                              if (g_strrstr (commands_lowercase, "AutoConfigure"))
-                                {
-                                  response = execute_maintenance_command (pp->devices[device_id].display_name,
-                                                                          "AutoConfigure",
-                                  /* Translators: Name of job which makes printer to autoconfigure itself */
-                                                                          _("Automatic configuration"));
-                                  if (response)
-                                    {
-                                      if (response->state == IPP_ERROR)
-                                      /* Translators: An error has occured during execution of AutoConfigure CUPS maintenance command */
-                                        g_warning ("An error has occured during automatic configuration of new printer.");
-                                      ippDelete (response);
-                                    }
-                                }
-                              g_free (commands);
-                              g_free (commands_lowercase);
-                            }
-                        }
-                    }
                   g_object_unref (proxy);
                 }
+            }
+        }
+
+      /* Set some options of the new printer */
+      if (success)
+        {
+          DBusGProxy *proxy;
+          GError     *error = NULL;
+          char       *ret_error = NULL;
+          char       *locale = NULL;
+
+          proxy = get_dbus_proxy (MECHANISM_BUS,
+                                  "/",
+                                  MECHANISM_BUS,
+                                  TRUE);
+
+          if (proxy)
+            {
+              dbus_g_proxy_call (proxy, "PrinterSetAcceptJobs", &error,
+                                 G_TYPE_STRING, pp->devices[device_id].display_name,
+                                 G_TYPE_BOOLEAN, TRUE,
+                                 G_TYPE_STRING, NULL,
+                                 G_TYPE_INVALID,
+                                 G_TYPE_STRING, &ret_error,
+                                 G_TYPE_INVALID);
+
+              if (error)
+                {
+                  g_warning ("%s", error->message);
+                  g_clear_error (&error);
+                }
+
+              if (ret_error && ret_error[0] != '\0')
+                g_warning ("%s", ret_error);
+
+
+              dbus_g_proxy_call (proxy, "PrinterSetEnabled", &error,
+                                 G_TYPE_STRING, pp->devices[device_id].display_name,
+                                 G_TYPE_BOOLEAN, TRUE,
+                                 G_TYPE_INVALID,
+                                 G_TYPE_STRING, &ret_error,
+                                 G_TYPE_INVALID);
+
+              if (error)
+                {
+                  g_warning ("%s", error->message);
+                  g_clear_error (&error);
+                }
+
+              if (ret_error && ret_error[0] != '\0')
+                g_warning ("%s", ret_error);
+
+
+              if (g_strcmp0 (pp->devices[device_id].device_class, "direct") == 0)
+                {
+                  gchar *commands = get_dest_attr (pp->devices[device_id].display_name, "printer-commands");
+                  gchar *commands_lowercase = g_ascii_strdown (commands, -1);
+                  ipp_t *response = NULL;
+
+                  if (g_strrstr (commands_lowercase, "AutoConfigure"))
+                    {
+                      response = execute_maintenance_command (pp->devices[device_id].display_name,
+                                                              "AutoConfigure",
+                      /* Translators: Name of job which makes printer to autoconfigure itself */
+                                                              _("Automatic configuration"));
+                      if (response)
+                        {
+                          if (response->state == IPP_ERROR)
+                            g_warning ("An error has occured during automatic configuration of new printer.");
+                          ippDelete (response);
+                        }
+                    }
+                  g_free (commands);
+                  g_free (commands_lowercase);
+                }
+
+
+              /* Set default PaperSize according to the locale */
+              locale = setlocale (LC_PAPER, NULL);
+              if (locale == NULL)
+                locale = setlocale (LC_MESSAGES, NULL);
+
+              if (locale)
+                {
+                  const char  *ppd_file_name = NULL;
+                  ppd_file_t  *ppd_file = NULL;
+                  gchar      **value = NULL;
+                  gchar       *paper_size;
+
+                  /* CLDR 2.0 alpha
+                   * http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/territory_language_information.html
+                   */
+                  if (g_regex_match_simple ("[^_.@]{2,3}_(BZ|CA|CL|CO|CR|GT|MX|NI|PA|PH|PR|SV|US|VE)",
+                                            locale, G_REGEX_ANCHORED, G_REGEX_MATCH_ANCHORED))
+                    paper_size = g_strdup ("Letter");
+                  else
+                    paper_size = g_strdup ("A4");
+
+                  ppd_file_name = cupsGetPPD (pp->devices[device_id].display_name);
+                  if (ppd_file_name)
+                    {
+                      ppd_file = ppdOpenFile (ppd_file_name);
+                      if (ppd_file)
+                        {
+                          ppdMarkDefaults (ppd_file);
+                          for (i = 0; i < ppd_file->num_groups; i++)
+                            for (j = 0; j < ppd_file->groups[i].num_options; j++)
+                              if (g_strcmp0 ("PageSize", ppd_file->groups[i].options[j].keyword) == 0)
+                                {
+                                  for (k = 0; k < ppd_file->groups[i].options[j].num_choices; k++)
+                                    {
+                                      if (g_ascii_strncasecmp (paper_size,
+                                                               ppd_file->groups[i].options[j].choices[k].choice,
+                                                               strlen (paper_size)) == 0 &&
+                                          !ppd_file->groups[i].options[j].choices[k].marked)
+                                        {
+                                          value = g_new0 (gchar *, 2);
+                                          value[0] = g_strdup (ppd_file->groups[i].options[j].choices[k].choice);
+                                          break;
+                                        }
+                                    }
+                                  break;
+                                }
+                          ppdClose (ppd_file);
+                        }
+                      g_unlink (ppd_file_name);
+                    }
+
+                  if (value)
+                    {
+                      dbus_g_proxy_call (proxy, "PrinterAddOptionDefault", &error,
+                                         G_TYPE_STRING, pp->devices[device_id].display_name,
+                                         G_TYPE_STRING, "PageSize-default",
+                                         G_TYPE_STRV, value,
+                                         G_TYPE_INVALID,
+                                         G_TYPE_STRING, &ret_error,
+                                         G_TYPE_INVALID);
+
+                      if (error)
+                        {
+                          g_warning ("%s", error->message);
+                          g_clear_error (&error);
+                        }
+
+                      if (ret_error && ret_error[0] != '\0')
+                        g_warning ("%s", ret_error);
+
+                      g_strfreev (value);
+                    }
+                  g_free (paper_size);
+                }
+              g_object_unref (proxy);
             }
         }
     }
