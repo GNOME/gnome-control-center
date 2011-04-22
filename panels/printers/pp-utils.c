@@ -359,18 +359,17 @@ ccGetAllowedUsers (gchar ***allowed_users, const char *printer_name)
 }
 
 gchar *
-get_ppd_attribute (const gchar *printer_name, const gchar *attribute_name)
+get_ppd_attribute (const gchar *ppd_file_name,
+                   const gchar *attribute_name)
 {
-  const char *file_name = NULL;
   ppd_file_t *ppd_file = NULL;
   ppd_attr_t *ppd_attr = NULL;
   gchar *result = NULL;
 
-  file_name = cupsGetPPD (printer_name);
-
-  if (file_name)
+  if (ppd_file_name)
     {
-      ppd_file = ppdOpenFile (file_name);
+      ppd_file = ppdOpenFile (ppd_file_name);
+
       if (ppd_file)
         {
           ppd_attr = ppdFindAttr (ppd_file, attribute_name, NULL);
@@ -378,7 +377,6 @@ get_ppd_attribute (const gchar *printer_name, const gchar *attribute_name)
             result = g_strdup (ppd_attr->value);
           ppdClose (ppd_file);
         }
-      g_unlink (file_name);
     }
 
   return result;

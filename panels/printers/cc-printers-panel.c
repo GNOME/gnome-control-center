@@ -65,6 +65,7 @@ struct _CcPrintersPanelPrivate
 
   cups_dest_t *dests;
   gchar **dest_model_names;
+  gchar **ppd_file_names;
   int num_dests;
   int current_dest;
 
@@ -98,6 +99,7 @@ static void actualize_sensitivity (gpointer user_data);
 static void printer_disable_cb (GObject *gobject, GParamSpec *pspec, gpointer user_data);
 static void printer_set_default_cb (GtkToggleButton *button, gpointer user_data);
 static void detach_from_cups_notifier (gpointer data);
+static void free_dests (CcPrintersPanel *self);
 
 static void
 cc_printers_panel_get_property (GObject    *object,
@@ -131,16 +133,7 @@ cc_printers_panel_dispose (GObject *object)
   CcPrintersPanelPrivate *priv = CC_PRINTERS_PANEL (object)->priv;
   int                     i;
 
-  if (priv->num_dests > 0)
-    {
-      for (i = 0; i < priv->num_dests; i++)
-        g_free (priv->dest_model_names[i]);
-      g_free (priv->dest_model_names);
-      cupsFreeDests (priv->num_dests, priv->dests);
-    }
-  priv->dests = NULL;
-  priv->num_dests = 0;
-  priv->current_dest = -1;
+  free_dests (CC_PRINTERS_PANEL (object));
 
   if (priv->num_jobs > 0)
     cupsFreeJobs (priv->num_jobs, priv->jobs);
@@ -392,6 +385,35 @@ detach_from_cups_notifier (gpointer data)
   }
 }
 
+static void
+free_dests (CcPrintersPanel *self)
+{
+  CcPrintersPanelPrivate *priv;
+  gint                    i;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  if (priv->num_dests > 0)
+    {
+      for (i = 0; i < priv->num_dests; i++)
+        {
+          g_free (priv->dest_model_names[i]);
+          if (priv->ppd_file_names[i]) {
+            g_unlink (priv->ppd_file_names[i]);
+            g_free (priv->ppd_file_names[i]);
+          }
+        }
+      g_free (priv->dest_model_names);
+      g_free (priv->ppd_file_names);
+      cupsFreeDests (priv->num_dests, priv->dests);
+    }
+  priv->dests = NULL;
+  priv->num_dests = 0;
+  priv->current_dest = -1;
+  priv->dest_model_names = NULL;
+  priv->ppd_file_names = NULL;
+}
+
 enum
 {
   NOTEBOOK_INFO_PAGE = 0,
@@ -564,9 +586,14 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
             printer_type = priv->dests[priv->current_dest].options[i].value;
         }
 
+      if (priv->ppd_file_names[priv->current_dest] == NULL)
+        priv->ppd_file_names[priv->current_dest] =
+          g_strdup (cupsGetPPD (priv->dests[priv->current_dest].name));
+
       if (priv->dest_model_names[priv->current_dest] == NULL)
         priv->dest_model_names[priv->current_dest] =
-          get_ppd_attribute (priv->dests[priv->current_dest].name, "ModelName");
+          get_ppd_attribute (priv->ppd_file_names[priv->current_dest],
+                             "ModelName");
 
       printer_model = g_strdup (priv->dest_model_names[priv->current_dest]);
 
@@ -893,16 +920,10 @@ actualize_printers_list (CcPrintersPanel *self)
         current_printer_instance = g_strdup (priv->dests[priv->current_dest].instance);
     }
 
-  if (priv->num_dests > 0)
-    {
-      for (i = 0; i < priv->num_dests; i++)
-        g_free (priv->dest_model_names[i]);
-      g_free (priv->dest_model_names);
-      cupsFreeDests (priv->num_dests, priv->dests);
-    }
+  free_dests (self);
   priv->num_dests = cupsGetDests (&priv->dests);
   priv->dest_model_names = g_new0 (gchar *, priv->num_dests);
-  priv->current_dest = -1;
+  priv->ppd_file_names = g_new0 (gchar *, priv->num_dests);
 
   treeview = (GtkTreeView*)
     gtk_builder_get_object (priv->builder, "printers-treeview");
@@ -2454,6 +2475,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   priv->builder = gtk_builder_new ();
   priv->dests = NULL;
   priv->dest_model_names = NULL;
+  priv->ppd_file_names = NULL;
   priv->num_dests = 0;
   priv->current_dest = -1;
 

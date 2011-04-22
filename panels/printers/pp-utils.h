@@ -51,7 +51,7 @@ ipp_t      *execute_maintenance_command (const char *printer_name,
 int         ccGetAllowedUsers (gchar      ***allowed_users,
                                const char   *printer_name);
 
-gchar      *get_ppd_attribute (const gchar *printer_name,
+gchar      *get_ppd_attribute (const gchar *ppd_file_name,
                                const gchar *attribute_name);
 
 void        cancel_cups_subscription (gint id);
