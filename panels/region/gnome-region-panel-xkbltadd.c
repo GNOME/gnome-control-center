@@ -244,6 +244,15 @@ xkl_layout_add_to_list (XklConfigRegistry * config,
 }
 
 static void
+xkb_layout_filter_clear (GtkEntry            *entry,
+			 GtkEntryIconPosition icon_pos,
+			 GdkEvent            *event,
+			 gpointer             user_data)
+{
+	gtk_entry_set_text (entry, "");
+}
+
+static void
 xkb_layout_filter_changed (GtkBuilder * chooser_dialog)
 {
 	GtkTreeModelFilter *filtered_model =
@@ -253,6 +262,20 @@ xkb_layout_filter_changed (GtkBuilder * chooser_dialog)
 	const gchar *pattern =
 	    gtk_entry_get_text (GTK_ENTRY (xkb_layout_filter));
 	gchar *upattern = g_utf8_strup (pattern, -1);
+
+	if (!g_strcmp0 (pattern, "")) {
+		g_object_set (G_OBJECT (xkb_layout_filter),
+			      "secondary-icon-name", "edit-find-symbolic",
+			      "secondary-icon-activatable", FALSE,
+			      "secondary-icon-sensitive", FALSE,
+			      NULL);
+	} else {
+		g_object_set (G_OBJECT (xkb_layout_filter),
+			      "secondary-icon-name", "edit-clear-symbolic",
+			      "secondary-icon-activatable", TRUE,
+			      "secondary-icon-sensitive", TRUE,
+			      NULL);
+	}
 
 	if (search_pattern_list != NULL)
 		g_strfreev (search_pattern_list);
@@ -362,6 +385,9 @@ xkb_layout_choose (GtkBuilder * dialog)
 				  G_CALLBACK
 				  (xkb_layout_filter_changed),
 				  chooser_dialog);
+
+	g_signal_connect (G_OBJECT (xkb_layout_filter), "icon-release",
+			  G_CALLBACK (xkb_layout_filter_clear), NULL);
 
 	selection =
 	    gtk_tree_view_get_selection (GTK_TREE_VIEW
