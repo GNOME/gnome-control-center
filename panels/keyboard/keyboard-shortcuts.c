@@ -253,7 +253,7 @@ append_section (GtkBuilder         *builder,
       is_new = TRUE;
     }
 
-  for (i = 0; keys_list[i].name != NULL; i++)
+  for (i = 0; keys_list != NULL && keys_list[i].name != NULL; i++)
     {
       CcKeyboardItem *item;
       gboolean ret;
@@ -300,7 +300,7 @@ append_section (GtkBuilder         *builder,
     }
 
   /* Add the keys to the hash table */
-  if (is_new && keys_array->len > 0)
+  if (is_new)
     {
       static gboolean have_sep = FALSE;
 
@@ -648,6 +648,10 @@ append_sections_from_gconf (GtkBuilder *builder, const gchar *gconf_path)
         {
           g_free (keys[i].name);
         }
+    }
+  else
+    {
+      append_section (builder, _("Custom Shortcuts"), BINDING_GROUP_USER, NULL);
     }
 
   g_array_free (entries, TRUE);
