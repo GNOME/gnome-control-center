@@ -314,10 +314,9 @@ cc_keyboard_item_finalize (GObject *object)
   /* Remove GConf watches */
   client = gconf_client_get_default ();
 
-  /* FIXME what if we didn't add a watch? */
-  if (item->gconf_key_dir != NULL)
+  if (item->gconf_key_dir != NULL && item->monitored_dir)
     gconf_client_remove_dir (client, item->gconf_key_dir, NULL);
-  else if (item->gconf_key != NULL)
+  else if (item->gconf_key != NULL && item->monitored)
     gconf_client_remove_dir (client, item->gconf_key, NULL);
 
   if (item->gconf_cnxn != 0)
@@ -459,6 +458,7 @@ cc_keyboard_item_load_from_gconf (CcKeyboardItem *item,
   }
   item->editable = gconf_entry_get_is_writable (entry);
   gconf_client_add_dir (client, item->gconf_key, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+  item->monitored = TRUE;
   item->gconf_cnxn = gconf_client_notify_add (client,
                                               item->gconf_key,
                                               (GConfClientNotifyFunc) &keybinding_key_changed,
@@ -501,6 +501,7 @@ cc_keyboard_item_load_from_gconf_dir (CcKeyboardItem *item,
   item->command = gconf_client_get_string (client, item->cmd_gconf_key, NULL);
   item->editable = gconf_entry_get_is_writable (entry);
   gconf_client_add_dir (client, item->gconf_key_dir, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+  item->monitored_dir = TRUE;
 
   item->desc_editable = gconf_client_key_is_writable (client, item->desc_gconf_key, NULL);
   item->gconf_cnxn_desc = gconf_client_notify_add (client,

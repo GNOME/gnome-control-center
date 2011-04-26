@@ -72,6 +72,7 @@ typedef struct
   char *gconf_key;
   guint gconf_cnxn;
   gboolean editable;
+  gboolean monitored;
 
   /* GCONF DIR */
   char *gconf_key_dir;
@@ -86,6 +87,8 @@ typedef struct
   char *cmd_gconf_key;
   gboolean cmd_editable;
   guint gconf_cnxn_cmd;
+
+  gboolean monitored_dir;
 
   /* GSettings */
   char *schema;
