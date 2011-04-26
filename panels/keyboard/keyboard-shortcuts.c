@@ -928,6 +928,7 @@ remove_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
   gchar *base;
   CcKeyboardItem *item;
   GPtrArray *keys_array;
+  GError *err = NULL;
 
   gtk_tree_model_get (model, iter,
                       DETAIL_KEYENTRY_COLUMN, &item,
@@ -938,10 +939,15 @@ remove_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
 
   client = gconf_client_get_default ();
 
-  base = g_path_get_dirname (item->gconf_key_dir);
+  base = g_strdup (item->gconf_key_dir);
   g_object_unref (item);
 
-  gconf_client_recursive_unset (client, base, 0, NULL);
+  if (gconf_client_recursive_unset (client, base, 0, &err) == FALSE)
+    {
+      g_warning ("Failed to unset GConf directory '%s': %s", base, err->message);
+      g_error_free (err);
+    }
+
   g_free (base);
   /* suggest sync now so the unset directory actually gets dropped;
    * if we don't do this we may end up with 'zombie' shortcuts when
