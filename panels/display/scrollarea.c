@@ -76,6 +76,8 @@ struct FooScrollAreaPrivate
 
   GtkAdjustment              *hadj;
   GtkAdjustment              *vadj;
+  GtkScrollablePolicy         hscroll_policy;
+  GtkScrollablePolicy         vscroll_policy;
   int                         x_offset;
   int                         y_offset;
 
@@ -112,7 +114,9 @@ enum
 enum {
   PROP_0,
   PROP_VADJUSTMENT,
-  PROP_HADJUSTMENT
+  PROP_HADJUSTMENT,
+  PROP_HSCROLL_POLICY,
+  PROP_VSCROLL_POLICY
 };
 
 static guint signals [LAST_SIGNAL] = { 0 };
@@ -195,6 +199,12 @@ foo_scroll_area_get_property (GObject    *object,
     case PROP_HADJUSTMENT:
       g_value_set_object (value, &scroll_area->priv->hadj);
       break;
+    case PROP_HSCROLL_POLICY:
+      g_value_set_enum (value, scroll_area->priv->hscroll_policy);
+      break;
+    case PROP_VSCROLL_POLICY:
+      g_value_set_enum (value, scroll_area->priv->vscroll_policy);
+      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
     }
@@ -206,12 +216,20 @@ foo_scroll_area_set_property (GObject      *object,
                               const GValue *value,
                               GParamSpec   *pspec)
 {
+  FooScrollArea *scroll_area = FOO_SCROLL_AREA (object);
+
   switch (property_id) {
   case PROP_VADJUSTMENT:
     foo_scroll_area_set_vadjustment (FOO_SCROLL_AREA (object), g_value_get_object (value));
     break;
   case PROP_HADJUSTMENT:
     foo_scroll_area_set_hadjustment (FOO_SCROLL_AREA (object), g_value_get_object (value));
+    break;
+  case PROP_HSCROLL_POLICY:
+    scroll_area->priv->hscroll_policy = g_value_get_enum (value);
+    break;
+  case PROP_VSCROLL_POLICY:
+    scroll_area->priv->vscroll_policy = g_value_get_enum (value);
     break;
   default:
     G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -245,6 +263,8 @@ foo_scroll_area_class_init (FooScrollAreaClass *class)
   /* Scrollable interface properties */
   g_object_class_override_property (object_class, PROP_HADJUSTMENT, "hadjustment");
   g_object_class_override_property (object_class, PROP_VADJUSTMENT, "vadjustment");
+  g_object_class_override_property (object_class, PROP_HSCROLL_POLICY, "hscroll-policy");
+  g_object_class_override_property (object_class, PROP_VSCROLL_POLICY, "vscroll-policy");
 
   signals[VIEWPORT_CHANGED] =
     g_signal_new ("viewport_changed",
