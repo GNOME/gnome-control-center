@@ -275,8 +275,13 @@ um_user_get_display_name (UmUser *user)
 {
         g_return_val_if_fail (UM_IS_USER (user), NULL);
 
-       return user->display_name ? user->display_name
-                                 : user->props->real_name;
+        if (user->display_name)
+                return user->display_name;
+        if (user->props->real_name &&
+            *user->props->real_name != '\0')
+                return user->props->real_name;
+
+        return user->props->user_name;
 }
 
 const gchar *
