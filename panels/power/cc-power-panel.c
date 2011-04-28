@@ -483,6 +483,9 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
   g_ptr_array_unref (devices);
 out:
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "vbox_actions"));
+  gtk_widget_set_visible (widget, has_batteries);
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "vbox_battery"));
   gtk_widget_set_visible (widget, has_batteries);
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
