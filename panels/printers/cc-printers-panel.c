@@ -88,6 +88,7 @@ struct _CcPrintersPanelPrivate
   GDBusProxy      *cups_proxy;
   GDBusConnection *cups_bus_connection;
   gint             subscription_id;
+  guint            subscription_renewal_id;
 
   gpointer dummy;
 };
@@ -336,7 +337,8 @@ attach_to_cups_notifier (gpointer data)
   priv = PRINTERS_PANEL_PRIVATE (self);
 
   renew_subscription (self);
-  g_timeout_add_seconds (RENEW_INTERVAL, renew_subscription, self);
+  priv->subscription_renewal_id =
+    g_timeout_add_seconds (RENEW_INTERVAL, renew_subscription, self);
 
   error = NULL;
   priv->cups_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
@@ -378,6 +380,11 @@ detach_from_cups_notifier (gpointer data)
 
   cancel_cups_subscription (priv->subscription_id);
   priv->subscription_id = -1;
+
+  if (priv->subscription_renewal_id != 0) {
+    g_source_remove (priv->subscription_renewal_id);
+    priv->subscription_renewal_id = 0;
+  }
 
   if (priv->cups_proxy != NULL) {
     g_object_unref (priv->cups_proxy);
