@@ -123,6 +123,8 @@ device_type_selection_changed_cb (GtkTreeSelection *selection,
   PpNewPrinterDialog *pp = (PpNewPrinterDialog *) user_data;
   GtkTreeModel       *model;
   GtkTreeIter         iter;
+  GtkWidget          *treeview = NULL;
+  GtkWidget          *widget;
   gchar              *device_type_name = NULL;
   gint                device_type_id = -1;
   gint                device_type = -1;
@@ -138,13 +140,71 @@ device_type_selection_changed_cb (GtkTreeSelection *selection,
 
   if (device_type >= 0)
     {
-      GtkWidget *widget;
-
       widget = (GtkWidget*)
         gtk_builder_get_object (pp->builder, "device-type-notebook");
 
       gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), device_type);
+
+      if (device_type == DEVICE_TYPE_LOCAL)
+        treeview = (GtkWidget*)
+          gtk_builder_get_object (pp->builder, "local-devices-treeview");
+      else if (device_type == DEVICE_TYPE_NETWORK)
+        treeview = (GtkWidget*)
+          gtk_builder_get_object (pp->builder, "network-devices-treeview");
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (pp->builder, "new-printer-add-button");
+
+      if (treeview)
+        gtk_widget_set_sensitive (widget,
+          gtk_tree_selection_get_selected (
+            gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
+            &model,
+            &iter));
     }
+}
+
+static void
+device_selection_changed_cb (GtkTreeSelection *selection,
+                             gpointer          user_data)
+{
+  PpNewPrinterDialog *pp = (PpNewPrinterDialog *) user_data;
+  GtkTreeModel       *model;
+  GtkTreeIter         iter;
+  GtkWidget          *treeview = NULL;
+  GtkWidget          *widget;
+  gchar              *device_type_name = NULL;
+  gint                device_type_id = -1;
+  gint                device_type = -1;
+
+  treeview = (GtkWidget*)
+    gtk_builder_get_object (pp->builder, "device-types-treeview");
+
+  if (gtk_tree_selection_get_selected (
+        gtk_tree_view_get_selection (
+          GTK_TREE_VIEW (treeview)), &model, &iter))
+    gtk_tree_model_get (model, &iter,
+			DEVICE_TYPE_ID_COLUMN, &device_type_id,
+			DEVICE_TYPE_NAME_COLUMN, &device_type_name,
+			DEVICE_TYPE_TYPE_COLUMN, &device_type,
+			-1);
+
+  if (device_type == DEVICE_TYPE_LOCAL)
+    treeview = (GtkWidget*)
+      gtk_builder_get_object (pp->builder, "local-devices-treeview");
+  else if (device_type == DEVICE_TYPE_NETWORK)
+    treeview = (GtkWidget*)
+      gtk_builder_get_object (pp->builder, "network-devices-treeview");
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (pp->builder, "new-printer-add-button");
+
+  if (treeview)
+    gtk_widget_set_sensitive (widget,
+      gtk_tree_selection_get_selected (
+        gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
+        &model,
+        &iter));
 }
 
 static void
@@ -642,6 +702,12 @@ populate_devices_list (PpNewPrinterDialog *pp)
 
   local_treeview = (GtkWidget*)
     gtk_builder_get_object (pp->builder, "local-devices-treeview");
+
+  g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (network_treeview)),
+                    "changed", G_CALLBACK (device_selection_changed_cb), pp);
+
+  g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (local_treeview)),
+                    "changed", G_CALLBACK (device_selection_changed_cb), pp);
 
   actualize_devices_list (pp);
   devices_get (pp);
@@ -1170,6 +1236,7 @@ pp_new_printer_dialog_new (GtkWindow            *parent,
   widget = (GtkWidget*)
     gtk_builder_get_object (pp->builder, "new-printer-add-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (new_printer_add_button_cb), pp);
+  gtk_widget_set_sensitive (widget, FALSE);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (pp->builder, "new-printer-cancel-button");
