@@ -27,8 +27,18 @@ G_BEGIN_DECLS
 #include <X11/extensions/XInput.h>
 #include <X11/extensions/XIproto.h>
 
-XDevice * device_is_touchpad  (XDeviceInfo deviceinfo);
-gboolean  touchpad_is_present (void);
+typedef enum {
+	COMMAND_DEVICE_ADDED,
+	COMMAND_DEVICE_REMOVED,
+	COMMAND_DEVICE_PRESENT
+} CustomCommand;
+
+gboolean  supports_xinput_devices (void);
+gboolean  device_is_touchpad      (XDevice                *xdevice);
+gboolean  touchpad_is_present     (void);
+
+gboolean  run_custom_command      (GdkDevice              *device,
+			           CustomCommand           command);
 
 G_END_DECLS
 

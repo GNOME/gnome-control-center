@@ -28,7 +28,10 @@
 
 #include "gsd-input-helper.h"
 
-static gboolean
+#define INPUT_DEVICES_SCHEMA "org.gnome.settings-daemon.peripherals.input-devices"
+#define KEY_HOTPLUG_COMMAND  "hotplug-command"
+
+gboolean
 supports_xinput_devices (void)
 {
         gint op_code, event, error;
@@ -40,39 +43,33 @@ supports_xinput_devices (void)
                                 &error);
 }
 
-XDevice*
-device_is_touchpad (XDeviceInfo deviceinfo)
+gboolean
+device_is_touchpad (XDevice *xdevice)
 {
-        XDevice *device;
         Atom realtype, prop;
         int realformat;
         unsigned long nitems, bytes_after;
         unsigned char *data;
 
-        if (deviceinfo.type != XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XI_TOUCHPAD, False))
-                return NULL;
+	/* FIXME
+	 * we don't check on the type being XI_TOUCHPAD, but having a "Synaptics Off"
+	 * property should be enough */
 
         prop = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "Synaptics Off", False);
         if (!prop)
-                return NULL;
+                return FALSE;
 
         gdk_error_trap_push ();
-        device = XOpenDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), deviceinfo.id);
-        if (gdk_error_trap_pop () || (device == NULL))
-                return NULL;
-
-        gdk_error_trap_push ();
-        if ((XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device, prop, 0, 1, False,
+        if ((XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), xdevice, prop, 0, 1, False,
                                 XA_INTEGER, &realtype, &realformat, &nitems,
                                 &bytes_after, &data) == Success) && (realtype != None)) {
                 gdk_error_trap_pop_ignored ();
                 XFree (data);
-                return device;
+                return TRUE;
         }
         gdk_error_trap_pop_ignored ();
 
-        XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device);
-        return NULL;
+        return FALSE;
 }
 
 gboolean
@@ -95,15 +92,93 @@ touchpad_is_present (void)
         for (i = 0; i < n_devices; i++) {
                 XDevice *device;
 
-                device = device_is_touchpad (device_info[i]);
-                if (device != NULL) {
-                        retval = TRUE;
+                gdk_error_trap_push ();
+                device = XOpenDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device_info[i].id);
+                if (gdk_error_trap_pop () || (device == NULL))
+                        continue;
+
+                retval = device_is_touchpad (device);
+                if (retval) {
+                        XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device);
                         break;
                 }
+
+                XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device);
         }
-        if (device_info != NULL)
-                XFreeDeviceList (device_info);
+        XFreeDeviceList (device_info);
 
         return retval;
 }
 
+static const char *
+custom_command_to_string (CustomCommand command)
+{
+        switch (command) {
+        case COMMAND_DEVICE_ADDED:
+                return "added";
+        case COMMAND_DEVICE_REMOVED:
+                return "removed";
+        case COMMAND_DEVICE_PRESENT:
+                return "present";
+        default:
+                g_assert_not_reached ();
+        }
+}
+
+/* Run a custom command on device presence events. Parameters passed into
+ * the custom command are:
+ * command -t [added|removed|present] -i <device ID> <device name>
+ * Type 'added' and 'removed' signal 'device added' and 'device removed',
+ * respectively. Type 'present' signals 'device present at
+ * gnome-settings-daemon init'.
+ *
+ * The script is expected to run synchronously, and an exit value
+ * of "1" means that no other settings will be applied to this
+ * particular device.
+ *
+ * More options may be added in the future.
+ *
+ * This function returns TRUE if we should not apply any more settings
+ * to the device.
+ */
+gboolean
+run_custom_command (GdkDevice              *device,
+                    CustomCommand           command)
+{
+        GSettings *settings;
+        char *cmd;
+        char *argv[5];
+        int exit_status;
+        gboolean rc;
+        int id;
+
+        settings = g_settings_new (INPUT_DEVICES_SCHEMA);
+        cmd = g_settings_get_string (settings, KEY_HOTPLUG_COMMAND);
+        g_object_unref (settings);
+
+        if (!cmd || cmd[0] == '\0') {
+                g_free (cmd);
+                return FALSE;
+        }
+
+        /* Easter egg! */
+        g_object_get (device, "device-id", &id, NULL);
+
+        argv[0] = cmd;
+        argv[1] = g_strdup_printf ("-t %s", custom_command_to_string (command));
+        argv[2] = g_strdup_printf ("-i %d", id);
+        argv[3] = g_strdup_printf ("%s", gdk_device_get_name (device));
+        argv[4] = NULL;
+
+        rc = g_spawn_sync (g_get_home_dir (), argv, NULL, G_SPAWN_SEARCH_PATH,
+                           NULL, NULL, NULL, NULL, &exit_status, NULL);
+
+        if (rc == FALSE)
+                g_warning ("Couldn't execute command '%s', verify that this is a valid command.", cmd);
+
+        g_free (argv[0]);
+        g_free (argv[1]);
+        g_free (argv[2]);
+
+        return (exit_status == 0);
+}
