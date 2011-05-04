@@ -1126,6 +1126,9 @@ device_off_toggled (GtkSwitch      *sw,
                 case NM_DEVICE_TYPE_WIMAX:
                         nm_client_wimax_set_enabled (panel->priv->client, active);
                         break;
+                case NM_DEVICE_TYPE_MODEM:
+                        nm_client_wwan_set_enabled (panel->priv->client, active);
+                        break;
                 default: ;
                         /* FIXME: handle other device types */
                 }
@@ -1180,6 +1183,33 @@ wimax_enabled_toggled (NMClient       *client,
         enabled = nm_client_wimax_get_enabled (client);
         sw = GTK_SWITCH (gtk_builder_get_object (panel->priv->builder,
                                                  "device_wimax_off_switch"));
+
+        panel->priv->updating_device = TRUE;
+        gtk_switch_set_active (sw, enabled);
+        panel->priv->updating_device = FALSE;
+}
+
+static void
+mobilebb_enabled_toggled (NMClient       *client,
+                          GParamSpec     *pspec,
+                          CcNetworkPanel *panel)
+{
+        gboolean enabled;
+        GtkSwitch *sw;
+        NMDevice *device;
+        NetObject *object;
+
+        object = get_selected_object (panel);
+        if (object == NULL)
+                return;
+        device = net_device_get_nm_device (NET_DEVICE (object));
+
+        if (nm_device_get_device_type (device) != NM_DEVICE_TYPE_MODEM)
+                return;
+
+        enabled = nm_client_wwan_get_enabled (client);
+        sw = GTK_SWITCH (gtk_builder_get_object (panel->priv->builder,
+                                                 "device_mobilebb_off_switch"));
 
         panel->priv->updating_device = TRUE;
         gtk_switch_set_active (sw, enabled);
@@ -1384,6 +1414,10 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
         case NM_DEVICE_TYPE_WIMAX:
                 gtk_widget_show (widget);
                 wimax_enabled_toggled (panel->priv->client, NULL, panel);
+                break;
+        case NM_DEVICE_TYPE_MODEM:
+                gtk_widget_show (widget);
+                mobilebb_enabled_toggled (panel->priv->client, NULL, panel);
                 break;
         default:
                 gtk_widget_hide (widget);
@@ -1601,7 +1635,7 @@ device_refresh_modem_ui (CcNetworkPanel *panel, NetDevice *device)
         if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
             (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
                 /* IMEI */
-                str = g_object_get_data (G_OBJECT (device),
+                str = g_object_get_data (G_OBJECT (nm_device),
                                          "ControlCenter::EquipmentIdentifier");
                 panel_set_widget_data (panel,
                                        "mobilebb",
@@ -1609,7 +1643,7 @@ device_refresh_modem_ui (CcNetworkPanel *panel, NetDevice *device)
                                        str);
 
                 /* operator name */
-                str = g_object_get_data (G_OBJECT (device),
+                str = g_object_get_data (G_OBJECT (nm_device),
                                          "ControlCenter::OperatorName");
                 panel_set_widget_data (panel,
                                        "mobilebb",
@@ -3191,6 +3225,8 @@ cc_network_panel_init (CcNetworkPanel *panel)
                           G_CALLBACK (wireless_enabled_toggled), panel);
         g_signal_connect (panel->priv->client, "notify::wimax-enabled",
                           G_CALLBACK (wimax_enabled_toggled), panel);
+        g_signal_connect (panel->priv->client, "notify::wwan-enabled",
+                          G_CALLBACK (mobilebb_enabled_toggled), panel);
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "start_hotspot_button"));
@@ -3209,6 +3245,11 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "button_wireless_options"));
+        g_signal_connect (widget, "clicked",
+                          G_CALLBACK (edit_connection), panel);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "button_mobilebb_options"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (edit_connection), panel);
 

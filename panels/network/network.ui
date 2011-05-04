@@ -1416,6 +1416,49 @@
                               </packing>
                             </child>
                             <child>
+                              <object class="GtkLabel" id="label_mobilebb_ipv6">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="selectable">True</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">5</property>
+                                <property name="width">2</property>
+                                <property name="height">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label_mobilebb_route">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="selectable">True</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">6</property>
+                                <property name="width">2</property>
+                                <property name="height">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label_mobilebb_dns">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="yalign">0</property>
+                                <property name="selectable">True</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="top_attach">7</property>
+                                <property name="width">2</property>
+                                <property name="height">1</property>
+                              </packing>
+                            </child>
+                            <child>
                               <object class="GtkAlignment" id="alignment_mobilebb_switch">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
@@ -1455,6 +1498,58 @@
                                 <property name="height">1</property>
                               </packing>
                             </child>
+                            <child>
+                              <object class="GtkLabel" id="heading_mobilebb_ipv6">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">1</property>
+                                <property name="label" translatable="yes">IPv6 Address</property>
+                                <style>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">5</property>
+                                <property name="width">1</property>
+                                <property name="height">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="heading_mobilebb_route">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">1</property>
+                                <property name="label" translatable="yes">Default Route</property>
+                                <style>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">6</property>
+                                <property name="width">1</property>
+                                <property name="height">1</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="heading_mobilebb_dns">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">1</property>
+                                <property name="yalign">0</property>
+                                <property name="label" translatable="yes">DNS</property>
+                                <style>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                              <packing>
+                                <property name="left_attach">0</property>
+                                <property name="top_attach">7</property>
+                                <property name="width">1</property>
+                                <property name="height">1</property>
+                              </packing>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1472,7 +1567,7 @@
                             <property name="yscale">0</property>
                             <property name="top_padding">12</property>
                             <child>
-                              <object class="GtkButton" id="button_mobile_options">
+                              <object class="GtkButton" id="button_mobilebb_options">
                                 <property name="label" translatable="yes">_Options...</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
