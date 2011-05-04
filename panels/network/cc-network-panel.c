@@ -996,12 +996,67 @@ get_ap_security_string (NMAccessPoint *ap)
 }
 
 static gchar *
+get_ipv4_config_address_as_string (NMIP4Config *ip4_config, const char *what)
+{
+        const GSList *list;
+        struct in_addr addr;
+        gchar *str = NULL;
+        gchar tmp[INET_ADDRSTRLEN];
+        NMIP4Address *address;
+
+        /* get address */
+        list = nm_ip4_config_get_addresses (ip4_config);
+        if (list == NULL)
+                goto out;
+
+        /* we only care about one address */
+        address = list->data;
+        if (!strcmp (what, "address"))
+                addr.s_addr = nm_ip4_address_get_address (address);
+        else if (!strcmp (what, "gateway"))
+                addr.s_addr = nm_ip4_address_get_gateway (address);
+        else if (!strcmp (what, "netmask"))
+                addr.s_addr = nm_utils_ip4_prefix_to_netmask (nm_ip4_address_get_prefix (address));
+        else
+                goto out;
+
+        if (!inet_ntop (AF_INET, &addr, tmp, sizeof(tmp)))
+                goto out;
+        str = g_strdup (tmp);
+out:
+        return str;
+}
+
+static gchar *
+get_ipv4_config_name_servers_as_string (NMIP4Config *ip4_config)
+{
+        const GArray *array;
+        GString *dns;
+        struct in_addr addr;
+        gchar tmp[INET_ADDRSTRLEN];
+        int i;
+
+        dns = g_string_new (NULL);
+
+        array = nm_ip4_config_get_nameservers (ip4_config);
+        if (array) {
+                for (i = 0; i < array->len; i++) {
+                        addr.s_addr = g_array_index (array, guint32, i);
+                        if (inet_ntop (AF_INET, &addr, tmp, sizeof(tmp)))
+                                g_string_append_printf (dns, "%s ", tmp);
+                }
+        }
+
+        return g_string_free (dns, FALSE);
+}
+
+static gchar *
 get_ipv6_config_address_as_string (NMIP6Config *ip6_config)
 {
         const GSList *list;
         const struct in6_addr *addr;
         gchar *str = NULL;
-        gchar tmp[1024];
+        gchar tmp[INET6_ADDRSTRLEN];
         NMIP6Address *address;
 
         /* get address */
@@ -1661,13 +1716,11 @@ static void
 nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
 {
         CcNetworkPanelPrivate *priv = panel->priv;
-        const gchar *str;
         const gchar *sub_pane = NULL;
         gchar *str_tmp;
-        GHashTable *options = NULL;
         GtkWidget *widget;
         NMDeviceType type;
-        NMDHCP4Config *config_dhcp4 = NULL;
+        NMIP4Config *ip4_config = NULL;
         NMIP6Config *ip6_config = NULL;
         NMDevice *nm_device;
         gboolean has_ip4;
@@ -1716,42 +1769,42 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                 goto out;
 
         /* get IP4 parameters */
-        config_dhcp4 = nm_device_get_dhcp4_config (nm_device);
-        if (!is_hotspot && config_dhcp4 != NULL) {
-                g_object_get (G_OBJECT (config_dhcp4),
-                              NM_DHCP4_CONFIG_OPTIONS, &options,
-                              NULL);
-
+        ip4_config = nm_device_get_ip4_config (nm_device);
+        if (!is_hotspot && ip4_config != NULL) {
                 /* IPv4 address */
-                str = nm_dhcp4_config_get_one_option (config_dhcp4,
-                                                      "ip_address");
+
+                str_tmp = get_ipv4_config_address_as_string (ip4_config, "address");
                 panel_set_widget_data (panel,
                                        sub_pane,
                                        "ipv4",
-                                       str);
-                has_ip4 = str != NULL;
+                                       str_tmp);
+                has_ip4 = str_tmp != NULL;
+                g_free (str_tmp);
 
                 /* IPv4 DNS */
+                str_tmp = get_ipv4_config_name_servers_as_string (ip4_config);
                 panel_set_widget_data (panel,
                                        sub_pane,
                                        "dns",
-                                       nm_dhcp4_config_get_one_option (config_dhcp4,
-                                                                       "domain_name_servers"));
+                                       str_tmp);
+                g_free (str_tmp);
 
                 /* IPv4 route */
+                str_tmp = get_ipv4_config_address_as_string (ip4_config, "gateway");
                 panel_set_widget_data (panel,
                                        sub_pane,
                                        "route",
-                                       nm_dhcp4_config_get_one_option (config_dhcp4,
-                                                                       "routers"));
+                                       str_tmp);
+                g_free (str_tmp);
 
                 /* IPv4 netmask */
                 if (type == NM_DEVICE_TYPE_ETHERNET) {
+                        str_tmp = get_ipv4_config_address_as_string (ip4_config, "netmask");
                         panel_set_widget_data (panel,
                                                sub_pane,
                                                "subnet",
-                                               nm_dhcp4_config_get_one_option (config_dhcp4,
-                                                                               "subnet_mask"));
+                                               str_tmp);
+                        g_free (str_tmp);
                 }
         } else {
                 /* IPv4 address */
