@@ -360,12 +360,19 @@ devices_get_cb (GObject      *source_object,
                   if (pp->devices[i].device_id)
                     {
                       name = get_tag_value (pp->devices[i].device_id, "mdl");
-                      name = g_strcanon (name, ALLOWED_CHARACTERS, '-');
+                      if (!name)
+                        name = get_tag_value (pp->devices[i].device_id, "model");
+
+                      if (name)
+                        name = g_strcanon (name, ALLOWED_CHARACTERS, '-');
                     }
-                  else if (pp->devices[i].device_info)
+
+                  if (!name &&
+                      pp->devices[i].device_info)
                     {
                       name = g_strdup (pp->devices[i].device_info);
-                      name = g_strcanon (name, ALLOWED_CHARACTERS, '-');
+                      if (name)
+                        name = g_strcanon (name, ALLOWED_CHARACTERS, '-');
                     }
 
                   pp->devices[i].display_name = name;
@@ -812,7 +819,7 @@ new_printer_add_button_cb (GtkButton *button,
   GtkWidget          *treeview;
   gboolean            success = FALSE;
   gchar              *device_name = NULL;
-  gchar              *ppd_name = NULL;
+  PPDName            *ppd_name = NULL;
   gint                device_id = -1;
   gint                device_type = -1;
   gint                i, j, k;
@@ -929,7 +936,7 @@ new_printer_add_button_cb (GtkButton *button,
                            pp->devices[device_id].device_uri,
                            pp->devices[device_id].device_location);
 
-          if (ppd_name == NULL)
+          if (ppd_name == NULL || ppd_name->ppd_match_level < PPD_EXACT_MATCH)
             {
               /* Try PackageKit to install printer driver */
               DBusGProxy *proxy;
@@ -969,6 +976,12 @@ new_printer_add_button_cb (GtkButton *button,
 
                   g_clear_error (&error);
 
+                  if (ppd_name)
+                    {
+                      g_free (ppd_name->ppd_name);
+                      g_free (ppd_name);
+                    }
+
                   /* Search CUPS for driver */
                   ppd_name = get_ppd_name (pp->devices[device_id].device_class,
                                pp->devices[device_id].device_id,
@@ -982,7 +995,7 @@ new_printer_add_button_cb (GtkButton *button,
             }
 
           /* Add the new printer */
-          if (ppd_name)
+          if (ppd_name && ppd_name->ppd_name)
             {
               DBusGProxy *proxy;
               GError     *error = NULL;
@@ -997,7 +1010,7 @@ new_printer_add_button_cb (GtkButton *button,
                   dbus_g_proxy_call (proxy, "PrinterAdd", &error,
                                      G_TYPE_STRING, pp->devices[device_id].display_name,
                                      G_TYPE_STRING, pp->devices[device_id].device_uri,
-                                     G_TYPE_STRING, ppd_name,
+                                     G_TYPE_STRING, ppd_name->ppd_name,
                                      G_TYPE_STRING, pp->devices[device_id].device_info,
                                      G_TYPE_STRING, pp->devices[device_id].device_location,
                                      G_TYPE_INVALID,
@@ -1021,6 +1034,9 @@ new_printer_add_button_cb (GtkButton *button,
 
                   g_object_unref (proxy);
                 }
+
+              g_free (ppd_name->ppd_name);
+              g_free (ppd_name);
             }
         }
 

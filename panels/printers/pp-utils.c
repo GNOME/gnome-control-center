@@ -68,20 +68,733 @@ gchar *get_tag_value (const gchar *tag_string, const gchar *tag_name)
 {
   gchar **tag_string_splitted = NULL;
   gchar  *tag_value = NULL;
-  gint    tag_name_length = strlen (tag_name);
+  gint    tag_name_length;
   gint    i;
 
-  tag_string_splitted = g_strsplit (tag_string, ";", 0);
-  for (i = 0; i < g_strv_length (tag_string_splitted); i++)
-    if (g_ascii_strncasecmp (tag_string_splitted[i], tag_name, tag_name_length) == 0)
-      if (strlen (tag_string_splitted[i]) > tag_name_length + 1)
-        tag_value = g_strdup (tag_string_splitted[i] + tag_name_length + 1);
-  g_strfreev (tag_string_splitted);
+  if (tag_string && tag_name)
+    {
+      tag_name_length = strlen (tag_name);
+      tag_string_splitted = g_strsplit (tag_string, ";", 0);
+      if (tag_string_splitted)
+        {
+          for (i = 0; i < g_strv_length (tag_string_splitted); i++)
+            if (g_ascii_strncasecmp (tag_string_splitted[i], tag_name, tag_name_length) == 0)
+              if (strlen (tag_string_splitted[i]) > tag_name_length + 1)
+                tag_value = g_strdup (tag_string_splitted[i] + tag_name_length + 1);
+
+          g_strfreev (tag_string_splitted);
+        }
+    }
 
   return tag_value;
 }
 
-gchar *
+
+typedef struct
+{
+  gchar *ppd_name;
+  gchar *ppd_device_id;
+  gchar *ppd_product;
+  gchar *ppd_make_and_model;
+
+  gchar *driver_type;
+
+  gchar *mfg;
+  gchar *mdl;
+  gint   match_level;
+  gint   preference_value;
+} PPDItem;
+
+
+static void
+ppd_item_free (PPDItem *item)
+{
+  if (item)
+    {
+      g_free (item->ppd_name);
+      g_free (item->ppd_device_id);
+      g_free (item->ppd_product);
+      g_free (item->ppd_make_and_model);
+      g_free (item->driver_type);
+      g_free (item->mfg);
+      g_free (item->mdl);
+    }
+}
+
+static PPDItem *
+ppd_item_copy (PPDItem *item)
+{
+  PPDItem *result = NULL;
+
+  result = g_new0 (PPDItem, 1);
+  if (item && result)
+    {
+      result->ppd_name = g_strdup (item->ppd_name);
+      result->ppd_device_id = g_strdup (item->ppd_device_id);
+      result->ppd_product = g_strdup (item->ppd_product);
+      result->ppd_make_and_model = g_strdup (item->ppd_make_and_model);
+      result->driver_type = g_strdup (item->driver_type);
+      result->mfg = g_strdup (item->mfg);
+      result->mdl = g_strdup (item->mdl);
+      result->match_level = item->match_level;
+      result->preference_value = item->preference_value;
+    }
+
+  return result;
+}
+
+
+/*
+ * Make deep copy of given const string array.
+ */
+static gchar **
+strvdup (const gchar * const x[])
+{
+  gint i, length = 0;
+  gchar **result;
+
+  for (length = 0; x && x[length]; length++);
+
+  length++;
+
+  result = g_new0 (gchar *, length);
+  for (i = 0; i < length; i++)
+    result[i] = g_strdup (x[i]);
+
+  return result;
+}
+
+/*
+ * Normalize given string so that it is lowercase, doesn't
+ * have trailing or leading whitespaces and digits doesn't
+ * neighbour with alphabetic.
+ * (see cupshelpers/ppds.py from system-config-printer)
+ */
+static gchar *
+normalize (const gchar *input_string)
+{
+  gchar *tmp = NULL;
+  gchar *res = NULL;
+  gchar *result = NULL;
+  gint   i, j = 0, k = -1;
+
+  if (input_string)
+    {
+      tmp = g_strstrip (g_ascii_strdown (input_string, -1));
+      if (tmp)
+        {
+          res = g_new (gchar, 2 * strlen (tmp));
+
+          for (i = 0; i < strlen (tmp); i++)
+            {
+              if ((g_ascii_isalpha (tmp[i]) && k >= 0 && g_ascii_isdigit (res[k])) ||
+                  (g_ascii_isdigit (tmp[i]) && k >= 0 && g_ascii_isalpha (res[k])))
+                {
+                  res[j] = ' ';
+                  k = j++;
+                  res[j] = tmp[i];
+                  k = j++;
+                }
+              else
+                {
+                  if (g_ascii_isspace (tmp[i]) || !g_ascii_isalnum (tmp[i]))
+                    {
+                      if (!(k >= 0 && res[k] == ' '))
+                        {
+                          res[j] = ' ';
+                          k = j++;
+                        }
+                    }
+                  else
+                    {
+                      res[j] = tmp[i];
+                      k = j++;
+                    }
+                }
+            }
+
+          res[j] = '\0';
+
+          result = g_strdup (res);
+          g_free (tmp);
+          g_free (res);
+        }
+    }
+
+  return result;
+}
+
+
+/*
+ * Find out type of the given printer driver.
+ * (see xml/preferreddrivers.xml from system-config-printer)
+ */
+static gchar *
+get_driver_type (gchar *ppd_name,
+                 gchar *ppd_device_id,
+                 gchar *ppd_make_and_model,
+                 gchar *ppd_product,
+                 gint   match_level)
+{
+  gchar *tmp = NULL;
+
+  if (match_level == PPD_GENERIC_MATCH)
+    {
+      if (ppd_name && g_regex_match_simple ("(foomatic(-db-compressed-ppds)?|ijsgutenprint.*):", ppd_name, 0, 0))
+        {
+          tmp = get_tag_value ("DRV", ppd_device_id);
+          if (tmp && g_regex_match_simple (".*,?R1", tmp, 0, 0))
+            return g_strdup ("generic-foomatic-recommended");
+        }
+    }
+
+  if (match_level == PPD_GENERIC_MATCH || match_level == PPD_NO_MATCH)
+    {
+      if (ppd_name && g_regex_match_simple ("(foomatic(-db-compressed-ppds)?|ijsgutenprint.*):Generic-ESC_P", ppd_name, 0, 0))
+        return g_strdup ("generic-escp");
+
+      if (ppd_name && g_regex_match_simple ("drv:///sample.drv/epson(9|24).ppd", ppd_name, 0, 0))
+        return g_strdup ("generic-escp");
+
+      if (g_strcmp0 (ppd_make_and_model, "Generic PostScript Printer") == 0)
+        return g_strdup ("generic-postscript");
+
+      if (g_strcmp0 (ppd_make_and_model, "Generic PCL 6 Printer") == 0)
+        return g_strdup ("generic-pcl6");
+
+      if (g_strcmp0 (ppd_make_and_model, "Generic PCL 5e Printer") == 0)
+        return g_strdup ("generic-pcl5e");
+
+      if (g_strcmp0 (ppd_make_and_model, "Generic PCL 5 Printer") == 0)
+        return g_strdup ("generic-pcl5");
+
+      if (g_strcmp0 (ppd_make_and_model, "Generic PCL Laser Printer") == 0)
+        return g_strdup ("generic-pcl");
+
+      return g_strdup ("generic");
+    }
+
+
+  if (ppd_name && g_regex_match_simple ("drv:///sample.drv/", ppd_name, 0, 0))
+    return g_strdup ("cups");
+
+  if (ppd_product && g_regex_match_simple (".*Ghostscript", ppd_product, 0, 0))
+    return g_strdup ("ghostscript");
+
+  if (ppd_name && g_regex_match_simple ("gutenprint.*:.*/simple|.*-gutenprint.*\\.sim", ppd_name, 0, 0))
+    return g_strdup ("gutenprint-simplified");
+
+  if (ppd_name && g_regex_match_simple ("gutenprint.*:|.*-gutenprint", ppd_name, 0, 0))
+    return g_strdup ("gutenprint-expert");
+
+  if (ppd_make_and_model && g_regex_match_simple (".* Foomatic/hpijs", ppd_make_and_model, 0, 0))
+    {
+      tmp = get_tag_value ("DRV", ppd_device_id);
+      if (tmp && g_regex_match_simple (",?R1", tmp, 0, 0))
+        return g_strdup ("foomatic-recommended-hpijs");
+    }
+
+  if (ppd_make_and_model && g_regex_match_simple (".* Foomatic/hpijs", ppd_make_and_model, 0, 0))
+    return g_strdup ("foomatic-hpijs");
+
+  if (ppd_name && g_regex_match_simple ("foomatic(-db-compressed-ppds)?:", ppd_name, 0, 0) &&
+      ppd_make_and_model && g_regex_match_simple (".* Postscript", ppd_make_and_model, 0, 0))
+    {
+      tmp = get_tag_value ("DRV", ppd_device_id);
+      if (tmp && g_regex_match_simple (".*,?R1", tmp, 0, 0))
+        return g_strdup ("foomatic-recommended-postscript");
+    }
+
+  if (ppd_name && g_regex_match_simple ("foomatic(-db-compressed-ppds)?:.*-Postscript", ppd_name, 0, 0))
+    return g_strdup ("foomatic-postscript");
+
+  if (ppd_make_and_model && g_regex_match_simple (".* Foomatic/pxlmono", ppd_make_and_model, 0, 0))
+    return g_strdup ("foomatic-pxlmono");
+
+  if (ppd_name && g_regex_match_simple ("(foomatic(-db-compressed-ppds)?|ijsgutenprint.*):", ppd_name, 0, 0))
+    {
+      tmp = get_tag_value ("DRV", ppd_device_id);
+      if (tmp && g_regex_match_simple (".*,?R1", tmp, 0, 0))
+        return g_strdup ("foomatic-recommended-non-postscript");
+    }
+
+  if (ppd_name && g_regex_match_simple ("(foomatic(-db-compressed-ppds)?|ijsgutenprint.*):.*-gutenprint", ppd_name, 0, 0))
+    return g_strdup ("foomatic-gutenprint");
+
+  if (ppd_name && g_regex_match_simple ("(foomatic(-db-compressed-ppds)?|ijsgutenprint.*):", ppd_name, 0, 0))
+    return g_strdup ("foomatic");
+
+  if (ppd_name && g_regex_match_simple ("drv:///(hp/)?hpcups.drv/|.*-hpcups", ppd_name, 0, 0) &&
+      ppd_make_and_model && g_regex_match_simple (".* plugin", ppd_make_and_model, 0, 0))
+    return g_strdup ("hpcups-plugin");
+
+  if (ppd_name && g_regex_match_simple ("drv:///(hp/)?hpcups.drv/|.*-hpcups", ppd_name, 0, 0))
+    return g_strdup ("hpcups");
+
+  if (ppd_name && g_regex_match_simple ("drv:///(hp/)?hpijs.drv/|.*-hpijs", ppd_name, 0, 0) &&
+      ppd_make_and_model && g_regex_match_simple (".* plugin", ppd_make_and_model, 0, 0))
+    return g_strdup ("hpijs-plugin");
+
+  if (ppd_name && g_regex_match_simple ("drv:///(hp/)?hpijs.drv/|.*-hpijs", ppd_name, 0, 0))
+    return g_strdup ("hpijs");
+
+  if (ppd_name && g_regex_match_simple (".*splix", ppd_name, 0, 0))
+    return g_strdup ("splix");
+
+  if (ppd_name && g_regex_match_simple (".*turboprint", ppd_name, 0, 0))
+    return g_strdup ("turboprint");
+
+  if (ppd_name && g_regex_match_simple (".*/(Ricoh|Lanier|Gestetner|InfoPrint|Infotech|Savin|NRG)/PS/", ppd_name, 0, 0))
+    return g_strdup ("manufacturer-ricoh-postscript");
+
+  if (ppd_name && g_regex_match_simple (".*/(Ricoh|Lanier|Gestetner|InfoPrint|Infotech|Savin|NRG)/PXL/", ppd_name, 0, 0))
+    return g_strdup ("manufacturer-ricoh-pxl");
+
+  if (match_level == PPD_EXACT_CMD_MATCH)
+    return g_strdup ("manufacturer-cmd");
+
+  return g_strdup ("manufacturer");
+}
+
+
+/*
+ * Return preference value. The most preferred driver has the lowest value.
+ * If the value is higher or equal to 1000 then try to avoid installation
+ * of this driver. If it is higher or equal to 2000 then don't install
+ * this driver.
+ * (see xml/preferreddrivers.xml from system-config-printer)
+ */
+static gint
+get_driver_preference (PPDItem *item)
+{
+  gchar   *tmp1 = NULL;
+  gchar   *tmp2 = NULL;
+  gint     result = 0;
+
+  if (item && item->ppd_make_and_model &&
+      g_regex_match_simple ("Brother HL-2030", item->ppd_make_and_model, 0, 0))
+    {
+      tmp1 = get_tag_value ("MFG", item->ppd_device_id);
+      tmp2 = get_tag_value ("MDL", item->ppd_device_id);
+
+      if (tmp1 && g_regex_match_simple ("Brother", tmp1, 0, 0) &&
+          tmp2 && g_regex_match_simple ("HL-2030", tmp2, 0, 0))
+        {
+          if (item->driver_type && g_regex_match_simple ("gutenprint*", item->driver_type, 0, 0))
+            return result + 2000;
+          else
+            return result;
+        }
+    }
+  result++;
+
+  if (item && item->ppd_make_and_model &&
+      g_regex_match_simple ("(Ricoh|Lanier|Gestetner|InfoPrint|Infotech|Savin|NRG) ", item->ppd_make_and_model, 0, 0))
+    {
+      tmp1 = get_tag_value ("MFG", item->ppd_device_id);
+
+      if (tmp1 && g_regex_match_simple ("(Ricoh|Lanier|Gestetner|InfoPrint|Infotech|Savin|NRG)", tmp1, 0, 0) &&
+          ((g_strcmp0 (item->driver_type, "manufacturer-ricoh-postscript") == 0) ||
+           (g_strcmp0 (item->driver_type, "manufacturer-ricoh-pxl") == 0)))
+        return result;
+    }
+  result++;
+
+  if (item && item->ppd_make_and_model &&
+      g_regex_match_simple ("Xerox 6250DP", item->ppd_make_and_model, 0, 0))
+    {
+      tmp1 = get_tag_value ("MFG", item->ppd_device_id);
+      tmp2 = get_tag_value ("MDL", item->ppd_device_id);
+
+      if (tmp1 && g_regex_match_simple ("Xerox", tmp1, 0, 0) &&
+          tmp2 && g_regex_match_simple ("6250DP", tmp2, 0, 0))
+        {
+          if (item->driver_type && g_regex_match_simple ("gutenprint*", item->driver_type, 0, 0))
+            return result + 1000;
+          else
+            return result;
+        }
+    }
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "manufacturer-cmd") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "foomatic-recommended-hpijs") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "foomatic-recommended-non-postscript") == 0)
+    return result;
+  result++;
+
+  if (item && item->driver_type &&
+      g_regex_match_simple ("manufacturer*", item->driver_type, 0, 0))
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "foomatic-recommended-postscript") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "foomatic-postscript") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "hpcups") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "hpijs") == 0)
+    return result;
+  result++;
+
+  if (item && item->ppd_make_and_model &&
+      g_regex_match_simple ("(HP|Hewlett-Packard) ", item->ppd_make_and_model, 0, 0))
+    {
+      tmp1 = get_tag_value ("MFG", item->ppd_device_id);
+
+      if (tmp1 && g_regex_match_simple ("HP|Hewlett-Packard", tmp1, 0, 0) &&
+          g_strcmp0 (item->driver_type, "foomatic-hpijs") == 0)
+        return result;
+    }
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "gutenprint-simplified") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "gutenprint-expert") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "foomatic-hpijs") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "foomatic-gutenprint") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "foomatic") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "cups") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "generic-postscript") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "generic-foomatic-recommended") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "generic-pcl6") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "generic-pcl5c") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "generic-pcl5e") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "generic-pcl5") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "generic-pcl") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "foomatic-pxlmono") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "generic-escp") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "ghostscript") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "generic") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "hpcups-plugin") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "hpijs-plugin") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "splix") == 0)
+    return result;
+  result++;
+
+  if (item && g_strcmp0 (item->driver_type, "turboprint") == 0)
+    return result;
+  result++;
+
+  return result;
+}
+
+
+/*
+ * Compare driver types according to preference order.
+ * The most preferred driver is the lowest one.
+ * (see xml/preferreddrivers.xml from system-config-printer)
+ */
+static gint
+preference_value_cmp (gconstpointer a,
+                      gconstpointer b)
+{
+  PPDItem *c = (PPDItem *) a;
+  PPDItem *d = (PPDItem *) b;
+
+  if (c == NULL && d == NULL)
+    return 0;
+  else if (c == NULL)
+    return -1;
+  else if (d == NULL)
+    return 1;
+
+  if (c->preference_value < d->preference_value)
+    return -1;
+  else if (c->preference_value > d->preference_value)
+    return 1;
+  else
+    return 0;
+}
+
+
+/* Compare PPDItems a and b according to normalized model name */
+static gint
+item_cmp (gconstpointer a,
+          gconstpointer b)
+{
+  PPDItem *c = (PPDItem *) a;
+  PPDItem *d = (PPDItem *) b;
+  glong   a_number;
+  glong   b_number;
+  gchar  *a_normalized;
+  gchar  *b_normalized;
+  gchar **av = NULL;
+  gchar **bv = NULL;
+  gint    a_length = 0;
+  gint    b_length = 0;
+  gint    min_length;
+  gint    result = 0;
+  gint    i;
+
+  if (c && d)
+    {
+      a_normalized = normalize (c->mdl);
+      b_normalized = normalize (d->mdl);
+
+      if (a_normalized)
+        av = g_strsplit (a_normalized, " ", 0);
+
+      if (b_normalized)
+        bv = g_strsplit (b_normalized, " ", 0);
+
+      if (av)
+        a_length = g_strv_length (av);
+
+      if (bv)
+        b_length = g_strv_length (bv);
+
+      min_length = a_length < b_length ? a_length : b_length;
+
+      for (i = 0; i < min_length; i++)
+        {
+          if (g_ascii_isdigit (av[i][0]) && g_ascii_isdigit (bv[i][0]))
+            {
+              a_number = atol (av[i]);
+              b_number = atol (bv[i]);
+              if (a_number < b_number)
+                {
+                  result = -1;
+                  goto out;
+                }
+              else if (a_number > b_number)
+                {
+                  result = 1;
+                  goto out;
+                }
+            }
+          else if (g_ascii_isdigit (av[i][0]) && !g_ascii_isdigit (bv[i][0]))
+            {
+              result = -1;
+              goto out;
+            }
+          else if (!g_ascii_isdigit (av[i][0]) && g_ascii_isdigit (bv[i][0]))
+            {
+              result = 1;
+              goto out;
+            }
+          else
+            {
+              if (g_strcmp0 (av[i], bv[i]) != 0)
+                {
+                  result = g_strcmp0 (av[i], bv[i]);
+                  goto out;
+                }
+            }
+        }
+
+      if (a_length < b_length)
+        result = -1;
+      else if (a_length > b_length)
+        result = 1;
+    }
+
+out:
+  if (av)
+    g_strfreev (av);
+
+  if (bv)
+    g_strfreev (bv);
+
+  g_free (a_normalized);
+  g_free (b_normalized);
+
+  return result;
+}
+
+
+static gint
+get_prefix_length (gchar *a, gchar *b)
+{
+  gint a_length;
+  gint b_length;
+  gint min_length;
+  gint i;
+
+  if (a && b)
+    {
+      a_length = strlen (a);
+      b_length = strlen (b);
+      min_length = a_length < b_length ? a_length : b_length;
+
+      for (i = 0; i < min_length; i++)
+        {
+          if (a[i] != b[i])
+            return i;
+        }
+      return min_length;
+    }
+
+  return 0;
+}
+
+
+/*
+ * Append best matching ppds from list "ppds" to list "list"
+ * according to model name "model". Return the resulting list.
+ */
+static GList *
+append_best_ppds (GList *list,
+                  GList *ppds,
+                  gchar *model)
+{
+  PPDItem *item;
+  PPDItem *tmp_item;
+  PPDItem *best_item = NULL;
+  gchar   *mdl_normalized;
+  gchar   *mdl;
+  gchar   *tmp;
+  GList   *local_ppds;
+  GList   *actual_item;
+  GList   *candidates = NULL;
+  GList   *tmp_list = NULL;
+  GList   *result = NULL;
+  gint     best_prefix_length = -1;
+  gint     prefix_length;
+
+  result = list;
+
+  if (model)
+    {
+      mdl = g_ascii_strdown (model, -1);
+      if (g_str_has_suffix (mdl, " series"))
+        {
+          tmp = g_strndup (mdl, strlen (mdl) - 7);
+          g_free (mdl);
+          mdl = tmp;
+        }
+
+      mdl_normalized = normalize (mdl);
+
+      item = g_new0 (PPDItem, 1);
+      item->ppd_device_id = g_strdup_printf ("mdl:%s;", mdl);
+      item->mdl = mdl_normalized;
+
+      local_ppds = g_list_copy (ppds);
+      local_ppds = g_list_append (local_ppds, item);
+      local_ppds = g_list_sort (local_ppds, item_cmp);
+
+      actual_item = g_list_find (local_ppds, item);
+      if (actual_item)
+        {
+          if (actual_item->prev)
+            candidates = g_list_append (candidates, actual_item->prev->data);
+          if (actual_item->next)
+            candidates = g_list_append (candidates, actual_item->next->data);
+        }
+
+      for (tmp_list = candidates; tmp_list; tmp_list = tmp_list->next)
+        {
+          tmp_item = (PPDItem *) tmp_list->data;
+
+          prefix_length = get_prefix_length (tmp_item->mdl, mdl_normalized);
+          if (prefix_length > best_prefix_length)
+            {
+              best_prefix_length = prefix_length;
+              best_item = tmp_item;
+            }
+        }
+
+      if (best_item && best_prefix_length > strlen (mdl_normalized) / 2)
+        {
+          if (best_prefix_length == strlen (mdl_normalized))
+            best_item->match_level = PPD_EXACT_MATCH;
+          else
+            best_item->match_level = PPD_CLOSE_MATCH;
+
+          result = g_list_append (result, ppd_item_copy (best_item));
+        }
+      else
+        {
+          /* TODO the last resort (see _findBestMatchPPDs() in ppds.py) */
+        }
+
+      g_list_free (candidates);
+      g_list_free (local_ppds);
+
+      g_free (item->ppd_device_id);
+      g_free (item);
+      g_free (mdl);
+      g_free (mdl_normalized);
+    }
+
+  return result;
+}
+
+/*
+ * Return the best matching driver name
+ * for device described by given parameters.
+ */
+PPDName *
 get_ppd_name (gchar *device_class,
               gchar *device_id,
               gchar *device_info,
@@ -89,104 +802,343 @@ get_ppd_name (gchar *device_class,
               gchar *device_uri,
               gchar *device_location)
 {
-  http_t *http = NULL;
-  ipp_t  *request = NULL;
-  ipp_t  *response = NULL;
-  gchar  *mfg = NULL;
-  gchar  *mdl = NULL;
-  gchar  *result = NULL;
+  ipp_attribute_t *attr = NULL;
+  const gchar     *hp_equivalents[] = {"hp", "hewlett packard", NULL};
+  const gchar     *kyocera_equivalents[] = {"kyocera", "kyocera mita", NULL};
+  const gchar     *toshiba_equivalents[] = {"toshiba", "toshiba tec corp.", NULL};
+  const gchar     *lexmark_equivalents[] = {"lexmark", "lexmark international", NULL};
+  gboolean         ppd_exact_match_found = FALSE;
+  PPDItem         *item;
+  PPDName         *result = NULL;
+  http_t          *http = NULL;
+  ipp_t           *request = NULL;
+  ipp_t           *response = NULL;
+  GList           *tmp_list;
+  GList           *tmp_list2;
+  GList           *mdls = NULL;
+  GList           *list = NULL;
+  gchar           *mfg_normalized = NULL;
+  gchar           *mdl_normalized = NULL;
+  gchar           *eq_normalized = NULL;
+  gchar           *mfg = NULL;
+  gchar           *mdl = NULL;
+  gchar           *tmp = NULL;
+  gchar           *ppd_device_id;
+  gchar           *ppd_make_and_model;
+  gchar           *ppd_name;
+  gchar           *ppd_product;
+  gchar          **equivalents = NULL;
+  gint             i;
 
   mfg = get_tag_value (device_id, "mfg");
+  if (!mfg)
+    mfg = get_tag_value (device_id, "manufacturer");
+
   mdl = get_tag_value (device_id, "mdl");
+  if (!mdl)
+    mdl = get_tag_value (device_id, "model");
+
+  mfg_normalized = normalize (mfg);
+  mdl_normalized = normalize (mdl);
+
+  if (mfg_normalized && mfg)
+    {
+      if (g_str_has_prefix (mfg_normalized, "hewlett") ||
+          g_str_has_prefix (mfg_normalized, "hp"))
+        equivalents = strvdup (hp_equivalents);
+
+      if (g_str_has_prefix (mfg_normalized, "kyocera"))
+        equivalents = strvdup (kyocera_equivalents);
+
+      if (g_str_has_prefix (mfg_normalized, "toshiba"))
+        equivalents = strvdup (toshiba_equivalents);
+
+      if (g_str_has_prefix (mfg_normalized, "lexmark"))
+        equivalents = strvdup (lexmark_equivalents);
+
+      if (equivalents == NULL)
+        {
+          equivalents = g_new0 (gchar *, 2);
+          equivalents[0] = g_strdup (mfg);
+        }
+    }
 
   http = httpConnectEncrypt (cupsServer (),
                              ippPort (),
                              cupsEncryption ());
 
+  /* Find usable drivers for given device */
   if (http)
     {
-      request = ippNewRequest (CUPS_GET_PPDS);
+      /* Try exact match according to device-id */
       if (device_id)
-        ippAddString(request, IPP_TAG_OPERATION, IPP_TAG_TEXT, "ppd-device-id",
-                     NULL, device_id);
-      else if (mfg)
-        ippAddString(request, IPP_TAG_OPERATION, IPP_TAG_TEXT, "ppd-make",
-                     NULL, mfg);
-      response = cupsDoRequest (http, request, "/");
-
-      if (response)
         {
-          ipp_attribute_t *attr = NULL;
-          const char      *ppd_device_id;
-          const char      *ppd_make_model;
-          const char      *ppd_make;
-          const char      *ppd_name;
-          gchar           *ppd_mfg;
-          gchar           *ppd_mdl;
+          request = ippNewRequest (CUPS_GET_PPDS);
+          ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_TEXT,
+                        "ppd-device-id", NULL, device_id);
+          response = cupsDoRequest (http, request, "/");
 
-          for (attr = response->attrs; attr != NULL; attr = attr->next)
+          if (response &&
+              response->request.status.status_code <= IPP_OK_CONFLICT)
             {
-              while (attr != NULL && attr->group_tag != IPP_TAG_PRINTER)
-                attr = attr->next;
-
-              if (attr == NULL)
-                break;
-
-              ppd_device_id  = "NONE";
-              ppd_make_model = NULL;
-              ppd_make       = NULL;
-              ppd_name       = NULL;
-              ppd_mfg        = NULL;
-              ppd_mdl        = NULL;
-
-              while (attr != NULL && attr->group_tag == IPP_TAG_PRINTER)
+              for (attr = response->attrs; attr != NULL; attr = attr->next)
                 {
-                  if (!strcmp(attr->name, "ppd-device-id") &&
-                      attr->value_tag == IPP_TAG_TEXT)
-                    ppd_device_id = attr->values[0].string.text;
-                  else if (!strcmp(attr->name, "ppd-name") &&
-                           attr->value_tag == IPP_TAG_NAME)
-                    ppd_name = attr->values[0].string.text;
-                  else if (!strcmp(attr->name, "ppd-make") &&
-                           attr->value_tag == IPP_TAG_TEXT)
-                    ppd_make = attr->values[0].string.text;
-                  else if (!strcmp(attr->name, "ppd-make-and-model") &&
-                           attr->value_tag == IPP_TAG_TEXT)
-                    ppd_make_model = attr->values[0].string.text;
+                  while (attr != NULL && attr->group_tag != IPP_TAG_PRINTER)
+                    attr = attr->next;
 
-                  attr = attr->next;
-                }
+                  if (attr == NULL)
+                    break;
 
-              if (mfg && mdl && !result)
-                {
-                  if (ppd_device_id)
+                  ppd_device_id = NULL;
+                  ppd_make_and_model = NULL;
+                  ppd_name = NULL;
+                  ppd_product = NULL;
+
+                  while (attr != NULL && attr->group_tag == IPP_TAG_PRINTER)
                     {
-                      ppd_mfg = get_tag_value (ppd_device_id, "mfg");
+                      if (g_strcmp0 (attr->name, "ppd-device-id") == 0 &&
+                          attr->value_tag == IPP_TAG_TEXT)
+                        ppd_device_id = attr->values[0].string.text;
+                      else if (g_strcmp0 (attr->name, "ppd-make-and-model") == 0 &&
+                               attr->value_tag == IPP_TAG_TEXT)
+                        ppd_make_and_model = attr->values[0].string.text;
+                      else if (g_strcmp0 (attr->name, "ppd-name") == 0 &&
+                               attr->value_tag == IPP_TAG_NAME)
+                        ppd_name = attr->values[0].string.text;
+                      else if (g_strcmp0 (attr->name, "ppd-product") == 0 &&
+                               attr->value_tag == IPP_TAG_TEXT)
+                        ppd_product = attr->values[0].string.text;
 
-                      if (ppd_mfg && g_ascii_strcasecmp (ppd_mfg, mfg) == 0)
-                        {
-                          ppd_mdl = get_tag_value (ppd_device_id, "mdl");
-
-                          if (ppd_mdl && g_ascii_strcasecmp (ppd_mdl, mdl) == 0)
-                            {
-                              result = g_strdup (ppd_name);
-                              g_free (ppd_mdl);
-                            }
-                          g_free (ppd_mfg);
-                        }
+                      attr = attr->next;
                     }
-                }
 
-              if (attr == NULL)
+                  if (ppd_device_id && ppd_name)
+                    {
+                      item = g_new0 (PPDItem, 1);
+                      item->ppd_name = g_strdup (ppd_name);
+                      item->ppd_device_id = g_strdup (ppd_device_id);
+                      item->ppd_make_and_model = g_strdup (ppd_make_and_model);
+                      item->ppd_product = g_strdup (ppd_product);
+
+                      tmp = get_tag_value (ppd_device_id, "mfg");
+                      if (!tmp)
+                        tmp = get_tag_value (ppd_device_id, "manufacturer");
+                      item->mfg = normalize (tmp);
+                      g_free (tmp);
+
+                      tmp = get_tag_value (ppd_device_id, "mdl");
+                      if (!tmp)
+                        tmp = get_tag_value (ppd_device_id, "model");
+                      item->mdl = normalize (tmp);
+                      g_free (tmp);
+
+                      item->match_level = PPD_EXACT_CMD_MATCH;
+                      ppd_exact_match_found = TRUE;
+                      list = g_list_append (list, item);
+                    }
+
+                  if (attr == NULL)
+                    break;
+                }
+            }
+
+          if (response)
+            ippDelete(response);
+        }
+
+      /* Try match according to manufacturer and model fields */
+      if (!ppd_exact_match_found && mfg_normalized && mdl_normalized)
+        {
+          request = ippNewRequest (CUPS_GET_PPDS);
+          response = cupsDoRequest (http, request, "/");
+
+          if (response &&
+              response->request.status.status_code <= IPP_OK_CONFLICT)
+            {
+              for (i = 0; equivalents && equivalents[i]; i++)
+                {
+                  eq_normalized = normalize (equivalents[i]);
+                  for (attr = response->attrs; attr != NULL; attr = attr->next)
+                    {
+                      while (attr != NULL && attr->group_tag != IPP_TAG_PRINTER)
+                        attr = attr->next;
+
+                      if (attr == NULL)
+                        break;
+
+                      ppd_device_id = NULL;
+                      ppd_make_and_model = NULL;
+                      ppd_name = NULL;
+                      ppd_product = NULL;
+
+                      while (attr != NULL && attr->group_tag == IPP_TAG_PRINTER)
+                        {
+                          if (g_strcmp0 (attr->name, "ppd-device-id") == 0 &&
+                              attr->value_tag == IPP_TAG_TEXT)
+                            ppd_device_id = attr->values[0].string.text;
+                          else if (g_strcmp0 (attr->name, "ppd-make-and-model") == 0 &&
+                                   attr->value_tag == IPP_TAG_TEXT)
+                            ppd_make_and_model = attr->values[0].string.text;
+                          else if (g_strcmp0 (attr->name, "ppd-name") == 0 &&
+                                   attr->value_tag == IPP_TAG_NAME)
+                            ppd_name = attr->values[0].string.text;
+                          else if (g_strcmp0 (attr->name, "ppd-product") == 0 &&
+                                   attr->value_tag == IPP_TAG_TEXT)
+                            ppd_product = attr->values[0].string.text;
+
+                          attr = attr->next;
+                        }
+
+                      if (ppd_device_id && ppd_name)
+                        {
+                          item = g_new0 (PPDItem, 1);
+                          item->ppd_name = g_strdup (ppd_name);
+                          item->ppd_device_id = g_strdup (ppd_device_id);
+                          item->ppd_make_and_model = g_strdup (ppd_make_and_model);
+                          item->ppd_product = g_strdup (ppd_product);
+
+                          tmp = get_tag_value (ppd_device_id, "mfg");
+                          if (!tmp)
+                            tmp = get_tag_value (ppd_device_id, "manufacturer");
+                          item->mfg = normalize (tmp);
+                          g_free (tmp);
+
+                          tmp = get_tag_value (ppd_device_id, "mdl");
+                          if (!tmp)
+                            tmp = get_tag_value (ppd_device_id, "model");
+                          item->mdl = normalize (tmp);
+                          g_free (tmp);
+
+                          if (item->mdl && item->mfg &&
+                              g_ascii_strcasecmp (item->mdl, mdl_normalized) == 0 &&
+                              g_ascii_strcasecmp (item->mfg, eq_normalized) == 0)
+                            {
+                              item->match_level = PPD_EXACT_MATCH;
+                              ppd_exact_match_found = TRUE;
+                            }
+
+                          if (item->match_level == PPD_EXACT_MATCH)
+                            list = g_list_append (list, item);
+                          else if (item->mfg &&
+                                   g_ascii_strcasecmp (item->mfg, eq_normalized) == 0)
+                            mdls = g_list_append (mdls, item);
+                          else
+                            {
+                              ppd_item_free (item);
+                              g_free (item);
+                            }
+                        }
+
+                      if (attr == NULL)
+                        break;
+                    }
+
+                  g_free (eq_normalized);
+                }
+            }
+
+          if (response)
+            ippDelete(response);
+        }
+
+      httpClose (http);
+    }
+
+  if (list == NULL)
+    list = append_best_ppds (list, mdls, mdl);
+
+  /* Find out driver types for all listed drivers and set their preference values */
+  for (tmp_list = list; tmp_list; tmp_list = tmp_list->next)
+    {
+      item = (PPDItem *) tmp_list->data;
+      if (item)
+        {
+          item->driver_type = get_driver_type (item->ppd_name,
+                                               item->ppd_device_id,
+                                               item->ppd_make_and_model,
+                                               item->ppd_product,
+                                               item->match_level);
+          item->preference_value = get_driver_preference (item);
+        }
+    }
+
+  /* Sort driver list according to preference value */
+  list = g_list_sort (list, preference_value_cmp);
+
+  /* Split blacklisted drivers to tmp_list */
+  for (tmp_list = list; tmp_list; tmp_list = tmp_list->next)
+    {
+      item = (PPDItem *) tmp_list->data;
+      if (item && item->preference_value >= 2000)
+        break;
+    }
+
+  /* Free tmp_list */
+  if (tmp_list)
+    {
+      if (tmp_list->prev)
+        tmp_list->prev->next = NULL;
+      else
+        list = NULL;
+
+      tmp_list->prev = NULL;
+      for (tmp_list2 = tmp_list; tmp_list2; tmp_list2 = tmp_list2->next)
+        {
+          item = (PPDItem *) tmp_list2->data;
+          ppd_item_free (item);
+          g_free (item);
+        }
+
+      g_list_free (tmp_list);
+    }
+
+  /* Free driver list and set the best one */
+  if (list)
+    {
+      item = (PPDItem *) list->data;
+      if (item)
+        {
+          result = g_new0 (PPDName, 1);
+          result->ppd_name = g_strdup (item->ppd_name);
+          result->ppd_match_level = item->match_level;
+          switch (item->match_level)
+            {
+              case PPD_GENERIC_MATCH:
+              case PPD_CLOSE_MATCH:
+                g_warning ("Found PPD does not match given device exactly!");
+                break;
+              default:
                 break;
             }
-          ippDelete(response);
         }
-      httpClose (http);
+
+      for (tmp_list = list; tmp_list; tmp_list = tmp_list->next)
+        {
+          item = (PPDItem *) tmp_list->data;
+          ppd_item_free (item);
+          g_free (item);
+        }
+
+      g_list_free (list);
+    }
+
+  if (mdls)
+    {
+      for (tmp_list = mdls; tmp_list; tmp_list = tmp_list->next)
+        {
+          item = (PPDItem *) tmp_list->data;
+          ppd_item_free (item);
+          g_free (item);
+        }
+      g_list_free (mdls);
     }
 
   g_free (mfg);
   g_free (mdl);
+  g_free (mfg_normalized);
+  g_free (mdl_normalized);
+  if (equivalents)
+    g_strfreev (equivalents);
 
   return result;
 }
