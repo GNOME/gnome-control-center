@@ -265,12 +265,17 @@ devices_get_cb (GObject      *source_object,
                 gpointer      user_data)
 {
   PpNewPrinterDialog *pp = user_data;
+  cups_dest_t        *dests;
   GHashTable         *devices = NULL;
   GtkWidget          *widget = NULL;
   GVariant           *dg_output = NULL;
+  gboolean            already_present;
   GError             *error = NULL;
+  gchar              *new_name = NULL;
   char               *ret_error = NULL;
   gint                i, j;
+  gint                name_index;
+  gint                num_dests;
 
   dg_output = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
                                         res,
@@ -374,6 +379,34 @@ devices_get_cb (GObject      *source_object,
                       if (name)
                         name = g_strcanon (name, ALLOWED_CHARACTERS, '-');
                     }
+
+                  name_index = 2;
+                  already_present = FALSE;
+                  num_dests = cupsGetDests (&dests);
+                  do
+                    {
+                      if (already_present)
+                        {
+                          new_name = g_strdup_printf ("%s-%d", name, name_index);
+                          name_index++;
+                        }
+                      else
+                        new_name = g_strdup (name);
+
+                      already_present = FALSE;
+                      for (j = 0; j < num_dests; j++)
+                        if (g_strcmp0 (dests[j].name, new_name) == 0)
+                          already_present = TRUE;
+
+                      if (already_present)
+                        g_free (new_name);
+                      else
+                        {
+                          g_free (name);
+                          name = new_name;
+                        }
+                    } while (already_present);
+                  cupsFreeDests (num_dests, dests);
 
                   pp->devices[i].display_name = name;
                 }
@@ -815,14 +848,16 @@ new_printer_add_button_cb (GtkButton *button,
   PpNewPrinterDialog *pp = (PpNewPrinterDialog*) user_data;
   GtkResponseType     dialog_response = GTK_RESPONSE_OK;
   GtkTreeModel       *model;
+  cups_dest_t        *dests;
   GtkTreeIter         iter;
   GtkWidget          *treeview;
   gboolean            success = FALSE;
-  gchar              *device_name = NULL;
   PPDName            *ppd_name = NULL;
+  gchar              *device_name = NULL;
   gint                device_id = -1;
   gint                device_type = -1;
   gint                i, j, k;
+  int                 num_dests;
 
   treeview = (GtkWidget*)
     gtk_builder_get_object (pp->builder, "device-types-treeview");
@@ -1029,8 +1064,6 @@ new_printer_add_button_cb (GtkButton *button,
 
                       g_clear_error (&error);
                     }
-                  else
-                    success = TRUE;
 
                   g_object_unref (proxy);
                 }
@@ -1038,6 +1071,12 @@ new_printer_add_button_cb (GtkButton *button,
               g_free (ppd_name->ppd_name);
               g_free (ppd_name);
             }
+
+          num_dests = cupsGetDests (&dests);
+          for (i = 0; i < num_dests; i++)
+            if (g_strcmp0 (dests[i].name, pp->devices[device_id].display_name) == 0)
+              success = TRUE;
+          cupsFreeDests (num_dests, dests);
         }
 
       /* Set some options of the new printer */
