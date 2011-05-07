@@ -530,7 +530,6 @@ enroll_fingerprints (GtkWindow *parent,
         const char *filename;
         char *msg;
         GError *error = NULL;
-        GdkPixbuf *pixbuf;
         gchar *title;
 
         device = NULL;
@@ -625,17 +624,12 @@ enroll_fingerprints (GtkWindow *parent,
 
         gtk_assistant_set_page_complete (GTK_ASSISTANT (ass), WID("page1"), TRUE);
 
-        pixbuf = um_user_render_icon (user, FALSE, 48);
         title = g_strdup_printf (_("Enrolling fingerprints for\n<b><big>%s</big></b>"), um_user_get_real_name (user));
 
-        gtk_assistant_set_page_header_image (GTK_ASSISTANT (ass), WID("page1"), pixbuf);
         gtk_assistant_set_page_title (GTK_ASSISTANT (ass), WID("page1"), title);
-        gtk_assistant_set_page_header_image (GTK_ASSISTANT (ass), WID("page2"), pixbuf);
         gtk_assistant_set_page_title (GTK_ASSISTANT (ass), WID("page2"), title);
-        gtk_assistant_set_page_header_image (GTK_ASSISTANT (ass), WID("page3"), pixbuf);
         gtk_assistant_set_page_title (GTK_ASSISTANT (ass), WID("page3"), title);
         gtk_container_forall (GTK_CONTAINER (ass), align_image, NULL);
-        g_object_unref (pixbuf);
         g_free (title);
 
         /* Page 2 */
