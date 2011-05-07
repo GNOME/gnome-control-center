@@ -32,7 +32,6 @@
 
 #include <math.h>
 
-#include "libgnome-control-center/cc-lockbutton.h"
 #include "pp-new-printer-dialog.h"
 #include "pp-utils.h"
 
@@ -2630,7 +2629,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
     "org.opensuse.cupspkhelper.mechanism.all-edit", NULL, NULL, NULL);
   if (priv->permission != NULL)
     {
-      widget = cc_lock_button_new (priv->permission);
+      widget = gtk_lock_button_new (priv->permission);
       gtk_widget_set_margin_top (widget, 12);
       gtk_widget_show (widget);
       box = (GtkWidget*) gtk_builder_get_object (priv->builder, "main-vbox");
