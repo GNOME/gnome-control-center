@@ -1,7 +1,7 @@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
-SUBDIRS = po libgnome-control-center shell panels help
-DIST_SUBDIRS = po help shell panels libgnome-control-center
+SUBDIRS = po libgnome-control-center shell panels setup help
+DIST_SUBDIRS = po help shell panels setup libgnome-control-center
 
 DISTCLEANFILES = \
 	gnome-doc-utils.make

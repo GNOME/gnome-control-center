@@ -91,6 +91,7 @@ PKG_CHECK_MODULES(LIBGNOME_CONTROL_CENTER, $COMMON_MODULES gconf-2.0)
 PKG_CHECK_MODULES(LIBLANGUAGE, $COMMON_MODULES gnome-desktop-3.0)
 PKG_CHECK_MODULES(LIBSHORTCUTS, $COMMON_MODULES x11)
 PKG_CHECK_MODULES(SHELL, $COMMON_MODULES libgnome-menu gio-unix-2.0)
+PKG_CHECK_MODULES(SETUP, $COMMON_MODULES)
 PKG_CHECK_MODULES(BACKGROUND_PANEL, $COMMON_MODULES libxml-2.0 gnome-desktop-3.0
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
 PKG_CHECK_MODULES(DATETIME_PANEL, $COMMON_MODULES dbus-glib-1
@@ -199,6 +200,8 @@ if test x"$GLIB_GENMARSHAL" = xno; then
 fi
 
 AC_SUBST(GLIB_GENMARSHAL)
+
+GLIB_GSETTINGS
 
 dnl =======================================
 dnl Panels
@@ -370,6 +373,7 @@ panels/user-accounts/data/icons/Makefile
 po/Makefile.in
 shell/Makefile
 shell/gnome-control-center.desktop.in
+setup/Makefile
 ])
 
 dnl due to a bug in intltool we need to expand something from the root last control-center.spec

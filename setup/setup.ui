@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<interface>
+  <requires lib="gtk+" version="3.0"/>
+  <object class="GtkAssistant" id="gnome-setup-assistant">
+    <!-- interface-naming-policy toplevel-contextual -->
+    <property name="border-width">12</property>
+    <property name="title"></property>
+    <property name="icon_name">preferences-system</property>
+    <property name="visible">False</property>
+    <property name="deletable">False</property>
+    <child>
+      <object class="GtkBox" id="welcome-page">
+        <property name="visible">True</property>
+        <property name="border_width">12</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">12</property>
+        <child>
+          <object class="GtkLabel" id="welcome-title">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Welcome to GNOME</property>
+            <property name="halign">start</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+              <attribute name="scale" value="1.2"/>
+            </attributes>
+          </object>
+        </child>
+        <child>
+          <object class="GtkImage" id="welcome-image">
+            <property name="visible">True</property>
+            <property name="file">welcome-image.jpg</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="welcome-subtitle">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Now let's set up some essentials for your account.</property>
+            <property name="halign">start</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+            </attributes>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="title" translatable="yes">Introduction</property>
+        <property name="page-type">intro</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="network-page">
+        <property name="visible">True</property>
+        <property name="border_width">12</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">12</property>
+        <child>
+          <object class="GtkLabel" id="network-title">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Connect to the Network</property>
+            <property name="halign">start</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+              <attribute name="scale" value="1.2"/>
+            </attributes>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="network-subtitle">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Select a wireless network</property>
+            <property name="halign">start</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+            </attributes>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="title" translatable="yes">Network</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="account-page">
+        <property name="visible">True</property>
+        <property name="border_width">12</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">12</property>
+        <child>
+          <object class="GtkLabel" id="account-title">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Create an Account</property>
+            <property name="halign">start</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+              <attribute name="scale" value="1.2"/>
+            </attributes>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="title" translatable="yes">Account</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="location-page">
+        <property name="visible">True</property>
+        <property name="border_width">12</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">12</property>
+        <child>
+          <object class="GtkLabel" id="location-title">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Select your Location</property>
+            <property name="halign">start</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+              <attribute name="scale" value="1.2"/>
+            </attributes>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="title" translatable="yes">Location</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="online-page">
+        <property name="visible">True</property>
+        <property name="border_width">12</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">12</property>
+        <child>
+          <object class="GtkLabel" id="online-title">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Web Accounts</property>
+            <property name="halign">start</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+              <attribute name="scale" value="1.2"/>
+            </attributes>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="online-subtitle">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Associate your new account with your existing online accounts</property>
+            <property name="halign">start</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+            </attributes>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="title" translatable="yes">Web Accounts</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="page6">
+        <property name="visible">True</property>
+        <property name="border_width">12</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">12</property>
+        <child>
+          <object class="GtkLabel" id="summary-title">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Enjoy GNOME !</property>
+            <property name="halign">start</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+              <attribute name="scale" value="1.2"/>
+            </attributes>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="summary-details">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Your new account is ready to use. You may change any of these options at any time in the System Settings.</property>
+            <property name="wrap">True</property>
+            <property name="halign">start</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+              <attribute name="scale" value="1.2"/>
+            </attributes>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="title" translatable="yes">Summary</property>
+        <property name="page-type">summary</property>
+      </packing>
+    </child>
+  </object>
+</interface>
