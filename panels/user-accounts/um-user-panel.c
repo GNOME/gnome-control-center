@@ -116,6 +116,14 @@ get_selected_user (UmUserPanelPrivate *d)
         return NULL;
 }
 
+static char *
+get_name_col_str (UmUser *user)
+{
+        return g_markup_printf_escaped ("<b>%s</b>\n<i>%s</i>",
+                                        um_user_get_display_name (user),
+                                        um_account_type_get_name (um_user_get_account_type (user)));
+}
+
 static void
 user_added (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
 {
@@ -128,7 +136,6 @@ user_added (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
         gchar *text;
         GtkTreeSelection *selection;
         gint sort_key;
-        gchar *escaped_name;
         gboolean is_autologin;
 
         g_debug ("user added: %d %s\n", um_user_get_uid (user), um_user_get_real_name (user));
@@ -138,11 +145,7 @@ user_added (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
 
         pixbuf = um_user_render_icon (user, TRUE, 48);
-        escaped_name = g_markup_escape_text (um_user_get_display_name (user), -1);
-        text = g_strdup_printf ("<b>%s</b>\n<i>%s</i>",
-                                escaped_name,
-                                um_account_type_get_name (um_user_get_account_type (user)));
-        g_free (escaped_name);
+        text = get_name_col_str (user);
 
         is_autologin = um_user_get_automatic_login (user);
 
@@ -269,9 +272,7 @@ user_changed (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
                 gtk_tree_model_get (model, &iter, USER_COL, &current, -1);
                 if (current == user) {
                         pixbuf = um_user_render_icon (user, TRUE, 48);
-                        text = g_strdup_printf ("<b>%s</b>\n<i>%s</i>",
-                                                um_user_get_display_name (user),
-                                                um_account_type_get_name (um_user_get_account_type (user)));
+                        text = get_name_col_str (user);
                         is_autologin = um_user_get_automatic_login (user);
 
                         gtk_list_store_set (GTK_LIST_STORE (model), &iter,
