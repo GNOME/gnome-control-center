@@ -38,7 +38,7 @@
 #define GNOME_SESSION_MANAGER_SCHEMA        "org.gnome.desktop.session"
 #define KEY_SESSION_NAME          "session-name"
 
-#define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
+#define WID(w) (GtkWidget *) gtk_builder_get_object (self->priv->builder, w)
 
 G_DEFINE_DYNAMIC_TYPE (CcInfoPanel, cc_info_panel, CC_TYPE_PANEL)
 
@@ -628,7 +628,7 @@ get_primary_disc_info_start (CcInfoPanel *self)
       GtkWidget *widget;
 
       size = format_size_for_display (self->priv->total_bytes);
-      widget = WID (self->priv->builder, "disk_label");
+      widget = WID ("disk_label");
       gtk_label_set_text (GTK_LABEL (widget), size);
       g_free (size);
 
@@ -796,7 +796,7 @@ on_section_changed (GtkTreeSelection  *selection,
 
   if (index >= 0)
     {
-      g_object_set (G_OBJECT (WID (self->priv->builder, "notebook")),
+      g_object_set (G_OBJECT (WID ("notebook")),
                     "page", index, NULL);
     }
 
@@ -822,7 +822,7 @@ toggle_fallback_warning_label (CcInfoPanel *self,
   GtkWidget  *widget;
   const char *text;
 
-  widget = WID (self->priv->builder, "graphics_logout_warning_label");
+  widget = WID ("graphics_logout_warning_label");
 
   if (self->priv->is_fallback)
     text = _("The next login will attempt to use the standard experience.");
@@ -861,7 +861,7 @@ info_panel_setup_graphics (CcInfoPanel  *self)
   GtkSwitch *sw;
   char *text;
 
-  widget = WID (self->priv->builder, "graphics_driver_label");
+  widget = WID ("graphics_driver_label");
   gtk_label_set_markup (GTK_LABEL (widget), self->priv->graphics_data->hardware_string);
 
   self->priv->is_fallback = get_current_is_fallback (self);
@@ -877,11 +877,11 @@ info_panel_setup_graphics (CcInfoPanel  *self)
        * shell, also called "Standard" experience */
       text = g_strdup (C_("Experience", "Standard"));
     }
-  widget = WID (self->priv->builder, "graphics_experience_label");
+  widget = WID ("graphics_experience_label");
   gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
   g_free (text);
 
-  widget = WID (self->priv->builder, "graphics_fallback_switch_box");
+  widget = WID ("graphics_fallback_switch_box");
   sw = GTK_SWITCH (gtk_switch_new ());
   g_settings_bind_with_mapping (self->priv->session_settings, KEY_SESSION_NAME,
                                 sw, "active", 0,
@@ -937,7 +937,7 @@ info_panel_setup_default_app (CcInfoPanel *self,
   GAppInfo  *info;
   GError    *error = NULL;
 
-  table = WID (self->priv->builder, "default_apps_table");
+  table = WID ("default_apps_table");
 
   /* FIXME: We need to do this because GtkAppChooser doesn't
    * give us the opportunity to select what app should be selected
@@ -995,7 +995,7 @@ info_panel_setup_selector (CcInfoPanel  *self)
   GtkTreeIter iter;
   int section_name_column = 0;
 
-  view = GTK_TREE_VIEW (WID (self->priv->builder, "overview_treeview"));
+  view = GTK_TREE_VIEW (WID ("overview_treeview"));
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (view));
 
   model = gtk_list_store_new (1, G_TYPE_STRING);
@@ -1051,7 +1051,7 @@ info_panel_setup_overview (CcInfoPanel  *self)
                             &self->priv->gnome_date);
   if (res)
     {
-      widget = WID (self->priv->builder, "version_label");
+      widget = WID ("version_label");
       text = g_strdup_printf (_("Version %s"), self->priv->gnome_version);
       gtk_label_set_text (GTK_LABEL (widget), text);
       g_free (text);
@@ -1059,28 +1059,28 @@ info_panel_setup_overview (CcInfoPanel  *self)
 
   glibtop_get_mem (&mem);
   text = g_format_size_for_display (mem.total);
-  widget = WID (self->priv->builder, "memory_label");
+  widget = WID ("memory_label");
   gtk_label_set_text (GTK_LABEL (widget), text ? text : "");
   g_free (text);
 
   info = glibtop_get_sysinfo ();
 
-  widget = WID (self->priv->builder, "processor_label");
+  widget = WID ("processor_label");
   text = get_cpu_info (info);
   gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
   g_free (text);
 
-  widget = WID (self->priv->builder, "os_type_label");
+  widget = WID ("os_type_label");
   text = get_os_type ();
   gtk_label_set_text (GTK_LABEL (widget), text ? text : "");
   g_free (text);
 
   get_primary_disc_info (self);
 
-  widget = WID (self->priv->builder, "graphics_label");
+  widget = WID ("graphics_label");
   gtk_label_set_markup (GTK_LABEL (widget), self->priv->graphics_data->hardware_string);
 
-  widget = WID (self->priv->builder, "info_vbox");
+  widget = WID ("info_vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
 }
 
@@ -1089,7 +1089,7 @@ refresh_update_button (CcInfoPanel  *self)
 {
   GtkWidget *widget;
 
-  widget = WID (self->priv->builder, "updates_button");
+  widget = WID ("updates_button");
   if (self->priv->updates_available)
     gtk_widget_show (widget);
   else
@@ -1279,7 +1279,7 @@ cc_info_panel_init (CcInfoPanel *self)
 
   self->priv->graphics_data = get_graphics_data ();
 
-  widget = WID (self->priv->builder, "updates_button");
+  widget = WID ("updates_button");
   g_signal_connect (widget, "clicked", G_CALLBACK (on_updates_button_clicked), self);
 
   info_panel_setup_selector (self);
