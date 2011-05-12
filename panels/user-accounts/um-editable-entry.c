@@ -36,6 +36,8 @@ struct _UmEditableEntryPrivate {
         gboolean weight_set;
         gdouble scale;
         gboolean scale_set;
+
+        gboolean in_stop_editing;
 };
 
 #define UM_EDITABLE_ENTRY_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), UM_TYPE_EDITABLE_ENTRY, UmEditableEntryPrivate))
@@ -53,6 +55,12 @@ enum {
 enum {
         EDITING_DONE,
         LAST_SIGNAL
+};
+
+enum {
+        PAGE_LABEL,
+        PAGE_BUTTON,
+        PAGE_ENTRY
 };
 
 static guint signals [LAST_SIGNAL] = { 0, };
@@ -102,7 +110,7 @@ um_editable_entry_set_editable (UmEditableEntry *e,
         if (priv->editable != editable) {
                 priv->editable = editable;
 
-                gtk_notebook_set_current_page (priv->notebook, editable ? 1 : 0);
+                gtk_notebook_set_current_page (priv->notebook, editable ? PAGE_BUTTON : PAGE_LABEL);
 
                 g_object_notify (G_OBJECT (e), "editable");
         }
@@ -366,22 +374,29 @@ um_editable_entry_class_init (UmEditableEntryClass *class)
 static void
 start_editing (UmEditableEntry *e)
 {
-        gtk_notebook_set_current_page (e->priv->notebook, 2);
+        gtk_notebook_set_current_page (e->priv->notebook, PAGE_ENTRY);
 }
 
 static void
 stop_editing (UmEditableEntry *e)
 {
+        /* Avoid launching another "editing-done" signal
+         * caused by the notebook page change */
+        if (e->priv->in_stop_editing)
+                return;
+
+        e->priv->in_stop_editing = TRUE;
+        gtk_notebook_set_current_page (e->priv->notebook, PAGE_BUTTON);
         um_editable_entry_set_text (e, gtk_entry_get_text (e->priv->entry));
-        gtk_notebook_set_current_page (e->priv->notebook, 1);
         g_signal_emit (e, signals[EDITING_DONE], 0);
+        e->priv->in_stop_editing = FALSE;
 }
 
 static void
 cancel_editing (UmEditableEntry *e)
 {
         gtk_entry_set_text (e->priv->entry, um_editable_entry_get_text (e));
-        gtk_notebook_set_current_page (e->priv->notebook, 1);
+        gtk_notebook_set_current_page (e->priv->notebook, PAGE_BUTTON);
 }
 
 static void
@@ -453,10 +468,12 @@ um_editable_entry_init (UmEditableEntry *e)
         gtk_notebook_set_show_tabs (priv->notebook, FALSE);
         gtk_notebook_set_show_border (priv->notebook, FALSE);
 
+        /* Label */
         priv->label = (GtkLabel*)gtk_label_new (EMPTY_TEXT);
         gtk_misc_set_alignment (GTK_MISC (priv->label), 0.0, 0.5);
         gtk_notebook_append_page (priv->notebook, (GtkWidget*)priv->label, NULL);
 
+        /* Button */
         priv->button = (GtkButton*)gtk_button_new_with_label (EMPTY_TEXT);
         gtk_widget_set_receives_default ((GtkWidget*)priv->button, TRUE);
         gtk_button_set_relief (priv->button, GTK_RELIEF_NONE);
@@ -464,6 +481,7 @@ um_editable_entry_init (UmEditableEntry *e)
         gtk_notebook_append_page (priv->notebook, (GtkWidget*)priv->button, NULL);
         g_signal_connect (priv->button, "clicked", G_CALLBACK (button_clicked), e);
 
+        /* Entry */
         priv->entry = (GtkEntry*)gtk_entry_new ();
         gtk_notebook_append_page (priv->notebook, (GtkWidget*)priv->entry, NULL);
 
@@ -480,7 +498,7 @@ um_editable_entry_init (UmEditableEntry *e)
         gtk_widget_show ((GtkWidget*)priv->button);
         gtk_widget_show ((GtkWidget*)priv->entry);
 
-        gtk_notebook_set_current_page (priv->notebook, 0);
+        gtk_notebook_set_current_page (priv->notebook, PAGE_LABEL);
 }
 
 GtkWidget *
