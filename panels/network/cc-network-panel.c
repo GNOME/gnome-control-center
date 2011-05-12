@@ -786,8 +786,7 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
         /* is this what we're on already? */
         if (active == NULL)
                 return;
-        if (g_strcmp0 (object_path,
-                       nm_object_get_path (NM_OBJECT (active))) == 0) {
+        if (nm_utils_same_ssid (ssid, nm_access_point_get_ssid (active), TRUE)) {
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                              "combobox_wireless_network_name"));
                 gtk_combo_box_set_active_iter (GTK_COMBO_BOX (widget), &treeiter);
