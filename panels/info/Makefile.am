@@ -8,6 +8,7 @@ INCLUDES = 						\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DDATADIR="\"$(datadir)\""			\
 	-DLIBEXECDIR="\"$(libexecdir)\""		\
+	-I$(top_srcdir)/libgnome-control-center/	\
 	$(NULL)
 
 ccpanelsdir = $(PANELS_DIR)
