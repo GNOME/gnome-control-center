@@ -11,13 +11,25 @@ INCLUDES = 						\
 	-I$(top_srcdir)/libgnome-control-center/	\
 	$(NULL)
 
+noinst_PROGRAMS = test-hostname
+test_hostname_SOURCES = hostname-helper.c hostname-helper.h test-hostname.c
+test_hostname_LDADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
+test_hostname_CFLAGS = $(INCLUDES)
+
+all-local: check-local
+
+check-local: test-hostname
+	$(builddir)/test-hostname > /dev/null
+
 ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libinfo.la
 
 libinfo_la_SOURCES =		\
 	info-module.c		\
-	cc-info-panel.c	\
-	cc-info-panel.h
+	cc-info-panel.c		\
+	cc-info-panel.h		\
+	hostname-helper.c	\
+	hostname-helper.h
 
 libinfo_la_LIBADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
 libinfo_la_LDFLAGS = $(PANEL_LDFLAGS)
