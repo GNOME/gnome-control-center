@@ -14,6 +14,7 @@ AM_CPPFLAGS =						\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
 	-DUM_PIXMAP_DIR=\""$(pkgdatadir)/pixmaps"\"	\
 	-I$(srcdir)/../common/				\
+	-I$(top_srcdir)/libgnome-control-center/	\
 	$(PANEL_CFLAGS)					\
 	$(USER_ACCOUNTS_PANEL_CFLAGS)			\
 	$(DISABLE_DEPRECATED)
@@ -59,8 +60,6 @@ libuser_accounts_la_SOURCES =		\
 	$(MARSHALFILES)			\
 	um-editable-button.h		\
 	um-editable-button.c		\
-	um-editable-entry.h		\
-	um-editable-entry.c		\
 	um-editable-combo.h		\
 	um-editable-combo.c		\
 	um-user-panel.h 		\

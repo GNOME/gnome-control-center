@@ -45,7 +45,7 @@
 
 #include "um-strength-bar.h"
 #include "um-editable-button.h"
-#include "um-editable-entry.h"
+#include "cc-editable-entry.h"
 #include "um-editable-combo.h"
 
 #include "um-account-dialog.h"
@@ -569,7 +569,7 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
         um_photo_dialog_set_user (d->photo_dialog, user);
 
         widget = get_widget (d, "full-name-entry");
-        um_editable_entry_set_text (UM_EDITABLE_ENTRY (widget), um_user_get_real_name (user));
+        cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), um_user_get_real_name (user));
         gtk_widget_set_tooltip_text (widget, um_user_get_user_name (user));
 
         widget = get_widget (d, "account-type-combo");
@@ -636,7 +636,7 @@ change_name_done (GtkWidget          *entry,
 
         user = get_selected_user (d);
 
-        text = um_editable_entry_get_text (UM_EDITABLE_ENTRY (entry));
+        text = cc_editable_entry_get_text (CC_EDITABLE_ENTRY (entry));
 
         if (g_strcmp0 (text, um_user_get_real_name (user)) != 0) {
                 um_user_set_real_name (user, text);
@@ -956,7 +956,7 @@ on_permission_changed (GPermission *permission,
                 gtk_widget_show (get_widget (d, "user-icon-button"));
                 gtk_widget_hide (get_widget (d, "user-icon-nonbutton"));
 
-                um_editable_entry_set_editable (UM_EDITABLE_ENTRY (get_widget (d, "full-name-entry")), TRUE);
+                cc_editable_entry_set_editable (CC_EDITABLE_ENTRY (get_widget (d, "full-name-entry")), TRUE);
                 remove_unlock_tooltip (get_widget (d, "full-name-entry"));
 
                 um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-language-combo")), TRUE);
@@ -971,7 +971,7 @@ on_permission_changed (GPermission *permission,
                 gtk_widget_hide (get_widget (d, "user-icon-button"));
                 gtk_widget_show (get_widget (d, "user-icon-nonbutton"));
 
-                um_editable_entry_set_editable (UM_EDITABLE_ENTRY (get_widget (d, "full-name-entry")), FALSE);
+                cc_editable_entry_set_editable (CC_EDITABLE_ENTRY (get_widget (d, "full-name-entry")), FALSE);
                 add_unlock_tooltip (get_widget (d, "full-name-entry"));
 
                 um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-language-combo")), FALSE);
@@ -1240,7 +1240,7 @@ um_user_panel_init (UmUserPanel *self)
         /* register types that the builder might need */
         type = um_strength_bar_get_type ();
         type = um_editable_button_get_type ();
-        type = um_editable_entry_get_type ();
+        type = cc_editable_entry_get_type ();
         type = um_editable_combo_get_type ();
 
         gtk_widget_set_size_request (GTK_WIDGET (self), -1, 350);

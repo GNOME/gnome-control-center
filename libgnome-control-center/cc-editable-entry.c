@@ -20,11 +20,11 @@
  */
 
 #include <gdk/gdkkeysyms.h>
-#include "um-editable-entry.h"
+#include "cc-editable-entry.h"
 
 #define EMPTY_TEXT "\xe2\x80\x94"
 
-struct _UmEditableEntryPrivate {
+struct _CcEditableEntryPrivate {
         GtkNotebook *notebook;
         GtkLabel    *label;
         GtkButton   *button;
@@ -40,7 +40,7 @@ struct _UmEditableEntryPrivate {
         gboolean in_stop_editing;
 };
 
-#define UM_EDITABLE_ENTRY_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), UM_TYPE_EDITABLE_ENTRY, UmEditableEntryPrivate))
+#define CC_EDITABLE_ENTRY_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), CC_TYPE_EDITABLE_ENTRY, CcEditableEntryPrivate))
 
 enum {
         PROP_0,
@@ -65,13 +65,13 @@ enum {
 
 static guint signals [LAST_SIGNAL] = { 0, };
 
-G_DEFINE_TYPE (UmEditableEntry, um_editable_entry, GTK_TYPE_ALIGNMENT);
+G_DEFINE_TYPE (CcEditableEntry, cc_editable_entry, GTK_TYPE_ALIGNMENT);
 
 void
-um_editable_entry_set_text (UmEditableEntry *e,
+cc_editable_entry_set_text (CcEditableEntry *e,
                              const gchar    *text)
 {
-        UmEditableEntryPrivate *priv;
+        CcEditableEntryPrivate *priv;
         gchar *tmp;
         GtkWidget *label;
 
@@ -94,16 +94,16 @@ um_editable_entry_set_text (UmEditableEntry *e,
 }
 
 const gchar *
-um_editable_entry_get_text (UmEditableEntry *e)
+cc_editable_entry_get_text (CcEditableEntry *e)
 {
         return e->priv->text;
 }
 
 void
-um_editable_entry_set_editable (UmEditableEntry *e,
+cc_editable_entry_set_editable (CcEditableEntry *e,
                                  gboolean        editable)
 {
-        UmEditableEntryPrivate *priv;
+        CcEditableEntryPrivate *priv;
 
         priv = e->priv;
 
@@ -117,16 +117,16 @@ um_editable_entry_set_editable (UmEditableEntry *e,
 }
 
 gboolean
-um_editable_entry_get_editable (UmEditableEntry *e)
+cc_editable_entry_get_editable (CcEditableEntry *e)
 {
         return e->priv->editable;
 }
 
 static void
 update_entry_font (GtkWidget        *widget,
-                   UmEditableEntry *e)
+                   CcEditableEntry *e)
 {
-        UmEditableEntryPrivate *priv = e->priv;
+        CcEditableEntryPrivate *priv = e->priv;
         PangoFontDescription *desc;
         GtkStyleContext *style;
         gint size;
@@ -156,13 +156,13 @@ update_entry_font (GtkWidget        *widget,
 }
 
 static void
-update_fonts (UmEditableEntry *e)
+update_fonts (CcEditableEntry *e)
 {
         PangoAttrList *attrs;
         PangoAttribute *attr;
         GtkWidget *label;
 
-        UmEditableEntryPrivate *priv = e->priv;
+        CcEditableEntryPrivate *priv = e->priv;
 
         attrs = pango_attr_list_new ();
         if (priv->scale_set) {
@@ -185,10 +185,10 @@ update_fonts (UmEditableEntry *e)
 }
 
 void
-um_editable_entry_set_weight (UmEditableEntry *e,
+cc_editable_entry_set_weight (CcEditableEntry *e,
                                gint            weight)
 {
-        UmEditableEntryPrivate *priv = e->priv;
+        CcEditableEntryPrivate *priv = e->priv;
 
         if (priv->weight == weight && priv->weight_set)
                 return;
@@ -203,16 +203,16 @@ um_editable_entry_set_weight (UmEditableEntry *e,
 }
 
 gint
-um_editable_entry_get_weight (UmEditableEntry *e)
+cc_editable_entry_get_weight (CcEditableEntry *e)
 {
         return e->priv->weight;
 }
 
 void
-um_editable_entry_set_scale (UmEditableEntry *e,
+cc_editable_entry_set_scale (CcEditableEntry *e,
                               gdouble         scale)
 {
-        UmEditableEntryPrivate *priv = e->priv;
+        CcEditableEntryPrivate *priv = e->priv;
 
         if (priv->scale == scale && priv->scale_set)
                 return;
@@ -227,34 +227,34 @@ um_editable_entry_set_scale (UmEditableEntry *e,
 }
 
 gdouble
-um_editable_entry_get_scale (UmEditableEntry *e)
+cc_editable_entry_get_scale (CcEditableEntry *e)
 {
         return e->priv->scale;
 }
 
 static void
-um_editable_entry_set_property (GObject      *object,
+cc_editable_entry_set_property (GObject      *object,
                                 guint         prop_id,
                                 const GValue *value,
                                 GParamSpec   *pspec)
 {
-        UmEditableEntry *e = UM_EDITABLE_ENTRY (object);
+        CcEditableEntry *e = CC_EDITABLE_ENTRY (object);
 
         switch (prop_id) {
         case PROP_TEXT:
-                um_editable_entry_set_text (e, g_value_get_string (value));
+                cc_editable_entry_set_text (e, g_value_get_string (value));
                 break;
         case PROP_EDITABLE:
-                um_editable_entry_set_editable (e, g_value_get_boolean (value));
+                cc_editable_entry_set_editable (e, g_value_get_boolean (value));
                 break;
         case PROP_WEIGHT:
-                um_editable_entry_set_weight (e, g_value_get_int (value));
+                cc_editable_entry_set_weight (e, g_value_get_int (value));
                 break;
         case PROP_WEIGHT_SET:
                 e->priv->weight_set = g_value_get_boolean (value);
                 break;
         case PROP_SCALE:
-                um_editable_entry_set_scale (e, g_value_get_double (value));
+                cc_editable_entry_set_scale (e, g_value_get_double (value));
                 break;
         case PROP_SCALE_SET:
                 e->priv->scale_set = g_value_get_boolean (value);
@@ -266,32 +266,32 @@ um_editable_entry_set_property (GObject      *object,
 }
 
 static void
-um_editable_entry_get_property (GObject    *object,
+cc_editable_entry_get_property (GObject    *object,
                                 guint       prop_id,
                                 GValue     *value,
                                 GParamSpec *pspec)
 {
-        UmEditableEntry *e = UM_EDITABLE_ENTRY (object);
+        CcEditableEntry *e = CC_EDITABLE_ENTRY (object);
 
         switch (prop_id) {
         case PROP_TEXT:
                 g_value_set_string (value,
-                                    um_editable_entry_get_text (e));
+                                    cc_editable_entry_get_text (e));
                 break;
         case PROP_EDITABLE:
                 g_value_set_boolean (value,
-                                     um_editable_entry_get_editable (e));
+                                     cc_editable_entry_get_editable (e));
                 break;
         case PROP_WEIGHT:
                 g_value_set_int (value,
-                                 um_editable_entry_get_weight (e));
+                                 cc_editable_entry_get_weight (e));
                 break;
         case PROP_WEIGHT_SET:
                 g_value_set_boolean (value, e->priv->weight_set);
                 break;
         case PROP_SCALE:
                 g_value_set_double (value,
-                                    um_editable_entry_get_scale (e));
+                                    cc_editable_entry_get_scale (e));
                 break;
         case PROP_SCALE_SET:
                 g_value_set_boolean (value, e->priv->scale_set);
@@ -303,31 +303,31 @@ um_editable_entry_get_property (GObject    *object,
 }
 
 static void
-um_editable_entry_finalize (GObject *object)
+cc_editable_entry_finalize (GObject *object)
 {
-        UmEditableEntry *e = (UmEditableEntry*)object;
+        CcEditableEntry *e = (CcEditableEntry*)object;
 
         g_free (e->priv->text);
 
-        G_OBJECT_CLASS (um_editable_entry_parent_class)->finalize (object);
+        G_OBJECT_CLASS (cc_editable_entry_parent_class)->finalize (object);
 }
 
 static void
-um_editable_entry_class_init (UmEditableEntryClass *class)
+cc_editable_entry_class_init (CcEditableEntryClass *class)
 {
         GObjectClass *object_class;
 
         object_class = G_OBJECT_CLASS (class);
 
-        object_class->set_property = um_editable_entry_set_property;
-        object_class->get_property = um_editable_entry_get_property;
-        object_class->finalize = um_editable_entry_finalize;
+        object_class->set_property = cc_editable_entry_set_property;
+        object_class->get_property = cc_editable_entry_get_property;
+        object_class->finalize = cc_editable_entry_finalize;
 
         signals[EDITING_DONE] =
                 g_signal_new ("editing-done",
                               G_TYPE_FROM_CLASS (class),
                               G_SIGNAL_RUN_LAST,
-                              G_STRUCT_OFFSET (UmEditableEntryClass, editing_done),
+                              G_STRUCT_OFFSET (CcEditableEntryClass, editing_done),
                               NULL, NULL,
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE, 0);
@@ -368,17 +368,17 @@ um_editable_entry_class_init (UmEditableEntryClass *class)
                                       FALSE,
                                       G_PARAM_READWRITE));
 
-        g_type_class_add_private (class, sizeof (UmEditableEntryPrivate));
+        g_type_class_add_private (class, sizeof (CcEditableEntryPrivate));
 }
 
 static void
-start_editing (UmEditableEntry *e)
+start_editing (CcEditableEntry *e)
 {
         gtk_notebook_set_current_page (e->priv->notebook, PAGE_ENTRY);
 }
 
 static void
-stop_editing (UmEditableEntry *e)
+stop_editing (CcEditableEntry *e)
 {
         /* Avoid launching another "editing-done" signal
          * caused by the notebook page change */
@@ -387,28 +387,28 @@ stop_editing (UmEditableEntry *e)
 
         e->priv->in_stop_editing = TRUE;
         gtk_notebook_set_current_page (e->priv->notebook, PAGE_BUTTON);
-        um_editable_entry_set_text (e, gtk_entry_get_text (e->priv->entry));
+        cc_editable_entry_set_text (e, gtk_entry_get_text (e->priv->entry));
         g_signal_emit (e, signals[EDITING_DONE], 0);
         e->priv->in_stop_editing = FALSE;
 }
 
 static void
-cancel_editing (UmEditableEntry *e)
+cancel_editing (CcEditableEntry *e)
 {
-        gtk_entry_set_text (e->priv->entry, um_editable_entry_get_text (e));
+        gtk_entry_set_text (e->priv->entry, cc_editable_entry_get_text (e));
         gtk_notebook_set_current_page (e->priv->notebook, PAGE_BUTTON);
 }
 
 static void
 button_clicked (GtkWidget       *widget,
-                UmEditableEntry *e)
+                CcEditableEntry *e)
 {
         start_editing (e);
 }
 
 static void
 entry_activated (GtkWidget       *widget,
-                 UmEditableEntry *e)
+                 CcEditableEntry *e)
 {
         stop_editing (e);
 }
@@ -416,7 +416,7 @@ entry_activated (GtkWidget       *widget,
 static gboolean
 entry_focus_out (GtkWidget       *widget,
                  GdkEventFocus   *event,
-                 UmEditableEntry *e)
+                 CcEditableEntry *e)
 {
         stop_editing (e);
         return FALSE;
@@ -425,7 +425,7 @@ entry_focus_out (GtkWidget       *widget,
 static gboolean
 entry_key_press (GtkWidget       *widget,
                  GdkEventKey     *event,
-                 UmEditableEntry *e)
+                 CcEditableEntry *e)
 {
         if (event->keyval == GDK_KEY_Escape) {
                 cancel_editing (e);
@@ -436,9 +436,9 @@ entry_key_press (GtkWidget       *widget,
 static void
 update_button_padding (GtkWidget       *widget,
                        GtkAllocation   *allocation,
-                       UmEditableEntry *e)
+                       CcEditableEntry *e)
 {
-        UmEditableEntryPrivate *priv = e->priv;
+        CcEditableEntryPrivate *priv = e->priv;
         GtkAllocation alloc;
         gint offset;
         gint pad;
@@ -453,11 +453,11 @@ update_button_padding (GtkWidget       *widget,
 }
 
 static void
-um_editable_entry_init (UmEditableEntry *e)
+cc_editable_entry_init (CcEditableEntry *e)
 {
-        UmEditableEntryPrivate *priv;
+        CcEditableEntryPrivate *priv;
 
-        priv = e->priv = UM_EDITABLE_ENTRY_GET_PRIVATE (e);
+        priv = e->priv = CC_EDITABLE_ENTRY_GET_PRIVATE (e);
 
         priv->weight = PANGO_WEIGHT_NORMAL;
         priv->weight_set = FALSE;
@@ -502,7 +502,7 @@ um_editable_entry_init (UmEditableEntry *e)
 }
 
 GtkWidget *
-um_editable_entry_new (void)
+cc_editable_entry_new (void)
 {
-        return (GtkWidget *) g_object_new (UM_TYPE_EDITABLE_ENTRY, NULL);
+        return (GtkWidget *) g_object_new (CC_TYPE_EDITABLE_ENTRY, NULL);
 }

@@ -26,6 +26,8 @@ libgnome_control_center_la_SOURCES =		\
 	cc-shell.h				\
 	gconf-property-editor.c			\
 	gconf-property-editor.h			\
+	cc-editable-entry.c			\
+	cc-editable-entry.h			\
 	$(NULL)
 
 libgnome_control_center_la_LDFLAGS =		\
