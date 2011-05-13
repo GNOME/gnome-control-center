@@ -12,11 +12,16 @@ gnome_setup_assistant_SOURCES =	\
 	gnome-setup-assistant.c \
 	panel-cell-renderer-signal.c panel-cell-renderer-signal.h \
 	panel-cell-renderer-mode.c panel-cell-renderer-mode.h \
-	panel-cell-renderer-security.c panel-cell-renderer-security.h
+	panel-cell-renderer-security.c panel-cell-renderer-security.h \
+	cc-timezone-map.c cc-timezone-map.h \
+	set-timezone.c set-timezone.h \
+	tz.c tz.h
 
 AM_CPPFLAGS = \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
-	-DUIDIR="\"$(uidir)\""
+	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
+	-DUIDIR="\"$(uidir)\"" \
+	-DDATADIR="\"$(pkgdatadir)/ui/datetime\""
 
 gsettings_SCHEMAS = org.gnome.control-center.setup.gschema.xml
 

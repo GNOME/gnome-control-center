@@ -16,6 +16,13 @@
 
 #include <act/act-user-manager.h>
 
+#include "cc-timezone-map.h"
+#include "set-timezone.h"
+
+#define GWEATHER_I_KNOW_THIS_IS_UNSTABLE
+#include <libgweather/location-entry.h>
+
+#define DEFAULT_TZ "Europe/London"
 
 typedef struct {
         GtkBuilder *builder;
@@ -42,6 +49,10 @@ typedef struct {
         ActUserAccountType account_type;
 
         gboolean user_data_unsaved;
+
+        /* location data */
+        CcTimezoneMap *map;
+        TzLocation *current_location;
 } SetupData;
 
 #define OBJ(type,name) ((type)gtk_builder_get_object(setup->builder,(name)))
@@ -371,7 +382,6 @@ refresh_wireless_list (SetupData *setup)
                 gtk_widget_hide (swin);
                 gtk_widget_hide (spinner);
                 gtk_widget_show (label);
-
                 goto out;
         }
         else if (aps == NULL || aps->len == 0) {
@@ -1135,6 +1145,185 @@ prepare_account_page (SetupData *setup)
         update_account_page_status (setup);
 }
 
+/* --- Location page --- */
+
+
+static void
+set_timezone_cb (SetupData *setup,
+                 GError    *error)
+{
+        /* TODO: display any error in a user friendly way */
+        if (error) {
+                g_warning ("Could not set system timezone: %s", error->message);
+        }
+}
+
+static void
+queue_set_timezone (SetupData *setup)
+{
+        /* for now just do it */
+        if (setup->current_location) {
+                set_system_timezone_async (setup->current_location->zone, (GFunc) set_timezone_cb, setup, NULL);
+        }
+}
+
+static void
+update_timezone (SetupData *setup)
+{
+        GtkWidget *widget;
+        GtkTreeIter iter;
+        GtkTreeModel *model;
+        GString *str;
+        gchar *location;
+        gchar *timezone;
+        gchar *c;
+
+        str = g_string_new ("");
+        for (c = setup->current_location->zone; *c; c++) {
+                switch (*c) {
+                case '_':
+                        g_string_append_c (str, ' ');
+                        break;
+                case '/':
+                        g_string_append (str, " / ");
+                        break;
+                default:
+                        g_string_append_c (str, *c);
+                }
+        }
+
+        c = strstr (str->str, " / ");
+        location = g_strdup (c + 3);
+        timezone = g_strdup (str->str);
+
+        gtk_label_set_label (OBJ(GtkLabel*,"current-location-label"), location);
+        gtk_label_set_label (OBJ(GtkLabel*,"current-timezone-label"), timezone);
+
+        g_free (location);
+        g_free (timezone);
+
+        g_string_free (str, TRUE);
+}
+
+static void
+location_changed_cb (CcTimezoneMap *map,
+                     TzLocation    *location,
+                     SetupData     *setup)
+{
+  g_debug ("location changed to %s/%s", location->country, location->zone);
+
+  setup->current_location = location;
+
+  update_timezone (setup);
+
+  queue_set_timezone (setup);
+}
+
+static void
+get_timezone_cb (SetupData   *setup,
+                 const gchar *timezone,
+                 GError      *error)
+{
+        if (error) {
+                g_warning ("Could not get current timezone: %s", error->message);
+        }
+        else {
+                if (!cc_timezone_map_set_timezone (setup->map, timezone)) {
+                        g_warning ("Timezone '%s' is unhandled, setting %s as default", timezone, DEFAULT_TZ);
+                        cc_timezone_map_set_timezone (setup->map, DEFAULT_TZ);
+                }
+                else {
+                        g_debug ("System timezone is '%s'", timezone);
+                }
+
+                setup->current_location = cc_timezone_map_get_location (setup->map);
+                update_timezone (setup);
+        }
+
+        g_signal_connect (setup->map, "location-changed",
+                          G_CALLBACK (location_changed_cb), setup);
+}
+
+static void
+location_changed (GObject *object, GParamSpec *param, SetupData *setup)
+{
+        GWeatherLocationEntry *entry = GWEATHER_LOCATION_ENTRY (object);
+        GWeatherLocation *gloc;
+        GWeatherTimezone *zone;
+        gchar *city;
+
+        gloc = gweather_location_entry_get_location (entry);
+        if (gloc == NULL)
+                return;
+
+        zone = gweather_location_get_timezone (gloc);
+        city = gweather_location_get_city_name (gloc);
+
+        if (zone != NULL) {
+                const gchar *name;
+                const gchar *id;
+                GtkLabel *label;
+
+                label = OBJ(GtkLabel*, "current-timezone-label");
+
+                name = gweather_timezone_get_name (zone);
+                id = gweather_timezone_get_tzid (zone);
+                if (name == NULL) {
+                        /* Why does this happen ? */
+                        name = id;
+                }
+                gtk_label_set_label (label, name);
+                cc_timezone_map_set_timezone (setup->map, id);
+        }
+
+        if (city != NULL) {
+                GtkLabel *label;
+
+                label = OBJ(GtkLabel*, "current-location-label");
+                gtk_label_set_label (label, city);
+        }
+
+        g_free (city);
+        gweather_location_unref (gloc);
+}
+
+static void
+prepare_location_page (SetupData *setup)
+{
+        GtkWidget *frame, *map, *entry;
+        GWeatherLocation *world;
+
+        frame = WID("location-map-frame");
+
+        setup->map = cc_timezone_map_new ();
+        map = (GtkWidget *)setup->map;
+        gtk_widget_set_hexpand (map, TRUE);
+        gtk_widget_set_vexpand (map, TRUE);
+        gtk_widget_set_halign (map, GTK_ALIGN_FILL);
+        gtk_widget_set_valign (map, GTK_ALIGN_FILL);
+        gtk_widget_show (map);
+
+        gtk_container_add (GTK_CONTAINER (frame), map);
+
+        get_system_timezone_async ((GetTimezoneFunc) get_timezone_cb, setup, NULL);
+
+        world = gweather_location_new_world (FALSE);
+        entry = gweather_location_entry_new (world);
+        gtk_entry_set_placeholder_text (GTK_ENTRY (entry), _("Search for a location"));
+        gtk_widget_set_halign (entry, GTK_ALIGN_END);
+        gtk_widget_show (entry);
+
+        frame = WID("location-page");
+        gtk_grid_attach (GTK_GRID (frame), entry, 1, 1, 1, 1);
+
+        g_signal_connect (G_OBJECT (entry), "notify::location",
+                          G_CALLBACK (location_changed), setup);
+#if 0
+        g_signal_connect (G_OBJECT (_entry), "changed",
+                          G_CALLBACK (location_name_changed), setup);
+#endif
+}
+
 /* --- Other setup --- */
 
 static void
@@ -1177,6 +1366,7 @@ prepare_assistant (SetupData *setup)
         prepare_welcome_page (setup);
         prepare_network_page (setup);
         prepare_account_page (setup);
+        prepare_location_page (setup);
 }
 
 int
