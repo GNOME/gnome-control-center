@@ -773,7 +773,6 @@ fullname_changed (GtkWidget *w, GParamSpec *pspec, SetupData *setup)
         setup->valid_name = strlen (gtk_entry_get_text (GTK_ENTRY (w))) > 0;
         setup->user_data_unsaved = TRUE;
 
-g_print ("fullname changed\n");
         update_account_page_status (setup);
 }
 
@@ -783,7 +782,6 @@ username_changed (GtkWidget *w, GParamSpec *pspec, SetupData *setup)
         setup->valid_username = strlen (gtk_entry_get_text (GTK_ENTRY (w))) > 0;
         setup->user_data_unsaved = TRUE;
 
-g_print ("username changed\n");
         update_account_page_status (setup);
 }
 
@@ -1047,7 +1045,6 @@ static void
 save_account_data (SetupData *setup)
 {
         if (!setup->user_data_unsaved) {
-                g_print ("no unsaved account data\n");
                 return;
         }
 
@@ -1055,13 +1052,8 @@ save_account_data (SetupData *setup)
         if (!setup->valid_name ||
             !setup->valid_username ||
             !setup->valid_password) {
-                g_print ("not saving invalid account data\n");
                 return;
         }
-
-        g_print ("saving username %s, real name %s\n",
-                 gtk_entry_get_text (OBJ (GtkEntry*, "account-username-entry")),
-                 gtk_entry_get_text (OBJ (GtkEntry*, "account-fullname-entry")));
 
         if (setup->act_user == NULL) {
                 create_user (setup);
