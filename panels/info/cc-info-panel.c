@@ -36,6 +36,8 @@
 #include <glibtop/mem.h>
 #include <glibtop/sysinfo.h>
 
+#include "hostname-helper.h"
+
 #define GNOME_SESSION_MANAGER_SCHEMA        "org.gnome.desktop.session"
 #define KEY_SESSION_NAME          "session-name"
 
@@ -1100,6 +1102,7 @@ text_changed_cb (GtkEntry        *entry,
                  CcInfoPanel     *self)
 {
   const char *text;
+  char *hostname;
   GVariant *variant;
   GError *error = NULL;
 
@@ -1119,6 +1122,26 @@ text_changed_cb (GtkEntry        *entry,
     {
       g_variant_unref (variant);
     }
+
+  /* Set the static hostname */
+  hostname = pretty_hostname_to_static (text, FALSE);
+  g_assert (hostname);
+
+  variant = g_dbus_proxy_call_sync (self->priv->hostnamed_proxy,
+                                    "SetStaticHostname",
+                                    g_variant_new ("(sb)", hostname, FALSE),
+                                    G_DBUS_CALL_FLAGS_NONE,
+                                    -1, NULL, &error);
+  if (variant == NULL)
+    {
+      g_warning ("Could not set StaticHostname: %s", error->message);
+      g_error_free (error);
+    }
+  else
+    {
+      g_variant_unref (variant);
+    }
+  g_free (hostname);
 }
 
 static void
