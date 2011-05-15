@@ -899,6 +899,8 @@ info_panel_setup_graphics (CcInfoPanel  *self)
                                 switch_fallback_set_mapping, self, NULL);
   gtk_box_pack_start (GTK_BOX (widget), GTK_WIDGET (sw), FALSE, FALSE, 0);
   gtk_widget_show_all (GTK_WIDGET (sw));
+  widget = WID ("fallback-label");
+  gtk_label_set_mnemonic_widget (GTK_LABEL (widget), GTK_WIDGET (sw));
 }
 
 static void
@@ -937,6 +939,7 @@ default_app_changed (GtkAppChooserButton *button,
 static void
 info_panel_setup_default_app (CcInfoPanel *self,
                               const char  *content_type,
+                              const char  *label_id,
                               guint        left_attach,
                               guint        right_attach,
                               guint        top_attach,
@@ -946,6 +949,7 @@ info_panel_setup_default_app (CcInfoPanel *self,
   GtkWidget *table;
   GAppInfo  *info;
   GError    *error = NULL;
+  GtkWidget *label;
 
   table = WID ("default_apps_table");
 
@@ -970,27 +974,30 @@ info_panel_setup_default_app (CcInfoPanel *self,
   g_signal_connect (G_OBJECT (button), "changed",
                     G_CALLBACK (default_app_changed), self);
   gtk_widget_show (button);
+
+  label = WID(label_id);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
 }
 
 static void
 info_panel_setup_default_apps (CcInfoPanel  *self)
 {
-  info_panel_setup_default_app (self, "x-scheme-handler/http",
+  info_panel_setup_default_app (self, "x-scheme-handler/http", "web-label",
                                 1, 2, 0, 1);
 
-  info_panel_setup_default_app (self, "x-scheme-handler/mailto",
+  info_panel_setup_default_app (self, "x-scheme-handler/mailto", "mail-label",
                                 1, 2, 1, 2);
 
-  info_panel_setup_default_app (self, "text/calendar",
+  info_panel_setup_default_app (self, "text/calendar", "calendar-label",
                                 1, 2, 2, 3);
 
-  info_panel_setup_default_app (self, "audio/x-vorbis+ogg",
+  info_panel_setup_default_app (self, "audio/x-vorbis+ogg", "music-label",
                                 1, 2, 3, 4);
 
-  info_panel_setup_default_app (self, "video/x-ogm+ogg",
+  info_panel_setup_default_app (self, "video/x-ogm+ogg", "video-label",
                                 1, 2, 4, 5);
 
-  info_panel_setup_default_app (self, "image/jpeg",
+  info_panel_setup_default_app (self, "image/jpeg", "photos-label",
                                 1, 2, 5, 6);
 }
 
