@@ -127,11 +127,12 @@
                             <property name="visible">True</property>
                             <child>
                               <object class="GtkCheckButton" id="checkbutton_sleep_ac">
-                                <property name="label" translatable="yes">On AC power:</property>
+                                <property name="label" translatable="yes">On AC _power:</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="use_action_appearance">False</property>
+                                <property name="use_underline">True</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                               <packing>
@@ -171,11 +172,12 @@
                             <property name="visible">True</property>
                             <child>
                               <object class="GtkCheckButton" id="checkbutton_sleep_battery">
-                                <property name="label" translatable="yes">On battery power:</property>
+                                <property name="label" translatable="yes">On _battery power:</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
                                 <property name="use_action_appearance">False</property>
+                                <property name="use_underline">True</property>
                                 <property name="draw_indicator">True</property>
                               </object>
                               <packing>
@@ -284,7 +286,9 @@
                     <child>
                       <object class="GtkLabel" id="label5">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">When power is critically low:</property>
+                        <property name="label" translatable="yes">When power is _critically low:</property>
+                        <property name="use_underline">True</property>
+                        <property name="mnemonic_widget">combobox_critical</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -337,7 +341,9 @@
                     <child>
                       <object class="GtkLabel" id="label4">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">When the power button is pressed:</property>
+                        <property name="label" translatable="yes">When the p_ower button is pressed:</property>
+                        <property name="use_underline">True</property>
+                        <property name="mnemonic_widget">combobox_button_power</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -380,7 +386,9 @@
                     <child>
                       <object class="GtkLabel" id="label3">
                         <property name="visible">True</property>
-                        <property name="label" translatable="yes">When the sleep button is pressed:</property>
+                        <property name="label" translatable="yes">When the _sleep button is pressed:</property>
+                        <property name="use_underline">True</property>
+                        <property name="mnemonic_widget">combobox_button_sleep</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
