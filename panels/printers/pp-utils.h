@@ -79,7 +79,42 @@ gint        renew_cups_subscription (gint id,
                                      gint num_events,
                                      gint lease_duration);
 
-void        set_local_default_printer (gchar *printer_name);
+void        set_local_default_printer (const gchar *printer_name);
+
+gboolean    printer_set_location (const gchar *printer_name,
+                                  const gchar *location);
+
+gboolean    printer_set_accepting_jobs (const gchar *printer_name,
+                                        gboolean     accepting_jobs,
+                                        const gchar *reason);
+
+gboolean    printer_set_enabled (const gchar *printer_name,
+                                 gboolean     enabled);
+
+gboolean    printer_rename (const gchar *old_name,
+                            const gchar *new_name);
+
+gboolean    printer_delete (const gchar *printer_name);
+
+gboolean    printer_set_default (const gchar *printer_name);
+
+gboolean    printer_set_shared (const gchar *printer_name,
+                                gboolean     shared);
+
+gboolean    printer_set_job_sheets (const gchar *printer_name,
+                                    const gchar *start_sheet,
+                                    const gchar *end_sheet);
+
+gboolean    printer_set_policy (const gchar *printer_name,
+                                const gchar *policy,
+                                gboolean     error_policy);
+
+gboolean    printer_set_users (const gchar  *printer_name,
+                               gchar       **users,
+                               gboolean      allowed);
+
+gboolean    class_add_printer (const gchar *class_name,
+                               const gchar *printer_name);
 
 G_END_DECLS
 

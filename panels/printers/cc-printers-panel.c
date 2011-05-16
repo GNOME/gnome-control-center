@@ -32,6 +32,7 @@
 
 #include <math.h>
 
+#include "cc-editable-entry.h"
 #include "pp-new-printer-dialog.h"
 #include "pp-utils.h"
 
@@ -727,11 +728,11 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
       if (printer_name)
         {
-          gtk_label_set_text (GTK_LABEL (widget), printer_name);
+          cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), printer_name);
           g_free (printer_name);
         }
       else
-        gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
+        cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
 
 
       widget = (GtkWidget*)
@@ -739,11 +740,11 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
       if (status)
         {
-          gtk_label_set_text (GTK_LABEL (widget), status);
+          cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), status);
           g_free (status);
         }
       else
-        gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
+        cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
 
 
       widget = (GtkWidget*)
@@ -751,11 +752,11 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
       if (location)
         {
-          gtk_label_set_text (GTK_LABEL (widget), location);
+          cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), location);
           g_free (location);
         }
       else
-        gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
+        cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
 
 
       widget = (GtkWidget*)
@@ -763,11 +764,11 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
       if (printer_model)
         {
-          gtk_label_set_text (GTK_LABEL (widget), printer_model);
+          cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), printer_model);
           g_free (printer_model);
         }
       else
-        gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
+        cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
 
 
       widget = (GtkWidget*)
@@ -781,7 +782,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
       if (is_local)
         {
-          gtk_label_set_text (GTK_LABEL (widget), "localhost");
+          cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), "localhost");
         }
       else
         {
@@ -798,12 +799,12 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
                               sizeof(resource));
 
               if (server[0] != '\0')
-                gtk_label_set_text (GTK_LABEL (widget), server);
+                cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), server);
               else
-                gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
+                cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
             }
           else
-            gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
+            cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
         }
 
 
@@ -861,11 +862,11 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
       if (active_jobs)
         {
-          gtk_label_set_text (GTK_LABEL (widget), active_jobs);
+          cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), active_jobs);
           g_free (active_jobs);
         }
       else
-        gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
+        cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
     }
   else
     {
@@ -885,27 +886,27 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-name-label");
-      gtk_label_set_text (GTK_LABEL (widget), "");
+      cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), "");
 
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-status-label");
-      gtk_label_set_text (GTK_LABEL (widget), "");
+      cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), "");
 
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-location-label");
-      gtk_label_set_text (GTK_LABEL (widget), "");
+      cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), "");
 
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-model-label");
-      gtk_label_set_text (GTK_LABEL (widget), "");
+      cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), "");
 
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-ip-address-label");
-      gtk_label_set_text (GTK_LABEL (widget), "");
+      cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), "");
 
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-jobs-label");
-      gtk_label_set_text (GTK_LABEL (widget), "");
+      cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), "");
     }
 
   actualize_sensitivity (self);
@@ -1245,11 +1246,11 @@ actualize_jobs_list (CcPrintersPanel *self)
 
       if (active_jobs)
         {
-          gtk_label_set_text (GTK_LABEL (widget), active_jobs);
+          cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), active_jobs);
           g_free (active_jobs);
         }
       else
-        gtk_label_set_text (GTK_LABEL (widget), EMPTY_TEXT);
+        cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
     }
 
   store = gtk_list_store_new (JOB_N_COLUMNS, G_TYPE_INT, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
@@ -1610,10 +1611,7 @@ printer_disable_cb (GObject    *gobject,
 {
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
-  DBusGProxy             *proxy;
   gboolean                paused = FALSE;
-  GError                 *error = NULL;
-  char                   *ret_error = NULL;
   char                   *name = NULL;
   int                     i;
 
@@ -1632,38 +1630,8 @@ printer_disable_cb (GObject    *gobject,
         }
     }
 
-  if (name)
-    {
-      proxy = get_dbus_proxy (MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              TRUE);
-
-      if (!proxy)
-        return;
-
-      dbus_g_proxy_call (proxy, "PrinterSetEnabled", &error,
-                         G_TYPE_STRING, name,
-                         G_TYPE_BOOLEAN, paused,
-                         G_TYPE_INVALID,
-                         G_TYPE_STRING, &ret_error,
-                         G_TYPE_INVALID);
-
-      g_object_unref (proxy);
-
-      if (error || (ret_error && ret_error[0] != '\0'))
-        {
-          if (error)
-            g_warning ("%s", error->message);
-
-          if (ret_error && ret_error[0] != '\0')
-            g_warning ("%s", ret_error);
-        }
-      else
-        actualize_printers_list (self);
-
-      g_clear_error (&error);
-    }
+  if (name && printer_set_enabled (name, paused))
+    actualize_printers_list (self);
 }
 
 typedef struct {
@@ -1863,9 +1831,6 @@ allowed_user_remove_cb (GtkToolButton *button,
 {
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
-  DBusGProxy             *proxy;
-  GError                 *error = NULL;
-  char                   *ret_error = NULL;
   char                   *printer_name = NULL;
   char                   **names = NULL;
   char                   *name = NULL;
@@ -1885,14 +1850,6 @@ allowed_user_remove_cb (GtkToolButton *button,
 
   if (name && printer_name)
     {
-      proxy = get_dbus_proxy (MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              TRUE);
-
-      if (!proxy)
-        return;
-
       names = g_new0 (gchar*, priv->num_allowed_users);
       j = 0;
       for (i = 0; i < (priv->num_allowed_users); i++)
@@ -1904,27 +1861,9 @@ allowed_user_remove_cb (GtkToolButton *button,
             }
         }
 
-      dbus_g_proxy_call (proxy, "PrinterSetUsersAllowed", &error,
-                         G_TYPE_STRING, printer_name,
-                         G_TYPE_STRV, names,
-                         G_TYPE_INVALID,
-                         G_TYPE_STRING, &ret_error,
-                         G_TYPE_INVALID);
+      printer_set_users (printer_name, names, TRUE);
+      actualize_allowed_users_list (self);
 
-      g_object_unref (proxy);
-
-      if (error || (ret_error && ret_error[0] != '\0'))
-        {
-          if (error)
-            g_warning ("%s", error->message);
-
-          if (ret_error && ret_error[0] != '\0')
-            g_warning ("%s", ret_error);
-        }
-      else
-        actualize_allowed_users_list (self);
-
-      g_clear_error (&error);
       g_free (names);
   }
 }
@@ -1937,9 +1876,6 @@ allowed_user_add_cb (GtkCellRendererText *renderer,
 {
   CcPrintersPanelPrivate  *priv;
   CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
-  DBusGProxy              *proxy;
-  GError                  *error = NULL;
-  char                    *ret_error = NULL;
   char                    *printer_name = NULL;
   char                   **names = NULL;
   int                      i;
@@ -1958,38 +1894,13 @@ allowed_user_add_cb (GtkCellRendererText *renderer,
 
   if (new_text && new_text[0] != '\0' && printer_name)
     {
-      proxy = get_dbus_proxy (MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              TRUE);
-
-      if (!proxy)
-        return;
-
       names = g_new0 (char *, priv->num_allowed_users + 2);
       for (i = 0; i < (priv->num_allowed_users); i++)
         names[i] = priv->allowed_users[i];
       names[priv->num_allowed_users] = new_text;
 
-      dbus_g_proxy_call (proxy, "PrinterSetUsersAllowed", &error,
-                         G_TYPE_STRING, printer_name,
-                         G_TYPE_STRV, names,
-                         G_TYPE_INVALID,
-                         G_TYPE_STRING, &ret_error,
-                         G_TYPE_INVALID);
+      printer_set_users (printer_name, names, TRUE);
 
-      g_object_unref (proxy);
-
-      if (error || (ret_error && ret_error[0] != '\0'))
-        {
-          if (error)
-            g_warning ("%s", error->message);
-
-          if (ret_error && ret_error[0] != '\0')
-            g_warning ("%s", ret_error);
-        }
-
-      g_clear_error (&error);
       g_free (names);
     }
 
@@ -2048,11 +1959,7 @@ printer_set_default_cb (GtkToggleButton *button,
 {
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
-  DBusGProxy             *proxy;
-  GError                 *error = NULL;
-  char                   *ret_error = NULL;
   char                   *name = NULL;
-  const char             *cups_server;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -2063,54 +1970,8 @@ printer_set_default_cb (GtkToggleButton *button,
 
   if (name)
     {
-      cups_server = cupsServer ();
-      if (g_ascii_strncasecmp (cups_server, "localhost", 9) == 0 ||
-          g_ascii_strncasecmp (cups_server, "127.0.0.1", 9) == 0 ||
-          g_ascii_strncasecmp (cups_server, "::1", 3) == 0 ||
-          cups_server[0] == '/')
-        {
-          /* Clean .cups/lpoptions before setting
-           * default printer on local CUPS server.
-           */
-          set_local_default_printer (NULL);
-
-          proxy = get_dbus_proxy (MECHANISM_BUS,
-                                  "/",
-                                  MECHANISM_BUS,
-                                  TRUE);
-
-          if (!proxy)
-            return;
-
-          dbus_g_proxy_call (proxy, "PrinterSetDefault", &error,
-                             G_TYPE_STRING, name,
-                             G_TYPE_INVALID,
-                             G_TYPE_STRING, &ret_error,
-                             G_TYPE_INVALID);
-
-          g_object_unref (proxy);
-
-          if (error || (ret_error && ret_error[0] != '\0'))
-            {
-              if (error)
-                g_warning ("%s", error->message);
-
-              if (ret_error && ret_error[0] != '\0')
-                g_warning ("%s", ret_error);
-            }
-          else
-            actualize_printers_list (self);
-
-          g_clear_error (&error);
-        }
-      else
-        /* Store default printer to .cups/lpoptions
-         * if we are connected to a remote CUPS server.
-         */
-        {
-          set_local_default_printer (name);
-          actualize_printers_list (self);
-        }
+      printer_set_default (name);
+      actualize_printers_list (self);
 
       g_signal_handlers_block_by_func (G_OBJECT (button), printer_set_default_cb, self);
       gtk_toggle_button_set_active (button, priv->dests[priv->current_dest].is_default);
@@ -2176,45 +2037,77 @@ printer_remove_cb (GtkToolButton *toolbutton,
 {
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
-  DBusGProxy             *proxy;
-  GError                 *error = NULL;
-  char                   *ret_error = NULL;
-  char                   *name = NULL;
+  char                   *printer_name = NULL;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
   if (priv->current_dest >= 0 &&
       priv->current_dest < priv->num_dests &&
       priv->dests != NULL)
-    name = priv->dests[priv->current_dest].name;
+    printer_name = priv->dests[priv->current_dest].name;
 
-  if (name)
+  if (printer_name && printer_delete (printer_name))
+    actualize_printers_list (self);
+}
+
+static void
+printer_name_edit_cb (GtkWidget *entry,
+                      gpointer   user_data)
+{
+  CcPrintersPanelPrivate  *priv;
+  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
+  const gchar             *new_name;
+  gchar                   *old_name = NULL;
+  gint                     i;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  new_name = cc_editable_entry_get_text (CC_EDITABLE_ENTRY (entry));
+
+  if (priv->current_dest >= 0 &&
+      priv->current_dest < priv->num_dests &&
+      priv->dests != NULL)
+    old_name = priv->dests[priv->current_dest].name;
+
+  if (printer_rename (old_name, new_name))
     {
-      proxy = get_dbus_proxy (MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              TRUE);
+      free_dests (self);
+      priv->num_dests = cupsGetDests (&priv->dests);
+      priv->dest_model_names = g_new0 (gchar *, priv->num_dests);
+      priv->ppd_file_names = g_new0 (gchar *, priv->num_dests);
 
-      if (!proxy)
-        return;
+      for (i = 0; i < priv->num_dests; i++)
+        if (g_strcmp0 (priv->dests[i].name, new_name) == 0)
+          {
+            priv->current_dest  = i;
+            break;
+          }
+    }
 
-      dbus_g_proxy_call (proxy, "PrinterDelete", &error,
-                         G_TYPE_STRING, name,
-                         G_TYPE_INVALID,
-                         G_TYPE_STRING, &ret_error,
-                         G_TYPE_INVALID);
+  actualize_printers_list (self);
+}
 
-      if (error || (ret_error && ret_error[0] != '\0'))
-        {
-          if (error)
-            g_warning ("%s", error->message);
+static void
+printer_location_edit_cb (GtkWidget *entry,
+                          gpointer   user_data)
+{
+  CcPrintersPanelPrivate  *priv;
+  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
+  const gchar             *location;
+  gchar                   *printer_name = NULL;
 
-          if (ret_error && ret_error[0] != '\0')
-            g_warning ("%s", ret_error);
-        }
-      else
-        actualize_printers_list (self);
-  }
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  location = cc_editable_entry_get_text (CC_EDITABLE_ENTRY (entry));
+
+  if (priv->current_dest >= 0 &&
+      priv->current_dest < priv->num_dests &&
+      priv->dests != NULL)
+    printer_name = priv->dests[priv->current_dest].name;
+
+  if (printer_name && location &&
+      printer_set_location (printer_name, location))
+    actualize_printers_list (self);
 }
 
 static void
@@ -2346,10 +2239,12 @@ actualize_sensitivity (gpointer user_data)
   CcPrintersPanelPrivate  *priv;
   CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
   cups_ptype_t             type = 0;
+  const char              *cups_server = NULL;
   GtkWidget               *widget;
   gboolean                 is_authorized;
   gboolean                 is_discovered = FALSE;
   gboolean                 printer_selected;
+  gboolean                 local_server = TRUE;
   gint                     i;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
@@ -2375,26 +2270,34 @@ actualize_sensitivity (gpointer user_data)
           }
       }
 
+  cups_server = cupsServer ();
+  if (cups_server &&
+      g_ascii_strncasecmp (cups_server, "localhost", 9) != 0 &&
+      g_ascii_strncasecmp (cups_server, "127.0.0.1", 9) != 0 &&
+      g_ascii_strncasecmp (cups_server, "::1", 3) != 0 &&
+      cups_server[0] != '/')
+    local_server = FALSE;
+
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-add-button");
-  gtk_widget_set_sensitive (widget, is_authorized);
+  gtk_widget_set_sensitive (widget, local_server && is_authorized);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-add-button2");
-  gtk_widget_set_sensitive (widget, is_authorized);
+  gtk_widget_set_sensitive (widget, local_server && is_authorized);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-remove-button");
-  gtk_widget_set_sensitive (widget, !is_discovered && is_authorized);
+  gtk_widget_set_sensitive (widget, local_server && !is_discovered && is_authorized);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-disable-switch");
-  gtk_widget_set_sensitive (widget, is_authorized);
+  gtk_widget_set_sensitive (widget, local_server && !is_discovered && is_authorized);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-default-check-button");
   gtk_widget_set_sensitive (widget, is_authorized);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "allowed-user-add-button");
-  gtk_widget_set_sensitive (widget, is_authorized);
+  gtk_widget_set_sensitive (widget, local_server && !is_discovered && is_authorized);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "allowed-user-remove-button");
-  gtk_widget_set_sensitive (widget, is_authorized);
+  gtk_widget_set_sensitive (widget, local_server && !is_discovered && is_authorized);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "print-test-page-button");
   gtk_widget_set_sensitive (widget, printer_selected);
@@ -2407,6 +2310,12 @@ actualize_sensitivity (gpointer user_data)
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-icon");
   gtk_widget_set_sensitive (widget, printer_selected);
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-name-label");
+  cc_editable_entry_set_editable (CC_EDITABLE_ENTRY (widget), local_server && !is_discovered && is_authorized);
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-location-label");
+  cc_editable_entry_set_editable (CC_EDITABLE_ENTRY (widget), local_server && !is_discovered && is_authorized);
 }
 
 static void
@@ -2603,6 +2512,14 @@ cc_printers_panel_init (CcPrintersPanel *self)
     gtk_builder_get_object (priv->builder, "printer-options-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (switch_to_options_cb), self);
 
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "printer-name-label");
+  g_signal_connect (widget, "editing-done", G_CALLBACK (printer_name_edit_cb), self);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "printer-location-label");
+  g_signal_connect (widget, "editing-done", G_CALLBACK (printer_location_edit_cb), self);
+
   priv->lockdown_settings = g_settings_new ("org.gnome.desktop.lockdown");
   if (priv->lockdown_settings)
     g_signal_connect (priv->lockdown_settings,
@@ -2656,7 +2573,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
     g_warning ("Your system does not have the cups-pk-helper's policy \
 \"org.opensuse.cupspkhelper.mechanism.all-edit\" installed. \
 Please check your installation");
-
 
   gtk_style_context_get_background_color (gtk_widget_get_style_context (top_widget),
                                           GTK_STATE_FLAG_NORMAL,

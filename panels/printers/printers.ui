@@ -141,11 +141,10 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="printer-location-label">
+                      <object class="CcEditableEntry" id="printer-location-label">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">---</property>
-                        <property name="ellipsize">end</property>
+                        <property name="text">---</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -156,12 +155,11 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="printer-status-label">
+                      <object class="CcEditableEntry" id="printer-status-label">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
                         <property name="yalign">0</property>
-                        <property name="label" translatable="yes">Printing...</property>
-                        <property name="ellipsize">end</property>
+                        <property name="text">Printing...</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -224,10 +222,10 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="printer-jobs-label">
+                      <object class="CcEditableEntry" id="printer-jobs-label">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="no">0 active</property>
+                        <property name="text" translatable="no">0 active</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -256,15 +254,13 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="printer-name-label">
+                      <object class="CcEditableEntry" id="printer-name-label">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
                         <property name="yalign">1</property>
-                        <property name="label" translatable="yes">Printer</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                          <attribute name="scale" value="1.200000"/>
-                        </attributes>
+                        <property name="text">Printer</property>
+                        <property name="weight">700</property>
+                        <property name="scale">1.2</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -318,11 +314,10 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="printer-model-label">
+                      <object class="CcEditableEntry" id="printer-model-label">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">---</property>
-                        <property name="ellipsize">end</property>
+                        <property name="text">---</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -333,10 +328,10 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="printer-ip-address-label">
+                      <object class="CcEditableEntry" id="printer-ip-address-label">
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
-                        <property name="label" translatable="yes">---</property>
+                        <property name="text">---</property>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>

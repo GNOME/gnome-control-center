@@ -1094,40 +1094,8 @@ new_printer_add_button_cb (GtkButton *button,
 
           if (proxy)
             {
-              dbus_g_proxy_call (proxy, "PrinterSetAcceptJobs", &error,
-                                 G_TYPE_STRING, pp->devices[device_id].display_name,
-                                 G_TYPE_BOOLEAN, TRUE,
-                                 G_TYPE_STRING, NULL,
-                                 G_TYPE_INVALID,
-                                 G_TYPE_STRING, &ret_error,
-                                 G_TYPE_INVALID);
-
-              if (error)
-                {
-                  g_warning ("%s", error->message);
-                  g_clear_error (&error);
-                }
-
-              if (ret_error && ret_error[0] != '\0')
-                g_warning ("%s", ret_error);
-
-
-              dbus_g_proxy_call (proxy, "PrinterSetEnabled", &error,
-                                 G_TYPE_STRING, pp->devices[device_id].display_name,
-                                 G_TYPE_BOOLEAN, TRUE,
-                                 G_TYPE_INVALID,
-                                 G_TYPE_STRING, &ret_error,
-                                 G_TYPE_INVALID);
-
-              if (error)
-                {
-                  g_warning ("%s", error->message);
-                  g_clear_error (&error);
-                }
-
-              if (ret_error && ret_error[0] != '\0')
-                g_warning ("%s", ret_error);
-
+              printer_set_accepting_jobs (pp->devices[device_id].display_name, TRUE, NULL);
+              printer_set_enabled (pp->devices[device_id].display_name, TRUE);
 
               if (g_strcmp0 (pp->devices[device_id].device_class, "direct") == 0)
                 {
