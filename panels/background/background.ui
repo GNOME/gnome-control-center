@@ -62,6 +62,16 @@
                     <attribute name="gicon">0</attribute>
                   </attributes>
                 </child>
+                <child>
+                  <!-- this cell renderer is here just to have
+                       the text spoken in orca -->
+                  <object class="GtkCellRendererText" id="text-renderer">
+                    <property name="visible">False</property>
+                  </object>
+                  <attributes>
+                    <attribute name="text">2</attribute>
+                  </attributes>
+                </child>
               </object>
             </child>
           </object>

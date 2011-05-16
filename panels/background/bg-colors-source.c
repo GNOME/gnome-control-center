@@ -117,6 +117,7 @@ bg_colors_source_init (BgColorsSource *self)
       gtk_list_store_insert_with_values (store, NULL, 0,
                                          0, pixbuf,
                                          1, item,
+                                         2, _(items[i].name),
                                          -1);
 
       g_object_unref (pixbuf);
