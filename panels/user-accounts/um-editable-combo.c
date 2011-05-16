@@ -47,6 +47,7 @@ enum {
 
 enum {
         EDITING_DONE,
+        ACTIVATE,
         LAST_SIGNAL
 };
 
@@ -233,12 +234,16 @@ um_editable_combo_get_property (GObject    *object,
         }
 }
 
+static void um_editable_combo_activate (UmEditableCombo *combo);
+
 static void
 um_editable_combo_class_init (UmEditableComboClass *class)
 {
         GObjectClass *object_class;
+        GtkWidgetClass *widget_class;
 
         object_class = G_OBJECT_CLASS (class);
+        widget_class = GTK_WIDGET_CLASS (class);
 
         object_class->set_property = um_editable_combo_set_property;
         object_class->get_property = um_editable_combo_get_property;
@@ -251,6 +256,16 @@ um_editable_combo_class_init (UmEditableComboClass *class)
                               NULL, NULL,
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE, 0);
+        signals[ACTIVATE] =
+                g_signal_new ("activate",
+                              G_TYPE_FROM_CLASS (class),
+                              G_SIGNAL_RUN_FIRST | G_SIGNAL_ACTION,
+                              G_STRUCT_OFFSET (UmEditableComboClass, activate),
+                              NULL, NULL,
+                              g_cclosure_marshal_VOID__VOID,
+                              G_TYPE_NONE, 0);
+        widget_class->activate_signal = signals[ACTIVATE];
+        class->activate = um_editable_combo_activate;
 
         g_object_class_install_property (object_class, PROP_MODEL,
                 g_param_spec_object ("model",
@@ -297,6 +312,15 @@ cancel_editing (UmEditableCombo *combo)
         gtk_combo_box_set_active (combo->priv->combo,
                                   um_editable_combo_get_active (combo));
         gtk_notebook_set_current_page (combo->priv->notebook, 1);
+}
+
+static void
+um_editable_combo_activate (UmEditableCombo *combo)
+{
+        if (combo->priv->editable) {
+                gtk_notebook_set_current_page (combo->priv->notebook, 2);
+                gtk_widget_grab_focus (GTK_WIDGET (combo->priv->combo));
+        }
 }
 
 static void

@@ -51,6 +51,7 @@ enum {
 
 enum {
         START_EDITING,
+        ACTIVATE,
         LAST_SIGNAL
 };
 
@@ -268,12 +269,16 @@ um_editable_button_finalize (GObject *object)
         G_OBJECT_CLASS (um_editable_button_parent_class)->finalize (object);
 }
 
+static void um_editable_button_activate (UmEditableButton *button);
+
 static void
 um_editable_button_class_init (UmEditableButtonClass *class)
 {
         GObjectClass *object_class;
+        GtkWidgetClass *widget_class;
 
         object_class = G_OBJECT_CLASS (class);
+        widget_class = GTK_WIDGET_CLASS (class);
 
         object_class->set_property = um_editable_button_set_property;
         object_class->get_property = um_editable_button_get_property;
@@ -287,6 +292,17 @@ um_editable_button_class_init (UmEditableButtonClass *class)
                               NULL, NULL,
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE, 0);
+        signals[ACTIVATE] =
+                g_signal_new ("activate",
+                              G_TYPE_FROM_CLASS (class),
+                              G_SIGNAL_RUN_FIRST | G_SIGNAL_ACTION,
+                              G_STRUCT_OFFSET (UmEditableButtonClass, activate),
+                              NULL, NULL,
+                              g_cclosure_marshal_VOID__VOID,
+                              G_TYPE_NONE, 0);
+        widget_class->activate_signal = signals[ACTIVATE];
+        class->activate = um_editable_button_activate;
+
 
         g_object_class_install_property (object_class, PROP_TEXT,
                 g_param_spec_string ("text",
@@ -331,6 +347,16 @@ static void
 start_editing (UmEditableButton *button)
 {
         g_signal_emit (button, signals[START_EDITING], 0);
+}
+
+static void
+um_editable_button_activate (UmEditableButton *button)
+{
+        UmEditableButtonPrivate *priv = button->priv;
+
+        if (priv->editable) {
+                gtk_widget_grab_focus (GTK_WIDGET (button->priv->button));
+        }
 }
 
 static void

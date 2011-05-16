@@ -50,6 +50,7 @@ struct _UmEditableComboClass
   GtkAlignmentClass parent_class;
 
   void (* editing_done) (UmEditableCombo *combo);
+  void (* activate)     (UmEditableCombo *combo);
 };
 
 GType         um_editable_combo_get_type        (void) G_GNUC_CONST;

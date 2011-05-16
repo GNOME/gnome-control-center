@@ -50,6 +50,7 @@ struct _UmEditableButtonClass
   GtkAlignmentClass parent_class;
 
   void (* start_editing) (UmEditableButton *button);
+  void (* activate)      (UmEditableButton *button);
 };
 
 GType        um_editable_button_get_type     (void) G_GNUC_CONST;
