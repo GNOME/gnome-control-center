@@ -210,7 +210,7 @@
                                       <object class="GtkLabel" id="seeing_contrast_label">
                                         <property name="visible">True</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">Contrast:</property>
+                                        <property name="label" translatable="yes">_Contrast:</property>
                                         <property name="use_underline">True</property>
                                         <property name="mnemonic_widget">seeing_contrast_combobox</property>
                                         <attributes>
@@ -258,7 +258,7 @@
                                       <object class="GtkLabel" id="seeing_text_size_label">
                                         <property name="visible">True</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">Text size:</property>
+                                        <property name="label" translatable="yes">_Text size:</property>
                                         <property name="use_underline">True</property>
                                         <property name="mnemonic_widget">seeing_text_size_combobox</property>
                                         <attributes>
@@ -450,6 +450,9 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <accessibility>
+                                          <relation target="zoom-section-heading" type="labelled-by"/>
+                                        </accessibility>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -665,7 +668,7 @@
                       </object>
                     </child>
                     <child type="label">
-                      <object class="GtkLabel" id="label8">
+                      <object class="GtkLabel" id="zoom-section-heading">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes" context="universal access, seeing" comments="Translators: this refers to screen magnifier">Zoom</property>
                         <attributes>
@@ -710,6 +713,9 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <accessibility>
+                                          <relation target="screen-reader-section-heading" type="labelled-by"/>
+                                        </accessibility>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -795,7 +801,7 @@
                       </object>
                     </child>
                     <child type="label">
-                      <object class="GtkLabel" id="label2">
+                      <object class="GtkLabel" id="screen-reader-section-heading">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Screen Reader</property>
                         <attributes>
@@ -885,6 +891,9 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <accessibility>
+                                          <relation target="visual-alerts-section-heading" type="labelled-by"/>
+                                        </accessibility>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -911,7 +920,8 @@
                                 </child>
                                 <child>
                                   <object class="GtkButton" id="hearing_test_flash_button">
-                                    <property name="label" translatable="yes">Test flash</property>
+                                    <property name="label" translatable="yes">_Test flash</property>
+                                    <property name="use_underline">True</property>
                                     <property name="visible">True</property>
                                     <property name="sensitive">False</property>
                                     <property name="can_focus">True</property>
@@ -1021,7 +1031,7 @@
                       </object>
                     </child>
                     <child type="label">
-                      <object class="GtkLabel" id="label32">
+                      <object class="GtkLabel" id="visual-alerts-section-heading">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Visual Alerts</property>
                         <property name="use_markup">True</property>
@@ -1122,7 +1132,8 @@
                     <property name="visible">True</property>
                     <child>
                       <object class="GtkButton" id="hearing_sound_preferences_button">
-                        <property name="label" translatable="yes">Sound Settings</property>
+                        <property name="label" translatable="yes">_Sound Settings</property>
+                        <property name="use_underline">True</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -1199,6 +1210,9 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
+                                    <accessibility>
+                                      <relation target="typing-assistant-section-heading" type="labelled-by"/>
+                                    </accessibility>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -1237,7 +1251,7 @@
                       </object>
                     </child>
                     <child type="label">
-                      <object class="GtkLabel" id="label42">
+                      <object class="GtkLabel" id="typing-assistant-section-heading">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Typing Assistant</property>
                         <property name="use_markup">True</property>
@@ -1255,7 +1269,8 @@
                 </child>
                 <child>
                   <object class="GtkCheckButton" id="typing_keyboard_toggle_checkbox">
-                    <property name="label" translatable="yes">Turn on accessibility features from the keyboard</property>
+                    <property name="label" translatable="yes">_Turn on accessibility features from the keyboard</property>
+                    <property name="use_underline">True</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
@@ -1297,6 +1312,9 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <accessibility>
+                                          <relation target="sticky-keys-section-heading" type="labelled-by"/>
+                                        </accessibility>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1323,7 +1341,8 @@
                                 </child>
                                 <child>
                                   <object class="GtkCheckButton" id="typing_sticky_keys_disable_two_keys_checkbutton">
-                                    <property name="label" translatable="yes">Disable if two keys are pressed together</property>
+                                    <property name="label" translatable="yes">_Disable if two keys are pressed together</property>
+                                    <property name="use_underline">True</property>
                                     <property name="visible">True</property>
                                     <property name="sensitive">False</property>
                                     <property name="can_focus">True</property>
@@ -1339,7 +1358,8 @@
                                 </child>
                                 <child>
                                   <object class="GtkCheckButton" id="typing_sticky_keys_beep_modifier_checkbutton">
-                                    <property name="label" translatable="yes">Beep when a modifer key is pressed</property>
+                                    <property name="label" translatable="yes">Beep when a _modifer key is pressed</property>
+                                    <property name="use_underline">True</property>
                                     <property name="visible">True</property>
                                     <property name="sensitive">False</property>
                                     <property name="can_focus">True</property>
@@ -1386,7 +1406,7 @@
                       </object>
                     </child>
                     <child type="label">
-                      <object class="GtkLabel" id="label3">
+                      <object class="GtkLabel" id="sticky-keys-section-heading">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Sticky Keys</property>
                         <property name="use_markup">True</property>
@@ -1432,6 +1452,9 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <accessibility>
+                                          <relation target="slow-keys-section-heading" type="labelled-by"/>
+                                        </accessibility>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1465,8 +1488,9 @@
                                       <object class="GtkLabel" id="typing_slowkeys_delay_label">
                                         <property name="visible">True</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">Acceptance delay:</property>
+                                        <property name="label" translatable="yes">A_cceptance delay:</property>
                                         <property name="use_underline">True</property>
+                                        <property name="mnemonic_widget">typing_slowkeys_delay_scale</property>
                                         <property name="justify">center</property>
                                       </object>
                                       <packing>
@@ -1674,7 +1698,7 @@
                       </object>
                     </child>
                     <child type="label">
-                      <object class="GtkLabel" id="label25">
+                      <object class="GtkLabel" id="slow-keys-section-heading">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Slow Keys</property>
                         <property name="use_markup">True</property>
@@ -1720,6 +1744,9 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <accessibility>
+                                          <relation target="bounce-keys-section-heading" type="labelled-by"/>
+                                        </accessibility>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -1753,8 +1780,9 @@
                                       <object class="GtkLabel" id="typing_bouncekeys_delay_label">
                                         <property name="visible">True</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">Acceptance delay:</property>
+                                        <property name="label" translatable="yes">Acc_eptance delay:</property>
                                         <property name="use_underline">True</property>
+                                        <property name="mnemonic_widget">typing_bouncekeys_delay_scale</property>
                                         <property name="justify">center</property>
                                       </object>
                                       <packing>
@@ -1829,7 +1857,8 @@
                                 </child>
                                 <child>
                                   <object class="GtkCheckButton" id="typing_bounce_keys_beep_rejected_checkbutton">
-                                    <property name="label" translatable="yes">Beep when a key is rejected</property>
+                                    <property name="label" translatable="yes">Beep when a key is _rejected</property>
+                                    <property name="use_underline">True</property>
                                     <property name="visible">True</property>
                                     <property name="sensitive">False</property>
                                     <property name="can_focus">True</property>
@@ -1914,7 +1943,7 @@
                       </object>
                     </child>
                     <child type="label">
-                      <object class="GtkLabel" id="label29">
+                      <object class="GtkLabel" id="bounce-keys-section-heading">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Bounce Keys</property>
                         <property name="use_markup">True</property>
@@ -1947,7 +1976,8 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="typing_keyboard_preferences_button">
-                        <property name="label" translatable="yes">Keyboard Settings</property>
+                        <property name="label" translatable="yes">_Keyboard Settings</property>
+                        <property name="use_underline">True</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -2018,6 +2048,9 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <accessibility>
+                                          <relation target="mouse-keys-section-heading" type="labelled-by"/>
+                                        </accessibility>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -2069,7 +2102,7 @@
                       </object>
                     </child>
                     <child type="label">
-                      <object class="GtkLabel" id="label30">
+                      <object class="GtkLabel" id="mouse-keys-section-heading">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Mouse Keys</property>
                         <property name="use_markup">True</property>
@@ -2210,6 +2243,9 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <accessibility>
+                                          <relation target="second-click-section-heading" type="labelled-by"/>
+                                        </accessibility>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -2266,7 +2302,7 @@
                                       <object class="GtkLabel" id="pointing_secondary_click_delay_label">
                                         <property name="visible">True</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">Acceptance delay:</property>
+                                        <property name="label" translatable="yes">A_cceptance delay:</property>
                                         <property name="use_underline">True</property>
                                         <property name="justify">center</property>
                                         <property name="mnemonic_widget">pointing_secondary_click_delay_scale</property>
@@ -2366,7 +2402,7 @@
                       </object>
                     </child>
                     <child type="label">
-                      <object class="GtkLabel" id="label33">
+                      <object class="GtkLabel" id="second-click-section-heading">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Simulated Secondary Click</property>
                         <property name="use_markup">True</property>
@@ -2412,6 +2448,9 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <accessibility>
+                                          <relation target="hover-click-section-heading" type="labelled-by"/>
+                                        </accessibility>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -2563,7 +2602,7 @@
                                       <object class="GtkLabel" id="pointing_dwell_threshold_label">
                                         <property name="visible">True</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">_Motion threshold:</property>
+                                        <property name="label" translatable="yes">Motion _threshold:</property>
                                         <property name="use_underline">True</property>
                                         <property name="justify">center</property>
                                         <property name="mnemonic_widget">pointing_dwell_threshold_scale</property>
@@ -2669,7 +2708,7 @@
                       </object>
                     </child>
                     <child type="label">
-                      <object class="GtkLabel" id="label36">
+                      <object class="GtkLabel" id="hover-click-section-heading">
                         <property name="visible">True</property>
                         <property name="label" translatable="yes">Hover Click</property>
                         <property name="use_markup">True</property>
@@ -2690,7 +2729,8 @@
                     <property name="visible">True</property>
                     <child>
                       <object class="GtkButton" id="pointing_mouse_preferences_button">
-                        <property name="label" translatable="yes">Mouse Settings</property>
+                        <property name="label" translatable="yes">_Mouse Settings</property>
+                        <property name="use_underline">True</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
