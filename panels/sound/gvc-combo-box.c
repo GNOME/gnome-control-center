@@ -340,6 +340,7 @@ gvc_combo_box_init (GvcComboBox *combo_box)
         gtk_box_pack_start (GTK_BOX (box), combo_box->priv->combobox, TRUE, TRUE, 0);
 
         combo_box->priv->button = gtk_button_new_with_label ("APPLICATION BUG");
+        gtk_button_set_use_underline (GTK_BUTTON (combo_box->priv->button), TRUE);
         gtk_widget_set_no_show_all (combo_box->priv->button, TRUE);
         gtk_box_pack_start (GTK_BOX (box), combo_box->priv->button, FALSE, FALSE, 0);
 

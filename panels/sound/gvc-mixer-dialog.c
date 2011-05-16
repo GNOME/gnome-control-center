@@ -1643,7 +1643,7 @@ on_card_selection_changed (GtkTreeSelection *selection,
         current_profile = gvc_mixer_card_get_profile (card);
         profiles = gvc_mixer_card_get_profiles (card);
         dialog->priv->hw_profile_combo = gvc_combo_box_new (_("_Profile:"));
-        g_object_set (G_OBJECT (dialog->priv->hw_profile_combo), "button-label", _("Test Speakers"), NULL);
+        g_object_set (G_OBJECT (dialog->priv->hw_profile_combo), "button-label", _("_Test Speakers"), NULL);
         gvc_combo_box_set_profiles (GVC_COMBO_BOX (dialog->priv->hw_profile_combo), profiles);
         gvc_combo_box_set_active (GVC_COMBO_BOX (dialog->priv->hw_profile_combo), current_profile->profile);
 

@@ -331,9 +331,14 @@ channel_control_new (ca_context *canberra, pa_channel_position_t position)
         gtk_box_pack_start (GTK_BOX (control), label, FALSE, FALSE, 0);
 
         test_button = gtk_button_new_with_label (_("Test"));
+        
         g_signal_connect (G_OBJECT (test_button), "clicked",
                           G_CALLBACK (on_test_button_clicked), control);
         g_object_set_data (G_OBJECT (control), "button", test_button);
+
+        atk_object_add_relationship (gtk_widget_get_accessible (test_button),
+                                     ATK_RELATION_LABELLED_BY,
+                                     gtk_widget_get_accessible (label));
 
         box = gtk_hbox_new (FALSE, 0);
         gtk_box_pack_start (GTK_BOX (box), test_button, TRUE, FALSE, 0);
