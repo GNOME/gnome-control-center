@@ -21,7 +21,7 @@
 #include "shell-search-renderer.h"
 #include <string.h>
 
-G_DEFINE_TYPE (ShellSearchRenderer, shell_search_renderer, GTK_TYPE_CELL_RENDERER)
+G_DEFINE_TYPE (ShellSearchRenderer, shell_search_renderer, GTK_TYPE_CELL_RENDERER_TEXT)
 
 #define SEARCH_RENDERER_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), SHELL_TYPE_SEARCH_RENDERER, ShellSearchRendererPrivate))
@@ -75,6 +75,8 @@ shell_search_renderer_set_property (GObject      *object,
   case PROP_TITLE:
     g_free (priv->title);
     priv->title = g_value_dup_string (value);
+    /* set GtkCellRendererText::text for a11y */
+    g_object_set (object, "text", priv->title, NULL);
     break;
 
   case PROP_SEARCH_TARGET:
@@ -200,13 +202,10 @@ shell_search_renderer_set_layout (ShellSearchRenderer *cell, GtkWidget *widget)
 }
 
 static void
-shell_search_renderer_get_size (GtkCellRenderer    *cell,
-                                GtkWidget          *widget,
-                                const GdkRectangle *cell_area,
-                                gint               *x_offset,
-                                gint               *y_offset,
-                                gint               *width,
-                                gint               *height)
+get_size (GtkCellRenderer *cell,
+          GtkWidget       *widget,
+          gint            *width,
+          gint            *height)
 {
   ShellSearchRendererPrivate *priv = SHELL_SEARCH_RENDERER (cell)->priv;
   PangoRectangle rect;
@@ -218,10 +217,54 @@ shell_search_renderer_get_size (GtkCellRenderer    *cell,
 
   if (width) *width = rect.width;
   if (height) *height = rect.height;
+}
 
-  if (x_offset) *x_offset = 0;
-  if (y_offset) *y_offset = 0;
+static void
+shell_search_renderer_get_preferred_width (GtkCellRenderer *cell,
+                                           GtkWidget       *widget,
+                                           gint            *minimum_size,
+                                           gint            *natural_size)
+{
+  gint width;
 
+  get_size (cell, widget, &width, NULL);
+  if (minimum_size) *minimum_size = width;
+  if (natural_size) *natural_size = width;
+}
+
+static void
+shell_search_renderer_get_preferred_height (GtkCellRenderer *cell,
+                                            GtkWidget       *widget,
+                                            gint            *minimum_size,
+                                            gint            *natural_size)
+{
+  gint height;
+
+  get_size (cell, widget, NULL, &height);
+  if (minimum_size) *minimum_size = height;
+  if (natural_size) *natural_size = height;
+}
+
+static void
+shell_search_renderer_get_preferred_height_for_width (GtkCellRenderer *cell,
+                                                      GtkWidget       *widget,
+                                                      gint             width,
+                                                      gint            *minimum_height,
+                                                      gint            *natural_height)
+{
+  shell_search_renderer_get_preferred_height (cell, widget, minimum_height, natural_height);
+}
+
+static void
+shell_search_renderer_get_aligned_area (GtkCellRenderer      *cell,
+                                        GtkWidget            *widget,
+                                        GtkCellRendererState  flags,
+                                        const GdkRectangle   *cell_area,
+                                        GdkRectangle         *aligned_area)
+{
+  get_size (cell, widget, &aligned_area->width, &aligned_area->height);
+  aligned_area->x = cell_area->x;
+  aligned_area->y = cell_area->y;
 }
 
 static void
@@ -262,7 +305,11 @@ shell_search_renderer_class_init (ShellSearchRendererClass *klass)
   object_class->dispose = shell_search_renderer_dispose;
   object_class->finalize = shell_search_renderer_finalize;
 
-  cell_renderer->get_size = shell_search_renderer_get_size;
+  cell_renderer->get_preferred_width = shell_search_renderer_get_preferred_width;
+  cell_renderer->get_preferred_height = shell_search_renderer_get_preferred_height;
+  cell_renderer->get_preferred_height_for_width = shell_search_renderer_get_preferred_height_for_width;
+  cell_renderer->get_aligned_area = shell_search_renderer_get_aligned_area;
+
   cell_renderer->render = shell_search_renderer_render;
 
   pspec = g_param_spec_string ("title",

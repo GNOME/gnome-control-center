@@ -55,14 +55,14 @@ typedef struct _ShellSearchRendererPrivate ShellSearchRendererPrivate;
 
 struct _ShellSearchRenderer
 {
-  GtkCellRenderer parent;
+  GtkCellRendererText parent;
 
   ShellSearchRendererPrivate *priv;
 };
 
 struct _ShellSearchRendererClass
 {
-  GtkCellRendererClass parent_class;
+  GtkCellRendererTextClass parent_class;
 };
 
 GType shell_search_renderer_get_type (void) G_GNUC_CONST;
