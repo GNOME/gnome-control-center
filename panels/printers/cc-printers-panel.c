@@ -1736,14 +1736,15 @@ supply_levels_draw_cb (GtkWidget *widget,
           gchar   **marker_namesv = NULL;
           gchar   **marker_typesv = NULL;
           gchar    *tmp = NULL;
-          gint      border_radius = 3;
+          gint      border_radius = 0;
 
           context = gtk_widget_get_style_context ((GtkWidget *)
             gtk_builder_get_object (priv->builder, "printer-options-button"));
           gtk_style_context_get_border_color (context, 0, &border_color);
           gtk_style_context_get_property (
             context, GTK_STYLE_PROPERTY_BORDER_RADIUS, 0, &int_val);
-          border_radius = g_value_get_int (&int_val);
+          if (G_VALUE_HOLDS_INT (&int_val))
+            border_radius = g_value_get_int (&int_val);
 
           widget = (GtkWidget*)
             gtk_builder_get_object (priv->builder, "supply-drawing-area");
