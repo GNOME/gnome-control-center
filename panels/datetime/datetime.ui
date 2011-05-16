@@ -210,6 +210,11 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="relief">none</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="hour_up_accessible">
+                                    <property name="accessible-description" translatable="yes">Set the time one hour ahead.</property>
+                                  </object>
+                                </child>
                                 <child>
                                   <object class="GtkArrow" id="arrow1">
                                     <property name="visible">True</property>
@@ -224,6 +229,11 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="relief">none</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="hour_down_accessible">
+                                    <property name="accessible-description" translatable="yes">Set the time one hour back.</property>
+                                  </object>
+                                </child>
                                 <child>
                                   <object class="GtkArrow" id="arrow2">
                                     <property name="visible">True</property>
@@ -242,6 +252,11 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="relief">none</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="min_up_accessible">
+                                    <property name="accessible-description" translatable="yes">Set the time one minute ahead.</property>
+                                  </object>
+                                </child>
                                 <child>
                                   <object class="GtkArrow" id="arrow4">
                                     <property name="visible">True</property>
@@ -260,6 +275,11 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="relief">none</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="min_down_accessible">
+                                    <property name="accessible-description" translatable="yes">Set the time one minute back.</property>
+                                  </object>
+                                </child>
                                 <child>
                                   <object class="GtkArrow" id="arrow3">
                                     <property name="visible">True</property>
@@ -302,6 +322,11 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="relief">none</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="ampm_up_accessible">
+                                    <property name="accessible-description" translatable="yes">Switch between AM and PM.</property>
+                                  </object>
+                                </child>
                                 <child>
                                   <object class="GtkArrow" id="arrow5">
                                     <property name="visible">True</property>
@@ -320,6 +345,11 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="relief">none</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="ampm_down_accessible">
+                                    <property name="accessible-description" translatable="yes">Switch between AM and PM.</property>
+                                  </object>
+                                </child>
                                 <child>
                                   <object class="GtkArrow" id="arrow6">
                                     <property name="visible">True</property>
@@ -386,6 +416,11 @@
                           <object class="GtkComboBox" id="month-combobox">
                             <property name="visible">True</property>
                             <property name="model">month-liststore</property>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="month-accessible">
+                                <property name="accessible-description" translatable="yes">Month</property>
+                              </object>
+                            </child>
                             <child>
                               <object class="GtkCellRendererText" id="cellrenderertext3"/>
                               <attributes>
@@ -404,6 +439,11 @@
                             <property name="width_chars">3</property>
                             <property name="numeric">True</property>
                             <property name="wrap">True</property>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="day-accessible">
+                                <property name="accessible-description" translatable="yes">Day</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                           </packing>
@@ -416,6 +456,11 @@
                             <property name="width_chars">5</property>
                             <property name="numeric">True</property>
                             <property name="wrap">True</property>
+                            <child internal-child="accessible">
+                              <object class="AtkObject" id="year-accessible">
+                                <property name="accessible-description" translatable="yes">Year</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                           </packing>
