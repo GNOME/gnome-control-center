@@ -19,11 +19,12 @@
  *
  */
 
+#include "config.h"
 #include "cc-datetime-panel.h"
 
 #include <sys/time.h>
 #include "cc-timezone-map.h"
-#include "set-timezone.h"
+#include "dtm.h"
 #include "date-endian.h"
 
 #include <gdesktop-enums.h>
@@ -77,6 +78,9 @@ struct _CcDateTimePanelPrivate
   GDesktopClockFormat clock_format;
 
   guint update_id;
+
+  DateTimeMechanism *dtm;
+  GCancellable *cancellable;
 };
 
 static void update_time (CcDateTimePanel *self);
@@ -135,6 +139,19 @@ cc_date_time_panel_dispose (GObject *object)
     {
       g_date_time_unref (priv->date);
       priv->date = NULL;
+    }
+
+  if (priv->cancellable)
+    {
+      g_cancellable_cancel (priv->cancellable);
+      g_object_unref (priv->cancellable);
+      priv->cancellable = NULL;
+    }
+
+  if (priv->dtm)
+    {
+      g_object_unref (priv->dtm);
+      priv->dtm = NULL;
     }
 
   G_OBJECT_CLASS (cc_date_time_panel_parent_class)->dispose (object);
@@ -252,13 +269,21 @@ update_time (CcDateTimePanel *self)
 }
 
 static void
-set_time_cb (CcDateTimePanel *self,
-             GError          *error)
+set_time_cb (GObject      *source,
+             GAsyncResult *res,
+             gpointer      user_data)
 {
-  /* TODO: display any error in a user friendly way */
-  if (error)
+  CcDateTimePanel *self = user_data;
+  GError *error;
+
+  error = NULL;
+  if (!date_time_mechanism_call_set_time_finish (self->priv->dtm,
+                                                 res,
+                                                 &error))
     {
+      /* TODO: display any error in a user friendly way */
       g_warning ("Could not set system time: %s", error->message);
+      g_error_free (error);
     }
   else
     {
@@ -267,24 +292,40 @@ set_time_cb (CcDateTimePanel *self,
 }
 
 static void
-set_timezone_cb (CcDateTimePanel *self,
-                 GError          *error)
+set_timezone_cb (GObject      *source,
+                 GAsyncResult *res,
+                 gpointer      user_data)
 {
-  /* TODO: display any error in a user friendly way */
-  if (error)
+  CcDateTimePanel *self = user_data;
+  GError *error;
+
+  error = NULL;
+  if (!date_time_mechanism_call_set_timezone_finish (self->priv->dtm,
+                                                     res,
+                                                     &error))
     {
+      /* TODO: display any error in a user friendly way */
       g_warning ("Could not set system timezone: %s", error->message);
+      g_error_free (error);
     }
 }
 
 static void
-set_using_ntp_cb (CcDateTimePanel *self,
-                  GError          *error)
+set_using_ntp_cb (GObject      *source,
+                  GAsyncResult *res,
+                  gpointer      user_data)
 {
-  /* TODO: display any error in a user friendly way */
-  if (error)
+  CcDateTimePanel *self = user_data;
+  GError *error;
+
+  error = NULL;
+  if (!date_time_mechanism_call_set_using_ntp_finish (self->priv->dtm,
+                                                      res,
+                                                      &error))
     {
+      /* TODO: display any error in a user friendly way */
       g_warning ("Could not set system to use NTP: %s", error->message);
+      g_error_free (error);
     }
 }
 
@@ -295,7 +336,12 @@ queue_set_datetime (CcDateTimePanel *self)
 
   /* for now just do it */
   unixtime = g_date_time_to_unix (self->priv->date);
-  set_system_time_async (unixtime, (GFunc) set_time_cb, self, NULL);
+
+  date_time_mechanism_call_set_time (self->priv->dtm,
+                                     unixtime,
+                                     self->priv->cancellable,
+                                     set_time_cb,
+                                     self);
 }
 
 static void
@@ -305,7 +351,12 @@ queue_set_ntp (CcDateTimePanel *self)
   gboolean using_ntp;
   /* for now just do it */
   using_ntp = gtk_switch_get_active (GTK_SWITCH (W("network_time_switch")));
-  set_using_ntp_async (using_ntp, (GFunc) set_using_ntp_cb, self, NULL);
+
+  date_time_mechanism_call_set_using_ntp (self->priv->dtm,
+                                          using_ntp,
+                                          self->priv->cancellable,
+                                          set_using_ntp_cb,
+                                          self);
 }
 
 static void
@@ -314,7 +365,11 @@ queue_set_timezone (CcDateTimePanel *self)
   /* for now just do it */
   if (self->priv->current_location)
     {
-      set_system_timezone_async (self->priv->current_location->zone, (GFunc) set_timezone_cb, self, NULL);
+      date_time_mechanism_call_set_timezone (self->priv->dtm,
+                                             self->priv->current_location->zone,
+                                             self->priv->cancellable,
+                                             set_timezone_cb,
+                                             self);
     }
 }
 
@@ -471,15 +526,20 @@ location_changed_cb (CcTimezoneMap   *map,
 }
 
 static void
-get_timezone_cb (CcDateTimePanel *self,
-                 const gchar     *timezone,
-                 GError          *error)
+get_timezone_cb (GObject      *source,
+                 GAsyncResult *res,
+                 gpointer      user_data)
 {
+  CcDateTimePanel *self = user_data;
   GtkWidget *widget;
+  gchar *timezone;
+  GError *error;
 
-  if (error)
+  error = NULL;
+  if (!date_time_mechanism_call_get_timezone_finish (self->priv->dtm, &timezone, res, &error))
     {
       g_warning ("Could not get current timezone: %s", error->message);
+      g_error_free (error);
     }
   else
     {
@@ -504,6 +564,8 @@ get_timezone_cb (CcDateTimePanel *self,
   g_signal_connect (self->priv->map, "location-changed",
                     G_CALLBACK (location_changed_cb), self);
 
+
+  g_free (timezone);
 }
 
 /* load region and city tree models */
@@ -813,12 +875,27 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   GtkTreeModelSort *city_modelsort;
   guint i, num_days;
   gboolean using_ntp;
+  gboolean can_use_ntp;
   int ret;
   GtkWidget *lockbutton;
   GPermission *permission;
   DateEndianess endianess;
+  GError *error;
 
   priv = self->priv = DATE_TIME_PANEL_PRIVATE (self);
+
+  priv->cancellable = g_cancellable_new ();
+  error = NULL;
+  priv->dtm = date_time_mechanism_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                          G_DBUS_PROXY_FLAGS_NONE,
+                                                          "org.gnome.SettingsDaemon.DateTimeMechanism",
+                                                          "/",
+                                                          priv->cancellable,
+                                                          &error);
+  if (priv->dtm == NULL) {
+        g_warning ("could not get proxy for DateTimeMechanism: %s", error->message);
+        g_error_free (error);
+  }
 
   priv->builder = gtk_builder_new ();
 
@@ -834,7 +911,18 @@ cc_date_time_panel_init (CcDateTimePanel *self)
     }
 
   /* set up network time button */
-  using_ntp = get_using_ntp ();
+  error = NULL;
+  using_ntp = can_use_ntp = FALSE;
+  if (!date_time_mechanism_call_get_using_ntp_sync (priv->dtm,
+                                                    &can_use_ntp,
+                                                    &using_ntp,
+                                                    priv->cancellable,
+                                                    &error))
+    {
+      g_warning ("Failed to get using ntp: %s", error->message);
+      g_error_free (error);
+    }
+
   gtk_switch_set_active (GTK_SWITCH (W("network_time_switch")), using_ntp);
   update_widget_state_for_ntp (self, using_ntp);
   g_signal_connect (W("network_time_switch"), "notify::active",
@@ -924,7 +1012,10 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 
   /* After the initial setup, so we can be sure that
    * the model is filled up */
-  get_system_timezone_async ((GetTimezoneFunc) get_timezone_cb, self, NULL);
+  date_time_mechanism_call_get_timezone (priv->dtm,
+                                         priv->cancellable,
+                                         get_timezone_cb,
+                                         self);
 
   queue_clock_update (self);
 

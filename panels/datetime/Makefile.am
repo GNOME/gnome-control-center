@@ -104,8 +104,8 @@ libdate_time_la_SOURCES =	\
 	cc-datetime-panel.h	\
 	cc-timezone-map.c	\
 	cc-timezone-map.h	\
-	set-timezone.c		\
-	set-timezone.h		\
+	dtm.c			\
+	dtm.h			\
 	date-endian.c		\
 	date-endian.h		\
 	tz.c tz.h
