@@ -14,8 +14,8 @@ gnome_setup_assistant_SOURCES =	\
 	panel-cell-renderer-mode.c panel-cell-renderer-mode.h \
 	panel-cell-renderer-security.c panel-cell-renderer-security.h \
 	cc-timezone-map.c cc-timezone-map.h \
-	set-timezone.c set-timezone.h \
-	tz.c tz.h
+	tz.c tz.h \
+	dtm.c dtm.h
 
 AM_CPPFLAGS = \
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \

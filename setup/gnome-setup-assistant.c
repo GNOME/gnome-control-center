@@ -17,7 +17,7 @@
 #include <act/act-user-manager.h>
 
 #include "cc-timezone-map.h"
-#include "set-timezone.h"
+#include "dtm.h"
 
 #define GWEATHER_I_KNOW_THIS_IS_UNSTABLE
 #include <libgweather/location-entry.h>
@@ -53,6 +53,7 @@ typedef struct {
         /* location data */
         CcTimezoneMap *map;
         TzLocation *current_location;
+        DateTimeMechanism *dtm;
 } SetupData;
 
 #define OBJ(type,name) ((type)gtk_builder_get_object(setup->builder,(name)))
@@ -1149,12 +1150,20 @@ prepare_account_page (SetupData *setup)
 
 
 static void
-set_timezone_cb (SetupData *setup,
-                 GError    *error)
+set_timezone_cb (GObject      *source,
+                 GAsyncResult *res,
+                 gpointer      user_data)
 {
-        /* TODO: display any error in a user friendly way */
-        if (error) {
+        SetupData *setup = user_data;
+        GError *error;
+
+        error = NULL;
+        if (!date_time_mechanism_call_set_timezone_finish (setup->dtm,
+                                                           res,
+                                                           &error)) {
+                /* TODO: display any error in a user friendly way */
                 g_warning ("Could not set system timezone: %s", error->message);
+                g_error_free (error);
         }
 }
 
@@ -1163,7 +1172,11 @@ queue_set_timezone (SetupData *setup)
 {
         /* for now just do it */
         if (setup->current_location) {
-                set_system_timezone_async (setup->current_location->zone, (GFunc) set_timezone_cb, setup, NULL);
+                date_time_mechanism_call_set_timezone (setup->dtm,
+                                                       setup->current_location->zone,
+                                                       NULL,
+                                                       set_timezone_cb,
+                                                       setup);
         }
 }
 
@@ -1220,12 +1233,18 @@ location_changed_cb (CcTimezoneMap *map,
 }
 
 static void
-get_timezone_cb (SetupData   *setup,
-                 const gchar *timezone,
-                 GError      *error)
+get_timezone_cb (GObject      *source,
+                 GAsyncResult *res,
+                 gpointer      user_data)
 {
-        if (error) {
+        SetupData *setup = user_data;
+        gchar *timezone;
+        GError *error;
+
+        error = NULL;
+        if (!date_time_mechanism_call_get_timezone_finish (setup->dtm, &timezone, res, &error)) {
                 g_warning ("Could not get current timezone: %s", error->message);
+                g_error_free (error);
         }
         else {
                 if (!cc_timezone_map_set_timezone (setup->map, timezone)) {
@@ -1292,8 +1311,21 @@ prepare_location_page (SetupData *setup)
 {
         GtkWidget *frame, *map, *entry;
         GWeatherLocation *world;
+        GError *error;
 
         frame = WID("location-map-frame");
+
+        error = NULL;
+        setup->dtm = date_time_mechanism_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                                 G_DBUS_PROXY_FLAGS_NONE,
+                                                                 "org.gnome.SettingsDaemon.DateTimeMechanism",
+                                                                 "/",
+                                                                 NULL,
+                                                                 &error);
+        if (setup->dtm == NULL) {
+                g_error ("Failed to create proxy for datetime mechanism: %s", error->message);
+                exit (1);
+        }
 
         setup->map = cc_timezone_map_new ();
         map = (GtkWidget *)setup->map;
@@ -1305,7 +1337,7 @@ prepare_location_page (SetupData *setup)
 
         gtk_container_add (GTK_CONTAINER (frame), map);
 
-        get_system_timezone_async ((GetTimezoneFunc) get_timezone_cb, setup, NULL);
+        date_time_mechanism_call_get_timezone (setup->dtm, NULL, get_timezone_cb, setup);
 
         world = gweather_location_new_world (FALSE);
         entry = gweather_location_entry_new (world);
