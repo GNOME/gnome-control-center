@@ -6,54 +6,62 @@
 
 #include "hostname-helper.h"
 
-struct {
-	char *input;
-	char *output_display;
-	char *output_real;
-} tests[] = {
-	{ "Lennart's PC", "Lennarts-PC", "lennarts-pc" },
-	{ "Müllers Computer", "Mullers-Computer", "mullers-computer" },
-	{ "Voran!", "Voran", "voran" },
-	{ "Es war einmal ein Männlein", "Es-war-einmal-ein-Mannlein", "es-war-einmal-ein-mannlein" },
-	{ "Jawoll. Ist doch wahr!", "Jawoll-Ist-doch-wahr", "jawoll-ist-doch-wahr" },
-	{ "レナート", "localhost", "localhost" },
-	{ "!!!", "localhost", "localhost" },
-	{ "...zack!!! zack!...", "zack-zack", "zack-zack" },
-	{ "Bãstien's computer... Foo-bar", "Bastiens-computer-Foo-bar", "bastiens-computer-foo-bar" },
-	{ "", "localhost", "localhost" },
-};
-
 int main (int argc, char **argv)
 {
 	char *result;
 	guint i;
+	char *contents;
+	char **lines;
 
 	setlocale (LC_ALL, "");
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
-	/* FIXME:
-	 * - Tests don't work in non-UTF-8 locales
-	 * - They also fail in de_DE.UTF-8 because of "ü" -> "ue" conversions */
-
-	for (i = 0; i < G_N_ELEMENTS (tests); i++) {
-		result = pretty_hostname_to_static (tests[i].input, FALSE);
-		if (g_strcmp0 (result, tests[i].output_real) != 0)
-			g_error ("Result for '%s' doesn't match '%s' (got: '%s')",
-				 tests[i].input, tests[i].output_real, result);
-		else
-			g_debug ("Result for '%s' matches '%s'",
-				 tests[i].input, result);
-		g_free (result);
-
-		result = pretty_hostname_to_static (tests[i].input, TRUE);
-		if (g_strcmp0 (result, tests[i].output_display) != 0)
-			g_error ("Result for '%s' doesn't match '%s' (got: '%s')",
-				 tests[i].input, tests[i].output_display, result);
-		else
-			g_debug ("Result for '%s' matches '%s'",
-				 tests[i].input, result);
-		g_free (result);
+	if (g_file_get_contents (argv[1], &contents, NULL, NULL) == FALSE) {
+		g_warning ("Failed to load '%s'", argv[1]);
+		return 1;
 	}
+	lines = g_strsplit (contents, "\n", -1);
+	if (lines == NULL) {
+		g_warning ("Test file is empty");
+		return 1;
+	}
+
+	for (i = 0; lines[i] != NULL; i++) {
+		char *utf8;
+		char **items;
+
+		if (*lines[i] == '#')
+			continue;
+		if (*lines[i] == '\0')
+			break;
+
+		items = g_strsplit (lines[i], "\t", -1);
+		utf8 = g_locale_from_utf8 (items[0], -1, NULL, NULL, NULL);
+		result = pretty_hostname_to_static (items[0], FALSE);
+		if (g_strcmp0 (result, items[2]) != 0)
+			g_error ("Result for '%s' doesn't match '%s' (got: '%s')",
+				 utf8, items[2], result);
+		else
+			g_debug ("Result for '%s' matches '%s'",
+				 utf8, result);
+		g_free (result);
+		g_free (utf8);
+
+		result = pretty_hostname_to_static (items[0], TRUE);
+		utf8 = g_locale_from_utf8 (items[0], -1, NULL, NULL, NULL);
+		if (g_strcmp0 (result, items[1]) != 0)
+			g_error ("Result for '%s' doesn't match '%s' (got: '%s')",
+				 utf8, items[1], result);
+		else
+			g_debug ("Result for '%s' matches '%s'",
+				 utf8, result);
+		g_free (result);
+		g_free (utf8);
+
+		g_strfreev (items);
+	}
+
+	g_strfreev (lines);
 
 	return 0;
 }

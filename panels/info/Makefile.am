@@ -19,7 +19,7 @@ test_hostname_CFLAGS = $(INCLUDES)
 all-local: check-local
 
 check-local: test-hostname
-	$(builddir)/test-hostname > /dev/null
+	$(builddir)/test-hostname $(srcdir)/hostnames-test.txt > /dev/null
 
 ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libinfo.la
@@ -44,5 +44,7 @@ desktop_in_files = gnome-info-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 CLEANFILES = $(desktop_in_files) $(desktop_DATA)
+
+EXTRA_DIST = hostnames-test.txt
 
 -include $(top_srcdir)/git.mk
