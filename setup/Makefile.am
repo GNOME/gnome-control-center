@@ -23,10 +23,6 @@ AM_CPPFLAGS = \
 	-DUIDIR="\"$(uidir)\"" \
 	-DDATADIR="\"$(pkgdatadir)/ui/datetime\""
 
-gsettings_SCHEMAS = org.gnome.control-center.setup.gschema.xml
-
-@GSETTINGS_RULES@
-
 uidir = $(pkgdatadir)/ui/setup
 ui_DATA = \
 	setup.ui
@@ -37,7 +33,6 @@ sys_DATA = gnome-setup-assistant.desktop
 
 EXTRA_DIST = \
 	$(ui_DATA) \
-	$(sys_DATA) \
-	org.gnome.control-center.setup.gschema.xml
+	$(sys_DATA)
 
 -include $(top_srcdir)/git.mk

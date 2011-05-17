@@ -1359,19 +1359,8 @@ prepare_location_page (SetupData *setup)
 /* --- Other setup --- */
 
 static void
-disable_autostart (void)
-{
-        GSettings *settings;
-
-        settings = g_settings_new ("org.gnome.control-center.setup");
-        g_settings_set_boolean (settings, "need-setup", FALSE);
-}
-
-static void
 close_cb (GtkAssistant *assi, gpointer data)
 {
-        disable_autostart ();
-
         gtk_main_quit ();
 }
 
