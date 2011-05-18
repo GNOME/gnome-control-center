@@ -19,13 +19,15 @@ libuniversal_access_la_SOURCES =		\
 	gconf-property-editor.h			\
 	gconf-property-editor.c			\
 	cc-marshal.c				\
-	cc-marshal.h
+	cc-marshal.h				\
+	zoom-options.c				\
+	zoom-options.h
 
 libuniversal_access_la_LIBADD = $(PANEL_LIBS) $(UNIVERSAL_ACCESS_PANEL_LIBS) $(top_builddir)/panels/common/libshortcuts.la
 libuniversal_access_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui
-dist_ui_DATA = uap.ui
+dist_ui_DATA = uap.ui zoom-options.ui
 
 
 @INTLTOOL_DESKTOP_RULE@

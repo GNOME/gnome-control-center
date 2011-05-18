@@ -32,6 +32,8 @@
 #include "eggaccelerators.h"
 #include "gconf-property-editor.h"
 
+#include "zoom-options.h"
+
 #define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
 
 
@@ -49,6 +51,8 @@ struct _CcUaPanelPrivate
   GSettings *mouse_settings;
   GSettings *application_settings;
   GSettings *mediakeys_settings;
+
+  GObject *zoom_options;
 
   GSList *notify_list;
 };
@@ -142,6 +146,12 @@ cc_ua_panel_dispose (GObject *object)
       priv->mediakeys_settings = NULL;
     }
 
+  if (priv->zoom_options)
+    {
+      g_object_unref (priv->zoom_options);
+      priv->zoom_options = NULL;
+    }
+
   G_OBJECT_CLASS (cc_ua_panel_parent_class)->dispose (object);
 }
 
@@ -209,6 +219,17 @@ static gchar *visual_alerts_section[] = {
     "hearing_flash_screen_button",
     NULL
 };
+
+/* zoom options dialog */
+static void
+zoom_options_launch_cb (GtkWidget *options_button, CcUaPanel *self)
+{
+  if (self->priv->zoom_options == NULL)
+    self->priv->zoom_options = g_object_new (ZOOM_TYPE_OPTIONS, NULL);
+
+  if (self->priv->zoom_options != NULL)
+    zoom_options_present_dialog (ZOOM_OPTIONS (self->priv->zoom_options));
+}
 
 static void
 cc_ua_panel_section_switched (GObject    *object,
@@ -516,10 +537,12 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                    WID (priv->builder, "seeing_enable_toggle_keys_checkbutton"), "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  settings_on_off_editor_new (priv, priv->application_settings,
-                              "screen-magnifier-enabled",
-                              WID (priv->builder, "seeing_zoom_switch"),
-                              NULL);
+  g_signal_connect (WID (priv->builder, "seeing_zoom_preferences_button"),
+                    "clicked",
+                    G_CALLBACK (zoom_options_launch_cb), self);
+  g_settings_bind (priv->application_settings, "screen-magnifier-enabled",
+                   WID (priv->builder, "seeing_zoom_switch"), "active",
+                   G_SETTINGS_BIND_DEFAULT);
 
   settings_on_off_editor_new (priv, priv->application_settings,
                               "screen-reader-enabled",
