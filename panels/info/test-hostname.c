@@ -13,7 +13,14 @@ int main (int argc, char **argv)
 	char *contents;
 	char **lines;
 
-	setlocale (LC_ALL, "");
+	/* Running in some locales will
+	 * break the tests as "ü" will be transliterated to
+	 * "ue" in de_DE, and 'u"' in the C locale.
+	 *
+	 * Work around that by forcing en_US with UTF-8 in
+	 * our tests
+	 * https://bugzilla.gnome.org/show_bug.cgi?id=650342 */
+	setlocale (LC_ALL, "en_US.UTF-8");
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
 	if (g_file_get_contents (argv[1], &contents, NULL, NULL) == FALSE) {
