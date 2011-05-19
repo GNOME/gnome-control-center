@@ -102,6 +102,7 @@ PKG_CHECK_MODULES(MOUSE_PANEL, $COMMON_MODULES xi >= 1.2
                   gnome-settings-daemon >= $GSD_REQUIRED_VERSION x11)
 PKG_CHECK_MODULES(NETWORK_PANEL, $COMMON_MODULES)
 PKG_CHECK_MODULES(POWER_PANEL, $COMMON_MODULES upower-glib >= 0.9.1)
+PKG_CHECK_MODULES(COLOR_PANEL, $COMMON_MODULES colord >= 0.1.8)
 PKG_CHECK_MODULES(PRINTERS_PANEL, $COMMON_MODULES dbus-glib-1
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
 PKG_CHECK_MODULES(REGION_PANEL, $COMMON_MODULES libgnomekbd >= 2.91.91
@@ -354,6 +355,8 @@ panels/info/Makefile
 panels/info/gnome-info-panel.desktop.in
 panels/power/Makefile
 panels/power/gnome-power-panel.desktop.in
+panels/color/Makefile
+panels/color/gnome-color-panel.desktop.in
 panels/printers/Makefile
 panels/printers/gnome-printers-panel.desktop.in
 panels/network/Makefile

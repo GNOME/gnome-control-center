@@ -3,6 +3,7 @@ SUBDIRS= \
 	background \
 	screen \
 	power \
+	color \
 	display \
 	media \
 	mouse \
