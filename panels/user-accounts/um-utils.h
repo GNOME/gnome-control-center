@@ -58,6 +58,13 @@ void     down_arrow                       (GtkStyleContext *context,
                                            gint             width,
                                            gint             height);
 
+gboolean is_valid_name                    (const gchar     *name);
+gboolean is_valid_username                (const gchar     *name,
+                                           gchar          **tip);
+
+void     generate_username_choices        (const gchar     *name,
+                                           GtkListStore    *store);
+
 G_END_DECLS
 
 #endif
