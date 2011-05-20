@@ -1020,6 +1020,7 @@ info_panel_setup_selector (CcInfoPanel  *self)
   g_object_unref (model);
 
   renderer = gtk_cell_renderer_text_new ();
+  gtk_cell_renderer_set_padding (renderer, 4, 4);
   g_object_set (renderer,
                 "width-chars", 20,
                 "ellipsize", PANGO_ELLIPSIZE_END,
