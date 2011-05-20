@@ -1826,9 +1826,11 @@ cc_color_panel_init (CcColorPanel *prefs)
   /* add columns to the tree view */
   gcm_prefs_add_devices_columns (prefs, GTK_TREE_VIEW (widget));
 
-  /* force to be at least 3 rows high */
+  /* force to be at least ~6 rows high */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "scrolledwindow_devices"));
+  gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (widget),
+                                              200);
 
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "toolbutton_device_default"));
