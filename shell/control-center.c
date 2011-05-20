@@ -93,7 +93,7 @@ application_command_line_cb (GApplication  *application,
       gchar *help;
 
       help = g_option_context_get_help (context, FALSE, NULL);
-      g_print (help);
+      g_print ("%s", help);
       g_free (help);
       g_option_context_free (context);
       return 0;
