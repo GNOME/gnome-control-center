@@ -1156,7 +1156,8 @@ populate_printers_list (CcPrintersPanel *self)
 
 
   icon_renderer = gtk_cell_renderer_pixbuf_new ();
-  g_object_set (icon_renderer, "stock-size", GTK_ICON_SIZE_DND, NULL);
+  g_object_set (icon_renderer, "stock-size", gtk_icon_size_from_name ("cc-sidebar-list"), NULL);
+  gtk_cell_renderer_set_padding (icon_renderer, 4, 4);
   column = gtk_tree_view_column_new_with_attributes ("Icon", icon_renderer,
                                                      "icon-name", PRINTER_ICON_COLUMN, NULL);
   gtk_tree_view_column_set_expand (column, FALSE);
