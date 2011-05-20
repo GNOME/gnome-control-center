@@ -586,8 +586,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         }
 
         /* make title a bit bigger */
-        title = g_strdup_printf ("<span size=\"large\">%s</span>",
-                                 panel_device_to_localized_string (device));
+        title = g_strdup_printf ("%s", panel_device_to_localized_string (device));
 
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                             "liststore_devices"));
@@ -647,7 +646,9 @@ panel_add_devices_columns (CcNetworkPanel *panel, GtkTreeView *treeview)
 
         /* image */
         renderer = gtk_cell_renderer_pixbuf_new ();
-        g_object_set (renderer, "stock-size", GTK_ICON_SIZE_DND, NULL);
+        g_object_set (renderer, "stock-size", gtk_icon_size_from_name ("cc-sidebar-list"), NULL);
+        gtk_cell_renderer_set_padding (renderer, 4, 4);
+
         column = gtk_tree_view_column_new_with_attributes ("", renderer,
                                                            "icon-name", PANEL_DEVICES_COLUMN_ICON,
                                                            NULL);
@@ -1790,8 +1791,7 @@ panel_add_proxy_device (CcNetworkPanel *panel)
 
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
                                             "liststore_devices"));
-        title = g_strdup_printf ("<span size=\"large\">%s</span>",
-                                 _("Network proxy"));
+        title = g_strdup_printf ("%s", _("Network proxy"));
 
         gtk_list_store_append (liststore_devices, &iter);
         gtk_list_store_set (liststore_devices,
@@ -1958,8 +1958,7 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
                                             "liststore_devices"));
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (connection));
-        title_markup = g_strdup_printf ("<span size=\"large\">%s</span>",
-                                        title);
+        title_markup = g_strdup_printf (title);
 
         net_object_set_title (NET_OBJECT (net_vpn), title);
         gtk_list_store_append (liststore_devices, &iter);
