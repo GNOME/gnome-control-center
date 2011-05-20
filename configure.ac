@@ -357,6 +357,15 @@ panels/power/Makefile
 panels/power/gnome-power-panel.desktop.in
 panels/color/Makefile
 panels/color/gnome-color-panel.desktop.in
+panels/color/icons/Makefile
+panels/color/icons/16x16/Makefile
+panels/color/icons/22x22/Makefile
+panels/color/icons/24x24/Makefile
+panels/color/icons/32x32/Makefile
+panels/color/icons/48x48/Makefile
+panels/color/icons/64x64/Makefile
+panels/color/icons/256x256/Makefile
+panels/color/icons/scalable/Makefile
 panels/printers/Makefile
 panels/printers/gnome-printers-panel.desktop.in
 panels/network/Makefile
