@@ -168,6 +168,9 @@ main (int argc, char **argv)
   gtk_init (&argc, &argv);
   cc_shell_log_init ();
 
+  /* register a symbolic icon size for use in sidebar lists */
+  gtk_icon_size_register ("cc-sidebar-list", 24, 24);
+
   shell = gnome_control_center_new ();
 
   /* enforce single instance of this application */
