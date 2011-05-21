@@ -81,6 +81,8 @@ struct _CcDateTimePanelPrivate
 
   DateTimeMechanism *dtm;
   GCancellable *cancellable;
+
+  GPermission *permission;
 };
 
 static void update_time (CcDateTimePanel *self);
@@ -154,19 +156,36 @@ cc_date_time_panel_dispose (GObject *object)
       priv->dtm = NULL;
     }
 
+  if (priv->permission)
+    {
+      g_object_unref (priv->permission);
+      priv->permission = NULL;
+    }
+
   G_OBJECT_CLASS (cc_date_time_panel_parent_class)->dispose (object);
+}
+
+static GPermission *
+cc_date_time_panel_get_permission (CcPanel *panel)
+{
+  CcDateTimePanelPrivate *priv = CC_DATE_TIME_PANEL (panel)->priv;
+
+  return priv->permission;
 }
 
 static void
 cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (CcDateTimePanelPrivate));
 
   object_class->get_property = cc_date_time_panel_get_property;
   object_class->set_property = cc_date_time_panel_set_property;
   object_class->dispose = cc_date_time_panel_dispose;
+
+  panel_class->get_permission = cc_date_time_panel_get_permission;
 }
 
 static void
@@ -877,8 +896,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   gboolean using_ntp;
   gboolean can_use_ntp;
   int ret;
-  GtkWidget *lockbutton;
-  GPermission *permission;
   DateEndianess endianess;
   GError *error;
 
@@ -1020,23 +1037,17 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   queue_clock_update (self);
 
   /* add the lock button */
-  permission = polkit_permission_new_sync ("org.gnome.settingsdaemon.datetimemechanism.configure", NULL, NULL, NULL);
-  if (permission == NULL)
+  priv->permission = polkit_permission_new_sync ("org.gnome.settingsdaemon.datetimemechanism.configure", NULL, NULL, NULL);
+  if (priv->permission == NULL)
     {
       g_warning ("Your system does not have the '%s' PolicyKit files installed. Please check your installation",
                  "org.gnome.settingsdaemon.datetimemechanism.configure");
       return;
     }
 
-  /* GtkLockButton takes ownership of the permission */
-  lockbutton = gtk_lock_button_new (permission);
-  gtk_widget_set_margin_top (lockbutton, 12);
-  gtk_widget_show (lockbutton);
-  gtk_box_pack_end ((GtkBox *) gtk_builder_get_object (priv->builder, "hbox"),
-                    lockbutton, FALSE, FALSE, 0);
-  g_signal_connect (permission, "notify",
+  g_signal_connect (priv->permission, "notify",
                     G_CALLBACK (on_permission_changed), self);
-  on_permission_changed (permission, NULL, self);
+  on_permission_changed (priv->permission, NULL, self);
 }
 
 void
