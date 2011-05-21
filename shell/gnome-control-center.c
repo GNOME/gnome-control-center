@@ -60,6 +60,7 @@ struct _GnomeControlCenterPrivate
   GtkWidget  *scrolled_window;
   GtkWidget  *window;
   GtkWidget  *search_entry;
+  GtkWidget  *lock_button;
 
   GMenuTree  *menu_tree;
   GtkListStore *store;
@@ -129,6 +130,9 @@ activate_panel (GnomeControlCenter *shell,
           /* create the panel plugin */
           panel = g_object_new (panel_type, "shell", shell, NULL);
 
+          gtk_lock_button_set_permission (GTK_LOCK_BUTTON (priv->lock_button),
+                                          cc_panel_get_permission (CC_PANEL (panel)));
+
           box = gtk_alignment_new (0, 0, 1, 1);
           gtk_alignment_set_padding (GTK_ALIGNMENT (box), 6, 6, 6, 6);
 
@@ -175,6 +179,8 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
   g_free (priv->filter_string);
   priv->filter_string = g_strdup ("");
   gtk_entry_set_text (GTK_ENTRY (priv->search_entry), "");
+
+  gtk_lock_button_set_permission (GTK_LOCK_BUTTON (priv->lock_button), NULL);
 
   /* reset window title and icon */
   gtk_window_set_title (GTK_WINDOW (priv->window), priv->default_window_title);
@@ -528,7 +534,6 @@ setup_search (GnomeControlCenter *shell)
   search_scrolled = W (priv->builder, "search-scrolled-window");
   gtk_container_add (GTK_CONTAINER (search_scrolled), search_view);
 
-
   /* add the custom renderer */
   priv->search_renderer = (GtkCellRenderer*) shell_search_renderer_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (search_view),
@@ -555,6 +560,26 @@ setup_search (GnomeControlCenter *shell)
 
   g_signal_connect (widget, "icon-release", G_CALLBACK (search_entry_clear_cb),
                     priv);
+}
+
+static void
+permission_changed_cb (GtkWidget *button, GParamSpec *pspec, gpointer data)
+{
+  if (gtk_lock_button_get_permission (GTK_LOCK_BUTTON (button)) != NULL)
+    gtk_widget_show (button);
+  else
+    gtk_widget_hide (button);
+}
+
+static void
+setup_lock (GnomeControlCenter *shell)
+{
+  GnomeControlCenterPrivate *priv = shell->priv;
+
+  priv->lock_button = W (priv->builder, "lock-button");
+
+  g_signal_connect (priv->lock_button, "notify::permission",
+                    G_CALLBACK (permission_changed_cb), NULL);
 }
 
 static void
@@ -713,6 +738,7 @@ notebook_switch_page_cb (GtkNotebook               *book,
     {
       gtk_widget_hide (W (priv->builder, "home-button"));
       gtk_widget_show (W (priv->builder, "search-entry"));
+      gtk_widget_hide (W (priv->builder, "lock-button"));
     }
   else
     {
@@ -1066,6 +1092,8 @@ gnome_control_center_init (GnomeControlCenter *self)
 
   /* setup search functionality */
   setup_search (self);
+
+  setup_lock (self);
 
   /* store default window title and name */
   priv->default_window_title = g_strdup (gtk_window_get_title (GTK_WINDOW (priv->window)));

@@ -52,14 +52,26 @@
                             <property name="xalign">1</property>
                             <property name="xscale">0</property>
                             <child>
-                              <object class="GtkEntry" id="search-entry">
-                                <property name="width_request">210</property>
+                              <object class="GtkBox" id="topright">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="invisible_char">&#x25CF;</property>
-                                <property name="secondary-icon-name">edit-find-symbolic</property>
-                                <property name="secondary-icon-activatable">False</property>
-                                <property name="secondary-icon-sensitive">False</property>
+                                <property name="orientation">horizontal</property>
+                                <child>
+                                  <object class="GtkEntry" id="search-entry">
+                                    <property name="width_request">210</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="invisible_char">&#x25CF;</property>
+                                    <property name="secondary-icon-name">edit-find-symbolic</property>
+                                    <property name="secondary-icon-activatable">False</property>
+                                    <property name="secondary-icon-sensitive">False</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLockButton" id="lock-button">
+                                    <property name="visible">False</property>
+                                    <property name="no_show_all">True</property>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                           </object>
