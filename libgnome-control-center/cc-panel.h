@@ -66,12 +66,15 @@ struct _CcPanelClass
 {
   /*< private >*/
   GtkBinClass parent_class;
+
+  GPermission * (* get_permission) (CcPanel *panel);
 };
 
 GType        cc_panel_get_type         (void);
 
 CcShell*     cc_panel_get_shell        (CcPanel     *panel);
 
+GPermission *cc_panel_get_permission   (CcPanel     *panel);
 
 G_END_DECLS
 
