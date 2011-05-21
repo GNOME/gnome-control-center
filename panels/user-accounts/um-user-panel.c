@@ -67,15 +67,12 @@ struct _UmUserPanelPrivate {
         GtkBuilder *builder;
 
         GtkWidget *main_box;
-        GtkWidget *lock_button;
         GPermission *permission;
         GtkWidget *language_chooser;
 
         UmAccountDialog *account_dialog;
         UmPasswordDialog *password_dialog;
         UmPhotoDialog *photo_dialog;
-
-        PolkitAuthority *authority;
 };
 
 static GtkWidget *
@@ -620,9 +617,7 @@ selected_user_changed (GtkTreeSelection *selection, UmUserPanelPrivate *d)
         if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
                 gtk_tree_model_get (model, &iter, USER_COL, &user, -1);
                 show_user (user, d);
-                if (d->lock_button != NULL) {
-                        on_permission_changed (d->permission, NULL, d);
-                }
+                on_permission_changed (d->permission, NULL, d);
                 g_object_unref (user);
         }
 }
@@ -1086,7 +1081,6 @@ setup_main_window (UmUserPanelPrivate *d)
         GtkWidget *button;
         GtkTreeIter iter;
         gint expander_size;
-        GtkWidget *box;
         gchar *title;
         GIcon *icon;
         gchar *names[3];
@@ -1195,18 +1189,9 @@ setup_main_window (UmUserPanelPrivate *d)
                           G_CALLBACK (change_fingerprint), d);
 
         d->permission = (GPermission *)polkit_permission_new_sync ("org.freedesktop.accounts.user-administration", NULL, NULL, NULL);
-        if (d->permission != NULL) {
-                /* accounts service not available? */
-                button = gtk_lock_button_new (d->permission);
-                gtk_widget_set_margin_top (button, 12);
-                gtk_widget_show (button);
-                box = get_widget (d, "accounts-vbox");
-                gtk_box_pack_end (GTK_BOX (box), button, FALSE, FALSE, 0);
-                g_signal_connect (d->permission, "notify",
-                                  G_CALLBACK (on_permission_changed), d);
-                on_permission_changed (d->permission, NULL, d);
-                d->lock_button = button;
-        }
+        g_signal_connect (d->permission, "notify",
+                          G_CALLBACK (on_permission_changed), d);
+        on_permission_changed (d->permission, NULL, d);
 
         button = get_widget (d, "add-user-toolbutton");
         names[0] = "changes-prevent-symbolic";
@@ -1250,7 +1235,6 @@ um_user_panel_init (UmUserPanel *self)
 
         d->builder = gtk_builder_new ();
         d->um = um_user_manager_ref_default ();
-        d->authority = polkit_authority_get_sync (NULL, NULL);
 
         filename = UIDIR "/user-accounts-dialog.ui";
         if (!g_file_test (filename, G_FILE_TEST_EXISTS)) {
@@ -1306,20 +1290,31 @@ um_user_panel_dispose (GObject *object)
                 gtk_widget_destroy (priv->language_chooser);
                 priv->language_chooser = NULL;
         }
-        if (priv->authority) {
-                g_object_unref (priv->authority);
-                priv->authority = NULL;
+        if (priv->permission) {
+                g_object_unref (priv->permission);
+                priv->permission = NULL;
         }
 
         G_OBJECT_CLASS (um_user_panel_parent_class)->dispose (object);
+}
+
+static GPermission *
+um_user_panel_get_permission (CcPanel *panel)
+{
+        UmUserPanelPrivate *priv = UM_USER_PANEL (panel)->priv;
+
+        return priv->permission;
 }
 
 static void
 um_user_panel_class_init (UmUserPanelClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
         object_class->dispose = um_user_panel_dispose;
+
+        panel_class->get_permission = um_user_panel_get_permission;
 
         g_type_class_add_private (klass, sizeof (UmUserPanelPrivate));
 }
