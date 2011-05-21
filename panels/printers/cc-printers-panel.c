@@ -60,8 +60,6 @@ struct _CcPrintersPanelPrivate
 {
   GtkBuilder *builder;
 
-  GtkWidget *lock_button;
-
   cups_dest_t *dests;
   gchar **dest_model_names;
   gchar **ppd_file_names;
@@ -163,6 +161,12 @@ cc_printers_panel_dispose (GObject *object)
       priv->lockdown_settings = NULL;
     }
 
+  if (priv->permission)
+    {
+      g_object_unref (priv->permission);
+      priv->permission = NULL;
+    }
+
   detach_from_cups_notifier (CC_PRINTERS_PANEL (object));
 
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->dispose (object);
@@ -174,10 +178,19 @@ cc_printers_panel_finalize (GObject *object)
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->finalize (object);
 }
 
+static GPermission *
+cc_printers_panel_get_permission (CcPanel *panel)
+{
+  CcPrintersPanelPrivate *priv = CC_PRINTERS_PANEL (panel)->priv;
+
+  return priv->permission;
+}
+
 static void
 cc_printers_panel_class_init (CcPrintersPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (CcPrintersPanelPrivate));
 
@@ -185,6 +198,8 @@ cc_printers_panel_class_init (CcPrintersPanelClass *klass)
   object_class->set_property = cc_printers_panel_set_property;
   object_class->dispose = cc_printers_panel_dispose;
   object_class->finalize = cc_printers_panel_finalize;
+
+  panel_class->get_permission = cc_printers_panel_get_permission;
 }
 
 static void
@@ -2415,8 +2430,11 @@ on_lockdown_settings_changed (GSettings  *settings,
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
+#if 0
+  /* FIXME */
   gtk_widget_set_sensitive (priv->lock_button,
     !g_settings_get_boolean (priv->lockdown_settings, "disable-print-setup"));
+#endif
 
   on_permission_changed (priv->permission, NULL, user_data);
 }
@@ -2501,7 +2519,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
   priv->cups_proxy = NULL;
   priv->cups_bus_connection = NULL;
 
-  priv->lock_button = NULL;
   priv->permission = NULL;
   priv->lockdown_settings = NULL;
 
@@ -2631,15 +2648,9 @@ cc_printers_panel_init (CcPrintersPanel *self)
     "org.opensuse.cupspkhelper.mechanism.all-edit", NULL, NULL, NULL);
   if (priv->permission != NULL)
     {
-      widget = gtk_lock_button_new (priv->permission);
-      gtk_widget_set_margin_top (widget, 12);
-      gtk_widget_show (widget);
-      box = (GtkWidget*) gtk_builder_get_object (priv->builder, "main-vbox");
-      gtk_box_pack_end (GTK_BOX (box), widget, FALSE, FALSE, 0);
       g_signal_connect (priv->permission, "notify",
                         G_CALLBACK (on_permission_changed), self);
       on_permission_changed (priv->permission, NULL, self);
-      priv->lock_button = widget;
     }
   else
     g_warning ("Your system does not have the cups-pk-helper's policy \
