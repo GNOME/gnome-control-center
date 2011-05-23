@@ -557,14 +557,18 @@ generate_username_choices (const gchar  *name,
 
         lc_name = g_ascii_strdown (ascii_name, -1);
 
-        /* remove all non ASCII alphanumeric chars from the name,
-         * apart from the few allowed symbols
+        /* Remove all non ASCII alphanumeric chars from the name,
+         * apart from the few allowed symbols.
+         *
+         * We do remove '.', even though it is usually allowed,
+         * since it often comes in via an abbreviated middle name,
+         * and the dot looks just wrong in the proposals then.
          */
         stripped_name = g_strnfill (strlen (lc_name) + 1, '\0');
         i = 0;
         for (c = lc_name; *c; c++) {
                 if (!(g_ascii_isdigit (*c) || g_ascii_islower (*c) ||
-                    *c == ' ' || *c == '-' || *c == '.' || *c == '_' ||
+                    *c == ' ' || *c == '-' || *c == '_' ||
                     /* used to track invalid words, removed below */
                     *c == '?') )
                         continue;
