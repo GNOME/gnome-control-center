@@ -1097,7 +1097,7 @@ date_time_mechanism_call_set_timezone (
  *
  * Finishes an operation started with date_time_mechanism_call_set_timezone().
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_set_timezone_finish (
@@ -1127,7 +1127,7 @@ _out:
  *
  * See date_time_mechanism_call_set_timezone() for the asynchronous version of this method.
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_set_timezone_sync (
@@ -1193,7 +1193,7 @@ date_time_mechanism_call_get_timezone (
  *
  * Finishes an operation started with date_time_mechanism_call_get_timezone().
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_get_timezone_finish (
@@ -1225,7 +1225,7 @@ _out:
  *
  * See date_time_mechanism_call_get_timezone() for the asynchronous version of this method.
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_get_timezone_sync (
@@ -1291,7 +1291,7 @@ date_time_mechanism_call_can_set_timezone (
  *
  * Finishes an operation started with date_time_mechanism_call_can_set_timezone().
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_can_set_timezone_finish (
@@ -1323,7 +1323,7 @@ _out:
  *
  * See date_time_mechanism_call_can_set_timezone() for the asynchronous version of this method.
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_can_set_timezone_sync (
@@ -1397,7 +1397,7 @@ date_time_mechanism_call_set_date (
  *
  * Finishes an operation started with date_time_mechanism_call_set_date().
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_set_date_finish (
@@ -1429,7 +1429,7 @@ _out:
  *
  * See date_time_mechanism_call_set_date() for the asynchronous version of this method.
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_set_date_sync (
@@ -1501,7 +1501,7 @@ date_time_mechanism_call_set_time (
  *
  * Finishes an operation started with date_time_mechanism_call_set_time().
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_set_time_finish (
@@ -1531,7 +1531,7 @@ _out:
  *
  * See date_time_mechanism_call_set_time() for the asynchronous version of this method.
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_set_time_sync (
@@ -1597,7 +1597,7 @@ date_time_mechanism_call_can_set_time (
  *
  * Finishes an operation started with date_time_mechanism_call_can_set_time().
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_can_set_time_finish (
@@ -1629,7 +1629,7 @@ _out:
  *
  * See date_time_mechanism_call_can_set_time() for the asynchronous version of this method.
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_can_set_time_sync (
@@ -1697,7 +1697,7 @@ date_time_mechanism_call_adjust_time (
  *
  * Finishes an operation started with date_time_mechanism_call_adjust_time().
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_adjust_time_finish (
@@ -1727,7 +1727,7 @@ _out:
  *
  * See date_time_mechanism_call_adjust_time() for the asynchronous version of this method.
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_adjust_time_sync (
@@ -1793,7 +1793,7 @@ date_time_mechanism_call_get_hardware_clock_using_utc (
  *
  * Finishes an operation started with date_time_mechanism_call_get_hardware_clock_using_utc().
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_get_hardware_clock_using_utc_finish (
@@ -1825,7 +1825,7 @@ _out:
  *
  * See date_time_mechanism_call_get_hardware_clock_using_utc() for the asynchronous version of this method.
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_get_hardware_clock_using_utc_sync (
@@ -1893,7 +1893,7 @@ date_time_mechanism_call_set_hardware_clock_using_utc (
  *
  * Finishes an operation started with date_time_mechanism_call_set_hardware_clock_using_utc().
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_set_hardware_clock_using_utc_finish (
@@ -1923,7 +1923,7 @@ _out:
  *
  * See date_time_mechanism_call_set_hardware_clock_using_utc() for the asynchronous version of this method.
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_set_hardware_clock_using_utc_sync (
@@ -1990,7 +1990,7 @@ date_time_mechanism_call_get_using_ntp (
  *
  * Finishes an operation started with date_time_mechanism_call_get_using_ntp().
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_get_using_ntp_finish (
@@ -2025,7 +2025,7 @@ _out:
  *
  * See date_time_mechanism_call_get_using_ntp() for the asynchronous version of this method.
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_get_using_ntp_sync (
@@ -2095,7 +2095,7 @@ date_time_mechanism_call_set_using_ntp (
  *
  * Finishes an operation started with date_time_mechanism_call_set_using_ntp().
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_set_using_ntp_finish (
@@ -2125,7 +2125,7 @@ _out:
  *
  * See date_time_mechanism_call_set_using_ntp() for the asynchronous version of this method.
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_set_using_ntp_sync (
@@ -2191,7 +2191,7 @@ date_time_mechanism_call_can_set_using_ntp (
  *
  * Finishes an operation started with date_time_mechanism_call_can_set_using_ntp().
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_can_set_using_ntp_finish (
@@ -2223,7 +2223,7 @@ _out:
  *
  * See date_time_mechanism_call_can_set_using_ntp() for the asynchronous version of this method.
  *
- * Returns: %TRUE if the call succeded, %FALSE if @error is set.
+ * Returns: (skip): %TRUE if the call succeded, %FALSE if @error is set.
  */
 gboolean
 date_time_mechanism_call_can_set_using_ntp_sync (
@@ -2818,6 +2818,7 @@ struct _DateTimeMechanismSkeletonPrivate
   GList *changed_properties;
   GSource *changed_properties_idle_source;
   GMainContext *context;
+  GMutex *lock;
 };
 
 static void
@@ -3018,32 +3019,15 @@ date_time_mechanism_skeleton_finalize (GObject *object)
     g_source_destroy (skeleton->priv->changed_properties_idle_source);
   if (skeleton->priv->context != NULL)
     g_main_context_unref (skeleton->priv->context);
+  g_mutex_free (skeleton->priv->lock);
   G_OBJECT_CLASS (date_time_mechanism_skeleton_parent_class)->finalize (object);
-}
-
-static void
-date_time_mechanism_skeleton_get_property (GObject      *object,
-  guint         prop_id,
-  GValue       *value,
-  GParamSpec   *pspec)
-{
-  DateTimeMechanismSkeleton *skeleton = DATE_TIME_MECHANISM_SKELETON (object);
-  g_assert (prop_id != 0 && prop_id - 1 < 0);
-  g_value_copy (&skeleton->priv->properties->values[prop_id - 1], value);
-}
-
-static void
-date_time_mechanism_skeleton_set_property (GObject      *object,
-  guint         prop_id,
-  const GValue *value,
-  GParamSpec   *pspec)
-{
 }
 
 static void
 date_time_mechanism_skeleton_init (DateTimeMechanismSkeleton *skeleton)
 {
   skeleton->priv = G_TYPE_INSTANCE_GET_PRIVATE (skeleton, TYPE_DATE_TIME_MECHANISM_SKELETON, DateTimeMechanismSkeletonPrivate);
+  skeleton->priv->lock = g_mutex_new ();
   skeleton->priv->context = g_main_context_get_thread_default ();
   if (skeleton->priv->context != NULL)
     g_main_context_ref (skeleton->priv->context);
@@ -3059,9 +3043,6 @@ date_time_mechanism_skeleton_class_init (DateTimeMechanismSkeletonClass *klass)
 
   gobject_class = G_OBJECT_CLASS (klass);
   gobject_class->finalize = date_time_mechanism_skeleton_finalize;
-  gobject_class->get_property = date_time_mechanism_skeleton_get_property;
-  gobject_class->set_property = date_time_mechanism_skeleton_set_property;
-
 
   skeleton_class = G_DBUS_INTERFACE_SKELETON_CLASS (klass);
   skeleton_class->get_info = date_time_mechanism_skeleton_dbus_interface_get_info;

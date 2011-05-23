@@ -389,6 +389,7 @@ typedef struct _DateTimeMechanismProxyPrivate DateTimeMechanismProxyPrivate;
 
 struct _DateTimeMechanismProxy
 {
+  /*< private >*/
   GDBusProxy parent_instance;
   DateTimeMechanismProxyPrivate *priv;
 };
@@ -454,6 +455,7 @@ typedef struct _DateTimeMechanismSkeletonPrivate DateTimeMechanismSkeletonPrivat
 
 struct _DateTimeMechanismSkeleton
 {
+  /*< private >*/
   GDBusInterfaceSkeleton parent_instance;
   DateTimeMechanismSkeletonPrivate *priv;
 };
