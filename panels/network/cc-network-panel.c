@@ -21,6 +21,7 @@
 #include <config.h>
 #include <glib/gi18n.h>
 #include <arpa/inet.h>
+#include <netinet/ether.h>
 #include <stdlib.h>
 
 #include "cc-network-panel.h"
@@ -34,6 +35,7 @@
 #include "nm-utils.h"
 #include "nm-active-connection.h"
 #include "nm-vpn-connection.h"
+#include "nm-setting-wireless.h"
 #include "nm-setting-ip4-config.h"
 #include "nm-setting-ip6-config.h"
 #include "nm-setting-connection.h"
@@ -1104,8 +1106,7 @@ device_off_toggled (GtkSwitch      *sw,
                                                                        device,
                                                                        NULL,
                                                                        NULL, NULL);
-                                }
-                                else {
+                                } else {
                                         nm_client_add_and_activate_connection (panel->priv->client,
                                                                                NULL,
                                                                                device,
@@ -1204,6 +1205,162 @@ update_off_switch_from_device_state (GtkSwitch *sw, NMDeviceState state, CcNetwo
         panel->priv->updating_device = FALSE;
 }
 
+static gboolean
+device_is_hotspot (CcNetworkPanel *panel,
+                   NMDevice *device)
+{
+        NMConnection *c;
+        NMSettingIP4Config *s_ip4;
+
+        if (nm_device_get_device_type (device) != NM_DEVICE_TYPE_WIFI) {
+                return FALSE;
+        }
+
+        c = find_connection_for_device (panel, device);
+        if (c == NULL) {
+                return FALSE;
+        }
+
+        s_ip4 = nm_connection_get_setting_ip4_config (c);
+        if (g_strcmp0 (nm_setting_ip4_config_get_method (s_ip4),
+                       NM_SETTING_IP4_CONFIG_METHOD_SHARED) != 0) {
+                return FALSE;
+        }
+
+        return TRUE;
+}
+
+static const GByteArray *
+device_get_hotspot_ssid (CcNetworkPanel *panel,
+                         NMDevice *device)
+{
+        NMConnection *c;
+        NMSettingWireless *sw;
+
+        c = find_connection_for_device (panel, device);
+        if (c == NULL) {
+                return FALSE;
+        }
+
+        sw = nm_connection_get_setting_wireless (c);
+        return nm_setting_wireless_get_ssid (sw);
+}
+
+static void
+get_secrets_cb (NMRemoteConnection *c,
+                GHashTable         *secrets,
+                GError             *error,
+                gpointer            data)
+{
+        CcNetworkPanel *panel = data;
+        NMSettingWireless *sw;
+
+        sw = nm_connection_get_setting_wireless (NM_CONNECTION (c));
+
+        nm_connection_update_secrets (NM_CONNECTION (c),
+                                      nm_setting_wireless_get_security (sw),
+                                      secrets, NULL);
+
+        refresh_ui (panel);
+}
+
+static void
+device_get_hotspot_security_details (CcNetworkPanel *panel,
+                                     NMDevice *device,
+                                     gchar **secret,
+                                     gchar **security)
+{
+        NMConnection *c;
+        NMSettingWireless *sw;
+        NMSettingWirelessSecurity *sws;
+        const gchar *key_mgmt;
+        const gchar *tmp_secret;
+        gboolean has_wep;
+        gboolean has_wpa;
+        gboolean has_wpa2;
+
+        c = find_connection_for_device (panel, device);
+        if (c == NULL) {
+                return;
+        }
+
+        sw = nm_connection_get_setting_wireless (c);
+        sws = nm_connection_get_setting_wireless_security (c);
+        if (sw == NULL || sws == NULL) {
+                return;
+        }
+
+        tmp_secret = NULL;
+        has_wep = FALSE;
+        has_wpa = FALSE;
+        has_wpa2 = FALSE;
+
+        key_mgmt = nm_setting_wireless_security_get_key_mgmt (sws);
+        if (strcmp (key_mgmt, "none") == 0) {
+                tmp_secret = nm_setting_wireless_security_get_wep_key (sws, 0);
+                has_wep = TRUE;
+        }
+        else if (strcmp (key_mgmt, "wpa-none") == 0) {
+                gint num_protos, i;
+
+                tmp_secret = nm_setting_wireless_security_get_psk (sws);
+                num_protos = nm_setting_wireless_security_get_num_protos (sws);
+                if (num_protos == 0) {
+                        has_wpa = TRUE;
+                        has_wpa2 = TRUE;
+                }
+                for (i = 0; i  < num_protos; i++) {
+                        const gchar *proto;
+                        proto = nm_setting_wireless_security_get_proto (sws, i);
+                        if (strcmp (proto, "wpa") == 0)
+                                has_wpa = TRUE;
+                        else if (strcmp (proto, "rsn") == 0)
+                                has_wpa2 = TRUE;
+                }
+        } else {
+                g_warning ("unhandled security key-mgmt: %s", key_mgmt);
+        }
+
+        /* If we don't have secrets, request them from NM and bail.
+         * We'll refresh the UI when secrets arrive.
+         */
+        if (tmp_secret == NULL) {
+                nm_remote_connection_get_secrets ((NMRemoteConnection*)c,
+                                                  nm_setting_wireless_get_security (sw),
+                                                  get_secrets_cb,
+                                                  panel);
+                return;
+        }
+
+        if (secret) {
+                *secret = g_strdup (tmp_secret);
+        }
+
+        if (security) {
+                GString *str;
+                str = g_string_new ("");
+                if (has_wep) {
+                        g_string_append (str, _("WEP"));
+                }
+                if (has_wpa) {
+                        if (str->len > 0) {
+                                g_string_append (str, ", ");
+                        }
+                        g_string_append (str, _("WPA"));
+                }
+                if (has_wpa2) {
+                        if (str->len > 0) {
+                                g_string_append (str, ", ");
+                        }
+                        g_string_append (str, _("WPA2"));
+                }
+                if (str->len == 0) {
+                        g_string_append (str, _("None"));
+                }
+                *security = g_string_free (str, FALSE);
+        }
+}
+
 static void
 refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_name)
 {
@@ -1212,8 +1369,11 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
         const char *str;
         NMDeviceState state;
         NMDeviceType type;
+        gboolean is_hotspot;
 
         type = nm_device_get_device_type (device);
+        state = nm_device_get_state (device);
+        is_hotspot = device_is_hotspot (panel, device);
 
         /* set header icon */
         wid_name = g_strdup_printf ("image_%s_device", page_name);
@@ -1230,13 +1390,15 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
         gtk_label_set_label (GTK_LABEL (widget),
                              panel_device_to_localized_string (device));
 
-
         /* set device state */
-        state = nm_device_get_state (device);
         wid_name = g_strdup_printf ("label_%s_status", page_name);
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
         g_free (wid_name);
-        str = panel_device_state_to_localized_string (device);
+        if (is_hotspot) {
+                str = _("Hotspot");
+        } else {
+                str = panel_device_state_to_localized_string (device);
+        }
         gtk_label_set_label (GTK_LABEL (widget), str);
 
 
@@ -1329,11 +1491,49 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
         GtkListStore *liststore_wireless_network;
         guint i;
         NMDevice *nm_device;
+        NMClientPermissionResult perm;
+        gboolean is_hotspot;
+        gchar *hotspot_ssid;
+        gchar *hotspot_secret;
+        gchar *hotspot_security;
 
         nm_device = net_device_get_nm_device (device);
         state = nm_device_get_state (nm_device);
 
         refresh_header_ui (panel, nm_device, "wireless");
+
+        /* sort out hotspot ui */
+        is_hotspot = device_is_hotspot (panel, nm_device);
+        hotspot_ssid = NULL;
+        hotspot_secret = NULL;
+        hotspot_security = NULL;
+        if (is_hotspot) {
+                const GByteArray *ssid;
+                ssid = device_get_hotspot_ssid (panel, nm_device);
+                if (ssid) {
+                        hotspot_ssid = nm_utils_ssid_to_utf8 (ssid);
+                }
+                device_get_hotspot_security_details (panel, nm_device, &hotspot_secret, &hotspot_security);
+        }
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "start_hotspot_button"));
+        gtk_widget_set_visible (widget, !is_hotspot);
+
+        perm = nm_client_get_permission_result (panel->priv->client, NM_CLIENT_PERMISSION_WIFI_SHARE_OPEN);
+        gtk_widget_set_sensitive (widget,
+                                  perm == NM_CLIENT_PERMISSION_RESULT_YES ||
+                                  perm == NM_CLIENT_PERMISSION_RESULT_AUTH);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "stop_hotspot_button"));
+        gtk_widget_set_visible (widget, is_hotspot);
+
+        panel_set_widget_data (panel, "hotspot", "network_name", hotspot_ssid);
+        g_free (hotspot_ssid);
+
+        panel_set_widget_data (panel, "hotspot", "security_key", hotspot_secret);
+        g_free (hotspot_secret);
 
         /* speed */
         speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (nm_device));
@@ -1360,6 +1560,8 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
         active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (nm_device));
         if (state == NM_DEVICE_STATE_UNAVAILABLE)
                 str_tmp = NULL;
+        else if (is_hotspot)
+                str_tmp = hotspot_security;
         else if (active_ap != NULL)
                 str_tmp = get_ap_security_string (active_ap);
         else
@@ -1375,7 +1577,7 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "combobox_wireless_network_name"));
         /* populate access point dropdown */
-        if (state == NM_DEVICE_STATE_UNAVAILABLE) {
+        if (is_hotspot || state == NM_DEVICE_STATE_UNAVAILABLE) {
                 gtk_widget_hide (heading);
                 gtk_widget_hide (widget);
         } else {
@@ -1470,10 +1672,12 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
         NMDevice *nm_device;
         gboolean has_ip4;
         gboolean has_ip6;
+        gboolean is_hotspot;
 
         /* we have a new device */
         nm_device = net_device_get_nm_device (device);
         type = nm_device_get_device_type (nm_device);
+        is_hotspot = device_is_hotspot (panel, nm_device);
         g_debug ("device %s type %i", nm_device_get_udi (nm_device), type);
 
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "notebook_types"));
@@ -1513,7 +1717,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
 
         /* get IP4 parameters */
         config_dhcp4 = nm_device_get_dhcp4_config (nm_device);
-        if (config_dhcp4 != NULL) {
+        if (!is_hotspot && config_dhcp4 != NULL) {
                 g_object_get (G_OBJECT (config_dhcp4),
                               NM_DHCP4_CONFIG_OPTIONS, &options,
                               NULL);
@@ -1580,7 +1784,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
 
         /* get IP6 parameters */
         ip6_config = nm_device_get_ip6_config (nm_device);
-        if (ip6_config != NULL) {
+        if (!is_hotspot && ip6_config != NULL) {
 
                 /* IPv6 address */
                 str_tmp = get_ipv6_config_address_as_string (ip6_config);
@@ -2412,6 +2616,243 @@ out:
         return retval;
 }
 
+static GByteArray *
+ssid_to_byte_array (const gchar *ssid)
+{
+        guint32 len;
+        GByteArray *ba;
+
+        len = strlen (ssid);
+        ba = g_byte_array_sized_new (len);
+        g_byte_array_append (ba, (guchar *)ssid, len);
+
+        return ba;
+}
+
+static void
+activate_cb (NMClient           *client,
+             NMActiveConnection *connection,
+             GError             *error,
+             CcNetworkPanel     *panel)
+{
+        if (error) {
+                g_warning ("Failed to add new connection: (%d) %s",
+                           error->code,
+                           error->message);
+                return;
+        }
+
+        refresh_ui (panel);
+}
+
+static void
+activate_new_cb (NMClient           *client,
+                 NMActiveConnection *connection,
+                 const gchar        *path,
+                 GError             *error,
+                 CcNetworkPanel     *panel)
+{
+        activate_cb (client, connection, error, panel);
+}
+
+static GByteArray *
+generate_ssid_for_hotspot (CcNetworkPanel *panel)
+{
+        gchar *ssid;
+        GByteArray *ssid_array;
+
+        ssid = g_strconcat (g_get_host_name (), "-hotspot", NULL);
+        ssid_array = ssid_to_byte_array (ssid);
+        g_free (ssid);
+
+        return ssid_array;
+}
+
+static gchar *
+generate_wep_key (CcNetworkPanel *panel)
+{
+        gchar key[11];
+        gint i;
+        const gchar *hexdigits = "0123456789abcdef";
+
+        /* generate a 10-digit hex WEP key */
+        for (i = 0; i < 10; i++) {
+                gint digit;
+                digit = g_random_int_range (0, 16);
+                key[i] = hexdigits[d];
+        }
+        key[10] = 0;
+
+        return g_strdup (key);
+}
+
+static gboolean
+is_hotspot_connection (NMConnection *connection)
+{
+        NMSettingConnection *sc;
+        NMSettingWireless *sw;
+        NMSettingIP4Config *sip;
+
+        sc = nm_connection_get_setting_connection (connection);
+        if (strcmp (nm_setting_connection_get_connection_type (sc), "802-11-wireless") != 0) {
+                return FALSE;
+        }
+        sw = nm_connection_get_setting_wireless (connection);
+        if (strcmp (nm_setting_wireless_get_mode (sw), "adhoc") != 0) {
+                return FALSE;
+        }
+        if (strcmp (nm_setting_wireless_get_security (sw), "802-11-wireless-security") != 0) {
+                return FALSE;
+        }
+        sip = nm_connection_get_setting_ip4_config (connection);
+        if (strcmp (nm_setting_ip4_config_get_method (sip), "shared") != 0) {
+                return FALSE;
+        }
+
+        return TRUE;
+}
+
+static void
+create_shared_connection (CcNetworkPanel *panel)
+{
+        NMConnection *c;
+        NMConnection *tmp;
+        NMSettingConnection *sc;
+        NMSettingWireless *sw;
+        NMSettingIP4Config *sip;
+        NMSettingWirelessSecurity *sws;
+        NMDevice *device;
+        NetObject *object;
+        GByteArray *ssid_array;
+        gchar *wep_key;
+        const gchar *str_mac;
+        struct ether_addr *bin_mac;
+        GSList *connections;
+        GSList *filtered;
+        GSList *l;
+
+        object = get_selected_object (panel);
+        device = net_device_get_nm_device (NET_DEVICE (object));
+        g_assert (nm_device_get_device_type (device) == NM_DEVICE_TYPE_WIFI);
+
+        connections = nm_remote_settings_list_connections (panel->priv->remote_settings);
+        filtered = nm_device_filter_connections (device, connections);
+        g_slist_free (connections);
+        c = NULL;
+        for (l = filtered; l; l = l->next) {
+                tmp = l->data;
+                if (is_hotspot_connection (tmp)) {
+                        c = tmp;
+                        break;
+                }
+        }
+        g_slist_free (filtered);
+
+        if (c != NULL) {
+                g_debug ("activate existing hotspot connection\n");
+                nm_client_activate_connection (panel->priv->client,
+                                               c,
+                                               device,
+                                               NULL,
+                                               (NMClientActivateFn)activate_cb,
+                                               panel);
+                return;
+        }
+
+        g_debug ("create new hotspot connection\n");
+        c = nm_connection_new ();
+
+        sc = (NMSettingConnection *)nm_setting_connection_new ();
+        g_object_set (sc,
+                      "type", "802-11-wireless",
+                      "id", "Hotspot",
+                      "autoconnect", FALSE,
+                      NULL);
+        nm_connection_add_setting (c, (NMSetting *)sc);
+
+        sw = (NMSettingWireless *)nm_setting_wireless_new ();
+        g_object_set (sw,
+                      "mode", "adhoc",
+                      "security", "802-11-wireless-security",
+                      NULL);
+
+        str_mac = nm_device_wifi_get_permanent_hw_address (NM_DEVICE_WIFI (device));
+        bin_mac = ether_aton (str_mac);
+        if (bin_mac) {
+                GByteArray *hw_address;
+
+                hw_address = g_byte_array_sized_new (ETH_ALEN);
+                g_byte_array_append (hw_address, bin_mac->ether_addr_octet, ETH_ALEN);
+                g_object_set (sw,
+                              "mac-address", hw_address,
+                              NULL);
+                g_byte_array_unref (hw_address);
+        }
+        nm_connection_add_setting (c, (NMSetting *)sw);
+
+        sip = (NMSettingIP4Config*) nm_setting_ip4_config_new ();
+        g_object_set (sip, "method", "shared", NULL);
+        nm_connection_add_setting (c, (NMSetting *)sip);
+
+        ssid_array = generate_ssid_for_hotspot (panel);
+        g_object_set (sw,
+                      "ssid", ssid_array,
+                      NULL);
+        g_byte_array_unref (ssid_array);
+
+        sws = (NMSettingWirelessSecurity*) nm_setting_wireless_security_new ();
+        wep_key = generate_wep_key (panel);
+        g_object_set (sws,
+                      "key-mgmt", "none",
+                      "wep-key0", wep_key,
+                      "wep-key-type", NM_WEP_KEY_TYPE_KEY,
+                      NULL);
+        g_free (wep_key);
+        nm_connection_add_setting (c, (NMSetting *)sws);
+
+        nm_client_add_and_activate_connection (panel->priv->client,
+                                               c,
+                                               device,
+                                               NULL,
+                                               (NMClientAddActivateFn)activate_new_cb,
+                                               panel);
+
+        g_object_unref (c);
+}
+
+static void
+start_hotspot (GtkButton *button, CcNetworkPanel *panel)
+{
+        create_shared_connection (panel);
+}
+
+static void
+stop_hotspot (GtkButton *button, CcNetworkPanel *panel)
+{
+        const GPtrArray *connections;
+        const GPtrArray *devices;
+        NetObject *object;
+        NMDevice *device;
+        gint i;
+        NMActiveConnection *c;
+
+        object = get_selected_object (panel);
+        device = net_device_get_nm_device (NET_DEVICE (object));
+
+        connections = nm_client_get_active_connections (panel->priv->client);
+        for (i = 0; i < connections->len; i++) {
+                c = (NMActiveConnection *)connections->pdata[i];
+
+                devices = nm_active_connection_get_devices (c);
+                if (devices->pdata[0] == device) {
+                        nm_client_deactivate_connection (panel->priv->client, c);
+                        break;
+                }
+        }
+
+        refresh_ui (panel);
+}
+
 static void
 cc_network_panel_init (CcNetworkPanel *panel)
 {
@@ -2624,6 +3065,16 @@ cc_network_panel_init (CcNetworkPanel *panel)
                           G_CALLBACK (wireless_enabled_toggled), panel);
         g_signal_connect (panel->priv->client, "notify::wimax-enabled",
                           G_CALLBACK (wimax_enabled_toggled), panel);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "start_hotspot_button"));
+        g_signal_connect (widget, "clicked",
+                          G_CALLBACK (start_hotspot), panel);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "stop_hotspot_button"));
+        g_signal_connect (widget, "clicked",
+                          G_CALLBACK (stop_hotspot), panel);
+
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "button_wired_options"));
