@@ -192,7 +192,7 @@ check_wpad_warning (CcNetworkPanel *panel)
         /* TRANSLATORS: this is when the use leaves the PAC textbox blank */
         g_string_append (string, _("Web Proxy Autodiscovery is used when a Configuration URL is not provided."));
 
-        g_string_append (string, " ");
+        g_string_append (string, "\n");
 
         /* TRANSLATORS: WPAD is bad: if you enable it on an untrusted
          * network, then anyone else on that network can tell your
