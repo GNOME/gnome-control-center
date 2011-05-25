@@ -62,6 +62,7 @@ struct _CcNetworkPanelPrivate
         NMClient         *client;
         NMRemoteSettings *remote_settings;
         gboolean          updating_device;
+        guint             refresh_idle;
 };
 
 enum {
@@ -1697,9 +1698,10 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
                                 net_vpn_get_password (vpn));
 }
 
-static void
-refresh_ui (CcNetworkPanel *panel)
+static gboolean
+refresh_ui_idle (gpointer data)
 {
+        CcNetworkPanel *panel = data;
         GtkTreeSelection *selection;
         GtkTreeIter iter;
         GtkTreeModel *model;
@@ -1776,7 +1778,18 @@ refresh_ui (CcNetworkPanel *panel)
                 nm_device_refresh_device_ui (panel, NET_DEVICE (object));
         }
 out:
-        return;
+        priv->refresh_idle = 0;
+
+        return FALSE;
+}
+
+static void
+refresh_ui (CcNetworkPanel *panel)
+{
+        if (panel->priv->refresh_idle != 0)
+                return;
+
+        panel->priv->refresh_idle = g_idle_add (refresh_ui_idle, panel);
 }
 
 static void
