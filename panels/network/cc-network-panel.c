@@ -1028,6 +1028,9 @@ find_connection_for_device (CcNetworkPanel *panel,
         gint i;
 
         connections = nm_client_get_active_connections (panel->priv->client);
+        if (connections == NULL) {
+                return NULL;
+        }
 
         for (i = 0; i < connections->len; i++) {
                 c = (NMActiveConnection *)connections->pdata[i];
