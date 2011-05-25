@@ -1270,7 +1270,7 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
         g_free (wid_name);
         if (widget != NULL) {
-                gtk_widget_set_sensitive (widget, state == NM_DEVICE_STATE_ACTIVATED);
+                gtk_widget_set_sensitive (widget, find_connection_for_device (panel, device) != NULL);
         }
 }
 
