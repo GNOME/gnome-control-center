@@ -1275,9 +1275,7 @@ device_get_hotspot_security_details (CcNetworkPanel *panel,
         NMSettingWirelessSecurity *sws;
         const gchar *key_mgmt;
         const gchar *tmp_secret;
-        gboolean has_wep;
-        gboolean has_wpa;
-        gboolean has_wpa2;
+        const gchar *tmp_security;
 
         c = find_connection_for_device (panel, device);
         if (c == NULL) {
@@ -1291,32 +1289,16 @@ device_get_hotspot_security_details (CcNetworkPanel *panel,
         }
 
         tmp_secret = NULL;
-        has_wep = FALSE;
-        has_wpa = FALSE;
-        has_wpa2 = FALSE;
+        tmp_security = _("None");
 
         key_mgmt = nm_setting_wireless_security_get_key_mgmt (sws);
         if (strcmp (key_mgmt, "none") == 0) {
                 tmp_secret = nm_setting_wireless_security_get_wep_key (sws, 0);
-                has_wep = TRUE;
+                tmp_security = _("WEP");
         }
         else if (strcmp (key_mgmt, "wpa-none") == 0) {
-                gint num_protos, i;
-
                 tmp_secret = nm_setting_wireless_security_get_psk (sws);
-                num_protos = nm_setting_wireless_security_get_num_protos (sws);
-                if (num_protos == 0) {
-                        has_wpa = TRUE;
-                        has_wpa2 = TRUE;
-                }
-                for (i = 0; i  < num_protos; i++) {
-                        const gchar *proto;
-                        proto = nm_setting_wireless_security_get_proto (sws, i);
-                        if (strcmp (proto, "wpa") == 0)
-                                has_wpa = TRUE;
-                        else if (strcmp (proto, "rsn") == 0)
-                                has_wpa2 = TRUE;
-                }
+                tmp_security = _("WPA");
         } else {
                 g_warning ("unhandled security key-mgmt: %s", key_mgmt);
         }
@@ -1337,27 +1319,7 @@ device_get_hotspot_security_details (CcNetworkPanel *panel,
         }
 
         if (security) {
-                GString *str;
-                str = g_string_new ("");
-                if (has_wep) {
-                        g_string_append (str, _("WEP"));
-                }
-                if (has_wpa) {
-                        if (str->len > 0) {
-                                g_string_append (str, ", ");
-                        }
-                        g_string_append (str, _("WPA"));
-                }
-                if (has_wpa2) {
-                        if (str->len > 0) {
-                                g_string_append (str, ", ");
-                        }
-                        g_string_append (str, _("WPA2"));
-                }
-                if (str->len == 0) {
-                        g_string_append (str, _("None"));
-                }
-                *security = g_string_free (str, FALSE);
+                *security = g_strdup (tmp_security);
         }
 }
 
