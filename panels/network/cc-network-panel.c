@@ -1441,6 +1441,7 @@ static void
 device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
 {
         GtkWidget *widget;
+        GtkWidget *sw;
         guint speed;
         const GPtrArray *aps;
         GPtrArray *aps_unique = NULL;
@@ -1458,6 +1459,7 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
         gchar *hotspot_ssid;
         gchar *hotspot_secret;
         gchar *hotspot_security;
+        gboolean can_start_hotspot;
 
         nm_device = net_device_get_nm_device (device);
         state = nm_device_get_state (nm_device);
@@ -1482,10 +1484,13 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
                                                      "start_hotspot_button"));
         gtk_widget_set_visible (widget, !is_hotspot);
 
+        sw = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                 "device_wireless_off_switch"));
         perm = nm_client_get_permission_result (panel->priv->client, NM_CLIENT_PERMISSION_WIFI_SHARE_OPEN);
-        gtk_widget_set_sensitive (widget,
-                                  perm == NM_CLIENT_PERMISSION_RESULT_YES ||
-                                  perm == NM_CLIENT_PERMISSION_RESULT_AUTH);
+        can_start_hotspot = gtk_switch_get_active (GTK_SWITCH (sw)) &&
+                            (perm == NM_CLIENT_PERMISSION_RESULT_YES ||
+                             perm == NM_CLIENT_PERMISSION_RESULT_AUTH);
+        gtk_widget_set_sensitive (widget, can_start_hotspot);
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "stop_hotspot_button"));
