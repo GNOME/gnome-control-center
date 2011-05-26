@@ -2680,7 +2680,7 @@ is_hotspot_connection (NMConnection *connection)
 }
 
 static void
-create_shared_connection (CcNetworkPanel *panel)
+start_shared_connection (CcNetworkPanel *panel)
 {
         NMConnection *c;
         NMConnection *tmp;
@@ -2788,34 +2788,12 @@ create_shared_connection (CcNetworkPanel *panel)
 }
 
 static void
-hotspot_response_cb (GtkWidget *dialog, gint response, CcNetworkPanel *panel)
+start_hotspot_response_cb (GtkWidget *dialog, gint response, CcNetworkPanel *panel)
 {
         if (response == GTK_RESPONSE_OK) {
-                create_shared_connection (panel);
+                start_shared_connection (panel);
         }
         gtk_widget_destroy (dialog);
-}
-
-static void
-show_hotspot_confirmation_dialog (CcNetworkPanel *panel,
-                                  const gchar    *text)
-{
-        GtkWidget *dialog;
-        GtkWidget *window;
-
-        window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
-        dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                         GTK_MESSAGE_WARNING,
-                                         GTK_BUTTONS_NONE,
-                                         text);
-        gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-                                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                _("_Start Hotspot"), GTK_RESPONSE_OK,
-                                NULL);
-        g_signal_connect (dialog, "response",
-                          G_CALLBACK (hotspot_response_cb), panel);
-        gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static void
@@ -2827,43 +2805,73 @@ start_hotspot (GtkButton *button, CcNetworkPanel *panel)
         const GPtrArray *connections;
         const GPtrArray *devices;
         NMActiveConnection *c;
+        NMAccessPoint *ap;
+        gchar *active_ssid;
+        gchar *warning;
         gint i;
+
+        warning = NULL;
 
         object = get_selected_object (panel);
         device = net_device_get_nm_device (NET_DEVICE (object));
         connections = nm_client_get_active_connections (panel->priv->client);
         if (connections == NULL || connections->len == 0) {
-                show_hotspot_confirmation_dialog (panel,
-                     _("You have no connection to the internet, so the hotspot will only allow others to reach your system.\n"
-                       "Start the hotspot anyway ?"));
-                return;
-        }
-
-        is_default = FALSE;
-        for (i = 0; i < connections->len; i++) {
-                c = (NMActiveConnection *)connections->pdata[i];
-                devices = nm_active_connection_get_devices (c);
-                if (nm_active_connection_get_default (c)) {
+                warning = g_strdup_printf ("%s\n\n%s",
+                                           _("Not connected to the internet."),
+                                           _("Create the hotspot anyway ?"));
+        } else {
+                is_default = FALSE;
+                active_ssid = NULL;
+                for (i = 0; i < connections->len; i++) {
+                        c = (NMActiveConnection *)connections->pdata[i];
+                        devices = nm_active_connection_get_devices (c);
                         if (devices->pdata[0] == device) {
-                                is_default = TRUE;
+                                ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (device));
+                                active_ssid = nm_utils_ssid_to_utf8 (nm_access_point_get_ssid (ap));
+                                is_default = nm_active_connection_get_default (c);
+                                break;
                         }
-                        break;
+                }
+
+                if (active_ssid != NULL) {
+                        GString *str;
+                        str = g_string_new ("");
+                        g_string_append_printf (str, _("Disconnect from %s and create a new hotspot ?"), active_ssid);
+                        if (is_default) {
+                                g_string_append (str, "\n\n");
+                                g_string_append (str, _("This is your only connection to the internet."));
+                        }
+                        warning = g_string_free (str, FALSE);
                 }
         }
 
-        if (is_default) {
-                show_hotspot_confirmation_dialog (panel,
-                     _("Turning this device into a hotspot will drop your default connection to the internet.\n"
-                       "Start the hotspot anyway ?"));
+        if (warning != NULL) {
+                GtkWidget *dialog;
+                GtkWidget *window;
+
+                window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
+                dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                                 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                 GTK_MESSAGE_OTHER,
+                                                 GTK_BUTTONS_NONE,
+                                                 warning);
+                gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+                                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                        _("Create _Hotspot"), GTK_RESPONSE_OK,
+                                        NULL);
+                g_signal_connect (dialog, "response",
+                                  G_CALLBACK (start_hotspot_response_cb), panel);
+                gtk_window_present (GTK_WINDOW (dialog));
+
                 return;
-        }
+          }
 
         /* if we get here, things look good to go ahead */
-        create_shared_connection (panel);
+        start_shared_connection (panel);
 }
 
 static void
-stop_hotspot (GtkButton *button, CcNetworkPanel *panel)
+stop_shared_connection (CcNetworkPanel *panel)
 {
         const GPtrArray *connections;
         const GPtrArray *devices;
@@ -2887,6 +2895,36 @@ stop_hotspot (GtkButton *button, CcNetworkPanel *panel)
         }
 
         refresh_ui (panel);
+}
+
+static void
+stop_hotspot_response_cb (GtkWidget *dialog, gint response, CcNetworkPanel *panel)
+{
+        if (response == GTK_RESPONSE_OK) {
+                stop_shared_connection (panel);
+        }
+        gtk_widget_destroy (dialog);
+}
+
+static void
+stop_hotspot (GtkButton *button, CcNetworkPanel *panel)
+{
+        GtkWidget *dialog;
+        GtkWidget *window;
+
+        window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
+        dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                         GTK_MESSAGE_OTHER,
+                                         GTK_BUTTONS_NONE,
+                                         _("Stop hotspot and disconnect any users ?"));
+        gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+                                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                _("_Stop Hotspot"), GTK_RESPONSE_OK,
+                                NULL);
+        g_signal_connect (dialog, "response",
+                          G_CALLBACK (stop_hotspot_response_cb), panel);
+        gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static void
