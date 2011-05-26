@@ -2679,7 +2679,7 @@ generate_wep_key (CcNetworkPanel *panel)
         for (i = 0; i < 10; i++) {
                 gint digit;
                 digit = g_random_int_range (0, 16);
-                key[i] = hexdigits[d];
+                key[i] = hexdigits[digit];
         }
         key[10] = 0;
 
