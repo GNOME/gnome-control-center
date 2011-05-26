@@ -2656,18 +2656,18 @@ is_hotspot_connection (NMConnection *connection)
         NMSettingIP4Config *sip;
 
         sc = nm_connection_get_setting_connection (connection);
-        if (strcmp (nm_setting_connection_get_connection_type (sc), "802-11-wireless") != 0) {
+        if (g_strcmp0 (nm_setting_connection_get_connection_type (sc), "802-11-wireless") != 0) {
                 return FALSE;
         }
         sw = nm_connection_get_setting_wireless (connection);
-        if (strcmp (nm_setting_wireless_get_mode (sw), "adhoc") != 0) {
+        if (g_strcmp0 (nm_setting_wireless_get_mode (sw), "adhoc") != 0) {
                 return FALSE;
         }
-        if (strcmp (nm_setting_wireless_get_security (sw), "802-11-wireless-security") != 0) {
+        if (g_strcmp0 (nm_setting_wireless_get_security (sw), "802-11-wireless-security") != 0) {
                 return FALSE;
         }
         sip = nm_connection_get_setting_ip4_config (connection);
-        if (strcmp (nm_setting_ip4_config_get_method (sip), "shared") != 0) {
+        if (g_strcmp0 (nm_setting_ip4_config_get_method (sip), "shared") != 0) {
                 return FALSE;
         }
 
