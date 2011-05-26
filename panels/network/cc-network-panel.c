@@ -2783,8 +2783,77 @@ create_shared_connection (CcNetworkPanel *panel)
 }
 
 static void
+hotspot_response_cb (GtkWidget *dialog, gint response, CcNetworkPanel *panel)
+{
+        if (response == GTK_RESPONSE_OK) {
+                create_shared_connection (panel);
+        }
+        gtk_widget_destroy (dialog);
+}
+
+static void
+show_hotspot_confirmation_dialog (CcNetworkPanel *panel,
+                                  const gchar    *text)
+{
+        GtkWidget *dialog;
+        GtkWidget *window;
+
+        window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
+        dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                         GTK_MESSAGE_WARNING,
+                                         GTK_BUTTONS_NONE,
+                                         text);
+        gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+                                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                _("_Start Hotspot"), GTK_RESPONSE_OK,
+                                NULL);
+        g_signal_connect (dialog, "response",
+                          G_CALLBACK (hotspot_response_cb), panel);
+        gtk_window_present (GTK_WINDOW (dialog));
+}
+
+static void
 start_hotspot (GtkButton *button, CcNetworkPanel *panel)
 {
+        NetObject *object;
+        NMDevice *device;
+        gboolean is_default;
+        const GPtrArray *connections;
+        const GPtrArray *devices;
+        NMActiveConnection *c;
+        gint i;
+
+        object = get_selected_object (panel);
+        device = net_device_get_nm_device (NET_DEVICE (object));
+        connections = nm_client_get_active_connections (panel->priv->client);
+        if (connections == NULL || connections->len == 0) {
+                show_hotspot_confirmation_dialog (panel,
+                     _("You have no connection to the internet, so the hotspot will only allow others to reach your system.\n"
+                       "Start the hotspot anyway ?"));
+                return;
+        }
+
+        is_default = FALSE;
+        for (i = 0; i < connections->len; i++) {
+                c = (NMActiveConnection *)connections->pdata[i];
+                devices = nm_active_connection_get_devices (c);
+                if (nm_active_connection_get_default (c)) {
+                        if (devices->pdata[0] == device) {
+                                is_default = TRUE;
+                        }
+                        break;
+                }
+        }
+
+        if (is_default) {
+                show_hotspot_confirmation_dialog (panel,
+                     _("Turning this device into a hotspot will drop your default connection to the internet.\n"
+                       "Start the hotspot anyway ?"));
+                return;
+        }
+
+        /* if we get here, things look good to go ahead */
         create_shared_connection (panel);
 }
 
