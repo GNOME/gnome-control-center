@@ -1513,8 +1513,8 @@ gcm_prefs_add_device (CcColorPanel *prefs, CdDevice *device)
 
   /* create sort order */
   sort = g_strdup_printf ("%s%s",
-        gcm_prefs_device_kind_to_sort (kind),
-        title);
+                          gcm_prefs_device_kind_to_sort (kind),
+                          title);
 
   /* watch for changes to update the status icons */
   g_signal_connect (device, "changed",
@@ -1525,12 +1525,12 @@ gcm_prefs_add_device (CcColorPanel *prefs, CdDevice *device)
   g_debug ("add %s to device list", id);
   gtk_tree_store_append (priv->list_store_devices, &parent, NULL);
   gtk_tree_store_set (priv->list_store_devices, &parent,
-          GCM_PREFS_COLUMN_DEVICE, device,
-          GCM_PREFS_COLUMN_DEVICE_ID, id,
-          GCM_PREFS_COLUMN_SORT, sort,
-          GCM_PREFS_COLUMN_TITLE, title,
-          GCM_PREFS_COLUMN_ICON, icon_name,
-          -1);
+                      GCM_PREFS_COLUMN_DEVICE, device,
+                      GCM_PREFS_COLUMN_DEVICE_ID, id,
+                      GCM_PREFS_COLUMN_SORT, sort,
+                      GCM_PREFS_COLUMN_TITLE, title,
+                      GCM_PREFS_COLUMN_ICON, icon_name,
+                      -1);
   gcm_prefs_device_set_model_by_iter (prefs, device, &parent);
   g_free (sort);
   g_free (title);
