@@ -448,6 +448,7 @@ gvc_speaker_test_init (GvcSpeakerTest *speaker_test)
                                  CA_PROP_APPLICATION_ID, "org.gnome.VolumeControl",
                                  NULL);
 
+        gtk_widget_set_direction (GTK_WIDGET (speaker_test), GTK_TEXT_DIR_LTR);
         gtk_table_resize (GTK_TABLE (speaker_test), 3, 5);
         gtk_container_set_border_width (GTK_CONTAINER (speaker_test), 12);
         gtk_table_set_homogeneous (GTK_TABLE (speaker_test), TRUE);
