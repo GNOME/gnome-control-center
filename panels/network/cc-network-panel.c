@@ -1039,7 +1039,7 @@ find_connection_for_device (CcNetworkPanel *panel,
                 c = (NMActiveConnection *)connections->pdata[i];
 
                 devices = nm_active_connection_get_devices (c);
-                if (devices->pdata[0] == device) {
+                if (devices && devices->pdata[0] == device) {
                         return (NMConnection *)nm_remote_settings_get_connection_by_path (panel->priv->remote_settings, nm_active_connection_get_connection (c));
                 }
         }
@@ -2622,13 +2622,63 @@ activate_new_cb (NMClient           *client,
         activate_cb (client, connection, error, panel);
 }
 
+static gchar *
+get_hostname (void)
+{
+        GDBusConnection *bus;
+        GVariant *res;
+        GVariant *inner;
+        gchar *str;
+        GError *error;
+
+        error = NULL;
+        bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+        if (error != NULL) {
+                g_warning ("Failed to get system bus connection: %s", error->message);
+                g_error_free (error);
+
+                return NULL;
+        }
+        res = g_dbus_connection_call_sync (bus,
+                                           "org.freedesktop.hostname1",
+                                           "/org/freedesktop/hostname1",
+                                           "org.freedesktop.DBus.Properties",
+                                           "Get",
+                                           g_variant_new ("(ss)",
+                                                          "org.freedesktop.hostname1",
+                                                          "PrettyHostname"),
+                                           (GVariantType*)"(v)",
+                                           G_DBUS_CALL_FLAGS_NONE,
+                                           -1,
+                                           NULL,
+                                           &error);
+        g_object_unref (bus);
+
+        if (error != NULL) {
+                g_warning ("Getting pretty hostname failed: %s", error->message);
+                g_error_free (error);
+        }
+
+        if (res != NULL) {
+                g_variant_get (res, "(v)", &inner);
+                str = g_variant_dup_string (inner, NULL);
+                g_variant_unref (res);
+        }
+
+        if (str == NULL || *str == '\0') {
+                str = g_strdup (g_get_host_name ());
+        }
+
+        return str;
+}
+
 static GByteArray *
 generate_ssid_for_hotspot (CcNetworkPanel *panel)
 {
-        gchar *ssid;
         GByteArray *ssid_array;
+        gchar *ssid;
 
-        ssid = g_strconcat (g_get_host_name (), "-hotspot", NULL);
+        ssid = get_hostname ();
         ssid_array = ssid_to_byte_array (ssid);
         g_free (ssid);
 
@@ -2825,7 +2875,7 @@ start_hotspot (GtkButton *button, CcNetworkPanel *panel)
                 for (i = 0; i < connections->len; i++) {
                         c = (NMActiveConnection *)connections->pdata[i];
                         devices = nm_active_connection_get_devices (c);
-                        if (devices->pdata[0] == device) {
+                        if (devices && devices->pdata[0] == device) {
                                 ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (device));
                                 active_ssid = nm_utils_ssid_to_utf8 (nm_access_point_get_ssid (ap));
                                 is_default = nm_active_connection_get_default (c);
@@ -2888,7 +2938,7 @@ stop_shared_connection (CcNetworkPanel *panel)
                 c = (NMActiveConnection *)connections->pdata[i];
 
                 devices = nm_active_connection_get_devices (c);
-                if (devices->pdata[0] == device) {
+                if (devices && devices->pdata[0] == device) {
                         nm_client_deactivate_connection (panel->priv->client, c);
                         break;
                 }
