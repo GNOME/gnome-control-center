@@ -513,6 +513,90 @@ devices_get (PpNewPrinterDialog *pp)
     }
 }
 
+static gchar **
+line_split (gchar *line)
+{
+  gboolean   escaped = FALSE;
+  gboolean   quoted = FALSE;
+  gboolean   in_word = FALSE;
+  gchar    **words = NULL;
+  gchar    **result = NULL;
+  gchar     *buffer = NULL;
+  gchar      ch;
+  gint       n = 0;
+  gint       i, j = 0, k = 0;
+
+  if (line)
+    {
+      n = strlen (line);
+      words = g_new0 (gchar *, n + 1);
+      buffer = g_new0 (gchar, n + 1);
+
+      for (i = 0; i < n; i++)
+        {
+          ch = line[i];
+
+          if (escaped)
+            {
+              buffer[k++] = ch;
+              escaped = FALSE;
+              continue;
+            }
+
+          if (ch == '\\')
+            {
+              in_word = TRUE;
+              escaped = TRUE;
+              continue;
+            }
+
+          if (in_word)
+            {
+              if (quoted)
+                {
+                  if (ch == '"')
+                    quoted = FALSE;
+                  else
+                    buffer[k++] = ch;
+                }
+              else if (g_ascii_isspace (ch))
+                {
+                  words[j++] = g_strdup (buffer);
+                  memset (buffer, 0, n + 1);
+                  k = 0;
+                  in_word = FALSE;
+                }
+              else if (ch == '"')
+                quoted = TRUE;
+              else
+                buffer[k++] = ch;
+            }
+          else
+            {
+              if (ch == '"')
+                {
+                  in_word = TRUE;
+                  quoted = TRUE;
+                }
+              else if (!g_ascii_isspace (ch))
+                {
+                  in_word = TRUE;
+                  buffer[k++] = ch;
+                }
+            }
+        }
+    }
+
+  if (buffer[0] != '\0')
+    words[j++] = g_strdup (buffer);
+
+  result = g_strdupv (words);
+  g_strfreev (words);
+  g_free (buffer);
+
+  return result;
+}
+
 static void
 search_address_cb (GtkToggleButton *togglebutton,
                    gpointer         user_data)
@@ -534,14 +618,19 @@ search_address_cb (GtkToggleButton *togglebutton,
 
       if (uri && uri[0] != '\0')
         {
-          http_t *http;
           cups_dest_t *dests = NULL;
-          gint num_dests = 0;
-          gchar *tmp = NULL;
-          gchar *host = NULL;
-          gchar *port_string = NULL;
-          int  port = 631;
-          gchar *position;
+          http_t      *http;
+          GError      *error = NULL;
+          gchar       *tmp = NULL;
+          gchar       *host = NULL;
+          gchar       *port_string = NULL;
+          gchar       *position;
+          gchar       *command;
+          gchar       *standard_output = NULL;
+          gint         exit_status = -1;
+          gint         num_dests = 0;
+          gint         length;
+          int          port = 631;
 
           if (g_strrstr (uri, "://"))
             tmp = g_strrstr (uri, "://") + 3;
@@ -569,9 +658,9 @@ search_address_cb (GtkToggleButton *togglebutton,
           if (port_string)
             port = atoi (port_string);
 
-          /* Search for CUPS server */
           if (host)
             {
+              /* Use CUPS to get printer's informations */
               http = httpConnectEncrypt (host, port, cupsEncryption ());
               if (http)
                 {
@@ -622,6 +711,71 @@ search_address_cb (GtkToggleButton *togglebutton,
 
                   httpClose (http);
                 }
+
+              /* Use SNMP to get printer's informations */
+              command = g_strdup_printf ("/usr/lib/cups/backend/snmp %s", host);
+              if (g_spawn_command_line_sync (command, &standard_output, NULL, &exit_status, &error))
+                {
+                  if (exit_status == 0 && standard_output)
+                    {
+                      gchar **printer_informations = NULL;
+
+                      printer_informations = line_split (standard_output);
+                      length = g_strv_length (printer_informations);
+
+                      if (length >= 4)
+                        {
+                          CupsDevice *devices = NULL;
+                          devices = g_new0 (CupsDevice, pp->num_devices + 1);
+
+                          for (i = 0; i < pp->num_devices; i++)
+                            {
+                              devices[i] = pp->devices[i];
+                              pp->devices[i].device_class = NULL;
+                              pp->devices[i].device_id = NULL;
+                              pp->devices[i].device_info = NULL;
+                              pp->devices[i].device_make_and_model = NULL;
+                              pp->devices[i].device_uri = NULL;
+                              pp->devices[i].device_location = NULL;
+                              pp->devices[i].device_ppd_uri = NULL;
+                              pp->devices[i].display_name = NULL;
+                              pp->devices[i].hostname = NULL;
+                            }
+
+                          g_free (pp->devices);
+                          pp->devices = devices;
+
+                          pp->devices[pp->num_devices].device_class = g_strdup (printer_informations[0]);
+                          pp->devices[pp->num_devices].device_uri = g_strdup (printer_informations[1]);
+                          pp->devices[pp->num_devices].device_make_and_model = g_strdup (printer_informations[2]);
+                          pp->devices[pp->num_devices].device_info = g_strdup (printer_informations[3]);
+                          pp->devices[pp->num_devices].display_name = g_strdup (printer_informations[3]);
+                          pp->devices[pp->num_devices].display_name =
+                            g_strcanon (pp->devices[pp->num_devices].display_name, ALLOWED_CHARACTERS, '-');
+                          pp->devices[pp->num_devices].show = TRUE;
+                          pp->devices[pp->num_devices].hostname = g_strdup (host);
+                          pp->devices[pp->num_devices].host_port = port;
+                          pp->devices[pp->num_devices].found = TRUE;
+
+                          if (length >= 5 && printer_informations[4][0] != '\0')
+                            pp->devices[pp->num_devices].device_id = g_strdup (printer_informations[4]);
+
+                          if (length >= 6 && printer_informations[5][0] != '\0')
+                            pp->devices[pp->num_devices].device_location = g_strdup (printer_informations[5]);
+
+                          pp->num_devices++;
+                        }
+                      g_strfreev (printer_informations);
+                      g_free (standard_output);
+                    }
+                }
+              else
+                {
+                  if (error)
+                    g_warning ("%s", error->message);
+                }
+
+              g_free (command);
               g_free (host);
             }
         }
