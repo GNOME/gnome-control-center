@@ -870,7 +870,7 @@ gcm_prefs_devices_treeview_clicked_cb (GtkTreeSelection *selection,
 
   /* get selection */
   if (!gtk_tree_selection_get_selected (selection, &model, &iter))
-    g_assert_not_reached ();
+    return;
 
   gtk_tree_model_get (model, &iter,
                       GCM_PREFS_COLUMN_DEVICE, &device,
@@ -1622,7 +1622,7 @@ gcm_prefs_remove_device (CcColorPanel *prefs, CdDevice *cd_device)
                           -1);
       if (g_strcmp0 (id_tmp, id) == 0)
         {
-          gtk_list_store_remove (GTK_LIST_STORE(model), &iter);
+          gtk_tree_store_remove (GTK_TREE_STORE (model), &iter);
           g_free (id_tmp);
           break;
         }
