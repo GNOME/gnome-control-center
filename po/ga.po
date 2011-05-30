@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-02 18:15-0600\n"
-"PO-Revision-Date: 2011-05-02 20:15-0600\n"
+"POT-Creation-Date: 2011-05-30 11:30-0600\n"
+"PO-Revision-Date: 2011-05-30 12:12-0600\n"
 "Last-Translator: Seán de Búrca <leftmostcat@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
 "Language: ga\n"
@@ -18,44 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=5; plural=n==1 ? 0 : (n%10==1 || n%10==2) ? 1 : (n"
 "%10>=3 && n%10<= 6) ? 2 : ((n%10>=7 && n%10<=9) || n==10) ? 3 : 4;\n"
-
-#: ../libgnome-control-center/cc-lockbutton.c:347
-#: ../panels/screen/screen.ui.h:14
-msgid "Lock"
-msgstr "Cuir Faoi Ghlas"
-
-#: ../libgnome-control-center/cc-lockbutton.c:356
-#: ../panels/network/network.ui.h:20
-msgid "Unlock"
-msgstr "Díghlasáil"
-
-#: ../libgnome-control-center/cc-lockbutton.c:365
-msgid "Locked"
-msgstr "Faoi Ghlas"
-
-#: ../libgnome-control-center/cc-lockbutton.c:374
-msgid ""
-"Dialog is unlocked.\n"
-"Click to prevent further changes"
-msgstr ""
-"Níl an dialóg faoi ghlas.\n"
-"Cliceáil chun cosc a chur ar tuilleadh athruithe"
-
-#: ../libgnome-control-center/cc-lockbutton.c:383
-msgid ""
-"Dialog is locked.\n"
-"Click to make changes"
-msgstr ""
-"Tá an dialóg faoi ghlas.\n"
-"Clicéail chun athruithe a dhéanamh"
-
-#: ../libgnome-control-center/cc-lockbutton.c:392
-msgid ""
-"System policy prevents changes.\n"
-"Contact your system administrator"
-msgstr ""
-"Cuireann polasaí an chórais cosc ar athruithe.\n"
-"Déan teagmháil le riarthóir an chórais"
 
 #: ../libgnome-control-center/gconf-property-editor.c:134
 msgid "Key"
@@ -147,6 +109,7 @@ msgid "Please select an image."
 msgstr "Roghnaigh íomhá, le do thoil."
 
 #: ../libgnome-control-center/gconf-property-editor.c:1609
+#: ../panels/user-accounts/data/language-chooser.ui.h:2
 msgid "_Select"
 msgstr "_Roghnaigh"
 
@@ -155,61 +118,62 @@ msgid "Background"
 msgstr "Cúlra"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:2
-#, fuzzy
 msgid "Change the background"
-msgstr "Sábháil íomhá _cúlra"
+msgstr "Athraigh an cúlra"
 
 #. Translators: those are keywords for the background control-center panel
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:4
 msgid "Wallpaper;Screen;Desktop;"
-msgstr ""
+msgstr "Cúlbhrat;Scáileán;Deasc;"
 
 #: ../panels/background/background.ui.h:1
-#, fuzzy
+msgid "Add wallpaper"
+msgstr "Cuir cúlbhrat leis"
+
+#: ../panels/background/background.ui.h:2
 msgid "Center"
-msgstr "Láraithe"
+msgstr "Láraigh"
 
 #. This refers to a slideshow background
-#: ../panels/background/background.ui.h:3
+#: ../panels/background/background.ui.h:4
 msgid "Changes throughout the day"
 msgstr ""
 
-#: ../panels/background/background.ui.h:4
-msgid "Fill"
-msgstr ""
-
 #: ../panels/background/background.ui.h:5
-#, fuzzy
-msgid "Scale"
-msgstr "Scálaithe"
+msgid "Fill"
+msgstr "Líon"
 
 #: ../panels/background/background.ui.h:6
-msgid "Span"
-msgstr ""
+msgid "Remove wallpaper"
+msgstr "Bain cúlbhrat"
 
 #: ../panels/background/background.ui.h:7
-#, fuzzy
-msgid "Tile"
-msgstr "Tílithe"
+msgid "Scale"
+msgstr "Scálaigh"
 
 #: ../panels/background/background.ui.h:8
+msgid "Span"
+msgstr "Réisigh"
+
+#: ../panels/background/background.ui.h:9
+msgid "Tile"
+msgstr "Tíligh"
+
+#: ../panels/background/background.ui.h:10
 msgid "Zoom"
 msgstr "Súmáil"
 
 #: ../panels/background/bg-colors-source.c:46
-#, fuzzy
 msgid "Horizontal Gradient"
-msgstr "Grádán cothrománach"
+msgstr "Grádán Cothrománach"
 
 #: ../panels/background/bg-colors-source.c:47
-#, fuzzy
 msgid "Vertical Gradient"
-msgstr "Grádán ingearach"
+msgstr "Grádán Ingearach"
 
 #: ../panels/background/bg-colors-source.c:48
-#, fuzzy
 msgid "Solid Color"
-msgstr "Dath soladach"
+msgstr "Dath Soladach"
 
 #: ../panels/background/cc-background-panel.c:963
 #: ../panels/user-accounts/um-photo-dialog.c:217
@@ -218,26 +182,24 @@ msgid "Browse for more pictures"
 msgstr ""
 
 #: ../panels/background/cc-background-panel.c:1055
-#, fuzzy
 msgid "Current background"
-msgstr "_Cúlra na Deisce"
+msgstr "Cúlra reatha"
 
 #: ../panels/background/cc-background-panel.c:1139
-#, fuzzy
 msgid "Wallpapers"
-msgstr "Cuir Cúlbhrat Leis"
+msgstr "Cúlbhrait"
 
 #: ../panels/background/cc-background-panel.c:1146
 msgid "Pictures Folder"
-msgstr ""
+msgstr "Fillteán Pictiúr"
 
 #: ../panels/background/cc-background-panel.c:1153
 msgid "Colors & Gradients"
-msgstr ""
+msgstr "Dathanna & Grádáin"
 
 #: ../panels/background/cc-background-panel.c:1161
 msgid "Flickr"
-msgstr ""
+msgstr "Flickr"
 
 #: ../panels/background/cc-background-item.c:148
 msgid "multiple sizes"
@@ -248,7 +210,7 @@ msgstr ""
 #: ../panels/background/cc-background-item.c:152
 #, c-format
 msgid "%d × %d"
-msgstr ""
+msgstr "%d × %d"
 
 #: ../panels/background/cc-background-item.c:281
 msgid "No Desktop Background"
@@ -259,86 +221,114 @@ msgid "Unspecified"
 msgstr ""
 
 #: ../panels/datetime/datetime.ui.h:1
-msgid "24-Hour Time"
+msgid "24-_Hour Time"
 msgstr ""
 
 #. Translator: this is the separator between hours and minutes, like in HH:MM
 #: ../panels/datetime/datetime.ui.h:3
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: ../panels/datetime/datetime.ui.h:4
 msgid "April"
-msgstr ""
+msgstr "Aibreán"
 
 #: ../panels/datetime/datetime.ui.h:5
 msgid "August"
-msgstr ""
+msgstr "Lúnasa"
 
 #: ../panels/datetime/datetime.ui.h:6
-#, fuzzy
-msgid "City:"
-msgstr "_Cathair:"
+msgid "Day"
+msgstr "Lá"
 
 #: ../panels/datetime/datetime.ui.h:7
 msgid "December"
-msgstr ""
+msgstr "Nollaig"
 
 #: ../panels/datetime/datetime.ui.h:8
 msgid "February"
-msgstr ""
+msgstr "Feabhra"
 
 #: ../panels/datetime/datetime.ui.h:9
 msgid "January"
-msgstr ""
+msgstr "Eanáir"
 
 #: ../panels/datetime/datetime.ui.h:10
 msgid "July"
-msgstr ""
+msgstr "Iúil"
 
 #: ../panels/datetime/datetime.ui.h:11
 msgid "June"
-msgstr ""
+msgstr "Meitheamh"
 
 #: ../panels/datetime/datetime.ui.h:12
-#, fuzzy
 msgid "March"
-msgstr "Cuardaigh"
+msgstr "Márta"
 
 #: ../panels/datetime/datetime.ui.h:13
 msgid "May"
-msgstr ""
+msgstr "Bealtaine"
 
 #: ../panels/datetime/datetime.ui.h:14
-#, fuzzy
-msgid "Network Time"
-msgstr "Freastalaithe Líonra"
+msgid "Month"
+msgstr "Mí"
 
 #: ../panels/datetime/datetime.ui.h:15
 msgid "November"
-msgstr ""
+msgstr "Samhain"
 
 #: ../panels/datetime/datetime.ui.h:16
 msgid "October"
-msgstr ""
+msgstr "Deireadh Fómhair"
 
 #: ../panels/datetime/datetime.ui.h:17
-#, fuzzy
-msgid "Region:"
-msgstr "Leagan:"
+msgid "September"
+msgstr "Meán Fómhair"
 
 #: ../panels/datetime/datetime.ui.h:18
-msgid "September"
+msgid "Set the time one hour ahead."
 msgstr ""
+
+#: ../panels/datetime/datetime.ui.h:19
+msgid "Set the time one hour back."
+msgstr ""
+
+#: ../panels/datetime/datetime.ui.h:20
+msgid "Set the time one minute ahead."
+msgstr ""
+
+#: ../panels/datetime/datetime.ui.h:21
+msgid "Set the time one minute back."
+msgstr ""
+
+#: ../panels/datetime/datetime.ui.h:22
+msgid "Switch between AM and PM."
+msgstr ""
+
+#: ../panels/datetime/datetime.ui.h:23
+msgid "Year"
+msgstr "Bliain"
+
+#: ../panels/datetime/datetime.ui.h:24
+msgid "_City:"
+msgstr "_Cathair:"
+
+#: ../panels/datetime/datetime.ui.h:25
+msgid "_Network Time"
+msgstr "Am _Líonra"
+
+#: ../panels/datetime/datetime.ui.h:26
+msgid "_Region:"
+msgstr "_Réigiún:"
 
 #. Translators: those are keywords for the date and time control-center panel
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
 msgid "Clock;Timezone;Location;"
-msgstr ""
+msgstr "Clog;Crios Ama;Suíomh;"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:3
 msgid "Date and Time"
-msgstr ""
+msgstr "Dáta agus Am"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:4
 msgid "Date and Time preferences panel"
@@ -349,14 +339,14 @@ msgid "Left"
 msgstr "Ar Chlé"
 
 #: ../panels/display/display-capplet.ui.h:2
-#: ../panels/display/xrandr-capplet.c:495
+#: ../panels/display/xrandr-capplet.c:493
 msgid "Monitor"
 msgstr "Monatóir"
 
 #: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/xrandr-capplet.c:331
-#: ../panels/display/xrandr-capplet.c:370
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/display/xrandr-capplet.c:329
+#: ../panels/display/xrandr-capplet.c:368
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Normal"
 msgstr "Gnáthrothlú"
 
@@ -370,7 +360,7 @@ msgstr "R_othlú:"
 
 #: ../panels/display/display-capplet.ui.h:6
 msgid "Right"
-msgstr "Deis"
+msgstr "Ar Dheis"
 
 #: ../panels/display/display-capplet.ui.h:7
 msgid "Upside-down"
@@ -396,24 +386,23 @@ msgid "Change resolution and position of monitors and projectors"
 msgstr ""
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
-#, fuzzy
 msgid "Displays"
-msgstr "Taispeáint"
+msgstr "Taispeáintí"
 
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:4
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr ""
 
-#: ../panels/display/xrandr-capplet.c:332
+#: ../panels/display/xrandr-capplet.c:330
 msgid "Anti-Clockwise"
 msgstr ""
 
-#: ../panels/display/xrandr-capplet.c:333
+#: ../panels/display/xrandr-capplet.c:331
 msgid "Clockwise"
 msgstr ""
 
-#: ../panels/display/xrandr-capplet.c:334
+#: ../panels/display/xrandr-capplet.c:332
 msgid "180 Degrees"
 msgstr ""
 
@@ -422,76 +411,76 @@ msgstr ""
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:471
+#: ../panels/display/xrandr-capplet.c:469
 #, fuzzy
 msgid "Mirror Displays"
 msgstr "Taispeáint"
 
-#: ../panels/display/xrandr-capplet.c:601
-#, fuzzy, c-format
+#: ../panels/display/xrandr-capplet.c:599
+#, c-format
 msgid "%d x %d (%s)"
-msgstr "%d x %d"
+msgstr "%d x %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:603
+#: ../panels/display/xrandr-capplet.c:601
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1514
+#: ../panels/display/xrandr-capplet.c:1512
 msgid "Drag to change primary display."
 msgstr ""
 
-#: ../panels/display/xrandr-capplet.c:1572
+#: ../panels/display/xrandr-capplet.c:1570
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
 msgstr ""
 
-#: ../panels/display/xrandr-capplet.c:1961
+#: ../panels/display/xrandr-capplet.c:1959
 msgid "%a %R"
-msgstr ""
+msgstr "%a %R"
 
-#: ../panels/display/xrandr-capplet.c:1963
+#: ../panels/display/xrandr-capplet.c:1961
 msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
-#: ../panels/display/xrandr-capplet.c:2209
+#: ../panels/display/xrandr-capplet.c:2207
 msgid "Could not save the monitor configuration"
 msgstr "Níorbh fhéidir cumraíocht an scáileáin a shábháil"
 
-#: ../panels/display/xrandr-capplet.c:2234
+#: ../panels/display/xrandr-capplet.c:2232
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 
-#: ../panels/display/xrandr-capplet.c:2279
+#: ../panels/display/xrandr-capplet.c:2277
 msgid "Could not detect displays"
 msgstr "Níorbh fhéidir taispeáintí a bhrath"
 
-#: ../panels/display/xrandr-capplet.c:2494
+#: ../panels/display/xrandr-capplet.c:2492
 msgid "Could not get screen information"
 msgstr "Níorbh fhéidir eolas scáileáin a fháil"
 
 #. Translators: VESA is an techncial acronym, don't translate it.
-#: ../panels/info/cc-info-panel.c:373
+#: ../panels/info/cc-info-panel.c:377
 #, c-format
 msgid "VESA: %s"
-msgstr ""
+msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:397 ../panels/network/panel-common.c:79
+#: ../panels/info/cc-info-panel.c:401 ../panels/network/panel-common.c:79
 #: ../panels/network/panel-common.c:158
 msgid "Unknown"
 msgstr "Anaithnid"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:540
+#: ../panels/info/cc-info-panel.c:550
 #, c-format
 msgid "%d-bit"
-msgstr ""
+msgstr "%d-giotán"
 
-#: ../panels/info/cc-info-panel.c:554
+#: ../panels/info/cc-info-panel.c:564
 #, c-format
 msgid "%u byte"
 msgid_plural "%u bytes"
@@ -501,46 +490,46 @@ msgstr[2] ""
 msgstr[3] ""
 msgstr[4] ""
 
-#: ../panels/info/cc-info-panel.c:562
-#, c-format
-msgid "%.1f KB"
-msgstr ""
-
-#: ../panels/info/cc-info-panel.c:567
-#, c-format
-msgid "%.1f MB"
-msgstr ""
-
 #: ../panels/info/cc-info-panel.c:572
 #, c-format
-msgid "%.1f GB"
-msgstr ""
+msgid "%.1f KB"
+msgstr "%.1f KB"
 
 #: ../panels/info/cc-info-panel.c:577
 #, c-format
-msgid "%.1f TB"
-msgstr ""
+msgid "%.1f MB"
+msgstr "%.1f MB"
 
 #: ../panels/info/cc-info-panel.c:582
 #, c-format
-msgid "%.1f PB"
-msgstr ""
+msgid "%.1f GB"
+msgstr "%.1f GB"
 
 #: ../panels/info/cc-info-panel.c:587
 #, c-format
-msgid "%.1f EB"
-msgstr ""
+msgid "%.1f TB"
+msgstr "%.1f TB"
 
-#: ../panels/info/cc-info-panel.c:745
+#: ../panels/info/cc-info-panel.c:592
+#, c-format
+msgid "%.1f PB"
+msgstr "%.1f PB"
+
+#: ../panels/info/cc-info-panel.c:597
+#, c-format
+msgid "%.1f EB"
+msgstr "%.1f EB"
+
+#: ../panels/info/cc-info-panel.c:755
 #, fuzzy
 msgid "Unknown model"
 msgstr "Anaithnid"
 
-#: ../panels/info/cc-info-panel.c:828
+#: ../panels/info/cc-info-panel.c:838
 msgid "The next login will attempt to use the standard experience."
 msgstr ""
 
-#: ../panels/info/cc-info-panel.c:830
+#: ../panels/info/cc-info-panel.c:840
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
@@ -548,128 +537,121 @@ msgstr ""
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:872
-#, fuzzy
+#: ../panels/info/cc-info-panel.c:882
 msgctxt "Experience"
 msgid "Fallback"
-msgstr "Aisghlaoch"
+msgstr "Tacachumas"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:878
-#, fuzzy
+#: ../panels/info/cc-info-panel.c:888
 msgctxt "Experience"
 msgid "Standard"
-msgstr "XTerminéal Caighdeánach"
+msgstr "Caighdeánach"
 
-#: ../panels/info/cc-info-panel.c:1010
+#: ../panels/info/cc-info-panel.c:1028
 #: ../panels/keyboard/keyboard-shortcuts.c:1762
 #, fuzzy
 msgid "Section"
 msgstr "Gníomh"
 
-#: ../panels/info/cc-info-panel.c:1019 ../panels/info/info.ui.h:15
-#, fuzzy
+#: ../panels/info/cc-info-panel.c:1037 ../panels/info/info.ui.h:13
 msgid "Overview"
-msgstr "Réamhamharc"
+msgstr "Foramharc"
 
-#: ../panels/info/cc-info-panel.c:1025 ../panels/info/info.ui.h:3
-#, fuzzy
+#: ../panels/info/cc-info-panel.c:1043 ../panels/info/info.ui.h:2
 msgid "Default Applications"
-msgstr "- Feidhmchláir Réamhshocraithe GNOME"
+msgstr "Feidhmchláir Réamhshocraithe"
 
-#: ../panels/info/cc-info-panel.c:1030 ../panels/info/info.ui.h:10
+#: ../panels/info/cc-info-panel.c:1048 ../panels/info/info.ui.h:9
 msgid "Graphics"
-msgstr ""
+msgstr "Grafaic"
 
-#: ../panels/info/cc-info-panel.c:1055
-#, fuzzy, c-format
+#: ../panels/info/cc-info-panel.c:1212
+#, c-format
 msgid "Version %s"
-msgstr "Leagan:"
+msgstr "Leagan %s"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
-#, fuzzy
 msgid "System Info"
-msgstr "Córas"
+msgstr "Faisnéis Córais"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:2
 msgid "System Information"
-msgstr ""
+msgstr "Faisnéis Córais"
 
-#. Translators: those are keywords for the System Information panel
+#. sure that you use the same "translation" for those keywords
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
-"fallback;"
+"fallback;preferred;"
 msgstr ""
 
 #: ../panels/info/info.ui.h:1
 msgid "Calculating..."
 msgstr ""
 
-#: ../panels/info/info.ui.h:2
-#, fuzzy
-msgid "Calendar"
-msgstr "Fé_ilire:"
-
-#: ../panels/info/info.ui.h:4
+#: ../panels/info/info.ui.h:3
 #, fuzzy
 msgid "Device name"
 msgstr "AINMCOMHAID"
 
-#: ../panels/info/info.ui.h:5
+#: ../panels/info/info.ui.h:4
 msgid "Disk"
-msgstr ""
+msgstr "Diosca"
+
+#: ../panels/info/info.ui.h:5
+msgid "Driver"
+msgstr "Tiománaí"
 
 #: ../panels/info/info.ui.h:6
-msgid "Driver"
-msgstr ""
-
-#: ../panels/info/info.ui.h:7
 msgid "Experience"
-msgstr ""
+msgstr "Eispéireas"
 
 #. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
-#: ../panels/info/info.ui.h:9
-msgid "Forced Fallback Mode"
-msgstr ""
+#: ../panels/info/info.ui.h:8
+msgid "Forced _Fallback Mode"
+msgstr "Modh _Tacachumais Éigeantach"
+
+#: ../panels/info/info.ui.h:10
+msgid "M_usic"
+msgstr "_Ceol"
 
 #: ../panels/info/info.ui.h:11
-#, fuzzy
-msgid "Mail"
-msgstr "KMail"
+msgid "Memory"
+msgstr "Cuimhne"
 
 #: ../panels/info/info.ui.h:12
-msgid "Memory"
-msgstr ""
-
-#: ../panels/info/info.ui.h:13
-msgid "Music"
-msgstr ""
+msgid "OS type"
+msgstr "Cineál OS"
 
 #: ../panels/info/info.ui.h:14
-msgid "OS type"
-msgstr ""
+msgid "Processor"
+msgstr "Próiseálaí"
+
+#: ../panels/info/info.ui.h:15
+msgid "Updates Available"
+msgstr "Nuashonruithe ar Fáil"
 
 #: ../panels/info/info.ui.h:16
-msgid "Photos"
-msgstr ""
+msgid "_Calendar"
+msgstr "Féi_lire"
 
 #: ../panels/info/info.ui.h:17
-msgid "Processor"
-msgstr ""
+msgid "_Mail"
+msgstr "_Post"
 
 #: ../panels/info/info.ui.h:18
-msgid "Updates Available"
-msgstr ""
+msgid "_Photos"
+msgstr "P_ictiúir"
 
 #: ../panels/info/info.ui.h:19
-msgid "Video"
-msgstr ""
+msgid "_Video"
+msgstr "_Fís"
 
 #: ../panels/info/info.ui.h:20
-msgid "Web"
-msgstr "Gréasán"
+msgid "_Web"
+msgstr "_Gréasán"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:1
 msgid "Eject"
@@ -796,7 +778,7 @@ msgstr "Léitheoir Scáileáin Linux"
 #: ../panels/keyboard/50-accessibility.xml.in.h:9
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
 msgid "Universal Access"
-msgstr ""
+msgstr "Rochtain Uilíoch"
 
 #: ../panels/keyboard/eggcellrendererkeys.c:21
 msgid "New shortcut..."
@@ -840,7 +822,7 @@ msgid "Change keyboard settings"
 msgstr ""
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid "Keyboard"
 msgstr "Méarchlár"
 
@@ -915,7 +897,7 @@ msgid "Cursor _blinks in text fields"
 msgstr "_Caochann an cúrsóir i réimsí téacs"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
-#: ../panels/mouse/gnome-mouse-properties.ui.h:1
+#: ../panels/mouse/gnome-mouse-properties.ui.h:2
 #: ../panels/universal-access/uap.ui.h:21
 msgid "Cursor blinks speed"
 msgstr "Luas caochadh an chúrsóra"
@@ -926,57 +908,52 @@ msgstr "Aicearra Saincheaptha"
 
 #. fast acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Fast"
 msgstr "Tapa"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
-msgid "General"
-msgstr "Ginearálta"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid "Key presses _repeat when key is held down"
 msgstr "Déantar brú eochracha _arís nuair a choinníonn an eochair síos"
 
 #. long delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/universal-access/uap.ui.h:37
 msgid "Long"
 msgstr "Fada"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 msgid "Repeat Keys"
 msgstr "Athbhrú Eochracha"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 msgid "Repeat keys speed"
 msgstr "Luas athbhrú eochracha"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
 msgid "S_peed:"
 msgstr "L_uas:"
 
 #. short delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
-#: ../panels/mouse/gnome-mouse-properties.ui.h:22
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:23
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Short"
 msgstr "Gearr"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 #, fuzzy
 msgid "Shortcuts"
 msgstr "Aicearra"
 
 #. slow acceleration
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
-#: ../panels/mouse/gnome-mouse-properties.ui.h:24
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+#: ../panels/mouse/gnome-mouse-properties.ui.h:25
 msgid "Slow"
 msgstr "Mall"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
 #, fuzzy
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
@@ -984,6 +961,12 @@ msgid ""
 msgstr ""
 "Chun eochair aicearra a chur in eagar, cliceáil ar an ró comhfhreagrach agus "
 "clóscríobh teaglaim eochracha nua, nó brúigh backspace chun glanta."
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
+#: ../panels/universal-access/uap.ui.h:63
+#, fuzzy
+msgid "Typing"
+msgstr "Sos Clóscríofa"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
 msgid "_Delay:"
@@ -1139,134 +1122,134 @@ msgstr ""
 
 #: ../panels/media/gnome-media-panel.desktop.in.in.h:2
 msgid "Removable Media"
-msgstr ""
+msgstr "Meán Inbhainte"
 
 #. Translators: those are keywords for the media control-center panel
 #: ../panels/media/gnome-media-panel.desktop.in.in.h:4
 msgid "cd;dvd;usb;audio;video;disc;"
-msgstr ""
+msgstr "cd;dvd;usb;fuaim;fís;diosca;"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:494
+#: ../panels/printers/cc-printers-panel.c:509
 msgid "Low on toner"
 msgstr ""
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:496
+#: ../panels/printers/cc-printers-panel.c:511
 msgid "Out of toner"
 msgstr ""
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:499
+#: ../panels/printers/cc-printers-panel.c:514
 msgid "Low on developer"
 msgstr ""
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:502
+#: ../panels/printers/cc-printers-panel.c:517
 msgid "Out of developer"
 msgstr ""
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:504
+#: ../panels/printers/cc-printers-panel.c:519
 msgid "Low on a marker supply"
 msgstr ""
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:506
+#: ../panels/printers/cc-printers-panel.c:521
 msgid "Out of a marker supply"
 msgstr ""
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:508
+#: ../panels/printers/cc-printers-panel.c:523
 msgid "Open cover"
 msgstr ""
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:510
+#: ../panels/printers/cc-printers-panel.c:525
 msgid "Open door"
 msgstr ""
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:512
+#: ../panels/printers/cc-printers-panel.c:527
 msgid "Low on paper"
 msgstr ""
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:514
+#: ../panels/printers/cc-printers-panel.c:529
 msgid "Out of paper"
 msgstr ""
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:516
+#: ../panels/printers/cc-printers-panel.c:531
 msgctxt "printer state"
 msgid "Offline"
 msgstr ""
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:518
+#: ../panels/printers/cc-printers-panel.c:533
 msgctxt "printer state"
 msgid "Paused"
 msgstr ""
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:520
+#: ../panels/printers/cc-printers-panel.c:535
 msgid "Waste receptacle almost full"
 msgstr ""
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:522
+#: ../panels/printers/cc-printers-panel.c:537
 msgid "Waste receptacle full"
 msgstr ""
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:524
+#: ../panels/printers/cc-printers-panel.c:539
 msgid "The optical photo conductor is near end of life"
 msgstr ""
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:526
+#: ../panels/printers/cc-printers-panel.c:541
 msgid "The optical photo conductor is no longer functioning"
 msgstr ""
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:698
+#: ../panels/printers/cc-printers-panel.c:713
 msgctxt "printer state"
 msgid "Ready"
 msgstr ""
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:702
+#: ../panels/printers/cc-printers-panel.c:717
 #, fuzzy
 msgctxt "printer state"
 msgid "Processing"
 msgstr "_Gairm:"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:706
+#: ../panels/printers/cc-printers-panel.c:721
 msgctxt "printer state"
 msgid "Stopped"
 msgstr ""
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:825
+#: ../panels/printers/cc-printers-panel.c:840
 msgid "Toner Level"
 msgstr ""
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:828
+#: ../panels/printers/cc-printers-panel.c:843
 msgid "Ink Level"
 msgstr ""
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:831
+#: ../panels/printers/cc-printers-panel.c:846
 msgid "Supply Level"
 msgstr ""
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:846
-#: ../panels/printers/cc-printers-panel.c:1229
+#: ../panels/printers/cc-printers-panel.c:861
+#: ../panels/printers/cc-printers-panel.c:1245
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -1277,84 +1260,84 @@ msgstr[3] ""
 msgstr[4] ""
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:951
+#: ../panels/printers/cc-printers-panel.c:966
 msgid "No printers available"
 msgstr ""
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1272
+#: ../panels/printers/cc-printers-panel.c:1288
 msgctxt "print job"
 msgid "Pending"
 msgstr ""
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1276
+#: ../panels/printers/cc-printers-panel.c:1292
 msgctxt "print job"
 msgid "Held"
 msgstr ""
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1280
+#: ../panels/printers/cc-printers-panel.c:1296
 #, fuzzy
 msgctxt "print job"
 msgid "Processing"
 msgstr "_Gairm:"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1284
+#: ../panels/printers/cc-printers-panel.c:1300
 msgctxt "print job"
 msgid "Stopped"
 msgstr ""
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1288
+#: ../panels/printers/cc-printers-panel.c:1304
 msgctxt "print job"
 msgid "Canceled"
 msgstr ""
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1292
+#: ../panels/printers/cc-printers-panel.c:1308
 msgctxt "print job"
 msgid "Aborted"
 msgstr ""
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1296
+#: ../panels/printers/cc-printers-panel.c:1312
 msgctxt "print job"
 msgid "Completed"
 msgstr ""
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1379
+#: ../panels/printers/cc-printers-panel.c:1395
 #, fuzzy
 msgid "Job Title"
 msgstr "_Teideal:"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1388
+#: ../panels/printers/cc-printers-panel.c:1404
 msgid "Job State"
 msgstr ""
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1394
+#: ../panels/printers/cc-printers-panel.c:1410
 #, fuzzy
 msgid "Time"
 msgstr "Teorainn _Ama:"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2129
+#: ../panels/printers/cc-printers-panel.c:2006
 msgid "Failed to add new printer."
 msgstr ""
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2301
-#: ../panels/printers/cc-printers-panel.c:2315
+#: ../panels/printers/cc-printers-panel.c:2210
+#: ../panels/printers/cc-printers-panel.c:2224
 #, fuzzy
 msgid "Test page"
 msgstr "LEATHANACH"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2514
+#: ../panels/printers/cc-printers-panel.c:2441
 #, fuzzy, c-format
 msgid "Could not load ui: %s"
 msgstr "Níorbh fhéidir an príomhchomhéadan a luchtú"
@@ -1369,13 +1352,12 @@ msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr ""
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
-#, fuzzy
 msgid "Printers"
-msgstr "Pointeoir"
+msgstr "Printéirí"
 
 #: ../panels/printers/new-printer-dialog.ui.h:1
 #, fuzzy
-msgid "Add"
+msgid "A_ddress"
 msgstr "Seoladh"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
@@ -1384,146 +1366,140 @@ msgid "Add a New Printer"
 msgstr "Pointeoir Mór"
 
 #: ../panels/printers/new-printer-dialog.ui.h:3
-msgid "Address"
-msgstr "Seoladh"
+msgid "_Add"
+msgstr ""
 
 #: ../panels/printers/new-printer-dialog.ui.h:4
+#: ../panels/user-accounts/um-user-panel.c:445
 #: ../panels/user-accounts/data/language-chooser.ui.h:1
-#: ../panels/user-accounts/data/photo-dialog.ui.h:3
-msgid "Cancel"
-msgstr ""
+msgid "_Cancel"
+msgstr "_Cealaigh"
 
 #: ../panels/printers/new-printer-dialog.ui.h:5
-msgid "Search by Address"
+msgid "_Search by Address"
 msgstr ""
 
-#: ../panels/printers/pp-new-printer-dialog.c:452
+#: ../panels/printers/pp-new-printer-dialog.c:492
 msgid "Getting devices..."
 msgstr ""
 
 #. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:718
-#: ../panels/printers/pp-new-printer-dialog.c:723
+#: ../panels/printers/pp-new-printer-dialog.c:912
+#: ../panels/printers/pp-new-printer-dialog.c:917
 msgid "Devices"
 msgstr ""
 
 #. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:748
+#: ../panels/printers/pp-new-printer-dialog.c:942
 msgid "Local"
 msgstr ""
 
 #. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:750
+#: ../panels/printers/pp-new-printer-dialog.c:944
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
-#, fuzzy
 msgid "Network"
-msgstr "Seachfhreastalaí Líonra"
+msgstr "Líonra"
 
 #. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:791
+#: ../panels/printers/pp-new-printer-dialog.c:985
 msgid "Device types"
 msgstr ""
 
 #. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:1088
+#: ../panels/printers/pp-new-printer-dialog.c:1265
 #, fuzzy
 msgid "Automatic configuration"
 msgstr "<b>Cumraíocht seachfhreastalaí _uathoibríoch</b>"
 
-#: ../panels/printers/printers.ui.h:1
-msgid "---"
-msgstr ""
-
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:3
+#: ../panels/printers/printers.ui.h:2
 msgid "Active Print Jobs"
 msgstr ""
 
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:5
+#: ../panels/printers/printers.ui.h:4
 msgid "Add New Printer"
 msgstr ""
+
+#: ../panels/printers/printers.ui.h:5
+#, fuzzy
+msgid "Add printer"
+msgstr "Pointeoir Mór"
 
 #: ../panels/printers/printers.ui.h:6
 msgid "Allowed users"
 msgstr ""
 
-#. Translators: Switch back to printer's info tab
-#: ../panels/printers/printers.ui.h:8
-msgid "Back"
-msgstr ""
-
-#. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:10
-#: ../panels/region/gnome-region-panel-xkbot.c:229
-#: ../panels/sound/gvc-sound-theme-chooser.c:586
-msgid "Default"
-msgstr "Réamhshocrú"
-
-#: ../panels/printers/printers.ui.h:11
-#: ../panels/network/cc-network-panel.c:1596
-#: ../panels/network/cc-network-panel.c:1599 ../panels/network/network.ui.h:11
+#: ../panels/printers/printers.ui.h:7
+#: ../panels/network/cc-network-panel.c:1771
+#: ../panels/network/cc-network-panel.c:1774 ../panels/network/network.ui.h:11
 #, fuzzy
 msgid "IP Address"
 msgstr "Seoladh"
 
-#: ../panels/printers/printers.ui.h:12
+#: ../panels/printers/printers.ui.h:8
 msgid "Jobs"
 msgstr ""
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:14
+#: ../panels/printers/printers.ui.h:10
 #, fuzzy
 msgid "Location"
 msgstr "Suíomh:"
 
-#: ../panels/printers/printers.ui.h:15
+#: ../panels/printers/printers.ui.h:11
 #, fuzzy
 msgid "Model"
 msgstr "Samhlacha"
 
-#. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:17
-#, fuzzy
-msgid "Options"
-msgstr "Gníomh"
-
 #. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:19
-msgid "Print Test Page"
-msgstr ""
-
-#: ../panels/printers/printers.ui.h:20
+#: ../panels/printers/printers.ui.h:13
 #, fuzzy
-msgid "Printer"
-msgstr "Pointeoir"
+msgid "Print _Test Page"
+msgstr "LEATHANACH"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:22
+#: ../panels/printers/printers.ui.h:15
 #, fuzzy
 msgid "Printer Options"
 msgstr "Gníomh an Bharra Teidil"
 
-#: ../panels/printers/printers.ui.h:23
-#, fuzzy
-msgid "Printing..."
-msgstr "Leidiú"
-
-#. Tanslators: Switch to tab containing printer's jobs
-#: ../panels/printers/printers.ui.h:25
-msgid "Show"
+#: ../panels/printers/printers.ui.h:16
+msgid "Remove printer"
 msgstr ""
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:18
 msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
 msgstr ""
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:30
+#: ../panels/printers/printers.ui.h:21
 msgid "Supply"
+msgstr ""
+
+#. Translators: Switch back to printer's info tab
+#: ../panels/printers/printers.ui.h:23
+msgid "_Back"
+msgstr ""
+
+#. Translators: This checkbox is checked when the default printer is selected.
+#: ../panels/printers/printers.ui.h:25
+#, fuzzy
+msgid "_Default"
+msgstr "Réamhshocrú"
+
+#. Translators: This button opens printer's options tab
+#: ../panels/printers/printers.ui.h:27
+#, fuzzy
+msgid "_Options"
+msgstr "Gníomh"
+
+#. Tanslators: Switch to tab containing printer's jobs
+#: ../panels/printers/printers.ui.h:29
+msgid "_Show"
 msgstr ""
 
 #: ../panels/region/gnome-region-panel.ui.h:1
@@ -1535,7 +1511,6 @@ msgid "Install languages..."
 msgstr "Suiteáil teangacha..."
 
 #: ../panels/region/gnome-region-panel.ui.h:3
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "Language"
 msgstr "Teanga"
 
@@ -1582,7 +1557,7 @@ msgid "View and edit keyboard layout options"
 msgstr "Roghanna Leaganacha Amach Méarchláir"
 
 #: ../panels/region/gnome-region-panel.ui.h:14
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network.ui.h:30
 msgid "_Options..."
 msgstr "_Roghanna..."
 
@@ -1606,6 +1581,11 @@ msgstr "Roghanna Leaganacha Amach Méarchláir"
 msgid "Layout"
 msgstr "Leagan Amach"
 
+#: ../panels/region/gnome-region-panel-xkbot.c:229
+#: ../panels/sound/gvc-sound-theme-chooser.c:586
+msgid "Default"
+msgstr "Réamhshocrú"
+
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:1
 msgid "Change your region and language settings"
 msgstr ""
@@ -1613,95 +1593,100 @@ msgstr ""
 #. Translators: those are keywords for the region control-center panel
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:3
 msgid "Language;Layout;Keyboard;"
-msgstr ""
+msgstr "Teanga;Leagan Amach;Méarchlár;"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:2
+#: ../panels/mouse/gnome-mouse-properties.ui.h:1
+#, fuzzy
+msgid "A_cceleration:"
+msgstr "Luas_ghéarú:"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:3
 #, fuzzy
 msgid "Disable _touchpad while typing"
 msgstr "Dí_chumasaigh ceap tadhaill agus ag clóscríobh"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:3
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
 msgid "Double-Click Timeout"
 msgstr "Teorainn Am Déchliceála"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
 msgid "Drag and Drop"
 msgstr "Tarraing agus Scaoil"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+#: ../panels/mouse/gnome-mouse-properties.ui.h:6
 #, fuzzy
 msgid "Enable _mouse clicks with touchpad"
 msgstr "Cumasaigh c_liceálacha luiche le ceap tadhaill"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:6
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
 #, fuzzy
 msgid "Enable h_orizontal scrolling"
 msgstr "Cumasaigh scrollú c_othrománach"
 
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+msgid "General"
+msgstr "Ginearálta"
+
 #. high sensitivity
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#: ../panels/mouse/gnome-mouse-properties.ui.h:12
 msgid "High"
 msgstr "Ard"
 
 #. large threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/universal-access/uap.ui.h:34
 msgid "Large"
 msgstr "Mór"
 
 #. low sensitivity
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Low"
 msgstr "Íseal"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Mouse"
 msgstr "Luch"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
 msgid "Mouse Preferences"
 msgstr "Sainroghanna na Luiche"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
 msgid "Pointer Speed"
 msgstr "Luas an Phointeora"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+#: ../panels/mouse/gnome-mouse-properties.ui.h:21
 msgid "Scrolling"
 msgstr "Scrollú"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:21
+#: ../panels/mouse/gnome-mouse-properties.ui.h:22
 msgid "Sh_ow position of pointer when the Control key is pressed"
 msgstr "Ta_ispeáin ionad an phointeora nuair a bhrúítear an eochair Control"
 
 #. small threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:26
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/mouse/gnome-mouse-properties.ui.h:27
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Small"
 msgstr "Beag"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:27
+#: ../panels/mouse/gnome-mouse-properties.ui.h:28
 msgid "Thr_eshold:"
 msgstr "_Tairseach:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/mouse/gnome-mouse-properties.ui.h:29
 #, fuzzy
 msgid "To test your settings, try to double-click on the face."
 msgstr ""
 "Chun do shocruithe déchliceála a thástáil, déan iarracht déchliceáil ar an "
 "mbolgán solais."
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:29
+#: ../panels/mouse/gnome-mouse-properties.ui.h:30
 msgid "Touchpad"
 msgstr "Ceap Tadhaill"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:30
+#: ../panels/mouse/gnome-mouse-properties.ui.h:31
 msgid "Two-_finger scrolling"
 msgstr "Scrollú dhá-_mhéar"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
-msgid "_Acceleration:"
-msgstr "Luas_ghéarú:"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:32
 msgid "_Disabled"
@@ -1728,9 +1713,8 @@ msgid "_Timeout:"
 msgstr "Teorainn _Ama:"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
-#, fuzzy
 msgid "Mouse and Touchpad"
-msgstr "Ceap Tadhaill"
+msgstr "Luch agus Ceap Tadhaill"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:2
 #, fuzzy
@@ -1743,7 +1727,7 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr ""
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/cc-network-panel.c:193
+#: ../panels/network/cc-network-panel.c:196
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgstr ""
@@ -1752,80 +1736,111 @@ msgstr ""
 #. * network, then anyone else on that network can tell your
 #. * machine that it should proxy all of your web traffic
 #. * through them.
-#: ../panels/network/cc-network-panel.c:201
+#: ../panels/network/cc-network-panel.c:204
 msgid "This is not recommended for untrusted public networks."
 msgstr ""
 
 #. TRANSLATORS: this is when the access point is not listed
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
-#: ../panels/network/cc-network-panel.c:814
-#, fuzzy
+#: ../panels/network/cc-network-panel.c:817
 msgctxt "Wireless access point"
 msgid "Other..."
-msgstr "Eile"
+msgstr "Eile..."
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:972
+#: ../panels/network/cc-network-panel.c:975
+#: ../panels/network/cc-network-panel.c:1297
 msgid "WEP"
-msgstr ""
+msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:976
+#: ../panels/network/cc-network-panel.c:979
+#: ../panels/network/cc-network-panel.c:1301
 msgid "WPA"
-msgstr ""
+msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:980
+#: ../panels/network/cc-network-panel.c:983
 msgid "WPA2"
-msgstr ""
+msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:985
+#: ../panels/network/cc-network-panel.c:988
 msgid "Enterprise"
-msgstr ""
+msgstr "Fiontar"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:991
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/network/cc-network-panel.c:994
+#: ../panels/network/cc-network-panel.c:1292
+#: ../panels/universal-access/uap.ui.h:41
 msgid "None"
 msgstr "Neamhní"
 
-#. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1294
-#: ../panels/network/cc-network-panel.c:1339
-#, c-format
-msgid "%d Mb/s"
+#: ../panels/network/cc-network-panel.c:1360
+msgid "Hotspot"
 msgstr ""
 
-#: ../panels/network/cc-network-panel.c:1592 ../panels/network/network.ui.h:12
-#, fuzzy
+#. Translators: network device speed
+#: ../panels/network/cc-network-panel.c:1422
+#: ../panels/network/cc-network-panel.c:1510
+#, c-format
+msgid "%d Mb/s"
+msgstr "%d Mb/s"
+
+#: ../panels/network/cc-network-panel.c:1767 ../panels/network/network.ui.h:12
 msgid "IPv4 Address"
-msgstr "Seoladh"
+msgstr "Seoladh IPv4"
 
-#: ../panels/network/cc-network-panel.c:1593 ../panels/network/network.ui.h:13
-#, fuzzy
+#: ../panels/network/cc-network-panel.c:1768 ../panels/network/network.ui.h:13
 msgid "IPv6 Address"
-msgstr "Seoladh"
+msgstr "Seoladh IPv6"
 
-#: ../panels/network/cc-network-panel.c:1731
-#, fuzzy
+#: ../panels/network/cc-network-panel.c:1907
 msgid "Proxy"
-msgstr "Seachfhreastalaí _FTP:"
+msgstr "Seachfhreastalaí"
 
-#: ../panels/network/cc-network-panel.c:1795
-#, fuzzy
+#: ../panels/network/cc-network-panel.c:1981
 msgid "Network proxy"
-msgstr "Seachfhreastalaí Líonra"
+msgstr "Seachfhreastalaí líonra"
 
-#: ../panels/network/cc-network-panel.c:1961
+#: ../panels/network/cc-network-panel.c:2147
 #, c-format
 msgid "%s VPN"
 msgstr ""
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2029
+#: ../panels/network/cc-network-panel.c:2214
 msgid "The system network services are not compatible with this version."
+msgstr ""
+
+#: ../panels/network/cc-network-panel.c:2870
+msgid "Not connected to the internet."
+msgstr ""
+
+#: ../panels/network/cc-network-panel.c:2871
+msgid "Create the hotspot anyway ?"
+msgstr ""
+
+#: ../panels/network/cc-network-panel.c:2889
+#, c-format
+msgid "Disconnect from %s and create a new hotspot ?"
+msgstr ""
+
+#: ../panels/network/cc-network-panel.c:2892
+msgid "This is your only connection to the internet."
+msgstr ""
+
+#: ../panels/network/cc-network-panel.c:2910
+msgid "Create _Hotspot"
+msgstr ""
+
+#: ../panels/network/cc-network-panel.c:2970
+msgid "Stop hotspot and disconnect any users ?"
+msgstr ""
+
+#: ../panels/network/cc-network-panel.c:2973
+msgid "_Stop Hotspot"
 msgstr ""
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
@@ -1836,16 +1851,15 @@ msgstr "Freastalaithe Líonra"
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
 msgid "Network;Wireless;IP;LAN;"
-msgstr ""
+msgstr "Líonra;Gan Sreang;IP;LAN;"
 
 #: ../panels/network/network.ui.h:1
 msgid "Air_plane Mode"
 msgstr ""
 
 #: ../panels/network/network.ui.h:2
-#, fuzzy
 msgid "Create..."
-msgstr "C_ruthaigh"
+msgstr "Cruthaigh..."
 
 #: ../panels/network/network.ui.h:3
 msgid "DNS"
@@ -1889,76 +1903,98 @@ msgid "Interface"
 msgstr "Comhéadan"
 
 #: ../panels/network/network.ui.h:15
+#, fuzzy
+msgid "Network Name"
+msgstr "Freastalaithe Líonra"
+
+#: ../panels/network/network.ui.h:16
 msgid "Provider"
 msgstr ""
 
-#: ../panels/network/network.ui.h:16
-msgid "Security"
-msgstr ""
-
 #: ../panels/network/network.ui.h:17
-msgid "Select the interface to use for the new service"
+msgid "Security"
 msgstr ""
 
 #: ../panels/network/network.ui.h:18
 #, fuzzy
+msgid "Security Key"
+msgstr "Eochracha Greamaitheacha"
+
+#: ../panels/network/network.ui.h:19
+msgid "Select the interface to use for the new service"
+msgstr ""
+
+#: ../panels/network/network.ui.h:20
+#, fuzzy
 msgid "Speed"
 msgstr "_Luas:"
 
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:21
 msgid "Subnet Mask"
 msgstr ""
 
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:22
+msgid "Unlock"
+msgstr "Díghlasáil"
+
+#: ../panels/network/network.ui.h:23
 #, fuzzy
 msgid "Username"
 msgstr "_Ainm Úsáideora:"
 
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:24
 msgid "VPN"
-msgstr ""
+msgstr "VPN"
 
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:25
 #, fuzzy
 msgid "_Configuration URL"
 msgstr "U_RL Uathchumraíochta:"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:26
 #, fuzzy
 msgid "_FTP Proxy"
 msgstr "Seachfhreastalaí _FTP:"
 
-#: ../panels/network/network.ui.h:25
+#: ../panels/network/network.ui.h:27
 #, fuzzy
 msgid "_HTTP Proxy"
 msgstr "Seachfhreastalaí _HTTP"
 
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:28
 #, fuzzy
 msgid "_Method"
 msgstr "_Meta"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:29
 #, fuzzy
 msgid "_Network Name"
 msgstr "Freastalaithe Líonra"
 
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network.ui.h:31
 #, fuzzy
 msgid "_Socks Host"
 msgstr "Óstach S_ocks:"
 
-#: ../panels/network/network.ui.h:30
+#: ../panels/network/network.ui.h:32
+msgid "_Stop Hotspot..."
+msgstr ""
+
+#: ../panels/network/network.ui.h:33
+msgid "_Use as Hotspot..."
+msgstr ""
+
+#: ../panels/network/network.ui.h:34
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr ""
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network.ui.h:35
 msgctxt "proxy method"
 msgid "Manual"
 msgstr ""
 
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network.ui.h:36
 #, fuzzy
 msgctxt "proxy method"
 msgid "None"
@@ -1982,7 +2018,7 @@ msgstr ""
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:99
 msgid "Bluetooth"
-msgstr ""
+msgstr "Bluetooth"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:103
@@ -2071,7 +2107,7 @@ msgstr ""
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
-msgstr ""
+msgstr "Cumhacht"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:2
 msgid "Power management settings"
@@ -2170,22 +2206,19 @@ msgstr ""
 
 #: ../panels/power/power.ui.h:1 ../panels/screen/screen.ui.h:1
 msgid "1 hour"
-msgstr ""
+msgstr "1 uair"
 
 #: ../panels/power/power.ui.h:2 ../panels/screen/screen.ui.h:3
-#, fuzzy
 msgid "10 minutes"
-msgstr "nóimeád"
+msgstr "10 nóimeád"
 
 #: ../panels/power/power.ui.h:3 ../panels/screen/screen.ui.h:6
-#, fuzzy
 msgid "30 minutes"
-msgstr "nóimeád"
+msgstr "30 nóimeád"
 
 #: ../panels/power/power.ui.h:4 ../panels/screen/screen.ui.h:8
-#, fuzzy
 msgid "5 minutes"
-msgstr "nóimeád"
+msgstr "5 nóimeád"
 
 #: ../panels/power/power.ui.h:5
 msgid "Ask me"
@@ -2196,11 +2229,11 @@ msgid "Hibernate"
 msgstr ""
 
 #: ../panels/power/power.ui.h:8
-msgid "On AC power:"
+msgid "On AC _power:"
 msgstr ""
 
 #: ../panels/power/power.ui.h:9
-msgid "On battery power:"
+msgid "On _battery power:"
 msgstr ""
 
 #: ../panels/power/power.ui.h:10
@@ -2216,15 +2249,284 @@ msgid "Suspend"
 msgstr ""
 
 #: ../panels/power/power.ui.h:13
-msgid "When power is critically low:"
+msgid "When power is _critically low:"
 msgstr ""
 
 #: ../panels/power/power.ui.h:14
-msgid "When the power button is pressed:"
+msgid "When the _sleep button is pressed:"
 msgstr ""
 
 #: ../panels/power/power.ui.h:15
-msgid "When the sleep button is pressed:"
+msgid "When the p_ower button is pressed:"
+msgstr ""
+
+#: ../panels/color/gnome-color-panel.desktop.in.in.h:1
+#: ../panels/color/color.ui.h:8
+#, fuzzy
+msgid "Color"
+msgstr "Dath soladach"
+
+#: ../panels/color/gnome-color-panel.desktop.in.in.h:2
+msgid "Color management settings"
+msgstr ""
+
+#. Translators: those are keywords for the color control-center panel
+#: ../panels/color/gnome-color-panel.desktop.in.in.h:4
+msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
+msgstr ""
+
+#. TRANSLATORS: this is where the user can click and import a profile
+#: ../panels/color/cc-color-panel.c:100
+#, fuzzy
+msgid "Other profile…"
+msgstr "Méar eile:"
+
+#. TRANSLATORS: an ICC profile is a file containing colorspace data
+#: ../panels/color/cc-color-panel.c:159
+msgid "Select ICC Profile File"
+msgstr ""
+
+#: ../panels/color/cc-color-panel.c:162
+msgid "Import"
+msgstr ""
+
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../panels/color/cc-color-panel.c:173
+msgid "Supported ICC profiles"
+msgstr ""
+
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../panels/color/cc-color-panel.c:180
+msgid "All files"
+msgstr ""
+
+#. TRANSLATORS: column for device list
+#: ../panels/color/cc-color-panel.c:642
+#: ../panels/sound/gvc-mixer-dialog.c:1539
+msgid "Device"
+msgstr ""
+
+#. TRANSLATORS: column for device list
+#: ../panels/color/cc-color-panel.c:677
+#, fuzzy
+msgid "Calibration"
+msgstr "Cló _feidhmchláir:"
+
+#. TRANSLATORS: this is when the button is sensitive
+#: ../panels/color/cc-color-panel.c:709
+msgid "Create a color profile for the selected device"
+msgstr ""
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../panels/color/cc-color-panel.c:723 ../panels/color/cc-color-panel.c:747
+msgid ""
+"The measuring instrument is not detected. Please check it is turned on and "
+"correctly connected."
+msgstr ""
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../panels/color/cc-color-panel.c:756
+msgid "The measuring instrument does not support printer profiling."
+msgstr ""
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../panels/color/cc-color-panel.c:767
+msgid "The device type is not currently supported."
+msgstr ""
+
+#. TRANSLATORS: this is when an auto-added profile cannot be removed
+#: ../panels/color/cc-color-panel.c:839
+msgid "Cannot remove automatically added profile"
+msgstr ""
+
+#. TRANSLATORS: this is when there is no profile for the device
+#: ../panels/color/cc-color-panel.c:1129
+#, fuzzy
+msgid "No profile"
+msgstr "Fón _póca:"
+
+#: ../panels/color/cc-color-panel.c:1148
+#, c-format
+msgid "%i year"
+msgid_plural "%i years"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+
+#: ../panels/color/cc-color-panel.c:1159
+#, fuzzy, c-format
+msgid "%i month"
+msgid_plural "%i months"
+msgstr[0] "nóimeád"
+msgstr[1] "nóimeád"
+msgstr[2] "nóimeád"
+msgstr[3] "nóimeád"
+msgstr[4] "nóimeád"
+
+#: ../panels/color/cc-color-panel.c:1170
+#, c-format
+msgid "%i week"
+msgid_plural "%i weeks"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+
+#. fallback
+#: ../panels/color/cc-color-panel.c:1177
+#, c-format
+msgid "Less than 1 week"
+msgstr ""
+
+#: ../panels/color/cc-color-panel.c:1223
+#, fuzzy
+msgctxt "Colorspace fallback"
+msgid "Default RGB"
+msgstr "Réamhshocrú"
+
+#: ../panels/color/cc-color-panel.c:1228
+#, fuzzy
+msgctxt "Colorspace fallback"
+msgid "Default CMYK"
+msgstr "Réamhshocrú"
+
+#: ../panels/color/cc-color-panel.c:1233
+#, fuzzy
+msgctxt "Colorspace fallback"
+msgid "Default Gray"
+msgstr "Réamhshocrú"
+
+#: ../panels/color/cc-color-panel.c:1346 ../panels/color/cc-color-panel.c:1357
+#: ../panels/color/cc-color-panel.c:1368
+msgid "Uncalibrated"
+msgstr ""
+
+#: ../panels/color/cc-color-panel.c:1349
+msgid "This device is not color managed."
+msgstr ""
+
+#: ../panels/color/cc-color-panel.c:1360
+msgid "This device is using manufacturing calibrated data."
+msgstr ""
+
+#: ../panels/color/cc-color-panel.c:1371
+msgid ""
+"This device does not have a profile suitable for whole-screen color "
+"correction."
+msgstr ""
+
+#: ../panels/color/cc-color-panel.c:1398
+msgid "This device has an old profile that may no longer be accurate."
+msgstr ""
+
+#: ../panels/color/cc-color-panel.c:1751
+#, fuzzy
+msgctxt "Device kind"
+msgid "Display"
+msgstr "Taispeáint"
+
+#: ../panels/color/cc-color-panel.c:1753
+msgctxt "Device kind"
+msgid "Scanner"
+msgstr ""
+
+#: ../panels/color/cc-color-panel.c:1755
+#, fuzzy
+msgctxt "Device kind"
+msgid "Printer"
+msgstr "Pointeoir"
+
+#: ../panels/color/cc-color-panel.c:1757
+msgctxt "Device kind"
+msgid "Camera"
+msgstr ""
+
+#: ../panels/color/cc-color-panel.c:1759
+msgctxt "Device kind"
+msgid "Webcam"
+msgstr ""
+
+#: ../panels/color/color.ui.h:1
+msgid "Add a virtual device"
+msgstr ""
+
+#: ../panels/color/color.ui.h:2
+msgid "Add device"
+msgstr ""
+
+#: ../panels/color/color.ui.h:3
+#, fuzzy
+msgid "Add profile"
+msgstr "Fón _póca:"
+
+#. Profiles that can be added to the device
+#: ../panels/color/color.ui.h:5
+msgid "Available Profiles"
+msgstr ""
+
+#: ../panels/color/color.ui.h:6
+msgid "Calibrate the device"
+msgstr ""
+
+#: ../panels/color/color.ui.h:7
+msgid "Calibrate…"
+msgstr ""
+
+#: ../panels/color/color.ui.h:9
+#, fuzzy
+msgid "Delete device"
+msgstr "Gach Comhad"
+
+#: ../panels/color/color.ui.h:10
+#, fuzzy
+msgid "Device type:"
+msgstr "AINMCOMHAID"
+
+#: ../panels/color/color.ui.h:11
+msgid "Each device needs an up to date color profile to be color managed."
+msgstr ""
+
+#: ../panels/color/color.ui.h:12
+msgid ""
+"Image files can be dragged on this window to auto-complete the above fields."
+msgstr ""
+
+#: ../panels/color/color.ui.h:13
+msgid "Manufacturer:"
+msgstr ""
+
+#: ../panels/color/color.ui.h:14
+#, fuzzy
+msgid "Model:"
+msgstr "Samhlacha"
+
+#. Some profiles are not compatible with some devices
+#: ../panels/color/color.ui.h:16
+msgid "Only profiles that are compatible with the device will be listed above."
+msgstr ""
+
+#: ../panels/color/color.ui.h:17
+msgid "Remove a device"
+msgstr ""
+
+#: ../panels/color/color.ui.h:18
+msgid "Remove profile"
+msgstr ""
+
+#: ../panels/color/color.ui.h:19
+#, fuzzy
+msgid "Set for all users"
+msgstr "Cruthaigh úsáideoir"
+
+#: ../panels/color/color.ui.h:20
+msgid "Set this device for all users on this computer"
+msgstr ""
+
+#: ../panels/color/color.ui.h:21
+msgid "View details"
 msgstr ""
 
 #. Translators: those are keywords for the brightness and lock control-center panel
@@ -2233,62 +2535,62 @@ msgid "Brightness;Lock;Dim;Blank;Monitor;"
 msgstr ""
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
-#, fuzzy
 msgid "Screen"
-msgstr "Scáthánaigh Scáileáin"
+msgstr "Scáileán"
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
 msgid "Screen brightness and lock settings"
 msgstr ""
 
 #: ../panels/screen/screen.ui.h:2
-#, fuzzy
 msgid "1 minute"
-msgstr "nóimeád"
+msgstr "1 nóimeád"
 
 #: ../panels/screen/screen.ui.h:4
-#, fuzzy
 msgid "2 minutes"
-msgstr "nóimeád"
+msgstr "2 nóimeád"
 
 #: ../panels/screen/screen.ui.h:5
-#, fuzzy
 msgid "3 minutes"
-msgstr "nóimeád"
+msgstr "3 nóimeád"
 
 #: ../panels/screen/screen.ui.h:7
-#, fuzzy
 msgid "30 seconds"
-msgstr "soicind"
+msgstr "30 soicind"
 
 #: ../panels/screen/screen.ui.h:9
 msgid "Brightness"
 msgstr ""
 
-#: ../panels/screen/screen.ui.h:10
-msgid "Dim screen to save power"
-msgstr ""
-
 #. To translators: This asks whether you want to lock the screen (through the screensaver) when you're detected to be physically in your home (your house, etc.)
-#: ../panels/screen/screen.ui.h:12
+#: ../panels/screen/screen.ui.h:11
 msgid "Don't lock when at home"
 msgstr ""
 
-#: ../panels/screen/screen.ui.h:13
+#: ../panels/screen/screen.ui.h:12
 #, fuzzy
 msgid "Locations..."
 msgstr "Suíomh Nua..."
 
-#: ../panels/screen/screen.ui.h:15
-msgid "Lock screen after:"
-msgstr ""
+#: ../panels/screen/screen.ui.h:13
+msgid "Lock"
+msgstr "Cuir Faoi Ghlas"
 
-#: ../panels/screen/screen.ui.h:16
+#: ../panels/screen/screen.ui.h:14
 msgid "Screen turns off"
 msgstr ""
 
+#: ../panels/screen/screen.ui.h:15
+msgid "_Dim screen to save power"
+msgstr ""
+
+#: ../panels/screen/screen.ui.h:16
+#, fuzzy
+msgid "_Lock screen after:"
+msgstr "Líon an scáileán"
+
 #: ../panels/screen/screen.ui.h:17
-msgid "Turn off after:"
+msgid "_Turn off after:"
 msgstr ""
 
 #: ../panels/sound/applet-main.c:49
@@ -2430,18 +2732,15 @@ msgstr ""
 msgid "Name"
 msgstr "Ainm:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1539
-msgid "Device"
-msgstr ""
-
 #: ../panels/sound/gvc-mixer-dialog.c:1587
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr ""
 
 #: ../panels/sound/gvc-mixer-dialog.c:1646
-msgid "Test Speakers"
-msgstr ""
+#, fuzzy
+msgid "_Test Speakers"
+msgstr "LEATHANACH"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1777
 msgid "_Output volume: "
@@ -2487,9 +2786,8 @@ msgid "C_hoose a device for sound output:"
 msgstr ""
 
 #: ../panels/sound/gvc-mixer-dialog.c:1977
-#, fuzzy
 msgid "Applications"
-msgstr "Cló _feidhmchláir:"
+msgstr "Feidhmchláir"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1981
 msgid "No application is currently playing or recording audio."
@@ -2518,9 +2816,8 @@ msgid "_Mute"
 msgstr ""
 
 #: ../panels/sound/gvc-stream-status-icon.c:270
-#, fuzzy
 msgid "_Sound Preferences"
-msgstr "Sainroghanna na Luiche"
+msgstr "Sainroghanna _Fuaime"
 
 #: ../panels/sound/gvc-stream-status-icon.c:415
 msgid "Muted"
@@ -2533,9 +2830,8 @@ msgstr ""
 #: ../panels/sound/gvc-sound-theme-chooser.c:456
 #: ../panels/sound/gvc-sound-theme-chooser.c:468
 #: ../panels/sound/gvc-sound-theme-chooser.c:480
-#, fuzzy
 msgid "Sound Preferences"
-msgstr "Sainroghanna na Luiche"
+msgstr "Sainroghanna Fuaime"
 
 #: ../panels/sound/gvc-sound-theme-chooser.c:459
 #: ../panels/sound/gvc-sound-theme-chooser.c:470
@@ -2640,46 +2936,45 @@ msgid "75%"
 msgstr "75%"
 
 #: ../panels/universal-access/uap.ui.h:9
-msgid "Acceptance delay:"
+msgid "A_cceptance delay:"
 msgstr ""
 
 #: ../panels/universal-access/uap.ui.h:10
-msgid "Beep when Caps and Num Lock are used"
+msgid "Acc_eptance delay:"
 msgstr ""
 
 #: ../panels/universal-access/uap.ui.h:11
-msgid "Beep when a key is"
+msgid "Beep when Caps and Num Lock are used"
 msgstr ""
 
 #: ../panels/universal-access/uap.ui.h:12
-msgid "Beep when a key is rejected"
+msgid "Beep when a _modifer key is pressed"
 msgstr ""
 
 #: ../panels/universal-access/uap.ui.h:13
-msgid "Beep when a modifer key is pressed"
+msgid "Beep when a key is"
 msgstr ""
 
 #: ../panels/universal-access/uap.ui.h:14
+msgid "Beep when a key is _rejected"
+msgstr ""
+
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Bounce Keys"
 msgstr "Eochracha Preabtha"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:16
 msgid "Caribou"
 msgstr ""
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:17
 #, fuzzy
 msgid "Change contrast:"
 msgstr "Codars_nacht is fearr"
 
-#: ../panels/universal-access/uap.ui.h:17
+#: ../panels/universal-access/uap.ui.h:18
 msgid "Closed Captioning"
 msgstr ""
-
-#: ../panels/universal-access/uap.ui.h:18
-#, fuzzy
-msgid "Contrast:"
-msgstr "Teagmháil"
 
 #: ../panels/universal-access/uap.ui.h:19
 #, fuzzy
@@ -2703,260 +2998,263 @@ msgid "Decrease size:"
 msgstr ""
 
 #: ../panels/universal-access/uap.ui.h:25
-#, fuzzy
-msgid "Disable if two keys are pressed together"
-msgstr ""
-"Dích_umasaigh eochracha greamaitheacha má bhrúitear dhá eochair le chéile"
-
-#: ../panels/universal-access/uap.ui.h:26
 msgid "Display a textual description of speech and sounds"
 msgstr ""
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:26
 #, fuzzy
 msgid "Flash the entire screen"
 msgstr "Splanc _scáileán ar fad"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:27
 #, fuzzy
 msgid "Flash the window title"
 msgstr "Splanc barra teidil na _fuinneoige"
 
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:28
 msgid "GOK"
-msgstr ""
+msgstr "GOK"
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:29
 #, fuzzy
 msgid "Hearing"
 msgstr "Rindreáil"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:30
 #, fuzzy
 msgid "Hover Click"
 msgstr "Cliceáil Fanachta"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:31
 #, fuzzy
 msgid "Ignores fast duplicate keypresses"
 msgstr "Déan _neamhaird ar brúnna eochrach dúblacha tapa"
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Increase size:"
 msgstr ""
 
-#: ../panels/universal-access/uap.ui.h:34
-#, fuzzy
-msgid "Keyboard Settings"
-msgstr "Aicearraí Méarchláir"
-
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:35
 #, fuzzy
 msgid "Larger"
 msgstr "Mór"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:38
+#, fuzzy
+msgid "Motion _threshold:"
+msgstr "Tairseach _ghluaisne:"
+
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Mouse Keys"
 msgstr "Cnaipe na Luiche"
 
-#: ../panels/universal-access/uap.ui.h:41
-#, fuzzy
-msgid "Mouse Settings"
-msgstr "Treosuíomh na Luiche"
-
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Nomon"
 msgstr ""
 
-#: ../panels/universal-access/uap.ui.h:45
+#: ../panels/universal-access/uap.ui.h:43
 #, fuzzy
 msgid "On screen keyboard"
 msgstr "Méarchlár Scáileáin GNOME"
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:44
 msgid "OnBoard"
 msgstr ""
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:45
 msgid "Options..."
 msgstr "Roghanna..."
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Pointing and Clicking"
 msgstr ""
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr ""
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:48
 #, fuzzy
 msgid "Screen Reader"
 msgstr "Léitheoir Scáileáin Linux"
 
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:49
 #, fuzzy
 msgid "Screen keyboard"
 msgstr "Méarchlár Scáileáin GNOME"
 
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Seeing"
 msgstr ""
 
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:53
 msgid "Simulated Secondary Click"
 msgstr "Cliceáil Tánaisteach Ionsamhailte"
 
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Slow Keys"
 msgstr "Eochracha Malla"
 
-#: ../panels/universal-access/uap.ui.h:59
-msgid "Sound Settings"
-msgstr ""
-
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:57
 msgid "Sticky Keys"
 msgstr "Eochracha Greamaitheacha"
 
-#: ../panels/universal-access/uap.ui.h:61
-msgid "Test flash"
-msgstr ""
-
-#: ../panels/universal-access/uap.ui.h:62
-msgid "Text size:"
-msgstr ""
-
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:58
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr ""
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:59
 #, fuzzy
 msgid "Trigger a click when the pointer hovers"
 msgstr "_Cuir tús le cliceáil agus gluaiseacht an phointeora á stad"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:60
 #, fuzzy
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "_Truicear cliceáil tánaisteach agus an príomhcnaipe á choinneáil síos"
 
-#: ../panels/universal-access/uap.ui.h:66
-#, fuzzy
-msgid "Turn on accessibility features from the keyboard"
-msgstr "Is féidir gnéithe _inrochtaineachta a scoránú le haicearraí méarchláir"
-
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Turn on or off:"
 msgstr ""
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:62
 #, fuzzy
 msgid "Type here to test settings"
 msgstr "Clósc_ríobh chun socruithe a thástáil:"
 
-#: ../panels/universal-access/uap.ui.h:69
-#, fuzzy
-msgid "Typing"
-msgstr "Sos Clóscríofa"
-
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:64
 #, fuzzy
 msgid "Typing Assistant"
 msgstr "_Cúntóir:"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Use a visual indication when an alert sound occurs"
 msgstr ""
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:66
 #, fuzzy
 msgid "Video Mouse"
 msgstr "Luch"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:67
 #, fuzzy
 msgid "Visual Alerts"
 msgstr "Amhairc"
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:68
 #, fuzzy
 msgid "Zoom in:"
 msgstr "Súmáil"
 
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:69
 #, fuzzy
 msgid "Zoom out:"
 msgstr "Súmáil"
 
+#: ../panels/universal-access/uap.ui.h:70
+#, fuzzy
+msgid "_Contrast:"
+msgstr "Teagmháil"
+
+#: ../panels/universal-access/uap.ui.h:71
+#, fuzzy
+msgid "_Disable if two keys are pressed together"
+msgstr ""
+"Dích_umasaigh eochracha greamaitheacha má bhrúitear dhá eochair le chéile"
+
+#: ../panels/universal-access/uap.ui.h:72
+#, fuzzy
+msgid "_Keyboard Settings"
+msgstr "Aicearraí Méarchláir"
+
+#: ../panels/universal-access/uap.ui.h:73
+#, fuzzy
+msgid "_Mouse Settings"
+msgstr "Treosuíomh na Luiche"
+
+#: ../panels/universal-access/uap.ui.h:74
+#, fuzzy
+msgid "_Sound Settings"
+msgstr "Treosuíomh na Luiche"
+
+#: ../panels/universal-access/uap.ui.h:75
+#, fuzzy
+msgid "_Test flash"
+msgstr "LEATHANACH"
+
 #: ../panels/universal-access/uap.ui.h:76
-msgid "_Motion threshold:"
-msgstr "Tairseach _ghluaisne:"
+msgid "_Text size:"
+msgstr ""
 
 #: ../panels/universal-access/uap.ui.h:77
+#, fuzzy
+msgid "_Turn on accessibility features from the keyboard"
+msgstr "Is féidir gnéithe _inrochtaineachta a scoránú le haicearraí méarchláir"
+
+#: ../panels/universal-access/uap.ui.h:78
 msgid "accepted"
 msgstr ""
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:79
 msgid "pressed"
 msgstr ""
 
-#: ../panels/universal-access/uap.ui.h:79
-msgid "rejected"
-msgstr ""
-
 #: ../panels/universal-access/uap.ui.h:80
-msgctxt "universal access, contrast"
-msgid "<span size=\"x-large\">High/Inverse</span>"
+msgid "rejected"
 msgstr ""
 
 #: ../panels/universal-access/uap.ui.h:81
 msgctxt "universal access, contrast"
-msgid "<span size=\"x-large\">High</span>"
+msgid "<span size=\"x-large\">High/Inverse</span>"
 msgstr ""
 
 #: ../panels/universal-access/uap.ui.h:82
 msgctxt "universal access, contrast"
-msgid "<span size=\"x-large\">Low</span>"
+msgid "<span size=\"x-large\">High</span>"
 msgstr ""
 
 #: ../panels/universal-access/uap.ui.h:83
 msgctxt "universal access, contrast"
-msgid "<span size=\"x-large\">Normal</span>"
+msgid "<span size=\"x-large\">Low</span>"
 msgstr ""
 
 #: ../panels/universal-access/uap.ui.h:84
+msgctxt "universal access, contrast"
+msgid "<span size=\"x-large\">Normal</span>"
+msgstr ""
+
+#: ../panels/universal-access/uap.ui.h:85
 #, fuzzy
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Ard"
 
-#: ../panels/universal-access/uap.ui.h:85
+#: ../panels/universal-access/uap.ui.h:86
 msgctxt "universal access, contrast"
 msgid "High/Inverse"
 msgstr ""
 
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:87
 #, fuzzy
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Íseal"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:88
 #, fuzzy
 msgctxt "universal access, contrast"
 msgid "Normal"
 msgstr "Gnáthrothlú"
 
 #. Translators: this refers to theme contrast and font size
-#: ../panels/universal-access/uap.ui.h:89
+#: ../panels/universal-access/uap.ui.h:90
 #, fuzzy
 msgctxt "universal access, seeing"
 msgid "Display"
 msgstr "Taispeáint"
 
 #. Translators: this refers to screen magnifier
-#: ../panels/universal-access/uap.ui.h:91
+#: ../panels/universal-access/uap.ui.h:92
 #, fuzzy
 msgctxt "universal access, seeing"
 msgid "Zoom"
@@ -3017,42 +3315,20 @@ msgstr ""
 msgid "Unknown error"
 msgstr "Anaithnid"
 
-#: ../panels/user-accounts/um-account-dialog.c:78
+#: ../panels/user-accounts/um-account-dialog.c:73
 msgid "Failed to create user"
-msgstr ""
-
-#: ../panels/user-accounts/um-account-dialog.c:185
-#, c-format
-msgid "A user with the username '%s' already exists"
-msgstr ""
-
-#: ../panels/user-accounts/um-account-dialog.c:189
-#, fuzzy, c-format
-msgid "The username is too long"
-msgstr "Tá an focal faire ró-ghairid."
-
-#: ../panels/user-accounts/um-account-dialog.c:192
-msgid "The username cannot start with a '-'"
-msgstr ""
-
-#: ../panels/user-accounts/um-account-dialog.c:195
-msgid ""
-"The username must consist of:\n"
-" ➣ letters from the English alphabet\n"
-" ➣ digits\n"
-" ➣ any of the characters '.', '-' and '_'"
 msgstr ""
 
 #: ../panels/user-accounts/um-account-type.c:35
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
 msgctxt "Account type"
 msgid "Standard"
 msgstr "Gnáthchuntas"
 
 #: ../panels/user-accounts/um-account-type.c:37
 #: ../panels/user-accounts/data/account-dialog.ui.h:1
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgctxt "Account type"
 msgid "Administrator"
 msgstr "Riarthóir"
@@ -3073,9 +3349,8 @@ msgstr "Tharla earráid chórais"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:181
 #: ../panels/user-accounts/um-fingerprint-dialog.c:182
-#, fuzzy
 msgid "Enabled"
-msgstr "Díchumasaithe"
+msgstr "Cumasaithe"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:224
 msgid "Delete registered fingerprints?"
@@ -3112,15 +3387,15 @@ msgstr ""
 msgid "Could not start finger capture on '%s' device"
 msgstr ""
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:549
+#: ../panels/user-accounts/um-fingerprint-dialog.c:548
 msgid "Could not access any fingerprint readers"
 msgstr ""
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:550
+#: ../panels/user-accounts/um-fingerprint-dialog.c:549
 msgid "Please contact your system administrator for help."
 msgstr ""
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:587
+#: ../panels/user-accounts/um-fingerprint-dialog.c:586
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Enable Fingerprint Login"
 msgstr ""
@@ -3130,14 +3405,14 @@ msgstr ""
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:621
+#: ../panels/user-accounts/um-fingerprint-dialog.c:620
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
 "using the '%s' device."
 msgstr ""
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:629
+#: ../panels/user-accounts/um-fingerprint-dialog.c:627
 #, c-format
 msgid ""
 "Enrolling fingerprints for\n"
@@ -3231,7 +3506,6 @@ msgid "Wrong password"
 msgstr "Athraigh Focal Faire"
 
 #: ../panels/user-accounts/um-photo-dialog.c:97
-#: ../panels/user-accounts/data/language-chooser.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
 #, fuzzy
 msgid "Select"
@@ -3264,86 +3538,82 @@ msgstr "Tá an suíomh ann cheana."
 msgid "This user does not exist."
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:357
+#: ../panels/user-accounts/um-user-panel.c:354
 msgid "Failed to delete user"
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:417
+#: ../panels/user-accounts/um-user-panel.c:414
 msgid "You cannot delete your own account."
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:426
+#: ../panels/user-accounts/um-user-panel.c:423
 #, c-format
 msgid "%s is still logged in"
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:430
+#: ../panels/user-accounts/um-user-panel.c:427
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:439
+#: ../panels/user-accounts/um-user-panel.c:436
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:443
+#: ../panels/user-accounts/um-user-panel.c:440
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:446
+#: ../panels/user-accounts/um-user-panel.c:443
 #, fuzzy
 msgid "_Delete Files"
 msgstr "Gach Comhad"
 
-#: ../panels/user-accounts/um-user-panel.c:447
+#: ../panels/user-accounts/um-user-panel.c:444
 #, fuzzy
 msgid "_Keep Files"
 msgstr "_Comhad"
 
-#: ../panels/user-accounts/um-user-panel.c:448
-msgid "_Cancel"
-msgstr "_Cealaigh"
-
-#: ../panels/user-accounts/um-user-panel.c:498
+#: ../panels/user-accounts/um-user-panel.c:495
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Cuntas díchumasaithe"
 
-#: ../panels/user-accounts/um-user-panel.c:506
+#: ../panels/user-accounts/um-user-panel.c:503
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:509
+#: ../panels/user-accounts/um-user-panel.c:506
 #, fuzzy
 msgctxt "Password mode"
 msgid "None"
 msgstr "Neamhní"
 
-#: ../panels/user-accounts/um-user-panel.c:831
+#: ../panels/user-accounts/um-user-panel.c:826
 msgid "Failed to contact the accounts service"
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:833
+#: ../panels/user-accounts/um-user-panel.c:828
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:866
+#: ../panels/user-accounts/um-user-panel.c:864
 msgid ""
 "To make changes,\n"
 "click the * icon first"
 msgstr ""
 
-#: ../panels/user-accounts/um-user-panel.c:904
+#: ../panels/user-accounts/um-user-panel.c:902
 msgid "Create a user"
 msgstr "Cruthaigh úsáideoir"
 
-#: ../panels/user-accounts/um-user-panel.c:915
-#: ../panels/user-accounts/um-user-panel.c:1214
+#: ../panels/user-accounts/um-user-panel.c:913
+#: ../panels/user-accounts/um-user-panel.c:1202
 msgid ""
 "To create a user,\n"
 "click the * icon first"
@@ -3351,12 +3621,12 @@ msgstr ""
 "Chun úsáideoir a chruthú,\n"
 "cliceáil an deilbhín * ar dtús"
 
-#: ../panels/user-accounts/um-user-panel.c:924
+#: ../panels/user-accounts/um-user-panel.c:922
 msgid "Delete the selected user"
 msgstr "Scrios an úsáideoir roghnaithe"
 
-#: ../panels/user-accounts/um-user-panel.c:936
-#: ../panels/user-accounts/um-user-panel.c:1219
+#: ../panels/user-accounts/um-user-panel.c:934
+#: ../panels/user-accounts/um-user-panel.c:1207
 msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
@@ -3364,13 +3634,35 @@ msgstr ""
 "Chun an úsáideoir roghnaithe a scriosadh,\n"
 "cliceáil an deilbhín * ar dtús"
 
-#: ../panels/user-accounts/um-user-panel.c:1114
+#: ../panels/user-accounts/um-user-panel.c:1111
 msgid "My Account"
 msgstr "Mo Chuntas"
 
-#: ../panels/user-accounts/um-user-panel.c:1124
+#: ../panels/user-accounts/um-user-panel.c:1121
 msgid "Other Accounts"
 msgstr "Cuntais Eile"
+
+#: ../panels/user-accounts/um-utils.c:512
+#, c-format
+msgid "A user with the username '%s' already exists"
+msgstr ""
+
+#: ../panels/user-accounts/um-utils.c:516
+#, fuzzy, c-format
+msgid "The username is too long"
+msgstr "Tá an focal faire ró-ghairid."
+
+#: ../panels/user-accounts/um-utils.c:519
+msgid "The username cannot start with a '-'"
+msgstr ""
+
+#: ../panels/user-accounts/um-utils.c:522
+msgid ""
+"The username must consist of:\n"
+" ➣ letters from the English alphabet\n"
+" ➣ digits\n"
+" ➣ any of the characters '.', '-' and '_'"
+msgstr ""
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
 msgid "Add or remove users"
@@ -3489,6 +3781,10 @@ msgstr "_Taispeáin focal faire"
 msgid "Browse"
 msgstr "Brabhsáil"
 
+#: ../panels/user-accounts/data/photo-dialog.ui.h:3
+msgid "Cancel"
+msgstr ""
+
 #: ../panels/user-accounts/data/photo-dialog.ui.h:4
 msgid "Changing photo for:"
 msgstr ""
@@ -3511,80 +3807,90 @@ msgid "Take a photograph"
 msgstr "Tóg grianghraf"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
+msgid "A_utomatic Login"
+msgstr "Logáil Isteach _Uathoibríoch"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
 msgid "Account Information"
 msgstr "Eolas Cuntais"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
-msgid "Account type"
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
+#, fuzzy
+msgid "Account _type"
 msgstr "Cineál cuntais"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
-msgid "Automatic Login"
-msgstr "Logáil Isteach Uathoibríoch"
-
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
-msgid "Fingerprint Login"
-msgstr "Logáil Isteach Méarloirg"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "Login Options"
 msgstr "Roghanna Logála Isteach"
 
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+#, fuzzy
+msgid "_Fingerprint Login"
+msgstr "Logáil Isteach Méarloirg"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "_Language"
+msgstr "_Teanga"
+
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
-msgid "Password"
+#, fuzzy
+msgid "_Password"
 msgstr "Focal Faire"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:2
-msgid "Left index finger"
-msgstr "Corrmhéar chlé"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:3
 msgid "Left little finger"
 msgstr "Lúidín clé"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:4
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:3
 msgid "Left middle finger"
 msgstr "Méar mheáin chlé"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:5
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:4
 msgid "Left ring finger"
 msgstr "Méar an fháinne chlé"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:6
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:5
 msgid "Left thumb"
 msgstr "Ordóg chlé"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:7
-msgid "Other finger: "
-msgstr "Méar eile:"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:8
-msgid "Right index finger"
-msgstr "Corrmhéar dheas"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:9
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:6
 msgid "Right little finger"
 msgstr "Lúidín deas"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:10
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:7
 msgid "Right middle finger"
 msgstr "Méar mheáin dheas"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:11
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:8
 msgid "Right ring finger"
 msgstr "Méar an fháinne dheas"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:12
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:9
 msgid "Right thumb"
 msgstr "Ordóg dheas"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:13
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:10
 msgid ""
 "Your fingerprint was successfully saved. You should now be able to log in "
 "using your fingerprint reader."
 msgstr ""
 "D'éirigh le sábháil do mhéarloirg. Ba chóir duit bheith in ann logáil "
 "isteach le do bhraiteoir méarloirg."
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:11
+#, fuzzy
+msgid "_Left index finger"
+msgstr "Corrmhéar chlé"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:12
+#, fuzzy
+msgid "_Other finger: "
+msgstr "Méar eile:"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:13
+#, fuzzy
+msgid "_Right index finger"
+msgstr "Corrmhéar dheas"
 
 #: ../shell/control-center.c:51
 msgid "Enable verbose mode"
