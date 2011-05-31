@@ -347,10 +347,6 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
     {
       profile_tmp = g_ptr_array_index (profile_array, i);
 
-      /* don't add the current profile */
-      if (profile != NULL && cd_profile_equal (profile, profile_tmp))
-        continue;
-
       /* get properties */
       ret = cd_profile_connect_sync (profile_tmp,
                                      priv->cancellable,
@@ -361,6 +357,10 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
           g_error_free (error);
           goto out;
         }
+
+      /* don't add the current profile */
+      if (profile != NULL && cd_profile_equal (profile, profile_tmp))
+        continue;
 
       /* only add correct types */
       ret = gcm_prefs_is_profile_suitable_for_device (profile_tmp,
