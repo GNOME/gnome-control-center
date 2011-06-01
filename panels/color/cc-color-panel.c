@@ -154,7 +154,7 @@ gcm_prefs_file_chooser_get_icc_profile (CcColorPanel *prefs)
 
   /* create new dialog */
   window = GTK_WINDOW(gtk_builder_get_object (priv->builder,
-                "dialog_assign"));
+                                              "dialog_assign"));
   /* TRANSLATORS: an ICC profile is a file containing colorspace data */
   dialog = gtk_file_chooser_dialog_new (_("Select ICC Profile File"), window,
                                         GTK_FILE_CHOOSER_ACTION_OPEN,
@@ -325,6 +325,9 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
   /* clear existing entries */
   model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
   gtk_list_store_clear (GTK_LIST_STORE (model));
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
+                                        GCM_PREFS_COMBO_COLUMN_TEXT,
+                                        GTK_SORT_ASCENDING);
   gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model),
                                    GCM_PREFS_COMBO_COLUMN_TEXT,
                                    gcm_prefs_combo_sort_func_cb,
