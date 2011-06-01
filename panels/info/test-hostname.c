@@ -12,6 +12,7 @@ int main (int argc, char **argv)
 	guint i;
 	char *contents;
 	char **lines;
+	char *locale;
 
 	/* Running in some locales will
 	 * break the tests as "ü" will be transliterated to
@@ -20,7 +21,11 @@ int main (int argc, char **argv)
 	 * Work around that by forcing en_US with UTF-8 in
 	 * our tests
 	 * https://bugzilla.gnome.org/show_bug.cgi?id=650342 */
-	setlocale (LC_ALL, "en_US.UTF-8");
+	locale = setlocale (LC_ALL, "en_US.UTF-8");
+	if (locale == NULL) {
+		g_debug("Missing en_US.UTF-8 locale, ignoring test.");
+		return 0;
+	}
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
 	if (g_file_get_contents (argv[1], &contents, NULL, NULL) == FALSE) {
