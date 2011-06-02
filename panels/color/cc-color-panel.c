@@ -1065,6 +1065,7 @@ gcm_prefs_sensor_coldplug (CcColorPanel *prefs)
 {
   GPtrArray *sensors;
   GError *error = NULL;
+  gboolean ret;
   CcColorPanelPrivate *priv = prefs->priv;
 
   /* unref old */
@@ -1087,6 +1088,15 @@ gcm_prefs_sensor_coldplug (CcColorPanel *prefs)
 
   /* save a copy of the sensor */
   priv->sensor = g_object_ref (g_ptr_array_index (sensors, 0));
+
+  /* connect to the sensor */
+  ret = cd_sensor_connect_sync (priv->sensor, NULL, &error);
+  if (!ret)
+    {
+      g_warning ("%s", error->message);
+      g_error_free (error);
+      goto out;
+    }
 out:
   if (sensors != NULL)
     g_ptr_array_unref (sensors);
