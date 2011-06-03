@@ -870,20 +870,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
     }
   else
     {
-      http_t *http = NULL;
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (priv->builder, "notebook");
-
-      http = httpConnectEncrypt (cupsServer (), ippPort (), cupsEncryption ());
-      if (http)
-        {
-          httpClose (http);
-          gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_NO_PRINTERS_PAGE);
-        }
-      else
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_NO_CUPS_PAGE);
-
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-name-label");
       cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), "");
@@ -921,8 +907,10 @@ actualize_printers_list (CcPrintersPanel *self)
   GtkTreeView            *treeview;
   GtkTreeIter             iter;
   cups_job_t             *jobs = NULL;
+  GtkWidget              *widget;
   gboolean                paused = FALSE;
   gboolean                valid = FALSE;
+  http_t                 *http;
   gchar                  *current_printer_instance = NULL;
   gchar                  *current_printer_name = NULL;
   gchar                  *printer_icon_name = NULL;
@@ -959,6 +947,18 @@ actualize_printers_list (CcPrintersPanel *self)
 
   if (priv->num_dests == 0)
     {
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "notebook");
+
+      http = httpConnectEncrypt (cupsServer (), ippPort (), cupsEncryption ());
+      if (http)
+        {
+          httpClose (http);
+          gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_NO_PRINTERS_PAGE);
+        }
+      else
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_NO_CUPS_PAGE);
+
       gtk_list_store_append (store, &iter);
       gtk_list_store_set (store, &iter,
                           PRINTER_ID_COLUMN, 0,
