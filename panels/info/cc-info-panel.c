@@ -1242,6 +1242,15 @@ info_panel_setup_overview (CcInfoPanel  *self)
 }
 
 static void
+info_panel_setup_startup_apps (CcInfoPanel *self)
+{
+  GtListStore *model;
+
+  /* Create the model and setup treeview */
+  model = gtk_list_store (
+}
+
+static void
 refresh_update_button (CcInfoPanel  *self)
 {
   GtkWidget *widget;
@@ -1443,6 +1452,7 @@ cc_info_panel_init (CcInfoPanel *self)
   info_panel_setup_overview (self);
   info_panel_setup_default_apps (self);
   info_panel_setup_graphics (self);
+  info_panel_setup_startup_apps (self);
 }
 
 void
