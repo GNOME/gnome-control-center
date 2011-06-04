@@ -1,13 +1,10 @@
 # translation of gnome-control-center.HEAD.he.po to Hebrew
 # translation of gnome-control-center.gnome-2-0.he.po to Hebrew
 # This file is distributed under the same license as the PACKAGE package.
-# Yuval Tanny, 2005.
-# Yuval Tanny, 2005.
-# Yuval Tanny, 2005.
-# Yuval Tanny, 2005.
 # Copyright (C) 2005 THE PACKAGE'S COPYRIGHT HOLDER.
 # Gil 'Dolfin' Osher <dolfin@rpg.org.il>, 2002,2003.
 # Yuval Tanny, 2005.
+# Yaron Shahrabani <sh.yaron@gmail.com>, 2010, 2011.
 #
 #
 msgid ""
@@ -15,14 +12,14 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2011-06-04 14:07+0300\n"
-"PO-Revision-Date: 2011-06-04 14:24+0200\n"
+"PO-Revision-Date: 2011-06-04 14:38+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n>2||n==0) ? 1 : 2;\n"
 "X-Poedit-Language: Hebrew\n"
 
 #: ../libgnome-control-center/gconf-property-editor.c:134
@@ -500,6 +497,7 @@ msgid "%u byte"
 msgid_plural "%u bytes"
 msgstr[0] "בית אחד"
 msgstr[1] "%u בתים"
+msgstr[2] "2 בתים"
 
 #: ../panels/info/cc-info-panel.c:572
 #, c-format
@@ -700,7 +698,7 @@ msgstr "הנמכת עצמת השמע"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:10
 msgid "Volume mute"
-msgstr "השקת השמע"
+msgstr "השתקת השמע"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:11
 msgid "Volume up"
@@ -1162,7 +1160,7 @@ msgstr "נגמרה אספקת הצבע"
 #. Translators: One or more covers on the printer are open
 #: ../panels/printers/cc-printers-panel.c:523
 msgid "Open cover"
-msgstr "הדלת פתוחה"
+msgstr "הכיסוי פתוח"
 
 #. Translators: One or more doors on the printer are open
 #: ../panels/printers/cc-printers-panel.c:525
@@ -1252,6 +1250,7 @@ msgid "%u active"
 msgid_plural "%u active"
 msgstr[0] "%u פעילה"
 msgstr[1] "%u פעילות"
+msgstr[2] "2 פעילות"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
 #: ../panels/printers/cc-printers-panel.c:966
@@ -2081,6 +2080,7 @@ msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "דקה"
 msgstr[1] "%i דקות"
+msgstr[2] "2 דקות"
 
 #: ../panels/power/cc-power-panel.c:171
 #, c-format
@@ -2088,6 +2088,7 @@ msgid "%i hour"
 msgid_plural "%i hours"
 msgstr[0] "שעה"
 msgstr[1] "%i שעות"
+msgstr[2] "שעתיים"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
@@ -2101,12 +2102,14 @@ msgid "hour"
 msgid_plural "hours"
 msgstr[0] "שעה"
 msgstr[1] "שעות"
+msgstr[2] "שעתיים"
 
 #: ../panels/power/cc-power-panel.c:181
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "דקה"
 msgstr[1] "דקות"
+msgstr[2] "דקות"
 
 #: ../panels/power/cc-power-panel.c:253
 msgid "Battery charging"
@@ -2286,6 +2289,7 @@ msgid "%i year"
 msgid_plural "%i years"
 msgstr[0] "שנה אחת"
 msgstr[1] "%i שנים"
+msgstr[2] "שנתיים"
 
 #: ../panels/color/cc-color-panel.c:1181
 #, c-format
@@ -2293,6 +2297,7 @@ msgid "%i month"
 msgid_plural "%i months"
 msgstr[0] "חודש אחד"
 msgstr[1] "%i חודשים"
+msgstr[2] "חודשיים"
 
 #: ../panels/color/cc-color-panel.c:1192
 #, c-format
@@ -2300,6 +2305,7 @@ msgid "%i week"
 msgid_plural "%i weeks"
 msgstr[0] "שבוע אחד"
 msgstr[1] "%i שבועות"
+msgstr[2] "שבועיים"
 
 #. fallback
 #: ../panels/color/cc-color-panel.c:1199
@@ -2601,8 +2607,9 @@ msgstr "_פרופיל:"
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
-msgstr[0] "פלט אחד"
+msgstr[0] "ערוץ פלט אחד"
 msgstr[1] "%u ערוצי פלט"
+msgstr[2] "2 ערוצי פלט"
 
 #. translators:
 #. * The number of sound inputs on a particular device
@@ -2610,8 +2617,9 @@ msgstr[1] "%u ערוצי פלט"
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
-msgstr[0] "פלט אחד"
-msgstr[1] "%u ערוצי פלט"
+msgstr[0] "ערוץ קלט אחד"
+msgstr[1] "%u ערוצי קלט"
+msgstr[2] "2 ערוצי קלט"
 
 #: ../panels/sound/gvc-mixer-control.c:1399
 msgid "System Sounds"
@@ -3739,7 +3747,7 @@ msgstr "Enable verbose mode"
 
 #: ../shell/control-center.c:52
 msgid "Show the overview"
-msgstr "הצגת הסקירה"
+msgstr "Show the overview"
 
 #: ../shell/control-center.c:53
 msgid "Show help options"
@@ -3747,7 +3755,7 @@ msgstr "Show help options"
 
 #: ../shell/control-center.c:54
 msgid "Panel to display"
-msgstr "לוח להצגה"
+msgstr "Panel to display"
 
 #: ../shell/control-center.c:76
 msgid "- System Settings"
