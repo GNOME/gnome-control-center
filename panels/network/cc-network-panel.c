@@ -2868,7 +2868,7 @@ start_hotspot (GtkButton *button, CcNetworkPanel *panel)
         if (connections == NULL || connections->len == 0) {
                 warning = g_strdup_printf ("%s\n\n%s",
                                            _("Not connected to the internet."),
-                                           _("Create the hotspot anyway ?"));
+                                           _("Create the hotspot anyway?"));
         } else {
                 is_default = FALSE;
                 active_ssid = NULL;
@@ -2886,7 +2886,7 @@ start_hotspot (GtkButton *button, CcNetworkPanel *panel)
                 if (active_ssid != NULL) {
                         GString *str;
                         str = g_string_new ("");
-                        g_string_append_printf (str, _("Disconnect from %s and create a new hotspot ?"), active_ssid);
+                        g_string_append_printf (str, _("Disconnect from %s and create a new hotspot?"), active_ssid);
                         if (is_default) {
                                 g_string_append (str, "\n\n");
                                 g_string_append (str, _("This is your only connection to the internet."));
@@ -2967,7 +2967,7 @@ stop_hotspot (GtkButton *button, CcNetworkPanel *panel)
                                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                          GTK_MESSAGE_OTHER,
                                          GTK_BUTTONS_NONE,
-                                         _("Stop hotspot and disconnect any users ?"));
+                                         _("Stop hotspot and disconnect any users?"));
         gtk_dialog_add_buttons (GTK_DIALOG (dialog),
                                 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                 _("_Stop Hotspot"), GTK_RESPONSE_OK,
