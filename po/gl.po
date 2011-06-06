@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-04-30 23:19+0200\n"
-"PO-Revision-Date: 2011-04-30 23:19+0200\n"
+"POT-Creation-Date: 2011-06-06 10:23+0200\n"
+"PO-Revision-Date: 2011-06-06 10:16+0200\n"
 "Last-Translator: Fran Diéguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician <gnome-l10n-gl@gnome.org>\n"
 "Language: gl\n"
@@ -30,44 +30,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 1.2\n"
-
-#: ../libgnome-control-center/cc-lockbutton.c:347
-#: ../panels/screen/screen.ui.h:14
-msgid "Lock"
-msgstr "Bloquear"
-
-#: ../libgnome-control-center/cc-lockbutton.c:356
-#: ../panels/network/network.ui.h:20
-msgid "Unlock"
-msgstr "Desbloquear"
-
-#: ../libgnome-control-center/cc-lockbutton.c:365
-msgid "Locked"
-msgstr "Bloqueado"
-
-#: ../libgnome-control-center/cc-lockbutton.c:374
-msgid ""
-"Dialog is unlocked.\n"
-"Click to prevent further changes"
-msgstr ""
-"O diálogo está desbloqueado.\n"
-"Prema para previr cambios futuros"
-
-#: ../libgnome-control-center/cc-lockbutton.c:383
-msgid ""
-"Dialog is locked.\n"
-"Click to make changes"
-msgstr ""
-"O diálogo está bloqueado.\n"
-"Prema para facer cambios"
-
-#: ../libgnome-control-center/cc-lockbutton.c:392
-msgid ""
-"System policy prevents changes.\n"
-"Contact your system administrator"
-msgstr ""
-"A normativa do sistema non permite os cambios.\n"
-"Contacte co seu administrador de sistemas"
 
 #: ../libgnome-control-center/gconf-property-editor.c:134
 msgid "Key"
@@ -177,6 +139,7 @@ msgid "Please select an image."
 msgstr "Seleccione unha imaxe."
 
 #: ../libgnome-control-center/gconf-property-editor.c:1609
+#: ../panels/user-accounts/data/language-chooser.ui.h:2
 msgid "_Select"
 msgstr "_Seleccionar"
 
@@ -194,31 +157,39 @@ msgid "Wallpaper;Screen;Desktop;"
 msgstr "Fondo de escritorio;Pantalla;Escritorio;"
 
 #: ../panels/background/background.ui.h:1
+msgid "Add wallpaper"
+msgstr "Engadir fondo"
+
+#: ../panels/background/background.ui.h:2
 msgid "Center"
 msgstr "Centrado"
 
 #. This refers to a slideshow background
-#: ../panels/background/background.ui.h:3
+#: ../panels/background/background.ui.h:4
 msgid "Changes throughout the day"
 msgstr "Cambia ao longo do día"
 
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:5
 msgid "Fill"
 msgstr "Encher"
 
-#: ../panels/background/background.ui.h:5
+#: ../panels/background/background.ui.h:6
+msgid "Remove wallpaper"
+msgstr "Quitar fondo"
+
+#: ../panels/background/background.ui.h:7
 msgid "Scale"
 msgstr "Escalar"
 
-#: ../panels/background/background.ui.h:6
+#: ../panels/background/background.ui.h:8
 msgid "Span"
 msgstr "Estender"
 
-#: ../panels/background/background.ui.h:7
+#: ../panels/background/background.ui.h:9
 msgid "Tile"
 msgstr "Mosaico"
 
-#: ../panels/background/background.ui.h:8
+#: ../panels/background/background.ui.h:10
 msgid "Zoom"
 msgstr "Ampliación"
 
@@ -280,8 +251,8 @@ msgid "Unspecified"
 msgstr "Non especificado"
 
 #: ../panels/datetime/datetime.ui.h:1
-msgid "24-Hour Time"
-msgstr "Formato 24 horas"
+msgid "24-_Hour Time"
+msgstr "Formato 24 _horas"
 
 #. Translator: this is the separator between hours and minutes, like in HH:MM
 #: ../panels/datetime/datetime.ui.h:3
@@ -297,8 +268,8 @@ msgid "August"
 msgstr "Agosto"
 
 #: ../panels/datetime/datetime.ui.h:6
-msgid "City:"
-msgstr "Cidade:"
+msgid "Day"
+msgstr "Día"
 
 #: ../panels/datetime/datetime.ui.h:7
 msgid "December"
@@ -329,8 +300,8 @@ msgid "May"
 msgstr "Maio"
 
 #: ../panels/datetime/datetime.ui.h:14
-msgid "Network Time"
-msgstr "Tempo de rede"
+msgid "Month"
+msgstr "Mes"
 
 #: ../panels/datetime/datetime.ui.h:15
 msgid "November"
@@ -341,12 +312,44 @@ msgid "October"
 msgstr "Outubro"
 
 #: ../panels/datetime/datetime.ui.h:17
-msgid "Region:"
-msgstr "Rexión:"
-
-#: ../panels/datetime/datetime.ui.h:18
 msgid "September"
 msgstr "Setembro"
+
+#: ../panels/datetime/datetime.ui.h:18
+msgid "Set the time one hour ahead."
+msgstr "Axustar a hora unha hora cara adiante."
+
+#: ../panels/datetime/datetime.ui.h:19
+msgid "Set the time one hour back."
+msgstr "Axustar a hora unha hora cara atrás."
+
+#: ../panels/datetime/datetime.ui.h:20
+msgid "Set the time one minute ahead."
+msgstr "Axustar a hora un minuto cara adiante."
+
+#: ../panels/datetime/datetime.ui.h:21
+msgid "Set the time one minute back."
+msgstr "Axustar a hora un minuto cara atrás."
+
+#: ../panels/datetime/datetime.ui.h:22
+msgid "Switch between AM and PM."
+msgstr "Alternar entre AM e PM."
+
+#: ../panels/datetime/datetime.ui.h:23
+msgid "Year"
+msgstr "Ano"
+
+#: ../panels/datetime/datetime.ui.h:24
+msgid "_City:"
+msgstr "_Cidade:"
+
+#: ../panels/datetime/datetime.ui.h:25
+msgid "_Network Time"
+msgstr "_Hora de rede"
+
+#: ../panels/datetime/datetime.ui.h:26
+msgid "_Region:"
+msgstr "_Rexión:"
 
 #. Translators: those are keywords for the date and time control-center panel
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
@@ -366,14 +369,14 @@ msgid "Left"
 msgstr "Esquerda"
 
 #: ../panels/display/display-capplet.ui.h:2
-#: ../panels/display/xrandr-capplet.c:491
+#: ../panels/display/xrandr-capplet.c:493
 msgid "Monitor"
 msgstr "Monitor"
 
 #: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/xrandr-capplet.c:327
-#: ../panels/display/xrandr-capplet.c:366
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/display/xrandr-capplet.c:329
+#: ../panels/display/xrandr-capplet.c:368
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Normal"
 msgstr "Normal"
 
@@ -419,15 +422,15 @@ msgstr "Pantallas"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Panel;Proxector;xrandr;Pantalla;Resolución;Refresco;"
 
-#: ../panels/display/xrandr-capplet.c:328
+#: ../panels/display/xrandr-capplet.c:330
 msgid "Anti-Clockwise"
 msgstr "Antihoraria"
 
-#: ../panels/display/xrandr-capplet.c:329
+#: ../panels/display/xrandr-capplet.c:331
 msgid "Clockwise"
 msgstr "Horaria"
 
-#: ../panels/display/xrandr-capplet.c:330
+#: ../panels/display/xrandr-capplet.c:332
 msgid "180 Degrees"
 msgstr "180 graos"
 
@@ -436,25 +439,25 @@ msgstr "180 graos"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:467
+#: ../panels/display/xrandr-capplet.c:469
 msgid "Mirror Displays"
 msgstr "Pantallas en espello"
 
-#: ../panels/display/xrandr-capplet.c:597
+#: ../panels/display/xrandr-capplet.c:599
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d x %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:599
+#: ../panels/display/xrandr-capplet.c:601
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1510
+#: ../panels/display/xrandr-capplet.c:1512
 msgid "Drag to change primary display."
 msgstr "Arrastre para cambiar a pantalla principal."
 
-#: ../panels/display/xrandr-capplet.c:1568
+#: ../panels/display/xrandr-capplet.c:1570
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
@@ -462,97 +465,97 @@ msgstr ""
 "Seleccione un monitor para cambiar as súas propiedades, arrástreo para "
 "reordenalo ao seu lugar."
 
-#: ../panels/display/xrandr-capplet.c:1957
+#: ../panels/display/xrandr-capplet.c:1959
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/xrandr-capplet.c:1959
+#: ../panels/display/xrandr-capplet.c:1961
 msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
-#: ../panels/display/xrandr-capplet.c:2205
+#: ../panels/display/xrandr-capplet.c:2207
 msgid "Could not save the monitor configuration"
 msgstr "Non foi posíbel gardar a configuración do monitor"
 
-#: ../panels/display/xrandr-capplet.c:2230
+#: ../panels/display/xrandr-capplet.c:2232
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 "Non foi posíbel obter o bus da sesión ao aplicar a configuración da pantalla"
 
-#: ../panels/display/xrandr-capplet.c:2275
+#: ../panels/display/xrandr-capplet.c:2277
 msgid "Could not detect displays"
 msgstr "Non foi posíbel detectar as pantallas"
 
-#: ../panels/display/xrandr-capplet.c:2470
+#: ../panels/display/xrandr-capplet.c:2492
 msgid "Could not get screen information"
 msgstr "Non foi posíbel obter a información da pantalla"
 
 #. Translators: VESA is an techncial acronym, don't translate it.
-#: ../panels/info/cc-info-panel.c:373
+#: ../panels/info/cc-info-panel.c:377
 #, c-format
 msgid "VESA: %s"
 msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:397 ../panels/network/panel-common.c:79
+#: ../panels/info/cc-info-panel.c:401 ../panels/network/panel-common.c:79
 #: ../panels/network/panel-common.c:158
 msgid "Unknown"
 msgstr "Descoñecido"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:540
+#: ../panels/info/cc-info-panel.c:550
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:554
+#: ../panels/info/cc-info-panel.c:564
 #, c-format
 msgid "%u byte"
 msgid_plural "%u bytes"
 msgstr[0] "%u byte"
 msgstr[1] "%u bytes"
 
-#: ../panels/info/cc-info-panel.c:562
+#: ../panels/info/cc-info-panel.c:572
 #, c-format
 msgid "%.1f KB"
 msgstr "%.1f KB"
 
-#: ../panels/info/cc-info-panel.c:567
+#: ../panels/info/cc-info-panel.c:577
 #, c-format
 msgid "%.1f MB"
 msgstr "%.1f MB"
 
-#: ../panels/info/cc-info-panel.c:572
+#: ../panels/info/cc-info-panel.c:582
 #, c-format
 msgid "%.1f GB"
 msgstr "%.1f GB"
 
-#: ../panels/info/cc-info-panel.c:577
+#: ../panels/info/cc-info-panel.c:587
 #, c-format
 msgid "%.1f TB"
 msgstr "%.1f TB"
 
-#: ../panels/info/cc-info-panel.c:582
+#: ../panels/info/cc-info-panel.c:592
 #, c-format
 msgid "%.1f PB"
 msgstr "%.1f PB"
 
-#: ../panels/info/cc-info-panel.c:587
+#: ../panels/info/cc-info-panel.c:597
 #, c-format
 msgid "%.1f EB"
 msgstr "%.1f EB"
 
-#: ../panels/info/cc-info-panel.c:745
+#: ../panels/info/cc-info-panel.c:755
 msgid "Unknown model"
 msgstr "Modelo descoñecido"
 
-#: ../panels/info/cc-info-panel.c:828
+#: ../panels/info/cc-info-panel.c:838
 msgid "The next login will attempt to use the standard experience."
 msgstr "O seguinte inicio de sesión tentará usar a decoración estándar."
 
-#: ../panels/info/cc-info-panel.c:830
+#: ../panels/info/cc-info-panel.c:840
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
@@ -562,36 +565,36 @@ msgstr ""
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:872
+#: ../panels/info/cc-info-panel.c:882
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "Alternativo"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:878
+#: ../panels/info/cc-info-panel.c:888
 msgctxt "Experience"
 msgid "Standard"
 msgstr "Estándar"
 
-#: ../panels/info/cc-info-panel.c:1010
+#: ../panels/info/cc-info-panel.c:1028
 #: ../panels/keyboard/keyboard-shortcuts.c:1762
 msgid "Section"
 msgstr "Sección"
 
-#: ../panels/info/cc-info-panel.c:1019 ../panels/info/info.ui.h:15
+#: ../panels/info/cc-info-panel.c:1037 ../panels/info/info.ui.h:13
 msgid "Overview"
 msgstr "Visión xeral"
 
-#: ../panels/info/cc-info-panel.c:1025 ../panels/info/info.ui.h:3
+#: ../panels/info/cc-info-panel.c:1043 ../panels/info/info.ui.h:2
 msgid "Default Applications"
 msgstr "Aplicativos predeterminados"
 
-#: ../panels/info/cc-info-panel.c:1030 ../panels/info/info.ui.h:10
+#: ../panels/info/cc-info-panel.c:1048 ../panels/info/info.ui.h:9
 msgid "Graphics"
 msgstr "Gráficos"
 
-#: ../panels/info/cc-info-panel.c:1055
+#: ../panels/info/cc-info-panel.c:1212
 #, c-format
 msgid "Version %s"
 msgstr "Versión %s"
@@ -604,79 +607,79 @@ msgstr "Información do sistema"
 msgid "System Information"
 msgstr "Información do sistema"
 
-#. Translators: those are keywords for the System Information panel
+#. sure that you use the same "translation" for those keywords
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
-"fallback;"
+"fallback;preferred;"
 msgstr ""
 "dispositivo;sistema;información;memoria;procesador;versión;predeterminado;"
-"aplicativo;alternativo;"
+"aplicativo;alternativo;preferido;"
 
 #: ../panels/info/info.ui.h:1
 msgid "Calculating..."
 msgstr "Calculando…"
 
-#: ../panels/info/info.ui.h:2
-msgid "Calendar"
-msgstr "Calendario"
-
-#: ../panels/info/info.ui.h:4
+#: ../panels/info/info.ui.h:3
 msgid "Device name"
 msgstr "Nome do dispositivo"
 
-#: ../panels/info/info.ui.h:5
+#: ../panels/info/info.ui.h:4
 msgid "Disk"
 msgstr "Disco"
 
-#: ../panels/info/info.ui.h:6
+#: ../panels/info/info.ui.h:5
 msgid "Driver"
 msgstr "Controlador"
 
-#: ../panels/info/info.ui.h:7
+#: ../panels/info/info.ui.h:6
 msgid "Experience"
 msgstr "Experiencia"
 
 #. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
-#: ../panels/info/info.ui.h:9
-msgid "Forced Fallback Mode"
-msgstr "Forzar o modo alternativo"
+#: ../panels/info/info.ui.h:8
+msgid "Forced _Fallback Mode"
+msgstr "_Forzar o modo alternativo"
+
+#: ../panels/info/info.ui.h:10
+msgid "M_usic"
+msgstr "M_úsica"
 
 #: ../panels/info/info.ui.h:11
-msgid "Mail"
-msgstr "Correo"
-
-#: ../panels/info/info.ui.h:12
 msgid "Memory"
 msgstr "Memoria"
 
-#: ../panels/info/info.ui.h:13
-msgid "Music"
-msgstr "Música"
-
-#: ../panels/info/info.ui.h:14
+#: ../panels/info/info.ui.h:12
 msgid "OS type"
 msgstr "Tipo de SO"
 
-#: ../panels/info/info.ui.h:16
-msgid "Photos"
-msgstr "Fotos"
-
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:14
 msgid "Processor"
 msgstr "Procesador"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:15
 msgid "Updates Available"
 msgstr "Actualizacións dispoñíbeis"
 
+#: ../panels/info/info.ui.h:16
+msgid "_Calendar"
+msgstr "_Calendario"
+
+#: ../panels/info/info.ui.h:17
+msgid "_Mail"
+msgstr "Co_rreo"
+
+#: ../panels/info/info.ui.h:18
+msgid "_Photos"
+msgstr "_Fotos"
+
 #: ../panels/info/info.ui.h:19
-msgid "Video"
-msgstr "Vídeo"
+msgid "_Video"
+msgstr "Víde_o"
 
 #: ../panels/info/info.ui.h:20
-msgid "Web"
-msgstr "Web"
+msgid "_Web"
+msgstr "_Web"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:1
 msgid "Eject"
@@ -841,7 +844,7 @@ msgid "Change keyboard settings"
 msgstr "Cambiar a configuración do teclado"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid "Keyboard"
 msgstr "Teclado"
 
@@ -921,7 +924,7 @@ msgid "Cursor _blinks in text fields"
 msgstr "Cursor _intermitente nos campos de texto"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
-#: ../panels/mouse/gnome-mouse-properties.ui.h:1
+#: ../panels/mouse/gnome-mouse-properties.ui.h:2
 #: ../panels/universal-access/uap.ui.h:21
 msgid "Cursor blinks speed"
 msgstr "Velocidade de intermitencia do cursor"
@@ -932,62 +935,62 @@ msgstr "Personalizar atallo"
 
 #. fast acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Fast"
 msgstr "Rápido"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
-msgid "General"
-msgstr "Xeral"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid "Key presses _repeat when key is held down"
 msgstr "As pulsacións de teclas _repítense cando a tecla se mantén premida"
 
 #. long delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/universal-access/uap.ui.h:37
 msgid "Long"
 msgstr "Longo"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 msgid "Repeat Keys"
 msgstr "Teclas de repetición"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 msgid "Repeat keys speed"
 msgstr "Velocidade de repetición de teclas"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
 msgid "S_peed:"
 msgstr "_Velocidade:"
 
 #. short delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
-#: ../panels/mouse/gnome-mouse-properties.ui.h:22
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:23
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Short"
 msgstr "Atallo"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 msgid "Shortcuts"
 msgstr "Atallos"
 
 #. slow acceleration
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
-#: ../panels/mouse/gnome-mouse-properties.ui.h:24
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+#: ../panels/mouse/gnome-mouse-properties.ui.h:25
 msgid "Slow"
 msgstr "Lento"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
 msgstr ""
 "Para editar unha tecla de atallo, prema na fila correspondente e teclee unha "
 "combinación de teclas nova, ou prema a tecla de retroceso para borrar todo."
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
+#: ../panels/universal-access/uap.ui.h:63
+msgid "Typing"
+msgstr "Escribindo"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
 msgid "_Delay:"
@@ -1146,125 +1149,125 @@ msgid "cd;dvd;usb;audio;video;disc;"
 msgstr "cd;dvd;usb;son;vídeo;disco;"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:494
+#: ../panels/printers/cc-printers-panel.c:509
 msgid "Low on toner"
 msgstr "Con pouco tóner"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:496
+#: ../panels/printers/cc-printers-panel.c:511
 msgid "Out of toner"
 msgstr "Sen tóner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:499
+#: ../panels/printers/cc-printers-panel.c:514
 msgid "Low on developer"
 msgstr "Nivel de revelador baixo"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:502
+#: ../panels/printers/cc-printers-panel.c:517
 msgid "Out of developer"
 msgstr "Sen revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:504
+#: ../panels/printers/cc-printers-panel.c:519
 msgid "Low on a marker supply"
 msgstr "Marcador de subministro baixo"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:506
+#: ../panels/printers/cc-printers-panel.c:521
 msgid "Out of a marker supply"
 msgstr "Sen marcador de subministro"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:508
+#: ../panels/printers/cc-printers-panel.c:523
 msgid "Open cover"
 msgstr "Abrir cuberta"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:510
+#: ../panels/printers/cc-printers-panel.c:525
 msgid "Open door"
 msgstr "Abrir porta"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:512
+#: ../panels/printers/cc-printers-panel.c:527
 msgid "Low on paper"
 msgstr "Ten pouco papel"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:514
+#: ../panels/printers/cc-printers-panel.c:529
 msgid "Out of paper"
 msgstr "Sen papel"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:516
+#: ../panels/printers/cc-printers-panel.c:531
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Desconectada"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:518
+#: ../panels/printers/cc-printers-panel.c:533
 msgctxt "printer state"
 msgid "Paused"
 msgstr "Pausada"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:520
+#: ../panels/printers/cc-printers-panel.c:535
 msgid "Waste receptacle almost full"
 msgstr "O receptáculo dos refugallos está case cheo"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:522
+#: ../panels/printers/cc-printers-panel.c:537
 msgid "Waste receptacle full"
 msgstr "O receptáculo dos refugallos está cheo"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:524
+#: ../panels/printers/cc-printers-panel.c:539
 msgid "The optical photo conductor is near end of life"
 msgstr "O condutor óptico está cerca do final da súa vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:526
+#: ../panels/printers/cc-printers-panel.c:541
 msgid "The optical photo conductor is no longer functioning"
 msgstr "O condutor óptico xa non funciona"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:698
+#: ../panels/printers/cc-printers-panel.c:713
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Lista"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:702
+#: ../panels/printers/cc-printers-panel.c:717
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:706
+#: ../panels/printers/cc-printers-panel.c:721
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Detida"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:825
+#: ../panels/printers/cc-printers-panel.c:840
 msgid "Toner Level"
 msgstr "Nivel do tóner"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:828
+#: ../panels/printers/cc-printers-panel.c:843
 msgid "Ink Level"
 msgstr "Nivel de tinta:"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:831
+#: ../panels/printers/cc-printers-panel.c:846
 msgid "Supply Level"
 msgstr "Nivel de subministro"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:846
-#: ../panels/printers/cc-printers-panel.c:1229
+#: ../panels/printers/cc-printers-panel.c:861
+#: ../panels/printers/cc-printers-panel.c:1245
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -1272,80 +1275,80 @@ msgstr[0] "%u activos"
 msgstr[1] "%u activos"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:951
+#: ../panels/printers/cc-printers-panel.c:966
 msgid "No printers available"
 msgstr "No hai impresoras dispoñíbeis"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1272
+#: ../panels/printers/cc-printers-panel.c:1288
 msgctxt "print job"
 msgid "Pending"
 msgstr "Pendente"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1276
+#: ../panels/printers/cc-printers-panel.c:1292
 msgctxt "print job"
 msgid "Held"
 msgstr "Retido"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1280
+#: ../panels/printers/cc-printers-panel.c:1296
 msgctxt "print job"
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1284
+#: ../panels/printers/cc-printers-panel.c:1300
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Detido"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1288
+#: ../panels/printers/cc-printers-panel.c:1304
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Cancelado"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1292
+#: ../panels/printers/cc-printers-panel.c:1308
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Abortado"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1296
+#: ../panels/printers/cc-printers-panel.c:1312
 msgctxt "print job"
 msgid "Completed"
 msgstr "Rematado"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1379
+#: ../panels/printers/cc-printers-panel.c:1395
 msgid "Job Title"
 msgstr "Título do traballo"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1388
+#: ../panels/printers/cc-printers-panel.c:1404
 msgid "Job State"
 msgstr "Estado do traballo"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1394
+#: ../panels/printers/cc-printers-panel.c:1410
 msgid "Time"
 msgstr "Tempo"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2129
+#: ../panels/printers/cc-printers-panel.c:2006
 msgid "Failed to add new printer."
 msgstr "Produciuse un fallo ao engadir unha nova impresora."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2301
-#: ../panels/printers/cc-printers-panel.c:2315
+#: ../panels/printers/cc-printers-panel.c:2210
+#: ../panels/printers/cc-printers-panel.c:2224
 msgid "Test page"
 msgstr "Páxina de proba"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2514
+#: ../panels/printers/cc-printers-panel.c:2441
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Non foi posíbel cargar a IU: %s"
@@ -1364,137 +1367,111 @@ msgid "Printers"
 msgstr "Impresoras"
 
 #: ../panels/printers/new-printer-dialog.ui.h:1
-msgid "Add"
-msgstr "Engadir"
+msgid "A_ddress"
+msgstr "En_derezo"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
 msgid "Add a New Printer"
 msgstr "Engadir unha nova impresora"
 
 #: ../panels/printers/new-printer-dialog.ui.h:3
-msgid "Address"
-msgstr "Enderezo"
+msgid "_Add"
+msgstr "_Engadir"
 
 #: ../panels/printers/new-printer-dialog.ui.h:4
+#: ../panels/user-accounts/um-user-panel.c:445
 #: ../panels/user-accounts/data/language-chooser.ui.h:1
-#: ../panels/user-accounts/data/photo-dialog.ui.h:3
-msgid "Cancel"
-msgstr "Cancelar"
+msgid "_Cancel"
+msgstr "_Cancelar"
 
 #: ../panels/printers/new-printer-dialog.ui.h:5
-msgid "Search by Address"
-msgstr "Buscar por enderezo"
+msgid "_Search by Address"
+msgstr "Bu_scar por enderezo"
 
-#: ../panels/printers/pp-new-printer-dialog.c:392
+#: ../panels/printers/pp-new-printer-dialog.c:492
 msgid "Getting devices..."
-msgstr "Obtendo os dispositivos..."
+msgstr "Obtendo os dispositivos…"
 
 #. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:652
-#: ../panels/printers/pp-new-printer-dialog.c:657
+#: ../panels/printers/pp-new-printer-dialog.c:912
+#: ../panels/printers/pp-new-printer-dialog.c:917
 msgid "Devices"
 msgstr "Dispositivos"
 
 #. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:682
+#: ../panels/printers/pp-new-printer-dialog.c:942
 msgid "Local"
 msgstr "Local"
 
 #. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:684
+#: ../panels/printers/pp-new-printer-dialog.c:944
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 msgid "Network"
 msgstr "Rede"
 
 #. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:725
+#: ../panels/printers/pp-new-printer-dialog.c:985
 msgid "Device types"
 msgstr "Tipos de dispositivo"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:1022
+#: ../panels/printers/pp-new-printer-dialog.c:1265
 msgid "Automatic configuration"
 msgstr "Configuración automática"
 
-#: ../panels/printers/printers.ui.h:1
-msgid "---"
-msgstr "---"
-
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:3
+#: ../panels/printers/printers.ui.h:2
 msgid "Active Print Jobs"
 msgstr "Traballos da impresora activos"
 
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:5
+#: ../panels/printers/printers.ui.h:4
 msgid "Add New Printer"
 msgstr "Engadir unha nova impresora"
+
+#: ../panels/printers/printers.ui.h:5
+msgid "Add printer"
+msgstr "Engadir impresora"
 
 #: ../panels/printers/printers.ui.h:6
 msgid "Allowed users"
 msgstr "Usuarios permitidos"
 
-#. Translators: Switch back to printer's info tab
-#: ../panels/printers/printers.ui.h:8
-msgid "Back"
-msgstr "Atrás"
-
-#. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:10
-#: ../panels/region/gnome-region-panel-xkbot.c:229
-#: ../panels/sound/gvc-sound-theme-chooser.c:586
-msgid "Default"
-msgstr "Predeterminado"
-
-#: ../panels/printers/printers.ui.h:11
-#: ../panels/network/cc-network-panel.c:1596
-#: ../panels/network/cc-network-panel.c:1599 ../panels/network/network.ui.h:11
+#: ../panels/printers/printers.ui.h:7
+#: ../panels/network/cc-network-panel.c:1771
+#: ../panels/network/cc-network-panel.c:1774 ../panels/network/network.ui.h:11
 msgid "IP Address"
 msgstr "Enderezo de IP"
 
-#: ../panels/printers/printers.ui.h:12
+#: ../panels/printers/printers.ui.h:8
 msgid "Jobs"
 msgstr "Traballos"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:14
+#: ../panels/printers/printers.ui.h:10
 msgid "Location"
 msgstr "Localización"
 
-#: ../panels/printers/printers.ui.h:15
+#: ../panels/printers/printers.ui.h:11
 msgid "Model"
 msgstr "Modelo"
 
-#. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:17
-msgid "Options"
-msgstr "Opcións"
-
 #. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:19
-msgid "Print Test Page"
-msgstr "Imprimir páxina de proba"
-
-#: ../panels/printers/printers.ui.h:20
-msgid "Printer"
-msgstr "Impresora"
+#: ../panels/printers/printers.ui.h:13
+msgid "Print _Test Page"
+msgstr "I_mprimir páxina de proba"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:22
+#: ../panels/printers/printers.ui.h:15
 msgid "Printer Options"
 msgstr "Opcións da impresora"
 
-#: ../panels/printers/printers.ui.h:23
-msgid "Printing..."
-msgstr "Impresión..."
-
-#. Tanslators: Switch to tab containing printer's jobs
-#: ../panels/printers/printers.ui.h:25
-msgid "Show"
-msgstr "Mostrar"
+#: ../panels/printers/printers.ui.h:16
+msgid "Remove printer"
+msgstr "Quitar impresora"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:18
 msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
@@ -1503,9 +1480,29 @@ msgstr ""
 "semella que non está dispoñíbel."
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:30
+#: ../panels/printers/printers.ui.h:21
 msgid "Supply"
 msgstr "Subministro"
+
+#. Translators: Switch back to printer's info tab
+#: ../panels/printers/printers.ui.h:23
+msgid "_Back"
+msgstr "_Atrás"
+
+#. Translators: This checkbox is checked when the default printer is selected.
+#: ../panels/printers/printers.ui.h:25
+msgid "_Default"
+msgstr "_Predeterminada"
+
+#. Translators: This button opens printer's options tab
+#: ../panels/printers/printers.ui.h:27
+msgid "_Options"
+msgstr "_Opcións"
+
+#. Tanslators: Switch to tab containing printer's jobs
+#: ../panels/printers/printers.ui.h:29
+msgid "_Show"
+msgstr "_Mostrar"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
 msgid "Allow different layouts for each window"
@@ -1513,10 +1510,9 @@ msgstr "Permitir disposicións diferentes para cada xanela"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
 msgid "Install languages..."
-msgstr "Instalar idiomas..."
+msgstr "Instalar idiomas…"
 
 #: ../panels/region/gnome-region-panel.ui.h:3
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "Language"
 msgstr "Idioma"
 
@@ -1563,7 +1559,7 @@ msgid "View and edit keyboard layout options"
 msgstr "Ver e editar as opcións de disposición do teclado"
 
 #: ../panels/region/gnome-region-panel.ui.h:14
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network.ui.h:30
 msgid "_Options..."
 msgstr "_Opcións…"
 
@@ -1587,6 +1583,11 @@ msgstr "Opcións de disposición do teclado"
 msgid "Layout"
 msgstr "Disposición"
 
+#: ../panels/region/gnome-region-panel-xkbot.c:229
+#: ../panels/sound/gvc-sound-theme-chooser.c:586
+msgid "Default"
+msgstr "Predeterminado"
+
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:1
 msgid "Change your region and language settings"
 msgstr "Cambiar a súa configuración de rexión e idioma"
@@ -1596,87 +1597,91 @@ msgstr "Cambiar a súa configuración de rexión e idioma"
 msgid "Language;Layout;Keyboard;"
 msgstr "Idioma:Disposición;Teclado;"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:2
+#: ../panels/mouse/gnome-mouse-properties.ui.h:1
+msgid "A_cceleration:"
+msgstr "_Aceleración:"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:3
 msgid "Disable _touchpad while typing"
 msgstr "_Desactivar a área táctil ao escribir"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:3
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
 msgid "Double-Click Timeout"
 msgstr "Tempo de espera do dobre clic"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
 msgid "Drag and Drop"
 msgstr "Arrastrar e soltar"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+#: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "Enable _mouse clicks with touchpad"
 msgstr "Activar _clics do rato coa área táctil"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:6
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
 msgid "Enable h_orizontal scrolling"
 msgstr "Activar o desprazamento _horizontal"
 
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+msgid "General"
+msgstr "Xeral"
+
 #. high sensitivity
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#: ../panels/mouse/gnome-mouse-properties.ui.h:12
 msgid "High"
 msgstr "Alta"
 
 #. large threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/universal-access/uap.ui.h:34
 msgid "Large"
 msgstr "Grande"
 
 #. low sensitivity
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Low"
 msgstr "Lento"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Mouse"
 msgstr "Rato"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
 msgid "Mouse Preferences"
 msgstr "Preferencias do rato"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
 msgid "Pointer Speed"
 msgstr "Velocidade do punteiro"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+#: ../panels/mouse/gnome-mouse-properties.ui.h:21
 msgid "Scrolling"
 msgstr "Desprazamento"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:21
+#: ../panels/mouse/gnome-mouse-properties.ui.h:22
 msgid "Sh_ow position of pointer when the Control key is pressed"
 msgstr "M_ostrar a posición do punteiro ao premer a tecla Control"
 
 #. small threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:26
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/mouse/gnome-mouse-properties.ui.h:27
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Small"
 msgstr "Pequeno"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:27
+#: ../panels/mouse/gnome-mouse-properties.ui.h:28
 msgid "Thr_eshold:"
 msgstr "_Límite:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/mouse/gnome-mouse-properties.ui.h:29
 msgid "To test your settings, try to double-click on the face."
 msgstr "Para probar a configuración, tente premer dúas veces sobre a cara."
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:29
+#: ../panels/mouse/gnome-mouse-properties.ui.h:30
 msgid "Touchpad"
 msgstr "Área táctil"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:30
+#: ../panels/mouse/gnome-mouse-properties.ui.h:31
 msgid "Two-_finger scrolling"
 msgstr "Desprazamento de dous _dedos"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
-msgid "_Acceleration:"
-msgstr "_Aceleración:"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:32
 msgid "_Disabled"
@@ -1716,7 +1721,7 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Trackpad;Punteiro;Clic;Toque;Dobre;Pulsación;Botón;"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/cc-network-panel.c:193
+#: ../panels/network/cc-network-panel.c:196
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgstr ""
@@ -1727,76 +1732,112 @@ msgstr ""
 #. * network, then anyone else on that network can tell your
 #. * machine that it should proxy all of your web traffic
 #. * through them.
-#: ../panels/network/cc-network-panel.c:201
+#: ../panels/network/cc-network-panel.c:204
 msgid "This is not recommended for untrusted public networks."
 msgstr "Non está recomendado para redes públicas non confiábeis"
 
 #. TRANSLATORS: this is when the access point is not listed
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
-#: ../panels/network/cc-network-panel.c:814
+#: ../panels/network/cc-network-panel.c:817
 msgctxt "Wireless access point"
 msgid "Other..."
 msgstr "Outro…"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:972
+#: ../panels/network/cc-network-panel.c:975
+#: ../panels/network/cc-network-panel.c:1297
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:976
+#: ../panels/network/cc-network-panel.c:979
+#: ../panels/network/cc-network-panel.c:1301
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:980
+#: ../panels/network/cc-network-panel.c:983
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:985
+#: ../panels/network/cc-network-panel.c:988
 msgid "Enterprise"
 msgstr "Empresarial"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:991
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/network/cc-network-panel.c:994
+#: ../panels/network/cc-network-panel.c:1292
+#: ../panels/universal-access/uap.ui.h:41
 msgid "None"
 msgstr "Ningunha"
 
+#: ../panels/network/cc-network-panel.c:1360
+msgid "Hotspot"
+msgstr "«Hotspot»"
+
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1294
-#: ../panels/network/cc-network-panel.c:1339
+#: ../panels/network/cc-network-panel.c:1422
+#: ../panels/network/cc-network-panel.c:1510
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: ../panels/network/cc-network-panel.c:1592 ../panels/network/network.ui.h:12
+#: ../panels/network/cc-network-panel.c:1767 ../panels/network/network.ui.h:12
 msgid "IPv4 Address"
 msgstr "Enderezo IPv4"
 
-#: ../panels/network/cc-network-panel.c:1593 ../panels/network/network.ui.h:13
+#: ../panels/network/cc-network-panel.c:1768 ../panels/network/network.ui.h:13
 msgid "IPv6 Address"
 msgstr "Enderezo IPv6"
 
-#: ../panels/network/cc-network-panel.c:1731
+#: ../panels/network/cc-network-panel.c:1907
 msgid "Proxy"
 msgstr "Proxy"
 
-#: ../panels/network/cc-network-panel.c:1795
+#: ../panels/network/cc-network-panel.c:1981
 msgid "Network proxy"
 msgstr "Proxy da rede"
 
-#: ../panels/network/cc-network-panel.c:1961
+#: ../panels/network/cc-network-panel.c:2147
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2029
+#: ../panels/network/cc-network-panel.c:2214
 msgid "The system network services are not compatible with this version."
 msgstr "Os servizos de rede do sistema non son compatíbeis con esta versión."
+
+#: ../panels/network/cc-network-panel.c:2870
+msgid "Not connected to the internet."
+msgstr "Non conectado a Internet."
+
+#: ../panels/network/cc-network-panel.c:2871
+msgid "Create the hotspot anyway ?"
+msgstr "Desexa crear o «hotspot» de todas formas?"
+
+#: ../panels/network/cc-network-panel.c:2889
+#, c-format
+msgid "Disconnect from %s and create a new hotspot ?"
+msgstr "Desexa desconectarse de %s e crear un «hotspot» novo?"
+
+#: ../panels/network/cc-network-panel.c:2892
+msgid "This is your only connection to the internet."
+msgstr "Esta é a única conexión a Internet."
+
+#: ../panels/network/cc-network-panel.c:2910
+msgid "Create _Hotspot"
+msgstr "Crear «_hotspot»"
+
+#: ../panels/network/cc-network-panel.c:2970
+msgid "Stop hotspot and disconnect any users ?"
+msgstr "Deter o «hotspot» e desconectar aos usuarios?"
+
+#: ../panels/network/cc-network-panel.c:2973
+msgid "_Stop Hotspot"
+msgstr "_Deter «hotspot»"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Network settings"
@@ -1852,68 +1893,88 @@ msgid "Interface"
 msgstr "Interface"
 
 #: ../panels/network/network.ui.h:15
+msgid "Network Name"
+msgstr "Nombre de rede"
+
+#: ../panels/network/network.ui.h:16
 msgid "Provider"
 msgstr "Fornecedor"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:17
 msgid "Security"
 msgstr "Seguranza"
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:18
+msgid "Security Key"
+msgstr "Chave de seguranza"
+
+#: ../panels/network/network.ui.h:19
 msgid "Select the interface to use for the new service"
 msgstr "Seleccione a interface a usar para o novo servizo"
 
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:20
 msgid "Speed"
 msgstr "Velocidade"
 
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:21
 msgid "Subnet Mask"
 msgstr "Máscara de rede"
 
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:22
+msgid "Unlock"
+msgstr "Desbloquear"
+
+#: ../panels/network/network.ui.h:23
 msgid "Username"
 msgstr "Nome de usuario"
 
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:24
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:25
 msgid "_Configuration URL"
 msgstr "URL de _configuración"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:26
 msgid "_FTP Proxy"
 msgstr "Proxy para _FTP"
 
-#: ../panels/network/network.ui.h:25
+#: ../panels/network/network.ui.h:27
 msgid "_HTTP Proxy"
 msgstr "Proxy para _HTTP"
 
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:28
 msgid "_Method"
 msgstr "_Método"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:29
 msgid "_Network Name"
 msgstr "_Nome da rede"
 
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network.ui.h:31
 msgid "_Socks Host"
 msgstr "_Servidor de socks"
 
-#: ../panels/network/network.ui.h:30
+#: ../panels/network/network.ui.h:32
+msgid "_Stop Hotspot..."
+msgstr "_Deter «hotspot»…"
+
+#: ../panels/network/network.ui.h:33
+msgid "_Use as Hotspot..."
+msgstr "_Usar como «hotspot»…"
+
+#: ../panels/network/network.ui.h:34
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "Automático"
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network.ui.h:35
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "Manual"
 
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network.ui.h:36
 msgctxt "proxy method"
 msgid "None"
 msgstr "Ningún"
@@ -2131,12 +2192,12 @@ msgid "Hibernate"
 msgstr "Hibernar"
 
 #: ../panels/power/power.ui.h:8
-msgid "On AC power:"
-msgstr "Con adaptador de corrente:"
+msgid "On AC _power:"
+msgstr "_Con adaptador de corrente:"
 
 #: ../panels/power/power.ui.h:9
-msgid "On battery power:"
-msgstr "Con batería:"
+msgid "On _battery power:"
+msgstr "Con _batería:"
 
 #: ../panels/power/power.ui.h:10
 msgid "Put the computer to sleep when inactive:"
@@ -2151,16 +2212,270 @@ msgid "Suspend"
 msgstr "Suspender"
 
 #: ../panels/power/power.ui.h:13
-msgid "When power is critically low:"
-msgstr "Cando a carga da batería é excesivamente baixa:"
+msgid "When power is _critically low:"
+msgstr "_Cando a carga da batería é criticamente baixa:"
 
 #: ../panels/power/power.ui.h:14
-msgid "When the power button is pressed:"
-msgstr "Cando se preme o botón de acendido:"
+msgid "When the _sleep button is pressed:"
+msgstr "Ao premer o botón de _suspensión:"
 
 #: ../panels/power/power.ui.h:15
-msgid "When the sleep button is pressed:"
-msgstr "Cando se preme o botón de suspensión:"
+msgid "When the p_ower button is pressed:"
+msgstr "Ao premer o b_otón de acendido:"
+
+#: ../panels/color/gnome-color-panel.desktop.in.in.h:1
+#: ../panels/color/color.ui.h:8
+msgid "Color"
+msgstr "Cor"
+
+#: ../panels/color/gnome-color-panel.desktop.in.in.h:2
+msgid "Color management settings"
+msgstr "Configuracións de xestión de cor"
+
+#. Translators: those are keywords for the color control-center panel
+#: ../panels/color/gnome-color-panel.desktop.in.in.h:4
+msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
+msgstr "Color;ICC;Perfil;Calibrado;Impresora;Pantalla;"
+
+#. TRANSLATORS: this is where the user can click and import a profile
+#: ../panels/color/cc-color-panel.c:100
+msgid "Other profile…"
+msgstr "Outro perfil…"
+
+#. TRANSLATORS: an ICC profile is a file containing colorspace data
+#: ../panels/color/cc-color-panel.c:159
+msgid "Select ICC Profile File"
+msgstr "Seleccionar ficheiro de perfil ICC"
+
+#: ../panels/color/cc-color-panel.c:162
+msgid "Import"
+msgstr "Importar"
+
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../panels/color/cc-color-panel.c:173
+msgid "Supported ICC profiles"
+msgstr "Perfiles ICC admitidos"
+
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../panels/color/cc-color-panel.c:180
+msgid "All files"
+msgstr "Tódolos ficheiros"
+
+#. TRANSLATORS: column for device list
+#: ../panels/color/cc-color-panel.c:656
+#: ../panels/sound/gvc-mixer-dialog.c:1539
+msgid "Device"
+msgstr "Dispositivo"
+
+#. TRANSLATORS: column for device list
+#: ../panels/color/cc-color-panel.c:691
+msgid "Calibration"
+msgstr "Calibración"
+
+#. TRANSLATORS: this is when the button is sensitive
+#: ../panels/color/cc-color-panel.c:723
+msgid "Create a color profile for the selected device"
+msgstr "Crear un perfil de cor para o dispositivo seleccionado"
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../panels/color/cc-color-panel.c:737 ../panels/color/cc-color-panel.c:761
+msgid ""
+"The measuring instrument is not detected. Please check it is turned on and "
+"correctly connected."
+msgstr ""
+"Non se detectou o instrumento de medida. Comprobe que está acendido e "
+"correctamente conectado."
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../panels/color/cc-color-panel.c:770
+msgid "The measuring instrument does not support printer profiling."
+msgstr "O instrumento de medida non é compatíbel co perfilado de impresoras."
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../panels/color/cc-color-panel.c:781
+msgid "The device type is not currently supported."
+msgstr "O tipo de dispositivo actualmente non é compatíbel."
+
+#. TRANSLATORS: this is when an auto-added profile cannot be removed
+#: ../panels/color/cc-color-panel.c:853
+msgid "Cannot remove automatically added profile"
+msgstr "Non é posíbel quitar o perfil engadido automaticamente"
+
+#. TRANSLATORS: this is when there is no profile for the device
+#: ../panels/color/cc-color-panel.c:1151
+msgid "No profile"
+msgstr "Sen perfil"
+
+#: ../panels/color/cc-color-panel.c:1170
+#, c-format
+msgid "%i year"
+msgid_plural "%i years"
+msgstr[0] "%i ano"
+msgstr[1] "%i anos"
+
+#: ../panels/color/cc-color-panel.c:1181
+#, c-format
+msgid "%i month"
+msgid_plural "%i months"
+msgstr[0] "%i mes"
+msgstr[1] "%i meses"
+
+#: ../panels/color/cc-color-panel.c:1192
+#, c-format
+msgid "%i week"
+msgid_plural "%i weeks"
+msgstr[0] "%i semana"
+msgstr[1] "%i semanas"
+
+#. fallback
+#: ../panels/color/cc-color-panel.c:1199
+#, c-format
+msgid "Less than 1 week"
+msgstr "Menos dunha semana"
+
+#: ../panels/color/cc-color-panel.c:1259
+msgctxt "Colorspace fallback"
+msgid "Default RGB"
+msgstr "RGB predeterminado"
+
+#: ../panels/color/cc-color-panel.c:1264
+msgctxt "Colorspace fallback"
+msgid "Default CMYK"
+msgstr "CMYK predeterminado"
+
+#: ../panels/color/cc-color-panel.c:1269
+msgctxt "Colorspace fallback"
+msgid "Default Gray"
+msgstr "Gris predeterminado"
+
+#: ../panels/color/cc-color-panel.c:1384 ../panels/color/cc-color-panel.c:1406
+#: ../panels/color/cc-color-panel.c:1417
+msgid "Uncalibrated"
+msgstr "Sen calibrar"
+
+#: ../panels/color/cc-color-panel.c:1387
+msgid "This device is not color managed."
+msgstr "Este dispositivo non ten xestión de cor."
+
+#: ../panels/color/cc-color-panel.c:1409
+msgid "This device is using manufacturing calibrated data."
+msgstr "Este dispositivo está usando os datos de calibración de fábrica."
+
+#: ../panels/color/cc-color-panel.c:1420
+msgid ""
+"This device does not have a profile suitable for whole-screen color "
+"correction."
+msgstr ""
+"Este dispositivo non ten un perfil apto para corrección de cor en toda a "
+"pantalla."
+
+#: ../panels/color/cc-color-panel.c:1447
+msgid "This device has an old profile that may no longer be accurate."
+msgstr "Este dispositivo ten un perfil antigo que pode non ser preciso."
+
+#: ../panels/color/cc-color-panel.c:1823
+msgctxt "Device kind"
+msgid "Display"
+msgstr "Pantalla"
+
+#: ../panels/color/cc-color-panel.c:1825
+msgctxt "Device kind"
+msgid "Scanner"
+msgstr "Escáner"
+
+#: ../panels/color/cc-color-panel.c:1827
+msgctxt "Device kind"
+msgid "Printer"
+msgstr "Impresora"
+
+#: ../panels/color/cc-color-panel.c:1829
+msgctxt "Device kind"
+msgid "Camera"
+msgstr "Cámara"
+
+#: ../panels/color/cc-color-panel.c:1831
+msgctxt "Device kind"
+msgid "Webcam"
+msgstr "Cámara web"
+
+#: ../panels/color/color.ui.h:1
+msgid "Add a virtual device"
+msgstr "Engadir un dispositivo vitual"
+
+#: ../panels/color/color.ui.h:2
+msgid "Add device"
+msgstr "Engadir dispositivo"
+
+#: ../panels/color/color.ui.h:3
+msgid "Add profile"
+msgstr "Engadir perfil"
+
+#. Profiles that can be added to the device
+#: ../panels/color/color.ui.h:5
+msgid "Available Profiles"
+msgstr "Perfiles dispoñíbeis"
+
+#: ../panels/color/color.ui.h:6
+msgid "Calibrate the device"
+msgstr "Calibrar o dispositivo"
+
+#: ../panels/color/color.ui.h:7
+msgid "Calibrate…"
+msgstr "Calibrar…"
+
+#: ../panels/color/color.ui.h:9
+msgid "Delete device"
+msgstr "Eliminar dispositivos"
+
+#: ../panels/color/color.ui.h:10
+msgid "Device type:"
+msgstr "Tipo de dispositivo:"
+
+#: ../panels/color/color.ui.h:11
+msgid "Each device needs an up to date color profile to be color managed."
+msgstr ""
+"Cada dispositivo necesita un perfil de cor actualizado para poder xestionar "
+"a cor."
+
+#: ../panels/color/color.ui.h:12
+msgid ""
+"Image files can be dragged on this window to auto-complete the above fields."
+msgstr ""
+"Pódense arrastrar ficheiros de imaxe nesta xanela para autocompletar os "
+"campos superiores."
+
+#: ../panels/color/color.ui.h:13
+msgid "Manufacturer:"
+msgstr "Fabricante:"
+
+#: ../panels/color/color.ui.h:14
+msgid "Model:"
+msgstr "Modelo:"
+
+#. Some profiles are not compatible with some devices
+#: ../panels/color/color.ui.h:16
+msgid "Only profiles that are compatible with the device will be listed above."
+msgstr "Debaixo só se mostrarán perfiles compatíbeis co dispositivo."
+
+#: ../panels/color/color.ui.h:17
+msgid "Remove a device"
+msgstr "Quitar un dispositivo"
+
+#: ../panels/color/color.ui.h:18
+msgid "Remove profile"
+msgstr "Quitar perfíl"
+
+#: ../panels/color/color.ui.h:19
+msgid "Set for all users"
+msgstr "Estabelecer para todos os usuarios"
+
+#: ../panels/color/color.ui.h:20
+msgid "Set this device for all users on this computer"
+msgstr "Configurar este dispositivo para tódolos usuarios deste equipo"
+
+#: ../panels/color/color.ui.h:21
+msgid "View details"
+msgstr "Ver detalles"
 
 #. Translators: those are keywords for the brightness and lock control-center panel
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
@@ -2195,30 +2510,34 @@ msgstr "30 segundos"
 msgid "Brightness"
 msgstr "Brillo"
 
-#: ../panels/screen/screen.ui.h:10
-msgid "Dim screen to save power"
-msgstr "Escurecer a pantalla para aforrar enerxía"
-
 #. To translators: This asks whether you want to lock the screen (through the screensaver) when you're detected to be physically in your home (your house, etc.)
-#: ../panels/screen/screen.ui.h:12
+#: ../panels/screen/screen.ui.h:11
 msgid "Don't lock when at home"
 msgstr "Non bloquear cando se estea na casa"
 
-#: ../panels/screen/screen.ui.h:13
+#: ../panels/screen/screen.ui.h:12
 msgid "Locations..."
 msgstr "Localizacións…"
 
-#: ../panels/screen/screen.ui.h:15
-msgid "Lock screen after:"
-msgstr "Bloquear a pantalla despois de:"
+#: ../panels/screen/screen.ui.h:13
+msgid "Lock"
+msgstr "Bloquear"
 
-#: ../panels/screen/screen.ui.h:16
+#: ../panels/screen/screen.ui.h:14
 msgid "Screen turns off"
 msgstr "A pantalla apágase"
 
+#: ../panels/screen/screen.ui.h:15
+msgid "_Dim screen to save power"
+msgstr "_Escurecer a pantalla para aforrar enerxía"
+
+#: ../panels/screen/screen.ui.h:16
+msgid "_Lock screen after:"
+msgstr "B_loquear a pantalla despois de:"
+
 #: ../panels/screen/screen.ui.h:17
-msgid "Turn off after:"
-msgstr "Apagar despois de:"
+msgid "_Turn off after:"
+msgstr "_Apagar despois de:"
 
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
@@ -2345,18 +2664,14 @@ msgstr "Detección de picos"
 msgid "Name"
 msgstr "Nome"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1539
-msgid "Device"
-msgstr "Dispositivo"
-
 #: ../panels/sound/gvc-mixer-dialog.c:1587
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Proba de altofalantes para %s"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1646
-msgid "Test Speakers"
-msgstr "Probar altofalantes"
+msgid "_Test Speakers"
+msgstr "_Probar altofalantes"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1777
 msgid "_Output volume: "
@@ -2546,44 +2861,44 @@ msgid "75%"
 msgstr "75%"
 
 #: ../panels/universal-access/uap.ui.h:9
-msgid "Acceptance delay:"
-msgstr "Atraso na aceptación:"
+msgid "A_cceptance delay:"
+msgstr "_Atraso na aceptación:"
 
 #: ../panels/universal-access/uap.ui.h:10
-msgid "Beep when Caps and Num Lock are used"
-msgstr "Emitir un ton de aviso cando se usa unha Maiús e Bloq Num"
+msgid "Acc_eptance delay:"
+msgstr "_Atraso na aceptación:"
 
 #: ../panels/universal-access/uap.ui.h:11
-msgid "Beep when a key is"
-msgstr "Emitir un ton de aviso cando a tecla é"
+msgid "Beep when Caps and Num Lock are used"
+msgstr "Pitar cando se usa unha Maiús e Bloq Num"
 
 #: ../panels/universal-access/uap.ui.h:12
-msgid "Beep when a key is rejected"
-msgstr "Emitir ton de aviso cando se rexeite a tecla"
+msgid "Beep when a _modifer key is pressed"
+msgstr "Pitar ao premer unha tecla _modificadora"
 
 #: ../panels/universal-access/uap.ui.h:13
-msgid "Beep when a modifer key is pressed"
-msgstr "Emitir un ton de aviso cando se prema unha tecla modificadora"
+msgid "Beep when a key is"
+msgstr "Pitar cando a tecla é"
 
 #: ../panels/universal-access/uap.ui.h:14
+msgid "Beep when a key is _rejected"
+msgstr "Pitar ao _rexeitar unha tecla"
+
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Bounce Keys"
 msgstr "Teclas de rebote"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:16
 msgid "Caribou"
 msgstr "Caribou"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Change contrast:"
 msgstr "Cambiar contraste:"
 
-#: ../panels/universal-access/uap.ui.h:17
+#: ../panels/universal-access/uap.ui.h:18
 msgid "Closed Captioning"
 msgstr "GOP pechado"
-
-#: ../panels/universal-access/uap.ui.h:18
-msgid "Contrast:"
-msgstr "Contraste:"
 
 #: ../panels/universal-access/uap.ui.h:19
 msgid "Control the pointer using the keypad"
@@ -2606,234 +2921,234 @@ msgid "Decrease size:"
 msgstr "Reducir tamaño:"
 
 #: ../panels/universal-access/uap.ui.h:25
-msgid "Disable if two keys are pressed together"
-msgstr "Desactivar se se premen dúas teclas á vez"
-
-#: ../panels/universal-access/uap.ui.h:26
 msgid "Display a textual description of speech and sounds"
 msgstr "Mostrar unha descrición textual da voz e os sons"
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:26
 msgid "Flash the entire screen"
 msgstr "Escintilar toda a pantalla"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Flash the window title"
 msgstr "Escintilar o título da xanela"
 
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:28
 msgid "GOK"
 msgstr "GOK"
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Hearing"
 msgstr "Advertencia"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Hover Click"
 msgstr "Clic en pausa"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Ignores fast duplicate keypresses"
 msgstr "Ignorar as pulsacións de tecla duplicadas rápidas"
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Increase size:"
 msgstr "Incrementar o tamaño:"
 
-#: ../panels/universal-access/uap.ui.h:34
-msgid "Keyboard Settings"
-msgstr "Configuración do teclado"
-
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:35
 msgid "Larger"
 msgstr "Máis grande"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:38
+msgid "Motion _threshold:"
+msgstr "Límite de _movemento:"
+
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Mouse Keys"
 msgstr "Teclas do rato"
 
-#: ../panels/universal-access/uap.ui.h:41
-msgid "Mouse Settings"
-msgstr "Configuración do rato"
-
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Nomon"
 msgstr "Nomon"
 
-#: ../panels/universal-access/uap.ui.h:45
+#: ../panels/universal-access/uap.ui.h:43
 msgid "On screen keyboard"
 msgstr "Teclado en pantalla"
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:44
 msgid "OnBoard"
 msgstr "EnPantalla"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:45
 msgid "Options..."
 msgstr "Opcións…"
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Pointing and Clicking"
 msgstr "Apuntar e premer"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "Engade un atraso entre cando se preme unha tecla e cando se acepta"
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Screen Reader"
 msgstr "Lector de pantalla"
 
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Screen keyboard"
 msgstr "Teclado en pantalla"
 
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Seeing"
 msgstr "Visión"
 
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:53
 msgid "Simulated Secondary Click"
 msgstr "Clic secundario simulado"
 
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Slow Keys"
 msgstr "Teclas lentas"
 
-#: ../panels/universal-access/uap.ui.h:59
-msgid "Sound Settings"
-msgstr "Configuración do son"
-
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:57
 msgid "Sticky Keys"
 msgstr "Teclas persistentes"
 
-#: ../panels/universal-access/uap.ui.h:61
-msgid "Test flash"
-msgstr "Probar o escintilado"
-
-#: ../panels/universal-access/uap.ui.h:62
-msgid "Text size:"
-msgstr "Tamaño do texto:"
-
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:58
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr ""
 "Trata unha secuencia de teclas modificadores como unha combinación de teclas"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Trigger a click when the pointer hovers"
 msgstr "Iniciar un clic cando se pasa por enriba o punteiro"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Iniciar un clic secundario ao manter o botón primario"
 
-#: ../panels/universal-access/uap.ui.h:66
-msgid "Turn on accessibility features from the keyboard"
-msgstr "Activar os recursos de accesibilidade desde o teclado"
-
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Turn on or off:"
 msgstr "Activar ou desactivar:"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Type here to test settings"
 msgstr "Escriba aquí para probar as configuracións"
 
-#: ../panels/universal-access/uap.ui.h:69
-msgid "Typing"
-msgstr "Escribindo"
-
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Typing Assistant"
 msgstr "Asistente de escritura"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "Usar un indicador visual cando se produza unha alerta de son"
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Video Mouse"
 msgstr "Rato do vídeo"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Visual Alerts"
 msgstr "Alertas visuais"
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Zoom in:"
 msgstr "Ampliar:"
 
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Zoom out:"
 msgstr "Afastar:"
 
+#: ../panels/universal-access/uap.ui.h:70
+msgid "_Contrast:"
+msgstr "_Contraste:"
+
+#: ../panels/universal-access/uap.ui.h:71
+msgid "_Disable if two keys are pressed together"
+msgstr "_Desactivar se se premen dúas teclas á vez"
+
+#: ../panels/universal-access/uap.ui.h:72
+msgid "_Keyboard Settings"
+msgstr "_Configuración do teclado"
+
+#: ../panels/universal-access/uap.ui.h:73
+msgid "_Mouse Settings"
+msgstr "Configuración do _rato"
+
+#: ../panels/universal-access/uap.ui.h:74
+msgid "_Sound Settings"
+msgstr "Configuración do _son"
+
+#: ../panels/universal-access/uap.ui.h:75
+msgid "_Test flash"
+msgstr "_Probar destello"
+
 #: ../panels/universal-access/uap.ui.h:76
-msgid "_Motion threshold:"
-msgstr "Límite de _movemento:"
+msgid "_Text size:"
+msgstr "_Tamaño do texto:"
 
 #: ../panels/universal-access/uap.ui.h:77
+msgid "_Turn on accessibility features from the keyboard"
+msgstr "_Activar os recursos de accesibilidade desde o teclado"
+
+#: ../panels/universal-access/uap.ui.h:78
 msgid "accepted"
 msgstr "aceptado"
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:79
 msgid "pressed"
 msgstr "premido"
 
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:80
 msgid "rejected"
 msgstr "rexeitado"
 
-#: ../panels/universal-access/uap.ui.h:80
+#: ../panels/universal-access/uap.ui.h:81
 msgctxt "universal access, contrast"
 msgid "<span size=\"x-large\">High/Inverse</span>"
 msgstr "<span size=\"x-large\">Alto/invertido</span>"
 
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:82
 msgctxt "universal access, contrast"
 msgid "<span size=\"x-large\">High</span>"
 msgstr "<span size=\"x-large\">Alto</span>"
 
-#: ../panels/universal-access/uap.ui.h:82
+#: ../panels/universal-access/uap.ui.h:83
 msgctxt "universal access, contrast"
 msgid "<span size=\"x-large\">Low</span>"
 msgstr "<span size=\"x-large\">Baixo</span>"
 
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:84
 msgctxt "universal access, contrast"
 msgid "<span size=\"x-large\">Normal</span>"
 msgstr "<span size=\"x-large\">Normal</span>"
 
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:85
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Alto"
 
-#: ../panels/universal-access/uap.ui.h:85
+#: ../panels/universal-access/uap.ui.h:86
 msgctxt "universal access, contrast"
 msgid "High/Inverse"
 msgstr "Alto/invertido"
 
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:87
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Lento"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:88
 msgctxt "universal access, contrast"
 msgid "Normal"
 msgstr "Normal"
 
 #. Translators: this refers to theme contrast and font size
-#: ../panels/universal-access/uap.ui.h:89
+#: ../panels/universal-access/uap.ui.h:90
 msgctxt "universal access, seeing"
 msgid "Display"
 msgstr "Mostrar"
 
 #. Translators: this refers to screen magnifier
-#: ../panels/universal-access/uap.ui.h:91
+#: ../panels/universal-access/uap.ui.h:92
 msgctxt "universal access, seeing"
 msgid "Zoom"
 msgstr "Ampliación"
@@ -2888,46 +3203,20 @@ msgstr "O novo contrasinal non contén suficientes caracteres diferentes"
 msgid "Unknown error"
 msgstr "Erro descoñecido"
 
-#: ../panels/user-accounts/um-account-dialog.c:78
+#: ../panels/user-accounts/um-account-dialog.c:73
 msgid "Failed to create user"
 msgstr "Produciuse un erro ao crear o usuario"
 
-#: ../panels/user-accounts/um-account-dialog.c:185
-#, c-format
-msgid "A user with the username '%s' already exists"
-msgstr "Xa existe un usuario co nome «%s»"
-
-#: ../panels/user-accounts/um-account-dialog.c:189
-#, c-format
-msgid "The username is too long"
-msgstr "O nome de usuario é demasiado longo"
-
-#: ../panels/user-accounts/um-account-dialog.c:192
-msgid "The username cannot start with a '-'"
-msgstr "O nome de usuario non pode comezar con «-»"
-
-#: ../panels/user-accounts/um-account-dialog.c:195
-msgid ""
-"The username must consist of:\n"
-" ➣ letters from the English alphabet\n"
-" ➣ digits\n"
-" ➣ any of the characters '.', '-' and '_'"
-msgstr ""
-"O nome de usuario debe estar formado por:\n"
-" ➣ letras do alfabeto inglés en minúsculas\n"
-" ➣ díxitos\n"
-" ➣ calquera dos caracteres «.», «-» e «_»"
-
 #: ../panels/user-accounts/um-account-type.c:35
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
 msgctxt "Account type"
 msgid "Standard"
 msgstr "Estándar"
 
 #: ../panels/user-accounts/um-account-type.c:37
 #: ../panels/user-accounts/data/account-dialog.ui.h:1
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgctxt "Account type"
 msgid "Administrator"
 msgstr "Administrador"
@@ -2989,15 +3278,15 @@ msgstr "Non foi posíbel acceder ao dispositivo «%s»"
 msgid "Could not start finger capture on '%s' device"
 msgstr "Non foi posíbel iniciar a captura do dedo no dispositivo «%s»"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:549
+#: ../panels/user-accounts/um-fingerprint-dialog.c:548
 msgid "Could not access any fingerprint readers"
 msgstr "Non foi posíbel acceder a ningún lector de pegadas dixitais"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:550
+#: ../panels/user-accounts/um-fingerprint-dialog.c:549
 msgid "Please contact your system administrator for help."
 msgstr "Contacte co administrador do seu sistema para obter axuda."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:587
+#: ../panels/user-accounts/um-fingerprint-dialog.c:586
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Enable Fingerprint Login"
 msgstr "Activar o Inicio con pegadas dixitais"
@@ -3007,7 +3296,7 @@ msgstr "Activar o Inicio con pegadas dixitais"
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:621
+#: ../panels/user-accounts/um-fingerprint-dialog.c:620
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -3016,7 +3305,7 @@ msgstr ""
 "Para activar o Inicio de sesión con pegadas dixitais debe gardar unha das "
 "súas pegadas dixitais usando o dispositivo «%s»."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:629
+#: ../panels/user-accounts/um-fingerprint-dialog.c:627
 #, c-format
 msgid ""
 "Enrolling fingerprints for\n"
@@ -3104,7 +3393,6 @@ msgid "Wrong password"
 msgstr "Contrasinal incorrecto"
 
 #: ../panels/user-accounts/um-photo-dialog.c:97
-#: ../panels/user-accounts/data/language-chooser.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
 msgid "Select"
 msgstr "Seleccionar"
@@ -3135,20 +3423,20 @@ msgstr "Xa existe un usuario co nome «%s»."
 msgid "This user does not exist."
 msgstr "Este usuario non existe."
 
-#: ../panels/user-accounts/um-user-panel.c:357
+#: ../panels/user-accounts/um-user-panel.c:354
 msgid "Failed to delete user"
 msgstr "Produciuse un fallo ao eliminar o usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:417
+#: ../panels/user-accounts/um-user-panel.c:414
 msgid "You cannot delete your own account."
 msgstr "Vostede non pode eliminar a súa propia conta."
 
-#: ../panels/user-accounts/um-user-panel.c:426
+#: ../panels/user-accounts/um-user-panel.c:423
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s aínda ten a sesión iniciada"
 
-#: ../panels/user-accounts/um-user-panel.c:430
+#: ../panels/user-accounts/um-user-panel.c:427
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -3156,12 +3444,12 @@ msgstr ""
 "Se elimina un usuario mentres ten a sesión iniciada pode poñer que o sistema "
 "nun estado inconsistente."
 
-#: ../panels/user-accounts/um-user-panel.c:439
+#: ../panels/user-accounts/um-user-panel.c:436
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Desexa manter os ficheiros de %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:443
+#: ../panels/user-accounts/um-user-panel.c:440
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -3169,43 +3457,39 @@ msgstr ""
 "É posíbel manter o cartafol persoal, a caixa de correo e os ficheiros "
 "temporais ao eliminar unha conta de usuario."
 
-#: ../panels/user-accounts/um-user-panel.c:446
+#: ../panels/user-accounts/um-user-panel.c:443
 msgid "_Delete Files"
 msgstr "_Borrar os ficheiros"
 
-#: ../panels/user-accounts/um-user-panel.c:447
+#: ../panels/user-accounts/um-user-panel.c:444
 msgid "_Keep Files"
 msgstr "_Manter os ficheiros"
 
-#: ../panels/user-accounts/um-user-panel.c:448
-msgid "_Cancel"
-msgstr "_Cancelar"
-
-#: ../panels/user-accounts/um-user-panel.c:498
+#: ../panels/user-accounts/um-user-panel.c:495
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Conta desactivada"
 
-#: ../panels/user-accounts/um-user-panel.c:506
+#: ../panels/user-accounts/um-user-panel.c:503
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "A estabelecer no seguinte inicio de sesión"
 
-#: ../panels/user-accounts/um-user-panel.c:509
+#: ../panels/user-accounts/um-user-panel.c:506
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ningún"
 
-#: ../panels/user-accounts/um-user-panel.c:831
+#: ../panels/user-accounts/um-user-panel.c:826
 msgid "Failed to contact the accounts service"
 msgstr "Produciuse un fallo ao contactar co servizo de contas"
 
-#: ../panels/user-accounts/um-user-panel.c:833
+#: ../panels/user-accounts/um-user-panel.c:828
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Asegúrese de que o Servizo de contas está instalado e activado correctamente."
 
-#: ../panels/user-accounts/um-user-panel.c:866
+#: ../panels/user-accounts/um-user-panel.c:864
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -3213,12 +3497,12 @@ msgstr ""
 "Para realizar os cambios,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:904
+#: ../panels/user-accounts/um-user-panel.c:902
 msgid "Create a user"
 msgstr "Crear un usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:915
-#: ../panels/user-accounts/um-user-panel.c:1214
+#: ../panels/user-accounts/um-user-panel.c:913
+#: ../panels/user-accounts/um-user-panel.c:1202
 msgid ""
 "To create a user,\n"
 "click the * icon first"
@@ -3226,12 +3510,12 @@ msgstr ""
 "Para crear un usuario,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:924
+#: ../panels/user-accounts/um-user-panel.c:922
 msgid "Delete the selected user"
 msgstr "Eliminar o usuario seleccionado"
 
-#: ../panels/user-accounts/um-user-panel.c:936
-#: ../panels/user-accounts/um-user-panel.c:1219
+#: ../panels/user-accounts/um-user-panel.c:934
+#: ../panels/user-accounts/um-user-panel.c:1207
 msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
@@ -3239,13 +3523,39 @@ msgstr ""
 "Para eliminar o usuario seleccionado,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1114
+#: ../panels/user-accounts/um-user-panel.c:1111
 msgid "My Account"
 msgstr "A miña conta"
 
-#: ../panels/user-accounts/um-user-panel.c:1124
+#: ../panels/user-accounts/um-user-panel.c:1121
 msgid "Other Accounts"
 msgstr "Outras contas"
+
+#: ../panels/user-accounts/um-utils.c:512
+#, c-format
+msgid "A user with the username '%s' already exists"
+msgstr "Xa existe un usuario co nome «%s»"
+
+#: ../panels/user-accounts/um-utils.c:516
+#, c-format
+msgid "The username is too long"
+msgstr "O nome de usuario é demasiado longo"
+
+#: ../panels/user-accounts/um-utils.c:519
+msgid "The username cannot start with a '-'"
+msgstr "O nome de usuario non pode comezar con «-»"
+
+#: ../panels/user-accounts/um-utils.c:522
+msgid ""
+"The username must consist of:\n"
+" ➣ letters from the English alphabet\n"
+" ➣ digits\n"
+" ➣ any of the characters '.', '-' and '_'"
+msgstr ""
+"O nome de usuario debe estar formado por:\n"
+" ➣ letras do alfabeto inglés en minúsculas\n"
+" ➣ díxitos\n"
+" ➣ calquera dos caracteres «.», «-» e «_»"
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
 msgid "Add or remove users"
@@ -3358,6 +3668,10 @@ msgstr "Mostrar _contrasinal"
 msgid "Browse"
 msgstr "Examinar"
 
+#: ../panels/user-accounts/data/photo-dialog.ui.h:3
+msgid "Cancel"
+msgstr "Cancelar"
+
 #: ../panels/user-accounts/data/photo-dialog.ui.h:4
 msgid "Changing photo for:"
 msgstr "Cambiando a foto para:"
@@ -3382,80 +3696,84 @@ msgid "Take a photograph"
 msgstr "Sacar unha fotografía"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
+msgid "A_utomatic Login"
+msgstr "_Inicio de sesión automático"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
 msgid "Account Information"
 msgstr "Información da conta"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
-msgid "Account type"
-msgstr "Tipo de conta"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
-msgid "Automatic Login"
-msgstr "Inicio de sesión automático"
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
+msgid "Account _type"
+msgstr "_Tipo de conta"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
-msgid "Fingerprint Login"
-msgstr "Inicio de sesión con pegadas dixitais"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "Login Options"
 msgstr "Opcións de inicio de sesión"
 
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+msgid "_Fingerprint Login"
+msgstr "Inicio de sesión con _pegadas dixitais"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "_Language"
+msgstr "_Idioma:"
+
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
-msgid "Password"
-msgstr "Contrasinal"
+msgid "_Password"
+msgstr "_Contrasinal:"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:2
-msgid "Left index finger"
-msgstr "Dedo índice esquerdo"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:3
 msgid "Left little finger"
 msgstr "Dedo maimiño esquerdo"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:4
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:3
 msgid "Left middle finger"
 msgstr "Dedo corazón esquerdo"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:5
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:4
 msgid "Left ring finger"
 msgstr "Dedo anular esquerdo"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:6
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:5
 msgid "Left thumb"
 msgstr "Dedo gordo esquerdo"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:7
-msgid "Other finger: "
-msgstr "Outro dedo: "
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:8
-msgid "Right index finger"
-msgstr "Dedo índice dereito"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:9
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:6
 msgid "Right little finger"
 msgstr "Dedo maimiño dereito"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:10
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:7
 msgid "Right middle finger"
 msgstr "Dedo corazón dereito"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:11
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:8
 msgid "Right ring finger"
 msgstr "Dedo anular dereito"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:12
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:9
 msgid "Right thumb"
 msgstr "Dedo gordo dereito"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:13
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:10
 msgid ""
 "Your fingerprint was successfully saved. You should now be able to log in "
 "using your fingerprint reader."
 msgstr ""
 "A súa pegada dixital foi gardada correctamente. Agora poderá iniciar a "
 "sesión usando o seu lector de pegadas dixitais."
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:11
+msgid "_Left index finger"
+msgstr "Dedo índice _esquerdo"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:12
+msgid "_Other finger: "
+msgstr "Outro _dedo: "
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:13
+msgid "_Right index finger"
+msgstr "_Dedo índice dereito"
 
 #: ../shell/control-center.c:51
 msgid "Enable verbose mode"
@@ -3498,6 +3816,54 @@ msgstr "Centro de control"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_Todas as configuracións"
+
+#~ msgid "Locked"
+#~ msgstr "Bloqueado"
+
+#~ msgid ""
+#~ "Dialog is unlocked.\n"
+#~ "Click to prevent further changes"
+#~ msgstr ""
+#~ "O diálogo está desbloqueado.\n"
+#~ "Prema para previr cambios futuros"
+
+#~ msgid ""
+#~ "Dialog is locked.\n"
+#~ "Click to make changes"
+#~ msgstr ""
+#~ "O diálogo está bloqueado.\n"
+#~ "Prema para facer cambios"
+
+#~ msgid ""
+#~ "System policy prevents changes.\n"
+#~ "Contact your system administrator"
+#~ msgstr ""
+#~ "A normativa do sistema non permite os cambios.\n"
+#~ "Contacte co seu administrador de sistemas"
+
+#~ msgid "Photos"
+#~ msgstr "Fotos"
+
+#~ msgid "Web"
+#~ msgstr "Web"
+
+#~ msgid "Add"
+#~ msgstr "Engadir"
+
+#~ msgid "---"
+#~ msgstr "---"
+
+#~ msgid "Options"
+#~ msgstr "Opcións"
+
+#~ msgid "Printing..."
+#~ msgstr "Impresión..."
+
+#~ msgid "Beep when a modifer key is pressed"
+#~ msgstr "Emitir un ton de aviso cando se prema unha tecla modificadora"
+
+#~ msgid "Password"
+#~ msgstr "Contrasinal"
 
 #~ msgid "Current network location"
 #~ msgstr "Localización de rede actual"
@@ -3628,9 +3994,6 @@ msgstr "_Todas as configuracións"
 #~ msgid "Supervised"
 #~ msgstr "Supervisado"
 
-#~ msgid "_Options"
-#~ msgstr "_Opcións"
-
 #~ msgid "More Info"
 #~ msgstr "Información do sistema"
 
@@ -3738,9 +4101,6 @@ msgstr "_Todas as configuracións"
 #~ msgid "_Country:"
 #~ msgstr "_País:"
 
-#~ msgid "_Language:"
-#~ msgstr "_Idioma:"
-
 #~ msgid "_Variants:"
 #~ msgstr "V_ariantes:"
 
@@ -3791,9 +4151,6 @@ msgstr "_Todas as configuracións"
 
 #~ msgid "Select a keyboard layout to be added to the list"
 #~ msgstr "Seleccione unha disposición de teclado para engadir á lista"
-
-#~ msgid "_Add..."
-#~ msgstr "_Engadir…"
 
 #~ msgid "_Pointer can be controlled using the keypad"
 #~ msgstr "O p_unteiro pode controlarse usando o teclado numérico"
@@ -4077,9 +4434,6 @@ msgstr "_Todas as configuracións"
 #~ msgid "Black"
 #~ msgstr "Negro"
 
-#~ msgid "Colors"
-#~ msgstr "Cores"
-
 #~ msgid "Slide Show"
 #~ msgstr "Presentación"
 
@@ -4175,17 +4529,11 @@ msgstr "_Todas as configuracións"
 #~ msgid "_Delete Location"
 #~ msgstr "_Eliminar a localización"
 
-#~ msgid "_Details"
-#~ msgstr "_Detalles"
-
 #~ msgid "_FTP proxy:"
 #~ msgstr "Proxy para _FTP:"
 
 #~ msgid "_Location name:"
 #~ msgstr "Nome da _localización:"
-
-#~ msgid "_Password:"
-#~ msgstr "_Contrasinal:"
 
 #~ msgid "_Secure HTTP proxy:"
 #~ msgstr "Proxy para HTTP _seguro:"
@@ -4196,17 +4544,8 @@ msgstr "_Todas as configuracións"
 #~ msgid "Flight Mode"
 #~ msgstr "Modo de voo"
 
-#~ msgid "Day:"
-#~ msgstr "Día:"
-
-#~ msgid "Month:"
-#~ msgstr "Mes:"
-
 #~ msgid "Set time automatically"
 #~ msgstr "Estabelecer a hora automaticamente"
-
-#~ msgid "Year:"
-#~ msgstr "Ano:"
 
 #~ msgid "_Mirror Screens"
 #~ msgstr "_Espellar pantallas"
@@ -4357,12 +4696,6 @@ msgstr "_Todas as configuracións"
 #~ msgid "Error"
 #~ msgstr "Erro"
 
-#~ msgid "Select Sound File"
-#~ msgstr "Seleccione un ficheiro de son"
-
-#~ msgid "Sound files"
-#~ msgstr "Ficheiros de son"
-
 #~ msgid "Custom…"
 #~ msgstr "Personalizado…"
 
@@ -4493,9 +4826,6 @@ msgstr "_Todas as configuracións"
 #~ msgstr ""
 #~ "Emitir un ton de aviso sempre que se activen ou desactiven os recursos de "
 #~ "_accesibilidade"
-
-#~ msgid "Beep when a _modifier key is pressed"
-#~ msgstr "Emitir un ton de aviso sempre que se prema unha tecla _modificadora"
 
 #~ msgid "Beep when a _toggle key is pressed"
 #~ msgstr "Emitir un ton de aviso sempre que se prema unha tecla conmu_tábel"
