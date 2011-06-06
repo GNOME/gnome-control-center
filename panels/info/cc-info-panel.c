@@ -91,6 +91,14 @@ typedef struct
   char **current;
 } VersionData;
 
+enum {
+  STARTUP_COL_ENABLED = 0,
+  STARTUP_COL_GICON,
+  STARTUP_COL_DESCRIPTION,
+  STARTUP_COL_FILENAME,
+  STARTUP_NUMBER_OF_COLUMNS
+};
+
 static void
 version_start_element_handler (GMarkupParseContext      *ctx,
                                const char               *element_name,
@@ -1045,6 +1053,11 @@ info_panel_setup_selector (CcInfoPanel  *self)
 
   gtk_list_store_append (model, &iter);
   gtk_list_store_set (model, &iter, section_name_column,
+                      _("Startup Applications"),
+                      -1);
+
+  gtk_list_store_append (model, &iter);
+  gtk_list_store_set (model, &iter, section_name_column,
                       _("Graphics"),
                       -1);
 
@@ -1242,12 +1255,120 @@ info_panel_setup_overview (CcInfoPanel  *self)
 }
 
 static void
+populate_startup_model (GtkListStore *model)
+{
+  gchar *path;
+  const gchar *name;
+  GDir *dir;
+
+  path = g_build_filename (g_get_user_config_dir (), "autostart", NULL);
+  dir = g_dir_open (path, 0, NULL);
+  if (!dir)
+    return;
+
+  while ((name = g_dir_read_name (dir))) {
+    gchar *file_path;
+    GKeyFile *key_file;
+
+    if (!g_str_has_suffix (name, ".desktop"))
+      continue;
+
+    file_path = g_build_filename (path, name, NULL);
+    key_file = g_key_file_new ();
+    if (g_key_file_load_from_file (key_file, file_path, G_KEY_FILE_NONE, NULL)) {
+      gboolean is_hidden;
+      GtkTreeIter new_row;
+      gchar *icon_path, *description;
+      GIcon *gicon;
+
+      /* If it's hidden, don't show it up */
+      is_hidden = g_key_file_get_boolean (key_file, "Desktop Entry", G_KEY_FILE_DESKTOP_KEY_HIDDEN, NULL);
+      /* FIXME */
+
+      /* Retrieve the icon for this entry */
+      icon_path = g_key_file_get_locale_string (key_file, "Desktop Entry", G_KEY_FILE_DESKTOP_KEY_ICON, NULL, NULL);
+      if (g_path_is_absolute (icon_path)) {
+        GFile *icon_file;
+
+        icon_file = g_file_new_for_path (icon_path);
+        gicon = g_file_icon_new (icon_file);
+
+        g_object_unref (icon_file);
+      } else {
+        gicon = g_themed_icon_new (icon_path);
+      }
+
+      /* Set description */
+      description = g_strdup_printf ("<b>%s</b>\n%s",
+                                     g_key_file_get_locale_string (key_file, "Desktop Entry", G_KEY_FILE_DESKTOP_KEY_NAME, NULL, NULL),
+                                     g_key_file_get_locale_string (key_file, "Desktop Entry", G_KEY_FILE_DESKTOP_KEY_COMMENT, NULL, NULL));
+      /* Add row to the model */
+      gtk_list_store_append (model, &new_row);
+      gtk_list_store_set (model, &new_row,
+                          0, g_key_file_get_boolean (key_file, "Desktop Entry", "X-GNOME-Autostart-enabled", NULL),
+                          1, gicon,
+                          2, description,
+                          3, key_file,
+                          -1);
+
+      g_free (icon_path);
+    } else
+      g_key_file_free (key_file);
+
+    g_free (file_path);
+  }
+
+  g_dir_close (dir);
+}
+
+static void
 info_panel_setup_startup_apps (CcInfoPanel *self)
 {
-  GtListStore *model;
+  GtkListStore *model;
+  GtkWidget *treeview;
+  GtkCellRenderer *renderer;
+  GtkTreeViewColumn *column;
 
   /* Create the model and setup treeview */
-  model = gtk_list_store (
+  model = gtk_list_store_new (STARTUP_NUMBER_OF_COLUMNS, G_TYPE_BOOLEAN, G_TYPE_ICON, G_TYPE_STRING, G_TYPE_POINTER);
+
+  treeview = WID ("startup_apps_treeview");
+  gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), GTK_TREE_MODEL (model));
+  g_object_unref (model);
+
+  /* ...Enable/disable column */
+  renderer = gtk_cell_renderer_toggle_new ();
+  column = gtk_tree_view_column_new_with_attributes (_("Enabled"),
+                                                     renderer,
+                                                     "active", STARTUP_COL_ENABLED,
+                                                     NULL);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+
+  /* ...Icon column */
+  renderer = gtk_cell_renderer_pixbuf_new ();
+  column = gtk_tree_view_column_new_with_attributes (_("Icon"),
+                                                     renderer,
+                                                     "gicon", STARTUP_COL_GICON,
+                                                     "sensitive", STARTUP_COL_ENABLED,
+                                                     NULL);
+  g_object_set (renderer,
+                "stock-size", GTK_ICON_SIZE_LARGE_TOOLBAR,
+                NULL);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+
+  /* ...Description column */
+  renderer = gtk_cell_renderer_text_new ();
+  column = gtk_tree_view_column_new_with_attributes (_("Description"),
+                                                     renderer,
+                                                     "markup", STARTUP_COL_DESCRIPTION,
+                                                     "sensitive", STARTUP_COL_ENABLED,
+                                                     NULL);
+  g_object_set (renderer,
+                "ellipsize", PANGO_ELLIPSIZE_END,
+                NULL);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+
+  populate_startup_model (model);
 }
 
 static void
