@@ -1283,7 +1283,8 @@ populate_startup_model (GtkListStore *model)
 
       /* If it's hidden, don't show it up */
       is_hidden = g_key_file_get_boolean (key_file, "Desktop Entry", G_KEY_FILE_DESKTOP_KEY_HIDDEN, NULL);
-      /* FIXME */
+      //if (is_hidden)
+      //  continue;
 
       /* Retrieve the icon for this entry */
       icon_path = g_key_file_get_locale_string (key_file, "Desktop Entry", G_KEY_FILE_DESKTOP_KEY_ICON, NULL, NULL);
@@ -1302,6 +1303,7 @@ populate_startup_model (GtkListStore *model)
       description = g_strdup_printf ("<b>%s</b>\n%s",
                                      g_key_file_get_locale_string (key_file, "Desktop Entry", G_KEY_FILE_DESKTOP_KEY_NAME, NULL, NULL),
                                      g_key_file_get_locale_string (key_file, "Desktop Entry", G_KEY_FILE_DESKTOP_KEY_COMMENT, NULL, NULL));
+
       /* Add row to the model */
       gtk_list_store_append (model, &new_row);
       gtk_list_store_set (model, &new_row,
