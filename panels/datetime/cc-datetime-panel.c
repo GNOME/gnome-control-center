@@ -834,15 +834,16 @@ on_permission_changed (GPermission *permission,
                        gpointer     data)
 {
   CcDateTimePanelPrivate *priv = CC_DATE_TIME_PANEL (data)->priv;
-  gboolean allowed;
+  gboolean allowed, using_ntp;
 
   allowed = g_permission_get_allowed (permission);
+  using_ntp = gtk_switch_get_active (GTK_SWITCH (W("network_time_switch")));
 
   /* All the widgets but the lock button and the 24h setting */
   gtk_widget_set_sensitive (W("map-vbox"), allowed);
   gtk_widget_set_sensitive (W("hbox2"), allowed);
   gtk_widget_set_sensitive (W("alignment2"), allowed);
-  gtk_widget_set_sensitive (W("table1"), allowed);
+  gtk_widget_set_sensitive (W("table1"), allowed && !using_ntp);
 }
 
 static void
