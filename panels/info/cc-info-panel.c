@@ -619,7 +619,7 @@ query_done (GFile        *file,
       return;
     }
 
-  self->priv->total_bytes += g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_FILESYSTEM_FREE);
+  self->priv->total_bytes += g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_FILESYSTEM_SIZE);
   g_object_unref (info);
 
   /* And onto the next element */
@@ -653,7 +653,7 @@ get_primary_disc_info_start (CcInfoPanel *self)
   self->priv->cancellable = g_cancellable_new ();
 
   g_file_query_filesystem_info_async (file,
-                                      G_FILE_ATTRIBUTE_FILESYSTEM_FREE,
+                                      G_FILE_ATTRIBUTE_FILESYSTEM_SIZE,
                                       0,
                                       self->priv->cancellable,
                                       (GAsyncReadyCallback) query_done,
