@@ -45,12 +45,16 @@ static char **start_panels = NULL;
 static gboolean show_overview = FALSE;
 static gboolean verbose = FALSE;
 static gboolean show_help = FALSE;
+static gboolean show_help_gtk = FALSE;
+static gboolean show_help_all = FALSE;
 
 const GOptionEntry all_options[] = {
   { "version", 0, G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, option_version_cb, NULL, NULL },
   { "verbose", 'v', 0, G_OPTION_ARG_NONE, &verbose, N_("Enable verbose mode"), NULL },
   { "overview", 'o', 0, G_OPTION_ARG_NONE, &show_overview, N_("Show the overview"), NULL },
-  { "help", '?', 0, G_OPTION_ARG_NONE, &show_help, N_("Show help options"), NULL },
+  { "help", 'h', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &show_help, N_("Show help options"), NULL },
+  { "help-all", 0, G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &show_help_all, N_("Show help options"), NULL },
+  { "help-gtk", 0, G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &show_help_gtk, N_("Show help options"), NULL },
   { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &start_panels, N_("Panel to display"), NULL },
   { NULL } /* end the list */
 };
@@ -88,11 +92,17 @@ application_command_line_cb (GApplication  *application,
       return 1;
     }
 
-  if (show_help)
+  if (show_help || show_help_all || show_help_gtk)
     {
       gchar *help;
+      GOptionGroup *group;
 
-      help = g_option_context_get_help (context, FALSE, NULL);
+      if (show_help || show_help_all)
+        group = NULL;
+      else
+        group = gtk_get_option_group (FALSE);
+
+      help = g_option_context_get_help (context, FALSE, group);
       g_print ("%s", help);
       g_free (help);
       g_option_context_free (context);
