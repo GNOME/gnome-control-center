@@ -184,9 +184,8 @@
         <child>
           <object class="GtkHBox" id="enroll_hbox">
             <property name="visible">True</property>
-            <child>
-              <placeholder/>
-            </child>
+            <property name="margin-top">24</property>
+            <property name="margin-bottom">24</property>
             <child>
               <object class="GtkImage" id="image1">
                 <property name="visible">True</property>
@@ -237,17 +236,17 @@
                 <property name="position">5</property>
               </packing>
             </child>
-            <child>
-              <placeholder/>
-            </child>
           </object>
           <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
             <property name="position">1</property>
           </packing>
         </child>
         <child>
           <object class="GtkLabel" id="status-label">
             <property name="visible">True</property>
+            <property name="wrap">True</property>
           </object>
           <packing>
             <property name="expand">False</property>

@@ -502,21 +502,6 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
 }
 
 static void
-align_image (GtkWidget *child, gpointer data)
-{
-        if (GTK_IS_IMAGE (child)) {
-                gtk_misc_set_alignment (GTK_MISC (child), 0, 0.5);
-                gtk_misc_set_padding (GTK_MISC (child), 10, 10);
-        }
-
-        if (GTK_IS_LABEL (child)) {
-                gtk_label_set_use_markup (GTK_LABEL (child), TRUE);
-                gtk_widget_override_font (child, NULL);
-                gtk_misc_set_padding (GTK_MISC (child), 68, 10);
-        }
-}
-
-static void
 enroll_fingerprints (GtkWindow *parent,
                      GtkWidget *label1,
                      GtkWidget *label2,
@@ -530,7 +515,6 @@ enroll_fingerprints (GtkWindow *parent,
         const char *filename;
         char *msg;
         GError *error = NULL;
-        gchar *title;
 
         device = NULL;
 
@@ -624,13 +608,9 @@ enroll_fingerprints (GtkWindow *parent,
 
         gtk_assistant_set_page_complete (GTK_ASSISTANT (ass), WID("page1"), TRUE);
 
-        title = g_strdup_printf (_("Enrolling fingerprints for\n<b><big>%s</big></b>"), um_user_get_real_name (user));
-
-        gtk_assistant_set_page_title (GTK_ASSISTANT (ass), WID("page1"), title);
-        gtk_assistant_set_page_title (GTK_ASSISTANT (ass), WID("page2"), title);
-        gtk_assistant_set_page_title (GTK_ASSISTANT (ass), WID("page3"), title);
-        gtk_container_forall (GTK_CONTAINER (ass), align_image, NULL);
-        g_free (title);
+        gtk_assistant_set_page_title (GTK_ASSISTANT (ass), WID("page1"), _("Selecting finger"));
+        gtk_assistant_set_page_title (GTK_ASSISTANT (ass), WID("page2"), _("Enrolling fingerprints"));
+        gtk_assistant_set_page_title (GTK_ASSISTANT (ass), WID("page3"), _("Summary"));
 
         /* Page 2 */
         g_object_set_data (G_OBJECT (WID("page2")), "name", "enroll");
