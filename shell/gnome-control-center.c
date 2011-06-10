@@ -563,23 +563,11 @@ setup_search (GnomeControlCenter *shell)
 }
 
 static void
-permission_changed_cb (GtkWidget *button, GParamSpec *pspec, gpointer data)
-{
-  if (gtk_lock_button_get_permission (GTK_LOCK_BUTTON (button)) != NULL)
-    gtk_widget_show (button);
-  else
-    gtk_widget_hide (button);
-}
-
-static void
 setup_lock (GnomeControlCenter *shell)
 {
   GnomeControlCenterPrivate *priv = shell->priv;
 
   priv->lock_button = W (priv->builder, "lock-button");
-
-  g_signal_connect (priv->lock_button, "notify::permission",
-                    G_CALLBACK (permission_changed_cb), NULL);
 }
 
 static void
