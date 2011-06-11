@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-08 09:51+0300\n"
-"PO-Revision-Date: 2011-06-08 09:54+0200\n"
+"POT-Creation-Date: 2011-06-11 11:36+0300\n"
+"PO-Revision-Date: 2011-06-11 11:38+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "Language: he\n"
@@ -1483,7 +1483,7 @@ msgid "_Show"
 msgstr "ה_צגה"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
-msgid "Allow different layouts for each window"
+msgid "Allow different layouts for individual windows"
 msgstr "מתן האפשרות להחלת פריסה נפרדת בכל חלון"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
@@ -1499,11 +1499,19 @@ msgid "Layouts"
 msgstr "פריסות"
 
 #: ../panels/region/gnome-region-panel.ui.h:5
+msgid "New windows use the default layout"
+msgstr "חלונות חדשים ישתמשו בפריסת בררת המחדל"
+
+#: ../panels/region/gnome-region-panel.ui.h:6
+msgid "New windows use the previous window's layout"
+msgstr "חלונות חדשים ישתמשו בפריסת החלון הקודם"
+
+#: ../panels/region/gnome-region-panel.ui.h:7
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
 msgstr "אזור ושפה"
 
-#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1511,24 +1519,16 @@ msgstr ""
 "החלפת הגדרות פריסת המקלדת הנוכחית\n"
 "בהגדרות בררת המחדל"
 
-#: ../panels/region/gnome-region-panel.ui.h:8
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "Reset to De_faults"
 msgstr "החזרה ל_בררת המחדל"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Select a display language (change will be applied next time you log in)"
 msgstr "יש לבחור שפת תצוגה (השינוי יחול עם הכניסה הבאה לסביבת המשתמש)"
 
-#: ../panels/region/gnome-region-panel.ui.h:10
-msgid "Use default layout in new windows"
-msgstr "שימוש בפריסת בררת המחדל בחלונות חדשים"
-
-#: ../panels/region/gnome-region-panel.ui.h:11
-msgid "Use previous window's layout in new windows"
-msgstr "יש להשתמש בפריסת החלון הקודם בחלונות חדשים"
-
 #: ../panels/region/gnome-region-panel.ui.h:12
-msgid "Use same layout in all windows"
+msgid "Use the same layout for all windows"
 msgstr "שימוש באותה הפריסה לכל החלונות"
 
 #: ../panels/region/gnome-region-panel.ui.h:13
@@ -3250,15 +3250,15 @@ msgstr "אין אפשרות לגשת אל התקן '%s'"
 msgid "Could not start finger capture on '%s' device"
 msgstr "לא ניתן להפעיל את לכידת האצבע על ההתקן '%s'"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:548
+#: ../panels/user-accounts/um-fingerprint-dialog.c:532
 msgid "Could not access any fingerprint readers"
 msgstr "לא ניתן לגשת לקוראי טביעות האצבעות"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:549
+#: ../panels/user-accounts/um-fingerprint-dialog.c:533
 msgid "Please contact your system administrator for help."
 msgstr "נא ליצור קשר עם מנהל המערכת שלך לקבלת עזרה."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:586
+#: ../panels/user-accounts/um-fingerprint-dialog.c:570
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Enable Fingerprint Login"
 msgstr "הפעלת התחברות באמצעות טביעת אצבע"
@@ -3268,7 +3268,7 @@ msgstr "הפעלת התחברות באמצעות טביעת אצבע"
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:620
+#: ../panels/user-accounts/um-fingerprint-dialog.c:604
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -3277,14 +3277,17 @@ msgstr ""
 "כדי לאפשר התחברות באמצעות טביעת אצבע, עליך לשמור את אחת מטביעות האצבעות שלך, "
 "באמצעות ההתקן '%s'."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:627
-#, c-format
-msgid ""
-"Enrolling fingerprints for\n"
-"<b><big>%s</big></b>"
-msgstr ""
-"נרשמות טביעות אצבעות עבור\n"
-"<b><big>%s</big></b>"
+#: ../panels/user-accounts/um-fingerprint-dialog.c:611
+msgid "Selecting finger"
+msgstr "נבחרת אצבע"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:612
+msgid "Enrolling fingerprints"
+msgstr "נרשמות טביעות אצבעות עבור"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:613
+msgid "Summary"
+msgstr "תקציר"
 
 #: ../panels/user-accounts/um-language-dialog.c:180
 msgid "Other..."
@@ -3741,27 +3744,28 @@ msgstr "אצבע א_חרת: "
 msgid "_Right index finger"
 msgstr "אצבע _ימנית"
 
-#: ../shell/control-center.c:51
+#: ../shell/control-center.c:53
 msgid "Enable verbose mode"
 msgstr "Enable verbose mode"
 
-#: ../shell/control-center.c:52
+#: ../shell/control-center.c:54
 msgid "Show the overview"
 msgstr "Show the overview"
 
-#: ../shell/control-center.c:53
+#: ../shell/control-center.c:55 ../shell/control-center.c:56
+#: ../shell/control-center.c:57
 msgid "Show help options"
 msgstr "Show help options"
 
-#: ../shell/control-center.c:54
+#: ../shell/control-center.c:58
 msgid "Panel to display"
 msgstr "Panel to display"
 
-#: ../shell/control-center.c:76
+#: ../shell/control-center.c:80
 msgid "- System Settings"
 msgstr "- הגדרות מערכת"
 
-#: ../shell/control-center.c:84
+#: ../shell/control-center.c:88
 #, c-format
 msgid ""
 "%s\n"
@@ -3781,6 +3785,12 @@ msgstr "לוח בקרה"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_כל ההגדרות"
+
+#~ msgid "Use default layout in new windows"
+#~ msgstr "שימוש בפריסת בררת המחדל בחלונות חדשים"
+
+#~ msgid "Use previous window's layout in new windows"
+#~ msgstr "יש להשתמש בפריסת החלון הקודם בחלונות חדשים"
 
 #~ msgid "Locked"
 #~ msgstr "נעול"
@@ -4031,9 +4041,6 @@ msgstr "_כל ההגדרות"
 
 #~ msgid "List of keyboard layouts selected for usage"
 #~ msgstr "רשימת פריסות המקלדת שנבחרו לשימוש"
-
-#~ msgid "New windows u_se active window's layout"
-#~ msgstr "חלונות חדשים עושים שימוש בפריסת החלון הפעיל"
 
 #~ msgid "By _country"
 #~ msgstr "לפי _מדינה"
@@ -5366,9 +5373,6 @@ msgstr "_כל ההגדרות"
 
 #~ msgid "Place finger on reader"
 #~ msgstr "הנח את האצבע על הקורא"
-
-#~ msgid "Select finger"
-#~ msgstr "בחר אצבע"
 
 #~ msgid "Child exited unexpectedly"
 #~ msgstr "Child exited unexpectedly"
