@@ -577,7 +577,7 @@ um_user_manager_delete_user (UmUserManager       *manager,
                                  delete_user_done,
                                  data,
                                  async_user_op_data_free,
-                                 G_TYPE_INT64, um_user_get_uid (user),
+                                 G_TYPE_INT64, (gint64) um_user_get_uid (user),
                                  G_TYPE_BOOLEAN, remove_files,
                                  G_TYPE_INVALID);
 }
