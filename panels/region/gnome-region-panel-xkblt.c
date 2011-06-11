@@ -351,6 +351,7 @@ chooser_response (GtkDialog  *chooser,
 						   SEL_LAYOUT_TREE_COL_ID, id,
 						   SEL_LAYOUT_TREE_COL_ENABLED, TRUE,
 						   -1);
+		g_free (name);
 		add_default_switcher_if_necessary ();
 	}
 

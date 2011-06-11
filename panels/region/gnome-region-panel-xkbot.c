@@ -466,6 +466,8 @@ xkb_options_update_option_counters (XklConfigRegistry * config_registry,
 		      (current1st_level_id, config_item->name));
 	gboolean current_state =
 	    xkb_options_is_selected (full_option_name);
+        g_free (full_option_name);
+
 	xkb_options_expander_selcounter_add (current_state);
 }
 
