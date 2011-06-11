@@ -40,7 +40,6 @@ enum {
 
 static int idx2select = -1;
 static int max_selected_layouts = -1;
-static gboolean updating_settings = FALSE;
 
 static GtkCellRenderer *text_renderer;
 
@@ -156,8 +155,6 @@ update_layouts_list (GtkTreeModel *model,
 	GtkTreeIter iter;
 	GPtrArray *array;
 
-	updating_settings = TRUE;
-
 	array = g_ptr_array_new_with_free_func ((GDestroyNotify) g_free);
 	cont = gtk_tree_model_get_iter_first (model, &iter);
 	while (cont) {
@@ -173,36 +170,16 @@ update_layouts_list (GtkTreeModel *model,
 	xkb_layouts_set_selected_list (array->pdata);
 	g_ptr_array_free (array, TRUE);
 
-	updating_settings = FALSE;
-
 	xkb_layouts_enable_disable_buttons (dialog);
 }
 
 static void
-xkb_layouts_row_inserted (GtkTreeModel *tree_model,
-			  GtkTreePath  *path,
-			  GtkTreeIter  *iter,
-			  GtkBuilder   *dialog)
+xkb_layouts_drag_end (GtkWidget	     *widget,
+		      GdkDragContext *drag_context,
+		      gpointer	      user_data)
 {
-	update_layouts_list (tree_model, dialog);
-}
-
-static void
-xkb_layouts_row_deleted (GtkTreeModel *tree_model,
-			 GtkTreePath  *path,
-			 GtkBuilder   *dialog)
-{
-	update_layouts_list (tree_model, dialog);
-}
-
-static void
-xkb_layouts_row_reordered (GtkTreeModel *tree_model,
-			   GtkTreePath  *path,
-			   GtkTreeIter  *iter,
-			   gpointer      new_order,
-			   GtkBuilder   *dialog)
-{
-	update_layouts_list (tree_model, dialog);
+	update_layouts_list (gtk_tree_view_get_model (GTK_TREE_VIEW (widget)),
+			     GTK_BUILDER (user_data));
 }
 
 void
@@ -248,12 +225,8 @@ xkb_layouts_prepare_selected_tree (GtkBuilder * dialog)
 
 	/* Setting up DnD */
 	gtk_tree_view_set_reorderable (GTK_TREE_VIEW (tree_view), TRUE);
-	g_signal_connect (G_OBJECT (list_store), "row-inserted",
-			  G_CALLBACK (xkb_layouts_row_inserted), dialog);
-	g_signal_connect (G_OBJECT (list_store), "row-deleted",
-			  G_CALLBACK (xkb_layouts_row_deleted), dialog);
-	g_signal_connect (G_OBJECT (list_store), "rows-reordered",
-			  G_CALLBACK (xkb_layouts_row_reordered), dialog);
+	g_signal_connect (G_OBJECT (tree_view), "drag-end",
+			  G_CALLBACK (xkb_layouts_drag_end), dialog);
 }
 
 gchar *
@@ -353,6 +326,7 @@ chooser_response (GtkDialog  *chooser,
 						   -1);
 		g_free (name);
 		add_default_switcher_if_necessary ();
+		update_layouts_list (GTK_TREE_MODEL (list_store), dialog);
 	}
 
 	xkb_layout_chooser_response (chooser, response_id);
@@ -397,6 +371,7 @@ remove_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 		return;
 
 	gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+	update_layouts_list (model, dialog);
 }
 
 static gboolean
@@ -432,6 +407,8 @@ move_up_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 
 	gtk_list_store_swap (GTK_LIST_STORE (model), &iter, prev);
 	gtk_tree_iter_free (prev);
+
+	update_layouts_list (model, dialog);
 }
 
 static void
@@ -451,6 +428,8 @@ move_down_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 
 	gtk_list_store_swap (GTK_LIST_STORE (model), &iter, next);
 	gtk_tree_iter_free (next);
+
+	update_layouts_list (model, dialog);
 }
 
 void
@@ -475,8 +454,6 @@ xkb_layouts_update_list (GSettings * settings,
 			 gchar * key, GtkBuilder * dialog)
 {
 	if (strcmp (key, GKBD_KEYBOARD_CONFIG_KEY_LAYOUTS) == 0) {
-		if (updating_settings)
-			return;
 		xkb_layouts_fill_selected_tree (dialog);
 		enable_disable_restoring (dialog);
 	}
