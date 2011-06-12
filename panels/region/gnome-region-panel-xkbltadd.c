@@ -301,6 +301,19 @@ xkb_layout_chooser_selection_changed (GtkTreeSelection * selection,
 	gtk_widget_set_sensitive (preview_button, anything_selected);
 }
 
+static void
+xkb_layout_chooser_row_activated (GtkTreeView	    *tree_view,
+				  GtkTreePath	    *path,
+				  GtkTreeViewColumn *column,
+				  GtkBuilder	    *chooser_dialog)
+{
+	GtkWidget *add_button = CWID ("btnOk");
+	GtkWidget *dialog = CWID ("xkb_layout_chooser");
+
+	if (gtk_widget_is_sensitive (add_button))
+		gtk_dialog_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+}
+
 static gboolean
 xkb_filter_layouts (GtkTreeModel * model,
 		    GtkTreeIter * iter, gpointer data)
@@ -400,6 +413,9 @@ xkb_layout_choose (GtkBuilder * dialog)
 			  chooser_dialog);
 
 	xkb_layout_chooser_selection_changed (selection, chooser_dialog);
+
+	g_signal_connect (G_OBJECT (xkb_filtered_layouts_list), "row-activated",
+			  G_CALLBACK (xkb_layout_chooser_row_activated), chooser_dialog);
 
 	filtered_model =
 	    GTK_TREE_MODEL_FILTER (gtk_builder_get_object
