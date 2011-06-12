@@ -374,39 +374,20 @@ remove_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 	update_layouts_list (model, dialog);
 }
 
-static gboolean
-_tree_model_iter_previous (GtkTreeModel *tree_model,
-			   GtkTreeIter *iter)
-{
-	GtkTreePath *path;
-	gboolean ret;
-
-	path = gtk_tree_model_get_path (tree_model, iter);
-	ret = gtk_tree_path_prev (path);
-	if (ret != FALSE)
-		gtk_tree_model_get_iter (tree_model, iter, path);
-
-	gtk_tree_path_free (path);
-	return ret;
-}
-
 static void
 move_up_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 {
 	GtkTreeModel *model;
-	GtkTreeIter iter, *prev;
+	GtkTreeIter iter, prev;
 
 	if (get_selected_iter (dialog, &model, &iter) == FALSE)
 		return;
 
-	prev = gtk_tree_iter_copy (&iter);
-	if (!_tree_model_iter_previous (model, prev)) {
-		gtk_tree_iter_free (prev);
+	prev = iter;
+	if (!gtk_tree_model_iter_previous (model, &prev))
 		return;
-	}
 
-	gtk_list_store_swap (GTK_LIST_STORE (model), &iter, prev);
-	gtk_tree_iter_free (prev);
+	gtk_list_store_swap (GTK_LIST_STORE (model), &iter, &prev);
 
 	update_layouts_list (model, dialog);
 }
@@ -415,19 +396,16 @@ static void
 move_down_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 {
 	GtkTreeModel *model;
-	GtkTreeIter iter, *next;
+	GtkTreeIter iter, next;
 
 	if (get_selected_iter (dialog, &model, &iter) == FALSE)
 		return;
 
-	next = gtk_tree_iter_copy (&iter);
-	if (!gtk_tree_model_iter_next (model, next)) {
-		gtk_tree_iter_free (next);
+	next = iter;
+	if (!gtk_tree_model_iter_next (model, &next))
 		return;
-	}
 
-	gtk_list_store_swap (GTK_LIST_STORE (model), &iter, next);
-	gtk_tree_iter_free (next);
+	gtk_list_store_swap (GTK_LIST_STORE (model), &iter, &next);
 
 	update_layouts_list (model, dialog);
 }
