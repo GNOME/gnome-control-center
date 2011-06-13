@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-06-10 18:10+0000\n"
-"PO-Revision-Date: 2011-06-10 21:16+0100\n"
+"POT-Creation-Date: 2011-06-12 13:08+0000\n"
+"PO-Revision-Date: 2011-06-13 08:32+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n%100==4 ? 3 : 0);\n"
 "X-Poedit-Language: Slovenian\n"
 "X-Poedit-Country: SLOVENIA\n"
@@ -326,9 +326,8 @@ msgid "_Network Time"
 msgstr "Omrežni _čas"
 
 #: ../panels/datetime/datetime.ui.h:26
-#, fuzzy
 msgid "_Region:"
-msgstr "Območje rezultata"
+msgstr "_Območje:"
 
 #. Translators: those are keywords for the date and time control-center panel
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
@@ -1472,8 +1471,8 @@ msgid "_Show"
 msgstr "_Pokaži"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
-msgid "Allow different layouts for each window"
-msgstr "Dovoli različne razporeditve za vsako okno"
+msgid "Allow different layouts for individual windows"
+msgstr "Dovoli različne razporeditve za posamezno okno"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
 msgid "Install languages..."
@@ -1488,11 +1487,19 @@ msgid "Layouts"
 msgstr "Razporeditve"
 
 #: ../panels/region/gnome-region-panel.ui.h:5
+msgid "New windows use the default layout"
+msgstr "nova okna uporabljajo privzeto razporeditev"
+
+#: ../panels/region/gnome-region-panel.ui.h:6
+msgid "New windows use the previous window's layout"
+msgstr "Nova okna uporabijo predhodno uporabljeno razporeditev"
+
+#: ../panels/region/gnome-region-panel.ui.h:7
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
 msgstr "Področje in jezik"
 
-#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1500,24 +1507,16 @@ msgstr ""
 "Zamenjaj trenutne nastavitve razporeditve tipkovnice s\n"
 "privzetimi nastavitvami"
 
-#: ../panels/region/gnome-region-panel.ui.h:8
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "Reset to De_faults"
 msgstr "Povrni na _privzeto"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Select a display language (change will be applied next time you log in)"
 msgstr "Izbor jezika namizja (sprememba bo uporabljen ob naslednji prijavi)"
 
-#: ../panels/region/gnome-region-panel.ui.h:10
-msgid "Use default layout in new windows"
-msgstr "Uporabi privzeto razporeditev v novih oknih"
-
-#: ../panels/region/gnome-region-panel.ui.h:11
-msgid "Use previous window's layout in new windows"
-msgstr "Uporabi razporeditev predhodnega okna v novih oknih"
-
 #: ../panels/region/gnome-region-panel.ui.h:12
-msgid "Use same layout in all windows"
+msgid "Use the same layout for all windows"
 msgstr "Uporabi enako razporeditev v vseh oknih"
 
 #: ../panels/region/gnome-region-panel.ui.h:13
@@ -1545,7 +1544,7 @@ msgstr "Izberite izvorni vir za dodajanje"
 msgid "Keyboard Layout Options"
 msgstr "Možnosti razporeditve tipkovnice"
 
-#: ../panels/region/gnome-region-panel-xkblt.c:222
+#: ../panels/region/gnome-region-panel-xkblt.c:199
 msgid "Layout"
 msgstr "Razporeditev"
 
@@ -1738,7 +1737,7 @@ msgstr "Brez"
 
 #: ../panels/network/cc-network-panel.c:1360
 msgid "Hotspot"
-msgstr ""
+msgstr "Vroča vstopna točka"
 
 #. Translators: network device speed
 #: ../panels/network/cc-network-panel.c:1422
@@ -1780,32 +1779,29 @@ msgid "Not connected to the internet."
 msgstr "Ni povezave v internet."
 
 #: ../panels/network/cc-network-panel.c:2871
-#, fuzzy
 msgid "Create the hotspot anyway?"
-msgstr "Vseeno namesti posodobitve."
+msgstr "Ali naj se vroča vstopna točka vseeno ustvari?"
 
 #: ../panels/network/cc-network-panel.c:2889
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
-msgstr ""
+msgstr "Ali naj se povezava s točko %s prekine in se ustvari nova vroča vstopna točka?"
 
 #: ../panels/network/cc-network-panel.c:2892
 msgid "This is your only connection to the internet."
 msgstr "To je edina povezava na internet."
 
 #: ../panels/network/cc-network-panel.c:2910
-#, fuzzy
 msgid "Create _Hotspot"
-msgstr "Ustvari vejo"
+msgstr "_Ustvari vročo vstopno točko"
 
 #: ../panels/network/cc-network-panel.c:2970
 msgid "Stop hotspot and disconnect any users?"
-msgstr ""
+msgstr "Ali naj se zaustavi vroča vstopna točka in se prekine povezava vseh uporabnikov?"
 
 #: ../panels/network/cc-network-panel.c:2973
-#, fuzzy
 msgid "_Stop Hotspot"
-msgstr "Zaustavi razhroščevalnik"
+msgstr "_Zaustavi vročo vstopno točko"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Network settings"
@@ -1925,14 +1921,12 @@ msgid "_Socks Host"
 msgstr "_Gostitelj vtičev"
 
 #: ../panels/network/network.ui.h:32
-#, fuzzy
 msgid "_Stop Hotspot..."
-msgstr "Zaustavi razhroščevalnik"
+msgstr "_Zaustavi vročo vstopno točko ..."
 
 #: ../panels/network/network.ui.h:33
-#, fuzzy
 msgid "_Use as Hotspot..."
-msgstr "_Uporabi sliko kot ozadje"
+msgstr "Uporabi kot _vročo vstopno točko"
 
 #: ../panels/network/network.ui.h:34
 msgctxt "proxy method"
@@ -2180,14 +2174,12 @@ msgid "Hibernate"
 msgstr "Mirovanje"
 
 #: ../panels/power/power.ui.h:8
-#, fuzzy
 msgid "On AC _power:"
-msgstr "Napajanje iz omrežja"
+msgstr "Napajanje iz _omrežja:"
 
 #: ../panels/power/power.ui.h:9
-#, fuzzy
 msgid "On _battery power:"
-msgstr "Napajanje iz baterije"
+msgstr "Napajanje iz _baterije:"
 
 #: ../panels/power/power.ui.h:10
 msgid "Put the computer to sleep when inactive:"
@@ -2202,19 +2194,16 @@ msgid "Suspend"
 msgstr "Naredi prehod v stanje pripravljenosti"
 
 #: ../panels/power/power.ui.h:13
-#, fuzzy
 msgid "When power is _critically low:"
-msgstr "Stanje UPS je kritično nizko:"
+msgstr "Ko je polnost baterije _kritično nizka:"
 
 #: ../panels/power/power.ui.h:14
-#, fuzzy
 msgid "When the _sleep button is pressed:"
-msgstr "Ko je pritisnjen gum_b za zaustavitev:"
+msgstr "Ko je pritisnjen gumb za prehod v stanje _pripravljenosti:"
 
 #: ../panels/power/power.ui.h:15
-#, fuzzy
 msgid "When the p_ower button is pressed:"
-msgstr "Ko je pritisnjen gum_b za zaustavitev:"
+msgstr "Ko je pritisnjen gumb za _izklop:"
 
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
 #: ../panels/color/color.ui.h:8
@@ -2262,9 +2251,8 @@ msgstr "Naprava"
 
 #. TRANSLATORS: column for device list
 #: ../panels/color/cc-color-panel.c:691
-#, fuzzy
 msgid "Calibration"
-msgstr "Samodejno uravnavanje"
+msgstr "Umerjanje"
 
 #. TRANSLATORS: this is when the button is sensitive
 #: ../panels/color/cc-color-panel.c:723
@@ -2284,9 +2272,8 @@ msgstr ""
 
 #. TRANSLATORS: this is when the button is insensitive
 #: ../panels/color/cc-color-panel.c:781
-#, fuzzy
 msgid "The device type is not currently supported."
-msgstr "Postopno nalaganje slike v zapisu '%s' ni podprto"
+msgstr "Vrsta naprave trenutno ni podprta."
 
 #. TRANSLATORS: this is when an auto-added profile cannot be removed
 #: ../panels/color/cc-color-panel.c:853
@@ -2350,7 +2337,7 @@ msgstr "Privzeta sivina"
 #: ../panels/color/cc-color-panel.c:1406
 #: ../panels/color/cc-color-panel.c:1417
 msgid "Uncalibrated"
-msgstr ""
+msgstr "Ni umerjeno"
 
 #: ../panels/color/cc-color-panel.c:1387
 msgid "This device is not color managed."
@@ -2362,7 +2349,7 @@ msgstr ""
 
 #: ../panels/color/cc-color-panel.c:1420
 msgid "This device does not have a profile suitable for whole-screen color correction."
-msgstr ""
+msgstr "Naprava nima določenega ustreznega profila za uravnavanje barv celega zaslona."
 
 #: ../panels/color/cc-color-panel.c:1447
 msgid "This device has an old profile that may no longer be accurate."
@@ -2411,13 +2398,12 @@ msgid "Available Profiles"
 msgstr "Profili na voljo"
 
 #: ../panels/color/color.ui.h:6
-#, fuzzy
 msgid "Calibrate the device"
-msgstr "Podpora naprav"
+msgstr "Umeri napravo"
 
 #: ../panels/color/color.ui.h:7
 msgid "Calibrate…"
-msgstr ""
+msgstr "Umeri ..."
 
 #: ../panels/color/color.ui.h:9
 msgid "Delete device"
@@ -2429,11 +2415,11 @@ msgstr "Vrsta naprave:"
 
 #: ../panels/color/color.ui.h:11
 msgid "Each device needs an up to date color profile to be color managed."
-msgstr ""
+msgstr "Vsaka napava zahteva posodobljen barvni profil za ustrezno barvno upravljanje."
 
 #: ../panels/color/color.ui.h:12
 msgid "Image files can be dragged on this window to auto-complete the above fields."
-msgstr ""
+msgstr "Slikovne datoteke je mogoče povleči v to okno za samodejno dopolnjevanje vnosnih polj."
 
 #: ../panels/color/color.ui.h:13
 msgid "Manufacturer:"
@@ -2446,7 +2432,7 @@ msgstr "Model:"
 #. Some profiles are not compatible with some devices
 #: ../panels/color/color.ui.h:16
 msgid "Only profiles that are compatible with the device will be listed above."
-msgstr ""
+msgstr "Zgoraj bodo navedeni le profili, ki so združljivi z napravo."
 
 #: ../panels/color/color.ui.h:17
 msgid "Remove a device"
@@ -2462,7 +2448,7 @@ msgstr "Nastavi za vse uporabnike"
 
 #: ../panels/color/color.ui.h:20
 msgid "Set this device for all users on this computer"
-msgstr ""
+msgstr "Nastavi napravo za vse uporabnike tega računalnika"
 
 #: ../panels/color/color.ui.h:21
 msgid "View details"
@@ -2519,18 +2505,16 @@ msgid "Screen turns off"
 msgstr "Zaslon se izklopi"
 
 #: ../panels/screen/screen.ui.h:15
-#, fuzzy
 msgid "_Dim screen to save power"
-msgstr "Zatemni zaslon za zmanjšanje porabe"
+msgstr "_Zatemni zaslon za zmanjšanje porabe"
 
 #: ../panels/screen/screen.ui.h:16
 msgid "_Lock screen after:"
 msgstr "Zakleni _zaslon po:"
 
 #: ../panels/screen/screen.ui.h:17
-#, fuzzy
 msgid "_Turn off after:"
-msgstr "Izklopi računalnik"
+msgstr "_Izklopi po:"
 
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
@@ -3079,9 +3063,8 @@ msgid "_Sound Settings"
 msgstr "Nastavitve _zvoka"
 
 #: ../panels/universal-access/uap.ui.h:75
-#, fuzzy
 msgid "_Test flash"
-msgstr "Flash video"
+msgstr "Preizkusni _blisk"
 
 #: ../panels/universal-access/uap.ui.h:76
 msgid "_Text size:"
@@ -3301,9 +3284,8 @@ msgid "Selecting finger"
 msgstr "Izbor prsta"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:612
-#, fuzzy
 msgid "Enrolling fingerprints"
-msgstr "_Izbriši prstne odtise"
+msgstr "Vpisovanje prstnih odtisov"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:613
 msgid "Summary"
@@ -3792,6 +3774,12 @@ msgstr "Nadzorno središče"
 msgid "_All Settings"
 msgstr "_Vse nastavitve"
 
+#~ msgid "Use default layout in new windows"
+#~ msgstr "Uporabi privzeto razporeditev v novih oknih"
+
+#~ msgid "Use previous window's layout in new windows"
+#~ msgstr "Uporabi razporeditev predhodnega okna v novih oknih"
+
 #~ msgid "Locked"
 #~ msgstr "Zaklenjeno"
 
@@ -4144,9 +4132,6 @@ msgstr "_Vse nastavitve"
 
 #~ msgid "Move the selected keyboard layout up in the list"
 #~ msgstr "Premakni izbrano razporeditev tipkovnice višje na seznamu"
-
-#~ msgid "New windows u_se active window's layout"
-#~ msgstr "Novo okno prevzame razporeditev dejavnega okna"
 
 #~ msgid "Print a diagram of the selected keyboard layout"
 #~ msgstr "Natisni diagram izbrane razporeditve tipkovnice"
@@ -5518,8 +5503,8 @@ msgstr "_Vse nastavitve"
 #~ "This theme will not look as intended because the required window manager "
 #~ "theme '%s' is not installed."
 #~ msgstr ""
-#~ "Tema ne bo prikazana pravilno, saj zahtevana tema upravljalnika namizja "
-#~ "'%s' ni nameščena."
+#~ "Tema ne bo prikazana pravilno, saj zahtevana tema upravljalnika namizja '%"
+#~ "s' ni nameščena."
 
 #~ msgid ""
 #~ "This theme will not look as intended because the required icon theme '%s' "
