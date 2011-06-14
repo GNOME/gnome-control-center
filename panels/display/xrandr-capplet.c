@@ -327,7 +327,7 @@ rebuild_rotation_combo (App *app)
   } RotationInfo;
   static const RotationInfo rotations[] = {
     { GNOME_RR_ROTATION_0, N_("Normal") },
-    { GNOME_RR_ROTATION_90, N_("Anti-Clockwise") },
+    { GNOME_RR_ROTATION_90, N_("Counterclockwise") },
     { GNOME_RR_ROTATION_270, N_("Clockwise") },
     { GNOME_RR_ROTATION_180, N_("180 Degrees") },
   };
