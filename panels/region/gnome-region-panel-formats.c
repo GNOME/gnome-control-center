@@ -46,16 +46,28 @@ selection_changed_cb (GtkComboBox *combo, gpointer user_data)
 	dt = g_date_time_new_now_local ();
 
 	/* Display dates */
+	s = g_date_time_format (dt, "%A %e %B %Y");
+	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "full_date_format")), s);
+	g_free (s);
+
+	s = g_date_time_format (dt, "%e %B %Y");
+	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "full_day_format")), s);
+	g_free (s);
+
+	s = g_date_time_format (dt, "%e %b %Y");
+	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "short_day_format")), s);
+	g_free (s);
+
 	s = g_date_time_format (dt, "%x");
 	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "shortest_day_format")), s);
 	g_free (s);
 	
 	/* Display times */
-	s = g_date_time_format (dt, "%r");
+	s = g_date_time_format (dt, "%r %Z");
 	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "full_time_format")), s);
 	g_free (s);
 
-	s = g_date_time_format (dt, "%R");
+	s = g_date_time_format (dt, "%X");
 	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "short_time_format")), s);
 	g_free (s);
 
