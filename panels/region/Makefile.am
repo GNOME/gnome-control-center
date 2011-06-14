@@ -17,6 +17,8 @@ libregion_la_SOURCES =	\
 	region-module.c \
 	cc-region-panel.c \
 	cc-region-panel.h \
+	gnome-region-panel-formats.c \
+	gnome-region-panel-formats.h \
 	gnome-region-panel-lang.c \
 	gnome-region-panel-lang.h \
 	gnome-region-panel-xkb.c \

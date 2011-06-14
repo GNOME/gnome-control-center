@@ -24,6 +24,7 @@
 
 #include "gnome-region-panel-xkb.h"
 #include "gnome-region-panel-lang.h"
+#include "gnome-region-panel-formats.h"
 
 #define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
 
@@ -120,6 +121,7 @@ cc_region_panel_init (CcRegionPanel * self)
 
 	setup_xkb_tabs (priv->builder);
 	setup_language (priv->builder);
+	setup_formats (priv->builder);
 }
 
 void
