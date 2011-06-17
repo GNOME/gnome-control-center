@@ -375,7 +375,7 @@ cc_common_language_select_current_language (GtkTreeView *treeview)
 		}
 		g_free (locale);
 
-		gtk_tree_model_iter_next (model, &iter);
+		cont = gtk_tree_model_iter_next (model, &iter);
 	}
 	g_free (lang);
 }
