@@ -120,5 +120,6 @@ setup_formats (GtkBuilder *builder)
 	gtk_combo_box_set_active_id (GTK_COMBO_BOX (combo), current_lang);
 	g_free (current_lang);
 
+	g_object_weak_ref (G_OBJECT (combo), (GWeakNotify) g_object_unref, locale_settings);
 	g_settings_bind (locale_settings, "region", combo, "active-id", G_SETTINGS_BIND_DEFAULT);
 }
