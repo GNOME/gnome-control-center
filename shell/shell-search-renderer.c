@@ -178,7 +178,7 @@ shell_search_renderer_set_layout (ShellSearchRenderer *cell, GtkWidget *widget)
       if (lead == full_string)
         leaddot = "";
       else
-        leaddot = "...";
+        leaddot = "…";
 
       match = g_strndup (start, count);
       lead = g_strndup (lead, start - lead);
