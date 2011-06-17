@@ -31,6 +31,16 @@
 static GSettings *locale_settings = NULL;
 
 static void
+display_date (GtkLabel *label, GDateTime *dt, const gchar *format)
+{
+	gchar *s;
+
+	s = g_date_time_format (dt, format);
+	gtk_label_set_text (label, s);
+	g_free (s);
+}
+
+static void
 selection_changed_cb (GtkComboBox *combo, gpointer user_data)
 {
 	const gchar *active_id, *locale;
@@ -48,30 +58,14 @@ selection_changed_cb (GtkComboBox *combo, gpointer user_data)
 	dt = g_date_time_new_now_local ();
 
 	/* Display dates */
-	s = g_date_time_format (dt, "%A %e %B %Y");
-	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "full_date_format")), s);
-	g_free (s);
-
-	s = g_date_time_format (dt, "%e %B %Y");
-	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "full_day_format")), s);
-	g_free (s);
-
-	s = g_date_time_format (dt, "%e %b %Y");
-	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "short_day_format")), s);
-	g_free (s);
-
-	s = g_date_time_format (dt, "%x");
-	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "shortest_day_format")), s);
-	g_free (s);
+	display_date (GTK_LABEL (gtk_builder_get_object (builder, "full_date_format")), dt, "%A %e %B %Y");
+	display_date (GTK_LABEL (gtk_builder_get_object (builder, "full_day_format")), dt, "%e %B %Y");
+	display_date (GTK_LABEL (gtk_builder_get_object (builder, "short_day_format")), dt, "%e %b %Y");
+	display_date (GTK_LABEL (gtk_builder_get_object (builder, "shortest_day_format")), dt, "%x");
 	
 	/* Display times */
-	s = g_date_time_format (dt, "%r %Z");
-	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "full_time_format")), s);
-	g_free (s);
-
-	s = g_date_time_format (dt, "%X");
-	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "short_time_format")), s);
-	g_free (s);
+	display_date (GTK_LABEL (gtk_builder_get_object (builder, "full_time_format")), dt, "%r %Z");
+	display_date (GTK_LABEL (gtk_builder_get_object (builder, "short_time_format")), dt, "%X");
 
 	/* Display numbers */
 	s = g_strdup_printf ("%'.2f", 123456789.00);
