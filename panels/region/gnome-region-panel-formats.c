@@ -28,6 +28,8 @@
 #include "gdm-languages.h"
 #include "gnome-region-panel-formats.h"
 
+static GSettings *locale_settings = NULL;
+
 static void
 selection_changed_cb (GtkComboBox *combo, gpointer user_data)
 {
@@ -92,6 +94,8 @@ setup_formats (GtkBuilder *builder)
 	gchar **langs, *language, *current_lang;
 	gint i;
 
+	locale_settings = g_settings_new ("org.gnome.system.locale");
+
 	/* Setup formats selector */
 	combo = GTK_WIDGET (gtk_builder_get_object (builder, "region_selector"));
 	gtk_combo_box_set_id_column (GTK_COMBO_BOX (combo), 1);
@@ -109,7 +113,12 @@ setup_formats (GtkBuilder *builder)
 	g_signal_connect (G_OBJECT (combo), "changed",
 			  G_CALLBACK (selection_changed_cb), builder);
 
-	current_lang = cc_common_language_get_current_language ();
+	current_lang = g_settings_get_string (locale_settings, "region");
+	if (!current_lang || !current_lang[0])
+		current_lang = cc_common_language_get_current_language ();
+
 	gtk_combo_box_set_active_id (GTK_COMBO_BOX (combo), current_lang);
 	g_free (current_lang);
+
+	g_settings_bind (locale_settings, "region", combo, "active-id", G_SETTINGS_BIND_DEFAULT);
 }
