@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 2.91.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-06 22:11+0200\n"
-"PO-Revision-Date: 2011-06-07 01:01+0200\n"
+"POT-Creation-Date: 2011-06-19 17:46+0200\n"
+"PO-Revision-Date: 2011-06-19 17:50+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -597,7 +597,9 @@ msgstr "Systeminformasjon"
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
 "fallback;preferred;"
-msgstr "enhet;system;informasjon;minne;prosessor;versjon;forvalg;program;reserveløsning;foretrukket;"
+msgstr ""
+"enhet;system;informasjon;minne;prosessor;versjon;forvalg;program;"
+"reserveløsning;foretrukket;"
 
 #: ../panels/info/info.ui.h:1
 msgid "Calculating..."
@@ -1488,27 +1490,64 @@ msgid "_Show"
 msgstr "Vi_s"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
-msgid "Allow different layouts for each window"
-msgstr "Tillat forskjellige utforminger for hvert vindu"
+msgid "<b>Example</b>"
+msgstr "<b>Eksempel</b>"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
+msgid "Allow different layouts for individual windows"
+msgstr "Tillat forskjellige utforminger for hvert vindu"
+
+#: ../panels/region/gnome-region-panel.ui.h:3
+msgid "Currency"
+msgstr "Valuta"
+
+#: ../panels/region/gnome-region-panel.ui.h:4
+msgid "Dates"
+msgstr "Datoer"
+
+#: ../panels/region/gnome-region-panel.ui.h:5
+msgid "Formats"
+msgstr "Formater"
+
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Install languages..."
 msgstr "Installer språk …"
 
-#: ../panels/region/gnome-region-panel.ui.h:3
+#: ../panels/region/gnome-region-panel.ui.h:7
 msgid "Language"
 msgstr "Språk"
 
-#: ../panels/region/gnome-region-panel.ui.h:4
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid "Layouts"
 msgstr "Utforminger"
 
-#: ../panels/region/gnome-region-panel.ui.h:5
+#: ../panels/region/gnome-region-panel.ui.h:9
+msgid "Measurement"
+msgstr "Måleenheter"
+
+#: ../panels/region/gnome-region-panel.ui.h:10
+msgid "New windows use the default layout"
+msgstr "Nye vinduer bruker forvalgt utforming"
+
+#: ../panels/region/gnome-region-panel.ui.h:11
+#, fuzzy
+msgid "New windows use the previous window's layout"
+msgstr "Bruk utforming fra forrige vindu i nye vinduer"
+
+#: ../panels/region/gnome-region-panel.ui.h:12
+msgid "Numbers"
+msgstr "Tall"
+
+#: ../panels/region/gnome-region-panel.ui.h:13
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
 msgstr "Region og språk"
 
-#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:14
+msgid "Region:"
+msgstr "Region:"
+
+#: ../panels/region/gnome-region-panel.ui.h:15
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1516,32 +1555,28 @@ msgstr ""
 "Erstatt aktive innstillinger for tastaturutforming med\n"
 "forvalgte innstillinger"
 
-#: ../panels/region/gnome-region-panel.ui.h:8
+#: ../panels/region/gnome-region-panel.ui.h:17
 msgid "Reset to De_faults"
 msgstr "Sett til _forvalg"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:18
 msgid "Select a display language (change will be applied next time you log in)"
 msgstr ""
 "Velg et visningsspråk. Endringen vil tas i bruk neste gang du logger inn"
 
-#: ../panels/region/gnome-region-panel.ui.h:10
-msgid "Use default layout in new windows"
-msgstr "Bruk forvalgt utforming i nye vinduer"
+#: ../panels/region/gnome-region-panel.ui.h:19
+msgid "Times"
+msgstr "Tid"
 
-#: ../panels/region/gnome-region-panel.ui.h:11
-msgid "Use previous window's layout in new windows"
-msgstr "Bruk utforming fra forrige vindu i nye vinduer"
+#: ../panels/region/gnome-region-panel.ui.h:20
+msgid "Use the same layout for all windows"
+msgstr "Bruk samme utforming for alle vinduer"
 
-#: ../panels/region/gnome-region-panel.ui.h:12
-msgid "Use same layout in all windows"
-msgstr "Bruk samme utforming i alle vinduer"
-
-#: ../panels/region/gnome-region-panel.ui.h:13
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "View and edit keyboard layout options"
 msgstr "Vis og rediger alternativer for tastaturutforming"
 
-#: ../panels/region/gnome-region-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:22
 #: ../panels/network/network.ui.h:30
 msgid "_Options..."
 msgstr "_Alternativer …"
@@ -1562,7 +1597,7 @@ msgstr "Velg en inndatakilde som skal legges til"
 msgid "Keyboard Layout Options"
 msgstr "Alternativer for tastaturutforming"
 
-#: ../panels/region/gnome-region-panel-xkblt.c:222
+#: ../panels/region/gnome-region-panel-xkblt.c:199
 msgid "Layout"
 msgstr "Utseende"
 
@@ -1758,7 +1793,7 @@ msgstr "Ingen"
 
 #: ../panels/network/cc-network-panel.c:1360
 msgid "Hotspot"
-msgstr ""
+msgstr "Hotspot"
 
 #. Translators: network device speed
 #: ../panels/network/cc-network-panel.c:1422
@@ -1801,12 +1836,12 @@ msgstr "Ikke koblet til internett."
 
 #: ../panels/network/cc-network-panel.c:2871
 msgid "Create the hotspot anyway?"
-msgstr ""
+msgstr "Lage hotspot likevel?"
 
 #: ../panels/network/cc-network-panel.c:2889
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
-msgstr ""
+msgstr "Koble fra %s og lag ny hotspot?"
 
 #: ../panels/network/cc-network-panel.c:2892
 msgid "This is your only connection to the internet."
@@ -1814,15 +1849,15 @@ msgstr "Dette er din eneste tilkobling til internett."
 
 #: ../panels/network/cc-network-panel.c:2910
 msgid "Create _Hotspot"
-msgstr ""
+msgstr "Lag _hotspot"
 
 #: ../panels/network/cc-network-panel.c:2970
 msgid "Stop hotspot and disconnect any users?"
-msgstr ""
+msgstr "Stoppe hotspot og koble fra alle brukere?"
 
 #: ../panels/network/cc-network-panel.c:2973
 msgid "_Stop Hotspot"
-msgstr ""
+msgstr "_Stopp hotspot"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Network settings"
@@ -1943,11 +1978,11 @@ msgstr "_Socks-vert"
 
 #: ../panels/network/network.ui.h:32
 msgid "_Stop Hotspot..."
-msgstr ""
+msgstr "_Stopp hotspot …"
 
 #: ../panels/network/network.ui.h:33
 msgid "_Use as Hotspot..."
-msgstr ""
+msgstr "Br_uk som hotspot …"
 
 #: ../panels/network/network.ui.h:34
 msgctxt "proxy method"
@@ -2201,14 +2236,12 @@ msgid "When power is _critically low:"
 msgstr "Når strømmen er _kritisk lav:"
 
 #: ../panels/power/power.ui.h:14
-#, fuzzy
 msgid "When the _sleep button is pressed:"
-msgstr "Når hvileknappen trykkes:"
+msgstr "Når _hvileknappen trykkes:"
 
 #: ../panels/power/power.ui.h:15
-#, fuzzy
 msgid "When the p_ower button is pressed:"
-msgstr "Når strømknappen trykkes:"
+msgstr "Når _strømknappen trykkes:"
 
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
 #: ../panels/color/color.ui.h:8
@@ -2216,9 +2249,8 @@ msgid "Color"
 msgstr "Farge"
 
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:2
-#, fuzzy
 msgid "Color management settings"
-msgstr "Innstillinger for strømstyring"
+msgstr "Innstillinger for fargestyring"
 
 #. Translators: those are keywords for the color control-center panel
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:4
@@ -2262,9 +2294,8 @@ msgstr "Kalibrering"
 
 #. TRANSLATORS: this is when the button is sensitive
 #: ../panels/color/cc-color-panel.c:723
-#, fuzzy
 msgid "Create a color profile for the selected device"
-msgstr "Innstillinger for valgt enhet:"
+msgstr "Lag en fargeprofil for valgt enhet"
 
 #. TRANSLATORS: this is when the button is insensitive
 #: ../panels/color/cc-color-panel.c:737 ../panels/color/cc-color-panel.c:761
@@ -3260,15 +3291,15 @@ msgstr "Kunne ikke aksessere enheten «%s»"
 msgid "Could not start finger capture on '%s' device"
 msgstr "Kunne ikke starte innlesing av data på enhet «%s»"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:548
+#: ../panels/user-accounts/um-fingerprint-dialog.c:532
 msgid "Could not access any fingerprint readers"
 msgstr "Kunne ikke aksessere fingeravtrykkleser"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:549
+#: ../panels/user-accounts/um-fingerprint-dialog.c:533
 msgid "Please contact your system administrator for help."
 msgstr "Kontakt din systemadministrator for hjelp."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:586
+#: ../panels/user-accounts/um-fingerprint-dialog.c:570
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Enable Fingerprint Login"
 msgstr "Slå på innlogging med fingeravtrykk"
@@ -3278,7 +3309,7 @@ msgstr "Slå på innlogging med fingeravtrykk"
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:620
+#: ../panels/user-accounts/um-fingerprint-dialog.c:604
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -3287,14 +3318,18 @@ msgstr ""
 "Du må lagre ett av dine fingeravtrykk med enheten «%s» for å slå på "
 "innlogging med fingeravtrykk."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:627
-#, c-format
-msgid ""
-"Enrolling fingerprints for\n"
-"<b><big>%s</big></b>"
-msgstr ""
-"Aktiverer fingeravtrykk for\n"
-"<b><big>%s</big></b>"
+#: ../panels/user-accounts/um-fingerprint-dialog.c:611
+#, fuzzy
+msgid "Selecting finger"
+msgstr "Venstre ringfinger"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:612
+msgid "Enrolling fingerprints"
+msgstr "Registrerer fingeravtrykk"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:613
+msgid "Summary"
+msgstr "Sammendrag"
 
 #: ../panels/user-accounts/um-language-dialog.c:180
 msgid "Other..."
@@ -3753,27 +3788,28 @@ msgstr "_Annen finger: "
 msgid "_Right index finger"
 msgstr "Høy_re pekefinger"
 
-#: ../shell/control-center.c:51
+#: ../shell/control-center.c:53
 msgid "Enable verbose mode"
 msgstr "Vis mer informasjon"
 
-#: ../shell/control-center.c:52
+#: ../shell/control-center.c:54
 msgid "Show the overview"
 msgstr "Vis oversikt"
 
-#: ../shell/control-center.c:53
+#: ../shell/control-center.c:55 ../shell/control-center.c:56
+#: ../shell/control-center.c:57
 msgid "Show help options"
 msgstr "Vis flagg for hjelp"
 
-#: ../shell/control-center.c:54
+#: ../shell/control-center.c:58
 msgid "Panel to display"
 msgstr "Panel som skal vises"
 
-#: ../shell/control-center.c:76
+#: ../shell/control-center.c:80
 msgid "- System Settings"
 msgstr "- Systeminnstillinger"
 
-#: ../shell/control-center.c:84
+#: ../shell/control-center.c:88
 #, c-format
 msgid ""
 "%s\n"
