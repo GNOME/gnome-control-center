@@ -147,7 +147,7 @@ if test x"$enable_cups" != x"no" ; then
   CUPS_API_MAJOR=`echo $ECHO_N $CUPS_API_VERSION | cut -d . -f 1`
   CUPS_API_MINOR=`echo $ECHO_N $CUPS_API_VERSION | cut -d . -f 2`
 
-  AC_CHECK_HEADERS([cups/cups.h cups/http.h cups/ipp.h],,
+  AC_CHECK_HEADERS([cups/cups.h cups/http.h cups/ipp.h cups/ppd.h],,
                    AC_MSG_ERROR([CUPS headers not found but CUPS support requested]))
 
   if ! test $CUPS_API_MAJOR -gt 1 -o \
