@@ -25,6 +25,7 @@
 #include <glib/gstdio.h>
 #include <gtk/gtk.h>
 #include <cups/cups.h>
+#include <cups/ppd.h>
 #include <dbus/dbus-glib.h>
 
 #include "pp-utils.h"
