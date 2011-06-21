@@ -277,18 +277,22 @@ shell_search_renderer_render (GtkCellRenderer      *cell,
 {
   ShellSearchRendererPrivate *priv = SHELL_SEARCH_RENDERER (cell)->priv;
   PangoRectangle rect;
+  GtkStyleContext *context;
+
+  context = gtk_widget_get_style_context (widget);
 
   shell_search_renderer_set_layout (SHELL_SEARCH_RENDERER (cell), widget);
 
   pango_layout_get_pixel_extents (priv->layout, NULL, &rect);
 
-  cairo_move_to (cr, cell_area->x, cell_area->y);
+  cairo_save (cr);
 
-  /* FIXME: get the correct colour from the theme */
-  cairo_set_source_rgb (cr, 0, 0, 0);
-  if (priv->layout)
-    pango_cairo_layout_path (cr, priv->layout);
-  cairo_fill (cr);
+  gtk_render_layout (context, cr,
+                     cell_area->x,
+                     cell_area->y,
+                     priv->layout);
+
+  cairo_restore (cr);
 }
 
 static void
