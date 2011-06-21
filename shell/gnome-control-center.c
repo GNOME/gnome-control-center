@@ -165,6 +165,10 @@ activate_panel (GnomeControlCenter *shell,
                              nat_height);
           return;
         }
+      else
+        {
+          g_warning ("Could not find the loadable module for panel '%s'", id);
+        }
     }
 }
 
