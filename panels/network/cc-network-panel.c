@@ -2657,7 +2657,10 @@ get_hostname (void)
         if (error != NULL) {
                 g_warning ("Getting pretty hostname failed: %s", error->message);
                 g_error_free (error);
+                return NULL;
         }
+
+        str = NULL;
 
         if (res != NULL) {
                 g_variant_get (res, "(v)", &inner);
