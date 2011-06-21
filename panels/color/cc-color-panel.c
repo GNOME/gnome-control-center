@@ -79,6 +79,8 @@ typedef enum {
 #define GCM_SETTINGS_RECALIBRATE_PRINTER_THRESHOLD      "recalibrate-printer-threshold"
 #define GCM_SETTINGS_RECALIBRATE_DISPLAY_THRESHOLD      "recalibrate-display-threshold"
 
+static void     gcm_prefs_device_add_cb (GtkWidget *widget, CcColorPanel *prefs);
+
 static void
 gcm_prefs_combobox_add_profile (GtkWidget *widget,
                                 CdProfile *profile,
@@ -155,8 +157,15 @@ gcm_prefs_treeview_popup_menu (CcColorPanel *prefs, GtkWidget *treeview)
   g_signal_connect (menuitem, "activate",
                     G_CALLBACK (gcm_prefs_default_cb),
                     prefs);
-
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+
+  /* TRANSLATORS: this is when the profile should be set for all users */
+  menuitem = gtk_menu_item_new_with_label (_("Create virtual device"));
+  g_signal_connect (menuitem, "activate",
+                    G_CALLBACK (gcm_prefs_device_add_cb),
+                    prefs);
+  gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+
   gtk_widget_show_all (menu);
 
   /* Note: gdk_event_get_time() accepts a NULL argument */
@@ -2176,7 +2185,6 @@ cc_color_panel_init (CcColorPanel *prefs)
                                                "toolbutton_device_remove"));
   g_signal_connect (widget, "clicked",
                     G_CALLBACK (gcm_prefs_delete_cb), prefs);
-  gtk_widget_set_sensitive (widget, FALSE);
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "toolbutton_device_add"));
   g_signal_connect (widget, "clicked",
@@ -2214,7 +2222,6 @@ cc_color_panel_init (CcColorPanel *prefs)
   g_signal_connect (widget, "clicked",
                     G_CALLBACK (gcm_prefs_button_virtual_add_cb),
                     prefs);
-  gtk_widget_set_sensitive (widget, FALSE);
 
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "button_virtual_cancel"));
