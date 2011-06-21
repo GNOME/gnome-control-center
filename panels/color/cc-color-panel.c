@@ -143,6 +143,36 @@ out:
     g_object_unref (profile);
 }
 
+static void
+gcm_prefs_treeview_popup_menu (CcColorPanel *prefs, GtkWidget *treeview)
+{
+  GtkWidget *menu, *menuitem;
+
+  menu = gtk_menu_new ();
+
+  /* TRANSLATORS: this is when the profile should be set for all users */
+  menuitem = gtk_menu_item_new_with_label (_("Set for all users"));
+  g_signal_connect (menuitem, "activate",
+                    G_CALLBACK (gcm_prefs_default_cb),
+                    prefs);
+
+  gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
+  gtk_widget_show_all (menu);
+
+  /* Note: gdk_event_get_time() accepts a NULL argument */
+  gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 0,
+                  gdk_event_get_time (NULL));
+}
+
+static gboolean
+gcm_prefs_treeview_popup_menu_cb (GtkWidget *treeview, CcColorPanel *prefs)
+{
+  if (prefs->priv->current_device == NULL)
+    return FALSE;
+  gcm_prefs_treeview_popup_menu (prefs, treeview);
+  return TRUE; /* we handled this */
+}
+
 static GFile *
 gcm_prefs_file_chooser_get_icc_profile (CcColorPanel *prefs)
 {
@@ -2124,6 +2154,9 @@ cc_color_panel_init (CcColorPanel *prefs)
                     prefs);
   g_signal_connect (GTK_TREE_VIEW (widget), "row-activated",
                     G_CALLBACK (gcm_prefs_treeview_row_activated_cb),
+                    prefs);
+  g_signal_connect (GTK_TREE_VIEW (widget), "popup-menu",
+                    G_CALLBACK (gcm_prefs_treeview_popup_menu_cb),
                     prefs);
 
   /* add columns to the tree view */
