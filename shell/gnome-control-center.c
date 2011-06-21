@@ -436,13 +436,23 @@ static void
 search_entry_changed_cb (GtkEntry                  *entry,
                          GnomeControlCenterPrivate *priv)
 {
+  char *str;
 
   /* if the entry text was set manually (not by the user) */
   if (!g_strcmp0 (priv->filter_string, gtk_entry_get_text (entry)))
     return;
 
+  /* Don't re-filter for added trailing or leading spaces */
+  str = g_strdup (gtk_entry_get_text (entry));
+  g_strstrip (str);
+  if (!g_strcmp0 (str, priv->filter_string))
+    {
+      g_free (str);
+      return;
+    }
+
   g_free (priv->filter_string);
-  priv->filter_string = g_strdup (gtk_entry_get_text (entry));
+  priv->filter_string = str;
 
   g_object_set (priv->search_renderer,
                 "search-string", priv->filter_string,
@@ -552,6 +562,7 @@ setup_search (GnomeControlCenter *shell)
   /* setup the search entry widget */
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "search-entry");
   priv->search_entry = widget;
+  priv->filter_string = g_strdup ("");
 
   g_signal_connect (widget, "changed", G_CALLBACK (search_entry_changed_cb),
                     priv);
