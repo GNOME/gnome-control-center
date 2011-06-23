@@ -150,8 +150,10 @@ goa_panel_init (GoaPanel *panel)
     {
       goa_warning ("Error getting a GoaClient: %s (%s, %d)",
                    error->message, g_quark_to_string (error->domain), error->code);
+      w = GTK_WIDGET (gtk_builder_get_object (panel->builder, "goa-top-widget"));
+      gtk_widget_set_sensitive (w, FALSE);
       g_error_free (error);
-      return;
+      goto out;
     }
   g_signal_connect (panel->client,
                     "account-changed",
