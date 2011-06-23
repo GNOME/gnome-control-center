@@ -1261,7 +1261,7 @@ ccGetAllowedUsers (gchar ***allowed_users, const char *printer_name)
                              ippPort (),
                              cupsEncryption ());
 
-  if (http || !allowed_users)
+  if (http)
     {
       request = ippNewRequest (IPP_GET_PRINTER_ATTRIBUTES);
 
