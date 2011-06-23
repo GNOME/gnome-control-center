@@ -922,7 +922,7 @@ default_app_changed (GtkAppChooserButton *button,
     }
 
   /* Set https support for the browser as well */
-  if (g_str_equal (content_type, "x-scheme-handler/https"))
+  if (g_str_equal (content_type, "x-scheme-handler/http"))
     {
       if (g_app_info_set_as_default_for_type (info, "x-scheme-handler/https", &error) == FALSE)
         {
