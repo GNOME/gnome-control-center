@@ -7,6 +7,7 @@ SUBDIRS= \
 	display \
 	media \
 	mouse \
+	online-accounts \
 	region \
 	info \
 	sound \

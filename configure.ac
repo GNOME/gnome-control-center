@@ -101,6 +101,7 @@ PKG_CHECK_MODULES(MEDIA_PANEL, $COMMON_MODULES)
 PKG_CHECK_MODULES(MOUSE_PANEL, $COMMON_MODULES xi >= 1.2
                   gnome-settings-daemon >= $GSD_REQUIRED_VERSION x11)
 PKG_CHECK_MODULES(NETWORK_PANEL, $COMMON_MODULES)
+PKG_CHECK_MODULES(ONLINE_ACCOUNTS_PANEL, $COMMON_MODULES goa-1.0 goa-backend-1.0)
 PKG_CHECK_MODULES(POWER_PANEL, $COMMON_MODULES upower-glib >= 0.9.1)
 PKG_CHECK_MODULES(COLOR_PANEL, $COMMON_MODULES colord >= 0.1.8)
 PKG_CHECK_MODULES(PRINTERS_PANEL, $COMMON_MODULES dbus-glib-1
@@ -320,6 +321,16 @@ panels/media/Makefile
 panels/media/gnome-media-panel.desktop.in
 panels/mouse/Makefile
 panels/mouse/gnome-mouse-panel.desktop.in
+panels/online-accounts/Makefile
+panels/online-accounts/gnome-online-accounts-panel.desktop.in
+panels/online-accounts/icons/Makefile
+panels/online-accounts/icons/16x16/Makefile
+panels/online-accounts/icons/22x22/Makefile
+panels/online-accounts/icons/24x24/Makefile
+panels/online-accounts/icons/32x32/Makefile
+panels/online-accounts/icons/48x48/Makefile
+panels/online-accounts/icons/256x256/Makefile
+panels/online-accounts/icons/scalable/Makefile
 panels/sound/Makefile
 panels/sound/data/Makefile
 panels/sound/data/gnome-sound-panel.desktop.in
