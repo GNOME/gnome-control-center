@@ -203,10 +203,12 @@ tz_info_from_location (TzLocation *loc)
 	TzInfo *tzinfo;
 	time_t curtime;
 	struct tm *curzone;
+	gchar *tz_env_value;
 	
 	g_return_val_if_fail (loc != NULL, NULL);
 	g_return_val_if_fail (loc->zone != NULL, NULL);
 	
+	tz_env_value = g_strdup (getenv ("TZ"));
 	setenv ("TZ", loc->zone, 1);
 	
 #if 0
@@ -236,7 +238,12 @@ tz_info_from_location (TzLocation *loc)
 
 	tzinfo->daylight = curzone->tm_isdst;
 
-	setenv ("TZ", "", 1);
+	if (tz_env_value)
+		setenv ("TZ", tz_env_value, 1);
+	else
+		unsetenv ("TZ");
+
+	g_free (tz_env_value);
 	
 	return tzinfo;
 }
