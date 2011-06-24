@@ -3,7 +3,6 @@ NULL =
 icondir = $(datadir)/icons/hicolor/256x256/apps
 icon_DATA = 				\
 	goa-panel.png			\
-	goa-account.png			\
 	$(NULL)
 
 EXTRA_DIST = \
