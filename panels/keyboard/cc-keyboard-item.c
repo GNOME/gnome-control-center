@@ -97,6 +97,36 @@ cc_keyboard_item_get_description (CcKeyboardItem *item)
   return item->description;
 }
 
+/* wrapper around g_settings_set_str[ing|v] */
+static void
+settings_set_binding (GSettings  *settings,
+                      const char *key,
+		      const char *value)
+{
+  GVariant *variant;
+
+  variant = g_settings_get_value (settings, key);
+
+  if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING))
+    g_settings_set_string (settings, key, value);
+  else if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY))
+    {
+      char **str_array;
+
+      str_array = g_variant_dup_strv (variant, NULL);
+
+      /* replace the first binding */
+      g_free (*str_array);
+      *str_array = g_strdup (value);
+
+      g_settings_set_strv (settings, key, (const char * const *)str_array);
+      g_strfreev (str_array);
+    }
+
+  g_variant_unref (variant);
+}
+
+
 static void
 _set_binding (CcKeyboardItem *item,
               const char     *value,
@@ -130,7 +160,7 @@ _set_binding (CcKeyboardItem *item,
     }
   else if (item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS)
     {
-      g_settings_set_string (item->settings, item->key, item->binding);
+      settings_set_binding (item->settings, item->key, item->binding);
     }
 }
 
@@ -400,6 +430,29 @@ keybinding_command_changed (GConfClient    *client,
   g_object_notify (G_OBJECT (item), "command");
 }
 
+/* wrapper around g_settings_get_str[ing|v] */
+static char *
+settings_get_binding (GSettings  *settings,
+                      const char *key)
+{
+  GVariant *variant;
+  char *value = NULL;
+
+  variant = g_settings_get_value (settings, key);
+  if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING))
+    value = g_variant_dup_string (variant, NULL);
+  else if (g_variant_is_of_type (variant, G_VARIANT_TYPE_STRING_ARRAY))
+    {
+      const char **str_array;
+
+      str_array = g_variant_get_strv (variant, NULL);
+      value = g_strdup (str_array[0]);
+    }
+  g_variant_unref (variant);
+
+  return value;
+}
+
 static void
 binding_changed (GSettings *settings,
 		 const char *key,
@@ -407,7 +460,7 @@ binding_changed (GSettings *settings,
 {
   char *value;
 
-  value = g_settings_get_string (item->settings, item->key);
+  value = settings_get_binding (item->settings, item->key);
   item->editable = g_settings_is_writable (item->settings, item->key);
   _set_binding (item, value, FALSE);
   g_free (value);
@@ -544,7 +597,7 @@ cc_keyboard_item_load_from_gsettings (CcKeyboardItem *item,
   item->description = g_strdup (description);
 
   item->settings = g_settings_new (item->schema);
-  item->binding = g_settings_get_string (item->settings, item->key);
+  item->binding = settings_get_binding (item->settings, item->key);
   item->editable = g_settings_is_writable (item->settings, item->key);
   binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
 
