@@ -410,6 +410,7 @@ binding_changed (GSettings *settings,
   value = g_settings_get_string (item->settings, item->key);
   item->editable = g_settings_is_writable (item->settings, item->key);
   _set_binding (item, value, FALSE);
+  g_free (value);
   g_object_notify (G_OBJECT (item), "binding");
 }
 
