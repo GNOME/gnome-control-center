@@ -481,7 +481,7 @@ parse_start_tag (GMarkupParseContext *ctx,
   key.key = g_strdup (gconf_key);
   key.description = g_strdup (description);
   key.gettext_package = g_strdup (keylist->package);
-  key.schema = keylist->schema ? g_strdup (keylist->schema) : g_strdup (schema);
+  key.schema = schema ? g_strdup (schema) : g_strdup (keylist->schema);
   key.comparison = comparison;
   g_array_append_val (keylist->entries, key);
 }
