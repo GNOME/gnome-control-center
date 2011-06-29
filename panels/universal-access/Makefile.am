@@ -13,9 +13,13 @@ ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libuniversal-access.la
 
 libuniversal_access_la_SOURCES =		\
-	universal-access-module.c	\
-	cc-ua-panel.c	\
-	cc-ua-panel.h
+	universal-access-module.c		\
+	cc-ua-panel.c				\
+	cc-ua-panel.h				\
+	gconf-property-editor.h			\
+	gconf-property-editor.c			\
+	cc-marshal.c				\
+	cc-marshal.h
 
 libuniversal_access_la_LIBADD = $(PANEL_LIBS) $(UNIVERSAL_ACCESS_PANEL_LIBS) $(top_builddir)/panels/common/libshortcuts.la
 libuniversal_access_la_LDFLAGS = $(PANEL_LDFLAGS)
