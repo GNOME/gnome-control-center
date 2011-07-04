@@ -226,7 +226,7 @@ brightness_slider_value_changed_cb (GtkRange *range, gpointer user_data)
   /* push this to g-p-m */
   percentage = (guint) gtk_range_get_value (range);
   g_dbus_proxy_call (priv->proxy,
-                     "SetBrightness",
+                     "SetPercentage",
                      g_variant_new ("(u)",
                                     percentage),
                      G_DBUS_CALL_FLAGS_NONE,
@@ -250,7 +250,7 @@ get_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data
     {
       gtk_widget_hide (WID ("screen_brightness_hscale"));
       gtk_widget_hide (WID ("screen_auto_reduce_checkbutton"));
-      g_debug ("Error getting brightness: %s", error->message);
+      g_warning ("Error getting brightness: %s", error->message);
       g_error_free (error);
       return;
     }
@@ -292,7 +292,7 @@ got_power_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_dat
 
   /* get the initial state */
   g_dbus_proxy_call (priv->proxy,
-                     "GetBrightness",
+                     "GetPercentage",
                      NULL,
                      G_DBUS_CALL_FLAGS_NONE,
                      200, /* we don't want to randomly move the bar */
@@ -471,9 +471,9 @@ cc_screen_panel_init (CcScreenPanel *self)
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                             G_DBUS_PROXY_FLAGS_NONE,
                             NULL,
-                            "org.gnome.PowerManager",
-                            "/org/gnome/PowerManager/Backlight",
-                            "org.gnome.PowerManager.Backlight",
+                            "org.gnome.SettingsDaemon",
+                            "/org/gnome/SettingsDaemon/Power",
+                            "org.gnome.SettingsDaemon.Power.Screen",
                             self->priv->cancellable,
                             got_power_proxy_cb,
                             self);
