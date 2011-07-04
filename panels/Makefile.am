@@ -14,7 +14,8 @@ SUBDIRS= \
 	keyboard \
 	universal-access \
 	user-accounts \
-	datetime
+	datetime \
+	locations
 
 if BUILD_PRINTERS
 SUBDIRS += printers
