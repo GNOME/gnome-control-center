@@ -1,4 +1,103 @@
 ==========================
+Version 3.1.3 (2011-07-04)
+==========================
+
+Common:
+- Bump gsettings-desktop-schemas requirement for locale settings (Rodrigo Moya)
+- Add Unity to OnlyShowIn fields (Michael Terry) (#653661)
+
+Library:
+- Typo preventing compilation on some platforms (Antoine Jacoutot) (#651162)
+
+Color:
+- Add new color setting panel (Richard Hughes)
+
+Date & Time:
+- Fix date sensitivity on permission changes (Florian Müllner)
+
+Info:
+- Skip test-hostnames if en_US.UTF-8 is not available (Frédéric Peters)
+- Fix disk space showing free space (Bastien Nocera) (#639376)
+- Fix https scheme handler app setting (Alexandre Rostovtsev) (#653211)
+
+Keyboard:
+- Force "icons" toolbar style (Bastien Nocera) (#651595)
+- Change precedence for schema in KeyList parser (Florian Müllner) (#653685)
+- Fix a small memory leak (Florian Müllner) (#653613)
+- Support string array keybindings (Florian Müllner)
+
+Network:
+- Fix the wpad warning (Matthias Clasen)
+- Avoid a possible crash (Matthias Clasen)
+- Use the correct condition for the option button (Matthias Clasen)
+- Refresh ui in an idle (Matthias Clasen)
+- Implement network sharing (Matthias Clasen)
+- Simplify security string for hotspots (Matthias Clasen)
+- Add warning dialogs (Matthias Clasen)
+- Disable the hotspot button when the device is off (Matthias Clasen)
+- Use the 'pretty hostname' for hotspots (Matthias Clasen)
+- Remove spaces before question marks (Piotr Drąg)
+- Avoid uninitialised variable (Bastien Nocera)
+- Fix toolbar style (Bastien Nocera) (#651595)
+
+Online accounts:
+- Add panel for gnome-online-accounts (Bastien Nocera)
+
+Printers:
+- Allow editing of printer name and location (Marek Kasik) (#649511)
+- Use SNMP CUPS backend to discover printers on given address (Marek Kasik)
+- Move check for availability of CUPS to better place (Marek Kasik)
+- Include cups/ppd.h explicitly (Marek Kasik)
+- Force icons toolbar style (Bastien Nocera) (#651599)
+
+Region:
+- Fix the labels according to the usability gurus (Sergey V. Udaltsov) (#641021)
+- Fix a couple of memory leaks (Rui Matos) (#652360)
+- Fix infinite loop dealing with gsettings 'changed' signal (Rui Matos) (#652361)
+- Remove helper function not needed since GTK+ 3.0 (Rui Matos) (#652374)
+- Trigger the layout chooser dialog response on 'row-activated' signal (RuiMatos) (#652409)
+- Add 'formats' tab (Rodrigo Moya)
+- Force icons only toolbar style (Bastien Nocera)
+- Add 'system' tab (Rodrigo Moya)
+
+Shell:
+- Move the raised class hint to the tool item (Cosimo Cecchi)
+- Don't update the visibility of the lock button (Florian Müllner) (#652299)
+- Make --help-all and --help-gtk work (Bastien Nocera) (#652165)
+- Use proper Unicode ellipses in the search renderer (Philip Withnall)
+- Fix bad rendering of search results (Bastien Nocera) (#652709)
+- Print warning for uninstantiable panels (Bastien Nocera) (#652585)
+
+Sound:
+- Fix direction of speaker test in RTL languages (Bastien Nocera) (#651273)
+
+User accounts:
+- Fix fingerprint assistant (Matthias Clasen) (#649678)
+- Fix deleting users on 32-bit systems (Bastien Nocera) (#652073)
+
+Xrandr:
+- Change "Anti-Clockwise" to "Counterclockwise" (Dan Winship) (#652569)
+
+Translations:
+- ca (Pau Iranzo)
+- ca@valencia (Carles Ferrando)
+- de (Mario Blättermann)
+- el (Kostas Papadimas)
+- eo (Kristjan SCHMIDT)
+- es (Daniel Mustieles, Jorge González)
+- fa (Arash Mousavi)
+- ga (Seán de Búrca)
+- gl (Fran Diéguez)
+- he (Yaron Shahrabani)
+- hu (Gabor Kelemen)
+- id (Andika Triwidada)
+- lt (Aurimas Černius)
+- nb (Kjartan Maraas)
+- ru (Yuri Myasoedov)
+- sl (Andrej Žnidaršič, Matej Urbančič)
+- vi (Nguyễn Thái Ngọc Duy)
+
+==========================
 Version 3.0.2 (2011-05-24)
 ==========================
 
