@@ -19,8 +19,10 @@ liblocation_la_SOURCES =    \
 liblocation_la_LIBADD = $(PANEL_LIBS) $(LOCATION_PANEL_LIBS)
 liblocation_la_LDFLAGS = $(PANEL_LDFLAGS)
 
-uidir = $(pkgdatadir)/ui
-dist_ui_DATA = location.ui
+uidir = $(pkgdatadir)/ui/location
+dist_ui_DATA = \
+	location.ui \
+	data/bg.png
 
 @INTLTOOL_DESKTOP_RULE@
 
