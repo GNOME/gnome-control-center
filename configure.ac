@@ -109,6 +109,7 @@ PKG_CHECK_MODULES(PRINTERS_PANEL, $COMMON_MODULES dbus-glib-1
 PKG_CHECK_MODULES(REGION_PANEL, $COMMON_MODULES libgnomekbd >= 2.91.91
                   libxklavier >= 5.1 libgnomekbdui >= 2.91.91)
 PKG_CHECK_MODULES(SCREEN_PANEL, $COMMON_MODULES)
+PKG_CHECK_MODULES(LOCATION_PANEL, $COMMON_MODULES)
 PKG_CHECK_MODULES(SOUND_PANEL, $COMMON_MODULES libxml-2.0
                   libcanberra-gtk3 >= $CANBERRA_REQUIRED_VERSION
                   libpulse >= $PA_REQUIRED_VERSION
@@ -361,6 +362,8 @@ panels/sound/data/icons/scalable/devices/Makefile
 panels/sound/data/sounds/Makefile
 panels/screen/Makefile
 panels/screen/gnome-screen-panel.desktop.in
+panels/location/Makefile
+panels/location/gnome-location-panel.desktop.in
 panels/info/Makefile
 panels/info/gnome-info-panel.desktop.in
 panels/power/Makefile
