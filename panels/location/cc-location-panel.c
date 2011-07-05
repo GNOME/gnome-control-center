@@ -97,7 +97,7 @@ cc_location_panel_init (CcLocationPanel *self)
 {
   GError     *error;
   GtkWidget  *widget;
-
+  GtkStyleContext *context;
   self->priv = LOCATION_PANEL_PRIVATE (self);
 
   self->priv->builder = gtk_builder_new ();
@@ -113,6 +113,15 @@ cc_location_panel_init (CcLocationPanel *self)
       g_error_free (error);
       return;
     }
+
+  widget = WID ("locations-scrolledwindow");
+  context = gtk_widget_get_style_context (widget);
+  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
+
+  widget = WID ("location-edit-toolbar");
+  context = gtk_widget_get_style_context (widget);
+  gtk_style_context_add_class (context, "inline-toolbar");
+  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
   widget = WID ("location-vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
