@@ -114,7 +114,7 @@ cc_location_panel_init (CcLocationPanel *self)
       return;
     }
 
-  widget = WID ("box1");
+  widget = WID ("location-vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
 }
 

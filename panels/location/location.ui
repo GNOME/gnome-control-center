@@ -38,7 +38,7 @@
     <property name="resizable">False</property>
     <signal name="destroy-event" handler="_on_destroy" swapped="no"/>
     <child>
-      <object class="GtkBox" id="box1">
+      <object class="GtkBox" id="location-vbox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
@@ -171,7 +171,7 @@
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkScrolledWindow" id="scrolledwindow1">
+                  <object class="GtkScrolledWindow" id="locations-scrolledwindow">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="shadow_type">in</property>
@@ -252,12 +252,12 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkToolbar" id="toolbar2">
+                  <object class="GtkToolbar" id="location-edit-toolbar">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="icon_size">1</property>
                     <child>
-                      <object class="GtkToolButton" id="printer-add-button">
+                      <object class="GtkToolButton" id="location-add-button">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_action_appearance">False</property>
@@ -271,7 +271,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkToolButton" id="printer-remove-button">
+                      <object class="GtkToolButton" id="location-remove-button">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_action_appearance">False</property>
