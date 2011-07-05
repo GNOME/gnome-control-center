@@ -221,6 +221,9 @@ brightness_slider_value_changed_cb (GtkRange *range, gpointer user_data)
   CcScreenPanelPrivate *priv = CC_SCREEN_PANEL (user_data)->priv;
 
   /* do not loop */
+  if (priv->setting_brightness)
+    return;
+
   priv->setting_brightness = TRUE;
 
   /* push this to g-p-m */
