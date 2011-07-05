@@ -2145,7 +2145,7 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
                                             "liststore_devices"));
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (connection));
-        title_markup = g_strdup_printf (title);
+        title_markup = g_strdup (title);
 
         net_object_set_title (NET_OBJECT (net_vpn), title);
         gtk_list_store_append (liststore_devices, &iter);
@@ -2907,7 +2907,7 @@ start_hotspot (GtkButton *button, CcNetworkPanel *panel)
                                                  GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                                  GTK_MESSAGE_OTHER,
                                                  GTK_BUTTONS_NONE,
-                                                 warning);
+                                                 "%s", warning);
                 gtk_dialog_add_buttons (GTK_DIALOG (dialog),
                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                         _("Create _Hotspot"), GTK_RESPONSE_OK,
