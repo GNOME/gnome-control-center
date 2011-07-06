@@ -70,4 +70,6 @@ setup_system (GtkBuilder *builder)
 			    display_language);
 	g_free (language);
 	g_free (display_language);
+
+	g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) g_object_unref, locale_settings);
 }
