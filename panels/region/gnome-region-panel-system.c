@@ -65,7 +65,13 @@ setup_system (GtkBuilder *builder)
 			  G_CALLBACK (locale_settings_changed), builder);
 
 	language = g_settings_get_string (locale_settings, "region");
-	display_language = gdm_get_language_from_name (language, NULL);
+	if (language && language[0])
+		display_language = gdm_get_language_from_name (language, NULL);
+	else {
+		language = cc_common_language_get_current_language ();
+		display_language = gdm_get_language_from_name (language, NULL);
+	}
+
 	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "user_format")),
 			    display_language);
 	g_free (language);
