@@ -19,6 +19,19 @@
  *
  */
 
+/* TODO:
+   - use geocode-glib to ask for locations ;
+   - use an indicator for the home location (add a pixbuf column) ;
+   - fallback to libgweather locations.xml when no Internet available ;
+   - draw pretty Cairos shapes to spot locations on the map (otherwise the map is useless) ;
+   - think about how to handle timezone change (are they just an hour offset?) ;
+   - think about how location change affect manual timing ;
+   - who takes care of daylight saving and summer time and all the fun stuff? ;
+   - think about where does my panel fit (seperate panel? replace date & time?) ;
+   - define a nice schema for GSettings ;
+   - what do we put in the locations keys (strict minimum and GS recomputes?)
+*/
+
 #include "cc-location-panel.h"
 
 #include <gdesktop-enums.h>
