@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkListStore" id="liststore1">
+  <object class="GtkListStore" id="locations-store">
     <columns>
       <!-- column-name city-name -->
       <column type="gchararray"/>
       <!-- column-name country -->
       <column type="gchararray"/>
-      <!-- column-name time -->
-      <column type="gchararray"/>
       <!-- column-name timezone -->
+      <column type="gchararray"/>
+      <!-- column-name time -->
       <column type="gchararray"/>
     </columns>
   </object>
@@ -160,7 +160,7 @@
                       <object class="GtkTreeView" id="treeview1">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="model">liststore1</property>
+                        <property name="model">locations-store</property>
                         <property name="headers_visible">False</property>
                         <property name="headers_clickable">False</property>
                         <property name="search_column">0</property>

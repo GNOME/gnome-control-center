@@ -51,8 +51,41 @@ struct _CcLocationPanelPrivate
   GtkBuilder *builder;
   GSettings *settings;
   GDesktopClockFormat clock_format;
+
+  GtkListStore *location_store;
   /* that's where private vars go I guess */
 };
+
+static void
+_on_add_location (GtkToolButton   *bt,
+                  CcLocationPanel *self)
+{
+  CcLocationPanelPrivate *priv = self->priv;
+  GError *e = NULL;
+
+  gtk_builder_add_from_file (self->priv->builder, "add-location.ui", &e);
+  g_assert_no_error (e);
+
+  GtkWidget *dialog = WID ("add-location-dialog");
+  int res = gtk_dialog_run (GTK_DIALOG (dialog));
+
+  GtkTreeIter iter;
+  switch (res) {
+    case GTK_RESPONSE_OK:
+      // FIXME: column ids
+      gtk_list_store_append (priv->location_store, &iter);
+      gtk_list_store_set (priv->location_store, &iter,
+                          0, gtk_entry_get_text (GTK_ENTRY (WID ("city-entry"))),
+                          1, gtk_entry_get_text (GTK_ENTRY (WID ("country-entry"))),
+                          3, gtk_entry_get_text (GTK_ENTRY (WID ("tz-entry"))),
+                          2, "20:00",
+                          -1);
+      break;
+    default:
+      break;
+    }
+  gtk_widget_destroy (dialog);
+}
 
 static void
 _on_24hr_time_switch (GObject         *gobject,
@@ -165,6 +198,10 @@ cc_location_panel_init (CcLocationPanel *self)
       return;
     }
 
+  gtk_builder_connect_signals (self->priv->builder, NULL);
+
+  self->priv->location_store = (GtkListStore *) gtk_builder_get_object (self->priv->builder,
+                                                                        "locations-store");
   widget = WID ("locations-scrolledwindow");
   context = gtk_widget_get_style_context (widget);
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
@@ -180,6 +217,10 @@ cc_location_panel_init (CcLocationPanel *self)
                          G_DESKTOP_CLOCK_FORMAT_24H);
   g_signal_connect (widget, "notify::active",
                     G_CALLBACK (_on_24hr_time_switch), self);
+
+  widget = WID ("location-add-button");
+  g_signal_connect (widget, "clicked",
+                    G_CALLBACK (_on_add_location), self);
 
   widget = WID ("location-vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
