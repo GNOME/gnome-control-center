@@ -21,6 +21,11 @@
 
 #include "cc-location-panel.h"
 
+#include <gdesktop-enums.h>
+
+#define CLOCK_SCHEMA "org.gnome.desktop.interface"
+#define CLOCK_FORMAT_KEY "clock-format"
+
 G_DEFINE_DYNAMIC_TYPE (CcLocationPanel, cc_location_panel, CC_TYPE_PANEL)
 
 #define LOCATION_PANEL_PRIVATE(o) \
@@ -31,8 +36,35 @@ G_DEFINE_DYNAMIC_TYPE (CcLocationPanel, cc_location_panel, CC_TYPE_PANEL)
 struct _CcLocationPanelPrivate
 {
   GtkBuilder *builder;
+  GSettings *settings;
+  GDesktopClockFormat clock_format;
   /* that's where private vars go I guess */
 };
+
+static void
+_on_24hr_time_switch (GObject         *gobject,
+                      GParamSpec      *pspec,
+                      CcLocationPanel *self)
+{
+  CcLocationPanelPrivate *priv = self->priv;
+  GDesktopClockFormat value;
+
+  //g_signal_handlers_block_by_func (priv->settings, clock_settings_changed_cb,
+  //                                 panel);
+
+  if (gtk_switch_get_active (GTK_SWITCH (WID ("24h_time_switch"))))
+    value = G_DESKTOP_CLOCK_FORMAT_24H;
+  else
+    value = G_DESKTOP_CLOCK_FORMAT_12H;
+
+  g_settings_set_enum (priv->settings, CLOCK_FORMAT_KEY, value);
+  priv->clock_format = value;
+
+  /* update_time (panel); */
+
+  /* g_signal_handlers_unblock_by_func (priv->settings, clock_settings_changed_cb, */
+  /*                                    panel); */
+}
 
 static void
 cc_location_panel_get_property (GObject    *object,
@@ -65,6 +97,11 @@ cc_location_panel_dispose (GObject *object)
 {
   CcLocationPanelPrivate *priv = CC_LOCATION_PANEL (object)->priv;
   G_OBJECT_CLASS (cc_location_panel_parent_class)->dispose (object);
+
+  if (priv->settings) {
+    g_object_unref (priv->settings);
+    priv->settings = NULL;
+  }
 }
 
 static void
@@ -100,6 +137,7 @@ cc_location_panel_init (CcLocationPanel *self)
   GtkStyleContext *context;
   self->priv = LOCATION_PANEL_PRIVATE (self);
 
+  self->priv->settings = g_settings_new (CLOCK_SCHEMA);
   self->priv->builder = gtk_builder_new ();
 
   error = NULL;
@@ -123,8 +161,16 @@ cc_location_panel_init (CcLocationPanel *self)
   gtk_style_context_add_class (context, "inline-toolbar");
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
+  widget = WID ("24h_time_switch");
+  gtk_switch_set_active (GTK_SWITCH (widget),
+                         g_settings_get_enum (self->priv->settings, CLOCK_FORMAT_KEY) ==
+                         G_DESKTOP_CLOCK_FORMAT_24H);
+  g_signal_connect (widget, "notify::active",
+                    G_CALLBACK (_on_24hr_time_switch), self);
+
   widget = WID ("location-vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
+
 }
 
 void
