@@ -14,7 +14,6 @@ lib_LTLIBRARIES = libgnome-control-center.la
 libgnome_control_center_include_HEADERS =	\
 	cc-panel.h				\
 	cc-shell.h				\
-	cc-editable-entry.h			\
 	$(NULL)
 
 libgnome_control_center_la_SOURCES =		\
