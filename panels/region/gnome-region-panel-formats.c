@@ -50,10 +50,10 @@ selection_changed_cb (GtkComboBox *combo, gpointer user_data)
 	GtkBuilder *builder = GTK_BUILDER (user_data);
 
 	active_id = gtk_combo_box_get_active_id (combo);
-	if (!active_id)
+	if (!active_id || !active_id[0])
 		return;
 
-	locale = setlocale (LC_ALL, active_id);
+	locale = setlocale (LC_TIME, active_id);
 
 	dt = g_date_time_new_now_local ();
 
@@ -67,18 +67,26 @@ selection_changed_cb (GtkComboBox *combo, gpointer user_data)
 	display_date (GTK_LABEL (gtk_builder_get_object (builder, "full_time_format")), dt, "%r %Z");
 	display_date (GTK_LABEL (gtk_builder_get_object (builder, "short_time_format")), dt, "%X");
 
+	setlocale (LC_TIME, locale);
+
 	/* Display numbers */
+	locale = setlocale (LC_NUMERIC, active_id);
+
 	s = g_strdup_printf ("%'.2f", 123456789.00);
 	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "numbers_format")), s);
 	g_free (s);
 
+	setlocale (LC_NUMERIC, locale);
+
 	/* Display currency and measurement */
+	locale = setlocale (LC_MONETARY, active_id);
+
 	num_info = localeconv ();
 	if (num_info != NULL) {
 		gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "currency_format")), num_info->currency_symbol);
 	}
 
-	setlocale (LC_ALL, locale);
+	setlocale (LC_MONETARY, locale);
 }
 
 void
