@@ -23,7 +23,10 @@
 #  include <config.h>
 #endif
 
+#include <glib/gi18n-lib.h>
 #include <locale.h>
+#include <langinfo.h>
+#include <stdlib.h>
 #include "cc-common-language.h"
 #include "gdm-languages.h"
 #include "gnome-region-panel-formats.h"
@@ -48,6 +51,7 @@ selection_changed_cb (GtkComboBox *combo, gpointer user_data)
 	gchar *s;
 	struct lconv *num_info;
 	GtkBuilder *builder = GTK_BUILDER (user_data);
+	const char *fmt;
 
 	active_id = gtk_combo_box_get_active_id (combo);
 	if (!active_id || !active_id[0])
@@ -78,7 +82,7 @@ selection_changed_cb (GtkComboBox *combo, gpointer user_data)
 
 	setlocale (LC_NUMERIC, locale);
 
-	/* Display currency and measurement */
+	/* Display currency */
 	locale = setlocale (LC_MONETARY, active_id);
 
 	num_info = localeconv ();
@@ -87,6 +91,16 @@ selection_changed_cb (GtkComboBox *combo, gpointer user_data)
 	}
 
 	setlocale (LC_MONETARY, locale);
+
+	/* Display measurement */
+	locale = setlocale (LC_MEASUREMENT, active_id);
+	fmt = nl_langinfo (_NL_MEASUREMENT_MEASUREMENT);
+	if (fmt && *fmt == 2)
+		gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "measurement_format")), _("Imperial"));
+	else
+		gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "measurement_format")), _("Metric"));
+
+	setlocale (LC_MEASUREMENT, locale);
 }
 
 void
