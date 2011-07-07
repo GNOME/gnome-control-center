@@ -147,7 +147,7 @@ gdm_parse_language_name (const char *name,
 
         if (!g_regex_match (re, name, 0, &match_info) ||
             g_match_info_is_partial_match (match_info)) {
-                g_warning ("locale %s isn't valid\n", name);
+                g_warning ("locale '%s' isn't valid\n", name);
                 goto out;
         }
 
@@ -367,6 +367,7 @@ add_locale (const char *language_name,
         gboolean   is_utf8;
 
         g_return_val_if_fail (language_name != NULL, FALSE);
+        g_return_val_if_fail (*language_name != '\0', FALSE);
 
         language_name_get_codeset_details (language_name, NULL, &is_utf8);
 
@@ -1060,6 +1061,9 @@ gdm_get_language_from_name (const char *name,
         char *translated_language;
         char *translated_territory;
         gboolean is_utf8 = TRUE;
+
+        g_return_val_if_fail (name != NULL, NULL);
+        g_return_val_if_fail (*name != '\0', NULL);
 
         translated_territory = NULL;
         translated_language = NULL;
