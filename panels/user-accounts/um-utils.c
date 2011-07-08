@@ -519,7 +519,7 @@ is_valid_username (const gchar *username, gchar **tip)
                         *tip = g_strdup (_("The username cannot start with a '-'"));
                 }
                 else {
-                        *tip = g_strdup (_("The username must consist of:\n"
+                        *tip = g_strdup (_("The username must only consist of:\n"
                                           " \xe2\x9e\xa3 letters from the English alphabet\n"
                                           " \xe2\x9e\xa3 digits\n"
                                           " \xe2\x9e\xa3 any of the characters '.', '-' and '_'"));
