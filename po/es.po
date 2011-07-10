@@ -10,23 +10,23 @@
 # Pablo Gonzalo del Campo <pablodc@bigfoot.com>, 2002,2003.
 # Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004, 2005, 2006.
 # Claudio Saavedra <csaavedra@alumnos.utalca.cl>, 2007.
-# Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008, 2009, 2010, 2011.
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2010, 2011.
+# Jorge González <jorgegonz@svn.gnome.org>, 2007, 2008, 2009, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-07-04 16:25+0000\n"
-"PO-Revision-Date: 2011-07-05 12:07+0200\n"
-"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
-"Language-Team: Español <gnome-es-list@gnome.org>\n"
+"POT-Creation-Date: 2011-07-10 12:16+0000\n"
+"PO-Revision-Date: 2011-07-10 15:38+0200\n"
+"Last-Translator: Jorge González <jorgegonz@svn.gnome.org>\n"
+"Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bits\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:1
 msgid "Background"
@@ -131,7 +131,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Sin fondo de escritorio"
 
-#: ../panels/common/gdm-languages.c:709
+#: ../panels/common/gdm-languages.c:710
 msgid "Unspecified"
 msgstr "Sin especificar"
 
@@ -1446,17 +1446,40 @@ msgstr "_Opciones"
 msgid "_Show"
 msgstr "Mo_strar"
 
+#: ../panels/region/gnome-region-panel-formats.c:99
+#| msgid "April"
+msgid "Imperial"
+msgstr "Imperial"
+
+#: ../panels/region/gnome-region-panel-formats.c:101
+msgid "Metric"
+msgstr "Métrico"
+
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
+msgid "Choose a Layout"
+msgstr "Elija una distribución"
+
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
+msgid "Preview"
+msgstr "Vista previa"
+
+#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
+msgid "Select an input source to add"
+msgstr "Seleccionar una fuente de entrada que añadir"
+
+#: ../panels/region/gnome-region-panel-options-dialog.ui.h:1
+msgid "Keyboard Layout Options"
+msgstr "Opciones de distribución del teclado"
+
 #: ../panels/region/gnome-region-panel.ui.h:1
 msgid "<b>Example</b>"
 msgstr "<b>Ejemplo</b>"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
-#| msgid "System Settings"
 msgid "<b>System settings</b>"
 msgstr "<b>Configuración del sistema</b>"
 
 #: ../panels/region/gnome-region-panel.ui.h:3
-#| msgid "<b>Sound Events</b>"
 msgid "<b>Your settings</b>"
 msgstr "<b>Su configuración</b>"
 
@@ -1465,7 +1488,6 @@ msgid "Allow different layouts for individual windows"
 msgstr "Permitir diferentes distribuciones para cada ventana"
 
 #: ../panels/region/gnome-region-panel.ui.h:5
-#| msgid "_Mouse Settings"
 msgid "Copy Settings..."
 msgstr "Copiar configuración…"
 
@@ -1478,12 +1500,10 @@ msgid "Dates"
 msgstr "_Fechas"
 
 #: ../panels/region/gnome-region-panel.ui.h:8
-#| msgid "Select a display language"
 msgid "Display language:"
 msgstr "Mostrar idioma:"
 
 #: ../panels/region/gnome-region-panel.ui.h:9
-#| msgid "Formats"
 msgid "Format:"
 msgstr "Formato:"
 
@@ -1492,7 +1512,6 @@ msgid "Formats"
 msgstr "Formatos"
 
 #: ../panels/region/gnome-region-panel.ui.h:11
-#| msgid "_Input volume: "
 msgid "Input source:"
 msgstr "Fuente de entrada:"
 
@@ -1576,26 +1595,6 @@ msgstr "Ver y editar las opciones de distribución de teclado"
 #: ../panels/network/network.ui.h:30
 msgid "_Options..."
 msgstr "_Opciones…"
-
-#: ../panels/region/gnome-region-panel.ui.h:31
-msgid "label"
-msgstr "etiqueta"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
-msgid "Choose a Layout"
-msgstr "Elija una distribución"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
-msgid "Preview"
-msgstr "Vista previa"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
-msgid "Select an input source to add"
-msgstr "Seleccionar una fuente de entrada que añadir"
-
-#: ../panels/region/gnome-region-panel-options-dialog.ui.h:1
-msgid "Keyboard Layout Options"
-msgstr "Opciones de distribución del teclado"
 
 #: ../panels/region/gnome-region-panel-xkblt.c:199
 msgid "Layout"
@@ -3601,8 +3600,8 @@ msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
-"Es posible mantener la carpeta personal, el «spool» del correo y los archivos "
-"temporales al eliminar una cuenta de usuario."
+"Es posible mantener la carpeta personal, el «spool» del correo y los "
+"archivos temporales al eliminar una cuenta de usuario."
 
 #: ../panels/user-accounts/um-user-panel.c:443
 msgid "_Delete Files"
@@ -3963,6 +3962,9 @@ msgstr "Centro de control"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_Todas las configuraciones"
+
+#~ msgid "label"
+#~ msgstr "etiqueta"
 
 #~ msgid "Add printer"
 #~ msgstr "Añadir impresora"
@@ -6773,4 +6775,5 @@ msgstr "_Todas las configuraciones"
 #~ msgstr "No hay establecido ningún grupo para el URI «%s»"
 
 #~ msgid "No application with name '%s' registered a bookmark for '%s'"
-#~ msgstr "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
+#~ msgstr ""
+#~ "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
