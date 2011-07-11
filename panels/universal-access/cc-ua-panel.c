@@ -300,7 +300,7 @@ gconf_on_off_peditor_new (CcUaPanelPrivate  *priv,
 /* seeing section */
 #define GTK_THEME_KEY "gtk-theme"
 #define ICON_THEME_KEY "icon-theme"
-#define CONTRAST_MODEL_THEME_COLUMN 3
+#define CONTRAST_MODEL_THEME_COLUMN 2
 #define DPI_MODEL_FACTOR_COLUMN 2
 
 static void text_scaling_factor_combo_box_changed (GtkComboBox *box, CcUaPanel *panel);
