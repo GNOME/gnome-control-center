@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-02 11:04+0200\n"
-"PO-Revision-Date: 2011-07-02 11:15+0200\n"
+"POT-Creation-Date: 2011-07-12 13:25+0200\n"
+"PO-Revision-Date: 2011-07-12 14:54+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -122,7 +122,7 @@ msgstr "%d x %d"
 msgid "No Desktop Background"
 msgstr "Ingen skrivebordsbakgrunn"
 
-#: ../panels/common/gdm-languages.c:709
+#: ../panels/common/gdm-languages.c:710
 msgid "Unspecified"
 msgstr "Uspesifisert"
 
@@ -637,6 +637,7 @@ msgid "Log out"
 msgstr "Logg ut"
 
 #: ../panels/keyboard/01-system.xml.in.h:3
+#: ../panels/region/gnome-region-panel.ui.h:23
 msgid "System"
 msgstr "System"
 
@@ -1070,7 +1071,8 @@ msgstr "Fje_rn"
 #. Translators: those are keywords for the online-accounts control-center panel
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:2
 msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
-msgstr "Google;Facebook;Twitter;Yahoo;Web;Nett;Lynmeldinger;Kalender;E-post;Kontakt;"
+msgstr ""
+"Google;Facebook;Twitter;Yahoo;Web;Nett;Lynmeldinger;Kalender;E-post;Kontakt;"
 
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:3
 msgid "Manage online accounts"
@@ -1432,96 +1434,13 @@ msgstr "_Alternativer"
 msgid "_Show"
 msgstr "Vi_s"
 
-#: ../panels/region/gnome-region-panel.ui.h:1
-msgid "<b>Example</b>"
-msgstr "<b>Eksempel</b>"
+#: ../panels/region/gnome-region-panel-formats.c:99
+msgid "Imperial"
+msgstr "Imperisk"
 
-#: ../panels/region/gnome-region-panel.ui.h:2
-msgid "Allow different layouts for individual windows"
-msgstr "Tillat forskjellige utforminger for hvert vindu"
-
-#: ../panels/region/gnome-region-panel.ui.h:3
-msgid "Currency"
-msgstr "Valuta"
-
-#: ../panels/region/gnome-region-panel.ui.h:4
-msgid "Dates"
-msgstr "Datoer"
-
-#: ../panels/region/gnome-region-panel.ui.h:5
-msgid "Formats"
-msgstr "Formater"
-
-#: ../panels/region/gnome-region-panel.ui.h:6
-msgid "Install languages..."
-msgstr "Installer språk …"
-
-#: ../panels/region/gnome-region-panel.ui.h:7
-msgid "Language"
-msgstr "Språk"
-
-#: ../panels/region/gnome-region-panel.ui.h:8
-msgid "Layouts"
-msgstr "Utforminger"
-
-#: ../panels/region/gnome-region-panel.ui.h:9
-msgid "Measurement"
-msgstr "Måleenheter"
-
-#: ../panels/region/gnome-region-panel.ui.h:10
-msgid "New windows use the default layout"
-msgstr "Nye vinduer bruker forvalgt utforming"
-
-#: ../panels/region/gnome-region-panel.ui.h:11
-msgid "New windows use the previous window's layout"
-msgstr "Nye vinduer bruker utforming fra forrige vindu"
-
-#: ../panels/region/gnome-region-panel.ui.h:12
-msgid "Numbers"
-msgstr "Tall"
-
-#: ../panels/region/gnome-region-panel.ui.h:13
-#: ../panels/region/gnome-region-panel.desktop.in.in.h:4
-msgid "Region and Language"
-msgstr "Region og språk"
-
-#: ../panels/region/gnome-region-panel.ui.h:14
-msgid "Region:"
-msgstr "Region:"
-
-#: ../panels/region/gnome-region-panel.ui.h:15
-msgid ""
-"Replace the current keyboard layout settings with the\n"
-"default settings"
-msgstr ""
-"Erstatt aktive innstillinger for tastaturutforming med\n"
-"forvalgte innstillinger"
-
-#: ../panels/region/gnome-region-panel.ui.h:17
-msgid "Reset to De_faults"
-msgstr "Sett til _forvalg"
-
-#: ../panels/region/gnome-region-panel.ui.h:18
-msgid "Select a display language (change will be applied next time you log in)"
-msgstr ""
-"Velg et visningsspråk. Endringen vil tas i bruk neste gang du logger inn"
-
-#: ../panels/region/gnome-region-panel.ui.h:19
-msgid "Times"
-msgstr "Tid"
-
-#: ../panels/region/gnome-region-panel.ui.h:20
-msgid "Use the same layout for all windows"
-msgstr "Bruk samme utforming for alle vinduer"
-
-#: ../panels/region/gnome-region-panel.ui.h:21
-msgid "View and edit keyboard layout options"
-msgstr "Vis og rediger alternativer for tastaturutforming"
-
-#: ../panels/region/gnome-region-panel.ui.h:22
-#: ../panels/network/network.ui.h:30
-msgid "_Options..."
-msgstr "_Alternativer …"
+#: ../panels/region/gnome-region-panel-formats.c:101
+msgid "Metric"
+msgstr "Metrisk"
 
 #: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
 msgid "Choose a Layout"
@@ -1538,6 +1457,127 @@ msgstr "Velg en inndatakilde som skal legges til"
 #: ../panels/region/gnome-region-panel-options-dialog.ui.h:1
 msgid "Keyboard Layout Options"
 msgstr "Alternativer for tastaturutforming"
+
+#: ../panels/region/gnome-region-panel.ui.h:1
+msgid "Allow different layouts for individual windows"
+msgstr "Tillat forskjellige utforminger for hvert vindu"
+
+#: ../panels/region/gnome-region-panel.ui.h:2
+msgid "Copy Settings..."
+msgstr "Kopier innstillinger …"
+
+#: ../panels/region/gnome-region-panel.ui.h:3
+msgid "Currency"
+msgstr "Valuta"
+
+#: ../panels/region/gnome-region-panel.ui.h:4
+msgid "Dates"
+msgstr "Datoer"
+
+#: ../panels/region/gnome-region-panel.ui.h:5
+msgid "Display language:"
+msgstr "Vis språk:"
+
+#: ../panels/region/gnome-region-panel.ui.h:6
+msgid "Example"
+msgstr "Eksempel"
+
+#: ../panels/region/gnome-region-panel.ui.h:7
+msgid "Format:"
+msgstr "Format:"
+
+#: ../panels/region/gnome-region-panel.ui.h:8
+msgid "Formats"
+msgstr "Formater"
+
+#: ../panels/region/gnome-region-panel.ui.h:9
+msgid "Input source:"
+msgstr "Inngangskilde:"
+
+#: ../panels/region/gnome-region-panel.ui.h:10
+msgid "Install languages..."
+msgstr "Installer språk …"
+
+#: ../panels/region/gnome-region-panel.ui.h:11
+msgid "Language"
+msgstr "Språk"
+
+#: ../panels/region/gnome-region-panel.ui.h:12
+msgid "Layouts"
+msgstr "Utforminger"
+
+#: ../panels/region/gnome-region-panel.ui.h:13
+msgid "Measurement"
+msgstr "Måleenheter"
+
+#: ../panels/region/gnome-region-panel.ui.h:14
+msgid "New windows use the default layout"
+msgstr "Nye vinduer bruker forvalgt utforming"
+
+#: ../panels/region/gnome-region-panel.ui.h:15
+msgid "New windows use the previous window's layout"
+msgstr "Nye vinduer bruker utforming fra forrige vindu"
+
+#: ../panels/region/gnome-region-panel.ui.h:16
+msgid "Numbers"
+msgstr "Tall"
+
+#: ../panels/region/gnome-region-panel.ui.h:17
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:4
+msgid "Region and Language"
+msgstr "Region og språk"
+
+#: ../panels/region/gnome-region-panel.ui.h:18
+msgid "Region:"
+msgstr "Region:"
+
+#: ../panels/region/gnome-region-panel.ui.h:19
+msgid ""
+"Replace the current keyboard layout settings with the\n"
+"default settings"
+msgstr ""
+"Erstatt aktive innstillinger for tastaturutforming med\n"
+"forvalgte innstillinger"
+
+#: ../panels/region/gnome-region-panel.ui.h:21
+msgid "Reset to De_faults"
+msgstr "Sett til _forvalg"
+
+#: ../panels/region/gnome-region-panel.ui.h:22
+msgid "Select a display language (change will be applied next time you log in)"
+msgstr ""
+"Velg et visningsspråk. Endringen vil tas i bruk neste gang du logger inn"
+
+#: ../panels/region/gnome-region-panel.ui.h:24
+msgid "System settings"
+msgstr "Systeminnstillinger"
+
+#: ../panels/region/gnome-region-panel.ui.h:25
+msgid ""
+"The login screen, system accounts and new user accounts use the system "
+"Region & Language settings. You may change the system settings to match yours"
+msgstr "Innloggingsskjermen, systemkontoene og nye brukerkontoer bruker systemets innstillinger for område og språk. Du kan sette systeminnstillingene slik du ønsker"
+
+#: ../panels/region/gnome-region-panel.ui.h:26
+msgid "Times"
+msgstr "Tid"
+
+#: ../panels/region/gnome-region-panel.ui.h:27
+msgid "Use the same layout for all windows"
+msgstr "Bruk samme utforming for alle vinduer"
+
+#: ../panels/region/gnome-region-panel.ui.h:28
+msgid "View and edit keyboard layout options"
+msgstr "Vis og rediger alternativer for tastaturutforming"
+
+#: ../panels/region/gnome-region-panel.ui.h:29
+msgid "Your settings"
+msgstr "Dine innstillinger"
+
+#: ../panels/region/gnome-region-panel.ui.h:30
+#: ../panels/network/network.ui.h:30
+msgid "_Options..."
+msgstr "_Alternativer …"
 
 #: ../panels/region/gnome-region-panel-xkblt.c:199
 msgid "Layout"
@@ -2254,7 +2294,9 @@ msgstr "Lag en fargeprofil for valgt enhet"
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
-msgstr "Måleinstrument ble ikke funnet. Vennligst sjekk at det er slått på og riktig tilkoblet."
+msgstr ""
+"Måleinstrument ble ikke funnet. Vennligst sjekk at det er slått på og riktig "
+"tilkoblet."
 
 #. TRANSLATORS: this is when the button is insensitive
 #: ../panels/color/cc-color-panel.c:809
@@ -2328,15 +2370,16 @@ msgid "This device is not color managed."
 msgstr "Denne enheten er ikke fargestyrt."
 
 #: ../panels/color/cc-color-panel.c:1448
-#, fuzzy
 msgid "This device is using manufacturing calibrated data."
-msgstr "Denne enheten bruker "
+msgstr "Denne enheten bruker data kalibrert av produsenten."
 
 #: ../panels/color/cc-color-panel.c:1459
 msgid ""
 "This device does not have a profile suitable for whole-screen color "
 "correction."
-msgstr "Denne enheten har ikke en profil som passer for fargekorrigering av hele skjermen."
+msgstr ""
+"Denne enheten har ikke en profil som passer for fargekorrigering av hele "
+"skjermen."
 
 #: ../panels/color/cc-color-panel.c:1486
 msgid "This device has an old profile that may no longer be accurate."
@@ -2413,7 +2456,9 @@ msgstr "Hver enhet må ha en oppdatert fargeprofil for å bli fargestyrt."
 #: ../panels/color/color.ui.h:12
 msgid ""
 "Image files can be dragged on this window to auto-complete the above fields."
-msgstr "Bildefiler kan dras til dette vinduet for å fullføre ovenstående felt automatisk."
+msgstr ""
+"Bildefiler kan dras til dette vinduet for å fullføre ovenstående felt "
+"automatisk."
 
 #: ../panels/color/color.ui.h:13
 msgid "Manufacturer:"
@@ -2797,6 +2842,107 @@ msgstr "Sonar"
 msgid "No shortcut set"
 msgstr "Ingen snarvei satt"
 
+#: ../panels/universal-access/gconf-property-editor.c:134
+msgid "Key"
+msgstr "Nøkkel"
+
+#: ../panels/universal-access/gconf-property-editor.c:135
+msgid "GConf key to which this property editor is attached"
+msgstr "GConf-nøkkel denne egenskapsredigereren er koblet til"
+
+#: ../panels/universal-access/gconf-property-editor.c:141
+msgid "Callback"
+msgstr "Tilbakekall"
+
+#: ../panels/universal-access/gconf-property-editor.c:142
+msgid "Issue this callback when the value associated with key gets changed"
+msgstr "Start dette tilbakekallet når verdien assosiert med nøkkelen blir endret"
+
+#: ../panels/universal-access/gconf-property-editor.c:147
+msgid "Change set"
+msgstr "Endringssett"
+
+#: ../panels/universal-access/gconf-property-editor.c:148
+msgid ""
+"GConf change set containing data to be forwarded to the gconf client on apply"
+msgstr "GConf-endringssett som inneholder data som skal videresendes til klienten når det tas i bruk"
+
+#: ../panels/universal-access/gconf-property-editor.c:153
+msgid "Conversion to widget callback"
+msgstr "Konvertering til tilbakekall for komponent"
+
+#: ../panels/universal-access/gconf-property-editor.c:154
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
+msgstr "Tilbakekall som skal startes når data skal konverteres fra GConf til komponenten"
+
+#: ../panels/universal-access/gconf-property-editor.c:159
+msgid "Conversion from widget callback"
+msgstr "Konvertering fra tilbakekall for komponent"
+
+#: ../panels/universal-access/gconf-property-editor.c:160
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
+msgstr "Tilbakekall som skal kjøres når data skal konverteres til GConf fra komponenten"
+
+#: ../panels/universal-access/gconf-property-editor.c:165
+msgid "UI Control"
+msgstr "Brukergrensesnittkontroll"
+
+#: ../panels/universal-access/gconf-property-editor.c:166
+msgid "Object that controls the property (normally a widget)"
+msgstr "Objekt som kontrollerer egenskapen (normalt sett en komponent)"
+
+#: ../panels/universal-access/gconf-property-editor.c:181
+msgid "Property editor object data"
+msgstr "Objektdata for egenskapsredigerer"
+
+#: ../panels/universal-access/gconf-property-editor.c:182
+msgid "Custom data required by the specific property editor"
+msgstr "Egendefinerte data som kreves av en spesifikk egenskapsredigerer"
+
+#: ../panels/universal-access/gconf-property-editor.c:188
+msgid "Property editor data freeing callback"
+msgstr ""
+
+#: ../panels/universal-access/gconf-property-editor.c:189
+msgid "Callback to be issued when property editor object data is to be freed"
+msgstr ""
+
+#: ../panels/universal-access/gconf-property-editor.c:1474
+#, c-format
+msgid ""
+"Couldn't find the file '%s'.\n"
+"\n"
+"Please make sure it exists and try again, or choose a different background "
+"picture."
+msgstr ""
+"Fant ikke filen «%s».\n"
+"\n"
+"Sjekk at denne eksisterer og prøv igjen, eller velg et annet bakgrunnsbilde."
+
+#: ../panels/universal-access/gconf-property-editor.c:1482
+#, c-format
+msgid ""
+"I don't know how to open the file '%s'.\n"
+"Perhaps it's a kind of picture that is not yet supported.\n"
+"\n"
+"Please select a different picture instead."
+msgstr ""
+"Kan ikke åpne filen «%s».\n"
+"Kanskje det er en type bilde som ikke er støttet ennå.\n"
+"\n"
+"Velg et annet bilde i stedet."
+
+#: ../panels/universal-access/gconf-property-editor.c:1604
+msgid "Please select an image."
+msgstr "Velg et bilde."
+
+#: ../panels/universal-access/gconf-property-editor.c:1609
+#: ../panels/user-accounts/data/language-chooser.ui.h:2
+msgid "_Select"
+msgstr "_Velg"
+
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Keyboard;Mouse;a11y;Accessibility;"
@@ -3068,52 +3214,32 @@ msgstr "avvist"
 
 #: ../panels/universal-access/uap.ui.h:81
 msgctxt "universal access, contrast"
-msgid "<span size=\"x-large\">High/Inverse</span>"
-msgstr "<span size=\"x-large\">Høy/omvendt</span>"
-
-#: ../panels/universal-access/uap.ui.h:82
-msgctxt "universal access, contrast"
-msgid "<span size=\"x-large\">High</span>"
-msgstr "<span size=\"x-large\">Høy</span>"
-
-#: ../panels/universal-access/uap.ui.h:83
-msgctxt "universal access, contrast"
-msgid "<span size=\"x-large\">Low</span>"
-msgstr "<span size=\"x-large\">Lav</span>"
-
-#: ../panels/universal-access/uap.ui.h:84
-msgctxt "universal access, contrast"
-msgid "<span size=\"x-large\">Normal</span>"
-msgstr "<span size=\"x-large\">Normal</span>"
-
-#: ../panels/universal-access/uap.ui.h:85
-msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Høy"
 
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:82
 msgctxt "universal access, contrast"
 msgid "High/Inverse"
 msgstr "Høy/omvendt"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:83
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Lav"
 
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:84
 msgctxt "universal access, contrast"
 msgid "Normal"
 msgstr "Normal"
 
 #. Translators: this refers to theme contrast and font size
-#: ../panels/universal-access/uap.ui.h:90
+#: ../panels/universal-access/uap.ui.h:86
 msgctxt "universal access, seeing"
 msgid "Display"
 msgstr "Vis"
 
 #. Translators: this refers to screen magnifier
-#: ../panels/universal-access/uap.ui.h:92
+#: ../panels/universal-access/uap.ui.h:88
 msgctxt "universal access, seeing"
 msgid "Zoom"
 msgstr "Zoom"
@@ -3512,15 +3638,15 @@ msgstr "Brukernavn kan ikke starte med «-»"
 
 #: ../panels/user-accounts/um-utils.c:522
 msgid ""
-"The username must consist of:\n"
+"The username must only consist of:\n"
 " ➣ letters from the English alphabet\n"
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
 msgstr ""
-"Brukernavn må bestå av:\n"
-" - bokstaver fra det engelske alfabetet\n"
-" - tall\n"
-" - tegnene «.», «-» og «_»"
+"Brukernavn må kun bestå av:\n"
+" ➣ bokstaver fra det engelske alfabetet\n"
+" ➣ tall\n"
+" ➣ tegnene «.», «-» og «_»"
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
 msgid "Add or remove users"
@@ -3555,66 +3681,59 @@ msgstr "_Fullt navn"
 msgid "_Username"
 msgstr "Br_ukernavn"
 
-#: ../panels/user-accounts/data/language-chooser.ui.h:2
-msgid "_Select"
-msgstr "_Velg"
-
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
-msgid ""
-"<small>This hint may be displayed at the login screen.  It will be visible "
-"to all users of this system.  Do <b>not</b> include the password here.</"
-"small>"
-msgstr ""
-"<small>Dette hintet kan vises på innloggingsskjermen. Det vil være synlig "
-"for alle brukere på dette systemet. <b>Ikke</b> ta med passord her.</small>"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:2
 msgid "C_onfirm password"
 msgstr "B_ekreft passord"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:3
+#: ../panels/user-accounts/data/password-dialog.ui.h:2
 msgid "Ch_ange"
 msgstr "_Bytt"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:4
+#: ../panels/user-accounts/data/password-dialog.ui.h:3
 msgid "Changing password for"
 msgstr "Bytter passord for"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:5
+#: ../panels/user-accounts/data/password-dialog.ui.h:4
 msgid "Choose a generated password"
 msgstr "Velg et generert passord"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:6
+#: ../panels/user-accounts/data/password-dialog.ui.h:5
 msgid "Choose password at next login"
 msgstr "Velg passord ved neste pålogging"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:7
+#: ../panels/user-accounts/data/password-dialog.ui.h:6
 msgid "Current _password"
 msgstr "Gjeldende _passord"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:8
+#: ../panels/user-accounts/data/password-dialog.ui.h:7
 msgid "Disable this account"
 msgstr "Daktiver denne kontoen"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:9
+#: ../panels/user-accounts/data/password-dialog.ui.h:8
 msgid "Enable this account"
 msgstr "Aktiver denne kontoen"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:10
+#: ../panels/user-accounts/data/password-dialog.ui.h:9
 msgid "Fair"
 msgstr "Bra"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:11
+#: ../panels/user-accounts/data/password-dialog.ui.h:10
 msgid "How to choose a strong password"
 msgstr "Hvordan velge et sterkt passord"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:12
+#: ../panels/user-accounts/data/password-dialog.ui.h:11
 msgid "Log in without a password"
 msgstr "Logg inn uten passord"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:13
+#: ../panels/user-accounts/data/password-dialog.ui.h:12
 msgid "Set a password now"
 msgstr "Sett et passord nå"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:13
+msgid ""
+"This hint may be displayed at the login screen.  It will be visible to all "
+"users of this system.  Do <b>not</b> include the password here."
+msgstr "Dette hintet kan vises på innloggingsskjermen. Det vil være synlig for alle brukere på dette systemet. <b>Ikke</b> ta med passord her."
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:14
 msgid "_Action"
