@@ -63,7 +63,7 @@ _on_add_location (GtkToolButton   *bt,
   CcLocationPanelPrivate *priv = self->priv;
   GError *e = NULL;
 
-  gtk_builder_add_from_file (self->priv->builder, "add-location.ui", &e);
+  gtk_builder_add_from_file (self->priv->builder, GNOMECC_UI_DIR "/add-location.ui", &e);
   g_assert_no_error (e);
 
   GtkWidget *dialog = WID ("add-location-dialog");

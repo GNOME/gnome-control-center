@@ -21,6 +21,7 @@ liblocation_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui/location
 dist_ui_DATA = \
+	add-location.ui \
 	location.ui \
 	data/bg.png
 
