@@ -250,6 +250,12 @@ source_update_edit_box (CcBackgroundPanelPrivate *priv,
   else
     gtk_widget_show (WID ("style-pcolor"));
 
+  if (gtk_widget_get_visible (WID ("style-pcolor")) &&
+      gtk_widget_get_visible (WID ("style-scolor")))
+    gtk_widget_show (WID ("swap-color-button"));
+  else
+    gtk_widget_hide (WID ("swap-color-button"));
+
   if (flags & CC_BACKGROUND_ITEM_HAS_PLACEMENT ||
       cc_background_item_get_uri (priv->current_background) == NULL)
     gtk_widget_hide (WID ("style-combobox"));
@@ -814,6 +820,39 @@ color_changed_cb (GtkColorButton    *button,
 }
 
 static void
+swap_colors_clicked (GtkButton         *button,
+                     CcBackgroundPanel *panel)
+{
+  CcBackgroundPanelPrivate *priv = panel->priv;
+  GdkColor pcolor, scolor;
+  char *new_pcolor, *new_scolor;
+
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (WID ("style-pcolor")), &pcolor);
+  gtk_color_button_get_color (GTK_COLOR_BUTTON (WID ("style-scolor")), &scolor);
+
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (WID ("style-scolor")), &pcolor);
+  gtk_color_button_set_color (GTK_COLOR_BUTTON (WID ("style-pcolor")), &scolor);
+
+  new_pcolor = gdk_color_to_string (&scolor);
+  new_scolor = gdk_color_to_string (&pcolor);
+
+  g_object_set (priv->current_background,
+                "primary-color", new_pcolor,
+                "secondary-color", new_scolor,
+                NULL);
+
+  g_settings_set_string (priv->settings, WP_PCOLOR_KEY, new_pcolor);
+  g_settings_set_string (priv->settings, WP_SCOLOR_KEY, new_scolor);
+
+  g_free (new_pcolor);
+  g_free (new_scolor);
+
+  g_settings_apply (priv->settings);
+
+  update_preview (priv, NULL);
+}
+
+static void
 row_inserted (GtkTreeModel      *tree_model,
 	      GtkTreePath       *path,
 	      GtkTreeIter       *iter,
@@ -1216,6 +1255,8 @@ cc_background_panel_init (CcBackgroundPanel *self)
                     G_CALLBACK (color_changed_cb), self);
   g_signal_connect (WID ("style-scolor"), "color-set",
                     G_CALLBACK (color_changed_cb), self);
+  g_signal_connect (WID ("swap-color-button"), "clicked",
+                    G_CALLBACK (swap_colors_clicked), self);
 
   priv->copy_cancellable = g_cancellable_new ();
 
