@@ -199,6 +199,7 @@ cc_shell_item_view_init (CcShellItemView *self)
 {
   self->priv = SHELL_ITEM_VIEW_PRIVATE (self);
 
+  g_object_set (self, "margin", 0, NULL);
   g_signal_connect (self, "item-activated",
                     G_CALLBACK (iconview_item_activated_cb), self);
   g_signal_connect (self, "button-press-event",

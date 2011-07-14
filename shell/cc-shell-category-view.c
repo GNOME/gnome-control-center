@@ -141,7 +141,6 @@ cc_shell_category_view_constructed (GObject *object)
 {
   CcShellCategoryViewPrivate *priv = CC_SHELL_CATEGORY_VIEW (object)->priv;
   GtkWidget *iconview, *vbox;
-  GtkWidget *alignment;
 
   iconview = cc_shell_item_view_new ();
   gtk_icon_view_set_model (GTK_ICON_VIEW (iconview), priv->model);
@@ -174,11 +173,8 @@ cc_shell_category_view_constructed (GObject *object)
   gtk_box_pack_start (GTK_BOX (vbox), iconview, FALSE, TRUE, 0);
 
   /* add the main vbox to the view */
-  alignment = gtk_alignment_new (0, 0, 1, 1);
-  gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 0, 12, 0);
-  gtk_container_add (GTK_CONTAINER (alignment), vbox);
-  gtk_container_add (GTK_CONTAINER (object), alignment);
-  gtk_widget_show_all (alignment);
+  gtk_container_add (GTK_CONTAINER (object), vbox);
+  gtk_widget_show_all (vbox);
 
   priv->iconview = iconview;
 }
