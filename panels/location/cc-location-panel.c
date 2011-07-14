@@ -29,7 +29,6 @@
    - who takes care of daylight saving and summer time and all the fun stuff? ;
    - think about where does my panel fit (seperate panel? replace date & time?) ;
    - define a nice schema for GSettings ;
-   - what do we put in the locations keys (strict minimum and GS recomputes?)
 */
 
 #include "cc-location-panel.h"
