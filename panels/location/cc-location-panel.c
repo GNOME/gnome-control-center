@@ -32,7 +32,7 @@
 */
 
 #include "cc-location-panel.h"
-
+#include "location-utils.h"
 #include <gdesktop-enums.h>
 
 #define CLOCK_SCHEMA "org.gnome.desktop.interface"
@@ -48,12 +48,66 @@ G_DEFINE_DYNAMIC_TYPE (CcLocationPanel, cc_location_panel, CC_TYPE_PANEL)
 struct _CcLocationPanelPrivate
 {
   GtkBuilder *builder;
-  GSettings *settings;
+  GSettings  *settings;
+  GSettings  *location_settings;
+  GVariant   *locations;
   GDesktopClockFormat clock_format;
 
   GtkListStore *location_store;
   /* that's where private vars go I guess */
 };
+
+static void
+populate_locations (GtkListStore *store,
+                    GVariant     *locations)
+{
+  GtkTreeIter iter;
+  GVariantIter *viter = g_variant_iter_new (locations);
+  GVariant *entry;
+  GVariant *value;
+  while (g_variant_iter_loop (viter, "v", &entry)) {
+    value = g_variant_lookup_value (entry,
+                                    "city",
+                                    G_VARIANT_TYPE_STRING);
+    gtk_list_store_append (store, &iter);
+    gtk_list_store_set (store, &iter, 0, g_variant_get_string (value, NULL));
+
+    value = g_variant_lookup_value (entry,
+                                    "country",
+                                    G_VARIANT_TYPE_STRING);
+    gtk_list_store_append (store, &iter);
+    gtk_list_store_set (store, &iter, 1, g_variant_get_string (value, NULL));
+
+    value = g_variant_lookup_value (entry,
+                                    "timezone",
+                                    G_VARIANT_TYPE_INT16);
+    int timezone = g_variant_get_int16 (value);
+    char *tz;
+    if (timezone > 0)
+      tz = g_strdup_printf ("GMT +%i", timezone);
+    else
+      tz = g_strdup_printf ("GMT -%i", timezone);
+    gtk_list_store_append (store, &iter);
+    gtk_list_store_set (store, &iter, 2, tz);
+    g_free (tz);
+
+    gtk_list_store_append (store, &iter);
+    gtk_list_store_set (store, &iter, 3, "20:00");
+
+    /*    value = g_variant_lookup_value (entry,
+          "longitude",
+          G_VARIANT_TYPE_DOUBLE);
+          gtk_list_store_append (store, &iter);
+          gtk_list_store_set (store, &iter, 1, g_value_get_double (value));
+
+          value = g_variant_lookup_value (entry,
+          "latitude",
+          G_VARIANT_TYPE_DOUBLE);
+          gtk_list_store_append (store, &iter);
+          gtk_list_store_set (store, &iter, 1, g_value_get_double (value));
+    */
+      }
+}
 
 static void
 _on_add_location (GtkToolButton   *bt,
@@ -68,17 +122,24 @@ _on_add_location (GtkToolButton   *bt,
   GtkWidget *dialog = WID ("add-location-dialog");
   int res = gtk_dialog_run (GTK_DIALOG (dialog));
 
-  GtkTreeIter iter;
   switch (res) {
     case GTK_RESPONSE_OK:
+      printf ("s");
       // FIXME: column ids
-      gtk_list_store_append (priv->location_store, &iter);
-      gtk_list_store_set (priv->location_store, &iter,
-                          0, gtk_entry_get_text (GTK_ENTRY (WID ("city-entry"))),
-                          1, gtk_entry_get_text (GTK_ENTRY (WID ("country-entry"))),
-                          3, gtk_entry_get_text (GTK_ENTRY (WID ("tz-entry"))),
-                          2, "20:00",
-                          -1);
+      const char *city = gtk_entry_get_text (GTK_ENTRY (WID ("city-entry")));
+      const char *ctry = gtk_entry_get_text (GTK_ENTRY (WID ("country-entry")));
+      //const char *tz = gtk_entry_get_text (GTK_ENTRY (WID ("tz-entry")));
+      const double longitude = 0.23;
+      const double latitude = 0.32;
+      GVariant *newloc = g_variant_location_new (city, ctry,
+                                                 3, longitude, latitude);
+      g_variant_array_add_value (priv->locations, newloc);
+      g_settings_set_value (priv->location_settings,
+                            "locations",
+                            newloc);
+      gtk_list_store_clear (priv->location_store);
+      populate_locations (priv->location_store,
+                          priv->locations);
       break;
     default:
       break;
@@ -183,7 +244,8 @@ cc_location_panel_init (CcLocationPanel *self)
   self->priv = LOCATION_PANEL_PRIVATE (self);
 
   self->priv->settings = g_settings_new (CLOCK_SCHEMA);
-  self->priv->builder = gtk_builder_new ();
+  self->priv->builder  = gtk_builder_new ();
+  self->priv->settings = g_settings_new ("org.gnome.desktop.location");
 
   error = NULL;
   gtk_builder_add_from_file (self->priv->builder,
@@ -224,6 +286,9 @@ cc_location_panel_init (CcLocationPanel *self)
   widget = WID ("location-vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
 
+  self->priv->locations = g_settings_get_value (self->priv->location_settings,
+                                                "locations");
+  populate_locations (self->priv->location_store, self->priv->locations);
 }
 
 void

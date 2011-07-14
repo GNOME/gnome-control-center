@@ -13,6 +13,8 @@ ccpanels_LTLIBRARIES = liblocation.la
 
 liblocation_la_SOURCES =    \
 	location-module.c   \
+	location-utils.h    \
+	location-utils.c    \
 	cc-location-panel.c \
 	cc-location-panel.h 
 
