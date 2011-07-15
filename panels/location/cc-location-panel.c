@@ -61,24 +61,26 @@ static void
 populate_locations (GtkListStore *store,
                     GVariant     *locations)
 {
+  g_debug ("Updating liststore with new locations");
   GtkTreeIter iter;
-  GVariantIter *viter = g_variant_iter_new (locations);
-  GVariant *entry;
+  GVariantIter viter;
+  GVariant *dict;
   GVariant *value;
-  while (g_variant_iter_loop (viter, "v", &entry)) {
-    value = g_variant_lookup_value (entry,
+
+  g_variant_iter_init (&viter, locations);
+  while ((dict = g_variant_iter_next_value (&viter))) {
+    gtk_list_store_append (store, &iter);
+    value = g_variant_lookup_value (dict,
                                     "city",
                                     G_VARIANT_TYPE_STRING);
-    gtk_list_store_append (store, &iter);
-    gtk_list_store_set (store, &iter, 0, g_variant_get_string (value, NULL));
+    gtk_list_store_set (store, &iter, 0, g_variant_get_string (value, NULL), -1);
 
-    value = g_variant_lookup_value (entry,
+    value = g_variant_lookup_value (dict,
                                     "country",
                                     G_VARIANT_TYPE_STRING);
-    gtk_list_store_append (store, &iter);
-    gtk_list_store_set (store, &iter, 1, g_variant_get_string (value, NULL));
+    gtk_list_store_set (store, &iter, 1, g_variant_get_string (value, NULL), -1);
 
-    value = g_variant_lookup_value (entry,
+    value = g_variant_lookup_value (dict,
                                     "timezone",
                                     G_VARIANT_TYPE_INT16);
     int timezone = g_variant_get_int16 (value);
@@ -87,26 +89,21 @@ populate_locations (GtkListStore *store,
       tz = g_strdup_printf ("GMT +%i", timezone);
     else
       tz = g_strdup_printf ("GMT -%i", timezone);
-    gtk_list_store_append (store, &iter);
-    gtk_list_store_set (store, &iter, 2, tz);
+    gtk_list_store_set (store, &iter, 2, tz, -1);
     g_free (tz);
 
-    gtk_list_store_append (store, &iter);
-    gtk_list_store_set (store, &iter, 3, "20:00");
+    gtk_list_store_set (store, &iter, 3, "20:00", -1);
 
-    /*    value = g_variant_lookup_value (entry,
-          "longitude",
-          G_VARIANT_TYPE_DOUBLE);
-          gtk_list_store_append (store, &iter);
-          gtk_list_store_set (store, &iter, 1, g_value_get_double (value));
+    value = g_variant_lookup_value (dict,
+                                    "longitude",
+                                    G_VARIANT_TYPE_DOUBLE);
+    //    gtk_list_store_set (store, &iter, 1, g_variant_get_double (value), -1);
 
-          value = g_variant_lookup_value (entry,
-          "latitude",
-          G_VARIANT_TYPE_DOUBLE);
-          gtk_list_store_append (store, &iter);
-          gtk_list_store_set (store, &iter, 1, g_value_get_double (value));
-    */
-      }
+    value = g_variant_lookup_value (dict,
+                                    "latitude",
+                                    G_VARIANT_TYPE_DOUBLE);
+    // gtk_list_store_set (store, &iter, 1, g_variant_get_double (value), -1);
+  }
 }
 
 static void
@@ -133,10 +130,10 @@ _on_add_location (GtkToolButton   *bt,
       const double latitude = 0.32;
       GVariant *newloc = g_variant_location_new (city, ctry,
                                                  3, longitude, latitude);
-      g_variant_array_add_value (priv->locations, newloc);
-      g_settings_set_value (priv->location_settings,
-                            "locations",
-                            newloc);
+      priv->locations = g_variant_array_add_value (priv->locations, newloc);
+      g_assert (g_settings_set_value (priv->location_settings,
+                                      "locations",
+                                      priv->locations));
       gtk_list_store_clear (priv->location_store);
       populate_locations (priv->location_store,
                           priv->locations);
@@ -245,7 +242,7 @@ cc_location_panel_init (CcLocationPanel *self)
 
   self->priv->settings = g_settings_new (CLOCK_SCHEMA);
   self->priv->builder  = gtk_builder_new ();
-  self->priv->settings = g_settings_new ("org.gnome.desktop.location");
+  self->priv->location_settings = g_settings_new ("org.gnome.desktop.location");
 
   error = NULL;
   gtk_builder_add_from_file (self->priv->builder,

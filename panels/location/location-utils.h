@@ -36,6 +36,8 @@ GVariant *
 g_variant_array_add_value (GVariant *container,
                            GVariant *value);
 
+void
+g_variant_location_print (GVariant *location);
 G_END_DECLS
 
 #endif /* __LOCATION_UTILS_H */
