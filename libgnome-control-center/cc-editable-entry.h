@@ -52,20 +52,23 @@ struct _CcEditableEntryClass
   void (* editing_done) (CcEditableEntry *entry);
 };
 
-GType        cc_editable_entry_get_type     (void) G_GNUC_CONST;
-GtkWidget   *cc_editable_entry_new          (void);
-void         cc_editable_entry_set_text     (CcEditableEntry *entry,
-                                             const gchar     *text);
-const gchar *cc_editable_entry_get_text     (CcEditableEntry *entry);
-void         cc_editable_entry_set_editable (CcEditableEntry *entry,
-                                             gboolean         editable);
-gboolean     cc_editable_entry_get_editable (CcEditableEntry *entry);
-void         cc_editable_entry_set_weight   (CcEditableEntry *entry,
-                                             gint             weight);
-gint         cc_editable_entry_get_weight   (CcEditableEntry *entry);
-void         cc_editable_entry_set_scale    (CcEditableEntry *entry,
-                                             gdouble          scale);
-gdouble      cc_editable_entry_get_scale    (CcEditableEntry *entry);
+GType        cc_editable_entry_get_type       (void) G_GNUC_CONST;
+GtkWidget   *cc_editable_entry_new            (void);
+void         cc_editable_entry_set_text       (CcEditableEntry *entry,
+                                               const gchar     *text);
+const gchar *cc_editable_entry_get_text       (CcEditableEntry *entry);
+void         cc_editable_entry_set_editable   (CcEditableEntry *entry,
+                                               gboolean         editable);
+gboolean     cc_editable_entry_get_editable   (CcEditableEntry *entry);
+void         cc_editable_entry_set_selectable (CcEditableEntry *entry,
+                                               gboolean         selectable);
+gboolean     cc_editable_entry_get_selectable (CcEditableEntry *entry);
+void         cc_editable_entry_set_weight     (CcEditableEntry *entry,
+                                               gint             weight);
+gint         cc_editable_entry_get_weight     (CcEditableEntry *entry);
+void         cc_editable_entry_set_scale      (CcEditableEntry *entry,
+                                               gdouble          scale);
+gdouble      cc_editable_entry_get_scale      (CcEditableEntry *entry);
 
 G_END_DECLS
 

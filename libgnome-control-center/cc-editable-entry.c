@@ -32,6 +32,7 @@ struct _CcEditableEntryPrivate {
 
         gchar *text;
         gboolean editable;
+        gboolean selectable;
         gint weight;
         gboolean weight_set;
         gdouble scale;
@@ -46,6 +47,7 @@ enum {
         PROP_0,
         PROP_TEXT,
         PROP_EDITABLE,
+        PROP_SELECTABLE,
         PROP_SCALE,
         PROP_SCALE_SET,
         PROP_WEIGHT,
@@ -120,6 +122,29 @@ gboolean
 cc_editable_entry_get_editable (CcEditableEntry *e)
 {
         return e->priv->editable;
+}
+
+void
+cc_editable_entry_set_selectable (CcEditableEntry *e,
+                                  gboolean         selectable)
+{
+        CcEditableEntryPrivate *priv;
+
+        priv = e->priv;
+
+        if (priv->selectable != selectable) {
+                priv->selectable = selectable;
+
+                gtk_label_set_selectable (priv->label, selectable);
+
+                g_object_notify (G_OBJECT (e), "selectable");
+        }
+}
+
+gboolean
+cc_editable_entry_get_selectable (CcEditableEntry *e)
+{
+        return e->priv->selectable;
 }
 
 static void
@@ -247,6 +272,9 @@ cc_editable_entry_set_property (GObject      *object,
         case PROP_EDITABLE:
                 cc_editable_entry_set_editable (e, g_value_get_boolean (value));
                 break;
+        case PROP_SELECTABLE:
+                cc_editable_entry_set_selectable (e, g_value_get_boolean (value));
+                break;
         case PROP_WEIGHT:
                 cc_editable_entry_set_weight (e, g_value_get_int (value));
                 break;
@@ -281,6 +309,10 @@ cc_editable_entry_get_property (GObject    *object,
         case PROP_EDITABLE:
                 g_value_set_boolean (value,
                                      cc_editable_entry_get_editable (e));
+                break;
+        case PROP_SELECTABLE:
+                g_value_set_boolean (value,
+                                     cc_editable_entry_get_selectable (e));
                 break;
         case PROP_WEIGHT:
                 g_value_set_int (value,
@@ -341,6 +373,12 @@ cc_editable_entry_class_init (CcEditableEntryClass *class)
         g_object_class_install_property (object_class, PROP_EDITABLE,
                 g_param_spec_boolean ("editable",
                                       "Editable", "Whether the text can be edited",
+                                      FALSE,
+                                      G_PARAM_READWRITE));
+
+        g_object_class_install_property (object_class, PROP_SELECTABLE,
+                g_param_spec_boolean ("selectable",
+                                      "Selectable", "Whether the text can be selected by mouse",
                                       FALSE,
                                       G_PARAM_READWRITE));
 

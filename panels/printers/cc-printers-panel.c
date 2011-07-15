@@ -2560,6 +2560,16 @@ cc_printers_panel_init (CcPrintersPanel *self)
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
 
+  /* Make model label and ip-address label selectable */
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "printer-ip-address-label");
+  cc_editable_entry_set_selectable (CC_EDITABLE_ENTRY (widget), TRUE);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "printer-model-label");
+  cc_editable_entry_set_selectable (CC_EDITABLE_ENTRY (widget), TRUE);
+
+
   /* Add unlock button */
   priv->permission = (GPermission *)polkit_permission_new_sync (
     "org.opensuse.cupspkhelper.mechanism.all-edit", NULL, NULL, NULL);
