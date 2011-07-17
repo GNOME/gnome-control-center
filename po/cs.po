@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-04-10 17:41+0000\n"
-"PO-Revision-Date: 2011-04-11 23:16+0200\n"
+"POT-Creation-Date: 2011-07-14 14:32+0000\n"
+"PO-Revision-Date: 2011-07-16 19:25+0200\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -30,189 +30,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-
-#: ../gnome-control-center.schemas.in.h:1
-msgid "Current network location"
-msgstr "Aktuální síťové umístění"
-
-#: ../gnome-control-center.schemas.in.h:2
-msgid "More backgrounds URL"
-msgstr "Adresa URL s dalšími pozadími"
-
-#: ../gnome-control-center.schemas.in.h:3
-msgid "More themes URL"
-msgstr "Adresa URL s dalšími motivy"
-
-#: ../gnome-control-center.schemas.in.h:4
-msgid ""
-"Set this to your current location name. This is used to determine the "
-"appropriate network proxy configuration."
-msgstr ""
-"Nastavte na název svého aktuálního umístění. Používá se ke zjištění "
-"nastavení příslušné síťové proxy."
-
-#: ../gnome-control-center.schemas.in.h:5
-msgid ""
-"URL for where to get more desktop backgrounds. If set to an empty string the "
-"link will not appear."
-msgstr ""
-"Adresa URL, na které lze získat další pozadí pracovní plochy. Je-li "
-"nastaveno na prázdný řetězec, odkaz se nezobrazí."
-
-#: ../gnome-control-center.schemas.in.h:6
-msgid ""
-"URL for where to get more desktop themes. If set to an empty string the link "
-"will not appear."
-msgstr ""
-"Adresa URL, na které lze získat další motivy pracovního prostředí. Je-li "
-"nastaveno na prázdný řetězec, odkaz se nezobrazí."
-
-#: ../libgnome-control-center/cc-lockbutton.c:347
-#: ../panels/screen/screen.ui.h:14
-msgid "Lock"
-msgstr "Zamknout"
-
-#: ../libgnome-control-center/cc-lockbutton.c:356
-#: ../panels/network/network.ui.h:20
-msgid "Unlock"
-msgstr "Odemknout"
-
-#: ../libgnome-control-center/cc-lockbutton.c:365
-msgid "Locked"
-msgstr "Uzamčeno"
-
-#: ../libgnome-control-center/cc-lockbutton.c:374
-msgid ""
-"Dialog is unlocked.\n"
-"Click to prevent further changes"
-msgstr ""
-"Dialogové okno je odemčeno.\n"
-"Provádění změn zamezíte kliknutím"
-
-#: ../libgnome-control-center/cc-lockbutton.c:383
-msgid ""
-"Dialog is locked.\n"
-"Click to make changes"
-msgstr ""
-"Dialogové okno je uzamčeno.\n"
-"Změny provedete kliknutím"
-
-#: ../libgnome-control-center/cc-lockbutton.c:392
-msgid ""
-"System policy prevents changes.\n"
-"Contact your system administrator"
-msgstr ""
-"Systémová zásada zabránila změnám.\n"
-"Kontaktujte svého správce systému"
-
-#: ../libgnome-control-center/gconf-property-editor.c:134
-msgid "Key"
-msgstr "Klíč"
-
-#: ../libgnome-control-center/gconf-property-editor.c:135
-msgid "GConf key to which this property editor is attached"
-msgstr "Klíč GConf, ke kterému je připojen tento editor vlastnosti"
-
-#: ../libgnome-control-center/gconf-property-editor.c:141
-msgid "Callback"
-msgstr "Zpětné volání"
-
-#: ../libgnome-control-center/gconf-property-editor.c:142
-msgid "Issue this callback when the value associated with key gets changed"
-msgstr "Provést toto zpětné volání, pokud se změní hodnota přiřazená klíči"
-
-#: ../libgnome-control-center/gconf-property-editor.c:147
-msgid "Change set"
-msgstr "Sada změn"
-
-#: ../libgnome-control-center/gconf-property-editor.c:148
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
-msgstr ""
-"Sada změn GConf obsahující data, která budou předána klientu GConf při "
-"použití"
-
-#: ../libgnome-control-center/gconf-property-editor.c:153
-msgid "Conversion to widget callback"
-msgstr "Zpětné volání konverze na prvek"
-
-#: ../libgnome-control-center/gconf-property-editor.c:154
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
-msgstr ""
-"Zpětné volání, které se provede, když má dojít ke konverzi dat systému GConf "
-"na prvek"
-
-#: ../libgnome-control-center/gconf-property-editor.c:159
-msgid "Conversion from widget callback"
-msgstr "Zpětné volání konverze z prvku"
-
-#: ../libgnome-control-center/gconf-property-editor.c:160
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
-msgstr ""
-"Zpětné volání, které se provede, když má dojít ke konverzi z prvku na data "
-"GConf"
-
-#: ../libgnome-control-center/gconf-property-editor.c:165
-msgid "UI Control"
-msgstr "Ovládací prvek uživatelského rozhraní"
-
-#: ../libgnome-control-center/gconf-property-editor.c:166
-msgid "Object that controls the property (normally a widget)"
-msgstr "Objekt, který ovládá tuto vlastnost (obvykle widget)"
-
-#: ../libgnome-control-center/gconf-property-editor.c:181
-msgid "Property editor object data"
-msgstr "Data objektu editoru vlastnosti"
-
-#: ../libgnome-control-center/gconf-property-editor.c:182
-msgid "Custom data required by the specific property editor"
-msgstr "Uživatelská data vyžadovaná určitým editorem vlastnosti"
-
-#: ../libgnome-control-center/gconf-property-editor.c:188
-msgid "Property editor data freeing callback"
-msgstr "Zpětné volání uvolnění dat editoru vlastnosti"
-
-#: ../libgnome-control-center/gconf-property-editor.c:189
-msgid "Callback to be issued when property editor object data is to be freed"
-msgstr ""
-"Zpětné volání, které se provede, když mají být uvolněna data objektu editoru "
-"vlastnosti"
-
-#: ../libgnome-control-center/gconf-property-editor.c:1474
-#, c-format
-msgid ""
-"Couldn't find the file '%s'.\n"
-"\n"
-"Please make sure it exists and try again, or choose a different background "
-"picture."
-msgstr ""
-"Nelze najít soubor „%s“.\n"
-"\n"
-"Ujistěte se prosím, že soubor existuje, a zkuste to znovu nebo vyberte jiný "
-"obrázek pozadí."
-
-#: ../libgnome-control-center/gconf-property-editor.c:1482
-#, c-format
-msgid ""
-"I don't know how to open the file '%s'.\n"
-"Perhaps it's a kind of picture that is not yet supported.\n"
-"\n"
-"Please select a different picture instead."
-msgstr ""
-"Není známo, jak otevřít soubor „%s“.\n"
-"Možná se jedná o typ obrázku, který zatím není podporovaný.\n"
-"\n"
-"Vyberte prosím místo něj jiný obrázek."
-
-#: ../libgnome-control-center/gconf-property-editor.c:1604
-msgid "Please select an image."
-msgstr "Vyberte prosím obrázek."
-
-#: ../libgnome-control-center/gconf-property-editor.c:1609
-msgid "_Select"
-msgstr "_Vybrat"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:1
 msgid "Background"
@@ -228,31 +45,41 @@ msgid "Wallpaper;Screen;Desktop;"
 msgstr "tapeta;obrazovka;plocha;"
 
 #: ../panels/background/background.ui.h:1
+#| msgid "Wallpapers"
+msgid "Add wallpaper"
+msgstr "Přidat tapetu"
+
+#: ../panels/background/background.ui.h:2
 msgid "Center"
 msgstr "Na střed"
 
 #. This refers to a slideshow background
-#: ../panels/background/background.ui.h:3
+#: ../panels/background/background.ui.h:4
 msgid "Changes throughout the day"
 msgstr "Měnit v průběhu dne"
 
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:5
 msgid "Fill"
 msgstr "Vyplnit"
 
-#: ../panels/background/background.ui.h:5
+#: ../panels/background/background.ui.h:6
+#| msgid "Wallpapers"
+msgid "Remove wallpaper"
+msgstr "Odebrat tapetu"
+
+#: ../panels/background/background.ui.h:7
 msgid "Scale"
 msgstr "Přizpůsobit"
 
-#: ../panels/background/background.ui.h:6
+#: ../panels/background/background.ui.h:8
 msgid "Span"
 msgstr "Rozšířit"
 
-#: ../panels/background/background.ui.h:7
+#: ../panels/background/background.ui.h:9
 msgid "Tile"
 msgstr "Dlaždice"
 
-#: ../panels/background/background.ui.h:8
+#: ../panels/background/background.ui.h:10
 msgid "Zoom"
 msgstr "Zvětšit"
 
@@ -309,13 +136,14 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Bez pozadí pracovní plochy"
 
-#: ../panels/common/gdm-languages.c:709
+#: ../panels/common/gdm-languages.c:710
 msgid "Unspecified"
 msgstr "Neurčeno"
 
 #: ../panels/datetime/datetime.ui.h:1
-msgid "24-Hour Time"
-msgstr "24hodinový čas"
+#| msgid "24-Hour Time"
+msgid "24-_Hour Time"
+msgstr "24_hodinový čas"
 
 #. Translator: this is the separator between hours and minutes, like in HH:MM
 #: ../panels/datetime/datetime.ui.h:3
@@ -331,8 +159,9 @@ msgid "August"
 msgstr "srpen"
 
 #: ../panels/datetime/datetime.ui.h:6
-msgid "City:"
-msgstr "Město:"
+#| msgid "May"
+msgid "Day"
+msgstr "Den"
 
 #: ../panels/datetime/datetime.ui.h:7
 msgid "December"
@@ -363,8 +192,9 @@ msgid "May"
 msgstr "květen"
 
 #: ../panels/datetime/datetime.ui.h:14
-msgid "Network Time"
-msgstr "Síťový čas"
+#| msgid "Monitor"
+msgid "Month"
+msgstr "Měsíc"
 
 #: ../panels/datetime/datetime.ui.h:15
 msgid "November"
@@ -375,12 +205,49 @@ msgid "October"
 msgstr "říjen"
 
 #: ../panels/datetime/datetime.ui.h:17
-msgid "Region:"
-msgstr "Oblast:"
-
-#: ../panels/datetime/datetime.ui.h:18
 msgid "September"
 msgstr "září"
+
+#: ../panels/datetime/datetime.ui.h:18
+msgid "Set the time one hour ahead."
+msgstr "Posunout čas o hodinu vpřed."
+
+#: ../panels/datetime/datetime.ui.h:19
+msgid "Set the time one hour back."
+msgstr "Posunout čas o hodinu zpět."
+
+#: ../panels/datetime/datetime.ui.h:20
+msgid "Set the time one minute ahead."
+msgstr "Posunout čas o minutu vpřed."
+
+#: ../panels/datetime/datetime.ui.h:21
+msgid "Set the time one minute back."
+msgstr "Posunout čas o minutu zpět."
+
+#: ../panels/datetime/datetime.ui.h:22
+msgid "Switch between AM and PM."
+msgstr "Přepnout mezi dopolednem a odpolednem."
+
+#: ../panels/datetime/datetime.ui.h:23
+#| msgctxt "balance"
+#| msgid "Rear"
+msgid "Year"
+msgstr "Rok"
+
+#: ../panels/datetime/datetime.ui.h:24
+#| msgid "City:"
+msgid "_City:"
+msgstr "_Město:"
+
+#: ../panels/datetime/datetime.ui.h:25
+#| msgid "Network Time"
+msgid "_Network Time"
+msgstr "_Síťový čas"
+
+#: ../panels/datetime/datetime.ui.h:26
+#| msgid "Region:"
+msgid "_Region:"
+msgstr "O_blast:"
 
 #. Translators: those are keywords for the date and time control-center panel
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
@@ -400,14 +267,14 @@ msgid "Left"
 msgstr "Vlevo"
 
 #: ../panels/display/display-capplet.ui.h:2
-#: ../panels/display/xrandr-capplet.c:491
+#: ../panels/display/xrandr-capplet.c:493
 msgid "Monitor"
 msgstr "Monitor"
 
 #: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/xrandr-capplet.c:327
-#: ../panels/display/xrandr-capplet.c:366
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/display/xrandr-capplet.c:329
+#: ../panels/display/xrandr-capplet.c:368
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Normal"
 msgstr "Běžné"
 
@@ -453,15 +320,15 @@ msgstr "Displeje"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "panel;projektor;xrandr;obrazovka;rozlišení;občerstvit;"
 
-#: ../panels/display/xrandr-capplet.c:328
+#: ../panels/display/xrandr-capplet.c:330
 msgid "Counterclockwise"
 msgstr "Protisměru hodinových ručiček"
 
-#: ../panels/display/xrandr-capplet.c:329
+#: ../panels/display/xrandr-capplet.c:331
 msgid "Clockwise"
 msgstr "Po směru hodinových ručiček"
 
-#: ../panels/display/xrandr-capplet.c:330
+#: ../panels/display/xrandr-capplet.c:332
 msgid "180 Degrees"
 msgstr "180 stupňů"
 
@@ -470,76 +337,76 @@ msgstr "180 stupňů"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:467
+#: ../panels/display/xrandr-capplet.c:469
 msgid "Mirror Displays"
 msgstr "Zrcadlit displeje"
 
-#: ../panels/display/xrandr-capplet.c:597
+#: ../panels/display/xrandr-capplet.c:599
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d × %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:599
+#: ../panels/display/xrandr-capplet.c:601
 #, c-format
 msgid "%d x %d"
 msgstr "%d × %d"
 
-#: ../panels/display/xrandr-capplet.c:1510
+#: ../panels/display/xrandr-capplet.c:1512
 msgid "Drag to change primary display."
 msgstr "Přetáhnutím změníte primární displej."
 
-#: ../panels/display/xrandr-capplet.c:1568
+#: ../panels/display/xrandr-capplet.c:1570
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
 msgstr ""
 "Výběrem monitoru změníte jeho vlastnosti; umístění upravíte jeho přetažením."
 
-#: ../panels/display/xrandr-capplet.c:1957
+#: ../panels/display/xrandr-capplet.c:1959
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/xrandr-capplet.c:1959
+#: ../panels/display/xrandr-capplet.c:1961
 msgid "%a %l:%M %p"
 msgstr "%a, %H:%M"
 
-#: ../panels/display/xrandr-capplet.c:2205
+#: ../panels/display/xrandr-capplet.c:2207
 msgid "Could not save the monitor configuration"
 msgstr "Nelze uložit nastavení monitoru"
 
-#: ../panels/display/xrandr-capplet.c:2230
+#: ../panels/display/xrandr-capplet.c:2232
 msgid "Could not get session bus while applying display configuration"
 msgstr "Při použití nastavení displeje se nezdařilo získat sběrnici sezení"
 
-#: ../panels/display/xrandr-capplet.c:2275
+#: ../panels/display/xrandr-capplet.c:2277
 msgid "Could not detect displays"
 msgstr "Displeje nelze rozpoznat"
 
-#: ../panels/display/xrandr-capplet.c:2470
+#: ../panels/display/xrandr-capplet.c:2492
 msgid "Could not get screen information"
 msgstr "Nelze získat informace o obrazovce"
 
 #. Translators: VESA is an techncial acronym, don't translate it.
-#: ../panels/info/cc-info-panel.c:373
+#: ../panels/info/cc-info-panel.c:377
 #, c-format
 msgid "VESA: %s"
 msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:397 ../panels/network/panel-common.c:79
+#: ../panels/info/cc-info-panel.c:401 ../panels/network/panel-common.c:79
 #: ../panels/network/panel-common.c:158
 msgid "Unknown"
 msgstr "Neznámé"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:540
+#: ../panels/info/cc-info-panel.c:550
 #, c-format
 msgid "%d-bit"
 msgstr "%dbitová"
 
-#: ../panels/info/cc-info-panel.c:554
+#: ../panels/info/cc-info-panel.c:564
 #, c-format
 msgid "%u byte"
 msgid_plural "%u bytes"
@@ -547,45 +414,45 @@ msgstr[0] "%u bajt"
 msgstr[1] "%u bajty"
 msgstr[2] "%u bajtů"
 
-#: ../panels/info/cc-info-panel.c:562
+#: ../panels/info/cc-info-panel.c:572
 #, c-format
 msgid "%.1f KB"
 msgstr "%.1f kB"
 
-#: ../panels/info/cc-info-panel.c:567
+#: ../panels/info/cc-info-panel.c:577
 #, c-format
 msgid "%.1f MB"
 msgstr "%.1f MB"
 
-#: ../panels/info/cc-info-panel.c:572
+#: ../panels/info/cc-info-panel.c:582
 #, c-format
 msgid "%.1f GB"
 msgstr "%.1f GB"
 
-#: ../panels/info/cc-info-panel.c:577
+#: ../panels/info/cc-info-panel.c:587
 #, c-format
 msgid "%.1f TB"
 msgstr "%.1f TB"
 
-#: ../panels/info/cc-info-panel.c:582
+#: ../panels/info/cc-info-panel.c:592
 #, c-format
 msgid "%.1f PB"
 msgstr "%.1f PB"
 
-#: ../panels/info/cc-info-panel.c:587
+#: ../panels/info/cc-info-panel.c:597
 #, c-format
 msgid "%.1f EB"
 msgstr "%.1f EB"
 
-#: ../panels/info/cc-info-panel.c:745
+#: ../panels/info/cc-info-panel.c:755
 msgid "Unknown model"
 msgstr "Neznámý model"
 
-#: ../panels/info/cc-info-panel.c:828
+#: ../panels/info/cc-info-panel.c:838
 msgid "The next login will attempt to use the standard experience."
 msgstr "Při příští přihlášení se zkusí použít standardní režim."
 
-#: ../panels/info/cc-info-panel.c:830
+#: ../panels/info/cc-info-panel.c:840
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
@@ -595,36 +462,36 @@ msgstr ""
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:872
+#: ../panels/info/cc-info-panel.c:882
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "Nouzový"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:878
+#: ../panels/info/cc-info-panel.c:888
 msgctxt "Experience"
 msgid "Standard"
 msgstr "Standardní"
 
-#: ../panels/info/cc-info-panel.c:1010
-#: ../panels/keyboard/keyboard-shortcuts.c:1732
+#: ../panels/info/cc-info-panel.c:1028
+#: ../panels/keyboard/keyboard-shortcuts.c:1762
 msgid "Section"
 msgstr "Oddíl"
 
-#: ../panels/info/cc-info-panel.c:1019 ../panels/info/info.ui.h:15
+#: ../panels/info/cc-info-panel.c:1037 ../panels/info/info.ui.h:13
 msgid "Overview"
 msgstr "Přehled"
 
-#: ../panels/info/cc-info-panel.c:1025 ../panels/info/info.ui.h:3
+#: ../panels/info/cc-info-panel.c:1043 ../panels/info/info.ui.h:2
 msgid "Default Applications"
 msgstr "Výchozí aplikace"
 
-#: ../panels/info/cc-info-panel.c:1030 ../panels/info/info.ui.h:10
+#: ../panels/info/cc-info-panel.c:1048 ../panels/info/info.ui.h:9
 msgid "Graphics"
 msgstr "Grafika"
 
-#: ../panels/info/cc-info-panel.c:1055
+#: ../panels/info/cc-info-panel.c:1212
 #, c-format
 msgid "Version %s"
 msgstr "Verze %s"
@@ -637,79 +504,89 @@ msgstr "Systémové info"
 msgid "System Information"
 msgstr "Systémové informace"
 
-#. Translators: those are keywords for the System Information panel
+#. sure that you use the same "translation" for those keywords
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
+#| msgid ""
+#| "device;system;information;memory;processor;version;default;application;"
+#| "fallback;"
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
-"fallback;"
+"fallback;preferred;"
 msgstr ""
-"zařízení;systém;informace;paměť;procesor;verze;výchozí;aplikace;nouzový"
+"zařízení;systém;informace;paměť;procesor;verze;výchozí;aplikace;nouzový;"
+"upřednostňovaný;"
 
 #: ../panels/info/info.ui.h:1
-#| msgid "Locations..."
 msgid "Calculating..."
 msgstr "Počítá se…"
 
-#: ../panels/info/info.ui.h:2
-msgid "Calendar"
-msgstr "Kalendář"
-
-#: ../panels/info/info.ui.h:4
+#: ../panels/info/info.ui.h:3
 msgid "Device name"
 msgstr "Název zařízení"
 
-#: ../panels/info/info.ui.h:5
+#: ../panels/info/info.ui.h:4
 msgid "Disk"
 msgstr "Disk"
 
-#: ../panels/info/info.ui.h:6
+#: ../panels/info/info.ui.h:5
 msgid "Driver"
 msgstr "Ovladač"
 
-#: ../panels/info/info.ui.h:7
+#: ../panels/info/info.ui.h:6
 msgid "Experience"
 msgstr "Režim"
 
 #. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
-#: ../panels/info/info.ui.h:9
-msgid "Forced Fallback Mode"
-msgstr "Vynutit nouzový režim"
+#: ../panels/info/info.ui.h:8
+#| msgid "Forced Fallback Mode"
+msgid "Forced _Fallback Mode"
+msgstr "Vynutit _nouzový režim"
+
+#: ../panels/info/info.ui.h:10
+#| msgid "Music"
+msgid "M_usic"
+msgstr "H_udba"
 
 #: ../panels/info/info.ui.h:11
-msgid "Mail"
-msgstr "Pošta"
-
-#: ../panels/info/info.ui.h:12
 msgid "Memory"
 msgstr "Paměť"
 
-#: ../panels/info/info.ui.h:13
-msgid "Music"
-msgstr "Hudba"
-
-#: ../panels/info/info.ui.h:14
+#: ../panels/info/info.ui.h:12
 msgid "OS type"
 msgstr "Typ OS"
 
-#: ../panels/info/info.ui.h:16
-msgid "Photos"
-msgstr "Fotografie"
-
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:14
 msgid "Processor"
 msgstr "Procesor"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:15
 msgid "Updates Available"
 msgstr "Jsou dostupné aktualizace"
 
+#: ../panels/info/info.ui.h:16
+#| msgid "Calendar"
+msgid "_Calendar"
+msgstr "_Kalendář"
+
+#: ../panels/info/info.ui.h:17
+#| msgid "Mail"
+msgid "_Mail"
+msgstr "_Pošta"
+
+#: ../panels/info/info.ui.h:18
+#| msgid "_Photos:"
+msgid "_Photos"
+msgstr "_Fotografie"
+
 #: ../panels/info/info.ui.h:19
-msgid "Video"
-msgstr "Video"
+#| msgid "Video"
+msgid "_Video"
+msgstr "_Video"
 
 #: ../panels/info/info.ui.h:20
-msgid "Web"
-msgstr "Web"
+#| msgid "Web"
+msgid "_Web"
+msgstr "_Web"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:1
 msgid "Eject"
@@ -792,6 +669,7 @@ msgid "Log out"
 msgstr "Odhlásit se"
 
 #: ../panels/keyboard/01-system.xml.in.h:3
+#: ../panels/region/gnome-region-panel.ui.h:23
 msgid "System"
 msgstr "Systém"
 
@@ -862,7 +740,7 @@ msgstr "Typ klávesové zkratky."
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/keyboard-shortcuts.c:1173
+#: ../panels/keyboard/keyboard-shortcuts.c:1183
 #: ../panels/sound/gvc-mixer-control.c:1084
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
@@ -874,7 +752,7 @@ msgid "Change keyboard settings"
 msgstr "Změnit nastavení klávesníce"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid "Keyboard"
 msgstr "Klávesnice"
 
@@ -884,21 +762,22 @@ msgid "Shortcut;Repeat;Blink;"
 msgstr "zkratka;opakovat;blikat;"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:646
-#: ../panels/keyboard/keyboard-shortcuts.c:948
-#: ../panels/keyboard/keyboard-shortcuts.c:1526
-#: ../panels/keyboard/keyboard-shortcuts.c:1530
+#: ../panels/keyboard/keyboard-shortcuts.c:654
+#: ../panels/keyboard/keyboard-shortcuts.c:958
+#: ../panels/keyboard/keyboard-shortcuts.c:1556
+#: ../panels/keyboard/keyboard-shortcuts.c:1560
 msgid "Custom Shortcuts"
 msgstr "Vlastní zkratky"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:800
+#: ../panels/keyboard/keyboard-shortcuts.c:804
 msgid "<Unknown Action>"
 msgstr "<Neznámá akce>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1199
+#: ../panels/keyboard/keyboard-shortcuts.c:1209
 msgid "Error saving the new shortcut"
 msgstr "Chyba při ukládání nové zkratky"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1312
+#: ../panels/keyboard/keyboard-shortcuts.c:1342
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -909,7 +788,7 @@ msgstr ""
 "používat k psaní.\n"
 "Zkuste to prosím v kombinaci s klávesami jako Control, Alt nebo Shift."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1342
+#: ../panels/keyboard/keyboard-shortcuts.c:1372
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -918,25 +797,25 @@ msgstr ""
 "Zkratka „%s“ se již používá pro\n"
 "„%s“"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1347
+#: ../panels/keyboard/keyboard-shortcuts.c:1377
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Změníte-li přiřazení zkratky k „%s“, zkratka „%s“ bude vypnuta."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1353
+#: ../panels/keyboard/keyboard-shortcuts.c:1383
 msgid "_Reassign"
 msgstr "Z_měnit přiřazení"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1465
+#: ../panels/keyboard/keyboard-shortcuts.c:1495
 msgid "Too many custom shortcuts"
 msgstr "Příliš mnoho vlastních zkratek"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1785
+#: ../panels/keyboard/keyboard-shortcuts.c:1815
 msgid "Action"
 msgstr "Akce"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1808
+#: ../panels/keyboard/keyboard-shortcuts.c:1838
 msgid "Shortcut"
 msgstr "Zkratka"
 
@@ -953,7 +832,7 @@ msgid "Cursor _blinks in text fields"
 msgstr "_Kurzor bliká v textových polích"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
-#: ../panels/mouse/gnome-mouse-properties.ui.h:1
+#: ../panels/mouse/gnome-mouse-properties.ui.h:2
 #: ../panels/universal-access/uap.ui.h:21
 msgid "Cursor blinks speed"
 msgstr "Rychlost blikání kurzoru"
@@ -964,62 +843,62 @@ msgstr "Vlastní zkratka"
 
 #. fast acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Fast"
 msgstr "Rychlá"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
-msgid "General"
-msgstr "Obecné"
-
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid "Key presses _repeat when key is held down"
 msgstr "Stisk klávesy se _opakuje, pokud klávesa zůstává stisknuta"
 
 #. long delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/universal-access/uap.ui.h:37
 msgid "Long"
 msgstr "Dlouhé"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 msgid "Repeat Keys"
 msgstr "Opakování kláves"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 msgid "Repeat keys speed"
 msgstr "Rychlost opakování kláves"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
 msgid "S_peed:"
 msgstr "_Rychlost:"
 
 #. short delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
-#: ../panels/mouse/gnome-mouse-properties.ui.h:22
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:23
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Short"
 msgstr "Krátké"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 msgid "Shortcuts"
 msgstr "Zkratky"
 
 #. slow acceleration
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
-#: ../panels/mouse/gnome-mouse-properties.ui.h:24
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+#: ../panels/mouse/gnome-mouse-properties.ui.h:25
 msgid "Slow"
 msgstr "Pomalá"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
 msgstr ""
 "Zkratku upravíte kliknutím na odpovídající řádek a podržením nových kláves, "
 "vymazání provedete klávesou Backspace."
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
+#: ../panels/universal-access/uap.ui.h:63
+msgid "Typing"
+msgstr "Psaní"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
 msgid "_Delay:"
@@ -1033,36 +912,36 @@ msgstr "_Název:"
 msgid "_Speed:"
 msgstr "Rychlo_st:"
 
-#: ../panels/media/cc-media-panel.c:322
+#: ../panels/media/cc-media-panel.c:315
 msgid "Ask what to do"
 msgstr "Zeptat se na další postup"
 
-#: ../panels/media/cc-media-panel.c:326 ../panels/power/power.ui.h:6
+#: ../panels/media/cc-media-panel.c:319 ../panels/power/power.ui.h:6
 msgid "Do nothing"
 msgstr "Nic nedělat"
 
-#: ../panels/media/cc-media-panel.c:330
+#: ../panels/media/cc-media-panel.c:323
 msgid "Open folder"
 msgstr "Otevřít složku"
 
-#: ../panels/media/cc-media-panel.c:441
+#: ../panels/media/cc-media-panel.c:434
 msgid "Select an application for audio CDs"
 msgstr "Vyberte aplikaci pro zvuková CD"
 
-#: ../panels/media/cc-media-panel.c:442
+#: ../panels/media/cc-media-panel.c:435
 msgid "Select an application for video DVDs"
 msgstr "Vyberte aplikaci pro DVD s videem"
 
-#: ../panels/media/cc-media-panel.c:443
+#: ../panels/media/cc-media-panel.c:436
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "Vyberte aplikaci, která má být spuštěna po připojení hudebního přehrávače"
 
-#: ../panels/media/cc-media-panel.c:444
+#: ../panels/media/cc-media-panel.c:437
 msgid "Select an application to run when a camera is connected"
 msgstr "Vyberte aplikaci, která má být spuštěna po připojení fotoaparátu"
 
-#: ../panels/media/cc-media-panel.c:445
+#: ../panels/media/cc-media-panel.c:438
 msgid "Select an application for software CDs"
 msgstr "Vyberte aplikaci pro CD se softwarem"
 
@@ -1071,47 +950,47 @@ msgstr "Vyberte aplikaci pro CD se softwarem"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/media/cc-media-panel.c:457
+#: ../panels/media/cc-media-panel.c:450
 msgid "audio DVD"
 msgstr "zvukové DVD"
 
-#: ../panels/media/cc-media-panel.c:458
+#: ../panels/media/cc-media-panel.c:451
 msgid "blank Blu-ray disc"
 msgstr "prázdný disk Blu-ray"
 
-#: ../panels/media/cc-media-panel.c:459
+#: ../panels/media/cc-media-panel.c:452
 msgid "blank CD disc"
 msgstr "prázdný disk CD"
 
-#: ../panels/media/cc-media-panel.c:460
+#: ../panels/media/cc-media-panel.c:453
 msgid "blank DVD disc"
 msgstr "prázdný disk DVD"
 
-#: ../panels/media/cc-media-panel.c:461
+#: ../panels/media/cc-media-panel.c:454
 msgid "blank HD DVD disc"
 msgstr "prázdný disk HD DVD"
 
-#: ../panels/media/cc-media-panel.c:462
+#: ../panels/media/cc-media-panel.c:455
 msgid "Blu-ray video disc"
 msgstr "videodisk Blu-ray"
 
-#: ../panels/media/cc-media-panel.c:463
+#: ../panels/media/cc-media-panel.c:456
 msgid "e-book reader"
 msgstr "čtečka elektronických knih"
 
-#: ../panels/media/cc-media-panel.c:464
+#: ../panels/media/cc-media-panel.c:457
 msgid "HD DVD video disc"
 msgstr "videodisk HD DVD"
 
-#: ../panels/media/cc-media-panel.c:465
+#: ../panels/media/cc-media-panel.c:458
 msgid "Picture CD"
 msgstr "Picture CD"
 
-#: ../panels/media/cc-media-panel.c:466
+#: ../panels/media/cc-media-panel.c:459
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: ../panels/media/cc-media-panel.c:467
+#: ../panels/media/cc-media-panel.c:460
 msgid "Video CD"
 msgstr "Video CD"
 
@@ -1176,126 +1055,195 @@ msgstr "Vyměnitelná média"
 msgid "cd;dvd;usb;audio;video;disc;"
 msgstr "cd;dvd;usb;zvuk;video;disk;"
 
+#: ../panels/online-accounts/cc-online-accounts-panel.c:306
+msgid "Error logging into the account"
+msgstr "Chyba při přihlašování k účtu"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:352
+msgid "Expired credentials. Please log in again."
+msgstr "Vypršelo pověření. Přihlaste se prosím znovu."
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:355
+msgid "_Log In"
+msgstr "Přih_lásit se"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:464
+msgid "To add a new account, first select the account type"
+msgstr "Než nový účet vytvoříte, nejprve určete, jakého bude typu."
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:467
+#| msgid "_Account Type"
+msgid "Account Type:"
+msgstr "Typ účtu:"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:499
+#| msgid "Add"
+msgid "_Add..."
+msgstr "Přid_at…"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:552
+#| msgid "Create new account"
+msgid "Error creating account"
+msgstr "Chyba při vytváření účtu"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:586
+msgid "Error removing account"
+msgstr "Chyba při odebírání účtu"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:622
+msgid "Are you sure you want to remove the account?"
+msgstr "Opravdu chcete odebrat tento účet?"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:624
+msgid "This will not remove the account on the server."
+msgstr "Tímto se neodstraní účet na serveru."
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:625
+msgid "_Remove"
+msgstr "Odeb_rat"
+
+#. Translators: those are keywords for the online-accounts control-center panel
+#: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:2
+msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
+msgstr ""
+"Google;Facebook;Twitter;Yahoo;web;on-line;diskuze;kalendář;e-mail;pošta;"
+"kontakt;"
+
+#: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:3
+#| msgid "Create new account"
+msgid "Manage online accounts"
+msgstr "Správa on-line účtů"
+
+#: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
+#| msgid "Other Accounts"
+msgid "Online Accounts"
+msgstr "On-line účty"
+
+#: ../panels/online-accounts/online-accounts.ui.h:1
+#| msgid "Create new account"
+msgid "Select an account"
+msgstr "Vyberte některý z účtů"
+
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:465
+#: ../panels/printers/cc-printers-panel.c:509
 msgid "Low on toner"
 msgstr "Dochází toner"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:467
+#: ../panels/printers/cc-printers-panel.c:511
 msgid "Out of toner"
 msgstr "Došel toner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:470
+#: ../panels/printers/cc-printers-panel.c:514
 msgid "Low on developer"
 msgstr "Životnost vývojové jednotka se blíží ke konci"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:473
+#: ../panels/printers/cc-printers-panel.c:517
 msgid "Out of developer"
 msgstr "Opotřebená vývojová jednotka"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:475
+#: ../panels/printers/cc-printers-panel.c:519
 msgid "Low on a marker supply"
 msgstr "Životnost zásobníku se blíží ke konci"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:477
+#: ../panels/printers/cc-printers-panel.c:521
 msgid "Out of a marker supply"
 msgstr "Opotřebený zásobník"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:479
+#: ../panels/printers/cc-printers-panel.c:523
 msgid "Open cover"
 msgstr "Otevřen kryt"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:481
+#: ../panels/printers/cc-printers-panel.c:525
 msgid "Open door"
 msgstr "Otevřena dvířka"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:483
+#: ../panels/printers/cc-printers-panel.c:527
 msgid "Low on paper"
 msgstr "Dochází papír"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:485
+#: ../panels/printers/cc-printers-panel.c:529
 msgid "Out of paper"
 msgstr "Došel papír"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:487
+#: ../panels/printers/cc-printers-panel.c:531
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Off-line"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:489
+#: ../panels/printers/cc-printers-panel.c:533
 msgctxt "printer state"
 msgid "Paused"
 msgstr "Pozastaveno"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:491
+#: ../panels/printers/cc-printers-panel.c:535
 msgid "Waste receptacle almost full"
 msgstr "Odpadní nádobka je téměř plná"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:493
+#: ../panels/printers/cc-printers-panel.c:537
 msgid "Waste receptacle full"
 msgstr "Odpadní nádobka je plná"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:495
+#: ../panels/printers/cc-printers-panel.c:539
 msgid "The optical photo conductor is near end of life"
 msgstr "Životnost optického válce se blíží ke konci"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:497
+#: ../panels/printers/cc-printers-panel.c:541
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Optický válec není nadále funkční"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:641
+#: ../panels/printers/cc-printers-panel.c:713
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Připraveno"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:645
+#: ../panels/printers/cc-printers-panel.c:717
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Zpracovává se"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:649
+#: ../panels/printers/cc-printers-panel.c:721
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Zastaveno"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:768
+#: ../panels/printers/cc-printers-panel.c:840
 msgid "Toner Level"
 msgstr "Stav množství toneru"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:771
+#: ../panels/printers/cc-printers-panel.c:843
 msgid "Ink Level"
 msgstr "Stav množství inkoustu"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:774
+#: ../panels/printers/cc-printers-panel.c:846
 msgid "Supply Level"
 msgstr "Stav spotřebního materiálu"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:789
-#: ../panels/printers/cc-printers-panel.c:1180
+#: ../panels/printers/cc-printers-panel.c:861
+#: ../panels/printers/cc-printers-panel.c:1245
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -1304,80 +1252,80 @@ msgstr[1] "%u aktivní"
 msgstr[2] "%u aktivních"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:912
+#: ../panels/printers/cc-printers-panel.c:966
 msgid "No printers available"
 msgstr "Není dostupná žádná tiskárna"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1223
+#: ../panels/printers/cc-printers-panel.c:1288
 msgctxt "print job"
 msgid "Pending"
 msgstr "Čeká"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1227
+#: ../panels/printers/cc-printers-panel.c:1292
 msgctxt "print job"
 msgid "Held"
 msgstr "Pozastaveno"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1231
+#: ../panels/printers/cc-printers-panel.c:1296
 msgctxt "print job"
 msgid "Processing"
 msgstr "Zpracovává se"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1235
+#: ../panels/printers/cc-printers-panel.c:1300
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Zastaveno"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1239
+#: ../panels/printers/cc-printers-panel.c:1304
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Zrušeno"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1243
+#: ../panels/printers/cc-printers-panel.c:1308
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Přerušeno"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1247
+#: ../panels/printers/cc-printers-panel.c:1312
 msgctxt "print job"
 msgid "Completed"
 msgstr "Dokončeno"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1339
+#: ../panels/printers/cc-printers-panel.c:1395
 msgid "Job Title"
 msgstr "Název úlohy"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1348
+#: ../panels/printers/cc-printers-panel.c:1404
 msgid "Job State"
 msgstr "Stav úlohy"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1354
+#: ../panels/printers/cc-printers-panel.c:1410
 msgid "Time"
 msgstr "Čas"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2069
+#: ../panels/printers/cc-printers-panel.c:2006
 msgid "Failed to add new printer."
 msgstr "Selhalo přidání nové tiskárny."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2241
-#: ../panels/printers/cc-printers-panel.c:2255
+#: ../panels/printers/cc-printers-panel.c:2210
+#: ../panels/printers/cc-printers-panel.c:2224
 msgid "Test page"
 msgstr "Zkušební stránka"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2453
+#: ../panels/printers/cc-printers-panel.c:2441
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Nelze načíst uživatelské rozhraní: %s"
@@ -1396,138 +1344,107 @@ msgid "Printers"
 msgstr "Tiskárny"
 
 #: ../panels/printers/new-printer-dialog.ui.h:1
-msgid "Add"
-msgstr "Přidat"
+#| msgid "Address"
+msgid "A_ddress"
+msgstr "A_dresa"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
 msgid "Add a New Printer"
 msgstr "Přidat novou tiskárnu"
 
 #: ../panels/printers/new-printer-dialog.ui.h:3
-msgid "Address"
-msgstr "Adresa"
+#| msgid "Add"
+msgid "_Add"
+msgstr "Přid_at"
 
 #: ../panels/printers/new-printer-dialog.ui.h:4
+#: ../panels/user-accounts/um-user-panel.c:445
 #: ../panels/user-accounts/data/language-chooser.ui.h:1
-#: ../panels/user-accounts/data/photo-dialog.ui.h:3
-msgid "Cancel"
-msgstr "Zrušit"
+msgid "_Cancel"
+msgstr "_Zrušit"
 
 #: ../panels/printers/new-printer-dialog.ui.h:5
-msgid "Search by Address"
-msgstr "Hledat podle adresy"
+#| msgid "Search by Address"
+msgid "_Search by Address"
+msgstr "Hledat podle adre_sy"
 
-#: ../panels/printers/pp-new-printer-dialog.c:381
+#: ../panels/printers/pp-new-printer-dialog.c:493
 msgid "Getting devices..."
 msgstr "Získávají se zařízení…"
 
 #. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:639
-#: ../panels/printers/pp-new-printer-dialog.c:644
+#: ../panels/printers/pp-new-printer-dialog.c:913
+#: ../panels/printers/pp-new-printer-dialog.c:918
 msgid "Devices"
 msgstr "Zařízení"
 
 #. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:669
+#: ../panels/printers/pp-new-printer-dialog.c:943
 msgid "Local"
 msgstr "Místní"
 
 #. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:671
+#: ../panels/printers/pp-new-printer-dialog.c:945
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 msgid "Network"
 msgstr "Síťová"
 
 #. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:712
+#: ../panels/printers/pp-new-printer-dialog.c:986
 msgid "Device types"
 msgstr "Typ zařízení"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:865
-#: ../panels/printers/pp-new-printer-dialog.c:1033
+#: ../panels/printers/pp-new-printer-dialog.c:1266
 msgid "Automatic configuration"
 msgstr "Automatické nastavení"
 
-#: ../panels/printers/printers.ui.h:1
-msgid "---"
-msgstr "---"
-
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:3
+#: ../panels/printers/printers.ui.h:2
 msgid "Active Print Jobs"
 msgstr "Aktivní tiskové úlohy"
 
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:5
+#: ../panels/printers/printers.ui.h:4
 msgid "Add New Printer"
 msgstr "Přidat novou tiskárnu"
 
-#: ../panels/printers/printers.ui.h:6
+#: ../panels/printers/printers.ui.h:5
 msgid "Allowed users"
 msgstr "Povolení uživatelé"
 
-#. Translators: Switch back to printer's info tab
-#: ../panels/printers/printers.ui.h:8
-msgid "Back"
-msgstr "Zpět"
-
-#. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:10
-#: ../panels/region/gnome-region-panel-xkbot.c:229
-#: ../panels/sound/gvc-sound-theme-chooser.c:586
-msgid "Default"
-msgstr "Výchozí"
-
-#: ../panels/printers/printers.ui.h:11
-#: ../panels/network/cc-network-panel.c:1596
-#: ../panels/network/cc-network-panel.c:1599 ../panels/network/network.ui.h:11
+#: ../panels/printers/printers.ui.h:6
+#: ../panels/network/cc-network-panel.c:1771
+#: ../panels/network/cc-network-panel.c:1774 ../panels/network/network.ui.h:11
 msgid "IP Address"
 msgstr "Adresa IP"
 
-#: ../panels/printers/printers.ui.h:12
+#: ../panels/printers/printers.ui.h:7
 msgid "Jobs"
 msgstr "Úlohy"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:14
+#: ../panels/printers/printers.ui.h:9
 msgid "Location"
 msgstr "Umístění"
 
-#: ../panels/printers/printers.ui.h:15
+#: ../panels/printers/printers.ui.h:10
 msgid "Model"
 msgstr "Model"
 
-#. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:17
-msgid "Options"
-msgstr "Volby"
-
 #. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:19
-msgid "Print Test Page"
-msgstr "Vytisknout zkušební stránku"
-
-#: ../panels/printers/printers.ui.h:20
-msgid "Printer"
-msgstr "Tiskárna"
+#: ../panels/printers/printers.ui.h:12
+#| msgid "Print Test Page"
+msgid "Print _Test Page"
+msgstr "Vy_tisknout zkušební stránku"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:22
+#: ../panels/printers/printers.ui.h:14
 msgid "Printer Options"
 msgstr "Volby tiskárny"
 
-#: ../panels/printers/printers.ui.h:23
-msgid "Printing..."
-msgstr "Tiskne se…"
-
-#. Tanslators: Switch to tab containing printer's jobs
-#: ../panels/printers/printers.ui.h:25
-msgid "Show"
-msgstr "Zobrazit"
-
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:16
 msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
@@ -1536,69 +1453,42 @@ msgstr ""
 "služba tisku není dostupná."
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:30
+#: ../panels/printers/printers.ui.h:19
 msgid "Supply"
 msgstr "Spotřební materiál"
 
-#: ../panels/region/gnome-region-panel.ui.h:1
-msgid "Allow different layouts for each window"
-msgstr "Umožnit oddělené rozložení pro každé okno"
+#. Translators: Switch back to printer's info tab
+#: ../panels/printers/printers.ui.h:21
+#| msgid "Back"
+msgid "_Back"
+msgstr "_Zpět"
 
-#: ../panels/region/gnome-region-panel.ui.h:2
-msgid "Install languages..."
-msgstr "Instalovat jazyky…"
+#. Translators: This checkbox is checked when the default printer is selected.
+#: ../panels/printers/printers.ui.h:23
+#| msgid "Default"
+msgid "_Default"
+msgstr "_Výchozí"
 
-#: ../panels/region/gnome-region-panel.ui.h:3
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
-msgid "Language"
-msgstr "Jazyk"
+#. Translators: This button opens printer's options tab
+#: ../panels/printers/printers.ui.h:25
+#| msgid "Options"
+msgid "_Options"
+msgstr "V_olby"
 
-#: ../panels/region/gnome-region-panel.ui.h:4
-msgid "Layouts"
-msgstr "Rozložení"
+#. Tanslators: Switch to tab containing printer's jobs
+#: ../panels/printers/printers.ui.h:27
+#| msgid "Show"
+msgid "_Show"
+msgstr "_Zobrazit"
 
-#: ../panels/region/gnome-region-panel.ui.h:5
-#: ../panels/region/gnome-region-panel.desktop.in.in.h:4
-msgid "Region and Language"
-msgstr "Region a jazyk"
+#: ../panels/region/gnome-region-panel-formats.c:99
+#| msgid "April"
+msgid "Imperial"
+msgstr "Imperiální"
 
-#: ../panels/region/gnome-region-panel.ui.h:6
-msgid ""
-"Replace the current keyboard layout settings with the\n"
-"default settings"
-msgstr ""
-"Nahradit aktuální nastavení rozložení klávesnice\n"
-"výchozím nastavením"
-
-#: ../panels/region/gnome-region-panel.ui.h:8
-msgid "Reset to De_faults"
-msgstr "O_bnovit výchozí"
-
-#: ../panels/region/gnome-region-panel.ui.h:9
-msgid "Select a display language (change will be applied next time you log in)"
-msgstr ""
-"Vyberte jazyk zobrazení (změny budou použity až při vašem příštím přihlášení)"
-
-#: ../panels/region/gnome-region-panel.ui.h:10
-msgid "Use default layout in new windows"
-msgstr "V novém okně použít výchozí rozložení"
-
-#: ../panels/region/gnome-region-panel.ui.h:11
-msgid "Use previous window's layout in new windows"
-msgstr "V novém okně použít rozložení předchozího okna"
-
-#: ../panels/region/gnome-region-panel.ui.h:12
-msgid "Use same layout in all windows"
-msgstr "Použít stejné rozložení ve všech oknech"
-
-#: ../panels/region/gnome-region-panel.ui.h:13
-msgid "View and edit keyboard layout options"
-msgstr "Zobrazit a upravit možnosti rozložení klávesnice"
-
-#: ../panels/region/gnome-region-panel.ui.h:14
-#: ../panels/network/network.ui.h:28
-msgid "_Options..."
-msgstr "V_olby…"
+#: ../panels/region/gnome-region-panel-formats.c:101
+msgid "Metric"
+msgstr "Metrické"
 
 #: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
 msgid "Choose a Layout"
@@ -1616,9 +1506,146 @@ msgstr "Vyberte vstupní zdroj, který se má přidat"
 msgid "Keyboard Layout Options"
 msgstr "Volby rozložení klávesnice"
 
-#: ../panels/region/gnome-region-panel-xkblt.c:222
+#: ../panels/region/gnome-region-panel.ui.h:1
+#| msgid "Allow different layouts for each window"
+msgid "Allow different layouts for individual windows"
+msgstr "Umožnit různá rozložení pro jednotlivá okna"
+
+#: ../panels/region/gnome-region-panel.ui.h:2
+#| msgid "Mouse Settings"
+msgid "Copy Settings..."
+msgstr "Kopírovat nastavení…"
+
+#: ../panels/region/gnome-region-panel.ui.h:3
+msgid "Currency"
+msgstr "Měna"
+
+#: ../panels/region/gnome-region-panel.ui.h:4
+msgid "Dates"
+msgstr "Datum"
+
+#: ../panels/region/gnome-region-panel.ui.h:5
+msgid "Display language:"
+msgstr "Jazyk zobrazení:"
+
+#: ../panels/region/gnome-region-panel.ui.h:6
+msgid "Example"
+msgstr "Příklad"
+
+#: ../panels/region/gnome-region-panel.ui.h:7
+#| msgid "Contrast:"
+msgid "Format:"
+msgstr "Formát:"
+
+#: ../panels/region/gnome-region-panel.ui.h:8
+#| msgid "Normal"
+msgid "Formats"
+msgstr "Formáty"
+
+#: ../panels/region/gnome-region-panel.ui.h:9
+#| msgid "_Input volume: "
+msgid "Input source:"
+msgstr "Vstupní zdroj:"
+
+#: ../panels/region/gnome-region-panel.ui.h:10
+msgid "Install languages..."
+msgstr "Instalovat jazyky…"
+
+#: ../panels/region/gnome-region-panel.ui.h:11
+msgid "Language"
+msgstr "Jazyk"
+
+#: ../panels/region/gnome-region-panel.ui.h:12
+msgid "Layouts"
+msgstr "Rozložení"
+
+#: ../panels/region/gnome-region-panel.ui.h:13
+msgid "Measurement"
+msgstr "Měrné jednotky"
+
+#: ../panels/region/gnome-region-panel.ui.h:14
+msgid "New windows use the default layout"
+msgstr "Nové okno použije výchozí rozložení"
+
+#: ../panels/region/gnome-region-panel.ui.h:15
+#| msgid "Use previous window's layout in new windows"
+msgid "New windows use the previous window's layout"
+msgstr "Nové okno použije rozložení předchozího okna"
+
+#: ../panels/region/gnome-region-panel.ui.h:16
+#| msgid "November"
+msgid "Numbers"
+msgstr "Čísla"
+
+#: ../panels/region/gnome-region-panel.ui.h:17
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:4
+msgid "Region and Language"
+msgstr "Region a jazyk"
+
+#: ../panels/region/gnome-region-panel.ui.h:18
+msgid "Region:"
+msgstr "Region:"
+
+#: ../panels/region/gnome-region-panel.ui.h:19
+msgid ""
+"Replace the current keyboard layout settings with the\n"
+"default settings"
+msgstr ""
+"Nahradit aktuální nastavení rozložení klávesnice\n"
+"výchozím nastavením"
+
+#: ../panels/region/gnome-region-panel.ui.h:21
+msgid "Reset to De_faults"
+msgstr "O_bnovit výchozí"
+
+#: ../panels/region/gnome-region-panel.ui.h:22
+msgid "Select a display language (change will be applied next time you log in)"
+msgstr ""
+"Vyberte jazyk zobrazení (změny budou použity až při vašem příštím přihlášení)"
+
+#: ../panels/region/gnome-region-panel.ui.h:24
+#| msgid "System Settings"
+msgid "System settings"
+msgstr "Nastavení systému"
+
+#: ../panels/region/gnome-region-panel.ui.h:25
+msgid ""
+"The login screen, system accounts and new user accounts use the system "
+"Region & Language settings. You may change the system settings to match yours"
+msgstr "Přihlašovací obrazovka, systémové účty a účty nových uživatelů"
+
+#: ../panels/region/gnome-region-panel.ui.h:26
+#| msgid "Time"
+msgid "Times"
+msgstr "Čas"
+
+#: ../panels/region/gnome-region-panel.ui.h:27
+#| msgid "Use same layout in all windows"
+msgid "Use the same layout for all windows"
+msgstr "Použít stejná rozložení ve všech oknech"
+
+#: ../panels/region/gnome-region-panel.ui.h:28
+msgid "View and edit keyboard layout options"
+msgstr "Zobrazit a upravit možnosti rozložení klávesnice"
+
+#: ../panels/region/gnome-region-panel.ui.h:29
+#| msgid "Network settings"
+msgid "Your settings"
+msgstr "Vaše nastavení"
+
+#: ../panels/region/gnome-region-panel.ui.h:30
+#: ../panels/network/network.ui.h:30
+msgid "_Options..."
+msgstr "V_olby…"
+
+#: ../panels/region/gnome-region-panel-xkblt.c:199
 msgid "Layout"
 msgstr "Rozložení"
+
+#: ../panels/region/gnome-region-panel-xkbot.c:229
+#: ../panels/sound/gvc-sound-theme-chooser.c:586
+msgid "Default"
+msgstr "Výchozí"
 
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:1
 msgid "Change your region and language settings"
@@ -1629,87 +1656,93 @@ msgstr "Změňte svůj region a nastavení jazyka"
 msgid "Language;Layout;Keyboard;"
 msgstr "jazyk;rozložení;klávesnice"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:2
+#: ../panels/mouse/gnome-mouse-properties.ui.h:1
+#| msgid "_Acceleration:"
+msgid "A_cceleration:"
+msgstr "Z_rychlení:"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:3
 msgid "Disable _touchpad while typing"
 msgstr "Vypnout touchpa_d při psaní"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:3
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
 msgid "Double-Click Timeout"
 msgstr "Interval dvojitého kliknutí"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
 msgid "Drag and Drop"
 msgstr "Táhni a pusť"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+#: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "Enable _mouse clicks with touchpad"
 msgstr "Povolit kliknutí myší pomo_cí zařízení touchpad"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:6
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
 msgid "Enable h_orizontal scrolling"
 msgstr "Po_volit vodorovné posunování"
 
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+msgid "General"
+msgstr "Obecné"
+
 #. high sensitivity
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#: ../panels/mouse/gnome-mouse-properties.ui.h:12
 msgid "High"
 msgstr "Vysoká"
 
 #. large threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/universal-access/uap.ui.h:34
 msgid "Large"
 msgstr "Velký"
 
 #. low sensitivity
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
 msgid "Low"
 msgstr "Nízká"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Mouse"
 msgstr "Myš"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
 msgid "Mouse Preferences"
 msgstr "Předvolby myši"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
 msgid "Pointer Speed"
 msgstr "Rychlost ukazatele"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+#: ../panels/mouse/gnome-mouse-properties.ui.h:21
 msgid "Scrolling"
 msgstr "Posunování"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:21
+#: ../panels/mouse/gnome-mouse-properties.ui.h:22
 msgid "Sh_ow position of pointer when the Control key is pressed"
 msgstr "Z_obrazit polohu ukazatele při zmáčknutí klávesy Ctrl"
 
 #. small threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:26
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/mouse/gnome-mouse-properties.ui.h:27
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Small"
 msgstr "Malý"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:27
+#: ../panels/mouse/gnome-mouse-properties.ui.h:28
 msgid "Thr_eshold:"
 msgstr "_Práh:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:28
-msgid "To test your settings, try to double-click on the face."
-msgstr "Chcete-li otestovat své nastavení, zkuste dvojitě kliknout na žárovku."
-
 #: ../panels/mouse/gnome-mouse-properties.ui.h:29
+msgid "To test your settings, try to double-click on the face."
+msgstr ""
+"Chcete-li otestovat své nastavení, zkuste dvojitě kliknout na smajlíka."
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:30
 msgid "Touchpad"
 msgstr "Touchpad"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:30
+#: ../panels/mouse/gnome-mouse-properties.ui.h:31
 msgid "Two-_finger scrolling"
 msgstr "Pos_unování dvěma prsty"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
-msgid "_Acceleration:"
-msgstr "Z_rychlení:"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:32
 msgid "_Disabled"
@@ -1749,7 +1782,7 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "trackpad;ukazatel;kliknutí;klepnutí;dvojité;tlačítko;trackball"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/cc-network-panel.c:193
+#: ../panels/network/cc-network-panel.c:196
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgstr ""
@@ -1760,77 +1793,114 @@ msgstr ""
 #. * network, then anyone else on that network can tell your
 #. * machine that it should proxy all of your web traffic
 #. * through them.
-#: ../panels/network/cc-network-panel.c:201
+#: ../panels/network/cc-network-panel.c:204
 msgid "This is not recommended for untrusted public networks."
 msgstr "Nedoporučuje se v nedůvěryhodných veřejných sítích."
 
 #. TRANSLATORS: this is when the access point is not listed
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
-#: ../panels/network/cc-network-panel.c:814
-#| msgid "Other..."
+#: ../panels/network/cc-network-panel.c:817
 msgctxt "Wireless access point"
 msgid "Other..."
 msgstr "Další…"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:972
+#: ../panels/network/cc-network-panel.c:975
+#: ../panels/network/cc-network-panel.c:1297
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:976
+#: ../panels/network/cc-network-panel.c:979
+#: ../panels/network/cc-network-panel.c:1301
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:980
+#: ../panels/network/cc-network-panel.c:983
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:985
+#: ../panels/network/cc-network-panel.c:988
 msgid "Enterprise"
 msgstr "Firemní"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:991
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/network/cc-network-panel.c:994
+#: ../panels/network/cc-network-panel.c:1292
+#: ../panels/universal-access/uap.ui.h:41
 msgid "None"
 msgstr "Žádná"
 
+#: ../panels/network/cc-network-panel.c:1360
+msgid "Hotspot"
+msgstr "Přístupový bod"
+
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1294
-#: ../panels/network/cc-network-panel.c:1339
+#: ../panels/network/cc-network-panel.c:1422
+#: ../panels/network/cc-network-panel.c:1510
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: ../panels/network/cc-network-panel.c:1592 ../panels/network/network.ui.h:12
+#: ../panels/network/cc-network-panel.c:1767 ../panels/network/network.ui.h:12
 msgid "IPv4 Address"
 msgstr "Adresa IPv4"
 
-#: ../panels/network/cc-network-panel.c:1593 ../panels/network/network.ui.h:13
+#: ../panels/network/cc-network-panel.c:1768 ../panels/network/network.ui.h:13
 msgid "IPv6 Address"
 msgstr "Adresa IPv6"
 
-#: ../panels/network/cc-network-panel.c:1731
+#: ../panels/network/cc-network-panel.c:1907
 msgid "Proxy"
 msgstr "Proxy"
 
-#: ../panels/network/cc-network-panel.c:1795
+#: ../panels/network/cc-network-panel.c:1981
 msgid "Network proxy"
 msgstr "Proxy sítě"
 
-#: ../panels/network/cc-network-panel.c:1961
+#: ../panels/network/cc-network-panel.c:2147
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2029
+#: ../panels/network/cc-network-panel.c:2214
 msgid "The system network services are not compatible with this version."
 msgstr "Systémová služba sítě není kompatibilní s touto verzí."
+
+#: ../panels/network/cc-network-panel.c:2873
+#| msgid "Not connected"
+msgid "Not connected to the internet."
+msgstr "Nepřipojeno do internetu."
+
+#: ../panels/network/cc-network-panel.c:2874
+msgid "Create the hotspot anyway?"
+msgstr "Přesto vytvořit přístupový bod?"
+
+#: ../panels/network/cc-network-panel.c:2892
+#, c-format
+msgid "Disconnect from %s and create a new hotspot?"
+msgstr "Odpojit od %s a vytvořit nové přístupový bod?"
+
+#: ../panels/network/cc-network-panel.c:2895
+msgid "This is your only connection to the internet."
+msgstr "Toto je vaše jediné připojení k internetu."
+
+#: ../panels/network/cc-network-panel.c:2913
+msgid "Create _Hotspot"
+msgstr "Vytvořit přís_tupové místo"
+
+#: ../panels/network/cc-network-panel.c:2973
+msgid "Stop hotspot and disconnect any users?"
+msgstr "Zastavit přístupový bod a odpojit případné uživatele?"
+
+#: ../panels/network/cc-network-panel.c:2976
+#| msgid "_Socks Host"
+msgid "_Stop Hotspot"
+msgstr "Za_stavit přístupový bod"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Network settings"
@@ -1886,68 +1956,91 @@ msgid "Interface"
 msgstr "Rozhraní"
 
 #: ../panels/network/network.ui.h:15
+#| msgid "_Network Name"
+msgid "Network Name"
+msgstr "Název sítě"
+
+#: ../panels/network/network.ui.h:16
 msgid "Provider"
 msgstr "Poskytovatel"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:17
 msgid "Security"
 msgstr "Zabezpečení"
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:18
+#| msgid "Security"
+msgid "Security Key"
+msgstr "Bezpečnostní klíč"
+
+#: ../panels/network/network.ui.h:19
 msgid "Select the interface to use for the new service"
 msgstr "Vyberte rozhraní, které se má použít pro novou službu"
 
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:20
 msgid "Speed"
 msgstr "Rychlost"
 
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:21
 msgid "Subnet Mask"
 msgstr "Maska podsítě"
 
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:22
+msgid "Unlock"
+msgstr "Odemknout"
+
+#: ../panels/network/network.ui.h:23
 msgid "Username"
 msgstr "Uživatelské jméno"
 
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:24
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:25
 msgid "_Configuration URL"
 msgstr "_URL s nastavením"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:26
 msgid "_FTP Proxy"
 msgstr "Proxy _FTP"
 
-#: ../panels/network/network.ui.h:25
+#: ../panels/network/network.ui.h:27
 msgid "_HTTP Proxy"
 msgstr "Proxy _HTTP"
 
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:28
 msgid "_Method"
 msgstr "_Metoda"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:29
 msgid "_Network Name"
 msgstr "_Název sítě"
 
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network.ui.h:31
 msgid "_Socks Host"
 msgstr "Počítač _SOCKS"
 
-#: ../panels/network/network.ui.h:30
+#: ../panels/network/network.ui.h:32
+msgid "_Stop Hotspot..."
+msgstr "Za_stavit přístupový bod…"
+
+#: ../panels/network/network.ui.h:33
+#| msgid "Take a photo..."
+msgid "_Use as Hotspot..."
+msgstr "Po_užít jako přístupový bod…"
+
+#: ../panels/network/network.ui.h:34
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "Automaticky"
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network.ui.h:35
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "Ručně"
 
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network.ui.h:36
 msgctxt "proxy method"
 msgid "None"
 msgstr "Žádná"
@@ -2169,12 +2262,14 @@ msgid "Hibernate"
 msgstr "Uspat na disk"
 
 #: ../panels/power/power.ui.h:8
-msgid "On AC power:"
-msgstr "Při napájení z el. sítě po:"
+#| msgid "On AC power:"
+msgid "On AC _power:"
+msgstr "Při na_pájení z el. sítě:"
 
 #: ../panels/power/power.ui.h:9
-msgid "On battery power:"
-msgstr "Při napájení z baterie po:"
+#| msgid "On battery power:"
+msgid "On _battery power:"
+msgstr "Při napájení z _baterie:"
 
 #: ../panels/power/power.ui.h:10
 msgid "Put the computer to sleep when inactive:"
@@ -2189,16 +2284,316 @@ msgid "Suspend"
 msgstr "Uspat do paměti"
 
 #: ../panels/power/power.ui.h:13
-msgid "When power is critically low:"
-msgstr "Když je napájení kriticky nízké:"
+#| msgid "When power is critically low:"
+msgid "When power is _critically low:"
+msgstr "Když je napájení kriti_cky nízké:"
 
 #: ../panels/power/power.ui.h:14
-msgid "When the power button is pressed:"
-msgstr "Když je zmáčknuto vypínací tlačítko:"
+#| msgid "When the sleep button is pressed:"
+msgid "When the _sleep button is pressed:"
+msgstr "Když je zmáčknuto u_spávací tlačítko:"
 
 #: ../panels/power/power.ui.h:15
-msgid "When the sleep button is pressed:"
-msgstr "Když je zmáčknuto uspávací tlačítko:"
+#| msgid "When the power button is pressed:"
+msgid "When the p_ower button is pressed:"
+msgstr "Když je zmáčknuto vypínací tlačítk_o:"
+
+#: ../panels/color/gnome-color-panel.desktop.in.in.h:1
+#: ../panels/color/color.ui.h:8
+#| msgid "Solid Color"
+msgid "Color"
+msgstr "Barvy"
+
+#: ../panels/color/gnome-color-panel.desktop.in.in.h:2
+#| msgid "Power management settings"
+msgid "Color management settings"
+msgstr "Nastavení správy barev"
+
+#. Translators: those are keywords for the color control-center panel
+#: ../panels/color/gnome-color-panel.desktop.in.in.h:4
+msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
+msgstr "barvy;ICC;profil;kalibrace;tiskárna;obrazovka"
+
+#. TRANSLATORS: this is where the user can click and import a profile
+#: ../panels/color/cc-color-panel.c:102
+#| msgid "Other finger: "
+msgid "Other profile…"
+msgstr "Další profil…"
+
+#. TRANSLATORS: this is when the profile should be set for all users
+#: ../panels/color/cc-color-panel.c:156 ../panels/color/color.ui.h:19
+#| msgid "Create a user"
+msgid "Set for all users"
+msgstr "Pro všechny uživatele"
+
+#. TRANSLATORS: this is when the profile should be set for all users
+#: ../panels/color/cc-color-panel.c:163
+msgid "Create virtual device"
+msgstr "Vytvořit virtuální zařízení"
+
+#. TRANSLATORS: an ICC profile is a file containing colorspace data
+#: ../panels/color/cc-color-panel.c:198
+msgid "Select ICC Profile File"
+msgstr "Výběr souboru s profilem ICC"
+
+#: ../panels/color/cc-color-panel.c:201
+msgid "Import"
+msgstr "Importovat"
+
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../panels/color/cc-color-panel.c:212
+msgid "Supported ICC profiles"
+msgstr "Podporované profily ICC"
+
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../panels/color/cc-color-panel.c:219
+msgid "All files"
+msgstr "Všechny soubory"
+
+#. TRANSLATORS: column for device list
+#: ../panels/color/cc-color-panel.c:695
+#: ../panels/sound/gvc-mixer-dialog.c:1539
+msgid "Device"
+msgstr "Zařízení"
+
+#. TRANSLATORS: column for device list
+#: ../panels/color/cc-color-panel.c:730
+#| msgid "Applications"
+msgid "Calibration"
+msgstr "Kalibrace"
+
+#. TRANSLATORS: this is when the button is sensitive
+#: ../panels/color/cc-color-panel.c:762
+#| msgid "Settings for the selected device:"
+msgid "Create a color profile for the selected device"
+msgstr "Vytvořit barevný profil pro vybrané zařízení"
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../panels/color/cc-color-panel.c:776 ../panels/color/cc-color-panel.c:800
+msgid ""
+"The measuring instrument is not detected. Please check it is turned on and "
+"correctly connected."
+msgstr ""
+"Měřící sonda nebyla nalezena. Zkontrolujte prosím, zda je správně připojena "
+"a zapnutá."
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../panels/color/cc-color-panel.c:809
+msgid "The measuring instrument does not support printer profiling."
+msgstr "Měřící sonda nepodporuje profilování tiskáren."
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../panels/color/cc-color-panel.c:820
+msgid "The device type is not currently supported."
+msgstr "Typ zařízení není v současnosti podporován."
+
+#. TRANSLATORS: this is when an auto-added profile cannot be removed
+#: ../panels/color/cc-color-panel.c:892
+msgid "Cannot remove automatically added profile"
+msgstr "Nelze odebrat automaticky přidaný profil"
+
+#. TRANSLATORS: this is when there is no profile for the device
+#: ../panels/color/cc-color-panel.c:1190
+#| msgid "_Profile:"
+msgid "No profile"
+msgstr "Bez profilu"
+
+#: ../panels/color/cc-color-panel.c:1209
+#, c-format
+msgid "%i year"
+msgid_plural "%i years"
+msgstr[0] "%i rok"
+msgstr[1] "%i roky"
+msgstr[2] "%i let"
+
+#: ../panels/color/cc-color-panel.c:1220
+#, c-format
+#| msgid "%i minute"
+#| msgid_plural "%i minutes"
+msgid "%i month"
+msgid_plural "%i months"
+msgstr[0] "%i měsíc"
+msgstr[1] "%i měsíce"
+msgstr[2] "%i měsíců"
+
+#: ../panels/color/cc-color-panel.c:1231
+#, c-format
+msgid "%i week"
+msgid_plural "%i weeks"
+msgstr[0] "%i týden"
+msgstr[1] "%i týdny"
+msgstr[2] "%i týdnů"
+
+#. fallback
+#: ../panels/color/cc-color-panel.c:1238
+#, c-format
+msgid "Less than 1 week"
+msgstr "Méně než 1 týden"
+
+#: ../panels/color/cc-color-panel.c:1298
+#| msgid "Default"
+msgctxt "Colorspace fallback"
+msgid "Default RGB"
+msgstr "Výchozí RGB"
+
+#: ../panels/color/cc-color-panel.c:1303
+#| msgid "Default"
+msgctxt "Colorspace fallback"
+msgid "Default CMYK"
+msgstr "Výchozí CMYK"
+
+#: ../panels/color/cc-color-panel.c:1308
+#| msgid "Default"
+msgctxt "Colorspace fallback"
+msgid "Default Gray"
+msgstr "Výchozí odstíny šedé"
+
+#: ../panels/color/cc-color-panel.c:1423 ../panels/color/cc-color-panel.c:1445
+#: ../panels/color/cc-color-panel.c:1456
+#| msgctxt "volume"
+#| msgid "Unamplified"
+msgid "Uncalibrated"
+msgstr "Nezkalibrováno"
+
+#: ../panels/color/cc-color-panel.c:1426
+#| msgid "The device is already in use."
+msgid "This device is not color managed."
+msgstr "Pro toto zařízení se nepoužívá správa barev."
+
+#: ../panels/color/cc-color-panel.c:1448
+msgid "This device is using manufacturing calibrated data."
+msgstr "Toto zařízení používá továrně kalibrovaná data."
+
+#: ../panels/color/cc-color-panel.c:1459
+msgid ""
+"This device does not have a profile suitable for whole-screen color "
+"correction."
+msgstr ""
+"Toto zařízení nemá profil použitelný pro celoobrazovkovou korekci barev."
+
+#: ../panels/color/cc-color-panel.c:1486
+msgid "This device has an old profile that may no longer be accurate."
+msgstr "Toto zařízení má starý profil, který již nemusí být přesný."
+
+#. TRANSLATORS: this is when the calibration profile age is not
+#. * specified as it has been autogenerated from the hardware
+#: ../panels/color/cc-color-panel.c:1513
+#| msgid "Unspecified"
+msgid "Not specified"
+msgstr "Neurčeno"
+
+#: ../panels/color/cc-color-panel.c:1864
+#| msgctxt "universal access, seeing"
+#| msgid "Display"
+msgctxt "Device kind"
+msgid "Display"
+msgstr "Obrazovka"
+
+#: ../panels/color/cc-color-panel.c:1866
+#| msgid "Scale"
+msgctxt "Device kind"
+msgid "Scanner"
+msgstr "Skener"
+
+#: ../panels/color/cc-color-panel.c:1868
+#| msgid "Printer"
+msgctxt "Device kind"
+msgid "Printer"
+msgstr "Tiskárna"
+
+#: ../panels/color/cc-color-panel.c:1870
+#| msgid "Name"
+msgctxt "Device kind"
+msgid "Camera"
+msgstr "Fotoaparát"
+
+#: ../panels/color/cc-color-panel.c:1872
+#| msgid "Web"
+msgctxt "Device kind"
+msgid "Webcam"
+msgstr "Webová kamera"
+
+#: ../panels/color/color.ui.h:1
+msgid "Add a virtual device"
+msgstr "Přidat virtuální zařízení"
+
+#: ../panels/color/color.ui.h:2
+#| msgid "Device"
+msgid "Add device"
+msgstr "Přidat zařízení"
+
+#: ../panels/color/color.ui.h:3
+#| msgid "April"
+msgid "Add profile"
+msgstr "Přidat profil"
+
+#. Profiles that can be added to the device
+#: ../panels/color/color.ui.h:5
+msgid "Available Profiles"
+msgstr "Dostupné profily"
+
+#: ../panels/color/color.ui.h:6
+msgid "Calibrate the device"
+msgstr "Kalibrovat zařízení"
+
+#: ../panels/color/color.ui.h:7
+msgid "Calibrate…"
+msgstr "Kalibrovat…"
+
+#: ../panels/color/color.ui.h:9
+#| msgid "_Delete Files"
+msgid "Delete device"
+msgstr "Smazat zařízení"
+
+#: ../panels/color/color.ui.h:10
+#| msgid "Device types"
+msgid "Device type:"
+msgstr "Typ zařízení:"
+
+#: ../panels/color/color.ui.h:11
+msgid "Each device needs an up to date color profile to be color managed."
+msgstr ""
+"Aby u jednotlivých zařízení byla uplatněna správa barev, potřebují aktuální "
+"barevné profily."
+
+#: ../panels/color/color.ui.h:12
+msgid ""
+"Image files can be dragged on this window to auto-complete the above fields."
+msgstr ""
+"Soubory s obrázky můžete do tohoto okna přetáhnout a tím předchozí pole "
+"automaticky dokončit."
+
+#: ../panels/color/color.ui.h:13
+msgid "Manufacturer:"
+msgstr "Výrobce:"
+
+#: ../panels/color/color.ui.h:14
+#| msgid "Model"
+msgid "Model:"
+msgstr "Model:"
+
+#. Some profiles are not compatible with some devices
+#: ../panels/color/color.ui.h:16
+msgid "Only profiles that are compatible with the device will be listed above."
+msgstr ""
+"Vypsány jsou jen ty profily, které jsou s daným zařízením kompatibilní."
+
+#: ../panels/color/color.ui.h:17
+#| msgid "Removable Media"
+msgid "Remove a device"
+msgstr "Odebrat zařízení"
+
+#: ../panels/color/color.ui.h:18
+msgid "Remove profile"
+msgstr "Odebrat profil"
+
+#: ../panels/color/color.ui.h:20
+msgid "Set this device for all users on this computer"
+msgstr "Nastavit toto zařízení pro všechny uživatele tohoto počítače"
+
+#: ../panels/color/color.ui.h:21
+msgid "View details"
+msgstr "Zobrazit detaily"
 
 #. Translators: those are keywords for the brightness and lock control-center panel
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
@@ -2233,30 +2628,37 @@ msgstr "30 sekundách"
 msgid "Brightness"
 msgstr "Jas"
 
-#: ../panels/screen/screen.ui.h:10
-msgid "Dim screen to save power"
-msgstr "Ztlumit obrazovku kvůli úspoře energie"
-
 #. To translators: This asks whether you want to lock the screen (through the screensaver) when you're detected to be physically in your home (your house, etc.)
-#: ../panels/screen/screen.ui.h:12
+#: ../panels/screen/screen.ui.h:11
 msgid "Don't lock when at home"
 msgstr "Doma nezamykat"
 
-#: ../panels/screen/screen.ui.h:13
+#: ../panels/screen/screen.ui.h:12
 msgid "Locations..."
 msgstr "Umístění…"
 
-#: ../panels/screen/screen.ui.h:15
-msgid "Lock screen after:"
-msgstr "Zamknout obrazovku po:"
+#: ../panels/screen/screen.ui.h:13
+msgid "Lock"
+msgstr "Zamknout"
 
-#: ../panels/screen/screen.ui.h:16
+#: ../panels/screen/screen.ui.h:14
 msgid "Screen turns off"
 msgstr "Vypnutí obrazovky"
 
+#: ../panels/screen/screen.ui.h:15
+#| msgid "Dim screen to save power"
+msgid "_Dim screen to save power"
+msgstr "Zt_lumit obrazovku kvůli úspoře energie"
+
+#: ../panels/screen/screen.ui.h:16
+#| msgid "Lock screen after:"
+msgid "_Lock screen after:"
+msgstr "Zam_knout obrazovku po:"
+
 #: ../panels/screen/screen.ui.h:17
-msgid "Turn off after:"
-msgstr "Vypnout po:"
+#| msgid "Turn off after:"
+msgid "_Turn off after:"
+msgstr "Vypnou_t po:"
 
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
@@ -2385,18 +2787,15 @@ msgstr "Rozpoznávání špiček"
 msgid "Name"
 msgstr "Název"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1539
-msgid "Device"
-msgstr "Zařízení"
-
 #: ../panels/sound/gvc-mixer-dialog.c:1587
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Test reproduktorů pro %s"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1646
-msgid "Test Speakers"
-msgstr "Otestovat reproduktory"
+#| msgid "Test Speakers"
+msgid "_Test Speakers"
+msgstr "O_testovat reproduktory"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1777
 msgid "_Output volume: "
@@ -2556,6 +2955,116 @@ msgstr "Sonar"
 msgid "No shortcut set"
 msgstr "Není nastavena žádná zkratka"
 
+#: ../panels/universal-access/gconf-property-editor.c:134
+msgid "Key"
+msgstr "Klíč"
+
+#: ../panels/universal-access/gconf-property-editor.c:135
+msgid "GConf key to which this property editor is attached"
+msgstr "Klíč GConf, ke kterému je připojen tento editor vlastnosti"
+
+#: ../panels/universal-access/gconf-property-editor.c:141
+msgid "Callback"
+msgstr "Zpětné volání"
+
+#: ../panels/universal-access/gconf-property-editor.c:142
+msgid "Issue this callback when the value associated with key gets changed"
+msgstr "Provést toto zpětné volání, pokud se změní hodnota přiřazená klíči"
+
+#: ../panels/universal-access/gconf-property-editor.c:147
+msgid "Change set"
+msgstr "Sada změn"
+
+#: ../panels/universal-access/gconf-property-editor.c:148
+msgid ""
+"GConf change set containing data to be forwarded to the gconf client on apply"
+msgstr ""
+"Sada změn GConf obsahující data, která budou předána klientu GConf při "
+"použití"
+
+#: ../panels/universal-access/gconf-property-editor.c:153
+msgid "Conversion to widget callback"
+msgstr "Zpětné volání konverze na prvek"
+
+#: ../panels/universal-access/gconf-property-editor.c:154
+msgid ""
+"Callback to be issued when data are to be converted from GConf to the widget"
+msgstr ""
+"Zpětné volání, které se provede, když má dojít ke konverzi dat systému GConf "
+"na prvek"
+
+#: ../panels/universal-access/gconf-property-editor.c:159
+msgid "Conversion from widget callback"
+msgstr "Zpětné volání konverze z prvku"
+
+#: ../panels/universal-access/gconf-property-editor.c:160
+msgid ""
+"Callback to be issued when data are to be converted to GConf from the widget"
+msgstr ""
+"Zpětné volání, které se provede, když má dojít ke konverzi z prvku na data "
+"GConf"
+
+#: ../panels/universal-access/gconf-property-editor.c:165
+msgid "UI Control"
+msgstr "Ovládací prvek uživatelského rozhraní"
+
+#: ../panels/universal-access/gconf-property-editor.c:166
+msgid "Object that controls the property (normally a widget)"
+msgstr "Objekt, který ovládá tuto vlastnost (obvykle widget)"
+
+#: ../panels/universal-access/gconf-property-editor.c:181
+msgid "Property editor object data"
+msgstr "Data objektu editoru vlastnosti"
+
+#: ../panels/universal-access/gconf-property-editor.c:182
+msgid "Custom data required by the specific property editor"
+msgstr "Uživatelská data vyžadovaná určitým editorem vlastnosti"
+
+#: ../panels/universal-access/gconf-property-editor.c:188
+msgid "Property editor data freeing callback"
+msgstr "Zpětné volání uvolnění dat editoru vlastnosti"
+
+#: ../panels/universal-access/gconf-property-editor.c:189
+msgid "Callback to be issued when property editor object data is to be freed"
+msgstr ""
+"Zpětné volání, které se provede, když mají být uvolněna data objektu editoru "
+"vlastnosti"
+
+#: ../panels/universal-access/gconf-property-editor.c:1474
+#, c-format
+msgid ""
+"Couldn't find the file '%s'.\n"
+"\n"
+"Please make sure it exists and try again, or choose a different background "
+"picture."
+msgstr ""
+"Nelze najít soubor „%s“.\n"
+"\n"
+"Ujistěte se prosím, že soubor existuje, a zkuste to znovu nebo vyberte jiný "
+"obrázek pozadí."
+
+#: ../panels/universal-access/gconf-property-editor.c:1482
+#, c-format
+msgid ""
+"I don't know how to open the file '%s'.\n"
+"Perhaps it's a kind of picture that is not yet supported.\n"
+"\n"
+"Please select a different picture instead."
+msgstr ""
+"Není známo, jak otevřít soubor „%s“.\n"
+"Možná se jedná o typ obrázku, který zatím není podporovaný.\n"
+"\n"
+"Vyberte prosím místo něj jiný obrázek."
+
+#: ../panels/universal-access/gconf-property-editor.c:1604
+msgid "Please select an image."
+msgstr "Vyberte prosím obrázek."
+
+#: ../panels/universal-access/gconf-property-editor.c:1609
+#: ../panels/user-accounts/data/language-chooser.ui.h:2
+msgid "_Select"
+msgstr "_Vybrat"
+
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Keyboard;Mouse;a11y;Accessibility;"
@@ -2586,44 +3095,48 @@ msgid "75%"
 msgstr "75%"
 
 #: ../panels/universal-access/uap.ui.h:9
-msgid "Acceptance delay:"
-msgstr "Zpoždění přijetí:"
+#| msgid "Acceptance delay:"
+msgid "A_cceptance delay:"
+msgstr "Zpož_dění přijetí:"
 
 #: ../panels/universal-access/uap.ui.h:10
+#| msgid "Acceptance delay:"
+msgid "Acc_eptance delay:"
+msgstr "Zpoždění přij_etí:"
+
+#: ../panels/universal-access/uap.ui.h:11
 msgid "Beep when Caps and Num Lock are used"
 msgstr "Zvukové znamení při použití zámků Caps Lock a Num Lock"
 
-#: ../panels/universal-access/uap.ui.h:11
+#: ../panels/universal-access/uap.ui.h:12
+#| msgid "Beep when a modifer key is pressed"
+msgid "Beep when a _modifer key is pressed"
+msgstr "Zvukové znamení při zmáčknutí _modifikátoru"
+
+#: ../panels/universal-access/uap.ui.h:13
 msgid "Beep when a key is"
 msgstr "Zvukové znamení když je klávesa"
 
-#: ../panels/universal-access/uap.ui.h:12
-msgid "Beep when a key is rejected"
-msgstr "Zvukové znamení při odmítnutí klávesy"
-
-#: ../panels/universal-access/uap.ui.h:13
-msgid "Beep when a modifer key is pressed"
-msgstr "Zvukové znamení při zmáčknutí modifikátoru"
-
 #: ../panels/universal-access/uap.ui.h:14
+#| msgid "Beep when a key is rejected"
+msgid "Beep when a key is _rejected"
+msgstr "Zvukové znamení při _odmítnutí klávesy"
+
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Bounce Keys"
 msgstr "Vícenásobná zmáčknutí kláves"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:16
 msgid "Caribou"
 msgstr "Caribou"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Change contrast:"
 msgstr "Změna kontrastu:"
 
-#: ../panels/universal-access/uap.ui.h:17
+#: ../panels/universal-access/uap.ui.h:18
 msgid "Closed Captioning"
 msgstr "Živé titulky"
-
-#: ../panels/universal-access/uap.ui.h:18
-msgid "Contrast:"
-msgstr "Kontrast:"
 
 #: ../panels/universal-access/uap.ui.h:19
 msgid "Control the pointer using the keypad"
@@ -2646,234 +3159,223 @@ msgid "Decrease size:"
 msgstr "Zmenšení velikosti:"
 
 #: ../panels/universal-access/uap.ui.h:25
-msgid "Disable if two keys are pressed together"
-msgstr "Vypnout při současném stisku dvou kláves"
-
-#: ../panels/universal-access/uap.ui.h:26
 msgid "Display a textual description of speech and sounds"
 msgstr "Zobrazovat textové popisy k mluvení a zvukům"
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:26
 msgid "Flash the entire screen"
 msgstr "Bliknout celou obrazovkou"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Flash the window title"
 msgstr "Bliknout záhlavím okna"
 
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:28
 msgid "GOK"
 msgstr "GOK"
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Hearing"
 msgstr "Poslouchání"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Hover Click"
 msgstr "Kliknutí posečkáním"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Ignores fast duplicate keypresses"
 msgstr "Ignorovat rychlé dvojité stisky kláves"
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Increase size:"
 msgstr "Zvětšení velikosti:"
 
-#: ../panels/universal-access/uap.ui.h:34
-msgid "Keyboard Settings"
-msgstr "Nastavení klávesnice"
-
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:35
 msgid "Larger"
 msgstr "Větší"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:38
+#| msgid "_Motion threshold:"
+msgid "Motion _threshold:"
+msgstr "Práh poh_ybu:"
+
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Mouse Keys"
 msgstr "Myš klávesnicí"
 
-#: ../panels/universal-access/uap.ui.h:41
-msgid "Mouse Settings"
-msgstr "Nastavení myši"
-
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Nomon"
 msgstr "Nomon"
 
-#: ../panels/universal-access/uap.ui.h:45
+#: ../panels/universal-access/uap.ui.h:43
 msgid "On screen keyboard"
 msgstr "Klávesnice na obrazovce"
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:44
 msgid "OnBoard"
 msgstr "OnBoard"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:45
 msgid "Options..."
 msgstr "Volby…"
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Pointing and Clicking"
 msgstr "Ukazování a klikání"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr ""
 "Zadejte jaké má být zpoždění, než je klávesa přijata po té, co je zmáčknuta"
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Screen Reader"
 msgstr "Čtení obrazovky"
 
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Screen keyboard"
 msgstr "Klávesnice na obrazovce"
 
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Seeing"
 msgstr "Dívání"
 
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:53
 msgid "Simulated Secondary Click"
 msgstr "Simulované druhé kliknutí"
 
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Slow Keys"
 msgstr "Pomalé klávesy"
 
-#: ../panels/universal-access/uap.ui.h:59
-msgid "Sound Settings"
-msgstr "Nastavení zvuku"
-
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:57
 msgid "Sticky Keys"
 msgstr "Kombinace kláves jedním prstem"
 
-#: ../panels/universal-access/uap.ui.h:61
-msgid "Test flash"
-msgstr "Otestovat blikání"
-
-#: ../panels/universal-access/uap.ui.h:62
-msgid "Text size:"
-msgstr "Velikost textu:"
-
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:58
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Sekvenci modifikačních kláves považovat za kombinaci těchto kláves"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Trigger a click when the pointer hovers"
 msgstr "Zahájit kliknutí při zastavení pohybu ukazatele"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Zahájit druhé kliknutí podržením hlavního tlačítka"
 
-#: ../panels/universal-access/uap.ui.h:66
-msgid "Turn on accessibility features from the keyboard"
-msgstr "Zapínat funkce zpřístupnění z klávesnice"
-
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Turn on or off:"
 msgstr "Zapnutí/vypnutí:"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Type here to test settings"
 msgstr "Nastavení si otestujte psaním zde"
 
-#: ../panels/universal-access/uap.ui.h:69
-msgid "Typing"
-msgstr "Psaní"
-
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Typing Assistant"
 msgstr "Pomocník psaní"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "Použít vizuální signalizaci, když se objeví zvukové upozornění"
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Video Mouse"
 msgstr "Myš videem"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Visual Alerts"
 msgstr "Vizuální upozornění"
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Zoom in:"
 msgstr "Zvětšení:"
 
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Zoom out:"
 msgstr "Zmenšení:"
 
+#: ../panels/universal-access/uap.ui.h:70
+#| msgid "Contrast:"
+msgid "_Contrast:"
+msgstr "_Kontrast:"
+
+#: ../panels/universal-access/uap.ui.h:71
+#| msgid "Disable if two keys are pressed together"
+msgid "_Disable if two keys are pressed together"
+msgstr "Vypnout při současném stisku _dvou kláves"
+
+#: ../panels/universal-access/uap.ui.h:72
+#| msgid "Keyboard Settings"
+msgid "_Keyboard Settings"
+msgstr "Nastavení _klávesnice"
+
+#: ../panels/universal-access/uap.ui.h:73
+#| msgid "Mouse Settings"
+msgid "_Mouse Settings"
+msgstr "Nastavení _myši"
+
+#: ../panels/universal-access/uap.ui.h:74
+#| msgid "Sound Settings"
+msgid "_Sound Settings"
+msgstr "Na_stavení zvuku"
+
+#: ../panels/universal-access/uap.ui.h:75
+#| msgid "Test flash"
+msgid "_Test flash"
+msgstr "O_testovat blikání"
+
 #: ../panels/universal-access/uap.ui.h:76
-msgid "_Motion threshold:"
-msgstr "Práh poh_ybu:"
+#| msgid "Text size:"
+msgid "_Text size:"
+msgstr "Velikost _textu:"
 
 #: ../panels/universal-access/uap.ui.h:77
+#| msgid "Turn on accessibility features from the keyboard"
+msgid "_Turn on accessibility features from the keyboard"
+msgstr "Zapína_t funkce zpřístupnění z klávesnice"
+
+#: ../panels/universal-access/uap.ui.h:78
 msgid "accepted"
 msgstr "přijata"
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:79
 msgid "pressed"
 msgstr "zmáčknuta"
 
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:80
 msgid "rejected"
 msgstr "odmítnuta"
 
-#: ../panels/universal-access/uap.ui.h:80
-msgctxt "universal access, contrast"
-msgid "<span size=\"x-large\">High/Inverse</span>"
-msgstr "<span size=\"x-large\">Vysoký/inverzně</span>"
-
 #: ../panels/universal-access/uap.ui.h:81
-msgctxt "universal access, contrast"
-msgid "<span size=\"x-large\">High</span>"
-msgstr "<span size=\"x-large\">Vysoký</span>"
-
-#: ../panels/universal-access/uap.ui.h:82
-msgctxt "universal access, contrast"
-msgid "<span size=\"x-large\">Low</span>"
-msgstr "<span size=\"x-large\">Nízký</span>"
-
-#: ../panels/universal-access/uap.ui.h:83
-msgctxt "universal access, contrast"
-msgid "<span size=\"x-large\">Normal</span>"
-msgstr "<span size=\"x-large\">Běžný</span>"
-
-#: ../panels/universal-access/uap.ui.h:84
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Vysoký"
 
-#: ../panels/universal-access/uap.ui.h:85
+#: ../panels/universal-access/uap.ui.h:82
 msgctxt "universal access, contrast"
 msgid "High/Inverse"
 msgstr "Vysoký/inverzně"
 
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:83
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Nízký"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:84
 msgctxt "universal access, contrast"
 msgid "Normal"
 msgstr "Běžný"
 
 #. Translators: this refers to theme contrast and font size
-#: ../panels/universal-access/uap.ui.h:89
+#: ../panels/universal-access/uap.ui.h:86
 msgctxt "universal access, seeing"
 msgid "Display"
 msgstr "Displej"
 
 #. Translators: this refers to screen magnifier
-#: ../panels/universal-access/uap.ui.h:91
+#: ../panels/universal-access/uap.ui.h:88
 msgctxt "universal access, seeing"
 msgid "Zoom"
 msgstr "Zvětšení"
@@ -2928,46 +3430,20 @@ msgstr "Nové heslo neobsahuje dostatek různorodých znaků"
 msgid "Unknown error"
 msgstr "Neznámá chyba"
 
-#: ../panels/user-accounts/um-account-dialog.c:78
+#: ../panels/user-accounts/um-account-dialog.c:73
 msgid "Failed to create user"
 msgstr "Selhalo vytvoření uživatele"
 
-#: ../panels/user-accounts/um-account-dialog.c:185
-#, c-format
-msgid "A user with the username '%s' already exists"
-msgstr "Uživatel s uživatelským jménem „%s“ již existuje"
-
-#: ../panels/user-accounts/um-account-dialog.c:189
-#, c-format
-msgid "The username is too long"
-msgstr "Uživatelské jméno je příliš dlouhé"
-
-#: ../panels/user-accounts/um-account-dialog.c:192
-msgid "The username cannot start with a '-'"
-msgstr "Uživatelské jméno nesmí začínat znakem „-“"
-
-#: ../panels/user-accounts/um-account-dialog.c:195
-msgid ""
-"The username must consist of:\n"
-" ➣ letters from the English alphabet\n"
-" ➣ digits\n"
-" ➣ any of the characters '.', '-' and '_'"
-msgstr ""
-"Uživatelské jméno musí sestávat z:\n"
-" ➣ písmen latinky bez diakritiky\n"
-" ➣ číslic\n"
-" ➣ některých znaků z „.“, „-“ a „_“"
-
 #: ../panels/user-accounts/um-account-type.c:35
 #: ../panels/user-accounts/data/account-dialog.ui.h:2
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
 msgctxt "Account type"
 msgid "Standard"
 msgstr "Normální"
 
 #: ../panels/user-accounts/um-account-type.c:37
 #: ../panels/user-accounts/data/account-dialog.ui.h:1
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
 msgctxt "Account type"
 msgid "Administrator"
 msgstr "Správce"
@@ -3028,15 +3504,15 @@ msgstr "Nezdařil se přístup k zařízení „%s“"
 msgid "Could not start finger capture on '%s' device"
 msgstr "Nezdařilo se spustit registraci otisků prstů na zařízení „%s“"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:549
+#: ../panels/user-accounts/um-fingerprint-dialog.c:532
 msgid "Could not access any fingerprint readers"
 msgstr "Nelze přistupovat k žádné čtečce otisku prstů"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:550
+#: ../panels/user-accounts/um-fingerprint-dialog.c:533
 msgid "Please contact your system administrator for help."
 msgstr "Potřebujete-li pomoc, kontaktujte prosím správce systému."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:587
+#: ../panels/user-accounts/um-fingerprint-dialog.c:570
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Enable Fingerprint Login"
 msgstr "Povolit přihlášení otiskem prstů"
@@ -3046,7 +3522,7 @@ msgstr "Povolit přihlášení otiskem prstů"
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:621
+#: ../panels/user-accounts/um-fingerprint-dialog.c:604
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -3055,14 +3531,21 @@ msgstr ""
 "Chcete-li zapnout přihlášení otiskem prstů, je nutné uložit jeden z vašich "
 "otisků prstů za použití zařízení \"%s\"."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:629
-#, c-format
-msgid ""
-"Enrolling fingerprints for\n"
-"<b><big>%s</big></b>"
-msgstr ""
-"Registrace otisků prstů uživatele\n"
-"<b><big>%s</big></b>"
+#: ../panels/user-accounts/um-fingerprint-dialog.c:611
+#| msgid "Left ring finger"
+msgid "Selecting finger"
+msgstr "Výběr prstu"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:612
+#| msgid ""
+#| "Enrolling fingerprints for\n"
+#| "<b><big>%s</big></b>"
+msgid "Enrolling fingerprints"
+msgstr "Registrace otisku prstu"
+
+#: ../panels/user-accounts/um-fingerprint-dialog.c:613
+msgid "Summary"
+msgstr "Souhrn"
 
 #: ../panels/user-accounts/um-language-dialog.c:180
 msgid "Other..."
@@ -3105,31 +3588,31 @@ msgid "The current password is not correct"
 msgstr "Současné heslo není správně"
 
 #: ../panels/user-accounts/um-password-dialog.c:466
-#: ../panels/user-accounts/um-password-dialog.c:683
+#: ../panels/user-accounts/um-password-dialog.c:693
 msgctxt "Password strength"
 msgid "Too short"
 msgstr "Příliš krátké"
 
 #: ../panels/user-accounts/um-password-dialog.c:469
-#: ../panels/user-accounts/um-password-dialog.c:684
+#: ../panels/user-accounts/um-password-dialog.c:694
 msgctxt "Password strength"
 msgid "Weak"
 msgstr "Slabé"
 
 #: ../panels/user-accounts/um-password-dialog.c:471
-#: ../panels/user-accounts/um-password-dialog.c:685
+#: ../panels/user-accounts/um-password-dialog.c:695
 msgctxt "Password strength"
 msgid "Fair"
 msgstr "Slušné"
 
 #: ../panels/user-accounts/um-password-dialog.c:473
-#: ../panels/user-accounts/um-password-dialog.c:686
+#: ../panels/user-accounts/um-password-dialog.c:696
 msgctxt "Password strength"
 msgid "Good"
 msgstr "Dobré"
 
 #: ../panels/user-accounts/um-password-dialog.c:475
-#: ../panels/user-accounts/um-password-dialog.c:687
+#: ../panels/user-accounts/um-password-dialog.c:697
 msgctxt "Password strength"
 msgid "Strong"
 msgstr "Silné"
@@ -3143,7 +3626,6 @@ msgid "Wrong password"
 msgstr "Nesprávné heslo"
 
 #: ../panels/user-accounts/um-photo-dialog.c:97
-#: ../panels/user-accounts/data/language-chooser.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
 msgid "Select"
 msgstr "Vybrat"
@@ -3165,29 +3647,29 @@ msgstr "Procházet další obrázky…"
 msgid "Used by %s"
 msgstr "Použito uživatelem %s"
 
-#: ../panels/user-accounts/um-user-manager.c:432
+#: ../panels/user-accounts/um-user-manager.c:437
 #, c-format
 msgid "A user with name '%s' already exists."
 msgstr "Uživatel se jménem „%s“ již existuje."
 
-#: ../panels/user-accounts/um-user-manager.c:527
+#: ../panels/user-accounts/um-user-manager.c:532
 msgid "This user does not exist."
 msgstr "Takovýto uživatel neexistuje."
 
-#: ../panels/user-accounts/um-user-panel.c:357
+#: ../panels/user-accounts/um-user-panel.c:354
 msgid "Failed to delete user"
 msgstr "Selhalo smazání účtu"
 
-#: ../panels/user-accounts/um-user-panel.c:417
+#: ../panels/user-accounts/um-user-panel.c:414
 msgid "You cannot delete your own account."
 msgstr "Nemůžete smazat svůj vlastní účet."
 
-#: ../panels/user-accounts/um-user-panel.c:426
+#: ../panels/user-accounts/um-user-panel.c:423
 #, c-format
 msgid "%s is still logged in"
 msgstr "Uživatel %s je doposud přihlášen"
 
-#: ../panels/user-accounts/um-user-panel.c:430
+#: ../panels/user-accounts/um-user-panel.c:427
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -3195,12 +3677,12 @@ msgstr ""
 "Smazání účtu, zatímco je dotyčný uživatel přihlášen, může přivést systém do "
 "nekonzistentního stavu."
 
-#: ../panels/user-accounts/um-user-panel.c:439
+#: ../panels/user-accounts/um-user-panel.c:436
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Chcete zachovat soubory uživatele %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:443
+#: ../panels/user-accounts/um-user-panel.c:440
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -3208,44 +3690,40 @@ msgstr ""
 "Je možné zachovat domovskou složku, poštovní schránku a dočasné soubory, i "
 "když bude uživatelský účet smazán."
 
-#: ../panels/user-accounts/um-user-panel.c:446
+#: ../panels/user-accounts/um-user-panel.c:443
 msgid "_Delete Files"
 msgstr "O_dstranit soubory"
 
-#: ../panels/user-accounts/um-user-panel.c:447
+#: ../panels/user-accounts/um-user-panel.c:444
 msgid "_Keep Files"
 msgstr "Zacho_vat soubory"
 
-#: ../panels/user-accounts/um-user-panel.c:448
-msgid "_Cancel"
-msgstr "_Zrušit"
-
-#: ../panels/user-accounts/um-user-panel.c:498
+#: ../panels/user-accounts/um-user-panel.c:495
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Účet zakázán"
 
-#: ../panels/user-accounts/um-user-panel.c:506
+#: ../panels/user-accounts/um-user-panel.c:503
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Bude nastaveno při příštím přihlášení"
 
-#: ../panels/user-accounts/um-user-panel.c:509
+#: ../panels/user-accounts/um-user-panel.c:506
 msgctxt "Password mode"
 msgid "None"
 msgstr "Žádné"
 
-#: ../panels/user-accounts/um-user-panel.c:831
+#: ../panels/user-accounts/um-user-panel.c:826
 msgid "Failed to contact the accounts service"
 msgstr "Selhalo kontaktování účtovací služby"
 
-#: ../panels/user-accounts/um-user-panel.c:833
+#: ../panels/user-accounts/um-user-panel.c:828
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Zkontrolujte prosím, že je účtovací služba AccountService nainstalovaná a "
 "zapnutá."
 
-#: ../panels/user-accounts/um-user-panel.c:866
+#: ../panels/user-accounts/um-user-panel.c:864
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -3253,12 +3731,12 @@ msgstr ""
 "Abyste mohli provést změny,\n"
 "klikněte nejprve na ikonu *"
 
-#: ../panels/user-accounts/um-user-panel.c:904
+#: ../panels/user-accounts/um-user-panel.c:902
 msgid "Create a user"
 msgstr "Vytvořit uživatele"
 
-#: ../panels/user-accounts/um-user-panel.c:915
-#: ../panels/user-accounts/um-user-panel.c:1214
+#: ../panels/user-accounts/um-user-panel.c:913
+#: ../panels/user-accounts/um-user-panel.c:1202
 msgid ""
 "To create a user,\n"
 "click the * icon first"
@@ -3266,12 +3744,12 @@ msgstr ""
 "Abyste mohli vytvořit uživatele\n"
 "klikněte nejprve na ikonu *"
 
-#: ../panels/user-accounts/um-user-panel.c:924
+#: ../panels/user-accounts/um-user-panel.c:922
 msgid "Delete the selected user"
 msgstr "Smazat vybraného uživatele"
 
-#: ../panels/user-accounts/um-user-panel.c:936
-#: ../panels/user-accounts/um-user-panel.c:1219
+#: ../panels/user-accounts/um-user-panel.c:934
+#: ../panels/user-accounts/um-user-panel.c:1207
 msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
@@ -3279,13 +3757,44 @@ msgstr ""
 "Abyste mohli smazat uživatele,\n"
 "klikněte nejprve na ikonu *"
 
-#: ../panels/user-accounts/um-user-panel.c:1114
+#: ../panels/user-accounts/um-user-panel.c:1111
 msgid "My Account"
 msgstr "Můj účet"
 
-#: ../panels/user-accounts/um-user-panel.c:1124
+#: ../panels/user-accounts/um-user-panel.c:1121
 msgid "Other Accounts"
 msgstr "Ostatní účty"
+
+#: ../panels/user-accounts/um-utils.c:512
+#, c-format
+msgid "A user with the username '%s' already exists"
+msgstr "Uživatel s uživatelským jménem „%s“ již existuje"
+
+#: ../panels/user-accounts/um-utils.c:516
+#, c-format
+msgid "The username is too long"
+msgstr "Uživatelské jméno je příliš dlouhé"
+
+#: ../panels/user-accounts/um-utils.c:519
+msgid "The username cannot start with a '-'"
+msgstr "Uživatelské jméno nesmí začínat znakem „-“"
+
+#: ../panels/user-accounts/um-utils.c:522
+#| msgid ""
+#| "The username must consist of:\n"
+#| " ➣ letters from the English alphabet\n"
+#| " ➣ digits\n"
+#| " ➣ any of the characters '.', '-' and '_'"
+msgid ""
+"The username must only consist of:\n"
+" ➣ letters from the English alphabet\n"
+" ➣ digits\n"
+" ➣ any of the characters '.', '-' and '_'"
+msgstr ""
+"Uživatelské jméno musí sestávat z:\n"
+" ➣ písmen latinky bez diakritiky\n"
+" ➣ číslic\n"
+" ➣ některých znaků z „.“, „-“ a „_“"
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
 msgid "Add or remove users"
@@ -3321,66 +3830,67 @@ msgid "_Username"
 msgstr "_Uživatelské jméno"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:1
-msgid ""
-"How to choose a "
-"strong password"
+msgid "C_onfirm password"
+msgstr "_Ověřit heslo"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:2
+msgid "Ch_ange"
+msgstr "Změn_it"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:3
+msgid "Changing password for"
+msgstr "Změna hesla pro"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:4
+msgid "Choose a generated password"
+msgstr "Zvolit náhodně vygenerované heslo"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:5
+msgid "Choose password at next login"
+msgstr "Zvolit heslo při příštím přihlášení"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:6
+msgid "Current _password"
+msgstr "Současné _heslo"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:7
+msgid "Disable this account"
+msgstr "Zakázat tento účet"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:8
+msgid "Enable this account"
+msgstr "Povolit tento účet"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:9
+msgid "Fair"
+msgstr "Slušné"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:10
+msgid "How to choose a strong password"
 msgstr ""
 "<a href=\"http://cs.wikipedia.org/wiki/Bezpe%C4%8Dn%C3%A9_heslo\">Jak zvolit "
 "silné heslo"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:2
-msgid ""
-"<small>This hint may be displayed at the login screen.  It will be visible "
-"to all users of this system.  Do <b>not</b> include the password here.</"
-"small>"
-msgstr ""
-"<small>Tato nápověda může být zobrazena na přihlašovací obrazovce a uvidí ji "
-"všichni uživatelé tohoto systému. <b>Nezadávejte</b> zde hleslo v přímé "
-"podobě.</small>"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:3
-msgid "C_onfirm password"
-msgstr "_Ověřit heslo"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:4
-msgid "Ch_ange"
-msgstr "Změn_it"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:5
-msgid "Changing password for"
-msgstr "Změna hesla pro"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:6
-msgid "Choose a generated password"
-msgstr "Zvolit náhodně vygenerované heslo"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:7
-msgid "Choose password at next login"
-msgstr "Zvolit heslo při příštím přihlášení"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:8
-msgid "Current _password"
-msgstr "Současné _heslo"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:9
-msgid "Disable this account"
-msgstr "Zakázat tento účet"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:10
-msgid "Enable this account"
-msgstr "Povolit tento účet"
-
 #: ../panels/user-accounts/data/password-dialog.ui.h:11
-msgid "Fair"
-msgstr "Slušné"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:12
 msgid "Log in without a password"
 msgstr "Přihlašovat se bez hesla"
 
-#: ../panels/user-accounts/data/password-dialog.ui.h:13
+#: ../panels/user-accounts/data/password-dialog.ui.h:12
 msgid "Set a password now"
 msgstr "Nastavit heslo nyní"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:13
+#| msgid ""
+#| "<small>This hint may be displayed at the login screen.  It will be "
+#| "visible to all users of this system.  Do <b>not</b> include the password "
+#| "here.</small>"
+msgid ""
+"This hint may be displayed at the login screen.  It will be visible to all "
+"users of this system.  Do <b>not</b> include the password here."
+msgstr ""
+"Tato nápověda může být zobrazena na přihlašovací obrazovce a uvidí ji "
+"všichni uživatelé tohoto systému. <b>Nezadávejte</b> zde hleslo v přímé "
+"podobě."
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:14
 msgid "_Action"
@@ -3401,6 +3911,10 @@ msgstr "Ukázat he_slo"
 #: ../panels/user-accounts/data/photo-dialog.ui.h:1
 msgid "Browse"
 msgstr "Procházet"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:3
+msgid "Cancel"
+msgstr "Zrušit"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:4
 msgid "Changing photo for:"
@@ -3425,74 +3939,71 @@ msgid "Take a photograph"
 msgstr "Pořídit fotografii"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
+#| msgid "Automatic Login"
+msgid "A_utomatic Login"
+msgstr "A_utomatické přihlašování"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
 msgid "Account Information"
 msgstr "Informace o účtu"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
-msgid "Account type"
-msgstr "Typ účtu"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
-msgid "Automatic Login"
-msgstr "Automatické přihlašování"
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
+#| msgid "Account type"
+msgid "Account _type"
+msgstr "_Typ účtu"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
-msgid "Fingerprint Login"
-msgstr "Přihlášení otiskem prstů"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
 msgid "Login Options"
 msgstr "Volby přihlašování"
 
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+#| msgid "Fingerprint Login"
+msgid "_Fingerprint Login"
+msgstr "Přihlášení otiskem _prstu"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+#| msgid "Language"
+msgid "_Language"
+msgstr "Jazy_k"
+
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
-msgid "Password"
-msgstr "Heslo"
+#| msgid "Password"
+msgid "_Password"
+msgstr "_Heslo"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:2
-msgid "Left index finger"
-msgstr "Ukazováček levé ruky"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:3
 msgid "Left little finger"
 msgstr "Malíček levé ruky"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:4
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:3
 msgid "Left middle finger"
 msgstr "Prostředníček levé ruky"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:5
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:4
 msgid "Left ring finger"
 msgstr "Prsteníček levé ruky"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:6
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:5
 msgid "Left thumb"
 msgstr "Palec levé ruky"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:7
-msgid "Other finger: "
-msgstr "Jiný prst: "
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:8
-msgid "Right index finger"
-msgstr "Ukazováček pravé ruky"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:9
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:6
 msgid "Right little finger"
 msgstr "Malíček pravé ruky"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:10
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:7
 msgid "Right middle finger"
 msgstr "Prostředníček pravé ruky"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:11
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:8
 msgid "Right ring finger"
 msgstr "Prsteníček pravé ruky"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:12
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:9
 msgid "Right thumb"
 msgstr "Palec pravé ruky"
 
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:13
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:10
 msgid ""
 "Your fingerprint was successfully saved. You should now be able to log in "
 "using your fingerprint reader."
@@ -3500,27 +4011,43 @@ msgstr ""
 "Váš otisk prstů byl úspěšně uložen. Nyní by mělo být možné přihlásit se za "
 "použití čtečky otisku prstů."
 
-#: ../shell/control-center.c:51
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:11
+#| msgid "Left index finger"
+msgid "_Left index finger"
+msgstr "Ukazováček _levé ruky"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:12
+#| msgid "Other finger: "
+msgid "_Other finger: "
+msgstr "_Jiný prst: "
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:13
+#| msgid "Right index finger"
+msgid "_Right index finger"
+msgstr "Ukazováček p_ravé ruky"
+
+#: ../shell/control-center.c:53
 msgid "Enable verbose mode"
 msgstr "Zapnout podrobný režim"
 
-#: ../shell/control-center.c:52
+#: ../shell/control-center.c:54
 msgid "Show the overview"
 msgstr "Zobrazit přehled"
 
-#: ../shell/control-center.c:53
+#: ../shell/control-center.c:55 ../shell/control-center.c:56
+#: ../shell/control-center.c:57
 msgid "Show help options"
 msgstr "Zobrazí přepínače nápovědy"
 
-#: ../shell/control-center.c:54
+#: ../shell/control-center.c:58
 msgid "Panel to display"
 msgstr "Panel, který se má zobrazit"
 
-#: ../shell/control-center.c:76
+#: ../shell/control-center.c:80
 msgid "- System Settings"
 msgstr "– Nastavení systému"
 
-#: ../shell/control-center.c:84
+#: ../shell/control-center.c:88
 #, c-format
 msgid ""
 "%s\n"
@@ -3542,14 +4069,3 @@ msgstr "Ovládací centrum"
 msgid "_All Settings"
 msgstr "Všech_a nastavení"
 
-#~ msgid "Clean print heads"
-#~ msgstr "Vyčistit tiskové hlavy"
-
-#~ msgid "An error has occured during a maintenance command."
-#~ msgstr "Při provádění příkazu údržby se vyskytla chyba."
-
-#~ msgid "DSL"
-#~ msgstr "DSL"
-
-#~ msgid "Mobile Broadband"
-#~ msgstr "Mobilní připojení"
