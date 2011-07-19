@@ -24,6 +24,7 @@
 
 #include <libupower-glib/upower.h>
 #include <glib/gi18n.h>
+#include <gnome-settings-daemon/gsd-enums.h>
 
 #include "cc-power-panel.h"
 
@@ -44,6 +45,12 @@ struct _CcPowerPanelPrivate
   UpClient      *up_client;
 };
 
+enum
+{
+  ACTION_MODEL_TEXT,
+  ACTION_MODEL_VALUE,
+  ACTION_MODEL_SENSITIVE
+};
 
 static void
 cc_power_panel_get_property (GObject    *object,
@@ -417,6 +424,53 @@ combo_enum_changed_cb (GtkWidget *widget, CcPowerPanel *self)
 }
 
 static void
+disable_unavailable_combo_items (CcPowerPanel *self,
+                                 GtkComboBox *combo_box)
+{
+  gboolean enabled;
+  gboolean ret;
+  gint value_tmp;
+  GtkCellRenderer *renderer;
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+
+  /* setup the renderer */
+  renderer = gtk_cell_renderer_text_new ();
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box), renderer, TRUE);
+  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo_box), renderer,
+                                  "text", ACTION_MODEL_TEXT,
+                                  "sensitive", ACTION_MODEL_SENSITIVE,
+                                  NULL);
+
+  /* get entry */
+  model = gtk_combo_box_get_model (combo_box);
+  ret = gtk_tree_model_get_iter_first (model, &iter);
+  if (!ret)
+    return;
+
+  /* disable any actions we cannot do */
+  do
+    {
+      gtk_tree_model_get (model, &iter,
+                          ACTION_MODEL_VALUE, &value_tmp,
+                          -1);
+      switch (value_tmp) {
+      case GSD_POWER_ACTION_SUSPEND:
+        enabled = up_client_get_can_suspend (self->priv->up_client);
+        break;
+      case GSD_POWER_ACTION_HIBERNATE:
+        enabled = up_client_get_can_hibernate (self->priv->up_client);
+        break;
+      default:
+        enabled = TRUE;
+      }
+      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+                          ACTION_MODEL_SENSITIVE, enabled,
+                          -1);
+    } while (gtk_tree_model_iter_next (model, &iter));
+}
+
+static void
 set_value_for_combo (GtkComboBox *combo_box, gint value)
 {
   GtkTreeIter iter;
@@ -613,6 +667,7 @@ cc_power_panel_init (CcPowerPanel *self)
   value = g_settings_get_enum (self->priv->gsd_settings, "critical-battery-action");
   widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
                                                "combobox_critical"));
+  disable_unavailable_combo_items (self, GTK_COMBO_BOX (widget));
   set_value_for_combo (GTK_COMBO_BOX (widget), value);
   g_object_set_data (G_OBJECT(widget), "_gsettings_key", "critical-battery-action");
   g_signal_connect (widget, "changed",
@@ -622,6 +677,7 @@ cc_power_panel_init (CcPowerPanel *self)
   value = g_settings_get_enum (self->priv->gsd_settings, "button-power");
   widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
                                                "combobox_button_power"));
+  disable_unavailable_combo_items (self, GTK_COMBO_BOX (widget));
   set_value_for_combo (GTK_COMBO_BOX (widget), value);
   g_object_set_data (G_OBJECT(widget), "_gsettings_key", "button-power");
   g_signal_connect (widget, "changed",
@@ -631,6 +687,7 @@ cc_power_panel_init (CcPowerPanel *self)
   value = g_settings_get_enum (self->priv->gsd_settings, "button-sleep");
   widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
                                                "combobox_button_sleep"));
+  disable_unavailable_combo_items (self, GTK_COMBO_BOX (widget));
   set_value_for_combo (GTK_COMBO_BOX (widget), value);
   g_object_set_data (G_OBJECT(widget), "_gsettings_key", "button-sleep");
   g_signal_connect (widget, "changed",
