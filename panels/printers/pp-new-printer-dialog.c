@@ -940,9 +940,9 @@ actualize_device_types_list (PpNewPrinterDialog *pp)
   pp->num_device_connection_types = 2;
 
   /* Translators: Local means local printers */
-  pp->device_connection_types[0] = g_strdup (_("Local"));
+  pp->device_connection_types[0] = g_strdup (C_("printer type", "Local"));
   /* Translators: Network means network printers */
-  pp->device_connection_types[1] = g_strdup (_("Network"));
+  pp->device_connection_types[1] = g_strdup (C_("printer type", "Network"));
 
   for (i = 0; i < pp->num_device_connection_types; i++)
     {
