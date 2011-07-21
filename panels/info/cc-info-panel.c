@@ -550,55 +550,6 @@ get_os_type (void)
   return g_strdup_printf (_("%d-bit"), bits);
 }
 
-#define KILOBYTE_FACTOR (G_GOFFSET_CONSTANT (1000))
-#define MEGABYTE_FACTOR (KILOBYTE_FACTOR * KILOBYTE_FACTOR)
-#define GIGABYTE_FACTOR (MEGABYTE_FACTOR * KILOBYTE_FACTOR)
-#define TERABYTE_FACTOR (GIGABYTE_FACTOR * KILOBYTE_FACTOR)
-#define PETABYTE_FACTOR (TERABYTE_FACTOR * KILOBYTE_FACTOR)
-#define EXABYTE_FACTOR  (PETABYTE_FACTOR * KILOBYTE_FACTOR)
-
-static char *
-format_size_for_display (goffset size)
-{
-  if (size < (goffset) KILOBYTE_FACTOR)
-    return g_strdup_printf (g_dngettext(NULL, "%u byte", "%u bytes",(guint) size), (guint) size);
-  else
-    {
-      gdouble displayed_size;
-
-      if (size < (goffset) MEGABYTE_FACTOR)
-        {
-          displayed_size = (gdouble) size / (gdouble) KILOBYTE_FACTOR;
-          return g_strdup_printf (_("%.1f KB"), displayed_size);
-        }
-      else if (size < (goffset) GIGABYTE_FACTOR)
-        {
-          displayed_size = (gdouble) size / (gdouble) MEGABYTE_FACTOR;
-          return g_strdup_printf (_("%.1f MB"), displayed_size);
-        }
-      else if (size < (goffset) TERABYTE_FACTOR)
-        {
-          displayed_size = (gdouble) size / (gdouble) GIGABYTE_FACTOR;
-          return g_strdup_printf (_("%.1f GB"), displayed_size);
-        }
-      else if (size < (goffset) PETABYTE_FACTOR)
-        {
-          displayed_size = (gdouble) size / (gdouble) TERABYTE_FACTOR;
-          return g_strdup_printf (_("%.1f TB"), displayed_size);
-        }
-      else if (size < (goffset) EXABYTE_FACTOR)
-        {
-          displayed_size = (gdouble) size / (gdouble) PETABYTE_FACTOR;
-          return g_strdup_printf (_("%.1f PB"), displayed_size);
-        }
-      else
-        {
-          displayed_size = (gdouble) size / (gdouble) EXABYTE_FACTOR;
-          return g_strdup_printf (_("%.1f EB"), displayed_size);
-        }
-    }
-}
-
 static void
 query_done (GFile        *file,
             GAsyncResult *res,
@@ -637,7 +588,7 @@ get_primary_disc_info_start (CcInfoPanel *self)
       char *size;
       GtkWidget *widget;
 
-      size = format_size_for_display (self->priv->total_bytes);
+      size = g_format_size (self->priv->total_bytes);
       widget = WID ("disk_label");
       gtk_label_set_text (GTK_LABEL (widget), size);
       g_free (size);
@@ -1215,7 +1166,7 @@ info_panel_setup_overview (CcInfoPanel  *self)
     }
 
   glibtop_get_mem (&mem);
-  text = g_format_size_for_display (mem.total);
+  text = g_format_size_full (mem.total, G_FORMAT_SIZE_IEC_UNITS);
   widget = WID ("memory_label");
   gtk_label_set_text (GTK_LABEL (widget), text ? text : "");
   g_free (text);
