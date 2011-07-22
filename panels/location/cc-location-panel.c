@@ -61,7 +61,6 @@ static void
 populate_locations (GtkListStore *store,
                     GVariant     *locations)
 {
-  g_debug ("Updating liststore with new locations");
   GtkTreeIter iter;
   GVariantIter viter;
   GVariant *dict;
@@ -94,15 +93,16 @@ populate_locations (GtkListStore *store,
 
     gtk_list_store_set (store, &iter, 3, "20:00", -1);
 
-    value = g_variant_lookup_value (dict,
+    /*value = g_variant_lookup_value (dict,
                                     "longitude",
                                     G_VARIANT_TYPE_DOUBLE);
-    //    gtk_list_store_set (store, &iter, 1, g_variant_get_double (value), -1);
+    gtk_list_store_set (store, &iter, 1, g_variant_get_double (value), -1);
 
     value = g_variant_lookup_value (dict,
                                     "latitude",
                                     G_VARIANT_TYPE_DOUBLE);
-    // gtk_list_store_set (store, &iter, 1, g_variant_get_double (value), -1);
+    gtk_list_store_set (store, &iter, 1, g_variant_get_double (value), -1);
+    */
   }
 }
 
@@ -121,7 +121,7 @@ _on_add_location (GtkToolButton   *bt,
 
   switch (res) {
     case GTK_RESPONSE_OK:
-      printf ("s");
+      printf ("Dialog response OK\n");
       // FIXME: column ids
       const char *city = gtk_entry_get_text (GTK_ENTRY (WID ("city-entry")));
       const char *ctry = gtk_entry_get_text (GTK_ENTRY (WID ("country-entry")));
@@ -134,6 +134,7 @@ _on_add_location (GtkToolButton   *bt,
       g_assert (g_settings_set_value (priv->location_settings,
                                       "locations",
                                       priv->locations));
+
       gtk_list_store_clear (priv->location_store);
       populate_locations (priv->location_store,
                           priv->locations);

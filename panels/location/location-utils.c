@@ -40,7 +40,6 @@ g_variant_location_new (const char  *city,
   g_variant_builder_add_parsed (builder, "{'latitude', <%d>}", latitude);
 
   GVariant *val = g_variant_builder_end (builder);
-  g_variant_location_print (val);
   return val;
 }
 
@@ -48,51 +47,19 @@ GVariant *
 g_variant_array_add_value (GVariant *container,
                            GVariant *value)
 {
-  g_debug ("Adding value to the locations array");
-
   GVariantBuilder *builder = g_variant_builder_new (G_VARIANT_TYPE_ARRAY);
   GVariantIter iter;
   GVariant *val;
 
   g_variant_iter_init (&iter, container);
-  g_debug ("About to loop in the previous locations");
   while ((val = g_variant_iter_next_value (&iter))) {
-    g_debug ("In the loop\n");
-    g_variant_location_print (val);
     g_variant_builder_add_value (builder, val);
   }
-  g_debug ("Added the previous locations");
   g_variant_builder_add_value (builder, value);
 
-  return g_variant_builder_end (builder);
-}
+  GVariant *res = g_variant_builder_end (builder);
+  g_variant_builder_unref (builder);
 
-void
-g_variant_location_print (GVariant *location)
-{
-  g_print("Location:\n");
-  g_print ("\tcity:%s\n"
-           "\tcountry: %s\n"
-           "\ttimezone: %i\n"
-           "\tlong: %f\n"
-           "\tlat: %f\n",
-           g_variant_get_string (g_variant_lookup_value (location,
-                                                         "city",
-                                                         G_VARIANT_TYPE_STRING),
-                                 NULL),
-           g_variant_get_string (g_variant_lookup_value (location,
-                                                         "country",
-                                                         G_VARIANT_TYPE_STRING),
-                                 NULL),
-           g_variant_get_int16 (g_variant_lookup_value (location,
-                                                        "timezone",
-                                                        G_VARIANT_TYPE_INT16)),
-           g_variant_get_double (g_variant_lookup_value (location,
-                                                         "latitude",
-                                                         G_VARIANT_TYPE_DOUBLE)),
-           g_variant_get_double (g_variant_lookup_value (location,
-                                                         "longitude",
-                                                         G_VARIANT_TYPE_DOUBLE))
-           );
-
+  g_variant_ref_sink (res);
+  return res;
 }
