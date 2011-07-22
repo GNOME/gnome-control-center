@@ -87,6 +87,7 @@ enum {
 
 static void     refresh_ui      (CcNetworkPanel *panel);
 static NetObject *find_in_model_by_id (CcNetworkPanel *panel, const gchar *id);
+static gboolean find_model_iter_by_object (GtkTreeModel *model, const NetObject *object, GtkTreeIter *iter);
 
 static void
 cc_network_panel_get_property (GObject    *object,
@@ -1876,6 +1877,9 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
         const gchar *path;
         const gchar *apath;
         NMVPNConnectionState state;
+        gchar *title;
+        GtkListStore *liststore_devices;
+        GtkTreeIter iter;
 
         sw = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                  "device_vpn_off_switch"));
@@ -1898,10 +1902,23 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
                                       "network-vpn",
                                       GTK_ICON_SIZE_DIALOG);
 
-        /* use title */
+        /* update title */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                      "label_vpn_device"));
-        gtk_label_set_label (GTK_LABEL (widget), net_object_get_title (NET_OBJECT (vpn)));
+        title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (net_vpn_get_connection (vpn)));
+        net_object_set_title (NET_OBJECT (vpn), title);
+        gtk_label_set_label (GTK_LABEL (widget), title);
+
+        /* update list store title */
+        liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
+                                                                    "liststore_devices"));
+        if (find_model_iter_by_object (GTK_TREE_MODEL (liststore_devices), NET_OBJECT (vpn), &iter)) {
+                gtk_list_store_set (liststore_devices,
+                                    &iter,
+                                    PANEL_DEVICES_COLUMN_TITLE, title,
+                                    -1);
+        }
+        g_free (title);
 
         /* use status */
         state = net_vpn_get_state (vpn);
@@ -2205,6 +2222,28 @@ find_in_model_by_id (CcNetworkPanel *panel, const gchar *id)
         } while (object == NULL && gtk_tree_model_iter_next (model, &iter));
 out:
         return object;
+}
+
+static gboolean
+find_model_iter_by_object (GtkTreeModel *model, const NetObject *object, GtkTreeIter *iter)
+{
+        gboolean valid;
+        NetObject *object_tmp;
+
+        /* find iter in model according to the passed object */
+        valid = gtk_tree_model_get_iter_first (model, iter);
+        while (valid) {
+                gtk_tree_model_get (model, iter,
+                                    PANEL_DEVICES_COLUMN_OBJECT, &object_tmp,
+                                    -1);
+                if (object_tmp != NULL)
+                        g_object_unref (object_tmp);
+                if (object_tmp == object)
+                        return TRUE;
+                valid = gtk_tree_model_iter_next (model, iter);
+        }
+
+        return FALSE;
 }
 
 static void

@@ -32,7 +32,6 @@
 
 struct _NetVpnPrivate
 {
-        NMSettingVPN            *setting;
         NMConnection            *connection;
         gboolean                 valid;
 };
@@ -59,10 +58,7 @@ static void
 connection_removed_cb (NMConnection *connection,
                        NetVpn *vpn)
 {
-        if (vpn->priv->setting == NULL)
-                return;
         net_object_emit_removed (NET_OBJECT (vpn));
-        vpn->priv->setting = NULL;
 }
 
 void
@@ -93,7 +89,6 @@ net_vpn_set_connection (NetVpn *vpn, NMConnection *connection)
                                   G_CALLBACK (connection_vpn_state_changed_cb),
                                   vpn);
         }
-        priv->setting = NM_SETTING_VPN (g_object_ref (nm_connection_get_setting_by_name (connection, "vpn")));
 }
 
 NMConnection *
@@ -115,28 +110,28 @@ const gchar *
 net_vpn_get_gateway (NetVpn *vpn)
 {
         NetVpnPrivate *priv = vpn->priv;
-        return nm_setting_vpn_get_data_item (priv->setting, "IPSec gateway");
+        return nm_setting_vpn_get_data_item (nm_connection_get_setting_vpn (priv->connection), "IPSec gateway");
 }
 
 const gchar *
 net_vpn_get_id (NetVpn *vpn)
 {
         NetVpnPrivate *priv = vpn->priv;
-        return nm_setting_vpn_get_data_item (priv->setting, "IPSec ID");
+        return nm_setting_vpn_get_data_item (nm_connection_get_setting_vpn (priv->connection), "IPSec ID");
 }
 
 const gchar *
 net_vpn_get_username (NetVpn *vpn)
 {
         NetVpnPrivate *priv = vpn->priv;
-        return nm_setting_vpn_get_data_item (priv->setting, "Xauth username");
+        return nm_setting_vpn_get_data_item (nm_connection_get_setting_vpn (priv->connection), "Xauth username");
 }
 
 const gchar *
 net_vpn_get_password (NetVpn *vpn)
 {
         NetVpnPrivate *priv = vpn->priv;
-        return nm_setting_vpn_get_data_item (priv->setting, "Xauth password");
+        return nm_setting_vpn_get_data_item (nm_connection_get_setting_vpn (priv->connection), "Xauth password");
 }
 
 static void
@@ -146,8 +141,6 @@ net_vpn_finalize (GObject *object)
         NetVpnPrivate *priv = vpn->priv;
 
         g_object_unref (priv->connection);
-        if (priv->setting != NULL)
-                g_object_unref (priv->setting);
 
         G_OBJECT_CLASS (net_vpn_parent_class)->finalize (object);
 }
