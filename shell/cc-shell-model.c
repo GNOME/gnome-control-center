@@ -30,42 +30,36 @@
 G_DEFINE_TYPE (CcShellModel, cc_shell_model, GTK_TYPE_LIST_STORE)
 
 static GdkPixbuf *
-load_pixbuf_for_string (const char *icon)
+load_pixbuf_for_gicon (GIcon *icon)
 {
   GtkIconTheme *theme;
+  GtkIconInfo *icon_info;
   GdkPixbuf *pixbuf;
   GError *err = NULL;
-  char *icon2 = NULL;
 
   if (icon == NULL)
     return NULL;
 
   theme = gtk_icon_theme_get_default ();
 
-  /* find the icon */
-  if (*icon == '/')
+  icon_info = gtk_icon_theme_lookup_by_gicon (theme, icon,
+                                              32, GTK_ICON_LOOKUP_FORCE_SIZE);
+  if (icon_info)
     {
-      pixbuf = gdk_pixbuf_new_from_file_at_scale (icon, 32, 32, TRUE, &err);
+      pixbuf = gtk_icon_info_load_icon (icon_info, &err);
+      if (err)
+        {
+          g_warning ("Could not load icon '%s': %s",
+                     gtk_icon_info_get_filename (icon_info), err->message);
+          g_error_free (err);
+        }
+
+      gtk_icon_info_free (icon_info);
     }
   else
     {
-      if (g_str_has_suffix (icon, ".png"))
-        icon2 = g_strndup (icon, strlen (icon) - strlen (".png"));
-
-      pixbuf = gtk_icon_theme_load_icon (theme,
-                                         icon2 ? icon2 : icon, 32,
-                                         GTK_ICON_LOOKUP_FORCE_SIZE,
-                                         &err);
+      g_warning ("Could not find icon");
     }
-
-  if (err)
-    {
-      g_warning ("Could not load icon '%s': %s", icon2 ? icon2 : icon,
-                 err->message);
-      g_error_free (err);
-    }
-
-  g_free (icon2);
 
   return pixbuf;
 }
@@ -83,13 +77,13 @@ icon_theme_changed (GtkIconTheme *theme,
   while (cont)
     {
       GdkPixbuf *pixbuf;
-      char *icon;
+      GIcon *icon;
 
       gtk_tree_model_get (model, &iter,
-                          COL_ICON_NAME, &icon,
+                          COL_GICON, &icon,
                           -1);
-      pixbuf = load_pixbuf_for_string (icon);
-      g_free (icon);
+      pixbuf = load_pixbuf_for_gicon (icon);
+      g_object_unref (icon);
       gtk_list_store_set (GTK_LIST_STORE (model), &iter,
                           COL_PIXBUF, pixbuf,
                           -1);
@@ -107,7 +101,7 @@ static void
 cc_shell_model_init (CcShellModel *self)
 {
   GType types[] = {G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
-      GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRV};
+      GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_ICON, G_TYPE_STRV};
 
   gtk_list_store_set_column_types (GTK_LIST_STORE (self),
                                    N_COLS, types);
@@ -160,10 +154,11 @@ cc_shell_model_add_item (CcShellModel   *model,
                          const gchar    *category_name,
                          GMenuTreeEntry *item)
 {
-  const gchar *icon = gmenu_tree_entry_get_icon (item);
-  const gchar *name = gmenu_tree_entry_get_name (item);
+  GAppInfo    *appinfo = G_APP_INFO (gmenu_tree_entry_get_app_info (item));
+  GIcon       *icon = g_app_info_get_icon (appinfo);
+  const gchar *name = g_app_info_get_name (appinfo);
   const gchar *desktop = gmenu_tree_entry_get_desktop_file_path (item);
-  const gchar *comment = gmenu_tree_entry_get_comment (item);
+  const gchar *comment = g_app_info_get_description (appinfo);
   gchar *id;
   GdkPixbuf *pixbuf = NULL;
   gchar *search_target;
@@ -202,7 +197,7 @@ cc_shell_model_add_item (CcShellModel   *model,
   g_key_file_free (key_file);
   key_file = NULL;
 
-  pixbuf = load_pixbuf_for_string (icon);
+  pixbuf = load_pixbuf_for_gicon (icon);
 
   search_target = g_strconcat (name, " - ", comment, NULL);
 
@@ -213,7 +208,7 @@ cc_shell_model_add_item (CcShellModel   *model,
                                      COL_PIXBUF, pixbuf,
                                      COL_CATEGORY, category_name,
                                      COL_SEARCH_TARGET, search_target,
-                                     COL_ICON_NAME, icon,
+                                     COL_GICON, icon,
                                      COL_KEYWORDS, keywords,
                                      -1);
 
