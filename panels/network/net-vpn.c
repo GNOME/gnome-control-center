@@ -33,6 +33,7 @@
 struct _NetVpnPrivate
 {
         NMConnection            *connection;
+        gchar                   *service_type;
         gboolean                 valid;
 };
 
@@ -65,7 +66,9 @@ void
 net_vpn_set_connection (NetVpn *vpn, NMConnection *connection)
 {
         NetVpnPrivate *priv = vpn->priv;
+        const gchar *type, *p;
         /*
+         * vpnc config exmaple:
          * key=IKE DH Group, value=dh2
          * key=xauth-password-type, value=ask
          * key=ipsec-secret-type, value=save
@@ -89,12 +92,22 @@ net_vpn_set_connection (NetVpn *vpn, NMConnection *connection)
                                   G_CALLBACK (connection_vpn_state_changed_cb),
                                   vpn);
         }
+
+        type = nm_setting_vpn_get_service_type (nm_connection_get_setting_vpn (priv->connection));
+        p = strrchr (type, '.');
+        priv->service_type = g_strdup (p ? p + 1 : type);
 }
 
 NMConnection *
 net_vpn_get_connection (NetVpn *vpn)
 {
         return vpn->priv->connection;
+}
+
+const gchar *
+net_vpn_get_service_type (NetVpn *vpn)
+{
+        return vpn->priv->service_type;
 }
 
 NMVPNConnectionState
@@ -106,32 +119,96 @@ net_vpn_get_state (NetVpn *vpn)
         return nm_vpn_connection_get_vpn_state (NM_VPN_CONNECTION (priv->connection));
 }
 
+/* VPN parameters can be found at:
+ * http://git.gnome.org/browse/network-manager-openvpn/tree/src/nm-openvpn-service.h
+ * http://git.gnome.org/browse/network-manager-vpnc/tree/src/nm-vpnc-service.h
+ * http://git.gnome.org/browse/network-manager-pptp/tree/src/nm-pptp-service.h
+ * http://git.gnome.org/browse/network-manager-openconnect/tree/src/nm-openconnect-service.h
+ * http://git.gnome.org/browse/network-manager-openswan/tree/src/nm-openswan-service.h
+ * See also 'properties' directory in these plugins.
+ */
+static const gchar *
+get_vpn_key_gateway (const char *vpn_type)
+{
+        if (g_strcmp0 (vpn_type, "openvpn") == 0)     return "remote";
+        if (g_strcmp0 (vpn_type, "vpnc") == 0)        return "IPSec gateway";
+        if (g_strcmp0 (vpn_type, "pptp") == 0)        return "gateway";
+        if (g_strcmp0 (vpn_type, "openconnect") == 0) return "gateway";
+        if (g_strcmp0 (vpn_type, "openswan") == 0)    return "right";
+        return "";
+}
+
+static const gchar *
+get_vpn_key_group (const char *vpn_type)
+{
+        if (g_strcmp0 (vpn_type, "openvpn") == 0)     return "";
+        if (g_strcmp0 (vpn_type, "vpnc") == 0)        return "IPSec ID";
+        if (g_strcmp0 (vpn_type, "pptp") == 0)        return "";
+        if (g_strcmp0 (vpn_type, "openconnect") == 0) return "";
+        if (g_strcmp0 (vpn_type, "openswan") == 0)    return "";
+        return "";
+}
+
+static const gchar *
+get_vpn_key_username (const char *vpn_type)
+{
+        if (g_strcmp0 (vpn_type, "openvpn") == 0)     return "username";
+        if (g_strcmp0 (vpn_type, "vpnc") == 0)        return "Xauth username";
+        if (g_strcmp0 (vpn_type, "pptp") == 0)        return "user";
+        if (g_strcmp0 (vpn_type, "openconnect") == 0) return "username";
+        if (g_strcmp0 (vpn_type, "openswan") == 0)    return "leftxauthusername";
+        return "";
+}
+
+static const gchar *
+get_vpn_key_group_password (const char *vpn_type)
+{
+        if (g_strcmp0 (vpn_type, "openvpn") == 0)     return "";
+        if (g_strcmp0 (vpn_type, "vpnc") == 0)        return "Xauth password";
+        if (g_strcmp0 (vpn_type, "pptp") == 0)        return "";
+        if (g_strcmp0 (vpn_type, "openconnect") == 0) return "";
+        if (g_strcmp0 (vpn_type, "openswan") == 0)    return "";
+        return "";
+}
+
 const gchar *
 net_vpn_get_gateway (NetVpn *vpn)
 {
         NetVpnPrivate *priv = vpn->priv;
-        return nm_setting_vpn_get_data_item (nm_connection_get_setting_vpn (priv->connection), "IPSec gateway");
+        const gchar *key;
+
+        key = get_vpn_key_gateway (priv->service_type);
+        return nm_setting_vpn_get_data_item (nm_connection_get_setting_vpn (priv->connection), key);
 }
 
 const gchar *
 net_vpn_get_id (NetVpn *vpn)
 {
         NetVpnPrivate *priv = vpn->priv;
-        return nm_setting_vpn_get_data_item (nm_connection_get_setting_vpn (priv->connection), "IPSec ID");
+        const gchar *key;
+
+        key = get_vpn_key_group (priv->service_type);
+        return nm_setting_vpn_get_data_item (nm_connection_get_setting_vpn (priv->connection), key);
 }
 
 const gchar *
 net_vpn_get_username (NetVpn *vpn)
 {
         NetVpnPrivate *priv = vpn->priv;
-        return nm_setting_vpn_get_data_item (nm_connection_get_setting_vpn (priv->connection), "Xauth username");
+        const gchar *key;
+
+        key = get_vpn_key_username (priv->service_type);
+        return nm_setting_vpn_get_data_item (nm_connection_get_setting_vpn (priv->connection), key);
 }
 
 const gchar *
 net_vpn_get_password (NetVpn *vpn)
 {
         NetVpnPrivate *priv = vpn->priv;
-        return nm_setting_vpn_get_data_item (nm_connection_get_setting_vpn (priv->connection), "Xauth password");
+        const gchar *key;
+
+        key = get_vpn_key_group_password (priv->service_type);
+        return nm_setting_vpn_get_data_item (nm_connection_get_setting_vpn (priv->connection), key);
 }
 
 static void
@@ -141,6 +218,7 @@ net_vpn_finalize (GObject *object)
         NetVpnPrivate *priv = vpn->priv;
 
         g_object_unref (priv->connection);
+        g_free (priv->service_type);
 
         G_OBJECT_CLASS (net_vpn_parent_class)->finalize (object);
 }

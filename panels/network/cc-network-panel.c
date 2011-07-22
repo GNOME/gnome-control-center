@@ -1947,29 +1947,35 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
                                state != NM_VPN_CONNECTION_STATE_DISCONNECTED);
         priv->updating_device = FALSE;
 
+        /* service type */
+        panel_set_widget_data (panel,
+                               sub_pane,
+                               "service_type",
+                               net_vpn_get_service_type (vpn));
+
         /* gateway */
         panel_set_widget_data (panel,
                                sub_pane,
                                "gateway",
-                                net_vpn_get_gateway (vpn));
+                               net_vpn_get_gateway (vpn));
 
         /* groupname */
         panel_set_widget_data (panel,
                                sub_pane,
                                "group_name",
-                                net_vpn_get_id (vpn));
+                               net_vpn_get_id (vpn));
 
         /* username */
         panel_set_widget_data (panel,
                                sub_pane,
                                "username",
-                                net_vpn_get_username (vpn));
+                               net_vpn_get_username (vpn));
 
         /* password */
         panel_set_widget_data (panel,
                                sub_pane,
                                "group_password",
-                                net_vpn_get_password (vpn));
+                               net_vpn_get_password (vpn));
 }
 
 static gboolean
