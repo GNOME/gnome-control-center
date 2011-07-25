@@ -603,6 +603,9 @@ cc_power_panel_init (CcPowerPanel *self)
   g_object_bind_property (widget, "active",
                           target, "sensitive",
                           G_BINDING_SYNC_CREATE);
+  gtk_widget_set_sensitive (widget,
+                            up_client_get_can_suspend (self->priv->up_client));
+
   widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
                                                "checkbutton_sleep_battery"));
   target = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
@@ -610,6 +613,9 @@ cc_power_panel_init (CcPowerPanel *self)
   g_object_bind_property (widget, "active",
                           target, "sensitive",
                           G_BINDING_SYNC_CREATE);
+  gtk_widget_set_sensitive (widget,
+                            up_client_get_can_suspend (self->priv->up_client));
+
   widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
                                                "checkbutton_sleep"));
   target = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
@@ -617,6 +623,8 @@ cc_power_panel_init (CcPowerPanel *self)
   g_object_bind_property (widget, "active",
                           target, "sensitive",
                           G_BINDING_SYNC_CREATE);
+  gtk_widget_set_sensitive (widget,
+                            up_client_get_can_suspend (self->priv->up_client));
 
   /* bind the checkboxes */
   widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
