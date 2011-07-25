@@ -1,4 +1,68 @@
 ==========================
+Version 3.1.4 (2011-07-25)
+==========================
+
+Background:
+- Add "swap" button for gradients (Bastien Nocera) (#34498)
+
+Common:
+- Add safeguards for empty language (Bastien Nocera)
+
+Date & Time:
+- Restore TZ envvar as it was (Rui Matos) (#649568)
+
+Info:
+- Use the new g_format_size() glib function (Javier Jardón)
+
+Network:
+- Kill compilation warnings (Rodrigo Moya)
+
+Power:
+- Use the new gnome-settings-daemon DBus names now the power plugin has moved to
+  g-s-d (Richard Hughes)
+- Make insensitive any sleep actions the hardware cannot do (Richard Hughes)
+
+Printers:
+- Make model label and ip address label selectable (Marek Kasik) (#651545)
+- Add translation context in some places (Matthias Clasen) (#654725)
+
+Region:
+- Add weak ref for locale settings (Rodrigo Moya)
+- Set LC_ specific variables, not LC_ALL (Rodrigo Moya)
+- If no regional settings, use the configured language (Rodrigo Moya)
+- Show measurement (Bastien Nocera)
+- Don't use markup in bold labels (Bastien Nocera)
+
+Screen:
+- Avoid making lots of DBus calls to set the brightness when the slider change
+  too quickly (Rodrigo Moya)
+
+Shell:
+- Shrink vertically (Bastien Nocera) (#645808)
+
+Sound:
+- Make hadware page tree a little taller (Bastien Nocera)
+
+Universal access:
+- Remove unused column in model (Bastien Nocera)
+
+User accounts:
+- Improved new username format message (Robert Roth) (#647851)
+- Remove unneeded markup in label (Bastien Nocera)
+
+Translations:
+- cz (Marek Černocký)
+- es (Daniel Mustieles, Jorge González)
+- gl (Fran Dieguez)
+- he (Yaron Shahrabani)
+- lv (Rudolfs Mazurs)
+- nb (Kjartan Maraas)
+- pa (A S Alam)
+- sl (Matej Urbančič)
+- sv (Daniel Nylander)
+- tr (Muhammet Kara)
+
+==========================
 Version 3.1.3 (2011-07-04)
 ==========================
 
