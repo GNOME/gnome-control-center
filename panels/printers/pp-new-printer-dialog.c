@@ -37,6 +37,7 @@
 #include "pp-utils.h"
 
 #include <dbus/dbus-glib.h>
+#include <libnotify/notify.h>
 
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
@@ -48,6 +49,10 @@
 #define PACKAGE_KIT_PATH "/org/freedesktop/PackageKit"
 #define PACKAGE_KIT_IFACE "org.freedesktop.PackageKit.Modify"
 
+#define FIREWALLD_BUS "org.fedoraproject.FirewallD"
+#define FIREWALLD_PATH "/org/fedoraproject/FirewallD"
+#define FIREWALLD_IFACE "org.fedoraproject.FirewallD"
+
 #define ALLOWED_CHARACTERS "abcdefghijklmnopqrtsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_/"
 
 static void pp_new_printer_dialog_hide (PpNewPrinterDialog *pp);
@@ -57,7 +62,6 @@ enum
 {
   NOTEBOOK_LOCAL_PAGE = 0,
   NOTEBOOK_NETWORK_PAGE,
-  NOTEBOOK_HP_JETDIRECT_PAGE,
   NOTEBOOK_N_PAGES
 };
 
@@ -80,7 +84,6 @@ enum
 {
   DEVICE_TYPE_LOCAL = 0,
   DEVICE_TYPE_NETWORK,
-  DEVICE_TYPE_HP_JETDIRECT,
   DEVICE_TYPE_N
 };
 
@@ -115,7 +118,29 @@ struct _PpNewPrinterDialog {
   gpointer             user_data;
 
   GCancellable *cancellable;
+
+  gchar    *warning;
+  gboolean  show_warning;
 };
+
+static void
+show_notification (gchar *primary_text,
+                   gchar *secondary_text,
+                   gchar *icon_name)
+{
+  if (primary_text)
+    {
+      NotifyNotification *notification;
+      notification = notify_notification_new (primary_text,
+                                              secondary_text,
+                                              icon_name);
+      notify_notification_set_app_name (notification, _("Printers"));
+      notify_notification_set_hint (notification, "transient", g_variant_new_boolean (TRUE));
+
+      notify_notification_show (notification, NULL);
+      g_object_unref (notification);
+    }
+}
 
 static void
 device_type_selection_changed_cb (GtkTreeSelection *selection,
@@ -144,7 +169,10 @@ device_type_selection_changed_cb (GtkTreeSelection *selection,
       widget = (GtkWidget*)
         gtk_builder_get_object (pp->builder, "device-type-notebook");
 
-      gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), device_type);
+      if (pp->show_warning && device_type == DEVICE_TYPE_NETWORK)
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 2);
+      else
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), device_type);
 
       if (device_type == DEVICE_TYPE_LOCAL)
         treeview = (GtkWidget*)
@@ -479,6 +507,13 @@ devices_get (PpNewPrinterDialog *pp)
 
   if (proxy)
     {
+      if (pp->show_warning)
+        {
+          widget = (GtkWidget*)
+            gtk_builder_get_object (pp->builder, "device-type-notebook");
+          gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 2);
+        }
+
       in_include = g_variant_builder_new (G_VARIANT_TYPE ("as"));
       in_exclude = g_variant_builder_new (G_VARIANT_TYPE ("as"));
 
@@ -594,6 +629,180 @@ line_split (gchar *line)
   result = g_strdupv (words);
   g_strfreev (words);
   g_free (buffer);
+
+  return result;
+}
+
+static void
+service_enable (gchar *service_name,
+                gint   service_timeout)
+{
+  GDBusProxy *proxy;
+  GVariant   *input = NULL;
+  GVariant   *output = NULL;
+  GError     *error = NULL;
+  gint        result;
+
+  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                         G_DBUS_PROXY_FLAGS_NONE,
+                                         NULL,
+                                         FIREWALLD_BUS,
+                                         FIREWALLD_PATH,
+                                         FIREWALLD_IFACE,
+                                         NULL,
+                                         &error);
+
+  if (proxy)
+    {
+      input = g_variant_new ("(si)",
+                             service_name,
+                             service_timeout);
+
+      output = g_dbus_proxy_call_sync (proxy,
+                                       "enableService",
+                                       input,
+                                       G_DBUS_CALL_FLAGS_NONE,
+                                       60000,
+                                       NULL,
+                                       &error);
+
+      if (output && g_variant_n_children (output) == 1)
+        g_variant_get (output, "(i)", &result);
+
+      if (output)
+        g_variant_unref (output);
+      g_variant_unref (input);
+      g_object_unref (proxy);
+    }
+}
+
+static void
+service_disable (gchar *service_name)
+{
+  GDBusProxy *proxy;
+  GVariant   *input = NULL;
+  GVariant   *output = NULL;
+  GError     *error = NULL;
+  gint        result;
+
+  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                         G_DBUS_PROXY_FLAGS_NONE,
+                                         NULL,
+                                         FIREWALLD_BUS,
+                                         FIREWALLD_PATH,
+                                         FIREWALLD_IFACE,
+                                         NULL,
+                                         &error);
+
+  if (proxy)
+    {
+      input = g_variant_new ("(s)", service_name);
+
+      output = g_dbus_proxy_call_sync (proxy,
+                                       "disableService",
+                                       input,
+                                       G_DBUS_CALL_FLAGS_NONE,
+                                       60000,
+                                       NULL,
+                                       &error);
+
+      if (output && g_variant_n_children (output) == 1)
+        g_variant_get (output, "(i)", &result);
+
+      if (output)
+        g_variant_unref (output);
+      g_variant_unref (input);
+      g_object_unref (proxy);
+    }
+}
+
+static gboolean
+service_enabled (gchar *service_name)
+{
+  GDBusProxy *proxy;
+  GVariant   *input = NULL;
+  GVariant   *output = NULL;
+  GError     *error = NULL;
+  gint        query_result = 0;
+
+  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                         G_DBUS_PROXY_FLAGS_NONE,
+                                         NULL,
+                                         FIREWALLD_BUS,
+                                         FIREWALLD_PATH,
+                                         FIREWALLD_IFACE,
+                                         NULL,
+                                         &error);
+
+  if (proxy)
+    {
+      input = g_variant_new ("(s)",
+                             service_name);
+
+      output = g_dbus_proxy_call_sync (proxy,
+                                       "queryService",
+                                       input,
+                                       G_DBUS_CALL_FLAGS_NONE,
+                                       60000,
+                                       NULL,
+                                       &error);
+
+      if (output && g_variant_n_children (output) == 1)
+        g_variant_get (output, "(i)", &query_result);
+
+      if (output)
+        g_variant_unref (output);
+      g_variant_unref (input);
+      g_object_unref (proxy);
+    }
+
+  if (query_result > 0)
+    return TRUE;
+  else
+    return FALSE;
+}
+
+static gboolean
+dbus_method_available (gchar *name,
+                       gchar *path,
+                       gchar *iface,
+                       gchar *method)
+{
+  GDBusProxy *proxy;
+  GError     *error = NULL;
+  GVariant   *output = NULL;
+  gboolean    result = FALSE;
+
+  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                         G_DBUS_PROXY_FLAGS_NONE,
+                                         NULL,
+                                         name,
+                                         path,
+                                         iface,
+                                         NULL,
+                                         NULL);
+
+  if (proxy)
+    {
+      output = g_dbus_proxy_call_sync (proxy,
+                                       method,
+                                       NULL,
+                                       G_DBUS_CALL_FLAGS_NONE,
+                                       60000,
+                                       NULL,
+                                       &error);
+
+      if (error &&
+          error->domain == G_DBUS_ERROR &&
+          error->code == G_DBUS_ERROR_SERVICE_UNKNOWN)
+        result = FALSE;
+      else
+        result = TRUE;
+
+      if (output)
+        g_variant_unref (output);
+      g_object_unref (proxy);
+    }
 
   return result;
 }
@@ -825,10 +1034,14 @@ actualize_devices_list (PpNewPrinterDialog *pp)
 {
   GtkListStore *network_store;
   GtkListStore *local_store;
+  GtkTreeModel *model;
   GtkTreeView  *network_treeview;
   GtkTreeView  *local_treeview;
   GtkTreeIter   iter;
+  GtkWidget    *treeview;
+  GtkWidget    *widget;
   gint          i;
+  gint          device_type = -1;
 
   network_treeview = (GtkTreeView*)
     gtk_builder_get_object (pp->builder, "network-devices-treeview");
@@ -855,6 +1068,7 @@ actualize_devices_list (PpNewPrinterDialog *pp)
                                   DEVICE_ID_COLUMN, i,
                                   DEVICE_NAME_COLUMN, pp->devices[i].display_name,
                                   -1);
+              pp->show_warning = FALSE;
             }
           else if (g_strcmp0 (pp->devices[i].device_class, "direct") == 0)
             {
@@ -880,6 +1094,23 @@ actualize_devices_list (PpNewPrinterDialog *pp)
       gtk_tree_view_get_selection (GTK_TREE_VIEW (local_treeview)),
       &iter);
 
+  treeview = (GtkWidget*)
+    gtk_builder_get_object (pp->builder, "device-types-treeview");
+
+  if (gtk_tree_selection_get_selected (
+        gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)), &model, &iter))
+    gtk_tree_model_get (model, &iter,
+                        DEVICE_TYPE_TYPE_COLUMN, &device_type,
+                        -1);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (pp->builder, "device-type-notebook");
+
+  if (pp->show_warning && device_type == DEVICE_TYPE_NETWORK)
+    gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 2);
+  else
+    gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), device_type);
+
   g_object_unref (network_store);
   g_object_unref (local_store);
 }
@@ -889,6 +1120,9 @@ populate_devices_list (PpNewPrinterDialog *pp)
 {
   GtkTreeViewColumn *column;
   GtkCellRenderer   *renderer;
+  GtkTextBuffer     *text_buffer;
+  GtkTextView       *warning_textview;
+  GtkTextIter        text_iter;
   GtkWidget         *network_treeview;
   GtkWidget         *local_treeview;
 
@@ -905,6 +1139,41 @@ populate_devices_list (PpNewPrinterDialog *pp)
                     "changed", G_CALLBACK (device_selection_changed_cb), pp);
 
   actualize_devices_list (pp);
+
+  if (dbus_method_available (FIREWALLD_BUS,
+                             FIREWALLD_PATH,
+                             FIREWALLD_IFACE,
+                             "getServices"))
+    {
+      if (!service_enabled ("mdns"))
+        service_enable ("mdns", 300);
+
+      if (!service_enabled ("ipp"))
+        service_enable ("ipp", 300);
+
+      if (!service_enabled ("ipp-client"))
+        service_enable ("ipp-client", 300);
+
+      if (!service_enabled ("samba-client"))
+        service_enable ("samba-client", 300);
+    }
+  else
+    {
+      pp->warning = g_strdup (_("FirewallD is not running. \
+Network printer detection needs services mdns, ipp, ipp-client \
+and samba-client enabled on firewall."));
+
+      warning_textview = (GtkTextView*)
+        gtk_builder_get_object (pp->builder, "warning-textview");
+      text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (warning_textview));
+
+      gtk_text_buffer_set_text (text_buffer, "", 0);
+      gtk_text_buffer_get_iter_at_offset (text_buffer, &text_iter, 0);
+      gtk_text_buffer_insert (text_buffer, &text_iter, pp->warning, -1);
+
+      pp->show_warning = TRUE;
+    }
+
   devices_get (pp);
 
   renderer = gtk_cell_renderer_text_new ();
@@ -1352,6 +1621,43 @@ new_printer_add_button_cb (GtkButton *button,
                 }
               g_object_unref (proxy);
             }
+
+          if (pp->devices[device_id].device_uri &&
+              dbus_method_available (FIREWALLD_BUS,
+                                     FIREWALLD_PATH,
+                                     FIREWALLD_IFACE,
+                                     "getServices"))
+            {
+              if (g_str_has_prefix (pp->devices[device_id].device_uri, "dnssd:") ||
+                  g_str_has_prefix (pp->devices[device_id].device_uri, "mdns:"))
+                {
+                  show_notification (_("Opening firewall for mDNS connections"),
+                                     NULL,
+                                     "dialog-information-symbolic");
+                  service_disable ("mdns");
+                  service_enable ("mdns", 0);
+                }
+
+              if (g_strrstr (pp->devices[device_id].device_uri, "smb:") != NULL)
+                {
+                  show_notification (_("Opening firewall for Samba connections"),
+                                     NULL,
+                                     "dialog-information-symbolic");
+                  service_disable ("samba-client");
+                  service_enable ("samba-client", 0);
+                }
+
+              if (g_strrstr (pp->devices[device_id].device_uri, "ipp:") != NULL)
+                {
+                  show_notification (_("Opening firewall for IPP connections"),
+                                     NULL,
+                                     "dialog-information-symbolic");
+                  service_disable ("ipp");
+                  service_enable ("ipp", 0);
+                  service_disable ("ipp-client");
+                  service_enable ("ipp-client", 0);
+                }
+            }
         }
     }
 
@@ -1407,6 +1713,8 @@ pp_new_printer_dialog_new (GtkWindow            *parent,
   pp->user_data = user_data;
 
   pp->cancellable = NULL;
+  pp->warning = NULL;
+  pp->show_warning = FALSE;
 
   /* connect signals */
   g_signal_connect (pp->dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
@@ -1458,6 +1766,8 @@ pp_new_printer_dialog_free (PpNewPrinterDialog *pp)
       g_cancellable_cancel (pp->cancellable);
       g_object_unref (pp->cancellable);
     }
+
+  g_free (pp->warning);
 
   g_free (pp);
 }

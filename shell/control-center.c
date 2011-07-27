@@ -28,6 +28,7 @@
 
 #include <gtk/gtk.h>
 #include <string.h>
+#include <libnotify/notify.h>
 
 #include "cc-shell-log.h"
 
@@ -180,6 +181,8 @@ main (int argc, char **argv)
 
   /* register a symbolic icon size for use in sidebar lists */
   gtk_icon_size_register ("cc-sidebar-list", 24, 24);
+
+  notify_init ("gnome-control-center");
 
   shell = gnome_control_center_new ();
 
