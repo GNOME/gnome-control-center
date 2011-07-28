@@ -199,7 +199,10 @@ cc_shell_model_add_item (CcShellModel   *model,
 
   pixbuf = load_pixbuf_for_gicon (icon);
 
-  search_target = g_strconcat (name, " - ", comment, NULL);
+  if (comment && comment[0])
+    search_target = g_strconcat (name, " - ", comment, NULL);
+  else
+    search_target = g_strdup (name);
 
   gtk_list_store_insert_with_values (GTK_LIST_STORE (model), NULL, 0,
                                      COL_NAME, name,
