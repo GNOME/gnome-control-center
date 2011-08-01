@@ -436,6 +436,24 @@ update_channel_map (GvcSpeakerTest *speaker_test)
 }
 
 static void
+gvc_speaker_test_set_theme (ca_context *ca)
+{
+        GtkSettings *settings;
+        char *theme_name;
+
+        settings = gtk_settings_get_for_screen (gdk_screen_get_default ());
+
+        g_object_get (G_OBJECT (settings),
+                      "gtk-sound-theme-name", &theme_name,
+                      NULL);
+
+        if (theme_name)
+                ca_context_change_props (ca, CA_PROP_CANBERRA_XDG_THEME_NAME, theme_name, NULL);
+
+        g_free (theme_name);
+}
+
+static void
 gvc_speaker_test_init (GvcSpeakerTest *speaker_test)
 {
         GtkWidget *face;
@@ -447,6 +465,7 @@ gvc_speaker_test_init (GvcSpeakerTest *speaker_test)
         ca_context_change_props (speaker_test->priv->canberra,
                                  CA_PROP_APPLICATION_ID, "org.gnome.VolumeControl",
                                  NULL);
+        gvc_speaker_test_set_theme (speaker_test->priv->canberra);
 
         gtk_widget_set_direction (GTK_WIDGET (speaker_test), GTK_TEXT_DIR_LTR);
         gtk_table_resize (GTK_TABLE (speaker_test), 3, 5);
