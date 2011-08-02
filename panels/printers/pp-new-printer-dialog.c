@@ -1388,12 +1388,9 @@ new_printer_add_button_cb (GtkButton *button,
       else if (pp->devices[device_id].device_id)
         {
           /* Try whether CUPS has a driver for the new printer */
-          ppd_name = get_ppd_name (pp->devices[device_id].device_class,
-                           pp->devices[device_id].device_id,
-                           pp->devices[device_id].device_info,
-                           pp->devices[device_id].device_make_and_model,
-                           pp->devices[device_id].device_uri,
-                           pp->devices[device_id].device_location);
+          ppd_name = get_ppd_name (pp->devices[device_id].device_id,
+                       pp->devices[device_id].device_make_and_model,
+                       pp->devices[device_id].device_uri);
 
           if (ppd_name == NULL || ppd_name->ppd_match_level < PPD_EXACT_MATCH)
             {
@@ -1442,12 +1439,9 @@ new_printer_add_button_cb (GtkButton *button,
                     }
 
                   /* Search CUPS for driver */
-                  ppd_name = get_ppd_name (pp->devices[device_id].device_class,
-                               pp->devices[device_id].device_id,
-                               pp->devices[device_id].device_info,
+                  ppd_name = get_ppd_name (pp->devices[device_id].device_id,
                                pp->devices[device_id].device_make_and_model,
-                               pp->devices[device_id].device_uri,
-                               pp->devices[device_id].device_location);
+                               pp->devices[device_id].device_uri);
 
                   g_free (device_ids);
                 }

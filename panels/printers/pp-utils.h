@@ -52,12 +52,9 @@ DBusGProxy *get_dbus_proxy (const gchar *name,
 gchar      *get_tag_value (const gchar *tag_string,
                            const gchar *tag_name);
 
-PPDName    *get_ppd_name (gchar *device_class,
-                          gchar *device_id,
-                          gchar *device_info,
+PPDName    *get_ppd_name (gchar *device_id,
                           gchar *device_make_and_model,
-                          gchar *device_uri,
-                          gchar *device_location);
+                          gchar *device_uri);
 
 char       *get_dest_attr (const char *dest_name,
                            const char *attr);
