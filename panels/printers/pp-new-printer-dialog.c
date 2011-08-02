@@ -53,6 +53,10 @@
 #define FIREWALLD_PATH "/org/fedoraproject/FirewallD"
 #define FIREWALLD_IFACE "org.fedoraproject.FirewallD"
 
+#define SCP_BUS   "org.fedoraproject.Config.Printing"
+#define SCP_PATH  "/org/fedoraproject/Config/Printing"
+#define SCP_IFACE "org.fedoraproject.Config.Printing"
+
 #define ALLOWED_CHARACTERS "abcdefghijklmnopqrtsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_/"
 
 static void pp_new_printer_dialog_hide (PpNewPrinterDialog *pp);
@@ -296,15 +300,18 @@ devices_get_cb (GObject      *source_object,
   PpNewPrinterDialog *pp = user_data;
   cups_dest_t        *dests;
   GHashTable         *devices = NULL;
+  GDBusProxy         *proxy;
   GtkWidget          *widget = NULL;
   GVariant           *dg_output = NULL;
   gboolean            already_present;
   GError             *error = NULL;
   gchar              *new_name = NULL;
+  gchar              *device_uri = NULL;
   char               *ret_error = NULL;
-  gint                i, j;
+  gint                i, j, k;
   gint                name_index;
   gint                num_dests;
+
 
   dg_output = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
                                         res,
@@ -445,22 +452,112 @@ devices_get_cb (GObject      *source_object,
                * Show devices with device-id.
                * Other preferences should apply here.
                */
-              for (i = 0; i < pp->num_devices; i++)
+              proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                                     G_DBUS_PROXY_FLAGS_NONE,
+                                                     NULL,
+                                                     SCP_BUS,
+                                                     SCP_PATH,
+                                                     SCP_IFACE,
+                                                     NULL,
+                                                     &error);
+
+              if (proxy)
                 {
-                  for (j = 0; j < pp->num_devices; j++)
+                  GVariantBuilder  device_list;
+                  GVariantBuilder  device_hash;
+                  GVariant        *input = NULL;
+                  GVariant        *output = NULL;
+                  GVariant        *array = NULL;
+                  GVariant        *subarray = NULL;
+
+                  g_variant_builder_init (&device_list, G_VARIANT_TYPE ("a{sv}"));
+
+                  for (i = 0; i < pp->num_devices; i++)
                     {
-                      if (i != j)
+                      if (pp->devices[i].device_uri)
                         {
-                          if (g_strcmp0 (pp->devices[i].display_name, pp->devices[j].display_name) == 0)
+                          g_variant_builder_init (&device_hash, G_VARIANT_TYPE ("a{ss}"));
+
+                          if (pp->devices[i].device_id)
+                            g_variant_builder_add (&device_hash,
+                                                   "{ss}",
+                                                   "device-id",
+                                                   pp->devices[i].device_id);
+
+                          if (pp->devices[i].device_make_and_model)
+                            g_variant_builder_add (&device_hash,
+                                                   "{ss}",
+                                                   "device-make-and-model",
+                                                   pp->devices[i].device_make_and_model);
+
+                          if (pp->devices[i].device_class)
+                            g_variant_builder_add (&device_hash,
+                                                   "{ss}",
+                                                   "device-class",
+                                                   pp->devices[i].device_class);
+
+                          g_variant_builder_add (&device_list,
+                                                 "{sv}",
+                                                 pp->devices[i].device_uri,
+                                                 g_variant_builder_end (&device_hash));
+                        }
+                    }
+
+                  input = g_variant_new ("(v)", g_variant_builder_end (&device_list));
+
+                  output = g_dbus_proxy_call_sync (proxy,
+                                                   "GroupPhysicalDevices",
+                                                   input,
+                                                   G_DBUS_CALL_FLAGS_NONE,
+                                                   60000,
+                                                   NULL,
+                                                   &error);
+
+                  if (output && g_variant_n_children (output) == 1)
+                    {
+                      array = g_variant_get_child_value (output, 0);
+                      if (array)
+                        {
+                          for (i = 0; i < g_variant_n_children (array); i++)
                             {
-                              if (pp->devices[i].device_id && !pp->devices[j].show)
+                              subarray = g_variant_get_child_value (array, i);
+                              if (subarray)
                                 {
-                                  pp->devices[i].show = TRUE;
+                                  device_uri = g_strdup (g_variant_get_string (
+                                                 g_variant_get_child_value (subarray, 0),
+                                                 NULL));
+
+                                  for (k = 0; k < pp->num_devices; k++)
+                                    if (g_str_has_prefix (pp->devices[k].device_uri, device_uri))
+                                      pp->devices[k].show = TRUE;
+
+                                  g_free (device_uri);
                                 }
                             }
                         }
                     }
+
+                  if (output)
+                    g_variant_unref (output);
+                  g_variant_unref (input);
+                  g_object_unref (proxy);
                 }
+
+              if (error &&
+                  error->domain == G_DBUS_ERROR &&
+                  (error->code == G_DBUS_ERROR_SERVICE_UNKNOWN ||
+                   error->code == G_DBUS_ERROR_UNKNOWN_METHOD))
+                {
+                  g_warning ("Install system-config-printer which provides \
+DBus method \"GroupPhysicalDevices\" to group duplicates in device list.");
+
+                  for (i = 0; i < pp->num_devices; i++)
+                    pp->devices[i].show = TRUE;
+                }
+
+              for (i = 0; i < pp->num_devices; i++)
+                if (!pp->devices[i].device_id)
+                  pp->devices[i].show = FALSE;
             }
 
           g_hash_table_destroy (devices);
@@ -1059,7 +1156,8 @@ actualize_devices_list (PpNewPrinterDialog *pp)
 
   for (i = 0; i < pp->num_devices; i++)
     {
-      if (pp->devices[i].device_id || pp->devices[i].device_ppd_uri)
+      if ((pp->devices[i].device_id || pp->devices[i].device_ppd_uri) &&
+          pp->devices[i].show)
         {
           if (g_strcmp0 (pp->devices[i].device_class, "network") == 0)
             {
