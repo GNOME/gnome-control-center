@@ -47,7 +47,8 @@
 
 #define PACKAGE_KIT_BUS "org.freedesktop.PackageKit"
 #define PACKAGE_KIT_PATH "/org/freedesktop/PackageKit"
-#define PACKAGE_KIT_IFACE "org.freedesktop.PackageKit.Modify"
+#define PACKAGE_KIT_MODIFY_IFACE "org.freedesktop.PackageKit.Modify"
+#define PACKAGE_KIT_QUERY_IFACE  "org.freedesktop.PackageKit.Query"
 
 #define FIREWALLD_BUS "org.fedoraproject.FirewallD"
 #define FIREWALLD_PATH "/org/fedoraproject/FirewallD"
@@ -543,12 +544,13 @@ devices_get_cb (GObject      *source_object,
                   g_object_unref (proxy);
                 }
 
-              if (error &&
-                  error->domain == G_DBUS_ERROR &&
-                  (error->code == G_DBUS_ERROR_SERVICE_UNKNOWN ||
-                   error->code == G_DBUS_ERROR_UNKNOWN_METHOD))
+              if (error)
                 {
-                  g_warning ("Install system-config-printer which provides \
+                  if (proxy == NULL ||
+                      (error->domain == G_DBUS_ERROR &&
+                       (error->code == G_DBUS_ERROR_SERVICE_UNKNOWN ||
+                        error->code == G_DBUS_ERROR_UNKNOWN_METHOD)))
+                    g_warning ("Install system-config-printer which provides \
 DBus method \"GroupPhysicalDevices\" to group duplicates in device list.");
 
                   for (i = 0; i < pp->num_devices; i++)
@@ -1363,6 +1365,28 @@ dialog_closed (GtkWidget          *dialog,
   gtk_widget_destroy (dialog);
 }
 
+static GList *
+glist_uniq (GList *list)
+{
+  GList *result = NULL;
+  GList *iter = NULL;
+  GList *tmp = NULL;
+
+  for (iter = list; iter; iter = iter->next)
+    {
+      if (tmp == NULL ||
+          g_strcmp0 ((gchar *) tmp->data, (gchar *) iter->data) != 0)
+        {
+          tmp = iter;
+          result = g_list_append (result, g_strdup (iter->data));
+        }
+    }
+
+  g_list_free_full (list, g_free);
+
+  return result;
+}
+
 static void
 new_printer_add_button_cb (GtkButton *button,
                            gpointer   user_data)
@@ -1498,7 +1522,7 @@ new_printer_add_button_cb (GtkButton *button,
 
               proxy = get_dbus_proxy (PACKAGE_KIT_BUS,
                                       PACKAGE_KIT_PATH,
-                                      PACKAGE_KIT_IFACE,
+                                      PACKAGE_KIT_MODIFY_IFACE,
                                       FALSE);
 
               if (proxy)
@@ -1598,10 +1622,13 @@ new_printer_add_button_cb (GtkButton *button,
       /* Set some options of the new printer */
       if (success)
         {
+          const char *ppd_file_name = NULL;
           DBusGProxy *proxy;
           GError     *error = NULL;
           char       *ret_error = NULL;
           char       *locale = NULL;
+
+          ppd_file_name = cupsGetPPD (pp->devices[device_id].display_name);
 
           proxy = get_dbus_proxy (MECHANISM_BUS,
                                   "/",
@@ -1644,7 +1671,6 @@ new_printer_add_button_cb (GtkButton *button,
 
               if (locale)
                 {
-                  const char  *ppd_file_name = NULL;
                   ppd_file_t  *ppd_file = NULL;
                   gchar      **value = NULL;
                   gchar       *paper_size;
@@ -1658,7 +1684,6 @@ new_printer_add_button_cb (GtkButton *button,
                   else
                     paper_size = g_strdup ("A4");
 
-                  ppd_file_name = cupsGetPPD (pp->devices[device_id].display_name);
                   if (ppd_file_name)
                     {
                       ppd_file = ppdOpenFile (ppd_file_name);
@@ -1685,7 +1710,6 @@ new_printer_add_button_cb (GtkButton *button,
                                 }
                           ppdClose (ppd_file);
                         }
-                      g_unlink (ppd_file_name);
                     }
 
                   if (value)
@@ -1750,6 +1774,187 @@ new_printer_add_button_cb (GtkButton *button,
                   service_enable ("ipp-client", 0);
                 }
             }
+
+          if (ppd_file_name)
+            {
+              GDBusProxy *proxy;
+              GVariant   *input;
+              GVariant   *output;
+              GVariant   *array;
+              GList      *executables = NULL;
+              GList      *packages = NULL;
+
+              g_clear_error (&error);
+              error = NULL;
+
+              proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                                     G_DBUS_PROXY_FLAGS_NONE,
+                                                     NULL,
+                                                     SCP_BUS,
+                                                     SCP_PATH,
+                                                     SCP_IFACE,
+                                                     NULL,
+                                                     &error);
+
+              if (proxy)
+                {
+                  input = g_variant_new ("(s)",
+                                         ppd_file_name);
+
+                  output = g_dbus_proxy_call_sync (proxy,
+                                                   "MissingExecutables",
+                                                   input,
+                                                   G_DBUS_CALL_FLAGS_NONE,
+                                                   60000,
+                                                   NULL,
+                                                   &error);
+
+                  if (output && g_variant_n_children (output) == 1)
+                    {
+                      array = g_variant_get_child_value (output, 0);
+                      if (array)
+                        {
+                          for (i = 0; i < g_variant_n_children (array); i++)
+                            {
+                              executables = g_list_append (
+                                              executables,
+                                                g_strdup (g_variant_get_string (
+                                                  g_variant_get_child_value (array, i),
+                                                  NULL)));
+                            }
+                        }
+                    }
+
+                  if (output)
+                    g_variant_unref (output);
+                  g_variant_unref (input);
+                  g_object_unref (proxy);
+                }
+
+              if (proxy == NULL ||
+                  (error &&
+                   error->domain == G_DBUS_ERROR &&
+                   (error->code == G_DBUS_ERROR_SERVICE_UNKNOWN ||
+                    error->code == G_DBUS_ERROR_UNKNOWN_METHOD)))
+                g_warning ("Install system-config-printer which provides \
+DBus method \"MissingExecutables\" to find missing executables and filters.");
+
+              executables = g_list_sort (executables, (GCompareFunc) g_strcmp0);
+              executables = glist_uniq (executables);
+
+              if (executables)
+                {
+                  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                                         G_DBUS_PROXY_FLAGS_NONE,
+                                                         NULL,
+                                                         PACKAGE_KIT_BUS,
+                                                         PACKAGE_KIT_PATH,
+                                                         PACKAGE_KIT_QUERY_IFACE,
+                                                         NULL,
+                                                         &error);
+
+                  if (proxy)
+                    {
+                      GList *exec_iter;
+
+                      for (exec_iter = executables; exec_iter; exec_iter = exec_iter->next)
+                        {
+                          input = g_variant_new ("(ss)", (gchar *) exec_iter->data, "");
+
+                          output = g_dbus_proxy_call_sync (proxy,
+                                                           "SearchFile",
+                                                           input,
+                                                           G_DBUS_CALL_FLAGS_NONE,
+                                                           60000,
+                                                           NULL,
+                                                           &error);
+
+                          if (error)
+                            g_warning ("%s", error->message);
+
+                          if (output)
+                            {
+                              gboolean  installed;
+                              gchar    *package;
+
+                              g_variant_get (output,
+                                             "(bs)",
+                                             &installed,
+                                             &package);
+                              if (!installed)
+                                packages = g_list_append (packages, g_strdup (package));
+                            }
+
+                          if (output)
+                            g_variant_unref (output);
+                          g_variant_unref (input);
+                        }
+
+                      g_object_unref (proxy);
+                    }
+
+                  g_list_free_full (executables, g_free);
+                }
+
+              packages = g_list_sort (packages, (GCompareFunc) g_strcmp0);
+              packages = glist_uniq (packages);
+
+              if (packages)
+                {
+                  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                                         G_DBUS_PROXY_FLAGS_NONE,
+                                                         NULL,
+                                                         PACKAGE_KIT_BUS,
+                                                         PACKAGE_KIT_PATH,
+                                                         PACKAGE_KIT_MODIFY_IFACE,
+                                                         NULL,
+                                                         &error);
+
+                  if (proxy)
+                    {
+                      GVariantBuilder  array_builder;
+                      GList           *pkg_iter;
+
+                      g_variant_builder_init (&array_builder, G_VARIANT_TYPE ("as"));
+
+                      for (pkg_iter = packages; pkg_iter; pkg_iter = pkg_iter->next)
+                        g_variant_builder_add (&array_builder,
+                                               "s",
+                                               (gchar *) pkg_iter->data);
+
+                      input = g_variant_new ("(uass)",
+#ifdef GDK_WINDOWING_X11
+                        GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (pp->dialog))),
+#else
+                        0,
+#endif
+                        &array_builder,
+                        "hide-finished");
+
+                      output = g_dbus_proxy_call_sync (proxy,
+                                                       "InstallPackageNames",
+                                                       input,
+                                                       G_DBUS_CALL_FLAGS_NONE,
+                                                       60000,
+                                                       NULL,
+                                                       &error);
+
+                      if (error)
+                        g_warning ("%s", error->message);
+
+                      if (output)
+                        g_variant_unref (output);
+                      g_variant_unref (input);
+
+                      g_object_unref (proxy);
+                    }
+
+                  g_list_free_full (packages, g_free);
+                }
+            }
+
+          if (ppd_file_name)
+            g_unlink (ppd_file_name);
         }
     }
 
