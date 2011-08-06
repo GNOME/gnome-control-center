@@ -57,6 +57,17 @@ get_selected_iter (GtkBuilder    *dialog,
 	return gtk_tree_selection_get_selected (selection, model, iter);
 }
 
+static void
+set_selected_path (GtkBuilder    *dialog,
+		   GtkTreePath   *path)
+{
+	GtkTreeSelection *selection;
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (WID ("xkb_layouts_selected")));
+
+	gtk_tree_selection_select_path (selection, path);
+}
+
 static gint
 find_selected_layout_idx (GtkBuilder *dialog)
 {
@@ -379,6 +390,7 @@ move_up_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 {
 	GtkTreeModel *model;
 	GtkTreeIter iter, prev;
+	GtkTreePath *path;
 
 	if (get_selected_iter (dialog, &model, &iter) == FALSE)
 		return;
@@ -387,9 +399,15 @@ move_up_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 	if (!gtk_tree_model_iter_previous (model, &prev))
 		return;
 
+	path = gtk_tree_model_get_path (model, &prev);
+	
 	gtk_list_store_swap (GTK_LIST_STORE (model), &iter, &prev);
 
 	update_layouts_list (model, dialog);
+	
+	set_selected_path (dialog, path);
+
+	gtk_tree_path_free (path);	
 }
 
 static void
@@ -397,6 +415,7 @@ move_down_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 {
 	GtkTreeModel *model;
 	GtkTreeIter iter, next;
+	GtkTreePath *path;
 
 	if (get_selected_iter (dialog, &model, &iter) == FALSE)
 		return;
@@ -405,9 +424,15 @@ move_down_selected_layout (GtkWidget * button, GtkBuilder * dialog)
 	if (!gtk_tree_model_iter_next (model, &next))
 		return;
 
+	path = gtk_tree_model_get_path (model, &next);
+
 	gtk_list_store_swap (GTK_LIST_STORE (model), &iter, &next);
 
 	update_layouts_list (model, dialog);
+
+	set_selected_path (dialog, path);
+
+	gtk_tree_path_free (path);	
 }
 
 void
