@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-15 10:43+0300\n"
-"PO-Revision-Date: 2011-07-15 10:50+0200\n"
+"POT-Creation-Date: 2011-08-06 14:57+0300\n"
+"PO-Revision-Date: 2011-08-06 15:00+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "Language: he\n"
@@ -387,53 +387,15 @@ msgstr "לא ידוע"
 msgid "%d-bit"
 msgstr "%d-סיביות"
 
-#: ../panels/info/cc-info-panel.c:564
-#, c-format
-msgid "%u byte"
-msgid_plural "%u bytes"
-msgstr[0] "בית אחד"
-msgstr[1] "%u בתים"
-msgstr[2] "2 בתים"
-
-#: ../panels/info/cc-info-panel.c:572
-#, c-format
-msgid "%.1f KB"
-msgstr "%.1f ק״ב"
-
-#: ../panels/info/cc-info-panel.c:577
-#, c-format
-msgid "%.1f MB"
-msgstr "%.1f מ״ב"
-
-#: ../panels/info/cc-info-panel.c:582
-#, c-format
-msgid "%.1f GB"
-msgstr "%.1f ג״ב"
-
-#: ../panels/info/cc-info-panel.c:587
-#, c-format
-msgid "%.1f TB"
-msgstr "%.1f ט״ב"
-
-#: ../panels/info/cc-info-panel.c:592
-#, c-format
-msgid "%.1f PB"
-msgstr "%.1f פ״ב"
-
-#: ../panels/info/cc-info-panel.c:597
-#, c-format
-msgid "%.1f EB"
-msgstr "%.1f א״ב"
-
-#: ../panels/info/cc-info-panel.c:755
+#: ../panels/info/cc-info-panel.c:706
 msgid "Unknown model"
 msgstr "דגם לא ידוע"
 
-#: ../panels/info/cc-info-panel.c:838
+#: ../panels/info/cc-info-panel.c:789
 msgid "The next login will attempt to use the standard experience."
 msgstr "בכניסה הבאה יתבצע ניסיון להשתמש בחוויה הרגילה."
 
-#: ../panels/info/cc-info-panel.c:840
+#: ../panels/info/cc-info-panel.c:791
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
@@ -441,36 +403,36 @@ msgstr "בכניסה הבאה יעשה שימוש במצב השחזור המיו
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:882
+#: ../panels/info/cc-info-panel.c:833
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "שחזור"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:888
+#: ../panels/info/cc-info-panel.c:839
 msgctxt "Experience"
 msgid "Standard"
 msgstr "רגיל"
 
-#: ../panels/info/cc-info-panel.c:1028
+#: ../panels/info/cc-info-panel.c:979
 #: ../panels/keyboard/keyboard-shortcuts.c:1762
 msgid "Section"
 msgstr "אגף"
 
-#: ../panels/info/cc-info-panel.c:1037 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:988 ../panels/info/info.ui.h:13
 msgid "Overview"
 msgstr "סקירה"
 
-#: ../panels/info/cc-info-panel.c:1043 ../panels/info/info.ui.h:2
+#: ../panels/info/cc-info-panel.c:994 ../panels/info/info.ui.h:2
 msgid "Default Applications"
 msgstr "יישומי בררת המחדל"
 
-#: ../panels/info/cc-info-panel.c:1048 ../panels/info/info.ui.h:9
+#: ../panels/info/cc-info-panel.c:999 ../panels/info/info.ui.h:9
 msgid "Graphics"
 msgstr "גרפיקה"
 
-#: ../panels/info/cc-info-panel.c:1212
+#: ../panels/info/cc-info-panel.c:1163
 #, c-format
 msgid "Version %s"
 msgstr "גרסה %s"
@@ -1299,12 +1261,13 @@ msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "מדפסת;תור;הדפסה;דף;דיו;טונר;"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
+#: ../panels/printers/pp-new-printer-dialog.c:142
 msgid "Printers"
 msgstr "מדפסות"
 
 #: ../panels/printers/new-printer-dialog.ui.h:1
-msgid "A_ddress"
-msgstr "_כתובת"
+msgid "A_ddress:"
+msgstr "_כתובת:"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
 msgid "Add a New Printer"
@@ -1324,36 +1287,57 @@ msgstr "_ביטול"
 msgid "_Search by Address"
 msgstr "חיפוש לפי _כתובת"
 
-#: ../panels/printers/pp-new-printer-dialog.c:493
+#: ../panels/printers/pp-new-printer-dialog.c:627
 msgid "Getting devices..."
 msgstr "ההתקנים מתקבלים..."
 
+#: ../panels/printers/pp-new-printer-dialog.c:1262
+msgid ""
+"FirewallD is not running. Network printer detection needs services mdns, "
+"ipp, ipp-client and samba-client enabled on firewall."
+msgstr ""
+"FirewallD אינו פעיל. איתור מדפסות הרשת דורש שהשירותים mdns, ipp, ipp-client "
+"ו־samba-client יופעלו בחומת האש."
+
 #. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:913
-#: ../panels/printers/pp-new-printer-dialog.c:918
+#: ../panels/printers/pp-new-printer-dialog.c:1282
+#: ../panels/printers/pp-new-printer-dialog.c:1287
 msgid "Devices"
 msgstr "התקנים"
 
 #. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:943
+#: ../panels/printers/pp-new-printer-dialog.c:1312
+msgctxt "printer type"
 msgid "Local"
 msgstr "מקומי"
 
 #. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:945
-#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:1314
+msgctxt "printer type"
 msgid "Network"
 msgstr "רשת"
 
 #. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:986
+#: ../panels/printers/pp-new-printer-dialog.c:1355
 msgid "Device types"
 msgstr "סוגי התקנים"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:1266
+#: ../panels/printers/pp-new-printer-dialog.c:1654
 msgid "Automatic configuration"
 msgstr "תצורה אוטומטית"
+
+#: ../panels/printers/pp-new-printer-dialog.c:1750
+msgid "Opening firewall for mDNS connections"
+msgstr "מתבצעת פתיחת חומת האש לחיבורי mDNS"
+
+#: ../panels/printers/pp-new-printer-dialog.c:1759
+msgid "Opening firewall for Samba connections"
+msgstr "מתבצעת פתיחת חומת האש לחיבורי Samba"
+
+#: ../panels/printers/pp-new-printer-dialog.c:1768
+msgid "Opening firewall for IPP connections"
+msgstr "מתבצעת פתיחת חומת האש לחיבורי IPP"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
 #: ../panels/printers/printers.ui.h:2
@@ -1578,7 +1562,7 @@ msgstr "ההגדרות שלך"
 msgid "_Options..."
 msgstr "_אפשרויות..."
 
-#: ../panels/region/gnome-region-panel-xkblt.c:199
+#: ../panels/region/gnome-region-panel-xkblt.c:210
 msgid "Layout"
 msgstr "פריסה"
 
@@ -1836,6 +1820,10 @@ msgstr "האם לעצור את נקודת הגישה ולנתק את כל המש
 msgid "_Stop Hotspot"
 msgstr "_עצירת נקודת הגישה"
 
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+msgid "Network"
+msgstr "רשת"
+
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Network settings"
 msgstr "הגדרות רשת"
@@ -2092,11 +2080,11 @@ msgstr "הגדרות ניהול צריכת חשמל"
 msgid "Power;Sleep;Suspend;Hibernate;Battery;"
 msgstr "צריכת חשמל;שינה;השהיה;תרדמת;סוללה;"
 
-#: ../panels/power/cc-power-panel.c:153
+#: ../panels/power/cc-power-panel.c:160
 msgid "Unknown time"
 msgstr "זמן בלתי ידוע"
 
-#: ../panels/power/cc-power-panel.c:159
+#: ../panels/power/cc-power-panel.c:166
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -2104,7 +2092,7 @@ msgstr[0] "דקה"
 msgstr[1] "%i דקות"
 msgstr[2] "2 דקות"
 
-#: ../panels/power/cc-power-panel.c:171
+#: ../panels/power/cc-power-panel.c:178
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -2114,56 +2102,56 @@ msgstr[2] "שעתיים"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:179
+#: ../panels/power/cc-power-panel.c:186
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:180
+#: ../panels/power/cc-power-panel.c:187
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "שעה"
 msgstr[1] "שעות"
 msgstr[2] "שעתיים"
 
-#: ../panels/power/cc-power-panel.c:181
+#: ../panels/power/cc-power-panel.c:188
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "דקה"
 msgstr[1] "דקות"
 msgstr[2] "דקות"
 
-#: ../panels/power/cc-power-panel.c:253
+#: ../panels/power/cc-power-panel.c:260
 msgid "Battery charging"
 msgstr "הסוללה נטענת"
 
-#: ../panels/power/cc-power-panel.c:256
+#: ../panels/power/cc-power-panel.c:263
 msgid "Battery discharging"
 msgstr "הסוללה מתרוקנת"
 
-#: ../panels/power/cc-power-panel.c:267
+#: ../panels/power/cc-power-panel.c:274
 msgid "UPS charging"
 msgstr "האל־פסק נטען"
 
-#: ../panels/power/cc-power-panel.c:270
+#: ../panels/power/cc-power-panel.c:277
 msgid "UPS discharging"
 msgstr "האל־פסק מתרוקן"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:288
+#: ../panels/power/cc-power-panel.c:295
 #, c-format
 msgid "%s until charged (%.0lf%%)"
 msgstr "%s עד לטעינה מלאה (%.0lf%%)"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:294
+#: ../panels/power/cc-power-panel.c:301
 #, c-format
 msgid "%s until empty (%.0lf%%)"
 msgstr "%s עד לפריקה מלאה (%.0lf%%)"
 
 #. TRANSLATORS: %1 is a percentage value. Note: this string is only
 #. * used when we don't have a time value
-#: ../panels/power/cc-power-panel.c:302
+#: ../panels/power/cc-power-panel.c:309
 #, c-format
 msgid "%.0lf%% charged"
 msgstr "%.0lf%% נטענו"
@@ -3861,28 +3849,28 @@ msgstr "אצבע א_חרת: "
 msgid "_Right index finger"
 msgstr "אצבע _ימנית"
 
-#: ../shell/control-center.c:53
+#: ../shell/control-center.c:54
 msgid "Enable verbose mode"
 msgstr "Enable verbose mode"
 
-#: ../shell/control-center.c:54
+#: ../shell/control-center.c:55
 msgid "Show the overview"
 msgstr "Show the overview"
 
-#: ../shell/control-center.c:55 ../shell/control-center.c:56
-#: ../shell/control-center.c:57
+#: ../shell/control-center.c:56 ../shell/control-center.c:57
+#: ../shell/control-center.c:58
 msgid "Show help options"
 msgstr "Show help options"
 
-#: ../shell/control-center.c:58
+#: ../shell/control-center.c:59
 msgid "Panel to display"
 msgstr "Panel to display"
 
-#: ../shell/control-center.c:80
+#: ../shell/control-center.c:81
 msgid "- System Settings"
 msgstr "- הגדרות מערכת"
 
-#: ../shell/control-center.c:88
+#: ../shell/control-center.c:89
 #, c-format
 msgid ""
 "%s\n"
@@ -3902,6 +3890,30 @@ msgstr "לוח בקרה"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_כל ההגדרות"
+
+#~ msgid "%u byte"
+#~ msgid_plural "%u bytes"
+#~ msgstr[0] "בית אחד"
+#~ msgstr[1] "%u בתים"
+#~ msgstr[2] "2 בתים"
+
+#~ msgid "%.1f KB"
+#~ msgstr "%.1f ק״ב"
+
+#~ msgid "%.1f MB"
+#~ msgstr "%.1f מ״ב"
+
+#~ msgid "%.1f GB"
+#~ msgstr "%.1f ג״ב"
+
+#~ msgid "%.1f TB"
+#~ msgstr "%.1f ט״ב"
+
+#~ msgid "%.1f PB"
+#~ msgstr "%.1f פ״ב"
+
+#~ msgid "%.1f EB"
+#~ msgstr "%.1f א״ב"
 
 #~ msgid "<b>Example</b>"
 #~ msgstr "<b>דוגמה</b>"
