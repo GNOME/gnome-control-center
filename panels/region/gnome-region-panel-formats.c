@@ -118,9 +118,35 @@ setup_formats (GtkBuilder *builder)
 
 	langs = gdm_get_all_language_names ();
 	for (i = 0; langs[i] != NULL; i++) {
+		GtkTreeModel *model;
+		GtkTreeIter iter;
+		gint row = 0;
+
 		language = gdm_get_language_from_name (langs[i], NULL);
-		/* FIXME: sort while adding */
-		gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (combo), langs[i], language);
+
+		/* Sort while adding */
+		model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+		if (gtk_tree_model_get_iter_first (model, &iter)) {
+			gboolean added = FALSE;
+
+			do {
+				gchar *iter_s;
+
+				gtk_tree_model_get (model, &iter, 0, &iter_s, -1);
+				if (g_strcmp0 (language, iter_s) < 0) {
+					gtk_combo_box_text_insert (GTK_COMBO_BOX_TEXT (combo), row,
+								   langs[i], language);
+					added = TRUE;
+					break;
+				}
+
+				row++;
+			} while (gtk_tree_model_iter_next (model, &iter));
+
+			if (!added)
+				gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (combo), langs[i], language);
+		} else
+			gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (combo), langs[i], language);
 
 		g_free (language);
 
