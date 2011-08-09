@@ -169,7 +169,7 @@ setup_xkb_tabs (GtkBuilder * dialog)
 	widget = WID ("xkb_layouts_swindow");
 	context = gtk_widget_get_style_context (widget);
 	gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
-	widget = WID("layouts-toolbar");
+	widget = WID ("layouts-toolbar");
 	context = gtk_widget_get_style_context (widget);
 	gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 }

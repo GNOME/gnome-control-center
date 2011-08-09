@@ -23,11 +23,13 @@
 #  include <config.h>
 #endif
 
+#include <libgnomekbd/gkbd-keyboard-config.h>
 #include "cc-common-language.h"
 #include "gdm-languages.h"
 #include "gnome-region-panel-system.h"
+#include "gnome-region-panel-xkb.h"
 
-static GSettings *locale_settings;
+static GSettings *locale_settings, *xkb_settings;
 
 static void
 locale_settings_changed (GSettings *settings,
@@ -47,10 +49,53 @@ locale_settings_changed (GSettings *settings,
 	}
 }
 
+static void
+xkb_settings_changed (GSettings *settings,
+		      const gchar *key,
+		      gpointer user_data)
+{
+	GtkBuilder *builder = GTK_BUILDER (user_data);
+
+	if (g_str_equal (key, "layouts")) {
+		gint i;
+		GString *str = NULL;
+		gchar **layouts = g_settings_get_strv (settings, "layouts");
+
+		for (i = 0; i < G_N_ELEMENTS (layouts); i++) {
+			gchar *utf_visible = xkb_layout_description_utf8 (layouts[i]);
+
+			if (utf_visible != NULL) {
+				if (str != NULL) {
+					str = g_string_append (str, ", ");
+					str = g_string_append (str, utf_visible);
+				} else
+					str = g_string_new (utf_visible);
+
+				g_free (utf_visible);
+			}
+		}
+
+		g_strfreev (layouts);
+
+		gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "user_input_source")), str->str);
+		g_string_free (str, TRUE);
+	}
+}
+
 void
 setup_system (GtkBuilder *builder)
 {
 	gchar *language, *display_language;
+
+	locale_settings = g_settings_new ("org.gnome.system.locale");
+	g_signal_connect (locale_settings, "changed",
+			  G_CALLBACK (locale_settings_changed), builder);
+	g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) g_object_unref, locale_settings);
+
+	xkb_settings = g_settings_new (GKBD_KEYBOARD_SCHEMA);
+	g_signal_connect (xkb_settings, "changed",
+			  G_CALLBACK (xkb_settings_changed), builder);
+	g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) g_object_unref, xkb_settings);
 
 	/* Display user settings */
 	language = cc_common_language_get_current_language ();
@@ -59,10 +104,6 @@ setup_system (GtkBuilder *builder)
 			   display_language);
 	g_free (language);
 	g_free (display_language);
-
-	locale_settings = g_settings_new ("org.gnome.system.locale");
-	g_signal_connect (locale_settings, "changed",
-			  G_CALLBACK (locale_settings_changed), builder);
 
 	language = g_settings_get_string (locale_settings, "region");
 	if (language && language[0])
@@ -77,5 +118,5 @@ setup_system (GtkBuilder *builder)
 	g_free (language);
 	g_free (display_language);
 
-	g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) g_object_unref, locale_settings);
+	xkb_settings_changed (xkb_settings, "layouts", builder);
 }
