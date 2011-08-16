@@ -2,6 +2,7 @@
 cappletname = common
 
 noinst_LTLIBRARIES = liblanguage.la libshortcuts.la
+noinst_PROGRAMS = list-languages
 
 AM_CPPFLAGS =						\
 	$(PANEL_CFLAGS)					\
@@ -34,5 +35,9 @@ libshortcuts_la_LIBADD =		\
 	$(LIBSHORTCUTS_LIBS)
 
 libshortcuts_la_LDFLAGS = $(PANEL_LDFLAGS)
+
+list_languages_SOURCES = list-languages.c
+list_languages_LDADD = liblanguage.la
+list_languages_CFLAGS = $(LIBLANGUAGE_CFLAGS)
 
 -include $(top_srcdir)/git.mk
