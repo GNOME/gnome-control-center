@@ -403,6 +403,7 @@ add_locale (const char *language_name,
 #ifdef WITH_INCOMPLETE_LOCALES
         if (utf8_only) {
                 if (locale->territory_code == NULL || locale->modifier) {
+                        g_debug ("Ignoring '%s' as a locale, since it lacks territory code or modifier", name);
                         gdm_locale_free (locale);
                         return FALSE;
                 }
