@@ -164,18 +164,16 @@ update_default_sink (GvcApplet *applet)
 }
 
 static void
-on_control_ready (GvcMixerControl *control,
-                  GvcApplet       *applet)
+on_control_state_changed (GvcMixerControl      *control,
+                          GvcMixerControlState  new_state,
+                          GvcApplet            *applet)
 {
-        update_default_sink (applet);
-        update_default_source (applet);
-}
-
-static void
-on_control_connecting (GvcMixerControl *control,
-                       GvcApplet       *applet)
-{
-        g_debug ("Connecting..");
+        if (new_state == GVC_STATE_READY)  {
+                update_default_sink (applet);
+                update_default_source (applet);
+        } else if (new_state == GVC_STATE_CONNECTING) {
+                g_debug ("Connecting...");
+        }
 }
 
 static void
@@ -224,12 +222,8 @@ gvc_applet_constructor (GType                  type,
 
         self->priv->control = gvc_mixer_control_new ("GNOME Volume Control Applet");
         g_signal_connect (self->priv->control,
-                          "ready",
-                          G_CALLBACK (on_control_ready),
-                          self);
-        g_signal_connect (self->priv->control,
-                          "connecting",
-                          G_CALLBACK (on_control_connecting),
+                          "state-changed",
+                          G_CALLBACK (on_control_state_changed),
                           self);
         g_signal_connect (self->priv->control,
                           "default-sink-changed",
