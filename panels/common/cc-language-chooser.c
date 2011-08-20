@@ -73,111 +73,6 @@ row_activated (GtkTreeView       *tree_view,
 }
 
 static void
-add_other_users_language (GHashTable *ht)
-{
-        GVariant *variant;
-        GVariantIter *vi;
-        GError *error = NULL;
-        const char *str;
-	GDBusProxy *proxy;
-
-        proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                               G_DBUS_PROXY_FLAGS_NONE,
-                                               NULL,
-                                               "org.freedesktop.Accounts",
-                                               "/org/freedesktop/Accounts",
-                                               "org.freedesktop.Accounts",
-                                               NULL,
-                                               NULL);
-
-        if (proxy == NULL)
-                return;
-
-        variant = g_dbus_proxy_call_sync (proxy,
-                                          "ListCachedUsers",
-                                          NULL,
-                                          G_DBUS_CALL_FLAGS_NONE,
-                                          -1,
-                                          NULL,
-                                          &error);
-        if (variant == NULL) {
-                g_warning ("Failed to list existing users: %s", error->message);
-                g_error_free (error);
-		g_object_unref (proxy);
-                return;
-        }
-        g_variant_get (variant, "(ao)", &vi);
-        while (g_variant_iter_loop (vi, "o", &str)) {
-                GDBusProxy *user;
-                GVariant *props;
-		const char *lang;
-                char *name;
-                char *language;
-
-                user = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                                      G_DBUS_PROXY_FLAGS_NONE,
-                                                      NULL,
-                                                      "org.freedesktop.Accounts",
-                                                      str,
-                                                      "org.freedesktop.Accounts.User",
-                                                      NULL,
-                                                      &error);
-                if (user == NULL) {
-                        g_warning ("Failed to get proxy for user '%s': %s",
-                                   str, error->message);
-                        g_error_free (error);
-                        error = NULL;
-                        continue;
-                }
-                props = g_dbus_proxy_get_cached_property (user, "Language");
-                lang = g_variant_get_string (props, NULL);
-                if (lang != NULL && *lang != '\0' &&
-		    cc_common_language_has_font (lang)) {
-                	name = gdm_normalize_language_name (lang);
-                        language = gdm_get_language_from_name (name, NULL);
-                        g_hash_table_insert (ht, name, language);
-                }
-                g_variant_unref (props);
-                g_object_unref (user);
-        }
-        g_variant_iter_free (vi);
-        g_variant_unref (variant);
-
-	g_object_unref (proxy);
-}
-
-static GHashTable *
-new_ht_for_user_languages (void)
-{
-	GHashTable *ht;
-        char *name;
-
-        ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-
-	/* Add some common languages first */
-	g_hash_table_insert (ht, g_strdup ("en_US.utf8"), g_strdup (_("English"))); 
-	g_hash_table_insert (ht, g_strdup ("de_DE.utf8"), g_strdup (_("German"))); 
-	g_hash_table_insert (ht, g_strdup ("fr_FR.utf8"), g_strdup (_("French"))); 
-	g_hash_table_insert (ht, g_strdup ("es_ES.utf8"), g_strdup (_("Spanish"))); 
-	g_hash_table_insert (ht, g_strdup ("zh_CN.utf8"), g_strdup (_("Chinese"))); 
-
-	/* Add the languages used by other users on the system */
-        add_other_users_language (ht);
-
-        /* Make sure the current locale is present */
-        name = cc_common_language_get_current_language ();
-        if (g_hash_table_lookup (ht, name) == NULL) {
-		char *language;
-                language = gdm_get_language_from_name (name, NULL);
-                g_hash_table_insert (ht, name, language);
-        } else {
-		g_free (name);
-	}
-
-	return ht;
-}
-
-static void
 languages_foreach_cb (gpointer key,
 		      gpointer value,
 		      gpointer user_data)
@@ -205,7 +100,7 @@ cc_add_user_languages (GtkTreeModel *model)
 
         gtk_list_store_clear (store);
 
-	user_langs = new_ht_for_user_languages ();
+	user_langs = cc_common_language_get_initial_languages ();
 
 	/* Add the current locale first */
 	name = cc_common_language_get_current_language ();
@@ -242,6 +137,15 @@ remove_async (gpointer data)
   g_source_remove (async_id);
 }
 
+static void
+selection_changed (GtkTreeSelection *selection,
+                   GtkWidget        *chooser)
+{
+	gtk_dialog_set_response_sensitive (GTK_DIALOG (chooser),
+					   GTK_RESPONSE_OK,
+				           gtk_tree_selection_get_selected (selection, NULL, NULL));
+}
+
 static gboolean
 finish_language_chooser (gpointer user_data)
 {
@@ -252,6 +156,7 @@ finish_language_chooser (gpointer user_data)
 	GHashTable *user_langs;
 	guint timeout;
         guint async_id;
+	GtkTreeSelection *selection;
 
 	/* Did we get called after the widget was destroyed? */
 	if (chooser == NULL)
@@ -272,8 +177,10 @@ finish_language_chooser (gpointer user_data)
 	timeout = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (chooser), "timeout"));
 	g_object_weak_unref (G_OBJECT (chooser), (GWeakNotify) remove_timeout, GUINT_TO_POINTER (timeout));
 
-	/* And select the current language */
-	cc_common_language_select_current_language (GTK_TREE_VIEW (list));
+	/* And now listen for changes */
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (list));
+        g_signal_connect (G_OBJECT (selection), "changed",
+                          G_CALLBACK (selection_changed), chooser);
 
 	return FALSE;
 }
@@ -389,9 +296,8 @@ cc_language_chooser_new (GtkWidget *parent)
 	g_signal_connect (entry, "icon-release",
 			  G_CALLBACK (filter_clear), NULL);
 
-	/* Add user languages */
-	user_langs = new_ht_for_user_languages ();
-        cc_common_language_setup_list (list, user_langs);
+	user_langs = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+	cc_common_language_setup_list (list, user_langs);
 
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
 	filter_model = gtk_tree_model_filter_new (model, NULL);
@@ -404,7 +310,7 @@ cc_language_chooser_new (GtkWidget *parent)
         gdk_window_set_cursor (gtk_widget_get_window (parent), cursor);
         g_object_unref (cursor);
 
-	gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (parent));
+        gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (parent));
 
 	g_object_set_data_full (G_OBJECT (chooser), "user-langs",
 				user_langs, (GDestroyNotify) g_hash_table_destroy);

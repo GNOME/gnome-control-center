@@ -28,92 +28,10 @@
 
 #include "gnome-region-panel-lang.h"
 #include "cc-common-language.h"
+#include "cc-language-chooser.h"
 #include "gdm-languages.h"
 
 static GDBusProxy *proxy = NULL;
-
-static void
-add_other_users_language (GHashTable *ht)
-{
-	GVariant *variant;
-	GVariantIter *vi;
-	GError *error = NULL;
-	const char *str;
-
-	if (proxy == NULL)
-		return;
-
-	variant = g_dbus_proxy_call_sync (proxy,
-					  "ListCachedUsers",
-					  NULL,
-					  G_DBUS_CALL_FLAGS_NONE,
-					  -1,
-					  NULL,
-					  &error);
-	if (variant == NULL) {
-		g_warning ("Failed to list existing users: %s", error->message);
-		g_error_free (error);
-		return;
-	}
-
-	g_variant_get (variant, "(ao)", &vi);
-	while (g_variant_iter_loop (vi, "o", &str)) {
-		GDBusProxy *user;
-		GVariant *props;
-		const char *name;
-		char *language;
-
-		user = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-						      G_DBUS_PROXY_FLAGS_NONE,
-						      NULL,
-						      "org.freedesktop.Accounts",
-						      str,
-						      "org.freedesktop.Accounts.User",
-						      NULL,
-						      &error);
-		if (user == NULL) {
-			g_warning ("Failed to get proxy for user '%s': %s",
-				   str, error->message);
-			g_error_free (error);
-			error = NULL;
-			continue;
-		}
-		props = g_dbus_proxy_get_cached_property (user, "Language");
-		name = g_variant_get_string (props, NULL);
-		if (name != NULL && *name != '\0') {
-			language = gdm_get_language_from_name (name, NULL);
-			g_hash_table_insert (ht, g_strdup (name), language);
-		}
-		g_variant_unref (props);
-		g_object_unref (user);
-	}
-	g_variant_iter_free (vi);
-	g_variant_unref (variant);
-}
-
-static GHashTable *
-new_ht_for_user_languages (void)
-{
-	GHashTable *ht;
-	char *name;
-	char *language;
-
-	ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-
-	/* Add the languages used by other users on the system */
-	add_other_users_language (ht);
-
-	/* Add current locale */
-	name = cc_common_language_get_current_language ();
-	if (g_hash_table_lookup (ht, name) == NULL) {
-		language = gdm_get_language_from_name (name, NULL);
-		g_hash_table_insert (ht, name, language);
-	} else {
-		g_free (name);
-	}
-
-	return ht;
-}
 
 static void
 selection_changed (GtkTreeSelection *selection,
@@ -201,61 +119,64 @@ bail:
 }
 
 static void
-remove_timeout (gpointer data,
-		GObject *where_the_object_was)
+language_response (GtkDialog *dialog,
+                   gint       response_id,
+                   GtkWidget *treeview)
 {
-	guint timeout = GPOINTER_TO_UINT (data);
-	g_source_remove (timeout);
+        gchar *lang;
+	GtkTreeModel *model;
+	GtkTreeSelection *selection;
+	GtkTreeIter iter;
+
+        gtk_widget_hide (GTK_WIDGET (dialog));
+
+        if (response_id != GTK_RESPONSE_OK) {
+		return;
+	}
+
+        lang = cc_language_chooser_get_language (GTK_WIDGET (dialog));
+
+	if (lang == NULL) {
+		return;
+	}
+
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+
+	if (cc_common_language_get_iter_for_language (model, lang, &iter)) {
+		gtk_tree_selection_select_iter (selection, &iter);
+        }
+
+	gtk_widget_grab_focus (treeview);
+
+        g_free (lang);
 }
 
 static void
-remove_async (gpointer data)
+add_language (GtkWidget *button, GtkWidget *treeview)
 {
-  guint id = GPOINTER_TO_UINT (data);
+  	GtkWidget *toplevel;
+	GtkWidget *chooser;
 
-  /* if the idle is already done, this harmlessly fails */
-  g_source_remove (id);
-}
+	toplevel = gtk_widget_get_toplevel (button);
+	chooser = g_object_get_data (G_OBJECT (button), "chooser");
+	if (chooser == NULL) {
+		chooser = cc_language_chooser_new (toplevel);
 
-static gboolean
-finish_language_setup (gpointer user_data)
-{
-	GtkWidget *list = (GtkWidget *) user_data;
-	GtkTreeModel *model;
-	GtkWidget *parent;
-	GHashTable *user_langs;
-	guint timeout;
-	GtkTreeSelection *selection;
-        guint async_id;
+       		g_signal_connect (chooser, "response",
+                	          G_CALLBACK (language_response), treeview);
+	        g_signal_connect (chooser, "delete-event",
+        	                  G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
-	/* Did we get called after the widget was destroyed? */
-	if (list == NULL)
-		return FALSE;
+		g_object_set_data_full (G_OBJECT (button), "chooser",
+					chooser, (GDestroyNotify)gtk_widget_destroy);
+	}
+	else {
+		cc_language_chooser_clear_filter (chooser);
+	}
 
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
-	user_langs = g_object_get_data (G_OBJECT (list), "user-langs");
-
-        async_id = cc_common_language_add_available_languages (GTK_LIST_STORE (model), user_langs);
-
-        g_object_set_data_full (G_OBJECT (list), "language-async",
-                                GUINT_TO_POINTER (async_id), remove_async);
-
-	parent = gtk_widget_get_toplevel (list);
-	gdk_window_set_cursor (gtk_widget_get_window (parent), NULL);
-
-	g_object_set_data (G_OBJECT (list), "user-langs", NULL);
-	timeout = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (list), "timeout"));
-	g_object_weak_unref (G_OBJECT (list), (GWeakNotify) remove_timeout, GUINT_TO_POINTER (timeout));
-
-	/* And select the current language */
-	cc_common_language_select_current_language (GTK_TREE_VIEW (list));
-
-	/* And now listen for changes */
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (list));
-	g_signal_connect (G_OBJECT (selection), "changed",
-			  G_CALLBACK (selection_changed), list);
-
-	return FALSE;
+        gdk_window_set_cursor (gtk_widget_get_window (toplevel), NULL);
+        gtk_window_present (GTK_WINDOW (chooser));
 }
 
 void
@@ -263,13 +184,25 @@ setup_language (GtkBuilder *builder)
 {
 	GtkWidget *treeview;
 	GHashTable *user_langs;
-	GtkWidget *parent;
-	GdkWindow *window;
-	guint timeout;
 	GError *error = NULL;
+	GtkWidget *widget;
+	GtkStyleContext *context;
+	GtkTreeSelection *selection;
 
+        /* Setup junction between toolbar and treeview */
+        widget = (GtkWidget *)gtk_builder_get_object (builder, "language-swindow");
+        context = gtk_widget_get_style_context (widget);
+        gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
+        widget = (GtkWidget *)gtk_builder_get_object (builder, "language-toolbar");
+        context = gtk_widget_get_style_context (widget);
+        gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
+	
 	treeview = GTK_WIDGET (gtk_builder_get_object (builder, "display_language_treeview"));
-	parent = gtk_widget_get_toplevel (treeview);
+
+	/* Connect buttons */
+	widget = (GtkWidget *)gtk_builder_get_object (builder, "language_add");
+	g_signal_connect (widget, "clicked",
+			  G_CALLBACK (add_language), treeview);	
 
 	/* Setup accounts service */
 	proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
@@ -280,6 +213,7 @@ setup_language (GtkBuilder *builder)
 					       "org.freedesktop.Accounts",
 					       NULL,
 					       &error);
+
 	if (proxy == NULL) {
 		g_warning ("Failed to contact accounts service: %s", error->message);
 		g_error_free (error);
@@ -288,22 +222,16 @@ setup_language (GtkBuilder *builder)
 	}
 
 	/* Add user languages */
-	user_langs = new_ht_for_user_languages ();
+	user_langs = cc_common_language_get_initial_languages ();
 	cc_common_language_setup_list (treeview, user_langs);
 
-	/* Setup so that the list is populated after the list appears */
-	window = gtk_widget_get_window (parent);
-	if (window) {
-		GdkCursor *cursor;
+        /* And select the current language */
+        cc_common_language_select_current_language (GTK_TREE_VIEW (treeview));
 
-		cursor = gdk_cursor_new (GDK_WATCH);
-		gdk_window_set_cursor (gtk_widget_get_window (parent), cursor);
-		g_object_unref (cursor);
-	}
+        /* And now listen for changes */
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+        g_signal_connect (G_OBJECT (selection), "changed",
+                          G_CALLBACK (selection_changed), treeview);
 
-	g_object_set_data_full (G_OBJECT (treeview), "user-langs",
-				user_langs, (GDestroyNotify) g_hash_table_destroy);
-	timeout = g_idle_add ((GSourceFunc) finish_language_setup, treeview);
-	g_object_set_data (G_OBJECT (treeview), "timeout", GUINT_TO_POINTER (timeout));
-	g_object_weak_ref (G_OBJECT (treeview), (GWeakNotify) remove_timeout, GUINT_TO_POINTER (timeout));
+	gtk_widget_grab_focus (treeview);
 }

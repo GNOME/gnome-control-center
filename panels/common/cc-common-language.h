@@ -42,6 +42,8 @@ guint    cc_common_language_add_available_languages (GtkListStore     *store,
 gboolean cc_common_language_has_font                (const gchar  *locale);
 gchar   *cc_common_language_get_current_language    (void);
 
+GHashTable *cc_common_language_get_initial_languages   (void);
+
 void     cc_common_language_setup_list              (GtkWidget    *treeview,
 						     GHashTable   *initial);
 void     cc_common_language_select_current_language (GtkTreeView  *treeview);
