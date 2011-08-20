@@ -30,6 +30,7 @@ G_BEGIN_DECLS
 void              um_add_user_languages            (GtkTreeModel *model);
 
 GtkWidget        *um_language_chooser_new          (GtkWidget *parent);
+void              um_language_chooser_clear_filter (GtkWidget *chooser);
 gchar            *um_language_chooser_get_language (GtkWidget *chooser);
 
 G_END_DECLS

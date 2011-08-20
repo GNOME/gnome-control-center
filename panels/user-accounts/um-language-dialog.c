@@ -55,6 +55,15 @@ um_language_chooser_get_language (GtkWidget *chooser)
         return lang;
 }
 
+void
+um_language_chooser_clear_filter (GtkWidget *chooser)
+{
+	GtkEntry *entry;
+
+	entry = (GtkEntry *) g_object_get_data (G_OBJECT (chooser), "filter-entry");
+	gtk_entry_set_text (entry, "");
+}
+
 static void
 row_activated (GtkTreeView       *tree_view,
                GtkTreePath       *path,
@@ -198,6 +207,7 @@ finish_um_language_chooser (gpointer user_data)
 
 	list = g_object_get_data (G_OBJECT (chooser), "list");
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
+	model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (model));
 	user_langs = g_object_get_data (G_OBJECT (chooser), "user-langs");
 
 	async_id = cc_common_language_add_available_languages (GTK_LIST_STORE (model), user_langs);
@@ -216,6 +226,74 @@ finish_um_language_chooser (gpointer user_data)
 	return FALSE;
 }
 
+static void
+filter_clear (GtkEntry *entry, GtkEntryIconPosition icon_pos, GdkEvent *event, gpointer user_data)
+{
+	gtk_entry_set_text (entry, "");
+}
+
+static void
+filter_changed (GtkWidget *entry, GParamSpec *pspec, GtkWidget *list)
+{
+	const gchar *pattern;
+	GtkTreeModel *filter_model;
+	GtkTreeModel *model;
+
+	pattern = gtk_entry_get_text (GTK_ENTRY (entry));
+
+	filter_model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
+	model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filter_model));
+
+	if (g_strcmp0 (pattern, "") == 0) {
+                g_object_set (G_OBJECT (entry),
+                              "secondary-icon-name", "edit-find-symbolic",
+                              "secondary-icon-activatable", FALSE,
+                              "secondary-icon-sensitive", FALSE,
+                              NULL);
+
+		g_object_set_data_full (G_OBJECT (model), "filter-string",
+					g_strdup (""), g_free);
+
+        } else {
+                g_object_set (G_OBJECT (entry),
+                              "secondary-icon-name", "edit-clear-symbolic",
+                              "secondary-icon-activatable", TRUE,
+                              "secondary-icon-sensitive", TRUE,
+                              NULL);
+
+		g_object_set_data_full (G_OBJECT (model), "filter-string",
+					g_utf8_casefold (pattern, -1), g_free);
+        }
+
+	gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (filter_model));
+}
+
+static gboolean
+filter_languages (GtkTreeModel *model,
+		  GtkTreeIter  *iter,
+		  gpointer      data)
+{
+	const gchar *filter_string;
+	gchar *locale, *l;
+	gboolean visible;
+
+	filter_string = g_object_get_data (G_OBJECT (model), "filter-string");
+
+	if (filter_string == NULL) {
+		return TRUE;
+	}
+
+	gtk_tree_model_get (model, iter, DISPLAY_LOCALE_COL, &locale, -1);
+	l = g_utf8_casefold (locale, -1);
+
+	visible = strstr (l, filter_string) != NULL;
+
+	g_free (locale);
+	g_free (l);
+
+	return visible;
+}
+
 GtkWidget *
 um_language_chooser_new (GtkWidget *parent)
 {
@@ -225,9 +303,12 @@ um_language_chooser_new (GtkWidget *parent)
         GtkWidget *chooser;
         GtkWidget *list;
         GtkWidget *button;
+	GtkWidget *entry;
         GHashTable *user_langs;
         GdkCursor *cursor;
         guint timeout;
+	GtkTreeModel *model;
+	GtkTreeModel *filter_model;
 
         builder = gtk_builder_new ();
         filename = UIDIR "/language-chooser.ui";
@@ -249,9 +330,22 @@ um_language_chooser_new (GtkWidget *parent)
         button = (GtkWidget *) gtk_builder_get_object (builder, "ok-button");
         gtk_widget_grab_default (button);
 
+	entry = (GtkWidget *) gtk_builder_get_object (builder, "filter-entry");
+        g_object_set_data (G_OBJECT (chooser), "filter-entry", entry);
+	g_signal_connect (entry, "notify::text",
+			  G_CALLBACK (filter_changed), list);
+	g_signal_connect (entry, "icon-release",
+			  G_CALLBACK (filter_clear), NULL);
+
 	/* Add user languages */
 	user_langs = new_ht_for_user_languages ();
         cc_common_language_setup_list (list, user_langs);
+
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
+	filter_model = gtk_tree_model_filter_new (model, NULL);
+	gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter_model), filter_languages,
+						NULL, NULL);
+	gtk_tree_view_set_model (GTK_TREE_VIEW (list), filter_model);
 
 	/* Setup so that the list is added after the dialogue is shown */
         cursor = gdk_cursor_new (GDK_WATCH);
@@ -268,4 +362,3 @@ um_language_chooser_new (GtkWidget *parent)
 
         return chooser;
 }
-

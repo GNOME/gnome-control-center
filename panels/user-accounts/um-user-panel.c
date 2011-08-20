@@ -714,6 +714,7 @@ language_changed (UmEditableCombo    *combo,
         }
 
         if (d->language_chooser) {
+		um_language_chooser_clear_filter (d->language_chooser);
                 gtk_window_present (GTK_WINDOW (d->language_chooser));
                 gtk_widget_set_sensitive (GTK_WIDGET (combo), FALSE);
                 return;
