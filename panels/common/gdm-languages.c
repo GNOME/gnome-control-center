@@ -63,6 +63,7 @@ typedef struct _GdmLocale {
 static GHashTable *gdm_languages_map;
 static GHashTable *gdm_territories_map;
 static GHashTable *gdm_available_locales_map;
+static GHashTable *gdm_language_count_map;
 
 static char * construct_language_name (const char *language,
                                        const char *territory,
@@ -614,6 +615,27 @@ collect_locales_from_locale_file (const char *locale_file)
 }
 
 static void
+count_languages (void)
+{
+	gpointer value;
+	GHashTableIter iter;
+	gint count;
+
+	gdm_language_count_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+
+        g_hash_table_iter_init (&iter, gdm_available_locales_map);
+        while (g_hash_table_iter_next (&iter, NULL, &value)) {
+                GdmLocale *locale;
+
+                locale = (GdmLocale *) value;
+
+		count = GPOINTER_TO_INT (g_hash_table_lookup (gdm_language_count_map, locale->language_code));
+		count++;
+		g_hash_table_insert (gdm_language_count_map, g_strdup (locale->language_code), GINT_TO_POINTER (count));
+        }
+}
+
+static void
 collect_locales (void)
 {
 
@@ -631,6 +653,24 @@ collect_locales (void)
                 collect_locales_from_directory ();
         }
         collect_locales_from_locale_file (ALIASES_FILE);
+
+	count_languages ();
+}
+
+static gint
+get_language_count (const char *language)
+{
+        if (gdm_language_count_map == NULL) {
+                collect_locales ();
+        }
+
+	return GPOINTER_TO_INT (g_hash_table_lookup (gdm_language_count_map, language));
+}
+
+static gboolean
+is_unique_language (const char *language)
+{
+  return get_language_count (language) == 1;
 }
 
 static gboolean
@@ -1100,6 +1140,10 @@ gdm_get_language_from_name (const char *name,
         }
 
         full_language = g_string_append (full_language, translated_language);
+
+	if (is_unique_language (language_code)) {
+		goto out;
+	}
 
         if (territory_code != NULL) {
                 translated_territory = get_translated_territory (territory_code, locale);
