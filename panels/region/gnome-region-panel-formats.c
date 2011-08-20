@@ -46,7 +46,8 @@ display_date (GtkLabel *label, GDateTime *dt, const gchar *format)
 static void
 selection_changed_cb (GtkComboBox *combo, gpointer user_data)
 {
-	const gchar *active_id, *locale;
+	const gchar *active_id;
+	gchar *locale;
 	GDateTime *dt;
 	gchar *s;
 	struct lconv *num_info;
@@ -57,7 +58,8 @@ selection_changed_cb (GtkComboBox *combo, gpointer user_data)
 	if (!active_id || !active_id[0])
 		return;
 
-	locale = setlocale (LC_TIME, active_id);
+	locale = g_strdup (setlocale (LC_TIME, NULL));
+	setlocale (LC_TIME, active_id);
 
 	dt = g_date_time_new_now_local ();
 
@@ -72,18 +74,22 @@ selection_changed_cb (GtkComboBox *combo, gpointer user_data)
 	display_date (GTK_LABEL (gtk_builder_get_object (builder, "short_time_format")), dt, "%X");
 
 	setlocale (LC_TIME, locale);
+	g_free (locale);
 
 	/* Display numbers */
-	locale = setlocale (LC_NUMERIC, active_id);
+	locale = g_strdup (setlocale (LC_NUMERIC, NULL));
+	setlocale (LC_NUMERIC, active_id);
 
 	s = g_strdup_printf ("%'.2f", 123456789.00);
 	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "numbers_format")), s);
 	g_free (s);
 
 	setlocale (LC_NUMERIC, locale);
+	g_free (locale);
 
 	/* Display currency */
-	locale = setlocale (LC_MONETARY, active_id);
+	locale = g_strdup (setlocale (LC_MONETARY, NULL));
+	setlocale (LC_MONETARY, active_id);
 
 	num_info = localeconv ();
 	if (num_info != NULL) {
@@ -91,9 +97,12 @@ selection_changed_cb (GtkComboBox *combo, gpointer user_data)
 	}
 
 	setlocale (LC_MONETARY, locale);
+	g_free (locale);
 
 	/* Display measurement */
-	locale = setlocale (LC_MEASUREMENT, active_id);
+	locale = g_strdup (setlocale (LC_MEASUREMENT, NULL));
+	setlocale (LC_MEASUREMENT, active_id);
+
 	fmt = nl_langinfo (_NL_MEASUREMENT_MEASUREMENT);
 	if (fmt && *fmt == 2)
 		gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "measurement_format")), _("Imperial"));
@@ -101,6 +110,7 @@ selection_changed_cb (GtkComboBox *combo, gpointer user_data)
 		gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "measurement_format")), _("Metric"));
 
 	setlocale (LC_MEASUREMENT, locale);
+	g_free (locale);
 }
 
 void
