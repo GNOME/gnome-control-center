@@ -36,23 +36,6 @@
 
 #include "gdm-languages.h"
 
-struct _UmLanguageDialog {
-        GtkWidget *dialog;
-        GtkWidget *user_icon;
-        GtkWidget *user_name;
-        GtkWidget *dialog_combo;
-        GtkListStore *dialog_store;
-
-        GtkWidget *chooser;
-        GtkWidget *chooser_list;
-        GtkListStore *chooser_store;
-
-        char *language;
-        UmUser *user;
-
-        gboolean force_setting;
-};
-
 gchar *
 um_language_chooser_get_language (GtkWidget *chooser)
 {
