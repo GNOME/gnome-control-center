@@ -58,19 +58,17 @@ xkb_settings_changed (GSettings *settings,
 
 	if (g_str_equal (key, "layouts")) {
 		gint i;
-		GString *str = NULL;
+		GString *str = g_string_new ("");
 		gchar **layouts = g_settings_get_strv (settings, "layouts");
 
 		for (i = 0; i < G_N_ELEMENTS (layouts); i++) {
 			gchar *utf_visible = xkb_layout_description_utf8 (layouts[i]);
 
 			if (utf_visible != NULL) {
-				if (str != NULL) {
+				if (str->str[0] != '\0') {
 					str = g_string_append (str, ", ");
-					str = g_string_append (str, utf_visible);
-				} else
-					str = g_string_new (utf_visible);
-
+				}
+				str = g_string_append (str, utf_visible);
 				g_free (utf_visible);
 			}
 		}
