@@ -84,6 +84,13 @@ new_ht_for_user_languages (void)
 
         ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
+	/* Add some common languages here */
+	g_hash_table_insert (ht, g_strdup ("en_US.utf8"), g_strdup (_("English"))); 
+	g_hash_table_insert (ht, g_strdup ("de_DE.utf8"), g_strdup (_("German"))); 
+	g_hash_table_insert (ht, g_strdup ("fr_FR.utf8"), g_strdup (_("French"))); 
+	g_hash_table_insert (ht, g_strdup ("es_ES.utf8"), g_strdup (_("Spanish"))); 
+	g_hash_table_insert (ht, g_strdup ("zh_CN.utf8"), g_strdup (_("Chinese"))); 
+
         manager = um_user_manager_ref_default ();
         users = um_user_manager_list_users (manager);
         g_object_unref (manager);
@@ -140,7 +147,6 @@ languages_foreach_cb (gpointer key,
 			    DISPLAY_LOCALE_COL, display_locale,
 			    -1);
 }
-
 
 void
 um_add_user_languages (GtkTreeModel *model)
