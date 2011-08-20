@@ -19,19 +19,18 @@
  * Written by: Matthias Clasen <mclasen@redhat.com>
  */
 
-#ifndef __UM_LANGUAGE_DIALOG_H__
-#define __UM_LANGUAGE_DIALOG_H__
+#ifndef __CC_LANGUAGE_CHOOSER_H__
+#define __CC_LANGUAGE_CHOOSER_H__
 
 #include <gtk/gtk.h>
-#include "um-user.h"
 
 G_BEGIN_DECLS
 
-void              um_add_user_languages            (GtkTreeModel *model);
+void              cc_add_user_languages            (GtkTreeModel *model);
 
-GtkWidget        *um_language_chooser_new          (GtkWidget *parent);
-void              um_language_chooser_clear_filter (GtkWidget *chooser);
-gchar            *um_language_chooser_get_language (GtkWidget *chooser);
+GtkWidget        *cc_language_chooser_new          (GtkWidget *parent);
+void              cc_language_chooser_clear_filter (GtkWidget *chooser);
+gchar            *cc_language_chooser_get_language (GtkWidget *chooser);
 
 G_END_DECLS
 

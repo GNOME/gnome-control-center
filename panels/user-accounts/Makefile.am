@@ -40,8 +40,6 @@ libuser_accounts_la_SOURCES =		\
 	um-user-manager.c 		\
 	um-account-dialog.h		\
 	um-account-dialog.c		\
-	um-language-dialog.h 		\
-	um-language-dialog.c		\
 	um-password-dialog.h		\
 	um-password-dialog.c		\
 	um-photo-dialog.h		\

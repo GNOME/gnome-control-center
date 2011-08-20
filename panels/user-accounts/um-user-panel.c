@@ -49,7 +49,7 @@
 #include "um-editable-combo.h"
 
 #include "um-account-dialog.h"
-#include "um-language-dialog.h"
+#include "cc-language-chooser.h"
 #include "um-password-dialog.h"
 #include "um-photo-dialog.h"
 #include "um-fingerprint-dialog.h"
@@ -582,7 +582,7 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
 
         widget = get_widget (d, "account-language-combo");
         model = um_editable_combo_get_model (UM_EDITABLE_COMBO (widget));
-        um_add_user_languages (model);
+        cc_add_user_languages (model);
 
         lang = g_strdup (um_user_get_language (user));
         if (!lang)
@@ -673,7 +673,7 @@ language_response (GtkDialog         *dialog,
         model = um_editable_combo_get_model (UM_EDITABLE_COMBO (combo));
 
         if (response_id == GTK_RESPONSE_OK) {
-                lang = um_language_chooser_get_language (GTK_WIDGET (dialog));
+                lang = cc_language_chooser_get_language (GTK_WIDGET (dialog));
                 um_user_set_language (user, lang);
         }
         else {
@@ -714,15 +714,14 @@ language_changed (UmEditableCombo    *combo,
         }
 
         if (d->language_chooser) {
-		um_language_chooser_clear_filter (d->language_chooser);
+		cc_language_chooser_clear_filter (d->language_chooser);
                 gtk_window_present (GTK_WINDOW (d->language_chooser));
                 gtk_widget_set_sensitive (GTK_WIDGET (combo), FALSE);
                 return;
         }
 
-        d->language_chooser = um_language_chooser_new (gtk_widget_get_toplevel (d->main_box));
-        gtk_window_set_transient_for (GTK_WINDOW (d->language_chooser),
-                                      GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)));
+        d->language_chooser = cc_language_chooser_new (gtk_widget_get_toplevel (d->main_box));
+
         g_signal_connect (d->language_chooser, "response",
                           G_CALLBACK (language_response), d);
         g_signal_connect (d->language_chooser, "delete-event",

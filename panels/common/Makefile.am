@@ -8,7 +8,7 @@ AM_CPPFLAGS =						\
 	$(PANEL_CFLAGS)					\
 	$(LIBLANGUAGE_CFLAGS)				\
 	-DDATADIR=\""$(datadir)"\"			\
-	-DUIDIR=\""$(pkgdatadir)/ui/user-accounts"\"	\
+	-DUIDIR=\""$(pkgdatadir)/ui"\"			\
 	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\"       \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
 	-DUM_PIXMAP_DIR=\""$(pkgdatadir)/pixmaps"\"
@@ -18,7 +18,9 @@ liblanguage_la_SOURCES =		\
 	gdm-languages.c 		\
 	locarchive.h			\
 	cc-common-language.c		\
-	cc-common-language.h
+	cc-common-language.h		\
+	cc-language-chooser.c		\
+	cc-language-chooser.h
 
 liblanguage_la_LIBADD = 		\
 	$(PANEL_LIBS)			\
@@ -39,5 +41,10 @@ libshortcuts_la_LDFLAGS = $(PANEL_LDFLAGS)
 list_languages_SOURCES = list-languages.c
 list_languages_LDADD = liblanguage.la
 list_languages_CFLAGS = $(LIBLANGUAGE_CFLAGS)
+
+uidir = $(pkgdatadir)/ui
+
+ui_DATA = \
+	language-chooser.ui
 
 -include $(top_srcdir)/git.mk

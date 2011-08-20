@@ -3,7 +3,6 @@ SUBDIRS = faces icons
 uidir = $(pkgdatadir)/ui/user-accounts
 ui_DATA = \
 	account-dialog.ui	\
-	language-chooser.ui	\
 	password-dialog.ui	\
 	photo-dialog.ui		\
 	user-accounts-dialog.ui \
