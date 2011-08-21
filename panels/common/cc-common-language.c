@@ -90,10 +90,11 @@ cc_common_language_sort_languages (GtkTreeModel *model,
         return result;
 }
 
-gboolean
-cc_common_language_get_iter_for_language (GtkTreeModel *model,
-					  const gchar  *lang,
-					  GtkTreeIter  *iter)
+static gboolean
+iter_for_language (GtkTreeModel *model,
+                   const gchar  *lang,
+                   GtkTreeIter  *iter,
+                   gboolean      region)
 {
         char *l;
         char *name;
@@ -111,7 +112,12 @@ cc_common_language_get_iter_for_language (GtkTreeModel *model,
 
         name = gdm_normalize_language_name (lang);
         if (name != NULL) {
-                language = gdm_get_language_from_name (name, NULL);
+                if (region) {
+                        language = gdm_get_region_from_name (name, NULL);
+                }
+                else {
+                        language = gdm_get_language_from_name (name, NULL);
+                }
 
                 gtk_list_store_append (GTK_LIST_STORE (model), iter);
                 gtk_list_store_set (GTK_LIST_STORE (model), iter, LOCALE_COL, name, DISPLAY_LOCALE_COL, language, -1);
@@ -121,6 +127,22 @@ cc_common_language_get_iter_for_language (GtkTreeModel *model,
         }
 
         return FALSE;
+}
+
+gboolean
+cc_common_language_get_iter_for_language (GtkTreeModel *model,
+                                          const gchar  *lang,
+                                          GtkTreeIter  *iter)
+{
+  return iter_for_language (model, lang, iter, FALSE);
+}
+
+gboolean
+cc_common_language_get_iter_for_region (GtkTreeModel *model,
+                                        const gchar  *lang,
+                                        GtkTreeIter  *iter)
+{
+  return iter_for_language (model, lang, iter, TRUE);
 }
 
 gboolean

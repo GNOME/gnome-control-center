@@ -28,6 +28,8 @@ G_BEGIN_DECLS
 
 char *        gdm_get_language_from_name  (const char *name,
                                            const char *locale);
+char *        gdm_get_region_from_name    (const char *name,
+                                           const char *locale);
 char **       gdm_get_all_language_names  (void);
 gboolean      gdm_parse_language_name     (const char *name,
                                            char      **language_codep,

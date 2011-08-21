@@ -64,6 +64,7 @@ static GHashTable *gdm_languages_map;
 static GHashTable *gdm_territories_map;
 static GHashTable *gdm_available_locales_map;
 static GHashTable *gdm_language_count_map;
+static GHashTable *gdm_territory_count_map;
 
 static char * construct_language_name (const char *language,
                                        const char *territory,
@@ -615,13 +616,14 @@ collect_locales_from_locale_file (const char *locale_file)
 }
 
 static void
-count_languages (void)
+count_languages_and_territories (void)
 {
 	gpointer value;
 	GHashTableIter iter;
 	gint count;
 
 	gdm_language_count_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+	gdm_territory_count_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
         g_hash_table_iter_init (&iter, gdm_available_locales_map);
         while (g_hash_table_iter_next (&iter, NULL, &value)) {
@@ -632,6 +634,10 @@ count_languages (void)
 		count = GPOINTER_TO_INT (g_hash_table_lookup (gdm_language_count_map, locale->language_code));
 		count++;
 		g_hash_table_insert (gdm_language_count_map, g_strdup (locale->language_code), GINT_TO_POINTER (count));
+
+		count = GPOINTER_TO_INT (g_hash_table_lookup (gdm_territory_count_map, locale->territory_code));
+		count++;
+		g_hash_table_insert (gdm_territory_count_map, g_strdup (locale->territory_code), GINT_TO_POINTER (count));
         }
 }
 
@@ -654,7 +660,7 @@ collect_locales (void)
         }
         collect_locales_from_locale_file (ALIASES_FILE);
 
-	count_languages ();
+	count_languages_and_territories ();
 }
 
 static gint
@@ -671,6 +677,22 @@ static gboolean
 is_unique_language (const char *language)
 {
   return get_language_count (language) == 1;
+}
+
+static gint
+get_territory_count (const char *territory)
+{
+        if (gdm_territory_count_map == NULL) {
+                collect_locales ();
+        }
+
+	return GPOINTER_TO_INT (g_hash_table_lookup (gdm_territory_count_map, territory));
+}
+
+static gboolean
+is_unique_territory (const char *territory)
+{
+  return get_territory_count (territory) == 1;
 }
 
 static gboolean
@@ -1180,6 +1202,94 @@ out:
        }
 
        return g_string_free (full_language, FALSE);
+}
+
+char *
+gdm_get_region_from_name (const char *name,
+                          const char *locale)
+{
+        GString *full_name;
+        char *language_code;
+        char *territory_code;
+        char *codeset_code;
+        char *langinfo_codeset;
+        char *translated_language;
+        char *translated_territory;
+        gboolean is_utf8 = TRUE;
+
+        g_return_val_if_fail (name != NULL, NULL);
+        g_return_val_if_fail (*name != '\0', NULL);
+
+        translated_territory = NULL;
+        translated_language = NULL;
+        langinfo_codeset = NULL;
+
+        full_name = g_string_new (NULL);
+
+        if (gdm_languages_map == NULL) {
+                languages_init ();
+        }
+
+        if (gdm_territories_map == NULL) {
+                territories_init ();
+        }
+
+        language_code = NULL;
+        territory_code = NULL;
+        codeset_code = NULL;
+
+        gdm_parse_language_name (name,
+                                 &language_code,
+                                 &territory_code,
+                                 &codeset_code,
+                                 NULL);
+
+        if (territory_code == NULL) {
+                goto out;
+        }
+
+        translated_territory = get_translated_territory (territory_code, locale);
+        g_string_append (full_name, translated_territory);
+
+	if (is_unique_territory (territory_code)) {
+		goto out;
+	}
+
+        if (language_code != NULL) {
+                translated_language = get_translated_language (language_code, locale);
+        }
+        if (translated_language != NULL) {
+                g_string_append_printf (full_name,
+                                        " (%s)",
+                                        translated_language);
+        }
+
+        language_name_get_codeset_details (name, &langinfo_codeset, &is_utf8);
+
+        if (codeset_code == NULL && langinfo_codeset != NULL) {
+            codeset_code = g_strdup (langinfo_codeset);
+        }
+
+        if (!is_utf8 && codeset_code) {
+                g_string_append_printf (full_name,
+                                        " [%s]",
+                                        codeset_code);
+        }
+
+out:
+       g_free (language_code);
+       g_free (territory_code);
+       g_free (codeset_code);
+       g_free (langinfo_codeset);
+       g_free (translated_language);
+       g_free (translated_territory);
+
+       if (full_name->len == 0) {
+               g_string_free (full_name, TRUE);
+               return NULL;
+       }
+
+       return g_string_free (full_name, FALSE);
 }
 
 char **
