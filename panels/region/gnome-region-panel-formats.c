@@ -234,7 +234,7 @@ setup_formats (GtkBuilder *builder)
 	langs = gdm_get_all_language_names ();
 	for (i = 0; langs[i] != NULL; i++) {
 
-		language = gdm_get_language_from_name (langs[i], NULL);
+		language = gdm_get_region_from_name (langs[i], NULL);
                 
                 gtk_list_store_append (GTK_LIST_STORE (model), &iter);
                 gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, langs[i], 1, language, -1);
