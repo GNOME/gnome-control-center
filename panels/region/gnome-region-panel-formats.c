@@ -31,8 +31,6 @@
 #include "gdm-languages.h"
 #include "gnome-region-panel-formats.h"
 
-static GSettings *locale_settings = NULL;
-
 static void
 display_date (GtkLabel *label, GDateTime *dt, const gchar *format)
 {
@@ -44,19 +42,56 @@ display_date (GtkLabel *label, GDateTime *dt, const gchar *format)
 }
 
 static void
-selection_changed_cb (GtkComboBox *combo, gpointer user_data)
+select_region (GtkTreeView *treeview, const gchar *lang)
 {
-	const gchar *active_id;
+        GtkTreeModel *model;
+        GtkTreeSelection *selection;
+        GtkTreeIter iter;
+        GtkTreePath *path;
+        gboolean cont;
+
+        model = gtk_tree_view_get_model (treeview);
+        selection = gtk_tree_view_get_selection (treeview);
+        cont = gtk_tree_model_get_iter_first (model, &iter);
+        while (cont) {
+                gchar *locale;
+
+                gtk_tree_model_get (model, &iter, 0, &locale, -1);
+                if (g_strcmp0 (locale, lang) == 0) {
+                        gtk_tree_selection_select_iter (selection, &iter);
+                        path = gtk_tree_model_get_path (model, &iter);
+                        gtk_tree_view_scroll_to_cell (treeview, path, NULL, FALSE, 0.0, 0.0);
+                        gtk_tree_path_free (path);
+                        g_free (locale);
+                        break;
+                }
+                g_free (locale);
+
+                cont = gtk_tree_model_iter_next (model, &iter);
+        }
+}
+
+static void
+selection_changed_cb (GtkTreeSelection *selection, gpointer user_data)
+{
+	GtkBuilder *builder = GTK_BUILDER (user_data);
+        GtkTreeModel *model;
+        GtkTreeIter iter;
+        gchar *active_id;
 	gchar *locale;
 	GDateTime *dt;
 	gchar *s;
 	struct lconv *num_info;
-	GtkBuilder *builder = GTK_BUILDER (user_data);
 	const char *fmt;
+        GtkWidget *treeview;
+        GSettings *locale_settings;
+        gchar *current_setting;
 
-	active_id = gtk_combo_box_get_active_id (combo);
-	if (!active_id || !active_id[0])
-		return;
+        if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
+                return;
+        }
+
+        gtk_tree_model_get (model, &iter, 0, &active_id, -1);
 
 	locale = g_strdup (setlocale (LC_TIME, NULL));
 	setlocale (LC_TIME, active_id);
@@ -111,67 +146,114 @@ selection_changed_cb (GtkComboBox *combo, gpointer user_data)
 
 	setlocale (LC_MEASUREMENT, locale);
 	g_free (locale);
+
+	treeview = GTK_WIDGET (gtk_builder_get_object (builder, "region_selector"));
+        locale_settings = g_object_get_data (G_OBJECT (treeview), "settings");
+	current_setting = g_settings_get_string (locale_settings, "region");
+
+        if (g_strcmp0 (active_id, current_setting) != 0) {
+                g_settings_set_string (locale_settings, "region", active_id);
+        }
+
+        g_free (current_setting);
+        g_free (active_id);
+}
+
+static void
+setting_changed_cb (GSettings *locale_settings, gchar *key, GtkTreeView *treeview)
+{
+        gchar *current_setting;
+
+        current_setting = g_settings_get_string (locale_settings, "region");
+        select_region (treeview, current_setting);
+        g_free (current_setting);
+}
+
+static gint
+sort_regions (GtkTreeModel *model,
+              GtkTreeIter  *a,
+              GtkTreeIter  *b,
+              gpointer      data)
+{
+        gchar *la, *lb;
+        gint result;
+
+        gtk_tree_model_get (model, a, 1, &la, -1);
+        gtk_tree_model_get (model, b, 1, &lb, -1);
+
+        result = strcmp (la, lb);
+
+        g_free (la);
+        g_free (lb);
+
+        return result;
 }
 
 void
 setup_formats (GtkBuilder *builder)
 {
-	GtkWidget *combo;
+	GtkWidget *treeview;
 	gchar **langs, *language, *current_lang;
 	gint i;
+	GtkTreeModel *model;
+        GtkTreeIter iter;
+        GtkCellRenderer *cell;
+        GtkTreeViewColumn *column;
+        GtkWidget *widget;
+        GtkStyleContext *context;
+        GSettings *locale_settings;
 
 	locale_settings = g_settings_new ("org.gnome.system.locale");
 
+        /* Setup junction between toolbar and treeview */
+        widget = (GtkWidget *)gtk_builder_get_object (builder, "region-swindow");
+        context = gtk_widget_get_style_context (widget);
+        gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
+        widget = (GtkWidget *)gtk_builder_get_object (builder, "region-toolbar");
+        context = gtk_widget_get_style_context (widget);
+        gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
+
 	/* Setup formats selector */
-	combo = GTK_WIDGET (gtk_builder_get_object (builder, "region_selector"));
-	gtk_combo_box_set_id_column (GTK_COMBO_BOX (combo), 1);
+	treeview = GTK_WIDGET (gtk_builder_get_object (builder, "region_selector"));
+        cell = gtk_cell_renderer_text_new ();
+        g_object_set (cell,
+                      "width-chars", 40,
+                      "ellipsize", PANGO_ELLIPSIZE_END,
+                      NULL);
+        column = gtk_tree_view_column_new_with_attributes (NULL, cell, "text", 1, NULL);
+        gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+
+        model = (GtkTreeModel*)gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING);
+        gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (model),
+                                                 sort_regions, NULL, NULL);
+        gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
+                                              GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID,
+                                              GTK_SORT_ASCENDING);
+        gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), model);
 
 	langs = gdm_get_all_language_names ();
 	for (i = 0; langs[i] != NULL; i++) {
-		GtkTreeModel *model;
-		GtkTreeIter iter;
-		gint row = 0;
 
 		language = gdm_get_language_from_name (langs[i], NULL);
-
-		/* Sort while adding */
-		model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-		if (gtk_tree_model_get_iter_first (model, &iter)) {
-			gboolean added = FALSE;
-
-			do {
-				gchar *iter_s;
-
-				gtk_tree_model_get (model, &iter, 0, &iter_s, -1);
-				if (g_strcmp0 (language, iter_s) < 0) {
-					gtk_combo_box_text_insert (GTK_COMBO_BOX_TEXT (combo), row,
-								   langs[i], language);
-					added = TRUE;
-					break;
-				}
-
-				row++;
-			} while (gtk_tree_model_iter_next (model, &iter));
-
-			if (!added)
-				gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (combo), langs[i], language);
-		} else
-			gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (combo), langs[i], language);
+                
+                gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+                gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, langs[i], 1, language, -1);
 
 		g_free (language);
-
 	}
 
-	g_signal_connect (G_OBJECT (combo), "changed",
+        g_object_set_data_full (G_OBJECT (treeview), "settings", locale_settings, g_object_unref);
+
+	g_signal_connect (G_OBJECT (gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview))), "changed",
 			  G_CALLBACK (selection_changed_cb), builder);
 
 	current_lang = g_settings_get_string (locale_settings, "region");
 	if (!current_lang || !current_lang[0])
 		current_lang = cc_common_language_get_current_language ();
 
-	gtk_combo_box_set_active_id (GTK_COMBO_BOX (combo), current_lang);
+	select_region (GTK_TREE_VIEW (treeview), current_lang);
 	g_free (current_lang);
 
-	g_object_weak_ref (G_OBJECT (combo), (GWeakNotify) g_object_unref, locale_settings);
-	g_settings_bind (locale_settings, "region", combo, "active-id", G_SETTINGS_BIND_DEFAULT);
+        g_signal_connect (locale_settings, "changed::region",
+                          G_CALLBACK (setting_changed_cb), treeview);
 }

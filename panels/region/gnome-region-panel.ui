@@ -109,7 +109,7 @@
                   <object class="GtkVBox" id="vbox2">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="border_width">10</property>
+                    <property name="border_width">12</property>
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkLabel" id="label4">
@@ -141,7 +141,7 @@
                                 <property name="can_focus">True</property>
                                 <property name="headers_visible">False</property>
                                 <child internal-child="selection">
-                                  <object class="GtkTreeSelection" id="treeview-selection"/>
+                                  <object class="GtkTreeSelection" id="language-treeview-selection"/>
                                 </child>
                               </object>
                             </child>
@@ -150,48 +150,6 @@
                             <property name="expand">True</property>
                             <property name="fill">True</property>
                             <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkToolbar" id="language-toolbar">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="show_arrow">False</property>
-                            <property name="icon_size">1</property>
-                            <property name="toolbar-style">icons</property>
-                            <style>
-                              <class name="inline-toolbar"/>
-                            </style>
-                            <child>
-                              <object class="GtkToolButton" id="language_add">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="use_action_appearance">False</property>
-                                <property name="use_underline">True</property>
-                                <property name="icon_name">list-add-symbolic</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkToolButton" id="language_remove">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="use_action_appearance">False</property>
-                                <property name="use_underline">True</property>
-                                <property name="icon_name">list-remove-symbolic</property>
-                                <property name="sensitive">False</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="homogeneous">True</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="fill">True</property>
                           </packing>
                         </child>
                         <child>
@@ -232,6 +190,50 @@
                             <property name="position">1</property>
                           </packing>
                         </child>
+                        <child>
+                          <object class="GtkToolbar" id="language-toolbar">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="toolbar_style">icons</property>
+                            <property name="show_arrow">False</property>
+                            <property name="icon_size">1</property>
+                            <style>
+                              <class name="inline-toolbar"/>
+                            </style>
+                            <child>
+                              <object class="GtkToolButton" id="language_add">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="use_action_appearance">False</property>
+                                <property name="use_underline">True</property>
+                                <property name="icon_name">list-add-symbolic</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="homogeneous">True</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkToolButton" id="language_remove">
+                                <property name="visible">True</property>
+                                <property name="sensitive">False</property>
+                                <property name="can_focus">False</property>
+                                <property name="use_action_appearance">False</property>
+                                <property name="use_underline">True</property>
+                                <property name="icon_name">list-remove-symbolic</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="homogeneous">True</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -252,24 +254,107 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkTable" id="table1">
+                  <object class="GtkGrid" id="table1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="n_rows">2</property>
-                    <property name="n_columns">2</property>
                     <property name="column_spacing">12</property>
-                    <property name="row_spacing">12</property>
+                    <property name="row_spacing">6</property>
+                    <property name="margin_top">12</property>
+                    <property name="margin_bottom">12</property>
+                    <property name="margin_left">12</property>
+                    <property name="margin_right">12</property>
                     <child>
                       <object class="GtkLabel" id="label5">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Region:</property>
+                        <property name="halign">start</property>
+                        <property name="label" translatable="yes">Select a region (change will be applied the next time you log in)</property>
                       </object>
                       <packing>
-                        <property name="x_options">GTK_SHRINK</property>
-                        <property name="y_options">GTK_FILL</property>
-                        <property name="x_padding">12</property>
-                        <property name="y_padding">12</property>
+                        <property name="left-attach">0</property>
+                        <property name="top-attach">0</property>
+                        <property name="width">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="region-box">
+                        <property name="visible">True</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                      <object class="GtkScrolledWindow" id="region-swindow">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="hscrollbar_policy">never</property>
+                        <property name="shadow_type">in</property>
+                        <property name="halign">fill</property>
+                        <property name="valign">fill</property>
+                        <property name="vexpand">True</property>
+                        <child>
+                          <object class="GtkTreeView" id="region_selector">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="headers_visible">False</property>
+                            <child internal-child="selection">
+                              <object class="GtkTreeSelection" id="region-treeview-selection"/>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                        <packing>
+                          <property name="expand">True</property>
+                          <property name="fill">True</property>
+                          <property name="position">0</property>
+                        </packing>
+                        </child>
+                      <child>
+                        <object class="GtkToolbar" id="region-toolbar">
+                        <property name="visible">False</property>
+                        <property name="can_focus">False</property>
+                        <property name="toolbar_style">icons</property>
+                        <property name="show_arrow">False</property>
+                        <property name="icon_size">1</property>
+                        <style>
+                          <class name="inline-toolbar"/>
+                        </style>
+                        <child>
+                          <object class="GtkToolButton" id="region_add">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="use_action_appearance">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="icon_name">list-add-symbolic</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="homogeneous">True</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkToolButton" id="region_remove">
+                            <property name="visible">True</property>
+                            <property name="sensitive">False</property>
+                            <property name="can_focus">False</property>
+                            <property name="use_action_appearance">False</property>
+                            <property name="use_underline">True</property>
+                            <property name="icon_name">list-remove-symbolic</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="homogeneous">True</property>
+                          </packing>
+                        </child>
+                      </object>
+                        <packing>
+                          <property name="expand">False</property>
+                          <property name="fill">True</property>
+                          <property name="position">1</property>
+                        </packing>
+                    </child>
+
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">1</property>
                       </packing>
                     </child>
                     <child>
@@ -509,18 +594,6 @@
                                     <property name="y_padding">3</property>
                                   </packing>
                                 </child>
-                                <child>
-                                  <placeholder/>
-                                </child>
-                                <child>
-                                  <placeholder/>
-                                </child>
-                                <child>
-                                  <placeholder/>
-                                </child>
-                                <child>
-                                  <placeholder/>
-                                </child>
                               </object>
                             </child>
                           </object>
@@ -529,7 +602,7 @@
                           <object class="GtkLabel" id="label6">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Example</property>
+                            <property name="label" translatable="yes">Examples</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
                             </attributes>
@@ -537,26 +610,8 @@
                         </child>
                       </object>
                       <packing>
-                        <property name="right_attach">2</property>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="x_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
-                        <property name="y_options">GTK_EXPAND | GTK_SHRINK | GTK_FILL</property>
-                        <property name="x_padding">12</property>
-                        <property name="y_padding">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkComboBoxText" id="region_selector">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                      </object>
-                      <packing>
                         <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="y_options">GTK_FILL</property>
-                        <property name="x_padding">12</property>
-                        <property name="y_padding">12</property>
+                        <property name="top_attach">1</property>
                       </packing>
                     </child>
                   </object>
@@ -619,9 +674,9 @@
                               <object class="GtkToolbar" id="layouts-toolbar">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="toolbar_style">icons</property>
                                 <property name="show_arrow">False</property>
                                 <property name="icon_size">1</property>
-                                <property name="toolbar-style">icons</property>
                                 <style>
                                   <class name="inline-toolbar"/>
                                 </style>
