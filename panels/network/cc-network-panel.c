@@ -51,10 +51,21 @@
 #include "panel-cell-renderer-signal.h"
 #include "panel-cell-renderer-security.h"
 
+#include "network-dialogs.h"
+
 G_DEFINE_DYNAMIC_TYPE (CcNetworkPanel, cc_network_panel, CC_TYPE_PANEL)
 
 #define NETWORK_PANEL_PRIVATE(o) \
         (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_NETWORK_PANEL, CcNetworkPanelPrivate))
+
+typedef enum {
+        OPERATION_NULL,
+        OPERATION_SHOW_DEVICE,
+        OPERATION_CREATE_WIFI,
+        OPERATION_CONNECT_HIDDEN,
+        OPERATION_CONNECT_8021X,
+        OPERATION_CONNECT_MOBILE
+} CmdlineOperation;
 
 struct _CcNetworkPanelPrivate
 {
@@ -65,6 +76,12 @@ struct _CcNetworkPanelPrivate
         NMRemoteSettings *remote_settings;
         gboolean          updating_device;
         guint             refresh_idle;
+
+        /* wireless dialog stuff */
+        CmdlineOperation  arg_operation;
+        gchar            *arg_device;
+        gchar            *arg_access_point;
+        gboolean          operation_done;
 };
 
 enum {
@@ -85,6 +102,11 @@ enum {
         PANEL_WIRELESS_COLUMN_LAST
 };
 
+enum {
+        PROP_0,
+        PROP_ARGV
+};
+
 static void     refresh_ui      (CcNetworkPanel *panel);
 static NetObject *find_in_model_by_id (CcNetworkPanel *panel, const gchar *id);
 static gboolean find_model_iter_by_object (GtkTreeModel *model, const NetObject *object, GtkTreeIter *iter);
@@ -101,13 +123,48 @@ cc_network_panel_get_property (GObject    *object,
         }
 }
 
+static CmdlineOperation
+cmdline_operation_from_string (const gchar *string)
+{
+        if (g_strcmp0 (string, "create-wifi") == 0)
+                return OPERATION_CREATE_WIFI;
+        if (g_strcmp0 (string, "connect-hidden-wifi") == 0)
+                return OPERATION_CONNECT_HIDDEN;
+        if (g_strcmp0 (string, "connect-8021x-wifi") == 0)
+                return OPERATION_CONNECT_8021X;
+        if (g_strcmp0 (string, "connect-3g") == 0)
+                return OPERATION_CONNECT_MOBILE;
+        if (g_strcmp0 (string, "show-device") == 0)
+                return OPERATION_SHOW_DEVICE;
+
+        g_warning ("Invalid additional argument %s", string);
+        return OPERATION_NULL;
+}
+
 static void
 cc_network_panel_set_property (GObject      *object,
                                guint         property_id,
                                const GValue *value,
                                GParamSpec   *pspec)
 {
+        CcNetworkPanel *self = CC_NETWORK_PANEL (object);
+        CcNetworkPanelPrivate *priv = self->priv;
+
         switch (property_id) {
+        case PROP_ARGV: {
+                gchar **args = g_value_get_boxed (value);
+                if (args) {
+                        g_debug ("Invoked with operation %s", args[0]);
+
+                        if (args[0])
+                                priv->arg_operation = cmdline_operation_from_string (args[0]);
+                        if (args[0] && args[1])
+                                priv->arg_device = g_strdup (args[1]);
+                        if (args[0] && args[1] && args[2])
+                                priv->arg_access_point = g_strdup (args[2]);
+                }
+                break;
+        }
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
         }
@@ -146,6 +203,10 @@ cc_network_panel_dispose (GObject *object)
 static void
 cc_network_panel_finalize (GObject *object)
 {
+        CcNetworkPanelPrivate *priv = CC_NETWORK_PANEL (object)->priv;
+        g_free (priv->arg_device);
+        g_free (priv->arg_access_point);
+
         G_OBJECT_CLASS (cc_network_panel_parent_class)->finalize (object);
 }
 
@@ -160,6 +221,8 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
         object_class->set_property = cc_network_panel_set_property;
         object_class->dispose = cc_network_panel_dispose;
         object_class->finalize = cc_network_panel_finalize;
+
+        g_object_class_override_property (object_class, PROP_ARGV, "argv");
 }
 
 static void
@@ -372,6 +435,19 @@ select_first_device (CcNetworkPanel *panel)
 }
 
 static void
+select_tree_iter (CcNetworkPanel *panel, GtkTreeIter *iter)
+{
+        GtkTreeView *widget;
+        GtkTreeSelection *selection;
+
+        widget = GTK_TREE_VIEW (gtk_builder_get_object (panel->priv->builder,
+                                                        "treeview_devices"));
+        selection = gtk_tree_view_get_selection (widget);
+
+        gtk_tree_selection_select_iter (selection, iter);
+}
+
+static void
 panel_device_got_modem_manager_cb (GObject *source_object,
                                    GAsyncResult *res,
                                    gpointer user_data)
@@ -541,7 +617,7 @@ register_object_interest (CcNetworkPanel *panel, NetObject *object)
                           panel);
 }
 
-static void
+static gboolean
 panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 {
         GtkListStore *liststore_devices;
@@ -557,6 +633,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 
         /* we don't support bluetooth devices yet -- no mockup */
         type = nm_device_get_device_type (device);
+
         if (type == NM_DEVICE_TYPE_BT)
                 goto out;
 
@@ -605,8 +682,45 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                             PANEL_DEVICES_COLUMN_TITLE, title,
                             PANEL_DEVICES_COLUMN_OBJECT, net_device,
                             -1);
+
+        if (priv->arg_operation != OPERATION_NULL) {
+                if (type == NM_DEVICE_TYPE_WIFI &&
+                    (priv->arg_operation == OPERATION_CREATE_WIFI ||
+                     priv->arg_operation == OPERATION_CONNECT_HIDDEN)) {
+                        g_debug ("Selecting wifi device");
+                        select_tree_iter (panel, &iter);
+
+                        if (priv->arg_operation == OPERATION_CREATE_WIFI)
+                                cc_network_panel_create_wifi_network (panel, priv->client, priv->remote_settings);
+                        else
+                                cc_network_panel_connect_to_hidden_network (panel, priv->client, priv->remote_settings);
+
+                        priv->arg_operation = OPERATION_NULL; /* done */
+                        return TRUE;
+                } else if (g_strcmp0 (nm_object_get_path (NM_OBJECT (device)), priv->arg_device) == 0) {
+                        if (priv->arg_operation == OPERATION_CONNECT_MOBILE) {
+                                cc_network_panel_connect_to_3g_network (panel, priv->client, priv->remote_settings, device);
+
+                                priv->arg_operation = OPERATION_NULL; /* done */
+                                select_tree_iter (panel, &iter);
+                                return TRUE;
+                        } else if (priv->arg_operation == OPERATION_CONNECT_8021X
+                                   || priv->arg_operation == OPERATION_SHOW_DEVICE) {
+                                select_tree_iter (panel, &iter);
+
+                                /* 802.11 wireless stuff must be handled in add_access_point, but
+                                   we still select the right page here, whereas if we're just showing
+                                   the device, we're done right away */
+                                if (priv->arg_operation == OPERATION_SHOW_DEVICE)
+                                        priv->arg_operation = OPERATION_NULL;
+                                return TRUE;
+                        }
+                }
+        }
+
 out:
         g_free (title);
+        return FALSE;
 }
 
 static void
@@ -757,7 +871,7 @@ get_access_point_security (NMAccessPoint *ap)
 }
 
 static void
-add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *active)
+add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *active, NMDevice *device)
 {
         CcNetworkPanelPrivate *priv = panel->priv;
         const GByteArray *ssid;
@@ -794,6 +908,17 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                              "combobox_wireless_network_name"));
                 gtk_combo_box_set_active_iter (GTK_COMBO_BOX (widget), &treeiter);
+        }
+
+        if (priv->arg_operation == OPERATION_CONNECT_8021X &&
+            g_strcmp0(priv->arg_device, nm_object_get_path (NM_OBJECT (device))) == 0 &&
+            g_strcmp0(priv->arg_access_point, object_path) == 0) {
+                cc_network_panel_connect_to_8021x_network (panel,
+                                                           priv->client,
+                                                           priv->remote_settings,
+                                                           device,
+                                                           ap);
+                priv->arg_operation = OPERATION_NULL; /* done */
         }
 }
 
@@ -1648,7 +1773,7 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
 
                 for (i = 0; i < aps_unique->len; i++) {
                         ap = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, i));
-                        add_access_point (panel, ap, active_ap);
+                        add_access_point (panel, ap, active_ap, nm_device);
                 }
                 add_access_point_other (panel);
                 if (active_ap == NULL) {
@@ -2170,6 +2295,7 @@ manager_running (NMClient *client, GParamSpec *pspec, gpointer user_data)
         int i;
         NMDevice *device_tmp;
         GtkListStore *liststore_devices;
+        gboolean selected = FALSE;
         CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
 
         /* clear all devices we added */
@@ -2190,11 +2316,13 @@ manager_running (NMClient *client, GParamSpec *pspec, gpointer user_data)
         }
         for (i = 0; i < devices->len; i++) {
                 device_tmp = g_ptr_array_index (devices, i);
-                panel_add_device (panel, device_tmp);
+                selected = panel_add_device (panel, device_tmp) || selected;
         }
 out:
-        /* select the first device */
-        select_first_device (panel);
+        if (!selected) {
+                /* select the first device */
+                select_first_device (panel);
+        }
 }
 
 static NetObject *
@@ -2530,58 +2658,11 @@ connection_add_activate_cb (NMClient *client,
 }
 
 static void
-connect_to_hidden_network_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
-{
-        GError *error = NULL;
-        GVariant *result = NULL;
-
-        result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
-        if (result == NULL) {
-                g_warning ("failed to connect to hidden network: %s",
-                           error->message);
-                g_error_free (error);
-                return;
-        }
-}
-
-static void
 connect_to_hidden_network (CcNetworkPanel *panel)
 {
-        GDBusProxy *proxy;
-        GVariant *res = NULL;
-        GError *error = NULL;
+        CcNetworkPanelPrivate *priv = panel->priv;
 
-        /* connect to NM applet */
-        proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-                                               G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES |
-                                               G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS,
-                                               NULL,
-                                               "org.gnome.network_manager_applet",
-                                               "/org/gnome/network_manager_applet",
-                                               "org.gnome.network_manager_applet",
-                                               panel->priv->cancellable,
-                                               &error);
-        if (proxy == NULL) {
-                g_warning ("failed to connect to NM applet: %s",
-                           error->message);
-                g_error_free (error);
-                goto out;
-        }
-
-        /* try to show the hidden network UI */
-        g_dbus_proxy_call (proxy,
-                           "ConnectToHiddenNetwork",
-                           NULL,
-                           G_DBUS_CALL_FLAGS_NONE,
-                           5000, /* don't wait forever */
-                           panel->priv->cancellable,
-                           connect_to_hidden_network_cb,
-                           panel);
-out:
-        if (proxy != NULL)
-                g_object_unref (proxy);
-        if (res != NULL)
-                g_variant_unref (res);
+        cc_network_panel_connect_to_hidden_network (panel, priv->client, priv->remote_settings);
 }
 
 static void
