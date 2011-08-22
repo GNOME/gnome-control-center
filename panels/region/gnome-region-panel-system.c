@@ -36,17 +36,18 @@ locale_settings_changed (GSettings *settings,
 			 const gchar *key,
 			 gpointer user_data)
 {
-	gchar *language, *display_language;
-	GtkBuilder *builder = GTK_BUILDER (user_data);
+        GtkBuilder *builder = GTK_BUILDER (user_data);
+        GtkWidget *label;
+        gchar *region, *display_region;
 
-	if (g_str_equal (key, "region")) {
-		language = g_settings_get_string (locale_settings, "region");
-		display_language = gdm_get_language_from_name (language, NULL);
-		gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "user_format")),
-				    display_language);
-		g_free (language);
-		g_free (display_language);
-	}
+        region = g_settings_get_string (locale_settings, "region");
+        if (!region || !region[0])
+                region = cc_common_language_get_current_language ();
+        display_region = gdm_get_language_from_name (region, NULL);
+        label = GTK_WIDGET (gtk_builder_get_object (builder, "user_format"));
+        gtk_label_set_text (GTK_LABEL (label), display_region);
+        g_free (region);
+        g_free (display_region);
 }
 
 static void
@@ -86,7 +87,7 @@ setup_system (GtkBuilder *builder)
 	gchar *language, *display_language;
 
 	locale_settings = g_settings_new ("org.gnome.system.locale");
-	g_signal_connect (locale_settings, "changed",
+	g_signal_connect (locale_settings, "changed::region",
 			  G_CALLBACK (locale_settings_changed), builder);
 	g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) g_object_unref, locale_settings);
 

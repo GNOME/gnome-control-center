@@ -27,6 +27,7 @@
 #include <glib/gi18n.h>
 
 #include "gnome-region-panel-lang.h"
+#include "gnome-region-panel-formats.h"
 #include "cc-common-language.h"
 #include "cc-language-chooser.h"
 #include "gdm-languages.h"
@@ -35,7 +36,7 @@ static GDBusProxy *proxy = NULL;
 
 static void
 selection_changed (GtkTreeSelection *selection,
-		   GtkTreeView      *list)
+                   GtkBuilder       *builder)
 {
 	GtkTreeModel *model;
 	GtkTreeIter iter;
@@ -107,6 +108,10 @@ selection_changed (GtkTreeSelection *selection,
 		g_error_free (error);
 		goto bail;
 	}
+
+        /* Update the list of regions in the other tab */
+
+        formats_update_language (builder, locale);
 
 	/* And done */
 
@@ -231,7 +236,7 @@ setup_language (GtkBuilder *builder)
         /* And now listen for changes */
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
         g_signal_connect (G_OBJECT (selection), "changed",
-                          G_CALLBACK (selection_changed), treeview);
+                          G_CALLBACK (selection_changed), builder);
 
 	gtk_widget_grab_focus (treeview);
 }

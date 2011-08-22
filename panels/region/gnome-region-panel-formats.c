@@ -28,6 +28,7 @@
 #include <langinfo.h>
 #include <stdlib.h>
 #include "cc-common-language.h"
+#include "cc-language-chooser.h"
 #include "gdm-languages.h"
 #include "gnome-region-panel-formats.h"
 
@@ -72,7 +73,7 @@ select_region (GtkTreeView *treeview, const gchar *lang)
 }
 
 static void
-selection_changed_cb (GtkTreeSelection *selection, gpointer user_data)
+update_examples_cb (GtkTreeSelection *selection, gpointer user_data)
 {
 	GtkBuilder *builder = GTK_BUILDER (user_data);
         GtkTreeModel *model;
@@ -83,18 +84,14 @@ selection_changed_cb (GtkTreeSelection *selection, gpointer user_data)
 	gchar *s;
 	struct lconv *num_info;
 	const char *fmt;
-        GtkWidget *treeview;
-        GSettings *locale_settings;
-        gchar *current_setting;
 
         if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
                 return;
         }
-
         gtk_tree_model_get (model, &iter, 0, &active_id, -1);
 
 	locale = g_strdup (setlocale (LC_TIME, NULL));
-	setlocale (LC_TIME, active_id);
+        setlocale (LC_TIME, active_id);
 
 	dt = g_date_time_new_now_local ();
 
@@ -103,7 +100,7 @@ selection_changed_cb (GtkTreeSelection *selection, gpointer user_data)
 	display_date (GTK_LABEL (gtk_builder_get_object (builder, "full_day_format")), dt, "%e %B %Y");
 	display_date (GTK_LABEL (gtk_builder_get_object (builder, "short_day_format")), dt, "%e %b %Y");
 	display_date (GTK_LABEL (gtk_builder_get_object (builder, "shortest_day_format")), dt, "%x");
-	
+
 	/* Display times */
 	display_date (GTK_LABEL (gtk_builder_get_object (builder, "full_time_format")), dt, "%r %Z");
 	display_date (GTK_LABEL (gtk_builder_get_object (builder, "short_time_format")), dt, "%X");
@@ -146,10 +143,30 @@ selection_changed_cb (GtkTreeSelection *selection, gpointer user_data)
 
 	setlocale (LC_MEASUREMENT, locale);
 	g_free (locale);
+        g_free (active_id);
+}
 
-	treeview = GTK_WIDGET (gtk_builder_get_object (builder, "region_selector"));
+
+static void
+update_settings_cb (GtkTreeSelection *selection, gpointer user_data)
+{
+        GtkBuilder *builder = GTK_BUILDER (user_data);
+        GtkTreeModel *model;
+        GtkTreeIter iter;
+        gchar *active_id;
+        GtkWidget *treeview;
+        GSettings *locale_settings;
+        gchar *current_setting;
+
+        if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
+                return;
+        }
+        gtk_tree_model_get (model, &iter, 0, &active_id, -1);
+
+        treeview = GTK_WIDGET (gtk_builder_get_object (builder, "region_selector"));
+
         locale_settings = g_object_get_data (G_OBJECT (treeview), "settings");
-	current_setting = g_settings_get_string (locale_settings, "region");
+        current_setting = g_settings_get_string (locale_settings, "region");
 
         if (g_strcmp0 (active_id, current_setting) != 0) {
                 g_settings_set_string (locale_settings, "region", active_id);
@@ -189,19 +206,126 @@ sort_regions (GtkTreeModel *model,
         return result;
 }
 
+static void
+populate_regions (GtkBuilder *builder, const gchar *current_lang)
+{
+        gchar *current_region;
+        GSettings *locale_settings;
+        GHashTable *ht;
+        GHashTableIter htiter;
+        GtkTreeModel *model;
+        gchar *name, *language;
+        GtkWidget *treeview;
+        GtkTreeIter iter;
+        GtkTreeSelection *selection;
+
+        treeview = GTK_WIDGET (gtk_builder_get_object (builder, "region_selector"));
+        /* don't update the setting just because the list is repopulated */
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+        g_signal_handlers_block_by_func (selection, update_settings_cb, builder);
+
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
+        locale_settings = g_object_get_data (G_OBJECT (treeview), "settings");
+
+        ht = cc_common_language_get_initial_regions (current_lang);
+
+        current_region = g_settings_get_string (locale_settings, "region");
+        if (!current_region || !current_region[0]) {
+                current_region = g_strdup (current_lang);
+        }
+        else if (!g_hash_table_lookup (ht, current_region)) {
+                name = gdm_get_region_from_name (current_region, NULL);
+                g_hash_table_insert (ht, g_strdup (current_region), name);
+        }
+
+        gtk_list_store_clear (GTK_LIST_STORE (model));
+
+        g_hash_table_iter_init (&htiter, ht);
+        while (g_hash_table_iter_next (&htiter, (gpointer *)&name, (gpointer *)&language)) {
+                gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+                gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, name, 1, language, -1);
+        }
+        g_hash_table_unref (ht);
+
+        select_region (GTK_TREE_VIEW (treeview), current_region);
+
+        g_free (current_region);
+
+        g_signal_handlers_unblock_by_func (selection, update_settings_cb, builder);
+}
+
+static void
+region_response (GtkDialog *dialog,
+                 gint       response_id,
+                 GtkWidget *treeview)
+{
+        gchar *lang;
+        GtkTreeModel *model;
+        GtkTreeSelection *selection;
+        GtkTreeIter iter;
+
+        gtk_widget_hide (GTK_WIDGET (dialog));
+
+        if (response_id != GTK_RESPONSE_OK) {
+                return;
+        }
+
+        lang = cc_language_chooser_get_language (GTK_WIDGET (dialog));
+
+        if (lang == NULL) {
+                return;
+        }
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+
+        if (cc_common_language_get_iter_for_region (model, lang, &iter)) {
+                gtk_tree_selection_select_iter (selection, &iter);
+        }
+
+        gtk_widget_grab_focus (treeview);
+
+        g_free (lang);
+}
+
+static void
+add_region (GtkWidget *button, GtkWidget *treeview)
+{
+        GtkWidget *toplevel;
+        GtkWidget *chooser;
+
+        toplevel = gtk_widget_get_toplevel (button);
+        chooser = g_object_get_data (G_OBJECT (button), "chooser");
+        if (chooser == NULL) {
+                chooser = cc_language_chooser_new (toplevel, TRUE);
+
+                g_signal_connect (chooser, "response",
+                                  G_CALLBACK (region_response), treeview);
+                g_signal_connect (chooser, "delete-event",
+                                  G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+
+                g_object_set_data_full (G_OBJECT (button), "chooser",
+                                        chooser, (GDestroyNotify)gtk_widget_destroy);
+        }
+        else {
+                cc_language_chooser_clear_filter (chooser);
+        }
+
+        gdk_window_set_cursor (gtk_widget_get_window (toplevel), NULL);
+        gtk_window_present (GTK_WINDOW (chooser));
+}
+
 void
 setup_formats (GtkBuilder *builder)
 {
 	GtkWidget *treeview;
-	gchar **langs, *language, *current_lang;
-	gint i;
+	gchar *current_lang;
 	GtkTreeModel *model;
-        GtkTreeIter iter;
         GtkCellRenderer *cell;
         GtkTreeViewColumn *column;
         GtkWidget *widget;
         GtkStyleContext *context;
         GSettings *locale_settings;
+        GtkTreeSelection *selection;
 
 	locale_settings = g_settings_new ("org.gnome.system.locale");
 
@@ -231,29 +355,31 @@ setup_formats (GtkBuilder *builder)
                                               GTK_SORT_ASCENDING);
         gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), model);
 
-	langs = gdm_get_all_language_names ();
-	for (i = 0; langs[i] != NULL; i++) {
-
-		language = gdm_get_region_from_name (langs[i], NULL);
-                
-                gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-                gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, langs[i], 1, language, -1);
-
-		g_free (language);
-	}
-
         g_object_set_data_full (G_OBJECT (treeview), "settings", locale_settings, g_object_unref);
 
-	g_signal_connect (G_OBJECT (gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview))), "changed",
-			  G_CALLBACK (selection_changed_cb), builder);
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+        g_signal_connect (selection, "changed",
+                          G_CALLBACK (update_settings_cb), builder);
+        g_signal_connect (selection, "changed",
+                          G_CALLBACK (update_examples_cb), builder);
 
-	current_lang = g_settings_get_string (locale_settings, "region");
-	if (!current_lang || !current_lang[0])
-		current_lang = cc_common_language_get_current_language ();
+        /* Connect buttons */
+        widget = (GtkWidget *)gtk_builder_get_object (builder, "region_add");
+        g_signal_connect (widget, "clicked",
+                          G_CALLBACK (add_region), treeview);
 
-	select_region (GTK_TREE_VIEW (treeview), current_lang);
+	current_lang = cc_common_language_get_current_language ();
+        populate_regions (builder, current_lang);
 	g_free (current_lang);
 
         g_signal_connect (locale_settings, "changed::region",
                           G_CALLBACK (setting_changed_cb), treeview);
 }
+
+void
+formats_update_language (GtkBuilder  *builder,
+                         const gchar *language)
+{
+        populate_regions (builder, language);
+}
+

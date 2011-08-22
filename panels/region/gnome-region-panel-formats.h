@@ -25,5 +25,7 @@
 #include <gtk/gtk.h>
 
 void setup_formats (GtkBuilder *builder);
+void formats_update_language (GtkBuilder  *builder,
+                              const gchar *language);
 
 #endif
