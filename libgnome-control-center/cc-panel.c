@@ -58,6 +58,7 @@ enum
 {
     PROP_0,
     PROP_SHELL,
+    PROP_ARGV
 };
 
 G_DEFINE_ABSTRACT_TYPE (CcPanel, cc_panel, GTK_TYPE_BIN)
@@ -79,6 +80,13 @@ cc_panel_set_property (GObject      *object,
       panel->priv->shell = g_value_get_object (value);
       break;
 
+    case PROP_ARGV:
+      {
+        gchar **argv = g_value_get_boxed (value);
+        if (argv && argv[0])
+          g_warning ("Ignoring additional argument %s", argv[0]);
+        break;
+      }
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -199,6 +207,13 @@ cc_panel_class_init (CcPanelClass *klass)
                                G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS
                                | G_PARAM_CONSTRUCT_ONLY);
   g_object_class_install_property (object_class, PROP_SHELL, pspec);
+
+  pspec = g_param_spec_boxed ("argv",
+                              "Argument vector",
+                              "Additional arguments passed on the command line",
+                              G_TYPE_STRV,
+                              G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT_ONLY);
+  g_object_class_install_property (object_class, PROP_ARGV, pspec);
 }
 
 static void

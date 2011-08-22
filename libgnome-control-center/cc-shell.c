@@ -184,6 +184,7 @@ cc_shell_set_active_panel (CcShell *shell,
 gboolean
 cc_shell_set_active_panel_from_id (CcShell      *shell,
                                    const gchar  *id,
+                                   const gchar **argv,
                                    GError      **error)
 {
   CcShellClass *class;
@@ -202,7 +203,7 @@ cc_shell_set_active_panel_from_id (CcShell      *shell,
     }
   else
     {
-      return class->set_active_panel_from_id (shell, id, error);
+      return class->set_active_panel_from_id (shell, id, argv, error);
     }
 }
 

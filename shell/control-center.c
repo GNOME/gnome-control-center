@@ -127,7 +127,12 @@ application_command_line_cb (GApplication  *application,
 
       start_id = start_panels[0];
 
-      if (!cc_shell_set_active_panel_from_id (CC_SHELL (shell), start_id, &err))
+      if (start_panels[1])
+	g_debug ("Extra argument: %s", start_panels[1]);
+      else
+	g_debug ("No extra argument");
+
+      if (!cc_shell_set_active_panel_from_id (CC_SHELL (shell), start_id, (const gchar**)start_panels+1, &err))
         {
           g_warning ("Could not load setting panel \"%s\": %s", start_id,
                      (err) ? err->message : "Unknown error");

@@ -111,6 +111,7 @@ get_icon_name_from_g_icon (GIcon *gicon)
 static void
 activate_panel (GnomeControlCenter *shell,
                 const gchar        *id,
+		const gchar       **argv,
                 const gchar        *desktop_file,
                 const gchar        *name,
                 GIcon              *gicon)
@@ -153,7 +154,7 @@ activate_panel (GnomeControlCenter *shell,
           const gchar *icon_name;
 
           /* create the panel plugin */
-          panel = g_object_new (panel_type, "shell", shell, NULL);
+          panel = g_object_new (panel_type, "shell", shell, "argv", argv, NULL);
 
           gtk_lock_button_set_permission (GTK_LOCK_BUTTON (priv->lock_button),
                                           cc_panel_get_permission (CC_PANEL (panel)));
@@ -234,7 +235,7 @@ item_activated_cb (CcShellCategoryView *view,
 {
   GError *err = NULL;
 
-  if (!cc_shell_set_active_panel_from_id (CC_SHELL (shell), id, &err))
+  if (!cc_shell_set_active_panel_from_id (CC_SHELL (shell), id, NULL, &err))
     {
       /* TODO: show message to user */
       if (err)
@@ -797,6 +798,7 @@ notebook_switch_page_cb (GtkNotebook               *book,
 static gboolean
 _shell_set_active_panel_from_id (CcShell      *shell,
                                  const gchar  *start_id,
+				 const gchar **argv,
                                  GError      **err)
 {
   GtkTreeIter iter;
@@ -852,8 +854,8 @@ _shell_set_active_panel_from_id (CcShell      *shell,
     {
       gtk_notebook_remove_page (GTK_NOTEBOOK (priv->notebook), CAPPLET_PAGE);
 
-      activate_panel (GNOME_CONTROL_CENTER (shell), start_id, desktop, name,
-                      gicon);
+      activate_panel (GNOME_CONTROL_CENTER (shell), start_id, argv, desktop,
+		      name, gicon);
 
       g_free (name);
       g_free (desktop);

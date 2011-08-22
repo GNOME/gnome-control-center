@@ -587,7 +587,7 @@ hearing_sound_preferences_clicked (GtkButton *button,
   CcShell *shell;
 
   shell = cc_panel_get_shell (CC_PANEL (panel));
-  cc_shell_set_active_panel_from_id (shell, "sound", NULL);
+  cc_shell_set_active_panel_from_id (shell, "sound", NULL, NULL);
 }
 
 static void
@@ -639,7 +639,7 @@ typing_keyboard_preferences_clicked (GtkButton *button,
   CcShell *shell;
 
   shell = cc_panel_get_shell (CC_PANEL (panel));
-  cc_shell_set_active_panel_from_id (shell, "keyboard", NULL);
+  cc_shell_set_active_panel_from_id (shell, "keyboard", NULL, NULL);
 }
 
 static void
@@ -709,7 +709,7 @@ pointing_mouse_preferences_clicked_cb (GtkButton *button,
   CcShell *shell;
 
   shell = cc_panel_get_shell (CC_PANEL (panel));
-  cc_shell_set_active_panel_from_id (shell, "mouse", NULL);
+  cc_shell_set_active_panel_from_id (shell, "mouse", NULL, NULL);
 }
 
 static void

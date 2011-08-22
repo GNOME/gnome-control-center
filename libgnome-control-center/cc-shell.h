@@ -86,6 +86,7 @@ struct _CcShellClass
   /* vfuncs */
   gboolean    (*set_active_panel_from_id) (CcShell      *shell,
                                            const gchar  *id,
+                                           const gchar **argv,
                                            GError      **error);
   GtkWidget * (*get_toplevel)             (CcShell      *shell);
 };
@@ -97,6 +98,7 @@ void            cc_shell_set_active_panel         (CcShell      *shell,
                                                    CcPanel      *panel);
 gboolean        cc_shell_set_active_panel_from_id (CcShell      *shell,
                                                    const gchar  *id,
+                                                   const gchar **argv,
                                                    GError      **error);
 GtkWidget *     cc_shell_get_toplevel             (CcShell      *shell);
 
