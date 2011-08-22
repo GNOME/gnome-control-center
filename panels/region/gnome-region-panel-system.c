@@ -41,13 +41,32 @@ locale_settings_changed (GSettings *settings,
         gchar *region, *display_region;
 
         region = g_settings_get_string (locale_settings, "region");
-        if (!region || !region[0])
-                region = cc_common_language_get_current_language ();
-        display_region = gdm_get_language_from_name (region, NULL);
+        if (!region || !region[0]) {
+                label = GTK_WIDGET (gtk_builder_get_object (builder, "user_display_language"));
+                region = g_strdup ((gchar*)g_object_get_data (G_OBJECT (label), "language"));
+        }
+
+        display_region = gdm_get_region_from_name (region, NULL);
         label = GTK_WIDGET (gtk_builder_get_object (builder, "user_format"));
         gtk_label_set_text (GTK_LABEL (label), display_region);
         g_free (region);
         g_free (display_region);
+}
+
+void
+system_update_language (GtkBuilder *builder, const gchar *language)
+{
+        gchar *display_language;
+        GtkWidget *label;
+
+        display_language = gdm_get_language_from_name (language, NULL);
+        label = (GtkWidget *)gtk_builder_get_object (builder, "user_display_language");
+        gtk_label_set_text (GTK_LABEL (label), display_language);
+        g_object_set_data_full (G_OBJECT (label), "language", g_strdup (language), g_free);
+        g_free (display_language);
+
+        /* need to update the region display in case the setting is '' */
+        locale_settings_changed (locale_settings, "region", builder);
 }
 
 static void
@@ -56,35 +75,32 @@ xkb_settings_changed (GSettings *settings,
 		      gpointer user_data)
 {
 	GtkBuilder *builder = GTK_BUILDER (user_data);
+	gint i;
+	GString *str = g_string_new ("");
+	gchar **layouts = g_settings_get_strv (settings, "layouts");
 
-	if (g_str_equal (key, "layouts")) {
-		gint i;
-		GString *str = g_string_new ("");
-		gchar **layouts = g_settings_get_strv (settings, "layouts");
+	for (i = 0; i < G_N_ELEMENTS (layouts); i++) {
+		gchar *utf_visible = xkb_layout_description_utf8 (layouts[i]);
 
-		for (i = 0; i < G_N_ELEMENTS (layouts); i++) {
-			gchar *utf_visible = xkb_layout_description_utf8 (layouts[i]);
-
-			if (utf_visible != NULL) {
-				if (str->str[0] != '\0') {
-					str = g_string_append (str, ", ");
-				}
-				str = g_string_append (str, utf_visible);
-				g_free (utf_visible);
+		if (utf_visible != NULL) {
+			if (str->str[0] != '\0') {
+				str = g_string_append (str, ", ");
 			}
+			str = g_string_append (str, utf_visible);
+			g_free (utf_visible);
 		}
-
-		g_strfreev (layouts);
-
-		gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "user_input_source")), str->str);
-		g_string_free (str, TRUE);
 	}
+
+	g_strfreev (layouts);
+
+	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "user_input_source")), str->str);
+	g_string_free (str, TRUE);
 }
 
 void
 setup_system (GtkBuilder *builder)
 {
-	gchar *language, *display_language;
+	gchar *language;
 
 	locale_settings = g_settings_new ("org.gnome.system.locale");
 	g_signal_connect (locale_settings, "changed::region",
@@ -92,30 +108,16 @@ setup_system (GtkBuilder *builder)
 	g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) g_object_unref, locale_settings);
 
 	xkb_settings = g_settings_new (GKBD_KEYBOARD_SCHEMA);
-	g_signal_connect (xkb_settings, "changed",
+	g_signal_connect (xkb_settings, "changed::layouts",
 			  G_CALLBACK (xkb_settings_changed), builder);
 	g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) g_object_unref, xkb_settings);
 
-	/* Display user settings */
-	language = cc_common_language_get_current_language ();
-	display_language = gdm_get_language_from_name (language, NULL);
-	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "user_display_language")),
-			   display_language);
-	g_free (language);
-	g_free (display_language);
+        /* Display user settings */
+        language = cc_common_language_get_current_language ();
+        system_update_language (builder, language);
+        g_free (language);
 
-	language = g_settings_get_string (locale_settings, "region");
-	if (language && language[0])
-		display_language = gdm_get_language_from_name (language, NULL);
-	else {
-		language = cc_common_language_get_current_language ();
-		display_language = gdm_get_language_from_name (language, NULL);
-	}
+        locale_settings_changed (locale_settings, "region", builder);
 
-	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "user_format")),
-			    display_language);
-	g_free (language);
-	g_free (display_language);
-
-	xkb_settings_changed (xkb_settings, "layouts", builder);
+        xkb_settings_changed (xkb_settings, "layouts", builder);
 }

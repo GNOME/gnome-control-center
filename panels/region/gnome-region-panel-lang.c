@@ -28,6 +28,7 @@
 
 #include "gnome-region-panel-lang.h"
 #include "gnome-region-panel-formats.h"
+#include "gnome-region-panel-system.h"
 #include "cc-common-language.h"
 #include "cc-language-chooser.h"
 #include "gdm-languages.h"
@@ -109,9 +110,9 @@ selection_changed (GtkTreeSelection *selection,
 		goto bail;
 	}
 
-        /* Update the list of regions in the other tab */
-
+        /* Update the other tabs */
         formats_update_language (builder, locale);
+        system_update_language (builder, locale);
 
 	/* And done */
 

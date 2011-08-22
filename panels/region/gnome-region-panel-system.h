@@ -24,6 +24,8 @@
 
 #include <gtk/gtk.h>
 
-void setup_system (GtkBuilder *builder);
+void setup_system           (GtkBuilder *builder);
+void system_update_language (GtkBuilder  *builder,
+                             const gchar *language);
 
 #endif
