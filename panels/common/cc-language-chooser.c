@@ -157,17 +157,20 @@ finish_language_chooser (gpointer user_data)
 	guint timeout;
         guint async_id;
 	GtkTreeSelection *selection;
+        gboolean regions;
 
 	/* Did we get called after the widget was destroyed? */
 	if (chooser == NULL)
 		return FALSE;
+
+        regions = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (chooser), "regions"));
 
 	list = g_object_get_data (G_OBJECT (chooser), "list");
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
 	model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (model));
 	user_langs = g_object_get_data (G_OBJECT (chooser), "user-langs");
 
-	async_id = cc_common_language_add_available_languages (GTK_LIST_STORE (model), user_langs);
+	async_id = cc_common_language_add_available_languages (GTK_LIST_STORE (model), regions, user_langs);
         g_object_set_data_full (G_OBJECT (chooser), "language-async", GUINT_TO_POINTER (async_id), remove_async);
 
 	parent = gtk_window_get_transient_for (GTK_WINDOW (chooser));
@@ -254,7 +257,7 @@ filter_languages (GtkTreeModel *model,
 }
 
 GtkWidget *
-cc_language_chooser_new (GtkWidget *parent)
+cc_language_chooser_new (GtkWidget *parent, gboolean regions)
 {
         GtkBuilder *builder;
         const char *filename;
@@ -263,6 +266,7 @@ cc_language_chooser_new (GtkWidget *parent)
         GtkWidget *list;
         GtkWidget *button;
 	GtkWidget *entry;
+        GtkWidget *widget;
         GHashTable *user_langs;
         GdkCursor *cursor;
         guint timeout;
@@ -280,6 +284,14 @@ cc_language_chooser_new (GtkWidget *parent)
         }
 
         chooser = (GtkWidget *) gtk_builder_get_object (builder, "dialog");
+
+        if (regions) {
+                widget = (GtkWidget *) gtk_builder_get_object (builder, "title");
+                gtk_label_set_text (GTK_LABEL (widget), _("Select a region"));
+
+                /* communicate the preference to finish_language_chooser() */
+                g_object_set_data (G_OBJECT (chooser), "regions", GINT_TO_POINTER (TRUE));
+        }
 
         list = (GtkWidget *) gtk_builder_get_object (builder, "language-list");
         g_object_set_data (G_OBJECT (chooser), "list", list);

@@ -41,11 +41,13 @@ gboolean cc_common_language_get_iter_for_region     (GtkTreeModel     *model,
 						     const gchar      *lang,
 						     GtkTreeIter      *iter);
 guint    cc_common_language_add_available_languages (GtkListStore     *store,
+                                                     gboolean          regions,
                                                      GHashTable       *user_langs);
 gboolean cc_common_language_has_font                (const gchar  *locale);
 gchar   *cc_common_language_get_current_language    (void);
 
 GHashTable *cc_common_language_get_initial_languages   (void);
+GHashTable *cc_common_language_get_initial_regions     (const gchar *lang);
 
 void     cc_common_language_setup_list              (GtkWidget    *treeview,
 						     GHashTable   *initial);

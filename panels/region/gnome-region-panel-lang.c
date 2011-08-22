@@ -161,7 +161,7 @@ add_language (GtkWidget *button, GtkWidget *treeview)
 	toplevel = gtk_widget_get_toplevel (button);
 	chooser = g_object_get_data (G_OBJECT (button), "chooser");
 	if (chooser == NULL) {
-		chooser = cc_language_chooser_new (toplevel);
+		chooser = cc_language_chooser_new (toplevel, FALSE);
 
        		g_signal_connect (chooser, "response",
                 	          G_CALLBACK (language_response), treeview);

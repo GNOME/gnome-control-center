@@ -208,6 +208,7 @@ typedef struct
   GtkListStore  *store;
   GHashTable    *user_langs;
   gchar        **languages;
+  gboolean       regions;
   gint           position;
 } AsyncLangData;
 
@@ -245,7 +246,12 @@ add_one_language (gpointer d)
     goto next;
   }
 
-  language = gdm_get_language_from_name (name, NULL);
+  if (data->regions) {
+    language = gdm_get_region_from_name (name, NULL);
+  }
+  else {
+    language = gdm_get_language_from_name (name, NULL);
+  }
   if (!language) {
     g_debug ("Ignoring '%s' as a locale, because we couldn't figure the language name", name);
     g_free (name);
@@ -280,6 +286,7 @@ add_one_language (gpointer d)
 
 guint
 cc_common_language_add_available_languages (GtkListStore *store,
+                                            gboolean      regions,
                                             GHashTable   *user_langs)
 {
   AsyncLangData *data;
@@ -289,6 +296,7 @@ cc_common_language_add_available_languages (GtkListStore *store,
   data->store = g_object_ref (store);
   data->user_langs = g_hash_table_ref (user_langs);
   data->languages = gdm_get_all_language_names ();
+  data->regions = regions;
   data->position = 0;
 
   return gdk_threads_add_idle (add_one_language, data);
@@ -518,6 +526,44 @@ cc_common_language_get_initial_languages (void)
         } else {
                 g_free (name);
         }
+
+        return ht;
+}
+
+GHashTable *
+cc_common_language_get_initial_regions (const gchar *lang)
+{
+        GHashTable *ht;
+        char *language;
+        gchar **langs;
+        gint i;
+
+        ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+
+#if 0
+        /* Add some common regions */
+        g_hash_table_insert (ht, g_strdup ("en_US.utf8"), g_strdup (_("United States")));
+        g_hash_table_insert (ht, g_strdup ("de_DE.utf8"), g_strdup (_("Germany")));
+        g_hash_table_insert (ht, g_strdup ("fr_FR.utf8"), g_strdup (_("France")));
+        g_hash_table_insert (ht, g_strdup ("es_ES.utf8"), g_strdup (_("Spain")));
+        g_hash_table_insert (ht, g_strdup ("zh_CN.utf8"), g_strdup (_("China")));
+#endif
+
+        gdm_parse_language_name (lang, &language, NULL, NULL, NULL);
+        langs = gdm_get_all_language_names ();
+        for (i = 0; langs[i]; i++) {
+                gchar *l, *s;
+                gdm_parse_language_name (langs[i], &l, NULL, NULL, NULL);
+                if (g_strcmp0 (language, l) == 0) {
+                        if (!g_hash_table_lookup (ht, langs[i])) {
+                                s = gdm_get_region_from_name (langs[i], NULL);
+                                g_hash_table_insert (ht, g_strdup (langs[i]), s);
+                        }
+                }
+                g_free (l);
+        }
+        g_strfreev (langs);
+        g_free (language);
 
         return ht;
 }

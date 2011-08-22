@@ -720,7 +720,7 @@ language_changed (UmEditableCombo    *combo,
                 return;
         }
 
-        d->language_chooser = cc_language_chooser_new (gtk_widget_get_toplevel (d->main_box));
+        d->language_chooser = cc_language_chooser_new (gtk_widget_get_toplevel (d->main_box), FALSE);
 
         g_signal_connect (d->language_chooser, "response",
                           G_CALLBACK (language_response), d);
