@@ -132,7 +132,8 @@ AC_SUBST(GDESKTOP_PREFIX)
 # Check for NetworkManager ~0.9
 PKG_CHECK_MODULES(NETWORK_MANAGER, NetworkManager >= $NETWORK_MANAGER_REQUIRED_VERSION
                   libnm-glib >= $NETWORK_MANAGER_REQUIRED_VERSION
-                  libnm-util >= $NETWORK_MANAGER_REQUIRED_VERSION,
+                  libnm-util >= $NETWORK_MANAGER_REQUIRED_VERSION
+		  libnm-gtk >= $NETWORK_MANAGER_REQUIRED_VERSION,
                   [have_networkmanager=yes], have_networkmanager=no)
 if test "x$have_networkmanager" = xno ; then
         AC_MSG_WARN(*** Network panel will not be built (NetworkManager ~0.9 or newer not found) ***)
