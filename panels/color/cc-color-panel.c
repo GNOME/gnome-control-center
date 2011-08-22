@@ -418,7 +418,9 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
     }
 
   /* add a import entry */
+#if CD_CHECK_VERSION(0,1,12)
   gcm_prefs_combobox_add_profile (widget, NULL, GCM_PREFS_ENTRY_TYPE_IMPORT, NULL);
+#endif
   gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
 out:
   if (profile_array != NULL)
@@ -1057,6 +1059,7 @@ gcm_prefs_profile_combo_changed_cb (GtkWidget *widget,
                                     CcColorPanel *prefs)
 {
   GFile *file = NULL;
+  GError *error = NULL;
   gboolean ret;
   CdProfile *profile = NULL;
   GtkTreeIter iter;
@@ -1089,6 +1092,19 @@ gcm_prefs_profile_combo_changed_cb (GtkWidget *widget,
           gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
           goto out;
         }
+
+#if CD_CHECK_VERSION(0,1,12)
+      profile = cd_client_import_profile_sync (priv->client,
+                                               file,
+                                               priv->cancellable,
+                                               &error);
+      if (profile == NULL)
+        {
+          g_warning ("failed to get imported profile: %s", error->message);
+          g_error_free (error);
+          goto out;
+        }
+#endif
 
       /* add to combobox */
       gtk_list_store_append (GTK_LIST_STORE(model), &iter);
