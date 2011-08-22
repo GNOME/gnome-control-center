@@ -604,6 +604,11 @@ gcm_prefs_button_assign_ok_cb (GtkWidget *widget, CcColorPanel *prefs)
   gtk_tree_model_get (model, &iter,
                       GCM_PREFS_COMBO_COLUMN_PROFILE, &profile,
                       -1);
+  if (profile == NULL)
+    {
+        g_warning ("failed to get the active profile");
+        goto out;
+    }
 
   /* just add it, the list store will get ::changed */
   ret = cd_device_add_profile_sync (priv->current_device,
