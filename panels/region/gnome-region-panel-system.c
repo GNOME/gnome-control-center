@@ -114,6 +114,7 @@ on_localed_properties_changed (GDBusProxy   *proxy,
 {
         GVariant *res;
         GVariant *v;
+	GError *error = NULL;
 
         res = g_dbus_connection_call_sync (g_dbus_proxy_get_connection (proxy),
                                            g_dbus_proxy_get_name (proxy),
@@ -125,7 +126,13 @@ on_localed_properties_changed (GDBusProxy   *proxy,
                                                           "Locale"),
                                            NULL,
                                            G_DBUS_CALL_FLAGS_NONE,
-                                           -1, NULL, NULL);
+                                           -1, NULL, &error);
+	if (!res) {
+		g_warning ("Failed to call Get method: %s", error->message);
+		g_error_free (error);
+		return;
+	}
+
         v = g_variant_get_child_value (res, 0);
         if (v) {
                 const gchar **strv;
