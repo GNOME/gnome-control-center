@@ -7,23 +7,24 @@
 # Ma SivaKumar <tamil@leatherlink.net>, 2004.
 # Jayaradha N <jaya@pune.redhat.com>, 2004.
 # Felix <ifelix@redhat.com>, 2006.
-# Dr.T.Vasudevan <agnihot3@gmail.com>, 2007, 2008, 2009, 2010.
+# Dr.T.Vasudevan <agnihot3@gmail.com>, 2007, 2008, 2009, 2010, 2011.
 # I. Felix <ifelix@redhat.com>, 2009.
 # Dr,T,Vasudevan <agnihot3@gmail.com>, 2010, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.master.ta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-18 05:17+0530\n"
-"PO-Revision-Date: 2011-04-01 12:08+0530\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2011-08-24 05:49+0530\n"
+"PO-Revision-Date: 2011-08-24 05:55+0530\n"
+"Last-Translator: Dr.T.Vasudevan <agnihot3@gmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\\n\n"
+"X-Generator: Lokalize 1.1\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -50,9 +51,8 @@ msgid "Wallpaper;Screen;Desktop;"
 msgstr "சுவர்-காகிதங்கள் ;திரை;மேல்மேசை"
 
 #: ../panels/background/background.ui.h:1
-#, fuzzy
 msgid "Add wallpaper"
-msgstr "சுவர்-காகிதங்கள்"
+msgstr "சுவர்-காகிதங்கள் சேர்"
 
 #: ../panels/background/background.ui.h:2
 msgid "Center"
@@ -68,9 +68,8 @@ msgid "Fill"
 msgstr "நிரப்பு"
 
 #: ../panels/background/background.ui.h:6
-#, fuzzy
 msgid "Remove wallpaper"
-msgstr "சுவர்-காகிதங்கள்"
+msgstr "சுவர்-காகிதங்கள் நீக்கு"
 
 #: ../panels/background/background.ui.h:7
 msgid "Scale"
@@ -141,14 +140,78 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "பணிமேடை பின்னணி எதுவுமில்லை"
 
-#: ../panels/common/gdm-languages.c:710
+#. Add some common languages first
+#: ../panels/common/cc-common-language.c:512
+msgid "English"
+msgstr "ஆங்கிலம்"
+
+#: ../panels/common/cc-common-language.c:513
+msgid "German"
+msgstr "ஜெர்மன் "
+
+#: ../panels/common/cc-common-language.c:514
+msgid "French"
+msgstr "ப்ரெஞ்ச் "
+
+#: ../panels/common/cc-common-language.c:515
+msgid "Spanish"
+msgstr "ஸ்பானிஷ் "
+
+#: ../panels/common/cc-common-language.c:516
+msgid "Chinese"
+msgstr "சைனீஸ் "
+
+#. Add some common regions
+#: ../panels/common/cc-common-language.c:545
+msgid "United States"
+msgstr "யுனைடட் ஸ்டேட்ஸ் "
+
+#: ../panels/common/cc-common-language.c:546
+msgid "Germany"
+msgstr "ஜெர்மனி "
+
+#: ../panels/common/cc-common-language.c:547
+msgid "France"
+msgstr "ப்ரான்ஸ்"
+
+#: ../panels/common/cc-common-language.c:548
+msgid "Spain"
+msgstr "ஸ்பெய்ன் "
+
+#: ../panels/common/cc-common-language.c:549
+msgid "China"
+msgstr "சைனா"
+
+#: ../panels/common/cc-language-chooser.c:119
+msgid "Other..."
+msgstr "மற்ற..."
+
+#: ../panels/common/cc-language-chooser.c:290
+msgid "Select a region"
+msgstr "மண்டலத்தை தேர்ந்தெடுக்கவும்"
+
+#: ../panels/common/gdm-languages.c:773
 msgid "Unspecified"
 msgstr "குறிப்பிடப்படாத"
 
+#: ../panels/common/language-chooser.ui.h:1
+msgid "Select a language"
+msgstr "மொழியை தேர்ந்தெடு"
+
+#: ../panels/common/language-chooser.ui.h:2
+#: ../panels/printers/new-printer-dialog.ui.h:4
+#: ../panels/user-accounts/um-user-panel.c:445
+msgid "_Cancel"
+msgstr "_C நீக்கு"
+
+#: ../panels/common/language-chooser.ui.h:3
+#: ../panels/universal-access/gconf-property-editor.c:1609
+msgid "_Select"
+msgstr "(_S) தேர்ந்தெடு"
+
 #: ../panels/datetime/datetime.ui.h:1
-#, fuzzy
 msgid "24-_Hour Time"
-msgstr "24- மணிநேர வடிவம்"
+msgstr "_H 24- மணிநேர வடிவம்"
 
 #. Translator: this is the separator between hours and minutes, like in HH:MM
 #: ../panels/datetime/datetime.ui.h:3
@@ -164,9 +227,8 @@ msgid "August"
 msgstr "ஆகஸ்ட்"
 
 #: ../panels/datetime/datetime.ui.h:6
-#, fuzzy
 msgid "Day"
-msgstr "நாள்:"
+msgstr "நாள்"
 
 #: ../panels/datetime/datetime.ui.h:7
 msgid "December"
@@ -197,9 +259,8 @@ msgid "May"
 msgstr "மே"
 
 #: ../panels/datetime/datetime.ui.h:14
-#, fuzzy
 msgid "Month"
-msgstr "மாதம்:"
+msgstr "மாதம்"
 
 #: ../panels/datetime/datetime.ui.h:15
 msgid "November"
@@ -215,43 +276,39 @@ msgstr "செப்டம்பர்"
 
 #: ../panels/datetime/datetime.ui.h:18
 msgid "Set the time one hour ahead."
-msgstr ""
+msgstr "நேரத்தை ஒரு மனி முன்னே அமை."
 
 #: ../panels/datetime/datetime.ui.h:19
 msgid "Set the time one hour back."
-msgstr ""
+msgstr "நேரத்தை ஒரு மனி பின்னே அமை."
 
 #: ../panels/datetime/datetime.ui.h:20
 msgid "Set the time one minute ahead."
-msgstr ""
+msgstr "நேரத்தை ஒரு நிமிடம்  முன்னே அமை."
 
 #: ../panels/datetime/datetime.ui.h:21
 msgid "Set the time one minute back."
-msgstr ""
+msgstr "நேரத்தை ஒரு நிமிடம் பின்னே அமை."
 
 #: ../panels/datetime/datetime.ui.h:22
 msgid "Switch between AM and PM."
-msgstr ""
+msgstr "முற்பகல் பிற்பகலுக்குள் மாறு"
 
 #: ../panels/datetime/datetime.ui.h:23
-#, fuzzy
 msgid "Year"
-msgstr "வருடம்:"
+msgstr "வருடம்"
 
 #: ../panels/datetime/datetime.ui.h:24
-#, fuzzy
 msgid "_City:"
-msgstr "நகரம்: "
+msgstr "நகரம் (_C):"
 
 #: ../panels/datetime/datetime.ui.h:25
-#, fuzzy
 msgid "_Network Time"
-msgstr "பிணைய நேரம்"
+msgstr "_N பிணைய நேரம்"
 
 #: ../panels/datetime/datetime.ui.h:26
-#, fuzzy
 msgid "_Region:"
-msgstr "வட்டாரம்:"
+msgstr "_R வட்டாரம்:"
 
 #. Translators: those are keywords for the date and time control-center panel
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
@@ -363,8 +420,7 @@ msgstr "முதன்மை காட்சியை மாற்ற இழு
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
-msgstr ""
-"பண்புகளை  மாற்ற ஒரு திரையகத்தை   தேர்வு செய்க; அதன் இடத்தை  மாற்ற அதை  இழுக்கவும்."
+msgstr "பண்புகளை  மாற்ற ஒரு திரையகத்தை   தேர்வு செய்க; அதன் இடத்தை  மாற்ற அதை  இழுக்கவும்."
 
 #: ../panels/display/xrandr-capplet.c:1959
 msgid "%a %R"
@@ -410,90 +466,52 @@ msgstr "தெரியாத"
 msgid "%d-bit"
 msgstr "%d-பிட்"
 
-#: ../panels/info/cc-info-panel.c:564
-#, c-format
-msgid "%u byte"
-msgid_plural "%u bytes"
-msgstr[0] "%u பைட்"
-msgstr[1] "%u பைட்கள்"
-
-#: ../panels/info/cc-info-panel.c:572
-#, c-format
-msgid "%.1f KB"
-msgstr "%.1f KB"
-
-#: ../panels/info/cc-info-panel.c:577
-#, c-format
-msgid "%.1f MB"
-msgstr "%.1f MB"
-
-#: ../panels/info/cc-info-panel.c:582
-#, c-format
-msgid "%.1f GB"
-msgstr "%.1f GB"
-
-#: ../panels/info/cc-info-panel.c:587
-#, c-format
-msgid "%.1f TB"
-msgstr "%.1f TB"
-
-#: ../panels/info/cc-info-panel.c:592
-#, c-format
-msgid "%.1f PB"
-msgstr "%.1f PB"
-
-#: ../panels/info/cc-info-panel.c:597
-#, c-format
-msgid "%.1f EB"
-msgstr "%.1f EB"
-
-#: ../panels/info/cc-info-panel.c:755
+#: ../panels/info/cc-info-panel.c:706
 msgid "Unknown model"
 msgstr "தெரியாத மாதிரி"
 
-#: ../panels/info/cc-info-panel.c:838
+#: ../panels/info/cc-info-panel.c:789
 msgid "The next login will attempt to use the standard experience."
 msgstr "அடுத்த உள்நுழைவு செந்தர முறையை பயன்படுத்தும்"
 
-#: ../panels/info/cc-info-panel.c:840
+#: ../panels/info/cc-info-panel.c:791
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
-msgstr ""
-"அடுத்த உள்நுழைவு ஆதரவில்லாத வரைகலை வன்பொருளுக்கான பின்சார்பு முறையை பயன்படுத்தும்"
+msgstr "அடுத்த உள்நுழைவு ஆதரவில்லாத வரைகலை வன்பொருளுக்கான பின்சார்பு முறையை பயன்படுத்தும்"
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:882
+#: ../panels/info/cc-info-panel.c:833
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "பின்சார்தல்"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:888
+#: ../panels/info/cc-info-panel.c:839
 msgctxt "Experience"
 msgid "Standard"
 msgstr "செந்தரம்"
 
-#: ../panels/info/cc-info-panel.c:1028
+#: ../panels/info/cc-info-panel.c:979
 #: ../panels/keyboard/keyboard-shortcuts.c:1762
 msgid "Section"
 msgstr "பிரிவு"
 
-#: ../panels/info/cc-info-panel.c:1037 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:988 ../panels/info/info.ui.h:13
 msgid "Overview"
 msgstr "மேலோட்டம்"
 
-#: ../panels/info/cc-info-panel.c:1043 ../panels/info/info.ui.h:2
+#: ../panels/info/cc-info-panel.c:994 ../panels/info/info.ui.h:2
 msgid "Default Applications"
 msgstr "முன்னிருப்பு பயன்பாடுகள்"
 
-#: ../panels/info/cc-info-panel.c:1048 ../panels/info/info.ui.h:9
+#: ../panels/info/cc-info-panel.c:999 ../panels/info/info.ui.h:9
 msgid "Graphics"
 msgstr "வரைகலைகள்"
 
-#: ../panels/info/cc-info-panel.c:1212
+#: ../panels/info/cc-info-panel.c:1163
 #, c-format
 msgid "Version %s"
 msgstr "பதிப்பு %s"
@@ -508,15 +526,15 @@ msgstr "கணினி தகவல்"
 
 #. sure that you use the same "translation" for those keywords
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
-#, fuzzy
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
 "fallback;preferred;"
-msgstr "சாதனம்;கணினி;தகவல்;நினைவகம்;செயலி;பதிப்பு;முன்னிருப்பு;நிரல்;பின்சார்பு"
+msgstr ""
+"சாதனம்;கணினி;தகவல்;நினைவகம்;செயலி;பதிப்பு;முன்னிருப்பு;நிரல்;பயன்பாடு;பின்சார்பு;முன்னுரிமை;"
 
 #: ../panels/info/info.ui.h:1
 msgid "Calculating..."
-msgstr ""
+msgstr "கணக்கிடுகிறது..."
 
 #: ../panels/info/info.ui.h:3
 msgid "Device name"
@@ -536,14 +554,12 @@ msgstr "அனுபவம்"
 
 #. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
 #: ../panels/info/info.ui.h:8
-#, fuzzy
 msgid "Forced _Fallback Mode"
-msgstr "வலுக்கட்டாய பின்சார்பு பாங்கு"
+msgstr "_F வலுக்கட்டாய பின்சார்பு பாங்கு"
 
 #: ../panels/info/info.ui.h:10
-#, fuzzy
 msgid "M_usic"
-msgstr "இசை"
+msgstr "_u இசை"
 
 #: ../panels/info/info.ui.h:11
 msgid "Memory"
@@ -562,28 +578,24 @@ msgid "Updates Available"
 msgstr "மேம்படுத்தல்கள் உள்ளன"
 
 #: ../panels/info/info.ui.h:16
-#, fuzzy
 msgid "_Calendar"
-msgstr "நாள்காட்டி"
+msgstr "நாள்காட்டி (_C)"
 
 #: ../panels/info/info.ui.h:17
-#, fuzzy
 msgid "_Mail"
-msgstr "மின்னஞ்சல்"
+msgstr "(_M)மின்னஞ்சல்"
 
 #: ../panels/info/info.ui.h:18
-#, fuzzy
 msgid "_Photos"
-msgstr "_படங்கள்:"
+msgstr "_படங்கள்"
 
 #: ../panels/info/info.ui.h:19
-#, fuzzy
 msgid "_Video"
-msgstr "வீடியோ"
+msgstr "_V வீடியோ"
 
 #: ../panels/info/info.ui.h:20
 msgid "_Web"
-msgstr ""
+msgstr "_W இணையம்"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:1
 msgid "Eject"
@@ -794,8 +806,7 @@ msgstr "குறுவழி \"%s\"ஏற்கெனவே \"%s\"க்கு 
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1377
 #, c-format
-msgid ""
-"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgid "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr " \"%s\" க்கு குறுவழியாக மாற்றி அமைத்தால்  \"%s\" குறுவழி  முடங்கிவிடும்."
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1383
@@ -1051,70 +1062,64 @@ msgstr "சிடி;டிவிடி;ஒலி;விடியோ;வட்�
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:306
 msgid "Error logging into the account"
-msgstr ""
+msgstr "கணக்குக்குள் நுழைவதில் பிழை"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:352
 msgid "Expired credentials. Please log in again."
-msgstr ""
+msgstr " அறிமுக ஆவணம் காலாவதியானது. மீண்டும் உள் நுழைக."
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:355
 msgid "_Log In"
-msgstr ""
+msgstr "_L உள்நுழை"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:464
 msgid "To add a new account, first select the account type"
-msgstr ""
+msgstr "ஒரு புதிய கணக்கை சேர்க்க முதலில் கணக்கின் வகையை தேர்ந்தெடு "
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:467
-#, fuzzy
 msgid "Account Type:"
-msgstr "_A கணக்கு வகை"
+msgstr "கணக்கு வகை:"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:499
 msgid "_Add..."
-msgstr ""
+msgstr "சேர் (_A)..."
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:552
-#, fuzzy
 msgid "Error creating account"
-msgstr "புதிய கணக்கை உருவாக்கு"
+msgstr "கணக்கை உருவாக்குவதில் பிழை"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:586
 msgid "Error removing account"
-msgstr ""
+msgstr "கணக்கை நீக்குவதில் பிழை"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:622
-#, fuzzy
 msgid "Are you sure you want to remove the account?"
-msgstr "\"%s\" ஐ அவசியம் நிரந்தரமாக நீக்க வேண்டுமா?"
+msgstr "கணக்கை அவசியம்  நீக்க உறுதியாக உள்ளீரா?"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:624
 msgid "This will not remove the account on the server."
-msgstr ""
+msgstr "இது சேவையகத்தில் கணக்கை நீக்காது."
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:625
 msgid "_Remove"
-msgstr ""
+msgstr "நீக்கு (_R)"
 
 #. Translators: those are keywords for the online-accounts control-center panel
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:2
 msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
-msgstr ""
+msgstr "கூகுள்;பேஸ்புக்;ட்விட்டர்;யாஹூ;வலை;ஆன்லைன்;அரட்டை;அஞ்சல்;தொடர்பு;"
 
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:3
-#, fuzzy
 msgid "Manage online accounts"
-msgstr "புதிய கணக்கை உருவாக்கு"
+msgstr "ஆன் லைன் கணக்குகளை மேலாள்"
 
 #: ../panels/online-accounts/gnome-online-accounts-panel.desktop.in.in.h:4
-#, fuzzy
 msgid "Online Accounts"
-msgstr "மற்ற கணக்குகள்"
+msgstr "ஆன் லைன்  கணக்குகள்"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
-#, fuzzy
 msgid "Select an account"
-msgstr "புதிய கணக்கை உருவாக்கு"
+msgstr "கணக்கை தேர்வு செய்யவும்"
 
 #. Translators: The printer is low on toner
 #: ../panels/printers/cc-printers-panel.c:509
@@ -1331,12 +1336,12 @@ msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "அச்சுப்பொறி;வரிசை;அச்சடி;காகிதம்;மசி;டோனர்"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
+#: ../panels/printers/pp-new-printer-dialog.c:142
 msgid "Printers"
 msgstr "அச்சுப்பொறிகள்"
 
 #: ../panels/printers/new-printer-dialog.ui.h:1
-#, fuzzy
-msgid "A_ddress"
+msgid "A_ddress:"
 msgstr "முகவரி: (_d)"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
@@ -1344,51 +1349,64 @@ msgid "Add a New Printer"
 msgstr "புதிய அச்சுப்பொறியை சேர்"
 
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#, fuzzy
 msgid "_Add"
-msgstr "முகவரி: (_A)"
-
-#: ../panels/printers/new-printer-dialog.ui.h:4
-#: ../panels/user-accounts/um-user-panel.c:445
-#: ../panels/user-accounts/data/language-chooser.ui.h:1
-msgid "_Cancel"
-msgstr "_C நீக்கு"
+msgstr "சேர் (_A)"
 
 #: ../panels/printers/new-printer-dialog.ui.h:5
-#, fuzzy
 msgid "_Search by Address"
-msgstr "முகவரியால் தேடு"
+msgstr "_S முகவரியால் தேடு"
 
-#: ../panels/printers/pp-new-printer-dialog.c:493
+#: ../panels/printers/pp-new-printer-dialog.c:627
 msgid "Getting devices..."
 msgstr "சாதனங்களை பெறுகிறது..."
 
+#: ../panels/printers/pp-new-printer-dialog.c:1262
+msgid ""
+"FirewallD is not running. Network printer detection needs services mdns, "
+"ipp, ipp-client and samba-client enabled on firewall."
+msgstr ""
+"பயர்வால்டீமன் இயங்கவில்லை. வலைப்பின்னல் அச்சுப்பொறி இயங்க பயர்வாலில் எம்டிஎன்எஸ், "
+"ஐபிபி,ஐபிபி-க்லையன்ட், சாம்பா -க்லையன்ட் ஆகியவை செயலனுமதி இருக்க வேண்டும்."
+
 #. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:913
-#: ../panels/printers/pp-new-printer-dialog.c:918
+#: ../panels/printers/pp-new-printer-dialog.c:1282
+#: ../panels/printers/pp-new-printer-dialog.c:1287
 msgid "Devices"
 msgstr "சாதனங்கள்"
 
 #. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:943
+#: ../panels/printers/pp-new-printer-dialog.c:1312
+msgctxt "printer type"
 msgid "Local"
 msgstr "உள்ளமை"
 
 #. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:945
-#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+#: ../panels/printers/pp-new-printer-dialog.c:1314
+msgctxt "printer type"
 msgid "Network"
 msgstr "பிணையம்"
 
 #. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:986
+#: ../panels/printers/pp-new-printer-dialog.c:1355
 msgid "Device types"
 msgstr "சாதன வகைகள்"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:1266
+#: ../panels/printers/pp-new-printer-dialog.c:1654
 msgid "Automatic configuration"
 msgstr "தானியங்கி கட்டமைப்பு"
+
+#: ../panels/printers/pp-new-printer-dialog.c:1750
+msgid "Opening firewall for mDNS connections"
+msgstr "எம்டிஎன்எஸ் இணைப்புகளுக்கு பயர்வாலை திறத்தல்"
+
+#: ../panels/printers/pp-new-printer-dialog.c:1759
+msgid "Opening firewall for Samba connections"
+msgstr "சாம்பா இணைப்புகளுக்கு பயர்வாலை திறத்தல்"
+
+#: ../panels/printers/pp-new-printer-dialog.c:1768
+msgid "Opening firewall for IPP connections"
+msgstr "ஐபிபி இணைப்புகளுக்கு பயர்வாலை திறத்தல்"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
 #: ../panels/printers/printers.ui.h:2
@@ -1425,9 +1443,8 @@ msgstr "மாதிரி"
 
 #. Translators: This button executes command which prints test page.
 #: ../panels/printers/printers.ui.h:12
-#, fuzzy
 msgid "Print _Test Page"
-msgstr "சோதனை பக்கத்தை அச்சிடு"
+msgstr "_T சோதனை பக்கத்தை அச்சிடு"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
 #: ../panels/printers/printers.ui.h:14
@@ -1448,35 +1465,31 @@ msgstr "வழங்கு"
 
 #. Translators: Switch back to printer's info tab
 #: ../panels/printers/printers.ui.h:21
-#, fuzzy
 msgid "_Back"
-msgstr "பின்"
+msgstr "_B பின்"
 
 #. Translators: This checkbox is checked when the default printer is selected.
 #: ../panels/printers/printers.ui.h:23
-#, fuzzy
 msgid "_Default"
-msgstr "முன்னிருப்பு"
+msgstr "_D முன்னிருப்பு"
 
 #. Translators: This button opens printer's options tab
 #: ../panels/printers/printers.ui.h:25
-#, fuzzy
 msgid "_Options"
-msgstr "தேர்வுகள்"
+msgstr "விருப்பங்கள் (_O)"
 
 #. Tanslators: Switch to tab containing printer's jobs
 #: ../panels/printers/printers.ui.h:27
-#, fuzzy
 msgid "_Show"
-msgstr "காட்டுக"
+msgstr "_S காட்டுக"
 
-#: ../panels/region/gnome-region-panel-formats.c:99
+#: ../panels/region/gnome-region-panel-formats.c:140
 msgid "Imperial"
-msgstr ""
+msgstr "இம்பீரியல்"
 
-#: ../panels/region/gnome-region-panel-formats.c:101
+#: ../panels/region/gnome-region-panel-formats.c:142
 msgid "Metric"
-msgstr ""
+msgstr "மெட்ரிக்"
 
 #: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
 msgid "Choose a Layout"
@@ -1495,47 +1508,41 @@ msgid "Keyboard Layout Options"
 msgstr "விசைப்பலகை இட அமைவு தேர்வுகள்"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
-#, fuzzy
 msgid "Allow different layouts for individual windows"
 msgstr "ஒவ்வொரு சாளரத்திற்கும் வேறு இட அமைவை அனுமதி"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
-#, fuzzy
+#: ../panels/region/gnome-region-panel-system.c:286
 msgid "Copy Settings..."
-msgstr "சொடுக்கி அமைப்புகள்"
+msgstr "அமைப்புகளை பிரதி எடு..."
 
 #: ../panels/region/gnome-region-panel.ui.h:3
 msgid "Currency"
-msgstr ""
+msgstr "பணம்"
 
 #: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Dates"
-msgstr ""
+msgstr "தேதிகள்"
 
 #: ../panels/region/gnome-region-panel.ui.h:5
-#, fuzzy
 msgid "Display language:"
-msgstr "மொழியால் (_l)"
+msgstr "மொழியை காட்டு:"
 
 #: ../panels/region/gnome-region-panel.ui.h:6
-#, fuzzy
-msgid "Example"
-msgstr "உதாரண பலகம்"
+msgid "Examples"
+msgstr "உதாரணங்கள்"
 
 #: ../panels/region/gnome-region-panel.ui.h:7
-#, fuzzy
 msgid "Format:"
-msgstr "இயல்பான"
+msgstr "வடிவம்:"
 
 #: ../panels/region/gnome-region-panel.ui.h:8
-#, fuzzy
 msgid "Formats"
-msgstr "இயல்பான"
+msgstr "ஒழுங்குகள்"
 
 #: ../panels/region/gnome-region-panel.ui.h:9
-#, fuzzy
 msgid "Input source:"
-msgstr "(_I) உள்ளீட்டு ஒலி அளவு:"
+msgstr " உள்ளீட்டு மூலம்:"
 
 #: ../panels/region/gnome-region-panel.ui.h:10
 msgid "Install languages..."
@@ -1550,24 +1557,20 @@ msgid "Layouts"
 msgstr "இடஅமைவுகள்"
 
 #: ../panels/region/gnome-region-panel.ui.h:13
-#, fuzzy
 msgid "Measurement"
-msgstr "துறை: (_D)"
+msgstr "அளவு "
 
 #: ../panels/region/gnome-region-panel.ui.h:14
-#, fuzzy
 msgid "New windows use the default layout"
-msgstr "_ புதிய சாளரங்கள் நடப்பு சாளர இட அமைவை பயன்படுத்தும்"
+msgstr " புதிய சாளரங்கள் நடப்பு முன்னிருப்பு  இட அமைவை பயன்படுத்தும்"
 
 #: ../panels/region/gnome-region-panel.ui.h:15
-#, fuzzy
 msgid "New windows use the previous window's layout"
-msgstr "_ புதிய சாளரங்கள் நடப்பு சாளர இட அமைவை பயன்படுத்தும்"
+msgstr "புதிய சாளரங்கள் நடப்பு சாளர இட அமைவை பயன்படுத்தும்"
 
 #: ../panels/region/gnome-region-panel.ui.h:16
-#, fuzzy
 msgid "Numbers"
-msgstr "நவம்பர்"
+msgstr "எண்கள்"
 
 #: ../panels/region/gnome-region-panel.ui.h:17
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
@@ -1575,10 +1578,6 @@ msgid "Region and Language"
 msgstr " வட்டாரம் மற்றும் மொழி "
 
 #: ../panels/region/gnome-region-panel.ui.h:18
-msgid "Region:"
-msgstr "வட்டாரம்:"
-
-#: ../panels/region/gnome-region-panel.ui.h:19
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1586,52 +1585,70 @@ msgstr ""
 "நடப்பு விசைப்பலகை அமைப்பை முன்னிருப்பு\n"
 "அமைப்பால் மாற்றுக."
 
-#: ../panels/region/gnome-region-panel.ui.h:21
+#: ../panels/region/gnome-region-panel.ui.h:20
 msgid "Reset to De_faults"
 msgstr "(_f) முன்னிருப்புக்கு மறுஅமை"
 
-#: ../panels/region/gnome-region-panel.ui.h:22
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "Select a display language (change will be applied next time you log in)"
 msgstr ""
 "காட்டுவதற்கு மொழியைத் தேர்ந்தெடுக்கவும் (மாற்றங்கள் அடுத்த முறை நீங்கள் உள் நுழையும்போது "
 "செயலாகும்)"
 
+#: ../panels/region/gnome-region-panel.ui.h:22
+msgid "Select a region (change will be applied the next time you log in)"
+msgstr ""
+"காட்டுவதற்கு மண்டலத்தை தேர்ந்தெடுக்கவும் (மாற்றங்கள் அடுத்த முறை நீங்கள் உள் நுழையும்போது "
+"செயலாகும்)"
+
 #: ../panels/region/gnome-region-panel.ui.h:24
-#, fuzzy
 msgid "System settings"
 msgstr "கணினி அமைப்புகள்"
 
 #: ../panels/region/gnome-region-panel.ui.h:25
+#: ../panels/region/gnome-region-panel-system.c:280
 msgid ""
-"The login screen, system accounts and new user accounts use the system "
-"Region & Language settings. You may change the system settings to match yours"
+"The login screen, system accounts and new user accounts use the system-wide "
+"Region and Language settings. You may change the system settings to match "
+"yours."
 msgstr ""
+"உள் நுழைவு திரை, கணினி கணக்குகள் மற்றும் புதிய பயனர் கணக்குகள் கணினியின் இடம் மற்றும் மொழி "
+"அமைப்புகளை பயன்படுத்துகின்றன. உங்களுடையதுடன் பொருந்தும் படி அவற்றை மாற்றலாம். ."
 
 #: ../panels/region/gnome-region-panel.ui.h:26
-#, fuzzy
 msgid "Times"
-msgstr "நேரம்"
+msgstr "நேரங்கள்"
 
 #: ../panels/region/gnome-region-panel.ui.h:27
-#, fuzzy
 msgid "Use the same layout for all windows"
-msgstr "எல்லா  சாளரத்திற்கும் ஒரே இட அமைவு"
+msgstr "எல்லா  சாளரத்திற்கும் ஒரே இட அமைவை பயன்படுத்துக."
 
 #: ../panels/region/gnome-region-panel.ui.h:28
 msgid "View and edit keyboard layout options"
 msgstr "விசைப்பலகை இட அமைவு தேர்வுகளை பார்த்து திருத்துக"
 
 #: ../panels/region/gnome-region-panel.ui.h:29
-#, fuzzy
 msgid "Your settings"
-msgstr "பிணைய அமைவுகள்"
+msgstr "உங்களுடைய அமைவுகள்"
 
 #: ../panels/region/gnome-region-panel.ui.h:30
 #: ../panels/network/network.ui.h:30
 msgid "_Options..."
 msgstr "(_O) தேர்வுகள்..."
 
-#: ../panels/region/gnome-region-panel-xkblt.c:199
+#: ../panels/region/gnome-region-panel-system.c:275
+msgid ""
+"The login screen, system accounts and new user accounts use the system-wide "
+"Region and Language settings."
+msgstr ""
+"உள் நுழைவு திரை, கணினி கணக்குகள் மற்றும் புதிய பயனர் கணக்குகள் கணினியின் இடம் மற்றும் மொழி "
+"அமைப்புகளை பயன்படுத்துகின்றன."
+
+#: ../panels/region/gnome-region-panel-system.c:283
+msgid "Copy Settings"
+msgstr "அமைப்புகளை பிரதி எடு"
+
+#: ../panels/region/gnome-region-panel-xkblt.c:210
 msgid "Layout"
 msgstr "இட அமைவு"
 
@@ -1774,8 +1791,7 @@ msgstr "தொடர்திட்டு;சுட்டி;சொடுக்�
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: ../panels/network/cc-network-panel.c:196
-msgid ""
-"Web Proxy Autodiscovery is used when a Configuration URL is not provided."
+msgid "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgstr "வலி பதிலாள் தானியங்கி காணல் வடிவமைப்பு, யூஆர்எல் இல்லாத போது பயன்படும்."
 
 #. TRANSLATORS: WPAD is bad: if you enable it on an untrusted
@@ -1790,10 +1806,9 @@ msgstr "நம்பகமில்லாத பொது வலைப்பி�
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
 #: ../panels/network/cc-network-panel.c:817
-#, fuzzy
 msgctxt "Wireless access point"
 msgid "Other..."
-msgstr "மற்ற..."
+msgstr "மற்றவை..."
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/cc-network-panel.c:975
@@ -1826,7 +1841,7 @@ msgstr "ஏதுமில்லை"
 
 #: ../panels/network/cc-network-panel.c:1360
 msgid "Hotspot"
-msgstr ""
+msgstr "செயலிடம் "
 
 #. Translators: network device speed
 #: ../panels/network/cc-network-panel.c:1422
@@ -1861,35 +1876,38 @@ msgstr "%s VPN"
 msgid "The system network services are not compatible with this version."
 msgstr "இந்த பதிப்புடன் கணினி வலைப்பின்னல் சேவைகள் இசையவில்லை"
 
-#: ../panels/network/cc-network-panel.c:2873
-#, fuzzy
+#: ../panels/network/cc-network-panel.c:2872
 msgid "Not connected to the internet."
-msgstr "இணைக்கப்படவில்லை"
+msgstr "பிணையத்துடன் இணைக்கப்படவில்லை"
 
-#: ../panels/network/cc-network-panel.c:2874
+#: ../panels/network/cc-network-panel.c:2873
 msgid "Create the hotspot anyway?"
-msgstr ""
+msgstr "எப்படியும் செயலிடத்தை உருவாக்கவா?"
 
-#: ../panels/network/cc-network-panel.c:2892
+#: ../panels/network/cc-network-panel.c:2891
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
-msgstr ""
+msgstr "%s இலிருந்து இணைப்பு நீங்கி புதிய செயலிடத்தை உருவாக்கவா?அமெரிக்கா"
 
-#: ../panels/network/cc-network-panel.c:2895
+#: ../panels/network/cc-network-panel.c:2894
 msgid "This is your only connection to the internet."
-msgstr ""
+msgstr "பிணையத்துக்கு இதுவே ஒரே ஒரு இணைப்பு"
 
-#: ../panels/network/cc-network-panel.c:2913
+#: ../panels/network/cc-network-panel.c:2912
 msgid "Create _Hotspot"
-msgstr ""
+msgstr "_H செயலிடத்தை உருவாக்கு"
 
-#: ../panels/network/cc-network-panel.c:2973
+#: ../panels/network/cc-network-panel.c:2972
 msgid "Stop hotspot and disconnect any users?"
-msgstr ""
+msgstr "செயலிடத்தை நிறுத்தி பயனர்களை இணைப்பு நீக்கவா?"
 
-#: ../panels/network/cc-network-panel.c:2976
+#: ../panels/network/cc-network-panel.c:2975
 msgid "_Stop Hotspot"
-msgstr ""
+msgstr "_S செயலிடத்தை நிறுத்து"
+
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+msgid "Network"
+msgstr "பிணையம்"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:2
 msgid "Network settings"
@@ -1945,9 +1963,8 @@ msgid "Interface"
 msgstr "இடைமுகம்"
 
 #: ../panels/network/network.ui.h:15
-#, fuzzy
 msgid "Network Name"
-msgstr "பிணைய பெயர் (_N):"
+msgstr "பிணைய பெயர்"
 
 #: ../panels/network/network.ui.h:16
 msgid "Provider"
@@ -1958,9 +1975,8 @@ msgid "Security"
 msgstr "பாதுகாப்பு"
 
 #: ../panels/network/network.ui.h:18
-#, fuzzy
 msgid "Security Key"
-msgstr "பாதுகாப்பு"
+msgstr "பாதுகாப்பு விசை"
 
 #: ../panels/network/network.ui.h:19
 msgid "Select the interface to use for the new service"
@@ -2012,29 +2028,26 @@ msgstr "_S சாக்ஸ்  புரவன்"
 
 #: ../panels/network/network.ui.h:32
 msgid "_Stop Hotspot..."
-msgstr ""
+msgstr "_S செயலிடத்தை நிறுத்து..."
 
 #: ../panels/network/network.ui.h:33
 msgid "_Use as Hotspot..."
-msgstr ""
+msgstr "_U செயலிடமாக பயன்படுத்தவும் ..."
 
 #: ../panels/network/network.ui.h:34
-#, fuzzy
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "தானியங்கி"
 
 #: ../panels/network/network.ui.h:35
-#, fuzzy
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "கைமுறை"
 
 #: ../panels/network/network.ui.h:36
-#, fuzzy
 msgctxt "proxy method"
 msgid "None"
-msgstr "ஏதுமில்லை"
+msgstr "எதுவுமில்லை"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:83
@@ -2152,18 +2165,18 @@ msgstr "சக்தி மேலாண்மை அமைப்பு"
 msgid "Power;Sleep;Suspend;Hibernate;Battery;"
 msgstr "சக்தி;உறங்கு;செயல்நீக்கம்;இடைநிறுத்தம்;மின்கலம்"
 
-#: ../panels/power/cc-power-panel.c:153
+#: ../panels/power/cc-power-panel.c:160
 msgid "Unknown time"
 msgstr "தெரியாத நேரம்"
 
-#: ../panels/power/cc-power-panel.c:159
+#: ../panels/power/cc-power-panel.c:166
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i நிமிடம்"
 msgstr[1] "%i நிமிடங்கள்"
 
-#: ../panels/power/cc-power-panel.c:171
+#: ../panels/power/cc-power-panel.c:178
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -2172,54 +2185,54 @@ msgstr[1] "%i மணிநேரங்கள்"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:179
+#: ../panels/power/cc-power-panel.c:186
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:180
+#: ../panels/power/cc-power-panel.c:187
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "மணி"
 msgstr[1] "மணிகள்"
 
-#: ../panels/power/cc-power-panel.c:181
+#: ../panels/power/cc-power-panel.c:188
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "நிமிடம்"
 msgstr[1] "நிமிடங்கள்"
 
-#: ../panels/power/cc-power-panel.c:253
+#: ../panels/power/cc-power-panel.c:260
 msgid "Battery charging"
 msgstr "மின்கல சக்தி ஏற்றம் ஆகிறது"
 
-#: ../panels/power/cc-power-panel.c:256
+#: ../panels/power/cc-power-panel.c:263
 msgid "Battery discharging"
 msgstr "மின்கல சக்தி இறங்குகிறது"
 
-#: ../panels/power/cc-power-panel.c:267
+#: ../panels/power/cc-power-panel.c:274
 msgid "UPS charging"
 msgstr "யூபிஎஸ் மின் சக்தி ஏற்றம் ஆகிறது"
 
-#: ../panels/power/cc-power-panel.c:270
+#: ../panels/power/cc-power-panel.c:277
 msgid "UPS discharging"
 msgstr "யூபிஎஸ் மின் சக்தி இறங்குகிறது"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:288
+#: ../panels/power/cc-power-panel.c:295
 #, c-format
 msgid "%s until charged (%.0lf%%)"
 msgstr " %s மின் ஏற்றும் வரை(%.0lf%%)"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:294
+#: ../panels/power/cc-power-panel.c:301
 #, c-format
 msgid "%s until empty (%.0lf%%)"
 msgstr "%s  காலியாகும் வரை  (%.0lf%%)"
 
 #. TRANSLATORS: %1 is a percentage value. Note: this string is only
 #. * used when we don't have a time value
-#: ../panels/power/cc-power-panel.c:302
+#: ../panels/power/cc-power-panel.c:309
 #, c-format
 msgid "%.0lf%% charged"
 msgstr "%.0lf%% மின்னேற்றப்பட்டது"
@@ -2249,14 +2262,12 @@ msgid "Hibernate"
 msgstr "இடை உறக்கம்"
 
 #: ../panels/power/power.ui.h:8
-#, fuzzy
 msgid "On AC _power:"
-msgstr "ஏசி மின்சாரத்தில்:"
+msgstr "_p ஏசி மின்சாரத்தில்:"
 
 #: ../panels/power/power.ui.h:9
-#, fuzzy
 msgid "On _battery power:"
-msgstr "மின்கல மின்சாரத்தில்:"
+msgstr "_b மின்கல மின்சாரத்தில்:"
 
 #: ../panels/power/power.ui.h:10
 msgid "Put the computer to sleep when inactive:"
@@ -2271,66 +2282,59 @@ msgid "Suspend"
 msgstr "இடைநிறுத்தம்"
 
 #: ../panels/power/power.ui.h:13
-#, fuzzy
 msgid "When power is _critically low:"
-msgstr "மின்சக்தி மிகக்குறைவாக உள்ளபோது"
+msgstr "_c  மின்சக்தி மிகக்குறைவாக உள்ளபோது:"
 
 #: ../panels/power/power.ui.h:14
-#, fuzzy
 msgid "When the _sleep button is pressed:"
-msgstr "உறக்க பொத்தான் அழுத்தப்படும் போது:"
+msgstr "_s உறக்க பொத்தான் அழுத்தப்படும் போது:"
 
 #: ../panels/power/power.ui.h:15
-#, fuzzy
 msgid "When the p_ower button is pressed:"
-msgstr "மின்சக்தி பொத்தான் அழுத்தப்படும் போது:"
+msgstr "_o மின்சக்தி பொத்தான் அழுத்தப்படும் போது:"
 
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
 #: ../panels/color/color.ui.h:8
-#, fuzzy
 msgid "Color"
-msgstr "வண்ணங்கள்"
+msgstr "நிறம்"
 
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:2
-#, fuzzy
 msgid "Color management settings"
-msgstr "சக்தி மேலாண்மை அமைப்பு"
+msgstr "நிற மேலாண்மை அமைப்பு"
 
 #. Translators: those are keywords for the color control-center panel
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:4
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
-msgstr ""
+msgstr "நிறம்;ஐசிசி;வரிவுரு;அளவீடுசெய்;அச்சுப்பொறி;தோற்றம்;"
 
 #. TRANSLATORS: this is where the user can click and import a profile
 #: ../panels/color/cc-color-panel.c:102
-#, fuzzy
 msgid "Other profile…"
-msgstr "மற்ற விரல்:"
+msgstr "மற்ற வரிவுரு..."
 
 #. TRANSLATORS: this is when the profile should be set for all users
 #: ../panels/color/cc-color-panel.c:156 ../panels/color/color.ui.h:19
-#, fuzzy
 msgid "Set for all users"
-msgstr "ஒரு பயனரை உருவாக்கு"
+msgstr "எல்லாப்பயனருக்கும் அமை"
 
 #. TRANSLATORS: this is when the profile should be set for all users
 #: ../panels/color/cc-color-panel.c:163
 msgid "Create virtual device"
-msgstr ""
+msgstr "மெய்நிகர் சாதனம் உருவாக்கு"
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
 #: ../panels/color/cc-color-panel.c:198
 msgid "Select ICC Profile File"
-msgstr ""
+msgstr "ஐசிசி வரிவுரு கோப்பை  தேர்ந்தெடு."
 
 #: ../panels/color/cc-color-panel.c:201
 msgid "Import"
-msgstr ""
+msgstr "இறக்குமதி"
 
 #. TRANSLATORS: filter name on the file->open dialog
 #: ../panels/color/cc-color-panel.c:212
 msgid "Supported ICC profiles"
-msgstr ""
+msgstr "ஆதரவுள்ள ஐசிசி வரிவுருக்கள்"
 
 #. TRANSLATORS: filter name on the file->open dialog
 #: ../panels/color/cc-color-panel.c:219
@@ -2338,233 +2342,217 @@ msgid "All files"
 msgstr "எல்லா கோப்புகள்"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:695
+#: ../panels/color/cc-color-panel.c:702
 #: ../panels/sound/gvc-mixer-dialog.c:1539
 msgid "Device"
 msgstr "சாதனம்"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:730
-#, fuzzy
+#: ../panels/color/cc-color-panel.c:737
 msgid "Calibration"
-msgstr "பயன்பாடுகள்"
+msgstr "அளவீடு"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:762
-#, fuzzy
+#: ../panels/color/cc-color-panel.c:769
 msgid "Create a color profile for the selected device"
-msgstr "தேர்ந்தெடுக்கப்பட்ட சாதனத்திற்கு அமைப்பு:"
+msgstr "தேர்ந்தெடுக்கப்பட்ட சாதனத்திற்கு வண்ன வரியுரு அமை:"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:776 ../panels/color/cc-color-panel.c:800
+#: ../panels/color/cc-color-panel.c:783 ../panels/color/cc-color-panel.c:807
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
 msgstr ""
+"அளவீட்டு கருவி காணவில்லை. அது இயக்கப்பட்டுள்ளது, சரியாக பொருத்தப்பட்டுள்ளது என உறுதி செய்து "
+"கொள்க."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:809
+#: ../panels/color/cc-color-panel.c:816
 msgid "The measuring instrument does not support printer profiling."
-msgstr ""
+msgstr "அளவீட்டு கருவி அச்சுப்பொறி வருவுருவாக்கத்தை ஆதரிக்கவில்லை."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:820
+#: ../panels/color/cc-color-panel.c:827
 msgid "The device type is not currently supported."
-msgstr ""
+msgstr "இந்த சாதன வகைக்கு இப்போது ஆதரவில்லை."
 
 #. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:892
+#: ../panels/color/cc-color-panel.c:899
 msgid "Cannot remove automatically added profile"
-msgstr ""
+msgstr "தானியங்கியாக சேர்க்கப்பட்ட வரிவுருவை நீக்க முடியாது"
 
 #. TRANSLATORS: this is when there is no profile for the device
-#: ../panels/color/cc-color-panel.c:1190
-#, fuzzy
+#: ../panels/color/cc-color-panel.c:1211
 msgid "No profile"
-msgstr "_P விவரகுறிப்பு:"
+msgstr "வரிவுரு இல்லை"
 
-#: ../panels/color/cc-color-panel.c:1209
+#: ../panels/color/cc-color-panel.c:1230
 #, c-format
 msgid "%i year"
 msgid_plural "%i years"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i வருடம்"
+msgstr[1] "%i வருடங்கள்"
 
-#: ../panels/color/cc-color-panel.c:1220
-#, fuzzy, c-format
+#: ../panels/color/cc-color-panel.c:1241
+#, c-format
 msgid "%i month"
 msgid_plural "%i months"
-msgstr[0] "%i நிமிடம்"
-msgstr[1] "%i நிமிடங்கள்"
+msgstr[0] "%i மாதம்"
+msgstr[1] "%i மாதங்கள்"
 
-#: ../panels/color/cc-color-panel.c:1231
+#: ../panels/color/cc-color-panel.c:1252
 #, c-format
 msgid "%i week"
 msgid_plural "%i weeks"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i வாரம்"
+msgstr[1] "%i வாரங்கள்"
 
 #. fallback
-#: ../panels/color/cc-color-panel.c:1238
+#: ../panels/color/cc-color-panel.c:1259
 #, c-format
 msgid "Less than 1 week"
-msgstr ""
+msgstr "1 வாரத்தைவிட குறை"
 
-#: ../panels/color/cc-color-panel.c:1298
-#, fuzzy
+#: ../panels/color/cc-color-panel.c:1319
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
-msgstr "முன்னிருப்பு"
+msgstr "முன்னிருப்பு ஆர்ஜிபி"
 
-#: ../panels/color/cc-color-panel.c:1303
-#, fuzzy
+#: ../panels/color/cc-color-panel.c:1324
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
-msgstr "முன்னிருப்பு"
+msgstr "முன்னிருப்பு சிஎம்ஒய்கே"
 
-#: ../panels/color/cc-color-panel.c:1308
-#, fuzzy
+#: ../panels/color/cc-color-panel.c:1329
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
-msgstr "முன்னிருப்பு"
+msgstr "முன்னிருப்பு சாம்பல்"
 
-#: ../panels/color/cc-color-panel.c:1423 ../panels/color/cc-color-panel.c:1445
-#: ../panels/color/cc-color-panel.c:1456
+#: ../panels/color/cc-color-panel.c:1444 ../panels/color/cc-color-panel.c:1466
+#: ../panels/color/cc-color-panel.c:1477
 msgid "Uncalibrated"
-msgstr ""
+msgstr "அளவிடாதது"
 
-#: ../panels/color/cc-color-panel.c:1426
-#, fuzzy
+#: ../panels/color/cc-color-panel.c:1447
 msgid "This device is not color managed."
-msgstr "சாதனம் பயன்படுத்த தயாராக உள்ளது."
+msgstr "சாதனம் வண்ண மேலாண்மை செய்யப்படாதது."
 
-#: ../panels/color/cc-color-panel.c:1448
+#: ../panels/color/cc-color-panel.c:1469
 msgid "This device is using manufacturing calibrated data."
-msgstr ""
+msgstr "இந்த சாதனம் உருவாக்கியபோது அள்விட்ட தரவை பயன்படுத்துகிறது."
 
-#: ../panels/color/cc-color-panel.c:1459
+#: ../panels/color/cc-color-panel.c:1480
 msgid ""
 "This device does not have a profile suitable for whole-screen color "
 "correction."
-msgstr ""
+msgstr "இந்த சாதனம் முழு திரையையும் வண்ணத்திருத்தம் செய்ய பொருந்தும் வரிவுரு கொண்டில்லை."
 
-#: ../panels/color/cc-color-panel.c:1486
+#: ../panels/color/cc-color-panel.c:1507
 msgid "This device has an old profile that may no longer be accurate."
-msgstr ""
+msgstr "இந்த சாதனத்தின் வரிவுரு மிகப்பழையது; இப்போது சரியாக இல்லாமால் இருக்கலாம்."
 
 #. TRANSLATORS: this is when the calibration profile age is not
 #. * specified as it has been autogenerated from the hardware
-#: ../panels/color/cc-color-panel.c:1513
-#, fuzzy
+#: ../panels/color/cc-color-panel.c:1534
 msgid "Not specified"
 msgstr "குறிப்பிடப்படாத"
 
-#: ../panels/color/cc-color-panel.c:1864
-#, fuzzy
+#: ../panels/color/cc-color-panel.c:1885
 msgctxt "Device kind"
 msgid "Display"
-msgstr "காட்டு"
+msgstr "காட்சி"
 
-#: ../panels/color/cc-color-panel.c:1866
+#: ../panels/color/cc-color-panel.c:1887
 msgctxt "Device kind"
 msgid "Scanner"
-msgstr ""
+msgstr "மின்வருடி "
 
-#: ../panels/color/cc-color-panel.c:1868
-#, fuzzy
+#: ../panels/color/cc-color-panel.c:1889
 msgctxt "Device kind"
 msgid "Printer"
 msgstr "அச்சுப்பொறி"
 
-#: ../panels/color/cc-color-panel.c:1870
+#: ../panels/color/cc-color-panel.c:1891
 msgctxt "Device kind"
 msgid "Camera"
-msgstr ""
+msgstr "காமிரா"
 
-#: ../panels/color/cc-color-panel.c:1872
+#: ../panels/color/cc-color-panel.c:1893
 msgctxt "Device kind"
 msgid "Webcam"
-msgstr ""
+msgstr "வலைகாமிரா"
 
 #: ../panels/color/color.ui.h:1
 msgid "Add a virtual device"
-msgstr ""
+msgstr "மெய்நிகர் சாதனத்தை சேர்"
 
 #: ../panels/color/color.ui.h:2
-#, fuzzy
 msgid "Add device"
-msgstr "சாதனம்"
+msgstr "சாதனத்தை சேர் "
 
 #: ../panels/color/color.ui.h:3
-#, fuzzy
 msgid "Add profile"
-msgstr "_P விவரகுறிப்பு:"
+msgstr "வரிவுரு சேர்"
 
 #. Profiles that can be added to the device
 #: ../panels/color/color.ui.h:5
-#, fuzzy
 msgid "Available Profiles"
-msgstr "எல்லா கோப்புகள்"
+msgstr "இருக்கும் வரிவுருக்கள்"
 
 #: ../panels/color/color.ui.h:6
 msgid "Calibrate the device"
-msgstr ""
+msgstr "சாதனத்தை அளவிடு "
 
 #: ../panels/color/color.ui.h:7
 msgid "Calibrate…"
-msgstr ""
+msgstr "அளவிடு..."
 
 #: ../panels/color/color.ui.h:9
-#, fuzzy
 msgid "Delete device"
-msgstr "(_D) கோப்புக்களை நீக்கவும்"
+msgstr "சாதனத்தை நீக்கவும்"
 
 #: ../panels/color/color.ui.h:10
-#, fuzzy
 msgid "Device type:"
-msgstr "சாதன வகைகள்"
+msgstr "சாதன வகை:"
 
 #: ../panels/color/color.ui.h:11
 msgid "Each device needs an up to date color profile to be color managed."
-msgstr ""
+msgstr "வண்ண மேலாண்மைக்கு ஒவ்வொரு சாதனமும் வண்ண வரிவுருவை இற்றைப்படுத்த வேண்டியுள்ளது."
 
 #: ../panels/color/color.ui.h:12
-msgid ""
-"Image files can be dragged on this window to auto-complete the above fields."
+msgid "Image files can be dragged on this window to auto-complete the above fields."
 msgstr ""
+"மேல் காணும் புலங்களை தானியங்கியாக பூர்த்தி செய்ய பிம்ப கோப்புக்களை இந்த சாளரத்தில் "
+"இழுத்துவிடலாம்."
 
 #: ../panels/color/color.ui.h:13
 msgid "Manufacturer:"
-msgstr ""
+msgstr "உருவாக்கியவர்: "
 
 #: ../panels/color/color.ui.h:14
-#, fuzzy
 msgid "Model:"
-msgstr "மாதிரி"
+msgstr "மாதிரி:"
 
 #. Some profiles are not compatible with some devices
 #: ../panels/color/color.ui.h:16
 msgid "Only profiles that are compatible with the device will be listed above."
-msgstr ""
+msgstr "இந்த சாதனத்துடன் பொருந்தும் வரிவுருக்கள் மட்டுமே மேலே பட்டியலிடப்பட்டன."
 
 #: ../panels/color/color.ui.h:17
-#, fuzzy
 msgid "Remove a device"
-msgstr "பிடித்தமானவையிலிருந்து நீக்கு"
+msgstr "ஒரு சாதனத்தை நீக்கு"
 
 #: ../panels/color/color.ui.h:18
-#, fuzzy
 msgid "Remove profile"
-msgstr "பிடித்தமானவையிலிருந்து நீக்கு"
+msgstr "வரிவுருவை நீக்கு"
 
 #: ../panels/color/color.ui.h:20
 msgid "Set this device for all users on this computer"
-msgstr ""
+msgstr "இந்த சாதனத்தை இந்த கணினியில் எல்லா பயனர்களுக்கும் அமை"
 
 #: ../panels/color/color.ui.h:21
-#, fuzzy
 msgid "View details"
-msgstr "கூடுதல் விவரங்களை காட்டவும் (_d)"
+msgstr "விவரங்களை காண்"
 
 #. Translators: those are keywords for the brightness and lock control-center panel
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
@@ -2617,19 +2605,16 @@ msgid "Screen turns off"
 msgstr "திரையை சக்தி நீக்கு"
 
 #: ../panels/screen/screen.ui.h:15
-#, fuzzy
 msgid "_Dim screen to save power"
-msgstr "சக்தியை சேமிக்க திரையை மங்கலாக்கு"
+msgstr "_D சக்தியை சேமிக்க திரையை மங்கலாக்கு"
 
 #: ../panels/screen/screen.ui.h:16
-#, fuzzy
 msgid "_Lock screen after:"
-msgstr "இவ்வளவு நேரம் கழிந்தபின் திரையை பூட்டு:"
+msgstr "_L இவ்வளவு நேரம் கழிந்தபின் திரையை பூட்டு:"
 
 #: ../panels/screen/screen.ui.h:17
-#, fuzzy
 msgid "_Turn off after:"
-msgstr "இவ்வளவுக்குப்பின் நிறுத்து:"
+msgstr "_T இவ்வளவுக்குப்பின் நிறுத்து:"
 
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
@@ -2762,9 +2747,8 @@ msgid "Speaker Testing for %s"
 msgstr "%s க்கு ஒலி பெருக்கி சோதனை"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1646
-#, fuzzy
 msgid "_Test Speakers"
-msgstr "ஒலி பெருக்கிகளை சோதி "
+msgstr "_T ஒலி பெருக்கிகளை சோதி "
 
 #: ../panels/sound/gvc-mixer-dialog.c:1777
 msgid "_Output volume: "
@@ -2944,8 +2928,7 @@ msgid "Change set"
 msgstr "கணத்தை மாற்று"
 
 #: ../panels/universal-access/gconf-property-editor.c:148
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
+msgid "GConf change set containing data to be forwarded to the gconf client on apply"
 msgstr ""
 "GConf  மாற்று அமைப்பு கொண்டுள்ள அமைப்பு gconf  கிளயண்ட் பயன்படுத்தினவுடட் முன்னோக்கப்பட்டது"
 
@@ -2954,8 +2937,7 @@ msgid "Conversion to widget callback"
 msgstr "குறுபயன்பாடு அழைப்புக்கு மாற்றுதல்"
 
 #: ../panels/universal-access/gconf-property-editor.c:154
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
+msgid "Callback to be issued when data are to be converted from GConf to the widget"
 msgstr ""
 "தரவுகள் GConf லிருந்து விட்ஜெட்டுக்கு மாற்றம் செய்யும்போது பின்னுக்குகூப்பிடு "
 "வழங்கப்படவேண்டும்"
@@ -2965,8 +2947,7 @@ msgid "Conversion from widget callback"
 msgstr "குறுபயன்பாடு மறுஅழைப்பிலிருந்து மாற்றுதல்"
 
 #: ../panels/universal-access/gconf-property-editor.c:160
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
+msgid "Callback to be issued when data are to be converted to GConf from the widget"
 msgstr ""
 "தரவுகள் விட்ஜெட்டிலிருந்து GConfக்கு மாற்றம் செய்யப்படும்போது பின்னுக்குகூப்பிடு "
 "வழங்கப்படவேண்டும்"
@@ -2993,8 +2974,7 @@ msgstr "மறுஅழைப்பை விட்டுவிடும் ப�
 
 #: ../panels/universal-access/gconf-property-editor.c:189
 msgid "Callback to be issued when property editor object data is to be freed"
-msgstr ""
-"குணங்கள் தொகுப்பி பொருள் தரவு சுதந்திரமாகும்போது பின்னுக்குகூப்பிடு வழங்கப்படவேண்டும்"
+msgstr "குணங்கள் தொகுப்பி பொருள் தரவு சுதந்திரமாகும்போது பின்னுக்குகூப்பிடு வழங்கப்படவேண்டும்"
 
 #: ../panels/universal-access/gconf-property-editor.c:1474
 #, c-format
@@ -3024,11 +3004,6 @@ msgstr ""
 #: ../panels/universal-access/gconf-property-editor.c:1604
 msgid "Please select an image."
 msgstr "ஓர் படத்தை தெரிவு செய்யவும்."
-
-#: ../panels/universal-access/gconf-property-editor.c:1609
-#: ../panels/user-accounts/data/language-chooser.ui.h:2
-msgid "_Select"
-msgstr "(_S) தேர்ந்தெடு"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
@@ -3060,21 +3035,18 @@ msgid "75%"
 msgstr "75%"
 
 #: ../panels/universal-access/uap.ui.h:9
-#, fuzzy
 msgid "A_cceptance delay:"
-msgstr "ஒப்புக்கொள்ளல் தாமதம்:"
+msgstr "_c ஒப்புக்கொள்ளல் தாமதம்:"
 
 #: ../panels/universal-access/uap.ui.h:10
-#, fuzzy
 msgid "Acc_eptance delay:"
-msgstr "ஒப்புக்கொள்ளல் தாமதம்:"
+msgstr "_e ஒப்புக்கொள்ளல் தாமதம்:"
 
 #: ../panels/universal-access/uap.ui.h:11
 msgid "Beep when Caps and Num Lock are used"
 msgstr "தலைப்பெழுத்து பூட்டு மற்றும் எண் பூட்டு ஆகியன பயன்படும்போது பீப் ஒலி எழுப்புக."
 
 #: ../panels/universal-access/uap.ui.h:12
-#, fuzzy
 msgid "Beep when a _modifer key is pressed"
 msgstr "(_m) மாற்றி விசை  அழுத்தினால் பீப் ஒலி எழுப்புக"
 
@@ -3083,9 +3055,8 @@ msgid "Beep when a key is"
 msgstr "எந்த விசையும்  அழுத்தினால் பீப் ஒலி எழுப்புக"
 
 #: ../panels/universal-access/uap.ui.h:14
-#, fuzzy
 msgid "Beep when a key is _rejected"
-msgstr "விசை ஏற்கப்படவில்லையானால் பீப் ஒலி எழுப்புக"
+msgstr "_r விசை ஏற்கப்படவில்லையானால் பீப் ஒலி எழுப்புக"
 
 #: ../panels/universal-access/uap.ui.h:15
 msgid "Bounce Keys"
@@ -3160,9 +3131,8 @@ msgid "Larger"
 msgstr "பெரிய"
 
 #: ../panels/universal-access/uap.ui.h:38
-#, fuzzy
 msgid "Motion _threshold:"
-msgstr "(_M) நகர்வு மாறு நிலை :"
+msgstr "(_t) நகர்வு மாறு நிலை :"
 
 #: ../panels/universal-access/uap.ui.h:39
 msgid "Mouse Keys"
@@ -3190,8 +3160,7 @@ msgstr "சுட்டி சொடுக்கல் "
 
 #: ../panels/universal-access/uap.ui.h:47
 msgid "Puts a delay between when a key is pressed and when it is accepted"
-msgstr ""
-"ஒரு விசை அழுத்தப்படுவதற்கும் அது ஒப்புக்கொள்ளப் படுவதற்கும் இடையே ஒரு இடைவெளியை அமை "
+msgstr "ஒரு விசை அழுத்தப்படுவதற்கும் அது ஒப்புக்கொள்ளப் படுவதற்கும் இடையே ஒரு இடைவெளியை அமை "
 
 #: ../panels/universal-access/uap.ui.h:48
 msgid "Screen Reader"
@@ -3262,44 +3231,36 @@ msgid "Zoom out:"
 msgstr "விலகிப்பார்:"
 
 #: ../panels/universal-access/uap.ui.h:70
-#, fuzzy
 msgid "_Contrast:"
-msgstr "வேறுபாடு:"
+msgstr "_C வேறுபாடு:"
 
 #: ../panels/universal-access/uap.ui.h:71
-#, fuzzy
 msgid "_Disable if two keys are pressed together"
-msgstr " இரண்டு விசைகளை ஒரே நேரத்தில் அழுத்தினால் செயல் நீக்கவும்."
+msgstr "_D இரண்டு விசைகளை ஒரே நேரத்தில் அழுத்தினால் செயல் நீக்கவும்."
 
 #: ../panels/universal-access/uap.ui.h:72
-#, fuzzy
 msgid "_Keyboard Settings"
-msgstr "விசைப்பலகை  அமைப்பு"
+msgstr "_K விசைப்பலகை  அமைப்பு"
 
 #: ../panels/universal-access/uap.ui.h:73
-#, fuzzy
 msgid "_Mouse Settings"
-msgstr "சொடுக்கி அமைப்புகள்"
+msgstr "_M சொடுக்கி அமைப்புகள்"
 
 #: ../panels/universal-access/uap.ui.h:74
-#, fuzzy
 msgid "_Sound Settings"
-msgstr "ஒலி அமைப்புகள்"
+msgstr "_S ஒலி அமைப்புகள்"
 
 #: ../panels/universal-access/uap.ui.h:75
-#, fuzzy
 msgid "_Test flash"
-msgstr "மின்ஒளியை சோதி "
+msgstr "_T மின்ஒளியை சோதி "
 
 #: ../panels/universal-access/uap.ui.h:76
-#, fuzzy
 msgid "_Text size:"
-msgstr "உரை அளவு:"
+msgstr "_T உரை அளவு:"
 
 #: ../panels/universal-access/uap.ui.h:77
-#, fuzzy
 msgid "_Turn on accessibility features from the keyboard"
-msgstr "விசைப்பலகையில் இருந்து அணுகல் சிறப்பு இயல்புகளை செயலாக்கு"
+msgstr "_T விசைப்பலகையில் இருந்து அணுகல் சிறப்பு இயல்புகளை செயலாக்கு"
 
 #: ../panels/universal-access/uap.ui.h:78
 msgid "accepted"
@@ -3314,39 +3275,33 @@ msgid "rejected"
 msgstr "நிராகரிக்கப்பட்டது "
 
 #: ../panels/universal-access/uap.ui.h:81
-#, fuzzy
 msgctxt "universal access, contrast"
 msgid "High"
-msgstr "அதிகம்"
+msgstr "அதிக"
 
 #: ../panels/universal-access/uap.ui.h:82
-#, fuzzy
 msgctxt "universal access, contrast"
 msgid "High/Inverse"
 msgstr "உயர் மாறுபாடு /எதிர்மறை"
 
 #: ../panels/universal-access/uap.ui.h:83
-#, fuzzy
 msgctxt "universal access, contrast"
 msgid "Low"
-msgstr "குறைவு"
+msgstr "குறைவாக"
 
 #: ../panels/universal-access/uap.ui.h:84
-#, fuzzy
 msgctxt "universal access, contrast"
 msgid "Normal"
-msgstr "இயல்பான"
+msgstr "இயல்பாக"
 
 #. Translators: this refers to theme contrast and font size
 #: ../panels/universal-access/uap.ui.h:86
-#, fuzzy
 msgctxt "universal access, seeing"
 msgid "Display"
-msgstr "காட்டு"
+msgstr "காட்சி"
 
 #. Translators: this refers to screen magnifier
 #: ../panels/universal-access/uap.ui.h:88
-#, fuzzy
 msgctxt "universal access, seeing"
 msgid "Zoom"
 msgstr "அணுகிப்பார்"
@@ -3420,8 +3375,7 @@ msgid "Administrator"
 msgstr "நிர்வாகி"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:107
-msgid ""
-"You are not allowed to access the device. Contact your system administrator."
+msgid "You are not allowed to access the device. Contact your system administrator."
 msgstr "நீங்கள் சாதனத்தை அணு அனுமதி இல்லை. கணினி நிர்வாகியை அணுகவும்."
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:109
@@ -3502,24 +3456,16 @@ msgstr ""
 "வேண்டும்."
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:611
-#, fuzzy
 msgid "Selecting finger"
 msgstr "விரலை தேர்ந்தெடு"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:612
-#, fuzzy
 msgid "Enrolling fingerprints"
-msgstr ""
-"<b><big>%s</big></b>\n"
-"க்கு விரல்ரேகை பதிவு செய்கிறது"
+msgstr "விரல்ரேகை பதிவு செய்கிறது"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:613
 msgid "Summary"
-msgstr ""
-
-#: ../panels/user-accounts/um-language-dialog.c:180
-msgid "Other..."
-msgstr "மற்ற..."
+msgstr "சுருக்கம்"
 
 #: ../panels/user-accounts/um-password-dialog.c:179
 msgid "More choices..."
@@ -3746,14 +3692,13 @@ msgid "The username cannot start with a '-'"
 msgstr "பயனர் பெயர் ஒரு '-' உடன் ஆரம்பிக்க முடியாது"
 
 #: ../panels/user-accounts/um-utils.c:522
-#, fuzzy
 msgid ""
 "The username must only consist of:\n"
 " ➣ letters from the English alphabet\n"
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
 msgstr ""
-"பயனர் பெயரில் இருக்க வேண்டியவை:\n"
+"பயனர் பெயரில் இவை மட்டும் இருக்கலாம்:\n"
 "  ➣ ஆங்கில எழுத்துக்களில் சில எழுத்துக்கள்\n"
 "  ➣ எண்கள்\n"
 "  ➣ பின் வரும் எழுத்துருக்களில் ஏதேனும் ஒன்று\"'.\", \"-\" மற்றும் \"_'"
@@ -3840,13 +3785,12 @@ msgid "Set a password now"
 msgstr "கடவுச்சொல்லை இப்போது அமை"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:13
-#, fuzzy
 msgid ""
 "This hint may be displayed at the login screen.  It will be visible to all "
 "users of this system.  Do <b>not</b> include the password here."
 msgstr ""
-"<small>இந்த குறிப்பு உள்புகுகை திரையில் காட்டப்படலாம். இந்த கணினியை பயன்படுத்துவோர் "
-"அனைவரும் இதை காணலாம்.  <b>சேர்க்காதீர்</b>இங்கே கடவுச்சொல்லை.</small>"
+"இந்த குறிப்பு உள்புகுகை திரையில் காட்டப்படலாம். இந்த கணினியை பயன்படுத்துவோர் "
+"அனைவரும் இதை காணலாம்.  <b>சேர்க்காதீர்</b>இங்கே கடவுச்சொல்லை."
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:14
 msgid "_Action"
@@ -3877,8 +3821,7 @@ msgid "Changing photo for:"
 msgstr "இவருக்கு படத்தை மாற்றுகிறது:"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:5
-msgid ""
-"Choose a picture that will be shown at the login screen for this account."
+msgid "Choose a picture that will be shown at the login screen for this account."
 msgstr "இந்த கணக்குக்கு உள்புகுகை திரையில் காட்ட ஒரு படத்தை தேர்ந்தெடு."
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:6
@@ -3894,37 +3837,32 @@ msgid "Take a photograph"
 msgstr "ஒரு போட்டோ எடுக்கவும் "
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
-#, fuzzy
 msgid "A_utomatic Login"
-msgstr "தானாகவே உள்நுழைதல்"
+msgstr "_u தானியங்கி உள்நுழைவு"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
 msgid "Account Information"
 msgstr "கணக்கு தகவல்"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
-#, fuzzy
 msgid "Account _type"
-msgstr "கணக்கு வகை:"
+msgstr "_t கணக்கு வகை:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "Login Options"
 msgstr "புகு பதிகை தேர்வுகள்"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
-#, fuzzy
 msgid "_Fingerprint Login"
-msgstr "கைரேகை புகுபதிவு:"
+msgstr "_F கைரேகை புகுபதிவு:"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
-#, fuzzy
 msgid "_Language"
-msgstr "(_L) மொழி:"
+msgstr "(_L) மொழி"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
-#, fuzzy
 msgid "_Password"
-msgstr "(_P) கடவுச் சொல்:."
+msgstr "கடவுச்சொல் (_P)"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:2
 msgid "Left little finger"
@@ -3967,42 +3905,39 @@ msgstr ""
 "புகுபதிவு செய்ய முடியும்."
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:11
-#, fuzzy
 msgid "_Left index finger"
-msgstr "இடது சுட்டுவிரல்"
+msgstr "_L இடது சுட்டுவிரல்"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:12
-#, fuzzy
 msgid "_Other finger: "
-msgstr "மற்ற விரல்:"
+msgstr "_O மற்ற விரல்:"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:13
-#, fuzzy
 msgid "_Right index finger"
-msgstr "வலது சுட்டு விரல்"
+msgstr "_R வலது சுட்டு விரல்"
 
-#: ../shell/control-center.c:53
+#: ../shell/control-center.c:54
 msgid "Enable verbose mode"
 msgstr "வெர்போஸ் பாங்கை செயல்படுத்து"
 
-#: ../shell/control-center.c:54
+#: ../shell/control-center.c:55
 msgid "Show the overview"
 msgstr "மேல்காணலை காட்டுக"
 
-#: ../shell/control-center.c:55 ../shell/control-center.c:56
-#: ../shell/control-center.c:57
+#: ../shell/control-center.c:56 ../shell/control-center.c:57
+#: ../shell/control-center.c:58
 msgid "Show help options"
 msgstr "உதவி விருப்பங்களை காட்டு"
 
-#: ../shell/control-center.c:58
+#: ../shell/control-center.c:59
 msgid "Panel to display"
 msgstr "காட்ட பலகம்"
 
-#: ../shell/control-center.c:80
+#: ../shell/control-center.c:81
 msgid "- System Settings"
 msgstr "- கணினி அமைப்புகள்"
 
-#: ../shell/control-center.c:88
+#: ../shell/control-center.c:89
 #, c-format
 msgid ""
 "%s\n"
@@ -4022,6 +3957,32 @@ msgstr "கட்டுப்பாட்டு மையம்"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_A எல்லா அமைப்புகளும்"
+
+#~ msgid "%u byte"
+#~ msgid_plural "%u bytes"
+#~ msgstr[0] "%u பைட்"
+#~ msgstr[1] "%u பைட்கள்"
+
+#~ msgid "%.1f KB"
+#~ msgstr "%.1f KB"
+
+#~ msgid "%.1f MB"
+#~ msgstr "%.1f MB"
+
+#~ msgid "%.1f GB"
+#~ msgstr "%.1f GB"
+
+#~ msgid "%.1f TB"
+#~ msgstr "%.1f TB"
+
+#~ msgid "%.1f PB"
+#~ msgstr "%.1f PB"
+
+#~ msgid "%.1f EB"
+#~ msgstr "%.1f EB"
+
+#~ msgid "Region:"
+#~ msgstr "வட்டாரம்:"
 
 #~ msgid "Current network location"
 #~ msgstr "நடப்பு பிணைய இடம்"
@@ -5206,9 +5167,6 @@ msgstr "_A எல்லா அமைப்புகளும்"
 
 #~ msgid "Remove your finger, and try swiping your finger again"
 #~ msgstr "விரலை எடுத்து மீண்டும் உங்கள் விரலை தேய்க்கவும்"
-
-#~ msgid "Select Image"
-#~ msgstr "படத்தைத் தேர்ந்தெடு"
 
 #~ msgid "No Image"
 #~ msgstr "படம் இல்லை"
