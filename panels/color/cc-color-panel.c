@@ -49,7 +49,7 @@ struct _CcColorPanelPrivate
 };
 
 enum {
-  GCM_PREFS_COLUMN_DEVICE_ID,
+  GCM_PREFS_COLUMN_DEVICE_PATH,
   GCM_PREFS_COLUMN_SORT,
   GCM_PREFS_COLUMN_ICON,
   GCM_PREFS_COLUMN_TITLE,
@@ -1353,7 +1353,7 @@ gcm_prefs_device_remove_profiles_phase1 (CcColorPanel *prefs, GtkTreeIter *paren
   /* mark to be removed */
   do {
     gtk_tree_store_set (priv->list_store_devices, &iter,
-                        GCM_PREFS_COLUMN_DEVICE_ID, NULL,
+                        GCM_PREFS_COLUMN_DEVICE_PATH, NULL,
                         -1);
   } while (gtk_tree_model_iter_next (model, &iter));
 }
@@ -1377,7 +1377,7 @@ gcm_prefs_device_remove_profiles_phase2 (CcColorPanel *prefs, GtkTreeIter *paren
   do
     {
       gtk_tree_model_get (model, &iter,
-              GCM_PREFS_COLUMN_DEVICE_ID, &id_tmp,
+              GCM_PREFS_COLUMN_DEVICE_PATH, &id_tmp,
               -1);
       if (id_tmp == NULL)
         ret = gtk_tree_store_remove (priv->list_store_devices, &iter);
@@ -1553,7 +1553,7 @@ skip:
       gtk_tree_store_set (priv->list_store_devices, iter_tmp_p,
                           GCM_PREFS_COLUMN_DEVICE, device,
                           GCM_PREFS_COLUMN_PROFILE, profile_tmp,
-                          GCM_PREFS_COLUMN_DEVICE_ID, cd_device_get_id (device),
+                          GCM_PREFS_COLUMN_DEVICE_PATH, cd_device_get_object_path (device),
                           GCM_PREFS_COLUMN_SORT, sort_tmp,
                           GCM_PREFS_COLUMN_STATUS, date_tmp->str,
                           GCM_PREFS_COLUMN_TITLE, title_tmp,
@@ -1593,12 +1593,12 @@ gcm_prefs_device_changed_cb (CdDevice *device, CcColorPanel *prefs)
     return;
 
   /* get the other elements */
-  id = cd_device_get_id (device);
+  id = cd_device_get_object_path (device);
   do
     {
       gtk_tree_model_get (model, &iter,
-              GCM_PREFS_COLUMN_DEVICE_ID, &id_tmp,
-              -1);
+                          GCM_PREFS_COLUMN_DEVICE_PATH, &id_tmp,
+                          -1);
       if (g_strcmp0 (id_tmp, id) == 0)
         gcm_prefs_device_set_model_by_iter (prefs, device, &iter);
       g_free (id_tmp);
@@ -1644,12 +1644,12 @@ gcm_prefs_add_device (CcColorPanel *prefs, CdDevice *device)
                     G_CALLBACK (gcm_prefs_device_changed_cb), prefs);
 
   /* add to list */
-  id = cd_device_get_id (device);
+  id = cd_device_get_object_path (device);
   g_debug ("add %s to device list", id);
   gtk_tree_store_append (priv->list_store_devices, &parent, NULL);
   gtk_tree_store_set (priv->list_store_devices, &parent,
                       GCM_PREFS_COLUMN_DEVICE, device,
-                      GCM_PREFS_COLUMN_DEVICE_ID, id,
+                      GCM_PREFS_COLUMN_DEVICE_PATH, id,
                       GCM_PREFS_COLUMN_SORT, sort,
                       GCM_PREFS_COLUMN_TITLE, title,
                       GCM_PREFS_COLUMN_ICON, icon_name,
@@ -1665,23 +1665,13 @@ gcm_prefs_remove_device (CcColorPanel *prefs, CdDevice *cd_device)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
-  GError *error = NULL;
   const gchar *id;
   gchar *id_tmp;
   gboolean ret;
   CcColorPanelPrivate *priv = prefs->priv;
 
-  /* get device properties */
-  ret = cd_device_connect_sync (cd_device, priv->cancellable, &error);
-  if (!ret)
-    {
-      g_warning ("failed to connect to the device: %s", error->message);
-      g_error_free (error);
-      return;
-    }
-
   /* remove */
-  id = cd_device_get_id (cd_device);
+  id = cd_device_get_object_path (cd_device);
 
   /* get first element */
   model = GTK_TREE_MODEL (priv->list_store_devices);
@@ -1693,7 +1683,7 @@ gcm_prefs_remove_device (CcColorPanel *prefs, CdDevice *cd_device)
   do
     {
       gtk_tree_model_get (model, &iter,
-                          GCM_PREFS_COLUMN_DEVICE_ID, &id_tmp,
+                          GCM_PREFS_COLUMN_DEVICE_PATH, &id_tmp,
                           -1);
       if (g_strcmp0 (id_tmp, id) == 0)
         {
