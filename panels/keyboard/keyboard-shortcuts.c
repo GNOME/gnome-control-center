@@ -1753,10 +1753,10 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
 
   /* Setup the section treeview */
   treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder, "section_treeview"));
- gtk_tree_view_set_row_separator_func (GTK_TREE_VIEW (treeview),
-                                       sections_separator_func,
-                                       panel,
-                                       NULL);
+  gtk_tree_view_set_row_separator_func (GTK_TREE_VIEW (treeview),
+					sections_separator_func,
+					panel,
+					NULL);
 
   renderer = gtk_cell_renderer_text_new ();
   column = gtk_tree_view_column_new_with_attributes (_("Section"),
