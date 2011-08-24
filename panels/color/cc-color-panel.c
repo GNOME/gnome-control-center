@@ -904,6 +904,11 @@ gcm_prefs_profile_clicked (CcColorPanel *prefs, CdProfile *profile, CdDevice *de
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                "toolbutton_profile_view"));
   gtk_widget_set_sensitive (widget, TRUE);
+
+  /* hide device specific stuff */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "toolbutton_device_remove"));
+  gtk_widget_set_visible (widget, FALSE);
 }
 
 static void
@@ -940,7 +945,10 @@ gcm_prefs_devices_treeview_clicked_cb (GtkTreeSelection *selection,
   gtk_widget_set_visible (widget, FALSE);
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "toolbutton_device_calibrate"));
-  gtk_widget_set_visible (widget, profile == NULL);
+  gtk_widget_set_visible (widget, device != NULL);
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "toolbutton_profile_add"));
+  gtk_widget_set_visible (widget, device != NULL);
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "toolbutton_profile_view"));
   gtk_widget_set_visible (widget, profile != NULL);
@@ -1623,6 +1631,7 @@ gcm_prefs_add_device (CcColorPanel *prefs, CdDevice *device)
   GtkTreeIter parent;
   CcColorPanelPrivate *priv = prefs->priv;
 
+
   /* get device properties */
   ret = cd_device_connect_sync (device, priv->cancellable, &error);
   if (!ret)
@@ -1701,12 +1710,54 @@ gcm_prefs_remove_device (CcColorPanel *prefs, CdDevice *cd_device)
 }
 
 static void
+gcm_prefs_update_device_list_extra_entry (CcColorPanel *prefs)
+{
+  CcColorPanelPrivate *priv = prefs->priv;
+  gboolean ret;
+  gchar *id_tmp;
+  gchar *title = NULL;
+  GtkTreeIter iter;
+
+  /* select the first device */
+  ret = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->list_store_devices), &iter);
+  if (!ret)
+    {
+      /* add the 'No devices detected' entry */
+      title = g_strdup_printf ("<i>%s</i>", _("No devices supporting color management detected"));
+      gtk_tree_store_append (priv->list_store_devices, &iter, NULL);
+      gtk_tree_store_set (priv->list_store_devices, &iter,
+                          GCM_PREFS_COLUMN_RADIO_VISIBLE, FALSE,
+                          GCM_PREFS_COLUMN_TITLE, title,
+                          -1);
+      g_free (title);
+      return;
+    }
+
+  /* remove the 'No devices detected' entry */
+  do
+    {
+      gtk_tree_model_get (GTK_TREE_MODEL (priv->list_store_devices), &iter,
+                          GCM_PREFS_COLUMN_DEVICE_PATH, &id_tmp,
+                          -1);
+      if (id_tmp == NULL)
+        {
+          gtk_tree_store_remove (priv->list_store_devices, &iter);
+          break;
+        }
+      g_free (id_tmp);
+    } while (gtk_tree_model_iter_next (GTK_TREE_MODEL (priv->list_store_devices), &iter));
+}
+
+static void
 gcm_prefs_device_added_cb (CdClient *client,
                            CdDevice *device,
                            CcColorPanel *prefs)
 {
   /* add the device */
   gcm_prefs_add_device (prefs, device);
+
+  /* ensure we're not showing the 'No devices detected' entry */
+  gcm_prefs_update_device_list_extra_entry (prefs);
 }
 
 static void
@@ -1730,6 +1781,9 @@ gcm_prefs_device_removed_cb (CdClient *client,
 
   /* remove from the UI */
   gcm_prefs_remove_device (prefs, device);
+
+  /* ensure we showing the 'No devices detected' entry if required */
+  gcm_prefs_update_device_list_extra_entry (prefs);
 
   /* select the first device */
   ret = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->list_store_devices), &iter);
@@ -1774,6 +1828,9 @@ gcm_prefs_get_devices_cb (GObject *object,
       device = g_ptr_array_index (devices, i);
       gcm_prefs_add_device (prefs, device);
     }
+
+  /* ensure we show the 'No devices detected' entry if empty */
+  gcm_prefs_update_device_list_extra_entry (prefs);
 
   /* set the cursor on the first device */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
@@ -2005,6 +2062,7 @@ gcm_prefs_connect_cb (GObject *object,
 
   /* set calibrate button sensitivity */
   gcm_prefs_sensor_coldplug (prefs);
+
 
   /* get devices */
   cd_client_get_devices (priv->client,
