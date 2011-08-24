@@ -948,6 +948,11 @@ gcm_prefs_devices_treeview_clicked_cb (GtkTreeSelection *selection,
                                                "toolbutton_profile_remove"));
   gtk_widget_set_visible (widget, profile != NULL);
 
+  /* if no buttons then hide toolbar */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "toolbar_devices"));
+  gtk_widget_set_visible (widget, profile != NULL || device != NULL);
+
   if (device != NULL)
     g_object_unref (device);
   if (profile != NULL)
