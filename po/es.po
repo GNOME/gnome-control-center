@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-07-27 11:34+0000\n"
-"PO-Revision-Date: 2011-07-29 10:23+0200\n"
+"POT-Creation-Date: 2011-08-24 01:54+0000\n"
+"PO-Revision-Date: 2011-08-24 12:39+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -131,9 +131,84 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Sin fondo de escritorio"
 
-#: ../panels/common/gdm-languages.c:710
+#. Add some common languages first
+#: ../panels/common/cc-common-language.c:512
+msgid "English"
+msgstr "Inglés"
+
+#: ../panels/common/cc-common-language.c:513
+#| msgid "General"
+msgid "German"
+msgstr "Alemán"
+
+#: ../panels/common/cc-common-language.c:514
+#| msgid "Stretch"
+msgid "French"
+msgstr "Francés"
+
+#: ../panels/common/cc-common-language.c:515
+#| msgid "Span"
+msgid "Spanish"
+msgstr "Español"
+
+#: ../panels/common/cc-common-language.c:516
+#| msgid "Chipset"
+msgid "Chinese"
+msgstr "Chino"
+
+#. Add some common regions
+#: ../panels/common/cc-common-language.c:545
+msgid "United States"
+msgstr "Estados Unidos"
+
+#: ../panels/common/cc-common-language.c:546
+#| msgid "Gray"
+msgid "Germany"
+msgstr "Alemania"
+
+#: ../panels/common/cc-common-language.c:547
+#| msgid "Cancel"
+msgid "France"
+msgstr "Francia"
+
+#: ../panels/common/cc-common-language.c:548
+#| msgid "Span"
+msgid "Spain"
+msgstr "España"
+
+#: ../panels/common/cc-common-language.c:549
+#| msgid "Chat"
+msgid "China"
+msgstr "China"
+
+#: ../panels/common/cc-language-chooser.c:119
+msgid "Other..."
+msgstr "Otra…"
+
+#: ../panels/common/cc-language-chooser.c:290
+#| msgid "Select an account"
+msgid "Select a region"
+msgstr "Seleccionar una región"
+
+#: ../panels/common/gdm-languages.c:773
 msgid "Unspecified"
 msgstr "Sin especificar"
+
+#: ../panels/common/language-chooser.ui.h:1
+#| msgid "Select Image"
+msgid "Select a language"
+msgstr "Seleccionar un idioma"
+
+#: ../panels/common/language-chooser.ui.h:2
+#: ../panels/printers/new-printer-dialog.ui.h:4
+#: ../panels/user-accounts/um-user-panel.c:445
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#: ../panels/common/language-chooser.ui.h:3
+#: ../panels/universal-access/gconf-property-editor.c:1609
+msgid "_Select"
+msgstr "_Seleccionar"
 
 #: ../panels/datetime/datetime.ui.h:1
 msgid "24-_Hour Time"
@@ -1276,12 +1351,11 @@ msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Impresora;Cola;Imprimir;Papel;Tinta;Tóner;"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
-#: ../panels/printers/pp-new-printer-dialog.c:137
+#: ../panels/printers/pp-new-printer-dialog.c:142
 msgid "Printers"
 msgstr "Impresoras"
 
 #: ../panels/printers/new-printer-dialog.ui.h:1
-#| msgid "A_ddress"
 msgid "A_ddress:"
 msgstr "_Dirección:"
 
@@ -1293,21 +1367,15 @@ msgstr "Añadir una impresora nueva"
 msgid "_Add"
 msgstr "_Añadir"
 
-#: ../panels/printers/new-printer-dialog.ui.h:4
-#: ../panels/user-accounts/um-user-panel.c:445
-#: ../panels/user-accounts/data/language-chooser.ui.h:1
-msgid "_Cancel"
-msgstr "_Cancelar"
-
 #: ../panels/printers/new-printer-dialog.ui.h:5
 msgid "_Search by Address"
 msgstr "Bu_scar por dirección"
 
-#: ../panels/printers/pp-new-printer-dialog.c:528
+#: ../panels/printers/pp-new-printer-dialog.c:627
 msgid "Getting devices..."
 msgstr "Obteniendo dispositivos…"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1162
+#: ../panels/printers/pp-new-printer-dialog.c:1262
 msgid ""
 "FirewallD is not running. Network printer detection needs services mdns, "
 "ipp, ipp-client and samba-client enabled on firewall."
@@ -1317,42 +1385,42 @@ msgstr ""
 "el cortafuegos."
 
 #. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:1182
-#: ../panels/printers/pp-new-printer-dialog.c:1187
+#: ../panels/printers/pp-new-printer-dialog.c:1282
+#: ../panels/printers/pp-new-printer-dialog.c:1287
 msgid "Devices"
 msgstr "Dispositivos"
 
 #. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:1212
+#: ../panels/printers/pp-new-printer-dialog.c:1312
 msgctxt "printer type"
 msgid "Local"
 msgstr "Local"
 
 #. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:1214
+#: ../panels/printers/pp-new-printer-dialog.c:1314
 msgctxt "printer type"
 msgid "Network"
 msgstr "De red"
 
 #. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:1255
+#: ../panels/printers/pp-new-printer-dialog.c:1355
 msgid "Device types"
 msgstr "Tipos de dispositivos"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:1535
+#: ../panels/printers/pp-new-printer-dialog.c:1654
 msgid "Automatic configuration"
 msgstr "Configuración automática"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1634
+#: ../panels/printers/pp-new-printer-dialog.c:1750
 msgid "Opening firewall for mDNS connections"
 msgstr "Abrir el cortafuegos para conexiones mDNS"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1643
+#: ../panels/printers/pp-new-printer-dialog.c:1759
 msgid "Opening firewall for Samba connections"
 msgstr "Abrir el cortafuegos para conexiones Samba"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1652
+#: ../panels/printers/pp-new-printer-dialog.c:1768
 msgid "Opening firewall for IPP connections"
 msgstr "Abrir el cortafuegos para conexiones IPP"
 
@@ -1433,11 +1501,11 @@ msgstr "_Opciones"
 msgid "_Show"
 msgstr "Mo_strar"
 
-#: ../panels/region/gnome-region-panel-formats.c:99
+#: ../panels/region/gnome-region-panel-formats.c:140
 msgid "Imperial"
 msgstr "Imperial"
 
-#: ../panels/region/gnome-region-panel-formats.c:101
+#: ../panels/region/gnome-region-panel-formats.c:142
 msgid "Metric"
 msgstr "Métrico"
 
@@ -1462,6 +1530,7 @@ msgid "Allow different layouts for individual windows"
 msgstr "Permitir diferentes distribuciones para cada ventana"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
+#: ../panels/region/gnome-region-panel-system.c:286
 msgid "Copy Settings..."
 msgstr "Copiar configuración…"
 
@@ -1478,8 +1547,9 @@ msgid "Display language:"
 msgstr "Mostrar idioma:"
 
 #: ../panels/region/gnome-region-panel.ui.h:6
-msgid "Example"
-msgstr "Ejemplo"
+#| msgid "Example"
+msgid "Examples"
+msgstr "Ejemplos"
 
 #: ../panels/region/gnome-region-panel.ui.h:7
 msgid "Format:"
@@ -1527,10 +1597,6 @@ msgid "Region and Language"
 msgstr "Región e idioma"
 
 #: ../panels/region/gnome-region-panel.ui.h:18
-msgid "Region:"
-msgstr "Región:"
-
-#: ../panels/region/gnome-region-panel.ui.h:19
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1538,28 +1604,42 @@ msgstr ""
 "Reemplazar la configuración de distribución de teclado actual\n"
 "con la configuración predeterminada"
 
-#: ../panels/region/gnome-region-panel.ui.h:21
+#: ../panels/region/gnome-region-panel.ui.h:20
 msgid "Reset to De_faults"
 msgstr "Restablecer valores _predeterminados"
 
-#: ../panels/region/gnome-region-panel.ui.h:22
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "Select a display language (change will be applied next time you log in)"
 msgstr ""
 "Seleccionar un idioma para mostrar (el cambio se aplicará la próxima vez que "
 "inicie sesión)"
+
+#: ../panels/region/gnome-region-panel.ui.h:22
+#| msgid ""
+#| "Select a display language (change will be applied next time you log in)"
+msgid "Select a region (change will be applied the next time you log in)"
+msgstr ""
+"Seleccionar una región (el cambio se aplicará la próxima vez que inicie "
+"sesión)"
 
 #: ../panels/region/gnome-region-panel.ui.h:24
 msgid "System settings"
 msgstr "Configuración del sistema"
 
 #: ../panels/region/gnome-region-panel.ui.h:25
+#: ../panels/region/gnome-region-panel-system.c:280
+#| msgid ""
+#| "The login screen, system accounts and new user accounts use the system "
+#| "Region & Language settings. You may change the system settings to match "
+#| "yours"
 msgid ""
-"The login screen, system accounts and new user accounts use the system "
-"Region & Language settings. You may change the system settings to match yours"
+"The login screen, system accounts and new user accounts use the system-wide "
+"Region and Language settings. You may change the system settings to match "
+"yours."
 msgstr ""
 "La pantalla de inicio de sesión, las cuentas del sistema y las cuentas de "
 "los usuarios nuevos usan la configuración de «Región e idioma» del sistema. "
-"Puede cambiar la configuración del sistema para que coincida con la suya"
+"Puede cambiar la configuración del sistema para que coincida con la suya."
 
 #: ../panels/region/gnome-region-panel.ui.h:26
 msgid "Times"
@@ -1582,7 +1662,24 @@ msgstr "Su configuración"
 msgid "_Options..."
 msgstr "_Opciones…"
 
-#: ../panels/region/gnome-region-panel-xkblt.c:199
+#: ../panels/region/gnome-region-panel-system.c:275
+#| msgid ""
+#| "The login screen, system accounts and new user accounts use the system "
+#| "Region & Language settings. You may change the system settings to match "
+#| "yours"
+msgid ""
+"The login screen, system accounts and new user accounts use the system-wide "
+"Region and Language settings."
+msgstr ""
+"La pantalla de inicio de sesión, las cuentas del sistema y las cuentas de "
+"los usuarios nuevos usan la configuración de «Región e idioma» del sistema"
+
+#: ../panels/region/gnome-region-panel-system.c:283
+#| msgid "Copy Settings..."
+msgid "Copy Settings"
+msgstr "Copiar configuración"
+
+#: ../panels/region/gnome-region-panel-xkblt.c:210
 msgid "Layout"
 msgstr "Distribución"
 
@@ -1813,32 +1910,32 @@ msgstr "VPN «%s»"
 msgid "The system network services are not compatible with this version."
 msgstr "Los servicios de red del sistema no son compatibles con esta versión."
 
-#: ../panels/network/cc-network-panel.c:2873
+#: ../panels/network/cc-network-panel.c:2872
 msgid "Not connected to the internet."
 msgstr "No conectado a Internet."
 
-#: ../panels/network/cc-network-panel.c:2874
+#: ../panels/network/cc-network-panel.c:2873
 msgid "Create the hotspot anyway?"
 msgstr "¿Crear el «hotspot» de todas formas?"
 
-#: ../panels/network/cc-network-panel.c:2892
+#: ../panels/network/cc-network-panel.c:2891
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
 msgstr "¿Desconectarse de %s y crear un «hotspot» nuevo?"
 
-#: ../panels/network/cc-network-panel.c:2895
+#: ../panels/network/cc-network-panel.c:2894
 msgid "This is your only connection to the internet."
 msgstr "Esta es su única conexión a Internet."
 
-#: ../panels/network/cc-network-panel.c:2913
+#: ../panels/network/cc-network-panel.c:2912
 msgid "Create _Hotspot"
 msgstr "Crear «_hotspot»"
 
-#: ../panels/network/cc-network-panel.c:2973
+#: ../panels/network/cc-network-panel.c:2972
 msgid "Stop hotspot and disconnect any users?"
 msgstr "¿Detener el «hotspot» y desconectar a los usuarios?"
 
-#: ../panels/network/cc-network-panel.c:2976
+#: ../panels/network/cc-network-panel.c:2975
 msgid "_Stop Hotspot"
 msgstr "_Detener «hotspot»"
 
@@ -2279,23 +2376,23 @@ msgid "All files"
 msgstr "Todos los archivos"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:695
+#: ../panels/color/cc-color-panel.c:702
 #: ../panels/sound/gvc-mixer-dialog.c:1539
 msgid "Device"
 msgstr "Dispositivo"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:730
+#: ../panels/color/cc-color-panel.c:737
 msgid "Calibration"
 msgstr "Calibración"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:762
+#: ../panels/color/cc-color-panel.c:769
 msgid "Create a color profile for the selected device"
 msgstr "Crear un perfil de color para el dispositivo seleccionado"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:776 ../panels/color/cc-color-panel.c:800
+#: ../panels/color/cc-color-panel.c:783 ../panels/color/cc-color-panel.c:807
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -2304,40 +2401,40 @@ msgstr ""
 "correctamente conectado."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:809
+#: ../panels/color/cc-color-panel.c:816
 msgid "The measuring instrument does not support printer profiling."
 msgstr "El instrumento de medida no soporta perfilado de impresoras."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:820
+#: ../panels/color/cc-color-panel.c:827
 msgid "The device type is not currently supported."
 msgstr "El tipo de dispositivo actualmente no está soportado."
 
 #. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:892
+#: ../panels/color/cc-color-panel.c:899
 msgid "Cannot remove automatically added profile"
 msgstr "No se puede quitar el perfil añadido automáticamente"
 
 #. TRANSLATORS: this is when there is no profile for the device
-#: ../panels/color/cc-color-panel.c:1190
+#: ../panels/color/cc-color-panel.c:1211
 msgid "No profile"
 msgstr "Sin perfil"
 
-#: ../panels/color/cc-color-panel.c:1209
+#: ../panels/color/cc-color-panel.c:1230
 #, c-format
 msgid "%i year"
 msgid_plural "%i years"
 msgstr[0] "%i año"
 msgstr[1] "%i años"
 
-#: ../panels/color/cc-color-panel.c:1220
+#: ../panels/color/cc-color-panel.c:1241
 #, c-format
 msgid "%i month"
 msgid_plural "%i months"
 msgstr[0] "%i mes"
 msgstr[1] "%i meses"
 
-#: ../panels/color/cc-color-panel.c:1231
+#: ../panels/color/cc-color-panel.c:1252
 #, c-format
 msgid "%i week"
 msgid_plural "%i weeks"
@@ -2345,40 +2442,40 @@ msgstr[0] "%i semana"
 msgstr[1] "%i semanas"
 
 #. fallback
-#: ../panels/color/cc-color-panel.c:1238
+#: ../panels/color/cc-color-panel.c:1259
 #, c-format
 msgid "Less than 1 week"
 msgstr "Menos de una semana"
 
-#: ../panels/color/cc-color-panel.c:1298
+#: ../panels/color/cc-color-panel.c:1319
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "RGB predeterminado"
 
-#: ../panels/color/cc-color-panel.c:1303
+#: ../panels/color/cc-color-panel.c:1324
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "CMYK predeterminado"
 
-#: ../panels/color/cc-color-panel.c:1308
+#: ../panels/color/cc-color-panel.c:1329
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "Gris predeterminado"
 
-#: ../panels/color/cc-color-panel.c:1423 ../panels/color/cc-color-panel.c:1445
-#: ../panels/color/cc-color-panel.c:1456
+#: ../panels/color/cc-color-panel.c:1444 ../panels/color/cc-color-panel.c:1466
+#: ../panels/color/cc-color-panel.c:1477
 msgid "Uncalibrated"
 msgstr "Sin calibrar"
 
-#: ../panels/color/cc-color-panel.c:1426
+#: ../panels/color/cc-color-panel.c:1447
 msgid "This device is not color managed."
 msgstr "Este dispositivo no tiene gestión de color."
 
-#: ../panels/color/cc-color-panel.c:1448
+#: ../panels/color/cc-color-panel.c:1469
 msgid "This device is using manufacturing calibrated data."
 msgstr "Este dispositivo está usando los datos de calibración de fabricación."
 
-#: ../panels/color/cc-color-panel.c:1459
+#: ../panels/color/cc-color-panel.c:1480
 msgid ""
 "This device does not have a profile suitable for whole-screen color "
 "correction."
@@ -2386,37 +2483,37 @@ msgstr ""
 "Este dispositivo no tiene un perfil apto para corrección de color en toda la "
 "pantalla."
 
-#: ../panels/color/cc-color-panel.c:1486
+#: ../panels/color/cc-color-panel.c:1507
 msgid "This device has an old profile that may no longer be accurate."
 msgstr "Este dispositivo tiene un perfil antiguo que puede no ser preciso."
 
 #. TRANSLATORS: this is when the calibration profile age is not
 #. * specified as it has been autogenerated from the hardware
-#: ../panels/color/cc-color-panel.c:1513
+#: ../panels/color/cc-color-panel.c:1534
 msgid "Not specified"
 msgstr "Sin especificar"
 
-#: ../panels/color/cc-color-panel.c:1864
+#: ../panels/color/cc-color-panel.c:1885
 msgctxt "Device kind"
 msgid "Display"
 msgstr "Pantalla"
 
-#: ../panels/color/cc-color-panel.c:1866
+#: ../panels/color/cc-color-panel.c:1887
 msgctxt "Device kind"
 msgid "Scanner"
 msgstr "Escáner"
 
-#: ../panels/color/cc-color-panel.c:1868
+#: ../panels/color/cc-color-panel.c:1889
 msgctxt "Device kind"
 msgid "Printer"
 msgstr "Impresora"
 
-#: ../panels/color/cc-color-panel.c:1870
+#: ../panels/color/cc-color-panel.c:1891
 msgctxt "Device kind"
 msgid "Camera"
 msgstr "Cámara"
 
-#: ../panels/color/cc-color-panel.c:1872
+#: ../panels/color/cc-color-panel.c:1893
 msgctxt "Device kind"
 msgid "Webcam"
 msgstr "Cámara web"
@@ -2958,15 +3055,15 @@ msgstr ""
 msgid "Please select an image."
 msgstr "Seleccione una imagen."
 
-#: ../panels/universal-access/gconf-property-editor.c:1609
-#: ../panels/user-accounts/data/language-chooser.ui.h:2
-msgid "_Select"
-msgstr "_Seleccionar"
-
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
-msgid "Keyboard;Mouse;a11y;Accessibility;"
-msgstr "teclado;ratón;accesibilidad;a11y;"
+msgid ""
+"Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;"
+"AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys"
+msgstr ""
+"Teclado;Ratón;a11y;Accesibilidad;Contrastes;Ampliación;Lector de pantalla;"
+"texto;tipografía;tamaño;AccessX;Teclas persistentes;Teclas lentas;Rechazo de "
+"teclas;Teclas del ratón"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
@@ -3429,10 +3526,6 @@ msgstr "Registrando huellas digitales"
 #: ../panels/user-accounts/um-fingerprint-dialog.c:613
 msgid "Summary"
 msgstr "Resumen"
-
-#: ../panels/user-accounts/um-language-dialog.c:180
-msgid "Other..."
-msgstr "Otra…"
 
 #: ../panels/user-accounts/um-password-dialog.c:179
 msgid "More choices..."
@@ -3931,6 +4024,12 @@ msgstr "Centro de control"
 msgid "_All Settings"
 msgstr "_Todas las configuraciones"
 
+#~ msgid "Region:"
+#~ msgstr "Región:"
+
+#~ msgid "Keyboard;Mouse;a11y;Accessibility;"
+#~ msgstr "teclado;ratón;accesibilidad;a11y;"
+
 #~ msgid "%u byte"
 #~ msgid_plural "%u bytes"
 #~ msgstr[0] "%u byte"
@@ -4174,9 +4273,6 @@ msgstr "_Todas las configuraciones"
 #~ msgid "Could not connect to system bus: %s"
 #~ msgstr "No se pudo conectar con el bus del sistema: %s"
 
-#~ msgid "Chipset"
-#~ msgstr "Chipset"
-
 #~ msgid "HighContrast"
 #~ msgstr "AltoContraste"
 
@@ -4218,9 +4314,6 @@ msgstr "_Todas las configuraciones"
 
 #~ msgid "%i Gb/s"
 #~ msgstr "%i Gb/s"
-
-#~ msgid "Chat"
-#~ msgstr "Chat"
 
 #~ msgid "Graphics:"
 #~ msgstr "Gráficos:"
@@ -4616,9 +4709,6 @@ msgstr "_Todas las configuraciones"
 
 #~ msgid "Aluminium"
 #~ msgstr "Aluminio"
-
-#~ msgid "Gray"
-#~ msgstr "Gris"
 
 #~ msgid "Slide Show"
 #~ msgstr "Mostrar diapositivas"
@@ -5550,9 +5640,6 @@ msgstr "_Todas las configuraciones"
 #~ msgid "Remove your finger, and try swiping your finger again"
 #~ msgstr "Quite su dedo e intente pasar su dedo de nuevo"
 
-#~ msgid "Select Image"
-#~ msgstr "Seleccionar imagen"
-
 #~ msgid "No Image"
 #~ msgstr "Sin imagen"
 
@@ -5909,9 +5996,6 @@ msgstr "_Todas las configuraciones"
 
 #~ msgid "Save _As..."
 #~ msgstr "Guardar _como…"
-
-#~ msgid "Stretch"
-#~ msgstr "Estirar"
 
 #~ msgid "Sub_pixel (LCDs)"
 #~ msgstr "Sub_píxel (LCD)"
