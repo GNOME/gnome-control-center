@@ -1700,9 +1700,6 @@ gcm_prefs_device_added_cb (CdClient *client,
                            CdDevice *device,
                            CcColorPanel *prefs)
 {
-  /* remove the saved device if it's already there */
-  gcm_prefs_remove_device (prefs, device);
-
   /* add the device */
   gcm_prefs_add_device (prefs, device);
 }
