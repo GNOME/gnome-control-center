@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-29 10:12+0200\n"
-"PO-Revision-Date: 2011-07-29 10:14+0100\n"
+"POT-Creation-Date: 2011-08-24 08:58+0200\n"
+"PO-Revision-Date: 2011-08-24 09:01+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "Language: sv\n"
@@ -126,9 +126,74 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Ingen skrivbordsbakgrund"
 
-#: ../panels/common/gdm-languages.c:710
+#. Add some common languages first
+#: ../panels/common/cc-common-language.c:512
+msgid "English"
+msgstr "Engelska"
+
+#: ../panels/common/cc-common-language.c:513
+msgid "German"
+msgstr "Tyska"
+
+#: ../panels/common/cc-common-language.c:514
+msgid "French"
+msgstr "Franska"
+
+#: ../panels/common/cc-common-language.c:515
+msgid "Spanish"
+msgstr "Spanska"
+
+#: ../panels/common/cc-common-language.c:516
+msgid "Chinese"
+msgstr "Kinesiska"
+
+#. Add some common regions
+#: ../panels/common/cc-common-language.c:545
+msgid "United States"
+msgstr "Förenta Staterna"
+
+#: ../panels/common/cc-common-language.c:546
+msgid "Germany"
+msgstr "Tyskland"
+
+#: ../panels/common/cc-common-language.c:547
+msgid "France"
+msgstr "Frankrike"
+
+#: ../panels/common/cc-common-language.c:548
+msgid "Spain"
+msgstr "Spanien"
+
+#: ../panels/common/cc-common-language.c:549
+msgid "China"
+msgstr "Kina"
+
+#: ../panels/common/cc-language-chooser.c:119
+msgid "Other..."
+msgstr "Övrigt..."
+
+#: ../panels/common/cc-language-chooser.c:290
+msgid "Select a region"
+msgstr "Välj en region"
+
+#: ../panels/common/gdm-languages.c:773
 msgid "Unspecified"
 msgstr "Ej angivet"
+
+#: ../panels/common/language-chooser.ui.h:1
+msgid "Select a language"
+msgstr "Välj ett språk"
+
+#: ../panels/common/language-chooser.ui.h:2
+#: ../panels/printers/new-printer-dialog.ui.h:4
+#: ../panels/user-accounts/um-user-panel.c:445
+msgid "_Cancel"
+msgstr "_Avbryt"
+
+#: ../panels/common/language-chooser.ui.h:3
+#: ../panels/universal-access/gconf-property-editor.c:1609
+msgid "_Select"
+msgstr "_Välj"
 
 #: ../panels/datetime/datetime.ui.h:1
 msgid "24-_Hour Time"
@@ -1251,7 +1316,7 @@ msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Skrivare;Kö;Skriv ut;Papper;Bläck;Toner;"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
-#: ../panels/printers/pp-new-printer-dialog.c:137
+#: ../panels/printers/pp-new-printer-dialog.c:142
 msgid "Printers"
 msgstr "Skrivare"
 
@@ -1267,61 +1332,55 @@ msgstr "Lägg till en ny skrivare"
 msgid "_Add"
 msgstr "_Lägg till"
 
-#: ../panels/printers/new-printer-dialog.ui.h:4
-#: ../panels/user-accounts/um-user-panel.c:445
-#: ../panels/user-accounts/data/language-chooser.ui.h:1
-msgid "_Cancel"
-msgstr "_Avbryt"
-
 #: ../panels/printers/new-printer-dialog.ui.h:5
 msgid "_Search by Address"
 msgstr "Sö_k efter adress"
 
-#: ../panels/printers/pp-new-printer-dialog.c:528
+#: ../panels/printers/pp-new-printer-dialog.c:627
 msgid "Getting devices..."
 msgstr "Hämtar enheter..."
 
-#: ../panels/printers/pp-new-printer-dialog.c:1162
+#: ../panels/printers/pp-new-printer-dialog.c:1262
 msgid "FirewallD is not running. Network printer detection needs services mdns, ipp, ipp-client and samba-client enabled on firewall."
 msgstr "FirewallD är inte igång. Identifiering av nätverksskrivare kräver att tjänsterna mdns, ipp, ipp-client och samba-client är aktiverade i brandväggen."
 
 #. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:1182
-#: ../panels/printers/pp-new-printer-dialog.c:1187
+#: ../panels/printers/pp-new-printer-dialog.c:1282
+#: ../panels/printers/pp-new-printer-dialog.c:1287
 msgid "Devices"
 msgstr "Enheter"
 
 #. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:1212
+#: ../panels/printers/pp-new-printer-dialog.c:1312
 msgctxt "printer type"
 msgid "Local"
 msgstr "Lokal"
 
 #. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:1214
+#: ../panels/printers/pp-new-printer-dialog.c:1314
 msgctxt "printer type"
 msgid "Network"
 msgstr "Nätverk"
 
 #. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:1255
+#: ../panels/printers/pp-new-printer-dialog.c:1355
 msgid "Device types"
 msgstr "Enhetstyper"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:1535
+#: ../panels/printers/pp-new-printer-dialog.c:1654
 msgid "Automatic configuration"
 msgstr "Automatisk konfiguration"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1634
+#: ../panels/printers/pp-new-printer-dialog.c:1750
 msgid "Opening firewall for mDNS connections"
 msgstr "Öppnar brandväggen för mDNS-anslutningar"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1643
+#: ../panels/printers/pp-new-printer-dialog.c:1759
 msgid "Opening firewall for Samba connections"
 msgstr "Öppnar brandväggen för Samba-anslutningar"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1652
+#: ../panels/printers/pp-new-printer-dialog.c:1768
 msgid "Opening firewall for IPP connections"
 msgstr "Öppnar brandväggen för IPP-anslutningar"
 
@@ -1403,11 +1462,11 @@ msgstr "A_lternativ"
 msgid "_Show"
 msgstr "_Visa"
 
-#: ../panels/region/gnome-region-panel-formats.c:99
+#: ../panels/region/gnome-region-panel-formats.c:140
 msgid "Imperial"
 msgstr "Imperial"
 
-#: ../panels/region/gnome-region-panel-formats.c:101
+#: ../panels/region/gnome-region-panel-formats.c:142
 msgid "Metric"
 msgstr "Metrisk"
 
@@ -1432,6 +1491,7 @@ msgid "Allow different layouts for individual windows"
 msgstr "Tillåt olika layouter för individuella fönster"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
+#: ../panels/region/gnome-region-panel-system.c:286
 msgid "Copy Settings..."
 msgstr "Kopiera inställningar..."
 
@@ -1448,7 +1508,7 @@ msgid "Display language:"
 msgstr "Visningsspråk:"
 
 #: ../panels/region/gnome-region-panel.ui.h:6
-msgid "Example"
+msgid "Examples"
 msgstr "Exempel"
 
 #: ../panels/region/gnome-region-panel.ui.h:7
@@ -1497,10 +1557,6 @@ msgid "Region and Language"
 msgstr "Region och språk"
 
 #: ../panels/region/gnome-region-panel.ui.h:18
-msgid "Region:"
-msgstr "Region:"
-
-#: ../panels/region/gnome-region-panel.ui.h:19
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1508,21 +1564,26 @@ msgstr ""
 "Ersätt aktuella inställningar för tangentbordslayout\n"
 "med standardinställningar"
 
-#: ../panels/region/gnome-region-panel.ui.h:21
+#: ../panels/region/gnome-region-panel.ui.h:20
 msgid "Reset to De_faults"
 msgstr "Återställ till s_tandardvärden"
 
-#: ../panels/region/gnome-region-panel.ui.h:22
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "Select a display language (change will be applied next time you log in)"
 msgstr "Välj ett språk (aktiveras nästa gång du loggar in)"
+
+#: ../panels/region/gnome-region-panel.ui.h:22
+msgid "Select a region (change will be applied the next time you log in)"
+msgstr "Välj en region (aktiveras nästa gång du loggar in)"
 
 #: ../panels/region/gnome-region-panel.ui.h:24
 msgid "System settings"
 msgstr "Systeminställningar"
 
 #: ../panels/region/gnome-region-panel.ui.h:25
-msgid "The login screen, system accounts and new user accounts use the system Region & Language settings. You may change the system settings to match yours"
-msgstr "Inloggningsskärmen, systemkonton och nya användarkonton använder systeminställningarna i Region och Språk. Du kan ändra systeminställningarna för att passa dina"
+#: ../panels/region/gnome-region-panel-system.c:280
+msgid "The login screen, system accounts and new user accounts use the system-wide Region and Language settings. You may change the system settings to match yours."
+msgstr "Inloggningsskärmen, systemkonton och nya användarkonton använder systeminställningarna i Region och Språk. Du kan ändra systeminställningarna för att passa dina behov."
 
 #: ../panels/region/gnome-region-panel.ui.h:26
 msgid "Times"
@@ -1545,7 +1606,15 @@ msgstr "Dina inställningar"
 msgid "_Options..."
 msgstr "A_lternativ..."
 
-#: ../panels/region/gnome-region-panel-xkblt.c:199
+#: ../panels/region/gnome-region-panel-system.c:275
+msgid "The login screen, system accounts and new user accounts use the system-wide Region and Language settings."
+msgstr "Inloggningsskärmen, systemkonton och nya användarkonton använder systeminställningarna i Region och Språk."
+
+#: ../panels/region/gnome-region-panel-system.c:283
+msgid "Copy Settings"
+msgstr "Kopiera inställningar"
+
+#: ../panels/region/gnome-region-panel-xkblt.c:210
 msgid "Layout"
 msgstr "Layout"
 
@@ -1776,32 +1845,32 @@ msgstr "%s VPN"
 msgid "The system network services are not compatible with this version."
 msgstr "Systemets nätverkstjänster är inte kompatibla med denna version."
 
-#: ../panels/network/cc-network-panel.c:2873
+#: ../panels/network/cc-network-panel.c:2872
 msgid "Not connected to the internet."
 msgstr "Inte ansluten till Internet."
 
-#: ../panels/network/cc-network-panel.c:2874
+#: ../panels/network/cc-network-panel.c:2873
 msgid "Create the hotspot anyway?"
 msgstr "Skapa accesspunkten ändå?"
 
-#: ../panels/network/cc-network-panel.c:2892
+#: ../panels/network/cc-network-panel.c:2891
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
 msgstr "Koppla från %s och skapa en ny accesspunkt?"
 
-#: ../panels/network/cc-network-panel.c:2895
+#: ../panels/network/cc-network-panel.c:2894
 msgid "This is your only connection to the internet."
 msgstr "Detta är din enda anslutning till Internet."
 
-#: ../panels/network/cc-network-panel.c:2913
+#: ../panels/network/cc-network-panel.c:2912
 msgid "Create _Hotspot"
 msgstr "Skapa a_ccesspunkt"
 
-#: ../panels/network/cc-network-panel.c:2973
+#: ../panels/network/cc-network-panel.c:2972
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Stoppa accesspunkten och koppla från eventuella användare?"
 
-#: ../panels/network/cc-network-panel.c:2976
+#: ../panels/network/cc-network-panel.c:2975
 msgid "_Stop Hotspot"
 msgstr "_Stoppa accesspunkt"
 
@@ -2253,62 +2322,62 @@ msgid "All files"
 msgstr "Alla filer"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:695
+#: ../panels/color/cc-color-panel.c:702
 #: ../panels/sound/gvc-mixer-dialog.c:1539
 msgid "Device"
 msgstr "Enhet"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:730
+#: ../panels/color/cc-color-panel.c:737
 msgid "Calibration"
 msgstr "Kalibrering"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:762
+#: ../panels/color/cc-color-panel.c:769
 msgid "Create a color profile for the selected device"
 msgstr "Skapa en färgprofil för den valda enheten"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:776
-#: ../panels/color/cc-color-panel.c:800
+#: ../panels/color/cc-color-panel.c:783
+#: ../panels/color/cc-color-panel.c:807
 msgid "The measuring instrument is not detected. Please check it is turned on and correctly connected."
 msgstr "Mätinstrumentet har inte identifierats. Kontrollera att det är aktiverat och korrekt anslutet."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:809
+#: ../panels/color/cc-color-panel.c:816
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Mätinstrumentet saknar stöd för skrivarprofilering."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:820
+#: ../panels/color/cc-color-panel.c:827
 msgid "The device type is not currently supported."
 msgstr "Enhetstypen stöds för närvarande inte."
 
 #. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:892
+#: ../panels/color/cc-color-panel.c:899
 msgid "Cannot remove automatically added profile"
 msgstr "Kan inte ta bort automatiskt tillagd profil"
 
 #. TRANSLATORS: this is when there is no profile for the device
-#: ../panels/color/cc-color-panel.c:1190
+#: ../panels/color/cc-color-panel.c:1211
 msgid "No profile"
 msgstr "Ingen profil"
 
-#: ../panels/color/cc-color-panel.c:1209
+#: ../panels/color/cc-color-panel.c:1230
 #, c-format
 msgid "%i year"
 msgid_plural "%i years"
 msgstr[0] "%i år"
 msgstr[1] "%i år"
 
-#: ../panels/color/cc-color-panel.c:1220
+#: ../panels/color/cc-color-panel.c:1241
 #, c-format
 msgid "%i month"
 msgid_plural "%i months"
 msgstr[0] "%i månad"
 msgstr[1] "%i månader"
 
-#: ../panels/color/cc-color-panel.c:1231
+#: ../panels/color/cc-color-panel.c:1252
 #, c-format
 msgid "%i week"
 msgid_plural "%i weeks"
@@ -2316,75 +2385,75 @@ msgstr[0] "%i vecka"
 msgstr[1] "%i veckor"
 
 #. fallback
-#: ../panels/color/cc-color-panel.c:1238
+#: ../panels/color/cc-color-panel.c:1259
 #, c-format
 msgid "Less than 1 week"
 msgstr "Mindre än en vecka"
 
-#: ../panels/color/cc-color-panel.c:1298
+#: ../panels/color/cc-color-panel.c:1319
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "Standard RGB"
 
-#: ../panels/color/cc-color-panel.c:1303
+#: ../panels/color/cc-color-panel.c:1324
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "Standard CMYK"
 
-#: ../panels/color/cc-color-panel.c:1308
+#: ../panels/color/cc-color-panel.c:1329
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "Standard Grå"
 
-#: ../panels/color/cc-color-panel.c:1423
-#: ../panels/color/cc-color-panel.c:1445
-#: ../panels/color/cc-color-panel.c:1456
+#: ../panels/color/cc-color-panel.c:1444
+#: ../panels/color/cc-color-panel.c:1466
+#: ../panels/color/cc-color-panel.c:1477
 msgid "Uncalibrated"
 msgstr "Inte kalibrerad"
 
-#: ../panels/color/cc-color-panel.c:1426
+#: ../panels/color/cc-color-panel.c:1447
 msgid "This device is not color managed."
 msgstr "Denna enhet är inte färghanterad."
 
-#: ../panels/color/cc-color-panel.c:1448
+#: ../panels/color/cc-color-panel.c:1469
 msgid "This device is using manufacturing calibrated data."
 msgstr "Denna enhet använder fabriksinställd kalibreringsdata."
 
-#: ../panels/color/cc-color-panel.c:1459
+#: ../panels/color/cc-color-panel.c:1480
 msgid "This device does not have a profile suitable for whole-screen color correction."
 msgstr "Denna enhet har inte en profil lämplig för färgkorrigering i helskärmsläge."
 
-#: ../panels/color/cc-color-panel.c:1486
+#: ../panels/color/cc-color-panel.c:1507
 msgid "This device has an old profile that may no longer be accurate."
 msgstr "Denna enhet har en gammal profil som kanske inte längre är bra nog."
 
 #. TRANSLATORS: this is when the calibration profile age is not
 #. * specified as it has been autogenerated from the hardware
-#: ../panels/color/cc-color-panel.c:1513
+#: ../panels/color/cc-color-panel.c:1534
 msgid "Not specified"
 msgstr "Inte angivet"
 
-#: ../panels/color/cc-color-panel.c:1864
+#: ../panels/color/cc-color-panel.c:1885
 msgctxt "Device kind"
 msgid "Display"
 msgstr "Skärm"
 
-#: ../panels/color/cc-color-panel.c:1866
+#: ../panels/color/cc-color-panel.c:1887
 msgctxt "Device kind"
 msgid "Scanner"
 msgstr "Bildläsare"
 
-#: ../panels/color/cc-color-panel.c:1868
+#: ../panels/color/cc-color-panel.c:1889
 msgctxt "Device kind"
 msgid "Printer"
 msgstr "Skrivare"
 
-#: ../panels/color/cc-color-panel.c:1870
+#: ../panels/color/cc-color-panel.c:1891
 msgctxt "Device kind"
 msgid "Camera"
 msgstr "Kamera"
 
-#: ../panels/color/cc-color-panel.c:1872
+#: ../panels/color/cc-color-panel.c:1893
 msgctxt "Device kind"
 msgid "Webcam"
 msgstr "Webbkamera"
@@ -2908,15 +2977,10 @@ msgstr ""
 msgid "Please select an image."
 msgstr "Välj en bild."
 
-#: ../panels/universal-access/gconf-property-editor.c:1609
-#: ../panels/user-accounts/data/language-chooser.ui.h:2
-msgid "_Select"
-msgstr "_Välj"
-
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
-msgid "Keyboard;Mouse;a11y;Accessibility;"
-msgstr "Tangentbord;Mus;a11y;Hjälpmedel;"
+msgid "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys"
+msgstr "Tangentbord;Mus;a11y;Hjälpmedel;Kontrast;Zoom;Skärmläsare;text;typsnitt;storlek;AccessX;Klistriga tangenter;Tröga tangenter;Studsande tangenter;Mustangenter"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
@@ -3366,10 +3430,6 @@ msgstr "Läs av fingeravtryck"
 #: ../panels/user-accounts/um-fingerprint-dialog.c:613
 msgid "Summary"
 msgstr "Sammandrag"
-
-#: ../panels/user-accounts/um-language-dialog.c:180
-msgid "Other..."
-msgstr "Övrigt..."
 
 #: ../panels/user-accounts/um-password-dialog.c:179
 msgid "More choices..."
@@ -3851,291 +3911,211 @@ msgstr "Kontrollpanel"
 msgid "_All Settings"
 msgstr "_Alla inställningar"
 
+#~ msgid "Region:"
+#~ msgstr "Region:"
+#~ msgid "Keyboard;Mouse;a11y;Accessibility;"
+#~ msgstr "Tangentbord;Mus;a11y;Hjälpmedel;"
 #~ msgid "%u byte"
-
 #~ msgid_plural "%u bytes"
 #~ msgstr[0] "%u byte"
 #~ msgstr[1] "%u byte"
-
 #~ msgid "%.1f KB"
 #~ msgstr "%.1f KB"
-
 #~ msgid "%.1f MB"
 #~ msgstr "%.1f MB"
-
 #~ msgid "%.1f GB"
 #~ msgstr "%.1f GB"
-
 #~ msgid "%.1f TB"
 #~ msgstr "%.1f TB"
-
 #~ msgid "%.1f PB"
 #~ msgstr "%.1f PB"
-
 #~ msgid "%.1f EB"
 #~ msgstr "%.1f EB"
-
 #~ msgid "Current network location"
 #~ msgstr "Aktuell nätverksplats"
-
 #~ msgid "More backgrounds URL"
 #~ msgstr "URL för fler bakgrundsbilder"
-
 #~ msgid "More themes URL"
 #~ msgstr "URL för fler teman"
-
 #~ msgid ""
 #~ "Set this to your current location name. This is used to determine the "
 #~ "appropriate network proxy configuration."
 #~ msgstr ""
 #~ "Ställ in detta till namnet på din aktuella plats. Detta används för att "
 #~ "bestämma lämplig konfiguration för nätverksproxyserver."
-
 #~ msgid ""
 #~ "URL for where to get more desktop backgrounds. If set to an empty string "
 #~ "the link will not appear."
 #~ msgstr ""
 #~ "URL där fler skrivbordsbakgrunder kan hämtas. Om inställd till en tom "
 #~ "sträng så kommer länken inte att visas."
-
 #~ msgid ""
 #~ "URL for where to get more desktop themes. If set to an empty string the "
 #~ "link will not appear."
 #~ msgstr ""
 #~ "URL där fler skrivbordsteman kan hämtas. Om inställd till en tom sträng "
 #~ "så kommer länken inte att visas."
-
 #~ msgid "Locked"
 #~ msgstr "Låst"
-
 #~ msgid ""
 #~ "Dialog is unlocked.\n"
 #~ "Click to prevent further changes"
 #~ msgstr ""
 #~ "Dialogrutan är upplåst.\n"
 #~ "Klicka för att förhindra ändringar"
-
 #~ msgid ""
 #~ "Dialog is locked.\n"
 #~ "Click to make changes"
 #~ msgstr ""
 #~ "Dialogrutan är låst.\n"
 #~ "Klicka för att göra ändringar"
-
 #~ msgid ""
 #~ "System policy prevents changes.\n"
 #~ "Contact your system administrator"
 #~ msgstr ""
 #~ "Systemets policy förhindrar ändringar.\n"
 #~ "Kontakta din systemadministratör"
-
 #~ msgid "Photos"
 #~ msgstr "Foton"
-
 #~ msgid "Web"
 #~ msgstr "Webb"
-
 #~ msgid "Add"
 #~ msgstr "Lägg till"
-
 #~ msgid "Address"
 #~ msgstr "Adress"
-
 #~ msgid "---"
 #~ msgstr "---"
-
 #~ msgid "Options"
 #~ msgstr "Alternativ"
-
 #~ msgid "Printing..."
 #~ msgstr "Skriver ut..."
-
 #~ msgid "Use default layout in new windows"
 #~ msgstr "Använd standardlayout för nya fönster"
-
 #~ msgid "Use previous window's layout in new windows"
 #~ msgstr "Använd föregående fönsters layout i nya fönster"
-
 #~ msgid "_Acceleration:"
 #~ msgstr "_Acceleration:"
-
 #~ msgid "Beep when a modifer key is pressed"
 #~ msgstr "Pip när en modifierartangent trycks ned"
 #~ msgctxt "universal access, contrast"
-
 #~ msgid "<span size=\"x-large\">High/Inverse</span>"
 #~ msgstr "<span size=\"x-large\">Hög/Inverterad</span>"
 #~ msgctxt "universal access, contrast"
-
 #~ msgid "<span size=\"x-large\">High</span>"
 #~ msgstr "<span size=\"x-large\">Hög</span>"
 #~ msgctxt "universal access, contrast"
-
 #~ msgid "<span size=\"x-large\">Low</span>"
 #~ msgstr "<span size=\"x-large\">Låg</span>"
 #~ msgctxt "universal access, contrast"
-
 #~ msgid "<span size=\"x-large\">Normal</span>"
 #~ msgstr "<span size=\"x-large\">Normal</span>"
-
 #~ msgid "Password"
 #~ msgstr "Lösenord"
-
 #~ msgid "Clean print heads"
 #~ msgstr "Rengör skrivhuvud"
-
 #~ msgid "An error has occured during a maintenance command."
 #~ msgstr "Ett fel inträffade under ett underhållskommando."
-
 #~ msgid "DSL"
 #~ msgstr "DSL"
-
 #~ msgid "Mobile Broadband"
 #~ msgstr "Mobilt bredband"
-
 #~ msgid "16"
 #~ msgstr "16"
-
 #~ msgid "2010"
 #~ msgstr "2010"
-
 #~ msgid "22"
 #~ msgstr "22"
-
 #~ msgid "45"
 #~ msgstr "45"
-
 #~ msgid "AM"
 #~ msgstr "f.m."
-
 #~ msgid " "
 #~ msgstr " "
-
 #~ msgid "page 1"
 #~ msgstr "sida 1"
-
 #~ msgid "page 2"
 #~ msgstr "sida 2"
-
 #~ msgid "page 3"
 #~ msgstr "sida 3"
-
 #~ msgid "Info"
 #~ msgstr "Info"
-
 #~ msgid "Locate Pointer"
 #~ msgstr "Lokalisera muspekare"
-
 #~ msgid "Mouse Orientation"
 #~ msgstr "Musorientering"
-
 #~ msgid "Set the system proxy settings"
 #~ msgstr "Ställ in systemets proxyinställningar"
-
 #~ msgid "Virtual private network"
 #~ msgstr "Virtuellt privat nätverk"
-
 #~ msgid "The running NetworkManager version is not compatible (too new)."
 #~ msgstr ""
 #~ "Den körande versionen av Nätverkshanterare är inte kompatibel (för ny)."
-
 #~ msgid "The running NetworkManager version is not compatible (too old)."
 #~ msgstr ""
 #~ "Den körande versionen av Nätverkshanterare är inte kompatibel (för "
 #~ "gammal)."
-
 #~ msgid "IP Address:"
 #~ msgstr "IP-adress:"
-
 #~ msgid "Preparing connection"
 #~ msgstr "Förbereder anslutning"
-
 #~ msgid "Configuring connection"
 #~ msgstr "Konfigurerar anslutning"
-
 #~ msgid "Authenticating"
 #~ msgstr "Autentiserar"
-
 #~ msgid "Getting network address"
 #~ msgstr "Hämtar nätverksadress"
-
 #~ msgid "Checking network address"
 #~ msgstr "Kontrollerar nätverksadress"
-
 #~ msgid "Failed to connect"
 #~ msgstr "Misslyckades med att ansluta"
-
 #~ msgid "Preparing"
 #~ msgstr "Förbereder"
-
 #~ msgid "Active"
 #~ msgstr "Aktiv"
-
 #~ msgid "Failed"
 #~ msgstr "Misslyckades"
 #~ msgctxt "Account type"
-
 #~ msgid "Supervised"
 #~ msgstr "Övervakad"
-
 #~ msgid "Secure HTTP Proxy:"
 #~ msgstr "Proxyserver för säker HTTP:"
-
 #~ msgid "Could not connect to system bus: %s"
 #~ msgstr "Kunde inte ansluta till systembussen: %s"
-
 #~ msgid "More Info"
 #~ msgstr "Mer information"
-
 #~ msgid "Error unsetting accelerator in configuration database: %s"
 #~ msgstr "Fel vid borttagning av snabbtangent i konfigurationsdatabasen: %s"
 #~ msgctxt "printer state"
-
 #~ msgid "Idle"
 #~ msgstr "Overksam"
-
 #~ msgid "User"
 #~ msgstr "Användare"
-
 #~ msgid "%i Gb/s"
 #~ msgstr "%i Gb/s"
-
 #~ msgid "%i kb/s"
 #~ msgstr "%i kb/s"
-
 #~ msgid "Ctrl+Alt+-"
 #~ msgstr "Ctrl+Alt+-"
-
 #~ msgid "Ctrl+Alt+0"
 #~ msgstr "Ctrl+Alt+0"
-
 #~ msgid "Ctrl+Alt+4"
 #~ msgstr "Ctrl+Alt+4"
-
 #~ msgid "Ctrl+Alt+8"
 #~ msgstr "Ctrl+Alt+8"
-
 #~ msgid "Ctrl+Alt+="
 #~ msgstr "Ctrl+Alt+="
-
 #~ msgid "HighContrast"
 #~ msgstr "HögKontrast"
-
 #~ msgid "LowContrast"
 #~ msgstr "LågKontrast"
-
 #~ msgid "Off"
 #~ msgstr "Av"
-
 #~ msgid "On"
 #~ msgstr "På"
-
 #~ msgid "Shift+Ctrl+Alt+-"
 #~ msgstr "Shift+Ctrl+Alt+-"
-
 #~ msgid "Shift+Ctrl+Alt+="
 #~ msgstr "Shift+Ctrl+Alt+="
-
 #~ msgid "Use an alternative form of text input"
 #~ msgstr "Använd en alternativ form av textinmatning"
 
@@ -4155,257 +4135,175 @@ msgstr "_Alla inställningar"
 #, fuzzy
 #~ msgid "Error setting default mailer: %s"
 #~ msgstr "Fel vid tolkning av argument: %s\n"
-
 #~ msgid "Could not load the main interface"
 #~ msgstr "Kunde inte läsa in huvudgränssnittet"
-
 #~ msgid "Please make sure that the applet is properly installed"
 #~ msgstr "Se till att panelprogrammet är korrekt installerat"
-
 #~ msgid "Accessibility"
 #~ msgstr "Hjälpmedel"
-
 #~ msgid "All %s occurrences will be replaced with actual link"
 #~ msgstr "Alla förekomster av %s kommer att ersättas med den faktiska länken"
-
 #~ msgid "Co_mmand:"
 #~ msgstr "Ko_mmando:"
-
 #~ msgid "E_xecute flag:"
 #~ msgstr "E_xecute-flagga:"
-
 #~ msgid "Instant Messenger"
 #~ msgstr "Snabbmeddelande"
-
 #~ msgid "Internet"
 #~ msgstr "Internet"
-
 #~ msgid "Mail Reader"
 #~ msgstr "E-postläsare"
-
 #~ msgid "Mobility"
 #~ msgstr "Rörlighet"
-
 #~ msgid "Run at st_art"
 #~ msgstr "Kör vid uppst_art"
-
 #~ msgid "Run in t_erminal"
 #~ msgstr "Kör i en t_erminal"
-
 #~ msgid "Terminal Emulator"
 #~ msgstr "Terminalemulator"
-
 #~ msgid "Text Editor"
 #~ msgstr "Textredigerare"
-
 #~ msgid "Visual"
 #~ msgstr "Visuellt"
-
 #~ msgid "Web Browser"
 #~ msgstr "Webbläsare"
-
 #~ msgid "_Run at start"
 #~ msgstr "_Kör vid uppstart"
-
 #~ msgid "Banshee Music Player"
 #~ msgstr "Musikspelaren Banshee"
-
 #~ msgid "Debian Terminal Emulator"
 #~ msgstr "Debian-terminalemulator"
-
 #~ msgid "ETerm"
 #~ msgstr "ETerm"
-
 #~ msgid "GNOME Magnifier without Screen Reader"
 #~ msgstr "GNOME-förstorare utan skärmläsare"
-
 #~ msgid "GNOME OnScreen Keyboard"
 #~ msgstr "GNOME OnScreen Keyboard"
-
 #~ msgid "GNOME Terminal"
 #~ msgstr "GNOME-terminal"
-
 #~ msgid "Gnopernicus"
 #~ msgstr "Gnopernicus"
-
 #~ msgid "Gnopernicus with Magnifier"
 #~ msgstr "Gnopernicus med skärmförstorare"
-
 #~ msgid "KDE Magnifier without Screen Reader"
 #~ msgstr "KDE-förstorare utan skärmläsare"
-
 #~ msgid "Konsole"
 #~ msgstr "Konsole"
-
 #~ msgid "Linux Screen Reader"
 #~ msgstr "Linux Screen Reader"
-
 #~ msgid "Linux Screen Reader with Magnifier"
 #~ msgstr "Linux Screen Reader med skärmförstorare"
-
 #~ msgid "Listen"
 #~ msgstr "Lyssna"
-
 #~ msgid "Muine Music Player"
 #~ msgstr "Musikspelaren Muine"
-
 #~ msgid "NXterm"
 #~ msgstr "NXterm"
-
 #~ msgid "Orca"
 #~ msgstr "Orca"
-
 #~ msgid "Orca with Magnifier"
 #~ msgstr "Orca med skärmförstorare"
-
 #~ msgid "RXVT"
 #~ msgstr "RXVT"
-
 #~ msgid "Rhythmbox Music Player"
 #~ msgstr "Musikspelaren Rhythmbox"
-
 #~ msgid "Standard XTerminal"
 #~ msgstr "Standard X-terminal"
-
 #~ msgid "Terminator"
 #~ msgstr "Terminator"
-
 #~ msgid "Totem Movie Player"
 #~ msgstr "Filmspelaren Totem"
-
 #~ msgid "aterm"
 #~ msgstr "aterm"
-
 #~ msgid "Upside Down"
 #~ msgstr "Upp och ned"
-
 #~ msgid "Desktop"
 #~ msgstr "Skrivbord"
-
 #~ msgid "Keyboard _model:"
 #~ msgstr "Tangentbords_modell:"
-
 #~ msgid "Move _Down"
 #~ msgstr "Flytta _nedåt"
-
 #~ msgid "Move _Up"
 #~ msgstr "Flytta _uppåt"
-
 #~ msgid "_Pointer can be controlled using the keypad"
 #~ msgstr "Tillåt styrning av _muspekaren med tangentbordet"
-
 #~ msgid "_Type to test settings:"
 #~ msgstr "_Skriv för att testa inställningar:"
-
 #~ msgid "By _country"
 #~ msgstr "Efter _land"
-
 #~ msgid "By _language"
 #~ msgstr "Efter s_pråk"
-
 #~ msgid "Preview:"
 #~ msgstr "Förhandsgranska:"
-
 #~ msgid "_Country:"
 #~ msgstr "_Land:"
-
 #~ msgid "_Variants:"
 #~ msgstr "_Varianter:"
-
 #~ msgid "Choose a Keyboard Model"
 #~ msgstr "Välj en tangentbordsmodell"
-
 #~ msgid "_Models:"
 #~ msgstr "_Modeller:"
-
 #~ msgid "_Vendors:"
 #~ msgstr "_Tillverkare:"
-
 #~ msgid "Vendors"
 #~ msgstr "Tillverkare"
-
 #~ msgid "Choose type of click _beforehand"
 #~ msgstr "Välj typ av _förhandsklick"
-
 #~ msgid "Choose type of click with mo_use gestures"
 #~ msgstr "Välj typ av klick med m_usgester"
-
 #~ msgid "D_ouble click:"
 #~ msgstr "D_ubbelklick:"
-
 #~ msgid "D_rag click:"
 #~ msgstr "D_ragklick:"
-
 #~ msgid "Dwell Click"
 #~ msgstr "Uppehållsklick"
-
 #~ msgid "Seco_ndary click:"
 #~ msgstr "Seku_ndärklick:"
-
 #~ msgid "Show click type _window"
 #~ msgstr "Visa klicktyps_fönster"
-
 #~ msgid ""
 #~ "You can also use the Dwell Click panel applet to choose the click type."
 #~ msgstr ""
 #~ "Du kan även använda panelprogrammet för Uppehållsklick för att välja "
 #~ "klicktypen."
-
 #~ msgid "_Initiate click when stopping pointer movement"
 #~ msgstr "_Initiera klick när pekaren stannar"
-
 #~ msgid "_Single click:"
 #~ msgstr "_Enkelklick:"
-
 #~ msgid "_Trigger secondary click by holding down the primary button"
 #~ msgstr "_Aktivera sekundärklick genom att hålla ned primärknappen"
-
 #~ msgid "Show Universal Access status"
 #~ msgstr "Visa status för Allmän åtkomst"
-
 #~ msgid "Accounts"
 #~ msgstr "Konton"
-
 #~ msgid "Allow guests to log in to this computer"
 #~ msgstr "Tillåt att gäster loggar in på denna dator"
-
 #~ msgid "E-mail address:"
 #~ msgstr "E-postadress:"
-
 #~ msgid "Open"
 #~ msgstr "Öppna"
-
 #~ msgid "Restrictions:"
 #~ msgstr "Begränsningar:"
-
 #~ msgid "Show list of users"
 #~ msgstr "Visa användarlista"
-
 #~ msgid "Show password hints"
 #~ msgstr "Visa lösenordstips"
-
 #~ msgid "Foo;Bar;Baz;"
 #~ msgstr "Foo;Bar;Baz;"
 
 #, fuzzy
 #~ msgid "Chameleon"
 #~ msgstr "Galeon"
-
 #~ msgid "Slide Show"
 #~ msgstr "Bildspel"
-
 #~ msgid "Image"
 #~ msgstr "Bild"
-
 #~ msgid "%d %s by %d %s"
 #~ msgstr "%d %s gånger %d %s"
-
 #~ msgid "pixel"
-
 #~ msgid_plural "pixels"
 #~ msgstr[0] "bildpunkt"
 #~ msgstr[1] "bildpunkter"
-
 #~ msgid ""
 #~ "<b>%s</b>\n"
 #~ "%s, %s\n"
@@ -4414,7 +4312,6 @@ msgstr "_Alla inställningar"
 #~ "<b>%s</b>\n"
 #~ "%s, %s\n"
 #~ "Mapp: %s"
-
 #~ msgid ""
 #~ "<b>%s</b>\n"
 #~ "%s\n"
@@ -4423,75 +4320,54 @@ msgstr "_Alla inställningar"
 #~ "<b>%s</b>\n"
 #~ "%s\n"
 #~ "Mapp: %s"
-
 #~ msgid "Image missing"
 #~ msgstr "Bild saknas"
-
 #~ msgid "_Detect monitors"
 #~ msgstr "_Detektera skärmar"
 
 #, fuzzy
 #~ msgid "_Mirror Screens"
 #~ msgstr "Spegla skärmar"
-
 #~ msgid "Mirror Screens"
 #~ msgstr "Spegla skärmar"
-
 #~ msgid "Location already exists"
 #~ msgstr "Platsen finns redan"
-
 #~ msgid "Set your network proxy preferences"
 #~ msgstr "Ställ in dina inställningar för nätverksproxyserver"
 
 #, fuzzy
 #~ msgid "Web;Location;"
 #~ msgstr "Plats:"
-
 #~ msgid "<b>Di_rect internet connection</b>"
 #~ msgstr "<b>Di_rektanslutning till Internet</b>"
-
 #~ msgid "<b>_Manual proxy configuration</b>"
 #~ msgstr "<b>_Manuell konfiguration av proxyserver</b>"
-
 #~ msgid "<b>_Use authentication</b>"
 #~ msgstr "<b>_Använd autentisering</b>"
-
 #~ msgid "Create New Location"
 #~ msgstr "Skapa ny plats"
-
 #~ msgid "HTTP Proxy Details"
 #~ msgstr "Detaljer för HTTP-proxyserver"
-
 #~ msgid "Ignore Host List"
 #~ msgstr "Ignorerade värdar"
-
 #~ msgid "Ignored Hosts"
 #~ msgstr "Ignorerade värdar"
-
 #~ msgid "Network Proxy Preferences"
 #~ msgstr "Inställningar för nätverksproxyserver"
-
 #~ msgid "Port:"
 #~ msgstr "Port:"
-
 #~ msgid "Proxy Configuration"
 #~ msgstr "Konfiguration av proxyserver"
-
 #~ msgid "The location already exists."
 #~ msgstr "Platsen finns redan."
-
 #~ msgid "U_sername:"
 #~ msgstr "_Användarnamn:"
-
 #~ msgid "_Delete Location"
 #~ msgstr "_Ta bort plats"
-
 #~ msgid "_Details"
 #~ msgstr "_Detaljer"
-
 #~ msgid "_Location name:"
 #~ msgstr "_Platsens namn:"
-
 #~ msgid "_Use the same proxy for all protocols"
 #~ msgstr "_Använd samma proxyserver för alla protokoll"
 
@@ -4506,170 +4382,116 @@ msgstr "_Alla inställningar"
 #, fuzzy
 #~ msgid "Enable _window and button sounds"
 #~ msgstr "Fönster och knappar"
-
 #~ msgid "I need assistance with:"
 #~ msgstr "Jag behöver hjälp med:"
-
 #~ msgid "Error saving configuration: %s"
 #~ msgstr "Fel vid sparandet av konfiguration: %s"
-
 #~ msgid "Image Viewer"
 #~ msgstr "Bildvisare"
-
 #~ msgid "Multimedia"
 #~ msgstr "Multimedia"
-
 #~ msgid "Open link in new _tab"
 #~ msgstr "Öppna länk i ny _flik"
-
 #~ msgid "Open link in new _window"
 #~ msgstr "Öppna länk i _nytt fönster"
-
 #~ msgid "Open link with web browser _default"
 #~ msgstr "Öppna länk med standard_webbläsaren"
-
 #~ msgid "Video Player"
 #~ msgstr "Videouppspelare"
-
 #~ msgid "Balsa"
 #~ msgstr "Balsa"
-
 #~ msgid "Claws Mail"
 #~ msgstr "Claws Mail"
-
 #~ msgid "Debian Sensible Browser"
 #~ msgstr "Vettig Debian-webbläsare"
-
 #~ msgid "Encompass"
 #~ msgstr "Encompass"
-
 #~ msgid "Epiphany Web Browser"
 #~ msgstr "Webbläsaren Epiphany"
-
 #~ msgid "Evolution Mail Reader"
 #~ msgstr "E-postläsaren Evolution"
-
 #~ msgid "Firebird"
 #~ msgstr "Firebird"
-
 #~ msgid "Firefox"
 #~ msgstr "Firefox"
-
 #~ msgid "Iceape"
 #~ msgstr "Iceape"
-
 #~ msgid "Iceape Mail"
 #~ msgstr "E-postklienten Iceape"
-
 #~ msgid "Icedove"
 #~ msgstr "Icedove"
-
 #~ msgid "Iceweasel"
 #~ msgstr "Iceweasel"
-
 #~ msgid "Konqueror"
 #~ msgstr "Konqueror"
-
 #~ msgid "Midori"
 #~ msgstr "Midori"
-
 #~ msgid "Mozilla"
 #~ msgstr "Mozilla"
-
 #~ msgid "Mozilla 1.6"
 #~ msgstr "Mozilla 1.6"
-
 #~ msgid "Mozilla Mail"
 #~ msgstr "Mozilla Mail"
-
 #~ msgid "Mozilla Thunderbird"
 #~ msgstr "Mozilla Thunderbird"
-
 #~ msgid "Mutt"
 #~ msgstr "Mutt"
-
 #~ msgid "Netscape Communicator"
 #~ msgstr "Netscape Communicator"
-
 #~ msgid "Opera"
 #~ msgstr "Opera"
-
 #~ msgid "SeaMonkey"
 #~ msgstr "SeaMonkey"
-
 #~ msgid "SeaMonkey Mail"
 #~ msgstr "E-postklienten SeaMonkey"
-
 #~ msgid "Sylpheed"
 #~ msgstr "Sylpheed"
-
 #~ msgid "Sylpheed-Claws"
 #~ msgstr "Sylpheed-Claws"
-
 #~ msgid "Thunderbird"
 #~ msgstr "Thunderbird"
-
 #~ msgid "Include _panel"
 #~ msgstr "Inkludera _panel"
-
 #~ msgid "Make Default"
 #~ msgstr "Gör till standard"
-
 #~ msgid "Panel icon"
 #~ msgstr "Panelikon"
-
 #~ msgid "Re_fresh rate:"
 #~ msgstr "Uppdater_ingsfrekvens:"
-
 #~ msgid "Sa_me image in all monitors"
 #~ msgstr "Sa_mma bild på alla skärmar"
-
 #~ msgid "_Show monitors in panel"
 #~ msgstr "_Visa skärmar i panelen"
-
 #~ msgid "Monitors"
 #~ msgstr "Skärmar"
-
 #~ msgid "This program can only be used by the root user"
 #~ msgstr "Detta program kan endast användas av root-användaren"
 
 #, fuzzy
 #~ msgid "The source filename must be absolute"
 #~ msgstr "Temanamnet måste anges"
-
 #~ msgid "Could not get information for %s: %s\n"
 #~ msgstr "Kunde inte få information för %s: %s\n"
-
 #~ msgid "%s must be a regular file\n"
 #~ msgstr "%s måste vara en vanlig fil\n"
-
 #~ msgid "This program must only be run through pkexec(1)"
 #~ msgstr "Detta program får endast köras genom pkexec(1)"
-
 #~ msgid "PKEXEC_UID must be set to an integer value"
 #~ msgstr "PKEXEC_UID måste vara inställd till ett heltalsvärde"
-
 #~ msgid "%s must be owned by you\n"
 #~ msgstr "%s måste ägas av dig\n"
-
 #~ msgid "%s must not have any directory components\n"
 #~ msgstr "%s får inte ha några katalogkomponenter\n"
-
 #~ msgid "%s must be a directory\n"
 #~ msgstr "%s måste vara en katalog\n"
-
 #~ msgid "Could not open %s/%s: %s\n"
 #~ msgstr "Kunde inte öppna %s/%s: %s\n"
-
 #~ msgid "%d Hz"
 #~ msgstr "%d Hz"
-
 #~ msgid "Monitor: %s"
 #~ msgstr "Skärm: %s"
-
 #~ msgid "The monitor configuration has been saved"
 #~ msgstr "Skärmkonfigurationen har sparats"
-
 #~ msgid "This configuration will be used the next time someone logs in."
 #~ msgstr ""
 #~ "Denna konfiguration kommer att användas nästa gång som någon loggar in."
@@ -4677,165 +4499,118 @@ msgstr "_Alla inställningar"
 #, fuzzy
 #~ msgid "Could not set the default configuration for monitors"
 #~ msgstr "Kunde inte spara skärmkonfigurationen"
-
 #~ msgid "Keyboard Shortcuts"
 #~ msgstr "Tangentbordsgenvägar"
-
 #~ msgid "Assign shortcut keys to commands"
 #~ msgstr "Associera snabbtangenter med kommandon"
-
 #~ msgid "Beep when a _toggle key is pressed"
 #~ msgstr "Pip när en _växlingstangent trycks ned"
-
 #~ msgid "Beep when a key is pr_essed"
 #~ msgstr "Pip när en tangent tr_ycks ned"
-
 #~ msgid "Beep when a key is reje_cted"
 #~ msgstr "Pip när en tangent för_kastas"
-
 #~ msgid "Beep when key is _accepted"
 #~ msgstr "Pip när tangent a_ccepteras"
-
 #~ msgid "Beep when key is _rejected"
 #~ msgstr "Pip när tangent f_örkastas"
-
 #~ msgid "Flash _window titlebar"
 #~ msgstr "Blinka _fönstrets titellist"
-
 #~ msgid "Flash entire _screen"
 #~ msgstr "Blinka hela _skärmen"
-
 #~ msgid "Keyboard Accessibility Audio Feedback"
 #~ msgstr "Ljudåterkoppling för tangentbordshjälpmedel"
-
 #~ msgid "Show _visual feedback for the alert sound"
 #~ msgstr "Visa _visuell återkoppling för larmljudet"
-
 #~ msgid "Visual cues for sounds"
 #~ msgstr "Visuell representation av ljud"
-
 #~ msgid "All_ow postponing of breaks"
 #~ msgstr "Till_åt uppskjutning av pauser"
-
 #~ msgid "Audio _Feedback..."
 #~ msgstr "Ljud_återkoppling..."
-
 #~ msgid "Check if breaks are allowed to be postponed"
 #~ msgstr "Kryssa i om pauser ska tillåtas att avbrytas"
-
 #~ msgid "Disa_ble sticky keys if two keys are pressed together"
 #~ msgstr ""
 #~ "Inakti_vera klistriga tangenter om två tangenter trycks ned samtidigt"
-
 #~ msgid "Duration of the break when typing is disallowed"
 #~ msgstr "Längd på paus när skrivande inte tillåts"
-
 #~ msgid "Duration of work before forcing a break"
 #~ msgstr "Längd på arbete innan paus"
-
 #~ msgid "Keyboard Preferences"
 #~ msgstr "Tangentbordsinställningar"
-
 #~ msgid ""
 #~ "Lock screen after a certain duration to help prevent repetitive keyboard "
 #~ "use injuries"
 #~ msgstr ""
 #~ "Lås skärmen efter en viss tid för att förhindra förslitningsskador från "
 #~ "tangentbordsanvändning"
-
 #~ msgid "Typing Break"
 #~ msgstr "Paus i skrivande"
-
 #~ msgid "_Accessibility features can be toggled with keyboard shortcuts"
 #~ msgstr ""
 #~ "_Hjälpmedelsfunktioner kan växlas på och av med tangentbordsgenvägar"
-
 #~ msgid "_Break interval lasts:"
 #~ msgstr "_Pausen varar:"
-
 #~ msgid "_Ignore fast duplicate keypresses"
 #~ msgstr "I_gnorera snabba dublettangenttryckningar"
-
 #~ msgid "_Lock screen to enforce typing break"
 #~ msgstr "_Lås skärmen för att tvinga fram paus i skrivandet"
-
 #~ msgid "_Only accept long keypresses"
 #~ msgstr "_Acceptera endast långa tangenttryckningar"
-
 #~ msgid "_Simulate simultaneous keypresses"
 #~ msgstr "_Simulera samtidiga tangenttryckningar"
-
 #~ msgid "_Work interval lasts:"
 #~ msgstr "_Arbetsintervallet varar:"
-
 #~ msgid "Set your keyboard preferences"
 #~ msgstr "Ställ in dina tangentbordsinställningar"
-
 #~ msgid "Unable to load stock icon '%s'\n"
 #~ msgstr "Kunde inte läsa in standardikon \"%s\"\n"
-
 #~ msgid "gesture|Move left"
 #~ msgstr "Flytta åt vänster"
-
 #~ msgid "gesture|Move right"
 #~ msgstr "Flytta åt höger"
-
 #~ msgid "gesture|Move up"
 #~ msgstr "Flytta uppåt"
-
 #~ msgid "gesture|Move down"
 #~ msgstr "Flytta nedåt"
-
 #~ msgid "gesture|Disabled"
 #~ msgstr "Inaktiverad"
-
 #~ msgid ""
 #~ "Accessibility features can be turned on or off with keyboard shortcuts"
 #~ msgstr ""
 #~ "Hjälpmedelsfunktioner kan aktiveras eller inaktiveras med "
 #~ "tangentbordsgenvägar"
-
 #~ msgid "Close the control-center when a task is activated"
 #~ msgstr "Stäng kontrollpanelen när en funktion aktiveras"
-
 #~ msgid "Exit shell on add or remove action performed"
 #~ msgstr "Avsluta skalet när en lägg till- eller ta bort-åtgärd genomförs"
-
 #~ msgid "Exit shell on help action performed"
 #~ msgstr "Avsluta skalet när en hjälpåtgärd genomförs"
-
 #~ msgid "Exit shell on start action performed"
 #~ msgstr "Avsluta skalet när en startåtgärd genomförs"
-
 #~ msgid "Exit shell on upgrade or uninstall action performed"
 #~ msgstr ""
 #~ "Avsluta skalet när en uppgraderings- eller avinstallationsåtgärd genomförs"
-
 #~ msgid ""
 #~ "Indicates whether to close the shell when a help action is performed."
 #~ msgstr "Indikerar huruvida skalet ska stängas när en hjälpåtgärd genomförs."
-
 #~ msgid ""
 #~ "Indicates whether to close the shell when a start action is performed."
 #~ msgstr "Indikerar huruvida skalet ska stängas när en startåtgärd genomförs."
-
 #~ msgid ""
 #~ "Indicates whether to close the shell when an add or remove action is "
 #~ "performed."
 #~ msgstr ""
 #~ "Indikerar huruvida skalet ska stängas när en lägg till- eller ta bort-"
 #~ "åtgärd genomförs."
-
 #~ msgid ""
 #~ "Indicates whether to close the shell when an upgrade or uninstall action "
 #~ "is performed."
 #~ msgstr ""
 #~ "Indikerar huruvida skalet ska stängas när en uppgradering- eller "
 #~ "avinstallationsåtgärd genomförs."
-
 #~ msgid "Task names and associated .desktop files"
 #~ msgstr "Funktionsnamnen och associerade .desktop-filer"
-
 #~ msgid ""
 #~ "The task name to be displayed in the control-center followed by a \";\" "
 #~ "separator then the filename of an associated .desktop file to launch for "
@@ -4844,7 +4619,6 @@ msgstr "_Alla inställningar"
 #~ "Funktionsnamnet som visas i kontrollpanelen, följt av avgränsaren \";\" "
 #~ "och sedan filnamnet för en associerad .desktop-fil som ska startas för "
 #~ "den funktionen."
-
 #~ msgid ""
 #~ "[Change Theme;gtk-theme-selector.desktop,Set Preferred Applications;"
 #~ "default-applications.desktop,Add Printer;gnome-cups-manager.desktop]"
@@ -4852,54 +4626,40 @@ msgstr "_Alla inställningar"
 #~ "[Ändra tema;gtk-theme-selector.desktop,Ställ in föredragna program;"
 #~ "default-applications.desktop,Lägg till skrivare;gnome-cups-manager."
 #~ "desktop]"
-
 #~ msgid ""
 #~ "if true, the control-center will close when a \"Common Task\" is "
 #~ "activated."
 #~ msgstr ""
 #~ "Om sant kommer kontrollpanelen att stängas när en \"Allmän funktion\" "
 #~ "aktiveras."
-
 #~ msgid "The GNOME configuration tool"
 #~ msgstr "Konfigurationsverktyget för GNOME"
-
 #~ msgid "_Postpone Break"
 #~ msgstr "_Skjut upp pausen"
-
 #~ msgid "_Take a Break"
 #~ msgstr "_Ta en paus"
-
 #~ msgid "Take a break now (next in %dm)"
 #~ msgstr "Ta en paus nu (nästa om %dm)"
-
 #~ msgid "%d minute until the next break"
-
 #~ msgid_plural "%d minutes until the next break"
 #~ msgstr[0] "%d minut till nästa paus"
 #~ msgstr[1] "%d minuter till nästa paus"
-
 #~ msgid "Take a break now (next in less than one minute)"
 #~ msgstr "Ta en paus nu (nästa om mindre än en minut)"
-
 #~ msgid "Less than one minute until the next break"
 #~ msgstr "Mindre än en minut till nästa paus"
-
 #~ msgid ""
 #~ "Unable to bring up the typing break properties dialog with the following "
 #~ "error: %s"
 #~ msgstr ""
 #~ "Kan inte visa dialogfönstret för skrivandepausegenskaper med följande "
 #~ "fel: %s"
-
 #~ msgid "Written by Richard Hult <richard@imendio.com>"
 #~ msgstr "Skrivet av Richard Hult <richard@imendio.com>"
-
 #~ msgid "Eye candy added by Anders Carlsson"
 #~ msgstr "Ögongodis tillagt av Anders Carlsson"
-
 #~ msgid "A computer break reminder."
 #~ msgstr "En datorpauspåminnare."
-
 #~ msgid "translator-credits"
 #~ msgstr ""
 #~ "Daniel Nylander\n"
@@ -4908,7 +4668,6 @@ msgstr "_Alla inställningar"
 #~ "\n"
 #~ "Skicka synpunkter på översättningen till\n"
 #~ "tp-sv@listor.tp-sv.se"
-
 #~ msgid "Don't check whether the notification area exists"
 #~ msgstr "Kontrollera inte huruvida notifieringsytan finns eller inte"
 
@@ -5060,8 +4819,6 @@ msgstr "_Alla inställningar"
 #~ msgstr "Ditt finger var inte centrerat. Prova att dra ditt finger igen"
 #~ msgid "Remove your finger, and try swiping your finger again"
 #~ msgstr "Ta bort ditt finger och prova att dra ditt finger igen"
-#~ msgid "Select Image"
-#~ msgstr "Välj bild"
 #~ msgid "No Image"
 #~ msgstr "Ingen bild"
 #~ msgid "Images"
@@ -5984,69 +5741,49 @@ msgstr "_Alla inställningar"
 #, fuzzy
 #~ msgid "_Play system beep sound"
 #~ msgstr "_Spela upp systemljud"
-
 #~ msgid "Unexpected attribute '%s' for element '%s'"
 #~ msgstr "Oväntat attribut \"%s\" för elementet \"%s\""
-
 #~ msgid "Attribute '%s' of element '%s' not found"
 #~ msgstr "Attributet \"%s\" för elementet \"%s\" hittades inte"
-
 #~ msgid "Unexpected tag '%s', tag '%s' expected"
 #~ msgstr "Oväntad tagg \"%s\", taggen \"%s\" förväntades"
-
 #~ msgid "Unexpected tag '%s' inside '%s'"
 #~ msgstr "Oväntad tagg \"%s\" inne i \"%s\""
-
 #~ msgid "No valid bookmark file found in data dirs"
 #~ msgstr "Ingen giltig bokmärkesfil hittades i datakatalogerna"
-
 #~ msgid "No bookmark found for URI '%s'"
 #~ msgstr "Inget bokmärke hittades för uri:n \"%s\""
-
 #~ msgid "No MIME type defined in the bookmark for URI '%s'"
 #~ msgstr "Ingen mime-typ definierad i bokmärket för uri:n \"%s\""
-
 #~ msgid "No private flag has been defined in bookmark for URI '%s'"
 #~ msgstr "Ingen privat flagga har definierats i bokmärket för uri:n \"%s\""
-
 #~ msgid "No groups set in bookmark for URI '%s'"
 #~ msgstr "Inga grupper inställda i bokmärket för uri:n \"%s\""
-
 #~ msgid "No application with name '%s' registered a bookmark for '%s'"
 #~ msgstr ""
 #~ "Inget program med namnet \"%s\" har registrerat ett bokmärke för \"%s\""
-
 #~ msgid ""
 #~ "%s is the path where the theme files will be installed. This can not be "
 #~ "selected as the source location"
 #~ msgstr ""
 #~ "%s är sökvägen där temafilerna kommer att installeras. Detta kan inte "
 #~ "väljas som källplatsen"
-
 #~ msgid "E_nable software sound mixing"
 #~ msgstr "A_ktivera ljudmixning via programvara"
-
 #~ msgid "System Beep"
 #~ msgstr "Systemsignal"
-
 #~ msgid "_Enable system beep"
 #~ msgstr "_Aktivera systemsignal"
-
 #~ msgid "_Visual system beep"
 #~ msgstr "_Visuell systemsignal"
-
 #~ msgid "Siren"
 #~ msgstr "Siren"
-
 #~ msgid "Clink"
 #~ msgstr "Klink"
-
 #~ msgid "Beep"
 #~ msgstr "Pip"
-
 #~ msgid "Sound not set for this event."
 #~ msgstr "Inget ljud är inställt för den här händelsen."
-
 #~ msgid ""
 #~ "The sound file for this event does not exist.\n"
 #~ "You may want to install the gnome-audio package for a set of default "
@@ -6055,16 +5792,12 @@ msgstr "_Alla inställningar"
 #~ "Ljudfilen för denna händelse existerar inte.\n"
 #~ "Du kanske vill installera paketet gnome-audio för att få en uppsättning "
 #~ "med standardljud."
-
 #~ msgid "The file %s is not a valid wav file"
 #~ msgstr "Filen %s är inte en giltig wav-fil"
-
 #~ msgid "Select sound file..."
 #~ msgstr "Välj ljudfil..."
-
 #~ msgid "Localization Preferences"
 #~ msgstr "Inställningar för lokalanpassning"
-
 #~ msgid ""
 #~ "Centered\n"
 #~ "Fill screen\n"
@@ -6077,20 +5810,15 @@ msgstr "_Alla inställningar"
 #~ "Skalad\n"
 #~ "Zoomad\n"
 #~ "Sida-vid-sida"
-
 #~ msgid "Just apply settings and quit"
 #~ msgstr "Verkställ ändringarna och avsluta"
-
 #~ msgid "Screen Resolution Preferences"
 #~ msgstr "Inställningar för skärmupplösning"
-
 #~ msgid "_Make default for this computer (%s) only"
 #~ msgstr "_Gör till standard endast för denna dator (%s)"
-
 #~ msgid ""
 #~ "Testing the new settings. If you don't respond in %d second the previous "
 #~ "settings will be restored."
-
 #~ msgid_plural ""
 #~ "Testing the new settings. If you don't respond in %d seconds the previous "
 #~ "settings will be restored."
@@ -6100,292 +5828,207 @@ msgstr "_Alla inställningar"
 #~ msgstr[1] ""
 #~ "Testar de nya inställningarna. Om du inte svarar inom %d sekunder kommer "
 #~ "de föregående inställningarna att återställas."
-
 #~ msgid "Keep Resolution"
 #~ msgstr "Behåll upplösning"
-
 #~ msgid "Use _Previous Resolution"
 #~ msgstr "Använd _föregående upplösning"
-
 #~ msgid "_Keep Resolution"
 #~ msgstr "_Behåll upplösning"
-
 #~ msgid ""
 #~ "The version of the XRandR extension is incompatible with this program. "
 #~ "Runtime changes to the display size are not available."
 #~ msgstr ""
 #~ "Versionen av XRandR-tillägget är inkompatibelt med detta program. "
 #~ "Ändringar av displaystorleken under körning är inte möjligt."
-
 #~ msgid "Error setting new accelerator in configuration database: %s\n"
 #~ msgstr ""
 #~ "Fel vid inställning av ny snabbtangent i konfigurationsdatabasen: %s\n"
-
 #~ msgid "Keyboard Accessibility Notifications"
 #~ msgstr "Notifieringar för tangentbordstillgänglighet"
-
 #~ msgid "_Layouts:"
 #~ msgstr "_Layouter:"
-
 #~ msgid "Advanced Configuration"
 #~ msgstr "Avancerad konfiguration"
-
 #~ msgid "Sets the default application font"
 #~ msgstr "Ställer in standardprogramtypsnittet"
-
 #~ msgid "<span weight=\"bold\" size=\"larger\">Apply new font?</span>"
 #~ msgstr "<span weight=\"bold\" size=\"larger\">Använda nytt typsnitt?</span>"
-
 #~ msgid "Do _not apply font"
 #~ msgstr "Använd i_nte typsnitt"
-
 #~ msgid ""
 #~ "The theme you have selected suggests a new font. A preview of the font is "
 #~ "shown below."
 #~ msgstr ""
 #~ "Temat du valt föreslår ett nytt typsnitt. En förhandsvisning av "
 #~ "typsnittet visas nedan."
-
 #~ msgid "_Apply font"
 #~ msgstr "_Använd typsnitt"
-
 #~ msgid "Themes"
 #~ msgstr "Teman"
-
 #~ msgid "Description"
 #~ msgstr "Beskrivning"
-
 #~ msgid "Control theme"
 #~ msgstr "Kontrolltema"
-
 #~ msgid "Window border theme"
 #~ msgstr "Fönsterramstema"
-
 #~ msgid "If set to true, then installed themes will be thumbnailed."
 #~ msgstr "Om detta är sant kommer installerade teman att få miniatyrbilder."
-
 #~ msgid "If set to true, then themes will be thumbnailed."
 #~ msgstr "Om detta är sant kommer teman att få miniatyrbilder."
-
 #~ msgid ""
 #~ "Set this key to the command used to create thumbnails for installed "
 #~ "themes."
 #~ msgstr ""
 #~ "Ställ in denna nyckel till kommandot som ska användas för att skapa "
 #~ "miniatyrbilder för installerade teman."
-
 #~ msgid "Set this key to the command used to create thumbnails for themes."
 #~ msgstr ""
 #~ "Ställ in denna nyckel till kommandot som ska användas för att skapa "
 #~ "miniatyrbilder för teman."
-
 #~ msgid "Thumbnail command for installed themes"
 #~ msgstr "Miniatyrbildskommando för installerade teman"
-
 #~ msgid "Thumbnail command for themes"
 #~ msgstr "Miniatyrbildskommando för teman"
-
 #~ msgid "Whether to thumbnail installed themes"
 #~ msgstr "Huruvida det ska skapas miniatyrbilder för installerade teman"
-
 #~ msgid "Whether to thumbnail themes"
 #~ msgstr "Huruvida det ska skapas miniatyrbilder för teman"
-
 #~ msgid "ABCDEFG"
 #~ msgstr "ABCDEFGÅÄÖ"
-
 #~ msgid "[FILE]"
 #~ msgstr "[FIL]"
-
 #~ msgid "Apply theme"
 #~ msgstr "Använd tema"
-
 #~ msgid "Sets the default theme"
 #~ msgstr "Ställer in standardtemat"
-
 #~ msgid "Go _to Fonts Folder"
 #~ msgstr "Gå _till typsnittsmappen"
-
 #~ msgid "Autostart the preferred AT"
 #~ msgstr "Starta automatiskt den föredragna hjälptekniken"
-
 #~ msgid "    "
 #~ msgstr "    "
-
 #~ msgid "      "
 #~ msgstr "      "
-
 #~ msgid "Set your language and location preferences"
 #~ msgstr "Inställningar för ditt språk och plats"
-
 #~ msgid ""
 #~ "If true, the mime handlers for text/plain and text/* will be kept in sync"
 #~ msgstr ""
 #~ "Om sant kommer mime-hanterarna för text/plain och text/* att hållas "
 #~ "synkroniserade"
-
 #~ msgid "Sync text/plain and text/* handlers"
 #~ msgstr "Synkronisera text/plain- och /text/*-hanterare"
-
 #~ msgid "E-mail's shortcut."
 #~ msgstr "Genvägen för e-post."
-
 #~ msgid "Home folder's shortcut."
 #~ msgstr "Genvägen till hemmappen."
-
 #~ msgid "Launch calculator's shortcut"
 #~ msgstr "Genvägen för starta miniräknare"
-
 #~ msgid "Launch help browser's shortcut."
 #~ msgstr "Genvägen för starta hjälpläsare."
-
 #~ msgid "Launch web browser's shortcut."
 #~ msgstr "Genvägen för starta webbläsare."
-
 #~ msgid "Log out's shortcut."
 #~ msgstr "Genvägen för logga ut."
-
 #~ msgid "Media player key's shortcut."
 #~ msgstr "Genvägen för mediaspelarens tangent."
-
 #~ msgid "Next track key's shortcut."
 #~ msgstr "Genvägen för tangenten nästa spår."
-
 #~ msgid "Pause key's shortcut."
 #~ msgstr "Genvägen för tangenten gör paus."
-
 #~ msgid "Play (or play/pause) key's shortcut."
 #~ msgstr "Genvägen för tangenten spela (eller spela/gör paus)."
-
 #~ msgid "Previous track key's shortcut."
 #~ msgstr "Genvägen för tangenten föregående spår."
-
 #~ msgid "Search's shortcut."
 #~ msgstr "Genvägen för sök."
-
 #~ msgid "Sleep"
 #~ msgstr "Sov"
-
 #~ msgid "Sleep's shortcut."
 #~ msgstr "Genvägen för sov."
-
 #~ msgid "Stop playback key's shortcut."
 #~ msgstr "Genvägen för tangenten stoppa uppspelning."
-
 #~ msgid "Volume down's shortcut."
 #~ msgstr "Genvägen för volym ned."
-
 #~ msgid "Volume mute's shortcut."
 #~ msgstr "Genvägen för att tysta volymen."
-
 #~ msgid "Volume step"
 #~ msgstr "Volymsteg"
-
 #~ msgid "Volume step as percentage of volume."
 #~ msgstr "Volymsteg som procentandel av volymen."
-
 #~ msgid "Volume up's shortcut."
 #~ msgstr "Genvägen för volym upp."
-
 #~ msgid "Display a dialog when there are errors running the screensaver"
 #~ msgstr ""
 #~ "Visa ett dialogfönster när det uppstår fel vid körandet av skärmsläckaren"
-
 #~ msgid "Run screensaver at login"
 #~ msgstr "Kör skärmsläckaren vid inloggning"
-
 #~ msgid "Show Startup Errors"
 #~ msgstr "Visa uppstartsfel"
-
 #~ msgid "Start screensaver"
 #~ msgstr "Starta skärmsläckaren"
-
 #~ msgid "There was an error launching the mouse preferences dialog: %s"
 #~ msgstr "Ett fel inträffade vid visning av musinställningsdialogen: %s"
-
 #~ msgid "Unable to import AccessX settings from file '%s'"
 #~ msgstr "Kan inte importera AccessX-inställningar från filen \"%s\""
-
 #~ msgid "Import Feature Settings File"
 #~ msgstr "Importera funktionsinställningsfil"
-
 #~ msgid "Set your keyboard accessibility preferences"
 #~ msgstr "Ställ in dina inställningar för tangentbordstillgänglighet"
-
 #~ msgid ""
 #~ "This system does not seem to have the XKB extension.  The keyboard "
 #~ "accessibility features will not operate without it."
 #~ msgstr ""
 #~ "Detta system verkar inte ha tillägget XKB. Funktionerna för "
 #~ "tangentbordstillgänglighet fungerar inte utan det."
-
 #~ msgid "<b>Enable Bo_unce Keys</b>"
 #~ msgstr "<b>Aktivera st_udsande tangenter</b>"
-
 #~ msgid "<b>Enable Slo_w Keys</b>"
 #~ msgstr "<b>Aktivera l_ångsamma tangenter</b>"
-
 #~ msgid "<b>Enable _Mouse Keys</b>"
 #~ msgstr "<b>Aktivera _mustangenter</b>"
-
 #~ msgid "<b>Enable _Repeat Keys</b>"
 #~ msgstr "<b>Aktivera _repeteringstangenter</b>"
-
 #~ msgid "<b>Enable _Sticky Keys</b>"
 #~ msgstr "<b>Aktivera _klistriga tangenter</b>"
-
 #~ msgid "<b>Features</b>"
 #~ msgstr "<b>Funktioner</b>"
-
 #~ msgid "<b>Toggle Keys</b>"
 #~ msgstr "<b>Växlingsknappar</b>"
-
 #~ msgid "Basic"
 #~ msgstr "Grundläggande"
-
 #~ msgid "Beep if key is re_jected"
 #~ msgstr "Pip om tangenten för_kastas"
-
 #~ msgid "Beep when _features turned on or off from keyboard"
 #~ msgstr "Pip då _funktioner slogs på eller av från tangentbordet"
-
 #~ msgid "Beep when an LED is turned on and two beeps when one is turned off."
 #~ msgstr "Pip när en lysdiod sätts på och pip två gånger när en stängs av."
-
 #~ msgid "Del_ay:"
 #~ msgstr "_Fördröjning:"
-
 #~ msgid "Delay between keypress and pointer mo_vement:"
 #~ msgstr "Fördröjning mellan tangenttryckning och pekarfl_ytt:"
-
 #~ msgid "E_nable Toggle Keys"
 #~ msgstr "Aktivera _växlingsknappar"
-
 #~ msgid "Filters"
 #~ msgstr "Filter"
-
 #~ msgid "I_gnore duplicate keypresses within:"
 #~ msgstr "I_gnorera dublettangenttryckningar inom:"
-
 #~ msgid ""
 #~ "Ignore all subsequent presses of the SAME key if they happen within a "
 #~ "user selectable period of time."
 #~ msgstr ""
 #~ "Ignorera alla efterföljande nedtryckningar av SAMMA tangent om de sker "
 #~ "inom en användardefinierbar tidsperiod."
-
 #~ msgid "Keyboard Accessibility Preferences (AccessX)"
 #~ msgstr "Inställningar för tangentbordstillgänglighet (AccessX)"
-
 #~ msgid "Ma_ximum pointer speed:"
 #~ msgstr "Ma_ximal pekarhastighet:"
-
 #~ msgid "Mouse _Preferences..."
 #~ msgstr "Mus_inställningar..."
-
 #~ msgid ""
 #~ "Only accept keys after they have been pressed and held for a user "
 #~ "adjustable amount of time."
 #~ msgstr ""
 #~ "Godtag endast tangenter då de har tryckts ned och hållits nedtryckta "
 #~ "under en användardefinierad tid."
+
