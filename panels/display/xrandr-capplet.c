@@ -41,6 +41,8 @@
 
 #define TOP_BAR_HEIGHT 10
 
+#define UI_FILE UIDIR "/display-capplet.ui"
+
 #define CLOCK_SCHEMA "org.gnome.desktop.interface"
 #define CLOCK_FORMAT_KEY "clock-format"
 
@@ -2462,10 +2464,6 @@ destroy_app (App *app)
 GtkWidget*
 run_application (void)
 {
-#ifndef UIDIR
-#define UIDIR "."
-#endif
-#define UI_FILE UIDIR "/display-capplet.ui"
   GtkBuilder *builder;
   GtkWidget *align;
   GError *error;
