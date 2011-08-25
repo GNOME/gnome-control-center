@@ -1774,7 +1774,7 @@ gvc_mixer_dialog_constructor (GType                  type,
                             FALSE, FALSE, 0);
         self->priv->output_bar = create_bar (self, TRUE);
         gvc_channel_bar_set_name (GVC_CHANNEL_BAR (self->priv->output_bar),
-                                  _("_Output volume: "));
+                                  _("_Output volume:"));
         gtk_widget_set_sensitive (self->priv->output_bar, FALSE);
         gtk_box_pack_start (GTK_BOX (self->priv->output_stream_box),
                             self->priv->output_bar, TRUE, TRUE, 12);
@@ -1795,7 +1795,7 @@ gvc_mixer_dialog_constructor (GType                  type,
 
         self->priv->effects_bar = create_bar (self, TRUE);
         gvc_channel_bar_set_name (GVC_CHANNEL_BAR (self->priv->effects_bar),
-                                  _("_Alert volume: "));
+                                  _("_Alert volume:"));
         gtk_widget_set_sensitive (self->priv->effects_bar, FALSE);
         gtk_box_pack_start (GTK_BOX (self->priv->sound_effects_box),
                             self->priv->effects_bar, FALSE, FALSE, 0);
@@ -1859,7 +1859,7 @@ gvc_mixer_dialog_constructor (GType                  type,
 
         self->priv->input_bar = create_bar (self, TRUE);
         gvc_channel_bar_set_name (GVC_CHANNEL_BAR (self->priv->input_bar),
-                                  _("_Input volume: "));
+                                  _("_Input volume:"));
         gvc_channel_bar_set_low_icon_name (GVC_CHANNEL_BAR (self->priv->input_bar),
                                            "audio-input-microphone-low-symbolic");
         gvc_channel_bar_set_high_icon_name (GVC_CHANNEL_BAR (self->priv->input_bar),
