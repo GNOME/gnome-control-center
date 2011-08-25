@@ -860,6 +860,10 @@ add_unlock_tooltip (GtkWidget *button)
         names[1] = "changes-prevent";
         names[2] = NULL;
         icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
+        /* Translator comments:
+         * We split the line in 2 here to "make it look good", as there's
+         * no good way to do this in GTK+ for tooltips. See:
+         * https://bugzilla.gnome.org/show_bug.cgi?id=657168 */
         setup_tooltip_with_embedded_icon (button,
                                           _("To make changes,\nclick the * icon first"),
                                           "*",
