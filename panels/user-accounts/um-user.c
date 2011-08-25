@@ -994,6 +994,15 @@ um_user_set_password (UmUser      *user,
                 g_free (crypted);
         }
         else if (password_mode == 3 || password_mode == 4) {
+                /* FIXME: this is a slightly odd side-effect:
+                 * you disable the account, and autologin flips
+                 * we should remove that once gdm knows to
+                 * ignore autologin for disabled accounts
+                 */
+                if (password_mode == 3 &&
+                    um_user_get_automatic_login (user)) {
+                        um_user_set_automatic_login (user, FALSE);
+                }
                 if (!dbus_g_proxy_call (user->proxy,
                                         "SetLocked",
                                         &error,
