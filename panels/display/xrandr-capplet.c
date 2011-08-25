@@ -1954,7 +1954,6 @@ paint_output (App *app, cairo_t *cr, int i)
       cairo_fill (cr);
 
       /* clock */
-      /* FIXME: set 12/24 hour */
       value = g_settings_get_enum (app->clock_settings, CLOCK_FORMAT_KEY);
       use_24 = value == G_DESKTOP_CLOCK_FORMAT_24H;
       if (use_24)
