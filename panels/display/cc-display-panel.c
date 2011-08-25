@@ -107,6 +107,9 @@ static void get_geometry (GnomeRROutputInfo *output, int *w, int *h);
 static void apply_configuration_returned_cb (DBusGProxy *proxy, DBusGProxyCall *call_id, void *data);
 static gboolean get_clone_size (GnomeRRScreen *screen, int *width, int *height);
 static gboolean output_info_supports_mode (CcDisplayPanel *self, GnomeRROutputInfo *info, int width, int height);
+static GObject *cc_display_panel_constructor (GType                  gtype,
+					      guint                  n_properties,
+					      GObjectConstructParam *properties);
 
 static void
 cc_display_panel_get_property (GObject    *object,
@@ -166,6 +169,7 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
 
   g_type_class_add_private (klass, sizeof (CcDisplayPanelPrivate));
 
+  object_class->constructor = cc_display_panel_constructor;
   object_class->get_property = cc_display_panel_get_property;
   object_class->set_property = cc_display_panel_set_property;
   object_class->dispose = cc_display_panel_dispose;
@@ -2447,29 +2451,22 @@ get_output_for_window (GnomeRRConfig *configuration, GdkWindow *window)
 			       win_rect.y + win_rect.height / 2);
 }
 
-static gboolean
-dialog_focus_in_cb (GtkWidget *widget, GdkEvent *event, gpointer data)
+static void
+dialog_toplevel_focus_changed (GtkWindow      *window,
+			       GParamSpec     *pspec,
+			       CcDisplayPanel *self)
 {
-  CcDisplayPanel *self = data;
-
-  if (self->priv->labeler)
+  if (self->priv->labeler == NULL)
+    return;
+  if (gtk_window_has_toplevel_focus (window))
     gnome_rr_labeler_show (self->priv->labeler);
-  return FALSE;
-}
-
-static gboolean
-dialog_focus_out_cb (GtkWidget *widget, GdkEvent *event, gpointer data)
-{
-  CcDisplayPanel *self = data;
-
-  if (self->priv->labeler)
+  else
     gnome_rr_labeler_hide (self->priv->labeler);
-  return FALSE;
 }
 
 static void
 on_toplevel_realized (GtkWidget     *widget,
-                     CcDisplayPanel *self)
+                      CcDisplayPanel *self)
 {
   self->priv->current_output = get_output_for_window (self->priv->current_configuration,
                                                gtk_widget_get_window (widget));
@@ -2512,11 +2509,24 @@ dialog_map_event_cb (GtkWidget *widget, GdkEventAny *event, gpointer data)
 static void
 cc_display_panel_init (CcDisplayPanel *self)
 {
+}
+
+static GObject *
+cc_display_panel_constructor (GType                  gtype,
+                              guint                  n_properties,
+                              GObjectConstructParam *properties)
+{
   GtkBuilder *builder;
   GtkWidget *align;
   GError *error;
+  GObject *obj;
+  CcDisplayPanel *self;
+  CcShell *shell;
+  GtkWidget *toplevel;
   gchar *objects[] = {"display-panel", "rotation-liststore", NULL};
 
+  obj = G_OBJECT_CLASS (cc_display_panel_parent_class)->constructor (gtype, n_properties, properties);
+  self = CC_DISPLAY_PANEL (obj);
   self->priv = DISPLAY_PANEL_PRIVATE (self);
 
   error = NULL;
@@ -2527,7 +2537,7 @@ cc_display_panel_init (CcDisplayPanel *self)
       g_warning ("Could not parse UI definition: %s", error->message);
       g_error_free (error);
       g_object_unref (builder);
-      return;
+      return obj;
     }
 
   self->priv->screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
@@ -2537,19 +2547,17 @@ cc_display_panel_init (CcDisplayPanel *self)
       error_message (NULL, _("Could not get screen information"), error->message);
       g_error_free (error);
       g_object_unref (builder);
-      return;
+      return obj;
     }
 
   self->priv->clock_settings = g_settings_new (CLOCK_SCHEMA);
 
-  self->priv->panel = WID ("display-panel");
-  g_signal_connect_after (self->priv->panel, "focus-in-event",
-                          G_CALLBACK (dialog_focus_in_cb), self);
-  g_signal_connect_after (self->priv->panel, "focus-out-event",
-                          G_CALLBACK (dialog_focus_out_cb), self);
+  shell = cc_panel_get_shell (CC_PANEL (self));
+  toplevel = cc_shell_get_toplevel (shell);
+  g_signal_connect (toplevel, "notify::has-toplevel-focus",
+                    G_CALLBACK (dialog_toplevel_focus_changed), self);
 
-  if (!self->priv->panel)
-    g_warning ("Missing display-panel object");
+  self->priv->panel = WID ("display-panel");
   g_signal_connect_after (self->priv->panel, "show",
                           G_CALLBACK (dialog_map_event_cb), self);
 
@@ -2606,6 +2614,8 @@ cc_display_panel_init (CcDisplayPanel *self)
 
   gtk_widget_show (self->priv->panel);
   gtk_container_add (GTK_CONTAINER (self), self->priv->panel);
+
+  return obj;
 }
 
 void
