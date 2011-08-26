@@ -1114,6 +1114,11 @@ window_key_press_event (GtkWidget          *win,
             gtk_widget_grab_focus (self->priv->search_entry);
             retval = TRUE;
             break;
+          case GDK_KEY_Q:
+          case GDK_KEY_q:
+            g_object_unref (self);
+            retval = TRUE;
+            break;
         }
     }
   return retval;
