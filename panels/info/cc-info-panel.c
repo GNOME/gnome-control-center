@@ -1218,11 +1218,11 @@ refresh_update_button (CcInfoPanel  *self)
         break;
       case UPDATES_AVAILABLE:
         gtk_widget_set_sensitive (widget, TRUE);
-        gtk_button_set_label (GTK_BUTTON (widget), _("Updates Available"));
+        gtk_button_set_label (GTK_BUTTON (widget), _("Install Updates"));
         break;
       case UPDATES_NOT_AVAILABLE:
         gtk_widget_set_sensitive (widget, FALSE);
-        gtk_button_set_label (GTK_BUTTON (widget), _("Nothing to Update"));
+        gtk_button_set_label (GTK_BUTTON (widget), _("System Up-To-Date"));
         break;
       case CHECKING_UPDATES:
         gtk_widget_set_sensitive (widget, FALSE);
