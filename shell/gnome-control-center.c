@@ -399,28 +399,38 @@ model_filter_func (GtkTreeModel              *model,
                    GtkTreeIter               *iter,
                    GnomeControlCenterPrivate *priv)
 {
-  gchar *name, *target;
+  gchar *name, *description;
   gchar *needle, *haystack;
   gboolean result;
   gchar **keywords;
 
-  gtk_tree_model_get (model, iter, COL_NAME, &name,
-                      COL_SEARCH_TARGET, &target,
+  gtk_tree_model_get (model, iter,
+                      COL_NAME, &name,
+                      COL_DESCRIPTION, &description,
                       COL_KEYWORDS, &keywords,
                       -1);
 
-  if (!priv->filter_string || !name || !target)
+  if (!priv->filter_string || !name)
     {
       g_free (name);
-      g_free (target);
+      g_free (description);
       g_strfreev (keywords);
       return FALSE;
     }
 
   needle = g_utf8_casefold (priv->filter_string, -1);
-  haystack = g_utf8_casefold (target, -1);
+  haystack = g_utf8_casefold (name, -1);
 
   result = (strstr (haystack, needle) != NULL);
+
+  if (!result && description)
+    {
+      gchar *folded;
+
+      folded = g_utf8_casefold (description, -1);
+      result = (strstr (folded, needle) != NULL);
+      g_free (folded);
+    }
 
   if (!result && keywords)
     {
@@ -436,7 +446,6 @@ model_filter_func (GtkTreeModel              *model,
     }
 
   g_free (name);
-  g_free (target);
   g_free (haystack);
   g_free (needle);
   g_strfreev (keywords);
@@ -582,7 +591,7 @@ setup_search (GnomeControlCenter *shell)
                                  "title", COL_NAME);
   gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (search_view),
                                  priv->search_renderer,
-                                 "search-target", COL_SEARCH_TARGET);
+                                 "search-target", COL_DESCRIPTION);
 
   /* connect the activated signal */
   g_signal_connect (search_view, "desktop-item-activated",

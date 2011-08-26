@@ -161,7 +161,6 @@ cc_shell_model_add_item (CcShellModel   *model,
   const gchar *comment = g_app_info_get_description (appinfo);
   gchar *id;
   GdkPixbuf *pixbuf = NULL;
-  gchar *search_target;
   GKeyFile *key_file;
   gchar **keywords;
 
@@ -199,23 +198,17 @@ cc_shell_model_add_item (CcShellModel   *model,
 
   pixbuf = load_pixbuf_for_gicon (icon);
 
-  if (comment && comment[0])
-    search_target = g_strconcat (name, " - ", comment, NULL);
-  else
-    search_target = g_strdup (name);
-
   gtk_list_store_insert_with_values (GTK_LIST_STORE (model), NULL, 0,
                                      COL_NAME, name,
                                      COL_DESKTOP_FILE, desktop,
                                      COL_ID, id,
                                      COL_PIXBUF, pixbuf,
                                      COL_CATEGORY, category_name,
-                                     COL_SEARCH_TARGET, search_target,
+                                     COL_DESCRIPTION, comment,
                                      COL_GICON, icon,
                                      COL_KEYWORDS, keywords,
                                      -1);
 
   g_free (id);
-  g_free (search_target);
   g_strfreev (keywords);
 }
