@@ -960,13 +960,14 @@ save_bar_for_stream (GvcMixerDialog *dialog,
 
 static GtkWidget *
 create_bar (GvcMixerDialog *dialog,
+            gboolean        add_to_size_group,
             gboolean        symmetric)
 {
         GtkWidget *bar;
 
         bar = gvc_channel_bar_new ();
         gtk_widget_set_sensitive (bar, FALSE);
-        if (dialog->priv->size_group != NULL) {
+        if (add_to_size_group && dialog->priv->size_group != NULL) {
                 gvc_channel_bar_set_size_group (GVC_CHANNEL_BAR (bar),
                                                 dialog->priv->size_group,
                                                 symmetric);
@@ -989,7 +990,7 @@ create_app_bar (GvcMixerDialog *dialog,
 {
         GtkWidget *bar;
 
-        bar = create_bar (dialog, FALSE);
+        bar = create_bar (dialog, FALSE, FALSE);
         gvc_channel_bar_set_ellipsize (GVC_CHANNEL_BAR (bar), TRUE);
         gvc_channel_bar_set_icon_name (GVC_CHANNEL_BAR (bar), icon_name);
         if (name == NULL || strchr (name, '_') == NULL) {
@@ -1780,7 +1781,7 @@ gvc_mixer_dialog_constructor (GType                  type,
         gtk_box_pack_start (GTK_BOX (main_vbox),
                             alignment,
                             FALSE, FALSE, 0);
-        self->priv->output_bar = create_bar (self, TRUE);
+        self->priv->output_bar = create_bar (self, TRUE, TRUE);
         gvc_channel_bar_set_name (GVC_CHANNEL_BAR (self->priv->output_bar),
                                   _("_Output volume:"));
         gtk_widget_set_sensitive (self->priv->output_bar, FALSE);
@@ -1801,7 +1802,7 @@ gvc_mixer_dialog_constructor (GType                  type,
                                   self->priv->sound_effects_box,
                                   label);
 
-        self->priv->effects_bar = create_bar (self, TRUE);
+        self->priv->effects_bar = create_bar (self, TRUE, TRUE);
         gvc_channel_bar_set_name (GVC_CHANNEL_BAR (self->priv->effects_bar),
                                   _("_Alert volume:"));
         gtk_widget_set_sensitive (self->priv->effects_bar, FALSE);
@@ -1865,7 +1866,7 @@ gvc_mixer_dialog_constructor (GType                  type,
                                   self->priv->input_box,
                                   label);
 
-        self->priv->input_bar = create_bar (self, TRUE);
+        self->priv->input_bar = create_bar (self, TRUE, TRUE);
         gvc_channel_bar_set_name (GVC_CHANNEL_BAR (self->priv->input_bar),
                                   _("_Input volume:"));
         gvc_channel_bar_set_low_icon_name (GVC_CHANNEL_BAR (self->priv->input_bar),
