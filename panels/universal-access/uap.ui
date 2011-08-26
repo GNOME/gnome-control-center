@@ -33,27 +33,33 @@
       <column type="gchararray"/>
       <!-- column-name text_scale -->
       <column type="gfloat"/>
+      <!-- column-name calculated_text_scale -->
+      <column type="gfloat"/>
     </columns>
     <data>
       <row>
         <col id="0" translatable="yes">75%</col>
         <col id="1" translatable="yes">Small</col>
         <col id="2">0.75</col>
+        <col id="3">0.75</col>
       </row>
       <row>
         <col id="0" translatable="yes">100%</col>
         <col id="1" translatable="yes">Normal</col>
         <col id="2">1</col>
+        <col id="3">1</col>
       </row>
       <row>
         <col id="0" translatable="yes">125%</col>
         <col id="1" translatable="yes">Large</col>
         <col id="2">1.25</col>
+        <col id="3">1.25</col>
       </row>
       <row>
         <col id="0" translatable="yes">150%</col>
         <col id="1" translatable="yes">Larger</col>
         <col id="2">1.5</col>
+        <col id="3">1.5</col>
       </row>
     </data>
   </object>
@@ -279,7 +285,7 @@
                                         <child>
                                           <object class="GtkCellRendererText" id="text_size_renderer"/>
                                           <attributes>
-                                            <attribute name="scale">2</attribute>
+                                            <attribute name="scale">3</attribute>
                                             <attribute name="text">1</attribute>
                                           </attributes>
                                         </child>

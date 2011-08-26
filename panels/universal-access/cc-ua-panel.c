@@ -302,6 +302,7 @@ gconf_on_off_peditor_new (CcUaPanelPrivate  *priv,
 #define ICON_THEME_KEY "icon-theme"
 #define CONTRAST_MODEL_THEME_COLUMN 2
 #define DPI_MODEL_FACTOR_COLUMN 2
+#define DPI_MODEL_FACTOR_CALC_COLUMN 3
 
 static void text_scaling_factor_combo_box_changed (GtkComboBox *box, CcUaPanel *panel);
 
@@ -326,6 +327,26 @@ text_scaling_factor_notify_cb (GSettings   *settings,
 
   combo = WID (priv->builder, "seeing_text_size_combobox");
   model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+
+  /* Recalculate the font sizes so that
+   * their size is about constant when changing text size */
+  valid = gtk_tree_model_get_iter_first (model, &iter);
+  while (valid)
+    {
+      gfloat factor;
+
+      gtk_tree_model_get (model, &iter,
+                          DPI_MODEL_FACTOR_COLUMN, &factor,
+                          -1);
+
+      factor /= conf_value;
+
+      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+                          DPI_MODEL_FACTOR_CALC_COLUMN, factor,
+                          -1);
+
+      valid = gtk_tree_model_iter_next (model, &iter);
+    }
 
   /* find the closest match in the combobox model */
   distance = 1e6;
