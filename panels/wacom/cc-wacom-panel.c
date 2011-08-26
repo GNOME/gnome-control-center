@@ -330,6 +330,24 @@ cc_wacom_panel_dispose (GObject *object)
 		priv->builder = NULL;
 	}
 
+	if (priv->wacom_settings)
+	{
+		g_object_unref (priv->wacom_settings);
+		priv->wacom_settings = NULL;
+	}
+
+	if (priv->stylus_settings)
+	{
+		g_object_unref (priv->stylus_settings);
+		priv->stylus_settings = NULL;
+	}
+
+	if (priv->eraser_settings)
+	{
+		g_object_unref (priv->eraser_settings);
+		priv->eraser_settings = NULL;
+	}
+
 	G_OBJECT_CLASS (cc_wacom_panel_parent_class)->dispose (object);
 }
 
@@ -412,7 +430,6 @@ cc_wacom_panel_init (CcWacomPanel *self)
 
 	gtk_image_set_from_file (GTK_IMAGE (WID ("image-tablet")), PIXMAP_DIR "/wacom-tablet.png");
 	gtk_image_set_from_file (GTK_IMAGE (WID ("image-stylus")), PIXMAP_DIR "/wacom-stylus.png");
-
 
 	grid = WID ("main-grid");
 
