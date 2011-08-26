@@ -2802,6 +2802,10 @@ get_hostname (void)
                 str = g_strdup (g_get_host_name ());
         }
 
+        if (str == NULL || *str == '\0') {
+                str = g_strdup ("GNOME");
+	}
+
         return str;
 }
 
