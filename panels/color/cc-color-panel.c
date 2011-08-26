@@ -496,6 +496,7 @@ gcm_prefs_profile_make_default_internal (CcColorPanel *prefs,
                                          GtkTreeModel *model,
                                          GtkTreeIter *iter_selected)
 {
+  CdDevice *device;
   CdProfile *profile;
   GError *error = NULL;
   gboolean ret = FALSE;
@@ -503,13 +504,14 @@ gcm_prefs_profile_make_default_internal (CcColorPanel *prefs,
 
   /* get currentlt selected item */
   gtk_tree_model_get (model, iter_selected,
+                      GCM_PREFS_COLUMN_DEVICE, &device,
                       GCM_PREFS_COLUMN_PROFILE, &profile,
                       -1);
-  if (profile == NULL)
+  if (profile == NULL || device == NULL)
     goto out;
 
   /* just set it default */
-  ret = cd_device_make_profile_default_sync (priv->current_device,
+  ret = cd_device_make_profile_default_sync (device,
                                              profile,
                                              priv->cancellable,
                                              &error);
@@ -522,6 +524,8 @@ gcm_prefs_profile_make_default_internal (CcColorPanel *prefs,
 out:
   if (profile != NULL)
     g_object_unref (profile);
+  if (device != NULL)
+    g_object_unref (device);
 }
 
 static void
