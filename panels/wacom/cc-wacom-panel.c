@@ -33,6 +33,10 @@ G_DEFINE_DYNAMIC_TYPE (CcWacomPanel, cc_wacom_panel, CC_TYPE_PANEL)
 #define WACOM_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_WACOM_PANEL, CcWacomPanelPrivate))
 
+#define WACOM_SCHEMA "org.gnome.settings-daemon.peripherals.wacom"
+#define WACOM_STYLUS_SCHEMA WACOM_SCHEMA ".stylus"
+#define WACOM_ERASER_SCHEMA WACOM_SCHEMA ".eraser"
+
 struct _CcWacomPanelPrivate
 {
 	GtkBuilder  *builder;
@@ -293,9 +297,9 @@ gnome_wacom_properties_init (CcWacomPanel *panel)
 	CcWacomPanelPrivate	*priv = CC_WACOM_PANEL(panel)->priv;
 	GtkComboBox		*combo;
 
-	priv->wacom_settings  = g_settings_new ("org.gnome.settings-daemon.peripherals.wacom");
-	priv->stylus_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.wacom.stylus");
-	priv->eraser_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.wacom.eraser");
+	priv->wacom_settings  = g_settings_new (WACOM_SCHEMA);
+	priv->stylus_settings = g_settings_new (WACOM_STYLUS_SCHEMA);
+	priv->eraser_settings = g_settings_new (WACOM_ERASER_SCHEMA);
 
 	g_signal_connect (WID ("scale-tip-feel"), "value-changed",
 			  G_CALLBACK (tip_feel_value_changed_cb), panel);
