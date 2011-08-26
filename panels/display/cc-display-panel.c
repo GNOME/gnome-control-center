@@ -56,6 +56,15 @@ G_DEFINE_DYNAMIC_TYPE (CcDisplayPanel, cc_display_panel, CC_TYPE_PANEL)
 #define MINIMUM_WIDTH 675
 #define MINIMUM_HEIGHT 530
 
+enum {
+  TEXT_COL,
+  WIDTH_COL,
+  HEIGHT_COL,
+  RATE_COL,
+  AREA_COL,
+  ROTATION_COL
+};
+
 struct _CcDisplayPanelPrivate
 {
   GnomeRRScreen       *screen;
@@ -314,7 +323,7 @@ foreach (GtkTreeModel *model,
   ForeachInfo *info = data;
   char *text = NULL;
 
-  gtk_tree_model_get (model, iter, 0, &text, -1);
+  gtk_tree_model_get (model, iter, TEXT_COL, &text, -1);
 
   g_assert (text != NULL);
 
@@ -348,12 +357,12 @@ add_key (GtkWidget *widget,
     {
       GtkTreeIter iter;
       gtk_list_store_insert_with_values (store, &iter, -1,
-                                         0, text,
-                                         1, width,
-                                         2, height,
-                                         3, rate,
-                                         4, width * height,
-                                         5, rotation,
+                                         TEXT_COL, text,
+                                         WIDTH_COL, width,
+                                         HEIGHT_COL, height,
+                                         RATE_COL, rate,
+                                         AREA_COL, width * height,
+                                         ROTATION_COL, rotation,
                                          -1);
 
     }
@@ -780,7 +789,7 @@ rebuild_gui (CcDisplayPanel *self)
 }
 
 static gboolean
-get_mode (GtkWidget *widget, int *width, int *height, int *freq, GnomeRRRotation *rot)
+get_mode (GtkWidget *widget, int *width, int *height, int *rate, GnomeRRRotation *rot)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
@@ -796,18 +805,18 @@ get_mode (GtkWidget *widget, int *width, int *height, int *freq, GnomeRRRotation
   if (!height)
     height = &dummy;
 
-  if (!freq)
-    freq = &dummy;
+  if (!rate)
+    rate = &dummy;
 
   if (!rot)
     rot = (GnomeRRRotation *)&dummy;
 
   model = gtk_combo_box_get_model (box);
   gtk_tree_model_get (model, &iter,
-                      1, width,
-                      2, height,
-                      3, freq,
-                      5, rot,
+                      WIDTH_COL, width,
+                      HEIGHT_COL, height,
+                      RATE_COL, rate,
+                      ROTATION_COL, rot,
                       -1);
 
   return TRUE;
