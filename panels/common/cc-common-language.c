@@ -510,10 +510,11 @@ cc_common_language_get_initial_languages (void)
 
         /* Add some common languages first */
         g_hash_table_insert (ht, g_strdup ("en_US.utf8"), g_strdup (_("English")));
+        g_hash_table_insert (ht, g_strdup ("en_GB.utf8"), g_strdup (_("British English")));
         g_hash_table_insert (ht, g_strdup ("de_DE.utf8"), g_strdup (_("German")));
         g_hash_table_insert (ht, g_strdup ("fr_FR.utf8"), g_strdup (_("French")));
         g_hash_table_insert (ht, g_strdup ("es_ES.utf8"), g_strdup (_("Spanish")));
-        g_hash_table_insert (ht, g_strdup ("zh_CN.utf8"), g_strdup (_("Chinese")));
+        g_hash_table_insert (ht, g_strdup ("zh_CN.utf8"), g_strdup (_("Chinese (simplified)")));
 
         /* Add the languages used by other users on the system */
         add_other_users_language (ht);
