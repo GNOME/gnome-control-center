@@ -209,7 +209,7 @@ change_clock_settings (GObject         *gobject,
   g_signal_handlers_block_by_func (priv->settings, clock_settings_changed_cb,
                                    panel);
 
-  if (gtk_switch_get_active (GTK_SWITCH (W ("24h_time_switch"))))
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (W ("24h_button"))))
     value = G_DESKTOP_CLOCK_FORMAT_24H;
   else
     value = G_DESKTOP_CLOCK_FORMAT_12H;
@@ -229,24 +229,24 @@ clock_settings_changed_cb (GSettings       *settings,
                            CcDateTimePanel *panel)
 {
   CcDateTimePanelPrivate *priv = panel->priv;
-  GtkWidget *switch24h;
+  GtkWidget *button24h;
   gboolean use_24_hour;
   GDesktopClockFormat value;
 
   value = g_settings_get_enum (settings, CLOCK_FORMAT_KEY);
   priv->clock_format = value;
 
-  switch24h = W ("24h_time_switch");
+  button24h = W ("24h_button");
 
   use_24_hour = (value == G_DESKTOP_CLOCK_FORMAT_24H);
 
-  g_signal_handlers_block_by_func (switch24h, change_clock_settings, panel);
+  g_signal_handlers_block_by_func (button24h, change_clock_settings, panel);
 
-  gtk_switch_set_active (GTK_SWITCH (switch24h), use_24_hour);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button24h), use_24_hour);
 
   update_time (panel);
 
-  g_signal_handlers_unblock_by_func (switch24h, change_clock_settings, panel);
+  g_signal_handlers_unblock_by_func (button24h, change_clock_settings, panel);
 }
 
 static void
@@ -1003,7 +1003,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   g_signal_connect (priv->settings, "changed::" CLOCK_FORMAT_KEY,
                     G_CALLBACK (clock_settings_changed_cb), self);
 
-  g_signal_connect (W("24h_time_switch"), "notify::active",
+  g_signal_connect (W("24h_button"), "notify::active",
                     G_CALLBACK (change_clock_settings), self);
 
   update_time (self);
