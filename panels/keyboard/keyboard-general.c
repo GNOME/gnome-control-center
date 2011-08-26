@@ -21,6 +21,8 @@
 
 #include "keyboard-general.h"
 
+#define WID(s) GTK_WIDGET (gtk_builder_get_object (builder, s))
+
 static GSettings *keyboard_settings = NULL;
 static GSettings *interface_settings = NULL;
 
@@ -51,6 +53,22 @@ set_rate (const GValue       *value,
   msecs = (1 / rate) * 1000;
   g_debug ("Setting repeat rate to %d", msecs);
   return g_variant_new_uint32 (msecs);
+}
+
+static gboolean
+layout_link_clicked (GtkLinkButton *button,
+                     CcPanel       *panel)
+{
+  CcShell *shell;
+  GError *error = NULL;
+
+  shell = cc_panel_get_shell (panel);
+  if (cc_shell_set_active_panel_from_id (shell, "region", &error) == FALSE)
+    {
+      g_warning ("Failed to activate Region panel: %s", error->message);
+      g_error_free (error);
+    }
+  return TRUE;
 }
 
 void
@@ -87,6 +105,9 @@ keyboard_general_init (CcPanel *panel, GtkBuilder *builder)
   g_settings_bind (interface_settings, "cursor-blink-time",
                    gtk_range_get_adjustment (GTK_RANGE (gtk_builder_get_object (builder, "cursor_blink_time_scale"))), "value",
                    G_SETTINGS_BIND_DEFAULT);
+
+  g_signal_connect (WID ("linkbutton"), "activate-link",
+                    G_CALLBACK (layout_link_clicked), panel);
 }
 
 void
