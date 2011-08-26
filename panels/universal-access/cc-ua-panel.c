@@ -551,7 +551,11 @@ visual_bell_type_notify_cb (GConfClient *client,
                             CcUaPanel   *panel)
 {
   GtkWidget *widget;
-  const gchar *value = gconf_value_get_string (entry->value);
+  const gchar *value;
+
+  g_return_if_fail (entry != NULL);
+
+  value = gconf_value_get_string (entry->value);
 
   if (!strcmp ("frame_flash", value))
     widget = WID (panel->priv->builder, "hearing_flash_window_title_button");
