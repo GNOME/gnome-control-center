@@ -333,7 +333,10 @@ update_output_settings (GvcMixerDialog *dialog)
                                     dialog->priv->output_port_combo,
                                     TRUE, FALSE, 6);
 
-                gvc_combo_box_set_size_group (GVC_COMBO_BOX (dialog->priv->output_port_combo), dialog->priv->size_group, FALSE);
+                if (dialog->priv->size_group != NULL) {
+                        gvc_combo_box_set_size_group (GVC_COMBO_BOX (dialog->priv->output_port_combo),
+                                                      dialog->priv->size_group, FALSE);
+                }
 
                 gtk_widget_show (dialog->priv->output_port_combo);
         }
@@ -637,7 +640,10 @@ update_input_settings (GvcMixerDialog *dialog)
                 g_signal_connect (G_OBJECT (dialog->priv->input_port_combo), "changed",
                                   G_CALLBACK (port_selection_changed), dialog);
 
-                gvc_combo_box_set_size_group (GVC_COMBO_BOX (dialog->priv->input_port_combo), dialog->priv->size_group, FALSE);
+                if (dialog->priv->size_group != NULL) {
+                        gvc_combo_box_set_size_group (GVC_COMBO_BOX (dialog->priv->input_port_combo),
+                                                      dialog->priv->size_group, FALSE);
+                }
                 gtk_box_pack_start (GTK_BOX (dialog->priv->input_settings_box),
                                     dialog->priv->input_port_combo,
                                     TRUE, TRUE, 0);
@@ -960,9 +966,11 @@ create_bar (GvcMixerDialog *dialog,
 
         bar = gvc_channel_bar_new ();
         gtk_widget_set_sensitive (bar, FALSE);
-        gvc_channel_bar_set_size_group (GVC_CHANNEL_BAR (bar),
-                                        dialog->priv->size_group,
-                                        symmetric);
+        if (dialog->priv->size_group != NULL) {
+                gvc_channel_bar_set_size_group (GVC_CHANNEL_BAR (bar),
+                                                dialog->priv->size_group,
+                                                symmetric);
+        }
         gvc_channel_bar_set_orientation (GVC_CHANNEL_BAR (bar),
                                          GTK_ORIENTATION_HORIZONTAL);
         gvc_channel_bar_set_show_mute (GVC_CHANNEL_BAR (bar),
@@ -1886,7 +1894,8 @@ gvc_mixer_dialog_constructor (GType                  type,
         gtk_box_pack_start (GTK_BOX (sbox),
                             label,
                             FALSE, FALSE, 0);
-        gtk_size_group_add_widget (self->priv->size_group, sbox);
+        if (self->priv->size_group != NULL)
+                gtk_size_group_add_widget (self->priv->size_group, sbox);
 
         self->priv->input_level_bar = gvc_level_bar_new ();
         gvc_level_bar_set_orientation (GVC_LEVEL_BAR (self->priv->input_level_bar),
@@ -1901,7 +1910,8 @@ gvc_mixer_dialog_constructor (GType                  type,
         gtk_box_pack_start (GTK_BOX (box),
                             ebox,
                             FALSE, FALSE, 0);
-        gtk_size_group_add_widget (self->priv->size_group, ebox);
+        if (self->priv->size_group != NULL)
+                gtk_size_group_add_widget (self->priv->size_group, ebox);
 
         self->priv->input_settings_box = gtk_hbox_new (FALSE, 6);
         gtk_box_pack_start (GTK_BOX (self->priv->input_box),
