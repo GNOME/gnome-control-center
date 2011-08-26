@@ -116,6 +116,7 @@ static void get_geometry (GnomeRROutputInfo *output, int *w, int *h);
 static void apply_configuration_returned_cb (DBusGProxy *proxy, DBusGProxyCall *call_id, void *data);
 static gboolean get_clone_size (GnomeRRScreen *screen, int *width, int *height);
 static gboolean output_info_supports_mode (CcDisplayPanel *self, GnomeRROutputInfo *info, int width, int height);
+static char *make_resolution_string (int width, int height);
 static GObject *cc_display_panel_constructor (GType                  gtype,
 					      guint                  n_properties,
 					      GObjectConstructParam *properties);
@@ -325,6 +326,7 @@ foreach (GtkTreeModel *model,
 static void
 add_key (GtkWidget *widget,
          const char *text,
+         gboolean preferred,
          int width, int height, int rate,
          GnomeRRRotation rotation)
 {
@@ -341,6 +343,7 @@ add_key (GtkWidget *widget,
   if (!info.found)
     {
       GtkTreeIter iter;
+      g_debug ("adding %s with rate %d Hz", text, rate);
       gtk_list_store_insert_with_values (store, &iter, -1,
                                          TEXT_COL, text,
                                          WIDTH_COL, width,
@@ -349,9 +352,67 @@ add_key (GtkWidget *widget,
                                          AREA_COL, width * height,
                                          ROTATION_COL, rotation,
                                          -1);
+      return;
+    }
 
+  /* Look, the preferred output, replace the old one */
+  if (preferred)
+    {
+      g_debug ("replacing %s with rate %d Hz (preferred mode)", text, rate);
+      gtk_list_store_set (store, &info.iter,
+                          RATE_COL, rate,
+                          -1);
+      return;
+    }
+
+  {
+    int old_rate;
+
+    gtk_tree_model_get (GTK_TREE_MODEL (store), &info.iter,
+                        RATE_COL, &old_rate,
+                        -1);
+
+    /* Higher refresh rate */
+    if (rate > old_rate)
+    {
+      g_debug ("replacing %s with rate %d Hz (old rate: %d)", text, rate, old_rate);
+      gtk_list_store_set (store, &info.iter,
+                          RATE_COL, rate,
+                          -1);
+      return;
+    }
+  }
+
+  g_debug ("not adding %s with rate %d Hz (higher rate already there)", text, rate);
+}
+
+static void
+add_mode (CcDisplayPanel *self,
+	  GnomeRRMode *mode,
+	  gint  output_width,
+	  gint  output_height,
+	  guint preferred_id)
+{
+  int width, height, rate;
+
+  width = gnome_rr_mode_get_width (mode);
+  height = gnome_rr_mode_get_height (mode);
+  rate = gnome_rr_mode_get_freq (mode);
+
+  if (should_show_resolution (output_width, output_height, width, height))
+    {
+      char *text;
+      gboolean preferred;
+
+      preferred = (gnome_rr_mode_get_id (mode) == preferred_id);
+      text = make_resolution_string (width, height);
+      add_key (self->priv->resolution_combo,
+               text, preferred, width, height, rate, -1);
+      g_free (text);
     }
 }
+
+
 
 static gboolean
 combo_select (GtkWidget *widget, const char *text)
@@ -434,7 +495,7 @@ rebuild_rotation_combo (CcDisplayPanel *self)
       /* NULL-GError --- FIXME: we should say why this rotation is not available! */
       if (gnome_rr_config_applicable (self->priv->current_configuration, self->priv->screen, NULL))
         {
-          add_key (self->priv->rotation_combo, _(info->name), 0, 0, 0, info->rotation);
+          add_key (self->priv->rotation_combo, _(info->name), FALSE, 0, 0, 0, info->rotation);
 
           if (info->rotation == current)
             selection = _(info->name);
@@ -708,8 +769,11 @@ rebuild_resolution_combo (CcDisplayPanel *self)
 {
   int i;
   GnomeRRMode **modes;
+  GnomeRRMode *mode;
   char *current;
   int output_width, output_height;
+  guint32 preferred_id;
+  GnomeRROutput *output;
 
   clear_combo (self->priv->resolution_combo);
 
@@ -728,24 +792,16 @@ rebuild_resolution_combo (CcDisplayPanel *self)
 
   gtk_widget_set_sensitive (self->priv->resolution_combo, TRUE);
 
+  output = gnome_rr_screen_get_output_by_name (self->priv->screen,
+                                               gnome_rr_output_info_get_name (self->priv->current_output));
+  mode = gnome_rr_output_get_preferred_mode (output);
+  preferred_id = gnome_rr_mode_get_id (mode);
+
   for (i = 0; modes[i] != NULL; ++i)
-    {
-      int width, height, rate;
+    add_mode (self, modes[i], output_width, output_height, preferred_id);
 
-      width = gnome_rr_mode_get_width (modes[i]);
-      height = gnome_rr_mode_get_height (modes[i]);
-      rate = gnome_rr_mode_get_freq (modes[i]);
-
-      if (should_show_resolution (output_width, output_height, width, height))
-        {
-          char *text;
-
-          text = make_resolution_string (width, height);
-          add_key (self->priv->resolution_combo,
-                   text, width, height, rate, -1);
-          g_free (text);
-        }
-    }
+  /* And force the preferred mode in the drop-down */
+  add_mode (self, mode, output_width, output_height, preferred_id);
 
   current = make_resolution_string (output_width, output_height);
 
