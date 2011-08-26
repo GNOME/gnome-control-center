@@ -62,11 +62,21 @@ connection_removed_cb (NMConnection *connection,
         net_object_emit_removed (NET_OBJECT (vpn));
 }
 
+static char *
+net_vpn_connection_to_type (NMConnection *connection)
+{
+        const gchar *type, *p;
+
+        type = nm_setting_vpn_get_service_type (nm_connection_get_setting_vpn (connection));
+        /* Go from "org.freedesktop.NetworkManager.vpnc" to "vpnc" for example */
+        p = strrchr (type, '.');
+        return g_strdup (p ? p + 1 : type);
+}
+
 void
 net_vpn_set_connection (NetVpn *vpn, NMConnection *connection)
 {
         NetVpnPrivate *priv = vpn->priv;
-        const gchar *type, *p;
         /*
          * vpnc config exmaple:
          * key=IKE DH Group, value=dh2
@@ -93,9 +103,7 @@ net_vpn_set_connection (NetVpn *vpn, NMConnection *connection)
                                   vpn);
         }
 
-        type = nm_setting_vpn_get_service_type (nm_connection_get_setting_vpn (priv->connection));
-        p = strrchr (type, '.');
-        priv->service_type = g_strdup (p ? p + 1 : type);
+        priv->service_type = net_vpn_connection_to_type (priv->connection);
 }
 
 NMConnection *
