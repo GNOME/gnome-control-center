@@ -40,6 +40,7 @@ AM_CPPFLAGS =							\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""		\
 	-DUIDIR="\"$(uidir)\""					\
 	-DMENUDIR="\"$(menudir)\""				\
+	-DDESKTOP_FILES_DIR="\"$(datadir)/applications/\""	\
 	-DPANELS_DIR="\"$(PANELS_DIR)\""
 
 menudir = $(sysconfdir)/xdg/menus

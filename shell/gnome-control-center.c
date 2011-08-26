@@ -63,6 +63,7 @@ struct _GnomeControlCenterPrivate
   GtkWidget  *lock_button;
 
   GMenuTree  *menu_tree;
+  char       *desktop_files_dir;
   GtkListStore *store;
   GHashTable *category_views;
 
@@ -648,6 +649,19 @@ maybe_add_category_view (GnomeControlCenter *shell,
   g_hash_table_insert (shell->priv->category_views, g_strdup (name), categoryview);
 }
 
+static gboolean
+item_is_in_dir (GnomeControlCenter *shell,
+		GMenuTreeEntry *item)
+{
+  const char *path;
+
+  path = gmenu_tree_entry_get_desktop_file_path (item);
+
+  if (g_str_has_prefix (path, shell->priv->desktop_files_dir))
+    return TRUE;
+  return FALSE;
+}
+
 static void
 reload_menu (GnomeControlCenter *shell)
 {
@@ -689,9 +703,12 @@ reload_menu (GnomeControlCenter *shell)
               if (sub_next_type == GMENU_TREE_ITEM_ENTRY)
                 {
                   GMenuTreeEntry *item = gmenu_tree_iter_get_entry (sub_iter);
-                  cc_shell_model_add_item (CC_SHELL_MODEL (shell->priv->store),
-                                           dir_name,
-                                           item);
+                  if (item_is_in_dir (shell, item))
+                    {
+                      cc_shell_model_add_item (CC_SHELL_MODEL (shell->priv->store),
+                                               dir_name,
+                                               item);
+                    }
                   gmenu_tree_item_unref (item);
                 }
             }
@@ -716,6 +733,7 @@ static void
 setup_model (GnomeControlCenter *shell)
 {
   GnomeControlCenterPrivate *priv = shell->priv;
+  GFile *file;
 
   gtk_container_set_border_width (GTK_CONTAINER (shell->priv->main_vbox), 10);
   gtk_container_set_focus_vadjustment (GTK_CONTAINER (shell->priv->main_vbox),
@@ -724,6 +742,11 @@ setup_model (GnomeControlCenter *shell)
   priv->store = (GtkListStore *) cc_shell_model_new ();
   priv->category_views = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   priv->menu_tree = gmenu_tree_new_for_path (MENUDIR "/gnomecc.menu", 0);
+
+  /* Normalise the file path, to avoid repeat slashes */
+  file = g_file_new_for_path (DESKTOP_FILES_DIR);
+  priv->desktop_files_dir = g_file_get_path (file);
+  g_object_unref (file);
 
   reload_menu (shell);
 
@@ -953,6 +976,12 @@ gnome_control_center_finalize (GObject *object)
       g_signal_handlers_disconnect_by_func (priv->menu_tree,
 					    G_CALLBACK (on_menu_changed), object);
       g_object_unref (priv->menu_tree);
+    }
+
+  if (priv->desktop_files_dir)
+    {
+      g_free (priv->desktop_files_dir);
+      priv->desktop_files_dir = NULL;
     }
 
   if (priv->category_views)
