@@ -439,7 +439,6 @@ panel_get_registration_info_cb (GObject *source_object, GAsyncResult *res, gpoin
                                 g_free);
 
         g_free (operator_name);
-        g_free (operator_name_safe);
         g_free (operator_code);
         g_variant_unref (result);
 }
