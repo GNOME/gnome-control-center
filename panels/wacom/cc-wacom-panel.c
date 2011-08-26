@@ -382,14 +382,23 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	GtkWidget *grid;
 	GError *error = NULL;
 	GtkComboBox *combo;
+	char *objects[] = {
+		"main-grid",
+		"liststore-tabletmode",
+		"liststore-buttons",
+		"adjustment-tip-feel",
+		"adjustment-eraser-feel",
+		NULL
+	};
 
 	priv = self->priv = WACOM_PANEL_PRIVATE (self);
 
 	priv->builder = gtk_builder_new ();
 
-	gtk_builder_add_from_file (priv->builder,
-			GNOMECC_UI_DIR "/gnome-wacom-properties.ui",
-			&error);
+	gtk_builder_add_objects_from_file (priv->builder,
+					   GNOMECC_UI_DIR "/gnome-wacom-properties.ui",
+					   objects,
+					   &error);
 	if (error != NULL)
 	{
 		g_warning ("Error loading UI file: %s", error->message);
@@ -397,6 +406,10 @@ cc_wacom_panel_init (CcWacomPanel *self)
 		g_error_free (error);
 		return;
 	}
+
+	grid = WID ("main-grid");
+	gtk_container_add (GTK_CONTAINER (self), grid);
+	gtk_container_set_border_width (GTK_CONTAINER (self), 24);
 
 	priv->wacom_settings  = g_settings_new (WACOM_SCHEMA);
 	priv->stylus_settings = g_settings_new (WACOM_STYLUS_SCHEMA);
@@ -430,10 +443,6 @@ cc_wacom_panel_init (CcWacomPanel *self)
 
 	gtk_image_set_from_file (GTK_IMAGE (WID ("image-tablet")), PIXMAP_DIR "/wacom-tablet.png");
 	gtk_image_set_from_file (GTK_IMAGE (WID ("image-stylus")), PIXMAP_DIR "/wacom-stylus.png");
-
-	grid = WID ("main-grid");
-
-	gtk_widget_reparent (grid, GTK_WIDGET (self));
 }
 
 void
