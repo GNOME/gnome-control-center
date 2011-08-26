@@ -26,7 +26,7 @@
 
 #include <string.h>
 
-#define WID(x) (GtkWidget *) gtk_builder_get_object (dialog, x)
+#define WID(x) (GtkWidget *) gtk_builder_get_object (priv->builder, x)
 
 G_DEFINE_DYNAMIC_TYPE (CcWacomPanel, cc_wacom_panel, CC_TYPE_PANEL)
 
@@ -135,7 +135,6 @@ static void
 tabletmode_changed_cb (GtkComboBox *combo, gpointer user_data)
 {
 	CcWacomPanelPrivate	*priv	= CC_WACOM_PANEL(user_data)->priv;
-	GtkBuilder		*dialog	= GTK_BUILDER (priv->builder);
 	GtkListStore		*liststore;
 	GtkTreeIter		iter;
 	gint			mode;
@@ -254,7 +253,6 @@ static void
 button_changed_cb (GtkComboBox *combo, gpointer user_data)
 {
 	CcWacomPanelPrivate	*priv = CC_WACOM_PANEL(user_data)->priv;
-	GtkBuilder		*dialog = priv->builder;
 	GtkTreeIter		iter;
 	GtkListStore		*liststore;
 	gint			mapping_b2,
@@ -293,7 +291,6 @@ static void
 gnome_wacom_properties_init (CcWacomPanel *panel)
 {
 	CcWacomPanelPrivate	*priv = CC_WACOM_PANEL(panel)->priv;
-	GtkBuilder		*dialog = priv->builder;
 	GtkComboBox		*combo;
 
 	priv->wacom_settings  = g_settings_new ("org.gnome.settings-daemon.peripherals.wacom");
@@ -420,7 +417,7 @@ cc_wacom_panel_init (CcWacomPanel *self)
 
 	gnome_wacom_properties_init (self);
 
-	grid = (GtkWidget*) gtk_builder_get_object (priv->builder, "main-grid");
+	grid = WID ("main-grid");
 
 	gtk_widget_reparent (grid, GTK_WIDGET (self));
 }
