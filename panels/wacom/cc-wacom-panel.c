@@ -414,6 +414,7 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	{
 		g_warning ("Error loading UI file: %s", error->message);
 		g_object_unref (priv->builder);
+		g_error_free (error);
 		return;
 	}
 
