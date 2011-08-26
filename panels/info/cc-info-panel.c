@@ -56,13 +56,20 @@ typedef struct {
   char *glx_renderer;
 } GraphicsData;
 
+typedef enum {
+	PK_NOT_AVAILABLE,
+	UPDATES_AVAILABLE,
+	UPDATES_NOT_AVAILABLE,
+	CHECKING_UPDATES
+} UpdatesState;
+
 struct _CcInfoPanelPrivate
 {
   GtkBuilder    *builder;
   char          *gnome_version;
   char          *gnome_distributor;
   char          *gnome_date;
-  gboolean       updates_available;
+  UpdatesState   updates_state;
   gboolean       is_fallback;
 
   /* Free space */
@@ -80,6 +87,7 @@ struct _CcInfoPanelPrivate
 };
 
 static void get_primary_disc_info_start (CcInfoPanel *self);
+static void refresh_update_button (CcInfoPanel *self);
 
 typedef struct
 {
@@ -1190,6 +1198,8 @@ info_panel_setup_overview (CcInfoPanel  *self)
 
   widget = WID ("info_vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
+
+  refresh_update_button (self);
 }
 
 static void
@@ -1198,10 +1208,27 @@ refresh_update_button (CcInfoPanel  *self)
   GtkWidget *widget;
 
   widget = WID ("updates_button");
-  if (self->priv->updates_available)
-    gtk_widget_show (widget);
-  else
-    gtk_widget_hide (widget);
+  if (widget == NULL)
+    return;
+
+  switch (self->priv->updates_state)
+    {
+      case PK_NOT_AVAILABLE:
+        gtk_widget_set_visible (widget, FALSE);
+        break;
+      case UPDATES_AVAILABLE:
+        gtk_widget_set_sensitive (widget, TRUE);
+        gtk_button_set_label (GTK_BUTTON (widget), _("Updates Available"));
+        break;
+      case UPDATES_NOT_AVAILABLE:
+        gtk_widget_set_sensitive (widget, FALSE);
+        gtk_button_set_label (GTK_BUTTON (widget), _("Nothing to Update"));
+        break;
+      case CHECKING_UPDATES:
+        gtk_widget_set_sensitive (widget, FALSE);
+        gtk_button_set_label (GTK_BUTTON (widget), _("Checking for Updates"));
+        break;
+    }
 }
 
 static void
@@ -1213,7 +1240,7 @@ on_pk_transaction_signal (GDBusProxy *proxy,
 {
   if (g_strcmp0 (signal_name, "Package") == 0)
     {
-      self->priv->updates_available = TRUE;
+      self->priv->updates_state = UPDATES_AVAILABLE;
     }
   else if (g_strcmp0 (signal_name, "Finished") == 0)
     {
@@ -1299,7 +1326,8 @@ on_pk_get_tid_ready (GObject      *source,
 static void
 refresh_updates (CcInfoPanel *self)
 {
-  self->priv->updates_available = FALSE;
+  self->priv->updates_state = CHECKING_UPDATES;
+  refresh_update_button (self);
 
   g_assert (self->priv->pk_proxy != NULL);
   g_dbus_proxy_call (self->priv->pk_proxy,
@@ -1364,7 +1392,10 @@ cc_info_panel_init (CcInfoPanel *self)
                                                         NULL,
                                                         NULL);
   if (self->priv->pk_proxy == NULL)
-    g_warning ("Unable to get PackageKit proxy object");
+    {
+      g_warning ("Unable to get PackageKit proxy object");
+      self->priv->updates_state = PK_NOT_AVAILABLE;
+    }
   else
     {
       g_signal_connect (self->priv->pk_proxy,
