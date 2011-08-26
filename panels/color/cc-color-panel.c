@@ -79,6 +79,9 @@ typedef enum {
 #define GCM_SETTINGS_RECALIBRATE_PRINTER_THRESHOLD      "recalibrate-printer-threshold"
 #define GCM_SETTINGS_RECALIBRATE_DISPLAY_THRESHOLD      "recalibrate-display-threshold"
 
+/* max number of devices and profiles to cause auto-expand at startup */
+#define GCM_PREFS_MAX_DEVICES_PROFILES_EXPANDED         5
+
 static void     gcm_prefs_device_add_cb (GtkWidget *widget, CcColorPanel *prefs);
 
 static void
@@ -1799,6 +1802,17 @@ gcm_prefs_device_removed_cb (CdClient *client,
   gtk_tree_selection_select_iter (selection, &iter);
 }
 
+static gboolean
+gcm_prefs_tree_model_count_cb (GtkTreeModel *model,
+                               GtkTreePath *path,
+                               GtkTreeIter *iter,
+                               gpointer user_data)
+{
+  guint *i = (guint *) user_data;
+  (*i)++;
+  return FALSE;
+}
+
 static void
 gcm_prefs_get_devices_cb (GObject *object,
                           GAsyncResult *res,
@@ -1812,6 +1826,7 @@ gcm_prefs_get_devices_cb (GObject *object,
   GtkTreePath *path;
   GtkWidget *widget;
   guint i;
+  guint devices_and_profiles = 0;
   CcColorPanelPrivate *priv = prefs->priv;
 
   /* get devices and add them */
@@ -1838,6 +1853,15 @@ gcm_prefs_get_devices_cb (GObject *object,
   path = gtk_tree_path_new_from_string ("0");
   gtk_tree_view_set_cursor (GTK_TREE_VIEW (widget), path, NULL, FALSE);
   gtk_tree_path_free (path);
+
+  /* if we have only a few devices and profiles expand the treeview
+   * devices so they can all be seen */
+  gtk_tree_model_foreach (GTK_TREE_MODEL (priv->list_store_devices),
+                          gcm_prefs_tree_model_count_cb,
+                          &devices_and_profiles);
+  if (devices_and_profiles <= GCM_PREFS_MAX_DEVICES_PROFILES_EXPANDED)
+    gtk_tree_view_expand_all (GTK_TREE_VIEW (widget));
+
 out:
   if (devices != NULL)
     g_ptr_array_unref (devices);
