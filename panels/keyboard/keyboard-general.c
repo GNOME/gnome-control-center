@@ -81,29 +81,29 @@ keyboard_general_init (CcPanel *panel, GtkBuilder *builder)
     interface_settings = g_settings_new ("org.gnome.desktop.interface");
 
   g_settings_bind (keyboard_settings, "repeat",
-                   gtk_builder_get_object (builder, "repeat_toggle"), "active",
+                   WID ("repeat_toggle"), "active",
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (keyboard_settings, "repeat",
-                   gtk_builder_get_object (builder, "repeat_table"), "sensitive",
+                   WID ("repeat_table"), "sensitive",
                    G_SETTINGS_BIND_GET);
   
   g_settings_bind (keyboard_settings, "delay",
-                   gtk_range_get_adjustment (GTK_RANGE (gtk_builder_get_object (builder, "repeat_delay_scale"))), "value",
+                   gtk_range_get_adjustment (GTK_RANGE (WID ("repeat_delay_scale"))), "value",
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind_with_mapping (keyboard_settings, "repeat-interval",
-                                gtk_range_get_adjustment (GTK_RANGE (gtk_builder_get_object (builder, "repeat_speed_scale"))), "value",
+                                gtk_range_get_adjustment (GTK_RANGE (WID ("repeat_speed_scale"))), "value",
                                 G_SETTINGS_BIND_DEFAULT,
                                 get_rate, set_rate, NULL, NULL);
 
   g_settings_bind (interface_settings, "cursor-blink",
-                   gtk_builder_get_object (builder, "cursor_toggle"), "active",
+                   WID ("cursor_toggle"), "active",
                    G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (interface_settings, "cursor-blink",
-                   gtk_builder_get_object (builder, "cursor_table"), "sensitive",
+                   WID ("cursor_table"), "sensitive",
                    G_SETTINGS_BIND_GET);
 
   g_settings_bind (interface_settings, "cursor-blink-time",
-                   gtk_range_get_adjustment (GTK_RANGE (gtk_builder_get_object (builder, "cursor_blink_time_scale"))), "value",
+                   gtk_range_get_adjustment (GTK_RANGE (WID ("cursor_blink_time_scale"))), "value",
                    G_SETTINGS_BIND_DEFAULT);
 
   g_signal_connect (WID ("linkbutton"), "activate-link",
