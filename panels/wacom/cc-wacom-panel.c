@@ -291,46 +291,6 @@ combobox_text_cellrenderer (GtkComboBox *combo, int name_column)
 					"text", BUTTONNAME_COLUMN, NULL);
 }
 
-static void
-gnome_wacom_properties_init (CcWacomPanel *panel)
-{
-	CcWacomPanelPrivate	*priv = CC_WACOM_PANEL(panel)->priv;
-	GtkComboBox		*combo;
-
-	priv->wacom_settings  = g_settings_new (WACOM_SCHEMA);
-	priv->stylus_settings = g_settings_new (WACOM_STYLUS_SCHEMA);
-	priv->eraser_settings = g_settings_new (WACOM_ERASER_SCHEMA);
-
-	g_signal_connect (WID ("scale-tip-feel"), "value-changed",
-			  G_CALLBACK (tip_feel_value_changed_cb), panel);
-	g_signal_connect (WID ("scale-eraser-feel"), "value-changed",
-			  G_CALLBACK (eraser_feel_value_changed_cb), panel);
-
-	combo = GTK_COMBO_BOX (WID ("combo-topbutton"));
-	combobox_text_cellrenderer (combo, BUTTONNAME_COLUMN);
-	g_signal_connect (G_OBJECT (combo), "changed",
-			  G_CALLBACK (button_changed_cb), panel);
-
-	combo = GTK_COMBO_BOX (WID ("combo-bottombutton"));
-	combobox_text_cellrenderer (combo, BUTTONNAME_COLUMN);
-	g_signal_connect (G_OBJECT (combo), "changed",
-			  G_CALLBACK (button_changed_cb), panel);
-
-	combo = GTK_COMBO_BOX (WID ("combo-tabletmode"));
-	combobox_text_cellrenderer (combo, MODELABEL_COLUMN);
-	g_signal_connect (G_OBJECT (combo), "changed",
-			  G_CALLBACK (tabletmode_changed_cb), panel);
-
-	set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-topbutton")), priv->stylus_settings, 3);
-	set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-bottombutton")), priv->stylus_settings, 2);
-	set_mode_from_gsettings (GTK_COMBO_BOX (WID ("combo-tabletmode")), panel);
-	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-tip-feel")), priv->stylus_settings);
-	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-eraser-feel")), priv->eraser_settings);
-
-	gtk_image_set_from_file (GTK_IMAGE (WID ("image-tablet")), PIXMAP_DIR "/wacom-tablet.png");
-	gtk_image_set_from_file (GTK_IMAGE (WID ("image-stylus")), PIXMAP_DIR "/wacom-stylus.png");
-}
-
 /* Boilerplate code goes below */
 
 static void
@@ -403,6 +363,7 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	CcWacomPanelPrivate *priv;
 	GtkWidget *grid;
 	GError *error = NULL;
+	GtkComboBox *combo;
 
 	priv = self->priv = WACOM_PANEL_PRIVATE (self);
 
@@ -419,7 +380,39 @@ cc_wacom_panel_init (CcWacomPanel *self)
 		return;
 	}
 
-	gnome_wacom_properties_init (self);
+	priv->wacom_settings  = g_settings_new (WACOM_SCHEMA);
+	priv->stylus_settings = g_settings_new (WACOM_STYLUS_SCHEMA);
+	priv->eraser_settings = g_settings_new (WACOM_ERASER_SCHEMA);
+
+	g_signal_connect (WID ("scale-tip-feel"), "value-changed",
+			  G_CALLBACK (tip_feel_value_changed_cb), self);
+	g_signal_connect (WID ("scale-eraser-feel"), "value-changed",
+			  G_CALLBACK (eraser_feel_value_changed_cb), self);
+
+	combo = GTK_COMBO_BOX (WID ("combo-topbutton"));
+	combobox_text_cellrenderer (combo, BUTTONNAME_COLUMN);
+	g_signal_connect (G_OBJECT (combo), "changed",
+			  G_CALLBACK (button_changed_cb), self);
+
+	combo = GTK_COMBO_BOX (WID ("combo-bottombutton"));
+	combobox_text_cellrenderer (combo, BUTTONNAME_COLUMN);
+	g_signal_connect (G_OBJECT (combo), "changed",
+			  G_CALLBACK (button_changed_cb), self);
+
+	combo = GTK_COMBO_BOX (WID ("combo-tabletmode"));
+	combobox_text_cellrenderer (combo, MODELABEL_COLUMN);
+	g_signal_connect (G_OBJECT (combo), "changed",
+			  G_CALLBACK (tabletmode_changed_cb), self);
+
+	set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-topbutton")), priv->stylus_settings, 3);
+	set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-bottombutton")), priv->stylus_settings, 2);
+	set_mode_from_gsettings (GTK_COMBO_BOX (WID ("combo-tabletmode")), self);
+	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-tip-feel")), priv->stylus_settings);
+	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-eraser-feel")), priv->eraser_settings);
+
+	gtk_image_set_from_file (GTK_IMAGE (WID ("image-tablet")), PIXMAP_DIR "/wacom-tablet.png");
+	gtk_image_set_from_file (GTK_IMAGE (WID ("image-stylus")), PIXMAP_DIR "/wacom-stylus.png");
+
 
 	grid = WID ("main-grid");
 
