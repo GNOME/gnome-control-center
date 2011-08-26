@@ -215,21 +215,6 @@ error_message (CcDisplayPanel *self, const char *primary_text, const char *secon
 }
 
 static gboolean
-do_free (gpointer data)
-{
-  g_free (data);
-  return FALSE;
-}
-
-static gchar *
-idle_free (gchar *s)
-{
-  g_idle_add (do_free, s);
-
-  return s;
-}
-
-static gboolean
 should_show_resolution (gint output_width,
                         gint output_height,
                         gint width,
@@ -723,7 +708,7 @@ rebuild_resolution_combo (CcDisplayPanel *self)
 {
   int i;
   GnomeRRMode **modes;
-  const char *current;
+  char *current;
   int output_width, output_height;
 
   clear_combo (self->priv->resolution_combo);
@@ -745,28 +730,37 @@ rebuild_resolution_combo (CcDisplayPanel *self)
 
   for (i = 0; modes[i] != NULL; ++i)
     {
-      int width, height;
+      int width, height, rate;
 
       width = gnome_rr_mode_get_width (modes[i]);
       height = gnome_rr_mode_get_height (modes[i]);
+      rate = gnome_rr_mode_get_freq (modes[i]);
 
       if (should_show_resolution (output_width, output_height, width, height))
         {
+          char *text;
+
+          text = make_resolution_string (width, height);
           add_key (self->priv->resolution_combo,
-                   idle_free (make_resolution_string (width, height)),
-                   width, height, 0, -1);
+                   text, width, height, rate, -1);
+          g_free (text);
         }
     }
 
-  current = idle_free (make_resolution_string (output_width, output_height));
+  current = make_resolution_string (output_width, output_height);
 
   if (!combo_select (self->priv->resolution_combo, current))
     {
       int best_w, best_h;
+      char *str;
 
       find_best_mode (modes, &best_w, &best_h);
-      combo_select (self->priv->resolution_combo, idle_free (make_resolution_string (best_w, best_h)));
+      str = make_resolution_string (best_w, best_h);
+      combo_select (self->priv->resolution_combo, str);
+      g_free (str);
     }
+
+  g_free (current);
 }
 
 static void
