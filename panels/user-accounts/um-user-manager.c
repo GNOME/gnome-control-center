@@ -115,19 +115,15 @@ remove_user_from_dupe_ring (UmUserManager *manager,
         GList *dupes;
         UmUser *dup;
 
-        um_user_show_short_display_name (user);
-
+        dup = NULL;
         dupes = g_object_get_data (G_OBJECT (user), "dupes");
 
-        if (dupes == NULL) {
-                return;
+        if (!dupes) {
+                goto out;
         }
 
         if (dupes->next == dupes->prev) {
                 dup = dupes->next->data;
-                um_user_show_short_display_name (dup);
-                g_signal_emit (manager, signals[USER_CHANGED], 0, dup);
-
                 g_list_free_1 (dupes->next);
                 g_object_set_data (G_OBJECT (dup), "dupes", NULL);
         }
@@ -138,6 +134,14 @@ remove_user_from_dupe_ring (UmUserManager *manager,
 
         g_list_free_1 (dupes);
         g_object_set_data (G_OBJECT (user), "dupes", NULL);
+
+out:
+        if (dup) {
+                um_user_show_short_display_name (dup);
+                g_signal_emit (manager, signals[USER_CHANGED], 0, dup);
+        }
+        um_user_show_short_display_name (user);
+        g_signal_emit (manager, signals[USER_CHANGED], 0, user);
 }
 
 static gboolean
@@ -163,15 +167,14 @@ add_user_to_dupe_ring (UmUserManager *manager,
                 return;
         }
 
-        um_user_show_full_display_name (user);
-
         dupes = g_object_get_data (G_OBJECT (dup), "dupes");
         if (!dupes) {
-                um_user_show_full_display_name (dup);
-                g_signal_emit (manager, signals[USER_CHANGED], 0, dup);
                 dupes = g_list_append (NULL, dup);
                 g_object_set_data (G_OBJECT (dup), "dupes", dupes);
                 dupes->next = dupes->prev = dupes;
+        }
+        else {
+                dup = NULL;
         }
 
         l = g_list_append (NULL, user);
@@ -180,6 +183,13 @@ add_user_to_dupe_ring (UmUserManager *manager,
         dupes->prev->next = l;
         l->next = dupes;
         dupes->prev = l;
+
+        if (dup) {
+                um_user_show_full_display_name (dup);
+                g_signal_emit (manager, signals[USER_CHANGED], 0, dup);
+        }
+        um_user_show_full_display_name (user);
+        g_signal_emit (manager, signals[USER_CHANGED], 0, user);
 }
 
 static void
@@ -295,6 +305,7 @@ static void
 um_user_manager_init (UmUserManager *manager)
 {
         GError *error = NULL;
+        DBusGConnection *bus;
 
         manager->user_by_object_path = g_hash_table_new_full (g_str_hash,
                                                               g_str_equal,
@@ -305,14 +316,14 @@ um_user_manager_init (UmUserManager *manager)
                                                        g_free,
                                                        g_object_unref);
 
-        manager->bus = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
-        if (manager->bus == NULL) {
+        bus = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
+        if (bus == NULL) {
                 g_warning ("Couldn't connect to system bus: %s", error->message);
                 g_error_free (error);
                 goto error;
         }
 
-        manager->proxy = dbus_g_proxy_new_for_name (manager->bus,
+        manager->proxy = dbus_g_proxy_new_for_name (bus,
                                                     "org.freedesktop.Accounts",
                                                     "/org/freedesktop/Accounts",
                                                     "org.freedesktop.Accounts");
@@ -358,6 +369,8 @@ um_user_manager_finalize (GObject *object)
         g_hash_table_foreach (manager->user_by_object_path, clear_dup, NULL);
         g_hash_table_destroy (manager->user_by_object_path);
         g_hash_table_destroy (manager->user_by_name);
+
+        g_object_unref (manager->proxy);
 
         G_OBJECT_CLASS (um_user_manager_parent_class)->finalize (object);
 }
@@ -447,6 +460,7 @@ create_user_done (DBusGProxy     *proxy,
         }
 
         data->callback (G_OBJECT (data->manager), G_ASYNC_RESULT (res), data->data);
+        g_object_unref (res);
 }
 
 gboolean
@@ -538,6 +552,7 @@ delete_user_done (DBusGProxy     *proxy,
         }
 
         data->callback (G_OBJECT (data->manager), G_ASYNC_RESULT (res), data->data);
+        g_object_unref (res);
 }
 
 gboolean

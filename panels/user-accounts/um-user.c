@@ -242,6 +242,8 @@ um_user_finalize (GObject *object)
 
         user = UM_USER (object);
 
+        g_free (user->display_name);
+
         dbus_g_connection_unref (user->bus);
         g_free (user->object_path);
 

@@ -40,7 +40,6 @@ typedef struct
 {
         GObject parent;
 
-        DBusGConnection *bus;
         DBusGProxy *proxy;
 
         GHashTable *user_by_object_path;

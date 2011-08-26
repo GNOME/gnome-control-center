@@ -322,8 +322,11 @@ select_created_user (UmUser *user, UmUserPanelPrivate *d)
                         gtk_tree_view_scroll_to_cell (tv, path, NULL, FALSE, 0.0, 0.0);
                         gtk_tree_selection_select_path (selection, path);
                         gtk_tree_path_free (path);
+                        g_object_unref (current);
                         break;
                 }
+                if (current)
+                        g_object_unref (current);
         } while (gtk_tree_model_iter_next (model, &iter));
 }
 
@@ -458,6 +461,7 @@ delete_user (GtkButton *button, UmUserPanelPrivate *d)
 
         gtk_window_present (GTK_WINDOW (dialog));
 
+        g_object_unref (user);
 }
 
 static const gchar *
@@ -634,10 +638,11 @@ change_name_done (GtkWidget          *entry,
         user = get_selected_user (d);
 
         text = cc_editable_entry_get_text (CC_EDITABLE_ENTRY (entry));
-
         if (g_strcmp0 (text, um_user_get_real_name (user)) != 0) {
                 um_user_set_real_name (user, text);
         }
+
+        g_object_unref (user);
 }
 
 static void
@@ -650,6 +655,7 @@ account_type_changed (UmEditableCombo    *combo,
         gint account_type;
 
         user = get_selected_user (d);
+
         model = um_editable_combo_get_model (combo);
         um_editable_combo_get_active_iter (combo, &iter);
         gtk_tree_model_get (model, &iter, 1, &account_type, -1);
@@ -657,6 +663,8 @@ account_type_changed (UmEditableCombo    *combo,
         if (account_type != um_user_get_account_type (user)) {
                 um_user_set_account_type (user, account_type);
         }
+
+        g_object_unref (user);
 }
 
 static void
@@ -671,6 +679,7 @@ language_response (GtkDialog         *dialog,
         GtkTreeIter iter;
 
         user = get_selected_user (d);
+
         combo = get_widget (d, "account-language-combo");
         model = um_editable_combo_get_model (UM_EDITABLE_COMBO (combo));
 
@@ -689,6 +698,8 @@ language_response (GtkDialog         *dialog,
 
         gtk_widget_hide (GTK_WIDGET (dialog));
         gtk_widget_set_sensitive (combo, TRUE);
+
+        g_object_unref (user);
 }
 
 static void
@@ -704,6 +715,7 @@ language_changed (UmEditableCombo    *combo,
                  return;
 
         user = get_selected_user (d);
+
         model = um_editable_combo_get_model (combo);
 
         gtk_tree_model_get (model, &iter, 0, &lang, -1);
@@ -712,14 +724,14 @@ language_changed (UmEditableCombo    *combo,
                         um_user_set_language (user, lang);
                 }
                 g_free (lang);
-                return;
+                goto out;
         }
 
         if (d->language_chooser) {
 		cc_language_chooser_clear_filter (d->language_chooser);
                 gtk_window_present (GTK_WINDOW (d->language_chooser));
                 gtk_widget_set_sensitive (GTK_WIDGET (combo), FALSE);
-                return;
+                goto out;
         }
 
         d->language_chooser = cc_language_chooser_new (gtk_widget_get_toplevel (d->main_box), FALSE);
@@ -732,6 +744,9 @@ language_changed (UmEditableCombo    *combo,
         gdk_window_set_cursor (gtk_widget_get_window (gtk_widget_get_toplevel (d->main_box)), NULL);
         gtk_window_present (GTK_WINDOW (d->language_chooser));
         gtk_widget_set_sensitive (GTK_WIDGET (combo), FALSE);
+
+out:
+        g_object_unref (user);
 }
 
 static void
@@ -755,11 +770,13 @@ change_fingerprint (GtkButton *button, UmUserPanelPrivate *d)
         UmUser *user;
 
         user = get_selected_user (d);
+
         g_assert (g_strcmp0 (g_get_user_name (), um_user_get_user_name (user)) == 0);
 
         label = get_widget (d, "account-fingerprint-value-label");
         label2 = get_widget (d, "account-fingerprint-button-label");
         fingerprint_button_clicked (GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)), label, label2, user);
+
         g_object_unref (user);
 }
 
@@ -988,6 +1005,8 @@ on_permission_changed (GPermission *permission,
         }
 
         um_password_dialog_set_privileged (d->password_dialog, is_authorized);
+
+        g_object_unref (user);
 }
 
 static gboolean
@@ -1063,10 +1082,7 @@ autologin_cell_data_func (GtkTreeViewColumn    *tree_column,
 {
         gboolean is_autologin;
 
-        gtk_tree_model_get (model,
-                            iter,
-                            AUTOLOGIN_COL, &is_autologin,
-                            -1);
+        gtk_tree_model_get (model, iter, AUTOLOGIN_COL, &is_autologin, -1);
 
         if (is_autologin) {
                 g_object_set (cell, "icon-name", "emblem-default-symbolic", NULL);
@@ -1108,6 +1124,7 @@ setup_main_window (UmUserPanelPrivate *d)
         gtk_tree_view_set_search_column (GTK_TREE_VIEW (userlist), USER_COL);
         gtk_tree_view_set_search_equal_func (GTK_TREE_VIEW (userlist),
                                              match_user, NULL, NULL);
+        g_object_unref (model);
 
         g_signal_connect (d->um, "users-loaded", G_CALLBACK (users_loaded), d);
 
@@ -1300,7 +1317,6 @@ um_user_panel_dispose (GObject *object)
                 g_object_unref (priv->permission);
                 priv->permission = NULL;
         }
-
         G_OBJECT_CLASS (um_user_panel_parent_class)->dispose (object);
 }
 
