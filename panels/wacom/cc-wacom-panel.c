@@ -409,7 +409,7 @@ cc_wacom_panel_init (CcWacomPanel *self)
 
 	grid = WID ("main-grid");
 	gtk_container_add (GTK_CONTAINER (self), grid);
-	gtk_container_set_border_width (GTK_CONTAINER (self), 24);
+	gtk_container_set_border_width (GTK_CONTAINER (grid), 24);
 
 	priv->wacom_settings  = g_settings_new (WACOM_SCHEMA);
 	priv->stylus_settings = g_settings_new (WACOM_STYLUS_SCHEMA);
