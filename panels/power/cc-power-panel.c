@@ -205,18 +205,22 @@ get_primary_device_cb (GObject *source_object, GAsyncResult *res, gpointer user_
   UpDeviceKind kind;
   UpDeviceState state;
   GIcon *icon;
+  GtkWidget *status_box;
   CcPowerPanelPrivate *priv = CC_POWER_PANEL (user_data)->priv;
+
+  status_box = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                   "hbox_status"));
 
   result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
   if (result == NULL)
     {
       g_printerr ("Error getting primary device: %s\n", error->message);
       g_error_free (error);
-      widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                   "hbox_status"));
-      gtk_widget_hide (widget);
+      gtk_widget_hide (status_box);
       return;
     }
+
+  gtk_widget_show (status_box);
 
   /* set the icon and text */
   g_variant_get (result,
