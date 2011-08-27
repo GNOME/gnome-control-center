@@ -86,8 +86,6 @@
   <object class="GtkSizeGroup" id="sizegroup_combos">
     <widgets>
       <widget name="combobox_critical"/>
-      <widget name="combobox_button_power"/>
-      <widget name="combobox_button_sleep"/>
       <widget name="combobox_sleep"/>
       <widget name="combobox_sleep_battery"/>
       <widget name="combobox_sleep_ac"/>
@@ -343,105 +341,6 @@
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="vbox_buttons">
-            <property name="visible">True</property>
-            <property name="spacing">6</property>
-            <child>
-              <object class="GtkHBox" id="hbox1">
-                <property name="visible">True</property>
-                <property name="spacing">6</property>
-                <child>
-                  <object class="GtkHBox" id="hbox7">
-                    <property name="visible">True</property>
-                    <child>
-                      <object class="GtkLabel" id="label4">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">When the p_ower button is pressed:</property>
-                        <property name="use_underline">True</property>
-                        <property name="mnemonic_widget">combobox_button_power</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkComboBox" id="combobox_button_power">
-                    <property name="visible">True</property>
-                    <property name="model">liststore_power</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkHBox" id="hbox4">
-                <property name="visible">True</property>
-                <property name="spacing">6</property>
-                <child>
-                  <object class="GtkHBox" id="hbox8">
-                    <property name="visible">True</property>
-                    <child>
-                      <object class="GtkLabel" id="label3">
-                        <property name="visible">True</property>
-                        <property name="label" translatable="yes">When the _sleep button is pressed:</property>
-                        <property name="use_underline">True</property>
-                        <property name="mnemonic_widget">combobox_button_sleep</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkComboBox" id="combobox_button_sleep">
-                    <property name="visible">True</property>
-                    <property name="model">liststore_sleep</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkHBox" id="hbox_status">
             <property name="visible">True</property>
             <child>
@@ -519,8 +418,6 @@
     <property name="ignore-hidden">True</property>
     <widgets>
       <widget name="hbox6"/>
-      <widget name="hbox7"/>
-      <widget name="hbox8"/>
       <widget name="hbox10"/>
       <widget name="hbox15"/>
       <widget name="hbox14"/>
