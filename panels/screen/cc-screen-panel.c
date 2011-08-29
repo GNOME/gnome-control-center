@@ -253,6 +253,9 @@ get_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data
     {
       gtk_widget_hide (WID ("screen_brightness_hscale"));
       gtk_widget_hide (WID ("screen_auto_reduce_checkbutton"));
+      /* FIXME: This needs a proper fix:
+       * https://bugzilla.gnome.org/show_bug.cgi?id=657606 */
+      gtk_label_set_text (GTK_LABEL (WID ("brightness-section-heading")), "");
       g_warning ("Error getting brightness: %s", error->message);
       g_error_free (error);
       return;
