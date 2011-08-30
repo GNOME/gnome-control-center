@@ -44,7 +44,7 @@ list_languages_CFLAGS = $(LIBLANGUAGE_CFLAGS)
 
 uidir = $(pkgdatadir)/ui
 
-ui_DATA = \
+dist_ui_DATA = \
 	language-chooser.ui
 
 -include $(top_srcdir)/git.mk
