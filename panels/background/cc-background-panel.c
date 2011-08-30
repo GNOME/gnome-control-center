@@ -996,8 +996,7 @@ add_button_clicked (GtkButton         *button,
   priv = panel->priv;
 
   filter = gtk_file_filter_new ();
-  gtk_file_filter_add_mime_type (filter, "image/png");
-  gtk_file_filter_add_mime_type (filter, "image/jpeg");
+  gtk_file_filter_add_mime_type (filter, "image/*");
 
   chooser = gtk_file_chooser_dialog_new (_("Browse for more pictures"),
 					 GTK_WINDOW (gtk_widget_get_toplevel (WID ("background-panel"))),

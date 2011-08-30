@@ -240,7 +240,8 @@ add_single_file (BgPicturesSource *bg_source,
     return FALSE;
 
   if (g_str_equal ("image/png", content_type) ||
-      g_str_equal ("image/jpeg", content_type))
+      g_str_equal ("image/jpeg", content_type) ||
+      g_str_equal ("image/svg+xml", content_type))
     {
       CcBackgroundItem *item;
       char *uri;
