@@ -1,3 +1,123 @@
+===========================
+Version 3.1.90 (2011-08-30)
+===========================
+
+Background:
+- Allow SVG image files as background (Rodrigo Moya) (#648764)
+
+Color:
+- Fix a crash where out internal state gets screwed up (Richard Hughes)
+- Only allow the user to import custom profiles with colord >= 0.1.12 (Richard Hughes)
+- Remove color managed devices if they are deleted by another process (Richard Hughes)
+- Do not attempt to delete the device if it's already added (Richard Hughes)
+- If there are no profiles or devices then hide the toolbar (Richard Hughes)
+- Add a small italic indication when there are no color managed devices (Richard Hughes)
+- Add a new 'Learn more' button to the color panel (Richard Hughes)
+- If we have only a few devices and profiles expand the treeview at startup (Richard Hughes)
+- Remove unneeded category (Bastien Nocera)
+- When setting the default profile for a display, use the correct device (Richard Hughes)
+
+Common:
+- Simplify language display (Matthias Clasen)
+- Add api for region names (Matthias Clasen)
+- Add a region mode to the language chooser (Matthias Clasen)
+- Tweak default user list (Bastien Nocera)
+- Fix distribution of language chooser glade file (Rodrigo Moya)
+
+Date & Time:
+- Use radio buttons for 24h time (Bastien Nocera) (#640059)
+
+Display:
+- Clean up ifdef's (Bastien Nocera)
+- Simplify panel code (Bastien Nocera)
+- Fix the labeller not disappearing (Bastien Nocera)
+- Prefer higher frequency modes (Bastien Nocera) (#655041)
+
+Keyboard:
+- Add link to the Region panel (Bastien Nocera) (#643101)
+- Simplify GtkBuilder calls (Bastien Nocera)
+- Use icon without a spanner (Bastien Nocera) (#657556)
+
+Network:
+- Mobile broadband bug fixes (Jiří Klimeš) (#657303)
+- Fix possible double-free (Bastien Nocera)
+- Fix display of IP info for some configs (Jiří Klimeš) (#657303)
+- Fix updating VPN info when edited (Jiří Klimeš) (#723489)
+- Show VPN type and info in panel (Jiří Klimeš)
+- Clarify the VPN service type setting (Bastien Nocera)
+- Rename "Options..." to "Configure..." (Bastien Nocera) (#657002)
+- Fallback to GNOME as a hotspot name (Bastien Nocera)
+- Use icon without a spanner (Bastien Nocera) (#657556)
+
+Online accounts:
+- Disable buttons when D-Bus service not available (Bastien Nocera) (#652572)
+
+Power:
+- Remove power and suspend buttons config (Bastien Nocera) (#652183) (#657068)
+- Don't shrink the panel on desktops (Bastien Nocera)
+
+Region:
+- Avoid a crash in the absence of configured layouts (Matthias Clasen)
+- Fix locale-changing code (Matthias Clasen)
+- Redo the language tab (Matthias Clasen)
+- Redo the formats tab (Matthias Clasen)
+- Use region names on the region tab (Matthias Clasen)
+- Show fewer regions (Matthias Clasen)
+- Ensure the system tab is updated (Matthias Clasen)
+- Add some spacing to the system tab (Matthias Clasen)
+- Initial implementation of 'copy to system' (Matthias Clasen)
+- Avoid crash when systemd is not available (Rodrigo Moya)
+- Don't show region panel in Unity, it uses its own language selector (Rodrigo Moya)
+
+Shell:
+- Only load desktop files from our dirs (Bastien Nocera)
+- Don't repeat the item title when searching (Bastien Nocera) (#657020)
+- Add Ctrl+Q as a way to exit the shell (Bastien Nocera) (#653443)
+
+Sound:
+- Remove trailing spaces in strings (Bastien Nocera) (#657169)
+- Track PulseAudio connection state and expose it (Giovanni Campagna) (#645708)
+- Update volume-control applet for GVC API changes (Giovanni Campagna) (#645708)
+- Don't warn without a sizegroup (Bastien Nocera)
+- Fix sizing of sliders (Bastien Nocera)
+
+System info:
+- Always show the "Updates" button (Bastien Nocera) (#645274)
+
+Universal access:
+- Add more keywords to the desktop file (Matthias Clasen) (#657189)
+- Add translator comments (Bastien Nocera) (#657167)
+- Keep "text size" items a constant size (Bastien Nocera) (#657188)
+- Don't crash when metacity isn't installed (Bastien Nocera)
+
+User accounts:
+- Remove some dead code (Matthias Clasen)
+- Add a filter entry to the language dialog (Matthias Clasen)
+- Prepopulate the language combo (Matthias Clasen)
+- Remove trailing space in string (Bastien Nocera) (#657169)
+- Add translator comments for split line (Bastien Nocera) (#657168)
+- Prevent autologin for disabled users (Matthias Clasen) (#649816)
+- Fix life-cycle issues (Matthias Clasen)
+
+Wacom:
+- Add a wacom control panel (Peter Hutterer) (#640981)
+
+Translations:
+- bg (Ivaylo Valkov)
+- de (Mario Blättermann)
+- es (Daniel Mustieles, Jorge González)
+- gl (Fran Dieguez)
+- lt (Aurimas Černius)
+- nb (Kjartan Maraas)
+- nl (Reinout van Schouwen)
+- sr (Мирослав Николић)
+- sv (Daniel Nylander)
+- ta (Dr.T.Vasudevan)
+- ug (Abduxukur Abdurixit)
+- zh_CN (Aron Xu)
+- zh_HK (Chao-Hsiung Liao)
+- zh_TW (Chao-Hsiung Liao)
+
 ==========================
 Version 3.1.5 (2011-08-18)
 ==========================
