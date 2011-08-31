@@ -370,6 +370,13 @@ panels/info/Makefile
 panels/info/gnome-info-panel.desktop.in
 panels/power/Makefile
 panels/power/gnome-power-panel.desktop.in
+panels/power/icons/Makefile
+panels/power/icons/16x16/Makefile
+panels/power/icons/22x22/Makefile
+panels/power/icons/24x24/Makefile
+panels/power/icons/32x32/Makefile
+panels/power/icons/48x48/Makefile
+panels/power/icons/256x256/Makefile
 panels/color/Makefile
 panels/color/gnome-color-panel.desktop.in
 panels/color/icons/Makefile

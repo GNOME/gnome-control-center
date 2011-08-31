@@ -1,5 +1,7 @@
 cappletname = power
 
+SUBDIRS = icons
+
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(POWER_PANEL_CFLAGS)				\
