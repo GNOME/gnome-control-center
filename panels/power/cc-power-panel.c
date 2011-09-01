@@ -214,7 +214,8 @@ get_primary_device_cb (GObject *source_object, GAsyncResult *res, gpointer user_
   result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
   if (result == NULL)
     {
-      g_printerr ("Error getting primary device: %s\n", error->message);
+      if (g_strstr_len (error->message, -1, "no primary device") == NULL)
+        g_printerr ("Error getting primary device: %s\n", error->message);
       g_error_free (error);
       gtk_widget_hide (status_box);
       return;
