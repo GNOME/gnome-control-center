@@ -74,6 +74,7 @@ struct _CcDisplayPanelPrivate
 
   GSettings      *clock_settings;
   GtkBuilder     *builder;
+  guint           focus_id;
 
   GtkWidget      *panel;
   GtkWidget      *current_monitor_event_box;
@@ -157,6 +158,8 @@ static void
 cc_display_panel_finalize (GObject *object)
 {
   CcDisplayPanel *self;
+  CcShell *shell;
+  GtkWidget *toplevel;
 
   self = CC_DISPLAY_PANEL (object);
 
@@ -165,6 +168,11 @@ cc_display_panel_finalize (GObject *object)
 
   if (self->priv->clock_settings != NULL)
     g_object_unref (self->priv->clock_settings);
+
+  shell = cc_panel_get_shell (CC_PANEL (self));
+  toplevel = cc_shell_get_toplevel (shell);
+  g_signal_handler_disconnect (G_OBJECT (toplevel),
+                               self->priv->focus_id);
 
   gnome_rr_labeler_hide (self->priv->labeler);
   g_object_unref (self->priv->labeler);
@@ -2613,8 +2621,8 @@ cc_display_panel_constructor (GType                  gtype,
 
   shell = cc_panel_get_shell (CC_PANEL (self));
   toplevel = cc_shell_get_toplevel (shell);
-  g_signal_connect (toplevel, "notify::has-toplevel-focus",
-                    G_CALLBACK (dialog_toplevel_focus_changed), self);
+  self->priv->focus_id = g_signal_connect (toplevel, "notify::has-toplevel-focus",
+                                           G_CALLBACK (dialog_toplevel_focus_changed), self);
 
   self->priv->panel = WID ("display-panel");
   g_signal_connect_after (self->priv->panel, "show",
