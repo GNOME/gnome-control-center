@@ -26,8 +26,8 @@ libwacom_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 pixmapdir = $(pkgdatadir)/pixmaps
 pixmap_DATA = \
-	wacom-tablet.png \
-	wacom-stylus.png
+	wacom-tablet.svg \
+	wacom-stylus.svg
 
 uidir   = $(pkgdatadir)/ui
 ui_DATA = gnome-wacom-properties.ui
