@@ -167,6 +167,28 @@ tabletmode_changed_cb (GtkComboBox *combo, gpointer user_data)
 }
 
 static void
+left_handed_toggled_cb (GtkSwitch *sw, GParamSpec *pspec, gpointer *user_data)
+{
+	CcWacomPanelPrivate	*priv = CC_WACOM_PANEL(user_data)->priv;
+	const gchar*		rotation;
+
+	rotation = gtk_switch_get_active (sw) ? "half" : "none";
+
+	g_settings_set_string (priv->wacom_settings, "rotation", rotation);
+}
+
+static void
+set_left_handed_from_gsettings (CcWacomPanel *panel)
+{
+	CcWacomPanelPrivate	*priv = CC_WACOM_PANEL(panel)->priv;
+	const gchar*		rotation;
+
+	rotation = g_settings_get_string (priv->wacom_settings, "rotation");
+	if (strcmp (rotation, "half") == 0)
+		gtk_switch_set_active (GTK_SWITCH (WID ("switch-left-handed")), TRUE);
+}
+
+static void
 set_mode_from_gsettings (GtkComboBox *combo, CcWacomPanel *panel)
 {
 	CcWacomPanelPrivate	*priv = CC_WACOM_PANEL(panel)->priv;
@@ -382,6 +404,7 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	GtkWidget *grid;
 	GError *error = NULL;
 	GtkComboBox *combo;
+	GtkSwitch *sw;
 	char *objects[] = {
 		"main-grid",
 		"liststore-tabletmode",
@@ -435,11 +458,16 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	g_signal_connect (G_OBJECT (combo), "changed",
 			  G_CALLBACK (tabletmode_changed_cb), self);
 
+	sw = GTK_SWITCH (WID ("switch-left-handed"));
+	g_signal_connect (G_OBJECT (sw), "notify::active",
+			  G_CALLBACK (left_handed_toggled_cb), self);
+
 	set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-topbutton")), priv->stylus_settings, 3);
 	set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-bottombutton")), priv->stylus_settings, 2);
 	set_mode_from_gsettings (GTK_COMBO_BOX (WID ("combo-tabletmode")), self);
 	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-tip-feel")), priv->stylus_settings);
 	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-eraser-feel")), priv->eraser_settings);
+	set_left_handed_from_gsettings (self);
 
 	gtk_image_set_from_file (GTK_IMAGE (WID ("image-tablet")), PIXMAP_DIR "/wacom-tablet.svg");
 	gtk_image_set_from_file (GTK_IMAGE (WID ("image-stylus")), PIXMAP_DIR "/wacom-stylus.svg");
