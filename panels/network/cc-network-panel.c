@@ -3114,6 +3114,20 @@ stop_hotspot (GtkButton *button, CcNetworkPanel *panel)
         gtk_window_present (GTK_WINDOW (dialog));
 }
 
+static GVariant *
+bind_settings_enabled_cb (const GValue *value,
+                          const GVariantType *expected_type,
+                          gpointer user_data)
+{
+        const gchar *str;
+        GSettings *settings = G_SETTINGS (user_data);
+
+        /* only set to enabled if there is a host in the combobox */
+        str = g_value_get_string (value);
+        g_settings_set_string (settings, "host", str);
+        return g_variant_new_boolean (str != NULL && str[0] != '\0');
+}
+
 static void
 cc_network_panel_init (CcNetworkPanel *panel)
 {
@@ -3171,9 +3185,13 @@ cc_network_panel_init (CcNetworkPanel *panel)
         settings_tmp = g_settings_get_child (panel->priv->proxy_settings, "http");
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "entry_proxy_http"));
-        g_settings_bind (settings_tmp, "host",
-                         widget, "text",
-                         G_SETTINGS_BIND_DEFAULT);
+        g_settings_bind_with_mapping (settings_tmp, "enabled",
+                                      widget, "text",
+                                      G_SETTINGS_BIND_SET,
+                                      NULL,
+                                      bind_settings_enabled_cb,
+                                      settings_tmp,
+                                      NULL);
         adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (panel->priv->builder,
                                                              "adjustment_proxy_port_http"));
         g_settings_bind (settings_tmp, "port",
