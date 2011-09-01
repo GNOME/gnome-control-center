@@ -3165,6 +3165,12 @@ cc_network_panel_init (CcNetworkPanel *panel)
                           G_CALLBACK (panel_settings_changed),
                           panel);
 
+        /* explicitly set this to false as the panel has no way of
+         * linking the http and https proxies them together */
+        g_settings_set_boolean (panel->priv->proxy_settings,
+                                "use-same-proxy",
+                                FALSE);
+
         /* actions */
         value = g_settings_get_enum (panel->priv->proxy_settings, "mode");
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
