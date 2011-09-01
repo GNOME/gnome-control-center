@@ -26,11 +26,14 @@
 #include "cc-timezone-map.h"
 #include "dtm.h"
 #include "date-endian.h"
+#define GNOME_DESKTOP_USE_UNSTABLE_API
 
 #include <gdesktop-enums.h>
 #include <string.h>
 #include <stdlib.h>
 #include <libintl.h>
+
+#include <libgnome-desktop/gnome-wall-clock.h>
 #include <polkit/polkit.h>
 
 /* FIXME: This should be "Etc/GMT" instead */
@@ -77,7 +80,7 @@ struct _CcDateTimePanelPrivate
   GSettings *settings;
   GDesktopClockFormat clock_format;
 
-  guint update_id;
+  GnomeWallClock *clock_tracker;
 
   DateTimeMechanism *dtm;
   GCancellable *cancellable;
@@ -86,7 +89,6 @@ struct _CcDateTimePanelPrivate
 };
 
 static void update_time (CcDateTimePanel *self);
-static void queue_clock_update (CcDateTimePanel *self);
 
 static void
 cc_date_time_panel_get_property (GObject    *object,
@@ -119,10 +121,10 @@ cc_date_time_panel_dispose (GObject *object)
 {
   CcDateTimePanelPrivate *priv = CC_DATE_TIME_PANEL (object)->priv;
 
-  if (priv->update_id != 0)
+  if (priv->clock_tracker != NULL)
     {
-      g_source_remove (priv->update_id);
-      priv->update_id = 0;
+      g_object_unref (priv->clock_tracker);
+      priv->clock_tracker = NULL;
     }
 
   if (priv->builder)
@@ -754,6 +756,14 @@ month_year_changed (GtkWidget       *widget,
 }
 
 static void
+on_clock_changed (GnomeWallClock  *clock,
+		  GParamSpec      *pspec,
+		  CcDateTimePanel *panel)
+{
+  update_time (panel);
+}
+
+static void
 change_time (GtkButton       *button,
              CcDateTimePanel *panel)
 {
@@ -801,31 +811,6 @@ change_ntp (GObject         *gobject,
 {
   update_widget_state_for_ntp (self, gtk_switch_get_active (GTK_SWITCH (gobject)));
   queue_set_ntp (self);
-}
-
-static gboolean
-update_time_timer (CcDateTimePanel *self)
-{
-  g_date_time_unref (self->priv->date);
-  self->priv->date = g_date_time_new_now_local ();
-  update_time (self);
-  queue_clock_update (self);
-  return FALSE;
-}
-
-static void
-queue_clock_update (CcDateTimePanel *self)
-{
-  int timeouttime;
-  struct timeval tv;
-
-  gettimeofday (&tv, NULL);
-  timeouttime = (G_USEC_PER_SEC - tv.tv_usec) / 1000 + 1;
-
-  /* timeout of one minute if we don't care about the seconds */
-  timeouttime += 1000 * (59 - tv.tv_sec % 60);
-
-  self->priv->update_id = g_timeout_add (timeouttime, (GSourceFunc)update_time_timer, self);
 }
 
 static void
@@ -998,6 +983,9 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 
 
   /* setup the time itself */
+  priv->clock_tracker = g_object_new (GNOME_TYPE_WALL_CLOCK, NULL);
+  g_signal_connect (priv->clock_tracker, "notify::clock", G_CALLBACK (on_clock_changed), self);
+
   priv->settings = g_settings_new (CLOCK_SCHEMA);
   clock_settings_changed_cb (priv->settings, CLOCK_FORMAT_KEY, self);
   g_signal_connect (priv->settings, "changed::" CLOCK_FORMAT_KEY,
@@ -1034,8 +1022,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                                          priv->cancellable,
                                          get_timezone_cb,
                                          self);
-
-  queue_clock_update (self);
 
   /* add the lock button */
   priv->permission = polkit_permission_new_sync ("org.gnome.settingsdaemon.datetimemechanism.configure", NULL, NULL, NULL);
