@@ -44,6 +44,8 @@ G_DEFINE_TYPE (GnomeControlCenter, gnome_control_center, CC_TYPE_SHELL)
 
 #define W(b,x) GTK_WIDGET (gtk_builder_get_object (b, x))
 
+#define MIN_ICON_VIEW_HEIGHT 50
+
 enum
 {
   OVERVIEW_PAGE,
@@ -178,7 +180,7 @@ activate_panel (GnomeControlCenter *shell,
 
           /* set the scrolled window small so that it doesn't force
              the window to be larger than this panel */
-          gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window), 50);
+          gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window), MIN_ICON_VIEW_HEIGHT);
 
           /* resize to the preferred size of the panel */
           gtk_widget_set_size_request (priv->window, FIXED_WIDTH, -1);
@@ -1028,7 +1030,7 @@ on_window_size_allocate (GtkWidget          *widget,
     }
   else
     {
-      height = 50;
+      height = MIN_ICON_VIEW_HEIGHT;
     }
 
   if (gtk_scrolled_window_get_min_content_height (GTK_SCROLLED_WINDOW (self->priv->scrolled_window)) != height)
