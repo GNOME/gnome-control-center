@@ -45,6 +45,9 @@ AM_CPPFLAGS =							\
 menudir = $(sysconfdir)/xdg/menus
 menu_DATA = gnomecc.menu
 
+gnomecc.menu: gnomecc.menu.in
+	$(AM_V_GEN) cat $< | sed 's,@applicationsdir@,$(datadir)/applications/,' > $@
+
 uidir = $(pkgdatadir)/ui
 ui_DATA = shell.ui
 
@@ -62,9 +65,9 @@ EXTRA_DIST =					\
 	$(ui_DATA)				\
 	gnome-control-center.desktop.in.in	\
 	gnomecc.directory.in			\
-	gnomecc.menu				\
+	gnomecc.menu.in				\
 	cc-shell-marshal.list
 
-DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in gnomecc.directory
+DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in gnomecc.directory gnomecc.menu
 
 -include $(top_srcdir)/git.mk
