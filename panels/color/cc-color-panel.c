@@ -252,6 +252,7 @@ gcm_prefs_calibrate_cb (GtkWidget *widget, CcColorPanel *prefs)
   g_ptr_array_add (argv, g_strdup (cd_device_get_id (priv->current_device)));
   g_ptr_array_add (argv, g_strdup ("--parent-window"));
   g_ptr_array_add (argv, g_strdup_printf ("%i", xid));
+  g_ptr_array_add (argv, NULL);
   ret = g_spawn_async (NULL, (gchar**) argv->pdata, NULL, 0,
                        NULL, NULL, NULL, &error);
   if (!ret)
