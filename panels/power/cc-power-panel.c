@@ -388,6 +388,7 @@ combo_time_changed_cb (GtkWidget *widget, CcPowerPanel *self)
   gint value;
   gboolean ret;
   const gchar *key = (const gchar *)g_object_get_data (G_OBJECT(widget), "_gsettings_key");
+  gchar *key_timeout;
 
   /* no selection */
   ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
@@ -400,8 +401,11 @@ combo_time_changed_cb (GtkWidget *widget, CcPowerPanel *self)
                       1, &value,
                       -1);
 
-  /* set both battery and ac keys */
-  g_settings_set_int (self->priv->gsd_settings, key, value);
+  /* set both keys */
+  key_timeout = g_strdup_printf ("%s-timeout", key);
+  g_settings_set_int (self->priv->gsd_settings, key_timeout, value);
+  g_settings_set_boolean (self->priv->gsd_settings, key, value != 0);
+  g_free (key_timeout);
 }
 
 static void
@@ -542,14 +546,11 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
   g_ptr_array_unref (devices);
 out:
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "vbox_actions"));
+                                               "box_header"));
   gtk_widget_set_visible (widget, has_batteries);
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "vbox_battery"));
+                                               "combobox_sleep_battery"));
   gtk_widget_set_visible (widget, has_batteries);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "hbox_ac"));
-  gtk_widget_set_visible (widget, !has_batteries);
 }
 
 static void
@@ -600,70 +601,12 @@ cc_power_panel_init (CcPowerPanel *self)
                     G_CALLBACK (on_lock_settings_changed),
                     self);
 
-  /* setup the checkboxes correcty */
-  widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
-                                               "checkbutton_sleep_ac"));
-  target = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
-                                               "combobox_sleep_ac"));
-  g_object_bind_property (widget, "active",
-                          target, "sensitive",
-                          G_BINDING_SYNC_CREATE);
-  gtk_widget_set_sensitive (widget,
-                            up_client_get_can_suspend (self->priv->up_client));
-
-  widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
-                                               "checkbutton_sleep_battery"));
-  target = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
-                                               "combobox_sleep_battery"));
-  g_object_bind_property (widget, "active",
-                          target, "sensitive",
-                          G_BINDING_SYNC_CREATE);
-  gtk_widget_set_sensitive (widget,
-                            up_client_get_can_suspend (self->priv->up_client));
-
-  widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
-                                               "checkbutton_sleep"));
-  target = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
-                                               "combobox_sleep"));
-  g_object_bind_property (widget, "active",
-                          target, "sensitive",
-                          G_BINDING_SYNC_CREATE);
-  gtk_widget_set_sensitive (widget,
-                            up_client_get_can_suspend (self->priv->up_client));
-
-  /* bind the checkboxes */
-  widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
-                                               "checkbutton_sleep_ac"));
-  g_settings_bind (self->priv->gsd_settings,
-                   "sleep-inactive-ac",
-                   widget, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-  widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
-                                               "checkbutton_sleep_battery"));
-  g_settings_bind (self->priv->gsd_settings,
-                   "sleep-inactive-battery",
-                   widget, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-  widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
-                                               "checkbutton_sleep"));
-  g_settings_bind (self->priv->gsd_settings,
-                   "sleep-inactive-ac",
-                   widget, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
   /* auto-sleep time */
   value = g_settings_get_int (self->priv->gsd_settings, "sleep-inactive-ac-timeout");
   widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
                                                "combobox_sleep_ac"));
   set_value_for_combo (GTK_COMBO_BOX (widget), value);
-  g_object_set_data (G_OBJECT(widget), "_gsettings_key", "sleep-inactive-ac-timeout");
-  g_signal_connect (widget, "changed",
-                    G_CALLBACK (combo_time_changed_cb),
-                    self);
-  widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
-                                               "combobox_sleep"));
-  set_value_for_combo (GTK_COMBO_BOX (widget), value);
-  g_object_set_data (G_OBJECT(widget), "_gsettings_key", "sleep-inactive-ac-timeout");
+  g_object_set_data (G_OBJECT(widget), "_gsettings_key", "sleep-inactive-ac");
   g_signal_connect (widget, "changed",
                     G_CALLBACK (combo_time_changed_cb),
                     self);
@@ -671,7 +614,7 @@ cc_power_panel_init (CcPowerPanel *self)
   widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
                                                "combobox_sleep_battery"));
   set_value_for_combo (GTK_COMBO_BOX (widget), value);
-  g_object_set_data (G_OBJECT(widget), "_gsettings_key", "sleep-inactive-battery-timeout");
+  g_object_set_data (G_OBJECT(widget), "_gsettings_key", "sleep-inactive-battery");
   g_signal_connect (widget, "changed",
                     G_CALLBACK (combo_time_changed_cb),
                     self);
