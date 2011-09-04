@@ -351,6 +351,14 @@ gcm_prefs_combo_sort_func_cb (GtkTreeModel *model,
   return retval;
 }
 
+static gboolean
+gcm_prefs_combo_set_default_cb (gpointer user_data)
+{
+  GtkWidget *widget = GTK_WIDGET (user_data);
+  gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
+  return FALSE;
+}
+
 static void
 gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
                                              GtkWidget *widget,
@@ -425,7 +433,7 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
 #if CD_CHECK_VERSION(0,1,12)
   gcm_prefs_combobox_add_profile (widget, NULL, GCM_PREFS_ENTRY_TYPE_IMPORT, NULL);
 #endif
-  gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
+  g_idle_add (gcm_prefs_combo_set_default_cb, widget);
 out:
   if (profile_array != NULL)
     g_ptr_array_unref (profile_array);
@@ -1111,6 +1119,19 @@ gcm_prefs_profile_combo_changed_cb (GtkWidget *widget,
         {
           g_warning ("failed to get ICC file");
           gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
+
+          /* if we've got no other existing profiles to choose, then
+           * just close the assign dialog */
+          gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
+          gtk_tree_model_get (model, &iter,
+                              GCM_PREFS_COMBO_COLUMN_TYPE, &entry_type,
+                              -1);
+          if (entry_type == GCM_PREFS_ENTRY_TYPE_IMPORT)
+            {
+              widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                           "dialog_assign"));
+              gtk_widget_hide (widget);
+            }
           goto out;
         }
 
