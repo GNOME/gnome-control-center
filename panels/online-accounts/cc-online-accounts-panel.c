@@ -479,6 +479,7 @@ on_toolbar_add_button_clicked (GtkToolButton *button,
                                  goa_provider_get_provider_type (provider),
                                  provider_name);
       g_free (provider_name);
+      provider = NULL;
     }
   gtk_combo_box_set_active (GTK_COMBO_BOX (combo_box), 0);
 
