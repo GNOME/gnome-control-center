@@ -201,7 +201,7 @@ gcm_prefs_file_chooser_get_icc_profile (CcColorPanel *prefs)
   dialog = gtk_file_chooser_dialog_new (_("Select ICC Profile File"), window,
                                         GTK_FILE_CHOOSER_ACTION_OPEN,
                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                        _("Import"), GTK_RESPONSE_ACCEPT,
+                                        _("_Import"), GTK_RESPONSE_ACCEPT,
                                         NULL);
   gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(dialog), g_get_home_dir ());
   gtk_file_chooser_set_create_folders (GTK_FILE_CHOOSER(dialog), FALSE);
