@@ -1794,48 +1794,28 @@ gvc_mixer_dialog_constructor (GType                  type,
                             TRUE, TRUE, 0);
         gtk_container_set_border_width (GTK_CONTAINER (self->priv->notebook), 5);
 
-        /* Effects page */
-        self->priv->sound_effects_box = gtk_vbox_new (FALSE, 6);
-        gtk_container_set_border_width (GTK_CONTAINER (self->priv->sound_effects_box), 12);
-        label = gtk_label_new (_("Sound Effects"));
+        /* Output page */
+        self->priv->output_box = gtk_vbox_new (FALSE, 12);
+        gtk_container_set_border_width (GTK_CONTAINER (self->priv->output_box), 12);
+        label = gtk_label_new (_("Output"));
         gtk_notebook_append_page (GTK_NOTEBOOK (self->priv->notebook),
-                                  self->priv->sound_effects_box,
+                                  self->priv->output_box,
                                   label);
 
-        self->priv->effects_bar = create_bar (self, TRUE, TRUE);
-        gvc_channel_bar_set_name (GVC_CHANNEL_BAR (self->priv->effects_bar),
-                                  _("_Alert volume:"));
-        gtk_widget_set_sensitive (self->priv->effects_bar, FALSE);
-        gtk_box_pack_start (GTK_BOX (self->priv->sound_effects_box),
-                            self->priv->effects_bar, FALSE, FALSE, 0);
-
-        self->priv->sound_theme_chooser = gvc_sound_theme_chooser_new ();
-        gtk_box_pack_start (GTK_BOX (self->priv->sound_effects_box),
-                            self->priv->sound_theme_chooser,
-                            TRUE, TRUE, 6);
-
-        /* Hardware page */
-        self->priv->hw_box = gtk_vbox_new (FALSE, 12);
-        gtk_container_set_border_width (GTK_CONTAINER (self->priv->hw_box), 12);
-        label = gtk_label_new (_("Hardware"));
-        gtk_notebook_append_page (GTK_NOTEBOOK (self->priv->notebook),
-                                  self->priv->hw_box,
-                                  label);
-
-        box = gtk_frame_new (_("C_hoose a device to configure:"));
+        box = gtk_frame_new (_("C_hoose a device for sound output:"));
         label = gtk_frame_get_label_widget (GTK_FRAME (box));
         _gtk_label_make_bold (GTK_LABEL (label));
         gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
         gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_NONE);
-        gtk_box_pack_start (GTK_BOX (self->priv->hw_box), box, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (self->priv->output_box), box, TRUE, TRUE, 0);
 
         alignment = gtk_alignment_new (0, 0, 1, 1);
         gtk_container_add (GTK_CONTAINER (box), alignment);
         gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 6, 0, 0, 0);
 
-        self->priv->hw_treeview = create_cards_treeview (self,
-                                                         G_CALLBACK (on_card_selection_changed));
-        gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->priv->hw_treeview);
+        self->priv->output_treeview = create_stream_treeview (self,
+                                                              G_CALLBACK (on_output_selection_changed));
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->priv->output_treeview);
 
         box = gtk_scrolled_window_new (NULL, NULL);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
@@ -1843,20 +1823,16 @@ gvc_mixer_dialog_constructor (GType                  type,
                                         GTK_POLICY_AUTOMATIC);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (box),
                                              GTK_SHADOW_IN);
-        gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (box), 150);
-        gtk_container_add (GTK_CONTAINER (box), self->priv->hw_treeview);
+        gtk_container_add (GTK_CONTAINER (box), self->priv->output_treeview);
         gtk_container_add (GTK_CONTAINER (alignment), box);
-
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->priv->hw_treeview));
-        gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
 
         box = gtk_frame_new (_("Settings for the selected device:"));
         label = gtk_frame_get_label_widget (GTK_FRAME (box));
         _gtk_label_make_bold (GTK_LABEL (label));
         gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_NONE);
-        gtk_box_pack_start (GTK_BOX (self->priv->hw_box), box, FALSE, TRUE, 12);
-        self->priv->hw_settings_box = gtk_vbox_new (FALSE, 12);
-        gtk_container_add (GTK_CONTAINER (box), self->priv->hw_settings_box);
+        gtk_box_pack_start (GTK_BOX (self->priv->output_box), box, FALSE, FALSE, 12);
+        self->priv->output_settings_box = gtk_vbox_new (FALSE, 0);
+        gtk_container_add (GTK_CONTAINER (box), self->priv->output_settings_box);
 
         /* Input page */
         self->priv->input_box = gtk_vbox_new (FALSE, 12);
@@ -1943,28 +1919,28 @@ gvc_mixer_dialog_constructor (GType                  type,
         gtk_container_add (GTK_CONTAINER (box), self->priv->input_treeview);
         gtk_container_add (GTK_CONTAINER (alignment), box);
 
-        /* Output page */
-        self->priv->output_box = gtk_vbox_new (FALSE, 12);
-        gtk_container_set_border_width (GTK_CONTAINER (self->priv->output_box), 12);
-        label = gtk_label_new (_("Output"));
+        /* Hardware page */
+        self->priv->hw_box = gtk_vbox_new (FALSE, 12);
+        gtk_container_set_border_width (GTK_CONTAINER (self->priv->hw_box), 12);
+        label = gtk_label_new (_("Hardware"));
         gtk_notebook_append_page (GTK_NOTEBOOK (self->priv->notebook),
-                                  self->priv->output_box,
+                                  self->priv->hw_box,
                                   label);
 
-        box = gtk_frame_new (_("C_hoose a device for sound output:"));
+        box = gtk_frame_new (_("C_hoose a device to configure:"));
         label = gtk_frame_get_label_widget (GTK_FRAME (box));
         _gtk_label_make_bold (GTK_LABEL (label));
         gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
         gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_NONE);
-        gtk_box_pack_start (GTK_BOX (self->priv->output_box), box, TRUE, TRUE, 0);
+        gtk_box_pack_start (GTK_BOX (self->priv->hw_box), box, TRUE, TRUE, 0);
 
         alignment = gtk_alignment_new (0, 0, 1, 1);
         gtk_container_add (GTK_CONTAINER (box), alignment);
         gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 6, 0, 0, 0);
 
-        self->priv->output_treeview = create_stream_treeview (self,
-                                                              G_CALLBACK (on_output_selection_changed));
-        gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->priv->output_treeview);
+        self->priv->hw_treeview = create_cards_treeview (self,
+                                                         G_CALLBACK (on_card_selection_changed));
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->priv->hw_treeview);
 
         box = gtk_scrolled_window_new (NULL, NULL);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
@@ -1972,16 +1948,40 @@ gvc_mixer_dialog_constructor (GType                  type,
                                         GTK_POLICY_AUTOMATIC);
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (box),
                                              GTK_SHADOW_IN);
-        gtk_container_add (GTK_CONTAINER (box), self->priv->output_treeview);
+        gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (box), 150);
+        gtk_container_add (GTK_CONTAINER (box), self->priv->hw_treeview);
         gtk_container_add (GTK_CONTAINER (alignment), box);
+
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->priv->hw_treeview));
+        gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
 
         box = gtk_frame_new (_("Settings for the selected device:"));
         label = gtk_frame_get_label_widget (GTK_FRAME (box));
         _gtk_label_make_bold (GTK_LABEL (label));
         gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_NONE);
-        gtk_box_pack_start (GTK_BOX (self->priv->output_box), box, FALSE, FALSE, 12);
-        self->priv->output_settings_box = gtk_vbox_new (FALSE, 0);
-        gtk_container_add (GTK_CONTAINER (box), self->priv->output_settings_box);
+        gtk_box_pack_start (GTK_BOX (self->priv->hw_box), box, FALSE, TRUE, 12);
+        self->priv->hw_settings_box = gtk_vbox_new (FALSE, 12);
+        gtk_container_add (GTK_CONTAINER (box), self->priv->hw_settings_box);
+
+        /* Effects page */
+        self->priv->sound_effects_box = gtk_vbox_new (FALSE, 6);
+        gtk_container_set_border_width (GTK_CONTAINER (self->priv->sound_effects_box), 12);
+        label = gtk_label_new (_("Sound Effects"));
+        gtk_notebook_append_page (GTK_NOTEBOOK (self->priv->notebook),
+                                  self->priv->sound_effects_box,
+                                  label);
+
+        self->priv->effects_bar = create_bar (self, TRUE, TRUE);
+        gvc_channel_bar_set_name (GVC_CHANNEL_BAR (self->priv->effects_bar),
+                                  _("_Alert volume:"));
+        gtk_widget_set_sensitive (self->priv->effects_bar, FALSE);
+        gtk_box_pack_start (GTK_BOX (self->priv->sound_effects_box),
+                            self->priv->effects_bar, FALSE, FALSE, 0);
+
+        self->priv->sound_theme_chooser = gvc_sound_theme_chooser_new ();
+        gtk_box_pack_start (GTK_BOX (self->priv->sound_effects_box),
+                            self->priv->sound_theme_chooser,
+                            TRUE, TRUE, 6);
 
         /* Applications */
         self->priv->applications_box = gtk_vbox_new (FALSE, 12);
@@ -2118,10 +2118,10 @@ gvc_mixer_dialog_new (GvcMixerControl *control)
 }
 
 enum {
-        PAGE_EVENTS,
-        PAGE_HARDWARE,
-        PAGE_INPUT,
         PAGE_OUTPUT,
+        PAGE_INPUT,
+        PAGE_HARDWARE,
+        PAGE_EVENTS,
         PAGE_APPLICATIONS
 };
 
@@ -2133,9 +2133,9 @@ gvc_mixer_dialog_set_page (GvcMixerDialog *self,
 
         g_return_val_if_fail (self != NULL, FALSE);
 
-        if (page == NULL)
-                num = 0;
-        else if (g_str_equal (page, "effects"))
+        num = PAGE_OUTPUT;
+
+        if (g_str_equal (page, "effects"))
                 num = PAGE_EVENTS;
         else if (g_str_equal (page, "hardware"))
                 num = PAGE_HARDWARE;
@@ -2145,8 +2145,6 @@ gvc_mixer_dialog_set_page (GvcMixerDialog *self,
                 num = PAGE_OUTPUT;
         else if (g_str_equal (page, "applications"))
                 num = PAGE_APPLICATIONS;
-        else
-                num = 0;
 
         gtk_notebook_set_current_page (GTK_NOTEBOOK (self->priv->notebook), num);
 
