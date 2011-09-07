@@ -90,7 +90,6 @@ enum {
         DEVICE_COLUMN,
         ACTIVE_COLUMN,
         ID_COLUMN,
-        SPEAKERS_COLUMN,
         ICON_COLUMN,
         NUM_COLUMNS
 };
@@ -1175,7 +1174,6 @@ add_stream (GvcMixerDialog *dialog,
                                     ACTIVE_COLUMN, is_default,
                                     ICON_COLUMN, icon,
                                     ID_COLUMN, gvc_mixer_stream_get_id (stream),
-                                    SPEAKERS_COLUMN, gvc_channel_map_get_mapping (map),
                                     -1);
                 if (icon != NULL)
                         g_object_unref (icon);
@@ -1471,35 +1469,6 @@ on_output_selection_changed (GtkTreeSelection *selection,
         }
 }
 
-static void
-name_to_text (GtkTreeViewColumn *column,
-              GtkCellRenderer *cell,
-              GtkTreeModel *model,
-              GtkTreeIter *iter,
-              gpointer user_data)
-{
-        char *name, *mapping;
-
-        gtk_tree_model_get(model, iter,
-                           NAME_COLUMN, &name,
-                           SPEAKERS_COLUMN, &mapping,
-                           -1);
-
-        if (mapping == NULL) {
-                g_object_set (cell, "text", name, NULL);
-        } else {
-                char *str;
-
-                str = g_strdup_printf ("%s\n<i>%s</i>",
-                                       name, mapping);
-                g_object_set (cell, "markup", str, NULL);
-                g_free (str);
-        }
-
-        g_free (name);
-        g_free (mapping);
-}
-
 static GtkWidget *
 create_stream_treeview (GvcMixerDialog *dialog,
                         GCallback       on_selection_changed)
@@ -1518,7 +1487,6 @@ create_stream_treeview (GvcMixerDialog *dialog,
                                     G_TYPE_STRING,
                                     G_TYPE_BOOLEAN,
                                     G_TYPE_UINT,
-                                    G_TYPE_STRING,
                                     G_TYPE_ICON);
         gtk_tree_view_set_model (GTK_TREE_VIEW (treeview),
                                  GTK_TREE_MODEL (store));
@@ -1537,8 +1505,9 @@ create_stream_treeview (GvcMixerDialog *dialog,
 
         renderer = gtk_cell_renderer_text_new ();
         gtk_tree_view_column_pack_start (column, renderer, TRUE);
-        gtk_tree_view_column_set_cell_data_func (column, renderer,
-                                                 name_to_text, NULL, NULL);
+        gtk_tree_view_column_set_attributes (column, renderer,
+                                             "text", NAME_COLUMN,
+                                             NULL);
         gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
         g_signal_connect (G_OBJECT (selection), "changed",
