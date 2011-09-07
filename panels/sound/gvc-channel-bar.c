@@ -520,27 +520,27 @@ update_mute_switch (GvcChannelBar *bar)
                                        !bar->priv->is_muted);
         } else {
                 gtk_widget_hide (bar->priv->mute_switch);
+        }
 
-                if (bar->priv->is_muted) {
-                        /* If we aren't showing the mute button then
-                         * move slider to the zero.  But we don't want to
-                         * change the adjustment.  */
-                        g_signal_handlers_block_by_func (bar->priv->zero_adjustment,
-                                                         on_zero_adjustment_value_changed,
-                                                         bar);
-                        gtk_adjustment_set_value (bar->priv->zero_adjustment, 0);
-                        g_signal_handlers_unblock_by_func (bar->priv->zero_adjustment,
-                                                           on_zero_adjustment_value_changed,
-                                                           bar);
-                        gtk_range_set_adjustment (GTK_RANGE (bar->priv->scale),
-                                                  bar->priv->zero_adjustment);
-                } else {
-                        /* no longer muted so restore the original adjustment
-                         * and tell the front-end that the value changed */
-                        gtk_range_set_adjustment (GTK_RANGE (bar->priv->scale),
-                                                  bar->priv->adjustment);
-                        gtk_adjustment_value_changed (bar->priv->adjustment);
-                }
+        if (bar->priv->is_muted) {
+                /* If we aren't showing the mute button then
+                 * move slider to the zero.  But we don't want to
+                 * change the adjustment.  */
+                g_signal_handlers_block_by_func (bar->priv->zero_adjustment,
+                                                 on_zero_adjustment_value_changed,
+                                                 bar);
+                gtk_adjustment_set_value (bar->priv->zero_adjustment, 0);
+                g_signal_handlers_unblock_by_func (bar->priv->zero_adjustment,
+                                                   on_zero_adjustment_value_changed,
+                                                   bar);
+                gtk_range_set_adjustment (GTK_RANGE (bar->priv->scale),
+                                          bar->priv->zero_adjustment);
+        } else {
+                /* no longer muted so restore the original adjustment
+                 * and tell the front-end that the value changed */
+                gtk_range_set_adjustment (GTK_RANGE (bar->priv->scale),
+                                          bar->priv->adjustment);
+                gtk_adjustment_value_changed (bar->priv->adjustment);
         }
 }
 
