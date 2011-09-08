@@ -210,13 +210,6 @@ static gchar *visual_alerts_section[] = {
     NULL
 };
 
-static gchar *shortcuts_section[] = {
-    "stickykeys_frame",
-    "slowkeys_frame",
-    "bouncekeys_frame",
-    NULL
-};
-
 static void
 cc_ua_panel_section_switched (GObject    *object,
                               GParamSpec *pspec,
@@ -654,7 +647,7 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
 
   /* enable shortcuts */
   w = WID (priv->builder, "typing_keyboard_toggle_checkbox");
-  settings_on_off_editor_new (priv, priv->kb_settings, "enable", w, shortcuts_section);
+  g_settings_bind (priv->kb_settings, "enable", w, "active", G_SETTINGS_BIND_DEFAULT);
 
   /* sticky keys */
   w = WID (priv->builder, "typing_sticky_keys_switch");
