@@ -36,7 +36,36 @@
 
 G_DEFINE_DYNAMIC_TYPE (CcSoundPanel, cc_sound_panel, CC_TYPE_PANEL)
 
+enum {
+        PROP_0,
+        PROP_ARGV
+};
+
 static void cc_sound_panel_finalize (GObject *object);
+
+static void
+cc_sound_panel_set_property (GObject      *object,
+                             guint         property_id,
+                             const GValue *value,
+                             GParamSpec   *pspec)
+{
+        CcSoundPanel *self = CC_SOUND_PANEL (object);
+
+        switch (property_id) {
+        case PROP_ARGV: {
+                gchar **args;
+
+                args = g_value_get_boxed (value);
+
+                if (args && args[0]) {
+                        gvc_mixer_dialog_set_page (self->dialog, args[0]);
+                }
+                break;
+        }
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+        }
+}
 
 static void
 cc_sound_panel_class_init (CcSoundPanelClass *klass)
@@ -44,6 +73,9 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
         object_class->finalize = cc_sound_panel_finalize;
+        object_class->set_property = cc_sound_panel_set_property;
+
+        g_object_class_override_property (object_class, PROP_ARGV, "argv");
 }
 
 static void
