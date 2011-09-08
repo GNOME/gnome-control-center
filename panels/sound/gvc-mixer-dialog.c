@@ -1159,13 +1159,11 @@ add_stream (GvcMixerDialog *dialog,
         } else if (GVC_IS_MIXER_SINK (stream)) {
                 GtkTreeModel        *model;
                 GtkTreeIter          iter;
-                const GvcChannelMap *map;
                 GIcon               *icon;
 
                 model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->output_treeview));
                 gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 
-                map = gvc_mixer_stream_get_channel_map (stream);
                 icon = gvc_mixer_stream_get_gicon (stream);
                 gtk_list_store_set (GTK_LIST_STORE (model),
                                     &iter,
