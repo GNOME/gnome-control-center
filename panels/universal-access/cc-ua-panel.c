@@ -610,6 +610,8 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
   entry = gconf_client_get_entry (priv->client,
                                   "/apps/metacity/general/visual_bell_type",
                                   NULL, TRUE, NULL);
+  if (entry == NULL)
+    g_warning ("The following warning is because metacity's GConf settings aren't installed");
   visual_bell_type_notify_cb (priv->client, 0, entry, self);
 
   g_signal_connect (WID (priv->builder, "hearing_flash_window_title_button"),
