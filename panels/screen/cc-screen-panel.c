@@ -535,6 +535,7 @@ cc_screen_panel_init (CcScreenPanel *self)
 
   widget = WID ("screen_vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
+  g_object_set (self, "valign", GTK_ALIGN_START, NULL);
 }
 
 void
