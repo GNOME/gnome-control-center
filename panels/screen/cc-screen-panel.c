@@ -254,6 +254,7 @@ get_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data
       gtk_widget_hide (WID ("screen_brightness_hscale"));
       gtk_widget_hide (WID ("screen_auto_reduce_checkbutton"));
       gtk_widget_hide (WID ("brightness-frame"));
+      g_object_set (G_OBJECT (WID ("turn-off-alignment")), "left-padding", 0, NULL);
       g_warning ("Error getting brightness: %s", error->message);
       g_error_free (error);
       return;
