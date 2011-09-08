@@ -152,7 +152,16 @@ cc_network_panel_set_property (GObject      *object,
 
         switch (property_id) {
         case PROP_ARGV: {
-                gchar **args = g_value_get_boxed (value);
+                gchar **args;
+
+                priv->arg_operation = OPERATION_NULL;
+                g_free (priv->arg_device);
+                priv->arg_device = NULL;
+                g_free (priv->arg_access_point);
+                priv->arg_access_point = NULL;
+
+                **args = g_value_get_boxed (value);
+
                 if (args) {
                         g_debug ("Invoked with operation %s", args[0]);
 
