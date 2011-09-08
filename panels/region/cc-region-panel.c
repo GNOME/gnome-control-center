@@ -27,8 +27,6 @@
 #include "gnome-region-panel-formats.h"
 #include "gnome-region-panel-system.h"
 
-#define WID(s) GTK_WIDGET (gtk_builder_get_object (dialog, s))
-
 G_DEFINE_DYNAMIC_TYPE (CcRegionPanel, cc_region_panel, CC_TYPE_PANEL)
 
 #define REGION_PANEL_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_REGION_PANEL, CcRegionPanelPrivate))
@@ -37,25 +35,59 @@ struct _CcRegionPanelPrivate {
 	GtkBuilder *builder;
 };
 
+enum {
+	PROP_0,
+	PROP_ARGV
+};
+
+enum {
+	LANGUAGE_PAGE,
+	FORMATS_PAGE,
+	LAYOUTS_PAGE,
+	SYSTEM_PAGE
+};
 
 static void
-cc_region_panel_get_property (GObject * object,
-				guint property_id,
-				GValue * value, GParamSpec * pspec)
+cc_region_panel_set_page (CcRegionPanel *panel,
+			  const char    *page)
 {
-	switch (property_id) {
-	default:
-		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id,
-						   pspec);
-	}
+	GtkWidget *notebook;
+	int page_num;
+
+	if (g_strcmp0 (page, "formats") == 0)
+		page_num = FORMATS_PAGE;
+	else if (g_strcmp0 (page, "layouts") == 0)
+		page_num = LAYOUTS_PAGE;
+	else if (g_strcmp0 (page, "system") == 0)
+		page_num = SYSTEM_PAGE;
+	else
+		page_num = LANGUAGE_PAGE;
+
+	notebook = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "region_notebook"));
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), page_num);
 }
 
 static void
 cc_region_panel_set_property (GObject * object,
-				guint property_id,
-				const GValue * value, GParamSpec * pspec)
+			      guint property_id,
+			      const GValue * value,
+			      GParamSpec * pspec)
 {
+	CcRegionPanel *self;
+
+	self = CC_REGION_PANEL (object);
+
 	switch (property_id) {
+        case PROP_ARGV: {
+                gchar **args;
+
+                args = g_value_get_boxed (value);
+
+                if (args && args[0]) {
+                        cc_region_panel_set_page (self, args[0]);
+                }
+                break;
+        }
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id,
 						   pspec);
@@ -63,18 +95,16 @@ cc_region_panel_set_property (GObject * object,
 }
 
 static void
-cc_region_panel_dispose (GObject * object)
+cc_region_panel_finalize (GObject * object)
 {
-	CcRegionPanelPrivate *priv = CC_REGION_PANEL (object)->priv;
+	CcRegionPanel *panel;
 
-	if (priv->builder) {
-		GtkBuilder *dialog = priv->builder;
-		gtk_widget_destroy (WID ("region_notebook"));
-		g_object_unref (priv->builder);
-		priv->builder = NULL;
-	}
+	panel = CC_REGION_PANEL (object);
 
-	G_OBJECT_CLASS (cc_region_panel_parent_class)->dispose (object);
+	if (panel->priv && panel->priv->builder)
+		g_object_unref (panel->priv->builder);
+
+	G_OBJECT_CLASS (cc_region_panel_parent_class)->finalize (object);
 }
 
 static void
@@ -84,9 +114,10 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
 
 	g_type_class_add_private (klass, sizeof (CcRegionPanelPrivate));
 
-	object_class->get_property = cc_region_panel_get_property;
 	object_class->set_property = cc_region_panel_set_property;
-	object_class->dispose = cc_region_panel_dispose;
+	object_class->finalize = cc_region_panel_finalize;
+
+	g_object_class_override_property (object_class, PROP_ARGV, "argv");
 }
 
 static void
