@@ -44,7 +44,13 @@ G_DEFINE_TYPE (GnomeControlCenter, gnome_control_center, CC_TYPE_SHELL)
 
 #define W(b,x) GTK_WIDGET (gtk_builder_get_object (b, x))
 
-#define MIN_ICON_VIEW_HEIGHT 50
+/* Use a fixed width for the shell, since resizing horizontally is more awkward
+ * for the user than resizing vertically
+ * Both sizes are defined in https://live.gnome.org/Design/SystemSettings/ */
+#define FIXED_WIDTH 675
+#define FIXED_HEIGHT 530
+
+#define MIN_ICON_VIEW_HEIGHT 300
 
 enum
 {
@@ -80,11 +86,6 @@ struct _GnomeControlCenterPrivate
   gchar *default_window_title;
   gchar *default_window_icon;
 };
-
-/* Use a fixed width for the shell, since resizing horizontally is more awkward
- * for the user than resizing vertically */
-#define FIXED_WIDTH 675
-
 
 static const gchar *
 get_icon_name_from_g_icon (GIcon *gicon)
@@ -786,11 +787,13 @@ notebook_switch_page_cb (GtkNotebook               *book,
       gtk_widget_hide (W (priv->builder, "home-button"));
       gtk_widget_show (W (priv->builder, "search-entry"));
       gtk_widget_hide (W (priv->builder, "lock-button"));
+      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window), FIXED_HEIGHT - 50);
     }
   else
     {
       gtk_widget_show (W (priv->builder, "home-button"));
       gtk_widget_hide (W (priv->builder, "search-entry"));
+      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window), MIN_ICON_VIEW_HEIGHT);
     }
 }
 
@@ -993,59 +996,6 @@ gnome_control_center_class_init (GnomeControlCenterClass *klass)
   shell_class->get_toplevel = _shell_get_toplevel;
 }
 
-static gboolean
-queue_resize (gpointer data)
-{
-  GtkWidget *widget = data;
-
-  gtk_widget_queue_resize (widget);
-
-  return FALSE;
-}
-
-static void
-on_window_size_allocate (GtkWidget          *widget,
-                         GtkAllocation      *allocation,
-                         GnomeControlCenter *self)
-{
-  int height;
-
-  if (gtk_notebook_get_current_page (GTK_NOTEBOOK (self->priv->notebook)) == OVERVIEW_PAGE)
-    {
-      gtk_widget_get_preferred_height_for_width (GTK_WIDGET (self->priv->main_vbox),
-                                                 FIXED_WIDTH,
-                                                 NULL,
-                                                 &height);
-      if (gtk_widget_get_realized (widget))
-        {
-          int          monitor;
-          GdkScreen   *screen;
-          GdkRectangle rect;
-          GdkWindow   *window;
-
-          window = gtk_widget_get_window (widget);
-          screen = gtk_widget_get_screen (widget);
-          monitor = gdk_screen_get_monitor_at_window (screen, window);
-          gdk_screen_get_monitor_geometry (screen, monitor, &rect);
-          height = MIN (height + 10, rect.height - 120);
-        }
-    }
-  else
-    {
-      height = MIN_ICON_VIEW_HEIGHT;
-    }
-
-  if (gtk_scrolled_window_get_min_content_height (GTK_SCROLLED_WINDOW (self->priv->scrolled_window)) != height)
-    {
-      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (self->priv->scrolled_window), height);
-      /*
-       * Queueing a resize out of size-allocate is ignored,
-       * so we have to defer to an idle.
-       */
-      g_idle_add (queue_resize, self->priv->scrolled_window);
-    }
-}
-
 static void
 viewport_style_set_cb (GtkWidget *widget,
                        GtkStyle  *old_style,
@@ -1134,7 +1084,6 @@ gnome_control_center_init (GnomeControlCenter *self)
 
   gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, -1);
   priv->main_vbox = W (priv->builder, "main-vbox");
-  g_signal_connect (priv->scrolled_window, "size-allocate", G_CALLBACK (on_window_size_allocate), self);
   g_signal_connect (priv->notebook, "switch-page",
                     G_CALLBACK (notebook_switch_page_cb), priv);
 
@@ -1155,6 +1104,8 @@ gnome_control_center_init (GnomeControlCenter *self)
   /* store default window title and name */
   priv->default_window_title = g_strdup (gtk_window_get_title (GTK_WINDOW (priv->window)));
   priv->default_window_icon = g_strdup (gtk_window_get_icon_name (GTK_WINDOW (priv->window)));
+
+  notebook_switch_page_cb (NULL, NULL, OVERVIEW_PAGE, priv);
 }
 
 GnomeControlCenter *
