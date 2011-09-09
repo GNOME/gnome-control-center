@@ -361,6 +361,7 @@ enroll_result (GObject *object, const char *result, gboolean done, EnrollData *d
         }
         if (g_str_equal (result, "enroll-completed")) {
                 gtk_label_set_text (GTK_LABEL (WID ("status-label")), _("Done!"));
+                gtk_label_set_text (GTK_LABEL (WID("enroll-label")), "");
                 gtk_assistant_set_page_complete (GTK_ASSISTANT (data->ass), WID ("page2"), TRUE);
         }
 
