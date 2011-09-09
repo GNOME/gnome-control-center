@@ -830,6 +830,9 @@ um_password_dialog_show (UmPasswordDialog *um,
 {
         gtk_window_set_transient_for (GTK_WINDOW (um->dialog), parent);
         gtk_window_present (GTK_WINDOW (um->dialog));
-        gtk_widget_grab_focus (um->password_entry);
+        if (um->old_password_ok == FALSE)
+                gtk_widget_grab_focus (um->old_password_entry);
+        else
+                gtk_widget_grab_focus (um->password_entry);
 }
 
