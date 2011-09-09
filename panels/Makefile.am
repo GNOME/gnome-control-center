@@ -5,7 +5,6 @@ SUBDIRS= \
 	power \
 	color \
 	display \
-	media \
 	mouse \
 	online-accounts \
 	region \
