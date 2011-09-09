@@ -160,7 +160,7 @@ cc_network_panel_set_property (GObject      *object,
                 g_free (priv->arg_access_point);
                 priv->arg_access_point = NULL;
 
-                **args = g_value_get_boxed (value);
+                args = g_value_get_boxed (value);
 
                 if (args) {
                         g_debug ("Invoked with operation %s", args[0]);
