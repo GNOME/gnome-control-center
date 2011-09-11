@@ -476,7 +476,7 @@ gcm_prefs_profile_remove_cb (GtkWidget *widget, CcColorPanel *prefs)
                                                "treeview_devices"));
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
   if (!gtk_tree_selection_get_selected (selection, &model, &iter))
-    g_assert_not_reached ();
+    goto out;
 
   /* if the profile is default, then we'll have to make the first profile default */
   gtk_tree_model_get (model, &iter,
