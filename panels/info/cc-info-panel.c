@@ -935,27 +935,12 @@ info_panel_setup_default_app (CcInfoPanel *self,
 {
   GtkWidget *button;
   GtkWidget *table;
-  GAppInfo  *info;
-  GError    *error = NULL;
   GtkWidget *label;
 
   table = WID ("default_apps_table");
 
-  /* FIXME: We need to do this because GtkAppChooser doesn't
-   * give us the opportunity to select what app should be selected
-   * by default.
-   * https://bugzilla.gnome.org/show_bug.cgi?id=642706 */
-  info = g_app_info_get_default_for_type (content_type, FALSE);
-  if (info != NULL && g_app_info_set_as_last_used_for_type (info, content_type, &error) == FALSE)
-    {
-      g_warning ("Failed to set '%s' as the default application for '%s': %s",
-                 g_app_info_get_name (info), content_type, error->message);
-      g_error_free (error);
-    }
-  if (info != NULL)
-    g_object_unref (info);
-
   button = gtk_app_chooser_button_new (content_type);
+  gtk_app_chooser_button_set_show_default_item (GTK_APP_CHOOSER_BUTTON (button), TRUE);
   gtk_table_attach (GTK_TABLE (table), button,
                     left_attach, right_attach,
                     top_attach, bottom_attach, GTK_FILL, 0, 0, 0);
