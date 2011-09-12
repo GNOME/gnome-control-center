@@ -474,10 +474,10 @@ rebuild_rotation_combo (CcDisplayPanel *self)
     const char *	name;
   } RotationInfo;
   static const RotationInfo rotations[] = {
-    { GNOME_RR_ROTATION_0, N_("Normal") },
-    { GNOME_RR_ROTATION_90, N_("Counterclockwise") },
-    { GNOME_RR_ROTATION_270, N_("Clockwise") },
-    { GNOME_RR_ROTATION_180, N_("180 Degrees") },
+    { GNOME_RR_ROTATION_0, NC_("display panel, rotation", "Normal") },
+    { GNOME_RR_ROTATION_90, NC_("display panel, rotation", "Counterclockwise") },
+    { GNOME_RR_ROTATION_270, NC_("display panel, rotation", "Clockwise") },
+    { GNOME_RR_ROTATION_180, NC_("display panel, rotation", "180 Degrees") },
   };
   const char *selection;
   GnomeRRRotation current;
@@ -513,7 +513,7 @@ rebuild_rotation_combo (CcDisplayPanel *self)
   gnome_rr_output_info_set_rotation (self->priv->current_output, current);
 
   if (!(selection && combo_select (self->priv->rotation_combo, selection)))
-    combo_select (self->priv->rotation_combo, _(rotations[0].name));
+    gtk_combo_box_set_active (GTK_COMBO_BOX (self->priv->rotation_combo), 0);
 }
 
 static int
