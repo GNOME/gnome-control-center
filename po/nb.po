@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.1.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-06 22:04+0200\n"
-"PO-Revision-Date: 2011-09-06 22:05+0200\n"
+"POT-Creation-Date: 2011-09-12 20:51+0200\n"
+"PO-Revision-Date: 2011-09-12 20:51+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -313,47 +313,28 @@ msgid "Date and Time preferences panel"
 msgstr "Brukervalgpanel for dato og klokkeslett"
 
 #: ../panels/display/display-capplet.ui.h:1
-msgid "Left"
-msgstr "Venstre"
-
-#: ../panels/display/display-capplet.ui.h:2
 #: ../panels/display/cc-display-panel.c:641
 msgid "Monitor"
 msgstr "Skjerm"
 
-#: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/cc-display-panel.c:477
-#: ../panels/display/cc-display-panel.c:516
-#: ../panels/universal-access/uap.ui.h:43
-msgid "Normal"
-msgstr "Normal"
-
-#: ../panels/display/display-capplet.ui.h:4
+#: ../panels/display/display-capplet.ui.h:2
 msgid "Note: may limit resolution options"
 msgstr "Merk: kan begrense alternativer for oppløsing"
 
-#: ../panels/display/display-capplet.ui.h:5
+#: ../panels/display/display-capplet.ui.h:3
 msgid "R_otation:"
 msgstr "R_otasjon:"
 
-#: ../panels/display/display-capplet.ui.h:6
-msgid "Right"
-msgstr "Høyre:"
-
-#: ../panels/display/display-capplet.ui.h:7
-msgid "Upside-down"
-msgstr "Opp-ned"
-
-#: ../panels/display/display-capplet.ui.h:8
+#: ../panels/display/display-capplet.ui.h:4
 msgid "_Detect Displays"
 msgstr "_Søk etter skjermer"
 
 #. Note that mirror is a verb in this string
-#: ../panels/display/display-capplet.ui.h:10
+#: ../panels/display/display-capplet.ui.h:6
 msgid "_Mirror displays"
 msgstr "_Speil skjermer"
 
-#: ../panels/display/display-capplet.ui.h:11
+#: ../panels/display/display-capplet.ui.h:7
 msgid "_Resolution:"
 msgstr "_Oppløsning:"
 
@@ -369,6 +350,11 @@ msgstr "Skjermer"
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:4
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Panel;Prosjektor;xrandr;Skjerm;Oppløsning;Oppdater;"
+
+#: ../panels/display/cc-display-panel.c:477
+#: ../panels/universal-access/uap.ui.h:43
+msgid "Normal"
+msgstr "Normal"
 
 #: ../panels/display/cc-display-panel.c:478
 msgid "Counterclockwise"
@@ -1435,8 +1421,8 @@ msgid "Allowed users"
 msgstr "Tilatte brukere"
 
 #: ../panels/printers/printers.ui.h:6
-#: ../panels/network/cc-network-panel.c:1858
-#: ../panels/network/cc-network-panel.c:1861 ../panels/network/network.ui.h:11
+#: ../panels/network/cc-network-panel.c:1992
+#: ../panels/network/cc-network-panel.c:1995 ../panels/network/network.ui.h:11
 msgid "IP Address"
 msgstr "IP-adresse"
 
@@ -1801,7 +1787,7 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Styrepute;Peker;Klikk;Tapp;Dobbel;Knapp;Styrekule;"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/cc-network-panel.c:197
+#: ../panels/network/cc-network-panel.c:269
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgstr ""
@@ -1812,113 +1798,113 @@ msgstr ""
 #. * network, then anyone else on that network can tell your
 #. * machine that it should proxy all of your web traffic
 #. * through them.
-#: ../panels/network/cc-network-panel.c:205
+#: ../panels/network/cc-network-panel.c:277
 msgid "This is not recommended for untrusted public networks."
 msgstr "Dette anbefales ikke for offentlige nettverk du ikke stoler på."
 
 #. TRANSLATORS: this is when the access point is not listed
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
-#: ../panels/network/cc-network-panel.c:817
+#: ../panels/network/cc-network-panel.c:951
 msgctxt "Wireless access point"
 msgid "Other..."
 msgstr "Annet …"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:975
-#: ../panels/network/cc-network-panel.c:1382
+#: ../panels/network/cc-network-panel.c:1109
+#: ../panels/network/cc-network-panel.c:1516
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:979
-#: ../panels/network/cc-network-panel.c:1386
+#: ../panels/network/cc-network-panel.c:1113
+#: ../panels/network/cc-network-panel.c:1520
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:983
+#: ../panels/network/cc-network-panel.c:1117
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:988
+#: ../panels/network/cc-network-panel.c:1122
 msgid "Enterprise"
 msgstr "Enterprise"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:994
-#: ../panels/network/cc-network-panel.c:1377
+#: ../panels/network/cc-network-panel.c:1128
+#: ../panels/network/cc-network-panel.c:1511
 #: ../panels/universal-access/uap.ui.h:42
 msgid "None"
 msgstr "Ingen"
 
-#: ../panels/network/cc-network-panel.c:1445
+#: ../panels/network/cc-network-panel.c:1579
 msgid "Hotspot"
 msgstr "Hotspot"
 
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1511
-#: ../panels/network/cc-network-panel.c:1599
+#: ../panels/network/cc-network-panel.c:1645
+#: ../panels/network/cc-network-panel.c:1733
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d MB/s"
 
-#: ../panels/network/cc-network-panel.c:1854 ../panels/network/network.ui.h:12
+#: ../panels/network/cc-network-panel.c:1988 ../panels/network/network.ui.h:12
 msgid "IPv4 Address"
 msgstr "IPv4-adresse"
 
-#: ../panels/network/cc-network-panel.c:1855 ../panels/network/network.ui.h:13
+#: ../panels/network/cc-network-panel.c:1989 ../panels/network/network.ui.h:13
 msgid "IPv6 Address"
 msgstr "IPv6-adresse"
 
-#: ../panels/network/cc-network-panel.c:1908
-#: ../panels/network/cc-network-panel.c:2278
+#: ../panels/network/cc-network-panel.c:2042
+#: ../panels/network/cc-network-panel.c:2415
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: ../panels/network/cc-network-panel.c:2016
+#: ../panels/network/cc-network-panel.c:2150
 msgid "Proxy"
 msgstr "Proxy"
 
-#: ../panels/network/cc-network-panel.c:2090
+#: ../panels/network/cc-network-panel.c:2224
 msgid "Network proxy"
 msgstr "Nettverksproxy"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2345
+#: ../panels/network/cc-network-panel.c:2482
 msgid "The system network services are not compatible with this version."
 msgstr ""
 "Nettverkstjenesten for dette systemet er ikke kompatibelt med denne "
 "versjonen."
 
-#: ../panels/network/cc-network-panel.c:3007
+#: ../panels/network/cc-network-panel.c:3097
 msgid "Not connected to the internet."
 msgstr "Ikke koblet til internett."
 
-#: ../panels/network/cc-network-panel.c:3008
+#: ../panels/network/cc-network-panel.c:3098
 msgid "Create the hotspot anyway?"
 msgstr "Lage hotspot likevel?"
 
-#: ../panels/network/cc-network-panel.c:3026
+#: ../panels/network/cc-network-panel.c:3116
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
 msgstr "Koble fra %s og lag ny hotspot?"
 
-#: ../panels/network/cc-network-panel.c:3029
+#: ../panels/network/cc-network-panel.c:3119
 msgid "This is your only connection to the internet."
 msgstr "Dette er din eneste tilkobling til internett."
 
-#: ../panels/network/cc-network-panel.c:3047
+#: ../panels/network/cc-network-panel.c:3137
 msgid "Create _Hotspot"
 msgstr "Lag _hotspot"
 
-#: ../panels/network/cc-network-panel.c:3107
+#: ../panels/network/cc-network-panel.c:3197
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Stoppe hotspot og koble fra alle brukere?"
 
-#: ../panels/network/cc-network-panel.c:3110
+#: ../panels/network/cc-network-panel.c:3200
 msgid "_Stop Hotspot"
 msgstr "_Stopp hotspot"
 
@@ -2939,8 +2925,8 @@ msgstr "Glass"
 msgid "Sonar"
 msgstr "Sonar"
 
-#: ../panels/universal-access/cc-ua-panel.c:491
-#: ../panels/universal-access/cc-ua-panel.c:496
+#: ../panels/universal-access/cc-ua-panel.c:484
+#: ../panels/universal-access/cc-ua-panel.c:489
 msgid "No shortcut set"
 msgstr "Ingen snarvei satt"
 
@@ -3466,8 +3452,8 @@ msgstr "Ferdig"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:409
-#: ../panels/user-accounts/um-fingerprint-dialog.c:431
+#: ../panels/user-accounts/um-fingerprint-dialog.c:410
+#: ../panels/user-accounts/um-fingerprint-dialog.c:432
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "Kunne ikke aksessere enheten «%s»"
@@ -3475,20 +3461,20 @@ msgstr "Kunne ikke aksessere enheten «%s»"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:480
+#: ../panels/user-accounts/um-fingerprint-dialog.c:481
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "Kunne ikke starte innlesing av data på enhet «%s»"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:532
+#: ../panels/user-accounts/um-fingerprint-dialog.c:533
 msgid "Could not access any fingerprint readers"
 msgstr "Kunne ikke aksessere fingeravtrykkleser"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:533
+#: ../panels/user-accounts/um-fingerprint-dialog.c:534
 msgid "Please contact your system administrator for help."
 msgstr "Kontakt din systemadministrator for hjelp."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:570
+#: ../panels/user-accounts/um-fingerprint-dialog.c:571
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Enable Fingerprint Login"
 msgstr "Slå på innlogging med fingeravtrykk"
@@ -3498,7 +3484,7 @@ msgstr "Slå på innlogging med fingeravtrykk"
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:604
+#: ../panels/user-accounts/um-fingerprint-dialog.c:605
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -3507,15 +3493,15 @@ msgstr ""
 "Du må lagre ett av dine fingeravtrykk med enheten «%s» for å slå på "
 "innlogging med fingeravtrykk."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:611
+#: ../panels/user-accounts/um-fingerprint-dialog.c:612
 msgid "Selecting finger"
 msgstr "Velger finger"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:612
+#: ../panels/user-accounts/um-fingerprint-dialog.c:613
 msgid "Enrolling fingerprints"
 msgstr "Registrerer fingeravtrykk"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:613
+#: ../panels/user-accounts/um-fingerprint-dialog.c:614
 msgid "Summary"
 msgstr "Sammendrag"
 
@@ -3996,70 +3982,74 @@ msgid "Left Mouse Button Click"
 msgstr "Venstre musklikk"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:7
+msgid "Left-Handed Orientation:"
+msgstr "Venstrehendt orientering:"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
 msgid "Lower Button"
 msgstr "Nedre knapp"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:8
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
 msgid "Middle Mouse Button Click"
 msgstr "Midtre musklikk"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:9
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "No Action"
 msgstr "Ingen handling"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+#: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Right Mouse Button Click"
 msgstr "Høyre musklikk"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:11
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
 msgid "Scroll Down"
 msgstr "Rull ned"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Scroll Left"
 msgstr "Rull til venstre"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:14
 msgid "Scroll Right"
 msgstr "Rull til høyre"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:14
+#: ../panels/wacom/gnome-wacom-properties.ui.h:15
 msgid "Scroll Up"
 msgstr "Rull opp"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:15
+#: ../panels/wacom/gnome-wacom-properties.ui.h:16
 msgid "Soft"
 msgstr "Myk"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:16
+#: ../panels/wacom/gnome-wacom-properties.ui.h:17
 msgid "Stylus"
 msgstr "Penn"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:17
+#: ../panels/wacom/gnome-wacom-properties.ui.h:18
 msgid "Tablet (absolute)"
 msgstr "Tegnebrett (absolutt)"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:18
+#: ../panels/wacom/gnome-wacom-properties.ui.h:19
 msgid "Tablet Preferences"
 msgstr "Brukervalg for tegnebrett"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:19
+#: ../panels/wacom/gnome-wacom-properties.ui.h:20
 msgid "Tip Pressure Feel"
 msgstr "Følelse av trykk på tuppen"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:20
+#: ../panels/wacom/gnome-wacom-properties.ui.h:21
 msgid "Top Button"
 msgstr "Øverste knapp"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:21
+#: ../panels/wacom/gnome-wacom-properties.ui.h:22
 msgid "Touchpad (relative)"
 msgstr "Pekeplate (relativ)"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:22
+#: ../panels/wacom/gnome-wacom-properties.ui.h:23
 msgid "Tracking Mode"
 msgstr "Sporingsmodus"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:23
+#: ../panels/wacom/gnome-wacom-properties.ui.h:24
 msgid "Wacom Tablet"
 msgstr "Wacom pekeplate"
 
