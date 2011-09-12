@@ -513,7 +513,7 @@ rebuild_rotation_combo (CcDisplayPanel *self)
   gnome_rr_output_info_set_rotation (self->priv->current_output, current);
 
   if (!(selection && combo_select (self->priv->rotation_combo, selection)))
-    combo_select (self->priv->rotation_combo, _("Normal"));
+    combo_select (self->priv->rotation_combo, _(rotations[0].name));
 }
 
 static int
@@ -2590,7 +2590,7 @@ cc_display_panel_constructor (GType                  gtype,
   CcDisplayPanel *self;
   CcShell *shell;
   GtkWidget *toplevel;
-  gchar *objects[] = {"display-panel", "rotation-liststore", NULL};
+  gchar *objects[] = {"display-panel", NULL};
 
   obj = G_OBJECT_CLASS (cc_display_panel_parent_class)->constructor (gtype, n_properties, properties);
   self = CC_DISPLAY_PANEL (obj);
