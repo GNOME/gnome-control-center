@@ -130,10 +130,7 @@ goa_panel_init (GoaPanel *panel)
   context = gtk_widget_get_style_context (GTK_WIDGET (gtk_builder_get_object (panel->builder, "accounts-tree-scrolledwindow")));
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
   context = gtk_widget_get_style_context (panel->toolbar);
-  gtk_style_context_add_class (context, GTK_STYLE_CLASS_INLINE_TOOLBAR);
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
-
-  gtk_notebook_set_show_tabs (GTK_NOTEBOOK (gtk_builder_get_object (panel->builder, "accounts-notebook")), FALSE);
 
   panel->accounts_treeview = GTK_WIDGET (gtk_builder_get_object (panel->builder, "accounts-tree-treeview"));
   g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview)),
