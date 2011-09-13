@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.master.ta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-04 11:39+0530\n"
-"PO-Revision-Date: 2011-09-04 11:55+0530\n"
+"POT-Creation-Date: 2011-09-13 14:49+0530\n"
+"PO-Revision-Date: 2011-09-13 14:54+0530\n"
 "Last-Translator: Dr.T.Vasudevan <agnihot3@gmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -332,47 +332,28 @@ msgid "Date and Time preferences panel"
 msgstr "நாள் நேரம் விருப்பங்கள் பலகம்"
 
 #: ../panels/display/display-capplet.ui.h:1
-msgid "Left"
-msgstr "இடது"
-
-#: ../panels/display/display-capplet.ui.h:2
 #: ../panels/display/cc-display-panel.c:641
 msgid "Monitor"
 msgstr "மானிட்டர்"
 
-#: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/cc-display-panel.c:477
-#: ../panels/display/cc-display-panel.c:516
-#: ../panels/universal-access/uap.ui.h:43
-msgid "Normal"
-msgstr "இயல்பான"
-
-#: ../panels/display/display-capplet.ui.h:4
+#: ../panels/display/display-capplet.ui.h:2
 msgid "Note: may limit resolution options"
 msgstr "குறிப்பு: தெளிதிறன் தேர்வுகளை கட்டுப்படுத்தலாம்"
 
-#: ../panels/display/display-capplet.ui.h:5
+#: ../panels/display/display-capplet.ui.h:3
 msgid "R_otation:"
 msgstr "சுழற்சி (_o):"
 
-#: ../panels/display/display-capplet.ui.h:6
-msgid "Right"
-msgstr "வலது"
-
-#: ../panels/display/display-capplet.ui.h:7
-msgid "Upside-down"
-msgstr "தலை கீழ்"
-
-#: ../panels/display/display-capplet.ui.h:8
+#: ../panels/display/display-capplet.ui.h:4
 msgid "_Detect Displays"
 msgstr "திரைகளை கண்டுபிடி"
 
 #. Note that mirror is a verb in this string
-#: ../panels/display/display-capplet.ui.h:10
+#: ../panels/display/display-capplet.ui.h:6
 msgid "_Mirror displays"
 msgstr "பிரதிபலிக்கும்  திரைகள் (_M)"
 
-#: ../panels/display/display-capplet.ui.h:11
+#: ../panels/display/display-capplet.ui.h:7
 msgid "_Resolution:"
 msgstr "தெளிவுத்திறன் (_R):"
 
@@ -389,15 +370,23 @@ msgstr "காட்டிகள்"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "பலகம்;ஒளிப்படக்காட்டி;எக்ஸ்ரான்டர்;திரை;தெளிதிறன்;புதுப்பி"
 
+#: ../panels/display/cc-display-panel.c:477
+msgctxt "display panel, rotation"
+msgid "Normal"
+msgstr "இயல்பான"
+
 #: ../panels/display/cc-display-panel.c:478
+msgctxt "display panel, rotation"
 msgid "Counterclockwise"
 msgstr "இடம்புரியாக "
 
 #: ../panels/display/cc-display-panel.c:479
+msgctxt "display panel, rotation"
 msgid "Clockwise"
 msgstr "வலம்புரியாக "
 
 #: ../panels/display/cc-display-panel.c:480
+msgctxt "display panel, rotation"
 msgid "180 Degrees"
 msgstr "180 பாகைகள்"
 
@@ -455,34 +444,34 @@ msgid "Could not get screen information"
 msgstr "திரை தகவலை பெற முடியவில்லை"
 
 #. Translators: VESA is an techncial acronym, don't translate it.
-#: ../panels/info/cc-info-panel.c:385
+#: ../panels/info/cc-info-panel.c:402
 #, c-format
 msgid "VESA: %s"
 msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:409 ../panels/network/panel-common.c:79
+#: ../panels/info/cc-info-panel.c:426 ../panels/network/panel-common.c:79
 #: ../panels/network/panel-common.c:158
 msgid "Unknown"
 msgstr "தெரியாத"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:558
+#: ../panels/info/cc-info-panel.c:587
 #, c-format
 msgid "%d-bit"
 msgstr "%d-பிட்"
 
-#: ../panels/info/cc-info-panel.c:714
+#: ../panels/info/cc-info-panel.c:743
 msgid "Unknown model"
 msgstr "தெரியாத மாதிரி"
 
-#: ../panels/info/cc-info-panel.c:797
+#: ../panels/info/cc-info-panel.c:826
 msgid "The next login will attempt to use the standard experience."
 msgstr "அடுத்த உள்நுழைவு செந்தர முறையை பயன்படுத்தும்"
 
-#: ../panels/info/cc-info-panel.c:799
+#: ../panels/info/cc-info-panel.c:828
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
@@ -490,49 +479,134 @@ msgstr "அடுத்த உள்நுழைவு ஆதரவில்ல�
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:841
+#: ../panels/info/cc-info-panel.c:870
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "பின்சார்தல்"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:847
+#: ../panels/info/cc-info-panel.c:876
 msgctxt "Experience"
 msgid "Standard"
 msgstr "செந்தரம்"
 
-#: ../panels/info/cc-info-panel.c:987
+#: ../panels/info/cc-info-panel.c:1199
+msgid "Ask what to do"
+msgstr "என்ன செய்ய என்று கேள் "
+
+#: ../panels/info/cc-info-panel.c:1203 ../panels/power/power.ui.h:6
+msgid "Do nothing"
+msgstr "ஒன்றும் செய்யாதே"
+
+#: ../panels/info/cc-info-panel.c:1207
+msgid "Open folder"
+msgstr "அடைவினை திற"
+
+#: ../panels/info/cc-info-panel.c:1318
+msgid "Select an application for audio CDs"
+msgstr "ஒலி குறுந்தட்டுகளுக்கு  நிரலைத் தெரிவுசெய்யவும்"
+
+#: ../panels/info/cc-info-panel.c:1319
+msgid "Select an application for video DVDs"
+msgstr "விடியோ டிவிடி களுக்கு நிரலைத் தெரிவுசெய்யவும்"
+
+#: ../panels/info/cc-info-panel.c:1320
+msgid "Select an application to run when a music player is connected"
+msgstr "இசைப்பியை இணைத்தபோது துவக்க நிரலை தேர்ந்தெடுக்கவும்."
+
+#: ../panels/info/cc-info-panel.c:1321
+msgid "Select an application to run when a camera is connected"
+msgstr "காமிராவை இணைத்தபோது துவக்க நிரலை தேர்ந்தெடுக்கவும்."
+
+#: ../panels/info/cc-info-panel.c:1322
+msgid "Select an application for software CDs"
+msgstr "மென்பொருள் குறுந்தட்டுகளுக்கு நிரலைத் தெரிவுசெய்யவும்"
+
+#. translators: these strings are duplicates of shared-mime-info
+#. * strings, just here to fix capitalization of the English originals.
+#. * If the shared-mime-info translation works for your language,
+#. * simply leave these untranslated.
+#.
+#: ../panels/info/cc-info-panel.c:1334
+msgid "audio DVD"
+msgstr "ஒலி டிவிடி"
+
+#: ../panels/info/cc-info-panel.c:1335
+msgid "blank Blu-ray disc"
+msgstr "வெற்று ப்ளூ-ரே வட்டு"
+
+#: ../panels/info/cc-info-panel.c:1336
+msgid "blank CD disc"
+msgstr "வெற்று குறுந்தட்டு வட்டு"
+
+#: ../panels/info/cc-info-panel.c:1337
+msgid "blank DVD disc"
+msgstr "வெற்று டிவிடி வட்டு"
+
+#: ../panels/info/cc-info-panel.c:1338
+msgid "blank HD DVD disc"
+msgstr "வெற்று ஹெச்டி டிவிடி வட்டு"
+
+#: ../panels/info/cc-info-panel.c:1339
+msgid "Blu-ray video disc"
+msgstr "ப்ளூ-ரே விடியோ வட்டு"
+
+#: ../panels/info/cc-info-panel.c:1340
+msgid "e-book reader"
+msgstr "மின் புத்தக படிப்பி"
+
+#: ../panels/info/cc-info-panel.c:1341
+msgid "HD DVD video disc"
+msgstr "ஹெச்டி டிவிடி விடியோ வட்டு"
+
+#: ../panels/info/cc-info-panel.c:1342
+msgid "Picture CD"
+msgstr "படங்கள் குறுந்தட்டு"
+
+#: ../panels/info/cc-info-panel.c:1343
+msgid "Super Video CD"
+msgstr "சூப்பர் விடியோ குறுந்தட்டு"
+
+#: ../panels/info/cc-info-panel.c:1344
+msgid "Video CD"
+msgstr "வீடியோ குறுவட்டு"
+
+#: ../panels/info/cc-info-panel.c:1473
 #: ../panels/keyboard/keyboard-shortcuts.c:1762
 msgid "Section"
 msgstr "பிரிவு"
 
-#: ../panels/info/cc-info-panel.c:996 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1482 ../panels/info/info.ui.h:15
 msgid "Overview"
 msgstr "மேலோட்டம்"
 
-#: ../panels/info/cc-info-panel.c:1002 ../panels/info/info.ui.h:2
+#: ../panels/info/cc-info-panel.c:1488 ../panels/info/info.ui.h:4
 msgid "Default Applications"
 msgstr "முன்னிருப்பு பயன்பாடுகள்"
 
-#: ../panels/info/cc-info-panel.c:1007 ../panels/info/info.ui.h:9
+#: ../panels/info/cc-info-panel.c:1493 ../panels/info/info.ui.h:17
+msgid "Removable Media"
+msgstr "நீக்கப்படக்கூடிய சாதனங்கள் "
+
+#: ../panels/info/cc-info-panel.c:1498 ../panels/info/info.ui.h:11
 msgid "Graphics"
 msgstr "வரைகலைகள்"
 
-#: ../panels/info/cc-info-panel.c:1171
+#: ../panels/info/cc-info-panel.c:1662
 #, c-format
 msgid "Version %s"
 msgstr "பதிப்பு %s"
 
-#: ../panels/info/cc-info-panel.c:1221
+#: ../panels/info/cc-info-panel.c:1712
 msgid "Install Updates"
 msgstr "மேம்படுத்தல்களை நிறுவு"
 
-#: ../panels/info/cc-info-panel.c:1225
+#: ../panels/info/cc-info-panel.c:1716
 msgid "System Up-To-Date"
 msgstr "கணிணி தற்காலப்படுத்தப்பட்டது"
 
-#: ../panels/info/cc-info-panel.c:1229
+#: ../panels/info/cc-info-panel.c:1720
 msgid "Checking for Updates"
 msgstr "மேம்பாடுகளுக்கு சோதிக்கிறது..."
 
@@ -548,69 +622,113 @@ msgstr "கணினி தகவல்"
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
-"fallback;preferred;"
+"fallback;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgstr ""
 "சாதனம்;கணினி;தகவல்;நினைவகம்;செயலி;பதிப்பு;முன்னிருப்பு;நிரல்;பயன்பாடு;பின்சார்பு;"
-"முன்னுரிமை;"
+"முன்னுரிமை;சிடி;டிவிடி;யூஎஸ்பி;ஒலி;விடியோ;வட்டு;வெளியேற்றக்கூடிய;ஊடகம்;தானியங்கிஇயக்கம்;"
 
 #: ../panels/info/info.ui.h:1
+msgid "Acti_on:"
+msgstr "(_o) செயல்:"
+
+#: ../panels/info/info.ui.h:2
+msgid "CD _audio:"
+msgstr "_a குறுந்தட்டு ஒலி:"
+
+#: ../panels/info/info.ui.h:3
 msgid "Calculating..."
 msgstr "கணக்கிடுகிறது..."
 
-#: ../panels/info/info.ui.h:3
+#: ../panels/info/info.ui.h:5
 msgid "Device name"
 msgstr "சாதனம்  பெயர்"
 
-#: ../panels/info/info.ui.h:4
+#: ../panels/info/info.ui.h:6
 msgid "Disk"
 msgstr "வட்டு"
 
-#: ../panels/info/info.ui.h:5
+#: ../panels/info/info.ui.h:7
 msgid "Driver"
 msgstr "இயக்கி"
 
-#: ../panels/info/info.ui.h:6
+#: ../panels/info/info.ui.h:8
 msgid "Experience"
 msgstr "அனுபவம்"
 
 #. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
-#: ../panels/info/info.ui.h:8
+#: ../panels/info/info.ui.h:10
 msgid "Forced _Fallback Mode"
 msgstr "_F வலுக்கட்டாய பின்சார்பு பாங்கு"
 
-#: ../panels/info/info.ui.h:10
+#: ../panels/info/info.ui.h:12
 msgid "M_usic"
 msgstr "_u இசை"
 
-#: ../panels/info/info.ui.h:11
+#: ../panels/info/info.ui.h:13
 msgid "Memory"
 msgstr "நினைவகம்"
 
-#: ../panels/info/info.ui.h:12
+#: ../panels/info/info.ui.h:14
 msgid "OS type"
 msgstr "ஓஎஸ் வகை"
 
-#: ../panels/info/info.ui.h:14
+#: ../panels/info/info.ui.h:16
 msgid "Processor"
 msgstr "செயலகம்"
 
-#: ../panels/info/info.ui.h:15
+#: ../panels/info/info.ui.h:18
+msgid "Select how media should be handled"
+msgstr "ஊடகத்தை எப்படி கையாள வேண்டுமென தேர்வு செய்க"
+
+#: ../panels/info/info.ui.h:19
+msgid "Select how other media should be handled"
+msgstr "மற்ற ஊடகத்தை எப்படி கையாள வேண்டுமென தேர்வு செய்க"
+
+#: ../panels/info/info.ui.h:20
 msgid "_Calendar"
 msgstr "நாள்காட்டி (_C)"
 
-#: ../panels/info/info.ui.h:16
+#: ../panels/info/info.ui.h:21
+msgid "_DVD video:"
+msgstr "_D டிவிடி விடியோ:"
+
+#: ../panels/info/info.ui.h:22
 msgid "_Mail"
 msgstr "(_M)மின்னஞ்சல்"
 
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:23
+msgid "_Music player:"
+msgstr "_M இசை இயக்கி:"
+
+#: ../panels/info/info.ui.h:24
+msgid "_Never prompt or start programs on media insertion"
+msgstr "_N ஊடகம் உள்ளிட்டபோது தூண்டாதே அல்லது நிரல்களை துவக்காதே "
+
+#: ../panels/info/info.ui.h:25
+msgid "_Other Media..."
+msgstr "_O மற்ற ஊடகம்..."
+
+#: ../panels/info/info.ui.h:26
 msgid "_Photos"
 msgstr "_படங்கள்"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:27
+msgid "_Photos:"
+msgstr "_படங்கள்:"
+
+#: ../panels/info/info.ui.h:28
+msgid "_Software:"
+msgstr "_S மென்பொருள் "
+
+#: ../panels/info/info.ui.h:29
+msgid "_Type:"
+msgstr "வகை_T :"
+
+#: ../panels/info/info.ui.h:30
 msgid "_Video"
 msgstr "_V வீடியோ"
 
-#: ../panels/info/info.ui.h:19
+#: ../panels/info/info.ui.h:31
 msgid "_Web"
 msgstr "_W இணையம்"
 
@@ -881,7 +999,7 @@ msgstr "இடவமைப்பு அமைப்புகள்"
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:37
 msgid "Long"
 msgstr "நீண்டது"
 
@@ -900,7 +1018,7 @@ msgstr "(_p) வேகம்:"
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 #: ../panels/mouse/gnome-mouse-properties.ui.h:23
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/uap.ui.h:51
 msgid "Short"
 msgstr "குறுகிய"
 
@@ -923,7 +1041,7 @@ msgstr ""
 "அல்லது  துப்புரவாக்க பின்னோக்கு  விசையை அழுத்துக ."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Typing"
 msgstr "உள்ளிடல் "
 
@@ -938,148 +1056,6 @@ msgstr "(_N) பெயர்:"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
 msgid "_Speed:"
 msgstr "(_S) வேகம்:"
-
-#: ../panels/media/cc-media-panel.c:315
-msgid "Ask what to do"
-msgstr "என்ன செய்ய என்று கேள் "
-
-#: ../panels/media/cc-media-panel.c:319 ../panels/power/power.ui.h:6
-msgid "Do nothing"
-msgstr "ஒன்றும் செய்யாதே"
-
-#: ../panels/media/cc-media-panel.c:323
-msgid "Open folder"
-msgstr "அடைவினை திற"
-
-#: ../panels/media/cc-media-panel.c:434
-msgid "Select an application for audio CDs"
-msgstr "ஒலி குறுந்தட்டுகளுக்கு  நிரலைத் தெரிவுசெய்யவும்"
-
-#: ../panels/media/cc-media-panel.c:435
-msgid "Select an application for video DVDs"
-msgstr "விடியோ டிவிடி களுக்கு நிரலைத் தெரிவுசெய்யவும்"
-
-#: ../panels/media/cc-media-panel.c:436
-msgid "Select an application to run when a music player is connected"
-msgstr "இசைப்பியை இணைத்தபோது துவக்க நிரலை தேர்ந்தெடுக்கவும்."
-
-#: ../panels/media/cc-media-panel.c:437
-msgid "Select an application to run when a camera is connected"
-msgstr "காமிராவை இணைத்தபோது துவக்க நிரலை தேர்ந்தெடுக்கவும்."
-
-#: ../panels/media/cc-media-panel.c:438
-msgid "Select an application for software CDs"
-msgstr "மென்பொருள் குறுந்தட்டுகளுக்கு நிரலைத் தெரிவுசெய்யவும்"
-
-#. translators: these strings are duplicates of shared-mime-info
-#. * strings, just here to fix capitalization of the English originals.
-#. * If the shared-mime-info translation works for your language,
-#. * simply leave these untranslated.
-#.
-#: ../panels/media/cc-media-panel.c:450
-msgid "audio DVD"
-msgstr "ஒலி டிவிடி"
-
-#: ../panels/media/cc-media-panel.c:451
-msgid "blank Blu-ray disc"
-msgstr "வெற்று ப்ளூ-ரே வட்டு"
-
-#: ../panels/media/cc-media-panel.c:452
-msgid "blank CD disc"
-msgstr "வெற்று குறுந்தட்டு வட்டு"
-
-#: ../panels/media/cc-media-panel.c:453
-msgid "blank DVD disc"
-msgstr "வெற்று டிவிடி வட்டு"
-
-#: ../panels/media/cc-media-panel.c:454
-msgid "blank HD DVD disc"
-msgstr "வெற்று ஹெச்டி டிவிடி வட்டு"
-
-#: ../panels/media/cc-media-panel.c:455
-msgid "Blu-ray video disc"
-msgstr "ப்ளூ-ரே விடியோ வட்டு"
-
-#: ../panels/media/cc-media-panel.c:456
-msgid "e-book reader"
-msgstr "மின் புத்தக படிப்பி"
-
-#: ../panels/media/cc-media-panel.c:457
-msgid "HD DVD video disc"
-msgstr "ஹெச்டி டிவிடி விடியோ வட்டு"
-
-#: ../panels/media/cc-media-panel.c:458
-msgid "Picture CD"
-msgstr "படங்கள் குறுந்தட்டு"
-
-#: ../panels/media/cc-media-panel.c:459
-msgid "Super Video CD"
-msgstr "சூப்பர் விடியோ குறுந்தட்டு"
-
-#: ../panels/media/cc-media-panel.c:460
-msgid "Video CD"
-msgstr "வீடியோ குறுவட்டு"
-
-#: ../panels/media/gnome-media-properties.ui.h:1
-msgid "Acti_on:"
-msgstr "(_o) செயல்:"
-
-#: ../panels/media/gnome-media-properties.ui.h:2
-msgid "CD _audio:"
-msgstr "_a குறுந்தட்டு ஒலி:"
-
-#: ../panels/media/gnome-media-properties.ui.h:3
-msgid "Media and Autorun"
-msgstr "ஊடகம் மற்றும் தானியக்கம்"
-
-#: ../panels/media/gnome-media-properties.ui.h:4
-msgid "Select how media should be handled"
-msgstr "ஊடகத்தை எப்படி கையாள வேண்டுமென தேர்வு செய்க"
-
-#: ../panels/media/gnome-media-properties.ui.h:5
-msgid "Select how other media should be handled"
-msgstr "மற்ற ஊடகத்தை எப்படி கையாள வேண்டுமென தேர்வு செய்க"
-
-#: ../panels/media/gnome-media-properties.ui.h:6
-msgid "_DVD video:"
-msgstr "_D டிவிடி விடியோ:"
-
-#: ../panels/media/gnome-media-properties.ui.h:7
-msgid "_Music player:"
-msgstr "_M இசை இயக்கி:"
-
-#: ../panels/media/gnome-media-properties.ui.h:8
-msgid "_Never prompt or start programs on media insertion"
-msgstr "_N ஊடகம் உள்ளிட்டபோது தூண்டாதே அல்லது நிரல்களை துவக்காதே "
-
-#: ../panels/media/gnome-media-properties.ui.h:9
-msgid "_Other Media..."
-msgstr "_O மற்ற ஊடகம்..."
-
-#: ../panels/media/gnome-media-properties.ui.h:10
-msgid "_Photos:"
-msgstr "_படங்கள்:"
-
-#: ../panels/media/gnome-media-properties.ui.h:11
-msgid "_Software:"
-msgstr "_S மென்பொருள் "
-
-#: ../panels/media/gnome-media-properties.ui.h:12
-msgid "_Type:"
-msgstr "வகை_T :"
-
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:1
-msgid "Configure media and autorun preferences"
-msgstr "ஊடகத்தை வடிவமை மற்றும் தானியங்கி  விருப்ப தேர்வுகளை அமைக்கவும்"
-
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:2
-msgid "Removable Media"
-msgstr "நீக்கப்படக்கூடிய சாதனங்கள் "
-
-#. Translators: those are keywords for the media control-center panel
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:4
-msgid "cd;dvd;usb;audio;video;disc;"
-msgstr "சிடி;டிவிடி;ஒலி;விடியோ;வட்டு"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:308
 msgid "Error logging into the account"
@@ -1101,27 +1077,27 @@ msgstr "ஒரு புதிய கணக்கை சேர்க்க ம�
 msgid "Account Type:"
 msgstr "கணக்கு வகை:"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:501
+#: ../panels/online-accounts/cc-online-accounts-panel.c:502
 msgid "_Add..."
 msgstr "சேர் (_A)..."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:554
+#: ../panels/online-accounts/cc-online-accounts-panel.c:555
 msgid "Error creating account"
 msgstr "கணக்கை உருவாக்குவதில் பிழை"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:588
+#: ../panels/online-accounts/cc-online-accounts-panel.c:589
 msgid "Error removing account"
 msgstr "கணக்கை நீக்குவதில் பிழை"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:624
+#: ../panels/online-accounts/cc-online-accounts-panel.c:625
 msgid "Are you sure you want to remove the account?"
 msgstr "கணக்கை அவசியம்  நீக்க உறுதியாக உள்ளீரா?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:626
+#: ../panels/online-accounts/cc-online-accounts-panel.c:627
 msgid "This will not remove the account on the server."
 msgstr "இது சேவையகத்தில் கணக்கை நீக்காது."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:627
+#: ../panels/online-accounts/cc-online-accounts-panel.c:628
 msgid "_Remove"
 msgstr "நீக்கு (_R)"
 
@@ -1444,8 +1420,8 @@ msgid "Allowed users"
 msgstr "அனுமதிக்கப்பட்ட பயனர்கள்"
 
 #: ../panels/printers/printers.ui.h:6
-#: ../panels/network/cc-network-panel.c:1858
-#: ../panels/network/cc-network-panel.c:1861 ../panels/network/network.ui.h:11
+#: ../panels/network/cc-network-panel.c:1992
+#: ../panels/network/cc-network-panel.c:1995 ../panels/network/network.ui.h:11
 msgid "IP Address"
 msgstr "IP முகவரி"
 
@@ -1752,7 +1728,7 @@ msgstr "(_o) கன்ட்ரோல் விசையை அழுத்த�
 
 #. small threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:27
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Small"
 msgstr "சிறிய"
 
@@ -1810,7 +1786,7 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "தொடர்திட்டு;சுட்டி;சொடுக்கு;தட்டு;இரட்டை;மென்மேடு;தொடர்பந்து"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/cc-network-panel.c:197
+#: ../panels/network/cc-network-panel.c:269
 msgid "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgstr "வலி பதிலாள் தானியங்கி காணல் வடிவமைப்பு, யூஆர்எல் இல்லாத போது பயன்படும்."
 
@@ -1818,111 +1794,111 @@ msgstr "வலி பதிலாள் தானியங்கி காணல
 #. * network, then anyone else on that network can tell your
 #. * machine that it should proxy all of your web traffic
 #. * through them.
-#: ../panels/network/cc-network-panel.c:205
+#: ../panels/network/cc-network-panel.c:277
 msgid "This is not recommended for untrusted public networks."
 msgstr "நம்பகமில்லாத பொது வலைப்பின்னல்களுக்கு இதை பரிந்துரைக்கவில்லை"
 
 #. TRANSLATORS: this is when the access point is not listed
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
-#: ../panels/network/cc-network-panel.c:817
+#: ../panels/network/cc-network-panel.c:951
 msgctxt "Wireless access point"
 msgid "Other..."
 msgstr "மற்றவை..."
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:975
-#: ../panels/network/cc-network-panel.c:1382
+#: ../panels/network/cc-network-panel.c:1109
+#: ../panels/network/cc-network-panel.c:1516
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:979
-#: ../panels/network/cc-network-panel.c:1386
+#: ../panels/network/cc-network-panel.c:1113
+#: ../panels/network/cc-network-panel.c:1520
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:983
+#: ../panels/network/cc-network-panel.c:1117
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:988
+#: ../panels/network/cc-network-panel.c:1122
 msgid "Enterprise"
 msgstr "என்டர்ப்ரைஸ்"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:994
-#: ../panels/network/cc-network-panel.c:1377
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/network/cc-network-panel.c:1128
+#: ../panels/network/cc-network-panel.c:1511
+#: ../panels/universal-access/uap.ui.h:41
 msgid "None"
 msgstr "ஏதுமில்லை"
 
-#: ../panels/network/cc-network-panel.c:1445
+#: ../panels/network/cc-network-panel.c:1579
 msgid "Hotspot"
 msgstr "செயலிடம் "
 
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1511
-#: ../panels/network/cc-network-panel.c:1599
+#: ../panels/network/cc-network-panel.c:1645
+#: ../panels/network/cc-network-panel.c:1733
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: ../panels/network/cc-network-panel.c:1854 ../panels/network/network.ui.h:12
+#: ../panels/network/cc-network-panel.c:1988 ../panels/network/network.ui.h:12
 msgid "IPv4 Address"
 msgstr "IPv4 முகவரி"
 
-#: ../panels/network/cc-network-panel.c:1855 ../panels/network/network.ui.h:13
+#: ../panels/network/cc-network-panel.c:1989 ../panels/network/network.ui.h:13
 msgid "IPv6 Address"
 msgstr "IPv6 முகவரி"
 
-#: ../panels/network/cc-network-panel.c:1908
-#: ../panels/network/cc-network-panel.c:2278
+#: ../panels/network/cc-network-panel.c:2042
+#: ../panels/network/cc-network-panel.c:2415
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: ../panels/network/cc-network-panel.c:2016
+#: ../panels/network/cc-network-panel.c:2150
 msgid "Proxy"
 msgstr "பதிலாள்"
 
-#: ../panels/network/cc-network-panel.c:2090
+#: ../panels/network/cc-network-panel.c:2224
 msgid "Network proxy"
 msgstr "வலையமைப்பு பிரதிநிதி."
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2345
+#: ../panels/network/cc-network-panel.c:2482
 msgid "The system network services are not compatible with this version."
 msgstr "இந்த பதிப்புடன் கணினி வலைப்பின்னல் சேவைகள் இசையவில்லை"
 
-#: ../panels/network/cc-network-panel.c:3007
+#: ../panels/network/cc-network-panel.c:3097
 msgid "Not connected to the internet."
 msgstr "பிணையத்துடன் இணைக்கப்படவில்லை"
 
-#: ../panels/network/cc-network-panel.c:3008
+#: ../panels/network/cc-network-panel.c:3098
 msgid "Create the hotspot anyway?"
 msgstr "எப்படியும் செயலிடத்தை உருவாக்கவா?"
 
-#: ../panels/network/cc-network-panel.c:3026
+#: ../panels/network/cc-network-panel.c:3116
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
 msgstr "%s இலிருந்து இணைப்பு நீங்கி புதிய செயலிடத்தை உருவாக்கவா?அமெரிக்கா"
 
-#: ../panels/network/cc-network-panel.c:3029
+#: ../panels/network/cc-network-panel.c:3119
 msgid "This is your only connection to the internet."
 msgstr "பிணையத்துக்கு இதுவே ஒரே ஒரு இணைப்பு"
 
-#: ../panels/network/cc-network-panel.c:3047
+#: ../panels/network/cc-network-panel.c:3137
 msgid "Create _Hotspot"
 msgstr "_H செயலிடத்தை உருவாக்கு"
 
-#: ../panels/network/cc-network-panel.c:3107
+#: ../panels/network/cc-network-panel.c:3197
 msgid "Stop hotspot and disconnect any users?"
 msgstr "செயலிடத்தை நிறுத்தி பயனர்களை இணைப்பு நீக்கவா?"
 
-#: ../panels/network/cc-network-panel.c:3110
+#: ../panels/network/cc-network-panel.c:3200
 msgid "_Stop Hotspot"
 msgstr "_S செயலிடத்தை நிறுத்து"
 
@@ -2353,8 +2329,8 @@ msgid "Select ICC Profile File"
 msgstr "ஐசிசி வரிவுரு கோப்பை  தேர்ந்தெடு."
 
 #: ../panels/color/cc-color-panel.c:204
-msgid "Import"
-msgstr "இறக்குமதி"
+msgid "_Import"
+msgstr "இறக்குமதி (_I)"
 
 #. TRANSLATORS: filter name on the file->open dialog
 #: ../panels/color/cc-color-panel.c:215
@@ -2367,23 +2343,23 @@ msgid "All files"
 msgstr "எல்லா கோப்புகள்"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:710
-#: ../panels/sound/gvc-mixer-dialog.c:1548
+#: ../panels/color/cc-color-panel.c:718
+#: ../panels/sound/gvc-mixer-dialog.c:1515
 msgid "Device"
 msgstr "சாதனம்"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:745
+#: ../panels/color/cc-color-panel.c:753
 msgid "Calibration"
 msgstr "அளவீடு"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:777
+#: ../panels/color/cc-color-panel.c:785
 msgid "Create a color profile for the selected device"
 msgstr "தேர்ந்தெடுக்கப்பட்ட சாதனத்திற்கு வண்ன வரியுரு அமை:"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:791 ../panels/color/cc-color-panel.c:815
+#: ../panels/color/cc-color-panel.c:799 ../panels/color/cc-color-panel.c:823
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -2392,40 +2368,40 @@ msgstr ""
 "செய்து கொள்க."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:824
+#: ../panels/color/cc-color-panel.c:832
 msgid "The measuring instrument does not support printer profiling."
 msgstr "அளவீட்டு கருவி அச்சுப்பொறி வருவுருவாக்கத்தை ஆதரிக்கவில்லை."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:835
+#: ../panels/color/cc-color-panel.c:843
 msgid "The device type is not currently supported."
 msgstr "இந்த சாதன வகைக்கு இப்போது ஆதரவில்லை."
 
 #. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:907
+#: ../panels/color/cc-color-panel.c:915
 msgid "Cannot remove automatically added profile"
 msgstr "தானியங்கியாக சேர்க்கப்பட்ட வரிவுருவை நீக்க முடியாது"
 
 #. TRANSLATORS: this is when there is no profile for the device
-#: ../panels/color/cc-color-panel.c:1232
+#: ../panels/color/cc-color-panel.c:1253
 msgid "No profile"
 msgstr "வரிவுரு இல்லை"
 
-#: ../panels/color/cc-color-panel.c:1251
+#: ../panels/color/cc-color-panel.c:1272
 #, c-format
 msgid "%i year"
 msgid_plural "%i years"
 msgstr[0] "%i வருடம்"
 msgstr[1] "%i வருடங்கள்"
 
-#: ../panels/color/cc-color-panel.c:1262
+#: ../panels/color/cc-color-panel.c:1283
 #, c-format
 msgid "%i month"
 msgid_plural "%i months"
 msgstr[0] "%i மாதம்"
 msgstr[1] "%i மாதங்கள்"
 
-#: ../panels/color/cc-color-panel.c:1273
+#: ../panels/color/cc-color-panel.c:1294
 #, c-format
 msgid "%i week"
 msgid_plural "%i weeks"
@@ -2433,81 +2409,81 @@ msgstr[0] "%i வாரம்"
 msgstr[1] "%i வாரங்கள்"
 
 #. fallback
-#: ../panels/color/cc-color-panel.c:1280
+#: ../panels/color/cc-color-panel.c:1301
 #, c-format
 msgid "Less than 1 week"
 msgstr "1 வாரத்தைவிட குறை"
 
-#: ../panels/color/cc-color-panel.c:1340
+#: ../panels/color/cc-color-panel.c:1361
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "முன்னிருப்பு ஆர்ஜிபி"
 
-#: ../panels/color/cc-color-panel.c:1345
+#: ../panels/color/cc-color-panel.c:1366
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "முன்னிருப்பு சிஎம்ஒய்கே"
 
-#: ../panels/color/cc-color-panel.c:1350
+#: ../panels/color/cc-color-panel.c:1371
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "முன்னிருப்பு சாம்பல்"
 
-#: ../panels/color/cc-color-panel.c:1465 ../panels/color/cc-color-panel.c:1487
-#: ../panels/color/cc-color-panel.c:1498
+#: ../panels/color/cc-color-panel.c:1486 ../panels/color/cc-color-panel.c:1508
+#: ../panels/color/cc-color-panel.c:1519
 msgid "Uncalibrated"
 msgstr "அளவிடாதது"
 
-#: ../panels/color/cc-color-panel.c:1468
+#: ../panels/color/cc-color-panel.c:1489
 msgid "This device is not color managed."
 msgstr "சாதனம் வண்ண மேலாண்மை செய்யப்படாதது."
 
-#: ../panels/color/cc-color-panel.c:1490
+#: ../panels/color/cc-color-panel.c:1511
 msgid "This device is using manufacturing calibrated data."
 msgstr "இந்த சாதனம் உருவாக்கியபோது அள்விட்ட தரவை பயன்படுத்துகிறது."
 
-#: ../panels/color/cc-color-panel.c:1501
+#: ../panels/color/cc-color-panel.c:1522
 msgid ""
 "This device does not have a profile suitable for whole-screen color "
 "correction."
 msgstr "இந்த சாதனம் முழு திரையையும் வண்ணத்திருத்தம் செய்ய பொருந்தும் வரிவுரு கொண்டில்லை."
 
-#: ../panels/color/cc-color-panel.c:1528
+#: ../panels/color/cc-color-panel.c:1549
 msgid "This device has an old profile that may no longer be accurate."
 msgstr "இந்த சாதனத்தின் வரிவுரு மிகப்பழையது; இப்போது சரியாக இல்லாமால் இருக்கலாம்."
 
 #. TRANSLATORS: this is when the calibration profile age is not
 #. * specified as it has been autogenerated from the hardware
-#: ../panels/color/cc-color-panel.c:1555
+#: ../panels/color/cc-color-panel.c:1576
 msgid "Not specified"
 msgstr "குறிப்பிடப்படாத"
 
 #. add the 'No devices detected' entry
-#: ../panels/color/cc-color-panel.c:1734
+#: ../panels/color/cc-color-panel.c:1755
 msgid "No devices supporting color management detected"
 msgstr "வண்ண மேலாண்மை செய்ய சாதனம் ஏதுமில்லை "
 
-#: ../panels/color/cc-color-panel.c:1963
+#: ../panels/color/cc-color-panel.c:1984
 msgctxt "Device kind"
 msgid "Display"
 msgstr "காட்சி"
 
-#: ../panels/color/cc-color-panel.c:1965
+#: ../panels/color/cc-color-panel.c:1986
 msgctxt "Device kind"
 msgid "Scanner"
 msgstr "மின்வருடி "
 
-#: ../panels/color/cc-color-panel.c:1967
+#: ../panels/color/cc-color-panel.c:1988
 msgctxt "Device kind"
 msgid "Printer"
 msgstr "அச்சுப்பொறி"
 
-#: ../panels/color/cc-color-panel.c:1969
+#: ../panels/color/cc-color-panel.c:1990
 msgctxt "Device kind"
 msgid "Camera"
 msgstr "காமிரா"
 
-#: ../panels/color/cc-color-panel.c:1971
+#: ../panels/color/cc-color-panel.c:1992
 msgctxt "Device kind"
 msgid "Webcam"
 msgstr "வலைகாமிரா"
@@ -2651,8 +2627,8 @@ msgid "_Lock screen after:"
 msgstr "_L இவ்வளவு நேரம் கழிந்தபின் திரையை பூட்டு:"
 
 #: ../panels/screen/screen.ui.h:17
-msgid "_Turn off after:"
-msgstr "_T இவ்வளவுக்குப்பின் நிறுத்து:"
+msgid "_Turn screen off when inactive for:"
+msgstr "_T இவ்வளவு நேரம் செயலற்று இருந்தால் திரையை உயிரிழக்கச் செய்க:"
 
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
@@ -2666,7 +2642,7 @@ msgstr "இந்த பயன்பாட்டின் பதிப்பு 
 msgid " — GNOME Volume Control Applet"
 msgstr "—GNOME ஒலிவளவு கட்டுப்பாடு குறுநிரல்"
 
-#: ../panels/sound/gvc-applet.c:270 ../panels/sound/gvc-mixer-dialog.c:1949
+#: ../panels/sound/gvc-applet.c:270 ../panels/sound/gvc-mixer-dialog.c:1767
 msgid "Output"
 msgstr "வெளிப்பாடு"
 
@@ -2674,7 +2650,7 @@ msgstr "வெளிப்பாடு"
 msgid "Sound Output Volume"
 msgstr "ஒலி வெளிப்பாடு அளவு"
 
-#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1864
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1807
 msgid "Input"
 msgstr "உள்ளீடு"
 
@@ -2734,11 +2710,7 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "பெருக்காதது"
 
-#: ../panels/sound/gvc-channel-bar.c:901
-msgid "Mute"
-msgstr "ஒலி நிறுத்தம்"
-
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1654
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1621
 msgid "_Profile:"
 msgstr "_P விவரகுறிப்பு:"
 
@@ -2764,76 +2736,76 @@ msgstr[1] "%u உள்ளீடுகள்"
 msgid "System Sounds"
 msgstr "கணினி ஒலிகள்"
 
-#: ../panels/sound/gvc-mixer-dialog.c:324
-#: ../panels/sound/gvc-mixer-dialog.c:635
+#: ../panels/sound/gvc-mixer-dialog.c:323
+#: ../panels/sound/gvc-mixer-dialog.c:634
 msgid "Co_nnector:"
 msgstr "_n பொருத்தி:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:541
+#: ../panels/sound/gvc-mixer-dialog.c:540
 msgid "Peak detect"
 msgstr "உச்சிகளை கண்டுபிடி"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1530
-#: ../panels/sound/gvc-mixer-dialog.c:1742
+#: ../panels/sound/gvc-mixer-dialog.c:1496
+#: ../panels/sound/gvc-mixer-dialog.c:1709
 #: ../panels/sound/gvc-sound-theme-chooser.c:596
 msgid "Name"
 msgstr "பெயர்"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1596
+#: ../panels/sound/gvc-mixer-dialog.c:1563
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "%s க்கு ஒலி பெருக்கி சோதனை"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1655
+#: ../panels/sound/gvc-mixer-dialog.c:1622
 msgid "_Test Speakers"
 msgstr "_T ஒலி பெருக்கிகளை சோதி "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1786
+#: ../panels/sound/gvc-mixer-dialog.c:1753
 msgid "_Output volume:"
 msgstr "_O வெளியீடு ஒலி அளவு: "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1800
-msgid "Sound Effects"
-msgstr "ஒலி விளைவுகள்"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1807
-msgid "_Alert volume:"
-msgstr "_A எச்சரிக்கை அளவு:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1820
-msgid "Hardware"
-msgstr "வன்பொருள்"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1825
-msgid "C_hoose a device to configure:"
-msgstr "_h வடிவமைக்க சாதனத்தை தேர்ந்தெடு"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1853
-#: ../panels/sound/gvc-mixer-dialog.c:1978
-msgid "Settings for the selected device:"
-msgstr "தேர்ந்தெடுக்கப்பட்ட சாதனத்திற்கு அமைப்பு:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1871
-msgid "_Input volume:"
-msgstr "(_I) உள்ளீட்டு ஒலி அளவு:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1894
-msgid "Input level:"
-msgstr "(_I) உள்ளீட்டு மட்டம்:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1922
-msgid "C_hoose a device for sound input:"
-msgstr "_h ஒலி உள்ளீட்டுக்கு சாதனம் தேர்ந்தெடு:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1954
+#: ../panels/sound/gvc-mixer-dialog.c:1772
 msgid "C_hoose a device for sound output:"
 msgstr "_h ஒலி வெளிப்பாடுக்கு சாதனத்தை தேர்ந்தெடு"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1989
+#: ../panels/sound/gvc-mixer-dialog.c:1796
+#: ../panels/sound/gvc-mixer-dialog.c:1925
+msgid "Settings for the selected device:"
+msgstr "தேர்ந்தெடுக்கப்பட்ட சாதனத்திற்கு அமைப்பு:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1814
+msgid "_Input volume:"
+msgstr "(_I) உள்ளீட்டு ஒலி அளவு:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1837
+msgid "Input level:"
+msgstr "(_I) உள்ளீட்டு மட்டம்:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1865
+msgid "C_hoose a device for sound input:"
+msgstr "_h ஒலி உள்ளீட்டுக்கு சாதனம் தேர்ந்தெடு:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1892
+msgid "Hardware"
+msgstr "வன்பொருள்"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1897
+msgid "C_hoose a device to configure:"
+msgstr "_h வடிவமைக்க சாதனத்தை தேர்ந்தெடு"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1936
+msgid "Sound Effects"
+msgstr "ஒலி விளைவுகள்"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1943
+msgid "_Alert volume:"
+msgstr "_A எச்சரிக்கை அளவு:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1956
 msgid "Applications"
 msgstr "பயன்பாடுகள்"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1993
+#: ../panels/sound/gvc-mixer-dialog.c:1960
 msgid "No application is currently playing or recording audio."
 msgstr "நடப்பில் எந்த பயன்பாடும் ஒலியை இயக்கவோ பதியவோ இல்லை"
 
@@ -2940,8 +2912,8 @@ msgstr "க்ளாஸ்"
 msgid "Sonar"
 msgstr "சோனார்"
 
-#: ../panels/universal-access/cc-ua-panel.c:491
-#: ../panels/universal-access/cc-ua-panel.c:496
+#: ../panels/universal-access/cc-ua-panel.c:484
+#: ../panels/universal-access/cc-ua-panel.c:489
 msgid "No shortcut set"
 msgstr "சுருக்கு வழி அமைக்கவில்லை"
 
@@ -3049,8 +3021,8 @@ msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;"
 "AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys"
 msgstr ""
-"விசைப்பலகை;சொடுக்கி;a11y;அணுகல்;மாறுபாடு;அணுகல்;திரைபடிப்பி;உரை;எழுத்துரு;அளாவு;அணுகல்x;ஒட்டுவிச"
-"ைகள்;மெதுவிசைகள்;துள்ளுவிசைகள்;சொடுக்கிவிசைகள்"
+"விசைப்பலகை;சொடுக்கி;a11y;அணுகல்;மாறுபாடு;அணுகல்;திரைபடிப்பி;உரை;எழுத்துரு;அளாவு;"
+"அணுகல்x;ஒட்டுவிசைகள்;மெதுவிசைகள்;துள்ளுவிசைகள்;சொடுக்கிவிசைகள்"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
@@ -3169,188 +3141,204 @@ msgstr "வேக இரட்டிப்பு விசை அழுத்த
 msgid "Increase size:"
 msgstr "அளவு ஐ அதிகமாக்குக:"
 
-#: ../panels/universal-access/uap.ui.h:36
-msgid "Larger"
-msgstr "பெரிய"
-
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:38
 msgid "Motion _threshold:"
 msgstr "(_t) நகர்வு மாறு நிலை :"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Mouse Keys"
 msgstr "சொடுக்கி விசைகள்"
 
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Nomon"
 msgstr "நோமோன் (மானிட்டர் ஏதுமில்லை)"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:42
 msgid "On screen keyboard"
 msgstr "திரை விசைப்பலகை"
 
-#: ../panels/universal-access/uap.ui.h:45
+#: ../panels/universal-access/uap.ui.h:43
 msgid "OnBoard"
 msgstr "உள்ளே"
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Options..."
 msgstr "தேர்வுகள்..."
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:45
 msgid "Pointing and Clicking"
 msgstr "சுட்டி சொடுக்கல் "
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "ஒரு விசை அழுத்தப்படுவதற்கும் அது ஒப்புக்கொள்ளப் படுவதற்கும் இடையே ஒரு இடைவெளியை அமை "
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Screen Reader"
 msgstr "திரைபடிப்பான்"
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Screen keyboard"
 msgstr "திரை விசைப்பலகை"
 
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Seeing"
 msgstr "காணல் "
 
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Simulated Secondary Click"
 msgstr "இரண்டாம்  சொடுக்கு பாவைக்கப்பட்டது"
 
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:53
 msgid "Slow Keys"
 msgstr "மெது விசைகள்"
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Sticky Keys"
 msgstr "ஒட்டு விசைகள்"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:57
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "மாற்றி விசைகளின் வரிசை ஒன்றை விசை தொகுப்பாக கொள்ளும்."
 
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:58
 msgid "Trigger a click when the pointer hovers"
 msgstr "சுட்டி அசைவை நிறுத்தும்போது சொடுக்கை தூண்டு"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "முதன்மை  பொத்தானை அழுத்தியதன் மூலம் இரண்டாம் சொடுக்கை இடரவும்"
 
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Turn on or off:"
 msgstr "இயக்கு அல்லது நிறுத்து:"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Type here to test settings"
 msgstr "அமைப்புகளை சோதிக்க இங்கு உள்ளிடவும்:"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Typing Assistant"
 msgstr "தட்டச்சு உதவியாளர்"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "எச்சரிக்கை ஒலி நிகழும் போது காணக்கூடிய குறிப்பை காட்டு"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Video Mouse"
 msgstr "வீடியோ சொடுக்கி"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Visual Alerts"
 msgstr "காட்சி எச்சரிக்கைகள்"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Zoom in:"
 msgstr "அணுகிப்பார்:"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Zoom out:"
 msgstr "விலகிப்பார்:"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:69
 msgid "_Contrast:"
 msgstr "_C வேறுபாடு:"
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:70
 msgid "_Disable if two keys are pressed together"
 msgstr "_D இரண்டு விசைகளை ஒரே நேரத்தில் அழுத்தினால் செயல் நீக்கவும்."
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:71
 msgid "_Keyboard Settings"
 msgstr "_K விசைப்பலகை  அமைப்பு"
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:72
 msgid "_Mouse Settings"
 msgstr "_M சொடுக்கி அமைப்புகள்"
 
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:73
 msgid "_Sound Settings"
 msgstr "_S ஒலி அமைப்புகள்"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:74
 msgid "_Test flash"
 msgstr "_T மின்ஒளியை சோதி "
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:75
 msgid "_Text size:"
 msgstr "_T உரை அளவு:"
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:76
 msgid "_Turn on accessibility features from the keyboard"
 msgstr "_T விசைப்பலகையில் இருந்து அணுகல் சிறப்பு இயல்புகளை செயலாக்கு"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:80
+#: ../panels/universal-access/uap.ui.h:78
 msgid "accepted"
 msgstr "ஏற்கப்பட்டது"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:82
+#: ../panels/universal-access/uap.ui.h:80
 msgid "pressed"
 msgstr "அழுத்தியது"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:82
 msgid "rejected"
 msgstr "நிராகரிக்கப்பட்டது "
 
-#: ../panels/universal-access/uap.ui.h:85
+#: ../panels/universal-access/uap.ui.h:83
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "அதிக"
 
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:84
 msgctxt "universal access, contrast"
 msgid "High/Inverse"
 msgstr "உயர் மாறுபாடு /எதிர்மறை"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:85
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "குறைவாக"
 
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:86
 msgctxt "universal access, contrast"
 msgid "Normal"
 msgstr "இயல்பாக"
 
 #. Translators: this refers to theme contrast and font size
-#: ../panels/universal-access/uap.ui.h:90
+#: ../panels/universal-access/uap.ui.h:88
 msgctxt "universal access, seeing"
 msgid "Display"
 msgstr "காட்சி"
 
 #. Translators: this refers to screen magnifier
-#: ../panels/universal-access/uap.ui.h:92
+#: ../panels/universal-access/uap.ui.h:90
 msgctxt "universal access, seeing"
 msgid "Zoom"
 msgstr "அணுகிப்பார்"
+
+#: ../panels/universal-access/uap.ui.h:91
+msgctxt "universal access, text size"
+msgid "Large"
+msgstr "பெரிய"
+
+#: ../panels/universal-access/uap.ui.h:92
+msgctxt "universal access, text size"
+msgid "Larger"
+msgstr "இன்னும் பெரிய"
+
+#: ../panels/universal-access/uap.ui.h:93
+msgctxt "universal access, text size"
+msgid "Normal"
+msgstr "இயல்பான"
+
+#: ../panels/universal-access/uap.ui.h:94
+msgctxt "universal access, text size"
+msgid "Small"
+msgstr "சிறிய"
 
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
@@ -3460,8 +3448,8 @@ msgstr "முடிந்தது!"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:409
-#: ../panels/user-accounts/um-fingerprint-dialog.c:431
+#: ../panels/user-accounts/um-fingerprint-dialog.c:410
+#: ../panels/user-accounts/um-fingerprint-dialog.c:432
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "'%s' சாதனத்தை அணுக முடியவில்லை"
@@ -3469,20 +3457,20 @@ msgstr "'%s' சாதனத்தை அணுக முடியவில்�
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:480
+#: ../panels/user-accounts/um-fingerprint-dialog.c:481
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "'%s' சாதனத்தில் விரலை பிடிக்க துவக்க முடியவில்லை"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:532
+#: ../panels/user-accounts/um-fingerprint-dialog.c:533
 msgid "Could not access any fingerprint readers"
 msgstr "கைரேகை வாசிப்பி எதையும் அணுக முடியவில்லை"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:533
+#: ../panels/user-accounts/um-fingerprint-dialog.c:534
 msgid "Please contact your system administrator for help."
 msgstr "உதவிக்கு உங்கள் கணினி நிர்வாகியை அணுகவும்"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:570
+#: ../panels/user-accounts/um-fingerprint-dialog.c:571
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Enable Fingerprint Login"
 msgstr "கைரேகை புகுபதிவை செயல்படுத்து"
@@ -3492,7 +3480,7 @@ msgstr "கைரேகை புகுபதிவை செயல்படு�
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:604
+#: ../panels/user-accounts/um-fingerprint-dialog.c:605
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -3501,15 +3489,15 @@ msgstr ""
 "கைரேகை புகுபதிவை செயல்படுத்த உங்கள் கைரேகையை '%s' சாதனத்தை பயன்படுத்தி சேமிக்க "
 "வேண்டும்."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:611
+#: ../panels/user-accounts/um-fingerprint-dialog.c:612
 msgid "Selecting finger"
 msgstr "விரலை தேர்ந்தெடு"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:612
+#: ../panels/user-accounts/um-fingerprint-dialog.c:613
 msgid "Enrolling fingerprints"
 msgstr "விரல்ரேகை பதிவு செய்கிறது"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:613
+#: ../panels/user-accounts/um-fingerprint-dialog.c:614
 msgid "Summary"
 msgstr "சுருக்கம்"
 
@@ -4112,6 +4100,30 @@ msgstr "கட்டுப்பாட்டு மையம்"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_A எல்லா அமைப்புகளும்"
+
+#~ msgid "Left"
+#~ msgstr "இடது"
+
+#~ msgid "Right"
+#~ msgstr "வலது"
+
+#~ msgid "Upside-down"
+#~ msgstr "தலை கீழ்"
+
+#~ msgid "Media and Autorun"
+#~ msgstr "ஊடகம் மற்றும் தானியக்கம்"
+
+#~ msgid "Configure media and autorun preferences"
+#~ msgstr "ஊடகத்தை வடிவமை மற்றும் தானியங்கி  விருப்ப தேர்வுகளை அமைக்கவும்"
+
+#~ msgid "cd;dvd;usb;audio;video;disc;"
+#~ msgstr "சிடி;டிவிடி;ஒலி;விடியோ;வட்டு"
+
+#~ msgid "_Turn off after:"
+#~ msgstr "_T இவ்வளவுக்குப்பின் நிறுத்து:"
+
+#~ msgid "Mute"
+#~ msgstr "ஒலி நிறுத்தம்"
 
 #~ msgid "Chinese"
 #~ msgstr "சைனீஸ் "
