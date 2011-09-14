@@ -787,6 +787,7 @@ cc_ua_panel_init (CcUaPanel *self)
   priv->interface_settings = g_settings_new ("org.gnome.desktop.interface");
   g_signal_connect (priv->interface_settings, "changed",
                     G_CALLBACK (interface_settings_changed_cb), self);
+  interface_settings_changed_cb (priv->interface_settings, "gtk-theme", self);
 
   priv->kb_settings = g_settings_new ("org.gnome.desktop.a11y.keyboard");
   priv->mouse_settings = g_settings_new ("org.gnome.desktop.a11y.mouse");
