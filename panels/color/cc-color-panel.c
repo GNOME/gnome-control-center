@@ -896,6 +896,7 @@ gcm_prefs_profile_clicked (CcColorPanel *prefs, CdProfile *profile, CdDevice *de
 {
   GtkWidget *widget;
   CdDeviceRelation relation;
+  gchar *s;
   CcColorPanelPrivate *priv = prefs->priv;
 
   /* get profile */
@@ -926,7 +927,13 @@ gcm_prefs_profile_clicked (CcColorPanel *prefs, CdProfile *profile, CdDevice *de
   /* allow getting profile info */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                "toolbutton_profile_view"));
-  gtk_widget_set_sensitive (widget, TRUE);
+  if ((s = g_find_program_in_path ("gcm-viewer")))
+    {
+      gtk_widget_set_sensitive (widget, TRUE);
+      g_free (s);
+    }
+  else
+      gtk_widget_set_sensitive (widget, FALSE);
 
   /* hide device specific stuff */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
