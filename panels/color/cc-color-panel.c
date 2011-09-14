@@ -422,6 +422,12 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
       if (!ret)
         continue;
 
+#if CD_CHECK_VERSION(0,1,13)
+      /* ignore profiles from other user accounts */
+      if (!cd_profile_has_access (profile_tmp))
+        continue;
+#endif
+
       /* add */
       gcm_prefs_combobox_add_profile (widget,
                                       profile_tmp,
