@@ -560,6 +560,7 @@ static void
 setup_search (GnomeControlCenter *shell)
 {
   GtkWidget *search_scrolled, *search_view, *widget;
+  GtkCellRenderer *renderer;
   GnomeControlCenterPrivate *priv = shell->priv;
 
   g_return_if_fail (priv->store != NULL);
@@ -580,7 +581,15 @@ setup_search (GnomeControlCenter *shell)
   gtk_icon_view_set_spacing (GTK_ICON_VIEW (search_view), 6);
   gtk_icon_view_set_model (GTK_ICON_VIEW (search_view),
                            GTK_TREE_MODEL (priv->search_filter));
-  gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (search_view), COL_PIXBUF);
+
+  renderer = gtk_cell_renderer_pixbuf_new ();
+  g_object_set (renderer,
+                "follow-state", TRUE,
+                NULL);
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (search_view),
+                              renderer, FALSE);
+  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (search_view), renderer,
+                                 "pixbuf", COL_PIXBUF);
 
   search_scrolled = W (priv->builder, "search-scrolled-window");
   gtk_container_add (GTK_CONTAINER (search_scrolled), search_view);

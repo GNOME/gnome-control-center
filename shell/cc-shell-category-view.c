@@ -141,13 +141,22 @@ cc_shell_category_view_constructed (GObject *object)
 {
   CcShellCategoryViewPrivate *priv = CC_SHELL_CATEGORY_VIEW (object)->priv;
   GtkWidget *iconview, *vbox;
+  GtkCellRenderer *renderer;
 
   iconview = cc_shell_item_view_new ();
   gtk_icon_view_set_model (GTK_ICON_VIEW (iconview), priv->model);
 
   vbox = gtk_vbox_new (FALSE, 0);
 
-  gtk_icon_view_set_pixbuf_column (GTK_ICON_VIEW (iconview), COL_PIXBUF);
+  renderer = gtk_cell_renderer_pixbuf_new ();
+  g_object_set (renderer,
+                "follow-state", TRUE,
+                NULL);
+  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (iconview),
+                              renderer, FALSE);
+  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (iconview), renderer,
+                                 "pixbuf", COL_PIXBUF);
+
   gtk_icon_view_set_text_column (GTK_ICON_VIEW (iconview), COL_NAME);
   gtk_icon_view_set_item_width (GTK_ICON_VIEW (iconview), 100);
   cc_shell_item_view_update_cells (CC_SHELL_ITEM_VIEW (iconview));
