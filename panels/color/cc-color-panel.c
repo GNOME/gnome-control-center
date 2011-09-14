@@ -573,6 +573,7 @@ gcm_prefs_profile_view_cb (GtkWidget *widget, CcColorPanel *prefs)
   g_ptr_array_add (argv, g_strdup (cd_profile_get_id (profile)));
   g_ptr_array_add (argv, g_strdup ("--parent-window"));
   g_ptr_array_add (argv, g_strdup_printf ("%i", xid));
+  g_ptr_array_add (argv, NULL);
   ret = g_spawn_async (NULL, (gchar**) argv->pdata, NULL, 0,
                        NULL, NULL, NULL, &error);
   if (!ret)
