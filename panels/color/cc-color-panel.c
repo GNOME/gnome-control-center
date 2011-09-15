@@ -1364,7 +1364,7 @@ gcm_prefs_get_profile_title (CcColorPanel *prefs, CdProfile *profile)
   title = cd_profile_get_title (profile);
   if (title != NULL)
     {
-      string = g_strdup (title);
+      string = g_markup_escape_text (title, -1);
       goto out;
     }
 
