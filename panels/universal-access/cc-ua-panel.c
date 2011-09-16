@@ -573,14 +573,16 @@ visual_bell_type_toggle_cb (GtkWidget *button,
     gconf_client_set_string (panel->priv->client, key, "fullscreen", NULL);
 }
 
-static void
-hearing_sound_preferences_clicked (GtkButton *button,
-                                   CcUaPanel *panel)
+static gboolean
+hearing_sound_preferences_clicked (GtkButton  *button,
+                                   CcUaPanel  *panel)
 {
   CcShell *shell;
 
   shell = cc_panel_get_shell (CC_PANEL (panel));
   cc_shell_set_active_panel_from_id (shell, "sound", NULL, NULL);
+
+  return TRUE;
 }
 
 static void
@@ -621,20 +623,22 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
   g_signal_connect (WID (priv->builder, "hearing_test_flash_button"),
                     "clicked", G_CALLBACK (gdk_beep), NULL);
 
-  g_signal_connect (WID (priv->builder, "hearing_sound_preferences_button"),
-                    "clicked",
+  g_signal_connect (WID (priv->builder, "hearing_sound_preferences_link"),
+                    "activate-link",
                     G_CALLBACK (hearing_sound_preferences_clicked), self);
 }
 
 /* typing/keyboard section */
-static void
-typing_keyboard_preferences_clicked (GtkButton *button,
-                                     CcUaPanel *panel)
+static gboolean
+typing_keyboard_preferences_clicked (GtkButton  *button,
+                                     CcUaPanel  *panel)
 {
   CcShell *shell;
 
   shell = cc_panel_get_shell (CC_PANEL (panel));
   cc_shell_set_active_panel_from_id (shell, "keyboard", NULL, NULL);
+
+  return TRUE;
 }
 
 static void
@@ -691,20 +695,22 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
   w = WID (priv->builder, "typing_bounce_keys_beep_rejected_checkbutton");
   g_settings_bind (priv->kb_settings, "bouncekeys-beep-reject", w, "active", G_SETTINGS_BIND_NO_SENSITIVITY);
 
-  g_signal_connect (WID (priv->builder, "typing_keyboard_preferences_button"),
-                    "clicked",
+  g_signal_connect (WID (priv->builder, "typing_keyboard_preferences_link"),
+                    "activate-link",
                     G_CALLBACK (typing_keyboard_preferences_clicked), self);
 }
 
 /* mouse/pointing & clicking section */
-static void
-pointing_mouse_preferences_clicked_cb (GtkButton *button,
-                                       CcUaPanel *panel)
+static gboolean
+pointing_mouse_preferences_clicked_cb (GtkButton  *button,
+                                       CcUaPanel  *panel)
 {
   CcShell *shell;
 
   shell = cc_panel_get_shell (CC_PANEL (panel));
   cc_shell_set_active_panel_from_id (shell, "mouse", NULL, NULL);
+
+  return TRUE;
 }
 
 static void
@@ -741,8 +747,8 @@ cc_ua_panel_init_mouse (CcUaPanel *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   /* mouse preferences button */
-  g_signal_connect (WID (priv->builder, "pointing_mouse_preferences_button"),
-                    "clicked",
+  g_signal_connect (WID (priv->builder, "pointing_mouse_preferences_link"),
+                    "activate-link",
                     G_CALLBACK (pointing_mouse_preferences_clicked_cb), self);
 }
 

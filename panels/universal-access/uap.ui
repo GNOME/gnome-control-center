@@ -1136,18 +1136,21 @@
                 <child>
                   <object class="GtkHBox" id="hbox5">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">end</property>
                     <child>
-                      <object class="GtkButton" id="hearing_sound_preferences_button">
-                        <property name="label" translatable="yes">_Sound Settings</property>
-                        <property name="use_underline">True</property>
+                      <object class="GtkLinkButton" id="hearing_sound_preferences_link">
+                        <property name="label" translatable="yes">Sound Settings</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="relief">none</property>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="pack_type">end</property>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
                         <property name="position">0</property>
                       </packing>
                     </child>
@@ -1981,12 +1984,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="typing_keyboard_preferences_button">
-                        <property name="label" translatable="yes">_Keyboard Settings</property>
-                        <property name="use_underline">True</property>
+                      <object class="GtkLinkButton" id="typing_keyboard_preferences_link">
+                        <property name="label" translatable="yes">Keyboard Settings</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="relief">none</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -2734,12 +2739,14 @@
                   <object class="GtkHBox" id="hbox13">
                     <property name="visible">True</property>
                     <child>
-                      <object class="GtkButton" id="pointing_mouse_preferences_button">
-                        <property name="label" translatable="yes">_Mouse Settings</property>
-                        <property name="use_underline">True</property>
+                      <object class="GtkLinkButton" id="pointing_mouse_preferences_link">
+                        <property name="label" translatable="yes">Mouse Settings</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
+                        <property name="has_tooltip">True</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="relief">none</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
