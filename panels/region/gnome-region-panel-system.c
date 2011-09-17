@@ -88,7 +88,7 @@ xkb_settings_changed (GSettings *settings,
 	GString *str = g_string_new ("");
 	gchar **layouts = g_settings_get_strv (settings, "layouts");
 
-	for (i = 0; i < G_N_ELEMENTS (layouts); i++) {
+	for (i = 0; layouts[i]; i++) {
 		gchar *utf_visible = xkb_layout_description_utf8 (layouts[i]);
 
 		if (utf_visible != NULL) {
