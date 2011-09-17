@@ -40,6 +40,39 @@ static GDBusProxy *localed_proxy;
 static GPermission *localed_permission;
 
 static void
+update_copy_button (GtkBuilder *builder)
+{
+        GtkWidget *label;
+        GtkWidget *button;
+        const gchar *user_lang, *system_lang;
+        const gchar *user_region, *system_region;
+
+        label = (GtkWidget *)gtk_builder_get_object (builder, "user_display_language");
+        user_lang = g_object_get_data (G_OBJECT (label), "language");
+
+        label = (GtkWidget*)gtk_builder_get_object (builder, "system_display_language");
+        system_lang = g_object_get_data (G_OBJECT (label), "language");
+
+        label = (GtkWidget *)gtk_builder_get_object (builder, "user_format");
+        user_region = g_object_get_data (G_OBJECT (label), "region");
+
+        label = (GtkWidget*)gtk_builder_get_object (builder, "system_format");
+        system_region = g_object_get_data (G_OBJECT (label), "region");
+
+        /* FIXME: compare layouts */
+
+        button = (GtkWidget *)gtk_builder_get_object (builder, "copy_settings_button");
+
+        if (g_strcmp0 (user_lang, system_lang) == 0 &&
+            g_strcmp0 (user_region, system_region) == 0) {
+                gtk_widget_set_sensitive (button, FALSE);
+        }
+        else {
+                gtk_widget_set_sensitive (button, TRUE);
+        }
+}
+
+static void
 locale_settings_changed (GSettings *settings,
 			 const gchar *key,
 			 gpointer user_data)
@@ -60,6 +93,8 @@ locale_settings_changed (GSettings *settings,
         g_object_set_data_full (G_OBJECT (label), "region", g_strdup (region), g_free);
         g_free (region);
         g_free (display_region);
+
+        update_copy_button (builder);
 }
 
 void
@@ -76,6 +111,8 @@ system_update_language (GtkBuilder *builder, const gchar *language)
 
         /* need to update the region display in case the setting is '' */
         locale_settings_changed (locale_settings, "region", builder);
+
+        update_copy_button (builder);
 }
 
 static void
@@ -170,6 +207,7 @@ on_localed_properties_changed (GDBusProxy   *proxy,
                         label = (GtkWidget*)gtk_builder_get_object (builder, "system_display_language");
                         gtk_label_set_text (GTK_LABEL (label), name);
                         g_free (name);
+                        g_object_set_data_full (G_OBJECT (label), "language", g_strdup (lang), g_free);
                 }
 
                 if (time) {
@@ -177,10 +215,13 @@ on_localed_properties_changed (GDBusProxy   *proxy,
                         label = (GtkWidget*)gtk_builder_get_object (builder, "system_format");
                         gtk_label_set_text (GTK_LABEL (label), name);
                         g_free (name);
+                        g_object_set_data_full (G_OBJECT (label), "region", g_strdup (time), g_free);
                 }
                 g_variant_unref (v);
         }
         g_variant_unref (res);
+
+        update_copy_button (builder);
 }
 
 static void
