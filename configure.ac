@@ -136,7 +136,7 @@ PKG_CHECK_MODULES(NETWORK_MANAGER, NetworkManager >= $NETWORK_MANAGER_REQUIRED_V
 		  libnm-gtk >= $NETWORK_MANAGER_REQUIRED_VERSION,
                   [have_networkmanager=yes], have_networkmanager=no)
 if test "x$have_networkmanager" = xno ; then
-        AC_MSG_WARN(*** Network panel will not be built (NetworkManager ~0.9 or newer not found) ***)
+        AC_MSG_WARN(*** Network panel will not be built (NetworkManager >= $NETWORK_MANAGER_REQUIRED_VERSION or newer not found) ***)
 fi
 AM_CONDITIONAL(BUILD_NETWORK, [test x$have_networkmanager = xyes])
 
