@@ -1567,15 +1567,12 @@ info_panel_get_hostname (CcInfoPanel  *self)
 }
 
 static void
-text_changed_cb (GtkEntry        *entry,
-                 CcInfoPanel     *self)
+info_panel_set_hostname (CcInfoPanel *self,
+                         const char  *text)
 {
-  const char *text;
   char *hostname;
   GVariant *variant;
   GError *error = NULL;
-
-  text = gtk_entry_get_text (GTK_ENTRY (entry));
 
   variant = g_dbus_proxy_call_sync (self->priv->hostnamed_proxy,
                                     "SetPrettyHostname",
@@ -1611,6 +1608,16 @@ text_changed_cb (GtkEntry        *entry,
       g_variant_unref (variant);
     }
   g_free (hostname);
+}
+
+static void
+text_changed_cb (GtkEntry        *entry,
+                 CcInfoPanel     *self)
+{
+  const char *text;
+
+  text = gtk_entry_get_text (GTK_ENTRY (entry));
+  info_panel_set_hostname (self, text);
 }
 
 static void
