@@ -1631,7 +1631,10 @@ info_panel_setup_hostname (CcInfoPanel  *self,
   g_assert (self->priv->hostnamed_proxy);
 
   str = info_panel_get_hostname (self);
-  gtk_entry_set_text (GTK_ENTRY (entry), str);
+  if (str != NULL)
+    gtk_entry_set_text (GTK_ENTRY (entry), str);
+  else
+    gtk_entry_set_text (GTK_ENTRY (entry), "");
   g_free (str);
 
   g_signal_connect (G_OBJECT (entry), "changed",
