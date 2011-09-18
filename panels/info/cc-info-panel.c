@@ -1506,13 +1506,14 @@ info_panel_setup_selector (CcInfoPanel  *self)
 }
 
 static char *
-info_panel_get_hostname (CcInfoPanel  *self)
+get_hostname_property (CcInfoPanel *self,
+		       const char  *property)
 {
   GVariant *variant;
   char *str;
 
   variant = g_dbus_proxy_get_cached_property (self->priv->hostnamed_proxy,
-                                              "PrettyHostname");
+                                              property);
   if (!variant)
     {
       GError *error = NULL;
@@ -1522,14 +1523,14 @@ info_panel_get_hostname (CcInfoPanel  *self)
        * the property value when changing values */
       variant = g_dbus_proxy_call_sync (self->priv->hostnamed_proxy,
                                         "org.freedesktop.DBus.Properties.Get",
-                                        g_variant_new ("(ss)", "org.freedesktop.hostname1", "PrettyHostname"),
+                                        g_variant_new ("(ss)", "org.freedesktop.hostname1", property),
                                         G_DBUS_CALL_FLAGS_NONE,
                                         -1,
                                         NULL,
                                         &error);
       if (variant == NULL)
         {
-          g_warning ("Failed to get property 'PrettyHostname': %s", error->message);
+          g_warning ("Failed to get property '%s': %s", property, error->message);
           g_error_free (error);
           return NULL;
         }
@@ -1544,12 +1545,22 @@ info_panel_get_hostname (CcInfoPanel  *self)
       g_variant_unref (variant);
     }
 
+  return str;
+}
+
+static char *
+info_panel_get_hostname (CcInfoPanel  *self)
+{
+  char *str;
+
+  str = get_hostname_property (self, "PrettyHostname");
+
   /* Empty strings means that we need to fallback */
   if (str != NULL &&
       *str == '\0')
     {
       g_free (str);
-      str = NULL;
+      str = get_hostname_property (self, "Hostname");
     }
 
   return str;
