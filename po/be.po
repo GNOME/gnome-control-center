@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-09-05 00:22+0300\n"
-"PO-Revision-Date: 2011-09-05 00:22+0300\n"
+"POT-Creation-Date: 2011-09-18 17:29+0300\n"
+"PO-Revision-Date: 2011-09-18 17:29+0300\n"
 "Last-Translator: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -293,7 +293,7 @@ msgstr "_Горад:"
 
 #: ../panels/datetime/datetime.ui.h:26
 msgid "_Network Time"
-msgstr "_Сеткавы час"
+msgstr "_Сеціўная настройка часу"
 
 #: ../panels/datetime/datetime.ui.h:27
 msgid "_Region:"
@@ -313,47 +313,28 @@ msgid "Date and Time preferences panel"
 msgstr "Панэль настройкі даты і часу"
 
 #: ../panels/display/display-capplet.ui.h:1
-msgid "Left"
-msgstr "Улева"
-
-#: ../panels/display/display-capplet.ui.h:2
 #: ../panels/display/cc-display-panel.c:641
 msgid "Monitor"
 msgstr "Манітор"
 
-#: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/cc-display-panel.c:477
-#: ../panels/display/cc-display-panel.c:516
-#: ../panels/universal-access/uap.ui.h:43
-msgid "Normal"
-msgstr "Звычайна"
-
-#: ../panels/display/display-capplet.ui.h:4
+#: ../panels/display/display-capplet.ui.h:2
 msgid "Note: may limit resolution options"
 msgstr "Увага: гэта можа абмежаваць опцыі распазнавальнасці экрана"
 
-#: ../panels/display/display-capplet.ui.h:5
+#: ../panels/display/display-capplet.ui.h:3
 msgid "R_otation:"
 msgstr "Пава_рот:"
 
-#: ../panels/display/display-capplet.ui.h:6
-msgid "Right"
-msgstr "Управа"
-
-#: ../panels/display/display-capplet.ui.h:7
-msgid "Upside-down"
-msgstr "Дагары нагамі"
-
-#: ../panels/display/display-capplet.ui.h:8
+#: ../panels/display/display-capplet.ui.h:4
 msgid "_Detect Displays"
 msgstr "_Апазнаць маніторы"
 
 #. Note that mirror is a verb in this string
-#: ../panels/display/display-capplet.ui.h:10
+#: ../panels/display/display-capplet.ui.h:6
 msgid "_Mirror displays"
-msgstr "Ад_люстраваць маніторы"
+msgstr "_Люстраванне манітораў"
 
-#: ../panels/display/display-capplet.ui.h:11
+#: ../panels/display/display-capplet.ui.h:7
 msgid "_Resolution:"
 msgstr "_Распазнавальнасць:"
 
@@ -370,15 +351,23 @@ msgstr "Маніторы"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Панэль;Праектар;xrandr;Экран;Распазнавальнасць;Абнаўленне экрана;"
 
+#: ../panels/display/cc-display-panel.c:477
+msgctxt "display panel, rotation"
+msgid "Normal"
+msgstr "Звычайны"
+
 #: ../panels/display/cc-display-panel.c:478
+msgctxt "display panel, rotation"
 msgid "Counterclockwise"
 msgstr "Супраць гадзіннікавай стрэлкі"
 
 #: ../panels/display/cc-display-panel.c:479
+msgctxt "display panel, rotation"
 msgid "Clockwise"
 msgstr "Па ходу гадзіннікавай стрэлкі"
 
 #: ../panels/display/cc-display-panel.c:480
+msgctxt "display panel, rotation"
 msgid "180 Degrees"
 msgstr "На 180 градусаў"
 
@@ -389,7 +378,7 @@ msgstr "На 180 градусаў"
 #.
 #: ../panels/display/cc-display-panel.c:617
 msgid "Mirror Displays"
-msgstr "Адлюстраваныя маніторы"
+msgstr "Люстраваныя маніторы"
 
 #: ../panels/display/cc-display-panel.c:747
 #, c-format
@@ -439,35 +428,35 @@ msgid "Could not get screen information"
 msgstr "Не ўдалося атрымаць звесткі аб экране"
 
 #. Translators: VESA is an techncial acronym, don't translate it.
-#: ../panels/info/cc-info-panel.c:385
+#: ../panels/info/cc-info-panel.c:402
 #, c-format
 msgid "VESA: %s"
 msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:409 ../panels/network/panel-common.c:79
+#: ../panels/info/cc-info-panel.c:426 ../panels/network/panel-common.c:79
 #: ../panels/network/panel-common.c:158
 msgid "Unknown"
 msgstr "Невядома"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:558
+#: ../panels/info/cc-info-panel.c:587
 #, c-format
 msgid "%d-bit"
 msgstr "%d-бітная"
 
-#: ../panels/info/cc-info-panel.c:714
+#: ../panels/info/cc-info-panel.c:743
 msgid "Unknown model"
 msgstr "Невядомая мадэль"
 
-#: ../panels/info/cc-info-panel.c:797
+#: ../panels/info/cc-info-panel.c:826
 msgid "The next login will attempt to use the standard experience."
 msgstr ""
 "Для наступнага ўваходу будзе выканана спроба ўжыць звычайны рэжым працы."
 
-#: ../panels/info/cc-info-panel.c:799
+#: ../panels/info/cc-info-panel.c:828
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
@@ -477,49 +466,135 @@ msgstr ""
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:841
+#: ../panels/info/cc-info-panel.c:870
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "Альтэрнатыўны запасны"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:847
+#: ../panels/info/cc-info-panel.c:876
 msgctxt "Experience"
 msgid "Standard"
 msgstr "Звычайны"
 
-#: ../panels/info/cc-info-panel.c:987
+#: ../panels/info/cc-info-panel.c:1199
+msgid "Ask what to do"
+msgstr "Спытаць аб патрэбным дзеянні"
+
+#: ../panels/info/cc-info-panel.c:1203 ../panels/power/power.ui.h:6
+msgid "Do nothing"
+msgstr "Нічога не рабіць"
+
+#: ../panels/info/cc-info-panel.c:1207
+msgid "Open folder"
+msgstr "Адкрыць папку"
+
+#: ../panels/info/cc-info-panel.c:1318
+msgid "Select an application for audio CDs"
+msgstr "Выберыце праграму для Audio CD"
+
+#: ../panels/info/cc-info-panel.c:1319
+msgid "Select an application for video DVDs"
+msgstr "Выберыце праграму для Video CD"
+
+#: ../panels/info/cc-info-panel.c:1320
+msgid "Select an application to run when a music player is connected"
+msgstr "Выберыце праграму для запуску пры падлучэнні музычнага плэера"
+
+#: ../panels/info/cc-info-panel.c:1321
+msgid "Select an application to run when a camera is connected"
+msgstr ""
+"Выберыце праграму для запуску пры падлучэнні фотаапарата ці відэакамеры"
+
+#: ../panels/info/cc-info-panel.c:1322
+msgid "Select an application for software CDs"
+msgstr "Выберыце праграму для дыскаў з апраграмаваннем"
+
+#. translators: these strings are duplicates of shared-mime-info
+#. * strings, just here to fix capitalization of the English originals.
+#. * If the shared-mime-info translation works for your language,
+#. * simply leave these untranslated.
+#.
+#: ../panels/info/cc-info-panel.c:1334
+msgid "audio DVD"
+msgstr "Audio DVD"
+
+#: ../panels/info/cc-info-panel.c:1335
+msgid "blank Blu-ray disc"
+msgstr "Пусты Blu-ray дыск"
+
+#: ../panels/info/cc-info-panel.c:1336
+msgid "blank CD disc"
+msgstr "Пусты CD-дыск"
+
+#: ../panels/info/cc-info-panel.c:1337
+msgid "blank DVD disc"
+msgstr "Пусты DVD-дыск"
+
+#: ../panels/info/cc-info-panel.c:1338
+msgid "blank HD DVD disc"
+msgstr "Пусты HD DVD-дыск"
+
+#: ../panels/info/cc-info-panel.c:1339
+msgid "Blu-ray video disc"
+msgstr "Blu-ray відэадыск"
+
+#: ../panels/info/cc-info-panel.c:1340
+msgid "e-book reader"
+msgstr "Электронная кніга"
+
+#: ../panels/info/cc-info-panel.c:1341
+msgid "HD DVD video disc"
+msgstr "HD DVD-відэадыск"
+
+#: ../panels/info/cc-info-panel.c:1342
+msgid "Picture CD"
+msgstr "Picture CD"
+
+#: ../panels/info/cc-info-panel.c:1343
+msgid "Super Video CD"
+msgstr "Super Video CD"
+
+#: ../panels/info/cc-info-panel.c:1344
+msgid "Video CD"
+msgstr "Video CD"
+
+#: ../panels/info/cc-info-panel.c:1473
 #: ../panels/keyboard/keyboard-shortcuts.c:1762
 msgid "Section"
 msgstr "Раздзел"
 
-#: ../panels/info/cc-info-panel.c:996 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1482 ../panels/info/info.ui.h:15
 msgid "Overview"
 msgstr "Агляд"
 
-#: ../panels/info/cc-info-panel.c:1002 ../panels/info/info.ui.h:2
+#: ../panels/info/cc-info-panel.c:1488 ../panels/info/info.ui.h:4
 msgid "Default Applications"
 msgstr "Прадвызначаныя праграмы"
 
-#: ../panels/info/cc-info-panel.c:1007 ../panels/info/info.ui.h:9
+#: ../panels/info/cc-info-panel.c:1493 ../panels/info/info.ui.h:17
+msgid "Removable Media"
+msgstr "Зменныя носьбіты"
+
+#: ../panels/info/cc-info-panel.c:1498 ../panels/info/info.ui.h:11
 msgid "Graphics"
 msgstr "Графіка"
 
-#: ../panels/info/cc-info-panel.c:1171
+#: ../panels/info/cc-info-panel.c:1685
 #, c-format
 msgid "Version %s"
 msgstr "Версія %s"
 
-#: ../panels/info/cc-info-panel.c:1221
+#: ../panels/info/cc-info-panel.c:1735
 msgid "Install Updates"
 msgstr "Усталяваць абноўкі"
 
-#: ../panels/info/cc-info-panel.c:1225
+#: ../panels/info/cc-info-panel.c:1739
 msgid "System Up-To-Date"
 msgstr "Сістэма поўнасцю абноўлена"
 
-#: ../panels/info/cc-info-panel.c:1229
+#: ../panels/info/cc-info-panel.c:1743
 msgid "Checking for Updates"
 msgstr "Праверка наяўнасці абновак"
 
@@ -535,69 +610,114 @@ msgstr "Звесткі аб сістэме"
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
-"fallback;preferred;"
+"fallback;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgstr ""
-"прыстасаванне;сістэма;інфармацыя;звесткі;памяць;працэсар;версія;"
-"прадвызначанае;праграма;альтэрнатыўны запасны рэжым;упадабанае;"
+"прыстасаванне;сістэма;інфармацыя;памяць;працэсар;версія;прадвызначанае;"
+"праграма;альтэрнатыўны запасны рэжым;упадабанае;cd;dvd;usb;гук;аўдыя;відэа;"
+"дыск;зменны;носьбіт;аўтазапуск;аўтаматычны запуск;"
 
 #: ../panels/info/info.ui.h:1
+msgid "Acti_on:"
+msgstr "_Дзеянне:"
+
+#: ../panels/info/info.ui.h:2
+msgid "CD _audio:"
+msgstr "_Гукавы CD:"
+
+#: ../panels/info/info.ui.h:3
 msgid "Calculating..."
 msgstr "Разлік..."
 
-#: ../panels/info/info.ui.h:3
+#: ../panels/info/info.ui.h:5
 msgid "Device name"
-msgstr "Назва прыстасавання"
+msgstr "Назва камп'ютара"
 
-#: ../panels/info/info.ui.h:4
+#: ../panels/info/info.ui.h:6
 msgid "Disk"
 msgstr "Дыск"
 
-#: ../panels/info/info.ui.h:5
+#: ../panels/info/info.ui.h:7
 msgid "Driver"
 msgstr "Драйвер"
 
-#: ../panels/info/info.ui.h:6
+#: ../panels/info/info.ui.h:8
 msgid "Experience"
 msgstr "Рэжым"
 
 #. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
-#: ../panels/info/info.ui.h:8
+#: ../panels/info/info.ui.h:10
 msgid "Forced _Fallback Mode"
 msgstr "Прымусовы _альтэрнатыўны рэжым"
 
-#: ../panels/info/info.ui.h:10
+#: ../panels/info/info.ui.h:12
 msgid "M_usic"
 msgstr "_Музыка"
 
-#: ../panels/info/info.ui.h:11
+#: ../panels/info/info.ui.h:13
 msgid "Memory"
 msgstr "Памяць"
 
-#: ../panels/info/info.ui.h:12
+#: ../panels/info/info.ui.h:14
 msgid "OS type"
 msgstr "Тып сістэмы"
 
-#: ../panels/info/info.ui.h:14
+#: ../panels/info/info.ui.h:16
 msgid "Processor"
 msgstr "Працэсар"
 
-#: ../panels/info/info.ui.h:15
+#: ../panels/info/info.ui.h:18
+msgid "Select how media should be handled"
+msgstr "Вызначыце, што трэба рабіць з носьбітамі даных"
+
+#: ../panels/info/info.ui.h:19
+msgid "Select how other media should be handled"
+msgstr "Вызначыце, што трэба рабіць з іншымі носьбітамі даных"
+
+#: ../panels/info/info.ui.h:20
 msgid "_Calendar"
 msgstr "_Каляндар"
 
-#: ../panels/info/info.ui.h:16
+#: ../panels/info/info.ui.h:21
+msgid "_DVD video:"
+msgstr "_Відэа DVD:"
+
+#: ../panels/info/info.ui.h:22
 msgid "_Mail"
 msgstr "_Пошта"
 
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:23
+msgid "_Music player:"
+msgstr "_Музычны плэер:"
+
+#: ../panels/info/info.ui.h:24
+msgid "_Never prompt or start programs on media insertion"
+msgstr "_Ніколі нічога не рабіць пры ўстаўцы новых носьбітаў даных"
+
+#: ../panels/info/info.ui.h:25
+msgid "_Other Media..."
+msgstr "Ін_шыя носьбіты..."
+
+#: ../panels/info/info.ui.h:26
 msgid "_Photos"
 msgstr "_Фатаграфіі"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:27
+msgid "_Photos:"
+msgstr "_Фатаграфіі:"
+
+#: ../panels/info/info.ui.h:28
+msgid "_Software:"
+msgstr "_Апраграмаванне:"
+
+#: ../panels/info/info.ui.h:29
+msgid "_Type:"
+msgstr "_Тып:"
+
+#: ../panels/info/info.ui.h:30
 msgid "_Video"
 msgstr "_Відэа"
 
-#: ../panels/info/info.ui.h:19
+#: ../panels/info/info.ui.h:31
 msgid "_Web"
 msgstr "_Сеціва"
 
@@ -682,7 +802,7 @@ msgid "Log out"
 msgstr "Скончыць сеанс"
 
 #: ../panels/keyboard/01-system.xml.in.h:3
-#: ../panels/region/gnome-region-panel.ui.h:23
+#: ../panels/region/gnome-region-panel.ui.h:24
 msgid "System"
 msgstr "Сістэма"
 
@@ -860,7 +980,7 @@ msgstr "Уласны клавіятурны скарот"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
 #: ../panels/mouse/gnome-mouse-properties.ui.h:9
 msgid "Fast"
-msgstr "Хуткая"
+msgstr "Хутка"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
 msgid "Key presses _repeat when key is held down"
@@ -875,7 +995,7 @@ msgstr "Настройкі раскладкі"
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
 #: ../panels/universal-access/uap.ui.h:38
 msgid "Long"
-msgstr "Доўгая"
+msgstr "Доўгі"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 msgid "Repeat Keys"
@@ -894,7 +1014,7 @@ msgstr "_Хуткасць:"
 #: ../panels/mouse/gnome-mouse-properties.ui.h:23
 #: ../panels/universal-access/uap.ui.h:53
 msgid "Short"
-msgstr "Кароткая"
+msgstr "Кароткі"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
 msgid "Shortcuts"
@@ -904,7 +1024,7 @@ msgstr "Клавіятурныя скароты"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
 #: ../panels/mouse/gnome-mouse-properties.ui.h:25
 msgid "Slow"
-msgstr "Марудная"
+msgstr "Марудна"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
 msgid ""
@@ -915,9 +1035,9 @@ msgstr ""
 "ачысціць яго, проста націсніце Backspace."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Typing"
-msgstr "Пісанне"
+msgstr "Пісьмо"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
 msgid "_Delay:"
@@ -931,191 +1051,47 @@ msgstr "_Назва:"
 msgid "_Speed:"
 msgstr "_Хуткасць:"
 
-#: ../panels/media/cc-media-panel.c:315
-msgid "Ask what to do"
-msgstr "Спытаць аб патрэбным дзеянні"
-
-#: ../panels/media/cc-media-panel.c:319 ../panels/power/power.ui.h:6
-msgid "Do nothing"
-msgstr "Нічога не рабіць"
-
-#: ../panels/media/cc-media-panel.c:323
-msgid "Open folder"
-msgstr "Адкрыць папку"
-
-#: ../panels/media/cc-media-panel.c:434
-msgid "Select an application for audio CDs"
-msgstr "Выберыце праграму для Audio CD"
-
-#: ../panels/media/cc-media-panel.c:435
-msgid "Select an application for video DVDs"
-msgstr "Выберыце праграму для Video CD"
-
-#: ../panels/media/cc-media-panel.c:436
-msgid "Select an application to run when a music player is connected"
-msgstr "Выберыце праграму для запуску пры падлучэнні музычнага плэера"
-
-#: ../panels/media/cc-media-panel.c:437
-msgid "Select an application to run when a camera is connected"
-msgstr ""
-"Выберыце праграму для запуску пры падлучэнні фотаапарата ці відэакамеры"
-
-#: ../panels/media/cc-media-panel.c:438
-msgid "Select an application for software CDs"
-msgstr "Выберыце праграму для дыскаў з апраграмаваннем"
-
-#. translators: these strings are duplicates of shared-mime-info
-#. * strings, just here to fix capitalization of the English originals.
-#. * If the shared-mime-info translation works for your language,
-#. * simply leave these untranslated.
-#.
-#: ../panels/media/cc-media-panel.c:450
-msgid "audio DVD"
-msgstr "Audio DVD"
-
-#: ../panels/media/cc-media-panel.c:451
-msgid "blank Blu-ray disc"
-msgstr "пусты дыск Blu-ray"
-
-#: ../panels/media/cc-media-panel.c:452
-msgid "blank CD disc"
-msgstr "пусты дыск CD"
-
-#: ../panels/media/cc-media-panel.c:453
-msgid "blank DVD disc"
-msgstr "пусты дыск DVD"
-
-#: ../panels/media/cc-media-panel.c:454
-msgid "blank HD DVD disc"
-msgstr "пусты дыск HD DVD"
-
-#: ../panels/media/cc-media-panel.c:455
-msgid "Blu-ray video disc"
-msgstr "відэадыск Blu-ray"
-
-#: ../panels/media/cc-media-panel.c:456
-msgid "e-book reader"
-msgstr "электронная кніга"
-
-#: ../panels/media/cc-media-panel.c:457
-msgid "HD DVD video disc"
-msgstr "відэадыск HD DVD"
-
-#: ../panels/media/cc-media-panel.c:458
-msgid "Picture CD"
-msgstr "Picture CD"
-
-#: ../panels/media/cc-media-panel.c:459
-msgid "Super Video CD"
-msgstr "Super Video CD"
-
-#: ../panels/media/cc-media-panel.c:460
-msgid "Video CD"
-msgstr "Video CD"
-
-#: ../panels/media/gnome-media-properties.ui.h:1
-msgid "Acti_on:"
-msgstr "_Дзеянне:"
-
-#: ../panels/media/gnome-media-properties.ui.h:2
-msgid "CD _audio:"
-msgstr "_Гукавы CD:"
-
-#: ../panels/media/gnome-media-properties.ui.h:3
-msgid "Media and Autorun"
-msgstr "Носьбіты даных і аўтаматычны запуск праграм"
-
-#: ../panels/media/gnome-media-properties.ui.h:4
-msgid "Select how media should be handled"
-msgstr "Вызначыце, што трэба рабіць з носьбітамі даных"
-
-#: ../panels/media/gnome-media-properties.ui.h:5
-msgid "Select how other media should be handled"
-msgstr "Вызначыце, што трэба рабіць з іншымі носьбітамі даных"
-
-#: ../panels/media/gnome-media-properties.ui.h:6
-msgid "_DVD video:"
-msgstr "_Відэа DVD:"
-
-#: ../panels/media/gnome-media-properties.ui.h:7
-msgid "_Music player:"
-msgstr "_Музычны плэер:"
-
-#: ../panels/media/gnome-media-properties.ui.h:8
-msgid "_Never prompt or start programs on media insertion"
-msgstr "_Ніколі нічога не рабіць пры ўстаўцы новых носьбітаў даных"
-
-#: ../panels/media/gnome-media-properties.ui.h:9
-msgid "_Other Media..."
-msgstr "Ін_шыя носьбіты..."
-
-#: ../panels/media/gnome-media-properties.ui.h:10
-msgid "_Photos:"
-msgstr "_Фатаграфіі:"
-
-#: ../panels/media/gnome-media-properties.ui.h:11
-msgid "_Software:"
-msgstr "_Апраграмаванне:"
-
-#: ../panels/media/gnome-media-properties.ui.h:12
-msgid "_Type:"
-msgstr "_Тып:"
-
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:1
-msgid "Configure media and autorun preferences"
-msgstr ""
-"Настройка дзеянняў для новых носьбітаў даных і аўтаматычнага запуску праграм"
-
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:2
-msgid "Removable Media"
-msgstr "Зменны носьбіт"
-
-#. Translators: those are keywords for the media control-center panel
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:4
-msgid "cd;dvd;usb;audio;video;disc;"
-msgstr "cd;dvd;usb;audio;video;аўдыё;гук;відэа;дыск;носьбіт;"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:308
+#: ../panels/online-accounts/cc-online-accounts-panel.c:305
 msgid "Error logging into the account"
 msgstr "Памылка ўваходу ў сеанс"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:354
+#: ../panels/online-accounts/cc-online-accounts-panel.c:351
 msgid "Expired credentials. Please log in again."
 msgstr "Састарэлы мандат для ўваходу. Паўтарыце ўваход."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:357
+#: ../panels/online-accounts/cc-online-accounts-panel.c:354
 msgid "_Log In"
 msgstr "_Увайсці"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:466
+#: ../panels/online-accounts/cc-online-accounts-panel.c:463
 msgid "To add a new account, first select the account type"
 msgstr "Каб стварыць новы конт, спачатку вызначыце яго тып"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:469
+#: ../panels/online-accounts/cc-online-accounts-panel.c:466
 msgid "Account Type:"
 msgstr "Тып конта:"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:502
+#: ../panels/online-accounts/cc-online-accounts-panel.c:499
 msgid "_Add..."
 msgstr "_Дадаць..."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:555
+#: ../panels/online-accounts/cc-online-accounts-panel.c:552
 msgid "Error creating account"
 msgstr "Памылка стварэння конта"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:589
+#: ../panels/online-accounts/cc-online-accounts-panel.c:586
 msgid "Error removing account"
 msgstr "Памылка выдалення конта"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:625
+#: ../panels/online-accounts/cc-online-accounts-panel.c:622
 msgid "Are you sure you want to remove the account?"
 msgstr "Ці вы насамрэч хочаце выдаліць гэты конт?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:627
+#: ../panels/online-accounts/cc-online-accounts-panel.c:624
 msgid "This will not remove the account on the server."
 msgstr "Гэтая аперацыя не выдаліць конт на серверы."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:628
+#: ../panels/online-accounts/cc-online-accounts-panel.c:625
 msgid "_Remove"
 msgstr "_Выдаліць"
 
@@ -1364,7 +1340,7 @@ msgstr "_Адрас:"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
 msgid "Add a New Printer"
-msgstr "Дадаць новы прынтар"
+msgstr "Даданне новага прынтара"
 
 #: ../panels/printers/new-printer-dialog.ui.h:3
 msgid "_Add"
@@ -1442,8 +1418,8 @@ msgid "Allowed users"
 msgstr "Карыстальнікі з дазволам"
 
 #: ../panels/printers/printers.ui.h:6
-#: ../panels/network/cc-network-panel.c:1858
-#: ../panels/network/cc-network-panel.c:1861 ../panels/network/network.ui.h:11
+#: ../panels/network/cc-network-panel.c:1992
+#: ../panels/network/cc-network-panel.c:1995 ../panels/network/network.ui.h:11
 msgid "IP Address"
 msgstr "IP-адрас"
 
@@ -1533,7 +1509,7 @@ msgid "Allow different layouts for individual windows"
 msgstr "Змяняць раскладкі для кожнага акна асобна"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
-#: ../panels/region/gnome-region-panel-system.c:286
+#: ../panels/region/gnome-region-panel-system.c:327
 msgid "Copy Settings..."
 msgstr "Скапіраваць настройкі..."
 
@@ -1545,60 +1521,61 @@ msgstr "Валюта"
 msgid "Dates"
 msgstr "Даты"
 
-#: ../panels/region/gnome-region-panel.ui.h:5
+#. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Display language:"
 msgstr "Мова інтэрфейсу:"
 
-#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:7
 msgid "Examples"
 msgstr "Прыклады"
 
-#: ../panels/region/gnome-region-panel.ui.h:7
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid "Format:"
 msgstr "Фармат:"
 
-#: ../panels/region/gnome-region-panel.ui.h:8
-msgid "Formats"
-msgstr "Фарматы"
-
 #: ../panels/region/gnome-region-panel.ui.h:9
+msgid "Formats"
+msgstr "Фармат"
+
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "Input source:"
 msgstr "Крыніца ўводу:"
 
-#: ../panels/region/gnome-region-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Install languages..."
 msgstr "Усталяваць мовы..."
 
-#: ../panels/region/gnome-region-panel.ui.h:11
+#: ../panels/region/gnome-region-panel.ui.h:12
 msgid "Language"
 msgstr "Мова"
 
-#: ../panels/region/gnome-region-panel.ui.h:12
-msgid "Layouts"
-msgstr "Раскладкі"
-
 #: ../panels/region/gnome-region-panel.ui.h:13
+msgid "Layouts"
+msgstr "Раскладка"
+
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "Measurement"
 msgstr "Сістэма мер"
 
-#: ../panels/region/gnome-region-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:15
 msgid "New windows use the default layout"
 msgstr "Для новых вокнаў ужываецца прадвызначаная раскладка"
 
-#: ../panels/region/gnome-region-panel.ui.h:15
+#: ../panels/region/gnome-region-panel.ui.h:16
 msgid "New windows use the previous window's layout"
 msgstr "Для новых вокнаў ужываецца раскладка папярэдняга акна"
 
-#: ../panels/region/gnome-region-panel.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:17
 msgid "Numbers"
 msgstr "Лікі"
 
-#: ../panels/region/gnome-region-panel.ui.h:17
+#: ../panels/region/gnome-region-panel.ui.h:18
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
 msgstr "Мясцовасць і мова"
 
-#: ../panels/region/gnome-region-panel.ui.h:18
+#: ../panels/region/gnome-region-panel.ui.h:19
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1606,25 +1583,25 @@ msgstr ""
 "Вярнуць прадвызначаныя настройкі раскладак замест\n"
 "цяперашніх"
 
-#: ../panels/region/gnome-region-panel.ui.h:20
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "Reset to De_faults"
 msgstr "_Вярнуць прадвызначанае"
 
-#: ../panels/region/gnome-region-panel.ui.h:21
+#: ../panels/region/gnome-region-panel.ui.h:22
 msgid "Select a display language (change will be applied next time you log in)"
 msgstr ""
 "Выберыце мову інтэрфейсу (гэтая змена будзе ўжыта для наступных сеансаў)"
 
-#: ../panels/region/gnome-region-panel.ui.h:22
+#: ../panels/region/gnome-region-panel.ui.h:23
 msgid "Select a region (change will be applied the next time you log in)"
 msgstr "Выберыце мясцовасць (гэтая змена будзе ўжыта для наступных сеансаў)"
 
-#: ../panels/region/gnome-region-panel.ui.h:24
+#: ../panels/region/gnome-region-panel.ui.h:25
 msgid "System settings"
 msgstr "Сістэмныя настройкі"
 
-#: ../panels/region/gnome-region-panel.ui.h:25
-#: ../panels/region/gnome-region-panel-system.c:280
+#: ../panels/region/gnome-region-panel.ui.h:26
+#: ../panels/region/gnome-region-panel-system.c:321
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings. You may change the system settings to match "
@@ -1634,27 +1611,27 @@ msgstr ""
 "настройкі мясцовасці і мовы. Вы можаце падстроіць гэтыя настройкі пад "
 "уласныя."
 
-#: ../panels/region/gnome-region-panel.ui.h:26
+#: ../panels/region/gnome-region-panel.ui.h:27
 msgid "Times"
 msgstr "Час"
 
-#: ../panels/region/gnome-region-panel.ui.h:27
+#: ../panels/region/gnome-region-panel.ui.h:28
 msgid "Use the same layout for all windows"
 msgstr "Сінхранізаваць раскладку для ўсіх вокнаў"
 
-#: ../panels/region/gnome-region-panel.ui.h:28
+#: ../panels/region/gnome-region-panel.ui.h:29
 msgid "View and edit keyboard layout options"
 msgstr "Паглядзець і змяніць настройкі раскладак"
 
-#: ../panels/region/gnome-region-panel.ui.h:29
+#: ../panels/region/gnome-region-panel.ui.h:30
 msgid "Your settings"
 msgstr "Вашы настройкі"
 
-#: ../panels/region/gnome-region-panel.ui.h:30
+#: ../panels/region/gnome-region-panel.ui.h:31
 msgid "_Options..."
 msgstr "_Параметры..."
 
-#: ../panels/region/gnome-region-panel-system.c:275
+#: ../panels/region/gnome-region-panel-system.c:316
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings."
@@ -1662,7 +1639,7 @@ msgstr ""
 "Экран уваходу, а таксама сістэмныя і новыя конты ўжываюць сістэмныя "
 "настройкі мясцовасці і мовы."
 
-#: ../panels/region/gnome-region-panel-system.c:283
+#: ../panels/region/gnome-region-panel-system.c:324
 msgid "Copy Settings"
 msgstr "Скапіраваць настройкі"
 
@@ -1710,7 +1687,7 @@ msgstr "Уключыць _гарызантальную пракрутку"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "General"
-msgstr "Агульнае"
+msgstr "Агульныя настройкі"
 
 #. high sensitivity
 #: ../panels/mouse/gnome-mouse-properties.ui.h:12
@@ -1719,9 +1696,9 @@ msgstr "Высокая"
 
 #. large threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:14
-#: ../panels/universal-access/uap.ui.h:35
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Large"
-msgstr "Вялікі"
+msgstr "Высокі"
 
 #. low sensitivity
 #: ../panels/mouse/gnome-mouse-properties.ui.h:17
@@ -1752,11 +1729,11 @@ msgstr "Паказваць _месцазнаходжанне паказальн�
 #: ../panels/mouse/gnome-mouse-properties.ui.h:27
 #: ../panels/universal-access/uap.ui.h:57
 msgid "Small"
-msgstr "Малы"
+msgstr "Нізкі"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:28
 msgid "Thr_eshold:"
-msgstr "Пар_ог:"
+msgstr "Пар_ог адчувальнасці:"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:29
 msgid "To test your settings, try to double-click on the face."
@@ -1806,10 +1783,10 @@ msgstr "Настройкі мышы і чулай панэлі"
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr ""
-"Чулая панэль;Паказальнік;Пстрычок;Дотык;Падвойная пстрычка;Кнопка;Трэкбол;"
+"Чулая панэль;Паказальнік;Пстрычка;Дотык;Падвойная пстрычка;Кнопка;Трэкбол;"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/cc-network-panel.c:197
+#: ../panels/network/cc-network-panel.c:269
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgstr ""
@@ -1820,111 +1797,111 @@ msgstr ""
 #. * network, then anyone else on that network can tell your
 #. * machine that it should proxy all of your web traffic
 #. * through them.
-#: ../panels/network/cc-network-panel.c:205
+#: ../panels/network/cc-network-panel.c:277
 msgid "This is not recommended for untrusted public networks."
 msgstr "Гэтая опцыя не рэкамендавана для публічных сетак, да якіх няма даверу."
 
 #. TRANSLATORS: this is when the access point is not listed
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
-#: ../panels/network/cc-network-panel.c:817
+#: ../panels/network/cc-network-panel.c:951
 msgctxt "Wireless access point"
 msgid "Other..."
 msgstr "Іншае..."
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:975
-#: ../panels/network/cc-network-panel.c:1382
+#: ../panels/network/cc-network-panel.c:1109
+#: ../panels/network/cc-network-panel.c:1516
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:979
-#: ../panels/network/cc-network-panel.c:1386
+#: ../panels/network/cc-network-panel.c:1113
+#: ../panels/network/cc-network-panel.c:1520
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:983
+#: ../panels/network/cc-network-panel.c:1117
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:988
+#: ../panels/network/cc-network-panel.c:1122
 msgid "Enterprise"
 msgstr "Enterprise"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:994
-#: ../panels/network/cc-network-panel.c:1377
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/network/cc-network-panel.c:1128
+#: ../panels/network/cc-network-panel.c:1511
+#: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "Няма"
 
-#: ../panels/network/cc-network-panel.c:1445
+#: ../panels/network/cc-network-panel.c:1579
 msgid "Hotspot"
 msgstr "Хотспот"
 
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1511
-#: ../panels/network/cc-network-panel.c:1599
+#: ../panels/network/cc-network-panel.c:1645
+#: ../panels/network/cc-network-panel.c:1733
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Мб/с"
 
-#: ../panels/network/cc-network-panel.c:1854 ../panels/network/network.ui.h:12
+#: ../panels/network/cc-network-panel.c:1988 ../panels/network/network.ui.h:12
 msgid "IPv4 Address"
 msgstr "IPv4-адрас"
 
-#: ../panels/network/cc-network-panel.c:1855 ../panels/network/network.ui.h:13
+#: ../panels/network/cc-network-panel.c:1989 ../panels/network/network.ui.h:13
 msgid "IPv6 Address"
 msgstr "IPv6-адрас"
 
-#: ../panels/network/cc-network-panel.c:1908
-#: ../panels/network/cc-network-panel.c:2278
+#: ../panels/network/cc-network-panel.c:2042
+#: ../panels/network/cc-network-panel.c:2415
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: ../panels/network/cc-network-panel.c:2016
+#: ../panels/network/cc-network-panel.c:2150
 msgid "Proxy"
 msgstr "Проксі-сервер"
 
-#: ../panels/network/cc-network-panel.c:2090
+#: ../panels/network/cc-network-panel.c:2224
 msgid "Network proxy"
 msgstr "Сеткавы проксі-сервер"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2345
+#: ../panels/network/cc-network-panel.c:2482
 msgid "The system network services are not compatible with this version."
 msgstr "Сістэмная сеткавая служба не сумяшчальная з гэтай версіяй."
 
-#: ../panels/network/cc-network-panel.c:3007
+#: ../panels/network/cc-network-panel.c:3097
 msgid "Not connected to the internet."
 msgstr "Няма злучэння з Інтэрнэтам."
 
-#: ../panels/network/cc-network-panel.c:3008
+#: ../panels/network/cc-network-panel.c:3098
 msgid "Create the hotspot anyway?"
 msgstr "Усё роўна стварыць хотспот?"
 
-#: ../panels/network/cc-network-panel.c:3026
+#: ../panels/network/cc-network-panel.c:3116
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
 msgstr "Адлучыцца ад %s і стварыць новы хотспот?"
 
-#: ../panels/network/cc-network-panel.c:3029
+#: ../panels/network/cc-network-panel.c:3119
 msgid "This is your only connection to the internet."
 msgstr "Гэта ваша адзінае злучэнне з сецівам."
 
-#: ../panels/network/cc-network-panel.c:3047
+#: ../panels/network/cc-network-panel.c:3137
 msgid "Create _Hotspot"
 msgstr "Стварыць _хотспот"
 
-#: ../panels/network/cc-network-panel.c:3107
+#: ../panels/network/cc-network-panel.c:3197
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Спыніць хотспот і адлучыць усіх карыстальнікаў?"
 
-#: ../panels/network/cc-network-panel.c:3110
+#: ../panels/network/cc-network-panel.c:3200
 msgid "_Stop Hotspot"
 msgstr "_Спыніць хотспот"
 
@@ -1943,7 +1920,7 @@ msgstr "Сетка;Сеціва;Бесправадное злучэнне;IP;LAN
 
 #: ../panels/network/network.ui.h:1
 msgid "Air_plane Mode"
-msgstr "_Рэжым самалёта"
+msgstr "_Рэжым у самалёце"
 
 #: ../panels/network/network.ui.h:2
 msgid "Create..."
@@ -2047,7 +2024,7 @@ msgstr "Прок_сі-сервер НТТР"
 
 #: ../panels/network/network.ui.h:30
 msgid "_Method"
-msgstr "_Метад"
+msgstr "_Спосаб настройкі"
 
 #: ../panels/network/network.ui.h:31
 msgid "_Network Name"
@@ -2055,7 +2032,7 @@ msgstr "_Назва сеткі"
 
 #: ../panels/network/network.ui.h:32
 msgid "_Socks Host"
-msgstr "Ву_зел Socks"
+msgstr "_Вузел Socks"
 
 #: ../panels/network/network.ui.h:33
 msgid "_Stop Hotspot..."
@@ -2068,17 +2045,17 @@ msgstr "_Ужыць для хотспота..."
 #: ../panels/network/network.ui.h:35
 msgctxt "proxy method"
 msgid "Automatic"
-msgstr "Аўтаматычна"
+msgstr "Аўтаматычны"
 
 #: ../panels/network/network.ui.h:36
 msgctxt "proxy method"
 msgid "Manual"
-msgstr "Уручную"
+msgstr "Ручны"
 
 #: ../panels/network/network.ui.h:37
 msgctxt "proxy method"
 msgid "None"
-msgstr "Нічога"
+msgstr "Ніякі"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:83
@@ -2373,23 +2350,23 @@ msgid "All files"
 msgstr "Усе файлы"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:710
-#: ../panels/sound/gvc-mixer-dialog.c:1548
+#: ../panels/color/cc-color-panel.c:725
+#: ../panels/sound/gvc-mixer-dialog.c:1515
 msgid "Device"
 msgstr "Прыстасаванне"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:745
+#: ../panels/color/cc-color-panel.c:760
 msgid "Calibration"
 msgstr "Каліброўка"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:777
+#: ../panels/color/cc-color-panel.c:792
 msgid "Create a color profile for the selected device"
 msgstr "Стварыць профіль колераў для вылучанага прыстасавання"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:791 ../panels/color/cc-color-panel.c:815
+#: ../panels/color/cc-color-panel.c:806 ../panels/color/cc-color-panel.c:830
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -2398,26 +2375,26 @@ msgstr ""
 "падлучана."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:824
+#: ../panels/color/cc-color-panel.c:839
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Прылада вымярэння не падтрымлівае прафілявання прынтараў."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:835
+#: ../panels/color/cc-color-panel.c:850
 msgid "The device type is not currently supported."
 msgstr "Тып прыстасавання не падтрымліваецца."
 
 #. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:907
+#: ../panels/color/cc-color-panel.c:923
 msgid "Cannot remove automatically added profile"
 msgstr "Немагчыма выдаліць аўтаматычна створаны профіль"
 
 #. TRANSLATORS: this is when there is no profile for the device
-#: ../panels/color/cc-color-panel.c:1232
+#: ../panels/color/cc-color-panel.c:1267
 msgid "No profile"
 msgstr "Без профілю"
 
-#: ../panels/color/cc-color-panel.c:1251
+#: ../panels/color/cc-color-panel.c:1286
 #, c-format
 msgid "%i year"
 msgid_plural "%i years"
@@ -2425,7 +2402,7 @@ msgstr[0] "%i год"
 msgstr[1] "%i гады"
 msgstr[2] "%i гадоў"
 
-#: ../panels/color/cc-color-panel.c:1262
+#: ../panels/color/cc-color-panel.c:1297
 #, c-format
 msgid "%i month"
 msgid_plural "%i months"
@@ -2433,7 +2410,7 @@ msgstr[0] "%i месяц"
 msgstr[1] "%i месяцы"
 msgstr[2] "%i месяцаў"
 
-#: ../panels/color/cc-color-panel.c:1273
+#: ../panels/color/cc-color-panel.c:1308
 #, c-format
 msgid "%i week"
 msgid_plural "%i weeks"
@@ -2442,42 +2419,42 @@ msgstr[1] "%i тыдні"
 msgstr[2] "%i тыдняў"
 
 #. fallback
-#: ../panels/color/cc-color-panel.c:1280
+#: ../panels/color/cc-color-panel.c:1315
 #, c-format
 msgid "Less than 1 week"
 msgstr "Менш за тыдзень"
 
-#: ../panels/color/cc-color-panel.c:1340
+#: ../panels/color/cc-color-panel.c:1375
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "Прадвызначаны RGB"
 
-#: ../panels/color/cc-color-panel.c:1345
+#: ../panels/color/cc-color-panel.c:1380
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "Прадвызначаны CMYK"
 
-#: ../panels/color/cc-color-panel.c:1350
+#: ../panels/color/cc-color-panel.c:1385
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "Прадвызначаны шэры"
 
-#: ../panels/color/cc-color-panel.c:1465 ../panels/color/cc-color-panel.c:1487
-#: ../panels/color/cc-color-panel.c:1498
+#: ../panels/color/cc-color-panel.c:1500 ../panels/color/cc-color-panel.c:1532
+#: ../panels/color/cc-color-panel.c:1543
 msgid "Uncalibrated"
 msgstr "Не адкалібравана"
 
-#: ../panels/color/cc-color-panel.c:1468
+#: ../panels/color/cc-color-panel.c:1503
 msgid "This device is not color managed."
 msgstr "Колеры гэтага прыстасавання не кіруюцца."
 
-#: ../panels/color/cc-color-panel.c:1490
+#: ../panels/color/cc-color-panel.c:1535
 msgid "This device is using manufacturing calibrated data."
 msgstr ""
 "Гэтае прыстасаванне выкарыстоўвае для калібрацыі даныя, закладзеныя на "
 "вытворчасці."
 
-#: ../panels/color/cc-color-panel.c:1501
+#: ../panels/color/cc-color-panel.c:1546
 msgid ""
 "This device does not have a profile suitable for whole-screen color "
 "correction."
@@ -2485,42 +2462,42 @@ msgstr ""
 "Гэтае прыстасаванне не мае профілю, прыдатнага для поўнаэкраннай карэкцыі "
 "колераў."
 
-#: ../panels/color/cc-color-panel.c:1528
+#: ../panels/color/cc-color-panel.c:1573
 msgid "This device has an old profile that may no longer be accurate."
 msgstr "Гэтае прыстасаванне мае стары профіль, які ўжо можа быць непрыдатным."
 
 #. TRANSLATORS: this is when the calibration profile age is not
 #. * specified as it has been autogenerated from the hardware
-#: ../panels/color/cc-color-panel.c:1555
+#: ../panels/color/cc-color-panel.c:1600
 msgid "Not specified"
 msgstr "Не вызначана"
 
 #. add the 'No devices detected' entry
-#: ../panels/color/cc-color-panel.c:1734
+#: ../panels/color/cc-color-panel.c:1779
 msgid "No devices supporting color management detected"
 msgstr "Прыстасаванні з падтрымкай кіравання колерамі не знойдзены"
 
-#: ../panels/color/cc-color-panel.c:1963
+#: ../panels/color/cc-color-panel.c:2008
 msgctxt "Device kind"
 msgid "Display"
 msgstr "Манітор"
 
-#: ../panels/color/cc-color-panel.c:1965
+#: ../panels/color/cc-color-panel.c:2010
 msgctxt "Device kind"
 msgid "Scanner"
 msgstr "Сканер"
 
-#: ../panels/color/cc-color-panel.c:1967
+#: ../panels/color/cc-color-panel.c:2012
 msgctxt "Device kind"
 msgid "Printer"
 msgstr "Прынтар"
 
-#: ../panels/color/cc-color-panel.c:1969
+#: ../panels/color/cc-color-panel.c:2014
 msgctxt "Device kind"
 msgid "Camera"
 msgstr "Фотаапарат/відэакамера"
 
-#: ../panels/color/cc-color-panel.c:1971
+#: ../panels/color/cc-color-panel.c:2016
 msgctxt "Device kind"
 msgid "Webcam"
 msgstr "Сеціўная камера"
@@ -2664,11 +2641,11 @@ msgstr "Зацямняць _экран дзеля эканоміі энергі�
 
 #: ../panels/screen/screen.ui.h:16
 msgid "_Lock screen after:"
-msgstr "_Замкнуць экран пасля:"
+msgstr "_Блакіраваць экран праз:"
 
 #: ../panels/screen/screen.ui.h:17
-msgid "_Turn off after:"
-msgstr "_Выключыць пасля:"
+msgid "_Turn screen off when inactive for:"
+msgstr "_Выключаць экран пасля бяздзейнасці цягам:"
 
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
@@ -2682,7 +2659,7 @@ msgstr "Версія гэтай праграмы"
 msgid " — GNOME Volume Control Applet"
 msgstr " - аплет кіравання гучнасцю для GNOME"
 
-#: ../panels/sound/gvc-applet.c:270 ../panels/sound/gvc-mixer-dialog.c:1949
+#: ../panels/sound/gvc-applet.c:270 ../panels/sound/gvc-mixer-dialog.c:1767
 msgid "Output"
 msgstr "Вывад"
 
@@ -2690,7 +2667,7 @@ msgstr "Вывад"
 msgid "Sound Output Volume"
 msgstr "Гучнасць вываду"
 
-#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1864
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1807
 msgid "Input"
 msgstr "Увод"
 
@@ -2750,11 +2727,7 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "Без узмацнення"
 
-#: ../panels/sound/gvc-channel-bar.c:901
-msgid "Mute"
-msgstr "Абязгучана"
-
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1654
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1621
 msgid "_Profile:"
 msgstr "_Профіль:"
 
@@ -2782,76 +2755,76 @@ msgstr[2] "%u уваходаў"
 msgid "System Sounds"
 msgstr "Сістэмныя гукі"
 
-#: ../panels/sound/gvc-mixer-dialog.c:324
-#: ../panels/sound/gvc-mixer-dialog.c:635
+#: ../panels/sound/gvc-mixer-dialog.c:323
+#: ../panels/sound/gvc-mixer-dialog.c:634
 msgid "Co_nnector:"
-msgstr "_Злучальнік:"
+msgstr "_Злучальны раздым:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:541
+#: ../panels/sound/gvc-mixer-dialog.c:540
 msgid "Peak detect"
 msgstr "Дэтэктар пікаў"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1530
-#: ../panels/sound/gvc-mixer-dialog.c:1742
+#: ../panels/sound/gvc-mixer-dialog.c:1496
+#: ../panels/sound/gvc-mixer-dialog.c:1709
 #: ../panels/sound/gvc-sound-theme-chooser.c:596
 msgid "Name"
 msgstr "Назва"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1596
+#: ../panels/sound/gvc-mixer-dialog.c:1563
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Праверка дынамікаў для %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1655
+#: ../panels/sound/gvc-mixer-dialog.c:1622
 msgid "_Test Speakers"
 msgstr "_Праверыць дынамікі"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1786
+#: ../panels/sound/gvc-mixer-dialog.c:1753
 msgid "_Output volume:"
-msgstr "_Гучнасць на выхадзе:"
+msgstr "_Гучнасць вываду:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1800
-msgid "Sound Effects"
-msgstr "Гукавыя эфекты"
+#: ../panels/sound/gvc-mixer-dialog.c:1772
+msgid "C_hoose a device for sound output:"
+msgstr "Вы_бар прыстасавання для вываду гуку:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1807
-msgid "_Alert volume:"
-msgstr "Гу_чнасць сігналаў:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1820
-msgid "Hardware"
-msgstr "Абсталяванне"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1825
-msgid "C_hoose a device to configure:"
-msgstr "_Выберыце прыстасаванне для настройкі:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1853
-#: ../panels/sound/gvc-mixer-dialog.c:1978
+#: ../panels/sound/gvc-mixer-dialog.c:1796
+#: ../panels/sound/gvc-mixer-dialog.c:1925
 msgid "Settings for the selected device:"
 msgstr "Настройкі выбранага прыстасавання:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1871
+#: ../panels/sound/gvc-mixer-dialog.c:1814
 msgid "_Input volume:"
-msgstr "Гучнасць на ўва_ходзе:"
+msgstr "Гучнасць у_воду:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1894
+#: ../panels/sound/gvc-mixer-dialog.c:1837
 msgid "Input level:"
-msgstr "_Узровень на ўваходзе:"
+msgstr "Узровень уводу:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1922
+#: ../panels/sound/gvc-mixer-dialog.c:1865
 msgid "C_hoose a device for sound input:"
-msgstr "В_ыберыце прыстасаванне для ўводу гуку:"
+msgstr "В_ыбар прыстасавання для ўводу гуку:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1954
-msgid "C_hoose a device for sound output:"
-msgstr "Вы_берыце прыстасаванне для вываду гуку:"
+#: ../panels/sound/gvc-mixer-dialog.c:1892
+msgid "Hardware"
+msgstr "Абсталяванне"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1989
+#: ../panels/sound/gvc-mixer-dialog.c:1897
+msgid "C_hoose a device to configure:"
+msgstr "_Выбар прыстасавання для настройкі:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1936
+msgid "Sound Effects"
+msgstr "Гукавыя эфекты"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1943
+msgid "_Alert volume:"
+msgstr "Гу_чнасць сігналаў:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1956
 msgid "Applications"
 msgstr "Праграмы"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1993
+#: ../panels/sound/gvc-mixer-dialog.c:1960
 msgid "No application is currently playing or recording audio."
 msgstr "У гэты момант ні адна праграма не грае і не запісвае гук."
 
@@ -2907,7 +2880,7 @@ msgstr "З матыва"
 
 #: ../panels/sound/gvc-sound-theme-chooser.c:782
 msgid "C_hoose an alert sound:"
-msgstr "_Выберыце гук сігналу:"
+msgstr "_Выбар гуку сігналу:"
 
 #: ../panels/sound/sound-theme-file-utils.c:292
 msgid "Custom"
@@ -2924,7 +2897,9 @@ msgstr "Кіраванне гучнасцю"
 #. Translators: those are keywords for the sound control-center panel
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
 msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;"
-msgstr "Карта;Мікрафон;Гучнасць;Гук;Затуханне;Баланс;Bluetooth;Аўдыягарнітура;Навушнікі;"
+msgstr ""
+"Карта;Мікрафон;Гучнасць;Гук;Затуханне;Баланс;Bluetooth;Навушнікі;"
+"Аўдыягарнітура;"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:3
 msgid "Change sound volume and sound events"
@@ -2958,10 +2933,10 @@ msgstr "Шкло"
 msgid "Sonar"
 msgstr "Гідралакатар"
 
-#: ../panels/universal-access/cc-ua-panel.c:491
-#: ../panels/universal-access/cc-ua-panel.c:496
+#: ../panels/universal-access/cc-ua-panel.c:484
+#: ../panels/universal-access/cc-ua-panel.c:489
 msgid "No shortcut set"
-msgstr "Клавіятурны скарот не вызначаны"
+msgstr "Няма клавіятурнага скароту"
 
 #: ../panels/universal-access/gconf-property-editor.c:134
 msgid "Key"
@@ -3076,7 +3051,7 @@ msgid ""
 msgstr ""
 "Клавіятура;Мыш;a11y;Даступнасць;Кантраснасць;Маштабаванне;Чытач з экрана;"
 "Тэкст;Шрыфт;Памер;AccessX;Грузкія клавішы;Марудныя клавішы;Рыкашэтныя "
-"клавішы;Мышыныя кнопкі"
+"клавішы;Мышыныя клавішы"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
@@ -3112,11 +3087,11 @@ msgstr "Пр_ымальная затрымка:"
 
 #: ../panels/universal-access/uap.ui.h:11
 msgid "Beep when Caps and Num Lock are used"
-msgstr "Звінець пры ўжытым Caps Lock ці Num Lock"
+msgstr "Пішчаць пры ўціснутым Caps Lock/Num Lock"
 
 #: ../panels/universal-access/uap.ui.h:12
 msgid "Beep when a _modifer key is pressed"
-msgstr "Звінець, калі націснута клавіша-_мадыфікатар"
+msgstr "Звінець пры націску клавішы-_мадыфікатара"
 
 #. This string is part of a line of checkboxes: Beep when a key is [ ] pressed  [ ] accepted  [ ] rejected
 #: ../panels/universal-access/uap.ui.h:14
@@ -3137,7 +3112,7 @@ msgstr "Caribou"
 
 #: ../panels/universal-access/uap.ui.h:18
 msgid "Change contrast:"
-msgstr "Змяніць кантраснасць:"
+msgstr "Змяненне кантраснасці:"
 
 #: ../panels/universal-access/uap.ui.h:19
 msgid "Closed Captioning"
@@ -3145,11 +3120,11 @@ msgstr "Субцітры"
 
 #: ../panels/universal-access/uap.ui.h:20
 msgid "Control the pointer using the keypad"
-msgstr "Кіраваць паказальнікам з дапамогай клавіятуры"
+msgstr "Кіраванне паказальнікам з дапамогай клавіятуры"
 
 #: ../panels/universal-access/uap.ui.h:21
 msgid "Control the pointer using the video camera."
-msgstr "Кіраваць паказальнікам з дапамогай відэакамеры."
+msgstr "Кіраванне паказальнікам з дапамогай відэакамеры."
 
 #: ../panels/universal-access/uap.ui.h:23
 msgid "D_elay:"
@@ -3161,7 +3136,7 @@ msgstr "Dasher"
 
 #: ../panels/universal-access/uap.ui.h:25
 msgid "Decrease size:"
-msgstr "Паменшыць памер:"
+msgstr "Памяншчэнне памеру:"
 
 #: ../panels/universal-access/uap.ui.h:26
 msgid "Display a textual description of speech and sounds"
@@ -3185,19 +3160,19 @@ msgstr "Слых"
 
 #: ../panels/universal-access/uap.ui.h:31
 msgid "Hover Click"
-msgstr "Пстрычок затрымкай"
+msgstr "Пстрычка з затрымкай"
 
 #: ../panels/universal-access/uap.ui.h:32
 msgid "Ignores fast duplicate keypresses"
-msgstr "Ігнараваць паўторныя націскі клавіш"
+msgstr "Ігнараванне паўторных націскаў клавіш"
 
 #: ../panels/universal-access/uap.ui.h:33
 msgid "Increase size:"
-msgstr "Павялічыць памер:"
+msgstr "Павелічэнне памеру:"
 
-#: ../panels/universal-access/uap.ui.h:36
-msgid "Larger"
-msgstr "Вялізны"
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Keyboard Settings"
+msgstr "Настройкі клавіятуры"
 
 #: ../panels/universal-access/uap.ui.h:39
 msgid "Motion _threshold:"
@@ -3208,6 +3183,10 @@ msgid "Mouse Keys"
 msgstr "Мышыныя клавішы"
 
 #: ../panels/universal-access/uap.ui.h:41
+msgid "Mouse Settings"
+msgstr "Настройкі мышы"
+
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Nomon"
 msgstr "Nomon"
 
@@ -3229,11 +3208,11 @@ msgstr "Паказальнік і пстрычкі"
 
 #: ../panels/universal-access/uap.ui.h:48
 msgid "Puts a delay between when a key is pressed and when it is accepted"
-msgstr "Дадае затрымку паміж націскам клавішы і яе прыняццём"
+msgstr "Затрымка паміж націскам клавішы і яе прыняццем"
 
 #: ../panels/universal-access/uap.ui.h:49
 msgid "Screen Reader"
-msgstr "_Чытач з экрана"
+msgstr "Чытач з экрана"
 
 #: ../panels/universal-access/uap.ui.h:50
 msgid "Screen keyboard"
@@ -3252,131 +3231,143 @@ msgid "Slow Keys"
 msgstr "Марудныя клавішы"
 
 #: ../panels/universal-access/uap.ui.h:58
+msgid "Sound Settings"
+msgstr "Настройкі гуку"
+
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Sticky Keys"
 msgstr "Грузкія клавішы"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Лічыць паслядоўна націснутыя клавішы-мадыфікатары адзіным спалучэннем"
 
-#: ../panels/universal-access/uap.ui.h:60
-msgid "Trigger a click when the pointer hovers"
-msgstr "Выклікаць пстрычку, калі паказальнік замірае"
-
 #: ../panels/universal-access/uap.ui.h:61
-msgid "Trigger a secondary click by holding down the primary button"
-msgstr "Выклікаць паўторную пстрычку, заціснуўшы галоўную кнопку"
+msgid "Trigger a click when the pointer hovers"
+msgstr "Выклік пстрычкі пры заміранні паказальніка"
 
 #: ../panels/universal-access/uap.ui.h:62
-msgid "Turn on or off:"
-msgstr "Уключыць/выключыць:"
+msgid "Trigger a secondary click by holding down the primary button"
+msgstr "Выклік паўторнай пстрычкі пры зацісканні галоўнай кнопкі"
 
 #: ../panels/universal-access/uap.ui.h:63
-msgid "Type here to test settings"
-msgstr "Пішыце тут, каб праверыць настройкі"
+msgid "Turn on or off:"
+msgstr "Пераключэнне:"
 
-#: ../panels/universal-access/uap.ui.h:65
-msgid "Typing Assistant"
-msgstr "Памочнік для пісання"
+#: ../panels/universal-access/uap.ui.h:64
+msgid "Type here to test settings"
+msgstr "Тут можна праверыць канфігурацыю"
 
 #: ../panels/universal-access/uap.ui.h:66
+msgid "Typing Assistant"
+msgstr "Дапамога ў пісьме"
+
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "Візуальна азначаць гукавы сігнал"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Video Mouse"
 msgstr "Відэамыш"
 
-#: ../panels/universal-access/uap.ui.h:68
-msgid "Visual Alerts"
-msgstr "Візуальныя сігналы"
-
 #: ../panels/universal-access/uap.ui.h:69
+msgid "Visual Alerts"
+msgstr "Візуалізацыя сігналаў"
+
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Zoom in:"
 msgstr "Набліжэнне:"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Zoom out:"
 msgstr "Аддаленне:"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:72
 msgid "_Contrast:"
 msgstr "_Кантраснасць:"
 
-#: ../panels/universal-access/uap.ui.h:72
-msgid "_Disable if two keys are pressed together"
-msgstr "_Выключыць, калі дзве клавішы націснуты разам"
-
 #: ../panels/universal-access/uap.ui.h:73
-msgid "_Keyboard Settings"
-msgstr "Настройкі _клавіятуры"
+msgid "_Disable if two keys are pressed together"
+msgstr "_Выключаць пры адначасовым націску дзвюх клавіш"
 
 #: ../panels/universal-access/uap.ui.h:74
-msgid "_Mouse Settings"
-msgstr "Настройкі _мышы"
-
-#: ../panels/universal-access/uap.ui.h:75
-msgid "_Sound Settings"
-msgstr "Настройкі _гуку"
-
-#: ../panels/universal-access/uap.ui.h:76
 msgid "_Test flash"
 msgstr "_Праверыць успышку"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:75
 msgid "_Text size:"
 msgstr "Памер _тэксту:"
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:76
 msgid "_Turn on accessibility features from the keyboard"
-msgstr "_Уключыць функцыі даступнасці з клавіятуры"
+msgstr "_Уключэнне функцый даступнасці з клавіятуры"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:80
+#: ../panels/universal-access/uap.ui.h:78
 msgid "accepted"
 msgstr "прынята"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:82
+#: ../panels/universal-access/uap.ui.h:80
 msgid "pressed"
 msgstr "націснута"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:82
 msgid "rejected"
 msgstr "не прынята"
 
-#: ../panels/universal-access/uap.ui.h:85
+#: ../panels/universal-access/uap.ui.h:83
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Высокая"
 
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:84
 msgctxt "universal access, contrast"
 msgid "High/Inverse"
-msgstr "Высокая/інверсійная"
+msgstr "Высокая, з інверсіяй колераў"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:85
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Нізкая"
 
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:86
 msgctxt "universal access, contrast"
 msgid "Normal"
 msgstr "Звычайная"
 
 #. Translators: this refers to theme contrast and font size
-#: ../panels/universal-access/uap.ui.h:90
+#: ../panels/universal-access/uap.ui.h:88
 msgctxt "universal access, seeing"
 msgid "Display"
 msgstr "Выгляд"
 
 #. Translators: this refers to screen magnifier
-#: ../panels/universal-access/uap.ui.h:92
+#: ../panels/universal-access/uap.ui.h:90
 msgctxt "universal access, seeing"
 msgid "Zoom"
 msgstr "Маштабаванне"
+
+#: ../panels/universal-access/uap.ui.h:91
+msgctxt "universal access, text size"
+msgid "Large"
+msgstr "Вялікі"
+
+#: ../panels/universal-access/uap.ui.h:92
+msgctxt "universal access, text size"
+msgid "Larger"
+msgstr "Вялізны"
+
+#: ../panels/universal-access/uap.ui.h:93
+msgctxt "universal access, text size"
+msgid "Normal"
+msgstr "Звычайны"
+
+#: ../panels/universal-access/uap.ui.h:94
+msgctxt "universal access, text size"
+msgid "Small"
+msgstr "Малы"
 
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
@@ -3489,8 +3480,8 @@ msgstr "Зроблена!"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:409
-#: ../panels/user-accounts/um-fingerprint-dialog.c:431
+#: ../panels/user-accounts/um-fingerprint-dialog.c:410
+#: ../panels/user-accounts/um-fingerprint-dialog.c:432
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "Не ўдалося атрымаць доступ да прыстасавання \"%s\""
@@ -3498,20 +3489,20 @@ msgstr "Не ўдалося атрымаць доступ да прыстаса�
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:480
+#: ../panels/user-accounts/um-fingerprint-dialog.c:481
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "Не ўдалося пачаць запіс адбіткаў пальцаў з прыстасавання \"%s\""
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:532
+#: ../panels/user-accounts/um-fingerprint-dialog.c:533
 msgid "Could not access any fingerprint readers"
 msgstr "Не ўдалося даступіцца ні да аднаго сканера адбіткаў пальцаў"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:533
+#: ../panels/user-accounts/um-fingerprint-dialog.c:534
 msgid "Please contact your system administrator for help."
 msgstr "Звярніцеся да сістэмнага адміністратара па дапамогу."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:570
+#: ../panels/user-accounts/um-fingerprint-dialog.c:571
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Enable Fingerprint Login"
 msgstr "Уключэнне ўваходу з дапамогай сканера адбіткаў пальцаў"
@@ -3521,7 +3512,7 @@ msgstr "Уключэнне ўваходу з дапамогай сканера �
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:604
+#: ../panels/user-accounts/um-fingerprint-dialog.c:605
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -3530,21 +3521,21 @@ msgstr ""
 "Каб магчы ўвайсці ў сеанс з дапамогай адбіткаў пальцаў, спачатку трэба "
 "захаваць іх, выкарыстаўшы прыстасаванне \"%s\"."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:611
+#: ../panels/user-accounts/um-fingerprint-dialog.c:612
 msgid "Selecting finger"
 msgstr "Выбар пальца"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:612
+#: ../panels/user-accounts/um-fingerprint-dialog.c:613
 msgid "Enrolling fingerprints"
 msgstr "Запіс адбіткаў пальцаў"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:613
+#: ../panels/user-accounts/um-fingerprint-dialog.c:614
 msgid "Summary"
 msgstr "Рэзюмэ"
 
 #: ../panels/user-accounts/um-password-dialog.c:179
 msgid "More choices..."
-msgstr "Больш выбару..."
+msgstr "Больш прапаноў..."
 
 #: ../panels/user-accounts/um-password-dialog.c:285
 msgid "Please choose another password."
