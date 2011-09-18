@@ -1574,6 +1574,7 @@ info_panel_set_hostname (CcInfoPanel *self,
   GVariant *variant;
   GError *error = NULL;
 
+  g_debug ("Setting PrettyHostname to '%s'", text);
   variant = g_dbus_proxy_call_sync (self->priv->hostnamed_proxy,
                                     "SetPrettyHostname",
                                     g_variant_new ("(sb)", text, FALSE),
@@ -1593,6 +1594,7 @@ info_panel_set_hostname (CcInfoPanel *self,
   hostname = pretty_hostname_to_static (text, FALSE);
   g_assert (hostname);
 
+  g_debug ("Setting StaticHostname to '%s'", hostname);
   variant = g_dbus_proxy_call_sync (self->priv->hostnamed_proxy,
                                     "SetStaticHostname",
                                     g_variant_new ("(sb)", hostname, FALSE),
