@@ -1136,7 +1136,7 @@ new_printer_add_button_cb (GtkButton *button,
                   gchar *commands_lowercase = g_ascii_strdown (commands, -1);
                   ipp_t *response = NULL;
 
-                  if (g_strrstr (commands_lowercase, "AutoConfigure"))
+                  if (g_strrstr (commands_lowercase, "autoconfigure"))
                     {
                       response = execute_maintenance_command (pp->devices[device_id].display_name,
                                                               "AutoConfigure",
