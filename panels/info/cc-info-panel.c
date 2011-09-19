@@ -1628,14 +1628,21 @@ info_panel_setup_hostname (CcInfoPanel  *self,
 {
   char *str;
   GtkWidget *entry;
+  GError *error = NULL;
+
+  if (permission == NULL)
+    {
+      g_debug ("Will not show hostname, hostnamed not installed");
+      return;
+    }
 
   entry = WID ("name_entry");
 
-  gtk_widget_show (WID ("label4"));
-  gtk_widget_show (entry);
-
   if (g_permission_get_allowed (permission) != FALSE)
-    gtk_widget_set_sensitive (entry, TRUE);
+    {
+      g_debug ("Not allowed to change the hostname");
+      gtk_widget_set_sensitive (entry, TRUE);
+    }
 
   self->priv->hostnamed_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                                G_DBUS_PROXY_FLAGS_NONE,
@@ -1644,11 +1651,19 @@ info_panel_setup_hostname (CcInfoPanel  *self,
                                                                "/org/freedesktop/hostname1",
                                                                "org.freedesktop.hostname1",
                                                                NULL,
-                                                               NULL);
+                                                               &error);
 
   /* This could only happen if the policy file was installed
    * but not hostnamed, which points to a system bug */
-  g_assert (self->priv->hostnamed_proxy);
+  if (self->priv->hostnamed_proxy == NULL)
+    {
+      g_debug ("Couldn't get hostnamed to start, bailing: %s", error->message);
+      g_error_free (error);
+      return;
+    }
+
+  gtk_widget_show (WID ("label4"));
+  gtk_widget_show (entry);
 
   str = info_panel_get_hostname (self);
   if (str != NULL)
@@ -1673,7 +1688,6 @@ info_panel_setup_overview (CcInfoPanel  *self)
 
   permission = polkit_permission_new_sync ("org.freedesktop.hostname1.set-static-hostname", NULL, NULL, NULL);
   /* Is hostnamed installed? */
-  if (permission != NULL)
     info_panel_setup_hostname (self, permission);
 
   res = load_gnome_version (&self->priv->gnome_version,
