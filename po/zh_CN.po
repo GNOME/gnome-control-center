@@ -24,9 +24,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-08-04 20:49+0000\n"
-"PO-Revision-Date: 2011-08-21 22:44+0800\n"
-"Last-Translator: Wylmer Wang <wantinghard@gmail.com>\n"
+"POT-Creation-Date: 2011-09-18 13:16+0000\n"
+"PO-Revision-Date: 2011-09-19 21:17+0800\n"
+"Last-Translator: Aron Xu <happyaron.xu@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,7 +45,7 @@ msgstr "更改背景图像"
 #. Translators: those are keywords for the background control-center panel
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:4
 msgid "Wallpaper;Screen;Desktop;"
-msgstr "壁纸;屏幕;桌面;Wallpaper;Screen;Desktop;"
+msgstr "Wallpaper;Screen;Desktop;壁纸;屏幕;桌面;"
 
 #: ../panels/background/background.ui.h:1
 msgid "Add wallpaper"
@@ -58,7 +58,7 @@ msgstr "居中"
 #. This refers to a slideshow background
 #: ../panels/background/background.ui.h:4
 msgid "Changes throughout the day"
-msgstr "一天内不断改变"
+msgstr "该日内所有改变"
 
 #: ../panels/background/background.ui.h:5
 msgid "Fill"
@@ -96,35 +96,35 @@ msgstr "竖直渐变"
 msgid "Solid Color"
 msgstr "纯色"
 
-#: ../panels/background/cc-background-panel.c:1002
+#: ../panels/background/cc-background-panel.c:1001
 #: ../panels/user-accounts/um-photo-dialog.c:217
 #: ../panels/user-accounts/data/photo-dialog.ui.h:2
 msgid "Browse for more pictures"
 msgstr "浏览更多图片"
 
-#: ../panels/background/cc-background-panel.c:1094
+#: ../panels/background/cc-background-panel.c:1093
 msgid "Current background"
 msgstr "当前背景"
 
-#: ../panels/background/cc-background-panel.c:1178
+#: ../panels/background/cc-background-panel.c:1177
 msgid "Wallpapers"
 msgstr "壁纸"
 
-#: ../panels/background/cc-background-panel.c:1185
+#: ../panels/background/cc-background-panel.c:1184
 msgid "Pictures Folder"
 msgstr "图片文件夹"
 
-#: ../panels/background/cc-background-panel.c:1192
+#: ../panels/background/cc-background-panel.c:1191
 msgid "Colors & Gradients"
 msgstr "颜色和渐变"
 
-#: ../panels/background/cc-background-panel.c:1200
+#: ../panels/background/cc-background-panel.c:1199
 msgid "Flickr"
 msgstr "Flickr"
 
 #: ../panels/background/cc-background-item.c:148
 msgid "multiple sizes"
-msgstr "多重尺寸"
+msgstr "多个尺寸"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
@@ -137,13 +137,82 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "无桌面背景"
 
-#: ../panels/common/gdm-languages.c:710
+#. Add some common languages first
+#: ../panels/common/cc-common-language.c:512
+msgid "English"
+msgstr "英语"
+
+#: ../panels/common/cc-common-language.c:513
+msgid "British English"
+msgstr "英国英语"
+
+#: ../panels/common/cc-common-language.c:514
+msgid "German"
+msgstr "德语"
+
+#: ../panels/common/cc-common-language.c:515
+msgid "French"
+msgstr "法语"
+
+#: ../panels/common/cc-common-language.c:516
+msgid "Spanish"
+msgstr "西班牙语"
+
+#: ../panels/common/cc-common-language.c:517
+msgid "Chinese (simplified)"
+msgstr "简体中文"
+
+#. Add some common regions
+#: ../panels/common/cc-common-language.c:546
+msgid "United States"
+msgstr "美国"
+
+#: ../panels/common/cc-common-language.c:547
+msgid "Germany"
+msgstr "德国"
+
+#: ../panels/common/cc-common-language.c:548
+msgid "France"
+msgstr "法国"
+
+#: ../panels/common/cc-common-language.c:549
+msgid "Spain"
+msgstr "西班牙"
+
+#: ../panels/common/cc-common-language.c:550
+msgid "China"
+msgstr "中国"
+
+#: ../panels/common/cc-language-chooser.c:119
+msgid "Other..."
+msgstr "其他..."
+
+#: ../panels/common/cc-language-chooser.c:290
+msgid "Select a region"
+msgstr "选择一个地区"
+
+#: ../panels/common/gdm-languages.c:773
 msgid "Unspecified"
 msgstr "未指定"
 
+#: ../panels/common/language-chooser.ui.h:1
+msgid "Select a language"
+msgstr "选择一个语言"
+
+#: ../panels/common/language-chooser.ui.h:2
+#: ../panels/printers/new-printer-dialog.ui.h:4
+#: ../panels/user-accounts/um-user-panel.c:448
+msgid "_Cancel"
+msgstr "取消(_C)"
+
+#: ../panels/common/language-chooser.ui.h:3
+#: ../panels/universal-access/gconf-property-editor.c:1609
+msgid "_Select"
+msgstr "选择(_S)"
+
 #: ../panels/datetime/datetime.ui.h:1
-msgid "24-_Hour Time"
-msgstr "24 小时格式(_H)"
+msgid "24-hour"
+msgstr "24 小时"
 
 #. Translator: this is the separator between hours and minutes, like in HH:MM
 #: ../panels/datetime/datetime.ui.h:3
@@ -151,101 +220,105 @@ msgid ":"
 msgstr ":"
 
 #: ../panels/datetime/datetime.ui.h:4
+msgid "AM/PM"
+msgstr "上午/下午"
+
+#: ../panels/datetime/datetime.ui.h:5
 msgid "April"
 msgstr "四月"
 
-#: ../panels/datetime/datetime.ui.h:5
+#: ../panels/datetime/datetime.ui.h:6
 msgid "August"
 msgstr "八月"
 
-#: ../panels/datetime/datetime.ui.h:6
+#: ../panels/datetime/datetime.ui.h:7
 msgid "Day"
 msgstr "日"
 
-#: ../panels/datetime/datetime.ui.h:7
+#: ../panels/datetime/datetime.ui.h:8
 msgid "December"
 msgstr "十二月"
 
-#: ../panels/datetime/datetime.ui.h:8
+#: ../panels/datetime/datetime.ui.h:9
 msgid "February"
 msgstr "二月"
 
-#: ../panels/datetime/datetime.ui.h:9
+#: ../panels/datetime/datetime.ui.h:10
 msgid "January"
 msgstr "一月"
 
-#: ../panels/datetime/datetime.ui.h:10
+#: ../panels/datetime/datetime.ui.h:11
 msgid "July"
 msgstr "七月"
 
-#: ../panels/datetime/datetime.ui.h:11
+#: ../panels/datetime/datetime.ui.h:12
 msgid "June"
 msgstr "六月"
 
-#: ../panels/datetime/datetime.ui.h:12
+#: ../panels/datetime/datetime.ui.h:13
 msgid "March"
 msgstr "三月"
 
-#: ../panels/datetime/datetime.ui.h:13
+#: ../panels/datetime/datetime.ui.h:14
 msgid "May"
 msgstr "五月"
 
-#: ../panels/datetime/datetime.ui.h:14
+#: ../panels/datetime/datetime.ui.h:15
 msgid "Month"
 msgstr "月"
 
-#: ../panels/datetime/datetime.ui.h:15
+#: ../panels/datetime/datetime.ui.h:16
 msgid "November"
 msgstr "十一月"
 
-#: ../panels/datetime/datetime.ui.h:16
+#: ../panels/datetime/datetime.ui.h:17
 msgid "October"
 msgstr "十月"
 
-#: ../panels/datetime/datetime.ui.h:17
+#: ../panels/datetime/datetime.ui.h:18
 msgid "September"
 msgstr "九月"
 
-#: ../panels/datetime/datetime.ui.h:18
+#: ../panels/datetime/datetime.ui.h:19
 msgid "Set the time one hour ahead."
 msgstr "将时间向前调一小时。"
 
-#: ../panels/datetime/datetime.ui.h:19
+#: ../panels/datetime/datetime.ui.h:20
 msgid "Set the time one hour back."
 msgstr "将时间向后调一小时。"
 
-#: ../panels/datetime/datetime.ui.h:20
+#: ../panels/datetime/datetime.ui.h:21
 msgid "Set the time one minute ahead."
 msgstr "将时间向前调一分钟。"
 
-#: ../panels/datetime/datetime.ui.h:21
+#: ../panels/datetime/datetime.ui.h:22
 msgid "Set the time one minute back."
 msgstr "将时间向后调一分钟。"
 
-#: ../panels/datetime/datetime.ui.h:22
+#: ../panels/datetime/datetime.ui.h:23
 msgid "Switch between AM and PM."
 msgstr "在上午(AM)和下午(PM)间切换。"
 
-#: ../panels/datetime/datetime.ui.h:23
+#: ../panels/datetime/datetime.ui.h:24
 msgid "Year"
 msgstr "年"
 
-#: ../panels/datetime/datetime.ui.h:24
+#: ../panels/datetime/datetime.ui.h:25
 msgid "_City:"
 msgstr "城市(_C)："
 
-#: ../panels/datetime/datetime.ui.h:25
+#: ../panels/datetime/datetime.ui.h:26
 msgid "_Network Time"
 msgstr "网络时间(_N)"
 
-#: ../panels/datetime/datetime.ui.h:26
+#: ../panels/datetime/datetime.ui.h:27
 msgid "_Region:"
 msgstr "地区(_R)："
 
 #. Translators: those are keywords for the date and time control-center panel
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
 msgid "Clock;Timezone;Location;"
-msgstr "时钟;时区;位置;"
+msgstr "Clock;Timezone;Location;时钟;时区;位置;"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:3
 msgid "Date and Time"
@@ -256,47 +329,28 @@ msgid "Date and Time preferences panel"
 msgstr "日期和时间首选项面板"
 
 #: ../panels/display/display-capplet.ui.h:1
-msgid "Left"
-msgstr "左"
-
-#: ../panels/display/display-capplet.ui.h:2
-#: ../panels/display/xrandr-capplet.c:493
+#: ../panels/display/cc-display-panel.c:641
 msgid "Monitor"
 msgstr "显示器"
 
-#: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/xrandr-capplet.c:329
-#: ../panels/display/xrandr-capplet.c:368
-#: ../panels/universal-access/uap.ui.h:42
-msgid "Normal"
-msgstr "普通"
-
-#: ../panels/display/display-capplet.ui.h:4
+#: ../panels/display/display-capplet.ui.h:2
 msgid "Note: may limit resolution options"
 msgstr "提醒：可能会限制分辨率选项"
 
-#: ../panels/display/display-capplet.ui.h:5
+#: ../panels/display/display-capplet.ui.h:3
 msgid "R_otation:"
 msgstr "旋转(_O)："
 
-#: ../panels/display/display-capplet.ui.h:6
-msgid "Right"
-msgstr "右"
-
-#: ../panels/display/display-capplet.ui.h:7
-msgid "Upside-down"
-msgstr "上下颠倒"
-
-#: ../panels/display/display-capplet.ui.h:8
+#: ../panels/display/display-capplet.ui.h:4
 msgid "_Detect Displays"
 msgstr "检测显示(_D)"
 
 #. Note that mirror is a verb in this string
-#: ../panels/display/display-capplet.ui.h:10
+#: ../panels/display/display-capplet.ui.h:6
 msgid "_Mirror displays"
 msgstr "镜像显示(_M)"
 
-#: ../panels/display/display-capplet.ui.h:11
+#: ../panels/display/display-capplet.ui.h:7
 msgid "_Resolution:"
 msgstr "分辨率(_R)："
 
@@ -311,17 +365,26 @@ msgstr "显示"
 #. Translators: those are keywords for the display control-center panel
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:4
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
-msgstr "面板;投影仪;xrandr;屏幕;分辨率;刷新;"
+msgstr "Panel;Projector;xrandr;Screen;Resolution;Refresh;面板;投影仪;"
+"屏幕;分辨率;刷新;"
 
-#: ../panels/display/xrandr-capplet.c:330
+#: ../panels/display/cc-display-panel.c:477
+msgctxt "display panel, rotation"
+msgid "Normal"
+msgstr "正常"
+
+#: ../panels/display/cc-display-panel.c:478
+msgctxt "display panel, rotation"
 msgid "Counterclockwise"
 msgstr "逆时针"
 
-#: ../panels/display/xrandr-capplet.c:331
+#: ../panels/display/cc-display-panel.c:479
+msgctxt "display panel, rotation"
 msgid "Clockwise"
 msgstr "顺时针"
 
-#: ../panels/display/xrandr-capplet.c:332
+#: ../panels/display/cc-display-panel.c:480
+msgctxt "display panel, rotation"
 msgid "180 Degrees"
 msgstr "180 度"
 
@@ -330,123 +393,222 @@ msgstr "180 度"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:469
+#: ../panels/display/cc-display-panel.c:617
 msgid "Mirror Displays"
 msgstr "镜像显示"
 
-#: ../panels/display/xrandr-capplet.c:599
+#: ../panels/display/cc-display-panel.c:747
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d x %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:601
+#: ../panels/display/cc-display-panel.c:749
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1512
+#: ../panels/display/cc-display-panel.c:1656
 msgid "Drag to change primary display."
 msgstr "拖拽以更改主显示设备。"
 
-#: ../panels/display/xrandr-capplet.c:1570
+#: ../panels/display/cc-display-panel.c:1714
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
 msgstr "选择一个显示器来更改它的属性；拖动它来排列位置。"
 
-#: ../panels/display/xrandr-capplet.c:1959
+#: ../panels/display/cc-display-panel.c:2102
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/xrandr-capplet.c:1961
+#: ../panels/display/cc-display-panel.c:2104
 msgid "%a %l:%M %p"
 msgstr "%A %H%M"
 
-#: ../panels/display/xrandr-capplet.c:2207
+#: ../panels/display/cc-display-panel.c:2350
 msgid "Could not save the monitor configuration"
 msgstr "无法保存显示器配置"
 
-#: ../panels/display/xrandr-capplet.c:2232
+#: ../panels/display/cc-display-panel.c:2375
 msgid "Could not get session bus while applying display configuration"
 msgstr "应用显示配置时无法获得会话总线"
 
-#: ../panels/display/xrandr-capplet.c:2277
+#: ../panels/display/cc-display-panel.c:2420
 msgid "Could not detect displays"
-msgstr "无法探测显示器"
+msgstr "无法检测显示器"
 
-#: ../panels/display/xrandr-capplet.c:2492
+#: ../panels/display/cc-display-panel.c:2614
 msgid "Could not get screen information"
 msgstr "无法获得屏幕信息"
 
 #. Translators: VESA is an techncial acronym, don't translate it.
-#: ../panels/info/cc-info-panel.c:377
+#: ../panels/info/cc-info-panel.c:402
 #, c-format
 msgid "VESA: %s"
 msgstr "VESA：%s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:401 ../panels/network/panel-common.c:79
+#: ../panels/info/cc-info-panel.c:426 ../panels/network/panel-common.c:79
 #: ../panels/network/panel-common.c:158
 msgid "Unknown"
 msgstr "未知"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:550
+#: ../panels/info/cc-info-panel.c:587
 #, c-format
 msgid "%d-bit"
 msgstr "%d 位"
 
-#: ../panels/info/cc-info-panel.c:706
+#: ../panels/info/cc-info-panel.c:743
 msgid "Unknown model"
 msgstr "未知型号"
 
-#: ../panels/info/cc-info-panel.c:789
+#: ../panels/info/cc-info-panel.c:826
 msgid "The next login will attempt to use the standard experience."
 msgstr "下次登陆将尝试提供标准用户体验。"
 
-#: ../panels/info/cc-info-panel.c:791
+#: ../panels/info/cc-info-panel.c:828
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
-msgstr "下次登录将使用为不支持的显示硬件设计的备用模式。"
+msgstr "下次登录将使用为不支持的显示硬件而设计的备用模式。"
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:833
+#: ../panels/info/cc-info-panel.c:870
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "备用"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:839
+#: ../panels/info/cc-info-panel.c:876
 msgctxt "Experience"
 msgid "Standard"
 msgstr "标准"
 
-#: ../panels/info/cc-info-panel.c:979
+#: ../panels/info/cc-info-panel.c:1199
+msgid "Ask what to do"
+msgstr "询问如何处理"
+
+#: ../panels/info/cc-info-panel.c:1203 ../panels/power/power.ui.h:6
+msgid "Do nothing"
+msgstr "不处理"
+
+#: ../panels/info/cc-info-panel.c:1207
+msgid "Open folder"
+msgstr "打开文件夹"
+
+#: ../panels/info/cc-info-panel.c:1318
+msgid "Select an application for audio CDs"
+msgstr "选择播放音频 CD 的应用程序"
+
+#: ../panels/info/cc-info-panel.c:1319
+msgid "Select an application for video DVDs"
+msgstr "选择播放视频 DVD 的应用程序"
+
+#: ../panels/info/cc-info-panel.c:1320
+msgid "Select an application to run when a music player is connected"
+msgstr "选择要在连接音乐播放器后运行的应用程序"
+
+#: ../panels/info/cc-info-panel.c:1321
+msgid "Select an application to run when a camera is connected"
+msgstr "选择要在连接相机后运行的应用程序"
+
+# 这个翻译太有歧义了
+#: ../panels/info/cc-info-panel.c:1322
+msgid "Select an application for software CDs"
+msgstr "选择运行软件 CD 的应用程序"
+
+#. translators: these strings are duplicates of shared-mime-info
+#. * strings, just here to fix capitalization of the English originals.
+#. * If the shared-mime-info translation works for your language,
+#. * simply leave these untranslated.
+#.
+#: ../panels/info/cc-info-panel.c:1334
+msgid "audio DVD"
+msgstr "视频 DVD"
+
+#: ../panels/info/cc-info-panel.c:1335
+msgid "blank Blu-ray disc"
+msgstr "空白蓝光光盘"
+
+#: ../panels/info/cc-info-panel.c:1336
+msgid "blank CD disc"
+msgstr "空白 CD 光盘"
+
+#: ../panels/info/cc-info-panel.c:1337
+msgid "blank DVD disc"
+msgstr "空白 DVD 光盘"
+
+# 空白 HD DVD 光盘
+#: ../panels/info/cc-info-panel.c:1338
+msgid "blank HD DVD disc"
+msgstr "空白 HD DVD 光盘"
+
+#: ../panels/info/cc-info-panel.c:1339
+msgid "Blu-ray video disc"
+msgstr "蓝光视频光盘"
+
+#: ../panels/info/cc-info-panel.c:1340
+msgid "e-book reader"
+msgstr "电子书阅读器"
+
+#: ../panels/info/cc-info-panel.c:1341
+msgid "HD DVD video disc"
+msgstr "HD DVD 视频光盘"
+
+#: ../panels/info/cc-info-panel.c:1342
+msgid "Picture CD"
+msgstr "图片 CD"
+
+#: ../panels/info/cc-info-panel.c:1343
+msgid "Super Video CD"
+msgstr "超级 VCD"
+
+#: ../panels/info/cc-info-panel.c:1344
+msgid "Video CD"
+msgstr "视频 CD"
+
+#: ../panels/info/cc-info-panel.c:1473
 #: ../panels/keyboard/keyboard-shortcuts.c:1762
 msgid "Section"
 msgstr "节"
 
-#: ../panels/info/cc-info-panel.c:988 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1482 ../panels/info/info.ui.h:15
 msgid "Overview"
 msgstr "概况"
 
-#: ../panels/info/cc-info-panel.c:994 ../panels/info/info.ui.h:2
+#: ../panels/info/cc-info-panel.c:1488 ../panels/info/info.ui.h:4
 msgid "Default Applications"
 msgstr "默认应用程序"
 
-#: ../panels/info/cc-info-panel.c:999 ../panels/info/info.ui.h:9
+#: ../panels/info/cc-info-panel.c:1493 ../panels/info/info.ui.h:17
+msgid "Removable Media"
+msgstr "可移动介质"
+
+#: ../panels/info/cc-info-panel.c:1498 ../panels/info/info.ui.h:11
 msgid "Graphics"
 msgstr "图形"
 
-#: ../panels/info/cc-info-panel.c:1163
+#: ../panels/info/cc-info-panel.c:1685
 #, c-format
 msgid "Version %s"
 msgstr "版本 %s"
+
+#: ../panels/info/cc-info-panel.c:1735
+msgid "Install Updates"
+msgstr "安装更新"
+
+#: ../panels/info/cc-info-panel.c:1739
+msgid "System Up-To-Date"
+msgstr "系统已是最新"
+
+#: ../panels/info/cc-info-panel.c:1743
+msgid "Checking for Updates"
+msgstr "正在检查更新"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
 msgid "System Info"
@@ -460,73 +622,115 @@ msgstr "系统信息"
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
-"fallback;preferred;"
+"fallback;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgstr ""
-"设备;系统;信息;主存;处理器;版本;默认;应用程序;备用;偏好;device;system;"
-"information;memory;processor;version;default;application;fallback;preferred"
+"device;system;information;memory;processor;version;default;application;"
+"fallback;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
+"设备;系统;信息;内存;处理器;CPU;版本;默认;应用程序;备用;回滚;喜好;音频;"
+"视频;光盘;光碟;盘片;可擦写;可移除;媒体;介质;自动运行;"
 
 #: ../panels/info/info.ui.h:1
+msgid "Acti_on:"
+msgstr "动作(_O)："
+
+#: ../panels/info/info.ui.h:2
+msgid "CD _audio:"
+msgstr "CD 音频(_A)"
+
+#: ../panels/info/info.ui.h:3
 msgid "Calculating..."
 msgstr "正在计算..."
 
-#: ../panels/info/info.ui.h:3
+#: ../panels/info/info.ui.h:5
 msgid "Device name"
 msgstr "设备名称"
 
-#: ../panels/info/info.ui.h:4
+#: ../panels/info/info.ui.h:6
 msgid "Disk"
 msgstr "磁盘"
 
-#: ../panels/info/info.ui.h:5
+#: ../panels/info/info.ui.h:7
 msgid "Driver"
 msgstr "驱动"
 
-#: ../panels/info/info.ui.h:6
+#: ../panels/info/info.ui.h:8
 msgid "Experience"
 msgstr "用户体验"
 
 #. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
-#: ../panels/info/info.ui.h:8
+#: ../panels/info/info.ui.h:10
 msgid "Forced _Fallback Mode"
 msgstr "强制使用备用模式(_F)"
 
-#: ../panels/info/info.ui.h:10
+#: ../panels/info/info.ui.h:12
 msgid "M_usic"
 msgstr "音乐(_U)"
 
-#: ../panels/info/info.ui.h:11
+#: ../panels/info/info.ui.h:13
 msgid "Memory"
 msgstr "内存"
 
-#: ../panels/info/info.ui.h:12
+#: ../panels/info/info.ui.h:14
 msgid "OS type"
 msgstr "操作系统类型"
 
-#: ../panels/info/info.ui.h:14
+#: ../panels/info/info.ui.h:16
 msgid "Processor"
 msgstr "处理器"
 
-#: ../panels/info/info.ui.h:15
-msgid "Updates Available"
-msgstr "有可用更新"
+#: ../panels/info/info.ui.h:18
+msgid "Select how media should be handled"
+msgstr "选择如何处理介质"
 
-#: ../panels/info/info.ui.h:16
+#: ../panels/info/info.ui.h:19
+msgid "Select how other media should be handled"
+msgstr "选择如何处理其他介质"
+
+#: ../panels/info/info.ui.h:20
 msgid "_Calendar"
 msgstr "日历(_C)"
 
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:21
+msgid "_DVD video:"
+msgstr "_DVD 视频："
+
+#: ../panels/info/info.ui.h:22
 msgid "_Mail"
 msgstr "邮件(_M)"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:23
+msgid "_Music player:"
+msgstr "音乐播放器(_M)："
+
+#: ../panels/info/info.ui.h:24
+msgid "_Never prompt or start programs on media insertion"
+msgstr "介质插入时从不提示或启动程序(_N)"
+
+#: ../panels/info/info.ui.h:25
+msgid "_Other Media..."
+msgstr "其他媒体(_O)..."
+
+#: ../panels/info/info.ui.h:26
 msgid "_Photos"
 msgstr "照片(_P)"
 
-#: ../panels/info/info.ui.h:19
+#: ../panels/info/info.ui.h:27
+msgid "_Photos:"
+msgstr "照片(_P)："
+
+#: ../panels/info/info.ui.h:28
+msgid "_Software:"
+msgstr "软件(_S)："
+
+#: ../panels/info/info.ui.h:29
+msgid "_Type:"
+msgstr "类型(_T)："
+
+#: ../panels/info/info.ui.h:30
 msgid "_Video"
 msgstr "视频(_V)"
 
-#: ../panels/info/info.ui.h:20
+#: ../panels/info/info.ui.h:31
 msgid "_Web"
 msgstr "网络(_W)"
 
@@ -611,7 +815,7 @@ msgid "Log out"
 msgstr "注销"
 
 #: ../panels/keyboard/01-system.xml.in.h:3
-#: ../panels/region/gnome-region-panel.ui.h:23
+#: ../panels/region/gnome-region-panel.ui.h:24
 msgid "System"
 msgstr "系统"
 
@@ -683,7 +887,7 @@ msgstr "加速键类型。"
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
 #: ../panels/keyboard/keyboard-shortcuts.c:1183
-#: ../panels/sound/gvc-mixer-control.c:1084
+#: ../panels/sound/gvc-mixer-control.c:1086
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
 msgid "Disabled"
@@ -701,7 +905,7 @@ msgstr "键盘"
 #. Translators: those are keywords for the keyboard control-center panel
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:4
 msgid "Shortcut;Repeat;Blink;"
-msgstr "快捷键;重复;闪烁;"
+msgstr "Shortcut;Repeat;Blink;快捷键;重复;闪烁;"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:646
 #: ../panels/keyboard/keyboard-shortcuts.c:654
@@ -774,7 +978,7 @@ msgstr "文本域中光标闪烁(_B)"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:22
 msgid "Cursor blinks speed"
 msgstr "光标闪烁速度"
 
@@ -792,227 +996,87 @@ msgstr "快"
 msgid "Key presses _repeat when key is held down"
 msgstr "按住某一键时重复该键(_R)"
 
-#. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+msgid "Layout Settings"
+msgstr "布局设置"
+
+#. long delay
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:38
 msgid "Long"
 msgstr "长"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 msgid "Repeat Keys"
 msgstr "重复键"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
 msgid "Repeat keys speed"
 msgstr "重复键速度"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
 msgid "S_peed:"
 msgstr "速度(_P)："
 
 #. short delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 #: ../panels/mouse/gnome-mouse-properties.ui.h:23
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:53
 msgid "Short"
 msgstr "短"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
 msgid "Shortcuts"
 msgstr "快捷键"
 
 #. slow acceleration
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
 #: ../panels/mouse/gnome-mouse-properties.ui.h:25
 msgid "Slow"
 msgstr "慢"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
 msgstr ""
 "要编辑快捷键，请单击相应的行，然后输入新按键组合，或按 Backspace 清除。"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Typing"
 msgstr "打字"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
 msgid "_Delay:"
 msgstr "延时(_D)："
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
 msgid "_Name:"
 msgstr "名称(_N)："
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
 msgid "_Speed:"
 msgstr "速度(_S)："
 
-#: ../panels/media/cc-media-panel.c:315
-msgid "Ask what to do"
-msgstr "询问如何处理"
-
-#: ../panels/media/cc-media-panel.c:319 ../panels/power/power.ui.h:6
-msgid "Do nothing"
-msgstr "不处理"
-
-#: ../panels/media/cc-media-panel.c:323
-msgid "Open folder"
-msgstr "打开文件夹"
-
-#: ../panels/media/cc-media-panel.c:434
-msgid "Select an application for audio CDs"
-msgstr "选择播放音频 CD 的应用程序"
-
-#: ../panels/media/cc-media-panel.c:435
-msgid "Select an application for video DVDs"
-msgstr "选择播放视频 DVD 的应用程序"
-
-#: ../panels/media/cc-media-panel.c:436
-msgid "Select an application to run when a music player is connected"
-msgstr "选择要在连接音乐播放器后运行的应用程序"
-
-#: ../panels/media/cc-media-panel.c:437
-msgid "Select an application to run when a camera is connected"
-msgstr "选择要在连接相机后运行的应用程序"
-
-# 这个翻译太有歧义了
-#: ../panels/media/cc-media-panel.c:438
-msgid "Select an application for software CDs"
-msgstr "选择运行软件 CD 的应用程序"
-
-#. translators: these strings are duplicates of shared-mime-info
-#. * strings, just here to fix capitalization of the English originals.
-#. * If the shared-mime-info translation works for your language,
-#. * simply leave these untranslated.
-#.
-#: ../panels/media/cc-media-panel.c:450
-msgid "audio DVD"
-msgstr "视频 DVD"
-
-#: ../panels/media/cc-media-panel.c:451
-msgid "blank Blu-ray disc"
-msgstr "空白蓝光光盘"
-
-#: ../panels/media/cc-media-panel.c:452
-msgid "blank CD disc"
-msgstr "空白 CD 光盘"
-
-#: ../panels/media/cc-media-panel.c:453
-msgid "blank DVD disc"
-msgstr "空白 DVD 光盘"
-
-# 空白 HD DVD 光盘
-#: ../panels/media/cc-media-panel.c:454
-msgid "blank HD DVD disc"
-msgstr "空白 HD DVD 光盘"
-
-#: ../panels/media/cc-media-panel.c:455
-msgid "Blu-ray video disc"
-msgstr "蓝光视频光盘"
-
-#: ../panels/media/cc-media-panel.c:456
-msgid "e-book reader"
-msgstr "电子书阅读器"
-
-#: ../panels/media/cc-media-panel.c:457
-msgid "HD DVD video disc"
-msgstr "HD DVD 视频光盘"
-
-#: ../panels/media/cc-media-panel.c:458
-msgid "Picture CD"
-msgstr "图片 CD"
-
-#: ../panels/media/cc-media-panel.c:459
-msgid "Super Video CD"
-msgstr "超级 VCD"
-
-#: ../panels/media/cc-media-panel.c:460
-msgid "Video CD"
-msgstr "视频 CD"
-
-#: ../panels/media/gnome-media-properties.ui.h:1
-msgid "Acti_on:"
-msgstr "动作(_O)："
-
-#: ../panels/media/gnome-media-properties.ui.h:2
-msgid "CD _audio:"
-msgstr "CD 音频(_A)"
-
-#: ../panels/media/gnome-media-properties.ui.h:3
-msgid "Media and Autorun"
-msgstr "介质和自动运行"
-
-#: ../panels/media/gnome-media-properties.ui.h:4
-msgid "Select how media should be handled"
-msgstr "选择如何处理介质"
-
-#: ../panels/media/gnome-media-properties.ui.h:5
-msgid "Select how other media should be handled"
-msgstr "选择如何处理其他介质"
-
-#: ../panels/media/gnome-media-properties.ui.h:6
-msgid "_DVD video:"
-msgstr "_DVD 视频："
-
-#: ../panels/media/gnome-media-properties.ui.h:7
-msgid "_Music player:"
-msgstr "音乐播放器(_M)："
-
-#: ../panels/media/gnome-media-properties.ui.h:8
-msgid "_Never prompt or start programs on media insertion"
-msgstr "介质插入时从不提示或启动程序(_N)"
-
-#: ../panels/media/gnome-media-properties.ui.h:9
-msgid "_Other Media..."
-msgstr "其他媒体(_O)..."
-
-#: ../panels/media/gnome-media-properties.ui.h:10
-msgid "_Photos:"
-msgstr "照片(_P)："
-
-#: ../panels/media/gnome-media-properties.ui.h:11
-msgid "_Software:"
-msgstr "软件(_S)："
-
-#: ../panels/media/gnome-media-properties.ui.h:12
-msgid "_Type:"
-msgstr "类型(_T)："
-
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:1
-msgid "Configure media and autorun preferences"
-msgstr "配置介质和自动运行首选项"
-
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:2
-msgid "Removable Media"
-msgstr "可移动介质"
-
-#. Translators: those are keywords for the media control-center panel
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:4
-msgid "cd;dvd;usb;audio;video;disc;"
-msgstr "cd;dvd;usb;audio;video;disc;音频;视频;光盘;"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:306
+#: ../panels/online-accounts/cc-online-accounts-panel.c:305
 msgid "Error logging into the account"
 msgstr "登录到该帐户出错"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:352
+#: ../panels/online-accounts/cc-online-accounts-panel.c:351
 msgid "Expired credentials. Please log in again."
 msgstr "凭据过期。请重新登录。"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:355
+#: ../panels/online-accounts/cc-online-accounts-panel.c:354
 msgid "_Log In"
 msgstr "登录(_L)"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:464
+#: ../panels/online-accounts/cc-online-accounts-panel.c:463
 msgid "To add a new account, first select the account type"
 msgstr "要添加一个新帐户，请先选择帐户类型"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:467
+#: ../panels/online-accounts/cc-online-accounts-panel.c:466
 msgid "Account Type:"
 msgstr "帐户类型："
 
@@ -1271,7 +1335,7 @@ msgstr "更改打印机设置"
 #. Translators: those are keywords for the printing control-center panel
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:3
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
-msgstr "打印机;队列;打印;纸张;墨水;墨粉;"
+msgstr "Printer;Queue;Print;Paper;Ink;Toner;打印机;队列;打印;纸张;墨水;墨粉;"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
 #: ../panels/printers/pp-new-printer-dialog.c:142
@@ -1289,12 +1353,6 @@ msgstr "添加新打印机"
 #: ../panels/printers/new-printer-dialog.ui.h:3
 msgid "_Add"
 msgstr "添加(_A)"
-
-#: ../panels/printers/new-printer-dialog.ui.h:4
-#: ../panels/user-accounts/um-user-panel.c:445
-#: ../panels/user-accounts/data/language-chooser.ui.h:1
-msgid "_Cancel"
-msgstr "取消(_C)"
 
 #: ../panels/printers/new-printer-dialog.ui.h:5
 msgid "_Search by Address"
@@ -1367,8 +1425,8 @@ msgid "Allowed users"
 msgstr "允许的用户"
 
 #: ../panels/printers/printers.ui.h:6
-#: ../panels/network/cc-network-panel.c:1771
-#: ../panels/network/cc-network-panel.c:1774 ../panels/network/network.ui.h:11
+#: ../panels/network/cc-network-panel.c:1992
+#: ../panels/network/cc-network-panel.c:1995 ../panels/network/network.ui.h:11
 msgid "IP Address"
 msgstr "IP 地址"
 
@@ -1427,11 +1485,11 @@ msgstr "选项(_O)"
 msgid "_Show"
 msgstr "显示(_O)"
 
-#: ../panels/region/gnome-region-panel-formats.c:99
+#: ../panels/region/gnome-region-panel-formats.c:140
 msgid "Imperial"
 msgstr "英制"
 
-#: ../panels/region/gnome-region-panel-formats.c:101
+#: ../panels/region/gnome-region-panel-formats.c:142
 msgid "Metric"
 msgstr "公制"
 
@@ -1456,6 +1514,7 @@ msgid "Allow different layouts for individual windows"
 msgstr "允许各个窗口拥有不同的布局"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
+#: ../panels/region/gnome-region-panel-system.c:327
 msgid "Copy Settings..."
 msgstr "复制设置..."
 
@@ -1467,62 +1526,59 @@ msgstr "货币"
 msgid "Dates"
 msgstr "日期"
 
-#: ../panels/region/gnome-region-panel.ui.h:5
+#. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Display language:"
 msgstr "显示语言："
 
-#: ../panels/region/gnome-region-panel.ui.h:6
-msgid "Example"
+#: ../panels/region/gnome-region-panel.ui.h:7
+msgid "Examples"
 msgstr "示例"
 
-#: ../panels/region/gnome-region-panel.ui.h:7
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid "Format:"
 msgstr "格式："
 
-#: ../panels/region/gnome-region-panel.ui.h:8
+#: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Formats"
 msgstr "格式"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "Input source:"
 msgstr "输入源："
 
-#: ../panels/region/gnome-region-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Install languages..."
 msgstr "安装语言..."
 
-#: ../panels/region/gnome-region-panel.ui.h:11
+#: ../panels/region/gnome-region-panel.ui.h:12
 msgid "Language"
 msgstr "语言"
 
-#: ../panels/region/gnome-region-panel.ui.h:12
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "Layouts"
 msgstr "布局"
 
-#: ../panels/region/gnome-region-panel.ui.h:13
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "Measurement"
 msgstr "度量衡"
 
-#: ../panels/region/gnome-region-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:15
 msgid "New windows use the default layout"
 msgstr "新窗口使用默认布局"
 
-#: ../panels/region/gnome-region-panel.ui.h:15
+#: ../panels/region/gnome-region-panel.ui.h:16
 msgid "New windows use the previous window's layout"
 msgstr "新窗口中使用前一窗口的布局"
 
-#: ../panels/region/gnome-region-panel.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:17
 msgid "Numbers"
 msgstr "数字"
 
-#: ../panels/region/gnome-region-panel.ui.h:17
+#: ../panels/region/gnome-region-panel.ui.h:18
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
 msgstr "区域和语言"
-
-#: ../panels/region/gnome-region-panel.ui.h:18
-msgid "Region:"
-msgstr "地区："
 
 #: ../panels/region/gnome-region-panel.ui.h:19
 msgid ""
@@ -1538,40 +1594,55 @@ msgstr "重置为默认值(_F)"
 msgid "Select a display language (change will be applied next time you log in)"
 msgstr "选择界面语言(将在下次登录时应用)"
 
-#: ../panels/region/gnome-region-panel.ui.h:24
+#: ../panels/region/gnome-region-panel.ui.h:23
+msgid "Select a region (change will be applied the next time you log in)"
+msgstr "选择一个地区(将在下次登录时应用更改)"
+
+#: ../panels/region/gnome-region-panel.ui.h:25
 msgid "System settings"
 msgstr "系统设置"
 
-#: ../panels/region/gnome-region-panel.ui.h:25
-msgid ""
-"The login screen, system accounts and new user accounts use the system "
-"Region & Language settings. You may change the system settings to match yours"
-msgstr ""
-"登录屏幕、系统帐号和新用户均遵循系统区域和语言设置。您可以在那里按需修改相关"
-"设置。"
-
 #: ../panels/region/gnome-region-panel.ui.h:26
+#: ../panels/region/gnome-region-panel-system.c:321
+msgid ""
+"The login screen, system accounts and new user accounts use the system-wide "
+"Region and Language settings. You may change the system settings to match "
+"yours."
+msgstr ""
+"登录屏幕、系统帐号和新用户均使用系统的“区域和语言”设定。您可以在那里按需修改"
+"相关系统设定。"
+
+#: ../panels/region/gnome-region-panel.ui.h:27
 msgid "Times"
 msgstr "时间"
 
-#: ../panels/region/gnome-region-panel.ui.h:27
+#: ../panels/region/gnome-region-panel.ui.h:28
 msgid "Use the same layout for all windows"
 msgstr "所有窗口使用相同的布局"
 
-#: ../panels/region/gnome-region-panel.ui.h:28
+#: ../panels/region/gnome-region-panel.ui.h:29
 msgid "View and edit keyboard layout options"
 msgstr "查看并编辑键盘布局选项"
 
-#: ../panels/region/gnome-region-panel.ui.h:29
+#: ../panels/region/gnome-region-panel.ui.h:30
 msgid "Your settings"
 msgstr "我的设置"
 
-#: ../panels/region/gnome-region-panel.ui.h:30
-#: ../panels/network/network.ui.h:30
+#: ../panels/region/gnome-region-panel.ui.h:31
 msgid "_Options..."
 msgstr "选项(_O)..."
 
-#: ../panels/region/gnome-region-panel-xkblt.c:199
+#: ../panels/region/gnome-region-panel-system.c:316
+msgid ""
+"The login screen, system accounts and new user accounts use the system-wide "
+"Region and Language settings."
+msgstr "登录屏幕、系统帐号和新用户均使用系统的“区域和语言”设定。"
+
+#: ../panels/region/gnome-region-panel-system.c:324
+msgid "Copy Settings"
+msgstr "复制设定"
+
+#: ../panels/region/gnome-region-panel-xkblt.c:210
 msgid "Layout"
 msgstr "布局"
 
@@ -1587,7 +1658,7 @@ msgstr "更改您的区域和语言设置"
 #. Translators: those are keywords for the region control-center panel
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:3
 msgid "Language;Layout;Keyboard;"
-msgstr "语言;布局;键盘;Language;Layout;Keyboard;"
+msgstr "Language;Layout;Keyboard;语言;布局;键盘;"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:1
 msgid "A_cceleration:"
@@ -1624,7 +1695,7 @@ msgstr "高"
 
 #. large threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:14
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Large"
 msgstr "大"
 
@@ -1655,7 +1726,7 @@ msgstr "按住 Ctrl 键时显示指针位置(_O)"
 
 #. small threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:27
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:57
 msgid "Small"
 msgstr "小"
 
@@ -1710,10 +1781,11 @@ msgstr "设置您的鼠标和触摸板首选项"
 #. Translators: those are keywords for the mouse and touchpad control-center panel
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
-msgstr "触摸板;指针;点击;单击;双击;按钮;轨迹球;"
+msgstr "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
+"触摸板;指针;点击;单击;双击;按钮;轨迹球;"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/cc-network-panel.c:196
+#: ../panels/network/cc-network-panel.c:269
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgstr "若未提供配置 URL，将使用网络代理自动发现。"
@@ -1722,110 +1794,111 @@ msgstr "若未提供配置 URL，将使用网络代理自动发现。"
 #. * network, then anyone else on that network can tell your
 #. * machine that it should proxy all of your web traffic
 #. * through them.
-#: ../panels/network/cc-network-panel.c:204
+#: ../panels/network/cc-network-panel.c:277
 msgid "This is not recommended for untrusted public networks."
 msgstr "对于不可信的公共网络，不建议这样做。"
 
 #. TRANSLATORS: this is when the access point is not listed
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
-#: ../panels/network/cc-network-panel.c:817
+#: ../panels/network/cc-network-panel.c:951
 msgctxt "Wireless access point"
 msgid "Other..."
 msgstr "其他..."
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:975
-#: ../panels/network/cc-network-panel.c:1297
+#: ../panels/network/cc-network-panel.c:1109
+#: ../panels/network/cc-network-panel.c:1516
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:979
-#: ../panels/network/cc-network-panel.c:1301
+#: ../panels/network/cc-network-panel.c:1113
+#: ../panels/network/cc-network-panel.c:1520
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:983
+#: ../panels/network/cc-network-panel.c:1117
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:988
+#: ../panels/network/cc-network-panel.c:1122
 msgid "Enterprise"
 msgstr "企业"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:994
-#: ../panels/network/cc-network-panel.c:1292
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/network/cc-network-panel.c:1128
+#: ../panels/network/cc-network-panel.c:1511
+#: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "无"
 
-#: ../panels/network/cc-network-panel.c:1360
+#: ../panels/network/cc-network-panel.c:1579
 msgid "Hotspot"
 msgstr "热点"
 
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1422
-#: ../panels/network/cc-network-panel.c:1510
+#: ../panels/network/cc-network-panel.c:1645
+#: ../panels/network/cc-network-panel.c:1733
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/秒"
 
-#: ../panels/network/cc-network-panel.c:1767 ../panels/network/network.ui.h:12
+#: ../panels/network/cc-network-panel.c:1988 ../panels/network/network.ui.h:12
 msgid "IPv4 Address"
 msgstr "IPv4 地址"
 
-#: ../panels/network/cc-network-panel.c:1768 ../panels/network/network.ui.h:13
+#: ../panels/network/cc-network-panel.c:1989 ../panels/network/network.ui.h:13
 msgid "IPv6 Address"
 msgstr "IPv6 地址"
 
-#: ../panels/network/cc-network-panel.c:1907
-msgid "Proxy"
-msgstr "代理"
-
-#: ../panels/network/cc-network-panel.c:1981
-msgid "Network proxy"
-msgstr "网络代理"
-
-#: ../panels/network/cc-network-panel.c:2147
+#: ../panels/network/cc-network-panel.c:2042
+#: ../panels/network/cc-network-panel.c:2415
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
+#: ../panels/network/cc-network-panel.c:2150
+msgid "Proxy"
+msgstr "代理"
+
+#: ../panels/network/cc-network-panel.c:2224
+msgid "Network proxy"
+msgstr "网络代理"
+
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2214
+#: ../panels/network/cc-network-panel.c:2482
 msgid "The system network services are not compatible with this version."
 msgstr "系统的网络服务与此版本的网络管理器不兼容。"
 
-#: ../panels/network/cc-network-panel.c:2873
+#: ../panels/network/cc-network-panel.c:3097
 msgid "Not connected to the internet."
 msgstr "未连接到互联网。"
 
-#: ../panels/network/cc-network-panel.c:2874
+#: ../panels/network/cc-network-panel.c:3098
 msgid "Create the hotspot anyway?"
 msgstr "仍然创建热点？"
 
-#: ../panels/network/cc-network-panel.c:2892
+#: ../panels/network/cc-network-panel.c:3116
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
 msgstr "从 %s 断开并创建一个新热点？"
 
-#: ../panels/network/cc-network-panel.c:2895
+#: ../panels/network/cc-network-panel.c:3119
 msgid "This is your only connection to the internet."
 msgstr "这是您惟一的互联网连接。"
 
-#: ../panels/network/cc-network-panel.c:2913
+#: ../panels/network/cc-network-panel.c:3137
 msgid "Create _Hotspot"
 msgstr "创建热点(_H)"
 
-#: ../panels/network/cc-network-panel.c:2973
+#: ../panels/network/cc-network-panel.c:3197
 msgid "Stop hotspot and disconnect any users?"
 msgstr "停止热点并断开所有用户？"
 
-#: ../panels/network/cc-network-panel.c:2976
+#: ../panels/network/cc-network-panel.c:3200
 msgid "_Stop Hotspot"
 msgstr "停止热点(_S)"
 
@@ -1840,7 +1913,7 @@ msgstr "网络设置"
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
 msgid "Network;Wireless;IP;LAN;"
-msgstr "网络;无线;IP;LAN;"
+msgstr "Network;Wireless;网络;无线;IP;LAN;"
 
 #: ../panels/network/network.ui.h:1
 msgid "Air_plane Mode"
@@ -1927,48 +2000,56 @@ msgid "VPN"
 msgstr "VPN"
 
 #: ../panels/network/network.ui.h:25
+msgid "VPN Type"
+msgstr "VPN 类型"
+
+#: ../panels/network/network.ui.h:26
 msgid "_Configuration URL"
 msgstr "配置 URL(_C)"
 
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:27
+msgid "_Configure..."
+msgstr "配置(_C)..."
+
+#: ../panels/network/network.ui.h:28
 msgid "_FTP Proxy"
 msgstr "_FTP 代理"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:29
 msgid "_HTTP Proxy"
 msgstr "_HTTP 代理"
 
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network.ui.h:30
 msgid "_Method"
 msgstr "方法(_M)"
 
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network.ui.h:31
 msgid "_Network Name"
 msgstr "网络名称(_N)"
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network.ui.h:32
 msgid "_Socks Host"
 msgstr "_Socks 主机"
 
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network.ui.h:33
 msgid "_Stop Hotspot..."
 msgstr "停止热点(_S)..."
 
-#: ../panels/network/network.ui.h:33
+#: ../panels/network/network.ui.h:34
 msgid "_Use as Hotspot..."
 msgstr "用作热点(_U)..."
 
-#: ../panels/network/network.ui.h:34
+#: ../panels/network/network.ui.h:35
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "自动"
 
-#: ../panels/network/network.ui.h:35
+#: ../panels/network/network.ui.h:36
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "手动"
 
-#: ../panels/network/network.ui.h:36
+#: ../panels/network/network.ui.h:37
 msgctxt "proxy method"
 msgid "None"
 msgstr "无"
@@ -2087,7 +2168,7 @@ msgstr "电源管理设置"
 #. Translators: those are keywords for the power control-center panel
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
 msgid "Power;Sleep;Suspend;Hibernate;Battery;"
-msgstr "电源；睡眠；挂起；休眠；电池；"
+msgstr "Power;Sleep;Suspend;Hibernate;Battery;电源;睡眠;挂起;休眠;电池;"
 
 #: ../panels/power/cc-power-panel.c:160
 msgid "Unknown time"
@@ -2122,37 +2203,37 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "分"
 
-#: ../panels/power/cc-power-panel.c:260
+#: ../panels/power/cc-power-panel.c:265
 msgid "Battery charging"
 msgstr "电池充电中"
 
-#: ../panels/power/cc-power-panel.c:263
+#: ../panels/power/cc-power-panel.c:268
 msgid "Battery discharging"
 msgstr "电池放电中"
 
-#: ../panels/power/cc-power-panel.c:274
+#: ../panels/power/cc-power-panel.c:279
 msgid "UPS charging"
 msgstr "UPS 充电中"
 
-#: ../panels/power/cc-power-panel.c:277
+#: ../panels/power/cc-power-panel.c:282
 msgid "UPS discharging"
 msgstr "UPS 放电中"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:295
+#: ../panels/power/cc-power-panel.c:300
 #, c-format
 msgid "%s until charged (%.0lf%%)"
 msgstr "还需 %s 充满(%.0lf%%)"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:301
+#: ../panels/power/cc-power-panel.c:306
 #, c-format
 msgid "%s until empty (%.0lf%%)"
 msgstr "还有 %s 耗尽(%.0lf%%)"
 
 #. TRANSLATORS: %1 is a percentage value. Note: this string is only
 #. * used when we don't have a time value
-#: ../panels/power/cc-power-panel.c:309
+#: ../panels/power/cc-power-panel.c:314
 #, c-format
 msgid "%.0lf%% charged"
 msgstr "已充电 %.0lf%%"
@@ -2178,40 +2259,36 @@ msgid "Ask me"
 msgstr "询问我"
 
 #: ../panels/power/power.ui.h:7
+msgid "Don't suspend"
+msgstr "不要挂起"
+
+#: ../panels/power/power.ui.h:8
 msgid "Hibernate"
 msgstr "休眠"
 
-#: ../panels/power/power.ui.h:8
-msgid "On AC _power:"
-msgstr "使用交流电源(_P)："
-
 #: ../panels/power/power.ui.h:9
-msgid "On _battery power:"
-msgstr "使用电池电源(_B)："
+msgid "On battery power"
+msgstr "使用电池电源"
 
 #: ../panels/power/power.ui.h:10
-msgid "Put the computer to sleep when inactive:"
-msgstr "计算机从无活动转入睡眠的等待时间："
-
-#: ../panels/power/power.ui.h:11
 msgid "Shutdown"
 msgstr "关闭"
 
-#: ../panels/power/power.ui.h:12
+#: ../panels/power/power.ui.h:11
 msgid "Suspend"
 msgstr "挂起"
 
+#: ../panels/power/power.ui.h:12
+msgid "Suspend when inactive for:"
+msgstr "在此时间内误操作则挂起："
+
 #: ../panels/power/power.ui.h:13
-msgid "When power is _critically low:"
-msgstr "电量严重不足时(_C)："
+msgid "When plugged in"
+msgstr "电缆插入时"
 
 #: ../panels/power/power.ui.h:14
-msgid "When the _sleep button is pressed:"
-msgstr "按下睡眠按钮时(_S)："
-
-#: ../panels/power/power.ui.h:15
-msgid "When the p_ower button is pressed:"
-msgstr "按下电源按钮时(_O)："
+msgid "When power is _critically low:"
+msgstr "电量严重不足时(_C)："
 
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
 #: ../panels/color/color.ui.h:8
@@ -2229,171 +2306,176 @@ msgstr ""
 "颜色;色彩;配置;校准;打印机;显示;Color;ICC;Profile;Calibrate;Printer;Display;"
 
 #. TRANSLATORS: this is where the user can click and import a profile
-#: ../panels/color/cc-color-panel.c:102
+#: ../panels/color/cc-color-panel.c:105
 msgid "Other profile…"
 msgstr "其他配置..."
 
 #. TRANSLATORS: this is when the profile should be set for all users
-#: ../panels/color/cc-color-panel.c:156 ../panels/color/color.ui.h:19
+#: ../panels/color/cc-color-panel.c:159 ../panels/color/color.ui.h:21
 msgid "Set for all users"
 msgstr "为所有用户设置"
 
 #. TRANSLATORS: this is when the profile should be set for all users
-#: ../panels/color/cc-color-panel.c:163
+#: ../panels/color/cc-color-panel.c:166
 msgid "Create virtual device"
 msgstr "创建虚拟设备"
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:198
+#: ../panels/color/cc-color-panel.c:201
 msgid "Select ICC Profile File"
 msgstr "选择 ICC 配置文件"
 
-#: ../panels/color/cc-color-panel.c:201
-msgid "Import"
-msgstr "导入"
+#: ../panels/color/cc-color-panel.c:204
+msgid "_Import"
+msgstr "导入(_I)"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:212
+#: ../panels/color/cc-color-panel.c:215
 msgid "Supported ICC profiles"
 msgstr "支持的 ICC 配置"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:219
+#: ../panels/color/cc-color-panel.c:222
 msgid "All files"
 msgstr "所有文件"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:695
-#: ../panels/sound/gvc-mixer-dialog.c:1539
+#: ../panels/color/cc-color-panel.c:725
+#: ../panels/sound/gvc-mixer-dialog.c:1515
 msgid "Device"
 msgstr "设备"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:730
+#: ../panels/color/cc-color-panel.c:760
 msgid "Calibration"
 msgstr "校准"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:762
+#: ../panels/color/cc-color-panel.c:792
 msgid "Create a color profile for the selected device"
 msgstr "为所选设备创建一份颜色配置"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:776 ../panels/color/cc-color-panel.c:800
+#: ../panels/color/cc-color-panel.c:806 ../panels/color/cc-color-panel.c:830
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
 msgstr "没有检测到测量仪器。请检查它是否打开和正确连接。"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:809
+#: ../panels/color/cc-color-panel.c:839
 msgid "The measuring instrument does not support printer profiling."
 msgstr "测量仪器不支持打印机校正。"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:820
+#: ../panels/color/cc-color-panel.c:850
 msgid "The device type is not currently supported."
 msgstr "目前不支持该设备类型。"
 
 #. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:892
+#: ../panels/color/cc-color-panel.c:923
 msgid "Cannot remove automatically added profile"
 msgstr "不能移除自动添加的配置"
 
 #. TRANSLATORS: this is when there is no profile for the device
-#: ../panels/color/cc-color-panel.c:1190
+#: ../panels/color/cc-color-panel.c:1267
 msgid "No profile"
 msgstr "无配置"
 
-#: ../panels/color/cc-color-panel.c:1209
+#: ../panels/color/cc-color-panel.c:1286
 #, c-format
 msgid "%i year"
 msgid_plural "%i years"
 msgstr[0] "%i 年"
 
-#: ../panels/color/cc-color-panel.c:1220
+#: ../panels/color/cc-color-panel.c:1297
 #, c-format
 msgid "%i month"
 msgid_plural "%i months"
 msgstr[0] "%i 个月"
 
-#: ../panels/color/cc-color-panel.c:1231
+#: ../panels/color/cc-color-panel.c:1308
 #, c-format
 msgid "%i week"
 msgid_plural "%i weeks"
 msgstr[0] "%i 周"
 
 #. fallback
-#: ../panels/color/cc-color-panel.c:1238
+#: ../panels/color/cc-color-panel.c:1315
 #, c-format
 msgid "Less than 1 week"
 msgstr "不到一周"
 
-#: ../panels/color/cc-color-panel.c:1298
+#: ../panels/color/cc-color-panel.c:1375
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "默认 RGB"
 
-#: ../panels/color/cc-color-panel.c:1303
+#: ../panels/color/cc-color-panel.c:1380
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "默认 CMYK"
 
-#: ../panels/color/cc-color-panel.c:1308
+#: ../panels/color/cc-color-panel.c:1385
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "默认灰度"
 
-#: ../panels/color/cc-color-panel.c:1423 ../panels/color/cc-color-panel.c:1445
-#: ../panels/color/cc-color-panel.c:1456
+#: ../panels/color/cc-color-panel.c:1500 ../panels/color/cc-color-panel.c:1532
+#: ../panels/color/cc-color-panel.c:1543
 msgid "Uncalibrated"
 msgstr "未校准"
 
-#: ../panels/color/cc-color-panel.c:1426
+#: ../panels/color/cc-color-panel.c:1503
 msgid "This device is not color managed."
 msgstr "此设备没有进行颜色管理。"
 
-#: ../panels/color/cc-color-panel.c:1448
+#: ../panels/color/cc-color-panel.c:1535
 msgid "This device is using manufacturing calibrated data."
 msgstr "此设备正在使用出厂校准数据。"
 
-#: ../panels/color/cc-color-panel.c:1459
+#: ../panels/color/cc-color-panel.c:1546
 msgid ""
 "This device does not have a profile suitable for whole-screen color "
 "correction."
 msgstr "此设备没有一份适于全屏颜色修正的配置。"
 
-#: ../panels/color/cc-color-panel.c:1486
+#: ../panels/color/cc-color-panel.c:1573
 msgid "This device has an old profile that may no longer be accurate."
 msgstr "此设备有一份可能已经不准确的旧配置。"
 
 #. TRANSLATORS: this is when the calibration profile age is not
 #. * specified as it has been autogenerated from the hardware
-#: ../panels/color/cc-color-panel.c:1513
+#: ../panels/color/cc-color-panel.c:1600
 msgid "Not specified"
 msgstr "未指定"
 
-#: ../panels/color/cc-color-panel.c:1864
+#. add the 'No devices detected' entry
+#: ../panels/color/cc-color-panel.c:1779
+msgid "No devices supporting color management detected"
+msgstr "没有检测到支持色彩管理的设备"
+
+#: ../panels/color/cc-color-panel.c:2008
 msgctxt "Device kind"
 msgid "Display"
 msgstr "显示"
 
-#: ../panels/color/cc-color-panel.c:1866
+#: ../panels/color/cc-color-panel.c:2010
 msgctxt "Device kind"
 msgid "Scanner"
 msgstr "扫描仪"
 
-#: ../panels/color/cc-color-panel.c:1868
+#: ../panels/color/cc-color-panel.c:2012
 msgctxt "Device kind"
 msgid "Printer"
 msgstr "打印机"
 
-#: ../panels/color/cc-color-panel.c:1870
+#: ../panels/color/cc-color-panel.c:2014
 msgctxt "Device kind"
 msgid "Camera"
 msgstr "相机"
 
-#: ../panels/color/cc-color-panel.c:1872
+#: ../panels/color/cc-color-panel.c:2016
 msgctxt "Device kind"
 msgid "Webcam"
 msgstr "摄像头"
@@ -2441,31 +2523,39 @@ msgid ""
 msgstr "可以将图像文件拖放到此窗口来自动填写以上字段。"
 
 #: ../panels/color/color.ui.h:13
+msgid "Learn more"
+msgstr "了解更多"
+
+#: ../panels/color/color.ui.h:14
+msgid "Learn more about color management"
+msgstr "了解更多有关色彩管理的信息"
+
+#: ../panels/color/color.ui.h:15
 msgid "Manufacturer:"
 msgstr "厂商："
 
-#: ../panels/color/color.ui.h:14
+#: ../panels/color/color.ui.h:16
 msgid "Model:"
 msgstr "型号："
 
 #. Some profiles are not compatible with some devices
-#: ../panels/color/color.ui.h:16
+#: ../panels/color/color.ui.h:18
 msgid "Only profiles that are compatible with the device will be listed above."
 msgstr "只有与该设备兼容的配置才会在上方列出。"
 
-#: ../panels/color/color.ui.h:17
+#: ../panels/color/color.ui.h:19
 msgid "Remove a device"
 msgstr "移除设备"
 
-#: ../panels/color/color.ui.h:18
+#: ../panels/color/color.ui.h:20
 msgid "Remove profile"
 msgstr "移除配置"
 
-#: ../panels/color/color.ui.h:20
+#: ../panels/color/color.ui.h:22
 msgid "Set this device for all users on this computer"
 msgstr "为此计算机上的所有用户设置此设备"
 
-#: ../panels/color/color.ui.h:21
+#: ../panels/color/color.ui.h:23
 msgid "View details"
 msgstr "查看详情"
 
@@ -2528,8 +2618,8 @@ msgid "_Lock screen after:"
 msgstr "定时锁定屏幕(_L)："
 
 #: ../panels/screen/screen.ui.h:17
-msgid "_Turn off after:"
-msgstr "定时关闭(_T)："
+msgid "_Turn screen off when inactive for:"
+msgstr "在此时间内无操作则关闭屏幕(_T)："
 
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
@@ -2543,19 +2633,19 @@ msgstr "此应用程序的版本"
 msgid " — GNOME Volume Control Applet"
 msgstr " — GNOME 音量控制小程序"
 
-#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1938
+#: ../panels/sound/gvc-applet.c:270 ../panels/sound/gvc-mixer-dialog.c:1767
 msgid "Output"
 msgstr "输出"
 
-#: ../panels/sound/gvc-applet.c:278
+#: ../panels/sound/gvc-applet.c:272
 msgid "Sound Output Volume"
 msgstr "输出音量"
 
-#: ../panels/sound/gvc-applet.c:282 ../panels/sound/gvc-mixer-dialog.c:1855
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1807
 msgid "Input"
 msgstr "输入"
 
-#: ../panels/sound/gvc-applet.c:284
+#: ../panels/sound/gvc-applet.c:278
 msgid "Microphone Volume"
 msgstr "话筒音量"
 
@@ -2611,17 +2701,13 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "减弱"
 
-#: ../panels/sound/gvc-channel-bar.c:901
-msgid "Mute"
-msgstr "静音"
-
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1645
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1621
 msgid "_Profile:"
 msgstr "配置(_P)："
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1091
+#: ../panels/sound/gvc-mixer-control.c:1093
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -2629,86 +2715,86 @@ msgstr[0] "%u 路输出"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1101
+#: ../panels/sound/gvc-mixer-control.c:1103
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u 路输入"
 
-#: ../panels/sound/gvc-mixer-control.c:1399
+#: ../panels/sound/gvc-mixer-control.c:1401
 msgid "System Sounds"
 msgstr "系统声音"
 
-#: ../panels/sound/gvc-mixer-dialog.c:324
-#: ../panels/sound/gvc-mixer-dialog.c:632
+#: ../panels/sound/gvc-mixer-dialog.c:323
+#: ../panels/sound/gvc-mixer-dialog.c:634
 msgid "Co_nnector:"
 msgstr "连接器(_N)："
 
-#: ../panels/sound/gvc-mixer-dialog.c:538
+#: ../panels/sound/gvc-mixer-dialog.c:540
 msgid "Peak detect"
 msgstr "峰值检测"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1521
-#: ../panels/sound/gvc-mixer-dialog.c:1733
+#: ../panels/sound/gvc-mixer-dialog.c:1496
+#: ../panels/sound/gvc-mixer-dialog.c:1709
 #: ../panels/sound/gvc-sound-theme-chooser.c:596
 msgid "Name"
 msgstr "名称"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1587
+#: ../panels/sound/gvc-mixer-dialog.c:1563
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "%s 扬声器测试"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1646
+#: ../panels/sound/gvc-mixer-dialog.c:1622
 msgid "_Test Speakers"
 msgstr "测试扬声器(_T)"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1777
-msgid "_Output volume: "
+#: ../panels/sound/gvc-mixer-dialog.c:1753
+msgid "_Output volume:"
 msgstr "输出音量(_O)："
 
-#: ../panels/sound/gvc-mixer-dialog.c:1791
-msgid "Sound Effects"
-msgstr "声音效果"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1798
-msgid "_Alert volume: "
-msgstr "警告音量(_A)："
-
-#: ../panels/sound/gvc-mixer-dialog.c:1811
-msgid "Hardware"
-msgstr "硬件"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1816
-msgid "C_hoose a device to configure:"
-msgstr "选择要配置的设备(_H)："
-
-#: ../panels/sound/gvc-mixer-dialog.c:1844
-#: ../panels/sound/gvc-mixer-dialog.c:1967
-msgid "Settings for the selected device:"
-msgstr "选中设备的设置："
-
-#: ../panels/sound/gvc-mixer-dialog.c:1862
-msgid "_Input volume: "
-msgstr "输入音量(_I)："
-
-#: ../panels/sound/gvc-mixer-dialog.c:1885
-msgid "Input level:"
-msgstr "输入等级："
-
-#: ../panels/sound/gvc-mixer-dialog.c:1911
-msgid "C_hoose a device for sound input:"
-msgstr "选择音频输入设备(_H)："
-
-#: ../panels/sound/gvc-mixer-dialog.c:1943
+#: ../panels/sound/gvc-mixer-dialog.c:1772
 msgid "C_hoose a device for sound output:"
 msgstr "选择音频输出设备(_H)："
 
-#: ../panels/sound/gvc-mixer-dialog.c:1978
+#: ../panels/sound/gvc-mixer-dialog.c:1796
+#: ../panels/sound/gvc-mixer-dialog.c:1925
+msgid "Settings for the selected device:"
+msgstr "选中设备的设置："
+
+#: ../panels/sound/gvc-mixer-dialog.c:1814
+msgid "_Input volume:"
+msgstr "输入音量(_I)："
+
+#: ../panels/sound/gvc-mixer-dialog.c:1837
+msgid "Input level:"
+msgstr "输入等级："
+
+#: ../panels/sound/gvc-mixer-dialog.c:1865
+msgid "C_hoose a device for sound input:"
+msgstr "选择音频输入设备(_H)："
+
+#: ../panels/sound/gvc-mixer-dialog.c:1892
+msgid "Hardware"
+msgstr "硬件"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1897
+msgid "C_hoose a device to configure:"
+msgstr "选择要配置的设备(_H)："
+
+#: ../panels/sound/gvc-mixer-dialog.c:1936
+msgid "Sound Effects"
+msgstr "声音效果"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1943
+msgid "_Alert volume:"
+msgstr "警告音量(_A)："
+
+#: ../panels/sound/gvc-mixer-dialog.c:1956
 msgid "Applications"
 msgstr "应用程序"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1982
+#: ../panels/sound/gvc-mixer-dialog.c:1960
 msgid "No application is currently playing or recording audio."
 msgstr "没有程序正在播放或录制音频。"
 
@@ -2782,6 +2868,7 @@ msgstr "音量控制"
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
 msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;"
 msgstr "声卡;麦克风;音量;淡入淡出;均衡;蓝牙;耳机;"
+"Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:3
 msgid "Change sound volume and sound events"
@@ -2815,8 +2902,8 @@ msgstr "玻璃"
 msgid "Sonar"
 msgstr "声纳"
 
-#: ../panels/universal-access/cc-ua-panel.c:470
-#: ../panels/universal-access/cc-ua-panel.c:475
+#: ../panels/universal-access/cc-ua-panel.c:484
+#: ../panels/universal-access/cc-ua-panel.c:489
 msgid "No shortcut set"
 msgstr "未设置快捷键"
 
@@ -2916,15 +3003,16 @@ msgstr ""
 msgid "Please select an image."
 msgstr "请选择一幅图片。"
 
-#: ../panels/universal-access/gconf-property-editor.c:1609
-#: ../panels/user-accounts/data/language-chooser.ui.h:2
-msgid "_Select"
-msgstr "选择(_S)"
-
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
-msgid "Keyboard;Mouse;a11y;Accessibility;"
-msgstr "键盘;鼠标;a11y;辅助功能;"
+msgid ""
+"Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;"
+"AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys"
+msgstr ""
+"Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;"
+"AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys;"
+"键盘;鼠标;辅助功能;对比度;缩放;屏幕读取器;文本;字体;大小;AccessX;粘滞键;"
+"缓按键;回键;鼠标键"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
@@ -2966,261 +3054,281 @@ msgstr "当使用 Caps Lock 键或 Num Lock 键时发出蜂鸣声"
 msgid "Beep when a _modifer key is pressed"
 msgstr "当按下修饰键时发出蜂鸣声(_M)"
 
-#: ../panels/universal-access/uap.ui.h:13
+#. This string is part of a line of checkboxes: Beep when a key is [ ] pressed  [ ] accepted  [ ] rejected
+#: ../panels/universal-access/uap.ui.h:14
 msgid "Beep when a key is"
 msgstr "发出蜂鸣声当使用键"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Beep when a key is _rejected"
 msgstr "当某个键被拒绝时发出蜂鸣声(_R)"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:16
 msgid "Bounce Keys"
 msgstr "回弹键"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Caribou"
 msgstr "Caribou"
 
-#: ../panels/universal-access/uap.ui.h:17
+#: ../panels/universal-access/uap.ui.h:18
 msgid "Change contrast:"
 msgstr "改变对比度："
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:19
 msgid "Closed Captioning"
 msgstr "闭合注释"
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:20
 msgid "Control the pointer using the keypad"
 msgstr "使用小键盘控制鼠标指针。"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:21
 msgid "Control the pointer using the video camera."
 msgstr "使用摄像头控制鼠标指针"
 
-#: ../panels/universal-access/uap.ui.h:22
+#: ../panels/universal-access/uap.ui.h:23
 msgid "D_elay:"
 msgstr "延时(_E)："
 
-#: ../panels/universal-access/uap.ui.h:23
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Dasher"
 msgstr "Dasher"
 
-#: ../panels/universal-access/uap.ui.h:24
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Decrease size:"
 msgstr "减少大小："
 
-#: ../panels/universal-access/uap.ui.h:25
+#: ../panels/universal-access/uap.ui.h:26
 msgid "Display a textual description of speech and sounds"
 msgstr "显示语音和声音的文字描述。"
 
-#: ../panels/universal-access/uap.ui.h:26
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Flash the entire screen"
 msgstr "闪烁整个屏幕"
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Flash the window title"
 msgstr "闪烁窗口标题栏"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:29
 msgid "GOK"
 msgstr "GNOME 屏幕键盘"
 
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Hearing"
 msgstr "听觉"
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Hover Click"
 msgstr "悬停点击"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Ignores fast duplicate keypresses"
 msgstr "忽略快速重复按键"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Increase size:"
 msgstr "增加大小："
 
-#: ../panels/universal-access/uap.ui.h:35
-msgid "Larger"
-msgstr "较大"
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Keyboard Settings"
+msgstr "键盘设置"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Motion _threshold:"
 msgstr "运动阈值(_T)："
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Mouse Keys"
 msgstr "鼠标键"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:41
+msgid "Mouse Settings"
+msgstr "鼠标设置"
+
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Nomon"
 msgstr "日冕定位"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:44
 msgid "On screen keyboard"
 msgstr "屏幕键盘"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:45
 msgid "OnBoard"
 msgstr "板载"
 
-#: ../panels/universal-access/uap.ui.h:45
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Options..."
 msgstr "选项..."
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Pointing and Clicking"
 msgstr "指向和单击"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "当某键按下和接收之间插入延迟"
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Screen Reader"
 msgstr "屏幕阅读器"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Screen keyboard"
 msgstr "屏幕键盘"
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:51
 msgid "Seeing"
 msgstr "视觉"
 
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Simulated Secondary Click"
 msgstr "模拟再次点击"
 
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Slow Keys"
 msgstr "慢速键"
 
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:58
+msgid "Sound Settings"
+msgstr "声音设置"
+
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Sticky Keys"
 msgstr "粘滞键"
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "将一串修改过的键当作一个组合键"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Trigger a click when the pointer hovers"
 msgstr "指针悬停时执行点击。"
 
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "按住鼠标主键不放时触发次击"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Turn on or off:"
 msgstr "打开或关闭："
 
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Type here to test settings"
 msgstr "在此输入字符以测试设置"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Typing Assistant"
 msgstr "打字助手"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "当警告声发生时使用视觉提示"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Video Mouse"
 msgstr "视频鼠标"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Visual Alerts"
 msgstr "视觉警告"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Zoom in:"
 msgstr "放大："
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Zoom out:"
 msgstr "缩小："
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:72
 msgid "_Contrast:"
 msgstr "对比度(_C)："
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:73
 msgid "_Disable if two keys are pressed together"
 msgstr "若同时按下两个键则禁用(_D)"
 
-#: ../panels/universal-access/uap.ui.h:72
-msgid "_Keyboard Settings"
-msgstr "键盘设置(_K)"
-
-#: ../panels/universal-access/uap.ui.h:73
-msgid "_Mouse Settings"
-msgstr "鼠标设置(_M)"
-
 #: ../panels/universal-access/uap.ui.h:74
-msgid "_Sound Settings"
-msgstr "声音设置(_S)"
-
-#: ../panels/universal-access/uap.ui.h:75
 msgid "_Test flash"
 msgstr "文字闪烁(_T)"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:75
 msgid "_Text size:"
 msgstr "文字大小(_T)："
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:76
 msgid "_Turn on accessibility features from the keyboard"
 msgstr "打开键盘辅助功能特性(_T)"
 
+#. This completes the sentence "Beep when a key is"
 #: ../panels/universal-access/uap.ui.h:78
 msgid "accepted"
 msgstr "已接受"
 
-#: ../panels/universal-access/uap.ui.h:79
+#. This completes the sentence "Beep when a key is"
+#: ../panels/universal-access/uap.ui.h:80
 msgid "pressed"
 msgstr "已按下"
 
-#: ../panels/universal-access/uap.ui.h:80
+#. This completes the sentence "Beep when a key is"
+#: ../panels/universal-access/uap.ui.h:82
 msgid "rejected"
 msgstr "已拒绝"
 
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:83
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "高"
 
-#: ../panels/universal-access/uap.ui.h:82
+#: ../panels/universal-access/uap.ui.h:84
 msgctxt "universal access, contrast"
 msgid "High/Inverse"
 msgstr "高/反色"
 
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:85
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "低"
 
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:86
 msgctxt "universal access, contrast"
 msgid "Normal"
 msgstr "普通"
 
 #. Translators: this refers to theme contrast and font size
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:88
 msgctxt "universal access, seeing"
 msgid "Display"
 msgstr "显示"
 
 #. Translators: this refers to screen magnifier
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:90
 msgctxt "universal access, seeing"
 msgid "Zoom"
 msgstr "缩放"
+
+#: ../panels/universal-access/uap.ui.h:91
+msgctxt "universal access, text size"
+msgid "Large"
+msgstr "大"
+
+#: ../panels/universal-access/uap.ui.h:92
+msgctxt "universal access, text size"
+msgid "Larger"
+msgstr "较大"
+
+#: ../panels/universal-access/uap.ui.h:93
+msgctxt "universal access, text size"
+msgid "Normal"
+msgstr "正常"
+
+#: ../panels/universal-access/uap.ui.h:94
+msgctxt "universal access, text size"
+msgid "Small"
+msgstr "小"
 
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
@@ -3329,8 +3437,8 @@ msgstr "完成！"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:409
-#: ../panels/user-accounts/um-fingerprint-dialog.c:431
+#: ../panels/user-accounts/um-fingerprint-dialog.c:410
+#: ../panels/user-accounts/um-fingerprint-dialog.c:432
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "无法访问“%s”设备"
@@ -3338,20 +3446,20 @@ msgstr "无法访问“%s”设备"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:480
+#: ../panels/user-accounts/um-fingerprint-dialog.c:481
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "无法在“%s”设备上启动手指捕捉"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:532
+#: ../panels/user-accounts/um-fingerprint-dialog.c:533
 msgid "Could not access any fingerprint readers"
 msgstr "无法访问指纹读取器"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:533
+#: ../panels/user-accounts/um-fingerprint-dialog.c:534
 msgid "Please contact your system administrator for help."
 msgstr "请联系系统管理员以寻求帮助。"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:570
+#: ../panels/user-accounts/um-fingerprint-dialog.c:571
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Enable Fingerprint Login"
 msgstr "启用指纹登录"
@@ -3361,28 +3469,24 @@ msgstr "启用指纹登录"
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:604
+#: ../panels/user-accounts/um-fingerprint-dialog.c:605
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
 "using the '%s' device."
 msgstr "要启用指纹登录，你需要使用“%s”设备来保存您的一个指纹。"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:611
+#: ../panels/user-accounts/um-fingerprint-dialog.c:612
 msgid "Selecting finger"
 msgstr "选择手指"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:612
+#: ../panels/user-accounts/um-fingerprint-dialog.c:613
 msgid "Enrolling fingerprints"
 msgstr "加入指纹识别"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:613
+#: ../panels/user-accounts/um-fingerprint-dialog.c:614
 msgid "Summary"
 msgstr "摘要"
-
-#: ../panels/user-accounts/um-language-dialog.c:180
-msgid "Other..."
-msgstr "其他..."
 
 #: ../panels/user-accounts/um-password-dialog.c:179
 msgid "More choices..."
@@ -3480,77 +3584,77 @@ msgstr "浏览更多图片..."
 msgid "Used by %s"
 msgstr "已被 %s 使用"
 
-#: ../panels/user-accounts/um-user-manager.c:437
+#: ../panels/user-accounts/um-user-manager.c:450
 #, c-format
 msgid "A user with name '%s' already exists."
 msgstr "名为 %s 的用户已存在。"
 
-#: ../panels/user-accounts/um-user-manager.c:532
+#: ../panels/user-accounts/um-user-manager.c:546
 msgid "This user does not exist."
 msgstr "该用户不存在。"
 
-#: ../panels/user-accounts/um-user-panel.c:354
+#: ../panels/user-accounts/um-user-panel.c:357
 msgid "Failed to delete user"
 msgstr "删除用户失败"
 
-#: ../panels/user-accounts/um-user-panel.c:414
+#: ../panels/user-accounts/um-user-panel.c:417
 msgid "You cannot delete your own account."
 msgstr "您不能删除自己的帐户。"
 
-#: ../panels/user-accounts/um-user-panel.c:423
+#: ../panels/user-accounts/um-user-panel.c:426
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s 已经登录"
 
-#: ../panels/user-accounts/um-user-panel.c:427
+#: ../panels/user-accounts/um-user-panel.c:430
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "在用户已登录时删除帐号可能导致系统处于不一致状态。"
 
-#: ../panels/user-accounts/um-user-panel.c:436
+#: ../panels/user-accounts/um-user-panel.c:439
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "您想要保持 %s 的文件吗？"
 
-#: ../panels/user-accounts/um-user-panel.c:440
+#: ../panels/user-accounts/um-user-panel.c:443
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr "删除用户时可以保留用户主目录、电子邮件目录和临时文件。"
 
-#: ../panels/user-accounts/um-user-panel.c:443
+#: ../panels/user-accounts/um-user-panel.c:446
 msgid "_Delete Files"
 msgstr "删除文件(_D)"
 
-#: ../panels/user-accounts/um-user-panel.c:444
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "_Keep Files"
 msgstr "保留文件(_K)"
 
-#: ../panels/user-accounts/um-user-panel.c:495
+#: ../panels/user-accounts/um-user-panel.c:499
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "帐户已禁用"
 
-#: ../panels/user-accounts/um-user-panel.c:503
+#: ../panels/user-accounts/um-user-panel.c:507
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "下次登录时设置"
 
-#: ../panels/user-accounts/um-user-panel.c:506
+#: ../panels/user-accounts/um-user-panel.c:510
 msgctxt "Password mode"
 msgid "None"
 msgstr "无"
 
-#: ../panels/user-accounts/um-user-panel.c:826
+#: ../panels/user-accounts/um-user-panel.c:845
 msgid "Failed to contact the accounts service"
 msgstr "联系帐户服务失败"
 
-#: ../panels/user-accounts/um-user-panel.c:828
+#: ../panels/user-accounts/um-user-panel.c:847
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "请确定 AccountService 已经正确安装并启用。"
 
-#: ../panels/user-accounts/um-user-panel.c:864
+#: ../panels/user-accounts/um-user-panel.c:887
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -3558,12 +3662,12 @@ msgstr ""
 "要进行更改，\n"
 "请先点击 * 图标"
 
-#: ../panels/user-accounts/um-user-panel.c:902
+#: ../panels/user-accounts/um-user-panel.c:925
 msgid "Create a user"
 msgstr "创建用户"
 
-#: ../panels/user-accounts/um-user-panel.c:913
-#: ../panels/user-accounts/um-user-panel.c:1202
+#: ../panels/user-accounts/um-user-panel.c:936
+#: ../panels/user-accounts/um-user-panel.c:1225
 msgid ""
 "To create a user,\n"
 "click the * icon first"
@@ -3571,12 +3675,12 @@ msgstr ""
 "要创建用户，\n"
 "请先点击 * 图标"
 
-#: ../panels/user-accounts/um-user-panel.c:922
+#: ../panels/user-accounts/um-user-panel.c:945
 msgid "Delete the selected user"
 msgstr "删除选中的用户"
 
-#: ../panels/user-accounts/um-user-panel.c:934
-#: ../panels/user-accounts/um-user-panel.c:1207
+#: ../panels/user-accounts/um-user-panel.c:957
+#: ../panels/user-accounts/um-user-panel.c:1230
 msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
@@ -3584,11 +3688,11 @@ msgstr ""
 "要删除选中的用户，\n"
 "请先点击 * 图标"
 
-#: ../panels/user-accounts/um-user-panel.c:1111
+#: ../panels/user-accounts/um-user-panel.c:1134
 msgid "My Account"
 msgstr "我的帐户"
 
-#: ../panels/user-accounts/um-user-panel.c:1121
+#: ../panels/user-accounts/um-user-panel.c:1144
 msgid "Other Accounts"
 msgstr "其他帐户"
 
@@ -3626,6 +3730,7 @@ msgstr "添加或删除用户"
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:3
 msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 msgstr "登录;名称;指纹;头像;标志;密码;"
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
 msgid "User Accounts"
@@ -3704,8 +3809,8 @@ msgid ""
 "This hint may be displayed at the login screen.  It will be visible to all "
 "users of this system.  Do <b>not</b> include the password here."
 msgstr ""
-"这个提示可能显示在登录屏幕。它将对此系统的所有用户可见。请 <b>不要</"
-"b> 把密码写在这里。"
+"这个提示可能显示在登录屏幕。它将对此系统的所有用户可见。请 <b>不要</b> 把密码"
+"写在这里。"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:14
 msgid "_Action"
@@ -3823,12 +3928,122 @@ msgid "_Left index finger"
 msgstr "左手食指(_L)"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:12
-msgid "_Other finger: "
+msgid "_Other finger:"
 msgstr "其他手指(_O)："
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:13
 msgid "_Right index finger"
 msgstr "右手食指(_R)"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:1
+msgid "Back"
+msgstr "后退"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:2
+msgid "Calibrate..."
+msgstr "校准..."
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:3
+msgid "Eraser Pressure Feel"
+msgstr "擦除器压力感应"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:4
+msgid "Firm"
+msgstr "紧"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
+msgid "Forward"
+msgstr "前进"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:6
+msgid "Left Mouse Button Click"
+msgstr "鼠标左键单击"
+
+# 左撇子有歧视色彩，故采用左利手。
+#: ../panels/wacom/gnome-wacom-properties.ui.h:7
+msgid "Left-Handed Orientation:"
+msgstr "左利手："
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
+msgid "Lower Button"
+msgstr "下键"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
+msgid "Middle Mouse Button Click"
+msgstr "鼠标中键单击"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+msgid "No Action"
+msgstr "不做动作"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:11
+msgid "Right Mouse Button Click"
+msgstr "鼠标右键单击"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+msgid "Scroll Down"
+msgstr "向下滚动"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+msgid "Scroll Left"
+msgstr "向左滚动"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:14
+msgid "Scroll Right"
+msgstr "向右滚动"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:15
+msgid "Scroll Up"
+msgstr "向上滚动"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:16
+msgid "Soft"
+msgstr "软"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:17
+msgid "Stylus"
+msgstr "写字笔"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:18
+msgid "Tablet (absolute)"
+msgstr "平板(绝对)"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:19
+msgid "Tablet Preferences"
+msgstr "平板首选项"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:20
+msgid "Tip Pressure Feel"
+msgstr "轻触压力感"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:21
+msgid "Top Button"
+msgstr "上键"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:22
+msgid "Touchpad (relative)"
+msgstr "触摸板(相对)"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:23
+msgid "Tracking Mode"
+msgstr "跟踪模式"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:24
+msgid "Wacom Tablet"
+msgstr "Wacom 平板"
+
+#: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
+msgid "Set your Wacom tablet preferences"
+msgstr "设置您的 Wacom 写字板首选项"
+
+#. Translators: those are keywords for the wacom tablet control-center panel
+#: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:3
+msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
+msgstr "Tablet;Wacom;Stylus;Eraser;Mouse;平板;手写板;写字笔;擦除器;鼠标;"
+
+#: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:4
+msgid "Wacom Graphics Tablet"
+msgstr "Wacom 图形手写板"
 
 #: ../shell/control-center.c:54
 msgid "Enable verbose mode"
@@ -3871,6 +4086,54 @@ msgstr "控制中心"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "全部设置(_A)"
+
+#~ msgid "Left"
+#~ msgstr "左"
+
+#~ msgid "Right"
+#~ msgstr "右"
+
+#~ msgid "Upside-down"
+#~ msgstr "上下颠倒"
+
+#~ msgid "Media and Autorun"
+#~ msgstr "介质和自动运行"
+
+#~ msgid "Configure media and autorun preferences"
+#~ msgstr "配置介质和自动运行首选项"
+
+#~ msgid "cd;dvd;usb;audio;video;disc;"
+#~ msgstr "cd;dvd;usb;audio;video;disc;音频;视频;光盘;"
+
+#~ msgid "On AC _power:"
+#~ msgstr "使用交流电源(_P)："
+
+#~ msgid "Put the computer to sleep when inactive:"
+#~ msgstr "计算机从无活动转入睡眠的等待时间："
+
+#~ msgid "_Turn off after:"
+#~ msgstr "定时关闭(_T)："
+
+#~ msgid "Mute"
+#~ msgstr "静音"
+
+#~ msgid "24-_Hour Time"
+#~ msgstr "24 小时格式(_H)"
+
+#~ msgid "Updates Available"
+#~ msgstr "有可用更新"
+
+#~ msgid "Region:"
+#~ msgstr "地区："
+
+#~ msgid "When the _sleep button is pressed:"
+#~ msgstr "按下睡眠按钮时(_S)："
+
+#~ msgid "When the p_ower button is pressed:"
+#~ msgstr "按下电源按钮时(_O)："
+
+#~ msgid "Keyboard;Mouse;a11y;Accessibility;"
+#~ msgstr "键盘;鼠标;a11y;辅助功能;"
 
 #~ msgid "%u byte"
 #~ msgid_plural "%u bytes"
