@@ -1,4 +1,101 @@
 ===========================
+Version 3.1.92 (2011-09-19)
+===========================
+
+Color:
+- Fix help links for gnome-help 3.1* (Jeremy Bicha)
+- Don't assert if the user double clicks the delete profile button (Richard Hughes)
+- Fix spawning of gcm-viewer (Matthias Clasen)
+- Do not allow the user to choose profiles owned by other users (Richard Hughes)
+- Do not allow the user to set default a profile they cannot access (Richard Hughes)
+- Disable 'View details' button if gcm-viewer is not installed (Rodrigo Moya)
+- Escape profile titles that have markup in the titles (Richard Hughes) (#659127)
+- Pack the left and right button groups into two GtkBox containers (Cosimo Cecchi) (#659273)
+
+Common:
+- Add a way for panels to receive additional arguments (Giovanni Campagna) (#657093)
+- Bump GTK+ deps (Bastien Nocera)
+- Tell the actual required version for NM (Bastien Nocera)
+
+Display:
+- Remove duplicate/unused translations (Bastien Nocera)
+
+Info:
+- Don't warn when the hostname is empty (Bastien Nocera)
+- Do fallback correctly when reading hostnames (Bastien Nocera)
+- Split the hostname setting (Bastien Nocera)
+
+Keyboard:
+- Link directly to the layouts page (Bastien Nocera)
+
+Network:
+- Show wireless dialogs when asked (Giovanni Campagna) (#657093)
+- Fix memleak when argv changes (Bastien Nocera)
+- A segfault was introduced when assigning to args (Alban Browaeys) (#658670)
+- Bind HTTP host entry to the 'host' setting in GSettings (Rodrigo Moya)
+
+Printers:
+- Match lower-case properly (Marek Kasik)
+
+Region:
+- Add ability to switch pages (Bastien Nocera)
+- Fix display of layouts on the system tab (Matthias Clasen)
+- Only offer to copy settings if they are different (Matthias Clasen)
+
+Screen:
+- Don't fill up the space (Bastien Nocera)
+- Fix resulting top-padding (Bastien Nocera) (#657606)
+- Remove indent on "Turn off..." label (Bastien Nocera)
+
+Shell:
+- Replace window sizing code (Bastien Nocera) (#658068)
+
+Sound:
+- Put the level bar at 0 when muting (Bastien Nocera) (#644537)
+- Allow switching tabs from the command-line (Bastien Nocera)
+
+Universal access:
+- Fix sensitivity of keyboard a11y (Bastien Nocera) (#649452)
+- Add context for text sizes (Bastien Nocera) (#645729)
+- Set contrast combo on startup (Michael Terry) (#658990)
+
+User accounts:
+- Hide old message when enrolling (Bastien Nocera)
+
+Wacom:
+- Add a left-handed switch (Peter Hutterer) (#657810)
+- Improve alignment of lines and widgets (Jakub Steiner) (#657425)
+- Make string as translatable (Bastien Nocera)
+
+Translations:
+- ast (Xandru Armesto)
+- be (Ihar Hrachyshka)
+- bg (Ivaylo Valkov)
+- de (Mario Blättermann)
+- en_GB (Bruce Cowan)
+- es (Jorge González, Daniel Mustieles)
+- fa (Arash Mousavi)
+- gl (Fran Dieguez)
+- hu (Gabor Kelemen)
+- id (Andika Triwidada)
+- it (Luca Ferretti)
+- ko (Changwoo Ryu, Seong-ho, Cho)
+- lt (Aurimas Černius)
+- lv (Rudolfs Mazurs)
+- nb (Kjartan Maraas)
+- pa (A S Alam)
+- pl (Piotr Drąg)
+- pt (Duarte Loreto)
+- pt_BR (Djavan Fagundes)
+- ru (Yuri Myasoedov)
+- sr (Мирослав Николић)
+- sv (Daniel Nylander)
+- ta (Dr.T.Vasudevan)
+- th (Theppitak Karoonboonyanan)
+- vi (Nguyễn Thái Ngọc Duy)
+- zh_CN (Aron Xu)
+
+===========================
 Version 3.1.91 (2011-09-05)
 ===========================
 
