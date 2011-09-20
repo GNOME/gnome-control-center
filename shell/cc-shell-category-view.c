@@ -173,6 +173,7 @@ cc_shell_category_view_constructed (GObject *object)
       gtk_label_set_attributes (GTK_LABEL (label), attrs);
       pango_attr_list_unref (attrs);
       gtk_frame_set_label_widget (GTK_FRAME (object), label);
+      gtk_widget_show (label);
 
       g_signal_connect (label, "style-set", G_CALLBACK (label_style_set_cb),
                         NULL);
