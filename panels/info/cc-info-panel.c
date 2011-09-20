@@ -597,18 +597,19 @@ query_done (GFile        *file,
 
   self->priv->cancellable = NULL;
   info = g_file_query_filesystem_info_finish (file, res, &error);
-  if (info == NULL)
+  if (info != NULL)
+    {
+      self->priv->total_bytes += g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_FILESYSTEM_SIZE);
+      g_object_unref (info);
+    }
+  else
     {
       char *path;
       path = g_file_get_path (file);
       g_warning ("Failed to get filesystem free space for '%s': %s", path, error->message);
       g_free (path);
       g_error_free (error);
-      return;
     }
-
-  self->priv->total_bytes += g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_FILESYSTEM_SIZE);
-  g_object_unref (info);
 
   /* And onto the next element */
   get_primary_disc_info_start (self);
