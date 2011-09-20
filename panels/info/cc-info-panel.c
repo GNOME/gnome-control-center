@@ -1585,6 +1585,7 @@ info_panel_set_hostname (CcInfoPanel *self,
     {
       g_warning ("Could not set PrettyHostname: %s", error->message);
       g_error_free (error);
+      error = NULL;
     }
   else
     {
