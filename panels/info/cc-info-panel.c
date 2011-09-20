@@ -1812,7 +1812,8 @@ on_pk_get_tid_ready (GObject      *source,
   result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
   if (result == NULL)
     {
-      g_warning ("Error getting PackageKit transaction ID: %s", error->message);
+      if (g_error_matches (error, G_DBUS_ERROR, G_DBUS_ERROR_SERVICE_UNKNOWN) == FALSE)
+        g_warning ("Error getting PackageKit transaction ID: %s", error->message);
       g_error_free (error);
       return;
     }
