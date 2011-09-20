@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-09-19 01:18+0000\n"
-"PO-Revision-Date: 2011-09-19 12:08+0100\n"
+"POT-Creation-Date: 2011-09-20 01:38+0000\n"
+"PO-Revision-Date: 2011-09-20 10:12+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -358,18 +358,22 @@ msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Pult;Projektor;xrandr;Zaslon;Ločljivost;Osveževanje;"
 
 #: ../panels/display/cc-display-panel.c:477
+msgctxt "display panel, rotation"
 msgid "Normal"
 msgstr "Običajno"
 
 #: ../panels/display/cc-display-panel.c:478
+msgctxt "display panel, rotation"
 msgid "Counterclockwise"
 msgstr "Obratno urinemu kazalcu"
 
 #: ../panels/display/cc-display-panel.c:479
+msgctxt "display panel, rotation"
 msgid "Clockwise"
 msgstr "V smeri urinega kazalca"
 
 #: ../panels/display/cc-display-panel.c:480
+msgctxt "display panel, rotation"
 msgid "180 Degrees"
 msgstr "180 stopinj"
 
@@ -425,14 +429,14 @@ msgid "Could not get screen information"
 msgstr "Ni mogoče dobiti podatkov zaslona"
 
 #. Translators: VESA is an techncial acronym, don't translate it.
-#: ../panels/info/cc-info-panel.c:385
+#: ../panels/info/cc-info-panel.c:402
 #, c-format
 msgid "VESA: %s"
 msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:409
+#: ../panels/info/cc-info-panel.c:426
 #: ../panels/network/panel-common.c:79
 #: ../panels/network/panel-common.c:158
 msgid "Unknown"
@@ -440,72 +444,158 @@ msgstr "Neznano"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:558
+#: ../panels/info/cc-info-panel.c:587
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bitno"
 
-#: ../panels/info/cc-info-panel.c:714
+#: ../panels/info/cc-info-panel.c:743
 msgid "Unknown model"
 msgstr "Neznan model"
 
-#: ../panels/info/cc-info-panel.c:797
+#: ../panels/info/cc-info-panel.c:826
 msgid "The next login will attempt to use the standard experience."
 msgstr "Ob naslednji prijavi bo uporabljena običajna izkušnja."
 
-#: ../panels/info/cc-info-panel.c:799
+#: ../panels/info/cc-info-panel.c:828
 msgid "The next login will use the fallback mode intended for unsupported graphics hardware."
 msgstr "Ob naslednji prijavi bo uporabljen zasilni način, ki je namenjen za nepodprto grafično strojno opremo "
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:841
+#: ../panels/info/cc-info-panel.c:870
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "Povratno"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:847
+#: ../panels/info/cc-info-panel.c:876
 msgctxt "Experience"
 msgid "Standard"
 msgstr "Običajna"
 
-#: ../panels/info/cc-info-panel.c:987
+#: ../panels/info/cc-info-panel.c:1199
+msgid "Ask what to do"
+msgstr "Vprašaj kaj storiti"
+
+#: ../panels/info/cc-info-panel.c:1203
+#: ../panels/power/power.ui.h:6
+msgid "Do nothing"
+msgstr "Ne naredi ničesar"
+
+#: ../panels/info/cc-info-panel.c:1207
+msgid "Open folder"
+msgstr "Odpri mapo"
+
+#: ../panels/info/cc-info-panel.c:1318
+msgid "Select an application for audio CDs"
+msgstr "Izbor programa za zvočne CD-je"
+
+#: ../panels/info/cc-info-panel.c:1319
+msgid "Select an application for video DVDs"
+msgstr "Izberite program za video DVD-je"
+
+#: ../panels/info/cc-info-panel.c:1320
+msgid "Select an application to run when a music player is connected"
+msgstr "Izberite kateri program naj se zažene, ko je predvajalnik glasbe povezan"
+
+#: ../panels/info/cc-info-panel.c:1321
+msgid "Select an application to run when a camera is connected"
+msgstr "Izberite program, ki naj teče, ko je povezan fotoaparat"
+
+#: ../panels/info/cc-info-panel.c:1322
+msgid "Select an application for software CDs"
+msgstr "Izbor programa za programske CD-je"
+
+#. translators: these strings are duplicates of shared-mime-info
+#. * strings, just here to fix capitalization of the English originals.
+#. * If the shared-mime-info translation works for your language,
+#. * simply leave these untranslated.
+#.
+#: ../panels/info/cc-info-panel.c:1334
+msgid "audio DVD"
+msgstr "zvočni DVD"
+
+#: ../panels/info/cc-info-panel.c:1335
+msgid "blank Blu-ray disc"
+msgstr "prazen Blu-Ray disk"
+
+#: ../panels/info/cc-info-panel.c:1336
+msgid "blank CD disc"
+msgstr "prazen CD disk"
+
+#: ../panels/info/cc-info-panel.c:1337
+msgid "blank DVD disc"
+msgstr "prazen DVD disk"
+
+#: ../panels/info/cc-info-panel.c:1338
+msgid "blank HD DVD disc"
+msgstr "Prazen HD DVD disk"
+
+#: ../panels/info/cc-info-panel.c:1339
+msgid "Blu-ray video disc"
+msgstr "Blu-ray video disk"
+
+#: ../panels/info/cc-info-panel.c:1340
+msgid "e-book reader"
+msgstr "Bralnik e-knjig"
+
+#: ../panels/info/cc-info-panel.c:1341
+msgid "HD DVD video disc"
+msgstr "HD DVD video disk"
+
+#: ../panels/info/cc-info-panel.c:1342
+msgid "Picture CD"
+msgstr "Slikovni CD"
+
+#: ../panels/info/cc-info-panel.c:1343
+msgid "Super Video CD"
+msgstr "Super Video CD"
+
+#: ../panels/info/cc-info-panel.c:1344
+msgid "Video CD"
+msgstr "Video CD"
+
+#: ../panels/info/cc-info-panel.c:1473
 #: ../panels/keyboard/keyboard-shortcuts.c:1762
 msgid "Section"
 msgstr "Odsek"
 
-#: ../panels/info/cc-info-panel.c:996
-#: ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1482
+#: ../panels/info/info.ui.h:15
 msgid "Overview"
 msgstr "Pregled"
 
-#: ../panels/info/cc-info-panel.c:1002
-#: ../panels/info/info.ui.h:2
+#: ../panels/info/cc-info-panel.c:1488
+#: ../panels/info/info.ui.h:4
 msgid "Default Applications"
 msgstr "Privzeti programi"
 
-#: ../panels/info/cc-info-panel.c:1007
-#: ../panels/info/info.ui.h:9
+#: ../panels/info/cc-info-panel.c:1493
+#: ../panels/info/info.ui.h:17
+msgid "Removable Media"
+msgstr "Odstranljiv medij"
+
+#: ../panels/info/cc-info-panel.c:1498
+#: ../panels/info/info.ui.h:11
 msgid "Graphics"
 msgstr "Grafika"
 
-#: ../panels/info/cc-info-panel.c:1194
+#: ../panels/info/cc-info-panel.c:1699
 #, c-format
 msgid "Version %s"
 msgstr "Različica %s"
 
-#: ../panels/info/cc-info-panel.c:1244
+#: ../panels/info/cc-info-panel.c:1749
 msgid "Install Updates"
 msgstr "Namesti posodobitve"
 
-#: ../panels/info/cc-info-panel.c:1248
-#, fuzzy
+#: ../panels/info/cc-info-panel.c:1753
 msgid "System Up-To-Date"
-msgstr "Uporabljate najnovejšo različico sistema."
+msgstr "Sistem je posodobljen."
 
-#: ../panels/info/cc-info-panel.c:1252
+#: ../panels/info/cc-info-panel.c:1757
 msgid "Checking for Updates"
 msgstr "Preverjanje za posodobitve"
 
@@ -519,67 +609,111 @@ msgstr "Sistemski podatki"
 
 #. sure that you use the same "translation" for those keywords
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
-msgid "device;system;information;memory;processor;version;default;application;fallback;preferred;"
-msgstr "naprava;sistem;podrobnosti;pomnilnik;procesor;različica;privzeto;program;povrnjeno:prednostno;"
+msgid "device;system;information;memory;processor;version;default;application;fallback;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
+msgstr "naprava;sistem;podrobnosti;pomnilnik;procesor;različica;privzeto;program;povrnjeno:prednostno;cd;dvd;usb;zvok;slika;video;disk;odstrani;predstavnost;samodejni zagon;"
 
 #: ../panels/info/info.ui.h:1
+msgid "Acti_on:"
+msgstr "_Dejanje:"
+
+#: ../panels/info/info.ui.h:2
+msgid "CD _audio:"
+msgstr "_Zvočni CD:"
+
+#: ../panels/info/info.ui.h:3
 msgid "Calculating..."
 msgstr "Preračunavanje ..."
 
-#: ../panels/info/info.ui.h:3
+#: ../panels/info/info.ui.h:5
 msgid "Device name"
 msgstr "Ime naprave"
 
-#: ../panels/info/info.ui.h:4
+#: ../panels/info/info.ui.h:6
 msgid "Disk"
 msgstr "Disk"
 
-#: ../panels/info/info.ui.h:5
+#: ../panels/info/info.ui.h:7
 msgid "Driver"
 msgstr "Gonilnik"
 
-#: ../panels/info/info.ui.h:6
+#: ../panels/info/info.ui.h:8
 msgid "Experience"
 msgstr "Izkušnja"
 
 #. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
-#: ../panels/info/info.ui.h:8
+#: ../panels/info/info.ui.h:10
 msgid "Forced _Fallback Mode"
 msgstr "Vsiljen _povrnitveni način"
 
-#: ../panels/info/info.ui.h:10
+#: ../panels/info/info.ui.h:12
 msgid "M_usic"
 msgstr "_Glasba"
 
-#: ../panels/info/info.ui.h:11
+#: ../panels/info/info.ui.h:13
 msgid "Memory"
 msgstr "Pomnilnik"
 
-#: ../panels/info/info.ui.h:12
+#: ../panels/info/info.ui.h:14
 msgid "OS type"
 msgstr "Vrsta OS"
 
-#: ../panels/info/info.ui.h:14
+#: ../panels/info/info.ui.h:16
 msgid "Processor"
 msgstr "Procesor"
 
-#: ../panels/info/info.ui.h:15
+#: ../panels/info/info.ui.h:18
+msgid "Select how media should be handled"
+msgstr "Izberite kako želite upravljati medij"
+
+#: ../panels/info/info.ui.h:19
+msgid "Select how other media should be handled"
+msgstr "Izberite kako upravljati z drugimi mediji"
+
+#: ../panels/info/info.ui.h:20
 msgid "_Calendar"
 msgstr "_Koledar"
 
-#: ../panels/info/info.ui.h:16
+#: ../panels/info/info.ui.h:21
+msgid "_DVD video:"
+msgstr "_DVD Video:"
+
+#: ../panels/info/info.ui.h:22
 msgid "_Mail"
 msgstr "Elektronska _pošta"
 
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:23
+msgid "_Music player:"
+msgstr "_Predvajalnik glasbe:"
+
+#: ../panels/info/info.ui.h:24
+msgid "_Never prompt or start programs on media insertion"
+msgstr "_Nikoli ne pozovi zaženi programov ob vstavitvi medija"
+
+#: ../panels/info/info.ui.h:25
+msgid "_Other Media..."
+msgstr "_Drug medij ..."
+
+#: ../panels/info/info.ui.h:26
 msgid "_Photos"
 msgstr "_Fotografije"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:27
+msgid "_Photos:"
+msgstr "_Fotografije:"
+
+#: ../panels/info/info.ui.h:28
+msgid "_Software:"
+msgstr "_Programska oprema:"
+
+#: ../panels/info/info.ui.h:29
+msgid "_Type:"
+msgstr "Vrs_ta:"
+
+#: ../panels/info/info.ui.h:30
 msgid "_Video"
 msgstr "_Video"
 
-#: ../panels/info/info.ui.h:19
+#: ../panels/info/info.ui.h:31
 msgid "_Web"
 msgstr "_Splet"
 
@@ -850,7 +984,7 @@ msgstr "Nastavitve postavitve"
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:38
 msgid "Long"
 msgstr "Dolga"
 
@@ -869,7 +1003,7 @@ msgstr "_Hitrost:"
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 #: ../panels/mouse/gnome-mouse-properties.ui.h:23
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:53
 msgid "Short"
 msgstr "Kratka"
 
@@ -888,7 +1022,7 @@ msgid "To edit a shortcut, click the row and hold down the new keys or press Bac
 msgstr "Za urejanje bližnjice kliknite ustrezno vrstico in vnesite novo bližnjico ali pa izbrišite staro."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Typing"
 msgstr "Tipkanje"
 
@@ -904,190 +1038,47 @@ msgstr "_Ime:"
 msgid "_Speed:"
 msgstr "_Hitrost:"
 
-#: ../panels/media/cc-media-panel.c:315
-msgid "Ask what to do"
-msgstr "Vprašaj kaj storiti"
-
-#: ../panels/media/cc-media-panel.c:319
-#: ../panels/power/power.ui.h:6
-msgid "Do nothing"
-msgstr "Ne naredi ničesar"
-
-#: ../panels/media/cc-media-panel.c:323
-msgid "Open folder"
-msgstr "Odpri mapo"
-
-#: ../panels/media/cc-media-panel.c:434
-msgid "Select an application for audio CDs"
-msgstr "Izbor programa za zvočne CD-je"
-
-#: ../panels/media/cc-media-panel.c:435
-msgid "Select an application for video DVDs"
-msgstr "Izberite program za video DVD-je"
-
-#: ../panels/media/cc-media-panel.c:436
-msgid "Select an application to run when a music player is connected"
-msgstr "Izberite kateri program naj se zažene, ko je predvajalnik glasbe povezan"
-
-#: ../panels/media/cc-media-panel.c:437
-msgid "Select an application to run when a camera is connected"
-msgstr "Izberite program, ki naj teče, ko je povezan fotoaparat"
-
-#: ../panels/media/cc-media-panel.c:438
-msgid "Select an application for software CDs"
-msgstr "Izbor programa za programske CD-je"
-
-#. translators: these strings are duplicates of shared-mime-info
-#. * strings, just here to fix capitalization of the English originals.
-#. * If the shared-mime-info translation works for your language,
-#. * simply leave these untranslated.
-#.
-#: ../panels/media/cc-media-panel.c:450
-msgid "audio DVD"
-msgstr "zvočni DVD"
-
-#: ../panels/media/cc-media-panel.c:451
-msgid "blank Blu-ray disc"
-msgstr "prazen Blu-Ray disk"
-
-#: ../panels/media/cc-media-panel.c:452
-msgid "blank CD disc"
-msgstr "prazen CD disk"
-
-#: ../panels/media/cc-media-panel.c:453
-msgid "blank DVD disc"
-msgstr "prazen DVD disk"
-
-#: ../panels/media/cc-media-panel.c:454
-msgid "blank HD DVD disc"
-msgstr "Prazen HD DVD disk"
-
-#: ../panels/media/cc-media-panel.c:455
-msgid "Blu-ray video disc"
-msgstr "Blu-ray video disk"
-
-#: ../panels/media/cc-media-panel.c:456
-msgid "e-book reader"
-msgstr "Bralnik e-knjig"
-
-#: ../panels/media/cc-media-panel.c:457
-msgid "HD DVD video disc"
-msgstr "HD DVD video disk"
-
-#: ../panels/media/cc-media-panel.c:458
-msgid "Picture CD"
-msgstr "Slikovni CD"
-
-#: ../panels/media/cc-media-panel.c:459
-msgid "Super Video CD"
-msgstr "Super Video CD"
-
-#: ../panels/media/cc-media-panel.c:460
-msgid "Video CD"
-msgstr "Video CD"
-
-#: ../panels/media/gnome-media-properties.ui.h:1
-msgid "Acti_on:"
-msgstr "_Dejanje:"
-
-#: ../panels/media/gnome-media-properties.ui.h:2
-msgid "CD _audio:"
-msgstr "_Zvočni CD:"
-
-#: ../panels/media/gnome-media-properties.ui.h:3
-msgid "Media and Autorun"
-msgstr "Medij in samodejno zaganjanje"
-
-#: ../panels/media/gnome-media-properties.ui.h:4
-msgid "Select how media should be handled"
-msgstr "Izberite kako želite upravljati medij"
-
-#: ../panels/media/gnome-media-properties.ui.h:5
-msgid "Select how other media should be handled"
-msgstr "Izberite kako upravljati z drugimi mediji"
-
-#: ../panels/media/gnome-media-properties.ui.h:6
-msgid "_DVD video:"
-msgstr "_DVD Video:"
-
-#: ../panels/media/gnome-media-properties.ui.h:7
-msgid "_Music player:"
-msgstr "_Predvajalnik glasbe:"
-
-#: ../panels/media/gnome-media-properties.ui.h:8
-msgid "_Never prompt or start programs on media insertion"
-msgstr "_Nikoli ne pozovi zaženi programov ob vstavitvi medija"
-
-#: ../panels/media/gnome-media-properties.ui.h:9
-msgid "_Other Media..."
-msgstr "_Drug medij ..."
-
-#: ../panels/media/gnome-media-properties.ui.h:10
-msgid "_Photos:"
-msgstr "_Fotografije:"
-
-#: ../panels/media/gnome-media-properties.ui.h:11
-msgid "_Software:"
-msgstr "_Programska oprema:"
-
-#: ../panels/media/gnome-media-properties.ui.h:12
-msgid "_Type:"
-msgstr "Vrs_ta:"
-
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:1
-msgid "Configure media and autorun preferences"
-msgstr "Nastavit možnosti medijev in samodejnega poganjanja"
-
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:2
-msgid "Removable Media"
-msgstr "Odstranljiv medij"
-
-#. Translators: those are keywords for the media control-center panel
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:4
-msgid "cd;dvd;usb;audio;video;disc;"
-msgstr "cd;dvd;usb;zvok;video;disk;"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:308
+#: ../panels/online-accounts/cc-online-accounts-panel.c:305
 msgid "Error logging into the account"
 msgstr "Napaka med prijavljanjem v račun"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:354
+#: ../panels/online-accounts/cc-online-accounts-panel.c:351
 msgid "Expired credentials. Please log in again."
 msgstr "Poverilo je pretečeno. Za nadaljevanje se je treba znova prijaviti. "
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:357
+#: ../panels/online-accounts/cc-online-accounts-panel.c:354
 msgid "_Log In"
 msgstr "_Prijava"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:466
+#: ../panels/online-accounts/cc-online-accounts-panel.c:463
 msgid "To add a new account, first select the account type"
 msgstr "Za dodajanje novega računa je treba najprej izbrati vrsto."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:469
+#: ../panels/online-accounts/cc-online-accounts-panel.c:466
 msgid "Account Type:"
 msgstr "Vrsta računa:"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:501
+#: ../panels/online-accounts/cc-online-accounts-panel.c:499
 msgid "_Add..."
 msgstr "_Dodaj ..."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:554
+#: ../panels/online-accounts/cc-online-accounts-panel.c:552
 msgid "Error creating account"
 msgstr "Napaka med ustvarjanjem računa"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:588
+#: ../panels/online-accounts/cc-online-accounts-panel.c:586
 msgid "Error removing account"
 msgstr "Napaka med odstranjevanjem računa"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:624
+#: ../panels/online-accounts/cc-online-accounts-panel.c:622
 msgid "Are you sure you want to remove the account?"
 msgstr "Ali ste prepričani, da želite izbrisati račun?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:626
+#: ../panels/online-accounts/cc-online-accounts-panel.c:624
 msgid "This will not remove the account on the server."
 msgstr "S tem dejanjem ne bo odstranjen račun s strežnika."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:627
+#: ../panels/online-accounts/cc-online-accounts-panel.c:625
 msgid "_Remove"
 msgstr "_Odstrani"
 
@@ -1351,7 +1342,7 @@ msgstr "Dobivanje naprav ..."
 
 #: ../panels/printers/pp-new-printer-dialog.c:1262
 msgid "FirewallD is not running. Network printer detection needs services mdns, ipp, ipp-client and samba-client enabled on firewall."
-msgstr ""
+msgstr "Ozadnjii program FirewallD ni zagnan. Zaznavanje omrežnega tiskalnika zahteva vključene storitve za mDNS, IPP, ipp-client in samba-client."
 
 #. Translators: Column of devices which can be installed
 #: ../panels/printers/pp-new-printer-dialog.c:1282
@@ -1383,15 +1374,15 @@ msgstr "Samodejna nastavitev"
 
 #: ../panels/printers/pp-new-printer-dialog.c:1750
 msgid "Opening firewall for mDNS connections"
-msgstr ""
+msgstr "Odpiranje požarnega zidu za povezave mDNS"
 
 #: ../panels/printers/pp-new-printer-dialog.c:1759
 msgid "Opening firewall for Samba connections"
-msgstr ""
+msgstr "Odpiranje požarnega zidu za povezave Samba"
 
 #: ../panels/printers/pp-new-printer-dialog.c:1768
 msgid "Opening firewall for IPP connections"
-msgstr ""
+msgstr "Odpiranje požarnega zidu za povezave IPP"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
 #: ../panels/printers/printers.ui.h:2
@@ -1580,12 +1571,11 @@ msgstr "Povrni na _privzeto"
 
 #: ../panels/region/gnome-region-panel.ui.h:22
 msgid "Select a display language (change will be applied next time you log in)"
-msgstr "Izbor jezika namizja (sprememba bo uporabljen ob naslednji prijavi)"
+msgstr "Izbor jezika namizja (sprememba bo uporabljena ob naslednji prijavi)"
 
 #: ../panels/region/gnome-region-panel.ui.h:23
-#, fuzzy
 msgid "Select a region (change will be applied the next time you log in)"
-msgstr "Izbor jezika namizja (sprememba bo uporabljen ob naslednji prijavi)"
+msgstr "Izbor področja (sprememba bo uporabljena ob naslednji prijavi)"
 
 #: ../panels/region/gnome-region-panel.ui.h:25
 msgid "System settings"
@@ -1593,9 +1583,8 @@ msgstr "Sistemske nastavitve"
 
 #: ../panels/region/gnome-region-panel.ui.h:26
 #: ../panels/region/gnome-region-panel-system.c:321
-#, fuzzy
 msgid "The login screen, system accounts and new user accounts use the system-wide Region and Language settings. You may change the system settings to match yours."
-msgstr "Prijavni zaslon, sistemski računi in novi uporabniški računi uporabljajo krajevne nastavitve in jezik. Te je mogoče kasneje prilagoditi vsakemu računu posebej."
+msgstr "Prijavni zaslon, sistemski računi in novi uporabniški računi uporabljajo sistemske nastavitve področij in jezika. Te je mogoče kasneje prilagoditi vsakemu računu posebej."
 
 #: ../panels/region/gnome-region-panel.ui.h:27
 msgid "Times"
@@ -1618,9 +1607,8 @@ msgid "_Options..."
 msgstr "_Možnosti ..."
 
 #: ../panels/region/gnome-region-panel-system.c:316
-#, fuzzy
 msgid "The login screen, system accounts and new user accounts use the system-wide Region and Language settings."
-msgstr "Prijavni zaslon, sistemski računi in novi uporabniški računi uporabljajo krajevne nastavitve in jezik. Te je mogoče kasneje prilagoditi vsakemu računu posebej."
+msgstr "Prijavni zaslon, sistemski računi in novi uporabniški računi uporabljajo sistemske nastavitve področij in jezika."
 
 #: ../panels/region/gnome-region-panel-system.c:324
 msgid "Copy Settings"
@@ -1679,7 +1667,7 @@ msgstr "Visoka"
 
 #. large threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:14
-#: ../panels/universal-access/uap.ui.h:35
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Large"
 msgstr "Velik"
 
@@ -1710,7 +1698,7 @@ msgstr "Pokaži _lego kazalnika, kadar je pritisnjena tipka Ctrl."
 
 #. small threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:27
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:57
 msgid "Small"
 msgstr "Majhen"
 
@@ -1813,7 +1801,7 @@ msgstr "Podjetniški"
 #. TRANSLATORS: this no (!) WiFi security
 #: ../panels/network/cc-network-panel.c:1128
 #: ../panels/network/cc-network-panel.c:1511
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "Brez"
 
@@ -2265,9 +2253,8 @@ msgid "Ask me"
 msgstr "Vprašaj me"
 
 #: ../panels/power/power.ui.h:7
-#, fuzzy
 msgid "Don't suspend"
-msgstr "_Nadaljuj/Ustavi"
+msgstr "Ne pošlji v pripravljenost"
 
 #: ../panels/power/power.ui.h:8
 msgid "Hibernate"
@@ -2286,14 +2273,12 @@ msgid "Suspend"
 msgstr "Naredi prehod v stanje pripravljenosti"
 
 #: ../panels/power/power.ui.h:12
-#, fuzzy
 msgid "Suspend when inactive for:"
-msgstr "Vključi podpis ob _posredovanju"
+msgstr "Pošlji v pripravljenost ob nedejavnosti:"
 
 #: ../panels/power/power.ui.h:13
-#, fuzzy
 msgid "When plugged in"
-msgstr "Priklop napajanja"
+msgstr "Ob priklopu"
 
 #: ../panels/power/power.ui.h:14
 msgid "When power is _critically low:"
@@ -2350,7 +2335,7 @@ msgstr "Vse datoteke"
 
 #. TRANSLATORS: column for device list
 #: ../panels/color/cc-color-panel.c:725
-#: ../panels/sound/gvc-mixer-dialog.c:1548
+#: ../panels/sound/gvc-mixer-dialog.c:1515
 msgid "Device"
 msgstr "Naprava"
 
@@ -2468,9 +2453,8 @@ msgstr "Ni določeno"
 
 #. add the 'No devices detected' entry
 #: ../panels/color/cc-color-panel.c:1779
-#, fuzzy
 msgid "No devices supporting color management detected"
-msgstr "Naprava ni nastavljena za upravljanje barv."
+msgstr "Ni zaznanih naprav s podporo za upravljanje barv."
 
 #: ../panels/color/cc-color-panel.c:2008
 msgctxt "Device kind"
@@ -2539,14 +2523,12 @@ msgid "Image files can be dragged on this window to auto-complete the above fiel
 msgstr "Slikovne datoteke je mogoče povleči v to okno za samodejno dopolnjevanje vnosnih polj."
 
 #: ../panels/color/color.ui.h:13
-#, fuzzy
 msgid "Learn more"
-msgstr "Več podrobnosti o namizju GNOME"
+msgstr "Več podrobnosti"
 
 #: ../panels/color/color.ui.h:14
-#, fuzzy
 msgid "Learn more about color management"
-msgstr "Izvedite več o zaganjanju programov."
+msgstr "Več podrobnosti o upravljanju barv"
 
 #: ../panels/color/color.ui.h:15
 msgid "Manufacturer:"
@@ -2636,8 +2618,8 @@ msgid "_Lock screen after:"
 msgstr "Zakleni _zaslon po:"
 
 #: ../panels/screen/screen.ui.h:17
-msgid "_Turn off after:"
-msgstr "_Izklopi po:"
+msgid "_Turn screen off when inactive for:"
+msgstr "Ugasni zaslon ob nedejavnosti:"
 
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
@@ -2652,7 +2634,7 @@ msgid " — GNOME Volume Control Applet"
 msgstr " — GNOME aplet nadzora glasnosti"
 
 #: ../panels/sound/gvc-applet.c:270
-#: ../panels/sound/gvc-mixer-dialog.c:1949
+#: ../panels/sound/gvc-mixer-dialog.c:1767
 msgid "Output"
 msgstr "Odvod"
 
@@ -2661,7 +2643,7 @@ msgid "Sound Output Volume"
 msgstr "Izhodna glasnost zvoka"
 
 #: ../panels/sound/gvc-applet.c:276
-#: ../panels/sound/gvc-mixer-dialog.c:1864
+#: ../panels/sound/gvc-mixer-dialog.c:1807
 msgid "Input"
 msgstr "Dovod"
 
@@ -2722,12 +2704,8 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "Neojačano"
 
-#: ../panels/sound/gvc-channel-bar.c:901
-msgid "Mute"
-msgstr "Utišaj"
-
 #: ../panels/sound/gvc-combo-box.c:167
-#: ../panels/sound/gvc-mixer-dialog.c:1654
+#: ../panels/sound/gvc-mixer-dialog.c:1621
 msgid "_Profile:"
 msgstr "_Profil:"
 
@@ -2757,76 +2735,76 @@ msgstr[3] "%u dovodi"
 msgid "System Sounds"
 msgstr "Sistemski zvoki"
 
-#: ../panels/sound/gvc-mixer-dialog.c:324
-#: ../panels/sound/gvc-mixer-dialog.c:635
+#: ../panels/sound/gvc-mixer-dialog.c:323
+#: ../panels/sound/gvc-mixer-dialog.c:634
 msgid "Co_nnector:"
 msgstr "_Spojnik:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:541
+#: ../panels/sound/gvc-mixer-dialog.c:540
 msgid "Peak detect"
 msgstr "Zaznava vrhov"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1530
-#: ../panels/sound/gvc-mixer-dialog.c:1742
+#: ../panels/sound/gvc-mixer-dialog.c:1496
+#: ../panels/sound/gvc-mixer-dialog.c:1709
 #: ../panels/sound/gvc-sound-theme-chooser.c:596
 msgid "Name"
 msgstr "Ime"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1596
+#: ../panels/sound/gvc-mixer-dialog.c:1563
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Preizkus zvočnikov za %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1655
+#: ../panels/sound/gvc-mixer-dialog.c:1622
 msgid "_Test Speakers"
 msgstr "Preizkus _zvočnikov"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1786
+#: ../panels/sound/gvc-mixer-dialog.c:1753
 msgid "_Output volume:"
 msgstr "_Glasnost izhoda:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1800
-msgid "Sound Effects"
-msgstr "Zvočni učinki"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1807
-msgid "_Alert volume:"
-msgstr "_Glasnost opozoril:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1820
-msgid "Hardware"
-msgstr "Strojna oprema"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1825
-msgid "C_hoose a device to configure:"
-msgstr "_Izbor naprave za nastavitev:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1853
-#: ../panels/sound/gvc-mixer-dialog.c:1978
-msgid "Settings for the selected device:"
-msgstr "Nastavitve izbrane naprave:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1871
-msgid "_Input volume:"
-msgstr "_Glasnost vhoda: "
-
-#: ../panels/sound/gvc-mixer-dialog.c:1894
-msgid "Input level:"
-msgstr "Raven dovoda:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1922
-msgid "C_hoose a device for sound input:"
-msgstr "_Izbor naprave za dovod zvoka:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1954
+#: ../panels/sound/gvc-mixer-dialog.c:1772
 msgid "C_hoose a device for sound output:"
 msgstr "_Izbor naprave za odvod zvoka:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1989
+#: ../panels/sound/gvc-mixer-dialog.c:1796
+#: ../panels/sound/gvc-mixer-dialog.c:1925
+msgid "Settings for the selected device:"
+msgstr "Nastavitve izbrane naprave:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1814
+msgid "_Input volume:"
+msgstr "_Glasnost vhoda: "
+
+#: ../panels/sound/gvc-mixer-dialog.c:1837
+msgid "Input level:"
+msgstr "Raven dovoda:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1865
+msgid "C_hoose a device for sound input:"
+msgstr "_Izbor naprave za dovod zvoka:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1892
+msgid "Hardware"
+msgstr "Strojna oprema"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1897
+msgid "C_hoose a device to configure:"
+msgstr "_Izbor naprave za nastavitev:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1936
+msgid "Sound Effects"
+msgstr "Zvočni učinki"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1943
+msgid "_Alert volume:"
+msgstr "_Glasnost opozoril:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1956
 msgid "Applications"
 msgstr "Programi"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1993
+#: ../panels/sound/gvc-mixer-dialog.c:1960
 msgid "No application is currently playing or recording audio."
 msgstr "Ni programa, ki bi trenutno predvajal ali snemal zvočni posnetek."
 
@@ -3033,7 +3011,7 @@ msgstr "Izberite sliko."
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
 msgid "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys"
-msgstr ""
+msgstr "Tipkovnica;Miška;a11y;Dostopnost;Kontrast;Približanje;Zaslonski bralnik;besedilo;pisava;velikost;AccessX;Lepljive tipke;Počasne tipke;Odskočne tipke;Tipke miške"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
@@ -3152,125 +3130,125 @@ msgstr "Prezre hitre podvojene pritiske tipk"
 msgid "Increase size:"
 msgstr "Povečava velikosti besedila:"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Keyboard Settings"
+msgstr "Nastavitve tipkovnice"
+
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Motion _threshold:"
 msgstr "_Prag premikanja:"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Mouse Keys"
 msgstr "Tipke miške"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:41
+msgid "Mouse Settings"
+msgstr "Nastavitve miške"
+
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Nomon"
 msgstr "Nomon"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:44
 msgid "On screen keyboard"
 msgstr "Zaslonska tipkovnica"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:45
 msgid "OnBoard"
 msgstr "OnBoard"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Options..."
 msgstr "Možnosti ..."
 
-#: ../panels/universal-access/uap.ui.h:45
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Pointing and Clicking"
 msgstr "Kazanje in klikanje"
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "Nastavi zamik med pritiskom in sprejemom tipke"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Screen Reader"
 msgstr "Zaslonski bralnik"
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Screen keyboard"
 msgstr "Zaslonska tipkovnica"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:51
 msgid "Seeing"
 msgstr "Izrisovanje"
 
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Simulated Secondary Click"
 msgstr "Oponašanje drugotnega klika"
 
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Slow Keys"
 msgstr "Počasne tipke"
 
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:58
+msgid "Sound Settings"
+msgstr "Nastavitve zvoka"
+
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Sticky Keys"
 msgstr "Lepljive tipke"
 
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Zaporedje spremenilnih tipk obravnava kot kombinacijo tipk"
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Trigger a click when the pointer hovers"
 msgstr "Sproži klik ob ledbenju kazalnika nad mestom"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Sproži drugotni klik s tiščanjem osnovnega gumba"
 
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Turn on or off:"
 msgstr "Vključi ali izključi:"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Type here to test settings"
 msgstr "Tipkajte tukaj za preizkus nastavitev"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Typing Assistant"
 msgstr "Pomočnik tipkanja"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "Uporabi vidni način zvočnih opozoril"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Video Mouse"
 msgstr "Video miška"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Visual Alerts"
 msgstr "Vidna opozorila"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Zoom in:"
 msgstr "Približaj:"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Zoom out:"
 msgstr "Oddalji:"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:72
 msgid "_Contrast:"
 msgstr "Kontrast:"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:73
 msgid "_Disable if two keys are pressed together"
 msgstr "_Onemogoči, če sta dve tipki pritisnjeni sočasno"
-
-#: ../panels/universal-access/uap.ui.h:71
-msgid "_Keyboard Settings"
-msgstr "Nastavitve _tipkovnice"
-
-#: ../panels/universal-access/uap.ui.h:72
-msgid "_Mouse Settings"
-msgstr "Nastavitve _miške"
-
-#: ../panels/universal-access/uap.ui.h:73
-msgid "_Sound Settings"
-msgstr "Nastavitve _zvoka"
 
 #: ../panels/universal-access/uap.ui.h:74
 msgid "_Test flash"
@@ -3948,14 +3926,12 @@ msgid "Calibrate..."
 msgstr "Umeri ..."
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:3
-#, fuzzy
 msgid "Eraser Pressure Feel"
-msgstr "Krivulja pritiska radirke Wacom"
+msgstr "Občutek pritiska radirke"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:4
-#, fuzzy
 msgid "Firm"
-msgstr "Zahtevano / Programska _strojna oprema"
+msgstr "Čvrsto"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "Forward"
@@ -3986,27 +3962,22 @@ msgid "Right Mouse Button Click"
 msgstr "Klik desnega gumba miške"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:12
-#, fuzzy
 msgid "Scroll Down"
-msgstr "Pomakni dol"
+msgstr "Zdrsni navzdol"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:13
-#, fuzzy
 msgid "Scroll Left"
-msgstr "Preostali kupček:"
+msgstr "Zdrsni v levo"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:14
-#, fuzzy
 msgid "Scroll Right"
-msgstr "Poravnava desno"
+msgstr "Zdrsni v desno"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:15
-#, fuzzy
 msgid "Scroll Up"
-msgstr "Pomakni gor"
+msgstr "Zdrsni navzgor"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:16
-#, fuzzy
 msgid "Soft"
 msgstr "Mehko"
 
@@ -4015,43 +3986,36 @@ msgid "Stylus"
 msgstr "Stylus"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:18
-#, fuzzy
 msgid "Tablet (absolute)"
-msgstr "Absolutni položaj"
+msgstr "Tablica (absolutno)"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:19
-#, fuzzy
 msgid "Tablet Preferences"
-msgstr "Možnosti programa"
+msgstr "Možnosti tablice"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:20
-#, fuzzy
 msgid "Tip Pressure Feel"
-msgstr "Videz in občutek"
+msgstr "Občutek pritiska konice"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:21
-#, fuzzy
 msgid "Top Button"
-msgstr "gumb"
+msgstr "Zgornji gumb"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:22
-#, fuzzy
 msgid "Touchpad (relative)"
-msgstr "Relativni položaj"
+msgstr "Sledilna ploščica (relativno)"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:23
-#, fuzzy
 msgid "Tracking Mode"
-msgstr "Način sledenja miške"
+msgstr "Način sledenja"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:24
 msgid "Wacom Tablet"
 msgstr "Tablica Wacom"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
-#, fuzzy
 msgid "Set your Wacom tablet preferences"
-msgstr "Nastavitve možnosti vaših kazalnih naprav"
+msgstr "Nastavitve možnosti tablice Wacom"
 
 #. Translators: those are keywords for the wacom tablet control-center panel
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:3
@@ -4059,9 +4023,8 @@ msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
 msgstr "Tablica;Wacom;Stylus;Eraser;Miška;"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:4
-#, fuzzy
 msgid "Wacom Graphics Tablet"
-msgstr "Vrtenje tablice Wacom"
+msgstr "Grafična tablica Wacom"
 
 #: ../shell/control-center.c:54
 msgid "Enable verbose mode"
@@ -4106,6 +4069,21 @@ msgstr "Nadzorno središče"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_Vse nastavitve"
+
+#~ msgid "Media and Autorun"
+#~ msgstr "Medij in samodejno zaganjanje"
+
+#~ msgid "Configure media and autorun preferences"
+#~ msgstr "Nastavit možnosti medijev in samodejnega poganjanja"
+
+#~ msgid "cd;dvd;usb;audio;video;disc;"
+#~ msgstr "cd;dvd;usb;zvok;video;disk;"
+
+#~ msgid "_Turn off after:"
+#~ msgstr "_Izklopi po:"
+
+#~ msgid "Mute"
+#~ msgstr "Utišaj"
 
 #~ msgid "24-_Hour Time"
 #~ msgstr "24-urna oblika časa"
