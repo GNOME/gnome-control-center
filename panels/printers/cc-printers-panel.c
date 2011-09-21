@@ -2285,7 +2285,7 @@ actualize_sensitivity (gpointer user_data)
   gtk_widget_set_sensitive (widget, local_server && is_authorized);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-remove-button");
-  gtk_widget_set_sensitive (widget, local_server && !is_discovered && is_authorized);
+  gtk_widget_set_sensitive (widget, local_server && !is_discovered && is_authorized && printer_selected);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-disable-switch");
   gtk_widget_set_sensitive (widget, local_server && !is_discovered && is_authorized);
