@@ -65,7 +65,7 @@ init_radio_group (GSList *radio_group,
                   ZoomOptionsPrivate *priv)
 {
     gchar *value;
-    gchar *name;
+    const gchar *name;
 
     value = g_settings_get_string (priv->settings, key);
 	for (; radio_group != NULL; radio_group = radio_group->next)
