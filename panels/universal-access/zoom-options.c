@@ -127,11 +127,11 @@ xhairs_color_opacity_changed_cb (GtkColorButton *button, ZoomOptionsPrivate *pri
     gtk_color_button_get_color (button, &rgb);
     color_string = gdk_color_to_string (&rgb);
 
-    // color_string is in the form '#rrrrggggbbbb'.  Convert to '#rrggbb'.
-    // Start by copying the leading '#'.
+    /* color_string is in the form '#rrrrggggbbbb', convert to '#rrggbb'.
+       Start by copying the leading '#' */
     g_strlcpy (gsetting_val, color_string, 4);
-    g_strlcpy (gsetting_val+3, color_string+5, 3);
-    g_strlcpy (gsetting_val+5, color_string+9, 3);
+    g_strlcpy (gsetting_val + 3, color_string + 5, 3);
+    g_strlcpy (gsetting_val + 5, color_string + 9, 3);
     g_settings_set_string (priv->settings, "cross-hairs-color", gsetting_val);
 
     gtk_color_button_get_rgba (button, &rgba);
@@ -143,7 +143,7 @@ static void xhairs_length_add_marks (GtkScale *scale)
     gint length, quarter_length;
     GtkAdjustment *scale_model;
 
-    // Get maximum dimension of screen.
+    /* Get maximum dimension of screen */
     length = MAX(gdk_screen_width(), gdk_screen_height());
     scale_model = gtk_range_get_adjustment (GTK_RANGE (scale));
     if (length < gtk_adjustment_get_upper(scale_model))
@@ -151,9 +151,9 @@ static void xhairs_length_add_marks (GtkScale *scale)
         gtk_adjustment_set_upper (scale_model, length);
       }
 
-    // The crosshair is made up of four lines in pairs (top, bottom) and
-    // (left, right).  Stipulating: "quarter of the screen" means that the
-    // length of one hair is 25% of the screen.
+    /* The crosshair is made up of four lines in pairs (top, bottom) and
+       (left, right).  Stipulating: "quarter of the screen" means that the
+       length of one hair is 25% of the screen. */
     quarter_length = length / 4;
 
     gtk_scale_add_mark (scale, quarter_length, GTK_POS_BOTTOM, _("1/4 Screen"));
