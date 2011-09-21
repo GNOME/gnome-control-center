@@ -41,20 +41,20 @@ static void xhairs_length_add_marks (GtkScale *scale);
 static void
 mouse_mode_radiobutton_toggled_cb (GtkWidget *widget, ZoomOptionsPrivate *priv)
 {
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)) == TRUE)
-	  {
+    if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)) == TRUE)
+      {
         g_settings_set_string (priv->settings, "mouse-tracking",
-	                           gtk_buildable_get_name (GTK_BUILDABLE (widget)));
+                               gtk_buildable_get_name (GTK_BUILDABLE (widget)));
       }
 }
 
 static void
 screen_position_radiobutton_toggled_cb (GtkWidget *widget, ZoomOptionsPrivate *priv)
 {
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)) == TRUE)
-	  {
+    if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)) == TRUE)
+      {
         g_settings_set_string (priv->settings, "screen-position",
-	                           gtk_buildable_get_name (GTK_BUILDABLE (widget)));
+                               gtk_buildable_get_name (GTK_BUILDABLE (widget)));
       }
 }
 
@@ -68,18 +68,18 @@ init_radio_group (GSList *radio_group,
     const gchar *name;
 
     value = g_settings_get_string (priv->settings, key);
-	for (; radio_group != NULL; radio_group = radio_group->next)
-	  {
-	    name = gtk_buildable_get_name (GTK_BUILDABLE (radio_group->data));
-	    if (strcmp (name, value) == 0)
-	      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio_group->data), TRUE);
-	    else
-	      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio_group->data), FALSE);
+    for (; radio_group != NULL; radio_group = radio_group->next)
+      {
+        name = gtk_buildable_get_name (GTK_BUILDABLE (radio_group->data));
+        if (strcmp (name, value) == 0)
+          gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio_group->data), TRUE);
+        else
+          gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio_group->data), FALSE);
 
-	    g_signal_connect (G_OBJECT (radio_group->data), "toggled",
+        g_signal_connect (G_OBJECT (radio_group->data), "toggled",
                           G_CALLBACK(radiobutton_toggled_cb),
                           priv);
-	  }
+      }
 }
 
 static void
@@ -179,7 +179,7 @@ zoom_options_dispose (GObject *object)
     {
       g_object_unref (priv->builder);
       priv->builder = NULL;
-	}
+    }
 
   if (priv->settings)
     {
@@ -243,8 +243,8 @@ zoom_options_init (ZoomOptions *self)
   /* Magnification factor */
   w = WID ("magFactorSpinButton");
   g_settings_bind (priv->settings, "mag-factor",
-				   gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (w)),
-				   "value", G_SETTINGS_BIND_DEFAULT);
+                   gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (w)),
+                   "value", G_SETTINGS_BIND_DEFAULT);
 
   /* Mouse tracking */
   w = WID ("proportional");
