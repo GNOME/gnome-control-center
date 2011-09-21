@@ -23,7 +23,7 @@
 #include <glib/gi18n.h>
 #include <string.h>
 
-#define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
+#define WID(w) (GtkWidget *) gtk_builder_get_object (priv->builder, w)
 
 struct _ZoomOptionsPrivate
 {
@@ -241,40 +241,40 @@ zoom_options_init (ZoomOptions *self)
   priv->settings = g_settings_new ("org.gnome.desktop.a11y.magnifier");
 
   /* Magnification factor */
-  w = WID (priv->builder, "magFactorSpinButton");
+  w = WID ("magFactorSpinButton");
   g_settings_bind (priv->settings, "mag-factor",
 				   gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (w)),
 				   "value", G_SETTINGS_BIND_DEFAULT);
 
   /* Mouse tracking */
-  w = WID (priv->builder, "proportional");
+  w = WID ("proportional");
   radio_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (w));
   init_radio_group (radio_group, "mouse-tracking",
                     G_CALLBACK(mouse_mode_radiobutton_toggled_cb), priv);
 
   /* Screen position */
-  w = WID (priv->builder, "full-screen");
+  w = WID ("full-screen");
   radio_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (w));
   init_radio_group (radio_group, "screen-position",
                     G_CALLBACK(screen_position_radiobutton_toggled_cb), priv);
 
   /* Lens mode */
-  w = WID (priv->builder, "moveableLensCheckbox");
+  w = WID ("moveableLensCheckbox");
   g_settings_bind (priv->settings, "lens-mode", w, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   /* Clamp scrolling at screen edges */
-  w = WID (priv->builder, "scrollAtEdges");
+  w = WID ("scrollAtEdges");
   g_settings_bind (priv->settings, "scroll-at-edges", w, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   /* Cross hairs: show/hide ... */
-  w = WID (priv->builder, "xhairsEnabledSwitch");
+  w = WID ("xhairsEnabledSwitch");
   g_settings_bind (priv->settings, "show-cross-hairs", w, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   /* ... Cross hairs: color and opacity */
-  w = WID (priv->builder, "xHairsPicker");
+  w = WID ("xHairsPicker");
   init_xhairs_color_opacity (GTK_COLOR_BUTTON (w), priv);
   g_signal_connect (G_OBJECT (priv->settings), "changed::cross-hairs-color",
                     G_CALLBACK (update_xhairs_color_cb), w);
@@ -285,26 +285,26 @@ zoom_options_init (ZoomOptions *self)
                     priv);
 
   /* ... Cross hairs: thickness ... */
-  w = WID (priv->builder, "xHairsThicknessSlider");
+  w = WID ("xHairsThicknessSlider");
   g_settings_bind (priv->settings, "cross-hairs-thickness",
                    gtk_range_get_adjustment (GTK_RANGE (w)), "value",
                    G_SETTINGS_BIND_DEFAULT);
 
   /* ... Cross hairs: clip ... */
-  w = WID (priv->builder, "xHairsClipCheckbox");
+  w = WID ("xHairsClipCheckbox");
   g_settings_bind (priv->settings, "cross-hairs-clip", w, "active",
                    G_SETTINGS_BIND_INVERT_BOOLEAN);
 
   /* ... Cross hairs: length */
-  w = WID (priv->builder, "xHairsLengthSlider");
+  w = WID ("xHairsLengthSlider");
   xhairs_length_add_marks (GTK_SCALE (w));
   g_settings_bind (priv->settings, "cross-hairs-length",
                    gtk_range_get_adjustment (GTK_RANGE (w)), "value",
                    G_SETTINGS_BIND_DEFAULT);
 
   /* ... Window itself ... */
-  priv->dialog = WID (priv->builder, "magPrefsDialog");
-  w = WID (priv->builder, "closeButton");
+  priv->dialog = WID ("magPrefsDialog");
+  w = WID ("closeButton");
   g_signal_connect (G_OBJECT (w), "clicked",
                     G_CALLBACK (zoom_option_close_dialog_cb),
                     priv);
