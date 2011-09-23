@@ -575,6 +575,7 @@ DBus method \"GroupPhysicalDevices\" to group duplicates in device list.");
         gtk_builder_get_object (pp->builder, "spinner");
       gtk_spinner_stop (GTK_SPINNER (widget));
       gtk_widget_set_sensitive (widget, FALSE);
+      gtk_widget_hide (widget);
 
       if (pp->cancellable != NULL)
         {
@@ -633,6 +634,7 @@ devices_get (PpNewPrinterDialog *pp)
         gtk_builder_get_object (pp->builder, "spinner");
       gtk_spinner_start (GTK_SPINNER (widget));
       gtk_widget_set_sensitive (widget, TRUE);
+      gtk_widget_show (widget);
 
       pp->cancellable = g_cancellable_new ();
 
