@@ -126,6 +126,7 @@ struct _PpNewPrinterDialog {
 
   gchar    *warning;
   gboolean  show_warning;
+  gboolean  searching;
 };
 
 static void
@@ -595,6 +596,8 @@ devices_get (PpNewPrinterDialog *pp)
   GVariantBuilder *in_exclude = NULL;
   GtkWidget *widget = NULL;
 
+  pp->searching = TRUE;
+
   proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                          G_DBUS_PROXY_FLAGS_NONE,
                                          NULL,
@@ -646,6 +649,8 @@ devices_get (PpNewPrinterDialog *pp)
       g_variant_builder_unref (in_include);
       g_variant_unref (dg_input);
     }
+
+  pp->searching = FALSE;
 }
 
 static gchar **
@@ -914,6 +919,8 @@ search_address_cb (GtkToggleButton *togglebutton,
   GtkWidget *widget;
   gint i;
 
+  pp->searching = TRUE;
+
   widget = (GtkWidget*)
     gtk_builder_get_object (pp->builder, "search-by-address-checkbutton");
 
@@ -1125,6 +1132,8 @@ search_address_cb (GtkToggleButton *togglebutton,
       pp->num_devices = length;
     }
 
+  pp->searching = FALSE;
+
   actualize_devices_list (pp);
 }
 
@@ -1139,6 +1148,8 @@ actualize_devices_list (PpNewPrinterDialog *pp)
   GtkTreeIter   iter;
   GtkWidget    *treeview;
   GtkWidget    *widget;
+  gboolean      no_local_device = TRUE;
+  gboolean      no_network_device = TRUE;
   gint          i;
   gint          device_type = -1;
 
@@ -1169,6 +1180,7 @@ actualize_devices_list (PpNewPrinterDialog *pp)
                                   DEVICE_NAME_COLUMN, pp->devices[i].display_name,
                                   -1);
               pp->show_warning = FALSE;
+              no_network_device = FALSE;
             }
           else if (g_strcmp0 (pp->devices[i].device_class, "direct") == 0)
             {
@@ -1177,19 +1189,48 @@ actualize_devices_list (PpNewPrinterDialog *pp)
                                   DEVICE_ID_COLUMN, i,
                                   DEVICE_NAME_COLUMN, pp->devices[i].display_name,
                                   -1);
+              no_local_device = FALSE;
             }
         }
     }
 
+  if (no_local_device && !pp->searching)
+    {
+      gtk_list_store_append (local_store, &iter);
+      gtk_list_store_set (local_store, &iter,
+                          DEVICE_ID_COLUMN, 0,
+      /* Translators: No localy connected printers were found */
+                          DEVICE_NAME_COLUMN, _("No local printers found"),
+                          -1);
+      gtk_widget_set_sensitive (GTK_WIDGET (local_treeview), FALSE);
+    }
+  else
+    gtk_widget_set_sensitive (GTK_WIDGET (local_treeview), TRUE);
+
+  if (no_network_device && !pp->show_warning && !pp->searching)
+    {
+      gtk_list_store_append (network_store, &iter);
+      gtk_list_store_set (network_store, &iter,
+                          DEVICE_ID_COLUMN, 0,
+      /* Translators: No network printers were found */
+                          DEVICE_NAME_COLUMN, _("No network printers found"),
+                          -1);
+      gtk_widget_set_sensitive (GTK_WIDGET (network_treeview), FALSE);
+    }
+  else
+    gtk_widget_set_sensitive (GTK_WIDGET (network_treeview), TRUE);
+
   gtk_tree_view_set_model (network_treeview, GTK_TREE_MODEL (network_store));
   gtk_tree_view_set_model (local_treeview, GTK_TREE_MODEL (local_store));
 
-  if (gtk_tree_model_get_iter_first ((GtkTreeModel *) network_store, &iter))
+  if (!no_network_device &&
+      gtk_tree_model_get_iter_first ((GtkTreeModel *) network_store, &iter))
     gtk_tree_selection_select_iter (
       gtk_tree_view_get_selection (GTK_TREE_VIEW (network_treeview)),
       &iter);
 
-  if (gtk_tree_model_get_iter_first ((GtkTreeModel *) local_store, &iter))
+  if (!no_local_device &&
+      gtk_tree_model_get_iter_first ((GtkTreeModel *) local_store, &iter))
     gtk_tree_selection_select_iter (
       gtk_tree_view_get_selection (GTK_TREE_VIEW (local_treeview)),
       &iter);
@@ -2034,6 +2075,7 @@ pp_new_printer_dialog_new (GtkWindow            *parent,
   gtk_window_present (GTK_WINDOW (pp->dialog));
   gtk_widget_show_all (GTK_WIDGET (pp->dialog));
 
+  pp->searching = TRUE;
   populate_device_types_list (pp);
   populate_devices_list (pp);
 
