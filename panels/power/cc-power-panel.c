@@ -602,6 +602,10 @@ cc_power_panel_init (CcPowerPanel *self)
 
   /* auto-sleep time */
   value = g_settings_get_int (self->priv->gsd_settings, "sleep-inactive-ac-timeout");
+  if (!g_settings_get_boolean (self->priv->gsd_settings, "sleep-inactive-ac"))
+    {
+      value = 0;
+    }
   widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
                                                "combobox_sleep_ac"));
   set_value_for_combo (GTK_COMBO_BOX (widget), value);
@@ -610,6 +614,10 @@ cc_power_panel_init (CcPowerPanel *self)
                     G_CALLBACK (combo_time_changed_cb),
                     self);
   value = g_settings_get_int (self->priv->gsd_settings, "sleep-inactive-battery-timeout");
+  if (!g_settings_get_boolean (self->priv->gsd_settings, "sleep-inactive-battery"))
+    {
+      value = 0;
+    }
   widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
                                                "combobox_sleep_battery"));
   set_value_for_combo (GTK_COMBO_BOX (widget), value);
