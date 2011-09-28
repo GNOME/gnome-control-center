@@ -621,6 +621,8 @@ setup_search (GnomeControlCenter *shell)
 
   g_signal_connect (widget, "icon-release", G_CALLBACK (search_entry_clear_cb),
                     priv);
+
+  gtk_widget_show (priv->search_view);
 }
 
 static void
