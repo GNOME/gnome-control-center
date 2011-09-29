@@ -388,7 +388,6 @@ combo_time_changed_cb (GtkWidget *widget, CcPowerPanel *self)
   gint value;
   gboolean ret;
   const gchar *key = (const gchar *)g_object_get_data (G_OBJECT(widget), "_gsettings_key");
-  gchar *key_timeout;
 
   /* no selection */
   ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
@@ -402,10 +401,7 @@ combo_time_changed_cb (GtkWidget *widget, CcPowerPanel *self)
                       -1);
 
   /* set both keys */
-  key_timeout = g_strdup_printf ("%s-timeout", key);
-  g_settings_set_int (self->priv->gsd_settings, key_timeout, value);
-  g_settings_set_boolean (self->priv->gsd_settings, key, value != 0);
-  g_free (key_timeout);
+  g_settings_set_int (self->priv->gsd_settings, key, value);
 }
 
 static void
@@ -602,26 +598,18 @@ cc_power_panel_init (CcPowerPanel *self)
 
   /* auto-sleep time */
   value = g_settings_get_int (self->priv->gsd_settings, "sleep-inactive-ac-timeout");
-  if (!g_settings_get_boolean (self->priv->gsd_settings, "sleep-inactive-ac"))
-    {
-      value = 0;
-    }
   widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
                                                "combobox_sleep_ac"));
   set_value_for_combo (GTK_COMBO_BOX (widget), value);
-  g_object_set_data (G_OBJECT(widget), "_gsettings_key", "sleep-inactive-ac");
+  g_object_set_data (G_OBJECT(widget), "_gsettings_key", "sleep-inactive-ac-timeout");
   g_signal_connect (widget, "changed",
                     G_CALLBACK (combo_time_changed_cb),
                     self);
   value = g_settings_get_int (self->priv->gsd_settings, "sleep-inactive-battery-timeout");
-  if (!g_settings_get_boolean (self->priv->gsd_settings, "sleep-inactive-battery"))
-    {
-      value = 0;
-    }
   widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
                                                "combobox_sleep_battery"));
   set_value_for_combo (GTK_COMBO_BOX (widget), value);
-  g_object_set_data (G_OBJECT(widget), "_gsettings_key", "sleep-inactive-battery");
+  g_object_set_data (G_OBJECT(widget), "_gsettings_key", "sleep-inactive-battery-timeout");
   g_signal_connect (widget, "changed",
                     G_CALLBACK (combo_time_changed_cb),
                     self);
