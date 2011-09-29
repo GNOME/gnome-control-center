@@ -334,12 +334,20 @@ setup_system (GtkBuilder *dialog)
         GtkWidget *button;
 
         localed_permission = polkit_permission_new_sync ("org.freedesktop.locale1.set-locale", NULL, NULL, NULL);
-        if (localed_permission != NULL) {
-	        g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, localed_permission);
+        if (localed_permission == NULL) {
+                GtkWidget *tab_widget, *notebook;
+                int num;
 
-                g_signal_connect (localed_permission, "notify",
-                                  G_CALLBACK (on_permission_changed), dialog);
+                tab_widget = WID ("table3");
+                notebook = WID ("region_notebook");
+                num = gtk_notebook_page_num (GTK_NOTEBOOK (notebook), tab_widget);
+                gtk_notebook_remove_page (GTK_NOTEBOOK (notebook), num);
+                return;
         }
+
+        g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, localed_permission);
+        g_signal_connect (localed_permission, "notify",
+                          G_CALLBACK (on_permission_changed), dialog);
         on_permission_changed (localed_permission, NULL, dialog);
 
 
