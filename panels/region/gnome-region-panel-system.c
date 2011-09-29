@@ -147,28 +147,10 @@ on_localed_properties_changed (GDBusProxy   *proxy,
                                const gchar **invalidated_properties,
                                GtkBuilder   *dialog)
 {
-        GVariant *res;
         GVariant *v;
-	GError *error = NULL;
 
-        res = g_dbus_connection_call_sync (g_dbus_proxy_get_connection (proxy),
-                                           g_dbus_proxy_get_name (proxy),
-                                            g_dbus_proxy_get_object_path (proxy),
-                                           "org.freedesktop.DBus.Properties",
-                                           "Get",
-                                           g_variant_new ("(ss)",
-                                                          g_dbus_proxy_get_interface_name (proxy),
-                                                          "Locale"),
-                                           NULL,
-                                           G_DBUS_CALL_FLAGS_NONE,
-                                           -1, NULL, &error);
-	if (!res) {
-		g_warning ("Failed to call Get method: %s", error->message);
-		g_error_free (error);
-		return;
-	}
+	v = g_dbus_proxy_get_cached_property (proxy, "Locale");
 
-        v = g_variant_get_child_value (res, 0);
         if (v) {
                 const gchar **strv;
                 gsize len;
@@ -176,10 +158,8 @@ on_localed_properties_changed (GDBusProxy   *proxy,
                 const gchar *lang, *messages, *time;
                 gchar *name;
                 GtkWidget *label;
-                GVariant *v2;
 
-                v2 = g_variant_get_variant (v);
-                strv = g_variant_get_strv (v2, &len);
+                strv = g_variant_get_strv (v, &len);
 
                 lang = messages = time = NULL;
                 for (i = 0; strv[i]; i++) {
@@ -217,7 +197,6 @@ on_localed_properties_changed (GDBusProxy   *proxy,
                 }
                 g_variant_unref (v);
         }
-        g_variant_unref (res);
 
         update_copy_button (dialog);
 }
