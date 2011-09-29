@@ -34,7 +34,7 @@ load_pixbuf_for_gicon (GIcon *icon)
 {
   GtkIconTheme *theme;
   GtkIconInfo *icon_info;
-  GdkPixbuf *pixbuf;
+  GdkPixbuf *pixbuf = NULL;
   GError *err = NULL;
 
   if (icon == NULL)
