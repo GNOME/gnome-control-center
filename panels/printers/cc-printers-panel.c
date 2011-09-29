@@ -57,6 +57,8 @@ G_DEFINE_DYNAMIC_TYPE (CcPrintersPanel, cc_printers_panel, CC_TYPE_PANEL)
 #define CUPS_DBUS_PATH      "/org/cups/cupsd/Notifier"
 #define CUPS_DBUS_INTERFACE "org.cups.cupsd.Notifier"
 
+#define CUPS_STATUS_CHECK_INTERVAL 5
+
 struct _CcPrintersPanelPrivate
 {
   GtkBuilder *builder;
@@ -87,6 +89,7 @@ struct _CcPrintersPanelPrivate
   GDBusConnection *cups_bus_connection;
   gint             subscription_id;
   guint            subscription_renewal_id;
+  guint            cups_status_check_id;
 
   gpointer dummy;
 };
@@ -169,6 +172,9 @@ cc_printers_panel_dispose (GObject *object)
     }
 
   detach_from_cups_notifier (CC_PRINTERS_PANEL (object));
+
+  if (priv->cups_status_check_id > 0)
+    g_source_remove (priv->cups_status_check_id);
 
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->dispose (object);
 }
@@ -339,7 +345,10 @@ renew_subscription (gpointer data)
                                                    G_N_ELEMENTS (events),
                                                    SUBSCRIPTION_DURATION);
 
-  return TRUE;
+  if (priv->subscription_id > 0)
+    return TRUE;
+  else
+    return FALSE;
 }
 
 static void
@@ -351,38 +360,40 @@ attach_to_cups_notifier (gpointer data)
 
   priv = PRINTERS_PANEL_PRIVATE (self);
 
-  renew_subscription (self);
-  priv->subscription_renewal_id =
-    g_timeout_add_seconds (RENEW_INTERVAL, renew_subscription, self);
-
-  error = NULL;
-  priv->cups_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                                    0,
-                                                    NULL,
-                                                    CUPS_DBUS_NAME,
-                                                    CUPS_DBUS_PATH,
-                                                    CUPS_DBUS_INTERFACE,
-                                                    NULL,
-                                                    &error);
-
-  if (error)
+  if (renew_subscription (self))
     {
-      g_warning ("%s", error->message);
-      return;
+      priv->subscription_renewal_id =
+        g_timeout_add_seconds (RENEW_INTERVAL, renew_subscription, self);
+
+      error = NULL;
+      priv->cups_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                        0,
+                                                        NULL,
+                                                        CUPS_DBUS_NAME,
+                                                        CUPS_DBUS_PATH,
+                                                        CUPS_DBUS_INTERFACE,
+                                                        NULL,
+                                                        &error);
+
+      if (error)
+        {
+          g_warning ("%s", error->message);
+          return;
+        }
+
+      priv->cups_bus_connection = g_dbus_proxy_get_connection (priv->cups_proxy);
+
+      g_dbus_connection_signal_subscribe (priv->cups_bus_connection,
+                                          NULL,
+                                          CUPS_DBUS_INTERFACE,
+                                          NULL,
+                                          CUPS_DBUS_PATH,
+                                          NULL,
+                                          0,
+                                          on_cups_notification,
+                                          self,
+                                          NULL);
     }
-
-  priv->cups_bus_connection = g_dbus_proxy_get_connection (priv->cups_proxy);
-
-  g_dbus_connection_signal_subscribe (priv->cups_bus_connection,
-                                      NULL,
-                                      CUPS_DBUS_INTERFACE,
-                                      NULL,
-                                      CUPS_DBUS_PATH,
-                                      NULL,
-                                      0,
-                                      on_cups_notification,
-                                      self,
-                                      NULL);
 }
 
 static void
@@ -394,7 +405,7 @@ detach_from_cups_notifier (gpointer data)
   priv = PRINTERS_PANEL_PRIVATE (self);
 
   cancel_cups_subscription (priv->subscription_id);
-  priv->subscription_id = -1;
+  priv->subscription_id = 0;
 
   if (priv->subscription_renewal_id != 0) {
     g_source_remove (priv->subscription_renewal_id);
@@ -2393,14 +2404,37 @@ switch_to_options_cb (GtkButton *button,
   gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_OPTIONS_PAGE);
 }
 
+static gboolean
+cups_status_check (gpointer user_data)
+{
+  CcPrintersPanelPrivate  *priv;
+  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
+  gboolean                 result = TRUE;
+  http_t                  *http;
+
+  priv = self->priv = PRINTERS_PANEL_PRIVATE (self);
+
+  http = httpConnectEncrypt (cupsServer (), ippPort (), cupsEncryption ());
+  if (http)
+    {
+      httpClose (http);
+      actualize_printers_list (self);
+      attach_to_cups_notifier (self);
+      priv->cups_status_check_id = 0;
+      result = FALSE;
+    }
+
+  return result;
+}
+
 static void
 cc_printers_panel_init (CcPrintersPanel *self)
 {
   CcPrintersPanelPrivate *priv;
   GtkWidget              *top_widget;
   GtkWidget              *widget;
-  GtkWidget              *box;
   GError                 *error = NULL;
+  http_t                 *http;
   gchar                  *objects[] = { "main-vbox", NULL };
   GtkStyleContext        *context;
 
@@ -2424,7 +2458,9 @@ cc_printers_panel_init (CcPrintersPanel *self)
 
   priv->pp_new_printer_dialog = NULL;
 
-  priv->subscription_id = -1;
+  priv->subscription_id = 0;
+  priv->cups_status_check_id = 0;
+  priv->subscription_renewal_id = 0;
   priv->cups_proxy = NULL;
   priv->cups_bus_connection = NULL;
 
@@ -2592,6 +2628,15 @@ Please check your installation");
   populate_jobs_list (self);
   populate_allowed_users_list (self);
   attach_to_cups_notifier (self);
+
+  http = httpConnectEncrypt (cupsServer (), ippPort (), cupsEncryption ());
+  if (!http)
+    {
+      priv->cups_status_check_id =
+        g_timeout_add_seconds (CUPS_STATUS_CHECK_INTERVAL, cups_status_check, self);
+    }
+  else
+    httpClose (http);
 
   gtk_container_add (GTK_CONTAINER (self), top_widget);
   gtk_widget_show_all (GTK_WIDGET (self));
