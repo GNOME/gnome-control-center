@@ -46,6 +46,8 @@ update_copy_button (GtkBuilder *dialog)
         GtkWidget *button;
         const gchar *user_lang, *system_lang;
         const gchar *user_region, *system_region;
+        const gchar *user_input_source, *system_input_source;
+        gboolean layouts_differ;
 
         label = WID ("user_display_language");
         user_lang = g_object_get_data (G_OBJECT (label), "language");
@@ -59,17 +61,26 @@ update_copy_button (GtkBuilder *dialog)
         label = WID ("system_format");
         system_region = g_object_get_data (G_OBJECT (label), "region");
 
-        /* FIXME: compare layouts */
+        label = WID ("user_input_source");
+        user_input_source = g_object_get_data (G_OBJECT (label), "input_source");
+
+        label = WID ("system_input_source");
+        system_input_source = g_object_get_data (G_OBJECT (label), "input_source");
 
         button = WID ("copy_settings_button");
 
+        /* If the version of localed doesn't include layouts... */
+        if (system_input_source)
+                layouts_differ = (g_strcmp0 (user_input_source, system_input_source) != 0);
+        else
+                layouts_differ = FALSE;
+
         if (g_strcmp0 (user_lang, system_lang) == 0 &&
-            g_strcmp0 (user_region, system_region) == 0) {
+            g_strcmp0 (user_region, system_region) == 0 &&
+            !layouts_differ)
                 gtk_widget_set_sensitive (button, FALSE);
-        }
-        else {
+        else
                 gtk_widget_set_sensitive (button, TRUE);
-        }
 }
 
 static void
@@ -119,26 +130,67 @@ xkb_settings_changed (GSettings *settings,
                       const gchar *key,
                       GtkBuilder *dialog)
 {
-	gint i;
-	GString *str = g_string_new ("");
-	gchar **layouts = g_settings_get_strv (settings, "layouts");
+	guint i;
+	GString *disp, *list;
+	GtkWidget *label;
+	gchar **layouts;
+
+	layouts = g_settings_get_strv (settings, "layouts");
+	if (layouts == NULL)
+		return;
+
+	label = WID ("user_input_source");
+	disp = g_string_new ("");
+	list = g_string_new ("");
 
 	for (i = 0; layouts[i]; i++) {
-		gchar *utf_visible = xkb_layout_description_utf8 (layouts[i]);
+		gchar *utf_visible;
 
-		if (utf_visible != NULL) {
-			if (str->str[0] != '\0') {
-				str = g_string_append (str, ", ");
-			}
-			str = g_string_append (str, utf_visible);
-			g_free (utf_visible);
-		}
+		utf_visible = xkb_layout_description_utf8 (layouts[i]);
+		if (disp->str[0] != '\0')
+			disp = g_string_append (disp, ", ");
+		disp = g_string_append (disp, utf_visible ? utf_visible : layouts[i]);
+		g_free (utf_visible);
+
+		if (list->str[0] != '\0')
+			list = g_string_append (list, ",");
+		list = g_string_append (list, layouts[i]);
 	}
-
 	g_strfreev (layouts);
 
-	gtk_label_set_text (GTK_LABEL (WID ("user_input_source")), str->str);
-	g_string_free (str, TRUE);
+        g_object_set_data_full (G_OBJECT (label), "input_source", g_string_free (list, FALSE), g_free);
+        gtk_label_set_text (GTK_LABEL (label), disp->str);
+        g_string_free (disp, TRUE);
+
+	update_copy_button (dialog);
+}
+
+static void
+update_property (GDBusProxy *proxy,
+                 const char *property)
+{
+        GError *error = NULL;
+        GVariant *variant;
+
+        /* Work around systemd-localed not sending us back
+         * the property value when changing values */
+        variant = g_dbus_proxy_call_sync (proxy,
+                                          "org.freedesktop.DBus.Properties.Get",
+                                          g_variant_new ("(ss)", "org.freedesktop.locale1", property),
+                                          G_DBUS_CALL_FLAGS_NONE,
+                                          -1,
+                                          NULL,
+                                          &error);
+        if (variant == NULL) {
+                g_warning ("Failed to get property '%s': %s", property, error->message);
+                g_error_free (error);
+        } else {
+                GVariant *v;
+
+                g_variant_get (variant, "(v)", &v);
+                g_dbus_proxy_set_cached_property (proxy, property, v);
+                g_variant_unref (variant);
+        }
 }
 
 static void
@@ -148,9 +200,23 @@ on_localed_properties_changed (GDBusProxy   *proxy,
                                GtkBuilder   *dialog)
 {
         GVariant *v;
+        GtkWidget *label;
+        const char *layout;
+        char **layouts;
+        GString *disp;
+        guint i;
 
-	v = g_dbus_proxy_get_cached_property (proxy, "Locale");
+        if (invalidated_properties != NULL) {
+                guint i;
+                for (i = 0; invalidated_properties[i] != NULL; i++) {
+                        if (g_str_equal (invalidated_properties[i], "Locale"))
+                                update_property (proxy, "Locale");
+                        else if (g_str_equal (invalidated_properties[i], "X11Layout"))
+                                update_property (proxy, "X11Layout");
+                }
+        }
 
+        v = g_dbus_proxy_get_cached_property (proxy, "Locale");
         if (v) {
                 const gchar **strv;
                 gsize len;
@@ -198,6 +264,33 @@ on_localed_properties_changed (GDBusProxy   *proxy,
                 g_variant_unref (v);
         }
 
+        label = WID ("system_input_source");
+        v = g_dbus_proxy_get_cached_property (proxy, "X11Layout");
+        if (v) {
+                layout = g_variant_get_string (v, NULL);
+                g_object_set_data_full (G_OBJECT (label), "input_source", g_strdup (layout), g_free);
+	} else {
+                g_object_set_data_full (G_OBJECT (label), "input_source", NULL, g_free);
+                update_copy_button (dialog);
+                return;
+        }
+
+	disp = g_string_new ("");
+	layouts = g_strsplit (layout, ",", -1);
+	for (i = 0; layouts[i]; i++) {
+		gchar *utf_visible;
+
+		utf_visible = xkb_layout_description_utf8 (layouts[i]);
+		if (disp->str[0] != '\0')
+			disp = g_string_append (disp, ", ");
+		disp = g_string_append (disp, utf_visible ? utf_visible : layouts[i]);
+		g_free (utf_visible);
+	}
+        gtk_label_set_text (GTK_LABEL (label), disp->str);
+        g_string_free (disp, TRUE);
+
+        g_variant_unref (v);
+
         update_copy_button (dialog);
 }
 
@@ -229,6 +322,7 @@ copy_settings (GtkButton *button, GtkBuilder *dialog)
 {
         const gchar *language;
         const gchar *region;
+        const gchar *layout;
         GtkWidget *label;
         GVariantBuilder *b;
         gchar *s;
@@ -263,6 +357,15 @@ copy_settings (GtkButton *button, GtkBuilder *dialog)
                            G_DBUS_CALL_FLAGS_NONE,
                            -1, NULL, NULL, NULL);
         g_variant_builder_unref (b);
+
+        label = WID ("user_input_source");
+        layout = g_object_get_data (G_OBJECT (label), "input_source");
+
+        g_dbus_proxy_call (localed_proxy,
+                           "SetX11Keyboard",
+                           g_variant_new ("(ssssbb)", layout, "", "", "", TRUE, TRUE),
+                           G_DBUS_CALL_FLAGS_NONE,
+                           -1, NULL, NULL, NULL);
 }
 
 static void
