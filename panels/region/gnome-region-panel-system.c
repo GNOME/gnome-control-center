@@ -40,28 +40,28 @@ static GDBusProxy *localed_proxy;
 static GPermission *localed_permission;
 
 static void
-update_copy_button (GtkBuilder *builder)
+update_copy_button (GtkBuilder *dialog)
 {
         GtkWidget *label;
         GtkWidget *button;
         const gchar *user_lang, *system_lang;
         const gchar *user_region, *system_region;
 
-        label = (GtkWidget *)gtk_builder_get_object (builder, "user_display_language");
+        label = WID ("user_display_language");
         user_lang = g_object_get_data (G_OBJECT (label), "language");
 
-        label = (GtkWidget*)gtk_builder_get_object (builder, "system_display_language");
+        label = WID ("system_display_language");
         system_lang = g_object_get_data (G_OBJECT (label), "language");
 
-        label = (GtkWidget *)gtk_builder_get_object (builder, "user_format");
+        label = WID ("user_format");
         user_region = g_object_get_data (G_OBJECT (label), "region");
 
-        label = (GtkWidget*)gtk_builder_get_object (builder, "system_format");
+        label = WID ("system_format");
         system_region = g_object_get_data (G_OBJECT (label), "region");
 
         /* FIXME: compare layouts */
 
-        button = (GtkWidget *)gtk_builder_get_object (builder, "copy_settings_button");
+        button = WID ("copy_settings_button");
 
         if (g_strcmp0 (user_lang, system_lang) == 0 &&
             g_strcmp0 (user_region, system_region) == 0) {
@@ -74,53 +74,51 @@ update_copy_button (GtkBuilder *builder)
 
 static void
 locale_settings_changed (GSettings *settings,
-			 const gchar *key,
-			 gpointer user_data)
+                         const gchar *key,
+                         GtkBuilder *dialog)
 {
-        GtkBuilder *builder = GTK_BUILDER (user_data);
         GtkWidget *label;
         gchar *region, *display_region;
 
         region = g_settings_get_string (locale_settings, "region");
         if (!region || !region[0]) {
-                label = GTK_WIDGET (gtk_builder_get_object (builder, "user_display_language"));
+                label = WID ("user_display_language");
                 region = g_strdup ((gchar*)g_object_get_data (G_OBJECT (label), "language"));
         }
 
         display_region = gdm_get_region_from_name (region, NULL);
-        label = GTK_WIDGET (gtk_builder_get_object (builder, "user_format"));
+        label = WID ("user_format");
         gtk_label_set_text (GTK_LABEL (label), display_region);
         g_object_set_data_full (G_OBJECT (label), "region", g_strdup (region), g_free);
         g_free (region);
         g_free (display_region);
 
-        update_copy_button (builder);
+        update_copy_button (dialog);
 }
 
 void
-system_update_language (GtkBuilder *builder, const gchar *language)
+system_update_language (GtkBuilder *dialog, const gchar *language)
 {
         gchar *display_language;
         GtkWidget *label;
 
         display_language = gdm_get_language_from_name (language, NULL);
-        label = (GtkWidget *)gtk_builder_get_object (builder, "user_display_language");
+        label = WID ("user_display_language");
         gtk_label_set_text (GTK_LABEL (label), display_language);
         g_object_set_data_full (G_OBJECT (label), "language", g_strdup (language), g_free);
         g_free (display_language);
 
         /* need to update the region display in case the setting is '' */
-        locale_settings_changed (locale_settings, "region", builder);
+        locale_settings_changed (locale_settings, "region", dialog);
 
-        update_copy_button (builder);
+        update_copy_button (dialog);
 }
 
 static void
 xkb_settings_changed (GSettings *settings,
-		      const gchar *key,
-		      gpointer user_data)
+                      const gchar *key,
+                      GtkBuilder *dialog)
 {
-	GtkBuilder *builder = GTK_BUILDER (user_data);
 	gint i;
 	GString *str = g_string_new ("");
 	gchar **layouts = g_settings_get_strv (settings, "layouts");
@@ -139,7 +137,7 @@ xkb_settings_changed (GSettings *settings,
 
 	g_strfreev (layouts);
 
-	gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "user_input_source")), str->str);
+	gtk_label_set_text (GTK_LABEL (WID ("user_input_source")), str->str);
 	g_string_free (str, TRUE);
 }
 
@@ -147,7 +145,7 @@ static void
 on_localed_properties_changed (GDBusProxy   *proxy,
                                GVariant     *changed_properties,
                                const gchar **invalidated_properties,
-                               GtkBuilder   *builder)
+                               GtkBuilder   *dialog)
 {
         GVariant *res;
         GVariant *v;
@@ -204,7 +202,7 @@ on_localed_properties_changed (GDBusProxy   *proxy,
 
                 if (messages) {
                         name = gdm_get_language_from_name (messages, NULL);
-                        label = (GtkWidget*)gtk_builder_get_object (builder, "system_display_language");
+                        label = WID ("system_display_language");
                         gtk_label_set_text (GTK_LABEL (label), name);
                         g_free (name);
                         g_object_set_data_full (G_OBJECT (label), "language", g_strdup (lang), g_free);
@@ -212,7 +210,7 @@ on_localed_properties_changed (GDBusProxy   *proxy,
 
                 if (time) {
                         name = gdm_get_region_from_name (time, NULL);
-                        label = (GtkWidget*)gtk_builder_get_object (builder, "system_format");
+                        label = WID ("system_format");
                         gtk_label_set_text (GTK_LABEL (label), name);
                         g_free (name);
                         g_object_set_data_full (G_OBJECT (label), "region", g_strdup (time), g_free);
@@ -221,15 +219,14 @@ on_localed_properties_changed (GDBusProxy   *proxy,
         }
         g_variant_unref (res);
 
-        update_copy_button (builder);
+        update_copy_button (dialog);
 }
 
 static void
 localed_proxy_ready (GObject      *source,
                      GAsyncResult *res,
-                     gpointer      user_data)
+                     GtkBuilder   *dialog)
 {
-        GtkBuilder *builder = user_data;
         GError *error = NULL;
 
         localed_proxy = g_dbus_proxy_new_finish (res, &error);
@@ -240,16 +237,16 @@ localed_proxy_ready (GObject      *source,
                 return;
         }
 
-        g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) g_object_unref, localed_proxy);
+        g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, localed_proxy);
 
         g_signal_connect (localed_proxy, "g-properties-changed",
-                          G_CALLBACK (on_localed_properties_changed), builder);
+                          G_CALLBACK (on_localed_properties_changed), dialog);
 
-        on_localed_properties_changed (localed_proxy, NULL, NULL, builder);
+        on_localed_properties_changed (localed_proxy, NULL, NULL, dialog);
 }
 
 static void
-copy_settings (GtkButton *button, GtkBuilder *builder)
+copy_settings (GtkButton *button, GtkBuilder *dialog)
 {
         const gchar *language;
         const gchar *region;
@@ -257,9 +254,9 @@ copy_settings (GtkButton *button, GtkBuilder *builder)
         GVariantBuilder *b;
         gchar *s;
 
-        label = GTK_WIDGET (gtk_builder_get_object (builder, "user_display_language"));
+        label = WID ("user_display_language");
         language = g_object_get_data (G_OBJECT (label), "language");
-        label = GTK_WIDGET (gtk_builder_get_object (builder, "user_format"));
+        label = WID ("user_format");
         region = g_object_get_data (G_OBJECT (label), "region");
 
         b = g_variant_builder_new (G_VARIANT_TYPE ("as"));
@@ -292,7 +289,7 @@ copy_settings (GtkButton *button, GtkBuilder *builder)
 static void
 on_permission_changed (GPermission *permission,
                        GParamSpec  *pspec,
-                       GtkBuilder  *builder)
+                       GtkBuilder  *dialog)
 {
         GtkWidget *button;
         GtkWidget *label;
@@ -308,8 +305,8 @@ on_permission_changed (GPermission *permission,
                 allowed = FALSE;
         }
 
-        button = (GtkWidget *)gtk_builder_get_object (builder, "copy_settings_button");
-        label = (GtkWidget *)gtk_builder_get_object (builder, "system-title");
+        button = WID ("copy_settings_button");
+        label = WID ("system-title");
 
         if (!allowed && !can_acquire) {
                 gtk_label_set_text (GTK_LABEL (label),
@@ -330,43 +327,45 @@ on_permission_changed (GPermission *permission,
 }
 
 void
-setup_system (GtkBuilder *builder)
+setup_system (GtkBuilder *dialog)
 {
-	gchar *language;
+        gchar *language;
         GDBusConnection *bus;
         GtkWidget *button;
 
-        button = (GtkWidget *)gtk_builder_get_object (builder, "copy_settings_button");
-        g_signal_connect (button, "clicked",
-                          G_CALLBACK (copy_settings), builder);
-
         localed_permission = polkit_permission_new_sync ("org.freedesktop.locale1.set-locale", NULL, NULL, NULL);
         if (localed_permission != NULL) {
-	        g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) g_object_unref, localed_permission);
+	        g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, localed_permission);
 
                 g_signal_connect (localed_permission, "notify",
-                                  G_CALLBACK (on_permission_changed), builder);
+                                  G_CALLBACK (on_permission_changed), dialog);
         }
-        on_permission_changed (localed_permission, NULL, builder);
+        on_permission_changed (localed_permission, NULL, dialog);
 
-	locale_settings = g_settings_new ("org.gnome.system.locale");
-	g_signal_connect (locale_settings, "changed::region",
-			  G_CALLBACK (locale_settings_changed), builder);
-	g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) g_object_unref, locale_settings);
+
+        button = WID ("copy_settings_button");
+        g_signal_connect (button, "clicked",
+                          G_CALLBACK (copy_settings), dialog);
+
+
+        locale_settings = g_settings_new ("org.gnome.system.locale");
+        g_signal_connect (locale_settings, "changed::region",
+                          G_CALLBACK (locale_settings_changed), dialog);
+        g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, locale_settings);
 
 	xkb_settings = g_settings_new (GKBD_KEYBOARD_SCHEMA);
 	g_signal_connect (xkb_settings, "changed::layouts",
-			  G_CALLBACK (xkb_settings_changed), builder);
-	g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) g_object_unref, xkb_settings);
+			  G_CALLBACK (xkb_settings_changed), dialog);
+	g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, xkb_settings);
 
         /* Display user settings */
         language = cc_common_language_get_current_language ();
-        system_update_language (builder, language);
+        system_update_language (dialog, language);
         g_free (language);
 
-        locale_settings_changed (locale_settings, "region", builder);
+        locale_settings_changed (locale_settings, "region", dialog);
 
-        xkb_settings_changed (xkb_settings, "layouts", builder);
+        xkb_settings_changed (xkb_settings, "layouts", dialog);
 
         bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
         g_dbus_proxy_new (bus,
@@ -376,7 +375,7 @@ setup_system (GtkBuilder *builder)
                            "/org/freedesktop/locale1",
                            "org.freedesktop.locale1",
                            NULL,
-                           localed_proxy_ready,
-                           builder);
+                           (GAsyncReadyCallback) localed_proxy_ready,
+                           dialog);
         g_object_unref (bus);
 }
