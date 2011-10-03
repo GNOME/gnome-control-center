@@ -1320,7 +1320,7 @@ info_panel_setup_media (CcInfoPanel *self)
     { "media_video_dvd_combobox", "x-content/video-dvd", N_("Select an application for video DVDs") },
     { "media_music_player_combobox", "x-content/audio-player", N_("Select an application to run when a music player is connected") },
     { "media_dcf_combobox", "x-content/image-dcf", N_("Select an application to run when a camera is connected") },
-    { "media_software_combobox", "x-content/software", N_("Select an application for software CDs") },
+    { "media_software_combobox", "x-content/unix-software", N_("Select an application for software CDs") },
   };
 
   struct {
