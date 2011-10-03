@@ -132,6 +132,7 @@ update_examples_cb (GtkTreeSelection *selection, gpointer user_data)
 	g_free (locale);
 
 	/* Display measurement */
+#ifdef LC_MEASUREMENT
 	locale = g_strdup (setlocale (LC_MEASUREMENT, NULL));
 	setlocale (LC_MEASUREMENT, active_id);
 
@@ -143,6 +144,7 @@ update_examples_cb (GtkTreeSelection *selection, gpointer user_data)
 
 	setlocale (LC_MEASUREMENT, locale);
 	g_free (locale);
+#endif
         g_free (active_id);
 }
 
