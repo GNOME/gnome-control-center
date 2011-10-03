@@ -1137,6 +1137,32 @@ scrolled_realize_cb (GtkWidget         *scrolled,
 }
 
 static void
+cc_background_panel_drag_uris (GtkWidget *widget,
+			       GdkDragContext *context, gint x, gint y,
+			       GtkSelectionData *data, guint info, guint time,
+			       CcBackgroundPanel *panel)
+{
+  gint i;
+  char *uri;
+  gchar **uris;
+
+  uris = gtk_selection_data_get_uris (data);
+  if (!uris)
+    return;
+
+  gtk_drag_finish (context, TRUE, FALSE, time);
+
+  for (i = 0; uris[i] != NULL; i++) {
+    uri = uris[i];
+    if (!bg_pictures_source_is_known (panel->priv->pictures_source, uri)) {
+      add_custom_wallpaper (panel, uri);
+    }
+  }
+
+  g_strfreev(uris);
+}
+
+static void
 cc_background_panel_init (CcBackgroundPanel *self)
 {
   CcBackgroundPanelPrivate *priv;
@@ -1234,6 +1260,14 @@ cc_background_panel_init (CcBackgroundPanel *self)
 		    G_CALLBACK (add_button_clicked), self);
   g_signal_connect (WID ("remove_button"), "clicked",
 		    G_CALLBACK (remove_button_clicked), self);
+
+  /* Add drag and drop support for bg images */
+  widget = WID ("scrolledwindow1");
+  gtk_drag_dest_set (widget, GTK_DEST_DEFAULT_ALL, NULL, 0, GDK_ACTION_COPY);
+  gtk_drag_dest_add_uri_targets (widget);
+  g_signal_connect (widget, "drag-data-received",
+		    G_CALLBACK (cc_background_panel_drag_uris), self);
+
 
   /* setup preview area */
   gtk_label_set_ellipsize (GTK_LABEL (WID ("background-label")), PANGO_ELLIPSIZE_END);
