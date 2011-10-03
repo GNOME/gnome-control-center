@@ -38,6 +38,7 @@ display_date (GtkLabel *label, GDateTime *dt, const gchar *format)
 	gchar *s;
 
 	s = g_date_time_format (dt, format);
+	s = g_strstrip (s);
 	gtk_label_set_text (label, s);
 	g_free (s);
 }
