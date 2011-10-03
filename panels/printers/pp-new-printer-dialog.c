@@ -1669,7 +1669,9 @@ new_printer_add_button_cb (GtkButton *button,
           DBusGProxy *proxy;
           GError     *error = NULL;
           char       *ret_error = NULL;
-          char       *locale = NULL;
+          ppd_file_t  *ppd_file = NULL;
+          gchar      **value = NULL;
+          const gchar *paper_size;
 
           ppd_file_name = cupsGetPPD (pp->devices[device_id].display_name);
 
@@ -1708,75 +1710,60 @@ new_printer_add_button_cb (GtkButton *button,
 
 
               /* Set default PaperSize according to the locale */
-              locale = setlocale (LC_PAPER, NULL);
-              if (locale == NULL)
-                locale = setlocale (LC_MESSAGES, NULL);
+              paper_size = gtk_paper_size_get_default ();
+              if (g_str_equal (paper_size, GTK_PAPER_NAME_LETTER))
+                paper_size = "Letter";
+              else
+                paper_size = "A4";
 
-              if (locale)
+              if (ppd_file_name)
                 {
-                  ppd_file_t  *ppd_file = NULL;
-                  gchar      **value = NULL;
-                  gchar       *paper_size;
-
-                  /* CLDR 2.0 alpha
-                   * http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/territory_language_information.html
-                   */
-                  if (g_regex_match_simple ("[^_.@]{2,3}_(BZ|CA|CL|CO|CR|GT|MX|NI|PA|PH|PR|SV|US|VE)",
-                                            locale, G_REGEX_ANCHORED, G_REGEX_MATCH_ANCHORED))
-                    paper_size = g_strdup ("Letter");
-                  else
-                    paper_size = g_strdup ("A4");
-
-                  if (ppd_file_name)
+                  ppd_file = ppdOpenFile (ppd_file_name);
+                  if (ppd_file)
                     {
-                      ppd_file = ppdOpenFile (ppd_file_name);
-                      if (ppd_file)
-                        {
-                          ppdMarkDefaults (ppd_file);
-                          for (i = 0; i < ppd_file->num_groups; i++)
-                            for (j = 0; j < ppd_file->groups[i].num_options; j++)
-                              if (g_strcmp0 ("PageSize", ppd_file->groups[i].options[j].keyword) == 0)
+                      ppdMarkDefaults (ppd_file);
+                      for (i = 0; i < ppd_file->num_groups; i++)
+                        for (j = 0; j < ppd_file->groups[i].num_options; j++)
+                          if (g_strcmp0 ("PageSize", ppd_file->groups[i].options[j].keyword) == 0)
+                            {
+                              for (k = 0; k < ppd_file->groups[i].options[j].num_choices; k++)
                                 {
-                                  for (k = 0; k < ppd_file->groups[i].options[j].num_choices; k++)
+                                  if (g_ascii_strncasecmp (paper_size,
+                                                           ppd_file->groups[i].options[j].choices[k].choice,
+                                                           strlen (paper_size)) == 0 &&
+                                      !ppd_file->groups[i].options[j].choices[k].marked)
                                     {
-                                      if (g_ascii_strncasecmp (paper_size,
-                                                               ppd_file->groups[i].options[j].choices[k].choice,
-                                                               strlen (paper_size)) == 0 &&
-                                          !ppd_file->groups[i].options[j].choices[k].marked)
-                                        {
-                                          value = g_new0 (gchar *, 2);
-                                          value[0] = g_strdup (ppd_file->groups[i].options[j].choices[k].choice);
-                                          break;
-                                        }
+                                      value = g_new0 (gchar *, 2);
+                                      value[0] = g_strdup (ppd_file->groups[i].options[j].choices[k].choice);
+                                      break;
                                     }
-                                  break;
                                 }
-                          ppdClose (ppd_file);
-                        }
+                              break;
+                            }
+                      ppdClose (ppd_file);
                     }
+                }
 
-                  if (value)
+              if (value)
+                {
+                  dbus_g_proxy_call (proxy, "PrinterAddOptionDefault", &error,
+                                     G_TYPE_STRING, pp->devices[device_id].display_name,
+                                     G_TYPE_STRING, "PageSize-default",
+                                     G_TYPE_STRV, value,
+                                     G_TYPE_INVALID,
+                                     G_TYPE_STRING, &ret_error,
+                                     G_TYPE_INVALID);
+
+                  if (error)
                     {
-                      dbus_g_proxy_call (proxy, "PrinterAddOptionDefault", &error,
-                                         G_TYPE_STRING, pp->devices[device_id].display_name,
-                                         G_TYPE_STRING, "PageSize-default",
-                                         G_TYPE_STRV, value,
-                                         G_TYPE_INVALID,
-                                         G_TYPE_STRING, &ret_error,
-                                         G_TYPE_INVALID);
-
-                      if (error)
-                        {
-                          g_warning ("%s", error->message);
-                          g_clear_error (&error);
-                        }
-
-                      if (ret_error && ret_error[0] != '\0')
-                        g_warning ("%s", ret_error);
-
-                      g_strfreev (value);
+                      g_warning ("%s", error->message);
+                      g_clear_error (&error);
                     }
-                  g_free (paper_size);
+
+                  if (ret_error && ret_error[0] != '\0')
+                    g_warning ("%s", ret_error);
+
+                  g_strfreev (value);
                 }
               g_object_unref (proxy);
             }
