@@ -1,5 +1,7 @@
 SUBDIRS = scalable 16x16 22x22 24x24 32x32 48x48 64x64 256x256
 
+if MAINTAINER_MODE
+
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(pkgdatadir)/icons/hicolor
 
 install-data-hook: update-icon-cache
@@ -13,3 +15,4 @@ update-icon-cache:
 		echo "***   $(gtk_update_icon_cache)"; \
 	fi
 
+endif
