@@ -281,6 +281,8 @@ cc_network_panel_connect_to_8021x_network (CcNetworkPanel   *panel,
                 return;
         }
 
+        connection = nm_connection_new ();
+
         /* Need a UUID for the "always ask" stuff in the Dialog of Doom */
         s_con = (NMSettingConnection *) nm_setting_connection_new ();
         uuid = nm_utils_uuid_generate ();
