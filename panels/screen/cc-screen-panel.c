@@ -312,7 +312,7 @@ set_idle_delay_from_dpms (CcScreenPanel *self,
 {
   guint off_delay;
 
-  off_delay = 1;
+  off_delay = 0;
 
   if (value > 0)
     off_delay = (guint) value;
