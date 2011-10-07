@@ -655,9 +655,10 @@ collect_locales (void)
                            "guessing possible locales from available translations, "
                            "but list may be incomplete!");
 #endif
-
-                collect_locales_from_directory ();
         }
+
+        collect_locales_from_directory ();
+
         collect_locales_from_locale_file (ALIASES_FILE);
 
 	count_languages_and_territories ();
