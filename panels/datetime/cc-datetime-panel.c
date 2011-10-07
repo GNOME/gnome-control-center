@@ -232,19 +232,21 @@ clock_settings_changed_cb (GSettings       *settings,
 {
   CcDateTimePanelPrivate *priv = panel->priv;
   GtkWidget *button24h;
-  gboolean use_24_hour;
+  GtkWidget *button12h;
   GDesktopClockFormat value;
 
   value = g_settings_get_enum (settings, CLOCK_FORMAT_KEY);
   priv->clock_format = value;
 
   button24h = W ("24h_button");
-
-  use_24_hour = (value == G_DESKTOP_CLOCK_FORMAT_24H);
+  button12h = W ("12h_button");
 
   g_signal_handlers_block_by_func (button24h, change_clock_settings, panel);
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button24h), use_24_hour);
+  if (value == G_DESKTOP_CLOCK_FORMAT_24H)
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button24h), TRUE);
+  else
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button12h), TRUE);
 
   update_time (panel);
 
