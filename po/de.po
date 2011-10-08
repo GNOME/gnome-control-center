@@ -21,11 +21,10 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-09-22 06:51+0000\n"
-"PO-Revision-Date: 2011-09-24 20:52+0100\n"
+"POT-Creation-Date: 2011-09-29 14:49+0000\n"
+"PO-Revision-Date: 2011-10-08 20:49+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@freenet.de>\n"
-"Language-Team: German <gnome-de@gnome.org>"
-"launchpad.net>\n"
+"Language-Team: German <gnome-de@gnome.org>launchpad.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -370,18 +369,22 @@ msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Panel;Projektor;xrandr;Bildschirm;Auflösung;Aktualisieren;"
 
 #: ../panels/display/cc-display-panel.c:477
+msgctxt "display panel, rotation"
 msgid "Normal"
 msgstr "Normal"
 
 #: ../panels/display/cc-display-panel.c:478
+msgctxt "display panel, rotation"
 msgid "Counterclockwise"
 msgstr "Gegen den Uhrzeigersinn"
 
 #: ../panels/display/cc-display-panel.c:479
+msgctxt "display panel, rotation"
 msgid "Clockwise"
 msgstr "Im Uhrzeigersinn"
 
 #: ../panels/display/cc-display-panel.c:480
+msgctxt "display panel, rotation"
 msgid "180 Degrees"
 msgstr "180 Grad"
 
@@ -411,8 +414,7 @@ msgstr "Ziehen Sie, um den primären Bildschirm zu ändern."
 
 #: ../panels/display/cc-display-panel.c:1714
 msgid ""
-"Select a monitor to change its properties; drag it to rearrange its "
-"placement."
+"Select a monitor to change its properties; drag it to rearrange its placement."
 msgstr ""
 "Wählen Sie einen Bildschirm, um dessen Eigenschaften zu ändern. Ziehen Sie "
 "ihn, um ihn neu zu platzieren."
@@ -446,36 +448,36 @@ msgid "Could not get screen information"
 msgstr "Bildschirminformationen konnten nicht ausgelesen werden"
 
 #. Translators: VESA is an techncial acronym, don't translate it.
-#: ../panels/info/cc-info-panel.c:385
+#: ../panels/info/cc-info-panel.c:402
 #, c-format
 msgid "VESA: %s"
 msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:409 ../panels/network/panel-common.c:79
+#: ../panels/info/cc-info-panel.c:426 ../panels/network/panel-common.c:79
 #: ../panels/network/panel-common.c:158
 msgid "Unknown"
 msgstr "Unbekannt"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:558
+#: ../panels/info/cc-info-panel.c:587
 #, c-format
 msgid "%d-bit"
 msgstr "%d Bit"
 
-#: ../panels/info/cc-info-panel.c:715
+#: ../panels/info/cc-info-panel.c:744
 msgid "Unknown model"
 msgstr "Unbekanntes Modell"
 
 # Schwierig. »experience« meint hier eine komplette Sitzung bzw. die Startprogramme
-#: ../panels/info/cc-info-panel.c:798
+#: ../panels/info/cc-info-panel.c:827
 msgid "The next login will attempt to use the standard experience."
 msgstr ""
 "Bei der nächsten Anmeldung wird versucht, die Standard-Umgebung zu verwenden."
 
-#: ../panels/info/cc-info-panel.c:800
+#: ../panels/info/cc-info-panel.c:829
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
@@ -486,49 +488,134 @@ msgstr ""
 # CHECK upto line 505
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:842
+#: ../panels/info/cc-info-panel.c:871
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "Ausweichmodus"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:848
+#: ../panels/info/cc-info-panel.c:877
 msgctxt "Experience"
 msgid "Standard"
 msgstr "Standard"
 
-#: ../panels/info/cc-info-panel.c:988
+#: ../panels/info/cc-info-panel.c:1200
+msgid "Ask what to do"
+msgstr "Nachfragen, was geschehen soll"
+
+#: ../panels/info/cc-info-panel.c:1204 ../panels/power/power.ui.h:6
+msgid "Do nothing"
+msgstr "Nichts tun"
+
+#: ../panels/info/cc-info-panel.c:1208
+msgid "Open folder"
+msgstr "Ordner öffnen"
+
+#: ../panels/info/cc-info-panel.c:1319
+msgid "Select an application for audio CDs"
+msgstr "Eine Anwendung für Audio-CDs wählen"
+
+#: ../panels/info/cc-info-panel.c:1320
+msgid "Select an application for video DVDs"
+msgstr "Eine Anwendung für Video-DVDs wählen"
+
+#: ../panels/info/cc-info-panel.c:1321
+msgid "Select an application to run when a music player is connected"
+msgstr "Wählen Sie eine Anwendung, wenn ein Musikabspieler angeschlossen wird"
+
+#: ../panels/info/cc-info-panel.c:1322
+msgid "Select an application to run when a camera is connected"
+msgstr "Wählen Sie eine Anwendung, wenn eine Kamera angeschlossen wird"
+
+#: ../panels/info/cc-info-panel.c:1323
+msgid "Select an application for software CDs"
+msgstr "Eine Anwendung für Software-CDs wählen"
+
+#. translators: these strings are duplicates of shared-mime-info
+#. * strings, just here to fix capitalization of the English originals.
+#. * If the shared-mime-info translation works for your language,
+#. * simply leave these untranslated.
+#.
+#: ../panels/info/cc-info-panel.c:1335
+msgid "audio DVD"
+msgstr "Audio-DVD"
+
+#: ../panels/info/cc-info-panel.c:1336
+msgid "blank Blu-ray disc"
+msgstr "Leere Blu-ray-Disc"
+
+#: ../panels/info/cc-info-panel.c:1337
+msgid "blank CD disc"
+msgstr "Leere CD"
+
+#: ../panels/info/cc-info-panel.c:1338
+msgid "blank DVD disc"
+msgstr "Leere DVD"
+
+#: ../panels/info/cc-info-panel.c:1339
+msgid "blank HD DVD disc"
+msgstr "Leere HD-DVD"
+
+#: ../panels/info/cc-info-panel.c:1340
+msgid "Blu-ray video disc"
+msgstr "Blu-Ray-Video-Disc"
+
+#: ../panels/info/cc-info-panel.c:1341
+msgid "e-book reader"
+msgstr "E-Book-Reader"
+
+#: ../panels/info/cc-info-panel.c:1342
+msgid "HD DVD video disc"
+msgstr "HD-DVD-Video-Disc"
+
+#: ../panels/info/cc-info-panel.c:1343
+msgid "Picture CD"
+msgstr "Foto-CD"
+
+#: ../panels/info/cc-info-panel.c:1344
+msgid "Super Video CD"
+msgstr "Super-Video-CD"
+
+#: ../panels/info/cc-info-panel.c:1345
+msgid "Video CD"
+msgstr "Video-CD"
+
+#: ../panels/info/cc-info-panel.c:1474
 #: ../panels/keyboard/keyboard-shortcuts.c:1762
 msgid "Section"
 msgstr "Abschnitt"
 
-#: ../panels/info/cc-info-panel.c:997 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1483 ../panels/info/info.ui.h:15
 msgid "Overview"
 msgstr "Übersicht"
 
-#: ../panels/info/cc-info-panel.c:1003 ../panels/info/info.ui.h:2
+#: ../panels/info/cc-info-panel.c:1489 ../panels/info/info.ui.h:4
 msgid "Default Applications"
 msgstr "Vorgabe-Anwendungen"
 
-#: ../panels/info/cc-info-panel.c:1008 ../panels/info/info.ui.h:9
+#: ../panels/info/cc-info-panel.c:1494 ../panels/info/info.ui.h:17
+msgid "Removable Media"
+msgstr "Wechselmedien"
+
+#: ../panels/info/cc-info-panel.c:1499 ../panels/info/info.ui.h:11
 msgid "Graphics"
 msgstr "Grafik"
 
-#: ../panels/info/cc-info-panel.c:1209
+#: ../panels/info/cc-info-panel.c:1700
 #, c-format
 msgid "Version %s"
 msgstr "Version %s"
 
-#: ../panels/info/cc-info-panel.c:1259
+#: ../panels/info/cc-info-panel.c:1750
 msgid "Install Updates"
 msgstr "Aktualisierungen installieren"
 
-#: ../panels/info/cc-info-panel.c:1263
+#: ../panels/info/cc-info-panel.c:1754
 msgid "System Up-To-Date"
 msgstr "System ist auf dem aktuellen Stand"
 
-#: ../panels/info/cc-info-panel.c:1267
+#: ../panels/info/cc-info-panel.c:1758
 msgid "Checking for Updates"
 msgstr "Nach Aktualisierungen wird gesucht"
 
@@ -544,69 +631,113 @@ msgstr "Systeminformationen"
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
-"fallback;preferred;"
+"fallback;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgstr ""
 "Gerät;System;Information;Speicher;Prozessor;Version;Vorgabe;Anwendung;Ersatz;"
-"bevorzugt;"
+"bevorzugt;cd;dvd;usb;audio;video;medien;wechsel;medien;autostart;"
 
 #: ../panels/info/info.ui.h:1
+msgid "Acti_on:"
+msgstr "Akti_on:"
+
+#: ../panels/info/info.ui.h:2
+msgid "CD _audio:"
+msgstr "CD-_Audio:"
+
+#: ../panels/info/info.ui.h:3
 msgid "Calculating..."
 msgstr "Berechnung läuft …"
 
-#: ../panels/info/info.ui.h:3
+#: ../panels/info/info.ui.h:5
 msgid "Device name"
 msgstr "Gerätename"
 
-#: ../panels/info/info.ui.h:4
+#: ../panels/info/info.ui.h:6
 msgid "Disk"
 msgstr "Datenträger"
 
-#: ../panels/info/info.ui.h:5
+#: ../panels/info/info.ui.h:7
 msgid "Driver"
 msgstr "Treiber"
 
-#: ../panels/info/info.ui.h:6
+#: ../panels/info/info.ui.h:8
 msgid "Experience"
 msgstr "Umgebung"
 
 #. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
-#: ../panels/info/info.ui.h:8
+#: ../panels/info/info.ui.h:10
 msgid "Forced _Fallback Mode"
 msgstr "Er_zwungener Ausweichmodus"
 
-#: ../panels/info/info.ui.h:10
+#: ../panels/info/info.ui.h:12
 msgid "M_usic"
 msgstr "M_usik"
 
-#: ../panels/info/info.ui.h:11
+#: ../panels/info/info.ui.h:13
 msgid "Memory"
 msgstr "Speicher"
 
-#: ../panels/info/info.ui.h:12
+#: ../panels/info/info.ui.h:14
 msgid "OS type"
 msgstr "Typ des Betriebssystems"
 
-#: ../panels/info/info.ui.h:14
+#: ../panels/info/info.ui.h:16
 msgid "Processor"
 msgstr "Prozessor"
 
-#: ../panels/info/info.ui.h:15
+#: ../panels/info/info.ui.h:18
+msgid "Select how media should be handled"
+msgstr "Wählen Sie, wie mit Medien umgegangen werden sollen"
+
+#: ../panels/info/info.ui.h:19
+msgid "Select how other media should be handled"
+msgstr "Wählen Sie, wie mit anderen Medien umgegangen werden sollen"
+
+#: ../panels/info/info.ui.h:20
 msgid "_Calendar"
 msgstr "_Kalender"
 
-#: ../panels/info/info.ui.h:16
+#: ../panels/info/info.ui.h:21
+msgid "_DVD video:"
+msgstr "_DVD-Video:"
+
+#: ../panels/info/info.ui.h:22
 msgid "_Mail"
 msgstr "_E-Mail"
 
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:23
+msgid "_Music player:"
+msgstr "_Musikwiedergabe:"
+
+#: ../panels/info/info.ui.h:24
+msgid "_Never prompt or start programs on media insertion"
+msgstr "Beim _Einlegen von Datenträgern nie nachfragen oder Programme starten"
+
+#: ../panels/info/info.ui.h:25
+msgid "_Other Media..."
+msgstr "_Andere Medien …"
+
+#: ../panels/info/info.ui.h:26
 msgid "_Photos"
 msgstr "_Fotos"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:27
+msgid "_Photos:"
+msgstr "_Fotos:"
+
+#: ../panels/info/info.ui.h:28
+msgid "_Software:"
+msgstr "_Software:"
+
+#: ../panels/info/info.ui.h:29
+msgid "_Type:"
+msgstr "_Typ:"
+
+#: ../panels/info/info.ui.h:30
 msgid "_Video"
 msgstr "V_ideo"
 
-#: ../panels/info/info.ui.h:19
+#: ../panels/info/info.ui.h:31
 msgid "_Web"
 msgstr "_Web"
 
@@ -884,7 +1015,8 @@ msgstr "Belegungseinstellungen"
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/zoom-options.ui.h:13
 msgid "Long"
 msgstr "Lang"
 
@@ -903,7 +1035,8 @@ msgstr "Ge_schwindigkeit:"
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 #: ../panels/mouse/gnome-mouse-properties.ui.h:23
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Short"
 msgstr "Kurz"
 
@@ -924,11 +1057,10 @@ msgid ""
 "Backspace to clear."
 msgstr ""
 "Um ein Tastenkürzel zu bearbeiten, klicken Sie auf die Zeile und drücken Sie "
-"die neue Tastenkombination, oder drücken Sie die Rücktaste, um sie zu "
-"löschen."
+"die neue Tastenkombination, oder drücken Sie die Rücktaste, um sie zu löschen."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Typing"
 msgstr "Texteingabe"
 
@@ -944,191 +1076,47 @@ msgstr "_Name:"
 msgid "_Speed:"
 msgstr "_Geschwindigkeit:"
 
-#: ../panels/media/cc-media-panel.c:315
-msgid "Ask what to do"
-msgstr "Nachfragen, was geschehen soll"
-
-#: ../panels/media/cc-media-panel.c:319 ../panels/power/power.ui.h:6
-msgid "Do nothing"
-msgstr "Nichts tun"
-
-#: ../panels/media/cc-media-panel.c:323
-msgid "Open folder"
-msgstr "Ordner öffnen"
-
-#: ../panels/media/cc-media-panel.c:434
-msgid "Select an application for audio CDs"
-msgstr "Eine Anwendung für Audio-CDs wählen"
-
-#: ../panels/media/cc-media-panel.c:435
-msgid "Select an application for video DVDs"
-msgstr "Eine Anwendung für Video-DVDs wählen"
-
-#: ../panels/media/cc-media-panel.c:436
-msgid "Select an application to run when a music player is connected"
-msgstr "Wählen Sie eine Anwendung, wenn ein Musikabspieler angeschlossen wird"
-
-#: ../panels/media/cc-media-panel.c:437
-msgid "Select an application to run when a camera is connected"
-msgstr "Wählen Sie eine Anwendung, wenn eine Kamera angeschlossen wird"
-
-#: ../panels/media/cc-media-panel.c:438
-msgid "Select an application for software CDs"
-msgstr "Eine Anwendung für Software-CDs wählen"
-
-#. translators: these strings are duplicates of shared-mime-info
-#. * strings, just here to fix capitalization of the English originals.
-#. * If the shared-mime-info translation works for your language,
-#. * simply leave these untranslated.
-#.
-#: ../panels/media/cc-media-panel.c:450
-msgid "audio DVD"
-msgstr "Audio-DVD"
-
-#: ../panels/media/cc-media-panel.c:451
-msgid "blank Blu-ray disc"
-msgstr "Leere Blu-ray-Disc"
-
-#: ../panels/media/cc-media-panel.c:452
-msgid "blank CD disc"
-msgstr "Leere CD"
-
-#: ../panels/media/cc-media-panel.c:453
-msgid "blank DVD disc"
-msgstr "Leere DVD"
-
-#: ../panels/media/cc-media-panel.c:454
-msgid "blank HD DVD disc"
-msgstr "Leere HD-DVD"
-
-#: ../panels/media/cc-media-panel.c:455
-msgid "Blu-ray video disc"
-msgstr "Blu-Ray-Video-Disc"
-
-#: ../panels/media/cc-media-panel.c:456
-msgid "e-book reader"
-msgstr "E-Book-Reader"
-
-#: ../panels/media/cc-media-panel.c:457
-msgid "HD DVD video disc"
-msgstr "HD-DVD-Video-Disc"
-
-#: ../panels/media/cc-media-panel.c:458
-msgid "Picture CD"
-msgstr "Foto-CD"
-
-#: ../panels/media/cc-media-panel.c:459
-msgid "Super Video CD"
-msgstr "Super-Video-CD"
-
-#: ../panels/media/cc-media-panel.c:460
-msgid "Video CD"
-msgstr "Video-CD"
-
-#: ../panels/media/gnome-media-properties.ui.h:1
-msgid "Acti_on:"
-msgstr "Akti_on:"
-
-#: ../panels/media/gnome-media-properties.ui.h:2
-msgid "CD _audio:"
-msgstr "CD-_Audio:"
-
-# Vielleicht zu lang?
-# Ist lang. Evtl »Medien und Auto-Start« ?
-#: ../panels/media/gnome-media-properties.ui.h:3
-msgid "Media and Autorun"
-msgstr "Medien und automatische Ausführung"
-
-#: ../panels/media/gnome-media-properties.ui.h:4
-msgid "Select how media should be handled"
-msgstr "Wählen Sie, wie mit Medien umgegangen werden sollen"
-
-#: ../panels/media/gnome-media-properties.ui.h:5
-msgid "Select how other media should be handled"
-msgstr "Wählen Sie, wie mit anderen Medien umgegangen werden sollen"
-
-#: ../panels/media/gnome-media-properties.ui.h:6
-msgid "_DVD video:"
-msgstr "_DVD-Video:"
-
-#: ../panels/media/gnome-media-properties.ui.h:7
-msgid "_Music player:"
-msgstr "_Musikwiedergabe:"
-
-#: ../panels/media/gnome-media-properties.ui.h:8
-msgid "_Never prompt or start programs on media insertion"
-msgstr "Beim _Einlegen von Datenträgern nie nachfragen oder Programme starten"
-
-#: ../panels/media/gnome-media-properties.ui.h:9
-msgid "_Other Media..."
-msgstr "_Andere Medien …"
-
-#: ../panels/media/gnome-media-properties.ui.h:10
-msgid "_Photos:"
-msgstr "_Fotos:"
-
-#: ../panels/media/gnome-media-properties.ui.h:11
-msgid "_Software:"
-msgstr "_Software:"
-
-#: ../panels/media/gnome-media-properties.ui.h:12
-msgid "_Type:"
-msgstr "_Typ:"
-
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:1
-msgid "Configure media and autorun preferences"
-msgstr "Einstellungen für Medien und automatische Ausführung festlegen"
-
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:2
-msgid "Removable Media"
-msgstr "Wechselmedien"
-
-#. Translators: those are keywords for the media control-center panel
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:4
-msgid "cd;dvd;usb;audio;video;disc;"
-msgstr "cd;dvd;usb;audio;video;disc;"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:308
+#: ../panels/online-accounts/cc-online-accounts-panel.c:305
 msgid "Error logging into the account"
 msgstr "Fehler beim Anmelden am Konto"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:354
+#: ../panels/online-accounts/cc-online-accounts-panel.c:351
 msgid "Expired credentials. Please log in again."
 msgstr "Anmeldeinformationen sind abgelaufen. Bitte melden Sie sich erneut an."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:357
+#: ../panels/online-accounts/cc-online-accounts-panel.c:354
 msgid "_Log In"
 msgstr "Anme_lden"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:466
+#: ../panels/online-accounts/cc-online-accounts-panel.c:463
 msgid "To add a new account, first select the account type"
 msgstr "Um ein neues Konto hinzuzufügen, wählen Sie zuerst den Kontentyp aus"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:469
+#: ../panels/online-accounts/cc-online-accounts-panel.c:466
 msgid "Account Type:"
 msgstr "Kontentyp:"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:501
+#: ../panels/online-accounts/cc-online-accounts-panel.c:499
 msgid "_Add..."
 msgstr "_Hinzufügen …"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:554
+#: ../panels/online-accounts/cc-online-accounts-panel.c:552
 msgid "Error creating account"
 msgstr "Fehler beim Erstellen des Kontos"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:588
+#: ../panels/online-accounts/cc-online-accounts-panel.c:586
 msgid "Error removing account"
 msgstr "Fehler beim Entfernen des Kontos"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:624
+#: ../panels/online-accounts/cc-online-accounts-panel.c:622
 msgid "Are you sure you want to remove the account?"
 msgstr "Sind Sie sicher, dass Sie dieses Konto löschen wollen?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:626
+#: ../panels/online-accounts/cc-online-accounts-panel.c:624
 msgid "This will not remove the account on the server."
 msgstr "Dadurch wird Ihr Konto nicht vom Server entfernt."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:627
+#: ../panels/online-accounts/cc-online-accounts-panel.c:625
 msgid "_Remove"
 msgstr "Entfe_rnen"
 
@@ -1150,125 +1138,125 @@ msgid "Select an account"
 msgstr "Konto auswählen"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:509
+#: ../panels/printers/cc-printers-panel.c:520
 msgid "Low on toner"
 msgstr "Wenig Toner"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:511
+#: ../panels/printers/cc-printers-panel.c:522
 msgid "Out of toner"
 msgstr "Toner leer"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:514
+#: ../panels/printers/cc-printers-panel.c:525
 msgid "Low on developer"
 msgstr "Wenig Entwickler"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:517
+#: ../panels/printers/cc-printers-panel.c:528
 msgid "Out of developer"
 msgstr "Entwickler leer"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:519
+#: ../panels/printers/cc-printers-panel.c:530
 msgid "Low on a marker supply"
 msgstr "Einer der Farbspeicher fast leer"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:521
+#: ../panels/printers/cc-printers-panel.c:532
 msgid "Out of a marker supply"
 msgstr "Eine Farbpatrone leer"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:523
+#: ../panels/printers/cc-printers-panel.c:534
 msgid "Open cover"
 msgstr "Abdeckung offen"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:525
+#: ../panels/printers/cc-printers-panel.c:536
 msgid "Open door"
 msgstr "Klappe offen"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:527
+#: ../panels/printers/cc-printers-panel.c:538
 msgid "Low on paper"
 msgstr "Wenig Papier"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:529
+#: ../panels/printers/cc-printers-panel.c:540
 msgid "Out of paper"
 msgstr "Papier leer"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:531
+#: ../panels/printers/cc-printers-panel.c:542
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Abgemeldet"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:533
+#: ../panels/printers/cc-printers-panel.c:544
 msgctxt "printer state"
 msgid "Paused"
 msgstr "Angehalten"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:535
+#: ../panels/printers/cc-printers-panel.c:546
 msgid "Waste receptacle almost full"
 msgstr "Der Abfallbehälter ist fast voll"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:537
+#: ../panels/printers/cc-printers-panel.c:548
 msgid "Waste receptacle full"
 msgstr "Der Abfallbehälter ist voll"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:539
+#: ../panels/printers/cc-printers-panel.c:550
 msgid "The optical photo conductor is near end of life"
 msgstr "Der optische Bildübertrager ist beinahe verbraucht"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:541
+#: ../panels/printers/cc-printers-panel.c:552
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Der optische Bildübertrager funktioniert nicht mehr"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:713
+#: ../panels/printers/cc-printers-panel.c:724
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Bereit"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:717
+#: ../panels/printers/cc-printers-panel.c:728
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Verarbeitung läuft"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:721
+#: ../panels/printers/cc-printers-panel.c:732
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Angehalten"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:840
+#: ../panels/printers/cc-printers-panel.c:851
 msgid "Toner Level"
 msgstr "Tonerfüllstand"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:843
+#: ../panels/printers/cc-printers-panel.c:854
 msgid "Ink Level"
 msgstr "Tintenfüllstand"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:846
+#: ../panels/printers/cc-printers-panel.c:857
 msgid "Supply Level"
 msgstr "Materialfüllstand"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:861
-#: ../panels/printers/cc-printers-panel.c:1245
+#: ../panels/printers/cc-printers-panel.c:872
+#: ../panels/printers/cc-printers-panel.c:1256
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -1276,80 +1264,80 @@ msgstr[0] "%u aktiv"
 msgstr[1] "%u aktiv"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:966
+#: ../panels/printers/cc-printers-panel.c:977
 msgid "No printers available"
 msgstr "Keine Drucker verfügbar"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1288
+#: ../panels/printers/cc-printers-panel.c:1299
 msgctxt "print job"
 msgid "Pending"
 msgstr "Ausstehend"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1292
+#: ../panels/printers/cc-printers-panel.c:1303
 msgctxt "print job"
 msgid "Held"
 msgstr "Zurückgehalten"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1296
+#: ../panels/printers/cc-printers-panel.c:1307
 msgctxt "print job"
 msgid "Processing"
 msgstr "Verarbeitung läuft"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1300
+#: ../panels/printers/cc-printers-panel.c:1311
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Angehalten"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1304
+#: ../panels/printers/cc-printers-panel.c:1315
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Abgebrochen"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1308
+#: ../panels/printers/cc-printers-panel.c:1319
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Abgebrochen"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1312
+#: ../panels/printers/cc-printers-panel.c:1323
 msgctxt "print job"
 msgid "Completed"
 msgstr "Abgeschlossen"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1395
+#: ../panels/printers/cc-printers-panel.c:1406
 msgid "Job Title"
 msgstr "Auftragsbezeichnung"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1404
+#: ../panels/printers/cc-printers-panel.c:1415
 msgid "Job State"
 msgstr "Auftragsstatus"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1410
+#: ../panels/printers/cc-printers-panel.c:1421
 msgid "Time"
 msgstr "Uhrzeit"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2006
+#: ../panels/printers/cc-printers-panel.c:2017
 msgid "Failed to add new printer."
 msgstr "Neuer Drucker konnte nicht hinzugefügt werden."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2210
-#: ../panels/printers/cc-printers-panel.c:2224
+#: ../panels/printers/cc-printers-panel.c:2221
+#: ../panels/printers/cc-printers-panel.c:2235
 msgid "Test page"
 msgstr "Testseite"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2441
+#: ../panels/printers/cc-printers-panel.c:2477
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Die Benutzeroberfläche konnte nicht geladen werden: %s"
@@ -1364,7 +1352,7 @@ msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Drucker;Warteschlange;Drucken;Papier;Tinte;Toner;Tintenpatrone;"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
-#: ../panels/printers/pp-new-printer-dialog.c:142
+#: ../panels/printers/pp-new-printer-dialog.c:143
 msgid "Printers"
 msgstr "Drucker"
 
@@ -1384,56 +1372,66 @@ msgstr "_Hinzufügen"
 msgid "_Search by Address"
 msgstr "Adressweise _suchen"
 
-#: ../panels/printers/pp-new-printer-dialog.c:627
+#: ../panels/printers/pp-new-printer-dialog.c:631
 msgid "Getting devices..."
 msgstr "Geräte werden ermittelt …"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1262
+#. Translators: No localy connected printers were found
+#: ../panels/printers/pp-new-printer-dialog.c:1205
+msgid "No local printers found"
+msgstr "Keine lokalen Drucker gefunden"
+
+#. Translators: No network printers were found
+#: ../panels/printers/pp-new-printer-dialog.c:1218
+msgid "No network printers found"
+msgstr "Keine Netzwerkdrucker gefunden"
+
+#: ../panels/printers/pp-new-printer-dialog.c:1305
 msgid ""
-"FirewallD is not running. Network printer detection needs services mdns, "
-"ipp, ipp-client and samba-client enabled on firewall."
+"FirewallD is not running. Network printer detection needs services mdns, ipp, "
+"ipp-client and samba-client enabled on firewall."
 msgstr ""
 "FirewallD wird nicht ausgeführt. Für die Erkennung von Netzwerkdruckern "
 "müssen die Dienste mdns, ipp, ipp-client und samba-client in der Firewall "
 "freigegeben sein."
 
 #. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:1282
-#: ../panels/printers/pp-new-printer-dialog.c:1287
+#: ../panels/printers/pp-new-printer-dialog.c:1325
+#: ../panels/printers/pp-new-printer-dialog.c:1330
 msgid "Devices"
 msgstr "Geräte"
 
 #. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:1312
+#: ../panels/printers/pp-new-printer-dialog.c:1355
 msgctxt "printer type"
 msgid "Local"
 msgstr "Lokal"
 
 #. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:1314
+#: ../panels/printers/pp-new-printer-dialog.c:1357
 msgctxt "printer type"
 msgid "Network"
 msgstr "Netzwerk"
 
 #. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:1355
+#: ../panels/printers/pp-new-printer-dialog.c:1398
 msgid "Device types"
 msgstr "Gerätetypen"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:1654
+#: ../panels/printers/pp-new-printer-dialog.c:1697
 msgid "Automatic configuration"
 msgstr "Automatische Konfiguration"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1750
+#: ../panels/printers/pp-new-printer-dialog.c:1793
 msgid "Opening firewall for mDNS connections"
 msgstr "Firewall wird für mDNS-Verbindungen geöffnet"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1759
+#: ../panels/printers/pp-new-printer-dialog.c:1802
 msgid "Opening firewall for Samba connections"
 msgstr "Firewall wird für Samba-Verbindungen geöffnet"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1768
+#: ../panels/printers/pp-new-printer-dialog.c:1811
 msgid "Opening firewall for IPP connections"
 msgstr "Firewall wird für IPP-Verbindungen geöffnet"
 
@@ -1451,8 +1449,7 @@ msgstr "Neuen Drucker hinzufügen"
 msgid "Allowed users"
 msgstr "Erlaubte Benutzer"
 
-#: ../panels/printers/printers.ui.h:6
-#: ../panels/network/cc-network-panel.c:1992
+#: ../panels/printers/printers.ui.h:6 ../panels/network/cc-network-panel.c:1992
 #: ../panels/network/cc-network-panel.c:1995 ../panels/network/network.ui.h:11
 msgid "IP Address"
 msgstr "IP-Adresse"
@@ -1625,8 +1622,8 @@ msgstr "Auf Vor_gabewerte zurücksetzen"
 #: ../panels/region/gnome-region-panel.ui.h:22
 msgid "Select a display language (change will be applied next time you log in)"
 msgstr ""
-"Wählen Sie eine Anzeigensprache (Änderungen werden mit der nächsten "
-"Anmeldung wirksam)"
+"Wählen Sie eine Anzeigensprache (Änderungen werden mit der nächsten Anmeldung "
+"wirksam)"
 
 #: ../panels/region/gnome-region-panel.ui.h:23
 msgid "Select a region (change will be applied the next time you log in)"
@@ -1644,8 +1641,8 @@ msgid ""
 "Region and Language settings. You may change the system settings to match "
 "yours."
 msgstr ""
-"Der Anmeldebildschirm, die Systemkonten und neue Benutzerkonten verwenden "
-"die Regions- und Spracheinstellungen des Systems. Sie können die "
+"Der Anmeldebildschirm, die Systemkonten und neue Benutzerkonten verwenden die "
+"Regions- und Spracheinstellungen des Systems. Sie können die "
 "Systemeinstellungen an Ihre Erfordernisse anpassen."
 
 #: ../panels/region/gnome-region-panel.ui.h:27
@@ -1673,8 +1670,8 @@ msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings."
 msgstr ""
-"Der Anmeldebildschirm, die Systemkonten und neue Benutzerkonten verwenden "
-"die Regions- und Spracheinstellungen des Systems."
+"Der Anmeldebildschirm, die Systemkonten und neue Benutzerkonten verwenden die "
+"Regions- und Spracheinstellungen des Systems."
 
 #: ../panels/region/gnome-region-panel-system.c:324
 msgid "Copy Settings"
@@ -1724,6 +1721,7 @@ msgid "Enable h_orizontal scrolling"
 msgstr "_Horizontalen Bildlauf einschalten"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/universal-access/zoom-options.ui.h:7
 msgid "General"
 msgstr "Allgemein"
 
@@ -1734,7 +1732,7 @@ msgstr "Hoch"
 
 #. large threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:14
-#: ../panels/universal-access/uap.ui.h:35
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Large"
 msgstr "Groß"
 
@@ -1766,7 +1764,7 @@ msgstr "_Position des Mauszeigers anzeigen, wenn die Strg-Taste gedrückt wird"
 
 #. small threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:27
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:57
 msgid "Small"
 msgstr "Klein"
 
@@ -1776,8 +1774,7 @@ msgstr "_Schwellenwert:"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:29
 msgid "To test your settings, try to double-click on the face."
-msgstr ""
-"Versuchen Sie, zur Probe einen Doppelklick auf dem Gesicht auszuführen."
+msgstr "Versuchen Sie, zur Probe einen Doppelklick auf dem Gesicht auszuführen."
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:30
 msgid "Touchpad"
@@ -1874,7 +1871,8 @@ msgstr "Enterprise"
 #. TRANSLATORS: this no (!) WiFi security
 #: ../panels/network/cc-network-panel.c:1128
 #: ../panels/network/cc-network-panel.c:1511
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/zoom-options.ui.h:16
 msgid "None"
 msgstr "Keine"
 
@@ -2388,8 +2386,7 @@ msgid "All files"
 msgstr "Alle Dateien"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:725
-#: ../panels/sound/gvc-mixer-dialog.c:1548
+#: ../panels/color/cc-color-panel.c:725 ../panels/sound/gvc-mixer-dialog.c:1515
 msgid "Device"
 msgstr "Gerät"
 
@@ -2680,8 +2677,8 @@ msgid "_Lock screen after:"
 msgstr "Bildschirm _sperren nach:"
 
 #: ../panels/screen/screen.ui.h:17
-msgid "_Turn off after:"
-msgstr "Abschal_ten nach:"
+msgid "_Turn screen off when inactive for:"
+msgstr "Bildschirm abschal_ten, wenn inaktiv für:"
 
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
@@ -2695,7 +2692,7 @@ msgstr "Version dieser Anwendung"
 msgid " — GNOME Volume Control Applet"
 msgstr " — GNOME-Lautstärkeregler-Applet"
 
-#: ../panels/sound/gvc-applet.c:270 ../panels/sound/gvc-mixer-dialog.c:1949
+#: ../panels/sound/gvc-applet.c:270 ../panels/sound/gvc-mixer-dialog.c:1767
 msgid "Output"
 msgstr "Ausgabe"
 
@@ -2703,7 +2700,7 @@ msgstr "Ausgabe"
 msgid "Sound Output Volume"
 msgstr "Wiedergabelautstärke"
 
-#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1864
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1807
 msgid "Input"
 msgstr "Eingang"
 
@@ -2764,11 +2761,7 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "Nicht verstärkt"
 
-#: ../panels/sound/gvc-channel-bar.c:901
-msgid "Mute"
-msgstr "Stumm"
-
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1654
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1621
 msgid "_Profile:"
 msgstr "_Profil:"
 
@@ -2794,79 +2787,78 @@ msgstr[1] "%u Eingänge"
 msgid "System Sounds"
 msgstr "Systemklänge"
 
-#: ../panels/sound/gvc-mixer-dialog.c:324
-#: ../panels/sound/gvc-mixer-dialog.c:635
+#: ../panels/sound/gvc-mixer-dialog.c:323
+#: ../panels/sound/gvc-mixer-dialog.c:634
 msgid "Co_nnector:"
 msgstr "_Verbindungsglied:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:541
+#: ../panels/sound/gvc-mixer-dialog.c:540
 msgid "Peak detect"
 msgstr "Spitzenpegelerkennung"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1530
-#: ../panels/sound/gvc-mixer-dialog.c:1742
+#: ../panels/sound/gvc-mixer-dialog.c:1496
+#: ../panels/sound/gvc-mixer-dialog.c:1709
 #: ../panels/sound/gvc-sound-theme-chooser.c:596
 msgid "Name"
 msgstr "Name"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1596
+#: ../panels/sound/gvc-mixer-dialog.c:1563
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Lautsprechertest für %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1655
+#: ../panels/sound/gvc-mixer-dialog.c:1622
 msgid "_Test Speakers"
 msgstr "Lautsprecher _testen"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1786
+#: ../panels/sound/gvc-mixer-dialog.c:1753
 msgid "_Output volume:"
 msgstr "_Wiedergabelautstärke: "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1800
-msgid "Sound Effects"
-msgstr "Klangeffekte"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1807
-msgid "_Alert volume:"
-msgstr "_Warnlautstärke: "
-
-#: ../panels/sound/gvc-mixer-dialog.c:1820
-msgid "Hardware"
-msgstr "Hardware"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1825
-msgid "C_hoose a device to configure:"
-msgstr "Wä_hlen Sie ein Gerät zum Konfigurieren:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1853
-#: ../panels/sound/gvc-mixer-dialog.c:1978
-msgid "Settings for the selected device:"
-msgstr "Einstellungen für das gewählte Gerät:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1871
-msgid "_Input volume:"
-msgstr "_Aufnahmelautstärke: "
-
-#: ../panels/sound/gvc-mixer-dialog.c:1894
-msgid "Input level:"
-msgstr "Aufnahmepegel:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1922
-msgid "C_hoose a device for sound input:"
-msgstr "Wä_hlen Sie ein Gerät zur Toneingabe:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1954
+#: ../panels/sound/gvc-mixer-dialog.c:1772
 msgid "C_hoose a device for sound output:"
 msgstr "Wä_hlen Sie ein Gerät zur Tonausgabe:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1989
+#: ../panels/sound/gvc-mixer-dialog.c:1796
+#: ../panels/sound/gvc-mixer-dialog.c:1925
+msgid "Settings for the selected device:"
+msgstr "Einstellungen für das gewählte Gerät:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1814
+msgid "_Input volume:"
+msgstr "_Aufnahmelautstärke: "
+
+#: ../panels/sound/gvc-mixer-dialog.c:1837
+msgid "Input level:"
+msgstr "Aufnahmepegel:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1865
+msgid "C_hoose a device for sound input:"
+msgstr "Wä_hlen Sie ein Gerät zur Toneingabe:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1892
+msgid "Hardware"
+msgstr "Hardware"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1897
+msgid "C_hoose a device to configure:"
+msgstr "Wä_hlen Sie ein Gerät zum Konfigurieren:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1936
+msgid "Sound Effects"
+msgstr "Klangeffekte"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1943
+msgid "_Alert volume:"
+msgstr "_Warnlautstärke: "
+
+#: ../panels/sound/gvc-mixer-dialog.c:1956
 msgid "Applications"
 msgstr "Anwendungen"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1993
+#: ../panels/sound/gvc-mixer-dialog.c:1960
 msgid "No application is currently playing or recording audio."
-msgstr ""
-"Derzeit wird von keiner Audio-Anwendung aufgenommen oder wiedergegeben."
+msgstr "Derzeit wird von keiner Audio-Anwendung aufgenommen oder wiedergegeben."
 
 #: ../panels/sound/gvc-speaker-test.c:221
 msgid "Stop"
@@ -2939,8 +2931,8 @@ msgstr "Lautstärkeregelung"
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
 msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;"
 msgstr ""
-"Karte;Mikrofon;Sound;Lautstärke;Lautstärkeregler;Ausblenden;Balance;"
-"Bluetooth;Headset;"
+"Karte;Mikrofon;Sound;Lautstärke;Lautstärkeregler;Ausblenden;Balance;Bluetooth;"
+"Headset;"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:3
 msgid "Change sound volume and sound events"
@@ -2975,8 +2967,8 @@ msgstr "Glas"
 msgid "Sonar"
 msgstr "Sonar"
 
-#: ../panels/universal-access/cc-ua-panel.c:484
-#: ../panels/universal-access/cc-ua-panel.c:489
+#: ../panels/universal-access/cc-ua-panel.c:505
+#: ../panels/universal-access/cc-ua-panel.c:510
 msgid "No shortcut set"
 msgstr "Kein Tastenkürzel zugewiesen"
 
@@ -3085,6 +3077,18 @@ msgstr ""
 #: ../panels/universal-access/gconf-property-editor.c:1604
 msgid "Please select an image."
 msgstr "Bitte wählen Sie ein Bild."
+
+#: ../panels/universal-access/zoom-options.c:156
+msgid "1/4 Screen"
+msgstr "1/4-Bildschirm"
+
+#: ../panels/universal-access/zoom-options.c:157
+msgid "1/2 Screen"
+msgstr "1/2-Bildschirm"
+
+#: ../panels/universal-access/zoom-options.c:158
+msgid "3/4 Screen"
+msgstr "3/4-Bildschirm"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
@@ -3215,126 +3219,125 @@ msgstr "Ignoriert schnelle doppelte Tastenanschläge"
 msgid "Increase size:"
 msgstr "Vergrößern:"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Keyboard Settings"
+msgstr "Tastatureinstellungen"
+
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Motion _threshold:"
 msgstr "_Schwellenwert der Bewegung:"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Mouse Keys"
 msgstr "Tastaturmaus"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:41
+msgid "Mouse Settings"
+msgstr "Maus-Einstellungen"
+
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Nomon"
 msgstr "Nomon"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:44
 msgid "On screen keyboard"
 msgstr "Bildschirmtastatur"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:45
 msgid "OnBoard"
 msgstr "AufBildschirm"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Options..."
 msgstr "Optionen …"
 
-#: ../panels/universal-access/uap.ui.h:45
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Pointing and Clicking"
 msgstr "Zeigen und Klicken"
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Puts a delay between when a key is pressed and when it is accepted"
-msgstr ""
-"Setzt eine Verzögerung zwischen dem Drücken und Akzeptieren einer Taste"
+msgstr "Setzt eine Verzögerung zwischen dem Drücken und Akzeptieren einer Taste"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Screen Reader"
 msgstr "Bildschirmleser"
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Screen keyboard"
 msgstr "Bildschirmtastatur"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:51
 msgid "Seeing"
 msgstr "Sehen"
 
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Simulated Secondary Click"
 msgstr "Simulierter Kontextklick"
 
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Slow Keys"
 msgstr "Tastenverzögerung"
 
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:58
+msgid "Sound Settings"
+msgstr "Klangeinstellungen"
+
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Sticky Keys"
 msgstr "Klebrige Tasten"
 
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Erkennt eine Abfolge von Zusatztasten als Tastenkombination"
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Trigger a click when the pointer hovers"
 msgstr "Klick ausführen, wenn sich der Mauszeiger nicht mehr bewegt"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Kontextklick durch Gedrückthalten der primären Maustaste auslösen"
 
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Turn on or off:"
 msgstr "An- oder abschalten:"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Type here to test settings"
 msgstr "Hier tippen, um Einstellungen zu überprüfen"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Typing Assistant"
 msgstr "Texteingabeassistent"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "Eine visuelle Anzeige auslösen, wenn ein Warnklang abgespielt wird"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Video Mouse"
 msgstr "Video-Maus"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Visual Alerts"
 msgstr "Visuelle Alarme"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Zoom in:"
 msgstr "Ansicht vergrößern:"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Zoom out:"
 msgstr "Ansicht verkleinern:"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:72
 msgid "_Contrast:"
 msgstr "_Kontrast:"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:73
 msgid "_Disable if two keys are pressed together"
 msgstr "_Deaktivieren, wenn zwei Tasten zusammen gedrückt werden"
-
-#: ../panels/universal-access/uap.ui.h:71
-msgid "_Keyboard Settings"
-msgstr "_Tastatureinstellungen"
-
-#: ../panels/universal-access/uap.ui.h:72
-msgid "_Mouse Settings"
-msgstr "_Maus-Einstellungen"
-
-#: ../panels/universal-access/uap.ui.h:73
-msgid "_Sound Settings"
-msgstr "_Klangeinstellungen"
 
 #: ../panels/universal-access/uap.ui.h:74
 msgid "_Test flash"
@@ -3416,6 +3419,108 @@ msgctxt "universal access, text size"
 msgid "Small"
 msgstr "Klein"
 
+#: ../panels/universal-access/zoom-options.ui.h:1
+msgid "Always"
+msgstr "Immer"
+
+#: ../panels/universal-access/zoom-options.ui.h:2
+msgid "Bottom Half"
+msgstr "Untere Hälfte"
+
+#: ../panels/universal-access/zoom-options.ui.h:3
+msgid "Centered"
+msgstr "Zentriert"
+
+#: ../panels/universal-access/zoom-options.ui.h:4
+msgid "Color and Opacity"
+msgstr "Farbe und Deckkraft"
+
+#: ../panels/universal-access/zoom-options.ui.h:5
+msgid "Crosshairs"
+msgstr "Fadenkreuz"
+
+#: ../panels/universal-access/zoom-options.ui.h:6
+msgid "Full Screen"
+msgstr "Vollbild"
+
+#: ../panels/universal-access/zoom-options.ui.h:8
+msgid "Image moves with the mouse pointer"
+msgstr "Bild folgt dem Mauszeiger"
+
+#: ../panels/universal-access/zoom-options.ui.h:9
+msgid "Image scrolls at screen edges"
+msgstr "Bild rollt an Bildschirmrändern"
+
+#: ../panels/universal-access/zoom-options.ui.h:10
+msgid "Left Half"
+msgstr "Linke Hälfte"
+
+#: ../panels/universal-access/zoom-options.ui.h:11
+msgid "Length"
+msgstr "Länge"
+
+#: ../panels/universal-access/zoom-options.ui.h:14
+msgid "Magnification"
+msgstr "Vergrößerung"
+
+#: ../panels/universal-access/zoom-options.ui.h:15
+msgid "Moveable lens - magnified view follows mouse movements"
+msgstr "Verschiebbare Linse - die vergrößerte Ansicht folgt den Masubewegungen"
+
+#: ../panels/universal-access/zoom-options.ui.h:17
+msgid "Position of magnified view on screen"
+msgstr "Position des vergrößerten Fensters auf dem Bildschirm"
+
+#: ../panels/universal-access/zoom-options.ui.h:18
+msgid "Proportional"
+msgstr "Proportional"
+
+#: ../panels/universal-access/zoom-options.ui.h:19
+msgid "Push"
+msgstr "Schieben"
+
+#: ../panels/universal-access/zoom-options.ui.h:20
+msgid "Right Half"
+msgstr "Rechte Hälfte"
+
+#: ../panels/universal-access/zoom-options.ui.h:23
+msgid "Show"
+msgstr "Zeigen"
+
+#: ../panels/universal-access/zoom-options.ui.h:24
+msgid "Show crosshairs intersection"
+msgstr "Fadenkreuzschnittpunkt anzeigen"
+
+#. long delay
+#: ../panels/universal-access/zoom-options.ui.h:26
+msgid "Thick"
+msgstr "Dick"
+
+#: ../panels/universal-access/zoom-options.ui.h:27
+msgid "Thickness"
+msgstr "Dicke"
+
+#. short delay
+#: ../panels/universal-access/zoom-options.ui.h:29
+msgid "Thin"
+msgstr "Dünn"
+
+#: ../panels/universal-access/zoom-options.ui.h:30
+msgid "To keep the pointer centered"
+msgstr "Den Zeiger zentriert halten"
+
+#: ../panels/universal-access/zoom-options.ui.h:31
+msgid "To keep the pointer visible"
+msgstr "Den Zeiger sichtbar halten"
+
+#: ../panels/universal-access/zoom-options.ui.h:32
+msgid "Top Half"
+msgstr "Obere Hälfte"
+
+#: ../panels/universal-access/zoom-options.ui.h:33
+msgid "Zoom Options"
+msgstr "Vergrößerungsoptionen"
+
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
 msgstr "Legitimierung fehlgeschlagen"
@@ -3454,8 +3559,7 @@ msgstr "Das neue und das alte Passwort sind gleich"
 #: ../panels/user-accounts/run-passwd.c:532
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
-msgstr ""
-"Ihr Passwort wurde geändert, seit Sie sich erstmalig legitimiert haben!"
+msgstr "Ihr Passwort wurde geändert, seit Sie sich erstmalig legitimiert haben!"
 
 #: ../panels/user-accounts/run-passwd.c:536
 #, c-format
@@ -3563,8 +3667,8 @@ msgstr "Anmeldung mit Fingerabdruck freischalten"
 #: ../panels/user-accounts/um-fingerprint-dialog.c:605
 #, c-format
 msgid ""
-"To enable fingerprint login, you need to save one of your fingerprints, "
-"using the '%s' device."
+"To enable fingerprint login, you need to save one of your fingerprints, using "
+"the '%s' device."
 msgstr ""
 "Zur Freischaltung der Anmeldung mit Fingerabdruck müssen Sie einen "
 "Fingerabdruck mit dem Gerät »%s« hinterlegen."
@@ -4206,4 +4310,3 @@ msgstr "Kontrollzentrum"
 #: ../shell/shell.ui.h:2
 msgid "_All Settings"
 msgstr "_Alle Einstellungen"
-
