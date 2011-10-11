@@ -37,6 +37,7 @@ gboolean      gdm_parse_language_name     (const char *name,
                                            char      **codesetp,
                                            char      **modifierp);
 char *        gdm_normalize_language_name (const char *name);
+gboolean      gdm_language_has_translations (const char *language_name);
 
 G_END_DECLS
 

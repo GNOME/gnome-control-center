@@ -323,8 +323,8 @@ language_name_get_codeset_details (const char  *language_name,
         g_free (old_locale);
 }
 
-static gboolean
-language_name_has_translations (const char *language_name)
+gboolean
+gdm_language_has_translations (const char *language_name)
 {
         GDir        *dir;
         char        *path;
@@ -418,9 +418,9 @@ add_locale (const char *language_name,
                                                 locale->codeset, locale->modifier);
 
 #ifndef WITH_INCOMPLETE_LOCALES
-        if (!language_name_has_translations (locale->name) &&
-            !language_name_has_translations (locale->id) &&
-            !language_name_has_translations (locale->language_code) &&
+        if (!gdm_language_has_translations (locale->name) &&
+            !gdm_language_has_translations (locale->id) &&
+            !gdm_language_has_translations (locale->language_code) &&
             utf8_only) {
                 g_debug ("Ignoring '%s' as a locale, since it lacks translations", locale->name);
                 gdm_locale_free (locale);
