@@ -480,7 +480,8 @@ add_other_users_language (GHashTable *ht)
                 props = g_dbus_proxy_get_cached_property (user, "Language");
                 lang = g_variant_get_string (props, NULL);
                 if (lang != NULL && *lang != '\0' &&
-                    cc_common_language_has_font (lang)) {
+                    cc_common_language_has_font (lang) &&
+                    gdm_language_has_translations (lang)) {
                         name = gdm_normalize_language_name (lang);
                         if (!g_hash_table_lookup (ht, name)) {
                                 language = gdm_get_language_from_name (name, NULL);
@@ -509,12 +510,18 @@ cc_common_language_get_initial_languages (void)
         ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
         /* Add some common languages first */
-        g_hash_table_insert (ht, g_strdup ("en_US.utf8"), g_strdup (_("English")));
-        g_hash_table_insert (ht, g_strdup ("en_GB.utf8"), g_strdup (_("British English")));
-        g_hash_table_insert (ht, g_strdup ("de_DE.utf8"), g_strdup (_("German")));
-        g_hash_table_insert (ht, g_strdup ("fr_FR.utf8"), g_strdup (_("French")));
-        g_hash_table_insert (ht, g_strdup ("es_ES.utf8"), g_strdup (_("Spanish")));
-        g_hash_table_insert (ht, g_strdup ("zh_CN.utf8"), g_strdup (_("Chinese (simplified)")));
+        if (gdm_language_has_translations ("en_US"))
+                g_hash_table_insert (ht, g_strdup ("en_US.utf8"), g_strdup (_("English")));
+        if (gdm_language_has_translations ("en_GB"))
+                g_hash_table_insert (ht, g_strdup ("en_GB.utf8"), g_strdup (_("British English")));
+        if (gdm_language_has_translations ("de_DE"))
+                g_hash_table_insert (ht, g_strdup ("de_DE.utf8"), g_strdup (_("German")));
+        if (gdm_language_has_translations ("fr_FR"))
+                g_hash_table_insert (ht, g_strdup ("fr_FR.utf8"), g_strdup (_("French")));
+        if (gdm_language_has_translations ("es_ES"))
+                g_hash_table_insert (ht, g_strdup ("es_ES.utf8"), g_strdup (_("Spanish")));
+        if (gdm_language_has_translations ("zh_CN"))
+                g_hash_table_insert (ht, g_strdup ("zh_CN.utf8"), g_strdup (_("Chinese (simplified)")));
 
         /* Add the languages used by other users on the system */
         add_other_users_language (ht);
