@@ -154,12 +154,15 @@ shell_search_renderer_set_layout (ShellSearchRenderer *cell, GtkWidget *widget)
     needle = g_utf8_casefold (priv->search_string, -1);
   else
     needle = NULL;
-  haystack = g_utf8_casefold (full_string, -1);
+  if (full_string != NULL)
+    haystack = g_utf8_casefold (full_string, -1);
+  else
+    haystack = NULL;
 
   /* clear any previous attributes */
   pango_layout_set_attributes (priv->layout, NULL);
 
-  if (priv->search_string && priv->title
+  if (priv->search_string && priv->search_target && priv->title
       && (strstr (haystack, needle)))
     {
       gchar *start;
