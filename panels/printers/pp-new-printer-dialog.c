@@ -88,8 +88,13 @@ enum
 enum
 {
   DEVICE_TYPE_LOCAL = 0,
-  DEVICE_TYPE_NETWORK,
-  DEVICE_TYPE_N
+  DEVICE_TYPE_NETWORK
+};
+
+enum
+{
+  STANDARD_TAB = 0,
+  WARNING_TAB
 };
 
 typedef struct{
@@ -156,6 +161,7 @@ device_type_selection_changed_cb (GtkTreeSelection *selection,
   GtkTreeModel       *model;
   GtkTreeIter         iter;
   GtkWidget          *treeview = NULL;
+  GtkWidget          *notebook = NULL;
   GtkWidget          *widget;
   gchar              *device_type_name = NULL;
   gint                device_type_id = -1;
@@ -175,17 +181,30 @@ device_type_selection_changed_cb (GtkTreeSelection *selection,
       widget = (GtkWidget*)
         gtk_builder_get_object (pp->builder, "device-type-notebook");
 
-      if (pp->show_warning && device_type == DEVICE_TYPE_NETWORK)
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 2);
-      else
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), device_type);
+      gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), device_type);
 
       if (device_type == DEVICE_TYPE_LOCAL)
-        treeview = (GtkWidget*)
-          gtk_builder_get_object (pp->builder, "local-devices-treeview");
+        {
+          treeview = (GtkWidget*)
+            gtk_builder_get_object (pp->builder, "local-devices-treeview");
+          notebook = (GtkWidget*)
+            gtk_builder_get_object (pp->builder, "local-devices-notebook");
+        }
       else if (device_type == DEVICE_TYPE_NETWORK)
-        treeview = (GtkWidget*)
-          gtk_builder_get_object (pp->builder, "network-devices-treeview");
+        {
+          treeview = (GtkWidget*)
+            gtk_builder_get_object (pp->builder, "network-devices-treeview");
+          notebook = (GtkWidget*)
+            gtk_builder_get_object (pp->builder, "network-devices-notebook");
+        }
+
+      if (notebook)
+        {
+          if (pp->show_warning && device_type == DEVICE_TYPE_NETWORK)
+            gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), WARNING_TAB);
+          else
+            gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), STANDARD_TAB);
+        }
 
       widget = (GtkWidget*)
         gtk_builder_get_object (pp->builder, "new-printer-add-button");
@@ -613,8 +632,12 @@ devices_get (PpNewPrinterDialog *pp)
       if (pp->show_warning)
         {
           widget = (GtkWidget*)
-            gtk_builder_get_object (pp->builder, "device-type-notebook");
-          gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 2);
+            gtk_builder_get_object (pp->builder, "local-devices-notebook");
+          gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), WARNING_TAB);
+
+          widget = (GtkWidget*)
+            gtk_builder_get_object (pp->builder, "network-devices-notebook");
+          gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), WARNING_TAB);
         }
 
       in_include = g_variant_builder_new (G_VARIANT_TYPE ("as"));
@@ -1150,6 +1173,8 @@ actualize_devices_list (PpNewPrinterDialog *pp)
   GtkTreeIter   iter;
   GtkWidget    *treeview;
   GtkWidget    *widget;
+  GtkWidget    *local_notebook;
+  GtkWidget    *network_notebook;
   gboolean      no_local_device = TRUE;
   gboolean      no_network_device = TRUE;
   gint          i;
@@ -1249,10 +1274,15 @@ actualize_devices_list (PpNewPrinterDialog *pp)
   widget = (GtkWidget*)
     gtk_builder_get_object (pp->builder, "device-type-notebook");
 
-  if (pp->show_warning && device_type == DEVICE_TYPE_NETWORK)
-    gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 2);
-  else
-    gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), device_type);
+  local_notebook = (GtkWidget*)
+    gtk_builder_get_object (pp->builder, "local-devices-notebook");
+
+  network_notebook = (GtkWidget*)
+    gtk_builder_get_object (pp->builder, "network-devices-notebook");
+
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (network_notebook), pp->show_warning ? WARNING_TAB : STANDARD_TAB);
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (local_notebook), STANDARD_TAB);
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), device_type);
 
   g_object_unref (network_store);
   g_object_unref (local_store);
@@ -1307,7 +1337,15 @@ Network printer detection needs services mdns, ipp, ipp-client \
 and samba-client enabled on firewall."));
 
       warning_textview = (GtkTextView*)
-        gtk_builder_get_object (pp->builder, "warning-textview");
+        gtk_builder_get_object (pp->builder, "local-warning");
+      text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (warning_textview));
+
+      gtk_text_buffer_set_text (text_buffer, "", 0);
+      gtk_text_buffer_get_iter_at_offset (text_buffer, &text_iter, 0);
+      gtk_text_buffer_insert (text_buffer, &text_iter, pp->warning, -1);
+
+      warning_textview = (GtkTextView*)
+        gtk_builder_get_object (pp->builder, "network-warning");
       text_buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (warning_textview));
 
       gtk_text_buffer_set_text (text_buffer, "", 0);
