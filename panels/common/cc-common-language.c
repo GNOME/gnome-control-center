@@ -510,8 +510,7 @@ cc_common_language_get_initial_languages (void)
         ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
         /* Add some common languages first */
-        if (gdm_language_has_translations ("en_US"))
-                g_hash_table_insert (ht, g_strdup ("en_US.utf8"), g_strdup (_("English")));
+        g_hash_table_insert (ht, g_strdup ("en_US.utf8"), g_strdup (_("English")));
         if (gdm_language_has_translations ("en_GB"))
                 g_hash_table_insert (ht, g_strdup ("en_GB.utf8"), g_strdup (_("British English")));
         if (gdm_language_has_translations ("de_DE"))
