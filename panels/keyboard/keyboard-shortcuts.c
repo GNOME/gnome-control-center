@@ -662,7 +662,6 @@ reload_sections (GtkBuilder *builder)
 {
   gchar **wm_keybindings;
   GDir *dir;
-  const gchar *name;
   GtkTreeModel *sort_model;
   GtkTreeModel *section_model;
   GtkTreeModel *shortcut_model;
@@ -671,6 +670,7 @@ reload_sections (GtkBuilder *builder)
   GtkTreeView *section_treeview;
   GtkTreeSelection *selection;
   GtkTreeIter iter;
+  GHashTable *loaded_files;
 
   section_treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder, "section_treeview"));
   sort_model = gtk_tree_view_get_model (section_treeview);
@@ -706,10 +706,13 @@ reload_sections (GtkBuilder *builder)
   /* Load WM keybindings */
   wm_keybindings = wm_common_get_current_keybindings ();
 
+  loaded_files = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+
   data_dirs = g_get_system_data_dirs ();
   for (i = 0; data_dirs[i] != NULL; i++)
     {
       char *dir_path;
+      const gchar *name;
 
       dir_path = g_build_filename (data_dirs[i], "gnome-control-center", "keybindings", NULL);
 
@@ -722,20 +725,27 @@ reload_sections (GtkBuilder *builder)
 
       for (name = g_dir_read_name (dir) ; name ; name = g_dir_read_name (dir))
         {
-	  if (g_str_has_suffix (name, ".xml"))
+          gchar *path;
+
+	  if (g_str_has_suffix (name, ".xml") == FALSE)
+	    continue;
+
+          if (g_hash_table_lookup (loaded_files, name) != NULL)
 	    {
-	      gchar *path;
-
-	      path = g_build_filename (dir_path, name, NULL);
-	      append_sections_from_file (builder, path, data_dirs[i], wm_keybindings);
-
-	      g_free (path);
+	      g_debug ("Not loading %s, it was already loaded from another directory", name);
+              continue;
 	    }
+
+	  g_hash_table_insert (loaded_files, g_strdup (name), GINT_TO_POINTER (1));
+	  path = g_build_filename (dir_path, name, NULL);
+	  append_sections_from_file (builder, path, data_dirs[i], wm_keybindings);
+	  g_free (path);
 	}
       g_free (dir_path);
       g_dir_close (dir);
     }
 
+  g_hash_table_destroy (loaded_files);
   g_strfreev (wm_keybindings);
 
   /* Load custom keybindings */
