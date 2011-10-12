@@ -122,9 +122,9 @@ wireless_dialog_response_cb (GtkDialog *foo,
 {
 	NMAWirelessDialog *dialog = NMA_WIRELESS_DIALOG (foo);
 	WirelessDialogClosure *closure = user_data;
-	NMConnection *connection = NULL, *fuzzy_match = NULL;
-	NMDevice *device = NULL;
-	NMAccessPoint *ap = NULL;
+	NMConnection *connection, *fuzzy_match = NULL;
+	NMDevice *device;
+	NMAccessPoint *ap;
 	GSList *all, *iter;
 
 	if (response != GTK_RESPONSE_OK)
@@ -174,7 +174,7 @@ wireless_dialog_response_cb (GtkDialog *foo,
 		                               NULL);
 	} else {
 		NMSetting *s_con;
-		NMSettingWireless *s_wifi = NULL;
+		NMSettingWireless *s_wifi;
 		const char *mode = NULL;
 
 		/* Entirely new connection */
@@ -260,11 +260,11 @@ cc_network_panel_connect_to_8021x_network (CcNetworkPanel   *panel,
                                            NMDevice         *device,
                                            NMAccessPoint    *ap)
 {
-	NMConnection *connection = NULL;
-	NMSettingConnection *s_con = NULL;
-	NMSettingWireless *s_wifi = NULL;
-	NMSettingWirelessSecurity *s_wsec = NULL;
-	NMSetting8021x *s_8021x = NULL;
+	NMConnection *connection;
+	NMSettingConnection *s_con;
+	NMSettingWireless *s_wifi;
+	NMSettingWirelessSecurity *s_wsec;
+	NMSetting8021x *s_8021x;
 	NM80211ApSecurityFlags wpa_flags, rsn_flags;
 	GtkWidget *dialog;
 	char *uuid;
