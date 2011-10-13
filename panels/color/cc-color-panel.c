@@ -1720,11 +1720,13 @@ out:
 static void
 gcm_prefs_device_changed_cb (CdDevice *device, CcColorPanel *prefs)
 {
+  const gchar *id;
+  gboolean ret;
+  gchar *id_tmp;
   GtkTreeIter iter;
   GtkTreeModel *model;
-  const gchar *id;
-  gchar *id_tmp;
-  gboolean ret;
+  GtkTreeSelection *selection;
+  GtkWidget *widget;
   CcColorPanelPrivate *priv = prefs->priv;
 
   /* get first element */
@@ -1741,7 +1743,15 @@ gcm_prefs_device_changed_cb (CdDevice *device, CcColorPanel *prefs)
                           GCM_PREFS_COLUMN_DEVICE_PATH, &id_tmp,
                           -1);
       if (g_strcmp0 (id_tmp, id) == 0)
-        gcm_prefs_device_set_model_by_iter (prefs, device, &iter);
+        {
+          /* populate device, and then select it */
+          gcm_prefs_device_set_model_by_iter (prefs, device, &iter);
+          widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                       "treeview_devices"));
+          selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+          gtk_tree_selection_select_iter (selection, &iter);
+
+        }
       g_free (id_tmp);
     } while (gtk_tree_model_iter_next (model, &iter));
 }
