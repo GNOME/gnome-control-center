@@ -1055,6 +1055,12 @@ window_key_press_event (GtkWidget          *win,
             g_object_unref (self);
             retval = TRUE;
             break;
+          case GDK_KEY_W:
+          case GDK_KEY_w:
+            if (gtk_notebook_get_current_page (GTK_NOTEBOOK (self->priv->notebook)) != OVERVIEW_PAGE)
+              shell_show_overview_page (self->priv);
+            retval = TRUE;
+            break;
         }
     }
   return retval;
