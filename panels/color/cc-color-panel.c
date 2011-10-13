@@ -90,9 +90,10 @@ gcm_prefs_combobox_add_profile (GtkWidget *widget,
                                 GcmPrefsEntryType entry_type,
                                 GtkTreeIter *iter)
 {
+  const gchar *id;
   GtkTreeModel *model;
   GtkTreeIter iter_tmp;
-  const gchar *description;
+  GString *string;
 
   /* iter is optional */
   if (iter == NULL)
@@ -102,21 +103,46 @@ gcm_prefs_combobox_add_profile (GtkWidget *widget,
   if (entry_type == GCM_PREFS_ENTRY_TYPE_IMPORT)
     {
       /* TRANSLATORS: this is where the user can click and import a profile */
-      description = _("Other profile…");
+      string = g_string_new (_("Other profile…"));
     }
   else
     {
-      description = cd_profile_get_title (profile);
+      string = g_string_new (cd_profile_get_title (profile));
+
+      /* any source prefix? */
+      id = cd_profile_get_metadata_item (profile,
+                                         CD_PROFILE_METADATA_DATA_SOURCE);
+      if (g_strcmp0 (id, CD_PROFILE_METADATA_DATA_SOURCE_EDID) == 0)
+        {
+          /* TRANSLATORS: this is a profile prefix to signify the
+           * profile has been auto-generated for this hardware */
+          g_string_prepend (string, _("Default: "));
+        }
+#if CD_CHECK_VERSION(0,1,14)
+      if (g_strcmp0 (id, CD_PROFILE_METADATA_DATA_SOURCE_STANDARD) == 0)
+        {
+          /* TRANSLATORS: this is a profile prefix to signify the
+           * profile his a standard space like AdobeRGB */
+          g_string_prepend (string, _("Colorspace: "));
+        }
+      if (g_strcmp0 (id, CD_PROFILE_METADATA_DATA_SOURCE_TEST) == 0)
+        {
+          /* TRANSLATORS: this is a profile prefix to signify the
+           * profile is a test profile */
+          g_string_prepend (string, _("Test profile: "));
+        }
+#endif
     }
 
   /* also add profile */
   model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
   gtk_list_store_append (GTK_LIST_STORE(model), iter);
   gtk_list_store_set (GTK_LIST_STORE(model), iter,
-                      GCM_PREFS_COMBO_COLUMN_TEXT, description,
+                      GCM_PREFS_COMBO_COLUMN_TEXT, string->str,
                       GCM_PREFS_COMBO_COLUMN_PROFILE, profile,
                       GCM_PREFS_COMBO_COLUMN_TYPE, entry_type,
                       -1);
+  g_string_free (string, TRUE);
 }
 
 static void
