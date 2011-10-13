@@ -1035,9 +1035,6 @@ window_key_press_event (GtkWidget          *win,
 
   retval = FALSE;
 
-  if (!gtk_widget_get_visible (self->priv->search_entry))
-    return retval;
-
   if (event->state != 0 &&
       (event->state & GDK_CONTROL_MASK))
     {
@@ -1047,8 +1044,11 @@ window_key_press_event (GtkWidget          *win,
           case GDK_KEY_S:
           case GDK_KEY_f:
           case GDK_KEY_F:
-            gtk_widget_grab_focus (self->priv->search_entry);
-            retval = TRUE;
+            if (gtk_widget_get_visible (self->priv->search_entry))
+              {
+                gtk_widget_grab_focus (self->priv->search_entry);
+                retval = TRUE;
+              }
             break;
           case GDK_KEY_Q:
           case GDK_KEY_q:
