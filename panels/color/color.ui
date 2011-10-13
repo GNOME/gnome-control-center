@@ -73,7 +73,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkLabel" id="label12">
+                  <object class="GtkLabel" id="label_assign_title">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes" comments="Profiles that can be added to the device">Available Profiles</property>
@@ -98,6 +98,7 @@
               <object class="GtkComboBox" id="combobox_profile">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="margin_right">5</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -105,47 +106,9 @@
                 <property name="position">1</property>
               </packing>
             </child>
-            <child>
-              <object class="GtkHBox" id="hbox57">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="spacing">9</property>
-                <child>
-                  <object class="GtkImage" id="image2">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="stock">gtk-dialog-info</property>
-                    <property name="icon-size">6</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="label13">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes" comments="Some profiles are not compatible with some devices">Only profiles that are compatible with the device will be listed above.</property>
-                    <property name="wrap">True</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
           </object>
           <packing>
-            <property name="expand">True</property>
+            <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">1</property>
           </packing>
@@ -259,50 +222,62 @@
                   <object class="GtkToolItem" id="left_button_group">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="use_action_appearance">False</property>
                     <child>
                       <object class="GtkBox" id="left_button_group_box">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="homogeneous">False</property>
                         <child>
                           <object class="GtkButton" id="toolbutton_device_add">
+                            <property name="label" translatable="yes">Add device</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="receives_default">False</property>
                             <property name="has_tooltip">True</property>
                             <property name="tooltip_markup" translatable="yes">Add a virtual device</property>
                             <property name="tooltip_text">Add a virtual device</property>
-                            <property name="label" translatable="yes">Add device</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkButton" id="toolbutton_device_remove">
+                            <property name="label" translatable="yes">Delete device</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="receives_default">False</property>
                             <property name="has_tooltip">True</property>
                             <property name="tooltip_markup" translatable="yes">Remove a device</property>
                             <property name="tooltip_text">Remove a device</property>
-                            <property name="label" translatable="yes">Delete device</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkButton" id="toolbutton_device_default">
+                            <property name="label" translatable="yes">Set for all users</property>
                             <property name="can_focus">False</property>
+                            <property name="receives_default">False</property>
                             <property name="has_tooltip">True</property>
                             <property name="tooltip_markup" translatable="yes">Set this device for all users on this computer</property>
                             <property name="tooltip_text">Set this device for all users on this computer</property>
-                            <property name="label" translatable="yes">Set for all users</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                       </object>
@@ -310,68 +285,97 @@
                   </object>
                   <packing>
                     <property name="expand">True</property>
-                    <property name="homogeneous">False</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkToolItem" id="right_button_group">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="use_action_appearance">False</property>
                     <child>
                       <object class="GtkBox" id="right_button_group_box">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
                           <object class="GtkButton" id="toolbutton_profile_add">
+                            <property name="label" translatable="yes">Add profile</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">Add profile</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkButton" id="toolbutton_device_calibrate">
+                            <property name="label" translatable="yes">Calibrate…</property>
                             <property name="can_focus">False</property>
+                            <property name="receives_default">False</property>
                             <property name="has_tooltip">True</property>
                             <property name="tooltip_markup" translatable="yes">Calibrate the device</property>
                             <property name="tooltip_text" translatable="yes">Calibrate the device</property>
-                            <property name="label" translatable="yes">Calibrate…</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkButton" id="toolbutton_profile_remove">
-                            <property name="can_focus">False</property>
                             <property name="label" translatable="yes">Remove profile</property>
+                            <property name="can_focus">False</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkButton" id="toolbutton_profile_view">
-                            <property name="can_focus">False</property>
                             <property name="label" translatable="yes">View details</property>
+                            <property name="can_focus">False</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">3</property>
                           </packing>
                         </child>
                       </object>
                     </child>
                   </object>
+                  <packing>
+                    <property name="expand">False</property>
+                  </packing>
                 </child>
               </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
             </child>
           </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
         </child>
       </object>
     </child>

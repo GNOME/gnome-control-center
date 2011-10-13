@@ -448,6 +448,7 @@ out:
 static void
 gcm_prefs_profile_add_cb (GtkWidget *widget, CcColorPanel *prefs)
 {
+  const gchar *title;
   CdProfile *profile = NULL;
   CcColorPanelPrivate *priv = prefs->priv;
 
@@ -456,6 +457,38 @@ gcm_prefs_profile_add_cb (GtkWidget *widget, CcColorPanel *prefs)
                                                "combobox_profile"));
   profile = cd_device_get_default_profile (priv->current_device);
   gcm_prefs_add_profiles_suitable_for_devices (prefs, widget, profile);
+
+  /* set the title */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "label_assign_title"));
+  switch (cd_device_get_kind (priv->current_device)) {
+    case CD_DEVICE_KIND_DISPLAY:
+      /* TRANSLATORS: this is the dialog title in the 'Add profile' UI */
+      title = _("Available Profiles for Displays");
+      break;
+    case CD_DEVICE_KIND_SCANNER:
+      /* TRANSLATORS: this is the dialog title in the 'Add profile' UI */
+      title = _("Available Profiles for Scanners");
+      break;
+    case CD_DEVICE_KIND_PRINTER:
+      /* TRANSLATORS: this is the dialog title in the 'Add profile' UI */
+      title = _("Available Profiles for Printers");
+      break;
+    case CD_DEVICE_KIND_CAMERA:
+      /* TRANSLATORS: this is the dialog title in the 'Add profile' UI */
+      title = _("Available Profiles for Cameras");
+      break;
+    case CD_DEVICE_KIND_WEBCAM:
+      /* TRANSLATORS: this is the dialog title in the 'Add profile' UI */
+      title = _("Available Profiles for Webcams");
+      break;
+    default:
+      /* TRANSLATORS: this is the dialog title in the 'Add profile' UI
+       * where the device type is not recognised */
+      title = _("Available Profiles");
+      break;
+  }
+  gtk_label_set_label (GTK_LABEL (widget), title);
 
   /* show the dialog */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
@@ -1089,7 +1122,6 @@ gcm_prefs_set_combo_simple_text (GtkWidget *combo_box)
   g_object_set (renderer,
                 "ellipsize", PANGO_ELLIPSIZE_END,
                 "wrap-mode", PANGO_WRAP_WORD_CHAR,
-                "width-chars", 60,
                 NULL);
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box), renderer, TRUE);
   gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo_box), renderer,
