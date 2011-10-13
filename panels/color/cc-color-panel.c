@@ -1621,6 +1621,12 @@ gcm_prefs_device_set_model_by_iter (CcColorPanel *prefs, CdDevice *device, GtkTr
 
   /* yay! */
   status = gcm_prefs_get_profile_age_as_string (profile);
+  if (status == NULL)
+    {
+      status = g_string_new (_("Uncalibrated"));
+      g_string_prepend (status, "<span foreground='gray'><i>");
+      g_string_append (status, "</i></span>");
+    }
 
   /* greater than the calibration threshold for the device type */
   age = cd_profile_get_age (profile);
