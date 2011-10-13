@@ -456,6 +456,9 @@ on_toolbar_add_button_clicked (GtkToolButton *button,
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
   gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
   gtk_window_set_transient_for (GTK_WINDOW (dialog), parent);
+  /* translators: This is the title of the "Add Account" dialogue.
+   * The title is not visible when using GNOME Shell */
+  gtk_window_set_title (GTK_WINDOW (dialog), _("Add Account"));
 
   vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
   gtk_box_set_spacing (GTK_BOX (vbox), 12);
