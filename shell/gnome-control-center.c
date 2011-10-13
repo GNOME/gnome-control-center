@@ -211,6 +211,7 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
   g_free (priv->filter_string);
   priv->filter_string = g_strdup ("");
   gtk_entry_set_text (GTK_ENTRY (priv->search_entry), "");
+  gtk_widget_grab_focus (priv->search_entry);
 
   gtk_lock_button_set_permission (GTK_LOCK_BUTTON (priv->lock_button), NULL);
 
