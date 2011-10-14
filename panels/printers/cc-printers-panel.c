@@ -1123,6 +1123,8 @@ actualize_printers_list (CcPrintersPanel *self)
   g_free (current_printer_name);
   g_free (current_printer_instance);
   g_object_unref (store);
+
+  actualize_sensitivity (self);
 }
 
 static void
@@ -2256,6 +2258,7 @@ actualize_sensitivity (gpointer user_data)
   gboolean                 is_discovered = FALSE;
   gboolean                 printer_selected;
   gboolean                 local_server = TRUE;
+  gboolean                 no_cups = FALSE;
   gint                     i;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
@@ -2289,14 +2292,18 @@ actualize_sensitivity (gpointer user_data)
       cups_server[0] != '/')
     local_server = FALSE;
 
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "notebook");
+  if (gtk_notebook_get_current_page (GTK_NOTEBOOK (widget)) == NOTEBOOK_NO_CUPS_PAGE)
+    no_cups = TRUE;
+
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-add-button");
-  gtk_widget_set_sensitive (widget, local_server && is_authorized);
+  gtk_widget_set_sensitive (widget, local_server && is_authorized && !no_cups);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-add-button2");
-  gtk_widget_set_sensitive (widget, local_server && is_authorized);
+  gtk_widget_set_sensitive (widget, local_server && is_authorized && !no_cups);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-remove-button");
-  gtk_widget_set_sensitive (widget, local_server && !is_discovered && is_authorized && printer_selected);
+  gtk_widget_set_sensitive (widget, local_server && !is_discovered && is_authorized && printer_selected && !no_cups);
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-disable-switch");
   gtk_widget_set_sensitive (widget, local_server && !is_discovered && is_authorized);
