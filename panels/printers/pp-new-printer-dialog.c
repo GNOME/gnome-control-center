@@ -1786,7 +1786,7 @@ new_printer_add_button_cb (GtkButton *button,
                 {
                   dbus_g_proxy_call (proxy, "PrinterAddOptionDefault", &error,
                                      G_TYPE_STRING, pp->devices[device_id].display_name,
-                                     G_TYPE_STRING, "PageSize-default",
+                                     G_TYPE_STRING, "PageSize",
                                      G_TYPE_STRV, value,
                                      G_TYPE_INVALID,
                                      G_TYPE_STRING, &ret_error,
