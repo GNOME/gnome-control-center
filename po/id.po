@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-08-12 04:43+0000\n"
-"PO-Revision-Date: 2011-08-18 14:03+0700\n"
+"POT-Creation-Date: 2011-10-16 13:51+0000\n"
+"PO-Revision-Date: 2011-10-17 13:31+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: GNOME Indonesian Translation Team <gnome@i15n.org>\n"
 "MIME-Version: 1.0\n"
@@ -84,29 +84,29 @@ msgstr "Gradien Vertikal"
 msgid "Solid Color"
 msgstr "Warna Rata"
 
-#: ../panels/background/cc-background-panel.c:1002
+#: ../panels/background/cc-background-panel.c:1001
 #: ../panels/user-accounts/um-photo-dialog.c:217
 #: ../panels/user-accounts/data/photo-dialog.ui.h:2
 msgid "Browse for more pictures"
 msgstr "Ramban lebih banyak gambar"
 
-#: ../panels/background/cc-background-panel.c:1094
+#: ../panels/background/cc-background-panel.c:1093
 msgid "Current background"
 msgstr "Latar belakang kini"
 
-#: ../panels/background/cc-background-panel.c:1178
+#: ../panels/background/cc-background-panel.c:1203
 msgid "Wallpapers"
 msgstr "Gambar latar"
 
-#: ../panels/background/cc-background-panel.c:1185
+#: ../panels/background/cc-background-panel.c:1210
 msgid "Pictures Folder"
 msgstr "Folder Gambar"
 
-#: ../panels/background/cc-background-panel.c:1192
+#: ../panels/background/cc-background-panel.c:1217
 msgid "Colors & Gradients"
 msgstr "Warna & Gradien"
 
-#: ../panels/background/cc-background-panel.c:1200
+#: ../panels/background/cc-background-panel.c:1225
 msgid "Flickr"
 msgstr "Flickr"
 
@@ -125,13 +125,82 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Tanpa Latar Belakang Desktop"
 
-#: ../panels/common/gdm-languages.c:710
+#. Add some common languages first
+#: ../panels/common/cc-common-language.c:513
+msgid "English"
+msgstr "Inggris"
+
+#: ../panels/common/cc-common-language.c:515
+msgid "British English"
+msgstr "Inggris Britania"
+
+#: ../panels/common/cc-common-language.c:517
+msgid "German"
+msgstr "Jerman"
+
+#: ../panels/common/cc-common-language.c:519
+msgid "French"
+msgstr "Perancis"
+
+#: ../panels/common/cc-common-language.c:521
+msgid "Spanish"
+msgstr "Spanyol"
+
+#: ../panels/common/cc-common-language.c:523
+msgid "Chinese (simplified)"
+msgstr "Cina (disederhanakan)"
+
+#. Add some common regions
+#: ../panels/common/cc-common-language.c:552
+msgid "United States"
+msgstr "Amerika Serikat"
+
+#: ../panels/common/cc-common-language.c:553
+msgid "Germany"
+msgstr "Jerman"
+
+#: ../panels/common/cc-common-language.c:554
+msgid "France"
+msgstr "Perancis"
+
+#: ../panels/common/cc-common-language.c:555
+msgid "Spain"
+msgstr "Spanyol"
+
+#: ../panels/common/cc-common-language.c:556
+msgid "China"
+msgstr "Cina"
+
+#: ../panels/common/cc-language-chooser.c:119
+msgid "Other..."
+msgstr "Lainnya..."
+
+#: ../panels/common/cc-language-chooser.c:290
+msgid "Select a region"
+msgstr "Pilih daerah"
+
+#: ../panels/common/gdm-languages.c:774
 msgid "Unspecified"
 msgstr "Tak dinyatakan"
 
+#: ../panels/common/language-chooser.ui.h:1
+msgid "Select a language"
+msgstr "Pilih bahasa"
+
+#: ../panels/common/language-chooser.ui.h:2
+#: ../panels/printers/new-printer-dialog.ui.h:4
+#: ../panels/user-accounts/um-user-panel.c:448
+msgid "_Cancel"
+msgstr "Ba_tal"
+
+#: ../panels/common/language-chooser.ui.h:3
+#: ../panels/universal-access/gconf-property-editor.c:1609
+msgid "_Select"
+msgstr "_Pilih"
+
 #: ../panels/datetime/datetime.ui.h:1
-msgid "24-_Hour Time"
-msgstr "Format Waktu 2_4 Jam"
+msgid "24-hour"
+msgstr "24-jam"
 
 #. Translator: this is the separator between hours and minutes, like in HH:MM
 #: ../panels/datetime/datetime.ui.h:3
@@ -139,94 +208,98 @@ msgid ":"
 msgstr ":"
 
 #: ../panels/datetime/datetime.ui.h:4
+msgid "AM/PM"
+msgstr "AM/PM"
+
+#: ../panels/datetime/datetime.ui.h:5
 msgid "April"
 msgstr "April"
 
-#: ../panels/datetime/datetime.ui.h:5
+#: ../panels/datetime/datetime.ui.h:6
 msgid "August"
 msgstr "Agustus"
 
-#: ../panels/datetime/datetime.ui.h:6
+#: ../panels/datetime/datetime.ui.h:7
 msgid "Day"
 msgstr "Hari"
 
-#: ../panels/datetime/datetime.ui.h:7
+#: ../panels/datetime/datetime.ui.h:8
 msgid "December"
 msgstr "Desember"
 
-#: ../panels/datetime/datetime.ui.h:8
+#: ../panels/datetime/datetime.ui.h:9
 msgid "February"
 msgstr "Februari"
 
-#: ../panels/datetime/datetime.ui.h:9
+#: ../panels/datetime/datetime.ui.h:10
 msgid "January"
 msgstr "Januari"
 
-#: ../panels/datetime/datetime.ui.h:10
+#: ../panels/datetime/datetime.ui.h:11
 msgid "July"
 msgstr "Juli"
 
-#: ../panels/datetime/datetime.ui.h:11
+#: ../panels/datetime/datetime.ui.h:12
 msgid "June"
 msgstr "Juni"
 
-#: ../panels/datetime/datetime.ui.h:12
+#: ../panels/datetime/datetime.ui.h:13
 msgid "March"
 msgstr "Maret"
 
-#: ../panels/datetime/datetime.ui.h:13
+#: ../panels/datetime/datetime.ui.h:14
 msgid "May"
 msgstr "Mei"
 
-#: ../panels/datetime/datetime.ui.h:14
+#: ../panels/datetime/datetime.ui.h:15
 msgid "Month"
 msgstr "Bulan"
 
-#: ../panels/datetime/datetime.ui.h:15
+#: ../panels/datetime/datetime.ui.h:16
 msgid "November"
 msgstr "November"
 
-#: ../panels/datetime/datetime.ui.h:16
+#: ../panels/datetime/datetime.ui.h:17
 msgid "October"
 msgstr "Oktober"
 
-#: ../panels/datetime/datetime.ui.h:17
+#: ../panels/datetime/datetime.ui.h:18
 msgid "September"
 msgstr "September"
 
-#: ../panels/datetime/datetime.ui.h:18
+#: ../panels/datetime/datetime.ui.h:19
 msgid "Set the time one hour ahead."
 msgstr "Atur waktu satu jam lebih awal."
 
-#: ../panels/datetime/datetime.ui.h:19
+#: ../panels/datetime/datetime.ui.h:20
 msgid "Set the time one hour back."
 msgstr "Atur waktu satu jam terlambat."
 
-#: ../panels/datetime/datetime.ui.h:20
+#: ../panels/datetime/datetime.ui.h:21
 msgid "Set the time one minute ahead."
 msgstr "Atur waktu satu menit lebih awal."
 
-#: ../panels/datetime/datetime.ui.h:21
+#: ../panels/datetime/datetime.ui.h:22
 msgid "Set the time one minute back."
 msgstr "Atur waktu satu menit terlambat."
 
-#: ../panels/datetime/datetime.ui.h:22
+#: ../panels/datetime/datetime.ui.h:23
 msgid "Switch between AM and PM."
 msgstr "Tukar antara AM dan PM."
 
-#: ../panels/datetime/datetime.ui.h:23
+#: ../panels/datetime/datetime.ui.h:24
 msgid "Year"
 msgstr "Tahun"
 
-#: ../panels/datetime/datetime.ui.h:24
+#: ../panels/datetime/datetime.ui.h:25
 msgid "_City:"
 msgstr "_Kota:"
 
-#: ../panels/datetime/datetime.ui.h:25
+#: ../panels/datetime/datetime.ui.h:26
 msgid "_Network Time"
 msgstr "Waktu Jari_ngan"
 
-#: ../panels/datetime/datetime.ui.h:26
+#: ../panels/datetime/datetime.ui.h:27
 msgid "_Region:"
 msgstr "_Wilayah:"
 
@@ -244,47 +317,28 @@ msgid "Date and Time preferences panel"
 msgstr "Panel preferensi Tanggal dan Waktu"
 
 #: ../panels/display/display-capplet.ui.h:1
-msgid "Left"
-msgstr "Kiri"
-
-#: ../panels/display/display-capplet.ui.h:2
-#: ../panels/display/xrandr-capplet.c:493
+#: ../panels/display/cc-display-panel.c:641
 msgid "Monitor"
 msgstr "Monitor"
 
-#: ../panels/display/display-capplet.ui.h:3
-#: ../panels/display/xrandr-capplet.c:329
-#: ../panels/display/xrandr-capplet.c:368
-#: ../panels/universal-access/uap.ui.h:42
-msgid "Normal"
-msgstr "Normal"
-
-#: ../panels/display/display-capplet.ui.h:4
+#: ../panels/display/display-capplet.ui.h:2
 msgid "Note: may limit resolution options"
 msgstr "Catatan: mungkin membatasi opsi resolusi"
 
-#: ../panels/display/display-capplet.ui.h:5
+#: ../panels/display/display-capplet.ui.h:3
 msgid "R_otation:"
 msgstr "R_otasi:"
 
-#: ../panels/display/display-capplet.ui.h:6
-msgid "Right"
-msgstr "Kanan"
-
-#: ../panels/display/display-capplet.ui.h:7
-msgid "Upside-down"
-msgstr "Terjungkir"
-
-#: ../panels/display/display-capplet.ui.h:8
+#: ../panels/display/display-capplet.ui.h:4
 msgid "_Detect Displays"
 msgstr "_Deteksi Tampilan"
 
 #. Note that mirror is a verb in this string
-#: ../panels/display/display-capplet.ui.h:10
+#: ../panels/display/display-capplet.ui.h:6
 msgid "_Mirror displays"
 msgstr "Layar ke_mbar"
 
-#: ../panels/display/display-capplet.ui.h:11
+#: ../panels/display/display-capplet.ui.h:7
 msgid "_Resolution:"
 msgstr "_Resolution:"
 
@@ -301,15 +355,23 @@ msgstr "Tampilan"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Panel;Projektor;xrandr;Layar;Resolusi;Segarkan;"
 
-#: ../panels/display/xrandr-capplet.c:330
+#: ../panels/display/cc-display-panel.c:477
+msgctxt "display panel, rotation"
+msgid "Normal"
+msgstr "Normal"
+
+#: ../panels/display/cc-display-panel.c:478
+msgctxt "display panel, rotation"
 msgid "Counterclockwise"
 msgstr "Berlawanan arah jarum jam"
 
-#: ../panels/display/xrandr-capplet.c:331
+#: ../panels/display/cc-display-panel.c:479
+msgctxt "display panel, rotation"
 msgid "Clockwise"
-msgstr "Searah Jarum Jam"
+msgstr "Searah jarum jam"
 
-#: ../panels/display/xrandr-capplet.c:332
+#: ../panels/display/cc-display-panel.c:480
+msgctxt "display panel, rotation"
 msgid "180 Degrees"
 msgstr "180 Derajat"
 
@@ -318,61 +380,61 @@ msgstr "180 Derajat"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/xrandr-capplet.c:469
+#: ../panels/display/cc-display-panel.c:617
 msgid "Mirror Displays"
 msgstr "Layar Kembar"
 
-#: ../panels/display/xrandr-capplet.c:599
+#: ../panels/display/cc-display-panel.c:747
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d x %d (%s)"
 
-#: ../panels/display/xrandr-capplet.c:601
+#: ../panels/display/cc-display-panel.c:749
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/xrandr-capplet.c:1512
+#: ../panels/display/cc-display-panel.c:1656
 msgid "Drag to change primary display."
 msgstr "Seret untuk mengubah tampilan utama."
 
-#: ../panels/display/xrandr-capplet.c:1570
+#: ../panels/display/cc-display-panel.c:1714
 msgid "Select a monitor to change its properties; drag it to rearrange its placement."
 msgstr "Pilih suatu monitor untuk mengubah propertinya; seret dia untuk menata ulang penempatannya."
 
-#: ../panels/display/xrandr-capplet.c:1959
+#: ../panels/display/cc-display-panel.c:2102
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/xrandr-capplet.c:1961
+#: ../panels/display/cc-display-panel.c:2104
 msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
-#: ../panels/display/xrandr-capplet.c:2207
+#: ../panels/display/cc-display-panel.c:2350
 msgid "Could not save the monitor configuration"
 msgstr "Tidak dapat menyimpan konfigurasi monitor"
 
-#: ../panels/display/xrandr-capplet.c:2232
+#: ../panels/display/cc-display-panel.c:2375
 msgid "Could not get session bus while applying display configuration"
 msgstr "Tidak dapat mendapatkan bus sesi saat menerapkan konfigurasi tampilan"
 
-#: ../panels/display/xrandr-capplet.c:2277
+#: ../panels/display/cc-display-panel.c:2420
 msgid "Could not detect displays"
 msgstr "Tidak dapat mendeteksi tampilan"
 
-#: ../panels/display/xrandr-capplet.c:2492
+#: ../panels/display/cc-display-panel.c:2614
 msgid "Could not get screen information"
 msgstr "Tidak mendapatkan informasi layar"
 
 #. Translators: VESA is an techncial acronym, don't translate it.
-#: ../panels/info/cc-info-panel.c:377
+#: ../panels/info/cc-info-panel.c:402
 #, c-format
 msgid "VESA: %s"
 msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:401
+#: ../panels/info/cc-info-panel.c:426
 #: ../panels/network/panel-common.c:79
 #: ../panels/network/panel-common.c:158
 msgid "Unknown"
@@ -380,61 +442,159 @@ msgstr "Unknown"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:550
+#: ../panels/info/cc-info-panel.c:587
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:706
+#: ../panels/info/cc-info-panel.c:744
 msgid "Unknown model"
 msgstr "Model tak dikenal"
 
-#: ../panels/info/cc-info-panel.c:789
+#: ../panels/info/cc-info-panel.c:827
 msgid "The next login will attempt to use the standard experience."
 msgstr "Login berikutnya akan mencoba memakai pengalaman standar."
 
-#: ../panels/info/cc-info-panel.c:791
+#: ../panels/info/cc-info-panel.c:829
 msgid "The next login will use the fallback mode intended for unsupported graphics hardware."
 msgstr "Login berikutnya akan memakai mode fallback yang ditujukan bagi perangkat keras grafik yang tak didukung."
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:833
+#: ../panels/info/cc-info-panel.c:871
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "Fallback"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:839
+#: ../panels/info/cc-info-panel.c:877
 msgctxt "Experience"
 msgid "Standard"
 msgstr "Standar"
 
-#: ../panels/info/cc-info-panel.c:979
-#: ../panels/keyboard/keyboard-shortcuts.c:1762
+#: ../panels/info/cc-info-panel.c:1200
+msgid "Ask what to do"
+msgstr "Tanya apa yang akan dilakukan"
+
+#: ../panels/info/cc-info-panel.c:1204
+msgid "Do nothing"
+msgstr "Jangan lakukan apa pun"
+
+#: ../panels/info/cc-info-panel.c:1208
+msgid "Open folder"
+msgstr "Buka folder"
+
+#: ../panels/info/cc-info-panel.c:1319
+msgid "Select an application for audio CDs"
+msgstr "Pilih aplikasi bagi CD musik"
+
+#: ../panels/info/cc-info-panel.c:1320
+msgid "Select an application for video DVDs"
+msgstr "Pilih aplikasi bagi DVD video"
+
+#: ../panels/info/cc-info-panel.c:1321
+msgid "Select an application to run when a music player is connected"
+msgstr "Pilih aplikasi yang dijalankan ketika pemutar musik disambungkan"
+
+#: ../panels/info/cc-info-panel.c:1322
+msgid "Select an application to run when a camera is connected"
+msgstr "Pilih aplikasi yang dijalankan ketika kamera disambungkan"
+
+#: ../panels/info/cc-info-panel.c:1323
+msgid "Select an application for software CDs"
+msgstr "Pilih aplikasi bagi CD perangkat lunak"
+
+#. translators: these strings are duplicates of shared-mime-info
+#. * strings, just here to fix capitalization of the English originals.
+#. * If the shared-mime-info translation works for your language,
+#. * simply leave these untranslated.
+#.
+#: ../panels/info/cc-info-panel.c:1335
+msgid "audio DVD"
+msgstr "DVD suara"
+
+#: ../panels/info/cc-info-panel.c:1336
+msgid "blank Blu-ray disc"
+msgstr "diska Blu-ray kosong"
+
+#: ../panels/info/cc-info-panel.c:1337
+msgid "blank CD disc"
+msgstr "diska CD kosong"
+
+#: ../panels/info/cc-info-panel.c:1338
+msgid "blank DVD disc"
+msgstr "diska DVD kosong"
+
+#: ../panels/info/cc-info-panel.c:1339
+msgid "blank HD DVD disc"
+msgstr "diska HD DVD kosong"
+
+#: ../panels/info/cc-info-panel.c:1340
+msgid "Blu-ray video disc"
+msgstr "diska video Blu-ray"
+
+#: ../panels/info/cc-info-panel.c:1341
+msgid "e-book reader"
+msgstr "pembaca e-book"
+
+#: ../panels/info/cc-info-panel.c:1342
+msgid "HD DVD video disc"
+msgstr "diska video HD DVD"
+
+#: ../panels/info/cc-info-panel.c:1343
+msgid "Picture CD"
+msgstr "CD gambar"
+
+#: ../panels/info/cc-info-panel.c:1344
+msgid "Super Video CD"
+msgstr "CD Super Video"
+
+#: ../panels/info/cc-info-panel.c:1345
+msgid "Video CD"
+msgstr "CD video"
+
+#: ../panels/info/cc-info-panel.c:1474
+#: ../panels/keyboard/keyboard-shortcuts.c:1772
 msgid "Section"
 msgstr "Seksi"
 
-#: ../panels/info/cc-info-panel.c:988
-#: ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1483
+#: ../panels/info/info.ui.h:15
 msgid "Overview"
 msgstr "Ringkasan"
 
-#: ../panels/info/cc-info-panel.c:994
-#: ../panels/info/info.ui.h:2
+#: ../panels/info/cc-info-panel.c:1489
+#: ../panels/info/info.ui.h:4
 msgid "Default Applications"
 msgstr "Aplikasi Baku"
 
-#: ../panels/info/cc-info-panel.c:999
-#: ../panels/info/info.ui.h:9
+#: ../panels/info/cc-info-panel.c:1494
+#: ../panels/info/info.ui.h:17
+msgid "Removable Media"
+msgstr "Media Lepasan"
+
+#: ../panels/info/cc-info-panel.c:1499
+#: ../panels/info/info.ui.h:11
 msgid "Graphics"
 msgstr "Grafik"
 
-#: ../panels/info/cc-info-panel.c:1163
+#: ../panels/info/cc-info-panel.c:1700
 #, c-format
 msgid "Version %s"
 msgstr "Versi %s"
+
+#: ../panels/info/cc-info-panel.c:1750
+msgid "Install Updates"
+msgstr "Pasang Pemutakhiran"
+
+#: ../panels/info/cc-info-panel.c:1754
+msgid "System Up-To-Date"
+msgstr "Sistem Mutakhir"
+
+#: ../panels/info/cc-info-panel.c:1758
+msgid "Checking for Updates"
+msgstr "Memeriksa Pemutakhiran"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
 msgid "System Info"
@@ -446,71 +606,111 @@ msgstr "Informasi Sistem"
 
 #. sure that you use the same "translation" for those keywords
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
-msgid "device;system;information;memory;processor;version;default;application;fallback;preferred;"
+msgid "device;system;information;memory;processor;version;default;application;fallback;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
 msgstr "perangkat;sistem;informasi;memori;prosesor;versi;baku;aplikasi;fallback;disukai;"
 
 #: ../panels/info/info.ui.h:1
+msgid "Acti_on:"
+msgstr "_Aksi:"
+
+#: ../panels/info/info.ui.h:2
+msgid "CD _audio:"
+msgstr "_Audio CD:"
+
+#: ../panels/info/info.ui.h:3
 msgid "Calculating..."
 msgstr "Menghitung..."
 
-#: ../panels/info/info.ui.h:3
+#: ../panels/info/info.ui.h:5
 msgid "Device name"
 msgstr "Nama perangkat"
 
-#: ../panels/info/info.ui.h:4
+#: ../panels/info/info.ui.h:6
 msgid "Disk"
 msgstr "Diska"
 
-#: ../panels/info/info.ui.h:5
+#: ../panels/info/info.ui.h:7
 msgid "Driver"
 msgstr "Pengandar"
 
-#: ../panels/info/info.ui.h:6
+#: ../panels/info/info.ui.h:8
 msgid "Experience"
 msgstr "Pengalaman"
 
 #. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
-#: ../panels/info/info.ui.h:8
+#: ../panels/info/info.ui.h:10
 msgid "Forced _Fallback Mode"
 msgstr "Mode _Fallback Paksa"
 
-#: ../panels/info/info.ui.h:10
+#: ../panels/info/info.ui.h:12
 msgid "M_usic"
 msgstr "M_usik"
 
-#: ../panels/info/info.ui.h:11
+#: ../panels/info/info.ui.h:13
 msgid "Memory"
 msgstr "Memori"
 
-#: ../panels/info/info.ui.h:12
+#: ../panels/info/info.ui.h:14
 msgid "OS type"
 msgstr "Tipe OS"
 
-#: ../panels/info/info.ui.h:14
+#: ../panels/info/info.ui.h:16
 msgid "Processor"
 msgstr "Prosesor"
 
-#: ../panels/info/info.ui.h:15
-msgid "Updates Available"
-msgstr "Pemutakhiran Tersedia"
+#: ../panels/info/info.ui.h:18
+msgid "Select how media should be handled"
+msgstr "Pilih bagaimana media mesti ditangani"
 
-#: ../panels/info/info.ui.h:16
+#: ../panels/info/info.ui.h:19
+msgid "Select how other media should be handled"
+msgstr "Pilih bagaimana media lain mesti ditangani"
+
+#: ../panels/info/info.ui.h:20
 msgid "_Calendar"
 msgstr "_Kalender"
 
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:21
+msgid "_DVD video:"
+msgstr "Video _DVD:"
+
+#: ../panels/info/info.ui.h:22
 msgid "_Mail"
 msgstr "_Surel"
 
-#: ../panels/info/info.ui.h:18
+#: ../panels/info/info.ui.h:23
+msgid "_Music player:"
+msgstr "Pemutar _musik:"
+
+#: ../panels/info/info.ui.h:24
+msgid "_Never prompt or start programs on media insertion"
+msgstr "Ja_ngan bertanya atau menjalankan program saat media dimasukkan"
+
+#: ../panels/info/info.ui.h:25
+msgid "_Other Media..."
+msgstr "Media _Lain..."
+
+#: ../panels/info/info.ui.h:26
 msgid "_Photos"
 msgstr "_Foto"
 
-#: ../panels/info/info.ui.h:19
+#: ../panels/info/info.ui.h:27
+msgid "_Photos:"
+msgstr "_Foto:"
+
+#: ../panels/info/info.ui.h:28
+msgid "_Software:"
+msgstr "Perangkat _Lunak:"
+
+#: ../panels/info/info.ui.h:29
+msgid "_Type:"
+msgstr "_Jenis:"
+
+#: ../panels/info/info.ui.h:30
 msgid "_Video"
 msgstr "_Video"
 
-#: ../panels/info/info.ui.h:20
+#: ../panels/info/info.ui.h:31
 msgid "_Web"
 msgstr "_Web"
 
@@ -595,7 +795,7 @@ msgid "Log out"
 msgstr "Log keluar"
 
 #: ../panels/keyboard/01-system.xml.in.h:3
-#: ../panels/region/gnome-region-panel.ui.h:23
+#: ../panels/region/gnome-region-panel.ui.h:24
 msgid "System"
 msgstr "Sistem"
 
@@ -666,8 +866,8 @@ msgstr "Jenis akselerator."
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/keyboard-shortcuts.c:1183
-#: ../panels/sound/gvc-mixer-control.c:1084
+#: ../panels/keyboard/keyboard-shortcuts.c:1193
+#: ../panels/sound/gvc-mixer-control.c:1086
 #: ../panels/user-accounts/um-fingerprint-dialog.c:177
 #: ../panels/user-accounts/um-fingerprint-dialog.c:178
 msgid "Disabled"
@@ -689,21 +889,21 @@ msgstr "Pintasan;Pengulangan;Kedip;"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:646
 #: ../panels/keyboard/keyboard-shortcuts.c:654
-#: ../panels/keyboard/keyboard-shortcuts.c:958
-#: ../panels/keyboard/keyboard-shortcuts.c:1556
-#: ../panels/keyboard/keyboard-shortcuts.c:1560
+#: ../panels/keyboard/keyboard-shortcuts.c:968
+#: ../panels/keyboard/keyboard-shortcuts.c:1566
+#: ../panels/keyboard/keyboard-shortcuts.c:1570
 msgid "Custom Shortcuts"
 msgstr "Tombol Pintas Gubahan"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:804
+#: ../panels/keyboard/keyboard-shortcuts.c:814
 msgid "<Unknown Action>"
 msgstr "<Tindakan Tidak Diketahui>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1209
+#: ../panels/keyboard/keyboard-shortcuts.c:1219
 msgid "Error saving the new shortcut"
 msgstr "Kesalahan saat menyimpan tombol pintas baru"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1342
+#: ../panels/keyboard/keyboard-shortcuts.c:1352
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type using this key.\n"
@@ -712,7 +912,7 @@ msgstr ""
 "Tombol pintas itu \"%s\" tidak dapat digunakan karena tidak mungkin mengetik menggunakan tombol ini.\n"
 "Silakan coba dengan rangkaian tombol seperti Control, Alt atau Shift secara bersamaan."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1372
+#: ../panels/keyboard/keyboard-shortcuts.c:1382
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -721,24 +921,24 @@ msgstr ""
 "Tombol pintas itu \"%s\" sudah digunakan untuk\n"
 "\"%s\""
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1377
+#: ../panels/keyboard/keyboard-shortcuts.c:1387
 #, c-format
 msgid "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Jika Anda memfungsikan ulang cara pintas untuk \"%s\", cara \"%s\"  ini akan dinonaktifkan."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1383
+#: ../panels/keyboard/keyboard-shortcuts.c:1393
 msgid "_Reassign"
 msgstr "Alih _Fungsikan"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1495
+#: ../panels/keyboard/keyboard-shortcuts.c:1505
 msgid "Too many custom shortcuts"
 msgstr "Terlalu banyak tombol pintas gubahan"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1815
+#: ../panels/keyboard/keyboard-shortcuts.c:1825
 msgid "Action"
 msgstr "Aksi"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1838
+#: ../panels/keyboard/keyboard-shortcuts.c:1848
 msgid "Shortcut"
 msgstr "Pintas"
 
@@ -756,7 +956,7 @@ msgstr "Pendaran _kursor di area teks"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:22
 msgid "Cursor blinks speed"
 msgstr "Kecepatan kedip kursor"
 
@@ -774,247 +974,116 @@ msgstr "Cepat"
 msgid "Key presses _repeat when key is held down"
 msgstr "Tombol akan diulangi saat tombol te_rsebut ditekan dalam beberapa saat"
 
-#. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+msgid "Layout Settings"
+msgstr "Pengaturan Tata Letak"
+
+#. long delay
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/zoom-options.ui.h:13
 msgid "Long"
 msgstr "Panjang"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 msgid "Repeat Keys"
 msgstr "Tombol Pengulangan"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
 msgid "Repeat keys speed"
 msgstr "Kecepatan pengulangan kunci"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
 msgid "S_peed:"
 msgstr "S_peed:"
 
 #. short delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 #: ../panels/mouse/gnome-mouse-properties.ui.h:23
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Short"
 msgstr "Pendek"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
 msgid "Shortcuts"
 msgstr "Pintas"
 
 #. slow acceleration
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
 #: ../panels/mouse/gnome-mouse-properties.ui.h:25
 msgid "Slow"
 msgstr "Lambat"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
 msgid "To edit a shortcut, click the row and hold down the new keys or press Backspace to clear."
 msgstr "Untuk mengedit tombol cara pintas, klik pada baris dan tahan tombol baru, atau tekan spasi mundur untuk menghapus."
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Typing"
 msgstr "Mengetik"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
 msgid "_Delay:"
 msgstr "Je_da:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
 msgid "_Name:"
 msgstr "_Nama:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
 msgid "_Speed:"
 msgstr "_Speed:"
 
-#: ../panels/media/cc-media-panel.c:315
-msgid "Ask what to do"
-msgstr "Tanya apa yang akan dilakukan"
-
-#: ../panels/media/cc-media-panel.c:319
-#: ../panels/power/power.ui.h:6
-msgid "Do nothing"
-msgstr "Jangan lakukan apa pun"
-
-#: ../panels/media/cc-media-panel.c:323
-msgid "Open folder"
-msgstr "Buka folder"
-
-#: ../panels/media/cc-media-panel.c:434
-msgid "Select an application for audio CDs"
-msgstr "Pilih aplikasi bagi CD musik"
-
-#: ../panels/media/cc-media-panel.c:435
-msgid "Select an application for video DVDs"
-msgstr "Pilih aplikasi bagi DVD video"
-
-#: ../panels/media/cc-media-panel.c:436
-msgid "Select an application to run when a music player is connected"
-msgstr "Pilih aplikasi yang dijalankan ketika pemutar musik disambungkan"
-
-#: ../panels/media/cc-media-panel.c:437
-msgid "Select an application to run when a camera is connected"
-msgstr "Pilih aplikasi yang dijalankan ketika kamera disambungkan"
-
-#: ../panels/media/cc-media-panel.c:438
-msgid "Select an application for software CDs"
-msgstr "Pilih aplikasi bagi CD perangkat lunak"
-
-#. translators: these strings are duplicates of shared-mime-info
-#. * strings, just here to fix capitalization of the English originals.
-#. * If the shared-mime-info translation works for your language,
-#. * simply leave these untranslated.
-#.
-#: ../panels/media/cc-media-panel.c:450
-msgid "audio DVD"
-msgstr "DVD suara"
-
-#: ../panels/media/cc-media-panel.c:451
-msgid "blank Blu-ray disc"
-msgstr "diska Blu-ray kosong"
-
-#: ../panels/media/cc-media-panel.c:452
-msgid "blank CD disc"
-msgstr "diska CD kosong"
-
-#: ../panels/media/cc-media-panel.c:453
-msgid "blank DVD disc"
-msgstr "diska DVD kosong"
-
-#: ../panels/media/cc-media-panel.c:454
-msgid "blank HD DVD disc"
-msgstr "diska HD DVD kosong"
-
-#: ../panels/media/cc-media-panel.c:455
-msgid "Blu-ray video disc"
-msgstr "diska video Blu-ray"
-
-#: ../panels/media/cc-media-panel.c:456
-msgid "e-book reader"
-msgstr "pembaca e-book"
-
-#: ../panels/media/cc-media-panel.c:457
-msgid "HD DVD video disc"
-msgstr "diska video HD DVD"
-
-#: ../panels/media/cc-media-panel.c:458
-msgid "Picture CD"
-msgstr "CD gambar"
-
-#: ../panels/media/cc-media-panel.c:459
-msgid "Super Video CD"
-msgstr "CD Super Video"
-
-#: ../panels/media/cc-media-panel.c:460
-msgid "Video CD"
-msgstr "CD video"
-
-#: ../panels/media/gnome-media-properties.ui.h:1
-msgid "Acti_on:"
-msgstr "_Aksi:"
-
-#: ../panels/media/gnome-media-properties.ui.h:2
-msgid "CD _audio:"
-msgstr "_Audio CD:"
-
-#: ../panels/media/gnome-media-properties.ui.h:3
-msgid "Media and Autorun"
-msgstr "Media dan Jalan Otomatis"
-
-#: ../panels/media/gnome-media-properties.ui.h:4
-msgid "Select how media should be handled"
-msgstr "Pilih bagaimana media mesti ditangani"
-
-#: ../panels/media/gnome-media-properties.ui.h:5
-msgid "Select how other media should be handled"
-msgstr "Pilih bagaimana media lain mesti ditangani"
-
-#: ../panels/media/gnome-media-properties.ui.h:6
-msgid "_DVD video:"
-msgstr "Video _DVD:"
-
-#: ../panels/media/gnome-media-properties.ui.h:7
-msgid "_Music player:"
-msgstr "Pemutar _musik:"
-
-#: ../panels/media/gnome-media-properties.ui.h:8
-msgid "_Never prompt or start programs on media insertion"
-msgstr "Ja_ngan bertanya atau menjalankan program saat media dimasukkan"
-
-#: ../panels/media/gnome-media-properties.ui.h:9
-msgid "_Other Media..."
-msgstr "Media _Lain..."
-
-#: ../panels/media/gnome-media-properties.ui.h:10
-msgid "_Photos:"
-msgstr "_Foto:"
-
-#: ../panels/media/gnome-media-properties.ui.h:11
-msgid "_Software:"
-msgstr "Perangkat _Lunak:"
-
-#: ../panels/media/gnome-media-properties.ui.h:12
-msgid "_Type:"
-msgstr "_Jenis:"
-
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:1
-msgid "Configure media and autorun preferences"
-msgstr "Atur preferensi media dan jalan otomatis"
-
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:2
-msgid "Removable Media"
-msgstr "Media Lepasan"
-
-#. Translators: those are keywords for the media control-center panel
-#: ../panels/media/gnome-media-panel.desktop.in.in.h:4
-msgid "cd;dvd;usb;audio;video;disc;"
-msgstr "cd;dvd;usb;suara;video;diska;"
-
-#: ../panels/online-accounts/cc-online-accounts-panel.c:306
+#: ../panels/online-accounts/cc-online-accounts-panel.c:305
 msgid "Error logging into the account"
 msgstr "Galat saat log masuk ke akun"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:352
+#: ../panels/online-accounts/cc-online-accounts-panel.c:351
 msgid "Expired credentials. Please log in again."
 msgstr "Kredensial kadaluarsa. Silakan log masuk lagi."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:355
+#: ../panels/online-accounts/cc-online-accounts-panel.c:354
 msgid "_Log In"
 msgstr "_Log Masuk"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:464
+#. translators: This is the title of the "Add Account" dialogue.
+#. * The title is not visible when using GNOME Shell
+#: ../panels/online-accounts/cc-online-accounts-panel.c:461
+msgid "Add Account"
+msgstr "Tambah Akun"
+
+#: ../panels/online-accounts/cc-online-accounts-panel.c:466
 msgid "To add a new account, first select the account type"
 msgstr "Untuk menambah akun baru, mulai dengan memilih jenis akun"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:467
+#: ../panels/online-accounts/cc-online-accounts-panel.c:469
 msgid "Account Type:"
 msgstr "Jenis Akun:"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:499
+#: ../panels/online-accounts/cc-online-accounts-panel.c:502
 msgid "_Add..."
 msgstr "T_ambah..."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:552
+#: ../panels/online-accounts/cc-online-accounts-panel.c:555
 msgid "Error creating account"
 msgstr "Galat saat membuat akun"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:586
+#: ../panels/online-accounts/cc-online-accounts-panel.c:589
 msgid "Error removing account"
 msgstr "Galat saat menghapus akun"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:622
+#: ../panels/online-accounts/cc-online-accounts-panel.c:625
 msgid "Are you sure you want to remove the account?"
 msgstr "Anda yakin ingin menghapus akun?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:624
+#: ../panels/online-accounts/cc-online-accounts-panel.c:627
 msgid "This will not remove the account on the server."
 msgstr "Ini tidak akan menghapus akun pada server."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:625
+#: ../panels/online-accounts/cc-online-accounts-panel.c:628
 msgid "_Remove"
 msgstr "_Hapus"
 
@@ -1036,205 +1105,205 @@ msgid "Select an account"
 msgstr "Pilih akun"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:509
+#: ../panels/printers/cc-printers-panel.c:520
 msgid "Low on toner"
 msgstr "Pewarna sedikit"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:511
+#: ../panels/printers/cc-printers-panel.c:522
 msgid "Out of toner"
 msgstr "Pewarna habis"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:514
+#: ../panels/printers/cc-printers-panel.c:525
 msgid "Low on developer"
 msgstr "Developer sedikit"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:517
+#: ../panels/printers/cc-printers-panel.c:528
 msgid "Out of developer"
 msgstr "Developer habis"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:519
+#: ../panels/printers/cc-printers-panel.c:530
 msgid "Low on a marker supply"
 msgstr "Asupan penanda sedikit"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:521
+#: ../panels/printers/cc-printers-panel.c:532
 msgid "Out of a marker supply"
 msgstr "Asupan penanda habis"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:523
+#: ../panels/printers/cc-printers-panel.c:534
 msgid "Open cover"
 msgstr "Buka penutup"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:525
+#: ../panels/printers/cc-printers-panel.c:536
 msgid "Open door"
 msgstr "Buka pinta"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:527
+#: ../panels/printers/cc-printers-panel.c:538
 msgid "Low on paper"
 msgstr "Kertas sedikit"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:529
+#: ../panels/printers/cc-printers-panel.c:540
 msgid "Out of paper"
 msgstr "Kertas habis"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:531
+#: ../panels/printers/cc-printers-panel.c:542
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Luring"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:533
+#: ../panels/printers/cc-printers-panel.c:544
 msgctxt "printer state"
 msgid "Paused"
 msgstr "Ditahan"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:535
+#: ../panels/printers/cc-printers-panel.c:546
 msgid "Waste receptacle almost full"
 msgstr "Penampung sampah hampir penuh"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:537
+#: ../panels/printers/cc-printers-panel.c:548
 msgid "Waste receptacle full"
 msgstr "Penampung sampah penuh"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:539
+#: ../panels/printers/cc-printers-panel.c:550
 msgid "The optical photo conductor is near end of life"
 msgstr "Penghantar foto optik hampir mati"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:541
+#: ../panels/printers/cc-printers-panel.c:552
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Penghantar foto optik tak berfungsi lagi"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:713
+#: ../panels/printers/cc-printers-panel.c:724
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Siap"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:717
+#: ../panels/printers/cc-printers-panel.c:728
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Memroses"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:721
+#: ../panels/printers/cc-printers-panel.c:732
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Dihentikan"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:840
+#: ../panels/printers/cc-printers-panel.c:851
 msgid "Toner Level"
 msgstr "Aras Pewarna"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:843
+#: ../panels/printers/cc-printers-panel.c:854
 msgid "Ink Level"
 msgstr "Aras Tinta"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:846
+#: ../panels/printers/cc-printers-panel.c:857
 msgid "Supply Level"
 msgstr "Aras Asupan"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:861
-#: ../panels/printers/cc-printers-panel.c:1245
+#: ../panels/printers/cc-printers-panel.c:872
+#: ../panels/printers/cc-printers-panel.c:1258
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
 msgstr[0] "%u aktif"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:966
+#: ../panels/printers/cc-printers-panel.c:977
 msgid "No printers available"
 msgstr "Pencetak tak tersedia"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1288
+#: ../panels/printers/cc-printers-panel.c:1301
 msgctxt "print job"
 msgid "Pending"
 msgstr "Ditunda"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1292
+#: ../panels/printers/cc-printers-panel.c:1305
 msgctxt "print job"
 msgid "Held"
 msgstr "Ditahan"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1296
+#: ../panels/printers/cc-printers-panel.c:1309
 msgctxt "print job"
 msgid "Processing"
 msgstr "Memroses"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1300
+#: ../panels/printers/cc-printers-panel.c:1313
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Dihentikan"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1304
+#: ../panels/printers/cc-printers-panel.c:1317
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Dibatalkan"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1308
+#: ../panels/printers/cc-printers-panel.c:1321
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Digugurkan"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1312
+#: ../panels/printers/cc-printers-panel.c:1325
 msgctxt "print job"
 msgid "Completed"
 msgstr "Selesai"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1395
+#: ../panels/printers/cc-printers-panel.c:1408
 msgid "Job Title"
 msgstr "Judul Tugas"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1404
+#: ../panels/printers/cc-printers-panel.c:1417
 msgid "Job State"
 msgstr "Keadaan Tugas"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1410
+#: ../panels/printers/cc-printers-panel.c:1423
 msgid "Time"
 msgstr "Waktu"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2006
+#: ../panels/printers/cc-printers-panel.c:2019
 msgid "Failed to add new printer."
 msgstr "Gagal menambah pencetak baru"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2210
-#: ../panels/printers/cc-printers-panel.c:2224
+#: ../panels/printers/cc-printers-panel.c:2223
+#: ../panels/printers/cc-printers-panel.c:2237
 msgid "Test page"
 msgstr "Halaman uji"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2441
+#: ../panels/printers/cc-printers-panel.c:2484
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Tidak dapat memuat ui: %s"
@@ -1249,7 +1318,7 @@ msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Pencetak;Antrian;Cetak;Kertas;Tinta;Pewarna;"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
-#: ../panels/printers/pp-new-printer-dialog.c:142
+#: ../panels/printers/pp-new-printer-dialog.c:148
 msgid "Printers"
 msgstr "Pencetak"
 
@@ -1265,61 +1334,65 @@ msgstr "Tambah Satu Pencetak Baru"
 msgid "_Add"
 msgstr "T_ambah"
 
-#: ../panels/printers/new-printer-dialog.ui.h:4
-#: ../panels/user-accounts/um-user-panel.c:445
-#: ../panels/user-accounts/data/language-chooser.ui.h:1
-msgid "_Cancel"
-msgstr "Ba_tal"
-
 #: ../panels/printers/new-printer-dialog.ui.h:5
 msgid "_Search by Address"
 msgstr "Pencarian Berda_sarkan Alamat"
 
-#: ../panels/printers/pp-new-printer-dialog.c:627
+#: ../panels/printers/pp-new-printer-dialog.c:654
 msgid "Getting devices..."
 msgstr "Sedang mendapat perangkat..."
 
-#: ../panels/printers/pp-new-printer-dialog.c:1262
+#. Translators: No localy connected printers were found
+#: ../panels/printers/pp-new-printer-dialog.c:1230
+msgid "No local printers found"
+msgstr "Tak ditemukan pencetak lokal"
+
+#. Translators: No network printers were found
+#: ../panels/printers/pp-new-printer-dialog.c:1243
+msgid "No network printers found"
+msgstr "Tak ditemukan pencetak jaringan"
+
+#: ../panels/printers/pp-new-printer-dialog.c:1335
 msgid "FirewallD is not running. Network printer detection needs services mdns, ipp, ipp-client and samba-client enabled on firewall."
 msgstr "FirewallD tak sedang berjalan. Deteksi pencetak jaringan perlu layanan mdns, ipp, ipp-client, dan samba-client diaktifkan pada firewall."
 
 #. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:1282
-#: ../panels/printers/pp-new-printer-dialog.c:1287
+#: ../panels/printers/pp-new-printer-dialog.c:1363
+#: ../panels/printers/pp-new-printer-dialog.c:1368
 msgid "Devices"
 msgstr "Perangkat"
 
 #. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:1312
+#: ../panels/printers/pp-new-printer-dialog.c:1393
 msgctxt "printer type"
 msgid "Local"
 msgstr "Lokal"
 
 #. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:1314
+#: ../panels/printers/pp-new-printer-dialog.c:1395
 msgctxt "printer type"
 msgid "Network"
 msgstr "Jaringan"
 
 #. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:1355
+#: ../panels/printers/pp-new-printer-dialog.c:1436
 msgid "Device types"
 msgstr "Jenis perangkat"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:1654
+#: ../panels/printers/pp-new-printer-dialog.c:1737
 msgid "Automatic configuration"
 msgstr "Konfigurasi otomatis"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1750
+#: ../panels/printers/pp-new-printer-dialog.c:1818
 msgid "Opening firewall for mDNS connections"
 msgstr "Membuka firewall bagi sambungan mDNS"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1759
+#: ../panels/printers/pp-new-printer-dialog.c:1827
 msgid "Opening firewall for Samba connections"
 msgstr "Membuka firewall bagi sambungan Samba"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1768
+#: ../panels/printers/pp-new-printer-dialog.c:1836
 msgid "Opening firewall for IPP connections"
 msgstr "Membuka firewall bagi sambungan IPP"
 
@@ -1338,8 +1411,8 @@ msgid "Allowed users"
 msgstr "Pengguna yang boleh"
 
 #: ../panels/printers/printers.ui.h:6
-#: ../panels/network/cc-network-panel.c:1771
-#: ../panels/network/cc-network-panel.c:1774
+#: ../panels/network/cc-network-panel.c:1990
+#: ../panels/network/cc-network-panel.c:1993
 #: ../panels/network/network.ui.h:11
 msgid "IP Address"
 msgstr "Alamat IP"
@@ -1401,11 +1474,11 @@ msgstr "_Pilihan"
 msgid "_Show"
 msgstr "_Tampilkan"
 
-#: ../panels/region/gnome-region-panel-formats.c:99
+#: ../panels/region/gnome-region-panel-formats.c:142
 msgid "Imperial"
 msgstr "Kerajaan"
 
-#: ../panels/region/gnome-region-panel-formats.c:101
+#: ../panels/region/gnome-region-panel-formats.c:144
 msgid "Metric"
 msgstr "Metrik"
 
@@ -1430,6 +1503,7 @@ msgid "Allow different layouts for individual windows"
 msgstr "Perbolehkan tata letak berbeda untuk tiap jendela"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
+#: ../panels/region/gnome-region-panel-system.c:406
 msgid "Copy Settings..."
 msgstr "Salin Pengaturan..."
 
@@ -1441,62 +1515,59 @@ msgstr "Mata Uang"
 msgid "Dates"
 msgstr "Tanggal"
 
-#: ../panels/region/gnome-region-panel.ui.h:5
+#. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Display language:"
 msgstr "Bahasa tampilan:"
 
-#: ../panels/region/gnome-region-panel.ui.h:6
-msgid "Example"
+#: ../panels/region/gnome-region-panel.ui.h:7
+msgid "Examples"
 msgstr "Contoh"
 
-#: ../panels/region/gnome-region-panel.ui.h:7
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid "Format:"
 msgstr "Format:"
 
-#: ../panels/region/gnome-region-panel.ui.h:8
+#: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Formats"
 msgstr "Format"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "Input source:"
 msgstr "Sumber masukan:"
 
-#: ../panels/region/gnome-region-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Install languages..."
 msgstr "Pasang bahasa..."
 
-#: ../panels/region/gnome-region-panel.ui.h:11
+#: ../panels/region/gnome-region-panel.ui.h:12
 msgid "Language"
 msgstr "Bahasa"
 
-#: ../panels/region/gnome-region-panel.ui.h:12
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "Layouts"
 msgstr "Tata Letak"
 
-#: ../panels/region/gnome-region-panel.ui.h:13
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "Measurement"
 msgstr "Pengukuran"
 
-#: ../panels/region/gnome-region-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:15
 msgid "New windows use the default layout"
 msgstr "Jendela baru memakai tata letak baku"
 
-#: ../panels/region/gnome-region-panel.ui.h:15
+#: ../panels/region/gnome-region-panel.ui.h:16
 msgid "New windows use the previous window's layout"
 msgstr "Jendela baru memakai tata letak jendela sebelumnya"
 
-#: ../panels/region/gnome-region-panel.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:17
 msgid "Numbers"
 msgstr "Angka"
 
-#: ../panels/region/gnome-region-panel.ui.h:17
+#: ../panels/region/gnome-region-panel.ui.h:18
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
 msgstr "Wilayah dan Bahasa"
-
-#: ../panels/region/gnome-region-panel.ui.h:18
-msgid "Region:"
-msgstr "Wilayah:"
 
 #: ../panels/region/gnome-region-panel.ui.h:19
 msgid ""
@@ -1514,34 +1585,46 @@ msgstr "Atur ulang ke Baku"
 msgid "Select a display language (change will be applied next time you log in)"
 msgstr "Pilih bahasa tampilan (perubahan akan diterapkan setelah Anda log masuk waktu berikutnya)"
 
-#: ../panels/region/gnome-region-panel.ui.h:24
+#: ../panels/region/gnome-region-panel.ui.h:23
+msgid "Select a region (change will be applied the next time you log in)"
+msgstr "Pilih suatu wilayah (perubahan akan diterapkan setelah Anda log masuk waktu berikutnya)"
+
+#: ../panels/region/gnome-region-panel.ui.h:25
 msgid "System settings"
 msgstr "Pengaturan sistem"
 
-#: ../panels/region/gnome-region-panel.ui.h:25
-msgid "The login screen, system accounts and new user accounts use the system Region & Language settings. You may change the system settings to match yours"
-msgstr "Layar log masuk, akun sistem, dan akun pengguna baru memakai pengaturan Wilayah & Bahasa sistem. Anda boleh mengubah pengaturan sistem agar sesuai dengan Anda"
-
 #: ../panels/region/gnome-region-panel.ui.h:26
+#: ../panels/region/gnome-region-panel-system.c:400
+msgid "The login screen, system accounts and new user accounts use the system-wide Region and Language settings. You may change the system settings to match yours."
+msgstr "Layar log masuk, akun sistem, dan akun pengguna baru memakai pengaturan Wilayah & Bahasa sistem. Anda boleh mengubah pengaturan sistem agar sesuai dengan Anda."
+
+#: ../panels/region/gnome-region-panel.ui.h:27
 msgid "Times"
 msgstr "Waktu"
 
-#: ../panels/region/gnome-region-panel.ui.h:27
+#: ../panels/region/gnome-region-panel.ui.h:28
 msgid "Use the same layout for all windows"
 msgstr "Tata letak sama untuk semua jendela"
 
-#: ../panels/region/gnome-region-panel.ui.h:28
+#: ../panels/region/gnome-region-panel.ui.h:29
 msgid "View and edit keyboard layout options"
 msgstr "Tilik dan sunting opsi tata letak papan tik"
 
-#: ../panels/region/gnome-region-panel.ui.h:29
+#: ../panels/region/gnome-region-panel.ui.h:30
 msgid "Your settings"
 msgstr "Pengaturan Anda"
 
-#: ../panels/region/gnome-region-panel.ui.h:30
-#: ../panels/network/network.ui.h:30
+#: ../panels/region/gnome-region-panel.ui.h:31
 msgid "_Options..."
 msgstr "_Opsi..."
+
+#: ../panels/region/gnome-region-panel-system.c:395
+msgid "The login screen, system accounts and new user accounts use the system-wide Region and Language settings."
+msgstr "Layar log masuk, akun sistem, dan akun pengguna baru memakai pengaturan Wilayah & Bahasa sistem."
+
+#: ../panels/region/gnome-region-panel-system.c:403
+msgid "Copy Settings"
+msgstr "Salin Pengaturan"
 
 #: ../panels/region/gnome-region-panel-xkblt.c:210
 msgid "Layout"
@@ -1586,6 +1669,7 @@ msgid "Enable h_orizontal scrolling"
 msgstr "Aktifkan penggulungan h_orisontal"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/universal-access/zoom-options.ui.h:7
 msgid "General"
 msgstr "Umum"
 
@@ -1596,7 +1680,7 @@ msgstr "Tinggi"
 
 #. large threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:14
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Large"
 msgstr "Besar"
 
@@ -1627,7 +1711,7 @@ msgstr "Tampilkan posisi pointer ketika kunci Control ditekan"
 
 #. small threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:27
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:57
 msgid "Small"
 msgstr "Kecil"
 
@@ -1685,7 +1769,7 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
 msgstr "Trackpad;Pointer;Klik;Sentuh;Ganda;Tombol;Trackball;"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/cc-network-panel.c:196
+#: ../panels/network/cc-network-panel.c:269
 msgid "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgstr "Mencari Sendiri Proksi Web dipakai ketika URL Konfigurai tak diberikan."
 
@@ -1693,112 +1777,114 @@ msgstr "Mencari Sendiri Proksi Web dipakai ketika URL Konfigurai tak diberikan."
 #. * network, then anyone else on that network can tell your
 #. * machine that it should proxy all of your web traffic
 #. * through them.
-#: ../panels/network/cc-network-panel.c:204
+#: ../panels/network/cc-network-panel.c:277
 msgid "This is not recommended for untrusted public networks."
 msgstr "Ini tak dianjurkan bagi jaringan publik yang tak terpercaya."
 
 #. TRANSLATORS: this is when the access point is not listed
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
-#: ../panels/network/cc-network-panel.c:817
+#: ../panels/network/cc-network-panel.c:949
 msgctxt "Wireless access point"
 msgid "Other..."
 msgstr "Lainnya..."
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:975
-#: ../panels/network/cc-network-panel.c:1297
+#: ../panels/network/cc-network-panel.c:1107
+#: ../panels/network/cc-network-panel.c:1514
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:979
-#: ../panels/network/cc-network-panel.c:1301
+#: ../panels/network/cc-network-panel.c:1111
+#: ../panels/network/cc-network-panel.c:1518
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:983
+#: ../panels/network/cc-network-panel.c:1115
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:988
+#: ../panels/network/cc-network-panel.c:1120
 msgid "Enterprise"
 msgstr "Enterprise "
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:994
-#: ../panels/network/cc-network-panel.c:1292
-#: ../panels/universal-access/uap.ui.h:41
+#: ../panels/network/cc-network-panel.c:1126
+#: ../panels/network/cc-network-panel.c:1509
+#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/zoom-options.ui.h:16
 msgid "None"
 msgstr "Tak Ada"
 
-#: ../panels/network/cc-network-panel.c:1360
+#: ../panels/network/cc-network-panel.c:1577
 msgid "Hotspot"
 msgstr "Hotspot"
 
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1422
-#: ../panels/network/cc-network-panel.c:1510
+#: ../panels/network/cc-network-panel.c:1643
+#: ../panels/network/cc-network-panel.c:1731
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: ../panels/network/cc-network-panel.c:1767
+#: ../panels/network/cc-network-panel.c:1986
 #: ../panels/network/network.ui.h:12
 msgid "IPv4 Address"
 msgstr "Alamat IPv4"
 
-#: ../panels/network/cc-network-panel.c:1768
+#: ../panels/network/cc-network-panel.c:1987
 #: ../panels/network/network.ui.h:13
 msgid "IPv6 Address"
 msgstr "Alamat IPv6"
 
-#: ../panels/network/cc-network-panel.c:1907
-msgid "Proxy"
-msgstr "Proksi"
-
-#: ../panels/network/cc-network-panel.c:1981
-msgid "Network proxy"
-msgstr "Proxy jaringan"
-
-#: ../panels/network/cc-network-panel.c:2147
+#: ../panels/network/cc-network-panel.c:2040
+#: ../panels/network/cc-network-panel.c:2413
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
+#: ../panels/network/cc-network-panel.c:2148
+msgid "Proxy"
+msgstr "Proksi"
+
+#: ../panels/network/cc-network-panel.c:2222
+msgid "Network proxy"
+msgstr "Proxy jaringan"
+
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2214
+#: ../panels/network/cc-network-panel.c:2480
 msgid "The system network services are not compatible with this version."
 msgstr "Layanan jaringan sistem tak kompatibel dengan versi ini."
 
-#: ../panels/network/cc-network-panel.c:2872
+#: ../panels/network/cc-network-panel.c:3095
 msgid "Not connected to the internet."
 msgstr "Tak tersambung ke internet."
 
-#: ../panels/network/cc-network-panel.c:2873
+#: ../panels/network/cc-network-panel.c:3096
 msgid "Create the hotspot anyway?"
 msgstr "Tetap buat hotspot?"
 
-#: ../panels/network/cc-network-panel.c:2891
+#: ../panels/network/cc-network-panel.c:3114
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
 msgstr "Memutus dari %s dan membuat hotspot baru?"
 
-#: ../panels/network/cc-network-panel.c:2894
+#: ../panels/network/cc-network-panel.c:3117
 msgid "This is your only connection to the internet."
 msgstr "Ini satu-satunya koneksi Anda ke internet."
 
-#: ../panels/network/cc-network-panel.c:2912
+#: ../panels/network/cc-network-panel.c:3135
 msgid "Create _Hotspot"
 msgstr "Buat _Hotspot"
 
-#: ../panels/network/cc-network-panel.c:2972
+#: ../panels/network/cc-network-panel.c:3195
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Hentikan hotspot dan putuskan semua pengguna?"
 
-#: ../panels/network/cc-network-panel.c:2975
+#: ../panels/network/cc-network-panel.c:3198
 msgid "_Stop Hotspot"
 msgstr "_Stop Hotspot"
 
@@ -1900,48 +1986,56 @@ msgid "VPN"
 msgstr "VPN"
 
 #: ../panels/network/network.ui.h:25
+msgid "VPN Type"
+msgstr "Jenis VPN"
+
+#: ../panels/network/network.ui.h:26
 msgid "_Configuration URL"
 msgstr "URL _Konfigurasi"
 
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:27
+msgid "_Configure..."
+msgstr "_Tata..."
+
+#: ../panels/network/network.ui.h:28
 msgid "_FTP Proxy"
 msgstr "Proksi _FTP"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:29
 msgid "_HTTP Proxy"
 msgstr "Proksi _HTTP"
 
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network.ui.h:30
 msgid "_Method"
 msgstr "_Metode"
 
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network.ui.h:31
 msgid "_Network Name"
 msgstr "_Nama Jaringan"
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network.ui.h:32
 msgid "_Socks Host"
 msgstr "Host _Socks"
 
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network.ui.h:33
 msgid "_Stop Hotspot..."
 msgstr "_Stop Hotspot..."
 
-#: ../panels/network/network.ui.h:33
+#: ../panels/network/network.ui.h:34
 msgid "_Use as Hotspot..."
 msgstr "Jadikan _Hotspot..."
 
-#: ../panels/network/network.ui.h:34
+#: ../panels/network/network.ui.h:35
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "Otomatis"
 
-#: ../panels/network/network.ui.h:35
+#: ../panels/network/network.ui.h:36
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "Manual"
 
-#: ../panels/network/network.ui.h:36
+#: ../panels/network/network.ui.h:37
 msgctxt "proxy method"
 msgid "None"
 msgstr "Tak ada"
@@ -2101,37 +2195,37 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "menit"
 
-#: ../panels/power/cc-power-panel.c:260
+#: ../panels/power/cc-power-panel.c:265
 msgid "Battery charging"
 msgstr "Baterai diisi"
 
-#: ../panels/power/cc-power-panel.c:263
+#: ../panels/power/cc-power-panel.c:268
 msgid "Battery discharging"
 msgstr "Baterai dipakai"
 
-#: ../panels/power/cc-power-panel.c:274
+#: ../panels/power/cc-power-panel.c:279
 msgid "UPS charging"
 msgstr "UPS diisi"
 
-#: ../panels/power/cc-power-panel.c:277
+#: ../panels/power/cc-power-panel.c:282
 msgid "UPS discharging"
 msgstr "UPS dipakai"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:295
+#: ../panels/power/cc-power-panel.c:300
 #, c-format
 msgid "%s until charged (%.0lf%%)"
 msgstr "%s menit sampai penuh (%.0lf%%)"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:301
+#: ../panels/power/cc-power-panel.c:306
 #, c-format
 msgid "%s until empty (%.0lf%%)"
 msgstr "%s sampai kosong (%.0lf%%)"
 
 #. TRANSLATORS: %1 is a percentage value. Note: this string is only
 #. * used when we don't have a time value
-#: ../panels/power/cc-power-panel.c:309
+#: ../panels/power/cc-power-panel.c:314
 #, c-format
 msgid "%.0lf%% charged"
 msgstr "%.0lf%% terisi"
@@ -2157,44 +2251,32 @@ msgid "5 minutes"
 msgstr "5 menit"
 
 #: ../panels/power/power.ui.h:5
-msgid "Ask me"
-msgstr "Tanya saya"
+msgid "Don't suspend"
+msgstr "Jangan suspensi"
 
-#: ../panels/power/power.ui.h:7
+#: ../panels/power/power.ui.h:6
 msgid "Hibernate"
 msgstr "Hibernasi"
 
+#: ../panels/power/power.ui.h:7
+msgid "On battery power"
+msgstr "Pakai baterai"
+
 #: ../panels/power/power.ui.h:8
-msgid "On AC _power:"
-msgstr "Memakai _listrik AC:"
-
-#: ../panels/power/power.ui.h:9
-msgid "On _battery power:"
-msgstr "Memakai tenaga baterai:"
-
-#: ../panels/power/power.ui.h:10
-msgid "Put the computer to sleep when inactive:"
-msgstr "Tidurkan komputer ketika tak aktif:"
-
-#: ../panels/power/power.ui.h:11
-msgid "Shutdown"
+msgid "Power off"
 msgstr "Matikan"
 
-#: ../panels/power/power.ui.h:12
-msgid "Suspend"
-msgstr "Suspensi"
+#: ../panels/power/power.ui.h:9
+msgid "Suspend when inactive for:"
+msgstr "Suspensi ketika tak aktif selama:"
 
-#: ../panels/power/power.ui.h:13
+#: ../panels/power/power.ui.h:10
+msgid "When plugged in"
+msgstr "Ketika ditancapkan"
+
+#: ../panels/power/power.ui.h:11
 msgid "When power is _critically low:"
 msgstr "Ketika daya _kritis:"
-
-#: ../panels/power/power.ui.h:14
-msgid "When the _sleep button is pressed:"
-msgstr "Ketika tombol _tidur ditekan:"
-
-#: ../panels/power/power.ui.h:15
-msgid "When the p_ower button is pressed:"
-msgstr "Ketika tombol p_ower ditekan:"
 
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
 #: ../panels/color/color.ui.h:8
@@ -2211,170 +2293,227 @@ msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Warna;ICC;Profil;Kalibrasi;Pencetak;Tampilan;"
 
 #. TRANSLATORS: this is where the user can click and import a profile
-#: ../panels/color/cc-color-panel.c:102
+#: ../panels/color/cc-color-panel.c:106
 msgid "Other profile…"
 msgstr "Profil lain…"
 
+#. TRANSLATORS: this is a profile prefix to signify the
+#. * profile has been auto-generated for this hardware
+#: ../panels/color/cc-color-panel.c:119
+msgid "Default: "
+msgstr "Baku:"
+
+#. TRANSLATORS: this is a profile prefix to signify the
+#. * profile his a standard space like AdobeRGB
+#: ../panels/color/cc-color-panel.c:126
+msgid "Colorspace: "
+msgstr "Ruang warna:"
+
+#. TRANSLATORS: this is a profile prefix to signify the
+#. * profile is a test profile
+#: ../panels/color/cc-color-panel.c:132
+msgid "Test profile: "
+msgstr "Profil uji:"
+
 #. TRANSLATORS: this is when the profile should be set for all users
-#: ../panels/color/cc-color-panel.c:156
+#: ../panels/color/cc-color-panel.c:185
 #: ../panels/color/color.ui.h:19
 msgid "Set for all users"
 msgstr "Tata bagi semua pengguna"
 
 #. TRANSLATORS: this is when the profile should be set for all users
-#: ../panels/color/cc-color-panel.c:163
+#: ../panels/color/cc-color-panel.c:192
 msgid "Create virtual device"
 msgstr "Buat perangkat virtual"
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:198
+#: ../panels/color/cc-color-panel.c:227
 msgid "Select ICC Profile File"
 msgstr "Pilih Berkas Profil ICC"
 
-#: ../panels/color/cc-color-panel.c:201
-msgid "Import"
-msgstr "Impor"
+#: ../panels/color/cc-color-panel.c:230
+msgid "_Import"
+msgstr "_Impor"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:212
+#: ../panels/color/cc-color-panel.c:241
 msgid "Supported ICC profiles"
 msgstr "Profil ICC yang didukung"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:219
+#: ../panels/color/cc-color-panel.c:248
 msgid "All files"
 msgstr "Semua berkas"
 
+#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
+#: ../panels/color/cc-color-panel.c:504
+msgid "Available Profiles for Displays"
+msgstr "Profil Tersedia Bagi Monitor"
+
+#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
+#: ../panels/color/cc-color-panel.c:508
+msgid "Available Profiles for Scanners"
+msgstr "Profil Tersedia Bagi Pemindai"
+
+#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
+#: ../panels/color/cc-color-panel.c:512
+msgid "Available Profiles for Printers"
+msgstr "Profil Tersedia Bagi Pencetak"
+
+#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
+#: ../panels/color/cc-color-panel.c:516
+msgid "Available Profiles for Cameras"
+msgstr "Profil Tersedia Bagi Kamera"
+
+#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
+#: ../panels/color/cc-color-panel.c:520
+msgid "Available Profiles for Webcams"
+msgstr "Profil Tersedia Bagi Webcam"
+
+#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
+#. * where the device type is not recognised
+#. Profiles that can be added to the device
+#: ../panels/color/cc-color-panel.c:525
+#: ../panels/color/color.ui.h:5
+msgid "Available Profiles"
+msgstr "Profil Tersedia"
+
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:695
-#: ../panels/sound/gvc-mixer-dialog.c:1539
+#: ../panels/color/cc-color-panel.c:795
+#: ../panels/sound/gvc-mixer-dialog.c:1515
 msgid "Device"
 msgstr "Perangkat"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:730
+#: ../panels/color/cc-color-panel.c:830
 msgid "Calibration"
 msgstr "Kalibrasi"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:762
+#: ../panels/color/cc-color-panel.c:862
 msgid "Create a color profile for the selected device"
 msgstr "Buat profil warna bagi perangkat yang dipilih"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:776
-#: ../panels/color/cc-color-panel.c:800
+#: ../panels/color/cc-color-panel.c:876
+#: ../panels/color/cc-color-panel.c:900
 msgid "The measuring instrument is not detected. Please check it is turned on and correctly connected."
 msgstr "Instrumen pengukur tak terdeteksi. Silakan periksa apakah sudah dinyalakan dari disambung dengan benar."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:809
+#: ../panels/color/cc-color-panel.c:909
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Instrumen pengukur tak mendukung pembuatan profil pencetak."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:820
+#: ../panels/color/cc-color-panel.c:920
 msgid "The device type is not currently supported."
 msgstr "Jenis perangkat belum didukung."
 
 #. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:892
+#: ../panels/color/cc-color-panel.c:993
 msgid "Cannot remove automatically added profile"
 msgstr "Tak bisa menghapus profil yang ditambahkan secara otomatis"
 
 #. TRANSLATORS: this is when there is no profile for the device
-#: ../panels/color/cc-color-panel.c:1190
+#: ../panels/color/cc-color-panel.c:1327
 msgid "No profile"
 msgstr "Tiada profil"
 
-#: ../panels/color/cc-color-panel.c:1209
+#: ../panels/color/cc-color-panel.c:1358
 #, c-format
 msgid "%i year"
 msgid_plural "%i years"
 msgstr[0] "%i tahun"
 
-#: ../panels/color/cc-color-panel.c:1220
+#: ../panels/color/cc-color-panel.c:1369
 #, c-format
 msgid "%i month"
 msgid_plural "%i months"
 msgstr[0] "%i bulan"
 
-#: ../panels/color/cc-color-panel.c:1231
+#: ../panels/color/cc-color-panel.c:1380
 #, c-format
 msgid "%i week"
 msgid_plural "%i weeks"
 msgstr[0] "%i minggu"
 
 #. fallback
-#: ../panels/color/cc-color-panel.c:1238
+#: ../panels/color/cc-color-panel.c:1387
 #, c-format
 msgid "Less than 1 week"
 msgstr "Kurang dari 1 minggu"
 
-#: ../panels/color/cc-color-panel.c:1298
+#: ../panels/color/cc-color-panel.c:1447
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "RGB bawaan"
 
-#: ../panels/color/cc-color-panel.c:1303
+#: ../panels/color/cc-color-panel.c:1452
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "CMYK bawaan"
 
-#: ../panels/color/cc-color-panel.c:1308
+#: ../panels/color/cc-color-panel.c:1457
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "Kelabu bawaan"
 
-#: ../panels/color/cc-color-panel.c:1423
-#: ../panels/color/cc-color-panel.c:1445
-#: ../panels/color/cc-color-panel.c:1456
+#: ../panels/color/cc-color-panel.c:1572
+#: ../panels/color/cc-color-panel.c:1604
+#: ../panels/color/cc-color-panel.c:1615
+#: ../panels/color/cc-color-panel.c:1626
 msgid "Uncalibrated"
 msgstr "Tak dikalibrasi"
 
-#: ../panels/color/cc-color-panel.c:1426
+#: ../panels/color/cc-color-panel.c:1575
 msgid "This device is not color managed."
 msgstr "Perangkat tak dikelola warnanya."
 
-#: ../panels/color/cc-color-panel.c:1448
+#: ../panels/color/cc-color-panel.c:1607
 msgid "This device is using manufacturing calibrated data."
 msgstr "Perangkat ini memakai data terkalibrasi pabrikan."
 
-#: ../panels/color/cc-color-panel.c:1459
+#: ../panels/color/cc-color-panel.c:1618
 msgid "This device does not have a profile suitable for whole-screen color correction."
 msgstr "Perangkat tak memiliki profil yang cocok bagi koreksi warna seluruh layar."
 
-#: ../panels/color/cc-color-panel.c:1486
+#: ../panels/color/cc-color-panel.c:1651
 msgid "This device has an old profile that may no longer be accurate."
 msgstr "Perangkat memiliki profil tua yang mungkin tidak akurat lagi."
 
 #. TRANSLATORS: this is when the calibration profile age is not
 #. * specified as it has been autogenerated from the hardware
-#: ../panels/color/cc-color-panel.c:1513
+#: ../panels/color/cc-color-panel.c:1679
 msgid "Not specified"
 msgstr "Tak dinyatakan"
 
+#. add the 'No devices detected' entry
 #: ../panels/color/cc-color-panel.c:1864
+msgid "No devices supporting color management detected"
+msgstr "Tak terdeteksi perangkat yang mendukung manajemen warna"
+
+#: ../panels/color/cc-color-panel.c:2093
 msgctxt "Device kind"
 msgid "Display"
 msgstr "Tampilan"
 
-#: ../panels/color/cc-color-panel.c:1866
+#: ../panels/color/cc-color-panel.c:2095
 msgctxt "Device kind"
 msgid "Scanner"
 msgstr "Pelarik"
 
-#: ../panels/color/cc-color-panel.c:1868
+#: ../panels/color/cc-color-panel.c:2097
 msgctxt "Device kind"
 msgid "Printer"
 msgstr "Pencetak"
 
-#: ../panels/color/cc-color-panel.c:1870
+#: ../panels/color/cc-color-panel.c:2099
 msgctxt "Device kind"
 msgid "Camera"
 msgstr "Kamera"
 
-#: ../panels/color/cc-color-panel.c:1872
+#: ../panels/color/cc-color-panel.c:2101
 msgctxt "Device kind"
 msgid "Webcam"
 msgstr "Webcam"
@@ -2390,11 +2529,6 @@ msgstr "Tambah perangkat"
 #: ../panels/color/color.ui.h:3
 msgid "Add profile"
 msgstr "Tambah profil"
-
-#. Profiles that can be added to the device
-#: ../panels/color/color.ui.h:5
-msgid "Available Profiles"
-msgstr "Profil Tersedia"
 
 #: ../panels/color/color.ui.h:6
 msgid "Calibrate the device"
@@ -2421,17 +2555,20 @@ msgid "Image files can be dragged on this window to auto-complete the above fiel
 msgstr "Berkas gambar dapat diseret ke jendela ini untuk melengkapi otomatis ruas-ruas di atas."
 
 #: ../panels/color/color.ui.h:13
+msgid "Learn more"
+msgstr "Pelajari lebih jauh"
+
+#: ../panels/color/color.ui.h:14
+msgid "Learn more about color management"
+msgstr "Pelajari lebih jauh tentang manajemen warna"
+
+#: ../panels/color/color.ui.h:15
 msgid "Manufacturer:"
 msgstr "Pabrikan:"
 
-#: ../panels/color/color.ui.h:14
+#: ../panels/color/color.ui.h:16
 msgid "Model:"
 msgstr "Model:"
-
-#. Some profiles are not compatible with some devices
-#: ../panels/color/color.ui.h:16
-msgid "Only profiles that are compatible with the device will be listed above."
-msgstr "Hanya profil yang kompatibel dengan perangkat ini yang akan didaftar di atas."
 
 #: ../panels/color/color.ui.h:17
 msgid "Remove a device"
@@ -2508,8 +2645,8 @@ msgid "_Lock screen after:"
 msgstr "Kunci _layar setelah:"
 
 #: ../panels/screen/screen.ui.h:17
-msgid "_Turn off after:"
-msgstr "Ma_tikan setelah:"
+msgid "_Turn screen off when inactive for:"
+msgstr "Ma_tikan layar ketika tak aktif selama:"
 
 #: ../panels/sound/applet-main.c:49
 msgid "Enable debugging code"
@@ -2523,21 +2660,21 @@ msgstr "Versi aplikasi ini"
 msgid " — GNOME Volume Control Applet"
 msgstr " — Aplet Kendali Volume GNOME"
 
-#: ../panels/sound/gvc-applet.c:276
-#: ../panels/sound/gvc-mixer-dialog.c:1938
+#: ../panels/sound/gvc-applet.c:270
+#: ../panels/sound/gvc-mixer-dialog.c:1767
 msgid "Output"
 msgstr "Keluaran"
 
-#: ../panels/sound/gvc-applet.c:278
+#: ../panels/sound/gvc-applet.c:272
 msgid "Sound Output Volume"
 msgstr "Volume Keluaran Suara"
 
-#: ../panels/sound/gvc-applet.c:282
-#: ../panels/sound/gvc-mixer-dialog.c:1855
+#: ../panels/sound/gvc-applet.c:276
+#: ../panels/sound/gvc-mixer-dialog.c:1807
 msgid "Input"
 msgstr "Masukan"
 
-#: ../panels/sound/gvc-applet.c:284
+#: ../panels/sound/gvc-applet.c:278
 msgid "Microphone Volume"
 msgstr "Volume Mikrofon"
 
@@ -2594,18 +2731,14 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "Tak diperkuat"
 
-#: ../panels/sound/gvc-channel-bar.c:901
-msgid "Mute"
-msgstr "Bisu"
-
 #: ../panels/sound/gvc-combo-box.c:167
-#: ../panels/sound/gvc-mixer-dialog.c:1645
+#: ../panels/sound/gvc-mixer-dialog.c:1621
 msgid "_Profile:"
 msgstr "_Profil:"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1091
+#: ../panels/sound/gvc-mixer-control.c:1093
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -2613,86 +2746,87 @@ msgstr[0] "%u Keluaran"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1101
+#: ../panels/sound/gvc-mixer-control.c:1103
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u Masukan"
 
-#: ../panels/sound/gvc-mixer-control.c:1399
+#: ../panels/sound/gvc-mixer-control.c:1401
 msgid "System Sounds"
 msgstr "Suara Sistem"
 
-#: ../panels/sound/gvc-mixer-dialog.c:324
-#: ../panels/sound/gvc-mixer-dialog.c:632
+#: ../panels/sound/gvc-mixer-dialog.c:323
+#: ../panels/sound/gvc-mixer-dialog.c:634
 msgid "Co_nnector:"
 msgstr "Ko_nektor:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:538
+#: ../panels/sound/gvc-mixer-dialog.c:540
 msgid "Peak detect"
 msgstr "Deteksi puncak"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1521
-#: ../panels/sound/gvc-mixer-dialog.c:1733
+#: ../panels/sound/gvc-mixer-dialog.c:1496
+#: ../panels/sound/gvc-mixer-dialog.c:1709
 #: ../panels/sound/gvc-sound-theme-chooser.c:596
 msgid "Name"
 msgstr "Nama"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1587
+#: ../panels/sound/gvc-mixer-dialog.c:1563
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Pengujian Speaker bagi %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1646
+#: ../panels/sound/gvc-mixer-dialog.c:1622
 msgid "_Test Speakers"
 msgstr "_Uji Speaker"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1777
-msgid "_Output volume: "
+#: ../panels/sound/gvc-mixer-dialog.c:1753
+msgid "_Output volume:"
 msgstr "V_olume keluaran: "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1791
-msgid "Sound Effects"
-msgstr "Efek Suara"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1798
-msgid "_Alert volume: "
-msgstr "Volume w_aspada: "
-
-#: ../panels/sound/gvc-mixer-dialog.c:1811
-msgid "Hardware"
-msgstr "Perangkat keras"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1816
-msgid "C_hoose a device to configure:"
-msgstr "Pili_h perangkat untuk ditata:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1844
-#: ../panels/sound/gvc-mixer-dialog.c:1967
-msgid "Settings for the selected device:"
-msgstr "Tatanan bagi perangkat yang dipilih:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1862
-msgid "_Input volume: "
-msgstr "Volume _masukan:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1885
-msgid "Input level:"
-msgstr "Tingkat masukan:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1911
-msgid "C_hoose a device for sound input:"
-msgstr "Pili_h perangkat bagi masukan suara:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1943
+#: ../panels/sound/gvc-mixer-dialog.c:1772
 msgid "C_hoose a device for sound output:"
 msgstr "Pili_h perangkat bagi keluaran suara:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1978
+#: ../panels/sound/gvc-mixer-dialog.c:1796
+#: ../panels/sound/gvc-mixer-dialog.c:1925
+msgid "Settings for the selected device:"
+msgstr "Tatanan bagi perangkat yang dipilih:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1814
+msgid "_Input volume:"
+msgstr "Volume _masukan:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1837
+msgid "Input level:"
+msgstr "Tingkat masukan:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1865
+msgid "C_hoose a device for sound input:"
+msgstr "Pili_h perangkat bagi masukan suara:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1892
+msgid "Hardware"
+msgstr "Perangkat keras"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1897
+msgid "C_hoose a device to configure:"
+msgstr "Pili_h perangkat untuk ditata:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1936
+msgid "Sound Effects"
+msgstr "Efek Suara"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1943
+#, fuzzy
+msgid "_Alert volume:"
+msgstr "Volume w_aspada: "
+
+#: ../panels/sound/gvc-mixer-dialog.c:1956
 msgid "Applications"
 msgstr "Aplikasi"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1982
+#: ../panels/sound/gvc-mixer-dialog.c:1960
 msgid "No application is currently playing or recording audio."
 msgstr "Tak ada aplikasi yang sedang memainkan atau merekam audio."
 
@@ -2799,8 +2933,8 @@ msgstr "Gelas"
 msgid "Sonar"
 msgstr "Sonar"
 
-#: ../panels/universal-access/cc-ua-panel.c:470
-#: ../panels/universal-access/cc-ua-panel.c:475
+#: ../panels/universal-access/cc-ua-panel.c:505
+#: ../panels/universal-access/cc-ua-panel.c:510
 msgid "No shortcut set"
 msgstr "Tak ada pintasan yang ditata"
 
@@ -2896,15 +3030,23 @@ msgstr ""
 msgid "Please select an image."
 msgstr "Silakan pilih sebuah gambar."
 
-#: ../panels/universal-access/gconf-property-editor.c:1609
-#: ../panels/user-accounts/data/language-chooser.ui.h:2
-msgid "_Select"
-msgstr "_Pilih"
+#: ../panels/universal-access/zoom-options.c:156
+msgid "1/4 Screen"
+msgstr "1/4 Layar"
+
+#: ../panels/universal-access/zoom-options.c:157
+msgid "1/2 Screen"
+msgstr "1/2 Layar"
+
+#: ../panels/universal-access/zoom-options.c:158
+msgid "3/4 Screen"
+msgstr "3/4 Layar"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
-msgid "Keyboard;Mouse;a11y;Accessibility;"
-msgstr "Papan Tik;Tetikus;a11y;Aksesibilitas;"
+#, fuzzy
+msgid "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys"
+msgstr "Papan Tik;Tetikus;a11y;Aksesabilitas;Kontras;Zum;Pembaca Layar;teks;fonta;ukuran;AccessX;Tombol Lengket;Tombol Lambat;Tombol Pantul;Tombol Tetikus"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
@@ -2946,261 +3088,385 @@ msgstr "Bip ketika Caps dan Num Lock dipakai"
 msgid "Beep when a _modifer key is pressed"
 msgstr "Bip ketika kunci _pengubah ditekan"
 
-#: ../panels/universal-access/uap.ui.h:13
+#. This string is part of a line of checkboxes: Beep when a key is [ ] pressed  [ ] accepted  [ ] rejected
+#: ../panels/universal-access/uap.ui.h:14
 msgid "Beep when a key is"
 msgstr "Bip ketika kunci"
 
-#: ../panels/universal-access/uap.ui.h:14
+#: ../panels/universal-access/uap.ui.h:15
 msgid "Beep when a key is _rejected"
 msgstr "Bip ketika kunci ditola_k"
 
-#: ../panels/universal-access/uap.ui.h:15
+#: ../panels/universal-access/uap.ui.h:16
 msgid "Bounce Keys"
 msgstr "Tombol Pantul"
 
-#: ../panels/universal-access/uap.ui.h:16
+#: ../panels/universal-access/uap.ui.h:17
 msgid "Caribou"
 msgstr "Caribou"
 
-#: ../panels/universal-access/uap.ui.h:17
+#: ../panels/universal-access/uap.ui.h:18
 msgid "Change contrast:"
 msgstr "Ubah kontras:"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:19
 msgid "Closed Captioning"
 msgstr "Balon Keterangan"
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:20
 msgid "Control the pointer using the keypad"
 msgstr "Kendalikan penunjuk memakai tombol panah"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:21
 msgid "Control the pointer using the video camera."
 msgstr "Kendalikan penunjuk memakai kamera video."
 
-#: ../panels/universal-access/uap.ui.h:22
+#: ../panels/universal-access/uap.ui.h:23
 msgid "D_elay:"
 msgstr "T_unda"
 
-#: ../panels/universal-access/uap.ui.h:23
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Dasher"
 msgstr "Dasher"
 
-#: ../panels/universal-access/uap.ui.h:24
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Decrease size:"
 msgstr "Kecilkan ukuran:"
 
-#: ../panels/universal-access/uap.ui.h:25
+#: ../panels/universal-access/uap.ui.h:26
 msgid "Display a textual description of speech and sounds"
 msgstr "Tampilkan deskripsi tekstual dari pidato dan suara"
 
-#: ../panels/universal-access/uap.ui.h:26
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Flash the entire screen"
 msgstr "Kedipkan seluruh layar"
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Flash the window title"
 msgstr "Kedipkan judul jendela"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:29
 msgid "GOK"
 msgstr "GOK"
 
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Hearing"
 msgstr "Pendengaran"
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Hover Click"
 msgstr "Klik Mengambang"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Ignores fast duplicate keypresses"
 msgstr "Abaikan penekanan cepat tombol yang sama"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Increase size:"
 msgstr "Besarkan ukuran:"
 
-#: ../panels/universal-access/uap.ui.h:35
-msgid "Larger"
-msgstr "Lebih besar"
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Keyboard Settings"
+msgstr "Pengaturan Papan Tik"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Motion _threshold:"
 msgstr "A_mbang gerakan:"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:40
 msgid "Mouse Keys"
 msgstr "Tombol Tetikus"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:41
+msgid "Mouse Settings"
+msgstr "Pengaturan Tetikus"
+
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Nomon"
 msgstr "Nomon"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:44
 msgid "On screen keyboard"
 msgstr "Papan tik di layar"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:45
 msgid "OnBoard"
 msgstr "OnBoard"
 
-#: ../panels/universal-access/uap.ui.h:45
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Options..."
 msgstr "Opsi..."
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:47
 msgid "Pointing and Clicking"
 msgstr "Menunjuk dan Mengklik"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:48
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "Sisipkan jeda antara ketika suatu tombol ditekan dan ketika itu diterima"
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Screen Reader"
 msgstr "Pembaca Layar"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Screen keyboard"
 msgstr "Papan tik di layar"
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:51
 msgid "Seeing"
 msgstr "Penglihatan"
 
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Simulated Secondary Click"
 msgstr "Klik Sekunder Tersimulasi"
 
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Slow Keys"
 msgstr "Tombol Lambat"
 
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:58
+msgid "Sound Settings"
+msgstr "Pengaturan Suara"
+
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Sticky Keys"
 msgstr "Tombol Lengket"
 
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Perlakukan urutan tombol pengubah sebagai suatu kombinasi tombol"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Trigger a click when the pointer hovers"
 msgstr "Picu klik ketika penunjuk mengambang"
 
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Picu klik sekunder dengan menahan tombol primer"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Turn on or off:"
 msgstr "Nyalakan atau matikan:"
 
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Type here to test settings"
 msgstr "Ketik di sini untuk menguji"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Typing Assistant"
 msgstr "Asisten Pengetikan"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "Gunakan indikasi visual ketika terjadi suara waspada"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Video Mouse"
 msgstr "Mouse Video"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Visual Alerts"
 msgstr "Peringatan Visual"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Zoom in:"
 msgstr "Perbesar:"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Zoom out:"
 msgstr "Perkecil:"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:72
 msgid "_Contrast:"
 msgstr "_Kontras:"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:73
 msgid "_Disable if two keys are pressed together"
 msgstr "Matikan bila _dua tombol ditekan bersamaan"
 
-#: ../panels/universal-access/uap.ui.h:72
-msgid "_Keyboard Settings"
-msgstr "Pengaturan Papan Ti_k"
-
-#: ../panels/universal-access/uap.ui.h:73
-msgid "_Mouse Settings"
-msgstr "Pengaturan _Tetikus"
-
 #: ../panels/universal-access/uap.ui.h:74
-msgid "_Sound Settings"
-msgstr "Pengaturan _Suara"
-
-#: ../panels/universal-access/uap.ui.h:75
 msgid "_Test flash"
 msgstr "_Uji flash"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:75
 msgid "_Text size:"
 msgstr "Ukuran _teks:"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:76
 msgid "_Turn on accessibility features from the keyboard"
 msgstr "Nyalakan fi_tur aksesibilitas dari papan tik"
 
+#. This completes the sentence "Beep when a key is"
 #: ../panels/universal-access/uap.ui.h:78
 msgid "accepted"
 msgstr "diterima"
 
-#: ../panels/universal-access/uap.ui.h:79
+#. This completes the sentence "Beep when a key is"
+#: ../panels/universal-access/uap.ui.h:80
 msgid "pressed"
 msgstr "ditekan"
 
-#: ../panels/universal-access/uap.ui.h:80
+#. This completes the sentence "Beep when a key is"
+#: ../panels/universal-access/uap.ui.h:82
 msgid "rejected"
 msgstr "ditolak"
 
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:83
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Tinggi"
 
-#: ../panels/universal-access/uap.ui.h:82
+#: ../panels/universal-access/uap.ui.h:84
 msgctxt "universal access, contrast"
 msgid "High/Inverse"
 msgstr "Tinggi/Terbalik"
 
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:85
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Rendah"
 
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:86
 msgctxt "universal access, contrast"
 msgid "Normal"
 msgstr "Normal"
 
 #. Translators: this refers to theme contrast and font size
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:88
 msgctxt "universal access, seeing"
 msgid "Display"
 msgstr "Tampilan"
 
 #. Translators: this refers to screen magnifier
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:90
 msgctxt "universal access, seeing"
 msgid "Zoom"
 msgstr "Zum"
+
+#: ../panels/universal-access/uap.ui.h:91
+msgctxt "universal access, text size"
+msgid "Large"
+msgstr "Besar"
+
+#: ../panels/universal-access/uap.ui.h:92
+msgctxt "universal access, text size"
+msgid "Larger"
+msgstr "Lebih besar"
+
+#: ../panels/universal-access/uap.ui.h:93
+msgctxt "universal access, text size"
+msgid "Normal"
+msgstr "Normal"
+
+#: ../panels/universal-access/uap.ui.h:94
+msgctxt "universal access, text size"
+msgid "Small"
+msgstr "Kecil"
+
+#: ../panels/universal-access/zoom-options.ui.h:1
+msgid "Always"
+msgstr "Selalu"
+
+#: ../panels/universal-access/zoom-options.ui.h:2
+msgid "Bottom Half"
+msgstr "Belahan Bawah"
+
+#: ../panels/universal-access/zoom-options.ui.h:3
+msgid "Centered"
+msgstr "Di Tengah"
+
+#: ../panels/universal-access/zoom-options.ui.h:4
+msgid "Color and Opacity"
+msgstr "Warna dan Kelegapan"
+
+#: ../panels/universal-access/zoom-options.ui.h:5
+#, fuzzy
+msgid "Crosshairs"
+msgstr "Pembidik"
+
+#: ../panels/universal-access/zoom-options.ui.h:6
+msgid "Full Screen"
+msgstr "Layar Penuh"
+
+#: ../panels/universal-access/zoom-options.ui.h:8
+msgid "Image moves with the mouse pointer"
+msgstr "Citra bergerak dengan penunjuk tetikus"
+
+#: ../panels/universal-access/zoom-options.ui.h:9
+msgid "Image scrolls at screen edges"
+msgstr "Citra menggulung di tepi layar"
+
+#: ../panels/universal-access/zoom-options.ui.h:10
+msgid "Left Half"
+msgstr "Belahan Kiri"
+
+#: ../panels/universal-access/zoom-options.ui.h:11
+msgid "Length"
+msgstr "Panjang"
+
+#: ../panels/universal-access/zoom-options.ui.h:14
+msgid "Magnification"
+msgstr "Pembesaran"
+
+#: ../panels/universal-access/zoom-options.ui.h:15
+msgid "Moveable lens - magnified view follows mouse movements"
+msgstr "Lensa yang dapat dipindah - tilikan diperbesar mengikuti pergerakan tetikus"
+
+#: ../panels/universal-access/zoom-options.ui.h:17
+msgid "Position of magnified view on screen"
+msgstr "Posisi tilikan diperbesar pada layar"
+
+#: ../panels/universal-access/zoom-options.ui.h:18
+msgid "Proportional"
+msgstr "Proporsional"
+
+#: ../panels/universal-access/zoom-options.ui.h:19
+msgid "Push"
+msgstr "Tekan"
+
+#: ../panels/universal-access/zoom-options.ui.h:20
+msgid "Right Half"
+msgstr "Belahan Kanan"
+
+#: ../panels/universal-access/zoom-options.ui.h:23
+msgid "Show"
+msgstr "Tampilkan"
+
+#: ../panels/universal-access/zoom-options.ui.h:24
+#, fuzzy
+msgid "Show crosshairs intersection"
+msgstr "Tampilkan perpotongan pembidik"
+
+#. long delay
+#: ../panels/universal-access/zoom-options.ui.h:26
+msgid "Thick"
+msgstr "Tebal"
+
+#: ../panels/universal-access/zoom-options.ui.h:27
+msgid "Thickness"
+msgstr "Ketebalan"
+
+#. short delay
+#: ../panels/universal-access/zoom-options.ui.h:29
+msgid "Thin"
+msgstr "Tipis"
+
+#: ../panels/universal-access/zoom-options.ui.h:30
+msgid "To keep the pointer centered"
+msgstr "Menjaga penunjuk di tengah"
+
+#: ../panels/universal-access/zoom-options.ui.h:31
+msgid "To keep the pointer visible"
+msgstr "Menjaga penunjuk nampak"
+
+#: ../panels/universal-access/zoom-options.ui.h:32
+msgid "Top Half"
+msgstr "Belahan Puncak"
+
+#: ../panels/universal-access/zoom-options.ui.h:33
+msgid "Zoom Options"
+msgstr "Pilihan Zum"
 
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
@@ -3306,8 +3572,8 @@ msgstr "Selesai!"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:409
-#: ../panels/user-accounts/um-fingerprint-dialog.c:431
+#: ../panels/user-accounts/um-fingerprint-dialog.c:410
+#: ../panels/user-accounts/um-fingerprint-dialog.c:432
 #, c-format
 msgid "Could not access '%s' device"
 msgstr "Tidak dapat mengakses perangkat '%s'"
@@ -3315,20 +3581,20 @@ msgstr "Tidak dapat mengakses perangkat '%s'"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:480
+#: ../panels/user-accounts/um-fingerprint-dialog.c:481
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "Tidak dapat memulai penangkapan sidik jari pada perangkat '%s'"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:532
+#: ../panels/user-accounts/um-fingerprint-dialog.c:533
 msgid "Could not access any fingerprint readers"
 msgstr "Tidak dapat mengakses pembaca sidik jari manapun"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:533
+#: ../panels/user-accounts/um-fingerprint-dialog.c:534
 msgid "Please contact your system administrator for help."
 msgstr "Silahkan hubungi administrator sistem Anda untuk bantuan."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:570
+#: ../panels/user-accounts/um-fingerprint-dialog.c:571
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Enable Fingerprint Login"
 msgstr "Fungsikan Log Masuk Sidik Jari"
@@ -3338,26 +3604,22 @@ msgstr "Fungsikan Log Masuk Sidik Jari"
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:604
+#: ../panels/user-accounts/um-fingerprint-dialog.c:605
 #, c-format
 msgid "To enable fingerprint login, you need to save one of your fingerprints, using the '%s' device."
 msgstr "Untuk memfungsikan log masuk sidik jari, Anda perlu menyimpan sidik jari Anda, memakai perangkat '%s'."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:611
+#: ../panels/user-accounts/um-fingerprint-dialog.c:612
 msgid "Selecting finger"
 msgstr "Memilih jari"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:612
+#: ../panels/user-accounts/um-fingerprint-dialog.c:613
 msgid "Enrolling fingerprints"
 msgstr "Mendaftarkan sidik jari"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:613
+#: ../panels/user-accounts/um-fingerprint-dialog.c:614
 msgid "Summary"
 msgstr "Ringkasan"
-
-#: ../panels/user-accounts/um-language-dialog.c:180
-msgid "Other..."
-msgstr "Lainnya..."
 
 #: ../panels/user-accounts/um-password-dialog.c:179
 msgid "More choices..."
@@ -3455,73 +3717,73 @@ msgstr "Ramban untuk gambar lain..."
 msgid "Used by %s"
 msgstr "Dipakai oleh %s"
 
-#: ../panels/user-accounts/um-user-manager.c:437
+#: ../panels/user-accounts/um-user-manager.c:450
 #, c-format
 msgid "A user with name '%s' already exists."
 msgstr "Pengguna dengan nama '%s' telah ada."
 
-#: ../panels/user-accounts/um-user-manager.c:532
+#: ../panels/user-accounts/um-user-manager.c:546
 msgid "This user does not exist."
 msgstr "Pengguna ini tak ada."
 
-#: ../panels/user-accounts/um-user-panel.c:354
+#: ../panels/user-accounts/um-user-panel.c:357
 msgid "Failed to delete user"
 msgstr "Gagal menghapus pengguna"
 
-#: ../panels/user-accounts/um-user-panel.c:414
+#: ../panels/user-accounts/um-user-panel.c:417
 msgid "You cannot delete your own account."
 msgstr "Anda tak bisa menghapus akunmu sendiri."
 
-#: ../panels/user-accounts/um-user-panel.c:423
+#: ../panels/user-accounts/um-user-panel.c:426
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s masih log masuk"
 
-#: ../panels/user-accounts/um-user-panel.c:427
+#: ../panels/user-accounts/um-user-panel.c:430
 msgid "Deleting a user while they are logged in can leave the system in an inconsistent state."
 msgstr "Menghapus pengguna saat mereka log masuk dapat menjerumuskan sistem ke dalam keadaan tak konsisten."
 
-#: ../panels/user-accounts/um-user-panel.c:436
+#: ../panels/user-accounts/um-user-panel.c:439
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Apakah Anda ingin mempertahankan berkas milik %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:440
+#: ../panels/user-accounts/um-user-panel.c:443
 msgid "It is possible to keep the home directory, mail spool and temporary files around when deleting a user account."
 msgstr "Dimungkinkan untuk mempertahankan direktori rumah, spool surel, dan berkas temporer ketika menghapus suatu akun pengguna."
 
-#: ../panels/user-accounts/um-user-panel.c:443
+#: ../panels/user-accounts/um-user-panel.c:446
 msgid "_Delete Files"
 msgstr "_Hapus Berkas"
 
-#: ../panels/user-accounts/um-user-panel.c:444
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "_Keep Files"
 msgstr "Biarkan Berkas"
 
-#: ../panels/user-accounts/um-user-panel.c:495
+#: ../panels/user-accounts/um-user-panel.c:499
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Akun dimatikan"
 
-#: ../panels/user-accounts/um-user-panel.c:503
+#: ../panels/user-accounts/um-user-panel.c:507
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Untuk ditata saat log masuk berikutnya"
 
-#: ../panels/user-accounts/um-user-panel.c:506
+#: ../panels/user-accounts/um-user-panel.c:510
 msgctxt "Password mode"
 msgid "None"
 msgstr "Tak ada"
 
-#: ../panels/user-accounts/um-user-panel.c:826
+#: ../panels/user-accounts/um-user-panel.c:845
 msgid "Failed to contact the accounts service"
 msgstr "Gagal menghubungi layanan akun"
 
-#: ../panels/user-accounts/um-user-panel.c:828
+#: ../panels/user-accounts/um-user-panel.c:847
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Pastikan bahwa AccountService ini telah terpasang dan diaktifkan."
 
-#: ../panels/user-accounts/um-user-panel.c:864
+#: ../panels/user-accounts/um-user-panel.c:887
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -3529,12 +3791,12 @@ msgstr ""
 "Untuk melakukan perubahan,\n"
 "pertama kali klik ikon *"
 
-#: ../panels/user-accounts/um-user-panel.c:902
+#: ../panels/user-accounts/um-user-panel.c:925
 msgid "Create a user"
 msgstr "Buat pengguna"
 
-#: ../panels/user-accounts/um-user-panel.c:913
-#: ../panels/user-accounts/um-user-panel.c:1202
+#: ../panels/user-accounts/um-user-panel.c:936
+#: ../panels/user-accounts/um-user-panel.c:1225
 msgid ""
 "To create a user,\n"
 "click the * icon first"
@@ -3542,12 +3804,12 @@ msgstr ""
 "Untuk membuat pengguna,\n"
 "pertama kali klik ikon *"
 
-#: ../panels/user-accounts/um-user-panel.c:922
+#: ../panels/user-accounts/um-user-panel.c:945
 msgid "Delete the selected user"
 msgstr "Hapus pengguna yang dipilih"
 
-#: ../panels/user-accounts/um-user-panel.c:934
-#: ../panels/user-accounts/um-user-panel.c:1207
+#: ../panels/user-accounts/um-user-panel.c:957
+#: ../panels/user-accounts/um-user-panel.c:1230
 msgid ""
 "To delete the selected user,\n"
 "click the * icon first"
@@ -3555,11 +3817,11 @@ msgstr ""
 "Untuk menghapus pengguna,\n"
 "pertama kali klik ikon *"
 
-#: ../panels/user-accounts/um-user-panel.c:1111
+#: ../panels/user-accounts/um-user-panel.c:1134
 msgid "My Account"
 msgstr "Akun Saya"
 
-#: ../panels/user-accounts/um-user-panel.c:1121
+#: ../panels/user-accounts/um-user-panel.c:1144
 msgid "Other Accounts"
 msgstr "Akun Lain"
 
@@ -3787,12 +4049,133 @@ msgid "_Left index finger"
 msgstr "Telunjuk k_iri"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:12
-msgid "_Other finger: "
+msgid "_Other finger:"
 msgstr "Jari _lain: "
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:13
 msgid "_Right index finger"
 msgstr "Telunjuk k_anan"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:1
+msgid "Back"
+msgstr "Mundur"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:2
+msgid "Bluetooth Settings"
+msgstr "Pengaturan Bluetooth"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:3
+msgid "Calibrate..."
+msgstr "Kalibrasi..."
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:4
+msgid "Eraser Pressure Feel"
+msgstr "Perasaan Tekanan Penghapus"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
+msgid "Firm"
+msgstr "Tegas"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:6
+msgid "Forward"
+msgstr "Maju"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:7
+msgid "Left Mouse Button Click"
+msgstr "Klik Tombol Kiri Tetikus"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
+msgid "Left-Handed Orientation:"
+msgstr "Orientasi Kidal:"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
+msgid "Lower Button"
+msgstr "Tombol Bawah"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+msgid "Middle Mouse Button Click"
+msgstr "Klik Tombol Tengah Tetikus"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:11
+msgid "No Action"
+msgstr "Tanpa Aksi"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+msgid "No tablet detected"
+msgstr "Tablet tak terdeteksi"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+msgid "Please plug in or turn on your Wacom tablet"
+msgstr "Silakan tancapkan atau nyalakan tablet Wacom Anda"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:14
+msgid "Right Mouse Button Click"
+msgstr "Klik Tombol Kanan Tetikus"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:15
+msgid "Scroll Down"
+msgstr "Gulung Turun"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:16
+msgid "Scroll Left"
+msgstr "Gulung Ke Kiri"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:17
+msgid "Scroll Right"
+msgstr "Gulung Ke Kanan"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:18
+msgid "Scroll Up"
+msgstr "Gulung Naik"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:19
+msgid "Soft"
+msgstr "Lembut"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:20
+msgid "Stylus"
+msgstr "Stylus"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:21
+msgid "Tablet (absolute)"
+msgstr "Tablet (absolut)"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:22
+msgid "Tablet Preferences"
+msgstr "Preferensi Tablet"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:23
+msgid "Tip Pressure Feel"
+msgstr "Perasaan Tekanan Ujung"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:24
+msgid "Top Button"
+msgstr "Tombol Puncak"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:25
+msgid "Touchpad (relative)"
+msgstr "Touchpad (relatif)"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:26
+msgid "Tracking Mode"
+msgstr "Mode Pelacakan"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:27
+msgid "Wacom Tablet"
+msgstr "Tablet Wacom"
+
+#: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
+msgid "Set your Wacom tablet preferences"
+msgstr "Atur preferensi tablet Wacom Anda"
+
+#. Translators: those are keywords for the wacom tablet control-center panel
+#: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:3
+msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
+msgstr "Tablet;Wacom;Stylus;Penghapus;Tetikus;"
+
+#: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:4
+msgid "Wacom Graphics Tablet"
+msgstr "Tablet Grafis Wacom"
 
 #: ../shell/control-center.c:54
 msgid "Enable verbose mode"
