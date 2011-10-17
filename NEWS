@@ -1,4 +1,69 @@
 ==========================
+Version 3.2.1 (2011-10-17)
+==========================
+
+Common:
+- Always collect locales from the directory (Bastien Nocera) (#660725)
+
+Color:
+- After removing a profile select the device so the UI is correct (Richard Hughes) (#661658)
+
+Date & time:
+- Fix showing actual clock format on panel open (Tomas Bzatek)
+
+Info:
+- Use new GtkAppChooserButton API (Bastien Nocera) (#658693)
+- Use x-content/unix-software as mime for the Software combobox (Cosimo Cecchi)
+
+Network:
+- Allocate nm-connection for nma-wireless-dialog (Gary Ching-Pang Lin) (#648174)
+- Show wireless dialog even if there is no active AP (Gary Ching-Pang Lin) (#661526)
+
+Printers:
+- Check state of CUPS after start (Marek Kasik) (#659721)
+- Fix build on systems without LC_PAPER (Bastien Nocera) (#660692)
+- Don't hide address entry (Marek Kasik)
+- Disable remove button if no printer is selected (Rodrigo Moya) (#659724)
+- Hide spinner after search (Marek Kasik) (#659753)
+- Make +/- buttons insensitive when can not connect to CUPS (Marek Kasik)
+
+Region:
+- Hide system tab if no localed (Bastien Nocera)
+- Simplify getting the current Locale (Bastien Nocera)
+- Implement copying layouts (Bastien Nocera) (#659300)
+- Fix build on systems without LC_MEASUREMENT (Antoine Jacoutot) (#660787)
+- Only show locales for languages that have translations (Rodrigo Moya)
+
+Screen:
+- Never set gnome-session's idle-delay to 1 (Rodrigo Moya)
+
+Shell:
+- Use gtk_widget_show instead of _show_all in gnome_control_center_show (Rodrigo Moya)
+- Show the label for the category sections (Rodrigo Moya)
+- Make sure we gtk_widget_show the search view (Rodrigo Moya)
+- Make Ctrl+Q work outside the overview (Bastien Nocera)
+- Give focus to the search entry when showing the overview page (Anders G. Jørgensen)
+- Don't crash when loading the icon fails (Christian Persch) (#660513)
+
+Translations:
+- ar (Abderrahim Kitouni)
+- be (Yuri Matsuk)
+- en_GB (Bruce Cowan)
+- ga (Seán de Búrca)
+- gl (Fran Dieguez)
+- ja (Jiro Matsuzawa)
+- lv (Rudolfs Mazurs)
+- nl (Wouter Bolsterlee)
+- pt_BR (André Gondim)
+- sr (Мирослав Николић)
+- ta (Dr.T.Vasudevan)
+- te (krishnababu k)
+- uk (Daniel Korostil)
+- zh_CN (Aron Xu, Funda Wang)
+- zh_HK (Chao-Hsiung Liao)
+- zh_TW (Chao-Hsiung Liao)
+
+==========================
 Version 3.2.0 (2011-09-26)
 ==========================
 
