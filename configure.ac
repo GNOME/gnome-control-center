@@ -19,14 +19,6 @@ AC_HEADER_STDC
 LT_PREREQ([2.2])
 LT_INIT
 
-# .so version for libgnome-control-center
-LIBGNOMECONTROLCENTER_CURRENT=1
-LIBGNOMECONTROLCENTER_REVISION=0
-LIBGNOMECONTROLCENTER_AGE=0
-AC_SUBST(LIBGNOMECONTROLCENTER_CURRENT)
-AC_SUBST(LIBGNOMECONTROLCENTER_REVISION)
-AC_SUBST(LIBGNOMECONTROLCENTER_AGE)
-
 # Use the GNOME documentation framework
 GNOME_DOC_INIT
 
@@ -224,7 +216,7 @@ AC_SUBST(PANELS_DIR)
 PANEL_CFLAGS="-I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-cc-panel\\\"\""
 AC_SUBST(PANEL_CFLAGS)
 
-PANEL_LIBS="\$(top_builddir)/libgnome-control-center/libgnome-control-center.la"
+PANEL_LIBS=""
 AC_SUBST(PANEL_LIBS)
 
 PANEL_LDFLAGS="-export_dynamic -avoid-version -module -no-undefined -export-symbols-regex '^g_io_module_(load|unload)'"

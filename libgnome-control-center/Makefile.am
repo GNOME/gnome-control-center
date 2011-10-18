@@ -9,7 +9,7 @@ AM_CPPFLAGS =					\
 	-DMENUDIR="\"$(menudir)\""		\
 	$(NULL)
 
-lib_LTLIBRARIES = libgnome-control-center.la
+noinst_LTLIBRARIES = libgnome-control-center.la
 
 libgnome_control_center_la_SOURCES =		\
 	cc-panel.c				\
@@ -22,13 +22,10 @@ libgnome_control_center_la_SOURCES =		\
 
 libgnome_control_center_la_LDFLAGS =		\
 	-no-undefined				\
-	-version-info $(LIBGNOMECONTROLCENTER_CURRENT):$(LIBGNOMECONTROLCENTER_REVISION):$(LIBGNOMECONTROLCENTER_AGE) \
 	$(NULL)
 
 libgnome_control_center_la_LIBADD = 		\
 	$(LIBGNOME_CONTROL_CENTER_LIBS)		\
 	$(NULL)
-
-libgnome_control_center_la_LIBTOOLFLAGS = --tag=disable-static
 
 -include $(top_srcdir)/git.mk
