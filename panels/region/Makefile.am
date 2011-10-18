@@ -1,9 +1,9 @@
 # This is used in PANEL_CFLAGS
 cappletname = region
 
-INCLUDES = 						\
+INCLUDES =						\
 	$(PANEL_CFLAGS)					\
-	$(REGION_PANEL_CFLAGS)			\
+	$(REGION_PANEL_CFLAGS)				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
