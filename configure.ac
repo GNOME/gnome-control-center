@@ -142,6 +142,11 @@ if test "x$have_networkmanager" = xno ; then
 fi
 AM_CONDITIONAL(BUILD_NETWORK, [test x$have_networkmanager = xyes])
 
+# Check for gnome-bluetooth
+PKG_CHECK_MODULES(BLUETOOTH, $COMMON_MODULES gnome-bluetooth-1.0 >= 3.3.0,
+		  [have_bluetooth=yes], have_bluetooth=no)
+AM_CONDITIONAL(BUILD_BLUETOOTH, [test x$have_bluetooth = xyes])
+
 # Check for CUPS 1.4 or newer
 AC_ARG_ENABLE([cups],
               AS_HELP_STRING([--disable-cups], [disable CUPS support (default: enabled)]),,
@@ -315,6 +320,8 @@ panels/Makefile
 panels/common/Makefile
 panels/background/Makefile
 panels/background/gnome-background-panel.desktop.in
+panels/bluetooth/Makefile
+panels/bluetooth/bluetooth-properties.desktop.in
 panels/datetime/Makefile
 panels/datetime/gnome-datetime-panel.desktop.in
 panels/datetime/po-timezones/Makefile
