@@ -1307,8 +1307,6 @@ gcm_prefs_device_kind_to_icon_name (CdDeviceKind kind)
     return "printer";
   if (kind == CD_DEVICE_KIND_CAMERA)
     return "camera-photo";
-  if (kind == CD_DEVICE_KIND_CAMERA)
-    return "camera-photo";
   if (kind == CD_DEVICE_KIND_WEBCAM)
     return "camera-web";
   return "image-missing";
