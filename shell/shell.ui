@@ -35,11 +35,12 @@
                         <property name="visible">True</property>
                         <child>
                           <object class="GtkButton" id="home-button">
-                            <property name="label" translatable="yes">_All Settings</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="no_show_all">True</property>
                             <property name="use_underline">True</property>
+                            <property name="use_action_appearance">False</property>
+                            <property name="image">image1</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -169,5 +170,11 @@
       <widget name="home-button"/>
       <widget name="entry-alignment"/>
     </widgets>
+  </object>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="icon_name">view-grid-symbolic</property>
+    <property name="use_fallback">True</property>
   </object>
 </interface>
