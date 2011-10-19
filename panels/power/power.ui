@@ -61,13 +61,16 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="border_width">12</property>
-        <property name="spacing">12</property>
+        <property name="spacing">3</property>
         <child>
-          <object class="GtkBox" id="box1">
+          <object class="GtkBox" id="box_combos">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">53</property>
+            <property name="margin_right">60</property>
+            <property name="margin_bottom">24</property>
             <property name="orientation">vertical</property>
-            <property name="spacing">9</property>
+            <property name="spacing">6</property>
             <child>
               <object class="GtkBox" id="box_header">
                 <property name="visible">True</property>
@@ -220,69 +223,36 @@
           </packing>
         </child>
         <child>
-          <object class="GtkHBox" id="hbox_status">
+          <object class="GtkBox" id="box_primary">
+            <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">53</property>
+            <property name="margin_right">60</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">3</property>
             <child>
-              <object class="GtkHBox" id="hbox2">
+              <object class="GtkBox" id="box_primary_header">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="border_width">12</property>
-                <property name="spacing">6</property>
+                <property name="spacing">3</property>
                 <child>
-                  <object class="GtkImage" id="image_status">
+                  <object class="GtkImage" id="image_primary_warning">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="stock">gtk-dialog-authentication</property>
-                    <property name="icon-size">6</property>
+                    <property name="icon_name">dialog-warning-symbolic</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">False</property>
+                    <property name="fill">True</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkVBox" id="vbox4">
+                  <object class="GtkLabel" id="label_battery_primary">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkHBox" id="hbox3">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkLabel" id="label_title">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label">Battery charging</property>
-                            <attributes>
-                              <attribute name="scale" value="1.5"/>
-                            </attributes>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label_description">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label">55 minutes until fully charged (6%)</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
+                    <property name="xalign">0</property>
+                    <property name="label">55 minutes until fully charged</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -290,18 +260,137 @@
                     <property name="position">1</property>
                   </packing>
                 </child>
+                <child>
+                  <object class="GtkBox" id="box_battery_addon">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="spacing">3</property>
+                    <child>
+                      <object class="GtkImage" id="image_battery_addon">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">1</property>
+                        <property name="stock">gtk-info</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_battery_addon">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">1</property>
+                        <property name="label">Your secondary battery is empty</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
               </object>
               <packing>
-                <property name="expand">True</property>
-                <property name="fill">False</property>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
                 <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkProgressBar" id="progressbar_primary">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="fraction">0.5</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">True</property>
+            <property name="fill">False</property>
             <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label_screen_settings">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_left">53</property>
+            <property name="margin_right">40</property>
+            <property name="xalign">0</property>
+            <property name="yalign">0.49000000953674316</property>
+            <property name="ypad">4</property>
+            <property name="label">Tip: &lt;a href="moo"&gt;Screen Settings&lt;/a&gt; affect how much power is used</property>
+            <property name="use_markup">True</property>
+            <property name="track_visited_links">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box_secondary">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_top">15</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">24</property>
+            <child>
+              <object class="GtkSeparator" id="separator_secondary">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkGrid" id="grid_secondary">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_left">9</property>
+                <property name="margin_right">28</property>
+                <property name="margin_bottom">15</property>
+                <property name="row_spacing">18</property>
+                <property name="column_spacing">6</property>
+                <property name="column_homogeneous">True</property>
+                <property name="n_rows">1</property>
+                <property name="n_columns">2</property>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">3</property>
           </packing>
         </child>
       </object>

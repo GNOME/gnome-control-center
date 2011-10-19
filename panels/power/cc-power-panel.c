@@ -190,139 +190,560 @@ get_timestring (guint64 time_secs)
 }
 
 static void
-get_primary_device_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+set_device_battery_primary (CcPowerPanel *panel, GVariant *device)
 {
-  const gchar *title = NULL;
+  CcPowerPanelPrivate *priv = panel->priv;
   gchar *details = NULL;
-  gchar *icon_name = NULL;
-  gchar *object_path = NULL;
+  gchar *time_string = NULL;
   gdouble percentage;
-  GError *error = NULL;
   GtkWidget *widget;
   guint64 time;
-  gchar *time_string = NULL;
-  GVariant *result;
-  UpDeviceKind kind;
   UpDeviceState state;
-  GIcon *icon;
-  GtkWidget *status_box;
-  CcPowerPanelPrivate *priv = CC_POWER_PANEL (user_data)->priv;
 
-  status_box = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                   "hbox_status"));
-
-  result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
-  if (result == NULL)
-    {
-      if (g_strstr_len (error->message, -1, "no primary device") == NULL)
-        g_printerr ("Error getting primary device: %s\n", error->message);
-      g_error_free (error);
-      gtk_widget_hide (status_box);
-      return;
-    }
-
-  gtk_widget_show (status_box);
-
-  /* set the icon and text */
-  g_variant_get (result,
-                 "((susdut))",
-                 &object_path,
-                 &kind,
-                 &icon_name,
+  /* set the device */
+  g_variant_get (device,
+                 "(susdut)",
+                 NULL, /* object_path */
+                 NULL, /* kind */
+                 NULL, /* icon_name */
                  &percentage,
                  &state,
                  &time);
 
-  g_debug ("got data from object %s", object_path);
-
-  /* set icon and text parameters */
+  /* set the percentage */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "image_status"));
-  icon = g_icon_new_for_string (icon_name, NULL);
-  if (icon != NULL)
-    {
-      gtk_image_set_from_gicon (GTK_IMAGE (widget),
-                                icon,
-                                GTK_ICON_SIZE_DIALOG);
-      g_object_unref (icon);
-    }
-  else
-    {
-      gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-                                    "dialog-error",
-                                    GTK_ICON_SIZE_DIALOG);
-    }
+                                               "progressbar_primary"));
+  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (widget),
+                                 percentage / 100.0f);
+
+  /* clear the warning */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "label_title"));
+                                               "image_primary_warning"));
+  gtk_widget_hide (widget);
 
-  /* translate the title, which has limited entries as devices that are
-   * fully charged are not returned as the primary device */
-  if (kind == UP_DEVICE_KIND_BATTERY)
-    {
-      switch (state)
-        {
-          case UP_DEVICE_STATE_CHARGING:
-            title = _("Battery charging");
-            break;
-          case UP_DEVICE_STATE_DISCHARGING:
-            title = _("Battery discharging");
-            break;
-          default:
-            break;
-        }
-    }
-  else if (kind == UP_DEVICE_KIND_UPS)
-    {
-      switch (state)
-        {
-          case UP_DEVICE_STATE_CHARGING:
-            title = _("UPS charging");
-            break;
-          case UP_DEVICE_STATE_DISCHARGING:
-            title = _("UPS discharging");
-            break;
-          default:
-            break;
-        }
-    }
-  gtk_label_set_label (GTK_LABEL (widget),
-                       title != NULL ? title : "");
-  gtk_widget_set_visible (widget, (title != NULL));
-
-  /* get the description */
+  /* set the description */
   if (time > 0)
     {
       time_string = get_timestring (time);
-
-      if (state == UP_DEVICE_STATE_CHARGING)
+      switch (state)
         {
-          /* TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes" */
-          details = g_strdup_printf(_("%s until charged (%.0lf%%)"),
-                                    time_string, percentage);
-        }
-      else if (state == UP_DEVICE_STATE_DISCHARGING)
-        {
-          /* TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes" */
-          details = g_strdup_printf(_("%s until empty (%.0lf%%)"),
-                                    time_string, percentage);
+          case UP_DEVICE_STATE_CHARGING:
+          case UP_DEVICE_STATE_PENDING_CHARGE:
+            /* TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes" */
+            details = g_strdup_printf(_("Charging - %s until fully charged"),
+                                      time_string);
+            break;
+          case UP_DEVICE_STATE_DISCHARGING:
+          case UP_DEVICE_STATE_PENDING_DISCHARGE:
+            if (percentage < 20)
+              {
+                /* TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes" */
+                details = g_strdup_printf(_("Caution low battery, %s remaining"),
+                                          time_string);
+                /* show the warning */
+                gtk_widget_show (widget);
+              }
+            else
+              {
+                /* TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes" */
+                details = g_strdup_printf(_("Using battery power - %s remaining"),
+                                          time_string);
+              }
+            break;
+          default:
+            details = g_strdup_printf ("error: %s",
+                                       up_device_state_to_string (state));
+            break;
         }
     }
   else
     {
-      /* TRANSLATORS: %1 is a percentage value. Note: this string is only
-       * used when we don't have a time value */
-      details = g_strdup_printf(_("%.0lf%% charged"),
-                                percentage);
+      switch (state)
+        {
+          case UP_DEVICE_STATE_CHARGING:
+          case UP_DEVICE_STATE_PENDING_CHARGE:
+            /* TRANSLATORS: primary battery */
+            details = g_strdup(_("Charging"));
+            break;
+          case UP_DEVICE_STATE_DISCHARGING:
+          case UP_DEVICE_STATE_PENDING_DISCHARGE:
+            /* TRANSLATORS: primary battery */
+            details = g_strdup(_("Using battery power"));
+            break;
+          case UP_DEVICE_STATE_FULLY_CHARGED:
+            /* TRANSLATORS: primary battery */
+            details = g_strdup(_("Charging - fully charged"));
+            break;
+          case UP_DEVICE_STATE_EMPTY:
+            /* TRANSLATORS: primary battery */
+            details = g_strdup(_("Empty"));
+            break;
+          default:
+            details = g_strdup_printf ("error: %s",
+                                       up_device_state_to_string (state));
+            break;
+        }
     }
+  if (details == NULL)
+    goto out;
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "label_description"));
-  gtk_label_set_label (GTK_LABEL (widget),
-                       details);
+                                               "label_battery_primary"));
+  gtk_label_set_label (GTK_LABEL (widget), details);
 
-  g_free (details);
+  /* show the primary device */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "box_primary"));
+  gtk_widget_show (widget);
+
+  /* hide the addon device until we stumble upon the device */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "box_battery_addon"));
+  gtk_widget_hide (widget);
+out:
   g_free (time_string);
-  g_free (object_path);
-  g_free (icon_name);
+  g_free (details);
+}
+
+static void
+set_device_ups_primary (CcPowerPanel *panel, GVariant *device)
+{
+  CcPowerPanelPrivate *priv = panel->priv;
+  gchar *details = NULL;
+  gchar *time_string = NULL;
+  gdouble percentage;
+  GtkWidget *widget;
+  guint64 time;
+  UpDeviceState state;
+
+  /* set the device */
+  g_variant_get (device,
+                 "(susdut)",
+                 NULL, /* object_path */
+                 NULL, /* kind */
+                 NULL, /* icon_name */
+                 &percentage,
+                 &state,
+                 &time);
+
+  /* set the percentage */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "progressbar_primary"));
+  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (widget),
+                                 percentage / 100.0f);
+
+  /* always show the warning */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "image_primary_warning"));
+  gtk_widget_show (widget);
+
+  /* set the description */
+  if (time > 0)
+    {
+      time_string = get_timestring (time);
+      switch (state)
+        {
+          case UP_DEVICE_STATE_DISCHARGING:
+            if (percentage < 20)
+              {
+                /* TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes" */
+                details = g_strdup_printf(_("Caution low UPS, %s remaining"),
+                                          time_string);
+              }
+            else
+              {
+                /* TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes" */
+                details = g_strdup_printf(_("Using UPS power - %s remaining"),
+                                          time_string);
+              }
+            break;
+          default:
+            details = g_strdup_printf ("error: %s",
+                                       up_device_state_to_string (state));
+            break;
+        }
+    }
+  else
+    {
+      switch (state)
+        {
+          case UP_DEVICE_STATE_DISCHARGING:
+            if (percentage < 20)
+              {
+                /* TRANSLATORS: UPS battery */
+                details = g_strdup(_("Caution low UPS"));
+              }
+            else
+              {
+                /* TRANSLATORS: UPS battery */
+                details = g_strdup(_("Using UPS power"));
+              }
+            break;
+          default:
+            details = g_strdup_printf ("error: %s",
+                                       up_device_state_to_string (state));
+            break;
+        }
+    }
+  if (details == NULL)
+    goto out;
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "label_battery_primary"));
+  gtk_label_set_label (GTK_LABEL (widget), details);
+
+  /* show the primary device */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "box_primary"));
+  gtk_widget_show (widget);
+
+  /* hide the addon device as extra UPS devices are not possible */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "box_battery_addon"));
+  gtk_widget_hide (widget);
+out:
+  g_free (time_string);
+  g_free (details);
+}
+
+static void
+set_device_battery_additional (CcPowerPanel *panel, GVariant *device)
+{
+  CcPowerPanelPrivate *priv = panel->priv;
+  gchar *details = NULL;
+  GtkWidget *widget;
+  UpDeviceState state;
+
+  /* set the device */
+  g_variant_get (device,
+                 "(susdut)",
+                 NULL, /* object_path */
+                 NULL, /* kind */
+                 NULL, /* icon_name */
+                 NULL, /* percentage */
+                 &state,
+                 NULL /* time */);
+
+  /* set the description */
+  switch (state)
+    {
+      case UP_DEVICE_STATE_FULLY_CHARGED:
+        /* TRANSLATORS: secondary battery is normally in the media bay */
+        details = g_strdup(_("Your secondary battery is fully charged"));
+        break;
+      case UP_DEVICE_STATE_EMPTY:
+        /* TRANSLATORS: secondary battery is normally in the media bay */
+        details = g_strdup(_("Your secondary battery is empty"));
+        break;
+      default:
+        break;
+    }
+  if (details == NULL)
+    goto out;
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "label_battery_addon"));
+  gtk_label_set_label (GTK_LABEL (widget), details);
+
+  /* show the addon device */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "box_battery_addon"));
+  gtk_widget_show (widget);
+out:
+  g_free (details);
+}
+
+static void
+add_device_secondary (CcPowerPanel *panel,
+                      GVariant *device,
+                      guint *secondary_devices_cnt)
+{
+  CcPowerPanelPrivate *priv = panel->priv;
+  const gchar *icon_name = NULL;
+  gdouble percentage;
+  guint64 time;
+  UpDeviceKind kind;
+  UpDeviceState state;
+  GtkWidget *vbox;
+  GtkWidget *hbox;
+  GtkWidget *widget;
+  GString *status;
+  GString *description;
+  gboolean show_caution = FALSE;
+
+  g_variant_get (device,
+                 "(susdut)",
+                 NULL,
+                 &kind,
+                 NULL,
+                 &percentage,
+                 &state,
+                 &time);
+
+  switch (kind)
+    {
+      case UP_DEVICE_KIND_UPS:
+        icon_name = "uninterruptible-power-supply";
+        show_caution = TRUE;
+        break;
+      case UP_DEVICE_KIND_MOUSE:
+        icon_name = "input-mouse";
+        break;
+      case UP_DEVICE_KIND_KEYBOARD:
+        icon_name = "input-keyboard";
+        break;
+      case UP_DEVICE_KIND_TABLET:
+        icon_name = "input-tablet";
+        break;
+      case UP_DEVICE_KIND_PDA:
+        icon_name = "pda";
+        break;
+      case UP_DEVICE_KIND_PHONE:
+        icon_name = "phone";
+        break;
+      case UP_DEVICE_KIND_MEDIA_PLAYER:
+        icon_name = "multimedia-player";
+        break;
+      case UP_DEVICE_KIND_COMPUTER:
+        icon_name = "computer";
+        show_caution = TRUE;
+        break;
+      default:
+        icon_name = "battery";
+        break;
+    }
+
+  switch (kind)
+    {
+      case UP_DEVICE_KIND_MOUSE:
+        /* TRANSLATORS: secondary battery */
+        description = g_string_new (_("Wireless mouse"));
+        break;
+      case UP_DEVICE_KIND_KEYBOARD:
+        /* TRANSLATORS: secondary battery */
+        description = g_string_new (_("Wireless keyboard"));
+        break;
+      case UP_DEVICE_KIND_UPS:
+        /* TRANSLATORS: secondary battery */
+        description = g_string_new (_("Uninterruptible power supply"));
+        break;
+      case UP_DEVICE_KIND_PDA:
+        /* TRANSLATORS: secondary battery */
+        description = g_string_new (_("Personal digital assistant"));
+        break;
+      case UP_DEVICE_KIND_PHONE:
+        /* TRANSLATORS: secondary battery */
+        description = g_string_new (_("Cellphone"));
+        break;
+      case UP_DEVICE_KIND_MEDIA_PLAYER:
+        /* TRANSLATORS: secondary battery */
+        description = g_string_new (_("Media player"));
+        break;
+      case UP_DEVICE_KIND_TABLET:
+        /* TRANSLATORS: secondary battery */
+        description = g_string_new (_("Tablet"));
+        break;
+      case UP_DEVICE_KIND_COMPUTER:
+        /* TRANSLATORS: secondary battery */
+        description = g_string_new (_("Computer"));
+        break;
+      default:
+        /* TRANSLATORS: secondary battery, misc */
+        description = g_string_new (_("Battery"));
+        break;
+    }
+  g_string_prepend (description, "<b>");
+  g_string_append (description, "</b>");
+
+  switch (state)
+    {
+      case UP_DEVICE_STATE_CHARGING:
+      case UP_DEVICE_STATE_PENDING_CHARGE:
+        /* TRANSLATORS: secondary battery */
+        status = g_string_new(_("Charging"));
+        break;
+      case UP_DEVICE_STATE_DISCHARGING:
+      case UP_DEVICE_STATE_PENDING_DISCHARGE:
+        if (percentage < 10 && show_caution)
+          {
+            /* TRANSLATORS: secondary battery */
+            status = g_string_new (_("Caution"));
+          }
+        else if (percentage < 30)
+          {
+            /* TRANSLATORS: secondary battery */
+            status = g_string_new (_("Low"));
+          }
+        else
+          {
+            /* TRANSLATORS: secondary battery */
+            status = g_string_new (_("Good"));
+          }
+        break;
+      case UP_DEVICE_STATE_FULLY_CHARGED:
+        /* TRANSLATORS: primary battery */
+        status = g_string_new(_("Charging - fully charged"));
+        break;
+      case UP_DEVICE_STATE_EMPTY:
+        /* TRANSLATORS: primary battery */
+        status = g_string_new(_("Empty"));
+        break;
+      default:
+        status = g_string_new (up_device_state_to_string (state));
+        break;
+    }
+  g_string_prepend (status, "<small>");
+  g_string_append (status, "</small>");
+
+  /* create the new widget */
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+  gtk_widget_set_hexpand (hbox, TRUE);
+  widget = gtk_image_new ();
+  gtk_misc_set_alignment (GTK_MISC (widget), 0.5f, 0.0f);
+  gtk_image_set_from_icon_name (GTK_IMAGE (widget), icon_name, GTK_ICON_SIZE_DND);
+  gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 0);
+  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+  widget = gtk_label_new ("");
+  gtk_misc_set_alignment (GTK_MISC (widget), 0.0f, 0.5f);
+  gtk_label_set_markup (GTK_LABEL (widget), description->str);
+  gtk_box_pack_start (GTK_BOX (vbox), widget, FALSE, FALSE, 0);
+  widget = gtk_label_new ("");
+  gtk_misc_set_alignment (GTK_MISC (widget), 0.0f, 0.5f);
+  gtk_label_set_markup (GTK_LABEL (widget), status->str);
+  gtk_box_pack_start (GTK_BOX (vbox), widget, FALSE, FALSE, 0);
+  widget = gtk_progress_bar_new ();
+  gtk_widget_set_margin_right (widget, 32);
+  gtk_widget_set_margin_top (widget, 3);
+  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (widget), percentage / 100.0f);
+  gtk_box_pack_start (GTK_BOX (vbox), widget, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
+
+  /* add to the grid */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "grid_secondary"));
+
+  /* two devices wide */
+  gtk_grid_attach (GTK_GRID (widget), hbox,
+                   *secondary_devices_cnt % 2,
+                   (*secondary_devices_cnt / 2) - 1,
+                   1, 1);
+  (*secondary_devices_cnt)++;
+
+  /* show panel */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "box_secondary"));
+  gtk_widget_show_all (widget);
+
+  g_string_free (description, TRUE);
+  g_string_free (status, TRUE);
+}
+
+static void
+get_devices_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+{
+  CcPowerPanel *panel = CC_POWER_PANEL (user_data);
+  CcPowerPanelPrivate *priv = panel->priv;
+  gboolean got_primary = FALSE;
+  gboolean ups_as_primary_device = FALSE;
+  GError *error = NULL;
+  gsize n_devices;
+  GList *children;
+  GList *l;
+  GtkWidget *widget;
+  guint i;
+  guint secondary_devices_cnt = 0;
+  GVariant *child;
+  GVariant *result;
+  GVariant *untuple;
+  UpDeviceKind kind;
+  UpDeviceState state;
+
+  /* empty the secondary box */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "grid_secondary"));
+  children = gtk_container_get_children (GTK_CONTAINER (widget));
+  for (l = children; l != NULL; l = l->next)
+    gtk_container_remove (GTK_CONTAINER (widget), l->data);
+  g_list_free (children);
+
+  /* hide both panels initially */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "box_primary"));
+  gtk_widget_hide (widget);
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "box_secondary"));
+  gtk_widget_hide (widget);
+
+  result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
+  if (result == NULL)
+    {
+      g_printerr ("Error getting devices: %s\n", error->message);
+      g_error_free (error);
+      return;
+    }
+
+  untuple = g_variant_get_child_value (result, 0);
+  n_devices = g_variant_n_children (untuple);
+
+  /* first we look for a discharging UPS, which is promoted to the
+   * primary device if it's discharging. Otherwise we use the first
+   * listed laptop battery as the primary device */
+  for (i = 0; i < n_devices; i++)
+    {
+      child = g_variant_get_child_value (untuple, i);
+      g_variant_get (child,
+                     "(susdut)",
+                     NULL,
+                     &kind,
+                     NULL,
+                     NULL,
+                     &state,
+                     NULL);
+      if (kind == UP_DEVICE_KIND_UPS &&
+          state == UP_DEVICE_STATE_DISCHARGING)
+        {
+          ups_as_primary_device = TRUE;
+        }
+      g_variant_unref (child);
+    }
+
+  /* add the devices now we know the state-of-play */
+  for (i = 0; i < n_devices; i++)
+    {
+      child = g_variant_get_child_value (untuple, i);
+      g_variant_get (child,
+                     "(susdut)",
+                     NULL,
+                     &kind,
+                     NULL,
+                     NULL,
+                     NULL,
+                     NULL);
+      if (kind == UP_DEVICE_KIND_LINE_POWER)
+        {
+          /* do nothing */
+        }
+      else if (kind == UP_DEVICE_KIND_UPS && ups_as_primary_device)
+        {
+          set_device_ups_primary (panel, child);
+        }
+      else if (kind == UP_DEVICE_KIND_BATTERY && !ups_as_primary_device)
+        {
+          if (!got_primary)
+            {
+              set_device_battery_primary (panel, child);
+              got_primary = TRUE;
+            }
+          else
+            {
+              set_device_battery_additional (panel, child);
+            }
+        }
+      else
+        {
+          add_device_secondary (panel, child, &secondary_devices_cnt);
+        }
+      g_variant_unref (child);
+    }
+
+  g_variant_unref (untuple);
   g_variant_unref (result);
 }
 
@@ -339,12 +760,12 @@ on_signal (GDBusProxy *proxy,
     {
       /* get the new state */
       g_dbus_proxy_call (priv->proxy,
-                         "GetPrimaryDevice",
+                         "GetDevices",
                          NULL,
                          G_DBUS_CALL_FLAGS_NONE,
                          -1,
                          priv->cancellable,
-                         get_primary_device_cb,
+                         get_devices_cb,
                          user_data);
     }
 }
@@ -371,12 +792,12 @@ got_power_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_dat
 
   /* get the initial state */
   g_dbus_proxy_call (priv->proxy,
-                     "GetPrimaryDevice",
+                     "GetDevices",
                      NULL,
                      G_DBUS_CALL_FLAGS_NONE,
                      200, /* we don't want to randomly expand the dialog */
                      priv->cancellable,
-                     get_primary_device_cb,
+                     get_devices_cb,
                      user_data);
 }
 
@@ -549,12 +970,28 @@ out:
   gtk_widget_set_visible (widget, has_batteries);
 }
 
+static gboolean
+activate_link_cb (GtkLabel *label, gchar *uri, CcPowerPanel *self)
+{
+  CcShell *shell;
+  GError *error = NULL;
+
+  shell = cc_panel_get_shell (CC_PANEL (self));
+  if (cc_shell_set_active_panel_from_id (shell, uri, NULL, &error) == FALSE)
+    {
+      g_warning ("Failed to activate %s panel: %s", uri, error->message);
+      g_error_free (error);
+    }
+  return TRUE;
+}
+
 static void
 cc_power_panel_init (CcPowerPanel *self)
 {
   GError     *error;
   GtkWidget  *widget;
   gint        value;
+  gchar      *tmp;
 
   self->priv = POWER_PANEL_PRIVATE (self);
 
@@ -623,6 +1060,21 @@ cc_power_panel_init (CcPowerPanel *self)
   g_object_set_data (G_OBJECT(widget), "_gsettings_key", "critical-battery-action");
   g_signal_connect (widget, "changed",
                     G_CALLBACK (combo_enum_changed_cb),
+                    self);
+
+  /* set screen link */
+  widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
+                                               "label_screen_settings"));
+  /* TRANSLATORS: this is a link to the Screen control center panel */
+  tmp = g_strdup_printf ("<span color=\"darkgray\" size=\"small\">%s "
+                         "<a href=\"screen\"><b>%s</b></a> %s</span>",
+                         _("Tip:"),
+                         _("Screen Settings"),
+                         _("affect how much power is used"));
+  gtk_label_set_markup (GTK_LABEL (widget), tmp);
+  g_free (tmp);
+  g_signal_connect (widget, "activate-link",
+                    G_CALLBACK (activate_link_cb),
                     self);
 
   widget = WID (self->priv->builder, "vbox_power");
