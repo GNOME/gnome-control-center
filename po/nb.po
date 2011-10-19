@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.3.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-17 07:50+0200\n"
-"PO-Revision-Date: 2011-10-17 07:57+0200\n"
+"POT-Creation-Date: 2011-10-19 22:34+0200\n"
+"PO-Revision-Date: 2011-10-19 22:37+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -120,6 +120,98 @@ msgstr "%d x %d"
 #: ../panels/background/cc-background-item.c:281
 msgid "No Desktop Background"
 msgstr "Ingen skrivebordsbakgrunn"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:281
+msgid "Yes"
+msgstr "Ja"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:281
+msgid "No"
+msgstr "Nei"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:393
+msgid "Bluetooth is disabled"
+msgstr "Bluetooth er slått av"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:398
+msgid "Bluetooth is disabled by hardware switch"
+msgstr "Bluetooth er slått av med maskinvarebryter"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:402
+msgid "No Bluetooth adapters found"
+msgstr "Ingen Bluetooth-kort funnet"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:535
+msgid "Visibility"
+msgstr "Synlighet"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:539
+#, c-format
+msgid "Visibility of “%s”"
+msgstr "Synlighet for «%s»"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:583
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "Fjern «%s» fra listen med enheter?"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:585
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr "Hvis du fjerner enheten vil du måtte sette den opp på nytt før du bruker den igjen."
+
+#: ../panels/bluetooth/bluetooth.ui.h:1
+msgid "Address"
+msgstr "Adresse"
+
+#: ../panels/bluetooth/bluetooth.ui.h:2
+msgid "Browse Files..."
+msgstr "Bla gjennom filer …"
+
+#: ../panels/bluetooth/bluetooth.ui.h:3
+msgid "Connection"
+msgstr "Tilkobling"
+
+#: ../panels/bluetooth/bluetooth.ui.h:4 ../panels/universal-access/uap.ui.h:34
+msgid "Keyboard Settings"
+msgstr "Innstillinger for tastatur"
+
+#: ../panels/bluetooth/bluetooth.ui.h:5
+msgid "Mouse and Touchpad Settings"
+msgstr "Innstillinger for mus og pekeplate"
+
+#: ../panels/bluetooth/bluetooth.ui.h:6
+msgid "Paired"
+msgstr "Koblet"
+
+#. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
+#: ../panels/bluetooth/bluetooth.ui.h:8
+msgctxt "Power"
+msgid "Bluetooth"
+msgstr "Bluetooth"
+
+#: ../panels/bluetooth/bluetooth.ui.h:9
+msgid "Send Files..."
+msgstr "Send filer …"
+
+#: ../panels/bluetooth/bluetooth.ui.h:10
+#: ../panels/universal-access/uap.ui.h:60
+msgid "Sound Settings"
+msgstr "Innstillinger for lyd"
+
+#: ../panels/bluetooth/bluetooth.ui.h:11
+msgid "Type"
+msgstr "Type:"
+
+#. TRANSLATORS: device type
+#: ../panels/bluetooth/bluetooth-properties.desktop.in.in.h:1
+#: ../panels/network/panel-common.c:99
+msgid "Bluetooth"
+msgstr "Blåtann"
+
+#: ../panels/bluetooth/bluetooth-properties.desktop.in.in.h:2
+msgid "Configure Bluetooth settings"
+msgstr "Konfigurer innstillinger for Bluetooth"
 
 #. Add some common languages first
 #: ../panels/common/cc-common-language.c:513
@@ -608,7 +700,10 @@ msgstr "Systeminformasjon"
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
 "fallback;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
-msgstr "enhet;system;informasjon;minne;prosessor;versjon;forvalg;program;reserveløsning;foretrukket;cd;dvd;usb;lyd;video;plate;avtagbar;medie;automatisk kjøring;"
+msgstr ""
+"enhet;system;informasjon;minne;prosessor;versjon;forvalg;program;"
+"reserveløsning;foretrukket;cd;dvd;usb;lyd;video;plate;avtagbar;medie;"
+"automatisk kjøring;"
 
 #: ../panels/info/info.ui.h:1
 msgid "Acti_on:"
@@ -961,9 +1056,7 @@ msgid "Cursor _blinks in text fields"
 msgstr "Markøren _blinker i tekstfelt"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
-#: ../panels/mouse/gnome-mouse-properties.ui.h:2
-#: ../panels/universal-access/uap.ui.h:22
-msgid "Cursor blinks speed"
+msgid "Cursor blink speed"
 msgstr "Hastighet for blinkende markør"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
@@ -972,7 +1065,7 @@ msgstr "Egendefinert snarvei"
 
 #. fast acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "Fast"
 msgstr "Rask"
 
@@ -986,7 +1079,7 @@ msgstr "Innstillinger for utforming"
 
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
 #: ../panels/universal-access/uap.ui.h:38
 #: ../panels/universal-access/zoom-options.ui.h:13
 msgid "Long"
@@ -1006,8 +1099,8 @@ msgstr "_Hastighet:"
 
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
-#: ../panels/mouse/gnome-mouse-properties.ui.h:23
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/mouse/gnome-mouse-properties.ui.h:24
+#: ../panels/universal-access/uap.ui.h:54
 #: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Short"
 msgstr "Kort"
@@ -1018,7 +1111,7 @@ msgstr "Snarveier"
 
 #. slow acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
-#: ../panels/mouse/gnome-mouse-properties.ui.h:25
+#: ../panels/mouse/gnome-mouse-properties.ui.h:26
 msgid "Slow"
 msgstr "Treg"
 
@@ -1031,7 +1124,7 @@ msgstr ""
 "en snarveitast, eller trykk slettetast for å fjerne den."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Typing"
 msgstr "Skriving"
 
@@ -1674,110 +1767,118 @@ msgstr "Språk;Utforming;Tastatur;"
 msgid "A_cceleration:"
 msgstr "A_ksellerasjon:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:3
+#: ../panels/mouse/gnome-mouse-properties.ui.h:2
 msgid "Disable _touchpad while typing"
 msgstr "Deak_tiver pekeplaten mens du skriver"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
+#: ../panels/mouse/gnome-mouse-properties.ui.h:3
 msgid "Double-Click Timeout"
 msgstr "Tidsavbrudd for dobbeltklikk"
 
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
+msgid "Double-click timeout"
+msgstr "Tidsavbrudd for dobbeltklikk"
+
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
+msgid "Drag Threshold"
+msgstr "Terskel for draoperasjon"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "Drag and Drop"
 msgstr "Dra-og-slipp"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:6
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
 msgid "Enable _mouse clicks with touchpad"
 msgstr "Aktiver _musklikk med pekeplaten"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
 msgid "Enable h_orizontal scrolling"
 msgstr "Aktiver h_orisontal rulling"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
 #: ../panels/universal-access/zoom-options.ui.h:7
 msgid "General"
 msgstr "Generelt"
 
 #. high sensitivity
-#: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
 msgid "High"
 msgstr "Høy"
 
 #. large threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
 #: ../panels/universal-access/uap.ui.h:36
 msgid "Large"
 msgstr "Stor"
 
 #. low sensitivity
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
 msgid "Low"
 msgstr "Lav"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
 msgid "Mouse"
 msgstr "Mus"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
 msgid "Mouse Preferences"
 msgstr "Brukervalg for mus"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+#: ../panels/mouse/gnome-mouse-properties.ui.h:21
 msgid "Pointer Speed"
 msgstr "Pekerhastighet"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:21
+#: ../panels/mouse/gnome-mouse-properties.ui.h:22
 msgid "Scrolling"
 msgstr "Rulling"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:22
+#: ../panels/mouse/gnome-mouse-properties.ui.h:23
 msgid "Sh_ow position of pointer when the Control key is pressed"
 msgstr "Vis pekerens p_osisjon når Ctrl trykkes ned"
 
 #. small threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:27
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Small"
 msgstr "Liten"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/mouse/gnome-mouse-properties.ui.h:29
 msgid "Thr_eshold:"
 msgstr "T_erskel:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:29
+#: ../panels/mouse/gnome-mouse-properties.ui.h:30
 msgid "To test your settings, try to double-click on the face."
 msgstr "Klikk på ansiktet for å teste dine innstillinger for dobbeltklikk."
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:30
+#: ../panels/mouse/gnome-mouse-properties.ui.h:31
 msgid "Touchpad"
 msgstr "Pekeplate"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
+#: ../panels/mouse/gnome-mouse-properties.ui.h:32
 msgid "Two-_finger scrolling"
 msgstr "Rulling med to _fingre"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:32
+#: ../panels/mouse/gnome-mouse-properties.ui.h:33
 msgid "_Disabled"
 msgstr "_Slått av"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:33
+#: ../panels/mouse/gnome-mouse-properties.ui.h:34
 msgid "_Edge scrolling"
 msgstr "_Kantrulling"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:34
+#: ../panels/mouse/gnome-mouse-properties.ui.h:35
 msgid "_Left-handed"
 msgstr "_Venstrehendt"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:35
+#: ../panels/mouse/gnome-mouse-properties.ui.h:36
 msgid "_Right-handed"
 msgstr "Høy_rehendt"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:36
+#: ../panels/mouse/gnome-mouse-properties.ui.h:37
 msgid "_Sensitivity:"
 msgstr "_Følsomhet:"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:37
+#: ../panels/mouse/gnome-mouse-properties.ui.h:38
 msgid "_Timeout:"
 msgstr "_Tidsavbrudd:"
 
@@ -2083,11 +2184,6 @@ msgstr "Trådløs"
 #: ../panels/network/panel-common.c:94
 msgid "Mobile broadband"
 msgstr "Mobilt bredbånd"
-
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:99
-msgid "Bluetooth"
-msgstr "Blåtann"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:103
@@ -3146,22 +3242,26 @@ msgid "Bounce Keys"
 msgstr "Sprettetaster"
 
 #: ../panels/universal-access/uap.ui.h:17
+msgid "Bounce keys typing delay"
+msgstr "Pause for tasting med sprettetaster"
+
+#: ../panels/universal-access/uap.ui.h:18
 msgid "Caribou"
 msgstr "Caribou"
 
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:19
 msgid "Change contrast:"
 msgstr "Endre kontrast:"
 
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:20
 msgid "Closed Captioning"
 msgstr "Lukket bildetekst"
 
-#: ../panels/universal-access/uap.ui.h:20
+#: ../panels/universal-access/uap.ui.h:21
 msgid "Control the pointer using the keypad"
 msgstr "Kontroller peker med det numeriske tastaturet"
 
-#: ../panels/universal-access/uap.ui.h:21
+#: ../panels/universal-access/uap.ui.h:22
 msgid "Control the pointer using the video camera."
 msgstr "Kontroller pekeren med videokamera."
 
@@ -3209,10 +3309,6 @@ msgstr "Ignorer raskt dupliserte tastaturtrykk"
 msgid "Increase size:"
 msgstr "Større størrelse:"
 
-#: ../panels/universal-access/uap.ui.h:34
-msgid "Keyboard Settings"
-msgstr "Innstillinger for tastatur"
-
 #: ../panels/universal-access/uap.ui.h:39
 msgid "Motion _threshold:"
 msgstr "_Terskel for bevegelse:"
@@ -3258,152 +3354,156 @@ msgid "Screen keyboard"
 msgstr "Tastatur på skjermen"
 
 #: ../panels/universal-access/uap.ui.h:51
+msgid "Secondary click delay"
+msgstr "Pause for sekundært klikk"
+
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Seeing"
 msgstr "Syn"
 
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:55
 msgid "Simulated Secondary Click"
 msgstr "Simulert andreklikk"
 
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:56
 msgid "Slow Keys"
 msgstr "Trege taster"
 
-#: ../panels/universal-access/uap.ui.h:58
-msgid "Sound Settings"
-msgstr "Innstillinger for lyd"
+#: ../panels/universal-access/uap.ui.h:57
+msgid "Slow keys typing delay"
+msgstr "Pause for tasting med trege taster"
 
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Sticky Keys"
 msgstr "Klebrige taster"
 
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "Behandler en sekvens med endringstaster som en tastekombinasjon"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Trigger a click when the pointer hovers"
 msgstr "Initier klikk når pekeren henger over et punkt"
 
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Utløs sekundærklikk ved å holde nede primærknappen"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Turn on or off:"
 msgstr "Slå på eller av:"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Type here to test settings"
 msgstr "Skriv her for å prøve ut innstillinger"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Typing Assistant"
 msgstr "Skriveassistent"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "Bruk en visuell indikasjon når en varsellyd spilles av"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Video Mouse"
 msgstr "Videomus"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Visual Alerts"
 msgstr "Synlige varsel"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Zoom in:"
 msgstr "Zoom inn:"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Zoom out:"
 msgstr "Zoom ut:"
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:74
 msgid "_Contrast:"
 msgstr "_Kontrast:"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:75
 msgid "_Disable if two keys are pressed together"
 msgstr "_Slå av hvis to taster trykkes ned samtidig"
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:76
 msgid "_Test flash"
 msgstr "_Test blinking"
 
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:77
 msgid "_Text size:"
 msgstr "_Tekststørrelse:"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:78
 msgid "_Turn on accessibility features from the keyboard"
 msgstr "Slå på funksjoner for tilgjengelighet fra tastaturet"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:80
 msgid "accepted"
 msgstr "godtatt"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:80
+#: ../panels/universal-access/uap.ui.h:82
 msgid "pressed"
 msgstr "trykket"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:82
+#: ../panels/universal-access/uap.ui.h:84
 msgid "rejected"
 msgstr "avvist"
 
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:85
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Høy"
 
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:86
 msgctxt "universal access, contrast"
 msgid "High/Inverse"
 msgstr "Høy/omvendt"
 
-#: ../panels/universal-access/uap.ui.h:85
+#: ../panels/universal-access/uap.ui.h:87
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Lav"
 
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:88
 msgctxt "universal access, contrast"
 msgid "Normal"
 msgstr "Normal"
 
 #. Translators: this refers to theme contrast and font size
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:90
 msgctxt "universal access, seeing"
 msgid "Display"
 msgstr "Vis"
 
 #. Translators: this refers to screen magnifier
-#: ../panels/universal-access/uap.ui.h:90
+#: ../panels/universal-access/uap.ui.h:92
 msgctxt "universal access, seeing"
 msgid "Zoom"
 msgstr "Zoom"
 
-#: ../panels/universal-access/uap.ui.h:91
+#: ../panels/universal-access/uap.ui.h:93
 msgctxt "universal access, text size"
 msgid "Large"
 msgstr "Stor"
 
-#: ../panels/universal-access/uap.ui.h:92
+#: ../panels/universal-access/uap.ui.h:94
 msgctxt "universal access, text size"
 msgid "Larger"
 msgstr "Større"
 
-#: ../panels/universal-access/uap.ui.h:93
+#: ../panels/universal-access/uap.ui.h:95
 msgctxt "universal access, text size"
 msgid "Normal"
 msgstr "Normal"
 
-#: ../panels/universal-access/uap.ui.h:94
+#: ../panels/universal-access/uap.ui.h:96
 msgctxt "universal access, text size"
 msgid "Small"
 msgstr "Liten"
