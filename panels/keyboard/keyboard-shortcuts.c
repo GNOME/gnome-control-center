@@ -1889,6 +1889,7 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
                                                      "/apps/metacity/general/num_workspaces",
                                                      (GConfClientNotifyFunc) key_entry_controlling_key_changed,
                                                      builder, NULL, NULL);
+  g_object_unref (client);
 
   model = gtk_list_store_new (DETAIL_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
   gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model),
@@ -1916,21 +1917,6 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   g_signal_connect (selection, "changed",
                     G_CALLBACK (shortcut_selection_changed),
                     WID (builder, "remove-toolbutton"));
-
-  /* FIXME those use GSettings now */
-  allowed_keys = gconf_client_get_list (client,
-                                        GCONF_BINDING_DIR "/allowed_keys",
-                                        GCONF_VALUE_STRING,
-                                        NULL);
-  if (allowed_keys != NULL)
-    {
-      g_slist_foreach (allowed_keys, (GFunc)g_free, NULL);
-      g_slist_free (allowed_keys);
-      gtk_widget_set_sensitive (WID (builder, "add-toolbutton"),
-                                FALSE);
-    }
-
-  g_object_unref (client);
 
   /* setup the custom shortcut dialog */
   custom_shortcut_dialog = WID (builder,
