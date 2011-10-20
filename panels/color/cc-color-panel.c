@@ -1419,6 +1419,8 @@ gcm_prefs_get_profile_title (CcColorPanel *prefs, CdProfile *profile)
 
   g_return_val_if_fail (profile != NULL, NULL);
 
+  string = NULL;
+
   /* get properties */
   ret = cd_profile_connect_sync (profile,
                                  priv->cancellable,
