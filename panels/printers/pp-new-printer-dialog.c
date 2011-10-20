@@ -752,7 +752,7 @@ line_split (gchar *line)
         }
     }
 
-  if (buffer[0] != '\0')
+  if (buffer && buffer[0] != '\0')
     words[j++] = g_strdup (buffer);
 
   result = g_strdupv (words);
