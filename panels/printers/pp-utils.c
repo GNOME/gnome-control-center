@@ -593,8 +593,8 @@ item_cmp (gconstpointer a,
   PPDItem *d = (PPDItem *) b;
   glong   a_number;
   glong   b_number;
-  gchar  *a_normalized;
-  gchar  *b_normalized;
+  gchar  *a_normalized = NULL;
+  gchar  *b_normalized = NULL;
   gchar **av = NULL;
   gchar **bv = NULL;
   gint    a_length = 0;
