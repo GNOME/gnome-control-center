@@ -658,8 +658,7 @@ gcm_prefs_profile_view_cb (GtkWidget *widget, CcColorPanel *prefs)
       g_error_free (error);
     }
 
-  if (argv != NULL)
-    g_ptr_array_unref (argv);
+  g_ptr_array_unref (argv);
   g_free (options);
   if (profile != NULL)
     g_object_unref (profile);
