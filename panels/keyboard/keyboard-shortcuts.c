@@ -1144,11 +1144,11 @@ description_edited_callback (GtkCellRendererText *renderer,
                       DETAIL_KEYENTRY_COLUMN, &item,
                       -1);
 
-  g_assert (item->type == CC_KEYBOARD_ITEM_TYPE_GCONF_DIR);
-
   /* sanity check */
   if (item == NULL || item->desc_gconf_key == NULL)
     return;
+
+  g_assert (item->type == CC_KEYBOARD_ITEM_TYPE_GCONF_DIR);
 
   client = gconf_client_get_default ();
   if (!gconf_client_set_string (client, item->desc_gconf_key, new_text, NULL))
