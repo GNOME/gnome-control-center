@@ -1521,29 +1521,32 @@ static GtkTreeIter *
 get_iter_for_profile (GtkTreeModel *model, CdProfile *profile, GtkTreeIter *parent)
 {
   const gchar *id;
-  GtkTreeIter iter_tmp;
   gboolean ret;
-  GtkTreeIter *iter = NULL;
+  GtkTreeIter iter;
   CdProfile *profile_tmp;
 
   /* get first element */
-  ret = gtk_tree_model_iter_children (model, &iter_tmp, parent);
+  ret = gtk_tree_model_iter_children (model, &iter, parent);
   if (!ret)
-    goto out;
+    return NULL;
 
   /* remove the other elements */
   id = cd_profile_get_id (profile);
-  do
+  while (ret)
     {
-      gtk_tree_model_get (model, &iter_tmp,
+      gtk_tree_model_get (model, &iter,
               GCM_PREFS_COLUMN_PROFILE, &profile_tmp,
               -1);
       if (g_strcmp0 (id, cd_profile_get_id (profile_tmp)) == 0)
-        iter = &iter_tmp;
+        {
+          g_object_unref (profile_tmp);
+          return gtk_tree_iter_copy (&iter);
+        }
       g_object_unref (profile_tmp);
-    } while (iter == NULL && gtk_tree_model_iter_next (model, &iter_tmp));
-out:
-  return iter;
+      ret = gtk_tree_model_iter_next (model, &iter);
+    }
+
+  return NULL;
 }
 
 static void
@@ -1688,12 +1691,9 @@ skip:
       iter_tmp_p = get_iter_for_profile (GTK_TREE_MODEL (priv->list_store_devices),
                                          profile_tmp, iter);
       if (iter_tmp_p == NULL)
-        {
-          gtk_tree_store_append (priv->list_store_devices, &iter_tmp, iter);
-          iter_tmp_p = &iter_tmp;
-        }
+        gtk_tree_store_append (priv->list_store_devices, &iter_tmp, iter);
 
-      gtk_tree_store_set (priv->list_store_devices, iter_tmp_p,
+      gtk_tree_store_set (priv->list_store_devices, iter_tmp_p ? iter_tmp_p : &iter_tmp,
                           GCM_PREFS_COLUMN_DEVICE, device,
                           GCM_PREFS_COLUMN_PROFILE, profile_tmp,
                           GCM_PREFS_COLUMN_DEVICE_PATH, cd_device_get_object_path (device),
@@ -1703,6 +1703,7 @@ skip:
                           GCM_PREFS_COLUMN_RADIO_VISIBLE, TRUE,
                           GCM_PREFS_COLUMN_RADIO_ACTIVE, i==0,
                           -1);
+      gtk_tree_iter_free (iter_tmp_p);
       g_free (title_tmp);
       g_free (sort_tmp);
       g_string_free (date_tmp, TRUE);
