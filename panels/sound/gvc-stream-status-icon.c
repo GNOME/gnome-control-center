@@ -388,7 +388,7 @@ update_icon (GvcStreamStatusIcon *icon)
         can_decibel = gvc_mixer_stream_get_can_decibel (icon->priv->mixer_stream);
 
         /* select image */
-        if (volume <= 0 || is_muted) {
+        if (volume == 0 || is_muted) {
                 n = 0;
         } else {
                 n = 3 * volume / PA_VOLUME_NORM + 1;
