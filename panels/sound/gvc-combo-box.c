@@ -262,7 +262,7 @@ gvc_combo_box_set_active (GvcComboBox *combo_box,
                         gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo_box->priv->combobox), &iter);
                         return;
                 }
-                gtk_tree_model_iter_next (combo_box->priv->model, &iter);
+                cont = gtk_tree_model_iter_next (combo_box->priv->model, &iter);
         }
         g_warning ("Could not find id '%s' in combo box", id);
 }
