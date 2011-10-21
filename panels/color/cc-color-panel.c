@@ -1703,7 +1703,8 @@ skip:
                           GCM_PREFS_COLUMN_RADIO_VISIBLE, TRUE,
                           GCM_PREFS_COLUMN_RADIO_ACTIVE, i==0,
                           -1);
-      gtk_tree_iter_free (iter_tmp_p);
+      if (iter_tmp_p != NULL)
+        gtk_tree_iter_free (iter_tmp_p);
       g_free (title_tmp);
       g_free (sort_tmp);
       g_string_free (date_tmp, TRUE);
