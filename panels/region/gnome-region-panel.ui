@@ -1068,13 +1068,10 @@ default settings</property>
                                 <property name="can_focus">True</property>
                                 <property name="shadow_type">in</property>
                                 <child>
-                                  <object class="GtkTreeView" id="input_sources_selected">
+                                  <object class="GtkTreeView" id="active_input_sources">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="headers_visible">False</property>
-                                    <child internal-child="selection">
-                                      <object class="GtkTreeSelection" id="input-sources-selection"/>
-                                    </child>
                                   </object>
                                 </child>
                               </object>
@@ -1085,98 +1082,84 @@ default settings</property>
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkToolbar" id="input-sources-toolbar">
+                              <object class="GtkToolbar" id="input-toolbar">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="toolbar_style">both-horiz</property>
+                                <property name="toolbar_style">icons</property>
                                 <property name="show_arrow">False</property>
                                 <property name="icon_size">1</property>
                                 <style>
                                   <class name="inline-toolbar"/>
                                 </style>
                                 <child>
-                                  <object class="GtkToolItem" id="input_sources_addremove">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <child>
-                                      <object class="GtkBox" id="input_sources_addremove_box">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <child>
-                                          <object class="GtkButton" id="input_sources_add">
-                                            <property name="use_action_appearance">False</property>
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="use_action_appearance">False</property>
-                                            <child>
-                                               <object class="GtkImage" id="input_sources_add_image">
-                                                 <property name="visible">True</property>
-                                                 <property name="icon_name">list-add-symbolic</property>
-                                                 <property name="icon_size">1</property>
-                                                </object>
-                                            </child>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkButton" id="input_sources_remove">
-                                            <property name="use_action_appearance">False</property>
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="use_action_appearance">False</property>
-                                            <child>
-                                               <object class="GtkImage" id="input_sources_remove_image">
-                                                 <property name="visible">True</property>
-                                                 <property name="icon_name">list-remove-symbolic</property>
-                                                 <property name="icon_size">1</property>
-                                                </object>
-                                            </child>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                          </packing>
-                                        </child>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkSeparatorToolItem" id="toolbutton1">
+                                  <object class="GtkToolButton" id="input_source_add">
                                     <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="hexpand">True</property>
+                                    <property name="can_focus">True</property>
                                     <property name="use_action_appearance">False</property>
-                                    <property name="draw">False</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="icon_name">list-add-symbolic</property>
                                   </object>
                                   <packing>
-                                    <property name="expand">True</property>
+                                    <property name="expand">False</property>
+                                    <property name="homogeneous">True</property>
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkToolItem" id="input_sources_show">
-
+                                  <object class="GtkToolButton" id="input_source_remove">
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <child>
-                                      <object class="GtkBox" id="input_sources_show_box">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <child>
-                                          <object class="GtkButton" id="input_sources_show_button">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="label" translatable="yes">_Preview</property>
-                                            <property name="use_underline">True</property>
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
+                                    <property name="can_focus">True</property>
+                                    <property name="use_action_appearance">False</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="icon_name">list-remove-symbolic</property>
                                   </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="homogeneous">True</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkToolButton" id="input_source_move_up">
+                                    <property name="use_action_appearance">False</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="use_action_appearance">False</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="icon_name">go-up-symbolic</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="homogeneous">True</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkToolButton" id="input_source_move_down">
+                                    <property name="use_action_appearance">False</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="use_action_appearance">False</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="icon_name">go-down-symbolic</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="homogeneous">True</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkToolButton" id="input_source_show">
+                                    <property name="use_action_appearance">False</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="use_action_appearance">False</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="icon_name">input-keyboard-symbolic</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="homogeneous">True</property>
+                                  </packing>
                                 </child>
                               </object>
                               <packing>

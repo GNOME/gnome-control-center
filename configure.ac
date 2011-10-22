@@ -114,6 +114,7 @@ PKG_CHECK_MODULES(PRINTERS_PANEL, $COMMON_MODULES
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
 PKG_CHECK_MODULES(REGION_PANEL, $COMMON_MODULES libgnomekbd >= 2.91.91
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
+                  ibus-1.0
                   libxklavier >= 5.1 libgnomekbdui >= 2.91.91)
 PKG_CHECK_MODULES(SCREEN_PANEL, $COMMON_MODULES)
 PKG_CHECK_MODULES(SOUND_PANEL, $COMMON_MODULES libxml-2.0
