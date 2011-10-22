@@ -27,7 +27,7 @@
 
 G_BEGIN_DECLS
 
-extern void setup_input_tabs (GtkBuilder * dialog);
+void setup_input_tabs (GtkBuilder *builder);
 
 G_END_DECLS
 

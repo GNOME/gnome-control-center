@@ -42,6 +42,7 @@ uidir   = $(pkgdatadir)/ui
 ui_DATA = \
 	gnome-region-panel.ui \
 	gnome-region-panel-layout-chooser.ui \
+	gnome-region-panel-input-chooser.ui \
 	gnome-region-panel-options-dialog.ui
 
 desktopdir = $(datadir)/applications
