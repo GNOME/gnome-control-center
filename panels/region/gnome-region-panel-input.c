@@ -124,7 +124,6 @@ populate_model (GtkListStore *store,
   GList *list, *l;
   GList *active_list;
   IBusEngineDesc *description;
-  GType type G_GNUC_UNUSED;
   const gchar *name;
   const gchar *lang;
   gchar *desc;
@@ -134,11 +133,6 @@ populate_model (GtkListStore *store,
   GHashTable *active_hash;
 
   bus = ibus_bus_new ();
-
-  /* IBus forgets to register its serializable types
-   * http://code.google.com/p/ibus/issues/detail?id=1339
-   */
-  type = ibus_engine_desc_get_type ();
 
   list = ibus_bus_list_engines (bus);
   active_list = ibus_bus_list_active_engines (bus);
@@ -588,6 +582,8 @@ setup_input_tabs (GtkBuilder *builder)
   gchar *previous = NULL;
   gchar *next = NULL;
   GtkWidget *label;
+
+  ibus_init ();
 
   /* set up the list of active inputs */
   treeview = WID("active_input_sources");
