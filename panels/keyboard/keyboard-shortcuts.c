@@ -1783,7 +1783,6 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   GtkWidget *widget;
   GtkTreeView *treeview;
   GtkTreeSelection *selection;
-  GSList *allowed_keys;
   CcShell *shell;
   GtkListStore *model;
   GtkTreeModelSort *sort_model;
