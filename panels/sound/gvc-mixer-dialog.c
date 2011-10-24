@@ -1791,6 +1791,7 @@ gvc_mixer_dialog_constructor (GType                  type,
         gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (box),
                                              GTK_SHADOW_IN);
         gtk_container_add (GTK_CONTAINER (box), self->priv->output_treeview);
+        gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (box), 150);
         gtk_container_add (GTK_CONTAINER (alignment), box);
 
         box = gtk_frame_new (_("Settings for the selected device:"));
