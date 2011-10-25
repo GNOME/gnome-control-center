@@ -875,8 +875,8 @@ add_unlock_tooltip (GtkWidget *button)
         gchar *names[3];
         GIcon *icon;
 
-        names[0] = "changes-prevent-symbolic";
-        names[1] = "changes-prevent";
+        names[0] = "changes-allow-symbolic";
+        names[1] = "changes-allow";
         names[2] = NULL;
         icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
         /* Translator comments:
@@ -928,8 +928,8 @@ on_permission_changed (GPermission *permission,
                 gchar *names[3];
                 GIcon *icon;
 
-                names[0] = "changes-prevent-symbolic";
-                names[1] = "changes-prevent";
+                names[0] = "changes-allow-symbolic";
+                names[1] = "changes-allow";
                 names[2] = NULL;
                 icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
                 setup_tooltip_with_embedded_icon (widget,
@@ -948,8 +948,8 @@ on_permission_changed (GPermission *permission,
                 gchar *names[3];
                 GIcon *icon;
 
-                names[0] = "changes-prevent-symbolic";
-                names[1] = "changes-prevent";
+                names[0] = "changes-allow-symbolic";
+                names[1] = "changes-allow";
                 names[2] = NULL;
                 icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
 
@@ -1217,8 +1217,8 @@ setup_main_window (UmUserPanelPrivate *d)
         on_permission_changed (d->permission, NULL, d);
 
         button = get_widget (d, "add-user-toolbutton");
-        names[0] = "changes-prevent-symbolic";
-        names[1] = "changes-prevent";
+        names[0] = "changes-allow-symbolic";
+        names[1] = "changes-allow";
         names[2] = NULL;
         icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
         setup_tooltip_with_embedded_icon (button,
