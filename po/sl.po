@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-10-23 12:52+0000\n"
-"PO-Revision-Date: 2011-10-23 20:07+0100\n"
+"POT-Creation-Date: 2011-10-25 16:57+0000\n"
+"PO-Revision-Date: 2011-10-25 20:54+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: \n"
@@ -197,15 +197,24 @@ msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #: ../panels/bluetooth/bluetooth.ui.h:9
+#: ../panels/network/network.ui.h:18
+msgid "Remove Device"
+msgstr "Odstrani napravo"
+
+#: ../panels/bluetooth/bluetooth.ui.h:10
 msgid "Send Files..."
 msgstr "Pošiljanje datotek ..."
 
-#: ../panels/bluetooth/bluetooth.ui.h:10
+#: ../panels/bluetooth/bluetooth.ui.h:11
+msgid "Set Up New Device"
+msgstr "Nastavi novo napravo"
+
+#: ../panels/bluetooth/bluetooth.ui.h:12
 #: ../panels/universal-access/uap.ui.h:60
 msgid "Sound Settings"
 msgstr "Nastavitve zvoka"
 
-#: ../panels/bluetooth/bluetooth.ui.h:11
+#: ../panels/bluetooth/bluetooth.ui.h:13
 msgid "Type"
 msgstr "Vrsta"
 
@@ -649,7 +658,7 @@ msgid "Video CD"
 msgstr "Video CD"
 
 #: ../panels/info/cc-info-panel.c:1474
-#: ../panels/keyboard/keyboard-shortcuts.c:1802
+#: ../panels/keyboard/keyboard-shortcuts.c:1801
 msgid "Section"
 msgstr "Odsek"
 
@@ -673,20 +682,20 @@ msgstr "Odstranljiv medij"
 msgid "Graphics"
 msgstr "Grafika"
 
-#: ../panels/info/cc-info-panel.c:1700
+#: ../panels/info/cc-info-panel.c:1701
 #, c-format
 msgid "Version %s"
 msgstr "Različica %s"
 
-#: ../panels/info/cc-info-panel.c:1750
+#: ../panels/info/cc-info-panel.c:1751
 msgid "Install Updates"
 msgstr "Namesti posodobitve"
 
-#: ../panels/info/cc-info-panel.c:1754
+#: ../panels/info/cc-info-panel.c:1755
 msgid "System Up-To-Date"
 msgstr "Sistem je posodobljen."
 
-#: ../panels/info/cc-info-panel.c:1758
+#: ../panels/info/cc-info-panel.c:1759
 msgid "Checking for Updates"
 msgstr "Preverjanje za posodobitve"
 
@@ -889,7 +898,7 @@ msgid "Log out"
 msgstr "Odjava"
 
 #: ../panels/keyboard/01-system.xml.in.h:3
-#: ../panels/region/gnome-region-panel.ui.h:24
+#: ../panels/region/gnome-region-panel.ui.h:33
 msgid "System"
 msgstr "Sistem"
 
@@ -972,7 +981,7 @@ msgid "Change keyboard settings"
 msgstr "Spremeni nastavitve tipkovnice"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
 msgid "Keyboard"
 msgstr "Tipkovnica"
 
@@ -1028,104 +1037,112 @@ msgstr "_Določitev bližnjice"
 msgid "Too many custom shortcuts"
 msgstr "Preveč bližnjic po meri"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1855
+#: ../panels/keyboard/keyboard-shortcuts.c:1854
 msgid "Action"
 msgstr "Dejanje"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1878
+#: ../panels/keyboard/keyboard-shortcuts.c:1877
 msgid "Shortcut"
 msgstr "Bližnjica"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
+msgid "Add Shortcut"
+msgstr "Dodaj tipkovno bližnjico"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "C_ommand:"
 msgstr "U_kaz:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 msgid "Cursor Blinking"
 msgstr "Utripanje kazalca"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "Cursor _blinks in text fields"
 msgstr "Kazalec _utripa v besedilnih poljih"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
 msgid "Cursor blink speed"
 msgstr "Hitrost utripanja kazalke"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
 msgid "Custom Shortcut"
 msgstr "Bližnjica po meri"
 
 #. fast acceleration
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
 #: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "Fast"
 msgstr "Hitro"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid "Key presses _repeat when key is held down"
 msgstr "Ponavljanje p_ritiskov tipk, ko je tipka pritisnjena zadržano"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 msgid "Layout Settings"
 msgstr "Nastavitve postavitve"
 
 #. long delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 #: ../panels/mouse/gnome-mouse-properties.ui.h:16
 #: ../panels/universal-access/uap.ui.h:38
 #: ../panels/universal-access/zoom-options.ui.h:13
 msgid "Long"
 msgstr "Dolga"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+msgid "Remove Shortcut"
+msgstr "Odstrani tipkovno bližnjico"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
 msgid "Repeat Keys"
 msgstr "Ponavljajoče tipke"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 msgid "Repeat keys speed"
 msgstr "Hitrost ponovitve tipk"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
 msgid "S_peed:"
 msgstr "_Hitrost:"
 
 #. short delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
 #: ../panels/universal-access/uap.ui.h:54
 #: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Short"
 msgstr "Kratka"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
 msgid "Shortcuts"
 msgstr "Tipkovne bližnjice"
 
 #. slow acceleration
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
 #: ../panels/mouse/gnome-mouse-properties.ui.h:26
 msgid "Slow"
 msgstr "Počasno"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
 msgid "To edit a shortcut, click the row and hold down the new keys or press Backspace to clear."
 msgstr "Za urejanje bližnjice kliknite ustrezno vrstico in vnesite novo bližnjico ali pa izbrišite staro."
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
 #: ../panels/universal-access/uap.ui.h:67
 msgid "Typing"
 msgstr "Tipkanje"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
 msgid "_Delay:"
 msgstr "_Premor:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
 msgid "_Name:"
 msgstr "_Ime:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:23
 msgid "_Speed:"
 msgstr "_Hitrost:"
 
@@ -1144,6 +1161,7 @@ msgstr "_Prijava"
 #. translators: This is the title of the "Add Account" dialogue.
 #. * The title is not visible when using GNOME Shell
 #: ../panels/online-accounts/cc-online-accounts-panel.c:461
+#: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "Add Account"
 msgstr "Dodaj račun"
 
@@ -1192,7 +1210,11 @@ msgstr "Upravljanje spletnih računov"
 msgid "Online Accounts"
 msgstr "Spletni računi"
 
-#: ../panels/online-accounts/online-accounts.ui.h:1
+#: ../panels/online-accounts/online-accounts.ui.h:2
+msgid "Remove Account"
+msgstr "Odstrani račun"
+
+#: ../panels/online-accounts/online-accounts.ui.h:3
 msgid "Select an account"
 msgstr "Izbor računa"
 
@@ -1502,41 +1524,69 @@ msgid "Add New Printer"
 msgstr "Dodaj nov tiskalnik"
 
 #: ../panels/printers/printers.ui.h:5
+msgid "Add Printer"
+msgstr "Dodaj tiskalnik"
+
+#: ../panels/printers/printers.ui.h:6
+msgid "Add User"
+msgstr "Dodaj uporabnika"
+
+#: ../panels/printers/printers.ui.h:7
 msgid "Allowed users"
 msgstr "Dovoljeni uporabniki"
 
-#: ../panels/printers/printers.ui.h:6
+#: ../panels/printers/printers.ui.h:8
+msgid "Cancel Print Job"
+msgstr "Prekliči posel tiskalnika"
+
+#: ../panels/printers/printers.ui.h:9
 #: ../panels/network/cc-network-panel.c:1990
 #: ../panels/network/cc-network-panel.c:1993
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:12
 msgid "IP Address"
 msgstr "IP naslov"
 
-#: ../panels/printers/printers.ui.h:7
+#: ../panels/printers/printers.ui.h:10
 msgid "Jobs"
 msgstr "Posli"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:9
+#: ../panels/printers/printers.ui.h:12
 msgid "Location"
 msgstr "Mesto"
 
-#: ../panels/printers/printers.ui.h:10
+#: ../panels/printers/printers.ui.h:13
 msgid "Model"
 msgstr "Model"
 
+#: ../panels/printers/printers.ui.h:14
+msgid "Pause Printing"
+msgstr "Premor tiskanja"
+
 #. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:12
+#: ../panels/printers/printers.ui.h:16
 msgid "Print _Test Page"
 msgstr "Natisni _preizkusno stran"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:14
+#: ../panels/printers/printers.ui.h:18
 msgid "Printer Options"
 msgstr "Možnosti tiskalnika"
 
+#: ../panels/printers/printers.ui.h:19
+msgid "Remove Printer"
+msgstr "Odstrani tiskalnik"
+
+#: ../panels/printers/printers.ui.h:20
+msgid "Remove User"
+msgstr "Odstrani uporabnika"
+
+#: ../panels/printers/printers.ui.h:21
+msgid "Resume Printing"
+msgstr "Nadaljuj tiskanje"
+
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:16
+#: ../panels/printers/printers.ui.h:23
 msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
@@ -1545,27 +1595,27 @@ msgstr ""
 "tiskanja ni na voljo."
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:19
+#: ../panels/printers/printers.ui.h:26
 msgid "Supply"
 msgstr "Zaloga"
 
 #. Translators: Switch back to printer's info tab
-#: ../panels/printers/printers.ui.h:21
+#: ../panels/printers/printers.ui.h:28
 msgid "_Back"
 msgstr "Na_zaj"
 
 #. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:30
 msgid "_Default"
 msgstr "_Privzeto"
 
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:25
+#: ../panels/printers/printers.ui.h:32
 msgid "_Options"
 msgstr "_Možnosti"
 
 #. Tanslators: Switch to tab containing printer's jobs
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:34
 msgid "_Show"
 msgstr "_Pokaži"
 
@@ -1594,77 +1644,113 @@ msgid "Keyboard Layout Options"
 msgstr "Možnosti razporeditve tipkovnice"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
+msgid "Add Language"
+msgstr "Dodaj jezik"
+
+#: ../panels/region/gnome-region-panel.ui.h:2
+msgid "Add Layout"
+msgstr "Dodaj postavitev"
+
+#: ../panels/region/gnome-region-panel.ui.h:3
+msgid "Add Region"
+msgstr "Dodaj področje"
+
+#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Allow different layouts for individual windows"
 msgstr "Dovoli različne razporeditve za posamezno okno"
 
-#: ../panels/region/gnome-region-panel.ui.h:2
+#: ../panels/region/gnome-region-panel.ui.h:5
 #: ../panels/region/gnome-region-panel-system.c:406
 msgid "Copy Settings..."
 msgstr "Nastavitve kopiranja ..."
 
-#: ../panels/region/gnome-region-panel.ui.h:3
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Currency"
 msgstr "Valuta"
 
-#: ../panels/region/gnome-region-panel.ui.h:4
+#: ../panels/region/gnome-region-panel.ui.h:7
 msgid "Dates"
 msgstr "Datumi"
 
 #. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
-#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Display language:"
 msgstr "Jezik vmesnika:"
 
-#: ../panels/region/gnome-region-panel.ui.h:7
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "Examples"
 msgstr "Primeri"
 
-#: ../panels/region/gnome-region-panel.ui.h:8
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Format:"
 msgstr "Oblika:"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:12
 msgid "Formats"
 msgstr "Zapisi"
 
-#: ../panels/region/gnome-region-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "Input source:"
 msgstr "Dovodni vir:"
 
-#: ../panels/region/gnome-region-panel.ui.h:11
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "Install languages..."
 msgstr "Namesti jezike ..."
 
-#: ../panels/region/gnome-region-panel.ui.h:12
+#: ../panels/region/gnome-region-panel.ui.h:15
 msgid "Language"
 msgstr "Jezik"
 
-#: ../panels/region/gnome-region-panel.ui.h:13
+#: ../panels/region/gnome-region-panel.ui.h:16
 msgid "Layouts"
 msgstr "Razporeditve"
 
-#: ../panels/region/gnome-region-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:17
 msgid "Measurement"
 msgstr "Merjenje"
 
-#: ../panels/region/gnome-region-panel.ui.h:15
+#: ../panels/region/gnome-region-panel.ui.h:18
+msgid "Move Down"
+msgstr "Premakni navzdol"
+
+#: ../panels/region/gnome-region-panel.ui.h:19
+msgid "Move Up"
+msgstr "Premakni navzgor"
+
+#: ../panels/region/gnome-region-panel.ui.h:20
 msgid "New windows use the default layout"
 msgstr "nova okna uporabljajo privzeto razporeditev"
 
-#: ../panels/region/gnome-region-panel.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "New windows use the previous window's layout"
 msgstr "Nova okna uporabijo predhodno uporabljeno razporeditev"
 
-#: ../panels/region/gnome-region-panel.ui.h:17
+#: ../panels/region/gnome-region-panel.ui.h:22
 msgid "Numbers"
 msgstr "Števila"
 
-#: ../panels/region/gnome-region-panel.ui.h:18
+#: ../panels/region/gnome-region-panel.ui.h:23
+msgid "Preview Layout"
+msgstr "Postavitev predogleda"
+
+#: ../panels/region/gnome-region-panel.ui.h:24
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
 msgstr "Področje in jezik"
 
-#: ../panels/region/gnome-region-panel.ui.h:19
+#: ../panels/region/gnome-region-panel.ui.h:25
+msgid "Remove Language"
+msgstr "Odstrani jezik"
+
+#: ../panels/region/gnome-region-panel.ui.h:26
+msgid "Remove Layout"
+msgstr "Odstrani postavitev"
+
+#: ../panels/region/gnome-region-panel.ui.h:27
+msgid "Remove Region"
+msgstr "Odstrani področje"
+
+#: ../panels/region/gnome-region-panel.ui.h:28
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1672,44 +1758,44 @@ msgstr ""
 "Zamenjaj trenutne nastavitve razporeditve tipkovnice s\n"
 "privzetimi nastavitvami"
 
-#: ../panels/region/gnome-region-panel.ui.h:21
+#: ../panels/region/gnome-region-panel.ui.h:30
 msgid "Reset to De_faults"
 msgstr "Povrni na _privzeto"
 
-#: ../panels/region/gnome-region-panel.ui.h:22
+#: ../panels/region/gnome-region-panel.ui.h:31
 msgid "Select a display language (change will be applied next time you log in)"
 msgstr "Izbor jezika namizja (sprememba bo uporabljena ob naslednji prijavi)"
 
-#: ../panels/region/gnome-region-panel.ui.h:23
+#: ../panels/region/gnome-region-panel.ui.h:32
 msgid "Select a region (change will be applied the next time you log in)"
 msgstr "Izbor področja (sprememba bo uporabljena ob naslednji prijavi)"
 
-#: ../panels/region/gnome-region-panel.ui.h:25
+#: ../panels/region/gnome-region-panel.ui.h:34
 msgid "System settings"
 msgstr "Sistemske nastavitve"
 
-#: ../panels/region/gnome-region-panel.ui.h:26
+#: ../panels/region/gnome-region-panel.ui.h:35
 #: ../panels/region/gnome-region-panel-system.c:400
 msgid "The login screen, system accounts and new user accounts use the system-wide Region and Language settings. You may change the system settings to match yours."
 msgstr "Prijavni zaslon, sistemski računi in novi uporabniški računi uporabljajo sistemske nastavitve področij in jezika. Te je mogoče kasneje prilagoditi vsakemu računu posebej."
 
-#: ../panels/region/gnome-region-panel.ui.h:27
+#: ../panels/region/gnome-region-panel.ui.h:36
 msgid "Times"
 msgstr "Čas"
 
-#: ../panels/region/gnome-region-panel.ui.h:28
+#: ../panels/region/gnome-region-panel.ui.h:37
 msgid "Use the same layout for all windows"
 msgstr "Uporabi enako razporeditev v vseh oknih"
 
-#: ../panels/region/gnome-region-panel.ui.h:29
+#: ../panels/region/gnome-region-panel.ui.h:38
 msgid "View and edit keyboard layout options"
 msgstr "Ogled in urejanje možnosti razporeditve tipkovnice"
 
-#: ../panels/region/gnome-region-panel.ui.h:30
+#: ../panels/region/gnome-region-panel.ui.h:39
 msgid "Your settings"
 msgstr "Osebne nastavitve"
 
-#: ../panels/region/gnome-region-panel.ui.h:31
+#: ../panels/region/gnome-region-panel.ui.h:40
 msgid "_Options..."
 msgstr "_Možnosti ..."
 
@@ -1934,12 +2020,12 @@ msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: ../panels/network/cc-network-panel.c:1986
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:13
 msgid "IPv4 Address"
 msgstr "Naslov IPv4"
 
 #: ../panels/network/cc-network-panel.c:1987
-#: ../panels/network/network.ui.h:13
+#: ../panels/network/network.ui.h:14
 msgid "IPv6 Address"
 msgstr "Naslov IPv6"
 
@@ -2005,140 +2091,144 @@ msgid "Network;Wireless;IP;LAN;"
 msgstr "Omrežje;Brezžično;IP;LAN;"
 
 #: ../panels/network/network.ui.h:1
+msgid "Add Device"
+msgstr "Dodaj napravo"
+
+#: ../panels/network/network.ui.h:2
 msgid "Air_plane Mode"
 msgstr "Način l_etala"
 
-#: ../panels/network/network.ui.h:2
+#: ../panels/network/network.ui.h:3
 msgid "Create..."
 msgstr "Ustvari ..."
 
-#: ../panels/network/network.ui.h:3
+#: ../panels/network/network.ui.h:4
 msgid "DNS"
 msgstr "DNS"
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:5
 msgid "Default Route"
 msgstr "Privzeta smer"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:6
 msgid "Gateway"
 msgstr "Prehod"
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:7
 msgid "Group Name"
 msgstr "Ime skupine"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:8
 msgid "Group Password"
 msgstr "Geslo skupine"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:9
 msgid "H_TTPS Proxy"
 msgstr "Posredniški strežnik H_TTPS"
 
-#: ../panels/network/network.ui.h:9
+#: ../panels/network/network.ui.h:10
 msgid "Hardware Address"
 msgstr "Strojni naslov"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:11
 msgid "IMEI"
 msgstr "IMEI"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:15
 msgid "Interface"
 msgstr "Vmesnik"
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:16
 msgid "Network Name"
 msgstr "Ime omrežja"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:17
 msgid "Provider"
 msgstr "Ponudnik"
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:19
 msgid "Security"
 msgstr "Varnost"
 
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:20
 msgid "Security Key"
 msgstr "Varnostni ključ"
 
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:21
 msgid "Select the interface to use for the new service"
 msgstr "Izbor vmesnika za novo storitev"
 
-#: ../panels/network/network.ui.h:20
+#: ../panels/network/network.ui.h:22
 msgid "Speed"
 msgstr "Hitrost"
 
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:23
 msgid "Subnet Mask"
 msgstr "Maska podomrežja"
 
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:24
 msgid "Unlock"
 msgstr "Odkleni"
 
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:25
 msgid "Username"
 msgstr "Uporabniško ime"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:26
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/network.ui.h:25
+#: ../panels/network/network.ui.h:27
 msgid "VPN Type"
 msgstr "Vrsto povezave VPN"
 
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:28
 msgid "_Configuration URL"
 msgstr "_Nastavitveni naslov URL"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:29
 msgid "_Configure..."
 msgstr "_Nastavi ..."
 
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network.ui.h:30
 msgid "_FTP Proxy"
 msgstr "Posredniški strežnik _FTP"
 
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network.ui.h:31
 msgid "_HTTP Proxy"
 msgstr "Posredniški strežnik _HTTP"
 
-#: ../panels/network/network.ui.h:30
+#: ../panels/network/network.ui.h:32
 msgid "_Method"
 msgstr "_Način"
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network.ui.h:33
 msgid "_Network Name"
 msgstr "_Ime omrežja"
 
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network.ui.h:34
 msgid "_Socks Host"
 msgstr "_Gostitelj vtičev"
 
-#: ../panels/network/network.ui.h:33
+#: ../panels/network/network.ui.h:35
 msgid "_Stop Hotspot..."
 msgstr "_Zaustavi vročo vstopno točko ..."
 
-#: ../panels/network/network.ui.h:34
+#: ../panels/network/network.ui.h:36
 msgid "_Use as Hotspot..."
 msgstr "Uporabi kot _vročo vstopno točko"
 
-#: ../panels/network/network.ui.h:35
+#: ../panels/network/network.ui.h:37
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "Samodejno"
 
-#: ../panels/network/network.ui.h:36
+#: ../panels/network/network.ui.h:38
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "Ročno"
 
-#: ../panels/network/network.ui.h:37
+#: ../panels/network/network.ui.h:39
 msgctxt "proxy method"
 msgid "None"
 msgstr "Brez"
@@ -2789,7 +2879,7 @@ msgid "Sound Output Volume"
 msgstr "Izhodna glasnost zvoka"
 
 #: ../panels/sound/gvc-applet.c:276
-#: ../panels/sound/gvc-mixer-dialog.c:1807
+#: ../panels/sound/gvc-mixer-dialog.c:1808
 msgid "Input"
 msgstr "Dovod"
 
@@ -2913,44 +3003,44 @@ msgstr "_Glasnost izhoda:"
 msgid "C_hoose a device for sound output:"
 msgstr "_Izbor naprave za odvod zvoka:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1796
-#: ../panels/sound/gvc-mixer-dialog.c:1925
+#: ../panels/sound/gvc-mixer-dialog.c:1797
+#: ../panels/sound/gvc-mixer-dialog.c:1926
 msgid "Settings for the selected device:"
 msgstr "Nastavitve izbrane naprave:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1814
+#: ../panels/sound/gvc-mixer-dialog.c:1815
 msgid "_Input volume:"
 msgstr "_Glasnost vhoda: "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1837
+#: ../panels/sound/gvc-mixer-dialog.c:1838
 msgid "Input level:"
 msgstr "Raven dovoda:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1865
+#: ../panels/sound/gvc-mixer-dialog.c:1866
 msgid "C_hoose a device for sound input:"
 msgstr "_Izbor naprave za dovod zvoka:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1892
+#: ../panels/sound/gvc-mixer-dialog.c:1893
 msgid "Hardware"
 msgstr "Strojna oprema"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1897
+#: ../panels/sound/gvc-mixer-dialog.c:1898
 msgid "C_hoose a device to configure:"
 msgstr "_Izbor naprave za nastavitev:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1936
+#: ../panels/sound/gvc-mixer-dialog.c:1937
 msgid "Sound Effects"
 msgstr "Zvočni učinki"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1943
+#: ../panels/sound/gvc-mixer-dialog.c:1944
 msgid "_Alert volume:"
 msgstr "_Glasnost opozoril:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1956
+#: ../panels/sound/gvc-mixer-dialog.c:1957
 msgid "Applications"
 msgstr "Programi"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1960
+#: ../panels/sound/gvc-mixer-dialog.c:1961
 msgid "No application is currently playing or recording audio."
 msgstr "Ni programa, ki bi trenutno predvajal ali snemal zvočni posnetek."
 
@@ -3917,29 +4007,29 @@ msgstr ""
 "kliknite na ikono *"
 
 #: ../panels/user-accounts/um-user-panel.c:925
-msgid "Create a user"
-msgstr "Ustvari novega uporabnika"
+msgid "Create a user account"
+msgstr "Ustvari uporabniški račun"
 
 #: ../panels/user-accounts/um-user-panel.c:936
 #: ../panels/user-accounts/um-user-panel.c:1225
 msgid ""
-"To create a user,\n"
+"To create a user account,\n"
 "click the * icon first"
 msgstr ""
-"Za ustvarjanje uporabnika,\n"
+"Za ustvarjanje uporabniškega računa,\n"
 "kliknite na ikono *"
 
 #: ../panels/user-accounts/um-user-panel.c:945
-msgid "Delete the selected user"
-msgstr "Izbriši izbranega uporabnika"
+msgid "Delete the selected user account"
+msgstr "Izbriši izbran uporabniški račun"
 
 #: ../panels/user-accounts/um-user-panel.c:957
 #: ../panels/user-accounts/um-user-panel.c:1230
 msgid ""
-"To delete the selected user,\n"
+"To delete the selected user account,\n"
 "click the * icon first"
 msgstr ""
-"Za izbris izbranega uporabnika,\n"
+"Za izbris izbranega uporabniškega računa,\n"
 "kliknite na ikono *"
 
 #: ../panels/user-accounts/um-user-panel.c:1134
@@ -4118,18 +4208,26 @@ msgid "Account _type"
 msgstr "Vrsta _računa"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+msgid "Add User Account"
+msgstr "Dodaj uporabniški račun"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "Login Options"
 msgstr "Možnosti prijave"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "Remove User Account"
+msgstr "Odstrani uporabniški račun"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
 msgid "_Fingerprint Login"
 msgstr "Prijava s _prstnimi odtisi"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "_Language"
 msgstr "_Jezik"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "_Password"
 msgstr "_Geslo"
 
@@ -4334,13 +4432,20 @@ msgstr ""
 "Zaženite '%s --help' za pregled celotnega seznama možnosti ukazne vrstice.\n"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:1
-#: ../shell/shell.ui.h:1
+#: ../shell/shell.ui.h:2
 msgid "System Settings"
 msgstr "Sistemske nastavitve"
 
 #: ../shell/gnomecc.directory.in.h:1
 msgid "Control Center"
 msgstr "Nadzorno središče"
+
+#: ../shell/shell.ui.h:1
+msgid "All Settings"
+msgstr "Vse nastavitve"
+
+#~ msgid "Create a user"
+#~ msgstr "Ustvari novega uporabnika"
 
 #~ msgid "Ask me"
 #~ msgstr "Vprašaj me"
@@ -4354,9 +4459,6 @@ msgstr "Nadzorno središče"
 #~ msgid ""
 #~ "Only profiles that are compatible with the device will be listed above."
 #~ msgstr "Zgoraj bodo navedeni le profili, ki so združljivi z napravo."
-
-#~ msgid "_All Settings"
-#~ msgstr "_Vse nastavitve"
 
 #~ msgid "Media and Autorun"
 #~ msgstr "Medij in samodejno zaganjanje"
@@ -4408,9 +4510,6 @@ msgstr "Nadzorno središče"
 #~ msgid "Updates Available"
 #~ msgstr "Posodobitve so na voljo"
 
-#~ msgid "Region:"
-#~ msgstr "Območje:"
-
 #~ msgid "On AC _power:"
 #~ msgstr "Napajanje iz _omrežja:"
 
@@ -4444,12 +4543,6 @@ msgstr "Nadzorno središče"
 
 #~ msgid "<span size=\"x-large\">Normal</span>"
 #~ msgstr "<span size=\"x-large\">Običajen</span>"
-
-#~ msgid "Add printer"
-#~ msgstr "Dodaj tiskalnik"
-
-#~ msgid "Remove printer"
-#~ msgstr "Odstrani tiskalnik"
 
 #~ msgid "Anti-Clockwise"
 #~ msgstr "V nasprotni smeri urinega kazalca"
@@ -4495,9 +4588,6 @@ msgstr "Nadzorno središče"
 
 #~ msgid "---"
 #~ msgstr "---"
-
-#~ msgid "Printing..."
-#~ msgstr "Tiskanje ..."
 
 #~ msgid "Beep when a modifer key is pressed"
 #~ msgstr "Zapiskaj ob pritisku na spremenilno tipko"
@@ -4779,12 +4869,6 @@ msgstr "Nadzorno središče"
 
 #~ msgid "List of keyboard layouts selected for usage"
 #~ msgstr "Seznam razporeditev tipkovnice izbranih za uporabo"
-
-#~ msgid "Move _Down"
-#~ msgstr "Premakni navz_dol"
-
-#~ msgid "Move _Up"
-#~ msgstr "Premakni _navzgor"
 
 #~ msgid "Move the selected keyboard layout down in the list"
 #~ msgstr "Premakni izbrano razporeditev tipkovnice nižje na seznamu"
