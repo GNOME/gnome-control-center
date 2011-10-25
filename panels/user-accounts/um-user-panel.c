@@ -922,7 +922,7 @@ on_permission_changed (GPermission *permission,
         widget = get_widget (d, "add-user-toolbutton");
         gtk_widget_set_sensitive (widget, is_authorized);
         if (is_authorized) {
-                setup_tooltip_with_embedded_icon (widget, _("Create a user"), NULL, NULL);
+                setup_tooltip_with_embedded_icon (widget, _("Create a user account"), NULL, NULL);
         }
         else {
                 gchar *names[3];
@@ -933,7 +933,7 @@ on_permission_changed (GPermission *permission,
                 names[2] = NULL;
                 icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
                 setup_tooltip_with_embedded_icon (widget,
-                                                  _("To create a user,\nclick the * icon first"),
+                                                  _("To create a user account,\nclick the * icon first"),
                                                   "*",
                                                   icon);
                 g_object_unref (icon);
@@ -942,7 +942,7 @@ on_permission_changed (GPermission *permission,
         widget = get_widget (d, "remove-user-toolbutton");
         gtk_widget_set_sensitive (widget, is_authorized && !self_selected);
         if (is_authorized) {
-                setup_tooltip_with_embedded_icon (widget, _("Delete the selected user"), NULL, NULL);
+                setup_tooltip_with_embedded_icon (widget, _("Delete the selected user account"), NULL, NULL);
         }
         else {
                 gchar *names[3];
@@ -954,7 +954,7 @@ on_permission_changed (GPermission *permission,
                 icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
 
                 setup_tooltip_with_embedded_icon (widget,
-                                                  _("To delete the selected user,\nclick the * icon first"),
+                                                  _("To delete the selected user account,\nclick the * icon first"),
                                                   "*",
                                                   icon);
                 g_object_unref (icon);
@@ -1222,12 +1222,12 @@ setup_main_window (UmUserPanelPrivate *d)
         names[2] = NULL;
         icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
         setup_tooltip_with_embedded_icon (button,
-                                          _("To create a user,\nclick the * icon first"),
+                                          _("To create a user account,\nclick the * icon first"),
                                           "*",
                                           icon);
         button = get_widget (d, "remove-user-toolbutton");
         setup_tooltip_with_embedded_icon (button,
-                                          _("To delete the selected user,\nclick the * icon first"),
+                                          _("To delete the selected user account,\nclick the * icon first"),
                                           "*",
                                           icon);
         g_object_unref (icon);
