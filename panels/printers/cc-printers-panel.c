@@ -292,12 +292,14 @@ on_cups_notification (GDBusConnection *connection,
       if ((http = httpConnectEncrypt (cupsServer (), ippPort (),
                                      cupsEncryption ())) != NULL)
         {
-          request = ippNewRequest(IPP_GET_JOB_ATTRIBUTES);
-          ippAddString(request, IPP_TAG_OPERATION, IPP_TAG_URI,
+          request = ippNewRequest (IPP_GET_JOB_ATTRIBUTES);
+          ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
                        "job-uri", NULL, job_uri);
+          ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
+                        "requesting-user-name", NULL, cupsUser ());
           ippAddStrings (request, IPP_TAG_OPERATION, IPP_TAG_KEYWORD,
                          "requested-attributes", G_N_ELEMENTS (requested_attrs), NULL, requested_attrs);
-          response = cupsDoRequest(http, request, "/");
+          response = cupsDoRequest (http, request, "/");
 
           if (response)
             {
