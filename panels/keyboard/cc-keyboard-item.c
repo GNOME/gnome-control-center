@@ -61,7 +61,7 @@ static gboolean
 binding_from_string (const char             *str,
                      guint                  *accelerator_key,
                      guint                  *keycode,
-                     EggVirtualModifierType *accelerator_mods)
+                     GdkModifierType        *accelerator_mods)
 {
   g_return_val_if_fail (accelerator_key != NULL, FALSE);
 
@@ -73,7 +73,7 @@ binding_from_string (const char             *str,
       return TRUE;
     }
 
-  egg_accelerator_parse_virtual (str, accelerator_key, keycode, accelerator_mods);
+  egg_accelerator_parse_virtual (str, accelerator_key, keycode, (EggVirtualModifierType *) accelerator_mods);
 
   if (*accelerator_key == 0)
     return FALSE;

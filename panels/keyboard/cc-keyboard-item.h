@@ -61,7 +61,7 @@ typedef struct
   /* FIXME move to priv? */
   guint keyval;
   guint keycode;
-  EggVirtualModifierType mask;
+  GdkModifierType mask;
   BindingGroupType group;
   GtkTreeModel *model;
   char *description;

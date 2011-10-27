@@ -23,7 +23,6 @@
 
 #include <glib/gi18n.h>
 #include <gconf/gconf-client.h>
-#include "eggcellrendererkeys.h"
 #include "keyboard-shortcuts.h"
 #include "cc-keyboard-item.h"
 #include "wm-common.h"
@@ -778,8 +777,8 @@ accel_set_func (GtkTreeViewColumn *tree_column,
     g_object_set (cell,
                   "visible", TRUE,
                   "editable", FALSE,
-                  "accel_key", item->keyval,
-                  "accel_mask", item->mask,
+                  "accel-key", item->keyval,
+                  "accel-mods", item->mask,
                   "keycode", item->keycode,
                   "style", PANGO_STYLE_ITALIC,
                   NULL);
@@ -787,8 +786,8 @@ accel_set_func (GtkTreeViewColumn *tree_column,
     g_object_set (cell,
                   "visible", TRUE,
                   "editable", TRUE,
-                  "accel_key", item->keyval,
-                  "accel_mask", item->mask,
+                  "accel-key", item->keyval,
+                  "accel-mods", item->mask,
                   "keycode", item->keycode,
                   "style", PANGO_STYLE_NORMAL,
                   NULL);
@@ -1180,7 +1179,7 @@ static const guint forbidden_keyvals[] = {
 static char*
 binding_name (guint                   keyval,
               guint                   keycode,
-              EggVirtualModifierType  mask,
+              GdkModifierType         mask,
               gboolean                translate)
 {
   if (keyval != 0 || keycode != 0)
@@ -1226,7 +1225,7 @@ typedef struct {
   CcKeyboardItem *orig_item;
   CcKeyboardItem *conflict_item;
   guint new_keyval;
-  EggVirtualModifierType new_mask;
+  GdkModifierType new_mask;
   guint new_keycode;
 } CcUniquenessData;
 
@@ -1276,7 +1275,7 @@ static void
 accel_edited_callback (GtkCellRendererText   *cell,
                        const char            *path_string,
                        guint                  keyval,
-                       EggVirtualModifierType mask,
+                       GdkModifierType        mask,
                        guint                  keycode,
                        GtkTreeView           *view)
 {
@@ -1301,7 +1300,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
     return;
 
   /* CapsLock isn't supported as a keybinding modifier, so keep it from confusing us */
-  mask &= ~EGG_VIRTUAL_LOCK_MASK;
+  mask &= ~GDK_LOCK_MASK;
 
   data.orig_item = item;
   data.new_keyval = keyval;
@@ -1356,9 +1355,11 @@ accel_edited_callback (GtkCellRendererText   *cell,
         gtk_widget_destroy (dialog);
 
         /* set it back to its previous value. */
-        egg_cell_renderer_keys_set_accelerator
-          (EGG_CELL_RENDERER_KEYS (cell),
-           item->keyval, item->keycode, item->mask);
+        g_object_set (G_OBJECT (cell),
+                      "accel-key", item->keyval,
+                      "keycode", item->keycode,
+                      "accel-mods", item->mask,
+                      NULL);
         return;
       }
     }
@@ -1409,10 +1410,11 @@ accel_edited_callback (GtkCellRendererText   *cell,
       else
         {
           /* set it back to its previous value. */
-          egg_cell_renderer_keys_set_accelerator (EGG_CELL_RENDERER_KEYS (cell),
-                                                  item->keyval,
-                                                  item->keycode,
-                                                  item->mask);
+        g_object_set (G_OBJECT (cell),
+                      "accel-key", item->keyval,
+                      "keycode", item->keycode,
+                      "accel-mods", item->mask,
+                      NULL);
         }
 
       return;
@@ -1862,8 +1864,8 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   gtk_tree_view_append_column (treeview, column);
   gtk_tree_view_column_set_sort_column_id (column, DETAIL_DESCRIPTION_COLUMN);
 
-  renderer = (GtkCellRenderer *) g_object_new (EGG_TYPE_CELL_RENDERER_KEYS,
-                                               "accel_mode", EGG_CELL_RENDERER_KEYS_MODE_X,
+  renderer = (GtkCellRenderer *) g_object_new (GTK_TYPE_CELL_RENDERER_ACCEL,
+                                               "accel-mode", GTK_CELL_RENDERER_ACCEL_MODE_OTHER,
                                                NULL);
 
   g_signal_connect (renderer, "accel_edited",
