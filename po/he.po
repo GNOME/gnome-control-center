@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-22 12:59+0200\n"
-"PO-Revision-Date: 2011-10-22 13:06+0200\n"
+"POT-Creation-Date: 2011-10-28 13:50+0200\n"
+"PO-Revision-Date: 2011-10-28 13:56+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "Language: he\n"
@@ -152,7 +152,7 @@ msgstr "גילוי"
 #: ../panels/bluetooth/cc-bluetooth-panel.c:539
 #, c-format
 msgid "Visibility of “%s”"
-msgstr "גילוי של ”%s“"
+msgstr "גילוי של „%s“"
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:583
 #, c-format
@@ -195,15 +195,24 @@ msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #: ../panels/bluetooth/bluetooth.ui.h:9
+#: ../panels/network/network.ui.h:18
+msgid "Remove Device"
+msgstr "הסרת התקן"
+
+#: ../panels/bluetooth/bluetooth.ui.h:10
 msgid "Send Files..."
 msgstr "שליחת קבצים..."
 
-#: ../panels/bluetooth/bluetooth.ui.h:10
+#: ../panels/bluetooth/bluetooth.ui.h:11
+msgid "Set Up New Device"
+msgstr "הגדרת התקן חדש"
+
+#: ../panels/bluetooth/bluetooth.ui.h:12
 #: ../panels/universal-access/uap.ui.h:60
 msgid "Sound Settings"
 msgstr "הגדרות השמע"
 
-#: ../panels/bluetooth/bluetooth.ui.h:11
+#: ../panels/bluetooth/bluetooth.ui.h:13
 msgid "Type"
 msgstr "סוג"
 
@@ -647,7 +656,7 @@ msgid "Video CD"
 msgstr "תקליטור וידאו (VCD)"
 
 #: ../panels/info/cc-info-panel.c:1474
-#: ../panels/keyboard/keyboard-shortcuts.c:1802
+#: ../panels/keyboard/keyboard-shortcuts.c:1803
 msgid "Section"
 msgstr "אגף"
 
@@ -671,20 +680,20 @@ msgstr "מדיה נתיקה"
 msgid "Graphics"
 msgstr "גרפיקה"
 
-#: ../panels/info/cc-info-panel.c:1700
+#: ../panels/info/cc-info-panel.c:1701
 #, c-format
 msgid "Version %s"
 msgstr "גרסה %s"
 
-#: ../panels/info/cc-info-panel.c:1750
+#: ../panels/info/cc-info-panel.c:1751
 msgid "Install Updates"
 msgstr "התקנת עדכונים"
 
-#: ../panels/info/cc-info-panel.c:1754
+#: ../panels/info/cc-info-panel.c:1755
 msgid "System Up-To-Date"
 msgstr "המערכת עדכנית"
 
-#: ../panels/info/cc-info-panel.c:1758
+#: ../panels/info/cc-info-panel.c:1759
 msgid "Checking for Updates"
 msgstr "מתבצעת בדיקה אחר עדכונים"
 
@@ -887,7 +896,7 @@ msgid "Log out"
 msgstr "יציאה"
 
 #: ../panels/keyboard/01-system.xml.in.h:3
-#: ../panels/region/gnome-region-panel.ui.h:24
+#: ../panels/region/gnome-region-panel.ui.h:33
 msgid "System"
 msgstr "מערכת"
 
@@ -928,49 +937,12 @@ msgstr "החלפת הפעלת מקריא מסך"
 msgid "Universal Access"
 msgstr "גישה אוניברסלית"
 
-#: ../panels/keyboard/eggcellrendererkeys.c:21
-msgid "New shortcut..."
-msgstr "קיצור דרך חדש..."
-
-#: ../panels/keyboard/eggcellrendererkeys.c:164
-#: ../panels/keyboard/eggcellrendererkeys.c:165
-msgid "Accelerator key"
-msgstr "מקש קיצור"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:174
-#: ../panels/keyboard/eggcellrendererkeys.c:175
-msgid "Accelerator modifiers"
-msgstr "מאיצי החלפה"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:183
-#: ../panels/keyboard/eggcellrendererkeys.c:184
-msgid "Accelerator keycode"
-msgstr "קוד מקש האצה"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:194
-msgid "Accel Mode"
-msgstr "מצב האצה"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:195
-msgid "The type of accelerator."
-msgstr "סוג הקיצור."
-
-#. translators:
-#. * The device has been disabled
-#: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/keyboard-shortcuts.c:1191
-#: ../panels/sound/gvc-mixer-control.c:1086
-#: ../panels/user-accounts/um-fingerprint-dialog.c:177
-#: ../panels/user-accounts/um-fingerprint-dialog.c:178
-msgid "Disabled"
-msgstr "מנוטרל"
-
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 msgid "Change keyboard settings"
 msgstr "שינוי הגדרות המקלדת"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
 msgid "Keyboard"
 msgstr "מקלדת"
 
@@ -979,151 +951,168 @@ msgstr "מקלדת"
 msgid "Shortcut;Repeat;Blink;"
 msgstr "קיצור דרך;חזרה;הבהוב;"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:646
-#: ../panels/keyboard/keyboard-shortcuts.c:654
-#: ../panels/keyboard/keyboard-shortcuts.c:966
-#: ../panels/keyboard/keyboard-shortcuts.c:1564
-#: ../panels/keyboard/keyboard-shortcuts.c:1568
+#: ../panels/keyboard/keyboard-shortcuts.c:645
+#: ../panels/keyboard/keyboard-shortcuts.c:653
+#: ../panels/keyboard/keyboard-shortcuts.c:965
+#: ../panels/keyboard/keyboard-shortcuts.c:1566
+#: ../panels/keyboard/keyboard-shortcuts.c:1570
 msgid "Custom Shortcuts"
 msgstr "קיצורי דרך מותאמים אישית"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:814
+#: ../panels/keyboard/keyboard-shortcuts.c:813
 msgid "<Unknown Action>"
 msgstr "<פעולה לא ידועה>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1217
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/keyboard-shortcuts.c:1190
+#: ../panels/sound/gvc-mixer-control.c:1086
+#: ../panels/user-accounts/um-fingerprint-dialog.c:177
+#: ../panels/user-accounts/um-fingerprint-dialog.c:178
+msgid "Disabled"
+msgstr "מנוטרל"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1216
 msgid "Error saving the new shortcut"
 msgstr "שגיאה בשמירת קיצור הדרך החדש"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1350
+#: ../panels/keyboard/keyboard-shortcuts.c:1349
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type using this key.\n"
 "Please try with a key such as Control, Alt or Shift at the same time."
 msgstr ""
-"לא ניתן להשתמש בקיצור הדרך \"%s\" מכיוון שלא ניתן יהיה להקליד באמצעות מקש זה.\n"
+"לא ניתן להשתמש בקיצור הדרך „%s“ מכיוון שלא ניתן יהיה להקליד באמצעות מקש זה.\n"
 "נא לנסות מקש או צירוף מקשים שונה כגון לחיצה על Ctrl, Alt או Shift יחדיו."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1380
+#: ../panels/keyboard/keyboard-shortcuts.c:1381
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
 "\"%s\""
 msgstr ""
-"קיצור הדרך \"%s\" כבר משמש ל:\n"
-"\"%s\"‏"
+"קיצור הדרך „%s“ כבר משמש ל:\n"
+"„%s“"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1385
+#: ../panels/keyboard/keyboard-shortcuts.c:1386
 #, c-format
 msgid "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
-msgstr "אם קיצור הדרך יוקצה מחדש אל %s\", קיצור הדרך \"%s\" יבוטל."
+msgstr "אם קיצור הדרך יוקצה מחדש אל „%s“, קיצור הדרך „%s“ יבוטל."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1391
+#: ../panels/keyboard/keyboard-shortcuts.c:1392
 msgid "_Reassign"
 msgstr "הקצאה _מחדש"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1503
+#: ../panels/keyboard/keyboard-shortcuts.c:1505
 msgid "Too many custom shortcuts"
 msgstr "יותר מדי קיצורי דרך מותאמים אישית"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1855
+#: ../panels/keyboard/keyboard-shortcuts.c:1856
 msgid "Action"
 msgstr "פעולה"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1878
+#: ../panels/keyboard/keyboard-shortcuts.c:1879
 msgid "Shortcut"
 msgstr "קיצור"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
+msgid "Add Shortcut"
+msgstr "הוספת קיצור דרך"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "C_ommand:"
 msgstr "פקו_דה:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 msgid "Cursor Blinking"
 msgstr "הבהוב סמן"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "Cursor _blinks in text fields"
 msgstr "סמן מה_בהב בשדות טקסט"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
 msgid "Cursor blink speed"
 msgstr "מהירות הבהוב הסמן"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
 msgid "Custom Shortcut"
 msgstr "קיצור דרך מותאם אישית"
 
 #. fast acceleration
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
 #: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "Fast"
 msgstr "מהיר"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid "Key presses _repeat when key is held down"
 msgstr "לחיצת המקש _חוזרת כאשר המקש נשאר לחוץ"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 msgid "Layout Settings"
 msgstr "הגדרות פריסה"
 
 #. long delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 #: ../panels/mouse/gnome-mouse-properties.ui.h:16
 #: ../panels/universal-access/uap.ui.h:38
 #: ../panels/universal-access/zoom-options.ui.h:13
 msgid "Long"
 msgstr "ארוך"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+msgid "Remove Shortcut"
+msgstr "הסרת קיצור דרך"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
 msgid "Repeat Keys"
 msgstr "מקשים חוזרים"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 msgid "Repeat keys speed"
 msgstr "מהירות החזרת מקשים"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
 msgid "S_peed:"
 msgstr "_מהירות:"
 
 #. short delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
 #: ../panels/universal-access/uap.ui.h:54
 #: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Short"
 msgstr "קצר"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
 msgid "Shortcuts"
 msgstr "קיצורי דרך"
 
 #. slow acceleration
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
 #: ../panels/mouse/gnome-mouse-properties.ui.h:26
 msgid "Slow"
 msgstr "איטי"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
 msgid "To edit a shortcut, click the row and hold down the new keys or press Backspace to clear."
 msgstr "כדי לערוך מקש קיצור דרך, יש ללחוץ על השורה המתאימה ולהחזיק את צירוף המקשים החדש או ללחוץ על Backspace כדי למחוק."
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
 #: ../panels/universal-access/uap.ui.h:67
 msgid "Typing"
 msgstr "הקלדה"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
 msgid "_Delay:"
 msgstr "ה_שהיה:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
 msgid "_Name:"
 msgstr "_שם:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:23
 msgid "_Speed:"
 msgstr "_מהירות:"
 
@@ -1142,6 +1131,7 @@ msgstr "_כניסה"
 #. translators: This is the title of the "Add Account" dialogue.
 #. * The title is not visible when using GNOME Shell
 #: ../panels/online-accounts/cc-online-accounts-panel.c:461
+#: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "Add Account"
 msgstr "הוספת חשבון"
 
@@ -1190,130 +1180,134 @@ msgstr "ניהול החשבונות המקוונים"
 msgid "Online Accounts"
 msgstr "חשבונות מקוונים"
 
-#: ../panels/online-accounts/online-accounts.ui.h:1
+#: ../panels/online-accounts/online-accounts.ui.h:2
+msgid "Remove Account"
+msgstr "הסרת חשבון"
+
+#: ../panels/online-accounts/online-accounts.ui.h:3
 msgid "Select an account"
 msgstr "נא לבחור חשבון"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:520
+#: ../panels/printers/cc-printers-panel.c:522
 msgid "Low on toner"
 msgstr "הטונר כמעט נגמר"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:522
+#: ../panels/printers/cc-printers-panel.c:524
 msgid "Out of toner"
 msgstr "נגמר הטונר"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:525
+#: ../panels/printers/cc-printers-panel.c:527
 msgid "Low on developer"
 msgstr "נותר מעט נייר צילום"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:528
+#: ../panels/printers/cc-printers-panel.c:530
 msgid "Out of developer"
 msgstr "נגמר נייר הצילום"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:530
+#: ../panels/printers/cc-printers-panel.c:532
 msgid "Low on a marker supply"
 msgstr "נותרה מעט אספקת צבע"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:532
+#: ../panels/printers/cc-printers-panel.c:534
 msgid "Out of a marker supply"
 msgstr "נגמרה אספקת הצבע"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:534
+#: ../panels/printers/cc-printers-panel.c:536
 msgid "Open cover"
 msgstr "הכיסוי פתוח"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:536
+#: ../panels/printers/cc-printers-panel.c:538
 msgid "Open door"
 msgstr "הדלת פתוחה"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:538
+#: ../panels/printers/cc-printers-panel.c:540
 msgid "Low on paper"
 msgstr "נותר מעט נייר"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:540
+#: ../panels/printers/cc-printers-panel.c:542
 msgid "Out of paper"
 msgstr "נגמר הנייר"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:542
+#: ../panels/printers/cc-printers-panel.c:544
 msgctxt "printer state"
 msgid "Offline"
 msgstr "מנותקת"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:544
+#: ../panels/printers/cc-printers-panel.c:546
 msgctxt "printer state"
 msgid "Paused"
 msgstr "מושהית"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:546
+#: ../panels/printers/cc-printers-panel.c:548
 msgid "Waste receptacle almost full"
 msgstr "כלי קיבול הפסולת כמעט מלא"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:548
+#: ../panels/printers/cc-printers-panel.c:550
 msgid "Waste receptacle full"
 msgstr "כלי קיבול הפסולת מלא"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:550
+#: ../panels/printers/cc-printers-panel.c:552
 msgid "The optical photo conductor is near end of life"
 msgstr "הפוטו מוליך האופטי עומד לסיים את חייו"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:552
+#: ../panels/printers/cc-printers-panel.c:554
 msgid "The optical photo conductor is no longer functioning"
 msgstr "הפוטו מוליך האופטי אינו מתפקד עוד"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:724
+#: ../panels/printers/cc-printers-panel.c:726
 msgctxt "printer state"
 msgid "Ready"
 msgstr "מוכנה"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:728
+#: ../panels/printers/cc-printers-panel.c:730
 msgctxt "printer state"
 msgid "Processing"
 msgstr "מעבדת"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:732
+#: ../panels/printers/cc-printers-panel.c:734
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "נעצרה"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:851
+#: ../panels/printers/cc-printers-panel.c:853
 msgid "Toner Level"
 msgstr "רמת הטונר"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:854
+#: ../panels/printers/cc-printers-panel.c:856
 msgid "Ink Level"
 msgstr "רמת הדיו"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:857
+#: ../panels/printers/cc-printers-panel.c:859
 msgid "Supply Level"
 msgstr "רמת האספקה"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:872
-#: ../panels/printers/cc-printers-panel.c:1258
+#: ../panels/printers/cc-printers-panel.c:874
+#: ../panels/printers/cc-printers-panel.c:1260
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -1322,80 +1316,80 @@ msgstr[1] "%u פעילות"
 msgstr[2] "2 פעילות"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:977
+#: ../panels/printers/cc-printers-panel.c:979
 msgid "No printers available"
 msgstr "אין מדפסות זמינות"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1301
+#: ../panels/printers/cc-printers-panel.c:1303
 msgctxt "print job"
 msgid "Pending"
 msgstr "ממתינה"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1305
+#: ../panels/printers/cc-printers-panel.c:1307
 msgctxt "print job"
 msgid "Held"
 msgstr "מוחזקת"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1309
+#: ../panels/printers/cc-printers-panel.c:1311
 msgctxt "print job"
 msgid "Processing"
 msgstr "מעבדת"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1313
+#: ../panels/printers/cc-printers-panel.c:1315
 msgctxt "print job"
 msgid "Stopped"
 msgstr "נעצרה"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1317
+#: ../panels/printers/cc-printers-panel.c:1319
 msgctxt "print job"
 msgid "Canceled"
 msgstr "בוטלה"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1321
+#: ../panels/printers/cc-printers-panel.c:1323
 msgctxt "print job"
 msgid "Aborted"
 msgstr "נפסקה"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1325
+#: ../panels/printers/cc-printers-panel.c:1327
 msgctxt "print job"
 msgid "Completed"
 msgstr "הושלמה"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1408
+#: ../panels/printers/cc-printers-panel.c:1410
 msgid "Job Title"
 msgstr "כותרת העבודה"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1417
+#: ../panels/printers/cc-printers-panel.c:1419
 msgid "Job State"
 msgstr "מצב המשימה"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1423
+#: ../panels/printers/cc-printers-panel.c:1425
 msgid "Time"
 msgstr "זמן"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2019
+#: ../panels/printers/cc-printers-panel.c:2021
 msgid "Failed to add new printer."
 msgstr "הוספת המדפסת החדשה נכשלה."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2223
-#: ../panels/printers/cc-printers-panel.c:2237
+#: ../panels/printers/cc-printers-panel.c:2225
+#: ../panels/printers/cc-printers-panel.c:2239
 msgid "Test page"
 msgstr "דף בדיקה"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2484
+#: ../panels/printers/cc-printers-panel.c:2486
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "לא ניתן לטעון את מנשק המשתמש: %s"
@@ -1499,41 +1493,69 @@ msgid "Add New Printer"
 msgstr "הוספת מדפסת חדשה"
 
 #: ../panels/printers/printers.ui.h:5
+msgid "Add Printer"
+msgstr "הוספת מדפסת"
+
+#: ../panels/printers/printers.ui.h:6
+msgid "Add User"
+msgstr "הוספת משתמש"
+
+#: ../panels/printers/printers.ui.h:7
 msgid "Allowed users"
 msgstr "משתמשים מורשים"
 
-#: ../panels/printers/printers.ui.h:6
+#: ../panels/printers/printers.ui.h:8
+msgid "Cancel Print Job"
+msgstr "ביטול משימות הדפסה"
+
+#: ../panels/printers/printers.ui.h:9
 #: ../panels/network/cc-network-panel.c:1990
 #: ../panels/network/cc-network-panel.c:1993
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:12
 msgid "IP Address"
 msgstr "כתובת IP"
 
-#: ../panels/printers/printers.ui.h:7
+#: ../panels/printers/printers.ui.h:10
 msgid "Jobs"
 msgstr "משימות"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:9
+#: ../panels/printers/printers.ui.h:12
 msgid "Location"
 msgstr "מיקום"
 
-#: ../panels/printers/printers.ui.h:10
+#: ../panels/printers/printers.ui.h:13
 msgid "Model"
 msgstr "דגם"
 
+#: ../panels/printers/printers.ui.h:14
+msgid "Pause Printing"
+msgstr "השהיית ההדפסה"
+
 #. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:12
+#: ../panels/printers/printers.ui.h:16
 msgid "Print _Test Page"
 msgstr "הדפסת דף _ניסיון"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:14
+#: ../panels/printers/printers.ui.h:18
 msgid "Printer Options"
 msgstr "אפשרויות המדפסת"
 
+#: ../panels/printers/printers.ui.h:19
+msgid "Remove Printer"
+msgstr "הסרת מדפסת"
+
+#: ../panels/printers/printers.ui.h:20
+msgid "Remove User"
+msgstr "הסרת משתמש"
+
+#: ../panels/printers/printers.ui.h:21
+msgid "Resume Printing"
+msgstr "המשך פעולת מדפסת"
+
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:16
+#: ../panels/printers/printers.ui.h:23
 msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
@@ -1542,27 +1564,27 @@ msgstr ""
 "אינם זמינים, עמך הסליחה!"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:19
+#: ../panels/printers/printers.ui.h:26
 msgid "Supply"
 msgstr "אספקה"
 
 #. Translators: Switch back to printer's info tab
-#: ../panels/printers/printers.ui.h:21
+#: ../panels/printers/printers.ui.h:28
 msgid "_Back"
 msgstr "_חזרה"
 
 #. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:30
 msgid "_Default"
 msgstr "_בררת מחדל"
 
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:25
+#: ../panels/printers/printers.ui.h:32
 msgid "_Options"
 msgstr "א_פשרויות"
 
 #. Tanslators: Switch to tab containing printer's jobs
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:34
 msgid "_Show"
 msgstr "ה_צגה"
 
@@ -1591,77 +1613,113 @@ msgid "Keyboard Layout Options"
 msgstr "אפשרויות פריסת מקלדת"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
+msgid "Add Language"
+msgstr "הוספת שפה"
+
+#: ../panels/region/gnome-region-panel.ui.h:2
+msgid "Add Layout"
+msgstr "הוספת פריסה"
+
+#: ../panels/region/gnome-region-panel.ui.h:3
+msgid "Add Region"
+msgstr "הוספת אזור"
+
+#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Allow different layouts for individual windows"
 msgstr "מתן האפשרות להחלת פריסה נפרדת בכל חלון"
 
-#: ../panels/region/gnome-region-panel.ui.h:2
+#: ../panels/region/gnome-region-panel.ui.h:5
 #: ../panels/region/gnome-region-panel-system.c:406
 msgid "Copy Settings..."
 msgstr "העתקת ההגדרות..."
 
-#: ../panels/region/gnome-region-panel.ui.h:3
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Currency"
 msgstr "מטבע"
 
-#: ../panels/region/gnome-region-panel.ui.h:4
+#: ../panels/region/gnome-region-panel.ui.h:7
 msgid "Dates"
 msgstr "תאריכים"
 
 #. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
-#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Display language:"
 msgstr "שפת התצוגה:"
 
-#: ../panels/region/gnome-region-panel.ui.h:7
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "Examples"
 msgstr "דוגמאות"
 
-#: ../panels/region/gnome-region-panel.ui.h:8
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Format:"
 msgstr "תבנית:"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:12
 msgid "Formats"
 msgstr "תבניות"
 
-#: ../panels/region/gnome-region-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "Input source:"
 msgstr "מקור הקלט:"
 
-#: ../panels/region/gnome-region-panel.ui.h:11
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "Install languages..."
 msgstr "התקנת שפות..."
 
-#: ../panels/region/gnome-region-panel.ui.h:12
+#: ../panels/region/gnome-region-panel.ui.h:15
 msgid "Language"
 msgstr "שפה"
 
-#: ../panels/region/gnome-region-panel.ui.h:13
+#: ../panels/region/gnome-region-panel.ui.h:16
 msgid "Layouts"
 msgstr "פריסות"
 
-#: ../panels/region/gnome-region-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:17
 msgid "Measurement"
 msgstr "מדידה"
 
-#: ../panels/region/gnome-region-panel.ui.h:15
+#: ../panels/region/gnome-region-panel.ui.h:18
+msgid "Move Down"
+msgstr "הזזה למטה"
+
+#: ../panels/region/gnome-region-panel.ui.h:19
+msgid "Move Up"
+msgstr "הזזה למעלה"
+
+#: ../panels/region/gnome-region-panel.ui.h:20
 msgid "New windows use the default layout"
 msgstr "חלונות חדשים ישתמשו בפריסת בררת המחדל"
 
-#: ../panels/region/gnome-region-panel.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "New windows use the previous window's layout"
 msgstr "חלונות חדשים ישתמשו בפריסת החלון הקודם"
 
-#: ../panels/region/gnome-region-panel.ui.h:17
+#: ../panels/region/gnome-region-panel.ui.h:22
 msgid "Numbers"
 msgstr "מספרים"
 
-#: ../panels/region/gnome-region-panel.ui.h:18
+#: ../panels/region/gnome-region-panel.ui.h:23
+msgid "Preview Layout"
+msgstr "תצוגה מקדימה של הפריסה"
+
+#: ../panels/region/gnome-region-panel.ui.h:24
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
 msgstr "אזור ושפה"
 
-#: ../panels/region/gnome-region-panel.ui.h:19
+#: ../panels/region/gnome-region-panel.ui.h:25
+msgid "Remove Language"
+msgstr "הסרת שפה"
+
+#: ../panels/region/gnome-region-panel.ui.h:26
+msgid "Remove Layout"
+msgstr "הסרת פריסה"
+
+#: ../panels/region/gnome-region-panel.ui.h:27
+msgid "Remove Region"
+msgstr "הסרת אזור"
+
+#: ../panels/region/gnome-region-panel.ui.h:28
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1669,44 +1727,44 @@ msgstr ""
 "החלפת הגדרות פריסת המקלדת הנוכחית\n"
 "בהגדרות בררת המחדל"
 
-#: ../panels/region/gnome-region-panel.ui.h:21
+#: ../panels/region/gnome-region-panel.ui.h:30
 msgid "Reset to De_faults"
 msgstr "החזרה ל_בררת המחדל"
 
-#: ../panels/region/gnome-region-panel.ui.h:22
+#: ../panels/region/gnome-region-panel.ui.h:31
 msgid "Select a display language (change will be applied next time you log in)"
 msgstr "יש לבחור שפת תצוגה (השינוי יחול עם הכניסה הבאה לסביבת המשתמש)"
 
-#: ../panels/region/gnome-region-panel.ui.h:23
+#: ../panels/region/gnome-region-panel.ui.h:32
 msgid "Select a region (change will be applied the next time you log in)"
 msgstr "יש לבחור מיקום (השינוי יחול עם הכניסה הבאה לסביבת המשתמש)"
 
-#: ../panels/region/gnome-region-panel.ui.h:25
+#: ../panels/region/gnome-region-panel.ui.h:34
 msgid "System settings"
 msgstr "הגדרות המערכת"
 
-#: ../panels/region/gnome-region-panel.ui.h:26
+#: ../panels/region/gnome-region-panel.ui.h:35
 #: ../panels/region/gnome-region-panel-system.c:400
 msgid "The login screen, system accounts and new user accounts use the system-wide Region and Language settings. You may change the system settings to match yours."
 msgstr "מסך הכניסה, חשבונות המערכת וחשבונות המשתמש החדשים משתמשים בהגדרות השפה והאזור הכלליות. ניתן לשנות את הגדרות המערכת כדי שיתאימו להעדפותיך."
 
-#: ../panels/region/gnome-region-panel.ui.h:27
+#: ../panels/region/gnome-region-panel.ui.h:36
 msgid "Times"
 msgstr "זמנים"
 
-#: ../panels/region/gnome-region-panel.ui.h:28
+#: ../panels/region/gnome-region-panel.ui.h:37
 msgid "Use the same layout for all windows"
 msgstr "שימוש באותה הפריסה לכל החלונות"
 
-#: ../panels/region/gnome-region-panel.ui.h:29
+#: ../panels/region/gnome-region-panel.ui.h:38
 msgid "View and edit keyboard layout options"
 msgstr "צפייה ועריכה באפשרויות פריסת המקלדת"
 
-#: ../panels/region/gnome-region-panel.ui.h:30
+#: ../panels/region/gnome-region-panel.ui.h:39
 msgid "Your settings"
 msgstr "ההגדרות שלך"
 
-#: ../panels/region/gnome-region-panel.ui.h:31
+#: ../panels/region/gnome-region-panel.ui.h:40
 msgid "_Options..."
 msgstr "_אפשרויות..."
 
@@ -1931,12 +1989,12 @@ msgid "%d Mb/s"
 msgstr "%d מסל״ש"
 
 #: ../panels/network/cc-network-panel.c:1986
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:13
 msgid "IPv4 Address"
 msgstr "כתובת IPv4"
 
 #: ../panels/network/cc-network-panel.c:1987
-#: ../panels/network/network.ui.h:13
+#: ../panels/network/network.ui.h:14
 msgid "IPv6 Address"
 msgstr "כתובת IPv6"
 
@@ -2002,140 +2060,144 @@ msgid "Network;Wireless;IP;LAN;"
 msgstr "רשת;אלחוטי;IP;LAN;"
 
 #: ../panels/network/network.ui.h:1
+msgid "Add Device"
+msgstr "הוספת התקן"
+
+#: ../panels/network/network.ui.h:2
 msgid "Air_plane Mode"
 msgstr "מצב _טיסה"
 
-#: ../panels/network/network.ui.h:2
+#: ../panels/network/network.ui.h:3
 msgid "Create..."
 msgstr "יצירה..."
 
-#: ../panels/network/network.ui.h:3
+#: ../panels/network/network.ui.h:4
 msgid "DNS"
 msgstr "DNS"
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:5
 msgid "Default Route"
 msgstr "נתיב בררת המחדל"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:6
 msgid "Gateway"
 msgstr "שער גישה"
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:7
 msgid "Group Name"
 msgstr "שם הקבוצה"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:8
 msgid "Group Password"
 msgstr "ססמת הקבוצה"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:9
 msgid "H_TTPS Proxy"
 msgstr "מת_ווך HTTPS"
 
-#: ../panels/network/network.ui.h:9
+#: ../panels/network/network.ui.h:10
 msgid "Hardware Address"
 msgstr "כתובת חומרה"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:11
 msgid "IMEI"
 msgstr "IMEI (מס׳ ברזל)"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:15
 msgid "Interface"
 msgstr "מנשק"
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:16
 msgid "Network Name"
 msgstr "שם הרשת"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:17
 msgid "Provider"
 msgstr "ספק"
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:19
 msgid "Security"
 msgstr "אבטחה"
 
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:20
 msgid "Security Key"
 msgstr "מפתח אבטחה"
 
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:21
 msgid "Select the interface to use for the new service"
 msgstr "נא לבחור את המנשק לשימוש עבור השירות החדש"
 
-#: ../panels/network/network.ui.h:20
+#: ../panels/network/network.ui.h:22
 msgid "Speed"
 msgstr "מהירות"
 
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:23
 msgid "Subnet Mask"
 msgstr "מסכת רשת"
 
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:24
 msgid "Unlock"
 msgstr "שחרור"
 
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:25
 msgid "Username"
 msgstr "שם משתמש"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:26
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/network.ui.h:25
+#: ../panels/network/network.ui.h:27
 msgid "VPN Type"
 msgstr "סוג ה־VPN"
 
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:28
 msgid "_Configuration URL"
 msgstr "כתובת הת_צורה"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:29
 msgid "_Configure..."
 msgstr "ה_גדרה..."
 
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network.ui.h:30
 msgid "_FTP Proxy"
 msgstr "מתוו_ך FTP"
 
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network.ui.h:31
 msgid "_HTTP Proxy"
 msgstr "_מתווך HTTP"
 
-#: ../panels/network/network.ui.h:30
+#: ../panels/network/network.ui.h:32
 msgid "_Method"
 msgstr "_שיטה"
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network.ui.h:33
 msgid "_Network Name"
 msgstr "שם ה_רשת"
 
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network.ui.h:34
 msgid "_Socks Host"
 msgstr "מ_ארח Socks"
 
-#: ../panels/network/network.ui.h:33
+#: ../panels/network/network.ui.h:35
 msgid "_Stop Hotspot..."
 msgstr "_עצירת נקודת הגישה..."
 
-#: ../panels/network/network.ui.h:34
+#: ../panels/network/network.ui.h:36
 msgid "_Use as Hotspot..."
 msgstr "שימוש _כנקודת גישה..."
 
-#: ../panels/network/network.ui.h:35
+#: ../panels/network/network.ui.h:37
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "אוטומטית"
 
-#: ../panels/network/network.ui.h:36
+#: ../panels/network/network.ui.h:38
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "ידני"
 
-#: ../panels/network/network.ui.h:37
+#: ../panels/network/network.ui.h:39
 msgctxt "proxy method"
 msgid "None"
 msgstr "ללא"
@@ -2779,7 +2841,7 @@ msgid "Sound Output Volume"
 msgstr "עצמת פלט השמע"
 
 #: ../panels/sound/gvc-applet.c:276
-#: ../panels/sound/gvc-mixer-dialog.c:1807
+#: ../panels/sound/gvc-mixer-dialog.c:1808
 msgid "Input"
 msgstr "קלט"
 
@@ -2901,44 +2963,44 @@ msgstr "עצמת ה_פלט:"
 msgid "C_hoose a device for sound output:"
 msgstr "ב_חירת התקן להשמעה:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1796
-#: ../panels/sound/gvc-mixer-dialog.c:1925
+#: ../panels/sound/gvc-mixer-dialog.c:1797
+#: ../panels/sound/gvc-mixer-dialog.c:1926
 msgid "Settings for the selected device:"
 msgstr "הגדרות עבור ההתקן הנבחר:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1814
+#: ../panels/sound/gvc-mixer-dialog.c:1815
 msgid "_Input volume:"
 msgstr "עצמת ה_קלט:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1837
+#: ../panels/sound/gvc-mixer-dialog.c:1838
 msgid "Input level:"
 msgstr "רמת הקלט:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1865
+#: ../panels/sound/gvc-mixer-dialog.c:1866
 msgid "C_hoose a device for sound input:"
 msgstr "ב_חירת התקן להקלטת שמע:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1892
+#: ../panels/sound/gvc-mixer-dialog.c:1893
 msgid "Hardware"
 msgstr "חומרה"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1897
+#: ../panels/sound/gvc-mixer-dialog.c:1898
 msgid "C_hoose a device to configure:"
 msgstr "בחירת התקן לה_גדרה:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1936
+#: ../panels/sound/gvc-mixer-dialog.c:1937
 msgid "Sound Effects"
 msgstr "אפקטים קוליים"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1943
+#: ../panels/sound/gvc-mixer-dialog.c:1944
 msgid "_Alert volume:"
 msgstr "עצמת צליל הה_תראה:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1956
+#: ../panels/sound/gvc-mixer-dialog.c:1957
 msgid "Applications"
 msgstr "יישומים"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1960
+#: ../panels/sound/gvc-mixer-dialog.c:1961
 msgid "No application is currently playing or recording audio."
 msgstr "אין יישום המנגן או מקליט שמע כעת."
 
@@ -3905,26 +3967,26 @@ msgstr ""
 "ראשית יש ללחוץ על הסמל *"
 
 #: ../panels/user-accounts/um-user-panel.c:925
-msgid "Create a user"
-msgstr "יצירת משתמש"
+msgid "Create a user account"
+msgstr "יצירת חשבון משתמש"
 
 #: ../panels/user-accounts/um-user-panel.c:936
 #: ../panels/user-accounts/um-user-panel.c:1225
 msgid ""
-"To create a user,\n"
+"To create a user account,\n"
 "click the * icon first"
 msgstr ""
 "כדי ליצור משתמש,\n"
 "ראשית יש ללחוץ על הסמל *"
 
 #: ../panels/user-accounts/um-user-panel.c:945
-msgid "Delete the selected user"
-msgstr "מחיקת המשתמש הנבחר"
+msgid "Delete the selected user account"
+msgstr "מחיקת חשבון המשתמש הנבחר"
 
 #: ../panels/user-accounts/um-user-panel.c:957
 #: ../panels/user-accounts/um-user-panel.c:1230
 msgid ""
-"To delete the selected user,\n"
+"To delete the selected user account,\n"
 "click the * icon first"
 msgstr ""
 "כדי למחוק את המשתמש הנבחר\n"
@@ -4106,18 +4168,26 @@ msgid "Account _type"
 msgstr "סוג ה_חשבון"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+msgid "Add User Account"
+msgstr "הוספת חשבון משתמש"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "Login Options"
 msgstr "אפשרויות כניסה"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "Remove User Account"
+msgstr "הסרת חשבון משתמש"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
 msgid "_Fingerprint Login"
 msgstr "כניסה באמצעות _טביעת אצבע"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "_Language"
 msgstr "_שפה"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "_Password"
 msgstr "_ססמה"
 
@@ -4322,13 +4392,38 @@ msgstr ""
 "Run '%s --help' to see a full list of available command line options.\n"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:1
-#: ../shell/shell.ui.h:1
+#: ../shell/shell.ui.h:2
 msgid "System Settings"
 msgstr "הגדרות מערכת"
 
 #: ../shell/gnomecc.directory.in.h:1
 msgid "Control Center"
 msgstr "לוח בקרה"
+
+#: ../shell/shell.ui.h:1
+msgid "All Settings"
+msgstr "כל ההגדרות"
+
+#~ msgid "New shortcut..."
+#~ msgstr "קיצור דרך חדש..."
+
+#~ msgid "Accelerator key"
+#~ msgstr "מקש קיצור"
+
+#~ msgid "Accelerator modifiers"
+#~ msgstr "מאיצי החלפה"
+
+#~ msgid "Accelerator keycode"
+#~ msgstr "קוד מקש האצה"
+
+#~ msgid "Accel Mode"
+#~ msgstr "מצב האצה"
+
+#~ msgid "The type of accelerator."
+#~ msgstr "סוג הקיצור."
+
+#~ msgid "Create a user"
+#~ msgstr "יצירת משתמש"
 
 #~ msgid "Ask me"
 #~ msgstr "הצגת שאלה"
@@ -4342,9 +4437,6 @@ msgstr "לוח בקרה"
 #~ msgid ""
 #~ "Only profiles that are compatible with the device will be listed above."
 #~ msgstr "רק פרופיל הנתמכים על ידי ההתקן יוצגו להלן."
-
-#~ msgid "_All Settings"
-#~ msgstr "_כל ההגדרות"
 
 #~ msgid "24-_Hour Time"
 #~ msgstr "השעה בתצוגת _24 שעות"
@@ -4363,9 +4455,6 @@ msgstr "לוח בקרה"
 
 #~ msgid "cd;dvd;usb;audio;video;disc;"
 #~ msgstr "תקליטור;וידאו;אודיו;שמע;cd;dvd;usb;audio;video;disc;"
-
-#~ msgid "Region:"
-#~ msgstr "אזור:"
 
 #~ msgid "On AC _power:"
 #~ msgstr "מופעל באמצעות מ_קור חשמל:"
@@ -4432,12 +4521,6 @@ msgstr "לוח בקרה"
 #~ msgid "<span size=\"x-large\">Normal</span>"
 #~ msgstr "<span size=\"x-large\">רגילה</span>"
 
-#~ msgid "Add printer"
-#~ msgstr "הוספת מדפסת"
-
-#~ msgid "Remove printer"
-#~ msgstr "הסרת מדפסת"
-
 #~ msgid "Use default layout in new windows"
 #~ msgstr "שימוש בפריסת בררת המחדל בחלונות חדשים"
 
@@ -4479,9 +4562,6 @@ msgstr "לוח בקרה"
 
 #~ msgid "---"
 #~ msgstr "---"
-
-#~ msgid "Printing..."
-#~ msgstr "בהדפסה..."
 
 #~ msgid "_Acceleration:"
 #~ msgstr "_קיצור:"
@@ -4667,9 +4747,6 @@ msgstr "לוח בקרה"
 #~ msgid "Error unsetting accelerator in configuration database: %s"
 #~ msgstr "שגיאה בביטול מאיץ במסד נתוני ההגדרות: %s"
 
-#~ msgid "User"
-#~ msgstr "משתמש"
-
 #~ msgid "Off"
 #~ msgstr "כבוי"
 
@@ -4738,12 +4815,6 @@ msgstr "לוח בקרה"
 
 #~ msgid "Keyboard _model:"
 #~ msgstr "דגם המ_קלדת:"
-
-#~ msgid "Move _Down"
-#~ msgstr "הזזה למ_טה"
-
-#~ msgid "Move _Up"
-#~ msgstr "הזזה למ_עלה"
 
 #~ msgid "Move the selected keyboard layout down in the list"
 #~ msgstr "הזזת פריסת המקלדת הנבחרת במורד הרשימה"
@@ -5753,9 +5824,6 @@ msgstr "לוח בקרה"
 
 #~ msgid "Font Viewer"
 #~ msgstr "מציג גופנים"
-
-#~ msgid "Preview fonts"
-#~ msgstr "תצוגה מקדימה של גופנים"
 
 #~ msgid "Text to thumbnail (default: Aa)"
 #~ msgstr "Text to thumbnail (default: Aa)"
