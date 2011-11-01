@@ -245,6 +245,7 @@ on_cups_notification (GDBusConnection *connection,
   if (g_strcmp0 (signal_name, "PrinterAdded") != 0 &&
       g_strcmp0 (signal_name, "PrinterDeleted") != 0 &&
       g_strcmp0 (signal_name, "PrinterStateChanged") != 0 &&
+      g_strcmp0 (signal_name, "PrinterStopped") != 0 &&
       g_strcmp0 (signal_name, "JobCreated") != 0 &&
       g_strcmp0 (signal_name, "JobCompleted") != 0)
     return;
@@ -279,7 +280,8 @@ on_cups_notification (GDBusConnection *connection,
 
   if (g_strcmp0 (signal_name, "PrinterAdded") == 0 ||
       g_strcmp0 (signal_name, "PrinterDeleted") == 0 ||
-      g_strcmp0 (signal_name, "PrinterStateChanged") == 0)
+      g_strcmp0 (signal_name, "PrinterStateChanged") == 0 ||
+      g_strcmp0 (signal_name, "PrinterStopped") == 0)
     actualize_printers_list (self);
   else if (g_strcmp0 (signal_name, "JobCreated") == 0 ||
            g_strcmp0 (signal_name, "JobCompleted") == 0)
@@ -336,6 +338,7 @@ renew_subscription (gpointer data)
   static const char * const events[] = {
           "printer-added",
           "printer-deleted",
+          "printer-stopped",
           "printer-state-changed",
           "job-created",
           "job-completed"};
