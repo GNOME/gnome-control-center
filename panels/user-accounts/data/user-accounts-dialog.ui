@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy toplevel-contextual -->
@@ -356,6 +356,11 @@
                                     <property name="visible">True</property>
                                     <property name="icon_name">avatar-default</property>
                                     <property name="icon-size">6</property>
+                                    <child internal-child="accessible">
+                                      <object class="AtkObject" id="user-icon-image-a11y">
+                                        <property name="accessible-name" translatable="yes">User Icon</property>
+                                      </object>
+                                    </child>
                                   </object>
                                 </child>
                               </object>
@@ -371,6 +376,11 @@
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
                                 <property name="relief">none</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="user-icon-image2-a11y">
+                                    <property name="accessible-name" translatable="yes">User Icon</property>
+                                  </object>
+                                </child>
                                 <child>
                                   <object class="GtkImage" id="user-icon-image2">
                                     <property name="visible">True</property>
