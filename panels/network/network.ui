@@ -404,6 +404,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Hardware Address</property>
+                                <property name="mnemonic-widget">label_wired_mac</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -421,6 +422,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Speed</property>
+                                <property name="mnemonic-widget">label_wired_speed</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -438,6 +440,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">IPv4 Address</property>
+                                <property name="mnemonic-widget">label_wired_ipv4</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -455,6 +458,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">IPv6 Address</property>
+                                <property name="mnemonic-widget">label_wired_ipv6</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -472,6 +476,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Subnet Mask</property>
+                                <property name="mnemonic-widget">label_wired_subnet</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -489,6 +494,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Default Route</property>
+                                <property name="mnemonic-widget">label_wired_route</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -507,6 +513,7 @@
                                 <property name="xalign">1</property>
                                 <property name="yalign">0</property>
                                 <property name="label" translatable="yes">DNS</property>
+                                <property name="mnemonic-widget">label_wired_dns</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -638,6 +645,11 @@
                                     <property name="halign">end</property>
                                     <property name="valign">start</property>
                                     <property name="use_action_appearance">False</property>
+                                    <child internal-child="accessible">
+                                      <object class="AtkObject" id="wired_off_a11y">
+                                        <property name="accessible-name" translatable="yes">Device Off</property>
+                                      </object>
+                                    </child>
                                   </object>
                                 </child>
                               </object>
@@ -780,6 +792,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Hardware Address</property>
+                                <property name="mnemonic-widget">label_wireless_mac</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -797,6 +810,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Speed</property>
+                                <property name="mnemonic-widget">label_wireless_speed</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -814,6 +828,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">IPv4 Address</property>
+                                <property name="mnemonic-widget">label_wireless_ipv4</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -831,6 +846,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">IPv6 Address</property>
+                                <property name="mnemonic-widget">label_wireless_ipv6</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -848,6 +864,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Default Route</property>
+                                <property name="mnemonic-widget">label_wireless_route</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -866,6 +883,7 @@
                                 <property name="xalign">1</property>
                                 <property name="yalign">0</property>
                                 <property name="label" translatable="yes">DNS</property>
+                                <property name="mnemonic-widget">label_wireless_dns</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -982,6 +1000,11 @@
                                     <property name="halign">end</property>
                                     <property name="valign">start</property>
                                     <property name="use_action_appearance">False</property>
+                                    <child internal-child="accessible">
+                                      <object class="AtkObject" id="wireless_off_a11y">
+                                        <property name="accessible-name" translatable="yes">Device Off</property>
+                                      </object>
+                                    </child>
                                   </object>
                                 </child>
                               </object>
@@ -998,6 +1021,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Security</property>
+                                <property name="mnemonic-widget">label_wireless_security</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1312,6 +1336,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">IMEI</property>
+                                <property name="mnemonic-widget">label_mobilebb_imei</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1329,6 +1354,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Speed</property>
+                                <property name="mnemonic-widget">label_mobilebb_speed</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1346,6 +1372,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Provider</property>
+                                <property name="mnemonic-widget">label_mobilebb_provider</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1473,6 +1500,11 @@
                                     <property name="halign">end</property>
                                     <property name="valign">start</property>
                                     <property name="use_action_appearance">False</property>
+                                    <child internal-child="accessible">
+                                      <object class="AtkObject" id="mobilebb_off_a11y">
+                                        <property name="accessible-name" translatable="yes">Device Off</property>
+                                      </object>
+                                    </child>
                                   </object>
                                 </child>
                               </object>
@@ -1686,6 +1718,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">VPN Type</property>
+                                <property name="mnemonic-widget">label_vpn_service_type</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1703,6 +1736,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Gateway</property>
+                                <property name="mnemonic-widget">label_vpn_gateway</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1720,6 +1754,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Group Name</property>
+                                <property name="mnemonic-widget">label_vpn_group_name</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1737,6 +1772,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Group Password</property>
+                                <property name="mnemonic-widget">label_vpn_group_password</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1754,6 +1790,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Username</property>
+                                <property name="mnemonic-widget">label_vpn_username</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1853,6 +1890,11 @@
                                     <property name="halign">end</property>
                                     <property name="valign">start</property>
                                     <property name="use_action_appearance">False</property>
+                                    <child internal-child="accessible">
+                                      <object class="AtkObject" id="vpn_off_a11y">
+                                        <property name="accessible-name" translatable="yes">Disable VPN</property>
+                                      </object>
+                                    </child>
                                   </object>
                                 </child>
                               </object>
@@ -2193,6 +2235,11 @@
                                 <property name="xalign">1</property>
                                 <property name="invisible_char_set">True</property>
                                 <property name="adjustment">adjustment_proxy_port_http</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="proxy_http_a11y">
+                                    <property name="accessible-name" translatable="yes">HTTP Port</property>
+                                  </object>
+                                </child>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
@@ -2251,6 +2298,11 @@
                                 <property name="xalign">1</property>
                                 <property name="invisible_char_set">True</property>
                                 <property name="adjustment">adjustment_proxy_port_https</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="proxy_https_a11y">
+                                    <property name="accessible-name" translatable="yes">HTTPS Port</property>
+                                  </object>
+                                </child>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
@@ -2267,6 +2319,11 @@
                                 <property name="xalign">1</property>
                                 <property name="invisible_char_set">True</property>
                                 <property name="adjustment">adjustment_proxy_port_ftp</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="proxy_ftp_a11y">
+                                    <property name="accessible-name" translatable="yes">FTP Port</property>
+                                  </object>
+                                </child>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
@@ -2283,6 +2340,11 @@
                                 <property name="xalign">1</property>
                                 <property name="invisible_char_set">True</property>
                                 <property name="adjustment">adjustment_proxy_port_socks</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject" id="proxy_socks_a11y">
+                                    <property name="accessible-name" translatable="yes">Socks Port</property>
+                                  </object>
+                                </child>
                               </object>
                               <packing>
                                 <property name="left_attach">2</property>
@@ -2378,6 +2440,7 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Air_plane Mode</property>
                     <property name="use_underline">True</property>
+                    <property name="mnemonic-widget">switch_flight_mode</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
