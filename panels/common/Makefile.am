@@ -1,7 +1,7 @@
 # This is used in PANEL_CFLAGS
 cappletname = common
 
-noinst_LTLIBRARIES = liblanguage.la libshortcuts.la
+noinst_LTLIBRARIES = liblanguage.la
 noinst_PROGRAMS = list-languages
 
 AM_CPPFLAGS =						\
@@ -26,15 +26,6 @@ liblanguage_la_LIBADD = 		\
 	$(LIBLANGUAGE_LIBS)
 
 liblanguage_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined
-
-libshortcuts_la_SOURCES =		\
-	eggaccelerators.h		\
-	eggaccelerators.c
-
-libshortcuts_la_LIBADD =		\
-	$(LIBSHORTCUTS_LIBS)
-
-libshortcuts_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined
 
 list_languages_SOURCES = list-languages.c
 list_languages_LDADD = liblanguage.la
