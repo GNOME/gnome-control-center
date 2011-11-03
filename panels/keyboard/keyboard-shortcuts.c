@@ -1184,8 +1184,8 @@ binding_name (guint                   keyval,
 {
   if (keyval != 0 || keycode != 0)
     return translate ?
-        egg_virtual_accelerator_label (keyval, keycode, mask) :
-        egg_virtual_accelerator_name (keyval, keycode, mask);
+        gtk_accelerator_get_label_with_keycode (NULL, keyval, keycode, mask) :
+        gtk_accelerator_name_with_keycode (NULL, keyval, keycode, mask);
   else
     return g_strdup (translate ? _("Disabled") : "");
 }

@@ -30,7 +30,6 @@
 #include <gconf/gconf-client.h>
 
 #include "cc-keyboard-item.h"
-#include "eggaccelerators.h"
 
 #define CC_KEYBOARD_ITEM_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_KEYBOARD_ITEM, CcKeyboardItemPrivate))
 
@@ -64,6 +63,7 @@ binding_from_string (const char             *str,
                      GdkModifierType        *accelerator_mods)
 {
   g_return_val_if_fail (accelerator_key != NULL, FALSE);
+  guint *keycodes;
 
   if (str == NULL || strcmp (str, "disabled") == 0)
     {
@@ -73,7 +73,11 @@ binding_from_string (const char             *str,
       return TRUE;
     }
 
-  egg_accelerator_parse_virtual (str, accelerator_key, keycode, (EggVirtualModifierType *) accelerator_mods);
+  gtk_accelerator_parse_with_keycode (str, accelerator_key, &keycodes, accelerator_mods);
+
+  if (keycode != NULL)
+    *keycode = (keycodes ? keycodes[0] : 0);
+  g_free (keycodes);
 
   if (*accelerator_key == 0)
     return FALSE;

@@ -22,7 +22,6 @@
 #define __CC_KEYBOARD_ITEM_H
 
 #include <glib-object.h>
-#include "eggaccelerators.h"
 
 G_BEGIN_DECLS
 
