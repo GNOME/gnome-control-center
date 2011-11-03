@@ -29,7 +29,6 @@
 
 #include <gconf/gconf-client.h>
 
-#include "eggaccelerators.h"
 #include "gconf-property-editor.h"
 
 #include "zoom-options.h"
@@ -495,8 +494,8 @@ cc_ua_panel_set_shortcut_label (CcUaPanel  *self,
 	GtkWidget *widget;
 	char *value;
 	char *text;
-	guint accel_key, keycode;
-	EggVirtualModifierType mods;
+	guint accel_key, *keycode;
+	GdkModifierType mods;
 
 	widget = WID (self->priv->builder, label);
 	value = g_settings_get_string (self->priv->mediakeys_settings, key);
@@ -506,7 +505,8 @@ cc_ua_panel_set_shortcut_label (CcUaPanel  *self,
 		g_free (value);
 		return;
 	}
-	if (egg_accelerator_parse_virtual (value, &accel_key, &keycode, &mods) == FALSE) {
+	gtk_accelerator_parse_with_keycode (value, &accel_key, &keycode, &mods);
+	if (accel_key == 0 && keycode == NULL && mods == 0) {
 		gtk_label_set_text (GTK_LABEL (widget), _("No shortcut set"));
 		g_free (value);
 		g_warning ("Failed to parse keyboard shortcut: '%s'", value);
@@ -514,7 +514,8 @@ cc_ua_panel_set_shortcut_label (CcUaPanel  *self,
 	}
 	g_free (value);
 
-	text = egg_virtual_accelerator_label (accel_key, keycode, mods);
+	text = gtk_accelerator_get_label_with_keycode (gtk_widget_get_display (widget), accel_key, *keycode, mods);
+	g_free (keycode);
 	gtk_label_set_text (GTK_LABEL (widget), text);
 	g_free (text);
 }

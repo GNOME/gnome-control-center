@@ -23,7 +23,7 @@ libuniversal_access_la_SOURCES =		\
 	zoom-options.c				\
 	zoom-options.h
 
-libuniversal_access_la_LIBADD = $(PANEL_LIBS) $(UNIVERSAL_ACCESS_PANEL_LIBS) $(top_builddir)/panels/common/libshortcuts.la
+libuniversal_access_la_LIBADD = $(PANEL_LIBS) $(UNIVERSAL_ACCESS_PANEL_LIBS)
 libuniversal_access_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui
