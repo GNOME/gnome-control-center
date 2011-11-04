@@ -45,13 +45,6 @@ typedef struct {
   GArray *entries;
 } KeyList;
 
-typedef enum {
-  COMPARISON_NONE = 0,
-  COMPARISON_GT,
-  COMPARISON_LT,
-  COMPARISON_EQ
-} Comparison;
-
 typedef struct
 {
   CcKeyboardItemType type;
@@ -59,9 +52,6 @@ typedef struct
   char *description; /* description for GSettings types */
   char *gettext_package; /* used for GConf type */
   char *name; /* GConf key, GConf directory, or GSettings key name depending on type */
-  int value; /* Value for comparison */
-  char *key; /* GConf key name for the comparison */
-  Comparison comparison;
 } KeyListEntry;
 
 enum
@@ -153,47 +143,6 @@ have_key_for_group (int group, const gchar *name)
 }
 
 static gboolean
-should_show_key (const KeyListEntry *entry)
-{
-  int value;
-  GConfClient *client;
-
-  if (entry->comparison == COMPARISON_NONE)
-    return TRUE;
-
-  g_return_val_if_fail (entry->key != NULL, FALSE);
-
-  /* FIXME: We'll need to change that when metacity/mutter
-   * uses GSettings */
-  g_assert (entry->type == CC_KEYBOARD_ITEM_TYPE_GCONF);
-
-  client = gconf_client_get_default();
-  value = gconf_client_get_int (client, entry->key, NULL);
-  g_object_unref (client);
-
-  switch (entry->comparison) {
-  case COMPARISON_NONE:
-    /* For compiler warnings */
-    g_assert_not_reached ();
-    return FALSE;
-  case COMPARISON_GT:
-    if (value > entry->value)
-      return TRUE;
-    break;
-  case COMPARISON_LT:
-    if (value < entry->value)
-      return TRUE;
-    break;
-  case COMPARISON_EQ:
-    if (value == entry->value)
-      return TRUE;
-    break;
-  }
-
-  return FALSE;
-}
-
-static gboolean
 keybinding_key_changed_foreach (GtkTreeModel   *model,
                                 GtkTreePath    *path,
                                 GtkTreeIter    *iter,
@@ -256,9 +205,6 @@ append_section (GtkBuilder         *builder,
     {
       CcKeyboardItem *item;
       gboolean ret;
-
-      if (!should_show_key (&keys_list[i]))
-        continue;
 
       if (have_key_for_group (group, keys_list[i].name)) /* FIXME broken for GSettings */
         continue;
@@ -334,9 +280,7 @@ parse_start_tag (GMarkupParseContext *ctx,
 {
   KeyList *keylist = (KeyList *) user_data;
   KeyListEntry key;
-  const char *name, *gconf_key, *schema, *description, *package;
-  int value;
-  Comparison comparison;
+  const char *name, *schema, *description, *package;
 
   name = NULL;
   schema = NULL;
@@ -415,9 +359,6 @@ parse_start_tag (GMarkupParseContext *ctx,
       || attr_values == NULL)
     return;
 
-  value = 0;
-  comparison = COMPARISON_NONE;
-  gconf_key = NULL;
   schema = NULL;
   description = NULL;
 
@@ -428,14 +369,6 @@ parse_start_tag (GMarkupParseContext *ctx,
           /* skip if empty */
           if (**attr_values)
             name = *attr_values;
-        } else if (g_str_equal (*attr_names, "value")) {
-          if (**attr_values) {
-            value = (int) g_ascii_strtoull (*attr_values, NULL, 0);
-          }
-        } else if (g_str_equal (*attr_names, "key")) {
-          if (**attr_values) {
-            gconf_key = *attr_values;
-          }
 	} else if (g_str_equal (*attr_names, "schema")) {
 	  if (**attr_values) {
 	   schema = *attr_values;
@@ -451,16 +384,6 @@ parse_start_tag (GMarkupParseContext *ctx,
 	        description = _(*attr_values);
 	      }
 	  }
-        } else if (g_str_equal (*attr_names, "comparison")) {
-          if (**attr_values) {
-            if (g_str_equal (*attr_values, "gt")) {
-              comparison = COMPARISON_GT;
-            } else if (g_str_equal (*attr_values, "lt")) {
-              comparison = COMPARISON_LT;
-            } else if (g_str_equal (*attr_values, "eq")) {
-              comparison = COMPARISON_EQ;
-            }
-          }
         }
 
       ++attr_names;
@@ -476,12 +399,9 @@ parse_start_tag (GMarkupParseContext *ctx,
     key.type = CC_KEYBOARD_ITEM_TYPE_GSETTINGS;
   else
     key.type = CC_KEYBOARD_ITEM_TYPE_GCONF;
-  key.value = value;
-  key.key = g_strdup (gconf_key);
   key.description = g_strdup (description);
   key.gettext_package = g_strdup (keylist->package);
   key.schema = schema ? g_strdup (schema) : g_strdup (keylist->schema);
-  key.comparison = comparison;
   g_array_append_val (keylist->entries, key);
 }
 
@@ -554,9 +474,6 @@ append_sections_from_file (GtkBuilder *builder, const gchar *path, const char *d
 
   /* Empty KeyListEntry to end the array */
   key.name = NULL;
-  key.key = NULL;
-  key.value = 0;
-  key.comparison = COMPARISON_NONE;
   g_array_append_val (keylist->entries, key);
 
   keys = (KeyListEntry *) g_array_free (keylist->entries, FALSE);
@@ -591,7 +508,6 @@ append_sections_from_file (GtkBuilder *builder, const gchar *path, const char *d
     g_free (entry->description);
     g_free (entry->gettext_package);
     g_free (entry->name);
-    g_free (entry->key);
   }
 
   g_free (keylist);
@@ -607,10 +523,6 @@ append_sections_from_gconf (GtkBuilder *builder, const gchar *gconf_path)
 
   /* load custom shortcuts from GConf */
   entries = g_array_new (FALSE, TRUE, sizeof (KeyListEntry));
-
-  key.key = NULL;
-  key.value = 0;
-  key.comparison = COMPARISON_NONE;
 
   client = gconf_client_get_default ();
   custom_list = gconf_client_all_dirs (client, gconf_path, NULL);
