@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-10-22 11:07+0000\n"
-"PO-Revision-Date: 2011-10-22 23:17+0300\n"
+"POT-Creation-Date: 2011-11-04 17:01+0000\n"
+"PO-Revision-Date: 2011-11-06 00:48+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <>\n"
 "MIME-Version: 1.0\n"
@@ -60,22 +60,34 @@ msgid "Fill"
 msgstr "Užpildymas"
 
 #: ../panels/background/background.ui.h:6
+msgid "Primary Color"
+msgstr "Pagrindinė spalva"
+
+#: ../panels/background/background.ui.h:7
 msgid "Remove wallpaper"
 msgstr "Pašalinti darbastalio paveikslėlį"
 
-#: ../panels/background/background.ui.h:7
+#: ../panels/background/background.ui.h:8
 msgid "Scale"
 msgstr "Ištempti (proporcingai)"
 
-#: ../panels/background/background.ui.h:8
+#: ../panels/background/background.ui.h:9
+msgid "Secondary color"
+msgstr "Antrinė spalva"
+
+#: ../panels/background/background.ui.h:10
 msgid "Span"
 msgstr "Apgaubti"
 
-#: ../panels/background/background.ui.h:9
+#: ../panels/background/background.ui.h:11
+msgid "Swap colors"
+msgstr "Sukeisti spalvas"
+
+#: ../panels/background/background.ui.h:12
 msgid "Tile"
 msgstr "Iškloti"
 
-#: ../panels/background/background.ui.h:10
+#: ../panels/background/background.ui.h:13
 msgid "Zoom"
 msgstr "Pritraukti"
 
@@ -180,7 +192,7 @@ msgstr "Naršyti failus..."
 
 #: ../panels/bluetooth/bluetooth.ui.h:3
 msgid "Connection"
-msgstr "Ryšys"
+msgstr "Prisijungimas"
 
 #: ../panels/bluetooth/bluetooth.ui.h:4
 #: ../panels/universal-access/uap.ui.h:34
@@ -193,7 +205,7 @@ msgstr "Pelės ir jutiklinio kilimėlio nustatymai"
 
 #: ../panels/bluetooth/bluetooth.ui.h:6
 msgid "Paired"
-msgstr "Sujungta"
+msgstr "Suporuotas"
 
 #. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
 #: ../panels/bluetooth/bluetooth.ui.h:8
@@ -202,15 +214,24 @@ msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #: ../panels/bluetooth/bluetooth.ui.h:9
+#: ../panels/network/network.ui.h:23
+msgid "Remove Device"
+msgstr "Pašalinti įrenginį"
+
+#: ../panels/bluetooth/bluetooth.ui.h:10
 msgid "Send Files..."
 msgstr "Siųsti failus..."
 
-#: ../panels/bluetooth/bluetooth.ui.h:10
+#: ../panels/bluetooth/bluetooth.ui.h:11
+msgid "Set Up New Device"
+msgstr "Nustatyti naują įrenginį"
+
+#: ../panels/bluetooth/bluetooth.ui.h:12
 #: ../panels/universal-access/uap.ui.h:60
 msgid "Sound Settings"
 msgstr "Garso nustatymai"
 
-#: ../panels/bluetooth/bluetooth.ui.h:11
+#: ../panels/bluetooth/bluetooth.ui.h:13
 msgid "Type"
 msgstr "Tipas"
 
@@ -222,7 +243,7 @@ msgstr "Bluetooth"
 
 #: ../panels/bluetooth/bluetooth-properties.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
-msgstr "Konfigūruoti Bluetooth parametrus"
+msgstr "Keisti „Bluetooth“ nustatymus"
 
 #. Add some common languages first
 #: ../panels/common/cc-common-language.c:513
@@ -472,7 +493,7 @@ msgstr "Pagal laikrodžio rodyklę"
 #: ../panels/display/cc-display-panel.c:480
 msgctxt "display panel, rotation"
 msgid "180 Degrees"
-msgstr "180 laipsnių"
+msgstr "180 laipsnių"
 
 #. Translators:  this is the feature where what you see on your laptop's
 #. * screen is the same as your external monitor.  Here, "Mirror" is being
@@ -654,7 +675,7 @@ msgid "Video CD"
 msgstr "Vaizdo CD"
 
 #: ../panels/info/cc-info-panel.c:1474
-#: ../panels/keyboard/keyboard-shortcuts.c:1802
+#: ../panels/keyboard/keyboard-shortcuts.c:1803
 msgid "Section"
 msgstr "Skyrius"
 
@@ -678,20 +699,20 @@ msgstr "Išimamos laikmenos"
 msgid "Graphics"
 msgstr "Grafika"
 
-#: ../panels/info/cc-info-panel.c:1700
+#: ../panels/info/cc-info-panel.c:1701
 #, c-format
 msgid "Version %s"
 msgstr "Versija %s"
 
-#: ../panels/info/cc-info-panel.c:1750
+#: ../panels/info/cc-info-panel.c:1751
 msgid "Install Updates"
 msgstr "Įdiegti atnaujinimus"
 
-#: ../panels/info/cc-info-panel.c:1754
+#: ../panels/info/cc-info-panel.c:1755
 msgid "System Up-To-Date"
 msgstr "Sistema yra atnaujinta"
 
-#: ../panels/info/cc-info-panel.c:1758
+#: ../panels/info/cc-info-panel.c:1759
 msgid "Checking for Updates"
 msgstr "Ieškoma atnaujinimų"
 
@@ -706,7 +727,7 @@ msgstr "Sistemos informacija"
 #. sure that you use the same "translation" for those keywords
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
 msgid "device;system;information;memory;processor;version;default;application;fallback;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
-msgstr "įrenginys;sistema;informacija;atmintis;procesorius;versija;numatyta;programa;atsarginė;pageidaujama;cd;dvd;usb;audio;video;diskas;išimami;media;automatinio paleidimo;"
+msgstr "įrenginys;sistema;informacija;atmintis;procesorius;versija;numatyta;programa;atsarginė;pageidaujama;cd;dvd;usb;audio;video;diskas;išimama;laikmena;autopaleidimas;"
 
 #: ../panels/info/info.ui.h:1
 msgid "Acti_on:"
@@ -894,7 +915,7 @@ msgid "Log out"
 msgstr "Atsijungti"
 
 #: ../panels/keyboard/01-system.xml.in.h:3
-#: ../panels/region/gnome-region-panel.ui.h:24
+#: ../panels/region/gnome-region-panel.ui.h:33
 msgid "System"
 msgstr "Sistema"
 
@@ -935,49 +956,12 @@ msgstr "Įjungti ekrano skaityklę"
 msgid "Universal Access"
 msgstr "Universali prieiga"
 
-#: ../panels/keyboard/eggcellrendererkeys.c:21
-msgid "New shortcut..."
-msgstr "Naujas susiejimas..."
-
-#: ../panels/keyboard/eggcellrendererkeys.c:164
-#: ../panels/keyboard/eggcellrendererkeys.c:165
-msgid "Accelerator key"
-msgstr "Spartusis klavišas"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:174
-#: ../panels/keyboard/eggcellrendererkeys.c:175
-msgid "Accelerator modifiers"
-msgstr "Sparčiojo klavišo modifikatoriai"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:183
-#: ../panels/keyboard/eggcellrendererkeys.c:184
-msgid "Accelerator keycode"
-msgstr "Sparčiojo klavišo kodas"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:194
-msgid "Accel Mode"
-msgstr "Sp. klavišo tipas"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:195
-msgid "The type of accelerator."
-msgstr "Sparčiojo klavišo tipas."
-
-#. translators:
-#. * The device has been disabled
-#: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/keyboard-shortcuts.c:1191
-#: ../panels/sound/gvc-mixer-control.c:1086
-#: ../panels/user-accounts/um-fingerprint-dialog.c:177
-#: ../panels/user-accounts/um-fingerprint-dialog.c:178
-msgid "Disabled"
-msgstr "Išjungta"
-
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 msgid "Change keyboard settings"
 msgstr "Keisti klaviatūros nustatymus"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
 msgid "Keyboard"
 msgstr "Klaviatūra"
 
@@ -986,23 +970,32 @@ msgstr "Klaviatūra"
 msgid "Shortcut;Repeat;Blink;"
 msgstr "Trumpinys;Pakartoti;Mirksėti;"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:646
-#: ../panels/keyboard/keyboard-shortcuts.c:654
-#: ../panels/keyboard/keyboard-shortcuts.c:966
-#: ../panels/keyboard/keyboard-shortcuts.c:1564
-#: ../panels/keyboard/keyboard-shortcuts.c:1568
+#: ../panels/keyboard/keyboard-shortcuts.c:645
+#: ../panels/keyboard/keyboard-shortcuts.c:653
+#: ../panels/keyboard/keyboard-shortcuts.c:965
+#: ../panels/keyboard/keyboard-shortcuts.c:1566
+#: ../panels/keyboard/keyboard-shortcuts.c:1570
 msgid "Custom Shortcuts"
 msgstr "Pasirinktiniai susiejimai"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:814
+#: ../panels/keyboard/keyboard-shortcuts.c:813
 msgid "<Unknown Action>"
 msgstr "<Nežinomas veiksmas>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1217
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/keyboard-shortcuts.c:1190
+#: ../panels/sound/gvc-mixer-control.c:1087
+#: ../panels/user-accounts/um-fingerprint-dialog.c:177
+#: ../panels/user-accounts/um-fingerprint-dialog.c:178
+msgid "Disabled"
+msgstr "Išjungta"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1216
 msgid "Error saving the new shortcut"
 msgstr "Klaida įrašant naują susiejimą"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1350
+#: ../panels/keyboard/keyboard-shortcuts.c:1349
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type using this key.\n"
@@ -1011,7 +1004,7 @@ msgstr ""
 "Negalima naudoti sparčiojo klavišo „%s“, kadangi nebegalėsite rašyti šiuo klavišu.\n"
 "Bandykite klavišą kartu su tokiais klavišai kaip Control, Alt ar Shift."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1380
+#: ../panels/keyboard/keyboard-shortcuts.c:1381
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1020,117 +1013,125 @@ msgstr ""
 "Susiejimas „%s“ jau yra naudojamas\n"
 "„%s“"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1385
+#: ../panels/keyboard/keyboard-shortcuts.c:1386
 #, c-format
 msgid "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Jei priskirsite spartųjį klavišą komandai „%s“, „%s“ bus išjungtas."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1391
+#: ../panels/keyboard/keyboard-shortcuts.c:1392
 msgid "_Reassign"
 msgstr "_Priskirti iš naujo"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1503
+#: ../panels/keyboard/keyboard-shortcuts.c:1505
 msgid "Too many custom shortcuts"
 msgstr "Per daug pasirinktinių susiejimų"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1855
+#: ../panels/keyboard/keyboard-shortcuts.c:1856
 msgid "Action"
 msgstr "Veiksmas"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1878
+#: ../panels/keyboard/keyboard-shortcuts.c:1879
 msgid "Shortcut"
 msgstr "Susiejimas"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
+msgid "Add Shortcut"
+msgstr "Pridėti trumpinį"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "C_ommand:"
 msgstr "Ko_manda:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 msgid "Cursor Blinking"
 msgstr "Žymeklio mirksėjimas"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "Cursor _blinks in text fields"
 msgstr "Žymeklis teksto laukeliuose _mirksi"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
-msgid "Cursor blink speed"
-msgstr "Žymeklio mirksėjimo greitis"
-
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
+msgid "Cursor blink speed"
+msgstr "Žymeklio mirksėjimo greitis"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
 msgid "Custom Shortcut"
 msgstr "Pasirinktinis susiejimas"
 
 #. fast acceleration
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
 #: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "Fast"
 msgstr "Greitas"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid "Key presses _repeat when key is held down"
 msgstr "Klavišų paspaudimai _kartojami, kai laikomas nuspaustas klavišas"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 msgid "Layout Settings"
 msgstr "Išdėstymo nustatymai"
 
 #. long delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 #: ../panels/mouse/gnome-mouse-properties.ui.h:16
 #: ../panels/universal-access/uap.ui.h:38
 #: ../panels/universal-access/zoom-options.ui.h:13
 msgid "Long"
 msgstr "Ilgas"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+msgid "Remove Shortcut"
+msgstr "Pašalinti trumpinį"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
 msgid "Repeat Keys"
 msgstr "Kartojimo klavišai"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 msgid "Repeat keys speed"
 msgstr "Kartojamų klavišų greitis"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
 msgid "S_peed:"
 msgstr "G_reitis:"
 
 #. short delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
 #: ../panels/universal-access/uap.ui.h:54
 #: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Short"
 msgstr "Trumpas"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
 msgid "Shortcuts"
 msgstr "Trumpiniai"
 
 #. slow acceleration
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
 #: ../panels/mouse/gnome-mouse-properties.ui.h:26
 msgid "Slow"
 msgstr "Lėtas"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
 msgid "To edit a shortcut, click the row and hold down the new keys or press Backspace to clear."
 msgstr "Norėdami pakeisti spartųjį klavišą, spustelėkite atitinkamą eilutę ir paspauskite spartųjį klavišą arba spauskite Backspace išvalymui."
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
 #: ../panels/universal-access/uap.ui.h:67
 msgid "Typing"
 msgstr "Spausdinimas"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
 msgid "_Delay:"
 msgstr "_Delsa:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
 msgid "_Name:"
 msgstr "_Pavadinimas:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:23
 msgid "_Speed:"
 msgstr "_Greitis:"
 
@@ -1149,8 +1150,9 @@ msgstr "_Prisijungti"
 #. translators: This is the title of the "Add Account" dialogue.
 #. * The title is not visible when using GNOME Shell
 #: ../panels/online-accounts/cc-online-accounts-panel.c:461
+#: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "Add Account"
-msgstr "Pridėti paskyrą"
+msgstr "Pridėti paskyrą"
 
 #: ../panels/online-accounts/cc-online-accounts-panel.c:466
 msgid "To add a new account, first select the account type"
@@ -1197,130 +1199,134 @@ msgstr "Tvarkyti internetinių paslaugų paskyras"
 msgid "Online Accounts"
 msgstr "Interneto paslaugų paskyros"
 
-#: ../panels/online-accounts/online-accounts.ui.h:1
+#: ../panels/online-accounts/online-accounts.ui.h:2
+msgid "Remove Account"
+msgstr "Pašalinti paskyrą"
+
+#: ../panels/online-accounts/online-accounts.ui.h:3
 msgid "Select an account"
 msgstr "Pasirinkite paskyrą"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:520
+#: ../panels/printers/cc-printers-panel.c:525
 msgid "Low on toner"
 msgstr "Baigiasi rašalas"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:522
+#: ../panels/printers/cc-printers-panel.c:527
 msgid "Out of toner"
 msgstr "Baigiasi rašalas"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:525
+#: ../panels/printers/cc-printers-panel.c:530
 msgid "Low on developer"
 msgstr "Baigiasi ryškalas"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:528
+#: ../panels/printers/cc-printers-panel.c:533
 msgid "Out of developer"
 msgstr "Baigėsi ryškalas"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:530
+#: ../panels/printers/cc-printers-panel.c:535
 msgid "Low on a marker supply"
 msgstr "Baigiasi spalvos tiekimas"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:532
+#: ../panels/printers/cc-printers-panel.c:537
 msgid "Out of a marker supply"
 msgstr "Baigėsi spalvos tiekimas"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:534
+#: ../panels/printers/cc-printers-panel.c:539
 msgid "Open cover"
 msgstr "Atvertas dangtis"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:536
+#: ../panels/printers/cc-printers-panel.c:541
 msgid "Open door"
 msgstr "Atvertos durys"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:538
+#: ../panels/printers/cc-printers-panel.c:543
 msgid "Low on paper"
 msgstr "Baigiasi popierius"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:540
+#: ../panels/printers/cc-printers-panel.c:545
 msgid "Out of paper"
 msgstr "Baigėsi popierius"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:542
+#: ../panels/printers/cc-printers-panel.c:547
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Išjungta"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:544
+#: ../panels/printers/cc-printers-panel.c:549
 msgctxt "printer state"
 msgid "Paused"
 msgstr "Pristabdyta"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:546
+#: ../panels/printers/cc-printers-panel.c:551
 msgid "Waste receptacle almost full"
 msgstr "Atliekų konteineris beveik pilnas"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:548
+#: ../panels/printers/cc-printers-panel.c:553
 msgid "Waste receptacle full"
 msgstr "Atliekų konteineris pilnas"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:550
+#: ../panels/printers/cc-printers-panel.c:555
 msgid "The optical photo conductor is near end of life"
 msgstr "Optinio foto konduktoriaus tarnavimo laikas baigiasi"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:552
+#: ../panels/printers/cc-printers-panel.c:557
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Optinis foto konduktorius nebeveikia"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:724
+#: ../panels/printers/cc-printers-panel.c:729
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Pasirengęs"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:728
+#: ../panels/printers/cc-printers-panel.c:733
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Apdorojama"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:732
+#: ../panels/printers/cc-printers-panel.c:737
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Sustabdytas"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:851
+#: ../panels/printers/cc-printers-panel.c:856
 msgid "Toner Level"
 msgstr "Dažų lygis"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:854
+#: ../panels/printers/cc-printers-panel.c:859
 msgid "Ink Level"
 msgstr "Rašalo lygis"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:857
+#: ../panels/printers/cc-printers-panel.c:862
 msgid "Supply Level"
 msgstr "Tiekimo lygis"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:872
-#: ../panels/printers/cc-printers-panel.c:1258
+#: ../panels/printers/cc-printers-panel.c:877
+#: ../panels/printers/cc-printers-panel.c:1263
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -1329,80 +1335,80 @@ msgstr[1] "%u aktyvūs"
 msgstr[2] "%u aktyvių"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:977
+#: ../panels/printers/cc-printers-panel.c:982
 msgid "No printers available"
 msgstr "Nėra spausdintuvų"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1301
+#: ../panels/printers/cc-printers-panel.c:1306
 msgctxt "print job"
 msgid "Pending"
 msgstr "Laukia"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1305
+#: ../panels/printers/cc-printers-panel.c:1310
 msgctxt "print job"
 msgid "Held"
 msgstr "Laikomas"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1309
+#: ../panels/printers/cc-printers-panel.c:1314
 msgctxt "print job"
 msgid "Processing"
 msgstr "Apdorojamas"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1313
+#: ../panels/printers/cc-printers-panel.c:1318
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Sustabdytas"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1317
+#: ../panels/printers/cc-printers-panel.c:1322
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Atšauktas"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1321
+#: ../panels/printers/cc-printers-panel.c:1326
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Atmestas"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1325
+#: ../panels/printers/cc-printers-panel.c:1330
 msgctxt "print job"
 msgid "Completed"
 msgstr "Baigtas"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1408
+#: ../panels/printers/cc-printers-panel.c:1413
 msgid "Job Title"
 msgstr "Darbo pavadinimas"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1417
+#: ../panels/printers/cc-printers-panel.c:1422
 msgid "Job State"
 msgstr "Darbo būsena"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1423
+#: ../panels/printers/cc-printers-panel.c:1428
 msgid "Time"
 msgstr "Laikas"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2019
+#: ../panels/printers/cc-printers-panel.c:2024
 msgid "Failed to add new printer."
 msgstr "Nepavyko pridėti naujo spausdintuvo."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2223
-#: ../panels/printers/cc-printers-panel.c:2237
+#: ../panels/printers/cc-printers-panel.c:2228
+#: ../panels/printers/cc-printers-panel.c:2242
 msgid "Test page"
 msgstr "Testinis puslapis"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2484
+#: ../panels/printers/cc-printers-panel.c:2489
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Nepavyko įkelti sąsajos: %s"
@@ -1506,41 +1512,69 @@ msgid "Add New Printer"
 msgstr "Pridėti naują spausdintuvą"
 
 #: ../panels/printers/printers.ui.h:5
+msgid "Add Printer"
+msgstr "Pridėti spausdintuvą"
+
+#: ../panels/printers/printers.ui.h:6
+msgid "Add User"
+msgstr "Pridėti naudotoją"
+
+#: ../panels/printers/printers.ui.h:7
 msgid "Allowed users"
 msgstr "Leidžiama naudotojams"
 
-#: ../panels/printers/printers.ui.h:6
+#: ../panels/printers/printers.ui.h:8
+msgid "Cancel Print Job"
+msgstr "Atšaukti spausdinimo darbą"
+
+#: ../panels/printers/printers.ui.h:9
 #: ../panels/network/cc-network-panel.c:1990
 #: ../panels/network/cc-network-panel.c:1993
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:17
 msgid "IP Address"
 msgstr "IP adresas"
 
-#: ../panels/printers/printers.ui.h:7
+#: ../panels/printers/printers.ui.h:10
 msgid "Jobs"
 msgstr "Darbai"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:9
+#: ../panels/printers/printers.ui.h:12
 msgid "Location"
 msgstr "Vieta"
 
-#: ../panels/printers/printers.ui.h:10
+#: ../panels/printers/printers.ui.h:13
 msgid "Model"
 msgstr "Modelis"
 
+#: ../panels/printers/printers.ui.h:14
+msgid "Pause Printing"
+msgstr "Pristabdyti spausdinimą"
+
 #. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:12
+#: ../panels/printers/printers.ui.h:16
 msgid "Print _Test Page"
 msgstr "Spausdinti _testinį puslapį"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:14
+#: ../panels/printers/printers.ui.h:18
 msgid "Printer Options"
 msgstr "Spausdintuvo darbai ir parinktys"
 
+#: ../panels/printers/printers.ui.h:19
+msgid "Remove Printer"
+msgstr "Pašalinti spausdintuvą"
+
+#: ../panels/printers/printers.ui.h:20
+msgid "Remove User"
+msgstr "Pašalinti naudotoją"
+
+#: ../panels/printers/printers.ui.h:21
+msgid "Resume Printing"
+msgstr "Pratęsti spausdinimą"
+
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:16
+#: ../panels/printers/printers.ui.h:23
 msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
@@ -1549,27 +1583,27 @@ msgstr ""
 "atrodo nėra pasiekiama."
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:19
+#: ../panels/printers/printers.ui.h:26
 msgid "Supply"
 msgstr "Tiekimas"
 
 #. Translators: Switch back to printer's info tab
-#: ../panels/printers/printers.ui.h:21
+#: ../panels/printers/printers.ui.h:28
 msgid "_Back"
 msgstr "_Atgal"
 
 #. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:30
 msgid "_Default"
 msgstr "_Numatytasis"
 
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:25
+#: ../panels/printers/printers.ui.h:32
 msgid "_Options"
 msgstr "_Parinktys"
 
 #. Tanslators: Switch to tab containing printer's jobs
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:34
 msgid "_Show"
 msgstr "_Rodyti"
 
@@ -1598,77 +1632,113 @@ msgid "Keyboard Layout Options"
 msgstr "Klaviatūros išdėstymo parinktys"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
+msgid "Add Language"
+msgstr "Pridėti kalbą"
+
+#: ../panels/region/gnome-region-panel.ui.h:2
+msgid "Add Layout"
+msgstr "Pridėti išdėstymą"
+
+#: ../panels/region/gnome-region-panel.ui.h:3
+msgid "Add Region"
+msgstr "Pridėti regioną"
+
+#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Allow different layouts for individual windows"
 msgstr "Leisti atskirus išdėstymus kiekvienam langui"
 
-#: ../panels/region/gnome-region-panel.ui.h:2
+#: ../panels/region/gnome-region-panel.ui.h:5
 #: ../panels/region/gnome-region-panel-system.c:406
 msgid "Copy Settings..."
 msgstr "Kopijuoti nustatymus..."
 
-#: ../panels/region/gnome-region-panel.ui.h:3
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Currency"
 msgstr "Valiuta"
 
-#: ../panels/region/gnome-region-panel.ui.h:4
+#: ../panels/region/gnome-region-panel.ui.h:7
 msgid "Dates"
 msgstr "Datos"
 
 #. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
-#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Display language:"
 msgstr "Rodymo kalba:"
 
-#: ../panels/region/gnome-region-panel.ui.h:7
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "Examples"
 msgstr "Pavyzdžiai"
 
-#: ../panels/region/gnome-region-panel.ui.h:8
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Format:"
 msgstr "Formatas:"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:12
 msgid "Formats"
 msgstr "Formatai"
 
-#: ../panels/region/gnome-region-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "Input source:"
 msgstr "Įvesties šaltinis:"
 
-#: ../panels/region/gnome-region-panel.ui.h:11
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "Install languages..."
 msgstr "Įdiegti kalbas..."
 
-#: ../panels/region/gnome-region-panel.ui.h:12
+#: ../panels/region/gnome-region-panel.ui.h:15
 msgid "Language"
 msgstr "Kalba"
 
-#: ../panels/region/gnome-region-panel.ui.h:13
+#: ../panels/region/gnome-region-panel.ui.h:16
 msgid "Layouts"
 msgstr "Išdėstymai"
 
-#: ../panels/region/gnome-region-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:17
 msgid "Measurement"
 msgstr "Matavimas"
 
-#: ../panels/region/gnome-region-panel.ui.h:15
+#: ../panels/region/gnome-region-panel.ui.h:18
+msgid "Move Down"
+msgstr "Nuleisti"
+
+#: ../panels/region/gnome-region-panel.ui.h:19
+msgid "Move Up"
+msgstr "Pakelti"
+
+#: ../panels/region/gnome-region-panel.ui.h:20
 msgid "New windows use the default layout"
 msgstr "Naujiems langams naudojamas numatytasis išdėstymas"
 
-#: ../panels/region/gnome-region-panel.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "New windows use the previous window's layout"
 msgstr "Naujiems langams naudojamas ankstesnio lango išdėstymas"
 
-#: ../panels/region/gnome-region-panel.ui.h:17
+#: ../panels/region/gnome-region-panel.ui.h:22
 msgid "Numbers"
 msgstr "Skaičiai"
 
-#: ../panels/region/gnome-region-panel.ui.h:18
+#: ../panels/region/gnome-region-panel.ui.h:23
+msgid "Preview Layout"
+msgstr "Peržiūros išdėstymas"
+
+#: ../panels/region/gnome-region-panel.ui.h:24
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
 msgstr "Regionas ir kalba"
 
-#: ../panels/region/gnome-region-panel.ui.h:19
+#: ../panels/region/gnome-region-panel.ui.h:25
+msgid "Remove Language"
+msgstr "Pašalinti kalbą"
+
+#: ../panels/region/gnome-region-panel.ui.h:26
+msgid "Remove Layout"
+msgstr "Pašalinti išdėstymą"
+
+#: ../panels/region/gnome-region-panel.ui.h:27
+msgid "Remove Region"
+msgstr "Pašalinti regioną"
+
+#: ../panels/region/gnome-region-panel.ui.h:28
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1676,44 +1746,44 @@ msgstr ""
 "Pakeisti dabartinius klaviatūros išdėstymus\n"
 "numatytaisiais nustatymais."
 
-#: ../panels/region/gnome-region-panel.ui.h:21
+#: ../panels/region/gnome-region-panel.ui.h:30
 msgid "Reset to De_faults"
 msgstr "Atstatyti į _numatytuosius"
 
-#: ../panels/region/gnome-region-panel.ui.h:22
+#: ../panels/region/gnome-region-panel.ui.h:31
 msgid "Select a display language (change will be applied next time you log in)"
 msgstr "Pasirinkite vaizdavimo kalbą (pakeitimus bus pritaikytas kitą kartą prisijungus)"
 
-#: ../panels/region/gnome-region-panel.ui.h:23
+#: ../panels/region/gnome-region-panel.ui.h:32
 msgid "Select a region (change will be applied the next time you log in)"
 msgstr "Pasirinkite regioną (pakeitimas bus pritaikytas kitą kartą prisijungus)"
 
-#: ../panels/region/gnome-region-panel.ui.h:25
+#: ../panels/region/gnome-region-panel.ui.h:34
 msgid "System settings"
 msgstr "Sistemos nustatymai"
 
-#: ../panels/region/gnome-region-panel.ui.h:26
+#: ../panels/region/gnome-region-panel.ui.h:35
 #: ../panels/region/gnome-region-panel-system.c:400
 msgid "The login screen, system accounts and new user accounts use the system-wide Region and Language settings. You may change the system settings to match yours."
 msgstr "Prisijungimo ekranas, sistemos paskyros ir naujos naudotojų paskyros naudoja sistemos regiono ir kalbos nustatymus. Galite pakeisti sistemos nustatymus, kad jie sutaptų su jūsiškiais."
 
-#: ../panels/region/gnome-region-panel.ui.h:27
+#: ../panels/region/gnome-region-panel.ui.h:36
 msgid "Times"
 msgstr "Laikai"
 
-#: ../panels/region/gnome-region-panel.ui.h:28
+#: ../panels/region/gnome-region-panel.ui.h:37
 msgid "Use the same layout for all windows"
 msgstr "Naudoti tą patį išdėstymą visiems langams"
 
-#: ../panels/region/gnome-region-panel.ui.h:29
+#: ../panels/region/gnome-region-panel.ui.h:38
 msgid "View and edit keyboard layout options"
 msgstr "Rodyti ir keisti klaviatūros išdėstymo nustatymus"
 
-#: ../panels/region/gnome-region-panel.ui.h:30
+#: ../panels/region/gnome-region-panel.ui.h:39
 msgid "Your settings"
 msgstr "Jūsų nustatymai"
 
-#: ../panels/region/gnome-region-panel.ui.h:31
+#: ../panels/region/gnome-region-panel.ui.h:40
 msgid "_Options..."
 msgstr "_Parametrai..."
 
@@ -1938,12 +2008,12 @@ msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
 #: ../panels/network/cc-network-panel.c:1986
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:18
 msgid "IPv4 Address"
 msgstr "IPv4 adresas"
 
 #: ../panels/network/cc-network-panel.c:1987
-#: ../panels/network/network.ui.h:13
+#: ../panels/network/network.ui.h:19
 msgid "IPv6 Address"
 msgstr "IPv6 adresas"
 
@@ -2005,144 +2075,172 @@ msgstr "Tinklo nustatymai"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-msgid "Network;Wireless;IP;LAN;"
-msgstr "Tinklas;Belaidis;IP;LAN;"
+msgid "Network;Wireless;IP;LAN;Proxy;"
+msgstr "Tinklas;Belaidis;IP;LAN;Tarpinisserveris;"
 
 #: ../panels/network/network.ui.h:1
+msgid "Add Device"
+msgstr "Pridėti įrenginį"
+
+#: ../panels/network/network.ui.h:2
 msgid "Air_plane Mode"
 msgstr "_Skrydžio veiksena"
 
-#: ../panels/network/network.ui.h:2
+#: ../panels/network/network.ui.h:3
 msgid "Create..."
 msgstr "Sukurti..."
 
-#: ../panels/network/network.ui.h:3
+#: ../panels/network/network.ui.h:4
 msgid "DNS"
 msgstr "DNS"
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:5
 msgid "Default Route"
 msgstr "Numatytasis kelias"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:6
+msgid "Device Off"
+msgstr "Įrenginys išjungtas"
+
+#: ../panels/network/network.ui.h:7
+msgid "Disable VPN"
+msgstr "Išjungti VPN"
+
+#: ../panels/network/network.ui.h:8
+msgid "FTP Port"
+msgstr "FTP prievadas"
+
+#: ../panels/network/network.ui.h:9
 msgid "Gateway"
 msgstr "Tinklų sietuvas"
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:10
 msgid "Group Name"
 msgstr "Grupės pavadinimas"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:11
 msgid "Group Password"
 msgstr "Grupės slaptažodis"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:12
+msgid "HTTP Port"
+msgstr "HTTP prievadas"
+
+#: ../panels/network/network.ui.h:13
+msgid "HTTPS Port"
+msgstr "HTTPS prievadas"
+
+#: ../panels/network/network.ui.h:14
 msgid "H_TTPS Proxy"
 msgstr "HTTP tarpinis serveris"
 
-#: ../panels/network/network.ui.h:9
+#: ../panels/network/network.ui.h:15
 msgid "Hardware Address"
 msgstr "Aparatinis adresas"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:16
 msgid "IMEI"
 msgstr "IMEI"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:20
 msgid "Interface"
 msgstr "Sąsaja"
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:21
 msgid "Network Name"
 msgstr "Tinklo pavadinimas"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:22
 msgid "Provider"
 msgstr "Tiekėjas"
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:24
 msgid "Security"
 msgstr "Saugumas"
 
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:25
 msgid "Security Key"
 msgstr "Saugumo raktas"
 
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:26
 msgid "Select the interface to use for the new service"
 msgstr "Pasirinkite naudotiną sąsają šiai tarnybai"
 
-#: ../panels/network/network.ui.h:20
+#: ../panels/network/network.ui.h:27
+msgid "Socks Port"
+msgstr "Socks prievadas"
+
+#: ../panels/network/network.ui.h:28
 msgid "Speed"
 msgstr "Greitis"
 
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:29
 msgid "Subnet Mask"
 msgstr "Potinklio kaukė"
 
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:30
 msgid "Unlock"
 msgstr "Atrakinti"
 
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:31
 msgid "Username"
 msgstr "Naudotojo vardas"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:32
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/network.ui.h:25
+#: ../panels/network/network.ui.h:33
 msgid "VPN Type"
 msgstr "VPN tinklo tipas"
 
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:34
 msgid "_Configuration URL"
 msgstr "_Konfigūravimo URL"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:35
 msgid "_Configure..."
 msgstr "_Konfigūruoti..."
 
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network.ui.h:36
 msgid "_FTP Proxy"
 msgstr "_FTP tarpinis serveris"
 
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network.ui.h:37
 msgid "_HTTP Proxy"
 msgstr "_HTTP tarpinis serveris"
 
-#: ../panels/network/network.ui.h:30
+#: ../panels/network/network.ui.h:38
 msgid "_Method"
 msgstr "_Metodas"
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network.ui.h:39
 msgid "_Network Name"
 msgstr "_Tinklo pavadinimas"
 
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network.ui.h:40
 msgid "_Socks Host"
 msgstr "_Socks serveris"
 
-#: ../panels/network/network.ui.h:33
+#: ../panels/network/network.ui.h:41
 msgid "_Stop Hotspot..."
 msgstr "_Stabdyti prieigos tašką..."
 
-#: ../panels/network/network.ui.h:34
+#: ../panels/network/network.ui.h:42
 msgid "_Use as Hotspot..."
 msgstr "_Naudoti kaip prieigos tašką..."
 
-#: ../panels/network/network.ui.h:35
+#: ../panels/network/network.ui.h:43
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "Automatinis"
 
-#: ../panels/network/network.ui.h:36
+#: ../panels/network/network.ui.h:44
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "Rankinis"
 
-#: ../panels/network/network.ui.h:37
+#: ../panels/network/network.ui.h:45
 msgctxt "proxy method"
 msgid "None"
 msgstr "Joks"
@@ -2417,7 +2515,7 @@ msgstr "Numatytasis: "
 #. * profile his a standard space like AdobeRGB
 #: ../panels/color/cc-color-panel.c:126
 msgid "Colorspace: "
-msgstr "Spalvos:"
+msgstr "Spalvų erdvė:"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
@@ -2458,27 +2556,27 @@ msgstr "Visi failai"
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
 #: ../panels/color/cc-color-panel.c:504
 msgid "Available Profiles for Displays"
-msgstr "Prieinami profiliai ekranams"
+msgstr "Esami profiliai ekranui"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
 #: ../panels/color/cc-color-panel.c:508
 msgid "Available Profiles for Scanners"
-msgstr "Prieinami profiliai skaitytuvams"
+msgstr "Esami profiliai skaneriam"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
 #: ../panels/color/cc-color-panel.c:512
 msgid "Available Profiles for Printers"
-msgstr "Prieinami profiliai spausdintuvams"
+msgstr "Esami profiliai spausdintuvams"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
 #: ../panels/color/cc-color-panel.c:516
 msgid "Available Profiles for Cameras"
-msgstr "Prieinami profiliai kameroms"
+msgstr "Esami profiliai kameroms"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
 #: ../panels/color/cc-color-panel.c:520
 msgid "Available Profiles for Webcams"
-msgstr "Prieinami profiliai internetinėms kameroms"
+msgstr "Esami profiliai internetinėms kameroms"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
 #. * where the device type is not recognised
@@ -2786,7 +2884,7 @@ msgid "Sound Output Volume"
 msgstr "Garso išvesties garsumas"
 
 #: ../panels/sound/gvc-applet.c:276
-#: ../panels/sound/gvc-mixer-dialog.c:1807
+#: ../panels/sound/gvc-mixer-dialog.c:1808
 msgid "Input"
 msgstr "Įvestis"
 
@@ -2854,7 +2952,7 @@ msgstr "_Profilis:"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1093
+#: ../panels/sound/gvc-mixer-control.c:1094
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -2864,7 +2962,7 @@ msgstr[2] "%u išvesčių"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1103
+#: ../panels/sound/gvc-mixer-control.c:1104
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
@@ -2872,7 +2970,7 @@ msgstr[0] "%u įvestis"
 msgstr[1] "%u įvestys"
 msgstr[2] "%u įvesčių"
 
-#: ../panels/sound/gvc-mixer-control.c:1401
+#: ../panels/sound/gvc-mixer-control.c:1402
 msgid "System Sounds"
 msgstr "Sistemos garsai"
 
@@ -2908,44 +3006,44 @@ msgstr "_Išvesties garsumas:"
 msgid "C_hoose a device for sound output:"
 msgstr "_Pasirinkite garso išvesties įrenginį:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1796
-#: ../panels/sound/gvc-mixer-dialog.c:1925
+#: ../panels/sound/gvc-mixer-dialog.c:1797
+#: ../panels/sound/gvc-mixer-dialog.c:1926
 msgid "Settings for the selected device:"
 msgstr "Pasirinkto įrenginio nustatymai:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1814
+#: ../panels/sound/gvc-mixer-dialog.c:1815
 msgid "_Input volume:"
 msgstr "Į_vesties garsumas:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1837
+#: ../panels/sound/gvc-mixer-dialog.c:1838
 msgid "Input level:"
 msgstr "Į_vesties lygmuo:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1865
+#: ../panels/sound/gvc-mixer-dialog.c:1866
 msgid "C_hoose a device for sound input:"
 msgstr "_Pasirinkite garso įvesties įrenginį:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1892
+#: ../panels/sound/gvc-mixer-dialog.c:1893
 msgid "Hardware"
 msgstr "Aparatūra"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1897
+#: ../panels/sound/gvc-mixer-dialog.c:1898
 msgid "C_hoose a device to configure:"
 msgstr "_Pasirinkite konfigūruojamą įrenginį:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1936
+#: ../panels/sound/gvc-mixer-dialog.c:1937
 msgid "Sound Effects"
 msgstr "Garso efektai"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1943
+#: ../panels/sound/gvc-mixer-dialog.c:1944
 msgid "_Alert volume:"
 msgstr "_Įspėjimų garsumas:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1956
+#: ../panels/sound/gvc-mixer-dialog.c:1957
 msgid "Applications"
 msgstr "Programos"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1960
+#: ../panels/sound/gvc-mixer-dialog.c:1961
 msgid "No application is currently playing or recording audio."
 msgstr "Jokia programa šiuo metu negroja ir neįrašinėja garso."
 
@@ -3052,7 +3150,7 @@ msgstr "Stiklas"
 msgid "Sonar"
 msgstr "Sonaras"
 
-#: ../panels/universal-access/cc-ua-panel.c:505
+#: ../panels/universal-access/cc-ua-panel.c:504
 #: ../panels/universal-access/cc-ua-panel.c:510
 msgid "No shortcut set"
 msgstr "Spartusis klavišas nenurodytas"
@@ -3297,7 +3395,7 @@ msgstr "Pelės mygtukai"
 
 #: ../panels/universal-access/uap.ui.h:41
 msgid "Mouse Settings"
-msgstr "Pelės nustatymai"
+msgstr "Pelės nustatymai"
 
 #: ../panels/universal-access/uap.ui.h:42
 msgid "Nomon"
@@ -3333,7 +3431,7 @@ msgstr "Klaviatūra ekrane"
 
 #: ../panels/universal-access/uap.ui.h:51
 msgid "Secondary click delay"
-msgstr "Antrinio spustelėjimo delsa"
+msgstr "Antrinis spustelėjimo vėlavimas"
 
 #: ../panels/universal-access/uap.ui.h:52
 msgid "Seeing"
@@ -3479,12 +3577,12 @@ msgstr "Didesnis"
 #: ../panels/universal-access/uap.ui.h:95
 msgctxt "universal access, text size"
 msgid "Normal"
-msgstr "Įprastinis"
+msgstr "Normalus"
 
 #: ../panels/universal-access/uap.ui.h:96
 msgctxt "universal access, text size"
 msgid "Small"
-msgstr "Mažas"
+msgstr "Mažas"
 
 #: ../panels/universal-access/zoom-options.ui.h:1
 msgid "Always"
@@ -3496,7 +3594,7 @@ msgstr "Apatinė pusė"
 
 #: ../panels/universal-access/zoom-options.ui.h:3
 msgid "Centered"
-msgstr "Centruotas"
+msgstr "Centruoti"
 
 #: ../panels/universal-access/zoom-options.ui.h:4
 msgid "Color and Opacity"
@@ -3548,7 +3646,7 @@ msgstr "Stumti"
 
 #: ../panels/universal-access/zoom-options.ui.h:20
 msgid "Right Half"
-msgstr "Dešinė pusė"
+msgstr "Dešinė pusė"
 
 #: ../panels/universal-access/zoom-options.ui.h:23
 msgid "Show"
@@ -3586,7 +3684,7 @@ msgstr "Viršutinė pusė"
 
 #: ../panels/universal-access/zoom-options.ui.h:33
 msgid "Zoom Options"
-msgstr "Priartinimo parinktys"
+msgstr "Mastelio parinktys"
 
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
@@ -3912,26 +4010,26 @@ msgstr ""
 "pirma paspauskite * piktogramą"
 
 #: ../panels/user-accounts/um-user-panel.c:925
-msgid "Create a user"
-msgstr "Sukurti naudotoją"
+msgid "Create a user account"
+msgstr "Sukurti naują paskyrą"
 
 #: ../panels/user-accounts/um-user-panel.c:936
 #: ../panels/user-accounts/um-user-panel.c:1225
 msgid ""
-"To create a user,\n"
+"To create a user account,\n"
 "click the * icon first"
 msgstr ""
 "Naudotojui sukurti,\n"
 "pirma paspauskite * piktogramą"
 
 #: ../panels/user-accounts/um-user-panel.c:945
-msgid "Delete the selected user"
+msgid "Delete the selected user account"
 msgstr "Ištrinti pasirinktą naudotoją"
 
 #: ../panels/user-accounts/um-user-panel.c:957
 #: ../panels/user-accounts/um-user-panel.c:1230
 msgid ""
-"To delete the selected user,\n"
+"To delete the selected user account,\n"
 "click the * icon first"
 msgstr ""
 "Pasirinktam naudotojui ištrinti,\n"
@@ -4113,18 +4211,30 @@ msgid "Account _type"
 msgstr "Paskyros _tipas"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+msgid "Add User Account"
+msgstr "Pridėti naudotojo paskyrą"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "Login Options"
 msgstr "Prisijungimo parinktys"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "Remove User Account"
+msgstr "Pašalinti naudotojo paskyrą"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+msgid "User Icon"
+msgstr "Naudotojo piktograma"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "_Fingerprint Login"
 msgstr "Prisijungimas _piršto atspaudu"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "_Language"
 msgstr "_Kalba"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
 msgid "_Password"
 msgstr "_Slaptažodis"
 
@@ -4222,11 +4332,11 @@ msgstr "Jokio veiksmo"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:12
 msgid "No tablet detected"
-msgstr "Neaptiktas planšetinis kompiuteris"
+msgstr "Planšetė nerasta"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Please plug in or turn on your Wacom tablet"
-msgstr "Prijunkite arba įjunkite savo Wacom planšetę"
+msgstr "Prašau prijungti ar įjungti savo Wacom planšetę"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:14
 msgid "Right Mouse Button Click"
@@ -4329,11 +4439,15 @@ msgstr ""
 "Paleiskite „%s --help“ visam komandų eilutės parinkčių sąrašui gauti.\n"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:1
-#: ../shell/shell.ui.h:1
+#: ../shell/shell.ui.h:2
 msgid "System Settings"
 msgstr "Sistemos nustatymai"
 
 #: ../shell/gnomecc.directory.in.h:1
 msgid "Control Center"
 msgstr "Valdymo centras"
+
+#: ../shell/shell.ui.h:1
+msgid "All Settings"
+msgstr "Visi nustatymai"
 
