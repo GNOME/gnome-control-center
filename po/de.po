@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-10-21 23:28+0000\n"
-"PO-Revision-Date: 2011-10-23 12:22+0100\n"
+"POT-Creation-Date: 2011-11-03 17:58+0000\n"
+"PO-Revision-Date: 2011-11-05 20:28+0100\n"
 "Last-Translator: Mario Blättermann <mario.blaettermann@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>launchpad.net>\n"
 "MIME-Version: 1.0\n"
@@ -66,22 +66,34 @@ msgid "Fill"
 msgstr "Füllen"
 
 #: ../panels/background/background.ui.h:6
+msgid "Primary Color"
+msgstr "Erste Farbe"
+
+#: ../panels/background/background.ui.h:7
 msgid "Remove wallpaper"
 msgstr "Hintergrundbild entfernen"
 
-#: ../panels/background/background.ui.h:7
+#: ../panels/background/background.ui.h:8
 msgid "Scale"
 msgstr "Skalieren"
 
-#: ../panels/background/background.ui.h:8
+#: ../panels/background/background.ui.h:9
+msgid "Secondary color"
+msgstr "Zweite Farbe"
+
+#: ../panels/background/background.ui.h:10
 msgid "Span"
 msgstr "Spannen"
 
-#: ../panels/background/background.ui.h:9
+#: ../panels/background/background.ui.h:11
+msgid "Swap colors"
+msgstr "Farben tauschen"
+
+#: ../panels/background/background.ui.h:12
 msgid "Tile"
 msgstr "Kacheln"
 
-#: ../panels/background/background.ui.h:10
+#: ../panels/background/background.ui.h:13
 msgid "Zoom"
 msgstr "Zoom"
 
@@ -209,15 +221,23 @@ msgctxt "Power"
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../panels/bluetooth/bluetooth.ui.h:9
+#: ../panels/bluetooth/bluetooth.ui.h:9 ../panels/network/network.ui.h:23
+msgid "Remove Device"
+msgstr "Gerät entfernen"
+
+#: ../panels/bluetooth/bluetooth.ui.h:10
 msgid "Send Files..."
 msgstr "Dateien senden …"
 
-#: ../panels/bluetooth/bluetooth.ui.h:10 ../panels/universal-access/uap.ui.h:60
+#: ../panels/bluetooth/bluetooth.ui.h:11
+msgid "Set Up New Device"
+msgstr "Neues Gerät einrichten"
+
+#: ../panels/bluetooth/bluetooth.ui.h:12 ../panels/universal-access/uap.ui.h:60
 msgid "Sound Settings"
 msgstr "Klangeinstellungen"
 
-#: ../panels/bluetooth/bluetooth.ui.h:11
+#: ../panels/bluetooth/bluetooth.ui.h:13
 msgid "Type"
 msgstr "Typ"
 
@@ -675,7 +695,7 @@ msgid "Video CD"
 msgstr "Video-CD"
 
 #: ../panels/info/cc-info-panel.c:1474
-#: ../panels/keyboard/keyboard-shortcuts.c:1802
+#: ../panels/keyboard/keyboard-shortcuts.c:1803
 msgid "Section"
 msgstr "Abschnitt"
 
@@ -695,20 +715,20 @@ msgstr "Wechselmedien"
 msgid "Graphics"
 msgstr "Grafik"
 
-#: ../panels/info/cc-info-panel.c:1700
+#: ../panels/info/cc-info-panel.c:1701
 #, c-format
 msgid "Version %s"
 msgstr "Version %s"
 
-#: ../panels/info/cc-info-panel.c:1750
+#: ../panels/info/cc-info-panel.c:1751
 msgid "Install Updates"
 msgstr "Aktualisierungen installieren"
 
-#: ../panels/info/cc-info-panel.c:1754
+#: ../panels/info/cc-info-panel.c:1755
 msgid "System Up-To-Date"
 msgstr "System ist auf dem aktuellen Stand"
 
-#: ../panels/info/cc-info-panel.c:1758
+#: ../panels/info/cc-info-panel.c:1759
 msgid "Checking for Updates"
 msgstr "Nach Aktualisierungen wird gesucht"
 
@@ -915,7 +935,7 @@ msgid "Log out"
 msgstr "Abmelden"
 
 #: ../panels/keyboard/01-system.xml.in.h:3
-#: ../panels/region/gnome-region-panel.ui.h:24
+#: ../panels/region/gnome-region-panel.ui.h:33
 msgid "System"
 msgstr "System"
 
@@ -956,49 +976,12 @@ msgstr "Bildschirmleser ein-/ausschalten"
 msgid "Universal Access"
 msgstr "Barrierefreiheit"
 
-#: ../panels/keyboard/eggcellrendererkeys.c:21
-msgid "New shortcut..."
-msgstr "Neue Tastenkombination …"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:164
-#: ../panels/keyboard/eggcellrendererkeys.c:165
-msgid "Accelerator key"
-msgstr "Auslösetasten der Kombination"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:174
-#: ../panels/keyboard/eggcellrendererkeys.c:175
-msgid "Accelerator modifiers"
-msgstr "Zusatztasten der Kombination"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:183
-#: ../panels/keyboard/eggcellrendererkeys.c:184
-msgid "Accelerator keycode"
-msgstr "Tastencode der Kombination"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:194
-msgid "Accel Mode"
-msgstr "Kombinationsmodus"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:195
-msgid "The type of accelerator."
-msgstr "Der Tastenkombinationstyp."
-
-#. translators:
-#. * The device has been disabled
-#: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/keyboard-shortcuts.c:1191
-#: ../panels/sound/gvc-mixer-control.c:1086
-#: ../panels/user-accounts/um-fingerprint-dialog.c:177
-#: ../panels/user-accounts/um-fingerprint-dialog.c:178
-msgid "Disabled"
-msgstr "Deaktiviert"
-
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 msgid "Change keyboard settings"
 msgstr "Tastatureinstellungen ändern"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
 msgid "Keyboard"
 msgstr "Tastatur"
 
@@ -1007,23 +990,32 @@ msgstr "Tastatur"
 msgid "Shortcut;Repeat;Blink;"
 msgstr "Kürzel;Wiederholen;Blinken;"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:646
-#: ../panels/keyboard/keyboard-shortcuts.c:654
-#: ../panels/keyboard/keyboard-shortcuts.c:966
-#: ../panels/keyboard/keyboard-shortcuts.c:1564
-#: ../panels/keyboard/keyboard-shortcuts.c:1568
+#: ../panels/keyboard/keyboard-shortcuts.c:645
+#: ../panels/keyboard/keyboard-shortcuts.c:653
+#: ../panels/keyboard/keyboard-shortcuts.c:965
+#: ../panels/keyboard/keyboard-shortcuts.c:1566
+#: ../panels/keyboard/keyboard-shortcuts.c:1570
 msgid "Custom Shortcuts"
 msgstr "Eigene Tastenkombinationen"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:814
+#: ../panels/keyboard/keyboard-shortcuts.c:813
 msgid "<Unknown Action>"
 msgstr "<Unbekannte Aktion>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1217
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/keyboard-shortcuts.c:1190
+#: ../panels/sound/gvc-mixer-control.c:1087
+#: ../panels/user-accounts/um-fingerprint-dialog.c:177
+#: ../panels/user-accounts/um-fingerprint-dialog.c:178
+msgid "Disabled"
+msgstr "Deaktiviert"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1216
 msgid "Error saving the new shortcut"
 msgstr "Beim Speichern der neuen Tastenkombination ist ein Fehler aufgetreten"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1350
+#: ../panels/keyboard/keyboard-shortcuts.c:1349
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1035,7 +1027,7 @@ msgstr ""
 "Bitte versuchen Sie eine Kombination mit einer Taste wie Strg, Alt oder der "
 "Umschalttaste."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1380
+#: ../panels/keyboard/keyboard-shortcuts.c:1381
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1045,7 +1037,7 @@ msgstr ""
 "»%s«\n"
 "verwendet."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1385
+#: ../panels/keyboard/keyboard-shortcuts.c:1386
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
@@ -1053,96 +1045,104 @@ msgstr ""
 "Wenn Sie diese Tastenkombination »%s« zuweisen, wird die Tastenkombination "
 "für »%s« deaktiviert."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1391
+#: ../panels/keyboard/keyboard-shortcuts.c:1392
 msgid "_Reassign"
 msgstr "_Zuweisen"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1503
+#: ../panels/keyboard/keyboard-shortcuts.c:1505
 msgid "Too many custom shortcuts"
 msgstr "Zu viele individuelle Tastenkombinationen"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1855
+#: ../panels/keyboard/keyboard-shortcuts.c:1856
 msgid "Action"
 msgstr "Aktion"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1878
+#: ../panels/keyboard/keyboard-shortcuts.c:1879
 msgid "Shortcut"
 msgstr "Tastenkombination"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
+msgid "Add Shortcut"
+msgstr "Tastenkürzel hinzufügen"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "C_ommand:"
 msgstr "Be_fehl:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 msgid "Cursor Blinking"
 msgstr "Blinkender Cursor"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "Cursor _blinks in text fields"
 msgstr "B_linkender Cursor in Textfeldern"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
 msgid "Cursor blink speed"
 msgstr "Blinkgeschwindigkeit des Cursors"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
 msgid "Custom Shortcut"
 msgstr "Individuelle Tastenkombination"
 
 #. fast acceleration
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
 #: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "Fast"
 msgstr "Schnell"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid "Key presses _repeat when key is held down"
 msgstr "Tasten _wiederholt auslösen, wenn sie gedrückt gehalten werden"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 msgid "Layout Settings"
 msgstr "Belegungseinstellungen"
 
 #. long delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 #: ../panels/mouse/gnome-mouse-properties.ui.h:16
 #: ../panels/universal-access/uap.ui.h:38
 #: ../panels/universal-access/zoom-options.ui.h:13
 msgid "Long"
 msgstr "Lang"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+msgid "Remove Shortcut"
+msgstr "Tastenkürzel entfernen"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
 msgid "Repeat Keys"
 msgstr "Tastenwiederholung"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 msgid "Repeat keys speed"
 msgstr "Geschwindigkeit der Tastenwiederholung"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
 msgid "S_peed:"
 msgstr "Ge_schwindigkeit:"
 
 #. short delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
 #: ../panels/universal-access/uap.ui.h:54
 #: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Short"
 msgstr "Kurz"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
 msgid "Shortcuts"
 msgstr "Tastaturkürzel"
 
 #. slow acceleration
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
 #: ../panels/mouse/gnome-mouse-properties.ui.h:26
 msgid "Slow"
 msgstr "Langsam"
 
 # extrem gekürzt, wirkt sich auf Fensterbreite aus
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
@@ -1150,20 +1150,20 @@ msgstr ""
 "Um ein Tastenkürzel zu bearbeiten, klicken Sie auf die Zeile und drücken Sie "
 "die neue Tastenkombination, oder drücken Sie die Rücktaste, um sie zu löschen."
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
 #: ../panels/universal-access/uap.ui.h:67
 msgid "Typing"
 msgstr "Texteingabe"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
 msgid "_Delay:"
 msgstr "_Verzögerung:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
 msgid "_Name:"
 msgstr "_Name:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:23
 msgid "_Speed:"
 msgstr "_Geschwindigkeit:"
 
@@ -1182,6 +1182,7 @@ msgstr "Anme_lden"
 #. translators: This is the title of the "Add Account" dialogue.
 #. * The title is not visible when using GNOME Shell
 #: ../panels/online-accounts/cc-online-accounts-panel.c:461
+#: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "Add Account"
 msgstr "Konto hinzufügen"
 
@@ -1230,130 +1231,134 @@ msgstr "Online-Konten verwalten"
 msgid "Online Accounts"
 msgstr "Online-Konten"
 
-#: ../panels/online-accounts/online-accounts.ui.h:1
+#: ../panels/online-accounts/online-accounts.ui.h:2
+msgid "Remove Account"
+msgstr "Konto entfernen"
+
+#: ../panels/online-accounts/online-accounts.ui.h:3
 msgid "Select an account"
 msgstr "Konto auswählen"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:520
+#: ../panels/printers/cc-printers-panel.c:525
 msgid "Low on toner"
 msgstr "Wenig Toner"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:522
+#: ../panels/printers/cc-printers-panel.c:527
 msgid "Out of toner"
 msgstr "Toner leer"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:525
+#: ../panels/printers/cc-printers-panel.c:530
 msgid "Low on developer"
 msgstr "Wenig Entwickler"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:528
+#: ../panels/printers/cc-printers-panel.c:533
 msgid "Out of developer"
 msgstr "Entwickler leer"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:530
+#: ../panels/printers/cc-printers-panel.c:535
 msgid "Low on a marker supply"
 msgstr "Einer der Farbspeicher fast leer"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:532
+#: ../panels/printers/cc-printers-panel.c:537
 msgid "Out of a marker supply"
 msgstr "Eine Farbpatrone leer"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:534
+#: ../panels/printers/cc-printers-panel.c:539
 msgid "Open cover"
 msgstr "Abdeckung offen"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:536
+#: ../panels/printers/cc-printers-panel.c:541
 msgid "Open door"
 msgstr "Klappe offen"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:538
+#: ../panels/printers/cc-printers-panel.c:543
 msgid "Low on paper"
 msgstr "Wenig Papier"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:540
+#: ../panels/printers/cc-printers-panel.c:545
 msgid "Out of paper"
 msgstr "Papier leer"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:542
+#: ../panels/printers/cc-printers-panel.c:547
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Abgemeldet"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:544
+#: ../panels/printers/cc-printers-panel.c:549
 msgctxt "printer state"
 msgid "Paused"
 msgstr "Angehalten"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:546
+#: ../panels/printers/cc-printers-panel.c:551
 msgid "Waste receptacle almost full"
 msgstr "Der Abfallbehälter ist fast voll"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:548
+#: ../panels/printers/cc-printers-panel.c:553
 msgid "Waste receptacle full"
 msgstr "Der Abfallbehälter ist voll"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:550
+#: ../panels/printers/cc-printers-panel.c:555
 msgid "The optical photo conductor is near end of life"
 msgstr "Der optische Bildübertrager ist beinahe verbraucht"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:552
+#: ../panels/printers/cc-printers-panel.c:557
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Der optische Bildübertrager funktioniert nicht mehr"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:724
+#: ../panels/printers/cc-printers-panel.c:729
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Bereit"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:728
+#: ../panels/printers/cc-printers-panel.c:733
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Verarbeitung läuft"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:732
+#: ../panels/printers/cc-printers-panel.c:737
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Angehalten"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:851
+#: ../panels/printers/cc-printers-panel.c:856
 msgid "Toner Level"
 msgstr "Tonerfüllstand"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:854
+#: ../panels/printers/cc-printers-panel.c:859
 msgid "Ink Level"
 msgstr "Tintenfüllstand"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:857
+#: ../panels/printers/cc-printers-panel.c:862
 msgid "Supply Level"
 msgstr "Materialfüllstand"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:872
-#: ../panels/printers/cc-printers-panel.c:1258
+#: ../panels/printers/cc-printers-panel.c:877
+#: ../panels/printers/cc-printers-panel.c:1263
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -1361,80 +1366,80 @@ msgstr[0] "%u aktiv"
 msgstr[1] "%u aktiv"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:977
+#: ../panels/printers/cc-printers-panel.c:982
 msgid "No printers available"
 msgstr "Keine Drucker verfügbar"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1301
+#: ../panels/printers/cc-printers-panel.c:1306
 msgctxt "print job"
 msgid "Pending"
 msgstr "Ausstehend"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1305
+#: ../panels/printers/cc-printers-panel.c:1310
 msgctxt "print job"
 msgid "Held"
 msgstr "Zurückgehalten"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1309
+#: ../panels/printers/cc-printers-panel.c:1314
 msgctxt "print job"
 msgid "Processing"
 msgstr "Verarbeitung läuft"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1313
+#: ../panels/printers/cc-printers-panel.c:1318
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Angehalten"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1317
+#: ../panels/printers/cc-printers-panel.c:1322
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Abgebrochen"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1321
+#: ../panels/printers/cc-printers-panel.c:1326
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Abgebrochen"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1325
+#: ../panels/printers/cc-printers-panel.c:1330
 msgctxt "print job"
 msgid "Completed"
 msgstr "Abgeschlossen"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1408
+#: ../panels/printers/cc-printers-panel.c:1413
 msgid "Job Title"
 msgstr "Auftragsbezeichnung"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1417
+#: ../panels/printers/cc-printers-panel.c:1422
 msgid "Job State"
 msgstr "Auftragsstatus"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1423
+#: ../panels/printers/cc-printers-panel.c:1428
 msgid "Time"
 msgstr "Uhrzeit"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2019
+#: ../panels/printers/cc-printers-panel.c:2024
 msgid "Failed to add new printer."
 msgstr "Neuer Drucker konnte nicht hinzugefügt werden."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2223
-#: ../panels/printers/cc-printers-panel.c:2237
+#: ../panels/printers/cc-printers-panel.c:2228
+#: ../panels/printers/cc-printers-panel.c:2242
 msgid "Test page"
 msgstr "Testseite"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2484
+#: ../panels/printers/cc-printers-panel.c:2489
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Die Benutzeroberfläche konnte nicht geladen werden: %s"
@@ -1543,39 +1548,67 @@ msgid "Add New Printer"
 msgstr "Neuen Drucker hinzufügen"
 
 #: ../panels/printers/printers.ui.h:5
+msgid "Add Printer"
+msgstr "Drucker hinzufügen"
+
+#: ../panels/printers/printers.ui.h:6
+msgid "Add User"
+msgstr "Benutzer hinzufügen"
+
+#: ../panels/printers/printers.ui.h:7
 msgid "Allowed users"
 msgstr "Erlaubte Benutzer"
 
-#: ../panels/printers/printers.ui.h:6 ../panels/network/cc-network-panel.c:1990
-#: ../panels/network/cc-network-panel.c:1993 ../panels/network/network.ui.h:11
+#: ../panels/printers/printers.ui.h:8
+msgid "Cancel Print Job"
+msgstr "Druckauftrag abbrechen"
+
+#: ../panels/printers/printers.ui.h:9 ../panels/network/cc-network-panel.c:1990
+#: ../panels/network/cc-network-panel.c:1993 ../panels/network/network.ui.h:17
 msgid "IP Address"
 msgstr "IP-Adresse"
 
-#: ../panels/printers/printers.ui.h:7
+#: ../panels/printers/printers.ui.h:10
 msgid "Jobs"
 msgstr "Aufträge"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:9
+#: ../panels/printers/printers.ui.h:12
 msgid "Location"
 msgstr "Ort"
 
-#: ../panels/printers/printers.ui.h:10
+#: ../panels/printers/printers.ui.h:13
 msgid "Model"
 msgstr "Modell"
 
+#: ../panels/printers/printers.ui.h:14
+msgid "Pause Printing"
+msgstr "Drucken unterbrechen"
+
 #. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:12
+#: ../panels/printers/printers.ui.h:16
 msgid "Print _Test Page"
 msgstr "_Testseite drucken"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:14
+#: ../panels/printers/printers.ui.h:18
 msgid "Printer Options"
 msgstr "Druckoptionen"
 
+#: ../panels/printers/printers.ui.h:19
+msgid "Remove Printer"
+msgstr "Drucker entfernen"
+
+#: ../panels/printers/printers.ui.h:20
+msgid "Remove User"
+msgstr "Benutzer entfernen"
+
+#: ../panels/printers/printers.ui.h:21
+msgid "Resume Printing"
+msgstr "Drucken fortsetzen"
+
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:16
+#: ../panels/printers/printers.ui.h:23
 msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
@@ -1584,28 +1617,28 @@ msgstr ""
 "nicht verfügbar ist."
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:19
+#: ../panels/printers/printers.ui.h:26
 msgid "Supply"
 msgstr "Material"
 
 # CHECK upto line 505
 #. Translators: Switch back to printer's info tab
-#: ../panels/printers/printers.ui.h:21
+#: ../panels/printers/printers.ui.h:28
 msgid "_Back"
 msgstr "_Zurück"
 
 #. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:30
 msgid "_Default"
 msgstr "_Standard"
 
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:25
+#: ../panels/printers/printers.ui.h:32
 msgid "_Options"
 msgstr "_Optionen"
 
 #. Tanslators: Switch to tab containing printer's jobs
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:34
 msgid "_Show"
 msgstr "An_zeigen"
 
@@ -1634,77 +1667,113 @@ msgid "Keyboard Layout Options"
 msgstr "Tastaturbelegungseinstellungen"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
+msgid "Add Language"
+msgstr "Sprache hinzufügen"
+
+#: ../panels/region/gnome-region-panel.ui.h:2
+msgid "Add Layout"
+msgstr "Belegung hinzufügen"
+
+#: ../panels/region/gnome-region-panel.ui.h:3
+msgid "Add Region"
+msgstr "Region hinzufügen"
+
+#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Allow different layouts for individual windows"
 msgstr "Verschiedene Anordnungen für einzelne Fenster erlauben"
 
-#: ../panels/region/gnome-region-panel.ui.h:2
+#: ../panels/region/gnome-region-panel.ui.h:5
 #: ../panels/region/gnome-region-panel-system.c:406
 msgid "Copy Settings..."
 msgstr "Einstellungen kopieren …"
 
-#: ../panels/region/gnome-region-panel.ui.h:3
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Currency"
 msgstr "Währung"
 
-#: ../panels/region/gnome-region-panel.ui.h:4
+#: ../panels/region/gnome-region-panel.ui.h:7
 msgid "Dates"
 msgstr "Daten"
 
 #. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
-#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Display language:"
 msgstr "Anzeigesprache:"
 
-#: ../panels/region/gnome-region-panel.ui.h:7
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "Examples"
 msgstr "Beispiele"
 
-#: ../panels/region/gnome-region-panel.ui.h:8
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Format:"
 msgstr "Format:"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:12
 msgid "Formats"
 msgstr "Formate"
 
-#: ../panels/region/gnome-region-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "Input source:"
 msgstr "Eingabequelle:"
 
-#: ../panels/region/gnome-region-panel.ui.h:11
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "Install languages..."
 msgstr "Sprachen installieren …"
 
-#: ../panels/region/gnome-region-panel.ui.h:12
+#: ../panels/region/gnome-region-panel.ui.h:15
 msgid "Language"
 msgstr "Sprache"
 
-#: ../panels/region/gnome-region-panel.ui.h:13
+#: ../panels/region/gnome-region-panel.ui.h:16
 msgid "Layouts"
 msgstr "Belegungen"
 
-#: ../panels/region/gnome-region-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:17
 msgid "Measurement"
 msgstr "Maßeinheiten"
 
-#: ../panels/region/gnome-region-panel.ui.h:15
+#: ../panels/region/gnome-region-panel.ui.h:18
+msgid "Move Down"
+msgstr "Hinunter schieben"
+
+#: ../panels/region/gnome-region-panel.ui.h:19
+msgid "Move Up"
+msgstr "Herauf schieben"
+
+#: ../panels/region/gnome-region-panel.ui.h:20
 msgid "New windows use the default layout"
 msgstr "Neue Fenster verwenden die vorgegebene Anordnung"
 
-#: ../panels/region/gnome-region-panel.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "New windows use the previous window's layout"
 msgstr "Anordnung des vorherigen Fensters in neuen Fenstern verwenden"
 
-#: ../panels/region/gnome-region-panel.ui.h:17
+#: ../panels/region/gnome-region-panel.ui.h:22
 msgid "Numbers"
 msgstr "Zahlen"
 
-#: ../panels/region/gnome-region-panel.ui.h:18
+#: ../panels/region/gnome-region-panel.ui.h:23
+msgid "Preview Layout"
+msgstr "Belegungsvorschau"
+
+#: ../panels/region/gnome-region-panel.ui.h:24
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
 msgstr "Region und Sprache"
 
-#: ../panels/region/gnome-region-panel.ui.h:19
+#: ../panels/region/gnome-region-panel.ui.h:25
+msgid "Remove Language"
+msgstr "Sprache entfernen"
+
+#: ../panels/region/gnome-region-panel.ui.h:26
+msgid "Remove Layout"
+msgstr "Belegung entfernen"
+
+#: ../panels/region/gnome-region-panel.ui.h:27
+msgid "Remove Region"
+msgstr "Region entfernen"
+
+#: ../panels/region/gnome-region-panel.ui.h:28
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1712,26 +1781,26 @@ msgstr ""
 "Die aktuellen Einstellungen zur Tastaturbelegung\n"
 "durch die Vorgabeeinstellungen ersetzen"
 
-#: ../panels/region/gnome-region-panel.ui.h:21
+#: ../panels/region/gnome-region-panel.ui.h:30
 msgid "Reset to De_faults"
 msgstr "Auf Vor_gabewerte zurücksetzen"
 
-#: ../panels/region/gnome-region-panel.ui.h:22
+#: ../panels/region/gnome-region-panel.ui.h:31
 msgid "Select a display language (change will be applied next time you log in)"
 msgstr ""
 "Wählen Sie eine Anzeigensprache (Änderungen werden mit der nächsten Anmeldung "
 "wirksam)"
 
-#: ../panels/region/gnome-region-panel.ui.h:23
+#: ../panels/region/gnome-region-panel.ui.h:32
 msgid "Select a region (change will be applied the next time you log in)"
 msgstr ""
 "Wählen Sie eine Region (Änderungen werden mit der nächsten Anmeldung wirksam)"
 
-#: ../panels/region/gnome-region-panel.ui.h:25
+#: ../panels/region/gnome-region-panel.ui.h:34
 msgid "System settings"
 msgstr "Systemeinstellungen"
 
-#: ../panels/region/gnome-region-panel.ui.h:26
+#: ../panels/region/gnome-region-panel.ui.h:35
 #: ../panels/region/gnome-region-panel-system.c:400
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
@@ -1742,23 +1811,23 @@ msgstr ""
 "Regions- und Spracheinstellungen des Systems. Sie können die "
 "Systemeinstellungen an Ihre Erfordernisse anpassen."
 
-#: ../panels/region/gnome-region-panel.ui.h:27
+#: ../panels/region/gnome-region-panel.ui.h:36
 msgid "Times"
 msgstr "Zeiten"
 
-#: ../panels/region/gnome-region-panel.ui.h:28
+#: ../panels/region/gnome-region-panel.ui.h:37
 msgid "Use the same layout for all windows"
 msgstr "Gleiche Anordnung für alle Fenster verwenden"
 
-#: ../panels/region/gnome-region-panel.ui.h:29
+#: ../panels/region/gnome-region-panel.ui.h:38
 msgid "View and edit keyboard layout options"
 msgstr "Tastaturbelegungseinstellungen betrachten und bearbeiten"
 
-#: ../panels/region/gnome-region-panel.ui.h:30
+#: ../panels/region/gnome-region-panel.ui.h:39
 msgid "Your settings"
 msgstr "Ihre Einstellungen"
 
-#: ../panels/region/gnome-region-panel.ui.h:31
+#: ../panels/region/gnome-region-panel.ui.h:40
 msgid "_Options..."
 msgstr "_Optionen …"
 
@@ -1993,11 +2062,11 @@ msgstr "HotSpot"
 msgid "%d Mb/s"
 msgstr "%d Mbit/s"
 
-#: ../panels/network/cc-network-panel.c:1986 ../panels/network/network.ui.h:12
+#: ../panels/network/cc-network-panel.c:1986 ../panels/network/network.ui.h:18
 msgid "IPv4 Address"
 msgstr "IPv4-Adresse"
 
-#: ../panels/network/cc-network-panel.c:1987 ../panels/network/network.ui.h:13
+#: ../panels/network/cc-network-panel.c:1987 ../panels/network/network.ui.h:19
 msgid "IPv6 Address"
 msgstr "IPv6-Adresse"
 
@@ -2060,144 +2129,173 @@ msgstr "Netzwerkeinstellungen"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-msgid "Network;Wireless;IP;LAN;"
-msgstr "Netzwerk;Drahtlos;IP;LAN;"
+msgid "Network;Wireless;IP;LAN;Proxy;"
+msgstr "Netzwerk;Drahtlos;IP;LAN;Proxy;"
 
 #: ../panels/network/network.ui.h:1
+msgid "Add Device"
+msgstr "Gerät hinzufügen"
+
+#: ../panels/network/network.ui.h:2
 msgid "Air_plane Mode"
 msgstr "_Flugzeugmodus"
 
-#: ../panels/network/network.ui.h:2
+#: ../panels/network/network.ui.h:3
 msgid "Create..."
 msgstr "Erstellen …"
 
-#: ../panels/network/network.ui.h:3
+#: ../panels/network/network.ui.h:4
 msgid "DNS"
 msgstr "DNS"
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:5
 msgid "Default Route"
 msgstr "Vorgaberoute"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:6
+#, fuzzy
+msgid "Device Off"
+msgstr "Gerät"
+
+#: ../panels/network/network.ui.h:7
+msgid "Disable VPN"
+msgstr "VPN deaktivieren"
+
+#: ../panels/network/network.ui.h:8
+msgid "FTP Port"
+msgstr "FTP-Port"
+
+#: ../panels/network/network.ui.h:9
 msgid "Gateway"
 msgstr "Gateway"
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:10
 msgid "Group Name"
 msgstr "Gruppenname"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:11
 msgid "Group Password"
 msgstr "Gruppenpasswort"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:12
+msgid "HTTP Port"
+msgstr "HTTP-Port"
+
+#: ../panels/network/network.ui.h:13
+msgid "HTTPS Port"
+msgstr "HTTPS-Port"
+
+#: ../panels/network/network.ui.h:14
 msgid "H_TTPS Proxy"
 msgstr "H_TTPS-Proxy"
 
-#: ../panels/network/network.ui.h:9
+#: ../panels/network/network.ui.h:15
 msgid "Hardware Address"
 msgstr "Hardware-Adresse"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:16
 msgid "IMEI"
 msgstr "IMEI"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:20
 msgid "Interface"
 msgstr "Schnittstelle"
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:21
 msgid "Network Name"
 msgstr "Netzwerkname"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:22
 msgid "Provider"
 msgstr "Dienstanbieter"
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:24
 msgid "Security"
 msgstr "Sicherheit"
 
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:25
 msgid "Security Key"
 msgstr "Sicherheitsschlüssel"
 
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:26
 msgid "Select the interface to use for the new service"
 msgstr "Schnittstelle für das neue Gerät auswählen"
 
-#: ../panels/network/network.ui.h:20
+#: ../panels/network/network.ui.h:27
+msgid "Socks Port"
+msgstr "SOCKS-Port"
+
+#: ../panels/network/network.ui.h:28
 msgid "Speed"
 msgstr "Geschwindigkeit"
 
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:29
 msgid "Subnet Mask"
 msgstr "Subnetz-Maske"
 
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:30
 msgid "Unlock"
 msgstr "Entsperren"
 
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:31
 msgid "Username"
 msgstr "Benutzername"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:32
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/network.ui.h:25
+#: ../panels/network/network.ui.h:33
 msgid "VPN Type"
 msgstr "VPN-Verbindungstyp"
 
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:34
 msgid "_Configuration URL"
 msgstr "_Konfigurationsadresse"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:35
 msgid "_Configure..."
 msgstr "_Konfigurieren …"
 
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network.ui.h:36
 msgid "_FTP Proxy"
 msgstr "_FTP-Proxy"
 
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network.ui.h:37
 msgid "_HTTP Proxy"
 msgstr "_HTTP-Proxy"
 
-#: ../panels/network/network.ui.h:30
+#: ../panels/network/network.ui.h:38
 msgid "_Method"
 msgstr "_Methode"
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network.ui.h:39
 msgid "_Network Name"
 msgstr "_Netzwerkname"
 
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network.ui.h:40
 msgid "_Socks Host"
 msgstr "_SOCKS-Rechner"
 
-#: ../panels/network/network.ui.h:33
+#: ../panels/network/network.ui.h:41
 msgid "_Stop Hotspot..."
 msgstr "Hot_Spot anhalten …"
 
-#: ../panels/network/network.ui.h:34
+#: ../panels/network/network.ui.h:42
 msgid "_Use as Hotspot..."
 msgstr "Als _HotSpot verwenden …"
 
-#: ../panels/network/network.ui.h:35
+#: ../panels/network/network.ui.h:43
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "Automatisch"
 
-#: ../panels/network/network.ui.h:36
+#: ../panels/network/network.ui.h:44
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "Manuell"
 
-#: ../panels/network/network.ui.h:37
+#: ../panels/network/network.ui.h:45
 msgctxt "proxy method"
 msgid "None"
 msgstr "Keine"
@@ -2833,7 +2931,7 @@ msgstr "Ausgabe"
 msgid "Sound Output Volume"
 msgstr "Wiedergabelautstärke"
 
-#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1807
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1808
 msgid "Input"
 msgstr "Eingang"
 
@@ -2900,7 +2998,7 @@ msgstr "_Profil:"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1093
+#: ../panels/sound/gvc-mixer-control.c:1094
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -2909,14 +3007,14 @@ msgstr[1] "%u Ausgänge"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1103
+#: ../panels/sound/gvc-mixer-control.c:1104
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u Eingang"
 msgstr[1] "%u Eingänge"
 
-#: ../panels/sound/gvc-mixer-control.c:1401
+#: ../panels/sound/gvc-mixer-control.c:1402
 msgid "System Sounds"
 msgstr "Systemklänge"
 
@@ -2952,44 +3050,44 @@ msgstr "_Wiedergabelautstärke: "
 msgid "C_hoose a device for sound output:"
 msgstr "Wä_hlen Sie ein Gerät zur Tonausgabe:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1796
-#: ../panels/sound/gvc-mixer-dialog.c:1925
+#: ../panels/sound/gvc-mixer-dialog.c:1797
+#: ../panels/sound/gvc-mixer-dialog.c:1926
 msgid "Settings for the selected device:"
 msgstr "Einstellungen für das gewählte Gerät:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1814
+#: ../panels/sound/gvc-mixer-dialog.c:1815
 msgid "_Input volume:"
 msgstr "_Aufnahmelautstärke: "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1837
+#: ../panels/sound/gvc-mixer-dialog.c:1838
 msgid "Input level:"
 msgstr "Aufnahmepegel:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1865
+#: ../panels/sound/gvc-mixer-dialog.c:1866
 msgid "C_hoose a device for sound input:"
 msgstr "Wä_hlen Sie ein Gerät zur Toneingabe:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1892
+#: ../panels/sound/gvc-mixer-dialog.c:1893
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1897
+#: ../panels/sound/gvc-mixer-dialog.c:1898
 msgid "C_hoose a device to configure:"
 msgstr "Wä_hlen Sie ein Gerät zum Konfigurieren:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1936
+#: ../panels/sound/gvc-mixer-dialog.c:1937
 msgid "Sound Effects"
 msgstr "Klangeffekte"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1943
+#: ../panels/sound/gvc-mixer-dialog.c:1944
 msgid "_Alert volume:"
 msgstr "_Warnlautstärke: "
 
-#: ../panels/sound/gvc-mixer-dialog.c:1956
+#: ../panels/sound/gvc-mixer-dialog.c:1957
 msgid "Applications"
 msgstr "Anwendungen"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1960
+#: ../panels/sound/gvc-mixer-dialog.c:1961
 msgid "No application is currently playing or recording audio."
 msgstr "Derzeit wird von keiner Audio-Anwendung aufgenommen oder wiedergegeben."
 
@@ -4003,29 +4101,29 @@ msgstr ""
 "klicken Sie zuerst auf das Symbol *"
 
 #: ../panels/user-accounts/um-user-panel.c:925
-msgid "Create a user"
-msgstr "Einen Benutzer erstellen"
+msgid "Create a user account"
+msgstr "Ein Benutzerkonto erstellen"
 
 #: ../panels/user-accounts/um-user-panel.c:936
 #: ../panels/user-accounts/um-user-panel.c:1225
 msgid ""
-"To create a user,\n"
+"To create a user account,\n"
 "click the * icon first"
 msgstr ""
-"Um einen Benutzer anzulegen,\n"
+"Um ein Benutzerkonto anzulegen,\n"
 "klicken Sie zuerst auf das Symbol *"
 
 #: ../panels/user-accounts/um-user-panel.c:945
-msgid "Delete the selected user"
-msgstr "Den gewählten Benutzer löschen"
+msgid "Delete the selected user account"
+msgstr "Das gewählte Benutzerkonto löschen"
 
 #: ../panels/user-accounts/um-user-panel.c:957
 #: ../panels/user-accounts/um-user-panel.c:1230
 msgid ""
-"To delete the selected user,\n"
+"To delete the selected user account,\n"
 "click the * icon first"
 msgstr ""
-"Um den gewählten Benutzer zu löschen,\n"
+"Um das gewählte Benutzerkonto zu löschen,\n"
 "klicken Sie zuerst auf das Symbol *"
 
 #: ../panels/user-accounts/um-user-panel.c:1134
@@ -4213,18 +4311,30 @@ msgid "Account _type"
 msgstr "Konto_typ"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+msgid "Add User Account"
+msgstr "Benutzerkonto hinzufügen"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "Login Options"
 msgstr "Anmeldeoptionen"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "Remove User Account"
+msgstr "Benutzerkonto löschen"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+msgid "User Icon"
+msgstr "Benutzersymbol"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "_Fingerprint Login"
 msgstr "Anmeldung mit _Fingerabdruck"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "_Language"
 msgstr "_Sprache"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
 msgid "_Password"
 msgstr "_Passwort"
 
@@ -4436,7 +4546,7 @@ msgstr ""
 "Rufen Sie »%s --help« auf, um eine vollständige Liste der verfügbaren\n"
 "Befehlszeilenoptionen zu sehen.\n"
 
-#: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:1
+#: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:2
 msgid "System Settings"
 msgstr "Systemeinstellungen"
 
@@ -4444,3 +4554,27 @@ msgstr "Systemeinstellungen"
 msgid "Control Center"
 msgstr "Kontrollzentrum"
 
+#: ../shell/shell.ui.h:1
+msgid "All Settings"
+msgstr "Alle Einstellungen"
+
+#~ msgid "New shortcut..."
+#~ msgstr "Neue Tastenkombination …"
+
+#~ msgid "Accelerator key"
+#~ msgstr "Auslösetasten der Kombination"
+
+#~ msgid "Accelerator modifiers"
+#~ msgstr "Zusatztasten der Kombination"
+
+#~ msgid "Accelerator keycode"
+#~ msgstr "Tastencode der Kombination"
+
+#~ msgid "Accel Mode"
+#~ msgstr "Kombinationsmodus"
+
+#~ msgid "The type of accelerator."
+#~ msgstr "Der Tastenkombinationstyp."
+
+#~ msgid "Create a user"
+#~ msgstr "Einen Benutzer erstellen"
