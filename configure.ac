@@ -307,7 +307,6 @@ fi
 AC_CONFIG_FILES([
 Makefile
 help/Makefile
-libgnome-control-center/Makefile
 panels/Makefile
 panels/common/Makefile
 panels/background/Makefile

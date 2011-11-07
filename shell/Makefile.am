@@ -1,6 +1,5 @@
 INCLUDES =					\
 	-I$(top_srcdir)				\
-	-I$(top_srcdir)/libgnome-control-center \
 	$(SHELL_CFLAGS)
 
 bin_PROGRAMS = gnome-control-center
@@ -28,10 +27,15 @@ gnome_control_center_SOURCES =			\
 	cc-shell-item-view.h			\
 	cc-shell-model.c			\
 	cc-shell-model.h			\
+	cc-editable-entry.c			\
+	cc-editable-entry.h			\
+	cc-panel.c				\
+	cc-panel.h				\
+	cc-shell.c				\
+	cc-shell.h				\
 	$(MARSHAL_FILES)
 
 gnome_control_center_LDADD =			\
-	$(top_builddir)/libgnome-control-center/libgnome-control-center.la \
 	$(SHELL_LIBS)
 
 gnome_control_center_LDFLAGS = -export-dynamic

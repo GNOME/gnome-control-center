@@ -22,7 +22,7 @@
 #define _GNOME_CONTROL_CENTER_H
 
 #include <glib-object.h>
-#include <libgnome-control-center/cc-shell.h>
+#include "cc-shell.h"
 
 G_BEGIN_DECLS
 
