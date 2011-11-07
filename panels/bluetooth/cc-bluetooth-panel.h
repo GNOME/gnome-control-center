@@ -25,7 +25,7 @@
 #ifndef _CC_BLUETOOTH_PANEL_H
 #define _CC_BLUETOOTH_PANEL_H
 
-#include <libgnome-control-center/cc-shell.h>
+#include <shell/cc-shell.h>
 
 G_BEGIN_DECLS
 

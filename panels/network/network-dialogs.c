@@ -20,7 +20,7 @@
  * Copyright 2008 - 2011 Red Hat, Inc. 
  */
 
-#include <libgnome-control-center/cc-shell.h>
+#include <shell/cc-shell.h>
 #include <nm-utils.h>
 #include <nm-connection.h>
 #include <nm-setting-gsm.h>

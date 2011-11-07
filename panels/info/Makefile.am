@@ -8,7 +8,6 @@ INCLUDES = 						\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DDATADIR="\"$(datadir)\""			\
 	-DLIBEXECDIR="\"$(libexecdir)\""		\
-	-I$(top_srcdir)/libgnome-control-center/	\
 	$(NULL)
 
 noinst_PROGRAMS = test-hostname

@@ -14,7 +14,6 @@ AM_CPPFLAGS =						\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
 	-DUM_PIXMAP_DIR=\""$(pkgdatadir)/pixmaps"\"	\
 	-I$(srcdir)/../common/				\
-	-I$(top_srcdir)/libgnome-control-center/	\
 	$(PANEL_CFLAGS)					\
 	$(USER_ACCOUNTS_PANEL_CFLAGS)			\
 	$(DISABLE_DEPRECATED)

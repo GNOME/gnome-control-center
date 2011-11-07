@@ -20,7 +20,7 @@
  */
 
 #include <gtk/gtk.h>
-#include <libgnome-control-center/cc-panel.h>
+#include <shell/cc-panel.h>
 
 void keyboard_general_init (CcPanel *panel, GtkBuilder *builder);
 void keyboard_general_dispose (CcPanel *panel);

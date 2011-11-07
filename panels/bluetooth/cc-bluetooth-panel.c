@@ -26,7 +26,7 @@
 #endif
 
 #include <glib/gi18n-lib.h>
-#include <libgnome-control-center/cc-shell.h>
+#include <shell/cc-shell.h>
 
 #include "cc-bluetooth-panel.h"
 

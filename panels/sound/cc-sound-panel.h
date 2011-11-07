@@ -21,7 +21,7 @@
 #ifndef _CC_SOUND_PANEL_H
 #define _CC_SOUND_PANEL_H
 
-#include <libgnome-control-center/cc-panel.h>
+#include <shell/cc-panel.h>
 #include "gvc-mixer-control.h"
 #include "gvc-mixer-dialog.h"
 

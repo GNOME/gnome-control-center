@@ -23,7 +23,7 @@
 #ifndef __GOA_PANEL_H__
 #define __GOA_PANEL_H__
 
-#include <libgnome-control-center/cc-panel.h>
+#include <shell/cc-panel.h>
 
 G_BEGIN_DECLS
 

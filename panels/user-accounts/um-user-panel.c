@@ -40,12 +40,13 @@
 
 #include "marshal.h"
 
+#include "shell/cc-editable-entry.h"
+
 #include "um-user.h"
 #include "um-user-manager.h"
 
 #include "um-strength-bar.h"
 #include "um-editable-button.h"
-#include "cc-editable-entry.h"
 #include "um-editable-combo.h"
 
 #include "um-account-dialog.h"
