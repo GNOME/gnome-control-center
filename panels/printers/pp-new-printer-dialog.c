@@ -58,7 +58,7 @@
 #define SCP_PATH  "/org/fedoraproject/Config/Printing"
 #define SCP_IFACE "org.fedoraproject.Config.Printing"
 
-#define ALLOWED_CHARACTERS "abcdefghijklmnopqrtsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_/"
+#define ALLOWED_CHARACTERS "abcdefghijklmnopqrtsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
 
 static void pp_new_printer_dialog_hide (PpNewPrinterDialog *pp);
 static void actualize_devices_list (PpNewPrinterDialog *pp);
