@@ -76,7 +76,6 @@ static GtkWidget *custom_shortcut_command_entry = NULL;
 static GHashTable *kb_system_sections = NULL;
 static GHashTable *kb_apps_sections = NULL;
 static GHashTable *kb_user_sections = NULL;
-static guint workspace_num_notify_id = 0;
 
 static void
 free_key_array (GPtrArray *keys)
@@ -1366,15 +1365,6 @@ accel_cleared_callback (GtkCellRendererText *cell,
   g_object_set (G_OBJECT (item), "binding", "", NULL);
 }
 
-static void
-key_entry_controlling_key_changed (GConfClient *client,
-                                   guint        cnxn_id,
-                                   GConfEntry  *entry,
-                                   gpointer     user_data)
-{
-  reload_sections (user_data);
-}
-
 /* this handler is used to keep accels from activating while the user
  * is assigning a new shortcut so that he won't accidentally trigger one
  * of the widgets */
@@ -1797,11 +1787,6 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   gtk_tree_view_column_set_sort_column_id (column, DETAIL_KEYENTRY_COLUMN);
 
   gconf_client_add_dir (client, GCONF_BINDING_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-  gconf_client_add_dir (client, "/apps/metacity/general", GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-  workspace_num_notify_id = gconf_client_notify_add (client,
-                                                     "/apps/metacity/general/num_workspaces",
-                                                     (GConfClientNotifyFunc) key_entry_controlling_key_changed,
-                                                     builder, NULL, NULL);
   g_object_unref (client);
 
   model = gtk_list_store_new (DETAIL_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
@@ -1895,14 +1880,6 @@ keyboard_shortcuts_dispose (CcPanel *panel)
         {
           g_hash_table_destroy (kb_user_sections);
           kb_user_sections = NULL;
-        }
-      if (workspace_num_notify_id != 0)
-        {
-          GConfClient *client;
-          client = gconf_client_get_default ();
-          gconf_client_notify_remove (client, workspace_num_notify_id);
-          workspace_num_notify_id = 0;
-          g_object_unref (client);
         }
     }
 }
