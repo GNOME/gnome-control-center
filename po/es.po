@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-11-03 17:58+0000\n"
-"PO-Revision-Date: 2011-11-04 11:13+0100\n"
+"POT-Creation-Date: 2011-11-09 00:05+0000\n"
+"PO-Revision-Date: 2011-11-09 19:58+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -311,7 +311,7 @@ msgstr "Seleccionar un idioma"
 
 #: ../panels/common/language-chooser.ui.h:2
 #: ../panels/printers/new-printer-dialog.ui.h:4
-#: ../panels/user-accounts/um-user-panel.c:448
+#: ../panels/user-accounts/um-user-panel.c:449
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -919,6 +919,20 @@ msgstr "Lanzadores"
 msgid "Search"
 msgstr "Buscar"
 
+#: ../panels/keyboard/01-screenshot.xml.in.h:1
+#| msgid "Screen"
+msgid "Screenshots"
+msgstr "Capturas de pantalla"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:2
+#| msgid "Take a photo..."
+msgid "Take a screenshot"
+msgstr "Capturar la pantalla"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:3
+msgid "Take a screenshot of a window"
+msgstr "Capturar una ventana"
+
 #: ../panels/keyboard/01-system.xml.in.h:1
 msgid "Lock screen"
 msgstr "Bloquear la pantalla"
@@ -937,37 +951,43 @@ msgid "Decrease text size"
 msgstr "Reducir el tamaño del texto:"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:2
+#| msgid "HighContrast"
+msgid "High contrast on or off"
+msgstr "Contraste alto activado o desactivado"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:3
 msgid "Increase text size"
 msgstr "Aumentar el tamaño del texto:"
 
-#: ../panels/keyboard/50-accessibility.xml.in.h:3
-msgid "Magnifier zoom in"
-msgstr "Ampliación del magnificador"
-
 #: ../panels/keyboard/50-accessibility.xml.in.h:4
-msgid "Magnifier zoom out"
-msgstr "Reducción del magnificador"
+#| msgid "Toggle on-screen keyboard"
+msgid "Turn on-screen keyboard on or off"
+msgstr "Activar o desactivar el teclado en pantalla"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:5
-msgid "Toggle contrast"
-msgstr "Cambiar contraste"
+#| msgid "Turn on or off:"
+msgid "Turn screen reader on or off"
+msgstr "Activar o desactivar el lector de pantalla"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:6
-msgid "Toggle magnifier"
-msgstr "Conmutar el magnificador"
+#| msgid "Turn on or off:"
+msgid "Turn zoom on or off"
+msgstr "Activar o desactivar la ampliación"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:7
-msgid "Toggle on-screen keyboard"
-msgstr "Conmutar el teclado en pantalla"
-
-#: ../panels/keyboard/50-accessibility.xml.in.h:8
-msgid "Toggle screen reader"
-msgstr "Conmutar el lector de pantalla"
-
-#: ../panels/keyboard/50-accessibility.xml.in.h:9
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
 msgid "Universal Access"
 msgstr "Acceso universal"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:8
+#| msgid "Zoom in:"
+msgid "Zoom in"
+msgstr "Ampliar"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:9
+#| msgid "Zoom out:"
+msgid "Zoom out"
+msgstr "Reducir"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 msgid "Change keyboard settings"
@@ -2116,7 +2136,6 @@ msgstr "Configuración de red"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-#| msgid "Network;Wireless;IP;LAN;"
 msgid "Network;Wireless;IP;LAN;Proxy;"
 msgstr "Red;Inalámbrica;IP;LAN;Proxy;"
 
@@ -2141,17 +2160,14 @@ msgid "Default Route"
 msgstr "Ruta predeterminada"
 
 #: ../panels/network/network.ui.h:6
-#| msgid "Device"
 msgid "Device Off"
 msgstr "Dispositivo apagado"
 
 #: ../panels/network/network.ui.h:7
-#| msgid "Disabled"
 msgid "Disable VPN"
 msgstr "Desactivar VPN"
 
 #: ../panels/network/network.ui.h:8
-#| msgid "_FTP Proxy"
 msgid "FTP Port"
 msgstr "Puerto FTP"
 
@@ -2168,12 +2184,10 @@ msgid "Group Password"
 msgstr "Contraseña del grupo"
 
 #: ../panels/network/network.ui.h:12
-#| msgid "_HTTP Proxy"
 msgid "HTTP Port"
 msgstr "Puerto HTTP"
 
 #: ../panels/network/network.ui.h:13
-#| msgid "H_TTPS Proxy"
 msgid "HTTPS Port"
 msgstr "Puerto HTTPS"
 
@@ -2214,7 +2228,6 @@ msgid "Select the interface to use for the new service"
 msgstr "Seleccionar la interfaz que usar para el servicio nuevo"
 
 #: ../panels/network/network.ui.h:27
-#| msgid "_Socks Host"
 msgid "Socks Port"
 msgstr "Puerto Socks"
 
@@ -3185,7 +3198,7 @@ msgstr "Vaso"
 msgid "Sonar"
 msgstr "Sonar"
 
-#: ../panels/universal-access/cc-ua-panel.c:505
+#: ../panels/universal-access/cc-ua-panel.c:504
 #: ../panels/universal-access/cc-ua-panel.c:510
 msgid "No shortcut set"
 msgstr "No existe ningún atajo configurado"
@@ -4012,20 +4025,20 @@ msgstr "Ya existe un usuario con el nombre «%s»."
 msgid "This user does not exist."
 msgstr "Este usuario no existe."
 
-#: ../panels/user-accounts/um-user-panel.c:357
+#: ../panels/user-accounts/um-user-panel.c:358
 msgid "Failed to delete user"
 msgstr "Falló al eliminar el usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:417
+#: ../panels/user-accounts/um-user-panel.c:418
 msgid "You cannot delete your own account."
 msgstr "No puede eliminar su propia cuenta."
 
-#: ../panels/user-accounts/um-user-panel.c:426
+#: ../panels/user-accounts/um-user-panel.c:427
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s aún está registrado en el sistema"
 
-#: ../panels/user-accounts/um-user-panel.c:430
+#: ../panels/user-accounts/um-user-panel.c:431
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -4033,51 +4046,51 @@ msgstr ""
 "Eliminar un usuario mientras está registrado en el sistema puede dejar el "
 "sistema en un estado inconsistente."
 
-#: ../panels/user-accounts/um-user-panel.c:439
+#: ../panels/user-accounts/um-user-panel.c:440
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "¿Quiere mantener los archivos de %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:443
+#: ../panels/user-accounts/um-user-panel.c:444
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
-"Es posible mantener la carpeta personal, el «spool» del correo y los archivos "
-"temporales al eliminar una cuenta de usuario."
+"Es posible mantener la carpeta personal, el «spool» del correo y los "
+"archivos temporales al eliminar una cuenta de usuario."
 
-#: ../panels/user-accounts/um-user-panel.c:446
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "_Delete Files"
 msgstr "_Eliminar archivos"
 
-#: ../panels/user-accounts/um-user-panel.c:447
+#: ../panels/user-accounts/um-user-panel.c:448
 msgid "_Keep Files"
 msgstr "_Mantener archivos"
 
-#: ../panels/user-accounts/um-user-panel.c:499
+#: ../panels/user-accounts/um-user-panel.c:500
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Cuenta desactivada"
 
-#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:508
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Para configurar en el siguiente inicio de sesión"
 
-#: ../panels/user-accounts/um-user-panel.c:510
+#: ../panels/user-accounts/um-user-panel.c:511
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ninguno"
 
-#: ../panels/user-accounts/um-user-panel.c:845
+#: ../panels/user-accounts/um-user-panel.c:846
 msgid "Failed to contact the accounts service"
 msgstr "Falló al contactar con el servicio de cuentas"
 
-#: ../panels/user-accounts/um-user-panel.c:847
+#: ../panels/user-accounts/um-user-panel.c:848
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
 
-#: ../panels/user-accounts/um-user-panel.c:887
+#: ../panels/user-accounts/um-user-panel.c:888
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -4085,12 +4098,12 @@ msgstr ""
 "Para realizar los cambios\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:925
+#: ../panels/user-accounts/um-user-panel.c:926
 msgid "Create a user account"
 msgstr "Crear una cuenta de usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:936
-#: ../panels/user-accounts/um-user-panel.c:1225
+#: ../panels/user-accounts/um-user-panel.c:937
+#: ../panels/user-accounts/um-user-panel.c:1226
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -4098,12 +4111,12 @@ msgstr ""
 "Para crear un usuario\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:945
+#: ../panels/user-accounts/um-user-panel.c:946
 msgid "Delete the selected user account"
 msgstr "Quitar la cuenta de usuario seleccionada"
 
-#: ../panels/user-accounts/um-user-panel.c:957
-#: ../panels/user-accounts/um-user-panel.c:1230
+#: ../panels/user-accounts/um-user-panel.c:958
+#: ../panels/user-accounts/um-user-panel.c:1231
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -4111,11 +4124,11 @@ msgstr ""
 "Para eliminar la cuenta de usuario seleccionada\n"
 "pulse primero el icono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1134
+#: ../panels/user-accounts/um-user-panel.c:1135
 msgid "My Account"
 msgstr "Mi cuenta"
 
-#: ../panels/user-accounts/um-user-panel.c:1144
+#: ../panels/user-accounts/um-user-panel.c:1145
 msgid "Other Accounts"
 msgstr "Otras cuentas"
 
@@ -4306,7 +4319,6 @@ msgid "Remove User Account"
 msgstr "Quitar cuenta de usuario"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
-#| msgid "User Accounts"
 msgid "User Icon"
 msgstr "Icono de usuario"
 
@@ -4537,6 +4549,21 @@ msgstr "Centro de control"
 #: ../shell/shell.ui.h:1
 msgid "All Settings"
 msgstr "Todas las configuraciones"
+
+#~ msgid "Magnifier zoom in"
+#~ msgstr "Ampliación del magnificador"
+
+#~ msgid "Magnifier zoom out"
+#~ msgstr "Reducción del magnificador"
+
+#~ msgid "Toggle contrast"
+#~ msgstr "Cambiar contraste"
+
+#~ msgid "Toggle magnifier"
+#~ msgstr "Conmutar el magnificador"
+
+#~ msgid "Toggle screen reader"
+#~ msgstr "Conmutar el lector de pantalla"
 
 #~ msgid "New shortcut..."
 #~ msgstr "Combinación nueva..."
@@ -4835,9 +4862,6 @@ msgstr "Todas las configuraciones"
 
 #~ msgid "Could not connect to system bus: %s"
 #~ msgstr "No se pudo conectar con el bus del sistema: %s"
-
-#~ msgid "HighContrast"
-#~ msgstr "AltoContraste"
 
 #~ msgid "HighContrastInverse"
 #~ msgstr "AltoContrasteInvertido"
@@ -7359,4 +7383,5 @@ msgstr "Todas las configuraciones"
 #~ msgstr "No hay establecido ningún grupo para el URI «%s»"
 
 #~ msgid "No application with name '%s' registered a bookmark for '%s'"
-#~ msgstr "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
+#~ msgstr ""
+#~ "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
