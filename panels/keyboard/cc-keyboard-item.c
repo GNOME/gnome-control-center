@@ -33,6 +33,8 @@
 
 #define CC_KEYBOARD_ITEM_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_KEYBOARD_ITEM, CcKeyboardItemPrivate))
 
+#define CUSTOM_KEYS_SCHEMA "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding"
+
 struct CcKeyboardItemPrivate
 {
   /* properties */
@@ -143,26 +145,21 @@ _set_binding (CcKeyboardItem *item,
   if (set_backend == FALSE)
     return;
 
-  if (item->type == CC_KEYBOARD_ITEM_TYPE_GCONF ||
-      item->type == CC_KEYBOARD_ITEM_TYPE_GCONF_DIR)
+  if (item->type == CC_KEYBOARD_ITEM_TYPE_GCONF)
     {
       GConfClient *client;
       GError *err = NULL;
-      const char *key;
 
       client = gconf_client_get_default ();
-      if (item->type == CC_KEYBOARD_ITEM_TYPE_GCONF)
-	key = item->gconf_key;
-      else
-	key = item->binding_gconf_key;
-      gconf_client_set_string (client, key, item->binding, &err);
+      gconf_client_set_string (client, item->gconf_key, item->binding, &err);
       if (err != NULL)
         {
-	  g_warning ("Failed to set '%s' to '%s': %s", key, item->binding, err->message);
+	  g_warning ("Failed to set '%s' to '%s': %s", item->gconf_key, item->binding, err->message);
 	  g_error_free (err);
 	}
     }
-  else if (item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS)
+  else if (item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS ||
+           item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
     {
       settings_set_binding (item->settings, item->key, item->binding);
     }
@@ -348,17 +345,11 @@ cc_keyboard_item_finalize (GObject *object)
   /* Remove GConf watches */
   client = gconf_client_get_default ();
 
-  if (item->gconf_key_dir != NULL && item->monitored_dir)
-    gconf_client_remove_dir (client, item->gconf_key_dir, NULL);
-  else if (item->gconf_key != NULL && item->monitored)
+  if (item->gconf_key != NULL && item->monitored)
     gconf_client_remove_dir (client, item->gconf_key, NULL);
 
   if (item->gconf_cnxn != 0)
     gconf_client_notify_remove (client, item->gconf_cnxn);
-  if (item->gconf_cnxn_desc != 0)
-    gconf_client_notify_remove (client, item->gconf_cnxn_desc);
-  if (item->gconf_cnxn_cmd != 0)
-    gconf_client_notify_remove (client, item->gconf_cnxn_cmd);
   if (item->settings != NULL)
     g_object_unref (item->settings);
 
@@ -368,12 +359,9 @@ cc_keyboard_item_finalize (GObject *object)
   g_free (item->binding);
   g_free (item->gettext_package);
   g_free (item->gconf_key);
-  g_free (item->gconf_key_dir);
-  g_free (item->binding_gconf_key);
+  g_free (item->gsettings_path);
   g_free (item->description);
-  g_free (item->desc_gconf_key);
   g_free (item->command);
-  g_free (item->cmd_gconf_key);
   g_free (item->schema);
   g_free (item->key);
 
@@ -393,20 +381,6 @@ cc_keyboard_item_new (CcKeyboardItemType type)
 }
 
 static void
-keybinding_description_changed (GConfClient    *client,
-                                guint           cnxn_id,
-                                GConfEntry     *entry,
-                                CcKeyboardItem *item)
-{
-  const gchar *key_value;
-
-  key_value = entry->value ? gconf_value_get_string (entry->value) : NULL;
-  _set_description (item, key_value);
-  item->desc_editable = gconf_entry_get_is_writable (entry);
-  g_object_notify (G_OBJECT (item), "description");
-}
-
-static void
 keybinding_key_changed (GConfClient    *client,
                         guint           cnxn_id,
                         GConfEntry     *entry,
@@ -418,20 +392,6 @@ keybinding_key_changed (GConfClient    *client,
   _set_binding (item, key_value, FALSE);
   item->editable = gconf_entry_get_is_writable (entry);
   g_object_notify (G_OBJECT (item), "binding");
-}
-
-static void
-keybinding_command_changed (GConfClient    *client,
-                            guint           cnxn_id,
-                            GConfEntry     *entry,
-                            CcKeyboardItem *item)
-{
-  const gchar *key_value;
-
-  key_value = entry->value ? gconf_value_get_string (entry->value) : NULL;
-  _set_command (item, key_value);
-  item->cmd_editable = gconf_entry_get_is_writable (entry);
-  g_object_notify (G_OBJECT (item), "command");
 }
 
 /* wrapper around g_settings_get_str[ing|v] */
@@ -531,59 +491,32 @@ cc_keyboard_item_load_from_gconf (CcKeyboardItem *item,
 }
 
 gboolean
-cc_keyboard_item_load_from_gconf_dir (CcKeyboardItem *item,
-                                      const char *key_dir)
+cc_keyboard_item_load_from_gsettings_path (CcKeyboardItem *item,
+                                           const char     *path,
+                                           gboolean        reset)
 {
-  GConfClient *client;
-  GConfEntry *entry;
+  item->schema = g_strdup (CUSTOM_KEYS_SCHEMA);
+  item->gsettings_path = g_strdup (path);
+  item->key = g_strdup ("binding");
+  item->settings = g_settings_new_with_path (item->schema, path);
+  item->editable = g_settings_is_writable (item->settings, item->key);
+  item->desc_editable = g_settings_is_writable (item->settings, "name");
+  item->cmd_editable = g_settings_is_writable (item->settings, "command");
 
-  /* FIXME add guards:
-   * key_dir finishing with '/' */
+  if (reset)
+    {
+      g_settings_reset (item->settings, "name");
+      g_settings_reset (item->settings, "command");
+      g_settings_reset (item->settings, "binding");
+    }
 
-  client = gconf_client_get_default ();
+  g_settings_bind (item->settings, "name",
+                   G_OBJECT (item), "description", G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (item->settings, "command",
+                   G_OBJECT (item), "command", G_SETTINGS_BIND_DEFAULT);
 
-  item->gconf_key_dir = g_strdup (key_dir);
-  item->binding_gconf_key = g_strdup_printf ("%s/binding", item->gconf_key_dir);
-  item->desc_gconf_key = g_strdup_printf ("%s/name", item->gconf_key_dir);
-  item->cmd_gconf_key = g_strdup_printf ("%s/action", item->gconf_key_dir);
-  item->description = gconf_client_get_string (client, item->desc_gconf_key, NULL);
-
-  entry = gconf_client_get_entry (client,
-                                  item->binding_gconf_key,
-                                  NULL,
-                                  TRUE,
-                                  NULL);
-  if (entry == NULL)
-    return FALSE;
-
-  item->command = gconf_client_get_string (client, item->cmd_gconf_key, NULL);
-  item->editable = gconf_entry_get_is_writable (entry);
-  gconf_client_add_dir (client, item->gconf_key_dir, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-  item->monitored_dir = TRUE;
-
-  item->desc_editable = gconf_client_key_is_writable (client, item->desc_gconf_key, NULL);
-  item->gconf_cnxn_desc = gconf_client_notify_add (client,
-                                                   item->desc_gconf_key,
-                                                   (GConfClientNotifyFunc) &keybinding_description_changed,
-                                                   item, NULL, NULL);
-
-  item->cmd_editable = gconf_client_key_is_writable (client, item->cmd_gconf_key, NULL);
-  item->gconf_cnxn_cmd = gconf_client_notify_add (client,
-                                                  item->cmd_gconf_key,
-                                                  (GConfClientNotifyFunc) &keybinding_command_changed,
-                                                  item, NULL, NULL);
-
-  item->cmd_editable = gconf_client_key_is_writable (client, item->binding_gconf_key, NULL);
-  item->gconf_cnxn = gconf_client_notify_add (client,
-                                              item->binding_gconf_key,
-                                              (GConfClientNotifyFunc) &keybinding_key_changed,
-                                              item, NULL, NULL);
-
-  item->binding = gconf_client_get_string (client, item->binding_gconf_key, NULL);
-  binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
-
-  gconf_entry_free (entry);
-  g_object_unref (client);
+  g_signal_connect (G_OBJECT (item->settings), "changed::binding",
+		    G_CALLBACK (binding_changed), item);
 
   return TRUE;
 }
@@ -623,8 +556,8 @@ cc_keyboard_item_equal (CcKeyboardItem *a,
     {
       case CC_KEYBOARD_ITEM_TYPE_GCONF:
         return g_str_equal (a->gconf_key, b->gconf_key);
-      case CC_KEYBOARD_ITEM_TYPE_GCONF_DIR:
-	return g_str_equal (a->gconf_key_dir, b->gconf_key_dir);
+      case CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH:
+	return g_str_equal (a->gsettings_path, b->gsettings_path);
       case CC_KEYBOARD_ITEM_TYPE_GSETTINGS:
 	return (g_str_equal (a->schema, b->schema) &&
 		g_str_equal (a->key, b->key));

@@ -27,8 +27,8 @@
 #include "cc-keyboard-item.h"
 #include "wm-common.h"
 
-#define MAX_CUSTOM_SHORTCUTS 1000
-#define GCONF_BINDING_DIR "/desktop/gnome/keybindings"
+#define BINDINGS_SCHEMA "org.gnome.settings-daemon.plugins.media-keys"
+#define CUSTOM_KEYS_BASENAME "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
 #define WID(builder, name) (GTK_WIDGET (gtk_builder_get_object (builder, name)))
 
 typedef struct {
@@ -70,6 +70,7 @@ enum
 
 static guint maybe_block_accels_id = 0;
 static gboolean block_accels = FALSE;
+static GSettings *settings = NULL;
 static GtkWidget *custom_shortcut_dialog = NULL;
 static GtkWidget *custom_shortcut_name_entry = NULL;
 static GtkWidget *custom_shortcut_command_entry = NULL;
@@ -170,6 +171,7 @@ item_changed (CcKeyboardItem *item,
   gtk_tree_model_foreach (item->model, (GtkTreeModelForeachFunc) keybinding_key_changed_foreach, item);
 }
 
+
 static void
 append_section (GtkBuilder         *builder,
                 const gchar        *title,
@@ -214,8 +216,8 @@ append_section (GtkBuilder         *builder,
 	case CC_KEYBOARD_ITEM_TYPE_GCONF:
           ret = cc_keyboard_item_load_from_gconf (item, keys_list[i].gettext_package, keys_list[i].name);
           break;
-	case CC_KEYBOARD_ITEM_TYPE_GCONF_DIR:
-          ret = cc_keyboard_item_load_from_gconf_dir (item, keys_list[i].name);
+	case CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH:
+          ret = cc_keyboard_item_load_from_gsettings_path (item, keys_list[i].name, FALSE);
           break;
 	case CC_KEYBOARD_ITEM_TYPE_GSETTINGS:
 	  ret = cc_keyboard_item_load_from_gsettings (item,
@@ -513,35 +515,29 @@ append_sections_from_file (GtkBuilder *builder, const gchar *path, const char *d
 }
 
 static void
-append_sections_from_gconf (GtkBuilder *builder, const gchar *gconf_path)
+append_sections_from_gsettings (GtkBuilder *builder)
 {
-  GConfClient *client;
-  GSList *custom_list, *l;
+  char **custom_paths;
   GArray *entries;
   KeyListEntry key;
+  int i;
 
   /* load custom shortcuts from GConf */
   entries = g_array_new (FALSE, TRUE, sizeof (KeyListEntry));
 
-  client = gconf_client_get_default ();
-  custom_list = gconf_client_all_dirs (client, gconf_path, NULL);
-
-  for (l = custom_list; l != NULL; l = l->next)
+  custom_paths = g_settings_get_strv (settings, "custom-keybindings");
+  for (i = 0; custom_paths[i]; i++)
     {
-      key.name = g_strdup (l->data);
+      key.name = g_strdup (custom_paths[i]);
       if (!have_key_for_group (BINDING_GROUP_USER, key.name))
         {
-          key.type = CC_KEYBOARD_ITEM_TYPE_GCONF_DIR;
+          key.type = CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH;
           g_array_append_val (entries, key);
         }
       else
         g_free (key.name);
-
-      g_free (l->data);
     }
-
-  g_slist_free (custom_list);
-  g_object_unref (client);
+  g_strfreev (custom_paths);
 
   if (entries->len > 0)
     {
@@ -659,7 +655,7 @@ reload_sections (GtkBuilder *builder)
   g_strfreev (wm_keybindings);
 
   /* Load custom keybindings */
-  append_sections_from_gconf (builder, GCONF_BINDING_DIR);
+  append_sections_from_gsettings (builder);
 
   /* Select the first item */
   gtk_tree_model_get_iter_first (sort_model, &iter);
@@ -807,32 +803,40 @@ static gboolean
 edit_custom_shortcut (CcKeyboardItem *item)
 {
   gint result;
-  const gchar *description, *command;
   gboolean ret;
+  GSettings *settings;
 
-  gtk_entry_set_text (GTK_ENTRY (custom_shortcut_name_entry), item->description ? item->description : "");
-  gtk_widget_set_sensitive (custom_shortcut_name_entry, item->desc_editable);
+  settings = g_settings_new_with_path (item->schema, item->gsettings_path);
+
+  g_settings_bind (settings, "name",
+                   G_OBJECT (custom_shortcut_name_entry), "text",
+                   G_SETTINGS_BIND_DEFAULT);
   gtk_widget_grab_focus (custom_shortcut_name_entry);
-  gtk_entry_set_text (GTK_ENTRY (custom_shortcut_command_entry), item->command ? item->command : "");
-  gtk_widget_set_sensitive (custom_shortcut_command_entry, item->cmd_editable);
+
+  g_settings_bind (settings, "command",
+                   G_OBJECT (custom_shortcut_command_entry), "text",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  g_settings_delay (settings);
 
   gtk_window_present (GTK_WINDOW (custom_shortcut_dialog));
   result = gtk_dialog_run (GTK_DIALOG (custom_shortcut_dialog));
   switch (result)
     {
     case GTK_RESPONSE_OK:
-      description = gtk_entry_get_text (GTK_ENTRY (custom_shortcut_name_entry));
-      command = gtk_entry_get_text (GTK_ENTRY (custom_shortcut_command_entry));
-      g_object_set (G_OBJECT (item),
-		    "description", description,
-		    "command", command,
-		    NULL);
+      g_settings_apply (settings);
       ret = TRUE;
       break;
     default:
+      g_settings_revert (settings);
       ret = FALSE;
       break;
     }
+
+  g_settings_unbind (G_OBJECT (custom_shortcut_name_entry), "text");
+  g_settings_unbind (G_OBJECT (custom_shortcut_command_entry), "text");
+
+  g_object_unref (settings);
 
   gtk_widget_hide (custom_shortcut_dialog);
 
@@ -842,36 +846,35 @@ edit_custom_shortcut (CcKeyboardItem *item)
 static gboolean
 remove_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
 {
-  GConfClient *client;
-  gchar *base;
   CcKeyboardItem *item;
   GPtrArray *keys_array;
-  GError *err = NULL;
+  GVariantBuilder builder;
+  char **settings_paths;
+  int i;
 
   gtk_tree_model_get (model, iter,
                       DETAIL_KEYENTRY_COLUMN, &item,
                       -1);
 
   /* not a custom shortcut */
-  g_assert (item->type == CC_KEYBOARD_ITEM_TYPE_GCONF_DIR);
+  g_assert (item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH);
 
-  client = gconf_client_get_default ();
+  g_settings_delay (item->settings);
+  g_settings_reset (item->settings, "name");
+  g_settings_reset (item->settings, "command");
+  g_settings_reset (item->settings, "binding");
+  g_settings_apply (item->settings);
+  g_settings_sync ();
 
-  base = g_strdup (item->gconf_key_dir);
+  settings_paths = g_settings_get_strv (settings, "custom-keybindings");
+  g_variant_builder_init (&builder, G_VARIANT_TYPE ("as"));
+  for (i = 0; settings_paths[i]; i++)
+    if (strcmp (settings_paths[i], item->gsettings_path) != 0)
+      g_variant_builder_add (&builder, "s", settings_paths[i]);
+  g_settings_set_value (settings,
+                        "custom-keybindings", g_variant_builder_end (&builder));
+  g_strfreev (settings_paths);
   g_object_unref (item);
-
-  if (gconf_client_recursive_unset (client, base, 0, &err) == FALSE)
-    {
-      g_warning ("Failed to unset GConf directory '%s': %s", base, err->message);
-      g_error_free (err);
-    }
-
-  g_free (base);
-  /* suggest sync now so the unset directory actually gets dropped;
-   * if we don't do this we may end up with 'zombie' shortcuts when
-   * restarting the app */
-  gconf_client_suggest_sync (client, NULL);
-  g_object_unref (client);
 
   keys_array = g_hash_table_lookup (get_hash_for_group (BINDING_GROUP_USER), _("Custom Shortcuts"));
   g_ptr_array_remove (keys_array, item);
@@ -890,7 +893,7 @@ update_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
                       DETAIL_KEYENTRY_COLUMN, &item,
                       -1);
 
-  g_assert (item->type == CC_KEYBOARD_ITEM_TYPE_GCONF_DIR);
+  g_assert (item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH);
 
   edit_custom_shortcut (item);
   if (item->command == NULL || item->command[0] == '\0')
@@ -899,17 +902,8 @@ update_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
     }
   else
     {
-      GConfClient *client;
-
       gtk_list_store_set (GTK_LIST_STORE (model), iter,
                           DETAIL_KEYENTRY_COLUMN, item, -1);
-      client = gconf_client_get_default ();
-      if (item->description != NULL)
-        gconf_client_set_string (client, item->desc_gconf_key, item->description, NULL);
-      else
-        gconf_client_unset (client, item->desc_gconf_key, NULL);
-      gconf_client_set_string (client, item->cmd_gconf_key, item->command, NULL);
-      g_object_unref (client);
     }
 }
 
@@ -1033,40 +1027,6 @@ start_editing_kb_cb (GtkTreeView *treeview,
     }
 }
 
-static void
-description_edited_callback (GtkCellRendererText *renderer,
-                             gchar               *path_string,
-                             gchar               *new_text,
-                             gpointer             user_data)
-{
-  GConfClient *client;
-  GtkTreeView *view = GTK_TREE_VIEW (user_data);
-  GtkTreeModel *model;
-  GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
-  GtkTreeIter iter;
-  CcKeyboardItem *item;
-
-  model = gtk_tree_view_get_model (view);
-  gtk_tree_model_get_iter (model, &iter, path);
-  gtk_tree_path_free (path);
-
-  gtk_tree_model_get (model, &iter,
-                      DETAIL_KEYENTRY_COLUMN, &item,
-                      -1);
-
-  /* sanity check */
-  if (item == NULL || item->desc_gconf_key == NULL)
-    return;
-
-  g_assert (item->type == CC_KEYBOARD_ITEM_TYPE_GCONF_DIR);
-
-  client = gconf_client_get_default ();
-  if (!gconf_client_set_string (client, item->desc_gconf_key, new_text, NULL))
-    item->desc_editable = FALSE;
-
-  g_object_unref (client);
-}
-
 static const guint forbidden_keyvals[] = {
   /* Navigation keys */
   GDK_KEY_Home,
@@ -1112,24 +1072,6 @@ keyval_is_forbidden (guint keyval)
   }
 
   return FALSE;
-}
-
-static void
-show_error (GtkWindow *parent,
-            GError *err)
-{
-  GtkWidget *dialog;
-
-  dialog = gtk_message_dialog_new (parent,
-                                   GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
-                                   GTK_MESSAGE_WARNING,
-                                   GTK_BUTTONS_OK,
-                                   _("Error saving the new shortcut"));
-
-  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                            "%s", err->message);
-  gtk_dialog_run (GTK_DIALOG (dialog));
-  gtk_widget_destroy (dialog);
 }
 
 typedef struct {
@@ -1381,33 +1323,29 @@ maybe_block_accels (GtkWidget *widget,
 }
 
 static gchar *
-find_free_gconf_key (GError **error)
+find_free_settings_path ()
 {
-  GConfClient *client;
+  char **used_names;
+  char *dir = NULL;
+  int i, num, n_names;
 
-  gchar *dir;
-  int i;
+  used_names = g_settings_get_strv (settings, "custom-keybindings");
+  n_names = g_strv_length (used_names);
 
-  client = gconf_client_get_default ();
-
-  for (i = 0; i < MAX_CUSTOM_SHORTCUTS; i++)
+  for (num = 0; dir == NULL; num++)
     {
-      dir = g_strdup_printf ("%s/custom%d", GCONF_BINDING_DIR, i);
-      if (!gconf_client_dir_exists (client, dir, NULL))
-        break;
-      g_free (dir);
-    }
+      char *tmp;
+      gboolean found = FALSE;
 
-  if (i == MAX_CUSTOM_SHORTCUTS)
-    {
-      dir = NULL;
-      g_set_error_literal (error,
-                           g_quark_from_string ("Keyboard Shortcuts"),
-                           0,
-                           _("Too many custom shortcuts"));
-    }
+      tmp = g_strdup_printf ("%s/custom%d/", CUSTOM_KEYS_BASENAME, num);
+      for (i = 0; i < n_names && !found; i++)
+        found = strcmp (used_names[i], tmp) == 0;
 
-  g_object_unref (client);
+      if (!found)
+        dir = tmp;
+      else
+        g_free (tmp);
+    }
 
   return dir;
 }
@@ -1418,31 +1356,15 @@ add_custom_shortcut (GtkTreeView  *tree_view,
 {
   CcKeyboardItem *item;
   GtkTreePath *path;
-  gchar *dir;
-  GError *error;
+  gchar *settings_path;
 
-  error = NULL;
-  dir = find_free_gconf_key (&error);
-  if (dir == NULL)
-    {
-      show_error (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tree_view))), error);
+  item = cc_keyboard_item_new (CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH);
 
-      g_error_free (error);
-      return;
-    }
+  settings_path = find_free_settings_path ();
+  cc_keyboard_item_load_from_gsettings_path (item, settings_path, TRUE);
+  g_free (settings_path);
 
-  /* FIXME this is way ugly */
-  item = cc_keyboard_item_new (CC_KEYBOARD_ITEM_TYPE_GCONF_DIR);
-  item->gconf_key_dir = g_strdup (dir);
-  item->gconf_key = g_strconcat (dir, "/binding", NULL);
-  item->editable = TRUE;
   item->model = model;
-  item->desc_gconf_key = g_strconcat (dir, "/name", NULL);
-  item->description = g_strdup ("");
-  item->desc_editable = TRUE;
-  item->cmd_gconf_key = g_strconcat (dir, "/action", NULL);
-  item->command = g_strdup ("");
-  item->cmd_editable = TRUE;
 
   if (edit_custom_shortcut (item) &&
       item->command && item->command[0])
@@ -1450,19 +1372,9 @@ add_custom_shortcut (GtkTreeView  *tree_view,
       GPtrArray *keys_array;
       GtkTreeIter iter;
       GHashTable *hash;
-      GConfClient *client;
-
-      /* store in gconf */
-      client = gconf_client_get_default ();
-      gconf_client_set_string (client, item->gconf_key, "", NULL);
-      gconf_client_set_string (client, item->desc_gconf_key, item->description, NULL);
-      gconf_client_set_string (client, item->cmd_gconf_key, item->command, NULL);
-      g_object_unref (client);
-      g_object_unref (item);
-
-      /* Now setup the actual item we'll be adding */
-      item = cc_keyboard_item_new (CC_KEYBOARD_ITEM_TYPE_GCONF_DIR);
-      cc_keyboard_item_load_from_gconf_dir (item, dir);
+      GVariantBuilder builder;
+      char **settings_paths;
+      int i;
 
       hash = get_hash_for_group (BINDING_GROUP_USER);
       keys_array = g_hash_table_lookup (hash, _("Custom Shortcuts"));
@@ -1476,6 +1388,14 @@ add_custom_shortcut (GtkTreeView  *tree_view,
 
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
       gtk_list_store_set (GTK_LIST_STORE (model), &iter, DETAIL_KEYENTRY_COLUMN, item, -1);
+
+      settings_paths = g_settings_get_strv (settings, "custom-keybindings");
+      g_variant_builder_init (&builder, G_VARIANT_TYPE ("as"));
+      for (i = 0; settings_paths[i]; i++)
+        g_variant_builder_add (&builder, "s", settings_paths[i]);
+      g_variant_builder_add (&builder, "s", item->gsettings_path);
+      g_settings_set_value (settings, "custom-keybindings",
+                            g_variant_builder_end (&builder));
 
       /* make the new shortcut visible */
       path = gtk_tree_model_get_path (model, &iter);
@@ -1681,7 +1601,6 @@ sections_separator_func (GtkTreeModel *model,
 static void
 setup_dialog (CcPanel *panel, GtkBuilder *builder)
 {
-  GConfClient *client;
   GtkCellRenderer *renderer;
   GtkTreeViewColumn *column;
   GtkWidget *widget;
@@ -1741,7 +1660,7 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder,
                                                     "shortcut_treeview"));
 
-  client = gconf_client_get_default ();
+  settings = g_settings_new (BINDINGS_SCHEMA);
 
   g_signal_connect (treeview, "button_press_event",
                     G_CALLBACK (start_editing_cb), builder);
@@ -1750,10 +1669,6 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
 
   renderer = gtk_cell_renderer_text_new ();
   g_object_set (G_OBJECT (renderer), "ellipsize", PANGO_ELLIPSIZE_END, NULL);
-
-  g_signal_connect (renderer, "edited",
-                    G_CALLBACK (description_edited_callback),
-                    treeview);
 
   column = gtk_tree_view_column_new_with_attributes (_("Action"),
                                                      renderer,
@@ -1785,9 +1700,6 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
 
   gtk_tree_view_append_column (treeview, column);
   gtk_tree_view_column_set_sort_column_id (column, DETAIL_KEYENTRY_COLUMN);
-
-  gconf_client_add_dir (client, GCONF_BINDING_DIR, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-  g_object_unref (client);
 
   model = gtk_list_store_new (DETAIL_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
   gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model),
