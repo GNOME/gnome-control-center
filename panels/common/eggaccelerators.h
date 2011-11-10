@@ -70,9 +70,16 @@ typedef enum
 
 } EggVirtualModifierType;
 
-gboolean egg_accelerator_parse_virtual        (const gchar            *accelerator,
+typedef enum {
+  EGG_PARSE_ERROR_NONE,
+  EGG_PARSE_ERROR_NOT_IN_KEYMAP,
+  EGG_PARSE_ERROR_INVALID_KEYCODE,
+  EGG_PARSE_ERROR_PARSE
+} EggParseError;
+
+EggParseError egg_accelerator_parse_virtual   (const gchar            *accelerator,
                                                guint                  *accelerator_key,
-					       guint                  *keycode,
+                                               guint                 **accelerator_codes,
                                                EggVirtualModifierType *accelerator_mods);
 void     egg_keymap_resolve_virtual_modifiers (GdkKeymap              *keymap,
                                                EggVirtualModifierType  virtual_mods,

@@ -202,6 +202,8 @@ is_keycode (const gchar *string)
  * egg_accelerator_parse_virtual:
  * @accelerator:      string representing an accelerator
  * @accelerator_key:  return location for accelerator keyval
+ * @accelerator_codes: return location for a 0-terminated array
+ *                     of accelerator keycodes
  * @accelerator_mods: return location for accelerator modifier mask
  *
  * Parses a string representing a virtual accelerator. The format
@@ -221,29 +223,29 @@ is_keycode (const gchar *string)
  * the virtual modifier represents the keyboard key, the concrete
  * modifier the actual Mod2-Mod5 bits in the key press event.
  *
- * Returns: %TRUE on success.
+ * Returns: %EGG_PARSE_ERROR_NONE on success.
  */
-gboolean
+EggParseError
 egg_accelerator_parse_virtual (const gchar            *accelerator,
                                guint                  *accelerator_key,
-			       guint                  *keycode,
+			       guint                 **accelerator_codes,
                                EggVirtualModifierType *accelerator_mods)
 {
   guint keyval;
   GdkModifierType mods;
   gint len;
-  gboolean bad_keyval;
+  EggParseError ret;
 
   if (accelerator_key)
     *accelerator_key = 0;
   if (accelerator_mods)
     *accelerator_mods = 0;
-  if (keycode)
-    *keycode = 0;
+  if (accelerator_codes)
+    *accelerator_codes = NULL;
 
   g_return_val_if_fail (accelerator != NULL, FALSE);
 
-  bad_keyval = FALSE;
+  ret = EGG_PARSE_ERROR_NONE;
 
   keyval = 0;
   mods = 0;
@@ -347,7 +349,7 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
 	{
           keyval = gdk_keyval_from_name (accelerator);
 
-          if (keyval == 0)
+          if (keyval == GDK_KEY_VoidSymbol)
 	    {
 	      /* If keyval is 0, then maybe it's a keycode.  Check for 0x## */
 	      if (len >= 4 && is_keycode (accelerator))
@@ -363,22 +365,46 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
 
 		  if (endptr == NULL || *endptr != '\000')
 		    {
-		      bad_keyval = TRUE;
+		      ret = EGG_PARSE_ERROR_INVALID_KEYCODE;
 		    }
-		  else if (keycode != NULL)
+		  else if (accelerator_codes != NULL)
 		    {
-		      *keycode = tmp_keycode;
 		      /* 0x00 is an invalid keycode too. */
-		      if (*keycode == 0)
-			bad_keyval = TRUE;
+		      if (tmp_keycode == 0) {
+			ret = EGG_PARSE_ERROR_INVALID_KEYCODE;
+		      } else {
+			*accelerator_codes = g_new0 (guint, 2);
+			(*accelerator_codes)[0] = tmp_keycode;
+		      }
 		    }
 		}
+	      else
+		{
+		  ret = EGG_PARSE_ERROR_PARSE;
+		}
 	    }
-	  else if (keycode != NULL)
+	  else if (accelerator_codes != NULL)
 	    {
-	      *keycode = XKeysymToKeycode (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), keyval);
-	      if (*keycode == 0)
-	 	bad_keyval = TRUE;
+	      GdkKeymapKey *keys;
+	      gint n_keys, i, j;
+
+	      if (!gdk_keymap_get_entries_for_keyval (gdk_keymap_get_default (), keyval, &keys, &n_keys)) {
+	        ret = EGG_PARSE_ERROR_NOT_IN_KEYMAP;
+	      } else {
+		*accelerator_codes = g_new0 (guint, n_keys + 1);
+
+		for (i = 0, j = 0; i < n_keys; ++i) {
+		  if (keys[i].level == 0)
+		    (*accelerator_codes)[j++] = keys[i].keycode;
+		}
+
+		if (j == 0) {
+		  g_free (*accelerator_codes);
+		  *accelerator_codes = NULL;
+		  ret = EGG_PARSE_ERROR_NOT_IN_KEYMAP;
+	        }
+	        g_free (keys);
+	      }
 	    }
 
           accelerator += len;
@@ -391,7 +417,7 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
   if (accelerator_mods)
     *accelerator_mods = mods;
 
-  return !bad_keyval;
+  return ret;
 }
 
 /**
