@@ -348,12 +348,13 @@ egg_accelerator_parse_virtual (const gchar            *accelerator,
       else
 	{
 	  if (g_str_has_prefix (accelerator, "0x"))
-	    keyval = 0;
+	    keyval = GDK_KEY_VoidSymbol;
 	  else
             keyval = gdk_keyval_from_name (accelerator);
 
           if (keyval == GDK_KEY_VoidSymbol)
 	    {
+	      keyval = 0;
 	      /* If keyval is 0, then maybe it's a keycode.  Check for 0x## */
 	      if (len >= 4 && is_keycode (accelerator))
 		{
