@@ -63,6 +63,9 @@ binding_from_string (const char             *str,
                      guint                  *keycode,
                      EggVirtualModifierType *accelerator_mods)
 {
+  EggParseError ret;
+  guint *keycodes;
+
   g_return_val_if_fail (accelerator_key != NULL, FALSE);
 
   if (str == NULL || strcmp (str, "disabled") == 0)
@@ -73,12 +76,13 @@ binding_from_string (const char             *str,
       return TRUE;
     }
 
-  egg_accelerator_parse_virtual (str, accelerator_key, keycode, accelerator_mods);
+  ret = egg_accelerator_parse_virtual (str, accelerator_key, &keycodes, accelerator_mods);
 
-  if (*accelerator_key == 0)
-    return FALSE;
-  else
-    return TRUE;
+  if (keycode != NULL)
+    *keycode = (keycodes ? keycodes[0] : 0);
+  g_free (keycodes);
+
+  return (ret == EGG_PARSE_ERROR_NONE);
 }
 
 static void
