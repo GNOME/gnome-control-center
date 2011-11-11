@@ -574,7 +574,7 @@ visual_bell_type_notify_cb (GConfClient *client,
 
   value = gconf_value_get_string (entry->value);
 
-  if (!strcmp ("frame_flash", value))
+  if (g_strcmp0 ("frame_flash", value) == 0)
     widget = WID (panel->priv->builder, "hearing_flash_window_title_button");
   else
     widget = WID (panel->priv->builder, "hearing_flash_screen_button");
