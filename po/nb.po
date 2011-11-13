@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.3.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-19 22:34+0200\n"
-"PO-Revision-Date: 2011-10-19 22:37+0200\n"
+"POT-Creation-Date: 2011-11-12 18:47+0100\n"
+"PO-Revision-Date: 2011-11-13 10:44+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -49,22 +49,34 @@ msgid "Fill"
 msgstr "Fyll"
 
 #: ../panels/background/background.ui.h:6
+msgid "Primary Color"
+msgstr "Primær farge"
+
+#: ../panels/background/background.ui.h:7
 msgid "Remove wallpaper"
 msgstr "Fjern bakgrunn"
 
-#: ../panels/background/background.ui.h:7
+#: ../panels/background/background.ui.h:8
 msgid "Scale"
 msgstr "Skaler"
 
-#: ../panels/background/background.ui.h:8
+#: ../panels/background/background.ui.h:9
+msgid "Secondary color"
+msgstr "Sekundær farge"
+
+#: ../panels/background/background.ui.h:10
 msgid "Span"
 msgstr "Strekk"
 
-#: ../panels/background/background.ui.h:9
+#: ../panels/background/background.ui.h:11
+msgid "Swap colors"
+msgstr "Bytt om farger"
+
+#: ../panels/background/background.ui.h:12
 msgid "Tile"
 msgstr "Flislegg"
 
-#: ../panels/background/background.ui.h:10
+#: ../panels/background/background.ui.h:13
 msgid "Zoom"
 msgstr "Zoom"
 
@@ -158,7 +170,9 @@ msgstr "Fjern «%s» fra listen med enheter?"
 #: ../panels/bluetooth/cc-bluetooth-panel.c:585
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
-msgstr "Hvis du fjerner enheten vil du måtte sette den opp på nytt før du bruker den igjen."
+msgstr ""
+"Hvis du fjerner enheten vil du måtte sette den opp på nytt før du bruker den "
+"igjen."
 
 #: ../panels/bluetooth/bluetooth.ui.h:1
 msgid "Address"
@@ -190,16 +204,24 @@ msgctxt "Power"
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../panels/bluetooth/bluetooth.ui.h:9
+#: ../panels/bluetooth/bluetooth.ui.h:9 ../panels/network/network.ui.h:23
+msgid "Remove Device"
+msgstr "Fjern enhet"
+
+#: ../panels/bluetooth/bluetooth.ui.h:10
 msgid "Send Files..."
 msgstr "Send filer …"
 
-#: ../panels/bluetooth/bluetooth.ui.h:10
+#: ../panels/bluetooth/bluetooth.ui.h:11
+msgid "Set Up New Device"
+msgstr "Sett opp ny enhet"
+
+#: ../panels/bluetooth/bluetooth.ui.h:12
 #: ../panels/universal-access/uap.ui.h:60
 msgid "Sound Settings"
 msgstr "Innstillinger for lyd"
 
-#: ../panels/bluetooth/bluetooth.ui.h:11
+#: ../panels/bluetooth/bluetooth.ui.h:13
 msgid "Type"
 msgstr "Type:"
 
@@ -277,7 +299,7 @@ msgstr "Velg et språk"
 
 #: ../panels/common/language-chooser.ui.h:2
 #: ../panels/printers/new-printer-dialog.ui.h:4
-#: ../panels/user-accounts/um-user-panel.c:448
+#: ../panels/user-accounts/um-user-panel.c:449
 msgid "_Cancel"
 msgstr "A_vbryt"
 
@@ -650,7 +672,7 @@ msgid "Video CD"
 msgstr "Video-CD"
 
 #: ../panels/info/cc-info-panel.c:1474
-#: ../panels/keyboard/keyboard-shortcuts.c:1772
+#: ../panels/keyboard/keyboard-shortcuts.c:1715
 msgid "Section"
 msgstr "Seksjon"
 
@@ -670,20 +692,20 @@ msgstr "Avtagbare medier"
 msgid "Graphics"
 msgstr "Grafikk"
 
-#: ../panels/info/cc-info-panel.c:1700
+#: ../panels/info/cc-info-panel.c:1701
 #, c-format
 msgid "Version %s"
 msgstr "Versjon %s"
 
-#: ../panels/info/cc-info-panel.c:1750
+#: ../panels/info/cc-info-panel.c:1751
 msgid "Install Updates"
 msgstr "Installer oppdateringer"
 
-#: ../panels/info/cc-info-panel.c:1754
+#: ../panels/info/cc-info-panel.c:1755
 msgid "System Up-To-Date"
 msgstr "Systemet er oppdatert"
 
-#: ../panels/info/cc-info-panel.c:1758
+#: ../panels/info/cc-info-panel.c:1759
 msgid "Checking for Updates"
 msgstr "Ser etter oppdateringer"
 
@@ -882,6 +904,18 @@ msgstr "Oppstartere"
 msgid "Search"
 msgstr "Søk"
 
+#: ../panels/keyboard/01-screenshot.xml.in.h:1
+msgid "Screenshots"
+msgstr "Skjermdump"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:2
+msgid "Take a screenshot"
+msgstr "Ta et skjermdump"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:3
+msgid "Take a screenshot of a window"
+msgstr "Ta et skjermdump av et vindu"
+
 #: ../panels/keyboard/01-system.xml.in.h:1
 msgid "Lock screen"
 msgstr "Lås skjerm"
@@ -891,7 +925,7 @@ msgid "Log out"
 msgstr "Logg ut"
 
 #: ../panels/keyboard/01-system.xml.in.h:3
-#: ../panels/region/gnome-region-panel.ui.h:24
+#: ../panels/region/gnome-region-panel.ui.h:33
 msgid "System"
 msgstr "System"
 
@@ -900,81 +934,44 @@ msgid "Decrease text size"
 msgstr "Mindre tekststørrelse"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:2
+msgid "High contrast on or off"
+msgstr "Høy kontrast på eller av"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:3
 msgid "Increase text size"
 msgstr "Større tekststørrelse"
 
-#: ../panels/keyboard/50-accessibility.xml.in.h:3
-msgid "Magnifier zoom in"
-msgstr "Zoom inn med forstørrelsesglass"
-
 #: ../panels/keyboard/50-accessibility.xml.in.h:4
-msgid "Magnifier zoom out"
-msgstr "Zoom ut med forstørrelsesglass"
-
-#: ../panels/keyboard/50-accessibility.xml.in.h:5
-msgid "Toggle contrast"
-msgstr "Endre kontrast"
-
-#: ../panels/keyboard/50-accessibility.xml.in.h:6
-msgid "Toggle magnifier"
-msgstr "Slå av/på forstørrelsesglass"
-
-#: ../panels/keyboard/50-accessibility.xml.in.h:7
-msgid "Toggle on-screen keyboard"
+msgid "Turn on-screen keyboard on or off"
 msgstr "Slå av/på tastatur på skjermen"
 
-#: ../panels/keyboard/50-accessibility.xml.in.h:8
-msgid "Toggle screen reader"
+#: ../panels/keyboard/50-accessibility.xml.in.h:5
+msgid "Turn screen reader on or off"
 msgstr "Slå av/på skjermleser"
 
-#: ../panels/keyboard/50-accessibility.xml.in.h:9
+#: ../panels/keyboard/50-accessibility.xml.in.h:6
+msgid "Turn zoom on or off"
+msgstr "Slå av/på zoom"
+
+#: ../panels/keyboard/50-accessibility.xml.in.h:7
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
 msgid "Universal Access"
 msgstr "Universell tilgang"
 
-#: ../panels/keyboard/eggcellrendererkeys.c:21
-msgid "New shortcut..."
-msgstr "Ny snarvei …"
+#: ../panels/keyboard/50-accessibility.xml.in.h:8
+msgid "Zoom in"
+msgstr "Zoom inn"
 
-#: ../panels/keyboard/eggcellrendererkeys.c:164
-#: ../panels/keyboard/eggcellrendererkeys.c:165
-msgid "Accelerator key"
-msgstr "Hurtigtast"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:174
-#: ../panels/keyboard/eggcellrendererkeys.c:175
-msgid "Accelerator modifiers"
-msgstr "Endringstaster for hurtigtaster"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:183
-#: ../panels/keyboard/eggcellrendererkeys.c:184
-msgid "Accelerator keycode"
-msgstr "Tastekode for hurtigtast"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:194
-msgid "Accel Mode"
-msgstr "Akselleratormodus"
-
-#: ../panels/keyboard/eggcellrendererkeys.c:195
-msgid "The type of accelerator."
-msgstr "Type hurtigtast."
-
-#. translators:
-#. * The device has been disabled
-#: ../panels/keyboard/eggcellrendererkeys.c:243
-#: ../panels/keyboard/keyboard-shortcuts.c:1193
-#: ../panels/sound/gvc-mixer-control.c:1086
-#: ../panels/user-accounts/um-fingerprint-dialog.c:177
-#: ../panels/user-accounts/um-fingerprint-dialog.c:178
-msgid "Disabled"
-msgstr "Slått av"
+#: ../panels/keyboard/50-accessibility.xml.in.h:9
+msgid "Zoom out"
+msgstr "Zoom ut"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 msgid "Change keyboard settings"
 msgstr "Endre innstillinger for tastatur"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:2
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
 msgid "Keyboard"
 msgstr "Tastatur"
 
@@ -983,23 +980,32 @@ msgstr "Tastatur"
 msgid "Shortcut;Repeat;Blink;"
 msgstr "Snarvei;Repetisjon;Blinking;"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:646
-#: ../panels/keyboard/keyboard-shortcuts.c:654
-#: ../panels/keyboard/keyboard-shortcuts.c:968
-#: ../panels/keyboard/keyboard-shortcuts.c:1566
-#: ../panels/keyboard/keyboard-shortcuts.c:1570
+#: ../panels/keyboard/keyboard-shortcuts.c:557
+#: ../panels/keyboard/keyboard-shortcuts.c:565
+#: ../panels/keyboard/keyboard-shortcuts.c:877
+#: ../panels/keyboard/keyboard-shortcuts.c:1478
+#: ../panels/keyboard/keyboard-shortcuts.c:1482
 msgid "Custom Shortcuts"
 msgstr "Egendefinerte snarveier"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:814
+#: ../panels/keyboard/keyboard-shortcuts.c:725
 msgid "<Unknown Action>"
 msgstr "<Ukjent handling>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1219
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/keyboard-shortcuts.c:1102
+#: ../panels/sound/gvc-mixer-control.c:1087
+#: ../panels/user-accounts/um-fingerprint-dialog.c:177
+#: ../panels/user-accounts/um-fingerprint-dialog.c:178
+msgid "Disabled"
+msgstr "Slått av"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1128
 msgid "Error saving the new shortcut"
 msgstr "Feil under lagring av ny snarvei"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1352
+#: ../panels/keyboard/keyboard-shortcuts.c:1261
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1011,7 +1017,7 @@ msgstr ""
 "Vennligst prøv med en tastekombinasjon som inkluderer Control, Alt eller "
 "Shift."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1382
+#: ../panels/keyboard/keyboard-shortcuts.c:1293
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1020,102 +1026,110 @@ msgstr ""
 "Snarvei «%s» er allerede brukt for\n"
 "«%s»"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1387
+#: ../panels/keyboard/keyboard-shortcuts.c:1298
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr ""
 "Hvis du omfordeler snarveien til «%s» vil snarveien for «%s» bli slått av."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1393
+#: ../panels/keyboard/keyboard-shortcuts.c:1304
 msgid "_Reassign"
 msgstr "_Omfordel"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1505
+#: ../panels/keyboard/keyboard-shortcuts.c:1417
 msgid "Too many custom shortcuts"
 msgstr "For mange egendefinerte snarveier"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1825
+#: ../panels/keyboard/keyboard-shortcuts.c:1768
 msgid "Action"
 msgstr "Handling"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1848
+#: ../panels/keyboard/keyboard-shortcuts.c:1791
 msgid "Shortcut"
 msgstr "Snarvei"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
+msgid "Add Shortcut"
+msgstr "Legg til snarvei"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
 msgid "C_ommand:"
 msgstr "K_ommando:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:2
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 msgid "Cursor Blinking"
 msgstr "Markørblinking"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "Cursor _blinks in text fields"
 msgstr "Markøren _blinker i tekstfelt"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
 msgid "Cursor blink speed"
 msgstr "Hastighet for blinkende markør"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
 msgid "Custom Shortcut"
 msgstr "Egendefinert snarvei"
 
 #. fast acceleration
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:6
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
 #: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "Fast"
 msgstr "Rask"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:7
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:8
 msgid "Key presses _repeat when key is held down"
 msgstr "Tastetrykk _repeteres når tasten holdes nede"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
 msgid "Layout Settings"
 msgstr "Innstillinger for utforming"
 
 #. long delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 #: ../panels/mouse/gnome-mouse-properties.ui.h:16
 #: ../panels/universal-access/uap.ui.h:38
 #: ../panels/universal-access/zoom-options.ui.h:13
 msgid "Long"
 msgstr "Lang"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+msgid "Remove Shortcut"
+msgstr "Fjern snarvei"
+
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
 msgid "Repeat Keys"
 msgstr "Repeter taster"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
 msgid "Repeat keys speed"
 msgstr "Hastighet for tasterepetering"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
 msgid "S_peed:"
 msgstr "_Hastighet:"
 
 #. short delay
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:14
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
 #: ../panels/universal-access/uap.ui.h:54
 #: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Short"
 msgstr "Kort"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:15
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
 msgid "Shortcuts"
 msgstr "Snarveier"
 
 #. slow acceleration
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
 #: ../panels/mouse/gnome-mouse-properties.ui.h:26
 msgid "Slow"
 msgstr "Treg"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:17
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
@@ -1123,20 +1137,20 @@ msgstr ""
 "Klikk på tilhørende rad og skriv inn en ny tastekombinasjon for å redigere "
 "en snarveitast, eller trykk slettetast for å fjerne den."
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:18
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
 #: ../panels/universal-access/uap.ui.h:67
 msgid "Typing"
 msgstr "Skriving"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
 msgid "_Delay:"
 msgstr "_Pause:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
 msgid "_Name:"
 msgstr "_Navn:"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:21
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:23
 msgid "_Speed:"
 msgstr "_Hastighet:"
 
@@ -1155,6 +1169,7 @@ msgstr "_Logg inn"
 #. translators: This is the title of the "Add Account" dialogue.
 #. * The title is not visible when using GNOME Shell
 #: ../panels/online-accounts/cc-online-accounts-panel.c:461
+#: ../panels/online-accounts/online-accounts.ui.h:1
 msgid "Add Account"
 msgstr "Legg til konto"
 
@@ -1204,130 +1219,134 @@ msgstr "Håndter kontoer på nettet"
 msgid "Online Accounts"
 msgstr "Kontoer på nettet"
 
-#: ../panels/online-accounts/online-accounts.ui.h:1
+#: ../panels/online-accounts/online-accounts.ui.h:2
+msgid "Remove Account"
+msgstr "Fjern konto"
+
+#: ../panels/online-accounts/online-accounts.ui.h:3
 msgid "Select an account"
 msgstr "Velg en konto"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:520
+#: ../panels/printers/cc-printers-panel.c:525
 msgid "Low on toner"
 msgstr "Lite toner"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:522
+#: ../panels/printers/cc-printers-panel.c:527
 msgid "Out of toner"
 msgstr "Ikke mer toner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:525
+#: ../panels/printers/cc-printers-panel.c:530
 msgid "Low on developer"
 msgstr "Lite utvikler"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:528
+#: ../panels/printers/cc-printers-panel.c:533
 msgid "Out of developer"
 msgstr "Ikke mer utvikler"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:530
+#: ../panels/printers/cc-printers-panel.c:535
 msgid "Low on a marker supply"
 msgstr "Lite farge igjen"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:532
+#: ../panels/printers/cc-printers-panel.c:537
 msgid "Out of a marker supply"
 msgstr "Tom for farge"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:534
+#: ../panels/printers/cc-printers-panel.c:539
 msgid "Open cover"
 msgstr "Åpne lokket"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:536
+#: ../panels/printers/cc-printers-panel.c:541
 msgid "Open door"
 msgstr "Åpne døren"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:538
+#: ../panels/printers/cc-printers-panel.c:543
 msgid "Low on paper"
 msgstr "Lite papir"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:540
+#: ../panels/printers/cc-printers-panel.c:545
 msgid "Out of paper"
 msgstr "Ikke mer papir"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:542
+#: ../panels/printers/cc-printers-panel.c:547
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Frakoblet"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:544
+#: ../panels/printers/cc-printers-panel.c:549
 msgctxt "printer state"
 msgid "Paused"
 msgstr "På pause"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:546
+#: ../panels/printers/cc-printers-panel.c:551
 msgid "Waste receptacle almost full"
 msgstr "Søppelkurven er nesten full"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:548
+#: ../panels/printers/cc-printers-panel.c:553
 msgid "Waste receptacle full"
 msgstr "Søppelkurven er full"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:550
+#: ../panels/printers/cc-printers-panel.c:555
 msgid "The optical photo conductor is near end of life"
 msgstr "Bildetrommelen er snart utbrukt"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:552
+#: ../panels/printers/cc-printers-panel.c:557
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Bildetrommelen fungerer ikke lenger"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:724
+#: ../panels/printers/cc-printers-panel.c:729
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Klar"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:728
+#: ../panels/printers/cc-printers-panel.c:733
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Prosesserer"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:732
+#: ../panels/printers/cc-printers-panel.c:737
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Stoppet"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:851
+#: ../panels/printers/cc-printers-panel.c:856
 msgid "Toner Level"
 msgstr "Tonernivå"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:854
+#: ../panels/printers/cc-printers-panel.c:859
 msgid "Ink Level"
 msgstr "Blekknivå"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:857
+#: ../panels/printers/cc-printers-panel.c:862
 msgid "Supply Level"
 msgstr "Beholdningsnivå"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:872
-#: ../panels/printers/cc-printers-panel.c:1258
+#: ../panels/printers/cc-printers-panel.c:877
+#: ../panels/printers/cc-printers-panel.c:1263
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -1335,80 +1354,80 @@ msgstr[0] "%u aktiv"
 msgstr[1] "%u aktive"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:977
+#: ../panels/printers/cc-printers-panel.c:982
 msgid "No printers available"
 msgstr "Ingen skrivere tilgjengelig"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1301
+#: ../panels/printers/cc-printers-panel.c:1306
 msgctxt "print job"
 msgid "Pending"
 msgstr "Utestående"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1305
+#: ../panels/printers/cc-printers-panel.c:1310
 msgctxt "print job"
 msgid "Held"
 msgstr "På hold"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1309
+#: ../panels/printers/cc-printers-panel.c:1314
 msgctxt "print job"
 msgid "Processing"
 msgstr "Prosesserer"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1313
+#: ../panels/printers/cc-printers-panel.c:1318
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Stoppet"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1317
+#: ../panels/printers/cc-printers-panel.c:1322
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Avbrutt"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1321
+#: ../panels/printers/cc-printers-panel.c:1326
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Avbrutt med feil"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1325
+#: ../panels/printers/cc-printers-panel.c:1330
 msgctxt "print job"
 msgid "Completed"
 msgstr "Fullført"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1408
+#: ../panels/printers/cc-printers-panel.c:1413
 msgid "Job Title"
 msgstr "Jobbtittel"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1417
+#: ../panels/printers/cc-printers-panel.c:1422
 msgid "Job State"
 msgstr "Tilstand for jobb"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1423
+#: ../panels/printers/cc-printers-panel.c:1428
 msgid "Time"
 msgstr "Tid"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2019
+#: ../panels/printers/cc-printers-panel.c:2024
 msgid "Failed to add new printer."
 msgstr "Klarte ikke å legge til ny skriver."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2223
-#: ../panels/printers/cc-printers-panel.c:2237
+#: ../panels/printers/cc-printers-panel.c:2228
+#: ../panels/printers/cc-printers-panel.c:2242
 msgid "Test page"
 msgstr "Testside"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2484
+#: ../panels/printers/cc-printers-panel.c:2489
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Klarte ikke å laste brukergrensesnitt: %s"
@@ -1516,40 +1535,68 @@ msgid "Add New Printer"
 msgstr "Legg til ny skriver"
 
 #: ../panels/printers/printers.ui.h:5
+msgid "Add Printer"
+msgstr "Legg til skriver"
+
+#: ../panels/printers/printers.ui.h:6
+msgid "Add User"
+msgstr "Legg til bruker"
+
+#: ../panels/printers/printers.ui.h:7
 msgid "Allowed users"
 msgstr "Tilatte brukere"
 
-#: ../panels/printers/printers.ui.h:6
+#: ../panels/printers/printers.ui.h:8
+msgid "Cancel Print Job"
+msgstr "Avbryt utskriftsjobb"
+
+#: ../panels/printers/printers.ui.h:9
 #: ../panels/network/cc-network-panel.c:1990
-#: ../panels/network/cc-network-panel.c:1993 ../panels/network/network.ui.h:11
+#: ../panels/network/cc-network-panel.c:1993 ../panels/network/network.ui.h:17
 msgid "IP Address"
 msgstr "IP-adresse"
 
-#: ../panels/printers/printers.ui.h:7
+#: ../panels/printers/printers.ui.h:10
 msgid "Jobs"
 msgstr "Jobber"
 
 #. Translators: Location of the printer (e.g. Lab, 1st floor,...).
-#: ../panels/printers/printers.ui.h:9
+#: ../panels/printers/printers.ui.h:12
 msgid "Location"
 msgstr "Plassering"
 
-#: ../panels/printers/printers.ui.h:10
+#: ../panels/printers/printers.ui.h:13
 msgid "Model"
 msgstr "Modell"
 
+#: ../panels/printers/printers.ui.h:14
+msgid "Pause Printing"
+msgstr "Sett utskrift på pause"
+
 #. Translators: This button executes command which prints test page.
-#: ../panels/printers/printers.ui.h:12
+#: ../panels/printers/printers.ui.h:16
 msgid "Print _Test Page"
 msgstr "Skriv ut _testside"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:14
+#: ../panels/printers/printers.ui.h:18
 msgid "Printer Options"
 msgstr "Alternativer for skriver"
 
+#: ../panels/printers/printers.ui.h:19
+msgid "Remove Printer"
+msgstr "Fjern skriver"
+
+#: ../panels/printers/printers.ui.h:20
+msgid "Remove User"
+msgstr "Fjern bruker"
+
+#: ../panels/printers/printers.ui.h:21
+msgid "Resume Printing"
+msgstr "Gjenoppta utskrift"
+
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:16
+#: ../panels/printers/printers.ui.h:23
 msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
@@ -1558,27 +1605,27 @@ msgstr ""
 "ser ikke ut til å være tilgjengelig."
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/printers.ui.h:19
+#: ../panels/printers/printers.ui.h:26
 msgid "Supply"
 msgstr "Beholdning"
 
 #. Translators: Switch back to printer's info tab
-#: ../panels/printers/printers.ui.h:21
+#: ../panels/printers/printers.ui.h:28
 msgid "_Back"
 msgstr "Til_bake"
 
 #. Translators: This checkbox is checked when the default printer is selected.
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:30
 msgid "_Default"
 msgstr "_Forvalg"
 
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:25
+#: ../panels/printers/printers.ui.h:32
 msgid "_Options"
 msgstr "_Alternativer"
 
 #. Tanslators: Switch to tab containing printer's jobs
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:34
 msgid "_Show"
 msgstr "Vi_s"
 
@@ -1607,77 +1654,113 @@ msgid "Keyboard Layout Options"
 msgstr "Alternativer for tastaturutforming"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
+msgid "Add Language"
+msgstr "Legg til språk"
+
+#: ../panels/region/gnome-region-panel.ui.h:2
+msgid "Add Layout"
+msgstr "Legg til utforming"
+
+#: ../panels/region/gnome-region-panel.ui.h:3
+msgid "Add Region"
+msgstr "Legg til region"
+
+#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Allow different layouts for individual windows"
 msgstr "Tillat forskjellige utforminger for hvert vindu"
 
-#: ../panels/region/gnome-region-panel.ui.h:2
+#: ../panels/region/gnome-region-panel.ui.h:5
 #: ../panels/region/gnome-region-panel-system.c:406
 msgid "Copy Settings..."
 msgstr "Kopier innstillinger …"
 
-#: ../panels/region/gnome-region-panel.ui.h:3
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Currency"
 msgstr "Valuta"
 
-#: ../panels/region/gnome-region-panel.ui.h:4
+#: ../panels/region/gnome-region-panel.ui.h:7
 msgid "Dates"
 msgstr "Datoer"
 
 #. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
-#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Display language:"
 msgstr "Vis språk:"
 
-#: ../panels/region/gnome-region-panel.ui.h:7
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "Examples"
 msgstr "Eksempler"
 
-#: ../panels/region/gnome-region-panel.ui.h:8
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Format:"
 msgstr "Format:"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:12
 msgid "Formats"
 msgstr "Formater"
 
-#: ../panels/region/gnome-region-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "Input source:"
 msgstr "Inngangskilde:"
 
-#: ../panels/region/gnome-region-panel.ui.h:11
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "Install languages..."
 msgstr "Installer språk …"
 
-#: ../panels/region/gnome-region-panel.ui.h:12
+#: ../panels/region/gnome-region-panel.ui.h:15
 msgid "Language"
 msgstr "Språk"
 
-#: ../panels/region/gnome-region-panel.ui.h:13
+#: ../panels/region/gnome-region-panel.ui.h:16
 msgid "Layouts"
 msgstr "Utforminger"
 
-#: ../panels/region/gnome-region-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:17
 msgid "Measurement"
 msgstr "Måleenheter"
 
-#: ../panels/region/gnome-region-panel.ui.h:15
+#: ../panels/region/gnome-region-panel.ui.h:18
+msgid "Move Down"
+msgstr "Flytt ned"
+
+#: ../panels/region/gnome-region-panel.ui.h:19
+msgid "Move Up"
+msgstr "Flytt opp"
+
+#: ../panels/region/gnome-region-panel.ui.h:20
 msgid "New windows use the default layout"
 msgstr "Nye vinduer bruker forvalgt utforming"
 
-#: ../panels/region/gnome-region-panel.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "New windows use the previous window's layout"
 msgstr "Nye vinduer bruker utforming fra forrige vindu"
 
-#: ../panels/region/gnome-region-panel.ui.h:17
+#: ../panels/region/gnome-region-panel.ui.h:22
 msgid "Numbers"
 msgstr "Tall"
 
-#: ../panels/region/gnome-region-panel.ui.h:18
+#: ../panels/region/gnome-region-panel.ui.h:23
+msgid "Preview Layout"
+msgstr "Forhåndsvis utforming"
+
+#: ../panels/region/gnome-region-panel.ui.h:24
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
 msgid "Region and Language"
 msgstr "Region og språk"
 
-#: ../panels/region/gnome-region-panel.ui.h:19
+#: ../panels/region/gnome-region-panel.ui.h:25
+msgid "Remove Language"
+msgstr "Fjern språk"
+
+#: ../panels/region/gnome-region-panel.ui.h:26
+msgid "Remove Layout"
+msgstr "Fjern utforming"
+
+#: ../panels/region/gnome-region-panel.ui.h:27
+msgid "Remove Region"
+msgstr "Fjern region"
+
+#: ../panels/region/gnome-region-panel.ui.h:28
 msgid ""
 "Replace the current keyboard layout settings with the\n"
 "default settings"
@@ -1685,24 +1768,24 @@ msgstr ""
 "Erstatt aktive innstillinger for tastaturutforming med\n"
 "forvalgte innstillinger"
 
-#: ../panels/region/gnome-region-panel.ui.h:21
+#: ../panels/region/gnome-region-panel.ui.h:30
 msgid "Reset to De_faults"
 msgstr "Sett til _forvalg"
 
-#: ../panels/region/gnome-region-panel.ui.h:22
+#: ../panels/region/gnome-region-panel.ui.h:31
 msgid "Select a display language (change will be applied next time you log in)"
 msgstr ""
 "Velg et visningsspråk. Endringen vil tas i bruk neste gang du logger inn"
 
-#: ../panels/region/gnome-region-panel.ui.h:23
+#: ../panels/region/gnome-region-panel.ui.h:32
 msgid "Select a region (change will be applied the next time you log in)"
 msgstr "Velg en region. Endringen vil tas i bruk neste gang du logger inn"
 
-#: ../panels/region/gnome-region-panel.ui.h:25
+#: ../panels/region/gnome-region-panel.ui.h:34
 msgid "System settings"
 msgstr "Systeminnstillinger"
 
-#: ../panels/region/gnome-region-panel.ui.h:26
+#: ../panels/region/gnome-region-panel.ui.h:35
 #: ../panels/region/gnome-region-panel-system.c:400
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
@@ -1713,23 +1796,23 @@ msgstr ""
 "innstillinger for område og språk. Du kan sette systeminnstillingene slik du "
 "ønsker."
 
-#: ../panels/region/gnome-region-panel.ui.h:27
+#: ../panels/region/gnome-region-panel.ui.h:36
 msgid "Times"
 msgstr "Tid"
 
-#: ../panels/region/gnome-region-panel.ui.h:28
+#: ../panels/region/gnome-region-panel.ui.h:37
 msgid "Use the same layout for all windows"
 msgstr "Bruk samme utforming for alle vinduer"
 
-#: ../panels/region/gnome-region-panel.ui.h:29
+#: ../panels/region/gnome-region-panel.ui.h:38
 msgid "View and edit keyboard layout options"
 msgstr "Vis og rediger alternativer for tastaturutforming"
 
-#: ../panels/region/gnome-region-panel.ui.h:30
+#: ../panels/region/gnome-region-panel.ui.h:39
 msgid "Your settings"
 msgstr "Dine innstillinger"
 
-#: ../panels/region/gnome-region-panel.ui.h:31
+#: ../panels/region/gnome-region-panel.ui.h:40
 msgid "_Options..."
 msgstr "_Alternativer …"
 
@@ -1960,11 +2043,11 @@ msgstr "Hotspot"
 msgid "%d Mb/s"
 msgstr "%d MB/s"
 
-#: ../panels/network/cc-network-panel.c:1986 ../panels/network/network.ui.h:12
+#: ../panels/network/cc-network-panel.c:1986 ../panels/network/network.ui.h:18
 msgid "IPv4 Address"
 msgstr "IPv4-adresse"
 
-#: ../panels/network/cc-network-panel.c:1987 ../panels/network/network.ui.h:13
+#: ../panels/network/cc-network-panel.c:1987 ../panels/network/network.ui.h:19
 msgid "IPv6 Address"
 msgstr "IPv6-adresse"
 
@@ -2028,144 +2111,172 @@ msgstr "Innstillinger for nettverk"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-msgid "Network;Wireless;IP;LAN;"
-msgstr "Nettverk;Trådløs;IP;LAN;"
+msgid "Network;Wireless;IP;LAN;Proxy;"
+msgstr "Nettverk;Trådløs;IP;LAN;Proxy;"
 
 #: ../panels/network/network.ui.h:1
+msgid "Add Device"
+msgstr "Legg til enhet"
+
+#: ../panels/network/network.ui.h:2
 msgid "Air_plane Mode"
 msgstr "Fly_modus"
 
-#: ../panels/network/network.ui.h:2
+#: ../panels/network/network.ui.h:3
 msgid "Create..."
 msgstr "Lag …"
 
-#: ../panels/network/network.ui.h:3
+#: ../panels/network/network.ui.h:4
 msgid "DNS"
 msgstr "DNS"
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:5
 msgid "Default Route"
 msgstr "Forvalgt rute"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:6
+msgid "Device Off"
+msgstr "Enhet av"
+
+#: ../panels/network/network.ui.h:7
+msgid "Disable VPN"
+msgstr "Slå av VPN"
+
+#: ../panels/network/network.ui.h:8
+msgid "FTP Port"
+msgstr "FTP-port"
+
+#: ../panels/network/network.ui.h:9
 msgid "Gateway"
 msgstr "Gateway"
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:10
 msgid "Group Name"
 msgstr "Gruppenavn"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:11
 msgid "Group Password"
 msgstr "Gruppepassord"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:12
+msgid "HTTP Port"
+msgstr "HTTP-port"
+
+#: ../panels/network/network.ui.h:13
+msgid "HTTPS Port"
+msgstr "HTTP-port"
+
+#: ../panels/network/network.ui.h:14
 msgid "H_TTPS Proxy"
 msgstr "H_TTP-proxy"
 
-#: ../panels/network/network.ui.h:9
+#: ../panels/network/network.ui.h:15
 msgid "Hardware Address"
 msgstr "Maskinvareadresse"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:16
 msgid "IMEI"
 msgstr "IMEI"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:20
 msgid "Interface"
 msgstr "Grensesnitt"
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:21
 msgid "Network Name"
 msgstr "Nettverksnavn"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:22
 msgid "Provider"
 msgstr "Tilbyder"
 
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/network.ui.h:24
 msgid "Security"
 msgstr "Sikkerhet"
 
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:25
 msgid "Security Key"
 msgstr "Sikkerhetsnøkkel"
 
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:26
 msgid "Select the interface to use for the new service"
 msgstr "Velger grensesnitt som skal brukes for den nye tjenesten"
 
-#: ../panels/network/network.ui.h:20
+#: ../panels/network/network.ui.h:27
+msgid "Socks Port"
+msgstr "Socks-port"
+
+#: ../panels/network/network.ui.h:28
 msgid "Speed"
 msgstr "Hastighet"
 
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:29
 msgid "Subnet Mask"
 msgstr "Subnettmaske"
 
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:30
 msgid "Unlock"
 msgstr "Lås opp"
 
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:31
 msgid "Username"
 msgstr "Brukernavn"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:32
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/network.ui.h:25
+#: ../panels/network/network.ui.h:33
 msgid "VPN Type"
 msgstr "Type VPN"
 
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:34
 msgid "_Configuration URL"
 msgstr "_Konfigurasjons-URL"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:35
 msgid "_Configure..."
 msgstr "_Konfigurer …"
 
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network.ui.h:36
 msgid "_FTP Proxy"
 msgstr "_FTP-proxy"
 
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network.ui.h:37
 msgid "_HTTP Proxy"
 msgstr "_HTTP-proxy"
 
-#: ../panels/network/network.ui.h:30
+#: ../panels/network/network.ui.h:38
 msgid "_Method"
 msgstr "_Metode"
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network.ui.h:39
 msgid "_Network Name"
 msgstr "_Nettverksnavn"
 
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network.ui.h:40
 msgid "_Socks Host"
 msgstr "_Socks-vert"
 
-#: ../panels/network/network.ui.h:33
+#: ../panels/network/network.ui.h:41
 msgid "_Stop Hotspot..."
 msgstr "_Stopp hotspot …"
 
-#: ../panels/network/network.ui.h:34
+#: ../panels/network/network.ui.h:42
 msgid "_Use as Hotspot..."
 msgstr "Br_uk som hotspot …"
 
-#: ../panels/network/network.ui.h:35
+#: ../panels/network/network.ui.h:43
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "Automatisk"
 
-#: ../panels/network/network.ui.h:36
+#: ../panels/network/network.ui.h:44
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "Manuell"
 
-#: ../panels/network/network.ui.h:37
+#: ../panels/network/network.ui.h:45
 msgctxt "proxy method"
 msgid "None"
 msgstr "Ingen"
@@ -2496,23 +2607,23 @@ msgid "Available Profiles"
 msgstr "Tilgjengelige profiler"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:795
+#: ../panels/color/cc-color-panel.c:794
 #: ../panels/sound/gvc-mixer-dialog.c:1515
 msgid "Device"
 msgstr "Enhet"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:830
+#: ../panels/color/cc-color-panel.c:829
 msgid "Calibration"
 msgstr "Kalibrering"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:862
+#: ../panels/color/cc-color-panel.c:861
 msgid "Create a color profile for the selected device"
 msgstr "Lag en fargeprofil for valgt enhet"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:876 ../panels/color/cc-color-panel.c:900
+#: ../panels/color/cc-color-panel.c:875 ../panels/color/cc-color-panel.c:899
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -2521,17 +2632,17 @@ msgstr ""
 "tilkoblet."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:909
+#: ../panels/color/cc-color-panel.c:908
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Måleinstrumentet støtter ikke profilering av skrivere."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:920
+#: ../panels/color/cc-color-panel.c:919
 msgid "The device type is not currently supported."
 msgstr "Enhetstypen er ikke støttet."
 
 #. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:993
+#: ../panels/color/cc-color-panel.c:992
 msgid "Cannot remove automatically added profile"
 msgstr "Kan ikke fjerne profil som er lagt til automatisk"
 
@@ -2567,35 +2678,35 @@ msgstr[1] "%i uker"
 msgid "Less than 1 week"
 msgstr "Mindre enn en uke"
 
-#: ../panels/color/cc-color-panel.c:1447
+#: ../panels/color/cc-color-panel.c:1449
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "Forvalgt RGB"
 
-#: ../panels/color/cc-color-panel.c:1452
+#: ../panels/color/cc-color-panel.c:1454
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "Forvalgt CMYK"
 
-#: ../panels/color/cc-color-panel.c:1457
+#: ../panels/color/cc-color-panel.c:1459
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "Forvalgt grå"
 
-#: ../panels/color/cc-color-panel.c:1572 ../panels/color/cc-color-panel.c:1604
-#: ../panels/color/cc-color-panel.c:1615 ../panels/color/cc-color-panel.c:1626
+#: ../panels/color/cc-color-panel.c:1577 ../panels/color/cc-color-panel.c:1609
+#: ../panels/color/cc-color-panel.c:1620 ../panels/color/cc-color-panel.c:1631
 msgid "Uncalibrated"
 msgstr "Ikke kalibrert"
 
-#: ../panels/color/cc-color-panel.c:1575
+#: ../panels/color/cc-color-panel.c:1580
 msgid "This device is not color managed."
 msgstr "Denne enheten er ikke fargestyrt."
 
-#: ../panels/color/cc-color-panel.c:1607
+#: ../panels/color/cc-color-panel.c:1612
 msgid "This device is using manufacturing calibrated data."
 msgstr "Denne enheten bruker data kalibrert av produsenten."
 
-#: ../panels/color/cc-color-panel.c:1618
+#: ../panels/color/cc-color-panel.c:1623
 msgid ""
 "This device does not have a profile suitable for whole-screen color "
 "correction."
@@ -2603,42 +2714,42 @@ msgstr ""
 "Denne enheten har ikke en profil som passer for fargekorrigering av hele "
 "skjermen."
 
-#: ../panels/color/cc-color-panel.c:1651
+#: ../panels/color/cc-color-panel.c:1656
 msgid "This device has an old profile that may no longer be accurate."
 msgstr "Denne enheten har en gammel profil som kan være unøyaktig."
 
 #. TRANSLATORS: this is when the calibration profile age is not
 #. * specified as it has been autogenerated from the hardware
-#: ../panels/color/cc-color-panel.c:1679
+#: ../panels/color/cc-color-panel.c:1684
 msgid "Not specified"
 msgstr "Ikke spesifisert"
 
 #. add the 'No devices detected' entry
-#: ../panels/color/cc-color-panel.c:1864
+#: ../panels/color/cc-color-panel.c:1868
 msgid "No devices supporting color management detected"
 msgstr "Fant ingen enheter som støtter fargehåndtering"
 
-#: ../panels/color/cc-color-panel.c:2093
+#: ../panels/color/cc-color-panel.c:2097
 msgctxt "Device kind"
 msgid "Display"
 msgstr "Skjerm"
 
-#: ../panels/color/cc-color-panel.c:2095
+#: ../panels/color/cc-color-panel.c:2099
 msgctxt "Device kind"
 msgid "Scanner"
 msgstr "Skanner"
 
-#: ../panels/color/cc-color-panel.c:2097
+#: ../panels/color/cc-color-panel.c:2101
 msgctxt "Device kind"
 msgid "Printer"
 msgstr "Skriver"
 
-#: ../panels/color/cc-color-panel.c:2099
+#: ../panels/color/cc-color-panel.c:2103
 msgctxt "Device kind"
 msgid "Camera"
 msgstr "Kamera"
 
-#: ../panels/color/cc-color-panel.c:2101
+#: ../panels/color/cc-color-panel.c:2105
 msgctxt "Device kind"
 msgid "Webcam"
 msgstr "Nettkamera"
@@ -2796,7 +2907,7 @@ msgstr "Utgang"
 msgid "Sound Output Volume"
 msgstr "Utgangsvolum for lyd"
 
-#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1807
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1808
 msgid "Input"
 msgstr "Inngang"
 
@@ -2862,7 +2973,7 @@ msgstr "_Profil:"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1093
+#: ../panels/sound/gvc-mixer-control.c:1094
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -2871,14 +2982,14 @@ msgstr[1] "%u utganger"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1103
+#: ../panels/sound/gvc-mixer-control.c:1104
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u inngang"
 msgstr[1] "%u innganger"
 
-#: ../panels/sound/gvc-mixer-control.c:1401
+#: ../panels/sound/gvc-mixer-control.c:1402
 msgid "System Sounds"
 msgstr "Systemlyder"
 
@@ -2914,44 +3025,44 @@ msgstr "_Utgangsvolum:"
 msgid "C_hoose a device for sound output:"
 msgstr "_Velg en enhet som lydutgang:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1796
-#: ../panels/sound/gvc-mixer-dialog.c:1925
+#: ../panels/sound/gvc-mixer-dialog.c:1797
+#: ../panels/sound/gvc-mixer-dialog.c:1926
 msgid "Settings for the selected device:"
 msgstr "Innstillinger for valgt enhet:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1814
+#: ../panels/sound/gvc-mixer-dialog.c:1815
 msgid "_Input volume:"
 msgstr "_Inngangsvolum:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1837
+#: ../panels/sound/gvc-mixer-dialog.c:1838
 msgid "Input level:"
 msgstr "Inngangsnivå:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1865
+#: ../panels/sound/gvc-mixer-dialog.c:1866
 msgid "C_hoose a device for sound input:"
 msgstr "_Velg en enhet som lydinngang:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1892
+#: ../panels/sound/gvc-mixer-dialog.c:1893
 msgid "Hardware"
 msgstr "Maskinvare"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1897
+#: ../panels/sound/gvc-mixer-dialog.c:1898
 msgid "C_hoose a device to configure:"
 msgstr "_Velg en enhet å konfigurere:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1936
+#: ../panels/sound/gvc-mixer-dialog.c:1937
 msgid "Sound Effects"
 msgstr "Lydeffekter"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1943
+#: ../panels/sound/gvc-mixer-dialog.c:1944
 msgid "_Alert volume:"
 msgstr "V_arselvolum:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1956
+#: ../panels/sound/gvc-mixer-dialog.c:1957
 msgid "Applications"
 msgstr "Programmer"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1960
+#: ../panels/sound/gvc-mixer-dialog.c:1961
 msgid "No application is currently playing or recording audio."
 msgstr "Ingen programmer spiller av eller tar opp lyd."
 
@@ -3058,7 +3169,7 @@ msgstr "Glass"
 msgid "Sonar"
 msgstr "Sonar"
 
-#: ../panels/universal-access/cc-ua-panel.c:505
+#: ../panels/universal-access/cc-ua-panel.c:504
 #: ../panels/universal-access/cc-ua-panel.c:510
 msgid "No shortcut set"
 msgstr "Ingen snarvei satt"
@@ -3877,20 +3988,20 @@ msgstr "En bruker med navn «%s» eksisterer allerede."
 msgid "This user does not exist."
 msgstr "Denne brukeren eksisterer ikke."
 
-#: ../panels/user-accounts/um-user-panel.c:357
+#: ../panels/user-accounts/um-user-panel.c:358
 msgid "Failed to delete user"
 msgstr "Klarte ikke å slette bruker"
 
-#: ../panels/user-accounts/um-user-panel.c:417
+#: ../panels/user-accounts/um-user-panel.c:418
 msgid "You cannot delete your own account."
 msgstr "Du kan ikke slette din egen konto."
 
-#: ../panels/user-accounts/um-user-panel.c:426
+#: ../panels/user-accounts/um-user-panel.c:427
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s er fremdeles logget inn"
 
-#: ../panels/user-accounts/um-user-panel.c:430
+#: ../panels/user-accounts/um-user-panel.c:431
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -3898,12 +4009,12 @@ msgstr ""
 "Hvis du sletter en innlogget bruker kan systemet ende opp i en inkonsistent "
 "tilstand."
 
-#: ../panels/user-accounts/um-user-panel.c:439
+#: ../panels/user-accounts/um-user-panel.c:440
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Vil du beholde filene til %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:443
+#: ../panels/user-accounts/um-user-panel.c:444
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -3911,38 +4022,38 @@ msgstr ""
 "Det er mulig å beholde hjemmekatalogen, e-postkøen og midlertidige filer når "
 "du sletter en brukerkonto."
 
-#: ../panels/user-accounts/um-user-panel.c:446
+#: ../panels/user-accounts/um-user-panel.c:447
 msgid "_Delete Files"
 msgstr "_Slett filer"
 
-#: ../panels/user-accounts/um-user-panel.c:447
+#: ../panels/user-accounts/um-user-panel.c:448
 msgid "_Keep Files"
 msgstr "_Behold filer"
 
-#: ../panels/user-accounts/um-user-panel.c:499
+#: ../panels/user-accounts/um-user-panel.c:500
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Konto deaktivert"
 
-#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:508
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Settes ved neste innlogging"
 
-#: ../panels/user-accounts/um-user-panel.c:510
+#: ../panels/user-accounts/um-user-panel.c:511
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ingen"
 
-#: ../panels/user-accounts/um-user-panel.c:845
+#: ../panels/user-accounts/um-user-panel.c:846
 msgid "Failed to contact the accounts service"
 msgstr "Klarte ikke å kontakte kontotjenesten"
 
-#: ../panels/user-accounts/um-user-panel.c:847
+#: ../panels/user-accounts/um-user-panel.c:848
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Sjekk at kontotjenesten er installert og aktivert."
 
-#: ../panels/user-accounts/um-user-panel.c:887
+#: ../panels/user-accounts/um-user-panel.c:888
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -3950,37 +4061,37 @@ msgstr ""
 "Klikk på *-ikonet\n"
 "for å gjøre endringer"
 
-#: ../panels/user-accounts/um-user-panel.c:925
-msgid "Create a user"
-msgstr "Lag en bruker"
+#: ../panels/user-accounts/um-user-panel.c:926
+msgid "Create a user account"
+msgstr "Lag en ny brukerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:936
-#: ../panels/user-accounts/um-user-panel.c:1225
+#: ../panels/user-accounts/um-user-panel.c:937
+#: ../panels/user-accounts/um-user-panel.c:1226
 msgid ""
-"To create a user,\n"
+"To create a user account,\n"
 "click the * icon first"
 msgstr ""
 "Klikk på *-ikonet\n"
-"for å lage en bruker"
+"for å lage en brukerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:945
-msgid "Delete the selected user"
-msgstr "Slett valgt bruker"
+#: ../panels/user-accounts/um-user-panel.c:946
+msgid "Delete the selected user account"
+msgstr "Slett valgt brukerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:957
-#: ../panels/user-accounts/um-user-panel.c:1230
+#: ../panels/user-accounts/um-user-panel.c:958
+#: ../panels/user-accounts/um-user-panel.c:1231
 msgid ""
-"To delete the selected user,\n"
+"To delete the selected user account,\n"
 "click the * icon first"
 msgstr ""
 "Klikk på *-ikonet\n"
-"for å slette valgt bruker"
+"for å slette valgt brukerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1134
+#: ../panels/user-accounts/um-user-panel.c:1135
 msgid "My Account"
 msgstr "Min konto"
 
-#: ../panels/user-accounts/um-user-panel.c:1144
+#: ../panels/user-accounts/um-user-panel.c:1145
 msgid "Other Accounts"
 msgstr "Andre kontoer"
 
@@ -4157,18 +4268,30 @@ msgid "Account _type"
 msgstr "_Type konto"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+msgid "Add User Account"
+msgstr "Legg til brukerkonto"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "Login Options"
 msgstr "Alternativer for pålogging"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "Remove User Account"
+msgstr "Fjern brukerkonto"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+msgid "User Icon"
+msgstr "Ikon for bruker"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "_Fingerprint Login"
 msgstr "Innlogging med _fingeravtrykk"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
 msgid "_Language"
 msgstr "_Språk"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
 msgid "_Password"
 msgstr "_Passord"
 
@@ -4376,7 +4499,7 @@ msgstr ""
 "Kjøre «%s --help» for å se en full liste med tilgjengelige "
 "kommandolinjeflagg.\n"
 
-#: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:1
+#: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:2
 msgid "System Settings"
 msgstr "Systeminnstillinger"
 
@@ -4384,6 +4507,6 @@ msgstr "Systeminnstillinger"
 msgid "Control Center"
 msgstr "Kontrollsenter"
 
-#: ../shell/shell.ui.h:2
-msgid "_All Settings"
-msgstr "_Alle innstillinger"
+#: ../shell/shell.ui.h:1
+msgid "All Settings"
+msgstr "Alle innstillinger"
