@@ -22,7 +22,6 @@
 #include <config.h>
 
 #include <glib/gi18n.h>
-#include <gconf/gconf-client.h>
 #include "keyboard-shortcuts.h"
 #include "cc-keyboard-item.h"
 #include "wm-common.h"
@@ -50,8 +49,8 @@ typedef struct
   CcKeyboardItemType type;
   char *schema; /* GSettings schema name, if any */
   char *description; /* description for GSettings types */
-  char *gettext_package; /* used for GConf type */
-  char *name; /* GConf key, GConf directory, or GSettings key name depending on type */
+  char *gettext_package;
+  char *name; /* GSettings schema path, or GSettings key name depending on type */
 } KeyListEntry;
 
 enum
@@ -134,8 +133,13 @@ have_key_for_group (int group, const gchar *name)
         {
           CcKeyboardItem *item = g_ptr_array_index (keys, i);
 
-          if (g_strcmp0 (name, item->gconf_key) == 0)
-            return TRUE;
+	  if (item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS &&
+	      g_strcmp0 (name, item->key) == 0)
+	    {
+	          return TRUE;
+	    }
+
+	  return FALSE;
         }
     }
 
@@ -207,15 +211,12 @@ append_section (GtkBuilder         *builder,
       CcKeyboardItem *item;
       gboolean ret;
 
-      if (have_key_for_group (group, keys_list[i].name)) /* FIXME broken for GSettings */
+      if (have_key_for_group (group, keys_list[i].name))
         continue;
 
       item = cc_keyboard_item_new (keys_list[i].type);
       switch (keys_list[i].type)
         {
-	case CC_KEYBOARD_ITEM_TYPE_GCONF:
-          ret = cc_keyboard_item_load_from_gconf (item, keys_list[i].gettext_package, keys_list[i].name);
-          break;
 	case CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH:
           ret = cc_keyboard_item_load_from_gsettings_path (item, keys_list[i].name, FALSE);
           break;
@@ -394,12 +395,14 @@ parse_start_tag (GMarkupParseContext *ctx,
   if (name == NULL)
     return;
 
+  if (schema == NULL &&
+      keylist->schema == NULL) {
+    g_debug ("Ignored GConf keyboard shortcut '%s'", name);
+    return;
+  }
+
   key.name = g_strdup (name);
-  if (schema != NULL ||
-      keylist->schema != NULL)
-    key.type = CC_KEYBOARD_ITEM_TYPE_GSETTINGS;
-  else
-    key.type = CC_KEYBOARD_ITEM_TYPE_GCONF;
+  key.type = CC_KEYBOARD_ITEM_TYPE_GSETTINGS;
   key.description = g_strdup (description);
   key.gettext_package = g_strdup (keylist->package);
   key.schema = schema ? g_strdup (schema) : g_strdup (keylist->schema);
@@ -522,7 +525,7 @@ append_sections_from_gsettings (GtkBuilder *builder)
   KeyListEntry key;
   int i;
 
-  /* load custom shortcuts from GConf */
+  /* load custom shortcuts from GSettings */
   entries = g_array_new (FALSE, TRUE, sizeof (KeyListEntry));
 
   custom_paths = g_settings_get_strv (settings, "custom-keybindings");
