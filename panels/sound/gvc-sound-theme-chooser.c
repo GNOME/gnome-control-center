@@ -33,7 +33,7 @@
 #include <canberra-gtk.h>
 #include <libxml/tree.h>
 
-#include <gconf/gconf-client.h>
+#include <gsettings-desktop-schemas/gdesktop-enums.h>
 
 #include "gvc-sound-theme-chooser.h"
 #include "sound-theme-file-utils.h"
@@ -44,9 +44,8 @@ struct GvcSoundThemeChooserPrivate
 {
         GtkWidget *treeview;
         GtkWidget *selection_box;
-        GConfClient *client;
+        GSettings *settings;
         GSettings *sound_settings;
-        guint metacity_dir_id;
         char *current_theme;
         char *current_parent;
 };
@@ -62,8 +61,8 @@ G_DEFINE_TYPE (GvcSoundThemeChooser, gvc_sound_theme_chooser, GTK_TYPE_VBOX)
 #define INPUT_SOUNDS_KEY           "input-feedback-sounds"
 #define SOUND_THEME_KEY            "theme-name"
 
-#define KEY_METACITY_DIR           "/apps/metacity/general"
-#define AUDIO_BELL_KEY             KEY_METACITY_DIR "/audible_bell"
+#define WM_SCHEMA                  "org.gnome.desktop.wm.preferences"
+#define AUDIO_BELL_KEY             "audible-bell"
 
 #define DEFAULT_ALERT_ID        "__default"
 #define CUSTOM_THEME_NAME       "__custom"
@@ -731,22 +730,11 @@ on_sound_settings_changed (GSettings            *settings,
 }
 
 static void
-on_key_changed (GConfClient          *client,
-                guint                 cnxn_id,
-                GConfEntry           *entry,
-                GvcSoundThemeChooser *chooser)
+on_audible_bell_changed (GSettings            *settings,
+                         const char           *key,
+                         GvcSoundThemeChooser *chooser)
 {
-        const char *key;
-
-        key = gconf_entry_get_key (entry);
-
-        if (! g_str_has_prefix (key, KEY_METACITY_DIR)) {
-                return;
-        }
-
-        if (strcmp (key, AUDIO_BELL_KEY) == 0) {
-                update_theme (chooser);
-        }
+        update_theme (chooser);
 }
 
 static void
@@ -776,7 +764,7 @@ gvc_sound_theme_chooser_init (GvcSoundThemeChooser *chooser)
 
         chooser->priv = GVC_SOUND_THEME_CHOOSER_GET_PRIVATE (chooser);
 
-        chooser->priv->client = gconf_client_get_default ();
+        chooser->priv->settings = g_settings_new (WM_SCHEMA);
         chooser->priv->sound_settings = g_settings_new (KEY_SOUNDS_SCHEMA);
 
         str = g_strdup_printf ("<b>%s</b>", _("C_hoose an alert sound:"));
@@ -812,13 +800,8 @@ gvc_sound_theme_chooser_init (GvcSoundThemeChooser *chooser)
 
         g_signal_connect (G_OBJECT (chooser->priv->sound_settings), "changed",
                           G_CALLBACK (on_sound_settings_changed), chooser);
-        gconf_client_add_dir (chooser->priv->client, KEY_METACITY_DIR,
-                              GCONF_CLIENT_PRELOAD_ONELEVEL,
-                              NULL);
-        chooser->priv->metacity_dir_id = gconf_client_notify_add (chooser->priv->client,
-                                                                  KEY_METACITY_DIR,
-                                                                  (GConfClientNotifyFunc)on_key_changed,
-                                                                  chooser, NULL, NULL);
+        g_signal_connect (chooser->priv->settings, "changed::" AUDIO_BELL_KEY,
+                          G_CALLBACK (on_audible_bell_changed), chooser);
 }
 
 static void
@@ -832,14 +815,8 @@ gvc_sound_theme_chooser_finalize (GObject *object)
         sound_theme_chooser = GVC_SOUND_THEME_CHOOSER (object);
 
         if (sound_theme_chooser->priv != NULL) {
-                if (sound_theme_chooser->priv->metacity_dir_id > 0) {
-                        gconf_client_notify_remove (sound_theme_chooser->priv->client,
-                                                    sound_theme_chooser->priv->metacity_dir_id);
-                        sound_theme_chooser->priv->metacity_dir_id = 0;
-                }
-                g_object_unref (sound_theme_chooser->priv->client);
+                g_object_unref (sound_theme_chooser->priv->settings);
                 g_object_unref (sound_theme_chooser->priv->sound_settings);
-                sound_theme_chooser->priv->client = NULL;
         }
 
         G_OBJECT_CLASS (gvc_sound_theme_chooser_parent_class)->finalize (object);
