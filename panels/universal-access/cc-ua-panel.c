@@ -25,11 +25,9 @@
 #include <config.h>
 
 #include <math.h>
+#include <glib/gi18n-lib.h>
+#include <gsettings-desktop-schemas/gdesktop-enums.h>
 #include "cc-ua-panel.h"
-
-#include <gconf/gconf-client.h>
-
-#include "gconf-property-editor.h"
 
 #include "zoom-options.h"
 
@@ -44,7 +42,7 @@ G_DEFINE_DYNAMIC_TYPE (CcUaPanel, cc_ua_panel, CC_TYPE_PANEL)
 struct _CcUaPanelPrivate
 {
   GtkBuilder *builder;
-  GConfClient *client;
+  GSettings *wm_settings;
   GSettings *interface_settings;
   GSettings *kb_settings;
   GSettings *mouse_settings;
@@ -52,8 +50,6 @@ struct _CcUaPanelPrivate
   GSettings *mediakeys_settings;
 
   GObject *zoom_options;
-
-  GSList *notify_list;
 };
 
 
@@ -87,21 +83,6 @@ static void
 cc_ua_panel_dispose (GObject *object)
 {
   CcUaPanelPrivate *priv = CC_UA_PANEL (object)->priv;
-  GSList *l;
-
-  /* remove the notify callbacks, since they rely on builder/client being
-   * available */
-  if (priv->notify_list)
-    {
-      for (l = priv->notify_list; l; l = g_slist_next (l))
-        {
-          gconf_client_notify_remove (priv->client,
-                                      GPOINTER_TO_INT (l->data));
-        }
-      g_slist_free (priv->notify_list);
-      priv->notify_list = NULL;
-    }
-
 
   if (priv->builder)
     {
@@ -109,10 +90,10 @@ cc_ua_panel_dispose (GObject *object)
       priv->builder = NULL;
     }
 
-  if (priv->client)
+  if (priv->wm_settings)
     {
-      g_object_unref (priv->client);
-      priv->client = NULL;
+      g_object_unref (priv->wm_settings);
+      priv->wm_settings = NULL;
     }
 
   if (priv->interface_settings)
@@ -268,46 +249,6 @@ settings_on_off_editor_new (CcUaPanelPrivate  *priv,
 
   /* set up the boolean editor */
   g_settings_bind (settings, key, widget, "active", G_SETTINGS_BIND_DEFAULT);
-}
-
-static GConfValue *
-cc_ua_panel_toggle_switch (GConfPropertyEditor *peditor,
-                           const GConfValue    *value)
-{
-  GtkWidget *sw;
-  gboolean enabled;
-
-  enabled = gconf_value_get_bool (value);
-  sw = (GtkWidget*) gconf_property_editor_get_ui_control (peditor);
-
-  gtk_switch_set_active (GTK_SWITCH (sw), enabled);
-
-  return gconf_value_copy (value);
-}
-
-static void
-gconf_on_off_peditor_new (CcUaPanelPrivate  *priv,
-                          const gchar       *key,
-                          GtkWidget         *widget,
-                          gchar            **section)
-{
-  GObject *peditor;
-
-  /* set data to enable/disable the section this on/off switch controls */
-  if (section)
-    {
-      g_object_set_data (G_OBJECT (widget), "section-widgets", section);
-      g_signal_connect (widget, "notify::active",
-                        G_CALLBACK (cc_ua_panel_section_switched),
-                        priv->builder);
-    }
-
-  /* set up the boolean editor */
-  peditor = gconf_peditor_new_switch (NULL, key, widget, NULL);
-  g_object_set (peditor, "conv-to-widget-cb", cc_ua_panel_toggle_switch, NULL);
-
-  /* emit the notify on the key, so that the conv-to-widget-cb callback is run */
-  gconf_client_notify (priv->client, key);
 }
 
 /* seeing section */
@@ -562,19 +503,16 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
 
 /* hearing/sound section */
 static void
-visual_bell_type_notify_cb (GConfClient *client,
-                            guint        cnxn_id,
-                            GConfEntry  *entry,
+visual_bell_type_notify_cb (GSettings   *settings,
+                            const gchar *key,
                             CcUaPanel   *panel)
 {
   GtkWidget *widget;
-  const gchar *value;
+  GDesktopVisualBellType type;
 
-  g_return_if_fail (entry != NULL);
+  type = g_settings_get_enum (panel->priv->wm_settings, "visual-bell-type");
 
-  value = gconf_value_get_string (entry->value);
-
-  if (g_strcmp0 ("frame_flash", value) == 0)
+  if (type == G_DESKTOP_VISUAL_BELL_FRAME_FLASH)
     widget = WID (panel->priv->builder, "hearing_flash_window_title_button");
   else
     widget = WID (panel->priv->builder, "hearing_flash_screen_button");
@@ -586,15 +524,16 @@ static void
 visual_bell_type_toggle_cb (GtkWidget *button,
                             CcUaPanel *panel)
 {
-  const gchar *key = "/apps/metacity/general/visual_bell_type";
-  gboolean window_title;
+  gboolean frame_flash;
+  GDesktopVisualBellType type;
 
-  window_title = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+  frame_flash = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
-  if (window_title)
-    gconf_client_set_string (panel->priv->client, key, "frame_flash", NULL);
+  if (frame_flash)
+    type = G_DESKTOP_VISUAL_BELL_FRAME_FLASH;
   else
-    gconf_client_set_string (panel->priv->client, key, "fullscreen", NULL);
+    type = G_DESKTOP_VISUAL_BELL_FULLSCREEN_FLASH;
+  g_settings_set_enum (panel->priv->wm_settings, "visual-bell-type", type);
 }
 
 static gboolean
@@ -614,32 +553,16 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
   GtkWidget *w;
-  GConfEntry *entry;
-  guint id;
 
-  gconf_client_add_dir (priv->client, "/apps/metacity/general",
-                        GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+  /* set the initial visual bell values */
+  visual_bell_type_notify_cb (NULL, NULL, self);
 
+  /* and listen */
   w = WID (priv->builder, "hearing_visual_alerts_switch");
-  gconf_on_off_peditor_new (priv, "/apps/metacity/general/visual_bell",
-                            w, visual_alerts_section);
+  settings_on_off_editor_new (priv, priv->wm_settings, "visual-bell", w, visual_alerts_section);
 
-  /* visual bell type */
-  id = gconf_client_notify_add (priv->client,
-                                "/apps/metacity/general/visual_bell_type",
-                                (GConfClientNotifyFunc)
-                                visual_bell_type_notify_cb,
-                                self, NULL, NULL);
-  priv->notify_list = g_slist_prepend (priv->notify_list, GINT_TO_POINTER (id));
-
-  /* set the initial value */
-  entry = gconf_client_get_entry (priv->client,
-                                  "/apps/metacity/general/visual_bell_type",
-                                  NULL, TRUE, NULL);
-  if (entry == NULL)
-    g_warning ("The following warning is because metacity's GConf settings aren't installed");
-  visual_bell_type_notify_cb (priv->client, 0, entry, self);
-
+  g_signal_connect (priv->wm_settings, "changed::visual-bell-type",
+                    G_CALLBACK (visual_bell_type_notify_cb), self);
   g_signal_connect (WID (priv->builder, "hearing_flash_window_title_button"),
                     "toggled", G_CALLBACK (visual_bell_type_toggle_cb), self);
 
@@ -812,13 +735,12 @@ cc_ua_panel_init (CcUaPanel *self)
       return;
     }
 
-  priv->client = gconf_client_get_default ();
-
   priv->interface_settings = g_settings_new ("org.gnome.desktop.interface");
   g_signal_connect (priv->interface_settings, "changed",
                     G_CALLBACK (interface_settings_changed_cb), self);
   interface_settings_changed_cb (priv->interface_settings, "gtk-theme", self);
 
+  priv->wm_settings = g_settings_new ("org.gnome.desktop.wm.preferences");
   priv->kb_settings = g_settings_new ("org.gnome.desktop.a11y.keyboard");
   priv->mouse_settings = g_settings_new ("org.gnome.desktop.a11y.mouse");
   priv->application_settings = g_settings_new ("org.gnome.desktop.a11y.applications");
