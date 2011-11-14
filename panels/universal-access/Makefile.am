@@ -16,8 +16,6 @@ libuniversal_access_la_SOURCES =		\
 	universal-access-module.c		\
 	cc-ua-panel.c				\
 	cc-ua-panel.h				\
-	gconf-property-editor.h			\
-	gconf-property-editor.c			\
 	cc-marshal.c				\
 	cc-marshal.h				\
 	zoom-options.c				\
