@@ -27,8 +27,6 @@
 #include <gio/gio.h>
 #include <glib/gi18n-lib.h>
 
-#include <gconf/gconf-client.h>
-
 #include "cc-keyboard-item.h"
 
 #define CC_KEYBOARD_ITEM_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_KEYBOARD_ITEM, CcKeyboardItemPrivate))
@@ -145,24 +143,7 @@ _set_binding (CcKeyboardItem *item,
   if (set_backend == FALSE)
     return;
 
-  if (item->type == CC_KEYBOARD_ITEM_TYPE_GCONF)
-    {
-      GConfClient *client;
-      GError *err = NULL;
-
-      client = gconf_client_get_default ();
-      gconf_client_set_string (client, item->gconf_key, item->binding, &err);
-      if (err != NULL)
-        {
-	  g_warning ("Failed to set '%s' to '%s': %s", item->gconf_key, item->binding, err->message);
-	  g_error_free (err);
-	}
-    }
-  else if (item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS ||
-           item->type == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
-    {
-      settings_set_binding (item->settings, item->key, item->binding);
-    }
+  settings_set_binding (item->settings, item->key, item->binding);
 }
 
 const char *
@@ -333,7 +314,6 @@ static void
 cc_keyboard_item_finalize (GObject *object)
 {
   CcKeyboardItem *item;
-  GConfClient *client;
 
   g_return_if_fail (object != NULL);
   g_return_if_fail (CC_IS_KEYBOARD_ITEM (object));
@@ -342,23 +322,12 @@ cc_keyboard_item_finalize (GObject *object)
 
   g_return_if_fail (item->priv != NULL);
 
-  /* Remove GConf watches */
-  client = gconf_client_get_default ();
-
-  if (item->gconf_key != NULL && item->monitored)
-    gconf_client_remove_dir (client, item->gconf_key, NULL);
-
-  if (item->gconf_cnxn != 0)
-    gconf_client_notify_remove (client, item->gconf_cnxn);
   if (item->settings != NULL)
     g_object_unref (item->settings);
-
-  g_object_unref (client);
 
   /* Free memory */
   g_free (item->binding);
   g_free (item->gettext_package);
-  g_free (item->gconf_key);
   g_free (item->gsettings_path);
   g_free (item->description);
   g_free (item->command);
@@ -378,20 +347,6 @@ cc_keyboard_item_new (CcKeyboardItemType type)
                          NULL);
 
   return CC_KEYBOARD_ITEM (object);
-}
-
-static void
-keybinding_key_changed (GConfClient    *client,
-                        guint           cnxn_id,
-                        GConfEntry     *entry,
-                        CcKeyboardItem *item)
-{
-  const gchar *key_value;
-
-  key_value = entry->value ? gconf_value_get_string (entry->value) : NULL;
-  _set_binding (item, key_value, FALSE);
-  item->editable = gconf_entry_get_is_writable (entry);
-  g_object_notify (G_OBJECT (item), "binding");
 }
 
 /* wrapper around g_settings_get_str[ing|v] */
@@ -429,65 +384,6 @@ binding_changed (GSettings *settings,
   _set_binding (item, value, FALSE);
   g_free (value);
   g_object_notify (G_OBJECT (item), "binding");
-}
-
-gboolean
-cc_keyboard_item_load_from_gconf (CcKeyboardItem *item,
-				  const char *gettext_package,
-                                  const char *key)
-{
-  GConfClient *client;
-  GConfEntry *entry;
-
-  client = gconf_client_get_default ();
-
-  item->gconf_key = g_strdup (key);
-  entry = gconf_client_get_entry (client,
-                                  item->gconf_key,
-                                  NULL,
-                                  TRUE,
-                                  NULL);
-  if (entry == NULL) {
-    g_object_unref (client);
-    return FALSE;
-  }
-
-  if (gconf_entry_get_schema_name (entry)) {
-    GConfSchema *schema;
-    const char *description;
-
-    schema = gconf_client_get_schema (client,
-                                      gconf_entry_get_schema_name (entry),
-                                      NULL);
-    if (schema != NULL) {
-      if (gettext_package != NULL) {
-	bind_textdomain_codeset (gettext_package, "UTF-8");
-	description = dgettext (gettext_package, gconf_schema_get_short_desc (schema));
-      } else {
-	description = _(gconf_schema_get_short_desc (schema));
-      }
-      item->description = g_strdup (description);
-      gconf_schema_free (schema);
-    }
-  }
-  if (item->description == NULL) {
-    /* Only print a warning for keys that should have a schema */
-    g_warning ("No description for key '%s'", item->gconf_key);
-  }
-  item->editable = gconf_entry_get_is_writable (entry);
-  gconf_client_add_dir (client, item->gconf_key, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
-  item->monitored = TRUE;
-  item->gconf_cnxn = gconf_client_notify_add (client,
-                                              item->gconf_key,
-                                              (GConfClientNotifyFunc) &keybinding_key_changed,
-                                              item, NULL, NULL);
-  item->binding = gconf_client_get_string (client, item->gconf_key, NULL);
-  binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
-
-  gconf_entry_free (entry);
-  g_object_unref (client);
-
-  return TRUE;
 }
 
 gboolean
@@ -554,8 +450,6 @@ cc_keyboard_item_equal (CcKeyboardItem *a,
     return FALSE;
   switch (a->type)
     {
-      case CC_KEYBOARD_ITEM_TYPE_GCONF:
-        return g_str_equal (a->gconf_key, b->gconf_key);
       case CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH:
 	return g_str_equal (a->gsettings_path, b->gsettings_path);
       case CC_KEYBOARD_ITEM_TYPE_GSETTINGS:
