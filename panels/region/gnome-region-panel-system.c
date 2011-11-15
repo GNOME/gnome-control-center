@@ -33,9 +33,10 @@
 #include "cc-common-language.h"
 #include "gdm-languages.h"
 #include "gnome-region-panel-system.h"
-#include "gnome-region-panel-xkb.h"
 
-static GSettings *locale_settings, *xkb_settings;
+#define WID(s) GTK_WIDGET(gtk_builder_get_object (dialog, s))
+
+static GSettings *locale_settings;
 static GDBusProxy *localed_proxy;
 static GPermission *localed_permission;
 
@@ -128,64 +129,6 @@ system_update_language (GtkBuilder *dialog, const gchar *language)
         locale_settings_changed (locale_settings, "region", dialog);
 
         update_copy_button (dialog);
-}
-
-static void
-xkb_settings_changed (GSettings *settings,
-                      const gchar *key,
-                      GtkBuilder *dialog)
-{
-	guint i;
-	GString *disp, *list, *variants;
-	GtkWidget *label;
-	gchar **layouts;
-
-	layouts = g_settings_get_strv (settings, "layouts");
-	if (layouts == NULL)
-		return;
-
-	label = WID ("user_input_source");
-	disp = g_string_new ("");
-	list = g_string_new ("");
-	variants = g_string_new ("");
-
-	for (i = 0; layouts[i]; i++) {
-		gchar *utf_visible;
-		char **split;
-		gchar *layout, *variant;
-
-		utf_visible = xkb_layout_description_utf8 (layouts[i]);
-		if (disp->str[0] != '\0')
-			g_string_append (disp, ", ");
-		g_string_append (disp, utf_visible ? utf_visible : layouts[i]);
-		g_free (utf_visible);
-
-		split = g_strsplit_set (layouts[i], " \t", 2);
-
-		if (split == NULL || split[0] == NULL)
-			continue;
-
-		layout = split[0];
-		variant = split[1];
-
-		if (list->str[0] != '\0')
-			g_string_append (list, ",");
-		g_string_append (list, layout);
-
-		if (variants->str[0] != '\0')
-			g_string_append (variants, ",");
-		g_string_append (variants, variant ? variant : "");
-
-		g_strfreev (split);
-	}
-	g_strfreev (layouts);
-
-        g_object_set_data_full (G_OBJECT (label), "input_source", g_string_free (list, FALSE), g_free);
-        g_object_set_data_full (G_OBJECT (label), "input_variants", g_string_free (variants, FALSE), g_free);
-        gtk_label_set_text (GTK_LABEL (label), disp->str);
-        g_string_free (disp, TRUE);
-
-	update_copy_button (dialog);
 }
 
 static void
@@ -287,6 +230,7 @@ on_localed_properties_changed (GDBusProxy   *proxy,
                 g_variant_unref (v);
         }
 
+#if 0
         label = WID ("system_input_source");
         v = g_dbus_proxy_get_cached_property (proxy, "X11Layout");
         if (v) {
@@ -313,6 +257,7 @@ on_localed_properties_changed (GDBusProxy   *proxy,
         g_string_free (disp, TRUE);
 
         g_variant_unref (v);
+#endif
 
         update_copy_button (dialog);
 }
@@ -468,19 +413,12 @@ setup_system (GtkBuilder *dialog)
                           G_CALLBACK (locale_settings_changed), dialog);
         g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, locale_settings);
 
-	xkb_settings = g_settings_new (GKBD_KEYBOARD_SCHEMA);
-	g_signal_connect (xkb_settings, "changed::layouts",
-			  G_CALLBACK (xkb_settings_changed), dialog);
-	g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, xkb_settings);
-
         /* Display user settings */
         language = cc_common_language_get_current_language ();
         system_update_language (dialog, language);
         g_free (language);
 
         locale_settings_changed (locale_settings, "region", dialog);
-
-        xkb_settings_changed (xkb_settings, "layouts", dialog);
 
         bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
         g_dbus_proxy_new (bus,

@@ -24,13 +24,7 @@ libregion_la_SOURCES =	\
 	gnome-region-panel-system.c \
 	gnome-region-panel-system.h \
 	gnome-region-panel-input.c \
-	gnome-region-panel-input.h \
-	gnome-region-panel-xkb.c \
-	gnome-region-panel-xkblt.c \
-	gnome-region-panel-xkbltadd.c \
-	gnome-region-panel-xkbot.c \
-	gnome-region-panel-xkbpv.c \
-	gnome-region-panel-xkb.h
+	gnome-region-panel-input.h
 
 libregion_la_LIBADD = $(PANEL_LIBS) $(REGION_PANEL_LIBS) $(builddir)/../common/liblanguage.la
 
