@@ -169,6 +169,7 @@
                               <object class="GtkToolButton" id="language_add">
                                 <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
+                                <property name="label" translatable="yes">Add Language</property>
                                 <property name="can_focus">False</property>
                                 <property name="use_underline">True</property>
                                 <property name="icon_name">list-add-symbolic</property>
@@ -181,6 +182,7 @@
                             <child>
                               <object class="GtkToolButton" id="language_remove">
                                 <property name="use_action_appearance">False</property>
+                                <property name="label" translatable="yes">Remove Language</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">False</property>
@@ -320,6 +322,7 @@
                             <child>
                               <object class="GtkToolButton" id="region_add">
                                 <property name="use_action_appearance">False</property>
+                                <property name="label" translatable="yes">Add Region</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="use_underline">True</property>
@@ -334,6 +337,7 @@
                               <object class="GtkToolButton" id="region_remove">
                                 <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
+                                <property name="label" translatable="yes">Remove Region</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">False</property>
                                 <property name="use_underline">True</property>
@@ -700,6 +704,7 @@
                                 <child>
                                   <object class="GtkToolButton" id="input_source_add">
                                     <property name="use_action_appearance">False</property>
+                                    <property name="label" translatable="yes">Add Input Source</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="use_underline">True</property>
@@ -713,6 +718,7 @@
                                 <child>
                                   <object class="GtkToolButton" id="input_source_remove">
                                     <property name="use_action_appearance">False</property>
+                                    <property name="label" translatable="yes">Remove Input Source</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="use_underline">True</property>
@@ -726,6 +732,7 @@
                                 <child>
                                   <object class="GtkToolButton" id="input_source_move_up">
                                     <property name="use_action_appearance">False</property>
+                                    <property name="label" translatable="yes">Move Selected Input Source Up</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="use_underline">True</property>
@@ -739,6 +746,7 @@
                                 <child>
                                   <object class="GtkToolButton" id="input_source_move_down">
                                     <property name="use_action_appearance">False</property>
+                                    <property name="label" translatable="yes">Move Selected Input Source Down</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="use_underline">True</property>
@@ -752,6 +760,7 @@
                                 <child>
                                   <object class="GtkToolButton" id="input_source_show">
                                     <property name="use_action_appearance">False</property>
+                                    <property name="label" translatable="yes">Show Keyboard Layout</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="use_underline">True</property>
@@ -815,7 +824,7 @@
                                         <property name="halign">end</property>
                                         <property name="hexpand">True</property>
                                         <property name="label" translatable="yes">Ctrl+Alt+Space</property>
-                                        <property name="selectable">True</property>
+                                        <style><class name="dim-label"/></style>
                                       </object>
                                       <packing>
                                         <property name="left_attach">1</property>
@@ -845,11 +854,25 @@
                                         <property name="halign">end</property>
                                         <property name="hexpand">True</property>
                                         <property name="label" translatable="yes">Ctrl+Alt+Shift+Space</property>
-                                        <property name="selectable">True</property>
+                                        <style><class name="dim-label"/></style>
                                       </object>
                                       <packing>
                                         <property name="left_attach">1</property>
                                         <property name="top_attach">1</property>
+                                        <property name="width">1</property>
+                                        <property name="height">1</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLinkButton" id="jump-to-shortcuts">
+                                        <property name="visible">True</property>
+                                        <property name="can_focus">True</property>
+                                        <property name="label" translatable="yes">Shortcut Settings</property>
+                                        <property name="halign">end</property>
+                                      </object>
+                                      <packing>
+                                        <property name="left_attach">1</property>
+                                        <property name="top_attach">2</property>
                                         <property name="width">1</property>
                                         <property name="height">1</property>
                                       </packing>

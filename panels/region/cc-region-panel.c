@@ -151,7 +151,7 @@ cc_region_panel_init (CcRegionPanel * self)
 
 	gtk_widget_reparent (prefs_widget, GTK_WIDGET (self));
 
-        setup_input_tabs (priv->builder);
+        setup_input_tabs (priv->builder, self);
 	setup_language (priv->builder);
 	setup_formats (priv->builder);
 	setup_system (priv->builder);

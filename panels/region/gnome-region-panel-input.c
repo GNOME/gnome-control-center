@@ -571,8 +571,27 @@ show_selected_layout (GtkButton *button, gpointer data)
 
 /* Main setup {{{1 */
 
+static gboolean
+go_to_shortcuts (GtkLinkButton *button,
+                 CcRegionPanel *panel)
+{
+  CcShell *shell;
+  const gchar *argv[] = { "shortcuts", NULL };
+  GError *error = NULL;
+
+  shell = cc_panel_get_shell (CC_PANEL (panel));
+  if (!cc_shell_set_active_panel_from_id (shell, "keyboard", argv, &error))
+    {
+      g_warning ("Failed to activate Keyboard panel: %s", error->message);
+      g_error_free (error);
+    }
+
+  return TRUE;
+}
+
 void
-setup_input_tabs (GtkBuilder *builder)
+setup_input_tabs (GtkBuilder    *builder,
+                  CcRegionPanel *panel)
 {
   GtkWidget *treeview;
   GtkTreeViewColumn *column;
@@ -632,6 +651,9 @@ setup_input_tabs (GtkBuilder *builder)
 
   g_free (previous);
   g_free (next);
+
+  g_signal_connect (WID("jump-to-shortcuts"), "activate-link",
+                    G_CALLBACK (go_to_shortcuts), panel);
 }
 
 /* Chooser dialog {{{1 */

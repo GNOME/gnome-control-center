@@ -24,10 +24,12 @@
 
 #include <gtk/gtk.h>
 
+#include "cc-region-panel.h"
 
 G_BEGIN_DECLS
 
-void setup_input_tabs (GtkBuilder *builder);
+void setup_input_tabs (GtkBuilder    *builder,
+                       CcRegionPanel *self);
 
 G_END_DECLS
 
