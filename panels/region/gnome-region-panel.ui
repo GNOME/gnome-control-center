@@ -702,75 +702,166 @@
                                   <class name="inline-toolbar"/>
                                 </style>
                                 <child>
-                                  <object class="GtkToolButton" id="input_source_add">
-                                    <property name="use_action_appearance">False</property>
-                                    <property name="label" translatable="yes">Add Input Source</property>
+                                  <object class="GtkToolItem" id="i_s_ar_item">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="icon_name">list-add-symbolic</property>
+                                    <child>
+                                      <object class="GtkBox" id="i_s_ar_box">
+                                        <property name="visible">True</property>
+                                        <child>
+                                           <object class="GtkButton" id="input_source_add">
+                                             <property name="visible">True</property>
+                                             <child internal-child="accessible">
+                                               <object class="AtkObject" id="i_s_a_a11y">
+                                                 <property name="accessible-name" translatable="yes">Add Input Source</property>
+                                               </object>
+                                             </child>
+                                             <child>
+                                                <object class="GtkImage" id="i_s_a_image">
+
+                                                  <property name="visible">True</property>
+                                                  <property name="icon-name">list-add-symbolic</property>
+                                                  <property name="icon-size">1</property>
+                                                </object>
+                                             </child>
+                                           </object>
+                                        </child>
+                                        <child>
+                                           <object class="GtkButton" id="input_source_remove">
+                                             <property name="visible">True</property>
+                                             <child internal-child="accessible">
+                                               <object class="AtkObject" id="i_s_r_a11y">
+                                                 <property name="accessible-name" translatable="yes">Remove Input Source</property>
+                                               </object>
+                                             </child>
+                                             <child>
+                                                <object class="GtkImage" id="i_s_r_image">
+                                                  <property name="visible">True</property>
+                                                  <property name="icon-name">list-remove-symbolic</property>
+                                                  <property name="icon-size">1</property>
+                                                </object>
+                                             </child>
+                                           </object>
+                                        </child>
+                                      </object>
+                                    </child>
                                   </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="homogeneous">True</property>
-                                  </packing>
                                 </child>
+
                                 <child>
-                                  <object class="GtkToolButton" id="input_source_remove">
-                                    <property name="use_action_appearance">False</property>
-                                    <property name="label" translatable="yes">Remove Input Source</property>
+                                  <object class="GtkSeparatorToolItem" id="sep1">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="icon_name">list-remove-symbolic</property>
+                                    <property name="draw">False</property>
                                   </object>
                                   <packing>
-                                    <property name="expand">False</property>
-                                    <property name="homogeneous">True</property>
+                                    <property name="expand">True</property>
                                   </packing>
                                 </child>
+
                                 <child>
-                                  <object class="GtkToolButton" id="input_source_move_up">
-                                    <property name="use_action_appearance">False</property>
-                                    <property name="label" translatable="yes">Move Selected Input Source Up</property>
+                                  <object class="GtkToolItem" id="i_s_ud_item">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="icon_name">go-up-symbolic</property>
+                                    <child>
+                                      <object class="GtkBox" id="i_s_ud_box">
+                                        <property name="visible">True</property>
+                                        <child>
+                                           <object class="GtkButton" id="input_source_move_up">
+                                             <property name="visible">True</property>
+                                             <child internal-child="accessible">
+                                               <object class="AtkObject" id="i_s_u_a11y">
+                                                 <property name="accessible-name" translatable="yes">Move Input Source Up</property>
+                                               </object>
+                                             </child>
+                                             <child>
+                                                <object class="GtkImage" id="i_s_u_image">
+
+                                                  <property name="visible">True</property>
+                                                  <property name="icon-name">go-up-symbolic</property>
+                                                  <property name="icon-size">1</property>
+                                                </object>
+                                             </child>
+                                           </object>
+                                        </child>
+                                        <child>
+                                           <object class="GtkButton" id="input_source_move_down">
+                                             <property name="visible">True</property>
+                                             <child internal-child="accessible">
+                                               <object class="AtkObject" id="i_s_d_a11y">
+                                                 <property name="accessible-name" translatable="yes">Move Input Source Down</property>
+                                               </object>
+                                             </child>
+                                             <child>
+                                                <object class="GtkImage" id="i_s_d_image">
+                                                  <property name="visible">True</property>
+                                                  <property name="icon-name">go-down-symbolic</property>
+                                                  <property name="icon-size">1</property>
+                                                </object>
+                                             </child>
+                                           </object>
+                                        </child>
+                                      </object>
+                                    </child>
                                   </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="homogeneous">True</property>
-                                  </packing>
                                 </child>
+
                                 <child>
-                                  <object class="GtkToolButton" id="input_source_move_down">
-                                    <property name="use_action_appearance">False</property>
-                                    <property name="label" translatable="yes">Move Selected Input Source Down</property>
+                                  <object class="GtkSeparatorToolItem" id="sep2">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="icon_name">go-down-symbolic</property>
+                                    <property name="draw">False</property>
+                                    <property name="hexpand">True</property>
                                   </object>
                                   <packing>
-                                    <property name="expand">False</property>
-                                    <property name="homogeneous">True</property>
+                                    <property name="expand">True</property>
                                   </packing>
                                 </child>
+
                                 <child>
-                                  <object class="GtkToolButton" id="input_source_show">
-                                    <property name="use_action_appearance">False</property>
-                                    <property name="label" translatable="yes">Show Keyboard Layout</property>
+                                  <object class="GtkToolItem" id="i_s_sp_item">
                                     <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="icon_name">input-keyboard-symbolic</property>
+                                    <child>
+                                      <object class="GtkBox" id="i_s_sp_box">
+                                        <property name="visible">True</property>
+                                        <child>
+                                           <object class="GtkButton" id="input_source_settings">
+                                             <property name="visible">True</property>
+                                             <child internal-child="accessible">
+                                               <object class="AtkObject" id="i_s_s_a11y">
+                                                 <property name="accessible-name" translatable="yes">Input Source Settings</property>
+                                               </object>
+                                             </child>
+                                             <child>
+                                                <object class="GtkImage" id="i_s_s_image">
+
+                                                  <property name="visible">True</property>
+                                                  <property name="icon_name">preferences-system-symbolic</property>
+                                                  <property name="icon_size">1</property>
+                                                  <property name="pixel_size">16</property>
+                                                </object>
+                                             </child>
+                                           </object>
+                                        </child>
+                                        <child>
+                                           <object class="GtkButton" id="input_source_show">
+                                             <property name="visible">True</property>
+                                             <child internal-child="accessible">
+                                               <object class="AtkObject" id="i_s_p_a11y">
+                                                 <property name="accessible-name" translatable="yes">Show Keyboard Layout</property>
+                                               </object>
+                                             </child>
+                                             <child>
+                                                <object class="GtkImage" id="i_s_p_image">
+
+                                                  <property name="visible">True</property>
+                                                  <property name="icon_name">input-keyboard-symbolic</property>
+                                                  <property name="icon-size">1</property>
+                                                </object>
+                                             </child>
+                                           </object>
+                                        </child>
+                                      </object>
+                                    </child>
                                   </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="homogeneous">True</property>
-                                  </packing>
                                 </child>
+
                               </object>
                               <packing>
                                 <property name="expand">False</property>
