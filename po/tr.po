@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-11-11 14:30+0000\n"
-"PO-Revision-Date: 2011-11-14 18:56+0200\n"
+"POT-Creation-Date: 2011-11-14 18:10+0000\n"
+"PO-Revision-Date: 2011-11-16 09:32+0200\n"
 "Last-Translator: Muhammet Kara <muhammet.k@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,22 +24,9 @@ msgstr ""
 "X-Poedit-Language: Turkish\n"
 "X-Poedit-Country: TURKEY\n"
 
-#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
-msgid "Background"
-msgstr "Arkaplan"
-
-#: ../panels/background/gnome-background-panel.desktop.in.in.h:2
-msgid "Change the background"
-msgstr "Arkaplanı değiştir"
-
-#. Translators: those are keywords for the background control-center panel
-#: ../panels/background/gnome-background-panel.desktop.in.in.h:4
-msgid "Wallpaper;Screen;Desktop;"
-msgstr "Duvar kağıdı;Ekran;Masaüstü;"
-
 #: ../panels/background/background.ui.h:1
 msgid "Add wallpaper"
-msgstr "Duvar kadğıdı ekle"
+msgstr "Duvar kağıdı ekle"
 
 #: ../panels/background/background.ui.h:2
 msgid "Center"
@@ -98,9 +85,24 @@ msgstr "Dikey Renk Geçişi"
 msgid "Solid Color"
 msgstr "Düz Renk"
 
+#: ../panels/background/cc-background-item.c:148
+msgid "multiple sizes"
+msgstr "birden çok boyut"
+
+#. translators: 100 × 100px
+#. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
+#: ../panels/background/cc-background-item.c:152
+#, c-format
+msgid "%d × %d"
+msgstr "%d × %d"
+
+#: ../panels/background/cc-background-item.c:281
+msgid "No Desktop Background"
+msgstr "Masaüstü Arkaplanı Yok"
+
 #: ../panels/background/cc-background-panel.c:1001
-#: ../panels/user-accounts/um-photo-dialog.c:217
 #: ../panels/user-accounts/data/photo-dialog.ui.h:2
+#: ../panels/user-accounts/um-photo-dialog.c:217
 msgid "Browse for more pictures"
 msgstr "Daha fazla resim için göz at"
 
@@ -124,61 +126,28 @@ msgstr "Renkler ve Renk Geçişleri"
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/cc-background-item.c:148
-msgid "multiple sizes"
-msgstr "birden çok boyut"
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:1
+msgid "Background"
+msgstr "Arkaplan"
 
-#. translators: 100 × 100px
-#. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/cc-background-item.c:152
-#, c-format
-msgid "%d × %d"
-msgstr "%d × %d"
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:2
+msgid "Change the background"
+msgstr "Arkaplanı değiştir"
 
-#: ../panels/background/cc-background-item.c:281
-msgid "No Desktop Background"
-msgstr "Masaüstü Arkaplanı Yok"
+#. Translators: those are keywords for the background control-center panel
+#: ../panels/background/gnome-background-panel.desktop.in.in.h:4
+msgid "Wallpaper;Screen;Desktop;"
+msgstr "Duvar kağıdı;Ekran;Masaüstü;"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:281
-msgid "Yes"
-msgstr "Evet"
+#. TRANSLATORS: device type
+#: ../panels/bluetooth/bluetooth-properties.desktop.in.in.h:1
+#: ../panels/network/panel-common.c:99
+msgid "Bluetooth"
+msgstr "Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:281
-msgid "No"
-msgstr "Hayır"
-
-#: ../panels/bluetooth/cc-bluetooth-panel.c:393
-msgid "Bluetooth is disabled"
-msgstr "Bluetooth devre dışı"
-
-#: ../panels/bluetooth/cc-bluetooth-panel.c:398
-msgid "Bluetooth is disabled by hardware switch"
-msgstr "Bluetooth donanım anahtarı ile kapatıldı"
-
-#: ../panels/bluetooth/cc-bluetooth-panel.c:402
-msgid "No Bluetooth adapters found"
-msgstr "Bluetooth bağdaştırıcısı bulunamadı"
-
-#: ../panels/bluetooth/cc-bluetooth-panel.c:535
-msgid "Visibility"
-msgstr "Görünürlük"
-
-#: ../panels/bluetooth/cc-bluetooth-panel.c:539
-#, c-format
-msgid "Visibility of “%s”"
-msgstr "“%s”in görünürlüğü"
-
-#: ../panels/bluetooth/cc-bluetooth-panel.c:583
-#, c-format
-msgid "Remove '%s' from the list of devices?"
-msgstr "'%s' aygıtlar listesinden kaldırılsın mı?"
-
-#: ../panels/bluetooth/cc-bluetooth-panel.c:585
-msgid ""
-"If you remove the device, you will have to set it up again before next use."
-msgstr ""
-"Eğer aygıtı kaldırırsanız, sonraki kullanımdan önce yeniden kurmanız "
-"gerekecek."
+#: ../panels/bluetooth/bluetooth-properties.desktop.in.in.h:2
+msgid "Configure Bluetooth settings"
+msgstr "Bluetooth ayarlarını yapılandır"
 
 #: ../panels/bluetooth/bluetooth.ui.h:1
 msgid "Address"
@@ -231,15 +200,366 @@ msgstr "Ses Ayarları"
 msgid "Type"
 msgstr "Tür"
 
-#. TRANSLATORS: device type
-#: ../panels/bluetooth/bluetooth-properties.desktop.in.in.h:1
-#: ../panels/network/panel-common.c:99
-msgid "Bluetooth"
-msgstr "Bluetooth"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:281
+msgid "Yes"
+msgstr "Evet"
 
-#: ../panels/bluetooth/bluetooth-properties.desktop.in.in.h:2
-msgid "Configure Bluetooth settings"
-msgstr "Bluetooth ayarlarını yapılandır"
+#: ../panels/bluetooth/cc-bluetooth-panel.c:281
+msgid "No"
+msgstr "Hayır"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:393
+msgid "Bluetooth is disabled"
+msgstr "Bluetooth devre dışı"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:398
+msgid "Bluetooth is disabled by hardware switch"
+msgstr "Bluetooth donanım anahtarı ile kapatıldı"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:402
+msgid "No Bluetooth adapters found"
+msgstr "Bluetooth bağdaştırıcısı bulunamadı"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:535
+msgid "Visibility"
+msgstr "Görünürlük"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:539
+#, c-format
+msgid "Visibility of “%s”"
+msgstr "“%s”in görünürlüğü"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:583
+#, c-format
+msgid "Remove '%s' from the list of devices?"
+msgstr "'%s' aygıtlar listesinden kaldırılsın mı?"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:585
+msgid ""
+"If you remove the device, you will have to set it up again before next use."
+msgstr ""
+"Eğer aygıtı kaldırırsanız, sonraki kullanımdan önce yeniden kurmanız "
+"gerekecek."
+
+#. TRANSLATORS: this is where the user can click and import a profile
+#: ../panels/color/cc-color-panel.c:106
+msgid "Other profile…"
+msgstr "Diğer profil..."
+
+#. TRANSLATORS: this is a profile prefix to signify the
+#. * profile has been auto-generated for this hardware
+#: ../panels/color/cc-color-panel.c:119
+msgid "Default: "
+msgstr "Öntanımlı: "
+
+#. TRANSLATORS: this is a profile prefix to signify the
+#. * profile his a standard space like AdobeRGB
+#: ../panels/color/cc-color-panel.c:126
+msgid "Colorspace: "
+msgstr "Colorspace: "
+
+#. TRANSLATORS: this is a profile prefix to signify the
+#. * profile is a test profile
+#: ../panels/color/cc-color-panel.c:132
+msgid "Test profile: "
+msgstr "Sınama profili: "
+
+#. TRANSLATORS: this is when the profile should be set for all users
+#: ../panels/color/cc-color-panel.c:185 ../panels/color/color.ui.h:19
+msgid "Set for all users"
+msgstr "Tüm kullanıcılar için ayarla"
+
+#. TRANSLATORS: this is when the profile should be set for all users
+#: ../panels/color/cc-color-panel.c:192
+msgid "Create virtual device"
+msgstr "Sanal aygıt oluştur"
+
+#. TRANSLATORS: an ICC profile is a file containing colorspace data
+#: ../panels/color/cc-color-panel.c:227
+msgid "Select ICC Profile File"
+msgstr "ICC Profil Dosyasını Seç"
+
+#: ../panels/color/cc-color-panel.c:230
+msgid "_Import"
+msgstr "_İçe Aktar"
+
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../panels/color/cc-color-panel.c:241
+msgid "Supported ICC profiles"
+msgstr "Desteklenen ICC profilleri"
+
+#. TRANSLATORS: filter name on the file->open dialog
+#: ../panels/color/cc-color-panel.c:248
+msgid "All files"
+msgstr "Tüm dosyalar"
+
+#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
+#: ../panels/color/cc-color-panel.c:504
+#| msgid "All files"
+msgid "Available Profiles for Displays"
+msgstr "Ekranlar için Kullanılabilir Profiller"
+
+#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
+#: ../panels/color/cc-color-panel.c:508
+#| msgid "All files"
+msgid "Available Profiles for Scanners"
+msgstr "Tarayıcılar için Kullanılabilir Profiller"
+
+#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
+#: ../panels/color/cc-color-panel.c:512
+#| msgid "All files"
+msgid "Available Profiles for Printers"
+msgstr "Yazıcılar için Kullanılabilir Profiller"
+
+#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
+#: ../panels/color/cc-color-panel.c:516
+#| msgid "All files"
+msgid "Available Profiles for Cameras"
+msgstr "Kameralar için Kullanılabilir Profiller"
+
+#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
+#: ../panels/color/cc-color-panel.c:520
+#| msgid "All files"
+msgid "Available Profiles for Webcams"
+msgstr "Web Kameraları için Kullanılabilir Profiller"
+
+#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
+#. * where the device type is not recognised
+#. Profiles that can be added to the device
+#: ../panels/color/cc-color-panel.c:525 ../panels/color/color.ui.h:5
+msgid "Available Profiles"
+msgstr "Kullanılabilir Profiller"
+
+#. TRANSLATORS: column for device list
+#: ../panels/color/cc-color-panel.c:794
+#: ../panels/sound/gvc-mixer-dialog.c:1515
+msgid "Device"
+msgstr "Aygıt"
+
+#. TRANSLATORS: column for device list
+#: ../panels/color/cc-color-panel.c:829
+msgid "Calibration"
+msgstr "Kalibrasyon"
+
+#. TRANSLATORS: this is when the button is sensitive
+#: ../panels/color/cc-color-panel.c:861
+msgid "Create a color profile for the selected device"
+msgstr "Seçilen aygıt için bir renk profili oluştur"
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../panels/color/cc-color-panel.c:875 ../panels/color/cc-color-panel.c:899
+msgid ""
+"The measuring instrument is not detected. Please check it is turned on and "
+"correctly connected."
+msgstr ""
+"Ölçüm cihazı algılanamadı. Lütfen açık durumda olduğundan ve doğru "
+"bağlandığından emin olunuz."
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../panels/color/cc-color-panel.c:908
+msgid "The measuring instrument does not support printer profiling."
+msgstr "Ölçüm cihazı yazıcı profillemeyi desteklemiyor."
+
+#. TRANSLATORS: this is when the button is insensitive
+#: ../panels/color/cc-color-panel.c:919
+msgid "The device type is not currently supported."
+msgstr "Aygıt türü şu anda desteklenmiyor."
+
+#. TRANSLATORS: this is when an auto-added profile cannot be removed
+#: ../panels/color/cc-color-panel.c:992
+msgid "Cannot remove automatically added profile"
+msgstr "Otomatik olarak eklenen profil kaldırılamaz"
+
+#. TRANSLATORS: this is when there is no profile for the device
+#: ../panels/color/cc-color-panel.c:1327
+msgid "No profile"
+msgstr "Profil yok"
+
+#: ../panels/color/cc-color-panel.c:1358
+#, c-format
+msgid "%i year"
+msgid_plural "%i years"
+msgstr[0] "%i yıl"
+
+#: ../panels/color/cc-color-panel.c:1369
+#, c-format
+msgid "%i month"
+msgid_plural "%i months"
+msgstr[0] "%i ay"
+
+#: ../panels/color/cc-color-panel.c:1380
+#, c-format
+msgid "%i week"
+msgid_plural "%i weeks"
+msgstr[0] "%i hafta"
+
+#. fallback
+#: ../panels/color/cc-color-panel.c:1387
+#, c-format
+msgid "Less than 1 week"
+msgstr "1 haftadan az"
+
+#: ../panels/color/cc-color-panel.c:1449
+msgctxt "Colorspace fallback"
+msgid "Default RGB"
+msgstr "Öntanımlı RGB"
+
+#: ../panels/color/cc-color-panel.c:1454
+msgctxt "Colorspace fallback"
+msgid "Default CMYK"
+msgstr "Öntanımlı CMYK"
+
+#: ../panels/color/cc-color-panel.c:1459
+msgctxt "Colorspace fallback"
+msgid "Default Gray"
+msgstr "Öntanımlı Gri"
+
+#: ../panels/color/cc-color-panel.c:1577 ../panels/color/cc-color-panel.c:1609
+#: ../panels/color/cc-color-panel.c:1620 ../panels/color/cc-color-panel.c:1631
+msgid "Uncalibrated"
+msgstr "Ayarlanmamış"
+
+#: ../panels/color/cc-color-panel.c:1580
+msgid "This device is not color managed."
+msgstr "Bu aygıt renk yönetimli değildir."
+
+#: ../panels/color/cc-color-panel.c:1612
+msgid "This device is using manufacturing calibrated data."
+msgstr "Bu aygıt, fabrika önayarlı verilerini kullanıyor."
+
+#: ../panels/color/cc-color-panel.c:1623
+msgid ""
+"This device does not have a profile suitable for whole-screen color "
+"correction."
+msgstr "Bu aygıt, tam ekran renk düzeltme için uygun bir profile sahip değil."
+
+#: ../panels/color/cc-color-panel.c:1656
+msgid "This device has an old profile that may no longer be accurate."
+msgstr "Bu aygıt artık uygun olmayabilecek eski bir profile sahip."
+
+#. TRANSLATORS: this is when the calibration profile age is not
+#. * specified as it has been autogenerated from the hardware
+#: ../panels/color/cc-color-panel.c:1684
+msgid "Not specified"
+msgstr "Belirtilmemiş"
+
+#. add the 'No devices detected' entry
+#: ../panels/color/cc-color-panel.c:1868
+msgid "No devices supporting color management detected"
+msgstr "Renk yönetimini destekleyen hiçbir aygıt tespit edilemedi"
+
+#: ../panels/color/cc-color-panel.c:2097
+#| msgctxt "universal access, seeing"
+#| msgid "Display"
+msgctxt "Device kind"
+msgid "Display"
+msgstr "Ekran"
+
+#: ../panels/color/cc-color-panel.c:2099
+msgctxt "Device kind"
+msgid "Scanner"
+msgstr "Tarayıcı"
+
+#: ../panels/color/cc-color-panel.c:2101
+msgctxt "Device kind"
+msgid "Printer"
+msgstr "Yazıcı"
+
+#: ../panels/color/cc-color-panel.c:2103
+msgctxt "Device kind"
+msgid "Camera"
+msgstr "Kamera"
+
+#: ../panels/color/cc-color-panel.c:2105
+msgctxt "Device kind"
+msgid "Webcam"
+msgstr "Web kamerası"
+
+#: ../panels/color/color.ui.h:1
+msgid "Add a virtual device"
+msgstr "Sanal bir aygıt ekle"
+
+#: ../panels/color/color.ui.h:2
+msgid "Add device"
+msgstr "Aygıt ekle"
+
+#: ../panels/color/color.ui.h:3
+msgid "Add profile"
+msgstr "Profil ekle"
+
+#: ../panels/color/color.ui.h:6
+msgid "Calibrate the device"
+msgstr "Aygıtı kalibre et"
+
+#: ../panels/color/color.ui.h:7
+msgid "Calibrate…"
+msgstr "Kalibrasyon..."
+
+#: ../panels/color/color.ui.h:8
+#: ../panels/color/gnome-color-panel.desktop.in.in.h:1
+msgid "Color"
+msgstr "Renk"
+
+#: ../panels/color/color.ui.h:9
+msgid "Delete device"
+msgstr "Aygıtı sil"
+
+#: ../panels/color/color.ui.h:10
+msgid "Device type:"
+msgstr "Aygıt türü:"
+
+#: ../panels/color/color.ui.h:11
+msgid "Each device needs an up to date color profile to be color managed."
+msgstr ""
+"Her aygıt, renk yönetimleri için güncel bir renk profiline gereksinim duyar."
+
+#: ../panels/color/color.ui.h:12
+msgid ""
+"Image files can be dragged on this window to auto-complete the above fields."
+msgstr ""
+"Yukarıdaki alanların otomatik tamamlanması için resim dosyalarını bu "
+"pencereye sürükleyebilirsiniz."
+
+#: ../panels/color/color.ui.h:13
+msgid "Learn more"
+msgstr "Daha fazlasını öğren"
+
+#: ../panels/color/color.ui.h:14
+msgid "Learn more about color management"
+msgstr "Renk yönetimi hakkında daha fazla bilgi edinin"
+
+#: ../panels/color/color.ui.h:15
+msgid "Manufacturer:"
+msgstr "Üretici:"
+
+#: ../panels/color/color.ui.h:16
+msgid "Model:"
+msgstr "Model:"
+
+#: ../panels/color/color.ui.h:17
+msgid "Remove a device"
+msgstr "Bir aygıtı kaldır"
+
+#: ../panels/color/color.ui.h:18
+msgid "Remove profile"
+msgstr "Profili kaldır"
+
+#: ../panels/color/color.ui.h:20
+msgid "Set this device for all users on this computer"
+msgstr "Bu aygıtı, bilgisayarı kullanan tüm kullanıcılar için ayarla"
+
+#: ../panels/color/color.ui.h:21
+msgid "View details"
+msgstr "Ayrıntıları görüntüle"
+
+#: ../panels/color/gnome-color-panel.desktop.in.in.h:2
+msgid "Color management settings"
+msgstr "Renk yönetim ayarları"
+
+#. Translators: those are keywords for the color control-center panel
+#: ../panels/color/gnome-color-panel.desktop.in.in.h:4
+msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
+msgstr "Renk;ICC;Profil;Ayar;Yazıcı;Görünüm;"
 
 #. Add some common languages first
 #: ../panels/common/cc-common-language.c:513
@@ -310,7 +630,6 @@ msgid "_Cancel"
 msgstr "_İptal"
 
 #: ../panels/common/language-chooser.ui.h:3
-#: ../panels/universal-access/gconf-property-editor.c:1609
 msgid "_Select"
 msgstr "_Seç"
 
@@ -432,45 +751,6 @@ msgstr "Tarih ve Saat"
 msgid "Date and Time preferences panel"
 msgstr "Tarih ve Saat seçenekleri"
 
-#: ../panels/display/display-capplet.ui.h:1
-#: ../panels/display/cc-display-panel.c:641
-msgid "Monitor"
-msgstr "Monitör"
-
-#: ../panels/display/display-capplet.ui.h:2
-msgid "Note: may limit resolution options"
-msgstr "Bilgi: çözünürlük seçeneklerini kısıtlayabilir"
-
-#: ../panels/display/display-capplet.ui.h:3
-msgid "R_otation:"
-msgstr "D_öndürme:"
-
-#: ../panels/display/display-capplet.ui.h:4
-msgid "_Detect Displays"
-msgstr "Ekranları _Algıla"
-
-#. Note that mirror is a verb in this string
-#: ../panels/display/display-capplet.ui.h:6
-msgid "_Mirror displays"
-msgstr "E_kranları yansıt"
-
-#: ../panels/display/display-capplet.ui.h:7
-msgid "_Resolution:"
-msgstr "Çö_zünürlük:"
-
-#: ../panels/display/gnome-display-panel.desktop.in.in.h:1
-msgid "Change resolution and position of monitors and projectors"
-msgstr "Monitör ve projektör çözünürlüğü ve konumunu değiştir"
-
-#: ../panels/display/gnome-display-panel.desktop.in.in.h:2
-msgid "Displays"
-msgstr "Ekranlar"
-
-#. Translators: those are keywords for the display control-center panel
-#: ../panels/display/gnome-display-panel.desktop.in.in.h:4
-msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
-msgstr "Panel;Projektör;xrandr;Ekran;Çözünürlük;Tazeleme;"
-
 #: ../panels/display/cc-display-panel.c:477
 msgctxt "display panel, rotation"
 msgid "Normal"
@@ -499,6 +779,11 @@ msgstr "180 Derece"
 #: ../panels/display/cc-display-panel.c:617
 msgid "Mirror Displays"
 msgstr "Ekran yansıtma"
+
+#: ../panels/display/cc-display-panel.c:641
+#: ../panels/display/display-capplet.ui.h:1
+msgid "Monitor"
+msgstr "Monitör"
 
 #: ../panels/display/cc-display-panel.c:747
 #, c-format
@@ -545,6 +830,40 @@ msgstr "Ekranlar tespit edilemedi"
 #: ../panels/display/cc-display-panel.c:2614
 msgid "Could not get screen information"
 msgstr "Ekran bilgisi alınamadı"
+
+#: ../panels/display/display-capplet.ui.h:2
+msgid "Note: may limit resolution options"
+msgstr "Bilgi: çözünürlük seçeneklerini kısıtlayabilir"
+
+#: ../panels/display/display-capplet.ui.h:3
+msgid "R_otation:"
+msgstr "D_öndürme:"
+
+#: ../panels/display/display-capplet.ui.h:4
+msgid "_Detect Displays"
+msgstr "Ekranları _Algıla"
+
+#. Note that mirror is a verb in this string
+#: ../panels/display/display-capplet.ui.h:6
+msgid "_Mirror displays"
+msgstr "E_kranları yansıt"
+
+#: ../panels/display/display-capplet.ui.h:7
+msgid "_Resolution:"
+msgstr "Çö_zünürlük:"
+
+#: ../panels/display/gnome-display-panel.desktop.in.in.h:1
+msgid "Change resolution and position of monitors and projectors"
+msgstr "Monitör ve projektör çözünürlüğü ve konumunu değiştir"
+
+#: ../panels/display/gnome-display-panel.desktop.in.in.h:2
+msgid "Displays"
+msgstr "Ekranlar"
+
+#. Translators: those are keywords for the display control-center panel
+#: ../panels/display/gnome-display-panel.desktop.in.in.h:4
+msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
+msgstr "Panel;Projektör;xrandr;Ekran;Çözünürlük;Tazeleme;"
 
 #. Translators: VESA is an techncial acronym, don't translate it.
 #: ../panels/info/cc-info-panel.c:402
@@ -678,7 +997,7 @@ msgid "Video CD"
 msgstr "Vidyo CD"
 
 #: ../panels/info/cc-info-panel.c:1474
-#: ../panels/keyboard/keyboard-shortcuts.c:1803
+#: ../panels/keyboard/keyboard-shortcuts.c:1627
 msgid "Section"
 msgstr "Bölüm"
 
@@ -985,75 +1304,6 @@ msgstr "Klavye"
 msgid "Shortcut;Repeat;Blink;"
 msgstr "Kısayol;Tekrar;Kırpma;"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:645
-#: ../panels/keyboard/keyboard-shortcuts.c:653
-#: ../panels/keyboard/keyboard-shortcuts.c:965
-#: ../panels/keyboard/keyboard-shortcuts.c:1566
-#: ../panels/keyboard/keyboard-shortcuts.c:1570
-msgid "Custom Shortcuts"
-msgstr "Özel Kısayollar"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:813
-msgid "<Unknown Action>"
-msgstr "<Bilinmeyen Eylem>"
-
-#. translators:
-#. * The device has been disabled
-#: ../panels/keyboard/keyboard-shortcuts.c:1190
-#: ../panels/sound/gvc-mixer-control.c:1087
-#: ../panels/user-accounts/um-fingerprint-dialog.c:177
-#: ../panels/user-accounts/um-fingerprint-dialog.c:178
-msgid "Disabled"
-msgstr "Devre dışı"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1216
-msgid "Error saving the new shortcut"
-msgstr "Yeni kısa yol kaydedilirken hata"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1349
-#, c-format
-msgid ""
-"The shortcut \"%s\" cannot be used because it will become impossible to type "
-"using this key.\n"
-"Please try with a key such as Control, Alt or Shift at the same time."
-msgstr ""
-"Kısayol tuşu \"%s\" kullanılamıyor çünkü kullanımı halinde bu tuş "
-"kullanılarak yazmak mümkün olmayacak.\n"
-"Lütfen Control, Alt ya da Shift gibi tuşlar ile aynı anda deneyin."
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1381
-#, c-format
-msgid ""
-"The shortcut \"%s\" is already used for\n"
-"\"%s\""
-msgstr ""
-"\"%s\" kısayolu zaten kullanılıyor:\n"
-"\"%s\""
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1386
-#, c-format
-msgid ""
-"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
-msgstr ""
-"Eğer kısayolu \"%s\" olarak tekrar atarsanız, \"%s\" kısayolu "
-"etkinsizleştirilecek."
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1392
-msgid "_Reassign"
-msgstr "_Tekrar ata"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1505
-msgid "Too many custom shortcuts"
-msgstr "Çok fazla özel kısayol"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1856
-msgid "Action"
-msgstr "Eylem"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1879
-msgid "Shortcut"
-msgstr "Kısayol"
-
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:1
 msgid "Add Shortcut"
 msgstr "Kısayol Ekle"
@@ -1159,6 +1409,604 @@ msgstr "İ_sim:"
 msgid "_Speed:"
 msgstr "_Hız:"
 
+#: ../panels/keyboard/keyboard-shortcuts.c:555
+#: ../panels/keyboard/keyboard-shortcuts.c:563
+#: ../panels/keyboard/keyboard-shortcuts.c:882
+#: ../panels/keyboard/keyboard-shortcuts.c:1383
+#: ../panels/keyboard/keyboard-shortcuts.c:1387
+msgid "Custom Shortcuts"
+msgstr "Özel Kısayollar"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:723
+msgid "<Unknown Action>"
+msgstr "<Bilinmeyen Eylem>"
+
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/keyboard-shortcuts.c:1064
+#: ../panels/sound/gvc-mixer-control.c:1087
+#: ../panels/user-accounts/um-fingerprint-dialog.c:177
+#: ../panels/user-accounts/um-fingerprint-dialog.c:178
+msgid "Disabled"
+msgstr "Devre dışı"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1205
+#, c-format
+msgid ""
+"The shortcut \"%s\" cannot be used because it will become impossible to type "
+"using this key.\n"
+"Please try with a key such as Control, Alt or Shift at the same time."
+msgstr ""
+"Kısayol tuşu \"%s\" kullanılamıyor çünkü kullanımı halinde bu tuş "
+"kullanılarak yazmak mümkün olmayacak.\n"
+"Lütfen Control, Alt ya da Shift gibi tuşlar ile aynı anda deneyin."
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1237
+#, c-format
+msgid ""
+"The shortcut \"%s\" is already used for\n"
+"\"%s\""
+msgstr ""
+"\"%s\" kısayolu zaten kullanılıyor:\n"
+"\"%s\""
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1242
+#, c-format
+msgid ""
+"If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
+msgstr ""
+"Eğer kısayolu \"%s\" olarak tekrar atarsanız, \"%s\" kısayolu "
+"etkinsizleştirilecek."
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1248
+msgid "_Reassign"
+msgstr "_Tekrar ata"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1676
+msgid "Action"
+msgstr "Eylem"
+
+#: ../panels/keyboard/keyboard-shortcuts.c:1699
+msgid "Shortcut"
+msgstr "Kısayol"
+
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
+msgid "Mouse and Touchpad"
+msgstr "Fare ve Touchpad"
+
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:2
+msgid "Set your mouse and touchpad preferences"
+msgstr "Fare ve touchpad tercihlerinizi yapın"
+
+#. Translators: those are keywords for the mouse and touchpad control-center panel
+#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
+msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
+msgstr "Trackpad;İşaretçi;Tıklama;Vurma;Çift;Düğme;Trackball;"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:1
+msgid "A_cceleration:"
+msgstr "_Hızlanma:"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:2
+msgid "Disable _touchpad while typing"
+msgstr "Yazma esnasında _touchpad'i kapat"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:3
+msgid "Double-Click Timeout"
+msgstr "Çift Tıklama Zaman Aşımı"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
+msgid "Double-click timeout"
+msgstr "Çift tıklama zaman aşımı"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+msgid "Drag Threshold"
+msgstr "Sürükleme Eşiği"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:6
+msgid "Drag and Drop"
+msgstr "Sürükle Bırak"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
+msgid "Enable _mouse clicks with touchpad"
+msgstr "Touchpad ile _fare tıklamalarını etkinleştir"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+msgid "Enable h_orizontal scrolling"
+msgstr "_Yatay kaydırmayı etkinleştir"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#: ../panels/universal-access/zoom-options.ui.h:7
+msgid "General"
+msgstr "Genel"
+
+#. high sensitivity
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+msgid "High"
+msgstr "Yüksek"
+
+#. large threshold
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/universal-access/uap.ui.h:36
+msgid "Large"
+msgstr "Büyük"
+
+#. low sensitivity
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+msgid "Low"
+msgstr "Düşük"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:19
+msgid "Mouse"
+msgstr "Fare"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:20
+msgid "Mouse Preferences"
+msgstr "Fare Tercihleri"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:21
+msgid "Pointer Speed"
+msgstr "Belirteç Hızı"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:22
+msgid "Scrolling"
+msgstr "Kaydırma"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:23
+msgid "Sh_ow position of pointer when the Control key is pressed"
+msgstr "Kontrol tuşuna basıldığında belitecin _konumunu göster"
+
+#. small threshold
+#: ../panels/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/universal-access/uap.ui.h:59
+msgid "Small"
+msgstr "Küçük"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:29
+msgid "Thr_eshold:"
+msgstr "_Eşik:"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:30
+msgid "To test your settings, try to double-click on the face."
+msgstr "Ayarlarınızı sınamak için yüze çift tıklamayı deneyin."
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:31
+msgid "Touchpad"
+msgstr "Touchpad"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:32
+msgid "Two-_finger scrolling"
+msgstr "İki _parmak kaydırma"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:33
+msgid "_Disabled"
+msgstr "_Kapalı"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:34
+msgid "_Edge scrolling"
+msgstr "_Kenar kaydırma"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:35
+msgid "_Left-handed"
+msgstr "_Solak"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:36
+msgid "_Right-handed"
+msgstr "_Sağlak"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:37
+msgid "_Sensitivity:"
+msgstr "_Duyarlılık:"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:38
+msgid "_Timeout:"
+msgstr "_Zaman aşımı:"
+
+#. TRANSLATORS: this is when the use leaves the PAC textbox blank
+#: ../panels/network/cc-network-panel.c:269
+msgid ""
+"Web Proxy Autodiscovery is used when a Configuration URL is not provided."
+msgstr ""
+"Yapılandırma URL'si verilmediğinde vekil sunucu otomatik bulma kullanılır."
+
+#. TRANSLATORS: WPAD is bad: if you enable it on an untrusted
+#. * network, then anyone else on that network can tell your
+#. * machine that it should proxy all of your web traffic
+#. * through them.
+#: ../panels/network/cc-network-panel.c:277
+msgid "This is not recommended for untrusted public networks."
+msgstr "Bu güvenli olmayan açık ağlarda önerilmez."
+
+#. TRANSLATORS: this is when the access point is not listed
+#. * in the dropdown (or hidden) and the user has to select
+#. * another entry manually
+#: ../panels/network/cc-network-panel.c:949
+msgctxt "Wireless access point"
+msgid "Other..."
+msgstr "Diğer..."
+
+#. TRANSLATORS: this WEP WiFi security
+#: ../panels/network/cc-network-panel.c:1107
+#: ../panels/network/cc-network-panel.c:1514
+msgid "WEP"
+msgstr "WEP"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/cc-network-panel.c:1111
+#: ../panels/network/cc-network-panel.c:1518
+msgid "WPA"
+msgstr "WPA"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/cc-network-panel.c:1115
+msgid "WPA2"
+msgstr "WPA2"
+
+#. TRANSLATORS: this Enterprise WiFi security
+#: ../panels/network/cc-network-panel.c:1120
+msgid "Enterprise"
+msgstr "Kurumsal"
+
+#. TRANSLATORS: this no (!) WiFi security
+#: ../panels/network/cc-network-panel.c:1126
+#: ../panels/network/cc-network-panel.c:1509
+#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/zoom-options.ui.h:16
+msgid "None"
+msgstr "Hiçbiri"
+
+#: ../panels/network/cc-network-panel.c:1577
+msgid "Hotspot"
+msgstr "Etkin nokta"
+
+#. Translators: network device speed
+#: ../panels/network/cc-network-panel.c:1643
+#: ../panels/network/cc-network-panel.c:1731
+#, c-format
+msgid "%d Mb/s"
+msgstr "%d Mb/sn"
+
+#: ../panels/network/cc-network-panel.c:1986 ../panels/network/network.ui.h:18
+msgid "IPv4 Address"
+msgstr "IPv4 Adresi"
+
+#: ../panels/network/cc-network-panel.c:1987 ../panels/network/network.ui.h:19
+msgid "IPv6 Address"
+msgstr "IPv6 Adresi"
+
+#: ../panels/network/cc-network-panel.c:1990
+#: ../panels/network/cc-network-panel.c:1993 ../panels/network/network.ui.h:17
+#: ../panels/printers/printers.ui.h:9
+msgid "IP Address"
+msgstr "İP Adresi"
+
+#: ../panels/network/cc-network-panel.c:2040
+#: ../panels/network/cc-network-panel.c:2413
+#, c-format
+msgid "%s VPN"
+msgstr "%s VPN"
+
+#: ../panels/network/cc-network-panel.c:2148
+msgid "Proxy"
+msgstr "Vekil"
+
+#: ../panels/network/cc-network-panel.c:2222
+msgid "Network proxy"
+msgstr "Ağ Vekili"
+
+#. TRANSLATORS: the user is running a NM that is not API compatible
+#: ../panels/network/cc-network-panel.c:2480
+msgid "The system network services are not compatible with this version."
+msgstr "Sistem ağ yöneticisi bu sürümle uyumlu değil."
+
+#: ../panels/network/cc-network-panel.c:3095
+msgid "Not connected to the internet."
+msgstr "İnternete bağlı değil."
+
+#: ../panels/network/cc-network-panel.c:3096
+msgid "Create the hotspot anyway?"
+msgstr "Yine de etkin nokta oluşturulsun mu?"
+
+#: ../panels/network/cc-network-panel.c:3114
+#, c-format
+msgid "Disconnect from %s and create a new hotspot?"
+msgstr "%s ile bağlantıyı kesilip yeni bir etkin nokta oluşturulsun mu?"
+
+#: ../panels/network/cc-network-panel.c:3117
+msgid "This is your only connection to the internet."
+msgstr "Bu sizin internete olan tek bağlantınız."
+
+#: ../panels/network/cc-network-panel.c:3135
+msgid "Create _Hotspot"
+msgstr "Etkin Nokta _Oluştur"
+
+#: ../panels/network/cc-network-panel.c:3195
+msgid "Stop hotspot and disconnect any users?"
+msgstr "Etkin nokta durdurulup tüm kullanıcıların bağlantısı kesilsin mi?"
+
+#: ../panels/network/cc-network-panel.c:3198
+msgid "_Stop Hotspot"
+msgstr "Etkin Noktayı _Durdur"
+
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+msgid "Network"
+msgstr "Ağ"
+
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:2
+msgid "Network settings"
+msgstr "Ağ ayarları"
+
+#. Translators: those are keywords for the network control-center panel
+#: ../panels/network/gnome-network-panel.desktop.in.in.h:4
+msgid "Network;Wireless;IP;LAN;Proxy;"
+msgstr "Ağ;Kablosuz;IP;LAN;Proxy;"
+
+#: ../panels/network/network.ui.h:1
+msgid "Add Device"
+msgstr "Aygıt Ekle"
+
+#: ../panels/network/network.ui.h:2
+msgid "Air_plane Mode"
+msgstr "Uça_k Kipi"
+
+#: ../panels/network/network.ui.h:3
+msgid "Create..."
+msgstr "Oluştur..."
+
+#: ../panels/network/network.ui.h:4
+msgid "DNS"
+msgstr "DNS"
+
+#: ../panels/network/network.ui.h:5
+msgid "Default Route"
+msgstr "Öntanımlı Geçit"
+
+#: ../panels/network/network.ui.h:6
+#| msgid "Device"
+msgid "Device Off"
+msgstr "Aygıt Kapalı"
+
+#: ../panels/network/network.ui.h:7
+msgid "Disable VPN"
+msgstr "VPN'i Kapat"
+
+#: ../panels/network/network.ui.h:8
+msgid "FTP Port"
+msgstr "FTP Limanı (Port)"
+
+#: ../panels/network/network.ui.h:9
+msgid "Gateway"
+msgstr "Geçit"
+
+#: ../panels/network/network.ui.h:10
+msgid "Group Name"
+msgstr "Grup İsmi"
+
+#: ../panels/network/network.ui.h:11
+msgid "Group Password"
+msgstr "Grup Parolası"
+
+#: ../panels/network/network.ui.h:12
+msgid "HTTP Port"
+msgstr "HTTP Limanı (Port)"
+
+#: ../panels/network/network.ui.h:13
+msgid "HTTPS Port"
+msgstr "HTTPS Limanı"
+
+#: ../panels/network/network.ui.h:14
+msgid "H_TTPS Proxy"
+msgstr "H_TTPS Vekili"
+
+#: ../panels/network/network.ui.h:15
+msgid "Hardware Address"
+msgstr "Donanım Adresi"
+
+#: ../panels/network/network.ui.h:16
+msgid "IMEI"
+msgstr "IMEI"
+
+#: ../panels/network/network.ui.h:20
+msgid "Interface"
+msgstr "Arayüz"
+
+#: ../panels/network/network.ui.h:21
+msgid "Network Name"
+msgstr "Ağ Adı"
+
+#: ../panels/network/network.ui.h:22
+msgid "Provider"
+msgstr "Sağlayıcı"
+
+#: ../panels/network/network.ui.h:24
+msgid "Security"
+msgstr "Güvenlik"
+
+#: ../panels/network/network.ui.h:25
+msgid "Security Key"
+msgstr "Güvenlik Anahtarı"
+
+#: ../panels/network/network.ui.h:26
+msgid "Select the interface to use for the new service"
+msgstr "Yeni hizmetin kullanılacağı arayüzü seçin"
+
+#: ../panels/network/network.ui.h:27
+msgid "Socks Port"
+msgstr "Socks Limanı"
+
+#: ../panels/network/network.ui.h:28
+msgid "Speed"
+msgstr "Hız"
+
+#: ../panels/network/network.ui.h:29
+msgid "Subnet Mask"
+msgstr "Alt Ağ Maskesi"
+
+#: ../panels/network/network.ui.h:30
+msgid "Unlock"
+msgstr "Kilidi Aç"
+
+#: ../panels/network/network.ui.h:31
+msgid "Username"
+msgstr "Kullanıcı Adı"
+
+#: ../panels/network/network.ui.h:32
+msgid "VPN"
+msgstr "VPN"
+
+#: ../panels/network/network.ui.h:33
+msgid "VPN Type"
+msgstr "VPN Türü"
+
+#: ../panels/network/network.ui.h:34
+msgid "_Configuration URL"
+msgstr "_Yapılandırma URL'si"
+
+#: ../panels/network/network.ui.h:35
+msgid "_Configure..."
+msgstr "_Yapılandır..."
+
+#: ../panels/network/network.ui.h:36
+msgid "_FTP Proxy"
+msgstr "_FTP Vekili"
+
+#: ../panels/network/network.ui.h:37
+msgid "_HTTP Proxy"
+msgstr "_HTTP Vekili"
+
+#: ../panels/network/network.ui.h:38
+msgid "_Method"
+msgstr "Y_öntem"
+
+#: ../panels/network/network.ui.h:39
+msgid "_Network Name"
+msgstr "_Ağ Adı"
+
+#: ../panels/network/network.ui.h:40
+msgid "_Socks Host"
+msgstr "_Socks Makinesi"
+
+#: ../panels/network/network.ui.h:41
+msgid "_Stop Hotspot..."
+msgstr "Etkin Noktayı _Durdur..."
+
+#: ../panels/network/network.ui.h:42
+msgid "_Use as Hotspot..."
+msgstr "Ektin Nokta Olarak _Kullan..."
+
+#: ../panels/network/network.ui.h:43
+msgctxt "proxy method"
+msgid "Automatic"
+msgstr "Otomatik"
+
+#: ../panels/network/network.ui.h:44
+msgctxt "proxy method"
+msgid "Manual"
+msgstr "El ile"
+
+#: ../panels/network/network.ui.h:45
+msgctxt "proxy method"
+msgid "None"
+msgstr "Hiçbiri"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:83
+msgid "Wired"
+msgstr "Kablolu"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:87
+msgid "Wireless"
+msgstr "Kablosuz"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:94
+msgid "Mobile broadband"
+msgstr "Mobil geniş bant"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:103
+msgid "Mesh"
+msgstr "Mesh"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:162
+msgid "Ad-hoc"
+msgstr "Ad-hoc"
+
+#. TRANSLATORS: AP type
+#: ../panels/network/panel-common.c:166
+msgid "Infrastructure"
+msgstr "Altyapı"
+
+#. TRANSLATORS: device status
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:190 ../panels/network/panel-common.c:251
+msgid "Status unknown"
+msgstr "Durum bilinmiyor"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:194
+msgid "Unmanaged"
+msgstr "Yönetilmeyen"
+
+#: ../panels/network/panel-common.c:199
+msgid "Firmware missing"
+msgstr "Firmware kayıp"
+
+#: ../panels/network/panel-common.c:202
+msgid "Cable unplugged"
+msgstr "Kablo takılı değil"
+
+#: ../panels/network/panel-common.c:204
+msgid "Unavailable"
+msgstr "Kullanılamıyor"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:208
+msgid "Disconnected"
+msgstr "Bağlı değil"
+
+#. TRANSLATORS: device status
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:215 ../panels/network/panel-common.c:257
+msgid "Connecting"
+msgstr "Bağlanıyor"
+
+#. TRANSLATORS: device status
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:219 ../panels/network/panel-common.c:261
+msgid "Authentication required"
+msgstr "Kimlik doğrulası gerekli"
+
+#. TRANSLATORS: device status
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:223 ../panels/network/panel-common.c:265
+msgid "Connected"
+msgstr "Bağlı"
+
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:227
+msgid "Disconnecting"
+msgstr "Bağlantı kesiliyor"
+
+#. TRANSLATORS: device status
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:231 ../panels/network/panel-common.c:269
+msgid "Connection failed"
+msgstr "Bağlantı başarısız"
+
+#. TRANSLATORS: device status
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:235 ../panels/network/panel-common.c:277
+msgid "Status unknown (missing)"
+msgstr "Durum bilinmiyor (kayıp)"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:273
+msgid "Not connected"
+msgstr "Bağlı değil"
+
 #: ../panels/online-accounts/cc-online-accounts-panel.c:305
 msgid "Error logging into the account"
 msgstr "Hesaba giriş yapılırken hata oluştu"
@@ -1231,6 +2079,131 @@ msgstr "Hesabı Kaldır"
 #: ../panels/online-accounts/online-accounts.ui.h:3
 msgid "Select an account"
 msgstr "Bir hesap seçin"
+
+#: ../panels/power/cc-power-panel.c:160
+msgid "Unknown time"
+msgstr "Bilinmeyen süre"
+
+#: ../panels/power/cc-power-panel.c:166
+#, c-format
+msgid "%i minute"
+msgid_plural "%i minutes"
+msgstr[0] "%i dakika"
+
+#: ../panels/power/cc-power-panel.c:178
+#, c-format
+msgid "%i hour"
+msgid_plural "%i hours"
+msgstr[0] "%i saat"
+
+#. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
+#. * Swap order with "%2$s %2$i %1$s %1$i if needed
+#: ../panels/power/cc-power-panel.c:186
+#, c-format
+msgid "%i %s %i %s"
+msgstr "%i %s %i %s"
+
+#: ../panels/power/cc-power-panel.c:187
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "saat"
+
+#: ../panels/power/cc-power-panel.c:188
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "dakika"
+
+#: ../panels/power/cc-power-panel.c:265
+msgid "Battery charging"
+msgstr "Pil doluyor"
+
+#: ../panels/power/cc-power-panel.c:268
+msgid "Battery discharging"
+msgstr "Pil boşalıyor"
+
+#: ../panels/power/cc-power-panel.c:279
+msgid "UPS charging"
+msgstr "KGK doluyor"
+
+#: ../panels/power/cc-power-panel.c:282
+msgid "UPS discharging"
+msgstr "KGK boşalıyor"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#: ../panels/power/cc-power-panel.c:300
+#, c-format
+msgid "%s until charged (%.0lf%%)"
+msgstr "%s dolmasına (%.0lf%%) var"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#: ../panels/power/cc-power-panel.c:306
+#, c-format
+msgid "%s until empty (%.0lf%%)"
+msgstr "%s boşalmasına (%.0lf%%) var"
+
+#. TRANSLATORS: %1 is a percentage value. Note: this string is only
+#. * used when we don't have a time value
+#: ../panels/power/cc-power-panel.c:314
+#, c-format
+msgid "%.0lf%% charged"
+msgstr "%.0lf%% dolu"
+
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:1
+msgid "Power"
+msgstr "Güç"
+
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:2
+msgid "Power management settings"
+msgstr "Güç yönetim ayarları"
+
+#. Translators: those are keywords for the power control-center panel
+#: ../panels/power/gnome-power-panel.desktop.in.in.h:4
+msgid "Power;Sleep;Suspend;Hibernate;Battery;"
+msgstr "Güç;Uyku;Bekleme;Derin Uyku;Pil;"
+
+#: ../panels/power/power.ui.h:1 ../panels/screen/screen.ui.h:1
+msgid "1 hour"
+msgstr "1 saat"
+
+#: ../panels/power/power.ui.h:2 ../panels/screen/screen.ui.h:3
+msgid "10 minutes"
+msgstr "10 dakika"
+
+#: ../panels/power/power.ui.h:3 ../panels/screen/screen.ui.h:6
+msgid "30 minutes"
+msgstr "30 dakika"
+
+#: ../panels/power/power.ui.h:4 ../panels/screen/screen.ui.h:8
+msgid "5 minutes"
+msgstr "5 dakika"
+
+#: ../panels/power/power.ui.h:5
+msgid "Don't suspend"
+msgstr "Askıya alma"
+
+#: ../panels/power/power.ui.h:6
+msgid "Hibernate"
+msgstr "Derin Uyku"
+
+#: ../panels/power/power.ui.h:7
+msgid "On battery power"
+msgstr "Pil gücünde"
+
+#: ../panels/power/power.ui.h:8
+msgid "Power off"
+msgstr "Kapat"
+
+#: ../panels/power/power.ui.h:9
+msgid "Suspend when inactive for:"
+msgstr "Şu kadar süre etkin değilse askıya al:"
+
+#: ../panels/power/power.ui.h:10
+msgid "When plugged in"
+msgstr "Fişe takıldığıında"
+
+#: ../panels/power/power.ui.h:11
+msgid "When power is _critically low:"
+msgstr "Güç düzeyi _çok düşük olduğunda:"
 
 #. Translators: The printer is low on toner
 #: ../panels/printers/cc-printers-panel.c:525
@@ -1554,12 +2527,6 @@ msgstr "İzin verilen kullanıcılar"
 msgid "Cancel Print Job"
 msgstr "Yazdırma İşini İptal Et"
 
-#: ../panels/printers/printers.ui.h:9
-#: ../panels/network/cc-network-panel.c:1990
-#: ../panels/network/cc-network-panel.c:1993 ../panels/network/network.ui.h:17
-msgid "IP Address"
-msgstr "İP Adresi"
-
 #: ../panels/printers/printers.ui.h:10
 msgid "Jobs"
 msgstr "İşler"
@@ -1633,6 +2600,20 @@ msgstr "_Seçenekler"
 msgid "_Show"
 msgstr "_Göster"
 
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:1
+msgid "Change your region and language settings"
+msgstr "Bölge ve dil ayarlarını değiştirin"
+
+#. Translators: those are keywords for the region control-center panel
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:3
+msgid "Language;Layout;Keyboard;"
+msgstr "Dil;Yerleşim;Klavye;"
+
+#: ../panels/region/gnome-region-panel.desktop.in.in.h:4
+#: ../panels/region/gnome-region-panel.ui.h:24
+msgid "Region and Language"
+msgstr "Bölge Ve Dil"
+
 #: ../panels/region/gnome-region-panel-formats.c:142
 msgid "Imperial"
 msgstr "İngiliz standartları"
@@ -1657,6 +2638,34 @@ msgstr "Eklemek için giriş kaynağı seçin"
 msgid "Keyboard Layout Options"
 msgstr "Klavye Düzen Seçenekleri"
 
+#: ../panels/region/gnome-region-panel-system.c:395
+msgid ""
+"The login screen, system accounts and new user accounts use the system-wide "
+"Region and Language settings."
+msgstr ""
+"Giriş ekranı, sistem hesapları ve yeni kullanıcı hesapları sistem çapındaki "
+"Bölge ve Dil ayarlarını kullanır."
+
+#: ../panels/region/gnome-region-panel-system.c:400
+#: ../panels/region/gnome-region-panel.ui.h:35
+msgid ""
+"The login screen, system accounts and new user accounts use the system-wide "
+"Region and Language settings. You may change the system settings to match "
+"yours."
+msgstr ""
+"Giriş ekranı, sistem hesapları ve yeni kullanıcı hesapları, sistem çapındaki "
+"Bölge ve Dil ayarlarını kullanır. Sistem ayarlarını kendi ayarlarınıza "
+"uyacak şekilde değiştirebilirsiniz."
+
+#: ../panels/region/gnome-region-panel-system.c:403
+msgid "Copy Settings"
+msgstr "Ayarları Kopyala"
+
+#: ../panels/region/gnome-region-panel-system.c:406
+#: ../panels/region/gnome-region-panel.ui.h:5
+msgid "Copy Settings..."
+msgstr "Ayarları Kopyala..."
+
 #: ../panels/region/gnome-region-panel.ui.h:1
 msgid "Add Language"
 msgstr "Dil Ekle"
@@ -1673,11 +2682,6 @@ msgstr "Bölge Ekle"
 msgid "Allow different layouts for individual windows"
 msgstr "Her pencere için farklı düzene izin ver"
 
-#: ../panels/region/gnome-region-panel.ui.h:5
-#: ../panels/region/gnome-region-panel-system.c:406
-msgid "Copy Settings..."
-msgstr "Ayarları Kopyala..."
-
 #: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Currency"
 msgstr "Para Birimi"
@@ -1688,7 +2692,6 @@ msgstr "Tarihler"
 
 #. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
 #: ../panels/region/gnome-region-panel.ui.h:9
-#| msgid "By _language"
 msgid "Display language:"
 msgstr "Görüntüleme Dili:"
 
@@ -1745,21 +2748,14 @@ msgid "Numbers"
 msgstr "Sayılar"
 
 #: ../panels/region/gnome-region-panel.ui.h:23
-#| msgid "Preview fonts"
 msgid "Preview Layout"
 msgstr "Düzeni Önizle"
-
-#: ../panels/region/gnome-region-panel.ui.h:24
-#: ../panels/region/gnome-region-panel.desktop.in.in.h:4
-msgid "Region and Language"
-msgstr "Bölge Ve Dil"
 
 #: ../panels/region/gnome-region-panel.ui.h:25
 msgid "Remove Language"
 msgstr "Dili Kaldır"
 
 #: ../panels/region/gnome-region-panel.ui.h:26
-#| msgid "Choose a Layout"
 msgid "Remove Layout"
 msgstr "Düzeni Kaldır"
 
@@ -1784,8 +2780,6 @@ msgid "Select a display language (change will be applied next time you log in)"
 msgstr "Görünüm dili seç (değişiklik bir sonraki girişinizde uygulanacak)"
 
 #: ../panels/region/gnome-region-panel.ui.h:32
-#| msgid ""
-#| "Select a display language (change will be applied next time you log in)"
 msgid "Select a region (change will be applied the next time you log in)"
 msgstr ""
 "Bir bölge seçin (değişiklik bir sonraki oturum açılışınızda uygulanacak)"
@@ -1794,20 +2788,7 @@ msgstr ""
 msgid "System settings"
 msgstr "Sistem ayarları"
 
-#: ../panels/region/gnome-region-panel.ui.h:35
-#: ../panels/region/gnome-region-panel-system.c:400
-msgid ""
-"The login screen, system accounts and new user accounts use the system-wide "
-"Region and Language settings. You may change the system settings to match "
-"yours."
-msgstr ""
-"Giriş ekranı, sistem hesapları ve yeni kullanıcı hesapları, sistem çapındaki "
-"Bölge ve Dil ayarlarını kullanır. Sistem ayarlarını kendi ayarlarınıza uyacak "
-"şekilde "
-"değiştirebilirsiniz."
-
 #: ../panels/region/gnome-region-panel.ui.h:36
-#| msgid "Time"
 msgid "Times"
 msgstr "Defa"
 
@@ -1827,1054 +2808,14 @@ msgstr "Kişisel ayarlarınız"
 msgid "_Options..."
 msgstr "_Seçenekler..."
 
-#: ../panels/region/gnome-region-panel-system.c:395
-msgid ""
-"The login screen, system accounts and new user accounts use the system-wide "
-"Region and Language settings."
-msgstr ""
-"Giriş ekranı, sistem hesapları ve yeni kullanıcı hesapları sistem çapındaki "
-"Bölge ve Dil ayarlarını kullanır."
-
-#: ../panels/region/gnome-region-panel-system.c:403
-msgid "Copy Settings"
-msgstr "Ayarları Kopyala"
-
 #: ../panels/region/gnome-region-panel-xkblt.c:210
 msgid "Layout"
 msgstr "Düzen"
 
 #: ../panels/region/gnome-region-panel-xkbot.c:229
-#: ../panels/sound/gvc-sound-theme-chooser.c:586
+#: ../panels/sound/gvc-sound-theme-chooser.c:585
 msgid "Default"
 msgstr "Öntanımlı"
-
-#: ../panels/region/gnome-region-panel.desktop.in.in.h:1
-msgid "Change your region and language settings"
-msgstr "Bölge ve dil ayarlarını değiştirin"
-
-#. Translators: those are keywords for the region control-center panel
-#: ../panels/region/gnome-region-panel.desktop.in.in.h:3
-msgid "Language;Layout;Keyboard;"
-msgstr "Dil;Yerleşim;Klavye;"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:1
-msgid "A_cceleration:"
-msgstr "_Hızlanma:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:2
-msgid "Disable _touchpad while typing"
-msgstr "Yazma esnasında _touchpad'i kapat"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgid "Double-Click Timeout"
-msgstr "Çift Tıklama Zaman Aşımı"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
-msgid "Double-click timeout"
-msgstr "Çift tıklama zaman aşımı"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:5
-msgid "Drag Threshold"
-msgstr "Sürükleme Eşiği"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:6
-msgid "Drag and Drop"
-msgstr "Sürükle Bırak"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
-msgid "Enable _mouse clicks with touchpad"
-msgstr "Touchpad ile _fare tıklamalarını etkinleştir"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
-msgid "Enable h_orizontal scrolling"
-msgstr "_Yatay kaydırmayı etkinleştir"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
-#: ../panels/universal-access/zoom-options.ui.h:7
-msgid "General"
-msgstr "Genel"
-
-#. high sensitivity
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
-msgid "High"
-msgstr "Yüksek"
-
-#. large threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#: ../panels/universal-access/uap.ui.h:36
-msgid "Large"
-msgstr "Büyük"
-
-#. low sensitivity
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
-msgid "Low"
-msgstr "Düşük"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
-msgid "Mouse"
-msgstr "Fare"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
-msgid "Mouse Preferences"
-msgstr "Fare Tercihleri"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:21
-msgid "Pointer Speed"
-msgstr "Belirteç Hızı"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:22
-msgid "Scrolling"
-msgstr "Kaydırma"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:23
-msgid "Sh_ow position of pointer when the Control key is pressed"
-msgstr "Kontrol tuşuna basıldığında belitecin _konumunu göster"
-
-#. small threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:28
-#: ../panels/universal-access/uap.ui.h:59
-msgid "Small"
-msgstr "Küçük"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:29
-msgid "Thr_eshold:"
-msgstr "_Eşik:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:30
-msgid "To test your settings, try to double-click on the face."
-msgstr "Ayarlarınızı sınamak için yüze çift tıklamayı deneyin."
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
-msgid "Touchpad"
-msgstr "Touchpad"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:32
-msgid "Two-_finger scrolling"
-msgstr "İki _parmak kaydırma"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:33
-msgid "_Disabled"
-msgstr "_Kapalı"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:34
-msgid "_Edge scrolling"
-msgstr "_Kenar kaydırma"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:35
-msgid "_Left-handed"
-msgstr "_Solak"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:36
-msgid "_Right-handed"
-msgstr "_Sağlak"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:37
-msgid "_Sensitivity:"
-msgstr "_Duyarlılık:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:38
-msgid "_Timeout:"
-msgstr "_Zaman aşımı:"
-
-#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
-msgid "Mouse and Touchpad"
-msgstr "Fare ve Touchpad"
-
-#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:2
-msgid "Set your mouse and touchpad preferences"
-msgstr "Fare ve touchpad tercihlerinizi yapın"
-
-#. Translators: those are keywords for the mouse and touchpad control-center panel
-#: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:4
-msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;"
-msgstr "Trackpad;İşaretçi;Tıklama;Vurma;Çift;Düğme;Trackball;"
-
-#. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/cc-network-panel.c:269
-msgid ""
-"Web Proxy Autodiscovery is used when a Configuration URL is not provided."
-msgstr ""
-"Yapılandırma URL'si verilmediğinde vekil sunucu otomatik bulma kullanılır."
-
-#. TRANSLATORS: WPAD is bad: if you enable it on an untrusted
-#. * network, then anyone else on that network can tell your
-#. * machine that it should proxy all of your web traffic
-#. * through them.
-#: ../panels/network/cc-network-panel.c:277
-msgid "This is not recommended for untrusted public networks."
-msgstr "Bu güvenli olmayan açık ağlarda önerilmez."
-
-#. TRANSLATORS: this is when the access point is not listed
-#. * in the dropdown (or hidden) and the user has to select
-#. * another entry manually
-#: ../panels/network/cc-network-panel.c:949
-msgctxt "Wireless access point"
-msgid "Other..."
-msgstr "Diğer..."
-
-#. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:1107
-#: ../panels/network/cc-network-panel.c:1514
-msgid "WEP"
-msgstr "WEP"
-
-#. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1111
-#: ../panels/network/cc-network-panel.c:1518
-msgid "WPA"
-msgstr "WPA"
-
-#. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1115
-msgid "WPA2"
-msgstr "WPA2"
-
-#. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:1120
-msgid "Enterprise"
-msgstr "Kurumsal"
-
-#. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:1126
-#: ../panels/network/cc-network-panel.c:1509
-#: ../panels/universal-access/uap.ui.h:43
-#: ../panels/universal-access/zoom-options.ui.h:16
-msgid "None"
-msgstr "Hiçbiri"
-
-#: ../panels/network/cc-network-panel.c:1577
-msgid "Hotspot"
-msgstr "Etkin nokta"
-
-#. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1643
-#: ../panels/network/cc-network-panel.c:1731
-#, c-format
-msgid "%d Mb/s"
-msgstr "%d Mb/sn"
-
-#: ../panels/network/cc-network-panel.c:1986 ../panels/network/network.ui.h:18
-msgid "IPv4 Address"
-msgstr "IPv4 Adresi"
-
-#: ../panels/network/cc-network-panel.c:1987 ../panels/network/network.ui.h:19
-msgid "IPv6 Address"
-msgstr "IPv6 Adresi"
-
-#: ../panels/network/cc-network-panel.c:2040
-#: ../panels/network/cc-network-panel.c:2413
-#, c-format
-msgid "%s VPN"
-msgstr "%s VPN"
-
-#: ../panels/network/cc-network-panel.c:2148
-msgid "Proxy"
-msgstr "Vekil"
-
-#: ../panels/network/cc-network-panel.c:2222
-msgid "Network proxy"
-msgstr "Ağ Vekili"
-
-#. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2480
-msgid "The system network services are not compatible with this version."
-msgstr "Sistem ağ yöneticisi bu sürümle uyumlu değil."
-
-#: ../panels/network/cc-network-panel.c:3095
-msgid "Not connected to the internet."
-msgstr "İnternete bağlı değil."
-
-#: ../panels/network/cc-network-panel.c:3096
-msgid "Create the hotspot anyway?"
-msgstr "Yine de etkin nokta oluşturulsun mu?"
-
-#: ../panels/network/cc-network-panel.c:3114
-#, c-format
-msgid "Disconnect from %s and create a new hotspot?"
-msgstr "%s ile bağlantıyı kesilip yeni bir etkin nokta oluşturulsun mu?"
-
-#: ../panels/network/cc-network-panel.c:3117
-msgid "This is your only connection to the internet."
-msgstr "Bu sizin internete olan tek bağlantınız."
-
-#: ../panels/network/cc-network-panel.c:3135
-msgid "Create _Hotspot"
-msgstr "Etkin Nokta _Oluştur"
-
-#: ../panels/network/cc-network-panel.c:3195
-msgid "Stop hotspot and disconnect any users?"
-msgstr "Etkin nokta durdurulup tüm kullanıcıların bağlantısı kesilsin mi?"
-
-#: ../panels/network/cc-network-panel.c:3198
-#| msgid "_Socks Host"
-msgid "_Stop Hotspot"
-msgstr "Etkin Noktayı _Durdur"
-
-#: ../panels/network/gnome-network-panel.desktop.in.in.h:1
-msgid "Network"
-msgstr "Ağ"
-
-#: ../panels/network/gnome-network-panel.desktop.in.in.h:2
-msgid "Network settings"
-msgstr "Ağ ayarları"
-
-#. Translators: those are keywords for the network control-center panel
-#: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-msgid "Network;Wireless;IP;LAN;Proxy;"
-msgstr "Ağ;Kablosuz;IP;LAN;Proxy;"
-
-#: ../panels/network/network.ui.h:1
-msgid "Add Device"
-msgstr "Aygıt Ekle"
-
-#: ../panels/network/network.ui.h:2
-msgid "Air_plane Mode"
-msgstr "Uça_k Kipi"
-
-#: ../panels/network/network.ui.h:3
-msgid "Create..."
-msgstr "Oluştur..."
-
-#: ../panels/network/network.ui.h:4
-msgid "DNS"
-msgstr "DNS"
-
-#: ../panels/network/network.ui.h:5
-msgid "Default Route"
-msgstr "Öntanımlı Geçit"
-
-#: ../panels/network/network.ui.h:6
-#, fuzzy
-#| msgid "Device"
-msgid "Device Off"
-msgstr "Aygıt"
-
-#: ../panels/network/network.ui.h:7
-#| msgid "Disabled"
-msgid "Disable VPN"
-msgstr "VPN'i Kapat"
-
-#: ../panels/network/network.ui.h:8
-msgid "FTP Port"
-msgstr "FTP Limanı (Port)"
-
-#: ../panels/network/network.ui.h:9
-msgid "Gateway"
-msgstr "Geçit"
-
-#: ../panels/network/network.ui.h:10
-msgid "Group Name"
-msgstr "Grup İsmi"
-
-#: ../panels/network/network.ui.h:11
-msgid "Group Password"
-msgstr "Grup Parolası"
-
-#: ../panels/network/network.ui.h:12
-msgid "HTTP Port"
-msgstr "HTTP Limanı (Port)"
-
-#: ../panels/network/network.ui.h:13
-msgid "HTTPS Port"
-msgstr "HTTPS Limanı"
-
-#: ../panels/network/network.ui.h:14
-msgid "H_TTPS Proxy"
-msgstr "H_TTPS Vekili"
-
-#: ../panels/network/network.ui.h:15
-msgid "Hardware Address"
-msgstr "Donanım Adresi"
-
-#: ../panels/network/network.ui.h:16
-msgid "IMEI"
-msgstr "IMEI"
-
-#: ../panels/network/network.ui.h:20
-msgid "Interface"
-msgstr "Arayüz"
-
-#: ../panels/network/network.ui.h:21
-msgid "Network Name"
-msgstr "Ağ Adı"
-
-#: ../panels/network/network.ui.h:22
-msgid "Provider"
-msgstr "Sağlayıcı"
-
-#: ../panels/network/network.ui.h:24
-msgid "Security"
-msgstr "Güvenlik"
-
-#: ../panels/network/network.ui.h:25
-msgid "Security Key"
-msgstr "Güvenlik Anahtarı"
-
-#: ../panels/network/network.ui.h:26
-msgid "Select the interface to use for the new service"
-msgstr "Yeni hizmetin kullanılacağı arayüzü seçin"
-
-#: ../panels/network/network.ui.h:27
-msgid "Socks Port"
-msgstr "Socks Limanı"
-
-#: ../panels/network/network.ui.h:28
-msgid "Speed"
-msgstr "Hız"
-
-#: ../panels/network/network.ui.h:29
-msgid "Subnet Mask"
-msgstr "Alt Ağ Maskesi"
-
-#: ../panels/network/network.ui.h:30
-msgid "Unlock"
-msgstr "Kilidi Aç"
-
-#: ../panels/network/network.ui.h:31
-msgid "Username"
-msgstr "Kullanıcı Adı"
-
-#: ../panels/network/network.ui.h:32
-msgid "VPN"
-msgstr "VPN"
-
-#: ../panels/network/network.ui.h:33
-msgid "VPN Type"
-msgstr "VPN Türü"
-
-#: ../panels/network/network.ui.h:34
-msgid "_Configuration URL"
-msgstr "_Yapılandırma URL'si"
-
-#: ../panels/network/network.ui.h:35
-msgid "_Configure..."
-msgstr "_Yapılandır..."
-
-#: ../panels/network/network.ui.h:36
-msgid "_FTP Proxy"
-msgstr "_FTP Vekili"
-
-#: ../panels/network/network.ui.h:37
-msgid "_HTTP Proxy"
-msgstr "_HTTP Vekili"
-
-#: ../panels/network/network.ui.h:38
-msgid "_Method"
-msgstr "Y_öntem"
-
-#: ../panels/network/network.ui.h:39
-msgid "_Network Name"
-msgstr "_Ağ Adı"
-
-#: ../panels/network/network.ui.h:40
-msgid "_Socks Host"
-msgstr "_Socks Makinesi"
-
-#: ../panels/network/network.ui.h:41
-msgid "_Stop Hotspot..."
-msgstr "Etkin Noktayı _Durdur..."
-
-#: ../panels/network/network.ui.h:42
-#| msgid "Take a photo..."
-msgid "_Use as Hotspot..."
-msgstr "Ektin Nokta Olarak _Kullan..."
-
-#: ../panels/network/network.ui.h:43
-msgctxt "proxy method"
-msgid "Automatic"
-msgstr "Otomatik"
-
-#: ../panels/network/network.ui.h:44
-msgctxt "proxy method"
-msgid "Manual"
-msgstr "El ile"
-
-#: ../panels/network/network.ui.h:45
-msgctxt "proxy method"
-msgid "None"
-msgstr "Hiçbiri"
-
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:83
-msgid "Wired"
-msgstr "Kablolu"
-
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:87
-msgid "Wireless"
-msgstr "Kablosuz"
-
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:94
-msgid "Mobile broadband"
-msgstr "Mobil geniş bant"
-
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:103
-msgid "Mesh"
-msgstr "Mesh"
-
-#. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:162
-msgid "Ad-hoc"
-msgstr "Ad-hoc"
-
-#. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:166
-msgid "Infrastructure"
-msgstr "Altyapı"
-
-#. TRANSLATORS: device status
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:190 ../panels/network/panel-common.c:251
-msgid "Status unknown"
-msgstr "Durum bilinmiyor"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:194
-msgid "Unmanaged"
-msgstr "Yönetilmeyen"
-
-#: ../panels/network/panel-common.c:199
-msgid "Firmware missing"
-msgstr "Firmware kayıp"
-
-#: ../panels/network/panel-common.c:202
-msgid "Cable unplugged"
-msgstr "Kablo takılı değil"
-
-#: ../panels/network/panel-common.c:204
-msgid "Unavailable"
-msgstr "Kullanılamıyor"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:208
-msgid "Disconnected"
-msgstr "Bağlı değil"
-
-#. TRANSLATORS: device status
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:215 ../panels/network/panel-common.c:257
-msgid "Connecting"
-msgstr "Bağlanıyor"
-
-#. TRANSLATORS: device status
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:219 ../panels/network/panel-common.c:261
-msgid "Authentication required"
-msgstr "Kimlik doğrulası gerekli"
-
-#. TRANSLATORS: device status
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:223 ../panels/network/panel-common.c:265
-msgid "Connected"
-msgstr "Bağlı"
-
-#. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:227
-msgid "Disconnecting"
-msgstr "Bağlantı kesiliyor"
-
-#. TRANSLATORS: device status
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:231 ../panels/network/panel-common.c:269
-msgid "Connection failed"
-msgstr "Bağlantı başarısız"
-
-#. TRANSLATORS: device status
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:235 ../panels/network/panel-common.c:277
-msgid "Status unknown (missing)"
-msgstr "Durum bilinmiyor (kayıp)"
-
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:273
-msgid "Not connected"
-msgstr "Bağlı değil"
-
-#: ../panels/power/gnome-power-panel.desktop.in.in.h:1
-msgid "Power"
-msgstr "Güç"
-
-#: ../panels/power/gnome-power-panel.desktop.in.in.h:2
-msgid "Power management settings"
-msgstr "Güç yönetim ayarları"
-
-#. Translators: those are keywords for the power control-center panel
-#: ../panels/power/gnome-power-panel.desktop.in.in.h:4
-msgid "Power;Sleep;Suspend;Hibernate;Battery;"
-msgstr "Güç;Uyku;Bekleme;Derin Uyku;Pil;"
-
-#: ../panels/power/cc-power-panel.c:160
-msgid "Unknown time"
-msgstr "Bilinmeyen süre"
-
-#: ../panels/power/cc-power-panel.c:166
-#, c-format
-msgid "%i minute"
-msgid_plural "%i minutes"
-msgstr[0] "%i dakika"
-
-#: ../panels/power/cc-power-panel.c:178
-#, c-format
-msgid "%i hour"
-msgid_plural "%i hours"
-msgstr[0] "%i saat"
-
-#. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
-#. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:186
-#, c-format
-msgid "%i %s %i %s"
-msgstr "%i %s %i %s"
-
-#: ../panels/power/cc-power-panel.c:187
-msgid "hour"
-msgid_plural "hours"
-msgstr[0] "saat"
-
-#: ../panels/power/cc-power-panel.c:188
-msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "dakika"
-
-#: ../panels/power/cc-power-panel.c:265
-msgid "Battery charging"
-msgstr "Pil doluyor"
-
-#: ../panels/power/cc-power-panel.c:268
-msgid "Battery discharging"
-msgstr "Pil boşalıyor"
-
-#: ../panels/power/cc-power-panel.c:279
-msgid "UPS charging"
-msgstr "KGK doluyor"
-
-#: ../panels/power/cc-power-panel.c:282
-msgid "UPS discharging"
-msgstr "KGK boşalıyor"
-
-#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:300
-#, c-format
-msgid "%s until charged (%.0lf%%)"
-msgstr "%s dolmasına (%.0lf%%) var"
-
-#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:306
-#, c-format
-msgid "%s until empty (%.0lf%%)"
-msgstr "%s boşalmasına (%.0lf%%) var"
-
-#. TRANSLATORS: %1 is a percentage value. Note: this string is only
-#. * used when we don't have a time value
-#: ../panels/power/cc-power-panel.c:314
-#, c-format
-msgid "%.0lf%% charged"
-msgstr "%.0lf%% dolu"
-
-#: ../panels/power/power.ui.h:1 ../panels/screen/screen.ui.h:1
-msgid "1 hour"
-msgstr "1 saat"
-
-#: ../panels/power/power.ui.h:2 ../panels/screen/screen.ui.h:3
-msgid "10 minutes"
-msgstr "10 dakika"
-
-#: ../panels/power/power.ui.h:3 ../panels/screen/screen.ui.h:6
-msgid "30 minutes"
-msgstr "30 dakika"
-
-#: ../panels/power/power.ui.h:4 ../panels/screen/screen.ui.h:8
-msgid "5 minutes"
-msgstr "5 dakika"
-
-#: ../panels/power/power.ui.h:5
-msgid "Don't suspend"
-msgstr "Askıya alma"
-
-#: ../panels/power/power.ui.h:6
-msgid "Hibernate"
-msgstr "Derin Uyku"
-
-#: ../panels/power/power.ui.h:7
-msgid "On battery power"
-msgstr "Pil gücünde"
-
-#: ../panels/power/power.ui.h:8
-msgid "Power off"
-msgstr "Kapat"
-
-#: ../panels/power/power.ui.h:9
-msgid "Suspend when inactive for:"
-msgstr "Şu kadar süre etkin değilse askıya al:"
-
-#: ../panels/power/power.ui.h:10
-msgid "When plugged in"
-msgstr "Fişe takıldığıında"
-
-#: ../panels/power/power.ui.h:11
-#| msgid "When power is critically low:"
-msgid "When power is _critically low:"
-msgstr "Güç düzeyi _çok düşük olduğunda:"
-
-#: ../panels/color/gnome-color-panel.desktop.in.in.h:1
-#: ../panels/color/color.ui.h:8
-msgid "Color"
-msgstr "Renk"
-
-#: ../panels/color/gnome-color-panel.desktop.in.in.h:2
-msgid "Color management settings"
-msgstr "Renk yönetim ayarları"
-
-#. Translators: those are keywords for the color control-center panel
-#: ../panels/color/gnome-color-panel.desktop.in.in.h:4
-msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
-msgstr "Renk;ICC;Profil;Ayar;Yazıcı;Görünüm;"
-
-#. TRANSLATORS: this is where the user can click and import a profile
-#: ../panels/color/cc-color-panel.c:106
-#| msgid "Other finger: "
-msgid "Other profile…"
-msgstr "Diğer profil..."
-
-#. TRANSLATORS: this is a profile prefix to signify the
-#. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:119
-msgid "Default: "
-msgstr "Öntanımlı: "
-
-#. TRANSLATORS: this is a profile prefix to signify the
-#. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:126
-#| msgid "C_olors:"
-msgid "Colorspace: "
-msgstr "Colorspace: "
-
-#. TRANSLATORS: this is a profile prefix to signify the
-#. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:132
-#| msgid "_Profile:"
-msgid "Test profile: "
-msgstr "Sınama profili: "
-
-#. TRANSLATORS: this is when the profile should be set for all users
-#: ../panels/color/cc-color-panel.c:185 ../panels/color/color.ui.h:19
-msgid "Set for all users"
-msgstr "Tüm kullanıcılar için ayarla"
-
-#. TRANSLATORS: this is when the profile should be set for all users
-#: ../panels/color/cc-color-panel.c:192
-msgid "Create virtual device"
-msgstr "Sanal aygıt oluştur"
-
-#. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:227
-msgid "Select ICC Profile File"
-msgstr "ICC Profil Dosyasını Seç"
-
-#: ../panels/color/cc-color-panel.c:230
-msgid "_Import"
-msgstr "_İçe Aktar"
-
-#. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:241
-msgid "Supported ICC profiles"
-msgstr "Desteklenen ICC profilleri"
-
-#. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:248
-msgid "All files"
-msgstr "Tüm dosyalar"
-
-#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:504
-#, fuzzy
-#| msgid "All files"
-msgid "Available Profiles for Displays"
-msgstr "Tüm dosyalar"
-
-#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:508
-#, fuzzy
-#| msgid "All files"
-msgid "Available Profiles for Scanners"
-msgstr "Tüm dosyalar"
-
-#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:512
-#, fuzzy
-#| msgid "All files"
-msgid "Available Profiles for Printers"
-msgstr "Tüm dosyalar"
-
-#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:516
-#, fuzzy
-#| msgid "All files"
-msgid "Available Profiles for Cameras"
-msgstr "Tüm dosyalar"
-
-#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:520
-#, fuzzy
-#| msgid "All files"
-msgid "Available Profiles for Webcams"
-msgstr "Tüm dosyalar"
-
-#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#. * where the device type is not recognised
-#. Profiles that can be added to the device
-#: ../panels/color/cc-color-panel.c:525 ../panels/color/color.ui.h:5
-#| msgid "All files"
-msgid "Available Profiles"
-msgstr "Kullanılabilir Profiller"
-
-#. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:794
-#: ../panels/sound/gvc-mixer-dialog.c:1515
-msgid "Device"
-msgstr "Aygıt"
-
-#. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:829
-#| msgid "Applications"
-msgid "Calibration"
-msgstr "Kalibrasyon"
-
-#. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:861
-#| msgid "Settings for the selected device:"
-msgid "Create a color profile for the selected device"
-msgstr "Seçilen aygıt için bir renk profili oluştur"
-
-#. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:875 ../panels/color/cc-color-panel.c:899
-msgid ""
-"The measuring instrument is not detected. Please check it is turned on and "
-"correctly connected."
-msgstr ""
-"Ölçüm cihazı algılanamadı. Lütfen açık durumda olduğundan ve doğru "
-"bağlandığından emin olunuz."
-
-#. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:908
-msgid "The measuring instrument does not support printer profiling."
-msgstr "Ölçüm cihazı yazıcı profillemeyi desteklemiyor."
-
-#. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:919
-msgid "The device type is not currently supported."
-msgstr "Aygıt türü şu anda desteklenmiyor."
-
-#. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:992
-msgid "Cannot remove automatically added profile"
-msgstr "Otomatik olarak eklenen profil kaldırılamaz"
-
-#. TRANSLATORS: this is when there is no profile for the device
-#: ../panels/color/cc-color-panel.c:1327
-#| msgid "_Profile:"
-msgid "No profile"
-msgstr "Profil yok"
-
-#: ../panels/color/cc-color-panel.c:1358
-#, c-format
-msgid "%i year"
-msgid_plural "%i years"
-msgstr[0] "%i yıl"
-
-#: ../panels/color/cc-color-panel.c:1369
-#, c-format
-#| msgid "%i minute"
-#| msgid_plural "%i minutes"
-msgid "%i month"
-msgid_plural "%i months"
-msgstr[0] "%i ay"
-
-#: ../panels/color/cc-color-panel.c:1380
-#, c-format
-msgid "%i week"
-msgid_plural "%i weeks"
-msgstr[0] "%i hafta"
-
-#. fallback
-#: ../panels/color/cc-color-panel.c:1387
-#, c-format
-msgid "Less than 1 week"
-msgstr "1 haftadan az"
-
-#: ../panels/color/cc-color-panel.c:1449
-#| msgid "Default"
-msgctxt "Colorspace fallback"
-msgid "Default RGB"
-msgstr "Öntanımlı RGB"
-
-#: ../panels/color/cc-color-panel.c:1454
-#| msgid "Default"
-msgctxt "Colorspace fallback"
-msgid "Default CMYK"
-msgstr "Öntanımlı CMYK"
-
-#: ../panels/color/cc-color-panel.c:1459
-#| msgid "Default"
-msgctxt "Colorspace fallback"
-msgid "Default Gray"
-msgstr "Öntanımlı Gri"
-
-#: ../panels/color/cc-color-panel.c:1577 ../panels/color/cc-color-panel.c:1609
-#: ../panels/color/cc-color-panel.c:1620 ../panels/color/cc-color-panel.c:1631
-#| msgctxt "volume"
-#| msgid "Unamplified"
-msgid "Uncalibrated"
-msgstr "Ayarlanmamış"
-
-#: ../panels/color/cc-color-panel.c:1580
-#| msgid "The device is already in use."
-msgid "This device is not color managed."
-msgstr "Bu aygıt renk yönetimli değildir."
-
-#: ../panels/color/cc-color-panel.c:1612
-msgid "This device is using manufacturing calibrated data."
-msgstr "Bu aygıt, fabrika önayarlı verilerini kullanıyor."
-
-#: ../panels/color/cc-color-panel.c:1623
-msgid ""
-"This device does not have a profile suitable for whole-screen color "
-"correction."
-msgstr ""
-"Bu aygıt, tam ekran renk düzeltme için uygun bir profile sahip "
-"değil."
-
-#: ../panels/color/cc-color-panel.c:1656
-msgid "This device has an old profile that may no longer be accurate."
-msgstr "Bu aygıt artık uygun olmayabilecek eski bir profile sahip."
-
-#. TRANSLATORS: this is when the calibration profile age is not
-#. * specified as it has been autogenerated from the hardware
-#: ../panels/color/cc-color-panel.c:1684
-#| msgid "Unspecified"
-msgid "Not specified"
-msgstr "Belirtilmemiş"
-
-#. add the 'No devices detected' entry
-#: ../panels/color/cc-color-panel.c:1868
-#| msgid "The device is already in use."
-msgid "No devices supporting color management detected"
-msgstr "Renk yönetimini destekleyen hiçbir aygıt tespit edilemedi"
-
-#: ../panels/color/cc-color-panel.c:2097
-#, fuzzy
-#| msgctxt "universal access, seeing"
-#| msgid "Display"
-msgctxt "Device kind"
-msgid "Display"
-msgstr "Görünüm"
-
-#: ../panels/color/cc-color-panel.c:2099
-#| msgid "Scale"
-msgctxt "Device kind"
-msgid "Scanner"
-msgstr "Tarayıcı"
-
-#: ../panels/color/cc-color-panel.c:2101
-#| msgid "Printer"
-msgctxt "Device kind"
-msgid "Printer"
-msgstr "Yazıcı"
-
-#: ../panels/color/cc-color-panel.c:2103
-#| msgid "Name"
-msgctxt "Device kind"
-msgid "Camera"
-msgstr "Kamera"
-
-#: ../panels/color/cc-color-panel.c:2105
-#| msgid "Web"
-msgctxt "Device kind"
-msgid "Webcam"
-msgstr "Web kamerası"
-
-#: ../panels/color/color.ui.h:1
-msgid "Add a virtual device"
-msgstr "Sanal bir aygıt ekle"
-
-#: ../panels/color/color.ui.h:2
-#| msgid "Device"
-msgid "Add device"
-msgstr "Aygıt ekle"
-
-#: ../panels/color/color.ui.h:3
-#| msgid "April"
-msgid "Add profile"
-msgstr "Profil ekle"
-
-#: ../panels/color/color.ui.h:6
-msgid "Calibrate the device"
-msgstr "Aygıtı kalibre et"
-
-#: ../panels/color/color.ui.h:7
-msgid "Calibrate…"
-msgstr "Kalibrasyon..."
-
-#: ../panels/color/color.ui.h:9
-#| msgid "_Delete Files"
-msgid "Delete device"
-msgstr "Aygıtı sil"
-
-#: ../panels/color/color.ui.h:10
-#| msgid "Device types"
-msgid "Device type:"
-msgstr "Aygıt türü:"
-
-#: ../panels/color/color.ui.h:11
-msgid "Each device needs an up to date color profile to be color managed."
-msgstr ""
-"Her aygıt, renk yönetimleri için güncel bir renk profiline gereksinim duyar."
-
-#: ../panels/color/color.ui.h:12
-msgid ""
-"Image files can be dragged on this window to auto-complete the above fields."
-msgstr ""
-"Yukarıdaki alanların otomatik tamamlanması için resim dosyalarını bu "
-"pencereye sürükleyebilirsiniz."
-
-#: ../panels/color/color.ui.h:13
-msgid "Learn more"
-msgstr "Daha fazlasını öğren"
-
-#: ../panels/color/color.ui.h:14
-msgid "Learn more about color management"
-msgstr "Renk yönetimi hakkında daha fazla bilgi edinin"
-
-#: ../panels/color/color.ui.h:15
-#| msgid "_Manager:"
-msgid "Manufacturer:"
-msgstr "Üretici:"
-
-#: ../panels/color/color.ui.h:16
-#| msgid "Model"
-msgid "Model:"
-msgstr "Model:"
-
-#: ../panels/color/color.ui.h:17
-#| msgid "Remove from Favorites"
-msgid "Remove a device"
-msgstr "Bir aygıtı kaldır"
-
-#: ../panels/color/color.ui.h:18
-#| msgid "Remove from Favorites"
-msgid "Remove profile"
-msgstr "Profili kaldır"
-
-#: ../panels/color/color.ui.h:20
-msgid "Set this device for all users on this computer"
-msgstr "Bu aygıtı, bilgisayarı kullanan tüm kullanıcılar için ayarla"
-
-#: ../panels/color/color.ui.h:21
-#| msgid "Show more _details"
-msgid "View details"
-msgstr "Ayrıntıları görüntüle"
 
 #. Translators: those are keywords for the brightness and lock control-center panel
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
@@ -2927,12 +2868,10 @@ msgid "Screen turns off"
 msgstr "Ekran kapanıyor"
 
 #: ../panels/screen/screen.ui.h:15
-#| msgid "Dim screen to save power"
 msgid "_Dim screen to save power"
 msgstr "Güç tasarrufu için ekranı _karart"
 
 #: ../panels/screen/screen.ui.h:16
-#| msgid "Lock screen after:"
 msgid "_Lock screen after:"
 msgstr "Şu süre geçince ekranı _kilitle:"
 
@@ -2951,6 +2890,51 @@ msgstr "Bu uygulamanın sürümü"
 #: ../panels/sound/applet-main.c:62
 msgid " — GNOME Volume Control Applet"
 msgstr " — GNOME Ses Denetim Uygulaması"
+
+#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:1
+msgid "Show desktop volume control"
+msgstr "Masaüstü ses denetimini göster"
+
+#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:2
+msgid "Volume Control"
+msgstr "Ses Denetimi"
+
+#. Translators: those are keywords for the sound control-center panel
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
+msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;"
+msgstr "Kart;Mikrofon;Ses;Kaybolma;Denge;Bluetooth;Kulaklık Seti;"
+
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:3
+msgid "Change sound volume and sound events"
+msgstr "Olaylar için ses şiddetini değiştir"
+
+#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
+msgid "Sound"
+msgstr "Ses"
+
+#. Translators: This is the name of an audio file that sounds like the bark of a dog.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:3
+msgid "Bark"
+msgstr "Havlama"
+
+#. Translators: This is the name of an audio file that sounds like a water drip.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:6
+msgid "Drip"
+msgstr "Damlama"
+
+#. Translators: This is the name of an audio file that sounds like tapping glass.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:9
+msgid "Glass"
+msgstr "Cam"
+
+#. Translators: This is the name of an audio file that sounds sort of like a submarine sonar ping.
+#. You might want to translate it into the equivalent words of your language.
+#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:12
+msgid "Sonar"
+msgstr "Sonar"
 
 #: ../panels/sound/gvc-applet.c:270 ../panels/sound/gvc-mixer-dialog.c:1767
 msgid "Output"
@@ -3055,7 +3039,7 @@ msgstr "Tepe algılama"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1496
 #: ../panels/sound/gvc-mixer-dialog.c:1709
-#: ../panels/sound/gvc-sound-theme-chooser.c:596
+#: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "İsim"
 
@@ -3065,12 +3049,10 @@ msgid "Speaker Testing for %s"
 msgstr "%s için Hoparlör Sınaması"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1622
-#| msgid "Test Speakers"
 msgid "_Test Speakers"
 msgstr "Hoparlörleri _Sına"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1753
-#| msgid "_Output volume: "
 msgid "_Output volume:"
 msgstr "_Çıkış ses düzeyi:"
 
@@ -3084,7 +3066,6 @@ msgid "Settings for the selected device:"
 msgstr "Seçili aygıt ayarları:"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1815
-#| msgid "_Input volume: "
 msgid "_Input volume:"
 msgstr "_Giriş ses düzeyi:"
 
@@ -3109,7 +3090,6 @@ msgid "Sound Effects"
 msgstr "Ses Efektleri"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1944
-#| msgid "_Alert volume: "
 msgid "_Alert volume:"
 msgstr "_Uyarı ses düzeyi: "
 
@@ -3120,6 +3100,30 @@ msgstr "Uygulamalar"
 #: ../panels/sound/gvc-mixer-dialog.c:1961
 msgid "No application is currently playing or recording audio."
 msgstr "Herhangi bir uygulama ses kaydı ya da yürütmesi yapmıyor."
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:189
+msgid "Built-in"
+msgstr "Dahili"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:455
+#: ../panels/sound/gvc-sound-theme-chooser.c:467
+#: ../panels/sound/gvc-sound-theme-chooser.c:479
+msgid "Sound Preferences"
+msgstr "Ses Tercihleri"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:458
+#: ../panels/sound/gvc-sound-theme-chooser.c:469
+#: ../panels/sound/gvc-sound-theme-chooser.c:481
+msgid "Testing event sound"
+msgstr "Olay sesi deneniyor"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:586
+msgid "From theme"
+msgstr "Temadan"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:770
+msgid "C_hoose an alert sound:"
+msgstr "Uyarı sesi se_çin:"
 
 #: ../panels/sound/gvc-speaker-test.c:221
 msgid "Stop"
@@ -3151,198 +3155,14 @@ msgstr "S_es Tercihleri"
 msgid "Muted"
 msgstr "Sessiz"
 
-#: ../panels/sound/gvc-sound-theme-chooser.c:190
-msgid "Built-in"
-msgstr "Dahili"
-
-#: ../panels/sound/gvc-sound-theme-chooser.c:456
-#: ../panels/sound/gvc-sound-theme-chooser.c:468
-#: ../panels/sound/gvc-sound-theme-chooser.c:480
-msgid "Sound Preferences"
-msgstr "Ses Tercihleri"
-
-#: ../panels/sound/gvc-sound-theme-chooser.c:459
-#: ../panels/sound/gvc-sound-theme-chooser.c:470
-#: ../panels/sound/gvc-sound-theme-chooser.c:482
-msgid "Testing event sound"
-msgstr "Olay sesi deneniyor"
-
-#: ../panels/sound/gvc-sound-theme-chooser.c:587
-msgid "From theme"
-msgstr "Temadan"
-
-#: ../panels/sound/gvc-sound-theme-chooser.c:782
-msgid "C_hoose an alert sound:"
-msgstr "Uyarı sesi se_çin:"
-
 #: ../panels/sound/sound-theme-file-utils.c:292
 msgid "Custom"
 msgstr "Özel"
 
-#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:1
-msgid "Show desktop volume control"
-msgstr "Masaüstü ses denetimini göster"
-
-#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:2
-msgid "Volume Control"
-msgstr "Ses Denetimi"
-
-#. Translators: those are keywords for the sound control-center panel
-#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
-msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;"
-msgstr "Kart;Mikrofon;Ses;Kaybolma;Denge;Bluetooth;Kulaklık Seti;"
-
-#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:3
-msgid "Change sound volume and sound events"
-msgstr "Olaylar için ses şiddetini değiştir"
-
-#: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
-msgid "Sound"
-msgstr "Ses"
-
-#. Translators: This is the name of an audio file that sounds like the bark of a dog.
-#. You might want to translate it into the equivalent words of your language.
-#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:3
-msgid "Bark"
-msgstr "Havlama"
-
-#. Translators: This is the name of an audio file that sounds like a water drip.
-#. You might want to translate it into the equivalent words of your language.
-#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:6
-msgid "Drip"
-msgstr "Damlama"
-
-#. Translators: This is the name of an audio file that sounds like tapping glass.
-#. You might want to translate it into the equivalent words of your language.
-#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:9
-msgid "Glass"
-msgstr "Cam"
-
-#. Translators: This is the name of an audio file that sounds sort of like a submarine sonar ping.
-#. You might want to translate it into the equivalent words of your language.
-#: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:12
-msgid "Sonar"
-msgstr "Sonar"
-
-#: ../panels/universal-access/cc-ua-panel.c:504
-#: ../panels/universal-access/cc-ua-panel.c:510
+#: ../panels/universal-access/cc-ua-panel.c:445
+#: ../panels/universal-access/cc-ua-panel.c:451
 msgid "No shortcut set"
 msgstr "Kısayol belirlenmemiş"
-
-#: ../panels/universal-access/gconf-property-editor.c:134
-msgid "Key"
-msgstr "Anahtar"
-
-#: ../panels/universal-access/gconf-property-editor.c:135
-msgid "GConf key to which this property editor is attached"
-msgstr "Bu özellik düzenleyicisinin bağlı olduğu GConf anahtarı"
-
-#: ../panels/universal-access/gconf-property-editor.c:141
-msgid "Callback"
-msgstr "Geriçağır"
-
-#: ../panels/universal-access/gconf-property-editor.c:142
-msgid "Issue this callback when the value associated with key gets changed"
-msgstr "Bu geriçağırımı anahtar ile alakalı değer değiştiği zaman kullanın"
-
-#: ../panels/universal-access/gconf-property-editor.c:147
-msgid "Change set"
-msgstr "Değiştirme takımı"
-
-#: ../panels/universal-access/gconf-property-editor.c:148
-msgid ""
-"GConf change set containing data to be forwarded to the gconf client on apply"
-msgstr ""
-"GConf değiştirme takımı gconf istemcisine uygulandığında yönlendirilecek "
-"verileri içerir"
-
-#: ../panels/universal-access/gconf-property-editor.c:153
-msgid "Conversion to widget callback"
-msgstr "Parça geriçağırımına dönüşüm"
-
-#: ../panels/universal-access/gconf-property-editor.c:154
-msgid ""
-"Callback to be issued when data are to be converted from GConf to the widget"
-msgstr "Veri GConf'dan parçacığa dönüştüğünde uygulanacak geriçağırım"
-
-#: ../panels/universal-access/gconf-property-editor.c:159
-msgid "Conversion from widget callback"
-msgstr "Parçadan dönüşüm geriçağırımı"
-
-#: ../panels/universal-access/gconf-property-editor.c:160
-msgid ""
-"Callback to be issued when data are to be converted to GConf from the widget"
-msgstr "Veri parçadan GConf'a dönüştüğünde uygulanacak geriçağırım"
-
-#: ../panels/universal-access/gconf-property-editor.c:165
-msgid "UI Control"
-msgstr "Arayüz Kontrolü"
-
-#: ../panels/universal-access/gconf-property-editor.c:166
-msgid "Object that controls the property (normally a widget)"
-msgstr "Bir özelliği kontrol eden nesne (genellikle bir parçacık)"
-
-#: ../panels/universal-access/gconf-property-editor.c:181
-msgid "Property editor object data"
-msgstr "Özellik düzenleyici nesne verisi"
-
-#: ../panels/universal-access/gconf-property-editor.c:182
-msgid "Custom data required by the specific property editor"
-msgstr "Belli özellik düzenleyicileri için gerekli tercihsel veri"
-
-#: ../panels/universal-access/gconf-property-editor.c:188
-msgid "Property editor data freeing callback"
-msgstr "Özellik düzenleyici veri boşaltma geriçağırımı"
-
-#: ../panels/universal-access/gconf-property-editor.c:189
-msgid "Callback to be issued when property editor object data is to be freed"
-msgstr ""
-"Özellik düzenleyici nesne verisi boşaltılacağında kullanılacak geriçağırım"
-
-#: ../panels/universal-access/gconf-property-editor.c:1474
-#, c-format
-msgid ""
-"Couldn't find the file '%s'.\n"
-"\n"
-"Please make sure it exists and try again, or choose a different background "
-"picture."
-msgstr ""
-"'%s' dosyası bulunamadı.\n"
-"\n"
-"Lütfen dosyanın bulunduğundan emin olun ve tekrar deneyin, ya da farklı bir "
-"arkaplan resmi kullanın."
-
-#: ../panels/universal-access/gconf-property-editor.c:1482
-#, c-format
-msgid ""
-"I don't know how to open the file '%s'.\n"
-"Perhaps it's a kind of picture that is not yet supported.\n"
-"\n"
-"Please select a different picture instead."
-msgstr ""
-"'%s' dosyası açılamıyor.\n"
-"Bu resim, henüz desteklenmiyor olabilir.\n"
-"\n"
-"Lütfen bunun yerine başka bir resim seçin."
-
-#: ../panels/universal-access/gconf-property-editor.c:1604
-msgid "Please select an image."
-msgstr "Lütfen bir resim seçin."
-
-#: ../panels/universal-access/zoom-options.c:156
-#| msgid "Screen"
-msgid "1/4 Screen"
-msgstr "Ekranın 1/4'ü"
-
-#: ../panels/universal-access/zoom-options.c:157
-#| msgid "Screen"
-msgid "1/2 Screen"
-msgstr "Ekranın 1/2'si"
-
-#: ../panels/universal-access/zoom-options.c:158
-#| msgid "Screen"
-msgid "3/4 Screen"
-msgstr "Ekranın 3/4'ü"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
@@ -3350,9 +3170,9 @@ msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;"
 "AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys"
 msgstr ""
-"Klavye;Fare;a11y;Erişebilirlik;Karşıtlık;Yakınlaştırma;Ekran "
-"Okuyucusu;metin;yazı tipi;boyut;"
-"AccessX;Yapışkan Tuşlar;Yavaş Tuşlar;Seken Tuşlar;Fare Tuşları"
+"Klavye;Fare;a11y;Erişebilirlik;Karşıtlık;Yakınlaştırma;Ekran Okuyucusu;metin;"
+"yazı tipi;boyut;AccessX;Yapışkan Tuşlar;Yavaş Tuşlar;Seken Tuşlar;Fare "
+"Tuşları"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
@@ -3379,12 +3199,10 @@ msgid "75%"
 msgstr "%75"
 
 #: ../panels/universal-access/uap.ui.h:9
-#| msgid "Acceptance delay:"
 msgid "A_cceptance delay:"
 msgstr "K_abul gecikmesi:"
 
 #: ../panels/universal-access/uap.ui.h:10
-#| msgid "Acceptance delay:"
 msgid "Acc_eptance delay:"
 msgstr "Kab_ul gecikmesi:"
 
@@ -3393,7 +3211,6 @@ msgid "Beep when Caps and Num Lock are used"
 msgstr "Caps ve Num Lock kullanıldığında biple"
 
 #: ../panels/universal-access/uap.ui.h:12
-#| msgid "Beep when a modifer key is pressed"
 msgid "Beep when a _modifer key is pressed"
 msgstr "_Değiştirici tuşa basıldığında biple"
 
@@ -3403,7 +3220,6 @@ msgid "Beep when a key is"
 msgstr "Tuş biplemesi"
 
 #: ../panels/universal-access/uap.ui.h:15
-#| msgid "Beep when a key is rejected"
 msgid "Beep when a key is _rejected"
 msgstr "Bir tuş _reddedildiğinde biple"
 
@@ -3480,7 +3296,6 @@ msgid "Increase size:"
 msgstr "Boyutu artır:"
 
 #: ../panels/universal-access/uap.ui.h:39
-#| msgid "_Motion threshold:"
 msgid "Motion _threshold:"
 msgstr "Hareket _eşiği:"
 
@@ -3489,7 +3304,6 @@ msgid "Mouse Keys"
 msgstr "Fare Tuşları"
 
 #: ../panels/universal-access/uap.ui.h:41
-#| msgid "Mouse Settings"
 msgid "Mouse Settings"
 msgstr "Fare Ayarları"
 
@@ -3526,7 +3340,6 @@ msgid "Screen keyboard"
 msgstr "Ekran Klavyesi"
 
 #: ../panels/universal-access/uap.ui.h:51
-#| msgid "Seco_ndary click:"
 msgid "Secondary click delay"
 msgstr "İkinci tıklama gecikmesi"
 
@@ -3595,27 +3408,22 @@ msgid "Zoom out:"
 msgstr "Uzaklaştırma"
 
 #: ../panels/universal-access/uap.ui.h:74
-#| msgid "Contrast:"
 msgid "_Contrast:"
 msgstr "_Karşıtlık:"
 
 #: ../panels/universal-access/uap.ui.h:75
-#| msgid "Disable if two keys are pressed together"
 msgid "_Disable if two keys are pressed together"
 msgstr "İki tuşa birden basıldığında _devre dışı bırak"
 
 #: ../panels/universal-access/uap.ui.h:76
-#| msgid "Test flash"
 msgid "_Test flash"
 msgstr "_Flaşı sına"
 
 #: ../panels/universal-access/uap.ui.h:77
-#| msgid "Text size:"
 msgid "_Text size:"
 msgstr "_Yazı boyutu:"
 
 #: ../panels/universal-access/uap.ui.h:78
-#| msgid "Turn on accessibility features from the keyboard"
 msgid "_Turn on accessibility features from the keyboard"
 msgstr "Erişilebilirlik özelliklerini klavyeden _aç"
 
@@ -3667,28 +3475,36 @@ msgid "Zoom"
 msgstr "Odaklama"
 
 #: ../panels/universal-access/uap.ui.h:93
-#| msgid "Large"
 msgctxt "universal access, text size"
 msgid "Large"
 msgstr "Büyük"
 
 #: ../panels/universal-access/uap.ui.h:94
-#| msgid "Larger"
 msgctxt "universal access, text size"
 msgid "Larger"
 msgstr "Daha Büyük"
 
 #: ../panels/universal-access/uap.ui.h:95
-#| msgid "Normal"
 msgctxt "universal access, text size"
 msgid "Normal"
 msgstr "Normal"
 
 #: ../panels/universal-access/uap.ui.h:96
-#| msgid "Small"
 msgctxt "universal access, text size"
 msgid "Small"
 msgstr "Küçük"
+
+#: ../panels/universal-access/zoom-options.c:156
+msgid "1/4 Screen"
+msgstr "Ekranın 1/4'ü"
+
+#: ../panels/universal-access/zoom-options.c:157
+msgid "1/2 Screen"
+msgstr "Ekranın 1/2'si"
+
+#: ../panels/universal-access/zoom-options.c:158
+msgid "3/4 Screen"
+msgstr "Ekranın 3/4'ü"
 
 #: ../panels/universal-access/zoom-options.ui.h:1
 msgid "Always"
@@ -3699,7 +3515,6 @@ msgid "Bottom Half"
 msgstr "Alt Yarı"
 
 #: ../panels/universal-access/zoom-options.ui.h:3
-#| msgid "Center"
 msgid "Centered"
 msgstr "Ortalanmış"
 
@@ -3712,40 +3527,36 @@ msgid "Crosshairs"
 msgstr "Artılar"
 
 #: ../panels/universal-access/zoom-options.ui.h:6
-#| msgid "Screen"
 msgid "Full Screen"
 msgstr "Tam Ekran"
 
 #: ../panels/universal-access/zoom-options.ui.h:8
 msgid "Image moves with the mouse pointer"
-msgstr ""
+msgstr "Görüntü, fare işaretçisiyle birlikte hareket eder"
 
 #: ../panels/universal-access/zoom-options.ui.h:9
 msgid "Image scrolls at screen edges"
-msgstr ""
+msgstr "Görüntü, ekran kenarlarında kaydırılır"
 
 #: ../panels/universal-access/zoom-options.ui.h:10
-#| msgid "Left"
 msgid "Left Half"
 msgstr "Sol Yarı"
 
 #: ../panels/universal-access/zoom-options.ui.h:11
-#| msgid "Left"
 msgid "Length"
 msgstr "Uzunluk"
 
 #: ../panels/universal-access/zoom-options.ui.h:14
-#| msgid "Magnifier zoom in"
 msgid "Magnification"
 msgstr "Büyütme"
 
 #: ../panels/universal-access/zoom-options.ui.h:15
 msgid "Moveable lens - magnified view follows mouse movements"
-msgstr ""
+msgstr "Hareketli mercek - büyütülmüş görüntü, fare hareketlerini izler"
 
 #: ../panels/universal-access/zoom-options.ui.h:17
 msgid "Position of magnified view on screen"
-msgstr ""
+msgstr "Büyütülmüş görüntünün ekrandaki konumu"
 
 #: ../panels/universal-access/zoom-options.ui.h:18
 msgid "Proportional"
@@ -3753,21 +3564,19 @@ msgstr "Orantılı"
 
 #: ../panels/universal-access/zoom-options.ui.h:19
 msgid "Push"
-msgstr ""
+msgstr "Gönder"
 
 #: ../panels/universal-access/zoom-options.ui.h:20
-#| msgid "Right"
 msgid "Right Half"
 msgstr "Sağ Yarı"
 
 #: ../panels/universal-access/zoom-options.ui.h:23
-#| msgid "_Show"
 msgid "Show"
 msgstr "Göster"
 
 #: ../panels/universal-access/zoom-options.ui.h:24
 msgid "Show crosshairs intersection"
-msgstr ""
+msgstr "Artı işareti kesişimlerini göster"
 
 #. long delay
 #: ../panels/universal-access/zoom-options.ui.h:26
@@ -3780,26 +3589,281 @@ msgstr "Kalınlık"
 
 #. short delay
 #: ../panels/universal-access/zoom-options.ui.h:29
-#| msgid "Typing"
 msgid "Thin"
 msgstr "İnce"
 
 #: ../panels/universal-access/zoom-options.ui.h:30
 msgid "To keep the pointer centered"
-msgstr ""
+msgstr "İşaretçiyi ortada tutmak için"
 
 #: ../panels/universal-access/zoom-options.ui.h:31
 msgid "To keep the pointer visible"
-msgstr ""
+msgstr "İşaretçiyi görünür tutmak için"
 
 #: ../panels/universal-access/zoom-options.ui.h:32
 msgid "Top Half"
 msgstr "Üst Yarı"
 
 #: ../panels/universal-access/zoom-options.ui.h:33
-#| msgid "Login Options"
 msgid "Zoom Options"
 msgstr "Yakınlaştırma Seçenekleri"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:1
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
+#: ../panels/user-accounts/um-account-type.c:37
+msgctxt "Account type"
+msgid "Administrator"
+msgstr "Yönetici"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:2
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
+#: ../panels/user-accounts/um-account-type.c:35
+msgctxt "Account type"
+msgid "Standard"
+msgstr "Standart"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:3
+msgid "Cr_eate"
+msgstr "_Oluştur"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:4
+msgid "Create new account"
+msgstr "Yeni hesap oluştur"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:5
+msgid "_Account Type"
+msgstr "_Hesap Türü"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
+msgid "_Full name"
+msgstr "_Tam İsim"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:7
+msgid "_Username"
+msgstr "_Kullanıcı adı"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:1
+#: ../panels/user-accounts/um-fingerprint-dialog.c:571
+msgid "Enable Fingerprint Login"
+msgstr "Parmak İzi Girişi Etkinleştir"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:2
+msgid "Left little finger"
+msgstr "Sol serçe parmağı"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:3
+msgid "Left middle finger"
+msgstr "Sol orta parmak"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:4
+msgid "Left ring finger"
+msgstr "Sol yüzük parmağı"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:5
+msgid "Left thumb"
+msgstr "Sol başparmak"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:6
+msgid "Right little finger"
+msgstr "Sağ serçe parmağı"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:7
+msgid "Right middle finger"
+msgstr "Sağ orta parmağı"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:8
+msgid "Right ring finger"
+msgstr "Sağ yüzük parmağı"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:9
+msgid "Right thumb"
+msgstr "Sağ başparmak"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:10
+msgid ""
+"Your fingerprint was successfully saved. You should now be able to log in "
+"using your fingerprint reader."
+msgstr ""
+"Parmak iziniz başarıyla kaydedildi. Artık parmak izi okuyucusunu kullanarak "
+"giriş yapabilirsiniz."
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:11
+#| msgid "Left index finger"
+msgid "_Left index finger"
+msgstr "_Sol işaret parmağı"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:12
+#| msgid "Other finger: "
+msgid "_Other finger:"
+msgstr "_Diğer parmak:"
+
+#: ../panels/user-accounts/data/account-fingerprint.ui.h:13
+#| msgid "Right index finger"
+msgid "_Right index finger"
+msgstr "_Sağ işaret parmağı"
+
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
+msgid "Add or remove users"
+msgstr "Kullanıcı ekle ya da sil"
+
+#. Translators: those are keywords for the user accounts control-center panel
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:3
+msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
+msgstr "Giriş;İsim;Parmak izi;Kullanıcı simgesi;Logo;Yüz;Parola;"
+
+#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
+msgid "User Accounts"
+msgstr "Kullanıcı Hesapları"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:1
+msgid "C_onfirm password"
+msgstr "Parolayı _onayla"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:2
+msgid "Ch_ange"
+msgstr "D_eğiştir"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:3
+msgid "Changing password for"
+msgstr "Parola değiştiriliyor"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:4
+msgid "Choose a generated password"
+msgstr "Üretilen parolalardan birini seçin"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:5
+msgid "Choose password at next login"
+msgstr "Sonraki girişte parola seç"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:6
+msgid "Current _password"
+msgstr "Mevcut p_arola"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:7
+msgid "Disable this account"
+msgstr "Bu hesabı devre dışı bırak"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:8
+msgid "Enable this account"
+msgstr "Bu hesabı etkinleştir"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:9
+msgid "Fair"
+msgstr "Orta"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:10
+msgid "How to choose a strong password"
+msgstr "Nasıl güçlü bir parola seçilir"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:11
+msgid "Log in without a password"
+msgstr "Parolasız giriş yap"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:12
+msgid "Set a password now"
+msgstr "Şimdi parola belirle"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:13
+#| msgid ""
+#| "<small>This hint may be displayed at the login screen.  It will be "
+#| "visible to all users of this system.  Do <b>not</b> include the password "
+#| "here.</small>"
+msgid ""
+"This hint may be displayed at the login screen.  It will be visible to all "
+"users of this system.  Do <b>not</b> include the password here."
+msgstr ""
+"Bu ipucu, giriş ekranında gösterilebilir.  Bu sistemdeki tüm "
+"kullanıcılarca görülebilecektir.  Buraya parolanızı <b>yazmayın.</b>"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:14
+msgid "_Action"
+msgstr "_Eylem"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:15
+msgid "_Hint"
+msgstr "_İpucu"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:16
+msgid "_New password"
+msgstr "Yeni p_arola"
+
+#: ../panels/user-accounts/data/password-dialog.ui.h:17
+msgid "_Show password"
+msgstr "Parolayı _Göster"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:1
+msgid "Browse"
+msgstr "Gözat"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:3
+msgid "Cancel"
+msgstr "İptal"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:4
+msgid "Changing photo for:"
+msgstr "Kullanıcının fotosu değiştiriliyor:"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:5
+msgid ""
+"Choose a picture that will be shown at the login screen for this account."
+msgstr "Giriş ekranında bu hesap için kullanılacak bir resim seçin."
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:6
+msgid "Gallery"
+msgstr "Galeri"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:7
+msgid "Photograph"
+msgstr "Fotoğrafçılık"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:8
+#: ../panels/user-accounts/um-photo-dialog.c:97
+msgid "Select"
+msgstr "Seç"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:9
+msgid "Take a photograph"
+msgstr "Fotograf çek"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
+msgid "A_utomatic Login"
+msgstr "_Otomatik Giriş"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
+msgid "Account Information"
+msgstr "Hesap bilgisi"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
+msgid "Account _type"
+msgstr "Hesap _türü"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+msgid "Add User Account"
+msgstr "Kullanıcı Hesabı Ekle"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
+msgid "Login Options"
+msgstr "Giriş Seçenekleri"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "Remove User Account"
+msgstr "Kullanıcı Hesabını Kaldır"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
+msgid "User Icon"
+msgstr "Kullanıcı Simgesi"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
+msgid "_Fingerprint Login"
+msgstr "_Parmak İziyle Giriş"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
+msgid "_Language"
+msgstr "_Dil"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
+msgid "_Password"
+msgstr "_Parola"
 
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
@@ -3854,20 +3918,6 @@ msgstr "Bilinmeyen hata"
 #: ../panels/user-accounts/um-account-dialog.c:73
 msgid "Failed to create user"
 msgstr "Kullanıcı oluşturma başarısız oldu"
-
-#: ../panels/user-accounts/um-account-type.c:35
-#: ../panels/user-accounts/data/account-dialog.ui.h:2
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
-msgctxt "Account type"
-msgid "Standard"
-msgstr "Standart"
-
-#: ../panels/user-accounts/um-account-type.c:37
-#: ../panels/user-accounts/data/account-dialog.ui.h:1
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:4
-msgctxt "Account type"
-msgid "Administrator"
-msgstr "Yönetici"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:107
 msgid ""
@@ -3932,11 +3982,6 @@ msgstr "Hiçbir parmak izi okuyucusuna erişilemedi"
 msgid "Please contact your system administrator for help."
 msgstr "Lütfen yardım için sistem yöneticinizle bağlantıya geçin."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:571
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:1
-msgid "Enable Fingerprint Login"
-msgstr "Parmak İzi Girişi Etkinleştir"
-
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
@@ -3952,20 +3997,16 @@ msgstr ""
 "s' aygıtını kullanarak kaydetmelisiniz."
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:612
-#, fuzzy
 #| msgid "Select finger"
 msgid "Selecting finger"
-msgstr "Parmak seç"
+msgstr "Parmak seçiliyor"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:613
-#, fuzzy
 #| msgid ""
 #| "Enrolling fingerprints for\n"
 #| "<b><big>%s</big></b>"
 msgid "Enrolling fingerprints"
-msgstr ""
-"Parmak izi kaydediliyor\n"
-"<b><big>%s</big></b>"
+msgstr "Parmak izleri kaydediliyor"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:614
 msgid "Summary"
@@ -4044,11 +4085,6 @@ msgstr "Parolalar uyuşmuyor"
 #: ../panels/user-accounts/um-password-dialog.c:540
 msgid "Wrong password"
 msgstr "Hatalı parola"
-
-#: ../panels/user-accounts/um-photo-dialog.c:97
-#: ../panels/user-accounts/data/photo-dialog.ui.h:8
-msgid "Select"
-msgstr "Seç"
 
 #: ../panels/user-accounts/um-photo-dialog.c:445
 msgid "Disable image"
@@ -4149,15 +4185,11 @@ msgstr ""
 "önce * simgesine tıklayın"
 
 #: ../panels/user-accounts/um-user-panel.c:926
-#| msgid "Create new account"
 msgid "Create a user account"
 msgstr "Kullanıcı hesabı oluştur"
 
 #: ../panels/user-accounts/um-user-panel.c:937
 #: ../panels/user-accounts/um-user-panel.c:1226
-#| msgid ""
-#| "To create a user,\n"
-#| "click the * icon first"
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -4166,15 +4198,11 @@ msgstr ""
 "önce * simgesine tıklayın"
 
 #: ../panels/user-accounts/um-user-panel.c:946
-#| msgid "Delete the selected user"
 msgid "Delete the selected user account"
 msgstr "Seçilen kullanıcı hesabını sil"
 
 #: ../panels/user-accounts/um-user-panel.c:958
 #: ../panels/user-accounts/um-user-panel.c:1231
-#| msgid ""
-#| "To delete the selected user,\n"
-#| "click the * icon first"
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -4205,11 +4233,6 @@ msgid "The username cannot start with a '-'"
 msgstr "Kullanıcı adı '-' ile başlayamaz"
 
 #: ../panels/user-accounts/um-utils.c:522
-#| msgid ""
-#| "The username must consist of:\n"
-#| " ➣ letters from the English alphabet\n"
-#| " ➣ digits\n"
-#| " ➣ any of the characters '.', '-' and '_'"
 msgid ""
 "The username must only consist of:\n"
 " ➣ letters from the English alphabet\n"
@@ -4221,384 +4244,6 @@ msgstr ""
 " ➣ rakamlar\n"
 " ➣ '.', '-' ve '_' karakterlerinden herhangi biri"
 
-#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
-msgid "Add or remove users"
-msgstr "Kullanıcı ekle ya da sil"
-
-#. Translators: those are keywords for the user accounts control-center panel
-#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:3
-msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
-msgstr "Giriş;İsim;Parmak izi;Kullanıcı simgesi;Logo;Yüz;Parola;"
-
-#: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:4
-msgid "User Accounts"
-msgstr "Kullanıcı Hesapları"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:3
-msgid "Cr_eate"
-msgstr "_Oluştur"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:4
-msgid "Create new account"
-msgstr "Yeni hesap oluştur"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:5
-msgid "_Account Type"
-msgstr "_Hesap Türü"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:6
-msgid "_Full name"
-msgstr "_Tam İsim"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:7
-msgid "_Username"
-msgstr "_Kullanıcı adı"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:1
-msgid "C_onfirm password"
-msgstr "Parolayı _onayla"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:2
-msgid "Ch_ange"
-msgstr "D_eğiştir"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:3
-msgid "Changing password for"
-msgstr "Parola değiştiriliyor"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:4
-msgid "Choose a generated password"
-msgstr "Üretilen parolalardan birini seçin"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:5
-msgid "Choose password at next login"
-msgstr "Sonraki girişte parola seç"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:6
-msgid "Current _password"
-msgstr "Mevcut p_arola"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:7
-msgid "Disable this account"
-msgstr "Bu hesabı devre dışı bırak"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:8
-msgid "Enable this account"
-msgstr "Bu hesabı etkinleştir"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:9
-msgid "Fair"
-msgstr "Orta"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:10
-msgid "How to choose a strong password"
-msgstr "Nasıl güçlü bir parola seçilir"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:11
-msgid "Log in without a password"
-msgstr "Parolasız giriş yap"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:12
-msgid "Set a password now"
-msgstr "Şimdi parola belirle"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:13
-#, fuzzy
-#| msgid ""
-#| "<small>This hint may be displayed at the login screen.  It will be "
-#| "visible to all users of this system.  Do <b>not</b> include the password "
-#| "here.</small>"
-msgid ""
-"This hint may be displayed at the login screen.  It will be visible to all "
-"users of this system.  Do <b>not</b> include the password here."
-msgstr ""
-"<small>Bu ipucu giriş ekranında gösterilebilir.  Bu sistemdeki tüm "
-"kullanıcılarca görülebilir.  Buraya <b>kesinlikle</b> parolanızı yazmayın.</"
-"small>"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:14
-msgid "_Action"
-msgstr "_Eylem"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:15
-msgid "_Hint"
-msgstr "_İpucu"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:16
-msgid "_New password"
-msgstr "Yeni p_arola"
-
-#: ../panels/user-accounts/data/password-dialog.ui.h:17
-msgid "_Show password"
-msgstr "Parolayı _Göster"
-
-#: ../panels/user-accounts/data/photo-dialog.ui.h:1
-msgid "Browse"
-msgstr "Gözat"
-
-#: ../panels/user-accounts/data/photo-dialog.ui.h:3
-msgid "Cancel"
-msgstr "İptal"
-
-#: ../panels/user-accounts/data/photo-dialog.ui.h:4
-msgid "Changing photo for:"
-msgstr "Kullanıcının fotosu değiştiriliyor:"
-
-#: ../panels/user-accounts/data/photo-dialog.ui.h:5
-msgid ""
-"Choose a picture that will be shown at the login screen for this account."
-msgstr "Giriş ekranında bu hesap için kullanılacak bir resim seçin."
-
-#: ../panels/user-accounts/data/photo-dialog.ui.h:6
-msgid "Gallery"
-msgstr "Galeri"
-
-#: ../panels/user-accounts/data/photo-dialog.ui.h:7
-msgid "Photograph"
-msgstr "Fotoğrafçılık"
-
-#: ../panels/user-accounts/data/photo-dialog.ui.h:9
-msgid "Take a photograph"
-msgstr "Fotograf çek"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
-#| msgid "Automatic Login"
-msgid "A_utomatic Login"
-msgstr "_Otomatik Giriş"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:2
-msgid "Account Information"
-msgstr "Hesap bilgisi"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
-#| msgid "Account type"
-msgid "Account _type"
-msgstr "Hesap _türü"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
-#| msgid "User Accounts"
-msgid "Add User Account"
-msgstr "Kullanıcı Hesabı Ekle"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
-msgid "Login Options"
-msgstr "Giriş Seçenekleri"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
-#| msgid "User Accounts"
-msgid "Remove User Account"
-msgstr "Kullanıcı Hesabını Kaldır"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
-#| msgid "User Accounts"
-msgid "User Icon"
-msgstr "Kullanıcı Simgesi"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
-#| msgid "Fingerprint Login"
-msgid "_Fingerprint Login"
-msgstr "_Parmak İziyle Giriş"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:11
-#| msgid "Language"
-msgid "_Language"
-msgstr "_Dil"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:12
-#| msgid "Password"
-msgid "_Password"
-msgstr "_Parola"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:2
-msgid "Left little finger"
-msgstr "Sol serçe parmağı"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:3
-msgid "Left middle finger"
-msgstr "Sol orta parmak"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:4
-msgid "Left ring finger"
-msgstr "Sol yüzük parmağı"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:5
-msgid "Left thumb"
-msgstr "Sol başparmak"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:6
-msgid "Right little finger"
-msgstr "Sağ serçe parmağı"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:7
-msgid "Right middle finger"
-msgstr "Sağ orta parmağı"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:8
-msgid "Right ring finger"
-msgstr "Sağ yüzük parmağı"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-msgid "Right thumb"
-msgstr "Sağ başparmak"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:10
-msgid ""
-"Your fingerprint was successfully saved. You should now be able to log in "
-"using your fingerprint reader."
-msgstr ""
-"Parmak iziniz başarıyla kaydedildi. Artık parmak izi okuyucusunu kullanarak "
-"giriş yapabilirsiniz."
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:11
-#, fuzzy
-#| msgid "Left index finger"
-msgid "_Left index finger"
-msgstr "Sol işaret parmağı"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:12
-#, fuzzy
-#| msgid "Other finger: "
-msgid "_Other finger:"
-msgstr "Diğer parmak:"
-
-#: ../panels/user-accounts/data/account-fingerprint.ui.h:13
-#, fuzzy
-#| msgid "Right index finger"
-msgid "_Right index finger"
-msgstr "Sağ işaret parmağı"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:1
-#, fuzzy
-#| msgid "_Back"
-msgid "Back"
-msgstr "_Geri"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:2
-#, fuzzy
-#| msgid "Bluetooth"
-msgid "Bluetooth Settings"
-msgstr "Bluetooth"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:3
-#, fuzzy
-#| msgid "Create..."
-msgid "Calibrate..."
-msgstr "Oluştur..."
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:4
-msgid "Eraser Pressure Feel"
-msgstr ""
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:5
-msgid "Firm"
-msgstr "Sıkı"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:6
-msgid "Forward"
-msgstr ""
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:7
-msgid "Left Mouse Button Click"
-msgstr ""
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:8
-msgid "Left-Handed Orientation:"
-msgstr ""
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:9
-#, fuzzy
-#| msgid "Alert Buttons"
-msgid "Lower Button"
-msgstr "Uyarı Düğmeleri"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:10
-msgid "Middle Mouse Button Click"
-msgstr ""
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:11
-#, fuzzy
-#| msgid "Action"
-msgid "No Action"
-msgstr "Eylem"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
-msgid "No tablet detected"
-msgstr ""
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
-msgid "Please plug in or turn on your Wacom tablet"
-msgstr ""
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:14
-msgid "Right Mouse Button Click"
-msgstr ""
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:15
-#, fuzzy
-#| msgid "Scrolling"
-msgid "Scroll Down"
-msgstr "Kaydırma"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:16
-#, fuzzy
-#| msgid "Scrolling"
-msgid "Scroll Left"
-msgstr "Kaydırma"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:17
-#, fuzzy
-#| msgid "Scrolling"
-msgid "Scroll Right"
-msgstr "Kaydırma"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:18
-#, fuzzy
-#| msgid "Scrolling"
-msgid "Scroll Up"
-msgstr "Kaydırma"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:19
-msgid "Soft"
-msgstr "Yumuşak"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:20
-#, fuzzy
-#| msgid "_Style:"
-msgid "Stylus"
-msgstr "_Stil:"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:21
-msgid "Tablet (absolute)"
-msgstr ""
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:22
-#, fuzzy
-#| msgid "Preferences"
-msgid "Tablet Preferences"
-msgstr "Tercihler"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:23
-msgid "Tip Pressure Feel"
-msgstr ""
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:24
-#, fuzzy
-#| msgid "Alert Buttons"
-msgid "Top Button"
-msgstr "Uyarı Düğmeleri"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:25
-msgid "Touchpad (relative)"
-msgstr ""
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:26
-msgid "Tracking Mode"
-msgstr ""
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:27
-msgid "Wacom Tablet"
-msgstr "Wacom Tablet"
-
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
 msgid "Set your Wacom tablet preferences"
 msgstr "Wacom tablet tercihlerinizi ayarlayın"
@@ -4606,11 +4251,131 @@ msgstr "Wacom tablet tercihlerinizi ayarlayın"
 #. Translators: those are keywords for the wacom tablet control-center panel
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:3
 msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
-msgstr ""
+msgstr "Tablet;Wacom;Kalem;Silgi;Fare;"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:4
 msgid "Wacom Graphics Tablet"
-msgstr ""
+msgstr "Wacom Grafik Tablet"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:1
+#| msgid "_Back"
+msgid "Back"
+msgstr "Geri"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:2
+#| msgid "Bluetooth"
+msgid "Bluetooth Settings"
+msgstr "Bluetooth Ayarları"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:3
+#| msgid "Create..."
+msgid "Calibrate..."
+msgstr "Kalibrasyon..."
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:4
+msgid "Eraser Pressure Feel"
+msgstr "Silgi Basınç Hissi"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
+msgid "Firm"
+msgstr "Sıkı"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:6
+msgid "Forward"
+msgstr "İleri"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:7
+msgid "Left Mouse Button Click"
+msgstr "Sol Fare Düğmesi Tıklaması"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
+msgid "Left-Handed Orientation:"
+msgstr "Sol Elle Kullanım Yerleşimi:"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
+#| msgid "Alert Buttons"
+msgid "Lower Button"
+msgstr "Aşağı Tuşu"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+msgid "Middle Mouse Button Click"
+msgstr "Orta Fare Düğmesi Tıklaması"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:11
+#| msgid "Action"
+msgid "No Action"
+msgstr "Eylem Yok"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+msgid "No tablet detected"
+msgstr "Tablet bulunamadı"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+msgid "Please plug in or turn on your Wacom tablet"
+msgstr "Lütfen Wacom tabletinizi açın veya bağlayın"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:14
+msgid "Right Mouse Button Click"
+msgstr "Sağ Fare Düğmesi Tıklaması"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:15
+#| msgid "Scrolling"
+msgid "Scroll Down"
+msgstr "Aşağı Kaydır"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:16
+#| msgid "Scrolling"
+msgid "Scroll Left"
+msgstr "Sola Kaydır"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:17
+#| msgid "Scrolling"
+msgid "Scroll Right"
+msgstr "Sağa Kaydır"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:18
+#| msgid "Scrolling"
+msgid "Scroll Up"
+msgstr "Yukarı Kaydır"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:19
+msgid "Soft"
+msgstr "Yumuşak"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:20
+#| msgid "_Style:"
+msgid "Stylus"
+msgstr "Tablet Kalemi (Stylus)"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:21
+msgid "Tablet (absolute)"
+msgstr "Tablet (mutlak)"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:22
+#| msgid "Preferences"
+msgid "Tablet Preferences"
+msgstr "Tablet Tercihleri"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:23
+msgid "Tip Pressure Feel"
+msgstr "Parmak Ucu Basınç Hissi"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:24
+#| msgid "Alert Buttons"
+msgid "Top Button"
+msgstr "Üst Düğme"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:25
+msgid "Touchpad (relative)"
+msgstr "Dokunmatik Yüzey (Touchpad) (göreceli)"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:26
+msgid "Tracking Mode"
+msgstr "İzleme Kipi"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:27
+msgid "Wacom Tablet"
+msgstr "Wacom Tablet"
 
 #: ../shell/control-center.c:54
 msgid "Enable verbose mode"
@@ -4643,17 +4408,106 @@ msgstr ""
 "Kullanılabilir komut satırı seçeneklerini görmek için '%s --help' komutunu "
 "çalıştırın.\n"
 
-#: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:2
-msgid "System Settings"
-msgstr "Sistem Ayarları"
-
 #: ../shell/gnomecc.directory.in.h:1
 msgid "Control Center"
 msgstr "Kontrol Merkezi"
 
+#: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:2
+msgid "System Settings"
+msgstr "Sistem Ayarları"
+
 #: ../shell/shell.ui.h:1
 msgid "All Settings"
 msgstr "Tüm Ayarlar"
+
+#~ msgid "Error saving the new shortcut"
+#~ msgstr "Yeni kısa yol kaydedilirken hata"
+
+#~ msgid "Too many custom shortcuts"
+#~ msgstr "Çok fazla özel kısayol"
+
+#~ msgid "Key"
+#~ msgstr "Anahtar"
+
+#~ msgid "GConf key to which this property editor is attached"
+#~ msgstr "Bu özellik düzenleyicisinin bağlı olduğu GConf anahtarı"
+
+#~ msgid "Callback"
+#~ msgstr "Geriçağır"
+
+#~ msgid "Issue this callback when the value associated with key gets changed"
+#~ msgstr "Bu geriçağırımı anahtar ile alakalı değer değiştiği zaman kullanın"
+
+#~ msgid "Change set"
+#~ msgstr "Değiştirme takımı"
+
+#~ msgid ""
+#~ "GConf change set containing data to be forwarded to the gconf client on "
+#~ "apply"
+#~ msgstr ""
+#~ "GConf değiştirme takımı gconf istemcisine uygulandığında yönlendirilecek "
+#~ "verileri içerir"
+
+#~ msgid "Conversion to widget callback"
+#~ msgstr "Parça geriçağırımına dönüşüm"
+
+#~ msgid ""
+#~ "Callback to be issued when data are to be converted from GConf to the "
+#~ "widget"
+#~ msgstr "Veri GConf'dan parçacığa dönüştüğünde uygulanacak geriçağırım"
+
+#~ msgid "Conversion from widget callback"
+#~ msgstr "Parçadan dönüşüm geriçağırımı"
+
+#~ msgid ""
+#~ "Callback to be issued when data are to be converted to GConf from the "
+#~ "widget"
+#~ msgstr "Veri parçadan GConf'a dönüştüğünde uygulanacak geriçağırım"
+
+#~ msgid "UI Control"
+#~ msgstr "Arayüz Kontrolü"
+
+#~ msgid "Object that controls the property (normally a widget)"
+#~ msgstr "Bir özelliği kontrol eden nesne (genellikle bir parçacık)"
+
+#~ msgid "Property editor object data"
+#~ msgstr "Özellik düzenleyici nesne verisi"
+
+#~ msgid "Custom data required by the specific property editor"
+#~ msgstr "Belli özellik düzenleyicileri için gerekli tercihsel veri"
+
+#~ msgid "Property editor data freeing callback"
+#~ msgstr "Özellik düzenleyici veri boşaltma geriçağırımı"
+
+#~ msgid ""
+#~ "Callback to be issued when property editor object data is to be freed"
+#~ msgstr ""
+#~ "Özellik düzenleyici nesne verisi boşaltılacağında kullanılacak geriçağırım"
+
+#~ msgid ""
+#~ "Couldn't find the file '%s'.\n"
+#~ "\n"
+#~ "Please make sure it exists and try again, or choose a different "
+#~ "background picture."
+#~ msgstr ""
+#~ "'%s' dosyası bulunamadı.\n"
+#~ "\n"
+#~ "Lütfen dosyanın bulunduğundan emin olun ve tekrar deneyin, ya da farklı "
+#~ "bir arkaplan resmi kullanın."
+
+#~ msgid ""
+#~ "I don't know how to open the file '%s'.\n"
+#~ "Perhaps it's a kind of picture that is not yet supported.\n"
+#~ "\n"
+#~ "Please select a different picture instead."
+#~ msgstr ""
+#~ "'%s' dosyası açılamıyor.\n"
+#~ "Bu resim, henüz desteklenmiyor olabilir.\n"
+#~ "\n"
+#~ "Lütfen bunun yerine başka bir resim seçin."
+
+#~ msgid "Please select an image."
+#~ msgstr "Lütfen bir resim seçin."
 
 #~| msgid "24-Hour Time"
 #~ msgid "24-_Hour Time"
