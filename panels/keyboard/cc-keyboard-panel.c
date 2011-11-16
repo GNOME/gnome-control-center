@@ -47,62 +47,73 @@ cc_keyboard_panel_get_property (GObject    *object,
     }
 }
 
+enum {
+  PROP_0,
+  PROP_ARGV
+};
+
+enum {
+  TYPING_PAGE,
+  SHORTCUTS_PAGE
+};
+
+static void
+cc_keyboard_panel_set_page (CcKeyboardPanel *panel,
+                            const gchar   *page)
+{
+  GtkWidget *notebook;
+  gint page_num;
+
+  if (g_strcmp0 (page, "typing") == 0)
+    page_num = TYPING_PAGE;
+  else
+    page_num = SHORTCUTS_PAGE;
+
+  notebook = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "keyboard_notebook"));
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), page_num);
+}
+
+
 static void
 cc_keyboard_panel_set_property (GObject      *object,
                                guint         property_id,
                                const GValue *value,
                                GParamSpec   *pspec)
 {
+  CcKeyboardPanel *panel = CC_KEYBOARD_PANEL (object);
+
   switch (property_id)
     {
+    case PROP_ARGV: {
+      gchar **args;
+
+      args = g_value_get_boxed (value);
+
+      if (args && args[0]) {
+        cc_keyboard_panel_set_page (panel, args[0]);
+      }
+      break;
+    }
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
     }
 }
 
-static void
-cc_keyboard_panel_dispose (GObject *object)
-{
-  keyboard_general_dispose (CC_PANEL (object));
-  keyboard_shortcuts_dispose (CC_PANEL (object));
-
-  G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->dispose (object);
-}
-
-static void
-cc_keyboard_panel_finalize (GObject *object)
-{
-  G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->finalize (object);
-}
-
 static GObject *
 cc_keyboard_panel_constructor (GType                  gtype,
-			       guint                  n_properties,
-			       GObjectConstructParam *properties)
+                               guint                  n_properties,
+                               GObjectConstructParam *properties)
 {
   GObject *obj;
   CcKeyboardPanel *self;
   CcKeyboardPanelPrivate *priv;
-  GError *error = NULL;
   GtkWidget *widget;
-
-  const gchar *uifile = GNOMECC_UI_DIR "/gnome-keyboard-panel.ui";
 
   obj = G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->constructor (gtype, n_properties, properties);
 
   self = CC_KEYBOARD_PANEL (obj);
-  priv = self->priv = KEYBOARD_PANEL_PRIVATE (self);
-
-  priv->builder = gtk_builder_new ();
-
-  if (gtk_builder_add_from_file (priv->builder, uifile, &error) == 0)
-    {
-      g_warning ("Could not load UI: %s", error->message);
-      g_clear_error (&error);
-      g_object_unref (priv->builder);
-      priv->builder = NULL;
-      return obj;
-    }
+  priv = self->priv;
 
   keyboard_general_init (CC_PANEL (self), priv->builder);
   keyboard_shortcuts_init (CC_PANEL (self), priv->builder);
@@ -122,6 +133,26 @@ cc_keyboard_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
+cc_keyboard_panel_dispose (GObject *object)
+{
+  keyboard_general_dispose (CC_PANEL (object));
+  keyboard_shortcuts_dispose (CC_PANEL (object));
+
+  G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->dispose (object);
+}
+
+static void
+cc_keyboard_panel_finalize (GObject *object)
+{
+  CcKeyboardPanel *panel = CC_KEYBOARD_PANEL (object);
+
+  if (panel->priv->builder)
+    g_object_unref (panel->priv->builder);
+
+  G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->finalize (object);
+}
+
+static void
 cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -136,6 +167,8 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
   object_class->set_property = cc_keyboard_panel_set_property;
   object_class->dispose = cc_keyboard_panel_dispose;
   object_class->finalize = cc_keyboard_panel_finalize;
+
+  g_object_class_override_property (object_class, PROP_ARGV, "argv");
 }
 
 static void
@@ -146,6 +179,21 @@ cc_keyboard_panel_class_finalize (CcKeyboardPanelClass *klass)
 static void
 cc_keyboard_panel_init (CcKeyboardPanel *self)
 {
+  const gchar *uifile = GNOMECC_UI_DIR "/gnome-keyboard-panel.ui";
+  CcKeyboardPanelPrivate *priv;
+  GError *error = NULL;
+
+  priv = self->priv = KEYBOARD_PANEL_PRIVATE (self);
+
+  priv->builder = gtk_builder_new ();
+
+  if (gtk_builder_add_from_file (priv->builder, uifile, &error) == 0)
+    {
+      g_warning ("Could not load UI: %s", error->message);
+      g_clear_error (&error);
+      g_object_unref (priv->builder);
+      priv->builder = NULL;
+    }
 }
 
 void
