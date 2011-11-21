@@ -307,6 +307,7 @@ cc_language_chooser_new (GtkWidget *parent, gboolean regions)
 			  G_CALLBACK (filter_changed), list);
 	g_signal_connect (entry, "icon-release",
 			  G_CALLBACK (filter_clear), NULL);
+        gtk_widget_grab_focus (entry);
 
 	user_langs = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 	cc_common_language_setup_list (list, user_langs);
