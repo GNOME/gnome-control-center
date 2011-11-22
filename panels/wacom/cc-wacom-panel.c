@@ -151,6 +151,7 @@ tabletmode_changed_cb (GtkComboBox *combo, gpointer user_data)
 	GtkListStore		*liststore;
 	GtkTreeIter		iter;
 	gint			mode;
+	gboolean		is_absolute;
 
 	if (!gtk_combo_box_get_active_iter (combo, &iter))
 		return;
@@ -159,20 +160,9 @@ tabletmode_changed_cb (GtkComboBox *combo, gpointer user_data)
 	gtk_tree_model_get (GTK_TREE_MODEL (liststore), &iter,
 			    MODENUMBER_COLUMN, &mode,
 			    -1);
-	switch (mode)
-	{
-		case MODE_ABSOLUTE:
-			g_settings_set_boolean (priv->stylus_settings, "is-absolute", TRUE);
-			g_settings_set_boolean (priv->eraser_settings, "is-absolute", TRUE);
-			break;
-		case MODE_RELATIVE:
-			g_settings_set_boolean (priv->stylus_settings, "is-absolute", FALSE);
-			g_settings_set_boolean (priv->eraser_settings, "is-absolute", FALSE);
-			break;
-		default:
-			g_warning ("Ignoring unknown tablet mode %d.\n", mode);
-			break;
-	}
+
+	is_absolute = (mode == MODE_ABSOLUTE);
+	g_settings_set_boolean (priv->wacom_settings, "is-absolute", is_absolute);
 }
 
 static void
@@ -201,19 +191,12 @@ static void
 set_mode_from_gsettings (GtkComboBox *combo, CcWacomPanel *panel)
 {
 	CcWacomPanelPrivate	*priv = CC_WACOM_PANEL(panel)->priv;
-	gboolean		stylus_is_absolute,
-				eraser_is_absolute;
+	gboolean		is_absolute;
 
-	stylus_is_absolute = g_settings_get_boolean (priv->stylus_settings, "is-absolute");
-	eraser_is_absolute = g_settings_get_boolean (priv->eraser_settings, "is-absolute");
+	is_absolute = g_settings_get_boolean (priv->wacom_settings, "is-absolute");
 
 	/* this must be kept in sync with the .ui file */
-	if (stylus_is_absolute && eraser_is_absolute)
-		gtk_combo_box_set_active (combo, MODE_ABSOLUTE);
-	else if (!stylus_is_absolute && !eraser_is_absolute)
-		gtk_combo_box_set_active (combo, MODE_RELATIVE);
-	else
-		gtk_combo_box_set_active (combo, -1);
+	gtk_combo_box_set_active (combo, is_absolute ? MODE_ABSOLUTE : MODE_RELATIVE);
 }
 
 static void
