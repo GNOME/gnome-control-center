@@ -1,4 +1,143 @@
 ==========================
+Version 3.3.2 (2011-11-22)
+==========================
+
+Common:
+- Always collect locales from the directory (Bastien Nocera) (#660725)
+- Do not install private libgnome-control-center (Bastien Nocera) (#655287)
+- Fix handling of <Primary> (Bastien Nocera) (#748444)
+
+Background:
+- Added D'n'D support for adding wallpapers (Ming Han Teh) (#655375)
+- Force a toolbar style (Bastien Nocera)
+
+Bluetooth:
+- Move Bluetooth panel from gnome-bluetooth (Bastien Nocera)
+
+Color:
+- Update icon cache only on MAINTAINER_MODE (Alberto Ruiz)
+- Do not allow the 'Add profile' modal dialog to be resizable (Richard Hughes)
+- Improve the 'Add profile' modal dialog (Richard Hughes) (#661657)
+- Don't show profile ages for EDID, test and colorspace profiles (Richard Hughes) (#661669)
+- Show 'Uncalibrated' when a device has a test profile assigned (Richard Hughes)
+- After removing a profile select the device so the UI is correct (Richard Hughes) (#661658)
+- Fix a critical warning in the new GtkTreeIter code (Richard Hughes)
+- Make toolbar buttons focusable (Bastien Nocera) (#662430)
+
+Date & time:
+- Fix showing actual clock format on panel open (Tomas Bzatek)
+
+Info:
+- Use x-content/unix-software as mime for the Software combobox (Cosimo Cecchi) (#660803)
+- Add labelling relations (Matthias Clasen)
+
+Keyboard:
+- Don't load duplicate keybindings (Bastien Nocera)
+- Fix ATK descriptions (Bastien Nocera) (#574073)
+- Make the '+' button work all the time (Bastien Nocera) (#662253)
+- Remove broken allowed_keys checks (Bastien Nocera)
+- Use GtkCellRendererAccel (Bastien Nocera)
+- Adjust shortcut files (Florian Müllner) (#663626)
+- Rename a11y keyboard shortcuts (Bastien Nocera)
+- Remove support for conditional shortcuts (Florian Müllner) (#663431)
+- Stop monitoring num-workspaces (Florian Müllner)
+- Port custom shortcuts to GSettings (Florian Müllner)
+
+Mouse:
+- Fix ATK descriptions (Bastien Nocera)
+
+Network:
+- Allocate nm-connection for nma-wireless-dialog (Gary Ching-Pang Lin) (#648174)
+- Show wireless dialog even if there is no active AP (Gary Ching-Pang Lin) (#661526)
+- Accessibility improvements (Matthias Clasen)
+- Add proxy to the keywords (Bastien Nocera) (#663340)
+- Make tabbing through the proxy page work (Matthias Clasen)
+
+Online accounts:
+- Add title for "Add Account" dialogue (Bastien Nocera) (#661573)
+
+Power:
+- Use the correct item in the combo boxes when sleep-when-inactive is disabled (Rodrigo Moya)
+- Don't set the sleep-inactive-x GSettings keys that have been removed (Richard Hughes)
+- Use "Power off" instead of "Shutdown" (Bastien Nocera) (#661559)
+
+Printers:
+- Check state of CUPS after start (Marek Kasik) (#659721)
+- Fix build on systems without LC_PAPER (Bastien Nocera) (#660692)
+- Don't hide address entry (Marek Kasik)
+- Make +/- buttons insensitive when can not connect to CUPS (Marek Kasik)
+- Set requesting-user-name when getting job info (Marek Kasik)
+- Detect disconnection of printer (Marek Kasik)
+- Don't allow "/" in printer name (Marek Kasik) (#661774)
+
+Region:
+- Hide system tab if no localed (Bastien Nocera)
+- Simplify getting the current Locale (Bastien Nocera)
+- Implement copying layouts (Bastien Nocera) (#659300)
+- Fix build on systems without LC_MEASUREMENT (Bastien Nocera) (#660787)
+- Align the example dates (Bastien Nocera)
+- Only show locales for languages that have translations (Rodrigo Moya)
+- Always add English to the list, as it should always be available (Rodrigo Moya)
+
+Screen:
+- Never set gnome-session's idle-delay to 1 (Rodrigo Moya)
+
+Shell:
+- Make sure we gtk_widget_show the search view (Rodrigo Moya)
+- Avoid crash when searching if a .desktop has no comment (Vincent Untz) (#661494)
+- Make Ctrl+Q work outside the overview (Bastien Nocera)
+- Make Ctrl+W close panels (Bastien Nocera) (#660814)
+- Give focus to the search entry when showing the overview page (Anders G. Jørgensen)
+- Don't crash when loading the icon fails (Christian Persch) (#660513)
+- Use icon for "All Settings" button (Bastien Nocera) (#657043)
+- Add a11y label for the All Settings button (Bastien Nocera)
+- Merge libgnome-control-center into main binary (Bastien Nocera)
+
+Sound:
+- Fix possible infinite loop in combo box (Bastien Nocera)
+- Add a minimum height for the output list (Bastien Nocera) (#660582)
+- Export sysfs path in stream properties (Bastien Nocera)
+- Port audible-bell to GSettings (Bastien Nocera) (#625899)
+
+Universal access:
+- Fix ATK descriptions (Bastien Nocera)
+- Avoid crashing when GConf is broken (Bastien Nocera) (#751007)
+- Update for metacity GSettings port (Bastien Nocera) (#625899)
+
+User accounts:
+- Make unlock icon in tooltip match reality (Matthias Clasen)
+
+Translations:
+- ar (Abderrahim Kitouni)
+- be (Ihar Hrachyshka)
+- cz (Petr Kovar)
+- de (Mario Blättermann, Christian Kirbach)
+- el (Kostas Papadimas)
+- en_GB (Bruce Cowan)
+- es (Daniel Mustieles, Jorge González, Benjamín Valero Espinosa)
+- fa (Arash Mousavi, Ali Akbar Najafian)
+- fr (Bruno Brouard)
+- ga (Seán de Búrca)
+- gl (Fran Dieguez)
+- he (Yaron Shahrabani)
+- id (Andika Triwidada)
+- ja (Jiro Matsuzawa)
+- ku (Erdal Ronahi)
+- lt (Aurimas Černius, Algimantas Margevičius)
+- nb (Kjartan Maraas)
+- nl (Rachid, Wouter Bolsterlee)
+- pl (Piotr Drąg)
+- sl (Andrej Žnidaršič, Matej Urbančič)
+- sr (Мирослав Николић)
+- sv (Daniel Nylander)
+- ta (Dr.T.Vasudevan)
+- te (krishnababu k)
+- tr (Muhammet Kara)
+- zh_CN (Aron Xu, Funda Wang, YunQiang Su)
+- zh_HK (Chao-Hsiung Liao, Cheng-Chia Tseng)
+- zh_TW (Chao-Hsiung Liao, Cheng-Chia Tseng)
+
+==========================
 Version 3.2.0 (2011-09-26)
 ==========================
 
