@@ -473,5 +473,7 @@ cc_wacom_page_new (GsdWacomDevice *pad,
 	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-eraser-feel")), priv->eraser_settings);
 	set_left_handed_from_gsettings (page);
 
+	gtk_label_set_text (GTK_LABEL (WID ("label-tabletmodel")), gsd_wacom_device_get_name (pad));
+
 	return GTK_WIDGET (page);
 }
