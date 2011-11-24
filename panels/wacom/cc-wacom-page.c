@@ -471,7 +471,13 @@ cc_wacom_page_new (GsdWacomDevice *pad,
 	set_mode_from_gsettings (GTK_COMBO_BOX (WID ("combo-tabletmode")), page);
 	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-tip-feel")), priv->stylus_settings);
 	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-eraser-feel")), priv->eraser_settings);
-	set_left_handed_from_gsettings (page);
+
+	if (gsd_wacom_device_reversible (pad) == FALSE) {
+		gtk_widget_hide (WID ("label-left-handed"));
+		gtk_widget_hide (WID ("switch-left-handed"));
+	} else {
+		set_left_handed_from_gsettings (page);
+	}
 
 	gtk_label_set_text (GTK_LABEL (WID ("label-tabletmodel")), gsd_wacom_device_get_name (pad));
 
