@@ -100,12 +100,6 @@ cc_wacom_panel_dispose (GObject *object)
 }
 
 static void
-cc_wacom_panel_finalize (GObject *object)
-{
-	G_OBJECT_CLASS (cc_wacom_panel_parent_class)->finalize (object);
-}
-
-static void
 cc_wacom_panel_class_init (CcWacomPanelClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -115,7 +109,6 @@ cc_wacom_panel_class_init (CcWacomPanelClass *klass)
 	object_class->get_property = cc_wacom_panel_get_property;
 	object_class->set_property = cc_wacom_panel_set_property;
 	object_class->dispose = cc_wacom_panel_dispose;
-	object_class->finalize = cc_wacom_panel_finalize;
 }
 
 static void
