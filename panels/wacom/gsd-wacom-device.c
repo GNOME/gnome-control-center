@@ -285,7 +285,7 @@ gsd_wacom_device_constructor (GType                     type,
 
 	/* FIXME
 	 * This needs to come from real data */
-	device->priv->reversible = FALSE;
+	device->priv->reversible = TRUE;
 	device->priv->is_screen_tablet = FALSE;
 
 	if (device->priv->type == WACOM_TYPE_STYLUS ||
