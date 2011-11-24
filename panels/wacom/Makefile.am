@@ -19,7 +19,9 @@ libwacom_properties_la_SOURCES =	\
 	cc-wacom-panel.c		\
 	cc-wacom-panel.h		\
 	cc-wacom-page.c			\
-	cc-wacom-page.h
+	cc-wacom-page.h			\
+	gsd-wacom-device.c		\
+	gsd-wacom-device.h
 
 libwacom_properties_la_LIBADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS)
 libwacom_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
