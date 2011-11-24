@@ -20,55 +20,55 @@
  */
 
 
-#ifndef _CC_WACOM_PANEL_H
-#define _CC_WACOM_PANEL_H
+#ifndef _CC_WACOM_PAGE_H
+#define _CC_WACOM_PAGE_H
 
-#include <shell/cc-panel.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_WACOM_PANEL cc_wacom_panel_get_type()
+#define CC_TYPE_WACOM_PAGE cc_wacom_page_get_type()
 
-#define CC_WACOM_PANEL(obj) \
+#define CC_WACOM_PAGE(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  CC_TYPE_WACOM_PANEL, CcWacomPanel))
+  CC_TYPE_WACOM_PAGE, CcWacomPage))
 
-#define CC_WACOM_PANEL_CLASS(klass) \
+#define CC_WACOM_PAGE_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  CC_TYPE_WACOM_PANEL, CcWacomPanelClass))
+  CC_TYPE_WACOM_PAGE, CcWacomPageClass))
 
-#define CC_IS_WACOM_PANEL(obj) \
+#define CC_IS_WACOM_PAGE(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
-  CC_TYPE_WACOM_PANEL))
+  CC_TYPE_WACOM_PAGE))
 
-#define CC_IS_WACOM_PANEL_CLASS(klass) \
+#define CC_IS_WACOM_PAGE_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_TYPE ((klass), \
-  CC_TYPE_WACOM_PANEL))
+  CC_TYPE_WACOM_PAGE))
 
-#define CC_WACOM_PANEL_GET_CLASS(obj) \
+#define CC_WACOM_PAGE_GET_CLASS(obj) \
   (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  CC_TYPE_WACOM_PANEL, CcWacomPanelClass))
+  CC_TYPE_WACOM_PAGE, CcWacomPageClass))
 
-typedef struct _CcWacomPanel CcWacomPanel;
-typedef struct _CcWacomPanelClass CcWacomPanelClass;
-typedef struct _CcWacomPanelPrivate CcWacomPanelPrivate;
+typedef struct _CcWacomPage CcWacomPage;
+typedef struct _CcWacomPageClass CcWacomPageClass;
+typedef struct _CcWacomPagePrivate CcWacomPagePrivate;
 
-struct _CcWacomPanel
+struct _CcWacomPage
 {
-  CcPanel parent;
+  GtkBox parent;
 
-  CcWacomPanelPrivate *priv;
+  CcWacomPagePrivate *priv;
 };
 
-struct _CcWacomPanelClass
+struct _CcWacomPageClass
 {
-  CcPanelClass parent_class;
+  GtkBoxClass parent_class;
 };
 
-GType cc_wacom_panel_get_type (void) G_GNUC_CONST;
+GType cc_wacom_page_get_type (void) G_GNUC_CONST;
 
-void  cc_wacom_panel_register (GIOModule *module);
+GtkWidget * cc_wacom_page_new (void);
 
 G_END_DECLS
 
-#endif /* _CC_WACOM_PANEL_H */
+#endif /* _CC_WACOM_PAGE_H */

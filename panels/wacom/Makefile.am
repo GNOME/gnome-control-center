@@ -17,7 +17,9 @@ ccpanels_LTLIBRARIES = libwacom-properties.la
 libwacom_properties_la_SOURCES =	\
 	wacom-module.c			\
 	cc-wacom-panel.c		\
-	cc-wacom-panel.h
+	cc-wacom-panel.h		\
+	cc-wacom-page.c			\
+	cc-wacom-page.h
 
 libwacom_properties_la_LIBADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS)
 libwacom_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
