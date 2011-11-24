@@ -40,10 +40,11 @@ G_DEFINE_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
 
 struct _CcWacomPagePrivate
 {
-	GtkBuilder  *builder;
-	GSettings   *wacom_settings;
-	GSettings   *stylus_settings;
-	GSettings   *eraser_settings;
+	GsdWacomDevice *pad, *stylus, *eraser;
+	GtkBuilder     *builder;
+	GSettings      *wacom_settings;
+	GSettings      *stylus_settings;
+	GSettings      *eraser_settings;
 	/* The UI doesn't support cursor/pad at the moment */
 };
 
@@ -336,24 +337,6 @@ cc_wacom_page_dispose (GObject *object)
 		priv->builder = NULL;
 	}
 
-	if (priv->wacom_settings)
-	{
-		g_object_unref (priv->wacom_settings);
-		priv->wacom_settings = NULL;
-	}
-
-	if (priv->stylus_settings)
-	{
-		g_object_unref (priv->stylus_settings);
-		priv->stylus_settings = NULL;
-	}
-
-	if (priv->eraser_settings)
-	{
-		g_object_unref (priv->eraser_settings);
-		priv->eraser_settings = NULL;
-	}
-
 	G_OBJECT_CLASS (cc_wacom_page_parent_class)->dispose (object);
 }
 
@@ -440,20 +423,48 @@ cc_wacom_page_init (CcWacomPage *self)
 	gtk_image_set_from_file (GTK_IMAGE (WID ("image-stylus")), PIXMAP_DIR "/wacom-stylus.svg");
 }
 
+static GSettings *
+get_first_stylus_setting (GsdWacomDevice *device)
+{
+	GList *styli;
+	GsdWacomStylus *stylus;
+
+	styli = gsd_wacom_device_list_styli (device);
+	stylus = styli->data;
+	g_list_free (styli);
+
+	return gsd_wacom_stylus_get_settings (stylus);
+}
+
 GtkWidget *
-cc_wacom_page_new (void)
+cc_wacom_page_new (GsdWacomDevice *pad,
+		   GsdWacomDevice *stylus,
+		   GsdWacomDevice *eraser)
 {
 	CcWacomPage *page;
 	CcWacomPagePrivate *priv;
 
+	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (pad), NULL);
+	g_return_val_if_fail (gsd_wacom_device_get_device_type (pad) == WACOM_TYPE_PAD, NULL);
+
+	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (stylus), NULL);
+	g_return_val_if_fail (gsd_wacom_device_get_device_type (stylus) == WACOM_TYPE_STYLUS, NULL);
+
+	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (eraser), NULL);
+	g_return_val_if_fail (gsd_wacom_device_get_device_type (eraser) == WACOM_TYPE_ERASER, NULL);
+
 	page = g_object_new (CC_TYPE_WACOM_PAGE, NULL);
 
 	priv = page->priv;
+	priv->pad = pad;
+	priv->stylus = stylus;
+	priv->eraser = eraser;
 
 	/* FIXME move this to construct */
-	priv->wacom_settings  = g_settings_new (WACOM_SCHEMA);
-	priv->stylus_settings = g_settings_new (WACOM_STYLUS_SCHEMA);
-	priv->eraser_settings = g_settings_new (WACOM_ERASER_SCHEMA);
+	priv->wacom_settings  = gsd_wacom_device_get_settings (pad);
+
+	priv->stylus_settings = get_first_stylus_setting (stylus);
+	priv->eraser_settings = get_first_stylus_setting (eraser);
 
 	set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-topbutton")), priv->stylus_settings, 3);
 	set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-bottombutton")), priv->stylus_settings, 2);

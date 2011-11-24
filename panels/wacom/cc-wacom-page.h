@@ -24,6 +24,7 @@
 #define _CC_WACOM_PAGE_H
 
 #include <gtk/gtk.h>
+#include "gsd-wacom-device.h"
 
 G_BEGIN_DECLS
 
@@ -67,7 +68,9 @@ struct _CcWacomPageClass
 
 GType cc_wacom_page_get_type (void) G_GNUC_CONST;
 
-GtkWidget * cc_wacom_page_new (void);
+GtkWidget * cc_wacom_page_new (GsdWacomDevice *pad,
+			       GsdWacomDevice *stylus,
+			       GsdWacomDevice *eraser);
 
 G_END_DECLS
 
