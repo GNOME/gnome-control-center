@@ -107,6 +107,7 @@ GsdWacomDevice * gsd_wacom_device_create_fake (GsdWacomDeviceType  type,
 
 GList * gsd_wacom_device_create_fake_cintiq   (void);
 GList * gsd_wacom_device_create_fake_bt       (void);
+GList * gsd_wacom_device_create_fake_x201     (void);
 
 G_END_DECLS
 
