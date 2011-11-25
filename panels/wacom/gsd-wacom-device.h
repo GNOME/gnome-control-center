@@ -69,6 +69,7 @@ typedef struct
 GType            gsd_wacom_stylus_get_type     (void);
 GSettings      * gsd_wacom_stylus_get_settings (GsdWacomStylus *stylus);
 const char     * gsd_wacom_stylus_get_name     (GsdWacomStylus *stylus);
+const char     * gsd_wacom_stylus_get_icon_name(GsdWacomStylus *stylus);
 GsdWacomDevice * gsd_wacom_stylus_get_device   (GsdWacomStylus *stylus);
 
 /* Device types to apply a setting to */
