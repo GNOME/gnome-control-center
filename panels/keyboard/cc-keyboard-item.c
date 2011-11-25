@@ -411,6 +411,8 @@ cc_keyboard_item_load_from_gsettings_path (CcKeyboardItem *item,
   g_settings_bind (item->settings, "command",
                    G_OBJECT (item), "command", G_SETTINGS_BIND_DEFAULT);
 
+  item->binding = settings_get_binding (item->settings, item->key);
+  binding_from_string (item->binding, &item->keyval, &item->keycode, &item->mask);
   g_signal_connect (G_OBJECT (item->settings), "changed::binding",
 		    G_CALLBACK (binding_changed), item);
 
