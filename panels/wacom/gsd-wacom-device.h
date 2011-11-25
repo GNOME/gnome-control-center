@@ -96,6 +96,17 @@ GSettings      * gsd_wacom_device_get_settings     (GsdWacomDevice *device);
 GsdWacomDeviceType gsd_wacom_device_get_device_type (GsdWacomDevice *device);
 const char     * gsd_wacom_device_type_to_string   (GsdWacomDeviceType type);
 
+/* Helper and debug functions */
+GsdWacomDevice * gsd_wacom_device_create_fake (GsdWacomDeviceType  type,
+					       const char         *name,
+					       const char         *tool_name,
+					       gboolean            reversible,
+					       gboolean            is_screen_tablet,
+					       const char         *icon_name,
+					       guint               num_styli);
+
+GList * gsd_wacom_device_create_fake_cintiq   (void);
+
 G_END_DECLS
 
 #endif /* __GSD_WACOM_DEVICE_MANAGER_H */

@@ -509,3 +509,80 @@ gsd_wacom_device_type_to_string (GsdWacomDeviceType type)
 		return "Unknown type";
 	}
 }
+
+GsdWacomDevice *
+gsd_wacom_device_create_fake (GsdWacomDeviceType  type,
+			      const char         *name,
+			      const char         *tool_name,
+			      gboolean            reversible,
+			      gboolean            is_screen_tablet,
+			      const char         *icon_name,
+			      guint               num_styli)
+{
+	GsdWacomDevice *device;
+	GsdWacomDevicePrivate *priv;
+	guint i;
+
+	device = GSD_WACOM_DEVICE (g_object_new (GSD_TYPE_WACOM_DEVICE, NULL));
+
+	priv = device->priv;
+	priv->type = type;
+	priv->name = g_strdup (name);
+	priv->tool_name = g_strdup (tool_name);
+	priv->reversible = reversible;
+	priv->is_screen_tablet = is_screen_tablet;
+	priv->icon_name = g_strdup (icon_name);
+	priv->wacom_settings = g_settings_new (SETTINGS_WACOM_DIR);
+
+	for (i = 0; i < num_styli ; i++) {
+		GsdWacomStylus *stylus;
+		GSettings *settings;
+
+		if (device->priv->type == WACOM_TYPE_STYLUS) {
+			settings = g_settings_new (SETTINGS_WACOM_DIR "." SETTINGS_STYLUS_DIR);
+			stylus = gsd_wacom_stylus_new (device, settings, _("Stylus"), "wacom-stylus");
+		} else {
+			settings = g_settings_new (SETTINGS_WACOM_DIR "." SETTINGS_ERASER_DIR);
+			stylus = gsd_wacom_stylus_new (device, settings, "Eraser XXX", NULL);
+		}
+		device->priv->styli = g_list_append (device->priv->styli, stylus);
+	}
+
+	return device;
+}
+
+GList *
+gsd_wacom_device_create_fake_cintiq (void)
+{
+	GsdWacomDevice *device;
+	GList *devices;
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_STYLUS,
+					       "Wacom Cintiq 21UX2",
+					       "Wacom Cintiq 21UX2 stylus",
+					       TRUE,
+					       TRUE,
+					       "wacom-tablet-cintiq",
+					       1);
+	devices = g_list_prepend (NULL, device);
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_ERASER,
+					       "Wacom Cintiq 21UX2",
+					       "Wacom Cintiq 21UX2 eraser",
+					       TRUE,
+					       TRUE,
+					       "wacom-tablet-cintiq",
+					       1);
+	devices = g_list_prepend (devices, device);
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_PAD,
+					       "Wacom Cintiq 21UX2",
+					       "Wacom Cintiq 21UX2 pad",
+					       TRUE,
+					       TRUE,
+					       "wacom-tablet-cintiq",
+					       1);
+	devices = g_list_prepend (devices, device);
+
+	return devices;
+}
