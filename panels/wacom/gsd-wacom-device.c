@@ -582,7 +582,52 @@ gsd_wacom_device_create_fake_cintiq (void)
 					       TRUE,
 					       TRUE,
 					       "wacom-tablet-cintiq",
+					       0);
+	devices = g_list_prepend (devices, device);
+
+	return devices;
+}
+
+GList *
+gsd_wacom_device_create_fake_bt (void)
+{
+	GsdWacomDevice *device;
+	GList *devices;
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_STYLUS,
+					       "WACOM Pen Tablet",
+					       "WACOM Pen Tablet stylus",
+					       FALSE,
+					       FALSE,
+					       "wacom-tablet",
 					       1);
+	devices = g_list_prepend (NULL, device);
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_ERASER,
+					       "WACOM Pen Tablet",
+					       "WACOM Pen Tablet eraser",
+					       FALSE,
+					       FALSE,
+					       "wacom-tablet",
+					       1);
+	devices = g_list_prepend (devices, device);
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_PAD,
+					       "WACOM Pen Tablet",
+					       "WACOM Pen Tablet pad",
+					       FALSE,
+					       FALSE,
+					       "wacom-tablet",
+					       0);
+	devices = g_list_prepend (devices, device);
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_CURSOR,
+					       "WACOM Pen Tablet",
+					       "WACOM Pen Tablet cursor",
+					       FALSE,
+					       FALSE,
+					       "wacom-tablet-cintiq",
+					       0);
 	devices = g_list_prepend (devices, device);
 
 	return devices;
