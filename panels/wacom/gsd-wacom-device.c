@@ -314,7 +314,7 @@ gsd_wacom_device_constructor (GType                     type,
 			stylus = gsd_wacom_stylus_new (device, settings, _("Stylus"), "wacom-stylus");
 		} else {
 			settings = g_settings_new (SETTINGS_WACOM_DIR "." SETTINGS_ERASER_DIR);
-			stylus = gsd_wacom_stylus_new (device, settings, NULL, NULL);
+			stylus = gsd_wacom_stylus_new (device, settings, "Eraser XXX", NULL);
 		}
 		device->priv->styli = g_list_append (NULL, stylus);
 	}
