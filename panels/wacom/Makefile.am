@@ -29,9 +29,13 @@ libwacom_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
 @INTLTOOL_DESKTOP_RULE@
 
 pixmapdir = $(pkgdatadir)/pixmaps
-pixmap_DATA = \
-	wacom-tablet.svg \
-	wacom-stylus.svg
+pixmap_DATA =				\
+	wacom-tablet.svg		\
+	wacom-stylus.svg		\
+	wacom-stylus-airbrush.svg	\
+	wacom-stylus-inking.svg		\
+	wacom-tablet-cintiq.svg		\
+	wacom-tablet-pc.svg
 
 uidir   = $(pkgdatadir)/ui
 ui_DATA = gnome-wacom-properties.ui
