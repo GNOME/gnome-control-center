@@ -419,8 +419,6 @@ cc_wacom_page_init (CcWacomPage *self)
 	g_signal_connect (G_OBJECT (sw), "notify::active",
 			  G_CALLBACK (left_handed_toggled_cb), self);
 
-	gtk_image_set_from_file (GTK_IMAGE (WID ("image-tablet")), PIXMAP_DIR "/wacom-tablet.svg");
-	gtk_image_set_from_file (GTK_IMAGE (WID ("image-stylus")), PIXMAP_DIR "/wacom-stylus.svg");
 }
 
 static GSettings *
@@ -434,6 +432,37 @@ get_first_stylus_setting (GsdWacomDevice *device)
 	g_list_free (styli);
 
 	return gsd_wacom_stylus_get_settings (stylus);
+}
+
+static void
+set_icon_name (CcWacomPage *page,
+	       const char  *widget_name,
+	       const char  *icon_name)
+{
+	CcWacomPagePrivate *priv;
+	char *filename, *path;
+
+	priv = page->priv;
+
+	filename = g_strdup_printf ("%s.svg", icon_name);
+	path = g_build_filename (PIXMAP_DIR, filename, NULL);
+	g_free (filename);
+
+	gtk_image_set_from_file (GTK_IMAGE (WID (widget_name)), path);
+	g_free (path);
+}
+
+static void
+set_first_stylus_icon (CcWacomPage *page)
+{
+	GList *styli;
+	GsdWacomStylus *stylus;
+
+	styli = gsd_wacom_device_list_styli (page->priv->stylus);
+	stylus = styli->data;
+	g_list_free (styli);
+
+	set_icon_name (page, "image-stylus", gsd_wacom_stylus_get_icon_name (stylus));
 }
 
 GtkWidget *
@@ -462,16 +491,12 @@ cc_wacom_page_new (GsdWacomDevice *pad,
 
 	/* FIXME move this to construct */
 	priv->wacom_settings  = gsd_wacom_device_get_settings (pad);
-
-	priv->stylus_settings = get_first_stylus_setting (stylus);
-	priv->eraser_settings = get_first_stylus_setting (eraser);
-
-	set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-topbutton")), priv->stylus_settings, 3);
-	set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-bottombutton")), priv->stylus_settings, 2);
 	set_mode_from_gsettings (GTK_COMBO_BOX (WID ("combo-tabletmode")), page);
-	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-tip-feel")), priv->stylus_settings);
-	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-eraser-feel")), priv->eraser_settings);
 
+	/* Tablet name */
+	gtk_label_set_text (GTK_LABEL (WID ("label-tabletmodel")), gsd_wacom_device_get_name (pad));
+
+	/* Left-handedness */
 	if (gsd_wacom_device_reversible (pad) == FALSE) {
 		gtk_widget_hide (WID ("label-left-handed"));
 		gtk_widget_hide (WID ("switch-left-handed"));
@@ -479,7 +504,18 @@ cc_wacom_page_new (GsdWacomDevice *pad,
 		set_left_handed_from_gsettings (page);
 	}
 
-	gtk_label_set_text (GTK_LABEL (WID ("label-tabletmodel")), gsd_wacom_device_get_name (pad));
+	/* Tablet icon */
+	set_icon_name (page, "image-tablet", gsd_wacom_device_get_icon_name (pad));
+
+	/* Stylus/Eraser */
+	priv->stylus_settings = get_first_stylus_setting (stylus);
+	priv->eraser_settings = get_first_stylus_setting (eraser);
+
+	set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-topbutton")), priv->stylus_settings, 3);
+	set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-bottombutton")), priv->stylus_settings, 2);
+	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-tip-feel")), priv->stylus_settings);
+	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-eraser-feel")), priv->eraser_settings);
+	set_first_stylus_icon (page);
 
 	return GTK_WIDGET (page);
 }
