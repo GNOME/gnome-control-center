@@ -40,7 +40,7 @@ G_DEFINE_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
 
 struct _CcWacomPagePrivate
 {
-	GsdWacomDevice *pad, *stylus, *eraser;
+	GsdWacomDevice *stylus, *eraser;
 	GtkBuilder     *builder;
 	GSettings      *wacom_settings;
 	GSettings      *stylus_settings;
@@ -466,15 +466,11 @@ set_first_stylus_icon (CcWacomPage *page)
 }
 
 GtkWidget *
-cc_wacom_page_new (GsdWacomDevice *pad,
-		   GsdWacomDevice *stylus,
+cc_wacom_page_new (GsdWacomDevice *stylus,
 		   GsdWacomDevice *eraser)
 {
 	CcWacomPage *page;
 	CcWacomPagePrivate *priv;
-
-	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (pad), NULL);
-	g_return_val_if_fail (gsd_wacom_device_get_device_type (pad) == WACOM_TYPE_PAD, NULL);
 
 	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (stylus), NULL);
 	g_return_val_if_fail (gsd_wacom_device_get_device_type (stylus) == WACOM_TYPE_STYLUS, NULL);
@@ -485,19 +481,18 @@ cc_wacom_page_new (GsdWacomDevice *pad,
 	page = g_object_new (CC_TYPE_WACOM_PAGE, NULL);
 
 	priv = page->priv;
-	priv->pad = pad;
 	priv->stylus = stylus;
 	priv->eraser = eraser;
 
 	/* FIXME move this to construct */
-	priv->wacom_settings  = gsd_wacom_device_get_settings (pad);
+	priv->wacom_settings  = gsd_wacom_device_get_settings (stylus);
 	set_mode_from_gsettings (GTK_COMBO_BOX (WID ("combo-tabletmode")), page);
 
 	/* Tablet name */
-	gtk_label_set_text (GTK_LABEL (WID ("label-tabletmodel")), gsd_wacom_device_get_name (pad));
+	gtk_label_set_text (GTK_LABEL (WID ("label-tabletmodel")), gsd_wacom_device_get_name (stylus));
 
 	/* Left-handedness */
-	if (gsd_wacom_device_reversible (pad) == FALSE) {
+	if (gsd_wacom_device_reversible (stylus) == FALSE) {
 		gtk_widget_hide (WID ("label-left-handed"));
 		gtk_widget_hide (WID ("switch-left-handed"));
 	} else {
@@ -505,7 +500,7 @@ cc_wacom_page_new (GsdWacomDevice *pad,
 	}
 
 	/* Tablet icon */
-	set_icon_name (page, "image-tablet", gsd_wacom_device_get_icon_name (pad));
+	set_icon_name (page, "image-tablet", gsd_wacom_device_get_icon_name (stylus));
 
 	/* Stylus/Eraser */
 	priv->stylus_settings = get_first_stylus_setting (stylus);

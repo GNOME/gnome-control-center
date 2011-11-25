@@ -68,8 +68,7 @@ struct _CcWacomPageClass
 
 GType cc_wacom_page_get_type (void) G_GNUC_CONST;
 
-GtkWidget * cc_wacom_page_new (GsdWacomDevice *pad,
-			       GsdWacomDevice *stylus,
+GtkWidget * cc_wacom_page_new (GsdWacomDevice *stylus,
 			       GsdWacomDevice *eraser);
 
 G_END_DECLS
