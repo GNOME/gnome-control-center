@@ -87,6 +87,7 @@ GType gsd_wacom_device_get_type     (void);
 GsdWacomDevice * gsd_wacom_device_new              (GdkDevice *device);
 GList          * gsd_wacom_device_list_styli       (GsdWacomDevice *device);
 const char     * gsd_wacom_device_get_name         (GsdWacomDevice *device);
+const char     * gsd_wacom_device_get_icon_name    (GsdWacomDevice *device);
 const char     * gsd_wacom_device_get_tool_name    (GsdWacomDevice *device);
 gboolean         gsd_wacom_device_reversible       (GsdWacomDevice *device);
 gboolean         gsd_wacom_device_is_screen_tablet (GsdWacomDevice *device);

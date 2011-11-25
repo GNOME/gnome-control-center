@@ -162,6 +162,7 @@ struct GsdWacomDevicePrivate
 	GdkDevice *gdk_device;
 	GsdWacomDeviceType type;
 	char *name;
+	char *icon_name;
 	char *tool_name;
 	gboolean reversible;
 	gboolean is_screen_tablet;
@@ -301,6 +302,7 @@ gsd_wacom_device_constructor (GType                     type,
 	 * This needs to come from real data */
 	device->priv->reversible = TRUE;
 	device->priv->is_screen_tablet = FALSE;
+	device->priv->icon_name = g_strdup ("wacom-tablet");
 
 	if (device->priv->type == WACOM_TYPE_STYLUS ||
 	    device->priv->type == WACOM_TYPE_ERASER) {
@@ -411,6 +413,9 @@ gsd_wacom_device_finalize (GObject *object)
         g_free (p->tool_name);
         p->tool_name = NULL;
 
+        g_free (p->icon_name);
+        p->icon_name = NULL;
+
         G_OBJECT_CLASS (gsd_wacom_device_parent_class)->finalize (object);
 }
 
@@ -436,6 +441,14 @@ gsd_wacom_device_get_name (GsdWacomDevice *device)
 	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), NULL);
 
 	return device->priv->name;
+}
+
+const char *
+gsd_wacom_device_get_icon_name (GsdWacomDevice *device)
+{
+	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), NULL);
+
+	return device->priv->icon_name;
 }
 
 const char *
