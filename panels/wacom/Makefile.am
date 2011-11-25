@@ -26,6 +26,18 @@ libwacom_properties_la_SOURCES =	\
 libwacom_properties_la_LIBADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS)
 libwacom_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
 
+noinst_PROGRAMS = test-wacom
+
+test_wacom_SOURCES =			\
+	test-wacom.c			\
+	cc-wacom-page.c			\
+	cc-wacom-page.h			\
+	gsd-wacom-device.c		\
+	gsd-wacom-device.h
+
+test_wacom_CPPFLAGS = $(INCLUDES)
+test_wacom_LDADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS)
+
 @INTLTOOL_DESKTOP_RULE@
 
 pixmapdir = $(pkgdatadir)/pixmaps
