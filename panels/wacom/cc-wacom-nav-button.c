@@ -213,12 +213,14 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 	gtk_container_add (GTK_CONTAINER (priv->prev), image);
 	g_signal_connect (G_OBJECT (priv->prev), "clicked",
 			  G_CALLBACK (prev_clicked), self);
+	gtk_widget_set_valign (priv->prev, GTK_ALIGN_START);
 
 	priv->next = gtk_button_new ();
 	image = gtk_image_new_from_icon_name ("go-next-symbolic", GTK_ICON_SIZE_MENU);
 	gtk_container_add (GTK_CONTAINER (priv->next), image);
 	g_signal_connect (G_OBJECT (priv->next), "clicked",
 			  G_CALLBACK (next_clicked), self);
+	gtk_widget_set_valign (priv->next, GTK_ALIGN_START);
 
 	gtk_box_pack_start (GTK_BOX (self), priv->prev,
 			    FALSE, FALSE, 0);
