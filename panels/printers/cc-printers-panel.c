@@ -90,6 +90,7 @@ struct _CcPrintersPanelPrivate
   gint             subscription_id;
   guint            subscription_renewal_id;
   guint            cups_status_check_id;
+  guint            dbus_subscription_id;
 
   gpointer dummy;
 };
@@ -388,16 +389,17 @@ attach_to_cups_notifier (gpointer data)
 
       priv->cups_bus_connection = g_dbus_proxy_get_connection (priv->cups_proxy);
 
-      g_dbus_connection_signal_subscribe (priv->cups_bus_connection,
-                                          NULL,
-                                          CUPS_DBUS_INTERFACE,
-                                          NULL,
-                                          CUPS_DBUS_PATH,
-                                          NULL,
-                                          0,
-                                          on_cups_notification,
-                                          self,
-                                          NULL);
+      priv->dbus_subscription_id =
+        g_dbus_connection_signal_subscribe (priv->cups_bus_connection,
+                                            NULL,
+                                            CUPS_DBUS_INTERFACE,
+                                            NULL,
+                                            CUPS_DBUS_PATH,
+                                            NULL,
+                                            0,
+                                            on_cups_notification,
+                                            self,
+                                            NULL);
     }
 }
 
@@ -408,6 +410,12 @@ detach_from_cups_notifier (gpointer data)
   CcPrintersPanel        *self = (CcPrintersPanel*) data;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
+
+  if (priv->dbus_subscription_id != 0) {
+    g_dbus_connection_signal_unsubscribe (priv->cups_bus_connection,
+                                          priv->dbus_subscription_id);
+    priv->dbus_subscription_id = 0;
+  }
 
   cancel_cups_subscription (priv->subscription_id);
   priv->subscription_id = 0;
@@ -2475,6 +2483,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   priv->subscription_renewal_id = 0;
   priv->cups_proxy = NULL;
   priv->cups_bus_connection = NULL;
+  priv->dbus_subscription_id = 0;
 
   priv->permission = NULL;
   priv->lockdown_settings = NULL;
