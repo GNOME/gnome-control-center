@@ -23,6 +23,7 @@
 #include <config.h>
 
 #include "cc-wacom-page.h"
+#include "cc-wacom-nav-button.h"
 #include <gtk/gtk.h>
 
 #include <string.h>
@@ -42,6 +43,7 @@ struct _CcWacomPagePrivate
 {
 	GsdWacomDevice *stylus, *eraser;
 	GtkBuilder     *builder;
+	GtkWidget      *nav;
 	GSettings      *wacom_settings;
 	GSettings      *stylus_settings;
 	GSettings      *eraser_settings;
@@ -412,6 +414,8 @@ cc_wacom_page_init (CcWacomPage *self)
 	g_signal_connect (G_OBJECT (sw), "notify::active",
 			  G_CALLBACK (left_handed_toggled_cb), self);
 
+	priv->nav = cc_wacom_nav_button_new ();
+	gtk_grid_attach (GTK_GRID (box), priv->nav, 0, 0, 1, 1);
 }
 
 static GSettings *
@@ -506,4 +510,21 @@ cc_wacom_page_new (GsdWacomDevice *stylus,
 	set_first_stylus_icon (page);
 
 	return GTK_WIDGET (page);
+}
+
+void
+cc_wacom_page_set_navigation (CcWacomPage *page,
+			      GtkNotebook *notebook,
+			      gboolean     ignore_first_page)
+{
+	CcWacomPagePrivate *priv;
+
+	g_return_if_fail (CC_IS_WACOM_PAGE (page));
+
+	priv = page->priv;
+
+	g_object_set (G_OBJECT (priv->nav),
+		      "notebook", notebook,
+		      "ignore-first", ignore_first_page,
+		      NULL);
 }
