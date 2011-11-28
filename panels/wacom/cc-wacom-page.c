@@ -341,12 +341,6 @@ cc_wacom_page_dispose (GObject *object)
 }
 
 static void
-cc_wacom_page_finalize (GObject *object)
-{
-	G_OBJECT_CLASS (cc_wacom_page_parent_class)->finalize (object);
-}
-
-static void
 cc_wacom_page_class_init (CcWacomPageClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -356,7 +350,6 @@ cc_wacom_page_class_init (CcWacomPageClass *klass)
 	object_class->get_property = cc_wacom_page_get_property;
 	object_class->set_property = cc_wacom_page_set_property;
 	object_class->dispose = cc_wacom_page_dispose;
-	object_class->finalize = cc_wacom_page_finalize;
 }
 
 static void
