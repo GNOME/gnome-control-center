@@ -201,9 +201,12 @@ static void
 cc_wacom_nav_button_init (CcWacomNavButton *self)
 {
 	CcWacomNavButtonPrivate *priv;
+	GtkStyleContext *context;
 	GtkWidget *image;
 
 	priv = self->priv = WACOM_NAV_BUTTON_PRIVATE (self);
+	context = gtk_widget_get_style_context (GTK_WIDGET (self));
+	gtk_style_context_add_class (context, GTK_STYLE_CLASS_LINKED);
 
 	priv->prev = gtk_button_new ();
 	image = gtk_image_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
