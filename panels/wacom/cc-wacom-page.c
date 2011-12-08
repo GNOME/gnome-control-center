@@ -605,6 +605,11 @@ cc_wacom_page_new (GsdWacomDevice *stylus,
 		set_left_handed_from_gsettings (page);
 	}
 
+	/* Calibration for screen tablets */
+	if (gsd_wacom_device_is_screen_tablet (stylus) == TRUE) {
+		gtk_widget_show (WID ("button-calibrate"));
+	}
+
 	/* Tablet icon */
 	set_icon_name (page, "image-tablet", gsd_wacom_device_get_icon_name (stylus));
 
