@@ -136,6 +136,12 @@ cc_printers_panel_dispose (GObject *object)
   CcPrintersPanelPrivate *priv = CC_PRINTERS_PANEL (object)->priv;
   int                     i;
 
+  if (priv->pp_new_printer_dialog)
+    {
+      pp_new_printer_dialog_free (priv->pp_new_printer_dialog);
+      priv->pp_new_printer_dialog = NULL;
+    }
+
   free_dests (CC_PRINTERS_PANEL (object));
 
   if (priv->num_jobs > 0)
