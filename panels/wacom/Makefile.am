@@ -22,6 +22,8 @@ libwacom_properties_la_SOURCES =	\
 	cc-wacom-page.h			\
 	gsd-wacom-device.c		\
 	gsd-wacom-device.h		\
+	gsd-input-helper.c		\
+	gsd-input-helper.h		\
 	cc-wacom-nav-button.c		\
 	cc-wacom-nav-button.h
 
@@ -37,7 +39,9 @@ test_wacom_SOURCES =			\
 	cc-wacom-nav-button.c		\
 	cc-wacom-nav-button.h		\
 	gsd-wacom-device.c		\
-	gsd-wacom-device.h
+	gsd-wacom-device.h		\
+	gsd-input-helper.c		\
+	gsd-input-helper.h
 
 test_wacom_CPPFLAGS = $(INCLUDES)
 test_wacom_LDADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS)
