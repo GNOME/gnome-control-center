@@ -99,11 +99,7 @@ const char     * gsd_wacom_device_type_to_string   (GsdWacomDeviceType type);
 /* Helper and debug functions */
 GsdWacomDevice * gsd_wacom_device_create_fake (GsdWacomDeviceType  type,
 					       const char         *name,
-					       const char         *tool_name,
-					       gboolean            reversible,
-					       gboolean            is_screen_tablet,
-					       const char         *icon_name,
-					       guint               num_styli);
+					       const char         *tool_name);
 
 GList * gsd_wacom_device_create_fake_cintiq   (void);
 GList * gsd_wacom_device_create_fake_bt       (void);
