@@ -9,6 +9,9 @@ add_page (GList *devices,
 	GsdWacomDevice *stylus, *eraser;
 	GList *l;
 
+	if (devices == NULL)
+		return;
+
 	stylus = eraser = NULL;
 	for (l = devices; l ; l = l->next) {
 		switch (gsd_wacom_device_get_device_type (l->data)) {
