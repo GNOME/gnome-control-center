@@ -120,7 +120,7 @@ PKG_CHECK_MODULES(USER_ACCOUNTS_PANEL, $COMMON_MODULES dbus-glib-1
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
 PKG_CHECK_MODULES(WACOM_PANEL, $COMMON_MODULES
                   gnome-settings-daemon >= $GSD_REQUIRED_VERSION
-                  xi >= 1.2 x11)
+                  xi >= 1.2 x11 libwacom)
 
 GDESKTOP_PREFIX=`$PKG_CONFIG --variable prefix gsettings-desktop-schemas`
 AC_SUBST(GDESKTOP_PREFIX)
