@@ -27,6 +27,8 @@ G_BEGIN_DECLS
 #include <X11/extensions/XInput.h>
 #include <X11/extensions/XIproto.h>
 
+#define WACOM_SERIAL_IDS_PROP "Wacom Serial IDs"
+
 typedef enum {
         COMMAND_DEVICE_ADDED,
         COMMAND_DEVICE_REMOVED,
@@ -69,8 +71,9 @@ gboolean  device_set_property     (XDevice                *xdevice,
 gboolean  run_custom_command      (GdkDevice              *device,
                                    CustomCommand           command);
 
-GList *   get_disabled_devices    (GdkDeviceManager       *manager);
-char *    xdevice_get_device_node (int                     deviceid);
+GList *   get_disabled_devices     (GdkDeviceManager       *manager);
+char *    xdevice_get_device_node  (int                     deviceid);
+int       xdevice_get_last_tool_id (int                     deviceid);
 
 G_END_DECLS
 

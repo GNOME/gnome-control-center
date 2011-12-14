@@ -30,6 +30,7 @@
 
 #include <libwacom/libwacom.h>
 #include <X11/extensions/XInput.h>
+#include <X11/extensions/XInput2.h>
 
 #include "gsd-input-helper.h"
 
@@ -49,6 +50,7 @@ struct GsdWacomStylusPrivate
 {
 	GsdWacomDevice *device;
 	int id;
+	WacomStylusType type;
 	char *name;
 	const char *icon_name;
 	GSettings *settings;
@@ -131,7 +133,8 @@ gsd_wacom_stylus_new (GsdWacomDevice    *device,
 	stylus->priv->id = libwacom_stylus_get_id (wstylus);
 	stylus->priv->name = g_strdup (libwacom_stylus_get_name (wstylus));
 	stylus->priv->settings = settings;
-	stylus->priv->icon_name = get_icon_name_from_type (libwacom_stylus_get_type (wstylus));
+	stylus->priv->type = libwacom_stylus_get_type (wstylus);
+	stylus->priv->icon_name = get_icon_name_from_type (stylus->priv->type);
 
 	return stylus;
 }
@@ -181,6 +184,9 @@ gsd_wacom_stylus_get_device (GsdWacomStylus *stylus)
 struct GsdWacomDevicePrivate
 {
 	GdkDevice *gdk_device;
+	int device_id;
+	int opcode;
+
 	GsdWacomDeviceType type;
 	char *name;
 	char *icon_name;
@@ -203,6 +209,76 @@ static void     gsd_wacom_device_init        (GsdWacomDevice      *wacom_device)
 static void     gsd_wacom_device_finalize    (GObject              *object);
 
 G_DEFINE_TYPE (GsdWacomDevice, gsd_wacom_device, G_TYPE_OBJECT)
+
+static GdkFilterReturn
+filter_events (XEvent         *xevent,
+               GdkEvent       *event,
+               GsdWacomDevice *device)
+{
+	XIEvent             *xiev;
+	XIPropertyEvent     *pev;
+	XGenericEventCookie *cookie;
+	char                *name;
+	int                  tool_id;
+
+        /* verify we have a property event */
+	if (xevent->type != GenericEvent)
+		return GDK_FILTER_CONTINUE;
+
+	cookie = &xevent->xcookie;
+	if (cookie->extension != device->priv->opcode)
+		return GDK_FILTER_CONTINUE;
+
+	xiev = (XIEvent *) xevent->xcookie.data;
+
+	if (xiev->evtype != XI_PropertyEvent)
+		return GDK_FILTER_CONTINUE;
+
+	pev = (XIPropertyEvent *) xiev;
+
+	/* Is the event for us? */
+	if (pev->deviceid != device->priv->device_id)
+		return GDK_FILTER_CONTINUE;
+
+	name = XGetAtomName (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), pev->property);
+	if (name == NULL ||
+	    g_strcmp0 (name, WACOM_SERIAL_IDS_PROP) != 0) {
+		return GDK_FILTER_CONTINUE;
+	}
+	XFree (name);
+
+	tool_id = xdevice_get_last_tool_id (device->priv->device_id);
+	gsd_wacom_device_set_current_stylus (device, tool_id);
+
+	return GDK_FILTER_CONTINUE;
+}
+
+static gboolean
+setup_property_notify (GsdWacomDevice *device)
+{
+	Display *dpy;
+	XIEventMask evmask;
+	unsigned char bitmask[2] = { 0 };
+	int tool_id;
+
+	XISetMask (bitmask, XI_PropertyEvent);
+
+	evmask.deviceid = device->priv->device_id;
+	evmask.mask_len = sizeof (bitmask);
+	evmask.mask = bitmask;
+
+	dpy = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
+	XISelectEvents (dpy, DefaultRootWindow(dpy), &evmask, 1);
+
+	gdk_window_add_filter (NULL,
+			       (GdkFilterFunc) filter_events,
+			       device);
+
+	tool_id = xdevice_get_last_tool_id (device->priv->device_id);
+	gsd_wacom_device_set_current_stylus (device, tool_id);
+
+	return TRUE;
+}
 
 static GsdWacomDeviceType
 get_device_type (XDeviceInfo *dev)
@@ -360,9 +436,10 @@ gsd_wacom_device_constructor (GType                     type,
                               GObjectConstructParam     *construct_properties)
 {
         GsdWacomDevice *device;
+        GdkDeviceManager *device_manager;
         XDeviceInfo *device_info;
         WacomDevice *wacom_device;
-        int n_devices, id;
+        int n_devices;
         guint i;
         char *path;
 
@@ -373,7 +450,10 @@ gsd_wacom_device_constructor (GType                     type,
 	if (device->priv->gdk_device == NULL)
 		return G_OBJECT (device);
 
-        g_object_get (device->priv->gdk_device, "device-id", &id, NULL);
+	device_manager = gdk_display_get_device_manager (gdk_display_get_default ());
+	g_object_get (device_manager, "opcode", &device->priv->opcode, NULL);
+
+        g_object_get (device->priv->gdk_device, "device-id", &device->priv->device_id, NULL);
 
         device_info = XListInputDevices (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &n_devices);
         if (device_info == NULL) {
@@ -382,7 +462,7 @@ gsd_wacom_device_constructor (GType                     type,
 	}
 
         for (i = 0; i < n_devices; i++) {
-		if (device_info[i].id == id) {
+		if (device_info[i].id == device->priv->device_id) {
 			device->priv->type = get_device_type (&device_info[i]);
 			device->priv->tool_name = g_strdup (device_info[i].name);
 			break;
@@ -394,9 +474,9 @@ gsd_wacom_device_constructor (GType                     type,
 	if (device->priv->type == WACOM_TYPE_INVALID)
 		goto end;
 
-	path = xdevice_get_device_node (id);
+	path = xdevice_get_device_node (device->priv->device_id);
 	if (path == NULL) {
-		g_warning ("Could not get the device node path for ID '%d'", id);
+		g_warning ("Could not get the device node path for ID '%d'", device->priv->device_id);
 		device->priv->type = WACOM_TYPE_INVALID;
 		goto end;
 	}
@@ -429,6 +509,11 @@ gsd_wacom_device_constructor (GType                     type,
 	gsd_wacom_device_update_from_db (device, wacom_device, path);
 	libwacom_destroy (wacom_device);
 	g_free (path);
+
+	if (device->priv->type == WACOM_TYPE_STYLUS ||
+	    device->priv->type == WACOM_TYPE_ERASER) {
+		setup_property_notify (device);
+	}
 
 end:
         return G_OBJECT (device);
@@ -536,6 +621,10 @@ gsd_wacom_device_finalize (GObject *object)
         g_free (p->icon_name);
         p->icon_name = NULL;
 
+	gdk_window_remove_filter (NULL,
+				  (GdkFilterFunc) filter_events,
+				  device);
+
         G_OBJECT_CLASS (gsd_wacom_device_parent_class)->finalize (object);
 }
 
@@ -601,6 +690,40 @@ gsd_wacom_device_get_settings (GsdWacomDevice *device)
 	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), NULL);
 
 	return device->priv->wacom_settings;
+}
+
+void
+gsd_wacom_device_set_current_stylus (GsdWacomDevice *device,
+				     int             stylus_id)
+{
+	GList *l;
+
+	g_return_if_fail (GSD_IS_WACOM_DEVICE (device));
+
+	/* Don't change anything if the stylus is already set */
+	if (device->priv->last_stylus != NULL) {
+		GsdWacomStylus *stylus = device->priv->last_stylus;
+		if (stylus->priv->id == stylus_id)
+			return;
+	}
+
+	for (l = device->priv->styli; l; l = l->next) {
+		GsdWacomStylus *stylus = l->data;
+
+		/* Set a nice default if 0x0 */
+		if (stylus_id == 0x0 &&
+		    stylus->priv->type == WSTYLUS_GENERAL) {
+			g_object_set (device, "last-stylus", stylus, NULL);
+			return;
+		}
+
+		if (stylus->priv->id == stylus_id) {
+			g_object_set (device, "last-stylus", stylus, NULL);
+			return;
+		}
+	}
+
+	g_warning ("Could not find stylus ID 0x%x for tablet '%s'", stylus_id, device->priv->name);
 }
 
 GsdWacomDeviceType

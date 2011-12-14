@@ -92,6 +92,8 @@ const char     * gsd_wacom_device_get_tool_name    (GsdWacomDevice *device);
 gboolean         gsd_wacom_device_reversible       (GsdWacomDevice *device);
 gboolean         gsd_wacom_device_is_screen_tablet (GsdWacomDevice *device);
 GSettings      * gsd_wacom_device_get_settings     (GsdWacomDevice *device);
+void             gsd_wacom_device_set_current_stylus (GsdWacomDevice *device,
+						      int             stylus_id);
 
 GsdWacomDeviceType gsd_wacom_device_get_device_type (GsdWacomDevice *device);
 const char     * gsd_wacom_device_type_to_string   (GsdWacomDeviceType type);
