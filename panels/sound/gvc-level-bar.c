@@ -65,7 +65,7 @@ struct GvcLevelBarPrivate
         GtkOrientation orientation;
         GtkAdjustment *peak_adjustment;
         GtkAdjustment *rms_adjustment;
-        int            scale;
+        GvcLevelScale  scale;
         gdouble        peak_fraction;
         gdouble        rms_fraction;
         gdouble        max_peak;
