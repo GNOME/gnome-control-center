@@ -25,61 +25,244 @@
 
 #define WID(w) (GtkWidget *) gtk_builder_get_object (priv->builder, w)
 
+#define POSITION_MODEL_VALUE_COLUMN     2
+#define FONT_SCALE                      1.25
+
 struct _ZoomOptionsPrivate
 {
   GtkBuilder *builder;
   GSettings *settings;
+
+  GtkWidget *position_combobox;
+  GtkWidget *follow_mouse_radio;
+  GtkWidget *screen_part_radio;
+  GtkWidget *centered_radio;
+  GtkWidget *push_radio;
+  GtkWidget *proportional_radio;
+  GtkWidget *extend_beyond_checkbox;
 
   GtkWidget *dialog;
 };
 
 G_DEFINE_TYPE (ZoomOptions, zoom_options, G_TYPE_OBJECT);
 
-static void xhairs_color_opacity_changed_cb (GtkColorButton *button, ZoomOptionsPrivate *priv);
+inline void set_active (GtkWidget* toggle, gboolean sense);
+inline gboolean get_active (GtkWidget* toggle);
+inline void set_sensitive (GtkWidget *widget, gboolean sense);
+
+static void set_enable_screen_part_ui (GtkWidget *widget, ZoomOptionsPrivate *priv);
+static void mouse_tracking_notify_cb (GSettings *settings, const gchar *key, ZoomOptionsPrivate *priv);
+static void scale_label (GtkBin *toggle, PangoAttrList *attrs);
+static void xhairs_color_opacity_changed (GtkColorButton *button, ZoomOptionsPrivate *priv);
 static void xhairs_length_add_marks (GtkScale *scale);
 
-static void
-mouse_mode_radiobutton_toggled_cb (GtkWidget *widget, ZoomOptionsPrivate *priv)
+/* Utilties to save on line length */
+
+inline void
+set_active (GtkWidget* toggle, gboolean sense)
 {
-    if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)) == TRUE)
-      {
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (toggle), sense);
+}
+
+inline gboolean
+get_active (GtkWidget* toggle)
+{
+    return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (toggle));
+}
+
+inline void
+set_sensitive (GtkWidget *widget, gboolean sense)
+{
+    gtk_widget_set_sensitive (widget, sense);
+}
+
+static void
+mouse_tracking_radio_toggled_cb (GtkWidget *widget, ZoomOptionsPrivate *priv)
+{
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)) == TRUE)
+	  {
         g_settings_set_string (priv->settings, "mouse-tracking",
-                               gtk_buildable_get_name (GTK_BUILDABLE (widget)));
+	                           gtk_buildable_get_name (GTK_BUILDABLE (widget)));
       }
 }
 
 static void
-screen_position_radiobutton_toggled_cb (GtkWidget *widget, ZoomOptionsPrivate *priv)
+init_mouse_mode_radio_group (GSList *mode_group, ZoomOptionsPrivate *priv)
 {
-    if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)) == TRUE)
-      {
-        g_settings_set_string (priv->settings, "screen-position",
-                               gtk_buildable_get_name (GTK_BUILDABLE (widget)));
-      }
-}
+    gchar *mode;
+    gchar *name;
 
-static void
-init_radio_group (GSList *radio_group,
-                  gchar *key,
-                  GCallback radiobutton_toggled_cb,
-                  ZoomOptionsPrivate *priv)
-{
-    gchar *value;
-    const gchar *name;
+    mode = g_settings_get_string (priv->settings, "mouse-tracking");
+	for (; mode_group != NULL; mode_group = mode_group->next)
+	  {
+	    name = (gchar *) gtk_buildable_get_name (GTK_BUILDABLE (mode_group->data));
+	    if (g_strcmp0 (name, mode) == 0)
+	      set_active (GTK_WIDGET (mode_group->data), TRUE);
+	    else
+	      set_active (GTK_WIDGET (mode_group->data), FALSE);
 
-    value = g_settings_get_string (priv->settings, key);
-    for (; radio_group != NULL; radio_group = radio_group->next)
-      {
-        name = gtk_buildable_get_name (GTK_BUILDABLE (radio_group->data));
-        if (strcmp (name, value) == 0)
-          gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio_group->data), TRUE);
-        else
-          gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio_group->data), FALSE);
-
-        g_signal_connect (G_OBJECT (radio_group->data), "toggled",
-                          G_CALLBACK(radiobutton_toggled_cb),
+	    g_signal_connect (G_OBJECT (mode_group->data), "toggled",
+                          G_CALLBACK(mouse_tracking_radio_toggled_cb),
                           priv);
+	  }
+}
+
+static void
+init_screen_part_section (ZoomOptionsPrivate *priv, PangoAttrList *pango_attrs)
+{
+  gboolean lens_mode;
+  GSList *mouse_mode_group;
+
+  priv->follow_mouse_radio = WID ("moveableLens");
+  priv->screen_part_radio = WID ("screenPart");
+  priv->centered_radio = WID ("centered");
+  priv->push_radio = WID ("push");
+  priv->proportional_radio = WID ("proportional");
+  priv->extend_beyond_checkbox = WID ("scrollAtEdges");
+
+  /* Scale the labels of the toggles */
+  scale_label (GTK_BIN(priv->follow_mouse_radio), pango_attrs);
+  scale_label (GTK_BIN(priv->screen_part_radio), pango_attrs);
+  scale_label (GTK_BIN(priv->centered_radio), pango_attrs);
+  scale_label (GTK_BIN(priv->push_radio), pango_attrs);
+  scale_label (GTK_BIN(priv->proportional_radio), pango_attrs);
+  scale_label (GTK_BIN(priv->extend_beyond_checkbox), pango_attrs);
+
+  lens_mode = g_settings_get_boolean (priv->settings, "lens-mode");
+  set_active (priv->follow_mouse_radio, lens_mode);
+  set_active (priv->screen_part_radio, !lens_mode);
+
+  mouse_mode_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (priv->centered_radio));
+  init_mouse_mode_radio_group (mouse_mode_group, priv);
+  set_enable_screen_part_ui (priv->screen_part_radio, priv);
+
+  g_settings_bind (priv->settings, "lens-mode",
+                   priv->follow_mouse_radio, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  g_settings_bind (priv->settings, "scroll-at-edges",
+                   priv->extend_beyond_checkbox, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  g_signal_connect (G_OBJECT (priv->screen_part_radio), "toggled",
+                    G_CALLBACK (set_enable_screen_part_ui), priv);
+
+  g_signal_connect (G_OBJECT (priv->settings), "changed::mouse-tracking",
+                    G_CALLBACK (mouse_tracking_notify_cb), priv);
+}
+
+static void
+set_enable_screen_part_ui (GtkWidget *widget, ZoomOptionsPrivate *priv)
+{
+    gboolean screen_part;
+
+    /* If the "screen part" radio is not checked, then the "follow mouse" radio
+     * is checked (== lens mode). Set mouse tracking back to the default.
+     */
+    screen_part = get_active (priv->screen_part_radio);
+    if (!screen_part)
+      {
+        g_settings_set_string (priv->settings,
+                               "mouse-tracking", "proportional");
       }
+
+    set_sensitive (priv->centered_radio, screen_part);
+    set_sensitive (priv->push_radio, screen_part);
+    set_sensitive (priv->proportional_radio, screen_part);
+    set_sensitive (priv->extend_beyond_checkbox, screen_part);
+}
+
+static void
+mouse_tracking_notify_cb (GSettings             *settings,
+                          const gchar           *key,
+                          ZoomOptionsPrivate    *priv)
+{
+  gchar *tracking;
+
+  tracking = g_settings_get_string (settings, key);
+  if (g_strcmp0 (tracking, "proportional") == 0)
+    {
+      set_active (priv->proportional_radio, TRUE);
+    }
+  else if (g_strcmp0 (tracking, "centered") == 0)
+    {
+      set_active (priv->centered_radio, TRUE);
+    }
+  else
+    {
+      set_active (priv->push_radio, TRUE);
+    }
+}
+
+static void
+scale_label (GtkBin *toggle, PangoAttrList *attrs)
+{
+  GtkWidget *label;
+
+  label = gtk_bin_get_child (toggle);
+  gtk_label_set_attributes (GTK_LABEL (label), attrs);
+}
+
+static void
+screen_position_combo_changed_cb (GtkWidget *combobox, ZoomOptions *options)
+{
+  ZoomOptionsPrivate *priv = options->priv;
+  gchar *combo_value = NULL;
+  GtkTreeIter iter;
+
+  gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combobox), &iter);
+
+  gtk_tree_model_get (gtk_combo_box_get_model (GTK_COMBO_BOX (combobox)), &iter,
+                      POSITION_MODEL_VALUE_COLUMN, &combo_value,
+                      -1);
+
+  if (g_strcmp0 (combo_value, ""))
+    {
+      g_settings_set_string (priv->settings, "screen-position", combo_value);
+    }
+
+  g_free (combo_value);
+}
+
+static void
+screen_position_notify_cb (GSettings *settings,
+                           const gchar *key,
+                           ZoomOptions *options)
+{
+  ZoomOptionsPrivate *priv = options->priv;
+  gchar *position;
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GtkComboBox *combobox;
+  gboolean valid;
+  gchar *combo_value;
+
+  position = g_settings_get_string (settings, key);
+  position = g_settings_get_string (priv->settings, key);
+  combobox = GTK_COMBO_BOX (WID ("screen_position_combo_box"));
+  model = gtk_combo_box_get_model (combobox);
+
+  /* Find the matching screen position value in the combobox model.  If nothing
+   * matches, leave the combobox as is.
+   */
+  valid = gtk_tree_model_get_iter_first (model, &iter);
+  while (valid)
+    {
+        gtk_tree_model_get (model, &iter,
+                            POSITION_MODEL_VALUE_COLUMN, &combo_value,
+                            -1);
+        if (!g_strcmp0 (combo_value, position))
+          {
+            g_signal_handlers_block_by_func (combobox, screen_position_combo_changed_cb, priv);
+            gtk_combo_box_set_active_iter (combobox, &iter);
+            g_signal_handlers_unblock_by_func (combobox, screen_position_combo_changed_cb, priv);
+            g_free (combo_value);
+            break;
+          }
+
+        g_free (combo_value);
+        valid = gtk_tree_model_iter_next (model, &iter);
+    }
 }
 
 static void
@@ -96,7 +279,7 @@ init_xhairs_color_opacity (GtkColorButton *color_button, ZoomOptionsPrivate *pri
 }
 
 static void
-update_xhairs_color_cb (GSettings *settings, gchar *key, GtkColorButton *button)
+xhairs_color_notify_cb (GSettings *settings, gchar *key, GtkColorButton *button)
 {
     gchar *color;
     GdkColor rgb;
@@ -108,7 +291,7 @@ update_xhairs_color_cb (GSettings *settings, gchar *key, GtkColorButton *button)
 }
 
 static void
-update_xhairs_opacity_cb (GSettings *settings, gchar *key, GtkColorButton *button)
+xhairs_opacity_notify_cb (GSettings *settings, gchar *key, GtkColorButton *button)
 {
     gdouble opacity;
 
@@ -118,7 +301,7 @@ update_xhairs_opacity_cb (GSettings *settings, gchar *key, GtkColorButton *butto
 
 #define TO_HEX(x) (int) ((gdouble) x * 255.0)
 static void
-xhairs_color_opacity_changed_cb (GtkColorButton *button, ZoomOptionsPrivate *priv)
+xhairs_color_opacity_changed (GtkColorButton *button, ZoomOptionsPrivate *priv)
 {
     GdkRGBA rgba;
     gchar *color_string;
@@ -153,9 +336,11 @@ static void xhairs_length_add_marks (GtkScale *scale)
        length of one hair is 25% of the screen. */
     quarter_length = length / 4;
 
+    gtk_scale_add_mark (scale, 0, GTK_POS_BOTTOM, _("Short"));
     gtk_scale_add_mark (scale, quarter_length, GTK_POS_BOTTOM, _("1/4 Screen"));
     gtk_scale_add_mark (scale, quarter_length * 2 , GTK_POS_BOTTOM, _("1/2 Screen"));
     gtk_scale_add_mark (scale, quarter_length * 3, GTK_POS_BOTTOM, _("3/4 Screen"));
+    gtk_scale_add_mark (scale, length, GTK_POS_BOTTOM, _("Long"));
 }
 
 static void
@@ -215,7 +400,8 @@ zoom_options_init (ZoomOptions *self)
 {
   ZoomOptionsPrivate *priv;
   GtkWidget *w;
-  GSList *radio_group;
+  PangoAttrList *pango_attrs;
+  PangoAttribute *attr;
   GError *err = NULL;
 
   priv = self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, ZOOM_TYPE_OPTIONS, ZoomOptionsPrivate);
@@ -237,33 +423,26 @@ zoom_options_init (ZoomOptions *self)
 
   priv->settings = g_settings_new ("org.gnome.desktop.a11y.magnifier");
 
+  pango_attrs = pango_attr_list_new ();
+  attr = pango_attr_scale_new (FONT_SCALE);
+  pango_attr_list_insert (pango_attrs, attr);
+
   /* Magnification factor */
   w = WID ("magFactorSpinButton");
   g_settings_bind (priv->settings, "mag-factor",
                    gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (w)),
                    "value", G_SETTINGS_BIND_DEFAULT);
 
-  /* Mouse tracking */
-  w = WID ("proportional");
-  radio_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (w));
-  init_radio_group (radio_group, "mouse-tracking",
-                    G_CALLBACK(mouse_mode_radiobutton_toggled_cb), priv);
+  /* Screen position combo */
+  w = WID ("screen_position_combo_box");
+  screen_position_notify_cb (priv->settings, "screen-position", self);
+  g_signal_connect (G_OBJECT (priv->settings), "changed::screen-position",
+                    G_CALLBACK (screen_position_notify_cb), self);
+  g_signal_connect (G_OBJECT (w), "changed",
+                    G_CALLBACK (screen_position_combo_changed_cb), self);
 
-  /* Screen position */
-  w = WID ("full-screen");
-  radio_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (w));
-  init_radio_group (radio_group, "screen-position",
-                    G_CALLBACK(screen_position_radiobutton_toggled_cb), priv);
-
-  /* Lens mode */
-  w = WID ("moveableLensCheckbox");
-  g_settings_bind (priv->settings, "lens-mode", w, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  /* Clamp scrolling at screen edges */
-  w = WID ("scrollAtEdges");
-  g_settings_bind (priv->settings, "scroll-at-edges", w, "active",
-                   G_SETTINGS_BIND_DEFAULT);
+  /* Screen part section */
+  init_screen_part_section (priv, pango_attrs);
 
   /* Cross hairs: show/hide ... */
   w = WID ("xhairsEnabledSwitch");
@@ -274,11 +453,11 @@ zoom_options_init (ZoomOptions *self)
   w = WID ("xHairsPicker");
   init_xhairs_color_opacity (GTK_COLOR_BUTTON (w), priv);
   g_signal_connect (G_OBJECT (priv->settings), "changed::cross-hairs-color",
-                    G_CALLBACK (update_xhairs_color_cb), w);
+                    G_CALLBACK (xhairs_color_notify_cb), w);
   g_signal_connect (G_OBJECT (priv->settings), "changed::cross-hairs-opacity",
-                    G_CALLBACK (update_xhairs_opacity_cb), w);
+                    G_CALLBACK (xhairs_opacity_notify_cb), w);
   g_signal_connect (G_OBJECT (w), "color-set",
-                    G_CALLBACK(xhairs_color_opacity_changed_cb),
+                    G_CALLBACK (xhairs_color_opacity_changed),
                     priv);
 
   /* ... Cross hairs: thickness ... */
@@ -289,6 +468,7 @@ zoom_options_init (ZoomOptions *self)
 
   /* ... Cross hairs: clip ... */
   w = WID ("xHairsClipCheckbox");
+  scale_label (GTK_BIN(w), pango_attrs);
   g_settings_bind (priv->settings, "cross-hairs-clip", w, "active",
                    G_SETTINGS_BIND_INVERT_BOOLEAN);
 
@@ -301,6 +481,8 @@ zoom_options_init (ZoomOptions *self)
 
   /* ... Window itself ... */
   priv->dialog = WID ("magPrefsDialog");
+  gtk_window_set_position (GTK_WINDOW (priv->dialog),
+                           GTK_WIN_POS_CENTER);
   w = WID ("closeButton");
   g_signal_connect (G_OBJECT (w), "clicked",
                     G_CALLBACK (zoom_option_close_dialog_cb),
@@ -308,6 +490,9 @@ zoom_options_init (ZoomOptions *self)
   g_signal_connect (G_OBJECT (priv->dialog), "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete),
                     NULL);
+
+  pango_attr_list_unref (pango_attrs);
+
   zoom_options_present_dialog (self);
 }
 
