@@ -236,6 +236,10 @@ add_one_language (gpointer d)
   }
 
   name = gdm_normalize_language_name (data->languages[data->position]);
+  if (!name) {
+    goto next;
+  }
+
   if (g_hash_table_lookup (data->user_langs, name) != NULL) {
     g_free (name);
     goto next;
@@ -300,6 +304,37 @@ cc_common_language_add_available_languages (GtkListStore *store,
   data->position = 0;
 
   return gdk_threads_add_idle (add_one_language, data);
+}
+
+guint
+cc_common_language_add_all_languages (GtkListStore *store,
+                                      gboolean      regions,
+                                      GHashTable   *user_langs)
+{
+        AsyncLangData *data;
+        gchar *file_contents;
+        gsize length;
+
+        data = g_new0 (AsyncLangData, 1);
+
+        data->store = g_object_ref (store);
+        data->user_langs = g_hash_table_ref (user_langs);
+        data->regions = regions;
+        data->position = 0;
+
+        /* Load /usr/share/i18n/SUPPORTED file to get all existing locales */
+        if (g_file_get_contents ("/usr/share/i18n/SUPPORTED", &file_contents, &length, NULL)) {
+                gchar **lines;
+                gint i = 0;
+
+                lines = g_strsplit (file_contents, "\n", 0);
+                if (lines)
+                        data->languages = lines;
+
+                g_free (file_contents);
+        }
+
+        return gdk_threads_add_idle (add_one_language, data);
 }
 
 gchar *

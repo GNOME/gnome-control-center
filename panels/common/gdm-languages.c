@@ -256,10 +256,12 @@ gdm_normalize_language_name (const char *name)
                 return NULL;
         }
 
-        gdm_parse_language_name (name,
-                                 &language_code,
-                                 &territory_code,
-                                 &codeset, &modifier);
+        if (!gdm_parse_language_name (name,
+                                      &language_code,
+                                      &territory_code,
+                                      &codeset, &modifier)) {
+                return NULL;
+        }
 
         normalized_name = construct_language_name (language_code,
                                                    territory_code,
