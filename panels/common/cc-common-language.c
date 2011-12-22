@@ -312,8 +312,10 @@ cc_common_language_add_all_languages (GtkListStore *store,
                                       GHashTable   *user_langs)
 {
         AsyncLangData *data;
-        gchar *file_contents;
+        gchar *file_contents, **available_langs;
         gsize length;
+        GPtrArray *array;
+        gint i;
 
         data = g_new0 (AsyncLangData, 1);
 
@@ -322,17 +324,31 @@ cc_common_language_add_all_languages (GtkListStore *store,
         data->regions = regions;
         data->position = 0;
 
-        /* Load /usr/share/i18n/SUPPORTED file to get all existing locales */
+        /* First load available languages */
+        array = g_ptr_array_new ();
+
+        available_langs = gdm_get_all_language_names ();
+        for (i = 0; available_langs[i] != NULL; i++)
+                g_ptr_array_add (array, g_strdup (available_langs[i]));
+        g_strfreev (available_langs);
+
+        /* Load /usr/share/i18n/SUPPORTED file to get the uninstalled locales, if any */
         if (g_file_get_contents ("/usr/share/i18n/SUPPORTED", &file_contents, &length, NULL)) {
                 gchar **lines;
-                gint i = 0;
 
                 lines = g_strsplit (file_contents, "\n", 0);
-                if (lines)
-                        data->languages = lines;
+                if (lines) {
+                        for (i = 0; lines[i] != NULL; i++)
+                                g_ptr_array_add (array, g_strdup (lines[i]));
+
+                        g_strfreev (lines);
+                }
 
                 g_free (file_contents);
         }
+
+        g_ptr_array_add (array, NULL);
+        data->languages = (char **) g_ptr_array_free (array, FALSE);
 
         return gdk_threads_add_idle (add_one_language, data);
 }
@@ -608,4 +624,47 @@ cc_common_language_get_initial_regions (const gchar *lang)
         g_free (language);
 
         return ht;
+}
+
+gboolean
+cc_common_language_maybe_install (const gchar *lang)
+{
+        gchar *language_code, *territory_code, *territory_lang;
+        gboolean result = FALSE;
+        GDBusProxy *pk_proxy = NULL;
+
+        gdm_parse_language_name (lang, &language_code, &territory_code, NULL, NULL);
+
+        /* If the language is already available, do nothing */
+        territory_lang = g_strdup_printf ("%s_%s", language_code, territory_code);
+        if (gdm_language_has_translations (territory_lang)) {
+                result = TRUE;
+                goto out;
+        }
+
+        g_warning ("Language %s not installed, trying to intall it", territory_lang);
+
+        /* Now try to retrieve the list of packages needed to install this language */
+        pk_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                  G_DBUS_PROXY_FLAGS_NONE,
+                                                  NULL,
+                                                  "org.freedesktop.PackageKit",
+                                                  "/org/freedesktop/PackageKit",
+                                                  "org.freedesktop.PackageKit",
+                                                  NULL,
+                                                  NULL);
+        if (!pk_proxy) {
+                /* if there's a PK error, ignore and assume the lang is available */
+                result = TRUE;
+                goto out;
+        }
+                                               
+out:
+        g_free (language_code);
+        g_free (territory_code);
+        g_free (territory_lang);
+
+        g_object_unref (pk_proxy);
+
+        return result;
 }

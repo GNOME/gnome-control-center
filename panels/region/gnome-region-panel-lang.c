@@ -146,12 +146,15 @@ language_response (GtkDialog *dialog,
 		return;
 	}
 
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+	if (cc_common_language_maybe_install (lang)) {
 
-	if (cc_common_language_get_iter_for_language (model, lang, &iter)) {
-		gtk_tree_selection_select_iter (selection, &iter);
-        }
+		model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
+		selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+
+		if (cc_common_language_get_iter_for_language (model, lang, &iter)) {
+			gtk_tree_selection_select_iter (selection, &iter);
+		}
+	}
 
 	gtk_widget_grab_focus (treeview);
 
