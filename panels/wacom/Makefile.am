@@ -1,9 +1,12 @@
 # This is used in PANEL_CFLAGS
 cappletname = wacom
 
+SUBDIRS = calibrator
+
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(WACOM_PANEL_CFLAGS)				\
+	-I$(srcdir)/calibrator				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
@@ -27,7 +30,7 @@ libwacom_properties_la_SOURCES =	\
 	cc-wacom-nav-button.c		\
 	cc-wacom-nav-button.h
 
-libwacom_properties_la_LIBADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS)
+libwacom_properties_la_LIBADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS) $(builddir)/calibrator/libwacom-calibrator.la
 libwacom_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 noinst_PROGRAMS = test-wacom
@@ -44,7 +47,7 @@ test_wacom_SOURCES =			\
 	gsd-input-helper.h
 
 test_wacom_CPPFLAGS = $(INCLUDES)
-test_wacom_LDADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS)
+test_wacom_LDADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS) $(builddir)/calibrator/libwacom-calibrator.la
 
 @INTLTOOL_DESKTOP_RULE@
 

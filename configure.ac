@@ -401,6 +401,7 @@ panels/user-accounts/data/gnome-user-accounts-panel.desktop.in
 panels/user-accounts/data/faces/Makefile
 panels/user-accounts/data/icons/Makefile
 panels/wacom/Makefile
+panels/wacom/calibrator/Makefile
 panels/wacom/gnome-wacom-panel.desktop.in
 po/Makefile.in
 shell/Makefile
