@@ -42,6 +42,8 @@ static gchar **search_pattern_list = NULL;
 
 static GtkWidget *preview_dialog = NULL;
 
+static GRegex *left_bracket_regex = NULL;
+
 #define RESPONSE_PREVIEW 1
 
 static void
@@ -51,7 +53,7 @@ xkb_preview_destroy_callback (GtkWidget * widget)
 }
 
 static gboolean
-xkb_layout_chooser_selection_dupe (GtkDialog *dialog)
+xkb_layout_chooser_selection_dupe (GtkDialog * dialog)
 {
 	gchar *selected_id =
 	    (gchar *) xkb_layout_chooser_get_selected_id (dialog);
@@ -71,8 +73,7 @@ xkb_layout_chooser_selection_dupe (GtkDialog *dialog)
 }
 
 void
-xkb_layout_chooser_response (GtkDialog  *dialog,
-			     gint        response)
+xkb_layout_chooser_response (GtkDialog * dialog, gint response)
 {
 	switch (response)
 	case GTK_RESPONSE_OK:{
@@ -188,12 +189,14 @@ xkl_layout_add_to_list (XklConfigRegistry * config,
 	    GTK_LIST_STORE (gtk_builder_get_object (chooser_dialog,
 						    "layout_list_model"));
 	GtkTreeIter iter;
+
 	gchar *utf_variant_name =
 	    subitem ?
 	    xkb_layout_description_utf8 (gkbd_keyboard_config_merge_items
 					 (item->name,
 					  subitem->name)) :
 	    xci_desc_to_utf8 (item);
+
 	const gchar *xkb_id =
 	    subitem ? gkbd_keyboard_config_merge_items (item->name,
 							subitem->name) :
@@ -207,6 +210,12 @@ xkl_layout_add_to_list (XklConfigRegistry * config,
 	    xkl_create_description_from_list (item, subitem,
 					      XCI_PROP_LANGUAGE_LIST,
 					      xkl_get_language_name);
+
+	gchar *tmp = utf_variant_name;
+	utf_variant_name =
+	    g_regex_replace_literal (left_bracket_regex, tmp, -1, 0,
+				     "&lt;", 0, NULL);
+	g_free (tmp);
 
 	if (subitem
 	    && g_object_get_data (G_OBJECT (subitem),
@@ -244,10 +253,9 @@ xkl_layout_add_to_list (XklConfigRegistry * config,
 }
 
 static void
-xkb_layout_filter_clear (GtkEntry            *entry,
+xkb_layout_filter_clear (GtkEntry * entry,
 			 GtkEntryIconPosition icon_pos,
-			 GdkEvent            *event,
-			 gpointer             user_data)
+			 GdkEvent * event, gpointer user_data)
 {
 	gtk_entry_set_text (entry, "");
 }
@@ -267,14 +275,12 @@ xkb_layout_filter_changed (GtkBuilder * chooser_dialog)
 		g_object_set (G_OBJECT (xkb_layout_filter),
 			      "secondary-icon-name", "edit-find-symbolic",
 			      "secondary-icon-activatable", FALSE,
-			      "secondary-icon-sensitive", FALSE,
-			      NULL);
+			      "secondary-icon-sensitive", FALSE, NULL);
 	} else {
 		g_object_set (G_OBJECT (xkb_layout_filter),
 			      "secondary-icon-name", "edit-clear-symbolic",
 			      "secondary-icon-activatable", TRUE,
-			      "secondary-icon-sensitive", TRUE,
-			      NULL);
+			      "secondary-icon-sensitive", TRUE, NULL);
 	}
 
 	if (search_pattern_list != NULL)
@@ -295,17 +301,20 @@ xkb_layout_chooser_selection_changed (GtkTreeSelection * selection,
 	GtkWidget *add_button = CWID ("btnOk");
 	GtkWidget *preview_button = CWID ("btnPreview");
 	gboolean anything_selected = g_list_length (selected_layouts) == 1;
-	gboolean dupe = xkb_layout_chooser_selection_dupe (GTK_DIALOG (CWID("xkb_layout_chooser")));
+	gboolean dupe =
+	    xkb_layout_chooser_selection_dupe (GTK_DIALOG
+					       (CWID
+						("xkb_layout_chooser")));
 
 	gtk_widget_set_sensitive (add_button, anything_selected && !dupe);
 	gtk_widget_set_sensitive (preview_button, anything_selected);
 }
 
 static void
-xkb_layout_chooser_row_activated (GtkTreeView	    *tree_view,
-				  GtkTreePath	    *path,
-				  GtkTreeViewColumn *column,
-				  GtkBuilder	    *chooser_dialog)
+xkb_layout_chooser_row_activated (GtkTreeView * tree_view,
+				  GtkTreePath * path,
+				  GtkTreeViewColumn * column,
+				  GtkBuilder * chooser_dialog)
 {
 	GtkWidget *add_button = CWID ("btnOk");
 	GtkWidget *dialog = CWID ("xkb_layout_chooser");
@@ -377,11 +386,12 @@ xkb_layout_choose (GtkBuilder * dialog)
 	xkb_filtered_layouts_list = CWID ("xkb_filtered_layouts_list");
 	xkb_layout_filter = CWID ("xkb_layout_filter");
 
-	g_object_set_data (G_OBJECT (chooser), "xkb_filtered_layouts_list", xkb_filtered_layouts_list);
+	g_object_set_data (G_OBJECT (chooser), "xkb_filtered_layouts_list",
+			   xkb_filtered_layouts_list);
 	visible_column =
 	    gtk_tree_view_column_new_with_attributes ("Layout",
 						      gtk_cell_renderer_text_new
-						      (), "text",
+						      (), "markup",
 						      COMBO_BOX_MODEL_COL_VISIBLE,
 						      NULL);
 
@@ -414,8 +424,10 @@ xkb_layout_choose (GtkBuilder * dialog)
 
 	xkb_layout_chooser_selection_changed (selection, chooser_dialog);
 
-	g_signal_connect (G_OBJECT (xkb_filtered_layouts_list), "row-activated",
-			  G_CALLBACK (xkb_layout_chooser_row_activated), chooser_dialog);
+	g_signal_connect (G_OBJECT (xkb_filtered_layouts_list),
+			  "row-activated",
+			  G_CALLBACK (xkb_layout_chooser_row_activated),
+			  chooser_dialog);
 
 	filtered_model =
 	    GTK_TREE_MODEL_FILTER (gtk_builder_get_object
@@ -425,11 +437,16 @@ xkb_layout_choose (GtkBuilder * dialog)
 	    GTK_LIST_STORE (gtk_builder_get_object
 			    (chooser_dialog, "layout_list_model"));
 
+	left_bracket_regex = g_regex_new ("<", 0, 0, NULL);
+
 	xkl_config_registry_search_by_pattern (config_registry,
 					       NULL,
 					       (TwoConfigItemsProcessFunc)
 					       (xkl_layout_add_to_list),
 					       chooser_dialog);
+
+	g_regex_unref (left_bracket_regex);
+
 	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
 					      COMBO_BOX_MODEL_COL_SORT,
 					      GTK_SORT_ASCENDING);
@@ -446,11 +463,12 @@ xkb_layout_choose (GtkBuilder * dialog)
 }
 
 gchar *
-xkb_layout_chooser_get_selected_id (GtkDialog *dialog)
+xkb_layout_chooser_get_selected_id (GtkDialog * dialog)
 {
 	GtkTreeModel *filtered_list_model;
 	GtkWidget *xkb_filtered_layouts_list =
-		g_object_get_data (G_OBJECT (dialog), "xkb_filtered_layouts_list");
+	    g_object_get_data (G_OBJECT (dialog),
+			       "xkb_filtered_layouts_list");
 	GtkTreeIter viter;
 	gchar *v_id;
 	GtkTreeSelection *selection =
