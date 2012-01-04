@@ -629,9 +629,11 @@ cc_common_language_get_initial_regions (const gchar *lang)
 gboolean
 cc_common_language_maybe_install (const gchar *lang)
 {
-        gchar *language_code, *territory_code, *territory_lang;
+        gchar *language_code, *territory_code, *territory_lang, *tid = NULL;
         gboolean result = FALSE;
-        GDBusProxy *pk_proxy = NULL;
+        GDBusProxy *pk_proxy = NULL, *tid_proxy = NULL;
+        GVariant *v = NULL;
+        GError *error = NULL;
 
         gdm_parse_language_name (lang, &language_code, &territory_code, NULL, NULL);
 
@@ -655,15 +657,66 @@ cc_common_language_maybe_install (const gchar *lang)
                                                   NULL);
         if (!pk_proxy) {
                 /* if there's a PK error, ignore and assume the lang is available */
+                g_warning ("PackageKit not available, not installing language");
                 result = TRUE;
                 goto out;
         }
-                                               
+
+        /* Retrieve PK transaction */
+        v = g_dbus_proxy_call_sync (pk_proxy,
+                                    "GetTid",
+                                    NULL,
+                                    G_DBUS_CALL_FLAGS_NONE,
+                                    -1,
+                                    NULL,
+                                    &error);
+        if (!v) {
+                g_warning ("Could not get transaction from PackageKit: %s", error->message);
+                result = TRUE;
+                g_error_free (error);
+                goto out;
+        }
+
+        g_variant_get (v, "(s)", &tid);
+        g_variant_unref (v);
+
+        tid_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                   G_DBUS_PROXY_FLAGS_NONE,
+                                                   NULL,
+                                                   "org.freedesktop.PackageKit",
+                                                   tid,
+                                                   "org.freedesktop.PackageKit.Transaction",
+                                                   NULL,
+                                                   NULL);
+        if (!tid_proxy) {
+                g_warning ("Unable to get transaction proxy from PackageKit");
+                result = TRUE;
+                goto out;
+        }
+
+        /* Retrieve packages to be installed */
+        v = g_dbus_proxy_call_sync (tid_proxy,
+                                    "WhatProvides",
+                                    g_variant_new ("(ss(as)",
+                                                   "", "", ""),
+                                    G_DBUS_CALL_FLAGS_NONE,
+                                    -1,
+                                    NULL,
+                                    &error);
+        if (!v) {
+                g_warning ("Could not get list of packages from PackageKit: %s", error->message);
+                result = TRUE;
+                goto out;
+        }
+
 out:
         g_free (language_code);
         g_free (territory_code);
         g_free (territory_lang);
+        g_free (tid);
+        g_variant_unref (v);
 
+        g_object_unref (tid_proxy);
         g_object_unref (pk_proxy);
 
         return result;
