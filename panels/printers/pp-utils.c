@@ -2300,3 +2300,102 @@ class_add_printer (const gchar *class_name,
 
   return result;
 }
+
+gboolean
+printer_is_local (cups_ptype_t  printer_type,
+                  const gchar  *device_uri)
+{
+  gboolean result = TRUE;
+  char     scheme[HTTP_MAX_URI];
+  char     username[HTTP_MAX_URI];
+  char     hostname[HTTP_MAX_URI];
+  char     resource[HTTP_MAX_URI];
+  int      port;
+
+  if (printer_type &
+      (CUPS_PRINTER_DISCOVERED |
+       CUPS_PRINTER_REMOTE |
+       CUPS_PRINTER_IMPLICIT))
+    result = FALSE;
+
+  if (device_uri == NULL || !result)
+    return result;
+
+  httpSeparateURI (HTTP_URI_CODING_ALL, device_uri,
+		   scheme, sizeof (scheme), 
+		   username, sizeof (username),
+		   hostname, sizeof (hostname),
+		   &port,
+		   resource, sizeof (resource));
+
+  if (g_str_equal (scheme, "ipp") ||
+      g_str_equal (scheme, "smb") ||
+      g_str_equal (scheme, "socket") ||
+      g_str_equal (scheme, "lpd"))
+    result = FALSE;
+
+  return result;
+}
+
+gchar*
+printer_get_hostname (cups_ptype_t  printer_type,
+                      const gchar  *device_uri,
+                      const gchar  *printer_uri)
+{
+  gboolean  local = TRUE;
+  gchar    *result = NULL;
+  char      scheme[HTTP_MAX_URI];
+  char      username[HTTP_MAX_URI];
+  char      hostname[HTTP_MAX_URI];
+  char      resource[HTTP_MAX_URI];
+  int       port;
+
+  if (device_uri == NULL)
+    return result;
+
+  if (printer_type & (CUPS_PRINTER_DISCOVERED |
+                      CUPS_PRINTER_REMOTE |
+                      CUPS_PRINTER_IMPLICIT))
+    {
+      if (printer_uri)
+        {
+          httpSeparateURI (HTTP_URI_CODING_ALL, printer_uri,
+                           scheme, sizeof (scheme),
+                           username, sizeof (username),
+                           hostname, sizeof (hostname),
+                           &port,
+                           resource, sizeof (resource));
+
+          if (hostname[0] != '\0')
+            result = g_strdup (hostname);
+        }
+
+      local = FALSE;
+    }
+
+  if (result == NULL && device_uri)
+    {
+      httpSeparateURI (HTTP_URI_CODING_ALL, device_uri,
+                       scheme, sizeof (scheme),
+                       username, sizeof (username),
+                       hostname, sizeof (hostname),
+                       &port,
+                       resource, sizeof (resource));
+
+      if (g_str_equal (scheme, "ipp") ||
+          g_str_equal (scheme, "smb") ||
+          g_str_equal (scheme, "socket") ||
+          g_str_equal (scheme, "lpd"))
+        {
+          if (hostname[0] != '\0')
+            result = g_strdup (hostname);
+
+          local = FALSE;
+        }
+    }
+
+  if (local)
+    result = g_strdup ("localhost");
+
+  return result;
+}

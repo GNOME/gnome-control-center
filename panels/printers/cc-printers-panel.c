@@ -497,7 +497,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   GtkTreeIter             iter;
   GtkWidget              *widget;
   gboolean                sensitive;
-  gboolean                is_local = TRUE;
   gchar                  *printer_make_and_model = NULL;
   gchar                  *printer_model = NULL;
   gchar                  *reason = NULL;
@@ -510,6 +509,8 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   gchar                  *printer_uri = NULL;
   gchar                  *location = NULL;
   gchar                  *status = NULL;
+  gchar                  *device_uri = NULL;
+  gchar                  *printer_hostname = NULL;
   guint                   num_jobs;
   int                     printer_state = 3;
   int                     id = -1;
@@ -622,12 +623,12 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
       for (i = 0; i < priv->dests[id].num_options; i++)
         {
-          if (g_strcmp0 (priv->dests[id].options[i].name, "printer-location") == 0)
-            location = g_strdup (priv->dests[id].options[i].value);
-          else if (g_strcmp0 (priv->dests[id].options[i].name, "printer-state") == 0)
-            printer_state = atoi (priv->dests[id].options[i].value);
-          else if (g_strcmp0 (priv->dests[id].options[i].name, "printer-state-reasons") == 0)
-            reason = priv->dests[id].options[i].value;
+          if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-location") == 0)
+            location = g_strdup (priv->dests[priv->current_dest].options[i].value);
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-state") == 0)
+            printer_state = atoi (priv->dests[priv->current_dest].options[i].value);
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-state-reasons") == 0)
+            reason = priv->dests[priv->current_dest].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-types") == 0)
             marker_types = priv->dests[priv->current_dest].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-make-and-model") == 0)
@@ -636,6 +637,8 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
             printer_uri = priv->dests[priv->current_dest].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-type") == 0)
             printer_type = priv->dests[priv->current_dest].options[i].value;
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "device-uri") == 0)
+            device_uri = priv->dests[priv->current_dest].options[i].value;
         }
 
       if (priv->ppd_file_names[priv->current_dest] == NULL)
@@ -805,37 +808,17 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
         gtk_builder_get_object (priv->builder, "printer-ip-address-label");
 
       if (printer_type)
-        {
-          type = atoi (printer_type);
-          is_local = !(type & (CUPS_PRINTER_REMOTE | CUPS_PRINTER_IMPLICIT));
-        }
+        type = atoi (printer_type);
 
-      if (is_local)
+      printer_hostname = printer_get_hostname (type, device_uri, printer_uri);
+
+      if (printer_hostname)
         {
-          cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), "localhost");
+          cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), printer_hostname);
+          g_free (printer_hostname);
         }
       else
-        {
-          if (printer_uri)
-            {
-              char scheme[HTTP_MAX_URI],
-              userpass[HTTP_MAX_URI],
-              server[HTTP_MAX_URI],
-              resource[HTTP_MAX_URI];
-              int port;
-
-              httpSeparateURI(HTTP_URI_CODING_ALL, printer_uri, scheme, sizeof(scheme), userpass,
-                              sizeof(userpass), server, sizeof(server), &port, resource,
-                              sizeof(resource));
-
-              if (server[0] != '\0')
-                cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), server);
-              else
-                cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
-            }
-          else
-            cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
-        }
+        cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
 
 
       widget = (GtkWidget*)
@@ -933,6 +916,7 @@ actualize_printers_list (CcPrintersPanel *self)
 {
   CcPrintersPanelPrivate *priv;
   GtkListStore           *store;
+  cups_ptype_t            printer_type = 0;
   GtkTreeIter             selected_iter;
   GtkTreeView            *treeview;
   GtkTreeIter             iter;
@@ -945,6 +929,7 @@ actualize_printers_list (CcPrintersPanel *self)
   gchar                  *current_printer_name = NULL;
   gchar                  *printer_icon_name = NULL;
   gchar                  *default_icon_name = NULL;
+  gchar                  *device_uri = NULL;
   int                     current_dest = -1;
   int                     i, j;
   int                     num_jobs = 0;
@@ -1037,6 +1022,10 @@ actualize_printers_list (CcPrintersPanel *self)
         {
           if (g_strcmp0 (priv->dests[i].options[j].name, "printer-state") == 0)
             paused = (g_strcmp0 (priv->dests[i].options[j].value, "5") == 0);
+          else if (g_strcmp0 (priv->dests[i].options[j].name, "device-uri") == 0)
+            device_uri = priv->dests[i].options[j].value;
+          else if (g_strcmp0 (priv->dests[i].options[i].name, "printer-type") == 0)
+            printer_type = atoi (priv->dests[i].options[i].value);
         }
 
       if (priv->dests[i].is_default)
@@ -1044,7 +1033,10 @@ actualize_printers_list (CcPrintersPanel *self)
       else
         default_icon_name = NULL;
 
-      printer_icon_name = g_strdup ("printer");
+      if (printer_is_local (printer_type, device_uri))
+        printer_icon_name = g_strdup ("printer");
+      else
+        printer_icon_name = g_strdup ("printer-network");
 
       gtk_list_store_set (store, &iter,
                           PRINTER_ID_COLUMN, i,
