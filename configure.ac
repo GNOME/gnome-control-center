@@ -59,7 +59,7 @@ dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
 
-GLIB_REQUIRED_VERSION=2.29.14
+GLIB_REQUIRED_VERSION=2.31.0
 GTK_REQUIRED_VERSION=3.3.5
 DESKTOP_SCHEMAS_REQUIRED_VERSION=3.0.2
 PA_REQUIRED_VERSION=0.9.16
