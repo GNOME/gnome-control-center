@@ -76,6 +76,7 @@ struct _CcNetworkPanelPrivate
         NMRemoteSettings *remote_settings;
         gboolean          updating_device;
         guint             refresh_idle;
+        GtkWidget        *kill_switch_header;
 
         /* wireless dialog stuff */
         CmdlineOperation  arg_operation;
@@ -204,6 +205,9 @@ cc_network_panel_dispose (GObject *object)
         if (priv->remote_settings != NULL) {
                 g_object_unref (priv->remote_settings);
                 priv->remote_settings = NULL;
+        }
+        if (priv->kill_switch_header != NULL) {
+                g_clear_object (&priv->kill_switch_header);
         }
 
         G_OBJECT_CLASS (cc_network_panel_parent_class)->dispose (object);
@@ -3178,11 +3182,37 @@ stop_hotspot (GtkButton *button, CcNetworkPanel *panel)
         gtk_window_present (GTK_WINDOW (dialog));
 }
 
+static gboolean
+network_add_shell_header_widgets_cb (gpointer user_data)
+{
+        CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
+        gboolean ret;
+        GtkWidget *box;
+        GtkWidget *widget;
+
+        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3);
+        /* TRANSLATORS: this is to disable the radio hardware in the
+         * network panel */
+        widget = gtk_label_new (_("Airplane Mode"));
+        gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
+        widget = gtk_switch_new ();
+        gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
+        cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (panel)), box);
+        gtk_widget_show_all (box);
+
+        ret = nm_client_wireless_get_enabled (panel->priv->client);
+        gtk_switch_set_active (GTK_SWITCH (widget), !ret);
+        g_signal_connect (GTK_SWITCH (widget), "notify::active",
+                          G_CALLBACK (cc_network_panel_notify_enable_active_cb),
+                          panel);
+
+        return FALSE;
+}
+
 static void
 cc_network_panel_init (CcNetworkPanel *panel)
 {
         DBusGConnection *bus = NULL;
-        gboolean ret;
         GError *error = NULL;
         gint value;
         GSettings *settings_tmp;
@@ -3445,14 +3475,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
                                                      "button_unlock"));
         gtk_widget_set_sensitive (widget, FALSE);
 
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "switch_flight_mode"));
-        ret = nm_client_wireless_get_enabled (panel->priv->client);
-        gtk_switch_set_active (GTK_SWITCH (widget), !ret);
-        g_signal_connect (GTK_SWITCH (widget), "notify::active",
-                          G_CALLBACK (cc_network_panel_notify_enable_active_cb),
-                          panel);
-
         /* add remote settings such as VPN settings as virtual devices */
         bus = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
         if (bus == NULL) {
@@ -3482,6 +3504,9 @@ cc_network_panel_init (CcNetworkPanel *panel)
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "vbox1"));
         gtk_widget_reparent (widget, (GtkWidget *) panel);
+
+        /* add kill switch widgets when dialog activated */
+        g_idle_add (network_add_shell_header_widgets_cb, panel);
 }
 
 void
