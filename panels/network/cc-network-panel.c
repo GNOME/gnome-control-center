@@ -1545,10 +1545,11 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
 {
         GtkWidget *widget;
         char *wid_name;
-        const char *str;
+        GString *str;
         NMDeviceState state;
         NMDeviceType type;
         gboolean is_hotspot;
+        guint speed = 0;
 
         type = nm_device_get_device_type (device);
         state = nm_device_get_state (device);
@@ -1569,18 +1570,6 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
         gtk_label_set_label (GTK_LABEL (widget),
                              panel_device_to_localized_string (device));
 
-        /* set device state */
-        wid_name = g_strdup_printf ("label_%s_status", page_name);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
-        g_free (wid_name);
-        if (is_hotspot) {
-                str = _("Hotspot");
-        } else {
-                str = panel_device_state_to_localized_string (device);
-        }
-        gtk_label_set_label (GTK_LABEL (widget), str);
-
-
         /* set up the device on/off switch */
         wid_name = g_strdup_printf ("device_%s_off_switch", page_name);
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
@@ -1593,10 +1582,15 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
                                         state != NM_DEVICE_STATE_UNAVAILABLE
                                         && state != NM_DEVICE_STATE_UNMANAGED);
                 update_off_switch_from_device_state (GTK_SWITCH (widget), state, panel);
+                if (state != NM_DEVICE_STATE_UNAVAILABLE)
+                        speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (device));
                 break;
         case NM_DEVICE_TYPE_WIFI:
                 gtk_widget_show (widget);
                 wireless_enabled_toggled (panel->priv->client, NULL, panel);
+                if (state != NM_DEVICE_STATE_UNAVAILABLE)
+                        speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (device));
+                speed /= 1000;
                 break;
         case NM_DEVICE_TYPE_WIMAX:
                 gtk_widget_show (widget);
@@ -1611,6 +1605,22 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
                 break;
         }
 
+        /* set device state, with status and optionally speed */
+        wid_name = g_strdup_printf ("label_%s_status", page_name);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
+        g_free (wid_name);
+        if (is_hotspot) {
+                str = g_string_new (_("Hotspot"));
+        } else {
+                str = g_string_new (panel_device_state_to_localized_string (device));
+        }
+        if (speed  > 0) {
+                g_string_append (str, " - ");
+                /* Translators: network device speed */
+                g_string_append_printf (str, _("%d Mb/s"), speed);
+        }
+        gtk_label_set_label (GTK_LABEL (widget), str->str);
+
         /* set up options button */
         wid_name = g_strdup_printf ("button_%s_options", page_name);
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
@@ -1618,36 +1628,18 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
         if (widget != NULL) {
                 gtk_widget_set_sensitive (widget, find_connection_for_device (panel, device) != NULL);
         }
+        g_string_free (str, TRUE);
 }
 
 static void
 device_refresh_ethernet_ui (CcNetworkPanel *panel, NetDevice *device)
 {
-        guint speed;
-        NMDeviceState state;
         const char *str;
-        gchar *str_tmp;
         NMDevice *nm_device;
 
         nm_device = net_device_get_nm_device (device);
-        state = nm_device_get_state (nm_device);
 
         refresh_header_ui (panel, nm_device, "wired");
-
-        /* speed */
-        speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (nm_device));
-        if (state == NM_DEVICE_STATE_UNAVAILABLE)
-                str_tmp = NULL;
-        else if (speed  > 0)
-                /* Translators: network device speed */
-                str_tmp = g_strdup_printf (_("%d Mb/s"), speed);
-        else
-                str_tmp = g_strdup ("");
-        panel_set_widget_data (panel,
-                               "wired",
-                               "speed",
-                               str_tmp);
-        g_free (str_tmp);
 
         /* device MAC */
         str = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (nm_device));
@@ -1663,7 +1655,6 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
 {
         GtkWidget *widget;
         GtkWidget *sw;
-        guint speed;
         const GPtrArray *aps;
         GPtrArray *aps_unique = NULL;
         GtkWidget *heading;
@@ -1722,21 +1713,6 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
 
         panel_set_widget_data (panel, "hotspot", "security_key", hotspot_secret);
         g_free (hotspot_secret);
-
-        /* speed */
-        speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (nm_device));
-        if (state == NM_DEVICE_STATE_UNAVAILABLE)
-                str_tmp = NULL;
-        else if (speed > 0)
-                str_tmp = g_strdup_printf (_("%d Mb/s"),
-                                           speed / 1000);
-        else
-                str_tmp = g_strdup ("");
-        panel_set_widget_data (panel,
-                               "wireless",
-                               "speed",
-                               str_tmp);
-        g_free (str_tmp);
 
         /* device MAC */
         str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (nm_device));
