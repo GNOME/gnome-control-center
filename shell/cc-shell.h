@@ -89,6 +89,8 @@ struct _CcShellClass
                                            const gchar **argv,
                                            GError      **error);
   GtkWidget * (*get_toplevel)             (CcShell      *shell);
+  void        (*embed_widget_in_header)   (CcShell      *shell,
+                                           GtkWidget    *widget);
 };
 
 GType           cc_shell_get_type                 (void) G_GNUC_CONST;
@@ -101,6 +103,9 @@ gboolean        cc_shell_set_active_panel_from_id (CcShell      *shell,
                                                    const gchar **argv,
                                                    GError      **error);
 GtkWidget *     cc_shell_get_toplevel             (CcShell      *shell);
+
+void            cc_shell_embed_widget_in_header   (CcShell      *shell,
+                                                   GtkWidget    *widget);
 
 G_END_DECLS
 
