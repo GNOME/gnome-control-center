@@ -40,7 +40,7 @@
 #define GSD_WACOM_STYLUS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GSD_TYPE_WACOM_STYLUS, GsdWacomStylusPrivate))
 
 #define WACOM_TABLET_SCHEMA "org.gnome.settings-daemon.peripherals.wacom"
-#define WACOM_DEVICE_CONFIG_BASE "/org/gnome/settings-daemon/peripherals/wacom/%s"
+#define WACOM_DEVICE_CONFIG_BASE "/org/gnome/settings-daemon/peripherals/wacom/%s/"
 #define WACOM_STYLUS_SCHEMA "org.gnome.settings-daemon.peripherals.wacom.stylus"
 #define WACOM_ERASER_SCHEMA "org.gnome.settings-daemon.peripherals.wacom.eraser"
 
@@ -374,7 +374,7 @@ add_stylus_to_device (GsdWacomDevice *device,
 		    libwacom_stylus_is_eraser (wstylus) == FALSE)
 			return;
 
-		stylus_settings_path = g_strdup_printf ("%s/0x%x", settings_path, id);
+		stylus_settings_path = g_strdup_printf ("%s0x%x/", settings_path, id);
 		if (device->priv->type == WACOM_TYPE_STYLUS) {
 			settings = g_settings_new_with_path (WACOM_STYLUS_SCHEMA, stylus_settings_path);
 			stylus = gsd_wacom_stylus_new (device, wstylus, settings);
