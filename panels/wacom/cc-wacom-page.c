@@ -99,8 +99,6 @@ set_pressurecurve (GtkRange *range, GSettings *settings)
 	array = g_variant_new_array (G_VARIANT_TYPE_INT32, values, G_N_ELEMENTS (values));
 
 	g_settings_set_value (settings, "pressurecurve", array);
-
-	g_variant_unref (array);
 }
 
 static void
@@ -259,7 +257,6 @@ map_button (GSettings *settings, int button2, int button3)
 	g_settings_set_value (settings, "buttonmapping", array);
 
 	g_free (tmp);
-	g_variant_unref (array);
 }
 
 static void
