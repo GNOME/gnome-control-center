@@ -767,10 +767,13 @@ gsd_wacom_device_create_fake (GsdWacomDeviceType  type,
 	if (db == NULL)
 		db = libwacom_database_new ();
 
+	wacom_device = libwacom_new_from_name (db, name, NULL);
+	if (wacom_device == NULL)
+		return NULL;
+
 	priv = device->priv;
 	priv->type = type;
 	priv->tool_name = g_strdup (tool_name);
-	wacom_device = libwacom_new_from_name (db, name, NULL);
 	gsd_wacom_device_update_from_db (device, wacom_device, name);
 	libwacom_destroy (wacom_device);
 
@@ -780,28 +783,25 @@ gsd_wacom_device_create_fake (GsdWacomDeviceType  type,
 GList *
 gsd_wacom_device_create_fake_cintiq (void)
 {
-#if 0
 	GsdWacomDevice *device;
 	GList *devices;
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_STYLUS,
-					       "Wacom Cintiq 21UX2",
+					       "Cintiq 21UX2",
 					       "Wacom Cintiq 21UX2 stylus");
 	devices = g_list_prepend (NULL, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_ERASER,
-					       "Wacom Cintiq 21UX2",
+					       "Cintiq 21UX2",
 					       "Wacom Cintiq 21UX2 eraser");
 	devices = g_list_prepend (devices, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_PAD,
-					       "Wacom Cintiq 21UX2",
+					       "Cintiq 21UX2",
 					       "Wacom Cintiq 21UX2 pad");
 	devices = g_list_prepend (devices, device);
 
 	return devices;
-#endif
-	return NULL;
 }
 
 GList *
@@ -836,21 +836,18 @@ gsd_wacom_device_create_fake_bt (void)
 GList *
 gsd_wacom_device_create_fake_x201 (void)
 {
-#if 0
 	GsdWacomDevice *device;
 	GList *devices;
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_STYLUS,
-					       "Serial Wacom Tablet WACf004",
-					       "Serial Wacom Tablet WACf004 stylus");
+					       "Serial Tablet WACf004",
+					       "Serial Tablet WACf004 stylus");
 	devices = g_list_prepend (NULL, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_ERASER,
-					       "Serial Wacom Tablet WACf004",
-					       "Serial Wacom Tablet WACf004 eraser");
+					       "Serial Tablet WACf004",
+					       "Serial Tablet WACf004 eraser");
 	devices = g_list_prepend (devices, device);
 
 	return devices;
-#endif
-	return NULL;
 }
