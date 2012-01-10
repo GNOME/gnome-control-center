@@ -126,7 +126,7 @@ int find_device(const char* pre_device, bool verbose, bool list_devices,
                     /* a calibratable device (has 2 axis valuators) */
                     found++;
                     *device_id = list->id;
-                    *device_name = my_strdup(list->name);
+                    *device_name = g_strdup(list->name);
                     device_axys->x_min = ax[0].min_value;
                     device_axys->x_max = ax[0].max_value;
                     device_axys->y_min = ax[1].min_value;

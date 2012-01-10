@@ -27,18 +27,6 @@
 #include "calibrator.h"
 
 
-/* strdup: non-ansi */
-char* my_strdup(const char* s);
-char* my_strdup(const char* s) {
-    size_t len = strlen(s) + 1;
-    void* p = malloc(len);
-
-    if (p == NULL)
-        return NULL;
-
-    return (char*) memcpy(p, s, len);
-}
-
 int find_device(const char*, bool, bool, XID*, const char**, XYinfo*);
 
 static void usage(char* cmd, unsigned thr_misclick);
