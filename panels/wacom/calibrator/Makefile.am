@@ -26,7 +26,6 @@ noinst_PROGRAMS = test-calibrator
 
 test_calibrator_SOURCES =		\
 	main.c				\
-	main.h				\
 	calibrator.c			\
 	calibrator.h			\
 	gui_gtk.c			\

@@ -29,7 +29,6 @@
 #include <X11/extensions/XInput.h>
 
 #include "gui_gtk.h"
-#include "main.h"
 
 /**
  * find a calibratable touchscreen device (using XInput)
@@ -38,7 +37,7 @@
  * retuns number of devices found,
  * the data of the device is returned in the last 3 function parameters
  */
-int find_device(const char* pre_device, gboolean verbose, gboolean list_devices,
+static int find_device(const char* pre_device, gboolean verbose, gboolean list_devices,
         XID* device_id, const char** device_name, XYinfo* device_axis)
 {
     gboolean pre_device_is_id = TRUE;
@@ -167,7 +166,23 @@ static void usage(char* cmd, unsigned thr_misclick)
     fprintf(stderr, "\t--geometry: manually provide the geometry (width and height) for the calibration window\n");
 }
 
-struct Calib* main_common(int argc, char** argv)
+static struct Calib* CalibratorXorgPrint(const char* const device_name0, const XYinfo *axis0, const gboolean verbose0, const int thr_misclick, const int thr_doubleclick, const char* geometry)
+{
+    struct Calib* c = (struct Calib*)calloc(1, sizeof(struct Calib));
+    c->old_axis = *axis0;
+    c->threshold_misclick = thr_misclick;
+    c->threshold_doubleclick = thr_doubleclick;
+    c->geometry = geometry;
+
+    printf("Calibrating standard Xorg driver \"%s\"\n", device_name0);
+    printf("\tcurrent calibration values: min_x=%d, max_x=%d and min_y=%d, max_y=%d\n",
+                c->old_axis.x_min, c->old_axis.x_max, c->old_axis.y_min, c->old_axis.y_max);
+    printf("\tIf these values are estimated wrong, either supply it manually with the --precalib option, or run the 'get_precalib.sh' script to automatically get it (through HAL).\n");
+
+    return c;
+}
+
+static struct Calib* main_common(int argc, char** argv)
 {
     gboolean verbose = FALSE;
     gboolean list_devices = FALSE;
@@ -323,37 +338,7 @@ struct Calib* main_common(int argc, char** argv)
             verbose, thr_misclick, thr_doubleclick, geometry);
 }
 
-struct Calib* CalibratorXorgPrint(const char* const device_name0, const XYinfo *axis0, const gboolean verbose0, const int thr_misclick, const int thr_doubleclick, const char* geometry)
-{
-    struct Calib* c = (struct Calib*)calloc(1, sizeof(struct Calib));
-    c->old_axis = *axis0;
-    c->threshold_misclick = thr_misclick;
-    c->threshold_doubleclick = thr_doubleclick;
-    c->geometry = geometry;
-
-    printf("Calibrating standard Xorg driver \"%s\"\n", device_name0);
-    printf("\tcurrent calibration values: min_x=%d, max_x=%d and min_y=%d, max_y=%d\n",
-                c->old_axis.x_min, c->old_axis.x_max, c->old_axis.y_min, c->old_axis.y_max);
-    printf("\tIf these values are estimated wrong, either supply it manually with the --precalib option, or run the 'get_precalib.sh' script to automatically get it (through HAL).\n");
-
-    return c;
-}
-
-gboolean finish_data(struct Calib* c, const XYinfo new_axis, int swap_xy)
-{
-    gboolean success = TRUE;
-
-    /* we suppose the previous 'swap_xy' value was 0 */
-    /* (unfortunately there is no way to verify this (yet)) */
-    int new_swap_xy = swap_xy;
-
-    printf("\n\n--> Making the calibration permanent <--\n");
-    success &= output_xorgconfd(c, new_axis, swap_xy, new_swap_xy);
-
-    return success;
-}
-
-gboolean output_xorgconfd(struct Calib* c, const XYinfo new_axis, int swap_xy, int new_swap_xy)
+static gboolean output_xorgconfd(struct Calib* c, const XYinfo new_axis, int swap_xy, int new_swap_xy)
 {
     const char* sysfs_name = "!!Name_Of_TouchScreen!!";
 
@@ -371,6 +356,20 @@ gboolean output_xorgconfd(struct Calib* c, const XYinfo new_axis, int swap_xy, i
     printf("EndSection\n");
 
     return TRUE;
+}
+
+static gboolean finish_data(struct Calib* c, const XYinfo new_axis, int swap_xy)
+{
+    gboolean success = TRUE;
+
+    /* we suppose the previous 'swap_xy' value was 0 */
+    /* (unfortunately there is no way to verify this (yet)) */
+    int new_swap_xy = swap_xy;
+
+    printf("\n\n--> Making the calibration permanent <--\n");
+    success &= output_xorgconfd(c, new_axis, swap_xy, new_swap_xy);
+
+    return success;
 }
 
 int main(int argc, char** argv)
