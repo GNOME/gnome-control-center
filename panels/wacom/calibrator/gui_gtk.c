@@ -30,8 +30,6 @@
 #include "calibrator.h"
 #include "gui_gtk.h"
 
-#define MAXIMUM(x,y) ((x) > (y) ? (x) : (y))
-
 /* Timeout parameters */
 const int time_step = 100;  /* in milliseconds */
 const int max_time = 15000; /* 5000 = 5 sec */
@@ -180,8 +178,8 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
     for (i = 0; i != HELP_LINES; i++)
     {
         cairo_text_extents(cr, help_text[i], &extent);
-        text_width = MAXIMUM(text_width, extent.width);
-        text_height = MAXIMUM(text_height, extent.height);
+        text_width = MAX(text_width, extent.width);
+        text_height = MAX(text_height, extent.height);
     }
     text_height += 2;
 
