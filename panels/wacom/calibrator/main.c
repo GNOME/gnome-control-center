@@ -39,7 +39,7 @@
  * the data of the device is returned in the last 3 function parameters
  */
 int find_device(const char* pre_device, gboolean verbose, gboolean list_devices,
-        XID* device_id, const char** device_name, XYinfo* device_axys)
+        XID* device_id, const char** device_name, XYinfo* device_axis)
 {
     gboolean pre_device_is_id = TRUE;
     int found = 0;
@@ -127,10 +127,10 @@ int find_device(const char* pre_device, gboolean verbose, gboolean list_devices,
                     found++;
                     *device_id = list->id;
                     *device_name = g_strdup(list->name);
-                    device_axys->x_min = ax[0].min_value;
-                    device_axys->x_max = ax[0].max_value;
-                    device_axys->y_min = ax[1].min_value;
-                    device_axys->y_max = ax[1].max_value;
+                    device_axis->x_min = ax[0].min_value;
+                    device_axis->x_max = ax[0].max_value;
+                    device_axis->y_min = ax[1].min_value;
+                    device_axis->y_max = ax[1].max_value;
 
                     if (list_devices)
                         printf("Device \"%s\" id=%i\n", *device_name, (int)*device_id);
@@ -173,7 +173,7 @@ struct Calib* main_common(int argc, char** argv)
     gboolean list_devices = FALSE;
     gboolean fake = FALSE;
     gboolean precalib = FALSE;
-    XYinfo pre_axys = {-1, -1, -1, -1};
+    XYinfo pre_axis = {-1, -1, -1, -1};
     const char* pre_device = NULL;
     const char* geometry = NULL;
     unsigned thr_misclick = 15;
@@ -217,13 +217,13 @@ struct Calib* main_common(int argc, char** argv)
             if (strcmp("--precalib", argv[i]) == 0) {
                 precalib = TRUE;
                 if (argc > i+1)
-                    pre_axys.x_min = atoi(argv[++i]);
+                    pre_axis.x_min = atoi(argv[++i]);
                 if (argc > i+1)
-                    pre_axys.x_max = atoi(argv[++i]);
+                    pre_axis.x_max = atoi(argv[++i]);
                 if (argc > i+1)
-                    pre_axys.y_min = atoi(argv[++i]);
+                    pre_axis.y_min = atoi(argv[++i]);
                 if (argc > i+1)
-                    pre_axys.y_max = atoi(argv[++i]);
+                    pre_axis.y_max = atoi(argv[++i]);
             } else
 
             /* Get mis-click threshold ? */
@@ -261,21 +261,21 @@ struct Calib* main_common(int argc, char** argv)
     /* Choose the device to calibrate */
     XID         device_id   = (XID) -1;
     const char* device_name = NULL;
-    XYinfo      device_axys = {-1, -1, -1, -1};
+    XYinfo      device_axis = {-1, -1, -1, -1};
     if (fake) {
         /* Fake a calibratable device */
         device_name = "Fake_device";
-        device_axys.x_min=0;
-        device_axys.x_max=1000;
-        device_axys.y_min=0;
-        device_axys.y_max=1000;
+        device_axis.x_min=0;
+        device_axis.x_max=1000;
+        device_axis.y_min=0;
+        device_axis.y_max=1000;
 
         if (verbose) {
             printf("DEBUG: Faking device: %s\n", device_name);
         }
     } else {
         /* Find the right device */
-        int nr_found = find_device(pre_device, verbose, list_devices, &device_id, &device_name, &device_axys);
+        int nr_found = find_device(pre_device, verbose, list_devices, &device_id, &device_name, &device_axis);
 
         if (list_devices) {
             /* printed the list in find_device */
@@ -302,44 +302,44 @@ struct Calib* main_common(int argc, char** argv)
 
     /* override min/max XY from command line ? */
     if (precalib) {
-        if (pre_axys.x_min != -1)
-            device_axys.x_min = pre_axys.x_min;
-        if (pre_axys.x_max != -1)
-            device_axys.x_max = pre_axys.x_max;
-        if (pre_axys.y_min != -1)
-            device_axys.y_min = pre_axys.y_min;
-        if (pre_axys.y_max != -1)
-            device_axys.y_max = pre_axys.y_max;
+        if (pre_axis.x_min != -1)
+            device_axis.x_min = pre_axis.x_min;
+        if (pre_axis.x_max != -1)
+            device_axis.x_max = pre_axis.x_max;
+        if (pre_axis.y_min != -1)
+            device_axis.y_min = pre_axis.y_min;
+        if (pre_axis.y_max != -1)
+            device_axis.y_max = pre_axis.y_max;
 
         if (verbose) {
             printf("DEBUG: Setting precalibration: %i, %i, %i, %i\n",
-                device_axys.x_min, device_axys.x_max,
-                device_axys.y_min, device_axys.y_max);
+                device_axis.x_min, device_axis.x_max,
+                device_axis.y_min, device_axis.y_max);
         }
     }
 
     /* lastly, presume a standard Xorg driver (evtouch, mutouch, ...) */
-    return CalibratorXorgPrint(device_name, &device_axys,
+    return CalibratorXorgPrint(device_name, &device_axis,
             verbose, thr_misclick, thr_doubleclick, geometry);
 }
 
-struct Calib* CalibratorXorgPrint(const char* const device_name0, const XYinfo *axys0, const gboolean verbose0, const int thr_misclick, const int thr_doubleclick, const char* geometry)
+struct Calib* CalibratorXorgPrint(const char* const device_name0, const XYinfo *axis0, const gboolean verbose0, const int thr_misclick, const int thr_doubleclick, const char* geometry)
 {
     struct Calib* c = (struct Calib*)calloc(1, sizeof(struct Calib));
-    c->old_axys = *axys0;
+    c->old_axis = *axis0;
     c->threshold_misclick = thr_misclick;
     c->threshold_doubleclick = thr_doubleclick;
     c->geometry = geometry;
 
     printf("Calibrating standard Xorg driver \"%s\"\n", device_name0);
     printf("\tcurrent calibration values: min_x=%d, max_x=%d and min_y=%d, max_y=%d\n",
-                c->old_axys.x_min, c->old_axys.x_max, c->old_axys.y_min, c->old_axys.y_max);
+                c->old_axis.x_min, c->old_axis.x_max, c->old_axis.y_min, c->old_axis.y_max);
     printf("\tIf these values are estimated wrong, either supply it manually with the --precalib option, or run the 'get_precalib.sh' script to automatically get it (through HAL).\n");
 
     return c;
 }
 
-gboolean finish_data(struct Calib* c, const XYinfo new_axys, int swap_xy)
+gboolean finish_data(struct Calib* c, const XYinfo new_axis, int swap_xy)
 {
     gboolean success = TRUE;
 
@@ -348,12 +348,12 @@ gboolean finish_data(struct Calib* c, const XYinfo new_axys, int swap_xy)
     int new_swap_xy = swap_xy;
 
     printf("\n\n--> Making the calibration permanent <--\n");
-    success &= output_xorgconfd(c, new_axys, swap_xy, new_swap_xy);
+    success &= output_xorgconfd(c, new_axis, swap_xy, new_swap_xy);
 
     return success;
 }
 
-gboolean output_xorgconfd(struct Calib* c, const XYinfo new_axys, int swap_xy, int new_swap_xy)
+gboolean output_xorgconfd(struct Calib* c, const XYinfo new_axis, int swap_xy, int new_swap_xy)
 {
     const char* sysfs_name = "!!Name_Of_TouchScreen!!";
 
@@ -362,10 +362,10 @@ gboolean output_xorgconfd(struct Calib* c, const XYinfo new_axys, int swap_xy, i
     printf("Section \"InputClass\"\n");
     printf("	Identifier	\"calibration\"\n");
     printf("	MatchProduct	\"%s\"\n", sysfs_name);
-    printf("	Option	\"MinX\"	\"%d\"\n", new_axys.x_min);
-    printf("	Option	\"MaxX\"	\"%d\"\n", new_axys.x_max);
-    printf("	Option	\"MinY\"	\"%d\"\n", new_axys.y_min);
-    printf("	Option	\"MaxY\"	\"%d\"\n", new_axys.y_max);
+    printf("	Option	\"MinX\"	\"%d\"\n", new_axis.x_min);
+    printf("	Option	\"MaxX\"	\"%d\"\n", new_axis.x_max);
+    printf("	Option	\"MinY\"	\"%d\"\n", new_axis.y_min);
+    printf("	Option	\"MaxY\"	\"%d\"\n", new_axis.y_max);
     if (swap_xy != 0)
         printf("	Option	\"SwapXY\"	\"%d\" # unless it was already set to 1\n", new_swap_xy);
     printf("EndSection\n");
@@ -376,7 +376,7 @@ gboolean output_xorgconfd(struct Calib* c, const XYinfo new_axys, int swap_xy, i
 int main(int argc, char** argv)
 {
     int success = 0;
-    XYinfo axys;
+    XYinfo axis;
     gboolean swap_xy;
 
     struct Calib* calibrator = main_common(argc, argv);
@@ -384,9 +384,9 @@ int main(int argc, char** argv)
     /* GTK setup */
     gtk_init(&argc, &argv);
 
-    success = run_gui(calibrator, &axys, &swap_xy);
+    success = run_gui(calibrator, &axis, &swap_xy);
     if (success)
-        success = finish_data(calibrator, axys, swap_xy);
+        success = finish_data(calibrator, axis, swap_xy);
 
     if (!success) {
         /* TODO, in GUI ? */

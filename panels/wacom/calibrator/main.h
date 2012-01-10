@@ -33,12 +33,12 @@ static void usage(char* cmd, unsigned thr_misclick);
 
 struct Calib* main_common(int argc, char** argv);
 
-struct Calib* CalibratorXorgPrint(const char* const device_name, const XYinfo *axys,
+struct Calib* CalibratorXorgPrint(const char* const device_name, const XYinfo *axis,
         const gboolean verbose, const int thr_misclick, const int thr_doubleclick,
         const char* geometry);
 
-gboolean finish_data(struct Calib*, const XYinfo new_axys, int swap_xy);
-gboolean output_xorgconfd(struct Calib*, const XYinfo new_axys, int swap_xy, int new_swap_xy);
+gboolean finish_data(struct Calib*, const XYinfo new_axis, int swap_xy);
+gboolean output_xorgconfd(struct Calib*, const XYinfo new_axis, int swap_xy, int new_swap_xy);
 
 int main(int argc, char** argv);
 

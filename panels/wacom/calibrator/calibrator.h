@@ -74,8 +74,8 @@ typedef struct
 
 struct Calib
 {
-    /* original axys values */
-    XYinfo old_axys;
+    /* original axis values */
+    XYinfo old_axis;
 
     /* nr of clicks registered */
     int num_clicks;
@@ -109,7 +109,7 @@ gboolean along_axis (struct Calib *c,
 gboolean finish     (struct Calib *c,
                  int           width,
                  int           height,
-                 XYinfo       *new_axys,
+                 XYinfo       *new_axis,
                  gboolean         *swap);
 
 #endif /* _calibrator_h */

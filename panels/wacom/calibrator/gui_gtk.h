@@ -41,7 +41,7 @@ struct CalibArea
 };
 
 gboolean              run_gui               (struct Calib     *c,
-                                         XYinfo           *new_axys,
+                                         XYinfo           *new_axis,
                                          gboolean             *swap);
 
 #endif /* _gui_gtk_h */

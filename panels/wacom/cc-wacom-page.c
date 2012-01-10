@@ -159,7 +159,7 @@ run_calibration (gint  *cal,
                  gsize  ncal)
 {
 	gboolean success = FALSE;
-	XYinfo axys;
+	XYinfo axis;
 	gboolean swap_xy;
 	struct Calib calibrator;
 
@@ -172,25 +172,25 @@ run_calibration (gint  *cal,
 	calibrator.threshold_misclick = 15;
 	calibrator.threshold_doubleclick = 7;
 	calibrator.geometry = NULL;
-	calibrator.old_axys.x_min = cal[0];
-	calibrator.old_axys.y_min = cal[1];
-	calibrator.old_axys.x_max = cal[2];
-	calibrator.old_axys.y_max = cal[3];
+	calibrator.old_axis.x_min = cal[0];
+	calibrator.old_axis.y_min = cal[1];
+	calibrator.old_axis.x_max = cal[2];
+	calibrator.old_axis.y_max = cal[3];
 
 	/* !!NOTE!! This call blocks on the calibration
          * !!NOTE!! process. It will be several seconds
          * !!NOTE!! before this returns.
          */
-	if(run_gui(&calibrator, &axys, &swap_xy))
+	if(run_gui(&calibrator, &axis, &swap_xy))
 		success = TRUE;
 
 quit_calibration:
 	if (success)
 	{
-		cal[0] = axys.x_min;
-		cal[1] = axys.y_min;
-		cal[2] = axys.x_max;
-		cal[3] = axys.y_max;
+		cal[0] = axis.x_min;
+		cal[1] = axis.y_min;
+		cal[2] = axis.x_max;
+		cal[3] = axis.y_max;
 	}
 
 	return success;

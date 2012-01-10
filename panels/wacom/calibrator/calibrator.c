@@ -122,7 +122,7 @@ gboolean
 finish (struct Calib *c,
         int           width,
         int           height,
-        XYinfo       *new_axys,
+        XYinfo       *new_axis,
         gboolean         *swap)
 {
     gboolean swap_xy;
@@ -130,7 +130,7 @@ finish (struct Calib *c,
     float scale_y;
     int delta_x;
     int delta_y;
-    XYinfo axys = {-1, -1, -1, -1};
+    XYinfo axis = {-1, -1, -1, -1};
 
     if (c->num_clicks != 4)
         return FALSE;
@@ -144,32 +144,32 @@ finish (struct Calib *c,
     }
 
     /* Compute min/max coordinates. */
-    /* These are scaled using the values of old_axys */
-    scale_x = (c->old_axys.x_max - c->old_axys.x_min)/(float)width;
-    axys.x_min = ((c->clicked_x[UL] + c->clicked_x[LL]) * scale_x/2) + c->old_axys.x_min;
-    axys.x_max = ((c->clicked_x[UR] + c->clicked_x[LR]) * scale_x/2) + c->old_axys.x_min;
-    scale_y = (c->old_axys.y_max - c->old_axys.y_min)/(float)height;
-    axys.y_min = ((c->clicked_y[UL] + c->clicked_y[UR]) * scale_y/2) + c->old_axys.y_min;
-    axys.y_max = ((c->clicked_y[LL] + c->clicked_y[LR]) * scale_y/2) + c->old_axys.y_min;
+    /* These are scaled using the values of old_axis */
+    scale_x = (c->old_axis.x_max - c->old_axis.x_min)/(float)width;
+    axis.x_min = ((c->clicked_x[UL] + c->clicked_x[LL]) * scale_x/2) + c->old_axis.x_min;
+    axis.x_max = ((c->clicked_x[UR] + c->clicked_x[LR]) * scale_x/2) + c->old_axis.x_min;
+    scale_y = (c->old_axis.y_max - c->old_axis.y_min)/(float)height;
+    axis.y_min = ((c->clicked_y[UL] + c->clicked_y[UR]) * scale_y/2) + c->old_axis.y_min;
+    axis.y_max = ((c->clicked_y[LL] + c->clicked_y[LR]) * scale_y/2) + c->old_axis.y_min;
 
     /* Add/subtract the offset that comes from not having the points in the
      * corners (using the same coordinate system they are currently in)
      */
-    delta_x = (axys.x_max - axys.x_min) / (float)(NUM_BLOCKS - 2);
-    axys.x_min -= delta_x;
-    axys.x_max += delta_x;
-    delta_y = (axys.y_max - axys.y_min) / (float)(NUM_BLOCKS - 2);
-    axys.y_min -= delta_y;
-    axys.y_max += delta_y;
+    delta_x = (axis.x_max - axis.x_min) / (float)(NUM_BLOCKS - 2);
+    axis.x_min -= delta_x;
+    axis.x_max += delta_x;
+    delta_y = (axis.y_max - axis.y_min) / (float)(NUM_BLOCKS - 2);
+    axis.y_min -= delta_y;
+    axis.y_max += delta_y;
 
     /* If x and y has to be swapped we also have to swap the parameters */
     if (swap_xy)
     {
-        SWAP(axys.x_min, axys.y_max);
-        SWAP(axys.y_min, axys.x_max);
+        SWAP(axis.x_min, axis.y_max);
+        SWAP(axis.y_min, axis.x_max);
     }
 
-    *new_axys = axys;
+    *new_axis = axis;
     *swap = swap_xy;
 
     return TRUE;
