@@ -141,7 +141,7 @@ set_calibration (gint      *cal,
 	g_variant_get_fixed_array (current, &nvalues, sizeof (gint32));
 	if ((ncal != 4) || (nvalues != 4))
 	{
-		g_warning("Unable set set device calibration property. Got %d items to put in %d slots; expected %d items.\n", ncal, nvalues, 4);
+		g_warning("Unable set set device calibration property. Got %"G_GSIZE_FORMAT" items to put in %"G_GSIZE_FORMAT" slots; expected %d items.\n", ncal, nvalues, 4);
 		return;
 	}
 
@@ -167,7 +167,7 @@ run_calibration (gint  *cal,
 
 	if (ncal != 4)
 	{
-		g_warning("Unable to run calibration. Got %d items; expected %d.\n", ncal, 4);
+		g_warning("Unable to run calibration. Got %"G_GSIZE_FORMAT" items; expected %d.\n", ncal, 4);
 		goto quit_calibration;
 	}
 
@@ -209,7 +209,7 @@ calibrate_button_clicked_cb (GtkButton *button, gpointer user_data)
     get_calibration (&current, &s, tablet);
     if (s != 4)
     {
-        g_warning("Device calibration property has wrong length. Got %d items; expected %d.\n", s, 4);
+        g_warning("Device calibration property has wrong length. Got %"G_GSIZE_FORMAT" items; expected %d.\n", s, 4);
         g_free (current);
         return;
     }
