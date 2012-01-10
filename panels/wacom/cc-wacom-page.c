@@ -160,7 +160,6 @@ static gboolean
 run_calibration (gint  *cal,
                  gsize  ncal)
 {
-	gboolean success = FALSE;
 	XYinfo axis;
 	gboolean swap_xy;
 	struct Calib calibrator;
@@ -168,7 +167,7 @@ run_calibration (gint  *cal,
 	if (ncal != 4)
 	{
 		g_warning("Unable to run calibration. Got %"G_GSIZE_FORMAT" items; expected %d.\n", ncal, 4);
-		goto quit_calibration;
+		return FALSE;
 	}
 
 	calibrator.threshold_misclick = 15;
@@ -184,18 +183,15 @@ run_calibration (gint  *cal,
          * !!NOTE!! before this returns.
          */
 	if(run_gui(&calibrator, &axis, &swap_xy))
-		success = TRUE;
-
-quit_calibration:
-	if (success)
 	{
 		cal[0] = axis.x_min;
 		cal[1] = axis.y_min;
 		cal[2] = axis.x_max;
 		cal[3] = axis.y_max;
+		return TRUE;
 	}
 
-	return success;
+	return FALSE;
 }
 
 static void
