@@ -26,7 +26,7 @@
 
 #include <math.h>
 #include <glib/gi18n-lib.h>
-#include <gsettings-desktop-schemas/gdesktop-enums.h>
+#include <gdesktop-enums.h>
 #include "cc-ua-panel.h"
 
 #include "zoom-options.h"
