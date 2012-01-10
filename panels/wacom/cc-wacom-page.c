@@ -119,8 +119,11 @@ get_calibration (gint      ** cal,
                  gsize      * ncal,
                  GSettings  * settings)
 {
+	gconstpointer res;
+
 	GVariant *current = g_settings_get_value (settings, "area");
-	*cal = g_variant_get_fixed_array (current, ncal, sizeof (gint32));
+	res = g_variant_get_fixed_array (current, ncal, sizeof (gint32));
+	*cal = g_memdup (res, *ncal * sizeof (gint32));
 }
 
 static void
@@ -208,6 +211,7 @@ calibrate_button_clicked_cb (GtkButton *button, gpointer user_data)
     if (s != 4)
     {
         g_warning("Device calibration property has wrong length. Got %d items; expected %d.\n", s, 4);
+        g_free (current);
         return;
     }
 
@@ -219,6 +223,8 @@ calibrate_button_clicked_cb (GtkButton *button, gpointer user_data)
 
     if (run_calibration(calibration, 4))
         set_calibration(calibration, 4, tablet);
+
+    g_free (current);
 }
 
 
