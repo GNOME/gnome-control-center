@@ -192,26 +192,6 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
     }
 }
 
-static gboolean
-on_expose_event(GtkWidget      *widget,
-                GdkEventExpose *event,
-                gpointer        data)
-{
-    struct CalibArea *calib_area = (struct CalibArea*)data;
-    GdkWindow *window = gtk_widget_get_window(calib_area->drawing_area);
-
-    if (window)
-    {
-        cairo_t *cr = gdk_cairo_create(window);
-        cairo_save(cr);
-        cairo_rectangle(cr, event->area.x, event->area.y, event->area.width, event->area.height);
-        cairo_clip(cr);
-        draw(widget, cr, data);
-        cairo_restore(cr);
-    }
-    return TRUE;
-}
-
 static void
 draw_message(struct CalibArea *calib_area,
              const char       *msg)
@@ -322,7 +302,6 @@ CalibrationArea_(struct Calib *c)
     gtk_widget_set_can_focus(calib_area->drawing_area, TRUE);
 
     /* Connect callbacks */
-    g_signal_connect(calib_area->drawing_area, "expose-event", G_CALLBACK(on_expose_event), calib_area);
     g_signal_connect(calib_area->drawing_area, "draw", G_CALLBACK(draw), calib_area);
     g_signal_connect(calib_area->drawing_area, "button-press-event", G_CALLBACK(on_button_press_event), calib_area);
     g_signal_connect(calib_area->drawing_area, "key-press-event", G_CALLBACK(on_key_press_event), calib_area);
