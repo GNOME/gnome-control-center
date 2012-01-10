@@ -50,50 +50,7 @@ const char *help_text[] = {
     "(To abort, press any key or wait)"
 };
 
-struct CalibArea*
-CalibrationArea_(struct Calib *c)
-{
-    struct CalibArea *calib_area;
-    const char *geo = c->geometry;
-
-    calib_area = (struct CalibArea*)calloc(1, sizeof(struct CalibArea));
-    calib_area->calibrator = c;
-    calib_area->drawing_area = gtk_drawing_area_new();
-
-    /* Listen for mouse events */
-    gtk_widget_add_events(calib_area->drawing_area, GDK_KEY_PRESS_MASK | GDK_BUTTON_PRESS_MASK);
-    gtk_widget_set_can_focus(calib_area->drawing_area, TRUE);
-
-    /* Connect callbacks */
-    g_signal_connect(calib_area->drawing_area, "expose-event", G_CALLBACK(on_expose_event), calib_area);
-    g_signal_connect(calib_area->drawing_area, "draw", G_CALLBACK(draw), calib_area);
-    g_signal_connect(calib_area->drawing_area, "button-press-event", G_CALLBACK(on_button_press_event), calib_area);
-    g_signal_connect(calib_area->drawing_area, "key-press-event", G_CALLBACK(on_key_press_event), calib_area);
-
-    /* parse geometry string */
-    if (geo != NULL)
-    {
-        int gw,gh;
-        int res = sscanf(geo,"%dx%d",&gw,&gh);
-        if (res != 2)
-            geo = NULL;
-        else
-            set_display_size(calib_area, gw, gh );\
-    }
-    if (geo == NULL)
-    {
-        GtkAllocation allocation;
-        gtk_widget_get_allocation(calib_area->drawing_area, &allocation);
-        set_display_size(calib_area, allocation.width, allocation.height);
-    }
-
-    /* Setup timer for animation */
-    g_timeout_add(time_step, (GSourceFunc)on_timer_signal, calib_area);
-
-    return calib_area;
-}
-
-void
+static void
 set_display_size(struct CalibArea *calib_area,
                  int               width,
                  int               height)
@@ -124,7 +81,7 @@ set_display_size(struct CalibArea *calib_area,
     reset(calib_area->calibrator);
 }
 
-void
+static void
 resize_display(struct CalibArea *calib_area)
 {
     /* check that screensize did not change (if no manually specified geometry) */
@@ -138,27 +95,7 @@ resize_display(struct CalibArea *calib_area)
     }
 }
 
-gboolean
-on_expose_event(GtkWidget      *widget,
-                GdkEventExpose *event,
-                gpointer        data)
-{
-    struct CalibArea *calib_area = (struct CalibArea*)data;
-    GdkWindow *window = gtk_widget_get_window(calib_area->drawing_area);
-
-    if (window)
-    {
-        cairo_t *cr = gdk_cairo_create(window);
-        cairo_save(cr);
-        cairo_rectangle(cr, event->area.x, event->area.y, event->area.width, event->area.height);
-        cairo_clip(cr);
-        draw(widget, cr, data);
-        cairo_restore(cr);
-    }
-    return TRUE;
-}
-
-void
+static void
 draw(GtkWidget *widget, cairo_t *cr, gpointer data)
 {
     struct CalibArea *calib_area = (struct CalibArea*)data;
@@ -255,7 +192,34 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
     }
 }
 
-void
+static gboolean
+on_expose_event(GtkWidget      *widget,
+                GdkEventExpose *event,
+                gpointer        data)
+{
+    struct CalibArea *calib_area = (struct CalibArea*)data;
+    GdkWindow *window = gtk_widget_get_window(calib_area->drawing_area);
+
+    if (window)
+    {
+        cairo_t *cr = gdk_cairo_create(window);
+        cairo_save(cr);
+        cairo_rectangle(cr, event->area.x, event->area.y, event->area.width, event->area.height);
+        cairo_clip(cr);
+        draw(widget, cr, data);
+        cairo_restore(cr);
+    }
+    return TRUE;
+}
+
+static void
+draw_message(struct CalibArea *calib_area,
+             const char       *msg)
+{
+    calib_area->message = msg;
+}
+
+static void
 redraw(struct CalibArea *calib_area)
 {
     GdkWindow *win = gtk_widget_get_window(calib_area->drawing_area);
@@ -270,36 +234,7 @@ redraw(struct CalibArea *calib_area)
     }
 }
 
-gboolean
-on_timer_signal(struct CalibArea *calib_area)
-{
-    GdkWindow *win;
-    GtkWidget *parent = gtk_widget_get_parent(calib_area->drawing_area);
-
-    calib_area->time_elapsed += time_step;
-    if (calib_area->time_elapsed > max_time || parent == NULL)
-    {
-        if (parent)
-            gtk_widget_destroy(parent);
-        return FALSE;
-    }
-
-    /* Update clock */
-    win = gtk_widget_get_window(calib_area->drawing_area);
-    if (win)
-    {
-        GdkRectangle rect;
-        rect.x = calib_area->display_width/2 - clock_radius - clock_line_width;
-        rect.y = calib_area->display_height/2 - clock_radius - clock_line_width;
-        rect.width = 2 * clock_radius + 1 + 2 * clock_line_width;
-        rect.height = 2 * clock_radius + 1 + 2 * clock_line_width;
-        gdk_window_invalidate_rect(win, &rect, FALSE);
-    }
-
-    return TRUE;
-}
-
-gboolean
+static gboolean
 on_button_press_event(GtkWidget      *widget,
                       GdkEventButton *event,
                       gpointer        data)
@@ -331,14 +266,7 @@ on_button_press_event(GtkWidget      *widget,
     return TRUE;
 }
 
-void
-draw_message(struct CalibArea *calib_area,
-             const char       *msg)
-{
-    calib_area->message = msg;
-}
-
-gboolean
+static gboolean
 on_key_press_event(GtkWidget   *widget,
                    GdkEventKey *event,
                    gpointer     data)
@@ -348,6 +276,78 @@ on_key_press_event(GtkWidget   *widget,
     if (parent)
         gtk_widget_destroy(parent);
     return TRUE;
+}
+
+static gboolean
+on_timer_signal(struct CalibArea *calib_area)
+{
+    GdkWindow *win;
+    GtkWidget *parent = gtk_widget_get_parent(calib_area->drawing_area);
+
+    calib_area->time_elapsed += time_step;
+    if (calib_area->time_elapsed > max_time || parent == NULL)
+    {
+        if (parent)
+            gtk_widget_destroy(parent);
+        return FALSE;
+    }
+
+    /* Update clock */
+    win = gtk_widget_get_window(calib_area->drawing_area);
+    if (win)
+    {
+        GdkRectangle rect;
+        rect.x = calib_area->display_width/2 - clock_radius - clock_line_width;
+        rect.y = calib_area->display_height/2 - clock_radius - clock_line_width;
+        rect.width = 2 * clock_radius + 1 + 2 * clock_line_width;
+        rect.height = 2 * clock_radius + 1 + 2 * clock_line_width;
+        gdk_window_invalidate_rect(win, &rect, FALSE);
+    }
+
+    return TRUE;
+}
+
+static struct CalibArea*
+CalibrationArea_(struct Calib *c)
+{
+    struct CalibArea *calib_area;
+    const char *geo = c->geometry;
+
+    calib_area = (struct CalibArea*)calloc(1, sizeof(struct CalibArea));
+    calib_area->calibrator = c;
+    calib_area->drawing_area = gtk_drawing_area_new();
+
+    /* Listen for mouse events */
+    gtk_widget_add_events(calib_area->drawing_area, GDK_KEY_PRESS_MASK | GDK_BUTTON_PRESS_MASK);
+    gtk_widget_set_can_focus(calib_area->drawing_area, TRUE);
+
+    /* Connect callbacks */
+    g_signal_connect(calib_area->drawing_area, "expose-event", G_CALLBACK(on_expose_event), calib_area);
+    g_signal_connect(calib_area->drawing_area, "draw", G_CALLBACK(draw), calib_area);
+    g_signal_connect(calib_area->drawing_area, "button-press-event", G_CALLBACK(on_button_press_event), calib_area);
+    g_signal_connect(calib_area->drawing_area, "key-press-event", G_CALLBACK(on_key_press_event), calib_area);
+
+    /* parse geometry string */
+    if (geo != NULL)
+    {
+        int gw,gh;
+        int res = sscanf(geo,"%dx%d",&gw,&gh);
+        if (res != 2)
+            geo = NULL;
+        else
+            set_display_size(calib_area, gw, gh );\
+    }
+    if (geo == NULL)
+    {
+        GtkAllocation allocation;
+        gtk_widget_get_allocation(calib_area->drawing_area, &allocation);
+        set_display_size(calib_area, allocation.width, allocation.height);
+    }
+
+    /* Setup timer for animation */
+    g_timeout_add(time_step, (GSourceFunc)on_timer_signal, calib_area);
+
+    return calib_area;
 }
 
 /**

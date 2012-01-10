@@ -40,27 +40,6 @@ struct CalibArea
     GtkWidget *drawing_area;
 };
 
-struct CalibArea* CalibrationArea_      (struct Calib     *c);
-void              set_display_size      (struct CalibArea *calib_area,
-                                         int               width,
-                                         int               height);
-void              resize_display        (struct CalibArea *calib_area);
-gboolean              on_expose_event       (GtkWidget        *widget,
-                                         GdkEventExpose   *event,
-                                         gpointer data);
-void              draw                  (GtkWidget        *widget,
-                                         cairo_t          *cr,
-                                         gpointer          data);
-void              redraw                (struct CalibArea *calib_area);
-gboolean              on_timer_signal       (struct CalibArea *calib_area);
-gboolean              on_button_press_event (GtkWidget        *widget,
-                                         GdkEventButton   *event,
-                                         gpointer          data);
-void              draw_message          (struct CalibArea *calib_area,
-                                         const char       *msg);
-gboolean              on_key_press_event    (GtkWidget        *widget,
-                                         GdkEventKey      *event,
-                                         gpointer          data);
 gboolean              run_gui               (struct Calib     *c,
                                          XYinfo           *new_axys,
                                          gboolean             *swap);
