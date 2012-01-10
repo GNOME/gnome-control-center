@@ -135,11 +135,10 @@ set_calibration (gint      *cal,
 	GVariant    *array;   /* new calibration */
 	GVariant   **tmp;
 	gsize        nvalues;
-	const gint  *values;
 	int          i;
 
 	current = g_settings_get_value (settings, "area");
-	values = g_variant_get_fixed_array (current, &nvalues, sizeof (gint32));
+	g_variant_get_fixed_array (current, &nvalues, sizeof (gint32));
 	if ((ncal != 4) || (nvalues != 4))
 	{
 		g_warning("Unable set set device calibration property. Got %d items to put in %d slots; expected %d items.\n", ncal, nvalues, 4);
