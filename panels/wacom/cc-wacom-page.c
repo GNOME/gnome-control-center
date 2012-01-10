@@ -24,6 +24,7 @@
 
 #include "cc-wacom-page.h"
 #include "cc-wacom-nav-button.h"
+#include "gui_gtk.h"
 #include <gtk/gtk.h>
 
 #include <string.h>
@@ -112,6 +113,114 @@ eraser_feel_value_changed_cb (GtkRange *range, gpointer user_data)
 {
     set_pressurecurve (range, CC_WACOM_PAGE(user_data)->priv->eraser_settings);
 }
+
+static void
+get_calibration (gint      ** cal,
+                 gsize      * ncal,
+                 GSettings  * settings)
+{
+	GVariant *current = g_settings_get_value (settings, "area");
+	*cal = g_variant_get_fixed_array (current, ncal, sizeof (gint32));
+}
+
+static void
+set_calibration (gint      *cal,
+                 gsize      ncal,
+                 GSettings *settings)
+{
+	GVariant    *current; /* current calibration */
+	GVariant    *array;   /* new calibration */
+	GVariant   **tmp;
+	gsize        nvalues;
+	const gint  *values;
+	int          i;
+
+	current = g_settings_get_value (settings, "area");
+	values = g_variant_get_fixed_array (current, &nvalues, sizeof (gint32));
+	if ((ncal != 4) || (nvalues != 4))
+	{
+		g_warning("Unable set set device calibration property. Got %d items to put in %d slots; expected %d items.\n", ncal, nvalues, 4);
+		return;
+	}
+
+	tmp = g_malloc (nvalues * sizeof (GVariant*));
+	for (i = 0; i < ncal; i++)
+		tmp[i] = g_variant_new_int32 (cal[i]);
+
+	array = g_variant_new_array (G_VARIANT_TYPE_INT32, tmp, nvalues);
+	g_settings_set_value (settings, "area", array);
+
+	g_free (tmp);
+	g_variant_unref (array);
+}
+
+static gboolean
+run_calibration (gint  *cal,
+                 gsize  ncal)
+{
+	gboolean success = FALSE;
+	XYinfo axys;
+	bool swap_xy;
+	struct Calib calibrator;
+
+	if (ncal != 4)
+	{
+		g_warning("Unable to run calibration. Got %d items; expected %d.\n", ncal, 4);
+		goto quit_calibration;
+	}
+
+	calibrator.threshold_misclick = 15;
+	calibrator.threshold_doubleclick = 7;
+	calibrator.geometry = NULL;
+	calibrator.old_axys.x_min = cal[0];
+	calibrator.old_axys.y_min = cal[1];
+	calibrator.old_axys.x_max = cal[2];
+	calibrator.old_axys.y_max = cal[3];
+
+	/* !!NOTE!! This call blocks on the calibration
+         * !!NOTE!! process. It will be several seconds
+         * !!NOTE!! before this returns.
+         */
+	if(run_gui(&calibrator, &axys, &swap_xy))
+		success = TRUE;
+
+quit_calibration:
+	if (success)
+	{
+		cal[0] = axys.x_min;
+		cal[1] = axys.y_min;
+		cal[2] = axys.x_max;
+		cal[3] = axys.y_max;
+	}
+
+	return success;
+}
+
+static void
+calibrate_button_clicked_cb (GtkButton *button, gpointer user_data)
+{
+    GSettings *tablet = CC_WACOM_PAGE(user_data)->priv->wacom_settings;
+    gint i, calibration[4];
+    gint *current;
+    gsize s;
+
+    get_calibration (&current, &s, tablet);
+    if (s != 4)
+    {
+        g_warning("Device calibration property has wrong length. Got %d items; expected %d.\n", s, 4);
+        return;
+    }
+
+    for (i = 0; i < 4; i++)
+        calibration[i] = current[i];
+
+    if (calibration[0] == -1 && calibration[1] == -1 && calibration[2] == -1 && calibration[3] == -1)
+        gsd_wacom_device_get_area(CC_WACOM_PAGE(user_data)->priv->stylus, &calibration);
+
+    if (run_calibration(calibration, 4))
+        set_calibration(calibration, 4, tablet);
+}
+
 
 static void
 set_feel_from_gsettings (GtkAdjustment *adjustment, GSettings *settings)
@@ -391,6 +500,9 @@ cc_wacom_page_init (CcWacomPage *self)
 			  G_CALLBACK (tip_feel_value_changed_cb), self);
 	g_signal_connect (WID ("scale-eraser-feel"), "value-changed",
 			  G_CALLBACK (eraser_feel_value_changed_cb), self);
+	g_signal_connect (WID ("button-calibrate"), "clicked",
+			  G_CALLBACK (calibrate_button_clicked_cb), self);
+
 
 	combo = GTK_COMBO_BOX (WID ("combo-topbutton"));
 	combobox_text_cellrenderer (combo, BUTTONNAME_COLUMN);

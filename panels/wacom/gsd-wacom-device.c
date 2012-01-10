@@ -734,6 +734,42 @@ gsd_wacom_device_get_device_type (GsdWacomDevice *device)
 	return device->priv->type;
 }
 
+gboolean
+gsd_wacom_device_get_area (GsdWacomDevice *dev, gint *device_area)
+{
+        int i, id;
+        XDevice *device;
+        Atom area, realtype;
+        int rc, realformat;
+        unsigned long nitems, bytes_after;
+        unsigned char *data = NULL;
+
+        g_object_get (dev->priv->gdk_device, "device-id", &id, NULL);
+
+        area = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "Wacom Tablet Area", False);
+
+        gdk_error_trap_push ();
+        device = XOpenDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), id);
+        if (gdk_error_trap_pop () || (device == NULL))
+                return FALSE;
+
+        gdk_error_trap_push ();
+        rc = XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
+                                 device, area, 0, 4, False,
+                                 XA_INTEGER, &realtype, &realformat, &nitems,
+                                 &bytes_after, &data);
+        if (gdk_error_trap_pop () || rc != Success || realtype == None || bytes_after != 0 || nitems != 4) {
+                XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), device);
+                return FALSE;
+        }
+
+        for (i = 0; i < nitems; i++)
+                device_area[i] = ((long*)data)[i];
+
+        XFree (data);
+        return TRUE;
+}
+
 const char *
 gsd_wacom_device_type_to_string (GsdWacomDeviceType type)
 {

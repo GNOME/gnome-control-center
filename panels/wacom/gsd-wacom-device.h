@@ -96,6 +96,8 @@ void             gsd_wacom_device_set_current_stylus (GsdWacomDevice *device,
 						      int             stylus_id);
 
 GsdWacomDeviceType gsd_wacom_device_get_device_type (GsdWacomDevice *device);
+gboolean         gsd_wacom_device_get_area         (GsdWacomDevice *dev,
+                                                    int *device_area);
 const char     * gsd_wacom_device_type_to_string   (GsdWacomDeviceType type);
 
 /* Helper and debug functions */

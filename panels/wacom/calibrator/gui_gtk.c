@@ -408,4 +408,3 @@ run_gui(struct Calib *c,
 
    return success;
 }
-
