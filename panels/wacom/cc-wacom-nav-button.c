@@ -227,8 +227,8 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 	gtk_box_pack_start (GTK_BOX (self), priv->next,
 			    FALSE, FALSE, 0);
 
-	gtk_widget_show (priv->prev);
-	gtk_widget_show (priv->next);
+	gtk_widget_show_all (priv->prev);
+	gtk_widget_show_all (priv->next);
 }
 
 GtkWidget *
