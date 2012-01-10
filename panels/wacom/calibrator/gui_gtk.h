@@ -38,6 +38,8 @@ struct CalibArea
     const char* message;
 
     GtkWidget *drawing_area;
+
+    guint anim_id;
 };
 
 gboolean              run_gui               (struct Calib     *c,

@@ -324,7 +324,7 @@ CalibrationArea_(struct Calib *c)
     }
 
     /* Setup timer for animation */
-    g_timeout_add(time_step, (GSourceFunc)on_timer_signal, calib_area);
+    calib_area->anim_id = g_timeout_add(time_step, (GSourceFunc)on_timer_signal, calib_area);
 
     return calib_area;
 }
@@ -369,6 +369,8 @@ run_gui(struct Calib *c,
     gtk_widget_show_all(win);
 
     gtk_main();
+
+    g_source_remove (calib_area->anim_id);
 
     success = finish(calib_area->calibrator, calib_area->display_width, calib_area->display_height, new_axis, swap);
 
