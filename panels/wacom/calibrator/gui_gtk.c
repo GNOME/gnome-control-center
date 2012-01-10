@@ -293,7 +293,7 @@ CalibrationArea_(struct Calib *c)
     struct CalibArea *calib_area;
     const char *geo = c->geometry;
 
-    calib_area = (struct CalibArea*)calloc(1, sizeof(struct CalibArea));
+    calib_area = g_new0 (struct CalibArea, 1);
     calib_area->calibrator = c;
     calib_area->drawing_area = gtk_drawing_area_new();
 
