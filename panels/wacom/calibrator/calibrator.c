@@ -35,7 +35,7 @@ reset (struct Calib *c)
 }
 
 /* add a click with the given coordinates */
-bool
+gboolean
 add_click (struct Calib *c,
            int           x,
            int           y)
@@ -49,7 +49,7 @@ add_click (struct Calib *c,
             if (abs(x - c->clicked_x[i]) <= c->threshold_doubleclick &&
                 abs(y - c->clicked_y[i]) <= c->threshold_doubleclick)
             {
-                return false;
+                return FALSE;
             }
             i--;
         }
@@ -58,7 +58,7 @@ add_click (struct Calib *c,
     /* Mis-click detection */
     if (c->threshold_misclick > 0 && c->num_clicks > 0)
     {
-        bool misclick = true;
+        gboolean misclick = TRUE;
 
         if (c->num_clicks == 1)
         {
@@ -66,7 +66,7 @@ add_click (struct Calib *c,
             if (along_axis(c, x,c->clicked_x[0],c->clicked_y[0]) ||
                 along_axis(c, y,c->clicked_x[0],c->clicked_y[0]))
             {
-                misclick = false;
+                misclick = FALSE;
             }
         }
         else if (c->num_clicks == 2)
@@ -77,7 +77,7 @@ add_click (struct Calib *c,
                 (along_axis(c, x,c->clicked_x[0],c->clicked_y[0]) &&
                  along_axis(c, c->clicked_y[1],c->clicked_x[0],c->clicked_y[0])))
             {
-                misclick = false;
+                misclick = FALSE;
             }
         }
         else if (c->num_clicks == 3)
@@ -88,14 +88,14 @@ add_click (struct Calib *c,
                 (along_axis(c, y,c->clicked_x[1],c->clicked_y[1]) &&
                  along_axis(c, x,c->clicked_x[2],c->clicked_y[2])))
             {
-                misclick = false;
+                misclick = FALSE;
             }
         }
 
         if (misclick)
         {
             reset(c);
-            return false;
+            return FALSE;
         }
     }
 
@@ -103,11 +103,11 @@ add_click (struct Calib *c,
     c->clicked_y[c->num_clicks] = y;
     c->num_clicks++;
 
-    return true;
+    return TRUE;
 }
 
 /* check whether the coordinates are along the respective axis */
-bool
+gboolean
 along_axis (struct Calib *c,
             int           xy,
             int           x0,
@@ -118,14 +118,14 @@ along_axis (struct Calib *c,
 }
 
 /* calculate and apply the calibration */
-bool
+gboolean
 finish (struct Calib *c,
         int           width,
         int           height,
         XYinfo       *new_axys,
-        bool         *swap)
+        gboolean         *swap)
 {
-    bool swap_xy;
+    gboolean swap_xy;
     float scale_x;
     float scale_y;
     int delta_x;
@@ -133,7 +133,7 @@ finish (struct Calib *c,
     XYinfo axys = {-1, -1, -1, -1};
 
     if (c->num_clicks != 4)
-        return false;
+        return FALSE;
 
     /* Should x and y be swapped? */
     swap_xy = (abs (c->clicked_x [UL] - c->clicked_x [UR]) < abs (c->clicked_y [UL] - c->clicked_y [UR]));
@@ -172,6 +172,6 @@ finish (struct Calib *c,
     *new_axys = axys;
     *swap = swap_xy;
 
-    return true;
+    return TRUE;
 }
 

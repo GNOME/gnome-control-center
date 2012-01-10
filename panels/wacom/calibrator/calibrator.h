@@ -24,6 +24,8 @@
 #ifndef _calibrator_h
 #define _calibrator_h
 
+#include <glib.h>
+
 /*
  * Number of blocks. We partition the screen into 'num_blocks' x 'num_blocks'
  * rectangles of equal size. We then ask the user to press points that are
@@ -70,12 +72,6 @@ typedef struct
 	int y_max;
 } XYinfo;
 
-typedef enum
-{
-	false = 0,
-	true  = 1
-} bool;
-
 struct Calib
 {
     /* original axys values */
@@ -103,17 +99,17 @@ struct Calib
 };
 
 void reset      (struct Calib *c);
-bool add_click  (struct Calib *c,
+gboolean add_click  (struct Calib *c,
                  int           x,
                  int           y);
-bool along_axis (struct Calib *c,
+gboolean along_axis (struct Calib *c,
                  int           xy,
                  int           x0,
                  int           y0);
-bool finish     (struct Calib *c,
+gboolean finish     (struct Calib *c,
                  int           width,
                  int           height,
                  XYinfo       *new_axys,
-                 bool         *swap);
+                 gboolean         *swap);
 
 #endif /* _calibrator_h */

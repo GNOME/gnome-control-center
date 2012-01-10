@@ -38,10 +38,10 @@
  * retuns number of devices found,
  * the data of the device is returned in the last 3 function parameters
  */
-int find_device(const char* pre_device, bool verbose, bool list_devices,
+int find_device(const char* pre_device, gboolean verbose, gboolean list_devices,
         XID* device_id, const char** device_name, XYinfo* device_axys)
 {
-    bool pre_device_is_id = true;
+    gboolean pre_device_is_id = TRUE;
     int found = 0;
 
     Display* display = XOpenDisplay(NULL);
@@ -73,7 +73,7 @@ int find_device(const char* pre_device, bool verbose, bool list_devices,
         int loop;
         for (loop=0; loop<len; loop++) {
 	        if (!isdigit(pre_device[loop])) {
-	            pre_device_is_id = false;
+	            pre_device_is_id = FALSE;
 	            break;
 	        }
         }
@@ -169,10 +169,10 @@ static void usage(char* cmd, unsigned thr_misclick)
 
 struct Calib* main_common(int argc, char** argv)
 {
-    bool verbose = false;
-    bool list_devices = false;
-    bool fake = false;
-    bool precalib = false;
+    gboolean verbose = FALSE;
+    gboolean list_devices = FALSE;
+    gboolean fake = FALSE;
+    gboolean precalib = FALSE;
     XYinfo pre_axys = {-1, -1, -1, -1};
     const char* pre_device = NULL;
     const char* geometry = NULL;
@@ -194,12 +194,12 @@ struct Calib* main_common(int argc, char** argv)
             /* Verbose output ? */
             if (strcmp("-v", argv[i]) == 0 ||
                 strcmp("--verbose", argv[i]) == 0) {
-                verbose = true;
+                verbose = TRUE;
             } else
 
             /* Just list devices ? */
             if (strcmp("--list", argv[i]) == 0) {
-                list_devices = true;
+                list_devices = TRUE;
             } else
 
             /* Select specific device ? */
@@ -215,7 +215,7 @@ struct Calib* main_common(int argc, char** argv)
 
             /* Get pre-calibration ? */
             if (strcmp("--precalib", argv[i]) == 0) {
-                precalib = true;
+                precalib = TRUE;
                 if (argc > i+1)
                     pre_axys.x_min = atoi(argv[++i]);
                 if (argc > i+1)
@@ -245,7 +245,7 @@ struct Calib* main_common(int argc, char** argv)
 
             /* Fake calibratable device ? */
             if (strcmp("--fake", argv[i]) == 0) {
-                fake = true;
+                fake = TRUE;
             }
             
             /* unknown option */
@@ -323,7 +323,7 @@ struct Calib* main_common(int argc, char** argv)
             verbose, thr_misclick, thr_doubleclick, geometry);
 }
 
-struct Calib* CalibratorXorgPrint(const char* const device_name0, const XYinfo *axys0, const bool verbose0, const int thr_misclick, const int thr_doubleclick, const char* geometry)
+struct Calib* CalibratorXorgPrint(const char* const device_name0, const XYinfo *axys0, const gboolean verbose0, const int thr_misclick, const int thr_doubleclick, const char* geometry)
 {
     struct Calib* c = (struct Calib*)calloc(1, sizeof(struct Calib));
     c->old_axys = *axys0;
@@ -339,9 +339,9 @@ struct Calib* CalibratorXorgPrint(const char* const device_name0, const XYinfo *
     return c;
 }
 
-bool finish_data(struct Calib* c, const XYinfo new_axys, int swap_xy)
+gboolean finish_data(struct Calib* c, const XYinfo new_axys, int swap_xy)
 {
-    bool success = true;
+    gboolean success = TRUE;
 
     /* we suppose the previous 'swap_xy' value was 0 */
     /* (unfortunately there is no way to verify this (yet)) */
@@ -353,7 +353,7 @@ bool finish_data(struct Calib* c, const XYinfo new_axys, int swap_xy)
     return success;
 }
 
-bool output_xorgconfd(struct Calib* c, const XYinfo new_axys, int swap_xy, int new_swap_xy)
+gboolean output_xorgconfd(struct Calib* c, const XYinfo new_axys, int swap_xy, int new_swap_xy)
 {
     const char* sysfs_name = "!!Name_Of_TouchScreen!!";
 
@@ -370,14 +370,14 @@ bool output_xorgconfd(struct Calib* c, const XYinfo new_axys, int swap_xy, int n
         printf("	Option	\"SwapXY\"	\"%d\" # unless it was already set to 1\n", new_swap_xy);
     printf("EndSection\n");
 
-    return true;
+    return TRUE;
 }
 
 int main(int argc, char** argv)
 {
     int success = 0;
     XYinfo axys;
-    bool swap_xy;
+    gboolean swap_xy;
 
     struct Calib* calibrator = main_common(argc, argv);
 

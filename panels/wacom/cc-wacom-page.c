@@ -160,7 +160,7 @@ run_calibration (gint  *cal,
 {
 	gboolean success = FALSE;
 	XYinfo axys;
-	bool swap_xy;
+	gboolean swap_xy;
 	struct Calib calibrator;
 
 	if (ncal != 4)

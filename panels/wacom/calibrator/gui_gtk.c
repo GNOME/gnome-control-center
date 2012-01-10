@@ -143,7 +143,7 @@ resize_display(struct CalibArea *calib_area)
     }
 }
 
-bool
+gboolean
 on_expose_event(GtkWidget      *widget,
                 GdkEventExpose *event,
                 gpointer        data)
@@ -160,7 +160,7 @@ on_expose_event(GtkWidget      *widget,
         draw(widget, cr, data);
         cairo_restore(cr);
     }
-    return true;
+    return TRUE;
 }
 
 void
@@ -271,11 +271,11 @@ redraw(struct CalibArea *calib_area)
         rect.y = 0;
         rect.width = calib_area->display_width;
         rect.height = calib_area->display_height;
-        gdk_window_invalidate_rect(win, &rect, false);
+        gdk_window_invalidate_rect(win, &rect, FALSE);
     }
 }
 
-bool
+gboolean
 on_timer_signal(struct CalibArea *calib_area)
 {
     GdkWindow *win;
@@ -286,7 +286,7 @@ on_timer_signal(struct CalibArea *calib_area)
     {
         if (parent)
             gtk_widget_destroy(parent);
-        return false;
+        return FALSE;
     }
 
     /* Update clock */
@@ -298,19 +298,19 @@ on_timer_signal(struct CalibArea *calib_area)
         rect.y = calib_area->display_height/2 - clock_radius - clock_line_width;
         rect.width = 2 * clock_radius + 1 + 2 * clock_line_width;
         rect.height = 2 * clock_radius + 1 + 2 * clock_line_width;
-        gdk_window_invalidate_rect(win, &rect, false);
+        gdk_window_invalidate_rect(win, &rect, FALSE);
     }
 
-    return true;
+    return TRUE;
 }
 
-bool
+gboolean
 on_button_press_event(GtkWidget      *widget,
                       GdkEventButton *event,
                       gpointer        data)
 {
     struct CalibArea *calib_area = (struct CalibArea*)data;
-    bool success;
+    gboolean success;
 
     /* Handle click */
     calib_area->time_elapsed = 0;
@@ -327,13 +327,13 @@ on_button_press_event(GtkWidget      *widget,
         GtkWidget *parent = gtk_widget_get_parent(calib_area->drawing_area);
         if (parent)
             gtk_widget_destroy(parent);
-        return true;
+        return TRUE;
     }
 
     /* Force a redraw */
     redraw(calib_area);
 
-    return true;
+    return TRUE;
 }
 
 void
@@ -343,7 +343,7 @@ draw_message(struct CalibArea *calib_area,
     calib_area->message = msg;
 }
 
-bool
+gboolean
 on_key_press_event(GtkWidget   *widget,
                    GdkEventKey *event,
                    gpointer     data)
@@ -352,21 +352,21 @@ on_key_press_event(GtkWidget   *widget,
     GtkWidget *parent = gtk_widget_get_parent(calib_area->drawing_area);
     if (parent)
         gtk_widget_destroy(parent);
-    return true;
+    return TRUE;
 }
 
 /**
  * Creates the windows and other objects required to do calibration
  * under GTK and then starts the main loop. When the main loop exits,
  * the calibration will be calculated (if possible) and this function
- * will then return ('true' if successful, 'false' otherwise).
+ * will then return ('TRUE' if successful, 'FALSE' otherwise).
  */
-bool
+gboolean
 run_gui(struct Calib *c,
         XYinfo       *new_axys,
-        bool         *swap)
+        gboolean         *swap)
 {
-    bool success;
+    gboolean success;
     struct CalibArea *calib_area = CalibrationArea_(c);
 
     printf("Current calibration: %d, %d, %d, %d\n",

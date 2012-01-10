@@ -45,24 +45,24 @@ void              set_display_size      (struct CalibArea *calib_area,
                                          int               width,
                                          int               height);
 void              resize_display        (struct CalibArea *calib_area);
-bool              on_expose_event       (GtkWidget        *widget,
+gboolean              on_expose_event       (GtkWidget        *widget,
                                          GdkEventExpose   *event,
                                          gpointer data);
 void              draw                  (GtkWidget        *widget,
                                          cairo_t          *cr,
                                          gpointer          data);
 void              redraw                (struct CalibArea *calib_area);
-bool              on_timer_signal       (struct CalibArea *calib_area);
-bool              on_button_press_event (GtkWidget        *widget,
+gboolean              on_timer_signal       (struct CalibArea *calib_area);
+gboolean              on_button_press_event (GtkWidget        *widget,
                                          GdkEventButton   *event,
                                          gpointer          data);
 void              draw_message          (struct CalibArea *calib_area,
                                          const char       *msg);
-bool              on_key_press_event    (GtkWidget        *widget,
+gboolean              on_key_press_event    (GtkWidget        *widget,
                                          GdkEventKey      *event,
                                          gpointer          data);
-bool              run_gui               (struct Calib     *c,
+gboolean              run_gui               (struct Calib     *c,
                                          XYinfo           *new_axys,
-                                         bool             *swap);
+                                         gboolean             *swap);
 
 #endif /* _gui_gtk_h */
