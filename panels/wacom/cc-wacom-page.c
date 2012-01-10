@@ -217,8 +217,13 @@ calibrate_button_clicked_cb (GtkButton *button, gpointer user_data)
     for (i = 0; i < 4; i++)
         calibration[i] = current[i];
 
-    if (calibration[0] == -1 && calibration[1] == -1 && calibration[2] == -1 && calibration[3] == -1)
-        gsd_wacom_device_get_area(CC_WACOM_PAGE(user_data)->priv->stylus, &calibration);
+    if (calibration[0] == -1 && calibration[1] == -1 && calibration[2] == -1 && calibration[3] == -1) {
+        gint *device_cal;
+        device_cal = gsd_wacom_device_get_area(CC_WACOM_PAGE(user_data)->priv->stylus);
+        for (i = 0; i < 4; i++)
+           calibration[i] = device_cal[i];
+        g_free (device_cal);
+    }
 
     if (run_calibration(calibration, 4))
         set_calibration(calibration, 4, tablet);
