@@ -33,6 +33,16 @@ add_page (GList *devices,
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), widget, NULL);
 }
 
+static gboolean
+delete_event_cb (GtkWidget *widget,
+		 GdkEvent  *event,
+		 gpointer   user_data)
+{
+	gtk_main_quit ();
+
+	return FALSE;
+}
+
 int main (int argc, char **argv)
 {
 	GtkWidget *window, *notebook;
@@ -41,6 +51,8 @@ int main (int argc, char **argv)
 	gtk_init (&argc, &argv);
 
 	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	g_signal_connect (G_OBJECT (window), "delete-event",
+			  G_CALLBACK (delete_event_cb), NULL);
 	notebook = gtk_notebook_new ();
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
 	gtk_widget_set_vexpand (notebook, TRUE);
