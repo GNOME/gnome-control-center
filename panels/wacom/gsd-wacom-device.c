@@ -737,41 +737,41 @@ gsd_wacom_device_get_device_type (GsdWacomDevice *device)
 gint *
 gsd_wacom_device_get_area (GsdWacomDevice *device)
 {
-        int i, id;
-        XDevice *xdevice;
-        Atom area, realtype;
-        int rc, realformat;
-        unsigned long nitems, bytes_after;
-        unsigned char *data = NULL;
-        gint *device_area;
+	int i, id;
+	XDevice *xdevice;
+	Atom area, realtype;
+	int rc, realformat;
+	unsigned long nitems, bytes_after;
+	unsigned char *data = NULL;
+	gint *device_area;
 
-        g_object_get (device->priv->gdk_device, "device-id", &id, NULL);
+	g_object_get (device->priv->gdk_device, "device-id", &id, NULL);
 
-        area = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "Wacom Tablet Area", False);
+	area = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "Wacom Tablet Area", False);
 
-        gdk_error_trap_push ();
-        xdevice = XOpenDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), id);
-        if (gdk_error_trap_pop () || (device == NULL))
-                return NULL;
+	gdk_error_trap_push ();
+	xdevice = XOpenDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), id);
+	if (gdk_error_trap_pop () || (device == NULL))
+		return NULL;
 
-        gdk_error_trap_push ();
-        rc = XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
-                                 xdevice, area, 0, 4, False,
-                                 XA_INTEGER, &realtype, &realformat, &nitems,
-                                 &bytes_after, &data);
-        if (gdk_error_trap_pop () || rc != Success || realtype == None || bytes_after != 0 || nitems != 4) {
-                XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), xdevice);
-                return NULL;
-        }
+	gdk_error_trap_push ();
+	rc = XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
+				 xdevice, area, 0, 4, False,
+				 XA_INTEGER, &realtype, &realformat, &nitems,
+				 &bytes_after, &data);
+	if (gdk_error_trap_pop () || rc != Success || realtype == None || bytes_after != 0 || nitems != 4) {
+		XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), xdevice);
+		return NULL;
+	}
 
 	device_area = g_new0 (int, nitems);
-        for (i = 0; i < nitems; i++)
-                device_area[i] = ((long*)data)[i];
+	for (i = 0; i < nitems; i++)
+		device_area[i] = ((long*)data)[i];
 
-        XFree (data);
+	XFree (data);
 	XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), xdevice);
 
-        return device_area;
+	return device_area;
 }
 
 const char *
