@@ -399,6 +399,8 @@ run_gui(struct Calib *c,
 
     success = finish(calib_area->calibrator, calib_area->display_width, calib_area->display_height, new_axis, swap);
 
+    g_free (calib_area);
+
     g_debug ("Final calibration: %d, %d, %d, %d\n",
 	     new_axis->x_min,
 	     new_axis->y_min,
