@@ -414,11 +414,14 @@ run_gui(struct Calib *c,
 
     g_free (calib_area);
 
-    g_debug ("Final calibration: %d, %d, %d, %d\n",
-	     new_axis->x_min,
-	     new_axis->y_min,
-	     new_axis->x_max,
-	     new_axis->y_max);
+    if (success)
+	    g_debug ("Final calibration: %d, %d, %d, %d\n",
+		     new_axis->x_min,
+		     new_axis->y_min,
+		     new_axis->x_max,
+		     new_axis->y_max);
+    else
+	    g_debug ("Calibration was aborted or timed out");
 
    return success;
 }
