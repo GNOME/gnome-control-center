@@ -196,7 +196,7 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
         /* Frame the message */
         layout = pango_layout_new (gtk_widget_get_pango_context (widget));
         pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
-        pango_layout_set_text (layout, calib_area->message, -1);
+        pango_layout_set_text (layout, _(calib_area->message), -1);
         pango_layout_get_pixel_extents (layout, NULL, &logical_rect);
 
         x = (calib_area->display_width - logical_rect.width) / 2 + logical_rect.x;
@@ -249,7 +249,7 @@ on_button_press_event(GtkWidget      *widget,
     success = add_click(calib_area->calibrator, (int)event->x_root, (int)event->y_root);
 
     if (!success && calib_area->calibrator->num_clicks == 0)
-        draw_message(calib_area, "Mis-click detected, restarting...");
+        draw_message(calib_area, N_("Mis-click detected, restarting..."));
     else
         draw_message(calib_area, NULL);
 
