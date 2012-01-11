@@ -28,21 +28,7 @@
 
 #include "calibrator.h"
 
-struct CalibArea
-{
-    struct Calib* calibrator;
-    double X[4], Y[4];
-    int display_width, display_height;
-    int time_elapsed;
-
-    const char* message;
-
-    guint anim_id;
-
-    GtkWidget *window;
-};
-
-gboolean              run_gui               (struct Calib     *c,
+gboolean              run_gui           (struct Calib     *c,
                                          XYinfo           *new_axis,
                                          gboolean             *swap);
 

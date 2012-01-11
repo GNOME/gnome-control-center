@@ -33,6 +33,21 @@
 #include "calibrator.h"
 #include "gui_gtk.h"
 
+typedef struct
+{
+    struct Calib* calibrator;
+    double X[4], Y[4];
+    int display_width, display_height;
+    int time_elapsed;
+
+    const char* message;
+
+    guint anim_id;
+
+    GtkWidget *window;
+} CalibArea;
+
+
 /* Window parameters */
 #define WINDOW_OPACITY		0.9
 
@@ -52,7 +67,7 @@
 #define HELP_TEXT_MAIN  N_("Please tap the target markers as they appear on screen to calibrate the tablet.")
 
 static void
-set_display_size(struct CalibArea *calib_area,
+set_display_size(CalibArea *calib_area,
                  int               width,
                  int               height)
 {
@@ -83,7 +98,7 @@ set_display_size(struct CalibArea *calib_area,
 }
 
 static void
-resize_display(struct CalibArea *calib_area)
+resize_display(CalibArea *calib_area)
 {
     /* check that screensize did not change (if no manually specified geometry) */
     GtkAllocation allocation;
@@ -99,7 +114,7 @@ resize_display(struct CalibArea *calib_area)
 static void
 draw(GtkWidget *widget, cairo_t *cr, gpointer data)
 {
-    struct CalibArea *calib_area = (struct CalibArea*)data;
+    CalibArea *calib_area = (CalibArea*)data;
     int i;
     double x;
     double y;
@@ -200,14 +215,14 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
 }
 
 static void
-draw_message(struct CalibArea *calib_area,
+draw_message(CalibArea *calib_area,
              const char       *msg)
 {
     calib_area->message = msg;
 }
 
 static void
-redraw(struct CalibArea *calib_area)
+redraw(CalibArea *calib_area)
 {
     GdkWindow *win = gtk_widget_get_window(calib_area->window);
     if (win)
@@ -226,7 +241,7 @@ on_button_press_event(GtkWidget      *widget,
                       GdkEventButton *event,
                       gpointer        data)
 {
-    struct CalibArea *calib_area = (struct CalibArea*)data;
+    CalibArea *calib_area = (CalibArea*)data;
     gboolean success;
 
     /* Handle click */
@@ -256,7 +271,7 @@ on_key_release_event(GtkWidget   *widget,
                      GdkEventKey *event,
                      gpointer     data)
 {
-    struct CalibArea *calib_area = (struct CalibArea*)data;
+    CalibArea *calib_area = (CalibArea*)data;
 
     if (event->type != GDK_KEY_RELEASE)
         return FALSE;
@@ -268,7 +283,7 @@ on_key_release_event(GtkWidget   *widget,
 }
 
 static gboolean
-on_timer_signal(struct CalibArea *calib_area)
+on_timer_signal(CalibArea *calib_area)
 {
     GdkWindow *win;
 
@@ -294,13 +309,13 @@ on_timer_signal(struct CalibArea *calib_area)
     return TRUE;
 }
 
-static struct CalibArea*
+static CalibArea*
 calibration_area_new (struct Calib *c,
 		      GtkWidget    *window)
 {
-    struct CalibArea *calib_area;
+    CalibArea *calib_area;
 
-    calib_area = g_new0 (struct CalibArea, 1);
+    calib_area = g_new0 (CalibArea, 1);
     calib_area->calibrator = c;
     calib_area->window = window;
 
@@ -354,7 +369,7 @@ run_gui(struct Calib *c,
         gboolean         *swap)
 {
     gboolean success;
-    struct CalibArea *calib_area;
+    CalibArea *calib_area;
     GdkRGBA black;
     GtkWidget *win;
     GdkScreen *screen;
