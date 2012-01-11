@@ -251,15 +251,22 @@ on_button_press_event(GtkWidget      *widget,
 }
 
 static gboolean
-on_key_press_event(GtkWidget   *widget,
-                   GdkEventKey *event,
-                   gpointer     data)
+on_key_release_event(GtkWidget   *widget,
+                     GdkEventKey *event,
+                     gpointer     data)
 {
     struct CalibArea *calib_area = (struct CalibArea*)data;
-    GtkWidget *parent = gtk_widget_get_parent(calib_area->drawing_area);
+    GtkWidget *parent;
+
+    if (event->type != GDK_KEY_RELEASE)
+        return FALSE;
+    if (event->keyval != GDK_KEY_Escape)
+        return FALSE;
+
+    parent = gtk_widget_get_parent(calib_area->drawing_area);
     if (parent)
         gtk_widget_destroy(parent);
-    return TRUE;
+    return FALSE;
 }
 
 static gboolean
@@ -302,13 +309,13 @@ CalibrationArea_(struct Calib *c)
     calib_area->drawing_area = gtk_drawing_area_new();
 
     /* Listen for mouse events */
-    gtk_widget_add_events(calib_area->drawing_area, GDK_KEY_PRESS_MASK | GDK_BUTTON_PRESS_MASK);
+    gtk_widget_add_events(calib_area->drawing_area, GDK_KEY_RELEASE_MASK | GDK_BUTTON_PRESS_MASK);
     gtk_widget_set_can_focus(calib_area->drawing_area, TRUE);
 
     /* Connect callbacks */
     g_signal_connect(calib_area->drawing_area, "draw", G_CALLBACK(draw), calib_area);
     g_signal_connect(calib_area->drawing_area, "button-press-event", G_CALLBACK(on_button_press_event), calib_area);
-    g_signal_connect(calib_area->drawing_area, "key-press-event", G_CALLBACK(on_key_press_event), calib_area);
+    g_signal_connect(calib_area->drawing_area, "key-release-event", G_CALLBACK(on_key_release_event), calib_area);
 
     /* parse geometry string */
     if (geo != NULL)
