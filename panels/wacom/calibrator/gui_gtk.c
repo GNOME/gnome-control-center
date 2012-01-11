@@ -310,26 +310,41 @@ on_timer_signal(CalibArea *calib_area)
 }
 
 static CalibArea*
-calibration_area_new (struct Calib *c,
-		      GtkWidget    *window)
+calibration_area_new (struct Calib *c)
 {
     CalibArea *calib_area;
+    GdkWindow *window;
+    GdkRGBA black;
 
     calib_area = g_new0 (CalibArea, 1);
     calib_area->calibrator = c;
-    calib_area->window = window;
+
+    /* Set up the window */
+    calib_area->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    gtk_widget_set_app_paintable (GTK_WIDGET (calib_area->window), TRUE);
+
+    /* Black background */
+    gdk_rgba_parse (&black, "rgb(0,0,0)");
+    gtk_window_set_opacity (GTK_WINDOW (calib_area->window), WINDOW_OPACITY);
+
+    gtk_widget_realize (calib_area->window);
+    window = gtk_widget_get_window (calib_area->window);
+    gdk_window_set_background_rgba (window, &black);
 
     /* Listen for mouse events */
-    gtk_widget_add_events (window, GDK_KEY_RELEASE_MASK | GDK_BUTTON_PRESS_MASK);
-    gtk_widget_set_can_focus (window, TRUE);
+    gtk_widget_add_events (calib_area->window, GDK_KEY_RELEASE_MASK | GDK_BUTTON_PRESS_MASK);
+    gtk_widget_set_can_focus (calib_area->window, TRUE);
+    gtk_window_fullscreen (GTK_WINDOW (calib_area->window));
 
     /* Connect callbacks */
-    g_signal_connect (window, "draw",
+    g_signal_connect (calib_area->window, "draw",
 		      G_CALLBACK(draw), calib_area);
-    g_signal_connect (window, "button-press-event",
+    g_signal_connect (calib_area->window, "button-press-event",
 		      G_CALLBACK(on_button_press_event), calib_area);
-    g_signal_connect (window, "key-release-event",
+    g_signal_connect (calib_area->window, "key-release-event",
 		      G_CALLBACK(on_key_release_event), calib_area);
+    g_signal_connect (calib_area->window, "destroy",
+		      G_CALLBACK (gtk_main_quit), NULL);
 
     /* FIXME */
 #if 0
@@ -370,10 +385,7 @@ run_gui(struct Calib *c,
 {
     gboolean success;
     CalibArea *calib_area;
-    GdkRGBA black;
-    GtkWidget *win;
     GdkScreen *screen;
-    GdkWindow *window;
     GdkRectangle rect;
 
     g_debug ("Current calibration: %d, %d, %d, %d\n",
@@ -387,27 +399,12 @@ run_gui(struct Calib *c,
     /*int num_monitors = screen->get_n_monitors(); TODO, multiple monitors?*/
     gdk_screen_get_monitor_geometry(screen, 0, &rect);
 
-    win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    gtk_widget_set_app_paintable (GTK_WIDGET (win), TRUE);
-    g_signal_connect (G_OBJECT (win), "destroy",
-		      G_CALLBACK (gtk_main_quit), NULL);
-    gtk_window_move (GTK_WINDOW(win), rect.x, rect.y);
-    gtk_window_set_default_size (GTK_WINDOW(win), rect.width, rect.height);
+    calib_area = calibration_area_new (c);
 
-    calib_area = calibration_area_new (c, win);
+    gtk_window_move (GTK_WINDOW (calib_area->window), rect.x, rect.y);
+    gtk_window_set_default_size (GTK_WINDOW (calib_area->window), rect.width, rect.height);
 
-    /* in case of window manager: set as full screen to hide window decorations */
-    gtk_window_fullscreen(GTK_WINDOW(win));
-
-    /* Black background */
-    gdk_rgba_parse (&black, "rgb(0,0,0)");
-    gtk_window_set_opacity (GTK_WINDOW (win), WINDOW_OPACITY);
-
-    gtk_widget_realize (win);
-    window = gtk_widget_get_window (win);
-    gdk_window_set_background_rgba (window, &black);
-
-    gtk_widget_show_all(win);
+    gtk_widget_show_all(calib_area->window);
 
     gtk_main();
 
