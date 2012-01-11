@@ -157,7 +157,7 @@ static int find_device(const char* pre_device, gboolean verbose, gboolean list_d
 
 static void usage(char* cmd, unsigned thr_misclick)
 {
-    fprintf(stderr, "Usage: %s [-h|--help] [-v|--verbose] [--list] [--device <device name or id>] [--precalib <minx> <maxx> <miny> <maxy>] [--misclick <nr of pixels>] [--output-type <auto|xorg.conf.d|hal|xinput>] [--fake] [--geometry <w>x<h>]\n", cmd);
+    fprintf(stderr, "Usage: %s [-h|--help] [-v|--verbose] [--list] [--device <device name or id>] [--precalib <minx> <maxx> <miny> <maxy>] [--misclick <nr of pixels>] [--output-type <auto|xorg.conf.d|hal|xinput>] [--fake]\n", cmd);
     fprintf(stderr, "\t-h, --help: print this help message\n");
     fprintf(stderr, "\t-v, --verbose: print debug messages during the process\n");
     fprintf(stderr, "\t--list: list calibratable input devices and quit\n");
@@ -166,16 +166,14 @@ static void usage(char* cmd, unsigned thr_misclick)
     fprintf(stderr, "\t--misclick: set the misclick threshold (0=off, default: %i pixels)\n",
         thr_misclick);
     fprintf(stderr, "\t--fake: emulate a fake device (for testing purposes)\n");
-    fprintf(stderr, "\t--geometry: manually provide the geometry (width and height) for the calibration window\n");
 }
 
-static struct Calib* CalibratorXorgPrint(const char* const device_name0, const XYinfo *axis0, const gboolean verbose0, const int thr_misclick, const int thr_doubleclick, const char* geometry)
+static struct Calib* CalibratorXorgPrint(const char* const device_name0, const XYinfo *axis0, const gboolean verbose0, const int thr_misclick, const int thr_doubleclick)
 {
     struct Calib* c = (struct Calib*)calloc(1, sizeof(struct Calib));
     c->old_axis = *axis0;
     c->threshold_misclick = thr_misclick;
     c->threshold_doubleclick = thr_doubleclick;
-    c->geometry = geometry;
 
     printf("Calibrating standard Xorg driver \"%s\"\n", device_name0);
     printf("\tcurrent calibration values: min_x=%d, max_x=%d and min_y=%d, max_y=%d\n",
@@ -193,7 +191,6 @@ static struct Calib* main_common(int argc, char** argv)
     gboolean precalib = FALSE;
     XYinfo pre_axis = {-1, -1, -1, -1};
     const char* pre_device = NULL;
-    const char* geometry = NULL;
     unsigned thr_misclick = 15;
     unsigned thr_doubleclick = 7;
 
@@ -253,12 +250,6 @@ static struct Calib* main_common(int argc, char** argv)
                     usage(argv[0], thr_misclick);
                     exit(1);
                 }
-            } else
-
-            /* specify window geometry? */
-            if (strcmp("--geometry", argv[i]) == 0) {
-                geometry = argv[++i];
-                /* sscanf(argv[++i],"%dx%d",&win_width,&win_height); */
             } else
 
             /* Fake calibratable device ? */
@@ -338,7 +329,7 @@ static struct Calib* main_common(int argc, char** argv)
 
     /* lastly, presume a standard Xorg driver (evtouch, mutouch, ...) */
     return CalibratorXorgPrint(device_name, &device_axis,
-            verbose, thr_misclick, thr_doubleclick, geometry);
+            verbose, thr_misclick, thr_doubleclick);
 }
 
 static gboolean output_xorgconfd(struct Calib* c, const XYinfo new_axis, int swap_xy, int new_swap_xy)
