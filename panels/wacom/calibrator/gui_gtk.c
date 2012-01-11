@@ -205,8 +205,9 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
         x = (calib_area->display_width - logical_rect.width) / 2 + logical_rect.x;
         y = (calib_area->display_height - logical_rect.height + CLOCK_RADIUS) / 2 + 60 + logical_rect.y;
         cairo_set_line_width(cr, 2);
-        cairo_rectangle(cr, x - 10 - 0.5 , y - logical_rect.height - 10 - 0.5,
-                logical_rect.width + 20 + 1, logical_rect.height + 25 + 1);
+        cairo_rectangle(cr, x - 10 - 0.5 , y - 10 - 0.5,
+                logical_rect.width + 20 + 1, logical_rect.height + 20 + 1);
+        cairo_stroke (cr);
 
         /* Print the message */
 	gtk_render_layout (context, cr,
