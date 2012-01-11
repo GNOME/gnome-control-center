@@ -135,28 +135,22 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
     cairo_restore(cr);
 
     /* Draw the points */
-    for (i = 0; i <= calib_area->calibrator->num_clicks; i++)
-    {
-        /* set color: already clicked or not */
-        if (i < calib_area->calibrator->num_clicks)
-            cairo_set_source_rgb(cr, 1.0, 1.0, 1.0);
-        else
-            cairo_set_source_rgb(cr, 0.8, 0.0, 0.0);
+    i = calib_area->calibrator->num_clicks;
+    cairo_set_source_rgb(cr, 1.0, 1.0, 1.0);
 
-        cairo_set_line_width(cr, 1);
-        cairo_move_to(cr, calib_area->X[i] - CROSS_LINES, calib_area->Y[i]);
-        cairo_rel_line_to(cr, CROSS_LINES*2, 0);
-        cairo_move_to(cr, calib_area->X[i], calib_area->Y[i] - CROSS_LINES);
-        cairo_rel_line_to(cr, 0, CROSS_LINES*2);
-        cairo_stroke(cr);
+    cairo_set_line_width(cr, 1);
+    cairo_move_to(cr, calib_area->X[i] - CROSS_LINES, calib_area->Y[i]);
+    cairo_rel_line_to(cr, CROSS_LINES*2, 0);
+    cairo_move_to(cr, calib_area->X[i], calib_area->Y[i] - CROSS_LINES);
+    cairo_rel_line_to(cr, 0, CROSS_LINES*2);
+    cairo_stroke(cr);
 
-        cairo_arc(cr, calib_area->X[i], calib_area->Y[i], CROSS_CIRCLE, 0.0, 2.0 * M_PI);
-        cairo_stroke(cr);
+    cairo_arc(cr, calib_area->X[i], calib_area->Y[i], CROSS_CIRCLE, 0.0, 2.0 * M_PI);
+    cairo_stroke(cr);
 
-	cairo_set_line_width(cr, 2);
-        cairo_arc(cr, calib_area->X[i], calib_area->Y[i], CROSS_CIRCLE2, 0.0, 2.0 * M_PI);
-        cairo_stroke(cr);
-    }
+    cairo_set_line_width(cr, 2);
+    cairo_arc(cr, calib_area->X[i], calib_area->Y[i], CROSS_CIRCLE2, 0.0, 2.0 * M_PI);
+    cairo_stroke(cr);
 
     /* Draw the clock background */
     cairo_arc(cr, calib_area->display_width/2, calib_area->display_height/2, CLOCK_RADIUS/2, 0.0, 2.0 * M_PI);
