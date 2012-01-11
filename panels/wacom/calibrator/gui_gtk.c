@@ -110,6 +110,11 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
 
     context = gtk_widget_get_style_context (widget);
 
+    /* Black background and reset the operator */
+    cairo_set_operator (cr, CAIRO_OPERATOR_CLEAR);
+    cairo_paint (cr);
+    cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
+
     /* Print the text */
     layout = pango_layout_new (gtk_widget_get_pango_context (widget));
     pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
@@ -342,6 +347,8 @@ run_gui(struct Calib *c,
 {
     gboolean success;
     struct CalibArea *calib_area = CalibrationArea_(c);
+    GdkRGBA black;
+    GdkWindow *window;
 
     g_debug ("Current calibration: %d, %d, %d, %d\n",
 	     c->old_axis.x_min,
@@ -366,6 +373,18 @@ run_gui(struct Calib *c,
     gtk_window_fullscreen(GTK_WINDOW(win));
 
     gtk_container_add(GTK_CONTAINER(win), calib_area->drawing_area);
+
+    /* Black background */
+    gdk_rgba_parse (&black, "000");
+
+    gtk_widget_realize (calib_area->drawing_area);
+    window = gtk_widget_get_window (calib_area->drawing_area);
+    gdk_window_set_background_rgba (window, &black);
+
+    gtk_widget_realize (win);
+    window = gtk_widget_get_window (win);
+    gdk_window_set_background_rgba (window, &black);
+
     gtk_widget_show_all(win);
 
     gtk_main();
