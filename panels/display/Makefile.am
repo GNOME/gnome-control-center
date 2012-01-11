@@ -23,7 +23,7 @@ libdisplay_la_SOURCES =		\
 	scrollarea.h		\
 	$(MARSHALFILES)
 
-libdisplay_la_LIBADD = $(DBUS_LIBS) $(PANEL_LIBS) $(DISPLAY_PANEL_LIBS)
+libdisplay_la_LIBADD = $(PANEL_LIBS) $(DISPLAY_PANEL_LIBS)
 libdisplay_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 # You will need a recent intltool or the patch from this bug
