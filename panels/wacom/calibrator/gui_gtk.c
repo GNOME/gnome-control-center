@@ -21,9 +21,12 @@
  * THE SOFTWARE.
  */
 
+#include "config.h"
+
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <cairo.h>
 
@@ -41,12 +44,10 @@
 #define CLOCK_LINE_WIDTH	10
 
 /* Text printed on screen */
-const char *help_text =
-    "Touchscreen Calibration\n"
-    "Press the point, use a stylus to increase precision.\n"
-    "\n"
-    "(To abort, press any key or wait)"
-;
+#define HELP_TEXT N_("Touchscreen Calibration\n"				\
+		     "Press the point, use a stylus to increase precision.\n"	\
+		     "\n"							\
+		     "(To abort, press any key or wait)")
 
 static void
 set_display_size(struct CalibArea *calib_area,
@@ -111,7 +112,7 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
     /* Print the text */
     layout = pango_layout_new (gtk_widget_get_pango_context (widget));
     pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
-    pango_layout_set_text (layout, help_text, -1);
+    pango_layout_set_text (layout, _(HELP_TEXT), -1);
 
     pango_layout_get_pixel_extents (layout, NULL, &logical_rect);
 
