@@ -137,7 +137,7 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
 
     layout = pango_layout_new (gtk_widget_get_pango_context (widget));
     pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
-    markup = g_strdup_printf ("<big><b>%s</b></big>\n<big>%s</big>",
+    markup = g_strdup_printf ("<span foreground=\"white\"><big><b>%s</b></big>\n<big>%s</big></span>",
 			      _(HELP_TEXT_TITLE),
 			      _(HELP_TEXT_MAIN));
     pango_layout_set_markup (layout, markup, -1);
@@ -196,7 +196,10 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
         /* Frame the message */
         layout = pango_layout_new (gtk_widget_get_pango_context (widget));
         pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
-        pango_layout_set_text (layout, _(calib_area->message), -1);
+        markup = g_strdup_printf ("<span foreground=\"white\"><big>%s</big></span>",
+				  _(calib_area->message));
+        pango_layout_set_markup (layout, markup, -1);
+        g_free (markup);
         pango_layout_get_pixel_extents (layout, NULL, &logical_rect);
 
         x = (calib_area->display_width - logical_rect.width) / 2 + logical_rect.x;
