@@ -128,7 +128,7 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
     pango_layout_get_pixel_extents (layout, NULL, &logical_rect);
 
     x = (calib_area->display_width - logical_rect.width) / 2 + logical_rect.x;
-    y = (calib_area->display_height - logical_rect.height) / 2  - logical_rect.height - 20 + logical_rect.y;
+    y = (calib_area->display_height - logical_rect.height) / 2  - logical_rect.height - 40 + logical_rect.y;
     cairo_set_line_width(cr, 2);
     cairo_rectangle(cr, x - 10 - 0.5, y - 10 - 0.5,
             logical_rect.width + 20 + 1, logical_rect.height + 20 + 1);
