@@ -33,6 +33,9 @@
 #include "calibrator.h"
 #include "gui_gtk.h"
 
+/* Window parameters */
+#define WINDOW_OPACITY		0.9
+
 /* Timeout parameters */
 #define TIME_STEP		100   /* in milliseconds */
 #define MAX_TIME		15000 /* 5000 = 5 sec */
@@ -382,7 +385,8 @@ run_gui(struct Calib *c,
     gtk_window_fullscreen(GTK_WINDOW(win));
 
     /* Black background */
-    gdk_rgba_parse (&black, "000");
+    gdk_rgba_parse (&black, "rgb(0,0,0)");
+    gtk_window_set_opacity (GTK_WINDOW (win), WINDOW_OPACITY);
 
     gtk_widget_realize (win);
     window = gtk_widget_get_window (win);
