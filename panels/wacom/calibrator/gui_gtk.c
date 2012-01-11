@@ -45,10 +45,8 @@
 #define CLOCK_LINE_WIDTH	10
 
 /* Text printed on screen */
-#define HELP_TEXT N_("Touchscreen Calibration\n"				\
-		     "Press the point, use a stylus to increase precision.\n"	\
-		     "\n"							\
-		     "(To abort, press any key or wait)")
+#define HELP_TEXT_TITLE N_("Screen Calibration")
+#define HELP_TEXT_MAIN  N_("Please tap the target markers as they appear on screen to calibrate the tablet.")
 
 static void
 set_display_size(struct CalibArea *calib_area,
@@ -105,6 +103,7 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
     PangoLayout *layout;
     PangoRectangle logical_rect;
     GtkStyleContext *context;
+    char *markup;
 
     resize_display(calib_area);
 
@@ -120,7 +119,11 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
 
     layout = pango_layout_new (gtk_widget_get_pango_context (widget));
     pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
-    pango_layout_set_text (layout, _(HELP_TEXT), -1);
+    markup = g_strdup_printf ("<big><b>%s</b></big>\n<big>%s</big>",
+			      _(HELP_TEXT_TITLE),
+			      _(HELP_TEXT_MAIN));
+    pango_layout_set_markup (layout, markup, -1);
+    g_free (markup);
 
     pango_layout_get_pixel_extents (layout, NULL, &logical_rect);
 
