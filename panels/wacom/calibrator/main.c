@@ -21,10 +21,13 @@
  * THE SOFTWARE.
  */
 
+#include "config.h"
+
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
 #include <dirent.h>
+#include <glib/gi18n.h>
 
 #include <X11/extensions/XInput.h>
 
@@ -379,6 +382,10 @@ int main(int argc, char** argv)
     gboolean swap_xy;
 
     struct Calib* calibrator = main_common(argc, argv);
+
+    bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+    textdomain (GETTEXT_PACKAGE);
 
     /* GTK setup */
     gtk_init(&argc, &argv);
