@@ -127,8 +127,8 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
     x = (calib_area->display_width - logical_rect.width) / 2 + logical_rect.x;
     y = (calib_area->display_height - logical_rect.height) / 2  - logical_rect.height - 20 + logical_rect.y;
     cairo_set_line_width(cr, 2);
-    cairo_rectangle(cr, x - 10, y - 10,
-            logical_rect.width + 20, logical_rect.height + 20);
+    cairo_rectangle(cr, x - 10 - 0.5, y - 10 - 0.5,
+            logical_rect.width + 20 + 1, logical_rect.height + 20 + 1);
 
     /* Print help lines */
     gtk_render_layout (context, cr,
@@ -139,20 +139,20 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
 
     /* Draw the points */
     i = calib_area->calibrator->num_clicks;
-    cairo_set_source_rgb(cr, 1.0, 1.0, 1.0);
 
     cairo_set_line_width(cr, 1);
-    cairo_move_to(cr, calib_area->X[i] - CROSS_LINES, calib_area->Y[i]);
+    cairo_move_to(cr, calib_area->X[i] - CROSS_LINES, calib_area->Y[i] - 0.5);
     cairo_rel_line_to(cr, CROSS_LINES*2, 0);
-    cairo_move_to(cr, calib_area->X[i], calib_area->Y[i] - CROSS_LINES);
+    cairo_move_to(cr, calib_area->X[i] - 0.5, calib_area->Y[i] - CROSS_LINES);
     cairo_rel_line_to(cr, 0, CROSS_LINES*2);
     cairo_stroke(cr);
 
-    cairo_arc(cr, calib_area->X[i], calib_area->Y[i], CROSS_CIRCLE, 0.0, 2.0 * M_PI);
+    cairo_set_line_width(cr, 2);
+    cairo_arc(cr, calib_area->X[i] - 0.5, calib_area->Y[i] - 0.5, CROSS_CIRCLE, 0.0, 2.0 * M_PI);
     cairo_stroke(cr);
 
-    cairo_set_line_width(cr, 2);
-    cairo_arc(cr, calib_area->X[i], calib_area->Y[i], CROSS_CIRCLE2, 0.0, 2.0 * M_PI);
+    cairo_set_line_width(cr, 5);
+    cairo_arc(cr, calib_area->X[i] - 0.5, calib_area->Y[i] - 0.5, CROSS_CIRCLE2, 0.0, 2.0 * M_PI);
     cairo_stroke(cr);
 
     /* Draw the clock background */
@@ -181,8 +181,8 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
         x = (calib_area->display_width - logical_rect.width) / 2 + logical_rect.x;
         y = (calib_area->display_height - logical_rect.height + CLOCK_RADIUS) / 2 + 60 + logical_rect.y;
         cairo_set_line_width(cr, 2);
-        cairo_rectangle(cr, x - 10, y - logical_rect.height - 10,
-                logical_rect.width + 20, logical_rect.height + 25);
+        cairo_rectangle(cr, x - 10 - 0.5 , y - logical_rect.height - 10 - 0.5,
+                logical_rect.width + 20 + 1, logical_rect.height + 25 + 1);
 
         /* Print the message */
 	gtk_render_layout (context, cr,
