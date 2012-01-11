@@ -34,6 +34,17 @@ reset (struct Calib *c)
     c->num_clicks = 0;
 }
 
+/* check whether the coordinates are along the respective axis */
+static gboolean
+along_axis (struct Calib *c,
+            int           xy,
+            int           x0,
+            int           y0)
+{
+    return ((abs(xy - x0) <= c->threshold_misclick) ||
+            (abs(xy - y0) <= c->threshold_misclick));
+}
+
 /* add a click with the given coordinates */
 gboolean
 add_click (struct Calib *c,
@@ -104,17 +115,6 @@ add_click (struct Calib *c,
     c->num_clicks++;
 
     return TRUE;
-}
-
-/* check whether the coordinates are along the respective axis */
-gboolean
-along_axis (struct Calib *c,
-            int           xy,
-            int           x0,
-            int           y0)
-{
-    return ((abs(xy - x0) <= c->threshold_misclick) ||
-            (abs(xy - y0) <= c->threshold_misclick));
 }
 
 /* calculate and apply the calibration */

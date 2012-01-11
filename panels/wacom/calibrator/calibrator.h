@@ -102,10 +102,6 @@ void reset      (struct Calib *c);
 gboolean add_click  (struct Calib *c,
                  int           x,
                  int           y);
-gboolean along_axis (struct Calib *c,
-                 int           xy,
-                 int           x0,
-                 int           y0);
 gboolean finish     (struct Calib *c,
                  int           width,
                  int           height,
