@@ -93,9 +93,6 @@ struct Calib
      * Set to zero if you don't want this check
      */
     int threshold_misclick;
-
-    /* manually specified geometry string */
-    const char* geometry;
 };
 
 void reset      (struct Calib *c);

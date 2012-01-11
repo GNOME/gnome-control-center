@@ -103,9 +103,8 @@ resize_display(CalibArea *calib_area)
     /* check that screensize did not change (if no manually specified geometry) */
     GtkAllocation allocation;
     gtk_widget_get_allocation(calib_area->window, &allocation);
-    if (calib_area->calibrator->geometry == NULL &&
-        (calib_area->display_width != allocation.width ||
-         calib_area->display_height != allocation.height ))
+    if (calib_area->display_width != allocation.width ||
+        calib_area->display_height != allocation.height)
     {
         set_display_size(calib_area, allocation.width, allocation.height);
     }
@@ -349,26 +348,6 @@ calibration_area_new (struct Calib *c)
 		      G_CALLBACK(on_key_release_event), calib_area);
     g_signal_connect (calib_area->window, "destroy",
 		      G_CALLBACK (gtk_main_quit), NULL);
-
-    /* FIXME */
-#if 0
-    /* parse geometry string */
-    if (c->geometry != NULL)
-    {
-        int gw,gh;
-        int res = sscanf(c->geometry,"%dx%d",&gw,&gh);
-        if (res != 2)
-            c->geometry = NULL;
-        else
-            set_display_size(calib_area, gw, gh );\
-    }
-    if (c->geometry == NULL)
-    {
-        GtkAllocation allocation;
-        gtk_widget_get_allocation(calib_area->drawing_area, &allocation);
-        set_display_size(calib_area, allocation.width, allocation.height);
-    }
-#endif
 
     /* Setup timer for animation */
     calib_area->anim_id = g_timeout_add(TIME_STEP, (GSourceFunc)on_timer_signal, calib_area);
