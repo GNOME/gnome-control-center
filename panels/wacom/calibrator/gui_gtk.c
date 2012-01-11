@@ -31,24 +31,22 @@
 #include "gui_gtk.h"
 
 /* Timeout parameters */
-const int time_step = 100;  /* in milliseconds */
-const int max_time = 15000; /* 5000 = 5 sec */
+#define TIME_STEP		100   /* in milliseconds */
+#define MAX_TIME		15000 /* 5000 = 5 sec */
 
 /* Clock appereance */
-const int cross_lines = 25;
-const int cross_circle = 4;
-const int clock_radius = 50;
-const int clock_line_width = 10;
+#define CROSS_LINES		25
+#define CROSS_CIRCLE		4
+#define CLOCK_RADIUS		50
+#define CLOCK_LINE_WIDTH	10
 
 /* Text printed on screen */
-const int font_size = 16;
-#define HELP_LINES (sizeof help_text / sizeof help_text[0])
-const char *help_text[] = {
-    "Touchscreen Calibration",
-    "Press the point, use a stylus to increase precision.",
-    "",
+const char *help_text =
+    "Touchscreen Calibration\n"
+    "Press the point, use a stylus to increase precision.\n"
+    "\n"
     "(To abort, press any key or wait)"
-};
+;
 
 static void
 set_display_size(struct CalibArea *calib_area,
@@ -100,42 +98,39 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
 {
     struct CalibArea *calib_area = (struct CalibArea*)data;
     int i;
-    double text_height;
-    double text_width;
     double x;
     double y;
-    cairo_text_extents_t extent;
+    PangoLayout *layout;
+    PangoRectangle logical_rect;
+    GtkStyleContext *context;
 
     resize_display(calib_area);
 
-    /* Print the text */
-    cairo_set_font_size(cr, font_size);
-    text_height = -1;
-    text_width = -1;
-    for (i = 0; i != HELP_LINES; i++)
-    {
-        cairo_text_extents(cr, help_text[i], &extent);
-        text_width = MAX(text_width, extent.width);
-        text_height = MAX(text_height, extent.height);
-    }
-    text_height += 2;
+    context = gtk_widget_get_style_context (widget);
 
-    x = (calib_area->display_width - text_width) / 2;
-    y = (calib_area->display_height - text_height) / 2 - 60;
+    /* Print the text */
+    layout = pango_layout_new (gtk_widget_get_pango_context (widget));
+    pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
+    pango_layout_set_text (layout, help_text, -1);
+
+    pango_layout_get_pixel_extents (layout, NULL, &logical_rect);
+
+    x = (calib_area->display_width - logical_rect.width) / 2 + logical_rect.x;
+    y = (calib_area->display_height - logical_rect.height) / 2  - logical_rect.height - 20 + logical_rect.y;
     cairo_set_line_width(cr, 2);
-    cairo_rectangle(cr, x - 10, y - (HELP_LINES*text_height) - 10,
-            text_width + 20, (HELP_LINES*text_height) + 20);
+    cairo_rectangle(cr, x - 10, y - 10,
+            logical_rect.width + 20, logical_rect.height + 20);
 
     /* Print help lines */
-    y -= 3;
-    for (i = HELP_LINES-1; i != -1; i--)
-    {
-        cairo_text_extents(cr, help_text[i], &extent);
-        cairo_move_to(cr, x + (text_width-extent.width)/2, y);
-        cairo_show_text(cr, help_text[i]);
-        y -= text_height;
-    }
-    cairo_stroke(cr);
+    cairo_save (cr);
+    gtk_render_layout (context, cr,
+		       x + logical_rect.x,
+		       y + logical_rect.y,
+		       layout);
+
+    g_object_unref (layout);
+
+    cairo_restore(cr);
 
     /* Draw the points */
     for (i = 0; i <= calib_area->calibrator->num_clicks; i++)
@@ -147,48 +142,53 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
             cairo_set_source_rgb(cr, 0.8, 0.0, 0.0);
 
         cairo_set_line_width(cr, 1);
-        cairo_move_to(cr, calib_area->X[i] - cross_lines, calib_area->Y[i]);
-        cairo_rel_line_to(cr, cross_lines*2, 0);
-        cairo_move_to(cr, calib_area->X[i], calib_area->Y[i] - cross_lines);
-        cairo_rel_line_to(cr, 0, cross_lines*2);
+        cairo_move_to(cr, calib_area->X[i] - CROSS_LINES, calib_area->Y[i]);
+        cairo_rel_line_to(cr, CROSS_LINES*2, 0);
+        cairo_move_to(cr, calib_area->X[i], calib_area->Y[i] - CROSS_LINES);
+        cairo_rel_line_to(cr, 0, CROSS_LINES*2);
         cairo_stroke(cr);
 
-        cairo_arc(cr, calib_area->X[i], calib_area->Y[i], cross_circle, 0.0, 2.0 * M_PI);
+        cairo_arc(cr, calib_area->X[i], calib_area->Y[i], CROSS_CIRCLE, 0.0, 2.0 * M_PI);
         cairo_stroke(cr);
     }
 
     /* Draw the clock background */
-    cairo_arc(cr, calib_area->display_width/2, calib_area->display_height/2, clock_radius/2, 0.0, 2.0 * M_PI);
+    cairo_arc(cr, calib_area->display_width/2, calib_area->display_height/2, CLOCK_RADIUS/2, 0.0, 2.0 * M_PI);
     cairo_set_source_rgb(cr, 0.5, 0.5, 0.5);
     cairo_fill_preserve(cr);
     cairo_stroke(cr);
 
-    cairo_set_line_width(cr, clock_line_width);
-    cairo_arc(cr, calib_area->display_width/2, calib_area->display_height/2, (clock_radius - clock_line_width)/2,
-         3/2.0*M_PI, (3/2.0*M_PI) + ((double)calib_area->time_elapsed/(double)max_time) * 2*M_PI);
+    cairo_set_line_width(cr, CLOCK_LINE_WIDTH);
+    cairo_arc(cr, calib_area->display_width/2, calib_area->display_height/2, (CLOCK_RADIUS - CLOCK_LINE_WIDTH)/2,
+         3/2.0*M_PI, (3/2.0*M_PI) + ((double)calib_area->time_elapsed/(double)MAX_TIME) * 2*M_PI);
     cairo_set_source_rgb(cr, 0.0, 0.0, 0.0);
     cairo_stroke(cr);
-
 
     /* Draw the message (if any) */
     if (calib_area->message != NULL)
     {
         /* Frame the message */
-        cairo_set_font_size(cr, font_size);
-        cairo_text_extents(cr, calib_area->message, &extent);
-        text_width = extent.width;
-        text_height = extent.height;
+        layout = pango_layout_new (gtk_widget_get_pango_context (widget));
+        pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
+        pango_layout_set_text (layout, calib_area->message, -1);
+        pango_layout_get_pixel_extents (layout, NULL, &logical_rect);
 
-        x = (calib_area->display_width - text_width) / 2;
-        y = (calib_area->display_height - text_height + clock_radius) / 2 + 60;
+        x = (calib_area->display_width - logical_rect.width) / 2 + logical_rect.x;
+        y = (calib_area->display_height - logical_rect.height + CLOCK_RADIUS) / 2 + 60 + logical_rect.y;
         cairo_set_line_width(cr, 2);
-        cairo_rectangle(cr, x - 10, y - text_height - 10,
-                text_width + 20, text_height + 25);
+        cairo_rectangle(cr, x - 10, y - logical_rect.height - 10,
+                logical_rect.width + 20, logical_rect.height + 25);
 
         /* Print the message */
-        cairo_move_to(cr, x, y);
-        cairo_show_text(cr, calib_area->message);
-        cairo_stroke(cr);
+	cairo_save (cr);
+	gtk_render_layout (context, cr,
+			   x + logical_rect.x,
+			   y + logical_rect.y,
+			   layout);
+
+	g_object_unref (layout);
+
+	cairo_restore(cr);
     }
 }
 
@@ -264,8 +264,8 @@ on_timer_signal(struct CalibArea *calib_area)
     GdkWindow *win;
     GtkWidget *parent = gtk_widget_get_parent(calib_area->drawing_area);
 
-    calib_area->time_elapsed += time_step;
-    if (calib_area->time_elapsed > max_time || parent == NULL)
+    calib_area->time_elapsed += TIME_STEP;
+    if (calib_area->time_elapsed > MAX_TIME || parent == NULL)
     {
         if (parent)
             gtk_widget_destroy(parent);
@@ -277,10 +277,10 @@ on_timer_signal(struct CalibArea *calib_area)
     if (win)
     {
         GdkRectangle rect;
-        rect.x = calib_area->display_width/2 - clock_radius - clock_line_width;
-        rect.y = calib_area->display_height/2 - clock_radius - clock_line_width;
-        rect.width = 2 * clock_radius + 1 + 2 * clock_line_width;
-        rect.height = 2 * clock_radius + 1 + 2 * clock_line_width;
+        rect.x = calib_area->display_width/2 - CLOCK_RADIUS - CLOCK_LINE_WIDTH;
+        rect.y = calib_area->display_height/2 - CLOCK_RADIUS - CLOCK_LINE_WIDTH;
+        rect.width = 2 * CLOCK_RADIUS + 1 + 2 * CLOCK_LINE_WIDTH;
+        rect.height = 2 * CLOCK_RADIUS + 1 + 2 * CLOCK_LINE_WIDTH;
         gdk_window_invalidate_rect(win, &rect, FALSE);
     }
 
@@ -324,7 +324,7 @@ CalibrationArea_(struct Calib *c)
     }
 
     /* Setup timer for animation */
-    calib_area->anim_id = g_timeout_add(time_step, (GSourceFunc)on_timer_signal, calib_area);
+    calib_area->anim_id = g_timeout_add(TIME_STEP, (GSourceFunc)on_timer_signal, calib_area);
 
     return calib_area;
 }
