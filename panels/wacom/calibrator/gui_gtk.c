@@ -40,6 +40,7 @@
 /* Clock appereance */
 #define CROSS_LINES		50
 #define CROSS_CIRCLE		7
+#define CROSS_CIRCLE2		30
 #define CLOCK_RADIUS		50
 #define CLOCK_LINE_WIDTH	10
 
@@ -150,6 +151,10 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
         cairo_stroke(cr);
 
         cairo_arc(cr, calib_area->X[i], calib_area->Y[i], CROSS_CIRCLE, 0.0, 2.0 * M_PI);
+        cairo_stroke(cr);
+
+	cairo_set_line_width(cr, 2);
+        cairo_arc(cr, calib_area->X[i], calib_area->Y[i], CROSS_CIRCLE2, 0.0, 2.0 * M_PI);
         cairo_stroke(cr);
     }
 
