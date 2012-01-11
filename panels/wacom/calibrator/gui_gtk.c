@@ -84,7 +84,7 @@ resize_display(struct CalibArea *calib_area)
 {
     /* check that screensize did not change (if no manually specified geometry) */
     GtkAllocation allocation;
-    gtk_widget_get_allocation(calib_area->drawing_area, &allocation);
+    gtk_widget_get_allocation(calib_area->window, &allocation);
     if (calib_area->calibrator->geometry == NULL &&
         (calib_area->display_width != allocation.width ||
          calib_area->display_height != allocation.height ))
@@ -206,7 +206,7 @@ draw_message(struct CalibArea *calib_area,
 static void
 redraw(struct CalibArea *calib_area)
 {
-    GdkWindow *win = gtk_widget_get_window(calib_area->drawing_area);
+    GdkWindow *win = gtk_widget_get_window(calib_area->window);
     if (win)
     {
         GdkRectangle rect;
@@ -238,16 +238,14 @@ on_button_press_event(GtkWidget      *widget,
     /* Are we done yet? */
     if (calib_area->calibrator->num_clicks >= 4)
     {
-        GtkWidget *parent = gtk_widget_get_parent(calib_area->drawing_area);
-        if (parent)
-            gtk_widget_destroy(parent);
-        return TRUE;
+        gtk_widget_destroy (calib_area->window);
+        return FALSE;
     }
 
     /* Force a redraw */
     redraw(calib_area);
 
-    return TRUE;
+    return FALSE;
 }
 
 static gboolean
@@ -256,16 +254,13 @@ on_key_release_event(GtkWidget   *widget,
                      gpointer     data)
 {
     struct CalibArea *calib_area = (struct CalibArea*)data;
-    GtkWidget *parent;
 
     if (event->type != GDK_KEY_RELEASE)
         return FALSE;
     if (event->keyval != GDK_KEY_Escape)
         return FALSE;
 
-    parent = gtk_widget_get_parent(calib_area->drawing_area);
-    if (parent)
-        gtk_widget_destroy(parent);
+    gtk_widget_destroy (calib_area->window);
     return FALSE;
 }
 
@@ -273,18 +268,16 @@ static gboolean
 on_timer_signal(struct CalibArea *calib_area)
 {
     GdkWindow *win;
-    GtkWidget *parent = gtk_widget_get_parent(calib_area->drawing_area);
 
     calib_area->time_elapsed += TIME_STEP;
-    if (calib_area->time_elapsed > MAX_TIME || parent == NULL)
+    if (calib_area->time_elapsed > MAX_TIME)
     {
-        if (parent)
-            gtk_widget_destroy(parent);
+        gtk_widget_destroy (calib_area->window);
         return FALSE;
     }
 
     /* Update clock */
-    win = gtk_widget_get_window(calib_area->drawing_area);
+    win = gtk_widget_get_window (calib_area->window);
     if (win)
     {
         GdkRectangle rect;
@@ -299,40 +292,46 @@ on_timer_signal(struct CalibArea *calib_area)
 }
 
 static struct CalibArea*
-CalibrationArea_(struct Calib *c)
+calibration_area_new (struct Calib *c,
+		      GtkWidget    *window)
 {
     struct CalibArea *calib_area;
-    const char *geo = c->geometry;
 
     calib_area = g_new0 (struct CalibArea, 1);
     calib_area->calibrator = c;
-    calib_area->drawing_area = gtk_drawing_area_new();
+    calib_area->window = window;
 
     /* Listen for mouse events */
-    gtk_widget_add_events(calib_area->drawing_area, GDK_KEY_RELEASE_MASK | GDK_BUTTON_PRESS_MASK);
-    gtk_widget_set_can_focus(calib_area->drawing_area, TRUE);
+    gtk_widget_add_events (window, GDK_KEY_RELEASE_MASK | GDK_BUTTON_PRESS_MASK);
+    gtk_widget_set_can_focus (window, TRUE);
 
     /* Connect callbacks */
-    g_signal_connect(calib_area->drawing_area, "draw", G_CALLBACK(draw), calib_area);
-    g_signal_connect(calib_area->drawing_area, "button-press-event", G_CALLBACK(on_button_press_event), calib_area);
-    g_signal_connect(calib_area->drawing_area, "key-release-event", G_CALLBACK(on_key_release_event), calib_area);
+    g_signal_connect (window, "draw",
+		      G_CALLBACK(draw), calib_area);
+    g_signal_connect (window, "button-press-event",
+		      G_CALLBACK(on_button_press_event), calib_area);
+    g_signal_connect (window, "key-release-event",
+		      G_CALLBACK(on_key_release_event), calib_area);
 
+    /* FIXME */
+#if 0
     /* parse geometry string */
-    if (geo != NULL)
+    if (c->geometry != NULL)
     {
         int gw,gh;
-        int res = sscanf(geo,"%dx%d",&gw,&gh);
+        int res = sscanf(c->geometry,"%dx%d",&gw,&gh);
         if (res != 2)
-            geo = NULL;
+            c->geometry = NULL;
         else
             set_display_size(calib_area, gw, gh );\
     }
-    if (geo == NULL)
+    if (c->geometry == NULL)
     {
         GtkAllocation allocation;
         gtk_widget_get_allocation(calib_area->drawing_area, &allocation);
         set_display_size(calib_area, allocation.width, allocation.height);
     }
+#endif
 
     /* Setup timer for animation */
     calib_area->anim_id = g_timeout_add(TIME_STEP, (GSourceFunc)on_timer_signal, calib_area);
@@ -352,9 +351,12 @@ run_gui(struct Calib *c,
         gboolean         *swap)
 {
     gboolean success;
-    struct CalibArea *calib_area = CalibrationArea_(c);
+    struct CalibArea *calib_area;
     GdkRGBA black;
+    GtkWidget *win;
+    GdkScreen *screen;
     GdkWindow *window;
+    GdkRectangle rect;
 
     g_debug ("Current calibration: %d, %d, %d, %d\n",
 	     c->old_axis.x_min,
@@ -362,30 +364,25 @@ run_gui(struct Calib *c,
 	     c->old_axis.x_max,
 	     c->old_axis.y_max);
 
-    GdkScreen *screen = gdk_screen_get_default();
-    GtkWidget *win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    GdkRectangle rect;
+    /* Which monitor are we on? */
+    screen = gdk_screen_get_default();
     /*int num_monitors = screen->get_n_monitors(); TODO, multiple monitors?*/
-
-    g_signal_connect(G_OBJECT(win), "destroy", G_CALLBACK(gtk_main_quit), NULL);
-
     gdk_screen_get_monitor_geometry(screen, 0, &rect);
 
-    /* when no window manager: explicitely take size of full screen */
-    gtk_window_move(GTK_WINDOW(win), rect.x, rect.y);
-    gtk_window_set_default_size(GTK_WINDOW(win), rect.width, rect.height);
+    win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    gtk_widget_set_app_paintable (GTK_WIDGET (win), TRUE);
+    g_signal_connect (G_OBJECT (win), "destroy",
+		      G_CALLBACK (gtk_main_quit), NULL);
+    gtk_window_move (GTK_WINDOW(win), rect.x, rect.y);
+    gtk_window_set_default_size (GTK_WINDOW(win), rect.width, rect.height);
+
+    calib_area = calibration_area_new (c, win);
 
     /* in case of window manager: set as full screen to hide window decorations */
     gtk_window_fullscreen(GTK_WINDOW(win));
 
-    gtk_container_add(GTK_CONTAINER(win), calib_area->drawing_area);
-
     /* Black background */
     gdk_rgba_parse (&black, "000");
-
-    gtk_widget_realize (calib_area->drawing_area);
-    window = gtk_widget_get_window (calib_area->drawing_area);
-    gdk_window_set_background_rgba (window, &black);
 
     gtk_widget_realize (win);
     window = gtk_widget_get_window (win);
