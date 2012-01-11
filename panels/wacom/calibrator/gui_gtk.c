@@ -116,6 +116,8 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
     cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
 
     /* Print the text */
+    cairo_set_source_rgb(cr, 1.0, 1.0, 1.0);
+
     layout = pango_layout_new (gtk_widget_get_pango_context (widget));
     pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
     pango_layout_set_text (layout, _(HELP_TEXT), -1);
@@ -166,12 +168,14 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
     cairo_set_line_width(cr, CLOCK_LINE_WIDTH);
     cairo_arc(cr, calib_area->display_width/2, calib_area->display_height/2, (CLOCK_RADIUS - CLOCK_LINE_WIDTH)/2,
          3/2.0*M_PI, (3/2.0*M_PI) + ((double)calib_area->time_elapsed/(double)MAX_TIME) * 2*M_PI);
-    cairo_set_source_rgb(cr, 0.0, 0.0, 0.0);
+    cairo_set_source_rgb(cr, 1.0, 1.0, 1.0);
     cairo_stroke(cr);
 
     /* Draw the message (if any) */
     if (calib_area->message != NULL)
     {
+        cairo_set_source_rgb(cr, 1.0, 1.0, 1.0);
+
         /* Frame the message */
         layout = pango_layout_new (gtk_widget_get_pango_context (widget));
         pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
