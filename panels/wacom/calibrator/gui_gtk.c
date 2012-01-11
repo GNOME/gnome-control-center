@@ -131,15 +131,11 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
             logical_rect.width + 20, logical_rect.height + 20);
 
     /* Print help lines */
-    cairo_save (cr);
     gtk_render_layout (context, cr,
 		       x + logical_rect.x,
 		       y + logical_rect.y,
 		       layout);
-
     g_object_unref (layout);
-
-    cairo_restore(cr);
 
     /* Draw the points */
     i = calib_area->calibrator->num_clicks;
@@ -189,15 +185,11 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
                 logical_rect.width + 20, logical_rect.height + 25);
 
         /* Print the message */
-	cairo_save (cr);
 	gtk_render_layout (context, cr,
 			   x + logical_rect.x,
 			   y + logical_rect.y,
 			   layout);
-
 	g_object_unref (layout);
-
-	cairo_restore(cr);
     }
 }
 
