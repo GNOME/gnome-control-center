@@ -38,7 +38,7 @@
 #define MAX_TIME		15000 /* 5000 = 5 sec */
 
 /* Clock appereance */
-#define CROSS_LINES		25
+#define CROSS_LINES		50
 #define CROSS_CIRCLE		4
 #define CLOCK_RADIUS		50
 #define CLOCK_LINE_WIDTH	10
