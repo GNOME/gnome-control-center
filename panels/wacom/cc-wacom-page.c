@@ -239,7 +239,7 @@ set_feel_from_gsettings (GtkAdjustment *adjustment, GSettings *settings)
 	values = g_variant_get_fixed_array (variant, &nvalues, sizeof (gint32));
 
 	if (nvalues != 4) {
-		g_warning ("Invalid pressure curve format, expected 4 values (got %ld)", nvalues);
+		g_warning ("Invalid pressure curve format, expected 4 values (got %"G_GSIZE_FORMAT")", nvalues);
 		return;
 	}
 
