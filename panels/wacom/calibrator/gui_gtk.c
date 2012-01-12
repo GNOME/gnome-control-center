@@ -33,9 +33,9 @@
 #include "calibrator.h"
 #include "gui_gtk.h"
 
-typedef struct
+struct CalibArea
 {
-    struct Calib* calibrator;
+    struct Calib calibrator;
     double X[4], Y[4];
     int display_width, display_height;
     int time_elapsed;
@@ -45,7 +45,10 @@ typedef struct
     guint anim_id;
 
     GtkWidget *window;
-} CalibArea;
+
+    FinishCallback callback;
+    gpointer       user_data;
+};
 
 
 /* Window parameters */
@@ -95,7 +98,7 @@ set_display_size(CalibArea *calib_area,
     calib_area->Y[LR] = calib_area->display_height - delta_y - 1;
 
     /* reset calibration if already started */
-    reset(calib_area->calibrator);
+    reset(&calib_area->calibrator);
 }
 
 static void
@@ -155,7 +158,7 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
     /* Draw the points */
     cairo_set_source_rgb(cr, 1.0, 1.0, 1.0);
 
-    i = calib_area->calibrator->num_clicks;
+    i = calib_area->calibrator.num_clicks;
 
     cairo_set_line_width(cr, 1);
     cairo_move_to(cr, calib_area->X[i] - CROSS_LINES, calib_area->Y[i] - 0.5);
@@ -237,31 +240,47 @@ redraw(CalibArea *calib_area)
 }
 
 static gboolean
+on_delete_event (GtkWidget *widget,
+		 GdkEvent  *event,
+		 CalibArea *area)
+{
+	if (area->anim_id > 0) {
+		g_source_remove (area->anim_id);
+		area->anim_id = 0;
+	}
+
+	gtk_widget_hide (area->window);
+
+	(*area->callback) (area, area->user_data);
+
+	return TRUE;
+}
+
+static gboolean
 on_button_press_event(GtkWidget      *widget,
                       GdkEventButton *event,
-                      gpointer        data)
+                      CalibArea      *area)
 {
-    CalibArea *calib_area = (CalibArea*)data;
     gboolean success;
 
     /* Handle click */
-    calib_area->time_elapsed = 0;
-    success = add_click(calib_area->calibrator, (int)event->x_root, (int)event->y_root);
+    area->time_elapsed = 0;
+    success = add_click(&area->calibrator, (int)event->x_root, (int)event->y_root);
 
-    if (!success && calib_area->calibrator->num_clicks == 0)
-        draw_message(calib_area, N_("Mis-click detected, restarting..."));
+    if (!success && area->calibrator.num_clicks == 0)
+        draw_message(area, N_("Mis-click detected, restarting..."));
     else
-        draw_message(calib_area, NULL);
+        draw_message(area, NULL);
 
     /* Are we done yet? */
-    if (calib_area->calibrator->num_clicks >= 4)
+    if (area->calibrator.num_clicks >= 4)
     {
-        gtk_widget_destroy (calib_area->window);
+        on_delete_event (widget, NULL, area);
         return FALSE;
     }
 
     /* Force a redraw */
-    redraw(calib_area);
+    redraw(area);
 
     return FALSE;
 }
@@ -269,38 +288,37 @@ on_button_press_event(GtkWidget      *widget,
 static gboolean
 on_key_release_event(GtkWidget   *widget,
                      GdkEventKey *event,
-                     gpointer     data)
+                     CalibArea   *area)
 {
-    CalibArea *calib_area = (CalibArea*)data;
-
     if (event->type != GDK_KEY_RELEASE)
         return FALSE;
     if (event->keyval != GDK_KEY_Escape)
         return FALSE;
 
-    gtk_widget_destroy (calib_area->window);
+    on_delete_event (widget, NULL, area);
+
     return FALSE;
 }
 
 static gboolean
-on_timer_signal(CalibArea *calib_area)
+on_timer_signal(CalibArea *area)
 {
     GdkWindow *win;
 
-    calib_area->time_elapsed += TIME_STEP;
-    if (calib_area->time_elapsed > MAX_TIME)
+    area->time_elapsed += TIME_STEP;
+    if (area->time_elapsed > MAX_TIME)
     {
-        gtk_widget_destroy (calib_area->window);
+        on_delete_event (NULL, NULL, area);
         return FALSE;
     }
 
     /* Update clock */
-    win = gtk_widget_get_window (calib_area->window);
+    win = gtk_widget_get_window (area->window);
     if (win)
     {
         GdkRectangle rect;
-        rect.x = calib_area->display_width/2 - CLOCK_RADIUS - CLOCK_LINE_WIDTH;
-        rect.y = calib_area->display_height/2 - CLOCK_RADIUS - CLOCK_LINE_WIDTH;
+        rect.x = area->display_width/2 - CLOCK_RADIUS - CLOCK_LINE_WIDTH;
+        rect.y = area->display_height/2 - CLOCK_RADIUS - CLOCK_LINE_WIDTH;
         rect.width = 2 * CLOCK_RADIUS + 1 + 2 * CLOCK_LINE_WIDTH;
         rect.height = 2 * CLOCK_RADIUS + 1 + 2 * CLOCK_LINE_WIDTH;
         gdk_window_invalidate_rect(win, &rect, FALSE);
@@ -309,99 +327,121 @@ on_timer_signal(CalibArea *calib_area)
     return TRUE;
 }
 
-static CalibArea*
-calibration_area_new (struct Calib *c)
-{
-    CalibArea *calib_area;
-    GdkWindow *window;
-    GdkRGBA black;
-
-    calib_area = g_new0 (CalibArea, 1);
-    calib_area->calibrator = c;
-
-    /* Set up the window */
-    calib_area->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    gtk_widget_set_app_paintable (GTK_WIDGET (calib_area->window), TRUE);
-
-    /* Black background */
-    gdk_rgba_parse (&black, "rgb(0,0,0)");
-    gtk_window_set_opacity (GTK_WINDOW (calib_area->window), WINDOW_OPACITY);
-
-    gtk_widget_realize (calib_area->window);
-    window = gtk_widget_get_window (calib_area->window);
-    gdk_window_set_background_rgba (window, &black);
-
-    /* Listen for mouse events */
-    gtk_widget_add_events (calib_area->window, GDK_KEY_RELEASE_MASK | GDK_BUTTON_PRESS_MASK);
-    gtk_widget_set_can_focus (calib_area->window, TRUE);
-    gtk_window_fullscreen (GTK_WINDOW (calib_area->window));
-
-    /* Connect callbacks */
-    g_signal_connect (calib_area->window, "draw",
-		      G_CALLBACK(draw), calib_area);
-    g_signal_connect (calib_area->window, "button-press-event",
-		      G_CALLBACK(on_button_press_event), calib_area);
-    g_signal_connect (calib_area->window, "key-release-event",
-		      G_CALLBACK(on_key_release_event), calib_area);
-    g_signal_connect (calib_area->window, "destroy",
-		      G_CALLBACK (gtk_main_quit), NULL);
-
-    /* Setup timer for animation */
-    calib_area->anim_id = g_timeout_add(TIME_STEP, (GSourceFunc)on_timer_signal, calib_area);
-
-    return calib_area;
-}
-
 /**
  * Creates the windows and other objects required to do calibration
- * under GTK and then starts the main loop. When the main loop exits,
- * the calibration will be calculated (if possible) and this function
- * will then return ('TRUE' if successful, 'FALSE' otherwise).
+ * under GTK. When the window is closed (timed out, calibration finished
+ * or user cancellation), callback will be called, where you should call
+ * calib_area_finish().
  */
-gboolean
-run_gui(struct Calib *c,
-        XYinfo       *new_axis,
-        gboolean         *swap)
+CalibArea *
+calib_area_new (GdkScreen      *screen,
+		int             monitor,
+		FinishCallback  callback,
+		gpointer        user_data,
+		XYinfo         *old_axis,
+		int             threshold_doubleclick,
+		int             threshold_misclick)
 {
-    gboolean success;
-    CalibArea *calib_area;
-    GdkScreen *screen;
-    GdkRectangle rect;
+	CalibArea *calib_area;
+	GdkRectangle rect;
+	GdkWindow *window;
+	GdkRGBA black;
 
-    g_debug ("Current calibration: %d, %d, %d, %d\n",
-	     c->old_axis.x_min,
-	     c->old_axis.y_min,
-	     c->old_axis.x_max,
-	     c->old_axis.y_max);
+	g_return_val_if_fail (old_axis, NULL);
+	g_return_val_if_fail (callback, NULL);
 
-    /* Which monitor are we on? */
-    screen = gdk_screen_get_default();
-    /*int num_monitors = screen->get_n_monitors(); TODO, multiple monitors?*/
-    gdk_screen_get_monitor_geometry(screen, 0, &rect);
+	g_debug ("Current calibration: %d, %d, %d, %d\n",
+		 old_axis->x_min,
+		 old_axis->y_min,
+		 old_axis->x_max,
+		 old_axis->y_max);
 
-    calib_area = calibration_area_new (c);
+	calib_area = g_new0 (CalibArea, 1);
+	calib_area->callback = callback;
+	calib_area->user_data = user_data;
+	calib_area->calibrator.old_axis.x_min = old_axis->x_min;
+	calib_area->calibrator.old_axis.x_max = old_axis->x_max;
+	calib_area->calibrator.old_axis.y_min = old_axis->y_min;
+	calib_area->calibrator.old_axis.y_max = old_axis->y_max;
+	calib_area->calibrator.threshold_doubleclick = threshold_doubleclick;
+	calib_area->calibrator.threshold_misclick = threshold_misclick;
 
-    gtk_window_move (GTK_WINDOW (calib_area->window), rect.x, rect.y);
-    gtk_window_set_default_size (GTK_WINDOW (calib_area->window), rect.width, rect.height);
+	/* Set up the window */
+	calib_area->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	gtk_widget_set_app_paintable (GTK_WIDGET (calib_area->window), TRUE);
 
-    gtk_widget_show_all(calib_area->window);
+	/* Black background */
+	gdk_rgba_parse (&black, "rgb(0,0,0)");
+	gtk_window_set_opacity (GTK_WINDOW (calib_area->window), WINDOW_OPACITY);
 
-    gtk_main();
+	gtk_widget_realize (calib_area->window);
+	window = gtk_widget_get_window (calib_area->window);
+	gdk_window_set_background_rgba (window, &black);
 
-    g_source_remove (calib_area->anim_id);
+	/* Listen for mouse events */
+	gtk_widget_add_events (calib_area->window, GDK_KEY_RELEASE_MASK | GDK_BUTTON_PRESS_MASK);
+	gtk_widget_set_can_focus (calib_area->window, TRUE);
+	gtk_window_fullscreen (GTK_WINDOW (calib_area->window));
 
-    success = finish(calib_area->calibrator, calib_area->display_width, calib_area->display_height, new_axis, swap);
+	/* Connect callbacks */
+	g_signal_connect (calib_area->window, "draw",
+			  G_CALLBACK(draw), calib_area);
+	g_signal_connect (calib_area->window, "button-press-event",
+			  G_CALLBACK(on_button_press_event), calib_area);
+	g_signal_connect (calib_area->window, "key-release-event",
+			  G_CALLBACK(on_key_release_event), calib_area);
+	g_signal_connect (calib_area->window, "delete-event",
+			  G_CALLBACK(on_delete_event), calib_area);
 
-    g_free (calib_area);
+	/* Setup timer for animation */
+	calib_area->anim_id = g_timeout_add(TIME_STEP, (GSourceFunc)on_timer_signal, calib_area);
 
-    if (success)
-	    g_debug ("Final calibration: %d, %d, %d, %d\n",
-		     new_axis->x_min,
-		     new_axis->y_min,
-		     new_axis->x_max,
-		     new_axis->y_max);
-    else
-	    g_debug ("Calibration was aborted or timed out");
+	/* Move to correct screen */
+	if (screen == NULL)
+		screen = gdk_screen_get_default ();
+	gdk_screen_get_monitor_geometry (screen, monitor, &rect);
+	gtk_window_move (GTK_WINDOW (calib_area->window), rect.x, rect.y);
+	gtk_window_set_default_size (GTK_WINDOW (calib_area->window), rect.width, rect.height);
 
-   return success;
+	gtk_widget_show_all (calib_area->window);
+
+	return calib_area;
+}
+
+/* Finishes the calibration. Note that CalibArea
+ * needs to be destroyed with calib_area_free() afterwards */
+gboolean
+calib_area_finish (CalibArea *area,
+		   XYinfo    *new_axis,
+		   gboolean  *swap_xy)
+{
+	gboolean success;
+
+	g_return_val_if_fail (area != NULL, FALSE);
+
+	success = finish (&area->calibrator, area->display_width, area->display_height, new_axis, swap_xy);
+
+	if (success)
+		g_debug ("Final calibration: %d, %d, %d, %d\n",
+			 new_axis->x_min,
+			 new_axis->y_min,
+			 new_axis->x_max,
+			 new_axis->y_max);
+	else
+		g_debug ("Calibration was aborted or timed out");
+
+	return success;
+}
+
+void
+calib_area_free (CalibArea *area)
+{
+	g_return_if_fail (area != NULL);
+
+	if (area->anim_id > 0) {
+		g_source_remove (area->anim_id);
+		area->anim_id = 0;
+	}
+	gtk_widget_destroy (area->window);
+	g_free (area);
 }

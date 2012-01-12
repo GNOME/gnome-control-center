@@ -25,6 +25,7 @@
 #define _calibrator_h
 
 #include <glib.h>
+#include "gui_gtk.h"
 
 /*
  * Number of blocks. We partition the screen into 'num_blocks' x 'num_blocks'
@@ -62,15 +63,6 @@ enum
 	LL = 2, /* Lower-left  */
 	LR = 3  /* Lower-right */
 };
-
-/* struct to hold min/max info of the X and Y axis */
-typedef struct
-{
-	int x_min;
-	int x_max;
-	int y_min;
-	int y_max;
-} XYinfo;
 
 struct Calib
 {

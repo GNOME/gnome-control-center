@@ -26,10 +26,30 @@
 
 #include <gtk/gtk.h>
 
-#include "calibrator.h"
+/* struct to hold min/max info of the X and Y axis */
+typedef struct
+{
+	int x_min;
+	int x_max;
+	int y_min;
+	int y_max;
+} XYinfo;
 
-gboolean              run_gui           (struct Calib     *c,
-                                         XYinfo           *new_axis,
-                                         gboolean             *swap);
+typedef struct CalibArea CalibArea;
+typedef void (*FinishCallback) (CalibArea *area, gpointer user_data);
+
+CalibArea * calib_area_new (GdkScreen      *screen,
+			    int             monitor,
+			    FinishCallback  callback,
+			    gpointer        user_data,
+			    XYinfo         *old_axis,
+			    int             threshold_doubleclick,
+			    int             threshold_misclick);
+
+gboolean calib_area_finish (CalibArea *area,
+			    XYinfo    *new_axis,
+			    gboolean  *swap_xy);
+
+void calib_area_free (CalibArea *area);
 
 #endif /* _gui_gtk_h */
