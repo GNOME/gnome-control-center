@@ -45,6 +45,7 @@ struct _CcWacomPagePrivate
 	GsdWacomDevice *stylus, *eraser;
 	GtkBuilder     *builder;
 	GtkWidget      *nav;
+	CalibArea      *area;
 	GSettings      *wacom_settings;
 	GSettings      *stylus_settings;
 	GSettings      *eraser_settings;
@@ -127,8 +128,7 @@ set_calibration (gint      *cal,
 
 	current = g_settings_get_value (settings, "area");
 	g_variant_get_fixed_array (current, &nvalues, sizeof (gint32));
-	if ((ncal != 4) || (nvalues != 4))
-	{
+	if ((ncal != 4) || (nvalues != 4)) {
 		g_warning("Unable set set device calibration property. Got %"G_GSIZE_FORMAT" items to put in %"G_GSIZE_FORMAT" slots; expected %d items.\n", ncal, nvalues, 4);
 		return;
 	}
@@ -144,37 +144,50 @@ set_calibration (gint      *cal,
 	g_variant_unref (array);
 }
 
-static gboolean
-run_calibration (gint  *cal,
-                 gsize  ncal)
+static void
+finish_calibration (CalibArea *area,
+		    gpointer   user_data)
 {
+	CcWacomPage *page = (CcWacomPage *) user_data;
+	CcWacomPagePrivate *priv = page->priv;
 	XYinfo axis;
 	gboolean swap_xy;
-	struct Calib calibrator;
+	int cal[4];
 
-	if (ncal != 4) {
-		g_warning("Unable to run calibration. Got %"G_GSIZE_FORMAT" items; expected %d.\n", ncal, 4);
-		return FALSE;
-	}
-
-	calibrator.threshold_misclick = 15;
-	calibrator.threshold_doubleclick = 7;
-	calibrator.old_axis.x_min = cal[0];
-	calibrator.old_axis.y_min = cal[1];
-	calibrator.old_axis.x_max = cal[2];
-	calibrator.old_axis.y_max = cal[3];
-
-	/* !!NOTE!! This call blocks on the calibration
-	 * !!NOTE!! process. It will be several seconds
-	 * !!NOTE!! before this returns.
-	 */
-	if (run_gui (&calibrator, &axis, &swap_xy)) {
+	if (calib_area_finish (area, &axis, &swap_xy)) {
 		cal[0] = axis.x_min;
 		cal[1] = axis.y_min;
 		cal[2] = axis.x_max;
 		cal[3] = axis.y_max;
-		return TRUE;
+
+		set_calibration(cal, 4, page->priv->wacom_settings);
 	}
+
+	calib_area_free (area);
+	page->priv->area = NULL;
+	gtk_widget_set_sensitive (WID ("button-calibrate"), TRUE);
+}
+
+static gboolean
+run_calibration (CcWacomPage *page,
+		 gint        *cal)
+{
+	XYinfo old_axis;
+
+	g_assert (page->priv->area == NULL);
+
+	old_axis.x_min = cal[0];
+	old_axis.y_min = cal[1];
+	old_axis.x_max = cal[2];
+	old_axis.y_max = cal[3];
+
+	page->priv->area = calib_area_new (NULL,
+					   0,
+					   finish_calibration,
+					   page,
+					   &old_axis,
+					   15,
+					   7);
 
 	return FALSE;
 }
@@ -211,8 +224,8 @@ calibrate_button_clicked_cb (GtkButton   *button,
 		g_free (device_cal);
 	}
 
-	if (run_calibration(calibration, 4))
-		set_calibration(calibration, 4, page->priv->wacom_settings);
+	run_calibration (page, calibration);
+	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
 }
 
 static void
@@ -432,11 +445,16 @@ cc_wacom_page_dispose (GObject *object)
 {
 	CcWacomPagePrivate *priv = CC_WACOM_PAGE (object)->priv;
 
-	if (priv->builder)
-	{
+	if (priv->area) {
+		calib_area_free (priv->area);
+		priv->area = NULL;
+	}
+
+	if (priv->builder) {
 		g_object_unref (priv->builder);
 		priv->builder = NULL;
 	}
+
 
 	G_OBJECT_CLASS (cc_wacom_page_parent_class)->dispose (object);
 }
