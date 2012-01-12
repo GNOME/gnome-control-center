@@ -131,9 +131,7 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
     cairo_paint (cr);
     cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
 
-    /* Print the text */
-    cairo_set_source_rgb(cr, 1.0, 1.0, 1.0);
-
+    /* Print the help lines */
     layout = pango_layout_new (gtk_widget_get_pango_context (widget));
     pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
     markup = g_strdup_printf ("<span foreground=\"white\"><big><b>%s</b></big>\n<big>%s</big></span>",
@@ -146,11 +144,7 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
 
     x = (calib_area->display_width - logical_rect.width) / 2 + logical_rect.x;
     y = (calib_area->display_height - logical_rect.height) / 2  - logical_rect.height - 40 + logical_rect.y;
-    cairo_set_line_width(cr, 2);
-    cairo_rectangle(cr, x - 10 - 0.5, y - 10 - 0.5,
-            logical_rect.width + 20 + 1, logical_rect.height + 20 + 1);
 
-    /* Print help lines */
     gtk_render_layout (context, cr,
 		       x + logical_rect.x,
 		       y + logical_rect.y,
@@ -158,6 +152,8 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
     g_object_unref (layout);
 
     /* Draw the points */
+    cairo_set_source_rgb(cr, 1.0, 1.0, 1.0);
+
     i = calib_area->calibrator->num_clicks;
 
     cairo_set_line_width(cr, 1);
