@@ -69,6 +69,9 @@ struct Calib
     /* original axis values */
     XYinfo old_axis;
 
+    /* Geometry of the calibration window */
+    GdkRectangle geometry;
+
     /* nr of clicks registered */
     int num_clicks;
 
@@ -92,8 +95,6 @@ gboolean add_click  (struct Calib *c,
                  int           x,
                  int           y);
 gboolean finish     (struct Calib *c,
-                 int           width,
-                 int           height,
                  XYinfo       *new_axis,
                  gboolean         *swap);
 

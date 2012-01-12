@@ -403,6 +403,11 @@ calib_area_new (GdkScreen      *screen,
 	gtk_window_move (GTK_WINDOW (calib_area->window), rect.x, rect.y);
 	gtk_window_set_default_size (GTK_WINDOW (calib_area->window), rect.width, rect.height);
 
+	calib_area->calibrator.geometry.x = rect.x;
+	calib_area->calibrator.geometry.y = rect.y;
+	calib_area->calibrator.geometry.width = rect.width;
+	calib_area->calibrator.geometry.height = rect.height;
+
 	gtk_widget_show_all (calib_area->window);
 
 	return calib_area;
@@ -419,7 +424,7 @@ calib_area_finish (CalibArea *area,
 
 	g_return_val_if_fail (area != NULL, FALSE);
 
-	success = finish (&area->calibrator, area->display_width, area->display_height, new_axis, swap_xy);
+	success = finish (&area->calibrator, new_axis, swap_xy);
 
 	if (success)
 		g_debug ("Final calibration: %d, %d, %d, %d\n",
