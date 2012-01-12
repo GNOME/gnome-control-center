@@ -156,6 +156,16 @@ calibrate_button_clicked_cb (GtkButton   *button,
 	GVariant *variant;
 	int *current;
 	gsize ncal;
+	gint monitor;
+
+	monitor = gsd_wacom_device_get_display_monitor (page->priv->stylus);
+	if (monitor < 0) {
+		/* The display the tablet should be mapped to could not be located.
+		 * This shouldn't happen if the EDID data is good...
+		 */
+		g_critical("Output associated with the tablet is not connected. Unable to calibrate.");
+		return;
+	}
 
 	variant = g_settings_get_value (page->priv->wacom_settings, "area");
 	current = (int *) g_variant_get_fixed_array (variant, &ncal, sizeof (gint32));
