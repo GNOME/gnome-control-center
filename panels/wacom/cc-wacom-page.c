@@ -172,7 +172,6 @@ run_calibration (gint  *cal,
 
 	calibrator.threshold_misclick = 15;
 	calibrator.threshold_doubleclick = 7;
-	calibrator.geometry = NULL;
 	calibrator.old_axis.x_min = cal[0];
 	calibrator.old_axis.y_min = cal[1];
 	calibrator.old_axis.x_max = cal[2];
