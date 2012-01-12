@@ -115,18 +115,6 @@ eraser_feel_value_changed_cb (GtkRange *range, gpointer user_data)
 }
 
 static void
-get_calibration (gint      ** cal,
-		 gsize      * ncal,
-		 GSettings  * settings)
-{
-	gconstpointer res;
-
-	GVariant *current = g_settings_get_value (settings, "area");
-	res = g_variant_get_fixed_array (current, ncal, sizeof (gint32));
-	*cal = g_memdup (res, *ncal * sizeof (gint32));
-}
-
-static void
 set_calibration (gint      *cal,
                  gsize      ncal,
                  GSettings *settings)
@@ -196,12 +184,15 @@ calibrate_button_clicked_cb (GtkButton   *button,
 			     CcWacomPage *page)
 {
 	int i, calibration[4];
+	GVariant *variant;
 	int *current;
-	gsize s;
+	gsize ncal;
 
-	get_calibration (&current, &s, page->priv->wacom_settings);
-	if (s != 4) {
-		g_warning("Device calibration property has wrong length. Got %"G_GSIZE_FORMAT" items; expected %d.\n", s, 4);
+	variant = g_settings_get_value (page->priv->wacom_settings, "area");
+	current = (int *) g_variant_get_fixed_array (variant, &ncal, sizeof (gint32));
+
+	if (ncal != 4) {
+		g_warning("Device calibration property has wrong length. Got %"G_GSIZE_FORMAT" items; expected %d.\n", ncal, 4);
 		g_free (current);
 		return;
 	}
@@ -214,7 +205,7 @@ calibrate_button_clicked_cb (GtkButton   *button,
 	    calibration[2] == -1 &&
 	    calibration[3] == -1) {
 		gint *device_cal;
-		device_cal = gsd_wacom_device_get_area(page->priv->stylus);
+		device_cal = gsd_wacom_device_get_area (page->priv->stylus);
 		for (i = 0; i < 4; i++)
 			calibration[i] = device_cal[i];
 		g_free (device_cal);
@@ -222,8 +213,6 @@ calibrate_button_clicked_cb (GtkButton   *button,
 
 	if (run_calibration(calibration, 4))
 		set_calibration(calibration, 4, page->priv->wacom_settings);
-
-	g_free (current);
 }
 
 static void
