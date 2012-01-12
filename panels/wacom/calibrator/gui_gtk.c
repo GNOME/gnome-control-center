@@ -61,6 +61,7 @@ typedef struct
 #define CROSS_CIRCLE2		27
 #define CLOCK_RADIUS		50
 #define CLOCK_LINE_WIDTH	10
+#define CLOCK_LINE_PADDING	10
 
 /* Text printed on screen */
 #define HELP_TEXT_TITLE N_("Screen Calibration")
@@ -178,7 +179,7 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
     cairo_stroke(cr);
 
     cairo_set_line_width(cr, CLOCK_LINE_WIDTH);
-    cairo_arc(cr, calib_area->display_width/2, calib_area->display_height/2, (CLOCK_RADIUS - CLOCK_LINE_WIDTH)/2,
+    cairo_arc(cr, calib_area->display_width/2, calib_area->display_height/2, (CLOCK_RADIUS - CLOCK_LINE_WIDTH - CLOCK_LINE_PADDING)/2,
          3/2.0*M_PI, (3/2.0*M_PI) + ((double)calib_area->time_elapsed/(double)MAX_TIME) * 2*M_PI);
     cairo_set_source_rgb(cr, 1.0, 1.0, 1.0);
     cairo_stroke(cr);
