@@ -182,7 +182,7 @@ run_calibration (CcWacomPage *page,
 	old_axis.y_max = cal[3];
 
 	page->priv->area = calib_area_new (NULL,
-					   0,
+					   0, /* FIXME */
 					   finish_calibration,
 					   page,
 					   &old_axis,
