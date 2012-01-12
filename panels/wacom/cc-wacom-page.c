@@ -194,14 +194,14 @@ run_calibration (gint  *cal,
 }
 
 static void
-calibrate_button_clicked_cb (GtkButton *button, gpointer user_data)
+calibrate_button_clicked_cb (GtkButton   *button,
+			     CcWacomPage *page)
 {
-    GSettings *tablet = CC_WACOM_PAGE(user_data)->priv->wacom_settings;
-    gint i, calibration[4];
-    gint *current;
+    int i, calibration[4];
+    int *current;
     gsize s;
 
-    get_calibration (&current, &s, tablet);
+    get_calibration (&current, &s, page->priv->wacom_settings);
     if (s != 4)
     {
         g_warning("Device calibration property has wrong length. Got %"G_GSIZE_FORMAT" items; expected %d.\n", s, 4);
@@ -214,14 +214,14 @@ calibrate_button_clicked_cb (GtkButton *button, gpointer user_data)
 
     if (calibration[0] == -1 && calibration[1] == -1 && calibration[2] == -1 && calibration[3] == -1) {
         gint *device_cal;
-        device_cal = gsd_wacom_device_get_area(CC_WACOM_PAGE(user_data)->priv->stylus);
+        device_cal = gsd_wacom_device_get_area(page->priv->stylus);
         for (i = 0; i < 4; i++)
            calibration[i] = device_cal[i];
         g_free (device_cal);
     }
 
     if (run_calibration(calibration, 4))
-        set_calibration(calibration, 4, tablet);
+        set_calibration(calibration, 4, page->priv->wacom_settings);
 
     g_free (current);
 }
