@@ -1,3 +1,8 @@
+
+#include "config.h"
+
+#include <glib/gi18n.h>
+
 #include "cc-wacom-page.h"
 #include "gsd-wacom-device.h"
 
@@ -49,6 +54,10 @@ int main (int argc, char **argv)
 {
 	GtkWidget *window, *notebook;
 	GList *devices;
+
+	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	textdomain (GETTEXT_PACKAGE);
 
 	gtk_init (&argc, &argv);
 
