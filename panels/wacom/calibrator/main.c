@@ -32,6 +32,7 @@
 #include <X11/extensions/XInput.h>
 
 #include "gui_gtk.h"
+#include "calibrator.h"
 
 /**
  * find a calibratable touchscreen device (using XInput)
@@ -332,7 +333,7 @@ static struct Calib* main_common(int argc, char** argv)
             verbose, thr_misclick, thr_doubleclick);
 }
 
-static gboolean output_xorgconfd(struct Calib* c, const XYinfo new_axis, int swap_xy, int new_swap_xy)
+static gboolean output_xorgconfd(const XYinfo new_axis, int swap_xy, int new_swap_xy)
 {
     const char* sysfs_name = "!!Name_Of_TouchScreen!!";
 
@@ -352,7 +353,7 @@ static gboolean output_xorgconfd(struct Calib* c, const XYinfo new_axis, int swa
     return TRUE;
 }
 
-static gboolean finish_data(struct Calib* c, const XYinfo new_axis, int swap_xy)
+static gboolean finish_data(const XYinfo new_axis, int swap_xy)
 {
     gboolean success = TRUE;
 
@@ -361,18 +362,33 @@ static gboolean finish_data(struct Calib* c, const XYinfo new_axis, int swap_xy)
     int new_swap_xy = swap_xy;
 
     printf("\n\n--> Making the calibration permanent <--\n");
-    success &= output_xorgconfd(c, new_axis, swap_xy, new_swap_xy);
+    success &= output_xorgconfd(new_axis, swap_xy, new_swap_xy);
 
     return success;
 }
 
+static void
+calibration_finished_cb (CalibArea *area,
+			 gpointer   user_data)
+{
+	gboolean success;
+	XYinfo axis;
+	gboolean swap_xy;
+
+	success = calib_area_finish (area, &axis, &swap_xy);
+	if (success)
+		success = finish_data (axis, swap_xy);
+	else
+		fprintf(stderr, "Error: unable to apply or save configuration values\n");
+
+	gtk_main_quit ();
+}
+
 int main(int argc, char** argv)
 {
-    int success = 0;
-    XYinfo axis;
-    gboolean swap_xy;
 
     struct Calib* calibrator = main_common(argc, argv);
+    CalibArea *calib_area;
 
     bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -383,15 +399,19 @@ int main(int argc, char** argv)
     /* GTK setup */
     gtk_init(&argc, &argv);
 
-    success = run_gui(calibrator, &axis, &swap_xy);
-    if (success)
-        success = finish_data(calibrator, axis, swap_xy);
+    calib_area = calib_area_new (NULL,
+				 0,
+				 calibration_finished_cb,
+				 NULL,
+				 &calibrator->old_axis,
+				 calibrator->threshold_doubleclick,
+				 calibrator->threshold_misclick);
 
-    if (!success) {
-        /* TODO, in GUI ? */
-        fprintf(stderr, "Error: unable to apply or save configuration values\n");
-    }
+    gtk_main ();
+
+    calib_area_free (calib_area);
 
     free(calibrator);
-    return success;
+
+    return 0;
 }
