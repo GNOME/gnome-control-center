@@ -117,6 +117,7 @@ PKG_CHECK_MODULES(UNIVERSAL_ACCESS_PANEL, $COMMON_MODULES gsettings-desktop-sche
 PKG_CHECK_MODULES(USER_ACCOUNTS_PANEL, $COMMON_MODULES dbus-glib-1
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
                   gnome-desktop-3.0
+                  clutter-gst-1.0
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
 PKG_CHECK_MODULES(WACOM_PANEL, $COMMON_MODULES
                   gnome-settings-daemon >= $GSD_REQUIRED_VERSION
