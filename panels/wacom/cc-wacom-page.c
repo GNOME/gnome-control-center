@@ -126,7 +126,8 @@ finish_calibration (CalibArea *area,
 
 static gboolean
 run_calibration (CcWacomPage *page,
-		 gint        *cal)
+		 gint        *cal,
+		 gint         monitor)
 {
 	XYinfo old_axis;
 
@@ -138,7 +139,7 @@ run_calibration (CcWacomPage *page,
 	old_axis.y_max = cal[3];
 
 	page->priv->area = calib_area_new (NULL,
-					   0, /* FIXME */
+					   monitor,
 					   finish_calibration,
 					   page,
 					   &old_axis,
@@ -190,7 +191,7 @@ calibrate_button_clicked_cb (GtkButton   *button,
 		g_free (device_cal);
 	}
 
-	run_calibration (page, calibration);
+	run_calibration (page, calibration, monitor);
 	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
 }
 
