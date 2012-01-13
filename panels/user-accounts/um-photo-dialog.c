@@ -311,10 +311,7 @@ update_photo_menu_status (UmPhotoDialog *um)
 
 static void
 device_added (CheeseCameraDeviceMonitor *monitor,
-              const gchar               *id,
-              const gchar               *device_file,
-              const gchar               *product_name,
-              gint                       api_version,
+              CheeseCameraDevice        *device,
               UmPhotoDialog             *um)
 {
         um->num_cameras++;
