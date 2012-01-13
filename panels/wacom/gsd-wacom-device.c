@@ -891,3 +891,32 @@ gsd_wacom_device_create_fake_x201 (void)
 
 	return devices;
 }
+
+GList *
+gsd_wacom_device_create_fake_intuos4 (void)
+{
+	GsdWacomDevice *device;
+	GList *devices;
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_STYLUS,
+					       "Intuos 4 M 6x9",
+					       "Wacom Intuos4 6x9 stylus");
+	devices = g_list_prepend (NULL, device);
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_ERASER,
+					       "Intuos 4 M 6x9",
+					       "Wacom Intuos4 6x9 eraser");
+	devices = g_list_prepend (devices, device);
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_PAD,
+					       "Intuos 4 M 6x9",
+					       "Wacom Intuos4 6x9 pad");
+	devices = g_list_prepend (devices, device);
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_CURSOR,
+					       "Intuos 4 M 6x9",
+					       "Wacom Intuos4 6x9 cursor");
+	devices = g_list_prepend (devices, device);
+
+	return devices;
+}
