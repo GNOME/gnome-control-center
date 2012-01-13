@@ -1028,6 +1028,22 @@ um_user_set_password (UmUser      *user,
         }
 }
 
+#ifdef HAVE_SYSTEMD
+
+#include <systemd/sd-login.h>
+
+gboolean
+um_user_is_logged_in (UmUser *user)
+{
+  int n_sessions;
+
+  n_sessions = sd_uid_get_sessions (um_user_get_uid (user), 0, NULL) > 0;
+
+  return n_sessions > 0;
+}
+
+#else
+
 gboolean
 um_user_is_logged_in (UmUser *user)
 {
@@ -1065,6 +1081,7 @@ um_user_is_logged_in (UmUser *user)
         return n_sessions > 0;
 }
 
+#endif
 
 void
 um_user_set_automatic_login (UmUser   *user,
