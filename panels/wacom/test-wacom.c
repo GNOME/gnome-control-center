@@ -74,6 +74,9 @@ int main (int argc, char **argv)
 	gtk_container_add (GTK_CONTAINER (window), notebook);
 	gtk_widget_show (notebook);
 
+	devices = gsd_wacom_device_create_fake_intuos4 ();
+	add_page (devices, notebook);
+
 	devices = gsd_wacom_device_create_fake_cintiq ();
 	add_page (devices, notebook);
 
