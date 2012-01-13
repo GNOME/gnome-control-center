@@ -38,6 +38,7 @@ add_page (GList *devices,
 	widget = cc_wacom_page_new (stylus, eraser);
 	cc_wacom_page_set_navigation (CC_WACOM_PAGE (widget), GTK_NOTEBOOK (notebook), FALSE);
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), widget, NULL);
+	gtk_widget_show (widget);
 }
 
 static gboolean
@@ -71,6 +72,7 @@ int main (int argc, char **argv)
 	gtk_widget_set_vexpand (notebook, TRUE);
 	gtk_container_set_border_width (GTK_CONTAINER (notebook), 24);
 	gtk_container_add (GTK_CONTAINER (window), notebook);
+	gtk_widget_show (notebook);
 
 	devices = gsd_wacom_device_create_fake_cintiq ();
 	add_page (devices, notebook);
@@ -81,7 +83,7 @@ int main (int argc, char **argv)
 	devices = gsd_wacom_device_create_fake_x201 ();
 	add_page (devices, notebook);
 
-	gtk_widget_show_all (window);
+	gtk_widget_show (window);
 
 	gtk_main ();
 
