@@ -40,6 +40,10 @@ G_DEFINE_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
 #define WACOM_STYLUS_SCHEMA WACOM_SCHEMA ".stylus"
 #define WACOM_ERASER_SCHEMA WACOM_SCHEMA ".eraser"
 
+#define THRESHOLD_MISCLICK	15
+#define THRESHOLD_DOUBLECLICK	7
+
+
 struct _CcWacomPagePrivate
 {
 	GsdWacomDevice *stylus, *eraser;
@@ -186,8 +190,8 @@ run_calibration (CcWacomPage *page,
 					   finish_calibration,
 					   page,
 					   &old_axis,
-					   15,
-					   7);
+					   THRESHOLD_MISCLICK,
+					   THRESHOLD_DOUBLECLICK);
 
 	return FALSE;
 }
