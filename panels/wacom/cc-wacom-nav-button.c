@@ -21,8 +21,10 @@
 
 #include <config.h>
 
-#include "cc-wacom-nav-button.h"
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
+
+#include "cc-wacom-nav-button.h"
 
 G_DEFINE_TYPE (CcWacomNavButton, cc_wacom_nav_button, GTK_TYPE_BOX)
 
@@ -32,6 +34,7 @@ G_DEFINE_TYPE (CcWacomNavButton, cc_wacom_nav_button, GTK_TYPE_BOX)
 struct _CcWacomNavButtonPrivate
 {
 	GtkNotebook *notebook;
+	GtkWidget   *label;
 	GtkWidget   *prev;
 	GtkWidget   *next;
 	guint        page_added_id;
@@ -72,6 +75,7 @@ cc_wacom_nav_button_update (CcWacomNavButton *nav)
 		gtk_widget_hide (GTK_WIDGET (nav));
 	} else {
 		int current_page;
+		char *text;
 
 		gtk_widget_show (GTK_WIDGET (nav));
 		current_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (priv->notebook));
@@ -81,6 +85,11 @@ cc_wacom_nav_button_update (CcWacomNavButton *nav)
 			current_page--;
 		gtk_widget_set_sensitive (priv->prev, current_page == 0 ? FALSE : TRUE);
 		gtk_widget_set_sensitive (priv->next, current_page + 1 == num_pages ? FALSE : TRUE);
+
+		text = g_strdup_printf (_("%d of %d"),
+					current_page + 1,
+					priv->ignore_first_page ? num_pages - 1 : num_pages);
+		gtk_label_set_text (GTK_LABEL (priv->label), text);
 	}
 }
 
@@ -208,6 +217,11 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 	context = gtk_widget_get_style_context (GTK_WIDGET (self));
 	gtk_style_context_add_class (context, GTK_STYLE_CLASS_LINKED);
 
+	/* Label */
+	priv->label = gtk_label_new (NULL);
+	gtk_style_context_add_class (gtk_widget_get_style_context (priv->label), "dim-label");
+
+	/* Prev button */
 	priv->prev = gtk_button_new ();
 	image = gtk_image_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
 	gtk_container_add (GTK_CONTAINER (priv->prev), image);
@@ -215,6 +229,7 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 			  G_CALLBACK (prev_clicked), self);
 	gtk_widget_set_valign (priv->prev, GTK_ALIGN_START);
 
+	/* Next button */
 	priv->next = gtk_button_new ();
 	image = gtk_image_new_from_icon_name ("go-next-symbolic", GTK_ICON_SIZE_MENU);
 	gtk_container_add (GTK_CONTAINER (priv->next), image);
@@ -222,11 +237,14 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 			  G_CALLBACK (next_clicked), self);
 	gtk_widget_set_valign (priv->next, GTK_ALIGN_START);
 
+	gtk_box_pack_start (GTK_BOX (self), priv->label,
+			    FALSE, FALSE, 8);
 	gtk_box_pack_start (GTK_BOX (self), priv->prev,
 			    FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (self), priv->next,
 			    FALSE, FALSE, 0);
 
+	gtk_widget_show (priv->label);
 	gtk_widget_show_all (priv->prev);
 	gtk_widget_show_all (priv->next);
 }
