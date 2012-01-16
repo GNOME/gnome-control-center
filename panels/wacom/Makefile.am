@@ -23,6 +23,8 @@ libwacom_properties_la_SOURCES =	\
 	cc-wacom-panel.h		\
 	cc-wacom-page.c			\
 	cc-wacom-page.h			\
+	cc-wacom-stylus-page.c		\
+	cc-wacom-stylus-page.h		\
 	gsd-wacom-device.c		\
 	gsd-wacom-device.h		\
 	gsd-input-helper.c		\
@@ -39,6 +41,8 @@ test_wacom_SOURCES =			\
 	test-wacom.c			\
 	cc-wacom-page.c			\
 	cc-wacom-page.h			\
+	cc-wacom-stylus-page.c		\
+	cc-wacom-stylus-page.h		\
 	cc-wacom-nav-button.c		\
 	cc-wacom-nav-button.h		\
 	gsd-wacom-device.c		\
@@ -61,7 +65,7 @@ pixmap_DATA =				\
 	wacom-tablet-pc.svg
 
 uidir   = $(pkgdatadir)/ui
-ui_DATA = gnome-wacom-properties.ui
+ui_DATA = gnome-wacom-properties.ui wacom-stylus-page.ui
 
 desktopdir = $(datadir)/applications
 desktop_in_files = gnome-wacom-panel.desktop.in
