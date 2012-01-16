@@ -36,10 +36,6 @@ G_DEFINE_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
 #define WACOM_PAGE_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_WACOM_PAGE, CcWacomPagePrivate))
 
-#define WACOM_SCHEMA "org.gnome.settings-daemon.peripherals.wacom"
-#define WACOM_STYLUS_SCHEMA WACOM_SCHEMA ".stylus"
-#define WACOM_ERASER_SCHEMA WACOM_SCHEMA ".eraser"
-
 #define THRESHOLD_MISCLICK	15
 #define THRESHOLD_DOUBLECLICK	7
 
