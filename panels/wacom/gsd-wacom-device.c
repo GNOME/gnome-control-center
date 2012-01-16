@@ -54,6 +54,8 @@ struct GsdWacomStylusPrivate
 	char *name;
 	const char *icon_name;
 	GSettings *settings;
+	gboolean has_eraser;
+	int num_buttons;
 };
 
 static void     gsd_wacom_stylus_class_init  (GsdWacomStylusClass *klass);
@@ -109,6 +111,9 @@ get_icon_name_from_type (WacomStylusType type)
 {
 	switch (type) {
 	case WSTYLUS_INKING:
+	case WSTYLUS_STROKE:
+		/* The stroke pen is the same as the inking pen with
+		 * a different nib */
 		return "wacom-stylus-inking";
 	case WSTYLUS_AIRBRUSH:
 		return "wacom-stylus-airbrush";
@@ -135,6 +140,8 @@ gsd_wacom_stylus_new (GsdWacomDevice    *device,
 	stylus->priv->settings = settings;
 	stylus->priv->type = libwacom_stylus_get_type (wstylus);
 	stylus->priv->icon_name = get_icon_name_from_type (stylus->priv->type);
+	stylus->priv->has_eraser = libwacom_stylus_has_eraser (wstylus);
+	stylus->priv->num_buttons = libwacom_stylus_get_num_buttons (wstylus);
 
 	return stylus;
 }
@@ -169,6 +176,49 @@ gsd_wacom_stylus_get_device (GsdWacomStylus *stylus)
 	g_return_val_if_fail (GSD_IS_WACOM_STYLUS (stylus), NULL);
 
 	return stylus->priv->device;
+}
+
+gboolean
+gsd_wacom_stylus_get_has_eraser (GsdWacomStylus *stylus)
+{
+	g_return_val_if_fail (GSD_IS_WACOM_STYLUS (stylus), FALSE);
+
+	return stylus->priv->has_eraser;
+}
+
+int
+gsd_wacom_stylus_get_num_buttons (GsdWacomStylus *stylus)
+{
+	g_return_val_if_fail (GSD_IS_WACOM_STYLUS (stylus), -1);
+
+	return stylus->priv->num_buttons;
+}
+
+GsdWacomStylusType
+gsd_wacom_stylus_get_stylus_type (GsdWacomStylus *stylus)
+{
+	g_return_val_if_fail (GSD_IS_WACOM_STYLUS (stylus), WACOM_STYLUS_TYPE_UNKNOWN);
+
+	switch (stylus->priv->type) {
+	case WSTYLUS_UNKNOWN:
+		return WACOM_STYLUS_TYPE_UNKNOWN;
+	case WSTYLUS_GENERAL:
+		return WACOM_STYLUS_TYPE_GENERAL;
+	case WSTYLUS_INKING:
+		return WACOM_STYLUS_TYPE_INKING;
+	case WSTYLUS_AIRBRUSH:
+		return WACOM_STYLUS_TYPE_AIRBRUSH;
+	case WSTYLUS_CLASSIC:
+		return WACOM_STYLUS_TYPE_CLASSIC;
+	case WSTYLUS_MARKER:
+		return WACOM_STYLUS_TYPE_MARKER;
+	case WSTYLUS_STROKE:
+		return WACOM_STYLUS_TYPE_STROKE;
+	default:
+		g_assert_not_reached ();
+	}
+
+	return WACOM_STYLUS_TYPE_UNKNOWN;
 }
 
 #define GSD_WACOM_DEVICE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GSD_TYPE_WACOM_DEVICE, GsdWacomDevicePrivate))
@@ -642,6 +692,23 @@ gsd_wacom_device_list_styli (GsdWacomDevice *device)
 	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), NULL);
 
 	return g_list_copy (device->priv->styli);
+}
+
+GsdWacomStylus *
+gsd_wacom_device_get_stylus_for_type (GsdWacomDevice     *device,
+				      GsdWacomStylusType  type)
+{
+	GList *l;
+
+	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), NULL);
+
+	for (l = device->priv->styli; l != NULL; l = l->next) {
+		GsdWacomStylus *stylus = l->data;
+
+		if (gsd_wacom_stylus_get_stylus_type (stylus) == type)
+			return stylus;
+	}
+	return NULL;
 }
 
 const char *
