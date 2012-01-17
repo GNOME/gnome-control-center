@@ -31,6 +31,7 @@
 
 #ifdef HAVE_CHEESE
 #include <cheese-avatar-chooser.h>
+#include <cheese-camera-device.h>
 #include <cheese-camera-device-monitor.h>
 #endif /* HAVE_CHEESE */
 
