@@ -56,11 +56,11 @@ device_set_property (XDevice        *xdevice,
 
         rc = XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
                                  xdevice, prop, 0, property->nitems, False,
-                                 XA_INTEGER, &realtype, &realformat, &nitems,
+                                 AnyPropertyType, &realtype, &realformat, &nitems,
                                  &bytes_after, &data);
 
         if (rc != Success ||
-            realtype != XA_INTEGER ||
+            realtype != property->type ||
             realformat != property->format ||
             nitems < property->nitems) {
                 gdk_error_trap_pop_ignored ();
@@ -80,7 +80,7 @@ device_set_property (XDevice        *xdevice,
         }
 
         XChangeDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
-                               xdevice, prop, XA_INTEGER, realformat,
+                               xdevice, prop, realtype, realformat,
                                PropModeReplace, data, nitems);
 
         if (gdk_error_trap_pop ()) {

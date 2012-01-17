@@ -76,6 +76,8 @@ typedef enum {
 	WACOM_STYLUS_TYPE_STROKE
 } GsdWacomStylusType;
 
+#define NUM_ELEMS_MATRIX 9
+
 GType            gsd_wacom_stylus_get_type       (void);
 GSettings      * gsd_wacom_stylus_get_settings   (GsdWacomStylus *stylus);
 const char     * gsd_wacom_stylus_get_name       (GsdWacomStylus *stylus);
@@ -96,6 +98,10 @@ typedef enum {
 } GsdWacomDeviceType;
 
 GType gsd_wacom_device_get_type     (void);
+
+gint     gsd_wacom_device_get_display_monitor (GsdWacomDevice *device);
+gboolean gsd_wacom_device_get_display_matrix  (GsdWacomDevice *device,
+                                               float           matrix[NUM_ELEMS_MATRIX]);
 
 GsdWacomDevice * gsd_wacom_device_new              (GdkDevice *device);
 GList          * gsd_wacom_device_list_styli       (GsdWacomDevice *device);

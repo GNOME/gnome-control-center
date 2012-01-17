@@ -27,6 +27,9 @@
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <X11/Xatom.h>
+#define GNOME_DESKTOP_USE_UNSTABLE_API
+#include <libgnome-desktop/gnome-rr.h>
+#include <libgnome-desktop/gnome-rr-config.h>
 
 #include <libwacom/libwacom.h>
 #include <X11/extensions/XInput.h>
@@ -402,6 +405,239 @@ get_device_name (WacomDevice *device)
 	return g_strdup_printf ("%s %s",
 				libwacom_get_vendor (device),
 				libwacom_get_product (device));
+}
+
+/* Finds an output which matches the given EDID information. Any NULL
+ * parameter will be interpreted to match any value.
+ */
+static GnomeRROutputInfo*
+find_output_by_edid (const gchar *vendor, const gchar *product, const gchar *serial)
+{
+	GError *error = NULL;
+	GnomeRRScreen *rr_screen;
+	GnomeRRConfig *rr_config;
+	GnomeRROutputInfo **rr_output_info;
+
+	/* TODO: Check the value of 'error' */
+	rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
+	rr_config = gnome_rr_config_new_current (rr_screen, &error);
+	rr_output_info = gnome_rr_config_get_outputs (rr_config);
+
+	for (; *rr_output_info != NULL; rr_output_info++) {
+		gchar *o_vendor;
+		gchar *o_product;
+		gchar *o_serial;
+		gboolean match;
+
+		o_vendor = g_malloc0 (4);
+		gnome_rr_output_info_get_vendor (*rr_output_info, o_vendor);
+		o_product = g_strdup_printf ("%d", gnome_rr_output_info_get_product (*rr_output_info));
+		o_serial  = g_strdup_printf ("%d", gnome_rr_output_info_get_serial  (*rr_output_info));
+
+		g_debug ("Checking for match between '%s','%s','%s' and '%s','%s','%s'", \
+		         vendor,product,serial, o_vendor,o_product,o_serial);
+
+		match = (vendor  == NULL || g_strcmp0 (vendor,  o_vendor)  == 0) && \
+		        (product == NULL || g_strcmp0 (product, o_product) == 0) && \
+		        (serial  == NULL || g_strcmp0 (serial,  o_serial)  == 0);
+
+		g_free (o_vendor);
+		g_free (o_product);
+		g_free (o_serial);
+
+		if (match)
+			return *rr_output_info;
+	}
+	return NULL;
+}
+
+static GnomeRROutputInfo*
+find_output_by_heuristic (GsdWacomDevice *device)
+{
+	GnomeRROutputInfo *rr_output_info;
+
+	/* TODO: This heuristic will fail for non-Wacom display
+	 * tablets and may give the wrong result if multiple Wacom
+	 * display tablets are connected.
+	 */
+	rr_output_info = find_output_by_edid("WAC", NULL, NULL);
+	return rr_output_info;
+}
+
+static GnomeRROutputInfo*
+find_output_by_display (GsdWacomDevice *device)
+{
+	gsize n;
+	GSettings *tablet;
+	GVariant *display;
+	const gchar **edid;
+
+	tablet   = device->priv->wacom_settings;
+	display  = g_settings_get_value (tablet, "display");
+	edid     = g_variant_get_strv (display, &n);
+
+	if (n != 3) {
+		g_critical ("Expected 'display' key to store %d values; got %"G_GSIZE_FORMAT".", 3, n);
+		return NULL;
+	}
+
+	if (strlen(edid[0]) == 0 || strlen(edid[1]) == 0 || strlen(edid[2]) == 0) {
+		g_warning ("EDID not completely defined.");
+		return NULL;
+	}
+
+	return find_output_by_edid (edid[0], edid[1], edid[2]);
+}
+
+static void
+set_display_by_output (GsdWacomDevice    *device,
+                       GnomeRROutputInfo *rr_output_info)
+{
+	GSettings   *tablet;
+	GVariant    *c_array;
+	GVariant    *n_array;
+	gsize        nvalues;
+	gchar       *o_vendor, *o_product, *o_serial;
+	const gchar *values[3];
+
+	tablet  = gsd_wacom_device_get_settings (device);
+	c_array = g_settings_get_value (tablet, "display");
+	g_variant_get_strv (c_array, &nvalues);
+	if (nvalues != 3) {
+		g_warning("Unable set set display property. Got %"G_GSIZE_FORMAT" items; expected %d items.\n", nvalues, 4);
+		return;
+	}
+
+	o_vendor = g_malloc0 (4);
+	gnome_rr_output_info_get_vendor (rr_output_info, o_vendor);
+	o_product = g_strdup_printf ("%d", gnome_rr_output_info_get_product (rr_output_info));
+	o_serial  = g_strdup_printf ("%d", gnome_rr_output_info_get_serial  (rr_output_info));
+
+	values[0] = o_vendor;
+	values[1] = o_product;
+	values[2] = o_serial;
+	n_array = g_variant_new_strv((const gchar * const *) &values, 3);
+	g_settings_set_value (tablet, "display", n_array);
+
+	g_free (o_vendor);
+	g_free (o_product);
+	g_free (o_serial);
+}
+
+static GnomeRROutputInfo*
+find_output (GsdWacomDevice *device)
+{
+	GnomeRROutputInfo *rr_output_info;
+
+	rr_output_info = find_output_by_display(device);
+
+	if (rr_output_info == NULL)
+	{
+		g_warning ("No strict EDID match was found.");
+
+		if (gsd_wacom_device_is_screen_tablet (device))
+		{
+			rr_output_info = find_output_by_heuristic (device);
+			if (rr_output_info == NULL)
+			{
+				g_warning ("No fuzzy match based on heuristics was found.");
+			}
+			else
+			{
+				g_warning("Automatically mapping tablet to heuristically-found display.");
+				set_display_by_output (device, rr_output_info);
+			}
+		}
+	}
+
+	return rr_output_info;
+}
+
+static void
+calculate_transformation_matrix (const GdkRectangle mapped, const GdkRectangle desktop, float matrix[NUM_ELEMS_MATRIX])
+{
+	float x_scale = (float)mapped.x / desktop.width;
+	float y_scale = (float)mapped.y / desktop.height;
+	float width_scale  = (float)mapped.width / desktop.width;
+	float height_scale = (float)mapped.height / desktop.height;
+
+	matrix[0] = width_scale;
+	matrix[1] = 0.0f;
+	matrix[2] = x_scale;
+
+	matrix[3] = 0.0f;
+	matrix[4] = height_scale;
+	matrix[5] = y_scale;
+
+	matrix[6] = 0.0f;
+	matrix[7] = 0.0f;
+	matrix[8] = 1.0f;
+
+	g_debug ("Matrix is %f,%f,%f,%f,%f,%f,%f,%f,%f.",
+	         matrix[0], matrix[1], matrix[2],
+	         matrix[3], matrix[4], matrix[5],
+	         matrix[6], matrix[7], matrix[8]);
+
+	return;
+}
+
+gint
+gsd_wacom_device_get_display_monitor (GsdWacomDevice *device)
+{
+	gint area[4];
+	GnomeRROutputInfo *rr_output_info;
+
+	rr_output_info = find_output(device);
+	if (rr_output_info == NULL)
+		return -1;
+
+	if (!gnome_rr_output_info_is_active (rr_output_info))
+	{
+		g_warning ("Output is not active.");
+		return -1;
+	}
+
+	gnome_rr_output_info_get_geometry (rr_output_info, &area[0], &area[1], &area[2], &area[3]);
+	if (area[2] <= 0 || area[3] <= 0)
+	{
+		g_warning ("Output has non-positive area.");
+		return -1;
+	}
+
+	g_debug ("Area: %d,%d %dx%d", area[0], area[1], area[2], area[3]);
+	return gdk_screen_get_monitor_at_point (gdk_screen_get_default (), area[0], area[1]);
+}
+
+gboolean
+gsd_wacom_device_get_display_matrix (GsdWacomDevice *device, float matrix[NUM_ELEMS_MATRIX])
+{
+	int monitor;
+	GdkRectangle display;
+	GdkRectangle desktop;
+	GdkScreen *screen = gdk_screen_get_default ();
+
+	matrix[0] = 1.0f;
+	matrix[1] = 0.0f;
+	matrix[2] = 0.0f;
+	matrix[3] = 0.0f;
+	matrix[4] = 1.0f;
+	matrix[5] = 0.0f;
+	matrix[6] = 0.0f;
+	matrix[7] = 0.0f;
+	matrix[8] = 1.0f;
+
+	monitor = gsd_wacom_device_get_display_monitor (device);
+	if (monitor < 0)
+		return FALSE;
+
+	desktop.x = 0;
+	desktop.y = 0;
+	desktop.width = gdk_screen_get_width (screen);
+	desktop.height = gdk_screen_get_height (screen);
+
+	gdk_screen_get_monitor_geometry (screen, monitor, &display);
+	calculate_transformation_matrix (display, desktop, matrix);
+	return TRUE;
 }
 
 static void
