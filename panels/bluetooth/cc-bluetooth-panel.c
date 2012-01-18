@@ -762,7 +762,7 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 
 	/* Note that this will only ever show the devices on the default
 	 * adapter, this is on purpose */
-	self->priv->chooser = bluetooth_chooser_new (NULL);
+	self->priv->chooser = bluetooth_chooser_new ();
 	gtk_box_pack_start (GTK_BOX (WID ("box_devices")), self->priv->chooser, TRUE, TRUE, 0);
 	g_object_set (self->priv->chooser,
 		      "show-searching", FALSE,
