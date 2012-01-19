@@ -321,7 +321,7 @@ else
 fi
 
 
-AC_CONFIG_FILES([
+AC_OUTPUT([
 Makefile
 help/Makefile
 panels/Makefile
@@ -423,5 +423,35 @@ shell/Makefile
 shell/gnome-control-center.desktop.in
 ])
 
-dnl due to a bug in intltool we need to expand something from the root last control-center.spec
-AC_OUTPUT
+AC_MSG_NOTICE([gnome-control-center was configured with the following options:])
+if test "x$have_networkmanager" = "xyes"; then
+	AC_MSG_NOTICE([** NetworkManager (Network panel)])
+else
+	AC_MSG_NOTICE([   Network panel disabled])
+fi
+if test "x$have_bluetooth" = "xyes"; then
+	AC_MSG_NOTICE([** gnome-bluetooth (Bluetooth panel)])
+else
+	AC_MSG_NOTICE([   Bluetooth panel disabled])
+fi
+if test "x$enable_cups" = "xyes"; then
+	AC_MSG_NOTICE([** CUPS (Printers panel)])
+else
+	AC_MSG_NOTICE([   Printers panel disabled])
+fi
+if test "x$have_cheese" = "xyes"; then
+	AC_MSG_NOTICE([** Cheese (Users panel webcam support)])
+else
+	AC_MSG_NOTICE([   Users panel webcam support disabled])
+fi
+if test "x$with_libsocialweb" = "xyes"; then
+	AC_MSG_NOTICE([** libsocialweb (Background panel Flickr support)])
+else
+	AC_MSG_NOTICE([   Background panel Flickr support disabled])
+fi
+if test "x$with_systemd" = "xyes"; then
+	AC_MSG_NOTICE([** systemd (Systemd session tracking)])
+else
+	AC_MSG_NOTICE([   Using ConsoleKit for session tracking])
+fi
+AC_MSG_NOTICE([End options])
