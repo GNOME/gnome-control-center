@@ -88,7 +88,7 @@ cc_wacom_nav_button_update (CcWacomNavButton *nav)
 
 		text = g_strdup_printf (_("%d of %d"),
 					current_page + 1,
-					priv->ignore_first_page ? num_pages - 1 : num_pages);
+					num_pages);
 		gtk_label_set_text (GTK_LABEL (priv->label), text);
 	}
 }
