@@ -30,6 +30,8 @@ libwacom_properties_la_SOURCES =	\
 	gsd-input-helper.h		\
 	cc-wacom-nav-button.c		\
 	cc-wacom-nav-button.h		\
+	cc-wacom-mapping-panel.c	\
+	cc-wacom-mapping-panel.h	\
 	gsd-enums.h
 
 libwacom_properties_la_LIBADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS) $(builddir)/calibrator/libwacom-calibrator.la
@@ -45,6 +47,8 @@ test_wacom_SOURCES =			\
 	cc-wacom-stylus-page.h		\
 	cc-wacom-nav-button.c		\
 	cc-wacom-nav-button.h		\
+	cc-wacom-mapping-panel.c	\
+	cc-wacom-mapping-panel.h	\
 	gsd-wacom-device.c		\
 	gsd-wacom-device.h		\
 	gsd-input-helper.c		\
