@@ -49,7 +49,7 @@ struct _CcUaPanelPrivate
   GSettings *application_settings;
   GSettings *mediakeys_settings;
 
-  GObject *zoom_options;
+  ZoomOptions *zoom_options;
 };
 
 
@@ -205,10 +205,11 @@ static void
 zoom_options_launch_cb (GtkWidget *options_button, CcUaPanel *self)
 {
   if (self->priv->zoom_options == NULL)
-    self->priv->zoom_options = g_object_new (ZOOM_TYPE_OPTIONS, NULL);
+    self->priv->zoom_options = zoom_options_new ();
 
   if (self->priv->zoom_options != NULL)
-    zoom_options_present_dialog (ZOOM_OPTIONS (self->priv->zoom_options));
+    zoom_options_set_parent (self->priv->zoom_options,
+			     GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
 }
 
 static void

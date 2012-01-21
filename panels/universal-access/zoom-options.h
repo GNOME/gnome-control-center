@@ -66,7 +66,9 @@ struct _ZoomOptions
 
 GType zoom_options_get_type (void) G_GNUC_CONST;
 
-void zoom_options_present_dialog (ZoomOptions *self);
+ZoomOptions *zoom_options_new    (void);
+void zoom_options_set_parent (ZoomOptions *self,
+			      GtkWindow   *parent);
 
 G_END_DECLS
 

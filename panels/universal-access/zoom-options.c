@@ -475,8 +475,7 @@ zoom_options_init (ZoomOptions *self)
 
   /* ... Window itself ... */
   priv->dialog = WID ("magPrefsDialog");
-  gtk_window_set_position (GTK_WINDOW (priv->dialog),
-                           GTK_WIN_POS_CENTER);
+
   w = WID ("closeButton");
   g_signal_connect (G_OBJECT (w), "clicked",
                     G_CALLBACK (zoom_option_close_dialog_cb),
@@ -486,21 +485,28 @@ zoom_options_init (ZoomOptions *self)
                     NULL);
 
   pango_attr_list_unref (pango_attrs);
-
-  zoom_options_present_dialog (self);
 }
 
 /**
- * zoom_options_present_dialog:
+ * zoom_options_set_parent:
  * @self: the #ZoomOptions object
+ * @parent: the parent #GtkWindow
  *
  * Activate the dialog associated with this ZoomOptions.
  */
 void
-zoom_options_present_dialog (ZoomOptions *self)
+zoom_options_set_parent (ZoomOptions *self,
+			 GtkWindow   *parent)
 {
   g_return_if_fail (ZOOM_IS_OPTIONS (self));
 
-  if (self->priv->dialog != NULL)
-    gtk_window_present (GTK_WINDOW (self->priv->dialog));
+  gtk_window_set_transient_for (GTK_WINDOW (self->priv->dialog), parent);
+  gtk_window_set_modal (GTK_WINDOW (self->priv->dialog), TRUE);
+  gtk_widget_show (self->priv->dialog);
+}
+
+ZoomOptions *
+zoom_options_new (void)
+{
+  return g_object_new (ZOOM_TYPE_OPTIONS, NULL);
 }
