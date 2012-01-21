@@ -266,28 +266,22 @@ screen_position_notify_cb (GSettings *settings,
 }
 
 static void
-init_xhairs_color_opacity (GtkColorButton *color_button, ZoomOptionsPrivate *priv)
+init_xhairs_color_opacity (GtkColorButton *color_button, GSettings *settings)
 {
     gchar *color_setting;
     GdkRGBA rgba;
 
-    color_setting = g_settings_get_string (priv->settings, "cross-hairs-color");
+    color_setting = g_settings_get_string (settings, "cross-hairs-color");
     gdk_rgba_parse (&rgba, color_setting);
 
-    rgba.alpha = g_settings_get_double (priv->settings, "cross-hairs-opacity");
-    gtk_color_button_set_rgba (GTK_COLOR_BUTTON (color_button), &rgba);
+    rgba.alpha = g_settings_get_double (settings, "cross-hairs-opacity");
+    gtk_color_button_set_rgba (color_button, &rgba);
 }
 
 static void
 xhairs_color_notify_cb (GSettings *settings, gchar *key, GtkColorButton *button)
 {
-    gchar *color;
-    GdkColor rgb;
-
-    color = g_settings_get_string (settings, key);
-    gdk_color_parse (color, &rgb);
-
-    gtk_color_button_set_color (button, &rgb);
+    init_xhairs_color_opacity (button, settings);
 }
 
 static void
@@ -451,7 +445,7 @@ zoom_options_init (ZoomOptions *self)
 
   /* ... Cross hairs: color and opacity */
   w = WID ("xHairsPicker");
-  init_xhairs_color_opacity (GTK_COLOR_BUTTON (w), priv);
+  init_xhairs_color_opacity (GTK_COLOR_BUTTON (w), priv->settings);
   g_signal_connect (G_OBJECT (priv->settings), "changed::cross-hairs-color",
                     G_CALLBACK (xhairs_color_notify_cb), w);
   g_signal_connect (G_OBJECT (priv->settings), "changed::cross-hairs-opacity",
