@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-01-14 23:53+0000\n"
-"PO-Revision-Date: 2012-01-15 13:44+0100\n"
+"POT-Creation-Date: 2012-01-21 16:08+0000\n"
+"PO-Revision-Date: 2012-01-21 21:22+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: \n"
@@ -102,7 +102,7 @@ msgstr "Ni ozadja namizja"
 
 #: ../panels/background/cc-background-panel.c:1001
 #: ../panels/user-accounts/data/photo-dialog.ui.h:2
-#: ../panels/user-accounts/um-photo-dialog.c:217
+#: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "Browse for more pictures"
 msgstr "Brskanje med več slikami"
 
@@ -747,6 +747,14 @@ msgstr "Datum in čas"
 msgid "Date and Time preferences panel"
 msgstr "Pult možnosti nastavitev datuma in časa"
 
+#: ../panels/datetime/org.gnome.controlcenter.datetime.policy.in.h:1
+msgid "Change system time and date settings"
+msgstr "Spremenite sistemski čas in datum"
+
+#: ../panels/datetime/org.gnome.controlcenter.datetime.policy.in.h:2
+msgid "To change time or date settings, you need to authenticate."
+msgstr "Za spreminjanje nastavitev časa in datuma so zahtevana skrbniška dovoljenja."
+
 #: ../panels/display/cc-display-panel.c:473
 msgctxt "display panel, rotation"
 msgid "Normal"
@@ -1301,11 +1309,11 @@ msgstr "U_kaz:"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:3
 msgid "Cursor Blinking"
-msgstr "Utripanje kazalca"
+msgstr "Utripanje kazalke"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "Cursor _blinks in text fields"
-msgstr "Kazalec _utripa v besedilnih poljih"
+msgstr "Kazalka v besedilnih poljih _utripa"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:5
 msgid "Cursor blink speed"
@@ -1333,7 +1341,7 @@ msgstr "Nastavitve postavitve"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 #: ../panels/mouse/gnome-mouse-properties.ui.h:16
 #: ../panels/universal-access/uap.ui.h:38
-#: ../panels/universal-access/zoom-options.ui.h:13
+#: ../panels/universal-access/zoom-options.c:337
 msgid "Long"
 msgstr "Dolga"
 
@@ -1357,7 +1365,7 @@ msgstr "_Hitrost:"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
 #: ../panels/universal-access/uap.ui.h:54
-#: ../panels/universal-access/zoom-options.ui.h:22
+#: ../panels/universal-access/zoom-options.c:333
 msgid "Short"
 msgstr "Kratka"
 
@@ -1494,7 +1502,6 @@ msgid "Enable h_orizontal scrolling"
 msgstr "Omogoči _vodoravno drsenje"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
-#: ../panels/universal-access/zoom-options.ui.h:7
 msgid "General"
 msgstr "Splošno"
 
@@ -1627,7 +1634,6 @@ msgstr "Podjetniški"
 #: ../panels/network/cc-network-panel.c:1130
 #: ../panels/network/cc-network-panel.c:1513
 #: ../panels/universal-access/uap.ui.h:43
-#: ../panels/universal-access/zoom-options.ui.h:16
 msgid "None"
 msgstr "Brez"
 
@@ -2801,14 +2807,14 @@ msgstr "Razporeditev"
 msgid "Default"
 msgstr "Privzeto"
 
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:1
+msgid "Brightness and Lock"
+msgstr "Zaklepanje in svetlost zaslona"
+
 #. Translators: those are keywords for the brightness and lock control-center panel
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
 msgid "Brightness;Lock;Dim;Blank;Monitor;"
 msgstr "Svetlost;Zakleni;Zatemnjevanje;Črn;Zaslon;"
-
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
-msgid "Screen"
-msgstr "Zaslon"
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
 msgid "Screen brightness and lock settings"
@@ -3153,8 +3159,8 @@ msgstr "Utišaj"
 msgid "Custom"
 msgstr "Po meri"
 
-#: ../panels/universal-access/cc-ua-panel.c:445
-#: ../panels/universal-access/cc-ua-panel.c:451
+#: ../panels/universal-access/cc-ua-panel.c:446
+#: ../panels/universal-access/cc-ua-panel.c:452
 msgid "No shortcut set"
 msgstr "Ni nastavljene bližnjice"
 
@@ -3483,117 +3489,101 @@ msgctxt "universal access, text size"
 msgid "Small"
 msgstr "Majhno"
 
-#: ../panels/universal-access/zoom-options.c:156
+#: ../panels/universal-access/zoom-options.c:334
 msgid "1/4 Screen"
 msgstr "1/4 zaslona"
 
-#: ../panels/universal-access/zoom-options.c:157
+#: ../panels/universal-access/zoom-options.c:335
 msgid "1/2 Screen"
 msgstr "1/2 zaslona"
 
-#: ../panels/universal-access/zoom-options.c:158
+#: ../panels/universal-access/zoom-options.c:336
 msgid "3/4 Screen"
 msgstr "3/4 zaslona"
 
 #: ../panels/universal-access/zoom-options.ui.h:1
-msgid "Always"
-msgstr "Vedno"
-
-#: ../panels/universal-access/zoom-options.ui.h:2
 msgid "Bottom Half"
 msgstr "Spodnja polovica"
 
+#: ../panels/universal-access/zoom-options.ui.h:2
+msgid "Color:"
+msgstr "Barva:"
+
 #: ../panels/universal-access/zoom-options.ui.h:3
-msgid "Centered"
-msgstr "Sredinjeno"
+msgid "Crosshairs:"
+msgstr "Merki:"
 
 #: ../panels/universal-access/zoom-options.ui.h:4
-msgid "Color and Opacity"
-msgstr "Barva in prosojnost"
+msgid "Follow mouse cursor"
+msgstr "Sledi kazalki miške"
 
 #: ../panels/universal-access/zoom-options.ui.h:5
-msgid "Crosshairs"
-msgstr "Merki"
-
-#: ../panels/universal-access/zoom-options.ui.h:6
 msgid "Full Screen"
 msgstr "Celozaslonski način"
 
-#: ../panels/universal-access/zoom-options.ui.h:8
-msgid "Image moves with the mouse pointer"
-msgstr "Slika se premika skupaj z kazalnikom miške."
+#: ../panels/universal-access/zoom-options.ui.h:6
+msgid "Keep magnifier cursor centered"
+msgstr "Ohrani kazalko približevalnika na sredini"
 
-#: ../panels/universal-access/zoom-options.ui.h:9
-msgid "Image scrolls at screen edges"
-msgstr "Slika zdrsi ob robovih zaslona."
-
-#: ../panels/universal-access/zoom-options.ui.h:10
+#: ../panels/universal-access/zoom-options.ui.h:7
 msgid "Left Half"
 msgstr "Leva polovica"
 
+#: ../panels/universal-access/zoom-options.ui.h:8
+msgid "Length:"
+msgstr "Dolžina:"
+
+#: ../panels/universal-access/zoom-options.ui.h:9
+msgid "Magnification:"
+msgstr "Približevanje:"
+
+#: ../panels/universal-access/zoom-options.ui.h:10
+msgid "Magnifier Position:"
+msgstr "Položaj približevalnika:"
+
 #: ../panels/universal-access/zoom-options.ui.h:11
-msgid "Length"
-msgstr "Dolžina"
+msgid "Magnifier cursor moves with contents"
+msgstr "Kazalka približevalnika se premika z vsebino"
+
+#: ../panels/universal-access/zoom-options.ui.h:12
+msgid "Magnifier cursor pushes contents around"
+msgstr "Kazalka približevalnika odriva vsebino"
+
+#: ../panels/universal-access/zoom-options.ui.h:13
+msgid "Magnifier extends outside of screen"
+msgstr "Približevalnik deluje tudi izven zaslona"
 
 #: ../panels/universal-access/zoom-options.ui.h:14
-msgid "Magnification"
-msgstr "Povečava"
+msgid "Overlaps mouse cursor"
+msgstr "Prekrivanje kazalke miške"
 
 #: ../panels/universal-access/zoom-options.ui.h:15
-msgid "Moveable lens - magnified view follows mouse movements"
-msgstr "Premikajoče leče - povečan pogled sledi gibanju miške."
-
-#: ../panels/universal-access/zoom-options.ui.h:17
-msgid "Position of magnified view on screen"
-msgstr "Položaj povečanega pogleda na zaslonu"
-
-#: ../panels/universal-access/zoom-options.ui.h:18
-msgid "Proportional"
-msgstr "Sorazmernost"
-
-#: ../panels/universal-access/zoom-options.ui.h:19
-msgid "Push"
-msgstr "Potisni"
-
-#: ../panels/universal-access/zoom-options.ui.h:20
 msgid "Right Half"
 msgstr "Desna polovica"
 
-#: ../panels/universal-access/zoom-options.ui.h:23
-msgid "Show"
-msgstr "Pokaži"
-
-#: ../panels/universal-access/zoom-options.ui.h:24
-msgid "Show crosshairs intersection"
-msgstr "Pokaži presek merkov"
+#: ../panels/universal-access/zoom-options.ui.h:16
+msgid "Screen part:"
+msgstr "Del zaslona:"
 
 #. long delay
-#: ../panels/universal-access/zoom-options.ui.h:26
+#: ../panels/universal-access/zoom-options.ui.h:18
 msgid "Thick"
 msgstr "Debelo"
 
-#: ../panels/universal-access/zoom-options.ui.h:27
-msgid "Thickness"
-msgstr "Debelina"
+#: ../panels/universal-access/zoom-options.ui.h:19
+msgid "Thickness:"
+msgstr "Debelina:"
 
 #. short delay
-#: ../panels/universal-access/zoom-options.ui.h:29
+#: ../panels/universal-access/zoom-options.ui.h:21
 msgid "Thin"
 msgstr "Tanko"
 
-#: ../panels/universal-access/zoom-options.ui.h:30
-msgid "To keep the pointer centered"
-msgstr "Kazalnik ohrani na sredini"
-
-#: ../panels/universal-access/zoom-options.ui.h:31
-msgid "To keep the pointer visible"
-msgstr "Kazalnik ohrani viden"
-
-#: ../panels/universal-access/zoom-options.ui.h:32
+#: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Top Half"
 msgstr "Zgornja polovica"
 
-#: ../panels/universal-access/zoom-options.ui.h:33
+#: ../panels/universal-access/zoom-options.ui.h:23
 msgid "Zoom Options"
 msgstr "Možnosti približanja"
 
@@ -3790,7 +3780,7 @@ msgid "Photograph"
 msgstr "Fotografija"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-photo-dialog.c:97
+#: ../panels/user-accounts/um-photo-dialog.c:98
 msgid "Select"
 msgstr "Izberi"
 
@@ -4046,19 +4036,19 @@ msgstr "Gesli se ne skladata."
 msgid "Wrong password"
 msgstr "Napačno geslo"
 
-#: ../panels/user-accounts/um-photo-dialog.c:442
+#: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
 msgstr "Onemogoči sliko"
 
-#: ../panels/user-accounts/um-photo-dialog.c:460
+#: ../panels/user-accounts/um-photo-dialog.c:461
 msgid "Take a photo..."
 msgstr "Zajemi fotografijo ..."
 
-#: ../panels/user-accounts/um-photo-dialog.c:478
+#: ../panels/user-accounts/um-photo-dialog.c:479
 msgid "Browse for more pictures..."
 msgstr "Brskanje med več slikami ..."
 
-#: ../panels/user-accounts/um-photo-dialog.c:703
+#: ../panels/user-accounts/um-photo-dialog.c:704
 #, c-format
 msgid "Used by %s"
 msgstr "Uporablja ga %s"
@@ -4211,112 +4201,112 @@ msgid "Wacom Graphics Tablet"
 msgstr "Grafična tablica Wacom"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:1
-msgid "Back"
-msgstr "Nazaj"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:2
 msgid "Bluetooth Settings"
 msgstr "Nastavitve vmesnika Bluetooth"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:3
+#: ../panels/wacom/gnome-wacom-properties.ui.h:2
 msgid "Calibrate..."
 msgstr "Umeri ..."
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:4
-msgid "Eraser Pressure Feel"
-msgstr "Občutek pritiska radirke"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:5
-msgid "Firm"
-msgstr "Čvrsto"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:6
-msgid "Forward"
-msgstr "Posreduj"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:7
-msgid "Left Mouse Button Click"
-msgstr "Klik levega gumba miške"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:8
+#: ../panels/wacom/gnome-wacom-properties.ui.h:3
 msgid "Left-Handed Orientation"
 msgstr "Levoročna usmerjenost"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:9
-msgid "Lower Button"
-msgstr "Spodnji gumb"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:10
-msgid "Middle Mouse Button Click"
-msgstr "Klik srednjega gumba miške"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:11
-msgid "No Action"
-msgstr "Ni dejanja"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/wacom/gnome-wacom-properties.ui.h:4
 msgid "No tablet detected"
 msgstr "Ni zaznane tablice"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Priklopite in prižgite tablico Wacom."
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:14
-msgid "Right Mouse Button Click"
-msgstr "Klik desnega gumba miške"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:15
-msgid "Scroll Down"
-msgstr "Zdrsni navzdol"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:16
-msgid "Scroll Left"
-msgstr "Zdrsni v levo"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:17
-msgid "Scroll Right"
-msgstr "Zdrsni v desno"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:18
-msgid "Scroll Up"
-msgstr "Zdrsni navzgor"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:19
-msgid "Soft"
-msgstr "Mehko"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:20
-msgid "Stylus"
-msgstr "Stylus"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:21
+#: ../panels/wacom/gnome-wacom-properties.ui.h:6
 msgid "Tablet (absolute)"
 msgstr "Tablica (absolutno)"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:22
+#: ../panels/wacom/gnome-wacom-properties.ui.h:7
 msgid "Tablet Preferences"
 msgstr "Možnosti tablice"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:23
-msgid "Tip Pressure Feel"
-msgstr "Občutek pritiska konice"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:24
-msgid "Top Button"
-msgstr "Zgornji gumb"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:25
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
 msgid "Touchpad (relative)"
 msgstr "Sledilna ploščica (relativno)"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:26
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
 msgid "Tracking Mode"
 msgstr "Način sledenja"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:27
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "Wacom Tablet"
 msgstr "Tablica Wacom"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:1
+msgid "Back"
+msgstr "Nazaj"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:2
+msgid "Eraser Pressure Feel"
+msgstr "Občutek pritiska radirke"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:3
+msgid "Firm"
+msgstr "Čvrsto"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:4
+msgid "Forward"
+msgstr "Posreduj"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:5
+msgid "Left Mouse Button Click"
+msgstr "Klik levega gumba miške"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:6
+msgid "Lower Button"
+msgstr "Spodnji gumb"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:7
+msgid "Middle Mouse Button Click"
+msgstr "Klik srednjega gumba miške"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:8
+msgid "No Action"
+msgstr "Ni dejanja"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:9
+msgid "Right Mouse Button Click"
+msgstr "Klik desnega gumba miške"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:10
+msgid "Scroll Down"
+msgstr "Zdrsni navzdol"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:11
+msgid "Scroll Left"
+msgstr "Zdrsni v levo"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:12
+msgid "Scroll Right"
+msgstr "Zdrsni v desno"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:13
+msgid "Scroll Up"
+msgstr "Zdrsni navzgor"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:14
+msgid "Soft"
+msgstr "Mehko"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:15
+msgid "Stylus"
+msgstr "Stylus"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:16
+msgid "Tip Pressure Feel"
+msgstr "Občutek pritiska konice"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:17
+msgid "Top Button"
+msgstr "Zgornji gumb"
 
 #. Text printed on screen
 #: ../panels/wacom/calibrator/gui_gtk.c:70
@@ -4330,6 +4320,15 @@ msgstr "Z udarjanjem na ciljna mest se umeri zaslon zaslona na dotik."
 #: ../panels/wacom/calibrator/gui_gtk.c:271
 msgid "Mis-click detected, restarting..."
 msgstr "Zaznan je napačen klik, zato bo znova začeto ..."
+
+#: ../panels/wacom/cc-wacom-nav-button.c:89
+#, c-format
+msgid "%d of %d"
+msgstr "%d od %d"
+
+#: ../panels/wacom/cc-wacom-stylus-page.c:387
+msgid "Button"
+msgstr "Gumb"
 
 #: ../shell/control-center.c:54
 msgid "Enable verbose mode"
@@ -4375,6 +4374,48 @@ msgstr "Sistemske nastavitve"
 msgid "All Settings"
 msgstr "Vse nastavitve"
 
+#~ msgid "Screen"
+#~ msgstr "Zaslon"
+
+#~ msgid "Always"
+#~ msgstr "Vedno"
+
+#~ msgid "Centered"
+#~ msgstr "Sredinjeno"
+
+#~ msgid "Color and Opacity"
+#~ msgstr "Barva in prosojnost"
+
+#~ msgid "Image moves with the mouse pointer"
+#~ msgstr "Slika se premika skupaj z kazalnikom miške."
+
+#~ msgid "Image scrolls at screen edges"
+#~ msgstr "Slika zdrsi ob robovih zaslona."
+
+#~ msgid "Moveable lens - magnified view follows mouse movements"
+#~ msgstr "Premikajoče leče - povečan pogled sledi gibanju miške."
+
+#~ msgid "Position of magnified view on screen"
+#~ msgstr "Položaj povečanega pogleda na zaslonu"
+
+#~ msgid "Proportional"
+#~ msgstr "Sorazmernost"
+
+#~ msgid "Push"
+#~ msgstr "Potisni"
+
+#~ msgid "Show"
+#~ msgstr "Pokaži"
+
+#~ msgid "Show crosshairs intersection"
+#~ msgstr "Pokaži presek merkov"
+
+#~ msgid "To keep the pointer centered"
+#~ msgstr "Kazalnik ohrani na sredini"
+
+#~ msgid "To keep the pointer visible"
+#~ msgstr "Kazalnik ohrani viden"
+
 #~ msgid "Could not get session bus while applying display configuration"
 #~ msgstr ""
 #~ "Ni mogoče pridobiti vodila seje med spreminjanjem nastavitev zaslona"
@@ -4384,9 +4425,6 @@ msgstr "Vse nastavitve"
 
 #~ msgid "_Photos:"
 #~ msgstr "_Fotografije:"
-
-#~ msgid "Magnifier zoom in"
-#~ msgstr "Približaj povečalo"
 
 #~ msgid "Magnifier zoom out"
 #~ msgstr "Oddalji povečalo"
