@@ -114,7 +114,7 @@ $(dbus_built_sources) : Makefile.am timedated1-interface.xml
 	gdbus-codegen						\
 		--interface-prefix org.freedesktop.		\
 		--generate-c-code timedated			\
-		timedated1-interface.xml
+		$(srcdir)/timedated1-interface.xml
 
 libdate_time_la_SOURCES =	\
 	datetime-module.c	\
