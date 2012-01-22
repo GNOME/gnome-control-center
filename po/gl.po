@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-15 00:51+0100\n"
-"PO-Revision-Date: 2012-01-15 00:52+0100\n"
+"POT-Creation-Date: 2012-01-22 23:57+0100\n"
+"PO-Revision-Date: 2012-01-22 23:59+0100\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician <gnome-l10n-gl@gnome.org>\n"
 "Language: gl\n"
@@ -109,7 +109,7 @@ msgstr "Sen fondo de escritorio"
 
 #: ../panels/background/cc-background-panel.c:1001
 #: ../panels/user-accounts/data/photo-dialog.ui.h:4
-#: ../panels/user-accounts/um-photo-dialog.c:217
+#: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "Browse for more pictures"
 msgstr "Buscar máis imaxes"
 
@@ -756,6 +756,14 @@ msgstr "Panel de preferencias da data e hora"
 msgid "Clock;Timezone;Location;"
 msgstr "Reloxo;Fuso horario;Localización"
 
+#: ../panels/datetime/org.gnome.controlcenter.datetime.policy.in.h:1
+msgid "Change system time and date settings"
+msgstr "Cambiar as opcións de data e hora do sistema"
+
+#: ../panels/datetime/org.gnome.controlcenter.datetime.policy.in.h:2
+msgid "To change time or date settings, you need to authenticate."
+msgstr "Para cambair as opcións de data e hora debe autenticarse."
+
 #: ../panels/display/cc-display-panel.c:473
 msgctxt "display panel, rotation"
 msgid "Normal"
@@ -1342,7 +1350,7 @@ msgstr "_Velocidade:"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
 #: ../panels/mouse/gnome-mouse-properties.ui.h:26
 #: ../panels/universal-access/uap.ui.h:55
-#: ../panels/universal-access/zoom-options.ui.h:20
+#: ../panels/universal-access/zoom-options.c:333
 msgid "Short"
 msgstr "Atallo"
 
@@ -1360,7 +1368,7 @@ msgstr "Velocidade de repetición de teclas"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
 #: ../panels/mouse/gnome-mouse-properties.ui.h:28
 #: ../panels/universal-access/uap.ui.h:58
-#: ../panels/universal-access/zoom-options.ui.h:22
+#: ../panels/universal-access/zoom-options.c:337
 msgid "Long"
 msgstr "Longo"
 
@@ -1492,7 +1500,6 @@ msgid "Mouse Preferences"
 msgstr "Preferencias do rato"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
-#: ../panels/universal-access/zoom-options.ui.h:15
 msgid "General"
 msgstr "Xeral"
 
@@ -1656,7 +1663,6 @@ msgstr "Empresarial"
 #: ../panels/network/cc-network-panel.c:1130
 #: ../panels/network/cc-network-panel.c:1513
 #: ../panels/universal-access/uap.ui.h:5
-#: ../panels/universal-access/zoom-options.ui.h:30
 msgid "None"
 msgstr "Ningunha"
 
@@ -2825,8 +2831,9 @@ msgid "Default"
 msgstr "Predeterminado"
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:1
-msgid "Screen"
-msgstr "Pantalla"
+#, fuzzy
+msgid "Brightness and Lock"
+msgstr "Brillo"
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
 msgid "Screen brightness and lock settings"
@@ -3169,8 +3176,8 @@ msgstr "Sen son"
 msgid "Custom"
 msgstr "Personalizar"
 
-#: ../panels/universal-access/cc-ua-panel.c:445
-#: ../panels/universal-access/cc-ua-panel.c:451
+#: ../panels/universal-access/cc-ua-panel.c:446
+#: ../panels/universal-access/cc-ua-panel.c:452
 msgid "No shortcut set"
 msgstr "Non existe ningún atallo configurado"
 
@@ -3505,15 +3512,15 @@ msgctxt "universal access, contrast"
 msgid "High/Inverse"
 msgstr "Alto/invertido"
 
-#: ../panels/universal-access/zoom-options.c:156
+#: ../panels/universal-access/zoom-options.c:334
 msgid "1/4 Screen"
 msgstr "1/4 da pantalla"
 
-#: ../panels/universal-access/zoom-options.c:157
+#: ../panels/universal-access/zoom-options.c:335
 msgid "1/2 Screen"
 msgstr "1/2 da pantalla"
 
-#: ../panels/universal-access/zoom-options.c:158
+#: ../panels/universal-access/zoom-options.c:336
 msgid "3/4 Screen"
 msgstr "3/4 da pantalla"
 
@@ -3522,102 +3529,86 @@ msgid "Zoom Options"
 msgstr "Opcións de zoom"
 
 #: ../panels/universal-access/zoom-options.ui.h:2
-msgid "Magnification"
-msgstr "Ampliación"
+msgid "Magnification:"
+msgstr "Magnificación:"
 
 #: ../panels/universal-access/zoom-options.ui.h:3
-msgid "Always"
-msgstr "Sempre"
+msgid "Follow mouse cursor"
+msgstr "Seguir o cursor do rato"
 
 #: ../panels/universal-access/zoom-options.ui.h:4
-msgid "To keep the pointer visible"
-msgstr "Manter o punteiro visíbel"
+msgid "Screen part:"
+msgstr "Parte da pantalla:"
 
 #: ../panels/universal-access/zoom-options.ui.h:5
-msgid "To keep the pointer centered"
-msgstr "Manter o punteiro centrado"
+msgid "Magnifier extends outside of screen"
+msgstr "O magnificador esténdese máis aló da pantalla"
 
 #: ../panels/universal-access/zoom-options.ui.h:6
-msgid "Image moves with the mouse pointer"
-msgstr "A imaxe móvese co punteiro do rato"
+msgid "Keep magnifier cursor centered"
+msgstr "Manter centrado o cursor do magnificador"
 
 #: ../panels/universal-access/zoom-options.ui.h:7
-msgid "Full Screen"
-msgstr "Pantalla completa"
+msgid "Magnifier cursor pushes contents around"
+msgstr "O cursor do magnificador empurra os contidos cara os lados"
 
 #: ../panels/universal-access/zoom-options.ui.h:8
-msgid "Top Half"
-msgstr "Metade superior"
+msgid "Magnifier cursor moves with contents"
+msgstr "O cursor do magnificador móvese co contido"
 
 #: ../panels/universal-access/zoom-options.ui.h:9
-msgid "Bottom Half"
-msgstr "Metade inferior"
+msgid "Magnifier Position:"
+msgstr "Posición do magnificador:"
 
 #: ../panels/universal-access/zoom-options.ui.h:10
-msgid "Left Half"
-msgstr "Metade esquerda"
-
-#: ../panels/universal-access/zoom-options.ui.h:11
-msgid "Right Half"
-msgstr "Metade dereita"
-
-#: ../panels/universal-access/zoom-options.ui.h:12
-msgid "Position of magnified view on screen"
-msgstr "Posición da visa ampliada na pantalla"
-
-#: ../panels/universal-access/zoom-options.ui.h:13
-msgid "Moveable lens - magnified view follows mouse movements"
-msgstr "Lentes movíbeis - a vista ampliada segue os movementos do rato"
-
-#: ../panels/universal-access/zoom-options.ui.h:14
-msgid "Image scrolls at screen edges"
-msgstr "A imaxe desprázase aos bordos da pantalla"
-
-#: ../panels/universal-access/zoom-options.ui.h:16
-msgid "Show crosshairs intersection"
-msgstr "Mostrar a intersección do punto de mira"
-
-#: ../panels/universal-access/zoom-options.ui.h:17
-msgid "Color and Opacity"
-msgstr "Cor e opacidade"
-
-#: ../panels/universal-access/zoom-options.ui.h:18
-msgid "Length"
-msgstr "Lonxitude"
-
-#: ../panels/universal-access/zoom-options.ui.h:23
-msgid "Thickness"
-msgstr "Grosor"
+msgid "Thickness:"
+msgstr "Grosor:"
 
 #. short delay
-#: ../panels/universal-access/zoom-options.ui.h:25
+#: ../panels/universal-access/zoom-options.ui.h:12
 msgid "Thin"
 msgstr "Fino"
 
 #. long delay
-#: ../panels/universal-access/zoom-options.ui.h:27
+#: ../panels/universal-access/zoom-options.ui.h:14
 msgid "Thick"
 msgstr "Groso"
 
-#: ../panels/universal-access/zoom-options.ui.h:28
-msgid "Show"
-msgstr "Mostrar"
+#: ../panels/universal-access/zoom-options.ui.h:15
+msgid "Length:"
+msgstr "Lonxitude:"
 
-#: ../panels/universal-access/zoom-options.ui.h:29
-msgid "Crosshairs"
-msgstr "Puntos de mira"
+#: ../panels/universal-access/zoom-options.ui.h:16
+msgid "Color:"
+msgstr "Cor:"
 
-#: ../panels/universal-access/zoom-options.ui.h:31
-msgid "Centered"
-msgstr "Centrado"
+#: ../panels/universal-access/zoom-options.ui.h:17
+msgid "Crosshairs:"
+msgstr "Cruces:"
 
-#: ../panels/universal-access/zoom-options.ui.h:32
-msgid "Push"
-msgstr "Empurrar"
+#: ../panels/universal-access/zoom-options.ui.h:18
+msgid "Overlaps mouse cursor"
+msgstr "Sobrepon o cursor do rato"
 
-#: ../panels/universal-access/zoom-options.ui.h:33
-msgid "Proportional"
-msgstr "Proporcional"
+#: ../panels/universal-access/zoom-options.ui.h:19
+msgid "Full Screen"
+msgstr "Pantalla completa"
+
+#: ../panels/universal-access/zoom-options.ui.h:20
+msgid "Top Half"
+msgstr "Metade superior"
+
+#: ../panels/universal-access/zoom-options.ui.h:21
+msgid "Bottom Half"
+msgstr "Metade inferior"
+
+#: ../panels/universal-access/zoom-options.ui.h:22
+msgid "Left Half"
+msgstr "Metade esquerda"
+
+#: ../panels/universal-access/zoom-options.ui.h:23
+msgid "Right Half"
+msgstr "Metade dereita"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:1
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
@@ -3827,7 +3818,7 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
-#: ../panels/user-accounts/um-photo-dialog.c:97
+#: ../panels/user-accounts/um-photo-dialog.c:98
 msgid "Select"
 msgstr "Seleccionar"
 
@@ -4090,19 +4081,19 @@ msgstr "Os contrasinais non coinciden"
 msgid "Wrong password"
 msgstr "Contrasinal incorrecto"
 
-#: ../panels/user-accounts/um-photo-dialog.c:442
+#: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
 msgstr "Desactivar imaxe"
 
-#: ../panels/user-accounts/um-photo-dialog.c:460
+#: ../panels/user-accounts/um-photo-dialog.c:461
 msgid "Take a photo..."
 msgstr "Sacar unha foto…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:478
+#: ../panels/user-accounts/um-photo-dialog.c:479
 msgid "Browse for more pictures..."
 msgstr "Buscar máis imaxes…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:703
+#: ../panels/user-accounts/um-photo-dialog.c:704
 #, c-format
 msgid "Used by %s"
 msgstr "Usado por %s"
@@ -4264,112 +4255,112 @@ msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
 msgstr "Tableta;Wacom;Stylus;Borrador;Rato;"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:1
-msgid "No Action"
-msgstr "Sen acción"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:2
-msgid "Left Mouse Button Click"
-msgstr "Pulsación do botón esquerdo do rato"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:3
-msgid "Middle Mouse Button Click"
-msgstr "Pulsación do botón dereito do rato"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:4
-msgid "Right Mouse Button Click"
-msgstr "Pulsación do botón do medio do rato"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:5
-msgid "Scroll Down"
-msgstr "Desprazar cara abaixo"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:6
-msgid "Scroll Up"
-msgstr "Desprazar cara a esquerda"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:7
-msgid "Scroll Left"
-msgstr "Desprazar cara a esquerda"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:8
-msgid "Scroll Right"
-msgstr "Desprazar cara a dereita"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:9
-msgid "Back"
-msgstr "Atrás"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:10
-msgid "Forward"
-msgstr "Adiante"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Tablet (absolute)"
 msgstr "Tableta (absoluto)"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/wacom/gnome-wacom-properties.ui.h:2
 msgid "Touchpad (relative)"
 msgstr "Área táctil (relativo)"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:3
 msgid "Tablet Preferences"
 msgstr "Preferencias da tableta"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:14
+#: ../panels/wacom/gnome-wacom-properties.ui.h:4
 msgid "No tablet detected"
 msgstr "Non se detectou ningunha tableta"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:15
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Conecte ou acenda a súa tableta Wacom"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:16
+#: ../panels/wacom/gnome-wacom-properties.ui.h:6
 msgid "Bluetooth Settings"
 msgstr "Preferencias de Bluetooth"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:17
+#: ../panels/wacom/gnome-wacom-properties.ui.h:7
 msgid "Tracking Mode"
 msgstr "Modo de seguimento"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:18
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
 msgid "Calibrate..."
 msgstr "Calibrar…"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:19
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
 msgid "Left-Handed Orientation"
 msgstr "Orientación para zurdos"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:20
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+msgid "Wacom Tablet"
+msgstr "Tableta Wacom"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:1
+msgid "No Action"
+msgstr "Sen acción"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:2
+msgid "Left Mouse Button Click"
+msgstr "Pulsación do botón esquerdo do rato"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:3
+msgid "Middle Mouse Button Click"
+msgstr "Pulsación do botón dereito do rato"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:4
+msgid "Right Mouse Button Click"
+msgstr "Pulsación do botón do medio do rato"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:5
+msgid "Scroll Down"
+msgstr "Desprazar cara abaixo"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:6
+msgid "Scroll Up"
+msgstr "Desprazar cara a esquerda"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:7
+msgid "Scroll Left"
+msgstr "Desprazar cara a esquerda"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:8
+msgid "Scroll Right"
+msgstr "Desprazar cara a dereita"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:9
+msgid "Back"
+msgstr "Atrás"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:10
+msgid "Forward"
+msgstr "Adiante"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:11
 msgid "Soft"
 msgstr "Suave"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:21
+#: ../panels/wacom/wacom-stylus-page.ui.h:12
 msgid "Firm"
 msgstr "Firme"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:22
+#: ../panels/wacom/wacom-stylus-page.ui.h:13
 msgid "Eraser Pressure Feel"
 msgstr "Sensibilidade de presión do borrador"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:23
+#: ../panels/wacom/wacom-stylus-page.ui.h:14
 msgid "Lower Button"
 msgstr "Botón inferior"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:24
+#: ../panels/wacom/wacom-stylus-page.ui.h:15
 msgid "Tip Pressure Feel"
 msgstr "Sensibilidade de presión do lapis"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:25
+#: ../panels/wacom/wacom-stylus-page.ui.h:16
 msgid "Top Button"
 msgstr "Botón superior"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:26
+#: ../panels/wacom/wacom-stylus-page.ui.h:17
 msgid "Stylus"
 msgstr "Lapis"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:27
-msgid "Wacom Tablet"
-msgstr "Tableta Wacom"
 
 #. Text printed on screen
 #: ../panels/wacom/calibrator/gui_gtk.c:70
@@ -4387,6 +4378,15 @@ msgstr ""
 #: ../panels/wacom/calibrator/gui_gtk.c:271
 msgid "Mis-click detected, restarting..."
 msgstr "Pulsación errónea detectada, reiniciando…"
+
+#: ../panels/wacom/cc-wacom-nav-button.c:89
+#, c-format
+msgid "%d of %d"
+msgstr "%d de %d"
+
+#: ../panels/wacom/cc-wacom-stylus-page.c:387
+msgid "Button"
+msgstr "Botón"
 
 #: ../shell/control-center.c:54
 msgid "Enable verbose mode"
@@ -4430,6 +4430,48 @@ msgstr "Preferencias do sistema"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "Todas as preferencias"
+
+#~ msgid "Screen"
+#~ msgstr "Pantalla"
+
+#~ msgid "Always"
+#~ msgstr "Sempre"
+
+#~ msgid "To keep the pointer visible"
+#~ msgstr "Manter o punteiro visíbel"
+
+#~ msgid "To keep the pointer centered"
+#~ msgstr "Manter o punteiro centrado"
+
+#~ msgid "Image moves with the mouse pointer"
+#~ msgstr "A imaxe móvese co punteiro do rato"
+
+#~ msgid "Position of magnified view on screen"
+#~ msgstr "Posición da visa ampliada na pantalla"
+
+#~ msgid "Moveable lens - magnified view follows mouse movements"
+#~ msgstr "Lentes movíbeis - a vista ampliada segue os movementos do rato"
+
+#~ msgid "Image scrolls at screen edges"
+#~ msgstr "A imaxe desprázase aos bordos da pantalla"
+
+#~ msgid "Show crosshairs intersection"
+#~ msgstr "Mostrar a intersección do punto de mira"
+
+#~ msgid "Color and Opacity"
+#~ msgstr "Cor e opacidade"
+
+#~ msgid "Show"
+#~ msgstr "Mostrar"
+
+#~ msgid "Centered"
+#~ msgstr "Centrado"
+
+#~ msgid "Push"
+#~ msgstr "Empurrar"
+
+#~ msgid "Proportional"
+#~ msgstr "Proporcional"
 
 #~ msgid "Could not get session bus while applying display configuration"
 #~ msgstr ""
@@ -4541,9 +4583,6 @@ msgstr "Todas as preferencias"
 
 #~ msgid "Please select an image."
 #~ msgstr "Seleccione unha imaxe."
-
-#~ msgid "Magnifier zoom in"
-#~ msgstr "Ampliación do magnificador"
 
 #~ msgid "Magnifier zoom out"
 #~ msgstr "Redución do magnificador"
