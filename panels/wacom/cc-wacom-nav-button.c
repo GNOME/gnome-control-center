@@ -218,6 +218,11 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 	/* Label */
 	priv->label = gtk_label_new (NULL);
 	gtk_style_context_add_class (gtk_widget_get_style_context (priv->label), "dim-label");
+	g_object_set (priv->label,
+		      "margin-top", 16,
+		      "margin-bottom", 16,
+		      NULL);
+
 	gtk_box_pack_start (GTK_BOX (self), priv->label,
 			    FALSE, FALSE, 8);
 
@@ -233,7 +238,7 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 	gtk_container_add (GTK_CONTAINER (priv->prev), image);
 	g_signal_connect (G_OBJECT (priv->prev), "clicked",
 			  G_CALLBACK (prev_clicked), self);
-	gtk_widget_set_valign (priv->prev, GTK_ALIGN_START);
+	gtk_widget_set_valign (priv->prev, GTK_ALIGN_CENTER);
 
 	/* Next button */
 	priv->next = gtk_button_new ();
@@ -241,7 +246,7 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 	gtk_container_add (GTK_CONTAINER (priv->next), image);
 	g_signal_connect (G_OBJECT (priv->next), "clicked",
 			  G_CALLBACK (next_clicked), self);
-	gtk_widget_set_valign (priv->next, GTK_ALIGN_START);
+	gtk_widget_set_valign (priv->next, GTK_ALIGN_CENTER);
 
 	gtk_box_pack_start (GTK_BOX (box), priv->prev,
 			    FALSE, FALSE, 0);
