@@ -175,6 +175,7 @@ activate_panel (GnomeControlCenter *shell,
 
           /* set the title of the window */
           icon_name = get_icon_name_from_g_icon (gicon);
+          gtk_window_set_role (GTK_WINDOW (priv->window), id);
           gtk_window_set_title (GTK_WINDOW (priv->window), name);
           gtk_window_set_default_icon_name (icon_name);
           gtk_window_set_icon_name (GTK_WINDOW (priv->window), icon_name);
@@ -234,6 +235,7 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
   gtk_lock_button_set_permission (GTK_LOCK_BUTTON (priv->lock_button), NULL);
 
   /* reset window title and icon */
+  gtk_window_set_role (GTK_WINDOW (priv->window), NULL);
   gtk_window_set_title (GTK_WINDOW (priv->window), priv->default_window_title);
   gtk_window_set_default_icon_name (priv->default_window_icon);
   gtk_window_set_icon_name (GTK_WINDOW (priv->window),
