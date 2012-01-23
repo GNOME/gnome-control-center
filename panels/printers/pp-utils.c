@@ -44,15 +44,14 @@ get_dbus_proxy (const gchar *name,
 {
   DBusGConnection *bus;
   DBusGProxy      *proxy;
-  GError          *error;
+  GError          *error = NULL;
 
-  error = NULL;
   if (system_bus)
     bus = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
   else
     bus = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
 
-  if (bus == NULL)
+  if (!bus)
     {
       if (system_bus)
         /* Translators: Program cannot connect to DBus' system bus */
@@ -64,14 +63,13 @@ get_dbus_proxy (const gchar *name,
       return NULL;
     }
 
-  error = NULL;
-
   proxy = dbus_g_proxy_new_for_name (bus, name, path, iface);
 
   return proxy;
 }
 
-gchar *get_tag_value (const gchar *tag_string, const gchar *tag_name)
+gchar *
+get_tag_value (const gchar *tag_string, const gchar *tag_name)
 {
   gchar **tag_string_splitted = NULL;
   gchar  *tag_value = NULL;
@@ -927,6 +925,7 @@ get_ppd_name (gchar *device_id,
 
       g_warning ("You should install system-config-printer which provides \
 DBus method \"GetBestDrivers\". Using fallback solution for now.");
+      g_error_free (error);
 
       mfg = get_tag_value (device_id, "mfg");
       if (!mfg)
@@ -1290,54 +1289,58 @@ execute_maintenance_command (const char *printer_name,
   GError *error = NULL;
   ipp_t  *request = NULL;
   ipp_t  *response = NULL;
-  char    uri[HTTP_MAX_URI + 1];
+  gchar  *file_name = NULL;
+  char   *uri;
   int     fd = -1;
 
   http = httpConnectEncrypt (cupsServer (),
                              ippPort (),
                              cupsEncryption ());
 
-  if (http)
+  if (!http)
+    return NULL;
+
+  request = ippNewRequest (IPP_PRINT_JOB);
+
+  uri = g_strdup_printf ("ipp://localhost/printers/%s", printer_name);
+
+  ippAddString (request,
+                IPP_TAG_OPERATION,
+                IPP_TAG_URI,
+                "printer-uri",
+                NULL,
+                uri);
+
+  g_free (uri);
+
+  ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME, "job-name",
+                NULL, title);
+
+  ippAddString (request, IPP_TAG_JOB, IPP_TAG_MIMETYPE, "document-format",
+                NULL, "application/vnd.cups-command");
+
+  fd = g_file_open_tmp ("ccXXXXXX", &file_name, &error);
+
+  if (fd != -1)
     {
-      request = ippNewRequest (IPP_PRINT_JOB);
+      FILE *file;
 
-      g_snprintf (uri,
-                  sizeof (uri),
-                  "ipp://localhost/printers/%s",
-                  printer_name);
+      file = fdopen (fd, "w");
+      fprintf (file, "#CUPS-COMMAND\n");
+      fprintf (file, "%s\n", command);
+      fclose (file);
 
-      ippAddString (request,
-                    IPP_TAG_OPERATION,
-                    IPP_TAG_URI,
-                    "printer-uri",
-                    NULL,
-                    uri);
-
-      ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME, "job-name",
-                    NULL, title);
-
-      ippAddString (request, IPP_TAG_JOB, IPP_TAG_MIMETYPE, "document-format",
-                    NULL, "application/vnd.cups-command");
-
-      gchar *file_name = NULL;
-      fd = g_file_open_tmp ("ccXXXXXX", &file_name, &error);
-
-      if (fd != -1 && !error)
-        {
-          FILE *file;
-
-          file = fdopen (fd, "w");
-          fprintf (file, "#CUPS-COMMAND\n");
-          fprintf (file, "%s\n", command);
-          fclose (file);
-
-          response = cupsDoFileRequest (http, request, "/", file_name);
-          g_unlink (file_name);
-        }
-
-      g_free (file_name);
-      httpClose (http);
+      response = cupsDoFileRequest (http, request, "/", file_name);
+      g_unlink (file_name);
     }
+  else
+    {
+      g_warning ("%s", error->message);
+      g_error_free (error);
+    }
+
+  g_free (file_name);
+  httpClose (http);
 
   return response;
 }
@@ -1350,60 +1353,67 @@ ccGetAllowedUsers (gchar ***allowed_users, const char *printer_name)
   ipp_t               *request = NULL;
   gchar              **users = NULL;
   ipp_t               *response;
-  char                 uri[HTTP_MAX_URI + 1];
+  char                *uri;
   int                  num_allowed_users = 0;
 
   http = httpConnectEncrypt (cupsServer (),
                              ippPort (),
                              cupsEncryption ());
 
-  if (http)
+  if (!http)
     {
-      request = ippNewRequest (IPP_GET_PRINTER_ATTRIBUTES);
+      *allowed_users = NULL;
+      return 0;
+    }
 
-      g_snprintf (uri, sizeof (uri), "ipp://localhost/printers/%s", printer_name);
-      ippAddString (request,
-                    IPP_TAG_OPERATION,
-                    IPP_TAG_URI,
-                    "printer-uri",
-                    NULL,
-                    uri);
-      ippAddStrings (request,
-                     IPP_TAG_OPERATION,
-                     IPP_TAG_KEYWORD,
-                     "requested-attributes",
-                     1,
-                     NULL,
-                     attrs);
+  request = ippNewRequest (IPP_GET_PRINTER_ATTRIBUTES);
 
-      response = cupsDoRequest (http, request, "/");
-      if (response)
+  uri = g_strdup_printf ("ipp://localhost/printers/%s", printer_name);
+
+  ippAddString (request,
+                IPP_TAG_OPERATION,
+                IPP_TAG_URI,
+                "printer-uri",
+                NULL,
+                uri);
+
+  g_free (uri);
+
+  ippAddStrings (request,
+                 IPP_TAG_OPERATION,
+                 IPP_TAG_KEYWORD,
+                 "requested-attributes",
+                 1,
+                 NULL,
+                 attrs);
+
+  response = cupsDoRequest (http, request, "/");
+  if (response)
+    {
+      ipp_attribute_t *attr = NULL;
+      ipp_attribute_t *allowed = NULL;
+
+      for (attr = response->attrs; attr != NULL; attr = attr->next)
         {
-          ipp_attribute_t *attr = NULL;
-          ipp_attribute_t *allowed = NULL;
-
-          for (attr = response->attrs; attr != NULL; attr = attr->next)
-            {
-              if (attr->group_tag == IPP_TAG_PRINTER &&
-                  attr->value_tag == IPP_TAG_NAME &&
-                  !g_strcmp0 (attr->name, "requesting-user-name-allowed"))
-                allowed = attr;
-            }
-
-          if (allowed && allowed->num_values > 0)
-            {
-              int i;
-
-              num_allowed_users = allowed->num_values;
-              users = g_new (gchar*, num_allowed_users);
-
-              for (i = 0; i < num_allowed_users; i ++)
-                users[i] = g_strdup (allowed->values[i].string.text);
-            }
-          ippDelete(response);
+          if (attr->group_tag == IPP_TAG_PRINTER &&
+              attr->value_tag == IPP_TAG_NAME &&
+              !g_strcmp0 (attr->name, "requesting-user-name-allowed"))
+            allowed = attr;
         }
-       httpClose (http);
-     }
+
+      if (allowed && allowed->num_values > 0)
+        {
+          int i;
+
+          num_allowed_users = allowed->num_values;
+          users = g_new (gchar*, num_allowed_users);
+
+          for (i = 0; i < num_allowed_users; i ++)
+            users[i] = g_strdup (allowed->values[i].string.text);
+        }
+      ippDelete(response);
+    }
+  httpClose (http);
 
   *allowed_users = users;
   return num_allowed_users;
@@ -1578,6 +1588,7 @@ printer_rename (const gchar *old_name,
   gboolean          printer_paused = FALSE;
   gboolean          default_printer = FALSE;
   gboolean          printer_shared = FALSE;
+  gboolean          call_result;
   GError           *error = NULL;
   http_t           *http;
   gchar           **sheets = NULL;
@@ -1745,7 +1756,6 @@ printer_rename (const gchar *old_name,
 
   if (proxy)
     {
-
       if (printer_type & CUPS_PRINTER_CLASS)
         {
           if (member_names)
@@ -1753,24 +1763,26 @@ printer_rename (const gchar *old_name,
               class_add_printer (new_name, member_names[i]);
         }
       else
-        dbus_g_proxy_call (proxy, "PrinterAddWithPpdFile", &error,
-                           G_TYPE_STRING, new_name,
-                           G_TYPE_STRING, device_uri,
-                           G_TYPE_STRING, ppd_filename,
-                           G_TYPE_STRING, printer_info,
-                           G_TYPE_STRING, printer_location,
-                           G_TYPE_INVALID,
-                           G_TYPE_STRING, &ret_error,
-                           G_TYPE_INVALID);
-
-      if (error)
         {
-          g_warning ("%s", error->message);
-          g_clear_error (&error);
-        }
+          call_result = dbus_g_proxy_call (proxy, "PrinterAddWithPpdFile", &error,
+                                           G_TYPE_STRING, new_name,
+                                           G_TYPE_STRING, device_uri,
+                                           G_TYPE_STRING, ppd_filename,
+                                           G_TYPE_STRING, printer_info,
+                                           G_TYPE_STRING, printer_location,
+                                           G_TYPE_INVALID,
+                                           G_TYPE_STRING, &ret_error,
+                                           G_TYPE_INVALID);
 
-      if (ret_error && ret_error[0] != '\0')
-        g_warning ("%s", ret_error);
+          if (!call_result)
+            {
+              g_warning ("%s", error->message);
+              g_error_free (error);
+            }
+
+          if (ret_error && ret_error[0] != '\0')
+            g_warning ("%s", ret_error);
+        }
 
       g_object_unref (proxy);
     }
@@ -1818,42 +1830,41 @@ printer_set_location (const gchar *printer_name,
                       const gchar *location)
 {
   DBusGProxy *proxy;
-  gboolean    result = TRUE;
+  gboolean    result;
   GError     *error = NULL;
   char       *ret_error = NULL;
 
-  if (printer_name && location)
+  if (!printer_name || !location)
+    return TRUE;
+
+  proxy = get_dbus_proxy (MECHANISM_BUS,
+                          "/",
+                          MECHANISM_BUS,
+                          TRUE);
+
+  if (!proxy)
+    return TRUE;
+
+  result = dbus_g_proxy_call (proxy, "PrinterSetLocation", &error,
+                              G_TYPE_STRING, printer_name,
+                              G_TYPE_STRING, location,
+                              G_TYPE_INVALID,
+                              G_TYPE_STRING, &ret_error,
+                              G_TYPE_INVALID);
+
+  if (!result)
     {
-      proxy = get_dbus_proxy (MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              TRUE);
-
-      if (proxy)
-        {
-          dbus_g_proxy_call (proxy, "PrinterSetLocation", &error,
-                             G_TYPE_STRING, printer_name,
-                             G_TYPE_STRING, location,
-                             G_TYPE_INVALID,
-                             G_TYPE_STRING, &ret_error,
-                             G_TYPE_INVALID);
-
-          if (error)
-            {
-              g_warning ("%s", error->message);
-              g_clear_error (&error);
-              result = FALSE;
-            }
-
-          if (ret_error && ret_error[0] != '\0')
-            {
-              g_warning ("%s", ret_error);
-              result = FALSE;
-            }
-
-          g_object_unref (proxy);
-        }
+      g_warning ("%s", error->message);
+      g_error_free (error);
     }
+
+  if (ret_error && ret_error[0] != '\0')
+    {
+      g_warning ("%s", ret_error);
+      result = FALSE;
+    }
+
+  g_object_unref (proxy);
 
   return result;
 }
@@ -1864,43 +1875,42 @@ printer_set_accepting_jobs (const gchar *printer_name,
                             const gchar *reason)
 {
   DBusGProxy *proxy;
-  gboolean    result = TRUE;
+  gboolean    result;
   GError     *error = NULL;
   char       *ret_error = NULL;
 
-  if (printer_name)
+  if (!printer_name)
+    return TRUE;
+
+  proxy = get_dbus_proxy (MECHANISM_BUS,
+                          "/",
+                          MECHANISM_BUS,
+                          TRUE);
+
+  if (!proxy)
+    return TRUE;
+
+  result = dbus_g_proxy_call (proxy, "PrinterSetAcceptJobs", &error,
+                              G_TYPE_STRING, printer_name,
+                              G_TYPE_BOOLEAN, accepting_jobs,
+                              G_TYPE_STRING, reason,
+                              G_TYPE_INVALID,
+                              G_TYPE_STRING, &ret_error,
+                              G_TYPE_INVALID);
+
+  if (!result)
     {
-      proxy = get_dbus_proxy (MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              TRUE);
-
-      if (proxy)
-        {
-          dbus_g_proxy_call (proxy, "PrinterSetAcceptJobs", &error,
-                             G_TYPE_STRING, printer_name,
-                             G_TYPE_BOOLEAN, accepting_jobs,
-                             G_TYPE_STRING, reason,
-                             G_TYPE_INVALID,
-                             G_TYPE_STRING, &ret_error,
-                             G_TYPE_INVALID);
-
-          if (error)
-            {
-              g_warning ("%s", error->message);
-              g_clear_error (&error);
-              result = FALSE;
-            }
-
-          if (ret_error && ret_error[0] != '\0')
-            {
-              g_warning ("%s", ret_error);
-              result = FALSE;
-            }
-
-          g_object_unref (proxy);
-        }
+      g_warning ("%s", error->message);
+      g_error_free (error);
     }
+
+  if (ret_error && ret_error[0] != '\0')
+    {
+      g_warning ("%s", ret_error);
+      result = FALSE;
+    }
+
+  g_object_unref (proxy);
 
   return result;
 }
@@ -1910,42 +1920,41 @@ printer_set_enabled (const gchar *printer_name,
                      gboolean     enabled)
 {
   DBusGProxy *proxy;
-  gboolean    result = TRUE;
+  gboolean    result;
   GError     *error = NULL;
   char       *ret_error = NULL;
 
-  if (printer_name)
+  if (!printer_name)
+    return TRUE;
+
+  proxy = get_dbus_proxy (MECHANISM_BUS,
+                          "/",
+                          MECHANISM_BUS,
+                          TRUE);
+
+  if (!proxy)
+    return TRUE;
+
+  result = dbus_g_proxy_call (proxy, "PrinterSetEnabled", &error,
+                              G_TYPE_STRING, printer_name,
+                              G_TYPE_BOOLEAN, enabled,
+                              G_TYPE_INVALID,
+                              G_TYPE_STRING, &ret_error,
+                              G_TYPE_INVALID);
+
+  if (!result)
     {
-      proxy = get_dbus_proxy (MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              TRUE);
-
-      if (proxy)
-        {
-          dbus_g_proxy_call (proxy, "PrinterSetEnabled", &error,
-                             G_TYPE_STRING, printer_name,
-                             G_TYPE_BOOLEAN, enabled,
-                             G_TYPE_INVALID,
-                             G_TYPE_STRING, &ret_error,
-                             G_TYPE_INVALID);
-
-          if (error)
-            {
-              g_warning ("%s", error->message);
-              g_clear_error (&error);
-              result = FALSE;
-            }
-
-          if (ret_error && ret_error[0] != '\0')
-            {
-              g_warning ("%s", ret_error);
-              result = FALSE;
-            }
-
-          g_object_unref (proxy);
-        }
+      g_warning ("%s", error->message);
+      g_error_free (error);
     }
+
+  if (ret_error && ret_error[0] != '\0')
+    {
+      g_warning ("%s", ret_error);
+      result = FALSE;
+    }
+
+  g_object_unref (proxy);
 
   return result;
 }
@@ -1954,41 +1963,40 @@ gboolean
 printer_delete (const gchar *printer_name)
 {
   DBusGProxy *proxy;
-  gboolean    result = TRUE;
+  gboolean    result;
   GError     *error = NULL;
   char       *ret_error = NULL;
 
-  if (printer_name)
+  if (!printer_name)
+    return TRUE;
+
+  proxy = get_dbus_proxy (MECHANISM_BUS,
+                          "/",
+                          MECHANISM_BUS,
+                          TRUE);
+
+  if (!proxy)
+    return TRUE;
+
+  result = dbus_g_proxy_call (proxy, "PrinterDelete", &error,
+                              G_TYPE_STRING, printer_name,
+                              G_TYPE_INVALID,
+                              G_TYPE_STRING, &ret_error,
+                              G_TYPE_INVALID);
+
+  if (!result)
     {
-      proxy = get_dbus_proxy (MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              TRUE);
-
-      if (proxy)
-        {
-          dbus_g_proxy_call (proxy, "PrinterDelete", &error,
-                             G_TYPE_STRING, printer_name,
-                             G_TYPE_INVALID,
-                             G_TYPE_STRING, &ret_error,
-                             G_TYPE_INVALID);
-
-          if (error)
-            {
-              g_warning ("%s", error->message);
-              g_clear_error (&error);
-              result = FALSE;
-            }
-
-          if (ret_error && ret_error[0] != '\0')
-            {
-              g_warning ("%s", ret_error);
-              result = FALSE;
-            }
-
-          g_object_unref (proxy);
-        }
+      g_warning ("%s", error->message);
+      g_error_free (error);
     }
+
+  if (ret_error && ret_error[0] != '\0')
+    {
+      g_warning ("%s", ret_error);
+      result = FALSE;
+    }
+
+  g_object_unref (proxy);
 
   return result;
 }
@@ -2002,55 +2010,54 @@ printer_set_default (const gchar *printer_name)
   GError     *error = NULL;
   char       *ret_error = NULL;
 
-  if (printer_name)
+  if (!printer_name)
+    return TRUE;
+
+  cups_server = cupsServer ();
+  if (g_ascii_strncasecmp (cups_server, "localhost", 9) == 0 ||
+      g_ascii_strncasecmp (cups_server, "127.0.0.1", 9) == 0 ||
+      g_ascii_strncasecmp (cups_server, "::1", 3) == 0 ||
+      cups_server[0] == '/')
     {
-      cups_server = cupsServer ();
-      if (g_ascii_strncasecmp (cups_server, "localhost", 9) == 0 ||
-          g_ascii_strncasecmp (cups_server, "127.0.0.1", 9) == 0 ||
-          g_ascii_strncasecmp (cups_server, "::1", 3) == 0 ||
-          cups_server[0] == '/')
+      /* Clean .cups/lpoptions before setting
+       * default printer on local CUPS server.
+       */
+      set_local_default_printer (NULL);
+
+      proxy = get_dbus_proxy (MECHANISM_BUS,
+                              "/",
+                              MECHANISM_BUS,
+                              TRUE);
+
+      if (proxy)
         {
-          /* Clean .cups/lpoptions before setting
-           * default printer on local CUPS server.
-           */
-          set_local_default_printer (NULL);
+          result = dbus_g_proxy_call (proxy, "PrinterSetDefault", &error,
+                                      G_TYPE_STRING, printer_name,
+                                      G_TYPE_INVALID,
+                                      G_TYPE_STRING, &ret_error,
+                                      G_TYPE_INVALID);
 
-          proxy = get_dbus_proxy (MECHANISM_BUS,
-                                  "/",
-                                  MECHANISM_BUS,
-                                  TRUE);
-
-          if (proxy)
+          if (!result)
             {
-              dbus_g_proxy_call (proxy, "PrinterSetDefault", &error,
-                                 G_TYPE_STRING, printer_name,
-                                 G_TYPE_INVALID,
-                                 G_TYPE_STRING, &ret_error,
-                                 G_TYPE_INVALID);
-
-              if (error)
-                {
-                  g_warning ("%s", error->message);
-                  g_clear_error (&error);
-                  result = FALSE;
-                }
-
-              if (ret_error && ret_error[0] != '\0')
-                {
-                  g_warning ("%s", ret_error);
-                  result = FALSE;
-                }
-
-              g_object_unref (proxy);
+              g_warning ("%s", error->message);
+              g_error_free (error);
             }
+
+          if (ret_error && ret_error[0] != '\0')
+            {
+              g_warning ("%s", ret_error);
+              result = FALSE;
+            }
+
+          g_object_unref (proxy);
         }
-      else
-        /* Store default printer to .cups/lpoptions
-         * if we are connected to a remote CUPS server.
-         */
-        {
-          set_local_default_printer (printer_name);
-        }
+    }
+  else
+    /* Store default printer to .cups/lpoptions
+     * if we are connected to a remote CUPS server.
+     */
+    {
+      set_local_default_printer (printer_name);
     }
 
   return result;
@@ -2061,42 +2068,41 @@ printer_set_shared (const gchar *printer_name,
                     gboolean     shared)
 {
   DBusGProxy *proxy;
-  gboolean    result = TRUE;
+  gboolean    result;
   GError     *error = NULL;
   char       *ret_error = NULL;
 
-  if (printer_name)
+  if (!printer_name)
+    return TRUE;
+
+  proxy = get_dbus_proxy (MECHANISM_BUS,
+                          "/",
+                          MECHANISM_BUS,
+                          TRUE);
+
+  if (!proxy)
+    return TRUE;
+
+  result = dbus_g_proxy_call (proxy, "PrinterSetShared", &error,
+                              G_TYPE_STRING, printer_name,
+                              G_TYPE_BOOLEAN, shared,
+                              G_TYPE_INVALID,
+                              G_TYPE_STRING, &ret_error,
+                              G_TYPE_INVALID);
+
+  if (!result)
     {
-      proxy = get_dbus_proxy (MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              TRUE);
-
-      if (proxy)
-        {
-          dbus_g_proxy_call (proxy, "PrinterSetShared", &error,
-                             G_TYPE_STRING, printer_name,
-                             G_TYPE_BOOLEAN, shared,
-                             G_TYPE_INVALID,
-                             G_TYPE_STRING, &ret_error,
-                             G_TYPE_INVALID);
-
-          if (error)
-            {
-              g_warning ("%s", error->message);
-              g_clear_error (&error);
-              result = FALSE;
-            }
-
-          if (ret_error && ret_error[0] != '\0')
-            {
-              g_warning ("%s", ret_error);
-              result = FALSE;
-            }
-
-          g_object_unref (proxy);
-        }
+      g_warning ("%s", error->message);
+      g_error_free (error);
     }
+
+  if (ret_error && ret_error[0] != '\0')
+    {
+      g_warning ("%s", ret_error);
+      result = FALSE;
+    }
+
+  g_object_unref (proxy);
 
   return result;
 }
@@ -2107,43 +2113,42 @@ printer_set_job_sheets (const gchar *printer_name,
                         const gchar *end_sheet)
 {
   DBusGProxy *proxy;
-  gboolean    result = TRUE;
+  gboolean    result;
   GError     *error = NULL;
   char       *ret_error = NULL;
 
-  if (printer_name && start_sheet && end_sheet)
+  if (!printer_name || !start_sheet || !end_sheet)
+    return TRUE;
+
+  proxy = get_dbus_proxy (MECHANISM_BUS,
+                          "/",
+                          MECHANISM_BUS,
+                          TRUE);
+
+  if (!proxy)
+    return TRUE;
+
+  result = dbus_g_proxy_call (proxy, "PrinterSetJobSheets", &error,
+                              G_TYPE_STRING, printer_name,
+                              G_TYPE_STRING, start_sheet,
+                              G_TYPE_STRING, end_sheet,
+                              G_TYPE_INVALID,
+                              G_TYPE_STRING, &ret_error,
+                              G_TYPE_INVALID);
+
+  if (!result)
     {
-      proxy = get_dbus_proxy (MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              TRUE);
-
-      if (proxy)
-        {
-          dbus_g_proxy_call (proxy, "PrinterSetJobSheets", &error,
-                             G_TYPE_STRING, printer_name,
-                             G_TYPE_STRING, start_sheet,
-                             G_TYPE_STRING, end_sheet,
-                             G_TYPE_INVALID,
-                             G_TYPE_STRING, &ret_error,
-                             G_TYPE_INVALID);
-
-          if (error)
-            {
-              g_warning ("%s", error->message);
-              g_clear_error (&error);
-              result = FALSE;
-            }
-
-          if (ret_error && ret_error[0] != '\0')
-            {
-              g_warning ("%s", ret_error);
-              result = FALSE;
-            }
-
-          g_object_unref (proxy);
-        }
+      g_warning ("%s", error->message);
+      g_error_free (error);
     }
+
+  if (ret_error && ret_error[0] != '\0')
+    {
+      g_warning ("%s", ret_error);
+      result = FALSE;
+    }
+
+  g_object_unref (proxy);
 
   return result;
 }
@@ -2154,50 +2159,49 @@ printer_set_policy (const gchar *printer_name,
                     gboolean     error_policy)
 {
   DBusGProxy *proxy;
-  gboolean    result = TRUE;
+  gboolean    result;
   GError     *error = NULL;
   char       *ret_error = NULL;
 
-  if (printer_name && policy)
+  if (!printer_name || !policy)
+    return TRUE;
+
+  proxy = get_dbus_proxy (MECHANISM_BUS,
+                          "/",
+                          MECHANISM_BUS,
+                          TRUE);
+
+  if (!proxy)
+    return TRUE;
+
+  if (error_policy)
+    result = dbus_g_proxy_call (proxy, "PrinterSetErrorPolicy", &error,
+                                G_TYPE_STRING, printer_name,
+                                G_TYPE_STRING, policy,
+                                G_TYPE_INVALID,
+                                G_TYPE_STRING, &ret_error,
+                                G_TYPE_INVALID);
+  else
+    result = dbus_g_proxy_call (proxy, "PrinterSetOpPolicy", &error,
+                                G_TYPE_STRING, printer_name,
+                                G_TYPE_STRING, policy,
+                                G_TYPE_INVALID,
+                                G_TYPE_STRING, &ret_error,
+                                G_TYPE_INVALID);
+
+  if (!result)
     {
-      proxy = get_dbus_proxy (MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              TRUE);
-
-      if (proxy)
-        {
-          if (error_policy)
-            dbus_g_proxy_call (proxy, "PrinterSetErrorPolicy", &error,
-                               G_TYPE_STRING, printer_name,
-                               G_TYPE_STRING, policy,
-                               G_TYPE_INVALID,
-                               G_TYPE_STRING, &ret_error,
-                               G_TYPE_INVALID);
-          else
-            dbus_g_proxy_call (proxy, "PrinterSetOpPolicy", &error,
-                               G_TYPE_STRING, printer_name,
-                               G_TYPE_STRING, policy,
-                               G_TYPE_INVALID,
-                               G_TYPE_STRING, &ret_error,
-                               G_TYPE_INVALID);
-
-          if (error)
-            {
-              g_warning ("%s", error->message);
-              g_clear_error (&error);
-              result = FALSE;
-            }
-
-          if (ret_error && ret_error[0] != '\0')
-            {
-              g_warning ("%s", ret_error);
-              result = FALSE;
-            }
-
-          g_object_unref (proxy);
-        }
+      g_warning ("%s", error->message);
+      g_error_free (error);
     }
+
+  if (ret_error && ret_error[0] != '\0')
+    {
+      g_warning ("%s", ret_error);
+      result = FALSE;
+    }
+
+  g_object_unref (proxy);
 
   return result;
 }
@@ -2208,50 +2212,49 @@ printer_set_users (const gchar  *printer_name,
                    gboolean      allowed)
 {
   DBusGProxy *proxy;
-  gboolean    result = TRUE;
+  gboolean    result;
   GError     *error = NULL;
   char       *ret_error = NULL;
 
-  if (printer_name && users)
+  if (!printer_name || !users)
+    return TRUE;
+
+  proxy = get_dbus_proxy (MECHANISM_BUS,
+                          "/",
+                          MECHANISM_BUS,
+                          TRUE);
+
+  if (!proxy)
+    return TRUE;
+
+  if (allowed)
+    result = dbus_g_proxy_call (proxy, "PrinterSetUsersAllowed", &error,
+                                G_TYPE_STRING, printer_name,
+                                G_TYPE_STRV, users,
+                                G_TYPE_INVALID,
+                                G_TYPE_STRING, &ret_error,
+                                G_TYPE_INVALID);
+  else
+    result = dbus_g_proxy_call (proxy, "PrinterSetUsersDenied", &error,
+                                G_TYPE_STRING, printer_name,
+                                G_TYPE_STRV, users,
+                                G_TYPE_INVALID,
+                                G_TYPE_STRING, &ret_error,
+                                G_TYPE_INVALID);
+
+  if (!result)
     {
-      proxy = get_dbus_proxy (MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              TRUE);
-
-      if (proxy)
-        {
-          if (allowed)
-            dbus_g_proxy_call (proxy, "PrinterSetUsersAllowed", &error,
-                               G_TYPE_STRING, printer_name,
-                               G_TYPE_STRV, users,
-                               G_TYPE_INVALID,
-                               G_TYPE_STRING, &ret_error,
-                               G_TYPE_INVALID);
-          else
-            dbus_g_proxy_call (proxy, "PrinterSetUsersDenied", &error,
-                               G_TYPE_STRING, printer_name,
-                               G_TYPE_STRV, users,
-                               G_TYPE_INVALID,
-                               G_TYPE_STRING, &ret_error,
-                               G_TYPE_INVALID);
-
-          if (error)
-            {
-              g_warning ("%s", error->message);
-              g_clear_error (&error);
-              result = FALSE;
-            }
-
-          if (ret_error && ret_error[0] != '\0')
-            {
-              g_warning ("%s", ret_error);
-              result = FALSE;
-            }
-
-          g_object_unref (proxy);
-        }
+      g_warning ("%s", error->message);
+      g_error_free (error);
     }
+
+  if (ret_error && ret_error[0] != '\0')
+    {
+      g_warning ("%s", ret_error);
+      result = FALSE;
+    }
+
+  g_object_unref (proxy);
 
   return result;
 }
@@ -2261,42 +2264,41 @@ class_add_printer (const gchar *class_name,
                    const gchar *printer_name)
 {
   DBusGProxy *proxy;
-  gboolean    result = TRUE;
+  gboolean    result;
   GError     *error = NULL;
   char       *ret_error = NULL;
 
-  if (class_name && printer_name)
+  if (!class_name || !printer_name)
+    return TRUE;
+
+  proxy = get_dbus_proxy (MECHANISM_BUS,
+                          "/",
+                          MECHANISM_BUS,
+                          TRUE);
+
+  if (!proxy)
+    return TRUE;
+
+  result = dbus_g_proxy_call (proxy, "ClassAddPrinter", &error,
+                              G_TYPE_STRING, class_name,
+                              G_TYPE_STRING, printer_name,
+                              G_TYPE_INVALID,
+                              G_TYPE_STRING, &ret_error,
+                              G_TYPE_INVALID);
+
+  if (!result)
     {
-      proxy = get_dbus_proxy (MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              TRUE);
-
-      if (proxy)
-        {
-          dbus_g_proxy_call (proxy, "ClassAddPrinter", &error,
-                             G_TYPE_STRING, class_name,
-                             G_TYPE_STRING, printer_name,
-                             G_TYPE_INVALID,
-                             G_TYPE_STRING, &ret_error,
-                             G_TYPE_INVALID);
-
-          if (error)
-            {
-              g_warning ("%s", error->message);
-              g_clear_error (&error);
-              result = FALSE;
-            }
-
-          if (ret_error && ret_error[0] != '\0')
-            {
-              g_warning ("%s", ret_error);
-              result = FALSE;
-            }
-
-          g_object_unref (proxy);
-        }
+      g_warning ("%s", error->message);
+      g_error_free (error);
     }
+
+  if (ret_error && ret_error[0] != '\0')
+    {
+      g_warning ("%s", ret_error);
+      result = FALSE;
+    }
+
+  g_object_unref (proxy);
 
   return result;
 }

@@ -338,9 +338,16 @@ devices_get_cb (GObject      *source_object,
                                         res,
                                         &error);
 
-  if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+  /* Do nothing if cancelled */
+  if (!dg_output && g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     {
-      if (dg_output && g_variant_n_children (dg_output) == 2)
+      g_error_free (error);
+      return;
+    }
+
+  if (dg_output)
+    {
+      if (g_variant_n_children (dg_output) == 2)
         {
           GVariant *devices_variant = NULL;
 
@@ -372,237 +379,235 @@ devices_get_cb (GObject      *source_object,
                 }
               g_variant_unref (devices_variant);
             }
-          g_variant_unref (dg_output);
         }
-      g_object_unref (source_object);
+      g_variant_unref (dg_output);
+    }
+  else
+    {
+      g_warning ("%s", error->message);
+      g_error_free (error);
+    }
 
-      if (error || (ret_error && ret_error[0] != '\0'))
+  g_object_unref (source_object);
+
+  if (ret_error && ret_error[0] != '\0')
+    g_warning ("%s", ret_error);
+
+  free_devices (pp);
+  if (devices)
+    {
+      GList *keys;
+      GList *iter;
+      gchar *cut;
+      gint   max_index = -1;
+      gint   index;
+
+      keys = g_hash_table_get_keys (devices);
+      for (iter = keys; iter; iter = iter->next)
         {
-          if (error)
-            g_warning ("%s", error->message);
+          index = -1;
 
-          if (ret_error && ret_error[0] != '\0')
-            g_warning ("%s", ret_error);
+          cut = g_strrstr ((gchar *)iter->data, ":");
+          if (cut)
+            index = atoi (cut + 1);
+
+          if (index > max_index)
+            max_index = index;
         }
 
-      free_devices (pp);
-      if (devices)
+      if (max_index >= 0)
         {
-          GList *keys;
-          GList *iter;
-          gchar *cut;
-          gint   max_index = -1;
-          gint   index;
+          pp->num_devices = max_index + 1;
+          pp->devices = g_new0 (CupsDevice, pp->num_devices);
 
-          keys = g_hash_table_get_keys (devices);
-          for (iter = keys; iter; iter = iter->next)
+          g_hash_table_foreach (devices, store_device_parameter, pp);
+
+          /* Assign names to devices */
+          for (i = 0; i < pp->num_devices; i++)
             {
-              index = -1;
+              gchar *name = NULL;
 
-              cut = g_strrstr ((gchar *)iter->data, ":");
-              if (cut)
-                index = atoi (cut + 1);
-
-              if (index > max_index)
-                max_index = index;
-            }
-
-          if (max_index >= 0)
-            {
-              pp->num_devices = max_index + 1;
-              pp->devices = g_new0 (CupsDevice, pp->num_devices);
-
-              g_hash_table_foreach (devices, store_device_parameter, pp);
-
-              /* Assign names to devices */
-              for (i = 0; i < pp->num_devices; i++)
+              if (pp->devices[i].device_id)
                 {
-                  gchar *name = NULL;
+                  name = get_tag_value (pp->devices[i].device_id, "mdl");
+                  if (!name)
+                    name = get_tag_value (pp->devices[i].device_id, "model");
 
-                  if (pp->devices[i].device_id)
-                    {
-                      name = get_tag_value (pp->devices[i].device_id, "mdl");
-                      if (!name)
-                        name = get_tag_value (pp->devices[i].device_id, "model");
-
-                      if (name)
-                        name = g_strcanon (name, ALLOWED_CHARACTERS, '-');
-                    }
-
-                  if (!name &&
-                      pp->devices[i].device_info)
-                    {
-                      name = g_strdup (pp->devices[i].device_info);
-                      if (name)
-                        name = g_strcanon (name, ALLOWED_CHARACTERS, '-');
-                    }
-
-                  name_index = 2;
-                  already_present = FALSE;
-                  num_dests = cupsGetDests (&dests);
-                  do
-                    {
-                      if (already_present)
-                        {
-                          new_name = g_strdup_printf ("%s-%d", name, name_index);
-                          name_index++;
-                        }
-                      else
-                        new_name = g_strdup (name);
-
-                      already_present = FALSE;
-                      for (j = 0; j < num_dests; j++)
-                        if (g_strcmp0 (dests[j].name, new_name) == 0)
-                          already_present = TRUE;
-
-                      if (already_present)
-                        g_free (new_name);
-                      else
-                        {
-                          g_free (name);
-                          name = new_name;
-                        }
-                    } while (already_present);
-                  cupsFreeDests (num_dests, dests);
-
-                  pp->devices[i].display_name = name;
+                  if (name)
+                    name = g_strcanon (name, ALLOWED_CHARACTERS, '-');
                 }
 
-              /* Set show bool
-               * Don't show duplicates.
-               * Show devices with device-id.
-               * Other preferences should apply here.
-               */
-              proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-                                                     G_DBUS_PROXY_FLAGS_NONE,
-                                                     NULL,
-                                                     SCP_BUS,
-                                                     SCP_PATH,
-                                                     SCP_IFACE,
-                                                     NULL,
-                                                     &error);
-
-              if (proxy)
+              if (!name &&
+                  pp->devices[i].device_info)
                 {
-                  GVariantBuilder  device_list;
-                  GVariantBuilder  device_hash;
-                  GVariant        *input = NULL;
-                  GVariant        *output = NULL;
-                  GVariant        *array = NULL;
-                  GVariant        *subarray = NULL;
+                  name = g_strdup (pp->devices[i].device_info);
+                  if (name)
+                    name = g_strcanon (name, ALLOWED_CHARACTERS, '-');
+                }
 
-                  g_variant_builder_init (&device_list, G_VARIANT_TYPE ("a{sv}"));
-
-                  for (i = 0; i < pp->num_devices; i++)
+              name_index = 2;
+              already_present = FALSE;
+              num_dests = cupsGetDests (&dests);
+              do
+                {
+                  if (already_present)
                     {
-                      if (pp->devices[i].device_uri)
-                        {
-                          g_variant_builder_init (&device_hash, G_VARIANT_TYPE ("a{ss}"));
-
-                          if (pp->devices[i].device_id)
-                            g_variant_builder_add (&device_hash,
-                                                   "{ss}",
-                                                   "device-id",
-                                                   pp->devices[i].device_id);
-
-                          if (pp->devices[i].device_make_and_model)
-                            g_variant_builder_add (&device_hash,
-                                                   "{ss}",
-                                                   "device-make-and-model",
-                                                   pp->devices[i].device_make_and_model);
-
-                          if (pp->devices[i].device_class)
-                            g_variant_builder_add (&device_hash,
-                                                   "{ss}",
-                                                   "device-class",
-                                                   pp->devices[i].device_class);
-
-                          g_variant_builder_add (&device_list,
-                                                 "{sv}",
-                                                 pp->devices[i].device_uri,
-                                                 g_variant_builder_end (&device_hash));
-                        }
+                      new_name = g_strdup_printf ("%s-%d", name, name_index);
+                      name_index++;
                     }
+                  else
+                    new_name = g_strdup (name);
 
-                  input = g_variant_new ("(v)", g_variant_builder_end (&device_list));
+                  already_present = FALSE;
+                  for (j = 0; j < num_dests; j++)
+                    if (g_strcmp0 (dests[j].name, new_name) == 0)
+                      already_present = TRUE;
 
-                  output = g_dbus_proxy_call_sync (proxy,
-                                                   "GroupPhysicalDevices",
-                                                   input,
-                                                   G_DBUS_CALL_FLAGS_NONE,
-                                                   60000,
-                                                   NULL,
-                                                   &error);
-
-                  if (output && g_variant_n_children (output) == 1)
+                  if (already_present)
+                    g_free (new_name);
+                  else
                     {
-                      array = g_variant_get_child_value (output, 0);
-                      if (array)
+                      g_free (name);
+                      name = new_name;
+                    }
+                } while (already_present);
+              cupsFreeDests (num_dests, dests);
+
+              pp->devices[i].display_name = name;
+            }
+
+          /* Set show bool
+           * Don't show duplicates.
+           * Show devices with device-id.
+           * Other preferences should apply here.
+           */
+          proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                                 G_DBUS_PROXY_FLAGS_NONE,
+                                                 NULL,
+                                                 SCP_BUS,
+                                                 SCP_PATH,
+                                                 SCP_IFACE,
+                                                 NULL,
+                                                 &error);
+
+          if (proxy)
+            {
+              GVariantBuilder  device_list;
+              GVariantBuilder  device_hash;
+              GVariant        *input = NULL;
+              GVariant        *output = NULL;
+              GVariant        *array = NULL;
+              GVariant        *subarray = NULL;
+
+              g_variant_builder_init (&device_list, G_VARIANT_TYPE ("a{sv}"));
+
+              for (i = 0; i < pp->num_devices; i++)
+                {
+                  if (pp->devices[i].device_uri)
+                    {
+                      g_variant_builder_init (&device_hash, G_VARIANT_TYPE ("a{ss}"));
+
+                      if (pp->devices[i].device_id)
+                        g_variant_builder_add (&device_hash,
+                                               "{ss}",
+                                               "device-id",
+                                               pp->devices[i].device_id);
+
+                      if (pp->devices[i].device_make_and_model)
+                        g_variant_builder_add (&device_hash,
+                                               "{ss}",
+                                               "device-make-and-model",
+                                               pp->devices[i].device_make_and_model);
+
+                      if (pp->devices[i].device_class)
+                        g_variant_builder_add (&device_hash,
+                                               "{ss}",
+                                               "device-class",
+                                               pp->devices[i].device_class);
+
+                      g_variant_builder_add (&device_list,
+                                             "{sv}",
+                                             pp->devices[i].device_uri,
+                                             g_variant_builder_end (&device_hash));
+                    }
+                }
+
+              input = g_variant_new ("(v)", g_variant_builder_end (&device_list));
+
+              output = g_dbus_proxy_call_sync (proxy,
+                                               "GroupPhysicalDevices",
+                                               input,
+                                               G_DBUS_CALL_FLAGS_NONE,
+                                               60000,
+                                               NULL,
+                                               &error);
+
+              if (output && g_variant_n_children (output) == 1)
+                {
+                  array = g_variant_get_child_value (output, 0);
+                  if (array)
+                    {
+                      for (i = 0; i < g_variant_n_children (array); i++)
                         {
-                          for (i = 0; i < g_variant_n_children (array); i++)
+                          subarray = g_variant_get_child_value (array, i);
+                          if (subarray)
                             {
-                              subarray = g_variant_get_child_value (array, i);
-                              if (subarray)
-                                {
-                                  device_uri = g_strdup (g_variant_get_string (
-                                                 g_variant_get_child_value (subarray, 0),
-                                                 NULL));
+                              device_uri = g_strdup (g_variant_get_string (
+                                             g_variant_get_child_value (subarray, 0),
+                                             NULL));
 
-                                  for (k = 0; k < pp->num_devices; k++)
-                                    if (g_str_has_prefix (pp->devices[k].device_uri, device_uri))
-                                      pp->devices[k].show = TRUE;
+                              for (k = 0; k < pp->num_devices; k++)
+                                if (g_str_has_prefix (pp->devices[k].device_uri, device_uri))
+                                  pp->devices[k].show = TRUE;
 
-                                  g_free (device_uri);
-                                }
+                              g_free (device_uri);
                             }
                         }
                     }
-
-                  if (output)
-                    g_variant_unref (output);
-                  g_variant_unref (input);
-                  g_object_unref (proxy);
                 }
 
-              if (error)
-                {
-                  if (proxy == NULL ||
-                      (error->domain == G_DBUS_ERROR &&
-                       (error->code == G_DBUS_ERROR_SERVICE_UNKNOWN ||
-                        error->code == G_DBUS_ERROR_UNKNOWN_METHOD)))
-                    g_warning ("Install system-config-printer which provides \
-DBus method \"GroupPhysicalDevices\" to group duplicates in device list.");
-
-                  for (i = 0; i < pp->num_devices; i++)
-                    pp->devices[i].show = TRUE;
-                }
-
-              for (i = 0; i < pp->num_devices; i++)
-                if (!pp->devices[i].device_id)
-                  pp->devices[i].show = FALSE;
+              if (output)
+                g_variant_unref (output);
+              g_variant_unref (input);
+              g_object_unref (proxy);
             }
 
-          g_hash_table_destroy (devices);
-          actualize_devices_list (pp);
+          if (error)
+            {
+              if (proxy == NULL ||
+                  (error->domain == G_DBUS_ERROR &&
+                   (error->code == G_DBUS_ERROR_SERVICE_UNKNOWN ||
+                    error->code == G_DBUS_ERROR_UNKNOWN_METHOD)))
+                g_warning ("Install system-config-printer which provides \
+DBus method \"GroupPhysicalDevices\" to group duplicates in device list.");
+
+              for (i = 0; i < pp->num_devices; i++)
+                pp->devices[i].show = TRUE;
+            }
+
+          for (i = 0; i < pp->num_devices; i++)
+            if (!pp->devices[i].device_id)
+              pp->devices[i].show = FALSE;
         }
 
-      widget = (GtkWidget*)
-        gtk_builder_get_object (pp->builder, "get-devices-status-label");
-      gtk_label_set_text (GTK_LABEL (widget), " ");
+      g_hash_table_destroy (devices);
+      actualize_devices_list (pp);
+    }
 
-      widget = (GtkWidget*)
-        gtk_builder_get_object (pp->builder, "spinner");
-      gtk_spinner_stop (GTK_SPINNER (widget));
-      gtk_widget_set_sensitive (widget, FALSE);
-      gtk_widget_hide (widget);
+  widget = (GtkWidget*)
+    gtk_builder_get_object (pp->builder, "get-devices-status-label");
+  gtk_label_set_text (GTK_LABEL (widget), " ");
 
-      if (pp->cancellable != NULL)
-        {
-          g_object_unref (pp->cancellable);
-          pp->cancellable = NULL;
-        }
+  widget = (GtkWidget*)
+    gtk_builder_get_object (pp->builder, "spinner");
+  gtk_spinner_stop (GTK_SPINNER (widget));
+  gtk_widget_set_sensitive (widget, FALSE);
+  gtk_widget_hide (widget);
 
-      g_clear_error (&error);
+  if (pp->cancellable != NULL)
+    {
+      g_object_unref (pp->cancellable);
+      pp->cancellable = NULL;
     }
 }
 
@@ -627,53 +632,58 @@ devices_get (PpNewPrinterDialog *pp)
                                          NULL,
                                          &error);
 
-  if (proxy)
+  if (!proxy)
     {
-      if (pp->show_warning)
-        {
-          widget = (GtkWidget*)
-            gtk_builder_get_object (pp->builder, "local-devices-notebook");
-          gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), WARNING_TAB);
-
-          widget = (GtkWidget*)
-            gtk_builder_get_object (pp->builder, "network-devices-notebook");
-          gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), WARNING_TAB);
-        }
-
-      in_include = g_variant_builder_new (G_VARIANT_TYPE ("as"));
-      in_exclude = g_variant_builder_new (G_VARIANT_TYPE ("as"));
-
-      dg_input = g_variant_new ("(iiasas)",
-                                0,
-                                60,
-                                in_include,
-                                in_exclude);
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (pp->builder, "get-devices-status-label");
-      gtk_label_set_text (GTK_LABEL (widget), _("Getting devices..."));
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (pp->builder, "spinner");
-      gtk_spinner_start (GTK_SPINNER (widget));
-      gtk_widget_set_sensitive (widget, TRUE);
-      gtk_widget_show (widget);
-
-      pp->cancellable = g_cancellable_new ();
-
-      g_dbus_proxy_call (proxy,
-                         "DevicesGet",
-                         dg_input,
-                         G_DBUS_CALL_FLAGS_NONE,
-                         60000,
-                         pp->cancellable,
-                         devices_get_cb,
-                         pp);
-
-      g_variant_builder_unref (in_exclude);
-      g_variant_builder_unref (in_include);
-      g_variant_unref (dg_input);
+      g_warning ("%s", error->message);
+      g_error_free (error);
+      pp->searching = FALSE;
+      return;
     }
+
+  if (pp->show_warning)
+    {
+      widget = (GtkWidget*)
+        gtk_builder_get_object (pp->builder, "local-devices-notebook");
+      gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), WARNING_TAB);
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (pp->builder, "network-devices-notebook");
+      gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), WARNING_TAB);
+    }
+
+  in_include = g_variant_builder_new (G_VARIANT_TYPE ("as"));
+  in_exclude = g_variant_builder_new (G_VARIANT_TYPE ("as"));
+
+  dg_input = g_variant_new ("(iiasas)",
+                            0,
+                            60,
+                            in_include,
+                            in_exclude);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (pp->builder, "get-devices-status-label");
+  gtk_label_set_text (GTK_LABEL (widget), _("Getting devices..."));
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (pp->builder, "spinner");
+  gtk_spinner_start (GTK_SPINNER (widget));
+  gtk_widget_set_sensitive (widget, TRUE);
+  gtk_widget_show (widget);
+
+  pp->cancellable = g_cancellable_new ();
+
+  g_dbus_proxy_call (proxy,
+                     "DevicesGet",
+                     dg_input,
+                     G_DBUS_CALL_FLAGS_NONE,
+                     60000,
+                     pp->cancellable,
+                     devices_get_cb,
+                     pp);
+
+  g_variant_builder_unref (in_exclude);
+  g_variant_builder_unref (in_include);
+  g_variant_unref (dg_input);
 
   pp->searching = FALSE;
 }
@@ -770,7 +780,6 @@ service_enable (gchar *service_name,
   GVariant   *input = NULL;
   GVariant   *output = NULL;
   GError     *error = NULL;
-  gint        result;
 
   proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                          G_DBUS_PROXY_FLAGS_NONE,
@@ -781,27 +790,36 @@ service_enable (gchar *service_name,
                                          NULL,
                                          &error);
 
-  if (proxy)
+  if (!proxy)
     {
-      input = g_variant_new ("(si)",
-                             service_name,
-                             service_timeout);
+      g_warning ("%s", error->message);
+      g_error_free (error);
+      return;
+    }
 
-      output = g_dbus_proxy_call_sync (proxy,
-                                       "enableService",
-                                       input,
-                                       G_DBUS_CALL_FLAGS_NONE,
-                                       60000,
-                                       NULL,
-                                       &error);
+  input = g_variant_new ("(si)",
+                         service_name,
+                         service_timeout);
 
-      if (output && g_variant_n_children (output) == 1)
-        g_variant_get (output, "(i)", &result);
+  output = g_dbus_proxy_call_sync (proxy,
+                                   "enableService",
+                                   input,
+                                   G_DBUS_CALL_FLAGS_NONE,
+                                   60000,
+                                   NULL,
+                                   &error);
 
-      if (output)
-        g_variant_unref (output);
-      g_variant_unref (input);
-      g_object_unref (proxy);
+  g_variant_unref (input);
+  g_object_unref (proxy);
+
+  if (output)
+    {
+      g_variant_unref (output);
+    }
+  else
+    {
+      g_warning ("%s", error->message);
+      g_error_free (error);
     }
 }
 
@@ -812,7 +830,6 @@ service_disable (gchar *service_name)
   GVariant   *input = NULL;
   GVariant   *output = NULL;
   GError     *error = NULL;
-  gint        result;
 
   proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                          G_DBUS_PROXY_FLAGS_NONE,
@@ -823,25 +840,34 @@ service_disable (gchar *service_name)
                                          NULL,
                                          &error);
 
-  if (proxy)
+  if (!proxy)
     {
-      input = g_variant_new ("(s)", service_name);
+      g_warning ("%s", error->message);
+      g_error_free (error);
+      return;
+    }
 
-      output = g_dbus_proxy_call_sync (proxy,
-                                       "disableService",
-                                       input,
-                                       G_DBUS_CALL_FLAGS_NONE,
-                                       60000,
-                                       NULL,
-                                       &error);
+  input = g_variant_new ("(s)", service_name);
 
-      if (output && g_variant_n_children (output) == 1)
-        g_variant_get (output, "(i)", &result);
+  output = g_dbus_proxy_call_sync (proxy,
+                                   "disableService",
+                                   input,
+                                   G_DBUS_CALL_FLAGS_NONE,
+                                   60000,
+                                   NULL,
+                                   &error);
 
-      if (output)
-        g_variant_unref (output);
-      g_variant_unref (input);
-      g_object_unref (proxy);
+  g_variant_unref (input);
+  g_object_unref (proxy);
+
+  if (output)
+    {
+      g_variant_unref (output);
+    }
+  else
+    {
+      g_warning ("%s", error->message);
+      g_error_free (error);
     }
 }
 
@@ -863,26 +889,38 @@ service_enabled (gchar *service_name)
                                          NULL,
                                          &error);
 
-  if (proxy)
+  if (!proxy)
     {
-      input = g_variant_new ("(s)",
-                             service_name);
+      g_warning ("%s", error->message);
+      g_error_free (error);
+      return FALSE;
+    }
 
-      output = g_dbus_proxy_call_sync (proxy,
-                                       "queryService",
-                                       input,
-                                       G_DBUS_CALL_FLAGS_NONE,
-                                       60000,
-                                       NULL,
-                                       &error);
+  input = g_variant_new ("(s)",
+                         service_name);
 
-      if (output && g_variant_n_children (output) == 1)
+  output = g_dbus_proxy_call_sync (proxy,
+                                   "queryService",
+                                   input,
+                                   G_DBUS_CALL_FLAGS_NONE,
+                                   60000,
+                                   NULL,
+                                   &error);
+
+  g_variant_unref (input);
+  g_object_unref (proxy);
+
+  if (output)
+    {
+      if (g_variant_n_children (output) == 1)
         g_variant_get (output, "(i)", &query_result);
-
-      if (output)
-        g_variant_unref (output);
-      g_variant_unref (input);
-      g_object_unref (proxy);
+      g_variant_unref (output);
+    }
+  else
+    {
+      g_warning ("%s", error->message);
+      g_error_free (error);
+      return FALSE;
     }
 
   if (query_result > 0)
@@ -911,26 +949,35 @@ dbus_method_available (gchar *name,
                                          NULL,
                                          NULL);
 
-  if (proxy)
+  if (!proxy)
     {
-      output = g_dbus_proxy_call_sync (proxy,
-                                       method,
-                                       NULL,
-                                       G_DBUS_CALL_FLAGS_NONE,
-                                       60000,
-                                       NULL,
-                                       &error);
+      g_warning ("%s", error->message);
+      g_error_free (error);
+      return FALSE;
+    }
 
-      if (error &&
-          error->domain == G_DBUS_ERROR &&
+  output = g_dbus_proxy_call_sync (proxy,
+                                   method,
+                                   NULL,
+                                   G_DBUS_CALL_FLAGS_NONE,
+                                   60000,
+                                   NULL,
+                                   &error);
+
+  g_object_unref (proxy);
+
+  if (output)
+    {
+      g_variant_unref (output);
+      result = TRUE;
+    }
+  else
+    {
+      if (error->domain == G_DBUS_ERROR &&
           error->code == G_DBUS_ERROR_SERVICE_UNKNOWN)
         result = FALSE;
       else
         result = TRUE;
-
-      if (output)
-        g_variant_unref (output);
-      g_object_unref (proxy);
     }
 
   return result;
@@ -1112,8 +1159,8 @@ search_address_cb (GtkToggleButton *togglebutton,
                 }
               else
                 {
-                  if (error)
-                    g_warning ("%s", error->message);
+                  g_warning ("%s", error->message);
+                  g_error_free (error);
                 }
 
               g_free (command);
@@ -1539,6 +1586,7 @@ new_printer_add_button_cb (GtkButton *button,
               if (ppd_file_name)
                 {
                   DBusGProxy *proxy;
+                  gboolean    result;
                   GError     *error = NULL;
                   char       *ret_error = NULL;
 
@@ -1548,29 +1596,30 @@ new_printer_add_button_cb (GtkButton *button,
                                           TRUE);
                   if (proxy)
                     {
-                      dbus_g_proxy_call (proxy, "PrinterAddWithPpdFile", &error,
-                                         G_TYPE_STRING, pp->devices[device_id].display_name,
-                                         G_TYPE_STRING, pp->devices[device_id].device_uri,
-                                         G_TYPE_STRING, ppd_file_name,
-                                         G_TYPE_STRING, pp->devices[device_id].device_info,
-                                         G_TYPE_STRING, pp->devices[device_id].device_location,
-                                         G_TYPE_INVALID,
-                                         G_TYPE_STRING, &ret_error,
-                                         G_TYPE_INVALID);
+                      result = dbus_g_proxy_call (proxy, "PrinterAddWithPpdFile", &error,
+                                                  G_TYPE_STRING, pp->devices[device_id].display_name,
+                                                  G_TYPE_STRING, pp->devices[device_id].device_uri,
+                                                  G_TYPE_STRING, ppd_file_name,
+                                                  G_TYPE_STRING, pp->devices[device_id].device_info,
+                                                  G_TYPE_STRING, pp->devices[device_id].device_location,
+                                                  G_TYPE_INVALID,
+                                                  G_TYPE_STRING, &ret_error,
+                                                  G_TYPE_INVALID);
 
-                      if (error || (ret_error && ret_error[0] != '\0'))
+                      if (!result)
                         {
+                          g_warning ("%s", error->message);
+                          g_error_free (error);
                           dialog_response = GTK_RESPONSE_REJECT;
-
-                          if (error)
-                            g_warning ("%s", error->message);
-
-                          if (ret_error && ret_error[0] != '\0')
-                            g_warning ("%s", ret_error);
-
-                          g_clear_error (&error);
                         }
-                      else
+
+                      if (ret_error && ret_error[0] != '\0')
+                        {
+                          g_warning ("%s", ret_error);
+                          dialog_response = GTK_RESPONSE_REJECT;
+                        }
+
+                      if (result && (!ret_error || ret_error[0] == '\0'))
                         success = TRUE;
 
                       g_object_unref (proxy);
@@ -1599,6 +1648,7 @@ new_printer_add_button_cb (GtkButton *button,
             {
               /* Try PackageKit to install printer driver */
               DBusGProxy *proxy;
+              gboolean    result;
               GError     *error = NULL;
 
               proxy = get_dbus_proxy (PACKAGE_KIT_BUS,
@@ -1614,7 +1664,7 @@ new_printer_add_button_cb (GtkButton *button,
                   device_ids[0] = pp->devices[device_id].device_id;
                   device_ids[1] = NULL;
 
-                  dbus_g_proxy_call_with_timeout (proxy,
+                  result = dbus_g_proxy_call_with_timeout (proxy,
                     "InstallPrinterDrivers",
                     3600000,
                     &error,
@@ -1630,10 +1680,11 @@ new_printer_add_button_cb (GtkButton *button,
 
                   g_object_unref (proxy);
 
-                  if (error)
-                    g_warning ("%s", error->message);
-
-                  g_clear_error (&error);
+                  if (!result)
+                    {
+                      g_warning ("%s", error->message);
+                      g_error_free (error);
+                    }
 
                   if (ppd_name)
                     {
@@ -1654,6 +1705,7 @@ new_printer_add_button_cb (GtkButton *button,
           if (ppd_name && ppd_name->ppd_name)
             {
               DBusGProxy *proxy;
+              gboolean    result;
               GError     *error = NULL;
               char       *ret_error = NULL;
 
@@ -1663,27 +1715,27 @@ new_printer_add_button_cb (GtkButton *button,
                                       TRUE);
               if (proxy)
                 {
-                  dbus_g_proxy_call (proxy, "PrinterAdd", &error,
-                                     G_TYPE_STRING, pp->devices[device_id].display_name,
-                                     G_TYPE_STRING, pp->devices[device_id].device_uri,
-                                     G_TYPE_STRING, ppd_name->ppd_name,
-                                     G_TYPE_STRING, pp->devices[device_id].device_info,
-                                     G_TYPE_STRING, pp->devices[device_id].device_location,
-                                     G_TYPE_INVALID,
-                                     G_TYPE_STRING, &ret_error,
-                                     G_TYPE_INVALID);
+                  result = dbus_g_proxy_call (proxy, "PrinterAdd", &error,
+                             G_TYPE_STRING, pp->devices[device_id].display_name,
+                             G_TYPE_STRING, pp->devices[device_id].device_uri,
+                             G_TYPE_STRING, ppd_name->ppd_name,
+                             G_TYPE_STRING, pp->devices[device_id].device_info,
+                             G_TYPE_STRING, pp->devices[device_id].device_location,
+                             G_TYPE_INVALID,
+                             G_TYPE_STRING, &ret_error,
+                             G_TYPE_INVALID);
 
-                  if (error || (ret_error && ret_error[0] != '\0'))
+                  if (!result)
                     {
+                      g_warning ("%s", error->message);
+                      g_error_free (error);
                       dialog_response = GTK_RESPONSE_REJECT;
+                    }
 
-                      if (error)
-                        g_warning ("%s", error->message);
-
-                      if (ret_error && ret_error[0] != '\0')
-                        g_warning ("%s", ret_error);
-
-                      g_clear_error (&error);
+                  if (ret_error && ret_error[0] != '\0')
+                    {
+                      g_warning ("%s", ret_error);
+                      dialog_response = GTK_RESPONSE_REJECT;
                     }
 
                   g_object_unref (proxy);
@@ -1705,6 +1757,7 @@ new_printer_add_button_cb (GtkButton *button,
         {
           const char *ppd_file_name = NULL;
           DBusGProxy *proxy;
+          gboolean    result;
           GError     *error = NULL;
           char       *ret_error = NULL;
           ppd_file_t  *ppd_file = NULL;
@@ -1784,22 +1837,24 @@ new_printer_add_button_cb (GtkButton *button,
 
               if (value)
                 {
-                  dbus_g_proxy_call (proxy, "PrinterAddOptionDefault", &error,
-                                     G_TYPE_STRING, pp->devices[device_id].display_name,
-                                     G_TYPE_STRING, "PageSize",
-                                     G_TYPE_STRV, value,
-                                     G_TYPE_INVALID,
-                                     G_TYPE_STRING, &ret_error,
-                                     G_TYPE_INVALID);
+                  result = dbus_g_proxy_call (proxy, "PrinterAddOptionDefault", &error,
+                             G_TYPE_STRING, pp->devices[device_id].display_name,
+                             G_TYPE_STRING, "PageSize",
+                             G_TYPE_STRV, value,
+                             G_TYPE_INVALID,
+                             G_TYPE_STRING, &ret_error,
+                             G_TYPE_INVALID);
 
-                  if (error)
+                  if (!result)
                     {
                       g_warning ("%s", error->message);
-                      g_clear_error (&error);
+                      g_error_free (error);
                     }
 
                   if (ret_error && ret_error[0] != '\0')
-                    g_warning ("%s", ret_error);
+                    {
+                      g_warning ("%s", ret_error);
+                    }
 
                   g_strfreev (value);
                 }
@@ -1852,7 +1907,6 @@ new_printer_add_button_cb (GtkButton *button,
               GList      *executables = NULL;
               GList      *packages = NULL;
 
-              g_clear_error (&error);
               error = NULL;
 
               proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
@@ -1877,26 +1931,28 @@ new_printer_add_button_cb (GtkButton *button,
                                                    NULL,
                                                    &error);
 
-                  if (output && g_variant_n_children (output) == 1)
-                    {
-                      array = g_variant_get_child_value (output, 0);
-                      if (array)
-                        {
-                          for (i = 0; i < g_variant_n_children (array); i++)
-                            {
-                              executables = g_list_append (
-                                              executables,
-                                                g_strdup (g_variant_get_string (
-                                                  g_variant_get_child_value (array, i),
-                                                  NULL)));
-                            }
-                        }
-                    }
-
-                  if (output)
-                    g_variant_unref (output);
                   g_variant_unref (input);
                   g_object_unref (proxy);
+
+                  if (output)
+                    {
+                      if (g_variant_n_children (output) == 1)
+                        {
+                          array = g_variant_get_child_value (output, 0);
+                          if (array)
+                            {
+                              for (i = 0; i < g_variant_n_children (array); i++)
+                                {
+                                  executables = g_list_append (
+                                                  executables,
+                                                    g_strdup (g_variant_get_string (
+                                                      g_variant_get_child_value (array, i),
+                                                      NULL)));
+                                }
+                            }
+                        }
+                      g_variant_unref (output);
+                    }
                 }
 
               if (proxy == NULL ||
@@ -1904,8 +1960,11 @@ new_printer_add_button_cb (GtkButton *button,
                    error->domain == G_DBUS_ERROR &&
                    (error->code == G_DBUS_ERROR_SERVICE_UNKNOWN ||
                     error->code == G_DBUS_ERROR_UNKNOWN_METHOD)))
-                g_warning ("Install system-config-printer which provides \
+                {
+                  g_warning ("Install system-config-printer which provides \
 DBus method \"MissingExecutables\" to find missing executables and filters.");
+                  g_error_free (error);
+                }
 
               executables = g_list_sort (executables, (GCompareFunc) g_strcmp0);
               executables = glist_uniq (executables);
@@ -1937,8 +1996,7 @@ DBus method \"MissingExecutables\" to find missing executables and filters.");
                                                            NULL,
                                                            &error);
 
-                          if (error)
-                            g_warning ("%s", error->message);
+                          g_variant_unref (input);
 
                           if (output)
                             {
@@ -1951,14 +2009,21 @@ DBus method \"MissingExecutables\" to find missing executables and filters.");
                                              &package);
                               if (!installed)
                                 packages = g_list_append (packages, g_strdup (package));
+                              g_variant_unref (output);
                             }
-
-                          if (output)
-                            g_variant_unref (output);
-                          g_variant_unref (input);
+                          else
+                            {
+                              g_warning ("%s", error->message);
+                              g_error_free (error);
+                            }
                         }
 
                       g_object_unref (proxy);
+                    }
+                  else
+                    {
+                      g_warning ("%s", error->message);
+                      g_error_free (error);
                     }
 
                   g_list_free_full (executables, g_free);
@@ -2007,14 +2072,23 @@ DBus method \"MissingExecutables\" to find missing executables and filters.");
                                                        NULL,
                                                        &error);
 
-                      if (error)
-                        g_warning ("%s", error->message);
+                      g_variant_unref (input);
+                      g_object_unref (proxy);
 
                       if (output)
-                        g_variant_unref (output);
-                      g_variant_unref (input);
-
-                      g_object_unref (proxy);
+                        {
+                          g_variant_unref (output);
+                        }
+                      else
+                        {
+                          g_warning ("%s", error->message);
+                          g_error_free (error);
+                        }
+                    }
+                  else
+                    {
+                      g_warning ("%s", error->message);
+                      g_error_free (error);
                     }
 
                   g_list_free_full (packages, g_free);
@@ -2049,17 +2123,18 @@ pp_new_printer_dialog_new (GtkWindow            *parent,
   GtkWidget          *widget;
   GError             *error = NULL;
   gchar              *objects[] = { "dialog", "main-vbox", NULL };
+  guint               builder_result;
 
   pp = g_new0 (PpNewPrinterDialog, 1);
 
   pp->builder = gtk_builder_new ();
   pp->parent = GTK_WIDGET (parent);
 
-  gtk_builder_add_objects_from_file (pp->builder,
-                                     DATADIR"/new-printer-dialog.ui",
-                                     objects, &error);
+  builder_result = gtk_builder_add_objects_from_file (pp->builder,
+                                                      DATADIR"/new-printer-dialog.ui",
+                                                      objects, &error);
 
-  if (error)
+  if (builder_result == 0)
     {
       g_warning ("Could not load ui: %s", error->message);
       g_error_free (error);

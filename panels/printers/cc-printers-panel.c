@@ -377,7 +377,6 @@ attach_to_cups_notifier (gpointer data)
       priv->subscription_renewal_id =
         g_timeout_add_seconds (RENEW_INTERVAL, renew_subscription, self);
 
-      error = NULL;
       priv->cups_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                         0,
                                                         NULL,
@@ -387,9 +386,10 @@ attach_to_cups_notifier (gpointer data)
                                                         NULL,
                                                         &error);
 
-      if (error)
+      if (!priv->cups_proxy)
         {
           g_warning ("%s", error->message);
+          g_error_free (error);
           return;
         }
 
@@ -1550,6 +1550,7 @@ job_process_cb (GtkButton *button,
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   DBusGProxy             *proxy;
   GtkWidget              *widget;
+  gboolean                result = TRUE;
   GError                 *error = NULL;
   char                   *ret_error = NULL;
   int                     id = -1;
@@ -1574,45 +1575,46 @@ job_process_cb (GtkButton *button,
       if ((GtkButton*) gtk_builder_get_object (priv->builder,
                                                "job-cancel-button") ==
           button)
-        dbus_g_proxy_call (proxy, "JobCancelPurge", &error,
-                           G_TYPE_INT, id,
-                           G_TYPE_BOOLEAN, FALSE,
-                           G_TYPE_INVALID,
-                           G_TYPE_STRING, &ret_error,
-                           G_TYPE_INVALID);
+        result = dbus_g_proxy_call (proxy, "JobCancelPurge", &error,
+                                    G_TYPE_INT, id,
+                                    G_TYPE_BOOLEAN, FALSE,
+                                    G_TYPE_INVALID,
+                                    G_TYPE_STRING, &ret_error,
+                                    G_TYPE_INVALID);
       else if ((GtkButton*) gtk_builder_get_object (priv->builder,
                                                         "job-hold-button") ==
                button)
-        dbus_g_proxy_call (proxy, "JobSetHoldUntil", &error,
-                           G_TYPE_INT, id,
-                           G_TYPE_STRING, "indefinite",
-                           G_TYPE_INVALID,
-                           G_TYPE_STRING, &ret_error,
-                           G_TYPE_INVALID);
+        result = dbus_g_proxy_call (proxy, "JobSetHoldUntil", &error,
+                                    G_TYPE_INT, id,
+                                    G_TYPE_STRING, "indefinite",
+                                    G_TYPE_INVALID,
+                                    G_TYPE_STRING, &ret_error,
+                                    G_TYPE_INVALID);
       else if ((GtkButton*) gtk_builder_get_object (priv->builder,
                                                         "job-release-button") ==
                button)
-        dbus_g_proxy_call (proxy, "JobSetHoldUntil", &error,
-                           G_TYPE_INT, id,
-                           G_TYPE_STRING, "no-hold",
-                           G_TYPE_INVALID,
-                           G_TYPE_STRING, &ret_error,
-                           G_TYPE_INVALID);
+        result = dbus_g_proxy_call (proxy, "JobSetHoldUntil", &error,
+                                    G_TYPE_INT, id,
+                                    G_TYPE_STRING, "no-hold",
+                                    G_TYPE_INVALID,
+                                    G_TYPE_STRING, &ret_error,
+                                    G_TYPE_INVALID);
 
       g_object_unref (proxy);
 
-      if (error || (ret_error && ret_error[0] != '\0'))
+      if (!result || (ret_error && ret_error[0] != '\0'))
         {
-          if (error)
-            g_warning ("%s", error->message);
+          if (!result)
+            {
+              g_warning ("%s", error->message);
+              g_error_free (error);
+            }
 
           if (ret_error && ret_error[0] != '\0')
             g_warning ("%s", ret_error);
         }
       else
         actualize_jobs_list (self);
-
-      g_clear_error (&error);
   }
 
   widget = (GtkWidget*)
@@ -2173,7 +2175,7 @@ test_page_cb (GtkButton *button,
       gchar        *printer_uri = NULL;
       gchar        *filename = NULL;
       gchar        *resource = NULL;
-      ipp_t        *response;
+      ipp_t        *response = NULL;
       ipp_t        *request;
 
       if ((datadir = getenv ("CUPS_DATADIR")) != NULL)
@@ -2455,6 +2457,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   http_t                 *http;
   gchar                  *objects[] = { "main-vbox", NULL };
   GtkStyleContext        *context;
+  guint                   builder_result;
 
   priv = self->priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -2486,11 +2489,11 @@ cc_printers_panel_init (CcPrintersPanel *self)
   priv->permission = NULL;
   priv->lockdown_settings = NULL;
 
-  gtk_builder_add_objects_from_file (priv->builder,
-                                     DATADIR"/printers.ui",
-                                     objects, &error);
+  builder_result = gtk_builder_add_objects_from_file (priv->builder,
+                                                      DATADIR"/printers.ui",
+                                                      objects, &error);
 
-  if (error)
+  if (builder_result == 0)
     {
       /* Translators: The XML file containing user interface can not be loaded */
       g_warning (_("Could not load ui: %s"), error->message);
