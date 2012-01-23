@@ -447,8 +447,8 @@ on_scale_scroll_event (GtkWidget      *widget,
                         else
                                 value = value + 0.01;
                 } else if (event->direction == GDK_SCROLL_DOWN) {
-                        if (value - 0.01 < 0)
-                                value = 0.0;
+                        if (value - 0.01 < -1.0)
+                                value = -1.0;
                         else
                                 value = value - 0.01;
                 }
