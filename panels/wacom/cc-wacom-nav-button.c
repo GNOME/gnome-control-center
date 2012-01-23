@@ -211,15 +211,21 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 {
 	CcWacomNavButtonPrivate *priv;
 	GtkStyleContext *context;
-	GtkWidget *image;
+	GtkWidget *image, *box;
 
 	priv = self->priv = WACOM_NAV_BUTTON_PRIVATE (self);
-	context = gtk_widget_get_style_context (GTK_WIDGET (self));
-	gtk_style_context_add_class (context, GTK_STYLE_CLASS_LINKED);
 
 	/* Label */
 	priv->label = gtk_label_new (NULL);
 	gtk_style_context_add_class (gtk_widget_get_style_context (priv->label), "dim-label");
+	gtk_box_pack_start (GTK_BOX (self), priv->label,
+			    FALSE, FALSE, 8);
+
+	box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+	context = gtk_widget_get_style_context (GTK_WIDGET (box));
+	gtk_style_context_add_class (context, GTK_STYLE_CLASS_LINKED);
+	gtk_box_pack_start (GTK_BOX (self), box,
+			    FALSE, FALSE, 8);
 
 	/* Prev button */
 	priv->prev = gtk_button_new ();
@@ -237,16 +243,13 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 			  G_CALLBACK (next_clicked), self);
 	gtk_widget_set_valign (priv->next, GTK_ALIGN_START);
 
-	gtk_box_pack_start (GTK_BOX (self), priv->label,
-			    FALSE, FALSE, 8);
-	gtk_box_pack_start (GTK_BOX (self), priv->prev,
+	gtk_box_pack_start (GTK_BOX (box), priv->prev,
 			    FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (self), priv->next,
+	gtk_box_pack_start (GTK_BOX (box), priv->next,
 			    FALSE, FALSE, 0);
 
 	gtk_widget_show (priv->label);
-	gtk_widget_show_all (priv->prev);
-	gtk_widget_show_all (priv->next);
+	gtk_widget_show_all (box);
 }
 
 GtkWidget *
