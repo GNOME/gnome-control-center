@@ -1,4 +1,4 @@
-# Norwegian bokmål translation of control-center.
+# Norwegian bokmål translation of gnome-control-center.
 # Copyright (C) 1999-2005 Free Software Foundation, Inc.
 #
 # Kjartan Maraas <kmaraas@gnome.org>, 1999-2012.
@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.3.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-16 17:25+0100\n"
-"PO-Revision-Date: 2012-01-16 17:27+0100\n"
+"POT-Creation-Date: 2012-01-23 13:31+0100\n"
+"PO-Revision-Date: 2012-01-23 13:34+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
-"Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
+"Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -96,7 +96,7 @@ msgstr "Ingen skrivebordsbakgrunn"
 
 #: ../panels/background/cc-background-panel.c:1001
 #: ../panels/user-accounts/data/photo-dialog.ui.h:4
-#: ../panels/user-accounts/um-photo-dialog.c:217
+#: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "Browse for more pictures"
 msgstr "Se etter flere bilder"
 
@@ -741,6 +741,14 @@ msgstr "Brukervalgpanel for dato og klokkeslett"
 msgid "Clock;Timezone;Location;"
 msgstr "Klokke;Tidssone;Plassering;Adresse;"
 
+#: ../panels/datetime/org.gnome.controlcenter.datetime.policy.in.h:1
+msgid "Change system time and date settings"
+msgstr "Endre innstillinger for systemets klokke og dato"
+
+#: ../panels/datetime/org.gnome.controlcenter.datetime.policy.in.h:2
+msgid "To change time or date settings, you need to authenticate."
+msgstr "Du må autentisere deg for å endre innstillinger for tid og dato."
+
 #: ../panels/display/cc-display-panel.c:473
 msgctxt "display panel, rotation"
 msgid "Normal"
@@ -1325,7 +1333,7 @@ msgstr "_Hastighet:"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
 #: ../panels/mouse/gnome-mouse-properties.ui.h:26
 #: ../panels/universal-access/uap.ui.h:55
-#: ../panels/universal-access/zoom-options.ui.h:20
+#: ../panels/universal-access/zoom-options.c:333
 msgid "Short"
 msgstr "Kort"
 
@@ -1343,7 +1351,7 @@ msgstr "Hastighet for tasterepetering"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
 #: ../panels/mouse/gnome-mouse-properties.ui.h:28
 #: ../panels/universal-access/uap.ui.h:58
-#: ../panels/universal-access/zoom-options.ui.h:22
+#: ../panels/universal-access/zoom-options.c:337
 msgid "Long"
 msgstr "Lang"
 
@@ -1477,7 +1485,6 @@ msgid "Mouse Preferences"
 msgstr "Brukervalg for mus"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:2
-#: ../panels/universal-access/zoom-options.ui.h:15
 msgid "General"
 msgstr "Generelt"
 
@@ -1641,7 +1648,6 @@ msgstr "Enterprise"
 #: ../panels/network/cc-network-panel.c:1130
 #: ../panels/network/cc-network-panel.c:1513
 #: ../panels/universal-access/uap.ui.h:5
-#: ../panels/universal-access/zoom-options.ui.h:30
 msgid "None"
 msgstr "Ingen"
 
@@ -2811,12 +2817,12 @@ msgid "Default"
 msgstr "Forvalg"
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:1
-msgid "Screen"
-msgstr "Skjerm"
+msgid "Brightness and Lock"
+msgstr "Lysstyrke og lås"
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
 msgid "Screen brightness and lock settings"
-msgstr "Lysstyrke og innstillinger for låsing av skjerm"
+msgstr "Innstillinger for lysstyrke og låsing av skjerm"
 
 #. Translators: those are keywords for the brightness and lock control-center panel
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
@@ -3154,8 +3160,8 @@ msgstr "Dempet"
 msgid "Custom"
 msgstr "Egendefinert"
 
-#: ../panels/universal-access/cc-ua-panel.c:445
-#: ../panels/universal-access/cc-ua-panel.c:451
+#: ../panels/universal-access/cc-ua-panel.c:446
+#: ../panels/universal-access/cc-ua-panel.c:452
 msgid "No shortcut set"
 msgstr "Ingen snarvei satt"
 
@@ -3168,7 +3174,9 @@ msgstr "Brukervalg for universal tilgang"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;"
 "AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys;"
-msgstr "Tastatur;Mus;a11y;Tilgjengelighet;Kontrast;Zoom;Skjermleser;tekst;skrift;størrelse;AccessX;Klebrige taster;Trege taster;Sprettetaster;Mustaster;"
+msgstr ""
+"Tastatur;Mus;a11y;Tilgjengelighet;Kontrast;Zoom;Skjermleser;tekst;skrift;"
+"størrelse;AccessX;Klebrige taster;Trege taster;Sprettetaster;Mustaster;"
 
 #: ../panels/universal-access/uap.ui.h:1
 msgid "On screen keyboard"
@@ -3486,15 +3494,15 @@ msgctxt "universal access, contrast"
 msgid "High/Inverse"
 msgstr "Høy/omvendt"
 
-#: ../panels/universal-access/zoom-options.c:156
+#: ../panels/universal-access/zoom-options.c:334
 msgid "1/4 Screen"
 msgstr "Kvart skjerm"
 
-#: ../panels/universal-access/zoom-options.c:157
+#: ../panels/universal-access/zoom-options.c:335
 msgid "1/2 Screen"
 msgstr "Halv skjerm"
 
-#: ../panels/universal-access/zoom-options.c:158
+#: ../panels/universal-access/zoom-options.c:336
 msgid "3/4 Screen"
 msgstr "Trekvart skjerm"
 
@@ -3503,102 +3511,86 @@ msgid "Zoom Options"
 msgstr "Alternativer for zoom"
 
 #: ../panels/universal-access/zoom-options.ui.h:2
-msgid "Magnification"
-msgstr "Forstørrelse"
+msgid "Magnification:"
+msgstr "Forstørrelse:"
 
 #: ../panels/universal-access/zoom-options.ui.h:3
-msgid "Always"
-msgstr "Alltid"
+msgid "Follow mouse cursor"
+msgstr "Følg muspeker"
 
 #: ../panels/universal-access/zoom-options.ui.h:4
-msgid "To keep the pointer visible"
-msgstr "For å holde pekeren synlig"
+msgid "Screen part:"
+msgstr "Del av skjermen:"
 
 #: ../panels/universal-access/zoom-options.ui.h:5
-msgid "To keep the pointer centered"
-msgstr "For å holde pekeren sentrert"
+msgid "Magnifier extends outside of screen"
+msgstr "Forstørrelsesglass fortsetter utenfor skjermen"
 
 #: ../panels/universal-access/zoom-options.ui.h:6
-msgid "Image moves with the mouse pointer"
-msgstr "Bildet flytter seg med muspeker"
+msgid "Keep magnifier cursor centered"
+msgstr "Hold forstørrelsesglasspeker sentrert"
 
 #: ../panels/universal-access/zoom-options.ui.h:7
-msgid "Full Screen"
-msgstr "Full skjerm"
+msgid "Magnifier cursor pushes contents around"
+msgstr "Forstørrelsesglasspeker dytter innholdet rundt"
 
 #: ../panels/universal-access/zoom-options.ui.h:8
-msgid "Top Half"
-msgstr "Øverste halvdel"
+msgid "Magnifier cursor moves with contents"
+msgstr "Forstørrelsesglasspeker flytter seg med innholdet"
 
 #: ../panels/universal-access/zoom-options.ui.h:9
-msgid "Bottom Half"
-msgstr "Nederste halvdel"
+msgid "Magnifier Position:"
+msgstr "Posisjon for forstørrelse:"
 
 #: ../panels/universal-access/zoom-options.ui.h:10
-msgid "Left Half"
-msgstr "Venstre halvdel"
-
-#: ../panels/universal-access/zoom-options.ui.h:11
-msgid "Right Half"
-msgstr "Høyre halvdel"
-
-#: ../panels/universal-access/zoom-options.ui.h:12
-msgid "Position of magnified view on screen"
-msgstr "Posisjon for forstørret visning på skjermen"
-
-#: ../panels/universal-access/zoom-options.ui.h:13
-msgid "Moveable lens - magnified view follows mouse movements"
-msgstr "Flyttbar linse - forstørret visning følger musbevegelsene"
-
-#: ../panels/universal-access/zoom-options.ui.h:14
-msgid "Image scrolls at screen edges"
-msgstr "Bilde ruller over skjermkantene"
-
-#: ../panels/universal-access/zoom-options.ui.h:16
-msgid "Show crosshairs intersection"
-msgstr "Vis siktekryss"
-
-#: ../panels/universal-access/zoom-options.ui.h:17
-msgid "Color and Opacity"
-msgstr "Farge og gjennomsiktighet"
-
-#: ../panels/universal-access/zoom-options.ui.h:18
-msgid "Length"
-msgstr "Lengde"
-
-#: ../panels/universal-access/zoom-options.ui.h:23
-msgid "Thickness"
-msgstr "Tykkelse"
+msgid "Thickness:"
+msgstr "Tykkelse:"
 
 #. short delay
-#: ../panels/universal-access/zoom-options.ui.h:25
+#: ../panels/universal-access/zoom-options.ui.h:12
 msgid "Thin"
 msgstr "Tynn"
 
 #. long delay
-#: ../panels/universal-access/zoom-options.ui.h:27
+#: ../panels/universal-access/zoom-options.ui.h:14
 msgid "Thick"
 msgstr "Tykk"
 
-#: ../panels/universal-access/zoom-options.ui.h:28
-msgid "Show"
-msgstr "Vis"
+#: ../panels/universal-access/zoom-options.ui.h:15
+msgid "Length:"
+msgstr "Lengde:"
 
-#: ../panels/universal-access/zoom-options.ui.h:29
-msgid "Crosshairs"
-msgstr "Siktekryss"
+#: ../panels/universal-access/zoom-options.ui.h:16
+msgid "Color:"
+msgstr "Farge:"
 
-#: ../panels/universal-access/zoom-options.ui.h:31
-msgid "Centered"
-msgstr "Midtstilt"
+#: ../panels/universal-access/zoom-options.ui.h:17
+msgid "Crosshairs:"
+msgstr "Siktekryss:"
 
-#: ../panels/universal-access/zoom-options.ui.h:32
-msgid "Push"
-msgstr "Dytt"
+#: ../panels/universal-access/zoom-options.ui.h:18
+msgid "Overlaps mouse cursor"
+msgstr "Overlapper med muspeker"
 
-#: ../panels/universal-access/zoom-options.ui.h:33
-msgid "Proportional"
-msgstr "Proporsjonal"
+#: ../panels/universal-access/zoom-options.ui.h:19
+msgid "Full Screen"
+msgstr "Full skjerm"
+
+#: ../panels/universal-access/zoom-options.ui.h:20
+msgid "Top Half"
+msgstr "Øverste halvdel"
+
+#: ../panels/universal-access/zoom-options.ui.h:21
+msgid "Bottom Half"
+msgstr "Nederste halvdel"
+
+#: ../panels/universal-access/zoom-options.ui.h:22
+msgid "Left Half"
+msgstr "Venstre halvdel"
+
+#: ../panels/universal-access/zoom-options.ui.h:23
+msgid "Right Half"
+msgstr "Høyre halvdel"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:1
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
@@ -3806,7 +3798,7 @@ msgid "Cancel"
 msgstr "Avbryt"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
-#: ../panels/user-accounts/um-photo-dialog.c:97
+#: ../panels/user-accounts/um-photo-dialog.c:98
 msgid "Select"
 msgstr "Velg"
 
@@ -4067,19 +4059,19 @@ msgstr "Passordene er ikke like"
 msgid "Wrong password"
 msgstr "Feil passord"
 
-#: ../panels/user-accounts/um-photo-dialog.c:442
+#: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
 msgstr "Slå av bilde"
 
-#: ../panels/user-accounts/um-photo-dialog.c:460
+#: ../panels/user-accounts/um-photo-dialog.c:461
 msgid "Take a photo..."
 msgstr "Ta et bilde …"
 
-#: ../panels/user-accounts/um-photo-dialog.c:478
+#: ../panels/user-accounts/um-photo-dialog.c:479
 msgid "Browse for more pictures..."
 msgstr "Se etter flere bilder …"
 
-#: ../panels/user-accounts/um-photo-dialog.c:703
+#: ../panels/user-accounts/um-photo-dialog.c:704
 #, c-format
 msgid "Used by %s"
 msgstr "Brukt av %s"
@@ -4240,112 +4232,112 @@ msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
 msgstr "Tegnebrett;Wacom;Stylus;Viskelær;Mus"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:1
-msgid "No Action"
-msgstr "Ingen handling"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:2
-msgid "Left Mouse Button Click"
-msgstr "Venstre musklikk"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:3
-msgid "Middle Mouse Button Click"
-msgstr "Midtre musklikk"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:4
-msgid "Right Mouse Button Click"
-msgstr "Høyre musklikk"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:5
-msgid "Scroll Down"
-msgstr "Rull ned"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:6
-msgid "Scroll Up"
-msgstr "Rull opp"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:7
-msgid "Scroll Left"
-msgstr "Rull til venstre"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:8
-msgid "Scroll Right"
-msgstr "Rull til høyre"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:9
-msgid "Back"
-msgstr "Tilbake"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:10
-msgid "Forward"
-msgstr "Fremover"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Tablet (absolute)"
 msgstr "Tegnebrett (absolutt)"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/wacom/gnome-wacom-properties.ui.h:2
 msgid "Touchpad (relative)"
 msgstr "Pekeplate (relativ)"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:3
 msgid "Tablet Preferences"
 msgstr "Brukervalg for tegnebrett"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:14
+#: ../panels/wacom/gnome-wacom-properties.ui.h:4
 msgid "No tablet detected"
 msgstr "Ingen tegnebrett funnet"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:15
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "Vennligst slå på eller koble til ditt Wacom tegnebrett"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:16
+#: ../panels/wacom/gnome-wacom-properties.ui.h:6
 msgid "Bluetooth Settings"
 msgstr "Innstillinger for Bluetooth"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:17
+#: ../panels/wacom/gnome-wacom-properties.ui.h:7
 msgid "Tracking Mode"
 msgstr "Sporingsmodus"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:18
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
 msgid "Calibrate..."
 msgstr "Kalibrer …"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:19
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
 msgid "Left-Handed Orientation"
 msgstr "Venstrehendt orientering"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:20
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+msgid "Wacom Tablet"
+msgstr "Wacom pekeplate"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:1
+msgid "No Action"
+msgstr "Ingen handling"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:2
+msgid "Left Mouse Button Click"
+msgstr "Venstre musklikk"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:3
+msgid "Middle Mouse Button Click"
+msgstr "Midtre musklikk"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:4
+msgid "Right Mouse Button Click"
+msgstr "Høyre musklikk"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:5
+msgid "Scroll Down"
+msgstr "Rull ned"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:6
+msgid "Scroll Up"
+msgstr "Rull opp"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:7
+msgid "Scroll Left"
+msgstr "Rull til venstre"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:8
+msgid "Scroll Right"
+msgstr "Rull til høyre"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:9
+msgid "Back"
+msgstr "Tilbake"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:10
+msgid "Forward"
+msgstr "Fremover"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:11
 msgid "Soft"
 msgstr "Myk"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:21
+#: ../panels/wacom/wacom-stylus-page.ui.h:12
 msgid "Firm"
 msgstr "Fast"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:22
+#: ../panels/wacom/wacom-stylus-page.ui.h:13
 msgid "Eraser Pressure Feel"
 msgstr "Følelse av trykk for sletting"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:23
+#: ../panels/wacom/wacom-stylus-page.ui.h:14
 msgid "Lower Button"
 msgstr "Nedre knapp"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:24
+#: ../panels/wacom/wacom-stylus-page.ui.h:15
 msgid "Tip Pressure Feel"
 msgstr "Følelse av trykk på tuppen"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:25
+#: ../panels/wacom/wacom-stylus-page.ui.h:16
 msgid "Top Button"
 msgstr "Øverste knapp"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:26
+#: ../panels/wacom/wacom-stylus-page.ui.h:17
 msgid "Stylus"
 msgstr "Penn"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:27
-msgid "Wacom Tablet"
-msgstr "Wacom pekeplate"
 
 #. Text printed on screen
 #: ../panels/wacom/calibrator/gui_gtk.c:70
@@ -4356,11 +4348,22 @@ msgstr "Kalibrering av skjerm"
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
-msgstr "Vennligst tapp på målmarkørene når de vises på skjermen for å kalibrere tegnebrettet."
+msgstr ""
+"Vennligst tapp på målmarkørene når de vises på skjermen for å kalibrere "
+"tegnebrettet."
 
 #: ../panels/wacom/calibrator/gui_gtk.c:271
 msgid "Mis-click detected, restarting..."
 msgstr "Feil klikk oppdaget. Starter på nytt …"
+
+#: ../panels/wacom/cc-wacom-nav-button.c:89
+#, c-format
+msgid "%d of %d"
+msgstr "%d av %d"
+
+#: ../panels/wacom/cc-wacom-stylus-page.c:387
+msgid "Button"
+msgstr "Knapp"
 
 #: ../shell/control-center.c:54
 msgid "Enable verbose mode"
