@@ -110,7 +110,8 @@ ccpanels_LTLIBRARIES = libdate_time.la
 #		 > timedated1-interface.xml
 
 dbus_built_sources = timedated.c timedated.h
-$(dbus_built_sources) : Makefile.am timedated1-interface.xml
+timedated.c: timedated.h
+timedated.h: Makefile.am timedated1-interface.xml
 	gdbus-codegen						\
 		--interface-prefix org.freedesktop.		\
 		--generate-c-code timedated			\
@@ -154,5 +155,7 @@ CLEANFILES =					\
 EXTRA_DIST =				\
 	timedated1-interface.xml	\
 	$(polkit_in_files)
+
+BUILT_SOURCES = $(dbus_built_sources)
 
 -include $(top_srcdir)/git.mk
