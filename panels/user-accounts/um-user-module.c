@@ -23,8 +23,10 @@
 
 #include "um-user-panel.h"
 
-#include <clutter-gst/clutter-gst.h>
 #include <glib/gi18n.h>
+#ifdef HAVE_CHEESE
+#include <cheese-gtk.h>
+#endif
 
 void
 g_io_module_load (GIOModule *module)
@@ -32,7 +34,9 @@ g_io_module_load (GIOModule *module)
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
-  clutter_gst_init (NULL, NULL);
+#ifdef HAVE_CHEESE
+  cheese_gtk_init (NULL, NULL);
+#endif
 
   /* register the panel */
   um_user_panel_register (module);
