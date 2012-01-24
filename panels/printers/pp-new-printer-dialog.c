@@ -1485,14 +1485,6 @@ populate_device_types_list (PpNewPrinterDialog *pp)
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 }
 
-static void
-dialog_closed (GtkWidget          *dialog,
-               gint                response_id,
-               PpNewPrinterDialog *pp)
-{
-  gtk_widget_destroy (dialog);
-}
-
 static GList *
 glist_uniq (GList *list)
 {

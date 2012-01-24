@@ -1755,7 +1755,7 @@ supply_levels_draw_cb (GtkWidget *widget,
           GdkRGBA   border_color = {0.0, 0.0, 0.0, 1.0};
           GSList   *markers = NULL;
           GSList   *tmp_list = NULL;
-          GValue    int_val = {0};
+          GValue    int_val = G_VALUE_INIT;
           gchar   **marker_levelsv = NULL;
           gchar   **marker_colorsv = NULL;
           gchar   **marker_namesv = NULL;
