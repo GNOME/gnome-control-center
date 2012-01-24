@@ -497,12 +497,14 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   GtkTreeIter             iter;
   GtkWidget              *widget;
   gboolean                sensitive;
+  GValue                  value = G_VALUE_INIT;
   gchar                  *printer_make_and_model = NULL;
   gchar                  *printer_model = NULL;
   gchar                  *reason = NULL;
   gchar                 **printer_reasons = NULL;
   gchar                  *marker_types = NULL;
   gchar                  *printer_name = NULL;
+  gchar                  *printer_icon = NULL;
   gchar                  *printer_type = NULL;
   gchar                  *active_jobs = NULL;
   gchar                  *supply_type = NULL;
@@ -579,6 +581,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       gtk_tree_model_get (model, &iter,
 			  PRINTER_ID_COLUMN, &id,
 			  PRINTER_NAME_COLUMN, &printer_name,
+			  PRINTER_ICON_COLUMN, &printer_icon,
 			  -1);
     }
   else
@@ -755,6 +758,19 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
                 break;
             }
         }
+
+      widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-icon");
+      g_value_init (&value, G_TYPE_INT);
+      g_object_get_property ((GObject *) widget, "icon-size", &value);
+
+      if (printer_icon)
+        {
+          gtk_image_set_from_icon_name ((GtkImage *) widget, printer_icon, g_value_get_int (&value));
+          g_free (printer_icon);
+        }
+      else
+        gtk_image_set_from_icon_name ((GtkImage *) widget, "printer", g_value_get_int (&value));
 
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-name-label");
