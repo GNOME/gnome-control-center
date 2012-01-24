@@ -346,6 +346,7 @@ calib_area_new (GdkScreen      *screen,
 	GdkRectangle rect;
 	GdkWindow *window;
 	GdkRGBA black;
+	GdkCursor *cursor;
 
 	g_return_val_if_fail (old_axis, NULL);
 	g_return_val_if_fail (callback, NULL);
@@ -377,6 +378,11 @@ calib_area_new (GdkScreen      *screen,
 	gtk_widget_realize (calib_area->window);
 	window = gtk_widget_get_window (calib_area->window);
 	gdk_window_set_background_rgba (window, &black);
+
+	/* No cursor */
+	cursor = gdk_cursor_new (GDK_BLANK_CURSOR);
+	gdk_window_set_cursor (window, cursor);
+	g_object_unref (cursor);
 
 	/* Listen for mouse events */
 	gtk_widget_add_events (calib_area->window, GDK_KEY_RELEASE_MASK | GDK_BUTTON_PRESS_MASK);
