@@ -595,8 +595,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
         g_strcmp0 (priv->dests[priv->current_dest].name,
                    priv->jobs[priv->current_job].dest) == 0))
     {
-      actualize_jobs_list (self);
-
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "job-release-button");
       gtk_widget_set_sensitive (widget, FALSE);
@@ -608,6 +606,8 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "job-cancel-button");
       gtk_widget_set_sensitive (widget, FALSE);
+
+      actualize_jobs_list (self);
     }
 
   actualize_allowed_users_list (self);
@@ -1398,7 +1398,6 @@ job_selection_changed_cb (GtkTreeSelection *selection,
 static void
 populate_jobs_list (CcPrintersPanel *self)
 {
-
   CcPrintersPanelPrivate *priv;
   GtkTreeViewColumn      *column;
   GtkCellRenderer        *renderer;
@@ -1406,8 +1405,6 @@ populate_jobs_list (CcPrintersPanel *self)
   GtkTreeView            *treeview;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
-
-  actualize_jobs_list (self);
 
   treeview = (GtkTreeView*)
     gtk_builder_get_object (priv->builder, "job-treeview");
@@ -1438,6 +1435,8 @@ populate_jobs_list (CcPrintersPanel *self)
 
   g_signal_connect (gtk_tree_view_get_selection (treeview),
                     "changed", G_CALLBACK (job_selection_changed_cb), self);
+
+  actualize_jobs_list (self);
 }
 
 enum
