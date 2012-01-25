@@ -37,7 +37,7 @@
 
 #include "gsd-input-helper.h"
 
-#include "gnome-settings-daemon/gsd-enums.h"
+#include "gsd-enums.h"
 #include "gsd-wacom-device.h"
 
 #define GSD_WACOM_STYLUS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GSD_TYPE_WACOM_STYLUS, GsdWacomStylusPrivate))
@@ -224,6 +224,14 @@ gsd_wacom_stylus_get_stylus_type (GsdWacomStylus *stylus)
 	return WACOM_STYLUS_TYPE_UNKNOWN;
 }
 
+int
+gsd_wacom_stylus_get_id (GsdWacomStylus *stylus)
+{
+	g_return_val_if_fail (GSD_IS_WACOM_STYLUS (stylus), -1);
+
+	return stylus->priv->id;
+}
+
 #define GSD_WACOM_DEVICE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GSD_TYPE_WACOM_DEVICE, GsdWacomDevicePrivate))
 
 /* we support two types of settings:
@@ -399,14 +407,6 @@ get_device_type (XDeviceInfo *dev)
 	return ret;
 }
 
-static char *
-get_device_name (WacomDevice *device)
-{
-	return g_strdup_printf ("%s %s",
-				libwacom_get_vendor (device),
-				libwacom_get_product (device));
-}
-
 /* Finds an output which matches the given EDID information. Any NULL
  * parameter will be interpreted to match any value.
  */
@@ -472,6 +472,9 @@ find_output_by_display (GsdWacomDevice *device)
 	GVariant *display;
 	const gchar **edid;
 
+	if (device == NULL)
+		return NULL;
+
 	tablet   = device->priv->wacom_settings;
 	display  = g_settings_get_value (tablet, "display");
 	edid     = g_variant_get_strv (display, &n);
@@ -508,10 +511,19 @@ set_display_by_output (GsdWacomDevice    *device,
 		return;
 	}
 
-	o_vendor = g_malloc0 (4);
-	gnome_rr_output_info_get_vendor (rr_output_info, o_vendor);
-	o_product = g_strdup_printf ("%d", gnome_rr_output_info_get_product (rr_output_info));
-	o_serial  = g_strdup_printf ("%d", gnome_rr_output_info_get_serial  (rr_output_info));
+	if (rr_output_info == NULL)
+	{
+		o_vendor  = g_strdup ("");
+		o_product = g_strdup ("");
+		o_serial  = g_strdup ("");
+	}
+	else
+	{
+		o_vendor = g_malloc0 (4);
+		gnome_rr_output_info_get_vendor (rr_output_info, o_vendor);
+		o_product = g_strdup_printf ("%d", gnome_rr_output_info_get_product (rr_output_info));
+		o_serial  = g_strdup_printf ("%d", gnome_rr_output_info_get_serial  (rr_output_info));
+	}
 
 	values[0] = o_vendor;
 	values[1] = o_product;
@@ -684,7 +696,7 @@ gsd_wacom_device_update_from_db (GsdWacomDevice *device,
 	device->priv->wacom_settings = g_settings_new_with_path (WACOM_TABLET_SCHEMA,
 								 settings_path);
 
-	device->priv->name = get_device_name (wacom_device);
+	device->priv->name = g_strdup (libwacom_get_name (wacom_device));
 	device->priv->reversible = libwacom_is_reversible (wacom_device);
 	device->priv->is_screen_tablet = libwacom_is_builtin (wacom_device);
 	if (device->priv->is_screen_tablet) {
@@ -1000,6 +1012,7 @@ gsd_wacom_device_set_current_stylus (GsdWacomDevice *device,
 				     int             stylus_id)
 {
 	GList *l;
+	GsdWacomStylus *stylus;
 
 	g_return_if_fail (GSD_IS_WACOM_DEVICE (device));
 
@@ -1011,7 +1024,7 @@ gsd_wacom_device_set_current_stylus (GsdWacomDevice *device,
 	}
 
 	for (l = device->priv->styli; l; l = l->next) {
-		GsdWacomStylus *stylus = l->data;
+		stylus = l->data;
 
 		/* Set a nice default if 0x0 */
 		if (stylus_id == 0x0 &&
@@ -1026,7 +1039,27 @@ gsd_wacom_device_set_current_stylus (GsdWacomDevice *device,
 		}
 	}
 
-	g_warning ("Could not find stylus ID 0x%x for tablet '%s'", stylus_id, device->priv->name);
+	/* Setting the default stylus to be the generic one */
+	for (l = device->priv->styli; l; l = l->next) {
+		stylus = l->data;
+
+		/* Set a nice default if 0x0 */
+		if (stylus->priv->type == WSTYLUS_GENERAL) {
+			g_debug ("Could not find stylus ID 0x%x for tablet '%s', setting general pen ID 0x%x instead",
+				 stylus_id, device->priv->name, stylus->priv->id);
+			g_object_set (device, "last-stylus", stylus, NULL);
+			return;
+		}
+	}
+
+	g_warning ("Could not set the current stylus ID 0x%x for tablet '%s', no general pen found",
+		   stylus_id, device->priv->name);
+
+	/* Setting the default stylus to be the first one */
+	g_assert (device->priv->styli);
+
+	stylus = device->priv->styli->data;
+	g_object_set (device, "last-stylus", stylus, NULL);
 }
 
 GsdWacomDeviceType
@@ -1130,17 +1163,17 @@ gsd_wacom_device_create_fake_cintiq (void)
 	GList *devices;
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_STYLUS,
-					       "Cintiq 21UX2",
+					       "Wacom Cintiq 21UX2",
 					       "Wacom Cintiq 21UX2 stylus");
 	devices = g_list_prepend (NULL, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_ERASER,
-					       "Cintiq 21UX2",
+					       "Wacom Cintiq 21UX2",
 					       "Wacom Cintiq 21UX2 eraser");
 	devices = g_list_prepend (devices, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_PAD,
-					       "Cintiq 21UX2",
+					       "Wacom Cintiq 21UX2",
 					       "Wacom Cintiq 21UX2 pad");
 	devices = g_list_prepend (devices, device);
 
@@ -1154,22 +1187,22 @@ gsd_wacom_device_create_fake_bt (void)
 	GList *devices;
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_STYLUS,
-					       "Graphire Wireless",
+					       "Wacom Graphire Wireless",
 					       "Graphire Wireless stylus");
 	devices = g_list_prepend (NULL, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_ERASER,
-					       "Graphire Wireless",
+					       "Wacom Graphire Wireless",
 					       "Graphire Wireless eraser");
 	devices = g_list_prepend (devices, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_PAD,
-					       "Graphire Wireless",
+					       "Wacom Graphire Wireless",
 					       "Graphire Wireless pad");
 	devices = g_list_prepend (devices, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_CURSOR,
-					       "Graphire Wireless",
+					       "Wacom Graphire Wireless",
 					       "Graphire Wireless cursor");
 	devices = g_list_prepend (devices, device);
 
@@ -1183,13 +1216,13 @@ gsd_wacom_device_create_fake_x201 (void)
 	GList *devices;
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_STYLUS,
-					       "Serial Tablet WACf004",
-					       "Serial Tablet WACf004 stylus");
+					       "Wacom Serial Tablet WACf004",
+					       "Wacom Serial Tablet WACf004 stylus");
 	devices = g_list_prepend (NULL, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_ERASER,
-					       "Serial Tablet WACf004",
-					       "Serial Tablet WACf004 eraser");
+					       "Wacom Serial Tablet WACf004",
+					       "Wacom Serial Tablet WACf004 eraser");
 	devices = g_list_prepend (devices, device);
 
 	return devices;
@@ -1202,22 +1235,22 @@ gsd_wacom_device_create_fake_intuos4 (void)
 	GList *devices;
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_STYLUS,
-					       "Intuos 4 M 6x9",
+					       "Wacom Intuos 4 M 6x9",
 					       "Wacom Intuos4 6x9 stylus");
 	devices = g_list_prepend (NULL, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_ERASER,
-					       "Intuos 4 M 6x9",
+					       "Wacom Intuos 4 M 6x9",
 					       "Wacom Intuos4 6x9 eraser");
 	devices = g_list_prepend (devices, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_PAD,
-					       "Intuos 4 M 6x9",
+					       "Wacom Intuos 4 M 6x9",
 					       "Wacom Intuos4 6x9 pad");
 	devices = g_list_prepend (devices, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_CURSOR,
-					       "Intuos 4 M 6x9",
+					       "Wacom Intuos 4 M 6x9",
 					       "Wacom Intuos4 6x9 cursor");
 	devices = g_list_prepend (devices, device);
 

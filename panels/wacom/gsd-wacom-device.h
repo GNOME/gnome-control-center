@@ -85,6 +85,7 @@ const char     * gsd_wacom_stylus_get_icon_name  (GsdWacomStylus *stylus);
 GsdWacomDevice * gsd_wacom_stylus_get_device     (GsdWacomStylus *stylus);
 gboolean         gsd_wacom_stylus_get_has_eraser (GsdWacomStylus *stylus);
 int              gsd_wacom_stylus_get_num_buttons(GsdWacomStylus *stylus);
+int              gsd_wacom_stylus_get_id         (GsdWacomStylus *stylus);
 GsdWacomStylusType gsd_wacom_stylus_get_stylus_type (GsdWacomStylus *stylus);
 
 /* Device types to apply a setting to */
