@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-01-21 14:26+0000\n"
-"PO-Revision-Date: 2012-01-22 20:51+0100\n"
+"POT-Creation-Date: 2012-01-26 14:32+0000\n"
+"PO-Revision-Date: 2012-01-26 17:10+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1243,16 +1243,36 @@ msgid "Search"
 msgstr "Buscar"
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:1
+#| msgid "Take a screenshot of a window"
+msgid "Copy a screenshot of a window to clipboard"
+msgstr "Copiar una captura de pantalla de una ventana al portapapeles"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:2
+#| msgid "Take a screenshot of a window"
+msgid "Copy a screenshot of an area to clipboard"
+msgstr "Copiar una captura de pantalla de un área al portapapeles"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:3
+#| msgid "Take a screenshot of a window"
+msgid "Copy a screenshot to clipboard"
+msgstr "Copiar una captura de pantalla al portapapeles"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:4
 msgid "Screenshots"
 msgstr "Capturas de pantalla"
 
-#: ../panels/keyboard/01-screenshot.xml.in.h:2
+#: ../panels/keyboard/01-screenshot.xml.in.h:5
 msgid "Take a screenshot"
 msgstr "Capturar la pantalla"
 
-#: ../panels/keyboard/01-screenshot.xml.in.h:3
+#: ../panels/keyboard/01-screenshot.xml.in.h:6
 msgid "Take a screenshot of a window"
 msgstr "Capturar una ventana"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:7
+#| msgid "Take a screenshot of a window"
+msgid "Take a screenshot of an area"
+msgstr "Tomar una captura de pantalla de un área"
 
 #: ../panels/keyboard/01-system.xml.in.h:1
 msgid "Lock screen"
@@ -1634,115 +1654,115 @@ msgstr "No se recomienda para redes públicas en las que no se confía."
 #. TRANSLATORS: this is when the access point is not listed
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
-#: ../panels/network/cc-network-panel.c:953
+#: ../panels/network/cc-network-panel.c:1001
 msgctxt "Wireless access point"
 msgid "Other..."
 msgstr "Otra…"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:1111
-#: ../panels/network/cc-network-panel.c:1518
+#: ../panels/network/cc-network-panel.c:1159
+#: ../panels/network/cc-network-panel.c:1566
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1115
-#: ../panels/network/cc-network-panel.c:1522
+#: ../panels/network/cc-network-panel.c:1163
+#: ../panels/network/cc-network-panel.c:1570
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1119
+#: ../panels/network/cc-network-panel.c:1167
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:1124
+#: ../panels/network/cc-network-panel.c:1172
 msgid "Enterprise"
 msgstr "Empresa"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:1130
-#: ../panels/network/cc-network-panel.c:1513
+#: ../panels/network/cc-network-panel.c:1178
+#: ../panels/network/cc-network-panel.c:1561
 #: ../panels/universal-access/uap.ui.h:43
 msgid "None"
 msgstr "Ninguna"
 
-#: ../panels/network/cc-network-panel.c:1617
+#: ../panels/network/cc-network-panel.c:1665
 msgid "Hotspot"
 msgstr "«Hotspot»"
 
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1624
+#: ../panels/network/cc-network-panel.c:1672
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: ../panels/network/cc-network-panel.c:1966 ../panels/network/network.ui.h:17
+#: ../panels/network/cc-network-panel.c:2014 ../panels/network/network.ui.h:17
 msgid "IPv4 Address"
 msgstr "Dirección IPv4"
 
-#: ../panels/network/cc-network-panel.c:1967 ../panels/network/network.ui.h:18
+#: ../panels/network/cc-network-panel.c:2015 ../panels/network/network.ui.h:18
 msgid "IPv6 Address"
 msgstr "Dirección IPv6"
 
-#: ../panels/network/cc-network-panel.c:1970
-#: ../panels/network/cc-network-panel.c:1973 ../panels/network/network.ui.h:16
+#: ../panels/network/cc-network-panel.c:2018
+#: ../panels/network/cc-network-panel.c:2021 ../panels/network/network.ui.h:16
 #: ../panels/printers/printers.ui.h:9
 msgid "IP Address"
 msgstr "Dirección IP"
 
-#: ../panels/network/cc-network-panel.c:2020
-#: ../panels/network/cc-network-panel.c:2393
+#: ../panels/network/cc-network-panel.c:2068
+#: ../panels/network/cc-network-panel.c:2443
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
 
-#: ../panels/network/cc-network-panel.c:2128
+#: ../panels/network/cc-network-panel.c:2176
 msgid "Proxy"
 msgstr "Proxy"
 
-#: ../panels/network/cc-network-panel.c:2202
+#: ../panels/network/cc-network-panel.c:2250
 msgid "Network proxy"
 msgstr "Proxy de la red"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2460
+#: ../panels/network/cc-network-panel.c:2510
 msgid "The system network services are not compatible with this version."
 msgstr "Los servicios de red del sistema no son compatibles con esta versión."
 
-#: ../panels/network/cc-network-panel.c:3075
+#: ../panels/network/cc-network-panel.c:3125
 msgid "Not connected to the internet."
 msgstr "No conectado a Internet."
 
-#: ../panels/network/cc-network-panel.c:3076
+#: ../panels/network/cc-network-panel.c:3126
 msgid "Create the hotspot anyway?"
 msgstr "¿Crear el «hotspot» de todas formas?"
 
-#: ../panels/network/cc-network-panel.c:3094
+#: ../panels/network/cc-network-panel.c:3144
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
 msgstr "¿Desconectarse de %s y crear un «hotspot» nuevo?"
 
-#: ../panels/network/cc-network-panel.c:3097
+#: ../panels/network/cc-network-panel.c:3147
 msgid "This is your only connection to the internet."
 msgstr "Esta es su única conexión a Internet."
 
-#: ../panels/network/cc-network-panel.c:3115
+#: ../panels/network/cc-network-panel.c:3165
 msgid "Create _Hotspot"
 msgstr "Crear «_hotspot»"
 
-#: ../panels/network/cc-network-panel.c:3175
+#: ../panels/network/cc-network-panel.c:3225
 msgid "Stop hotspot and disconnect any users?"
 msgstr "¿Detener el «hotspot» y desconectar a los usuarios?"
 
-#: ../panels/network/cc-network-panel.c:3178
+#: ../panels/network/cc-network-panel.c:3228
 msgid "_Stop Hotspot"
 msgstr "_Detener «hotspot»"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:3196
+#: ../panels/network/cc-network-panel.c:3246
 msgid "Airplane Mode"
 msgstr "Modo avión"
 
@@ -2219,125 +2239,125 @@ msgid "When power is _critically low:"
 msgstr "_Cuando la carga está críticamente baja:"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:540
+#: ../panels/printers/cc-printers-panel.c:542
 msgid "Low on toner"
 msgstr "Tóner bajo"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:542
+#: ../panels/printers/cc-printers-panel.c:544
 msgid "Out of toner"
 msgstr "Sin tóner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:545
+#: ../panels/printers/cc-printers-panel.c:547
 msgid "Low on developer"
 msgstr "Nivel de revelador bajo"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:548
+#: ../panels/printers/cc-printers-panel.c:550
 msgid "Out of developer"
 msgstr "Sin revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:550
+#: ../panels/printers/cc-printers-panel.c:552
 msgid "Low on a marker supply"
 msgstr "Marcador bajo"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:552
+#: ../panels/printers/cc-printers-panel.c:554
 msgid "Out of a marker supply"
 msgstr "Sin marcador"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:554
+#: ../panels/printers/cc-printers-panel.c:556
 msgid "Open cover"
 msgstr "Abrir cubierta"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:556
+#: ../panels/printers/cc-printers-panel.c:558
 msgid "Open door"
 msgstr "Abrir puerta"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:558
+#: ../panels/printers/cc-printers-panel.c:560
 msgid "Low on paper"
 msgstr "Nivel de papel bajo"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:560
+#: ../panels/printers/cc-printers-panel.c:562
 msgid "Out of paper"
 msgstr "Sin papel"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:562
+#: ../panels/printers/cc-printers-panel.c:564
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Desconectada"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:564
+#: ../panels/printers/cc-printers-panel.c:566
 msgctxt "printer state"
 msgid "Paused"
 msgstr "Pausada"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:566
+#: ../panels/printers/cc-printers-panel.c:568
 msgid "Waste receptacle almost full"
 msgstr "Recipiente de residuos casi lleno"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:568
+#: ../panels/printers/cc-printers-panel.c:570
 msgid "Waste receptacle full"
 msgstr "Receptáculo de residuos lleno"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:570
+#: ../panels/printers/cc-printers-panel.c:572
 msgid "The optical photo conductor is near end of life"
 msgstr "El conductor óptico está cerca del final de su vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:572
+#: ../panels/printers/cc-printers-panel.c:574
 msgid "The optical photo conductor is no longer functioning"
 msgstr "El conductor óptico ya no funciona"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:746
+#: ../panels/printers/cc-printers-panel.c:749
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Preparada"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:750
+#: ../panels/printers/cc-printers-panel.c:753
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:754
+#: ../panels/printers/cc-printers-panel.c:757
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Detenida"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:853
+#: ../panels/printers/cc-printers-panel.c:869
 msgid "Toner Level"
 msgstr "Nivel de tóner"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:856
+#: ../panels/printers/cc-printers-panel.c:872
 msgid "Ink Level"
 msgstr "Nivel de tinta"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:859
+#: ../panels/printers/cc-printers-panel.c:875
 msgid "Supply Level"
 msgstr "Nivel del suministro"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:874
-#: ../panels/printers/cc-printers-panel.c:1269
+#: ../panels/printers/cc-printers-panel.c:890
+#: ../panels/printers/cc-printers-panel.c:1285
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -2345,80 +2365,80 @@ msgstr[0] "%u activo"
 msgstr[1] "%u activos"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:981
+#: ../panels/printers/cc-printers-panel.c:997
 msgid "No printers available"
 msgstr "No hay impresoras disponibles"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1312
+#: ../panels/printers/cc-printers-panel.c:1328
 msgctxt "print job"
 msgid "Pending"
 msgstr "Pendiente"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1316
+#: ../panels/printers/cc-printers-panel.c:1332
 msgctxt "print job"
 msgid "Held"
 msgstr "Retenido"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1320
+#: ../panels/printers/cc-printers-panel.c:1336
 msgctxt "print job"
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1324
+#: ../panels/printers/cc-printers-panel.c:1340
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Detenido"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1328
+#: ../panels/printers/cc-printers-panel.c:1344
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Cancelado"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1332
+#: ../panels/printers/cc-printers-panel.c:1348
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Abortado"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1336
+#: ../panels/printers/cc-printers-panel.c:1352
 msgctxt "print job"
 msgid "Completed"
 msgstr "Completado"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1419
+#: ../panels/printers/cc-printers-panel.c:1432
 msgid "Job Title"
 msgstr "Título del trabajo"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1428
+#: ../panels/printers/cc-printers-panel.c:1441
 msgid "Job State"
 msgstr "Estado del trabajo"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1434
+#: ../panels/printers/cc-printers-panel.c:1447
 msgid "Time"
 msgstr "Hora"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2030
+#: ../panels/printers/cc-printers-panel.c:2047
 msgid "Failed to add new printer."
 msgstr "Falló al añadir una impresora nueva."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2234
-#: ../panels/printers/cc-printers-panel.c:2248
+#: ../panels/printers/cc-printers-panel.c:2251
+#: ../panels/printers/cc-printers-panel.c:2265
 msgid "Test page"
 msgstr "Página de prueba"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2496
+#: ../panels/printers/cc-printers-panel.c:2514
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No se pudo cargar la IU: %s"
@@ -2453,21 +2473,21 @@ msgstr "_Añadir"
 msgid "_Search by Address"
 msgstr "Bu_scar por dirección"
 
-#: ../panels/printers/pp-new-printer-dialog.c:654
+#: ../panels/printers/pp-new-printer-dialog.c:665
 msgid "Getting devices..."
 msgstr "Obteniendo dispositivos…"
 
 #. Translators: No localy connected printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1230
+#: ../panels/printers/pp-new-printer-dialog.c:1277
 msgid "No local printers found"
 msgstr "No se encontraron impresoras locales"
 
 #. Translators: No network printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1243
+#: ../panels/printers/pp-new-printer-dialog.c:1290
 msgid "No network printers found"
 msgstr "No se encontraron impresoras en red"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1335
+#: ../panels/printers/pp-new-printer-dialog.c:1382
 msgid ""
 "FirewallD is not running. Network printer detection needs services mdns, "
 "ipp, ipp-client and samba-client enabled on firewall."
@@ -2477,42 +2497,42 @@ msgstr ""
 "el cortafuegos."
 
 #. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:1363
-#: ../panels/printers/pp-new-printer-dialog.c:1368
+#: ../panels/printers/pp-new-printer-dialog.c:1410
+#: ../panels/printers/pp-new-printer-dialog.c:1415
 msgid "Devices"
 msgstr "Dispositivos"
 
 #. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:1393
+#: ../panels/printers/pp-new-printer-dialog.c:1440
 msgctxt "printer type"
 msgid "Local"
 msgstr "Local"
 
 #. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:1395
+#: ../panels/printers/pp-new-printer-dialog.c:1442
 msgctxt "printer type"
 msgid "Network"
 msgstr "De red"
 
 #. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:1436
+#: ../panels/printers/pp-new-printer-dialog.c:1483
 msgid "Device types"
 msgstr "Tipos de dispositivos"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:1737
+#: ../panels/printers/pp-new-printer-dialog.c:1782
 msgid "Automatic configuration"
 msgstr "Configuración automática"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1818
+#: ../panels/printers/pp-new-printer-dialog.c:1865
 msgid "Opening firewall for mDNS connections"
 msgstr "Abrir el cortafuegos para conexiones mDNS"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1827
+#: ../panels/printers/pp-new-printer-dialog.c:1874
 msgid "Opening firewall for Samba connections"
 msgstr "Abrir el cortafuegos para conexiones Samba"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1836
+#: ../panels/printers/pp-new-printer-dialog.c:1883
 msgid "Opening firewall for IPP connections"
 msgstr "Abrir el cortafuegos para conexiones IPP"
 
@@ -3535,17 +3555,14 @@ msgid "Bottom Half"
 msgstr "Mitad inferior"
 
 #: ../panels/universal-access/zoom-options.ui.h:2
-#| msgid "Color"
 msgid "Color:"
 msgstr "Color:"
 
 #: ../panels/universal-access/zoom-options.ui.h:3
-#| msgid "Crosshairs"
 msgid "Crosshairs:"
 msgstr "Cruces:"
 
 #: ../panels/universal-access/zoom-options.ui.h:4
-#| msgid "Allowed users"
 msgid "Follow mouse cursor"
 msgstr "Seguir el cursor del ratón"
 
@@ -3562,17 +3579,14 @@ msgid "Left Half"
 msgstr "Mitad izquierda"
 
 #: ../panels/universal-access/zoom-options.ui.h:8
-#| msgid "Length"
 msgid "Length:"
 msgstr "Longitud:"
 
 #: ../panels/universal-access/zoom-options.ui.h:9
-#| msgid "Magnification"
 msgid "Magnification:"
 msgstr "Magnificación:"
 
 #: ../panels/universal-access/zoom-options.ui.h:10
-#| msgid "Magnifier zoom in"
 msgid "Magnifier Position:"
 msgstr "Posición del magnificador:"
 
@@ -3586,7 +3600,7 @@ msgstr ""
 
 #: ../panels/universal-access/zoom-options.ui.h:13
 msgid "Magnifier extends outside of screen"
-msgstr ""
+msgstr "El magnificador se extiende fuera de la pantalla"
 
 #: ../panels/universal-access/zoom-options.ui.h:14
 msgid "Overlaps mouse cursor"
@@ -3608,7 +3622,6 @@ msgid "Thick"
 msgstr "Grueso"
 
 #: ../panels/universal-access/zoom-options.ui.h:19
-#| msgid "Thickness"
 msgid "Thickness:"
 msgstr "Grosor:"
 
@@ -4153,8 +4166,8 @@ msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
-"Es posible mantener la carpeta personal, el «spool» del correo y los "
-"archivos temporales al eliminar una cuenta de usuario."
+"Es posible mantener la carpeta personal, el «spool» del correo y los archivos "
+"temporales al eliminar una cuenta de usuario."
 
 #: ../panels/user-accounts/um-user-panel.c:447
 msgid "_Delete Files"
@@ -7423,5 +7436,4 @@ msgstr "Todas las configuraciones"
 #~ msgstr "No hay establecido ningún grupo para el URI «%s»"
 
 #~ msgid "No application with name '%s' registered a bookmark for '%s'"
-#~ msgstr ""
-#~ "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
+#~ msgstr "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
