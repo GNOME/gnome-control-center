@@ -69,6 +69,9 @@ GType cc_wacom_panel_get_type (void) G_GNUC_CONST;
 
 void  cc_wacom_panel_register (GIOModule *module);
 
+void  cc_wacom_panel_switch_to_panel (CcWacomPanel *self,
+				      const char   *panel);
+
 G_END_DECLS
 
 #endif /* _CC_WACOM_PANEL_H */

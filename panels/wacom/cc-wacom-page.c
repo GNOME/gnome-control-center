@@ -42,6 +42,7 @@ G_DEFINE_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
 
 struct _CcWacomPagePrivate
 {
+	CcWacomPanel   *panel;
 	GsdWacomDevice *stylus, *eraser;
 	GtkBuilder     *builder;
 	GtkWidget      *nav;
@@ -261,6 +262,14 @@ combobox_text_cellrenderer (GtkComboBox *combo, int name_column)
 					"text", BUTTONNAME_COLUMN, NULL);
 }
 
+static gboolean
+display_clicked_cb (GtkButton   *button,
+		    CcWacomPage *page)
+{
+	cc_wacom_panel_switch_to_panel (page->priv->panel, "display");
+	return TRUE;
+}
+
 /* Boilerplate code goes below */
 
 static void
@@ -370,6 +379,9 @@ cc_wacom_page_init (CcWacomPage *self)
 	g_signal_connect (G_OBJECT (sw), "notify::active",
 			  G_CALLBACK (left_handed_toggled_cb), self);
 
+	g_signal_connect (G_OBJECT (WID ("display-link")), "activate-link",
+			  G_CALLBACK (display_clicked_cb), self);
+
 	priv->nav = cc_wacom_nav_button_new ();
 	gtk_grid_attach (GTK_GRID (box), priv->nav, 0, 0, 1, 1);
 }
@@ -431,7 +443,8 @@ add_styli (CcWacomPage *page)
 }
 
 GtkWidget *
-cc_wacom_page_new (GsdWacomDevice *stylus,
+cc_wacom_page_new (CcWacomPanel   *panel,
+		   GsdWacomDevice *stylus,
 		   GsdWacomDevice *eraser)
 {
 	CcWacomPage *page;
@@ -446,6 +459,7 @@ cc_wacom_page_new (GsdWacomDevice *stylus,
 	page = g_object_new (CC_TYPE_WACOM_PAGE, NULL);
 
 	priv = page->priv;
+	priv->panel = panel;
 	priv->stylus = stylus;
 	priv->eraser = eraser;
 
@@ -469,6 +483,7 @@ cc_wacom_page_new (GsdWacomDevice *stylus,
 		gtk_widget_show (WID ("button-calibrate"));
 		gtk_widget_hide (WID ("combo-tabletmode"));
 		gtk_widget_hide (WID ("label-trackingmode"));
+		gtk_widget_show (WID ("display-link"));
 	}
 
 	/* Tablet icon */
