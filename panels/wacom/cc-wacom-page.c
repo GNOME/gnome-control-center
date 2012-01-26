@@ -465,8 +465,10 @@ cc_wacom_page_new (GsdWacomDevice *stylus,
 	}
 
 	/* Calibration for screen tablets */
-	if (gsd_wacom_device_is_screen_tablet (stylus) == TRUE) {
+	if (gsd_wacom_device_is_screen_tablet (stylus) != FALSE) {
 		gtk_widget_show (WID ("button-calibrate"));
+		gtk_widget_hide (WID ("combo-tabletmode"));
+		gtk_widget_hide (WID ("label-trackingmode"));
 	}
 
 	/* Tablet icon */
