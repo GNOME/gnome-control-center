@@ -30,6 +30,7 @@
 #include <string.h>
 
 #define WID(x) (GtkWidget *) gtk_builder_get_object (priv->builder, x)
+#define CWID(x) (GtkContainer *) gtk_builder_get_object (priv->builder, x)
 
 G_DEFINE_TYPE (CcWacomStylusPage, cc_wacom_stylus_page, GTK_TYPE_BOX)
 
@@ -348,6 +349,78 @@ set_icon_name (CcWacomStylusPage *page,
 	g_free (path);
 }
 
+/* Different types of layout for the stylus config */
+enum {
+	LAYOUT_NORMAL,   /* eraser, 2 buttons, tip */
+	LAYOUT_INKING,   /* tip */
+	LAYOUT_AIRBRUSH, /* eraser, 1 button, tip */
+	LAYOUT_OTHER
+};
+
+static void
+remove_buttons (CcWacomStylusPagePrivate *priv)
+{
+	gtk_widget_destroy (WID ("combo-topbutton"));
+	gtk_widget_destroy (WID ("combo-bottombutton"));
+	gtk_widget_destroy (WID ("label-top-button"));
+	gtk_widget_destroy (WID ("label-lower-button"));
+}
+
+static void
+remove_button (CcWacomStylusPagePrivate *priv)
+{
+	gtk_widget_destroy (WID ("combo-topbutton"));
+	gtk_widget_destroy (WID ("label-top-button"));
+	gtk_label_set_text (GTK_LABEL (WID ("label-lower-button")), _("Button"));
+}
+
+static void
+remove_eraser (CcWacomStylusPagePrivate *priv)
+{
+	gtk_widget_destroy (WID ("eraser-box"));
+	gtk_widget_destroy (WID ("label-eraser-feel"));
+}
+
+static void
+update_stylus_ui (CcWacomStylusPage *page,
+		  int                layout)
+{
+	CcWacomStylusPagePrivate *priv = page->priv;
+
+	switch (layout) {
+	case LAYOUT_NORMAL:
+		/* easy! */
+		break;
+	case LAYOUT_INKING:
+		remove_buttons (page->priv);
+		remove_eraser (page->priv);
+		gtk_container_child_set (CWID ("stylus-grid"),
+					 WID ("label-tip-feel"),
+					 "top_attach", 1, NULL);
+		gtk_container_child_set (CWID ("stylus-grid"),
+					 WID ("box-tip-feel"),
+					 "top_attach", 1, NULL);
+		break;
+	case LAYOUT_AIRBRUSH:
+		remove_button (page->priv);
+		gtk_container_child_set (CWID ("stylus-grid"),
+					 WID ("label-lower-button"),
+					 "top_attach", 2, NULL);
+		gtk_container_child_set (CWID ("stylus-grid"),
+					 WID ("combo-bottombutton"),
+					 "top_attach", 2, NULL);
+		gtk_container_child_set (CWID ("stylus-grid"),
+					 WID ("label-tip-feel"),
+					 "top_attach", 3, NULL);
+		gtk_container_child_set (CWID ("stylus-grid"),
+					 WID ("box-tip-feel"),
+					 "top_attach", 3, NULL);
+	case LAYOUT_OTHER:
+		/* We already warn about it in cc_wacom_stylus_page_new () */
+		break;
+	}
+}
+
 GtkWidget *
 cc_wacom_stylus_page_new (GsdWacomStylus *stylus,
 			  GsdWacomStylus *eraser)
@@ -355,6 +428,7 @@ cc_wacom_stylus_page_new (GsdWacomStylus *stylus,
 	CcWacomStylusPage *page;
 	CcWacomStylusPagePrivate *priv;
 	int num_buttons;
+	int layout;
 
 	g_return_val_if_fail (GSD_IS_WACOM_STYLUS (stylus), NULL);
 
@@ -376,18 +450,27 @@ cc_wacom_stylus_page_new (GsdWacomStylus *stylus,
 	gtk_label_set_text (GTK_LABEL (WID ("label-stylus")), gsd_wacom_stylus_get_name (stylus));
 
 	num_buttons = gsd_wacom_stylus_get_num_buttons (stylus);
-	if (num_buttons == 0) {
-		gtk_widget_hide (WID ("combo-topbutton"));
-		gtk_widget_hide (WID ("combo-bottombutton"));
-		gtk_widget_hide (WID ("label-top-button"));
-		gtk_widget_hide (WID ("label-lower-button"));
-	} else if (num_buttons == 1) {
-		gtk_widget_hide (WID ("combo-topbutton"));
-		gtk_widget_hide (WID ("label-top-button"));
-		gtk_label_set_text (GTK_LABEL (WID ("label-lower-button")), _("Button"));
-	} else if (num_buttons > 2) {
-		g_warning ("Unhandled number of buttons on stylus '%s'", gsd_wacom_stylus_get_name (stylus));
+	if (num_buttons == 0 && eraser == NULL)
+		layout = LAYOUT_INKING;
+	else if (num_buttons == 2 && eraser != NULL)
+		layout = LAYOUT_NORMAL;
+	else if (num_buttons == 1 && eraser != NULL)
+		layout = LAYOUT_AIRBRUSH;
+	else {
+		layout = LAYOUT_OTHER;
+		if (num_buttons == 0)
+			remove_buttons (priv);
+		else if (num_buttons == 1)
+			remove_button (priv);
+
+		if (eraser == NULL)
+			remove_eraser (priv);
+
+		g_warning ("The layout of this page is not known, %d buttons, %s eraser",
+			   num_buttons, eraser ? "with" : "without");
 	}
+
+	update_stylus_ui (page, layout);
 
 	if (num_buttons == 2)
 		set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-topbutton")), priv->stylus_settings, 3);
@@ -395,12 +478,8 @@ cc_wacom_stylus_page_new (GsdWacomStylus *stylus,
 		set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-bottombutton")), priv->stylus_settings, 2);
 	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-tip-feel")), priv->stylus_settings);
 
-	if (eraser != NULL) {
+	if (eraser != NULL)
 		set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-eraser-feel")), priv->eraser_settings);
-	} else {
-		gtk_widget_hide (WID ("eraser-box"));
-		gtk_widget_hide (WID ("label-eraser-feel"));
-	}
 
 	return GTK_WIDGET (page);
 }
