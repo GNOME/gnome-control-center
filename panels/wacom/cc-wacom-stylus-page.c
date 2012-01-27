@@ -474,7 +474,7 @@ cc_wacom_stylus_page_new (GsdWacomStylus *stylus,
 
 	if (num_buttons == 2)
 		set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-topbutton")), priv->stylus_settings, 3);
-	if (num_buttons > 1)
+	if (num_buttons >= 1)
 		set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-bottombutton")), priv->stylus_settings, 2);
 	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-tip-feel")), priv->stylus_settings);
 
