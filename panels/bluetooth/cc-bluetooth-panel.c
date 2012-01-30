@@ -427,7 +427,7 @@ switch_panel (CcBluetoothPanel *self,
   shell = cc_panel_get_shell (CC_PANEL (self));
   if (cc_shell_set_active_panel_from_id (shell, panel, NULL, &error) == FALSE)
     {
-      g_warning ("Failed to activate Region panel: %s", error->message);
+      g_warning ("Failed to activate '%s' panel: %s", panel, error->message);
       g_error_free (error);
     }
 }
@@ -762,7 +762,7 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 
 	/* Note that this will only ever show the devices on the default
 	 * adapter, this is on purpose */
-	self->priv->chooser = bluetooth_chooser_new (NULL);
+	self->priv->chooser = bluetooth_chooser_new ();
 	gtk_box_pack_start (GTK_BOX (WID ("box_devices")), self->priv->chooser, TRUE, TRUE, 0);
 	g_object_set (self->priv->chooser,
 		      "show-searching", FALSE,

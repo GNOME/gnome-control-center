@@ -69,6 +69,7 @@ struct _GnomeControlCenterPrivate
   GtkWidget  *window;
   GtkWidget  *search_entry;
   GtkWidget  *lock_button;
+  GPtrArray  *custom_widgets;
 
   GMenuTree  *menu_tree;
   GtkListStore *store;
@@ -174,6 +175,7 @@ activate_panel (GnomeControlCenter *shell,
 
           /* set the title of the window */
           icon_name = get_icon_name_from_g_icon (gicon);
+          gtk_window_set_role (GTK_WINDOW (priv->window), id);
           gtk_window_set_title (GTK_WINDOW (priv->window), name);
           gtk_window_set_default_icon_name (icon_name);
           gtk_window_set_icon_name (GTK_WINDOW (priv->window), icon_name);
@@ -201,6 +203,23 @@ activate_panel (GnomeControlCenter *shell,
 }
 
 static void
+_shell_remove_all_custom_widgets (GnomeControlCenterPrivate *priv)
+{
+  GtkBox *box;
+  GtkWidget *widget;
+  guint i;
+
+  /* remove from the header */
+  box = GTK_BOX (W (priv->builder, "topright"));
+  for (i = 0; i < priv->custom_widgets->len; i++)
+    {
+        widget = g_ptr_array_index (priv->custom_widgets, i);
+        gtk_container_remove (GTK_CONTAINER (box), widget);
+    }
+  g_ptr_array_set_size (priv->custom_widgets, 0);
+}
+
+static void
 shell_show_overview_page (GnomeControlCenterPrivate *priv)
 {
   gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), OVERVIEW_PAGE);
@@ -216,10 +235,14 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
   gtk_lock_button_set_permission (GTK_LOCK_BUTTON (priv->lock_button), NULL);
 
   /* reset window title and icon */
+  gtk_window_set_role (GTK_WINDOW (priv->window), NULL);
   gtk_window_set_title (GTK_WINDOW (priv->window), priv->default_window_title);
   gtk_window_set_default_icon_name (priv->default_window_icon);
   gtk_window_set_icon_name (GTK_WINDOW (priv->window),
                             priv->default_window_icon);
+
+  /* clear any custom widgets */
+  _shell_remove_all_custom_widgets (priv);
 }
 
 void
@@ -810,6 +833,20 @@ notebook_switch_page_cb (GtkNotebook               *book,
 }
 
 /* CcShell implementation */
+static void
+_shell_embed_widget_in_header (CcShell      *shell,
+                               GtkWidget    *widget)
+{
+  GnomeControlCenterPrivate *priv = GNOME_CONTROL_CENTER (shell)->priv;
+  GtkBox *box;
+
+  /* add to header */
+  box = GTK_BOX (W (priv->builder, "topright"));
+  gtk_box_pack_end (box, widget, FALSE, FALSE, 0);
+  g_ptr_array_add (priv->custom_widgets, g_object_ref (widget));
+}
+
+/* CcShell implementation */
 static gboolean
 _shell_set_active_panel_from_id (CcShell      *shell,
                                  const gchar  *start_id,
@@ -823,6 +860,8 @@ _shell_set_active_panel_from_id (CcShell      *shell,
   GIcon *gicon;
   GnomeControlCenterPrivate *priv = GNOME_CONTROL_CENTER (shell)->priv;
 
+  /* clear any custom widgets */
+  _shell_remove_all_custom_widgets (priv);
 
   iter_valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->store),
                                               &iter);
@@ -919,6 +958,11 @@ gnome_control_center_dispose (GObject *object)
 {
   GnomeControlCenterPrivate *priv = GNOME_CONTROL_CENTER (object)->priv;
 
+  if (priv->custom_widgets)
+    {
+      g_ptr_array_unref (priv->custom_widgets);
+      priv->custom_widgets = NULL;
+    }
   if (priv->window)
     {
       gtk_widget_destroy (priv->window);
@@ -1005,26 +1049,8 @@ gnome_control_center_class_init (GnomeControlCenterClass *klass)
   object_class->finalize = gnome_control_center_finalize;
 
   shell_class->set_active_panel_from_id = _shell_set_active_panel_from_id;
+  shell_class->embed_widget_in_header = _shell_embed_widget_in_header;
   shell_class->get_toplevel = _shell_get_toplevel;
-}
-
-static void
-viewport_style_set_cb (GtkWidget *widget,
-                       GtkStyle  *old_style,
-                       gpointer   user_data)
-{
-  GtkStyle *style;
-
-  /* use "base" colours inside the viewport */
-
-  g_signal_handlers_block_by_func (widget, viewport_style_set_cb, NULL);
-
-  style = gtk_widget_get_style (widget);
-
-  gtk_widget_modify_bg (widget, GTK_STATE_NORMAL,
-                        &style->base[GTK_STATE_NORMAL]);
-
-  g_signal_handlers_unblock_by_func (widget, viewport_style_set_cb, NULL);
 }
 
 static gboolean
@@ -1070,7 +1096,6 @@ window_key_press_event (GtkWidget          *win,
 static void
 gnome_control_center_init (GnomeControlCenter *self)
 {
-  GtkWidget *widget;
   GError *err = NULL;
   GnomeControlCenterPrivate *priv;
 
@@ -1095,11 +1120,6 @@ gnome_control_center_init (GnomeControlCenter *self)
 
   priv->notebook = W (priv->builder, "notebook");
   priv->scrolled_window = W (priv->builder, "scrolledwindow1");
-
-  widget = W (priv->builder, "viewport");
-  g_signal_connect (widget, "style-set", G_CALLBACK (viewport_style_set_cb),
-                    NULL);
-
   gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, -1);
   priv->main_vbox = W (priv->builder, "main-vbox");
   g_signal_connect (priv->notebook, "switch-page",
@@ -1107,6 +1127,9 @@ gnome_control_center_init (GnomeControlCenter *self)
 
   g_signal_connect (gtk_builder_get_object (priv->builder, "home-button"),
                     "clicked", G_CALLBACK (home_button_clicked_cb), self);
+
+  /* keep a list of custom widgets to unload on panel change */
+  priv->custom_widgets = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
 
   /* load the available settings panels */
   setup_model (self);

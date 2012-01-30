@@ -98,11 +98,24 @@ check-local: test-timezone-gfx test-endianess test-timezone
 ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libdate_time.la
 
-# FIXME add a way to regenerate the dtm.[ch]
-# gdbus-codegen --generate-c-code dtm  --interface-prefix org.gnome.SettingsDaemon  /path/to/gnome-settings-daemon/plugins/datetime/gsd-datetime-mechanism.xml
-# See also:
-# https://bugzilla.gnome.org/show_bug.cgi?id=650875
-# https://bugzilla.gnome.org/show_bug.cgi?id=650874
+
+# This requires running d-bus session and accessible timedate1 daemon
+# FIXME: need to find a way how to filter out unnecessary d-bus stuff (introspectable, properties)
+#timedated1-interface.xml:
+#	gdbus introspect					\
+#		--xml						\
+#		--system					\
+#		--dest org.freedesktop.timedate1		\
+#		--object-path /org/freedesktop/timedate1	\
+#		 > timedated1-interface.xml
+
+dbus_built_sources = timedated.c timedated.h
+timedated.c: timedated.h
+timedated.h: Makefile.am timedated1-interface.xml
+	gdbus-codegen						\
+		--interface-prefix org.freedesktop.		\
+		--generate-c-code timedated			\
+		$(srcdir)/timedated1-interface.xml
 
 libdate_time_la_SOURCES =	\
 	datetime-module.c	\
@@ -110,14 +123,22 @@ libdate_time_la_SOURCES =	\
 	cc-datetime-panel.h	\
 	cc-timezone-map.c	\
 	cc-timezone-map.h	\
-	dtm.c			\
-	dtm.h			\
 	date-endian.c		\
 	date-endian.h		\
-	tz.c tz.h
+	tz.c tz.h		\
+	$(dbus_built_sources)	\
+	$(NULL)
 
 libdate_time_la_LIBADD = $(PANEL_LIBS) $(DATETIME_PANEL_LIBS)
 libdate_time_la_LDFLAGS = $(PANEL_LDFLAGS)
+
+
+polkitdir = $(datadir)/polkit-1/actions
+polkit_in_files = org.gnome.controlcenter.datetime.policy.in
+
+@INTLTOOL_POLICY_RULE@
+polkit_DATA = $(polkit_in_files:.policy.in=.policy)
+
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -125,7 +146,16 @@ desktopdir = $(datadir)/applications
 desktop_in_files = gnome-datetime-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
-CLEANFILES = $(desktop_in_files) $(desktop_DATA)
+CLEANFILES =					\
+	$(desktop_in_files)			\
+	$(desktop_DATA)				\
+	$(dbus_built_sources)			\
+	org.gnome.controlcenter.datetime.policy
+
+EXTRA_DIST =				\
+	timedated1-interface.xml	\
+	$(polkit_in_files)
+
+BUILT_SOURCES = $(dbus_built_sources)
 
 -include $(top_srcdir)/git.mk
-

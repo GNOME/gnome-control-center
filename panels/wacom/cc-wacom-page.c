@@ -24,6 +24,8 @@
 
 #include "cc-wacom-page.h"
 #include "cc-wacom-nav-button.h"
+#include "cc-wacom-stylus-page.h"
+#include "gui_gtk.h"
 #include <gtk/gtk.h>
 
 #include <string.h>
@@ -35,18 +37,18 @@ G_DEFINE_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
 #define WACOM_PAGE_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_WACOM_PAGE, CcWacomPagePrivate))
 
-#define WACOM_SCHEMA "org.gnome.settings-daemon.peripherals.wacom"
-#define WACOM_STYLUS_SCHEMA WACOM_SCHEMA ".stylus"
-#define WACOM_ERASER_SCHEMA WACOM_SCHEMA ".eraser"
+#define THRESHOLD_MISCLICK	15
+#define THRESHOLD_DOUBLECLICK	7
 
 struct _CcWacomPagePrivate
 {
+	CcWacomPanel   *panel;
 	GsdWacomDevice *stylus, *eraser;
 	GtkBuilder     *builder;
 	GtkWidget      *nav;
+	GtkWidget      *notebook;
+	CalibArea      *area;
 	GSettings      *wacom_settings;
-	GSettings      *stylus_settings;
-	GSettings      *eraser_settings;
 	/* The UI doesn't support cursor/pad at the moment */
 };
 
@@ -70,73 +72,128 @@ enum {
 	MODE_RELATIVE, /* stylus + eraser relative */
 };
 
-/* GSettings stores pressurecurve as 4 values like the driver. We map slider
- * scale to these values given the array below. These settings were taken from
- * wacomcpl, where they've been around for years.
- */
-#define N_PRESSURE_CURVES 7
-static const gint32 PRESSURE_CURVES[N_PRESSURE_CURVES][4] = {
-		{	0,	75,	25,	100	},	/* soft */
-		{	0,	50,	50,	100	},
-		{	0,	25,	75,	100	},
-		{	0,	0,	100,	100	},	/* neutral */
-		{	25,	0,	100,	75	},
-		{	50,	0,	100,	50	},
-		{	75,	0,	100,	25	}	/* firm */
-};
-
 static void
-set_pressurecurve (GtkRange *range, GSettings *settings)
+set_calibration (gint      *cal,
+                 gsize      ncal,
+                 GSettings *settings)
 {
-	gint		slider_val = gtk_range_get_value (range);
-	GVariant	*values[4],
-			*array;
-	int		i;
+	GVariant    *current; /* current calibration */
+	GVariant    *array;   /* new calibration */
+	GVariant   **tmp;
+	gsize        nvalues;
+	int          i;
 
-	for (i = 0; i < G_N_ELEMENTS (values); i++)
-		values[i] = g_variant_new_int32 (PRESSURE_CURVES[slider_val][i]);
+	current = g_settings_get_value (settings, "area");
+	g_variant_get_fixed_array (current, &nvalues, sizeof (gint32));
+	if ((ncal != 4) || (nvalues != 4)) {
+		g_warning("Unable set set device calibration property. Got %"G_GSIZE_FORMAT" items to put in %"G_GSIZE_FORMAT" slots; expected %d items.\n", ncal, nvalues, 4);
+		return;
+	}
 
-	array = g_variant_new_array (G_VARIANT_TYPE_INT32, values, G_N_ELEMENTS (values));
+	tmp = g_malloc (nvalues * sizeof (GVariant*));
+	for (i = 0; i < ncal; i++)
+		tmp[i] = g_variant_new_int32 (cal[i]);
 
-	g_settings_set_value (settings, "pressurecurve", array);
+	array = g_variant_new_array (G_VARIANT_TYPE_INT32, tmp, nvalues);
+	g_settings_set_value (settings, "area", array);
 
+	g_free (tmp);
 	g_variant_unref (array);
 }
 
 static void
-tip_feel_value_changed_cb (GtkRange *range, gpointer user_data)
+finish_calibration (CalibArea *area,
+		    gpointer   user_data)
 {
-    set_pressurecurve (range, CC_WACOM_PAGE(user_data)->priv->stylus_settings);
+	CcWacomPage *page = (CcWacomPage *) user_data;
+	CcWacomPagePrivate *priv = page->priv;
+	XYinfo axis;
+	gboolean swap_xy;
+	int cal[4];
+
+	if (calib_area_finish (area, &axis, &swap_xy)) {
+		cal[0] = axis.x_min;
+		cal[1] = axis.y_min;
+		cal[2] = axis.x_max;
+		cal[3] = axis.y_max;
+
+		set_calibration(cal, 4, page->priv->wacom_settings);
+	}
+
+	calib_area_free (area);
+	page->priv->area = NULL;
+	gtk_widget_set_sensitive (WID ("button-calibrate"), TRUE);
+}
+
+static gboolean
+run_calibration (CcWacomPage *page,
+		 gint        *cal,
+		 gint         monitor)
+{
+	XYinfo old_axis;
+
+	g_assert (page->priv->area == NULL);
+
+	old_axis.x_min = cal[0];
+	old_axis.y_min = cal[1];
+	old_axis.x_max = cal[2];
+	old_axis.y_max = cal[3];
+
+	page->priv->area = calib_area_new (NULL,
+					   monitor,
+					   finish_calibration,
+					   page,
+					   &old_axis,
+					   THRESHOLD_MISCLICK,
+					   THRESHOLD_DOUBLECLICK);
+
+	return FALSE;
 }
 
 static void
-eraser_feel_value_changed_cb (GtkRange *range, gpointer user_data)
+calibrate_button_clicked_cb (GtkButton   *button,
+			     CcWacomPage *page)
 {
-    set_pressurecurve (range, CC_WACOM_PAGE(user_data)->priv->eraser_settings);
-}
+	int i, calibration[4];
+	GVariant *variant;
+	int *current;
+	gsize ncal;
+	gint monitor;
 
-static void
-set_feel_from_gsettings (GtkAdjustment *adjustment, GSettings *settings)
-{
-	GVariant	*variant;
-	const gint32	*values;
-	gsize		nvalues;
-	int		i;
-
-	variant = g_settings_get_value (settings, "pressurecurve");
-	values = g_variant_get_fixed_array (variant, &nvalues, sizeof (gint32));
-
-	if (nvalues != 4) {
-		g_warning ("Invalid pressure curve format, expected 4 values (got %ld)", nvalues);
+	monitor = gsd_wacom_device_get_display_monitor (page->priv->stylus);
+	if (monitor < 0) {
+		/* The display the tablet should be mapped to could not be located.
+		 * This shouldn't happen if the EDID data is good...
+		 */
+		g_critical("Output associated with the tablet is not connected. Unable to calibrate.");
 		return;
 	}
 
-	for (i = 0; i < N_PRESSURE_CURVES; i++) {
-		if (memcmp (PRESSURE_CURVES[i], values, sizeof (gint32) * 4) == 0) {
-			gtk_adjustment_set_value (adjustment, i);
-			break;
-		}
+	variant = g_settings_get_value (page->priv->wacom_settings, "area");
+	current = (int *) g_variant_get_fixed_array (variant, &ncal, sizeof (gint32));
+
+	if (ncal != 4) {
+		g_warning("Device calibration property has wrong length. Got %"G_GSIZE_FORMAT" items; expected %d.\n", ncal, 4);
+		g_free (current);
+		return;
 	}
+
+	for (i = 0; i < 4; i++)
+		calibration[i] = current[i];
+
+	if (calibration[0] == -1 &&
+	    calibration[1] == -1 &&
+	    calibration[2] == -1 &&
+	    calibration[3] == -1) {
+		gint *device_cal;
+		device_cal = gsd_wacom_device_get_area (page->priv->stylus);
+		for (i = 0; i < 4; i++)
+			calibration[i] = device_cal[i];
+		g_free (device_cal);
+	}
+
+	run_calibration (page, calibration, monitor);
+	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
 }
 
 static void
@@ -195,101 +252,6 @@ set_mode_from_gsettings (GtkComboBox *combo, CcWacomPage *page)
 }
 
 static void
-set_button_mapping_from_gsettings (GtkComboBox *combo, GSettings* settings, gint current_button)
-{
-	GVariant	*current;
-	gsize		 nvalues;
-	const gint	*values;
-	GtkTreeModel	*model;
-	GtkTreeIter	 iter;
-	gboolean	 valid;
-
-	current = g_settings_get_value (settings, "buttonmapping");
-	values = g_variant_get_fixed_array (current, &nvalues, sizeof (gint32));
-	model = gtk_combo_box_get_model (combo);
-	valid = gtk_tree_model_get_iter_first (model, &iter);
-
-	while (valid) {
-		gint button;
-
-		gtk_tree_model_get (model, &iter,
-				    BUTTONNUMBER_COLUMN, &button,
-				    -1);
-
-		/* Currently button values match logical X buttons. If we
-		 * introduce things like double-click, this code must
-		 * change. Recommendation: use negative buttons numbers for
-		 * special ones.
-		 */
-
-		/* 0 vs 1-indexed array/button numbers */
-		if (button == values[current_button - 1]) {
-			gtk_combo_box_set_active_iter (combo, &iter);
-			break;
-		}
-
-		valid = gtk_tree_model_iter_next (model, &iter);
-	}
-}
-
-static void
-map_button (GSettings *settings, int button2, int button3)
-{
-	GVariant	*current; /* current mapping */
-	GVariant	*array;   /* new mapping */
-	GVariant	**tmp;
-	gsize		 nvalues;
-	const gint	*values;
-	gint		 i;
-
-	current = g_settings_get_value (settings, "buttonmapping");
-	values = g_variant_get_fixed_array (current, &nvalues, sizeof (gint32));
-
-	tmp = g_malloc (nvalues * sizeof (GVariant*));
-	for (i = 0; i < nvalues; i++) {
-		if (i == 1) /* zero indexed array vs one-indexed buttons */
-			tmp[i] = g_variant_new_int32 (button2);
-		else if (i == 2)
-			tmp[i] = g_variant_new_int32 (button3);
-		else
-			tmp[i] = g_variant_new_int32 (values[i]);
-	}
-
-	array = g_variant_new_array (G_VARIANT_TYPE_INT32, tmp, nvalues);
-	g_settings_set_value (settings, "buttonmapping", array);
-
-	g_free (tmp);
-	g_variant_unref (array);
-}
-
-static void
-button_changed_cb (GtkComboBox *combo, gpointer user_data)
-{
-	CcWacomPagePrivate	*priv = CC_WACOM_PAGE(user_data)->priv;
-	GtkTreeIter		iter;
-	GtkListStore		*liststore;
-	gint			mapping_b2,
-				mapping_b3;
-
-	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (WID ("combo-bottombutton")), &iter))
-		return;
-
-	liststore = GTK_LIST_STORE (WID ("liststore-buttons"));
-	gtk_tree_model_get (GTK_TREE_MODEL (liststore), &iter,
-			    BUTTONNUMBER_COLUMN, &mapping_b2,
-			    -1);
-
-	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (WID ("combo-topbutton")), &iter))
-		return;
-
-	gtk_tree_model_get (GTK_TREE_MODEL (liststore), &iter,
-			    BUTTONNUMBER_COLUMN, &mapping_b3,
-			    -1);
-
-	map_button (priv->stylus_settings, mapping_b2, mapping_b3);
-}
-
-static void
 combobox_text_cellrenderer (GtkComboBox *combo, int name_column)
 {
 	GtkCellRenderer	*renderer;
@@ -298,6 +260,14 @@ combobox_text_cellrenderer (GtkComboBox *combo, int name_column)
 	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), renderer, TRUE);
 	gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo), renderer,
 					"text", BUTTONNAME_COLUMN, NULL);
+}
+
+static gboolean
+display_clicked_cb (GtkButton   *button,
+		    CcWacomPage *page)
+{
+	cc_wacom_panel_switch_to_panel (page->priv->panel, "display");
+	return TRUE;
 }
 
 /* Boilerplate code goes below */
@@ -333,11 +303,16 @@ cc_wacom_page_dispose (GObject *object)
 {
 	CcWacomPagePrivate *priv = CC_WACOM_PAGE (object)->priv;
 
-	if (priv->builder)
-	{
+	if (priv->area) {
+		calib_area_free (priv->area);
+		priv->area = NULL;
+	}
+
+	if (priv->builder) {
 		g_object_unref (priv->builder);
 		priv->builder = NULL;
 	}
+
 
 	G_OBJECT_CLASS (cc_wacom_page_parent_class)->dispose (object);
 }
@@ -390,20 +365,10 @@ cc_wacom_page_init (CcWacomPage *self)
 	gtk_container_add (GTK_CONTAINER (self), box);
 	gtk_widget_set_vexpand (GTK_WIDGET (box), TRUE);
 
-	g_signal_connect (WID ("scale-tip-feel"), "value-changed",
-			  G_CALLBACK (tip_feel_value_changed_cb), self);
-	g_signal_connect (WID ("scale-eraser-feel"), "value-changed",
-			  G_CALLBACK (eraser_feel_value_changed_cb), self);
+	self->priv->notebook = WID ("stylus-notebook");
 
-	combo = GTK_COMBO_BOX (WID ("combo-topbutton"));
-	combobox_text_cellrenderer (combo, BUTTONNAME_COLUMN);
-	g_signal_connect (G_OBJECT (combo), "changed",
-			  G_CALLBACK (button_changed_cb), self);
-
-	combo = GTK_COMBO_BOX (WID ("combo-bottombutton"));
-	combobox_text_cellrenderer (combo, BUTTONNAME_COLUMN);
-	g_signal_connect (G_OBJECT (combo), "changed",
-			  G_CALLBACK (button_changed_cb), self);
+	g_signal_connect (WID ("button-calibrate"), "clicked",
+			  G_CALLBACK (calibrate_button_clicked_cb), self);
 
 	combo = GTK_COMBO_BOX (WID ("combo-tabletmode"));
 	combobox_text_cellrenderer (combo, MODELABEL_COLUMN);
@@ -414,21 +379,11 @@ cc_wacom_page_init (CcWacomPage *self)
 	g_signal_connect (G_OBJECT (sw), "notify::active",
 			  G_CALLBACK (left_handed_toggled_cb), self);
 
+	g_signal_connect (G_OBJECT (WID ("display-link")), "activate-link",
+			  G_CALLBACK (display_clicked_cb), self);
+
 	priv->nav = cc_wacom_nav_button_new ();
 	gtk_grid_attach (GTK_GRID (box), priv->nav, 0, 0, 1, 1);
-}
-
-static GSettings *
-get_first_stylus_setting (GsdWacomDevice *device)
-{
-	GList *styli;
-	GsdWacomStylus *stylus;
-
-	styli = gsd_wacom_device_list_styli (device);
-	stylus = styli->data;
-	g_list_free (styli);
-
-	return gsd_wacom_stylus_get_settings (stylus);
 }
 
 static void
@@ -449,21 +404,47 @@ set_icon_name (CcWacomPage *page,
 	g_free (path);
 }
 
-static void
-set_first_stylus_icon (CcWacomPage *page)
-{
-	GList *styli;
+typedef struct {
 	GsdWacomStylus *stylus;
+	GsdWacomStylus *eraser;
+} StylusPair;
 
-	styli = gsd_wacom_device_list_styli (page->priv->stylus);
-	stylus = styli->data;
+static void
+add_styli (CcWacomPage *page)
+{
+	GList *styli, *l;
+	CcWacomPagePrivate *priv;
+
+	priv = page->priv;
+
+	styli = gsd_wacom_device_list_styli (priv->stylus);
+
+	for (l = styli; l; l = l->next) {
+		GsdWacomStylus *stylus, *eraser;
+		GtkWidget *page;
+
+		stylus = l->data;
+		if (gsd_wacom_stylus_get_has_eraser (stylus)) {
+			GsdWacomDeviceType type;
+			type = gsd_wacom_stylus_get_stylus_type (stylus);
+			eraser = gsd_wacom_device_get_stylus_for_type (priv->eraser, type);
+		} else {
+			eraser = NULL;
+		}
+
+		page = cc_wacom_stylus_page_new (stylus, eraser);
+		cc_wacom_stylus_page_set_navigation (CC_WACOM_STYLUS_PAGE (page), GTK_NOTEBOOK (priv->notebook));
+		gtk_widget_show (page);
+		gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), page, NULL);
+	}
 	g_list_free (styli);
 
-	set_icon_name (page, "image-stylus", gsd_wacom_stylus_get_icon_name (stylus));
+	/*FIXME: Set the page with the last used item */
 }
 
 GtkWidget *
-cc_wacom_page_new (GsdWacomDevice *stylus,
+cc_wacom_page_new (CcWacomPanel   *panel,
+		   GsdWacomDevice *stylus,
 		   GsdWacomDevice *eraser)
 {
 	CcWacomPage *page;
@@ -478,6 +459,7 @@ cc_wacom_page_new (GsdWacomDevice *stylus,
 	page = g_object_new (CC_TYPE_WACOM_PAGE, NULL);
 
 	priv = page->priv;
+	priv->panel = panel;
 	priv->stylus = stylus;
 	priv->eraser = eraser;
 
@@ -496,18 +478,19 @@ cc_wacom_page_new (GsdWacomDevice *stylus,
 		set_left_handed_from_gsettings (page);
 	}
 
+	/* Calibration for screen tablets */
+	if (gsd_wacom_device_is_screen_tablet (stylus) != FALSE) {
+		gtk_widget_show (WID ("button-calibrate"));
+		gtk_widget_hide (WID ("combo-tabletmode"));
+		gtk_widget_hide (WID ("label-trackingmode"));
+		gtk_widget_show (WID ("display-link"));
+	}
+
 	/* Tablet icon */
 	set_icon_name (page, "image-tablet", gsd_wacom_device_get_icon_name (stylus));
 
-	/* Stylus/Eraser */
-	priv->stylus_settings = get_first_stylus_setting (stylus);
-	priv->eraser_settings = get_first_stylus_setting (eraser);
-
-	set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-topbutton")), priv->stylus_settings, 3);
-	set_button_mapping_from_gsettings (GTK_COMBO_BOX (WID ("combo-bottombutton")), priv->stylus_settings, 2);
-	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-tip-feel")), priv->stylus_settings);
-	set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-eraser-feel")), priv->eraser_settings);
-	set_first_stylus_icon (page);
+	/* Add styli */
+	add_styli (page);
 
 	return GTK_WIDGET (page);
 }

@@ -27,6 +27,9 @@
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <X11/Xatom.h>
+#define GNOME_DESKTOP_USE_UNSTABLE_API
+#include <libgnome-desktop/gnome-rr.h>
+#include <libgnome-desktop/gnome-rr-config.h>
 
 #include <libwacom/libwacom.h>
 #include <X11/extensions/XInput.h>
@@ -34,13 +37,13 @@
 
 #include "gsd-input-helper.h"
 
-#include "gnome-settings-daemon/gsd-enums.h"
+#include "gsd-enums.h"
 #include "gsd-wacom-device.h"
 
 #define GSD_WACOM_STYLUS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GSD_TYPE_WACOM_STYLUS, GsdWacomStylusPrivate))
 
 #define WACOM_TABLET_SCHEMA "org.gnome.settings-daemon.peripherals.wacom"
-#define WACOM_DEVICE_CONFIG_BASE "/org/gnome/settings-daemon/peripherals/wacom/%s"
+#define WACOM_DEVICE_CONFIG_BASE "/org/gnome/settings-daemon/peripherals/wacom/%s/"
 #define WACOM_STYLUS_SCHEMA "org.gnome.settings-daemon.peripherals.wacom.stylus"
 #define WACOM_ERASER_SCHEMA "org.gnome.settings-daemon.peripherals.wacom.eraser"
 
@@ -54,6 +57,8 @@ struct GsdWacomStylusPrivate
 	char *name;
 	const char *icon_name;
 	GSettings *settings;
+	gboolean has_eraser;
+	int num_buttons;
 };
 
 static void     gsd_wacom_stylus_class_init  (GsdWacomStylusClass *klass);
@@ -109,6 +114,9 @@ get_icon_name_from_type (WacomStylusType type)
 {
 	switch (type) {
 	case WSTYLUS_INKING:
+	case WSTYLUS_STROKE:
+		/* The stroke pen is the same as the inking pen with
+		 * a different nib */
 		return "wacom-stylus-inking";
 	case WSTYLUS_AIRBRUSH:
 		return "wacom-stylus-airbrush";
@@ -135,6 +143,8 @@ gsd_wacom_stylus_new (GsdWacomDevice    *device,
 	stylus->priv->settings = settings;
 	stylus->priv->type = libwacom_stylus_get_type (wstylus);
 	stylus->priv->icon_name = get_icon_name_from_type (stylus->priv->type);
+	stylus->priv->has_eraser = libwacom_stylus_has_eraser (wstylus);
+	stylus->priv->num_buttons = libwacom_stylus_get_num_buttons (wstylus);
 
 	return stylus;
 }
@@ -169,6 +179,57 @@ gsd_wacom_stylus_get_device (GsdWacomStylus *stylus)
 	g_return_val_if_fail (GSD_IS_WACOM_STYLUS (stylus), NULL);
 
 	return stylus->priv->device;
+}
+
+gboolean
+gsd_wacom_stylus_get_has_eraser (GsdWacomStylus *stylus)
+{
+	g_return_val_if_fail (GSD_IS_WACOM_STYLUS (stylus), FALSE);
+
+	return stylus->priv->has_eraser;
+}
+
+int
+gsd_wacom_stylus_get_num_buttons (GsdWacomStylus *stylus)
+{
+	g_return_val_if_fail (GSD_IS_WACOM_STYLUS (stylus), -1);
+
+	return stylus->priv->num_buttons;
+}
+
+GsdWacomStylusType
+gsd_wacom_stylus_get_stylus_type (GsdWacomStylus *stylus)
+{
+	g_return_val_if_fail (GSD_IS_WACOM_STYLUS (stylus), WACOM_STYLUS_TYPE_UNKNOWN);
+
+	switch (stylus->priv->type) {
+	case WSTYLUS_UNKNOWN:
+		return WACOM_STYLUS_TYPE_UNKNOWN;
+	case WSTYLUS_GENERAL:
+		return WACOM_STYLUS_TYPE_GENERAL;
+	case WSTYLUS_INKING:
+		return WACOM_STYLUS_TYPE_INKING;
+	case WSTYLUS_AIRBRUSH:
+		return WACOM_STYLUS_TYPE_AIRBRUSH;
+	case WSTYLUS_CLASSIC:
+		return WACOM_STYLUS_TYPE_CLASSIC;
+	case WSTYLUS_MARKER:
+		return WACOM_STYLUS_TYPE_MARKER;
+	case WSTYLUS_STROKE:
+		return WACOM_STYLUS_TYPE_STROKE;
+	default:
+		g_assert_not_reached ();
+	}
+
+	return WACOM_STYLUS_TYPE_UNKNOWN;
+}
+
+int
+gsd_wacom_stylus_get_id (GsdWacomStylus *stylus)
+{
+	g_return_val_if_fail (GSD_IS_WACOM_STYLUS (stylus), -1);
+
+	return stylus->priv->id;
 }
 
 #define GSD_WACOM_DEVICE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GSD_TYPE_WACOM_DEVICE, GsdWacomDevicePrivate))
@@ -346,12 +407,249 @@ get_device_type (XDeviceInfo *dev)
 	return ret;
 }
 
-static char *
-get_device_name (WacomDevice *device)
+/* Finds an output which matches the given EDID information. Any NULL
+ * parameter will be interpreted to match any value.
+ */
+static GnomeRROutputInfo*
+find_output_by_edid (const gchar *vendor, const gchar *product, const gchar *serial)
 {
-	return g_strdup_printf ("%s %s",
-				libwacom_get_vendor (device),
-				libwacom_get_product (device));
+	GError *error = NULL;
+	GnomeRRScreen *rr_screen;
+	GnomeRRConfig *rr_config;
+	GnomeRROutputInfo **rr_output_info;
+
+	/* TODO: Check the value of 'error' */
+	rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
+	rr_config = gnome_rr_config_new_current (rr_screen, &error);
+	rr_output_info = gnome_rr_config_get_outputs (rr_config);
+
+	for (; *rr_output_info != NULL; rr_output_info++) {
+		gchar *o_vendor;
+		gchar *o_product;
+		gchar *o_serial;
+		gboolean match;
+
+		o_vendor = g_malloc0 (4);
+		gnome_rr_output_info_get_vendor (*rr_output_info, o_vendor);
+		o_product = g_strdup_printf ("%d", gnome_rr_output_info_get_product (*rr_output_info));
+		o_serial  = g_strdup_printf ("%d", gnome_rr_output_info_get_serial  (*rr_output_info));
+
+		g_debug ("Checking for match between '%s','%s','%s' and '%s','%s','%s'", \
+		         vendor,product,serial, o_vendor,o_product,o_serial);
+
+		match = (vendor  == NULL || g_strcmp0 (vendor,  o_vendor)  == 0) && \
+		        (product == NULL || g_strcmp0 (product, o_product) == 0) && \
+		        (serial  == NULL || g_strcmp0 (serial,  o_serial)  == 0);
+
+		g_free (o_vendor);
+		g_free (o_product);
+		g_free (o_serial);
+
+		if (match)
+			return *rr_output_info;
+	}
+	return NULL;
+}
+
+static GnomeRROutputInfo*
+find_output_by_heuristic (GsdWacomDevice *device)
+{
+	GnomeRROutputInfo *rr_output_info;
+
+	/* TODO: This heuristic will fail for non-Wacom display
+	 * tablets and may give the wrong result if multiple Wacom
+	 * display tablets are connected.
+	 */
+	rr_output_info = find_output_by_edid("WAC", NULL, NULL);
+	return rr_output_info;
+}
+
+static GnomeRROutputInfo*
+find_output_by_display (GsdWacomDevice *device)
+{
+	gsize n;
+	GSettings *tablet;
+	GVariant *display;
+	const gchar **edid;
+
+	if (device == NULL)
+		return NULL;
+
+	tablet   = device->priv->wacom_settings;
+	display  = g_settings_get_value (tablet, "display");
+	edid     = g_variant_get_strv (display, &n);
+
+	if (n != 3) {
+		g_critical ("Expected 'display' key to store %d values; got %"G_GSIZE_FORMAT".", 3, n);
+		return NULL;
+	}
+
+	if (strlen(edid[0]) == 0 || strlen(edid[1]) == 0 || strlen(edid[2]) == 0) {
+		g_warning ("EDID not completely defined.");
+		return NULL;
+	}
+
+	return find_output_by_edid (edid[0], edid[1], edid[2]);
+}
+
+static void
+set_display_by_output (GsdWacomDevice    *device,
+                       GnomeRROutputInfo *rr_output_info)
+{
+	GSettings   *tablet;
+	GVariant    *c_array;
+	GVariant    *n_array;
+	gsize        nvalues;
+	gchar       *o_vendor, *o_product, *o_serial;
+	const gchar *values[3];
+
+	tablet  = gsd_wacom_device_get_settings (device);
+	c_array = g_settings_get_value (tablet, "display");
+	g_variant_get_strv (c_array, &nvalues);
+	if (nvalues != 3) {
+		g_warning("Unable set set display property. Got %"G_GSIZE_FORMAT" items; expected %d items.\n", nvalues, 4);
+		return;
+	}
+
+	if (rr_output_info == NULL)
+	{
+		o_vendor  = g_strdup ("");
+		o_product = g_strdup ("");
+		o_serial  = g_strdup ("");
+	}
+	else
+	{
+		o_vendor = g_malloc0 (4);
+		gnome_rr_output_info_get_vendor (rr_output_info, o_vendor);
+		o_product = g_strdup_printf ("%d", gnome_rr_output_info_get_product (rr_output_info));
+		o_serial  = g_strdup_printf ("%d", gnome_rr_output_info_get_serial  (rr_output_info));
+	}
+
+	values[0] = o_vendor;
+	values[1] = o_product;
+	values[2] = o_serial;
+	n_array = g_variant_new_strv((const gchar * const *) &values, 3);
+	g_settings_set_value (tablet, "display", n_array);
+
+	g_free (o_vendor);
+	g_free (o_product);
+	g_free (o_serial);
+}
+
+static GnomeRROutputInfo*
+find_output (GsdWacomDevice *device)
+{
+	GnomeRROutputInfo *rr_output_info;
+
+	rr_output_info = find_output_by_display(device);
+
+	if (rr_output_info == NULL)
+	{
+		g_warning ("No strict EDID match was found.");
+
+		if (gsd_wacom_device_is_screen_tablet (device))
+		{
+			rr_output_info = find_output_by_heuristic (device);
+			if (rr_output_info == NULL)
+			{
+				g_warning ("No fuzzy match based on heuristics was found.");
+			}
+			else
+			{
+				g_warning("Automatically mapping tablet to heuristically-found display.");
+				set_display_by_output (device, rr_output_info);
+			}
+		}
+	}
+
+	return rr_output_info;
+}
+
+static void
+calculate_transformation_matrix (const GdkRectangle mapped, const GdkRectangle desktop, float matrix[NUM_ELEMS_MATRIX])
+{
+	float x_scale = (float)mapped.x / desktop.width;
+	float y_scale = (float)mapped.y / desktop.height;
+	float width_scale  = (float)mapped.width / desktop.width;
+	float height_scale = (float)mapped.height / desktop.height;
+
+	matrix[0] = width_scale;
+	matrix[1] = 0.0f;
+	matrix[2] = x_scale;
+
+	matrix[3] = 0.0f;
+	matrix[4] = height_scale;
+	matrix[5] = y_scale;
+
+	matrix[6] = 0.0f;
+	matrix[7] = 0.0f;
+	matrix[8] = 1.0f;
+
+	g_debug ("Matrix is %f,%f,%f,%f,%f,%f,%f,%f,%f.",
+	         matrix[0], matrix[1], matrix[2],
+	         matrix[3], matrix[4], matrix[5],
+	         matrix[6], matrix[7], matrix[8]);
+
+	return;
+}
+
+gint
+gsd_wacom_device_get_display_monitor (GsdWacomDevice *device)
+{
+	gint area[4];
+	GnomeRROutputInfo *rr_output_info;
+
+	rr_output_info = find_output(device);
+	if (rr_output_info == NULL)
+		return -1;
+
+	if (!gnome_rr_output_info_is_active (rr_output_info))
+	{
+		g_warning ("Output is not active.");
+		return -1;
+	}
+
+	gnome_rr_output_info_get_geometry (rr_output_info, &area[0], &area[1], &area[2], &area[3]);
+	if (area[2] <= 0 || area[3] <= 0)
+	{
+		g_warning ("Output has non-positive area.");
+		return -1;
+	}
+
+	g_debug ("Area: %d,%d %dx%d", area[0], area[1], area[2], area[3]);
+	return gdk_screen_get_monitor_at_point (gdk_screen_get_default (), area[0], area[1]);
+}
+
+gboolean
+gsd_wacom_device_get_display_matrix (GsdWacomDevice *device, float matrix[NUM_ELEMS_MATRIX])
+{
+	int monitor;
+	GdkRectangle display;
+	GdkRectangle desktop;
+	GdkScreen *screen = gdk_screen_get_default ();
+
+	matrix[0] = 1.0f;
+	matrix[1] = 0.0f;
+	matrix[2] = 0.0f;
+	matrix[3] = 0.0f;
+	matrix[4] = 1.0f;
+	matrix[5] = 0.0f;
+	matrix[6] = 0.0f;
+	matrix[7] = 0.0f;
+	matrix[8] = 1.0f;
+
+	monitor = gsd_wacom_device_get_display_monitor (device);
+	if (monitor < 0)
+		return FALSE;
+
+	desktop.x = 0;
+	desktop.y = 0;
+	desktop.width = gdk_screen_get_width (screen);
+	desktop.height = gdk_screen_get_height (screen);
+
+	gdk_screen_get_monitor_geometry (screen, monitor, &display);
+	calculate_transformation_matrix (display, desktop, matrix);
+	return TRUE;
 }
 
 static void
@@ -374,7 +672,7 @@ add_stylus_to_device (GsdWacomDevice *device,
 		    libwacom_stylus_is_eraser (wstylus) == FALSE)
 			return;
 
-		stylus_settings_path = g_strdup_printf ("%s/0x%x", settings_path, id);
+		stylus_settings_path = g_strdup_printf ("%s0x%x/", settings_path, id);
 		if (device->priv->type == WACOM_TYPE_STYLUS) {
 			settings = g_settings_new_with_path (WACOM_STYLUS_SCHEMA, stylus_settings_path);
 			stylus = gsd_wacom_stylus_new (device, wstylus, settings);
@@ -398,7 +696,7 @@ gsd_wacom_device_update_from_db (GsdWacomDevice *device,
 	device->priv->wacom_settings = g_settings_new_with_path (WACOM_TABLET_SCHEMA,
 								 settings_path);
 
-	device->priv->name = get_device_name (wacom_device);
+	device->priv->name = g_strdup (libwacom_get_name (wacom_device));
 	device->priv->reversible = libwacom_is_reversible (wacom_device);
 	device->priv->is_screen_tablet = libwacom_is_builtin (wacom_device);
 	if (device->priv->is_screen_tablet) {
@@ -644,6 +942,23 @@ gsd_wacom_device_list_styli (GsdWacomDevice *device)
 	return g_list_copy (device->priv->styli);
 }
 
+GsdWacomStylus *
+gsd_wacom_device_get_stylus_for_type (GsdWacomDevice     *device,
+				      GsdWacomStylusType  type)
+{
+	GList *l;
+
+	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), NULL);
+
+	for (l = device->priv->styli; l != NULL; l = l->next) {
+		GsdWacomStylus *stylus = l->data;
+
+		if (gsd_wacom_stylus_get_stylus_type (stylus) == type)
+			return stylus;
+	}
+	return NULL;
+}
+
 const char *
 gsd_wacom_device_get_name (GsdWacomDevice *device)
 {
@@ -697,6 +1012,7 @@ gsd_wacom_device_set_current_stylus (GsdWacomDevice *device,
 				     int             stylus_id)
 {
 	GList *l;
+	GsdWacomStylus *stylus;
 
 	g_return_if_fail (GSD_IS_WACOM_DEVICE (device));
 
@@ -708,7 +1024,7 @@ gsd_wacom_device_set_current_stylus (GsdWacomDevice *device,
 	}
 
 	for (l = device->priv->styli; l; l = l->next) {
-		GsdWacomStylus *stylus = l->data;
+		stylus = l->data;
 
 		/* Set a nice default if 0x0 */
 		if (stylus_id == 0x0 &&
@@ -723,7 +1039,27 @@ gsd_wacom_device_set_current_stylus (GsdWacomDevice *device,
 		}
 	}
 
-	g_warning ("Could not find stylus ID 0x%x for tablet '%s'", stylus_id, device->priv->name);
+	/* Setting the default stylus to be the generic one */
+	for (l = device->priv->styli; l; l = l->next) {
+		stylus = l->data;
+
+		/* Set a nice default if 0x0 */
+		if (stylus->priv->type == WSTYLUS_GENERAL) {
+			g_debug ("Could not find stylus ID 0x%x for tablet '%s', setting general pen ID 0x%x instead",
+				 stylus_id, device->priv->name, stylus->priv->id);
+			g_object_set (device, "last-stylus", stylus, NULL);
+			return;
+		}
+	}
+
+	g_warning ("Could not set the current stylus ID 0x%x for tablet '%s', no general pen found",
+		   stylus_id, device->priv->name);
+
+	/* Setting the default stylus to be the first one */
+	g_assert (device->priv->styli);
+
+	stylus = device->priv->styli->data;
+	g_object_set (device, "last-stylus", stylus, NULL);
 }
 
 GsdWacomDeviceType
@@ -732,6 +1068,46 @@ gsd_wacom_device_get_device_type (GsdWacomDevice *device)
 	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), WACOM_TYPE_INVALID);
 
 	return device->priv->type;
+}
+
+gint *
+gsd_wacom_device_get_area (GsdWacomDevice *device)
+{
+	int i, id;
+	XDevice *xdevice;
+	Atom area, realtype;
+	int rc, realformat;
+	unsigned long nitems, bytes_after;
+	unsigned char *data = NULL;
+	gint *device_area;
+
+	g_object_get (device->priv->gdk_device, "device-id", &id, NULL);
+
+	area = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), "Wacom Tablet Area", False);
+
+	gdk_error_trap_push ();
+	xdevice = XOpenDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), id);
+	if (gdk_error_trap_pop () || (device == NULL))
+		return NULL;
+
+	gdk_error_trap_push ();
+	rc = XGetDeviceProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
+				 xdevice, area, 0, 4, False,
+				 XA_INTEGER, &realtype, &realformat, &nitems,
+				 &bytes_after, &data);
+	if (gdk_error_trap_pop () || rc != Success || realtype == None || bytes_after != 0 || nitems != 4) {
+		XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), xdevice);
+		return NULL;
+	}
+
+	device_area = g_new0 (int, nitems);
+	for (i = 0; i < nitems; i++)
+		device_area[i] = ((long*)data)[i];
+
+	XFree (data);
+	XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), xdevice);
+
+	return device_area;
 }
 
 const char *
@@ -767,10 +1143,13 @@ gsd_wacom_device_create_fake (GsdWacomDeviceType  type,
 	if (db == NULL)
 		db = libwacom_database_new ();
 
+	wacom_device = libwacom_new_from_name (db, name, NULL);
+	if (wacom_device == NULL)
+		return NULL;
+
 	priv = device->priv;
 	priv->type = type;
 	priv->tool_name = g_strdup (tool_name);
-	wacom_device = libwacom_new_from_name (db, name, NULL);
 	gsd_wacom_device_update_from_db (device, wacom_device, name);
 	libwacom_destroy (wacom_device);
 
@@ -780,7 +1159,6 @@ gsd_wacom_device_create_fake (GsdWacomDeviceType  type,
 GList *
 gsd_wacom_device_create_fake_cintiq (void)
 {
-#if 0
 	GsdWacomDevice *device;
 	GList *devices;
 
@@ -800,8 +1178,6 @@ gsd_wacom_device_create_fake_cintiq (void)
 	devices = g_list_prepend (devices, device);
 
 	return devices;
-#endif
-	return NULL;
 }
 
 GList *
@@ -811,22 +1187,22 @@ gsd_wacom_device_create_fake_bt (void)
 	GList *devices;
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_STYLUS,
-					       "Graphire Wireless",
+					       "Wacom Graphire Wireless",
 					       "Graphire Wireless stylus");
 	devices = g_list_prepend (NULL, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_ERASER,
-					       "Graphire Wireless",
+					       "Wacom Graphire Wireless",
 					       "Graphire Wireless eraser");
 	devices = g_list_prepend (devices, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_PAD,
-					       "Graphire Wireless",
+					       "Wacom Graphire Wireless",
 					       "Graphire Wireless pad");
 	devices = g_list_prepend (devices, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_CURSOR,
-					       "Graphire Wireless",
+					       "Wacom Graphire Wireless",
 					       "Graphire Wireless cursor");
 	devices = g_list_prepend (devices, device);
 
@@ -836,21 +1212,47 @@ gsd_wacom_device_create_fake_bt (void)
 GList *
 gsd_wacom_device_create_fake_x201 (void)
 {
-#if 0
 	GsdWacomDevice *device;
 	GList *devices;
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_STYLUS,
-					       "Serial Wacom Tablet WACf004",
-					       "Serial Wacom Tablet WACf004 stylus");
+					       "Wacom Serial Tablet WACf004",
+					       "Wacom Serial Tablet WACf004 stylus");
 	devices = g_list_prepend (NULL, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_ERASER,
-					       "Serial Wacom Tablet WACf004",
-					       "Serial Wacom Tablet WACf004 eraser");
+					       "Wacom Serial Tablet WACf004",
+					       "Wacom Serial Tablet WACf004 eraser");
 	devices = g_list_prepend (devices, device);
 
 	return devices;
-#endif
-	return NULL;
+}
+
+GList *
+gsd_wacom_device_create_fake_intuos4 (void)
+{
+	GsdWacomDevice *device;
+	GList *devices;
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_STYLUS,
+					       "Wacom Intuos 4 M 6x9",
+					       "Wacom Intuos4 6x9 stylus");
+	devices = g_list_prepend (NULL, device);
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_ERASER,
+					       "Wacom Intuos 4 M 6x9",
+					       "Wacom Intuos4 6x9 eraser");
+	devices = g_list_prepend (devices, device);
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_PAD,
+					       "Wacom Intuos 4 M 6x9",
+					       "Wacom Intuos4 6x9 pad");
+	devices = g_list_prepend (devices, device);
+
+	device = gsd_wacom_device_create_fake (WACOM_TYPE_CURSOR,
+					       "Wacom Intuos 4 M 6x9",
+					       "Wacom Intuos4 6x9 cursor");
+	devices = g_list_prepend (devices, device);
+
+	return devices;
 }

@@ -1,4 +1,4 @@
-m4_define([gnome_control_center_version], 3.3.2)
+m4_define([gnome_control_center_version], 3.3.4.1)
 AC_INIT([gnome-control-center], [gnome_control_center_version],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center])
 
@@ -6,7 +6,7 @@ AC_CONFIG_SRCDIR([shell])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
-AM_INIT_AUTOMAKE([1.10 no-dist-gzip dist-xz tar-ustar])
+AM_INIT_AUTOMAKE([1.11 no-dist-gzip dist-xz tar-ustar])
 AM_MAINTAINER_MODE([enable])
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
@@ -32,7 +32,6 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Gettext package])
 
 GNOME_DEBUG_CHECK
 GNOME_COMPILE_WARNINGS([maximum])
-GNOME_MAINTAINER_MODE_DEFINES
 
 AC_PATH_XTRA
 x_libs="$X_PRE_LIBS $X_LIBS -lX11 $X_EXTRA_LIBS"
@@ -55,22 +54,34 @@ CPPFLAGS=$savecppflags
 
 AC_CHECK_LIB(m, floor)
 
+AC_ARG_ENABLE([systemd],
+              AS_HELP_STRING([--enable-systemd], [Use systemd]),
+              [with_systemd=$enableval],
+              [with_systemd=no])
+if test "$with_systemd" = "yes" ; then
+  SYSTEMD=libsystemd-login
+  AC_DEFINE(HAVE_SYSTEMD, 1, [Define to 1 if systemd is available])
+else
+  SYSTEMD=
+fi
+
 dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
 
-GLIB_REQUIRED_VERSION=2.29.14
+GLIB_REQUIRED_VERSION=2.31.0
 GTK_REQUIRED_VERSION=3.3.5
 DESKTOP_SCHEMAS_REQUIRED_VERSION=3.0.2
 PA_REQUIRED_VERSION=0.9.16
 CANBERRA_REQUIRED_VERSION=0.13
 GDKPIXBUF_REQUIRED_VERSION=2.23.0
-POLKIT_REQUIRED_VERSION=0.97
-GSD_REQUIRED_VERSION=2.91.94
+POLKIT_REQUIRED_VERSION=0.103
+GSD_REQUIRED_VERSION=3.3.4
 NETWORK_MANAGER_REQUIRED_VERSION=0.8.992
 LIBNOTIFY_REQUIRED_VERSION=0.7.3
 GNOME_DESKTOP_REQUIRED_VERSION=3.1.91
 SCHEMAS_REQUIRED_VERSION=3.3.0
+LIBWACOM_REQUIRED_VERSION=0.2
 
 COMMON_MODULES="gtk+-3.0 >= $GTK_REQUIRED_VERSION
  glib-2.0 >= $GLIB_REQUIRED_VERSION
@@ -81,16 +92,16 @@ COMMON_MODULES="gtk+-3.0 >= $GTK_REQUIRED_VERSION
  libnotify >= $LIBNOTIFY_REQUIRED_VERSION"
 
 PKG_CHECK_MODULES(LIBGNOME_CONTROL_CENTER, $COMMON_MODULES)
-PKG_CHECK_MODULES(LIBLANGUAGE, $COMMON_MODULES gnome-desktop-3.0)
+PKG_CHECK_MODULES(LIBLANGUAGE, $COMMON_MODULES gnome-desktop-3.0 fontconfig)
 PKG_CHECK_MODULES(LIBSHORTCUTS, $COMMON_MODULES x11)
 PKG_CHECK_MODULES(SHELL, $COMMON_MODULES libgnome-menu-3.0 gio-unix-2.0)
 PKG_CHECK_MODULES(BACKGROUND_PANEL, $COMMON_MODULES libxml-2.0 gnome-desktop-3.0
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
-PKG_CHECK_MODULES(DATETIME_PANEL, $COMMON_MODULES dbus-glib-1
+PKG_CHECK_MODULES(DATETIME_PANEL, $COMMON_MODULES
                   gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
-PKG_CHECK_MODULES(DISPLAY_PANEL, $COMMON_MODULES dbus-glib-1 gnome-desktop-3.0 >= 3.1.0)
+PKG_CHECK_MODULES(DISPLAY_PANEL, $COMMON_MODULES gnome-desktop-3.0 >= 3.1.0)
 PKG_CHECK_MODULES(INFO_PANEL, $COMMON_MODULES libgtop-2.0
 		  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
 PKG_CHECK_MODULES(KEYBOARD_PANEL, $COMMON_MODULES x11)
@@ -117,10 +128,12 @@ PKG_CHECK_MODULES(UNIVERSAL_ACCESS_PANEL, $COMMON_MODULES gsettings-desktop-sche
 PKG_CHECK_MODULES(USER_ACCOUNTS_PANEL, $COMMON_MODULES dbus-glib-1
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
                   gnome-desktop-3.0
-                  gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
+                  gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION
+                  $SYSTEMD)
 PKG_CHECK_MODULES(WACOM_PANEL, $COMMON_MODULES
                   gnome-settings-daemon >= $GSD_REQUIRED_VERSION
-                  xi >= 1.2 x11 libwacom)
+                  xi >= 1.2 x11 libwacom >= $LIBWACOM_REQUIRED_VERSION
+                  gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION)
 
 GDESKTOP_PREFIX=`$PKG_CONFIG --variable prefix gsettings-desktop-schemas`
 AC_SUBST(GDESKTOP_PREFIX)
@@ -137,7 +150,7 @@ fi
 AM_CONDITIONAL(BUILD_NETWORK, [test x$have_networkmanager = xyes])
 
 # Check for gnome-bluetooth
-PKG_CHECK_MODULES(BLUETOOTH, $COMMON_MODULES gnome-bluetooth-1.0 >= 3.3.0,
+PKG_CHECK_MODULES(BLUETOOTH, $COMMON_MODULES gnome-bluetooth-1.0 >= 3.3.4,
 		  [have_bluetooth=yes], have_bluetooth=no)
 AM_CONDITIONAL(BUILD_BLUETOOTH, [test x$have_bluetooth = xyes])
 
@@ -178,7 +191,7 @@ AC_ARG_WITH([cheese],
             with_cheese=auto)
 
 if test x"$with_cheese" != x"no" ; then
-   PKG_CHECK_MODULES(CHEESE, gstreamer-0.10 cheese-gtk >= 2.91.91.1, [have_cheese=yes], [have_cheese=no])
+   PKG_CHECK_MODULES(CHEESE, gstreamer-0.10 cheese-gtk >= 3.3.5, [have_cheese=yes], [have_cheese=no])
    if test x${have_cheese} = xyes; then
      AC_DEFINE(HAVE_CHEESE, 1, [Define to 1 to enable cheese webcam support])
    fi
@@ -306,7 +319,7 @@ else
 fi
 
 
-AC_CONFIG_FILES([
+AC_OUTPUT([
 Makefile
 help/Makefile
 panels/Makefile
@@ -401,11 +414,42 @@ panels/user-accounts/data/gnome-user-accounts-panel.desktop.in
 panels/user-accounts/data/faces/Makefile
 panels/user-accounts/data/icons/Makefile
 panels/wacom/Makefile
+panels/wacom/calibrator/Makefile
 panels/wacom/gnome-wacom-panel.desktop.in
 po/Makefile.in
 shell/Makefile
 shell/gnome-control-center.desktop.in
 ])
 
-dnl due to a bug in intltool we need to expand something from the root last control-center.spec
-AC_OUTPUT
+AC_MSG_NOTICE([gnome-control-center was configured with the following options:])
+if test "x$have_networkmanager" = "xyes"; then
+	AC_MSG_NOTICE([** NetworkManager (Network panel)])
+else
+	AC_MSG_NOTICE([   Network panel disabled])
+fi
+if test "x$have_bluetooth" = "xyes"; then
+	AC_MSG_NOTICE([** gnome-bluetooth (Bluetooth panel)])
+else
+	AC_MSG_NOTICE([   Bluetooth panel disabled])
+fi
+if test "x$enable_cups" = "xyes"; then
+	AC_MSG_NOTICE([** CUPS (Printers panel)])
+else
+	AC_MSG_NOTICE([   Printers panel disabled])
+fi
+if test "x$have_cheese" = "xyes"; then
+	AC_MSG_NOTICE([** Cheese (Users panel webcam support)])
+else
+	AC_MSG_NOTICE([   Users panel webcam support disabled])
+fi
+if test "x$with_libsocialweb" = "xyes"; then
+	AC_MSG_NOTICE([** libsocialweb (Background panel Flickr support)])
+else
+	AC_MSG_NOTICE([   Background panel Flickr support disabled])
+fi
+if test "x$with_systemd" = "xyes"; then
+	AC_MSG_NOTICE([** systemd (Systemd session tracking)])
+else
+	AC_MSG_NOTICE([   Using ConsoleKit for session tracking])
+fi
+AC_MSG_NOTICE([End options])

@@ -44,6 +44,7 @@ typedef struct {
         const char *name;       /* property name */
         gint nitems;            /* number of items in data */
         gint format;            /* CARD8 or CARD32 sized-items */
+        gint type;              /* Atom representing data type */
         union {
                 const gchar *c; /* 8 bit data */
                 const gint *i;  /* 32 bit data */

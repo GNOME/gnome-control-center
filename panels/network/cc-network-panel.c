@@ -76,6 +76,7 @@ struct _CcNetworkPanelPrivate
         NMRemoteSettings *remote_settings;
         gboolean          updating_device;
         guint             refresh_idle;
+        GtkWidget        *kill_switch_header;
 
         /* wireless dialog stuff */
         CmdlineOperation  arg_operation;
@@ -204,6 +205,9 @@ cc_network_panel_dispose (GObject *object)
         if (priv->remote_settings != NULL) {
                 g_object_unref (priv->remote_settings);
                 priv->remote_settings = NULL;
+        }
+        if (priv->kill_switch_header != NULL) {
+                g_clear_object (&priv->kill_switch_header);
         }
 
         G_OBJECT_CLASS (cc_network_panel_parent_class)->dispose (object);
@@ -624,6 +628,54 @@ register_object_interest (CcNetworkPanel *panel, NetObject *object)
                           "removed",
                           G_CALLBACK (object_removed_cb),
                           panel);
+}
+
+static void
+panel_refresh_killswitch_visibility (CcNetworkPanel *panel)
+{
+        gboolean ret;
+        gboolean show_flight_toggle = FALSE;
+        GtkTreeIter iter;
+        GtkTreeModel *model;
+        NetObject *object_tmp;
+        NMDeviceModemCapabilities caps;
+        NMDevice *nm_device;
+
+        /* find any wireless devices in model */
+        model = GTK_TREE_MODEL (gtk_builder_get_object (panel->priv->builder,
+                                                        "liststore_devices"));
+        ret = gtk_tree_model_get_iter_first (model, &iter);
+        if (!ret)
+                return;
+        do {
+                gtk_tree_model_get (model, &iter,
+                                    PANEL_DEVICES_COLUMN_OBJECT, &object_tmp,
+                                    -1);
+                if (NET_IS_DEVICE (object_tmp)) {
+                        nm_device = net_device_get_nm_device (NET_DEVICE (object_tmp));
+                        switch (nm_device_get_device_type (nm_device)) {
+                        case NM_DEVICE_TYPE_WIFI:
+                        case NM_DEVICE_TYPE_WIMAX:
+                                show_flight_toggle = TRUE;
+                                break;
+                        case NM_DEVICE_TYPE_MODEM:
+                                {
+                                caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
+                                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
+                                    (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO))
+                                        show_flight_toggle = TRUE;
+                                }
+                                break;
+                        default:
+                                break;
+                        }
+                }
+                g_object_unref (object_tmp);
+        } while (!show_flight_toggle && gtk_tree_model_iter_next (model, &iter));
+
+        /* only show toggle if there are wireless devices */
+        gtk_widget_set_visible (panel->priv->kill_switch_header,
+                                show_flight_toggle);
 }
 
 static gboolean
@@ -1545,10 +1597,11 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
 {
         GtkWidget *widget;
         char *wid_name;
-        const char *str;
+        GString *str;
         NMDeviceState state;
         NMDeviceType type;
         gboolean is_hotspot;
+        guint speed = 0;
 
         type = nm_device_get_device_type (device);
         state = nm_device_get_state (device);
@@ -1569,18 +1622,6 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
         gtk_label_set_label (GTK_LABEL (widget),
                              panel_device_to_localized_string (device));
 
-        /* set device state */
-        wid_name = g_strdup_printf ("label_%s_status", page_name);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
-        g_free (wid_name);
-        if (is_hotspot) {
-                str = _("Hotspot");
-        } else {
-                str = panel_device_state_to_localized_string (device);
-        }
-        gtk_label_set_label (GTK_LABEL (widget), str);
-
-
         /* set up the device on/off switch */
         wid_name = g_strdup_printf ("device_%s_off_switch", page_name);
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
@@ -1593,10 +1634,15 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
                                         state != NM_DEVICE_STATE_UNAVAILABLE
                                         && state != NM_DEVICE_STATE_UNMANAGED);
                 update_off_switch_from_device_state (GTK_SWITCH (widget), state, panel);
+                if (state != NM_DEVICE_STATE_UNAVAILABLE)
+                        speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (device));
                 break;
         case NM_DEVICE_TYPE_WIFI:
                 gtk_widget_show (widget);
                 wireless_enabled_toggled (panel->priv->client, NULL, panel);
+                if (state != NM_DEVICE_STATE_UNAVAILABLE)
+                        speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (device));
+                speed /= 1000;
                 break;
         case NM_DEVICE_TYPE_WIMAX:
                 gtk_widget_show (widget);
@@ -1611,6 +1657,22 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
                 break;
         }
 
+        /* set device state, with status and optionally speed */
+        wid_name = g_strdup_printf ("label_%s_status", page_name);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
+        g_free (wid_name);
+        if (is_hotspot) {
+                str = g_string_new (_("Hotspot"));
+        } else {
+                str = g_string_new (panel_device_state_to_localized_string (device));
+        }
+        if (speed  > 0) {
+                g_string_append (str, " - ");
+                /* Translators: network device speed */
+                g_string_append_printf (str, _("%d Mb/s"), speed);
+        }
+        gtk_label_set_label (GTK_LABEL (widget), str->str);
+
         /* set up options button */
         wid_name = g_strdup_printf ("button_%s_options", page_name);
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
@@ -1618,36 +1680,18 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
         if (widget != NULL) {
                 gtk_widget_set_sensitive (widget, find_connection_for_device (panel, device) != NULL);
         }
+        g_string_free (str, TRUE);
 }
 
 static void
 device_refresh_ethernet_ui (CcNetworkPanel *panel, NetDevice *device)
 {
-        guint speed;
-        NMDeviceState state;
         const char *str;
-        gchar *str_tmp;
         NMDevice *nm_device;
 
         nm_device = net_device_get_nm_device (device);
-        state = nm_device_get_state (nm_device);
 
         refresh_header_ui (panel, nm_device, "wired");
-
-        /* speed */
-        speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (nm_device));
-        if (state == NM_DEVICE_STATE_UNAVAILABLE)
-                str_tmp = NULL;
-        else if (speed  > 0)
-                /* Translators: network device speed */
-                str_tmp = g_strdup_printf (_("%d Mb/s"), speed);
-        else
-                str_tmp = g_strdup ("");
-        panel_set_widget_data (panel,
-                               "wired",
-                               "speed",
-                               str_tmp);
-        g_free (str_tmp);
 
         /* device MAC */
         str = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (nm_device));
@@ -1663,7 +1707,6 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
 {
         GtkWidget *widget;
         GtkWidget *sw;
-        guint speed;
         const GPtrArray *aps;
         GPtrArray *aps_unique = NULL;
         GtkWidget *heading;
@@ -1722,21 +1765,6 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
 
         panel_set_widget_data (panel, "hotspot", "security_key", hotspot_secret);
         g_free (hotspot_secret);
-
-        /* speed */
-        speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (nm_device));
-        if (state == NM_DEVICE_STATE_UNAVAILABLE)
-                str_tmp = NULL;
-        else if (speed > 0)
-                str_tmp = g_strdup_printf (_("%d Mb/s"),
-                                           speed / 1000);
-        else
-                str_tmp = g_strdup ("");
-        panel_set_widget_data (panel,
-                               "wireless",
-                               "speed",
-                               str_tmp);
-        g_free (str_tmp);
 
         /* device MAC */
         str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (nm_device));
@@ -2286,6 +2314,7 @@ device_added_cb (NMClient *client, NMDevice *device, CcNetworkPanel *panel)
 {
         g_debug ("New device added");
         panel_add_device (panel, device);
+        panel_refresh_killswitch_visibility (panel);
 }
 
 static void
@@ -2293,6 +2322,7 @@ device_removed_cb (NMClient *client, NMDevice *device, CcNetworkPanel *panel)
 {
         g_debug ("Device removed");
         panel_remove_device (panel, device);
+        panel_refresh_killswitch_visibility (panel);
 }
 
 static void
@@ -3202,11 +3232,40 @@ stop_hotspot (GtkButton *button, CcNetworkPanel *panel)
         gtk_window_present (GTK_WINDOW (dialog));
 }
 
+static gboolean
+network_add_shell_header_widgets_cb (gpointer user_data)
+{
+        CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
+        gboolean ret;
+        GtkWidget *box;
+        GtkWidget *widget;
+
+        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3);
+        /* TRANSLATORS: this is to disable the radio hardware in the
+         * network panel */
+        widget = gtk_label_new (_("Airplane Mode"));
+        gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
+        gtk_widget_set_visible (widget, TRUE);
+        widget = gtk_switch_new ();
+        gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
+        gtk_widget_set_visible (widget, TRUE);
+        cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (panel)), box);
+        panel->priv->kill_switch_header = g_object_ref (box);
+
+        ret = nm_client_wireless_get_enabled (panel->priv->client);
+        gtk_switch_set_active (GTK_SWITCH (widget), !ret);
+        g_signal_connect (GTK_SWITCH (widget), "notify::active",
+                          G_CALLBACK (cc_network_panel_notify_enable_active_cb),
+                          panel);
+        panel_refresh_killswitch_visibility (panel);
+
+        return FALSE;
+}
+
 static void
 cc_network_panel_init (CcNetworkPanel *panel)
 {
         DBusGConnection *bus = NULL;
-        gboolean ret;
         GError *error = NULL;
         gint value;
         GSettings *settings_tmp;
@@ -3469,14 +3528,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
                                                      "button_unlock"));
         gtk_widget_set_sensitive (widget, FALSE);
 
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "switch_flight_mode"));
-        ret = nm_client_wireless_get_enabled (panel->priv->client);
-        gtk_switch_set_active (GTK_SWITCH (widget), !ret);
-        g_signal_connect (GTK_SWITCH (widget), "notify::active",
-                          G_CALLBACK (cc_network_panel_notify_enable_active_cb),
-                          panel);
-
         /* add remote settings such as VPN settings as virtual devices */
         bus = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
         if (bus == NULL) {
@@ -3506,6 +3557,9 @@ cc_network_panel_init (CcNetworkPanel *panel)
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "vbox1"));
         gtk_widget_reparent (widget, (GtkWidget *) panel);
+
+        /* add kill switch widgets when dialog activated */
+        g_idle_add (network_add_shell_header_widgets_cb, panel);
 }
 
 void

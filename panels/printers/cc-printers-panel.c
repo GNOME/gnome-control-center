@@ -377,7 +377,6 @@ attach_to_cups_notifier (gpointer data)
       priv->subscription_renewal_id =
         g_timeout_add_seconds (RENEW_INTERVAL, renew_subscription, self);
 
-      error = NULL;
       priv->cups_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                         0,
                                                         NULL,
@@ -387,9 +386,10 @@ attach_to_cups_notifier (gpointer data)
                                                         NULL,
                                                         &error);
 
-      if (error)
+      if (!priv->cups_proxy)
         {
           g_warning ("%s", error->message);
+          g_error_free (error);
           return;
         }
 
@@ -497,19 +497,22 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   GtkTreeIter             iter;
   GtkWidget              *widget;
   gboolean                sensitive;
-  gboolean                is_local = TRUE;
+  GValue                  value = G_VALUE_INIT;
   gchar                  *printer_make_and_model = NULL;
   gchar                  *printer_model = NULL;
   gchar                  *reason = NULL;
   gchar                 **printer_reasons = NULL;
   gchar                  *marker_types = NULL;
   gchar                  *printer_name = NULL;
+  gchar                  *printer_icon = NULL;
   gchar                  *printer_type = NULL;
   gchar                  *active_jobs = NULL;
   gchar                  *supply_type = NULL;
   gchar                  *printer_uri = NULL;
   gchar                  *location = NULL;
   gchar                  *status = NULL;
+  gchar                  *device_uri = NULL;
+  gchar                  *printer_hostname = NULL;
   guint                   num_jobs;
   int                     printer_state = 3;
   int                     id = -1;
@@ -578,6 +581,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       gtk_tree_model_get (model, &iter,
 			  PRINTER_ID_COLUMN, &id,
 			  PRINTER_NAME_COLUMN, &printer_name,
+			  PRINTER_ICON_COLUMN, &printer_icon,
 			  -1);
     }
   else
@@ -594,8 +598,6 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
         g_strcmp0 (priv->dests[priv->current_dest].name,
                    priv->jobs[priv->current_job].dest) == 0))
     {
-      actualize_jobs_list (self);
-
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "job-release-button");
       gtk_widget_set_sensitive (widget, FALSE);
@@ -607,6 +609,8 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "job-cancel-button");
       gtk_widget_set_sensitive (widget, FALSE);
+
+      actualize_jobs_list (self);
     }
 
   actualize_allowed_users_list (self);
@@ -622,12 +626,12 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
 
       for (i = 0; i < priv->dests[id].num_options; i++)
         {
-          if (g_strcmp0 (priv->dests[id].options[i].name, "printer-location") == 0)
-            location = g_strdup (priv->dests[id].options[i].value);
-          else if (g_strcmp0 (priv->dests[id].options[i].name, "printer-state") == 0)
-            printer_state = atoi (priv->dests[id].options[i].value);
-          else if (g_strcmp0 (priv->dests[id].options[i].name, "printer-state-reasons") == 0)
-            reason = priv->dests[id].options[i].value;
+          if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-location") == 0)
+            location = g_strdup (priv->dests[priv->current_dest].options[i].value);
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-state") == 0)
+            printer_state = atoi (priv->dests[priv->current_dest].options[i].value);
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-state-reasons") == 0)
+            reason = priv->dests[priv->current_dest].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "marker-types") == 0)
             marker_types = priv->dests[priv->current_dest].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-make-and-model") == 0)
@@ -636,6 +640,8 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
             printer_uri = priv->dests[priv->current_dest].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-type") == 0)
             printer_type = priv->dests[priv->current_dest].options[i].value;
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "device-uri") == 0)
+            device_uri = priv->dests[priv->current_dest].options[i].value;
         }
 
       if (priv->ppd_file_names[priv->current_dest] == NULL)
@@ -754,6 +760,19 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
         }
 
       widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-icon");
+      g_value_init (&value, G_TYPE_INT);
+      g_object_get_property ((GObject *) widget, "icon-size", &value);
+
+      if (printer_icon)
+        {
+          gtk_image_set_from_icon_name ((GtkImage *) widget, printer_icon, g_value_get_int (&value));
+          g_free (printer_icon);
+        }
+      else
+        gtk_image_set_from_icon_name ((GtkImage *) widget, "printer", g_value_get_int (&value));
+
+      widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-name-label");
 
       if (printer_name)
@@ -805,37 +824,17 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
         gtk_builder_get_object (priv->builder, "printer-ip-address-label");
 
       if (printer_type)
-        {
-          type = atoi (printer_type);
-          is_local = !(type & (CUPS_PRINTER_REMOTE | CUPS_PRINTER_IMPLICIT));
-        }
+        type = atoi (printer_type);
 
-      if (is_local)
+      printer_hostname = printer_get_hostname (type, device_uri, printer_uri);
+
+      if (printer_hostname)
         {
-          cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), "localhost");
+          cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), printer_hostname);
+          g_free (printer_hostname);
         }
       else
-        {
-          if (printer_uri)
-            {
-              char scheme[HTTP_MAX_URI],
-              userpass[HTTP_MAX_URI],
-              server[HTTP_MAX_URI],
-              resource[HTTP_MAX_URI];
-              int port;
-
-              httpSeparateURI(HTTP_URI_CODING_ALL, printer_uri, scheme, sizeof(scheme), userpass,
-                              sizeof(userpass), server, sizeof(server), &port, resource,
-                              sizeof(resource));
-
-              if (server[0] != '\0')
-                cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), server);
-              else
-                cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
-            }
-          else
-            cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
-        }
+        cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
 
 
       widget = (GtkWidget*)
@@ -933,6 +932,7 @@ actualize_printers_list (CcPrintersPanel *self)
 {
   CcPrintersPanelPrivate *priv;
   GtkListStore           *store;
+  cups_ptype_t            printer_type = 0;
   GtkTreeIter             selected_iter;
   GtkTreeView            *treeview;
   GtkTreeIter             iter;
@@ -945,6 +945,7 @@ actualize_printers_list (CcPrintersPanel *self)
   gchar                  *current_printer_name = NULL;
   gchar                  *printer_icon_name = NULL;
   gchar                  *default_icon_name = NULL;
+  gchar                  *device_uri = NULL;
   int                     current_dest = -1;
   int                     i, j;
   int                     num_jobs = 0;
@@ -1037,6 +1038,10 @@ actualize_printers_list (CcPrintersPanel *self)
         {
           if (g_strcmp0 (priv->dests[i].options[j].name, "printer-state") == 0)
             paused = (g_strcmp0 (priv->dests[i].options[j].value, "5") == 0);
+          else if (g_strcmp0 (priv->dests[i].options[j].name, "device-uri") == 0)
+            device_uri = priv->dests[i].options[j].value;
+          else if (g_strcmp0 (priv->dests[i].options[i].name, "printer-type") == 0)
+            printer_type = atoi (priv->dests[i].options[i].value);
         }
 
       if (priv->dests[i].is_default)
@@ -1044,7 +1049,10 @@ actualize_printers_list (CcPrintersPanel *self)
       else
         default_icon_name = NULL;
 
-      printer_icon_name = g_strdup ("printer");
+      if (printer_is_local (printer_type, device_uri))
+        printer_icon_name = g_strdup ("printer");
+      else
+        printer_icon_name = g_strdup ("printer-network");
 
       gtk_list_store_set (store, &iter,
                           PRINTER_ID_COLUMN, i,
@@ -1406,7 +1414,6 @@ job_selection_changed_cb (GtkTreeSelection *selection,
 static void
 populate_jobs_list (CcPrintersPanel *self)
 {
-
   CcPrintersPanelPrivate *priv;
   GtkTreeViewColumn      *column;
   GtkCellRenderer        *renderer;
@@ -1414,8 +1421,6 @@ populate_jobs_list (CcPrintersPanel *self)
   GtkTreeView            *treeview;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
-
-  actualize_jobs_list (self);
 
   treeview = (GtkTreeView*)
     gtk_builder_get_object (priv->builder, "job-treeview");
@@ -1446,6 +1451,8 @@ populate_jobs_list (CcPrintersPanel *self)
 
   g_signal_connect (gtk_tree_view_get_selection (treeview),
                     "changed", G_CALLBACK (job_selection_changed_cb), self);
+
+  actualize_jobs_list (self);
 }
 
 enum
@@ -1558,6 +1565,7 @@ job_process_cb (GtkButton *button,
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   DBusGProxy             *proxy;
   GtkWidget              *widget;
+  gboolean                result = TRUE;
   GError                 *error = NULL;
   char                   *ret_error = NULL;
   int                     id = -1;
@@ -1582,45 +1590,46 @@ job_process_cb (GtkButton *button,
       if ((GtkButton*) gtk_builder_get_object (priv->builder,
                                                "job-cancel-button") ==
           button)
-        dbus_g_proxy_call (proxy, "JobCancelPurge", &error,
-                           G_TYPE_INT, id,
-                           G_TYPE_BOOLEAN, FALSE,
-                           G_TYPE_INVALID,
-                           G_TYPE_STRING, &ret_error,
-                           G_TYPE_INVALID);
+        result = dbus_g_proxy_call (proxy, "JobCancelPurge", &error,
+                                    G_TYPE_INT, id,
+                                    G_TYPE_BOOLEAN, FALSE,
+                                    G_TYPE_INVALID,
+                                    G_TYPE_STRING, &ret_error,
+                                    G_TYPE_INVALID);
       else if ((GtkButton*) gtk_builder_get_object (priv->builder,
                                                         "job-hold-button") ==
                button)
-        dbus_g_proxy_call (proxy, "JobSetHoldUntil", &error,
-                           G_TYPE_INT, id,
-                           G_TYPE_STRING, "indefinite",
-                           G_TYPE_INVALID,
-                           G_TYPE_STRING, &ret_error,
-                           G_TYPE_INVALID);
+        result = dbus_g_proxy_call (proxy, "JobSetHoldUntil", &error,
+                                    G_TYPE_INT, id,
+                                    G_TYPE_STRING, "indefinite",
+                                    G_TYPE_INVALID,
+                                    G_TYPE_STRING, &ret_error,
+                                    G_TYPE_INVALID);
       else if ((GtkButton*) gtk_builder_get_object (priv->builder,
                                                         "job-release-button") ==
                button)
-        dbus_g_proxy_call (proxy, "JobSetHoldUntil", &error,
-                           G_TYPE_INT, id,
-                           G_TYPE_STRING, "no-hold",
-                           G_TYPE_INVALID,
-                           G_TYPE_STRING, &ret_error,
-                           G_TYPE_INVALID);
+        result = dbus_g_proxy_call (proxy, "JobSetHoldUntil", &error,
+                                    G_TYPE_INT, id,
+                                    G_TYPE_STRING, "no-hold",
+                                    G_TYPE_INVALID,
+                                    G_TYPE_STRING, &ret_error,
+                                    G_TYPE_INVALID);
 
       g_object_unref (proxy);
 
-      if (error || (ret_error && ret_error[0] != '\0'))
+      if (!result || (ret_error && ret_error[0] != '\0'))
         {
-          if (error)
-            g_warning ("%s", error->message);
+          if (!result)
+            {
+              g_warning ("%s", error->message);
+              g_error_free (error);
+            }
 
           if (ret_error && ret_error[0] != '\0')
             g_warning ("%s", ret_error);
         }
       else
         actualize_jobs_list (self);
-
-      g_clear_error (&error);
   }
 
   widget = (GtkWidget*)
@@ -1746,7 +1755,7 @@ supply_levels_draw_cb (GtkWidget *widget,
           GdkRGBA   border_color = {0.0, 0.0, 0.0, 1.0};
           GSList   *markers = NULL;
           GSList   *tmp_list = NULL;
-          GValue    int_val = {0};
+          GValue    int_val = G_VALUE_INIT;
           gchar   **marker_levelsv = NULL;
           gchar   **marker_colorsv = NULL;
           gchar   **marker_namesv = NULL;
@@ -2181,7 +2190,7 @@ test_page_cb (GtkButton *button,
       gchar        *printer_uri = NULL;
       gchar        *filename = NULL;
       gchar        *resource = NULL;
-      ipp_t        *response;
+      ipp_t        *response = NULL;
       ipp_t        *request;
 
       if ((datadir = getenv ("CUPS_DATADIR")) != NULL)
@@ -2463,6 +2472,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   http_t                 *http;
   gchar                  *objects[] = { "main-vbox", NULL };
   GtkStyleContext        *context;
+  guint                   builder_result;
 
   priv = self->priv = PRINTERS_PANEL_PRIVATE (self);
 
@@ -2494,11 +2504,11 @@ cc_printers_panel_init (CcPrintersPanel *self)
   priv->permission = NULL;
   priv->lockdown_settings = NULL;
 
-  gtk_builder_add_objects_from_file (priv->builder,
-                                     DATADIR"/printers.ui",
-                                     objects, &error);
+  builder_result = gtk_builder_add_objects_from_file (priv->builder,
+                                                      DATADIR"/printers.ui",
+                                                      objects, &error);
 
-  if (error)
+  if (builder_result == 0)
     {
       /* Translators: The XML file containing user interface can not be loaded */
       g_warning (_("Could not load ui: %s"), error->message);

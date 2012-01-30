@@ -214,7 +214,7 @@ update_current_page (CcWacomPanel *self)
 
 		if (g_hash_table_lookup (priv->pages, tablet->name) == NULL) {
 			GtkWidget *page;
-			page = cc_wacom_page_new (tablet->stylus, tablet->eraser);
+			page = cc_wacom_page_new (self, tablet->stylus, tablet->eraser);
 			cc_wacom_page_set_navigation (CC_WACOM_PAGE (page), GTK_NOTEBOOK (priv->notebook), TRUE);
 			gtk_widget_show (page);
 			gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), page, NULL);
@@ -278,16 +278,23 @@ static gboolean
 link_activated (GtkLinkButton *button,
 		CcWacomPanel  *self)
 {
+	cc_wacom_panel_switch_to_panel (self, "bluetooth");
+	return TRUE;
+}
+
+void
+cc_wacom_panel_switch_to_panel (CcWacomPanel *self,
+				const char   *panel)
+{
 	CcShell *shell;
 	GError *error = NULL;
 
 	shell = cc_panel_get_shell (CC_PANEL (self));
-	if (cc_shell_set_active_panel_from_id (shell, "bluetooth", NULL, &error) == FALSE)
+	if (cc_shell_set_active_panel_from_id (shell, panel, NULL, &error) == FALSE)
 	{
-		g_warning ("Failed to activate Bluetooth panel: %s", error->message);
+		g_warning ("Failed to activate '%s' panel: %s", panel, error->message);
 		g_error_free (error);
 	}
-	return TRUE;
 }
 
 static void

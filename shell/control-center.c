@@ -179,8 +179,6 @@ main (int argc, char **argv)
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-
-  g_thread_init (NULL);
   gtk_init (&argc, &argv);
   cc_shell_log_init ();
 

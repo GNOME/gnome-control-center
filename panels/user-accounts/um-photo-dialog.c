@@ -31,6 +31,7 @@
 
 #ifdef HAVE_CHEESE
 #include <cheese-avatar-chooser.h>
+#include <cheese-camera-device.h>
 #include <cheese-camera-device-monitor.h>
 #endif /* HAVE_CHEESE */
 
@@ -311,10 +312,7 @@ update_photo_menu_status (UmPhotoDialog *um)
 
 static void
 device_added (CheeseCameraDeviceMonitor *monitor,
-              const gchar               *id,
-              const gchar               *device_file,
-              const gchar               *product_name,
-              gint                       api_version,
+              CheeseCameraDevice        *device,
               UmPhotoDialog             *um)
 {
         um->num_cameras++;

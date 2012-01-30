@@ -113,6 +113,13 @@ gboolean    printer_set_users (const gchar  *printer_name,
 gboolean    class_add_printer (const gchar *class_name,
                                const gchar *printer_name);
 
+gboolean    printer_is_local (cups_ptype_t  printer_type,
+                              const gchar  *device_uri);
+
+gchar      *printer_get_hostname (cups_ptype_t  printer_type,
+                                  const gchar  *device_uri,
+                                  const gchar  *printer_uri);
+
 G_END_DECLS
 
 #endif /* __PP_UTILS_H */

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-10 10:51+0200\n"
-"PO-Revision-Date: 2011-12-10 10:54+0200\n"
+"POT-Creation-Date: 2012-01-28 12:39+0200\n"
+"PO-Revision-Date: 2012-01-28 12:43+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "Language: he\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: ../panels/background/background.ui.h:1
 msgid "Add wallpaper"
-msgstr "הוספת רקע"
+msgstr "הוספת הרקע"
 
 #: ../panels/background/background.ui.h:2
 msgid "Center"
@@ -100,7 +100,7 @@ msgstr "אין רקע לשולחן העבודה"
 
 #: ../panels/background/cc-background-panel.c:1001
 #: ../panels/user-accounts/data/photo-dialog.ui.h:2
-#: ../panels/user-accounts/um-photo-dialog.c:217
+#: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "Browse for more pictures"
 msgstr "עיון אחר תמונות נוספות"
 
@@ -179,7 +179,7 @@ msgid "Bluetooth"
 msgstr "Bluetooth"
 
 #: ../panels/bluetooth/bluetooth.ui.h:9
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:22
 msgid "Remove Device"
 msgstr "הסרת התקן"
 
@@ -742,22 +742,30 @@ msgstr "תאריך ושעה"
 msgid "Date and Time preferences panel"
 msgstr "לוח ניהול התאריך והשעה"
 
-#: ../panels/display/cc-display-panel.c:477
+#: ../panels/datetime/org.gnome.controlcenter.datetime.policy.in.h:1
+msgid "Change system time and date settings"
+msgstr "שינוי הגדרות השעה והתאריך של המערכת"
+
+#: ../panels/datetime/org.gnome.controlcenter.datetime.policy.in.h:2
+msgid "To change time or date settings, you need to authenticate."
+msgstr "כדי לשנות את הגדרות השעה או התאריך עליך להזדהות."
+
+#: ../panels/display/cc-display-panel.c:473
 msgctxt "display panel, rotation"
 msgid "Normal"
 msgstr "רגיל"
 
-#: ../panels/display/cc-display-panel.c:478
+#: ../panels/display/cc-display-panel.c:474
 msgctxt "display panel, rotation"
 msgid "Counterclockwise"
 msgstr "נגד כיוון השעון"
 
-#: ../panels/display/cc-display-panel.c:479
+#: ../panels/display/cc-display-panel.c:475
 msgctxt "display panel, rotation"
 msgid "Clockwise"
 msgstr "עם כיוון השעון"
 
-#: ../panels/display/cc-display-panel.c:480
+#: ../panels/display/cc-display-panel.c:476
 msgctxt "display panel, rotation"
 msgid "180 Degrees"
 msgstr "180 מעלות"
@@ -767,54 +775,56 @@ msgstr "180 מעלות"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/cc-display-panel.c:617
+#: ../panels/display/cc-display-panel.c:613
 msgid "Mirror Displays"
 msgstr "היפוך מראה בצגים"
 
-#: ../panels/display/cc-display-panel.c:641
+#: ../panels/display/cc-display-panel.c:637
 #: ../panels/display/display-capplet.ui.h:1
 msgid "Monitor"
 msgstr "צג"
 
-#: ../panels/display/cc-display-panel.c:747
+#: ../panels/display/cc-display-panel.c:743
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d x %d (%s)"
 
-#: ../panels/display/cc-display-panel.c:749
+#: ../panels/display/cc-display-panel.c:745
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/cc-display-panel.c:1656
+#: ../panels/display/cc-display-panel.c:1652
 msgid "Drag to change primary display."
 msgstr "יש לגרור כדי לשנות את התצוגה הראשית."
 
-#: ../panels/display/cc-display-panel.c:1714
+#: ../panels/display/cc-display-panel.c:1710
 msgid "Select a monitor to change its properties; drag it to rearrange its placement."
 msgstr "יש לבחור את הצג כדי לשנות את מאפייניו; יש לגרור אותו כדי לשנות את מיקומו."
 
-#: ../panels/display/cc-display-panel.c:2102
+#: ../panels/display/cc-display-panel.c:2098
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/cc-display-panel.c:2104
+#: ../panels/display/cc-display-panel.c:2100
 msgid "%a %l:%M %p"
 msgstr "‏%a‎ ‏‎%l:%M %p"
 
-#: ../panels/display/cc-display-panel.c:2350
+#: ../panels/display/cc-display-panel.c:2262
+#: ../panels/display/cc-display-panel.c:2314
+#, c-format
+msgid "Failed to apply configuration: %s"
+msgstr "החלת התצורה נכשלה: %s"
+
+#: ../panels/display/cc-display-panel.c:2342
 msgid "Could not save the monitor configuration"
 msgstr "לא ניתן לשמור את תצורת הצג"
 
-#: ../panels/display/cc-display-panel.c:2375
-msgid "Could not get session bus while applying display configuration"
-msgstr "לא ניתן לאחזר את אפיק ההפעלה בעת החלת תצורת התצוגה"
-
-#: ../panels/display/cc-display-panel.c:2420
+#: ../panels/display/cc-display-panel.c:2402
 msgid "Could not detect displays"
 msgstr "לא ניתן לזהות את הצגים"
 
-#: ../panels/display/cc-display-panel.c:2614
+#: ../panels/display/cc-display-panel.c:2596
 msgid "Could not get screen information"
 msgstr "לא ניתן לקבל את פרטי הצג"
 
@@ -1209,16 +1219,32 @@ msgid "Search"
 msgstr "חיפוש"
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:1
+msgid "Copy a screenshot of a window to clipboard"
+msgstr "העתקת צילום של חלון ללוח הגזירים"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:2
+msgid "Copy a screenshot of an area to clipboard"
+msgstr "העתקת צילום מסך של אזור ללוח הגזירים"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:3
+msgid "Copy a screenshot to clipboard"
+msgstr "העתקת צילום מסך ללוח הגזירים"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:4
 msgid "Screenshots"
 msgstr "צילומי מסך"
 
-#: ../panels/keyboard/01-screenshot.xml.in.h:2
+#: ../panels/keyboard/01-screenshot.xml.in.h:5
 msgid "Take a screenshot"
 msgstr "צילום המסך"
 
-#: ../panels/keyboard/01-screenshot.xml.in.h:3
+#: ../panels/keyboard/01-screenshot.xml.in.h:6
 msgid "Take a screenshot of a window"
 msgstr "צילום החלון"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:7
+msgid "Take a screenshot of an area"
+msgstr "צילום של אזור מסוים"
 
 #: ../panels/keyboard/01-system.xml.in.h:1
 msgid "Lock screen"
@@ -1326,7 +1352,7 @@ msgstr "הגדרות פריסה"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 #: ../panels/mouse/gnome-mouse-properties.ui.h:16
 #: ../panels/universal-access/uap.ui.h:38
-#: ../panels/universal-access/zoom-options.ui.h:13
+#: ../panels/universal-access/zoom-options.c:337
 msgid "Long"
 msgstr "ארוך"
 
@@ -1350,7 +1376,7 @@ msgstr "_מהירות:"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
 #: ../panels/universal-access/uap.ui.h:54
-#: ../panels/universal-access/zoom-options.ui.h:22
+#: ../panels/universal-access/zoom-options.c:333
 msgid "Short"
 msgstr "קצר"
 
@@ -1487,7 +1513,6 @@ msgid "Enable h_orizontal scrolling"
 msgstr "ה_פעלת גלילה אופקית"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
-#: ../panels/universal-access/zoom-options.ui.h:7
 msgid "General"
 msgstr "כללי"
 
@@ -1574,7 +1599,7 @@ msgid "_Timeout:"
 msgstr "_פרק זמן:"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/cc-network-panel.c:269
+#: ../panels/network/cc-network-panel.c:273
 msgid "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgstr "נעשה שימוש בזיהוי אוטומטי של מתווך רשת כאשר לא מסופקת כתובת תצורה."
 
@@ -1582,123 +1607,127 @@ msgstr "נעשה שימוש בזיהוי אוטומטי של מתווך רשת �
 #. * network, then anyone else on that network can tell your
 #. * machine that it should proxy all of your web traffic
 #. * through them.
-#: ../panels/network/cc-network-panel.c:277
+#: ../panels/network/cc-network-panel.c:281
 msgid "This is not recommended for untrusted public networks."
 msgstr "מצב זה אינו מומלץ לרשתות ציבוריות שאינן מהימנות."
 
 #. TRANSLATORS: this is when the access point is not listed
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
-#: ../panels/network/cc-network-panel.c:949
+#: ../panels/network/cc-network-panel.c:1001
 msgctxt "Wireless access point"
 msgid "Other..."
 msgstr "אחר..."
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:1107
-#: ../panels/network/cc-network-panel.c:1514
+#: ../panels/network/cc-network-panel.c:1159
+#: ../panels/network/cc-network-panel.c:1566
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1111
-#: ../panels/network/cc-network-panel.c:1518
+#: ../panels/network/cc-network-panel.c:1163
+#: ../panels/network/cc-network-panel.c:1570
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1115
+#: ../panels/network/cc-network-panel.c:1167
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:1120
+#: ../panels/network/cc-network-panel.c:1172
 msgid "Enterprise"
 msgstr "ארגוני"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:1126
-#: ../panels/network/cc-network-panel.c:1509
+#: ../panels/network/cc-network-panel.c:1178
+#: ../panels/network/cc-network-panel.c:1561
 #: ../panels/universal-access/uap.ui.h:43
-#: ../panels/universal-access/zoom-options.ui.h:16
 msgid "None"
 msgstr "ללא"
 
-#: ../panels/network/cc-network-panel.c:1577
+#: ../panels/network/cc-network-panel.c:1665
 msgid "Hotspot"
 msgstr "נקודת גישה"
 
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1643
-#: ../panels/network/cc-network-panel.c:1731
+#: ../panels/network/cc-network-panel.c:1672
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d מסל״ש"
 
-#: ../panels/network/cc-network-panel.c:1986
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/cc-network-panel.c:2014
+#: ../panels/network/network.ui.h:17
 msgid "IPv4 Address"
 msgstr "כתובת IPv4"
 
-#: ../panels/network/cc-network-panel.c:1987
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/cc-network-panel.c:2015
+#: ../panels/network/network.ui.h:18
 msgid "IPv6 Address"
 msgstr "כתובת IPv6"
 
-#: ../panels/network/cc-network-panel.c:1990
-#: ../panels/network/cc-network-panel.c:1993
-#: ../panels/network/network.ui.h:17
+#: ../panels/network/cc-network-panel.c:2018
+#: ../panels/network/cc-network-panel.c:2021
+#: ../panels/network/network.ui.h:16
 #: ../panels/printers/printers.ui.h:9
 msgid "IP Address"
 msgstr "כתובת IP"
 
-#: ../panels/network/cc-network-panel.c:2040
-#: ../panels/network/cc-network-panel.c:2413
+#: ../panels/network/cc-network-panel.c:2068
+#: ../panels/network/cc-network-panel.c:2443
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: ../panels/network/cc-network-panel.c:2148
+#: ../panels/network/cc-network-panel.c:2176
 msgid "Proxy"
 msgstr "מתווך"
 
-#: ../panels/network/cc-network-panel.c:2222
+#: ../panels/network/cc-network-panel.c:2250
 msgid "Network proxy"
 msgstr "מתווך הרשת"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2480
+#: ../panels/network/cc-network-panel.c:2510
 msgid "The system network services are not compatible with this version."
 msgstr "שירותי הרשת של המערכת אינם תואמים לגרסה זו."
 
-#: ../panels/network/cc-network-panel.c:3095
+#: ../panels/network/cc-network-panel.c:3125
 msgid "Not connected to the internet."
 msgstr "אין חיבור לאינטרנט."
 
-#: ../panels/network/cc-network-panel.c:3096
+#: ../panels/network/cc-network-panel.c:3126
 msgid "Create the hotspot anyway?"
 msgstr "האם ליצור את נקודת הגישה בכל זאת ?"
 
-#: ../panels/network/cc-network-panel.c:3114
+#: ../panels/network/cc-network-panel.c:3144
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
 msgstr "האם להתנתק מהרשת %s וליצור נקודת גישה חדשה ?"
 
-#: ../panels/network/cc-network-panel.c:3117
+#: ../panels/network/cc-network-panel.c:3147
 msgid "This is your only connection to the internet."
 msgstr "זהו החיבור היחיד שלך לאינטרנט."
 
-#: ../panels/network/cc-network-panel.c:3135
+#: ../panels/network/cc-network-panel.c:3165
 msgid "Create _Hotspot"
 msgstr "יצירת _נקודת גישה"
 
-#: ../panels/network/cc-network-panel.c:3195
+#: ../panels/network/cc-network-panel.c:3225
 msgid "Stop hotspot and disconnect any users?"
 msgstr "האם לעצור את נקודת הגישה ולנתק את כל המשתמשים ?"
 
-#: ../panels/network/cc-network-panel.c:3198
+#: ../panels/network/cc-network-panel.c:3228
 msgid "_Stop Hotspot"
 msgstr "_עצירת נקודת הגישה"
+
+#. TRANSLATORS: this is to disable the radio hardware in the
+#. * network panel
+#: ../panels/network/cc-network-panel.c:3246
+msgid "Airplane Mode"
+msgstr "מצב טיסה"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 msgid "Network"
@@ -1718,164 +1747,156 @@ msgid "Add Device"
 msgstr "הוספת התקן"
 
 #: ../panels/network/network.ui.h:2
-msgid "Air_plane Mode"
-msgstr "מצב _טיסה"
-
-#: ../panels/network/network.ui.h:3
 msgid "Create..."
 msgstr "יצירה..."
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:3
 msgid "DNS"
 msgstr "DNS"
 
-#: ../panels/network/network.ui.h:5
+#: ../panels/network/network.ui.h:4
 msgid "Default Route"
 msgstr "נתיב בררת המחדל"
 
-#: ../panels/network/network.ui.h:6
+#: ../panels/network/network.ui.h:5
 msgid "Device Off"
 msgstr "ההתקן כבוי"
 
-#: ../panels/network/network.ui.h:7
+#: ../panels/network/network.ui.h:6
 msgid "Disable VPN"
 msgstr "נטרול ה־VPN"
 
-#: ../panels/network/network.ui.h:8
+#: ../panels/network/network.ui.h:7
 msgid "FTP Port"
 msgstr "פתחת FTP"
 
-#: ../panels/network/network.ui.h:9
+#: ../panels/network/network.ui.h:8
 msgid "Gateway"
 msgstr "שער גישה"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:9
 msgid "Group Name"
 msgstr "שם הקבוצה"
 
-#: ../panels/network/network.ui.h:11
+#: ../panels/network/network.ui.h:10
 msgid "Group Password"
 msgstr "ססמת הקבוצה"
 
-#: ../panels/network/network.ui.h:12
+#: ../panels/network/network.ui.h:11
 msgid "HTTP Port"
 msgstr "פתחת HTTP"
 
-#: ../panels/network/network.ui.h:13
+#: ../panels/network/network.ui.h:12
 msgid "HTTPS Port"
 msgstr "פתחת HTTPS"
 
-#: ../panels/network/network.ui.h:14
+#: ../panels/network/network.ui.h:13
 msgid "H_TTPS Proxy"
 msgstr "מת_ווך HTTPS"
 
-#: ../panels/network/network.ui.h:15
+#: ../panels/network/network.ui.h:14
 msgid "Hardware Address"
 msgstr "כתובת חומרה"
 
-#: ../panels/network/network.ui.h:16
+#: ../panels/network/network.ui.h:15
 msgid "IMEI"
 msgstr "IMEI (מס׳ ברזל)"
 
-#: ../panels/network/network.ui.h:20
+#: ../panels/network/network.ui.h:19
 msgid "Interface"
 msgstr "מנשק"
 
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:20
 msgid "Network Name"
 msgstr "שם הרשת"
 
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:21
 msgid "Provider"
 msgstr "ספק"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:23
 msgid "Security"
 msgstr "אבטחה"
 
-#: ../panels/network/network.ui.h:25
+#: ../panels/network/network.ui.h:24
 msgid "Security Key"
 msgstr "מפתח אבטחה"
 
-#: ../panels/network/network.ui.h:26
+#: ../panels/network/network.ui.h:25
 msgid "Select the interface to use for the new service"
 msgstr "נא לבחור את המנשק לשימוש עבור השירות החדש"
 
-#: ../panels/network/network.ui.h:27
+#: ../panels/network/network.ui.h:26
 msgid "Socks Port"
 msgstr "פתחת Socks"
 
-#: ../panels/network/network.ui.h:28
-msgid "Speed"
-msgstr "מהירות"
-
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network.ui.h:27
 msgid "Subnet Mask"
 msgstr "מסכת רשת"
 
-#: ../panels/network/network.ui.h:30
+#: ../panels/network/network.ui.h:28
 msgid "Unlock"
 msgstr "שחרור"
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network.ui.h:29
 msgid "Username"
 msgstr "שם משתמש"
 
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network.ui.h:30
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/network.ui.h:33
+#: ../panels/network/network.ui.h:31
 msgid "VPN Type"
 msgstr "סוג ה־VPN"
 
-#: ../panels/network/network.ui.h:34
+#: ../panels/network/network.ui.h:32
 msgid "_Configuration URL"
 msgstr "כתובת הת_צורה"
 
-#: ../panels/network/network.ui.h:35
+#: ../panels/network/network.ui.h:33
 msgid "_Configure..."
 msgstr "ה_גדרה..."
 
-#: ../panels/network/network.ui.h:36
+#: ../panels/network/network.ui.h:34
 msgid "_FTP Proxy"
 msgstr "מתוו_ך FTP"
 
-#: ../panels/network/network.ui.h:37
+#: ../panels/network/network.ui.h:35
 msgid "_HTTP Proxy"
 msgstr "_מתווך HTTP"
 
-#: ../panels/network/network.ui.h:38
+#: ../panels/network/network.ui.h:36
 msgid "_Method"
 msgstr "_שיטה"
 
-#: ../panels/network/network.ui.h:39
+#: ../panels/network/network.ui.h:37
 msgid "_Network Name"
 msgstr "שם ה_רשת"
 
-#: ../panels/network/network.ui.h:40
+#: ../panels/network/network.ui.h:38
 msgid "_Socks Host"
 msgstr "מ_ארח Socks"
 
-#: ../panels/network/network.ui.h:41
+#: ../panels/network/network.ui.h:39
 msgid "_Stop Hotspot..."
 msgstr "_עצירת נקודת הגישה..."
 
-#: ../panels/network/network.ui.h:42
+#: ../panels/network/network.ui.h:40
 msgid "_Use as Hotspot..."
 msgstr "שימוש _כנקודת גישה..."
 
-#: ../panels/network/network.ui.h:43
+#: ../panels/network/network.ui.h:41
 msgctxt "proxy method"
 msgid "Automatic"
 msgstr "אוטומטית"
 
-#: ../panels/network/network.ui.h:44
+#: ../panels/network/network.ui.h:42
 msgctxt "proxy method"
 msgid "Manual"
 msgstr "ידני"
 
-#: ../panels/network/network.ui.h:45
+#: ../panels/network/network.ui.h:43
 msgctxt "proxy method"
 msgid "None"
 msgstr "ללא"
@@ -2194,125 +2215,125 @@ msgid "When power is _critically low:"
 msgstr "כאשר עצמת הסוללה _חלשה מאוד:"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:533
+#: ../panels/printers/cc-printers-panel.c:542
 msgid "Low on toner"
 msgstr "הטונר כמעט נגמר"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:535
+#: ../panels/printers/cc-printers-panel.c:544
 msgid "Out of toner"
 msgstr "נגמר הטונר"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:538
+#: ../panels/printers/cc-printers-panel.c:547
 msgid "Low on developer"
 msgstr "נותר מעט נייר צילום"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:541
+#: ../panels/printers/cc-printers-panel.c:550
 msgid "Out of developer"
 msgstr "נגמר נייר הצילום"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:543
+#: ../panels/printers/cc-printers-panel.c:552
 msgid "Low on a marker supply"
 msgstr "נותרה מעט אספקת צבע"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:545
+#: ../panels/printers/cc-printers-panel.c:554
 msgid "Out of a marker supply"
 msgstr "נגמרה אספקת הצבע"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:547
+#: ../panels/printers/cc-printers-panel.c:556
 msgid "Open cover"
 msgstr "הכיסוי פתוח"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:549
+#: ../panels/printers/cc-printers-panel.c:558
 msgid "Open door"
 msgstr "הדלת פתוחה"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:551
+#: ../panels/printers/cc-printers-panel.c:560
 msgid "Low on paper"
 msgstr "נותר מעט נייר"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:553
+#: ../panels/printers/cc-printers-panel.c:562
 msgid "Out of paper"
 msgstr "נגמר הנייר"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:555
+#: ../panels/printers/cc-printers-panel.c:564
 msgctxt "printer state"
 msgid "Offline"
 msgstr "מנותקת"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:557
+#: ../panels/printers/cc-printers-panel.c:566
 msgctxt "printer state"
 msgid "Paused"
 msgstr "מושהית"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:559
+#: ../panels/printers/cc-printers-panel.c:568
 msgid "Waste receptacle almost full"
 msgstr "כלי קיבול הפסולת כמעט מלא"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:561
+#: ../panels/printers/cc-printers-panel.c:570
 msgid "Waste receptacle full"
 msgstr "כלי קיבול הפסולת מלא"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:563
+#: ../panels/printers/cc-printers-panel.c:572
 msgid "The optical photo conductor is near end of life"
 msgstr "הפוטו מוליך האופטי עומד לסיים את חייו"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:565
+#: ../panels/printers/cc-printers-panel.c:574
 msgid "The optical photo conductor is no longer functioning"
 msgstr "הפוטו מוליך האופטי אינו מתפקד עוד"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:737
+#: ../panels/printers/cc-printers-panel.c:749
 msgctxt "printer state"
 msgid "Ready"
 msgstr "מוכנה"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:741
+#: ../panels/printers/cc-printers-panel.c:753
 msgctxt "printer state"
 msgid "Processing"
 msgstr "מעבדת"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:745
+#: ../panels/printers/cc-printers-panel.c:757
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "נעצרה"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:864
+#: ../panels/printers/cc-printers-panel.c:869
 msgid "Toner Level"
 msgstr "רמת הטונר"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:867
+#: ../panels/printers/cc-printers-panel.c:872
 msgid "Ink Level"
 msgstr "רמת הדיו"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:870
+#: ../panels/printers/cc-printers-panel.c:875
 msgid "Supply Level"
 msgstr "רמת האספקה"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:885
-#: ../panels/printers/cc-printers-panel.c:1271
+#: ../panels/printers/cc-printers-panel.c:890
+#: ../panels/printers/cc-printers-panel.c:1285
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -2321,80 +2342,80 @@ msgstr[1] "%u פעילות"
 msgstr[2] "2 פעילות"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:990
+#: ../panels/printers/cc-printers-panel.c:997
 msgid "No printers available"
 msgstr "אין מדפסות זמינות"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1314
+#: ../panels/printers/cc-printers-panel.c:1328
 msgctxt "print job"
 msgid "Pending"
 msgstr "ממתינה"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1318
+#: ../panels/printers/cc-printers-panel.c:1332
 msgctxt "print job"
 msgid "Held"
 msgstr "מוחזקת"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1322
+#: ../panels/printers/cc-printers-panel.c:1336
 msgctxt "print job"
 msgid "Processing"
 msgstr "מעבדת"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1326
+#: ../panels/printers/cc-printers-panel.c:1340
 msgctxt "print job"
 msgid "Stopped"
 msgstr "נעצרה"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1330
+#: ../panels/printers/cc-printers-panel.c:1344
 msgctxt "print job"
 msgid "Canceled"
 msgstr "בוטלה"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1334
+#: ../panels/printers/cc-printers-panel.c:1348
 msgctxt "print job"
 msgid "Aborted"
 msgstr "נפסקה"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1338
+#: ../panels/printers/cc-printers-panel.c:1352
 msgctxt "print job"
 msgid "Completed"
 msgstr "הושלמה"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1421
+#: ../panels/printers/cc-printers-panel.c:1432
 msgid "Job Title"
 msgstr "כותרת העבודה"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1430
+#: ../panels/printers/cc-printers-panel.c:1441
 msgid "Job State"
 msgstr "מצב המשימה"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1436
+#: ../panels/printers/cc-printers-panel.c:1447
 msgid "Time"
 msgstr "זמן"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2032
+#: ../panels/printers/cc-printers-panel.c:2047
 msgid "Failed to add new printer."
 msgstr "הוספת המדפסת החדשה נכשלה."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2236
-#: ../panels/printers/cc-printers-panel.c:2250
+#: ../panels/printers/cc-printers-panel.c:2251
+#: ../panels/printers/cc-printers-panel.c:2265
 msgid "Test page"
 msgstr "דף בדיקה"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2498
+#: ../panels/printers/cc-printers-panel.c:2514
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "לא ניתן לטעון את מנשק המשתמש: %s"
@@ -2429,61 +2450,61 @@ msgstr "הו_ספה"
 msgid "_Search by Address"
 msgstr "חיפוש לפי _כתובת"
 
-#: ../panels/printers/pp-new-printer-dialog.c:654
+#: ../panels/printers/pp-new-printer-dialog.c:665
 msgid "Getting devices..."
 msgstr "ההתקנים מתקבלים..."
 
 #. Translators: No localy connected printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1230
+#: ../panels/printers/pp-new-printer-dialog.c:1277
 msgid "No local printers found"
 msgstr "לא נמצאו מדפסות מקומיות"
 
 #. Translators: No network printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1243
+#: ../panels/printers/pp-new-printer-dialog.c:1290
 msgid "No network printers found"
 msgstr "לא נמצאו מדפסות רשת"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1335
+#: ../panels/printers/pp-new-printer-dialog.c:1382
 msgid "FirewallD is not running. Network printer detection needs services mdns, ipp, ipp-client and samba-client enabled on firewall."
 msgstr "FirewallD אינו פעיל. איתור מדפסות הרשת דורש שהשירותים mdns, ipp, ipp-client ו־samba-client יופעלו בחומת האש."
 
 #. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:1363
-#: ../panels/printers/pp-new-printer-dialog.c:1368
+#: ../panels/printers/pp-new-printer-dialog.c:1410
+#: ../panels/printers/pp-new-printer-dialog.c:1415
 msgid "Devices"
 msgstr "התקנים"
 
 #. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:1393
+#: ../panels/printers/pp-new-printer-dialog.c:1440
 msgctxt "printer type"
 msgid "Local"
 msgstr "מקומי"
 
 #. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:1395
+#: ../panels/printers/pp-new-printer-dialog.c:1442
 msgctxt "printer type"
 msgid "Network"
 msgstr "רשת"
 
 #. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:1436
+#: ../panels/printers/pp-new-printer-dialog.c:1483
 msgid "Device types"
 msgstr "סוגי התקנים"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:1737
+#: ../panels/printers/pp-new-printer-dialog.c:1782
 msgid "Automatic configuration"
 msgstr "תצורה אוטומטית"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1818
+#: ../panels/printers/pp-new-printer-dialog.c:1865
 msgid "Opening firewall for mDNS connections"
 msgstr "מתבצעת פתיחת חומת האש לחיבורי mDNS"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1827
+#: ../panels/printers/pp-new-printer-dialog.c:1874
 msgid "Opening firewall for Samba connections"
 msgstr "מתבצעת פתיחת חומת האש לחיבורי Samba"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1836
+#: ../panels/printers/pp-new-printer-dialog.c:1883
 msgid "Opening firewall for IPP connections"
 msgstr "מתבצעת פתיחת חומת האש לחיבורי IPP"
 
@@ -2792,14 +2813,14 @@ msgstr "פריסה"
 msgid "Default"
 msgstr "בררת מחדל"
 
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:1
+msgid "Brightness and Lock"
+msgstr "בהירות ונעילה"
+
 #. Translators: those are keywords for the brightness and lock control-center panel
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
 msgid "Brightness;Lock;Dim;Blank;Monitor;"
 msgstr "בהירות;נעילה;עמעום;החשכה;צג;מסך;"
-
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
-msgid "Screen"
-msgstr "צג"
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
 msgid "Screen brightness and lock settings"
@@ -3142,15 +3163,15 @@ msgstr "מושתק"
 msgid "Custom"
 msgstr "התאמה אישית"
 
-#: ../panels/universal-access/cc-ua-panel.c:445
-#: ../panels/universal-access/cc-ua-panel.c:451
+#: ../panels/universal-access/cc-ua-panel.c:446
+#: ../panels/universal-access/cc-ua-panel.c:452
 msgid "No shortcut set"
 msgstr "לא הוגדר קיצור דרך"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
-msgid "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys"
-msgstr "מקלדת;עכבר;a11y;נגישות;ניגודיות;ניגוד;תקריב;זום;מקריא מסך;טקסט;גופן;גודל;AccessX;מקשים דביקים;מקשי אטיים;מקשים קופצים;מקשי עכבר"
+msgid "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys;"
+msgstr "מקלדת;עכבר;a11y;נגישות;ניגודיות;ניגוד;תקריב;זום;מקריא מסך;טקסט;גופן;גודל;AccessX;מקשים דביקים;מקשים אטיים;מקשים קופצים;מקשי עכבר;"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
@@ -3472,117 +3493,101 @@ msgctxt "universal access, text size"
 msgid "Small"
 msgstr "קטן"
 
-#: ../panels/universal-access/zoom-options.c:156
+#: ../panels/universal-access/zoom-options.c:334
 msgid "1/4 Screen"
 msgstr "1/4 צג"
 
-#: ../panels/universal-access/zoom-options.c:157
+#: ../panels/universal-access/zoom-options.c:335
 msgid "1/2 Screen"
 msgstr "1/2 צג"
 
-#: ../panels/universal-access/zoom-options.c:158
+#: ../panels/universal-access/zoom-options.c:336
 msgid "3/4 Screen"
 msgstr "3/4 צג"
 
 #: ../panels/universal-access/zoom-options.ui.h:1
-msgid "Always"
-msgstr "תמיד"
-
-#: ../panels/universal-access/zoom-options.ui.h:2
 msgid "Bottom Half"
 msgstr "החצי התחתון"
 
+#: ../panels/universal-access/zoom-options.ui.h:2
+msgid "Color:"
+msgstr "צבע:"
+
 #: ../panels/universal-access/zoom-options.ui.h:3
-msgid "Centered"
-msgstr "ממורכז"
+msgid "Crosshairs:"
+msgstr "סמני צלב:"
 
 #: ../panels/universal-access/zoom-options.ui.h:4
-msgid "Color and Opacity"
-msgstr "צבע ואטימות"
+msgid "Follow mouse cursor"
+msgstr "מעקב אחר סמן העכבר"
 
 #: ../panels/universal-access/zoom-options.ui.h:5
-msgid "Crosshairs"
-msgstr "סמני צלב"
-
-#: ../panels/universal-access/zoom-options.ui.h:6
 msgid "Full Screen"
 msgstr "מסך מלא"
 
-#: ../panels/universal-access/zoom-options.ui.h:8
-msgid "Image moves with the mouse pointer"
-msgstr "התמונה זזה עם סמן העכבר"
+#: ../panels/universal-access/zoom-options.ui.h:6
+msgid "Keep magnifier cursor centered"
+msgstr "שמירה על סמן ההגדלה ממורכז"
 
-#: ../panels/universal-access/zoom-options.ui.h:9
-msgid "Image scrolls at screen edges"
-msgstr "התמונה נגללת בקצוות המסך"
-
-#: ../panels/universal-access/zoom-options.ui.h:10
+#: ../panels/universal-access/zoom-options.ui.h:7
 msgid "Left Half"
 msgstr "החצי השמאלי"
 
+#: ../panels/universal-access/zoom-options.ui.h:8
+msgid "Length:"
+msgstr "אורך:"
+
+#: ../panels/universal-access/zoom-options.ui.h:9
+msgid "Magnification:"
+msgstr "הגדלה:"
+
+#: ../panels/universal-access/zoom-options.ui.h:10
+msgid "Magnifier Position:"
+msgstr "מיקום זכוכית המגדלת:"
+
 #: ../panels/universal-access/zoom-options.ui.h:11
-msgid "Length"
-msgstr "אורך"
+msgid "Magnifier cursor moves with contents"
+msgstr "סמן ההגדלה זז עם התכנים"
+
+#: ../panels/universal-access/zoom-options.ui.h:12
+msgid "Magnifier cursor pushes contents around"
+msgstr "סמן ההגדלה דוחף את התכנים סביב"
+
+#: ../panels/universal-access/zoom-options.ui.h:13
+msgid "Magnifier extends outside of screen"
+msgstr "האזור המוגדל מוצג מחוץ למסך"
 
 #: ../panels/universal-access/zoom-options.ui.h:14
-msgid "Magnification"
-msgstr "הגדלה"
+msgid "Overlaps mouse cursor"
+msgstr "חופף את סמן העכבר"
 
 #: ../panels/universal-access/zoom-options.ui.h:15
-msgid "Moveable lens - magnified view follows mouse movements"
-msgstr "עדשה ניידת – תצוגה מוגדלת עוקבת אחר תנועות העכבר"
-
-#: ../panels/universal-access/zoom-options.ui.h:17
-msgid "Position of magnified view on screen"
-msgstr "מיקום התצוגה המוגדלת על גבי המסך"
-
-#: ../panels/universal-access/zoom-options.ui.h:18
-msgid "Proportional"
-msgstr "פרופורציונלי"
-
-#: ../panels/universal-access/zoom-options.ui.h:19
-msgid "Push"
-msgstr "דחיפה"
-
-#: ../panels/universal-access/zoom-options.ui.h:20
 msgid "Right Half"
 msgstr "החצי הימני"
 
-#: ../panels/universal-access/zoom-options.ui.h:23
-msgid "Show"
-msgstr "הצגה"
-
-#: ../panels/universal-access/zoom-options.ui.h:24
-msgid "Show crosshairs intersection"
-msgstr "הצגת הצטלבות סמני הצלב"
+#: ../panels/universal-access/zoom-options.ui.h:16
+msgid "Screen part:"
+msgstr "החלק מהמסך:"
 
 #. long delay
-#: ../panels/universal-access/zoom-options.ui.h:26
+#: ../panels/universal-access/zoom-options.ui.h:18
 msgid "Thick"
 msgstr "עבה"
 
-#: ../panels/universal-access/zoom-options.ui.h:27
-msgid "Thickness"
-msgstr "עובי"
+#: ../panels/universal-access/zoom-options.ui.h:19
+msgid "Thickness:"
+msgstr "עובי:"
 
 #. short delay
-#: ../panels/universal-access/zoom-options.ui.h:29
+#: ../panels/universal-access/zoom-options.ui.h:21
 msgid "Thin"
 msgstr "צר"
 
-#: ../panels/universal-access/zoom-options.ui.h:30
-msgid "To keep the pointer centered"
-msgstr "השארת הסמן ממורכז"
-
-#: ../panels/universal-access/zoom-options.ui.h:31
-msgid "To keep the pointer visible"
-msgstr "השרת הסמן גלוי"
-
-#: ../panels/universal-access/zoom-options.ui.h:32
+#: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Top Half"
 msgstr "החצי העליון"
 
-#: ../panels/universal-access/zoom-options.ui.h:33
+#: ../panels/universal-access/zoom-options.ui.h:23
 msgid "Zoom Options"
 msgstr "אפשרויות תקריב"
 
@@ -3779,7 +3784,7 @@ msgid "Photograph"
 msgstr "צילום"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-photo-dialog.c:97
+#: ../panels/user-accounts/um-photo-dialog.c:98
 msgid "Select"
 msgstr "בחירה"
 
@@ -4035,19 +4040,19 @@ msgstr "הססמאות אינן תואמות"
 msgid "Wrong password"
 msgstr "ססמה שגויה"
 
-#: ../panels/user-accounts/um-photo-dialog.c:445
+#: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
 msgstr "נטרול התמונה"
 
-#: ../panels/user-accounts/um-photo-dialog.c:463
+#: ../panels/user-accounts/um-photo-dialog.c:461
 msgid "Take a photo..."
 msgstr "צילום תמונה..."
 
-#: ../panels/user-accounts/um-photo-dialog.c:481
+#: ../panels/user-accounts/um-photo-dialog.c:479
 msgid "Browse for more pictures..."
 msgstr "עיון אחר תמונות נוספות..."
 
-#: ../panels/user-accounts/um-photo-dialog.c:706
+#: ../panels/user-accounts/um-photo-dialog.c:704
 #, c-format
 msgid "Used by %s"
 msgstr "בשימוש על ידי %s"
@@ -4200,8 +4205,8 @@ msgid "Wacom Graphics Tablet"
 msgstr "לוח גרפי Wacom"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:1
-msgid "Back"
-msgstr "חזרה"
+msgid "Adjust display resolution"
+msgstr "התאמת רזולוציית התצוגה"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:2
 msgid "Bluetooth Settings"
@@ -4212,102 +4217,130 @@ msgid "Calibrate..."
 msgstr "כיול..."
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:4
-msgid "Eraser Pressure Feel"
-msgstr "תחושת לחץ המוחק"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:5
-msgid "Firm"
-msgstr "נוקשה"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:6
-msgid "Forward"
-msgstr "קדימה"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:7
-msgid "Left Mouse Button Click"
-msgstr "לחיצה על לחצן העכבר השמאלי"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:8
 msgid "Left-Handed Orientation"
 msgstr "התאמה לשמאליים"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:9
-msgid "Lower Button"
-msgstr "הלחצן הנמוך יותר"
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
+msgid "Map Buttons..."
+msgstr "מיפוי לחצנים..."
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:10
-msgid "Middle Mouse Button Click"
-msgstr "לחיצה על לחצן העכבר האמצעי"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:11
-msgid "No Action"
-msgstr "ללא פעולה"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/wacom/gnome-wacom-properties.ui.h:6
 msgid "No tablet detected"
 msgstr "לא זוהה לוח מגע"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:7
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "נא לחבר או להפעיל את לוח ה־Wacom שלך"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:14
-msgid "Right Mouse Button Click"
-msgstr "לחיצה על לחצן העכבר הימני"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:15
-msgid "Scroll Down"
-msgstr "גלילה למטה"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:16
-msgid "Scroll Left"
-msgstr "גלילה לשמאל"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:17
-msgid "Scroll Right"
-msgstr "גלילה לימין"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:18
-msgid "Scroll Up"
-msgstr "גלילה למעלה"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:19
-msgid "Soft"
-msgstr "רכה"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:20
-#: ../panels/wacom/gsd-wacom-device.c:315
-#: ../panels/wacom/gsd-wacom-device.c:544
-msgid "Stylus"
-msgstr "עט מגע"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:21
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
 msgid "Tablet (absolute)"
 msgstr "לוח (מוחלט)"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:22
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
 msgid "Tablet Preferences"
 msgstr "העדפות מחשב לוח"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:23
-msgid "Tip Pressure Feel"
-msgstr "תחושת לחץ החוד"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:24
-msgid "Top Button"
-msgstr "לחצן עליון"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:25
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "Touchpad (relative)"
 msgstr "משטח מגע"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:26
+#: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Tracking Mode"
 msgstr "מצב עקיבה"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:27
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
 msgid "Wacom Tablet"
 msgstr "לוח Wacom"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:1
+msgid "Back"
+msgstr "חזרה"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:2
+msgid "Eraser Pressure Feel"
+msgstr "תחושת לחץ המוחק"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:3
+msgid "Firm"
+msgstr "נוקשה"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:4
+msgid "Forward"
+msgstr "קדימה"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:5
+msgid "Left Mouse Button Click"
+msgstr "לחיצה על לחצן העכבר השמאלי"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:6
+msgid "Lower Button"
+msgstr "הלחצן הנמוך יותר"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:7
+msgid "Middle Mouse Button Click"
+msgstr "לחיצה על לחצן העכבר האמצעי"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:8
+msgid "No Action"
+msgstr "ללא פעולה"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:9
+msgid "Right Mouse Button Click"
+msgstr "לחיצה על לחצן העכבר הימני"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:10
+msgid "Scroll Down"
+msgstr "גלילה למטה"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:11
+msgid "Scroll Left"
+msgstr "גלילה לשמאל"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:12
+msgid "Scroll Right"
+msgstr "גלילה לימין"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:13
+msgid "Scroll Up"
+msgstr "גלילה למעלה"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:14
+msgid "Soft"
+msgstr "רכה"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:15
+msgid "Stylus"
+msgstr "עט מגע"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:16
+msgid "Tip Pressure Feel"
+msgstr "תחושת לחץ החוד"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:17
+msgid "Top Button"
+msgstr "לחצן עליון"
+
+#. Text printed on screen
+#: ../panels/wacom/calibrator/gui_gtk.c:70
+msgid "Screen Calibration"
+msgstr "כיול מסך"
+
+#: ../panels/wacom/calibrator/gui_gtk.c:71
+msgid "Please tap the target markers as they appear on screen to calibrate the tablet."
+msgstr "נא ללחוץ על סמני היעד כאשר הם מופיעים על המסך כדי לכייל את משטח המגע."
+
+#: ../panels/wacom/calibrator/gui_gtk.c:271
+msgid "Mis-click detected, restarting..."
+msgstr "זוהתה לחיצה שגויה, הפעולה תתחיל מההתחלה..."
+
+#: ../panels/wacom/cc-wacom-nav-button.c:89
+#, c-format
+msgid "%d of %d"
+msgstr "%d מתוך %d"
+
+#: ../panels/wacom/cc-wacom-stylus-page.c:374
+msgid "Button"
+msgstr "לחצן"
 
 #: ../shell/control-center.c:54
 msgid "Enable verbose mode"
@@ -4353,14 +4386,59 @@ msgstr "הגדרות מערכת"
 msgid "All Settings"
 msgstr "כל ההגדרות"
 
+#~ msgid "Screen"
+#~ msgstr "צג"
+
+#~ msgid "Always"
+#~ msgstr "תמיד"
+
+#~ msgid "Centered"
+#~ msgstr "ממורכז"
+
+#~ msgid "Color and Opacity"
+#~ msgstr "צבע ואטימות"
+
+#~ msgid "Image moves with the mouse pointer"
+#~ msgstr "התמונה זזה עם סמן העכבר"
+
+#~ msgid "Image scrolls at screen edges"
+#~ msgstr "התמונה נגללת בקצוות המסך"
+
+#~ msgid "Moveable lens - magnified view follows mouse movements"
+#~ msgstr "עדשה ניידת – תצוגה מוגדלת עוקבת אחר תנועות העכבר"
+
+#~ msgid "Position of magnified view on screen"
+#~ msgstr "מיקום התצוגה המוגדלת על גבי המסך"
+
+#~ msgid "Proportional"
+#~ msgstr "פרופורציונלי"
+
+#~ msgid "Push"
+#~ msgstr "דחיפה"
+
+#~ msgid "Show"
+#~ msgstr "הצגה"
+
+#~ msgid "Show crosshairs intersection"
+#~ msgstr "הצגת הצטלבות סמני הצלב"
+
+#~ msgid "To keep the pointer centered"
+#~ msgstr "השארת הסמן ממורכז"
+
+#~ msgid "To keep the pointer visible"
+#~ msgstr "השרת הסמן גלוי"
+
+#~ msgid "Could not get session bus while applying display configuration"
+#~ msgstr "לא ניתן לאחזר את אפיק ההפעלה בעת החלת תצורת התצוגה"
+
+#~ msgid "Speed"
+#~ msgstr "מהירות"
+
 #~ msgid "System Info"
 #~ msgstr "פרטי המערכת"
 
 #~ msgid "_Photos:"
 #~ msgstr "תמו_נות:"
-
-#~ msgid "Magnifier zoom in"
-#~ msgstr "התקרבות זכוכית המגדלת"
 
 #~ msgid "Magnifier zoom out"
 #~ msgstr "התרחקות זכוכית המגדלת"
@@ -5533,9 +5611,6 @@ msgstr "כל ההגדרות"
 #~ msgid ""
 #~ "Accessibility features can be turned on or off with keyboard shortcuts"
 #~ msgstr "ניתן לכבות או להפעיל את תכונות הנגישות בעזרת צירופי מקשים"
-
-#~ msgid "Error saving configuration: %s"
-#~ msgstr "שגיאה בשמירת ההגדרות: %s"
 
 #~ msgid "Image Viewer"
 #~ msgstr "מציג תמונות"

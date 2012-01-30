@@ -35,8 +35,6 @@
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
 #include <glib/gi18n.h>
-#include <dbus/dbus-glib.h>
-#include <dbus/dbus-glib-bindings.h>
 #include <gdesktop-enums.h>
 
 G_DEFINE_DYNAMIC_TYPE (CcDisplayPanel, cc_display_panel, CC_TYPE_PANEL)
@@ -95,9 +93,7 @@ struct _CcDisplayPanelPrivate
   gboolean        dragging_top_bar;
 
   /* These are used while we are waiting for the ApplyConfiguration method to be executed over D-bus */
-  DBusGConnection *connection;
-  DBusGProxy *proxy;
-  DBusGProxyCall *proxy_call;
+  GDBusProxy *proxy;
 };
 
 typedef struct
@@ -114,7 +110,7 @@ static gboolean output_overlaps (GnomeRROutputInfo *output, GnomeRRConfig *confi
 static void select_current_output_from_dialog_position (CcDisplayPanel *self);
 static void monitor_switch_active_cb (GObject *object, GParamSpec *pspec, gpointer data);
 static void get_geometry (GnomeRROutputInfo *output, int *w, int *h);
-static void apply_configuration_returned_cb (DBusGProxy *proxy, DBusGProxyCall *call_id, void *data);
+static void apply_configuration_returned_cb (GObject *proxy, GAsyncResult *res, gpointer data);
 static gboolean get_clone_size (GnomeRRScreen *screen, int *width, int *height);
 static gboolean output_info_supports_mode (CcDisplayPanel *self, GnomeRROutputInfo *info, int width, int height);
 static char *make_resolution_string (int width, int height);
@@ -2250,26 +2246,32 @@ static void
 begin_version2_apply_configuration (CcDisplayPanel *self, GdkWindow *parent_window, guint32 timestamp)
 {
   XID parent_window_xid;
+  GError *error = NULL;
 
   parent_window_xid = GDK_WINDOW_XID (parent_window);
 
-  self->priv->proxy = dbus_g_proxy_new_for_name (self->priv->connection,
-                                          "org.gnome.SettingsDaemon",
-                                          "/org/gnome/SettingsDaemon/XRANDR",
-                                          "org.gnome.SettingsDaemon.XRANDR_2");
-  g_assert (self->priv->proxy != NULL); /* that call does not fail unless we pass bogus names */
+  self->priv->proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                                     G_DBUS_PROXY_FLAGS_NONE,
+                                                     NULL,
+                                                     "org.gnome.SettingsDaemon",
+                                                     "/org/gnome/SettingsDaemon/XRANDR",
+                                                     "org.gnome.SettingsDaemon.XRANDR_2",
+                                                     NULL,
+                                                     &error);
+  if (self->priv->proxy == NULL) {
+    error_message (self, _("Failed to apply configuration: %s"), error->message);
+    g_error_free (error);
+    return;
+  }
 
-  self->priv->proxy_call = dbus_g_proxy_begin_call (self->priv->proxy, "ApplyConfiguration",
-                                             apply_configuration_returned_cb, self,
-                                             NULL,
-                                             G_TYPE_INT64, (gint64) parent_window_xid,
-                                             G_TYPE_INT64, (gint64) timestamp,
-                                             G_TYPE_INVALID,
-                                             G_TYPE_INVALID);
-  /* FIXME: we don't check for self->priv->proxy_call == NULL, which could happen if
-   * the connection was disconnected.  This is left as an exercise for the
-   * reader.
-   */
+  g_dbus_proxy_call (self->priv->proxy,
+                     "ApplyConfiguration",
+                     g_variant_new ("(xx)", (gint64) parent_window_xid, (gint64) timestamp),
+                     G_DBUS_CALL_FLAGS_NONE,
+                     -1,
+                     NULL,
+                     apply_configuration_returned_cb,
+                     self);
 }
 
 static void
@@ -2298,34 +2300,24 @@ ensure_current_configuration_is_saved (void)
   g_object_unref (rr_screen);
 }
 
-/* Callback for dbus_g_proxy_begin_call() */
 static void
-apply_configuration_returned_cb (DBusGProxy       *proxy,
-                                 DBusGProxyCall   *call_id,
-                                 void             *data)
+apply_configuration_returned_cb (GObject          *proxy,
+                                 GAsyncResult     *res,
+                                 gpointer          data)
 {
   CcDisplayPanel *self = data;
-  gboolean success;
-  GError *error;
+  GVariant *result;
+  GError *error = NULL;
 
-  g_assert (call_id == self->priv->proxy_call);
-
-  error = NULL;
-  success = dbus_g_proxy_end_call (proxy, call_id, &error, G_TYPE_INVALID);
-
-  if (!success) {
-    /* We don't pop up an error message; gnome-settings-daemon already does that
-     * in case the selected RANDR configuration could not be applied.
-     */
-    g_error_free (error);
-  }
+  result = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), res, &error);
+  if (error)
+    error_message (self, _("Failed to apply configuration: %s"), error->message);
+  g_clear_error (&error);  
+  if (result)
+    g_variant_unref (result);
 
   g_object_unref (self->priv->proxy);
   self->priv->proxy = NULL;
-
-  dbus_g_connection_unref (self->priv->connection);
-  self->priv->connection = NULL;
-  self->priv->proxy_call = NULL;
 
   gtk_widget_set_sensitive (self->priv->panel, TRUE);
 }
@@ -2358,7 +2350,6 @@ sanitize_and_save_configuration (CcDisplayPanel *self)
 static void
 apply (CcDisplayPanel *self)
 {
-  GError *error = NULL;
   GdkWindow *window;
 
   self->priv->apply_button_clicked_timestamp = gtk_get_current_event_time ();
@@ -2366,16 +2357,7 @@ apply (CcDisplayPanel *self)
   if (!sanitize_and_save_configuration (self))
     return;
 
-  g_assert (self->priv->connection == NULL);
   g_assert (self->priv->proxy == NULL);
-  g_assert (self->priv->proxy_call == NULL);
-
-  self->priv->connection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
-  if (self->priv->connection == NULL) {
-    error_message (self, _("Could not get session bus while applying display configuration"), error->message);
-    g_error_free (error);
-    return;
-  }
 
   gtk_widget_set_sensitive (self->priv->panel, FALSE);
 

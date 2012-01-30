@@ -15,8 +15,7 @@ AM_CPPFLAGS =						\
 	-DUM_PIXMAP_DIR=\""$(pkgdatadir)/pixmaps"\"	\
 	-I$(srcdir)/../common/				\
 	$(PANEL_CFLAGS)					\
-	$(USER_ACCOUNTS_PANEL_CFLAGS)			\
-	$(DISABLE_DEPRECATED)
+	$(USER_ACCOUNTS_PANEL_CFLAGS)
 
 if BUILD_CHEESE
 AM_CPPFLAGS += $(CHEESE_CFLAGS)
