@@ -31,6 +31,7 @@
 #include <string.h>
 
 #define WID(x) (GtkWidget *) gtk_builder_get_object (priv->builder, x)
+#define CWID(x) (GtkContainer *) gtk_builder_get_object (priv->builder, x)
 
 G_DEFINE_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
 
@@ -442,6 +443,65 @@ add_styli (CcWacomPage *page)
 	/*FIXME: Set the page with the last used item */
 }
 
+/* Different types of layout for the tablet config */
+enum {
+	LAYOUT_NORMAL,        /* tracking mode, button mapping */
+	LAYOUT_REVERSIBLE,    /* tracking mode, button mapping, left-hand orientation */
+	LAYOUT_SCREEN        /* button mapping, calibration, display resolution */
+};
+
+static void
+remove_left_handed (CcWacomPagePrivate *priv)
+{
+	gtk_widget_destroy (WID ("label-left-handed"));
+	gtk_widget_destroy (WID ("switch-left-handed"));
+}
+
+static void
+remove_display_link (CcWacomPagePrivate *priv)
+{
+	gtk_widget_destroy (WID ("display-link"));
+}
+
+static void
+update_tablet_ui (CcWacomPage *page,
+		  int          layout)
+{
+	CcWacomPagePrivate *priv;
+
+	priv = page->priv;
+
+	switch (layout) {
+	case LAYOUT_NORMAL:
+		remove_left_handed (page->priv);
+		remove_display_link (page->priv);
+		break;
+	case LAYOUT_REVERSIBLE:
+		remove_display_link (page->priv);
+		break;
+	case LAYOUT_SCREEN:
+		remove_left_handed (page->priv);
+
+		gtk_widget_destroy (WID ("combo-tabletmode"));
+		gtk_widget_destroy (WID ("label-trackingmode"));
+
+		gtk_widget_show (WID ("button-calibrate"));
+		gtk_widget_show (WID ("display-link"));
+
+		gtk_container_child_set (CWID ("main-grid"),
+					 WID ("tablet-buttons-box"),
+					 "left_attach", 1,
+					 "top_attach", 1, NULL);
+		gtk_container_child_set (CWID ("main-grid"),
+					 WID ("display-link"),
+					 "left_attach", 1,
+					 "top_attach", 2, NULL);
+		break;
+	default:
+		g_assert_not_reached ();
+	}
+}
+
 GtkWidget *
 cc_wacom_page_new (CcWacomPanel   *panel,
 		   GsdWacomDevice *stylus,
@@ -449,6 +509,7 @@ cc_wacom_page_new (CcWacomPanel   *panel,
 {
 	CcWacomPage *page;
 	CcWacomPagePrivate *priv;
+	int layout;
 
 	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (stylus), NULL);
 	g_return_val_if_fail (gsd_wacom_device_get_device_type (stylus) == WACOM_TYPE_STYLUS, NULL);
@@ -470,21 +531,19 @@ cc_wacom_page_new (CcWacomPanel   *panel,
 	/* Tablet name */
 	gtk_label_set_text (GTK_LABEL (WID ("label-tabletmodel")), gsd_wacom_device_get_name (stylus));
 
-	/* Left-handedness */
-	if (gsd_wacom_device_reversible (stylus) == FALSE) {
-		gtk_widget_hide (WID ("label-left-handed"));
-		gtk_widget_hide (WID ("switch-left-handed"));
-	} else {
-		set_left_handed_from_gsettings (page);
-	}
+	/* Type of layout */
+	if (gsd_wacom_device_is_screen_tablet (stylus))
+		layout = LAYOUT_SCREEN;
+	else if (gsd_wacom_device_reversible (stylus))
+		layout = LAYOUT_REVERSIBLE;
+	else
+		layout = LAYOUT_NORMAL;
 
-	/* Calibration for screen tablets */
-	if (gsd_wacom_device_is_screen_tablet (stylus) != FALSE) {
-		gtk_widget_show (WID ("button-calibrate"));
-		gtk_widget_hide (WID ("combo-tabletmode"));
-		gtk_widget_hide (WID ("label-trackingmode"));
-		gtk_widget_show (WID ("display-link"));
-	}
+	update_tablet_ui (page, layout);
+
+	/* Left-handedness */
+	if (gsd_wacom_device_reversible (stylus))
+		set_left_handed_from_gsettings (page);
 
 	/* Tablet icon */
 	set_icon_name (page, "image-tablet", gsd_wacom_device_get_icon_name (stylus));
