@@ -120,6 +120,10 @@ get_icon_name_from_type (WacomStylusType type)
 		return "wacom-stylus-inking";
 	case WSTYLUS_AIRBRUSH:
 		return "wacom-stylus-airbrush";
+	case WSTYLUS_MARKER:
+		return "wacom-stylus-art-pen";
+	case WSTYLUS_CLASSIC:
+		return "wacom-stylus-classic";
 	default:
 		return "wacom-stylus";
 	}
@@ -417,6 +421,7 @@ find_output_by_edid (const gchar *vendor, const gchar *product, const gchar *ser
 	GnomeRRScreen *rr_screen;
 	GnomeRRConfig *rr_config;
 	GnomeRROutputInfo **rr_output_info;
+        GnomeRROutputInfo *retval = NULL;
 
 	/* TODO: Check the value of 'error' */
 	rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
@@ -445,10 +450,15 @@ find_output_by_edid (const gchar *vendor, const gchar *product, const gchar *ser
 		g_free (o_product);
 		g_free (o_serial);
 
-		if (match)
-			return *rr_output_info;
+		if (match) {
+			retval = g_object_ref (*rr_output_info);
+			break;
+		}
 	}
-	return NULL;
+
+	g_object_unref (rr_config);
+
+	return retval;
 }
 
 static GnomeRROutputInfo*
@@ -597,19 +607,24 @@ gint
 gsd_wacom_device_get_display_monitor (GsdWacomDevice *device)
 {
 	gint area[4];
+	gboolean is_active;
 	GnomeRROutputInfo *rr_output_info;
 
 	rr_output_info = find_output(device);
 	if (rr_output_info == NULL)
 		return -1;
 
-	if (!gnome_rr_output_info_is_active (rr_output_info))
+	is_active = gnome_rr_output_info_is_active (rr_output_info);
+	gnome_rr_output_info_get_geometry (rr_output_info, &area[0], &area[1], &area[2], &area[3]);
+
+	g_object_unref (rr_output_info);
+
+	if (!is_active)
 	{
 		g_warning ("Output is not active.");
 		return -1;
 	}
 
-	gnome_rr_output_info_get_geometry (rr_output_info, &area[0], &area[1], &area[2], &area[3]);
 	if (area[2] <= 0 || area[3] <= 0)
 	{
 		g_warning ("Output has non-positive area.");
