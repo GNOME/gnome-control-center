@@ -10,7 +10,6 @@ INCLUDES = 						\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
-	-DPIXMAP_DIR=\""$(datadir)/gnome-control-center/pixmaps"\"	\
 	$(NULL)
 
 
@@ -57,7 +56,7 @@ test_wacom_LDADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS) $(builddir)/calibrator/libw
 
 @INTLTOOL_DESKTOP_RULE@
 
-pixmapdir = $(pkgdatadir)/pixmaps
+pixmapdir = $(pkgdatadir)/ui
 pixmap_DATA =				\
 	wacom-tablet.svg		\
 	wacom-stylus.svg		\
