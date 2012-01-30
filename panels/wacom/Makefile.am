@@ -63,6 +63,8 @@ pixmap_DATA =				\
 	wacom-stylus.svg		\
 	wacom-stylus-airbrush.svg	\
 	wacom-stylus-inking.svg		\
+	wacom-stylus-art-pen.svg	\
+	wacom-stylus-classic.svg	\
 	wacom-tablet-cintiq.svg		\
 	wacom-tablet-pc.svg
 
