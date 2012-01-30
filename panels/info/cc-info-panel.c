@@ -23,7 +23,6 @@
 
 #include "cc-info-panel.h"
 
-#include <sys/vfs.h>
 #include <polkit/polkit.h>
 
 #include <glib.h>
