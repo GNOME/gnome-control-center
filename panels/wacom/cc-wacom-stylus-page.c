@@ -481,6 +481,8 @@ cc_wacom_stylus_page_new (GsdWacomStylus *stylus,
 	if (eraser != NULL)
 		set_feel_from_gsettings (GTK_ADJUSTMENT (WID ("adjustment-eraser-feel")), priv->eraser_settings);
 
+	g_object_set (G_OBJECT (page), "margin-top", 16, NULL);
+
 	return GTK_WIDGET (page);
 }
 
