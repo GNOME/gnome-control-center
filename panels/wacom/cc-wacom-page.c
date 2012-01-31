@@ -425,6 +425,10 @@ add_styli (CcWacomPage *page)
 		GtkWidget *page;
 
 		stylus = l->data;
+
+		if (gsd_wacom_stylus_get_stylus_type (stylus) == WACOM_STYLUS_TYPE_PUCK)
+			continue;
+
 		if (gsd_wacom_stylus_get_has_eraser (stylus)) {
 			GsdWacomDeviceType type;
 			type = gsd_wacom_stylus_get_stylus_type (stylus);
