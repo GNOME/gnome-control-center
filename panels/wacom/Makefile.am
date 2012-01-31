@@ -77,10 +77,10 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 WACOMDIR=$(top_srcdir)/../gnome-settings-daemon/plugins/wacom/
 WACOMFILES=gsd-wacom-device.c gsd-wacom-device.h
 COMMONDIR=$(top_srcdir)/../gnome-settings-daemon/plugins/common/
-COMMONFILES=gsd-wacom-device.c gsd-wacom-device.h
+COMMONFILES=gsd-input-helper.c gsd-input-helper.h
 update-from-gsd:
 	FILES="$(WACOMFILES)" DIR="$(WACOMDIR)" $(srcdir)/update-from-gsd.sh && changed=true ; \
-	FILES="$(COMMONFILES)" DIR="$(WACOMDIR)" $(srcdir)/update-from-gsd.sh && changed=true ; \
+	FILES="$(COMMONFILES)" DIR="$(COMMONDIR)" $(srcdir)/update-from-gsd.sh && changed=true ; \
 	git commit -m "wacom: Update from gnome-settings-daemon" $(WACOMFILES) $(COMMONFILES)
 
 CLEANFILES = $(Desktop_in_files) $(desktop_DATA)
