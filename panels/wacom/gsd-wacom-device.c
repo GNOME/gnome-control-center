@@ -221,6 +221,8 @@ gsd_wacom_stylus_get_stylus_type (GsdWacomStylus *stylus)
 		return WACOM_STYLUS_TYPE_MARKER;
 	case WSTYLUS_STROKE:
 		return WACOM_STYLUS_TYPE_STROKE;
+	case WSTYLUS_PUCK:
+		return WACOM_STYLUS_TYPE_PUCK;
 	default:
 		g_assert_not_reached ();
 	}
@@ -1250,22 +1252,22 @@ gsd_wacom_device_create_fake_intuos4 (void)
 	GList *devices;
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_STYLUS,
-					       "Wacom Intuos 4 M 6x9",
+					       "Wacom Intuos4 6x9",
 					       "Wacom Intuos4 6x9 stylus");
 	devices = g_list_prepend (NULL, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_ERASER,
-					       "Wacom Intuos 4 M 6x9",
+					       "Wacom Intuos4 6x9",
 					       "Wacom Intuos4 6x9 eraser");
 	devices = g_list_prepend (devices, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_PAD,
-					       "Wacom Intuos 4 M 6x9",
+					       "Wacom Intuos4 6x9",
 					       "Wacom Intuos4 6x9 pad");
 	devices = g_list_prepend (devices, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_CURSOR,
-					       "Wacom Intuos 4 M 6x9",
+					       "Wacom Intuos4 6x9",
 					       "Wacom Intuos4 6x9 cursor");
 	devices = g_list_prepend (devices, device);
 
