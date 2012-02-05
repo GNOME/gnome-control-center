@@ -120,6 +120,10 @@ get_icon_name_from_type (WacomStylusType type)
 		return "wacom-stylus-inking";
 	case WSTYLUS_AIRBRUSH:
 		return "wacom-stylus-airbrush";
+	case WSTYLUS_MARKER:
+		return "wacom-stylus-art-pen";
+	case WSTYLUS_CLASSIC:
+		return "wacom-stylus-classic";
 	default:
 		return "wacom-stylus";
 	}
@@ -217,6 +221,8 @@ gsd_wacom_stylus_get_stylus_type (GsdWacomStylus *stylus)
 		return WACOM_STYLUS_TYPE_MARKER;
 	case WSTYLUS_STROKE:
 		return WACOM_STYLUS_TYPE_STROKE;
+	case WSTYLUS_PUCK:
+		return WACOM_STYLUS_TYPE_PUCK;
 	default:
 		g_assert_not_reached ();
 	}
@@ -417,6 +423,7 @@ find_output_by_edid (const gchar *vendor, const gchar *product, const gchar *ser
 	GnomeRRScreen *rr_screen;
 	GnomeRRConfig *rr_config;
 	GnomeRROutputInfo **rr_output_info;
+        GnomeRROutputInfo *retval = NULL;
 
 	/* TODO: Check the value of 'error' */
 	rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
@@ -445,10 +452,15 @@ find_output_by_edid (const gchar *vendor, const gchar *product, const gchar *ser
 		g_free (o_product);
 		g_free (o_serial);
 
-		if (match)
-			return *rr_output_info;
+		if (match) {
+			retval = g_object_ref (*rr_output_info);
+			break;
+		}
 	}
-	return NULL;
+
+	g_object_unref (rr_config);
+
+	return retval;
 }
 
 static GnomeRROutputInfo*
@@ -597,19 +609,24 @@ gint
 gsd_wacom_device_get_display_monitor (GsdWacomDevice *device)
 {
 	gint area[4];
+	gboolean is_active;
 	GnomeRROutputInfo *rr_output_info;
 
 	rr_output_info = find_output(device);
 	if (rr_output_info == NULL)
 		return -1;
 
-	if (!gnome_rr_output_info_is_active (rr_output_info))
+	is_active = gnome_rr_output_info_is_active (rr_output_info);
+	gnome_rr_output_info_get_geometry (rr_output_info, &area[0], &area[1], &area[2], &area[3]);
+
+	g_object_unref (rr_output_info);
+
+	if (!is_active)
 	{
 		g_warning ("Output is not active.");
 		return -1;
 	}
 
-	gnome_rr_output_info_get_geometry (rr_output_info, &area[0], &area[1], &area[2], &area[3]);
 	if (area[2] <= 0 || area[3] <= 0)
 	{
 		g_warning ("Output has non-positive area.");
@@ -1235,22 +1252,22 @@ gsd_wacom_device_create_fake_intuos4 (void)
 	GList *devices;
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_STYLUS,
-					       "Wacom Intuos 4 M 6x9",
+					       "Wacom Intuos4 6x9",
 					       "Wacom Intuos4 6x9 stylus");
 	devices = g_list_prepend (NULL, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_ERASER,
-					       "Wacom Intuos 4 M 6x9",
+					       "Wacom Intuos4 6x9",
 					       "Wacom Intuos4 6x9 eraser");
 	devices = g_list_prepend (devices, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_PAD,
-					       "Wacom Intuos 4 M 6x9",
+					       "Wacom Intuos4 6x9",
 					       "Wacom Intuos4 6x9 pad");
 	devices = g_list_prepend (devices, device);
 
 	device = gsd_wacom_device_create_fake (WACOM_TYPE_CURSOR,
-					       "Wacom Intuos 4 M 6x9",
+					       "Wacom Intuos4 6x9",
 					       "Wacom Intuos4 6x9 cursor");
 	devices = g_list_prepend (devices, device);
 

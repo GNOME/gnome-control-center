@@ -54,6 +54,8 @@ cc_wacom_nav_button_update (CcWacomNavButton *nav)
 {
 	CcWacomNavButtonPrivate *priv = nav->priv;
 	int num_pages;
+	int current_page;
+	char *text;
 
 	if (priv->notebook == NULL) {
 		gtk_widget_hide (GTK_WIDGET (nav));
@@ -71,26 +73,23 @@ cc_wacom_nav_button_update (CcWacomNavButton *nav)
 
 	g_assert (num_pages >= 1);
 
-	if (num_pages == 1) {
+	if (num_pages == 1)
 		gtk_widget_hide (GTK_WIDGET (nav));
-	} else {
-		int current_page;
-		char *text;
-
+	else
 		gtk_widget_show (GTK_WIDGET (nav));
-		current_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (priv->notebook));
-		if (current_page < 0)
-			return;
-		if (priv->ignore_first_page)
-			current_page--;
-		gtk_widget_set_sensitive (priv->prev, current_page == 0 ? FALSE : TRUE);
-		gtk_widget_set_sensitive (priv->next, current_page + 1 == num_pages ? FALSE : TRUE);
 
-		text = g_strdup_printf (_("%d of %d"),
-					current_page + 1,
-					num_pages);
-		gtk_label_set_text (GTK_LABEL (priv->label), text);
-	}
+	current_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (priv->notebook));
+	if (current_page < 0)
+		return;
+	if (priv->ignore_first_page)
+		current_page--;
+	gtk_widget_set_sensitive (priv->prev, current_page == 0 ? FALSE : TRUE);
+	gtk_widget_set_sensitive (priv->next, current_page + 1 == num_pages ? FALSE : TRUE);
+
+	text = g_strdup_printf (_("%d of %d"),
+				current_page + 1,
+				num_pages);
+	gtk_label_set_text (GTK_LABEL (priv->label), text);
 }
 
 static void
@@ -218,11 +217,6 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 	/* Label */
 	priv->label = gtk_label_new (NULL);
 	gtk_style_context_add_class (gtk_widget_get_style_context (priv->label), "dim-label");
-	g_object_set (priv->label,
-		      "margin-top", 16,
-		      "margin-bottom", 16,
-		      NULL);
-
 	gtk_box_pack_start (GTK_BOX (self), priv->label,
 			    FALSE, FALSE, 8);
 
