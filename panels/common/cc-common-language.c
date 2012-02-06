@@ -723,7 +723,7 @@ cc_common_language_maybe_install (const gchar *lang)
         /* Retrieve packages to be installed */
         v = g_dbus_proxy_call_sync (tid_proxy,
                                     "WhatProvides",
-                                    g_variant_new ("(ssas)",
+                                    g_variant_new ("(ss^a&s)",
                                                    "~installed", "language-support", provides_args),
                                     G_DBUS_CALL_FLAGS_NONE,
                                     -1,
