@@ -56,6 +56,8 @@ void     cc_common_language_setup_list              (GtkWidget    *treeview,
 						     GHashTable   *initial);
 void     cc_common_language_select_current_language (GtkTreeView  *treeview);
 
+gboolean cc_common_language_maybe_install           (const gchar *lang);
+
 G_END_DECLS
 
 #endif

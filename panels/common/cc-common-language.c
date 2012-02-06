@@ -626,6 +626,25 @@ cc_common_language_get_initial_regions (const gchar *lang)
         return ht;
 }
 
+typedef struct {
+        gchar *lang;
+} PkTransactionData;
+
+static void
+on_pk_transaction_signal (GDBusProxy *proxy,
+                          char *sender_name,
+                          char *signal_name,
+                          GVariant *parameters,
+                          PkTransactionData *pk_data)
+{
+        if (g_strcmp0 (signal_name, "Package")) {
+                g_variant_print (parameters, TRUE);
+        } else if (g_strcmp0 (signal_name, "Progress")) {
+        } else if (g_strcmp0 (signal_name, "Status")) {
+        } else if (g_strcmp0 (signal_name, "Error")) {
+        }
+}
+
 gboolean
 cc_common_language_maybe_install (const gchar *lang)
 {
@@ -634,6 +653,8 @@ cc_common_language_maybe_install (const gchar *lang)
         GDBusProxy *pk_proxy = NULL, *tid_proxy = NULL;
         GVariant *v = NULL;
         GError *error = NULL;
+        PkTransactionData *pk_data = NULL;
+        gchar *provides_args[1] = { lang };
 
         gdm_parse_language_name (lang, &language_code, &territory_code, NULL, NULL);
 
@@ -694,20 +715,28 @@ cc_common_language_maybe_install (const gchar *lang)
                 goto out;
         }
 
+        pk_data = g_new0 (PkTransactionData, 1);
+        pk_data->lang = g_strdup (lang);
+
+        g_signal_connect (tid_proxy, "g-signal", G_CALLBACK (on_pk_transaction_signal), pk_data);
+
         /* Retrieve packages to be installed */
         v = g_dbus_proxy_call_sync (tid_proxy,
                                     "WhatProvides",
-                                    g_variant_new ("(ss(as)",
-                                                   "", "", ""),
+                                    g_variant_new ("(ssas)",
+                                                   "~installed", "language-support", provides_args),
                                     G_DBUS_CALL_FLAGS_NONE,
                                     -1,
                                     NULL,
                                     &error);
-        if (!v) {
-                g_warning ("Could not get list of packages from PackageKit: %s", error->message);
+        if (error != NULL) {
+                g_warning ("Unable to get packages from PackageKit: %s", error->message);
+                g_error_free (error);
                 result = TRUE;
                 goto out;
         }
+
+        /* Now install all packages returned by the previous call */
 
 out:
         g_free (language_code);
@@ -715,6 +744,11 @@ out:
         g_free (territory_lang);
         g_free (tid);
         g_variant_unref (v);
+
+        if (pk_data != NULL) {
+                g_free (pk_data->lang);
+                g_free (pk_data);
+        }
 
         g_object_unref (tid_proxy);
         g_object_unref (pk_proxy);
