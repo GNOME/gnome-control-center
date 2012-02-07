@@ -23,7 +23,6 @@
 
 #include <glib-object.h>
 #include <gio/gio.h>
-#include <dbus/dbus-glib.h>
 
 #include "um-user.h"
 
@@ -40,7 +39,7 @@ typedef struct
 {
         GObject parent;
 
-        DBusGProxy *proxy;
+        GDBusProxy *proxy;
 
         GHashTable *user_by_object_path;
         GHashTable *user_by_name;

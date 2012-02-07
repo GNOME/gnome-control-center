@@ -32,13 +32,10 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <polkit/polkit.h>
-#include <dbus/dbus-glib-bindings.h>
 
 #ifdef HAVE_CHEESE
 #include <gst/gst.h>
 #endif /* HAVE_CHEESE */
-
-#include "marshal.h"
 
 #include "shell/cc-editable-entry.h"
 
@@ -1243,9 +1240,6 @@ um_user_panel_init (UmUserPanel *self)
         const gchar *filename;
         GtkWidget *button;
         GtkStyleContext *context;
-
-        dbus_g_object_register_marshaller (fprintd_marshal_VOID__STRING_BOOLEAN,
-                                           G_TYPE_NONE, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_INVALID);
 
         d = self->priv = UM_USER_PANEL_PRIVATE (self);
 

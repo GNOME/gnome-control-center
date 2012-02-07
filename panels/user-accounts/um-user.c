@@ -37,8 +37,6 @@
 
 #include <gio/gunixoutputstream.h>
 
-#include <dbus/dbus-glib.h>
-
 #include "um-user.h"
 #include "um-account-type.h"
 #include "um-utils.h"
@@ -68,69 +66,6 @@ typedef struct {
 } UserProperties;
 
 static void
-collect_props (const gchar    *key,
-               const GValue   *value,
-               UserProperties *props)
-{
-        gboolean handled = TRUE;
-
-        if (strcmp (key, "Uid") == 0) {
-                props->uid = g_value_get_uint64 (value);
-        }
-        else if (strcmp (key, "UserName") == 0) {
-                props->user_name = g_value_dup_string (value);
-        }
-        else if (strcmp (key, "RealName") == 0) {
-                props->real_name = g_value_dup_string (value);
-        }
-        else if (strcmp (key, "AccountType") == 0) {
-                props->account_type = g_value_get_int (value);
-        }
-        else if (strcmp (key, "Email") == 0) {
-                props->email = g_value_dup_string (value);
-        }
-        else if (strcmp (key, "Language") == 0) {
-                props->language = g_value_dup_string (value);
-        }
-        else if (strcmp (key, "Location") == 0) {
-                props->location = g_value_dup_string (value);
-        }
-        else if (strcmp (key, "LoginFrequency") == 0) {
-                props->login_frequency = g_value_get_uint64 (value);
-        }
-        else if (strcmp (key, "IconFile") == 0) {
-                props->icon_file = g_value_dup_string (value);
-        }
-        else if (strcmp (key, "Locked") == 0) {
-                props->locked = g_value_get_boolean (value);
-        }
-        else if (strcmp (key, "AutomaticLogin") == 0) {
-                props->automatic_login = g_value_get_boolean (value);
-        }
-        else if (strcmp (key, "SystemAccount") == 0) {
-                props->system_account = g_value_get_boolean (value);
-        }
-        else if (strcmp (key, "PasswordMode") == 0) {
-                props->password_mode = g_value_get_int (value);
-        }
-        else if (strcmp (key, "PasswordHint") == 0) {
-                props->password_hint = g_value_dup_string (value);
-        }
-        else if (strcmp (key, "HomeDirectory") == 0) {
-                /* ignore */
-        }
-        else if (strcmp (key, "Shell") == 0) {
-                /* ignore */
-        }
-        else {
-                handled = FALSE;
-        }
-
-        if (!handled)
-                g_debug ("unhandled property %s", key);
-}
-
-static void
 user_properties_free (UserProperties *props)
 {
         g_free (props->user_name);
@@ -144,41 +79,92 @@ user_properties_free (UserProperties *props)
 }
 
 static UserProperties *
-user_properties_get (DBusGConnection *bus,
+user_properties_get (GDBusConnection *bus,
                      const gchar     *object_path)
 {
+        GVariant *result;
+        GVariantIter *iter;
+        gchar *key;
+        GVariant *value;
         UserProperties *props;
-        GError *error;
-        DBusGProxy *proxy;
-        GHashTable *hash_table;
+        GError *error = NULL;
 
-        props = g_new0 (UserProperties, 1);
-
-        proxy = dbus_g_proxy_new_for_name (bus,
-                                           "org.freedesktop.Accounts",
-                                           object_path,
-                                           "org.freedesktop.DBus.Properties");
-        error = NULL;
-        if (!dbus_g_proxy_call (proxy,
-                                "GetAll",
-                                &error,
-                                G_TYPE_STRING,
-                                "org.freedesktop.Accounts.User",
-                                G_TYPE_INVALID,
-                                dbus_g_type_get_map ("GHashTable", G_TYPE_STRING, G_TYPE_VALUE),
-                                &hash_table,
-                                G_TYPE_INVALID)) {
+        result = g_dbus_connection_call_sync (bus,
+                                              "org.freedesktop.Accounts",
+                                              object_path,
+                                              "org.freedesktop.DBus.Properties",
+                                              "GetAll",
+                                              g_variant_new ("(s)", "org.freedesktop.Accounts.User"),
+                                              G_VARIANT_TYPE ("(a{sv})"),
+                                              G_DBUS_CALL_FLAGS_NONE,
+                                              -1,
+                                              NULL,
+                                              &error);
+        if (!result) {
                 g_debug ("Error calling GetAll() when retrieving properties for %s: %s", object_path, error->message);
                 g_error_free (error);
-                g_free (props);
-                props = NULL;
-                goto out;
+                return NULL;
         }
-        g_hash_table_foreach (hash_table, (GHFunc) collect_props, props);
-        g_hash_table_unref (hash_table);
 
- out:
-        g_object_unref (proxy);
+        props = g_new0 (UserProperties, 1);
+        g_variant_get (result, "(a{sv})", &iter);
+        while (g_variant_iter_loop (iter, "{&sv}", &key, &value)) {
+                if (strcmp (key, "Uid") == 0) {
+                        g_variant_get (value, "t", &props->uid);
+                }
+                else if (strcmp (key, "UserName") == 0) {
+                        g_variant_get (value, "s", &props->user_name);
+                }
+                else if (strcmp (key, "RealName") == 0) {
+                        g_variant_get (value, "s", &props->real_name);
+                }
+                else if (strcmp (key, "AccountType") == 0) {
+                        g_variant_get (value, "i", &props->account_type);
+                }
+                else if (strcmp (key, "Email") == 0) {
+                        g_variant_get (value, "s", &props->email);
+                }
+                else if (strcmp (key, "Language") == 0) {
+                        g_variant_get (value, "s", &props->language);
+                }
+                else if (strcmp (key, "Location") == 0) {
+                        g_variant_get (value, "s", &props->location);
+                }
+                else if (strcmp (key, "LoginFrequency") == 0) {
+                        g_variant_get (value, "t", &props->login_frequency);
+                }
+                else if (strcmp (key, "IconFile") == 0) {
+                        g_variant_get (value, "s", &props->icon_file);
+                }
+                else if (strcmp (key, "Locked") == 0) {
+                        g_variant_get (value, "b", &props->locked);
+                }
+                else if (strcmp (key, "AutomaticLogin") == 0) {
+                        g_variant_get (value, "b", &props->automatic_login);
+                }
+                else if (strcmp (key, "SystemAccount") == 0) {
+                        g_variant_get (value, "b", &props->system_account);
+                }
+                else if (strcmp (key, "PasswordMode") == 0) {
+                        g_variant_get (value, "i", &props->password_mode);
+                }
+                else if (strcmp (key, "PasswordHint") == 0) {
+                        g_variant_get (value, "s", &props->password_hint);
+                }
+                else if (strcmp (key, "HomeDirectory") == 0) {
+                        /* ignore */
+                }
+                else if (strcmp (key, "Shell") == 0) {
+                        /* ignore */
+                }
+                else {
+                        g_debug ("unhandled property %s", key);
+                }
+        }
+  
+        g_variant_iter_free (iter);
+        g_variant_unref (result);
+
         return props;
 }
 
@@ -186,8 +172,8 @@ user_properties_get (DBusGConnection *bus,
 struct _UmUser {
         GObject         parent;
 
-        DBusGConnection *bus;
-        DBusGProxy      *proxy;
+        GDBusConnection *bus;
+        GDBusProxy      *proxy;
         gchar           *object_path;
 
         UserProperties  *props;
@@ -244,7 +230,7 @@ um_user_finalize (GObject *object)
 
         g_free (user->display_name);
 
-        dbus_g_connection_unref (user->bus);
+        g_object_unref (user->bus);
         g_free (user->object_path);
 
         if (user->proxy != NULL)
@@ -719,17 +705,15 @@ update_info (UmUser *user)
 }
 
 static void
-changed_handler (DBusGProxy *proxy,
-                 gpointer   *data)
+user_signal_cb (GDBusProxy *proxy, gchar *sender_name, gchar *signal_name, GVariant *parameters, UmUser *user)
 {
-        UmUser *user = UM_USER (data);
-
-        if (update_info (user)) {
-                if (user->display_name != NULL) {
-                        um_user_show_full_display_name (user);
+        if (strcmp (signal_name, "Changed") == 0) {
+                if (update_info (user)) {
+                        if (user->display_name != NULL) {
+                                um_user_show_full_display_name (user);
+                        }
+                        g_signal_emit (user, signals[CHANGED], 0);
                 }
-
-                g_signal_emit (user, signals[CHANGED], 0);
         }
 }
 
@@ -737,27 +721,33 @@ UmUser *
 um_user_new_from_object_path (const gchar *object_path)
 {
         UmUser *user;
-        GError *error;
+        GError *error = NULL;
 
         user = (UmUser *)g_object_new (UM_TYPE_USER, NULL);
         user->object_path = g_strdup (object_path);
 
-        error = NULL;
-        user->bus = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
+        user->bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
         if (user->bus == NULL) {
                 g_warning ("Couldn't connect to system bus: %s", error->message);
+                g_error_free (error);
                 goto error;
         }
 
-        user->proxy = dbus_g_proxy_new_for_name (user->bus,
-                                                 "org.freedesktop.Accounts",
-                                                 user->object_path,
-                                                 "org.freedesktop.Accounts.User");
-        dbus_g_proxy_set_default_timeout (user->proxy, INT_MAX);
-        dbus_g_proxy_add_signal (user->proxy, "Changed", G_TYPE_INVALID);
-
-        dbus_g_proxy_connect_signal (user->proxy, "Changed",
-                                     G_CALLBACK (changed_handler), user, NULL);
+        user->proxy = g_dbus_proxy_new_sync (user->bus,
+                                             G_DBUS_PROXY_FLAGS_NONE,
+                                             NULL,
+                                             "org.freedesktop.Accounts",
+                                             user->object_path,
+                                             "org.freedesktop.Accounts.User",
+                                             NULL,
+                                             &error);
+        if (user->proxy == NULL) {
+                g_warning ("Couldn't get user proxy: %s", error->message);
+                g_error_free (error);
+                goto error;     
+        }
+        g_dbus_proxy_set_default_timeout (user->proxy, INT_MAX);
+        g_signal_connect (user->proxy, "g-signal", G_CALLBACK (user_signal_cb), user);
 
         if (!update_info (user))
                 goto error;
@@ -773,108 +763,96 @@ void
 um_user_set_email (UmUser      *user,
                    const gchar *email)
 {
+        GVariant *result;
         GError *error = NULL;
 
-        if (!dbus_g_proxy_call (user->proxy,
-                                "SetEmail",
-                                &error,
-                                G_TYPE_STRING, email,
-                                G_TYPE_INVALID,
-                                G_TYPE_INVALID)) {
+        result = g_dbus_proxy_call_sync (user->proxy, "SetEmail", g_variant_new ("(s)", email), G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+        if (!result) {
                 g_warning ("SetEmail call failed: %s", error->message);
                 g_error_free (error);
                 return;
         }
+        g_variant_unref (result);
 }
 
 void
 um_user_set_language (UmUser      *user,
                       const gchar *language)
 {
+        GVariant *result;
         GError *error = NULL;
 
-        if (!dbus_g_proxy_call (user->proxy,
-                                "SetLanguage",
-                                &error,
-                                G_TYPE_STRING, language,
-                                G_TYPE_INVALID,
-                                G_TYPE_INVALID)) {
+        result = g_dbus_proxy_call_sync (user->proxy, "SetLanguage", g_variant_new ("(s)", language), G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+        if (!result) {
                 g_warning ("SetLanguage call failed: %s", error->message);
                 g_error_free (error);
                 return;
         }
+        g_variant_unref (result);
 }
 
 void
 um_user_set_location (UmUser      *user,
                       const gchar *location)
 {
+        GVariant *result;
         GError *error = NULL;
 
-        if (!dbus_g_proxy_call (user->proxy,
-                                "SetLocation",
-                                &error,
-                                G_TYPE_STRING, location,
-                                G_TYPE_INVALID,
-                                G_TYPE_INVALID)) {
+        result = g_dbus_proxy_call_sync (user->proxy, "SetLocation", g_variant_new ("(s)", location), G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+        if (!result) {
                 g_warning ("SetLocation call failed: %s", error->message);
                 g_error_free (error);
                 return;
         }
+        g_variant_unref (result);
 }
 
 void
 um_user_set_user_name (UmUser      *user,
                        const gchar *user_name)
 {
+        GVariant *result;
         GError *error = NULL;
 
-        if (!dbus_g_proxy_call (user->proxy,
-                                "SetUserName",
-                                &error,
-                                G_TYPE_STRING, user_name,
-                                G_TYPE_INVALID,
-                                G_TYPE_INVALID)) {
+        result = g_dbus_proxy_call_sync (user->proxy, "SetUserName", g_variant_new ("(s)", user_name), G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+        if (!result) {
                 g_warning ("SetUserName call failed: %s", error->message);
                 g_error_free (error);
                 return;
         }
+        g_variant_unref (result);
 }
 
 void
 um_user_set_real_name (UmUser      *user,
                        const gchar *real_name)
 {
+        GVariant *result;
         GError *error = NULL;
 
-        if (!dbus_g_proxy_call (user->proxy,
-                                "SetRealName",
-                                &error,
-                                G_TYPE_STRING, real_name,
-                                G_TYPE_INVALID,
-                                G_TYPE_INVALID)) {
+        result = g_dbus_proxy_call_sync (user->proxy, "SetRealName", g_variant_new ("(s)", real_name), G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+        if (!result) {
                 g_warning ("SetRealName call failed: %s", error->message);
                 g_error_free (error);
                 return;
         }
+        g_variant_unref (result);
 }
 
 void
 um_user_set_icon_file (UmUser      *user,
                        const gchar *icon_file)
 {
+        GVariant *result;
         GError *error = NULL;
 
-        if (!dbus_g_proxy_call (user->proxy,
-                                "SetIconFile",
-                                &error,
-                                G_TYPE_STRING, icon_file,
-                                G_TYPE_INVALID,
-                                G_TYPE_INVALID)) {
+        result = g_dbus_proxy_call_sync (user->proxy, "SetIconFile", g_variant_new ("(s)", icon_file), G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+        if (!result) {
                 g_warning ("SetIconFile call failed: %s", error->message);
                 g_error_free (error);
                 return;
         }
+        g_variant_unref (result);
 }
 
 void
@@ -921,18 +899,16 @@ void
 um_user_set_account_type (UmUser *user,
                           gint    account_type)
 {
+        GVariant *result;  
         GError *error = NULL;
 
-        if (!dbus_g_proxy_call (user->proxy,
-                                "SetAccountType",
-                                &error,
-                                G_TYPE_INT, account_type,
-                                G_TYPE_INVALID,
-                                G_TYPE_INVALID)) {
+        result = g_dbus_proxy_call_sync (user->proxy, "SetAccountType", g_variant_new ("(i)", account_type), G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+        if (!result) {
                 g_warning ("SetAccountType call failed: %s", error->message);
                 g_error_free (error);
                 return;
         }
+        g_variant_unref (result);  
 }
 
 static gchar
@@ -981,21 +957,22 @@ um_user_set_password (UmUser      *user,
         gchar *crypted;
 
         if (password_mode == 0) {
+                GVariant *result;
+
                 crypted = make_crypted (password);
-                if (!dbus_g_proxy_call (user->proxy,
-                                        "SetPassword",
-                                        &error,
-                                        G_TYPE_STRING, crypted,
-                                        G_TYPE_STRING, hint,
-                                        G_TYPE_INVALID,
-                                        G_TYPE_INVALID)) {
+                result = g_dbus_proxy_call_sync (user->proxy, "SetPassword", g_variant_new ("(ss)", crypted, hint), G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+                if (!result) {
                         g_warning ("SetPassword call failed: %s", error->message);
                         g_error_free (error);
                 }
+                else
+                        g_variant_unref (result);
                 memset (crypted, 0, strlen (crypted));
                 g_free (crypted);
         }
         else if (password_mode == 3 || password_mode == 4) {
+                GVariant *result;
+
                 /* FIXME: this is a slightly odd side-effect:
                  * you disable the account, and autologin flips
                  * we should remove that once gdm knows to
@@ -1005,26 +982,24 @@ um_user_set_password (UmUser      *user,
                     um_user_get_automatic_login (user)) {
                         um_user_set_automatic_login (user, FALSE);
                 }
-                if (!dbus_g_proxy_call (user->proxy,
-                                        "SetLocked",
-                                        &error,
-                                        G_TYPE_BOOLEAN, (password_mode == 3),
-                                        G_TYPE_INVALID,
-                                        G_TYPE_INVALID)) {
+                result = g_dbus_proxy_call_sync (user->proxy, "SetLocked", g_variant_new ("(b)", password_mode == 3), G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+                if (!result) {
                         g_warning ("SetLocked call failed: %s", error->message);
                         g_error_free (error);
                 }
+                else
+                        g_variant_unref (result);
         }
         else {
-                if (!dbus_g_proxy_call (user->proxy,
-                                        "SetPasswordMode",
-                                        &error,
-                                        G_TYPE_INT, password_mode,
-                                        G_TYPE_INVALID,
-                                        G_TYPE_INVALID)) {
+                GVariant *result;
+
+                result = g_dbus_proxy_call_sync (user->proxy, "SetPasswordMode", g_variant_new ("(i)", password_mode), G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+                if (!result) {
                         g_warning ("SetPasswordMode call failed: %s", error->message);
                         g_error_free (error);
                 }
+                else
+                        g_variant_unref (result);
         }
 }
 
@@ -1047,36 +1022,32 @@ um_user_is_logged_in (UmUser *user)
 gboolean
 um_user_is_logged_in (UmUser *user)
 {
-        DBusGProxy *proxy;
-        GPtrArray *array;
-        GError *error;
+        GVariant *result;
+        GVariantIter *iter;
         gint n_sessions;
+        GError *error = NULL;
 
-        proxy = dbus_g_proxy_new_for_name (user->bus,
-                                           "org.freedesktop.ConsoleKit",
-                                           "/org/freedesktop/ConsoleKit/Manager",
-                                           "org.freedesktop.ConsoleKit.Manager");
-
-        array = NULL;
-        error = NULL;
-        if (!dbus_g_proxy_call (proxy,
-                                "GetSessionsForUnixUser",
-                                &error,
-                                G_TYPE_UINT, um_user_get_uid (user),
-                                G_TYPE_INVALID,
-                                dbus_g_type_get_collection ("GPtrArray", DBUS_TYPE_G_OBJECT_PATH), &array,
-                                G_TYPE_INVALID)) {
+        result = g_dbus_connection_call_sync (user->bus,
+                                              "org.freedesktop.ConsoleKit",
+                                              "/org/freedesktop/ConsoleKit/Manager",
+                                              "org.freedesktop.ConsoleKit.Manager",
+                                              "GetSessionsForUnixUser",
+                                              g_variant_new ("(u)", um_user_get_uid (user)),
+                                              G_VARIANT_TYPE ("(ao)"),
+                                              G_DBUS_CALL_FLAGS_NONE,
+                                              -1,
+                                              NULL,
+                                              &error);
+        if (!result) {
                 g_warning ("GetSessionsForUnixUser failed: %s", error->message);
                 g_error_free (error);
                 return FALSE;
         }
-
-        n_sessions = array->len;
-
-        g_ptr_array_foreach (array, (GFunc)g_free, NULL);
-        g_ptr_array_free (array, TRUE);
-
-        g_object_unref (proxy);
+  
+        g_variant_get (result, "(ao)", &iter);
+        n_sessions = g_variant_iter_n_children (iter);
+        g_variant_iter_free (iter);
+        g_variant_unref (result);
 
         return n_sessions > 0;
 }
@@ -1087,17 +1058,16 @@ void
 um_user_set_automatic_login (UmUser   *user,
                              gboolean  enabled)
 {
+        GVariant *result;
         GError *error = NULL;
 
-        if (!dbus_g_proxy_call (user->proxy,
-                                "SetAutomaticLogin",
-                                &error,
-                                G_TYPE_BOOLEAN, enabled,
-                                G_TYPE_INVALID,
-                                G_TYPE_INVALID)) {
+        result = g_dbus_proxy_call_sync (user->proxy, "SetAutomaticLogin", g_variant_new ("(b)", enabled), G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+        if (!result) {
                 g_warning ("SetAutomaticLogin call failed: %s", error->message);
                 g_error_free (error);
+                return;
         }
+        g_variant_unref (result);
 }
 
 void

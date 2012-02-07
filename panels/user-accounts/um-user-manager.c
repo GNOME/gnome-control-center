@@ -202,11 +202,9 @@ user_changed_handler (UmUser        *user,
 }
 
 static void
-user_added_handler (DBusGProxy *proxy,
-                    const char *object_path,
-                    gpointer    user_data)
+user_added_handler (UmUserManager *manager,
+                    const char *object_path)
 {
-        UmUserManager *manager = UM_USER_MANAGER (user_data);
         UmUser *user;
  
         if (g_hash_table_lookup (manager->user_by_object_path, object_path))
@@ -233,11 +231,9 @@ user_added_handler (DBusGProxy *proxy,
 }
 
 static void
-user_deleted_handler (DBusGProxy *proxy,
-                      const char *object_path,
-                      gpointer    user_data)
+user_deleted_handler (UmUserManager *manager,
+                      const char *object_path)
 {
-        UmUserManager *manager = UM_USER_MANAGER (user_data);
         UmUser *user;
 
         user = g_hash_table_lookup (manager->user_by_object_path, object_path);
@@ -255,35 +251,51 @@ user_deleted_handler (DBusGProxy *proxy,
 }
 
 static void
-add_user (const gchar   *object_path,
-          UmUserManager *manager)
+manager_signal_cb (GDBusProxy *proxy, gchar *sender_name, gchar *signal_name, GVariant *parameters, UmUserManager *manager)
 {
-        user_added_handler (NULL, object_path, manager);
+        if (strcmp (signal_name, "UserAdded") == 0) {
+                if (g_variant_is_of_type (parameters, G_VARIANT_TYPE ("(o)"))) {
+                        gchar *object_path;
+                        g_variant_get (parameters, "(&o)", &object_path);
+                        user_added_handler (manager, object_path);
+                }
+        }
+        else if (strcmp (signal_name, "UserDeleted") == 0) {
+                if (g_variant_is_of_type (parameters, G_VARIANT_TYPE ("(o)"))) {
+                        gchar *object_path;
+                        g_variant_get (parameters, "(&o)", &object_path);
+                        user_deleted_handler (manager, object_path);
+                }
+        }
 }
 
 static void
-got_users (DBusGProxy     *proxy,
-           DBusGProxyCall *call_id,
+got_users (GObject        *object,
+           GAsyncResult   *res,
            gpointer        data)
 {
         UmUserManager *manager = data;
+        GVariant *result;
         GError *error = NULL;
-        GPtrArray *paths;
 
-        if (!dbus_g_proxy_end_call (proxy,
-                                    call_id,
-                                    &error,
-                                    dbus_g_type_get_collection ("GPtrArray", DBUS_TYPE_G_OBJECT_PATH), &paths,
-                                    G_TYPE_INVALID)) {
+        result = g_dbus_proxy_call_finish (G_DBUS_PROXY (object), res, &error);
+        if (!result) {
                 manager->no_service = TRUE;
                 g_error_free (error);
                 goto done;
         }
 
-        g_ptr_array_foreach (paths, (GFunc)add_user, manager);
+        if (g_variant_is_of_type (result, G_VARIANT_TYPE ("(ao)"))) {
+                GVariantIter *iter;
+                gchar *object_path;
 
-        g_ptr_array_foreach (paths, (GFunc)g_free, NULL);
-        g_ptr_array_free (paths, TRUE);
+                g_variant_get (result, "(ao)", &iter);
+                while (g_variant_iter_loop (iter, "&o", &object_path))
+                        user_added_handler (manager, object_path);
+                g_variant_iter_free (iter);
+        }
+
+        g_variant_unref (result);
 
  done:
         g_signal_emit (G_OBJECT (manager), signals[USERS_LOADED], 0);
@@ -293,19 +305,21 @@ static void
 get_users (UmUserManager *manager)
 {
         g_debug ("calling 'ListCachedUsers'");
-        dbus_g_proxy_begin_call (manager->proxy,
-                                 "ListCachedUsers",
-                                 got_users,
-                                 manager,
-                                 NULL,
-                                 G_TYPE_INVALID);
+        g_dbus_proxy_call (manager->proxy,
+                           "ListCachedUsers",
+                           g_variant_new ("()"),
+                           G_DBUS_CALL_FLAGS_NONE,
+                           -1,
+                           NULL,
+                           got_users,
+                           manager);
 }
 
 static void
 um_user_manager_init (UmUserManager *manager)
 {
         GError *error = NULL;
-        DBusGConnection *bus;
+        GDBusConnection *bus;
 
         manager->user_by_object_path = g_hash_table_new_full (g_str_hash,
                                                               g_str_equal,
@@ -316,29 +330,30 @@ um_user_manager_init (UmUserManager *manager)
                                                        g_free,
                                                        g_object_unref);
 
-        bus = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
+        bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
         if (bus == NULL) {
                 g_warning ("Couldn't connect to system bus: %s", error->message);
                 g_error_free (error);
-                goto error;
+                return;
         }
 
-        manager->proxy = dbus_g_proxy_new_for_name (bus,
-                                                    "org.freedesktop.Accounts",
-                                                    "/org/freedesktop/Accounts",
-                                                    "org.freedesktop.Accounts");
+        manager->proxy = g_dbus_proxy_new_sync (bus,
+                                                G_DBUS_PROXY_FLAGS_NONE,
+                                                NULL,
+                                                "org.freedesktop.Accounts",
+                                                "/org/freedesktop/Accounts",
+                                                "org.freedesktop.Accounts",
+                                                NULL,
+                                                &error);
+        if (manager->proxy == NULL) {
+                g_warning ("Couldn't get accounts proxy: %s", error->message);
+                g_error_free (error);
+                return;     
+        }
 
-        dbus_g_proxy_add_signal (manager->proxy, "UserAdded", DBUS_TYPE_G_OBJECT_PATH, G_TYPE_INVALID);
-        dbus_g_proxy_add_signal (manager->proxy, "UserDeleted", DBUS_TYPE_G_OBJECT_PATH, G_TYPE_INVALID);
-
-        dbus_g_proxy_connect_signal (manager->proxy, "UserAdded",
-                                     G_CALLBACK (user_added_handler), manager, NULL);
-        dbus_g_proxy_connect_signal (manager->proxy, "UserDeleted",
-                                     G_CALLBACK (user_deleted_handler), manager, NULL);
+        g_signal_connect (manager->proxy, "g-signal", G_CALLBACK (manager_signal_cb), manager);
 
         get_users (manager);
-
- error: ;
 }
 
 static void
@@ -413,37 +428,35 @@ async_user_op_data_free (gpointer d)
 }
 
 static void
-create_user_done (DBusGProxy     *proxy,
-                  DBusGProxyCall *call_id,
+create_user_done (GObject        *proxy,
+                  GAsyncResult   *r,
                   gpointer        user_data)
 {
         AsyncUserOpData *data = user_data;
-        gchar *path;
-        GError *error;
         GSimpleAsyncResult *res;
+        GVariant *result;
+        GError *error = NULL;
 
         res = g_simple_async_result_new (G_OBJECT (data->manager),
                                          data->callback,
                                          data->data,
                                          um_user_manager_create_user);
-        error = NULL;
-        if (!dbus_g_proxy_end_call (proxy,
-                                    call_id,
-                                    &error,
-                                    DBUS_TYPE_G_OBJECT_PATH, &path,
-                                    G_TYPE_INVALID)) {
+        result = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), r, &error);
+        if (!result) {
                 /* dbus-glib fail:
                  * We have to translate the errors manually here, since
                  * calling dbus_g_error_has_name on the error returned in
                  * um_user_manager_create_user_finish doesn't work.
                  */
-                if (dbus_g_error_has_name (error, "org.freedesktop.Accounts.Error.PermissionDenied")) {
+                if (g_dbus_error_is_remote_error (error) &&
+                    strcmp (g_dbus_error_get_remote_error(error), "org.freedesktop.Accounts.Error.PermissionDenied") == 0) {
                         g_simple_async_result_set_error (res,
                                                          UM_USER_MANAGER_ERROR,
                                                          UM_USER_MANAGER_ERROR_PERMISSION_DENIED,
                                                          "Not authorized");
                 }
-                else if (dbus_g_error_has_name (error, "org.freedesktop.Accounts.Error.UserExists")) {
+                if (g_dbus_error_is_remote_error (error) &&
+                    strcmp (g_dbus_error_get_remote_error(error), "org.freedesktop.Accounts.Error.UserExists") == 0) {
                         g_simple_async_result_set_error (res,
                                                          UM_USER_MANAGER_ERROR,
                                                          UM_USER_MANAGER_ERROR_USER_EXISTS,
@@ -456,10 +469,21 @@ create_user_done (DBusGProxy     *proxy,
                 g_error_free (error);
         }
         else {
-                g_simple_async_result_set_op_res_gpointer (res, path, g_free);
+                if (g_variant_is_of_type (result, G_VARIANT_TYPE ("(o)"))) {
+                        gchar *path;
+                        g_variant_get (result, "(o)", &path);
+                        g_simple_async_result_set_op_res_gpointer (res, path, g_free);
+                }
+                else
+                        g_simple_async_result_set_error (res,
+                                                         UM_USER_MANAGER_ERROR,
+                                                         UM_USER_MANAGER_ERROR_FAILED,
+                                                         "Got invalid response from AccountsService");
+                g_variant_unref (result);
         }
 
         data->callback (G_OBJECT (data->manager), G_ASYNC_RESULT (res), data->data);
+        async_user_op_data_free (data);
         g_object_unref (res);
 }
 
@@ -504,42 +528,41 @@ um_user_manager_create_user (UmUserManager       *manager,
         data->data = done_data;
         data->destroy = destroy;
 
-        dbus_g_proxy_begin_call (manager->proxy,
-                                 "CreateUser",
-                                 create_user_done,
-                                 data,
-                                 async_user_op_data_free,
-                                 G_TYPE_STRING, user_name,
-                                 G_TYPE_STRING, real_name,
-                                 G_TYPE_INT, account_type,
-                                 G_TYPE_INVALID);
+        g_dbus_proxy_call (manager->proxy,
+                           "CreateUser",
+                           g_variant_new ("(ssi)", user_name, real_name, account_type),
+                           G_DBUS_CALL_FLAGS_NONE,
+                           -1,
+                           NULL,
+                           create_user_done,
+                           data);
 }
 
 static void
-delete_user_done (DBusGProxy     *proxy,
-                  DBusGProxyCall *call_id,
+delete_user_done (GObject        *proxy,
+                  GAsyncResult   *r,
                   gpointer        user_data)
 {
         AsyncUserOpData *data = user_data;
-        GError *error;
         GSimpleAsyncResult *res;
+        GVariant *result;
+        GError *error = NULL;
 
         res = g_simple_async_result_new (G_OBJECT (data->manager),
                                          data->callback,
                                          data->data,
                                          um_user_manager_delete_user);
-        error = NULL;
-        if (!dbus_g_proxy_end_call (proxy,
-                                    call_id,
-                                    &error,
-                                    G_TYPE_INVALID)) {
-                if (dbus_g_error_has_name (error, "org.freedesktop.Accounts.Error.PermissionDenied")) {
+        result = g_dbus_proxy_call_finish (G_DBUS_PROXY (proxy), r, &error);
+        if (!result) {
+                if (g_dbus_error_is_remote_error (error) &&
+                    strcmp (g_dbus_error_get_remote_error(error), "org.freedesktop.Accounts.Error.PermissionDenied") == 0) {
                         g_simple_async_result_set_error (res,
                                                          UM_USER_MANAGER_ERROR,
                                                          UM_USER_MANAGER_ERROR_PERMISSION_DENIED,
                                                          "Not authorized");
                 }
-                else if (dbus_g_error_has_name (error, "org.freedesktop.Accounts.Error.UserDoesntExists")) {
+                if (g_dbus_error_is_remote_error (error) &&
+                    strcmp (g_dbus_error_get_remote_error(error), "org.freedesktop.Accounts.Error.UserExists") == 0) {
                         g_simple_async_result_set_error (res,
                                                          UM_USER_MANAGER_ERROR,
                                                          UM_USER_MANAGER_ERROR_USER_DOES_NOT_EXIST,
@@ -550,8 +573,11 @@ delete_user_done (DBusGProxy     *proxy,
                         g_error_free (error);
                 }
         }
+        else
+                g_variant_unref (result);
 
         data->callback (G_OBJECT (data->manager), G_ASYNC_RESULT (res), data->data);
+        async_user_op_data_free (data);
         g_object_unref (res);
 }
 
@@ -587,14 +613,14 @@ um_user_manager_delete_user (UmUserManager       *manager,
         data->data = done_data;
         data->destroy = destroy;
 
-        dbus_g_proxy_begin_call (manager->proxy,
-                                 "DeleteUser",
-                                 delete_user_done,
-                                 data,
-                                 async_user_op_data_free,
-                                 G_TYPE_INT64, (gint64) um_user_get_uid (user),
-                                 G_TYPE_BOOLEAN, remove_files,
-                                 G_TYPE_INVALID);
+        g_dbus_proxy_call (manager->proxy,
+                           "DeleteUser",
+                           g_variant_new ("(xb)", (gint64) um_user_get_uid (user), remove_files),
+                           G_DBUS_CALL_FLAGS_NONE,
+                           -1,
+                           NULL,
+                           delete_user_done,
+                           data);
 }
 
 GSList *
