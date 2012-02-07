@@ -21,14 +21,6 @@ if BUILD_CHEESE
 AM_CPPFLAGS += $(CHEESE_CFLAGS)
 endif
 
-MARSHALFILES = marshal.c marshal.h
-BUILT_SOURCES = $(MARSHALFILES)
-
-marshal.h: fprintd-marshal.list
-	@GLIB_GENMARSHAL@ --prefix=fprintd_marshal $< --header > $@
-marshal.c: fprintd-marshal.list
-	@GLIB_GENMARSHAL@ --prefix=fprintd_marshal $< --body --header > $@
-
 libuser_accounts_la_SOURCES =		\
 	um-account-type.h		\
 	um-account-type.c 		\
@@ -53,7 +45,6 @@ libuser_accounts_la_SOURCES =		\
 	um-strength-bar.c		\
 	run-passwd.h			\
 	run-passwd.c			\
-	$(MARSHALFILES)			\
 	um-editable-button.h		\
 	um-editable-button.c		\
 	um-editable-combo.h		\
@@ -74,9 +65,6 @@ libuser_accounts_la_LIBADD += $(CHEESE_LIBS)
 endif
 
 libuser_accounts_la_LDFLAGS = $(PANEL_LDFLAGS)
-
-EXTRA_DIST = \
-	fprintd-marshal.list
 
 CLEANFILES =				\
 	$(BUILT_SOURCES)		\

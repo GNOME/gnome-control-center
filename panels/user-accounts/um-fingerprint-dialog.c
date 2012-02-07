@@ -21,8 +21,8 @@
 
 #include <stdlib.h>
 #include <glib/gi18n.h>
+#include <gio/gio.h>
 #include <gtk/gtk.h>
-#include <dbus/dbus-glib-bindings.h>
 
 #include "um-fingerprint-dialog.h"
 
@@ -37,8 +37,8 @@
 /* This must match the number of images on the 2nd page in the UI file */
 #define MAX_ENROLL_STAGES 5
 
-static DBusGProxy *manager = NULL;
-static DBusGConnection *connection = NULL;
+static GDBusProxy *manager = NULL;
+static GDBusConnection *connection = NULL;
 static gboolean is_disable = FALSE;
 
 enum {
@@ -54,7 +54,7 @@ typedef struct {
         GtkWidget *ass;
         GtkBuilder *dialog;
 
-        DBusGProxy *device;
+        GDBusProxy *device;
         gboolean is_swipe;
         int num_enroll_stages;
         int num_stages_done;
@@ -67,33 +67,65 @@ static void create_manager (void)
 {
         GError *error = NULL;
 
-        connection = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
+        connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
         if (connection == NULL) {
                 g_warning ("Failed to connect to session bus: %s", error->message);
+                g_error_free (error);
                 return;
         }
 
-        manager = dbus_g_proxy_new_for_name (connection,
-                                             "net.reactivated.Fprint",
-                                             "/net/reactivated/Fprint/Manager",
-                                             "net.reactivated.Fprint.Manager");
+        manager = g_dbus_proxy_new_sync (connection,
+                                         G_DBUS_PROXY_FLAGS_NONE,
+                                         NULL,
+                                         "net.reactivated.Fprint",
+                                         "/net/reactivated/Fprint/Manager",
+                                         "net.reactivated.Fprint.Manager",
+                                         NULL,
+                                         &error);
+        if (manager == NULL) {
+                g_warning ("Failed to create fingerprint manager proxy: %s", error->message);
+                g_free_error (error);
+        }
 }
 
-static DBusGProxy *
+static GDBusProxy *
 get_first_device (void)
 {
-        DBusGProxy *device;
-        char *device_str;
+        GDBusProxy *device;
+        GVariant *result;
+        char *device_str = NULL;
+        GError *error = NULL;
 
-        if (!dbus_g_proxy_call (manager, "GetDefaultDevice", NULL, G_TYPE_INVALID,
-                                DBUS_TYPE_G_OBJECT_PATH, &device_str, G_TYPE_INVALID)) {
+        result = g_dbus_proxy_call_sync (manager,
+                                         "GetDefaultDevice",
+                                         g_variant_new ("()"),
+                                         G_DBUS_CALL_FLAGS_NONE,
+                                         -1,
+                                         NULL,
+                                         NULL);
+        if (result == NULL)
                 return NULL;
-        }
+        if (!g_variant_is_of_type (result, G_VARIANT_TYPE ("(o)")))
+                g_warning ("net.reactivated.Fprint.Manager.GetDefaultDevice returns unknown result %s", g_variant_get_type_string (result));
+        else
+                g_variant_get (result, "(o)", &device_str);
+        g_variant_unref (result);
 
-        device = dbus_g_proxy_new_for_name(connection,
-                                           "net.reactivated.Fprint",
-                                           device_str,
-                                           "net.reactivated.Fprint.Device");
+        if (device_str == NULL)
+                return NULL;
+
+        device = g_dbus_proxy_new_sync (connection,
+                                        G_DBUS_PROXY_FLAGS_NONE,
+                                        NULL,
+                                        "net.reactivated.Fprint",
+                                        device_str,
+                                        "net.reactivated.Fprint.Device",
+                                        NULL,
+                                        &error);
+        if (device == NULL) {
+                g_warning ("Failed to create fingerprint device proxy: %s", error->message);
+                g_free_error (error);
+        }
 
         g_free (device_str);
 
@@ -148,8 +180,9 @@ gboolean
 set_fingerprint_label (GtkWidget *label1,
                        GtkWidget *label2)
 {
-        char **fingers;
-        DBusGProxy *device;
+        GDBusProxy *device;
+        GVariant *result;
+        GVariantIter *fingers;
         GError *error = NULL;
 
         if (manager == NULL) {
@@ -163,16 +196,21 @@ set_fingerprint_label (GtkWidget *label1,
         if (device == NULL)
                 return FALSE;
 
-        if (!dbus_g_proxy_call (device, "ListEnrolledFingers", &error, G_TYPE_STRING, "", G_TYPE_INVALID,
-                                G_TYPE_STRV, &fingers, G_TYPE_INVALID)) {
-                if (dbus_g_error_has_name (error, "net.reactivated.Fprint.Error.NoEnrolledPrints") == FALSE) {
+        result = g_dbus_proxy_call_sync (device, "ListEnrolledFingers", g_variant_new ("(s)", ""), G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+        if (!result) {
+                if (!g_dbus_error_is_remote_error (error) ||
+                    strcmp (g_dbus_error_get_remote_error(error), "net.reactivated.Fprint.Error.NoEnrolledPrints") != 0) {
                         g_object_unref (device);
                         return FALSE;
                 }
-                fingers = NULL;
         }
 
-        if (fingers == NULL || g_strv_length (fingers) == 0) {
+        if (result && g_variant_is_of_type (result, G_VARIANT_TYPE ("(as)")))
+                g_variant_get (result, "(as)", &fingers);
+        else
+                fingers = NULL;
+
+        if (fingers == NULL || g_variant_iter_n_children (fingers) == 0) {
                 is_disable = FALSE;
                 gtk_label_set_text (GTK_LABEL (label1), _("Disabled"));
                 gtk_label_set_text (GTK_LABEL (label2), _("Disabled"));
@@ -182,7 +220,9 @@ set_fingerprint_label (GtkWidget *label1,
                 gtk_label_set_text (GTK_LABEL (label2), _("Enabled"));
         }
 
-        g_strfreev (fingers);
+        g_variant_unref (result);
+        if (fingers != NULL)
+                g_variant_iter_free (fingers);
         g_object_unref (device);
 
         return TRUE;
@@ -191,7 +231,8 @@ set_fingerprint_label (GtkWidget *label1,
 static void
 delete_fingerprints (void)
 {
-        DBusGProxy *device;
+        GDBusProxy *device;
+        GVariant *result;
 
         if (manager == NULL) {
                 create_manager ();
@@ -203,7 +244,9 @@ delete_fingerprints (void)
         if (device == NULL)
                 return;
 
-        dbus_g_proxy_call (device, "DeleteEnrolledFingers", NULL, G_TYPE_STRING, "", G_TYPE_INVALID, G_TYPE_INVALID);
+        result = g_dbus_proxy_call_sync (device, "DeleteEnrolledFingers", g_variant_new ("()"), G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL);
+        if (result)
+                g_variant_unref (result);
 
         g_object_unref (device);
 }
@@ -246,15 +289,63 @@ delete_fingerprints_question (GtkWindow *parent,
         gtk_widget_destroy (question);
 }
 
+static gboolean
+enroll_start (EnrollData *data, GError **error)
+{
+        GVariant *result;
+
+        result = g_dbus_proxy_call_sync (data->device, "EnrollStart", g_variant_new ("(s)", data->finger), G_DBUS_CALL_FLAGS_NONE, -1, NULL, error);
+        if (result == NULL)
+                return FALSE;
+        g_variant_unref (result);
+        return TRUE;
+}
+
+static gboolean
+enroll_stop (EnrollData *data, GError **error)
+{
+        GVariant *result;
+
+        result = g_dbus_proxy_call_sync (data->device, "EnrollStop", g_variant_new ("()"), G_DBUS_CALL_FLAGS_NONE, -1, NULL, error);
+        if (result == NULL)
+                return FALSE;
+        g_variant_unref (result);
+        return TRUE;
+}
+
+static gboolean
+claim (EnrollData *data, GError **error)
+{
+        GVariant *result;
+
+        result = g_dbus_proxy_call_sync (data->device, "Claim", g_variant_new ("()"), G_DBUS_CALL_FLAGS_NONE, -1, NULL, error);
+        if (result == NULL)
+                return FALSE;
+        g_variant_unref (result);
+        return TRUE;
+}
+
+static gboolean
+release (EnrollData *data, GError **error)
+{
+        GVariant *result;
+
+        result = g_dbus_proxy_call_sync (data->device, "Release", g_variant_new ("()"), G_DBUS_CALL_FLAGS_NONE, -1, NULL, error);
+        if (result == NULL)
+                return FALSE;
+        g_variant_unref (result);
+        return TRUE;
+}
+
 static void
 enroll_data_destroy (EnrollData *data)
 {
         switch (data->state) {
         case STATE_ENROLLING:
-                dbus_g_proxy_call(data->device, "EnrollStop", NULL, G_TYPE_INVALID, G_TYPE_INVALID);
+                enroll_stop (data, NULL);
                 /* fall-through */
         case STATE_CLAIMED:
-                dbus_g_proxy_call(data->device, "Release", NULL, G_TYPE_INVALID, G_TYPE_INVALID);
+                release (data, NULL);
                 /* fall-through */
         case STATE_NONE:
                 g_free (data->name);
@@ -344,7 +435,7 @@ assistant_cancelled (GtkAssistant *ass, EnrollData *data)
 }
 
 static void
-enroll_result (GObject *object, const char *result, gboolean done, EnrollData *data)
+enroll_result (EnrollData *data, const char *result, gboolean done)
 {
         GtkBuilder *dialog = data->dialog;
         char *msg;
@@ -366,11 +457,11 @@ enroll_result (GObject *object, const char *result, gboolean done, EnrollData *d
         }
 
         if (done != FALSE) {
-                dbus_g_proxy_call(data->device, "EnrollStop", NULL, G_TYPE_INVALID, G_TYPE_INVALID);
+                enroll_stop (data, NULL);
                 data->state = STATE_CLAIMED;
                 if (g_str_equal (result, "enroll-completed") == FALSE) {
                         /* The enrollment failed, restart it */
-                        dbus_g_proxy_call(data->device, "EnrollStart", NULL, G_TYPE_STRING, data->finger, G_TYPE_INVALID, G_TYPE_INVALID);
+                        enroll_start (data, NULL);
                         data->state = STATE_ENROLLING;
                         result = "enroll-retry-scan";
                 } else {
@@ -384,6 +475,20 @@ enroll_result (GObject *object, const char *result, gboolean done, EnrollData *d
 }
 
 static void
+device_signal_cb (GDBusProxy *proxy, gchar *sender_name, gchar *signal_name, GVariant *parameters, EnrollData *data)
+{
+        if (strcmp (signal_name, "EnrollStatus") == 0) {
+                if (g_variant_is_of_type (parameters, G_VARIANT_TYPE ("sb"))) {
+                        gchar *result;
+                        gboolean done;
+
+                        g_variant_get (parameters, "&sb", &result, &done);
+                        enroll_result (data, result, done);
+                }
+        }
+}
+
+static void
 assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
 {
         const char *name;
@@ -393,14 +498,14 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
                 return;
 
         if (g_str_equal (name, "enroll")) {
-                DBusGProxy *p;
                 GError *error = NULL;
                 GtkBuilder *dialog = data->dialog;
                 char *path;
                 guint i;
-                GValue value = { 0, };
+                GVariant *result;
+                gint num_enroll_stages;
 
-                if (!dbus_g_proxy_call (data->device, "Claim", &error, G_TYPE_STRING, "", G_TYPE_INVALID, G_TYPE_INVALID)) {
+                if (!claim (data, &error)) {
                         GtkWidget *d;
                         char *msg;
 
@@ -408,8 +513,8 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
                          * The variable is the name of the device, for example:
                          * "Could you not access "Digital Persona U.are.U 4000/4000B" device */
                         msg = g_strdup_printf (_("Could not access '%s' device"), data->name);
-                        d = get_error_dialog (msg, dbus_g_error_get_name (error), GTK_WINDOW (data->ass));
-                        g_error_free (error);
+                        d = get_error_dialog (msg, error->message, GTK_WINDOW (data->ass));
+                        g_free_error (error);
                         gtk_dialog_run (GTK_DIALOG (d));
                         gtk_widget_destroy (d);
                         g_free (msg);
@@ -420,9 +525,24 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
                 }
                 data->state = STATE_CLAIMED;
 
-                p = dbus_g_proxy_new_from_proxy (data->device, "org.freedesktop.DBus.Properties", NULL);
-                if (!dbus_g_proxy_call (p, "Get", NULL, G_TYPE_STRING, "net.reactivated.Fprint.Device", G_TYPE_STRING, "num-enroll-stages", G_TYPE_INVALID,
-                                       G_TYPE_VALUE, &value, G_TYPE_INVALID) || g_value_get_int (&value) < 1) {
+                result = g_dbus_connection_call_sync (connection,
+                                                      "net.reactivated.Fprint",
+                                                      g_dbus_proxy_get_object_path (data->device),
+                                                      "org.freedesktop.DBus.Properties",
+                                                      "Get",
+                                                      g_variant_new ("(ss)", "net.reactivated.Fprint.Device", "num-enroll-stages"),
+                                                      G_VARIANT_TYPE ("(i)"),
+                                                      G_DBUS_CALL_FLAGS_NONE,
+                                                      -1,
+                                                      NULL,
+                                                      NULL);
+                num_enroll_stages = 0;
+                if (result) {
+                        g_variant_get (result, "(i)", &num_enroll_stages);
+                        g_variant_unref (result);
+                }
+
+                if (num_enroll_stages < 1) {
                         GtkWidget *d;
                         char *msg;
 
@@ -436,13 +556,10 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
                         g_free (msg);
 
                         enroll_data_destroy (data);
-
-                        g_object_unref (p);
                         return;
                 }
-                g_object_unref (p);
 
-                data->num_enroll_stages = g_value_get_int (&value);
+                data->num_enroll_stages = num_enroll_stages;
 
                 /* Hide the extra "bulbs" if not needed */
                 for (i = MAX_ENROLL_STAGES; i > data->num_enroll_stages; i--) {
@@ -468,10 +585,9 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
                 }
                 g_free (path);
 
-                dbus_g_proxy_add_signal(data->device, "EnrollStatus", G_TYPE_STRING, G_TYPE_BOOLEAN, NULL);
-                dbus_g_proxy_connect_signal(data->device, "EnrollStatus", G_CALLBACK(enroll_result), data, NULL);
+                g_signal_connect (data->device, "g-signal", G_CALLBACK (device_signal_cb), data);
 
-                if (!dbus_g_proxy_call(data->device, "EnrollStart", &error, G_TYPE_STRING, data->finger, G_TYPE_INVALID, G_TYPE_INVALID)) {
+                if (!enroll_start (data, &error)) {
                         GtkWidget *d;
                         char *msg;
 
@@ -479,7 +595,7 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
                          * The variable is the name of the device, for example:
                          * "Could you not access "Digital Persona U.are.U 4000/4000B" device */
                         msg = g_strdup_printf (_("Could not start finger capture on '%s' device"), data->name);
-                        d = get_error_dialog (msg, dbus_g_error_get_name (error), GTK_WINDOW (data->ass));
+                        d = get_error_dialog (msg, error->message, GTK_WINDOW (data->ass));
                         g_error_free (error);
                         gtk_dialog_run (GTK_DIALOG (d));
                         gtk_widget_destroy (d);
@@ -492,11 +608,11 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
                 data->state = STATE_ENROLLING;;
         } else {
                 if (data->state == STATE_ENROLLING) {
-                        dbus_g_proxy_call(data->device, "EnrollStop", NULL, G_TYPE_INVALID, G_TYPE_INVALID);
+                        enroll_stop (data, NULL);
                         data->state = STATE_CLAIMED;
                 }
                 if (data->state == STATE_CLAIMED) {
-                        dbus_g_proxy_call(data->device, "Release", NULL, G_TYPE_INVALID, G_TYPE_INVALID);
+                        release (data, NULL);
                         data->state = STATE_NONE;
                 }
         }
@@ -508,13 +624,13 @@ enroll_fingerprints (GtkWindow *parent,
                      GtkWidget *label2,
                      UmUser    *user)
 {
-        DBusGProxy *device, *p;
-        GHashTable *props;
+        GDBusProxy *device;
         GtkBuilder *dialog;
         EnrollData *data;
         GtkWidget *ass;
         const char *filename;
         char *msg;
+        GVariant *result;
         GError *error = NULL;
 
         device = NULL;
@@ -544,17 +660,30 @@ enroll_fingerprints (GtkWindow *parent,
         data->label2 = label2;
 
         /* Get some details about the device */
-        p = dbus_g_proxy_new_from_proxy (device, "org.freedesktop.DBus.Properties", NULL);
-        if (dbus_g_proxy_call (p, "GetAll", NULL, G_TYPE_STRING, "net.reactivated.Fprint.Device", G_TYPE_INVALID,
-                               dbus_g_type_get_map ("GHashTable", G_TYPE_STRING, G_TYPE_VALUE), &props, G_TYPE_INVALID)) {
-                const char *scan_type;
-                data->name = g_value_dup_string (g_hash_table_lookup (props, "name"));
-                scan_type = g_value_dup_string (g_hash_table_lookup (props, "scan-type"));
-                if (g_str_equal (scan_type, "swipe"))
+        result = g_dbus_connection_call_sync (connection,
+                                              "net.reactivated.Fprint",
+                                              g_dbus_proxy_get_object_path (data->device),
+                                              "org.freedesktop.DBus.Properties",
+                                              "GetAll",
+                                              g_variant_new ("(s)", "net.reactivated.Fprint.Device"),
+                                              G_VARIANT_TYPE ("(a{sv})"),
+                                              G_DBUS_CALL_FLAGS_NONE,
+                                              -1,
+                                              NULL,
+                                              NULL);
+        if (result) {
+                GVariant *props;
+                gchar *scan_type;
+
+                g_variant_get (result, "(@a{sv})", &props);
+                g_variant_lookup (props, "name", "s", &data->name);
+                g_variant_lookup (props, "scan-type", "s", &scan_type);
+                if (g_strcmp0 (scan_type, "swipe") == 0)
                         data->is_swipe = TRUE;
-                g_hash_table_destroy (props);
+                g_free (scan_type);
+                g_variant_unref (props);
+                g_variant_unref (result);
         }
-        g_object_unref (p);
 
         dialog = gtk_builder_new ();
         filename = UIDIR "/account-fingerprint.ui";
