@@ -26,6 +26,8 @@
 
 G_BEGIN_DECLS
 
+#define NUM_ELEMS_MATRIX 9
+
 #define GSD_TYPE_WACOM_DEVICE         (gsd_wacom_device_get_type ())
 #define GSD_WACOM_DEVICE(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GSD_TYPE_WACOM_DEVICE, GsdWacomDevice))
 #define GSD_WACOM_DEVICE_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GSD_TYPE_WACOM_DEVICE, GsdWacomDeviceClass))
@@ -77,17 +79,33 @@ typedef enum {
 	WACOM_STYLUS_TYPE_PUCK
 } GsdWacomStylusType;
 
-#define NUM_ELEMS_MATRIX 9
-
 GType            gsd_wacom_stylus_get_type       (void);
 GSettings      * gsd_wacom_stylus_get_settings   (GsdWacomStylus *stylus);
 const char     * gsd_wacom_stylus_get_name       (GsdWacomStylus *stylus);
 const char     * gsd_wacom_stylus_get_icon_name  (GsdWacomStylus *stylus);
 GsdWacomDevice * gsd_wacom_stylus_get_device     (GsdWacomStylus *stylus);
 gboolean         gsd_wacom_stylus_get_has_eraser (GsdWacomStylus *stylus);
-int              gsd_wacom_stylus_get_num_buttons(GsdWacomStylus *stylus);
+guint            gsd_wacom_stylus_get_num_buttons(GsdWacomStylus *stylus);
 int              gsd_wacom_stylus_get_id         (GsdWacomStylus *stylus);
 GsdWacomStylusType gsd_wacom_stylus_get_stylus_type (GsdWacomStylus *stylus);
+
+/* Tablet Buttons */
+typedef enum {
+	WACOM_TABLET_BUTTON_TYPE_NORMAL,
+	WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+	WACOM_TABLET_BUTTON_TYPE_HARDCODED
+} GsdWacomTabletButtonType;
+
+typedef struct
+{
+	char                     *name;
+	char                     *id;
+	GsdWacomTabletButtonType  type;
+	int                       group_id;
+} GsdWacomTabletButton;
+
+void                  gsd_wacom_tablet_button_free (GsdWacomTabletButton *button);
+GsdWacomTabletButton *gsd_wacom_tablet_button_copy (GsdWacomTabletButton *button);
 
 /* Device types to apply a setting to */
 typedef enum {
@@ -96,7 +114,8 @@ typedef enum {
         WACOM_TYPE_ERASER  =     (1 << 2),
         WACOM_TYPE_CURSOR  =     (1 << 3),
         WACOM_TYPE_PAD     =     (1 << 4),
-        WACOM_TYPE_ALL     =     WACOM_TYPE_STYLUS | WACOM_TYPE_ERASER | WACOM_TYPE_CURSOR | WACOM_TYPE_PAD
+        WACOM_TYPE_TOUCH   =     (1 << 5),
+        WACOM_TYPE_ALL     =     WACOM_TYPE_STYLUS | WACOM_TYPE_ERASER | WACOM_TYPE_CURSOR | WACOM_TYPE_PAD | WACOM_TYPE_TOUCH
 } GsdWacomDeviceType;
 
 GType gsd_wacom_device_get_type     (void);
@@ -121,6 +140,7 @@ GsdWacomStylus * gsd_wacom_device_get_stylus_for_type (GsdWacomDevice     *devic
 GsdWacomDeviceType gsd_wacom_device_get_device_type (GsdWacomDevice *device);
 gint           * gsd_wacom_device_get_area          (GsdWacomDevice *device);
 const char     * gsd_wacom_device_type_to_string    (GsdWacomDeviceType type);
+GList          * gsd_wacom_device_get_buttons       (GsdWacomDevice *device);
 
 /* Helper and debug functions */
 GsdWacomDevice * gsd_wacom_device_create_fake (GsdWacomDeviceType  type,

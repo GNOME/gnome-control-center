@@ -302,13 +302,13 @@ xdevice_get_last_tool_id (int deviceid)
         unsigned char *data, *ptr;
         int            id;
 
-        id = 0x0;
+        id = -1;
 
         gdk_display_sync (gdk_display_get_default ());
 
         prop = XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), WACOM_SERIAL_IDS_PROP, False);
         if (!prop)
-                return id;
+                return -1;
 
         gdk_error_trap_push ();
 
@@ -317,7 +317,7 @@ xdevice_get_last_tool_id (int deviceid)
                             AnyPropertyType, &act_type, &act_format,
                             &nitems, &bytes_after, &data) == Success) {
                 gdk_error_trap_pop_ignored ();
-                return 0x0;
+                return -1;
         }
 
         if (gdk_error_trap_pop ())
