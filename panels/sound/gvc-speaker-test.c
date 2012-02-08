@@ -315,7 +315,7 @@ channel_control_new (ca_context *canberra, pa_channel_position_t position)
         GtkWidget *test_button;
         const char *name;
 
-        control = gtk_vbox_new (FALSE, 6);
+        control = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
         g_object_set_data (G_OBJECT (control), "playing", GINT_TO_POINTER(FALSE));
         g_object_set_data (G_OBJECT (control), "position", GINT_TO_POINTER(position));
         g_object_set_data (G_OBJECT (control), "canberra", canberra);
@@ -340,7 +340,7 @@ channel_control_new (ca_context *canberra, pa_channel_position_t position)
                                      ATK_RELATION_LABELLED_BY,
                                      gtk_widget_get_accessible (label));
 
-        box = gtk_hbox_new (FALSE, 0);
+        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
         gtk_box_pack_start (GTK_BOX (box), test_button, TRUE, FALSE, 0);
         gtk_box_pack_start (GTK_BOX (control), box, FALSE, FALSE, 0);
 

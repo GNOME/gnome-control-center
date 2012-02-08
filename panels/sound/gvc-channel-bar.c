@@ -110,14 +110,14 @@ _scale_box_new (GvcChannelBar *bar)
         GtkWidget            *ebox;
 
         if (priv->orientation == GTK_ORIENTATION_VERTICAL) {
-                bar->priv->scale_box = box = gtk_vbox_new (FALSE, 6);
+                bar->priv->scale_box = box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 
                 priv->scale = gtk_vscale_new (priv->adjustment);
 
                 gtk_widget_set_size_request (priv->scale, -1, SCALE_SIZE);
                 gtk_range_set_inverted (GTK_RANGE (priv->scale), TRUE);
 
-                bar->priv->start_box = sbox = gtk_vbox_new (FALSE, 6);
+                bar->priv->start_box = sbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
                 gtk_box_pack_start (GTK_BOX (box), sbox, FALSE, FALSE, 0);
 
                 gtk_box_pack_start (GTK_BOX (sbox), priv->image, FALSE, FALSE, 0);
@@ -127,7 +127,7 @@ _scale_box_new (GvcChannelBar *bar)
                 gtk_widget_hide (priv->high_image);
                 gtk_box_pack_start (GTK_BOX (box), priv->scale, TRUE, TRUE, 0);
 
-                bar->priv->end_box = ebox = gtk_vbox_new (FALSE, 6);
+                bar->priv->end_box = ebox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
                 gtk_box_pack_start (GTK_BOX (box), ebox, FALSE, FALSE, 0);
 
                 gtk_box_pack_start (GTK_BOX (ebox), priv->low_image, FALSE, FALSE, 0);
@@ -135,14 +135,14 @@ _scale_box_new (GvcChannelBar *bar)
 
                 gtk_box_pack_start (GTK_BOX (ebox), priv->mute_box, FALSE, FALSE, 0);
         } else {
-                bar->priv->scale_box = box = gtk_hbox_new (FALSE, 6);
+                bar->priv->scale_box = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
                 gtk_box_pack_start (GTK_BOX (box), priv->image, FALSE, FALSE, 0);
 
                 priv->scale = gtk_hscale_new (priv->adjustment);
 
                 gtk_widget_set_size_request (priv->scale, SCALE_SIZE, -1);
 
-                bar->priv->start_box = sbox = gtk_hbox_new (FALSE, 6);
+                bar->priv->start_box = sbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
                 gtk_box_pack_start (GTK_BOX (box), sbox, FALSE, FALSE, 0);
 
                 gtk_box_pack_end (GTK_BOX (sbox), priv->low_image, FALSE, FALSE, 0);
@@ -151,7 +151,7 @@ _scale_box_new (GvcChannelBar *bar)
                 gtk_box_pack_start (GTK_BOX (sbox), priv->label, TRUE, TRUE, 0);
                 gtk_box_pack_start (GTK_BOX (box), priv->scale, TRUE, TRUE, 0);
 
-                bar->priv->end_box = ebox = gtk_hbox_new (FALSE, 6);
+                bar->priv->end_box = ebox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
                 gtk_box_pack_start (GTK_BOX (box), ebox, FALSE, FALSE, 0);
 
                 gtk_box_pack_start (GTK_BOX (ebox), priv->high_image, FALSE, FALSE, 0);

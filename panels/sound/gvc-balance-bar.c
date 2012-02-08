@@ -89,7 +89,7 @@ _scale_box_new (GvcBalanceBar *bar)
         char                 *str_lower, *str_upper;
         gdouble              lower, upper;
 
-        bar->priv->scale_box = box = gtk_hbox_new (FALSE, 6);
+        bar->priv->scale_box = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         priv->scale = gtk_hscale_new (priv->adjustment);
         gtk_widget_set_size_request (priv->scale, SCALE_SIZE, -1);
 
@@ -99,7 +99,7 @@ _scale_box_new (GvcBalanceBar *bar)
                              "}\n"
                              "widget \"*.balance-bar-scale\" style : rc \"balance-bar-scale-style\"\n");
 
-        bar->priv->start_box = sbox = gtk_hbox_new (FALSE, 6);
+        bar->priv->start_box = sbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         gtk_box_pack_start (GTK_BOX (box), sbox, FALSE, FALSE, 0);
 
         gtk_box_pack_start (GTK_BOX (sbox), priv->label, FALSE, FALSE, 0);
@@ -138,7 +138,7 @@ _scale_box_new (GvcBalanceBar *bar)
                                     GTK_POS_BOTTOM, NULL);
         }
 
-        bar->priv->end_box = ebox = gtk_hbox_new (FALSE, 6);
+        bar->priv->end_box = ebox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         gtk_box_pack_start (GTK_BOX (box), ebox, FALSE, FALSE, 0);
 
         ca_gtk_widget_disable_sounds (bar->priv->scale, FALSE);

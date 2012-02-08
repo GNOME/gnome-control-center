@@ -318,7 +318,7 @@ gvc_combo_box_init (GvcComboBox *combo_box)
         gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
         gtk_container_add (GTK_CONTAINER (combo_box), frame);
 
-        combo_box->priv->drop_box = box = gtk_hbox_new (FALSE, 6);
+        combo_box->priv->drop_box = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         combo_box->priv->combobox = gtk_combo_box_new_with_model (combo_box->priv->model);
         renderer = gtk_cell_renderer_text_new ();
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box->priv->combobox),
@@ -332,7 +332,7 @@ gvc_combo_box_init (GvcComboBox *combo_box)
         g_object_set (G_OBJECT (renderer), "ellipsize", PANGO_ELLIPSIZE_END, NULL);
         g_object_set (G_OBJECT (combo_box->priv->combobox), "popup-fixed-width", FALSE, NULL);
 
-        combo_box->priv->start_box = sbox = gtk_hbox_new (FALSE, 6);
+        combo_box->priv->start_box = sbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         gtk_box_pack_start (GTK_BOX (box), sbox, FALSE, FALSE, 0);
 
         gtk_box_pack_start (GTK_BOX (sbox), combo_box->priv->label, FALSE, FALSE, 0);
@@ -345,7 +345,7 @@ gvc_combo_box_init (GvcComboBox *combo_box)
         gtk_box_pack_start (GTK_BOX (box), combo_box->priv->button, FALSE, FALSE, 0);
 
 
-        combo_box->priv->end_box = ebox = gtk_hbox_new (FALSE, 6);
+        combo_box->priv->end_box = ebox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         gtk_box_pack_start (GTK_BOX (box), ebox, FALSE, FALSE, 0);
 
         if (combo_box->priv->size_group != NULL) {

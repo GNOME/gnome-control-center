@@ -636,7 +636,7 @@ gvc_stream_status_icon_constructor (GType                  type,
         gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
         gtk_container_add (GTK_CONTAINER (icon->priv->dock), frame);
 
-        box = gtk_vbox_new (FALSE, 6);
+        box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
         gtk_container_set_border_width (GTK_CONTAINER (box), 2);
         gtk_container_add (GTK_CONTAINER (frame), box);
 
