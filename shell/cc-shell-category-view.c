@@ -124,7 +124,7 @@ cc_shell_category_view_constructed (GObject *object)
   iconview = cc_shell_item_view_new ();
   gtk_icon_view_set_model (GTK_ICON_VIEW (iconview), priv->model);
 
-  vbox = gtk_vbox_new (FALSE, 0);
+  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 
   renderer = gtk_cell_renderer_pixbuf_new ();
   g_object_set (renderer,
