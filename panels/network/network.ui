@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.20"/>
+  <!-- interface-requires gtk+ 3.0 -->
   <object class="GtkAdjustment" id="adjustment_proxy_port_ftp">
     <property name="upper">65535</property>
     <property name="step_increment">1</property>
@@ -67,6 +67,7 @@
             <child>
               <object class="GtkButton" id="cancel_button">
                 <property name="label">gtk-cancel</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -82,6 +83,7 @@
             <child>
               <object class="GtkButton" id="create_button">
                 <property name="label" translatable="yes">Create...</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
@@ -95,6 +97,12 @@
               </packing>
             </child>
           </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
         </child>
         <child>
           <object class="GtkBox" id="box_1">
@@ -267,20 +275,21 @@
                       <object class="GtkToolbar" id="devices_toolbar">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="show_arrow">False</property>
-                        <property name="icon_size">1</property>
-                        <property name="toolbar-style">icons</property>
+                        <property name="toolbar_style">icons</property>
                         <style>
                           <class name="inline-toolbar"/>
                         </style>
+                        <property name="show_arrow">False</property>
+                        <property name="icon_size">1</property>
                         <child>
                           <object class="GtkToolButton" id="add_toolbutton">
+                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="use_action_appearance">False</property>
+                            <property name="label" translatable="yes">Add Device</property>
                             <property name="use_underline">True</property>
                             <property name="icon_name">list-add-symbolic</property>
-                            <property name="label" translatable="yes">Add Device</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -289,12 +298,13 @@
                         </child>
                         <child>
                           <object class="GtkToolButton" id="remove_toolbutton">
+                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="use_action_appearance">False</property>
+                            <property name="label" translatable="yes">Remove Device</property>
                             <property name="use_underline">True</property>
                             <property name="icon_name">list-remove-symbolic</property>
-                            <property name="label" translatable="yes">Remove Device</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -330,7 +340,6 @@
                           <object class="GtkGrid" id="grid1">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="halign">fill</property>
                             <property name="valign">start</property>
                             <property name="row_spacing">10</property>
                             <property name="column_spacing">6</property>
@@ -404,7 +413,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Hardware Address</property>
-                                <property name="mnemonic-widget">label_wired_mac</property>
+                                <property name="mnemonic_widget">label_wired_mac</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -422,7 +431,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">IPv4 Address</property>
-                                <property name="mnemonic-widget">label_wired_ipv4</property>
+                                <property name="mnemonic_widget">label_wired_ipv4</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -440,7 +449,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">IPv6 Address</property>
-                                <property name="mnemonic-widget">label_wired_ipv6</property>
+                                <property name="mnemonic_widget">label_wired_ipv6</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -458,7 +467,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Subnet Mask</property>
-                                <property name="mnemonic-widget">label_wired_subnet</property>
+                                <property name="mnemonic_widget">label_wired_subnet</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -476,7 +485,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Default Route</property>
-                                <property name="mnemonic-widget">label_wired_route</property>
+                                <property name="mnemonic_widget">label_wired_route</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -495,7 +504,7 @@
                                 <property name="xalign">1</property>
                                 <property name="yalign">0</property>
                                 <property name="label" translatable="yes">DNS</property>
-                                <property name="mnemonic-widget">label_wired_dns</property>
+                                <property name="mnemonic_widget">label_wired_dns</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -607,6 +616,7 @@
                                 <property name="valign">start</property>
                                 <child>
                                   <object class="GtkSwitch" id="device_wired_off_switch">
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="halign">end</property>
@@ -627,6 +637,15 @@
                                 <property name="height">1</property>
                               </packing>
                             </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -638,30 +657,42 @@
                           <object class="GtkGrid" id="alignment1">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">12</property>
                             <property name="hexpand">True</property>
                             <property name="vexpand">True</property>
-                            <property name="margin-top">12</property>
                             <child>
                               <object class="GtkButton" id="button_wired_options">
                                 <property name="label" translatable="yes">_Configure...</property>
-                                <property name="halign">end</property>
-                                <property name="valign">end</property>
-                            <property name="hexpand">True</property>
-                            <property name="vexpand">True</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
+                                <property name="halign">end</property>
+                                <property name="valign">end</property>
+                                <property name="hexpand">True</property>
+                                <property name="vexpand">True</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
                               </object>
                               <packing>
-                                <property name="top_attach">0</property>
                                 <property name="left_attach">1</property>
+                                <property name="top_attach">0</property>
                                 <property name="width">1</property>
                                 <property name="height">1</property>
                               </packing>
                             </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
                         </child>
                       </object>
                     </child>
@@ -685,7 +716,6 @@
                           <object class="GtkGrid" id="grid2">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="halign">fill</property>
                             <property name="valign">start</property>
                             <property name="row_spacing">10</property>
                             <property name="column_spacing">6</property>
@@ -759,7 +789,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Hardware Address</property>
-                                <property name="mnemonic-widget">label_wireless_mac</property>
+                                <property name="mnemonic_widget">label_wireless_mac</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -777,7 +807,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">IPv4 Address</property>
-                                <property name="mnemonic-widget">label_wireless_ipv4</property>
+                                <property name="mnemonic_widget">label_wireless_ipv4</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -795,7 +825,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">IPv6 Address</property>
-                                <property name="mnemonic-widget">label_wireless_ipv6</property>
+                                <property name="mnemonic_widget">label_wireless_ipv6</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -813,7 +843,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Default Route</property>
-                                <property name="mnemonic-widget">label_wireless_route</property>
+                                <property name="mnemonic_widget">label_wireless_route</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -832,7 +862,7 @@
                                 <property name="xalign">1</property>
                                 <property name="yalign">0</property>
                                 <property name="label" translatable="yes">DNS</property>
-                                <property name="mnemonic-widget">label_wireless_dns</property>
+                                <property name="mnemonic_widget">label_wireless_dns</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -929,6 +959,7 @@
                                 <property name="valign">start</property>
                                 <child>
                                   <object class="GtkSwitch" id="device_wireless_off_switch">
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="halign">end</property>
@@ -955,7 +986,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Security</property>
-                                <property name="mnemonic-widget">label_wireless_security</property>
+                                <property name="mnemonic_widget">label_wireless_security</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1114,25 +1145,26 @@
                           <object class="GtkGrid" id="alignment2">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_top">12</property>
                             <property name="hexpand">True</property>
                             <property name="vexpand">True</property>
-                            <property name="margin-top">12</property>
                             <child>
                               <object class="GtkButton" id="start_hotspot_button">
                                 <property name="label" translatable="yes">_Use as Hotspot...</property>
+                                <property name="use_action_appearance">False</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
                                 <property name="halign">start</property>
                                 <property name="valign">end</property>
                                 <property name="hexpand">True</property>
                                 <property name="vexpand">True</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
                               </object>
                               <packing>
-                                <property name="top_attach">0</property>
                                 <property name="left_attach">0</property>
+                                <property name="top_attach">0</property>
                                 <property name="width">1</property>
                                 <property name="height">1</property>
                               </packing>
@@ -1140,19 +1172,20 @@
                             <child>
                               <object class="GtkButton" id="stop_hotspot_button">
                                 <property name="label" translatable="yes">_Stop Hotspot...</property>
+                                <property name="use_action_appearance">False</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
                                 <property name="halign">start</property>
                                 <property name="valign">end</property>
                                 <property name="hexpand">True</property>
                                 <property name="vexpand">True</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
                               </object>
                               <packing>
-                                <property name="top_attach">0</property>
                                 <property name="left_attach">1</property>
+                                <property name="top_attach">0</property>
                                 <property name="width">1</property>
                                 <property name="height">1</property>
                               </packing>
@@ -1160,19 +1193,20 @@
                             <child>
                               <object class="GtkButton" id="button_wireless_options">
                                 <property name="label" translatable="yes">_Configure...</property>
+                                <property name="use_action_appearance">False</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">True</property>
                                 <property name="halign">end</property>
                                 <property name="valign">end</property>
                                 <property name="hexpand">True</property>
                                 <property name="vexpand">True</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="receives_default">True</property>
                                 <property name="use_action_appearance">False</property>
                                 <property name="use_underline">True</property>
                               </object>
                               <packing>
-                                <property name="top_attach">0</property>
                                 <property name="left_attach">2</property>
+                                <property name="top_attach">0</property>
                                 <property name="width">1</property>
                                 <property name="height">1</property>
                               </packing>
@@ -1211,7 +1245,6 @@
                           <object class="GtkGrid" id="grid3">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="halign">fill</property>
                             <property name="valign">start</property>
                             <property name="row_spacing">10</property>
                             <property name="column_spacing">6</property>
@@ -1285,7 +1318,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">IMEI</property>
-                                <property name="mnemonic-widget">label_mobilebb_imei</property>
+                                <property name="mnemonic_widget">label_mobilebb_imei</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1303,7 +1336,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Provider</property>
-                                <property name="mnemonic-widget">label_mobilebb_provider</property>
+                                <property name="mnemonic_widget">label_mobilebb_provider</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1411,6 +1444,7 @@
                                 <property name="valign">start</property>
                                 <child>
                                   <object class="GtkSwitch" id="device_mobilebb_off_switch">
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="halign">end</property>
@@ -1500,6 +1534,15 @@
                                 <property name="height">1</property>
                               </packing>
                             </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1519,6 +1562,7 @@
                             <child>
                               <object class="GtkButton" id="button_mobilebb_options">
                                 <property name="label" translatable="yes">_Configure...</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -1560,7 +1604,6 @@
                           <object class="GtkGrid" id="grid4">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="halign">fill</property>
                             <property name="valign">start</property>
                             <property name="row_spacing">10</property>
                             <property name="column_spacing">6</property>
@@ -1634,7 +1677,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">VPN Type</property>
-                                <property name="mnemonic-widget">label_vpn_service_type</property>
+                                <property name="mnemonic_widget">label_vpn_service_type</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1652,7 +1695,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Gateway</property>
-                                <property name="mnemonic-widget">label_vpn_gateway</property>
+                                <property name="mnemonic_widget">label_vpn_gateway</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1670,7 +1713,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Group Name</property>
-                                <property name="mnemonic-widget">label_vpn_group_name</property>
+                                <property name="mnemonic_widget">label_vpn_group_name</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1688,7 +1731,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Group Password</property>
-                                <property name="mnemonic-widget">label_vpn_group_password</property>
+                                <property name="mnemonic_widget">label_vpn_group_password</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1706,7 +1749,7 @@
                                 <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes">Username</property>
-                                <property name="mnemonic-widget">label_vpn_username</property>
+                                <property name="mnemonic_widget">label_vpn_username</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -1801,6 +1844,7 @@
                                 <property name="valign">start</property>
                                 <child>
                                   <object class="GtkSwitch" id="device_vpn_off_switch">
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="halign">end</property>
@@ -1840,6 +1884,7 @@
                             <child>
                               <object class="GtkButton" id="button_vpn_options">
                                 <property name="label" translatable="yes">_Configure...</property>
+                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -1881,7 +1926,6 @@
                           <object class="GtkGrid" id="grid5">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="halign">fill</property>
                             <property name="valign">start</property>
                             <property name="row_spacing">10</property>
                             <property name="column_spacing">6</property>
@@ -1957,6 +2001,7 @@
                                 <property name="valign">start</property>
                                 <child>
                                   <object class="GtkSwitch" id="device_proxy_off_switch">
+                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="halign">end</property>
@@ -2117,10 +2162,10 @@
                               <object class="GtkLabel" id="label_proxy_warning">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
                                 <property name="label">WPAD warning...</property>
                                 <property name="wrap">True</property>
-                                <property name="width-chars">50</property>
-                                <property name="xalign">0</property>
+                                <property name="width_chars">50</property>
                               </object>
                               <packing>
                                 <property name="left_attach">0</property>
@@ -2334,6 +2379,7 @@
             <child>
               <object class="GtkButton" id="button_unlock">
                 <property name="label" translatable="yes">Unlock</property>
+                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
