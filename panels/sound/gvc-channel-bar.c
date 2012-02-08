@@ -138,7 +138,7 @@ _scale_box_new (GvcChannelBar *bar)
                 bar->priv->scale_box = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
                 gtk_box_pack_start (GTK_BOX (box), priv->image, FALSE, FALSE, 0);
 
-                priv->scale = gtk_hscale_new (priv->adjustment);
+                priv->scale = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, priv->adjustment);
 
                 gtk_widget_set_size_request (priv->scale, SCALE_SIZE, -1);
 
