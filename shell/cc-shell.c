@@ -250,10 +250,9 @@ cc_shell_embed_widget_in_header (CcShell *shell, GtkWidget *widget)
       g_warning ("Object of type \"%s\" does not implement required virtual"
                  " function \"embed_widget_in_header\",",
                  G_OBJECT_TYPE_NAME (shell));
-      return FALSE;
     }
   else
     {
-      return class->embed_widget_in_header (shell, widget);
+      class->embed_widget_in_header (shell, widget);
     }
 }
