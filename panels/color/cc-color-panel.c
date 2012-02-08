@@ -1596,8 +1596,17 @@ gcm_prefs_device_set_model_by_iter (CcColorPanel *prefs, CdDevice *device, GtkTr
       /* ignore profiles from other user accounts */
       if (!cd_profile_has_access (profile))
         {
-          g_warning ("%s is not usable by this user",
-                     cd_profile_get_filename (profile));
+          /* only print the filename if it exists */
+          if (cd_profile_get_filename (profile) != NULL)
+            {
+              g_warning ("%s is not usable by this user",
+                         cd_profile_get_filename (profile));
+            }
+          else
+            {
+              g_warning ("%s is not usable by this user",
+                         cd_profile_get_id (profile));
+            }
           goto out;
         }
 #endif
