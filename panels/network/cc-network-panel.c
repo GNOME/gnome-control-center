@@ -1823,6 +1823,10 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
                 g_ptr_array_unref (aps_unique);
         }
 
+        /* setup wireless button */
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "button_wireless_button"));
+        gtk_widget_set_visible (widget, active_ap != NULL);
 }
 
 static void
@@ -2632,6 +2636,98 @@ add_connection_cb (GtkToolButton *button, CcNetworkPanel *panel)
                 g_free (cmdline);
                 g_free (type);
         }
+}
+
+static void
+forget_network_connection_delete_cb (NMRemoteConnection *connection,
+                                     GError *error,
+                                     gpointer user_data)
+{
+        if (error == NULL)
+                return;
+        g_warning ("failed to delete connection %s: %s",
+                   nm_object_get_path (NM_OBJECT (connection)),
+                   error->message);
+}
+
+static void
+forget_network_response_cb (GtkWidget *dialog,
+                            gint response,
+                            CcNetworkPanel *panel)
+{
+        NetObject *object;
+        NMDevice *device;
+        NMRemoteConnection *remote_connection;
+
+        if (response != GTK_RESPONSE_OK)
+                goto out;
+
+        /* get current device */
+        object = get_selected_object (panel);
+        if (object == NULL)
+                return;
+        device = net_device_get_nm_device (NET_DEVICE (object));
+        if (device == NULL)
+                goto out;
+
+        /* delete the connection */
+        remote_connection = NM_REMOTE_CONNECTION (find_connection_for_device (panel, device));
+        if (remote_connection == NULL) {
+                g_warning ("failed to get remote connection");
+                goto out;
+        }
+        nm_remote_connection_delete (remote_connection,
+                                     forget_network_connection_delete_cb,
+                                     panel);
+out:
+        gtk_widget_destroy (dialog);
+}
+
+static void
+wireless_button_clicked_cb (GtkButton *button, CcNetworkPanel *panel)
+{
+        gboolean ret;
+        gchar *ssid_pretty = NULL;
+        gchar *ssid_target = NULL;
+        gchar *warning = NULL;
+        GtkComboBox *combobox;
+        GtkTreeIter iter;
+        GtkTreeModel *model;
+        GtkWidget *dialog;
+        GtkWidget *window;
+
+        combobox = GTK_COMBO_BOX (gtk_builder_get_object (panel->priv->builder,
+                                                          "combobox_wireless_network_name"));
+        ret = gtk_combo_box_get_active_iter (combobox, &iter);
+        if (!ret)
+                goto out;
+
+        /* get entry */
+        model = gtk_combo_box_get_model (GTK_COMBO_BOX (combobox));
+        gtk_tree_model_get (model, &iter,
+                            PANEL_WIRELESS_COLUMN_TITLE, &ssid_target,
+                            -1);
+
+        ssid_pretty = g_strdup_printf ("<b>%s</b>", ssid_target);
+        warning = g_strdup_printf (_("Network details for %s including password and any custom configuration will be lost"), ssid_pretty);
+        window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
+        dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+                                         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                         GTK_MESSAGE_OTHER,
+                                         GTK_BUTTONS_NONE,
+                                         NULL);
+        gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog), warning);
+        gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+                                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                _("Forget"), GTK_RESPONSE_OK,
+                                NULL);
+        g_signal_connect (dialog, "response",
+                          G_CALLBACK (forget_network_response_cb), panel);
+        gtk_window_present (GTK_WINDOW (dialog));
+out:
+        g_free (ssid_target);
+        g_free (ssid_pretty);
+        g_free (warning);
 }
 
 static void
@@ -3522,6 +3618,12 @@ cc_network_panel_init (CcNetworkPanel *panel)
                                                      "remove_toolbutton"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (remove_connection), panel);
+
+        /* setup wireless button */
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "button_wireless_button"));
+        g_signal_connect (widget, "clicked",
+                          G_CALLBACK (wireless_button_clicked_cb), panel);
 
         /* nothing to unlock yet */
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
