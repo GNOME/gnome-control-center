@@ -436,7 +436,7 @@ on_toolbar_add_button_clicked (GtkToolButton *button,
   GtkWidget *dialog;
   GtkWidget *vbox;
   GtkWidget *label;
-  GtkWidget *table;
+  GtkWidget *grid;
   GtkWidget *combo_box;
   gint response;
   GList *providers;
@@ -483,18 +483,13 @@ on_toolbar_add_button_clicked (GtkToolButton *button,
     }
   gtk_combo_box_set_active (GTK_COMBO_BOX (combo_box), 0);
 
-  table = gtk_table_new (1, 2, FALSE);
-  gtk_table_set_col_spacings (GTK_TABLE (table), 10);
-  gtk_box_pack_start (GTK_BOX (vbox), table, FALSE, TRUE, 0);
+  grid = gtk_grid_new ();
+  gtk_grid_set_column_spacing (GTK_GRID (grid), 10);
+  gtk_box_pack_start (GTK_BOX (vbox), grid, FALSE, TRUE, 0);
 
-  gtk_table_attach (GTK_TABLE (table), label,
-                    0, 1,
-                    0, 1,
-                    GTK_FILL, GTK_FILL, 0, 0);
-  gtk_table_attach (GTK_TABLE (table), combo_box,
-                    1, 2,
-                    0, 1,
-                    GTK_FILL | GTK_EXPAND, GTK_FILL, 0, 0);
+  gtk_grid_attach (GTK_GRID (grid), label, 0, 0, 1, 1);
+  gtk_widget_set_hexpand (combo_box, TRUE);
+  gtk_grid_attach (GTK_GRID (grid), combo_box, 1, 0, 1, 1);
 
   gtk_dialog_add_button (GTK_DIALOG (dialog),
                          GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
