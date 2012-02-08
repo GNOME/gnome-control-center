@@ -577,14 +577,33 @@ out:
 }
 
 static void
+gcm_prefs_make_profile_default_cb (GObject *object,
+                                   GAsyncResult *res,
+                                   gpointer user_data)
+{
+  CdDevice *device = CD_DEVICE (object);
+  gboolean ret = FALSE;
+  GError *error = NULL;
+
+  ret = cd_device_make_profile_default_finish (device,
+                                               res,
+                                               &error);
+  if (!ret)
+    {
+      g_warning ("failed to set default profile on %s: %s",
+                 cd_device_get_id (device),
+                 error->message);
+      g_error_free (error);
+    }
+}
+
+static void
 gcm_prefs_profile_make_default_internal (CcColorPanel *prefs,
                                          GtkTreeModel *model,
                                          GtkTreeIter *iter_selected)
 {
   CdDevice *device;
   CdProfile *profile;
-  GError *error = NULL;
-  gboolean ret = FALSE;
   CcColorPanelPrivate *priv = prefs->priv;
 
   /* get currentlt selected item */
@@ -596,16 +615,14 @@ gcm_prefs_profile_make_default_internal (CcColorPanel *prefs,
     goto out;
 
   /* just set it default */
-  ret = cd_device_make_profile_default_sync (device,
-                                             profile,
-                                             priv->cancellable,
-                                             &error);
-  if (!ret)
-    {
-      g_warning ("failed to set default profile: %s", error->message);
-      g_error_free (error);
-      goto out;
-    }
+  g_debug ("setting %s default on %s",
+           cd_profile_get_id (profile),
+           cd_device_get_id (device));
+  cd_device_make_profile_default (device,
+                                  profile,
+                                  priv->cancellable,
+                                  gcm_prefs_make_profile_default_cb,
+                                  prefs);
 out:
   if (profile != NULL)
     g_object_unref (profile);
@@ -718,16 +735,11 @@ gcm_prefs_button_assign_ok_cb (GtkWidget *widget, CcColorPanel *prefs)
     }
 
   /* make it default */
-  ret = cd_device_make_profile_default_sync (priv->current_device,
-                                             profile,
-                                             priv->cancellable,
-                                             &error);
-  if (!ret)
-    {
-      g_warning ("failed to set default: %s", error->message);
-      g_error_free (error);
-      goto out;
-    }
+  cd_device_make_profile_default (priv->current_device,
+                                  profile,
+                                  priv->cancellable,
+                                  gcm_prefs_make_profile_default_cb,
+                                  prefs);
 out:
   if (profile != NULL)
     g_object_unref (profile);
