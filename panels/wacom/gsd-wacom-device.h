@@ -100,6 +100,7 @@ typedef struct
 {
 	char                     *name;
 	char                     *id;
+	GSettings                *settings;
 	GsdWacomTabletButtonType  type;
 	int                       group_id;
 } GsdWacomTabletButton;
