@@ -84,7 +84,7 @@ static void create_manager (void)
                                          &error);
         if (manager == NULL) {
                 g_warning ("Failed to create fingerprint manager proxy: %s", error->message);
-                g_free_error (error);
+                g_error_free (error);
         }
 }
 
@@ -124,7 +124,7 @@ get_first_device (void)
                                         &error);
         if (device == NULL) {
                 g_warning ("Failed to create fingerprint device proxy: %s", error->message);
-                g_free_error (error);
+                g_error_free (error);
         }
 
         g_free (device_str);
@@ -220,7 +220,8 @@ set_fingerprint_label (GtkWidget *label1,
                 gtk_label_set_text (GTK_LABEL (label2), _("Enabled"));
         }
 
-        g_variant_unref (result);
+        if (result != NULL)
+                g_variant_unref (result);
         if (fingers != NULL)
                 g_variant_iter_free (fingers);
         g_object_unref (device);
@@ -244,7 +245,7 @@ delete_fingerprints (void)
         if (device == NULL)
                 return;
 
-        result = g_dbus_proxy_call_sync (device, "DeleteEnrolledFingers", g_variant_new ("()"), G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL);
+        result = g_dbus_proxy_call_sync (device, "DeleteEnrolledFingers", g_variant_new ("(s)", ""), G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL);
         if (result)
                 g_variant_unref (result);
 
@@ -318,7 +319,7 @@ claim (EnrollData *data, GError **error)
 {
         GVariant *result;
 
-        result = g_dbus_proxy_call_sync (data->device, "Claim", g_variant_new ("()"), G_DBUS_CALL_FLAGS_NONE, -1, NULL, error);
+        result = g_dbus_proxy_call_sync (data->device, "Claim", g_variant_new ("(s)", ""), G_DBUS_CALL_FLAGS_NONE, -1, NULL, error);
         if (result == NULL)
                 return FALSE;
         g_variant_unref (result);
@@ -478,11 +479,11 @@ static void
 device_signal_cb (GDBusProxy *proxy, gchar *sender_name, gchar *signal_name, GVariant *parameters, EnrollData *data)
 {
         if (strcmp (signal_name, "EnrollStatus") == 0) {
-                if (g_variant_is_of_type (parameters, G_VARIANT_TYPE ("sb"))) {
+                if (g_variant_is_of_type (parameters, G_VARIANT_TYPE ("(sb)"))) {
                         gchar *result;
                         gboolean done;
 
-                        g_variant_get (parameters, "&sb", &result, &done);
+                        g_variant_get (parameters, "(&sb)", &result, &done);
                         enroll_result (data, result, done);
                 }
         }
@@ -514,7 +515,7 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
                          * "Could you not access "Digital Persona U.are.U 4000/4000B" device */
                         msg = g_strdup_printf (_("Could not access '%s' device"), data->name);
                         d = get_error_dialog (msg, error->message, GTK_WINDOW (data->ass));
-                        g_free_error (error);
+                        g_error_free (error);
                         gtk_dialog_run (GTK_DIALOG (d));
                         gtk_widget_destroy (d);
                         g_free (msg);
@@ -531,15 +532,20 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
                                                       "org.freedesktop.DBus.Properties",
                                                       "Get",
                                                       g_variant_new ("(ss)", "net.reactivated.Fprint.Device", "num-enroll-stages"),
-                                                      G_VARIANT_TYPE ("(i)"),
+                                                      G_VARIANT_TYPE ("(v)"),
                                                       G_DBUS_CALL_FLAGS_NONE,
                                                       -1,
                                                       NULL,
-                                                      NULL);
+                                                      &error);
                 num_enroll_stages = 0;
                 if (result) {
-                        g_variant_get (result, "(i)", &num_enroll_stages);
+                        GVariant *v;
+
+                        g_variant_get (result, "(v)", &v);
+                        num_enroll_stages = g_variant_get_int32 (v);
+
                         g_variant_unref (result);
+                        g_variant_unref (v);
                 }
 
                 if (num_enroll_stages < 1) {
