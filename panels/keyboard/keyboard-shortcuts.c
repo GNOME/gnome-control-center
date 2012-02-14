@@ -999,16 +999,6 @@ start_editing_kb_cb (GtkTreeView *treeview,
                       DETAIL_KEYENTRY_COLUMN, &item,
                       -1);
 
-  if (item == NULL)
-    {
-      /* This is a section heading - expand or collapse */
-      if (gtk_tree_view_row_expanded (treeview, path))
-        gtk_tree_view_collapse_row (treeview, path);
-      else
-        gtk_tree_view_expand_row (treeview, path, FALSE);
-      return;
-    }
-
   /* if only the accel can be edited on the selected row
    * always select the accel column */
   if (item->desc_editable &&
