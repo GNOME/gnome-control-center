@@ -96,6 +96,8 @@ typedef enum {
 	WACOM_TABLET_BUTTON_TYPE_HARDCODED
 } GsdWacomTabletButtonType;
 
+#define MAX_GROUP_ID 4
+
 typedef struct
 {
 	char                     *name;
@@ -121,6 +123,8 @@ typedef enum {
 
 GType gsd_wacom_device_get_type     (void);
 
+void     gsd_wacom_device_set_display         (GsdWacomDevice    *device,
+                                               int                monitor);
 gint     gsd_wacom_device_get_display_monitor (GsdWacomDevice *device);
 gboolean gsd_wacom_device_get_display_matrix  (GsdWacomDevice *device,
                                                float           matrix[NUM_ELEMS_MATRIX]);
@@ -142,6 +146,9 @@ GsdWacomDeviceType gsd_wacom_device_get_device_type (GsdWacomDevice *device);
 gint           * gsd_wacom_device_get_area          (GsdWacomDevice *device);
 const char     * gsd_wacom_device_type_to_string    (GsdWacomDeviceType type);
 GList          * gsd_wacom_device_get_buttons       (GsdWacomDevice *device);
+GsdWacomTabletButton *gsd_wacom_device_get_button   (GsdWacomDevice   *device,
+						     int               button,
+						     GtkDirectionType *dir);
 
 /* Helper and debug functions */
 GsdWacomDevice * gsd_wacom_device_create_fake (GsdWacomDeviceType  type,

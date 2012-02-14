@@ -573,6 +573,61 @@ find_output_by_display (GsdWacomDevice *device)
 	return find_output_by_edid (edid[0], edid[1], edid[2]);
 }
 
+static GnomeRROutputInfo*
+find_output_by_monitor (GdkScreen *screen,
+			int        monitor)
+{
+	GError *error = NULL;
+	GnomeRRScreen *rr_screen;
+	GnomeRRConfig *rr_config;
+	GnomeRROutputInfo **rr_output_infos;
+	GnomeRROutputInfo *ret;
+	guint i;
+
+	ret = NULL;
+
+	rr_screen = gnome_rr_screen_new (screen, &error);
+	if (rr_screen == NULL) {
+		g_warning ("gnome_rr_screen_new() failed: %s", error->message);
+		g_error_free (error);
+		return NULL;
+	}
+
+	rr_config = gnome_rr_config_new_current (rr_screen, &error);
+	if (rr_screen == NULL) {
+		g_warning ("gnome_rr_config_new_current() failed: %s", error->message);
+		g_error_free (error);
+		g_object_unref (rr_screen);
+		return NULL;
+	}
+
+	rr_output_infos = gnome_rr_config_get_outputs (rr_config);
+
+	for (i = 0; rr_output_infos[i] != NULL; i++) {
+		GnomeRROutputInfo *info;
+		int x, y, w, h;
+
+		info = rr_output_infos[i];
+
+		if (!gnome_rr_output_info_is_active (info))
+			continue;
+
+		gnome_rr_output_info_get_geometry (info, &x, &y, &w, &h);
+		if (monitor == gdk_screen_get_monitor_at_point (screen, x, y)) {
+			ret = g_object_ref (info);
+			break;
+		}
+	}
+
+	g_object_unref (rr_config);
+	g_object_unref (rr_screen);
+
+	if (ret == NULL)
+		g_warning ("No output found for monitor %d.", monitor);
+
+	return ret;
+}
+
 static void
 set_display_by_output (GsdWacomDevice    *device,
                        GnomeRROutputInfo *rr_output_info)
@@ -615,6 +670,21 @@ set_display_by_output (GsdWacomDevice    *device,
 	g_free (o_vendor);
 	g_free (o_product);
 	g_free (o_serial);
+}
+
+
+void
+gsd_wacom_device_set_display (GsdWacomDevice *device,
+                              int             monitor)
+{
+	GnomeRROutputInfo *output;
+
+        g_return_if_fail (GSD_IS_WACOM_DEVICE (device));
+        g_return_if_fail (monitor >= 0);
+
+	output = find_output_by_monitor (gdk_screen_get_default (), monitor);
+	if (output != NULL)
+		set_display_by_output (device, output);
 }
 
 static GnomeRROutputInfo*
@@ -674,12 +744,14 @@ calculate_transformation_matrix (const GdkRectangle mapped, const GdkRectangle d
 	return;
 }
 
-gint
+int
 gsd_wacom_device_get_display_monitor (GsdWacomDevice *device)
 {
 	gint area[4];
 	gboolean is_active;
 	GnomeRROutputInfo *rr_output_info;
+
+        g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), -1);
 
 	rr_output_info = find_output(device);
 	if (rr_output_info == NULL)
@@ -942,16 +1014,16 @@ gsd_wacom_device_add_buttons (GsdWacomDevice *device,
 
 	ret = NULL;
 
-	l = gsd_wacom_device_add_buttons_dir (wacom_device, settings_path, WACOM_BUTTON_POSITION_LEFT, _("Left Button #%d"), "left-button");
+	l = gsd_wacom_device_add_buttons_dir (wacom_device, settings_path, WACOM_BUTTON_POSITION_LEFT, _("Left Button #%d"), "button");
 	if (l)
 		ret = l;
-	l = gsd_wacom_device_add_buttons_dir (wacom_device, settings_path, WACOM_BUTTON_POSITION_RIGHT, _("Right Button #%d"), "right-button");
+	l = gsd_wacom_device_add_buttons_dir (wacom_device, settings_path, WACOM_BUTTON_POSITION_RIGHT, _("Right Button #%d"), "button");
 	if (l)
 		ret = g_list_concat (ret, l);
-	l = gsd_wacom_device_add_buttons_dir (wacom_device, settings_path, WACOM_BUTTON_POSITION_TOP, _("Top Button #%d"), "top-button");
+	l = gsd_wacom_device_add_buttons_dir (wacom_device, settings_path, WACOM_BUTTON_POSITION_TOP, _("Top Button #%d"), "button");
 	if (l)
 		ret = g_list_concat (ret, l);
-	l = gsd_wacom_device_add_buttons_dir (wacom_device, settings_path, WACOM_BUTTON_POSITION_BOTTOM, _("Bottom Button #%d"), "bottom-button");
+	l = gsd_wacom_device_add_buttons_dir (wacom_device, settings_path, WACOM_BUTTON_POSITION_BOTTOM, _("Bottom Button #%d"), "button");
 	if (l)
 		ret = g_list_concat (ret, l);
 
@@ -1418,6 +1490,80 @@ gsd_wacom_device_get_buttons (GsdWacomDevice *device)
 	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), NULL);
 
 	return g_list_copy (device->priv->buttons);
+}
+
+static GsdWacomTabletButton *
+find_button_with_id (GsdWacomDevice *device,
+		     const char     *id)
+{
+	GList *l;
+
+	for (l = device->priv->buttons; l != NULL; l = l->next) {
+		GsdWacomTabletButton *button = l->data;
+
+		if (g_strcmp0 (button->id, id) == 0)
+			return button;
+	}
+	return NULL;
+}
+
+GsdWacomTabletButton *
+gsd_wacom_device_get_button (GsdWacomDevice   *device,
+			     int               button,
+			     GtkDirectionType *dir)
+{
+	if (button <= 26) {
+		char *id;
+		GsdWacomTabletButton *ret;
+		int physical_button;
+
+		/* mouse_button = physical_button < 4 ? physical_button : physical_button + 4 */
+		if (button > 4)
+			physical_button = button - 4;
+		else
+			physical_button = button;
+
+		id = g_strdup_printf ("button%c", 'A' + physical_button - 1);
+		ret = find_button_with_id (device, id);
+		g_free (id);
+
+		return ret;
+	}
+
+	switch (button) {
+	case 90:
+	case 92:
+	case 94:
+	case 96:
+		*dir = GTK_DIR_UP;
+		break;
+	case 91:
+	case 93:
+	case 95:
+	case 97:
+		*dir = GTK_DIR_DOWN;
+		break;
+	default:
+		;;
+	}
+
+	/* FIXME handle the mode */
+	switch (button) {
+	case 90:
+	case 91:
+		return find_button_with_id (device, "left-ring-mode-1");
+	case 92:
+	case 93:
+		return find_button_with_id (device, "right-ring-mode-1");
+	case 94:
+	case 95:
+		return find_button_with_id (device, "left-strip-mode-1");
+	case 96:
+	case 97:
+		return find_button_with_id (device, "right-strip-mode-1");
+	default:
+		return NULL;
+	}
 }
 
 GsdWacomDevice *
