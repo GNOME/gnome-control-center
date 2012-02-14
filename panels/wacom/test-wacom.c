@@ -19,13 +19,13 @@ add_page (GList *devices,
 	  GtkWidget *notebook)
 {
 	GtkWidget *widget;
-	GsdWacomDevice *stylus, *eraser;
+	GsdWacomDevice *stylus, *eraser, *pad;
 	GList *l;
 
 	if (devices == NULL)
 		return;
 
-	stylus = eraser = NULL;
+	stylus = eraser = pad = NULL;
 	for (l = devices; l ; l = l->next) {
 		switch (gsd_wacom_device_get_device_type (l->data)) {
 		case WACOM_TYPE_ERASER:
@@ -34,6 +34,9 @@ add_page (GList *devices,
 		case WACOM_TYPE_STYLUS:
 			stylus = l->data;
 			break;
+		case WACOM_TYPE_PAD:
+			pad = l->data;
+			break;
 		default:
 			/* Nothing */
 			;
@@ -41,7 +44,7 @@ add_page (GList *devices,
 	}
 	g_list_free (devices);
 
-	widget = cc_wacom_page_new (NULL, stylus, eraser);
+	widget = cc_wacom_page_new (NULL, stylus, eraser, pad);
 	cc_wacom_page_set_navigation (CC_WACOM_PAGE (widget), GTK_NOTEBOOK (notebook), FALSE);
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), widget, NULL);
 	gtk_widget_show (widget);
