@@ -557,10 +557,15 @@ get_initial_timezone (CcDateTimePanel *self)
 {
   const gchar *timezone;
 
-  timezone = timedate1_get_timezone (self->priv->dtm);
-  if (!cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->priv->map), timezone))
+  if (self->priv->dtm)
+    timezone = timedate1_get_timezone (self->priv->dtm);
+  else
+    timezone = NULL;
+
+  if (timezone == NULL ||
+      !cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->priv->map), timezone))
     {
-      g_warning ("Timezone '%s' is unhandled, setting %s as default", timezone, DEFAULT_TZ);
+      g_warning ("Timezone '%s' is unhandled, setting %s as default", timezone ? timezone : "(null)", DEFAULT_TZ);
       cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->priv->map), DEFAULT_TZ);
     }
   self->priv->current_location = cc_timezone_map_get_location (CC_TIMEZONE_MAP (self->priv->map));
@@ -969,7 +974,8 @@ cc_date_time_panel_init (CcDateTimePanel *self)
     }
 
   /* set up network time button */
-  update_ntp_switch_from_system (self);
+  if (priv->dtm != NULL)
+    update_ntp_switch_from_system (self);
   g_signal_connect (W("network_time_switch"), "notify::active",
                     G_CALLBACK (change_ntp), self);
 
@@ -1074,12 +1080,15 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                     G_CALLBACK (location_changed_cb), self);
 
   /* Watch changes of timedated remote service properties */
-  g_signal_connect (priv->dtm, "g-properties-changed",
-                    G_CALLBACK (on_timedated_properties_changed), self);
-  g_signal_connect_swapped (priv->dtm, "notify::ntp",
-                            G_CALLBACK (on_ntp_changed), self);
-  g_signal_connect_swapped (priv->dtm, "notify::timezone",
-                            G_CALLBACK (on_timezone_changed), self);
+  if (priv->dtm)
+    {
+      g_signal_connect (priv->dtm, "g-properties-changed",
+                        G_CALLBACK (on_timedated_properties_changed), self);
+      g_signal_connect_swapped (priv->dtm, "notify::ntp",
+                                G_CALLBACK (on_ntp_changed), self);
+      g_signal_connect_swapped (priv->dtm, "notify::timezone",
+                                G_CALLBACK (on_timezone_changed), self);
+    }
   /* We ignore UTC <--> LocalRTC changes at the moment */
 
   /* add the lock button */
