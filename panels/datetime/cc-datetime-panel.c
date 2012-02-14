@@ -553,7 +553,7 @@ get_timezone_cb (GObject      *source,
 {
   CcDateTimePanel *self = user_data;
   GtkWidget *widget;
-  gchar *timezone;
+  gchar *timezone = NULL;
   GError *error;
 
   error = NULL;
