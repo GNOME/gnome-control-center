@@ -494,7 +494,6 @@ devices_get_cb (GObject      *source_object,
             {
               GVariantBuilder  device_list;
               GVariantBuilder  device_hash;
-              GVariant        *input = NULL;
               GVariant        *output = NULL;
               GVariant        *array = NULL;
               GVariant        *subarray = NULL;
@@ -532,11 +531,9 @@ devices_get_cb (GObject      *source_object,
                     }
                 }
 
-              input = g_variant_new ("(v)", g_variant_builder_end (&device_list));
-
               output = g_dbus_proxy_call_sync (proxy,
                                                "GroupPhysicalDevices",
-                                               input,
+                                               g_variant_new ("(v)", g_variant_builder_end (&device_list)),
                                                G_DBUS_CALL_FLAGS_NONE,
                                                60000,
                                                NULL,
@@ -568,7 +565,6 @@ devices_get_cb (GObject      *source_object,
 
               if (output)
                 g_variant_unref (output);
-              g_variant_unref (input);
               g_object_unref (proxy);
             }
 
@@ -616,7 +612,6 @@ devices_get (PpNewPrinterDialog *pp)
 {
   GDBusProxy *proxy;
   GError     *error = NULL;
-  GVariant        *dg_input = NULL;
   GVariantBuilder *in_include = NULL;
   GVariantBuilder *in_exclude = NULL;
   GtkWidget *widget = NULL;
@@ -654,12 +649,6 @@ devices_get (PpNewPrinterDialog *pp)
   in_include = g_variant_builder_new (G_VARIANT_TYPE ("as"));
   in_exclude = g_variant_builder_new (G_VARIANT_TYPE ("as"));
 
-  dg_input = g_variant_new ("(iiasas)",
-                            0,
-                            60,
-                            in_include,
-                            in_exclude);
-
   widget = (GtkWidget*)
     gtk_builder_get_object (pp->builder, "get-devices-status-label");
   gtk_label_set_text (GTK_LABEL (widget), _("Getting devices..."));
@@ -674,16 +663,16 @@ devices_get (PpNewPrinterDialog *pp)
 
   g_dbus_proxy_call (proxy,
                      "DevicesGet",
-                     dg_input,
+                     g_variant_new ("(iiasas)",
+                                    0,
+                                    60,
+                                    in_include,
+                                    in_exclude),
                      G_DBUS_CALL_FLAGS_NONE,
                      60000,
                      pp->cancellable,
                      devices_get_cb,
                      pp);
-
-  g_variant_builder_unref (in_exclude);
-  g_variant_builder_unref (in_include);
-  g_variant_unref (dg_input);
 
   pp->searching = FALSE;
 }
@@ -777,7 +766,6 @@ service_enable (gchar *service_name,
                 gint   service_timeout)
 {
   GDBusProxy *proxy;
-  GVariant   *input = NULL;
   GVariant   *output = NULL;
   GError     *error = NULL;
 
@@ -797,19 +785,17 @@ service_enable (gchar *service_name,
       return;
     }
 
-  input = g_variant_new ("(si)",
-                         service_name,
-                         service_timeout);
 
   output = g_dbus_proxy_call_sync (proxy,
                                    "enableService",
-                                   input,
+                                   g_variant_new ("(si)",
+                                                  service_name,
+                                                  service_timeout),
                                    G_DBUS_CALL_FLAGS_NONE,
                                    60000,
                                    NULL,
                                    &error);
 
-  g_variant_unref (input);
   g_object_unref (proxy);
 
   if (output)
@@ -827,7 +813,6 @@ static void
 service_disable (gchar *service_name)
 {
   GDBusProxy *proxy;
-  GVariant   *input = NULL;
   GVariant   *output = NULL;
   GError     *error = NULL;
 
@@ -847,17 +832,14 @@ service_disable (gchar *service_name)
       return;
     }
 
-  input = g_variant_new ("(s)", service_name);
-
   output = g_dbus_proxy_call_sync (proxy,
                                    "disableService",
-                                   input,
+                                   g_variant_new ("(s)", service_name),
                                    G_DBUS_CALL_FLAGS_NONE,
                                    60000,
                                    NULL,
                                    &error);
 
-  g_variant_unref (input);
   g_object_unref (proxy);
 
   if (output)
@@ -875,7 +857,6 @@ static gboolean
 service_enabled (gchar *service_name)
 {
   GDBusProxy *proxy;
-  GVariant   *input = NULL;
   GVariant   *output = NULL;
   GError     *error = NULL;
   gint        query_result = 0;
@@ -896,18 +877,14 @@ service_enabled (gchar *service_name)
       return FALSE;
     }
 
-  input = g_variant_new ("(s)",
-                         service_name);
-
   output = g_dbus_proxy_call_sync (proxy,
                                    "queryService",
-                                   input,
+                                   g_variant_new ("(s)", service_name),
                                    G_DBUS_CALL_FLAGS_NONE,
                                    60000,
                                    NULL,
                                    &error);
 
-  g_variant_unref (input);
   g_object_unref (proxy);
 
   if (output)
@@ -1893,7 +1870,6 @@ new_printer_add_button_cb (GtkButton *button,
           if (ppd_file_name)
             {
               GDBusProxy *proxy;
-              GVariant   *input;
               GVariant   *output;
               GVariant   *array;
               GList      *executables = NULL;
@@ -1912,18 +1888,13 @@ new_printer_add_button_cb (GtkButton *button,
 
               if (proxy)
                 {
-                  input = g_variant_new ("(s)",
-                                         ppd_file_name);
-
                   output = g_dbus_proxy_call_sync (proxy,
                                                    "MissingExecutables",
-                                                   input,
+                                                   g_variant_new ("(s)", ppd_file_name),
                                                    G_DBUS_CALL_FLAGS_NONE,
                                                    60000,
                                                    NULL,
                                                    &error);
-
-                  g_variant_unref (input);
                   g_object_unref (proxy);
 
                   if (output)
@@ -1978,17 +1949,15 @@ DBus method \"MissingExecutables\" to find missing executables and filters.");
 
                       for (exec_iter = executables; exec_iter; exec_iter = exec_iter->next)
                         {
-                          input = g_variant_new ("(ss)", (gchar *) exec_iter->data, "");
-
                           output = g_dbus_proxy_call_sync (proxy,
                                                            "SearchFile",
-                                                           input,
+                                                           g_variant_new ("(ss)",
+                                                                          (gchar *) exec_iter->data,
+                                                                          ""),
                                                            G_DBUS_CALL_FLAGS_NONE,
                                                            60000,
                                                            NULL,
                                                            &error);
-
-                          g_variant_unref (input);
 
                           if (output)
                             {
@@ -2047,24 +2016,20 @@ DBus method \"MissingExecutables\" to find missing executables and filters.");
                                                "s",
                                                (gchar *) pkg_iter->data);
 
-                      input = g_variant_new ("(uass)",
-#ifdef GDK_WINDOWING_X11
-                        GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (pp->dialog))),
-#else
-                        0,
-#endif
-                        &array_builder,
-                        "hide-finished");
-
                       output = g_dbus_proxy_call_sync (proxy,
                                                        "InstallPackageNames",
-                                                       input,
+                                                       g_variant_new ("(uass)",
+#ifdef GDK_WINDOWING_X11
+                                                                      GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (pp->dialog))),
+#else
+                                                                      0,
+#endif
+                                                                      &array_builder,
+                                                                      "hide-finished"),
                                                        G_DBUS_CALL_FLAGS_NONE,
                                                        60000,
                                                        NULL,
                                                        &error);
-
-                      g_variant_unref (input);
                       g_object_unref (proxy);
 
                       if (output)
