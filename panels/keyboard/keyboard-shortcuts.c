@@ -1665,7 +1665,6 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
 
   column = gtk_tree_view_column_new_with_attributes (_("Action"),
                                                      renderer,
-                                                     "text", DETAIL_DESCRIPTION_COLUMN,
                                                      NULL);
   gtk_tree_view_column_set_cell_data_func (column, renderer, description_set_func, NULL, NULL);
   gtk_tree_view_column_set_resizable (column, FALSE);
