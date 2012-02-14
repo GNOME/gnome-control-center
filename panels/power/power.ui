@@ -63,173 +63,111 @@
         <property name="border_width">12</property>
         <property name="spacing">3</property>
         <child>
-          <object class="GtkBox" id="box_combos">
+          <object class="GtkGrid" id="grid_combos">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_left">53</property>
             <property name="margin_right">60</property>
             <property name="margin_bottom">24</property>
             <property name="orientation">vertical</property>
-            <property name="spacing">6</property>
+            <property name="row_spacing">6</property>
+            <property name="column_spacing">12</property>
             <child>
-              <object class="GtkBox" id="box_header">
+              <object class="GtkLabel" id="label_header_battery">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="spacing">9</property>
-                <child>
-                  <object class="GtkLabel" id="label_header_padding">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="label_header_battery">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">On battery power</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="label_header_ac">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">When plugged in</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
+                <property name="label" translatable="yes">On battery power</property>
+                <property name="halign">center</property>
               </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="box3">
+              <object class="GtkLabel" id="label_header_ac">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="spacing">9</property>
-                <child>
-                  <object class="GtkLabel" id="label7">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="xalign">1</property>
-                    <property name="label" translatable="yes">Suspend when inactive for</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkComboBoxText" id="combobox_sleep_battery">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="model">liststore_time</property>
-                    <accessibility>
-                      <relation type="labelled-by" target="label_header_battery"/>
-                      <relation type="labelled-by" target="label7"/>
-                    </accessibility>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkComboBoxText" id="combobox_sleep_ac">
-                    <property name="width_request">150</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="model">liststore_time</property>
-                    <accessibility>
-                      <relation type="labelled-by" target="label_header_ac"/>
-                      <relation type="labelled-by" target="label7"/>
-                    </accessibility>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
+                <property name="label" translatable="yes">When plugged in</property>
+                <property name="halign">center</property>
               </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="left_attach">2</property>
+                <property name="top_attach">0</property>
               </packing>
             </child>
             <child>
-              <object class="GtkBox" id="box2">
+              <object class="GtkLabel" id="label7">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="spacing">9</property>
-                <child>
-                  <object class="GtkLabel" id="label5">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="xalign">1</property>
-                    <property name="label" translatable="yes">When power is _critically low</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">combobox_critical</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkComboBox" id="combobox_critical">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="model">liststore_critical</property>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="label1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
+                <property name="halign">end</property>
+                <property name="label" translatable="yes">Suspend when inactive for</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
               </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="combobox_sleep_battery">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="model">liststore_time</property>
+                <accessibility>
+                  <relation type="labelled-by" target="label_header_battery"/>
+                  <relation type="labelled-by" target="label7"/>
+                </accessibility>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="combobox_sleep_ac">
+                <property name="width_request">150</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="model">liststore_time</property>
+                <accessibility>
+                  <relation type="labelled-by" target="label_header_ac"/>
+                  <relation type="labelled-by" target="label7"/>
+                </accessibility>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label5">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">end</property>
+                <property name="label" translatable="yes">When power is _critically low</property>
+                <property name="use_underline">True</property>
+                <property name="mnemonic_widget">combobox_critical</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBox" id="combobox_critical">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="model">liststore_critical</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">2</property>
               </packing>
             </child>
           </object>
@@ -415,17 +353,6 @@
       <widget name="combobox_critical"/>
       <widget name="combobox_sleep_battery"/>
       <widget name="combobox_sleep_ac"/>
-      <widget name="label1"/>
-      <widget name="label_header_battery"/>
-      <widget name="label_header_ac"/>
-    </widgets>
-  </object>
-  <object class="GtkSizeGroup" id="sizegroup_labels">
-    <property name="ignore_hidden">True</property>
-    <widgets>
-      <widget name="label5"/>
-      <widget name="label7"/>
-      <widget name="label_header_padding"/>
     </widgets>
   </object>
 </interface>

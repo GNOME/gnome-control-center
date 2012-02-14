@@ -929,7 +929,6 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
   gboolean ret;
   GError *error = NULL;
   GPtrArray *devices;
-  GtkWidget *widget;
   guint i;
   UpDevice *device;
   UpDeviceKind kind;
@@ -960,12 +959,9 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
     }
   g_ptr_array_unref (devices);
 out:
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "box_header"));
-  gtk_widget_set_visible (widget, has_batteries);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "combobox_sleep_battery"));
-  gtk_widget_set_visible (widget, has_batteries);
+  gtk_widget_set_visible (WID (priv->builder, "label_header_battery"), has_batteries);
+  gtk_widget_set_visible (WID (priv->builder, "label_header_ac"), has_batteries);
+  gtk_widget_set_visible (WID (priv->builder, "combobox_sleep_battery"), has_batteries);
 }
 
 static gboolean
