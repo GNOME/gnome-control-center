@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.20"/>
+  <!-- interface-requires gtk+ 3.0 -->
   <object class="GtkListStore" id="liststore_critical">
     <columns>
       <!-- column-name name -->
@@ -142,9 +142,9 @@
                     <property name="can_focus">False</property>
                     <property name="model">liststore_time</property>
                     <accessibility>
-                      <relation target="label_header_battery" type="labelled-by"/>
-                      <relation target="label7" type="labelled-by"/>
-                    </accessibility>"
+                      <relation type="labelled-by" target="label_header_battery"/>
+                      <relation type="labelled-by" target="label7"/>
+                    </accessibility>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -159,9 +159,9 @@
                     <property name="can_focus">False</property>
                     <property name="model">liststore_time</property>
                     <accessibility>
-                      <relation target="label_header_ac" type="labelled-by"/>
-                      <relation target="label7" type="labelled-by"/>
-                    </accessibility>"
+                      <relation type="labelled-by" target="label_header_ac"/>
+                      <relation type="labelled-by" target="label7"/>
+                    </accessibility>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -371,8 +371,6 @@
                 <property name="row_spacing">18</property>
                 <property name="column_spacing">6</property>
                 <property name="column_homogeneous">True</property>
-                <property name="n_rows">1</property>
-                <property name="n_columns">2</property>
                 <child>
                   <placeholder/>
                 </child>
