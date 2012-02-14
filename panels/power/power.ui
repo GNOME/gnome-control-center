@@ -147,7 +147,7 @@
                     </accessibility>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
+                    <property name="expand">True</property>
                     <property name="fill">True</property>
                     <property name="position">1</property>
                   </packing>
@@ -164,7 +164,7 @@
                     </accessibility>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
+                    <property name="expand">True</property>
                     <property name="fill">True</property>
                     <property name="position">2</property>
                   </packing>
@@ -203,9 +203,20 @@
                     <property name="model">liststore_critical</property>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
+                    <property name="expand">True</property>
                     <property name="fill">True</property>
                     <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
               </object>
@@ -398,8 +409,7 @@
       <widget name="combobox_critical"/>
       <widget name="combobox_sleep_battery"/>
       <widget name="combobox_sleep_ac"/>
-      <widget name="label_header_battery"/>
-      <widget name="label_header_ac"/>
+      <widget name="label1"/>
     </widgets>
   </object>
   <object class="GtkSizeGroup" id="sizegroup_labels">
