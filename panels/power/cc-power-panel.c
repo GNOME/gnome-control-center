@@ -962,6 +962,8 @@ out:
   gtk_widget_set_visible (WID (priv->builder, "label_header_battery"), has_batteries);
   gtk_widget_set_visible (WID (priv->builder, "label_header_ac"), has_batteries);
   gtk_widget_set_visible (WID (priv->builder, "combobox_sleep_battery"), has_batteries);
+  gtk_widget_set_visible (WID (priv->builder, "label_critical"), has_batteries);
+  gtk_widget_set_visible (WID (priv->builder, "combobox_critical"), has_batteries);
 }
 
 static gboolean
