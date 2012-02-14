@@ -2,10 +2,17 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <object class="GtkDialog" id="button-mapping-dialog">
+    <property name="width_request">600</property>
+    <property name="height_request">450</property>
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
-    <property name="title" translatable="yes">Keyboard</property>
+    <property name="title" translatable="yes">Map Buttons</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="default_width">600</property>
+    <property name="default_height">450</property>
     <property name="type_hint">dialog</property>
+    <property name="has_resize_grip">False</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="top_vbox">
         <property name="visible">True</property>
