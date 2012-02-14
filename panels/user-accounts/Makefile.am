@@ -14,6 +14,7 @@ AM_CPPFLAGS =						\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
 	-DUM_PIXMAP_DIR=\""$(pkgdatadir)/pixmaps"\"	\
 	-I$(srcdir)/../common/				\
+	-I$(srcdir)/../../shell/			\
 	$(PANEL_CFLAGS)					\
 	$(USER_ACCOUNTS_PANEL_CFLAGS)
 
@@ -41,8 +42,6 @@ libuser_accounts_la_SOURCES =		\
 	um-utils.h			\
 	um-utils.c			\
 	fingerprint-strings.h		\
-	um-strength-bar.h		\
-	um-strength-bar.c		\
 	run-passwd.h			\
 	run-passwd.c			\
 	um-editable-button.h		\

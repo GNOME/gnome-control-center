@@ -32,7 +32,7 @@
 
 #include "um-password-dialog.h"
 #include "um-user-manager.h"
-#include "um-strength-bar.h"
+#include "cc-strength-bar.h"
 #include "um-utils.h"
 #include "run-passwd.h"
 
@@ -474,7 +474,7 @@ update_password_strength (UmPasswordDialog *um)
         else
                 hint = C_("Password strength", "Strong");
 
-        um_strength_bar_set_strength (UM_STRENGTH_BAR (um->strength_indicator), strength);
+        cc_strength_bar_set_fraction (CC_STRENGTH_BAR (um->strength_indicator), strength);
         gtk_label_set_label (GTK_LABEL (um->strength_indicator_label), hint);
 }
 
