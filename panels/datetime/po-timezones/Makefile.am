@@ -1,4 +1,12 @@
-CATALOGS = $(patsubst %.po,%.mo,$(wildcard *.po))
+PO_LINGUAS = $(subst .po,,$(wildcard *.po))
+
+USER_LINGUAS = $(filter $(LINGUAS),$(PO_LINGUAS))
+
+USE_LINGUAS = $(shell if test -n "$(USER_LINGUAS)" -o -n "$(LINGUAS)"; then LLINGUAS="$(USER_LINGUAS)"; else LLINGUAS="$(PO_LINGUAS)"; fi; for lang in $$LLINGUAS; do printf "$$lang "; done)
+
+ALL_CATALOGS = $(patsubst %.po,%.mo,$(wildcard *.po))
+
+CATALOGS = $(USE_LINGUAS:%=%.mo)
 
 all: $(CATALOGS)
 
@@ -20,6 +28,6 @@ install: $(CATALOGS)
 
 EXTRA_DIST=$(wildcard *.po)
 
-CLEANFILES = $(CATALOGS)
+CLEANFILES = $(ALL_CATALOGS)
 
 -include $(top_srcdir)/git.mk
