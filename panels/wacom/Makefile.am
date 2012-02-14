@@ -68,7 +68,7 @@ pixmap_DATA =				\
 	wacom-tablet-pc.svg
 
 uidir   = $(pkgdatadir)/ui
-ui_DATA = gnome-wacom-properties.ui wacom-stylus-page.ui
+ui_DATA = gnome-wacom-properties.ui wacom-stylus-page.ui button-mapping.ui
 
 desktopdir = $(datadir)/applications
 desktop_in_files = gnome-wacom-panel.desktop.in

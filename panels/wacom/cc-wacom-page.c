@@ -32,6 +32,7 @@
 
 #define WID(x) (GtkWidget *) gtk_builder_get_object (priv->builder, x)
 #define CWID(x) (GtkContainer *) gtk_builder_get_object (priv->builder, x)
+#define MWID(x) (GtkWidget *) gtk_builder_get_object (builder, x);
 
 G_DEFINE_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
 
@@ -195,6 +196,34 @@ calibrate_button_clicked_cb (GtkButton   *button,
 
 	run_calibration (page, calibration, monitor);
 	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
+}
+
+static void
+map_buttons_button_clicked_cb (GtkButton   *button,
+			       CcWacomPage *page)
+{
+	GtkBuilder *builder;
+	GError *error = NULL;
+	GtkWidget *dialog;
+
+	builder = gtk_builder_new ();
+	gtk_builder_add_from_file (builder,
+				   GNOMECC_UI_DIR "/button-mapping.ui",
+				   &error);
+
+	if (error != NULL) {
+		g_warning ("Error loading UI file: %s", error->message);
+		g_object_unref (builder);
+		g_error_free (error);
+		return;
+	}
+
+	dialog = MWID ("button-mapping-dialog");
+	gtk_window_set_transient_for (GTK_WINDOW (dialog),
+				      GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (page))));
+	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+
+	gtk_widget_show (dialog);
 }
 
 static void
@@ -370,6 +399,8 @@ cc_wacom_page_init (CcWacomPage *self)
 
 	g_signal_connect (WID ("button-calibrate"), "clicked",
 			  G_CALLBACK (calibrate_button_clicked_cb), self);
+	g_signal_connect (WID ("map-buttons-button"), "clicked",
+			  G_CALLBACK (map_buttons_button_clicked_cb), self);
 
 	combo = GTK_COMBO_BOX (WID ("combo-tabletmode"));
 	combobox_text_cellrenderer (combo, MODELABEL_COLUMN);
