@@ -485,6 +485,11 @@ setup_mapping_treeview (CcWacomPage *page)
 		GsdWacomTabletButton *button = l->data;
 		GtkTreeIter new_row;
 
+		/* FIXME
+		 * We need to handle up/down buttons, such as the touchrings */
+		if (button->type == WACOM_TABLET_BUTTON_TYPE_ELEVATOR)
+			continue;
+
 		gtk_list_store_append (model, &new_row);
 		gtk_list_store_set (model, &new_row,
 				    MAPPING_DESCRIPTION_COLUMN, button->name,
