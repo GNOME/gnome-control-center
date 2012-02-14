@@ -22,17 +22,20 @@
 
 #include <config.h>
 
+#include <glib/gi18n-lib.h>
+#include <gtk/gtk.h>
+
 #include "cc-wacom-page.h"
 #include "cc-wacom-nav-button.h"
 #include "cc-wacom-stylus-page.h"
+#include "gsd-enums.h"
 #include "gui_gtk.h"
-#include <gtk/gtk.h>
 
 #include <string.h>
 
 #define WID(x) (GtkWidget *) gtk_builder_get_object (priv->builder, x)
 #define CWID(x) (GtkContainer *) gtk_builder_get_object (priv->builder, x)
-#define MWID(x) (GtkWidget *) gtk_builder_get_object (builder, x);
+#define MWID(x) (GtkWidget *) gtk_builder_get_object (priv->mapping_builder, x)
 
 G_DEFINE_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
 
@@ -41,6 +44,15 @@ G_DEFINE_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
 
 #define THRESHOLD_MISCLICK	15
 #define THRESHOLD_DOUBLECLICK	7
+
+#define ACTION_TYPE_KEY         "action-type"
+#define CUSTOM_ACTION_KEY       "custom-action"
+
+enum {
+	MAPPING_DESCRIPTION_COLUMN,
+	MAPPING_BUTTON_COLUMN,
+	MAPPING_N_COLUMNS
+};
 
 struct _CcWacomPagePrivate
 {
@@ -51,6 +63,7 @@ struct _CcWacomPagePrivate
 	GtkWidget      *notebook;
 	CalibArea      *area;
 	GSettings      *wacom_settings;
+	GtkBuilder     *mapping_builder;
 	/* The UI doesn't support cursor/pad at the moment */
 };
 
@@ -199,24 +212,314 @@ calibrate_button_clicked_cb (GtkButton   *button,
 }
 
 static void
+accel_set_func (GtkTreeViewColumn *tree_column,
+		GtkCellRenderer   *cell,
+		GtkTreeModel      *model,
+		GtkTreeIter       *iter,
+		gpointer           data)
+{
+	GsdWacomTabletButton *button;
+	GsdWacomActionType type;
+	char *str;
+	guint keyval;
+	guint mask;
+
+	gtk_tree_model_get (model, iter,
+			    MAPPING_BUTTON_COLUMN, &button,
+			    -1);
+
+	if (button == NULL) {
+		g_object_set (cell,
+			      "visible", FALSE,
+			      NULL);
+		return;
+	}
+
+	if (button->type == WACOM_TABLET_BUTTON_TYPE_HARDCODED) {
+		/* FIXME this should tell us that it will
+		 * switch groups */
+		g_object_set (cell,
+			      "visible", TRUE,
+			      "editable", FALSE,
+			      "accel-key", 0,
+			      "accel-mods", 0,
+			      "style", PANGO_STYLE_NORMAL,
+			      NULL);
+		return;
+	}
+
+	if (button->settings == NULL) {
+		g_warning ("Button '%s' does not have an associated GSettings", button->id);
+		return;
+	}
+
+	type = g_settings_get_enum (button->settings, ACTION_TYPE_KEY);
+	if (type == GSD_WACOM_ACTION_TYPE_NONE) {
+		g_object_set (cell,
+			      "visible", TRUE,
+			      "editable", TRUE,
+			      "accel-key", 0,
+			      "accel-mods", 0,
+			      "style", PANGO_STYLE_NORMAL,
+			      NULL);
+		return;
+	}
+
+	str = g_settings_get_string (button->settings, CUSTOM_ACTION_KEY);
+	gtk_accelerator_parse (str, &keyval, &mask);
+	g_free (str);
+
+	g_object_set (cell,
+		      "visible", TRUE,
+		      "editable", TRUE,
+		      "accel-key", keyval,
+		      "accel-mods", mask,
+		      "style", PANGO_STYLE_NORMAL,
+		      NULL);
+}
+
+typedef struct {
+	GtkTreeView *tree_view;
+	GtkTreePath *path;
+	GtkTreeViewColumn *column;
+} IdleData;
+
+static gboolean
+real_start_editing_cb (IdleData *idle_data)
+{
+	gtk_widget_grab_focus (GTK_WIDGET (idle_data->tree_view));
+	gtk_tree_view_set_cursor (idle_data->tree_view,
+				  idle_data->path,
+				  idle_data->column,
+				  TRUE);
+	gtk_tree_path_free (idle_data->path);
+	g_free (idle_data);
+	return FALSE;
+}
+
+static gboolean
+start_editing_cb (GtkTreeView    *tree_view,
+		  GdkEventButton *event,
+		  gpointer        user_data)
+{
+	GtkTreePath *path;
+	GtkTreeViewColumn *column;
+
+	if (event->window != gtk_tree_view_get_bin_window (tree_view))
+		return FALSE;
+
+	if (gtk_tree_view_get_path_at_pos (tree_view,
+					   (gint) event->x,
+					   (gint) event->y,
+					   &path, &column,
+					   NULL, NULL))
+	{
+		IdleData *idle_data;
+		GtkTreeModel *model;
+		GtkTreeIter iter;
+		GsdWacomTabletButton *button;
+
+		if (gtk_tree_path_get_depth (path) == 1)
+		{
+			gtk_tree_path_free (path);
+			return FALSE;
+		}
+
+		model = gtk_tree_view_get_model (tree_view);
+		gtk_tree_model_get_iter (model, &iter, path);
+		gtk_tree_model_get (model, &iter,
+				    MAPPING_BUTTON_COLUMN, &button,
+				    -1);
+
+		idle_data = g_new (IdleData, 1);
+		idle_data->tree_view = tree_view;
+		idle_data->path = path;
+		idle_data->column = button->type != WACOM_TABLET_BUTTON_TYPE_HARDCODED ?
+			column :
+			gtk_tree_view_get_column (tree_view, 1);
+		g_idle_add ((GSourceFunc) real_start_editing_cb, idle_data);
+		g_signal_stop_emission_by_name (tree_view, "button_press_event");
+	}
+	return TRUE;
+}
+
+static void
+start_editing_kb_cb (GtkTreeView *treeview,
+                          GtkTreePath *path,
+                          GtkTreeViewColumn *column,
+                          gpointer user_data)
+{
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  GsdWacomTabletButton *button;
+
+  model = gtk_tree_view_get_model (treeview);
+  gtk_tree_model_get_iter (model, &iter, path);
+  gtk_tree_model_get (model, &iter,
+                      MAPPING_BUTTON_COLUMN, &button,
+                      -1);
+
+  gtk_widget_grab_focus (GTK_WIDGET (treeview));
+  gtk_tree_view_set_cursor (treeview,
+			    path,
+			    gtk_tree_view_get_column (treeview, 1),
+			    TRUE);
+}
+
+static void
+accel_edited_callback (GtkCellRendererText   *cell,
+                       const char            *path_string,
+                       guint                  keyval,
+                       GdkModifierType        mask,
+                       guint                  keycode,
+                       GtkTreeView           *view)
+{
+  GtkTreeModel *model;
+  GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
+  GtkTreeIter iter;
+  GsdWacomTabletButton *button;
+  char *str;
+
+  model = gtk_tree_view_get_model (view);
+  gtk_tree_model_get_iter (model, &iter, path);
+  gtk_tree_path_free (path);
+  gtk_tree_model_get (model, &iter,
+		      MAPPING_BUTTON_COLUMN, &button,
+                      -1);
+
+  /* sanity check */
+  if (button == NULL)
+    return;
+
+  /* CapsLock isn't supported as a keybinding modifier, so keep it from confusing us */
+  mask &= ~GDK_LOCK_MASK;
+
+  str = gtk_accelerator_name (keyval, mask);
+  g_settings_set_string (button->settings, CUSTOM_ACTION_KEY, str);
+  g_settings_set_enum (button->settings, ACTION_TYPE_KEY, GSD_WACOM_ACTION_TYPE_CUSTOM);
+  g_free (str);
+}
+
+static void
+accel_cleared_callback (GtkCellRendererText *cell,
+                        const char          *path_string,
+                        gpointer             data)
+{
+  GtkTreeView *view = (GtkTreeView *) data;
+  GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GsdWacomTabletButton *button;
+
+  model = gtk_tree_view_get_model (view);
+  gtk_tree_model_get_iter (model, &iter, path);
+  gtk_tree_path_free (path);
+  gtk_tree_model_get (model, &iter,
+		      MAPPING_BUTTON_COLUMN, &button,
+                      -1);
+
+  /* sanity check */
+  if (button == NULL)
+    return;
+
+  /* Unset the key */
+  g_settings_set_enum (button->settings, ACTION_TYPE_KEY, GSD_WACOM_ACTION_TYPE_NONE);
+  g_settings_set_string (button->settings, CUSTOM_ACTION_KEY, "");
+}
+
+static void
+setup_mapping_treeview (CcWacomPage *page)
+{
+	CcWacomPagePrivate *priv;
+	GtkTreeView *treeview;
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
+	GtkListStore *model;
+	GList *list, *l;
+
+	priv = page->priv;
+	treeview = GTK_TREE_VIEW(MWID ("shortcut_treeview"));
+
+	g_signal_connect (treeview, "button_press_event",
+			  G_CALLBACK (start_editing_cb), page);
+	g_signal_connect (treeview, "row-activated",
+			  G_CALLBACK (start_editing_kb_cb), page);
+
+	renderer = gtk_cell_renderer_text_new ();
+	g_object_set (G_OBJECT (renderer), "ellipsize", PANGO_ELLIPSIZE_END, NULL);
+
+	column = gtk_tree_view_column_new_with_attributes (_("Button"),
+							   renderer,
+							   "text", MAPPING_DESCRIPTION_COLUMN,
+							   NULL);
+	gtk_tree_view_column_set_resizable (column, FALSE);
+	gtk_tree_view_column_set_expand (column, TRUE);
+
+	gtk_tree_view_append_column (treeview, column);
+	gtk_tree_view_column_set_sort_column_id (column, MAPPING_DESCRIPTION_COLUMN);
+
+	renderer = (GtkCellRenderer *) g_object_new (GTK_TYPE_CELL_RENDERER_ACCEL,
+						     "accel-mode", GTK_CELL_RENDERER_ACCEL_MODE_OTHER,
+						     NULL);
+
+	g_signal_connect (renderer, "accel_edited",
+			  G_CALLBACK (accel_edited_callback),
+			  treeview);
+	g_signal_connect (renderer, "accel_cleared",
+			  G_CALLBACK (accel_cleared_callback),
+			  treeview);
+
+	column = gtk_tree_view_column_new_with_attributes (_("Action"), renderer, NULL);
+	gtk_tree_view_column_set_cell_data_func (column, renderer, accel_set_func, NULL, NULL);
+	gtk_tree_view_column_set_resizable (column, FALSE);
+	gtk_tree_view_column_set_expand (column, FALSE);
+
+	gtk_tree_view_append_column (treeview, column);
+
+	model = gtk_list_store_new (MAPPING_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+	gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (model));
+
+	/* Fill it up! */
+	list = gsd_wacom_device_get_buttons (page->priv->pad);
+	for (l = list; l != NULL; l = l->next) {
+		GsdWacomTabletButton *button = l->data;
+		GtkTreeIter new_row;
+
+		gtk_list_store_append (model, &new_row);
+		gtk_list_store_set (model, &new_row,
+				    MAPPING_DESCRIPTION_COLUMN, button->name,
+				    MAPPING_BUTTON_COLUMN, button,
+				    -1);
+	}
+	g_list_free (list);
+	g_object_unref (model);
+}
+
+static void
 map_buttons_button_clicked_cb (GtkButton   *button,
 			       CcWacomPage *page)
 {
-	GtkBuilder *builder;
 	GError *error = NULL;
 	GtkWidget *dialog;
+	CcWacomPagePrivate *priv;
 
-	builder = gtk_builder_new ();
-	gtk_builder_add_from_file (builder,
+	priv = page->priv;
+
+	g_assert (page->priv->mapping_builder == NULL);
+	page->priv->mapping_builder = gtk_builder_new ();
+	gtk_builder_add_from_file (page->priv->mapping_builder,
 				   GNOMECC_UI_DIR "/button-mapping.ui",
 				   &error);
 
 	if (error != NULL) {
 		g_warning ("Error loading UI file: %s", error->message);
-		g_object_unref (builder);
+		g_object_unref (page->priv->mapping_builder);
+		page->priv->mapping_builder = NULL;
 		g_error_free (error);
 		return;
 	}
+
+	setup_mapping_treeview (page);
 
 	dialog = MWID ("button-mapping-dialog");
 	gtk_window_set_transient_for (GTK_WINDOW (dialog),
