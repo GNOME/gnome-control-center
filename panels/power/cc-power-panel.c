@@ -27,6 +27,7 @@
 #include <gnome-settings-daemon/gsd-enums.h>
 
 #include "cc-power-panel.h"
+#include "cc-strength-bar.h"
 
 #define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
 
@@ -43,6 +44,7 @@ struct _CcPowerPanelPrivate
   GtkBuilder    *builder;
   GDBusProxy    *proxy;
   UpClient      *up_client;
+  CcStrengthBar *progressbar_primary;
 };
 
 enum
@@ -211,10 +213,8 @@ set_device_battery_primary (CcPowerPanel *panel, GVariant *device)
                  &time);
 
   /* set the percentage */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "progressbar_primary"));
-  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (widget),
-                                 percentage / 100.0f);
+  cc_strength_bar_set_fraction (priv->progressbar_primary,
+                                percentage / 100.0f);
 
   /* clear the warning */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
@@ -326,10 +326,8 @@ set_device_ups_primary (CcPowerPanel *panel, GVariant *device)
                  &time);
 
   /* set the percentage */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "progressbar_primary"));
-  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (widget),
-                                 percentage / 100.0f);
+  cc_strength_bar_set_fraction (priv->progressbar_primary,
+                                percentage / 100.0f);
 
   /* always show the warning */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
@@ -608,10 +606,10 @@ add_device_secondary (CcPowerPanel *panel,
   gtk_misc_set_alignment (GTK_MISC (widget), 0.0f, 0.5f);
   gtk_label_set_markup (GTK_LABEL (widget), status->str);
   gtk_box_pack_start (GTK_BOX (vbox), widget, FALSE, FALSE, 0);
-  widget = gtk_progress_bar_new ();
+  widget = cc_strength_bar_new ();
   gtk_widget_set_margin_right (widget, 32);
   gtk_widget_set_margin_top (widget, 3);
-  gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (widget), percentage / 100.0f);
+  cc_strength_bar_set_fraction (CC_STRENGTH_BAR (widget), percentage / 100.0f);
   gtk_box_pack_start (GTK_BOX (vbox), widget, TRUE, TRUE, 0);
   gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
 
@@ -1008,6 +1006,20 @@ cc_power_panel_init (CcPowerPanel *self)
       g_error_free (error);
       return;
     }
+
+  /* add custom progressbar */
+  widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
+                                               "progressbar_primary"));
+  gtk_widget_hide (widget);
+  self->priv->progressbar_primary = CC_STRENGTH_BAR (cc_strength_bar_new ());
+  widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
+                                               "box_primary"));
+  gtk_box_pack_end (GTK_BOX (widget),
+                    GTK_WIDGET (self->priv->progressbar_primary),
+                    FALSE,
+                    TRUE,
+                    0);
+  gtk_widget_set_visible (GTK_WIDGET (self->priv->progressbar_primary), TRUE);
 
   self->priv->cancellable = g_cancellable_new ();
 
