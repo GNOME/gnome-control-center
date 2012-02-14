@@ -501,6 +501,19 @@ setup_mapping_treeview (CcWacomPage *page)
 }
 
 static void
+button_mapping_dialog_closed (GtkDialog   *dialog,
+			      int          response_id,
+			      CcWacomPage *page)
+{
+	CcWacomPagePrivate *priv;
+
+	priv = page->priv;
+	gtk_widget_destroy (MWID ("button-mapping-dialog"));
+	g_object_unref (page->priv->mapping_builder);
+	page->priv->mapping_builder = NULL;
+}
+
+static void
 map_buttons_button_clicked_cb (GtkButton   *button,
 			       CcWacomPage *page)
 {
@@ -530,6 +543,9 @@ map_buttons_button_clicked_cb (GtkButton   *button,
 	gtk_window_set_transient_for (GTK_WINDOW (dialog),
 				      GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (page))));
 	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+	g_signal_connect (G_OBJECT (dialog), "response",
+			  G_CALLBACK (button_mapping_dialog_closed), page);
+
 
 	gtk_widget_show (dialog);
 }
