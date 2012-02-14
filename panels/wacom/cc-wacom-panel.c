@@ -51,6 +51,7 @@ typedef struct {
 	const char *name;
 	GsdWacomDevice *stylus;
 	GsdWacomDevice *eraser;
+	GsdWacomDevice *pad;
 } Tablet;
 
 enum {
@@ -184,6 +185,9 @@ update_current_page (CcWacomPanel *self)
 		case WACOM_TYPE_ERASER:
 			tablet->eraser = device;
 			break;
+		case WACOM_TYPE_PAD:
+			tablet->pad = device;
+			break;
 		default:
 			/* Nothing */
 			;
@@ -214,7 +218,7 @@ update_current_page (CcWacomPanel *self)
 
 		if (g_hash_table_lookup (priv->pages, tablet->name) == NULL) {
 			GtkWidget *page;
-			page = cc_wacom_page_new (self, tablet->stylus, tablet->eraser);
+			page = cc_wacom_page_new (self, tablet->stylus, tablet->eraser, tablet->pad);
 			cc_wacom_page_set_navigation (CC_WACOM_PAGE (page), GTK_NOTEBOOK (priv->notebook), TRUE);
 			gtk_widget_show (page);
 			gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), page, NULL);

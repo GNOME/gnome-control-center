@@ -45,7 +45,7 @@ G_DEFINE_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
 struct _CcWacomPagePrivate
 {
 	CcWacomPanel   *panel;
-	GsdWacomDevice *stylus, *eraser;
+	GsdWacomDevice *stylus, *eraser, *pad;
 	GtkBuilder     *builder;
 	GtkWidget      *nav;
 	GtkWidget      *notebook;
@@ -506,6 +506,8 @@ update_tablet_ui (CcWacomPage *page,
 
 	priv = page->priv;
 
+	/* FIXME Handle ->pad being NULL and hide the pad buttons */
+
 	switch (layout) {
 	case LAYOUT_NORMAL:
 		remove_left_handed (page->priv);
@@ -540,7 +542,8 @@ update_tablet_ui (CcWacomPage *page,
 GtkWidget *
 cc_wacom_page_new (CcWacomPanel   *panel,
 		   GsdWacomDevice *stylus,
-		   GsdWacomDevice *eraser)
+		   GsdWacomDevice *eraser,
+		   GsdWacomDevice *pad)
 {
 	CcWacomPage *page;
 	CcWacomPagePrivate *priv;
@@ -552,12 +555,16 @@ cc_wacom_page_new (CcWacomPanel   *panel,
 	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (eraser), NULL);
 	g_return_val_if_fail (gsd_wacom_device_get_device_type (eraser) == WACOM_TYPE_ERASER, NULL);
 
+	if (pad != NULL)
+		g_return_val_if_fail (gsd_wacom_device_get_device_type (pad) == WACOM_TYPE_PAD, NULL);
+
 	page = g_object_new (CC_TYPE_WACOM_PAGE, NULL);
 
 	priv = page->priv;
 	priv->panel = panel;
 	priv->stylus = stylus;
 	priv->eraser = eraser;
+	priv->pad = pad;
 
 	/* FIXME move this to construct */
 	priv->wacom_settings  = gsd_wacom_device_get_settings (stylus);
