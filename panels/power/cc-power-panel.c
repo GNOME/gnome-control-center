@@ -1077,7 +1077,7 @@ cc_power_panel_init (CcPowerPanel *self)
                                                "label_screen_settings"));
   /* TRANSLATORS: this is a link to the Screen control center panel */
   tmp = g_strdup_printf ("<span color=\"darkgray\" size=\"small\">%s "
-                         "<a href=\"screen\"><b>%s</b></a> %s</span>",
+                         "<a href=\"screen\">%s</a> %s</span>",
                          _("Tip:"),
                          _("Screen Settings"),
                          _("affect how much power is used"));
