@@ -1778,70 +1778,75 @@ supply_levels_draw_cb (GtkWidget *widget,
           marker_colorsv = g_strsplit (marker_colors, ",", -1);
           marker_namesv = g_strsplit (marker_names, ",", -1);
           marker_typesv = g_strsplit (marker_types, ",", -1);
-  
-          for (i = 0; i < g_strv_length (marker_levelsv); i++)
+
+          if (g_strv_length (marker_levelsv) == g_strv_length (marker_colorsv) &&
+              g_strv_length (marker_colorsv) == g_strv_length (marker_namesv) &&
+              g_strv_length (marker_namesv) == g_strv_length (marker_typesv))
             {
-              MarkerItem *marker;
-
-              if (g_strcmp0 (marker_typesv[i], "ink") == 0 ||
-                  g_strcmp0 (marker_typesv[i], "toner") == 0)
+              for (i = 0; i < g_strv_length (marker_levelsv); i++)
                 {
-                  marker = g_new0 (MarkerItem, 1);
-                  marker->type = g_strdup (marker_typesv[i]);
-                  marker->name = g_strdup (marker_namesv[i]);
-                  marker->color = g_strdup (marker_colorsv[i]);
-                  marker->level = atoi (marker_levelsv[i]);
+                  MarkerItem *marker;
 
-                  markers = g_slist_prepend (markers, marker);
-                }
-            }
+                  if (g_strcmp0 (marker_typesv[i], "ink") == 0 ||
+                      g_strcmp0 (marker_typesv[i], "toner") == 0)
+                    {
+                      marker = g_new0 (MarkerItem, 1);
+                      marker->type = g_strdup (marker_typesv[i]);
+                      marker->name = g_strdup (marker_namesv[i]);
+                      marker->color = g_strdup (marker_colorsv[i]);
+                      marker->level = atoi (marker_levelsv[i]);
 
-          markers = g_slist_sort (markers, markers_cmp);
-
-          for (tmp_list = markers; tmp_list; tmp_list = tmp_list->next)
-            {
-              GdkRGBA color = {0.0, 0.0, 0.0, 1.0};
-              double  display_value;
-              int     value;
-
-              value = ((MarkerItem*) tmp_list->data)->level;
-
-              gdk_rgba_parse (&color, ((MarkerItem*) tmp_list->data)->color);
-
-              if (value > 0)
-                {
-                  display_value = value / 100.0 * (width - 3.0);
-                  gdk_cairo_set_source_rgba (cr, &color);
-                  rounded_rectangle (cr, 1.5, 1.5, display_value, SUPPLY_BAR_HEIGHT - 3.0, border_radius);
-                  cairo_fill (cr);
+                      markers = g_slist_prepend (markers, marker);
+                    }
                 }
 
-              if (tooltip_text)
+              markers = g_slist_sort (markers, markers_cmp);
+
+              for (tmp_list = markers; tmp_list; tmp_list = tmp_list->next)
                 {
-                  tmp = g_strdup_printf ("%s\n%s",
-                                         tooltip_text,
-                                         ((MarkerItem*) tmp_list->data)->name);
-                  g_free (tooltip_text);
-                  tooltip_text = tmp;
-                  tmp = NULL;
+                  GdkRGBA color = {0.0, 0.0, 0.0, 1.0};
+                  double  display_value;
+                  int     value;
+
+                  value = ((MarkerItem*) tmp_list->data)->level;
+
+                  gdk_rgba_parse (&color, ((MarkerItem*) tmp_list->data)->color);
+
+                  if (value > 0)
+                    {
+                      display_value = value / 100.0 * (width - 3.0);
+                      gdk_cairo_set_source_rgba (cr, &color);
+                      rounded_rectangle (cr, 1.5, 1.5, display_value, SUPPLY_BAR_HEIGHT - 3.0, border_radius);
+                      cairo_fill (cr);
+                    }
+
+                  if (tooltip_text)
+                    {
+                      tmp = g_strdup_printf ("%s\n%s",
+                                             tooltip_text,
+                                             ((MarkerItem*) tmp_list->data)->name);
+                      g_free (tooltip_text);
+                      tooltip_text = tmp;
+                      tmp = NULL;
+                    }
+                  else
+                    tooltip_text = g_strdup_printf ("%s",
+                                                    ((MarkerItem*) tmp_list->data)->name);
                 }
-              else
-                tooltip_text = g_strdup_printf ("%s",
-                                                ((MarkerItem*) tmp_list->data)->name);
-            }
 
-          cairo_set_line_width (cr, 1.0);
-          gdk_cairo_set_source_rgba (cr, &border_color);
-          rounded_rectangle (cr, 1.5, 1.5, width - 3.0, SUPPLY_BAR_HEIGHT - 3.0, border_radius);
-          cairo_stroke (cr);
+              cairo_set_line_width (cr, 1.0);
+              gdk_cairo_set_source_rgba (cr, &border_color);
+              rounded_rectangle (cr, 1.5, 1.5, width - 3.0, SUPPLY_BAR_HEIGHT - 3.0, border_radius);
+              cairo_stroke (cr);
 
-          for (tmp_list = markers; tmp_list; tmp_list = tmp_list->next)
-            {
-              g_free (((MarkerItem*) tmp_list->data)->name);
-              g_free (((MarkerItem*) tmp_list->data)->type);
-              g_free (((MarkerItem*) tmp_list->data)->color);
+              for (tmp_list = markers; tmp_list; tmp_list = tmp_list->next)
+                {
+                  g_free (((MarkerItem*) tmp_list->data)->name);
+                  g_free (((MarkerItem*) tmp_list->data)->type);
+                  g_free (((MarkerItem*) tmp_list->data)->color);
+                }
+              g_slist_free_full (markers, g_free);
             }
-          g_slist_free_full (markers, g_free);
 
           g_strfreev (marker_levelsv);
           g_strfreev (marker_colorsv);
