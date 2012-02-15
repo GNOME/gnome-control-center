@@ -160,13 +160,10 @@ cc_strength_bar_draw (GtkWidget *widget,
         gint count;
         gint last_x;
         gint width, height;
-        GtkStateFlags state;
         GtkStyleContext *context;
         guint i;
 
         context = gtk_widget_get_style_context (widget);
-        state = gtk_widget_get_state_flags (widget);
-
         width = gtk_widget_get_allocated_width (widget);
         height = gtk_widget_get_allocated_height (widget);
 
@@ -196,7 +193,16 @@ cc_strength_bar_draw (GtkWidget *widget,
                          0.5, 0.5,
                          width - 1, height - 1, 4);
         cairo_fill_preserve (cr);
-        gtk_style_context_get_color (context, state, &color);
+        ret = gtk_style_context_lookup_color (context,
+                                              "@borders",
+                                              &color);
+        if (!ret) {
+                /* fall back to black */
+                color.alpha = 1.0f;
+                color.red = 0.0;
+                color.green = 0.0;
+                color.blue = 0.0;
+        }
         gdk_cairo_set_source_rgba (cr, &color);
         cairo_stroke (cr);
 
