@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-11 22:45+0300\n"
-"PO-Revision-Date: 2012-02-11 22:45+0300\n"
+"POT-Creation-Date: 2012-02-15 21:57+0300\n"
+"PO-Revision-Date: 2012-02-15 22:04+0300\n"
 "Last-Translator: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -1005,7 +1005,7 @@ msgid "Video CD"
 msgstr "Video CD"
 
 #: ../panels/info/cc-info-panel.c:1473
-#: ../panels/keyboard/keyboard-shortcuts.c:1627
+#: ../panels/keyboard/keyboard-shortcuts.c:1617
 msgid "Section"
 msgstr "Раздзел"
 
@@ -1419,6 +1419,7 @@ msgid "Remove Shortcut"
 msgstr "Выдаліць клавіятурны скарот"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:22
+#: ../panels/wacom/button-mapping.ui.h:3
 msgid ""
 "To edit a shortcut, click the row and hold down the new keys or press "
 "Backspace to clear."
@@ -1433,8 +1434,8 @@ msgstr "Клавіятурныя скароты"
 #: ../panels/keyboard/keyboard-shortcuts.c:555
 #: ../panels/keyboard/keyboard-shortcuts.c:563
 #: ../panels/keyboard/keyboard-shortcuts.c:882
-#: ../panels/keyboard/keyboard-shortcuts.c:1383
-#: ../panels/keyboard/keyboard-shortcuts.c:1387
+#: ../panels/keyboard/keyboard-shortcuts.c:1373
+#: ../panels/keyboard/keyboard-shortcuts.c:1377
 msgid "Custom Shortcuts"
 msgstr "Уласныя клавіятурныя скароты"
 
@@ -1444,14 +1445,14 @@ msgstr "<Невядомае дзеянне>"
 
 #. translators:
 #. * The device has been disabled
-#: ../panels/keyboard/keyboard-shortcuts.c:1064
+#: ../panels/keyboard/keyboard-shortcuts.c:1054
 #: ../panels/sound/gvc-mixer-control.c:1087
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Disabled"
 msgstr "Выключана"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1205
+#: ../panels/keyboard/keyboard-shortcuts.c:1195
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1462,7 +1463,7 @@ msgstr ""
 "немагчымым увод адпаведнага знака.\n"
 "Паспрабуйце гэтую клавішу разам з Control, Alt ці Shift."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1237
+#: ../panels/keyboard/keyboard-shortcuts.c:1227
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1471,7 +1472,7 @@ msgstr ""
 "Клавіятурны скарот \"%s\" ужо заняты для\n"
 " \"%s\""
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1242
+#: ../panels/keyboard/keyboard-shortcuts.c:1232
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
@@ -1479,15 +1480,16 @@ msgstr ""
 "Клавіятурны скарот \"%2$s\" будзе выключаны, калі вы перапрызначыце гэты "
 "скарот для \"%1$s\"."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1248
+#: ../panels/keyboard/keyboard-shortcuts.c:1238
 msgid "_Reassign"
 msgstr "_Перапрызначыць"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1676
+#: ../panels/keyboard/keyboard-shortcuts.c:1666
+#: ../panels/wacom/cc-wacom-page.c:472
 msgid "Action"
 msgstr "Дзеянне"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1699
+#: ../panels/keyboard/keyboard-shortcuts.c:1688
 msgid "Shortcut"
 msgstr "Клавіятурны скарот"
 
@@ -1538,7 +1540,9 @@ msgid "_Sensitivity:"
 msgstr "Ад_чувальнасць:"
 
 #. low sensitivity
+#. TRANSLATORS: secondary battery
 #: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/power/cc-power-panel.c:570
 msgid "Low"
 msgstr "Нізкая"
 
@@ -2116,11 +2120,11 @@ msgstr "Выдаліць конт"
 msgid "Select an account"
 msgstr "Выберыце конт"
 
-#: ../panels/power/cc-power-panel.c:160
+#: ../panels/power/cc-power-panel.c:162
 msgid "Unknown time"
 msgstr "Невядомы час"
 
-#: ../panels/power/cc-power-panel.c:166
+#: ../panels/power/cc-power-panel.c:168
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -2128,7 +2132,7 @@ msgstr[0] "%i хвіліна"
 msgstr[1] "%i хвіліны"
 msgstr[2] "%i хвілін"
 
-#: ../panels/power/cc-power-panel.c:178
+#: ../panels/power/cc-power-panel.c:180
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -2138,59 +2142,162 @@ msgstr[2] "%i гадзін"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:186
+#: ../panels/power/cc-power-panel.c:188
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:187
+#: ../panels/power/cc-power-panel.c:189
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "гадзіна"
 msgstr[1] "гадзіны"
 msgstr[2] "гадзін"
 
-#: ../panels/power/cc-power-panel.c:188
+#: ../panels/power/cc-power-panel.c:190
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "хвіліна"
 msgstr[1] "хвіліны"
 msgstr[2] "хвілін"
 
-#: ../panels/power/cc-power-panel.c:265
-msgid "Battery charging"
-msgstr "Зарадка батарэі"
-
-#: ../panels/power/cc-power-panel.c:268
-msgid "Battery discharging"
-msgstr "Разрадка батарэі"
-
-#: ../panels/power/cc-power-panel.c:279
-msgid "UPS charging"
-msgstr "Зарадка UPS"
-
-#: ../panels/power/cc-power-panel.c:282
-msgid "UPS discharging"
-msgstr "Разрадка UPS"
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#: ../panels/power/cc-power-panel.c:233
+#, c-format
+msgid "Charging - %s until fully charged"
+msgstr "Зарадка - %s да поўнага зараду"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:300
+#: ../panels/power/cc-power-panel.c:241
 #, c-format
-msgid "%s until charged (%.0lf%%)"
-msgstr "%s да поўнай зарадкі (%.0lf%%)"
+msgid "Caution low battery, %s remaining"
+msgstr "Увага: нізкі зарад батарэі, засталося %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:306
+#: ../panels/power/cc-power-panel.c:249
 #, c-format
-msgid "%s until empty (%.0lf%%)"
-msgstr "%s да поўнай разрадкі (%.0lf%%)"
+msgid "Using battery power - %s remaining"
+msgstr "Сілкаванне з батарэі - засталося %s"
 
-#. TRANSLATORS: %1 is a percentage value. Note: this string is only
-#. * used when we don't have a time value
-#: ../panels/power/cc-power-panel.c:314
+#. TRANSLATORS: primary battery
+#. TRANSLATORS: secondary battery
+#: ../panels/power/cc-power-panel.c:266 ../panels/power/cc-power-panel.c:558
+msgid "Charging"
+msgstr "Зарадка"
+
+#. TRANSLATORS: primary battery
+#: ../panels/power/cc-power-panel.c:271
+msgid "Using battery power"
+msgstr "Сілкуючыся з батарэі"
+
+#. TRANSLATORS: primary battery
+#: ../panels/power/cc-power-panel.c:275 ../panels/power/cc-power-panel.c:580
+msgid "Charging - fully charged"
+msgstr "Зарадка - батарэя поўнасцю зараджана"
+
+#. TRANSLATORS: primary battery
+#: ../panels/power/cc-power-panel.c:279 ../panels/power/cc-power-panel.c:584
+msgid "Empty"
+msgstr "Няма зараду"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#: ../panels/power/cc-power-panel.c:347
 #, c-format
-msgid "%.0lf%% charged"
-msgstr "%.0lf%% зараджана"
+msgid "Caution low UPS, %s remaining"
+msgstr "Увага: нізкі зарад UPS, засталося %s"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#: ../panels/power/cc-power-panel.c:353
+#, c-format
+msgid "Using UPS power - %s remaining"
+msgstr "Сілкаванне з UPS - засталося %s"
+
+#. TRANSLATORS: UPS battery
+#: ../panels/power/cc-power-panel.c:371
+msgid "Caution low UPS"
+msgstr "Увага: нізкі зарад UPS"
+
+#. TRANSLATORS: UPS battery
+#: ../panels/power/cc-power-panel.c:376
+msgid "Using UPS power"
+msgstr "Сілкаванне з UPS"
+
+#. TRANSLATORS: secondary battery is normally in the media bay
+#: ../panels/power/cc-power-panel.c:428
+msgid "Your secondary battery is fully charged"
+msgstr "Дадатковая батарэя поўнасцю зараджана"
+
+#. TRANSLATORS: secondary battery is normally in the media bay
+#: ../panels/power/cc-power-panel.c:432
+msgid "Your secondary battery is empty"
+msgstr "Дадатковая батарэя поўнасцю разраджана"
+
+#. TRANSLATORS: secondary battery
+#: ../panels/power/cc-power-panel.c:515
+msgid "Wireless mouse"
+msgstr "Бесправадная мыш"
+
+#. TRANSLATORS: secondary battery
+#: ../panels/power/cc-power-panel.c:519
+msgid "Wireless keyboard"
+msgstr "Бесправадная клавіятура"
+
+#. TRANSLATORS: secondary battery
+#: ../panels/power/cc-power-panel.c:523
+msgid "Uninterruptible power supply"
+msgstr "Крыніца бесперабойнага сілкавання"
+
+#. TRANSLATORS: secondary battery
+#: ../panels/power/cc-power-panel.c:527
+msgid "Personal digital assistant"
+msgstr "Асабісты лічбавы памочнік"
+
+#. TRANSLATORS: secondary battery
+#: ../panels/power/cc-power-panel.c:531
+msgid "Cellphone"
+msgstr "Мабільны тэлефон"
+
+#. TRANSLATORS: secondary battery
+#: ../panels/power/cc-power-panel.c:535
+msgid "Media player"
+msgstr "Медыяплэер"
+
+#. TRANSLATORS: secondary battery
+#: ../panels/power/cc-power-panel.c:539
+msgid "Tablet"
+msgstr "Планшэт"
+
+#. TRANSLATORS: secondary battery
+#: ../panels/power/cc-power-panel.c:543
+msgid "Computer"
+msgstr "Камп'ютар"
+
+#. TRANSLATORS: secondary battery, misc
+#: ../panels/power/cc-power-panel.c:547
+msgid "Battery"
+msgstr "Батарэя"
+
+#. TRANSLATORS: secondary battery
+#: ../panels/power/cc-power-panel.c:565
+msgid "Caution"
+msgstr "Увага"
+
+#. TRANSLATORS: secondary battery
+#: ../panels/power/cc-power-panel.c:575
+msgid "Good"
+msgstr "Добра"
+
+#: ../panels/power/cc-power-panel.c:1081
+msgid "Tip:"
+msgstr "Парада:"
+
+#: ../panels/power/cc-power-panel.c:1082
+msgid "Screen Settings"
+msgstr "Настройкі экрана"
+
+#: ../panels/power/cc-power-panel.c:1083
+msgid "affect how much power is used"
+msgstr "уплывае на ўжытак энергіі"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -2242,12 +2349,12 @@ msgid "When plugged in"
 msgstr "Сілкуючыся ад блока сілкавання"
 
 #: ../panels/power/power.ui.h:10
-msgid "Suspend when inactive for:"
-msgstr "Супыніць пасля бяздзейнасці цягам:"
+msgid "Suspend when inactive for"
+msgstr "Супыніць пасля бяздзейнасці цягам"
 
 #: ../panels/power/power.ui.h:11
-msgid "When power is _critically low:"
-msgstr "Калі _энергія блізкая да вычарпання:"
+msgid "When power is _critically low"
+msgstr "Калі _энергія крытычна блізкая да вычарпання"
 
 #. Translators: The printer is low on toner
 #: ../panels/printers/cc-printers-panel.c:542
@@ -2439,18 +2546,18 @@ msgid "Time"
 msgstr "Час"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2047
+#: ../panels/printers/cc-printers-panel.c:2052
 msgid "Failed to add new printer."
 msgstr "Не ўдалося дадаць новы прынтар."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2251
-#: ../panels/printers/cc-printers-panel.c:2265
+#: ../panels/printers/cc-printers-panel.c:2256
+#: ../panels/printers/cc-printers-panel.c:2270
 msgid "Test page"
 msgstr "Тэставая старонка"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2514
+#: ../panels/printers/cc-printers-panel.c:2519
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Не ўдалося загрузіць інтэрфейс: %s"
@@ -2485,21 +2592,21 @@ msgstr "_Знайсці па адрасе"
 msgid "_Add"
 msgstr "_Дадаць"
 
-#: ../panels/printers/pp-new-printer-dialog.c:665
+#: ../panels/printers/pp-new-printer-dialog.c:654
 msgid "Getting devices..."
 msgstr "Атрыманне спіса прыстасаванняў..."
 
 #. Translators: No localy connected printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1277
+#: ../panels/printers/pp-new-printer-dialog.c:1254
 msgid "No local printers found"
 msgstr "Мясцовыя прынтары не знойдзены"
 
 #. Translators: No network printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1290
+#: ../panels/printers/pp-new-printer-dialog.c:1267
 msgid "No network printers found"
 msgstr "Сеткавыя прынтары не знойдзены"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1382
+#: ../panels/printers/pp-new-printer-dialog.c:1359
 msgid ""
 "FirewallD is not running. Network printer detection needs services mdns, "
 "ipp, ipp-client and samba-client enabled on firewall."
@@ -2509,42 +2616,42 @@ msgstr ""
 "client."
 
 #. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:1410
-#: ../panels/printers/pp-new-printer-dialog.c:1415
+#: ../panels/printers/pp-new-printer-dialog.c:1387
+#: ../panels/printers/pp-new-printer-dialog.c:1392
 msgid "Devices"
 msgstr "Прыстасаванні"
 
 #. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:1440
+#: ../panels/printers/pp-new-printer-dialog.c:1417
 msgctxt "printer type"
 msgid "Local"
 msgstr "Мясцовы"
 
 #. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:1442
+#: ../panels/printers/pp-new-printer-dialog.c:1419
 msgctxt "printer type"
 msgid "Network"
 msgstr "Сеткавы"
 
 #. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:1483
+#: ../panels/printers/pp-new-printer-dialog.c:1460
 msgid "Device types"
 msgstr "Тыпы прыстасаванняў"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:1782
+#: ../panels/printers/pp-new-printer-dialog.c:1759
 msgid "Automatic configuration"
 msgstr "Аўтаматычная настройка"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1865
+#: ../panels/printers/pp-new-printer-dialog.c:1842
 msgid "Opening firewall for mDNS connections"
 msgstr "Разблакіраванне злучэнняў mDNS на брандмаўэры"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1874
+#: ../panels/printers/pp-new-printer-dialog.c:1851
 msgid "Opening firewall for Samba connections"
 msgstr "Разблакіраванне злучэнняў Samba на брандмаўэры"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1883
+#: ../panels/printers/pp-new-printer-dialog.c:1860
 msgid "Opening firewall for IPP connections"
 msgstr "Разблакіраванне злучэнняў IPP на брандмаўэры"
 
@@ -4403,67 +4510,75 @@ msgstr "Верхняя кнопка"
 msgid "Stylus"
 msgstr "Стыло"
 
-#: ../panels/wacom/gsd-wacom-device.c:804
+#: ../panels/wacom/button-mapping.ui.h:1
+msgid "Map Buttons"
+msgstr "Прызначыць кнопкі"
+
+#: ../panels/wacom/button-mapping.ui.h:2
+msgid "Map buttons to functions"
+msgstr "Прызначыць функцыі кнопкам"
+
+#: ../panels/wacom/gsd-wacom-device.c:876
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:811
-#, fuzzy, c-format
+#: ../panels/wacom/gsd-wacom-device.c:883
+#, c-format
 msgid "Right Ring Mode #%d"
-msgstr "Правы безыменны палец"
+msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:839
+#: ../panels/wacom/gsd-wacom-device.c:911
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:846
+#: ../panels/wacom/gsd-wacom-device.c:918
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:861
+#: ../panels/wacom/gsd-wacom-device.c:933
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:863
+#: ../panels/wacom/gsd-wacom-device.c:935
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:866
+#: ../panels/wacom/gsd-wacom-device.c:938
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:868
+#: ../panels/wacom/gsd-wacom-device.c:940
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:873
+#: ../panels/wacom/gsd-wacom-device.c:945
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Пераключальнік рэжыму #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:945
+#: ../panels/wacom/gsd-wacom-device.c:1017
 #, c-format
 msgid "Left Button #%d"
 msgstr "Левая кнопка #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:948
+#: ../panels/wacom/gsd-wacom-device.c:1020
 #, c-format
 msgid "Right Button #%d"
 msgstr "Правая кнопка #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:951
+#: ../panels/wacom/gsd-wacom-device.c:1023
 #, c-format
 msgid "Top Button #%d"
 msgstr "Верхняя кнопка #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:954
+#: ../panels/wacom/gsd-wacom-device.c:1026
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Ніжняя кнопка #%d"
@@ -4491,6 +4606,7 @@ msgid "%d of %d"
 msgstr "%d з %d"
 
 #: ../panels/wacom/cc-wacom-stylus-page.c:374
+#: ../panels/wacom/cc-wacom-page.c:451
 msgid "Button"
 msgstr "Кнопка"
 
