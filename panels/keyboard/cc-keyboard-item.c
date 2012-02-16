@@ -119,6 +119,13 @@ settings_set_binding (GSettings  *settings,
 
       str_array = g_variant_dup_strv (variant, NULL);
 
+      /* create a space for the new binding if empty */
+      if (*str_array == NULL)
+        {
+          g_free (str_array);
+          str_array = g_new0 (char *, 2);
+        }
+
       /* replace the first binding */
       g_free (*str_array);
       *str_array = g_strdup (value);
