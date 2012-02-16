@@ -66,6 +66,14 @@ get_rr_outputs (void)
 	return gnome_rr_config_get_outputs (rr_config);
 }
 
+static void
+set_combobox_sensitive (CcWacomMappingPanel *self,
+			gboolean             sensitive)
+{
+	gtk_widget_set_sensitive (GTK_WIDGET(self->priv->combobox), sensitive);
+	gtk_widget_set_sensitive (GTK_WIDGET(self->priv->label), sensitive);
+}
+
 /* Update the display of available monitors based on the latest
  * information from RandR. At the moment the chooser is just a
  * a combobox crudely listing available outputs. The UI mockup
@@ -85,7 +93,7 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 	gtk_combo_box_set_model (GTK_COMBO_BOX(self->priv->combobox), GTK_TREE_MODEL(store));
 
 	if (self->priv->device == NULL) {
-		gtk_widget_set_sensitive (GTK_WIDGET(self->priv->combobox), FALSE);
+		set_combobox_sensitive (self, FALSE);
 		g_object_unref (store);
 		return;
 	}
@@ -124,6 +132,8 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 			g_free (text);
 		}
 	}
+
+	set_combobox_sensitive (self, TRUE);
 
 	g_object_unref (store);
 }
@@ -187,7 +197,7 @@ checkbutton_toggled_cb (GtkWidget *widget,
 {
 	CcWacomMappingPanel *self = data;
 	gboolean active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-	gtk_widget_set_sensitive (GTK_WIDGET(self->priv->combobox), !active);
+	set_combobox_sensitive (self, !active);
 	update_mapping (self);
 }
 
