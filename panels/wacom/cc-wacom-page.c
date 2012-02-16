@@ -27,6 +27,7 @@
 
 #include "cc-wacom-page.h"
 #include "cc-wacom-nav-button.h"
+#include "cc-wacom-mapping-panel.h"
 #include "cc-wacom-stylus-page.h"
 #include "gsd-enums.h"
 #include "gui_gtk.h"
@@ -63,8 +64,13 @@ struct _CcWacomPagePrivate
 	GtkWidget      *notebook;
 	CalibArea      *area;
 	GSettings      *wacom_settings;
+
+	/* Button mapping */
 	GtkBuilder     *mapping_builder;
-	/* The UI doesn't support cursor/pad at the moment */
+
+	/* Display mapping */
+	GtkWidget      *mapping;
+	GtkWidget      *dialog;
 };
 
 /* Button combo box storage columns */
@@ -550,6 +556,45 @@ map_buttons_button_clicked_cb (GtkButton   *button,
 }
 
 static void
+display_mapping_dialog_closed (GtkDialog   *dialog,
+			       int          response_id,
+			       CcWacomPage *page)
+{
+	CcWacomPagePrivate *priv;
+
+	priv = page->priv;
+	gtk_widget_destroy (priv->dialog);
+	priv->dialog = NULL;
+	priv->mapping = NULL;
+}
+
+static void
+display_mapping_button_clicked_cb (GtkButton   *button,
+				   CcWacomPage *page)
+{
+	CcWacomPagePrivate *priv;
+
+	priv = page->priv;
+
+	g_assert (priv->mapping == NULL);
+
+	priv->dialog = gtk_dialog_new_with_buttons (_("Display Mapping"),
+						    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (page))),
+						    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+						    GTK_STOCK_CLOSE,
+						    GTK_RESPONSE_ACCEPT,
+						    NULL);
+	priv->mapping = cc_wacom_mapping_panel_new ();
+	cc_wacom_mapping_panel_set_device (CC_WACOM_MAPPING_PANEL (priv->mapping),
+					   priv->stylus);
+	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (priv->dialog))),
+			   priv->mapping);
+	g_signal_connect (G_OBJECT (priv->dialog), "response",
+			  G_CALLBACK (display_mapping_dialog_closed), page);
+	gtk_widget_show_all (priv->dialog);
+}
+
+static void
 tabletmode_changed_cb (GtkComboBox *combo, gpointer user_data)
 {
 	CcWacomPagePrivate	*priv	= CC_WACOM_PAGE(user_data)->priv;
@@ -736,6 +781,9 @@ cc_wacom_page_init (CcWacomPage *self)
 
 	g_signal_connect (G_OBJECT (WID ("display-link")), "activate-link",
 			  G_CALLBACK (display_clicked_cb), self);
+
+	g_signal_connect (G_OBJECT (WID ("display-mapping-button")), "clicked",
+			  G_CALLBACK (display_mapping_button_clicked_cb), self);
 
 	priv->nav = cc_wacom_nav_button_new ();
 	gtk_grid_attach (GTK_GRID (box), priv->nav, 0, 0, 1, 1);
