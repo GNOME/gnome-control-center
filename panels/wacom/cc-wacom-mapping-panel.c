@@ -51,6 +51,8 @@ enum {
 	MONITOR_NUM_COLUMNS
 };
 
+static void combobox_changed_cb (GtkWidget *widget, gpointer data);
+
 static GnomeRROutputInfo**
 get_rr_outputs (void)
 {
@@ -89,14 +91,16 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 	}
 
 	monitor = gsd_wacom_device_get_display_monitor (self->priv->device);
+	/* FIXME: does this break screen tablets? What's the default
+	 * for unconfigured tablets? */
+	if (monitor < 0)
+		monitor = 0;
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(self->priv->checkbutton), monitor == -1);
 	if (monitor >= 0)
 		gdk_screen_get_monitor_geometry (gdk_screen_get_default (), monitor, &geom);
 
-	for (outputs = get_rr_outputs (); *outputs != NULL; outputs++)
-	{
-		if (gnome_rr_output_info_is_active (*outputs))
-		{
+	for (outputs = get_rr_outputs (); *outputs != NULL; outputs++) {
+		if (gnome_rr_output_info_is_active (*outputs)) {
 			GtkTreeIter iter;
 			gchar *name, *disp_name, *text;
 			int x, y, w, h;
@@ -111,8 +115,11 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 			gtk_list_store_append (store, &iter);
 			gtk_list_store_set (store, &iter, MONITOR_NAME_COLUMN, text, MONITOR_NUM_COLUMN, mon_at_point, -1);
 
-			if (x == geom.x && y == geom.y && w == geom.width && h == geom.height)
+			if (x == geom.x && y == geom.y && w == geom.width && h == geom.height) {
+				g_signal_handlers_block_by_func (G_OBJECT (self->priv->combobox), combobox_changed_cb, self);
 				gtk_combo_box_set_active_iter (GTK_COMBO_BOX(self->priv->combobox), &iter);
+				g_signal_handlers_unblock_by_func (G_OBJECT (self->priv->combobox), combobox_changed_cb, self);
+			}
 
 			g_free (text);
 		}
@@ -124,13 +131,10 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 static void
 update_ui (CcWacomMappingPanel *self)
 {
-	if (self->priv->device == NULL)
-	{
+	if (self->priv->device == NULL) {
 		gtk_widget_set_sensitive (GTK_WIDGET(self->priv->checkbutton), FALSE);
 		gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON(self->priv->checkbutton), TRUE);
-	}
-	else
-	{
+	} else {
 		gboolean is_screen_tablet;
 
 		is_screen_tablet = gsd_wacom_device_is_screen_tablet (self->priv->device);
@@ -146,15 +150,13 @@ update_mapping (CcWacomMappingPanel *self)
 {
 	int monitor = -1;
 
-	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->priv->checkbutton)))
-	{
+	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->priv->checkbutton))) {
 		GtkTreeIter iter;
 		GtkTreeModel *model;
 		char *name;
 
 		model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->priv->combobox));
-		if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (self->priv->combobox), &iter))
-		{
+		if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (self->priv->combobox), &iter)) {
 			g_warning ("Map to desktop unchecked, but no screen selected.");
 			return;
 		}
@@ -162,7 +164,13 @@ update_mapping (CcWacomMappingPanel *self)
 		gtk_tree_model_get (model, &iter, MONITOR_NAME_COLUMN, &name, MONITOR_NUM_COLUMN, &monitor, -1);
 	}
 
-	gsd_wacom_device_set_display (self->priv->device, monitor);
+	if (monitor != -1) {
+		gsd_wacom_device_set_display (self->priv->device, monitor);
+	} else {
+		/* FIXME: does this break screen tablets that aren't
+		 * on the first monitor */
+		gsd_wacom_device_set_display (self->priv->device, 0);
+	}
 }
 
 void
@@ -170,7 +178,7 @@ cc_wacom_mapping_panel_set_device (CcWacomMappingPanel *self,
                                    GsdWacomDevice *device)
 {
 	self->priv->device = device;
-	update_ui(self);
+	update_ui (self);
 }
 
 static void
