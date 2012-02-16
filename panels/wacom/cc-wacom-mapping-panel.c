@@ -82,9 +82,9 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 	store = gtk_list_store_new (MONITOR_NUM_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
 	gtk_combo_box_set_model (GTK_COMBO_BOX(self->priv->combobox), GTK_TREE_MODEL(store));
 
-	if (self->priv->device == NULL)
-	{
+	if (self->priv->device == NULL) {
 		gtk_widget_set_sensitive (GTK_WIDGET(self->priv->combobox), FALSE);
+		g_object_unref (store);
 		return;
 	}
 
@@ -117,6 +117,8 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 			g_free (text);
 		}
 	}
+
+	g_object_unref (store);
 }
 
 static void
