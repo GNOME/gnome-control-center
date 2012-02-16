@@ -848,6 +848,10 @@ static void
 remove_display_link (CcWacomPagePrivate *priv)
 {
 	gtk_widget_destroy (WID ("display-link"));
+
+        gtk_container_child_set (CWID ("main-grid"),
+                                 WID ("main-controls-grid"),
+                                 "top_attach", 2, NULL);
 }
 
 static void
@@ -880,11 +884,9 @@ update_tablet_ui (CcWacomPage *page,
 
 		gtk_container_child_set (CWID ("main-grid"),
 					 WID ("tablet-buttons-box"),
-					 "left_attach", 1,
 					 "top_attach", 1, NULL);
 		gtk_container_child_set (CWID ("main-grid"),
 					 WID ("display-link"),
-					 "left_attach", 1,
 					 "top_attach", 2, NULL);
 		break;
 	default:
