@@ -52,6 +52,7 @@ enum {
 };
 
 static void combobox_changed_cb (GtkWidget *widget, gpointer data);
+static void checkbutton_toggled_cb (GtkWidget *widget, gpointer  data);
 
 static GnomeRROutputInfo**
 get_rr_outputs (void)
@@ -88,6 +89,7 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 	GnomeRROutputInfo **outputs;
 	GdkRectangle geom;
 	gint monitor;
+	gboolean single_mon;
 
 	store = gtk_list_store_new (MONITOR_NUM_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
 	gtk_combo_box_set_model (GTK_COMBO_BOX(self->priv->combobox), GTK_TREE_MODEL(store));
@@ -99,13 +101,17 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 	}
 
 	monitor = gsd_wacom_device_get_display_monitor (self->priv->device);
+	single_mon = (monitor != -1);
+
+	g_signal_handlers_block_by_func (G_OBJECT (self->priv->checkbutton), checkbutton_toggled_cb, self);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(self->priv->checkbutton), single_mon);
+	g_signal_handlers_unblock_by_func (G_OBJECT (self->priv->checkbutton), checkbutton_toggled_cb, self);
+
 	/* FIXME: does this break screen tablets? What's the default
 	 * for unconfigured tablets? */
 	if (monitor < 0)
 		monitor = 0;
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(self->priv->checkbutton), monitor == -1);
-	if (monitor >= 0)
-		gdk_screen_get_monitor_geometry (gdk_screen_get_default (), monitor, &geom);
+	gdk_screen_get_monitor_geometry (gdk_screen_get_default (), monitor, &geom);
 
 	for (outputs = get_rr_outputs (); *outputs != NULL; outputs++) {
 		if (gnome_rr_output_info_is_active (*outputs)) {
@@ -133,7 +139,7 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 		}
 	}
 
-	set_combobox_sensitive (self, TRUE);
+	set_combobox_sensitive (self, single_mon);
 
 	g_object_unref (store);
 }
@@ -160,14 +166,14 @@ update_mapping (CcWacomMappingPanel *self)
 {
 	int monitor = -1;
 
-	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->priv->checkbutton))) {
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->priv->checkbutton))) {
 		GtkTreeIter iter;
 		GtkTreeModel *model;
 		char *name;
 
 		model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->priv->combobox));
 		if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (self->priv->combobox), &iter)) {
-			g_warning ("Map to desktop unchecked, but no screen selected.");
+			g_warning ("Map to single monitor checked, but no screen selected.");
 			return;
 		}
 
@@ -197,7 +203,7 @@ checkbutton_toggled_cb (GtkWidget *widget,
 {
 	CcWacomMappingPanel *self = data;
 	gboolean active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-	set_combobox_sensitive (self, !active);
+	set_combobox_sensitive (self, active);
 	update_mapping (self);
 }
 
@@ -238,7 +244,8 @@ cc_wacom_mapping_panel_init (CcWacomMappingPanel *self)
 				FALSE, FALSE, 0);
 
 	/* Whole-desktop checkbox */
-	priv->checkbutton = gtk_check_button_new_with_label ("Map to entire desktop");
+	priv->checkbutton = gtk_check_button_new_with_label ("Map to single monitor");
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->checkbutton), FALSE);
 	g_signal_connect (G_OBJECT (priv->checkbutton), "toggled",
                       G_CALLBACK (checkbutton_toggled_cb), self);
 
