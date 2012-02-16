@@ -844,6 +844,7 @@ update_tablet_ui (CcWacomPage *page,
 
 		gtk_widget_destroy (WID ("combo-tabletmode"));
 		gtk_widget_destroy (WID ("label-trackingmode"));
+		gtk_widget_destroy (WID ("display-mapping-button"));
 
 		gtk_widget_show (WID ("button-calibrate"));
 		gtk_widget_show (WID ("display-link"));
