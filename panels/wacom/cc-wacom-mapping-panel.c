@@ -51,8 +51,8 @@ enum {
 	MONITOR_NUM_COLUMNS
 };
 
-static void combobox_changed_cb (GtkWidget *widget, gpointer data);
-static void checkbutton_toggled_cb (GtkWidget *widget, gpointer  data);
+static void combobox_changed_cb (GtkWidget *widget, CcWacomMappingPanel *self);
+static void checkbutton_toggled_cb (GtkWidget *widget, CcWacomMappingPanel *self);
 
 static GnomeRROutputInfo**
 get_rr_outputs (void)
@@ -198,20 +198,20 @@ cc_wacom_mapping_panel_set_device (CcWacomMappingPanel *self,
 }
 
 static void
-checkbutton_toggled_cb (GtkWidget *widget,
-                        gpointer  data)
+checkbutton_toggled_cb (GtkWidget           *widget,
+			CcWacomMappingPanel *self)
 {
-	CcWacomMappingPanel *self = data;
-	gboolean active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+	gboolean active;
+
+	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 	set_combobox_sensitive (self, active);
 	update_mapping (self);
 }
 
 static void
-combobox_changed_cb (GtkWidget *widget,
-                     gpointer  data)
+combobox_changed_cb (GtkWidget           *widget,
+                     CcWacomMappingPanel *self)
 {
-	CcWacomMappingPanel *self = data;
 	update_mapping (self);
 }
 
