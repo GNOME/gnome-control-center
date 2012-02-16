@@ -546,7 +546,6 @@ map_buttons_button_clicked_cb (GtkButton   *button,
 	g_signal_connect (G_OBJECT (dialog), "response",
 			  G_CALLBACK (button_mapping_dialog_closed), page);
 
-
 	gtk_widget_show (dialog);
 }
 
