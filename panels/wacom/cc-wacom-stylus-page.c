@@ -396,27 +396,27 @@ update_stylus_ui (CcWacomStylusPage *page,
 	case LAYOUT_INKING:
 		remove_buttons (page->priv);
 		remove_eraser (page->priv);
-		gtk_container_child_set (CWID ("stylus-grid"),
+		gtk_container_child_set (CWID ("stylus-controls-grid"),
 					 WID ("label-tip-feel"),
-					 "top_attach", 1, NULL);
-		gtk_container_child_set (CWID ("stylus-grid"),
+					 "top_attach", 0, NULL);
+		gtk_container_child_set (CWID ("stylus-controls-grid"),
 					 WID ("box-tip-feel"),
-					 "top_attach", 1, NULL);
+					 "top_attach", 0, NULL);
 		break;
 	case LAYOUT_AIRBRUSH:
 		remove_button (page->priv);
-		gtk_container_child_set (CWID ("stylus-grid"),
+		gtk_container_child_set (CWID ("stylus-controls-grid"),
 					 WID ("label-lower-button"),
-					 "top_attach", 2, NULL);
-		gtk_container_child_set (CWID ("stylus-grid"),
+					 "top_attach", 1, NULL);
+		gtk_container_child_set (CWID ("stylus-controls-grid"),
 					 WID ("combo-bottombutton"),
-					 "top_attach", 2, NULL);
-		gtk_container_child_set (CWID ("stylus-grid"),
+					 "top_attach", 1, NULL);
+		gtk_container_child_set (CWID ("stylus-controls-grid"),
 					 WID ("label-tip-feel"),
-					 "top_attach", 3, NULL);
-		gtk_container_child_set (CWID ("stylus-grid"),
+					 "top_attach", 2, NULL);
+		gtk_container_child_set (CWID ("stylus-controls-grid"),
 					 WID ("box-tip-feel"),
-					 "top_attach", 3, NULL);
+					 "top_attach", 2, NULL);
 	case LAYOUT_OTHER:
 		/* We already warn about it in cc_wacom_stylus_page_new () */
 		break;
