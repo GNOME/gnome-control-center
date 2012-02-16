@@ -45,6 +45,11 @@ struct _CcWacomMappingPanelPrivate
 	GtkWidget      *checkbutton;
 };
 
+enum {
+	MONITOR_NAME_COLUMN,
+	MONITOR_NUM_COLUMN,
+	MONITOR_NUM_COLUMNS
+};
 
 static GnomeRROutputInfo**
 get_rr_outputs ()
@@ -74,7 +79,7 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 	GdkRectangle geom;
 	gint monitor;
 
-	store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
+	store = gtk_list_store_new (MONITOR_NUM_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
 	gtk_combo_box_set_model (GTK_COMBO_BOX(self->priv->combobox), GTK_TREE_MODEL(store));
 
 	if (self->priv->device == NULL)
@@ -104,7 +109,7 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 			gnome_rr_output_info_get_geometry (*outputs, &x, &y, &w, &h);
 			mon_at_point = gdk_screen_get_monitor_at_point (gdk_screen_get_default (), x, y);
 			gtk_list_store_append (store, &iter);
-			gtk_list_store_set (store, &iter, 0, text, 1, mon_at_point, -1);
+			gtk_list_store_set (store, &iter, MONITOR_NAME_COLUMN, text, MONITOR_NUM_COLUMN, mon_at_point, -1);
 
 			if (x == geom.x && y == geom.y && w == geom.width && h == geom.height)
 				gtk_combo_box_set_active_iter (GTK_COMBO_BOX(self->priv->combobox), &iter);
@@ -152,7 +157,7 @@ update_mapping (CcWacomMappingPanel *self)
 			return;
 		}
 
-		gtk_tree_model_get (model, &iter, 0, &name, 1, &monitor, -1);
+		gtk_tree_model_get (model, &iter, MONITOR_NAME_COLUMN, &name, MONITOR_NUM_COLUMN, &monitor, -1);
 	}
 
 	gsd_wacom_device_set_display (self->priv->device, monitor);
