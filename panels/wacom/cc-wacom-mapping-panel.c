@@ -242,10 +242,10 @@ cc_wacom_mapping_panel_init (CcWacomMappingPanel *self)
 	g_signal_connect (G_OBJECT (priv->checkbutton), "toggled",
                       G_CALLBACK (checkbutton_toggled_cb), self);
 
-	gtk_box_pack_start (GTK_BOX(vbox), GTK_WIDGET(hbox),
-				FALSE, FALSE, 8);
 	gtk_box_pack_start (GTK_BOX(vbox), GTK_WIDGET(priv->checkbutton),
 				FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(vbox), GTK_WIDGET(hbox),
+				FALSE, FALSE, 8);
 
 	/* Update display */
 	cc_wacom_mapping_panel_set_device (self, NULL);
