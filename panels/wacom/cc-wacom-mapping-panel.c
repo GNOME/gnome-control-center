@@ -52,7 +52,7 @@ enum {
 };
 
 static GnomeRROutputInfo**
-get_rr_outputs ()
+get_rr_outputs (void)
 {
 	GError *error = NULL;
 	GnomeRRScreen *rr_screen;
@@ -233,7 +233,7 @@ cc_wacom_mapping_panel_init (CcWacomMappingPanel *self)
 }
 
 GtkWidget *
-cc_wacom_mapping_panel_new ()
+cc_wacom_mapping_panel_new (void)
 {
 	CcWacomMappingPanel *panel;
 
