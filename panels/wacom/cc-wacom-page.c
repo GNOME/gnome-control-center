@@ -767,6 +767,8 @@ cc_wacom_page_init (CcWacomPage *self)
 			  G_CALLBACK (display_mapping_button_clicked_cb), self);
 
 	priv->nav = cc_wacom_nav_button_new ();
+        gtk_widget_set_halign (priv->nav, GTK_ALIGN_END);
+        gtk_widget_set_margin_right (priv->nav, 10);
 	gtk_grid_attach (GTK_GRID (box), priv->nav, 0, 0, 1, 1);
 }
 
