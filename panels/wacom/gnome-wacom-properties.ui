@@ -164,15 +164,14 @@
               <object class="GtkGrid" id="main-grid">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="column_spacing">10</property>
+                <property name="row_spacing">10</property>
                 <child>
                   <object class="GtkLabel" id="label-tabletmodel">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="halign">start</property>
                     <property name="valign">center</property>
-                    <property name="margin_left">10</property>
-                    <property name="margin_top">16</property>
-                    <property name="margin_bottom">16</property>
                     <property name="label" translatable="yes">Wacom Tablet</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
@@ -190,7 +189,8 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="pixbuf">wacom-tablet.svg</property>
-                    <property name="margin-right">16</property>
+                    <property name="valign">start</property>
+                    <property name="halign">center</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
@@ -204,9 +204,7 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="orientation">horizontal</property>
-                    <property name="spacing">16</property>
-                    <property name="margin_top">16</property>
-                    <property name="margin_bottom">16</property>
+                    <property name="spacing">10</property>
                     <property name="hexpand">True</property>
                     <child>
                       <object class="GtkButton" id="button-calibrate">
@@ -214,9 +212,8 @@
                         <property name="use_action_appearance">False</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="halign">start</property>
-                        <property name="valign">center</property>
                         <property name="use_action_appearance">False</property>
+                        <property name="valign">center</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -232,9 +229,8 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="halign">start</property>
-                        <property name="valign">center</property>
                         <property name="use_action_appearance">False</property>
+                        <property name="valign">center</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -274,6 +270,7 @@
                    <property name="use_action_appearance">False</property>
                    <property name="relief">none</property>
                    <property name="halign">start</property>
+                   <property name="valign">center</property>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -288,15 +285,15 @@
                     <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="margin_left">16</property>
+                    <property name="row_spacing">10</property>
+                    <property name="column_spacing">10</property>
                     <child>
                       <object class="GtkLabel" id="label-trackingmode">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">end</property>
                         <property name="valign">center</property>
-                        <property name="margin_right">10</property>
                         <property name="label" translatable="yes">Tracking Mode</property>
-                        <property name="justify">right</property>
                         <style>
                           <class name="dim-label"/>
                         </style>
@@ -312,7 +309,6 @@
                       <object class="GtkComboBox" id="combo-tabletmode">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="valign">center</property>
                         <property name="hexpand">True</property>
                         <property name="model">liststore-tabletmode</property>
                       </object>
@@ -328,8 +324,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">end</property>
-                        <property name="valign">center</property>                    
-                        <property name="margin_right">10</property>
+                        <property name="valign">center</property>
                         <property name="label" translatable="yes">Left-Handed Orientation</property>
                         <style>
                           <class name="dim-label"/>
