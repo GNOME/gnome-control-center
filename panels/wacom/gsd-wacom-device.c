@@ -494,9 +494,19 @@ find_output_by_edid (const gchar *vendor, const gchar *product, const gchar *ser
 	GnomeRROutputInfo **rr_output_info;
         GnomeRROutputInfo *retval = NULL;
 
-	/* TODO: Check the value of 'error' */
 	rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
+	if (rr_screen == NULL) {
+		g_warning ("Failed to create GnomeRRScreen: %s", error->message);
+		g_error_free (error);
+		return NULL;
+	}
 	rr_config = gnome_rr_config_new_current (rr_screen, &error);
+	if (rr_config == NULL) {
+		g_warning ("Failed to get current screen configuration: %s", error->message);
+		g_error_free (error);
+		g_object_unref (rr_screen);
+		return NULL;
+	}
 	rr_output_info = gnome_rr_config_get_outputs (rr_config);
 
 	for (; *rr_output_info != NULL; rr_output_info++) {
@@ -528,6 +538,11 @@ find_output_by_edid (const gchar *vendor, const gchar *product, const gchar *ser
 	}
 
 	g_object_unref (rr_config);
+	g_object_unref (rr_screen);
+
+	if (retval == NULL)
+		g_debug ("Did not find a matching output for EDID '%s,%s,%s'",
+			 vendor, product, serial);
 
 	return retval;
 }
@@ -565,10 +580,8 @@ find_output_by_display (GsdWacomDevice *device)
 		return NULL;
 	}
 
-	if (strlen(edid[0]) == 0 || strlen(edid[1]) == 0 || strlen(edid[2]) == 0) {
-		g_warning ("EDID not completely defined.");
+	if (strlen(edid[0]) == 0 || strlen(edid[1]) == 0 || strlen(edid[2]) == 0)
 		return NULL;
-	}
 
 	return find_output_by_edid (edid[0], edid[1], edid[2]);
 }
@@ -694,19 +707,12 @@ find_output (GsdWacomDevice *device)
 
 	rr_output_info = find_output_by_display(device);
 
-	if (rr_output_info == NULL)
-	{
-		g_warning ("No strict EDID match was found.");
-
-		if (gsd_wacom_device_is_screen_tablet (device))
-		{
+	if (rr_output_info == NULL) {
+		if (gsd_wacom_device_is_screen_tablet (device)) {
 			rr_output_info = find_output_by_heuristic (device);
-			if (rr_output_info == NULL)
-			{
+			if (rr_output_info == NULL) {
 				g_warning ("No fuzzy match based on heuristics was found.");
-			}
-			else
-			{
+			} else {
 				g_warning("Automatically mapping tablet to heuristically-found display.");
 				set_display_by_output (device, rr_output_info);
 			}
