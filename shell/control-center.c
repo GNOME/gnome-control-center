@@ -30,6 +30,10 @@
 #include <string.h>
 #include <libnotify/notify.h>
 
+#ifdef GDK_WINDOWING_X11
+#include <X11/Xlib.h>
+#endif
+
 #include "cc-shell-log.h"
 
 G_GNUC_NORETURN static gboolean
@@ -178,6 +182,10 @@ main (int argc, char **argv)
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
+
+#ifdef GDK_WINDOWING_X11
+  XInitThreads ();
+#endif
 
   gtk_init (&argc, &argv);
   cc_shell_log_init ();
