@@ -746,26 +746,22 @@ get_devices_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 }
 
 static void
-on_signal (GDBusProxy *proxy,
-           gchar      *sender_name,
-           gchar      *signal_name,
-           GVariant   *parameters,
-           gpointer    user_data)
+on_properties_changed (GDBusProxy *proxy,
+                       GVariant   *changed_properties,
+                       GStrv       invalidated_properties,
+                       gpointer    user_data)
 {
   CcPowerPanelPrivate *priv = CC_POWER_PANEL (user_data)->priv;
 
-  if (g_strcmp0 (signal_name, "Changed") == 0)
-    {
-      /* get the new state */
-      g_dbus_proxy_call (priv->proxy,
-                         "GetDevices",
-                         NULL,
-                         G_DBUS_CALL_FLAGS_NONE,
-                         -1,
-                         priv->cancellable,
-                         get_devices_cb,
-                         user_data);
-    }
+  /* get the new state */
+  g_dbus_proxy_call (priv->proxy,
+                     "GetDevices",
+                     NULL,
+                     G_DBUS_CALL_FLAGS_NONE,
+                     -1,
+                     priv->cancellable,
+                     get_devices_cb,
+                     user_data);
 }
 
 static void
@@ -784,8 +780,8 @@ got_power_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_dat
 
   /* we want to change the primary device changes */
   g_signal_connect (priv->proxy,
-                    "g-signal",
-                    G_CALLBACK (on_signal),
+                    "g-properties-changed",
+                    G_CALLBACK (on_properties_changed),
                     user_data);
 
   /* get the initial state */
