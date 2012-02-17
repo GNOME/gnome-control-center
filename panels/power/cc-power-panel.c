@@ -1076,7 +1076,7 @@ cc_power_panel_init (CcPowerPanel *self)
   widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
                                                "label_screen_settings"));
   /* TRANSLATORS: this is a link to the Screen control center panel */
-  tmp = g_strdup_printf ("<span color=\"darkgray\" size=\"small\">%s "
+  tmp = g_strdup_printf ("<span size=\"small\">%s "
                          "<a href=\"screen\">%s</a> %s</span>",
                          _("Tip:"),
                          _("Screen Settings"),
