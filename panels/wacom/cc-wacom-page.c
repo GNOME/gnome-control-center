@@ -242,14 +242,13 @@ accel_set_func (GtkTreeViewColumn *tree_column,
 	}
 
 	if (button->type == WACOM_TABLET_BUTTON_TYPE_HARDCODED) {
-		/* FIXME this should tell us that it will
-		 * switch groups */
 		g_object_set (cell,
 			      "visible", TRUE,
 			      "editable", FALSE,
 			      "accel-key", 0,
 			      "accel-mods", 0,
 			      "style", PANGO_STYLE_NORMAL,
+			      "text", _("Switch Modes"),
 			      NULL);
 		return;
 	}
@@ -267,6 +266,7 @@ accel_set_func (GtkTreeViewColumn *tree_column,
 			      "accel-key", 0,
 			      "accel-mods", 0,
 			      "style", PANGO_STYLE_NORMAL,
+			      "text", _("None"),
 			      NULL);
 		return;
 	}
