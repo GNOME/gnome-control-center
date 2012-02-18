@@ -1,5 +1,5 @@
 # gnome-control-center ja.po.
-# Copyright (C) 1998-2011 Free Software Foundation, Inc.
+# Copyright (C) 1998-2012 Free Software Foundation, Inc.
 # Yukihiro Nakai <Nakai@abricot.co.jp>, 1998
 # Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1999
 # Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2000, 2009, 2010-2011.
@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center gnome-3-2\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-01-14 23:53+0000\n"
-"PO-Revision-Date: 2012-01-15 15:30+0900\n"
+"POT-Creation-Date: 2012-01-30 10:42+0000\n"
+"PO-Revision-Date: 2012-02-07 20:24+0900\n"
 "Last-Translator: Jiro Matsuzawa <jmatsuzawa@src.gnome.org>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr "引き伸ばす"
 
 #: ../panels/background/background.ui.h:6
 msgid "Primary Color"
-msgstr ""
+msgstr "主色"
 
 #: ../panels/background/background.ui.h:7
 msgid "Remove wallpaper"
@@ -59,10 +59,8 @@ msgid "Scale"
 msgstr "サイズ調整"
 
 #: ../panels/background/background.ui.h:9
-#, fuzzy
-#| msgid "Secondary click delay"
 msgid "Secondary color"
-msgstr "副ボタンのクリックの間隔"
+msgstr "副色"
 
 #: ../panels/background/background.ui.h:10
 msgid "Span"
@@ -70,7 +68,7 @@ msgstr "スパン(複数に跨げる)"
 
 #: ../panels/background/background.ui.h:11
 msgid "Swap colors"
-msgstr ""
+msgstr "色を交換する"
 
 # FIXME
 #: ../panels/background/background.ui.h:12
@@ -110,7 +108,7 @@ msgstr "デスクトップの背景ではありません"
 
 #: ../panels/background/cc-background-panel.c:1001
 #: ../panels/user-accounts/data/photo-dialog.ui.h:2
-#: ../panels/user-accounts/um-photo-dialog.c:217
+#: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "Browse for more pictures"
 msgstr "他の画像も参照"
 
@@ -756,6 +754,16 @@ msgstr "日付と時刻"
 msgid "Date and Time preferences panel"
 msgstr "日付と時刻の設定パネル"
 
+#: ../panels/datetime/org.gnome.controlcenter.datetime.policy.in.h:1
+#, fuzzy
+#| msgid "Change your region and language settings"
+msgid "Change system time and date settings"
+msgstr "地域と言語に関する設定の変更"
+
+#: ../panels/datetime/org.gnome.controlcenter.datetime.policy.in.h:2
+msgid "To change time or date settings, you need to authenticate."
+msgstr ""
+
 #: ../panels/display/cc-display-panel.c:473
 msgctxt "display panel, rotation"
 msgid "Normal"
@@ -843,10 +851,8 @@ msgid "Note: may limit resolution options"
 msgstr "注意: 解像度の選択を制限することがあります"
 
 #: ../panels/display/display-capplet.ui.h:3
-#, fuzzy
-#| msgid "R_otation:"
 msgid "R_otation"
-msgstr "回転(_O):"
+msgstr "回転(_O)"
 
 #: ../panels/display/display-capplet.ui.h:4
 msgid "_Detect Displays"
@@ -858,10 +864,8 @@ msgid "_Mirror displays"
 msgstr "複数のディスプレイをミラーする(_M)"
 
 #: ../panels/display/display-capplet.ui.h:7
-#, fuzzy
-#| msgid "_Resolution:"
 msgid "_Resolution"
-msgstr "解像度(_R):"
+msgstr "解像度(_R)"
 
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:1
 msgid "Change resolution and position of monitors and projectors"
@@ -1048,10 +1052,8 @@ msgid "Checking for Updates"
 msgstr "更新を確認中"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
-#, fuzzy
-#| msgid "View details"
 msgid "Details"
-msgstr "詳細を表示"
+msgstr "詳細"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:2
 msgid "System Information"
@@ -1078,10 +1080,8 @@ msgid "Acti_on:"
 msgstr "アクション(_O):"
 
 #: ../panels/info/info.ui.h:2
-#, fuzzy
-#| msgid "CD _audio:"
 msgid "CD _audio"
-msgstr "CD オーディオ(_A):"
+msgstr "CD オーディオ(_A)"
 
 #: ../panels/info/info.ui.h:3
 msgid "Calculating..."
@@ -1137,20 +1137,16 @@ msgid "_Calendar"
 msgstr "カレンダー(_C)"
 
 #: ../panels/info/info.ui.h:21
-#, fuzzy
-#| msgid "_DVD video:"
 msgid "_DVD video"
-msgstr "DVD ビデオ(_D):"
+msgstr "DVD ビデオ(_D)"
 
 #: ../panels/info/info.ui.h:22
 msgid "_Mail"
 msgstr "メール(_M)"
 
 #: ../panels/info/info.ui.h:23
-#, fuzzy
-#| msgid "_Music player:"
 msgid "_Music player"
-msgstr "音楽プレイヤー(_M):"
+msgstr "音楽プレイヤー(_M)"
 
 #: ../panels/info/info.ui.h:24
 msgid "_Never prompt or start programs on media insertion"
@@ -1166,10 +1162,8 @@ msgid "_Photos"
 msgstr "写真(_P)"
 
 #: ../panels/info/info.ui.h:27
-#, fuzzy
-#| msgid "_Software:"
 msgid "_Software"
-msgstr "ソフトウェア(_S):"
+msgstr "ソフトウェア(_S)"
 
 #: ../panels/info/info.ui.h:28
 msgid "_Type:"
@@ -1256,20 +1250,34 @@ msgid "Search"
 msgstr "検索"
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:1
-#, fuzzy
-#| msgid "Screen"
-msgid "Screenshots"
-msgstr "画面"
+msgid "Copy a screenshot of a window to clipboard"
+msgstr ""
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:2
-#, fuzzy
-#| msgid "Take a photo..."
-msgid "Take a screenshot"
-msgstr "写真を撮る..."
+msgid "Copy a screenshot of an area to clipboard"
+msgstr ""
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:3
-msgid "Take a screenshot of a window"
+msgid "Copy a screenshot to clipboard"
 msgstr ""
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:4
+msgid "Screenshots"
+msgstr "スクリーンショット"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:5
+msgid "Take a screenshot"
+msgstr "スクリーンショットを撮る"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:6
+msgid "Take a screenshot of a window"
+msgstr "ウィンドウのスクリーンショットを撮る"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:7
+#, fuzzy
+#| msgid "Take a photo..."
+msgid "Take a screenshot of an area"
+msgstr "写真を撮る..."
 
 #: ../panels/keyboard/01-system.xml.in.h:1
 msgid "Lock screen"
@@ -1290,29 +1298,23 @@ msgstr "文字サイズを縮小"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:2
 msgid "High contrast on or off"
-msgstr ""
+msgstr "ハイコントラストのオン/オフを切り替える"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:3
 msgid "Increase text size"
 msgstr "文字サイズを拡大"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:4
-#, fuzzy
-#| msgid "Toggle on-screen keyboard"
 msgid "Turn on-screen keyboard on or off"
-msgstr "オンスクリーンキーボードの切り替え"
+msgstr "オンスクリーンキーボードのオン/オフを切り替える"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:5
-#, fuzzy
-#| msgid "Turn on or off:"
 msgid "Turn screen reader on or off"
-msgstr "ON/OFF の切り替え:"
+msgstr "スクリーンリーダーのオン/オフを切り替える"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:6
-#, fuzzy
-#| msgid "Turn on or off:"
 msgid "Turn zoom on or off"
-msgstr "ON/OFF の切り替え:"
+msgstr "ズームのオン/オフを切り替える"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:7
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:3
@@ -1320,16 +1322,12 @@ msgid "Universal Access"
 msgstr "ユニバーサルアクセス"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:8
-#, fuzzy
-#| msgid "Zoom in:"
 msgid "Zoom in"
-msgstr "ズームイン:"
+msgstr "ズームイン"
 
 #: ../panels/keyboard/50-accessibility.xml.in.h:9
-#, fuzzy
-#| msgid "Zoom out:"
 msgid "Zoom out"
-msgstr "ズームアウト:"
+msgstr "ズームアウト"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 msgid "Change keyboard settings"
@@ -1387,7 +1385,7 @@ msgstr "レイアウトの設定"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 #: ../panels/mouse/gnome-mouse-properties.ui.h:16
 #: ../panels/universal-access/uap.ui.h:38
-#: ../panels/universal-access/zoom-options.ui.h:13
+#: ../panels/universal-access/zoom-options.c:337
 msgid "Long"
 msgstr "長い"
 
@@ -1411,7 +1409,7 @@ msgstr "速度(_P):"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:16
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
 #: ../panels/universal-access/uap.ui.h:54
-#: ../panels/universal-access/zoom-options.ui.h:22
+#: ../panels/universal-access/zoom-options.c:333
 msgid "Short"
 msgstr "短い"
 
@@ -1559,7 +1557,6 @@ msgid "Enable h_orizontal scrolling"
 msgstr "水平スクロールを有効にする(_O)"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
-#: ../panels/universal-access/zoom-options.ui.h:7
 msgid "General"
 msgstr "全般"
 
@@ -1664,116 +1661,115 @@ msgstr "信頼できない公衆ネットワークでは推奨されません。
 #. TRANSLATORS: this is when the access point is not listed
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
-#: ../panels/network/cc-network-panel.c:953
+#: ../panels/network/cc-network-panel.c:1001
 msgctxt "Wireless access point"
 msgid "Other..."
 msgstr "その他..."
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:1111
-#: ../panels/network/cc-network-panel.c:1518
+#: ../panels/network/cc-network-panel.c:1159
+#: ../panels/network/cc-network-panel.c:1566
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1115
-#: ../panels/network/cc-network-panel.c:1522
+#: ../panels/network/cc-network-panel.c:1163
+#: ../panels/network/cc-network-panel.c:1570
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1119
+#: ../panels/network/cc-network-panel.c:1167
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:1124
+#: ../panels/network/cc-network-panel.c:1172
 msgid "Enterprise"
 msgstr "Enterprise"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:1130
-#: ../panels/network/cc-network-panel.c:1513
+#: ../panels/network/cc-network-panel.c:1178
+#: ../panels/network/cc-network-panel.c:1561
 #: ../panels/universal-access/uap.ui.h:43
-#: ../panels/universal-access/zoom-options.ui.h:16
 msgid "None"
 msgstr "何もしない"
 
-#: ../panels/network/cc-network-panel.c:1617
+#: ../panels/network/cc-network-panel.c:1665
 msgid "Hotspot"
 msgstr "アクセスポイント"
 
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1624
+#: ../panels/network/cc-network-panel.c:1672
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: ../panels/network/cc-network-panel.c:1966 ../panels/network/network.ui.h:17
+#: ../panels/network/cc-network-panel.c:2014 ../panels/network/network.ui.h:17
 msgid "IPv4 Address"
 msgstr "IPv4 アドレス"
 
-#: ../panels/network/cc-network-panel.c:1967 ../panels/network/network.ui.h:18
+#: ../panels/network/cc-network-panel.c:2015 ../panels/network/network.ui.h:18
 msgid "IPv6 Address"
 msgstr "IPv6 アドレス"
 
-#: ../panels/network/cc-network-panel.c:1970
-#: ../panels/network/cc-network-panel.c:1973 ../panels/network/network.ui.h:16
+#: ../panels/network/cc-network-panel.c:2018
+#: ../panels/network/cc-network-panel.c:2021 ../panels/network/network.ui.h:16
 #: ../panels/printers/printers.ui.h:9
 msgid "IP Address"
 msgstr "IP アドレス"
 
-#: ../panels/network/cc-network-panel.c:2020
-#: ../panels/network/cc-network-panel.c:2393
+#: ../panels/network/cc-network-panel.c:2068
+#: ../panels/network/cc-network-panel.c:2443
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: ../panels/network/cc-network-panel.c:2128
+#: ../panels/network/cc-network-panel.c:2176
 msgid "Proxy"
 msgstr "プロキシ"
 
-#: ../panels/network/cc-network-panel.c:2202
+#: ../panels/network/cc-network-panel.c:2250
 msgid "Network proxy"
 msgstr "ネットワークプロキシ"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2460
+#: ../panels/network/cc-network-panel.c:2510
 msgid "The system network services are not compatible with this version."
 msgstr "システムのネットワークサービスはこのバージョンと互換性がありません。"
 
-#: ../panels/network/cc-network-panel.c:3075
+#: ../panels/network/cc-network-panel.c:3125
 msgid "Not connected to the internet."
 msgstr "インターネットに接続していません。"
 
-#: ../panels/network/cc-network-panel.c:3076
+#: ../panels/network/cc-network-panel.c:3126
 msgid "Create the hotspot anyway?"
 msgstr "とにかくアクセスポイントを作成しますか?"
 
-#: ../panels/network/cc-network-panel.c:3094
+#: ../panels/network/cc-network-panel.c:3144
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
 msgstr "%s から切断し、新規にアクセスポイントを作成しますか?"
 
-#: ../panels/network/cc-network-panel.c:3097
+#: ../panels/network/cc-network-panel.c:3147
 msgid "This is your only connection to the internet."
 msgstr "この接続だけがインターネットに繋がります。"
 
-#: ../panels/network/cc-network-panel.c:3115
+#: ../panels/network/cc-network-panel.c:3165
 msgid "Create _Hotspot"
 msgstr "アクセスポイントを作成(_H)"
 
-#: ../panels/network/cc-network-panel.c:3175
+#: ../panels/network/cc-network-panel.c:3225
 msgid "Stop hotspot and disconnect any users?"
 msgstr "アクセスポイントを停止し、ユーザーを切断しますか?"
 
-#: ../panels/network/cc-network-panel.c:3178
+#: ../panels/network/cc-network-panel.c:3228
 msgid "_Stop Hotspot"
 msgstr "停止(_S)"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:3196
+#: ../panels/network/cc-network-panel.c:3246
 #, fuzzy
 #| msgid "Air_plane Mode"
 msgid "Airplane Mode"
@@ -2265,206 +2261,206 @@ msgid "When power is _critically low:"
 msgstr "電力がひどく低下したときの動作(_C):"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:540
+#: ../panels/printers/cc-printers-panel.c:542
 msgid "Low on toner"
 msgstr "トナーの残量が少ないです"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:542
+#: ../panels/printers/cc-printers-panel.c:544
 msgid "Out of toner"
 msgstr "トナーが空です"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:545
+#: ../panels/printers/cc-printers-panel.c:547
 msgid "Low on developer"
 msgstr "現像液が少ないです"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:548
+#: ../panels/printers/cc-printers-panel.c:550
 msgid "Out of developer"
 msgstr "現像液が空です"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:550
+#: ../panels/printers/cc-printers-panel.c:552
 msgid "Low on a marker supply"
 msgstr "インクが少なくなっています"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:552
+#: ../panels/printers/cc-printers-panel.c:554
 msgid "Out of a marker supply"
 msgstr "インクが切れています"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:554
+#: ../panels/printers/cc-printers-panel.c:556
 msgid "Open cover"
 msgstr "カバーが開いています"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:556
+#: ../panels/printers/cc-printers-panel.c:558
 msgid "Open door"
 msgstr "扉が開いています"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:558
+#: ../panels/printers/cc-printers-panel.c:560
 msgid "Low on paper"
 msgstr "紙が少なくなっています"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:560
+#: ../panels/printers/cc-printers-panel.c:562
 msgid "Out of paper"
 msgstr "紙が空です"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:562
+#: ../panels/printers/cc-printers-panel.c:564
 msgctxt "printer state"
 msgid "Offline"
 msgstr "オフライン"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:564
+#: ../panels/printers/cc-printers-panel.c:566
 msgctxt "printer state"
 msgid "Paused"
 msgstr "一時停止中"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:566
+#: ../panels/printers/cc-printers-panel.c:568
 msgid "Waste receptacle almost full"
 msgstr "廃インクタンクがもう少しでいっぱいです"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:568
+#: ../panels/printers/cc-printers-panel.c:570
 msgid "Waste receptacle full"
 msgstr "廃インクタンクがいっぱいです"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:570
+#: ../panels/printers/cc-printers-panel.c:572
 msgid "The optical photo conductor is near end of life"
 msgstr "感光体の寿命が近づいています"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:572
+#: ../panels/printers/cc-printers-panel.c:574
 msgid "The optical photo conductor is no longer functioning"
 msgstr "感光体の寿命です"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:746
+#: ../panels/printers/cc-printers-panel.c:749
 msgctxt "printer state"
 msgid "Ready"
 msgstr "準備完了"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:750
+#: ../panels/printers/cc-printers-panel.c:753
 msgctxt "printer state"
 msgid "Processing"
 msgstr "処理中"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:754
+#: ../panels/printers/cc-printers-panel.c:757
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "停止中"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:853
+#: ../panels/printers/cc-printers-panel.c:869
 msgid "Toner Level"
 msgstr "トナーの量"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:856
+#: ../panels/printers/cc-printers-panel.c:872
 msgid "Ink Level"
 msgstr "インクの量"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:859
+#: ../panels/printers/cc-printers-panel.c:875
 msgid "Supply Level"
 msgstr "サプライの量"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:874
-#: ../panels/printers/cc-printers-panel.c:1269
+#: ../panels/printers/cc-printers-panel.c:890
+#: ../panels/printers/cc-printers-panel.c:1285
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
 msgstr[0] "%u 個がアクティブ"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:981
+#: ../panels/printers/cc-printers-panel.c:997
 msgid "No printers available"
 msgstr "利用できるプリンターがありません"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1312
+#: ../panels/printers/cc-printers-panel.c:1328
 msgctxt "print job"
 msgid "Pending"
 msgstr "待機中"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1316
+#: ../panels/printers/cc-printers-panel.c:1332
 msgctxt "print job"
 msgid "Held"
 msgstr "保留"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1320
+#: ../panels/printers/cc-printers-panel.c:1336
 msgctxt "print job"
 msgid "Processing"
 msgstr "印刷中"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1324
+#: ../panels/printers/cc-printers-panel.c:1340
 msgctxt "print job"
 msgid "Stopped"
 msgstr "停止"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1328
+#: ../panels/printers/cc-printers-panel.c:1344
 msgctxt "print job"
 msgid "Canceled"
 msgstr "キャンセル"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1332
+#: ../panels/printers/cc-printers-panel.c:1348
 msgctxt "print job"
 msgid "Aborted"
 msgstr "中止"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1336
+#: ../panels/printers/cc-printers-panel.c:1352
 msgctxt "print job"
 msgid "Completed"
 msgstr "完了"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1419
+#: ../panels/printers/cc-printers-panel.c:1432
 msgid "Job Title"
 msgstr "ジョブ名"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1428
+#: ../panels/printers/cc-printers-panel.c:1441
 msgid "Job State"
 msgstr "ジョブの状態"
 
 # FIXME
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1434
+#: ../panels/printers/cc-printers-panel.c:1447
 msgid "Time"
 msgstr "時刻"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2030
+#: ../panels/printers/cc-printers-panel.c:2047
 msgid "Failed to add new printer."
 msgstr "新しいプリンターを追加できませんでした。"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2234
-#: ../panels/printers/cc-printers-panel.c:2248
+#: ../panels/printers/cc-printers-panel.c:2251
+#: ../panels/printers/cc-printers-panel.c:2265
 msgid "Test page"
 msgstr "テストページ"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2496
+#: ../panels/printers/cc-printers-panel.c:2514
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "ui ファイルを読み込めませんでした: %s"
@@ -2500,21 +2496,21 @@ msgstr "追加(_A)"
 msgid "_Search by Address"
 msgstr "アドレスで検索(_S)"
 
-#: ../panels/printers/pp-new-printer-dialog.c:654
+#: ../panels/printers/pp-new-printer-dialog.c:665
 msgid "Getting devices..."
 msgstr "デバイスの取得中..."
 
 #. Translators: No localy connected printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1230
+#: ../panels/printers/pp-new-printer-dialog.c:1277
 msgid "No local printers found"
 msgstr "接続されているプリンターが見つかりませんでした"
 
 #. Translators: No network printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1243
+#: ../panels/printers/pp-new-printer-dialog.c:1290
 msgid "No network printers found"
 msgstr "ネットワークプリンターが見つかりませんでした"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1335
+#: ../panels/printers/pp-new-printer-dialog.c:1382
 msgid ""
 "FirewallD is not running. Network printer detection needs services mdns, "
 "ipp, ipp-client and samba-client enabled on firewall."
@@ -2524,42 +2520,42 @@ msgstr ""
 "能でなければなりません。"
 
 #. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:1363
-#: ../panels/printers/pp-new-printer-dialog.c:1368
+#: ../panels/printers/pp-new-printer-dialog.c:1410
+#: ../panels/printers/pp-new-printer-dialog.c:1415
 msgid "Devices"
 msgstr "デバイス"
 
 #. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:1393
+#: ../panels/printers/pp-new-printer-dialog.c:1440
 msgctxt "printer type"
 msgid "Local"
 msgstr "ローカル"
 
 #. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:1395
+#: ../panels/printers/pp-new-printer-dialog.c:1442
 msgctxt "printer type"
 msgid "Network"
 msgstr "ネットワーク"
 
 #. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:1436
+#: ../panels/printers/pp-new-printer-dialog.c:1483
 msgid "Device types"
 msgstr "デバイスの種類"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:1737
+#: ../panels/printers/pp-new-printer-dialog.c:1782
 msgid "Automatic configuration"
 msgstr "自動設定"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1818
+#: ../panels/printers/pp-new-printer-dialog.c:1865
 msgid "Opening firewall for mDNS connections"
 msgstr "mDNS 接続にファイアウォールを開放"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1827
+#: ../panels/printers/pp-new-printer-dialog.c:1874
 msgid "Opening firewall for Samba connections"
 msgstr "Samba 接続にファイアウォールを開放"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1836
+#: ../panels/printers/pp-new-printer-dialog.c:1883
 msgid "Opening firewall for IPP connections"
 msgstr "IPP 接続にファイアウォールを開放"
 
@@ -2790,14 +2786,12 @@ msgid "Measurement"
 msgstr "計量単位"
 
 #: ../panels/region/gnome-region-panel.ui.h:18
-#, fuzzy
-#| msgid "Volume down"
 msgid "Move Down"
-msgstr "音量を下げる"
+msgstr "下へ"
 
 #: ../panels/region/gnome-region-panel.ui.h:19
 msgid "Move Up"
-msgstr ""
+msgstr "上へ"
 
 #: ../panels/region/gnome-region-panel.ui.h:20
 msgid "New windows use the default layout"
@@ -2879,15 +2873,15 @@ msgstr "レイアウト"
 msgid "Default"
 msgstr "デフォルト"
 
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:1
+msgid "Brightness and Lock"
+msgstr "画面の明るさとロック"
+
 #. Translators: those are keywords for the brightness and lock control-center panel
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
+#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
 msgid "Brightness;Lock;Dim;Blank;Monitor;"
 msgstr ""
 "Brightness;Lock;Dim;Blank;Monitor;明るさ;ロック;暗い;ブランク;モニター;"
-
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:3
-msgid "Screen"
-msgstr "画面"
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
 msgid "Screen brightness and lock settings"
@@ -3224,25 +3218,21 @@ msgstr "ミュート"
 msgid "Custom"
 msgstr "その他"
 
-#: ../panels/universal-access/cc-ua-panel.c:445
-#: ../panels/universal-access/cc-ua-panel.c:451
+#: ../panels/universal-access/cc-ua-panel.c:446
+#: ../panels/universal-access/cc-ua-panel.c:452
 msgid "No shortcut set"
 msgstr "ショートカット未設定"
 
 #. Translators: those are keywords for the universal access control-center panel
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:2
-#, fuzzy
-#| msgid ""
-#| "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;"
-#| "size;AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;"
 "AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys;"
 msgstr ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;"
-"AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keysキーボード;マウス;アクセ"
+"AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys;キーボード;マウス;アクセ"
 "シビリティ;コントラスト;ズーム;拡大;スクリーンリーダー;テキスト;文字;フォン"
-"ト;サイズ;大きさ;固定キー;スローキー;バウンスキー;マウスキー"
+"ト;サイズ;大きさ;固定キー;スローキー;バウンスキー;マウスキー;"
 
 #: ../panels/universal-access/gnome-universal-access-panel.desktop.in.in.h:4
 msgid "Universal Access Preferences"
@@ -3449,7 +3439,7 @@ msgstr "第一ボタンを押したままにすると第二ボタンのクリッ
 
 #: ../panels/universal-access/uap.ui.h:65
 msgid "Turn on or off:"
-msgstr "ON/OFF の切り替え:"
+msgstr "オン/オフ の切り替え:"
 
 #: ../panels/universal-access/uap.ui.h:66
 msgid "Type here to test settings"
@@ -3566,125 +3556,104 @@ msgctxt "universal access, text size"
 msgid "Small"
 msgstr "小"
 
-#: ../panels/universal-access/zoom-options.c:156
+#: ../panels/universal-access/zoom-options.c:334
 msgid "1/4 Screen"
 msgstr "画面の 1/4"
 
-#: ../panels/universal-access/zoom-options.c:157
+#: ../panels/universal-access/zoom-options.c:335
 msgid "1/2 Screen"
 msgstr "画面の 1/2"
 
-#: ../panels/universal-access/zoom-options.c:158
+#: ../panels/universal-access/zoom-options.c:336
 msgid "3/4 Screen"
 msgstr "画面の 3/4"
 
 #: ../panels/universal-access/zoom-options.ui.h:1
-msgid "Always"
-msgstr ""
+msgid "Bottom Half"
+msgstr "下半分"
 
 #: ../panels/universal-access/zoom-options.ui.h:2
-msgid "Bottom Half"
-msgstr ""
+msgid "Color:"
+msgstr "色:"
 
 #: ../panels/universal-access/zoom-options.ui.h:3
-#, fuzzy
-#| msgid "Center"
-msgid "Centered"
-msgstr "中央"
+msgid "Crosshairs:"
+msgstr "照準線:"
 
 #: ../panels/universal-access/zoom-options.ui.h:4
-msgid "Color and Opacity"
-msgstr ""
+msgid "Follow mouse cursor"
+msgstr "マウスカーソルの動きを追う"
 
 #: ../panels/universal-access/zoom-options.ui.h:5
-msgid "Crosshairs"
-msgstr ""
-
-#: ../panels/universal-access/zoom-options.ui.h:6
 msgid "Full Screen"
 msgstr "フルスクリーン"
 
+# 旧来のユーザーのために旧Orcaでの名称を括弧内に併記
+#: ../panels/universal-access/zoom-options.ui.h:6
+msgid "Keep magnifier cursor centered"
+msgstr "カーソルを画面中央にキープする (中央)"
+
+#: ../panels/universal-access/zoom-options.ui.h:7
+msgid "Left Half"
+msgstr "左半分"
+
 #: ../panels/universal-access/zoom-options.ui.h:8
-msgid "Image moves with the mouse pointer"
-msgstr ""
+msgid "Length:"
+msgstr "長さ:"
 
 #: ../panels/universal-access/zoom-options.ui.h:9
-msgid "Image scrolls at screen edges"
-msgstr ""
+msgid "Magnification:"
+msgstr "拡大率:"
 
 #: ../panels/universal-access/zoom-options.ui.h:10
-#, fuzzy
-#| msgid "Left"
-msgid "Left Half"
-msgstr "左回り"
+msgid "Magnifier Position:"
+msgstr "拡大領域の位置:"
 
+# 旧来のユーザーのために旧Orcaでの名称を括弧内に併記
 #: ../panels/universal-access/zoom-options.ui.h:11
-msgid "Length"
-msgstr "長さ"
+msgid "Magnifier cursor moves with contents"
+msgstr "カーソルの動きに拡大領域を移動する (プロポーショナル)"
+
+# 旧来のユーザーのために旧Orcaでの名称を括弧内に併記
+#: ../panels/universal-access/zoom-options.ui.h:12
+msgid "Magnifier cursor pushes contents around"
+msgstr "拡大領域を押し出すように移動する (プッシュ)"
+
+#: ../panels/universal-access/zoom-options.ui.h:13
+msgid "Magnifier extends outside of screen"
+msgstr "画面の外側も表示する"
 
 #: ../panels/universal-access/zoom-options.ui.h:14
-#, fuzzy
-#| msgid "Magnifier zoom in"
-msgid "Magnification"
-msgstr "拡大鏡ズームイン"
+msgid "Overlaps mouse cursor"
+msgstr "マウスカーソルに重ねる"
 
 #: ../panels/universal-access/zoom-options.ui.h:15
-msgid "Moveable lens - magnified view follows mouse movements"
-msgstr ""
-
-#: ../panels/universal-access/zoom-options.ui.h:17
-msgid "Position of magnified view on screen"
-msgstr ""
-
-#: ../panels/universal-access/zoom-options.ui.h:18
-msgid "Proportional"
-msgstr ""
-
-#: ../panels/universal-access/zoom-options.ui.h:19
-msgid "Push"
-msgstr ""
-
-#: ../panels/universal-access/zoom-options.ui.h:20
-#, fuzzy
-#| msgid "Right"
 msgid "Right Half"
-msgstr "右回り"
+msgstr "右半分"
 
-#: ../panels/universal-access/zoom-options.ui.h:23
-msgid "Show"
-msgstr "表示"
-
-#: ../panels/universal-access/zoom-options.ui.h:24
-msgid "Show crosshairs intersection"
-msgstr ""
+#: ../panels/universal-access/zoom-options.ui.h:16
+msgid "Screen part:"
+msgstr "拡大部分:"
 
 #. long delay
-#: ../panels/universal-access/zoom-options.ui.h:26
+#: ../panels/universal-access/zoom-options.ui.h:18
 msgid "Thick"
-msgstr ""
+msgstr "太い"
 
-#: ../panels/universal-access/zoom-options.ui.h:27
-msgid "Thickness"
-msgstr ""
+#: ../panels/universal-access/zoom-options.ui.h:19
+msgid "Thickness:"
+msgstr "太さ:"
 
 #. short delay
-#: ../panels/universal-access/zoom-options.ui.h:29
+#: ../panels/universal-access/zoom-options.ui.h:21
 msgid "Thin"
-msgstr ""
+msgstr "細い"
 
-#: ../panels/universal-access/zoom-options.ui.h:30
-msgid "To keep the pointer centered"
-msgstr ""
-
-#: ../panels/universal-access/zoom-options.ui.h:31
-msgid "To keep the pointer visible"
-msgstr ""
-
-#: ../panels/universal-access/zoom-options.ui.h:32
+#: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Top Half"
-msgstr ""
+msgstr "上半分"
 
-#: ../panels/universal-access/zoom-options.ui.h:33
+#: ../panels/universal-access/zoom-options.ui.h:23
 msgid "Zoom Options"
 msgstr "ズームオプション"
 
@@ -3892,7 +3861,7 @@ msgid "Photograph"
 msgstr "フォト"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-photo-dialog.c:97
+#: ../panels/user-accounts/um-photo-dialog.c:98
 msgid "Select"
 msgstr "選択"
 
@@ -3925,10 +3894,8 @@ msgid "Remove User Account"
 msgstr "ユーザーアカウントの削除"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
-#, fuzzy
-#| msgid "User Accounts"
 msgid "User Icon"
-msgstr "ユーザーアカウント"
+msgstr "ユーザーアイコン"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:10
 msgid "_Fingerprint Login"
@@ -4158,19 +4125,19 @@ msgstr "パスワードが一致しない"
 msgid "Wrong password"
 msgstr "間違ったパスワード"
 
-#: ../panels/user-accounts/um-photo-dialog.c:442
+#: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
 msgstr "画像を無効にする"
 
-#: ../panels/user-accounts/um-photo-dialog.c:460
+#: ../panels/user-accounts/um-photo-dialog.c:461
 msgid "Take a photo..."
 msgstr "写真を撮る..."
 
-#: ../panels/user-accounts/um-photo-dialog.c:478
+#: ../panels/user-accounts/um-photo-dialog.c:479
 msgid "Browse for more pictures..."
 msgstr "他の画像も参照..."
 
-#: ../panels/user-accounts/um-photo-dialog.c:703
+#: ../panels/user-accounts/um-photo-dialog.c:704
 #, c-format
 msgid "Used by %s"
 msgstr "%s に使用されています"
@@ -4332,8 +4299,8 @@ msgid "Wacom Graphics Tablet"
 msgstr "ワコム グラフィックスタブレット"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:1
-msgid "Back"
-msgstr "戻る"
+msgid "Adjust display resolution"
+msgstr ""
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:2
 msgid "Bluetooth Settings"
@@ -4344,102 +4311,110 @@ msgid "Calibrate..."
 msgstr "キャリブレーション..."
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:4
-msgid "Eraser Pressure Feel"
-msgstr "消しゴムの感触"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:5
-msgid "Firm"
-msgstr "硬い"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:6
-msgid "Forward"
-msgstr "進む"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:7
-msgid "Left Mouse Button Click"
-msgstr "マウスの左ボタンクリック"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:8
-#, fuzzy
-#| msgid "Left-Handed Orientation:"
 msgid "Left-Handed Orientation"
 msgstr "左手用"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:9
-msgid "Lower Button"
-msgstr "下のサイドスイッチ"
+#: ../panels/wacom/gnome-wacom-properties.ui.h:5
+#, fuzzy
+#| msgid "Options..."
+msgid "Map Buttons..."
+msgstr "オプション..."
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:10
-msgid "Middle Mouse Button Click"
-msgstr "マウスの中ボタンクリック"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:11
-msgid "No Action"
-msgstr "何もしない"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/wacom/gnome-wacom-properties.ui.h:6
 msgid "No tablet detected"
 msgstr "タブレットを検出できません"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#: ../panels/wacom/gnome-wacom-properties.ui.h:7
 msgid "Please plug in or turn on your Wacom tablet"
 msgstr "ワコムタブレットを接続するか、電源を入れてください"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:14
-msgid "Right Mouse Button Click"
-msgstr "マウスの右ボタンクリック"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:15
-msgid "Scroll Down"
-msgstr "下にスクロール"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:16
-msgid "Scroll Left"
-msgstr "左にスクロール"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:17
-msgid "Scroll Right"
-msgstr "右にスクロール"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:18
-msgid "Scroll Up"
-msgstr "上にスクロール"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:19
-msgid "Soft"
-msgstr "柔らかい"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:20
-msgid "Stylus"
-msgstr "ペン"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:21
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
 msgid "Tablet (absolute)"
 msgstr "タブレット(絶対座標)"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:22
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
 msgid "Tablet Preferences"
 msgstr "タブレット設定"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:23
-msgid "Tip Pressure Feel"
-msgstr "ペン先の感触"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:24
-msgid "Top Button"
-msgstr "上のサイドスイッチ"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:25
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "Touchpad (relative)"
 msgstr "タッチパッド(相対座標)"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:26
+#: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Tracking Mode"
 msgstr "検出モード"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:27
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
 msgid "Wacom Tablet"
 msgstr "ワコムタブレット"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:1
+msgid "Back"
+msgstr "戻る"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:2
+msgid "Eraser Pressure Feel"
+msgstr "消しゴムの感触"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:3
+msgid "Firm"
+msgstr "硬い"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:4
+msgid "Forward"
+msgstr "進む"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:5
+msgid "Left Mouse Button Click"
+msgstr "マウスの左ボタンクリック"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:6
+msgid "Lower Button"
+msgstr "下のサイドスイッチ"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:7
+msgid "Middle Mouse Button Click"
+msgstr "マウスの中ボタンクリック"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:8
+msgid "No Action"
+msgstr "何もしない"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:9
+msgid "Right Mouse Button Click"
+msgstr "マウスの右ボタンクリック"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:10
+msgid "Scroll Down"
+msgstr "下にスクロール"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:11
+msgid "Scroll Left"
+msgstr "左にスクロール"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:12
+msgid "Scroll Right"
+msgstr "右にスクロール"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:13
+msgid "Scroll Up"
+msgstr "上にスクロール"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:14
+msgid "Soft"
+msgstr "柔らかい"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:15
+msgid "Stylus"
+msgstr "ペン"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:16
+msgid "Tip Pressure Feel"
+msgstr "ペン先の感触"
+
+#: ../panels/wacom/wacom-stylus-page.ui.h:17
+msgid "Top Button"
+msgstr "上のサイドスイッチ"
 
 #. Text printed on screen
 #: ../panels/wacom/calibrator/gui_gtk.c:70
@@ -4457,6 +4432,18 @@ msgstr ""
 #: ../panels/wacom/calibrator/gui_gtk.c:271
 msgid "Mis-click detected, restarting..."
 msgstr ""
+
+#: ../panels/wacom/cc-wacom-nav-button.c:89
+#, fuzzy, c-format
+#| msgid "%d x %d"
+msgid "%d of %d"
+msgstr "%d x %d"
+
+#: ../panels/wacom/cc-wacom-stylus-page.c:374
+#, fuzzy
+#| msgid "Top Button"
+msgid "Button"
+msgstr "上のサイドスイッチ"
 
 #: ../shell/control-center.c:54
 msgid "Enable verbose mode"
@@ -4493,13 +4480,28 @@ msgstr ""
 msgid "Control Center"
 msgstr "コントロールセンター"
 
-#: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:2
+#: ../shell/gnome-control-center.desktop.in.in.h:1
+msgid "Preferences;Settings;"
+msgstr "Preferences;Settings;設定"
+
+#: ../shell/gnome-control-center.desktop.in.in.h:2 ../shell/shell.ui.h:2
 msgid "System Settings"
 msgstr "システム設定"
 
 #: ../shell/shell.ui.h:1
 msgid "All Settings"
 msgstr "すべての設定"
+
+#~ msgid "Screen"
+#~ msgstr "画面"
+
+#, fuzzy
+#~| msgid "Center"
+#~ msgid "Centered"
+#~ msgstr "中央"
+
+#~ msgid "Show"
+#~ msgstr "表示"
 
 #~ msgid "Could not get session bus while applying display configuration"
 #~ msgstr "ディスプレイの設定を適用するセッションバスの取得に失敗しました"
@@ -4509,9 +4511,6 @@ msgstr "すべての設定"
 
 #~ msgid "_Photos:"
 #~ msgstr "写真(_P):"
-
-#~ msgid "Magnifier zoom in"
-#~ msgstr "拡大鏡ズームイン"
 
 #~ msgid "Magnifier zoom out"
 #~ msgstr "拡大鏡ズームアウト"
