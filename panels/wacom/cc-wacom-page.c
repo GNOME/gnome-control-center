@@ -284,25 +284,6 @@ accel_set_func (GtkTreeViewColumn *tree_column,
 		      NULL);
 }
 
-typedef struct {
-	GtkTreeView *tree_view;
-	GtkTreePath *path;
-	GtkTreeViewColumn *column;
-} IdleData;
-
-static gboolean
-real_start_editing_cb (IdleData *idle_data)
-{
-	gtk_widget_grab_focus (GTK_WIDGET (idle_data->tree_view));
-	gtk_tree_view_set_cursor (idle_data->tree_view,
-				  idle_data->path,
-				  idle_data->column,
-				  TRUE);
-	gtk_tree_path_free (idle_data->path);
-	g_free (idle_data);
-	return FALSE;
-}
-
 static gboolean
 start_editing_cb (GtkTreeView    *tree_view,
 		  GdkEventButton *event,
@@ -320,16 +301,9 @@ start_editing_cb (GtkTreeView    *tree_view,
 					   &path, &column,
 					   NULL, NULL))
 	{
-		IdleData *idle_data;
 		GtkTreeModel *model;
 		GtkTreeIter iter;
 		GsdWacomTabletButton *button;
-
-		if (gtk_tree_path_get_depth (path) == 1)
-		{
-			gtk_tree_path_free (path);
-			return FALSE;
-		}
 
 		model = gtk_tree_view_get_model (tree_view);
 		gtk_tree_model_get_iter (model, &iter, path);
@@ -337,14 +311,13 @@ start_editing_cb (GtkTreeView    *tree_view,
 				    MAPPING_BUTTON_COLUMN, &button,
 				    -1);
 
-		idle_data = g_new (IdleData, 1);
-		idle_data->tree_view = tree_view;
-		idle_data->path = path;
-		idle_data->column = button->type != WACOM_TABLET_BUTTON_TYPE_HARDCODED ?
-			column :
-			gtk_tree_view_get_column (tree_view, 1);
-		g_idle_add ((GSourceFunc) real_start_editing_cb, idle_data);
+		gtk_widget_grab_focus (GTK_WIDGET (tree_view));
+		gtk_tree_view_set_cursor (tree_view,
+					  path,
+					  gtk_tree_view_get_column (tree_view, 1),
+					  TRUE);
 		g_signal_stop_emission_by_name (tree_view, "button_press_event");
+		gtk_tree_path_free (path);
 	}
 	return TRUE;
 }
