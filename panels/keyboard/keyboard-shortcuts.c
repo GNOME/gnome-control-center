@@ -1137,7 +1137,7 @@ accel_edited_callback (GtkCellRendererText   *cell,
     }
 
   /* Check for unmodified keys */
-  if (mask == 0 && keycode != 0)
+  if ((mask == 0 || mask == GDK_SHIFT_MASK) && keycode != 0)
     {
       if ((keyval >= GDK_KEY_a && keyval <= GDK_KEY_z)
            || (keyval >= GDK_KEY_A && keyval <= GDK_KEY_Z)
