@@ -351,14 +351,18 @@ accel_edited_callback (GtkCellRendererText   *cell,
                        guint                  keyval,
                        GdkModifierType        mask,
                        guint                  keycode,
-                       GtkTreeView           *view)
+                       CcWacomPage           *page)
 {
   GtkTreeModel *model;
   GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
+  GtkTreeView *view;
   GtkTreeIter iter;
+  CcWacomPagePrivate *priv;
   GsdWacomTabletButton *button;
   char *str;
 
+  priv = page->priv;
+  view = GTK_TREE_VIEW (MWID("shortcut_treeview"));
   model = gtk_tree_view_get_model (view);
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_tree_path_free (path);
@@ -382,14 +386,17 @@ accel_edited_callback (GtkCellRendererText   *cell,
 static void
 accel_cleared_callback (GtkCellRendererText *cell,
                         const char          *path_string,
-                        gpointer             data)
+                        CcWacomPage         *page)
 {
-  GtkTreeView *view = (GtkTreeView *) data;
+  GtkTreeView *view;
   GtkTreePath *path = gtk_tree_path_new_from_string (path_string);
   GtkTreeIter iter;
   GtkTreeModel *model;
   GsdWacomTabletButton *button;
+  CcWacomPagePrivate *priv;
 
+  priv = page->priv;
+  view = GTK_TREE_VIEW (MWID("shortcut_treeview"));
   model = gtk_tree_view_get_model (view);
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_tree_path_free (path);
@@ -443,10 +450,10 @@ setup_mapping_treeview (CcWacomPage *page)
 
 	g_signal_connect (renderer, "accel_edited",
 			  G_CALLBACK (accel_edited_callback),
-			  treeview);
+			  page);
 	g_signal_connect (renderer, "accel_cleared",
 			  G_CALLBACK (accel_cleared_callback),
-			  treeview);
+			  page);
 
 	column = gtk_tree_view_column_new_with_attributes (_("Action"), renderer, NULL);
 	gtk_tree_view_column_set_cell_data_func (column, renderer, accel_set_func, NULL, NULL);
@@ -499,19 +506,20 @@ map_buttons_button_clicked_cb (GtkButton   *button,
 	GError *error = NULL;
 	GtkWidget *dialog;
 	CcWacomPagePrivate *priv;
+	GtkWidget *toplevel;
 
 	priv = page->priv;
 
-	g_assert (page->priv->mapping_builder == NULL);
-	page->priv->mapping_builder = gtk_builder_new ();
-	gtk_builder_add_from_file (page->priv->mapping_builder,
+	g_assert (priv->mapping_builder == NULL);
+	priv->mapping_builder = gtk_builder_new ();
+	gtk_builder_add_from_file (priv->mapping_builder,
 				   GNOMECC_UI_DIR "/button-mapping.ui",
 				   &error);
 
 	if (error != NULL) {
 		g_warning ("Error loading UI file: %s", error->message);
-		g_object_unref (page->priv->mapping_builder);
-		page->priv->mapping_builder = NULL;
+		g_object_unref (priv->mapping_builder);
+		priv->mapping_builder = NULL;
 		g_error_free (error);
 		return;
 	}
@@ -519,8 +527,8 @@ map_buttons_button_clicked_cb (GtkButton   *button,
 	setup_mapping_treeview (page);
 
 	dialog = MWID ("button-mapping-dialog");
-	gtk_window_set_transient_for (GTK_WINDOW (dialog),
-				      GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (page))));
+	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (page));
+	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
 	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 	g_signal_connect (G_OBJECT (dialog), "response",
 			  G_CALLBACK (button_mapping_dialog_closed), page);
