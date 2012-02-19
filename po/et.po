@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: GNOME Control Center MASTER\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-02-08 17:05+0000\n"
-"PO-Revision-Date: 2012-02-09 12:33+0200\n"
+"POT-Creation-Date: 2012-02-17 16:15+0000\n"
+"PO-Revision-Date: 2012-02-17 23:49+0200\n"
 "Last-Translator: Mattias Põldaru <mahfiaz@gmail.com>\n"
 "Language-Team: Estonian <>\n"
 "Language: et\n"
@@ -40,7 +40,7 @@ msgid "Changes throughout the day"
 msgstr "Muutub pidevalt"
 
 msgid "Primary Color"
-msgstr "Esmane värv"
+msgstr "Peamine värv"
 
 msgid "Swap colors"
 msgstr "Vaheta värvid"
@@ -128,7 +128,7 @@ msgid "Set Up New Device"
 msgstr "Uue seadme seadistamine"
 
 msgid "Remove Device"
-msgstr "Eemalda seade"
+msgstr "Seadme eemaldamine"
 
 msgid "Connection"
 msgstr "Ühendus"
@@ -1180,6 +1180,7 @@ msgid "_Sensitivity:"
 msgstr "_Tundlikkus:"
 
 #. low sensitivity
+#. TRANSLATORS: secondary battery
 msgid "Low"
 msgstr "Madal"
 
@@ -1649,33 +1650,116 @@ msgid_plural "minutes"
 msgstr[0] "minut"
 msgstr[1] "minutit"
 
-msgid "Battery charging"
-msgstr "Aku laadimine"
-
-msgid "Battery discharging"
-msgstr "Aku tühjenemine"
-
-msgid "UPS charging"
-msgstr "UPS-i laadimine"
-
-msgid "UPS discharging"
-msgstr "UPS-i tühjenemine"
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#, c-format
+msgid "Charging - %s until fully charged"
+msgstr "Laadimine - %s täislaadimiseni"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #, c-format
-msgid "%s until charged (%.0lf%%)"
-msgstr "%s täislaadimiseni (%.0lf%%)"
+msgid "Caution low battery, %s remaining"
+msgstr "Hoiatus, aku varsti tühi, %s jäänud"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #, c-format
-msgid "%s until empty (%.0lf%%)"
-msgstr "%s tühjenemiseni (%.0lf%%)"
+msgid "Using battery power - %s remaining"
+msgstr "Akutoitel - %s jäänud"
 
-#. TRANSLATORS: %1 is a percentage value. Note: this string is only
-#. * used when we don't have a time value
+#. TRANSLATORS: primary battery
+#. TRANSLATORS: secondary battery
+msgid "Charging"
+msgstr "Laadimine"
+
+#. TRANSLATORS: primary battery
+msgid "Using battery power"
+msgstr "Akutoitel"
+
+#. TRANSLATORS: primary battery
+msgid "Charging - fully charged"
+msgstr "Laadimine - täiesti täis"
+
+#. TRANSLATORS: primary battery
+msgid "Empty"
+msgstr "Tühi"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #, c-format
-msgid "%.0lf%% charged"
-msgstr "%.0lf%% laetud"
+msgid "Caution low UPS, %s remaining"
+msgstr "Hoiatus, UPS varsti tühi, %s jäänud"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#, c-format
+msgid "Using UPS power - %s remaining"
+msgstr "UPS-i toitel - %s jäänud"
+
+#. TRANSLATORS: UPS battery
+msgid "Caution low UPS"
+msgstr "Hoiatus, UPS varsti tühi"
+
+#. TRANSLATORS: UPS battery
+msgid "Using UPS power"
+msgstr "UPS-i toitel"
+
+#. TRANSLATORS: secondary battery is normally in the media bay
+msgid "Your secondary battery is fully charged"
+msgstr "Sinu teine aku on täiesti täis"
+
+#. TRANSLATORS: secondary battery is normally in the media bay
+msgid "Your secondary battery is empty"
+msgstr "Sinu teine aku on tühi"
+
+#. TRANSLATORS: secondary battery
+msgid "Wireless mouse"
+msgstr "Juhtmeta hiir"
+
+#. TRANSLATORS: secondary battery
+msgid "Wireless keyboard"
+msgstr "Juhtmeta klaviatuur"
+
+#. TRANSLATORS: secondary battery
+msgid "Uninterruptible power supply"
+msgstr "Katkestuseta toite allikas (UPS)"
+
+#. TRANSLATORS: secondary battery
+msgid "Personal digital assistant"
+msgstr "Isiklik digitaalassistent"
+
+#. TRANSLATORS: secondary battery
+msgid "Cellphone"
+msgstr "Mobiiltelefon"
+
+#. TRANSLATORS: secondary battery
+msgid "Media player"
+msgstr "Muusikaesitaja"
+
+#. TRANSLATORS: secondary battery
+msgid "Tablet"
+msgstr "Digitaallaud"
+
+#. TRANSLATORS: secondary battery
+msgid "Computer"
+msgstr "Arvuti"
+
+#. TRANSLATORS: secondary battery, misc
+msgid "Battery"
+msgstr "Aku"
+
+#. TRANSLATORS: secondary battery
+msgid "Caution"
+msgstr "Hoiatus"
+
+#. TRANSLATORS: secondary battery
+msgid "Good"
+msgstr "Hea"
+
+msgid "Tip:"
+msgstr "Märkus:"
+
+msgid "Screen Settings"
+msgstr "Ekraani seaded"
+
+msgid "affect how much power is used"
+msgstr "mõjutab, kui palju voolu tarbitakse"
 
 msgid "Power"
 msgstr "Vooluhaldus"
@@ -1714,15 +1798,15 @@ msgstr "Akutoitel"
 msgid "When plugged in"
 msgstr "Võrgutoitel"
 
-msgid "Suspend when inactive for:"
-msgstr "Seisata, kui aktiivsust pole:"
+msgid "Suspend when inactive for"
+msgstr "Seisata, kui aktiivsust pole"
 
-msgid "When power is _critically low:"
-msgstr "Kui aku on _peaaegu täiesti tühi"
+msgid "When power is _critically low"
+msgstr "Kui voolu on _väga vähe"
 
 #. Translators: The printer is low on toner
 msgid "Low on toner"
-msgstr "Toonerit on vähe"
+msgstr "Tooner on otsakorral"
 
 #. Translators: The printer has no toner left
 msgid "Out of toner"
@@ -1731,7 +1815,7 @@ msgstr "Tooner on otsas"
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
 msgid "Low on developer"
-msgstr "Ilmutit on vähe"
+msgstr "Ilmuti on otsakorral"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
@@ -1740,7 +1824,7 @@ msgstr "Ilmuti on otsas"
 
 #. Translators: "marker" is one color bin of the printer
 msgid "Low on a marker supply"
-msgstr "Värvi on vähe"
+msgstr "Värv on otsakorral"
 
 #. Translators: "marker" is one color bin of the printer
 msgid "Out of a marker supply"
@@ -1756,7 +1840,7 @@ msgstr "Luuk on avatud"
 
 #. Translators: At least one input tray is low on media
 msgid "Low on paper"
-msgstr "Paberit on vähe"
+msgstr "Paber on otsakorral"
 
 #. Translators: At least one input tray is empty
 msgid "Out of paper"
@@ -1782,11 +1866,11 @@ msgstr "Prügimahuti on täis"
 
 #. Translators: Optical photo conductors are used in laser printers
 msgid "The optical photo conductor is near end of life"
-msgstr "Fototakisti eluiga on lõppemas"
+msgstr "Fotosilma eluiga on lõppemas"
 
 #. Translators: Optical photo conductors are used in laser printers
 msgid "The optical photo conductor is no longer functioning"
-msgstr "Fototakisti enam ei tööta"
+msgstr "Fotosilm enam ei tööta"
 
 #. Translators: Printer's state (can start new job without waiting)
 msgctxt "printer state"
@@ -2587,6 +2671,7 @@ msgstr "Visuaalsed märguanded"
 msgid "Display a textual description of speech and sounds"
 msgstr "Kõne ja helide kirjeldust kuvatakse"
 
+# Filmi puhul nt subtiitrid + helide kirjeldus (plaksutatakse).
 msgid "Closed Captioning"
 msgstr ""
 
@@ -3317,6 +3402,9 @@ msgstr "Kalibreerimine..."
 msgid "Map Buttons..."
 msgstr "Nuppude määramine..."
 
+msgid "Display Mapping..."
+msgstr "Kuvade ühendamine..."
+
 msgid "No Action"
 msgstr "Tegevus puudub"
 
@@ -3367,6 +3455,12 @@ msgstr "Ülemine nupp"
 
 msgid "Stylus"
 msgstr "Kirjapulk"
+
+msgid "Map Buttons"
+msgstr "Nuppude ühendamine"
+
+msgid "Map buttons to functions"
+msgstr "Nuppude ühendamine tegevustega"
 
 #, c-format
 msgid "Left Ring Mode #%d"
@@ -3440,6 +3534,9 @@ msgstr "%d / %d"
 msgid "Button"
 msgstr "Nupp"
 
+msgid "Display Mapping"
+msgstr "Kuvade ühendamine"
+
 msgid "Enable verbose mode"
 msgstr "Jutuka režiimi lubamine"
 
@@ -3474,3 +3571,18 @@ msgstr "Eelistused;Sätted;Seaded;Seadistused;"
 
 msgid "All Settings"
 msgstr "Kõik seaded"
+
+#~ msgid "Battery discharging"
+#~ msgstr "Aku tühjenemine"
+
+#~ msgid "UPS discharging"
+#~ msgstr "UPS-i tühjenemine"
+
+#~ msgid "%s until charged (%.0lf%%)"
+#~ msgstr "%s täislaadimiseni (%.0lf%%)"
+
+#~ msgid "%s until empty (%.0lf%%)"
+#~ msgstr "%s tühjenemiseni (%.0lf%%)"
+
+#~ msgid "%.0lf%% charged"
+#~ msgstr "%.0lf%% laetud"
