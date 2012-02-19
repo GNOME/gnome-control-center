@@ -67,8 +67,6 @@ enum
   SECTION_N_COLUMNS
 };
 
-static guint maybe_block_accels_id = 0;
-static gboolean block_accels = FALSE;
 static GSettings *settings = NULL;
 static GtkWidget *custom_shortcut_dialog = NULL;
 static GtkWidget *custom_shortcut_name_entry = NULL;
@@ -1105,8 +1103,6 @@ accel_edited_callback (GtkCellRendererText   *cell,
   CcKeyboardItem *item;
   char *str;
 
-  block_accels = FALSE;
-
   model = gtk_tree_view_get_model (view);
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_tree_path_free (path);
@@ -1256,8 +1252,6 @@ accel_cleared_callback (GtkCellRendererText *cell,
   GtkTreeIter iter;
   GtkTreeModel *model;
 
-  block_accels = FALSE;
-
   model = gtk_tree_view_get_model (view);
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_tree_path_free (path);
@@ -1271,21 +1265,6 @@ accel_cleared_callback (GtkCellRendererText *cell,
 
   /* Unset the key */
   g_object_set (G_OBJECT (item), "binding", "", NULL);
-}
-
-/* this handler is used to keep accels from activating while the user
- * is assigning a new shortcut so that he won't accidentally trigger one
- * of the widgets */
-static gboolean
-maybe_block_accels (GtkWidget *widget,
-                    GdkEventKey *event,
-                    gpointer user_data)
-{
-  if (block_accels)
-  {
-    return gtk_window_propagate_key_event (GTK_WINDOW (widget), event);
-  }
-  return FALSE;
 }
 
 static gchar *
@@ -1685,9 +1664,6 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   shell = cc_panel_get_shell (CC_PANEL (panel));
   widget = cc_shell_get_toplevel (shell);
 
-  maybe_block_accels_id = g_signal_connect (widget, "key_press_event",
-                                            G_CALLBACK (maybe_block_accels), NULL);
-
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
   g_signal_connect (selection, "changed",
                     G_CALLBACK (shortcut_selection_changed),
@@ -1732,31 +1708,19 @@ keyboard_shortcuts_init (CcPanel *panel, GtkBuilder *builder)
 void
 keyboard_shortcuts_dispose (CcPanel *panel)
 {
-  if (maybe_block_accels_id != 0)
+  if (kb_system_sections != NULL)
     {
-      CcShell *shell;
-      GtkWidget *toplevel;
-
-      shell = cc_panel_get_shell (CC_PANEL (panel));
-      toplevel = cc_shell_get_toplevel (shell);
-
-      g_signal_handler_disconnect (toplevel, maybe_block_accels_id);
-      maybe_block_accels_id = 0;
-
-      if (kb_system_sections != NULL)
-        {
-          g_hash_table_destroy (kb_system_sections);
-          kb_system_sections = NULL;
-        }
-      if (kb_apps_sections != NULL)
-        {
-          g_hash_table_destroy (kb_apps_sections);
-          kb_apps_sections = NULL;
-        }
-      if (kb_user_sections != NULL)
-        {
-          g_hash_table_destroy (kb_user_sections);
-          kb_user_sections = NULL;
-        }
+      g_hash_table_destroy (kb_system_sections);
+      kb_system_sections = NULL;
+    }
+  if (kb_apps_sections != NULL)
+    {
+      g_hash_table_destroy (kb_apps_sections);
+      kb_apps_sections = NULL;
+    }
+  if (kb_user_sections != NULL)
+    {
+      g_hash_table_destroy (kb_user_sections);
+      kb_user_sections = NULL;
     }
 }
