@@ -36,6 +36,7 @@ libuser_accounts_la_SOURCES =		\
 	um-identity-manager.c		\
 	um-identity.h			\
 	um-identity.c			\
+	$(kerberos_sources)		\
 	um-user.h 			\
 	um-user.c 			\
 	um-user-manager.h 		\
@@ -67,6 +68,15 @@ libuser_accounts_la_SOURCES =		\
 	um-realm-manager.c		\
 	um-realm-manager.h		\
 	$(BUILT_SOURCES)
+
+if BUILD_KERBEROS
+libuser_accounts_la_SOURCES +=		\
+	um-kerberos-identity-manager.h	\
+	um-kerberos-identity-manager.c	\
+	um-kerberos-identity.h		\
+	um-kerberos-identity.c
+endif
+
 
 libuser_accounts_la_LIBADD = 		\
 	$(PANEL_LIBS)			\
