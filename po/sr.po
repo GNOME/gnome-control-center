@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-02-14 19:38+0000\n"
-"PO-Revision-Date: 2012-02-15 10:49+0200\n"
+"POT-Creation-Date: 2012-02-18 13:43+0000\n"
+"PO-Revision-Date: 2012-02-19 14:43+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -1488,7 +1488,7 @@ msgid "_Reassign"
 msgstr "_Поново додели"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1666
-#: ../panels/wacom/cc-wacom-page.c:472
+#: ../panels/wacom/cc-wacom-page.c:478
 msgid "Action"
 msgstr "Радња"
 
@@ -1679,7 +1679,7 @@ msgstr "Ентерпрајз"
 #. TRANSLATORS: this no (!) WiFi security
 #: ../panels/network/cc-network-panel.c:1178
 #: ../panels/network/cc-network-panel.c:1561
-#: ../panels/universal-access/uap.ui.h:5
+#: ../panels/universal-access/uap.ui.h:5 ../panels/wacom/cc-wacom-page.c:269
 msgid "None"
 msgstr "Ништа"
 
@@ -2184,20 +2184,17 @@ msgstr "Батерија је скоро празна, преостало вре
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #: ../panels/power/cc-power-panel.c:249
 #, c-format
-#| msgid "On battery power"
 msgid "Using battery power - %s remaining"
 msgstr "Напајање из батерије обезбеђује још %s рада"
 
 #. TRANSLATORS: primary battery
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:266 ../panels/power/cc-power-panel.c:558
-#| msgid "UPS charging"
 msgid "Charging"
 msgstr "Пуњење је у току"
 
 #. TRANSLATORS: primary battery
 #: ../panels/power/cc-power-panel.c:271
-#| msgid "On battery power"
 msgid "Using battery power"
 msgstr "Напајање из батерије"
 
@@ -2245,13 +2242,11 @@ msgstr "Ваша помоћна батерија је празна"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:515
-#| msgid "Wireless"
 msgid "Wireless mouse"
 msgstr "Бежични миш"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:519
-#| msgid "Screen keyboard"
 msgid "Wireless keyboard"
 msgstr "Бежична тастатура"
 
@@ -2272,53 +2267,43 @@ msgstr "Мобилни телефон"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:535
-#| msgid "_Music player"
 msgid "Media player"
 msgstr "Музички уређај"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:539
-#| msgid "Wacom Tablet"
 msgid "Tablet"
 msgstr "Таблица"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:543
-#| msgctxt "print job"
-#| msgid "Completed"
 msgid "Computer"
 msgstr "Рачунар"
 
 #. TRANSLATORS: secondary battery, misc
 #: ../panels/power/cc-power-panel.c:547
-#| msgid "Battery charging"
 msgid "Battery"
 msgstr "Батерија"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:565
-#| msgid "Calibration"
 msgid "Caution"
 msgstr "Упозорење"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:575
-#| msgctxt "Password strength"
-#| msgid "Good"
 msgid "Good"
 msgstr "Добра"
 
-#: ../panels/power/cc-power-panel.c:1083
-#| msgid "_Type:"
+#: ../panels/power/cc-power-panel.c:1081
 msgid "Tip:"
 msgstr "Врста:"
 
-#: ../panels/power/cc-power-panel.c:1084
-#| msgid "Sound Settings"
+#: ../panels/power/cc-power-panel.c:1082
 msgid "Screen Settings"
 msgstr "Подешавања екрана"
 
-#: ../panels/power/cc-power-panel.c:1085
+#: ../panels/power/cc-power-panel.c:1083
 msgid "affect how much power is used"
 msgstr "одређује колико напајања се користи"
 
@@ -2375,12 +2360,14 @@ msgid "When plugged in"
 msgstr "Када је укључен"
 
 #: ../panels/power/power.ui.h:10
-msgid "Suspend when inactive for:"
-msgstr "Ако је неактиван обустави након:"
+#| msgid "Suspend when inactive for:"
+msgid "Suspend when inactive for"
+msgstr "Ако је неактиван обустави након"
 
 #: ../panels/power/power.ui.h:11
-msgid "When power is _critically low:"
-msgstr "Када је напајање критично _ниско:"
+#| msgid "When power is _critically low:"
+msgid "When power is _critically low"
+msgstr "Када је напајање критично _ниско"
 
 #. Translators: The printer is low on toner
 #: ../panels/printers/cc-printers-panel.c:542
@@ -2573,18 +2560,18 @@ msgid "Time"
 msgstr "Време"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2047
+#: ../panels/printers/cc-printers-panel.c:2052
 msgid "Failed to add new printer."
 msgstr "Нисам успео да додам нови штампач."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2251
-#: ../panels/printers/cc-printers-panel.c:2265
+#: ../panels/printers/cc-printers-panel.c:2256
+#: ../panels/printers/cc-printers-panel.c:2270
 msgid "Test page"
 msgstr "Пробна страница"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2514
+#: ../panels/printers/cc-printers-panel.c:2519
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Не могу да учитам сучеље: %s"
@@ -4471,6 +4458,11 @@ msgstr "Подеси..."
 msgid "Map Buttons..."
 msgstr "Мапирај дугмад..."
 
+#: ../panels/wacom/gnome-wacom-properties.ui.h:13
+#| msgid "Display language:"
+msgid "Display Mapping..."
+msgstr "Прикажи мапирање..."
+
 #: ../panels/wacom/wacom-stylus-page.ui.h:1
 msgid "No Action"
 msgstr "Без радње"
@@ -4540,7 +4532,6 @@ msgid "Stylus"
 msgstr "Пенкало"
 
 #: ../panels/wacom/button-mapping.ui.h:1
-#| msgid "Map Buttons..."
 msgid "Map Buttons"
 msgstr "Мапирај дугмад"
 
@@ -4548,67 +4539,67 @@ msgstr "Мапирај дугмад"
 msgid "Map buttons to functions"
 msgstr "Мапирајте дугмад према функцијама"
 
-#: ../panels/wacom/gsd-wacom-device.c:876
+#: ../panels/wacom/gsd-wacom-device.c:882
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Режим левог прстена #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:883
+#: ../panels/wacom/gsd-wacom-device.c:889
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Режим десног прстена #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:911
+#: ../panels/wacom/gsd-wacom-device.c:917
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Режим леве додирне траке #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:918
+#: ../panels/wacom/gsd-wacom-device.c:924
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Режим десне додирне траке #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:933
+#: ../panels/wacom/gsd-wacom-device.c:939
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Режим прекидача левог додирног прстена"
 
-#: ../panels/wacom/gsd-wacom-device.c:935
+#: ../panels/wacom/gsd-wacom-device.c:941
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Режим прекидача десног додирног прстена"
 
-#: ../panels/wacom/gsd-wacom-device.c:938
+#: ../panels/wacom/gsd-wacom-device.c:944
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Режим прекидача леве додирне траке"
 
-#: ../panels/wacom/gsd-wacom-device.c:940
+#: ../panels/wacom/gsd-wacom-device.c:946
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Режим прекидача десне додирне траке"
 
-#: ../panels/wacom/gsd-wacom-device.c:945
+#: ../panels/wacom/gsd-wacom-device.c:951
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Режим прекидача #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1017
+#: ../panels/wacom/gsd-wacom-device.c:1023
 #, c-format
 msgid "Left Button #%d"
 msgstr "Лево дугме #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1020
+#: ../panels/wacom/gsd-wacom-device.c:1026
 #, c-format
 msgid "Right Button #%d"
 msgstr "Десно дугме #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1023
+#: ../panels/wacom/gsd-wacom-device.c:1029
 #, c-format
 msgid "Top Button #%d"
 msgstr "Горње дугме #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1026
+#: ../panels/wacom/gsd-wacom-device.c:1032
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Доње дугме #%d"
@@ -4636,32 +4627,41 @@ msgid "%d of %d"
 msgstr "%d од %d"
 
 #: ../panels/wacom/cc-wacom-stylus-page.c:374
-#: ../panels/wacom/cc-wacom-page.c:451
+#: ../panels/wacom/cc-wacom-page.c:457
 msgid "Button"
 msgstr "Дугме"
 
-#: ../shell/control-center.c:54
-msgid "Enable verbose mode"
-msgstr "Укључи режим исписивања"
+#: ../panels/wacom/cc-wacom-page.c:251
+msgid "Switch Modes"
+msgstr "Режими пребацивања"
 
-#: ../shell/control-center.c:55
-msgid "Show the overview"
-msgstr "Прикажи преглед"
+#: ../panels/wacom/cc-wacom-page.c:581
+#| msgid "Display language:"
+msgid "Display Mapping"
+msgstr "Приказује мапирање"
 
-#: ../shell/control-center.c:56 ../shell/control-center.c:57
 #: ../shell/control-center.c:58
+msgid "Enable verbose mode"
+msgstr "Укључује режим исписивања"
+
+#: ../shell/control-center.c:59
+msgid "Show the overview"
+msgstr "Приказује преглед"
+
+#: ../shell/control-center.c:60 ../shell/control-center.c:61
+#: ../shell/control-center.c:62
 msgid "Show help options"
 msgstr "Приказује опције за помоћ"
 
-#: ../shell/control-center.c:59
+#: ../shell/control-center.c:63
 msgid "Panel to display"
 msgstr "Панел за приказ"
 
-#: ../shell/control-center.c:81
+#: ../shell/control-center.c:85
 msgid "- System Settings"
 msgstr "— Подешавања система"
 
-#: ../shell/control-center.c:89
+#: ../shell/control-center.c:93
 #, c-format
 msgid ""
 "%s\n"
