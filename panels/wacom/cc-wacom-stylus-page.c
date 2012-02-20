@@ -488,6 +488,12 @@ cc_wacom_stylus_page_new (GsdWacomStylus *stylus,
 	return GTK_WIDGET (page);
 }
 
+GsdWacomStylus *
+cc_wacom_stylus_page_get_stylus (CcWacomStylusPage *page)
+{
+	return page->priv->stylus;
+}
+
 void
 cc_wacom_stylus_page_set_navigation (CcWacomStylusPage *page,
 				     GtkNotebook *notebook)

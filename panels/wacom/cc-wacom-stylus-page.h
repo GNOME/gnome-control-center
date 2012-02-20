@@ -71,6 +71,8 @@ GType cc_wacom_stylus_page_get_type (void) G_GNUC_CONST;
 GtkWidget * cc_wacom_stylus_page_new (GsdWacomStylus *stylus,
 				      GsdWacomStylus *eraser);
 
+GsdWacomStylus * cc_wacom_stylus_page_get_stylus (CcWacomStylusPage *page);
+
 void cc_wacom_stylus_page_set_navigation (CcWacomStylusPage *page,
 					  GtkNotebook *notebook);
 
