@@ -828,8 +828,38 @@ add_styli (CcWacomPage *page)
 		gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), page, NULL);
 	}
 	g_list_free (styli);
+}
 
-	/*FIXME: Set the page with the last used item */
+static void
+stylus_changed (GsdWacomDevice *device,
+		GParamSpec     *pspec,
+		CcWacomPage    *page)
+{
+	GsdWacomStylus *stylus;
+	CcWacomPagePrivate *priv;
+	int num_pages;
+	guint i;
+
+	priv = page->priv;
+	g_object_get (G_OBJECT (device), "last-stylus", &stylus, NULL);
+	if (stylus == NULL)
+		return;
+
+	num_pages = gtk_notebook_get_n_pages (GTK_NOTEBOOK (priv->notebook));
+	for (i = 0; i < num_pages; i++) {
+		GsdWacomStylus *s;
+		CcWacomStylusPage *spage;
+
+		spage = CC_WACOM_STYLUS_PAGE (gtk_notebook_get_nth_page (GTK_NOTEBOOK (priv->notebook), i));
+		s = cc_wacom_stylus_page_get_stylus (spage);
+		if (s == stylus) {
+			gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), i);
+			return;
+		}
+	}
+
+	g_warning ("Failed to find the page for stylus '%s'",
+		   gsd_wacom_stylus_get_name (stylus));
 }
 
 /* Different types of layout for the tablet config */
@@ -949,6 +979,11 @@ cc_wacom_page_new (CcWacomPanel   *panel,
 
 	/* Add styli */
 	add_styli (page);
+
+	/* Get the current stylus and switch to its page */
+	stylus_changed (priv->stylus, NULL, page);
+	g_signal_connect (G_OBJECT (priv->stylus), "notify::last-stylus",
+			  G_CALLBACK (stylus_changed), page);
 
 	return GTK_WIDGET (page);
 }
