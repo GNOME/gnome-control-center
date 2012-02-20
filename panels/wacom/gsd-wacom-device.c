@@ -387,17 +387,17 @@ setup_property_notify (GsdWacomDevice *device)
 {
 	Display *dpy;
 	XIEventMask evmask;
-	unsigned char bitmask[2] = { 0 };
 	int tool_id;
 
-	XISetMask (bitmask, XI_PropertyEvent);
-
 	evmask.deviceid = device->priv->device_id;
-	evmask.mask_len = sizeof (bitmask);
-	evmask.mask = bitmask;
+	evmask.mask_len = XIMaskLen (XI_PropertyEvent);
+	evmask.mask = g_malloc0(evmask.mask_len * sizeof(char));
+	XISetMask (evmask.mask, XI_PropertyEvent);
 
 	dpy = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 	XISelectEvents (dpy, DefaultRootWindow(dpy), &evmask, 1);
+
+	g_free (evmask.mask);
 
 	gdk_window_add_filter (NULL,
 			       (GdkFilterFunc) filter_events,

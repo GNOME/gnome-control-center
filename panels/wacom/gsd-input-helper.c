@@ -289,17 +289,35 @@ out:
         return NULL;
 }
 
+#define TOOL_ID_FORMAT_SIZE 32
+static int
+get_id_for_index (guchar *data,
+		  guint   idx)
+{
+	guchar *ptr;
+	int id;
+
+	ptr = data;
+	ptr += TOOL_ID_FORMAT_SIZE / 8 * idx;
+
+	id = *((int32_t*)ptr);
+	id = id & 0xfffff;
+
+	return id;
+}
+
+
 #define STYLUS_DEVICE_ID        0x02
 #define ERASER_DEVICE_ID        0x0A
 
 int
-xdevice_get_last_tool_id (int deviceid)
+xdevice_get_last_tool_id (int  deviceid)
 {
         Atom           prop;
         Atom           act_type;
         int            act_format;
         unsigned long  nitems, bytes_after;
-        unsigned char *data, *ptr;
+        unsigned char *data;
         int            id;
 
         id = -1;
@@ -329,18 +347,14 @@ xdevice_get_last_tool_id (int deviceid)
 	if (act_type != XA_INTEGER)
 		goto out;
 
-	if (act_format != 32)
+	if (act_format != TOOL_ID_FORMAT_SIZE)
 		goto out;
 
 	/* item 0 = tablet ID
 	 * item 1 = old device serial number (== last tool in proximity)
 	 * item 2 = old hardware serial number (including tool ID)
 	 * item 3 = current serial number (0 if no tool in proximity) */
-	ptr = data;
-	ptr += act_format/8 * 2;
-
-	id = *((int32_t*)ptr);
-	id = id & 0xfffff;
+	id = get_id_for_index (data, 2);
 
 	/* That means that no tool was set down yet */
 	if (id == STYLUS_DEVICE_ID ||
