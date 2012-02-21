@@ -1050,7 +1050,7 @@ gcm_prefs_devices_treeview_clicked_cb (GtkTreeSelection *selection,
 
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "toolbutton_device_default"));
-  gtk_widget_set_visible (widget, FALSE);
+  gtk_widget_set_visible (widget, profile != NULL);
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "toolbutton_device_add"));
   gtk_widget_set_visible (widget, FALSE);
