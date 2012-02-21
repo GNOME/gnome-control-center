@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-02-18 13:43+0000\n"
+"POT-Creation-Date: 2012-02-20 17:48+0000\n"
 "PO-Revision-Date: 2012-02-19 14:43+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
-"Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
-"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Language: sr\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n%"
+"10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Project-Style: gnome\n"
 
 #: ../panels/background/background.ui.h:1
@@ -1010,7 +1010,7 @@ msgid "Video CD"
 msgstr "Видео ЦД"
 
 #: ../panels/info/cc-info-panel.c:1473
-#: ../panels/keyboard/keyboard-shortcuts.c:1617
+#: ../panels/keyboard/keyboard-shortcuts.c:1569
 msgid "Section"
 msgstr "Одељак"
 
@@ -1436,28 +1436,28 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "Пречице"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:555
-#: ../panels/keyboard/keyboard-shortcuts.c:563
-#: ../panels/keyboard/keyboard-shortcuts.c:882
-#: ../panels/keyboard/keyboard-shortcuts.c:1373
-#: ../panels/keyboard/keyboard-shortcuts.c:1377
+#: ../panels/keyboard/keyboard-shortcuts.c:553
+#: ../panels/keyboard/keyboard-shortcuts.c:561
+#: ../panels/keyboard/keyboard-shortcuts.c:873
+#: ../panels/keyboard/keyboard-shortcuts.c:1325
+#: ../panels/keyboard/keyboard-shortcuts.c:1329
 msgid "Custom Shortcuts"
 msgstr "Произвољне пречице"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:723
+#: ../panels/keyboard/keyboard-shortcuts.c:721
 msgid "<Unknown Action>"
 msgstr "<Непозната радња>"
 
 #. translators:
 #. * The device has been disabled
-#: ../panels/keyboard/keyboard-shortcuts.c:1054
+#: ../panels/keyboard/keyboard-shortcuts.c:1025
 #: ../panels/sound/gvc-mixer-control.c:1087
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Disabled"
 msgstr "Искључено"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1195
+#: ../panels/keyboard/keyboard-shortcuts.c:1164
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1468,7 +1468,7 @@ msgstr ""
 "овај тастер.\n"
 "Пробајте да придодате тастер као што је „Цтрл, Алт или Шифт“."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1227
+#: ../panels/keyboard/keyboard-shortcuts.c:1196
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1477,22 +1477,22 @@ msgstr ""
 "Пречица „%s“ се већ користи за\n"
 "„%s“"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1232
+#: ../panels/keyboard/keyboard-shortcuts.c:1201
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Уколико доделите пречицу за „%s“, пречица „%s“ ће бити искључена."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1238
+#: ../panels/keyboard/keyboard-shortcuts.c:1207
 msgid "_Reassign"
 msgstr "_Поново додели"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1666
-#: ../panels/wacom/cc-wacom-page.c:478
+#: ../panels/keyboard/keyboard-shortcuts.c:1618
+#: ../panels/wacom/cc-wacom-page.c:458
 msgid "Action"
 msgstr "Радња"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1688
+#: ../panels/keyboard/keyboard-shortcuts.c:1640
 msgid "Shortcut"
 msgstr "Пречица"
 
@@ -2295,15 +2295,15 @@ msgstr "Упозорење"
 msgid "Good"
 msgstr "Добра"
 
-#: ../panels/power/cc-power-panel.c:1081
+#: ../panels/power/cc-power-panel.c:1077
 msgid "Tip:"
 msgstr "Врста:"
 
-#: ../panels/power/cc-power-panel.c:1082
+#: ../panels/power/cc-power-panel.c:1078
 msgid "Screen Settings"
 msgstr "Подешавања екрана"
 
-#: ../panels/power/cc-power-panel.c:1083
+#: ../panels/power/cc-power-panel.c:1079
 msgid "affect how much power is used"
 msgstr "одређује колико напајања се користи"
 
@@ -2360,12 +2360,10 @@ msgid "When plugged in"
 msgstr "Када је укључен"
 
 #: ../panels/power/power.ui.h:10
-#| msgid "Suspend when inactive for:"
 msgid "Suspend when inactive for"
 msgstr "Ако је неактиван обустави након"
 
 #: ../panels/power/power.ui.h:11
-#| msgid "When power is _critically low:"
 msgid "When power is _critically low"
 msgstr "Када је напајање критично _ниско"
 
@@ -4435,33 +4433,33 @@ msgid "Bluetooth Settings"
 msgstr "Подешавања Блутута"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:7
-msgid "Tracking Mode"
-msgstr "Режим праћења"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:8
-msgid "Left-Handed Orientation"
-msgstr "Леворуко усмерење"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:9
 msgid "Wacom Tablet"
 msgstr "Ваком таблица"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:10
-msgid "Adjust display resolution"
-msgstr "Подесите резолуцију приказа"
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:11
+#: ../panels/wacom/gnome-wacom-properties.ui.h:8
 msgid "Calibrate..."
 msgstr "Подеси..."
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+#: ../panels/wacom/gnome-wacom-properties.ui.h:9
 msgid "Map Buttons..."
 msgstr "Мапирај дугмад..."
 
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+#| msgid "Map Buttons..."
+msgid "Map to Monitor..."
+msgstr "Мапирај монитор..."
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:11
+msgid "Adjust display resolution"
+msgstr "Подесите резолуцију приказа"
+
+#: ../panels/wacom/gnome-wacom-properties.ui.h:12
+msgid "Tracking Mode"
+msgstr "Режим праћења"
+
 #: ../panels/wacom/gnome-wacom-properties.ui.h:13
-#| msgid "Display language:"
-msgid "Display Mapping..."
-msgstr "Прикажи мапирање..."
+msgid "Left-Handed Orientation"
+msgstr "Леворуко усмерење"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:1
 msgid "No Action"
@@ -4504,32 +4502,32 @@ msgid "Forward"
 msgstr "Напред"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:11
-msgid "Soft"
-msgstr "Умекшан"
+msgid "Stylus"
+msgstr "Пенкало"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:12
-msgid "Firm"
-msgstr "Стојеће"
-
-#: ../panels/wacom/wacom-stylus-page.ui.h:13
 msgid "Eraser Pressure Feel"
 msgstr "Осећај притиска брисача"
 
+#: ../panels/wacom/wacom-stylus-page.ui.h:13
+msgid "Soft"
+msgstr "Умекшан"
+
 #: ../panels/wacom/wacom-stylus-page.ui.h:14
-msgid "Lower Button"
-msgstr "Доње дугме"
+msgid "Firm"
+msgstr "Стојеће"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:15
-msgid "Tip Pressure Feel"
-msgstr "Осећај притиска савета"
-
-#: ../panels/wacom/wacom-stylus-page.ui.h:16
 msgid "Top Button"
 msgstr "Горње дугме"
 
+#: ../panels/wacom/wacom-stylus-page.ui.h:16
+msgid "Lower Button"
+msgstr "Доње дугме"
+
 #: ../panels/wacom/wacom-stylus-page.ui.h:17
-msgid "Stylus"
-msgstr "Пенкало"
+msgid "Tip Pressure Feel"
+msgstr "Осећај притиска савета"
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
@@ -4626,8 +4624,8 @@ msgstr "Откривен је лош клик, почињем из почетк�
 msgid "%d of %d"
 msgstr "%d од %d"
 
-#: ../panels/wacom/cc-wacom-stylus-page.c:374
-#: ../panels/wacom/cc-wacom-page.c:457
+#: ../panels/wacom/cc-wacom-stylus-page.c:376
+#: ../panels/wacom/cc-wacom-page.c:437
 msgid "Button"
 msgstr "Дугме"
 
@@ -4635,8 +4633,7 @@ msgstr "Дугме"
 msgid "Switch Modes"
 msgstr "Режими пребацивања"
 
-#: ../panels/wacom/cc-wacom-page.c:581
-#| msgid "Display language:"
+#: ../panels/wacom/cc-wacom-page.c:562
 msgid "Display Mapping"
 msgstr "Приказује мапирање"
 
@@ -4686,6 +4683,10 @@ msgstr "Поставке;Подешавања;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "Сва подешавања"
+
+#~| msgid "Display language:"
+#~ msgid "Display Mapping..."
+#~ msgstr "Прикажи мапирање..."
 
 #~ msgid "Battery discharging"
 #~ msgstr "Батерија се празни"
