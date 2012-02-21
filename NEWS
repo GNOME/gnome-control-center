@@ -1,3 +1,49 @@
+===========================
+Version 3.3.90 (2012-02-21)
+===========================
+
+All:
+- Remove use of deprecated widgets
+
+Wacom:
+- Add simple display mapping dialogue
+- Add button mapping dialogue
+- Switch to last used stylus automatically
+- Loads of small layout fixes
+
+Power:
+- Redesigned dialogue
+- Fix updating not working due to recent gnome-settings-daemon changes
+
+Color:
+- Don't print (null) for virtual printer profiles
+- Don't block the UI settings the default profile
+
+User Accounts:
+- Port to GDBus
+- Fix crasher on startup when compiled with Cheese avatar capture
+- Use new strength bar widget from Power
+
+Keyboard:
+- Fix description not matching reality for setting shortcuts
+- Refuse Shift+unmodified key shortcuts
+- Fix crasher setting new custom shortcuts
+
+Printers:
+- Prevent possible crashes when level, name and color
+  information are parsed
+
+Network:
+- Add "Forget Network" button
+- Remove unused "Unlock" button
+
+Date & Time:
+- Fix crasher when systemd is unavailable
+- Respect LINGUAS for timezone translations
+
+Shell:
+- Force a pixel size for the "All Settings" button
+
 ==========================
 Version 3.3.4 (2012-02-07)
 ==========================
