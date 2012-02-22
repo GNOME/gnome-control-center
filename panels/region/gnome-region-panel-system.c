@@ -148,13 +148,13 @@ xkb_settings_changed (GSettings *settings,
 
 		utf_visible = xkb_layout_description_utf8 (layouts[i]);
 		if (disp->str[0] != '\0')
-			disp = g_string_append (disp, ", ");
-		disp = g_string_append (disp, utf_visible ? utf_visible : layouts[i]);
+			g_string_append (disp, ", ");
+		g_string_append (disp, utf_visible ? utf_visible : layouts[i]);
 		g_free (utf_visible);
 
 		if (list->str[0] != '\0')
-			list = g_string_append (list, ",");
-		list = g_string_append (list, layouts[i]);
+			g_string_append (list, ",");
+		g_string_append (list, layouts[i]);
 	}
 	g_strfreev (layouts);
 
