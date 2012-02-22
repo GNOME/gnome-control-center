@@ -341,7 +341,7 @@ xdevice_get_last_tool_id (int  deviceid)
         if (gdk_error_trap_pop ())
                 goto out;
 
-	if (nitems != 4)
+	if (nitems != 4 && nitems != 5)
 		goto out;
 
 	if (act_type != XA_INTEGER)
@@ -353,8 +353,15 @@ xdevice_get_last_tool_id (int  deviceid)
 	/* item 0 = tablet ID
 	 * item 1 = old device serial number (== last tool in proximity)
 	 * item 2 = old hardware serial number (including tool ID)
-	 * item 3 = current serial number (0 if no tool in proximity) */
-	id = get_id_for_index (data, 2);
+	 * item 3 = current serial number (0 if no tool in proximity)
+	 * item 4 = current tool ID (since Feb 2012)
+	 *
+	 * Get the current tool ID first, if available, then the old one */
+	id = 0x0;
+	if (nitems == 5)
+		id = get_id_for_index (data, 4);
+	if (id == 0x0)
+		id = get_id_for_index (data, 2);
 
 	/* That means that no tool was set down yet */
 	if (id == STYLUS_DEVICE_ID ||

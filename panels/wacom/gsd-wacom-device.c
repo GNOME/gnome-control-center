@@ -374,7 +374,7 @@ filter_events (XEvent         *xevent,
 
 	tool_id = xdevice_get_last_tool_id (device->priv->device_id);
 	if (tool_id == -1) {
-		g_warning ("Failed to get value for changed stylus ID on device '%d", device->priv->device_id);
+		g_warning ("Failed to get value for changed stylus ID on device '%d'", device->priv->device_id);
 		return GDK_FILTER_CONTINUE;
 	}
 	gsd_wacom_device_set_current_stylus (device, tool_id);
