@@ -47,6 +47,7 @@ update_copy_button (GtkBuilder *dialog)
         const gchar *user_lang, *system_lang;
         const gchar *user_region, *system_region;
         const gchar *user_input_source, *system_input_source;
+        const gchar *user_input_variants, *system_input_variants;
         gboolean layouts_differ;
 
         label = WID ("user_display_language");
@@ -63,16 +64,20 @@ update_copy_button (GtkBuilder *dialog)
 
         label = WID ("user_input_source");
         user_input_source = g_object_get_data (G_OBJECT (label), "input_source");
+        user_input_variants = g_object_get_data (G_OBJECT (label), "input_variants");
 
         label = WID ("system_input_source");
         system_input_source = g_object_get_data (G_OBJECT (label), "input_source");
+        system_input_variants = g_object_get_data (G_OBJECT (label), "input_variants");
 
         button = WID ("copy_settings_button");
 
         /* If the version of localed doesn't include layouts... */
-        if (system_input_source)
+        if (system_input_source) {
                 layouts_differ = (g_strcmp0 (user_input_source, system_input_source) != 0);
-        else
+                if (layouts_differ == FALSE)
+                        layouts_differ = (g_strcmp0 (user_input_variants, system_input_variants) != 0);
+        } else
                 layouts_differ = FALSE;
 
         if (g_strcmp0 (user_lang, system_lang) == 0 &&
@@ -131,7 +136,7 @@ xkb_settings_changed (GSettings *settings,
                       GtkBuilder *dialog)
 {
 	guint i;
-	GString *disp, *list;
+	GString *disp, *list, *variants;
 	GtkWidget *label;
 	gchar **layouts;
 
@@ -142,9 +147,12 @@ xkb_settings_changed (GSettings *settings,
 	label = WID ("user_input_source");
 	disp = g_string_new ("");
 	list = g_string_new ("");
+	variants = g_string_new ("");
 
 	for (i = 0; layouts[i]; i++) {
 		gchar *utf_visible;
+		char **split;
+		gchar *layout, *variant;
 
 		utf_visible = xkb_layout_description_utf8 (layouts[i]);
 		if (disp->str[0] != '\0')
@@ -152,13 +160,25 @@ xkb_settings_changed (GSettings *settings,
 		g_string_append (disp, utf_visible ? utf_visible : layouts[i]);
 		g_free (utf_visible);
 
+		split = g_strsplit_set (layouts[i], " \t", 2);
+
+		layout = split[0];
+		variant = split[1];
+
 		if (list->str[0] != '\0')
 			g_string_append (list, ",");
-		g_string_append (list, layouts[i]);
+		g_string_append (list, layout);
+
+		if (variants->str[0] != '\0')
+			g_string_append (variants, ",");
+		g_string_append (variants, variant ? variant : "");
+
+		g_strfreev (split);
 	}
 	g_strfreev (layouts);
 
         g_object_set_data_full (G_OBJECT (label), "input_source", g_string_free (list, FALSE), g_free);
+        g_object_set_data_full (G_OBJECT (label), "input_variants", g_string_free (variants, FALSE), g_free);
         gtk_label_set_text (GTK_LABEL (label), disp->str);
         g_string_free (disp, TRUE);
 
@@ -323,6 +343,7 @@ copy_settings (GtkButton *button, GtkBuilder *dialog)
         const gchar *language;
         const gchar *region;
         const gchar *layout;
+        const gchar *variants;
         GtkWidget *label;
         GVariantBuilder *b;
         gchar *s;
@@ -360,10 +381,11 @@ copy_settings (GtkButton *button, GtkBuilder *dialog)
 
         label = WID ("user_input_source");
         layout = g_object_get_data (G_OBJECT (label), "input_source");
+        variants = g_object_get_data (G_OBJECT (label), "input_variants");
 
         g_dbus_proxy_call (localed_proxy,
                            "SetX11Keyboard",
-                           g_variant_new ("(ssssbb)", layout, "", "", "", TRUE, TRUE),
+                           g_variant_new ("(ssssbb)", layout, "", variants ? variants : "", "", TRUE, TRUE),
                            G_DBUS_CALL_FLAGS_NONE,
                            -1, NULL, NULL, NULL);
 }
