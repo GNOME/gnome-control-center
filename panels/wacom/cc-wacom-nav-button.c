@@ -224,7 +224,7 @@ cc_wacom_nav_button_init (CcWacomNavButton *self)
 	context = gtk_widget_get_style_context (GTK_WIDGET (box));
 	gtk_style_context_add_class (context, GTK_STYLE_CLASS_LINKED);
 	gtk_box_pack_start (GTK_BOX (self), box,
-			    FALSE, FALSE, 8);
+			    FALSE, FALSE, 0);
 
 	/* Prev button */
 	priv->prev = gtk_button_new ();
