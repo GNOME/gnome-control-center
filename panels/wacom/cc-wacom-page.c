@@ -882,7 +882,7 @@ remove_display_link (CcWacomPagePrivate *priv)
 	gtk_widget_destroy (WID ("display-link"));
 
         gtk_container_child_set (CWID ("main-grid"),
-                                 WID ("main-controls-grid"),
+                                 WID ("tablet-buttons-box"),
                                  "top_attach", 2, NULL);
 }
 
