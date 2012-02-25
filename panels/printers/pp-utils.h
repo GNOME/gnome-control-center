@@ -22,7 +22,6 @@
 #define __PP_UTILS_H__
 
 #include <gtk/gtk.h>
-#include <dbus/dbus-glib.h>
 
 G_BEGIN_DECLS
 
@@ -43,11 +42,6 @@ typedef struct
   gchar *ppd_name;
   gint   ppd_match_level;
 } PPDName;
-
-DBusGProxy *get_dbus_proxy (const gchar *name,
-                            const gchar *path,
-                            const gchar *iface,
-                            const gboolean system_bus);
 
 gchar      *get_tag_value (const gchar *tag_string,
                            const gchar *tag_name);

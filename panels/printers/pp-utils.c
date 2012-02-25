@@ -26,7 +26,6 @@
 #include <gtk/gtk.h>
 #include <cups/cups.h>
 #include <cups/ppd.h>
-#include <dbus/dbus-glib.h>
 
 #include "pp-utils.h"
 
@@ -35,38 +34,6 @@
 #define SCP_BUS   "org.fedoraproject.Config.Printing"
 #define SCP_PATH  "/org/fedoraproject/Config/Printing"
 #define SCP_IFACE "org.fedoraproject.Config.Printing"
-
-DBusGProxy *
-get_dbus_proxy (const gchar *name,
-                const gchar *path,
-                const gchar *iface,
-                const gboolean system_bus)
-{
-  DBusGConnection *bus;
-  DBusGProxy      *proxy;
-  GError          *error = NULL;
-
-  if (system_bus)
-    bus = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
-  else
-    bus = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
-
-  if (!bus)
-    {
-      if (system_bus)
-        /* Translators: Program cannot connect to DBus' system bus */
-        g_warning ("Could not connect to system bus: %s", error->message);
-      else
-        /* Translators: Program cannot connect to DBus' session bus */
-        g_warning ("Could not connect to session bus: %s", error->message);
-      g_error_free (error);
-      return NULL;
-    }
-
-  proxy = dbus_g_proxy_new_for_name (bus, name, path, iface);
-
-  return proxy;
-}
 
 gchar *
 get_tag_value (const gchar *tag_string, const gchar *tag_name)
@@ -1576,7 +1543,7 @@ printer_rename (const gchar *old_name,
   cups_dest_t      *dests = NULL;
   cups_dest_t      *dest = NULL;
   cups_job_t       *jobs = NULL;
-  DBusGProxy       *proxy;
+  GDBusConnection  *bus;
   const char       *printer_location = NULL;
   const char       *ppd_filename = NULL;
   const char       *printer_info = NULL;
@@ -1588,7 +1555,6 @@ printer_rename (const gchar *old_name,
   gboolean          printer_paused = FALSE;
   gboolean          default_printer = FALSE;
   gboolean          printer_shared = FALSE;
-  gboolean          call_result;
   GError           *error = NULL;
   http_t           *http;
   gchar           **sheets = NULL;
@@ -1601,7 +1567,6 @@ printer_rename (const gchar *old_name,
   gchar            *op_policy = NULL;
   ipp_t            *request;
   ipp_t            *response;
-  char             *ret_error = NULL;
   gint              i;
   int               num_dests = 0;
   int               num_jobs = 0;
@@ -1749,12 +1714,13 @@ printer_rename (const gchar *old_name,
 
   ppd_filename = cupsGetPPD (old_name);
 
-  proxy = get_dbus_proxy (MECHANISM_BUS,
-                          "/",
-                          MECHANISM_BUS,
-                          TRUE);
-
-  if (proxy)
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
+   {
+     g_warning ("Failed to get system bus: %s", error->message);
+     g_error_free (error);
+   }
+  else
     {
       if (printer_type & CUPS_PRINTER_CLASS)
         {
@@ -1764,27 +1730,42 @@ printer_rename (const gchar *old_name,
         }
       else
         {
-          call_result = dbus_g_proxy_call (proxy, "PrinterAddWithPpdFile", &error,
-                                           G_TYPE_STRING, new_name,
-                                           G_TYPE_STRING, device_uri,
-                                           G_TYPE_STRING, ppd_filename,
-                                           G_TYPE_STRING, printer_info,
-                                           G_TYPE_STRING, printer_location,
-                                           G_TYPE_INVALID,
-                                           G_TYPE_STRING, &ret_error,
-                                           G_TYPE_INVALID);
+          GVariant *output;
 
-          if (!call_result)
+          output = g_dbus_connection_call_sync (bus,
+                                                MECHANISM_BUS,
+                                                "/",
+                                                MECHANISM_BUS,
+                                                "PrinterAddWithPpdFile",
+                                                g_variant_new ("(sssss)",
+                                                               new_name,
+                                                               device_uri ? device_uri : "",
+                                                               ppd_filename ? ppd_filename : "",
+                                                               printer_info ? printer_info : "",
+                                                               printer_location ? printer_location : ""),
+                                                G_VARIANT_TYPE ("(s)"),
+                                                G_DBUS_CALL_FLAGS_NONE,
+                                                -1,
+                                                NULL,
+                                                &error);
+          g_object_unref (bus);
+
+          if (output)
+            {
+              const gchar *ret_error;
+
+              g_variant_get (output, "(&s)", &ret_error);
+              if (ret_error[0] != '\0')
+                g_warning ("%s", ret_error);
+
+              g_variant_unref (output);
+            }
+          else
             {
               g_warning ("%s", error->message);
               g_error_free (error);
             }
-
-          if (ret_error && ret_error[0] != '\0')
-            g_warning ("%s", ret_error);
         }
-
-      g_object_unref (proxy);
     }
 
   if (ppd_filename)
@@ -1829,42 +1810,52 @@ gboolean
 printer_set_location (const gchar *printer_name,
                       const gchar *location)
 {
-  DBusGProxy *proxy;
-  gboolean    result;
+  GDBusConnection *bus;
+  GVariant   *output;
+  gboolean    result = FALSE;
   GError     *error = NULL;
-  char       *ret_error = NULL;
 
   if (!printer_name || !location)
     return TRUE;
 
-  proxy = get_dbus_proxy (MECHANISM_BUS,
-                          "/",
-                          MECHANISM_BUS,
-                          TRUE);
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
+   {
+     g_warning ("Failed to get system bus: %s", error->message);
+     g_error_free (error);
+     return TRUE;
+   }
 
-  if (!proxy)
-    return TRUE;
+  output = g_dbus_connection_call_sync (bus,
+                                        MECHANISM_BUS,
+                                        "/",
+                                        MECHANISM_BUS,
+                                        "PrinterSetLocation",
+                                        g_variant_new ("(ss)", printer_name, location),
+                                        G_VARIANT_TYPE ("(s)"),
+                                        G_DBUS_CALL_FLAGS_NONE,
+                                        -1,
+                                        NULL,
+                                        &error);
+  g_object_unref (bus);
 
-  result = dbus_g_proxy_call (proxy, "PrinterSetLocation", &error,
-                              G_TYPE_STRING, printer_name,
-                              G_TYPE_STRING, location,
-                              G_TYPE_INVALID,
-                              G_TYPE_STRING, &ret_error,
-                              G_TYPE_INVALID);
+  if (output)
+    {
+      const gchar *ret_error;
 
-  if (!result)
+      g_variant_get (output, "(&s)", &ret_error);
+      if (ret_error[0] != '\0')
+        g_warning ("%s", ret_error);
+      else
+        result = TRUE;
+
+      g_variant_unref (output);
+    }
+  else
     {
       g_warning ("%s", error->message);
       g_error_free (error);
     }
-
-  if (ret_error && ret_error[0] != '\0')
-    {
-      g_warning ("%s", ret_error);
-      result = FALSE;
-    }
-
-  g_object_unref (proxy);
 
   return result;
 }
@@ -1874,43 +1865,54 @@ printer_set_accepting_jobs (const gchar *printer_name,
                             gboolean     accepting_jobs,
                             const gchar *reason)
 {
-  DBusGProxy *proxy;
-  gboolean    result;
+  GDBusConnection *bus;
+  GVariant   *output;
+  gboolean    result = FALSE;
   GError     *error = NULL;
-  char       *ret_error = NULL;
 
   if (!printer_name)
     return TRUE;
 
-  proxy = get_dbus_proxy (MECHANISM_BUS,
-                          "/",
-                          MECHANISM_BUS,
-                          TRUE);
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
+   {
+     g_warning ("Failed to get system bus: %s", error->message);
+     g_error_free (error);
+     return TRUE;
+   }
 
-  if (!proxy)
-    return TRUE;
+  output = g_dbus_connection_call_sync (bus,
+                                        MECHANISM_BUS,
+                                        "/",
+                                        MECHANISM_BUS,
+                                        "PrinterSetAcceptJobs",
+                                        g_variant_new ("(sbs)",
+                                                       printer_name,
+                                                       accepting_jobs,
+                                                       reason ? reason : ""),
+                                        G_VARIANT_TYPE ("(s)"),
+                                        G_DBUS_CALL_FLAGS_NONE,
+                                        -1,
+                                        NULL,
+                                        &error);
+  g_object_unref (bus);
 
-  result = dbus_g_proxy_call (proxy, "PrinterSetAcceptJobs", &error,
-                              G_TYPE_STRING, printer_name,
-                              G_TYPE_BOOLEAN, accepting_jobs,
-                              G_TYPE_STRING, reason,
-                              G_TYPE_INVALID,
-                              G_TYPE_STRING, &ret_error,
-                              G_TYPE_INVALID);
+  if (output)
+    {
+      const gchar *ret_error;
 
-  if (!result)
+      g_variant_get (output, "(&s)", &ret_error);
+      if (ret_error[0] != '\0')
+        g_warning ("%s", ret_error);
+      else
+        result = TRUE;
+      g_variant_unref (output);
+    }
+  else
     {
       g_warning ("%s", error->message);
       g_error_free (error);
     }
-
-  if (ret_error && ret_error[0] != '\0')
-    {
-      g_warning ("%s", ret_error);
-      result = FALSE;
-    }
-
-  g_object_unref (proxy);
 
   return result;
 }
@@ -1919,42 +1921,52 @@ gboolean
 printer_set_enabled (const gchar *printer_name,
                      gboolean     enabled)
 {
-  DBusGProxy *proxy;
-  gboolean    result;
+  GDBusConnection *bus;
+  GVariant   *output;
+  gboolean    result = FALSE;
   GError     *error = NULL;
-  char       *ret_error = NULL;
 
   if (!printer_name)
     return TRUE;
 
-  proxy = get_dbus_proxy (MECHANISM_BUS,
-                          "/",
-                          MECHANISM_BUS,
-                          TRUE);
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
+   {
+     g_warning ("Failed to get system bus: %s", error->message);
+     g_error_free (error);
+     return TRUE;
+   }
 
-  if (!proxy)
-    return TRUE;
+  output = g_dbus_connection_call_sync (bus,
+                                        MECHANISM_BUS,
+                                        "/",
+                                        MECHANISM_BUS,
+                                        "PrinterSetEnabled",
+                                        g_variant_new ("(sb)", printer_name, enabled),
+                                        G_VARIANT_TYPE ("(s)"),
+                                        G_DBUS_CALL_FLAGS_NONE,
+                                        -1,
+                                        NULL,
+                                        &error);
+  g_object_unref (bus);
 
-  result = dbus_g_proxy_call (proxy, "PrinterSetEnabled", &error,
-                              G_TYPE_STRING, printer_name,
-                              G_TYPE_BOOLEAN, enabled,
-                              G_TYPE_INVALID,
-                              G_TYPE_STRING, &ret_error,
-                              G_TYPE_INVALID);
+  if (output)
+    {
+      const gchar *ret_error;
 
-  if (!result)
+      g_variant_get (output, "(&s)", &ret_error);
+      if (ret_error[0] != '\0')
+        g_warning ("%s", ret_error);
+      else
+        result = TRUE;
+
+      g_variant_unref (output);
+    }
+  else
     {
       g_warning ("%s", error->message);
       g_error_free (error);
     }
-
-  if (ret_error && ret_error[0] != '\0')
-    {
-      g_warning ("%s", ret_error);
-      result = FALSE;
-    }
-
-  g_object_unref (proxy);
 
   return result;
 }
@@ -1962,41 +1974,52 @@ printer_set_enabled (const gchar *printer_name,
 gboolean
 printer_delete (const gchar *printer_name)
 {
-  DBusGProxy *proxy;
-  gboolean    result;
+  GDBusConnection *bus;
+  GVariant   *output;
+  gboolean    result = FALSE;
   GError     *error = NULL;
-  char       *ret_error = NULL;
 
   if (!printer_name)
     return TRUE;
 
-  proxy = get_dbus_proxy (MECHANISM_BUS,
-                          "/",
-                          MECHANISM_BUS,
-                          TRUE);
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
+   {
+     g_warning ("Failed to get system bus: %s", error->message);
+     g_error_free (error);
+     return TRUE;
+   }
 
-  if (!proxy)
-    return TRUE;
+  output = g_dbus_connection_call_sync (bus,
+                                        MECHANISM_BUS,
+                                        "/",
+                                        MECHANISM_BUS,
+                                        "PrinterDelete",
+                                        g_variant_new ("(s)", printer_name),
+                                        G_VARIANT_TYPE ("(s)"),
+                                        G_DBUS_CALL_FLAGS_NONE,
+                                        -1,
+                                        NULL,
+                                        &error);
+  g_object_unref (bus);
 
-  result = dbus_g_proxy_call (proxy, "PrinterDelete", &error,
-                              G_TYPE_STRING, printer_name,
-                              G_TYPE_INVALID,
-                              G_TYPE_STRING, &ret_error,
-                              G_TYPE_INVALID);
+  if (output)
+    {
+      const gchar *ret_error;
 
-  if (!result)
+      g_variant_get (output, "(&s)", &ret_error);
+      if (ret_error[0] != '\0')
+        g_warning ("%s", ret_error);
+      else
+        result = TRUE;
+
+      g_variant_unref (output);
+    }
+  else
     {
       g_warning ("%s", error->message);
       g_error_free (error);
     }
-
-  if (ret_error && ret_error[0] != '\0')
-    {
-      g_warning ("%s", ret_error);
-      result = FALSE;
-    }
-
-  g_object_unref (proxy);
 
   return result;
 }
@@ -2004,11 +2027,11 @@ printer_delete (const gchar *printer_name)
 gboolean
 printer_set_default (const gchar *printer_name)
 {
-  DBusGProxy *proxy;
+  GDBusConnection *bus;
   const char *cups_server;
-  gboolean    result = TRUE;
+  GVariant   *output;
+  gboolean    result = FALSE;
   GError     *error = NULL;
-  char       *ret_error = NULL;
 
   if (!printer_name)
     return TRUE;
@@ -2024,32 +2047,44 @@ printer_set_default (const gchar *printer_name)
        */
       set_local_default_printer (NULL);
 
-      proxy = get_dbus_proxy (MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              TRUE);
-
-      if (proxy)
+      bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+      if (!bus)
         {
-          result = dbus_g_proxy_call (proxy, "PrinterSetDefault", &error,
-                                      G_TYPE_STRING, printer_name,
-                                      G_TYPE_INVALID,
-                                      G_TYPE_STRING, &ret_error,
-                                      G_TYPE_INVALID);
+          g_warning ("Failed to get system bus: %s", error->message);
+          g_error_free (error);
+        }
+      else
+        {
+          output = g_dbus_connection_call_sync (bus,
+                                                MECHANISM_BUS,
+                                                "/",
+                                                MECHANISM_BUS,
+                                                "PrinterSetDefault",
+                                                g_variant_new ("(s)", printer_name),
+                                                G_VARIANT_TYPE ("(s)"),
+                                                G_DBUS_CALL_FLAGS_NONE,
+                                                -1,
+                                                NULL,
+                                                &error);
+          g_object_unref (bus);
 
-          if (!result)
+          if (output)
+            {
+              const gchar *ret_error;
+
+              g_variant_get (output, "(&s)", &ret_error);
+              if (ret_error[0] != '\0')
+                g_warning ("%s", ret_error);
+              else
+                result = TRUE;
+
+              g_variant_unref (output);
+            }
+          else
             {
               g_warning ("%s", error->message);
               g_error_free (error);
             }
-
-          if (ret_error && ret_error[0] != '\0')
-            {
-              g_warning ("%s", ret_error);
-              result = FALSE;
-            }
-
-          g_object_unref (proxy);
         }
     }
   else
@@ -2067,42 +2102,52 @@ gboolean
 printer_set_shared (const gchar *printer_name,
                     gboolean     shared)
 {
-  DBusGProxy *proxy;
-  gboolean    result;
+  GDBusConnection *bus;
+  GVariant   *output;
+  gboolean    result = FALSE;
   GError     *error = NULL;
-  char       *ret_error = NULL;
 
   if (!printer_name)
     return TRUE;
 
-  proxy = get_dbus_proxy (MECHANISM_BUS,
-                          "/",
-                          MECHANISM_BUS,
-                          TRUE);
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
+   {
+     g_warning ("Failed to get system bus: %s", error->message);
+     g_error_free (error);
+     return TRUE;
+   }
 
-  if (!proxy)
-    return TRUE;
+  output = g_dbus_connection_call_sync (bus,
+                                        MECHANISM_BUS,
+                                        "/",
+                                        MECHANISM_BUS,
+                                        "PrinterSetShared",
+                                        g_variant_new ("(sb)", printer_name, shared),
+                                        G_VARIANT_TYPE ("(s)"),
+                                        G_DBUS_CALL_FLAGS_NONE,
+                                        -1,
+                                        NULL,
+                                        &error);
+  g_object_unref (bus);
 
-  result = dbus_g_proxy_call (proxy, "PrinterSetShared", &error,
-                              G_TYPE_STRING, printer_name,
-                              G_TYPE_BOOLEAN, shared,
-                              G_TYPE_INVALID,
-                              G_TYPE_STRING, &ret_error,
-                              G_TYPE_INVALID);
+  if (output)
+    {
+      const gchar *ret_error;
 
-  if (!result)
+      g_variant_get (output, "(&s)", &ret_error);
+      if (ret_error[0] != '\0')
+        g_warning ("%s", ret_error);
+      else
+        result = TRUE;
+
+      g_variant_unref (output);
+    }
+  else
     {
       g_warning ("%s", error->message);
       g_error_free (error);
     }
-
-  if (ret_error && ret_error[0] != '\0')
-    {
-      g_warning ("%s", ret_error);
-      result = FALSE;
-    }
-
-  g_object_unref (proxy);
 
   return result;
 }
@@ -2112,43 +2157,52 @@ printer_set_job_sheets (const gchar *printer_name,
                         const gchar *start_sheet,
                         const gchar *end_sheet)
 {
-  DBusGProxy *proxy;
-  gboolean    result;
+  GDBusConnection *bus;
+  GVariant   *output;
   GError     *error = NULL;
-  char       *ret_error = NULL;
+  gboolean    result = FALSE;
 
   if (!printer_name || !start_sheet || !end_sheet)
     return TRUE;
 
-  proxy = get_dbus_proxy (MECHANISM_BUS,
-                          "/",
-                          MECHANISM_BUS,
-                          TRUE);
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
+   {
+     g_warning ("Failed to get system bus: %s", error->message);
+     g_error_free (error);
+     return TRUE;
+   }
 
-  if (!proxy)
-    return TRUE;
+  output = g_dbus_connection_call_sync (bus,
+                                        MECHANISM_BUS,
+                                        "/",
+                                        MECHANISM_BUS,
+                                        "PrinterSetJobSheets",
+                                        g_variant_new ("(sss)", printer_name, start_sheet, end_sheet),
+                                        G_VARIANT_TYPE ("(s)"),
+                                        G_DBUS_CALL_FLAGS_NONE,
+                                        -1,
+                                        NULL,
+                                        &error);
+  g_object_unref (bus);
 
-  result = dbus_g_proxy_call (proxy, "PrinterSetJobSheets", &error,
-                              G_TYPE_STRING, printer_name,
-                              G_TYPE_STRING, start_sheet,
-                              G_TYPE_STRING, end_sheet,
-                              G_TYPE_INVALID,
-                              G_TYPE_STRING, &ret_error,
-                              G_TYPE_INVALID);
+  if (output)
+    {
+      const gchar *ret_error;
 
-  if (!result)
+      g_variant_get (output, "(&s)", &ret_error);
+      if (ret_error[0] != '\0')
+        g_warning ("%s", ret_error);
+      else
+        result = TRUE;
+
+      g_variant_unref (output);
+    }
+  else
     {
       g_warning ("%s", error->message);
       g_error_free (error);
     }
-
-  if (ret_error && ret_error[0] != '\0')
-    {
-      g_warning ("%s", ret_error);
-      result = FALSE;
-    }
-
-  g_object_unref (proxy);
 
   return result;
 }
@@ -2158,50 +2212,65 @@ printer_set_policy (const gchar *printer_name,
                     const gchar *policy,
                     gboolean     error_policy)
 {
-  DBusGProxy *proxy;
-  gboolean    result;
+  GDBusConnection *bus;
+  GVariant   *output;
+  gboolean   result = FALSE;
   GError     *error = NULL;
-  char       *ret_error = NULL;
 
   if (!printer_name || !policy)
     return TRUE;
 
-  proxy = get_dbus_proxy (MECHANISM_BUS,
-                          "/",
-                          MECHANISM_BUS,
-                          TRUE);
-
-  if (!proxy)
-    return TRUE;
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
+   {
+     g_warning ("Failed to get system bus: %s", error->message);
+     g_error_free (error);
+     return TRUE;
+   }
 
   if (error_policy)
-    result = dbus_g_proxy_call (proxy, "PrinterSetErrorPolicy", &error,
-                                G_TYPE_STRING, printer_name,
-                                G_TYPE_STRING, policy,
-                                G_TYPE_INVALID,
-                                G_TYPE_STRING, &ret_error,
-                                G_TYPE_INVALID);
+    output = g_dbus_connection_call_sync (bus,
+                                          MECHANISM_BUS,
+                                          "/",
+                                          MECHANISM_BUS,
+                                          "PrinterSetErrorPolicy",
+                                          g_variant_new ("(ss)", printer_name, policy),
+                                          G_VARIANT_TYPE ("(s)"),
+                                          G_DBUS_CALL_FLAGS_NONE,
+                                          -1,
+                                          NULL,
+                                          &error);
   else
-    result = dbus_g_proxy_call (proxy, "PrinterSetOpPolicy", &error,
-                                G_TYPE_STRING, printer_name,
-                                G_TYPE_STRING, policy,
-                                G_TYPE_INVALID,
-                                G_TYPE_STRING, &ret_error,
-                                G_TYPE_INVALID);
+    output = g_dbus_connection_call_sync (bus,
+                                          MECHANISM_BUS,
+                                          "/",
+                                          MECHANISM_BUS,
+                                          "PrinterSetOpPolicy",
+                                          g_variant_new ("(ss)", printer_name, policy),
+                                          G_VARIANT_TYPE ("(s)"),
+                                          G_DBUS_CALL_FLAGS_NONE,
+                                          -1,
+                                          NULL,
+                                          &error);
+  g_object_unref (bus);
 
-  if (!result)
+  if (output)
+    {
+      const gchar *ret_error;
+
+      g_variant_get (output, "(&s)", &ret_error);
+      if (ret_error[0] != '\0')
+        g_warning ("%s", ret_error);
+      else
+        result = TRUE;
+
+      g_variant_unref (output);
+    }
+  else
     {
       g_warning ("%s", error->message);
       g_error_free (error);
     }
-
-  if (ret_error && ret_error[0] != '\0')
-    {
-      g_warning ("%s", ret_error);
-      result = FALSE;
-    }
-
-  g_object_unref (proxy);
 
   return result;
 }
@@ -2211,50 +2280,71 @@ printer_set_users (const gchar  *printer_name,
                    gchar       **users,
                    gboolean      allowed)
 {
-  DBusGProxy *proxy;
-  gboolean    result;
+  GDBusConnection *bus;
+  GVariantBuilder array_builder;
+  gint        i;
+  GVariant   *output;
+  gboolean    result = FALSE;
   GError     *error = NULL;
-  char       *ret_error = NULL;
 
   if (!printer_name || !users)
     return TRUE;
+  
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
+   {
+     g_warning ("Failed to get system bus: %s", error->message);
+     g_error_free (error);
+     return TRUE;
+   }
 
-  proxy = get_dbus_proxy (MECHANISM_BUS,
-                          "/",
-                          MECHANISM_BUS,
-                          TRUE);
-
-  if (!proxy)
-    return TRUE;
+  g_variant_builder_init (&array_builder, G_VARIANT_TYPE ("as"));
+  for (i = 0; users[i]; i++)
+    g_variant_builder_add (&array_builder, "s", users[i]);
 
   if (allowed)
-    result = dbus_g_proxy_call (proxy, "PrinterSetUsersAllowed", &error,
-                                G_TYPE_STRING, printer_name,
-                                G_TYPE_STRV, users,
-                                G_TYPE_INVALID,
-                                G_TYPE_STRING, &ret_error,
-                                G_TYPE_INVALID);
+    output = g_dbus_connection_call_sync (bus,
+                                          MECHANISM_BUS,
+                                          "/",
+                                          MECHANISM_BUS,
+                                          "PrinterSetUsersAllowed",
+                                          g_variant_new ("(sas)", printer_name, &array_builder),
+                                          G_VARIANT_TYPE ("(s)"),
+                                          G_DBUS_CALL_FLAGS_NONE,
+                                          -1,
+                                          NULL,
+                                          &error);
   else
-    result = dbus_g_proxy_call (proxy, "PrinterSetUsersDenied", &error,
-                                G_TYPE_STRING, printer_name,
-                                G_TYPE_STRV, users,
-                                G_TYPE_INVALID,
-                                G_TYPE_STRING, &ret_error,
-                                G_TYPE_INVALID);
+    output = g_dbus_connection_call_sync (bus,
+                                          MECHANISM_BUS,
+                                          "/",
+                                          MECHANISM_BUS,
+                                          "PrinterSetUsersDenied",
+                                          g_variant_new ("(sas)", printer_name, &array_builder),
+                                          G_VARIANT_TYPE ("(s)"),
+                                          G_DBUS_CALL_FLAGS_NONE,
+                                          -1,
+                                          NULL,
+                                          &error);
+  g_object_unref (bus);
 
-  if (!result)
+  if (output)
+    {
+      const gchar *ret_error;
+
+      g_variant_get (output, "(&s)", &ret_error);
+      if (ret_error[0] != '\0')
+        g_warning ("%s", ret_error);
+      else
+        result = TRUE;
+
+      g_variant_unref (output);
+    }
+  else
     {
       g_warning ("%s", error->message);
       g_error_free (error);
     }
-
-  if (ret_error && ret_error[0] != '\0')
-    {
-      g_warning ("%s", ret_error);
-      result = FALSE;
-    }
-
-  g_object_unref (proxy);
 
   return result;
 }
@@ -2263,42 +2353,52 @@ gboolean
 class_add_printer (const gchar *class_name,
                    const gchar *printer_name)
 {
-  DBusGProxy *proxy;
-  gboolean    result;
+  GDBusConnection *bus;
+  GVariant   *output;
+  gboolean    result = FALSE;
   GError     *error = NULL;
-  char       *ret_error = NULL;
 
   if (!class_name || !printer_name)
     return TRUE;
 
-  proxy = get_dbus_proxy (MECHANISM_BUS,
-                          "/",
-                          MECHANISM_BUS,
-                          TRUE);
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
+   {
+     g_warning ("Failed to get system bus: %s", error->message);
+     g_error_free (error);
+     return TRUE;
+   }
 
-  if (!proxy)
-    return TRUE;
+  output = g_dbus_connection_call_sync (bus,
+                                        MECHANISM_BUS,
+                                        "/",
+                                        MECHANISM_BUS,
+                                        "ClassAddPrinter",
+                                        g_variant_new ("(ss)", class_name, printer_name),
+                                        G_VARIANT_TYPE ("(s)"),
+                                        G_DBUS_CALL_FLAGS_NONE,
+                                        -1,
+                                        NULL,
+                                        &error);
+  g_object_unref (bus);
 
-  result = dbus_g_proxy_call (proxy, "ClassAddPrinter", &error,
-                              G_TYPE_STRING, class_name,
-                              G_TYPE_STRING, printer_name,
-                              G_TYPE_INVALID,
-                              G_TYPE_STRING, &ret_error,
-                              G_TYPE_INVALID);
+  if (output)
+    {
+      const gchar *ret_error;
 
-  if (!result)
+      g_variant_get (output, "(&s)", &ret_error);
+      if (ret_error[0] != '\0')
+        g_warning ("%s", ret_error);
+      else
+        result = TRUE;
+
+      g_variant_unref (output);
+    }
+  else
     {
       g_warning ("%s", error->message);
       g_error_free (error);
     }
-
-  if (ret_error && ret_error[0] != '\0')
-    {
-      g_warning ("%s", ret_error);
-      result = FALSE;
-    }
-
-  g_object_unref (proxy);
 
   return result;
 }

@@ -36,7 +36,6 @@
 #include "pp-new-printer-dialog.h"
 #include "pp-utils.h"
 
-#include <dbus/dbus-glib.h>
 #include <libnotify/notify.h>
 
 #ifdef GDK_WINDOWING_X11
@@ -1554,44 +1553,58 @@ new_printer_add_button_cb (GtkButton *button,
 
               if (ppd_file_name)
                 {
-                  DBusGProxy *proxy;
-                  gboolean    result;
+                  GDBusConnection *bus;
                   GError     *error = NULL;
-                  char       *ret_error = NULL;
 
-                  proxy = get_dbus_proxy (MECHANISM_BUS,
-                                          "/",
-                                          MECHANISM_BUS,
-                                          TRUE);
-                  if (proxy)
+                  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+                  if (!bus)
                     {
-                      result = dbus_g_proxy_call (proxy, "PrinterAddWithPpdFile", &error,
-                                                  G_TYPE_STRING, pp->devices[device_id].display_name,
-                                                  G_TYPE_STRING, pp->devices[device_id].device_uri,
-                                                  G_TYPE_STRING, ppd_file_name,
-                                                  G_TYPE_STRING, pp->devices[device_id].device_info,
-                                                  G_TYPE_STRING, pp->devices[device_id].device_location,
-                                                  G_TYPE_INVALID,
-                                                  G_TYPE_STRING, &ret_error,
-                                                  G_TYPE_INVALID);
+                      g_warning ("Failed to get system bus: %s", error->message);
+                      g_error_free (error);
+                    }
+                  else
+                    {
+                      GVariant *output;
 
-                      if (!result)
+                      output = g_dbus_connection_call_sync (bus,
+                                                            MECHANISM_BUS,
+                                                            "/",
+                                                            MECHANISM_BUS,
+                                                            "PrinterAddWithPpdFile",
+                                                            g_variant_new ("(sssss)",
+                                                                           pp->devices[device_id].display_name,
+                                                                           pp->devices[device_id].device_uri,
+                                                                           ppd_file_name,
+                                                                           pp->devices[device_id].device_info,
+                                                                           pp->devices[device_id].device_location ? pp->devices[device_id].device_location : ""),
+                                                            G_VARIANT_TYPE ("(s)"),
+                                                            G_DBUS_CALL_FLAGS_NONE,
+                                                            -1,
+                                                            NULL,
+                                                            &error);
+                      g_object_unref (bus);
+
+                      if (output)
+                        {
+                          const gchar *ret_error;
+
+                          g_variant_get (output, "(&s)", &ret_error);
+                          if (ret_error[0] != '\0')
+                            {
+                              g_warning ("%s", ret_error);
+                              dialog_response = GTK_RESPONSE_REJECT;
+                            }
+                          else
+                            success = TRUE;
+
+                          g_variant_unref (output);
+                        }
+                      else
                         {
                           g_warning ("%s", error->message);
                           g_error_free (error);
                           dialog_response = GTK_RESPONSE_REJECT;
                         }
-
-                      if (ret_error && ret_error[0] != '\0')
-                        {
-                          g_warning ("%s", ret_error);
-                          dialog_response = GTK_RESPONSE_REJECT;
-                        }
-
-                      if (result && (!ret_error || ret_error[0] == '\0'))
-                        success = TRUE;
-
-                      g_object_unref (proxy);
                     }
 
                   g_unlink (ppd_file_name);
@@ -1616,40 +1629,47 @@ new_printer_add_button_cb (GtkButton *button,
           if (ppd_name == NULL || ppd_name->ppd_match_level < PPD_EXACT_MATCH)
             {
               /* Try PackageKit to install printer driver */
-              DBusGProxy *proxy;
-              gboolean    result;
+              GDBusConnection *bus;
               GError     *error = NULL;
 
-              proxy = get_dbus_proxy (PACKAGE_KIT_BUS,
-                                      PACKAGE_KIT_PATH,
-                                      PACKAGE_KIT_MODIFY_IFACE,
-                                      FALSE);
-
-              if (proxy)
+              bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
+              if (!bus)
                 {
-                  gchar **device_ids = NULL;
+                  g_warning ("Failed to get session bus: %s", error->message);
+                  g_error_free (error);
+                }
+              else
+                {
+                  GVariantBuilder array_builder;
+                  GVariant *output;
+                  guint window_id = 0;
 
-                  device_ids = g_new (gchar *, 2);
-                  device_ids[0] = pp->devices[device_id].device_id;
-                  device_ids[1] = NULL;
+                  g_variant_builder_init (&array_builder, G_VARIANT_TYPE ("as"));
+                  g_variant_builder_add (&array_builder, "s", pp->devices[device_id].device_id);
 
-                  result = dbus_g_proxy_call_with_timeout (proxy,
-                    "InstallPrinterDrivers",
-                    3600000,
-                    &error,
 #ifdef GDK_WINDOWING_X11
-                    G_TYPE_UINT, GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (pp->dialog))),
-#else
-                    G_TYPE_UINT, 0,
+                  window_id = GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (pp->dialog)));
 #endif
-                    G_TYPE_STRV, device_ids,
-                    G_TYPE_STRING, "hide-finished",
-                    G_TYPE_INVALID,
-                    G_TYPE_INVALID);
 
-                  g_object_unref (proxy);
+                  output = g_dbus_connection_call_sync (bus,
+                                                        PACKAGE_KIT_BUS,
+                                                        PACKAGE_KIT_PATH,
+                                                        PACKAGE_KIT_MODIFY_IFACE,
+                                                        "InstallPrinterDrivers",
+                                                        g_variant_new ("(uass)",
+                                                                       window_id,
+                                                                       &array_builder,
+                                                                       "hide-finished"),
+                                                        G_VARIANT_TYPE ("()"),
+                                                        G_DBUS_CALL_FLAGS_NONE,
+                                                        3600000,
+                                                        NULL,
+                                                        &error);
+                  g_object_unref (bus);
 
-                  if (!result)
+                  if (output)
+                    g_variant_unref (output);
+                  else
                     {
                       g_warning ("%s", error->message);
                       g_error_free (error);
@@ -1665,49 +1685,61 @@ new_printer_add_button_cb (GtkButton *button,
                   ppd_name = get_ppd_name (pp->devices[device_id].device_id,
                                pp->devices[device_id].device_make_and_model,
                                pp->devices[device_id].device_uri);
-
-                  g_free (device_ids);
                 }
             }
 
           /* Add the new printer */
           if (ppd_name && ppd_name->ppd_name)
             {
-              DBusGProxy *proxy;
-              gboolean    result;
+              GDBusConnection *bus;
               GError     *error = NULL;
-              char       *ret_error = NULL;
+              GVariant   *output;
 
-              proxy = get_dbus_proxy (MECHANISM_BUS,
-                                      "/",
-                                      MECHANISM_BUS,
-                                      TRUE);
-              if (proxy)
+              bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+              if (!bus)
                 {
-                  result = dbus_g_proxy_call (proxy, "PrinterAdd", &error,
-                             G_TYPE_STRING, pp->devices[device_id].display_name,
-                             G_TYPE_STRING, pp->devices[device_id].device_uri,
-                             G_TYPE_STRING, ppd_name->ppd_name,
-                             G_TYPE_STRING, pp->devices[device_id].device_info,
-                             G_TYPE_STRING, pp->devices[device_id].device_location,
-                             G_TYPE_INVALID,
-                             G_TYPE_STRING, &ret_error,
-                             G_TYPE_INVALID);
+                  g_warning ("Failed to get system bus: %s", error->message);
+                  g_error_free (error);
+                }
+              else
+                {
+                  output = g_dbus_connection_call_sync (bus,
+                                                        MECHANISM_BUS,
+                                                        "/",
+                                                        MECHANISM_BUS,
+                                                        "PrinterAdd",
+                                                        g_variant_new ("(sssss)",
+                                                                       pp->devices[device_id].display_name,
+                                                                       pp->devices[device_id].device_uri,
+                                                                       ppd_name->ppd_name,
+                                                                       pp->devices[device_id].device_info,
+                                                                       pp->devices[device_id].device_location ? pp->devices[device_id].device_location : ""),
+                                                        G_VARIANT_TYPE ("(s)"),
+                                                        G_DBUS_CALL_FLAGS_NONE,
+                                                        -1,
+                                                        NULL,
+                                                        &error);
+                  g_object_unref (bus);
 
-                  if (!result)
+                  if (output)
+                    {
+                      const gchar *ret_error;
+
+                      g_variant_get (output, "(&s)", &ret_error);
+                      if (ret_error[0] != '\0')
+                        {
+                          g_warning ("%s", ret_error);
+                          dialog_response = GTK_RESPONSE_REJECT;
+                        }
+
+                      g_variant_unref (output);
+                    }
+                  else
                     {
                       g_warning ("%s", error->message);
                       g_error_free (error);
                       dialog_response = GTK_RESPONSE_REJECT;
                     }
-
-                  if (ret_error && ret_error[0] != '\0')
-                    {
-                      g_warning ("%s", ret_error);
-                      dialog_response = GTK_RESPONSE_REJECT;
-                    }
-
-                  g_object_unref (proxy);
                 }
 
               g_free (ppd_name->ppd_name);
@@ -1725,22 +1757,22 @@ new_printer_add_button_cb (GtkButton *button,
       if (success)
         {
           const char *ppd_file_name = NULL;
-          DBusGProxy *proxy;
-          gboolean    result;
+          GDBusConnection *bus;
           GError     *error = NULL;
-          char       *ret_error = NULL;
+          GVariant   *output;
           ppd_file_t  *ppd_file = NULL;
-          gchar      **value = NULL;
+          gchar       *value = NULL;
           const gchar *paper_size;
 
           ppd_file_name = cupsGetPPD (pp->devices[device_id].display_name);
 
-          proxy = get_dbus_proxy (MECHANISM_BUS,
-                                  "/",
-                                  MECHANISM_BUS,
-                                  TRUE);
-
-          if (proxy)
+          bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+          if (!bus)
+            {
+              g_warning ("Failed to get system bus: %s", error->message);
+              g_error_free (error);
+            }
+          else
             {
               printer_set_accepting_jobs (pp->devices[device_id].display_name, TRUE, NULL);
               printer_set_enabled (pp->devices[device_id].display_name, TRUE);
@@ -1793,8 +1825,7 @@ new_printer_add_button_cb (GtkButton *button,
                                                            strlen (paper_size)) == 0 &&
                                       !ppd_file->groups[i].options[j].choices[k].marked)
                                     {
-                                      value = g_new0 (gchar *, 2);
-                                      value[0] = g_strdup (ppd_file->groups[i].options[j].choices[k].choice);
+                                      value = g_strdup (ppd_file->groups[i].options[j].choices[k].choice);
                                       break;
                                     }
                                 }
@@ -1806,28 +1837,45 @@ new_printer_add_button_cb (GtkButton *button,
 
               if (value)
                 {
-                  result = dbus_g_proxy_call (proxy, "PrinterAddOptionDefault", &error,
-                             G_TYPE_STRING, pp->devices[device_id].display_name,
-                             G_TYPE_STRING, "PageSize",
-                             G_TYPE_STRV, value,
-                             G_TYPE_INVALID,
-                             G_TYPE_STRING, &ret_error,
-                             G_TYPE_INVALID);
+                  GVariantBuilder array_builder;
 
-                  if (!result)
+                  g_variant_builder_init (&array_builder, G_VARIANT_TYPE ("as"));
+                  g_variant_builder_add (&array_builder, "s", value);
+
+                  output = g_dbus_connection_call_sync (bus,
+                                                        MECHANISM_BUS,
+                                                        "/",
+                                                        MECHANISM_BUS,
+                                                        "PrinterAddOptionDefault",
+                                                        g_variant_new ("(ssas)",
+                                                                       pp->devices[device_id].display_name,
+                                                                       "PageSize",
+                                                                       &array_builder),
+                                                        G_VARIANT_TYPE ("(s)"),
+                                                        G_DBUS_CALL_FLAGS_NONE,
+                                                        -1,
+                                                        NULL,
+                                                        &error);
+                  g_object_unref (bus);
+
+                  if (output)
+                    {
+                      const gchar *ret_error;
+
+                      g_variant_get (output, "(&s)", &ret_error);
+                      if (ret_error[0] != '\0')
+                        g_warning ("%s", ret_error);
+
+                      g_variant_unref (output);
+                    }
+                  else
                     {
                       g_warning ("%s", error->message);
                       g_error_free (error);
                     }
 
-                  if (ret_error && ret_error[0] != '\0')
-                    {
-                      g_warning ("%s", ret_error);
-                    }
-
-                  g_strfreev (value);
+                  g_free (value);
                 }
-              g_object_unref (proxy);
             }
 
           if (pp->devices[device_id].device_uri &&
@@ -2008,6 +2056,7 @@ DBus method \"MissingExecutables\" to find missing executables and filters.");
                     {
                       GVariantBuilder  array_builder;
                       GList           *pkg_iter;
+                      guint            window_id = 0;
 
                       g_variant_builder_init (&array_builder, G_VARIANT_TYPE ("as"));
 
@@ -2016,14 +2065,14 @@ DBus method \"MissingExecutables\" to find missing executables and filters.");
                                                "s",
                                                (gchar *) pkg_iter->data);
 
+#ifdef GDK_WINDOWING_X11
+                      window_id = GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (pp->dialog))),
+#endif
+
                       output = g_dbus_proxy_call_sync (proxy,
                                                        "InstallPackageNames",
                                                        g_variant_new ("(uass)",
-#ifdef GDK_WINDOWING_X11
-                                                                      GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (pp->dialog))),
-#else
-                                                                      0,
-#endif
+                                                                      window_id,
                                                                       &array_builder,
                                                                       "hide-finished"),
                                                        G_DBUS_CALL_FLAGS_NONE,

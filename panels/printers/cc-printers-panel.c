@@ -25,7 +25,6 @@
 #include <glib/gi18n-lib.h>
 #include <glib/gstdio.h>
 #include <polkit/polkit.h>
-#include <dbus/dbus-glib.h>
 #include <gdesktop-enums.h>
 
 #include <cups/cups.h>
@@ -1563,11 +1562,10 @@ job_process_cb (GtkButton *button,
 {
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
-  DBusGProxy             *proxy;
+  GDBusConnection        *bus;
   GtkWidget              *widget;
-  gboolean                result = TRUE;
   GError                 *error = NULL;
-  char                   *ret_error = NULL;
+  GVariant               *output = NULL;
   int                     id = -1;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
@@ -1579,57 +1577,75 @@ job_process_cb (GtkButton *button,
 
   if (id >= 0)
     {
-      proxy = get_dbus_proxy (MECHANISM_BUS,
-                              "/",
-                              MECHANISM_BUS,
-                              TRUE);
-
-      if (!proxy)
-        return;
+      bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+      if (!bus)
+        {
+          g_warning ("Failed to get system bus: %s", error->message);
+          g_error_free (error);
+          return;
+        }
 
       if ((GtkButton*) gtk_builder_get_object (priv->builder,
                                                "job-cancel-button") ==
           button)
-        result = dbus_g_proxy_call (proxy, "JobCancelPurge", &error,
-                                    G_TYPE_INT, id,
-                                    G_TYPE_BOOLEAN, FALSE,
-                                    G_TYPE_INVALID,
-                                    G_TYPE_STRING, &ret_error,
-                                    G_TYPE_INVALID);
+        output = g_dbus_connection_call_sync (bus,
+                                              MECHANISM_BUS,
+                                              "/",
+                                              MECHANISM_BUS,
+                                              "JobCancelPurge",
+                                              g_variant_new ("(ib)", id, FALSE),
+                                              G_VARIANT_TYPE ("(s)"),
+                                              G_DBUS_CALL_FLAGS_NONE,
+                                              -1,
+                                              NULL,
+                                              &error);
       else if ((GtkButton*) gtk_builder_get_object (priv->builder,
                                                         "job-hold-button") ==
                button)
-        result = dbus_g_proxy_call (proxy, "JobSetHoldUntil", &error,
-                                    G_TYPE_INT, id,
-                                    G_TYPE_STRING, "indefinite",
-                                    G_TYPE_INVALID,
-                                    G_TYPE_STRING, &ret_error,
-                                    G_TYPE_INVALID);
+        output = g_dbus_connection_call_sync (bus,
+                                              MECHANISM_BUS,
+                                              "/",
+                                              MECHANISM_BUS,
+                                              "JobSetHoldUntil",
+                                              g_variant_new ("(is)", id, "indefinite"),
+                                              G_VARIANT_TYPE ("(s)"),
+                                              G_DBUS_CALL_FLAGS_NONE,
+                                              -1,
+                                              NULL,
+                                              &error);
       else if ((GtkButton*) gtk_builder_get_object (priv->builder,
                                                         "job-release-button") ==
                button)
-        result = dbus_g_proxy_call (proxy, "JobSetHoldUntil", &error,
-                                    G_TYPE_INT, id,
-                                    G_TYPE_STRING, "no-hold",
-                                    G_TYPE_INVALID,
-                                    G_TYPE_STRING, &ret_error,
-                                    G_TYPE_INVALID);
+        output = g_dbus_connection_call_sync (bus,
+                                              MECHANISM_BUS,
+                                              "/",
+                                              MECHANISM_BUS,
+                                              "JobSetHoldUntil",
+                                              g_variant_new ("(is)", id, "no-hold"),
+                                              G_VARIANT_TYPE ("(s)"),
+                                              G_DBUS_CALL_FLAGS_NONE,
+                                              -1,
+                                              NULL,
+                                              &error);
+      g_object_unref (bus);
 
-      g_object_unref (proxy);
-
-      if (!result || (ret_error && ret_error[0] != '\0'))
+      if (output)
         {
-          if (!result)
-            {
-              g_warning ("%s", error->message);
-              g_error_free (error);
-            }
+          const gchar *ret_error;
 
-          if (ret_error && ret_error[0] != '\0')
+          g_variant_get (output, "(&s)", &ret_error);
+          if (ret_error[0] != '\0')
             g_warning ("%s", ret_error);
+          else
+            actualize_jobs_list (self);
+
+          g_variant_unref (output);
         }
       else
-        actualize_jobs_list (self);
+        {
+          g_warning ("%s", error->message);
+          g_error_free (error);
+        }
   }
 
   widget = (GtkWidget*)
