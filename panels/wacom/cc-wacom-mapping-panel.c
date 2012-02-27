@@ -180,13 +180,7 @@ update_mapping (CcWacomMappingPanel *self)
 		gtk_tree_model_get (model, &iter, MONITOR_NAME_COLUMN, &name, MONITOR_NUM_COLUMN, &monitor, -1);
 	}
 
-	if (monitor != -1) {
-		gsd_wacom_device_set_display (self->priv->device, monitor);
-	} else {
-		/* FIXME: does this break screen tablets that aren't
-		 * on the first monitor */
-		gsd_wacom_device_set_display (self->priv->device, 0);
-	}
+	gsd_wacom_device_set_display (self->priv->device, monitor);
 }
 
 void
