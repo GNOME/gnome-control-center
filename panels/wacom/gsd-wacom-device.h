@@ -104,7 +104,7 @@ typedef struct
 	char                     *id;
 	GSettings                *settings;
 	GsdWacomTabletButtonType  type;
-	int                       group_id;
+	int                       group_id, idx;
 } GsdWacomTabletButton;
 
 void                  gsd_wacom_tablet_button_free (GsdWacomTabletButton *button);
@@ -148,7 +148,10 @@ const char     * gsd_wacom_device_type_to_string    (GsdWacomDeviceType type);
 GList          * gsd_wacom_device_get_buttons       (GsdWacomDevice *device);
 GsdWacomTabletButton *gsd_wacom_device_get_button   (GsdWacomDevice   *device,
 						     int               button,
+						     int               index,
 						     GtkDirectionType *dir);
+int gsd_wacom_device_set_next_mode                  (GsdWacomDevice *device,
+						     int             group_id);
 
 /* Helper and debug functions */
 GsdWacomDevice * gsd_wacom_device_create_fake (GsdWacomDeviceType  type,
