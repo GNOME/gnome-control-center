@@ -270,6 +270,59 @@ AC_SUBST(PANEL_LIBS)
 PANEL_LDFLAGS="-export_dynamic -avoid-version -module -no-undefined -export-symbols-regex '^g_io_module_(load|unload)'"
 AC_SUBST(PANEL_LDFLAGS)
 
+dnl ==================================================
+dnl timerfd support
+dnl ==================================================
+AC_MSG_CHECKING([for timerfd support])
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM([
+#include <sys/timerfd.h>
+#include <unistd.h>
+],[
+int
+main (void)
+{
+  struct itimerspec timer_spec = { 0 };
+  timerfd_settime (timerfd_create (CLOCK_MONOTONIC, TFD_CLOEXEC),
+                   TFD_TIMER_ABSTIME,
+                   &timer_spec,
+                   NULL);
+
+  return 0;
+}
+])],
+[have_timerfd=yes],
+[have_timerfd=no])
+AC_MSG_RESULT($have_timerfd)
+if test x"$have_timerfd" = x"yes"; then
+    AC_DEFINE(HAVE_TIMERFD, 1, [have timerfd support])
+
+    dnl libc headers tend to trail kernel support
+    dnl so compensate if necessary
+    AC_MSG_CHECKING([for timerfd cancel-on-set support])
+    AC_COMPILE_IFELSE([AC_LANG_PROGRAM([
+    #include <sys/timerfd.h>
+    #include <unistd.h>
+    ],[
+    int
+    main (void)
+    {
+      struct itimerspec timer_spec = { 0 };
+      timerfd_settime (timerfd_create (CLOCK_MONOTONIC, TFD_CLOEXEC),
+                       TFD_TIMER_ABSTIME | TFD_TIMER_CANCEL_ON_SET,
+                       &timer_spec,
+                       NULL);
+
+      return 0;
+    }
+    ])],
+    [have_tfd_timer_cancel_on_set=yes],
+    [have_tfd_timer_cancel_on_set=no])
+    AC_MSG_RESULT($have_tfd_timer_cancel_on_set)
+    if test x"$have_tfd_timer_cancel_on_set" = x"no"; then
+       AC_DEFINE(TFD_TIMER_CANCEL_ON_SET, [(1 << 1)], [have timerfd support])
+    fi
+fi
+
 dnl ==============================================
 dnl libsocialweb
 dnl ==============================================
