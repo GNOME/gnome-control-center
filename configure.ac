@@ -19,9 +19,6 @@ AC_HEADER_STDC
 LT_PREREQ([2.2])
 LT_INIT
 
-# Use the GNOME documentation framework
-GNOME_DOC_INIT
-
 # Internationalization support
 
 IT_PROG_INTLTOOL([0.40.1])
@@ -321,7 +318,6 @@ fi
 
 AC_OUTPUT([
 Makefile
-help/Makefile
 panels/Makefile
 panels/common/Makefile
 panels/background/Makefile

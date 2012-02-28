@@ -1,7 +1,7 @@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
-SUBDIRS = po shell panels help
-DIST_SUBDIRS = po help shell panels
+SUBDIRS = po shell panels
+DIST_SUBDIRS = po shell panels
 
 DISTCLEANFILES = \
 	gnome-doc-utils.make
@@ -31,7 +31,7 @@ EXTRA_DIST = \
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --disable-update-mimedb --enable-gtk-doc
 
-GITIGNOREFILES=m4 help/*/*.mo
+GITIGNOREFILES=m4
 
 -include $(top_srcdir)/git.mk
 
