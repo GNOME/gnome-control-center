@@ -268,6 +268,8 @@ accel_set_func (GtkTreeViewColumn *tree_column,
 	}
 
 	if (button->type == WACOM_TABLET_BUTTON_TYPE_HARDCODED) {
+		/* FIXME this should list the name of the button,
+		 * Switch Modes Touchring #1 for example */
 		g_object_set (cell,
 			      "visible", TRUE,
 			      "editable", FALSE,
