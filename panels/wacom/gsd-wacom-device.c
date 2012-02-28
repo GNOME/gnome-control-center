@@ -1336,6 +1336,15 @@ gsd_wacom_device_finalize (GObject *object)
         g_free (p->icon_name);
         p->icon_name = NULL;
 
+        if (p->modes) {
+                g_hash_table_destroy (p->modes);
+                p->modes = NULL;
+        }
+        if (p->num_modes) {
+                g_hash_table_destroy (p->num_modes);
+                p->num_modes = NULL;
+        }
+
 	gdk_window_remove_filter (NULL,
 				  (GdkFilterFunc) filter_events,
 				  device);
@@ -1581,7 +1590,7 @@ find_button_with_index (GsdWacomDevice *device,
 	GsdWacomTabletButton *button;
 	char *str;
 
-	str = g_strdup_printf ("%s-mode-%d", id, index + 1);
+	str = g_strdup_printf ("%s-mode-%d", id, index);
 	button = find_button_with_id (device, str);
 	g_free (str);
 
@@ -1591,9 +1600,10 @@ find_button_with_index (GsdWacomDevice *device,
 GsdWacomTabletButton *
 gsd_wacom_device_get_button (GsdWacomDevice   *device,
 			     int               button,
-			     int               index,
 			     GtkDirectionType *dir)
 {
+	int index;
+
 	if (button <= 26) {
 		char *id;
 		GsdWacomTabletButton *ret;
@@ -1633,15 +1643,19 @@ gsd_wacom_device_get_button (GsdWacomDevice   *device,
 	switch (button) {
 	case 90:
 	case 91:
+		index = GPOINTER_TO_INT (g_hash_table_lookup (device->priv->modes, GINT_TO_POINTER (1)));
 		return find_button_with_index (device, "left-ring", index);
 	case 92:
 	case 93:
+		index = GPOINTER_TO_INT (g_hash_table_lookup (device->priv->modes, GINT_TO_POINTER (2)));
 		return find_button_with_index (device, "right-ring", index);
 	case 94:
 	case 95:
+		index = GPOINTER_TO_INT (g_hash_table_lookup (device->priv->modes, GINT_TO_POINTER (3)));
 		return find_button_with_index (device, "left-strip", index);
 	case 96:
 	case 97:
+		index = GPOINTER_TO_INT (g_hash_table_lookup (device->priv->modes, GINT_TO_POINTER (4)));
 		return find_button_with_index (device, "right-strip", index);
 	default:
 		return NULL;

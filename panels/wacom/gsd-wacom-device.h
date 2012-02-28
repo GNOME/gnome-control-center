@@ -148,7 +148,6 @@ const char     * gsd_wacom_device_type_to_string    (GsdWacomDeviceType type);
 GList          * gsd_wacom_device_get_buttons       (GsdWacomDevice *device);
 GsdWacomTabletButton *gsd_wacom_device_get_button   (GsdWacomDevice   *device,
 						     int               button,
-						     int               index,
 						     GtkDirectionType *dir);
 int gsd_wacom_device_set_next_mode                  (GsdWacomDevice *device,
 						     int             group_id);
