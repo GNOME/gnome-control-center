@@ -320,7 +320,7 @@ devices_get_cb (GObject      *source_object,
   PpNewPrinterDialog *pp = user_data;
   cups_dest_t        *dests;
   GHashTable         *devices = NULL;
-  GDBusProxy         *proxy;
+  GDBusConnection    *bus;
   GtkWidget          *widget = NULL;
   GVariant           *dg_output = NULL;
   gboolean            already_present;
@@ -480,16 +480,8 @@ devices_get_cb (GObject      *source_object,
            * Show devices with device-id.
            * Other preferences should apply here.
            */
-          proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-                                                 G_DBUS_PROXY_FLAGS_NONE,
-                                                 NULL,
-                                                 SCP_BUS,
-                                                 SCP_PATH,
-                                                 SCP_IFACE,
-                                                 NULL,
-                                                 &error);
-
-          if (proxy)
+          bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
+          if (bus)
             {
               GVariantBuilder  device_list;
               GVariantBuilder  device_hash;
@@ -530,13 +522,17 @@ devices_get_cb (GObject      *source_object,
                     }
                 }
 
-              output = g_dbus_proxy_call_sync (proxy,
-                                               "GroupPhysicalDevices",
-                                               g_variant_new ("(v)", g_variant_builder_end (&device_list)),
-                                               G_DBUS_CALL_FLAGS_NONE,
-                                               60000,
-                                               NULL,
-                                               &error);
+              output = g_dbus_connection_call_sync (bus,
+                                                    SCP_BUS,
+                                                    SCP_PATH,
+                                                    SCP_IFACE,
+                                                    "GroupPhysicalDevices",
+                                                    g_variant_new ("(v)", g_variant_builder_end (&device_list)),
+                                                    NULL,
+                                                    G_DBUS_CALL_FLAGS_NONE,
+                                                    60000,
+                                                    NULL,
+                                                    &error);
 
               if (output && g_variant_n_children (output) == 1)
                 {
@@ -564,12 +560,12 @@ devices_get_cb (GObject      *source_object,
 
               if (output)
                 g_variant_unref (output);
-              g_object_unref (proxy);
+              g_object_unref (bus);
             }
 
           if (error)
             {
-              if (proxy == NULL ||
+              if (bus == NULL ||
                   (error->domain == G_DBUS_ERROR &&
                    (error->code == G_DBUS_ERROR_SERVICE_UNKNOWN ||
                     error->code == G_DBUS_ERROR_UNKNOWN_METHOD)))
@@ -764,38 +760,33 @@ static void
 service_enable (gchar *service_name,
                 gint   service_timeout)
 {
-  GDBusProxy *proxy;
+  GDBusConnection *bus;
   GVariant   *output = NULL;
   GError     *error = NULL;
 
-  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                         G_DBUS_PROXY_FLAGS_NONE,
-                                         NULL,
-                                         FIREWALLD_BUS,
-                                         FIREWALLD_PATH,
-                                         FIREWALLD_IFACE,
-                                         NULL,
-                                         &error);
-
-  if (!proxy)
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
     {
       g_warning ("%s", error->message);
       g_error_free (error);
       return;
     }
 
+  output = g_dbus_connection_call_sync (bus,
+                                        FIREWALLD_BUS,
+                                        FIREWALLD_PATH,
+                                        FIREWALLD_IFACE,
+                                        "enableService",
+                                        g_variant_new ("(si)",
+                                                       service_name,
+                                                       service_timeout),
+                                        NULL,
+                                        G_DBUS_CALL_FLAGS_NONE,
+                                        60000,
+                                        NULL,
+                                        &error);
 
-  output = g_dbus_proxy_call_sync (proxy,
-                                   "enableService",
-                                   g_variant_new ("(si)",
-                                                  service_name,
-                                                  service_timeout),
-                                   G_DBUS_CALL_FLAGS_NONE,
-                                   60000,
-                                   NULL,
-                                   &error);
-
-  g_object_unref (proxy);
+  g_object_unref (bus);
 
   if (output)
     {
@@ -811,35 +802,31 @@ service_enable (gchar *service_name,
 static void
 service_disable (gchar *service_name)
 {
-  GDBusProxy *proxy;
+  GDBusConnection *bus;
   GVariant   *output = NULL;
   GError     *error = NULL;
 
-  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                         G_DBUS_PROXY_FLAGS_NONE,
-                                         NULL,
-                                         FIREWALLD_BUS,
-                                         FIREWALLD_PATH,
-                                         FIREWALLD_IFACE,
-                                         NULL,
-                                         &error);
-
-  if (!proxy)
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
     {
       g_warning ("%s", error->message);
       g_error_free (error);
       return;
     }
 
-  output = g_dbus_proxy_call_sync (proxy,
-                                   "disableService",
-                                   g_variant_new ("(s)", service_name),
-                                   G_DBUS_CALL_FLAGS_NONE,
-                                   60000,
-                                   NULL,
-                                   &error);
+  output = g_dbus_connection_call_sync (bus,
+                                        FIREWALLD_BUS,
+                                        FIREWALLD_PATH,
+                                        FIREWALLD_IFACE,
+                                        "disableService",
+                                        g_variant_new ("(s)", service_name),
+                                        NULL,
+                                        G_DBUS_CALL_FLAGS_NONE,
+                                        60000,
+                                        NULL,
+                                        &error);
 
-  g_object_unref (proxy);
+  g_object_unref (bus);
 
   if (output)
     {
@@ -855,36 +842,32 @@ service_disable (gchar *service_name)
 static gboolean
 service_enabled (gchar *service_name)
 {
-  GDBusProxy *proxy;
+  GDBusConnection *bus;
   GVariant   *output = NULL;
   GError     *error = NULL;
   gint        query_result = 0;
 
-  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                         G_DBUS_PROXY_FLAGS_NONE,
-                                         NULL,
-                                         FIREWALLD_BUS,
-                                         FIREWALLD_PATH,
-                                         FIREWALLD_IFACE,
-                                         NULL,
-                                         &error);
-
-  if (!proxy)
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
     {
       g_warning ("%s", error->message);
       g_error_free (error);
       return FALSE;
     }
 
-  output = g_dbus_proxy_call_sync (proxy,
-                                   "queryService",
-                                   g_variant_new ("(s)", service_name),
-                                   G_DBUS_CALL_FLAGS_NONE,
-                                   60000,
-                                   NULL,
-                                   &error);
+  output = g_dbus_connection_call_sync (bus,
+                                        FIREWALLD_BUS,
+                                        FIREWALLD_PATH,
+                                        FIREWALLD_IFACE,
+                                        "queryService",
+                                        g_variant_new ("(s)", service_name),
+                                        G_VARIANT_TYPE ("(i)"),
+                                        G_DBUS_CALL_FLAGS_NONE,
+                                        60000,
+                                        NULL,
+                                        &error);
 
-  g_object_unref (proxy);
+  g_object_unref (bus);
 
   if (output)
     {
@@ -911,36 +894,32 @@ dbus_method_available (gchar *name,
                        gchar *iface,
                        gchar *method)
 {
-  GDBusProxy *proxy;
+  GDBusConnection *bus;
   GError     *error = NULL;
   GVariant   *output = NULL;
   gboolean    result = FALSE;
 
-  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                         G_DBUS_PROXY_FLAGS_NONE,
-                                         NULL,
-                                         name,
-                                         path,
-                                         iface,
-                                         NULL,
-                                         NULL);
-
-  if (!proxy)
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
     {
       g_warning ("%s", error->message);
       g_error_free (error);
       return FALSE;
     }
 
-  output = g_dbus_proxy_call_sync (proxy,
-                                   method,
-                                   NULL,
-                                   G_DBUS_CALL_FLAGS_NONE,
-                                   60000,
-                                   NULL,
-                                   &error);
+  output = g_dbus_connection_call_sync (bus,
+                                        name,
+                                        path,
+                                        iface,
+                                        method,
+                                        NULL,
+                                        NULL,
+                                        G_DBUS_CALL_FLAGS_NONE,
+                                        60000,
+                                        NULL,
+                                        &error);
 
-  g_object_unref (proxy);
+  g_object_unref (bus);
 
   if (output)
     {
@@ -1917,7 +1896,6 @@ new_printer_add_button_cb (GtkButton *button,
 
           if (ppd_file_name)
             {
-              GDBusProxy *proxy;
               GVariant   *output;
               GVariant   *array;
               GList      *executables = NULL;
@@ -1925,25 +1903,21 @@ new_printer_add_button_cb (GtkButton *button,
 
               error = NULL;
 
-              proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-                                                     G_DBUS_PROXY_FLAGS_NONE,
-                                                     NULL,
-                                                     SCP_BUS,
-                                                     SCP_PATH,
-                                                     SCP_IFACE,
-                                                     NULL,
-                                                     &error);
-
-              if (proxy)
+              bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
+              if (bus)
                 {
-                  output = g_dbus_proxy_call_sync (proxy,
-                                                   "MissingExecutables",
-                                                   g_variant_new ("(s)", ppd_file_name),
-                                                   G_DBUS_CALL_FLAGS_NONE,
-                                                   60000,
-                                                   NULL,
-                                                   &error);
-                  g_object_unref (proxy);
+                  output = g_dbus_connection_call_sync (bus,
+                                                        SCP_BUS,
+                                                        SCP_PATH,
+                                                        SCP_IFACE,
+                                                        "MissingExecutables",
+                                                        g_variant_new ("(s)", ppd_file_name),
+                                                        NULL,
+                                                        G_DBUS_CALL_FLAGS_NONE,
+                                                        60000,
+                                                        NULL,
+                                                        &error);
+                  g_object_unref (bus);
 
                   if (output)
                     {
@@ -1966,7 +1940,7 @@ new_printer_add_button_cb (GtkButton *button,
                     }
                 }
 
-              if (proxy == NULL ||
+              if (bus == NULL ||
                   (error &&
                    error->domain == G_DBUS_ERROR &&
                    (error->code == G_DBUS_ERROR_SERVICE_UNKNOWN ||
@@ -1982,30 +1956,26 @@ DBus method \"MissingExecutables\" to find missing executables and filters.");
 
               if (executables)
                 {
-                  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-                                                         G_DBUS_PROXY_FLAGS_NONE,
-                                                         NULL,
-                                                         PACKAGE_KIT_BUS,
-                                                         PACKAGE_KIT_PATH,
-                                                         PACKAGE_KIT_QUERY_IFACE,
-                                                         NULL,
-                                                         &error);
-
-                  if (proxy)
+                  bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
+                  if (bus)
                     {
                       GList *exec_iter;
 
                       for (exec_iter = executables; exec_iter; exec_iter = exec_iter->next)
                         {
-                          output = g_dbus_proxy_call_sync (proxy,
-                                                           "SearchFile",
-                                                           g_variant_new ("(ss)",
-                                                                          (gchar *) exec_iter->data,
-                                                                          ""),
-                                                           G_DBUS_CALL_FLAGS_NONE,
-                                                           60000,
-                                                           NULL,
-                                                           &error);
+                          output = g_dbus_connection_call_sync (bus,
+                                                                PACKAGE_KIT_BUS,
+                                                                PACKAGE_KIT_PATH,
+                                                                PACKAGE_KIT_QUERY_IFACE,
+                                                                "SearchFile",
+                                                                g_variant_new ("(ss)",
+                                                                               (gchar *) exec_iter->data,
+                                                                               ""),
+                                                                G_VARIANT_TYPE ("(bs)"),
+                                                                G_DBUS_CALL_FLAGS_NONE,
+                                                                60000,
+                                                                NULL,
+                                                                &error);
 
                           if (output)
                             {
@@ -2027,7 +1997,7 @@ DBus method \"MissingExecutables\" to find missing executables and filters.");
                             }
                         }
 
-                      g_object_unref (proxy);
+                      g_object_unref (bus);
                     }
                   else
                     {
@@ -2043,16 +2013,8 @@ DBus method \"MissingExecutables\" to find missing executables and filters.");
 
               if (packages)
                 {
-                  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-                                                         G_DBUS_PROXY_FLAGS_NONE,
-                                                         NULL,
-                                                         PACKAGE_KIT_BUS,
-                                                         PACKAGE_KIT_PATH,
-                                                         PACKAGE_KIT_MODIFY_IFACE,
-                                                         NULL,
-                                                         &error);
-
-                  if (proxy)
+                  bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
+                  if (bus)
                     {
                       GVariantBuilder  array_builder;
                       GList           *pkg_iter;
@@ -2069,17 +2031,21 @@ DBus method \"MissingExecutables\" to find missing executables and filters.");
                       window_id = GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (pp->dialog))),
 #endif
 
-                      output = g_dbus_proxy_call_sync (proxy,
-                                                       "InstallPackageNames",
-                                                       g_variant_new ("(uass)",
-                                                                      window_id,
-                                                                      &array_builder,
-                                                                      "hide-finished"),
-                                                       G_DBUS_CALL_FLAGS_NONE,
-                                                       60000,
-                                                       NULL,
-                                                       &error);
-                      g_object_unref (proxy);
+                      output = g_dbus_connection_call_sync (bus,
+                                                            PACKAGE_KIT_BUS,
+                                                            PACKAGE_KIT_PATH,
+                                                            PACKAGE_KIT_MODIFY_IFACE,
+                                                            "InstallPackageNames",
+                                                            g_variant_new ("(uass)",
+                                                                           window_id,
+                                                                           &array_builder,
+                                                                           "hide-finished"),
+                                                            NULL,
+                                                            G_DBUS_CALL_FLAGS_NONE,
+                                                            60000,
+                                                            NULL,
+                                                            &error);
+                      g_object_unref (bus);
 
                       if (output)
                         {

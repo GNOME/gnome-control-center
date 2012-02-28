@@ -771,8 +771,7 @@ get_ppd_name (gchar *device_id,
               gchar *device_make_and_model,
               gchar *device_uri)
 {
-  GDBusProxy *proxy;
-  GVariant   *input;
+  GDBusConnection *bus;
   GVariant   *output;
   GVariant   *array;
   GVariant   *tuple;
@@ -787,29 +786,23 @@ get_ppd_name (gchar *device_id,
              "generic",
              "none"};
 
-  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-                                         G_DBUS_PROXY_FLAGS_NONE,
-                                         NULL,
-                                         SCP_BUS,
-                                         SCP_PATH,
-                                         SCP_IFACE,
-                                         NULL,
-                                         &error);
-
-  if (proxy)
+  bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
+  if (bus)
     {
-      input = g_variant_new ("(sss)",
-                             device_id ? device_id : "",
-                             device_make_and_model ? device_make_and_model : "",
-                             device_uri ? device_uri : "");
-
-      output = g_dbus_proxy_call_sync (proxy,
-                                       "GetBestDrivers",
-                                       input,
-                                       G_DBUS_CALL_FLAGS_NONE,
-                                       60000,
-                                       NULL,
-                                       &error);
+      output = g_dbus_connection_call_sync (bus,
+                                            SCP_BUS,
+                                            SCP_PATH,
+                                            SCP_IFACE,
+                                            "GetBestDrivers",
+                                            g_variant_new ("(sss)",
+                                                           device_id ? device_id : "",
+                                                           device_make_and_model ? device_make_and_model : "",
+                                                           device_uri ? device_uri : ""),
+                                            NULL,
+                                            G_DBUS_CALL_FLAGS_NONE,
+                                            60000,
+                                            NULL,
+                                            &error);
 
       if (output && g_variant_n_children (output) >= 1)
         {
@@ -853,11 +846,10 @@ get_ppd_name (gchar *device_id,
 
       if (output)
         g_variant_unref (output);
-      g_variant_unref (input);
-      g_object_unref (proxy);
+      g_object_unref (bus);
     }
 
-  if (proxy == NULL ||
+  if (bus == NULL ||
       (error &&
        error->domain == G_DBUS_ERROR &&
        (error->code == G_DBUS_ERROR_SERVICE_UNKNOWN ||
