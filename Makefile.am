@@ -3,9 +3,6 @@ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 SUBDIRS = po shell panels
 DIST_SUBDIRS = po shell panels
 
-DISTCLEANFILES = \
-	gnome-doc-utils.make
-
 MAINTAINERCLEANFILES = \
 	$(srcdir)/INSTALL \
 	$(srcdir)/aclocal.m4 \
@@ -26,10 +23,9 @@ MAINTAINERCLEANFILES = \
 	`find "$(srcdir)" -type f -name Makefile.in -print`
 
 EXTRA_DIST = \
-	MAINTAINERS \
-	gnome-doc-utils.make
+	MAINTAINERS
 
-DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper --disable-update-mimedb --enable-gtk-doc
+DISTCHECK_CONFIGURE_FLAGS = --disable-update-mimedb --enable-gtk-doc
 
 GITIGNOREFILES=m4
 
