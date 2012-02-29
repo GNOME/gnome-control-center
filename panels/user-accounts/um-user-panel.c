@@ -690,6 +690,7 @@ account_type_changed (UmEditableCombo    *combo,
 
         if (account_type != um_user_get_account_type (user)) {
                 um_user_set_account_type (user, account_type);
+                on_permission_changed (d->permission, NULL, d);
         }
 
         g_object_unref (user);
@@ -945,6 +946,60 @@ remove_unlock_tooltip (GtkWidget *button)
 }
 
 static void
+hide_administrative_tasks (UmUserPanelPrivate *d)
+{
+        GtkWidget *widget;
+
+        widget = get_widget (d, "userlist-vbox");
+        gtk_widget_hide (widget);
+
+        widget = get_widget (d, "account-type-label");
+        gtk_widget_hide (widget);
+
+        widget = get_widget (d, "account-type-combo");
+        gtk_widget_hide (widget);
+
+        widget = get_widget (d, "language-label");
+        gtk_widget_hide (widget);
+
+        widget = get_widget (d, "account-language-combo");
+        gtk_widget_hide (widget);
+
+        widget = get_widget (d, "autologin-label");
+        gtk_widget_hide (widget);
+
+        widget = get_widget (d, "autologin-switch");
+        gtk_widget_hide (widget);
+}
+
+static void
+show_administrative_tasks (UmUserPanelPrivate *d)
+{
+        GtkWidget *widget;
+
+        widget = get_widget (d, "userlist-vbox");
+        gtk_widget_show (widget);
+
+        widget = get_widget (d, "account-type-label");
+        gtk_widget_show (widget);
+
+        widget = get_widget (d, "account-type-combo");
+        gtk_widget_show (widget);
+
+        widget = get_widget (d, "language-label");
+        gtk_widget_show (widget);
+
+        widget = get_widget (d, "account-language-combo");
+        gtk_widget_show (widget);
+
+        widget = get_widget (d, "autologin-label");
+        gtk_widget_show (widget);
+
+        widget = get_widget (d, "autologin-switch");
+        gtk_widget_show (widget);
+}
+
+static void
 on_permission_changed (GPermission *permission,
                        GParamSpec  *pspec,
                        gpointer     data)
@@ -953,6 +1008,8 @@ on_permission_changed (GPermission *permission,
         gboolean is_authorized;
         gboolean self_selected;
         UmUser *user;
+        UmUser *self_user;
+        UmAccountType self_account_type;
         GtkWidget *widget;
 
         user = get_selected_user (d);
@@ -962,6 +1019,9 @@ on_permission_changed (GPermission *permission,
 
         is_authorized = g_permission_get_allowed (G_PERMISSION (d->permission));
         self_selected = um_user_get_uid (user) == geteuid ();
+
+        self_user = um_user_manager_get_user_by_id (d->um, geteuid ());
+        self_account_type = um_user_get_account_type (self_user);
 
         widget = get_widget (d, "add-user-toolbutton");
         gtk_widget_set_sensitive (widget, is_authorized);
@@ -1046,6 +1106,12 @@ on_permission_changed (GPermission *permission,
                 add_unlock_tooltip (get_widget (d, "account-password-button"));
 
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (get_widget (d, "account-fingerprint-notebook")), 0);
+        }
+
+        if (is_authorized || self_account_type == UM_ACCOUNT_TYPE_ADMINISTRATOR) {
+                show_administrative_tasks (d);
+        } else {
+                hide_administrative_tasks (d);
         }
 
         um_password_dialog_set_privileged (d->password_dialog, is_authorized);
