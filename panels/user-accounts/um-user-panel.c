@@ -57,6 +57,8 @@
 
 G_DEFINE_DYNAMIC_TYPE (UmUserPanel, um_user_panel, CC_TYPE_PANEL)
 
+#define OTHER_PASSWORDS_PROGRAM "seahorse"
+
 #define UM_USER_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), UM_TYPE_USER_PANEL, UmUserPanelPrivate))
 
@@ -617,6 +619,21 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
                 gtk_widget_show (label);
                 gtk_widget_show (widget);
         }
+
+        widget = get_widget (d, "other-passwords-button");
+        if (um_user_get_uid (user) != getuid()) {
+                gtk_widget_hide (widget);
+        } else {
+                char *other_passwords;
+
+                other_passwords = g_find_program_in_path (OTHER_PASSWORDS_PROGRAM);
+                if (other_passwords != NULL) {
+                        gtk_widget_show (widget);
+                        g_free (other_passwords);
+                } else {
+                        gtk_widget_hide (widget);
+                }
+        }
 }
 
 static void on_permission_changed (GPermission *permission, GParamSpec *pspec, gpointer data);
@@ -772,6 +789,22 @@ change_password (GtkButton *button, UmUserPanelPrivate *d)
                                   GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)));
 
         g_object_unref (user);
+}
+
+static void
+edit_other_passwords (GtkButton *button, UmUserPanelPrivate *d)
+{
+      GError *error;
+
+      error = NULL;
+
+      g_spawn_command_line_async (OTHER_PASSWORDS_PROGRAM, &error);
+
+      if (error != NULL) {
+              g_warning ("unable to launch " OTHER_PASSWORDS_PROGRAM ": %s",
+                         error->message);
+              g_error_free (error);
+      }
 }
 
 static void
@@ -1212,6 +1245,9 @@ setup_main_window (UmUserPanelPrivate *d)
 
         button = get_widget (d, "account-password-button");
         g_signal_connect (button, "start-editing", G_CALLBACK (change_password), d);
+
+        button = get_widget (d, "other-passwords-button");
+        g_signal_connect (button, "clicked", G_CALLBACK (edit_other_passwords), d);
 
         button = get_widget (d, "account-language-combo");
         g_signal_connect (button, "editing-done", G_CALLBACK (language_changed), d);
