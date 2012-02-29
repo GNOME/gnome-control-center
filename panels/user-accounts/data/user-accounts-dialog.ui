@@ -131,11 +131,10 @@
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
-                      <object class="GtkTable" id="table1">
+                      <object class="GtkGrid" id="user-grid">
                         <property name="visible">True</property>
-                        <property name="n_rows">7</property>
-                        <property name="n_columns">2</property>
                         <property name="column_spacing">10</property>
+                        <property name="column_homogeneous">True</property>
                         <child>
                           <object class="GtkNotebook" id="account-fingerprint-notebook">
                             <property name="visible">True</property>
@@ -167,10 +166,9 @@
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
+                            <property name="width">1</property>
                             <property name="top_attach">6</property>
-                            <property name="bottom_attach">7</property>
-                            <property name="y_options">0</property>
+                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -180,17 +178,18 @@
                             <property name="text-column">0</property>
                           </object>
                           <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="top_attach">1</property>
-                            <property name="bottom_attach">2</property>
-                            <property name="y_options">0</property>
+                            <property name="left_attach">2</property>
+                            <property name="width">1</property>
+                            <property name="top_attach">2</property>
+                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkLabel" id="account-type-label">
                             <property name="visible">True</property>
                             <property name="xalign">1</property>
+                            <property name="halign">GTK_ALIGN_END</property>
+                            <property name="hexpand">True</property>
                             <property name="label" translatable="yes">Account _type</property>
                             <property name="use_underline">True</property>
                             <property name="mnemonic_widget">account-type-combo</property>
@@ -199,10 +198,10 @@
                             </style>
                           </object>
                           <packing>
-                            <property name="top_attach">1</property>
-                            <property name="bottom_attach">2</property>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options">0</property>
+                            <property name="left_attach">1</property>
+                            <property name="width">1</property>
+                            <property name="top_attach">2</property>
+                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -223,15 +222,18 @@
                             </child>
                           </object>
                           <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="y_options">0</property>
+                            <property name="left_attach">2</property>
+                            <property name="width">1</property>
+                            <property name="top_attach">0</property>
+                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkLabel" id="login-options-label">
                             <property name="visible">True</property>
                             <property name="xalign">1</property>
+                            <property name="halign">GTK_ALIGN_END</property>
+                            <property name="hexpand">True</property>
                             <property name="ypad">5</property>
                             <property name="label" translatable="yes">Login Options</property>
                             <attributes>
@@ -239,16 +241,18 @@
                             </attributes>
                           </object>
                           <packing>
-                            <property name="top_attach">3</property>
-                            <property name="bottom_attach">4</property>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options">0</property>
+                            <property name="left_attach">1</property>
+                            <property name="width">1</property>
+                            <property name="top_attach">4</property>
+                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkLabel" id="password-label">
                             <property name="visible">True</property>
                             <property name="xalign">1</property>
+                            <property name="halign">GTK_ALIGN_END</property>
+                            <property name="hexpand">True</property>
                             <property name="label" translatable="yes">_Password</property>
                             <property name="use_underline">True</property>
                             <property name="mnemonic_widget">account-password-button</property>
@@ -257,10 +261,10 @@
                             </style>
                           </object>
                           <packing>
-                            <property name="top_attach">4</property>
-                            <property name="bottom_attach">5</property>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options">0</property>
+                            <property name="left_attach">1</property>
+                            <property name="width">1</property>
+                            <property name="top_attach">5</property>
+                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -268,17 +272,18 @@
                             <property name="visible">True</property>
                           </object>
                           <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="top_attach">4</property>
-                            <property name="bottom_attach">5</property>
-                            <property name="y_options">0</property>
+                            <property name="left_attach">2</property>
+                            <property name="width">1</property>
+                            <property name="top_attach">5</property>
+                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkLabel" id="autologin-label">
                             <property name="visible">True</property>
                             <property name="xalign">1</property>
+                            <property name="halign">GTK_ALIGN_END</property>
+                            <property name="hexpand">True</property>
                             <property name="label" translatable="yes">A_utomatic Login</property>
                             <property name="use_underline">True</property>
                             <property name="mnemonic_widget">autologin-switch</property>
@@ -287,10 +292,10 @@
                             </style>
                           </object>
                           <packing>
-                            <property name="top_attach">5</property>
-                            <property name="bottom_attach">6</property>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options">0</property>
+                            <property name="left_attach">1</property>
+                            <property name="width">1</property>
+                            <property name="top_attach">6</property>
+                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -311,17 +316,18 @@
                             </child>
                           </object>
                           <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="top_attach">5</property>
-                            <property name="bottom_attach">6</property>
-                            <property name="y_options">0</property>
+                            <property name="left_attach">2</property>
+                            <property name="width">1</property>
+                            <property name="top_attach">6</property>
+                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkLabel" id="account-fingerprint-label">
                             <property name="visible">True</property>
                             <property name="xalign">1</property>
+                            <property name="halign">GTK_ALIGN_END</property>
+                            <property name="hexpand">True</property>
                             <property name="label" translatable="yes">_Fingerprint Login</property>
                             <property name="use_underline">True</property>
                             <property name="mnemonic_widget">account-fingerprint-button</property>
@@ -330,15 +336,17 @@
                             </style>
                           </object>
                           <packing>
-                            <property name="top_attach">6</property>
-                            <property name="bottom_attach">7</property>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options">0</property>
+                            <property name="left_attach">1</property>
+                            <property name="width">1</property>
+                            <property name="top_attach">7</property>
+                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkHBox" id="hbox5">
                             <property name="visible">True</property>
+                            <property name="halign">GTK_ALIGN_END</property>
+                            <property name="hexpand">True</property>
                             <child>
                               <object class="GtkLabel" id="label4">
                                 <property name="visible">True</property>
@@ -399,14 +407,18 @@
                             </child>
                           </object>
                           <packing>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options">0</property>
+                            <property name="left_attach">1</property>
+                            <property name="width">1</property>
+                            <property name="top_attach">0</property>
+                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkLabel" id="language-label">
                             <property name="visible">True</property>
                             <property name="xalign">1</property>
+                            <property name="halign">GTK_ALIGN_END</property>
+                            <property name="hexpand">True</property>
                             <property name="label" translatable="yes">_Language</property>
                             <property name="use_underline">True</property>
                             <property name="mnemonic_widget">account-language-combo</property>
@@ -415,10 +427,10 @@
                             </style>
                           </object>
                           <packing>
-                            <property name="top_attach">2</property>
-                            <property name="bottom_attach">3</property>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options">0</property>
+                            <property name="left_attach">1</property>
+                            <property name="width">1</property>
+                            <property name="top_attach">3</property>
+                            <property name="height">1</property>
                           </packing>
                         </child>
                         <child>
@@ -428,12 +440,10 @@
                             <property name="text-column">1</property>
                           </object>
                           <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="top_attach">2</property>
-                            <property name="bottom_attach">3</property>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options">0</property>
+                            <property name="left_attach">2</property>
+                            <property name="width">1</property>
+                            <property name="top_attach">3</property>
+                            <property name="height">1</property>
                           </packing>
                         </child>
                       </object>
