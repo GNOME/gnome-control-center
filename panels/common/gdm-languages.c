@@ -620,7 +620,6 @@ count_languages_and_territories (void)
 {
 	gpointer value;
 	GHashTableIter iter;
-	gint count;
 
 	gdm_language_count_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 	gdm_territory_count_map = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
@@ -631,13 +630,21 @@ count_languages_and_territories (void)
 
                 locale = (GdmLocale *) value;
 
-		count = GPOINTER_TO_INT (g_hash_table_lookup (gdm_language_count_map, locale->language_code));
-		count++;
-		g_hash_table_insert (gdm_language_count_map, g_strdup (locale->language_code), GINT_TO_POINTER (count));
+		if (locale->language_code != NULL) {
+			int count;
 
-		count = GPOINTER_TO_INT (g_hash_table_lookup (gdm_territory_count_map, locale->territory_code));
-		count++;
-		g_hash_table_insert (gdm_territory_count_map, g_strdup (locale->territory_code), GINT_TO_POINTER (count));
+			count = GPOINTER_TO_INT (g_hash_table_lookup (gdm_language_count_map, locale->language_code));
+			count++;
+			g_hash_table_insert (gdm_language_count_map, g_strdup (locale->language_code), GINT_TO_POINTER (count));
+		}
+
+		if (locale->territory_code != NULL) {
+			int count;
+
+			count = GPOINTER_TO_INT (g_hash_table_lookup (gdm_territory_count_map, locale->territory_code));
+			count++;
+			g_hash_table_insert (gdm_territory_count_map, g_strdup (locale->territory_code), GINT_TO_POINTER (count));
+		}
         }
 }
 
