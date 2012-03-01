@@ -90,6 +90,7 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 	GdkRectangle geom;
 	gint monitor;
 	gboolean single_mon;
+	guint i;
 
 	store = gtk_list_store_new (MONITOR_NUM_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
 	gtk_combo_box_set_model (GTK_COMBO_BOX(self->priv->combobox), GTK_TREE_MODEL(store));
@@ -113,18 +114,24 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 		monitor = 0;
 	gdk_screen_get_monitor_geometry (gdk_screen_get_default (), monitor, &geom);
 
-	for (outputs = get_rr_outputs (); *outputs != NULL; outputs++) {
-		if (gnome_rr_output_info_is_active (*outputs)) {
+	outputs = get_rr_outputs ();
+	if (outputs == NULL)
+		goto bail;
+
+	for (i = 0; outputs[i] != NULL; i++) {
+		GnomeRROutputInfo *output = outputs[i];
+
+		if (gnome_rr_output_info_is_active (output)) {
 			GtkTreeIter iter;
 			gchar *name, *disp_name, *text;
 			int x, y, w, h;
 			int mon_at_point;
 
-			name = gnome_rr_output_info_get_name (*outputs);
-			disp_name = gnome_rr_output_info_get_display_name (*outputs);
+			name = gnome_rr_output_info_get_name (output);
+			disp_name = gnome_rr_output_info_get_display_name (output);
 			text = g_strdup_printf ("%s (%s)", name, disp_name);
 
-			gnome_rr_output_info_get_geometry (*outputs, &x, &y, &w, &h);
+			gnome_rr_output_info_get_geometry (output, &x, &y, &w, &h);
 			mon_at_point = gdk_screen_get_monitor_at_point (gdk_screen_get_default (), x, y);
 			gtk_list_store_append (store, &iter);
 			gtk_list_store_set (store, &iter, MONITOR_NAME_COLUMN, text, MONITOR_NUM_COLUMN, mon_at_point, -1);
@@ -139,8 +146,8 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 		}
 	}
 
+bail:
 	set_combobox_sensitive (self, single_mon);
-
 	g_object_unref (store);
 }
 
