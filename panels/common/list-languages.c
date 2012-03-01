@@ -9,6 +9,17 @@ int main (int argc, char **argv)
 
 	g_type_init ();
 
+	if (argc > 1) {
+		guint i;
+		for (i = 1; i < argc; i++) {
+			char *lang;
+			lang = gdm_get_language_from_name (argv[i], NULL);
+			g_print ("%s == %s\n", argv[i], lang);
+			g_free (lang);
+		}
+		return 0;
+	}
+
 	langs = gdm_get_all_language_names ();
 	if (langs == NULL) {
 		g_warning ("No languages found");
