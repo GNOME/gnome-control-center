@@ -1155,7 +1155,7 @@ setup_main_window (UmUserPanelPrivate *d)
         gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "pixbuf", FACE_COL);
         gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "visible", USER_ROW_COL);
         cell = gtk_cell_renderer_text_new ();
-        g_object_set (cell, "ellipsize", PANGO_ELLIPSIZE_END, "width-chars", 18, NULL);
+        g_object_set (cell, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), cell, TRUE);
         gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "markup", NAME_COL);
         gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "visible", USER_ROW_COL);
@@ -1163,18 +1163,16 @@ setup_main_window (UmUserPanelPrivate *d)
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), cell, TRUE);
         gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "markup", TITLE_COL);
         gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "visible", HEADING_ROW_COL);
-
-        gtk_tree_view_append_column (GTK_TREE_VIEW (userlist), column);
-
         cell = gtk_cell_renderer_pixbuf_new ();
-        column = gtk_tree_view_column_new ();
         gtk_tree_view_column_pack_start (column, cell, FALSE);
-        gtk_tree_view_append_column (GTK_TREE_VIEW (userlist), column);
+        gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "visible", USER_ROW_COL);
         gtk_tree_view_column_set_cell_data_func (column,
                                                  cell,
                                                  (GtkTreeCellDataFunc) autologin_cell_data_func,
                                                  d,
                                                  NULL);
+
+        gtk_tree_view_append_column (GTK_TREE_VIEW (userlist), column);
 
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (userlist));
         gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
