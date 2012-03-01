@@ -117,6 +117,7 @@ static char *make_resolution_string (int width, int height);
 static GObject *cc_display_panel_constructor (GType                  gtype,
 					      guint                  n_properties,
 					      GObjectConstructParam *properties);
+static void on_screen_changed (GnomeRRScreen *scr, gpointer data);
 
 static void
 cc_display_panel_get_property (GObject    *object,
@@ -159,6 +160,7 @@ cc_display_panel_finalize (GObject *object)
 
   self = CC_DISPLAY_PANEL (object);
 
+  g_signal_handlers_disconnect_by_func (self->priv->screen, on_screen_changed, self);
   g_object_unref (self->priv->screen);
   g_object_unref (self->priv->builder);
 
