@@ -1071,11 +1071,11 @@ cc_power_panel_init (CcPowerPanel *self)
   /* set screen link */
   widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
                                                "label_screen_settings"));
-  /* TRANSLATORS: this is a link to the Screen control center panel */
+  /* TRANSLATORS: this is a link to the "Brightness and Lock" control center panel */
   tmp = g_strdup_printf ("<span size=\"small\">%s "
                          "<a href=\"screen\">%s</a> %s</span>",
                          _("Tip:"),
-                         _("Screen Settings"),
+                         _("Brightness Settings"),
                          _("affect how much power is used"));
   gtk_label_set_markup (GTK_LABEL (widget), tmp);
   g_free (tmp);
