@@ -315,7 +315,8 @@ struct GsdWacomDevicePrivate
 
 	GsdWacomDeviceType type;
 	char *name;
-	char *icon_name;
+	char *path;
+	const char *icon_name;
 	char *tool_name;
 	gboolean reversible;
 	gboolean is_screen_tablet;
@@ -1110,11 +1111,11 @@ gsd_wacom_device_update_from_db (GsdWacomDevice *device,
 	device->priv->is_screen_tablet = libwacom_is_builtin (wacom_device);
 	if (device->priv->is_screen_tablet) {
 		if (libwacom_get_class (wacom_device) == WCLASS_CINTIQ)
-			device->priv->icon_name = g_strdup ("wacom-tablet-cintiq");
+			device->priv->icon_name = "wacom-tablet-cintiq";
 		else
-			device->priv->icon_name = g_strdup ("wacom-tablet-pc");
+			device->priv->icon_name = "wacom-tablet-pc";
 	} else {
-		device->priv->icon_name = g_strdup ("wacom-tablet");
+		device->priv->icon_name = "wacom-tablet";
 	}
 
 	if (device->priv->type == WACOM_TYPE_PAD) {
@@ -1153,7 +1154,6 @@ gsd_wacom_device_constructor (GType                     type,
         WacomDevice *wacom_device;
         int n_devices;
         guint i;
-        char *path;
 
         device = GSD_WACOM_DEVICE (G_OBJECT_CLASS (gsd_wacom_device_parent_class)->constructor (type,
 												n_construct_properties,
@@ -1186,8 +1186,8 @@ gsd_wacom_device_constructor (GType                     type,
 	if (device->priv->type == WACOM_TYPE_INVALID)
 		goto end;
 
-	path = xdevice_get_device_node (device->priv->device_id);
-	if (path == NULL) {
+	device->priv->path = xdevice_get_device_node (device->priv->device_id);
+	if (device->priv->path == NULL) {
 		g_warning ("Could not get the device node path for ID '%d'", device->priv->device_id);
 		device->priv->type = WACOM_TYPE_INVALID;
 		goto end;
@@ -1196,31 +1196,29 @@ gsd_wacom_device_constructor (GType                     type,
 	if (db == NULL)
 		db = libwacom_database_new ();
 
-	wacom_device = libwacom_new_from_path (db, path, FALSE, NULL);
+	wacom_device = libwacom_new_from_path (db, device->priv->path, FALSE, NULL);
 	if (!wacom_device) {
 		WacomError *wacom_error;
 
 		g_debug ("Creating fallback driver for wacom tablet '%s' ('%s')",
 			 gdk_device_get_name (device->priv->gdk_device),
-			 path);
+			 device->priv->path);
 
 		wacom_error = libwacom_error_new ();
-		wacom_device = libwacom_new_from_path (db, path, TRUE, wacom_error);
+		wacom_device = libwacom_new_from_path (db, device->priv->path, TRUE, wacom_error);
 		if (wacom_device == NULL) {
 			g_warning ("Failed to create fallback wacom device for '%s': %s (%d)",
-				   path,
+				   device->priv->path,
 				   libwacom_error_get_message (wacom_error),
 				   libwacom_error_get_code (wacom_error));
-			g_free (path);
 			libwacom_error_free (&wacom_error);
 			device->priv->type = WACOM_TYPE_INVALID;
 			goto end;
 		}
 	}
 
-	gsd_wacom_device_update_from_db (device, wacom_device, path);
+	gsd_wacom_device_update_from_db (device, wacom_device, device->priv->path);
 	libwacom_destroy (wacom_device);
-	g_free (path);
 
 	if (device->priv->type == WACOM_TYPE_STYLUS ||
 	    device->priv->type == WACOM_TYPE_ERASER) {
@@ -1333,8 +1331,8 @@ gsd_wacom_device_finalize (GObject *object)
         g_free (p->tool_name);
         p->tool_name = NULL;
 
-        g_free (p->icon_name);
-        p->icon_name = NULL;
+        g_free (p->path);
+        p->path = NULL;
 
         if (p->modes) {
                 g_hash_table_destroy (p->modes);
@@ -1391,6 +1389,14 @@ gsd_wacom_device_get_name (GsdWacomDevice *device)
 	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), NULL);
 
 	return device->priv->name;
+}
+
+const char *
+gsd_wacom_device_get_path (GsdWacomDevice *device)
+{
+	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), NULL);
+
+	return device->priv->path;
 }
 
 const char *
