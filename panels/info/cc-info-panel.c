@@ -1349,7 +1349,9 @@ info_panel_setup_media (CcInfoPanel *self)
     { "x-content/video-hddvd", N_("HD DVD video disc") },
     { "x-content/image-picturecd", N_("Picture CD") },
     { "x-content/video-svcd", N_("Super Video CD") },
-    { "x-content/video-vcd", N_("Video CD") }
+    { "x-content/video-vcd", N_("Video CD") },
+    { "x-content/win32-software", N_("Windows software") },
+    { "x-content/software", N_("Software") }
   };
 
   for (n = 0; n < G_N_ELEMENTS (defs); n++) {
