@@ -1771,6 +1771,13 @@ on_pk_transaction_signal (GDBusProxy *proxy,
     }
   else if (g_strcmp0 (signal_name, "Finished") == 0)
     {
+      if (self->priv->updates_state == CHECKING_UPDATES)
+        self->priv->updates_state = UPDATES_NOT_AVAILABLE;
+      refresh_update_button (self);
+    }
+  else if (g_strcmp0 (signal_name, "ErrorCode") == 0)
+    {
+      self->priv->updates_state = PK_NOT_AVAILABLE;
       refresh_update_button (self);
     }
   else if (g_strcmp0 (signal_name, "Destroy") == 0)
