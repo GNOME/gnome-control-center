@@ -1292,6 +1292,7 @@ on_extra_options_button_clicked (GtkWidget    *button,
   gtk_window_set_transient_for (GTK_WINDOW (dialog),
                                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
   gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+  gtk_window_set_title (GTK_WINDOW (dialog), _("Other Media"));
   g_signal_connect (dialog,
                     "response",
                     G_CALLBACK (on_extra_options_dialog_response),
