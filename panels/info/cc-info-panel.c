@@ -1293,6 +1293,10 @@ on_extra_options_button_clicked (GtkWidget    *button,
                     "response",
                     G_CALLBACK (on_extra_options_dialog_response),
                     self);
+  g_signal_connect (dialog,
+                    "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete),
+                    NULL);
   /* update other_application_combo */
   other_type_combo_box_changed (GTK_COMBO_BOX (combo_box), self);
   gtk_window_present (GTK_WINDOW (dialog));
