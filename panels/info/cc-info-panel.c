@@ -1247,7 +1247,7 @@ other_type_combo_box_changed (GtkComboBox *combo_box,
   }
 
   gtk_tree_model_get (model, &iter,
-                      2, &x_content_type,
+                      1, &x_content_type,
                       -1);
 
   action_container = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
@@ -1356,8 +1356,7 @@ info_panel_setup_media (CcInfoPanel *self)
 
   other_type_combo_box = GTK_WIDGET (gtk_builder_get_object (builder, "media_other_type_combobox"));
 
-  other_type_list_store = gtk_list_store_new (3,
-                                              G_TYPE_ICON,
+  other_type_list_store = gtk_list_store_new (2,
                                               G_TYPE_STRING,
                                               G_TYPE_STRING);
 
@@ -1370,7 +1369,6 @@ info_panel_setup_media (CcInfoPanel *self)
   for (l = content_types; l != NULL; l = l->next) {
     char *content_type = l->data;
     char *description = NULL;
-    GIcon *icon;
 
     if (!g_str_has_prefix (content_type, "x-content/"))
       continue;
@@ -1399,15 +1397,12 @@ info_panel_setup_media (CcInfoPanel *self)
     }
 
     gtk_list_store_append (other_type_list_store, &iter);
-    icon = g_content_type_get_icon (content_type);
 
     gtk_list_store_set (other_type_list_store, &iter,
-                        0, icon,
-                        1, description,
-                        2, content_type,
+                        0, description,
+                        1, content_type,
                         -1);
     g_free (description);
-    g_object_unref (icon);
   skip:
     ;
   }
@@ -1417,16 +1412,10 @@ info_panel_setup_media (CcInfoPanel *self)
   gtk_combo_box_set_model (GTK_COMBO_BOX (other_type_combo_box),
                            GTK_TREE_MODEL (other_type_list_store));
 
-  renderer = gtk_cell_renderer_pixbuf_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (other_type_combo_box), renderer, FALSE);
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (other_type_combo_box), renderer,
-                                  "gicon", 0,
-                                  NULL);
-
   renderer = gtk_cell_renderer_text_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (other_type_combo_box), renderer, TRUE);
   gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (other_type_combo_box), renderer,
-                                  "text", 1,
+                                  "text", 0,
                                   NULL);
 
   g_signal_connect (other_type_combo_box,
