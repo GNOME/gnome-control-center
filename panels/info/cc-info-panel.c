@@ -1393,6 +1393,11 @@ info_panel_setup_media (CcInfoPanel *self)
        }
     }
 
+    if (description == NULL) {
+      g_debug ("Content type '%s' is missing from the info panel", content_type);
+      description = g_content_type_get_description (content_type);
+    }
+
     gtk_list_store_append (other_type_list_store, &iter);
     icon = g_content_type_get_icon (content_type);
 
