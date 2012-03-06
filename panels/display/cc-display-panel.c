@@ -330,16 +330,13 @@ foreach (GtkTreeModel *model,
 }
 
 static void
-add_key (GtkWidget *widget,
+add_key (GtkTreeModel *model,
          const char *text,
          gboolean preferred,
          int width, int height, int rate,
          GnomeRRRotation rotation)
 {
   ForeachInfo info;
-  GtkComboBox *box = GTK_COMBO_BOX (widget);
-  GtkTreeModel *model = gtk_combo_box_get_model (box);
-  GtkListStore *store = GTK_LIST_STORE (model);
 
   info.text = text;
   info.found = FALSE;
@@ -350,7 +347,7 @@ add_key (GtkWidget *widget,
     {
       GtkTreeIter iter;
       g_debug ("adding %s with rate %d Hz", text, rate);
-      gtk_list_store_insert_with_values (store, &iter, -1,
+      gtk_list_store_insert_with_values (GTK_LIST_STORE (model), &iter, -1,
                                          TEXT_COL, text,
                                          WIDTH_COL, width,
                                          HEIGHT_COL, height,
@@ -365,7 +362,7 @@ add_key (GtkWidget *widget,
   if (preferred)
     {
       g_debug ("replacing %s with rate %d Hz (preferred mode)", text, rate);
-      gtk_list_store_set (store, &info.iter,
+      gtk_list_store_set (GTK_LIST_STORE (model), &info.iter,
                           RATE_COL, rate,
                           -1);
       return;
@@ -374,7 +371,7 @@ add_key (GtkWidget *widget,
   {
     int old_rate;
 
-    gtk_tree_model_get (GTK_TREE_MODEL (store), &info.iter,
+    gtk_tree_model_get (model, &info.iter,
                         RATE_COL, &old_rate,
                         -1);
 
@@ -382,7 +379,7 @@ add_key (GtkWidget *widget,
     if (rate > old_rate)
     {
       g_debug ("replacing %s with rate %d Hz (old rate: %d)", text, rate, old_rate);
-      gtk_list_store_set (store, &info.iter,
+      gtk_list_store_set (GTK_LIST_STORE (model), &info.iter,
                           RATE_COL, rate,
                           -1);
       return;
@@ -412,7 +409,7 @@ add_mode (CcDisplayPanel *self,
 
       preferred = (gnome_rr_mode_get_id (mode) == preferred_id);
       text = make_resolution_string (width, height);
-      add_key (self->priv->resolution_combo,
+      add_key (gtk_combo_box_get_model (GTK_COMBO_BOX (self->priv->resolution_combo)),
                text, preferred, width, height, rate, -1);
       g_free (text);
     }
@@ -501,7 +498,7 @@ rebuild_rotation_combo (CcDisplayPanel *self)
       /* NULL-GError --- FIXME: we should say why this rotation is not available! */
       if (gnome_rr_config_applicable (self->priv->current_configuration, self->priv->screen, NULL))
         {
-          add_key (self->priv->rotation_combo, _(info->name), FALSE, 0, 0, 0, info->rotation);
+          add_key (gtk_combo_box_get_model (GTK_COMBO_BOX (self->priv->rotation_combo)), _(info->name), FALSE, 0, 0, 0, info->rotation);
 
           if (info->rotation == current)
             selection = _(info->name);
