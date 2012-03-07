@@ -60,7 +60,8 @@ enum {
   HEIGHT_COL,
   RATE_COL,
   AREA_COL,
-  ROTATION_COL
+  ROTATION_COL,
+  NUM_COLS
 };
 
 struct _CcDisplayPanelPrivate
@@ -2159,7 +2160,7 @@ make_text_combo (GtkWidget *widget, int sort_column)
 {
   GtkComboBox *box = GTK_COMBO_BOX (widget);
   GtkListStore *store = gtk_list_store_new (
-                                            6,
+                                            NUM_COLS,
                                             G_TYPE_STRING,          /* Text */
                                             G_TYPE_INT,             /* Width */
                                             G_TYPE_INT,             /* Height */
