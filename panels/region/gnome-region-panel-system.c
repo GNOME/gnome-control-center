@@ -162,6 +162,9 @@ xkb_settings_changed (GSettings *settings,
 
 		split = g_strsplit_set (layouts[i], " \t", 2);
 
+		if (split == NULL || split[0] == NULL)
+			continue;
+
 		layout = split[0];
 		variant = split[1];
 
