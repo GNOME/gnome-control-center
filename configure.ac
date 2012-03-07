@@ -65,7 +65,7 @@ fi
 AC_ARG_ENABLE([kerberos],
               AS_HELP_STRING([--enable-kerberos], [Use Kerberos]),
               [with_kerberos=$enableval],
-              [with_kerberos=no])
+              [with_kerberos=auto])
 
 dnl ==============================================
 dnl Check that we meet the  dependencies
@@ -219,13 +219,13 @@ fi
 AC_SUBST(KRB5_CFLAGS)
 AC_SUBST(KRB5_LIBS)
 
-if test "$with_kerberos" = "yes" ; then
+if test "$with_kerberos" != "no" ; then
   if test "$have_kerberos" = "no" ; then
       AC_MSG_ERROR([kerberos support requested, but not available])
   fi
   AC_DEFINE(HAVE_KERBEROS, 1, [Define to 1 if kerberos is available])
 fi
-AM_CONDITIONAL(BUILD_KERBEROS, [test x$with_kerberos = xyes])
+AM_CONDITIONAL(BUILD_KERBEROS, [test x$with_kerberos != xno])
 
 USER_ACCOUNTS_PANEL_CFLAGS="$USER_ACCOUNTS_PANEL_CFLAGS $KRB5_CFLAGS"
 USER_ACCOUNTS_PANEL_LIBS="$USER_ACCOUNTS_PANEL_LIBS $KRB5_LIBS"
@@ -570,8 +570,8 @@ if test "x$have_cheese" = "xyes"; then
 else
 	AC_MSG_NOTICE([   Users panel webcam support disabled])
 fi
-if test "x$with_kerberos" = "xyes"; then
-	AC_MSG_NOTICE([** Kerberos])
+if test "x$with_kerberos" != "xno"; then
+	AC_MSG_NOTICE([** Kerberos (Users panel Kerberos support)])
 else
 	AC_MSG_NOTICE([   Users panel Kerberos support disabled])
 fi
