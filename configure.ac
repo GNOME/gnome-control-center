@@ -570,6 +570,12 @@ if test "x$have_cheese" = "xyes"; then
 else
 	AC_MSG_NOTICE([   Users panel webcam support disabled])
 fi
+if test "x$with_kerberos" = "xyes"; then
+	AC_MSG_NOTICE([** Kerberos])
+else
+	AC_MSG_NOTICE([   Users panel Kerberos support disabled])
+fi
+
 if test "x$with_libsocialweb" = "xyes"; then
 	AC_MSG_NOTICE([** libsocialweb (Background panel Flickr support)])
 else
