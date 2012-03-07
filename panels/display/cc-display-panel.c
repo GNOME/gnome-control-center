@@ -59,7 +59,7 @@ enum {
   WIDTH_COL,
   HEIGHT_COL,
   RATE_COL,
-  AREA_COL,
+  SORT_COL,
   ROTATION_COL,
   NUM_COLS
 };
@@ -353,7 +353,7 @@ add_key (GtkTreeModel *model,
                                          WIDTH_COL, width,
                                          HEIGHT_COL, height,
                                          RATE_COL, rate,
-                                         AREA_COL, width * height,
+                                         SORT_COL, width * 10000 + height,
                                          ROTATION_COL, rotation,
                                          -1);
       return;
