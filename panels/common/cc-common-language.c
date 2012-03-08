@@ -513,11 +513,14 @@ cc_common_language_get_initial_languages (void)
         g_hash_table_insert (ht, g_strdup ("en_US.utf8"), g_strdup (_("English")));
         if (gdm_language_has_translations ("en_GB"))
                 g_hash_table_insert (ht, g_strdup ("en_GB.utf8"), g_strdup (_("British English")));
-        if (gdm_language_has_translations ("de_DE"))
+        if (gdm_language_has_translations ("de") ||
+            gdm_language_has_translations ("de_DE"))
                 g_hash_table_insert (ht, g_strdup ("de_DE.utf8"), g_strdup (_("German")));
-        if (gdm_language_has_translations ("fr_FR"))
+        if (gdm_language_has_translations ("fr") ||
+            gdm_language_has_translations ("fr_FR"))
                 g_hash_table_insert (ht, g_strdup ("fr_FR.utf8"), g_strdup (_("French")));
-        if (gdm_language_has_translations ("es_ES"))
+        if (gdm_language_has_translations ("es") ||
+            gdm_language_has_translations ("es_ES"))
                 g_hash_table_insert (ht, g_strdup ("es_ES.utf8"), g_strdup (_("Spanish")));
         if (gdm_language_has_translations ("zh_CN"))
                 g_hash_table_insert (ht, g_strdup ("zh_CN.utf8"), g_strdup (_("Chinese (simplified)")));
