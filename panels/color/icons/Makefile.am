@@ -16,3 +16,5 @@ update-icon-cache:
 	fi
 
 endif
+
+-include $(top_srcdir)/git.mk

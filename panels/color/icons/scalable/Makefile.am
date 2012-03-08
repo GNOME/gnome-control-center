@@ -10,3 +10,4 @@ EXTRA_DIST =				\
 	$(icons_DATA)			\
 	$(appicons_DATA)
 
+-include $(top_srcdir)/git.mk
