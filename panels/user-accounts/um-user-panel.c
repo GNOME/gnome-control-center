@@ -1179,6 +1179,9 @@ setup_main_window (UmUserPanelPrivate *d)
         g_signal_connect (selection, "changed", G_CALLBACK (selected_user_changed), d);
         gtk_tree_selection_set_select_function (selection, dont_select_headings, NULL, NULL);
 
+        gtk_scrolled_window_set_min_content_width (GTK_SCROLLED_WINDOW (get_widget (d, "list-scrolledwindow")), 300);
+        gtk_widget_set_size_request (get_widget (d, "list-scrolledwindow"), 200, -1);
+
         button = get_widget (d, "add-user-toolbutton");
         g_signal_connect (button, "clicked", G_CALLBACK (add_user), d);
 
