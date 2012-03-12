@@ -323,6 +323,7 @@ show_page_account (GoaPanel  *panel,
 {
   GList *children;
   GList *l;
+  GtkWidget *alignment;
   GtkWidget *table;
   GtkWidget *bar;
   GtkWidget *label;
@@ -358,8 +359,7 @@ show_page_account (GoaPanel  *panel,
 
   table = gtk_table_new (3, 2, FALSE);
   gtk_table_set_row_spacings (GTK_TABLE (table), 0);
-  gtk_table_set_col_spacings (GTK_TABLE (table), 4);
-  gtk_box_pack_start (GTK_BOX (panel->accounts_vbox), table, FALSE, TRUE, 0);
+  gtk_table_set_col_spacings (GTK_TABLE (table), 12);
 
   if (provider != NULL)
     {
@@ -369,6 +369,10 @@ show_page_account (GoaPanel  *panel,
                                  GTK_BOX (panel->accounts_vbox),
                                  GTK_TABLE (table));
     }
+
+  alignment = gtk_alignment_new (0.5, 0.0, 0.0, 0.0);
+  gtk_container_add (GTK_CONTAINER (alignment), table);
+  gtk_box_pack_start (GTK_BOX (panel->accounts_vbox), alignment, FALSE, TRUE, 0);
 
   gtk_widget_show_all (panel->accounts_vbox);
 
