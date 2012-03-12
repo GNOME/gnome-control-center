@@ -355,7 +355,7 @@ set_using_ntp_cb (GObject      *source,
 static void
 queue_set_datetime (CcDateTimePanel *self)
 {
-  time_t unixtime;
+  gint64 unixtime;
 
   /* timedated expects number of microseconds since 1 Jan 1970 UTC */
   unixtime = g_date_time_to_unix (self->priv->date);
