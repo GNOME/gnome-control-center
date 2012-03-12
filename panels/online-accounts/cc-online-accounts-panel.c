@@ -1,6 +1,6 @@
 /* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*- */
 /*
- * Copyright (C) 2011 Red Hat, Inc.
+ * Copyright (C) 2011, 2012 Red Hat, Inc.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -31,6 +31,8 @@
 #include <goabackend/goabackend.h>
 
 #include "cc-online-accounts-panel.h"
+
+#include "cc-online-accounts-add-account-dialog.h"
 #include "cc-online-accounts-model.h"
 
 typedef struct _GoaPanelClass GoaPanelClass;
@@ -457,69 +459,28 @@ on_toolbar_add_button_clicked (GtkToolButton *button,
 {
   GoaPanel *panel = GOA_PANEL (user_data);
   GtkWindow *parent;
-  GtkWidget *add_account_button;
   GtkWidget *dialog;
-  GtkWidget *vbox;
-  GtkWidget *label;
-  GtkWidget *grid;
-  GtkWidget *combo_box;
   gint response;
   GList *providers;
-  GoaProvider *provider;
-  GList *children;
   GList *l;
   GoaObject *object;
   GError *error;
 
-  provider = NULL;
   providers = NULL;
 
   parent = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel))));
 
-  dialog = gtk_dialog_new ();
-  gtk_container_set_border_width (GTK_CONTAINER (dialog), 12);
-  gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-  gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+  dialog = goa_panel_add_account_dialog_new (panel->client);
   gtk_window_set_transient_for (GTK_WINDOW (dialog), parent);
-  /* translators: This is the title of the "Add Account" dialogue.
-   * The title is not visible when using GNOME Shell */
-  gtk_window_set_title (GTK_WINDOW (dialog), _("Add Account"));
 
-  vbox = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
-  gtk_box_set_spacing (GTK_BOX (vbox), 12);
-
-  label = gtk_label_new (_("To add a new account, first select the account type"));
-  gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, TRUE, 0);
-
-  label = gtk_label_new (_("Account Type:"));
-  combo_box = gtk_combo_box_text_new ();
   providers = goa_provider_get_all ();
   for (l = providers; l != NULL; l = l->next)
     {
-      gchar *provider_name;
+      GoaProvider *provider;
 
       provider = GOA_PROVIDER (l->data);
-      provider_name = goa_provider_get_provider_name (provider, NULL);
-      gtk_combo_box_text_append (GTK_COMBO_BOX_TEXT (combo_box),
-                                 goa_provider_get_provider_type (provider),
-                                 provider_name);
-      g_free (provider_name);
-      provider = NULL;
+      goa_panel_add_account_dialog_add_provider (GOA_PANEL_ADD_ACCOUNT_DIALOG (dialog), provider);
     }
-  gtk_combo_box_set_active (GTK_COMBO_BOX (combo_box), 0);
-
-  grid = gtk_grid_new ();
-  gtk_grid_set_column_spacing (GTK_GRID (grid), 10);
-  gtk_box_pack_start (GTK_BOX (vbox), grid, FALSE, TRUE, 0);
-
-  gtk_grid_attach (GTK_GRID (grid), label, 0, 0, 1, 1);
-  gtk_widget_set_hexpand (combo_box, TRUE);
-  gtk_grid_attach (GTK_GRID (grid), combo_box, 1, 0, 1, 1);
-
-  gtk_dialog_add_button (GTK_DIALOG (dialog),
-                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
-  add_account_button = gtk_dialog_add_button (GTK_DIALOG (dialog),
-                                              _("_Add..."), GTK_RESPONSE_OK);
 
   gtk_widget_show_all (dialog);
   response = gtk_dialog_run (GTK_DIALOG (dialog));
@@ -528,27 +489,10 @@ on_toolbar_add_button_clicked (GtkToolButton *button,
       gtk_widget_destroy (dialog);
       goto out;
     }
-  gtk_container_remove (GTK_CONTAINER (gtk_widget_get_parent (add_account_button)), add_account_button);
-
-  provider = goa_provider_get_for_provider_type (gtk_combo_box_get_active_id (GTK_COMBO_BOX (combo_box)));
-  g_assert (provider != NULL);
-
-  /* Prepare GtkDialog for the provider */
-  children = gtk_container_get_children (GTK_CONTAINER (vbox));
-  for (l = children; l != NULL; l = l->next)
-    {
-      GtkWidget *child = GTK_WIDGET (l->data);
-      if (child != gtk_dialog_get_action_area (GTK_DIALOG (dialog)))
-        gtk_container_remove (GTK_CONTAINER (vbox), child);
-    }
-  g_list_free (children);
 
   error = NULL;
-  object = goa_provider_add_account (provider,
-                                     panel->client,
-                                     GTK_DIALOG (dialog),
-                                     GTK_BOX (vbox),
-                                     &error);
+  object = goa_panel_add_account_dialog_get_account (GOA_PANEL_ADD_ACCOUNT_DIALOG (dialog), &error);
+
   if (object != NULL)
     {
       GtkTreeIter iter;
@@ -584,8 +528,6 @@ on_toolbar_add_button_clicked (GtkToolButton *button,
     }
 
  out:
-  if (provider != NULL)
-    g_object_unref (provider);
   g_list_foreach (providers, (GFunc) g_object_unref, NULL);
   g_list_free (providers);
 }

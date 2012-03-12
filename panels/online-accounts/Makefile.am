@@ -14,6 +14,8 @@ ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libonline-accounts.la
 
 libonline_accounts_la_SOURCES =		\
+	cc-online-accounts-add-account-dialog.c	\
+	cc-online-accounts-add-account-dialog.h	\
 	cc-online-accounts-model.c	\
 	cc-online-accounts-model.h	\
 	cc-online-accounts-panel.c	\
