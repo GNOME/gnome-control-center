@@ -234,8 +234,8 @@ synaptics_check_capabilities (GtkBuilder *dialog)
 			}
 
 			/* Disable two finger scrolling unless the hardware supports
-			 * double touch or can emulate it based on finger width. */
-			if (!(data[3] ||(nitems >= 6 && data[5])))
+			 * double touch */
+			if (!(data[3]))
 				gtk_widget_set_sensitive (WID ("scroll_twofinger_radio"), FALSE);
 
 			XFree (data);
