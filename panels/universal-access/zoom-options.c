@@ -330,11 +330,11 @@ static void xhairs_length_add_marks (GtkScale *scale)
        length of one hair is 25% of the screen. */
     quarter_length = length / 4;
 
-    gtk_scale_add_mark (scale, 0, GTK_POS_BOTTOM, _("Short"));
-    gtk_scale_add_mark (scale, quarter_length, GTK_POS_BOTTOM, _("1/4 Screen"));
-    gtk_scale_add_mark (scale, quarter_length * 2 , GTK_POS_BOTTOM, _("1/2 Screen"));
-    gtk_scale_add_mark (scale, quarter_length * 3, GTK_POS_BOTTOM, _("3/4 Screen"));
-    gtk_scale_add_mark (scale, length, GTK_POS_BOTTOM, _("Long"));
+    gtk_scale_add_mark (scale, 0, GTK_POS_BOTTOM, C_("Distance", "Short"));
+    gtk_scale_add_mark (scale, quarter_length, GTK_POS_BOTTOM, C_("Distance", "¼ Screen"));
+    gtk_scale_add_mark (scale, quarter_length * 2 , GTK_POS_BOTTOM, C_("Distance", "½ Screen"));
+    gtk_scale_add_mark (scale, quarter_length * 3, GTK_POS_BOTTOM, C_("Distance", "¾ Screen"));
+    gtk_scale_add_mark (scale, length, GTK_POS_BOTTOM, C_("Distance", "Long"));
 }
 
 static void
