@@ -396,10 +396,25 @@ gcm_prefs_combo_set_default_cb (gpointer user_data)
   return FALSE;
 }
 
+static gboolean
+gcm_prefs_profile_exists_in_array (GPtrArray *array, CdProfile *profile)
+{
+  CdProfile *profile_tmp;
+  guint i;
+
+  for (i = 0; i < array->len; i++)
+    {
+      profile_tmp = g_ptr_array_index (array, i);
+      if (cd_profile_equal (profile, profile_tmp))
+         return TRUE;
+    }
+  return FALSE;
+}
+
 static void
 gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
                                              GtkWidget *widget,
-                                             CdProfile *profile)
+                                             GPtrArray *profiles)
 {
   CdProfile *profile_tmp;
   gboolean ret;
@@ -449,9 +464,12 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
           goto out;
         }
 
-      /* don't add the current profile */
-      if (profile != NULL && cd_profile_equal (profile, profile_tmp))
-        continue;
+      /* don't add any of the already added profiles */
+      if (profiles != NULL)
+        {
+          if (gcm_prefs_profile_exists_in_array (profiles, profile_tmp))
+            continue;
+        }
 
       /* only add correct types */
       ret = gcm_prefs_is_profile_suitable_for_device (profile_tmp,
@@ -486,14 +504,14 @@ static void
 gcm_prefs_profile_add_cb (GtkWidget *widget, CcColorPanel *prefs)
 {
   const gchar *title;
-  CdProfile *profile = NULL;
+  GPtrArray *profiles;
   CcColorPanelPrivate *priv = prefs->priv;
 
   /* add profiles of the right kind */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "combobox_profile"));
-  profile = cd_device_get_default_profile (priv->current_device);
-  gcm_prefs_add_profiles_suitable_for_devices (prefs, widget, profile);
+  profiles = cd_device_get_profiles (priv->current_device);
+  gcm_prefs_add_profiles_suitable_for_devices (prefs, widget, profiles);
 
   /* set the title */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
@@ -532,8 +550,8 @@ gcm_prefs_profile_add_cb (GtkWidget *widget, CcColorPanel *prefs)
                                                "dialog_assign"));
   gtk_widget_show (widget);
   gtk_window_set_transient_for (GTK_WINDOW (widget), GTK_WINDOW (priv->main_window));
-  if (profile != NULL)
-    g_object_unref (profile);
+  if (profiles != NULL)
+    g_ptr_array_unref (profiles);
 }
 
 static void
