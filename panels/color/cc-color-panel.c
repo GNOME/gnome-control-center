@@ -1856,6 +1856,7 @@ gcm_prefs_remove_device (CcColorPanel *prefs, CdDevice *cd_device)
   const gchar *id;
   gchar *id_tmp;
   gboolean ret;
+  CdDevice *device_tmp;
   CcColorPanelPrivate *priv = prefs->priv;
 
   /* remove */
@@ -1875,8 +1876,15 @@ gcm_prefs_remove_device (CcColorPanel *prefs, CdDevice *cd_device)
                           -1);
       if (g_strcmp0 (id_tmp, id) == 0)
         {
+          gtk_tree_model_get (model, &iter,
+                              GCM_PREFS_COLUMN_DEVICE, &device_tmp,
+                              -1);
+          g_signal_handlers_disconnect_by_func (device_tmp,
+                                                G_CALLBACK (gcm_prefs_device_changed_cb),
+                                                prefs);
           gtk_tree_store_remove (GTK_TREE_STORE (model), &iter);
           g_free (id_tmp);
+          g_object_unref (device_tmp);
           break;
         }
       g_free (id_tmp);
