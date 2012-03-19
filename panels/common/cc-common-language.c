@@ -119,8 +119,12 @@ iter_for_language (GtkTreeModel *model,
                         language = gdm_get_language_from_name (name, NULL);
                 }
 
-                gtk_list_store_append (GTK_LIST_STORE (model), iter);
-                gtk_list_store_set (GTK_LIST_STORE (model), iter, LOCALE_COL, name, DISPLAY_LOCALE_COL, language, -1);
+                gtk_list_store_insert_with_values (GTK_LIST_STORE (model),
+                                                   iter,
+                                                   -1,
+                                                   LOCALE_COL, name,
+                                                   DISPLAY_LOCALE_COL, language,
+                                                   -1);
                 g_free (name);
                 g_free (language);
                 return TRUE;
@@ -262,18 +266,23 @@ add_one_language (gpointer d)
   if (g_object_get_data (G_OBJECT (data->store), "needs-separator")) {
     GtkTreeIter iter;
 
-    gtk_list_store_append (GTK_LIST_STORE (data->store), &iter);
-    gtk_list_store_set (GTK_LIST_STORE (data->store), &iter,
-                        LOCALE_COL, NULL,
-                        DISPLAY_LOCALE_COL, "Don't show",
-                        SEPARATOR_COL, TRUE,
-                        USER_LANGUAGE, FALSE,
-                        -1);
+    gtk_list_store_insert_with_values (GTK_LIST_STORE (data->store),
+                                       &iter,
+                                       -1,
+                                       LOCALE_COL, NULL,
+                                       DISPLAY_LOCALE_COL, "Don't show",
+                                       SEPARATOR_COL, TRUE,
+                                       USER_LANGUAGE, FALSE,
+                                       -1);
     g_object_set_data (G_OBJECT (data->store), "needs-separator", NULL);
   }
 
-  gtk_list_store_append (data->store, &iter);
-  gtk_list_store_set (data->store, &iter, LOCALE_COL, name, DISPLAY_LOCALE_COL, language, -1);
+  gtk_list_store_insert_with_values (data->store,
+                                     &iter,
+                                     -1,
+                                     LOCALE_COL, name,
+                                     DISPLAY_LOCALE_COL, language,
+                                     -1);
 
   g_free (name);
   g_free (language);
@@ -327,13 +336,14 @@ languages_foreach_cb (gpointer key,
 	const char *display_locale = (const char *) value;
 	GtkTreeIter iter;
 
-	gtk_list_store_append (store, &iter);
-	gtk_list_store_set (store, &iter,
-			    LOCALE_COL, locale,
-			    DISPLAY_LOCALE_COL, display_locale,
-			    SEPARATOR_COL, FALSE,
-			    USER_LANGUAGE, TRUE,
-			    -1);
+        gtk_list_store_insert_with_values (store,
+                                           &iter,
+                                           -1,
+                                           LOCALE_COL, locale,
+                                           DISPLAY_LOCALE_COL, display_locale,
+                                           SEPARATOR_COL, FALSE,
+                                           USER_LANGUAGE, TRUE,
+                                           -1);
 }
 
 static gboolean
