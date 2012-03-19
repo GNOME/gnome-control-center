@@ -293,7 +293,7 @@ on_status_icon_scroll_event (GtkStatusIcon       *status_icon,
                              GdkEventScroll      *event,
                              GvcStreamStatusIcon *icon)
 {
-        return gvc_channel_bar_scroll (GVC_CHANNEL_BAR (icon->priv->bar), event->direction);
+        return gvc_channel_bar_scroll (GVC_CHANNEL_BAR (icon->priv->bar), event);
 }
 
 static void

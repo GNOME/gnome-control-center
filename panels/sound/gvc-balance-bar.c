@@ -425,32 +425,51 @@ on_scale_scroll_event (GtkWidget      *widget,
                        GvcBalanceBar  *bar)
 {
         gdouble value;
+        gdouble dx, dy;
 
         value = gtk_adjustment_get_value (bar->priv->adjustment);
 
+        if (!gdk_event_get_scroll_deltas ((GdkEvent*)event, &dx, &dy)) {
+                dx = 0.0;
+                dy = 0.0;
+
+                switch (event->direction) {
+                case GDK_SCROLL_UP:
+                case GDK_SCROLL_RIGHT:
+                        dy = 1.0;
+                        break;
+                case GDK_SCROLL_DOWN:
+                case GDK_SCROLL_LEFT:
+                        dy = -1.0;
+                        break;
+                default:
+                        ;
+                }
+        }
+
         if (bar->priv->btype == BALANCE_TYPE_LFE) {
-                if (event->direction == GDK_SCROLL_UP) {
-                        if (value + ADJUSTMENT_MAX_NORMAL/100.0 > ADJUSTMENT_MAX_NORMAL)
+                if (dy > 0) {
+                        if (value + dy * ADJUSTMENT_MAX_NORMAL/100.0 > ADJUSTMENT_MAX_NORMAL)
                                 value = ADJUSTMENT_MAX_NORMAL;
                         else
-                                value = value + ADJUSTMENT_MAX_NORMAL/100.0;
-                } else if (event->direction == GDK_SCROLL_DOWN) {
-                        if (value - ADJUSTMENT_MAX_NORMAL/100.0 < 0)
+                                value = value + dy * ADJUSTMENT_MAX_NORMAL/100.0;
+                } else if (dy < 0) {
+                        if (value + dy * ADJUSTMENT_MAX_NORMAL/100.0 < 0)
                                 value = 0.0;
                         else
-                                value = value - ADJUSTMENT_MAX_NORMAL/100.0;
+                                value = value + dy * ADJUSTMENT_MAX_NORMAL/100.0;
                 }
         } else {
-                if (event->direction == GDK_SCROLL_UP) {
-                        if (value + 0.01 > 1.0)
+                if (dy > 0) {
+                        if (value + dy * 0.01 > 1.0)
                                 value = 1.0;
                         else
-                                value = value + 0.01;
-                } else if (event->direction == GDK_SCROLL_DOWN) {
-                        if (value - 0.01 < -1.0)
+                                value = value + dy * 0.01;
+                } else if (dy < 0) {
+                        if (value + dy * 0.01 < -1.0)
                                 value = -1.0;
                         else
-                                value = value - 0.01;
+                                value = value + dy * 0.01;
                 }
         }
         gtk_adjustment_set_value (bar->priv->adjustment, value);

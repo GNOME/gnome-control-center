@@ -416,16 +416,20 @@ on_scale_button_release_event (GtkWidget      *widget,
 }
 
 gboolean
-gvc_channel_bar_scroll (GvcChannelBar *bar, GdkScrollDirection direction)
+gvc_channel_bar_scroll (GvcChannelBar *bar, GdkEventScroll *event)
 {
         GtkAdjustment *adj;
         gdouble value;
+        GdkScrollDirection direction;
+        gdouble dx, dy;
 
         g_return_val_if_fail (bar != NULL, FALSE);
         g_return_val_if_fail (GVC_IS_CHANNEL_BAR (bar), FALSE);
 
+        direction = event->direction;
+
         if (bar->priv->orientation == GTK_ORIENTATION_VERTICAL) {
-                if (direction != GDK_SCROLL_UP && direction != GDK_SCROLL_DOWN)
+                if (direction == GDK_SCROLL_LEFT || direction == GDK_SCROLL_RIGHT)
                         return FALSE;
         } else {
                 /* Switch direction for RTL */
@@ -442,25 +446,43 @@ gvc_channel_bar_scroll (GvcChannelBar *bar, GdkScrollDirection direction)
                         direction = GDK_SCROLL_DOWN;
         }
 
+	if (!gdk_event_get_scroll_deltas ((GdkEvent*)event, &dx, &dy)) {
+		dx = 0.0;
+		dy = 0.0;
+
+		switch (direction) {
+		case GDK_SCROLL_UP:
+		case GDK_SCROLL_LEFT:
+			dy = 1.0;
+			break;
+		case GDK_SCROLL_DOWN:
+		case GDK_SCROLL_RIGHT:
+			dy = -1.0;
+			break;
+		default:
+			;
+		}
+	}
+
         adj = gtk_range_get_adjustment (GTK_RANGE (bar->priv->scale));
         if (adj == bar->priv->zero_adjustment) {
-                if (direction == GDK_SCROLL_UP)
+                if (dy > 0)
                         gvc_channel_bar_set_is_muted (bar, FALSE);
                 return TRUE;
         }
 
         value = gtk_adjustment_get_value (adj);
 
-        if (direction == GDK_SCROLL_UP) {
-                if (value + SCROLLSTEP > ADJUSTMENT_MAX)
+        if (dy > 0) {
+                if (value + dy * SCROLLSTEP > ADJUSTMENT_MAX)
                         value = ADJUSTMENT_MAX;
                 else
-                        value = value + SCROLLSTEP;
-        } else if (direction == GDK_SCROLL_DOWN) {
-                if (value - SCROLLSTEP < 0)
+                        value = value + dy * SCROLLSTEP;
+        } else if (dy < 0) {
+                if (value + dy * SCROLLSTEP < 0)
                         value = 0.0;
                 else
-                        value = value - SCROLLSTEP;
+                        value = value + dy * SCROLLSTEP;
         }
 
         gvc_channel_bar_set_is_muted (bar, (value == 0.0));
@@ -475,7 +497,7 @@ on_scale_scroll_event (GtkWidget      *widget,
                        GdkEventScroll *event,
                        GvcChannelBar  *bar)
 {
-        return gvc_channel_bar_scroll (bar, event->direction);
+        return gvc_channel_bar_scroll (bar, event);
 }
 
 static void
