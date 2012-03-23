@@ -1039,8 +1039,8 @@ actualize_printers_list (CcPrintersPanel *self)
             paused = (g_strcmp0 (priv->dests[i].options[j].value, "5") == 0);
           else if (g_strcmp0 (priv->dests[i].options[j].name, "device-uri") == 0)
             device_uri = priv->dests[i].options[j].value;
-          else if (g_strcmp0 (priv->dests[i].options[i].name, "printer-type") == 0)
-            printer_type = atoi (priv->dests[i].options[i].value);
+          else if (g_strcmp0 (priv->dests[i].options[j].name, "printer-type") == 0)
+            printer_type = atoi (priv->dests[i].options[j].value);
         }
 
       if (priv->dests[i].is_default)
