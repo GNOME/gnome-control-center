@@ -2,7 +2,7 @@
 # Copyright (C) 1998-2012 Free Software Foundation, Inc.
 # Yukihiro Nakai <Nakai@abricot.co.jp>, 1998
 # Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1999
-# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2000, 2009, 2010-2011.
+# Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2000, 2009, 2010-2012.
 # Akira TAGOH <tagoh@gnome.gr.jp>, 2001.
 # Takeshi AIHANA <takeshi.aihana@gmail.com>, 2003-2008.
 # KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>, 2003.
@@ -15,17 +15,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center gnome-3-2\n"
+"Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-03-05 18:33+0000\n"
-"PO-Revision-Date: 2012-02-25 11:58+0900\n"
-"Last-Translator: Jiro Matsuzawa <jmatsuzawa@src.gnome.org>\n"
+"POT-Creation-Date: 2012-03-24 17:14+0000\n"
+"PO-Revision-Date: 2012-03-25 02:44+0900\n"
+"Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../panels/background/background.ui.h:1
@@ -255,11 +255,12 @@ msgstr "他のプロファイル…"
 msgid "Default: "
 msgstr "デフォルト: "
 
+# ref. gnome-color-manager
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
 #: ../panels/color/cc-color-panel.c:126
 msgid "Colorspace: "
-msgstr ""
+msgstr "色空間:"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
@@ -297,55 +298,55 @@ msgid "All files"
 msgstr "すべてのファイル"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:504
+#: ../panels/color/cc-color-panel.c:522
 msgid "Available Profiles for Displays"
 msgstr "利用可能なディスプレイ用プロファイル"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:508
+#: ../panels/color/cc-color-panel.c:526
 msgid "Available Profiles for Scanners"
 msgstr "利用可能なスキャナー用プロファイル"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:512
+#: ../panels/color/cc-color-panel.c:530
 msgid "Available Profiles for Printers"
 msgstr "利用可能なプリンター用プロファイル"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:516
+#: ../panels/color/cc-color-panel.c:534
 msgid "Available Profiles for Cameras"
 msgstr "利用可能なカメラ用プロファイル"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:520
+#: ../panels/color/cc-color-panel.c:538
 msgid "Available Profiles for Webcams"
 msgstr "利用可能なウェブカム用プロファイル"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
 #. * where the device type is not recognised
 #. Profiles that can be added to the device
-#: ../panels/color/cc-color-panel.c:525 ../panels/color/color.ui.h:2
+#: ../panels/color/cc-color-panel.c:543 ../panels/color/color.ui.h:2
 msgid "Available Profiles"
 msgstr "利用可能なプロファイル"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:806
+#: ../panels/color/cc-color-panel.c:824
 #: ../panels/sound/gvc-mixer-dialog.c:1516
 msgid "Device"
 msgstr "デバイス"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:841
+#: ../panels/color/cc-color-panel.c:859
 msgid "Calibration"
 msgstr "キャリブレーション"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:873
+#: ../panels/color/cc-color-panel.c:891
 msgid "Create a color profile for the selected device"
 msgstr "選択したデバイスのカラープロファイルを作成"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:887 ../panels/color/cc-color-panel.c:911
+#: ../panels/color/cc-color-panel.c:905 ../panels/color/cc-color-panel.c:929
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -354,121 +355,121 @@ msgstr ""
 "してください。"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:920
+#: ../panels/color/cc-color-panel.c:938
 msgid "The measuring instrument does not support printer profiling."
 msgstr "計測器がプリンターのプロファイルをサポートしていません。"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:931
+#: ../panels/color/cc-color-panel.c:949
 msgid "The device type is not currently supported."
 msgstr "このデバイスの種類は現在サポートされていません。"
 
 #. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:1004
+#: ../panels/color/cc-color-panel.c:1022
 msgid "Cannot remove automatically added profile"
 msgstr "自動で追加されたプロファイルを削除できません"
 
 #. TRANSLATORS: this is when there is no profile for the device
-#: ../panels/color/cc-color-panel.c:1339
+#: ../panels/color/cc-color-panel.c:1357
 msgid "No profile"
 msgstr "プロファイルなし"
 
-#: ../panels/color/cc-color-panel.c:1370
+#: ../panels/color/cc-color-panel.c:1388
 #, c-format
 msgid "%i year"
 msgid_plural "%i years"
 msgstr[0] "%i 年"
 
-#: ../panels/color/cc-color-panel.c:1381
+#: ../panels/color/cc-color-panel.c:1399
 #, c-format
 msgid "%i month"
 msgid_plural "%i months"
 msgstr[0] "%i か月"
 
-#: ../panels/color/cc-color-panel.c:1392
+#: ../panels/color/cc-color-panel.c:1410
 #, c-format
 msgid "%i week"
 msgid_plural "%i weeks"
 msgstr[0] "%i 週間"
 
 #. fallback
-#: ../panels/color/cc-color-panel.c:1399
+#: ../panels/color/cc-color-panel.c:1417
 #, c-format
 msgid "Less than 1 week"
 msgstr "1 週間以下"
 
-#: ../panels/color/cc-color-panel.c:1461
+#: ../panels/color/cc-color-panel.c:1479
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "デフォルト RGB"
 
-#: ../panels/color/cc-color-panel.c:1466
+#: ../panels/color/cc-color-panel.c:1484
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "デフォルト CMYK"
 
-#: ../panels/color/cc-color-panel.c:1471
+#: ../panels/color/cc-color-panel.c:1489
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "デフォルトグレー"
 
-#: ../panels/color/cc-color-panel.c:1589 ../panels/color/cc-color-panel.c:1630
-#: ../panels/color/cc-color-panel.c:1641 ../panels/color/cc-color-panel.c:1652
+#: ../panels/color/cc-color-panel.c:1607 ../panels/color/cc-color-panel.c:1648
+#: ../panels/color/cc-color-panel.c:1659 ../panels/color/cc-color-panel.c:1670
 msgid "Uncalibrated"
 msgstr "未較正"
 
-#: ../panels/color/cc-color-panel.c:1592
+#: ../panels/color/cc-color-panel.c:1610
 msgid "This device is not color managed."
 msgstr "このデバイスは色の管理が行われていません。"
 
-#: ../panels/color/cc-color-panel.c:1633
+#: ../panels/color/cc-color-panel.c:1651
 msgid "This device is using manufacturing calibrated data."
 msgstr "このデバイスは製造時のキャリブレーションデータを使用しています。"
 
-#: ../panels/color/cc-color-panel.c:1644
+#: ../panels/color/cc-color-panel.c:1662
 msgid ""
 "This device does not have a profile suitable for whole-screen color "
 "correction."
 msgstr "このデバイスには画面全体の色補正に適したプロファイルがありません。"
 
-#: ../panels/color/cc-color-panel.c:1677
+#: ../panels/color/cc-color-panel.c:1695
 msgid "This device has an old profile that may no longer be accurate."
 msgstr ""
 "このデバイスには、すでに正確でない可能性のある古いプロファイルがあります。"
 
 #. TRANSLATORS: this is when the calibration profile age is not
 #. * specified as it has been autogenerated from the hardware
-#: ../panels/color/cc-color-panel.c:1705
+#: ../panels/color/cc-color-panel.c:1723
 msgid "Not specified"
 msgstr "指定なし"
 
 #. add the 'No devices detected' entry
-#: ../panels/color/cc-color-panel.c:1889
+#: ../panels/color/cc-color-panel.c:1908
 msgid "No devices supporting color management detected"
 msgstr "カラーマネージメントをサポートするデバイスがみつかりません"
 
-#: ../panels/color/cc-color-panel.c:2118
+#: ../panels/color/cc-color-panel.c:2137
 msgctxt "Device kind"
 msgid "Display"
 msgstr "ディスプレイ"
 
 # FIXME
-#: ../panels/color/cc-color-panel.c:2120
+#: ../panels/color/cc-color-panel.c:2139
 msgctxt "Device kind"
 msgid "Scanner"
 msgstr "スキャナー"
 
-#: ../panels/color/cc-color-panel.c:2122
+#: ../panels/color/cc-color-panel.c:2141
 msgctxt "Device kind"
 msgid "Printer"
 msgstr "プリンター"
 
-#: ../panels/color/cc-color-panel.c:2124
+#: ../panels/color/cc-color-panel.c:2143
 msgctxt "Device kind"
 msgid "Camera"
 msgstr "カメラ"
 
-#: ../panels/color/cc-color-panel.c:2126
+#: ../panels/color/cc-color-panel.c:2145
 msgctxt "Device kind"
 msgid "Webcam"
 msgstr "ウェブカム"
@@ -570,40 +571,40 @@ msgstr "英語"
 msgid "British English"
 msgstr "イギリス英語"
 
-#: ../panels/common/cc-common-language.c:517
+#: ../panels/common/cc-common-language.c:518
 msgid "German"
 msgstr "ドイツ語"
 
-#: ../panels/common/cc-common-language.c:519
+#: ../panels/common/cc-common-language.c:521
 msgid "French"
 msgstr "フランス語"
 
-#: ../panels/common/cc-common-language.c:521
+#: ../panels/common/cc-common-language.c:524
 msgid "Spanish"
 msgstr "スペイン語"
 
-#: ../panels/common/cc-common-language.c:523
+#: ../panels/common/cc-common-language.c:526
 msgid "Chinese (simplified)"
 msgstr "中国語 (簡体字)"
 
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:552
+#: ../panels/common/cc-common-language.c:555
 msgid "United States"
 msgstr "米国"
 
-#: ../panels/common/cc-common-language.c:553
+#: ../panels/common/cc-common-language.c:556
 msgid "Germany"
 msgstr "ドイツ"
 
-#: ../panels/common/cc-common-language.c:554
+#: ../panels/common/cc-common-language.c:557
 msgid "France"
 msgstr "フランス"
 
-#: ../panels/common/cc-common-language.c:555
+#: ../panels/common/cc-common-language.c:558
 msgid "Spain"
 msgstr "スペイン"
 
-#: ../panels/common/cc-common-language.c:556
+#: ../panels/common/cc-common-language.c:559
 msgid "China"
 msgstr "中国"
 
@@ -749,34 +750,32 @@ msgstr "日付と時刻の設定パネル"
 #. Translators: those are keywords for the date and time control-center panel
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:4
 msgid "Clock;Timezone;Location;"
-msgstr "Clock;Timezone;Location;時計;タイムゾーン;場所;"
+msgstr "Clock;Timezone;Location;時計;日付;時刻;時間;日時;タイムゾーン;場所;"
 
 #: ../panels/datetime/org.gnome.controlcenter.datetime.policy.in.h:1
-#, fuzzy
-#| msgid "Change your region and language settings"
 msgid "Change system time and date settings"
-msgstr "地域と言語に関する設定の変更"
+msgstr "システムの時刻と日付の設定を変更"
 
 #: ../panels/datetime/org.gnome.controlcenter.datetime.policy.in.h:2
 msgid "To change time or date settings, you need to authenticate."
-msgstr ""
+msgstr "時刻と日付の設定を変更するには、認証が必要です。"
 
-#: ../panels/display/cc-display-panel.c:475
+#: ../panels/display/cc-display-panel.c:473
 msgctxt "display panel, rotation"
 msgid "Normal"
 msgstr "標準"
 
-#: ../panels/display/cc-display-panel.c:476
+#: ../panels/display/cc-display-panel.c:474
 msgctxt "display panel, rotation"
 msgid "Counterclockwise"
 msgstr "反時計回り"
 
-#: ../panels/display/cc-display-panel.c:477
+#: ../panels/display/cc-display-panel.c:475
 msgctxt "display panel, rotation"
 msgid "Clockwise"
 msgstr "時計回り"
 
-#: ../panels/display/cc-display-panel.c:478
+#: ../panels/display/cc-display-panel.c:476
 msgctxt "display panel, rotation"
 msgid "180 Degrees"
 msgstr "180度"
@@ -786,60 +785,59 @@ msgstr "180度"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/cc-display-panel.c:615
+#: ../panels/display/cc-display-panel.c:613
 msgid "Mirror Displays"
 msgstr "ディスプレイをミラー"
 
-#: ../panels/display/cc-display-panel.c:639
+#: ../panels/display/cc-display-panel.c:637
 #: ../panels/display/display-capplet.ui.h:1
 msgid "Monitor"
 msgstr "モニター"
 
-#: ../panels/display/cc-display-panel.c:745
+#: ../panels/display/cc-display-panel.c:743
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d x %d (%s)"
 
-#: ../panels/display/cc-display-panel.c:747
+#: ../panels/display/cc-display-panel.c:745
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/cc-display-panel.c:1654
+#: ../panels/display/cc-display-panel.c:1652
 msgid "Drag to change primary display."
 msgstr "第 1 ディスプレイを変更するにはドラッグしてください。"
 
-#: ../panels/display/cc-display-panel.c:1712
+#: ../panels/display/cc-display-panel.c:1710
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
 msgstr ""
 "設定を変更するモニターを選んでください。ドラッグして位置を調整してください。"
 
-#: ../panels/display/cc-display-panel.c:2100
+#: ../panels/display/cc-display-panel.c:2098
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/cc-display-panel.c:2102
+#: ../panels/display/cc-display-panel.c:2100
 msgid "%a %l:%M %p"
 msgstr "%p%l:%M (%a)"
 
-#: ../panels/display/cc-display-panel.c:2264
-#: ../panels/display/cc-display-panel.c:2316
-#, fuzzy, c-format
-#| msgid "Automatic configuration"
+#: ../panels/display/cc-display-panel.c:2262
+#: ../panels/display/cc-display-panel.c:2314
+#, c-format
 msgid "Failed to apply configuration: %s"
-msgstr "自動設定"
+msgstr "設定の適用に失敗しました: %s"
 
-#: ../panels/display/cc-display-panel.c:2344
+#: ../panels/display/cc-display-panel.c:2342
 msgid "Could not save the monitor configuration"
 msgstr "モニターの設定を保存できませんでした"
 
-#: ../panels/display/cc-display-panel.c:2404
+#: ../panels/display/cc-display-panel.c:2402
 msgid "Could not detect displays"
 msgstr "ディスプレイを検出できませんでした"
 
-#: ../panels/display/cc-display-panel.c:2598
+#: ../panels/display/cc-display-panel.c:2596
 msgid "Could not get screen information"
 msgstr "スクリーンの情報を取得できませんでした"
 
@@ -1058,10 +1056,6 @@ msgstr "システム情報"
 
 #. sure that you use the same "translation" for those keywords
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:4
-#, fuzzy
-#| msgid ""
-#| "device;system;information;memory;processor;version;default;application;"
-#| "fallback;preferred;"
 msgid ""
 "device;system;information;memory;processor;version;default;application;"
 "fallback;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;"
@@ -1259,22 +1253,20 @@ msgid "Take a screenshot of a window"
 msgstr "ウィンドウのスクリーンショットを撮る"
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:4
-#, fuzzy
-#| msgid "Take a photo..."
 msgid "Take a screenshot of an area"
-msgstr "写真を撮る..."
+msgstr "選択領域のスクリーンショットを撮る"
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:5
 msgid "Copy a screenshot to clipboard"
-msgstr ""
+msgstr "スクリーンショットをクリップボードにコピーする"
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:6
 msgid "Copy a screenshot of a window to clipboard"
-msgstr ""
+msgstr "ウィンドウのスクリーンショットをクリップボードにコピーする"
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:7
 msgid "Copy a screenshot of an area to clipboard"
-msgstr ""
+msgstr "選択領域のスクリーンショットをクリップボードにコピーする"
 
 #: ../panels/keyboard/01-system.xml.in.h:1
 #: ../panels/region/gnome-region-panel.ui.h:40
@@ -1745,13 +1737,11 @@ msgstr "システムのネットワークサービスはこのバージョンと
 msgid ""
 "Network details for %s including password and any custom configuration will "
 "be lost"
-msgstr ""
+msgstr "ネットワーク %s のパスワードや独自の設定など、詳細な設定は失われます"
 
 #: ../panels/network/cc-network-panel.c:2722
-#, fuzzy
-#| msgid "Format:"
 msgid "Forget"
-msgstr "フォーマット:"
+msgstr "破棄"
 
 #: ../panels/network/cc-network-panel.c:3221
 msgid "Not connected to the internet."
@@ -1785,10 +1775,8 @@ msgstr "停止(_S)"
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
 #: ../panels/network/cc-network-panel.c:3342
-#, fuzzy
-#| msgid "Air_plane Mode"
 msgid "Airplane Mode"
-msgstr "機内モード(_P)"
+msgstr "機内モード"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 msgid "Network"
@@ -1800,10 +1788,8 @@ msgstr "ネットワークの設定"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-#, fuzzy
-#| msgid "Network;Wireless;IP;LAN;"
 msgid "Network;Wireless;IP;LAN;Proxy;"
-msgstr "Network;Wireless;IP;LAN;ネットワーク;無線;"
+msgstr "Network;Wireless;IP;LAN;Proxy;ネットワーク;無線;プロキシ;"
 
 #: ../panels/network/network.ui.h:1
 msgid "Select the interface to use for the new service"
@@ -1857,10 +1843,8 @@ msgid "DNS"
 msgstr "DNS"
 
 #: ../panels/network/network.ui.h:16
-#, fuzzy
-#| msgid "Device"
 msgid "Device Off"
-msgstr "デバイス"
+msgstr "デバイスをオフ"
 
 #: ../panels/network/network.ui.h:17
 #: ../panels/region/gnome-region-panel.ui.h:26
@@ -1884,10 +1868,8 @@ msgid "Security Key"
 msgstr "セキュリティキー"
 
 #: ../panels/network/network.ui.h:22
-#, fuzzy
-#| msgid "Network"
 msgid "Forget Network"
-msgstr "ネットワーク"
+msgstr "ネットワークを破棄"
 
 #: ../panels/network/network.ui.h:23
 msgid "_Use as Hotspot..."
@@ -1926,10 +1908,8 @@ msgid "Username"
 msgstr "ユーザー名"
 
 #: ../panels/network/network.ui.h:33
-#, fuzzy
-#| msgid "Disabled"
 msgid "Disable VPN"
-msgstr "無効"
+msgstr "VPN を無効化"
 
 #: ../panels/network/network.ui.h:34
 msgid "_Configure..."
@@ -1960,28 +1940,20 @@ msgid "_Socks Host"
 msgstr "Socks ホスト(_S)"
 
 #: ../panels/network/network.ui.h:41
-#, fuzzy
-#| msgid "_HTTP Proxy"
 msgid "HTTP Port"
-msgstr "HTTP プロキシ(_H)"
+msgstr "HTTP ポート"
 
 #: ../panels/network/network.ui.h:42
-#, fuzzy
-#| msgid "H_TTPS Proxy"
 msgid "HTTPS Port"
-msgstr "HTTPS プロキシ(_T)"
+msgstr "HTTPS ポート"
 
 #: ../panels/network/network.ui.h:43
-#, fuzzy
-#| msgid "_FTP Proxy"
 msgid "FTP Port"
-msgstr "FTP プロキシ(_F)"
+msgstr "FTP ポート"
 
 #: ../panels/network/network.ui.h:44
-#, fuzzy
-#| msgid "_Socks Host"
 msgid "Socks Port"
-msgstr "Socks ホスト(_S)"
+msgstr "Socks ポート"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:83
@@ -2026,7 +1998,7 @@ msgstr "管理対象外"
 
 #: ../panels/network/panel-common.c:199
 msgid "Firmware missing"
-msgstr "ファームウェア無し"
+msgstr "ファームウェア未検出"
 
 #: ../panels/network/panel-common.c:202
 msgid "Cable unplugged"
@@ -2192,166 +2164,140 @@ msgstr[0] "分"
 #: ../panels/power/cc-power-panel.c:233
 #, c-format
 msgid "Charging - %s until fully charged"
-msgstr ""
+msgstr "充電中 - フル充電まで %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #: ../panels/power/cc-power-panel.c:241
 #, c-format
 msgid "Caution low battery, %s remaining"
-msgstr ""
+msgstr "バッテリー残量が少ないので注意 - 残り %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #: ../panels/power/cc-power-panel.c:249
-#, fuzzy, c-format
-#| msgid "On battery power"
+#, c-format
 msgid "Using battery power - %s remaining"
-msgstr "バッテリー動作時"
+msgstr "バッテリー電源の使用中 - 残り %s"
 
 #. TRANSLATORS: primary battery
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:266 ../panels/power/cc-power-panel.c:558
-#, fuzzy
-#| msgid "UPS charging"
 msgid "Charging"
-msgstr "UPS の充電中"
+msgstr "充電中"
 
 #. TRANSLATORS: primary battery
 #: ../panels/power/cc-power-panel.c:271
-#, fuzzy
-#| msgid "On battery power"
 msgid "Using battery power"
-msgstr "バッテリー動作時"
+msgstr "バッテリー電源の使用中"
 
 #. TRANSLATORS: primary battery
 #: ../panels/power/cc-power-panel.c:275 ../panels/power/cc-power-panel.c:580
 msgid "Charging - fully charged"
-msgstr ""
+msgstr "充電中 - フル充電されています"
 
 #. TRANSLATORS: primary battery
 #: ../panels/power/cc-power-panel.c:279 ../panels/power/cc-power-panel.c:584
 msgid "Empty"
-msgstr ""
+msgstr "空"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #: ../panels/power/cc-power-panel.c:347
 #, c-format
 msgid "Caution low UPS, %s remaining"
-msgstr ""
+msgstr "UPS 電源の残量低下に注意 - 残り %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #: ../panels/power/cc-power-panel.c:353
 #, c-format
 msgid "Using UPS power - %s remaining"
-msgstr ""
+msgstr "UPS 電源の使用中 - 残り %s"
 
 #. TRANSLATORS: UPS battery
 #: ../panels/power/cc-power-panel.c:371
 msgid "Caution low UPS"
-msgstr ""
+msgstr "UPS 電源の残量低下に注意"
 
 #. TRANSLATORS: UPS battery
 #: ../panels/power/cc-power-panel.c:376
 msgid "Using UPS power"
-msgstr ""
+msgstr "UPS 電源の使用中"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
 #: ../panels/power/cc-power-panel.c:428
 msgid "Your secondary battery is fully charged"
-msgstr ""
+msgstr "第2バッテリーはフル充電されています"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
 #: ../panels/power/cc-power-panel.c:432
 msgid "Your secondary battery is empty"
-msgstr ""
+msgstr "第2バッテリーは空です"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:515
-#, fuzzy
-#| msgid "Wireless"
 msgid "Wireless mouse"
-msgstr "無線"
+msgstr "ワイヤレスマウス"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:519
-#, fuzzy
-#| msgid "Screen keyboard"
 msgid "Wireless keyboard"
-msgstr "スクリーンキーボード"
+msgstr "ワイヤレスキーボード"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:523
 msgid "Uninterruptible power supply"
-msgstr ""
+msgstr "無停電電源装置"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:527
 msgid "Personal digital assistant"
-msgstr ""
+msgstr "携帯情報端末"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:531
 msgid "Cellphone"
-msgstr ""
+msgstr "携帯電話"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:535
-#, fuzzy
-#| msgid "_Music player"
 msgid "Media player"
-msgstr "音楽プレイヤー(_M)"
+msgstr "音楽プレイヤー"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:539
-#, fuzzy
-#| msgid "Wacom Tablet"
 msgid "Tablet"
-msgstr "ワコムタブレット"
+msgstr "タブレット"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:543
-#, fuzzy
-#| msgctxt "print job"
-#| msgid "Completed"
 msgid "Computer"
-msgstr "完了"
+msgstr "コンピューター"
 
 #. TRANSLATORS: secondary battery, misc
 #: ../panels/power/cc-power-panel.c:547
-#, fuzzy
-#| msgid "Battery charging"
 msgid "Battery"
-msgstr "バッテリーの充電中"
+msgstr "バッテリー"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:565
-#, fuzzy
-#| msgid "Calibration"
 msgid "Caution"
-msgstr "キャリブレーション"
+msgstr "注意"
 
 #. TRANSLATORS: secondary battery
 #: ../panels/power/cc-power-panel.c:575
-#, fuzzy
-#| msgctxt "Password strength"
-#| msgid "Good"
 msgid "Good"
 msgstr "良"
 
 #: ../panels/power/cc-power-panel.c:1077
-#, fuzzy
-#| msgid "_Type:"
 msgid "Tip:"
-msgstr "種類(_T):"
+msgstr "ヒント:"
 
+# 原文は <a href="screen">Brightness Settings</a> affect how much power is used
 #: ../panels/power/cc-power-panel.c:1078
-#, fuzzy
-#| msgid "Brightness"
 msgid "Brightness Settings"
-msgstr "明るさ"
+msgstr "明るさの設定は"
 
 #: ../panels/power/cc-power-panel.c:1079
 msgid "affect how much power is used"
-msgstr ""
+msgstr "どのくらい電力を使うのかに影響します"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -2405,16 +2351,12 @@ msgid "When plugged in"
 msgstr "電源接続時"
 
 #: ../panels/power/power.ui.h:10
-#, fuzzy
-#| msgid "Suspend when inactive for:"
 msgid "Suspend when inactive for"
-msgstr "次の時間アイドル状態が続けばサスペンドする:"
+msgstr "次の時間アイドル状態が続けばサスペンドする"
 
 #: ../panels/power/power.ui.h:11
-#, fuzzy
-#| msgid "When power is _critically low:"
 msgid "When power is _critically low"
-msgstr "電力がひどく低下したときの動作(_C):"
+msgstr "電力がひどく低下したときの動作(_C)"
 
 #. Translators: The printer is low on toner
 #: ../panels/printers/cc-printers-panel.c:541
@@ -2852,7 +2794,7 @@ msgstr "追加する入力源を選択"
 msgid "Keyboard Layout Options"
 msgstr "キーボードレイアウトのオプション"
 
-#: ../panels/region/gnome-region-panel-system.c:417
+#: ../panels/region/gnome-region-panel-system.c:420
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings."
@@ -2860,7 +2802,7 @@ msgstr ""
 "ログイン画面、システムアカウント、および新規のユーザーアカウントでは、システ"
 "ムワイドの地域と言語の設定が使用されます。"
 
-#: ../panels/region/gnome-region-panel-system.c:422
+#: ../panels/region/gnome-region-panel-system.c:425
 #: ../panels/region/gnome-region-panel.ui.h:32
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
@@ -2871,11 +2813,11 @@ msgstr ""
 "ムワイドの地域と言語の設定が使用されます。システム設定をユーザー設定に合わせ"
 "ることができます。"
 
-#: ../panels/region/gnome-region-panel-system.c:425
+#: ../panels/region/gnome-region-panel-system.c:428
 msgid "Copy Settings"
 msgstr "設定のコピー"
 
-#: ../panels/region/gnome-region-panel-system.c:428
+#: ../panels/region/gnome-region-panel-system.c:431
 #: ../panels/region/gnome-region-panel.ui.h:39
 msgid "Copy Settings..."
 msgstr "設定のコピー..."
@@ -3370,8 +3312,8 @@ msgstr "ミュート"
 msgid "Custom"
 msgstr "その他"
 
-#: ../panels/universal-access/cc-ua-panel.c:446
-#: ../panels/universal-access/cc-ua-panel.c:452
+#: ../panels/universal-access/cc-ua-panel.c:453
+#: ../panels/universal-access/cc-ua-panel.c:459
 msgid "No shortcut set"
 msgstr "ショートカット未設定"
 
@@ -4380,7 +4322,7 @@ msgid "Create a user account"
 msgstr "新規ユーザーアカウントの作成"
 
 #: ../panels/user-accounts/um-user-panel.c:934
-#: ../panels/user-accounts/um-user-panel.c:1221
+#: ../panels/user-accounts/um-user-panel.c:1224
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -4393,7 +4335,7 @@ msgid "Delete the selected user account"
 msgstr "選択したユーザーアカウントを削除します"
 
 #: ../panels/user-accounts/um-user-panel.c:955
-#: ../panels/user-accounts/um-user-panel.c:1226
+#: ../panels/user-accounts/um-user-panel.c:1229
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -4478,25 +4420,23 @@ msgstr "Bluetooth の設定"
 msgid "Wacom Tablet"
 msgstr "ワコムタブレット"
 
+# 参考: intuos 5 のマニュアル p.57
 #: ../panels/wacom/gnome-wacom-properties.ui.h:8
-#, fuzzy
-#| msgid "Options..."
 msgid "Map to Monitor..."
-msgstr "オプション..."
+msgstr "画面にマッピング..."
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:9
-#, fuzzy
-#| msgid "Options..."
 msgid "Map Buttons..."
-msgstr "オプション..."
+msgstr "ボタンの割り当て..."
 
+# Cintiq 21UX の日英のマニュアルを参照。calibrate は位置調整、に対応している
 #: ../panels/wacom/gnome-wacom-properties.ui.h:10
 msgid "Calibrate..."
-msgstr "キャリブレーション..."
+msgstr "位置調整..."
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Adjust display resolution"
-msgstr ""
+msgstr "ディスプレイの解像度を調整"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:12
 msgid "Tracking Mode"
@@ -4575,133 +4515,124 @@ msgid "Tip Pressure Feel"
 msgstr "ペン先の感触"
 
 #: ../panels/wacom/button-mapping.ui.h:1
-#, fuzzy
-#| msgid "Options..."
 msgid "Map Buttons"
-msgstr "オプション..."
+msgstr "ボタン割り当て"
 
 #: ../panels/wacom/button-mapping.ui.h:2
 msgid "Map buttons to functions"
-msgstr ""
+msgstr "ボタンへ機能を割り当て"
 
+# この Ring は Intuos 4 や Cintiq 24HD の Touch Ring のこと。日本版ではタッチホイール。
+# libwacom のソースコードも参照のこと。
 #: ../panels/wacom/gsd-wacom-device.c:909
 #, c-format
 msgid "Left Ring Mode #%d"
-msgstr ""
+msgstr "左タッチホイールのモード #%d"
 
 #: ../panels/wacom/gsd-wacom-device.c:916
-#, fuzzy, c-format
-#| msgid "Right ring finger"
+#, c-format
 msgid "Right Ring Mode #%d"
-msgstr "右の薬指"
+msgstr "右タッチホイールのモード #%d"
 
+# Touch Strip はトラックパッド。Cintiq の日英のマニュアルを参照
 #: ../panels/wacom/gsd-wacom-device.c:944
 #, c-format
 msgid "Left Touchstrip Mode #%d"
-msgstr ""
+msgstr "左トラックパッドのモード #%d"
 
 #: ../panels/wacom/gsd-wacom-device.c:951
 #, c-format
 msgid "Right Touchstrip Mode #%d"
-msgstr ""
+msgstr "右トラックパッドのモード #%d"
 
+# Touch Ring はタッチホイール。Intuos 4 の日英のマニュアルを参照
 #: ../panels/wacom/gsd-wacom-device.c:966
 #, c-format
 msgid "Left Touchring Mode Switch"
-msgstr ""
+msgstr "左タッチホイールのモードスイッチ"
 
 #: ../panels/wacom/gsd-wacom-device.c:968
 #, c-format
 msgid "Right Touchring Mode Switch"
-msgstr ""
+msgstr "右タッチホイールのモードスイッチ"
 
 #: ../panels/wacom/gsd-wacom-device.c:971
 #, c-format
 msgid "Left Touchstrip Mode Switch"
-msgstr ""
+msgstr "左トラックパッドのモードスイッチ"
 
 #: ../panels/wacom/gsd-wacom-device.c:973
 #, c-format
 msgid "Right Touchstrip Mode Switch"
-msgstr ""
+msgstr "右トラックパッドのモードスイッチ"
 
 #: ../panels/wacom/gsd-wacom-device.c:978
 #, c-format
 msgid "Mode Switch #%d"
-msgstr ""
+msgstr "モードスイッチ #%d"
 
 #: ../panels/wacom/gsd-wacom-device.c:1050
-#, fuzzy, c-format
-#| msgid "Lower Button"
+#, c-format
 msgid "Left Button #%d"
-msgstr "下のサイドスイッチ"
+msgstr "左ボタン #%d"
 
 #: ../panels/wacom/gsd-wacom-device.c:1053
-#, fuzzy, c-format
-#| msgid "Right Mouse Button Click"
+#, c-format
 msgid "Right Button #%d"
-msgstr "マウスの右ボタンクリック"
+msgstr "右ボタン #%d"
 
 #: ../panels/wacom/gsd-wacom-device.c:1056
-#, fuzzy, c-format
-#| msgid "Top Button"
+#, c-format
 msgid "Top Button #%d"
-msgstr "上のサイドスイッチ"
+msgstr "上ボタン #%d"
 
 #: ../panels/wacom/gsd-wacom-device.c:1059
 #, c-format
 msgid "Bottom Button #%d"
-msgstr ""
+msgstr "下ボタン #%d"
 
 #. Text printed on screen
 #: ../panels/wacom/calibrator/gui_gtk.c:70
-#, fuzzy
-#| msgid "Calibration"
 msgid "Screen Calibration"
-msgstr "キャリブレーション"
+msgstr "画面位置調整"
 
 #: ../panels/wacom/calibrator/gui_gtk.c:71
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
 msgstr ""
+"タブレットの位置調整を行いますので、画面に出現するマーカーをタップしてくださ"
+"い。"
 
 #: ../panels/wacom/calibrator/gui_gtk.c:271
 msgid "Mis-click detected, restarting..."
-msgstr ""
+msgstr "誤クリックを検出しました。再起動します..."
 
 #: ../panels/wacom/cc-wacom-nav-button.c:89
-#, fuzzy, c-format
-#| msgid "%d x %d"
+#, c-format
 msgid "%d of %d"
-msgstr "%d x %d"
+msgstr "%d / %d"
 
 #: ../panels/wacom/cc-wacom-stylus-page.c:376
 #: ../panels/wacom/cc-wacom-page.c:561
-#, fuzzy
-#| msgid "Top Button"
 msgid "Button"
-msgstr "上のサイドスイッチ"
+msgstr "ボタン"
 
 #: ../panels/wacom/cc-wacom-page.c:279
 msgid "Switch Modes"
-msgstr ""
+msgstr "スイッチモード"
 
 #: ../panels/wacom/cc-wacom-page.c:526
 msgid "Up"
-msgstr ""
+msgstr "上"
 
 #: ../panels/wacom/cc-wacom-page.c:526
-#, fuzzy
-#| msgid "Done!"
 msgid "Down"
-msgstr "完了です!"
+msgstr "下"
 
 #: ../panels/wacom/cc-wacom-page.c:681
-#, fuzzy
-#| msgid "Display language:"
 msgid "Display Mapping"
-msgstr "表示言語:"
+msgstr "画面のマッピング"
 
 #: ../shell/control-center.c:58
 msgid "Enable verbose mode"
