@@ -75,6 +75,8 @@ struct _CcNetworkPanelPrivate
         NMClient         *client;
         NMRemoteSettings *remote_settings;
         gboolean          updating_device;
+        guint             add_header_widgets_idle;
+        guint             nm_warning_idle;
         guint             refresh_idle;
         GtkWidget        *kill_switch_header;
 
@@ -208,6 +210,18 @@ cc_network_panel_dispose (GObject *object)
         }
         if (priv->kill_switch_header != NULL) {
                 g_clear_object (&priv->kill_switch_header);
+        }
+        if (priv->refresh_idle != 0) {
+                g_source_remove (priv->refresh_idle);
+                priv->refresh_idle = 0;
+        }
+        if (priv->nm_warning_idle != 0) {
+                g_source_remove (priv->nm_warning_idle);
+                priv->nm_warning_idle = 0;
+        }
+        if (priv->add_header_widgets_idle != 0) {
+                g_source_remove (priv->add_header_widgets_idle);
+                priv->add_header_widgets_idle = 0;
         }
 
         G_OBJECT_CLASS (cc_network_panel_parent_class)->dispose (object);
@@ -2554,7 +2568,7 @@ panel_check_network_manager_version (CcNetworkPanel *panel)
                 ret = FALSE;
 
                 /* do modal dialog in idle so we don't block startup */
-                g_idle_add ((GSourceFunc)display_version_warning_idle, panel);
+                panel->priv->nm_warning_idle = g_idle_add ((GSourceFunc)display_version_warning_idle, panel);
         }
 
         g_strfreev (split);
@@ -3651,7 +3665,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
         gtk_widget_reparent (widget, (GtkWidget *) panel);
 
         /* add kill switch widgets when dialog activated */
-        g_idle_add (network_add_shell_header_widgets_cb, panel);
+        panel->priv->add_header_widgets_idle = g_idle_add (network_add_shell_header_widgets_cb, panel);
 }
 
 void
