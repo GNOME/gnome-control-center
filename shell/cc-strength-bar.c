@@ -26,6 +26,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <math.h>
 
 #include "cc-strength-bar.h"
 
@@ -254,7 +255,7 @@ cc_strength_bar_draw (GtkWidget *widget,
 
         /* print the bar */
         section_width = (width - (padding_end * 2) + 2) / (gdouble) bar->priv->segments;
-        count = bar->priv->fraction * (gdouble) bar->priv->segments;
+        count = ceil (bar->priv->fraction * (gdouble) bar->priv->segments);
         last_x = -padding_x + padding_end;
         for (i = 0; i < count; i++) {
 
