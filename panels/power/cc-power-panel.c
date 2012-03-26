@@ -555,33 +555,33 @@ add_device_secondary (CcPowerPanel *panel,
       case UP_DEVICE_STATE_CHARGING:
       case UP_DEVICE_STATE_PENDING_CHARGE:
         /* TRANSLATORS: secondary battery */
-        status = g_string_new(_("Charging"));
+        status = g_string_new(C_("Battery power", "Charging"));
         break;
       case UP_DEVICE_STATE_DISCHARGING:
       case UP_DEVICE_STATE_PENDING_DISCHARGE:
         if (percentage < 10 && show_caution)
           {
             /* TRANSLATORS: secondary battery */
-            status = g_string_new (_("Caution"));
+            status = g_string_new (C_("Battery power", "Caution"));
           }
         else if (percentage < 30)
           {
             /* TRANSLATORS: secondary battery */
-            status = g_string_new (_("Low"));
+            status = g_string_new (C_("Battery power", "Low"));
           }
         else
           {
             /* TRANSLATORS: secondary battery */
-            status = g_string_new (_("Good"));
+            status = g_string_new (C_("Battery power", "Good"));
           }
         break;
       case UP_DEVICE_STATE_FULLY_CHARGED:
         /* TRANSLATORS: primary battery */
-        status = g_string_new(_("Charging - fully charged"));
+        status = g_string_new(C_("Battery power", "Charging - fully charged"));
         break;
       case UP_DEVICE_STATE_EMPTY:
         /* TRANSLATORS: primary battery */
-        status = g_string_new(_("Empty"));
+        status = g_string_new(C_("Battery power", "Empty"));
         break;
       default:
         status = g_string_new (up_device_state_to_string (state));
