@@ -128,6 +128,36 @@ bg_pictures_source_class_init (BgPicturesSourceClass *klass)
   object_class->finalize = bg_pictures_source_finalize;
 }
 
+static int
+sort_func (GtkTreeModel *model,
+           GtkTreeIter *a,
+           GtkTreeIter *b,
+           BgPicturesSource *bg_source)
+{
+  CcBackgroundItem *item_a;
+  CcBackgroundItem *item_b;
+  const char *name_a;
+  const char *name_b;
+  int retval;
+
+  gtk_tree_model_get (model, a,
+                      1, &item_a,
+                      -1);
+  gtk_tree_model_get (model, b,
+                      1, &item_b,
+                      -1);
+
+  name_a = cc_background_item_get_name (item_a);
+  name_b = cc_background_item_get_name (item_b);
+
+  retval = g_utf8_collate (name_a, name_b);
+
+  g_object_unref (item_a);
+  g_object_unref (item_b);
+
+  return retval;
+}
+
 static void
 picture_scaled (GObject *source_object,
                 GAsyncResult *res,
@@ -145,6 +175,16 @@ picture_scaled (GObject *source_object,
 
   store = bg_source_get_liststore (BG_SOURCE (bg_source));
   item = g_object_get_data (source_object, "item");
+
+  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (store),
+                                   1,
+                                   (GtkTreeIterCompareFunc)sort_func,
+                                   bg_source,
+                                   NULL);
+
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store),
+                                        1,
+                                        GTK_SORT_ASCENDING);
 
   pixbuf = gdk_pixbuf_new_from_stream_finish (res, &error);
   if (pixbuf == NULL)
@@ -166,6 +206,8 @@ picture_scaled (GObject *source_object,
       g_object_unref (item);
       return;
     }
+
+  cc_background_item_load (item, NULL);
 
   /* insert the item into the liststore */
   gtk_list_store_insert_with_values (store, &iter, 0,
