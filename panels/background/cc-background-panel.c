@@ -349,8 +349,12 @@ update_preview (CcBackgroundPanelPrivate *priv,
   if (priv->current_background)
     {
       GdkColor pcolor, scolor;
+      char *escaped;
 
-      markup = g_strdup_printf ("<b>%s</b>", cc_background_item_get_name (priv->current_background));
+      escaped = g_markup_escape_text (cc_background_item_get_name (priv->current_background), -1);
+      markup = g_strdup_printf ("<b>%s</b>", escaped);
+      g_free (escaped);
+
       gtk_label_set_markup (GTK_LABEL (WID ("background-label")), markup);
       g_free (markup);
 
