@@ -374,6 +374,8 @@ devices_get_cb (GObject      *source_object,
                                      &value);
 
                       g_hash_table_insert (devices, key, value);
+
+                      g_variant_unref (item);
                     }
                 }
               g_variant_unref (devices_variant);
