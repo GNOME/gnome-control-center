@@ -177,6 +177,11 @@ goa_panel_init (GoaPanel *panel)
 
   renderer = gtk_cell_renderer_text_new ();
   gtk_tree_view_column_pack_start (column, renderer, FALSE);
+  g_object_set (G_OBJECT (renderer),
+                "ellipsize", PANGO_ELLIPSIZE_END,
+                "ellipsize-set", TRUE,
+                "width-chars", 30,
+                NULL);
   gtk_tree_view_column_set_attributes (column,
                                        renderer,
                                        "markup", GOA_PANEL_ACCOUNTS_MODEL_COLUMN_MARKUP,
