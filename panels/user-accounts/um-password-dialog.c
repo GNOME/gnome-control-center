@@ -333,12 +333,42 @@ update_password_strength (UmPasswordDialog *um)
 }
 
 static void
+update_password_match (UmPasswordDialog *um)
+{
+        const char *password;
+        const char *verify;
+
+        password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
+        verify = gtk_entry_get_text (GTK_ENTRY (um->verify_entry));
+
+        if (strlen (password) > 0 && strlen (verify) > 0) {
+                if (strcmp (password, verify) != 0) {
+                        set_entry_validation_error (GTK_ENTRY (um->verify_entry),
+                                                    _("Passwords do not match"));
+                }
+                else {
+                        clear_entry_validation_error (GTK_ENTRY (um->verify_entry));
+                }
+        }
+}
+
+static void
 password_entry_changed (GtkEntry         *entry,
                         GParamSpec       *pspec,
                         UmPasswordDialog *um)
 {
         update_password_strength (um);
         update_sensitivity (um);
+        update_password_match (um);
+}
+
+static gboolean
+password_entry_focus_out (GtkWidget        *entry,
+                          GdkEventFocus    *event,
+                          UmPasswordDialog *um)
+{
+        update_password_match (um);
+        return FALSE;
 }
 
 static void
@@ -356,22 +386,7 @@ verify_entry_focus_out (GtkWidget        *entry,
                         GdkEventFocus    *event,
                         UmPasswordDialog *um)
 {
-        const char *password;
-        const char *verify;
-
-        password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
-        verify = gtk_entry_get_text (GTK_ENTRY (um->verify_entry));
-
-        if (strlen (password) > 0 && strlen (verify) > 0) {
-                if (strcmp (password, verify) != 0) {
-                        set_entry_validation_error (GTK_ENTRY (um->verify_entry),
-                                                    _("Passwords do not match"));
-                }
-                else {
-                        clear_entry_validation_error (GTK_ENTRY (um->verify_entry));
-                }
-        }
-
+        update_password_match (um);
         return FALSE;
 }
 
@@ -522,6 +537,8 @@ um_password_dialog_new (void)
         widget = (GtkWidget *) gtk_builder_get_object (builder, "password-entry");
         g_signal_connect (widget, "notify::text",
                           G_CALLBACK (password_entry_changed), um);
+        g_signal_connect_after (widget, "focus-out-event",
+                                G_CALLBACK (password_entry_focus_out), um);
         gtk_entry_set_visibility (GTK_ENTRY (widget), FALSE);
 
         g_signal_connect (widget, "icon-press",
