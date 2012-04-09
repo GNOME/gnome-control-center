@@ -499,10 +499,10 @@ rebuild_rotation_combo (CcDisplayPanel *self)
       /* NULL-GError --- FIXME: we should say why this rotation is not available! */
       if (gnome_rr_config_applicable (self->priv->current_configuration, self->priv->screen, NULL))
         {
-          add_key (gtk_combo_box_get_model (GTK_COMBO_BOX (self->priv->rotation_combo)), _(info->name), FALSE, 0, 0, 0, info->rotation);
+          add_key (gtk_combo_box_get_model (GTK_COMBO_BOX (self->priv->rotation_combo)), g_dpgettext2 (NULL, "display panel, rotation", info->name), FALSE, 0, 0, 0, info->rotation);
 
           if (info->rotation == current)
-            selection = _(info->name);
+            selection = g_dpgettext2 (NULL, "display panel, rotation", info->name);
         }
     }
 
