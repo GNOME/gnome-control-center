@@ -42,6 +42,12 @@ enum
   PROP_SEARCH_STRING
 };
 
+#define FIXED_WIDTH 740
+#define MARGIN 20
+#define COLUMN_SPACING 20
+#define ICON_SIZE 48
+#define ICON_PADDING 10
+#define FIXED_SEARCH_LABEL_WIDTH ((FIXED_WIDTH - 2*MARGIN - 3*ICON_SIZE - 6*ICON_PADDING - 2*COLUMN_SPACING)/3. - 2)
 
 static void
 shell_search_renderer_get_property (GObject    *object,
@@ -215,7 +221,7 @@ get_size (GtkCellRenderer *cell,
 
   shell_search_renderer_set_layout (SHELL_SEARCH_RENDERER (cell), widget);
 
-  pango_layout_set_width (priv->layout, PANGO_SCALE * 180);
+  pango_layout_set_width (priv->layout, PANGO_SCALE * FIXED_SEARCH_LABEL_WIDTH);
   pango_layout_get_pixel_extents (priv->layout, NULL, &rect);
 
   if (width) *width = rect.width;
@@ -281,6 +287,8 @@ shell_search_renderer_render (GtkCellRenderer      *cell,
   ShellSearchRendererPrivate *priv = SHELL_SEARCH_RENDERER (cell)->priv;
   PangoRectangle rect;
   GtkStyleContext *context;
+  gint layout_height;
+  gint vcenter_offset;
 
   context = gtk_widget_get_style_context (widget);
 
@@ -288,11 +296,14 @@ shell_search_renderer_render (GtkCellRenderer      *cell,
 
   pango_layout_get_pixel_extents (priv->layout, NULL, &rect);
 
+  pango_layout_get_pixel_size (priv->layout, NULL, &layout_height);
+  vcenter_offset = (cell_area->height - layout_height) / 2;
+
   cairo_save (cr);
 
   gtk_render_layout (context, cr,
                      cell_area->x,
-                     cell_area->y,
+                     cell_area->y + vcenter_offset,
                      priv->layout);
 
   cairo_restore (cr);
