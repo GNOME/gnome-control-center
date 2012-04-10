@@ -47,8 +47,9 @@ G_DEFINE_TYPE (GnomeControlCenter, gnome_control_center, CC_TYPE_SHELL)
 /* Use a fixed width for the shell, since resizing horizontally is more awkward
  * for the user than resizing vertically
  * Both sizes are defined in https://live.gnome.org/Design/SystemSettings/ */
-#define FIXED_WIDTH 675
-#define FIXED_HEIGHT 530
+#define FIXED_WIDTH 740
+#define FIXED_HEIGHT 636
+#define SMALL_SCREEN_FIXED_HEIGHT 500
 
 #define MIN_ICON_VIEW_HEIGHT 300
 
@@ -86,6 +87,10 @@ struct _GnomeControlCenterPrivate
 
   gchar *default_window_title;
   gchar *default_window_icon;
+
+  int monitor_num;
+  gboolean small_screen;
+  gboolean small_screen_set;
 };
 
 static const gchar *
@@ -603,6 +608,7 @@ setup_search (GnomeControlCenter *shell)
   gtk_icon_view_set_item_orientation (GTK_ICON_VIEW (search_view),
                                       GTK_ORIENTATION_HORIZONTAL);
   gtk_icon_view_set_spacing (GTK_ICON_VIEW (search_view), 6);
+  gtk_icon_view_set_margin (GTK_ICON_VIEW (search_view), 12);
   gtk_icon_view_set_model (GTK_ICON_VIEW (search_view),
                            GTK_TREE_MODEL (priv->search_filter));
 
@@ -765,7 +771,10 @@ setup_model (GnomeControlCenter *shell)
 {
   GnomeControlCenterPrivate *priv = shell->priv;
 
-  gtk_container_set_border_width (GTK_CONTAINER (shell->priv->main_vbox), 10);
+  gtk_widget_set_margin_top (shell->priv->main_vbox, 8);
+  gtk_widget_set_margin_bottom (shell->priv->main_vbox, 8);
+  gtk_widget_set_margin_left (shell->priv->main_vbox, 12);
+  gtk_widget_set_margin_right (shell->priv->main_vbox, 12);
   gtk_container_set_focus_vadjustment (GTK_CONTAINER (shell->priv->main_vbox),
                                        gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (shell->priv->scrolled_window)));
 
@@ -822,7 +831,11 @@ notebook_switch_page_cb (GtkNotebook               *book,
       gtk_widget_hide (W (priv->builder, "home-button"));
       gtk_widget_show (W (priv->builder, "search-entry"));
       gtk_widget_hide (W (priv->builder, "lock-button"));
-      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window), FIXED_HEIGHT - 50);
+      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window),
+                                                  (priv->small_screen
+                                                   ? SMALL_SCREEN_FIXED_HEIGHT
+                                                   : FIXED_HEIGHT) - 50);
+
     }
   else
     {
@@ -1093,13 +1106,105 @@ window_key_press_event (GtkWidget          *win,
   return retval;
 }
 
+static gint
+get_monitor_height (GnomeControlCenter *self)
+{
+  GdkScreen *screen;
+  GdkRectangle rect;
+
+  screen = gtk_widget_get_screen (self->priv->window);
+  gdk_screen_get_monitor_geometry (screen, self->priv->monitor_num, &rect);
+
+  return rect.height;
+}
+
+static gboolean
+update_monitor_number (GnomeControlCenter *self)
+{
+  gboolean changed = FALSE;
+  GtkWidget *widget;
+  GdkScreen *screen;
+  GdkWindow *window;
+  int monitor;
+
+  widget = self->priv->window;
+
+  window = gtk_widget_get_window (widget);
+  screen = gtk_widget_get_screen (widget);
+  monitor = gdk_screen_get_monitor_at_window (screen, window);
+  if (self->priv->monitor_num != monitor)
+    {
+      self->priv->monitor_num = monitor;
+      changed = TRUE;
+    }
+
+  return changed;
+}
+
+static void
+update_small_screen_settings (GnomeControlCenter *self)
+{
+  gboolean small;
+
+  update_monitor_number (self);
+  small = get_monitor_height (self) <= FIXED_HEIGHT;
+
+  if (self->priv->small_screen)
+    {
+      gtk_window_set_resizable (GTK_WINDOW (self->priv->window), TRUE);
+      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (self->priv->scrolled_window),
+                                                  SMALL_SCREEN_FIXED_HEIGHT - 50);
+      gtk_window_resize (GTK_WINDOW (self->priv->window), FIXED_WIDTH, SMALL_SCREEN_FIXED_HEIGHT);
+
+      if (self->priv->small_screen_set
+          && self->priv->small_screen == small)
+        gtk_window_maximize (GTK_WINDOW (self->priv->window));
+    }
+  else
+    {
+      if (self->priv->small_screen_set
+          && self->priv->small_screen == small)
+        gtk_window_unmaximize (GTK_WINDOW (self->priv->window));
+
+      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (self->priv->scrolled_window),
+                                                  FIXED_HEIGHT - 50);
+      gtk_window_set_resizable (GTK_WINDOW (self->priv->window), FALSE);
+    }
+
+  self->priv->small_screen = small;
+  self->priv->small_screen_set = TRUE;
+}
+
+static gboolean
+main_window_configure_cb (GtkWidget *widget,
+                          GdkEvent  *event,
+                          GnomeControlCenter *self)
+{
+  /* shouldn't need to run this every time but:
+     http://bugzilla.gnome.org/show_bug.cgi?id=675242 */
+  update_small_screen_settings (self);
+  return FALSE;
+}
+
+static void
+monitors_changed_cb (GdkScreen *screen,
+                     GnomeControlCenter *self)
+{
+  update_small_screen_settings (self);
+}
+
 static void
 gnome_control_center_init (GnomeControlCenter *self)
 {
   GError *err = NULL;
   GnomeControlCenterPrivate *priv;
+  GdkScreen *screen;
 
   priv = self->priv = CONTROL_CENTER_PRIVATE (self);
+
+  priv->monitor_num = -1;
+  self->priv->small_screen = FALSE;
+  self->priv->small_screen_set = FALSE;
 
   /* load the user interface */
   priv->builder = gtk_builder_new ();
@@ -1114,6 +1219,9 @@ gnome_control_center_init (GnomeControlCenter *self)
 
   /* connect various signals */
   priv->window = W (priv->builder, "main-window");
+  screen = gtk_widget_get_screen (priv->window);
+  g_signal_connect (screen, "monitors-changed", G_CALLBACK (monitors_changed_cb), self);
+  g_signal_connect (priv->window, "configure-event", G_CALLBACK (main_window_configure_cb), self);
   g_signal_connect_swapped (priv->window, "delete-event", G_CALLBACK (g_object_unref), self);
   g_signal_connect (priv->window, "key_press_event",
                     G_CALLBACK (window_key_press_event), self);
@@ -1121,6 +1229,8 @@ gnome_control_center_init (GnomeControlCenter *self)
   priv->notebook = W (priv->builder, "notebook");
   priv->scrolled_window = W (priv->builder, "scrolledwindow1");
   gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, -1);
+  gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (self->priv->scrolled_window),
+                                              FIXED_HEIGHT - 50);
   priv->main_vbox = W (priv->builder, "main-vbox");
   g_signal_connect (priv->notebook, "switch-page",
                     G_CALLBACK (notebook_switch_page_cb), priv);
@@ -1146,7 +1256,9 @@ gnome_control_center_init (GnomeControlCenter *self)
   priv->default_window_title = g_strdup (gtk_window_get_title (GTK_WINDOW (priv->window)));
   priv->default_window_icon = g_strdup (gtk_window_get_icon_name (GTK_WINDOW (priv->window)));
 
-  notebook_switch_page_cb (NULL, NULL, OVERVIEW_PAGE, priv);
+  gtk_widget_hide (W (priv->builder, "home-button"));
+  gtk_widget_show (W (priv->builder, "search-entry"));
+  gtk_widget_hide (W (priv->builder, "lock-button"));
 }
 
 GnomeControlCenter *
