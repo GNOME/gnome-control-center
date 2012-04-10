@@ -232,7 +232,7 @@ cc_wacom_mapping_panel_init (CcWacomMappingPanel *self)
 
 	/* Output Combobox */
 	hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 8);
-	priv->label = gtk_label_new ("Output:");
+	priv->label = gtk_label_new (_("Output:"));
 	priv->combobox = gtk_combo_box_new ();
 	g_signal_connect (G_OBJECT (priv->combobox), "changed",
 	                      G_CALLBACK (combobox_changed_cb), self);
@@ -245,7 +245,7 @@ cc_wacom_mapping_panel_init (CcWacomMappingPanel *self)
 				FALSE, FALSE, 0);
 
 	/* Whole-desktop checkbox */
-	priv->checkbutton = gtk_check_button_new_with_label ("Map to single monitor");
+	priv->checkbutton = gtk_check_button_new_with_label (_("Map to single monitor"));
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->checkbutton), FALSE);
 	g_signal_connect (G_OBJECT (priv->checkbutton), "toggled",
                       G_CALLBACK (checkbutton_toggled_cb), self);
