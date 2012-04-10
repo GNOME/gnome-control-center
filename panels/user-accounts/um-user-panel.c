@@ -622,7 +622,10 @@ selected_user_changed (GtkTreeSelection *selection, UmUserPanelPrivate *d)
                 gtk_tree_model_get (model, &iter, USER_COL, &user, -1);
                 show_user (user, d);
                 on_permission_changed (d->permission, NULL, d);
+                gtk_widget_set_sensitive (get_widget (d, "main-user-vbox"), TRUE);
                 g_object_unref (user);
+        } else {                
+                gtk_widget_set_sensitive (get_widget (d, "main-user-vbox"), FALSE);
         }
 }
 
