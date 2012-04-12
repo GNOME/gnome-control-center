@@ -1032,6 +1032,7 @@ update_tablet_ui (CcWacomPage *page,
 		  int          layout)
 {
 	CcWacomPagePrivate *priv;
+	gboolean has_monitor = FALSE;
 
 	priv = page->priv;
 
@@ -1054,6 +1055,9 @@ update_tablet_ui (CcWacomPage *page,
 		gtk_widget_destroy (WID ("display-mapping-button"));
 
 		gtk_widget_show (WID ("button-calibrate"));
+		if (gsd_wacom_device_get_display_monitor (page->priv->stylus) >= 0)
+			has_monitor = TRUE;
+		gtk_widget_set_sensitive (WID ("button-calibrate"), has_monitor);
 		gtk_widget_show (WID ("display-link"));
 
 		gtk_container_child_set (CWID ("main-grid"),
