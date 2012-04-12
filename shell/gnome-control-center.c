@@ -1225,6 +1225,7 @@ gnome_control_center_init (GnomeControlCenter *self)
 
   /* connect various signals */
   priv->window = W (priv->builder, "main-window");
+  gtk_window_set_hide_titlebar_when_maximized (GTK_WINDOW (priv->window), TRUE);
   screen = gtk_widget_get_screen (priv->window);
   g_signal_connect (screen, "monitors-changed", G_CALLBACK (monitors_changed_cb), self);
   g_signal_connect (priv->window, "configure-event", G_CALLBACK (main_window_configure_cb), self);
