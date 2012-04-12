@@ -74,6 +74,11 @@ GtkWidget * cc_wacom_page_new (CcWacomPanel   *panel,
 			       GsdWacomDevice *eraser,
 			       GsdWacomDevice *pad);
 
+gboolean cc_wacom_page_update_tools (CcWacomPage    *page,
+				     GsdWacomDevice *stylus,
+				     GsdWacomDevice *eraser,
+				     GsdWacomDevice *pad);
+
 void cc_wacom_page_set_navigation (CcWacomPage *page,
 				   GtkNotebook *notebook,
 				   gboolean     ignore_first_page);

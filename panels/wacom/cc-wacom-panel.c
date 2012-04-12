@@ -200,12 +200,11 @@ update_current_page (CcWacomPanel *self)
 	tablets = g_hash_table_get_values (ht);
 	for (l = tablets; l; l = l->next) {
 		Tablet *tablet;
+		GtkWidget *page;
 
 		tablet = l->data;
 		if (tablet->stylus == NULL ||
 		    tablet->eraser == NULL) {
-			GtkWidget *page;
-
 			page = g_hash_table_lookup (priv->pages, tablet->name);
 			if (page != NULL) {
 				remove_page (GTK_NOTEBOOK (priv->notebook), page);
@@ -215,9 +214,9 @@ update_current_page (CcWacomPanel *self)
 			}
 			continue;
 		}
-
-		if (g_hash_table_lookup (priv->pages, tablet->name) == NULL) {
-			GtkWidget *page;
+		/* this code is called once the stylus + eraser were set up, but the pad does not exist yet */
+		page = g_hash_table_lookup (priv->pages, tablet->name);
+		if (page == NULL) {
 			page = cc_wacom_page_new (self, tablet->stylus, tablet->eraser, tablet->pad);
 			cc_wacom_page_set_navigation (CC_WACOM_PAGE (page), GTK_NOTEBOOK (priv->notebook), TRUE);
 			gtk_widget_show (page);
@@ -225,6 +224,8 @@ update_current_page (CcWacomPanel *self)
 			g_hash_table_insert (priv->pages, g_strdup (tablet->name), page);
 
 			changed = TRUE;
+		} else {
+			cc_wacom_page_update_tools (CC_WACOM_PAGE (page), tablet->stylus, tablet->eraser, tablet->pad);
 		}
 	}
 	g_list_free (tablets);
