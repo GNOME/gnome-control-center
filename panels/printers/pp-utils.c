@@ -2504,7 +2504,7 @@ get_paper_size_from_locale ()
     return "iso-a4";
 }
 
-+/* Set default media size according to the locale */
+/* Set default media size according to the locale */
 void
 printer_set_default_media_size (const gchar *printer_name)
 {
