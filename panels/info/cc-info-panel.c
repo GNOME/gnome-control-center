@@ -29,6 +29,7 @@
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <gio/gunixmounts.h>
+#include <gio/gdesktopappinfo.h>
 
 #include <glibtop/fsusage.h>
 #include <glibtop/mountlist.h>
@@ -75,6 +76,16 @@ typedef enum {
 	UPDATES_NOT_AVAILABLE,
 	CHECKING_UPDATES
 } UpdatesState;
+
+typedef struct 
+{
+  const char *content_type;
+  const char *label;
+  /* A pattern used to filter supported mime types
+     when changing preferred applications. NULL
+     means no other types should be changed */
+  const char *extra_type_filter;
+} DefaultAppData;
 
 struct _CcInfoPanelPrivate
 {
@@ -894,42 +905,56 @@ default_app_changed (GtkAppChooserButton *button,
                      CcInfoPanel         *self)
 {
   GAppInfo *info;
-  char *content_type;
   GError *error = NULL;
+  DefaultAppData *app_data;
+  int i;
 
   info = gtk_app_chooser_get_app_info (GTK_APP_CHOOSER (button));
-  content_type = gtk_app_chooser_get_content_type (GTK_APP_CHOOSER (button));
-  if (g_app_info_set_as_default_for_type (info, content_type, &error) == FALSE)
+  app_data = g_object_get_data (G_OBJECT (button), "cc-default-app-data");
+
+  if (g_app_info_set_as_default_for_type (info, app_data->content_type, &error) == FALSE)
     {
       g_warning ("Failed to set '%s' as the default application for '%s': %s",
-                 g_app_info_get_name (info), content_type, error->message);
+                 g_app_info_get_name (info), app_data->content_type, error->message);
       g_error_free (error);
       error = NULL;
     }
 
-  /* Set https support for the browser as well */
-  if (g_str_equal (content_type, "x-scheme-handler/http"))
+  if (app_data->extra_type_filter)
     {
-      if (g_app_info_set_as_default_for_type (info, "x-scheme-handler/https", &error) == FALSE)
+      const char *const *mime_types;
+      GPatternSpec *pattern;
+
+      pattern = g_pattern_spec_new (app_data->extra_type_filter);
+      mime_types = g_app_info_get_supported_types (info);
+
+      for (i = 0; mime_types[i]; i++)
         {
-          g_warning ("Failed to set '%s' as the default application for '%s': %s",
-                     g_app_info_get_name (info), "x-scheme-handler/https", error->message);
-          g_error_free (error);
+          if (!g_pattern_match_string (pattern, mime_types[i]))
+            continue;
+
+          if (g_app_info_set_as_default_for_type (info, mime_types[i], &error) == FALSE)
+            {
+              g_warning ("Failed to set '%s' as the default application for secondary "
+                         "content type '%s': %s",
+                         g_app_info_get_name (info), mime_types[i], error->message);
+              g_error_free (error);
+            }
         }
+
+      g_pattern_spec_free (pattern);
     }
 
-  g_free (content_type);
   g_object_unref (info);
 }
 
 static void
-info_panel_setup_default_app (CcInfoPanel *self,
-                              const char  *content_type,
-                              const char  *label_id,
-                              guint        left_attach,
-                              guint        right_attach,
-                              guint        top_attach,
-                              guint        bottom_attach)
+info_panel_setup_default_app (CcInfoPanel    *self,
+                              DefaultAppData *data,
+                              guint           left_attach,
+                              guint           right_attach,
+                              guint           top_attach,
+                              guint           bottom_attach)
 {
   GtkWidget *button;
   GtkWidget *table;
@@ -937,7 +962,9 @@ info_panel_setup_default_app (CcInfoPanel *self,
 
   table = WID ("default_apps_table");
 
-  button = gtk_app_chooser_button_new (content_type);
+  button = gtk_app_chooser_button_new (data->content_type);
+  g_object_set_data (G_OBJECT (button), "cc-default-app-data", data);
+
   gtk_app_chooser_button_set_show_default_item (GTK_APP_CHOOSER_BUTTON (button), TRUE);
   gtk_table_attach (GTK_TABLE (table), button,
                     left_attach, right_attach,
@@ -946,30 +973,33 @@ info_panel_setup_default_app (CcInfoPanel *self,
                     G_CALLBACK (default_app_changed), self);
   gtk_widget_show (button);
 
-  label = WID(label_id);
+  label = WID(data->label);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
 }
+
+static DefaultAppData preferred_app_infos[] = {
+  /* for web, we need to support text/html,
+     application/xhtml+xml and x-scheme-handler/https,
+     hence the "*" pattern
+  */
+  { "x-scheme-handler/http", "web-label", "*" },
+  { "x-scheme-handler/mailto", "mail-label", NULL },
+  { "text/calendar", "calendar-label", NULL },
+  { "audio/x-vorbis+ogg", "music-label", "audio/*" },
+  { "video/x-ogm+ogg", "video-label", "video/*" },
+  { "image/jpeg", "photos-label", "image/*" }
+};
 
 static void
 info_panel_setup_default_apps (CcInfoPanel  *self)
 {
-  info_panel_setup_default_app (self, "x-scheme-handler/http", "web-label",
-                                1, 2, 0, 1);
+  int i;
 
-  info_panel_setup_default_app (self, "x-scheme-handler/mailto", "mail-label",
-                                1, 2, 1, 2);
-
-  info_panel_setup_default_app (self, "text/calendar", "calendar-label",
-                                1, 2, 2, 3);
-
-  info_panel_setup_default_app (self, "audio/x-vorbis+ogg", "music-label",
-                                1, 2, 3, 4);
-
-  info_panel_setup_default_app (self, "video/x-ogm+ogg", "video-label",
-                                1, 2, 4, 5);
-
-  info_panel_setup_default_app (self, "image/jpeg", "photos-label",
-                                1, 2, 5, 6);
+  for (i = 0; i < G_N_ELEMENTS(preferred_app_infos); i++)
+    {
+      info_panel_setup_default_app (self, &preferred_app_infos[i],
+                                    1, 2, i, i+1);
+    }
 }
 
 static char **
