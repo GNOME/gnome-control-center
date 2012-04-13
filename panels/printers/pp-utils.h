@@ -114,6 +114,8 @@ gchar      *printer_get_hostname (cups_ptype_t  printer_type,
                                   const gchar  *device_uri,
                                   const gchar  *printer_uri);
 
+void        printer_set_default_media_size (const gchar *printer_name);
+
 G_END_DECLS
 
 #endif /* __PP_UTILS_H */

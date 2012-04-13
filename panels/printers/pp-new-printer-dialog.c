@@ -1477,7 +1477,7 @@ new_printer_add_button_cb (GtkButton *button,
   gchar              *device_name = NULL;
   gint                device_id = -1;
   gint                device_type = -1;
-  gint                i, j, k;
+  gint                i;
   int                 num_dests;
 
   treeview = (GtkWidget*)
@@ -1738,124 +1738,36 @@ new_printer_add_button_cb (GtkButton *button,
           const char *ppd_file_name = NULL;
           GDBusConnection *bus;
           GError     *error = NULL;
-          GVariant   *output;
-          ppd_file_t  *ppd_file = NULL;
-          gchar       *value = NULL;
-          const gchar *paper_size;
 
           ppd_file_name = cupsGetPPD (pp->devices[device_id].display_name);
 
-          bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
-          if (!bus)
+          printer_set_accepting_jobs (pp->devices[device_id].display_name, TRUE, NULL);
+          printer_set_enabled (pp->devices[device_id].display_name, TRUE);
+
+          if (g_strcmp0 (pp->devices[device_id].device_class, "direct") == 0)
             {
-              g_warning ("Failed to get system bus: %s", error->message);
-              g_error_free (error);
+              gchar *commands = get_dest_attr (pp->devices[device_id].display_name, "printer-commands");
+              gchar *commands_lowercase = g_ascii_strdown (commands, -1);
+              ipp_t *response = NULL;
+
+              if (g_strrstr (commands_lowercase, "autoconfigure"))
+                {
+                  response = execute_maintenance_command (pp->devices[device_id].display_name,
+                                                          "AutoConfigure",
+                  /* Translators: Name of job which makes printer to autoconfigure itself */
+                                                          _("Automatic configuration"));
+                  if (response)
+                    {
+                      if (response->state == IPP_ERROR)
+                        g_warning ("An error has occured during automatic configuration of new printer.");
+                      ippDelete (response);
+                    }
+                }
+              g_free (commands);
+              g_free (commands_lowercase);
             }
-          else
-            {
-              printer_set_accepting_jobs (pp->devices[device_id].display_name, TRUE, NULL);
-              printer_set_enabled (pp->devices[device_id].display_name, TRUE);
 
-              if (g_strcmp0 (pp->devices[device_id].device_class, "direct") == 0)
-                {
-                  gchar *commands = get_dest_attr (pp->devices[device_id].display_name, "printer-commands");
-                  gchar *commands_lowercase = g_ascii_strdown (commands, -1);
-                  ipp_t *response = NULL;
-
-                  if (g_strrstr (commands_lowercase, "autoconfigure"))
-                    {
-                      response = execute_maintenance_command (pp->devices[device_id].display_name,
-                                                              "AutoConfigure",
-                      /* Translators: Name of job which makes printer to autoconfigure itself */
-                                                              _("Automatic configuration"));
-                      if (response)
-                        {
-                          if (response->state == IPP_ERROR)
-                            g_warning ("An error has occured during automatic configuration of new printer.");
-                          ippDelete (response);
-                        }
-                    }
-                  g_free (commands);
-                  g_free (commands_lowercase);
-                }
-
-
-              /* Set default PaperSize according to the locale */
-              paper_size = gtk_paper_size_get_default ();
-              if (g_str_equal (paper_size, GTK_PAPER_NAME_LETTER))
-                paper_size = "Letter";
-              else
-                paper_size = "A4";
-
-              if (ppd_file_name)
-                {
-                  ppd_file = ppdOpenFile (ppd_file_name);
-                  if (ppd_file)
-                    {
-                      ppdMarkDefaults (ppd_file);
-                      for (i = 0; i < ppd_file->num_groups; i++)
-                        for (j = 0; j < ppd_file->groups[i].num_options; j++)
-                          if (g_strcmp0 ("PageSize", ppd_file->groups[i].options[j].keyword) == 0)
-                            {
-                              for (k = 0; k < ppd_file->groups[i].options[j].num_choices; k++)
-                                {
-                                  if (g_ascii_strncasecmp (paper_size,
-                                                           ppd_file->groups[i].options[j].choices[k].choice,
-                                                           strlen (paper_size)) == 0 &&
-                                      !ppd_file->groups[i].options[j].choices[k].marked)
-                                    {
-                                      value = g_strdup (ppd_file->groups[i].options[j].choices[k].choice);
-                                      break;
-                                    }
-                                }
-                              break;
-                            }
-                      ppdClose (ppd_file);
-                    }
-                }
-
-              if (value)
-                {
-                  GVariantBuilder array_builder;
-
-                  g_variant_builder_init (&array_builder, G_VARIANT_TYPE ("as"));
-                  g_variant_builder_add (&array_builder, "s", value);
-
-                  output = g_dbus_connection_call_sync (bus,
-                                                        MECHANISM_BUS,
-                                                        "/",
-                                                        MECHANISM_BUS,
-                                                        "PrinterAddOptionDefault",
-                                                        g_variant_new ("(ssas)",
-                                                                       pp->devices[device_id].display_name,
-                                                                       "PageSize",
-                                                                       &array_builder),
-                                                        G_VARIANT_TYPE ("(s)"),
-                                                        G_DBUS_CALL_FLAGS_NONE,
-                                                        -1,
-                                                        NULL,
-                                                        &error);
-                  g_object_unref (bus);
-
-                  if (output)
-                    {
-                      const gchar *ret_error;
-
-                      g_variant_get (output, "(&s)", &ret_error);
-                      if (ret_error[0] != '\0')
-                        g_warning ("%s", ret_error);
-
-                      g_variant_unref (output);
-                    }
-                  else
-                    {
-                      g_warning ("%s", error->message);
-                      g_error_free (error);
-                    }
-
-                  g_free (value);
-                }
-            }
+          printer_set_default_media_size (pp->devices[device_id].display_name);
 
           if (pp->devices[device_id].device_uri &&
               dbus_method_available (FIREWALLD_BUS,
