@@ -22,6 +22,7 @@
 #include "config.h"
 #include "cc-datetime-panel.h"
 
+#include <langinfo.h>
 #include <sys/time.h>
 #include "cc-timezone-map.h"
 #include "timedated.h"
@@ -79,6 +80,7 @@ struct _CcDateTimePanelPrivate
 
   GSettings *settings;
   GDesktopClockFormat clock_format;
+  gboolean ampm_available;
 
   GnomeWallClock *clock_tracker;
 
@@ -261,8 +263,14 @@ update_time (CcDateTimePanel *self)
   char *label;
   char *am_pm_widgets[] = {"ampm_up_button", "ampm_down_button", "ampm_label" };
   guint i;
+  gboolean use_ampm;
 
-  if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_24H)
+  if (priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H && priv->ampm_available)
+    use_ampm = TRUE;
+  else
+    use_ampm = FALSE;
+
+  if (!use_ampm)
     {
       /* Update the hours label */
       label = g_date_time_format (priv->date, "%H");
@@ -283,8 +291,7 @@ update_time (CcDateTimePanel *self)
     }
 
   for (i = 0; i < G_N_ELEMENTS (am_pm_widgets); i++)
-    gtk_widget_set_visible (W(am_pm_widgets[i]),
-                            priv->clock_format == G_DESKTOP_CLOCK_FORMAT_12H);
+    gtk_widget_set_visible (W(am_pm_widgets[i]), use_ampm);
 
   /* Update the minutes label */
   label = g_date_time_format (priv->date, "%M");
@@ -945,6 +952,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   GError *err = NULL;
   GtkTreeModelFilter *city_modelfilter;
   GtkTreeModelSort *city_modelsort;
+  const char *ampm;
   guint i, num_days;
   int ret;
   DateEndianess endianess;
@@ -1030,6 +1038,25 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                                                             "aspectmap")),
                      widget);
 
+  /* Clock settings */
+  priv->settings = g_settings_new (CLOCK_SCHEMA);
+
+  ampm = nl_langinfo (AM_STR);
+  /* There are no AM/PM indicators for this locale, so
+   * offer the 24 hr clock as the only option */
+  if (ampm == NULL || ampm[0] == '\0')
+    {
+      gtk_widget_set_visible (W("ampm_up_button"), FALSE);
+      gtk_widget_set_visible (W("ampm_label"), FALSE);
+      gtk_widget_set_visible (W("ampm_down_button"), FALSE);
+      gtk_widget_set_visible (W("24h_box"), FALSE);
+      priv->ampm_available = FALSE;
+    }
+  else
+    {
+     priv->ampm_available = TRUE;
+    }
+
   gtk_container_add (GTK_CONTAINER (self),
                      GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                          "datetime-panel")));
@@ -1039,7 +1066,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   priv->clock_tracker = g_object_new (GNOME_TYPE_WALL_CLOCK, NULL);
   g_signal_connect (priv->clock_tracker, "notify::clock", G_CALLBACK (on_clock_changed), self);
 
-  priv->settings = g_settings_new (CLOCK_SCHEMA);
   clock_settings_changed_cb (priv->settings, CLOCK_FORMAT_KEY, self);
   g_signal_connect (priv->settings, "changed::" CLOCK_FORMAT_KEY,
                     G_CALLBACK (clock_settings_changed_cb), self);
