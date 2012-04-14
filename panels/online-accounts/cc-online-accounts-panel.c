@@ -323,8 +323,9 @@ show_page_account (GoaPanel  *panel,
 {
   GList *children;
   GList *l;
-  GtkWidget *alignment;
-  GtkWidget *table;
+  GtkWidget *grid;
+  GtkWidget *left_grid;
+  GtkWidget *right_grid;
   GtkWidget *bar;
   GtkWidget *label;
   GoaProvider *provider;
@@ -357,9 +358,16 @@ show_page_account (GoaPanel  *panel,
       g_signal_connect (bar, "response", G_CALLBACK (on_info_bar_response), panel);
     }
 
-  table = gtk_table_new (3, 2, FALSE);
-  gtk_table_set_row_spacings (GTK_TABLE (table), 0);
-  gtk_table_set_col_spacings (GTK_TABLE (table), 12);
+  left_grid = gtk_grid_new ();
+  gtk_widget_set_halign (left_grid, GTK_ALIGN_END);
+  gtk_widget_set_hexpand (left_grid, TRUE);
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (left_grid), GTK_ORIENTATION_VERTICAL);
+  gtk_grid_set_row_spacing (GTK_GRID (left_grid), 0);
+
+  right_grid = gtk_grid_new ();
+  gtk_widget_set_hexpand (right_grid, TRUE);
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (right_grid), GTK_ORIENTATION_VERTICAL);
+  gtk_grid_set_row_spacing (GTK_GRID (right_grid), 0);
 
   if (provider != NULL)
     {
@@ -367,12 +375,16 @@ show_page_account (GoaPanel  *panel,
                                  panel->client,
                                  object,
                                  GTK_BOX (panel->accounts_vbox),
-                                 GTK_TABLE (table));
+                                 GTK_GRID (left_grid),
+                                 GTK_GRID (right_grid));
     }
 
-  alignment = gtk_alignment_new (0.5, 0.0, 0.0, 0.0);
-  gtk_container_add (GTK_CONTAINER (alignment), table);
-  gtk_box_pack_start (GTK_BOX (panel->accounts_vbox), alignment, FALSE, TRUE, 0);
+  grid = gtk_grid_new ();
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_HORIZONTAL);
+  gtk_grid_set_column_spacing (GTK_GRID (grid), 12);
+  gtk_container_add (GTK_CONTAINER (grid), left_grid);
+  gtk_container_add (GTK_CONTAINER (grid), right_grid);
+  gtk_box_pack_start (GTK_BOX (panel->accounts_vbox), grid, FALSE, TRUE, 0);
 
   gtk_widget_show_all (panel->accounts_vbox);
 
