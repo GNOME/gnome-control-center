@@ -497,6 +497,11 @@ on_toolbar_add_button_clicked (GtkToolButton *button,
 
   error = NULL;
   object = goa_panel_add_account_dialog_get_account (GOA_PANEL_ADD_ACCOUNT_DIALOG (dialog), &error);
+  gtk_widget_destroy (dialog);
+
+  /* We might have an object even when error is set.
+   * eg., if we failed to store the credentials in the keyring.
+   */
 
   if (object != NULL)
     {
@@ -510,11 +515,10 @@ on_toolbar_add_button_clicked (GtkToolButton *button,
                                           &iter);
         }
       g_object_unref (object);
-      gtk_widget_destroy (dialog);
     }
-  else
+
+  if (error != NULL)
     {
-      gtk_widget_destroy (dialog);
       if (!(error->domain == GOA_ERROR && error->code == GOA_ERROR_DIALOG_DISMISSED))
         {
           dialog = gtk_message_dialog_new (parent,
