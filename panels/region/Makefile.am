@@ -35,9 +35,7 @@ libregion_la_LDFLAGS = $(PANEL_LDFLAGS)
 uidir   = $(pkgdatadir)/ui
 ui_DATA = \
 	gnome-region-panel.ui \
-	gnome-region-panel-layout-chooser.ui \
-	gnome-region-panel-input-chooser.ui \
-	gnome-region-panel-options-dialog.ui
+	gnome-region-panel-input-chooser.ui
 
 desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-region-panel.desktop.in

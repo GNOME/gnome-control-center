@@ -32,9 +32,6 @@
 #include <ibusutil.h>
 #undef IBUS_COMPILATION
 
-#include <gdk/gdkx.h>
-#include <libgnomekbd/gkbd-keyboard-drawing.h>
-
 #include "gnome-region-panel-input.h"
 
 #define WID(s) GTK_WIDGET(gtk_builder_get_object (builder, s))
@@ -527,15 +524,10 @@ static void
 show_selected_layout (GtkButton *button, gpointer data)
 {
   GtkBuilder *builder = data;
-  GtkWidget *parent;
-  GtkWidget *popup;
   GtkTreeModel *model;
   GtkTreeIter iter;
   gchar *layout;
-  gchar *desc;
-  gchar *title;
-  XklEngine *engine;
-  XklConfigRegistry *registry;
+  gchar *kbd_viewer_args;
 
   g_debug ("show selected layout");
 
@@ -544,29 +536,14 @@ show_selected_layout (GtkButton *button, gpointer data)
 
   gtk_tree_model_get (model, &iter,
                       COL_LAYOUT, &layout,
-                      COL_DESC, &desc,
                       -1);
 
-  parent = WID ("region_notebook");
-  popup = gkbd_keyboard_drawing_dialog_new ();
+  kbd_viewer_args = g_strdup_printf ("gkbd-keyboard-display -l %s", layout);
 
-  engine = xkl_engine_get_instance (GDK_DISPLAY_XDISPLAY (gtk_widget_get_display (parent)));
-  registry = xkl_config_registry_get_instance (engine);
+  g_spawn_command_line_async (kbd_viewer_args, NULL);
 
-  gkbd_keyboard_drawing_dialog_set_layout (popup, registry, layout);
-
-  g_object_unref (registry);
-
-  title = g_strdup_printf (_("Keyboard layout for %s"), desc);
-  gtk_window_set_title (GTK_WINDOW (popup), title);
-  g_free (title);
-
-  gtk_window_set_transient_for (GTK_WINDOW (popup),
-                                GTK_WINDOW (gtk_widget_get_toplevel (parent)));
-  gtk_widget_show_all (popup);
-
+  g_free (kbd_viewer_args);
   g_free (layout);
-  g_free (desc);
 }
 
 /* Main setup {{{1 */

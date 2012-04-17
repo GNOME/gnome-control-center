@@ -29,7 +29,6 @@
 
 #include <glib/gi18n.h>
 
-#include <libgnomekbd/gkbd-keyboard-config.h>
 #include "cc-common-language.h"
 #include "gdm-languages.h"
 #include "gnome-region-panel-system.h"
