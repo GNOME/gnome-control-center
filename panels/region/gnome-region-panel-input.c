@@ -661,10 +661,8 @@ static void
 selection_changed (GtkTreeSelection *selection,
                    GtkBuilder       *builder)
 {
-  GList *selected;
-
-  selected = gtk_tree_selection_get_selected_rows (selection, NULL);
-  gtk_widget_set_sensitive (WID ("ok-button"), selected != NULL);
+  gtk_widget_set_sensitive (WID ("ok-button"),
+                            gtk_tree_selection_get_selected (selection, NULL, NULL));
 }
 
 static void
@@ -746,6 +744,8 @@ input_chooser_new (GtkBuilder *main_builder)
                              GNOMECC_UI_DIR "/gnome-region-panel-input-chooser.ui",
                              NULL);
   chooser = WID ("input_source_chooser");
+  g_object_set_data_full (G_OBJECT (chooser), "builder", builder, g_object_unref);
+
   filtered_list = WID ("filtered_input_source_list");
   filter_entry = WID ("input_source_filter");
 
