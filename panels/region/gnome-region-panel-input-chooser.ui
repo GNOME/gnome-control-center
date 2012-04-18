@@ -3,16 +3,9 @@
   <requires lib="gtk+" version="2.16"/>
   <object class="GtkListStore" id="input_source_model">
     <columns>
-      <!-- column-name id -->
       <column type="gchararray"/>
-      <!-- column-name name -->
       <column type="gchararray"/>
-      <!-- column-name lang -->
       <column type="gchararray"/>
-      <!-- column-name layout -->
-      <column type="gchararray"/>
-      <!-- column-name xkb -->
-      <column type="gboolean"/>
     </columns>
   </object>
   <object class="GtkTreeModelFilter" id="filtered_input_source_model">

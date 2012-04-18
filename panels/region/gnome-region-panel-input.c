@@ -26,12 +26,6 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 
-#include <ibus.h>
-/* http://code.google.com/p/ibus/issues/detail?id=1338 */
-#define IBUS_COMPILATION
-#include <ibusutil.h>
-#undef IBUS_COMPILATION
-
 #include "gnome-region-panel-input.h"
 
 #define WID(s) GTK_WIDGET(gtk_builder_get_object (builder, s))
@@ -56,6 +50,115 @@
  * - Allow changing shortcuts ?
  */
 
+struct _InputSource
+{
+  const gchar *name;
+  const gchar *layout;
+  const gchar *engine;
+};
+
+static const struct _InputSource input_sources[] =
+  {
+    { "English (US)",                                   "us",   "" },
+    { "Catalan",                                        "ad",   "" },
+    { "Afghani",                                        "af",   "" },
+    { "Arabic",                                         "ara",  "" },
+    { "Albanian",                                       "al",   "" },
+    { "Armenian",                                       "am",   "" },
+    { "German (Austria)",                               "at",   "" },
+    { "Azerbaijani",                                    "az",   "" },
+    { "Belarusian",                                     "by",   "" },
+    { "Belgian",                                        "be",   "" },
+    { "Bengali",                                        "bd",   "" },
+    { "Indian",                                         "in",   "" },
+    { "Bosnian",                                        "ba",   "" },
+    { "Portuguese (Brazil)",                            "br",   "" },
+    { "Bulgarian",                                      "bg",   "" },
+    { "Arabic (Morocco)",                               "ma",   "" },
+    { "English (Cameroon)",                             "cm",   "" },
+    { "Burmese",                                        "mm",   "" },
+    { "French (Canada)",                                "ca",   "" },
+    { "French (Democratic Republic of the Congo)",      "cd",   "" },
+    { "Chinese",                                        "cn",   "" },
+    { "Croatian",                                       "hr",   "" },
+    { "Czech",                                          "cz",   "" },
+    { "Danish",                                         "dk",   "" },
+    { "Dutch",                                          "nl",   "" },
+    { "Dzongkha",                                       "bt",   "" },
+    { "Estonian",                                       "ee",   "" },
+    { "Persian",                                        "ir",   "" },
+    { "Iraqi",                                          "iq",   "" },
+    { "Faroese",                                        "fo",   "" },
+    { "Finnish",                                        "fi",   "" },
+    { "French",                                         "fr",   "" },
+    { "English (Ghana)",                                "gh",   "" },
+    { "French (Guinea)",                                "gn",   "" },
+    { "Georgian",                                       "ge",   "" },
+    { "German",                                         "de",   "" },
+    { "Greek",                                          "gr",   "" },
+    { "Hungarian",                                      "hu",   "" },
+    { "Icelandic",                                      "is",   "" },
+    { "Hebrew",                                         "il",   "" },
+    { "Italian",                                        "it",   "" },
+    { "Japanese",                                       "jp",   "anthy" },
+    { "Kyrgyz",                                         "kg",   "" },
+    { "Khmer (Cambodia)",                               "kh",   "" },
+    { "Kazakh",                                         "kz",   "" },
+    { "Lao",                                            "la",   "" },
+    { "Spanish (Latin American)",                       "latam","" },
+    { "Lithuanian",                                     "lt",   "" },
+    { "Latvian",                                        "lv",   "" },
+    { "Maori",                                          "mao",  "" },
+    { "Montenegrin",                                    "me",   "" },
+    { "Macedonian",                                     "mk",   "" },
+    { "Maltese",                                        "mt",   "" },
+    { "Mongolian",                                      "mn",   "" },
+    { "Norwegian",                                      "no",   "" },
+    { "Polish",                                         "pl",   "" },
+    { "Portuguese",                                     "pt",   "" },
+    { "Romanian",                                       "ro",   "" },
+    { "Russian",                                        "ru",   "" },
+    { "Serbian",                                        "rs",   "" },
+    { "Slovenian",                                      "si",   "" },
+    { "Slovak",                                         "sk",   "" },
+    { "Spanish",                                        "es",   "" },
+    { "Swedish",                                        "se",   "" },
+    { "German (Switzerland)",                           "ch",   "" },
+    { "Arabic (Syria)",                                 "sy",   "" },
+    { "Tajik",                                          "tj",   "" },
+    { "Sinhala",                                        "lk",   "" },
+    { "Thai",                                           "th",   "" },
+    { "Turkish",                                        "tr",   "" },
+    { "Taiwanese",                                      "tw",   "" },
+    { "Ukrainian",                                      "ua",   "" },
+    { "English (UK)",                                   "gb",   "" },
+    { "Uzbek",                                          "uz",   "" },
+    { "Vietnamese",                                     "vn",   "" },
+    { "Korean",                                         "kr",   "hangul" },
+    { "Irish",                                          "ie",   "" },
+    { "Urdu (Pakistan)",                                "pk",   "" },
+    { "Dhivehi",                                        "mv",   "" },
+    { "English (South Africa)",                         "za",   "" },
+    { "Esperanto",                                      "epo",  "" },
+    { "Nepali",                                         "np",   "" },
+    { "English (Nigeria)",                              "ng",   "" },
+    { "Amharic",                                        "et",   "" },
+    { "Wolof",                                          "sn",   "" },
+    { "Braille",                                        "brai", "" },
+    { "Turkmen",                                        "tm",   "" },
+    { "Bambara",                                        "ml",   "" },
+    { "Swahili (Tanzania)",                             "tz",   "" },
+    { "Swahili (Kenya)",                                "ke",   "" },
+    { "Tswana",                                         "bw",   "" },
+    { "Filipino",                                       "ph",   "" }
+  };
+
+#define GNOME_DESKTOP_INPUT_SOURCES_DIR "org.gnome.desktop.input-sources"
+
+#define KEY_CURRENT_IS     "current"
+#define KEY_INPUT_SOURCES  "sources"
+
+static GSettings *is_settings = NULL;
 
 static GtkWidget *input_chooser_new          (GtkBuilder    *builder);
 static gboolean   input_chooser_get_selected (GtkWidget     *chooser,
@@ -65,192 +168,106 @@ static gboolean   input_chooser_get_selected (GtkWidget     *chooser,
 enum
 {
   COL_NAME,
-  COL_DESC,
-  COL_LANG,
   COL_LAYOUT,
-  COL_XKB
+  COL_ENGINE
 };
 
-/* IBus interaction {{{1 */
-
-static gchar *
-engine_description (IBusEngineDesc *description, gboolean unique_lang)
+static gboolean
+add_source_to_hash (GtkTreeModel *model,
+                    GtkTreePath  *path,
+                    GtkTreeIter  *iter,
+                    gpointer      data)
 {
-  const gchar *lang;
-  gchar *longname;
-  gchar *desc;
+  GHashTable *hash = data;
+  gchar *name;
 
-  lang = ibus_get_language_name (ibus_engine_desc_get_language (description));
+  gtk_tree_model_get (model, iter, COL_NAME, &name, -1);
+  g_hash_table_insert (hash, name, GINT_TO_POINTER (1));
 
-  if (g_getenv ("DEBUG_IBUS"))
-    return g_strdup_printf ("%s %s/%s/%s/%s", lang,
-                            ibus_engine_desc_get_name (description),
-                            ibus_engine_desc_get_longname (description),
-                            ibus_engine_desc_get_language (description),
-                            ibus_engine_desc_get_layout (description));
-
-  if (unique_lang)
-    return g_strdup (lang);
-
-  if (g_str_has_prefix (ibus_engine_desc_get_name (description), "xkb:layout:"))
-    {
-      if (strcmp (ibus_engine_desc_get_longname (description), lang) == 0)
-        return g_strdup_printf ("%s (xkb)", lang);
-      else
-        return g_strdup (ibus_engine_desc_get_longname (description));
-    }
-
-  longname = g_strdup (ibus_engine_desc_get_longname (description));
-  if (g_str_has_suffix (longname, " (m17n)"))
-    {
-       longname[strlen (longname) - strlen (" (m17n)")] = '\0';
-    }
-
-  desc = g_strdup_printf ("%s (%s)", lang, longname);
-
-  g_free (longname);
-
-  return desc;
+  return FALSE;
 }
 
 static void
 populate_model (GtkListStore *store,
-                gboolean      only_active)
+                GtkListStore *active_sources)
 {
-  IBusBus *bus;
-  GList *list, *l;
-  GList *active_list;
-  IBusEngineDesc *description;
-  const gchar *name;
-  const gchar *lang;
-  gchar *desc;
-  gint count;
-  GtkTreeIter iter;
-  GHashTable *lang_hash;
   GHashTable *active_hash;
+  GtkTreeIter iter;
+  gint i;
 
-  bus = ibus_bus_new ();
+  active_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
-  list = ibus_bus_list_engines (bus);
-  active_list = ibus_bus_list_active_engines (bus);
+  gtk_tree_model_foreach (GTK_TREE_MODEL (active_sources),
+                          add_source_to_hash,
+                          active_hash);
 
-  lang_hash = g_hash_table_new (g_str_hash, g_str_equal);
-  active_hash = g_hash_table_new (g_str_hash, g_str_equal);
-
-  /* Figure out which languages occur more than once
-   * for these, showing only the language is not sufficient
-   */
-  for (l = list; l; l = l->next)
+  for (i = 0; i < G_N_ELEMENTS (input_sources); ++i)
     {
-      description = (IBusEngineDesc *)l->data;
-
-      name = ibus_engine_desc_get_name (description);
-      if (g_str_has_prefix (name, "xkb:layout:default:#"))
+      if (g_hash_table_lookup (active_hash, input_sources[i].name))
         continue;
-
-      lang = ibus_engine_desc_get_language (description);
-      lang = ibus_get_language_name (lang);
-      if (lang == NULL)
-        continue;
-
-      count = GPOINTER_TO_INT (g_hash_table_lookup (lang_hash, lang));
-      count++;
-      g_hash_table_insert (lang_hash, (gpointer)lang, GINT_TO_POINTER (count));
-    }
-
-  if (only_active)
-    {
-      g_list_free (list);
-      list = active_list;
-      active_list = NULL;
-    }
-  else
-    {
-      /* We want to skip active engines when
-       * making a list of inactive engines
-       */
-      for (l = active_list; l; l = l->next)
-        {
-          description = (IBusEngineDesc *)l->data;
-          name = ibus_engine_desc_get_name (description);
-          g_hash_table_insert (active_hash, (gpointer)name, (gpointer)name);
-        }
-      g_list_free (active_list);
-      active_list = NULL;
-    }
-
-  for (l = list; l; l = l->next)
-    {
-      description = (IBusEngineDesc *)l->data;
-
-      name = ibus_engine_desc_get_name (description);
-      if (g_str_has_prefix (name, "xkb:layout:default:#"))
-        continue;
-
-      if (g_hash_table_lookup (active_hash, name))
-        continue;
-
-      lang = ibus_engine_desc_get_language (description);
-      lang = ibus_get_language_name (lang);
-      if (lang == NULL)
-        continue;
-
-      count = GPOINTER_TO_INT (g_hash_table_lookup (lang_hash, lang));
-      desc = engine_description (description, count <= 1);
 
       gtk_list_store_append (store, &iter);
       gtk_list_store_set (store, &iter,
-                          COL_NAME, name,
-                          COL_DESC, desc,
-                          COL_LANG, lang,
-                          COL_LAYOUT, ibus_engine_desc_get_layout (description),
-                          COL_XKB, g_str_has_prefix (name, "xkb:layout:"),
+                          COL_NAME, input_sources[i].name,
+                          COL_LAYOUT, input_sources[i].layout,
+                          COL_ENGINE, input_sources[i].engine,
                           -1);
-      g_free (desc);
     }
 
-  g_hash_table_unref (lang_hash);
-  g_hash_table_unref (active_hash);
-
-  g_list_free (list);
-
-  g_object_unref (bus);
+  g_hash_table_destroy (active_hash);
 }
 
 static void
-update_ibus_configuration (GtkTreeModel *model)
+populate_with_active_sources (GtkListStore *store)
 {
-  GtkTreeIter iter;
-  IBusBus *bus;
-  IBusConfig *config;
-  gchar **active;
-  gsize n_active;
-  gchar *name;
-  gint i;
+  GVariant *sources;
+  GVariantIter iter;
+  const gchar *layout;
+  const gchar *engine;
+  const gchar *name;
+  GtkTreeIter tree_iter;
 
-  n_active = gtk_tree_model_iter_n_children (model, NULL);
-  active = g_new0 (gchar *, n_active + 1);
-  gtk_tree_model_get_iter_first (model, &iter);
-  i = 0;
-  do {
-    gtk_tree_model_get (model, &iter, COL_NAME, &name, -1);
-     active[i++] = name;
-  } while (gtk_tree_model_iter_next (model, &iter));
-  active[n_active] = NULL;
+  sources = g_settings_get_value (is_settings, KEY_INPUT_SOURCES);
 
-  bus = ibus_bus_new ();
-  config = ibus_bus_get_config (bus);
-
-  if (!ibus_config_set_value (config,
-                              "general", "preload_engines",
-                              g_variant_new_strv ((const gchar * const *)active, -1)))
+  g_variant_iter_init (&iter, sources);
+  while (g_variant_iter_next (&iter, "(&s&s&s)", &name, &layout, &engine))
     {
-      g_warning ("Failed to update IBus configuration");
+      gtk_list_store_append (store, &tree_iter);
+      gtk_list_store_set (store, &tree_iter,
+                          COL_NAME, name,
+                          COL_LAYOUT, layout,
+                          COL_ENGINE, engine,
+                          -1);
     }
 
-  g_strfreev (active);
+  g_variant_unref (sources);
+}
 
-  g_object_unref (bus);
+static void
+update_configuration (GtkTreeModel *model)
+{
+  GtkTreeIter iter;
+  gchar *name;
+  gchar *layout;
+  gchar *engine;
+  GVariantBuilder builder;
+
+  g_variant_builder_init (&builder, G_VARIANT_TYPE ("a(sss)"));
+
+  gtk_tree_model_get_iter_first (model, &iter);
+  do {
+    gtk_tree_model_get (model, &iter,
+                        COL_NAME, &name,
+                        COL_LAYOUT, &layout,
+                        COL_ENGINE, &engine,
+                        -1);
+    g_variant_builder_add (&builder, "(sss)", name, layout, engine);
+    g_free (name);
+    g_free (layout);
+    g_free (engine);
+  } while (gtk_tree_model_iter_next (model, &iter));
+
+  g_settings_set_value (is_settings, KEY_INPUT_SOURCES, g_variant_builder_end (&builder));
 }
 
 /* List handling {{{1 */
@@ -341,18 +358,14 @@ chooser_response (GtkWidget *chooser, gint response_id, gpointer data)
           GtkTreeView *my_tv;
           GtkListStore *my_model;
           GtkTreeIter my_iter;
-          gchar *name;
-          gchar *desc;
-          gchar *lang;
           gchar *layout;
-          gboolean xkb;
+          gchar *engine;
+          gchar *name;
 
           gtk_tree_model_get (model, &iter,
                               COL_NAME, &name,
-                              COL_DESC, &desc,
-                              COL_LANG, &lang,
                               COL_LAYOUT, &layout,
-                              COL_XKB, &xkb,
+                              COL_ENGINE, &engine,
                               -1);
 
           my_tv = GTK_TREE_VIEW (WID ("active_input_sources"));
@@ -362,21 +375,18 @@ chooser_response (GtkWidget *chooser, gint response_id, gpointer data)
 
           gtk_list_store_set (my_model, &my_iter,
                               COL_NAME, name,
-                              COL_DESC, desc,
-                              COL_LANG, lang,
                               COL_LAYOUT, layout,
-                              COL_XKB, xkb,
+                              COL_ENGINE, engine,
                               -1);
 
           g_free (name);
-          g_free (desc);
-          g_free (lang);
+          g_free (engine);
           g_free (layout);
 
           gtk_tree_selection_select_iter (gtk_tree_view_get_selection (my_tv), &my_iter);
 
           update_button_sensitivity (builder);
-          update_ibus_configuration (GTK_TREE_MODEL (my_model));
+          update_configuration (GTK_TREE_MODEL (my_model));
         }
       else
         {
@@ -424,7 +434,7 @@ remove_selected_input (GtkButton *button, gpointer data)
   gtk_tree_path_free (path);
 
   update_button_sensitivity (builder);
-  update_ibus_configuration (model);
+  update_configuration (model);
 }
 
 static void
@@ -451,7 +461,7 @@ move_selected_input_up (GtkButton *button, gpointer data)
   gtk_tree_path_free (path);
 
   update_button_sensitivity (builder);
-  update_ibus_configuration (model);
+  update_configuration (model);
 }
 
 static void
@@ -477,7 +487,7 @@ move_selected_input_down (GtkButton *button, gpointer data)
   gtk_tree_path_free (path);
 
   update_button_sensitivity (builder);
-  update_ibus_configuration (model);
+  update_configuration (model);
 }
 
 static void
@@ -539,20 +549,20 @@ setup_input_tabs (GtkBuilder    *builder,
   gchar *next = NULL;
   GtkWidget *label;
 
-  ibus_init ();
+  is_settings = g_settings_new (GNOME_DESKTOP_INPUT_SOURCES_DIR);
 
   /* set up the list of active inputs */
   treeview = WID("active_input_sources");
   column = gtk_tree_view_column_new ();
   cell = gtk_cell_renderer_text_new ();
   gtk_tree_view_column_pack_start (column, cell, TRUE);
-  gtk_tree_view_column_add_attribute (column, cell, "text", COL_DESC);
+  gtk_tree_view_column_add_attribute (column, cell, "text", COL_NAME);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
-  /* id, name, language, layout, xkb? */
-  store = gtk_list_store_new (5, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_BOOLEAN);
+  /* layout, engine, name */
+  store = gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
-  populate_model (store, TRUE);
+  populate_with_active_sources (store);
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
   g_signal_connect_swapped (selection, "changed",
@@ -692,7 +702,7 @@ filter_func (GtkTreeModel *model,
              GtkTreeIter  *iter,
              gpointer      data)
 {
-  gchar *desc = NULL;
+  gchar *name = NULL;
   gchar **pattern;
   gboolean rv = TRUE;
 
@@ -700,13 +710,13 @@ filter_func (GtkTreeModel *model,
     return TRUE;
 
   gtk_tree_model_get (model, iter,
-                      COL_DESC, &desc,
+                      COL_NAME, &name,
                       -1);
 
   pattern = search_pattern_list;
   do {
     gboolean is_pattern_found = FALSE;
-    gchar *udesc = g_utf8_strup (desc, -1);
+    gchar *udesc = g_utf8_strup (name, -1);
     if (udesc != NULL && g_strstr_len (udesc, -1, *pattern))
       {
         is_pattern_found = TRUE;
@@ -721,7 +731,7 @@ filter_func (GtkTreeModel *model,
 
   } while (*++pattern != NULL);
 
-  g_free (desc);
+  g_free (name);
 
   return rv;
 }
@@ -752,9 +762,9 @@ input_chooser_new (GtkBuilder *main_builder)
   g_object_set_data (G_OBJECT (chooser),
                      "filtered_input_source_list", filtered_list);
   visible_column =
-    gtk_tree_view_column_new_with_attributes ("Layout",
+    gtk_tree_view_column_new_with_attributes ("Input Sources",
                                               gtk_cell_renderer_text_new (),
-                                              "text", COL_DESC,
+                                              "text", COL_NAME,
                                               NULL);
 
   gtk_window_set_transient_for (GTK_WINDOW (chooser),
@@ -778,10 +788,12 @@ input_chooser_new (GtkBuilder *main_builder)
   model =
     GTK_LIST_STORE (gtk_builder_get_object (builder, "input_source_model"));
 
-  populate_model (model, FALSE);
+  populate_model (model,
+                  GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (main_builder,
+                                                                                                  "active_input_sources")))));
 
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
-                                        COL_DESC, GTK_SORT_ASCENDING);
+                                        COL_NAME, GTK_SORT_ASCENDING);
 
   gtk_tree_model_filter_set_visible_func (filtered_model,
                                           filter_func,
