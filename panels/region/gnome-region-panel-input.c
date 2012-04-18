@@ -360,12 +360,13 @@ static void
 filter_changed (GtkBuilder *builder)
 {
   GtkTreeModelFilter *filtered_model;
+  GtkTreeView *tree_view;
+  GtkTreeSelection *selection;
+  GtkTreeIter selected_iter;
   GtkWidget *filter_entry;
   const gchar *pattern;
   gchar *upattern;
 
-  filtered_model = GTK_TREE_MODEL_FILTER (gtk_builder_get_object (builder,
-                                                   "filtered_input_source_model"));
   filter_entry = WID ("input_source_filter");
   pattern = gtk_entry_get_text (GTK_ENTRY (filter_entry));
   upattern = g_utf8_strup (pattern, -1);
@@ -388,7 +389,24 @@ filter_changed (GtkBuilder *builder)
   search_pattern_list = g_strsplit (upattern, " ", -1);
   g_free (upattern);
 
+  filtered_model = GTK_TREE_MODEL_FILTER (gtk_builder_get_object (builder, "filtered_input_source_model"));
   gtk_tree_model_filter_refilter (filtered_model);
+
+  tree_view = GTK_TREE_VIEW (WID ("filtered_input_source_list"));
+  selection = gtk_tree_view_get_selection (tree_view);
+  if (gtk_tree_selection_get_selected (selection, NULL, &selected_iter))
+    {
+      GtkTreePath *path = gtk_tree_model_get_path (GTK_TREE_MODEL (filtered_model),
+                                                   &selected_iter);
+      gtk_tree_view_scroll_to_cell (tree_view, path, NULL, TRUE, 0.5, 0.5);
+      gtk_tree_path_free (path);
+    }
+  else
+    {
+      GtkTreeIter iter;
+      if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (filtered_model), &iter))
+        gtk_tree_selection_select_iter (selection, &iter);
+    }
 }
 
 static void
@@ -464,6 +482,7 @@ input_chooser_new (GtkWindow *main_window)
   GtkTreeSelection *selection;
   GtkListStore *model;
   GtkTreeModelFilter *filtered_model;
+  GtkTreeIter iter;
 
   builder = gtk_builder_new ();
   gtk_builder_add_from_file (builder,
@@ -493,17 +512,6 @@ input_chooser_new (GtkWindow *main_window)
   g_signal_connect (G_OBJECT (filter_entry), "icon-release",
                     G_CALLBACK (filter_clear), NULL);
 
-  selection =
-    gtk_tree_view_get_selection (GTK_TREE_VIEW (filtered_list));
-
-  g_signal_connect (G_OBJECT (selection), "changed",
-                    G_CALLBACK (selection_changed), builder);
-
-  selection_changed (selection, builder);
-
-  g_signal_connect (G_OBJECT (filtered_list), "row-activated",
-                    G_CALLBACK (row_activated), builder);
-
   filtered_model = GTK_TREE_MODEL_FILTER (gtk_builder_get_object (builder, "filtered_input_source_model"));
   model = GTK_LIST_STORE (gtk_builder_get_object (builder, "input_source_model"));
 
@@ -513,6 +521,17 @@ input_chooser_new (GtkWindow *main_window)
   gtk_tree_model_filter_set_visible_func (filtered_model,
                                           filter_func,
                                           NULL, NULL);
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (filtered_list));
+
+  g_signal_connect (G_OBJECT (selection), "changed",
+                    G_CALLBACK (selection_changed), builder);
+
+  if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (filtered_model), &iter))
+    gtk_tree_selection_select_iter (selection, &iter);
+
+  g_signal_connect (G_OBJECT (filtered_list), "row-activated",
+                    G_CALLBACK (row_activated), builder);
 
   gtk_widget_grab_focus (filter_entry);
 
