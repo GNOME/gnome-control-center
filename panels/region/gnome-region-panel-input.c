@@ -253,46 +253,6 @@ update_ibus_configuration (GtkTreeModel *model)
   g_object_unref (bus);
 }
 
-static void
-get_shortcuts (gchar **previous, gchar **next)
-{
-  IBusBus *bus;
-  IBusConfig *config;
-  GVariant *value;
-  const gchar **strv;
-  gsize len;
-
-  bus = ibus_bus_new ();
-  config = ibus_bus_get_config (bus);
-
-  *previous = NULL;
-  *next = NULL;
-
-  value = ibus_config_get_value (config, "general/hotkey", "previous_engine");
-  if (value)
-    {
-       strv = g_variant_get_strv (value, &len);
-       if (len > 0)
-         *previous = g_strdup (strv[0]);
-       g_free (strv);
-       g_variant_unref (value);
-    }
-
-  value = ibus_config_get_value (config, "general/hotkey", "next_engine_in_menu");
-  if (value)
-    {
-       strv = g_variant_get_strv (value, &len);
-       if (len > 0)
-         *next = g_strdup (strv[0]);
-       g_free (strv);
-       g_variant_unref (value);
-    }
-
-  g_debug ("Hotkeys: previous: %s next: %s\n", *previous, *next);
-
-  g_object_unref (bus);
-}
-
 /* List handling {{{1 */
 
 static gboolean
@@ -611,9 +571,6 @@ setup_input_tabs (GtkBuilder    *builder,
                     G_CALLBACK (move_selected_input_down), builder);
   g_signal_connect (WID("input_source_show"), "clicked",
                     G_CALLBACK (show_selected_layout), builder);
-
-  /* show the right shortcuts */
-  get_shortcuts (&previous, &next);
 
   /* use an em dash is no shortcut */
   if (!previous)
