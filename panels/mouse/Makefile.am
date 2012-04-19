@@ -41,6 +41,12 @@ desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-mouse-panel.desktop.in
 desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
+INPUTDIR=$(top_srcdir)/../gnome-settings-daemon/plugins/common/
+INPUTFILES=gsd-input-helper.h gsd-input-helper.c
+update-from-gsd:
+	FILES="$(INPUTFILES)" DIR="$(INPUTDIR)" $(top_srcdir)/update-from-gsd.sh && changed=true ; \
+	git commit -m "mouse: Update from gnome-settings-daemon" $(INPUTFILES)
+
 CLEANFILES = $(Desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = $(ui_DATA) $(pixmap_DATA)
 
