@@ -32,6 +32,7 @@
 G_BEGIN_DECLS
 
 gboolean gsd_should_ignore_unix_mount (GUnixMountEntry *mount);
+gboolean gsd_is_removable_mount       (GUnixMountEntry *mount);
 
 G_END_DECLS
 
