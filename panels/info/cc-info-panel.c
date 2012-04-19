@@ -665,6 +665,7 @@ get_primary_disc_info (CcInfoPanel *self)
       mount_path = g_unix_mount_get_mount_path (mount);
 
       if (gsd_should_ignore_unix_mount (mount) ||
+          gsd_is_removable_mount (mount) ||
           g_str_has_prefix (mount_path, "/media/") ||
           g_str_has_prefix (mount_path, g_get_home_dir ()))
         {
