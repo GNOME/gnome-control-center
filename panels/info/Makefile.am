@@ -28,7 +28,9 @@ libinfo_la_SOURCES =		\
 	cc-info-panel.c		\
 	cc-info-panel.h		\
 	hostname-helper.c	\
-	hostname-helper.h
+	hostname-helper.h	\
+	gsd-disk-space-helper.h	\
+	gsd-disk-space-helper.c
 
 libinfo_la_LIBADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
 libinfo_la_LDFLAGS = $(PANEL_LDFLAGS)
