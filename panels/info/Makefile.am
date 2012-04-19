@@ -42,8 +42,13 @@ desktopdir = $(datadir)/applications
 desktop_in_files = gnome-info-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
-CLEANFILES = $(desktop_in_files) $(desktop_DATA)
+SPACEDIR=$(top_srcdir)/../gnome-settings-daemon/plugins/housekeeping/
+SPACEFILES=gsd-disk-space-helper.c gsd-disk-space-helper.h
+update-from-gsd:
+	FILES="$(SPACEFILES)" DIR="$(SPACEDIR)" $(top_srcdir)/update-from-gsd.sh && changed=true ; \
+	git commit -m "info: Update from gnome-settings-daemon" $(SPACEFILES)
 
+CLEANFILES = $(desktop_in_files) $(desktop_DATA)
 EXTRA_DIST = hostnames-test.txt
 
 -include $(top_srcdir)/git.mk
