@@ -36,6 +36,7 @@
 #include <glibtop/sysinfo.h>
 
 #include "hostname-helper.h"
+#include "gsd-disk-space-helper.h"
 
 /* Autorun options */
 #define PREF_MEDIA_AUTORUN_NEVER                "autorun-never"
@@ -663,8 +664,9 @@ get_primary_disc_info (CcInfoPanel *self)
 
       mount_path = g_unix_mount_get_mount_path (mount);
 
-      if (g_str_has_prefix (mount_path, "/media/")
-          || g_str_has_prefix (mount_path, g_get_home_dir ()))
+      if (gsd_should_ignore_unix_mount (mount) ||
+          g_str_has_prefix (mount_path, "/media/") ||
+          g_str_has_prefix (mount_path, g_get_home_dir ()))
         {
           g_unix_mount_free (mount);
           continue;
