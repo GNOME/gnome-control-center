@@ -114,7 +114,7 @@ get_selected_user (UmUserPanelPrivate *d)
 static char *
 get_name_col_str (UmUser *user)
 {
-        return g_markup_printf_escaped ("<b>%s</b>\n<i>%s</i>",
+        return g_markup_printf_escaped ("<b>%s</b>\n<small>%s</small>",
                                         um_user_get_display_name (user),
                                         um_account_type_get_name (um_user_get_account_type (user)));
 }
