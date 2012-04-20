@@ -1114,13 +1114,19 @@ panel_get_strongest_unique_aps (const GPtrArray *aps)
         if (aps != NULL)
                 for (i = 0; i < aps->len; i++) {
                         ap = NM_ACCESS_POINT (g_ptr_array_index (aps, i));
+
+                        /* Hidden SSIDs don't get shown in the list */
                         ssid = nm_access_point_get_ssid (ap);
+                        if (!ssid)
+                                continue;
+
                         add_ap = TRUE;
 
                         /* get already added list */
                         for (j=0; j<aps_unique->len; j++) {
                                 ap_tmp = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, j));
                                 ssid_tmp = nm_access_point_get_ssid (ap_tmp);
+                                g_assert (ssid_tmp);
         
                                 /* is this the same type and data? */
                                 if (nm_utils_same_ssid (ssid, ssid_tmp, TRUE)) {
