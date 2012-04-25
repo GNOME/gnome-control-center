@@ -433,7 +433,7 @@ run_custom_command (GdkDevice              *device,
 {
         GSettings *settings;
         char *cmd;
-        char *argv[5];
+        char *argv[7];
         int exit_status;
         gboolean rc;
         int id;
@@ -451,10 +451,12 @@ run_custom_command (GdkDevice              *device,
         g_object_get (device, "device-id", &id, NULL);
 
         argv[0] = cmd;
-        argv[1] = g_strdup_printf ("-t %s", custom_command_to_string (command));
-        argv[2] = g_strdup_printf ("-i %d", id);
-        argv[3] = g_strdup_printf ("%s", gdk_device_get_name (device));
-        argv[4] = NULL;
+        argv[1] = "-t";
+        argv[2] = (char *) custom_command_to_string (command);
+        argv[3] = "-i";
+        argv[4] = g_strdup_printf ("%d", id);
+        argv[5] = g_strdup_printf ("%s", gdk_device_get_name (device));
+        argv[6] = NULL;
 
         rc = g_spawn_sync (g_get_home_dir (), argv, NULL, G_SPAWN_SEARCH_PATH,
                            NULL, NULL, NULL, NULL, &exit_status, NULL);
@@ -463,8 +465,8 @@ run_custom_command (GdkDevice              *device,
                 g_warning ("Couldn't execute command '%s', verify that this is a valid command.", cmd);
 
         g_free (argv[0]);
-        g_free (argv[1]);
-        g_free (argv[2]);
+        g_free (argv[4]);
+        g_free (argv[5]);
 
         return (exit_status == 0);
 }
