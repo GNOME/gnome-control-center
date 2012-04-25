@@ -43,7 +43,7 @@
 #define GSD_WACOM_STYLUS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GSD_TYPE_WACOM_STYLUS, GsdWacomStylusPrivate))
 
 #define WACOM_TABLET_SCHEMA "org.gnome.settings-daemon.peripherals.wacom"
-#define WACOM_DEVICE_CONFIG_BASE "/org/gnome/settings-daemon/peripherals/wacom/%s/"
+#define WACOM_DEVICE_CONFIG_BASE "/org/gnome/settings-daemon/peripherals/wacom/%s-%s/"
 #define WACOM_STYLUS_SCHEMA "org.gnome.settings-daemon.peripherals.wacom.stylus"
 #define WACOM_ERASER_SCHEMA "org.gnome.settings-daemon.peripherals.wacom.eraser"
 #define WACOM_BUTTON_SCHEMA "org.gnome.settings-daemon.peripherals.wacom.tablet-button"
@@ -316,6 +316,7 @@ struct GsdWacomDevicePrivate
 	GsdWacomDeviceType type;
 	char *name;
 	char *path;
+	char *machine_id;
 	const char *icon_name;
 	char *tool_name;
 	gboolean reversible;
@@ -1102,7 +1103,9 @@ gsd_wacom_device_update_from_db (GsdWacomDevice *device,
 {
 	char *settings_path;
 
-	settings_path = g_strdup_printf (WACOM_DEVICE_CONFIG_BASE, libwacom_get_match (wacom_device));
+	settings_path = g_strdup_printf (WACOM_DEVICE_CONFIG_BASE,
+					 device->priv->machine_id,
+					 libwacom_get_match (wacom_device));
 	device->priv->wacom_settings = g_settings_new_with_path (WACOM_TABLET_SCHEMA,
 								 settings_path);
 
@@ -1300,6 +1303,12 @@ gsd_wacom_device_init (GsdWacomDevice *device)
 {
         device->priv = GSD_WACOM_DEVICE_GET_PRIVATE (device);
         device->priv->type = WACOM_TYPE_INVALID;
+
+        if (g_file_get_contents ("/etc/machine-id", &device->priv->machine_id, NULL, NULL) == FALSE)
+                if (g_file_get_contents ("/var/lib/dbus/machine-id", &device->priv->machine_id, NULL, NULL) == FALSE)
+                        device->priv->machine_id = g_strdup ("00000000000000000000000000000000");
+
+        device->priv->machine_id = g_strstrip (device->priv->machine_id);
 }
 
 static void
@@ -1333,6 +1342,9 @@ gsd_wacom_device_finalize (GObject *object)
 
         g_free (p->path);
         p->path = NULL;
+
+        g_free (p->machine_id);
+        p->machine_id = NULL;
 
         if (p->modes) {
                 g_hash_table_destroy (p->modes);
