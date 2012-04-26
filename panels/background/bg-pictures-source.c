@@ -138,6 +138,7 @@ picture_scaled (GObject *source_object,
   GError *error = NULL;
   GdkPixbuf *pixbuf;
   const char *source_url;
+  const char *software;
 
   GtkTreeIter iter;
   GtkListStore *store;
@@ -150,6 +151,18 @@ picture_scaled (GObject *source_object,
     {
       g_warning ("Failed to load image: %s", error->message);
       g_error_free (error);
+      g_object_unref (item);
+      return;
+    }
+
+  /* Ignore screenshots */
+  software = gdk_pixbuf_get_option (pixbuf, "tEXt::Software");
+  if (software != NULL &&
+      g_str_equal (software, "gnome-screenshot"))
+    {
+      g_debug ("Ignored URL '%s' as it's a screenshot from gnome-screenshot",
+               cc_background_item_get_uri (item));
+      g_object_unref (pixbuf);
       g_object_unref (item);
       return;
     }
