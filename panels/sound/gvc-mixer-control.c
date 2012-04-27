@@ -80,7 +80,8 @@ struct GvcMixerControlPrivate
         GHashTable       *clients;
         GHashTable       *cards;
 
-        GvcMixerStream   *new_default_stream; /* new default stream, used in gvc_mixer_control_set_default_sink () */
+        GvcMixerStream   *new_default_sink_stream; /* new default sink stream, used in gvc_mixer_control_set_default_sink () */
+        GvcMixerStream   *new_default_source_stream; /* new default source stream, used in gvc_mixer_control_set_default_source () */
 
         GvcMixerControlState state;
 };
@@ -133,15 +134,15 @@ gvc_mixer_control_get_event_sink_input (GvcMixerControl *control)
 
 static void
 gvc_mixer_control_stream_restore_cb (pa_context *c,
+				     GvcMixerStream *new_stream,
                                      const pa_ext_stream_restore_info *info,
                                      int eol,
-                                     void *userdata)
+                                     GvcMixerControl *control)
 {
         pa_operation *o;
-        GvcMixerControl *control = (GvcMixerControl *) userdata;
         pa_ext_stream_restore_info new_info;
 
-        if (eol || control->priv->new_default_stream == NULL)
+        if (eol || new_stream == NULL)
                 return;
 
         new_info.name = info->name;
@@ -149,7 +150,7 @@ gvc_mixer_control_stream_restore_cb (pa_context *c,
         new_info.volume = info->volume;
         new_info.mute = info->mute;
 
-        new_info.device = gvc_mixer_stream_get_name (control->priv->new_default_stream);
+        new_info.device = gvc_mixer_stream_get_name (new_stream);
 
         o = pa_ext_stream_restore_write (control->priv->pa_context,
                                          PA_UPDATE_REPLACE,
@@ -162,9 +163,33 @@ gvc_mixer_control_stream_restore_cb (pa_context *c,
                 return;
         }
 
-        g_debug ("Changed default device for %s to %s", info->name, info->device);
+        g_debug ("Changed default device for %s to %s", info->name, new_info.device);
 
         pa_operation_unref (o);
+}
+
+static void
+gvc_mixer_control_stream_restore_sink_cb (pa_context *c,
+                                          const pa_ext_stream_restore_info *info,
+                                          int eol,
+                                          void *userdata)
+{
+        GvcMixerControl *control = (GvcMixerControl *) userdata;
+        if (!g_str_has_prefix(info->name, "sink-input-by"))
+                return;
+        gvc_mixer_control_stream_restore_cb (c, control->priv->new_default_sink_stream, info, eol, control);
+}
+
+static void
+gvc_mixer_control_stream_restore_source_cb (pa_context *c,
+                                            const pa_ext_stream_restore_info *info,
+                                            int eol,
+                                            void *userdata)
+{
+        GvcMixerControl *control = (GvcMixerControl *) userdata;
+        if (!g_str_has_prefix(info->name, "source-output-by"))
+                return;
+        gvc_mixer_control_stream_restore_cb (c, control->priv->new_default_source_stream, info, eol, control);
 }
 
 gboolean
@@ -188,11 +213,11 @@ gvc_mixer_control_set_default_sink (GvcMixerControl *control,
 
         pa_operation_unref (o);
 
-        control->priv->new_default_stream = stream;
-        g_object_add_weak_pointer (G_OBJECT (stream), (gpointer *) &control->priv->new_default_stream);
+        control->priv->new_default_sink_stream = stream;
+        g_object_add_weak_pointer (G_OBJECT (stream), (gpointer *) &control->priv->new_default_sink_stream);
 
         o = pa_ext_stream_restore_read (control->priv->pa_context,
-                                        gvc_mixer_control_stream_restore_cb,
+                                        gvc_mixer_control_stream_restore_sink_cb,
                                         control);
 
         if (o == NULL) {
@@ -221,6 +246,21 @@ gvc_mixer_control_set_default_source (GvcMixerControl *control,
                                            NULL);
         if (o == NULL) {
                 g_warning ("pa_context_set_default_source() failed");
+                return FALSE;
+        }
+
+        pa_operation_unref (o);
+
+        control->priv->new_default_source_stream = stream;
+        g_object_add_weak_pointer (G_OBJECT (stream), (gpointer *) &control->priv->new_default_source_stream);
+
+        o = pa_ext_stream_restore_read (control->priv->pa_context,
+                                        gvc_mixer_control_stream_restore_source_cb,
+                                        control);
+
+        if (o == NULL) {
+                g_warning ("pa_ext_stream_restore_read() failed: %s",
+                           pa_strerror (pa_context_errno (control->priv->pa_context)));
                 return FALSE;
         }
 
