@@ -115,88 +115,82 @@ activate_panel (GnomeControlCenter *shell,
   GnomeControlCenterPrivate *priv = shell->priv;
   GType panel_type = G_TYPE_INVALID;
   GList *panels, *l;
+  GtkWidget *panel;
+  GtkWidget *box;
+  gint i;
+  int nat_height;
+  const gchar *icon_name;
 
   /* check if there is an plugin that implements this panel */
   panels = g_io_extension_point_get_extensions (priv->extension_point);
 
   if (!desktop_file)
     return;
+  if (!id)
+    return;
 
-  if (id)
+  for (l = panels; l != NULL; l = l->next)
     {
+      GIOExtension *extension;
+      const gchar *name;
 
-      for (l = panels; l != NULL; l = l->next)
+      extension = l->data;
+
+      name = g_io_extension_get_name (extension);
+
+      if (!g_strcmp0 (name, id))
         {
-          GIOExtension *extension;
-          const gchar *name;
-
-          extension = l->data;
-
-          name = g_io_extension_get_name (extension);
-
-          if (!g_strcmp0 (name, id))
-            {
-              panel_type = g_io_extension_get_type (extension);
-              break;
-            }
-        }
-
-      if (panel_type != G_TYPE_INVALID)
-        {
-          GtkWidget *panel;
-          GtkWidget *box;
-          gint i;
-          int nat_height;
-          const gchar *icon_name;
-
-          /* create the panel plugin */
-          panel = g_object_new (panel_type, "shell", shell, "argv", argv, NULL);
-
-          gtk_lock_button_set_permission (GTK_LOCK_BUTTON (priv->lock_button),
-                                          cc_panel_get_permission (CC_PANEL (panel)));
-
-          box = gtk_alignment_new (0, 0, 1, 1);
-          gtk_alignment_set_padding (GTK_ALIGNMENT (box), 6, 6, 6, 6);
-
-          gtk_container_add (GTK_CONTAINER (box), panel);
-
-          i = gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), box,
-                                        NULL);
-
-          /* switch to the new panel */
-          gtk_widget_show (box);
-          gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), i);
-
-          /* set the title of the window */
-          icon_name = get_icon_name_from_g_icon (gicon);
-          gtk_window_set_role (GTK_WINDOW (priv->window), id);
-          gtk_window_set_title (GTK_WINDOW (priv->window), name);
-          gtk_window_set_default_icon_name (icon_name);
-          gtk_window_set_icon_name (GTK_WINDOW (priv->window), icon_name);
-
-          gtk_widget_show (panel);
-
-          /* set the scrolled window small so that it doesn't force
-             the window to be larger than this panel */
-          gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window), MIN_ICON_VIEW_HEIGHT);
-
-          /* resize to the preferred size of the panel */
-          gtk_widget_set_size_request (priv->window, FIXED_WIDTH, -1);
-          gtk_widget_get_preferred_height (GTK_WIDGET (priv->window),
-                                           NULL, &nat_height);
-          gtk_window_resize (GTK_WINDOW (priv->window),
-                             FIXED_WIDTH,
-                             nat_height);
-
-          priv->current_panel = box;
-
-          return;
-        }
-      else
-        {
-          g_warning ("Could not find the loadable module for panel '%s'", id);
+          panel_type = g_io_extension_get_type (extension);
+          break;
         }
     }
+
+  if (panel_type == G_TYPE_INVALID)
+    {
+      g_warning ("Could not find the loadable module for panel '%s'", id);
+      return;
+    }
+
+  /* create the panel plugin */
+  panel = g_object_new (panel_type, "shell", shell, "argv", argv, NULL);
+
+  gtk_lock_button_set_permission (GTK_LOCK_BUTTON (priv->lock_button),
+                                  cc_panel_get_permission (CC_PANEL (panel)));
+
+  box = gtk_alignment_new (0, 0, 1, 1);
+  gtk_alignment_set_padding (GTK_ALIGNMENT (box), 6, 6, 6, 6);
+
+  gtk_container_add (GTK_CONTAINER (box), panel);
+
+  i = gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), box,
+                                NULL);
+
+  /* switch to the new panel */
+  gtk_widget_show (box);
+  gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), i);
+
+  /* set the title of the window */
+  icon_name = get_icon_name_from_g_icon (gicon);
+  gtk_window_set_role (GTK_WINDOW (priv->window), id);
+  gtk_window_set_title (GTK_WINDOW (priv->window), name);
+  gtk_window_set_default_icon_name (icon_name);
+  gtk_window_set_icon_name (GTK_WINDOW (priv->window), icon_name);
+
+  gtk_widget_show (panel);
+
+  /* set the scrolled window small so that it doesn't force
+     the window to be larger than this panel */
+  gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window), MIN_ICON_VIEW_HEIGHT);
+
+  /* resize to the preferred size of the panel */
+  gtk_widget_set_size_request (priv->window, FIXED_WIDTH, -1);
+  gtk_widget_get_preferred_height (GTK_WIDGET (priv->window),
+                                   NULL, &nat_height);
+  gtk_window_resize (GTK_WINDOW (priv->window),
+                     FIXED_WIDTH,
+                     nat_height);
+
+  priv->current_panel = box;
 }
 
 static void
