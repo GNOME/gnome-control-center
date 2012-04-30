@@ -28,6 +28,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
+#include <clutter-gtk/clutter-gtk.h>
 #define GMENU_I_KNOW_THIS_IS_UNSTABLE
 #include <gmenu-tree.h>
 
@@ -36,6 +37,7 @@
 #include "shell-search-renderer.h"
 #include "cc-shell-category-view.h"
 #include "cc-shell-model.h"
+#include "cc-notebook.h"
 
 G_DEFINE_TYPE (GnomeControlCenter, gnome_control_center, CC_TYPE_SHELL)
 
@@ -104,36 +106,6 @@ get_icon_name_from_g_icon (GIcon *gicon)
   return NULL;
 }
 
-static void
-shell_set_current_notebook_widget (GtkNotebook *notebook,
-				   GtkWidget   *child)
-{
-  int num_pages, i;
-
-  num_pages = gtk_notebook_get_n_pages (notebook);
-  for (i = 0; i < num_pages; i++)
-    {
-      GtkWidget *widget;
-
-      widget = gtk_notebook_get_nth_page (notebook, i);
-      if (widget == child)
-        {
-          gtk_notebook_set_current_page (notebook, i);
-          return;
-	}
-    }
-}
-
-static GtkWidget *
-shell_get_current_notebook_widget (GtkNotebook *notebook)
-{
-  int current_page;
-
-  current_page = gtk_notebook_get_current_page (notebook);
-  g_assert (current_page >= 0);
-  return gtk_notebook_get_nth_page (notebook, current_page);
-}
-
 static gboolean
 activate_panel (GnomeControlCenter *shell,
                 const gchar        *id,
@@ -195,7 +167,7 @@ activate_panel (GnomeControlCenter *shell,
 
   /* switch to the new panel */
   gtk_widget_show (box);
-  shell_set_current_notebook_widget (GTK_NOTEBOOK (priv->notebook), box);
+  cc_notebook_set_current (CC_NOTEBOOK (priv->notebook), box);
 
   /* set the title of the window */
   icon_name = get_icon_name_from_g_icon (gicon);
@@ -243,8 +215,8 @@ _shell_remove_all_custom_widgets (GnomeControlCenterPrivate *priv)
 static void
 shell_show_overview_page (GnomeControlCenterPrivate *priv)
 {
-  shell_set_current_notebook_widget (GTK_NOTEBOOK (priv->notebook),
-				     priv->scrolled_window);
+  cc_notebook_set_current (CC_NOTEBOOK (priv->notebook),
+			   priv->scrolled_window);
 
   if (priv->current_panel)
     gtk_container_remove (GTK_CONTAINER (priv->notebook), priv->current_panel);
@@ -559,8 +531,8 @@ search_entry_changed_cb (GtkEntry                  *entry,
   else
     {
       gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->search_filter));
-      shell_set_current_notebook_widget (GTK_NOTEBOOK (priv->notebook),
-                                         priv->search_scrolled);
+      cc_notebook_set_current (CC_NOTEBOOK (priv->notebook),
+			       priv->search_scrolled);
       g_object_set (G_OBJECT (entry),
                           "secondary-icon-name", "edit-clear-symbolic",
                           "secondary-icon-activatable", TRUE,
@@ -927,8 +899,8 @@ _shell_set_active_panel_from_id (CcShell      *shell,
     {
       gtk_container_remove (GTK_CONTAINER (priv->notebook), priv->current_panel);
       priv->current_panel = NULL;
-      shell_set_current_notebook_widget (GTK_NOTEBOOK (priv->notebook),
-					 priv->scrolled_window);
+      cc_notebook_set_current (CC_NOTEBOOK (priv->notebook),
+			       priv->scrolled_window);
       g_warning ("Could not find settings panel \"%s\"", start_id);
       return FALSE;
     }
@@ -942,8 +914,8 @@ _shell_set_active_panel_from_id (CcShell      *shell,
       if (activate_panel (GNOME_CONTROL_CENTER (shell), start_id, argv, desktop,
 			  name, gicon) == FALSE)
         {
-          shell_set_current_notebook_widget (GTK_NOTEBOOK (priv->notebook),
-					     priv->scrolled_window);
+          cc_notebook_set_current (CC_NOTEBOOK (priv->notebook),
+				   priv->scrolled_window);
         }
 
       if (old_panel)
@@ -1122,7 +1094,7 @@ window_key_press_event (GtkWidget          *win,
             break;
           case GDK_KEY_W:
           case GDK_KEY_w:
-            if (shell_get_current_notebook_widget (GTK_NOTEBOOK (self->priv->notebook)) == self->priv->scrolled_window)
+            if (cc_notebook_get_current (CC_NOTEBOOK (self->priv->notebook)) == self->priv->scrolled_window)
               shell_show_overview_page (self->priv);
             retval = TRUE;
             break;
@@ -1138,6 +1110,12 @@ gnome_control_center_init (GnomeControlCenter *self)
   GnomeControlCenterPrivate *priv;
 
   priv = self->priv = CONTROL_CENTER_PRIVATE (self);
+
+  if (gtk_clutter_init (NULL, NULL) != CLUTTER_INIT_SUCCESS)
+    {
+      g_critical ("Clutter-GTK init failed");
+      return;
+    }
 
   /* load the user interface */
   priv->builder = gtk_builder_new ();
@@ -1184,7 +1162,7 @@ gnome_control_center_init (GnomeControlCenter *self)
   priv->default_window_title = g_strdup (gtk_window_get_title (GTK_WINDOW (priv->window)));
   priv->default_window_icon = g_strdup (gtk_window_get_icon_name (GTK_WINDOW (priv->window)));
 
-  notebook_switch_page_cb (NULL, priv->scrolled_window, -1, priv);
+  cc_notebook_set_current (CC_NOTEBOOK (priv->notebook), priv->scrolled_window);
 }
 
 GnomeControlCenter *
