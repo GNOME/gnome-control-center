@@ -109,6 +109,36 @@ get_icon_name_from_g_icon (GIcon *gicon)
   return NULL;
 }
 
+static void
+shell_set_current_notebook_widget (GtkNotebook *notebook,
+				   GtkWidget   *child)
+{
+  int num_pages, i;
+
+  num_pages = gtk_notebook_get_n_pages (notebook);
+  for (i = 0; i < num_pages; i++)
+    {
+      GtkWidget *widget;
+
+      widget = gtk_notebook_get_nth_page (notebook, i);
+      if (widget == child)
+        {
+          gtk_notebook_set_current_page (notebook, i);
+          return;
+	}
+    }
+}
+
+static GtkWidget *
+shell_get_current_notebook_widget (GtkNotebook *notebook)
+{
+  int current_page;
+
+  current_page = gtk_notebook_get_current_page (notebook);
+  g_assert (current_page >= 0);
+  return gtk_notebook_get_nth_page (notebook, current_page);
+}
+
 static gboolean
 activate_panel (GnomeControlCenter *shell,
                 const gchar        *id,
@@ -200,36 +230,6 @@ _shell_remove_all_custom_widgets (GnomeControlCenterPrivate *priv)
         gtk_container_remove (GTK_CONTAINER (box), widget);
     }
   g_ptr_array_set_size (priv->custom_widgets, 0);
-}
-
-static void
-shell_set_current_notebook_widget (GtkNotebook *notebook,
-				   GtkWidget   *child)
-{
-  int num_pages, i;
-
-  num_pages = gtk_notebook_get_n_pages (notebook);
-  for (i = 0; i < num_pages; i++)
-    {
-      GtkWidget *widget;
-
-      widget = gtk_notebook_get_nth_page (notebook, i);
-      if (widget == child)
-        {
-          gtk_notebook_set_current_page (notebook, i);
-          return;
-	}
-    }
-}
-
-static GtkWidget *
-shell_get_current_notebook_widget (GtkNotebook *notebook)
-{
-  int current_page;
-
-  current_page = gtk_notebook_get_current_page (notebook);
-  g_assert (current_page >= 0);
-  return gtk_notebook_get_nth_page (notebook, current_page);
 }
 
 static void
