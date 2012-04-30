@@ -104,7 +104,7 @@ get_icon_name_from_g_icon (GIcon *gicon)
   return NULL;
 }
 
-static void
+static gboolean
 activate_panel (GnomeControlCenter *shell,
                 const gchar        *id,
 		const gchar       **argv,
@@ -125,9 +125,9 @@ activate_panel (GnomeControlCenter *shell,
   panels = g_io_extension_point_get_extensions (priv->extension_point);
 
   if (!desktop_file)
-    return;
+    return FALSE;
   if (!id)
-    return;
+    return FALSE;
 
   for (l = panels; l != NULL; l = l->next)
     {
@@ -148,7 +148,7 @@ activate_panel (GnomeControlCenter *shell,
   if (panel_type == G_TYPE_INVALID)
     {
       g_warning ("Could not find the loadable module for panel '%s'", id);
-      return;
+      return FALSE;
     }
 
   /* create the panel plugin */
@@ -191,6 +191,8 @@ activate_panel (GnomeControlCenter *shell,
                      nat_height);
 
   priv->current_panel = box;
+
+  return TRUE;
 }
 
 static void
