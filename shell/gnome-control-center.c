@@ -948,17 +948,29 @@ _shell_set_active_panel_from_id (CcShell      *shell,
 
   if (!name)
     {
+      gtk_container_remove (GTK_CONTAINER (priv->notebook), priv->current_panel);
+      priv->current_panel = NULL;
+      shell_set_current_notebook_widget (GTK_NOTEBOOK (priv->notebook),
+					 priv->scrolled_window);
       g_warning ("Could not find settings panel \"%s\"", start_id);
       return FALSE;
     }
   else
     {
-      if (priv->current_panel)
-        gtk_container_remove (GTK_CONTAINER (priv->notebook), priv->current_panel);
+      GtkWidget *old_panel;
+
+      old_panel = priv->current_panel;
       priv->current_panel = NULL;
 
-      activate_panel (GNOME_CONTROL_CENTER (shell), start_id, argv, desktop,
-		      name, gicon);
+      if (activate_panel (GNOME_CONTROL_CENTER (shell), start_id, argv, desktop,
+			  name, gicon) == FALSE)
+        {
+          shell_set_current_notebook_widget (GTK_NOTEBOOK (priv->notebook),
+					     priv->scrolled_window);
+        }
+
+      if (old_panel)
+        gtk_container_remove (GTK_CONTAINER (priv->notebook), old_panel);
 
       g_free (name);
       g_free (desktop);
