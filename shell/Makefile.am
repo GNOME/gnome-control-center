@@ -19,6 +19,8 @@ gnome_control_center_SOURCES =			\
 	cc-shell-log.h				\
 	gnome-control-center.c			\
 	gnome-control-center.h			\
+	cc-notebook.c				\
+	cc-notebook.h				\
 	shell-search-renderer.c			\
 	shell-search-renderer.h			\
 	cc-shell-category-view.c		\
