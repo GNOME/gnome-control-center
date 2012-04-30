@@ -152,7 +152,6 @@ activate_panel (GnomeControlCenter *shell,
   GList *panels, *l;
   GtkWidget *panel;
   GtkWidget *box;
-  gint i;
   const gchar *icon_name;
 
   /* check if there is an plugin that implements this panel */
@@ -196,12 +195,11 @@ activate_panel (GnomeControlCenter *shell,
 
   gtk_container_add (GTK_CONTAINER (box), panel);
 
-  i = gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), box,
-                                NULL);
+  gtk_container_add (GTK_CONTAINER (priv->notebook), box);
 
   /* switch to the new panel */
   gtk_widget_show (box);
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), i);
+  shell_set_current_notebook_widget (GTK_NOTEBOOK (priv->notebook), box);
 
   /* set the title of the window */
   icon_name = get_icon_name_from_g_icon (gicon);
