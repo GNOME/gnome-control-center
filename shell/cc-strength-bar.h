@@ -29,14 +29,14 @@
 
 G_BEGIN_DECLS
 
-#define UM_TYPE_STRENGTH_BAR            (cc_strength_bar_get_type ())
-#define CC_STRENGTH_BAR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), UM_TYPE_STRENGTH_BAR, \
+#define CC_TYPE_STRENGTH_BAR            (cc_strength_bar_get_type ())
+#define CC_STRENGTH_BAR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CC_TYPE_STRENGTH_BAR, \
                                                                            CcStrengthBar))
-#define CC_STRENGTH_BAR_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), UM_TYPE_STRENGTH_BAR, \
+#define CC_STRENGTH_BAR_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CC_TYPE_STRENGTH_BAR, \
                                                                         CcStrengthBarClass))
-#define UM_IS_STRENGTH_BAR(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), UM_TYPE_STRENGTH_BAR))
-#define UM_IS_STRENGTH_BAR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), UM_TYPE_STRENGTH_BAR))
-#define CC_STRENGTH_BAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), UM_TYPE_STRENGTH_BAR, \
+#define UM_IS_STRENGTH_BAR(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CC_TYPE_STRENGTH_BAR))
+#define UM_IS_STRENGTH_BAR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), CC_TYPE_STRENGTH_BAR))
+#define CC_STRENGTH_BAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), CC_TYPE_STRENGTH_BAR, \
                                                                           CcStrengthBarClass))
 
 typedef struct _CcStrengthBarClass CcStrengthBarClass;

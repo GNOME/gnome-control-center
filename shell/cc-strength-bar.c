@@ -30,7 +30,7 @@
 
 #include "cc-strength-bar.h"
 
-#define GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), UM_TYPE_STRENGTH_BAR, CcStrengthBarPrivate))
+#define GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), CC_TYPE_STRENGTH_BAR, CcStrengthBarPrivate))
 
 struct _CcStrengthBarPrivate
 {
@@ -355,7 +355,7 @@ cc_strength_bar_init (CcStrengthBar *bar)
 GtkWidget *
 cc_strength_bar_new (void)
 {
-        return (GtkWidget*) g_object_new (UM_TYPE_STRENGTH_BAR, NULL);
+        return (GtkWidget*) g_object_new (CC_TYPE_STRENGTH_BAR, NULL);
 }
 
 void
