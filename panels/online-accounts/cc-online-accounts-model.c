@@ -335,8 +335,7 @@ set_values (GoaPanelAccountsModel  *model,
       g_error_free (error);
     }
 
-  markup = g_strdup_printf ("<b>%s</b>\n"
-                            "<small><span foreground=\"#555555\">%s</span></small>",
+  markup = g_strdup_printf ("<b>%s</b>\n<small>%s</small>",
                             goa_account_get_provider_name (account),
                             goa_account_get_presentation_identity (account));
 
