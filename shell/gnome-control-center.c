@@ -163,7 +163,7 @@ activate_panel (GnomeControlCenter *shell,
 
   gtk_container_add (GTK_CONTAINER (box), panel);
 
-  gtk_container_add (GTK_CONTAINER (priv->notebook), box);
+  cc_notebook_add (CC_NOTEBOOK (priv->notebook), box);
 
   /* switch to the new panel */
   gtk_widget_show (box);
@@ -207,7 +207,7 @@ _shell_remove_all_custom_widgets (GnomeControlCenterPrivate *priv)
   for (i = 0; i < priv->custom_widgets->len; i++)
     {
         widget = g_ptr_array_index (priv->custom_widgets, i);
-        gtk_container_remove (GTK_CONTAINER (box), widget);
+        cc_notebook_remove (CC_NOTEBOOK (box), widget);
     }
   g_ptr_array_set_size (priv->custom_widgets, 0);
 }
@@ -219,7 +219,7 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
 			   priv->scrolled_window);
 
   if (priv->current_panel)
-    gtk_container_remove (GTK_CONTAINER (priv->notebook), priv->current_panel);
+    cc_notebook_remove (CC_NOTEBOOK (priv->notebook), priv->current_panel);
   priv->current_panel = NULL;
 
   /* clear the search text */
@@ -897,7 +897,7 @@ _shell_set_active_panel_from_id (CcShell      *shell,
 
   if (!name)
     {
-      gtk_container_remove (GTK_CONTAINER (priv->notebook), priv->current_panel);
+      cc_notebook_remove (CC_NOTEBOOK (priv->notebook), priv->current_panel);
       priv->current_panel = NULL;
       cc_notebook_set_current (CC_NOTEBOOK (priv->notebook),
 			       priv->scrolled_window);
@@ -919,7 +919,7 @@ _shell_set_active_panel_from_id (CcShell      *shell,
         }
 
       if (old_panel)
-        gtk_container_remove (GTK_CONTAINER (priv->notebook), old_panel);
+        cc_notebook_remove (CC_NOTEBOOK (priv->notebook), old_panel);
 
       g_free (name);
       g_free (desktop);

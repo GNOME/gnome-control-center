@@ -18,8 +18,8 @@ int main (int argc, char **argv)
 	notebook = cc_notebook_new ();
 	gtk_container_add (GTK_CONTAINER (window), notebook);
 
-	gtk_container_add (GTK_CONTAINER (notebook), gtk_label_new ("fhdkhfjksdhkfjsdhk"));
-	gtk_container_add (GTK_CONTAINER (notebook), gtk_label_new ("fhdkhfjksdhkfjsdhk2"));
+	cc_notebook_add (CC_NOTEBOOK (notebook), gtk_label_new ("fhdkhfjksdhkfjsdhk"));
+	cc_notebook_add (CC_NOTEBOOK (notebook), gtk_label_new ("fhdkhfjksdhkfjsdhk2"));
 
 	gtk_widget_show_all (window);
 	gtk_main ();
