@@ -43,7 +43,7 @@ load_pixbuf_for_gicon (GIcon *icon)
   theme = gtk_icon_theme_get_default ();
 
   icon_info = gtk_icon_theme_lookup_by_gicon (theme, icon,
-                                              48, GTK_ICON_LOOKUP_FORCE_SIZE);
+                                              32, GTK_ICON_LOOKUP_FORCE_SIZE);
   if (icon_info)
     {
       pixbuf = gtk_icon_info_load_icon (icon_info, &err);
