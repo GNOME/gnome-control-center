@@ -53,22 +53,22 @@ cc_notebook_add (CcNotebook *notebook,
 {
 	ClutterConstraint *constraint;
 	ClutterActor *child;
-	gboolean notify = FALSE;
+	ClutterLayoutManager *layout;
 
 	child = gtk_clutter_actor_new_with_contents (widget);
-	constraint = clutter_bind_constraint_new (notebook->priv->bin, CLUTTER_BIND_SIZE, 0.0);
+
+	/* Make sure that the actor will be window sized */
+	constraint = clutter_bind_constraint_new (notebook->priv->bin, CLUTTER_BIND_SIZE, 0.f);
 	clutter_actor_add_constraint_with_name (child, "size", constraint);
 	clutter_actor_add_child (notebook->priv->bin, child);
-
-	if (notebook->priv->children == NULL)
-		notify = TRUE;
 
 	notebook->priv->children = g_list_prepend (notebook->priv->children,
 						   child);
 
-	if (notify == FALSE)
+	if (notebook->priv->current_page != NULL)
 		return;
-	g_object_notify (G_OBJECT (notebook), "current-page");
+
+	cc_notebook_set_current (notebook, widget);
 }
 
 static int
@@ -80,9 +80,9 @@ _cc_notebook_find_widget (GtkClutterActor *actor,
 	return -1;
 }
 
-void
-cc_notebook_remove (CcNotebook *notebook,
-		    GtkWidget  *widget)
+static ClutterActor *
+_cc_notebook_actor_for_widget (CcNotebook *notebook,
+			       GtkWidget  *widget)
 {
 	GList *l;
 
@@ -90,9 +90,21 @@ cc_notebook_remove (CcNotebook *notebook,
 				widget,
 				(GCompareFunc) _cc_notebook_find_widget);
 	if (!l)
+		return NULL;
+	return l->data;
+}
+
+void
+cc_notebook_remove (CcNotebook *notebook,
+		    GtkWidget  *widget)
+{
+	ClutterActor *actor;
+
+	actor = _cc_notebook_actor_for_widget (notebook, widget);
+	if (actor == NULL)
 		return;
-	clutter_actor_remove_child (notebook->priv->bin, l->data);
-	notebook->priv->children = g_list_remove (notebook->priv->children, l->data);
+	clutter_actor_remove_child (notebook->priv->bin, actor);
+	notebook->priv->children = g_list_remove (notebook->priv->children, actor);
 }
 
 static void
@@ -128,6 +140,111 @@ cc_notebook_get_property (GObject    *object,
         }
 }
 
+static GtkSizeRequestMode
+cc_notebook_get_request_mode (GtkWidget *widget)
+{
+	CcNotebook *notebook;
+	GtkWidget *target;
+
+	notebook = CC_NOTEBOOK (widget);
+
+	target = notebook->priv->current_page ? notebook->priv->current_page : GTK_WIDGET (notebook);
+
+	return gtk_widget_get_request_mode (target);
+}
+
+static void
+cc_notebook_get_preferred_height (GtkWidget       *widget,
+				  gint            *minimum_height,
+				  gint            *natural_height)
+{
+	CcNotebook *notebook;
+	GtkWidget *target;
+
+	notebook = CC_NOTEBOOK (widget);
+
+	target = notebook->priv->current_page ? notebook->priv->current_page : GTK_WIDGET (notebook);
+
+	gtk_widget_get_preferred_height (target, minimum_height, natural_height);
+}
+
+static void
+cc_notebook_get_preferred_width_for_height (GtkWidget       *widget,
+					    gint             height,
+					    gint            *minimum_width,
+					    gint            *natural_width)
+{
+	CcNotebook *notebook;
+	GtkWidget *target;
+
+	notebook = CC_NOTEBOOK (widget);
+
+	target = notebook->priv->current_page ? notebook->priv->current_page : GTK_WIDGET (notebook);
+
+	gtk_widget_get_preferred_width_for_height (target, height, minimum_width, natural_width);
+}
+
+static void
+cc_notebook_get_preferred_width (GtkWidget       *widget,
+				 gint            *minimum_width,
+				 gint            *natural_width)
+{
+	CcNotebook *notebook;
+	GtkWidget *target;
+
+	notebook = CC_NOTEBOOK (widget);
+
+	target = notebook->priv->current_page ? notebook->priv->current_page : GTK_WIDGET (notebook);
+
+	gtk_widget_get_preferred_width (target, minimum_width, natural_width);
+}
+
+static void
+cc_notebook_get_preferred_height_for_width (GtkWidget       *widget,
+					    gint             width,
+					    gint            *minimum_height,
+					    gint            *natural_height)
+{
+	CcNotebook *notebook;
+	GtkWidget *target;
+
+	notebook = CC_NOTEBOOK (widget);
+
+	target = notebook->priv->current_page ? notebook->priv->current_page : GTK_WIDGET (notebook);
+
+	gtk_widget_get_preferred_height_for_width (target, width, minimum_height, natural_height);
+}
+
+static void
+cc_notebook_size_allocate (GtkWidget     *widget,
+			   GtkAllocation *allocation)
+{
+	CcNotebook *notebook;
+	GtkWidget *target;
+
+	notebook = CC_NOTEBOOK (widget);
+
+	target = notebook->priv->current_page ? notebook->priv->current_page : GTK_WIDGET (notebook);
+
+	gtk_widget_size_allocate (target, allocation);
+}
+
+static void
+cc_notebook_configure_event (GtkWidget         *widget,
+			     GdkEventConfigure *event)
+{
+	CcNotebook *notebook;
+	ClutterActor *actor;
+
+	GTK_WIDGET_CLASS (cc_notebook_parent_class)->configure_event (widget, event);
+
+	notebook = CC_NOTEBOOK (widget);
+	actor = _cc_notebook_actor_for_widget (notebook, notebook->priv->current_page);
+	if (actor == NULL)
+		return;
+	clutter_actor_set_size (actor, event->width, event->height);
+}
+
 static void
 cc_notebook_class_init (CcNotebookClass *class)
 {
@@ -147,6 +264,14 @@ cc_notebook_class_init (CcNotebookClass *class)
 							      "Current Page",
 							      G_PARAM_READWRITE));
 
+	widget_class->get_request_mode = cc_notebook_get_request_mode;
+	widget_class->get_preferred_height = cc_notebook_get_preferred_height;
+	widget_class->get_preferred_width_for_height = cc_notebook_get_preferred_width_for_height;
+	widget_class->get_preferred_width = cc_notebook_get_preferred_width;
+	widget_class->get_preferred_height_for_width = cc_notebook_get_preferred_height_for_width;
+//	widget_class->size_allocate = cc_notebook_size_allocate;
+//	widget_class->configure_event = cc_notebook_configure_event;
+
         g_type_class_add_private (class, sizeof (CcNotebookPrivate));
 }
 
@@ -155,28 +280,32 @@ cc_notebook_init (CcNotebook *notebook)
 {
 	CcNotebookPrivate *priv;
 	ClutterConstraint *constraint;
+	ClutterLayoutManager *layout;
 
 	priv = GET_PRIVATE (notebook);
 	notebook->priv = priv;
 
 	priv->embed = gtk_clutter_embed_new ();
-	gtk_container_add (GTK_CONTAINER (notebook), priv->embed);
+	gtk_widget_push_composite_child ();
+	gtk_box_pack_start (GTK_BOX (notebook), priv->embed, TRUE, TRUE, 0);
+	gtk_widget_pop_composite_child ();
 	gtk_widget_show (priv->embed);
 	priv->stage = gtk_clutter_embed_get_stage (GTK_CLUTTER_EMBED (priv->embed));
 
+	clutter_actor_set_background_color (CLUTTER_ACTOR (priv->stage), CLUTTER_COLOR_Red);
 
+	/* Scroll actor */
 	priv->scroll_actor = clutter_scroll_actor_new ();
 	clutter_actor_add_child (priv->stage, priv->scroll_actor);
 	clutter_scroll_actor_set_scroll_mode (CLUTTER_SCROLL_ACTOR (priv->scroll_actor),
 					      CLUTTER_SCROLL_HORIZONTALLY);
-	constraint = clutter_bind_constraint_new (priv->stage, CLUTTER_BIND_SIZE, 0.0);
-	clutter_actor_add_constraint_with_name (priv->scroll_actor, "size", constraint);
 
+	/* Horizontal flow, inside the scroll */
 	priv->bin = clutter_actor_new ();
-	clutter_actor_set_layout_manager (priv->bin, clutter_box_layout_new ());
+	layout = clutter_flow_layout_new (CLUTTER_FLOW_HORIZONTAL);
+	clutter_flow_layout_set_homogeneous (layout, TRUE);
+	clutter_actor_set_layout_manager (priv->bin, layout);
 	clutter_actor_add_child (priv->scroll_actor, priv->bin);
-	constraint = clutter_bind_constraint_new (priv->scroll_actor, CLUTTER_BIND_SIZE, 0.0);
-	clutter_actor_add_constraint_with_name (priv->bin, "size", constraint);
 }
 
 GtkWidget *
@@ -190,7 +319,7 @@ cc_notebook_set_current (CcNotebook *notebook,
 			 GtkWidget  *widget)
 {
 	ClutterPoint pos;
-	GList *l;
+	ClutterActor *actor;
 
 	g_return_if_fail (CC_IS_NOTEBOOK (notebook));
 	g_return_if_fail (GTK_IS_WIDGET (widget));
@@ -198,16 +327,13 @@ cc_notebook_set_current (CcNotebook *notebook,
 	if (widget == notebook->priv->current_page)
 		return;
 
-	l = g_list_find_custom (notebook->priv->children,
-				widget,
-				(GCompareFunc) _cc_notebook_find_widget);
-	g_return_if_fail (l != NULL);
+	actor = _cc_notebook_actor_for_widget (notebook, widget);
+	g_return_if_fail (actor != NULL);
 
-	clutter_actor_get_position (l->data, &pos.x, &pos.y);
+	clutter_actor_get_position (actor, &pos.x, &pos.y);
 
 	clutter_actor_save_easing_state (notebook->priv->scroll_actor);
 	clutter_actor_set_easing_duration (notebook->priv->scroll_actor, 500);
-	clutter_actor_set_easing_mode (notebook->priv->scroll_actor, CLUTTER_EASE_OUT_BOUNCE);
 
 	clutter_scroll_actor_scroll_to_point (CLUTTER_SCROLL_ACTOR (notebook->priv->scroll_actor), &pos);
 
@@ -215,6 +341,8 @@ cc_notebook_set_current (CcNotebook *notebook,
 
 	notebook->priv->current_page = widget;
 	g_object_notify (G_OBJECT (notebook), "current-page");
+
+	gtk_widget_queue_resize (GTK_WIDGET (notebook));
 }
 
 GtkWidget *
