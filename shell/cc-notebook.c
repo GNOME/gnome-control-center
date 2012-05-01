@@ -44,9 +44,12 @@ void
 cc_notebook_add (CcNotebook *notebook,
 		 GtkWidget  *widget)
 {
+	ClutterConstraint *constraint;
 	ClutterActor *child;
 
 	child = gtk_clutter_actor_new_with_contents (widget);
+	constraint = clutter_bind_constraint_new (notebook->priv->bin, CLUTTER_BIND_SIZE, 0.0);
+	clutter_actor_add_constraint_with_name (child, "size", constraint);
 	clutter_actor_add_child (notebook->priv->bin, child);
 
 	notebook->priv->children = g_list_prepend (notebook->priv->children,
