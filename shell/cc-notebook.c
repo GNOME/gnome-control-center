@@ -107,8 +107,6 @@ cc_notebook_init (CcNotebook *notebook)
 	priv->stage = gtk_clutter_embed_get_stage (GTK_CLUTTER_EMBED (priv->embed));
 
 
-	clutter_stage_set_color (CLUTTER_STAGE (priv->stage), CLUTTER_COLOR_LightSkyBlue);
-
 	priv->scroll_actor = clutter_scroll_actor_new ();
 	clutter_actor_add_child (priv->stage, priv->scroll_actor);
 	clutter_scroll_actor_set_scroll_mode (CLUTTER_SCROLL_ACTOR (priv->scroll_actor),
@@ -143,8 +141,6 @@ cc_notebook_set_current (CcNotebook *notebook,
 				widget,
 				(GCompareFunc) _cc_notebook_find_widget);
 	g_return_if_fail (l != NULL);
-
-	g_message ("setting %p as the current widget", l->data);
 
 	clutter_actor_get_position (l->data, &pos.x, &pos.y);
 
