@@ -245,7 +245,6 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
   gtk_window_set_default_icon_name (priv->default_window_icon);
   gtk_window_set_icon_name (GTK_WINDOW (priv->window),
                             priv->default_window_icon);
-  gtk_window_set_hide_titlebar_when_maximized (GTK_WINDOW (priv->window), TRUE);
 
   /* clear any custom widgets */
   _shell_remove_all_custom_widgets (priv);
