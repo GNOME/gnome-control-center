@@ -43,17 +43,22 @@ typedef struct _CcNotebook CcNotebook;
 typedef struct _CcNotebookPrivate CcNotebookPrivate;
 
 struct _CcNotebookClass {
-        GtkClutterEmbedClass parent_class;
+        GtkBoxClass parent_class;
 };
 
 struct _CcNotebook {
-        GtkClutterEmbed parent_instance;
+        GtkBox parent_instance;
         CcNotebookPrivate *priv;
 };
 
 GType      cc_notebook_get_type             (void) G_GNUC_CONST;
 
 GtkWidget *cc_notebook_new                  (void);
+
+void       cc_notebook_add                  (CcNotebook *notebook,
+					     GtkWidget  *widget);
+void       cc_notebook_remove               (CcNotebook *notebook,
+					     GtkWidget  *widget);
 
 void       cc_notebook_set_current          (CcNotebook *notebook,
 					     GtkWidget  *widget);

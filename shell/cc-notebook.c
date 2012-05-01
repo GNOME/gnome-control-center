@@ -31,22 +31,21 @@
 
 struct _CcNotebookPrivate
 {
+	GtkWidget *embed;
         ClutterActor *stage;
         ClutterActor *scroll_actor;
         ClutterActor *bin;
         GList *children; /* GList of ClutterActor */
 };
 
-G_DEFINE_TYPE (CcNotebook, cc_notebook, GTK_CLUTTER_TYPE_EMBED);
+G_DEFINE_TYPE (CcNotebook, cc_notebook, GTK_TYPE_BOX);
 
-static void
-cc_notebook_add (GtkContainer *container,
-		 GtkWidget    *widget)
+void
+cc_notebook_add (CcNotebook *notebook,
+		 GtkWidget  *widget)
 {
-	CcNotebook *notebook;
 	ClutterActor *child;
 
-	notebook = CC_NOTEBOOK (container);
 	child = gtk_clutter_actor_new_with_contents (widget);
 	clutter_actor_add_child (notebook->priv->bin, child);
 
@@ -63,14 +62,11 @@ _cc_notebook_find_widget (GtkClutterActor *actor,
 	return -1;
 }
 
-static void
-cc_notebook_remove (GtkContainer *container,
-		    GtkWidget    *widget)
+void
+cc_notebook_remove (CcNotebook *notebook,
+		    GtkWidget  *widget)
 {
-	CcNotebook *notebook;
 	GList *l;
-
-	notebook = CC_NOTEBOOK (container);
 
 	l = g_list_find_custom (notebook->priv->children,
 				widget,
@@ -81,50 +77,14 @@ cc_notebook_remove (GtkContainer *container,
 	notebook->priv->children = g_list_remove (notebook->priv->children, l->data);
 }
 
-static GType
-cc_notebook_child_type (GtkContainer *container)
-{
-	return GTK_TYPE_WIDGET;
-}
-
-static void
-cc_notebook_forall (GtkContainer *container,
-		    gboolean      include_internals,
-		    GtkCallback   callback,
-		    gpointer      callback_data)
-{
-#if 0
-	CcNotebook *notebook;
-	GList *children;
-	ClutterActor *child;
-
-	notebook = CC_NOTEBOOK (container);
-
-	children = notebook->priv->children;
-	while (children) {
-		child = children->data;
-		children = children->next;
-
-		(* callback) (gtk_clutter_actor_get_contents (GTK_CLUTTER_ACTOR (child)), callback_data);
-	}
-#endif
-}
-
 static void
 cc_notebook_class_init (CcNotebookClass *class)
 {
         GObjectClass *gobject_class;
         GtkWidgetClass *widget_class;
-        GtkContainerClass *container_class;
 
         gobject_class = (GObjectClass*)class;
         widget_class = (GtkWidgetClass*)class;
-        container_class = (GtkContainerClass*)class;
-
-        container_class->add = cc_notebook_add;
-        container_class->remove = cc_notebook_remove;
-        container_class->child_type = cc_notebook_child_type;
-        container_class->forall = cc_notebook_forall;
 
         g_type_class_add_private (class, sizeof (CcNotebookPrivate));
 }
@@ -138,20 +98,26 @@ cc_notebook_init (CcNotebook *notebook)
 	priv = GET_PRIVATE (notebook);
 	notebook->priv = priv;
 
-	priv->stage = gtk_clutter_embed_get_stage (GTK_CLUTTER_EMBED (notebook));
+	priv->embed = gtk_clutter_embed_new ();
+	gtk_container_add (GTK_CONTAINER (notebook), priv->embed);
+	gtk_widget_show (priv->embed);
+	priv->stage = gtk_clutter_embed_get_stage (GTK_CLUTTER_EMBED (priv->embed));
+
+
+	clutter_stage_set_color (CLUTTER_STAGE (priv->stage), CLUTTER_COLOR_LightSkyBlue);
 
 	priv->scroll_actor = clutter_scroll_actor_new ();
 	clutter_actor_add_child (priv->stage, priv->scroll_actor);
 	clutter_scroll_actor_set_scroll_mode (CLUTTER_SCROLL_ACTOR (priv->scroll_actor),
 					      CLUTTER_SCROLL_HORIZONTALLY);
-//	constraint = clutter_bind_constraint_new (priv->stage, CLUTTER_BIND_SIZE, 0.0);
-//	clutter_actor_add_constraint_with_name (priv->scroll_actor, "size", constraint);
+	constraint = clutter_bind_constraint_new (priv->stage, CLUTTER_BIND_SIZE, 0.0);
+	clutter_actor_add_constraint_with_name (priv->scroll_actor, "size", constraint);
 
 	priv->bin = clutter_actor_new ();
 	clutter_actor_set_layout_manager (priv->bin, clutter_box_layout_new ());
 	clutter_actor_add_child (priv->scroll_actor, priv->bin);
-//	constraint = clutter_bind_constraint_new (priv->scroll_actor, CLUTTER_BIND_SIZE, 0.0);
-//	clutter_actor_add_constraint_with_name (priv->bin, "size", constraint);
+	constraint = clutter_bind_constraint_new (priv->scroll_actor, CLUTTER_BIND_SIZE, 0.0);
+	clutter_actor_add_constraint_with_name (priv->bin, "size", constraint);
 }
 
 GtkWidget *
