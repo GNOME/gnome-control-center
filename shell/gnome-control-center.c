@@ -810,11 +810,14 @@ home_button_clicked_cb (GtkButton *button,
 }
 
 static void
-notebook_switch_page_cb (GtkNotebook               *book,
-                         GtkWidget                 *child,
-                         gint                       page_num,
+notebook_page_notify_cb (CcNotebook               *notebook,
+			 GParamSpec               *spec,
                          GnomeControlCenterPrivate *priv)
 {
+  GtkWidget *child;
+
+  child = cc_notebook_get_current (notebook);
+
   /* make sure the home button is shown on all pages except the overview page */
 
   if (child == priv->scrolled_window || child == priv->search_scrolled)
@@ -1149,8 +1152,8 @@ gnome_control_center_init (GnomeControlCenter *self)
 
   gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, -1);
   priv->main_vbox = W (priv->builder, "main-vbox");
-  g_signal_connect (priv->notebook, "switch-page",
-                    G_CALLBACK (notebook_switch_page_cb), priv);
+  g_signal_connect (priv->notebook, "notify::current-page",
+                    G_CALLBACK (notebook_page_notify_cb), priv);
 
   g_signal_connect (gtk_builder_get_object (priv->builder, "home-button"),
                     "clicked", G_CALLBACK (home_button_clicked_cb), self);
