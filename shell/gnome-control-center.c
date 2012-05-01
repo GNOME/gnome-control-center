@@ -612,6 +612,10 @@ setup_search (GnomeControlCenter *shell)
                                  "pixbuf", COL_PIXBUF);
 
   priv->search_scrolled = W (priv->builder, "search-scrolled-window");
+  g_object_ref (priv->search_scrolled);
+  gtk_container_remove (GTK_CONTAINER (priv->notebook), priv->search_scrolled);
+  cc_notebook_add (CC_NOTEBOOK (priv->notebook), priv->search_scrolled);
+  g_object_unref (priv->search_scrolled);
   gtk_container_add (GTK_CONTAINER (priv->search_scrolled), search_view);
 
   /* add the custom renderer */
@@ -1135,7 +1139,14 @@ gnome_control_center_init (GnomeControlCenter *self)
                     G_CALLBACK (window_key_press_event), self);
 
   priv->notebook = W (priv->builder, "notebook");
+
+  /* Main scrolled window */
   priv->scrolled_window = W (priv->builder, "scrolledwindow1");
+  g_object_ref (priv->scrolled_window);
+  gtk_container_remove (GTK_CONTAINER (priv->notebook), priv->scrolled_window);
+  cc_notebook_add (CC_NOTEBOOK (priv->notebook), priv->scrolled_window);
+  g_object_unref (priv->scrolled_window);
+
   gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, -1);
   priv->main_vbox = W (priv->builder, "main-vbox");
   g_signal_connect (priv->notebook, "switch-page",
