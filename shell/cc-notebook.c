@@ -113,6 +113,7 @@ on_embed_size_allocate (GtkWidget     *embed,
         ClutterActor *child;
         float page_w, page_h;
         float offset = 0.f;
+        ClutterPoint pos;
 
         /* we only care about the width changes, since we need to recompute the
          * offset of the pages
@@ -132,6 +133,9 @@ on_embed_size_allocate (GtkWidget     *embed,
         }
 
         self->priv->last_width = allocation->width;
+        pos.y = 0;
+        pos.x = self->priv->last_width * self->priv->selected_index;
+        clutter_scroll_actor_scroll_to_point (CLUTTER_SCROLL_ACTOR (self->priv->scroll), &pos);
 }
 
 static void
