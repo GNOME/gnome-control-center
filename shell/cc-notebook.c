@@ -53,14 +53,13 @@ cc_notebook_add (CcNotebook *notebook,
 {
 	ClutterConstraint *constraint;
 	ClutterActor *child;
-	ClutterLayoutManager *layout;
 
 	child = gtk_clutter_actor_new_with_contents (widget);
 
 	/* Make sure that the actor will be window sized */
-	constraint = clutter_bind_constraint_new (notebook->priv->bin, CLUTTER_BIND_SIZE, 0.f);
-	clutter_actor_add_constraint_with_name (child, "size", constraint);
 	clutter_actor_add_child (notebook->priv->bin, child);
+	constraint = clutter_bind_constraint_new (notebook->priv->stage, CLUTTER_BIND_SIZE, 0.f);
+	clutter_actor_add_constraint_with_name (child, "size", constraint);
 
 	notebook->priv->children = g_list_prepend (notebook->priv->children,
 						   child);
@@ -279,7 +278,6 @@ static void
 cc_notebook_init (CcNotebook *notebook)
 {
 	CcNotebookPrivate *priv;
-	ClutterConstraint *constraint;
 	ClutterLayoutManager *layout;
 
 	priv = GET_PRIVATE (notebook);
@@ -303,7 +301,7 @@ cc_notebook_init (CcNotebook *notebook)
 	/* Horizontal flow, inside the scroll */
 	priv->bin = clutter_actor_new ();
 	layout = clutter_flow_layout_new (CLUTTER_FLOW_HORIZONTAL);
-	clutter_flow_layout_set_homogeneous (layout, TRUE);
+	clutter_flow_layout_set_homogeneous (CLUTTER_FLOW_LAYOUT (layout), TRUE);
 	clutter_actor_set_layout_manager (priv->bin, layout);
 	clutter_actor_add_child (priv->scroll_actor, priv->bin);
 }
