@@ -130,6 +130,8 @@ on_embed_size_allocate (GtkWidget     *embed,
 
                 offset += page_w;
         }
+
+        self->priv->last_width = allocation->width;
 }
 
 static void
