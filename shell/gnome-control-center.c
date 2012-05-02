@@ -163,11 +163,12 @@ activate_panel (GnomeControlCenter *shell,
 
   gtk_container_add (GTK_CONTAINER (box), panel);
 
-  cc_notebook_add (CC_NOTEBOOK (priv->notebook), box);
+  gtk_widget_set_name (box, id);
+  cc_notebook_add_page (CC_NOTEBOOK (priv->notebook), box);
 
   /* switch to the new panel */
   gtk_widget_show (box);
-  cc_notebook_set_current (CC_NOTEBOOK (priv->notebook), box);
+  cc_notebook_select_page (CC_NOTEBOOK (priv->notebook), box);
 
   /* set the title of the window */
   icon_name = get_icon_name_from_g_icon (gicon);
@@ -207,7 +208,7 @@ _shell_remove_all_custom_widgets (GnomeControlCenterPrivate *priv)
   for (i = 0; i < priv->custom_widgets->len; i++)
     {
         widget = g_ptr_array_index (priv->custom_widgets, i);
-        cc_notebook_remove (CC_NOTEBOOK (box), widget);
+        cc_notebook_remove_page (CC_NOTEBOOK (box), widget);
     }
   g_ptr_array_set_size (priv->custom_widgets, 0);
 }
@@ -215,11 +216,11 @@ _shell_remove_all_custom_widgets (GnomeControlCenterPrivate *priv)
 static void
 shell_show_overview_page (GnomeControlCenterPrivate *priv)
 {
-  cc_notebook_set_current (CC_NOTEBOOK (priv->notebook),
+  cc_notebook_select_page (CC_NOTEBOOK (priv->notebook),
 			   priv->scrolled_window);
 
   if (priv->current_panel)
-    cc_notebook_remove (CC_NOTEBOOK (priv->notebook), priv->current_panel);
+    cc_notebook_remove_page (CC_NOTEBOOK (priv->notebook), priv->current_panel);
   priv->current_panel = NULL;
 
   /* clear the search text */
@@ -531,7 +532,7 @@ search_entry_changed_cb (GtkEntry                  *entry,
   else
     {
       gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->search_filter));
-      cc_notebook_set_current (CC_NOTEBOOK (priv->notebook),
+      cc_notebook_select_page (CC_NOTEBOOK (priv->notebook),
 			       priv->search_scrolled);
       g_object_set (G_OBJECT (entry),
                           "secondary-icon-name", "edit-clear-symbolic",
@@ -614,7 +615,8 @@ setup_search (GnomeControlCenter *shell)
   priv->search_scrolled = W (priv->builder, "search-scrolled-window");
   g_object_ref (priv->search_scrolled);
   gtk_container_remove (GTK_CONTAINER (priv->notebook), priv->search_scrolled);
-  cc_notebook_add (CC_NOTEBOOK (priv->notebook), priv->search_scrolled);
+  gtk_widget_set_name (priv->search_scrolled, "search-page");
+  cc_notebook_add_page (CC_NOTEBOOK (priv->notebook), priv->search_scrolled);
   g_object_unref (priv->search_scrolled);
   gtk_container_add (GTK_CONTAINER (priv->search_scrolled), search_view);
 
@@ -816,7 +818,7 @@ notebook_page_notify_cb (CcNotebook               *notebook,
 {
   GtkWidget *child;
 
-  child = cc_notebook_get_current (notebook);
+  child = cc_notebook_get_selected_page (notebook);
 
   /* make sure the home button is shown on all pages except the overview page */
 
@@ -904,9 +906,9 @@ _shell_set_active_panel_from_id (CcShell      *shell,
 
   if (!name)
     {
-      cc_notebook_remove (CC_NOTEBOOK (priv->notebook), priv->current_panel);
+      cc_notebook_remove_page (CC_NOTEBOOK (priv->notebook), priv->current_panel);
       priv->current_panel = NULL;
-      cc_notebook_set_current (CC_NOTEBOOK (priv->notebook),
+      cc_notebook_select_page (CC_NOTEBOOK (priv->notebook),
 			       priv->scrolled_window);
       g_warning ("Could not find settings panel \"%s\"", start_id);
       return FALSE;
@@ -921,12 +923,12 @@ _shell_set_active_panel_from_id (CcShell      *shell,
       if (activate_panel (GNOME_CONTROL_CENTER (shell), start_id, argv, desktop,
 			  name, gicon) == FALSE)
         {
-          cc_notebook_set_current (CC_NOTEBOOK (priv->notebook),
+          cc_notebook_select_page (CC_NOTEBOOK (priv->notebook),
 				   priv->scrolled_window);
         }
 
       if (old_panel)
-        cc_notebook_remove (CC_NOTEBOOK (priv->notebook), old_panel);
+        cc_notebook_remove_page (CC_NOTEBOOK (priv->notebook), old_panel);
 
       g_free (name);
       g_free (desktop);
@@ -1101,7 +1103,7 @@ window_key_press_event (GtkWidget          *win,
             break;
           case GDK_KEY_W:
           case GDK_KEY_w:
-            if (cc_notebook_get_current (CC_NOTEBOOK (self->priv->notebook)) == self->priv->scrolled_window)
+            if (cc_notebook_get_selected_page (CC_NOTEBOOK (self->priv->notebook)) == self->priv->scrolled_window)
               shell_show_overview_page (self->priv);
             retval = TRUE;
             break;
@@ -1147,7 +1149,8 @@ gnome_control_center_init (GnomeControlCenter *self)
   priv->scrolled_window = W (priv->builder, "scrolledwindow1");
   g_object_ref (priv->scrolled_window);
   gtk_container_remove (GTK_CONTAINER (priv->notebook), priv->scrolled_window);
-  cc_notebook_add (CC_NOTEBOOK (priv->notebook), priv->scrolled_window);
+  gtk_widget_set_name (priv->scrolled_window, "overview-page");
+  cc_notebook_add_page (CC_NOTEBOOK (priv->notebook), priv->scrolled_window);
   g_object_unref (priv->scrolled_window);
 
   gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, -1);
@@ -1176,7 +1179,7 @@ gnome_control_center_init (GnomeControlCenter *self)
   priv->default_window_title = g_strdup (gtk_window_get_title (GTK_WINDOW (priv->window)));
   priv->default_window_icon = g_strdup (gtk_window_get_icon_name (GTK_WINDOW (priv->window)));
 
-  cc_notebook_set_current (CC_NOTEBOOK (priv->notebook), priv->scrolled_window);
+  cc_notebook_select_page (CC_NOTEBOOK (priv->notebook), priv->scrolled_window);
 }
 
 GnomeControlCenter *
