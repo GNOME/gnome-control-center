@@ -219,7 +219,11 @@ cc_notebook_select_page_at_index (CcNotebook *self,
         item = clutter_actor_get_child_at_index (self->priv->bin, index_);
         g_assert (item != NULL);
 
-        clutter_actor_get_position (item, &pos.x, &pos.y);
+	/* Don't use clutter_actor_get_position() here
+	 * because the layout manager might not have had the
+	 * chance to move the actor yet */
+	pos.y = 0;
+	pos.x = self->priv->last_width * index_;
         g_message ("scrolling to %lfx%lf (item %d)", pos.x, pos.y, index_);
         clutter_scroll_actor_scroll_to_point (CLUTTER_SCROLL_ACTOR (self->priv->scroll), &pos);
 
