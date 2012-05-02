@@ -29,6 +29,14 @@
 
 #define GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), CC_TYPE_NOTEBOOK, CcNotebookPrivate))
 
+/* Structure is:
+ * GtkClutterEmbed aka stage
+ *     scroll_actor
+ *         bin (with a ClutterFlowLayout layout
+ *             ClutterActor (each page is 1 widget)
+ *             ClutterActor...
+ */
+
 struct _CcNotebookPrivate
 {
 	GtkWidget *embed;
