@@ -22,47 +22,52 @@
 #ifndef _CC_NOTEBOOK_H_
 #define _CC_NOTEBOOK_H_
 
-#include <glib-object.h>
 #include <gtk/gtk.h>
 #include <clutter-gtk/clutter-gtk.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_NOTEBOOK            (cc_notebook_get_type ())
-#define CC_NOTEBOOK(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CC_TYPE_NOTEBOOK, \
-                                                                           CcNotebook))
-#define CC_NOTEBOOK_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CC_TYPE_NOTEBOOK, \
-                                                                        CcNotebookClass))
-#define CC_IS_NOTEBOOK(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CC_TYPE_NOTEBOOK))
-#define CC_IS_NOTEBOOK_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), CC_TYPE_NOTEBOOK))
-#define CC_NOTEBOOK_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), CC_TYPE_NOTEBOOK, \
-                                                                          CcNotebookClass))
+#define CC_TYPE_NOTEBOOK                (cc_notebook_get_type ())
+#define CC_NOTEBOOK(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), CC_TYPE_NOTEBOOK, CcNotebook))
+#define CC_IS_NOTEBOOK(obj)             (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CC_TYPE_NOTEBOOK))
+#define CC_NOTEBOOK_CLASS(klass)        (G_TYPE_CHECK_CLASS_CAST ((klass), CC_TYPE_NOTEBOOK, CcNotebookClass))
+#define CC_IS_NOTEBOOK_CLASS(klass)     (G_TYPE_CHECK_CLASS_TYPE ((klass), CC_TYPE_NOTEBOOK))
+#define CC_NOTEBOOK_GET_CLASS(obj)      (G_TYPE_INSTANCE_GET_CLASS ((obj), CC_TYPE_NOTEBOOK, CcNotebookClass))
 
-typedef struct _CcNotebookClass CcNotebookClass;
-typedef struct _CcNotebook CcNotebook;
-typedef struct _CcNotebookPrivate CcNotebookPrivate;
+typedef struct _CcNotebook            CcNotebook;
+typedef struct _CcNotebookPrivate     CcNotebookPrivate;
+typedef struct _CcNotebookClass       CcNotebookClass;
 
-struct _CcNotebookClass {
-        GtkBoxClass parent_class;
-};
+struct _CcNotebook
+{
+        GtkBox parent_class;
 
-struct _CcNotebook {
-        GtkBox parent_instance;
         CcNotebookPrivate *priv;
 };
 
-GType      cc_notebook_get_type             (void) G_GNUC_CONST;
+struct _CcNotebookClass
+{
+        GtkBoxClass parent_class;
+};
 
-GtkWidget *cc_notebook_new                  (void);
+GType           cc_notebook_get_type                    (void) G_GNUC_CONST;
 
-void       cc_notebook_add                  (CcNotebook *notebook,
-					     GtkWidget  *widget);
-void       cc_notebook_remove               (CcNotebook *notebook,
-					     GtkWidget  *widget);
+GtkWidget *     cc_notebook_new                         (void);
 
-void       cc_notebook_set_current          (CcNotebook *notebook,
-					     GtkWidget  *widget);
-GtkWidget *cc_notebook_get_current          (CcNotebook *notebook);
+int             cc_notebook_add_page                    (CcNotebook *self,
+                                                         GtkWidget  *widget);
+void            cc_notebook_remove_page                 (CcNotebook *self,
+                                                         GtkWidget  *widget);
+
+void            cc_notebook_select_page                 (CcNotebook *self,
+                                                         GtkWidget  *widget);
+void            cc_notebook_select_page_at_index        (CcNotebook *self,
+                                                         int         index_);
+void            cc_notebook_select_previous_page        (CcNotebook *self);
+void            cc_notebook_select_next_page            (CcNotebook *self);
+
+int             cc_notebook_get_selected_index          (CcNotebook *self);
+GtkWidget *     cc_notebook_get_selected_page           (CcNotebook *self);
 
 G_END_DECLS
 
