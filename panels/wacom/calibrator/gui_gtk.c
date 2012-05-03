@@ -301,6 +301,17 @@ on_key_release_event(GtkWidget   *widget,
 }
 
 static gboolean
+on_focus_out_event (GtkWidget *widget,
+		    GdkEvent  *event,
+		    CalibArea *area)
+{
+    /* If the calibrator window looses focus, simply bail out... */
+    on_delete_event (widget, NULL, area);
+
+    return FALSE;
+}
+
+static gboolean
 on_timer_signal(CalibArea *area)
 {
     GdkWindow *win;
@@ -388,6 +399,7 @@ calib_area_new (GdkScreen      *screen,
 	gtk_widget_add_events (calib_area->window, GDK_KEY_RELEASE_MASK | GDK_BUTTON_PRESS_MASK);
 	gtk_widget_set_can_focus (calib_area->window, TRUE);
 	gtk_window_fullscreen (GTK_WINDOW (calib_area->window));
+	gtk_window_set_keep_above (GTK_WINDOW (calib_area->window), TRUE);
 
 	/* Connect callbacks */
 	g_signal_connect (calib_area->window, "draw",
@@ -398,6 +410,8 @@ calib_area_new (GdkScreen      *screen,
 			  G_CALLBACK(on_key_release_event), calib_area);
 	g_signal_connect (calib_area->window, "delete-event",
 			  G_CALLBACK(on_delete_event), calib_area);
+	g_signal_connect (calib_area->window, "focus-out-event",
+			  G_CALLBACK(on_focus_out_event), calib_area);
 
 	/* Setup timer for animation */
 	calib_area->anim_id = g_timeout_add(TIME_STEP, (GSourceFunc)on_timer_signal, calib_area);
