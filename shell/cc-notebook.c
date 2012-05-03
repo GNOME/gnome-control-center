@@ -54,6 +54,7 @@ struct _CcNotebookPrivate
         int last_width;
 
         int selected_index;
+        GtkWidget *selected_page;
 };
 
 enum
@@ -85,10 +86,86 @@ cc_notebook_get_property (GObject    *gobject,
         }
 }
 
+static GtkSizeRequestMode
+cc_notebook_get_request_mode (GtkWidget *widget)
+{
+	CcNotebook *notebook;
+	GtkWidget *target;
+
+	notebook = CC_NOTEBOOK (widget);
+
+	target = cc_notebook_get_selected_page (notebook) ? cc_notebook_get_selected_page (notebook) : GTK_WIDGET (notebook);
+
+	return gtk_widget_get_request_mode (target);
+}
+
+static void
+cc_notebook_get_preferred_height (GtkWidget       *widget,
+				  gint            *minimum_height,
+				  gint            *natural_height)
+{
+	CcNotebook *notebook;
+	GtkWidget *target;
+
+	notebook = CC_NOTEBOOK (widget);
+
+	target = cc_notebook_get_selected_page (notebook) ? cc_notebook_get_selected_page (notebook) : GTK_WIDGET (notebook);
+
+	gtk_widget_get_preferred_height (target, minimum_height, natural_height);
+}
+
+static void
+cc_notebook_get_preferred_width_for_height (GtkWidget       *widget,
+					    gint             height,
+					    gint            *minimum_width,
+					    gint            *natural_width)
+{
+	CcNotebook *notebook;
+	GtkWidget *target;
+
+	notebook = CC_NOTEBOOK (widget);
+
+	target = cc_notebook_get_selected_page (notebook) ? cc_notebook_get_selected_page (notebook) : GTK_WIDGET (notebook);
+
+	gtk_widget_get_preferred_width_for_height (target, height, minimum_width, natural_width);
+}
+
+static void
+cc_notebook_get_preferred_width (GtkWidget       *widget,
+				 gint            *minimum_width,
+				 gint            *natural_width)
+{
+	CcNotebook *notebook;
+	GtkWidget *target;
+
+	notebook = CC_NOTEBOOK (widget);
+
+	target = cc_notebook_get_selected_page (notebook) ? cc_notebook_get_selected_page (notebook) : GTK_WIDGET (notebook);
+
+	gtk_widget_get_preferred_width (target, minimum_width, natural_width);
+}
+
+static void
+cc_notebook_get_preferred_height_for_width (GtkWidget       *widget,
+					    gint             width,
+					    gint            *minimum_height,
+					    gint            *natural_height)
+{
+	CcNotebook *notebook;
+	GtkWidget *target;
+
+	notebook = CC_NOTEBOOK (widget);
+
+	target = cc_notebook_get_selected_page (notebook) ? cc_notebook_get_selected_page (notebook) : GTK_WIDGET (notebook);
+
+	gtk_widget_get_preferred_height_for_width (target, width, minimum_height, natural_height);
+}
+
 static void
 cc_notebook_class_init (CcNotebookClass *klass)
 {
         GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
         g_type_class_add_private (klass, sizeof (CcNotebookPrivate));
 
@@ -102,6 +179,12 @@ cc_notebook_class_init (CcNotebookClass *klass)
 
         gobject_class->get_property = cc_notebook_get_property;
         g_object_class_install_properties (gobject_class, LAST_PROP, obj_props);
+
+	widget_class->get_request_mode = cc_notebook_get_request_mode;
+	widget_class->get_preferred_height = cc_notebook_get_preferred_height;
+	widget_class->get_preferred_width_for_height = cc_notebook_get_preferred_width_for_height;
+	widget_class->get_preferred_width = cc_notebook_get_preferred_width;
+	widget_class->get_preferred_height_for_width = cc_notebook_get_preferred_height_for_width;
 }
 
 static void
@@ -115,14 +198,19 @@ on_embed_size_allocate (GtkWidget     *embed,
         float offset = 0.f;
         ClutterPoint pos;
 
+        g_message ("alloc called with %dx%d",
+		   allocation->width, allocation->height);
+
         /* we only care about the width changes, since we need to recompute the
          * offset of the pages
          */
-        if (allocation->width == self->priv->last_width)
-                return;
+//        if (allocation->width == self->priv->last_width)
+//                return;
 
         page_w = allocation->width;
         page_h = allocation->height;
+
+        g_message ("page_w %lf page_h %lf", page_w, page_h);
 
         clutter_actor_iter_init (&iter, self->priv->bin);
         while (clutter_actor_iter_next (&iter, &child)) {
@@ -133,6 +221,7 @@ on_embed_size_allocate (GtkWidget     *embed,
         }
 
         self->priv->last_width = allocation->width;
+
         pos.y = 0;
         pos.x = self->priv->last_width * self->priv->selected_index;
         clutter_scroll_actor_scroll_to_point (CLUTTER_SCROLL_ACTOR (self->priv->scroll), &pos);
@@ -163,6 +252,7 @@ cc_notebook_init (CcNotebook *self)
         clutter_actor_add_child (self->priv->scroll, self->priv->bin);
 
         self->priv->selected_index = -1;
+        self->priv->selected_page = NULL;
 }
 
 GtkWidget *
@@ -199,7 +289,7 @@ void
 cc_notebook_select_page_at_index (CcNotebook *self,
                                   int         index_)
 {
-        ClutterActor *item;
+        ClutterActor *item, *frame, *embed;
         ClutterPoint pos;
         int n_children;
 
@@ -226,6 +316,12 @@ cc_notebook_select_page_at_index (CcNotebook *self,
 	pos.x = self->priv->last_width * index_;
         g_message ("scrolling to %lfx%lf (item %d)", pos.x, pos.y, index_);
         clutter_scroll_actor_scroll_to_point (CLUTTER_SCROLL_ACTOR (self->priv->scroll), &pos);
+
+        /* Remember the last selected page */
+	frame = clutter_actor_get_child_at_index (self->priv->bin, self->priv->selected_index);
+	g_assert (frame != NULL);
+	embed = clutter_actor_get_child_at_index (frame, 0);
+	self->priv->selected_page = gtk_clutter_actor_get_contents (GTK_CLUTTER_ACTOR (embed));
 
         g_object_notify_by_pspec (G_OBJECT (self), obj_props[PROP_CURRENT_PAGE]);
 }
@@ -293,6 +389,8 @@ cc_notebook_remove_page (CcNotebook *self,
                         return;
                 }
         }
+
+        /* FIXME current page getting removed :((( */
 }
 
 int
@@ -306,18 +404,7 @@ cc_notebook_get_selected_index (CcNotebook *self)
 GtkWidget *
 cc_notebook_get_selected_page (CcNotebook *self)
 {
-        ClutterActor *frame, *embed;
-
         g_return_val_if_fail (CC_IS_NOTEBOOK (self), NULL);
 
-        if (self->priv->selected_index < 0)
-                return NULL;
-
-        frame = clutter_actor_get_child_at_index (self->priv->bin, self->priv->selected_index);
-        if (frame == NULL)
-                return NULL;
-
-        embed = clutter_actor_get_child_at_index (frame, 0);
-
-        return gtk_clutter_actor_get_contents (GTK_CLUTTER_ACTOR (embed));
+        return self->priv->selected_page;
 }
