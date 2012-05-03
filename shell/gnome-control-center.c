@@ -1117,6 +1117,7 @@ gnome_control_center_init (GnomeControlCenter *self)
 {
   GError *err = NULL;
   GnomeControlCenterPrivate *priv;
+  GdkGeometry hints;
 
   priv = self->priv = CONTROL_CENTER_PRIVATE (self);
 
@@ -1144,6 +1145,13 @@ gnome_control_center_init (GnomeControlCenter *self)
                     G_CALLBACK (window_key_press_event), self);
 
   priv->notebook = W (priv->builder, "notebook");
+
+  hints.min_width = FIXED_WIDTH;
+  hints.min_height = FIXED_HEIGHT;
+  gtk_window_set_geometry_hints (GTK_WINDOW (priv->window),
+				 priv->notebook,
+				 &hints,
+				 GDK_HINT_MIN_SIZE);
 
   /* Main scrolled window */
   priv->scrolled_window = W (priv->builder, "scrolledwindow1");
