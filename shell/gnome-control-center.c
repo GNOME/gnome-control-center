@@ -208,7 +208,7 @@ _shell_remove_all_custom_widgets (GnomeControlCenterPrivate *priv)
   for (i = 0; i < priv->custom_widgets->len; i++)
     {
         widget = g_ptr_array_index (priv->custom_widgets, i);
-        cc_notebook_remove_page (CC_NOTEBOOK (box), widget);
+        gtk_container_remove (GTK_CONTAINER (box), widget);
     }
   g_ptr_array_set_size (priv->custom_widgets, 0);
 }
