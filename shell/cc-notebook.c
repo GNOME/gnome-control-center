@@ -220,6 +220,11 @@ on_embed_size_allocate (GtkWidget     *embed,
                 offset += page_w;
         }
 
+	/* This stops the non-animated scrolling from happening
+	 * if we're still scrolling there */
+	if (self->priv->last_width == allocation->width)
+		return;
+
         self->priv->last_width = allocation->width;
 
         pos.y = 0;
