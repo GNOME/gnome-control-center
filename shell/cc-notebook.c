@@ -365,7 +365,7 @@ cc_notebook_add_page (CcNotebook *self,
 
         embed = gtk_clutter_actor_new_with_contents (widget);
         clutter_actor_add_child (frame, embed);
-        gtk_widget_show_all (widget);
+        gtk_widget_show (widget);
 
         res = clutter_actor_get_n_children (self->priv->bin);
         clutter_actor_insert_child_at_index (self->priv->bin, frame, res);
