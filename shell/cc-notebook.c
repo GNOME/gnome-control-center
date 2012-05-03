@@ -315,7 +315,13 @@ cc_notebook_select_page_at_index (CcNotebook *self,
 	pos.y = 0;
 	pos.x = self->priv->last_width * index_;
         g_message ("scrolling to %lfx%lf (item %d)", pos.x, pos.y, index_);
+
+        clutter_actor_save_easing_state (self->priv->scroll);
+        clutter_actor_set_easing_duration (self->priv->scroll, 500);
+
         clutter_scroll_actor_scroll_to_point (CLUTTER_SCROLL_ACTOR (self->priv->scroll), &pos);
+
+	clutter_actor_restore_easing_state (self->priv->scroll);
 
         /* Remember the last selected page */
 	frame = clutter_actor_get_child_at_index (self->priv->bin, self->priv->selected_index);
