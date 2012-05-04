@@ -30,6 +30,7 @@ create_page_contents (const char *text)
   gtk_box_pack_end (GTK_BOX (hbox), fwd_button, FALSE, FALSE, 0);
 
   GtkWidget *label = gtk_label_new (text);
+  gtk_widget_set_name (label, text);
 
   gtk_box_pack_end (GTK_BOX (vbox), label, TRUE, TRUE, 0);
 
@@ -41,8 +42,8 @@ create_page_contents (const char *text)
 static void
 on_page_change (CcNotebook *notebook)
 {
-  g_print (G_STRLOC ": Currently selected page: %d\n",
-           cc_notebook_get_selected_index (notebook));
+  g_print (G_STRLOC ": Currently selected page: %s\n",
+           gtk_widget_get_name (cc_notebook_get_selected_page (notebook)));
 }
 
 int
