@@ -1147,7 +1147,7 @@ gnome_control_center_init (GnomeControlCenter *self)
   priv->notebook = W (priv->builder, "notebook");
 
   hints.min_width = FIXED_WIDTH;
-  hints.min_height = FIXED_HEIGHT;
+  hints.min_height = MIN_ICON_VIEW_HEIGHT;
   gtk_window_set_geometry_hints (GTK_WINDOW (priv->window),
 				 priv->notebook,
 				 &hints,
