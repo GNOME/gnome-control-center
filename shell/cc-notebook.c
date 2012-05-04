@@ -367,22 +367,40 @@ cc_notebook_remove_page (CcNotebook *self,
                          GtkWidget  *widget)
 {
         ClutterActorIter iter;
-        ClutterActor *child;
+        ClutterActor *child, *frame, *selected_frame;
+        int index;
+        gboolean found_current;
+        ClutterPoint pos;
 
         g_return_if_fail (CC_IS_NOTEBOOK (self));
         g_return_if_fail (GTK_IS_WIDGET (widget));
         g_return_if_fail (widget != self->priv->selected_page);
 
+        found_current = FALSE;
+        frame = g_object_get_data (G_OBJECT (widget), "cc-notebook-frame");
+        selected_frame = g_object_get_data (G_OBJECT (self->priv->selected_page), "cc-notebook-frame");
+
+	index = 0;
         clutter_actor_iter_init (&iter, self->priv->bin);
         while (clutter_actor_iter_next (&iter, &child)) {
-                ClutterActor *embed = clutter_actor_get_child_at_index (child, 0);
+                if (frame == child) {
+			clutter_actor_iter_remove (&iter);
+                        break;
+                } else if (selected_frame == child) {
+			found_current = TRUE;
+		}
 
-                if (gtk_clutter_actor_get_contents (GTK_CLUTTER_ACTOR (embed)) == widget) {
-                        clutter_actor_iter_remove (&iter);
-                        /* FIXME reset scroll to current page */
-                        return;
-                }
+		index++;
         }
+
+	/* The current page is before the one we removed, so no
+	 * need to shift the scroll view */
+        if (found_current)
+		return;
+
+        pos.y = 0;
+        pos.x = self->priv->last_width * index;
+        clutter_scroll_actor_scroll_to_point (CLUTTER_SCROLL_ACTOR (self->priv->scroll), &pos);
 }
 
 GtkWidget *
