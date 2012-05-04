@@ -54,7 +54,6 @@ struct _CcNotebookPrivate
 
         int last_width;
 
-        int selected_index;
         GtkWidget *selected_page;
 };
 
@@ -68,10 +67,6 @@ enum
 static GParamSpec *obj_props[LAST_PROP] = { NULL, };
 
 G_DEFINE_TYPE (CcNotebook, cc_notebook, GTK_TYPE_BOX)
-
-static void            cc_notebook_select_page_at_index        (CcNotebook *self,
-                                                         int         index_);
-
 
 static void
 cc_notebook_get_property (GObject    *gobject,
@@ -216,23 +211,16 @@ on_embed_size_allocate (GtkWidget     *embed,
 {
         ClutterActorIter iter;
         ClutterActor *child;
+        ClutterActor *frame;
         float page_w, page_h;
         float offset = 0.f;
         ClutterPoint pos;
 
-        g_message ("alloc called with %dx%d",
-		   allocation->width, allocation->height);
-
-        /* we only care about the width changes, since we need to recompute the
-         * offset of the pages
-         */
-//        if (allocation->width == self->priv->last_width)
-//                return;
+        if (self->priv->selected_page == NULL)
+		return;
 
         page_w = allocation->width;
         page_h = allocation->height;
-
-        g_message ("page_w %lf page_h %lf", page_w, page_h);
 
         clutter_actor_iter_init (&iter, self->priv->bin);
         while (clutter_actor_iter_next (&iter, &child)) {
@@ -249,8 +237,11 @@ on_embed_size_allocate (GtkWidget     *embed,
 
         self->priv->last_width = allocation->width;
 
+	frame = g_object_get_data (G_OBJECT (self->priv->selected_page),
+				   "cc-notebook-frame");
+
         pos.y = 0;
-        pos.x = self->priv->last_width * self->priv->selected_index;
+        pos.x = clutter_actor_get_x (frame);
         clutter_scroll_actor_scroll_to_point (CLUTTER_SCROLL_ACTOR (self->priv->scroll), &pos);
 }
 
@@ -278,7 +269,6 @@ cc_notebook_init (CcNotebook *self)
         self->priv->bin = clutter_actor_new ();
         clutter_actor_add_child (self->priv->scroll, self->priv->bin);
 
-        self->priv->selected_index = -1;
         self->priv->selected_page = NULL;
 }
 
@@ -288,60 +278,18 @@ cc_notebook_new (void)
         return g_object_new (CC_TYPE_NOTEBOOK, NULL);
 }
 
-void
-cc_notebook_select_page (CcNotebook *self,
-                         GtkWidget  *widget)
+static void
+_cc_notebook_select_page (CcNotebook *self,
+			  GtkWidget  *widget,
+			  int         index)
 {
-        ClutterActorIter iter;
-        ClutterActor *child;
-        int index_ = 0;
+        ClutterPoint pos;
 
         g_return_if_fail (CC_IS_NOTEBOOK (self));
         g_return_if_fail (GTK_IS_WIDGET (widget));
 
-        clutter_actor_iter_init (&iter, self->priv->bin);
-        while (clutter_actor_iter_next (&iter, &child)) {
-                ClutterActor *embed = clutter_actor_get_child_at_index (child, 0);
-
-                if (gtk_clutter_actor_get_contents (GTK_CLUTTER_ACTOR (embed)) == widget) {
-                        cc_notebook_select_page_at_index (self, index_);
-                        return;
-                }
-
-                index_ += 1;
-        }
-}
-
-void
-cc_notebook_select_page_at_index (CcNotebook *self,
-                                  int         index_)
-{
-        ClutterActor *item, *frame, *embed;
-        ClutterPoint pos;
-        int n_children;
-
-        g_return_if_fail (CC_IS_NOTEBOOK (self));
-
-        n_children = clutter_actor_get_n_children (self->priv->bin);
-        if (index_ >= n_children)
-                index_ = 0;
-        else if (index_ < 0)
-                index_ = n_children - 1;
-
-        if (self->priv->selected_index == index_)
-                return;
-
-        self->priv->selected_index = index_;
-
-        item = clutter_actor_get_child_at_index (self->priv->bin, index_);
-        g_assert (item != NULL);
-
-	/* Don't use clutter_actor_get_position() here
-	 * because the layout manager might not have had the
-	 * chance to move the actor yet */
-	pos.y = 0;
-	pos.x = self->priv->last_width * index_;
-        g_message ("scrolling to %lfx%lf (item %d)", pos.x, pos.y, index_);
+        pos.y = 0;
+        pos.x = self->priv->last_width * index;
 
         clutter_actor_save_easing_state (self->priv->scroll);
         clutter_actor_set_easing_duration (self->priv->scroll, 500);
@@ -351,12 +299,30 @@ cc_notebook_select_page_at_index (CcNotebook *self,
 	clutter_actor_restore_easing_state (self->priv->scroll);
 
         /* Remember the last selected page */
-	frame = clutter_actor_get_child_at_index (self->priv->bin, self->priv->selected_index);
-	g_assert (frame != NULL);
-	embed = clutter_actor_get_child_at_index (frame, 0);
-	self->priv->selected_page = gtk_clutter_actor_get_contents (GTK_CLUTTER_ACTOR (embed));
+        self->priv->selected_page = widget;
 
         g_object_notify_by_pspec (G_OBJECT (self), obj_props[PROP_CURRENT_PAGE]);
+}
+
+void
+cc_notebook_select_page (CcNotebook *self,
+                         GtkWidget  *widget)
+{
+	int i, n_children;
+	ClutterActor *frame;
+
+        if (widget == self->priv->selected_page)
+		return;
+
+	frame = g_object_get_data (G_OBJECT (widget), "cc-notebook-frame");
+
+        n_children = clutter_actor_get_n_children (self->priv->bin);
+        for (i = 0; i < n_children; i++) {
+		if (frame == clutter_actor_get_child_at_index (self->priv->bin, i)) {
+			_cc_notebook_select_page (self, widget, i);
+			return;
+		}
+	}
 }
 
 int
@@ -375,14 +341,15 @@ cc_notebook_add_page (CcNotebook *self,
                                                                          CLUTTER_BIN_ALIGNMENT_FILL));
 
         embed = gtk_clutter_actor_new_with_contents (widget);
+        g_object_set_data (G_OBJECT (widget), "cc-notebook-frame", frame);
         clutter_actor_add_child (frame, embed);
         gtk_widget_show (widget);
 
         res = clutter_actor_get_n_children (self->priv->bin);
         clutter_actor_insert_child_at_index (self->priv->bin, frame, res);
 
-        if (self->priv->selected_index < 0)
-                cc_notebook_select_page_at_index (self, 0);
+        if (self->priv->selected_page == NULL)
+		_cc_notebook_select_page (self, widget, res);
 
         return res;
 }
