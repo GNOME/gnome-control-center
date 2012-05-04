@@ -17,6 +17,7 @@
  *
  * Written by:
  *      Bastien Nocera <hadess@hadess.net>
+ *      Emmanuele Bassi <ebassi@linux.intel.com>
  */
 
 #include "config.h"
