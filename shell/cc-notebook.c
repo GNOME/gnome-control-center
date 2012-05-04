@@ -383,13 +383,14 @@ cc_notebook_add_page (CcNotebook *self,
 
 void
 cc_notebook_remove_page (CcNotebook *self,
-                           GtkWidget    *widget)
+                         GtkWidget  *widget)
 {
         ClutterActorIter iter;
         ClutterActor *child;
 
         g_return_if_fail (CC_IS_NOTEBOOK (self));
         g_return_if_fail (GTK_IS_WIDGET (widget));
+        g_return_if_fail (widget != self->priv->selected_page);
 
         clutter_actor_iter_init (&iter, self->priv->bin);
         while (clutter_actor_iter_next (&iter, &child)) {
@@ -397,11 +398,10 @@ cc_notebook_remove_page (CcNotebook *self,
 
                 if (gtk_clutter_actor_get_contents (GTK_CLUTTER_ACTOR (embed)) == widget) {
                         clutter_actor_iter_remove (&iter);
+                        /* FIXME reset scroll to current page */
                         return;
                 }
         }
-
-        /* FIXME current page getting removed :((( */
 }
 
 int
