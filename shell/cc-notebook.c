@@ -82,7 +82,25 @@ cc_notebook_get_property (GObject    *gobject,
 
         switch (prop_id) {
         case PROP_CURRENT_PAGE:
-                g_value_set_int (value, priv->selected_index);
+                g_value_set_pointer (value, priv->selected_page);
+                break;
+
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (gobject, prop_id, pspec);
+        }
+}
+
+static void
+cc_notebook_set_property (GObject      *gobject,
+			  guint         prop_id,
+			  const GValue *value,
+			  GParamSpec   *pspec)
+{
+        CcNotebook *self = CC_NOTEBOOK (gobject);
+
+        switch (prop_id) {
+        case PROP_CURRENT_PAGE:
+                cc_notebook_select_page (self, g_value_get_pointer (value));
                 break;
 
         default:
@@ -174,14 +192,13 @@ cc_notebook_class_init (CcNotebookClass *klass)
         g_type_class_add_private (klass, sizeof (CcNotebookPrivate));
 
         obj_props[PROP_CURRENT_PAGE] =
-                g_param_spec_int (g_intern_static_string ("current-page"),
-                                  "Current Page",
-                                  "The index of the currently selected page",
-                                  -1, G_MAXINT,
-                                  -1,
-                                  G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
+                g_param_spec_pointer (g_intern_static_string ("current-page"),
+				      "Current Page",
+				      "The currently selected page widget",
+				      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
         gobject_class->get_property = cc_notebook_get_property;
+        gobject_class->set_property = cc_notebook_set_property;
         g_object_class_install_properties (gobject_class, LAST_PROP, obj_props);
 
 	widget_class->get_request_mode = cc_notebook_get_request_mode;
