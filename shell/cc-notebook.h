@@ -54,7 +54,7 @@ GType           cc_notebook_get_type                    (void) G_GNUC_CONST;
 
 GtkWidget *     cc_notebook_new                         (void);
 
-int             cc_notebook_add_page                    (CcNotebook *self,
+void            cc_notebook_add_page                    (CcNotebook *self,
                                                          GtkWidget  *widget);
 void            cc_notebook_remove_page                 (CcNotebook *self,
                                                          GtkWidget  *widget);

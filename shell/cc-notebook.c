@@ -333,7 +333,7 @@ cc_notebook_select_page (CcNotebook *self,
 		g_warning ("Could not find widget '%p' in CcNotebook '%p'", widget, self);
 }
 
-int
+void
 cc_notebook_add_page (CcNotebook *self,
                       GtkWidget  *widget)
 {
@@ -341,8 +341,8 @@ cc_notebook_add_page (CcNotebook *self,
         ClutterActor *embed;
         int res;
 
-        g_return_val_if_fail (CC_IS_NOTEBOOK (self), -1);
-        g_return_val_if_fail (GTK_IS_WIDGET (widget), -1);
+        g_return_if_fail (CC_IS_NOTEBOOK (self));
+        g_return_if_fail (GTK_IS_WIDGET (widget));
 
         frame = clutter_actor_new ();
         clutter_actor_set_layout_manager (frame, clutter_bin_layout_new (CLUTTER_BIN_ALIGNMENT_FILL,
@@ -358,8 +358,6 @@ cc_notebook_add_page (CcNotebook *self,
 
         if (self->priv->selected_page == NULL)
 		_cc_notebook_select_page (self, widget, res);
-
-        return res;
 }
 
 void
