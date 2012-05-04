@@ -100,7 +100,7 @@ cc_notebook_get_request_mode (GtkWidget *widget)
 
 	target = notebook->priv->selected_page ? notebook->priv->selected_page : widget;
 
-	return gtk_widget_get_request_mode (target);
+	return GTK_WIDGET_GET_CLASS (target)->get_request_mode (target);
 }
 
 static void
@@ -115,7 +115,7 @@ cc_notebook_get_preferred_height (GtkWidget       *widget,
 
 	target = notebook->priv->selected_page ? notebook->priv->selected_page : widget;
 
-	gtk_widget_get_preferred_height (target, minimum_height, natural_height);
+	GTK_WIDGET_GET_CLASS (target)->get_preferred_height (target, minimum_height, natural_height);
 }
 
 static void
@@ -131,7 +131,7 @@ cc_notebook_get_preferred_width_for_height (GtkWidget       *widget,
 
 	target = notebook->priv->selected_page ? notebook->priv->selected_page : widget;
 
-	gtk_widget_get_preferred_width_for_height (target, height, minimum_width, natural_width);
+	GTK_WIDGET_GET_CLASS (target)->get_preferred_width_for_height (target, height, minimum_width, natural_width);
 }
 
 static void
@@ -146,7 +146,7 @@ cc_notebook_get_preferred_width (GtkWidget       *widget,
 
 	target = notebook->priv->selected_page ? notebook->priv->selected_page : widget;
 
-	gtk_widget_get_preferred_width (target, minimum_width, natural_width);
+	GTK_WIDGET_GET_CLASS (target)->get_preferred_width (target, minimum_width, natural_width);
 }
 
 static void
@@ -162,7 +162,7 @@ cc_notebook_get_preferred_height_for_width (GtkWidget       *widget,
 
 	target = notebook->priv->selected_page ? notebook->priv->selected_page : widget;
 
-	gtk_widget_get_preferred_height_for_width (target, width, minimum_height, natural_height);
+	GTK_WIDGET_GET_CLASS (target)->get_preferred_height_for_width (target, width, minimum_height, natural_height);
 }
 
 static void
