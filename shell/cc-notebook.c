@@ -309,20 +309,28 @@ cc_notebook_select_page (CcNotebook *self,
                          GtkWidget  *widget)
 {
 	int i, n_children;
+	GList *children, *l;
 	ClutterActor *frame;
+	gboolean found;
 
         if (widget == self->priv->selected_page)
 		return;
 
+	found = FALSE;
 	frame = g_object_get_data (G_OBJECT (widget), "cc-notebook-frame");
 
         n_children = clutter_actor_get_n_children (self->priv->bin);
-        for (i = 0; i < n_children; i++) {
-		if (frame == clutter_actor_get_child_at_index (self->priv->bin, i)) {
+        children = clutter_actor_get_children (self->priv->bin);
+        for (i = 0, l = children; i < n_children; i++, l = l->next) {
+		if (frame == l->data) {
 			_cc_notebook_select_page (self, widget, i);
-			return;
+			found = TRUE;
+			break;
 		}
 	}
+	g_list_free (children);
+	if (found == FALSE)
+		g_warning ("Could not find widget '%p' in CcNotebook '%p'", widget, self);
 }
 
 int
