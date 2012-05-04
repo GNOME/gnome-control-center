@@ -2,7 +2,3 @@
   the children list order affects the paint order - so you can use set_child_above_sibling/set_child_below_sibling
 - Add a scroll direction to the animation
   (back to parent to the left, to a child to the right)
-- Only destroy the existing panel once we've finished scrolling
-  - get_transition('scroll-to') after calling scroll_to_point(), and connect to the 'completed' signal on it
-  - alternatively, you can use 'transitions-completed' on the actor
-    but that will be called once every transition is finished - e.g. position, size, rotation, etc.
