@@ -68,6 +68,10 @@ static GParamSpec *obj_props[LAST_PROP] = { NULL, };
 
 G_DEFINE_TYPE (CcNotebook, cc_notebook, GTK_TYPE_BOX)
 
+static void            cc_notebook_select_page_at_index        (CcNotebook *self,
+                                                         int         index_);
+
+
 static void
 cc_notebook_get_property (GObject    *gobject,
                           guint       prop_id,
@@ -337,22 +341,6 @@ cc_notebook_select_page_at_index (CcNotebook *self,
         g_object_notify_by_pspec (G_OBJECT (self), obj_props[PROP_CURRENT_PAGE]);
 }
 
-void
-cc_notebook_select_previous_page (CcNotebook *self)
-{
-        g_return_if_fail (CC_IS_NOTEBOOK (self));
-
-        cc_notebook_select_page_at_index (self, self->priv->selected_index - 1);
-}
-
-void
-cc_notebook_select_next_page (CcNotebook *self)
-{
-        g_return_if_fail (CC_IS_NOTEBOOK (self));
-
-        cc_notebook_select_page_at_index (self, self->priv->selected_index + 1);
-}
-
 int
 cc_notebook_add_page (CcNotebook *self,
                       GtkWidget  *widget)
@@ -402,14 +390,6 @@ cc_notebook_remove_page (CcNotebook *self,
                         return;
                 }
         }
-}
-
-int
-cc_notebook_get_selected_index (CcNotebook *self)
-{
-        g_return_val_if_fail (CC_IS_NOTEBOOK (self), -1);
-
-        return self->priv->selected_index;
 }
 
 GtkWidget *

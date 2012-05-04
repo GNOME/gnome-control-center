@@ -61,12 +61,7 @@ void            cc_notebook_remove_page                 (CcNotebook *self,
 
 void            cc_notebook_select_page                 (CcNotebook *self,
                                                          GtkWidget  *widget);
-void            cc_notebook_select_page_at_index        (CcNotebook *self,
-                                                         int         index_);
-void            cc_notebook_select_previous_page        (CcNotebook *self);
-void            cc_notebook_select_next_page            (CcNotebook *self);
 
-int             cc_notebook_get_selected_index          (CcNotebook *self);
 GtkWidget *     cc_notebook_get_selected_page           (CcNotebook *self);
 
 G_END_DECLS
