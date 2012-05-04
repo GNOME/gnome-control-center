@@ -258,7 +258,6 @@ cc_notebook_init (CcNotebook *self)
         gtk_widget_show (self->priv->embed);
 
         self->priv->stage = gtk_clutter_embed_get_stage (GTK_CLUTTER_EMBED (self->priv->embed));
-        clutter_actor_set_background_color (self->priv->stage, CLUTTER_COLOR_Red);
 
         self->priv->scroll = clutter_scroll_actor_new ();
         clutter_scroll_actor_set_scroll_mode (CLUTTER_SCROLL_ACTOR (self->priv->scroll),
@@ -270,6 +269,7 @@ cc_notebook_init (CcNotebook *self)
         clutter_actor_add_child (self->priv->scroll, self->priv->bin);
 
         self->priv->selected_page = NULL;
+        gtk_widget_set_name (GTK_WIDGET (self), "GtkBox");
 }
 
 GtkWidget *
