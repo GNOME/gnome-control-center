@@ -43,11 +43,11 @@ create_page_contents (int page_num)
 		    G_CALLBACK (goto_page), GINT_TO_POINTER (page_num + 1));
 
   GtkWidget *label = gtk_label_new (text);
-  gtk_widget_set_name (label, text);
 
   gtk_box_pack_end (GTK_BOX (vbox), label, TRUE, TRUE, 0);
 
   gtk_widget_show_all (vbox);
+  g_object_set_data_full (G_OBJECT (vbox), "display-name", text, g_free);
 
   g_hash_table_insert (pages, GINT_TO_POINTER (page_num), vbox);
 
@@ -58,7 +58,7 @@ static void
 on_page_change (CcNotebook *notebook)
 {
   g_print (G_STRLOC ": Currently selected page: %s\n",
-           gtk_widget_get_name (cc_notebook_get_selected_page (notebook)));
+           (char *) g_object_get_data (G_OBJECT (cc_notebook_get_selected_page (notebook)), "display-name"));
 }
 
 int
