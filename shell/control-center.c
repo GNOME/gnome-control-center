@@ -164,10 +164,59 @@ application_command_line_cb (GApplication  *application,
 }
 
 static void
+help_activated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GnomeControlCenter *shell = user_data;
+  CcPanel *panel = cc_shell_get_active_panel (CC_SHELL (shell));
+  GtkWidget *window = cc_shell_get_toplevel (CC_SHELL (shell));
+  const char *uri = NULL;
+
+  if (panel)
+    uri = cc_panel_get_help_uri (panel);
+
+  gtk_show_uri (gtk_widget_get_screen (window),
+                uri ? uri : "help:gnome-help/prefs",
+                GDK_CURRENT_TIME, NULL);
+}
+
+static void
+quit_activated (GSimpleAction *action,
+                GVariant      *parameter,
+                gpointer       user_data)
+{
+  GnomeControlCenter *shell = user_data;
+  g_object_unref (shell);
+}
+
+static void
 application_startup_cb (GApplication       *application,
                         GnomeControlCenter *shell)
 {
-  /* nothing to do here, we don't want to show a window before
+  GMenu *menu, *section;
+  GAction *action;
+
+  action = G_ACTION (g_simple_action_new ("help", NULL));
+  g_action_map_add_action (G_ACTION_MAP (application), action);
+  g_signal_connect (action, "activate", G_CALLBACK (help_activated), shell);
+
+  action = G_ACTION (g_simple_action_new ("quit", NULL));
+  g_action_map_add_action (G_ACTION_MAP (application), action);
+  g_signal_connect (action, "activate", G_CALLBACK (quit_activated), shell);
+
+  menu = g_menu_new ();
+
+  section = g_menu_new ();
+  g_menu_append (section, _("Help"), "app.help");
+  g_menu_append (section, _("Quit"), "app.quit");
+
+  g_menu_append_section (menu, NULL, G_MENU_MODEL (section));
+
+  gtk_application_set_app_menu (GTK_APPLICATION (application),
+                                G_MENU_MODEL (menu));
+
+  /* nothing else to do here, we don't want to show a window before
    * we've looked at the commandline
    */
 }
