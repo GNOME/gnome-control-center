@@ -165,7 +165,6 @@ cc_shell_set_active_panel (CcShell *shell,
       if (panel)
         {
           shell->priv->active_panel = g_object_ref (panel);
-          g_object_set (G_OBJECT (panel), "shell", shell, NULL);
         }
       g_object_notify (G_OBJECT (shell), "active-panel");
     }

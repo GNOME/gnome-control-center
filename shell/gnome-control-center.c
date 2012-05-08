@@ -158,6 +158,7 @@ activate_panel (GnomeControlCenter *shell,
 
   /* create the panel plugin */
   panel = g_object_new (panel_type, "shell", shell, "argv", argv, NULL);
+  cc_shell_set_active_panel (CC_SHELL (shell), CC_PANEL (panel));
   gtk_widget_show (panel);
 
   gtk_lock_button_set_permission (GTK_LOCK_BUTTON (priv->lock_button),
@@ -230,6 +231,8 @@ shell_show_overview_page (GnomeControlCenter *center)
   gtk_window_set_default_icon_name (priv->default_window_icon);
   gtk_window_set_icon_name (GTK_WINDOW (priv->window),
                             priv->default_window_icon);
+
+  cc_shell_set_active_panel (CC_SHELL (center), NULL);
 
   /* clear any custom widgets */
   _shell_remove_all_custom_widgets (priv);
