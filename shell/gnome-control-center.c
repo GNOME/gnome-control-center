@@ -1196,6 +1196,9 @@ static void
 monitors_changed_cb (GdkScreen *screen,
                      GnomeControlCenter *self)
 {
+  /* We reset small_screen_set to make sure that the
+   * window gets maximised if need be, in update_small_screen_settings() */
+  self->priv->small_screen_set = FALSE;
   update_small_screen_settings (self);
 }
 
