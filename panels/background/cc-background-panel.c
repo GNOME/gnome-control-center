@@ -96,6 +96,12 @@ enum
 
 #define WID(y) (GtkWidget *) gtk_builder_get_object (priv->builder, y)
 
+static const char *
+cc_background_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/look-background";
+}
+
 static void
 cc_background_panel_get_property (GObject    *object,
                                   guint       property_id,
@@ -215,8 +221,11 @@ static void
 cc_background_panel_class_init (CcBackgroundPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (CcBackgroundPanelPrivate));
+
+  panel_class->get_help_uri = cc_background_panel_get_help_uri;
 
   object_class->get_property = cc_background_panel_get_property;
   object_class->set_property = cc_background_panel_set_property;
