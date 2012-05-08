@@ -838,8 +838,8 @@ notebook_switch_page_cb (GtkNotebook               *book,
 
       gtk_widget_get_preferred_height_for_width (GTK_WIDGET (priv->main_vbox),
                                                  FIXED_WIDTH, NULL, &nat_height);
-      gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH,
-                                   priv->small_screen ? SMALL_SCREEN_FIXED_HEIGHT : nat_height);
+      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window),
+                                                  priv->small_screen ? SMALL_SCREEN_FIXED_HEIGHT : nat_height);
     }
   else
     {
@@ -849,7 +849,7 @@ notebook_switch_page_cb (GtkNotebook               *book,
          the window to be larger than this panel */
       gtk_widget_get_preferred_height_for_width (GTK_WIDGET (priv->window),
                                                  FIXED_WIDTH, NULL, &nat_height);
-      gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, MIN_ICON_VIEW_HEIGHT);
+      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window), MIN_ICON_VIEW_HEIGHT);
       gtk_window_resize (GTK_WINDOW (priv->window),
                          FIXED_WIDTH,
                          nat_height);
@@ -1164,7 +1164,7 @@ update_small_screen_settings (GnomeControlCenter *self)
   if (small)
     {
       gtk_window_set_resizable (GTK_WINDOW (self->priv->window), TRUE);
-      gtk_widget_set_size_request (self->priv->scrolled_window, FIXED_WIDTH, SMALL_SCREEN_FIXED_HEIGHT);
+      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (self->priv->scrolled_window), SMALL_SCREEN_FIXED_HEIGHT);
 
       if (!self->priv->small_screen_set
           && self->priv->small_screen != small) {
@@ -1237,6 +1237,7 @@ gnome_control_center_init (GnomeControlCenter *self)
 
   priv->notebook = W (priv->builder, "notebook");
   priv->scrolled_window = W (priv->builder, "scrolledwindow1");
+  gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, -1);
   priv->main_vbox = W (priv->builder, "main-vbox");
   g_signal_connect (priv->notebook, "switch-page",
                     G_CALLBACK (notebook_switch_page_cb), priv);
