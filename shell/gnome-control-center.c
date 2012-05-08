@@ -152,7 +152,6 @@ activate_panel (GnomeControlCenter *shell,
           GtkWidget *panel;
           GtkWidget *box;
           gint i;
-          int nat_height;
           const gchar *icon_name;
 
           /* create the panel plugin */
@@ -182,17 +181,6 @@ activate_panel (GnomeControlCenter *shell,
 
           gtk_widget_show (panel);
 
-          /* set the scrolled window small so that it doesn't force
-             the window to be larger than this panel */
-          gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window), MIN_ICON_VIEW_HEIGHT);
-
-          /* resize to the preferred size of the panel */
-          gtk_widget_set_size_request (priv->window, FIXED_WIDTH, -1);
-          gtk_widget_get_preferred_height (GTK_WIDGET (priv->window),
-                                           NULL, &nat_height);
-          gtk_window_resize (GTK_WINDOW (priv->window),
-                             FIXED_WIDTH,
-                             nat_height);
           return;
         }
       else
@@ -815,6 +803,8 @@ notebook_switch_page_cb (GtkNotebook               *book,
                          gint                       page_num,
                          GnomeControlCenterPrivate *priv)
 {
+  int nat_height;
+
   /* make sure the home button is shown on all pages except the overview page */
 
   if (page_num == OVERVIEW_PAGE || page_num == SEARCH_PAGE)
@@ -822,13 +812,25 @@ notebook_switch_page_cb (GtkNotebook               *book,
       gtk_widget_hide (W (priv->builder, "home-button"));
       gtk_widget_show (W (priv->builder, "search-entry"));
       gtk_widget_hide (W (priv->builder, "lock-button"));
-      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window), FIXED_HEIGHT - 50);
+
+      /* FIXME: select a height that fits into the screen
+       * for small displays */
+      gtk_widget_get_preferred_height_for_width (GTK_WIDGET (priv->main_vbox),
+                                                 FIXED_WIDTH, NULL, &nat_height);
+      gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, nat_height);
     }
   else
     {
       gtk_widget_show (W (priv->builder, "home-button"));
       gtk_widget_hide (W (priv->builder, "search-entry"));
-      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window), MIN_ICON_VIEW_HEIGHT);
+      /* set the scrolled window small so that it doesn't force
+         the window to be larger than this panel */
+      gtk_widget_get_preferred_height_for_width (GTK_WIDGET (priv->window),
+                                                 FIXED_WIDTH, NULL, &nat_height);
+      gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, MIN_ICON_VIEW_HEIGHT);
+      gtk_window_resize (GTK_WINDOW (priv->window),
+                         FIXED_WIDTH,
+                         nat_height);
     }
 }
 
@@ -1120,7 +1122,6 @@ gnome_control_center_init (GnomeControlCenter *self)
 
   priv->notebook = W (priv->builder, "notebook");
   priv->scrolled_window = W (priv->builder, "scrolledwindow1");
-  gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, -1);
   priv->main_vbox = W (priv->builder, "main-vbox");
   g_signal_connect (priv->notebook, "switch-page",
                     G_CALLBACK (notebook_switch_page_cb), priv);
