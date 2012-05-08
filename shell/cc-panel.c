@@ -246,3 +246,14 @@ cc_panel_get_permission (CcPanel *panel)
 
   return NULL;
 }
+
+const char *
+cc_panel_get_help_uri (CcPanel *panel)
+{
+  CcPanelClass *class = CC_PANEL_GET_CLASS (panel);
+
+  if (class->get_help_uri)
+    return class->get_help_uri (panel);
+
+  return NULL;
+}

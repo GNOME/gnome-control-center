@@ -68,6 +68,7 @@ struct _CcPanelClass
   GtkBinClass parent_class;
 
   GPermission * (* get_permission) (CcPanel *panel);
+  const char  * (* get_help_uri)   (CcPanel *panel);
 };
 
 GType        cc_panel_get_type         (void);
@@ -75,6 +76,8 @@ GType        cc_panel_get_type         (void);
 CcShell*     cc_panel_get_shell        (CcPanel     *panel);
 
 GPermission *cc_panel_get_permission   (CcPanel     *panel);
+
+const char  *cc_panel_get_help_uri     (CcPanel     *panel);
 
 G_END_DECLS
 
