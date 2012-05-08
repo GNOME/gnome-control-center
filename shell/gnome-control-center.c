@@ -49,7 +49,7 @@ G_DEFINE_TYPE (GnomeControlCenter, gnome_control_center, CC_TYPE_SHELL)
  * Both sizes are defined in https://live.gnome.org/Design/SystemSettings/ */
 #define FIXED_WIDTH 740
 #define FIXED_HEIGHT 636
-#define SMALL_SCREEN_FIXED_HEIGHT 500
+#define SMALL_SCREEN_FIXED_HEIGHT 400
 
 #define MIN_ICON_VIEW_HEIGHT 300
 
