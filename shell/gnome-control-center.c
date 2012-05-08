@@ -1260,6 +1260,10 @@ gnome_control_center_init (GnomeControlCenter *self)
 
   setup_lock (self);
 
+  /* update small screen settings now */
+  gtk_widget_realize (priv->window);
+  update_small_screen_settings (self);
+
   /* store default window title and name */
   priv->default_window_title = g_strdup (gtk_window_get_title (GTK_WINDOW (priv->window)));
   priv->default_window_icon = g_strdup (gtk_window_get_icon_name (GTK_WINDOW (priv->window)));
