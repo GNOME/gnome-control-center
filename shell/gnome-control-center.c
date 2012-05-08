@@ -1167,8 +1167,10 @@ update_small_screen_settings (GnomeControlCenter *self)
       gtk_widget_set_size_request (self->priv->scrolled_window, FIXED_WIDTH, SMALL_SCREEN_FIXED_HEIGHT);
 
       if (!self->priv->small_screen_set
-          && self->priv->small_screen != small)
+          && self->priv->small_screen != small) {
         gtk_window_maximize (GTK_WINDOW (self->priv->window));
+        self->priv->small_screen_set = TRUE;
+      }
     }
   else
     {
@@ -1177,10 +1179,10 @@ update_small_screen_settings (GnomeControlCenter *self)
         gtk_window_unmaximize (GTK_WINDOW (self->priv->window));
 
       gtk_window_set_resizable (GTK_WINDOW (self->priv->window), FALSE);
+      self->priv->small_screen_set = FALSE;
     }
 
   self->priv->small_screen = small;
-  self->priv->small_screen_set = TRUE;
 }
 
 static gboolean
