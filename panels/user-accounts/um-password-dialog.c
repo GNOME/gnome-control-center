@@ -50,8 +50,6 @@ struct _UmPasswordDialog {
         GtkWidget *strength_indicator_label;
         GtkWidget *normal_hint_entry;
         GtkWidget *normal_hint_label;
-        GtkWidget *generate_button;
-        GtkWidget *generate_menu;
         GtkWidget *show_password_button;
         GtkWidget *ok_button;
 
@@ -62,88 +60,35 @@ struct _UmPasswordDialog {
         gboolean   old_password_ok;
 
         PasswdHandler *passwd_handler;
+
+        gchar **generated;
+        gint next_generated;
 };
 
 static void
-generate_clicked (GtkButton        *button,
-                  UmPasswordDialog *um)
-{
-        gtk_menu_popup (GTK_MENU (um->generate_menu),
-                        NULL, NULL,
-                        (GtkMenuPositionFunc) popup_menu_below_button, um->generate_button,
-                        0, gtk_get_current_event_time ());
-
-        gtk_widget_set_has_tooltip (um->generate_button, FALSE);
-}
-
-static void
-generate_draw (GtkWidget        *widget,
-               cairo_t          *cr,
-               UmPasswordDialog *um)
-{
-        if (!gtk_widget_is_sensitive (widget))
-                return;
-
-        down_arrow (gtk_widget_get_style_context (widget),
-                    cr,
-                    gtk_widget_get_allocated_width (widget) - 12,
-                    gtk_widget_get_allocated_height (widget) - 12,
-                    12, 12);
-}
-
-static void
-activate_password_item (GtkMenuItem      *item,
-                        UmPasswordDialog *um)
-{
-        const char *password;
-
-        password = gtk_menu_item_get_label (item);
-
-        gtk_entry_set_text (GTK_ENTRY (um->password_entry), password);
-        gtk_entry_set_text (GTK_ENTRY (um->verify_entry), "");
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (um->show_password_button), TRUE);
-        gtk_widget_grab_focus (um->verify_entry);
-}
-
-static void generate_passwords (UmPasswordDialog *um);
-
-static void
-activate_generate_item (GtkMenuItem      *item,
-                        UmPasswordDialog *um)
-{
-        generate_passwords (um);
-        generate_clicked (GTK_BUTTON (um->generate_button), um);
-}
-
-static void
-on_generate_menu_unmap (GtkWidget        *menu,
-                        UmPasswordDialog *um)
-{
-        gtk_widget_set_has_tooltip (um->generate_button, TRUE);
-}
-
-static void
-generate_passwords (UmPasswordDialog *um)
+generate_one_password (GtkWidget        *widget,
+                       UmPasswordDialog *um)
 {
         gint min_len, max_len;
-        gchar *output, *err, *cmdline;
+        gchar *output, *err, *cmdline, *p;
         gint status;
         GError *error;
-        gint i;
-        GtkWidget *item;
+
+        if (um->generated && um->generated[um->next_generated]) {
+                gtk_entry_set_text (GTK_ENTRY (um->password_entry), um->generated[um->next_generated]);
+                gtk_entry_set_text (GTK_ENTRY (um->verify_entry), "");
+                um->next_generated++;
+                return;
+        }
+
+        g_strfreev (um->generated);
+        um->generated = NULL;
+        um->next_generated = 0;
 
         min_len = 6;
         max_len = 12;
 
-        if (um->generate_menu) {
-                gtk_widget_destroy (um->generate_menu);
-        }
-
-        um->generate_menu = gtk_menu_new ();
-        g_signal_connect (um->generate_menu, "unmap",
-                          G_CALLBACK (on_generate_menu_unmap), um);
-
-        cmdline = g_strdup_printf ("apg -n 6 -M SNC -m %d -x %d", min_len, max_len);
+        cmdline = g_strdup_printf ("apg -n 10 -M SNC -m %d -x %d", min_len, max_len);
         error = NULL;
         output = NULL;
         err = NULL;
@@ -151,19 +96,16 @@ generate_passwords (UmPasswordDialog *um)
                 g_warning ("Failed to run apg: %s", error->message);
                 g_error_free (error);
         } else if (WEXITSTATUS (status) == 0) {
-                char **lines;
-                lines = g_strsplit (output, "\n", 0);
-                for (i = 0; lines[i]; i++) {
-                        if (lines[i][0] == 0)
-                                continue;
+                p = output;
+                if (*p == '\n')
+                        p++;
+                if (p[strlen(p) - 1] == '\n')
+                        p[strlen(p) - 1] = '\0';
+                um->generated = g_strsplit (p, "\n", -1);
 
-                        item = gtk_menu_item_new_with_label (lines[i]);
-                        g_signal_connect (item, "activate",
-                                          G_CALLBACK (activate_password_item), um);
-                        gtk_widget_show (item);
-                        gtk_menu_shell_append (GTK_MENU_SHELL (um->generate_menu), item);
-                }
-                g_strfreev (lines);
+                gtk_entry_set_text (GTK_ENTRY (um->password_entry), um->generated[0]);
+                gtk_entry_set_text (GTK_ENTRY (um->verify_entry), "");
+                um->next_generated = 1;
         } else {
                 g_warning ("agp returned an error: %s", err);
         }
@@ -171,16 +113,29 @@ generate_passwords (UmPasswordDialog *um)
         g_free (cmdline);
         g_free (output);
         g_free (err);
+}
 
-        item = gtk_separator_menu_item_new ();
-        gtk_widget_show (item);
-        gtk_menu_shell_append (GTK_MENU_SHELL (um->generate_menu), item);
+static void
+activate_icon (GtkEntry             *entry,
+               GtkEntryIconPosition  pos,
+               GdkEventButton       *event,
+               UmPasswordDialog     *um)
+{
+        generate_one_password (GTK_WIDGET (entry), um);
+}
 
-        item = gtk_menu_item_new_with_label (_("More choices..."));
+static void
+populate_menu (GtkEntry         *entry,
+               GtkMenu          *menu,
+               UmPasswordDialog *um)
+{
+        GtkWidget *item;
+
+        item = gtk_menu_item_new_with_mnemonic (_("_Generate a password"));
         g_signal_connect (item, "activate",
-                          G_CALLBACK (activate_generate_item), um);
+                          G_CALLBACK (generate_one_password), um);
         gtk_widget_show (item);
-        gtk_menu_shell_append (GTK_MENU_SHELL (um->generate_menu), item);
+        gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 }
 
 /* This code is based on the Master Password dialog in Firefox
@@ -411,8 +366,7 @@ action_changed (GtkComboBox      *combo,
         active = gtk_combo_box_get_active (combo);
         if (active == 0) {
                 gtk_widget_set_sensitive (um->password_entry, TRUE);
-                gtk_widget_set_sensitive (um->generate_button, TRUE);
-                gtk_widget_set_has_tooltip (um->generate_button, TRUE);
+                gtk_entry_set_icon_sensitive (GTK_ENTRY (um->password_entry), GTK_ENTRY_ICON_SECONDARY, TRUE);
                 gtk_widget_set_sensitive (um->verify_entry, TRUE);
                 gtk_widget_set_sensitive (um->old_password_entry, TRUE);
                 gtk_widget_set_sensitive (um->normal_hint_entry, TRUE);
@@ -424,8 +378,7 @@ action_changed (GtkComboBox      *combo,
         }
         else {
                 gtk_widget_set_sensitive (um->password_entry, FALSE);
-                gtk_widget_set_sensitive (um->generate_button, FALSE);
-                gtk_widget_set_has_tooltip (um->generate_button, FALSE);
+                gtk_entry_set_icon_sensitive (GTK_ENTRY (um->password_entry), GTK_ENTRY_ICON_SECONDARY, FALSE);
                 gtk_widget_set_sensitive (um->verify_entry, FALSE);
                 gtk_widget_set_sensitive (um->old_password_entry, FALSE);
                 gtk_widget_set_sensitive (um->normal_hint_entry, FALSE);
@@ -670,6 +623,11 @@ um_password_dialog_new (void)
                           G_CALLBACK (password_entry_changed), um);
         gtk_entry_set_visibility (GTK_ENTRY (widget), FALSE);
 
+        g_signal_connect (widget, "icon-press",
+                          G_CALLBACK (activate_icon), um);
+        g_signal_connect (widget, "populate-popup",
+                          G_CALLBACK (populate_menu), um);
+
         um->password_entry = widget;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "old-password-entry");
@@ -700,18 +658,6 @@ um_password_dialog_new (void)
         widget = (GtkWidget *) gtk_builder_get_object (builder, "strength-indicator-label");
         gtk_label_set_width_chars (GTK_LABEL (widget), len);
 
-
-        widget = (GtkWidget *) gtk_builder_get_object (builder, "generate-again-button");
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (generate_clicked), um);
-#if 0
-        g_signal_connect (widget, "state-changed",
-                          G_CALLBACK (generate_state_changed), um);
-#endif
-        um->generate_button = widget;
-        g_signal_connect_after (widget, "draw",
-                                G_CALLBACK (generate_draw), um);
-
         um->normal_hint_entry = (GtkWidget *) gtk_builder_get_object (builder, "normal-hint-entry");
 
         /* Label size hack.
@@ -727,8 +673,6 @@ um_password_dialog_new (void)
         um->strength_indicator_label = (GtkWidget *) gtk_builder_get_object (builder, "strength-indicator-label");
 
         g_object_unref (builder);
-
-        generate_passwords (um);
 
         return um;
 }
