@@ -33,6 +33,14 @@
 
 #define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
 
+#define DPI_FACTOR_LARGE 1.25
+#define DPI_FACTOR_NORMAL 1.0
+
+#define HIGH_CONTRAST_THEME     "HighContrast"
+#define KEY_TEXT_SCALING_FACTOR "text-scaling-factor"
+#define KEY_GTK_THEME           "gtk-theme"
+#define KEY_ICON_THEME          "icon-theme"
+
 
 G_DEFINE_DYNAMIC_TYPE (CcUaPanel, cc_ua_panel, CC_TYPE_PANEL)
 
@@ -56,9 +64,9 @@ struct _CcUaPanelPrivate
 
 static void
 cc_ua_panel_get_property (GObject    *object,
-                               guint       property_id,
-                               GValue     *value,
-                               GParamSpec *pspec)
+                          guint       property_id,
+                          GValue     *value,
+                          GParamSpec *pspec)
 {
   switch (property_id)
     {
@@ -69,9 +77,9 @@ cc_ua_panel_get_property (GObject    *object,
 
 static void
 cc_ua_panel_set_property (GObject      *object,
-                               guint         property_id,
-                               const GValue *value,
-                               GParamSpec   *pspec)
+                          guint         property_id,
+                          const GValue *value,
+                          GParamSpec   *pspec)
 {
   switch (property_id)
     {
@@ -166,11 +174,6 @@ cc_ua_panel_class_finalize (CcUaPanelClass *klass)
 {
 }
 
-static gchar *typing_assistant_section[] = {
-    "typing_assistant_preferences_button",
-    NULL
-};
-
 static gchar *sticky_keys_section[] = {
     "typing_sticky_keys_disable_two_keys_checkbutton",
     "typing_sticky_keys_beep_modifier_checkbutton",
@@ -260,180 +263,6 @@ settings_on_off_editor_new (CcUaPanelPrivate  *priv,
 }
 
 /* seeing section */
-#define GTK_THEME_KEY "gtk-theme"
-#define ICON_THEME_KEY "icon-theme"
-#define CONTRAST_MODEL_THEME_COLUMN 2
-#define DPI_MODEL_FACTOR_COLUMN 2
-#define DPI_MODEL_FACTOR_CALC_COLUMN 3
-
-static void text_scaling_factor_combo_box_changed (GtkComboBox *box, CcUaPanel *panel);
-
-static void
-text_scaling_factor_notify_cb (GSettings   *settings,
-			       const gchar *key,
-			       CcUaPanel   *panel)
-{
-  CcUaPanelPrivate *priv = panel->priv;
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  GtkWidget *combo;
-  gboolean valid;
-  gdouble conf_value;
-  GtkTreeIter best;
-  gdouble distance;
-
-  if (!g_str_equal (key, "text-scaling-factor"))
-    return;
-
-  conf_value = g_settings_get_double (settings, key);
-
-  combo = WID (priv->builder, "seeing_text_size_combobox");
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-
-  /* Recalculate the font sizes so that
-   * their size is about constant when changing text size */
-  valid = gtk_tree_model_get_iter_first (model, &iter);
-  while (valid)
-    {
-      gfloat factor;
-
-      gtk_tree_model_get (model, &iter,
-                          DPI_MODEL_FACTOR_COLUMN, &factor,
-                          -1);
-
-      factor /= conf_value;
-
-      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-                          DPI_MODEL_FACTOR_CALC_COLUMN, factor,
-                          -1);
-
-      valid = gtk_tree_model_iter_next (model, &iter);
-    }
-
-  /* find the closest match in the combobox model */
-  distance = 1e6;
-  valid = gtk_tree_model_get_iter_first (model, &iter);
-  while (valid)
-    {
-      gfloat factor;
-      gdouble d;
-
-      gtk_tree_model_get (model, &iter,
-                          DPI_MODEL_FACTOR_COLUMN, &factor,
-                          -1);
-
-      d = fabs (conf_value - factor);
-      if (d < distance)
-        {
-          best = iter;
-          distance = d;
-        }
-
-      valid = gtk_tree_model_iter_next (model, &iter);
-    }
-
-  g_signal_handlers_block_by_func (combo, text_scaling_factor_combo_box_changed, panel);
-  gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &best);
-  g_signal_handlers_unblock_by_func (combo, text_scaling_factor_combo_box_changed, panel);
-}
-
-static void
-text_scaling_factor_combo_box_changed (GtkComboBox *box,
-				       CcUaPanel *panel)
-{
-  CcUaPanelPrivate *priv = panel->priv;
-  GtkTreeIter iter;
-  gfloat factor;
-
-  gtk_combo_box_get_active_iter (box, &iter);
-
-  gtk_tree_model_get (gtk_combo_box_get_model (box), &iter,
-                      DPI_MODEL_FACTOR_COLUMN, &factor,
-                      -1);
-
-  if (factor == 1.0)
-    g_settings_reset (priv->interface_settings, "text-scaling-factor");
-  else
-    g_settings_set_double (priv->interface_settings, "text-scaling-factor", factor);
-}
-
-
-static void
-interface_settings_changed_cb (GSettings   *settings,
-                               const gchar *key,
-                               CcUaPanel   *panel)
-{
-  CcUaPanelPrivate *priv = panel->priv;
-
-  if (g_str_equal (key, "gtk-theme")) {
-    GtkTreeIter iter;
-    GtkTreeModel *model;
-    GtkWidget *combo;
-    gboolean valid;
-    gchar *theme_value;
-
-    theme_value = g_settings_get_string (settings, GTK_THEME_KEY);
-
-    combo = WID (priv->builder, "seeing_contrast_combobox");
-    model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-
-    /* see if there is a matching theme name in the combobox model */
-    valid = gtk_tree_model_get_iter_first (model, &iter);
-    while (valid)
-      {
-        gchar *value;
-
-        gtk_tree_model_get (model, &iter,
-                            CONTRAST_MODEL_THEME_COLUMN, &value,
-                            -1);
-
-        if (!g_strcmp0 (value, theme_value))
-          {
-            gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &iter);
-            g_free (value);
-            break;
-          }
-
-        g_free (value);
-        valid = gtk_tree_model_iter_next (model, &iter);
-      }
-
-    /* if a value for the current theme was not found in the combobox, set to the
-     * "normal" option */
-    if (!valid)
-      {
-        gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 1);
-      }
-  }
-}
-
-static void
-contrast_combobox_changed_cb (GtkComboBox *box,
-                              CcUaPanel   *panel)
-{
-  CcUaPanelPrivate *priv = panel->priv;
-  gchar *theme_name = NULL;
-  GtkTreeIter iter;
-
-  gtk_combo_box_get_active_iter (box, &iter);
-
-  gtk_tree_model_get (gtk_combo_box_get_model (box), &iter,
-                      CONTRAST_MODEL_THEME_COLUMN, &theme_name,
-                      -1);
-
-  if (g_strcmp0 (theme_name, ""))
-    {
-      g_settings_set_string (priv->interface_settings, GTK_THEME_KEY, theme_name);
-      g_settings_set_string (priv->interface_settings, ICON_THEME_KEY, theme_name);
-    }
-  else
-    {
-      g_settings_reset (priv->interface_settings, GTK_THEME_KEY);
-      g_settings_reset (priv->interface_settings, ICON_THEME_KEY);
-    }
-
-  g_free (theme_name);
-}
 
 static void
 cc_ua_panel_set_shortcut_label (CcUaPanel  *self,
@@ -476,7 +305,8 @@ shell_vanished_cb (GDBusConnection *connection,
 {
   CcUaPanelPrivate *priv = self->priv;
 
-  gtk_widget_hide (WID (priv->builder, "zoom_frame"));
+  gtk_widget_hide (WID (priv->builder, "zoom_label_box"));
+  gtk_widget_hide (WID (priv->builder, "zoom_value_box"));
 }
 
 static void
@@ -487,7 +317,80 @@ shell_appeared_cb (GDBusConnection *connection,
 {
   CcUaPanelPrivate *priv = self->priv;
 
-  gtk_widget_show (WID (priv->builder, "zoom_frame"));
+  gtk_widget_show (WID (priv->builder, "zoom_label_box"));
+  gtk_widget_show (WID (priv->builder, "zoom_value_box"));
+}
+
+static gboolean
+get_large_text_mapping (GValue   *value,
+                        GVariant *variant,
+                        gpointer  user_data)
+{
+  gdouble factor;
+  gboolean large;
+
+  factor = g_variant_get_double (variant);
+  large = factor > DPI_FACTOR_NORMAL;
+  g_value_set_boolean (value, large);
+
+  return TRUE;
+}
+
+static GVariant *
+set_large_text_mapping (const GValue       *value,
+                        const GVariantType *expected_type,
+                        gpointer            user_data)
+{
+  gboolean large;
+  GSettings *settings = user_data;
+  GVariant *ret = NULL;
+
+  large = g_value_get_boolean (value);
+  if (large)
+    ret = g_variant_new_double (DPI_FACTOR_LARGE);
+  else
+    g_settings_reset (settings, KEY_TEXT_SCALING_FACTOR);
+
+  return ret;
+}
+
+static gboolean
+get_contrast_mapping (GValue   *value,
+                      GVariant *variant,
+                      gpointer  user_data)
+{
+  const char *theme;
+  gboolean hc;
+
+  theme = g_variant_get_string (variant, NULL);
+  hc = (g_strcmp0 (theme, HIGH_CONTRAST_THEME) == 0);
+  g_value_set_boolean (value, hc);
+
+  return TRUE;
+}
+
+static GVariant *
+set_contrast_mapping (const GValue       *value,
+                      const GVariantType *expected_type,
+                      gpointer            user_data)
+{
+  gboolean hc;
+  GSettings *settings = user_data;
+  GVariant *ret = NULL;
+
+  hc = g_value_get_boolean (value);
+  if (hc)
+    {
+      ret = g_variant_new_string (HIGH_CONTRAST_THEME);
+      g_settings_set_string (settings, KEY_ICON_THEME, HIGH_CONTRAST_THEME);
+    }
+  else
+    {
+      g_settings_reset (settings, KEY_GTK_THEME);
+      g_settings_reset (settings, KEY_ICON_THEME);
+    }
+
+  return ret;
 }
 
 static void
@@ -495,17 +398,23 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
 {
   CcUaPanelPrivate *priv = self->priv;
 
-  text_scaling_factor_notify_cb (priv->interface_settings, "text-scaling-factor", self);
-  g_signal_connect (priv->interface_settings, "changed::text-scaling-factor", G_CALLBACK (text_scaling_factor_notify_cb), self);
-
-  g_signal_connect (WID (priv->builder, "seeing_contrast_combobox"), "changed",
-                    G_CALLBACK (contrast_combobox_changed_cb), self);
-
-  g_signal_connect (WID (priv->builder, "seeing_text_size_combobox"), "changed",
-                    G_CALLBACK (text_scaling_factor_combo_box_changed), self);
+  g_settings_bind_with_mapping (priv->interface_settings, KEY_GTK_THEME,
+                                WID (priv->builder, "seeing_contrast_switch"),
+                                "active", G_SETTINGS_BIND_DEFAULT,
+                                get_contrast_mapping,
+                                set_contrast_mapping,
+                                priv->interface_settings,
+                                NULL);
+  g_settings_bind_with_mapping (priv->interface_settings, KEY_TEXT_SCALING_FACTOR,
+                                WID (priv->builder, "seeing_large_text_switch"),
+                                "active", G_SETTINGS_BIND_DEFAULT,
+                                get_large_text_mapping,
+                                set_large_text_mapping,
+                                priv->interface_settings,
+                                NULL);
 
   g_settings_bind (priv->kb_settings, "togglekeys-enable",
-                   WID (priv->builder, "seeing_enable_toggle_keys_checkbutton"), "active",
+                   WID (priv->builder, "seeing_toggle_keys_switch"), "active",
                    G_SETTINGS_BIND_DEFAULT);
 
   priv->shell_watch_id = g_bus_watch_name (G_BUS_TYPE_SESSION,
@@ -527,9 +436,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                               WID (priv->builder, "seeing_reader_switch"),
                               NULL);
 
-  cc_ua_panel_set_shortcut_label (self, "seeing_contrast_toggle_keybinding_label", "toggle-contrast");
-  cc_ua_panel_set_shortcut_label (self, "seeing_increase_size_keybinding_label", "increase-text-size");
-  cc_ua_panel_set_shortcut_label (self, "seeing_decrease_size_keybinding_label", "decrease-text-size");
   cc_ua_panel_set_shortcut_label (self, "seeing_zoom_enable_keybinding_label", "magnifier");
   cc_ua_panel_set_shortcut_label (self, "seeing_zoom_in_keybinding_label", "magnifier-zoom-in");
   cc_ua_panel_set_shortcut_label (self, "seeing_zoom_out_keybinding_label", "magnifier-zoom-out");
@@ -612,17 +518,6 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
 }
 
 /* typing/keyboard section */
-static gboolean
-typing_keyboard_preferences_clicked (GtkButton  *button,
-                                     CcUaPanel  *panel)
-{
-  CcShell *shell;
-
-  shell = cc_panel_get_shell (CC_PANEL (panel));
-  cc_shell_set_active_panel_from_id (shell, "keyboard", NULL, NULL);
-
-  return TRUE;
-}
 
 static void
 cc_ua_panel_init_keyboard (CcUaPanel *self)
@@ -632,10 +527,11 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
 
   /* Typing assistant (on-screen keyboard) */
   w = WID (priv->builder, "typing_assistant_switch");
-  settings_on_off_editor_new (priv, priv->application_settings, "screen-keyboard-enabled", w, typing_assistant_section);
+  g_settings_bind (priv->application_settings, "screen-keyboard-enabled",
+                   w, "active", G_SETTINGS_BIND_DEFAULT);
 
   /* enable shortcuts */
-  w = WID (priv->builder, "typing_keyboard_toggle_checkbox");
+  w = WID (priv->builder, "typing_keyboard_toggle_switch");
   g_settings_bind (priv->kb_settings, "enable", w, "active", G_SETTINGS_BIND_DEFAULT);
 
   /* sticky keys */
@@ -677,10 +573,6 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
 
   w = WID (priv->builder, "typing_bounce_keys_beep_rejected_checkbutton");
   g_settings_bind (priv->kb_settings, "bouncekeys-beep-reject", w, "active", G_SETTINGS_BIND_NO_SENSITIVITY);
-
-  g_signal_connect (WID (priv->builder, "typing_keyboard_preferences_link"),
-                    "activate-link",
-                    G_CALLBACK (typing_keyboard_preferences_clicked), self);
 }
 
 /* mouse/pointing & clicking section */
@@ -772,10 +664,6 @@ cc_ua_panel_init (CcUaPanel *self)
     }
 
   priv->interface_settings = g_settings_new ("org.gnome.desktop.interface");
-  g_signal_connect (priv->interface_settings, "changed",
-                    G_CALLBACK (interface_settings_changed_cb), self);
-  interface_settings_changed_cb (priv->interface_settings, "gtk-theme", self);
-
   priv->wm_settings = g_settings_new ("org.gnome.desktop.wm.preferences");
   priv->kb_settings = g_settings_new ("org.gnome.desktop.a11y.keyboard");
   priv->mouse_settings = g_settings_new ("org.gnome.desktop.a11y.mouse");
