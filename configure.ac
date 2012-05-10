@@ -113,7 +113,8 @@ PKG_CHECK_MODULES(COLOR_PANEL, $COMMON_MODULES colord >= 0.1.8)
 PKG_CHECK_MODULES(PRINTERS_PANEL, $COMMON_MODULES
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
 PKG_CHECK_MODULES(REGION_PANEL, $COMMON_MODULES
-                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
+                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
+                  xkbfile)
 PKG_CHECK_MODULES(SCREEN_PANEL, $COMMON_MODULES)
 PKG_CHECK_MODULES(SOUND_PANEL, $COMMON_MODULES libxml-2.0
                   libcanberra-gtk3 >= $CANBERRA_REQUIRED_VERSION
@@ -133,6 +134,13 @@ PKG_CHECK_MODULES(WACOM_PANEL, $COMMON_MODULES
 
 GDESKTOP_PREFIX=`$PKG_CONFIG --variable prefix gsettings-desktop-schemas`
 AC_SUBST(GDESKTOP_PREFIX)
+
+AC_ARG_WITH(xkb-config-root,
+        AS_HELP_STRING([--with-xkb-config-root=<paths>],
+                       [Set default XKB config root (default: ${datadir}/X11/xkb)]),
+        [XKBCONFIGROOT="$withval"],
+        [XKBCONFIGROOT=${datadir}/X11/xkb])
+AC_SUBST([XKBCONFIGROOT])
 
 # Check for NetworkManager ~0.9
 PKG_CHECK_MODULES(NETWORK_MANAGER, NetworkManager >= $NETWORK_MANAGER_REQUIRED_VERSION

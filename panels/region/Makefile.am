@@ -1,12 +1,15 @@
 # This is used in PANEL_CFLAGS
 cappletname = region
 
+XKBCONFIGROOT=@XKBCONFIGROOT@
+
 INCLUDES =						\
 	$(PANEL_CFLAGS)					\
 	$(REGION_PANEL_CFLAGS)				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
+	-DDFLT_XKB_CONFIG_ROOT=\"$(XKBCONFIGROOT)\"	\
 	-I$(srcdir)/../common/				\
 	$(NULL)
 
@@ -24,7 +27,9 @@ libregion_la_SOURCES =	\
 	gnome-region-panel-system.c \
 	gnome-region-panel-system.h \
 	gnome-region-panel-input.c \
-	gnome-region-panel-input.h
+	gnome-region-panel-input.h \
+	xkb-rules-db.c \
+	xkb-rules-db.h
 
 libregion_la_LIBADD = $(PANEL_LIBS) $(REGION_PANEL_LIBS) $(builddir)/../common/liblanguage.la
 

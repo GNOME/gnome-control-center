@@ -26,6 +26,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 
+#include "xkb-rules-db.h"
 #include "gnome-region-panel-input.h"
 
 #define WID(s) GTK_WIDGET(gtk_builder_get_object (builder, s))
@@ -50,108 +51,22 @@
  * - Allow changing shortcuts ?
  */
 
+typedef struct _InputSource InputSource;
 struct _InputSource
 {
   const gchar *name;
-  const gchar *layout;
-  const gchar *engine;
+  const gchar *short_name;
+  const gchar *xkb_layout;
+  const gchar *xkb_variant;
+  const gchar *ibus_engine;
 };
 
-static const struct _InputSource input_sources[] =
-  {
-    { "English (US)",                                   "us",   "" },
-    { "Catalan",                                        "ad",   "" },
-    { "Afghani",                                        "af",   "" },
-    { "Arabic",                                         "ara",  "" },
-    { "Albanian",                                       "al",   "" },
-    { "Armenian",                                       "am",   "" },
-    { "German (Austria)",                               "at",   "" },
-    { "Azerbaijani",                                    "az",   "" },
-    { "Belarusian",                                     "by",   "" },
-    { "Belgian",                                        "be",   "" },
-    { "Bengali",                                        "bd",   "" },
-    { "Indian",                                         "in",   "" },
-    { "Bosnian",                                        "ba",   "" },
-    { "Portuguese (Brazil)",                            "br",   "" },
-    { "Bulgarian",                                      "bg",   "" },
-    { "Arabic (Morocco)",                               "ma",   "" },
-    { "English (Cameroon)",                             "cm",   "" },
-    { "Burmese",                                        "mm",   "" },
-    { "French (Canada)",                                "ca",   "" },
-    { "French (Democratic Republic of the Congo)",      "cd",   "" },
-    { "Chinese",                                        "cn",   "" },
-    { "Croatian",                                       "hr",   "" },
-    { "Czech",                                          "cz",   "" },
-    { "Danish",                                         "dk",   "" },
-    { "Dutch",                                          "nl",   "" },
-    { "Dzongkha",                                       "bt",   "" },
-    { "Estonian",                                       "ee",   "" },
-    { "Persian",                                        "ir",   "" },
-    { "Iraqi",                                          "iq",   "" },
-    { "Faroese",                                        "fo",   "" },
-    { "Finnish",                                        "fi",   "" },
-    { "French",                                         "fr",   "" },
-    { "English (Ghana)",                                "gh",   "" },
-    { "French (Guinea)",                                "gn",   "" },
-    { "Georgian",                                       "ge",   "" },
-    { "German",                                         "de",   "" },
-    { "Greek",                                          "gr",   "" },
-    { "Hungarian",                                      "hu",   "" },
-    { "Icelandic",                                      "is",   "" },
-    { "Hebrew",                                         "il",   "" },
-    { "Italian",                                        "it",   "" },
-    { "Japanese",                                       "jp",   "anthy" },
-    { "Kyrgyz",                                         "kg",   "" },
-    { "Khmer (Cambodia)",                               "kh",   "" },
-    { "Kazakh",                                         "kz",   "" },
-    { "Lao",                                            "la",   "" },
-    { "Spanish (Latin American)",                       "latam","" },
-    { "Lithuanian",                                     "lt",   "" },
-    { "Latvian",                                        "lv",   "" },
-    { "Maori",                                          "mao",  "" },
-    { "Montenegrin",                                    "me",   "" },
-    { "Macedonian",                                     "mk",   "" },
-    { "Maltese",                                        "mt",   "" },
-    { "Mongolian",                                      "mn",   "" },
-    { "Norwegian",                                      "no",   "" },
-    { "Polish",                                         "pl",   "" },
-    { "Portuguese",                                     "pt",   "" },
-    { "Romanian",                                       "ro",   "" },
-    { "Russian",                                        "ru",   "" },
-    { "Serbian",                                        "rs",   "" },
-    { "Slovenian",                                      "si",   "" },
-    { "Slovak",                                         "sk",   "" },
-    { "Spanish",                                        "es",   "" },
-    { "Swedish",                                        "se",   "" },
-    { "German (Switzerland)",                           "ch",   "" },
-    { "Arabic (Syria)",                                 "sy",   "" },
-    { "Tajik",                                          "tj",   "" },
-    { "Sinhala",                                        "lk",   "" },
-    { "Thai",                                           "th",   "" },
-    { "Turkish",                                        "tr",   "" },
-    { "Taiwanese",                                      "tw",   "" },
-    { "Ukrainian",                                      "ua",   "" },
-    { "English (UK)",                                   "gb",   "" },
-    { "Uzbek",                                          "uz",   "" },
-    { "Vietnamese",                                     "vn",   "" },
-    { "Korean",                                         "kr",   "hangul" },
-    { "Irish",                                          "ie",   "" },
-    { "Urdu (Pakistan)",                                "pk",   "" },
-    { "Dhivehi",                                        "mv",   "" },
-    { "English (South Africa)",                         "za",   "" },
-    { "Esperanto",                                      "epo",  "" },
-    { "Nepali",                                         "np",   "" },
-    { "English (Nigeria)",                              "ng",   "" },
-    { "Amharic",                                        "et",   "" },
-    { "Wolof",                                          "sn",   "" },
-    { "Braille",                                        "brai", "" },
-    { "Turkmen",                                        "tm",   "" },
-    { "Bambara",                                        "ml",   "" },
-    { "Swahili (Tanzania)",                             "tz",   "" },
-    { "Swahili (Kenya)",                                "ke",   "" },
-    { "Tswana",                                         "bw",   "" },
-    { "Filipino",                                       "ph",   "" }
-  };
+static const InputSource ibus_sources[] = {
+  { "Chinese (Bopomofo)",       "般",   "us",   "",     "bopomofo" },
+  { "Chinese (Pinyin)",         "拼",   "us",   "",     "pinyin" },
+  { "Japanese (Anthy)",         "あ",   "jp",   "",     "anthy" },
+  { "Korean (Hangul)",          "한",   "us",   "",     "hangul" },
+};
 
 #define GNOME_DESKTOP_INPUT_SOURCES_DIR "org.gnome.desktop.input-sources"
 
@@ -165,24 +80,17 @@ static gboolean   input_chooser_get_selected (GtkWidget     *chooser,
                                               GtkTreeModel **model,
                                               GtkTreeIter   *iter);
 
-enum
-{
-  COL_NAME,
-  COL_LAYOUT,
-  COL_ENGINE
-};
-
 static gboolean
-add_source_to_hash (GtkTreeModel *model,
-                    GtkTreePath  *path,
-                    GtkTreeIter  *iter,
-                    gpointer      data)
+add_source_to_table (GtkTreeModel *model,
+                     GtkTreePath  *path,
+                     GtkTreeIter  *iter,
+                     gpointer      data)
 {
   GHashTable *hash = data;
   gchar *name;
 
-  gtk_tree_model_get (model, iter, COL_NAME, &name, -1);
-  g_hash_table_insert (hash, name, GINT_TO_POINTER (1));
+  gtk_tree_model_get (model, iter, 0, &name, -1);
+  g_hash_table_add (hash, name);
 
   return FALSE;
 }
@@ -191,30 +99,35 @@ static void
 populate_model (GtkListStore *store,
                 GtkListStore *active_sources)
 {
-  GHashTable *active_hash;
+  GHashTable *active_sources_table;
   GtkTreeIter iter;
+  GSList *all_sources, *tmp;
   gint i;
 
-  active_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  active_sources_table = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
   gtk_tree_model_foreach (GTK_TREE_MODEL (active_sources),
-                          add_source_to_hash,
-                          active_hash);
+                          add_source_to_table,
+                          active_sources_table);
 
-  for (i = 0; i < G_N_ELEMENTS (input_sources); ++i)
+  all_sources = xkb_rules_db_get_all_layout_names ();
+
+  for (i = 0; i < G_N_ELEMENTS (ibus_sources); ++i)
+    all_sources = g_slist_prepend (all_sources, (gpointer)ibus_sources[i].name);
+
+  for (tmp = all_sources; tmp; tmp = tmp->next)
     {
-      if (g_hash_table_lookup (active_hash, input_sources[i].name))
+      if (g_hash_table_contains (active_sources_table, tmp->data))
         continue;
 
       gtk_list_store_append (store, &iter);
       gtk_list_store_set (store, &iter,
-                          COL_NAME, input_sources[i].name,
-                          COL_LAYOUT, input_sources[i].layout,
-                          COL_ENGINE, input_sources[i].engine,
+                          0, tmp->data,
                           -1);
     }
 
-  g_hash_table_destroy (active_hash);
+  g_slist_free (all_sources);
+  g_hash_table_destroy (active_sources_table);
 }
 
 static void
@@ -222,21 +135,17 @@ populate_with_active_sources (GtkListStore *store)
 {
   GVariant *sources;
   GVariantIter iter;
-  const gchar *layout;
-  const gchar *engine;
   const gchar *name;
   GtkTreeIter tree_iter;
 
   sources = g_settings_get_value (is_settings, KEY_INPUT_SOURCES);
 
   g_variant_iter_init (&iter, sources);
-  while (g_variant_iter_next (&iter, "(&s&s&s)", &name, &layout, &engine))
+  while (g_variant_iter_next (&iter, "(&s&s&s&s&s)", &name, NULL, NULL, NULL, NULL))
     {
       gtk_list_store_append (store, &tree_iter);
       gtk_list_store_set (store, &tree_iter,
-                          COL_NAME, name,
-                          COL_LAYOUT, layout,
-                          COL_ENGINE, engine,
+                          0, name,
                           -1);
     }
 
@@ -248,23 +157,36 @@ update_configuration (GtkTreeModel *model)
 {
   GtkTreeIter iter;
   gchar *name;
-  gchar *layout;
-  gchar *engine;
+  const gchar *short_name = "";
+  const gchar *xkb_layout = "";
+  const gchar *xkb_variant = "";
+  const gchar *ibus_engine = "";
   GVariantBuilder builder;
+  gint i;
 
-  g_variant_builder_init (&builder, G_VARIANT_TYPE ("a(sss)"));
+  g_variant_builder_init (&builder, G_VARIANT_TYPE ("a(sssss)"));
 
   gtk_tree_model_get_iter_first (model, &iter);
   do {
     gtk_tree_model_get (model, &iter,
-                        COL_NAME, &name,
-                        COL_LAYOUT, &layout,
-                        COL_ENGINE, &engine,
+                        0, &name,
                         -1);
-    g_variant_builder_add (&builder, "(sss)", name, layout, engine);
+
+    if (xkb_rules_db_get_layout_info (name, &short_name, &xkb_layout, &xkb_variant))
+      ibus_engine = "";
+    else
+      for (i = 0; i < G_N_ELEMENTS (ibus_sources); ++i)
+        if (strcmp (name, ibus_sources[i].name) == 0)
+          {
+            short_name = ibus_sources[i].short_name;
+            xkb_layout = ibus_sources[i].xkb_layout;
+            xkb_variant = ibus_sources[i].xkb_variant;
+            ibus_engine = ibus_sources[i].ibus_engine;
+            break;
+          }
+
+    g_variant_builder_add (&builder, "(sssss)", name, short_name, xkb_layout, xkb_variant, ibus_engine);
     g_free (name);
-    g_free (layout);
-    g_free (engine);
   } while (gtk_tree_model_iter_next (model, &iter));
 
   g_settings_set_value (is_settings, KEY_INPUT_SOURCES, g_variant_builder_end (&builder));
@@ -358,14 +280,10 @@ chooser_response (GtkWidget *chooser, gint response_id, gpointer data)
           GtkTreeView *my_tv;
           GtkListStore *my_model;
           GtkTreeIter my_iter;
-          gchar *layout;
-          gchar *engine;
           gchar *name;
 
           gtk_tree_model_get (model, &iter,
-                              COL_NAME, &name,
-                              COL_LAYOUT, &layout,
-                              COL_ENGINE, &engine,
+                              0, &name,
                               -1);
 
           my_tv = GTK_TREE_VIEW (WID ("active_input_sources"));
@@ -374,14 +292,9 @@ chooser_response (GtkWidget *chooser, gint response_id, gpointer data)
           gtk_list_store_append (my_model, &my_iter);
 
           gtk_list_store_set (my_model, &my_iter,
-                              COL_NAME, name,
-                              COL_LAYOUT, layout,
-                              COL_ENGINE, engine,
+                              0, name,
                               -1);
-
           g_free (name);
-          g_free (engine);
-          g_free (layout);
 
           gtk_tree_selection_select_iter (gtk_tree_view_get_selection (my_tv), &my_iter);
 
@@ -496,8 +409,11 @@ show_selected_layout (GtkButton *button, gpointer data)
   GtkBuilder *builder = data;
   GtkTreeModel *model;
   GtkTreeIter iter;
-  gchar *layout;
+  gchar *name;
   gchar *kbd_viewer_args;
+  const gchar *xkb_layout = "";
+  const gchar *xkb_variant = "";
+  gint i;
 
   g_debug ("show selected layout");
 
@@ -505,15 +421,29 @@ show_selected_layout (GtkButton *button, gpointer data)
     return;
 
   gtk_tree_model_get (model, &iter,
-                      COL_LAYOUT, &layout,
+                      0, &name,
                       -1);
 
-  kbd_viewer_args = g_strdup_printf ("gkbd-keyboard-display -l %s", layout);
+  if (!xkb_rules_db_get_layout_info (name, NULL, &xkb_layout, &xkb_variant))
+    for (i = 0; i < G_N_ELEMENTS (ibus_sources); ++i)
+      if (strcmp (name, ibus_sources[i].name) == 0)
+        {
+          xkb_layout = ibus_sources[i].xkb_layout;
+          xkb_variant = ibus_sources[i].xkb_variant;
+          break;
+        }
+
+  if (xkb_variant[0])
+    kbd_viewer_args = g_strdup_printf ("gkbd-keyboard-display -l \"%s\t%s\"",
+                                       xkb_layout, xkb_variant);
+  else
+    kbd_viewer_args = g_strdup_printf ("gkbd-keyboard-display -l %s",
+                                       xkb_layout);
 
   g_spawn_command_line_async (kbd_viewer_args, NULL);
 
   g_free (kbd_viewer_args);
-  g_free (layout);
+  g_free (name);
 }
 
 /* Main setup {{{1 */
@@ -556,11 +486,10 @@ setup_input_tabs (GtkBuilder    *builder,
   column = gtk_tree_view_column_new ();
   cell = gtk_cell_renderer_text_new ();
   gtk_tree_view_column_pack_start (column, cell, TRUE);
-  gtk_tree_view_column_add_attribute (column, cell, "text", COL_NAME);
+  gtk_tree_view_column_add_attribute (column, cell, "text", 0);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
-  /* layout, engine, name */
-  store = gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+  store = gtk_list_store_new (1, G_TYPE_STRING);
 
   populate_with_active_sources (store);
 
@@ -710,7 +639,7 @@ filter_func (GtkTreeModel *model,
     return TRUE;
 
   gtk_tree_model_get (model, iter,
-                      COL_NAME, &name,
+                      0, &name,
                       -1);
 
   pattern = search_pattern_list;
@@ -764,7 +693,7 @@ input_chooser_new (GtkBuilder *main_builder)
   visible_column =
     gtk_tree_view_column_new_with_attributes ("Input Sources",
                                               gtk_cell_renderer_text_new (),
-                                              "text", COL_NAME,
+                                              "text", 0,
                                               NULL);
 
   gtk_window_set_transient_for (GTK_WINDOW (chooser),
@@ -793,7 +722,7 @@ input_chooser_new (GtkBuilder *main_builder)
                                                                                                   "active_input_sources")))));
 
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
-                                        COL_NAME, GTK_SORT_ASCENDING);
+                                        0, GTK_SORT_ASCENDING);
 
   gtk_tree_model_filter_set_visible_func (filtered_model,
                                           filter_func,
