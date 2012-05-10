@@ -468,29 +468,22 @@ cc_notebook_remove_page (CcNotebook *self,
                          GtkWidget  *widget)
 {
         ClutterActorIter iter;
-        ClutterActor *child, *frame, *selected_frame;
+        ClutterActor *child, *frame;
         int index;
-        gboolean found_current;
 
         g_return_if_fail (CC_IS_NOTEBOOK (self));
         g_return_if_fail (GTK_IS_WIDGET (widget));
         g_return_if_fail (widget != self->priv->selected_page);
 
-        found_current = FALSE;
         frame = g_object_get_data (G_OBJECT (widget), "cc-notebook-frame");
-        selected_frame = g_object_get_data (G_OBJECT (self->priv->selected_page), "cc-notebook-frame");
 
 	index = 0;
         clutter_actor_iter_init (&iter, self->priv->bin);
         while (clutter_actor_iter_next (&iter, &child)) {
                 if (frame == child) {
-			if (found_current ||
-			    setup_delayed_remove (self, frame) == FALSE) {
+			if (setup_delayed_remove (self, frame) == FALSE)
 				clutter_actor_iter_remove (&iter);
-			}
                         break;
-                } else if (selected_frame == child) {
-			found_current = TRUE;
 		}
 
 		index++;
