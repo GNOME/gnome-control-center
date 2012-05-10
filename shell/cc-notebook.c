@@ -56,6 +56,9 @@ struct _CcNotebookPrivate
 
         GtkWidget *selected_page;
         GList *pages; /* GList of GtkWidgets */
+        GList *removed_pages; /* GList of RemoveData, see setup_delayed_remove() */
+
+        //FIXME finalize
 };
 
 enum
@@ -103,6 +106,15 @@ cc_notebook_set_property (GObject      *gobject,
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (gobject, prop_id, pspec);
         }
+}
+
+static void
+cc_notebook_finalize (GObject *gobject)
+{
+        CcNotebook *self = CC_NOTEBOOK (gobject);
+
+	g_list_free_full (self->priv->removed_pages, (GDestroyNotify) g_free);
+	self->priv->removed_pages = NULL;
 }
 
 static GtkSizeRequestMode
@@ -244,6 +256,7 @@ cc_notebook_class_init (CcNotebookClass *klass)
 
         gobject_class->get_property = cc_notebook_get_property;
         gobject_class->set_property = cc_notebook_set_property;
+        gobject_class->finalize = cc_notebook_finalize;
         g_object_class_install_properties (gobject_class, LAST_PROP, obj_props);
 
 	widget_class->get_request_mode = cc_notebook_get_request_mode;
@@ -281,7 +294,7 @@ on_embed_size_allocate (GtkWidget     *embed,
 
 	/* This stops the non-animated scrolling from happening
 	 * if we're still scrolling there */
-	if (self->priv->last_width == allocation->width)
+	if (clutter_actor_get_transition (self->priv->scroll, "scroll-to") != NULL)
 		return;
 
         self->priv->last_width = allocation->width;
@@ -413,6 +426,43 @@ cc_notebook_add_page (CcNotebook *self,
         gtk_widget_queue_resize (GTK_WIDGET (self));
 }
 
+typedef struct {
+	CcNotebook   *notebook;
+	ClutterActor *frame;
+} RemoveData;
+
+static void
+remove_on_complete (ClutterTimeline *timeline,
+		    RemoveData      *data)
+{
+	data->notebook->priv->removed_pages = g_list_remove (data->notebook->priv->removed_pages, data);
+	clutter_actor_remove_child (data->notebook->priv->bin,
+				    data->frame);
+	g_free (data);
+}
+
+static gboolean
+setup_delayed_remove (CcNotebook   *self,
+		      ClutterActor *frame)
+{
+        ClutterTransition *transition;
+        RemoveData *data;
+
+	transition = clutter_actor_get_transition (self->priv->scroll, "scroll-to");
+	if (transition == NULL)
+		return FALSE;
+
+	data = g_new0 (RemoveData, 1);
+	data->notebook = self;
+	data->frame = frame;
+
+	self->priv->removed_pages = g_list_prepend (self->priv->removed_pages, data);
+	g_signal_connect (transition, "completed",
+			  G_CALLBACK (remove_on_complete), data);
+
+	return TRUE;
+}
+
 void
 cc_notebook_remove_page (CcNotebook *self,
                          GtkWidget  *widget)
@@ -421,7 +471,6 @@ cc_notebook_remove_page (CcNotebook *self,
         ClutterActor *child, *frame, *selected_frame;
         int index;
         gboolean found_current;
-        ClutterPoint pos;
 
         g_return_if_fail (CC_IS_NOTEBOOK (self));
         g_return_if_fail (GTK_IS_WIDGET (widget));
@@ -435,7 +484,10 @@ cc_notebook_remove_page (CcNotebook *self,
         clutter_actor_iter_init (&iter, self->priv->bin);
         while (clutter_actor_iter_next (&iter, &child)) {
                 if (frame == child) {
-			clutter_actor_iter_remove (&iter);
+			if (found_current ||
+			    setup_delayed_remove (self, frame) == FALSE) {
+				clutter_actor_iter_remove (&iter);
+			}
                         break;
                 } else if (selected_frame == child) {
 			found_current = TRUE;
@@ -446,15 +498,6 @@ cc_notebook_remove_page (CcNotebook *self,
 
         self->priv->pages = g_list_remove (self->priv->pages, widget);
         gtk_widget_queue_resize (GTK_WIDGET (self));
-
-	/* The current page is before the one we removed, so no
-	 * need to shift the scroll view */
-        if (found_current)
-		return;
-
-        pos.y = 0;
-        pos.x = self->priv->last_width * index;
-        clutter_scroll_actor_scroll_to_point (CLUTTER_SCROLL_ACTOR (self->priv->scroll), &pos);
 }
 
 GtkWidget *
