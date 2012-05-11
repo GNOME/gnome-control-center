@@ -57,8 +57,6 @@ struct _CcNotebookPrivate
         GtkWidget *selected_page;
         GList *pages; /* GList of GtkWidgets */
         GList *removed_pages; /* GList of RemoveData, see setup_delayed_remove() */
-
-        //FIXME finalize
 };
 
 enum
