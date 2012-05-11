@@ -113,6 +113,8 @@ cc_notebook_finalize (GObject *gobject)
 
 	g_list_free_full (self->priv->removed_pages, (GDestroyNotify) g_free);
 	self->priv->removed_pages = NULL;
+
+	G_OBJECT_CLASS (cc_notebook_parent_class)->finalize (gobject);
 }
 
 static GtkSizeRequestMode
