@@ -1686,6 +1686,7 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
                 g_string_append_printf (str, _("%d Mb/s"), speed);
         }
         gtk_label_set_label (GTK_LABEL (widget), str->str);
+        gtk_widget_set_tooltip_text (widget, panel_device_state_reason_to_localized_string (device));
 
         /* set up options button */
         wid_name = g_strdup_printf ("button_%s_options", page_name);

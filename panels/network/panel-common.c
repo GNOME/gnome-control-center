@@ -1,6 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
  *
  * Copyright (C) 2010 Richard Hughes <richard@hughsie.com>
+ * Copyright (C) 2012 Thomas Bechtold <thomasbechtold@jpberlin.de>
  *
  * Licensed under the GNU General Public License Version 2
  *
@@ -275,6 +276,198 @@ panel_vpn_state_to_localized_string (NMVPNConnectionState type)
         default:
                 /* TRANSLATORS: VPN status */
                 value = _("Status unknown (missing)");
+                break;
+        }
+        return value;
+}
+
+/**
+ * panel_device_state_reason_to_localized_string:
+ **/
+const gchar *
+panel_device_state_reason_to_localized_string (NMDevice *device)
+{
+        const gchar *value = NULL;
+        NMDeviceStateReason state_reason;
+
+        /* we only want the StateReason's we care about */
+        nm_device_get_state_reason (device, &state_reason);
+        switch (state_reason) {
+        case NM_DEVICE_STATE_REASON_CONFIG_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("Configuration failed");
+                break;
+        case NM_DEVICE_STATE_REASON_IP_CONFIG_UNAVAILABLE:
+                /* TRANSLATORS: device status reason */
+                value = _("IP configuration failed");
+                break;
+        case NM_DEVICE_STATE_REASON_IP_CONFIG_EXPIRED:
+                /* TRANSLATORS: device status reason */
+                value = _("IP configuration expired");
+                break;
+        case NM_DEVICE_STATE_REASON_NO_SECRETS:
+                /* TRANSLATORS: device status reason */
+                value = _("Secrets were required, but not provided");
+                break;
+        case NM_DEVICE_STATE_REASON_SUPPLICANT_DISCONNECT:
+                /* TRANSLATORS: device status reason */
+                value = _("802.1x supplicant disconnected");
+                break;
+        case NM_DEVICE_STATE_REASON_SUPPLICANT_CONFIG_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("802.1x supplicant configuration failed");
+                break;
+        case NM_DEVICE_STATE_REASON_SUPPLICANT_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("802.1x supplicant failed");
+                break;
+        case NM_DEVICE_STATE_REASON_SUPPLICANT_TIMEOUT:
+                /* TRANSLATORS: device status reason */
+                value = _("802.1x supplicant took too long to authenticate");
+                break;
+        case NM_DEVICE_STATE_REASON_PPP_START_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("PPP service failed to start");
+                break;
+        case NM_DEVICE_STATE_REASON_PPP_DISCONNECT:
+                /* TRANSLATORS: device status reason */
+                value = _("PPP service disconnected");
+                break;
+        case NM_DEVICE_STATE_REASON_PPP_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("PPP failed");
+                break;
+        case NM_DEVICE_STATE_REASON_DHCP_START_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("DHCP client failed to start");
+                break;
+        case NM_DEVICE_STATE_REASON_DHCP_ERROR:
+                /* TRANSLATORS: device status reason */
+                value = _("DHCP client error");
+                break;
+        case NM_DEVICE_STATE_REASON_DHCP_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("DHCP client failed");
+                break;
+        case NM_DEVICE_STATE_REASON_SHARED_START_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("Shared connection service failed to start");
+                break;
+        case NM_DEVICE_STATE_REASON_SHARED_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("Shared connection service failed");
+                break;
+        case NM_DEVICE_STATE_REASON_AUTOIP_START_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("AutoIP service failed to start");
+                break;
+        case NM_DEVICE_STATE_REASON_AUTOIP_ERROR:
+                /* TRANSLATORS: device status reason */
+                value = _("AutoIP service error");
+                break;
+        case NM_DEVICE_STATE_REASON_AUTOIP_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("AutoIP service failed");
+                break;
+        case NM_DEVICE_STATE_REASON_MODEM_BUSY:
+                /* TRANSLATORS: device status reason */
+                value = _("Line busy");
+                break;
+        case NM_DEVICE_STATE_REASON_MODEM_NO_DIAL_TONE:
+                /* TRANSLATORS: device status reason */
+                value = _("No dial tone");
+                break;
+        case NM_DEVICE_STATE_REASON_MODEM_NO_CARRIER:
+                /* TRANSLATORS: device status reason */
+                value = _("No carrier could be established");
+                break;
+        case NM_DEVICE_STATE_REASON_MODEM_DIAL_TIMEOUT:
+                /* TRANSLATORS: device status reason */
+                value = _("Dialing request timed out");
+                break;
+        case NM_DEVICE_STATE_REASON_MODEM_DIAL_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("Dialing attempt failed");
+                break;
+        case NM_DEVICE_STATE_REASON_MODEM_INIT_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("Modem initialization failed");
+                break;
+        case NM_DEVICE_STATE_REASON_GSM_APN_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("Failed to select the specified APN");
+                break;
+        case NM_DEVICE_STATE_REASON_GSM_REGISTRATION_NOT_SEARCHING:
+                /* TRANSLATORS: device status reason */
+                value = _("Not searching for networks");
+                break;
+        case NM_DEVICE_STATE_REASON_GSM_REGISTRATION_DENIED:
+                /* TRANSLATORS: device status reason */
+                value = _("Network registration denied");
+                break;
+        case NM_DEVICE_STATE_REASON_GSM_REGISTRATION_TIMEOUT:
+                /* TRANSLATORS: device status reason */
+                value = _("Network registration timed out");
+                break;
+        case NM_DEVICE_STATE_REASON_GSM_REGISTRATION_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("Failed to register with the requested network");
+                break;
+        case NM_DEVICE_STATE_REASON_GSM_PIN_CHECK_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("PIN check failed");
+                break;
+        case NM_DEVICE_STATE_REASON_FIRMWARE_MISSING:
+                /* TRANSLATORS: device status reason */
+                value = _("Firmware for the device may be missing");
+                break;
+        case NM_DEVICE_STATE_REASON_CONNECTION_REMOVED:
+                /* TRANSLATORS: device status reason */
+                value = _("Connection disappeared");
+                break;
+        case NM_DEVICE_STATE_REASON_CARRIER:
+                /* TRANSLATORS: device status reason */
+                value = _("Carrier/link changed");
+                break;
+        case NM_DEVICE_STATE_REASON_CONNECTION_ASSUMED:
+                /* TRANSLATORS: device status reason */
+                value = _("Existing connection was assumed");
+                break;
+        case NM_DEVICE_STATE_REASON_MODEM_NOT_FOUND:
+                /* TRANSLATORS: device status reason */
+                value = _("Modem not found");
+                break;
+        case NM_DEVICE_STATE_REASON_BT_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("Bluetooth connection failed");
+                break;
+        case NM_DEVICE_STATE_REASON_GSM_SIM_NOT_INSERTED:
+                /* TRANSLATORS: device status reason */
+                value = _("SIM Card not inserted");
+                break;
+        case NM_DEVICE_STATE_REASON_GSM_SIM_PIN_REQUIRED:
+                /* TRANSLATORS: device status reason */
+                value = _("SIM Pin required");
+                break;
+        case NM_DEVICE_STATE_REASON_GSM_SIM_PUK_REQUIRED:
+                /* TRANSLATORS: device status reason */
+                value = _("SIM Puk required");
+                break;
+        case NM_DEVICE_STATE_REASON_GSM_SIM_WRONG:
+                /* TRANSLATORS: device status reason */
+                value = _("SIM wrong");
+                break;
+        case NM_DEVICE_STATE_REASON_INFINIBAND_MODE:
+                /* TRANSLATORS: device status reason */
+                value = _("InfiniBand device does not support connected mode");
+                break;
+        case NM_DEVICE_STATE_REASON_DEPENDENCY_FAILED:
+                /* TRANSLATORS: device status reason */
+                value = _("Connection dependency failed");
+                break;
+        default:
+                /* no StateReason to show */
+                value = "";
                 break;
         }
         return value;
