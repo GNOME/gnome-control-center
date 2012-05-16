@@ -23,6 +23,7 @@
 #include <gtk/gtk.h>
 
 #include "gnome-region-panel-xkb.h"
+#include "gnome-region-panel-input.h"
 #include "gnome-region-panel-lang.h"
 #include "gnome-region-panel-formats.h"
 #include "gnome-region-panel-system.h"
@@ -161,6 +162,7 @@ cc_region_panel_init (CcRegionPanel * self)
 	gtk_widget_reparent (prefs_widget, GTK_WIDGET (self));
 
 	setup_xkb_tabs (priv->builder);
+        setup_input_tabs (priv->builder, self);
 	setup_language (priv->builder);
 	setup_formats (priv->builder);
 	setup_system (priv->builder);
