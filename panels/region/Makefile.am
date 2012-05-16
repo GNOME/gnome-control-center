@@ -25,12 +25,7 @@ libregion_la_SOURCES =	\
 	gnome-region-panel-system.h \
 	gnome-region-panel-input.c \
 	gnome-region-panel-input.h \
-	gnome-region-panel-xkb.c \
-	gnome-region-panel-xkblt.c \
-	gnome-region-panel-xkbltadd.c \
-	gnome-region-panel-xkbot.c \
-	gnome-region-panel-xkbpv.c \
-	gnome-region-panel-xkb.h
+	$(NULL)
 
 libregion_la_LIBADD = $(PANEL_LIBS) $(REGION_PANEL_LIBS) $(builddir)/../common/liblanguage.la
 
@@ -41,9 +36,8 @@ libregion_la_LDFLAGS = $(PANEL_LDFLAGS)
 uidir   = $(pkgdatadir)/ui
 ui_DATA = \
 	gnome-region-panel.ui \
-	gnome-region-panel-layout-chooser.ui \
 	gnome-region-panel-input-chooser.ui \
-	gnome-region-panel-options-dialog.ui
+	$(NULL)
 
 desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-region-panel.desktop.in
