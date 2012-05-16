@@ -439,8 +439,7 @@ remove_on_complete (ClutterTimeline *timeline,
 		    RemoveData      *data)
 {
 	data->notebook->priv->removed_pages = g_list_remove (data->notebook->priv->removed_pages, data);
-	clutter_actor_remove_child (data->notebook->priv->bin,
-				    data->frame);
+	clutter_actor_destroy (data->frame);
 	g_free (data);
 }
 
