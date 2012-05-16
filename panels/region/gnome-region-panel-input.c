@@ -432,6 +432,13 @@ row_activated (GtkTreeView       *tree_view,
     gtk_dialog_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 }
 
+static void
+entry_activated (GtkBuilder *builder,
+                 gpointer    data)
+{
+  row_activated (NULL, NULL, NULL, builder);
+}
+
 static gboolean
 filter_func (GtkTreeModel *model,
              GtkTreeIter  *iter,
@@ -506,6 +513,12 @@ input_chooser_new (GtkWindow *main_window)
 
   gtk_tree_view_append_column (GTK_TREE_VIEW (filtered_list),
                                visible_column);
+  /* We handle searching ourselves, thank you. */
+  gtk_tree_view_set_enable_search (GTK_TREE_VIEW (filtered_list), FALSE);
+  gtk_tree_view_set_search_column (GTK_TREE_VIEW (filtered_list), -1);
+
+  g_signal_connect_swapped (G_OBJECT (filter_entry), "activate",
+                            G_CALLBACK (entry_activated), builder);
   g_signal_connect_swapped (G_OBJECT (filter_entry), "notify::text",
                             G_CALLBACK (filter_changed), builder);
 
