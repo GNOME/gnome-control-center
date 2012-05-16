@@ -748,13 +748,34 @@ tabletmode_changed_cb (GtkComboBox *combo, gpointer user_data)
 	g_settings_set_boolean (priv->wacom_settings, "is-absolute", is_absolute);
 }
 
+static const gchar*
+opposite_rotation (const gchar *rotation)
+{
+	/* Order matters here, if not found we return "none"  */
+	static const gchar *rotations[] = { "half", "cw", "none", "ccw" };
+	guint i, n;
+
+	n = G_N_ELEMENTS (rotations);
+	for (i = 0; i < n; i++) {
+		if (strcmp (rotation, rotations[i]) == 0)
+			break;
+	}
+
+	return rotations[(i + n / 2) % n];
+}
+
 static void
 left_handed_toggled_cb (GtkSwitch *sw, GParamSpec *pspec, gpointer *user_data)
 {
 	CcWacomPagePrivate	*priv = CC_WACOM_PAGE(user_data)->priv;
+	GsdWacomDevice          *device = priv->stylus;
+	GsdWacomRotation 	display_rotation;
 	const gchar*		rotation;
 
-	rotation = gtk_switch_get_active (sw) ? "half" : "none";
+	display_rotation = gsd_wacom_device_get_display_rotation (device);
+	rotation = gsd_wacom_device_rotation_type_to_name (display_rotation);
+	if (gtk_switch_get_active (sw))
+		rotation = opposite_rotation (rotation);
 
 	g_settings_set_string (priv->wacom_settings, "rotation", rotation);
 }
@@ -763,10 +784,13 @@ static void
 set_left_handed_from_gsettings (CcWacomPage *page)
 {
 	CcWacomPagePrivate	*priv = CC_WACOM_PAGE(page)->priv;
+	GsdWacomDevice          *device = priv->stylus;
+	GsdWacomRotation 	display_rotation;
 	const gchar*		rotation;
 
+	display_rotation = gsd_wacom_device_get_display_rotation (device);
 	rotation = g_settings_get_string (priv->wacom_settings, "rotation");
-	if (strcmp (rotation, "half") == 0)
+	if (strcmp (rotation, gsd_wacom_device_rotation_type_to_name (display_rotation)) != 0)
 		gtk_switch_set_active (GTK_SWITCH (WID ("switch-left-handed")), TRUE);
 }
 
