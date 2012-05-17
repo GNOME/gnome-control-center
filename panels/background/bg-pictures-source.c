@@ -46,6 +46,14 @@ struct _BgPicturesSourcePrivate
   GHashTable *known_items;
 };
 
+const char * const content_types[] = {
+	"image/png",
+	"image/jpeg",
+	"image/bmp",
+	"image/svg+xml",
+	NULL
+};
+
 static char *bg_pictures_source_get_unique_filename (const char *uri);
 
 static void
@@ -281,45 +289,49 @@ picture_opened_for_read (GObject *source_object,
 }
 
 static gboolean
+in_content_types (const char *content_type)
+{
+	guint i;
+	for (i = 0; content_types[i]; i++)
+		if (g_str_equal (content_types[i], content_type))
+			return TRUE;
+	return FALSE;
+}
+
+static gboolean
 add_single_file (BgPicturesSource *bg_source,
 		 GFile            *file,
 		 GFileInfo        *info,
 		 const char       *source_uri)
 {
   const gchar *content_type;
+  CcBackgroundItem *item;
+  char *uri;
 
   /* find png and jpeg files */
   content_type = g_file_info_get_content_type (info);
 
   if (!content_type)
     return FALSE;
+  if (!in_content_types (content_type))
+    return FALSE;
 
-  if (g_str_equal ("image/png", content_type) ||
-      g_str_equal ("image/jpeg", content_type) ||
-      g_str_equal ("image/svg+xml", content_type))
-    {
-      CcBackgroundItem *item;
-      char *uri;
+  /* create a new CcBackgroundItem */
+  uri = g_file_get_uri (file);
+  item = cc_background_item_new (uri);
+  g_free (uri);
+  g_object_set (G_OBJECT (item),
+		"flags", CC_BACKGROUND_ITEM_HAS_URI | CC_BACKGROUND_ITEM_HAS_SHADING,
+		"shading", G_DESKTOP_BACKGROUND_SHADING_SOLID,
+		"placement", G_DESKTOP_BACKGROUND_STYLE_ZOOM,
+		NULL);
+  if (source_uri != NULL)
+    g_object_set (G_OBJECT (item), "source-url", source_uri, NULL);
 
-      /* create a new CcBackgroundItem */
-      uri = g_file_get_uri (file);
-      item = cc_background_item_new (uri);
-      g_free (uri);
-      g_object_set (G_OBJECT (item),
-		    "flags", CC_BACKGROUND_ITEM_HAS_URI | CC_BACKGROUND_ITEM_HAS_SHADING,
-		    "shading", G_DESKTOP_BACKGROUND_SHADING_SOLID,
-		    "placement", G_DESKTOP_BACKGROUND_STYLE_ZOOM,
-		    NULL);
-      if (source_uri != NULL)
-        g_object_set (G_OBJECT (item), "source-url", source_uri, NULL);
-
-      g_object_set_data (G_OBJECT (file), "item", item);
-      g_file_read_async (file, 0, NULL, picture_opened_for_read, bg_source);
-      g_object_unref (file);
-      return TRUE;
-    }
-
-  return FALSE;
+  g_object_set_data (G_OBJECT (file), "item", item);
+  g_file_read_async (file, 0, NULL, picture_opened_for_read, bg_source);
+  g_object_unref (file);
+  return TRUE;
 }
 
 gboolean
@@ -554,3 +566,8 @@ bg_pictures_source_new (void)
   return g_object_new (BG_TYPE_PICTURES_SOURCE, NULL);
 }
 
+const char * const *
+bg_pictures_get_support_content_types (void)
+{
+	return content_types;
+}

@@ -80,6 +80,8 @@ gboolean          bg_pictures_source_remove         (BgPicturesSource *bg_source
 gboolean          bg_pictures_source_is_known       (BgPicturesSource *bg_source,
 						     const char       *uri);
 
+const char * const * bg_pictures_get_support_content_types (void);
+
 G_END_DECLS
 
 #endif /* _BG_PICTURES_SOURCE_H */

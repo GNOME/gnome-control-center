@@ -992,11 +992,15 @@ add_button_clicked (GtkButton         *button,
   GtkWidget *preview;
   GtkFileFilter *filter;
   CcBackgroundPanelPrivate *priv;
+  const char * const * content_types;
+  guint i;
 
   priv = panel->priv;
 
   filter = gtk_file_filter_new ();
-  gtk_file_filter_add_mime_type (filter, "image/*");
+  content_types = bg_pictures_get_support_content_types ();
+  for (i = 0; content_types[i] != NULL; i++)
+    gtk_file_filter_add_mime_type (filter, content_types[i]);
 
   chooser = gtk_file_chooser_dialog_new (_("Browse for more pictures"),
 					 GTK_WINDOW (gtk_widget_get_toplevel (WID ("background-panel"))),
