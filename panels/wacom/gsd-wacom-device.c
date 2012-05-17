@@ -1128,7 +1128,7 @@ gsd_wacom_device_update_from_db (GsdWacomDevice *device,
 
 	if (device->priv->type == WACOM_TYPE_STYLUS ||
 	    device->priv->type == WACOM_TYPE_ERASER) {
-		int *ids;
+		const int *ids;
 		int num_styli;
 		guint i;
 

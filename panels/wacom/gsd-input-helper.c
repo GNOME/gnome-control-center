@@ -129,7 +129,14 @@ supports_xinput2_devices (int *opcode)
 
         if (XIQueryVersion (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &major, &minor) != Success) {
                 gdk_error_trap_pop_ignored ();
-                return FALSE;
+                /* try for 2.2, maybe gtk has already announced 2.2 support */
+                gdk_error_trap_push ();
+                major = 2;
+                minor = 2;
+                if (XIQueryVersion (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &major, &minor) != Success) {
+                    gdk_error_trap_pop_ignored ();
+                    return FALSE;
+                }
         }
         gdk_error_trap_pop_ignored ();
 
