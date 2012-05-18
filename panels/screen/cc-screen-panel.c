@@ -150,10 +150,17 @@ on_lockdown_settings_changed (GSettings     *settings,
   update_lock_screen_sensitivity (panel);
 }
 
+static const char *
+cc_screen_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/prefs-display";
+}
+
 static void
 cc_screen_panel_class_init (CcScreenPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (CcScreenPanelPrivate));
 
@@ -161,6 +168,8 @@ cc_screen_panel_class_init (CcScreenPanelClass *klass)
   object_class->set_property = cc_screen_panel_set_property;
   object_class->dispose = cc_screen_panel_dispose;
   object_class->finalize = cc_screen_panel_finalize;
+
+  panel_class->get_help_uri = cc_screen_panel_get_help_uri;
 }
 
 static void
