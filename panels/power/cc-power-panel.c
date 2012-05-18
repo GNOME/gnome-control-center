@@ -129,10 +129,17 @@ on_lock_settings_changed (GSettings     *settings,
 {
 }
 
+static const char *
+cc_power_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/power";
+}
+
 static void
 cc_power_panel_class_init (CcPowerPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (CcPowerPanelPrivate));
 
@@ -140,6 +147,8 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   object_class->set_property = cc_power_panel_set_property;
   object_class->dispose = cc_power_panel_dispose;
   object_class->finalize = cc_power_panel_finalize;
+
+  panel_class->get_help_uri = cc_power_panel_get_help_uri;
 }
 
 static void
