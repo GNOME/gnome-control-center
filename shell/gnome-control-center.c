@@ -34,7 +34,7 @@
 
 #include "cc-panel.h"
 #include "cc-shell.h"
-#include "shell-search-renderer.h"
+#include "cc-shell-search-renderer.h"
 #include "cc-shell-category-view.h"
 #include "cc-shell-model.h"
 #include "cc-notebook.h"
@@ -623,7 +623,7 @@ setup_search (GnomeControlCenter *shell)
   gtk_container_add (GTK_CONTAINER (priv->search_scrolled), search_view);
 
   /* add the custom renderer */
-  priv->search_renderer = (GtkCellRenderer*) shell_search_renderer_new ();
+  priv->search_renderer = (GtkCellRenderer*) cc_shell_search_renderer_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (search_view),
                               priv->search_renderer, TRUE);
   gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (search_view),

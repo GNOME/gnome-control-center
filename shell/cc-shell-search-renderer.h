@@ -18,8 +18,8 @@
  * Author: Thomas Wood <thos@gnome.org>
  */
 
-#ifndef _SHELL_SEARCH_RENDERER_H
-#define _SHELL_SEARCH_RENDERER_H
+#ifndef _CC_SHELL_SEARCH_RENDERER_H
+#define _CC_SHELL_SEARCH_RENDERER_H
 
 #include <glib-object.h>
 
@@ -27,15 +27,15 @@
 
 G_BEGIN_DECLS
 
-#define SHELL_TYPE_SEARCH_RENDERER shell_search_renderer_get_type()
+#define SHELL_TYPE_SEARCH_RENDERER cc_shell_search_renderer_get_type()
 
-#define SHELL_SEARCH_RENDERER(obj) \
+#define CC_SHELL_SEARCH_RENDERER(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), \
-  SHELL_TYPE_SEARCH_RENDERER, ShellSearchRenderer))
+  SHELL_TYPE_SEARCH_RENDERER, CcShellSearchRenderer))
 
-#define SHELL_SEARCH_RENDERER_CLASS(klass) \
+#define CC_SHELL_SEARCH_RENDERER_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_CAST ((klass), \
-  SHELL_TYPE_SEARCH_RENDERER, ShellSearchRendererClass))
+  SHELL_TYPE_SEARCH_RENDERER, CcShellSearchRendererClass))
 
 #define SHELL_IS_SEARCH_RENDERER(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), \
@@ -45,30 +45,30 @@ G_BEGIN_DECLS
   (G_TYPE_CHECK_CLASS_TYPE ((klass), \
   SHELL_TYPE_SEARCH_RENDERER))
 
-#define SHELL_SEARCH_RENDERER_GET_CLASS(obj) \
+#define CC_SHELL_SEARCH_RENDERER_GET_CLASS(obj) \
   (G_TYPE_INSTANCE_GET_CLASS ((obj), \
-  SHELL_TYPE_SEARCH_RENDERER, ShellSearchRendererClass))
+  SHELL_TYPE_SEARCH_RENDERER, CcShellSearchRendererClass))
 
-typedef struct _ShellSearchRenderer ShellSearchRenderer;
-typedef struct _ShellSearchRendererClass ShellSearchRendererClass;
-typedef struct _ShellSearchRendererPrivate ShellSearchRendererPrivate;
+typedef struct _CcShellSearchRenderer CcShellSearchRenderer;
+typedef struct _CcShellSearchRendererClass CcShellSearchRendererClass;
+typedef struct _CcShellSearchRendererPrivate CcShellSearchRendererPrivate;
 
-struct _ShellSearchRenderer
+struct _CcShellSearchRenderer
 {
   GtkCellRendererText parent;
 
-  ShellSearchRendererPrivate *priv;
+  CcShellSearchRendererPrivate *priv;
 };
 
-struct _ShellSearchRendererClass
+struct _CcShellSearchRendererClass
 {
   GtkCellRendererTextClass parent_class;
 };
 
-GType shell_search_renderer_get_type (void) G_GNUC_CONST;
+GType cc_shell_search_renderer_get_type (void) G_GNUC_CONST;
 
-ShellSearchRenderer *shell_search_renderer_new (void);
+CcShellSearchRenderer *cc_shell_search_renderer_new (void);
 
 G_END_DECLS
 
-#endif /* _SHELL_SEARCH_RENDERER_H */
+#endif /* _CC_SHELL_SEARCH_RENDERER_H */

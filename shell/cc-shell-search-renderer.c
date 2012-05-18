@@ -18,15 +18,16 @@
  * Author: Thomas Wood <thos@gnome.org>
  */
 
-#include "shell-search-renderer.h"
 #include <string.h>
 
-G_DEFINE_TYPE (ShellSearchRenderer, shell_search_renderer, GTK_TYPE_CELL_RENDERER_TEXT)
+#include "cc-shell-search-renderer.h"
+
+G_DEFINE_TYPE (CcShellSearchRenderer, cc_shell_search_renderer, GTK_TYPE_CELL_RENDERER_TEXT)
 
 #define SEARCH_RENDERER_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), SHELL_TYPE_SEARCH_RENDERER, ShellSearchRendererPrivate))
+  (G_TYPE_INSTANCE_GET_PRIVATE ((o), SHELL_TYPE_SEARCH_RENDERER, CcShellSearchRendererPrivate))
 
-struct _ShellSearchRendererPrivate
+struct _CcShellSearchRendererPrivate
 {
   gchar *title;
   gchar *search_target;
@@ -50,7 +51,7 @@ enum
 #define FIXED_SEARCH_LABEL_WIDTH ((FIXED_WIDTH - 2*MARGIN - 3*ICON_SIZE - 6*ICON_PADDING - 2*COLUMN_SPACING)/3. - 2)
 
 static void
-shell_search_renderer_get_property (GObject    *object,
+cc_shell_search_renderer_get_property (GObject    *object,
                                     guint       property_id,
                                     GValue     *value,
                                     GParamSpec *pspec)
@@ -69,12 +70,12 @@ shell_search_renderer_get_property (GObject    *object,
 }
 
 static void
-shell_search_renderer_set_property (GObject      *object,
+cc_shell_search_renderer_set_property (GObject      *object,
                                     guint         property_id,
                                     const GValue *value,
                                     GParamSpec   *pspec)
 {
-  ShellSearchRendererPrivate *priv = SHELL_SEARCH_RENDERER (object)->priv;
+  CcShellSearchRendererPrivate *priv = CC_SHELL_SEARCH_RENDERER (object)->priv;
 
   switch (property_id)
     {
@@ -101,9 +102,9 @@ shell_search_renderer_set_property (GObject      *object,
 }
 
 static void
-shell_search_renderer_dispose (GObject *object)
+cc_shell_search_renderer_dispose (GObject *object)
 {
-  ShellSearchRendererPrivate *priv = SHELL_SEARCH_RENDERER (object)->priv;
+  CcShellSearchRendererPrivate *priv = CC_SHELL_SEARCH_RENDERER (object)->priv;
 
   if (priv->layout)
     {
@@ -111,13 +112,13 @@ shell_search_renderer_dispose (GObject *object)
       priv->layout = NULL;
     }
 
-  G_OBJECT_CLASS (shell_search_renderer_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_shell_search_renderer_parent_class)->dispose (object);
 }
 
 static void
-shell_search_renderer_finalize (GObject *object)
+cc_shell_search_renderer_finalize (GObject *object)
 {
-  ShellSearchRendererPrivate *priv = SHELL_SEARCH_RENDERER (object)->priv;
+  CcShellSearchRendererPrivate *priv = CC_SHELL_SEARCH_RENDERER (object)->priv;
 
   if (priv->title)
     {
@@ -137,14 +138,14 @@ shell_search_renderer_finalize (GObject *object)
       priv->search_string = NULL;
     }
 
-  G_OBJECT_CLASS (shell_search_renderer_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_shell_search_renderer_parent_class)->finalize (object);
 }
 
 static void
-shell_search_renderer_set_layout (ShellSearchRenderer *cell, GtkWidget *widget)
+cc_shell_search_renderer_set_layout (CcShellSearchRenderer *cell, GtkWidget *widget)
 {
   gchar *display_string;
-  ShellSearchRendererPrivate *priv = cell->priv;
+  CcShellSearchRendererPrivate *priv = cell->priv;
   gchar *needle, *haystack;
   gchar *full_string;
 
@@ -216,10 +217,10 @@ get_size (GtkCellRenderer *cell,
           gint            *width,
           gint            *height)
 {
-  ShellSearchRendererPrivate *priv = SHELL_SEARCH_RENDERER (cell)->priv;
+  CcShellSearchRendererPrivate *priv = CC_SHELL_SEARCH_RENDERER (cell)->priv;
   PangoRectangle rect;
 
-  shell_search_renderer_set_layout (SHELL_SEARCH_RENDERER (cell), widget);
+  cc_shell_search_renderer_set_layout (CC_SHELL_SEARCH_RENDERER (cell), widget);
 
   pango_layout_set_width (priv->layout, PANGO_SCALE * FIXED_SEARCH_LABEL_WIDTH);
   pango_layout_get_pixel_extents (priv->layout, NULL, &rect);
@@ -229,7 +230,7 @@ get_size (GtkCellRenderer *cell,
 }
 
 static void
-shell_search_renderer_get_preferred_width (GtkCellRenderer *cell,
+cc_shell_search_renderer_get_preferred_width (GtkCellRenderer *cell,
                                            GtkWidget       *widget,
                                            gint            *minimum_size,
                                            gint            *natural_size)
@@ -242,7 +243,7 @@ shell_search_renderer_get_preferred_width (GtkCellRenderer *cell,
 }
 
 static void
-shell_search_renderer_get_preferred_height (GtkCellRenderer *cell,
+cc_shell_search_renderer_get_preferred_height (GtkCellRenderer *cell,
                                             GtkWidget       *widget,
                                             gint            *minimum_size,
                                             gint            *natural_size)
@@ -255,17 +256,17 @@ shell_search_renderer_get_preferred_height (GtkCellRenderer *cell,
 }
 
 static void
-shell_search_renderer_get_preferred_height_for_width (GtkCellRenderer *cell,
+cc_shell_search_renderer_get_preferred_height_for_width (GtkCellRenderer *cell,
                                                       GtkWidget       *widget,
                                                       gint             width,
                                                       gint            *minimum_height,
                                                       gint            *natural_height)
 {
-  shell_search_renderer_get_preferred_height (cell, widget, minimum_height, natural_height);
+  cc_shell_search_renderer_get_preferred_height (cell, widget, minimum_height, natural_height);
 }
 
 static void
-shell_search_renderer_get_aligned_area (GtkCellRenderer      *cell,
+cc_shell_search_renderer_get_aligned_area (GtkCellRenderer      *cell,
                                         GtkWidget            *widget,
                                         GtkCellRendererState  flags,
                                         const GdkRectangle   *cell_area,
@@ -277,14 +278,14 @@ shell_search_renderer_get_aligned_area (GtkCellRenderer      *cell,
 }
 
 static void
-shell_search_renderer_render (GtkCellRenderer      *cell,
+cc_shell_search_renderer_render (GtkCellRenderer      *cell,
                               cairo_t              *cr,
                               GtkWidget            *widget,
                               const GdkRectangle   *background_area,
                               const GdkRectangle   *cell_area,
                               GtkCellRendererState  flags)
 {
-  ShellSearchRendererPrivate *priv = SHELL_SEARCH_RENDERER (cell)->priv;
+  CcShellSearchRendererPrivate *priv = CC_SHELL_SEARCH_RENDERER (cell)->priv;
   PangoRectangle rect;
   GtkStyleContext *context;
   gint layout_height;
@@ -292,7 +293,7 @@ shell_search_renderer_render (GtkCellRenderer      *cell,
 
   context = gtk_widget_get_style_context (widget);
 
-  shell_search_renderer_set_layout (SHELL_SEARCH_RENDERER (cell), widget);
+  cc_shell_search_renderer_set_layout (CC_SHELL_SEARCH_RENDERER (cell), widget);
 
   pango_layout_get_pixel_extents (priv->layout, NULL, &rect);
 
@@ -310,25 +311,25 @@ shell_search_renderer_render (GtkCellRenderer      *cell,
 }
 
 static void
-shell_search_renderer_class_init (ShellSearchRendererClass *klass)
+cc_shell_search_renderer_class_init (CcShellSearchRendererClass *klass)
 {
   GParamSpec *pspec;
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkCellRendererClass *cell_renderer = GTK_CELL_RENDERER_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (ShellSearchRendererPrivate));
+  g_type_class_add_private (klass, sizeof (CcShellSearchRendererPrivate));
 
-  object_class->get_property = shell_search_renderer_get_property;
-  object_class->set_property = shell_search_renderer_set_property;
-  object_class->dispose = shell_search_renderer_dispose;
-  object_class->finalize = shell_search_renderer_finalize;
+  object_class->get_property = cc_shell_search_renderer_get_property;
+  object_class->set_property = cc_shell_search_renderer_set_property;
+  object_class->dispose = cc_shell_search_renderer_dispose;
+  object_class->finalize = cc_shell_search_renderer_finalize;
 
-  cell_renderer->get_preferred_width = shell_search_renderer_get_preferred_width;
-  cell_renderer->get_preferred_height = shell_search_renderer_get_preferred_height;
-  cell_renderer->get_preferred_height_for_width = shell_search_renderer_get_preferred_height_for_width;
-  cell_renderer->get_aligned_area = shell_search_renderer_get_aligned_area;
+  cell_renderer->get_preferred_width = cc_shell_search_renderer_get_preferred_width;
+  cell_renderer->get_preferred_height = cc_shell_search_renderer_get_preferred_height;
+  cell_renderer->get_preferred_height_for_width = cc_shell_search_renderer_get_preferred_height_for_width;
+  cell_renderer->get_aligned_area = cc_shell_search_renderer_get_aligned_area;
 
-  cell_renderer->render = shell_search_renderer_render;
+  cell_renderer->render = cc_shell_search_renderer_render;
 
   pspec = g_param_spec_string ("title",
                                "Title",
@@ -353,13 +354,13 @@ shell_search_renderer_class_init (ShellSearchRendererClass *klass)
 }
 
 static void
-shell_search_renderer_init (ShellSearchRenderer *self)
+cc_shell_search_renderer_init (CcShellSearchRenderer *self)
 {
   self->priv = SEARCH_RENDERER_PRIVATE (self);
 }
 
-ShellSearchRenderer *
-shell_search_renderer_new (void)
+CcShellSearchRenderer *
+cc_shell_search_renderer_new (void)
 {
   return g_object_new (SHELL_TYPE_SEARCH_RENDERER, NULL);
 }
