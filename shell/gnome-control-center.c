@@ -1136,7 +1136,7 @@ window_key_press_event (GtkWidget          *win,
             break;
           case GDK_KEY_W:
           case GDK_KEY_w:
-            if (cc_notebook_get_selected_page (CC_NOTEBOOK (self->priv->notebook)) == self->priv->scrolled_window)
+            if (cc_notebook_get_selected_page (CC_NOTEBOOK (self->priv->notebook)) != self->priv->scrolled_window)
               shell_show_overview_page (self);
             retval = TRUE;
             break;
