@@ -202,9 +202,18 @@ goa_panel_init (GoaPanel *panel)
   gtk_widget_show_all (w);
 }
 
+static const char *
+goa_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/accounts";
+}
+
 static void
 goa_panel_class_init (GoaPanelClass *klass)
 {
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+
+  panel_class->get_help_uri = goa_panel_get_help_uri;
 }
 
 static void
