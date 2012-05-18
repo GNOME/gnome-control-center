@@ -115,12 +115,21 @@ cc_keyboard_panel_constructor (GType                  gtype,
   return obj;
 }
 
+static const char *
+cc_keyboard_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/prefs";
+}
+
 static void
 cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (CcKeyboardPanelPrivate));
+
+  panel_class->get_help_uri = cc_keyboard_panel_get_help_uri;
 
   object_class->constructor = cc_keyboard_panel_constructor;
   object_class->get_property = cc_keyboard_panel_get_property;
