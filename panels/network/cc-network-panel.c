@@ -237,12 +237,21 @@ cc_network_panel_finalize (GObject *object)
         G_OBJECT_CLASS (cc_network_panel_parent_class)->finalize (object);
 }
 
+static const char *
+cc_network_panel_get_help_uri (CcPanel *panel)
+{
+	return "help:gnome-help/net";
+}
+
 static void
 cc_network_panel_class_init (CcNetworkPanelClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
         g_type_class_add_private (klass, sizeof (CcNetworkPanelPrivate));
+
+	panel_class->get_help_uri = cc_network_panel_get_help_uri;
 
         object_class->get_property = cc_network_panel_get_property;
         object_class->set_property = cc_network_panel_set_property;
