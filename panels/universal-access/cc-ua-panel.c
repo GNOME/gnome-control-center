@@ -156,12 +156,21 @@ cc_ua_panel_finalize (GObject *object)
   G_OBJECT_CLASS (cc_ua_panel_parent_class)->finalize (object);
 }
 
+static const char *
+cc_ua_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/a11y";
+}
+
 static void
 cc_ua_panel_class_init (CcUaPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (CcUaPanelPrivate));
+
+  panel_class->get_help_uri = cc_ua_panel_get_help_uri;
 
   object_class->get_property = cc_ua_panel_get_property;
   object_class->set_property = cc_ua_panel_set_property;
