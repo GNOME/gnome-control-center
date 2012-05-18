@@ -82,12 +82,21 @@ cc_mouse_panel_dispose (GObject *object)
   G_OBJECT_CLASS (cc_mouse_panel_parent_class)->dispose (object);
 }
 
+static const char *
+cc_mouse_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/mouse";
+}
+
 static void
 cc_mouse_panel_class_init (CcMousePanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (CcMousePanelPrivate));
+
+  panel_class->get_help_uri = cc_mouse_panel_get_help_uri;
 
   object_class->get_property = cc_mouse_panel_get_property;
   object_class->set_property = cc_mouse_panel_set_property;
