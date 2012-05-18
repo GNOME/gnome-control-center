@@ -1133,14 +1133,9 @@ gsd_wacom_device_update_from_db (GsdWacomDevice *device,
 		guint i;
 
 		ids = libwacom_get_supported_styli(wacom_device, &num_styli);
+		g_assert (num_styli >= 1);
 		for (i = 0; i < num_styli; i++)
 			add_stylus_to_device (device, settings_path, ids[i]);
-		/* Create a fallback stylus if we don't have one */
-		if (num_styli == 0)
-			add_stylus_to_device (device, settings_path,
-					      device->priv->type == WACOM_TYPE_STYLUS ?
-					      WACOM_STYLUS_FALLBACK_ID : WACOM_ERASER_FALLBACK_ID);
-
 		device->priv->styli = g_list_reverse (device->priv->styli);
 	}
 	g_free (settings_path);
