@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-05-16 08:55+0000\n"
-"PO-Revision-Date: 2012-05-16 12:30+0200\n"
+"POT-Creation-Date: 2012-05-17 17:30+0000\n"
+"PO-Revision-Date: 2012-05-18 10:24+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -60,6 +60,7 @@ msgid "Tile"
 msgstr "Mosaico"
 
 #: ../panels/background/background.ui.h:9
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Zoom"
 msgstr "Ampliación"
 
@@ -106,29 +107,29 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Sin fondo de escritorio"
 
-#: ../panels/background/cc-background-panel.c:1001
+#: ../panels/background/cc-background-panel.c:1005
 #: ../panels/user-accounts/data/photo-dialog.ui.h:4
 #: ../panels/user-accounts/um-photo-dialog.c:218
 msgid "Browse for more pictures"
 msgstr "Examinar para buscar más imágenes"
 
-#: ../panels/background/cc-background-panel.c:1093
+#: ../panels/background/cc-background-panel.c:1097
 msgid "Current background"
 msgstr "Fondo actual"
 
-#: ../panels/background/cc-background-panel.c:1203
+#: ../panels/background/cc-background-panel.c:1207
 msgid "Wallpapers"
 msgstr "Fondos de escritorio"
 
-#: ../panels/background/cc-background-panel.c:1210
+#: ../panels/background/cc-background-panel.c:1214
 msgid "Pictures Folder"
 msgstr "Carpeta de imágenes"
 
-#: ../panels/background/cc-background-panel.c:1217
+#: ../panels/background/cc-background-panel.c:1221
 msgid "Colors & Gradients"
 msgstr "Colores y gradientes"
 
-#: ../panels/background/cc-background-panel.c:1225
+#: ../panels/background/cc-background-panel.c:1229
 msgid "Flickr"
 msgstr "Flickr"
 
@@ -183,11 +184,11 @@ msgstr "Dirección"
 msgid "Mouse and Touchpad Settings"
 msgstr "Emparejado"
 
-#: ../panels/bluetooth/bluetooth.ui.h:8 ../panels/universal-access/uap.ui.h:43
+#: ../panels/bluetooth/bluetooth.ui.h:8 ../panels/universal-access/uap.ui.h:41
 msgid "Sound Settings"
 msgstr "Configuración del sonido"
 
-#: ../panels/bluetooth/bluetooth.ui.h:9 ../panels/universal-access/uap.ui.h:74
+#: ../panels/bluetooth/bluetooth.ui.h:9
 msgid "Keyboard Settings"
 msgstr "Configuración del teclado"
 
@@ -1365,7 +1366,7 @@ msgstr "Ve_locidad:"
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:52
 #: ../panels/universal-access/zoom-options.c:333
 msgid "Short"
 msgstr "Corto"
@@ -1383,7 +1384,7 @@ msgstr "Velocidad de repetición de teclas"
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
 #: ../panels/mouse/gnome-mouse-properties.ui.h:26
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:55
 #: ../panels/universal-access/zoom-options.c:337
 msgid "Long"
 msgstr "Largo"
@@ -1415,7 +1416,7 @@ msgid "Layout Settings"
 msgstr "Configuración de la distribución"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Typing"
 msgstr "Escritura"
 
@@ -1566,7 +1567,7 @@ msgstr "U_mbral:"
 
 #. small threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:18
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:84
 msgid "Small"
 msgstr "Pequeño"
 
@@ -1576,7 +1577,7 @@ msgstr "Umbral de arrastre"
 
 #. large threshold
 #: ../panels/mouse/gnome-mouse-properties.ui.h:21
-#: ../panels/universal-access/uap.ui.h:89
+#: ../panels/universal-access/uap.ui.h:86
 msgid "Large"
 msgstr "Grande"
 
@@ -1681,7 +1682,7 @@ msgstr "Empresa"
 #. TRANSLATORS: this no (!) WiFi security
 #: ../panels/network/cc-network-panel.c:1192
 #: ../panels/network/cc-network-panel.c:1575
-#: ../panels/universal-access/uap.ui.h:5 ../panels/wacom/cc-wacom-page.c:323
+#: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:323
 #: ../panels/wacom/cc-wacom-page.c:340
 msgid "None"
 msgstr "Ninguna"
@@ -2054,19 +2055,16 @@ msgstr "No conectado"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:298
-#| msgid "Connection failed"
 msgid "Configuration failed"
 msgstr "Falló la configuración"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:302
-#| msgid "Proxy Configuration"
 msgid "IP configuration failed"
 msgstr "Falló la configuración IP"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:306
-#| msgid "Proxy Configuration"
 msgid "IP configuration expired"
 msgstr "La configuración IP ha expirado"
 
@@ -2102,13 +2100,11 @@ msgstr "Falló al iniciar el servicio de PPP"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:334
-#| msgid "Disconnected"
 msgid "PPP service disconnected"
 msgstr "Servicio PPP desconectado"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:338
-#| msgid "Paired"
 msgid "PPP failed"
 msgstr "PPP falló"
 
@@ -2124,7 +2120,6 @@ msgstr "Error del cliente de DHCP"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:350
-#| msgid "Connection failed"
 msgid "DHCP client failed"
 msgstr "Falló el cliente de DHCP"
 
@@ -2135,7 +2130,6 @@ msgstr "Falló al iniciar el servicio de conexión compartida"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:358
-#| msgid "Connection failed"
 msgid "Shared connection service failed"
 msgstr "Falló el servicio de conexión compartida"
 
@@ -2151,7 +2145,6 @@ msgstr "Error del servicio de AutoIP"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:370
-#| msgid "Authentication failed"
 msgid "AutoIP service failed"
 msgstr "Falló el servicio AutoIP"
 
@@ -2182,13 +2175,11 @@ msgstr "Intento de llamada fallido"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:394
-#| msgid "Authentication failed"
 msgid "Modem initialization failed"
 msgstr "Falló la inicialización del módem"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:398
-#| msgid "Failed to delete user"
 msgid "Failed to select the specified APN"
 msgstr "Falló al seleccionar el NPA especificado"
 
@@ -2199,7 +2190,6 @@ msgstr "No se están buscando redes"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:406
-#| msgid "Network settings"
 msgid "Network registration denied"
 msgstr "Registro de la red denegado"
 
@@ -2225,7 +2215,6 @@ msgstr "Es posible que falte el firmware del dispositivo"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:426
-#| msgid "Connection failed"
 msgid "Connection disappeared"
 msgstr "La conexión ha desaparecido"
 
@@ -2241,13 +2230,11 @@ msgstr "Se asumió una conexión existente"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:438
-#| msgid "key not found [%s]\n"
 msgid "Modem not found"
 msgstr "Módem no encontrado"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:442
-#| msgid "Connection failed"
 msgid "Bluetooth connection failed"
 msgstr "Falló la conexión Bluetooth"
 
@@ -2268,8 +2255,6 @@ msgstr "Se necesita el PUK de la SIM"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:458
-#| msgctxt "Password strength"
-#| msgid "Strong"
 msgid "SIM wrong"
 msgstr "SIM errónea"
 
@@ -2280,7 +2265,6 @@ msgstr "El dispositivo InfiniBand no soporta el modo conectado"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:466
-#| msgid "Connection failed"
 msgid "Connection dependency failed"
 msgstr "Falló la dependencia de la conexión"
 
@@ -3573,8 +3557,8 @@ msgstr "Silenciado"
 msgid "Custom"
 msgstr "Personalizado"
 
-#: ../panels/universal-access/cc-ua-panel.c:453
-#: ../panels/universal-access/cc-ua-panel.c:459
+#: ../panels/universal-access/cc-ua-panel.c:282
+#: ../panels/universal-access/cc-ua-panel.c:288
 msgid "No shortcut set"
 msgstr "No existe ningún atajo configurado"
 
@@ -3593,322 +3577,301 @@ msgstr ""
 "teclas;Teclas del ratón"
 
 #: ../panels/universal-access/uap.ui.h:1
-msgid "On screen keyboard"
-msgstr "Teclado en pantalla"
-
-#: ../panels/universal-access/uap.ui.h:2
-msgid "Dasher"
-msgstr "Dasher"
-
-#: ../panels/universal-access/uap.ui.h:3
-msgid "Nomon"
-msgstr "Nomon"
-
-#: ../panels/universal-access/uap.ui.h:4
-msgid "Caribou"
-msgstr "Caribou"
-
-#: ../panels/universal-access/uap.ui.h:7
-#, no-c-format
-msgid "75%"
-msgstr "75%"
-
-#: ../panels/universal-access/uap.ui.h:8
-msgctxt "universal access, text size"
-msgid "Small"
-msgstr "Pequeño"
-
-#: ../panels/universal-access/uap.ui.h:10
-#, no-c-format
-msgid "100%"
-msgstr "100%"
-
-#: ../panels/universal-access/uap.ui.h:11
-msgctxt "universal access, text size"
-msgid "Normal"
-msgstr "Normal"
-
-#: ../panels/universal-access/uap.ui.h:13
-#, no-c-format
-msgid "125%"
-msgstr "125%"
-
-#: ../panels/universal-access/uap.ui.h:14
-msgctxt "universal access, text size"
-msgid "Large"
-msgstr "Grande"
-
-#: ../panels/universal-access/uap.ui.h:16
-#, no-c-format
-msgid "150%"
-msgstr "150%"
-
-#: ../panels/universal-access/uap.ui.h:17
-msgctxt "universal access, text size"
-msgid "Larger"
-msgstr "Más grande"
-
-#: ../panels/universal-access/uap.ui.h:18
-msgid "GOK"
-msgstr "GOK"
-
-#: ../panels/universal-access/uap.ui.h:19
-msgid "OnBoard"
-msgstr "EnPantalla"
-
-#: ../panels/universal-access/uap.ui.h:20
-msgid "Change contrast:"
-msgstr "Cambiar contraste:"
-
-#: ../panels/universal-access/uap.ui.h:21
-msgid "_Contrast:"
-msgstr "_Contraste:"
-
-#: ../panels/universal-access/uap.ui.h:22
-msgid "_Text size:"
-msgstr "_Tamaño del texto:"
-
-#: ../panels/universal-access/uap.ui.h:23
-msgid "Increase size:"
-msgstr "Aumentar tamaño:"
-
-#: ../panels/universal-access/uap.ui.h:24
-msgid "Decrease size:"
-msgstr "Reducir tamaño:"
-
-#. Translators: this refers to theme contrast and font size
-#: ../panels/universal-access/uap.ui.h:26
-msgctxt "universal access, seeing"
-msgid "Display"
-msgstr "Pantalla"
-
-#: ../panels/universal-access/uap.ui.h:27
-msgid "Turn on or off:"
-msgstr "Activar o desactivar:"
-
-#: ../panels/universal-access/uap.ui.h:28
-msgid "Zoom in:"
-msgstr "Ampliar:"
-
-#: ../panels/universal-access/uap.ui.h:29
-msgid "Zoom out:"
-msgstr "Reducir:"
-
-#: ../panels/universal-access/uap.ui.h:30
-msgid "Options..."
-msgstr "Opciones…"
-
-#. Translators: this refers to screen magnifier
-#: ../panels/universal-access/uap.ui.h:32
-msgctxt "universal access, seeing"
-msgid "Zoom"
-msgstr "Ampliación"
-
-#: ../panels/universal-access/uap.ui.h:33
-msgid "Screen Reader"
-msgstr "Lector de pantalla"
-
-#: ../panels/universal-access/uap.ui.h:34
-msgid "Beep when Caps and Num Lock are used"
-msgstr "Pitar al usar Bloq. Num. y Bloq. Mayús."
-
-#: ../panels/universal-access/uap.ui.h:35
-msgid "Seeing"
-msgstr "Visión"
-
-#: ../panels/universal-access/uap.ui.h:36
-msgid "Use a visual indication when an alert sound occurs"
-msgstr "Usar una indicación visual cuando ocurra una alerta de sonido"
-
-#: ../panels/universal-access/uap.ui.h:37
-msgid "_Test flash"
-msgstr "_Probar destellos"
-
-#: ../panels/universal-access/uap.ui.h:38
-msgid "Flash the window title"
-msgstr "Destello de la barra de título de la ventana"
-
-#: ../panels/universal-access/uap.ui.h:39
-msgid "Flash the entire screen"
-msgstr "Destello de la pantalla completa"
-
-#: ../panels/universal-access/uap.ui.h:40
-msgid "Visual Alerts"
-msgstr "Alertas visuales"
-
-#: ../panels/universal-access/uap.ui.h:41
-msgid "Display a textual description of speech and sounds"
-msgstr "Mostrar una descripción textual de la voz y los sonidos"
-
-#: ../panels/universal-access/uap.ui.h:42
-msgid "Closed Captioning"
-msgstr "GOP cerrado"
-
-#: ../panels/universal-access/uap.ui.h:44
-msgid "Hearing"
-msgstr "Audición"
-
-#: ../panels/universal-access/uap.ui.h:45
-msgid "Screen keyboard"
-msgstr "Teclado en pantalla"
-
-#: ../panels/universal-access/uap.ui.h:46
-msgid "Typing Assistant"
-msgstr "Asistente de tecleado"
-
-#: ../panels/universal-access/uap.ui.h:47
-msgid "_Turn on accessibility features from the keyboard"
-msgstr "Ac_tivar las características de accesibilidad desde el teclado"
-
-#: ../panels/universal-access/uap.ui.h:48
-msgid "Treats a sequence of modifier keys as a key combination"
-msgstr ""
-"Trata una secuencia de teclas modificadoras como una combinación de teclas"
-
-#: ../panels/universal-access/uap.ui.h:49
-msgid "_Disable if two keys are pressed together"
-msgstr "_Desactivar si se pulsan dos teclas a la vez"
-
-#: ../panels/universal-access/uap.ui.h:50
-msgid "Beep when a _modifer key is pressed"
-msgstr "Pitar al pulsar una tecla _modificadora"
-
-#: ../panels/universal-access/uap.ui.h:51
-msgid "Sticky Keys"
-msgstr "Teclas persistentes"
-
-#: ../panels/universal-access/uap.ui.h:52
-msgid "Puts a delay between when a key is pressed and when it is accepted"
-msgstr "Introduce un retardo al pulsar una tecla y cuando esta se acepta"
-
-#: ../panels/universal-access/uap.ui.h:53
-msgid "A_cceptance delay:"
-msgstr "R_etardo de aceptación:"
-
-#: ../panels/universal-access/uap.ui.h:56
-msgid "Slow keys typing delay"
-msgstr "Retardo de las teclas lentas al escribir"
-
-#. This string is part of a line of checkboxes: Beep when a key is [ ] pressed  [ ] accepted  [ ] rejected
-#: ../panels/universal-access/uap.ui.h:60
-msgid "Beep when a key is"
-msgstr "Pitar cuando la tecla es"
-
-#. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:62
-msgid "pressed"
-msgstr "pulsada"
-
-#. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:64
-msgid "accepted"
-msgstr "aceptada"
-
-#. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:66
-msgid "rejected"
-msgstr "rechazada"
-
-#: ../panels/universal-access/uap.ui.h:67
-msgid "Slow Keys"
-msgstr "Teclas lentas"
-
-#: ../panels/universal-access/uap.ui.h:68
-msgid "Ignores fast duplicate keypresses"
-msgstr "Ignorar pulsaciones duplicadas rápidas"
-
-#: ../panels/universal-access/uap.ui.h:69
-msgid "Acc_eptance delay:"
-msgstr "R_etardo de aceptación:"
-
-#: ../panels/universal-access/uap.ui.h:70
-msgid "Bounce keys typing delay"
-msgstr "Retraso de pulsación del rechazo de teclas"
-
-#: ../panels/universal-access/uap.ui.h:71
-msgid "Beep when a key is _rejected"
-msgstr "Pitar al _rechazar una tecla"
-
-#: ../panels/universal-access/uap.ui.h:72
-msgid "Bounce Keys"
-msgstr "Rechazo de teclas"
-
-#: ../panels/universal-access/uap.ui.h:73
-msgid "Type here to test settings"
-msgstr "Teclear aquí para probar la configuración"
-
-#: ../panels/universal-access/uap.ui.h:76
-msgid "Control the pointer using the keypad"
-msgstr "Controlar el puntero usando el teclado numérico"
-
-#: ../panels/universal-access/uap.ui.h:77
-msgid "Mouse Keys"
-msgstr "Teclas del ratón"
-
-#: ../panels/universal-access/uap.ui.h:78
-msgid "Control the pointer using the video camera."
-msgstr "Controlar el puntero usando la cámara de vídeo."
-
-#: ../panels/universal-access/uap.ui.h:79
-msgid "Video Mouse"
-msgstr "Ratón de vídeo"
-
-#: ../panels/universal-access/uap.ui.h:80
-msgid "Trigger a secondary click by holding down the primary button"
-msgstr ""
-"Disparar una pulsación secundaria al mantener pulsado el botón primario"
-
-#: ../panels/universal-access/uap.ui.h:81
-msgid "Secondary click delay"
-msgstr "Retardo de la pulsación secundaria"
-
-#: ../panels/universal-access/uap.ui.h:82
-msgid "Simulated Secondary Click"
-msgstr "Pulsación secundaria simulada"
-
-#: ../panels/universal-access/uap.ui.h:83
-msgid "Trigger a click when the pointer hovers"
-msgstr "Iniciar una pulsación al posicionar el puntero"
-
-#: ../panels/universal-access/uap.ui.h:84
-msgid "D_elay:"
-msgstr "R_etardo:"
-
-#: ../panels/universal-access/uap.ui.h:85
-msgid "Motion _threshold:"
-msgstr "Umbral de _movimiento:"
-
-#: ../panels/universal-access/uap.ui.h:90
-msgid "Hover Click"
-msgstr "Pulsar al enfocar"
-
-#: ../panels/universal-access/uap.ui.h:91
-msgid "Mouse Settings"
-msgstr "Configuración del ratón"
-
-#: ../panels/universal-access/uap.ui.h:92
-msgid "Pointing and Clicking"
-msgstr "Apuntar y pulsar"
-
-#: ../panels/universal-access/uap.ui.h:93
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Bajo"
 
-#: ../panels/universal-access/uap.ui.h:94
+#: ../panels/universal-access/uap.ui.h:2
 msgctxt "universal access, contrast"
 msgid "Normal"
 msgstr "Normal"
 
-#: ../panels/universal-access/uap.ui.h:95
+#: ../panels/universal-access/uap.ui.h:3
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Alto"
 
-#: ../panels/universal-access/uap.ui.h:96
+#: ../panels/universal-access/uap.ui.h:4
 msgctxt "universal access, contrast"
 msgid "High/Inverse"
 msgstr "Alto/invertido"
+
+#: ../panels/universal-access/uap.ui.h:5
+msgid "On screen keyboard"
+msgstr "Teclado en pantalla"
+
+#: ../panels/universal-access/uap.ui.h:6
+msgid "GOK"
+msgstr "GOK"
+
+#: ../panels/universal-access/uap.ui.h:7
+msgid "OnBoard"
+msgstr "EnPantalla"
+
+#: ../panels/universal-access/uap.ui.h:10
+#, no-c-format
+msgid "75%"
+msgstr "75%"
+
+#: ../panels/universal-access/uap.ui.h:11
+msgctxt "universal access, text size"
+msgid "Small"
+msgstr "Pequeño"
+
+#: ../panels/universal-access/uap.ui.h:13
+#, no-c-format
+msgid "100%"
+msgstr "100%"
+
+#: ../panels/universal-access/uap.ui.h:14
+msgctxt "universal access, text size"
+msgid "Normal"
+msgstr "Normal"
+
+#: ../panels/universal-access/uap.ui.h:16
+#, no-c-format
+msgid "125%"
+msgstr "125%"
+
+#: ../panels/universal-access/uap.ui.h:17
+msgctxt "universal access, text size"
+msgid "Large"
+msgstr "Grande"
+
+#: ../panels/universal-access/uap.ui.h:19
+#, no-c-format
+msgid "150%"
+msgstr "150%"
+
+#: ../panels/universal-access/uap.ui.h:20
+msgctxt "universal access, text size"
+msgid "Larger"
+msgstr "Más grande"
+
+#: ../panels/universal-access/uap.ui.h:21
+msgid "Dasher"
+msgstr "Dasher"
+
+#: ../panels/universal-access/uap.ui.h:22
+msgid "Nomon"
+msgstr "Nomon"
+
+#: ../panels/universal-access/uap.ui.h:23
+msgid "Caribou"
+msgstr "Caribou"
+
+#: ../panels/universal-access/uap.ui.h:24
+#| msgid "HighContrastInverse"
+msgid "High Contrast"
+msgstr "Alto contraste"
+
+#: ../panels/universal-access/uap.ui.h:25
+#| msgid "Beep when Caps and Num Lock are used"
+msgid "Beep on Caps and Num Lock"
+msgstr "Pitar al usar Bloq. Num. y Bloq. Mayús."
+
+#: ../panels/universal-access/uap.ui.h:26
+msgid "Options..."
+msgstr "Opciones…"
+
+#: ../panels/universal-access/uap.ui.h:27
+msgid "Screen Reader"
+msgstr "Lector de pantalla"
+
+#: ../panels/universal-access/uap.ui.h:28
+msgid "Turn on or off:"
+msgstr "Activar o desactivar:"
+
+#: ../panels/universal-access/uap.ui.h:30
+msgid "Zoom in:"
+msgstr "Ampliar:"
+
+#: ../panels/universal-access/uap.ui.h:31
+msgid "Zoom out:"
+msgstr "Reducir:"
+
+#: ../panels/universal-access/uap.ui.h:32
+#| msgid "Large"
+msgid "Large Text"
+msgstr "Texto grande"
+
+#: ../panels/universal-access/uap.ui.h:33
+msgid "Seeing"
+msgstr "Visión"
+
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Visual Alerts"
+msgstr "Alertas visuales"
+
+#: ../panels/universal-access/uap.ui.h:35
+msgid "Use a visual indication when an alert sound occurs"
+msgstr "Usar una indicación visual cuando ocurra una alerta de sonido"
+
+#: ../panels/universal-access/uap.ui.h:36
+msgid "Flash the window title"
+msgstr "Destello de la barra de título de la ventana"
+
+#: ../panels/universal-access/uap.ui.h:37
+msgid "Flash the entire screen"
+msgstr "Destello de la pantalla completa"
+
+#: ../panels/universal-access/uap.ui.h:38
+msgid "Closed Captioning"
+msgstr "GOP cerrado"
+
+#: ../panels/universal-access/uap.ui.h:39
+msgid "Display a textual description of speech and sounds"
+msgstr "Mostrar una descripción textual de la voz y los sonidos"
+
+#: ../panels/universal-access/uap.ui.h:40
+msgid "_Test flash"
+msgstr "_Probar destellos"
+
+#: ../panels/universal-access/uap.ui.h:42
+msgid "Hearing"
+msgstr "Audición"
+
+#: ../panels/universal-access/uap.ui.h:43
+#| msgid "On screen keyboard"
+msgid "On Screen Keyboard"
+msgstr "Teclado en pantalla"
+
+#: ../panels/universal-access/uap.ui.h:44
+msgid "Sticky Keys"
+msgstr "Teclas persistentes"
+
+#: ../panels/universal-access/uap.ui.h:45
+msgid "Treats a sequence of modifier keys as a key combination"
+msgstr ""
+"Trata una secuencia de teclas modificadoras como una combinación de teclas"
+
+#: ../panels/universal-access/uap.ui.h:46
+msgid "_Disable if two keys are pressed together"
+msgstr "_Desactivar si se pulsan dos teclas a la vez"
+
+#: ../panels/universal-access/uap.ui.h:47
+msgid "Beep when a _modifer key is pressed"
+msgstr "Pitar al pulsar una tecla _modificadora"
+
+#: ../panels/universal-access/uap.ui.h:48
+msgid "Slow Keys"
+msgstr "Teclas lentas"
+
+#: ../panels/universal-access/uap.ui.h:49
+msgid "Puts a delay between when a key is pressed and when it is accepted"
+msgstr "Introduce un retardo al pulsar una tecla y cuando esta se acepta"
+
+#: ../panels/universal-access/uap.ui.h:50
+msgid "A_cceptance delay:"
+msgstr "R_etardo de aceptación:"
+
+#: ../panels/universal-access/uap.ui.h:53
+msgid "Slow keys typing delay"
+msgstr "Retardo de las teclas lentas al escribir"
+
+#. This string is part of a line of checkboxes: Beep when a key is [ ] pressed  [ ] accepted  [ ] rejected
+#: ../panels/universal-access/uap.ui.h:57
+msgid "Beep when a key is"
+msgstr "Pitar cuando la tecla es"
+
+#. This completes the sentence "Beep when a key is"
+#: ../panels/universal-access/uap.ui.h:59
+msgid "pressed"
+msgstr "pulsada"
+
+#. This completes the sentence "Beep when a key is"
+#: ../panels/universal-access/uap.ui.h:61
+msgid "accepted"
+msgstr "aceptada"
+
+#. This completes the sentence "Beep when a key is"
+#: ../panels/universal-access/uap.ui.h:63
+msgid "rejected"
+msgstr "rechazada"
+
+#: ../panels/universal-access/uap.ui.h:64
+msgid "Bounce Keys"
+msgstr "Rechazo de teclas"
+
+#: ../panels/universal-access/uap.ui.h:65
+msgid "Ignores fast duplicate keypresses"
+msgstr "Ignorar pulsaciones duplicadas rápidas"
+
+#: ../panels/universal-access/uap.ui.h:66
+msgid "Acc_eptance delay:"
+msgstr "R_etardo de aceptación:"
+
+#: ../panels/universal-access/uap.ui.h:67
+msgid "Bounce keys typing delay"
+msgstr "Retraso de pulsación del rechazo de teclas"
+
+#: ../panels/universal-access/uap.ui.h:68
+msgid "Beep when a key is _rejected"
+msgstr "Pitar al _rechazar una tecla"
+
+#: ../panels/universal-access/uap.ui.h:69
+#| msgid "Keyboard"
+msgid "Enable by Keyboard"
+msgstr "Activar por teclado"
+
+#: ../panels/universal-access/uap.ui.h:70
+#| msgid "_Turn on accessibility features from the keyboard"
+msgid "Turn accessibility features on and off using the keyboard"
+msgstr "Activar las características de accesibilidad usando el teclado"
+
+#: ../panels/universal-access/uap.ui.h:72
+msgid "Mouse Keys"
+msgstr "Teclas del ratón"
+
+#: ../panels/universal-access/uap.ui.h:73
+msgid "Control the pointer using the keypad"
+msgstr "Controlar el puntero usando el teclado numérico"
+
+#: ../panels/universal-access/uap.ui.h:74
+msgid "Video Mouse"
+msgstr "Ratón de vídeo"
+
+#: ../panels/universal-access/uap.ui.h:75
+msgid "Control the pointer using the video camera."
+msgstr "Controlar el puntero usando la cámara de vídeo."
+
+#: ../panels/universal-access/uap.ui.h:76
+msgid "Simulated Secondary Click"
+msgstr "Pulsación secundaria simulada"
+
+#: ../panels/universal-access/uap.ui.h:77
+msgid "Trigger a secondary click by holding down the primary button"
+msgstr ""
+"Disparar una pulsación secundaria al mantener pulsado el botón primario"
+
+#: ../panels/universal-access/uap.ui.h:78
+msgid "Secondary click delay"
+msgstr "Retardo de la pulsación secundaria"
+
+#: ../panels/universal-access/uap.ui.h:79
+#| msgid "Hover Click"
+msgid "Hover Click\t"
+msgstr "Pulsación al pasar por encima\t"
+
+#: ../panels/universal-access/uap.ui.h:80
+msgid "Trigger a click when the pointer hovers"
+msgstr "Iniciar una pulsación al posicionar el puntero"
+
+#: ../panels/universal-access/uap.ui.h:81
+msgid "D_elay:"
+msgstr "R_etardo:"
+
+#: ../panels/universal-access/uap.ui.h:82
+msgid "Motion _threshold:"
+msgstr "Umbral de _movimiento:"
+
+#: ../panels/universal-access/uap.ui.h:87
+msgid "Mouse Settings"
+msgstr "Configuración del ratón"
+
+#: ../panels/universal-access/uap.ui.h:88
+msgid "Pointing and Clicking"
+msgstr "Apuntar y pulsar"
 
 #: ../panels/universal-access/zoom-options.c:334
 msgid "1/4 Screen"
@@ -4940,6 +4903,38 @@ msgstr "Preferencias;Configuración;"
 msgid "All Settings"
 msgstr "Todas las configuraciones"
 
+#~ msgid "Change contrast:"
+#~ msgstr "Cambiar contraste:"
+
+#~ msgid "_Contrast:"
+#~ msgstr "_Contraste:"
+
+#~ msgid "_Text size:"
+#~ msgstr "_Tamaño del texto:"
+
+#~ msgid "Increase size:"
+#~ msgstr "Aumentar tamaño:"
+
+#~ msgid "Decrease size:"
+#~ msgstr "Reducir tamaño:"
+
+#~ msgctxt "universal access, seeing"
+#~ msgid "Display"
+#~ msgstr "Pantalla"
+
+#~ msgctxt "universal access, seeing"
+#~ msgid "Zoom"
+#~ msgstr "Ampliación"
+
+#~ msgid "Screen keyboard"
+#~ msgstr "Teclado en pantalla"
+
+#~ msgid "Typing Assistant"
+#~ msgstr "Asistente de tecleado"
+
+#~ msgid "Type here to test settings"
+#~ msgstr "Teclear aquí para probar la configuración"
+
 #~ msgid "Wacom Graphics Tablet"
 #~ msgstr "Tableta gráfica Wacom"
 
@@ -5433,9 +5428,6 @@ msgstr "Todas las configuraciones"
 
 #~ msgid "Could not connect to system bus: %s"
 #~ msgstr "No se pudo conectar con el bus del sistema: %s"
-
-#~ msgid "HighContrastInverse"
-#~ msgstr "AltoContrasteInvertido"
 
 #~ msgid "LowContrast"
 #~ msgstr "ContrasteBajo"
