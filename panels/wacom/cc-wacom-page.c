@@ -1014,7 +1014,8 @@ update_tablet_ui (CcWacomPage *page,
 
 	priv = page->priv;
 
-	/* FIXME Handle ->pad being NULL and hide the pad buttons */
+	/* Hide the pad buttons if no pad is present */
+	gtk_widget_set_visible (WID ("map-buttons-button"), priv->pad != NULL);
 
 	switch (layout) {
 	case LAYOUT_NORMAL:
