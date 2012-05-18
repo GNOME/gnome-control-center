@@ -107,12 +107,21 @@ cc_region_panel_finalize (GObject * object)
 	G_OBJECT_CLASS (cc_region_panel_parent_class)->finalize (object);
 }
 
+static const char *
+cc_region_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/prefs-language";
+}
+
 static void
 cc_region_panel_class_init (CcRegionPanelClass * klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	CcPanelClass * panel_class = CC_PANEL_CLASS (klass);
 
 	g_type_class_add_private (klass, sizeof (CcRegionPanelPrivate));
+
+	panel_class->get_help_uri = cc_region_panel_get_help_uri;
 
 	object_class->set_property = cc_region_panel_set_property;
 	object_class->finalize = cc_region_panel_finalize;
