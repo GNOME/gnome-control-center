@@ -356,6 +356,9 @@ _cc_notebook_select_page (CcNotebook *self,
         pos.y = 0;
         pos.x = self->priv->last_width * index;
 
+        if (clutter_actor_get_transition (self->priv->scroll, "scroll-to") != NULL)
+                clutter_actor_remove_transition (self->priv->scroll, "scroll-to");
+
         clutter_actor_save_easing_state (self->priv->scroll);
         clutter_actor_set_easing_duration (self->priv->scroll, 500);
 
