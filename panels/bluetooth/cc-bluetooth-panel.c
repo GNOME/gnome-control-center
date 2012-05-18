@@ -68,12 +68,21 @@ launch_command (const char *command)
 	}
 }
 
+static const char *
+cc_bluetooth_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/bluetooth";
+}
+
 static void
 cc_bluetooth_panel_class_init (CcBluetoothPanelClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
 	object_class->finalize = cc_bluetooth_panel_finalize;
+
+	panel_class->get_help_uri = cc_bluetooth_panel_get_help_uri;
 
 	g_type_class_add_private (klass, sizeof (CcBluetoothPanelPrivate));
 }
