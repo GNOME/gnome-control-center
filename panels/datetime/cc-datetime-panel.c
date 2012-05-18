@@ -175,6 +175,12 @@ cc_date_time_panel_get_permission (CcPanel *panel)
   return priv->permission;
 }
 
+static const char *
+cc_date_time_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/clock";
+}
+
 static void
 cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
 {
@@ -188,6 +194,7 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   object_class->dispose = cc_date_time_panel_dispose;
 
   panel_class->get_permission = cc_date_time_panel_get_permission;
+  panel_class->get_help_uri   = cc_date_time_panel_get_help_uri;
 }
 
 static void
