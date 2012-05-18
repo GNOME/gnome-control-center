@@ -1221,6 +1221,21 @@ main_window_configure_cb (GtkWidget *widget,
 }
 
 static void
+application_set_cb (GObject    *object,
+                    GParamSpec *pspec,
+                    GnomeControlCenter *self)
+{
+  /* update small screen settings now - to avoid visible resizing, we want
+   * to do it before showing the window, and GtkApplicationWindow cannot be
+   * realized unless its application property has been set */
+  if (gtk_window_get_application (GTK_WINDOW (self->priv->window)))
+    {
+      gtk_widget_realize (self->priv->window);
+      update_small_screen_settings (self);
+    }
+}
+
+static void
 monitors_changed_cb (GdkScreen *screen,
                      GnomeControlCenter *self)
 {
@@ -1266,6 +1281,7 @@ gnome_control_center_init (GnomeControlCenter *self)
   screen = gtk_widget_get_screen (priv->window);
   g_signal_connect (screen, "monitors-changed", G_CALLBACK (monitors_changed_cb), self);
   g_signal_connect (priv->window, "configure-event", G_CALLBACK (main_window_configure_cb), self);
+  g_signal_connect (priv->window, "notify::application", G_CALLBACK (application_set_cb), self);
   g_signal_connect_swapped (priv->window, "delete-event", G_CALLBACK (g_object_unref), self);
   g_signal_connect (priv->window, "key_press_event",
                     G_CALLBACK (window_key_press_event), self);
@@ -1297,10 +1313,6 @@ gnome_control_center_init (GnomeControlCenter *self)
   setup_search (self);
 
   setup_lock (self);
-
-  /* update small screen settings now */
-  gtk_widget_realize (priv->window);
-  update_small_screen_settings (self);
 
   /* store default window title and name */
   priv->default_window_title = g_strdup (gtk_window_get_title (GTK_WINDOW (priv->window)));
