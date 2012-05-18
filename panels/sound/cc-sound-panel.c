@@ -67,10 +67,19 @@ cc_sound_panel_set_property (GObject      *object,
         }
 }
 
+static const char *
+cc_sound_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/media#sound";
+}
+
 static void
 cc_sound_panel_class_init (CcSoundPanelClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+
+	panel_class->get_help_uri = cc_sound_panel_get_help_uri;
 
         object_class->finalize = cc_sound_panel_finalize;
         object_class->set_property = cc_sound_panel_set_property;
