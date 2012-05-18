@@ -1327,6 +1327,12 @@ um_user_panel_get_permission (CcPanel *panel)
         return priv->permission;
 }
 
+static const char *
+um_user_panel_get_help_uri (CcPanel *panel)
+{
+	return "help:gnome-help/user-accounts";
+}
+
 static void
 um_user_panel_class_init (UmUserPanelClass *klass)
 {
@@ -1336,6 +1342,7 @@ um_user_panel_class_init (UmUserPanelClass *klass)
         object_class->dispose = um_user_panel_dispose;
 
         panel_class->get_permission = um_user_panel_get_permission;
+        panel_class->get_help_uri = um_user_panel_get_help_uri;
 
         g_type_class_add_private (klass, sizeof (UmUserPanelPrivate));
 }
