@@ -2282,6 +2282,12 @@ gcm_prefs_window_realize_cb (GtkWidget *widget, CcColorPanel *prefs)
   prefs->priv->main_window = gtk_widget_get_toplevel (widget);
 }
 
+static const char *
+cc_color_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/color";
+}
+
 static void
 cc_color_panel_get_property (GObject    *object,
                               guint       property_id,
@@ -2358,8 +2364,11 @@ static void
 cc_color_panel_class_init (CcColorPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (CcColorPanelPrivate));
+
+  panel_class->get_help_uri = cc_color_panel_get_help_uri;
 
   object_class->get_property = cc_color_panel_get_property;
   object_class->set_property = cc_color_panel_set_property;
