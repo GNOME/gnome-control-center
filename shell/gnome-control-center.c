@@ -205,8 +205,10 @@ _shell_remove_all_custom_widgets (GnomeControlCenterPrivate *priv)
 }
 
 static void
-shell_show_overview_page (GnomeControlCenterPrivate *priv)
+shell_show_overview_page (GnomeControlCenter *center)
 {
+  GnomeControlCenterPrivate *priv = center->priv;
+
   cc_notebook_select_page (CC_NOTEBOOK (priv->notebook),
 			   priv->scrolled_window);
 
@@ -236,7 +238,7 @@ shell_show_overview_page (GnomeControlCenterPrivate *priv)
 void
 gnome_control_center_set_overview_page (GnomeControlCenter *center)
 {
-  shell_show_overview_page (center->priv);
+  shell_show_overview_page (center);
 }
 
 static void
@@ -486,9 +488,10 @@ category_filter_func (GtkTreeModel *model,
 }
 
 static void
-search_entry_changed_cb (GtkEntry                  *entry,
-                         GnomeControlCenterPrivate *priv)
+search_entry_changed_cb (GtkEntry           *entry,
+                         GnomeControlCenter *center)
 {
+  GnomeControlCenterPrivate *priv = center->priv;
   char *str;
 
   /* if the entry text was set manually (not by the user) */
@@ -513,7 +516,7 @@ search_entry_changed_cb (GtkEntry                  *entry,
 
   if (!g_strcmp0 (priv->filter_string, ""))
     {
-      shell_show_overview_page (priv);
+      shell_show_overview_page (center);
       g_object_set (G_OBJECT (entry),
                     "secondary-icon-name", "edit-find-symbolic",
                     "secondary-icon-activatable", FALSE,
@@ -643,7 +646,7 @@ setup_search (GnomeControlCenter *shell)
   priv->filter_string = g_strdup ("");
 
   g_signal_connect (widget, "changed", G_CALLBACK (search_entry_changed_cb),
-                    priv);
+                    shell);
   g_signal_connect (widget, "key-press-event",
                     G_CALLBACK (search_entry_key_press_event_cb), priv);
 
@@ -823,7 +826,7 @@ static void
 home_button_clicked_cb (GtkButton *button,
                         GnomeControlCenter *shell)
 {
-  shell_show_overview_page (shell->priv);
+  shell_show_overview_page (shell);
 }
 
 static void
@@ -1131,7 +1134,7 @@ window_key_press_event (GtkWidget          *win,
           case GDK_KEY_W:
           case GDK_KEY_w:
             if (cc_notebook_get_selected_page (CC_NOTEBOOK (self->priv->notebook)) == self->priv->scrolled_window)
-              shell_show_overview_page (self->priv);
+              shell_show_overview_page (self);
             retval = TRUE;
             break;
         }
