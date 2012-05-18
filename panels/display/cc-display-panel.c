@@ -179,12 +179,21 @@ cc_display_panel_finalize (GObject *object)
   G_OBJECT_CLASS (cc_display_panel_parent_class)->finalize (object);
 }
 
+static const char *
+cc_display_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/prefs-display";
+}
+
 static void
 cc_display_panel_class_init (CcDisplayPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   g_type_class_add_private (klass, sizeof (CcDisplayPanelPrivate));
+
+  panel_class->get_help_uri = cc_display_panel_get_help_uri;
 
   object_class->constructor = cc_display_panel_constructor;
   object_class->get_property = cc_display_panel_get_property;
