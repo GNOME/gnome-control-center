@@ -76,22 +76,27 @@ pw_generate (void)
 
 gdouble
 pw_strength (const gchar  *password,
-             const gchar **hint)
+             const gchar  *old_password,
+             const gchar  *username,
+             const gchar **hint,
+             const gchar **long_hint)
 {
         gint rv;
         gdouble strength;
         void *auxerror;
 
         rv = pwquality_check (get_pwq (),
-                              password, NULL, NULL,
+                              password, old_password, username,
                               &auxerror);
 
         if (rv == PWQ_ERROR_MIN_LENGTH) {
                 *hint = C_("Password strength", "Too short");
+                *long_hint = pwquality_strerror (NULL, 0, rv, auxerror);
                 return 0.0;
         }
         else if (rv < 0) {
                 *hint = C_("Password strength", "Not good enough");
+                *long_hint = pwquality_strerror (NULL, 0, rv, auxerror);
                 return 0.0;
         }
 
@@ -105,6 +110,8 @@ pw_strength (const gchar  *password,
                 *hint = C_("Password strength", "Good");
         else
                 *hint = C_("Password strength", "Strong");
+
+        *long_hint = NULL;
 
          return strength;
 }

@@ -314,15 +314,23 @@ static void
 update_password_strength (UmPasswordDialog *um)
 {
         const gchar *password;
+        const gchar *old_password;
+        const gchar *username;
         gdouble strength;
         const gchar *hint;
+        const gchar *long_hint;
 
         password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
+        old_password = gtk_entry_get_text (GTK_ENTRY (um->old_password_entry));
+        username = um_user_get_user_name (um->user);
 
-        strength = pw_strength (password, &hint);
+        strength = pw_strength (password, old_password, username,
+                                &hint, &long_hint);
 
         cc_strength_bar_set_fraction (CC_STRENGTH_BAR (um->strength_indicator), strength);
         gtk_label_set_label (GTK_LABEL (um->strength_indicator_label), hint);
+        gtk_widget_set_tooltip_text (um->strength_indicator, long_hint);
+        gtk_widget_set_tooltip_text (um->strength_indicator_label, long_hint);
 }
 
 static void

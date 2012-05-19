@@ -24,4 +24,7 @@
 gint     pw_min_length (void);
 gchar   *pw_generate   (void);
 gdouble  pw_strength   (const gchar  *password,
-                        const gchar **hint);
+                        const gchar  *old_password,
+                        const gchar  *username,
+                        const gchar **hint,
+                        const gchar **long_hints);
