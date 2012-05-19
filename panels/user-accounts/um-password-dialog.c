@@ -74,6 +74,8 @@ generate_one_password (GtkWidget        *widget,
         gint status;
         GError *error;
 
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (um->show_password_button), TRUE);
+
         if (um->generated && um->generated[um->next_generated]) {
                 gtk_entry_set_text (GTK_ENTRY (um->password_entry), um->generated[um->next_generated]);
                 gtk_entry_set_text (GTK_ENTRY (um->verify_entry), "");
