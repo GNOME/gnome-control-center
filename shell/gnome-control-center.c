@@ -55,6 +55,12 @@ G_DEFINE_TYPE (GnomeControlCenter, gnome_control_center, CC_TYPE_SHELL)
 
 #define MIN_ICON_VIEW_HEIGHT 300
 
+typedef enum {
+	SMALL_SCREEN_UNSET,
+	SMALL_SCREEN_TRUE,
+	SMALL_SCREEN_FALSE
+} CcSmallScreen;
+
 struct _GnomeControlCenterPrivate
 {
   GtkBuilder *builder;
@@ -85,8 +91,7 @@ struct _GnomeControlCenterPrivate
   gchar *default_window_icon;
 
   int monitor_num;
-  gboolean small_screen;
-  gboolean small_screen_set;
+  CcSmallScreen small_screen;
 };
 
 static const gchar *
@@ -853,7 +858,7 @@ notebook_page_notify_cb (CcNotebook               *notebook,
       gtk_widget_get_preferred_height_for_width (GTK_WIDGET (priv->main_vbox),
                                                  FIXED_WIDTH, NULL, &nat_height);
       gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (priv->scrolled_window),
-                                                  priv->small_screen ? SMALL_SCREEN_FIXED_HEIGHT : nat_height);
+                                                  priv->small_screen == SMALL_SCREEN_TRUE ? SMALL_SCREEN_FIXED_HEIGHT : nat_height);
     }
   else
     {
@@ -1182,34 +1187,39 @@ update_monitor_number (GnomeControlCenter *self)
   return changed;
 }
 
+static CcSmallScreen
+is_small (GnomeControlCenter *self)
+{
+  if (get_monitor_height (self) <= FIXED_HEIGHT)
+    return SMALL_SCREEN_TRUE;
+  return SMALL_SCREEN_FALSE;
+}
+
 static void
 update_small_screen_settings (GnomeControlCenter *self)
 {
-  gboolean small;
+  CcSmallScreen small;
 
   update_monitor_number (self);
-  small = get_monitor_height (self) <= FIXED_HEIGHT;
+  small = is_small (self);
 
-  if (small)
+  if (small == SMALL_SCREEN_TRUE)
     {
       gtk_window_set_resizable (GTK_WINDOW (self->priv->window), TRUE);
       gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (self->priv->scrolled_window), SMALL_SCREEN_FIXED_HEIGHT);
 
-      if (!self->priv->small_screen_set
-          && self->priv->small_screen != small)
+      if (self->priv->small_screen != small)
         gtk_window_maximize (GTK_WINDOW (self->priv->window));
     }
   else
     {
-      if (!self->priv->small_screen_set
-          && self->priv->small_screen != small)
+      if (self->priv->small_screen != small)
         gtk_window_unmaximize (GTK_WINDOW (self->priv->window));
 
       gtk_window_set_resizable (GTK_WINDOW (self->priv->window), FALSE);
     }
 
   self->priv->small_screen = small;
-  self->priv->small_screen_set = TRUE;
 }
 
 static gboolean
@@ -1242,7 +1252,7 @@ monitors_changed_cb (GdkScreen *screen,
 {
   /* We reset small_screen_set to make sure that the
    * window gets maximised if need be, in update_small_screen_settings() */
-  self->priv->small_screen_set = FALSE;
+  self->priv->small_screen = SMALL_SCREEN_UNSET;
   update_small_screen_settings (self);
 }
 
@@ -1262,8 +1272,7 @@ gnome_control_center_init (GnomeControlCenter *self)
     }
 
   priv->monitor_num = -1;
-  self->priv->small_screen = FALSE;
-  self->priv->small_screen_set = FALSE;
+  self->priv->small_screen = SMALL_SCREEN_UNSET;
 
   /* load the user interface */
   priv->builder = gtk_builder_new ();
