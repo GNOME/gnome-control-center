@@ -1206,7 +1206,6 @@ update_small_screen_settings (GnomeControlCenter *self)
   if (small == SMALL_SCREEN_TRUE)
     {
       gtk_window_set_resizable (GTK_WINDOW (self->priv->window), TRUE);
-      gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (self->priv->scrolled_window), SMALL_SCREEN_FIXED_HEIGHT);
 
       if (self->priv->small_screen != small)
         gtk_window_maximize (GTK_WINDOW (self->priv->window));
@@ -1220,6 +1219,9 @@ update_small_screen_settings (GnomeControlCenter *self)
     }
 
   self->priv->small_screen = small;
+
+  /* And update the minimum sizes */
+  notebook_page_notify_cb (CC_NOTEBOOK (self->priv->notebook), NULL, self->priv);
 }
 
 static gboolean
