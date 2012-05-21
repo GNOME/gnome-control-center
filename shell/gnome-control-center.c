@@ -1151,7 +1151,8 @@ get_monitor_height (GnomeControlCenter *self)
   GdkScreen *screen;
   GdkRectangle rect;
 
-  /* FIXME use workarea instead of raw screen geometry */
+  /* We cannot use workarea here, as this wouldn't
+   * be updated when we read it after a monitors-changed signal */
   screen = gtk_widget_get_screen (self->priv->window);
   gdk_screen_get_monitor_geometry (screen, self->priv->monitor_num, &rect);
 
