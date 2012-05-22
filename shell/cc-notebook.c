@@ -315,6 +315,8 @@ cc_notebook_init (CcNotebook *self)
 {
         self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, CC_TYPE_NOTEBOOK, CcNotebookPrivate);
 
+        gtk_widget_set_can_focus (GTK_WIDGET (self), TRUE);
+
         self->priv->embed = gtk_clutter_embed_new ();
         gtk_widget_push_composite_child ();
         gtk_container_add (GTK_CONTAINER (self), self->priv->embed);
