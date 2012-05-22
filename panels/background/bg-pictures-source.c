@@ -569,7 +569,7 @@ bg_pictures_source_init (BgPicturesSource *self)
   g_object_unref (dir);
 
   priv->thumb_factory =
-    gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
+    gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 }
 
 BgPicturesSource *

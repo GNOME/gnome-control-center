@@ -26,8 +26,8 @@
 
 G_BEGIN_DECLS
 
-#define THUMBNAIL_WIDTH 48
-#define THUMBNAIL_HEIGHT 48
+#define THUMBNAIL_WIDTH 256
+#define THUMBNAIL_HEIGHT (THUMBNAIL_WIDTH * 3 / 4)
 
 #define BG_TYPE_SOURCE bg_source_get_type()
 

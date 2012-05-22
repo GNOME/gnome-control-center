@@ -4,7 +4,6 @@ cappletname = background
 uidir = $(pkgdatadir)/ui/background
 dist_ui_DATA = \
 	background.ui \
-	display-base.png \
 	display-overlay.png
 
 slideshowicondir = $(datadir)/icons/hicolor/scalable/categories/
@@ -18,7 +17,8 @@ INCLUDES =						\
 	$(BACKGROUND_PANEL_CFLAGS)			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
-	-DDATADIR="\"$(uidir)\""			\
+	-DUIDIR="\"$(uidir)\""				\
+	-DDATADIR="\"$(datadir)\""			\
 	-DGNOME_DESKTOP_USE_UNSTABLE_API		\
 	$(NULL)
 
@@ -32,6 +32,8 @@ BUILT_SOURCES =            \
 libbackground_la_SOURCES =		\
 	$(BUILT_SOURCES)		\
 	background-module.c		\
+	cc-background-chooser-dialog.c	\
+	cc-background-chooser-dialog.h	\
 	cc-background-panel.c		\
 	cc-background-panel.h		\
 	cc-background-item.c		\

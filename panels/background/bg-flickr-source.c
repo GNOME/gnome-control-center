@@ -156,7 +156,7 @@ bg_flickr_source_init (BgFlickrSource *self)
                                      _query_open_view_cb,
                                      self);
 
-  thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
+  thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 
   g_object_unref (thumb_factory);
 }

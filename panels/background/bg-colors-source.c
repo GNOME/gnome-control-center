@@ -39,31 +39,23 @@ bg_colors_source_class_init (BgColorsSourceClass *klass)
 }
 
 struct {
-	const char *name;
-	GDesktopBackgroundShading type;
-	int orientation;
+  GDesktopBackgroundShading type;
+  int orientation;
+  const char *pcolor;
 } items[] = {
-	{ N_("Horizontal Gradient"), G_DESKTOP_BACKGROUND_SHADING_HORIZONTAL, GTK_ORIENTATION_HORIZONTAL },
-	{ N_("Vertical Gradient"), G_DESKTOP_BACKGROUND_SHADING_VERTICAL, GTK_ORIENTATION_VERTICAL },
-	{ N_("Solid Color"), G_DESKTOP_BACKGROUND_SHADING_SOLID, -1 },
+  { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#8f5902" },
+  { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#770000" },
+  { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#ad7fa8" },
+  { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#edd400" },
+  { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#67915c" },
+  { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#f57900" },
+  { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#6aa978" },
+  { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#57667c" },
+  { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#727e6f" },
+  { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#d59659" },
+  { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#86af8f" },
+  { G_DESKTOP_BACKGROUND_SHADING_SOLID, -1, "#828b98" },
 };
-
-#define PCOLOR "#023c88"
-#define SCOLOR "#5789ca"
-
-static GEmblem *
-get_arrow_icon (GtkOrientation orientation)
-{
-  GIcon *themed;
-  GEmblem *emblem;
-  if (orientation == GTK_ORIENTATION_HORIZONTAL)
-    themed = g_themed_icon_new ("go-next-symbolic");
-  else
-    themed = g_themed_icon_new ("go-down-symbolic");
-  emblem = g_emblem_new_with_origin (themed, G_EMBLEM_ORIGIN_DEVICE);
-  g_object_unref (themed);
-  return emblem;
-}
 
 static void
 bg_colors_source_init (BgColorsSource *self)
@@ -74,7 +66,7 @@ bg_colors_source_init (BgColorsSource *self)
 
   store = bg_source_get_liststore (BG_SOURCE (self));
 
-  thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
+  thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 
   for (i = 0; i < G_N_ELEMENTS (items); i++)
     {
@@ -91,33 +83,22 @@ bg_colors_source_init (BgColorsSource *self)
       /* It does have a URI, it's "none" */
 
       g_object_set (G_OBJECT (item),
-		    "name", _(items[i].name),
-		    "primary-color", PCOLOR,
-		    "secondary-color", SCOLOR,
+                    "uri", "file:///" DATADIR "/gnome-shell/theme/noise-texture.png",
+		    "primary-color", items[i].pcolor,
+		    "secondary-color", items[i].pcolor,
 		    "shading", items[i].type,
-		    "placement", G_DESKTOP_BACKGROUND_STYLE_NONE,
+		    "placement", G_DESKTOP_BACKGROUND_STYLE_WALLPAPER,
 		    "flags", flags,
 		    NULL);
+      cc_background_item_load (item, NULL);
 
       /* insert the item into the liststore */
       pixbuf = cc_background_item_get_thumbnail (item,
 						 thumb_factory,
 						 THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT);
-      if (items[i].orientation != -1)
-        {
-          GEmblem *emblem;
-          GIcon *icon;
-
-	  emblem = get_arrow_icon (items[i].orientation);
-	  icon = g_emblemed_icon_new (G_ICON (pixbuf), emblem);
-	  g_object_unref (emblem);
-	  g_object_unref (pixbuf);
-	  pixbuf = icon;
-	}
       gtk_list_store_insert_with_values (store, NULL, 0,
                                          0, pixbuf,
                                          1, item,
-                                         2, _(items[i].name),
                                          -1);
 
       g_object_unref (pixbuf);

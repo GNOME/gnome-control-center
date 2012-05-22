@@ -183,7 +183,7 @@ bg_wallpapers_source_init (BgWallpapersSource *self)
   priv = self->priv = WALLPAPERS_SOURCE_PRIVATE (self);
 
   priv->thumb_factory =
-    gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
+    gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
   priv->xml = cc_background_xml_new ();
   g_signal_connect (G_OBJECT (priv->xml), "added",
 		    G_CALLBACK (item_added), self);
