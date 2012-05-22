@@ -4,7 +4,6 @@ cappletname = background
 uidir = $(pkgdatadir)/ui/background
 dist_ui_DATA = \
 	background.ui \
-	display-base.png \
 	display-overlay.png
 
 slideshowicondir = $(datadir)/icons/hicolor/scalable/categories/
