@@ -34,7 +34,6 @@
 
 #include "cc-panel.h"
 #include "cc-shell.h"
-#include "cc-shell-search-renderer.h"
 #include "cc-shell-category-view.h"
 #include "cc-shell-model.h"
 #include "cc-notebook.h"
@@ -80,7 +79,6 @@ struct _GnomeControlCenterPrivate
 
   GtkTreeModel *search_filter;
   GtkWidget *search_view;
-  GtkCellRenderer *search_renderer;
   gchar *filter_string;
 
   guint32 last_time;
@@ -518,10 +516,6 @@ search_entry_changed_cb (GtkEntry           *entry,
   g_free (priv->filter_string);
   priv->filter_string = str;
 
-  g_object_set (priv->search_renderer,
-                "search-string", priv->filter_string,
-                NULL);
-
   if (!g_strcmp0 (priv->filter_string, ""))
     {
       shell_show_overview_page (center);
@@ -590,10 +584,34 @@ reparent_notebook_page (GnomeControlCenterPrivate *priv,
 }
 
 static void
+on_search_selection_changed (GtkTreeSelection   *selection,
+                             GnomeControlCenter *shell)
+{
+  GtkTreeModel *model;
+  GtkTreeIter   iter;
+  char         *id = NULL;
+
+  if (!gtk_tree_selection_get_selected (selection, &model, &iter))
+    return;
+
+  gtk_tree_model_get (model, &iter,
+                      COL_ID, &id,
+                      -1);
+
+  if (id)
+    cc_shell_set_active_panel_from_id (CC_SHELL (shell), id, NULL, NULL);
+
+  gtk_tree_selection_unselect_all (selection);
+
+  g_free (id);
+}
+
+static void
 setup_search (GnomeControlCenter *shell)
 {
   GtkWidget *search_view, *widget;
   GtkCellRenderer *renderer;
+  GtkTreeViewColumn *column;
   GnomeControlCenterPrivate *priv = shell->priv;
 
   g_return_if_fail (priv->store != NULL);
@@ -604,49 +622,56 @@ setup_search (GnomeControlCenter *shell)
 
   gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (priv->search_filter),
                                           (GtkTreeModelFilterVisibleFunc)
-                                            model_filter_func,
+                                          model_filter_func,
                                           priv, NULL);
 
   /* set up the search view */
-  priv->search_view = search_view = cc_shell_item_view_new ();
-  gtk_icon_view_set_item_orientation (GTK_ICON_VIEW (search_view),
-                                      GTK_ORIENTATION_HORIZONTAL);
-  gtk_icon_view_set_spacing (GTK_ICON_VIEW (search_view), 0);
-  gtk_icon_view_set_column_spacing (GTK_ICON_VIEW (search_view), 20);
-  gtk_icon_view_set_row_spacing (GTK_ICON_VIEW (search_view), 20);
-  gtk_icon_view_set_margin (GTK_ICON_VIEW (search_view), 20);
-  gtk_icon_view_set_item_padding (GTK_ICON_VIEW (search_view), 0);
-  gtk_icon_view_set_model (GTK_ICON_VIEW (search_view),
+  priv->search_view = search_view = gtk_tree_view_new ();
+  gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (search_view), FALSE);
+  gtk_tree_view_set_model (GTK_TREE_VIEW (search_view),
                            GTK_TREE_MODEL (priv->search_filter));
 
   renderer = gtk_cell_renderer_pixbuf_new ();
   g_object_set (renderer,
                 "follow-state", TRUE,
-                "xpad", 10,
+                "xpad", 15,
+                "ypad", 10,
+                "stock-size", GTK_ICON_SIZE_DIALOG,
                 NULL);
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (search_view),
-                              renderer, FALSE);
-  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (search_view), renderer,
-                                 "pixbuf", COL_PIXBUF);
+  column = gtk_tree_view_column_new_with_attributes ("Icon", renderer,
+                                                     "gicon", COL_GICON,
+                                                     NULL);
+  gtk_tree_view_column_set_expand (column, FALSE);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (priv->search_view), column);
+
+  renderer = gtk_cell_renderer_text_new ();
+  g_object_set (renderer,
+                "xpad", 0,
+                NULL);
+  column = gtk_tree_view_column_new_with_attributes ("Name", renderer,
+                                                     "text", COL_NAME,
+                                                     NULL);
+  gtk_tree_view_column_set_expand (column, FALSE);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (priv->search_view), column);
+
+  renderer = gtk_cell_renderer_text_new ();
+  g_object_set (renderer,
+                "xpad", 15,
+                NULL);
+  column = gtk_tree_view_column_new_with_attributes ("Description", renderer,
+                                                     "text", COL_DESCRIPTION,
+                                                     NULL);
+  gtk_tree_view_column_set_expand (column, TRUE);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (priv->search_view), column);
 
   priv->search_scrolled = W (priv->builder, "search-scrolled-window");
   reparent_notebook_page (priv, priv->search_scrolled);
   gtk_container_add (GTK_CONTAINER (priv->search_scrolled), search_view);
 
-  /* add the custom renderer */
-  priv->search_renderer = (GtkCellRenderer*) cc_shell_search_renderer_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (search_view),
-                              priv->search_renderer, TRUE);
-  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (search_view),
-                                 priv->search_renderer,
-                                 "title", COL_NAME);
-  gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (search_view),
-                                 priv->search_renderer,
-                                 "search-target", COL_DESCRIPTION);
-
-  /* connect the activated signal */
-  g_signal_connect (search_view, "desktop-item-activated",
-                    G_CALLBACK (item_activated_cb), shell);
+  g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->search_view)),
+                    "changed",
+                    G_CALLBACK (on_search_selection_changed),
+                    shell);
 
   /* setup the search entry widget */
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "search-entry");
@@ -1029,7 +1054,6 @@ gnome_control_center_dispose (GObject *object)
       priv->notebook = NULL;
       priv->search_entry = NULL;
       priv->search_view = NULL;
-      priv->search_renderer = NULL;
     }
 
   if (priv->builder)
