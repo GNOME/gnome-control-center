@@ -139,6 +139,8 @@ cc_background_panel_dispose (GObject *object)
     }
 
   g_free (priv->screenshot_path);
+  priv->screenshot_path = NULL;
+
   g_clear_object (&priv->connection);
 
   G_OBJECT_CLASS (cc_background_panel_parent_class)->dispose (object);
@@ -309,9 +311,6 @@ on_screenshot_finished (GObject *source,
       goto out;
     }
 
-  /* remove the temporary file created by the shell */
-  g_unlink (panel->priv->screenshot_path);
-
   width = gdk_pixbuf_get_width (pixbuf);
   height = gdk_pixbuf_get_height (pixbuf);
   surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
@@ -336,6 +335,11 @@ on_screenshot_finished (GObject *source,
                                                                  0, 0,
                                                                  width,
                                                                  height);
+  /* remove the temporary file created by the shell */
+  g_unlink (panel->priv->screenshot_path);
+  g_free (priv->screenshot_path);
+  priv->screenshot_path = NULL;
+
   cairo_destroy (cr);
   cairo_surface_destroy (surface);
 
@@ -386,7 +390,9 @@ on_preview_draw (GtkWidget         *widget,
                  cairo_t           *cr,
                  CcBackgroundPanel *panel)
 {
-  if (!panel->priv->display_screenshot)
+  /* we have another shot in flight or an existing cache */
+  if (panel->priv->display_screenshot == NULL
+      && panel->priv->screenshot_path == NULL)
     {
       GdkRectangle rect;
 
