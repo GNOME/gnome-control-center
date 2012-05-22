@@ -243,6 +243,24 @@ cc_notebook_get_preferred_height_for_width (GtkWidget       *widget,
 	}
 }
 
+static gboolean
+cc_notebook_focus (GtkWidget        *widget,
+		   GtkDirectionType  direction)
+{
+	CcNotebook *notebook;
+	GtkWidget *child;
+
+	notebook = CC_NOTEBOOK (widget);
+	child = notebook->priv->selected_page;
+
+	if (child == NULL)
+		return FALSE;
+
+	/* HACK: the default GtkContainer implementation is fine by us
+	 * and there's no way to get to it without excessive copy/paste */
+	return GTK_WIDGET_GET_CLASS (child)->focus (child, direction);
+}
+
 static void
 cc_notebook_class_init (CcNotebookClass *klass)
 {
@@ -267,6 +285,7 @@ cc_notebook_class_init (CcNotebookClass *klass)
 	widget_class->get_preferred_width_for_height = cc_notebook_get_preferred_width_for_height;
 	widget_class->get_preferred_width = cc_notebook_get_preferred_width;
 	widget_class->get_preferred_height_for_width = cc_notebook_get_preferred_height_for_width;
+	widget_class->focus = cc_notebook_focus;
 }
 
 static void
