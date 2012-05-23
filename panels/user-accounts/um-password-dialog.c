@@ -35,8 +35,7 @@
 #include "cc-strength-bar.h"
 #include "um-utils.h"
 #include "run-passwd.h"
-
-#define MIN_PASSWORD_LEN 6
+#include "pw-utils.h"
 
 struct _UmPasswordDialog {
         GtkWidget *dialog;
@@ -69,52 +68,14 @@ static void
 generate_one_password (GtkWidget        *widget,
                        UmPasswordDialog *um)
 {
-        gint min_len, max_len;
-        gchar *output, *err, *cmdline, *p;
-        gint status;
-        GError *error;
+        gchar *pwd;
 
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (um->show_password_button), TRUE);
+        pwd = pw_generate ();
 
-        if (um->generated && um->generated[um->next_generated]) {
-                gtk_entry_set_text (GTK_ENTRY (um->password_entry), um->generated[um->next_generated]);
-                gtk_entry_set_text (GTK_ENTRY (um->verify_entry), "");
-                um->next_generated++;
-                return;
-        }
+        gtk_entry_set_text (GTK_ENTRY (um->password_entry), pwd);
+        gtk_entry_set_text (GTK_ENTRY (um->verify_entry), "");
 
-        g_strfreev (um->generated);
-        um->generated = NULL;
-        um->next_generated = 0;
-
-        min_len = 6;
-        max_len = 12;
-
-        cmdline = g_strdup_printf ("apg -n 10 -M SNC -m %d -x %d", min_len, max_len);
-        error = NULL;
-        output = NULL;
-        err = NULL;
-        if (!g_spawn_command_line_sync (cmdline, &output, &err, &status, &error)) {
-                g_warning ("Failed to run apg: %s", error->message);
-                g_error_free (error);
-        } else if (WEXITSTATUS (status) == 0) {
-                p = output;
-                if (*p == '\n')
-                        p++;
-                if (p[strlen(p) - 1] == '\n')
-                        p[strlen(p) - 1] = '\0';
-                um->generated = g_strsplit (p, "\n", -1);
-
-                gtk_entry_set_text (GTK_ENTRY (um->password_entry), um->generated[0]);
-                gtk_entry_set_text (GTK_ENTRY (um->verify_entry), "");
-                um->next_generated = 1;
-        } else {
-                g_warning ("agp returned an error: %s", err);
-        }
-
-        g_free (cmdline);
-        g_free (output);
-        g_free (err);
+        g_free (pwd);
 }
 
 static void
@@ -138,58 +99,6 @@ populate_menu (GtkEntry         *entry,
                           G_CALLBACK (generate_one_password), um);
         gtk_widget_show (item);
         gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-}
-
-/* This code is based on the Master Password dialog in Firefox
- * (pref-masterpass.js)
- * Original code triple-licensed under the MPL, GPL, and LGPL
- * so is license-compatible with this file
- */
-static gdouble
-compute_password_strength (const gchar *password)
-{
-        gint length;
-        gint upper, lower, digit, misc;
-        gint i;
-        gdouble strength;
-
-        length = strlen (password);
-        upper = 0;
-        lower = 0;
-        digit = 0;
-        misc = 0;
-
-        for (i = 0; i < length ; i++) {
-                if (g_ascii_isdigit (password[i]))
-                        digit++;
-                else if (g_ascii_islower (password[i]))
-                        lower++;
-                else if (g_ascii_isupper (password[i]))
-                        upper++;
-                else
-                        misc++;
-        }
-
-        if (length > 5)
-                length = 5;
-
-        if (digit > 3)
-                digit = 3;
-
-        if (upper > 3)
-                upper = 3;
-
-        if (misc > 3)
-                misc = 3;
-
-        strength = ((length * 0.1) - 0.2) +
-                    (digit * 0.1) +
-                    (misc * 0.15) +
-                    (upper * 0.1);
-
-        strength = CLAMP (strength, 0.0, 1.0);
-
-        return strength;
 }
 
 static void
@@ -322,8 +231,7 @@ update_sensitivity (UmPasswordDialog *um)
         verify = gtk_entry_get_text (GTK_ENTRY (um->verify_entry));
         old_password = gtk_entry_get_text (GTK_ENTRY (um->old_password_entry));
 
-        /* TODO: configurable policies for acceptable passwords */
-        if (strlen (password) < MIN_PASSWORD_LEN) {
+        if (strlen (password) < pw_min_length ()) {
                 can_change = FALSE;
                 if (password[0] == '\0') {
                         tooltip = _("You need to enter a new password");
@@ -411,23 +319,7 @@ update_password_strength (UmPasswordDialog *um)
 
         password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
 
-        strength = compute_password_strength (password);
-
-        if (strlen (password) < MIN_PASSWORD_LEN) {
-                strength = 0.0;
-                if (password[0] == '\0')
-                        hint = "";
-                else
-                        hint = C_("Password strength", "Too short");
-        }
-        else if (strength < 0.50)
-                hint = C_("Password strength", "Weak");
-        else if (strength < 0.75)
-                hint = C_("Password strength", "Fair");
-        else if (strength < 0.90)
-                hint = C_("Password strength", "Good");
-        else
-                hint = C_("Password strength", "Strong");
+        strength = pw_strength (password, &hint);
 
         cc_strength_bar_set_fraction (CC_STRENGTH_BAR (um->strength_indicator), strength);
         gtk_label_set_label (GTK_LABEL (um->strength_indicator_label), hint);
