@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-05-18 16:52+0000\n"
-"PO-Revision-Date: 2012-05-21 12:59+0200\n"
+"POT-Creation-Date: 2012-05-23 12:32+0000\n"
+"PO-Revision-Date: 2012-05-23 18:09+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -515,7 +515,6 @@ msgid "Remove a device"
 msgstr "Quitar un dispositivo"
 
 #: ../panels/color/color.ui.h:12
-#| msgid "Set this device for all users on this computer"
 msgid "Set this profile for all users on this computer"
 msgstr "Establecer este perfil para todos los usuarios de este equipo"
 
@@ -3844,7 +3843,6 @@ msgid "Secondary click delay"
 msgstr "Retardo de la pulsación secundaria"
 
 #: ../panels/universal-access/uap.ui.h:79
-#| msgid "Hover Click\t"
 msgid "Hover Click"
 msgstr "Pulsación al pasar por encima"
 
@@ -4111,8 +4109,9 @@ msgid "_New password"
 msgstr "Contraseña _nueva"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:10
-msgid "Choose a generated password"
-msgstr "Elegir una contraseña generada"
+#| msgid "Set a password now"
+msgid "Generate a password"
+msgstr "Generar una contraseña"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:11
 msgid "Fair"
@@ -4223,7 +4222,7 @@ msgid "Authentication failed"
 msgstr "Falló la autenticación"
 
 #: ../panels/user-accounts/run-passwd.c:506
-#: ../panels/user-accounts/um-password-dialog.c:375
+#: ../panels/user-accounts/um-password-dialog.c:332
 #, c-format
 msgid "The new password is too short"
 msgstr "La contraseña nueva es demasiado corta"
@@ -4363,77 +4362,78 @@ msgstr "Registrando huellas digitales"
 msgid "Summary"
 msgstr "Resumen"
 
-#: ../panels/user-accounts/um-password-dialog.c:179
-msgid "More choices..."
-msgstr "Más opciones…"
+#: ../panels/user-accounts/um-password-dialog.c:136
+#| msgid "Set a password now"
+msgid "_Generate a password"
+msgstr "_Generar una contraseña"
 
-#: ../panels/user-accounts/um-password-dialog.c:285
+#: ../panels/user-accounts/um-password-dialog.c:242
 msgid "Please choose another password."
 msgstr "Elija otra contraseña."
 
-#: ../panels/user-accounts/um-password-dialog.c:294
+#: ../panels/user-accounts/um-password-dialog.c:251
 msgid "Please type your current password again."
 msgstr "Escriba de nuevo su contraseña actual."
 
-#: ../panels/user-accounts/um-password-dialog.c:300
+#: ../panels/user-accounts/um-password-dialog.c:257
 msgid "Password could not be changed"
 msgstr "No se pudo cambiar la contraseña"
 
-#: ../panels/user-accounts/um-password-dialog.c:372
+#: ../panels/user-accounts/um-password-dialog.c:329
 msgid "You need to enter a new password"
 msgstr "Debe introducir una contraseña"
 
-#: ../panels/user-accounts/um-password-dialog.c:381
+#: ../panels/user-accounts/um-password-dialog.c:338
 msgid "You need to confirm the password"
 msgstr "Debe confirmar la contraseña"
 
-#: ../panels/user-accounts/um-password-dialog.c:384
+#: ../panels/user-accounts/um-password-dialog.c:341
 msgid "The passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
-#: ../panels/user-accounts/um-password-dialog.c:390
+#: ../panels/user-accounts/um-password-dialog.c:347
 msgid "You need to enter your current password"
 msgstr "Debe introducir su contraseña actual"
 
-#: ../panels/user-accounts/um-password-dialog.c:393
+#: ../panels/user-accounts/um-password-dialog.c:350
 msgid "The current password is not correct"
 msgstr "La contraseña actual no es correcta"
 
-#: ../panels/user-accounts/um-password-dialog.c:466
-#: ../panels/user-accounts/um-password-dialog.c:693
+#: ../panels/user-accounts/um-password-dialog.c:421
+#: ../panels/user-accounts/um-password-dialog.c:653
 msgctxt "Password strength"
 msgid "Too short"
 msgstr "Demasiado corta"
 
-#: ../panels/user-accounts/um-password-dialog.c:469
-#: ../panels/user-accounts/um-password-dialog.c:694
+#: ../panels/user-accounts/um-password-dialog.c:424
+#: ../panels/user-accounts/um-password-dialog.c:654
 msgctxt "Password strength"
 msgid "Weak"
 msgstr "Débil"
 
-#: ../panels/user-accounts/um-password-dialog.c:471
-#: ../panels/user-accounts/um-password-dialog.c:695
+#: ../panels/user-accounts/um-password-dialog.c:426
+#: ../panels/user-accounts/um-password-dialog.c:655
 msgctxt "Password strength"
 msgid "Fair"
 msgstr "Regular"
 
-#: ../panels/user-accounts/um-password-dialog.c:473
-#: ../panels/user-accounts/um-password-dialog.c:696
+#: ../panels/user-accounts/um-password-dialog.c:428
+#: ../panels/user-accounts/um-password-dialog.c:656
 msgctxt "Password strength"
 msgid "Good"
 msgstr "Buena"
 
-#: ../panels/user-accounts/um-password-dialog.c:475
-#: ../panels/user-accounts/um-password-dialog.c:697
+#: ../panels/user-accounts/um-password-dialog.c:430
+#: ../panels/user-accounts/um-password-dialog.c:657
 msgctxt "Password strength"
 msgid "Strong"
 msgstr "Fuerte"
 
-#: ../panels/user-accounts/um-password-dialog.c:514
+#: ../panels/user-accounts/um-password-dialog.c:469
 msgid "Passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
-#: ../panels/user-accounts/um-password-dialog.c:540
+#: ../panels/user-accounts/um-password-dialog.c:495
 msgid "Wrong password"
 msgstr "Contraseña errónea"
 
@@ -4883,13 +4883,10 @@ msgstr ""
 "disponibles.\n"
 
 #: ../shell/control-center.c:211
-#| msgctxt "print job"
-#| msgid "Held"
 msgid "Help"
 msgstr "Ayuda"
 
 #: ../shell/control-center.c:212
-#| msgid "_Quit"
 msgid "Quit"
 msgstr "Salir"
 
@@ -4908,6 +4905,12 @@ msgstr "Preferencias;Configuración;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "Todas las configuraciones"
+
+#~ msgid "Choose a generated password"
+#~ msgstr "Elegir una contraseña generada"
+
+#~ msgid "More choices..."
+#~ msgstr "Más opciones…"
 
 #~ msgid "Change contrast:"
 #~ msgstr "Cambiar contraste:"
