@@ -54,6 +54,8 @@ cc_shell_log_init (void)
 void
 cc_shell_log_set_debug (gboolean debug)
 {
+        g_setenv ("G_MESSAGES_DEBUG", "all", TRUE);
+
         if (debug) {
                 log_levels |= (G_LOG_LEVEL_DEBUG | G_LOG_LEVEL_INFO);
                 g_debug ("Enabling debugging");
