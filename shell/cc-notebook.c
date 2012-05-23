@@ -326,6 +326,7 @@ on_embed_size_allocate (GtkWidget     *embed,
 
         pos.y = 0;
         pos.x = clutter_actor_get_x (frame);
+        g_debug ("Scrolling to (%lf,%lf) in allocation", pos.x, pos.y);
         clutter_scroll_actor_scroll_to_point (CLUTTER_SCROLL_ACTOR (self->priv->scroll), &pos);
 }
 
@@ -377,12 +378,15 @@ _cc_notebook_select_page (CcNotebook *self,
         pos.y = 0;
         pos.x = self->priv->last_width * index;
 
-        if (clutter_actor_get_transition (self->priv->scroll, "scroll-to") != NULL)
+        if (clutter_actor_get_transition (self->priv->scroll, "scroll-to") != NULL) {
+                g_debug ("Cancelling previous scroll animation");
                 clutter_actor_remove_transition (self->priv->scroll, "scroll-to");
+        }
 
         clutter_actor_save_easing_state (self->priv->scroll);
         clutter_actor_set_easing_duration (self->priv->scroll, 500);
 
+        g_debug ("Scrolling to (%lf,%lf) in page selection", pos.x, pos.y);
         clutter_scroll_actor_scroll_to_point (CLUTTER_SCROLL_ACTOR (self->priv->scroll), &pos);
 
 	clutter_actor_restore_easing_state (self->priv->scroll);
