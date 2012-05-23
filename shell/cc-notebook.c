@@ -303,6 +303,8 @@ on_embed_size_allocate (GtkWidget     *embed,
         if (self->priv->selected_page == NULL)
 		return;
 
+        self->priv->last_width = allocation->width;
+
         page_w = allocation->width;
         page_h = allocation->height;
 
@@ -318,8 +320,6 @@ on_embed_size_allocate (GtkWidget     *embed,
 	 * if we're still scrolling there */
 	if (clutter_actor_get_transition (self->priv->scroll, "scroll-to") != NULL)
 		return;
-
-        self->priv->last_width = allocation->width;
 
 	frame = g_object_get_data (G_OBJECT (self->priv->selected_page),
 				   "cc-notebook-frame");
