@@ -26,124 +26,76 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 
-#include <sys/types.h>
-#include <sys/wait.h>
+#include <pwquality.h>
 
 
-#define MIN_PASSWORD_LEN 6
+static pwquality_settings_t *
+get_pwq (void)
+{
+        static pwquality_settings_t *settings;
+
+        if (settings == NULL) {
+                gchar *err = NULL;
+                settings = pwquality_default_settings ();
+                if (pwquality_read_config (settings, NULL, (gpointer)&err) < 0) {
+                        g_error ("failed to read pwquality configuration: %s\n", err);
+                }
+        }
+
+        return settings;
+}
 
 gint
 pw_min_length (void)
 {
-        return MIN_PASSWORD_LEN;
+        gint value = 0;
+
+        if (pwquality_get_int_value (get_pwq (), PWQ_SETTING_MIN_LENGTH, &value) < 0) {
+                g_error ("Failed to read pwquality setting\n" );
+        }
+
+        return value;
 }
 
 gchar *
 pw_generate (void)
 {
-        static gchar **generated = NULL;
-        static gint next;
+        gchar *res;
+        gint rv;
 
-        gint min_len, max_len;
-        gchar *output, *err, *cmdline, *p;
-        gint status;
-        GError *error;
-        gchar *ret;
+        rv = pwquality_generate (get_pwq (), 0, &res);
 
-        if (generated && generated[next]) {
-                return g_strdup (generated[next++]);
+        if (rv < 0) {
+                g_error ("Password generation failed: %s\n",
+                         pwquality_strerror (NULL, 0, rv, NULL));
+                return NULL;
         }
 
-        g_strfreev (generated);
-        generated = NULL;
-        next = 0;
-
-        ret = NULL;
-
-        min_len = 6;
-        max_len = 12;
-        cmdline = g_strdup_printf ("apg -n 10 -M SNC -m %d -x %d", min_len, max_len);
-        error = NULL;
-        output = NULL;
-        err = NULL;
-        if (!g_spawn_command_line_sync (cmdline, &output, &err, &status, &error)) {
-                g_warning ("Failed to run apg: %s", error->message);
-                g_error_free (error);
-        } else if (WEXITSTATUS (status) == 0) {
-                p = output;
-                if (*p == '\n')
-                        p++;
-                if (p[strlen(p) - 1] == '\n')
-                        p[strlen(p) - 1] = '\0';
-                generated = g_strsplit (p, "\n", -1);
-                next = 0;
-
-                ret = g_strdup (generated[next++]);
-        } else {
-                g_warning ("agp returned an error: %s", err);
-        }
-
-        g_free (cmdline);
-        g_free (output);
-        g_free (err);
-
-        return ret;
+        return res;
 }
 
-/* This code is based on the Master Password dialog in Firefox
- * (pref-masterpass.js)
- * Original code triple-licensed under the MPL, GPL, and LGPL
- * so is license-compatible with this file
- */
 gdouble
 pw_strength (const gchar  *password,
              const gchar **hint)
 {
-        gint length;
-        gint upper, lower, digit, misc;
-        gint i;
+        gint rv;
         gdouble strength;
+        void *auxerror;
 
-        length = strlen (password);
-        upper = 0;
-        lower = 0;
-        digit = 0;
-        misc = 0;
+        rv = pwquality_check (get_pwq (),
+                              password, NULL, NULL,
+                              &auxerror);
 
-        if (length < MIN_PASSWORD_LEN) {
+        if (rv == PWQ_ERROR_MIN_LENGTH) {
                 *hint = C_("Password strength", "Too short");
                 return 0.0;
         }
-
-        for (i = 0; i < length ; i++) {
-                if (g_ascii_isdigit (password[i]))
-                        digit++;
-                else if (g_ascii_islower (password[i]))
-                        lower++;
-                else if (g_ascii_isupper (password[i]))
-                        upper++;
-                else
-                        misc++;
+        else if (rv < 0) {
+                *hint = C_("Password strength", "Not good enough");
+                return 0.0;
         }
 
-        if (length > 5)
-                length = 5;
-
-        if (digit > 3)
-                digit = 3;
-
-        if (upper > 3)
-                upper = 3;
-
-        if (misc > 3)
-                misc = 3;
-
-        strength = ((length * 0.1) - 0.2) +
-                    (digit * 0.1) +
-                    (misc * 0.15) +
-                    (upper * 0.1);
-
-        strength = CLAMP (strength, 0.0, 1.0);
+        strength = CLAMP (0.01 * rv, 0.0, 1.0);
 
         if (strength < 0.50)
                 *hint = C_("Password strength", "Weak");
@@ -154,5 +106,5 @@ pw_strength (const gchar  *password,
         else
                 *hint = C_("Password strength", "Strong");
 
-        return strength;
+         return strength;
 }

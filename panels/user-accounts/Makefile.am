@@ -13,6 +13,7 @@ AM_CPPFLAGS =						\
 	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\"       \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
 	-DUM_PIXMAP_DIR=\""$(pkgdatadir)/pixmaps"\"	\
+	-DHAVE_LIBPWQUALITY				\
 	-I$(srcdir)/../common/				\
 	-I$(srcdir)/../../shell/			\
 	$(PANEL_CFLAGS)					\
@@ -58,6 +59,7 @@ libuser_accounts_la_LIBADD = 		\
 	$(PANEL_LIBS)			\
 	$(USER_ACCOUNTS_PANEL_LIBS)	\
 	$(top_builddir)/panels/common/liblanguage.la \
+	-lpwquality			\
 	-lcrypt				\
 	-lm
 
