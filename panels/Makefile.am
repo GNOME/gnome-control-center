@@ -13,8 +13,11 @@ SUBDIRS= \
 	keyboard \
 	universal-access \
 	user-accounts \
-	datetime \
-	wacom
+	datetime
+
+if BUILD_WACOM
+SUBDIRS += wacom
+endif
 
 if BUILD_PRINTERS
 SUBDIRS += printers

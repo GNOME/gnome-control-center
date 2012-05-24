@@ -130,10 +130,6 @@ PKG_CHECK_MODULES(USER_ACCOUNTS_PANEL, $COMMON_MODULES
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION
                   pwquality
                   $SYSTEMD)
-PKG_CHECK_MODULES(WACOM_PANEL, $COMMON_MODULES
-                  gnome-settings-daemon >= $GSD_REQUIRED_VERSION
-                  xi >= 1.2 x11 libwacom >= $LIBWACOM_REQUIRED_VERSION
-                  gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION)
 
 GDESKTOP_PREFIX=`$PKG_CONFIG --variable prefix gsettings-desktop-schemas`
 AC_SUBST(GDESKTOP_PREFIX)
@@ -202,6 +198,25 @@ else
    have_cheese=no
 fi
 AM_CONDITIONAL(BUILD_CHEESE, test x${have_cheese} = xyes)
+
+# wacom is disabled for s390/s390x and non Linux platforms (needs udev)
+case $host_os in
+  linux*)
+    if test "$host_cpu" = s390 -o "$host_cpu" = s390x; then
+      have_wacom=no
+    else
+      PKG_CHECK_MODULES(WACOM_PANEL, $COMMON_MODULES
+                        gnome-settings-daemon >= $GSD_REQUIRED_VERSION
+                        xi >= 1.2 x11 libwacom >= $LIBWACOM_REQUIRED_VERSION
+                        gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION)
+      have_wacom=yes
+    fi
+    ;;
+  *)
+    have_wacom=no
+    ;;
+esac
+AM_CONDITIONAL(BUILD_WACOM, [test x"$have_wacom" = x"yes"])
 
 # This is a hard-dependency for the region and user-accounts panels
 PKG_CHECK_MODULES(ISOCODES, iso-codes)
@@ -450,5 +465,10 @@ if test "x$with_systemd" = "xyes"; then
 	AC_MSG_NOTICE([** systemd (Systemd session tracking)])
 else
 	AC_MSG_NOTICE([   Using ConsoleKit for session tracking])
+fi
+if test "x$have_wacom" = "xyes"; then
+	AC_MSG_NOTICE([** wacom (Wacom tablet panel)])
+else
+	AC_MSG_NOTICE([   Wacom panel disabled])
 fi
 AC_MSG_NOTICE([End options])
