@@ -128,6 +128,7 @@ PKG_CHECK_MODULES(USER_ACCOUNTS_PANEL, $COMMON_MODULES
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
                   gnome-desktop-3.0
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION
+                  pwquality
                   $SYSTEMD)
 PKG_CHECK_MODULES(WACOM_PANEL, $COMMON_MODULES
                   gnome-settings-daemon >= $GSD_REQUIRED_VERSION
