@@ -83,6 +83,8 @@ device_set_property (XDevice        *xdevice,
                                xdevice, prop, realtype, realformat,
                                PropModeReplace, data, nitems);
 
+        XFree (data);
+
         if (gdk_error_trap_pop ()) {
                 g_warning ("Error in setting \"%s\" for \"%s\"", property->name, device_name);
                 return FALSE;
@@ -129,7 +131,14 @@ supports_xinput2_devices (int *opcode)
 
         if (XIQueryVersion (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &major, &minor) != Success) {
                 gdk_error_trap_pop_ignored ();
-                return FALSE;
+                /* try for 2.2, maybe gtk has already announced 2.2 support */
+                gdk_error_trap_push ();
+                major = 2;
+                minor = 2;
+                if (XIQueryVersion (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &major, &minor) != Success) {
+                    gdk_error_trap_pop_ignored ();
+                    return FALSE;
+                }
         }
         gdk_error_trap_pop_ignored ();
 
@@ -328,14 +337,16 @@ xdevice_get_last_tool_id (int  deviceid)
         if (!prop)
                 return -1;
 
+        data = NULL;
+
         gdk_error_trap_push ();
 
-        if (!XIGetProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
+        if (XIGetProperty (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
                             deviceid, prop, 0, 1000, False,
                             AnyPropertyType, &act_type, &act_format,
-                            &nitems, &bytes_after, &data) == Success) {
+                            &nitems, &bytes_after, &data) != Success) {
                 gdk_error_trap_pop_ignored ();
-                return -1;
+                goto out;
         }
 
         if (gdk_error_trap_pop ())
@@ -366,10 +377,11 @@ xdevice_get_last_tool_id (int  deviceid)
 	/* That means that no tool was set down yet */
 	if (id == STYLUS_DEVICE_ID ||
 	    id == ERASER_DEVICE_ID)
-		return 0x0;
+		id = 0x0;
 
 out:
-        XFree (data);
+        if (data != NULL)
+                XFree (data);
         return id;
 }
 
@@ -433,7 +445,7 @@ run_custom_command (GdkDevice              *device,
 {
         GSettings *settings;
         char *cmd;
-        char *argv[5];
+        char *argv[7];
         int exit_status;
         gboolean rc;
         int id;
@@ -451,10 +463,12 @@ run_custom_command (GdkDevice              *device,
         g_object_get (device, "device-id", &id, NULL);
 
         argv[0] = cmd;
-        argv[1] = g_strdup_printf ("-t %s", custom_command_to_string (command));
-        argv[2] = g_strdup_printf ("-i %d", id);
-        argv[3] = g_strdup_printf ("%s", gdk_device_get_name (device));
-        argv[4] = NULL;
+        argv[1] = "-t";
+        argv[2] = (char *) custom_command_to_string (command);
+        argv[3] = "-i";
+        argv[4] = g_strdup_printf ("%d", id);
+        argv[5] = g_strdup_printf ("%s", gdk_device_get_name (device));
+        argv[6] = NULL;
 
         rc = g_spawn_sync (g_get_home_dir (), argv, NULL, G_SPAWN_SEARCH_PATH,
                            NULL, NULL, NULL, NULL, &exit_status, NULL);
@@ -463,8 +477,8 @@ run_custom_command (GdkDevice              *device,
                 g_warning ("Couldn't execute command '%s', verify that this is a valid command.", cmd);
 
         g_free (argv[0]);
-        g_free (argv[1]);
-        g_free (argv[2]);
+        g_free (argv[4]);
+        g_free (argv[5]);
 
         return (exit_status == 0);
 }
