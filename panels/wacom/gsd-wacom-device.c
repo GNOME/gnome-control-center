@@ -1326,6 +1326,9 @@ gsd_wacom_device_finalize (GObject *object)
                 p->wacom_settings = NULL;
         }
 
+        g_list_foreach (p->styli, (GFunc) g_object_unref, NULL);
+        g_list_free (p->styli);
+
         g_list_foreach (p->buttons, (GFunc) gsd_wacom_tablet_button_free, NULL);
         g_list_free (p->buttons);
 
