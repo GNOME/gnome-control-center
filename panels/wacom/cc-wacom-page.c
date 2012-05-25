@@ -69,6 +69,7 @@ struct _CcWacomPagePrivate
 
 	/* Button mapping */
 	GtkBuilder     *mapping_builder;
+	GtkWidget      *button_map;
 
 	/* Display mapping */
 	GtkWidget      *mapping;
@@ -679,6 +680,9 @@ map_buttons_button_clicked_cb (GtkButton   *button,
 			  G_CALLBACK (button_mapping_dialog_closed), page);
 
 	gtk_widget_show (dialog);
+
+	priv->button_map = dialog;
+	g_object_add_weak_pointer (G_OBJECT (dialog), (gpointer *) &priv->button_map);
 }
 
 static void
@@ -833,6 +837,11 @@ cc_wacom_page_dispose (GObject *object)
 	if (priv->area) {
 		calib_area_free (priv->area);
 		priv->area = NULL;
+	}
+
+	if (priv->button_map) {
+		gtk_widget_destroy (priv->button_map);
+		priv->button_map = NULL;
 	}
 
 	if (priv->builder) {
