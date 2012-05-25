@@ -294,6 +294,8 @@ cc_wacom_panel_switch_to_panel (CcWacomPanel *self,
 	CcShell *shell;
 	GError *error = NULL;
 
+	g_return_if_fail (self);
+
 	shell = cc_panel_get_shell (CC_PANEL (self));
 	if (cc_shell_set_active_panel_from_id (shell, panel, NULL, &error) == FALSE)
 	{

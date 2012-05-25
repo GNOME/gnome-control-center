@@ -849,6 +849,7 @@ cc_wacom_page_dispose (GObject *object)
 		priv->builder = NULL;
 	}
 
+	priv->panel = NULL;
 
 	G_OBJECT_CLASS (cc_wacom_page_parent_class)->dispose (object);
 }
@@ -1129,6 +1130,7 @@ cc_wacom_page_new (CcWacomPanel   *panel,
 	page = g_object_new (CC_TYPE_WACOM_PAGE, NULL);
 
 	priv = page->priv;
+	priv->panel = panel;
 
 	cc_wacom_page_update_tools (page, stylus, eraser, pad);
 
