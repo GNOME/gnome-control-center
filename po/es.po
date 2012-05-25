@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-05-23 12:32+0000\n"
-"PO-Revision-Date: 2012-05-23 18:09+0200\n"
+"POT-Creation-Date: 2012-05-25 13:05+0000\n"
+"PO-Revision-Date: 2012-05-25 16:15+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1367,7 +1367,6 @@ msgstr "Ve_locidad:"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
 #: ../panels/universal-access/uap.ui.h:52
-#: ../panels/universal-access/zoom-options.c:333
 msgid "Short"
 msgstr "Corto"
 
@@ -1385,7 +1384,6 @@ msgstr "Velocidad de repetición de teclas"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
 #: ../panels/mouse/gnome-mouse-properties.ui.h:26
 #: ../panels/universal-access/uap.ui.h:55
-#: ../panels/universal-access/zoom-options.c:337
 msgid "Long"
 msgstr "Largo"
 
@@ -1494,7 +1492,7 @@ msgid "_Reassign"
 msgstr "_Reasignar"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1618
-#: ../panels/wacom/cc-wacom-page.c:608
+#: ../panels/wacom/cc-wacom-page.c:609
 msgid "Action"
 msgstr "Acción"
 
@@ -1682,8 +1680,8 @@ msgstr "Empresa"
 #. TRANSLATORS: this no (!) WiFi security
 #: ../panels/network/cc-network-panel.c:1201
 #: ../panels/network/cc-network-panel.c:1584
-#: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:323
-#: ../panels/wacom/cc-wacom-page.c:340
+#: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:324
+#: ../panels/wacom/cc-wacom-page.c:341
 msgid "None"
 msgstr "Ninguna"
 
@@ -3866,17 +3864,35 @@ msgstr "Configuración del ratón"
 msgid "Pointing and Clicking"
 msgstr "Apuntar y pulsar"
 
+#: ../panels/universal-access/zoom-options.c:333
+#| msgid "Short"
+msgctxt "Distance"
+msgid "Short"
+msgstr "Corta"
+
 #: ../panels/universal-access/zoom-options.c:334
-msgid "1/4 Screen"
-msgstr "1/4 de pantalla"
+#| msgid "Screen"
+msgctxt "Distance"
+msgid "¼ Screen"
+msgstr "¼ de pantalla"
 
 #: ../panels/universal-access/zoom-options.c:335
-msgid "1/2 Screen"
-msgstr "1/2 de pantalla"
+#| msgid "Screen"
+msgctxt "Distance"
+msgid "½ Screen"
+msgstr "½ pantalla"
 
 #: ../panels/universal-access/zoom-options.c:336
-msgid "3/4 Screen"
-msgstr "3/4 de pantalla"
+#| msgid "Screen"
+msgctxt "Distance"
+msgid "¾ Screen"
+msgstr "¾ de pantalla"
+
+#: ../panels/universal-access/zoom-options.c:337
+#| msgid "Long"
+msgctxt "Distance"
+msgid "Long"
+msgstr "Larga"
 
 #: ../panels/universal-access/zoom-options.ui.h:1
 msgid "Zoom Options"
@@ -4109,7 +4125,6 @@ msgid "_New password"
 msgstr "Contraseña _nueva"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:10
-#| msgid "Set a password now"
 msgid "Generate a password"
 msgstr "Generar una contraseña"
 
@@ -4217,12 +4232,47 @@ msgstr "Icono de usuario"
 msgid "_Language"
 msgstr "_Idioma"
 
+#: ../panels/user-accounts/pw-utils.c:93
+#: ../panels/user-accounts/um-password-dialog.c:553
+msgctxt "Password strength"
+msgid "Too short"
+msgstr "Demasiado corta"
+
+#: ../panels/user-accounts/pw-utils.c:98
+msgctxt "Password strength"
+msgid "Not good enough"
+msgstr "No es suficientemente buena"
+
+#: ../panels/user-accounts/pw-utils.c:106
+#: ../panels/user-accounts/um-password-dialog.c:554
+msgctxt "Password strength"
+msgid "Weak"
+msgstr "Débil"
+
+#: ../panels/user-accounts/pw-utils.c:108
+#: ../panels/user-accounts/um-password-dialog.c:555
+msgctxt "Password strength"
+msgid "Fair"
+msgstr "Regular"
+
+#: ../panels/user-accounts/pw-utils.c:110
+#: ../panels/user-accounts/um-password-dialog.c:556
+msgctxt "Password strength"
+msgid "Good"
+msgstr "Buena"
+
+#: ../panels/user-accounts/pw-utils.c:112
+#: ../panels/user-accounts/um-password-dialog.c:557
+msgctxt "Password strength"
+msgid "Strong"
+msgstr "Fuerte"
+
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
 msgstr "Falló la autenticación"
 
 #: ../panels/user-accounts/run-passwd.c:506
-#: ../panels/user-accounts/um-password-dialog.c:332
+#: ../panels/user-accounts/um-password-dialog.c:240
 #, c-format
 msgid "The new password is too short"
 msgstr "La contraseña nueva es demasiado corta"
@@ -4362,78 +4412,47 @@ msgstr "Registrando huellas digitales"
 msgid "Summary"
 msgstr "Resumen"
 
-#: ../panels/user-accounts/um-password-dialog.c:136
-#| msgid "Set a password now"
+#: ../panels/user-accounts/um-password-dialog.c:97
 msgid "_Generate a password"
 msgstr "_Generar una contraseña"
 
-#: ../panels/user-accounts/um-password-dialog.c:242
+#: ../panels/user-accounts/um-password-dialog.c:151
 msgid "Please choose another password."
 msgstr "Elija otra contraseña."
 
-#: ../panels/user-accounts/um-password-dialog.c:251
+#: ../panels/user-accounts/um-password-dialog.c:160
 msgid "Please type your current password again."
 msgstr "Escriba de nuevo su contraseña actual."
 
-#: ../panels/user-accounts/um-password-dialog.c:257
+#: ../panels/user-accounts/um-password-dialog.c:166
 msgid "Password could not be changed"
 msgstr "No se pudo cambiar la contraseña"
 
-#: ../panels/user-accounts/um-password-dialog.c:329
+#: ../panels/user-accounts/um-password-dialog.c:237
 msgid "You need to enter a new password"
 msgstr "Debe introducir una contraseña"
 
-#: ../panels/user-accounts/um-password-dialog.c:338
+#: ../panels/user-accounts/um-password-dialog.c:246
 msgid "You need to confirm the password"
 msgstr "Debe confirmar la contraseña"
 
-#: ../panels/user-accounts/um-password-dialog.c:341
+#: ../panels/user-accounts/um-password-dialog.c:249
 msgid "The passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
-#: ../panels/user-accounts/um-password-dialog.c:347
+#: ../panels/user-accounts/um-password-dialog.c:255
 msgid "You need to enter your current password"
 msgstr "Debe introducir su contraseña actual"
 
-#: ../panels/user-accounts/um-password-dialog.c:350
+#: ../panels/user-accounts/um-password-dialog.c:258
 msgid "The current password is not correct"
 msgstr "La contraseña actual no es correcta"
 
-#: ../panels/user-accounts/um-password-dialog.c:421
-#: ../panels/user-accounts/um-password-dialog.c:653
-msgctxt "Password strength"
-msgid "Too short"
-msgstr "Demasiado corta"
-
-#: ../panels/user-accounts/um-password-dialog.c:424
-#: ../panels/user-accounts/um-password-dialog.c:654
-msgctxt "Password strength"
-msgid "Weak"
-msgstr "Débil"
-
-#: ../panels/user-accounts/um-password-dialog.c:426
-#: ../panels/user-accounts/um-password-dialog.c:655
-msgctxt "Password strength"
-msgid "Fair"
-msgstr "Regular"
-
-#: ../panels/user-accounts/um-password-dialog.c:428
-#: ../panels/user-accounts/um-password-dialog.c:656
-msgctxt "Password strength"
-msgid "Good"
-msgstr "Buena"
-
-#: ../panels/user-accounts/um-password-dialog.c:430
-#: ../panels/user-accounts/um-password-dialog.c:657
-msgctxt "Password strength"
-msgid "Strong"
-msgstr "Fuerte"
-
-#: ../panels/user-accounts/um-password-dialog.c:469
+#: ../panels/user-accounts/um-password-dialog.c:369
 msgid "Passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
-#: ../panels/user-accounts/um-password-dialog.c:495
+#: ../panels/user-accounts/um-password-dialog.c:395
 msgid "Wrong password"
 msgstr "Contraseña errónea"
 
@@ -4635,24 +4654,24 @@ msgstr "Mapear una única pantalla"
 msgid "%d of %d"
 msgstr "%d de %d"
 
-#: ../panels/wacom/cc-wacom-page.c:305
+#: ../panels/wacom/cc-wacom-page.c:306
 msgid "Switch Modes"
 msgstr "Cambiar modos"
 
-#: ../panels/wacom/cc-wacom-page.c:552
+#: ../panels/wacom/cc-wacom-page.c:553
 msgid "Up"
 msgstr "Arriba"
 
-#: ../panels/wacom/cc-wacom-page.c:552
+#: ../panels/wacom/cc-wacom-page.c:553
 msgid "Down"
 msgstr "Abajo"
 
-#: ../panels/wacom/cc-wacom-page.c:587
+#: ../panels/wacom/cc-wacom-page.c:588
 #: ../panels/wacom/cc-wacom-stylus-page.c:376
 msgid "Button"
 msgstr "Botón"
 
-#: ../panels/wacom/cc-wacom-page.c:710
+#: ../panels/wacom/cc-wacom-page.c:714
 msgid "Display Mapping"
 msgstr "Mostrar mapeo"
 
@@ -4718,67 +4737,67 @@ msgstr "Modo de seguimiento"
 msgid "Left-Handed Orientation"
 msgstr "Orientación para zurdos"
 
-#: ../panels/wacom/gsd-wacom-device.c:910
+#: ../panels/wacom/gsd-wacom-device.c:920
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Modo del anillo izquierdo nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:917
+#: ../panels/wacom/gsd-wacom-device.c:929
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Modo del anillo derecho nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:945
+#: ../panels/wacom/gsd-wacom-device.c:959
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Modo de la banda táctil izquierda nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:952
+#: ../panels/wacom/gsd-wacom-device.c:968
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Modo de la banda táctil derecha nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:967
+#: ../panels/wacom/gsd-wacom-device.c:985
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Modo de cambio del anillo táctil izquierdo"
 
-#: ../panels/wacom/gsd-wacom-device.c:969
+#: ../panels/wacom/gsd-wacom-device.c:987
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Modo de cambio del anillo táctil derecho"
 
-#: ../panels/wacom/gsd-wacom-device.c:972
+#: ../panels/wacom/gsd-wacom-device.c:990
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Modo de cambio de la banda táctil izquierda"
 
-#: ../panels/wacom/gsd-wacom-device.c:974
+#: ../panels/wacom/gsd-wacom-device.c:992
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Modo de cambio de la banda táctil derecha"
 
-#: ../panels/wacom/gsd-wacom-device.c:979
+#: ../panels/wacom/gsd-wacom-device.c:997
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Modo de cambio nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1051
+#: ../panels/wacom/gsd-wacom-device.c:1069
 #, c-format
 msgid "Left Button #%d"
 msgstr "Botón izquierdo nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1054
+#: ../panels/wacom/gsd-wacom-device.c:1072
 #, c-format
 msgid "Right Button #%d"
 msgstr "Botón derecho nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1057
+#: ../panels/wacom/gsd-wacom-device.c:1075
 #, c-format
 msgid "Top Button #%d"
 msgstr "Botón superior nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1060
+#: ../panels/wacom/gsd-wacom-device.c:1078
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Botón inferior nº %d"
@@ -4906,6 +4925,15 @@ msgstr "Preferencias;Configuración;"
 msgid "All Settings"
 msgstr "Todas las configuraciones"
 
+#~ msgid "1/4 Screen"
+#~ msgstr "1/4 de pantalla"
+
+#~ msgid "1/2 Screen"
+#~ msgstr "1/2 de pantalla"
+
+#~ msgid "3/4 Screen"
+#~ msgstr "3/4 de pantalla"
+
 #~ msgid "Choose a generated password"
 #~ msgstr "Elegir una contraseña generada"
 
@@ -5013,9 +5041,6 @@ msgstr "Todas las configuraciones"
 
 #~ msgid "To keep the pointer visible"
 #~ msgstr "Mantener el puntero visible"
-
-#~ msgid "Screen"
-#~ msgstr "Pantalla"
 
 #~ msgid "Could not get session bus while applying display configuration"
 #~ msgstr ""
