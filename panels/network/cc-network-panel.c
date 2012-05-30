@@ -1295,7 +1295,20 @@ find_connection_for_device (CcNetworkPanel *panel,
 
         connections = nm_client_get_active_connections (panel->priv->client);
         if (connections == NULL) {
-                return NULL;
+                GSList *list;
+                GSList *filtered;
+                NMConnection *connection = NULL;
+
+                /* if the device is not active, but only has *one*
+                 * potential connection, then show that -- which is the
+                 * typical case for ethernet connections */
+                list = nm_remote_settings_list_connections (panel->priv->remote_settings);
+                filtered = nm_device_filter_connections (device, list);
+                if (g_slist_length (filtered) == 1)
+                        connection = filtered->data;
+                g_slist_free (list);
+                g_slist_free (filtered);
+                return connection;
         }
 
         for (i = 0; i < connections->len; i++) {
@@ -1625,6 +1638,7 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
         NMDeviceState state;
         NMDeviceType type;
         gboolean is_hotspot;
+        gboolean is_connected;
         guint speed = 0;
 
         type = nm_device_get_device_type (device);
@@ -1698,12 +1712,22 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
         gtk_label_set_label (GTK_LABEL (widget), str->str);
         gtk_widget_set_tooltip_text (widget, panel_device_state_reason_to_localized_string (device));
 
-        /* set up options button */
+        /* The options button is always enabled for wired connections,
+         * and is sensitive for other connection types if the device
+         * is currently connected */
         wid_name = g_strdup_printf ("button_%s_options", page_name);
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, wid_name));
         g_free (wid_name);
         if (widget != NULL) {
-                gtk_widget_set_sensitive (widget, find_connection_for_device (panel, device) != NULL);
+                switch (type) {
+                case NM_DEVICE_TYPE_ETHERNET:
+                        gtk_widget_set_sensitive (widget, TRUE);
+                        break;
+                default:
+                        is_connected = find_connection_for_device (panel, device) != NULL;
+                        gtk_widget_set_sensitive (widget, is_connected);
+                        break;
+                }
         }
         g_string_free (str, TRUE);
 }
@@ -2605,6 +2629,10 @@ edit_connection (GtkButton *button, CcNetworkPanel *panel)
         else {
                 device = net_device_get_nm_device (NET_DEVICE (object));
                 c = find_connection_for_device (panel, device);
+                if (c == NULL) {
+                        g_warning ("failed to find connection for device");
+                        return;
+                }
         }
 
         uuid = nm_connection_get_uuid (c);
