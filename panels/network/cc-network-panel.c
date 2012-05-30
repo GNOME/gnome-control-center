@@ -693,7 +693,8 @@ panel_refresh_killswitch_visibility (CcNetworkPanel *panel)
                                 break;
                         }
                 }
-                g_object_unref (object_tmp);
+                if (object_tmp != NULL)
+                        g_object_unref (object_tmp);
         } while (!show_flight_toggle && gtk_tree_model_iter_next (model, &iter));
 
         /* only show toggle if there are wireless devices */
