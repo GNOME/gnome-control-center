@@ -96,6 +96,16 @@ gboolean           um_user_manager_create_user_finish    (UmUserManager       *m
                                                           GAsyncResult        *result,
                                                           UmUser             **user,
                                                           GError             **error);
+void               um_user_manager_cache_user            (UmUserManager       *manager,
+                                                          const char          *user_name,
+                                                          GCancellable        *cancellable,
+                                                          GAsyncReadyCallback  done,
+                                                          gpointer             user_data,
+                                                          GDestroyNotify       destroy);
+gboolean           um_user_manager_cache_user_finish     (UmUserManager       *manager,
+                                                          GAsyncResult        *result,
+                                                          UmUser             **user,
+                                                          GError             **error);
 void               um_user_manager_delete_user           (UmUserManager       *manager,
                                                           UmUser              *user,
                                                           gboolean             remove_files,

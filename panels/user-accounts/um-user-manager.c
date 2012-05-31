@@ -427,10 +427,11 @@ async_user_op_data_free (gpointer d)
         g_free (data);
 }
 
+/* Used for both create_user and cache_user */
 static void
-create_user_done (GObject        *proxy,
-                  GAsyncResult   *r,
-                  gpointer        user_data)
+user_call_done (GObject        *proxy,
+                GAsyncResult   *r,
+                gpointer        user_data)
 {
         AsyncUserOpData *data = user_data;
         GSimpleAsyncResult *res;
@@ -463,6 +464,13 @@ create_user_done (GObject        *proxy,
                                                          UM_USER_MANAGER_ERROR,
                                                          UM_USER_MANAGER_ERROR_USER_EXISTS,
                                                          _("A user with name '%s' already exists."),
+                                                         data->user_name);
+                } else if (g_dbus_error_is_remote_error (error) &&
+                    strcmp (remote, "org.freedesktop.Accounts.Error.UserDoesNotExist") == 0) {
+                        g_simple_async_result_set_error (res,
+                                                         UM_USER_MANAGER_ERROR,
+                                                         UM_USER_MANAGER_ERROR_USER_DOES_NOT_EXIST,
+                                                         _("No user with the name '%s' exists."),
                                                          data->user_name);
                 }
                 else {
@@ -538,7 +546,57 @@ um_user_manager_create_user (UmUserManager       *manager,
                            G_DBUS_CALL_FLAGS_NONE,
                            -1,
                            cancellable,
-                           create_user_done,
+                           user_call_done,
+                           data);
+}
+
+gboolean
+um_user_manager_cache_user_finish (UmUserManager       *manager,
+                                   GAsyncResult        *result,
+                                   UmUser             **user,
+                                   GError             **error)
+{
+        gchar *path;
+        GSimpleAsyncResult *res;
+
+        res = G_SIMPLE_ASYNC_RESULT (result);
+
+        *user = NULL;
+
+        if (g_simple_async_result_propagate_error (res, error)) {
+                return FALSE;
+        }
+
+        path = g_simple_async_result_get_op_res_gpointer (res);
+        *user = g_hash_table_lookup (manager->user_by_object_path, path);
+
+        return TRUE;
+}
+
+void
+um_user_manager_cache_user (UmUserManager       *manager,
+                            const char          *user_name,
+                            GCancellable        *cancellable,
+                            GAsyncReadyCallback  done,
+                            gpointer             done_data,
+                            GDestroyNotify       destroy)
+{
+        AsyncUserOpData *data;
+
+        data = g_new0 (AsyncUserOpData, 1);
+        data->manager = g_object_ref (manager);
+        data->user_name = g_strdup (user_name);
+        data->callback = done;
+        data->data = done_data;
+        data->destroy = destroy;
+
+        g_dbus_proxy_call (manager->proxy,
+                           "CacheUser",
+                           g_variant_new ("(s)", user_name),
+                           G_DBUS_CALL_FLAGS_NONE,
+                           -1,
+                           cancellable,
+                           user_call_done,
                            data);
 }
 
@@ -565,7 +623,7 @@ delete_user_done (GObject        *proxy,
                                                          UM_USER_MANAGER_ERROR_PERMISSION_DENIED,
                                                          "Not authorized");
                 }
-                if (g_dbus_error_is_remote_error (error) &&
+                else if (g_dbus_error_is_remote_error (error) &&
                     strcmp (g_dbus_error_get_remote_error(error), "org.freedesktop.Accounts.Error.UserExists") == 0) {
                         g_simple_async_result_set_error (res,
                                                          UM_USER_MANAGER_ERROR,
