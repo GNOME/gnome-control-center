@@ -485,6 +485,51 @@ input_sources_changed (GSettings  *settings,
   populate_with_active_sources (GTK_LIST_STORE (store));
 }
 
+static void
+update_shortcut_label (GtkWidget  *widget,
+		       const char *value)
+{
+  char *text;
+  guint accel_key, *keycode;
+  GdkModifierType mods;
+
+  if (value == NULL || *value == '\0')
+    {
+      gtk_label_set_text (GTK_LABEL (widget), "\342\200\224");
+      return;
+    }
+  gtk_accelerator_parse_with_keycode (value, &accel_key, &keycode, &mods);
+  if (accel_key == 0 && keycode == NULL && mods == 0)
+    {
+      gtk_label_set_text (GTK_LABEL (widget), "\342\200\224");
+      g_warning ("Failed to parse keyboard shortcut: '%s'", value);
+      return;
+    }
+
+  text = gtk_accelerator_get_label_with_keycode (gtk_widget_get_display (widget), accel_key, *keycode, mods);
+  g_free (keycode);
+  gtk_label_set_text (GTK_LABEL (widget), text);
+  g_free (text);
+}
+
+static void
+update_shortcuts (GtkBuilder *builder)
+{
+  char *previous, *next;
+  GSettings *settings;
+
+  settings = g_settings_new ("org.gnome.settings-daemon.plugins.media-keys");
+
+  previous = g_settings_get_string (settings, "switch-input-source-backward");
+  next = g_settings_get_string (settings, "switch-input-source");
+
+  update_shortcut_label (WID ("prev-source-shortcut-label"), previous);
+  update_shortcut_label (WID ("next-source-shortcut-label"), next);
+
+  g_free (previous);
+  g_free (next);
+}
+
 void
 setup_input_tabs (GtkBuilder    *builder,
                   CcRegionPanel *panel)
@@ -494,9 +539,6 @@ setup_input_tabs (GtkBuilder    *builder,
   GtkCellRenderer *cell;
   GtkListStore *store;
   GtkTreeSelection *selection;
-  gchar *previous = NULL;
-  gchar *next = NULL;
-  GtkWidget *label;
 
   input_sources_settings = g_settings_new (GNOME_DESKTOP_INPUT_SOURCES_DIR);
   xkb_info = gnome_xkb_info_new ();
@@ -532,18 +574,7 @@ setup_input_tabs (GtkBuilder    *builder,
                     G_CALLBACK (show_selected_layout), builder);
 
   /* use an em dash is no shortcut */
-  if (!previous)
-    previous = g_strdup ("\342\200\224");
-  if (!next)
-    next = g_strdup ("\342\200\224");
-
-  label = WID("prev-source-shortcut-label");
-  gtk_label_set_label (GTK_LABEL (label), previous);
-  label = WID("next-source-shortcut-label");
-  gtk_label_set_label (GTK_LABEL (label), next);
-
-  g_free (previous);
-  g_free (next);
+  update_shortcuts (builder);
 
   g_signal_connect (WID("jump-to-shortcuts"), "activate-link",
                     G_CALLBACK (go_to_shortcuts), panel);
