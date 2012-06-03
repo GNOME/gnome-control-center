@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-05-19 15:42+0200\n"
-"PO-Revision-Date: 2012-05-19 15:46+0200\n"
+"POT-Creation-Date: 2012-06-03 02:31+0200\n"
+"PO-Revision-Date: 2012-06-03 02:35+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician <gnome-l10n-gl@gnome.org>\n"
 "Language: gl\n"
@@ -1215,6 +1215,21 @@ msgstr "Seguinte pista"
 msgid "Eject"
 msgstr "Expulsar"
 
+#: ../panels/keyboard/01-input-sources.xml.in.h:1
+#: ../panels/region/gnome-region-panel.ui.h:30
+msgid "Input Sources"
+msgstr "Orixes de entrada"
+
+#: ../panels/keyboard/01-input-sources.xml.in.h:2
+#: ../panels/region/gnome-region-panel.ui.h:26
+msgid "Switch to next source"
+msgstr "Cambiar á seguinte orixe"
+
+#: ../panels/keyboard/01-input-sources.xml.in.h:3
+#: ../panels/region/gnome-region-panel.ui.h:24
+msgid "Switch to previous source"
+msgstr "Cambiar ao orixe anterior"
+
 #: ../panels/keyboard/01-launchers.xml.in.h:1
 msgid "Launchers"
 msgstr "Iniciadores"
@@ -1272,7 +1287,7 @@ msgid "Copy a screenshot of an area to clipboard"
 msgstr "Copiar unha captura de pantalla dun área ao portapapeis"
 
 #: ../panels/keyboard/01-system.xml.in.h:1
-#: ../panels/region/gnome-region-panel.ui.h:40
+#: ../panels/region/gnome-region-panel.ui.h:39
 msgid "System"
 msgstr "Sistema"
 
@@ -1367,7 +1382,6 @@ msgstr "_Velocidade:"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
 #: ../panels/mouse/gnome-mouse-properties.ui.h:24
 #: ../panels/universal-access/uap.ui.h:52
-#: ../panels/universal-access/zoom-options.c:333
 msgid "Short"
 msgstr "Curto"
 
@@ -1385,7 +1399,6 @@ msgstr "Velocidade de repetición de teclas"
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
 #: ../panels/mouse/gnome-mouse-properties.ui.h:26
 #: ../panels/universal-access/uap.ui.h:55
-#: ../panels/universal-access/zoom-options.c:337
 msgid "Long"
 msgstr "Longo"
 
@@ -1438,6 +1451,7 @@ msgstr ""
 "combinación de teclas nova, ou prema a tecla de «Retroceso» para borrar todo."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:23
+#: ../panels/region/gnome-region-panel.ui.h:29
 msgid "Shortcuts"
 msgstr "Atallos de teclado"
 
@@ -1493,7 +1507,7 @@ msgid "_Reassign"
 msgstr "_Reasignar"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1618
-#: ../panels/wacom/cc-wacom-page.c:608
+#: ../panels/wacom/cc-wacom-page.c:609
 msgid "Action"
 msgstr "Acción"
 
@@ -1651,85 +1665,85 @@ msgstr "Non se recomenda para redes públicas nas que non se confía."
 #. TRANSLATORS: this is when the access point is not listed
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
-#: ../panels/network/cc-network-panel.c:1024
+#: ../panels/network/cc-network-panel.c:1025
 msgctxt "Wireless access point"
 msgid "Other..."
 msgstr "Outro…"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:1182
-#: ../panels/network/cc-network-panel.c:1589
+#: ../panels/network/cc-network-panel.c:1183
+#: ../panels/network/cc-network-panel.c:1603
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1186
-#: ../panels/network/cc-network-panel.c:1593
+#: ../panels/network/cc-network-panel.c:1187
+#: ../panels/network/cc-network-panel.c:1607
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1190
+#: ../panels/network/cc-network-panel.c:1191
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:1195
+#: ../panels/network/cc-network-panel.c:1196
 msgid "Enterprise"
 msgstr "Empresarial"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:1201
-#: ../panels/network/cc-network-panel.c:1584
-#: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:323
-#: ../panels/wacom/cc-wacom-page.c:340
+#: ../panels/network/cc-network-panel.c:1202
+#: ../panels/network/cc-network-panel.c:1598
+#: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:324
+#: ../panels/wacom/cc-wacom-page.c:341
 msgid "None"
 msgstr "Ningunha"
 
-#: ../panels/network/cc-network-panel.c:1688
+#: ../panels/network/cc-network-panel.c:1703
 msgid "Hotspot"
 msgstr "«Hotspot»"
 
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1695
+#: ../panels/network/cc-network-panel.c:1710
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: ../panels/network/cc-network-panel.c:2042 ../panels/network/network.ui.h:11
+#: ../panels/network/cc-network-panel.c:2067 ../panels/network/network.ui.h:11
 msgid "IPv4 Address"
 msgstr "Enderezo IPv4"
 
-#: ../panels/network/cc-network-panel.c:2043 ../panels/network/network.ui.h:12
+#: ../panels/network/cc-network-panel.c:2068 ../panels/network/network.ui.h:12
 msgid "IPv6 Address"
 msgstr "Enderezo IPv6"
 
-#: ../panels/network/cc-network-panel.c:2046
-#: ../panels/network/cc-network-panel.c:2049 ../panels/network/network.ui.h:27
+#: ../panels/network/cc-network-panel.c:2071
+#: ../panels/network/cc-network-panel.c:2074 ../panels/network/network.ui.h:27
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "Enderezo IP"
 
-#: ../panels/network/cc-network-panel.c:2096
-#: ../panels/network/cc-network-panel.c:2471
+#: ../panels/network/cc-network-panel.c:2121
+#: ../panels/network/cc-network-panel.c:2496
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
 
-#: ../panels/network/cc-network-panel.c:2204
+#: ../panels/network/cc-network-panel.c:2229
 msgid "Proxy"
 msgstr "Proxy"
 
-#: ../panels/network/cc-network-panel.c:2278
+#: ../panels/network/cc-network-panel.c:2303
 msgid "Network proxy"
 msgstr "Proxy da rede"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2538
+#: ../panels/network/cc-network-panel.c:2563
 msgid "The system network services are not compatible with this version."
 msgstr "Os servizos de rede do sistema non son compatíbeis con esta versión."
 
-#: ../panels/network/cc-network-panel.c:2736
+#: ../panels/network/cc-network-panel.c:2765
 #, c-format
 msgid ""
 "Network details for %s including password and any custom configuration will "
@@ -1738,42 +1752,42 @@ msgstr ""
 "Perderanse os detalles da rede %s, incluíndo o contrasinal e calquera "
 "configuración personalizada"
 
-#: ../panels/network/cc-network-panel.c:2746
+#: ../panels/network/cc-network-panel.c:2775
 msgid "Forget"
 msgstr "Esquecer"
 
-#: ../panels/network/cc-network-panel.c:3245
+#: ../panels/network/cc-network-panel.c:3274
 msgid "Not connected to the internet."
 msgstr "Non conectado a Internet."
 
-#: ../panels/network/cc-network-panel.c:3246
+#: ../panels/network/cc-network-panel.c:3275
 msgid "Create the hotspot anyway?"
 msgstr "Desexa crear o «hotspot» de todas formas?"
 
-#: ../panels/network/cc-network-panel.c:3264
+#: ../panels/network/cc-network-panel.c:3293
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
 msgstr "Desexa desconectarse de %s e crear un «hotspot» novo?"
 
-#: ../panels/network/cc-network-panel.c:3267
+#: ../panels/network/cc-network-panel.c:3296
 msgid "This is your only connection to the internet."
 msgstr "Esta é a única conexión a Internet."
 
-#: ../panels/network/cc-network-panel.c:3285
+#: ../panels/network/cc-network-panel.c:3314
 msgid "Create _Hotspot"
 msgstr "Crear «_hotspot»"
 
-#: ../panels/network/cc-network-panel.c:3345
+#: ../panels/network/cc-network-panel.c:3374
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Desexa deter o «hotspot» e desconectar aos usuarios?"
 
-#: ../panels/network/cc-network-panel.c:3348
+#: ../panels/network/cc-network-panel.c:3377
 msgid "_Stop Hotspot"
 msgstr "_Deter «hotspot»"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:3366
+#: ../panels/network/cc-network-panel.c:3395
 msgid "Airplane Mode"
 msgstr "Modo avión"
 
@@ -1846,7 +1860,6 @@ msgid "Device Off"
 msgstr "Dispositivo desactivado"
 
 #: ../panels/network/network.ui.h:17
-#: ../panels/region/gnome-region-panel.ui.h:26
 msgid "_Options..."
 msgstr "_Opcións…"
 
@@ -3015,23 +3028,15 @@ msgstr "Imperial"
 msgid "Metric"
 msgstr "Métrico"
 
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
-msgid "Choose a Layout"
-msgstr "Seleccione unha distribución"
+#: ../panels/region/gnome-region-panel-input-chooser.ui.h:1
+msgid "Choose an input source"
+msgstr "Seleccione unha orixe da entrada"
 
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
-msgid "Preview"
-msgstr "Previsualización"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
+#: ../panels/region/gnome-region-panel-input-chooser.ui.h:2
 msgid "Select an input source to add"
-msgstr "Seleccione a fonte da entrada a engadir"
+msgstr "Seleccione unha orixe de entrada para engadir"
 
-#: ../panels/region/gnome-region-panel-options-dialog.ui.h:1
-msgid "Keyboard Layout Options"
-msgstr "Preferencias de distribución do teclado"
-
-#: ../panels/region/gnome-region-panel-system.c:420
+#: ../panels/region/gnome-region-panel-system.c:330
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings."
@@ -3039,8 +3044,8 @@ msgstr ""
 "A pantalla de inicio de sesión, as contas do sistema e as contas dos "
 "usuarios novos usan as preferencias de «Rexión e idioma» do sistema."
 
-#: ../panels/region/gnome-region-panel-system.c:425
-#: ../panels/region/gnome-region-panel.ui.h:32
+#: ../panels/region/gnome-region-panel-system.c:335
+#: ../panels/region/gnome-region-panel.ui.h:31
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings. You may change the system settings to match "
@@ -3050,12 +3055,12 @@ msgstr ""
 "as opicións de «Rexión e idioma». Pode cambiar as preferencias do sistema "
 "para axeitalas ás súas."
 
-#: ../panels/region/gnome-region-panel-system.c:428
+#: ../panels/region/gnome-region-panel-system.c:338
 msgid "Copy Settings"
 msgstr "Copiar configuración"
 
-#: ../panels/region/gnome-region-panel-system.c:431
-#: ../panels/region/gnome-region-panel.ui.h:39
+#: ../panels/region/gnome-region-panel-system.c:341
+#: ../panels/region/gnome-region-panel.ui.h:38
 msgid "Copy Settings..."
 msgstr "Copiar configuración…"
 
@@ -3066,16 +3071,16 @@ msgstr ""
 "inicie sesión)"
 
 #: ../panels/region/gnome-region-panel.ui.h:3
-msgid "Install languages..."
-msgstr "Instalar idiomas…"
-
-#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Add Language"
 msgstr "Engadir idioma"
 
-#: ../panels/region/gnome-region-panel.ui.h:5
+#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Remove Language"
 msgstr "Quitar idioma"
+
+#: ../panels/region/gnome-region-panel.ui.h:5
+msgid "Install languages..."
+msgstr "Instalar idiomas…"
 
 #: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Language"
@@ -3123,90 +3128,65 @@ msgid "Formats"
 msgstr "Formatos"
 
 #: ../panels/region/gnome-region-panel.ui.h:17
-msgid "Add Layout"
-msgstr "Engadir distribución"
+msgid "Select keyboards or other input sources"
+msgstr "Seleccione os teclados ou outros orixes de entrada"
 
 #: ../panels/region/gnome-region-panel.ui.h:18
-msgid "Remove Layout"
-msgstr "Quitar distribución"
+msgid "Add Input Source"
+msgstr "Engadir orixe de entrada"
 
 #: ../panels/region/gnome-region-panel.ui.h:19
-msgid "Move Up"
-msgstr "Subir"
+msgid "Remove Input Source"
+msgstr "Quitar orixe de entrada"
 
 #: ../panels/region/gnome-region-panel.ui.h:20
-msgid "Move Down"
-msgstr "Baixar"
+msgid "Move Input Source Up"
+msgstr "Mover orixe de entrada arriba"
 
 #: ../panels/region/gnome-region-panel.ui.h:21
-msgid "Preview Layout"
-msgstr "Vista previa da distribución"
+msgid "Move Input Source Down"
+msgstr "Mover orixe de entrada abaixo"
 
 #: ../panels/region/gnome-region-panel.ui.h:22
-msgid "Use the same layout for all windows"
-msgstr "Usar a mesma distribución para tódalas xanelas"
+msgid "Input Source Settings"
+msgstr "Preferencias das orixes de entrada"
 
 #: ../panels/region/gnome-region-panel.ui.h:23
-msgid "Allow different layouts for individual windows"
-msgstr "Permitir diferentes distribucións para cada xanela"
-
-#: ../panels/region/gnome-region-panel.ui.h:24
-msgid "New windows use the default layout"
-msgstr "As xanelas novas usan a distribución predeterminada"
+msgid "Show Keyboard Layout"
+msgstr "Mostrar a distribución do teclado"
 
 #: ../panels/region/gnome-region-panel.ui.h:25
-msgid "New windows use the previous window's layout"
-msgstr "As xanelas novas usan a distribución da xanela activa"
+msgid "Ctrl+Alt+Space"
+msgstr "Ctrl+Alt+Espacio"
 
 #: ../panels/region/gnome-region-panel.ui.h:27
-msgid "View and edit keyboard layout options"
-msgstr "Ver e editar as preferencias de distribución do teclado"
+msgid "Ctrl+Alt+Shift+Space"
+msgstr "Ctrl+Alt+Maiús+Espacio"
 
 #: ../panels/region/gnome-region-panel.ui.h:28
-msgid "Reset to De_faults"
-msgstr "Restabelecer os valores _predeterminados"
-
-#: ../panels/region/gnome-region-panel.ui.h:29
-msgid ""
-"Replace the current keyboard layout settings with the\n"
-"default settings"
-msgstr ""
-"Substituír a configuración de distribucións de teclado\n"
-"actual coa configuración predeterminada"
-
-#: ../panels/region/gnome-region-panel.ui.h:31
-msgid "Layouts"
-msgstr "Distribucións"
+msgid "Shortcut Settings"
+msgstr "Preferencias de atallos"
 
 #. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
-#: ../panels/region/gnome-region-panel.ui.h:34
+#: ../panels/region/gnome-region-panel.ui.h:33
 msgid "Display language:"
 msgstr "Mostrar idioma:"
 
-#: ../panels/region/gnome-region-panel.ui.h:35
+#: ../panels/region/gnome-region-panel.ui.h:34
 msgid "Input source:"
 msgstr "Orixe de entrada:"
 
-#: ../panels/region/gnome-region-panel.ui.h:36
+#: ../panels/region/gnome-region-panel.ui.h:35
 msgid "Format:"
 msgstr "Formato:"
 
-#: ../panels/region/gnome-region-panel.ui.h:37
+#: ../panels/region/gnome-region-panel.ui.h:36
 msgid "Your settings"
 msgstr "As súas preferencias"
 
-#: ../panels/region/gnome-region-panel.ui.h:38
+#: ../panels/region/gnome-region-panel.ui.h:37
 msgid "System settings"
 msgstr "Preferencias do sistema"
-
-#: ../panels/region/gnome-region-panel-xkblt.c:210
-msgid "Layout"
-msgstr "Distribución"
-
-#: ../panels/region/gnome-region-panel-xkbot.c:229
-#: ../panels/sound/gvc-sound-theme-chooser.c:585
-msgid "Default"
-msgstr "Predeterminado"
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:1
 msgid "Brightness and Lock"
@@ -3509,6 +3489,10 @@ msgstr "Preferencias de son"
 #: ../panels/sound/gvc-sound-theme-chooser.c:481
 msgid "Testing event sound"
 msgstr "Probando o son de evento"
+
+#: ../panels/sound/gvc-sound-theme-chooser.c:585
+msgid "Default"
+msgstr "Predeterminado"
 
 #: ../panels/sound/gvc-sound-theme-chooser.c:586
 msgid "From theme"
@@ -3860,17 +3844,30 @@ msgstr "Preferencias do rato"
 msgid "Pointing and Clicking"
 msgstr "Apuntar e premer"
 
+#: ../panels/universal-access/zoom-options.c:333
+msgctxt "Distance"
+msgid "Short"
+msgstr "Curta"
+
 #: ../panels/universal-access/zoom-options.c:334
-msgid "1/4 Screen"
-msgstr "1/4 da pantalla"
+msgctxt "Distance"
+msgid "¼ Screen"
+msgstr "¼ da pantalla"
 
 #: ../panels/universal-access/zoom-options.c:335
-msgid "1/2 Screen"
-msgstr "1/2 da pantalla"
+msgctxt "Distance"
+msgid "½ Screen"
+msgstr "½ da pantalla"
 
 #: ../panels/universal-access/zoom-options.c:336
-msgid "3/4 Screen"
-msgstr "3/4 da pantalla"
+msgctxt "Distance"
+msgid "¾ Screen"
+msgstr "¾ da pantalla"
+
+#: ../panels/universal-access/zoom-options.c:337
+msgctxt "Distance"
+msgid "Long"
+msgstr "Longa"
 
 #: ../panels/universal-access/zoom-options.ui.h:1
 msgid "Zoom Options"
@@ -4103,8 +4100,8 @@ msgid "_New password"
 msgstr "_Contrasinal novo"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:10
-msgid "Choose a generated password"
-msgstr "Escolla un contrasinal xerado"
+msgid "Generate a password"
+msgstr "Xerar un contrasinal"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:11
 msgid "Fair"
@@ -4210,12 +4207,47 @@ msgstr "Icona de usuario"
 msgid "_Language"
 msgstr "_Idioma:"
 
+#: ../panels/user-accounts/pw-utils.c:93
+#: ../panels/user-accounts/um-password-dialog.c:553
+msgctxt "Password strength"
+msgid "Too short"
+msgstr "Demasiado curto"
+
+#: ../panels/user-accounts/pw-utils.c:98
+msgctxt "Password strength"
+msgid "Not good enough"
+msgstr "Non é boa dabondo"
+
+#: ../panels/user-accounts/pw-utils.c:106
+#: ../panels/user-accounts/um-password-dialog.c:554
+msgctxt "Password strength"
+msgid "Weak"
+msgstr "Débil"
+
+#: ../panels/user-accounts/pw-utils.c:108
+#: ../panels/user-accounts/um-password-dialog.c:555
+msgctxt "Password strength"
+msgid "Fair"
+msgstr "Aceptábel"
+
+#: ../panels/user-accounts/pw-utils.c:110
+#: ../panels/user-accounts/um-password-dialog.c:556
+msgctxt "Password strength"
+msgid "Good"
+msgstr "Boa"
+
+#: ../panels/user-accounts/pw-utils.c:112
+#: ../panels/user-accounts/um-password-dialog.c:557
+msgctxt "Password strength"
+msgid "Strong"
+msgstr "Forte"
+
 #: ../panels/user-accounts/run-passwd.c:426
 msgid "Authentication failed"
 msgstr "Fallou a autenticación"
 
 #: ../panels/user-accounts/run-passwd.c:506
-#: ../panels/user-accounts/um-password-dialog.c:375
+#: ../panels/user-accounts/um-password-dialog.c:240
 #, c-format
 msgid "The new password is too short"
 msgstr "O novo contrasinal é demasiado curto"
@@ -4355,77 +4387,47 @@ msgstr "Rexistrando pegadas dixitais"
 msgid "Summary"
 msgstr "Resumo"
 
-#: ../panels/user-accounts/um-password-dialog.c:179
-msgid "More choices..."
-msgstr "Máis opcións…"
+#: ../panels/user-accounts/um-password-dialog.c:97
+msgid "_Generate a password"
+msgstr "_Xerar un contrasinal"
 
-#: ../panels/user-accounts/um-password-dialog.c:285
+#: ../panels/user-accounts/um-password-dialog.c:151
 msgid "Please choose another password."
 msgstr "Seleccione outro contrasinal."
 
-#: ../panels/user-accounts/um-password-dialog.c:294
+#: ../panels/user-accounts/um-password-dialog.c:160
 msgid "Please type your current password again."
 msgstr "Escriba o seu contrasinal actual de novo."
 
-#: ../panels/user-accounts/um-password-dialog.c:300
+#: ../panels/user-accounts/um-password-dialog.c:166
 msgid "Password could not be changed"
 msgstr "Non foi posíbel cambiar o contrasinal"
 
-#: ../panels/user-accounts/um-password-dialog.c:372
+#: ../panels/user-accounts/um-password-dialog.c:237
 msgid "You need to enter a new password"
 msgstr "Debe escribir un novo contrasinal"
 
-#: ../panels/user-accounts/um-password-dialog.c:381
+#: ../panels/user-accounts/um-password-dialog.c:246
 msgid "You need to confirm the password"
 msgstr "Debe confirmar o contrasinal"
 
-#: ../panels/user-accounts/um-password-dialog.c:384
+#: ../panels/user-accounts/um-password-dialog.c:249
 msgid "The passwords do not match"
 msgstr "Os contrasinais non coninciden"
 
-#: ../panels/user-accounts/um-password-dialog.c:390
+#: ../panels/user-accounts/um-password-dialog.c:255
 msgid "You need to enter your current password"
 msgstr "Debe escribir o seu contrasinal actual"
 
-#: ../panels/user-accounts/um-password-dialog.c:393
+#: ../panels/user-accounts/um-password-dialog.c:258
 msgid "The current password is not correct"
 msgstr "O contrasinal actual non é correcto"
 
-#: ../panels/user-accounts/um-password-dialog.c:466
-#: ../panels/user-accounts/um-password-dialog.c:693
-msgctxt "Password strength"
-msgid "Too short"
-msgstr "Demasiado curto"
-
-#: ../panels/user-accounts/um-password-dialog.c:469
-#: ../panels/user-accounts/um-password-dialog.c:694
-msgctxt "Password strength"
-msgid "Weak"
-msgstr "Débil"
-
-#: ../panels/user-accounts/um-password-dialog.c:471
-#: ../panels/user-accounts/um-password-dialog.c:695
-msgctxt "Password strength"
-msgid "Fair"
-msgstr "Aceptábel"
-
-#: ../panels/user-accounts/um-password-dialog.c:473
-#: ../panels/user-accounts/um-password-dialog.c:696
-msgctxt "Password strength"
-msgid "Good"
-msgstr "Boa"
-
-#: ../panels/user-accounts/um-password-dialog.c:475
-#: ../panels/user-accounts/um-password-dialog.c:697
-msgctxt "Password strength"
-msgid "Strong"
-msgstr "Forte"
-
-#: ../panels/user-accounts/um-password-dialog.c:514
+#: ../panels/user-accounts/um-password-dialog.c:369
 msgid "Passwords do not match"
 msgstr "Os contrasinais non coinciden"
 
-#: ../panels/user-accounts/um-password-dialog.c:540
+#: ../panels/user-accounts/um-password-dialog.c:395
 msgid "Wrong password"
 msgstr "Contrasinal incorrecto"
 
@@ -4627,24 +4629,24 @@ msgstr "Asignar a unha única pantalla"
 msgid "%d of %d"
 msgstr "%d de %d"
 
-#: ../panels/wacom/cc-wacom-page.c:305
+#: ../panels/wacom/cc-wacom-page.c:306
 msgid "Switch Modes"
 msgstr "Cambiar modos"
 
-#: ../panels/wacom/cc-wacom-page.c:552
+#: ../panels/wacom/cc-wacom-page.c:553
 msgid "Up"
 msgstr "Arriba"
 
-#: ../panels/wacom/cc-wacom-page.c:552
+#: ../panels/wacom/cc-wacom-page.c:553
 msgid "Down"
 msgstr "Abaixo"
 
-#: ../panels/wacom/cc-wacom-page.c:587
+#: ../panels/wacom/cc-wacom-page.c:588
 #: ../panels/wacom/cc-wacom-stylus-page.c:376
 msgid "Button"
 msgstr "Botón"
 
-#: ../panels/wacom/cc-wacom-page.c:710
+#: ../panels/wacom/cc-wacom-page.c:714
 msgid "Display Mapping"
 msgstr "Mostrar mapeo"
 
@@ -4710,67 +4712,67 @@ msgstr "Modo de seguimento"
 msgid "Left-Handed Orientation"
 msgstr "Orientación para zurdos"
 
-#: ../panels/wacom/gsd-wacom-device.c:910
+#: ../panels/wacom/gsd-wacom-device.c:920
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Modo de anel esquerdo #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:917
+#: ../panels/wacom/gsd-wacom-device.c:929
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Modo de anel dereito #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:945
+#: ../panels/wacom/gsd-wacom-device.c:959
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Modo de banda táctil esquerda nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:952
+#: ../panels/wacom/gsd-wacom-device.c:968
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Modo de banda táctil dereita nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:967
+#: ../panels/wacom/gsd-wacom-device.c:985
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Modo de cambio do anel táctil esquerdo"
 
-#: ../panels/wacom/gsd-wacom-device.c:969
+#: ../panels/wacom/gsd-wacom-device.c:987
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Modo de cambio do anel táctil dereito"
 
-#: ../panels/wacom/gsd-wacom-device.c:972
+#: ../panels/wacom/gsd-wacom-device.c:990
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Modo de cambio da banda táctil esquerda"
 
-#: ../panels/wacom/gsd-wacom-device.c:974
+#: ../panels/wacom/gsd-wacom-device.c:992
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Modo de cambio da banda táctil dereita"
 
-#: ../panels/wacom/gsd-wacom-device.c:979
+#: ../panels/wacom/gsd-wacom-device.c:997
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Modo conmutador #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1051
+#: ../panels/wacom/gsd-wacom-device.c:1069
 #, c-format
 msgid "Left Button #%d"
 msgstr "Botón esquerdo #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1054
+#: ../panels/wacom/gsd-wacom-device.c:1072
 #, c-format
 msgid "Right Button #%d"
 msgstr "Botón dereito #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1057
+#: ../panels/wacom/gsd-wacom-device.c:1075
 #, c-format
 msgid "Top Button #%d"
 msgstr "Botón superior #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1060
+#: ../panels/wacom/gsd-wacom-device.c:1078
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Botón inferior #%d"
@@ -4898,6 +4900,73 @@ msgstr "Preferencias;Configuración;"
 msgid "All Settings"
 msgstr "Todas as preferencias"
 
+#~ msgid "Choose a Layout"
+#~ msgstr "Seleccione unha distribución"
+
+#~ msgid "Preview"
+#~ msgstr "Previsualización"
+
+#~ msgid "Add Layout"
+#~ msgstr "Engadir distribución"
+
+#~ msgid "Remove Layout"
+#~ msgstr "Quitar distribución"
+
+#~ msgid "Move Up"
+#~ msgstr "Subir"
+
+#~ msgid "Move Down"
+#~ msgstr "Baixar"
+
+#~ msgid "Preview Layout"
+#~ msgstr "Vista previa da distribución"
+
+#~ msgid "Use the same layout for all windows"
+#~ msgstr "Usar a mesma distribución para tódalas xanelas"
+
+#~ msgid "Allow different layouts for individual windows"
+#~ msgstr "Permitir diferentes distribucións para cada xanela"
+
+#~ msgid "New windows use the default layout"
+#~ msgstr "As xanelas novas usan a distribución predeterminada"
+
+#~ msgid "New windows use the previous window's layout"
+#~ msgstr "As xanelas novas usan a distribución da xanela activa"
+
+#~ msgid "View and edit keyboard layout options"
+#~ msgstr "Ver e editar as preferencias de distribución do teclado"
+
+#~ msgid "Reset to De_faults"
+#~ msgstr "Restabelecer os valores _predeterminados"
+
+#~ msgid ""
+#~ "Replace the current keyboard layout settings with the\n"
+#~ "default settings"
+#~ msgstr ""
+#~ "Substituír a configuración de distribucións de teclado\n"
+#~ "actual coa configuración predeterminada"
+
+#~ msgid "Layouts"
+#~ msgstr "Distribucións"
+
+#~ msgid "Layout"
+#~ msgstr "Distribución"
+
+#~ msgid "1/4 Screen"
+#~ msgstr "1/4 da pantalla"
+
+#~ msgid "1/2 Screen"
+#~ msgstr "1/2 da pantalla"
+
+#~ msgid "3/4 Screen"
+#~ msgstr "3/4 da pantalla"
+
+#~ msgid "Choose a generated password"
+#~ msgstr "Escolla un contrasinal xerado"
+
+#~ msgid "More choices..."
+#~ msgstr "Máis opcións…"
+
 #~ msgid "Change contrast:"
 #~ msgstr "Cambiar contraste:"
 
@@ -4956,9 +5025,6 @@ msgstr "Todas as preferencias"
 
 #~ msgid "%.0lf%% charged"
 #~ msgstr "%.0lf%% cargado"
-
-#~ msgid "Screen"
-#~ msgstr "Pantalla"
 
 #~ msgid "Always"
 #~ msgstr "Sempre"
@@ -5434,9 +5500,6 @@ msgstr "Todas as preferencias"
 
 #~ msgid "Secure HTTP Proxy:"
 #~ msgstr "Proxy para HTTP seguro:"
-
-#~ msgid "Ctrl+Alt+-"
-#~ msgstr "Ctrl+Alt+-"
 
 #~ msgid "Ctrl+Alt+0"
 #~ msgstr "Ctrl+Alt+0"
