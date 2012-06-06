@@ -41,6 +41,61 @@
                </object>
             </child>
             <child>
+              <object class="GtkAlignment" id="alignment1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xscale">0</property>
+                <property name="yscale">0</property>
+                <property name="bottom-padding">10</property>
+                <property name="top-padding">6</property>
+                <child>
+                  <object class="GtkBox" id="account-mode">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <style>
+                      <class name="linked"/>
+                    </style>
+                    <child>
+                      <object class="GtkToggleButton" id="local-button">
+                        <property name="label" translatable="yes">_Local Account</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="focus_on_click">False</property>
+                        <property name="use_underline">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkToggleButton" id="enterprise-button">
+                        <property name="label" translatable="yes">_Enterprise Login</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="focus_on_click">False</property>
+                        <property name="use_underline">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkGrid" id="local-area">
                 <property name="visible">True</property>
                 <property name="hexpand">True</property>
@@ -132,6 +187,33 @@
                     <property name="label" translatable="yes">Account _Type</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">local-account-type</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkGrid" id="enterprise-area">
+                <property name="visible">True</property>
+                <property name="hexpand">True</property>
+                <property name="column_spacing">10</property>
+                <property name="row_spacing">10</property>
+                <child>
+                  <object class="GtkLabel" id="label61">
+                    <property name="visible">True</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">Enterprise Widgets</property>
+                    <property name="use_underline">True</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
