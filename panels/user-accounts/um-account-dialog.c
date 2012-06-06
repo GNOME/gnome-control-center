@@ -29,6 +29,8 @@
 #include "um-user-manager.h"
 #include "um-utils.h"
 
+static void   dialog_validate     (UmAccountDialog *self);
+
 #define UM_ACCOUNT_DIALOG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), UM_TYPE_ACCOUNT_DIALOG, \
                                                                     UmAccountDialogClass))
 #define UM_IS_ACCOUNT_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), UM_TYPE_ACCOUNT_DIALOG))
@@ -46,9 +48,6 @@ struct _UmAccountDialog {
         GtkWidget *local_username;
         GtkWidget *local_name;
         GtkWidget *local_account_type;
-
-        gboolean valid_name;
-        gboolean valid_username;
 };
 
 struct _UmAccountDialogClass {
@@ -164,59 +163,55 @@ local_create_user (UmAccountDialog *self)
         g_object_unref (manager);
 }
 
-static void
-on_username_changed (GtkComboBoxText *combo,
-                           UmAccountDialog *self)
+static gboolean
+local_validate (UmAccountDialog *self)
 {
-        const gchar *username;
-        gchar *tip;
+        gboolean valid_login;
+        gboolean valid_name;
         GtkWidget *entry;
+        const gchar *name;
+        gchar *tip;
 
-        username = gtk_combo_box_text_get_active_text (combo);
+        name = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (self->local_username));
+        valid_login = is_valid_username (name, &tip);
 
-        self->valid_username = is_valid_username (username, &tip);
-
-        gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK,
-                                           self->valid_name && self->valid_username);
-        entry = gtk_bin_get_child (GTK_BIN (combo));
-
+        entry = gtk_bin_get_child (GTK_BIN (self->local_username));
         if (tip) {
                 set_entry_validation_error (GTK_ENTRY (entry), tip);
                 g_free (tip);
-        }
-        else {
+        } else {
                 clear_entry_validation_error (GTK_ENTRY (entry));
         }
+
+        name = gtk_entry_get_text (GTK_ENTRY (self->local_name));
+        valid_name = is_valid_name (name);
+
+        return valid_name && valid_login;
 }
 
 static void
-on_name_changed (GtkEntry        *local_name,
-                 GParamSpec      *pspec,
-                 UmAccountDialog *self)
+on_username_changed (GtkComboBoxText *combo,
+                     gpointer         user_data)
 {
-        GtkWidget *entry;
+        dialog_validate (UM_ACCOUNT_DIALOG (user_data));
+}
+
+static void
+on_name_changed (GtkEditable *editable,
+                 gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
         GtkTreeModel *model;
         const char *name;
-
-        entry = gtk_bin_get_child (GTK_BIN (self->local_username));
 
         model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->local_username));
         gtk_list_store_clear (GTK_LIST_STORE (model));
 
-        name = gtk_entry_get_text (GTK_ENTRY (local_name));
-
-        self->valid_name = is_valid_name (name);
-        gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK,
-                                           self->valid_name && self->valid_username);
-
-        if (!self->valid_name) {
-                gtk_entry_set_text (GTK_ENTRY (entry), "");
-                return;
-        }
-
+        name = gtk_entry_get_text (GTK_ENTRY (editable));
         generate_username_choices (name, GTK_LIST_STORE (model));
-
         gtk_combo_box_set_active (GTK_COMBO_BOX (self->local_username), 0);
+
+        dialog_validate (self);
 }
 
 static void
@@ -231,8 +226,7 @@ local_area_init (UmAccountDialog *self,
         self->local_username = widget;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "local-name");
-        g_signal_connect (widget, "notify::text",
-                          G_CALLBACK (on_name_changed), self);
+        g_signal_connect (widget, "changed", G_CALLBACK (on_name_changed), self);
         self->local_name = widget;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "local-account-type");
@@ -249,10 +243,16 @@ local_prepare (UmAccountDialog *self)
         model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->local_username));
         gtk_list_store_clear (GTK_LIST_STORE (model));
         gtk_combo_box_set_active (GTK_COMBO_BOX (self->local_account_type), 0);
+}
 
-        self->valid_name = self->valid_username = FALSE;
-        gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK,
-                                           self->valid_name && self->valid_username);
+static void
+dialog_validate (UmAccountDialog *self)
+{
+        gboolean valid = FALSE;
+
+        valid = local_validate (self);
+
+        gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, valid);
 }
 
 static void
@@ -393,6 +393,7 @@ um_account_dialog_show (UmAccountDialog     *self,
         self->cancellable = g_cancellable_new ();
 
         local_prepare (self);
+        dialog_validate (self);
 
         gtk_window_set_modal (GTK_WINDOW (self), parent != NULL);
         gtk_window_set_transient_for (GTK_WINDOW (self), parent);
