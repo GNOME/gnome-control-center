@@ -225,6 +225,8 @@ um_account_dialog_init (UmAccountDialog *self)
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "account-type-combo");
         self->account_type_combo = widget;
+
+        g_object_unref (builder);
 }
 
 static void
