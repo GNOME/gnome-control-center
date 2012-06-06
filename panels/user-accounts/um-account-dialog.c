@@ -55,15 +55,15 @@ struct _UmAccountDialogClass {
 G_DEFINE_TYPE (UmAccountDialog, um_account_dialog, GTK_TYPE_DIALOG);
 
 static void
-cancel_account_dialog (UmAccountDialog *um)
+cancel_account_dialog (UmAccountDialog *self)
 {
-        gtk_widget_hide (GTK_WIDGET (um));
+        gtk_widget_hide (GTK_WIDGET (self));
 }
 
 static void
 create_user_done (UmUserManager   *manager,
                   GAsyncResult    *res,
-                  UmAccountDialog *um)
+                  UmAccountDialog *self)
 {
         UmUser *user;
         GError *error;
@@ -74,7 +74,7 @@ create_user_done (UmUserManager   *manager,
                 if (!g_error_matches (error, UM_USER_MANAGER_ERROR, UM_USER_MANAGER_ERROR_PERMISSION_DENIED)) {
                         GtkWidget *dialog;
 
-                        dialog = gtk_message_dialog_new (gtk_window_get_transient_for (GTK_WINDOW (um)),
+                        dialog = gtk_message_dialog_new (gtk_window_get_transient_for (GTK_WINDOW (self)),
                                                          GTK_DIALOG_DESTROY_WITH_PARENT,
                                                          GTK_MESSAGE_ERROR,
                                                          GTK_BUTTONS_CLOSE,
@@ -90,12 +90,12 @@ create_user_done (UmUserManager   *manager,
                 g_error_free (error);
         }
         else {
-                um->user_created_callback (user, um->user_created_data);
+                self->user_created_callback (user, self->user_created_data);
         }
 }
 
 static void
-accept_account_dialog (UmAccountDialog *um)
+accept_account_dialog (UmAccountDialog *self)
 {
         UmUserManager *manager;
         const gchar *username;
@@ -104,10 +104,10 @@ accept_account_dialog (UmAccountDialog *um)
         GtkTreeModel *model;
         GtkTreeIter iter;
 
-        name = gtk_entry_get_text (GTK_ENTRY (um->name_entry));
-        username = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (um->username_combo));
-        model = gtk_combo_box_get_model (GTK_COMBO_BOX (um->account_type_combo));
-        gtk_combo_box_get_active_iter (GTK_COMBO_BOX (um->account_type_combo), &iter);
+        name = gtk_entry_get_text (GTK_ENTRY (self->name_entry));
+        username = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (self->username_combo));
+        model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->account_type_combo));
+        gtk_combo_box_get_active_iter (GTK_COMBO_BOX (self->account_type_combo), &iter);
         gtk_tree_model_get (model, &iter, 1, &account_type, -1);
 
         manager = um_user_manager_ref_default ();
@@ -116,16 +116,16 @@ accept_account_dialog (UmAccountDialog *um)
                                      name,
                                      account_type,
                                      (GAsyncReadyCallback)create_user_done,
-                                     um,
+                                     self,
                                      NULL);
         g_object_unref (manager);
 
-        gtk_widget_hide (GTK_WIDGET (um));
+        gtk_widget_hide (GTK_WIDGET (self));
 }
 
 static void
 username_changed (GtkComboBoxText *combo,
-                  UmAccountDialog *um)
+                  UmAccountDialog *self)
 {
         const gchar *username;
         gchar *tip;
@@ -133,10 +133,10 @@ username_changed (GtkComboBoxText *combo,
 
         username = gtk_combo_box_text_get_active_text (combo);
 
-        um->valid_username = is_valid_username (username, &tip);
+        self->valid_username = is_valid_username (username, &tip);
 
-        gtk_dialog_set_response_sensitive (GTK_DIALOG (um), GTK_RESPONSE_OK,
-                                           um->valid_name && um->valid_username);
+        gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK,
+                                           self->valid_name && self->valid_username);
         entry = gtk_bin_get_child (GTK_BIN (combo));
 
         if (tip) {
@@ -151,35 +151,35 @@ username_changed (GtkComboBoxText *combo,
 static void
 name_changed (GtkEntry        *name_entry,
               GParamSpec      *pspec,
-              UmAccountDialog *um)
+              UmAccountDialog *self)
 {
         GtkWidget *entry;
         GtkTreeModel *model;
         const char *name;
 
-        entry = gtk_bin_get_child (GTK_BIN (um->username_combo));
+        entry = gtk_bin_get_child (GTK_BIN (self->username_combo));
 
-        model = gtk_combo_box_get_model (GTK_COMBO_BOX (um->username_combo));
+        model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->username_combo));
         gtk_list_store_clear (GTK_LIST_STORE (model));
 
         name = gtk_entry_get_text (GTK_ENTRY (name_entry));
 
-        um->valid_name = is_valid_name (name);
-        gtk_dialog_set_response_sensitive (GTK_DIALOG (um), GTK_RESPONSE_OK,
-                                           um->valid_name && um->valid_username);
+        self->valid_name = is_valid_name (name);
+        gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK,
+                                           self->valid_name && self->valid_username);
 
-        if (!um->valid_name) {
+        if (!self->valid_name) {
                 gtk_entry_set_text (GTK_ENTRY (entry), "");
                 return;
         }
 
         generate_username_choices (name, GTK_LIST_STORE (model));
 
-        gtk_combo_box_set_active (GTK_COMBO_BOX (um->username_combo), 0);
+        gtk_combo_box_set_active (GTK_COMBO_BOX (self->username_combo), 0);
 }
 
 static void
-um_account_dialog_init (UmAccountDialog *um)
+um_account_dialog_init (UmAccountDialog *self)
 {
         GtkBuilder *builder;
         GtkWidget *widget;
@@ -199,7 +199,7 @@ um_account_dialog_init (UmAccountDialog *um)
                 return;
         }
 
-        dialog = GTK_DIALOG (um);
+        dialog = GTK_DIALOG (self);
         content = gtk_dialog_get_content_area (dialog);
         gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
         gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
@@ -215,16 +215,16 @@ um_account_dialog_init (UmAccountDialog *um)
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "username-combo");
         g_signal_connect (widget, "changed",
-                          G_CALLBACK (username_changed), um);
-        um->username_combo = widget;
+                          G_CALLBACK (username_changed), self);
+        self->username_combo = widget;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "name-entry");
         g_signal_connect (widget, "notify::text",
-                          G_CALLBACK (name_changed), um);
-        um->name_entry = widget;
+                          G_CALLBACK (name_changed), self);
+        self->name_entry = widget;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "account-type-combo");
-        um->account_type_combo = widget;
+        self->account_type_combo = widget;
 }
 
 static void
@@ -259,26 +259,26 @@ um_account_dialog_new (void)
 }
 
 void
-um_account_dialog_show (UmAccountDialog     *um,
+um_account_dialog_show (UmAccountDialog     *self,
                         GtkWindow           *parent,
                         UserCreatedCallback  user_created_callback,
                         gpointer             user_created_data)
 {
         GtkTreeModel *model;
 
-        gtk_entry_set_text (GTK_ENTRY (um->name_entry), "");
-        gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (um->username_combo))), "");
-        model = gtk_combo_box_get_model (GTK_COMBO_BOX (um->username_combo));
+        gtk_entry_set_text (GTK_ENTRY (self->name_entry), "");
+        gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (self->username_combo))), "");
+        model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->username_combo));
         gtk_list_store_clear (GTK_LIST_STORE (model));
-        gtk_combo_box_set_active (GTK_COMBO_BOX (um->account_type_combo), 0);
+        gtk_combo_box_set_active (GTK_COMBO_BOX (self->account_type_combo), 0);
 
-        gtk_window_set_modal (GTK_WINDOW (um), parent != NULL);
-        gtk_window_set_transient_for (GTK_WINDOW (um), parent);
-        gtk_window_present (GTK_WINDOW (um));
-        gtk_widget_grab_focus (um->name_entry);
+        gtk_window_set_modal (GTK_WINDOW (self), parent != NULL);
+        gtk_window_set_transient_for (GTK_WINDOW (self), parent);
+        gtk_window_present (GTK_WINDOW (self));
+        gtk_widget_grab_focus (self->name_entry);
 
-        um->valid_name = um->valid_username = TRUE;
+        self->valid_name = self->valid_username = TRUE;
 
-        um->user_created_callback = user_created_callback;
-        um->user_created_data = user_created_data;
+        self->user_created_callback = user_created_callback;
+        self->user_created_data = user_created_data;
 }
