@@ -37,15 +37,16 @@
 
 struct _UmAccountDialog {
         GtkDialog parent;
+        GtkWidget *container_widget;
+        GSimpleAsyncResult *async;
+        GCancellable *cancellable;
+
         GtkWidget *username_combo;
         GtkWidget *name_entry;
         GtkWidget *account_type_combo;
 
         gboolean valid_name;
         gboolean valid_username;
-
-        UserCreatedCallback user_created_callback;
-        gpointer            user_created_data;
 };
 
 struct _UmAccountDialogClass {
@@ -55,8 +56,50 @@ struct _UmAccountDialogClass {
 G_DEFINE_TYPE (UmAccountDialog, um_account_dialog, GTK_TYPE_DIALOG);
 
 static void
-cancel_account_dialog (UmAccountDialog *self)
+show_error_dialog (UmAccountDialog *self,
+                   const gchar *message,
+                   GError *error)
 {
+        GtkWidget *dialog;
+
+        dialog = gtk_message_dialog_new (GTK_WINDOW (self),
+                                         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                         GTK_MESSAGE_ERROR,
+                                         GTK_BUTTONS_CLOSE,
+                                         message);
+
+        gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                                  "%s", error->message);
+
+        g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+        gtk_window_present (GTK_WINDOW (dialog));
+}
+
+static void
+begin_action (UmAccountDialog *self)
+{
+        gtk_widget_set_sensitive (self->container_widget, FALSE);
+        gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
+}
+
+static void
+finish_action (UmAccountDialog *self)
+{
+        gtk_widget_set_sensitive (self->container_widget, TRUE);
+        gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, TRUE);
+}
+
+static void
+complete_dialog (UmAccountDialog *self,
+                 UmUser *user)
+{
+        if (user != NULL) {
+                g_simple_async_result_set_op_res_gpointer (self->async,
+                                                           g_object_ref (user),
+                                                           g_object_unref);
+        }
+
+        g_simple_async_result_complete_in_idle (self->async);
         gtk_widget_hide (GTK_WIDGET (self));
 }
 
@@ -68,29 +111,18 @@ create_user_done (UmUserManager   *manager,
         UmUser *user;
         GError *error;
 
+        finish_action (self);
+
+        /* Note that user is returned without an extra reference */
+
         error = NULL;
         if (!um_user_manager_create_user_finish (manager, res, &user, &error)) {
-
-                if (!g_error_matches (error, UM_USER_MANAGER_ERROR, UM_USER_MANAGER_ERROR_PERMISSION_DENIED)) {
-                        GtkWidget *dialog;
-
-                        dialog = gtk_message_dialog_new (gtk_window_get_transient_for (GTK_WINDOW (self)),
-                                                         GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                         GTK_MESSAGE_ERROR,
-                                                         GTK_BUTTONS_CLOSE,
-                                                         _("Failed to create user"));
-
-                        gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                                                  "%s", error->message);
-
-                        g_signal_connect (G_OBJECT (dialog), "response",
-                                          G_CALLBACK (gtk_widget_destroy), NULL);
-                        gtk_window_present (GTK_WINDOW (dialog));
-                }
+                if (!g_error_matches (error, UM_USER_MANAGER_ERROR, UM_USER_MANAGER_ERROR_PERMISSION_DENIED))
+                       show_error_dialog (self, _("Failed to create user"), error);
                 g_error_free (error);
-        }
-        else {
-                self->user_created_callback (user, self->user_created_data);
+                gtk_widget_grab_focus (self->name_entry);
+        } else {
+                complete_dialog (self, user);
         }
 }
 
@@ -104,6 +136,8 @@ accept_account_dialog (UmAccountDialog *self)
         GtkTreeModel *model;
         GtkTreeIter iter;
 
+        begin_action (self);
+
         name = gtk_entry_get_text (GTK_ENTRY (self->name_entry));
         username = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (self->username_combo));
         model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->account_type_combo));
@@ -115,12 +149,11 @@ accept_account_dialog (UmAccountDialog *self)
                                      username,
                                      name,
                                      account_type,
+                                     self->cancellable,
                                      (GAsyncReadyCallback)create_user_done,
                                      self,
                                      NULL);
         g_object_unref (manager);
-
-        gtk_widget_hide (GTK_WIDGET (self));
 }
 
 static void
@@ -212,6 +245,7 @@ um_account_dialog_init (UmAccountDialog *self)
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "account-dialog");
         gtk_container_add (GTK_CONTAINER (content), widget);
+        self->container_widget = widget;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "username-combo");
         g_signal_connect (widget, "changed",
@@ -241,15 +275,42 @@ um_account_dialog_response (GtkDialog *dialog,
                 break;
         case GTK_RESPONSE_CANCEL:
         case GTK_RESPONSE_DELETE_EVENT:
-                cancel_account_dialog (self);
+                g_cancellable_cancel (self->cancellable);
+                complete_dialog (self, NULL);
                 break;
         }
 }
 
 static void
+um_account_dialog_dispose (GObject *obj)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (obj);
+
+        if (self->cancellable)
+                g_cancellable_cancel (self->cancellable);
+
+        G_OBJECT_CLASS (um_account_dialog_parent_class)->dispose (obj);
+}
+
+static void
+um_account_dialog_finalize (GObject *obj)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (obj);
+
+        if (self->cancellable)
+                g_object_unref (self->cancellable);
+
+        G_OBJECT_CLASS (um_account_dialog_parent_class)->finalize (obj);
+}
+
+static void
 um_account_dialog_class_init (UmAccountDialogClass *klass)
 {
+        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         GtkDialogClass *dialog_class = GTK_DIALOG_CLASS (klass);
+
+        object_class->dispose = um_account_dialog_dispose;
+        object_class->finalize = um_account_dialog_finalize;
 
         dialog_class->response = um_account_dialog_response;
 }
@@ -263,10 +324,22 @@ um_account_dialog_new (void)
 void
 um_account_dialog_show (UmAccountDialog     *self,
                         GtkWindow           *parent,
-                        UserCreatedCallback  user_created_callback,
-                        gpointer             user_created_data)
+                        GAsyncReadyCallback  callback,
+                        gpointer             user_data)
 {
         GtkTreeModel *model;
+
+        g_return_if_fail (UM_IS_ACCOUNT_DIALOG (self));
+
+        /* Make sure not already doing an operation */
+        g_return_if_fail (self->async == NULL);
+
+        self->async = g_simple_async_result_new (G_OBJECT (self), callback, user_data,
+                                                 um_account_dialog_show);
+
+        if (self->cancellable)
+                g_object_unref (self->cancellable);
+        self->cancellable = g_cancellable_new ();
 
         gtk_entry_set_text (GTK_ENTRY (self->name_entry), "");
         gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (self->username_combo))), "");
@@ -274,15 +347,31 @@ um_account_dialog_show (UmAccountDialog     *self,
         gtk_list_store_clear (GTK_LIST_STORE (model));
         gtk_combo_box_set_active (GTK_COMBO_BOX (self->account_type_combo), 0);
 
-        gtk_window_set_modal (GTK_WINDOW (self), parent != NULL);
-        gtk_window_set_transient_for (GTK_WINDOW (self), parent);
-        gtk_window_present (GTK_WINDOW (self));
-        gtk_widget_grab_focus (self->name_entry);
-
         self->valid_name = self->valid_username = FALSE;
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK,
                                            self->valid_name && self->valid_username);
 
-        self->user_created_callback = user_created_callback;
-        self->user_created_data = user_created_data;
+        gtk_window_set_modal (GTK_WINDOW (self), parent != NULL);
+        gtk_window_set_transient_for (GTK_WINDOW (self), parent);
+        gtk_window_present (GTK_WINDOW (self));
+        gtk_widget_grab_focus (self->name_entry);
+}
+
+UmUser *
+um_account_dialog_finish (UmAccountDialog     *self,
+                          GAsyncResult        *result)
+{
+        UmUser *user;
+
+        g_return_val_if_fail (UM_IS_ACCOUNT_DIALOG (self), NULL);
+        g_return_val_if_fail (g_simple_async_result_is_valid (result, G_OBJECT (self),
+                              um_account_dialog_show), NULL);
+        g_return_val_if_fail (result == G_ASYNC_RESULT (self->async), NULL);
+
+        user = g_simple_async_result_get_op_res_gpointer (self->async);
+        if (user != NULL)
+                g_object_ref (user);
+
+        g_clear_object (&self->async);
+        return user;
 }

@@ -299,14 +299,22 @@ user_changed (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
 }
 
 static void
-select_created_user (UmUser *user, UmUserPanelPrivate *d)
+select_created_user (GObject *object,
+                     GAsyncResult *result,
+                     gpointer user_data)
 {
+        UmUserPanelPrivate *d = user_data;
         GtkTreeView *tv;
         GtkTreeModel *model;
         GtkTreeSelection *selection;
         GtkTreeIter iter;
         UmUser *current;
         GtkTreePath *path;
+        UmUser *user;
+
+        user = um_account_dialog_finish (UM_ACCOUNT_DIALOG (object), result);
+        if (user == NULL)
+                return;
 
         tv = (GtkTreeView *)get_widget (d, "list-treeview");
         model = gtk_tree_view_get_model (tv);
@@ -326,6 +334,8 @@ select_created_user (UmUser *user, UmUserPanelPrivate *d)
                 if (current)
                         g_object_unref (current);
         } while (gtk_tree_model_iter_next (model, &iter));
+
+        g_object_unref (user);
 }
 
 static void
@@ -333,7 +343,7 @@ add_user (GtkButton *button, UmUserPanelPrivate *d)
 {
         um_account_dialog_show (d->account_dialog,
                                 GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
-                                (UserCreatedCallback)select_created_user, d);
+                                select_created_user, d);
 }
 
 static void

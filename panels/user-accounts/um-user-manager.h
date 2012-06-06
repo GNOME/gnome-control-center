@@ -88,6 +88,7 @@ void               um_user_manager_create_user           (UmUserManager       *m
                                                           const char          *user_name,
                                                           const char          *real_name,
                                                           gint                 account_type,
+                                                          GCancellable        *cancellable,
                                                           GAsyncReadyCallback  done,
                                                           gpointer             user_data,
                                                           GDestroyNotify       destroy);
