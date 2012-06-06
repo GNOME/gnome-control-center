@@ -29,8 +29,6 @@
 #include "um-user-manager.h"
 #include "um-utils.h"
 
-#define MAXNAMELEN  (UT_NAMESIZE - 1)
-
 struct _UmAccountDialog {
         GtkWidget *dialog;
         GtkWidget *username_combo;
