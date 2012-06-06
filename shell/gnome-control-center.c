@@ -306,6 +306,8 @@ get_item_views (GnomeControlCenter *shell)
   res = NULL;
   for (l = list; l; l = l->next)
     {
+      if (!CC_IS_SHELL_CATEGORY_VIEW (l->data))
+        continue;
       res = g_list_append (res, cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (l->data)));
     }
 
