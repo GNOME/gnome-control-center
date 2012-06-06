@@ -69,6 +69,26 @@ endif
 
 libuser_accounts_la_LDFLAGS = $(PANEL_LDFLAGS)
 
+noinst_PROGRAMS = frob-account-dialog
+
+frob_account_dialog_SOURCES = \
+	frob-account-dialog.c \
+	um-account-dialog.h \
+	um-account-dialog.c \
+	um-user.h \
+	um-user.c \
+	um-user-manager.c \
+	um-user-manager.h \
+	um-utils.h \
+	um-utils.c
+
+frob_account_dialog_LDADD = \
+	$(libuser_accounts_la_LIBADD)
+
+frob_account_dialog_CFLAGS = \
+	$(AM_CFLAGS) \
+	-DUIDIR=\""$(pkgdatadir)/ui/user-accounts"\"
+
 CLEANFILES =				\
 	$(BUILT_SOURCES)		\
 	$(NULL)
