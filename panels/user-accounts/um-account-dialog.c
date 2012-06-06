@@ -40,6 +40,7 @@ struct _UmAccountDialog {
         GtkWidget *container_widget;
         GSimpleAsyncResult *async;
         GCancellable *cancellable;
+        GtkSpinner *spinner;
 
         GtkWidget *username_combo;
         GtkWidget *name_entry;
@@ -80,6 +81,9 @@ begin_action (UmAccountDialog *self)
 {
         gtk_widget_set_sensitive (self->container_widget, FALSE);
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
+
+        gtk_widget_show (GTK_WIDGET (self->spinner));
+        gtk_spinner_start (self->spinner);
 }
 
 static void
@@ -87,6 +91,9 @@ finish_action (UmAccountDialog *self)
 {
         gtk_widget_set_sensitive (self->container_widget, TRUE);
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, TRUE);
+
+        gtk_widget_hide (GTK_WIDGET (self->spinner));
+        gtk_spinner_stop (self->spinner);
 }
 
 static void
@@ -220,6 +227,8 @@ um_account_dialog_init (UmAccountDialog *self)
         GError *error = NULL;
         GtkDialog *dialog;
         GtkWidget *content;
+        GtkWidget *actions;
+        GtkWidget *box;
 
         builder = gtk_builder_new ();
 
@@ -233,11 +242,29 @@ um_account_dialog_init (UmAccountDialog *self)
         }
 
         dialog = GTK_DIALOG (self);
+        actions = gtk_dialog_get_action_area (dialog);
         content = gtk_dialog_get_content_area (dialog);
         gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
         gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
         gtk_window_set_title (GTK_WINDOW (dialog), " ");
         gtk_window_set_icon_name (GTK_WINDOW (dialog), "system-users");
+
+        /* Rearrange the bottom of dialog, so we can have spinner on left */
+        g_object_ref (actions);
+        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
+        gtk_container_remove (GTK_CONTAINER (content), actions);
+        gtk_box_pack_end (GTK_BOX (box), actions, FALSE, TRUE, 0);
+        gtk_box_pack_end (GTK_BOX (content), box, TRUE, TRUE, 0);
+        gtk_widget_show (box);
+        g_object_unref (actions);
+
+        /* Create the spinner, but don't show it yet */
+        self->spinner = GTK_SPINNER (gtk_spinner_new ());
+        widget = gtk_alignment_new (0.5, 0.5, 1.0, 1.0);
+        gtk_alignment_set_padding (GTK_ALIGNMENT (widget), 0, 0, 12, 6);
+        gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
+        gtk_container_add (GTK_CONTAINER (widget), GTK_WIDGET (self->spinner));
+        gtk_widget_show (widget);
 
         gtk_dialog_add_button (dialog, _("Cancel"), GTK_RESPONSE_CANCEL);
         widget = gtk_dialog_add_button (dialog, _("Create"), GTK_RESPONSE_OK);
