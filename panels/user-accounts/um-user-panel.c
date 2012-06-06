@@ -1297,7 +1297,7 @@ um_user_panel_dispose (GObject *object)
                 priv->builder = NULL;
         }
         if (priv->account_dialog) {
-                um_account_dialog_free (priv->account_dialog);
+                gtk_widget_destroy (GTK_WIDGET (priv->account_dialog));
                 priv->account_dialog = NULL;
         }
         if (priv->password_dialog) {
