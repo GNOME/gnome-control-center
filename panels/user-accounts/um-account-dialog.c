@@ -125,7 +125,7 @@ create_user_done (UmUserManager   *manager,
         error = NULL;
         if (!um_user_manager_create_user_finish (manager, res, &user, &error)) {
                 if (!g_error_matches (error, UM_USER_MANAGER_ERROR, UM_USER_MANAGER_ERROR_PERMISSION_DENIED))
-                       show_error_dialog (self, _("Failed to create user"), error);
+                       show_error_dialog (self, _("Failed to add account"), error);
                 g_error_free (error);
                 gtk_widget_grab_focus (self->name_entry);
         } else {
@@ -267,7 +267,7 @@ um_account_dialog_init (UmAccountDialog *self)
         gtk_widget_show (widget);
 
         gtk_dialog_add_button (dialog, _("Cancel"), GTK_RESPONSE_CANCEL);
-        widget = gtk_dialog_add_button (dialog, _("Create"), GTK_RESPONSE_OK);
+        widget = gtk_dialog_add_button (dialog, _("_Add"), GTK_RESPONSE_OK);
         gtk_widget_grab_default (widget);
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "account-dialog");
