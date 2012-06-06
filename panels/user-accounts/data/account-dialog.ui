@@ -31,10 +31,19 @@
             <property name="border_width">10</property>
             <property name="spacing">6</property>
             <child>
-              <object class="GtkTable" id="table1">
+               <object class="GtkLabel" id="label2">
+                 <property name="visible">True</property>
+                 <property name="label" translatable="yes">Add account</property>
+                 <attributes>
+                   <attribute name="weight" value="bold"/>
+                   <attribute name="scale" value="1.200000"/>
+                 </attributes>
+               </object>
+            </child>
+            <child>
+              <object class="GtkGrid" id="local-area">
                 <property name="visible">True</property>
-                <property name="n_rows">5</property>
-                <property name="n_columns">2</property>
+                <property name="hexpand">True</property>
                 <property name="column_spacing">10</property>
                 <property name="row_spacing">10</property>
                 <child>
@@ -43,6 +52,7 @@
                     <property name="has_entry">True</property>
                     <property name="entry_text_column">0</property>
                     <property name="model">username-model</property>
+                    <property name="hexpand">True</property>
                     <child internal-child="entry">
                       <object class="GtkEntry" id="username-entry">
                         <property name="activates_default">True</property>
@@ -51,9 +61,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">4</property>
-                    <property name="bottom_attach">5</property>
+                    <property name="top_attach">3</property>
                   </packing>
                 </child>
                 <child>
@@ -68,59 +76,8 @@
                     </style>
                   </object>
                   <packing>
-                    <property name="top_attach">4</property>
-                    <property name="bottom_attach">5</property>
-                    <property name="x_options">GTK_FILL</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkHBox" id="hbox1">
-                    <property name="visible">True</property>
-                    <child>
-                      <object class="GtkLabel" id="label1">
-                        <property name="visible">True</property>
-                      </object>
-                      <packing>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="x_options">GTK_FILL</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="label2">
-                    <property name="visible">True</property>
-                    <property name="label" translatable="yes">Add account</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                      <attribute name="scale" value="1.200000"/>
-                    </attributes>
-                  </object>
-                  <packing>
-                    <property name="right_attach">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="label3">
-                    <property name="visible">True</property>
-                  </object>
-                  <packing>
-                    <property name="top_attach">1</property>
-                    <property name="bottom_attach">2</property>
-                    <property name="x_options">GTK_FILL</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="label4">
-                    <property name="visible">True</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">1</property>
-                    <property name="bottom_attach">2</property>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">3</property>
                   </packing>
                 </child>
                 <child>
@@ -128,12 +85,11 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="activates_default">True</property>
+                    <property name="hexpand">True</property>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">3</property>
-                    <property name="bottom_attach">4</property>
+                    <property name="top_attach">2</property>
                   </packing>
                 </child>
                 <child>
@@ -148,31 +104,15 @@
                     </style>
                   </object>
                   <packing>
-                    <property name="top_attach">3</property>
-                    <property name="bottom_attach">4</property>
-                    <property name="x_options">GTK_FILL</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="label7">
-                    <property name="visible">True</property>
-                    <property name="xalign">1</property>
-                    <property name="label" translatable="yes">_Account Type</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">account-type-combo</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                  </object>
-                  <packing>
+                    <property name="left_attach">0</property>
                     <property name="top_attach">2</property>
-                    <property name="bottom_attach">3</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkComboBox" id="account-type-combo">
                     <property name="visible">True</property>
                     <property name="model">account-type-model</property>
+                    <property name="hexpand">True</property>
                     <child>
                       <object class="GtkCellRendererText" id="account-type-cell"/>
                       <attributes>
@@ -182,16 +122,29 @@
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
-                    <property name="right_attach">2</property>
-                    <property name="top_attach">2</property>
-                    <property name="bottom_attach">3</property>
+                    <property name="top_attach">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label7">
+                    <property name="visible">True</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">Account _Type</property>
+                    <property name="use_underline">True</property>
+                    <property name="mnemonic_widget">account-type-combo</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
                   </packing>
                 </child>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="position">0</property>
               </packing>
             </child>
           </object>
