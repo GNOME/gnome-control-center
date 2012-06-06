@@ -23,6 +23,10 @@ if BUILD_CHEESE
 AM_CPPFLAGS += $(CHEESE_CFLAGS)
 endif
 
+BUILT_SOURCES = \
+       um-realm-generated.c \
+       um-realm-generated.h
+
 libuser_accounts_la_SOURCES =		\
 	um-account-type.h		\
 	um-account-type.c 		\
@@ -53,7 +57,10 @@ libuser_accounts_la_SOURCES =		\
 	um-editable-combo.c		\
 	um-user-panel.h 		\
 	um-user-panel.c			\
-	um-user-module.c
+	um-user-module.c		\
+	um-realm-manager.c		\
+	um-realm-manager.h		\
+	$(BUILT_SOURCES)
 
 libuser_accounts_la_LIBADD = 		\
 	$(PANEL_LIBS)			\
@@ -69,18 +76,26 @@ endif
 
 libuser_accounts_la_LDFLAGS = $(PANEL_LDFLAGS)
 
+um-realm-generated.c: $(srcdir)/data/org.freedesktop.realmd.xml
+	$(AM_V_GEN) gdbus-codegen --interface-prefix org.freedesktop.realmd. \
+		--generate-c-code um-realm-generated --c-namespace UmRealm $<
+um-realm-generated.h: um-realm-generated.c
+
 noinst_PROGRAMS = frob-account-dialog
 
 frob_account_dialog_SOURCES = \
 	frob-account-dialog.c \
 	um-account-dialog.h \
 	um-account-dialog.c \
+	um-realm-manager.c \
+	um-realm-manager.h \
 	um-user.h \
 	um-user.c \
 	um-user-manager.c \
 	um-user-manager.h \
 	um-utils.h \
-	um-utils.c
+	um-utils.c \
+	$(BUILT_SOURCES)
 
 frob_account_dialog_LDADD = \
 	$(libuser_accounts_la_LIBADD)

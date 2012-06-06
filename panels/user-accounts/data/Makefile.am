@@ -16,6 +16,7 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 EXTRA_DIST = 					\
 	gnome-user-accounts-panel.desktop.in.in	\
+	org.freedesktop.realmd.xml		\
 	$(ui_DATA)
 
 CLEANFILES =					\

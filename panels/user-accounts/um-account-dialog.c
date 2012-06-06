@@ -26,22 +26,34 @@
 #include <gtk/gtk.h>
 
 #include "um-account-dialog.h"
+#include "um-realm-manager.h"
 #include "um-user-manager.h"
 #include "um-utils.h"
-
-static void   dialog_validate     (UmAccountDialog *self);
-
-#define UM_ACCOUNT_DIALOG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), UM_TYPE_ACCOUNT_DIALOG, \
-                                                                    UmAccountDialogClass))
-#define UM_IS_ACCOUNT_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), UM_TYPE_ACCOUNT_DIALOG))
-#define UM_ACCOUNT_DIALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), UM_TYPE_ACCOUNT_DIALOG, \
-                                                                      UmAccountDialogClass))
 
 typedef enum {
         UM_LOCAL,
         UM_ENTERPRISE,
         NUM_MODES
 } UmAccountMode;
+
+static void   mode_change          (UmAccountDialog *self,
+                                    UmAccountMode mode);
+
+static void   dialog_validate      (UmAccountDialog *self);
+
+static void   on_join_login        (GObject *source,
+                                    GAsyncResult *result,
+                                    gpointer user_data);
+
+static void   on_realm_joined      (GObject *source,
+                                    GAsyncResult *result,
+                                    gpointer user_data);
+
+#define UM_ACCOUNT_DIALOG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), UM_TYPE_ACCOUNT_DIALOG, \
+                                                                    UmAccountDialogClass))
+#define UM_IS_ACCOUNT_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), UM_TYPE_ACCOUNT_DIALOG))
+#define UM_ACCOUNT_DIALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), UM_TYPE_ACCOUNT_DIALOG, \
+                                                                      UmAccountDialogClass))
 
 struct _UmAccountDialog {
         GtkDialog parent;
@@ -63,6 +75,22 @@ struct _UmAccountDialog {
         GtkWidget *local_account_type;
 
         /* Enterprise widgets */
+        guint realmd_watch;
+        GtkWidget *enterprise_button;
+        GtkListStore *enterprise_realms;
+        GtkComboBox *enterprise_domain;
+        GtkEntry *enterprise_domain_entry;
+        gboolean enterprise_domain_chosen;
+        GtkEntry *enterprise_login;
+        GtkEntry *enterprise_password;
+        UmRealmManager *realm_manager;
+        UmRealmKerberos *selected_realm;
+
+        /* Join credential dialog */
+        GtkDialog *join_dialog;
+        GtkLabel *join_domain;
+        GtkEntry *join_name;
+        GtkEntry *join_password;
 };
 
 struct _UmAccountDialogClass {
@@ -230,8 +258,8 @@ on_name_changed (GtkEditable *editable,
 }
 
 static void
-local_area_init (UmAccountDialog *self,
-                 GtkBuilder *builder)
+local_init (UmAccountDialog *self,
+            GtkBuilder *builder)
 {
         GtkWidget *widget;
 
@@ -260,6 +288,527 @@ local_prepare (UmAccountDialog *self)
         gtk_combo_box_set_active (GTK_COMBO_BOX (self->local_account_type), 0);
 }
 
+static gboolean
+enterprise_validate (UmAccountDialog *self)
+{
+        const gchar *name;
+        gboolean valid_name;
+        gboolean valid_domain;
+        GtkTreeIter iter;
+
+        name = gtk_entry_get_text (GTK_ENTRY (self->enterprise_login));
+        valid_name = is_valid_name (name);
+
+        if (gtk_combo_box_get_active_iter (self->enterprise_domain, &iter)) {
+                gtk_tree_model_get (gtk_combo_box_get_model (self->enterprise_domain),
+                                    &iter, 0, &name, -1);
+        } else {
+                name = gtk_entry_get_text (self->enterprise_domain_entry);
+        }
+
+        valid_domain = is_valid_name (name);
+        return valid_name && valid_domain;
+}
+
+static void
+enterprise_add_realm (UmAccountDialog *self,
+                      UmRealmKerberos *realm)
+{
+        GtkTreeIter iter;
+
+        gtk_list_store_append (self->enterprise_realms, &iter);
+        gtk_list_store_set (self->enterprise_realms, &iter,
+                            0, um_realm_kerberos_get_domain (realm),
+                            1, realm,
+                            -1);
+
+        /* Select the domain if appropriate */
+        if (!self->enterprise_domain_chosen && um_realm_kerberos_get_enrolled (realm))
+                gtk_combo_box_set_active_iter (self->enterprise_domain, &iter);
+}
+
+static void
+on_manager_realm_added (UmRealmManager  *manager,
+                        UmRealmKerberos *realm,
+                        gpointer         user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        enterprise_add_realm (self, realm);
+}
+
+
+static void
+on_register_user (GObject *source,
+                  GAsyncResult *result,
+                  gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        GError *error = NULL;
+        UmUser *user = NULL;
+
+        um_user_manager_cache_user_finish (UM_USER_MANAGER (source),
+                                           result, &user, &error);
+
+        /* This is where we're finally done */
+        if (error == NULL) {
+                finish_action (self);
+                complete_dialog (self, user);
+
+        } else {
+                show_error_dialog (self, _("Failed to register account"), error);
+                g_message ("Couldn't cache user account: %s", error->message);
+                finish_action (self);
+                g_error_free (error);
+        }
+}
+
+static gchar *
+enterprise_calculate_login (UmAccountDialog *self)
+{
+        const gchar *format = um_realm_kerberos_get_login_format (self->selected_realm);
+        return g_strdup_printf (format, gtk_entry_get_text (self->enterprise_login));
+}
+
+static void
+on_permit_user_login (GObject *source,
+                      GAsyncResult *result,
+                      gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        UmUserManager *manager;
+        GError *error = NULL;
+        gchar *login;
+
+        um_realm_kerberos_call_change_permitted_logins_finish (UM_REALM_KERBEROS (source),
+                                                               result, &error);
+        if (error == NULL) {
+
+                /*
+                 * Now tell the account service about this user. The account service
+                 * should also lookup information about this via the realm and make
+                 * sure all that is functional.
+                 */
+                manager = um_user_manager_ref_default ();
+                login = enterprise_calculate_login (self);
+                um_user_manager_cache_user (manager, login, self->cancellable,
+                                            on_register_user, g_object_ref (self),
+                                            g_object_unref);
+
+                g_free (login);
+                g_object_unref (manager);
+
+        } else {
+                show_error_dialog (self, _("Failed to register account"), error);
+                g_message ("Couldn't permit logins on account: %s", error->message);
+                finish_action (self);
+        }
+
+        g_object_unref (self);
+}
+
+static void
+enterprise_permit_user_login (UmAccountDialog *self)
+{
+        gchar *login;
+        const gchar *add[2];
+        const gchar *remove[1];
+
+        login = enterprise_calculate_login (self);
+
+        add[0] = login;
+        add[1] = NULL;
+        remove[0] = NULL;
+
+        um_realm_kerberos_call_change_permitted_logins (self->selected_realm,
+                                                        add, remove,
+                                                        self->cancellable,
+                                                        on_permit_user_login,
+                                                        g_object_ref (self));
+
+        g_free (login);
+}
+
+static void
+on_join_response (GtkDialog *dialog,
+                  gint response,
+                  gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+
+        gtk_widget_hide (GTK_WIDGET (dialog));
+        if (response != GTK_RESPONSE_OK) {
+                finish_action (self);
+                return;
+        }
+
+        /* Prompted for some admin credentials, try to use them to log in */
+        um_realm_login (um_realm_kerberos_get_name (self->selected_realm),
+                        um_realm_kerberos_get_domain (self->selected_realm),
+                        gtk_entry_get_text (self->join_name),
+                        gtk_entry_get_text (self->join_password),
+                        self->cancellable,
+                        on_join_login,
+                        g_object_ref (self));
+}
+
+static void
+join_show_prompt (UmAccountDialog *self,
+                  GError *error)
+{
+        const gchar *name;
+
+        gtk_entry_set_text (self->join_password, "");
+        gtk_widget_grab_focus (GTK_WIDGET (self->join_password));
+
+        gtk_label_set_text (self->join_domain,
+                            um_realm_kerberos_get_domain (self->selected_realm));
+
+        clear_entry_validation_error (self->join_name);
+        clear_entry_validation_error (self->join_password);
+
+        if (error == NULL) {
+                name = um_realm_kerberos_get_suggested_administrator (self->selected_realm);
+                if (name && !g_str_equal (name, "")) {
+                        gtk_entry_set_text (self->join_name, name);
+                } else {
+                        gtk_widget_grab_focus (GTK_WIDGET (self->join_name));
+                }
+
+        } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD)) {
+                set_entry_validation_error (self->join_password, error->message);
+
+        } else {
+                g_dbus_error_strip_remote_error (error);
+                set_entry_validation_error (self->join_name, error->message);
+        }
+
+        gtk_window_set_transient_for (GTK_WINDOW (self->join_dialog), GTK_WINDOW (self));
+        gtk_window_set_modal (GTK_WINDOW (self->join_dialog), TRUE);
+        gtk_window_present (GTK_WINDOW (self->join_dialog));
+
+        /* And now we wait for on_join_response() */
+}
+
+static void
+on_join_login (GObject *source,
+               GAsyncResult *result,
+               gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        GError *error = NULL;
+        GBytes *creds;
+
+        um_realm_login_finish (result, &creds, &error);
+
+        /* Logged in as admin successfully, use creds to join domain */
+        if (error == NULL) {
+                um_realm_join (self->selected_realm,
+                               creds, self->cancellable, on_realm_joined,
+                               g_object_ref (self));
+                g_bytes_unref (creds);
+
+        /* Couldn't login as admin, show prompt again */
+        } else {
+                join_show_prompt (self, error);
+                g_message ("Couldn't log in as admin to join domain: %s", error->message);
+                g_error_free (error);
+        }
+
+        g_object_unref (self);
+}
+
+static void
+join_init (UmAccountDialog *self,
+           GtkBuilder *builder)
+{
+        self->join_dialog = GTK_DIALOG (gtk_builder_get_object (builder, "join-dialog"));
+        self->join_domain = GTK_LABEL (gtk_builder_get_object (builder, "join-domain"));
+        self->join_name = GTK_ENTRY (gtk_builder_get_object (builder, "join-name"));
+        self->join_password = GTK_ENTRY (gtk_builder_get_object (builder, "join-password"));
+
+        g_signal_connect (self->join_dialog, "response",
+                          G_CALLBACK (on_join_response), self);
+}
+
+static void
+on_realm_joined (GObject *source,
+                 GAsyncResult *result,
+                 gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        GError *error = NULL;
+
+        um_realm_join_finish (self->selected_realm,
+                              result, &error);
+
+        /* Yay, joined the domain, register the user locally */
+        if (error == NULL) {
+                enterprise_permit_user_login (self);
+
+        /* Credential failure while joining domain, prompt for admin creds */
+        } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_LOGIN) ||
+                   g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD)) {
+                join_show_prompt (self, error);
+
+        /* Other failure */
+        } else {
+                show_error_dialog (self, _("Failed to join domain"), error);
+                g_message ("Failed to join the domain: %s", error->message);
+                finish_action (self);
+                g_error_free (error);
+        }
+
+        g_object_unref (self);
+}
+
+static void
+on_realm_login (GObject *source,
+                GAsyncResult *result,
+                gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        GError *error = NULL;
+        GBytes *creds;
+
+        um_realm_login_finish (result, &creds, &error);
+        if (error == NULL) {
+
+                /* Already joined to the domain, just register this user */
+                if (um_realm_kerberos_get_enrolled (self->selected_realm)) {
+                        enterprise_permit_user_login (self);
+
+                /* Join the domain, try using the user's creds */
+                } else {
+                        um_realm_join (self->selected_realm,
+                                       creds,
+                                       self->cancellable,
+                                       on_realm_joined,
+                                       g_object_ref (self));
+                }
+
+                g_bytes_unref (creds);
+
+        /* A problem with the user's login name or password */
+        } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_LOGIN)) {
+                set_entry_validation_error (self->enterprise_login, error->message);
+                finish_action (self);
+                gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_login));
+
+        } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD)) {
+                set_entry_validation_error (self->enterprise_password, error->message);
+                finish_action (self);
+                gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_password));
+
+        /* Other login failure */
+        } else {
+                g_dbus_error_strip_remote_error (error);
+                show_error_dialog (self, _("Failed to log into domain"), error);
+                g_message ("Couldn't log in as user: %s", error->message);
+                finish_action (self);
+        }
+
+        g_clear_error (&error);
+        g_object_unref (self);
+}
+
+static void
+enterprise_check_login (UmAccountDialog *self)
+{
+        g_assert (self->selected_realm);
+
+        um_realm_login (um_realm_kerberos_get_name (self->selected_realm),
+                        um_realm_kerberos_get_domain (self->selected_realm),
+                        gtk_entry_get_text (self->enterprise_login),
+                        gtk_entry_get_text (self->enterprise_password),
+                        self->cancellable,
+                        on_realm_login,
+                        g_object_ref (self));
+}
+
+static void
+on_realm_discover_input (GObject *source,
+                         GAsyncResult *result,
+                         gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        GError *error = NULL;
+        GList *realms;
+
+        realms = um_realm_manager_discover_finish (self->realm_manager,
+                                                   result, &error);
+
+        /* Found a realm, log user into domain */
+        if (error == NULL) {
+                g_assert (realms != NULL);
+                self->selected_realm = g_object_ref (realms->data);
+                enterprise_check_login (self);
+                g_list_free_full (realms, g_object_unref);
+
+        /* The domain is likely invalid*/
+        } else {
+                finish_action (self);
+                g_message ("Couldn't discover domain: %s", error->message);
+                gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_domain_entry));
+                g_dbus_error_strip_remote_error (error);
+                set_entry_validation_error (self->enterprise_domain_entry,
+                                            error->message);
+                g_error_free (error);
+        }
+
+        g_object_unref (self);
+}
+
+static void
+enterprise_add_user (UmAccountDialog *self)
+{
+        GtkTreeIter iter;
+
+        begin_action (self);
+        g_clear_object (&self->selected_realm);
+
+        /* Already know about this realm, try to login as user */
+        if (gtk_combo_box_get_active_iter (self->enterprise_domain, &iter)) {
+                gtk_tree_model_get (gtk_combo_box_get_model (self->enterprise_domain),
+                                    &iter, 1, &self->selected_realm, -1);
+                enterprise_check_login (self);
+
+        /* Something the user typed, we need to discover realm */
+        } else {
+                um_realm_manager_discover (self->realm_manager,
+                                           gtk_entry_get_text (self->enterprise_domain_entry),
+                                           self->cancellable,
+                                           on_realm_discover_input,
+                                           g_object_ref (self));
+        }
+}
+
+static void
+on_realm_manager_created (GObject *source,
+                           GAsyncResult *result,
+                           gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        GError *error = NULL;
+        GList *realms, *l;
+
+        g_clear_object (&self->realm_manager);
+
+        self->realm_manager = um_realm_manager_new_finish (result, &error);
+        if (error != NULL) {
+                g_warning ("Couldn't contact realmd service: %s", error->message);
+                g_error_free (error);
+                return;
+        }
+
+        /* Lookup all the realm objects */
+        realms = um_realm_manager_get_realms (self->realm_manager);
+        for (l = realms; l != NULL; l = g_list_next (l))
+                enterprise_add_realm (self, l->data);
+        g_list_free (realms);
+        g_signal_connect (self->realm_manager, "realm-added",
+                          G_CALLBACK (on_manager_realm_added), self);
+
+        /* When no realms try to discover a sensible default, triggers realm-added signal */
+        um_realm_manager_discover (self->realm_manager, "", self->cancellable,
+                                   NULL, NULL);
+
+        /* Show the 'Enterprise Login' stuff, and update mode */
+        gtk_widget_show (self->enterprise_button);
+        mode_change (self, self->mode);
+}
+
+static void
+on_realmd_appeared (GDBusConnection *connection,
+                    const gchar *name,
+                    const gchar *name_owner,
+                    gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        um_realm_manager_new (self->cancellable, on_realm_manager_created, self);
+}
+
+static void
+on_realmd_disappeared (GDBusConnection *unused1,
+                       const gchar *unused2,
+                       gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+
+        if (self->realm_manager) {
+                g_signal_handlers_disconnect_by_func (self->realm_manager,
+                                                      on_manager_realm_added,
+                                                      self);
+                g_object_unref (self->realm_manager);
+                self->realm_manager = NULL;
+        }
+
+        gtk_list_store_clear (self->enterprise_realms);
+        gtk_widget_hide (self->enterprise_button);
+        mode_change (self, UM_LOCAL);
+}
+
+static void
+on_domain_changed (GtkComboBox *widget,
+                   gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+
+        dialog_validate (self);
+        self->enterprise_domain_chosen = TRUE;
+        clear_entry_validation_error (self->enterprise_domain_entry);
+}
+
+static void
+on_entry_changed (GtkEditable *editable,
+                  gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        dialog_validate (self);
+        clear_entry_validation_error (GTK_ENTRY (editable));
+}
+
+static void
+enterprise_init (UmAccountDialog *self,
+                 GtkBuilder *builder)
+{
+        GtkWidget *widget;
+
+        self->enterprise_realms = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_OBJECT);
+
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-domain");
+        g_signal_connect (widget, "changed", G_CALLBACK (on_domain_changed), self);
+        self->enterprise_domain = GTK_COMBO_BOX (widget);
+        gtk_combo_box_set_model (self->enterprise_domain,
+                                 GTK_TREE_MODEL (self->enterprise_realms));
+        gtk_combo_box_set_entry_text_column (self->enterprise_domain, 0);
+        self->enterprise_domain_entry = GTK_ENTRY (gtk_bin_get_child (GTK_BIN (widget)));
+
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-login");
+        g_signal_connect (widget, "changed", G_CALLBACK (on_entry_changed), self);
+        self->enterprise_login = GTK_ENTRY (widget);
+
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-password");
+        g_signal_connect (widget, "changed", G_CALLBACK (on_entry_changed), self);
+        self->enterprise_password = GTK_ENTRY (widget);
+
+        /* Initially we hide the 'Enterprise Login' stuff */
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-button");
+        self->enterprise_button = widget;
+        gtk_widget_hide (widget);
+
+        self->realmd_watch = g_bus_watch_name (G_BUS_TYPE_SYSTEM, "org.freedesktop.realmd",
+                                               G_BUS_NAME_WATCHER_FLAGS_AUTO_START,
+                                               on_realmd_appeared, on_realmd_disappeared,
+                                               self, NULL);
+}
+
+static void
+enterprise_prepare (UmAccountDialog *self)
+{
+        gtk_entry_set_text (GTK_ENTRY (self->enterprise_login), "");
+        gtk_entry_set_text (GTK_ENTRY (self->enterprise_password), "");
+}
+
 static void
 dialog_validate (UmAccountDialog *self)
 {
@@ -270,8 +819,7 @@ dialog_validate (UmAccountDialog *self)
                 valid = local_validate (self);
                 break;
         case UM_ENTERPRISE:
-                /* TODO: Implement */
-                valid = FALSE;
+                valid = enterprise_validate (self);
                 break;
         default:
                 valid = FALSE;
@@ -442,7 +990,9 @@ um_account_dialog_init (UmAccountDialog *self)
         gtk_container_add (GTK_CONTAINER (content), widget);
         self->container_widget = widget;
 
-        local_area_init (self, builder);
+        local_init (self, builder);
+        enterprise_init (self, builder);
+        join_init (self, builder);
         mode_init (self, builder);
 
         g_object_unref (builder);
@@ -461,8 +1011,7 @@ um_account_dialog_response (GtkDialog *dialog,
                         local_create_user (self);
                         break;
                 case UM_ENTERPRISE:
-                        /* TODO: */
-                        g_assert_not_reached ();
+                        enterprise_add_user (self);
                         break;
                 default:
                         g_assert_not_reached ();
@@ -484,6 +1033,18 @@ um_account_dialog_dispose (GObject *obj)
         if (self->cancellable)
                 g_cancellable_cancel (self->cancellable);
 
+        if (self->realmd_watch)
+                g_bus_unwatch_name (self->realmd_watch);
+        self->realmd_watch = 0;
+
+        if (self->realm_manager) {
+                g_signal_handlers_disconnect_by_func (self->realm_manager,
+                                                      on_manager_realm_added,
+                                                      self);
+                g_object_unref (self->realm_manager);
+                self->realm_manager = NULL;
+        }
+
         G_OBJECT_CLASS (um_account_dialog_parent_class)->dispose (obj);
 }
 
@@ -494,6 +1055,7 @@ um_account_dialog_finalize (GObject *obj)
 
         if (self->cancellable)
                 g_object_unref (self->cancellable);
+        g_object_unref (self->enterprise_realms);
 
         G_OBJECT_CLASS (um_account_dialog_parent_class)->finalize (obj);
 }
@@ -535,6 +1097,7 @@ um_account_dialog_show (UmAccountDialog     *self,
         self->cancellable = g_cancellable_new ();
 
         local_prepare (self);
+        enterprise_prepare (self);
         mode_change (self, UM_LOCAL);
         dialog_validate (self);
 

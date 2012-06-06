@@ -1,0 +1,145 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
+ "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+
+<node name="/">
+	<!--
+	 * Global interface implemented by realmd. Allows listing of providers
+	 * and discovering which one is relevant for a given domain.
+	 *
+	 * This is implemented by individual providers, but is aggregated
+	 * globally at the system bus name 'org.freedesktop.realmd' with the
+	 * object path '/org/freedesktop/realmd'
+	-->
+	<interface name="org.freedesktop.realmd.Provider">
+
+		<!--
+		 * A list of known, enrolled or discovered realms.
+		 * Each realm is a DBus object and is represeted by a:
+		 *   s: DBus bus name of the realm
+		 *   o: DBus object path of the realm
+		 *   s: DBus interface name, like 'ofr.Kerberos' (below)
+		-->
+		<property name="Realms" type="a(sos)" access="read"/>
+
+		<!--
+		 * Discover whether a string represents a realm that a provider
+		 * can enroll or otherwise use.
+		-->
+		<method name="Discover">
+			<!-- The input string -->
+			<arg name="string" type="s" direction="in"/>
+
+			<!-- Returned match relevance -->
+			<arg name="relevance" type="i" direction="out"/>
+
+			<!-- The realm objects: bus name, object path, interface -->
+			<arg name="realm" type="a(sos)" direction="out"/>
+		</method>
+	</interface>
+
+	<!--
+	 * This interface is implemented by Providers and Realms to provide
+	 * additional information when an long running operation is happening
+	 *
+	 * In particular you can connect to the "Diagnostics" signal when
+	 * during an enroll or unenroll to get details.
+	-->
+	<interface name="org.freedesktop.realmd.Diagnostics">
+		<signal name="Diagnostics">
+			<arg name="data" type="s"/>
+		</signal>
+	</interface>
+
+	<!--
+	 * This interface is implemented by Kerberos realms.
+	-->
+	<interface name="org.freedesktop.realmd.Kerberos">
+
+		<!--
+		 * The kerberos realm name. Usually capitalized.
+		-->
+		<property name="Name" type="s" access="read"/>
+
+		<!--
+		 * The DNS domain name for this realm.
+		-->
+		<property name="Domain" type="s" access="read"/>
+
+		<!--
+		 * The suggested Administrator login name for this realm
+		-->
+		<property name="SuggestedAdministrator" type="s" access="read"/>
+
+		<!--
+		 * Whether the machine is enrolled in this realm or not.
+		-->
+		<property name="Enrolled" type="b" access="read"/>
+
+		<!--
+		 * Enroll the machine in this realm using an administrative
+		 * account and a password.
+		-->
+		<method name="EnrollWithPassword">
+			<arg name="principal" type="s" direction="in"/>
+			<arg name="password" type="s" direction="in"/>
+			<arg name="options" type="a{sv}" direction="in"/>
+		</method>
+
+		<!--
+		 * Enroll the machine in this realm using kerberos cached
+		 * administrative credentials.
+		-->
+		<method name="EnrollWithCredentialCache">
+			<!-- The contents of a kerberos cache file containing administrative credentials -->
+			<arg name="kerberos_cache" type="ay" direction="in">
+				<annotation name="org.gtk.GDBus.C.ForceGVariant" value="yup"/>
+			</arg>
+			<arg name="options" type="a{sv}" direction="in"/>
+		</method>
+
+		<!--
+		 * Unenroll the machine from this realm using an administrative
+		 * account and a password.
+		-->
+		<method name="UnenrollWithPassword">
+			<arg name="principal" type="s" direction="in"/>
+			<arg name="password" type="s" direction="in"/>
+			<arg name="options" type="a{sv}" direction="in"/>
+		</method>
+
+		<!--
+		 * Unenroll the machine from this realm using a kerberos cached
+		 * administrative credentials.
+		-->
+		<method name="UnenrollWithCredentialCache">
+			<!-- The contents of a kerberos cache file containing administrative credentials -->
+			<arg name="kerberos_cache" type="ay" direction="in">
+				<annotation name="org.gtk.GDBus.C.ForceGVariant" value="yup"/>
+			</arg>
+			<arg name="options" type="a{sv}" direction="in"/>
+		</method>
+
+		<!--
+		 * The format for user logins when this realm is enrolled.
+		 * This property may not be valid unless machine is enrolled
+		 * in this realm. The format contains a %s where the user name
+		 * goes eg: "DOMAIN\%s"
+		-->
+		<property name="LoginFormat" type="s" access="read"/>
+
+		<!--
+		 * The list of permitted logins in the LoginFormat style
+		-->
+		<property name="PermittedLogins" type="as" access="read"/>
+
+		<!--
+		 * Change the PermittedLogins property. Should take effect
+		 * immediately. Some providers may not enforce this :S
+		-->
+		<method name="ChangePermittedLogins">
+			<arg name="add" type="as" direction="in"/>
+			<arg name="remove" type="as" direction="in"/>
+		</method>
+
+	</interface>
+</node>
