@@ -220,6 +220,7 @@ um_account_dialog_new (void)
         widget = (GtkWidget *) gtk_builder_get_object (builder, "account-type-combo");
         um->account_type_combo = widget;
 
+        g_object_unref (builder);
         return um;
 }
 
