@@ -33,6 +33,8 @@ libgnomevolumecontrol_la_SOURCES =		\
 	gvc-channel-map.h			\
 	gvc-channel-map.c			\
 	gvc-channel-map-private.h		\
+	gvc-mixer-ui-device.h			\
+	gvc-mixer-ui-device.c			\
 	gvc-mixer-sink.h			\
 	gvc-mixer-sink.c			\
 	gvc-mixer-source.h			\
