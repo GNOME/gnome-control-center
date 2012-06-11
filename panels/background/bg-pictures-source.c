@@ -171,16 +171,29 @@ picture_scaled (GObject *source_object,
                 GAsyncResult *res,
                 gpointer user_data)
 {
-  BgPicturesSource *bg_source = BG_PICTURES_SOURCE (user_data);
+  BgPicturesSource *bg_source;
   CcBackgroundItem *item;
   GError *error = NULL;
   GdkPixbuf *pixbuf;
   const char *source_url;
   const char *software;
-
   GtkTreeIter iter;
   GtkListStore *store;
 
+  pixbuf = gdk_pixbuf_new_from_stream_finish (res, &error);
+  if (pixbuf == NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Failed to load image: %s", error->message);
+
+      g_error_free (error);
+      return;
+    }
+
+  /* since we were not cancelled, we can now cast user_data
+   * back to BgPicturesSource.
+   */
+  bg_source = BG_PICTURES_SOURCE (user_data);
   store = bg_source_get_liststore (BG_SOURCE (bg_source));
   item = g_object_get_data (source_object, "item");
 
@@ -193,15 +206,6 @@ picture_scaled (GObject *source_object,
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store),
                                         1,
                                         GTK_SORT_ASCENDING);
-
-  pixbuf = gdk_pixbuf_new_from_stream_finish (res, &error);
-  if (pixbuf == NULL)
-    {
-      g_warning ("Failed to load image: %s", error->message);
-      g_error_free (error);
-      g_object_unref (item);
-      return;
-    }
 
   /* Ignore screenshots */
   software = gdk_pixbuf_get_option (pixbuf, "tEXt::Software");
@@ -259,7 +263,7 @@ picture_opened_for_read (GObject *source_object,
                          GAsyncResult *res,
                          gpointer user_data)
 {
-  BgPicturesSource *bg_source = BG_PICTURES_SOURCE (user_data);
+  BgPicturesSource *bg_source;
   CcBackgroundItem *item;
   GFileInputStream *stream;
   GError *error = NULL;
@@ -268,22 +272,28 @@ picture_opened_for_read (GObject *source_object,
   stream = g_file_read_finish (G_FILE (source_object), res, &error);
   if (stream == NULL)
     {
-      char *filename;
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          char *filename = g_file_get_path (G_FILE (source_object));
+          g_warning ("Failed to load picture '%s': %s", filename, error->message);
+          g_free (filename);
+        }
 
-      filename = g_file_get_path (G_FILE (source_object));
-      g_warning ("Failed to load picture '%s': %s", filename, error->message);
-      g_free (filename);
       g_error_free (error);
       g_object_unref (item);
       return;
     }
 
-  g_object_set_data (G_OBJECT (stream), "item", item);
+  /* since we were not cancelled, we can now cast user_data
+   * back to BgPicturesSource.
+   */
+  bg_source = BG_PICTURES_SOURCE (user_data);
 
+  g_object_set_data (G_OBJECT (stream), "item", item);
   gdk_pixbuf_new_from_stream_at_scale_async (G_INPUT_STREAM (stream),
                                              THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT,
                                              TRUE,
-                                             NULL,
+                                             bg_source->priv->cancellable,
                                              picture_scaled, bg_source);
   g_object_unref (stream);
 }
@@ -329,7 +339,9 @@ add_single_file (BgPicturesSource *bg_source,
     g_object_set (G_OBJECT (item), "source-url", source_uri, NULL);
 
   g_object_set_data (G_OBJECT (file), "item", item);
-  g_file_read_async (file, 0, NULL, picture_opened_for_read, bg_source);
+  g_file_read_async (file, G_PRIORITY_DEFAULT,
+                     bg_source->priv->cancellable,
+                     picture_opened_for_read, bg_source);
   g_object_unref (file);
   return TRUE;
 }
