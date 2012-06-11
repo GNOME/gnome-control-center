@@ -79,10 +79,11 @@ pw_strength (const gchar  *password,
              const gchar  *old_password,
              const gchar  *username,
              const gchar **hint,
-             const gchar **long_hint)
+             const gchar **long_hint,
+             gint         *strength_level)
 {
-        gint rv;
-        gdouble strength;
+        gint rv, level = 0;
+        gdouble strength = 0.0;
         void *auxerror;
 
         rv = pwquality_check (get_pwq (),
@@ -92,26 +93,35 @@ pw_strength (const gchar  *password,
         if (rv == PWQ_ERROR_MIN_LENGTH) {
                 *hint = C_("Password strength", "Too short");
                 *long_hint = pwquality_strerror (NULL, 0, rv, auxerror);
-                return 0.0;
+                goto out;
         }
         else if (rv < 0) {
                 *hint = C_("Password strength", "Not good enough");
                 *long_hint = pwquality_strerror (NULL, 0, rv, auxerror);
-                return 0.0;
+                goto out;
         }
 
         strength = CLAMP (0.01 * rv, 0.0, 1.0);
 
-        if (strength < 0.50)
+        if (strength < 0.50) {
+                level = 1;
                 *hint = C_("Password strength", "Weak");
-        else if (strength < 0.75)
+        } else if (strength < 0.75) {
+                level = 2;
                 *hint = C_("Password strength", "Fair");
-        else if (strength < 0.90)
+        } else if (strength < 0.90) {
+                level = 3;
                 *hint = C_("Password strength", "Good");
-        else
+        } else {
+                level = 4;
                 *hint = C_("Password strength", "Strong");
+        }
 
         *long_hint = NULL;
 
-         return strength;
+ out:
+        if (strength_level)
+                *strength_level = level;
+
+        return strength;
 }

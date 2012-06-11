@@ -32,7 +32,6 @@
 
 #include "um-password-dialog.h"
 #include "um-user-manager.h"
-#include "cc-strength-bar.h"
 #include "um-utils.h"
 #include "run-passwd.h"
 #include "pw-utils.h"
@@ -316,7 +315,7 @@ update_password_strength (UmPasswordDialog *um)
         const gchar *password;
         const gchar *old_password;
         const gchar *username;
-        gdouble strength;
+        gint strength_level;
         const gchar *hint;
         const gchar *long_hint;
 
@@ -324,10 +323,10 @@ update_password_strength (UmPasswordDialog *um)
         old_password = gtk_entry_get_text (GTK_ENTRY (um->old_password_entry));
         username = um_user_get_user_name (um->user);
 
-        strength = pw_strength (password, old_password, username,
-                                &hint, &long_hint);
+        pw_strength (password, old_password, username,
+                     &hint, &long_hint, &strength_level);
 
-        cc_strength_bar_set_fraction (CC_STRENGTH_BAR (um->strength_indicator), strength);
+        gtk_level_bar_set_value (GTK_LEVEL_BAR (um->strength_indicator), strength_level);
         gtk_label_set_label (GTK_LABEL (um->strength_indicator_label), hint);
         gtk_widget_set_tooltip_text (um->strength_indicator, long_hint);
         gtk_widget_set_tooltip_text (um->strength_indicator_label, long_hint);

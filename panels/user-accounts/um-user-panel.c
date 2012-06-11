@@ -42,7 +42,6 @@
 #include "um-user.h"
 #include "um-user-manager.h"
 
-#include "cc-strength-bar.h"
 #include "um-editable-button.h"
 #include "um-editable-combo.h"
 
@@ -1258,7 +1257,6 @@ um_user_panel_init (UmUserPanel *self)
         d = self->priv = UM_USER_PANEL_PRIVATE (self);
 
         /* register types that the builder might need */
-        type = cc_strength_bar_get_type ();
         type = um_editable_button_get_type ();
         type = cc_editable_entry_get_type ();
         type = um_editable_combo_get_type ();
