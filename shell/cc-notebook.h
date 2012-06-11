@@ -60,7 +60,8 @@ void            cc_notebook_remove_page                 (CcNotebook *self,
                                                          GtkWidget  *widget);
 
 void            cc_notebook_select_page                 (CcNotebook *self,
-                                                         GtkWidget  *widget);
+                                                         GtkWidget  *widget,
+                                                         gboolean    animate);
 
 GtkWidget *     cc_notebook_get_selected_page           (CcNotebook *self);
 

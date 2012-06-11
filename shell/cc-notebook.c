@@ -98,7 +98,7 @@ cc_notebook_set_property (GObject      *gobject,
 
         switch (prop_id) {
         case PROP_CURRENT_PAGE:
-                cc_notebook_select_page (self, g_value_get_pointer (value));
+                cc_notebook_select_page (self, g_value_get_pointer (value), TRUE);
                 break;
 
         default:
@@ -368,7 +368,8 @@ cc_notebook_new (void)
 static void
 _cc_notebook_select_page (CcNotebook *self,
 			  GtkWidget  *widget,
-			  int         index)
+			  int         index,
+			  gboolean    animate)
 {
         ClutterPoint pos;
 
@@ -384,9 +385,13 @@ _cc_notebook_select_page (CcNotebook *self,
         }
 
         clutter_actor_save_easing_state (self->priv->scroll);
-        clutter_actor_set_easing_duration (self->priv->scroll, 500);
+        if (animate)
+		clutter_actor_set_easing_duration (self->priv->scroll, 500);
+	else
+		clutter_actor_set_easing_duration (self->priv->scroll, 0);
 
-        g_debug ("Scrolling to (%lf,%lf) in page selection", pos.x, pos.y);
+        g_debug ("Scrolling to (%lf,%lf) %s animation in page selection", pos.x, pos.y,
+		 animate ? "with" : "without");
         clutter_scroll_actor_scroll_to_point (CLUTTER_SCROLL_ACTOR (self->priv->scroll), &pos);
 
 	clutter_actor_restore_easing_state (self->priv->scroll);
@@ -399,7 +404,8 @@ _cc_notebook_select_page (CcNotebook *self,
 
 void
 cc_notebook_select_page (CcNotebook *self,
-                         GtkWidget  *widget)
+                         GtkWidget  *widget,
+                         gboolean    animate)
 {
 	int i, n_children;
 	GList *children, *l;
@@ -416,7 +422,7 @@ cc_notebook_select_page (CcNotebook *self,
         children = clutter_actor_get_children (self->priv->bin);
         for (i = 0, l = children; i < n_children; i++, l = l->next) {
 		if (frame == l->data) {
-			_cc_notebook_select_page (self, widget, i);
+			_cc_notebook_select_page (self, widget, i, animate);
 			found = TRUE;
 			break;
 		}
@@ -452,7 +458,7 @@ cc_notebook_add_page (CcNotebook *self,
         self->priv->pages = g_list_prepend (self->priv->pages, widget);
 
         if (self->priv->selected_page == NULL)
-		_cc_notebook_select_page (self, widget, res);
+		_cc_notebook_select_page (self, widget, res, FALSE);
 
         gtk_widget_queue_resize (GTK_WIDGET (self));
 }
