@@ -18,7 +18,7 @@ goto_page (GtkButton *button,
 	else if (target > NUM_PAGES)
 		target = 1;
 	widget = g_hash_table_lookup (pages, GINT_TO_POINTER (target));
-	cc_notebook_select_page (CC_NOTEBOOK (notebook), widget);
+	cc_notebook_select_page (CC_NOTEBOOK (notebook), widget, TRUE);
 }
 
 static GtkWidget *
