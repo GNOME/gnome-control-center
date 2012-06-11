@@ -1,6 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
  *
  * Copyright (C) 2010-2011 Richard Hughes <richard@hughsie.com>
+ * Copyright (C) 2012 Thomas Bechtold <thomasbechtold@jpberlin.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,6 +33,8 @@
 #include "nm-device-ethernet.h"
 #include "nm-device-modem.h"
 #include "nm-device-wifi.h"
+#include "nm-device-wimax.h"
+#include "nm-device-infiniband.h"
 #include "nm-utils.h"
 #include "nm-active-connection.h"
 #include "nm-vpn-connection.h"
@@ -1290,42 +1293,167 @@ out:
         return str;
 }
 
+/* return value must be freed by caller with g_free() */
+static gchar *
+get_mac_address_of_connection (NMConnection *connection)
+{
+        if (!connection)
+                return NULL;
+
+        const GByteArray *mac = NULL;
+
+        /* check the connection type */
+        if (nm_connection_is_type (connection,
+                                   NM_SETTING_WIRELESS_SETTING_NAME)) {
+                /* check wireless settings */
+                NMSettingWireless *s_wireless = \
+                        nm_connection_get_setting_wireless (connection);
+                if (!s_wireless)
+                        return NULL;
+                mac = nm_setting_wireless_get_mac_address (s_wireless);
+                if (mac)
+                        return nm_utils_hwaddr_ntoa (mac->data, ARPHRD_ETHER);
+        } else if (nm_connection_is_type (connection,
+                                          NM_SETTING_WIRED_SETTING_NAME)) {
+                /* check wired settings */
+                NMSettingWired *s_wired = \
+                        nm_connection_get_setting_wired (connection);
+                if (!s_wired)
+                        return NULL;
+                mac = nm_setting_wired_get_mac_address (s_wired);
+                if (mac)
+                        return nm_utils_hwaddr_ntoa (mac->data, ARPHRD_ETHER);
+        } else if (nm_connection_is_type (connection,
+                                          NM_SETTING_WIMAX_SETTING_NAME)) {
+                /* check wimax settings */
+                NMSettingWimax *s_wimax = \
+                        nm_connection_get_setting_wimax (connection);
+                if (!s_wimax)
+                        return NULL;
+                mac = nm_setting_wimax_get_mac_address (s_wimax);
+                if (mac)
+                        return nm_utils_hwaddr_ntoa (mac->data, ARPHRD_ETHER);
+        } else if (nm_connection_is_type (connection,
+                                          NM_SETTING_INFINIBAND_SETTING_NAME)) {
+                /* check infiniband settings */
+                NMSettingInfiniband *s_infiniband = \
+                        nm_connection_get_setting_infiniband (connection);
+                if (!s_infiniband)
+                        return NULL;
+                mac = nm_setting_infiniband_get_mac_address (s_infiniband);
+                if (mac)
+                        return nm_utils_hwaddr_ntoa (mac->data,
+                                                     ARPHRD_INFINIBAND);
+        }
+        /* no MAC address found */
+        return NULL;
+}
+
+/* return value must not be freed! */
+static const gchar *
+get_mac_address_of_device (NMDevice *device)
+{
+        const gchar *mac = NULL;
+        switch (nm_device_get_device_type (device)) {
+        case NM_DEVICE_TYPE_WIFI:
+        {
+                NMDeviceWifi *device_wifi = NM_DEVICE_WIFI (device);
+                mac = nm_device_wifi_get_hw_address (device_wifi);
+                break;
+        }
+        case NM_DEVICE_TYPE_ETHERNET:
+        {
+                NMDeviceEthernet *device_ethernet = NM_DEVICE_ETHERNET (device);
+                mac = nm_device_ethernet_get_hw_address (device_ethernet);
+                break;
+        }
+        case NM_DEVICE_TYPE_WIMAX:
+        {
+                NMDeviceWimax *device_wimax = NM_DEVICE_WIMAX (device);
+                mac = nm_device_wimax_get_hw_address (device_wimax);
+                break;
+        }
+        case NM_DEVICE_TYPE_INFINIBAND:
+        {
+                NMDeviceInfiniband *device_infiniband = \
+                        NM_DEVICE_INFINIBAND (device);
+                mac = nm_device_infiniband_get_hw_address (device_infiniband);
+                break;
+        }
+        default:
+                break;
+        }
+        /* no MAC address found */
+        return mac;
+}
+
+/* returns TRUE if both MACs are equal */
+static gboolean
+compare_mac_device_with_mac_connection (NMDevice *device,
+                                        NMConnection *connection)
+{
+        const gchar *mac_dev = NULL;
+        gchar *mac_conn = NULL;
+
+        mac_dev = get_mac_address_of_device (device);
+        if (mac_dev) {
+                mac_conn = get_mac_address_of_connection (connection);
+                if (mac_conn) {
+                        /* compare both MACs */
+                        if (g_strcmp0 (mac_dev, mac_conn) == 0) {
+                                g_free (mac_conn);
+                                return TRUE;
+                        }
+                        g_free (mac_conn);
+                }
+        }
+        return FALSE;
+}
+
 static NMConnection *
 find_connection_for_device (CcNetworkPanel *panel,
                             NMDevice       *device)
 {
-        const GPtrArray *connections;
-        const GPtrArray *devices;
-        NMActiveConnection *c;
-        gint i;
-
-        connections = nm_client_get_active_connections (panel->priv->client);
-        if (connections == NULL) {
-                GSList *list;
-                GSList *filtered;
-                NMConnection *connection = NULL;
-
-                /* if the device is not active, but only has *one*
-                 * potential connection, then show that -- which is the
-                 * typical case for ethernet connections */
-                list = nm_remote_settings_list_connections (panel->priv->remote_settings);
-                filtered = nm_device_filter_connections (device, list);
-                if (g_slist_length (filtered) == 1)
-                        connection = filtered->data;
-                g_slist_free (list);
-                g_slist_free (filtered);
-                return connection;
+        /* is the device available in a active connection? */
+        NMActiveConnection *ac = nm_device_get_active_connection (device);
+        if (ac) {
+                return (NMConnection*)nm_remote_settings_get_connection_by_path \
+                        (panel->priv->remote_settings,
+                         nm_active_connection_get_connection (ac));
         }
 
-        for (i = 0; i < connections->len; i++) {
-                c = (NMActiveConnection *)connections->pdata[i];
+        /* not found in active connections - check all available connections */
+        GSList *list, *filtered, *iterator;
+        NMConnection *connection;
+        list = nm_remote_settings_list_connections \
+           (panel->priv->remote_settings);
+        filtered = nm_device_filter_connections (device, list);
 
-                devices = nm_active_connection_get_devices (c);
-                if (devices && devices->pdata[0] == device) {
-                        return (NMConnection *)nm_remote_settings_get_connection_by_path (panel->priv->remote_settings, nm_active_connection_get_connection (c));
+        if (filtered) {
+                /* if list has only one connection, use this connection */
+                if (g_slist_length (filtered) == 1) {
+                        connection = filtered->data;
+                        g_slist_free (list);
+                        g_slist_free (filtered);
+                        return connection;
+                }
+
+                /* is there connection with the MAC address of the device? */
+                for (iterator = filtered; iterator; iterator = iterator->next) {
+                        connection = iterator->data;
+                        if (compare_mac_device_with_mac_connection (device,
+                                                                    connection)) {
+                                /* found a valid MAC combination */
+                                g_slist_free (list);
+                                g_slist_free (filtered);
+                                return connection;
+                        }
                 }
         }
 
+        /* no connection found for the given device */
+        g_slist_free (list);
+        g_slist_free (filtered);
         return NULL;
 }
 
