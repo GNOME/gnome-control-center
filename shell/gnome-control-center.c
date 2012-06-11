@@ -521,11 +521,6 @@ search_entry_changed_cb (GtkEntry           *entry,
   if (!g_strcmp0 (priv->filter_string, ""))
     {
       shell_show_overview_page (center);
-      g_object_set (G_OBJECT (entry),
-                    "secondary-icon-name", "edit-find-symbolic",
-                    "secondary-icon-activatable", FALSE,
-                    "secondary-icon-sensitive", FALSE,
-                    NULL);
     }
   else
     {
@@ -533,11 +528,6 @@ search_entry_changed_cb (GtkEntry           *entry,
       cc_notebook_select_page (CC_NOTEBOOK (priv->notebook),
 			       priv->search_scrolled,
 			       FALSE);
-      g_object_set (G_OBJECT (entry),
-                          "secondary-icon-name", "edit-clear-symbolic",
-                          "secondary-icon-activatable", TRUE,
-                          "secondary-icon-sensitive", TRUE,
-                          NULL);
     }
 }
 
@@ -567,12 +557,6 @@ search_entry_key_press_event_cb (GtkEntry    *entry,
     }
 
   return FALSE;
-}
-
-static void
-search_entry_clear_cb (GtkEntry *entry)
-{
-  gtk_entry_set_text (entry, "");
 }
 
 static void
@@ -685,9 +669,6 @@ setup_search (GnomeControlCenter *shell)
                     shell);
   g_signal_connect (widget, "key-press-event",
                     G_CALLBACK (search_entry_key_press_event_cb), priv);
-
-  g_signal_connect (widget, "icon-release", G_CALLBACK (search_entry_clear_cb),
-                    priv);
 
   gtk_widget_show (priv->search_view);
 }
