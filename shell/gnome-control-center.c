@@ -177,7 +177,7 @@ activate_panel (GnomeControlCenter *shell,
 
   /* switch to the new panel */
   gtk_widget_show (box);
-  cc_notebook_select_page (CC_NOTEBOOK (priv->notebook), box);
+  cc_notebook_select_page (CC_NOTEBOOK (priv->notebook), box, TRUE);
 
   /* set the title of the window */
   icon_name = get_icon_name_from_g_icon (gicon);
@@ -214,7 +214,7 @@ shell_show_overview_page (GnomeControlCenter *center)
   GnomeControlCenterPrivate *priv = center->priv;
 
   cc_notebook_select_page (CC_NOTEBOOK (priv->notebook),
-			   priv->scrolled_window);
+			   priv->scrolled_window, priv->current_panel != NULL);
 
   if (priv->current_panel)
     cc_notebook_remove_page (CC_NOTEBOOK (priv->notebook), priv->current_panel);
@@ -531,7 +531,8 @@ search_entry_changed_cb (GtkEntry           *entry,
     {
       gtk_tree_model_filter_refilter (GTK_TREE_MODEL_FILTER (priv->search_filter));
       cc_notebook_select_page (CC_NOTEBOOK (priv->notebook),
-			       priv->search_scrolled);
+			       priv->search_scrolled,
+			       FALSE);
       g_object_set (G_OBJECT (entry),
                           "secondary-icon-name", "edit-clear-symbolic",
                           "secondary-icon-activatable", TRUE,
@@ -974,7 +975,8 @@ _shell_set_active_panel_from_id (CcShell      *shell,
       cc_notebook_remove_page (CC_NOTEBOOK (priv->notebook), priv->current_panel);
       priv->current_panel = NULL;
       cc_notebook_select_page (CC_NOTEBOOK (priv->notebook),
-			       priv->scrolled_window);
+			       priv->scrolled_window,
+			       TRUE);
       g_warning ("Could not find settings panel \"%s\"", start_id);
       return FALSE;
     }
@@ -989,7 +991,7 @@ _shell_set_active_panel_from_id (CcShell      *shell,
 			  name, gicon) == FALSE)
         {
           cc_notebook_select_page (CC_NOTEBOOK (priv->notebook),
-				   priv->scrolled_window);
+				   priv->scrolled_window, TRUE);
         }
 
       if (old_panel)
