@@ -91,6 +91,7 @@ struct _UmAccountDialog {
         GtkLabel *join_domain;
         GtkEntry *join_name;
         GtkEntry *join_password;
+        gboolean join_prompted;
 };
 
 struct _UmAccountDialogClass {
@@ -466,7 +467,7 @@ join_show_prompt (UmAccountDialog *self,
         clear_entry_validation_error (self->join_name);
         clear_entry_validation_error (self->join_password);
 
-        if (error == NULL) {
+        if (!self->join_prompted) {
                 name = um_realm_kerberos_get_suggested_administrator (self->selected_realm);
                 if (name && !g_str_equal (name, "")) {
                         gtk_entry_set_text (self->join_name, name);
@@ -485,6 +486,8 @@ join_show_prompt (UmAccountDialog *self,
         gtk_window_set_transient_for (GTK_WINDOW (self->join_dialog), GTK_WINDOW (self));
         gtk_window_set_modal (GTK_WINDOW (self->join_dialog), TRUE);
         gtk_window_present (GTK_WINDOW (self->join_dialog));
+
+        self->join_prompted = TRUE;
 
         /* And now we wait for on_join_response() */
 }
@@ -664,7 +667,9 @@ enterprise_add_user (UmAccountDialog *self)
         GtkTreeIter iter;
 
         begin_action (self);
+
         g_clear_object (&self->selected_realm);
+        self->join_prompted = FALSE;
 
         /* Already know about this realm, try to login as user */
         if (gtk_combo_box_get_active_iter (self->enterprise_domain, &iter)) {
