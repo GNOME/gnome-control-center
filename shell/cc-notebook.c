@@ -199,7 +199,7 @@ cc_notebook_get_preferred_width (GtkWidget       *widget,
 	notebook = CC_NOTEBOOK (widget);
 
 	if (notebook->priv->selected_page == NULL) {
-		gtk_widget_get_preferred_height (notebook->priv->embed, minimum_width, natural_width);
+		gtk_widget_get_preferred_width (notebook->priv->embed, minimum_width, natural_width);
 		return;
 	}
 
