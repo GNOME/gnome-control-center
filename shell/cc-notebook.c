@@ -68,7 +68,18 @@ enum
 
 static GParamSpec *obj_props[LAST_PROP] = { NULL, };
 
-G_DEFINE_TYPE (CcNotebook, cc_notebook, GTK_TYPE_BOX)
+static void
+cc_notebook_buildable_add_child (GtkBuildable  *buildable,
+                                 GtkBuilder    *builder,
+                                 GObject       *child,
+                                 const gchar   *type);
+
+static void
+cc_notebook_buildable_init (GtkBuildableIface *iface);
+
+G_DEFINE_TYPE_WITH_CODE (CcNotebook, cc_notebook, GTK_TYPE_BOX,
+                         G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE,
+                                                cc_notebook_buildable_init))
 
 static void
 cc_notebook_get_property (GObject    *gobject,
@@ -535,4 +546,20 @@ cc_notebook_get_selected_page (CcNotebook *self)
         g_return_val_if_fail (CC_IS_NOTEBOOK (self), NULL);
 
         return self->priv->selected_page;
+}
+
+static void
+cc_notebook_buildable_add_child (GtkBuildable  *buildable,
+                                 GtkBuilder    *builder,
+                                 GObject       *child,
+                                 const gchar   *type)
+{
+        CcNotebook *notebook = CC_NOTEBOOK (buildable);
+        cc_notebook_add_page (notebook, GTK_WIDGET (child));
+}
+
+static void
+cc_notebook_buildable_init (GtkBuildableIface *iface)
+{
+        iface->add_child = cc_notebook_buildable_add_child;
 }
