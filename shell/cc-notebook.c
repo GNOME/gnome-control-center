@@ -144,7 +144,7 @@ cc_notebook_get_preferred_height (GtkWidget       *widget,
 	notebook = CC_NOTEBOOK (widget);
 
 	if (notebook->priv->selected_page == NULL) {
-		gtk_widget_get_preferred_height (notebook->priv->selected_page, minimum_height, natural_height);
+		gtk_widget_get_preferred_height (notebook->priv->embed, minimum_height, natural_height);
 		return;
 	}
 
@@ -172,7 +172,7 @@ cc_notebook_get_preferred_width_for_height (GtkWidget       *widget,
 	notebook = CC_NOTEBOOK (widget);
 
 	if (notebook->priv->selected_page == NULL) {
-		gtk_widget_get_preferred_width_for_height (notebook->priv->selected_page, height, minimum_width, natural_width);
+		gtk_widget_get_preferred_width_for_height (notebook->priv->embed, height, minimum_width, natural_width);
 		return;
 	}
 
@@ -199,7 +199,7 @@ cc_notebook_get_preferred_width (GtkWidget       *widget,
 	notebook = CC_NOTEBOOK (widget);
 
 	if (notebook->priv->selected_page == NULL) {
-		gtk_widget_get_preferred_height (notebook->priv->selected_page, minimum_width, natural_width);
+		gtk_widget_get_preferred_height (notebook->priv->embed, minimum_width, natural_width);
 		return;
 	}
 
@@ -227,7 +227,7 @@ cc_notebook_get_preferred_height_for_width (GtkWidget       *widget,
 	notebook = CC_NOTEBOOK (widget);
 
 	if (notebook->priv->selected_page == NULL) {
-		gtk_widget_get_preferred_height_for_width (notebook->priv->selected_page, width, minimum_height, natural_height);
+		gtk_widget_get_preferred_height_for_width (notebook->priv->embed, width, minimum_height, natural_height);
 		return;
 	}
 
