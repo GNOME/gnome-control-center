@@ -483,6 +483,7 @@ static void
 remove_on_complete (ClutterTimeline *timeline,
 		    RemoveData      *data)
 {
+        g_signal_handlers_disconnect_by_func (timeline, remove_on_complete, data);
 	data->notebook->priv->removed_pages = g_list_remove (data->notebook->priv->removed_pages, data);
 	clutter_actor_destroy (data->frame);
 	g_free (data);
