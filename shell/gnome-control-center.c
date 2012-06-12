@@ -895,9 +895,10 @@ _shell_set_active_panel_from_id (CcShell      *shell,
   GtkTreeIter iter;
   gboolean iter_valid;
   gchar *name = NULL;
-  gchar *desktop;
-  GIcon *gicon;
+  gchar *desktop = NULL;
+  GIcon *gicon = NULL;
   GnomeControlCenterPrivate *priv = GNOME_CONTROL_CENTER (shell)->priv;
+  GtkWidget *old_panel;
 
   /* clear any custom widgets */
   _shell_remove_all_custom_widgets (priv);
@@ -932,6 +933,8 @@ _shell_set_active_panel_from_id (CcShell      *shell,
 
           name = NULL;
           id = NULL;
+          desktop = NULL;
+          gicon = NULL;
         }
 
       iter_valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (priv->store),
@@ -940,38 +943,25 @@ _shell_set_active_panel_from_id (CcShell      *shell,
 
   if (!name)
     {
-      cc_notebook_remove_page (CC_NOTEBOOK (priv->notebook), priv->current_panel);
-      priv->current_panel = NULL;
-      cc_notebook_select_page (CC_NOTEBOOK (priv->notebook),
-			       priv->scrolled_window,
-			       TRUE);
       g_warning ("Could not find settings panel \"%s\"", start_id);
-      return FALSE;
     }
-  else
+  else if (activate_panel (GNOME_CONTROL_CENTER (shell), start_id, argv, desktop,
+                           name, gicon) == FALSE)
     {
-      GtkWidget *old_panel;
-
       old_panel = priv->current_panel;
       priv->current_panel = NULL;
-
-      if (activate_panel (GNOME_CONTROL_CENTER (shell), start_id, argv, desktop,
-			  name, gicon) == FALSE)
-        {
-          cc_notebook_select_page (CC_NOTEBOOK (priv->notebook),
-				   priv->scrolled_window, TRUE);
-        }
-
+      cc_notebook_select_page (CC_NOTEBOOK (priv->notebook),
+                               priv->scrolled_window, TRUE);
       if (old_panel)
         cc_notebook_remove_page (CC_NOTEBOOK (priv->notebook), old_panel);
-
-      g_free (name);
-      g_free (desktop);
-      if (gicon)
-	g_object_unref (gicon);
-
-      return TRUE;
     }
+
+  g_free (name);
+  g_free (desktop);
+  if (gicon)
+    g_object_unref (gicon);
+
+  return TRUE;
 }
 
 static GtkWidget *
