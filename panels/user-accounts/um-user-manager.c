@@ -436,6 +436,7 @@ create_user_done (GObject        *proxy,
         GSimpleAsyncResult *res;
         GVariant *result;
         GError *error = NULL;
+        gchar *remote;
 
         res = g_simple_async_result_new (G_OBJECT (data->manager),
                                          data->callback,
@@ -448,15 +449,16 @@ create_user_done (GObject        *proxy,
                  * calling dbus_g_error_has_name on the error returned in
                  * um_user_manager_create_user_finish doesn't work.
                  */
+                remote = g_dbus_error_get_remote_error (error);
                 if (g_dbus_error_is_remote_error (error) &&
-                    strcmp (g_dbus_error_get_remote_error(error), "org.freedesktop.Accounts.Error.PermissionDenied") == 0) {
+                    strcmp (remote, "org.freedesktop.Accounts.Error.PermissionDenied") == 0) {
                         g_simple_async_result_set_error (res,
                                                          UM_USER_MANAGER_ERROR,
                                                          UM_USER_MANAGER_ERROR_PERMISSION_DENIED,
                                                          "Not authorized");
                 }
                 if (g_dbus_error_is_remote_error (error) &&
-                    strcmp (g_dbus_error_get_remote_error(error), "org.freedesktop.Accounts.Error.UserExists") == 0) {
+                    strcmp (remote, "org.freedesktop.Accounts.Error.UserExists") == 0) {
                         g_simple_async_result_set_error (res,
                                                          UM_USER_MANAGER_ERROR,
                                                          UM_USER_MANAGER_ERROR_USER_EXISTS,
@@ -467,6 +469,7 @@ create_user_done (GObject        *proxy,
                         g_simple_async_result_set_from_error (res, error);
                 }
                 g_error_free (error);
+                g_free (remote);
         }
         else {
                 if (g_variant_is_of_type (result, G_VARIANT_TYPE ("(o)"))) {
