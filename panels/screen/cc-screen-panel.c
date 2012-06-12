@@ -94,6 +94,7 @@ cc_screen_panel_dispose (GObject *object)
     }
   if (priv->cancellable != NULL)
     {
+      g_cancellable_cancel (priv->cancellable);
       g_object_unref (priv->cancellable);
       priv->cancellable = NULL;
     }
@@ -109,14 +110,6 @@ cc_screen_panel_dispose (GObject *object)
     }
 
   G_OBJECT_CLASS (cc_screen_panel_parent_class)->dispose (object);
-}
-
-static void
-cc_screen_panel_finalize (GObject *object)
-{
-  CcScreenPanelPrivate *priv = CC_SCREEN_PANEL (object)->priv;
-  g_cancellable_cancel (priv->cancellable);
-  G_OBJECT_CLASS (cc_screen_panel_parent_class)->finalize (object);
 }
 
 static void
@@ -167,7 +160,6 @@ cc_screen_panel_class_init (CcScreenPanelClass *klass)
   object_class->get_property = cc_screen_panel_get_property;
   object_class->set_property = cc_screen_panel_set_property;
   object_class->dispose = cc_screen_panel_dispose;
-  object_class->finalize = cc_screen_panel_finalize;
 
   panel_class->get_help_uri = cc_screen_panel_get_help_uri;
 }
@@ -228,10 +220,18 @@ get_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data
   result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
   if (result == NULL)
     {
+      /* We got cancelled, so we're probably exiting */
+      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          g_error_free (error);
+          return;
+	}
+
       gtk_widget_hide (WID ("screen_brightness_hscale"));
       gtk_widget_hide (WID ("screen_auto_reduce_checkbutton"));
       gtk_widget_hide (WID ("brightness-frame"));
       g_object_set (G_OBJECT (WID ("turn-off-alignment")), "left-padding", 0, NULL);
+
       g_warning ("Error getting brightness: %s", error->message);
       g_error_free (error);
       return;
