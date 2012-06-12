@@ -560,17 +560,6 @@ search_entry_key_press_event_cb (GtkEntry    *entry,
 }
 
 static void
-reparent_notebook_page (GnomeControlCenterPrivate *priv,
-			GtkWidget                 *widget)
-{
-  g_object_ref (widget);
-  gtk_container_remove (GTK_CONTAINER (priv->notebook), widget);
-  gtk_widget_set_name (widget, "search-page");
-  cc_notebook_add_page (CC_NOTEBOOK (priv->notebook), widget);
-  g_object_unref (widget);
-}
-
-static void
 on_search_selection_changed (GtkTreeSelection   *selection,
                              GnomeControlCenter *shell)
 {
@@ -652,8 +641,6 @@ setup_search (GnomeControlCenter *shell)
   gtk_tree_view_append_column (GTK_TREE_VIEW (priv->search_view), column);
 
   priv->search_scrolled = W (priv->builder, "search-scrolled-window");
-  reparent_notebook_page (priv, priv->search_scrolled);
-  gtk_container_add (GTK_CONTAINER (priv->search_scrolled), search_view);
 
   g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->search_view)),
                     "changed",
@@ -1311,7 +1298,6 @@ gnome_control_center_init (GnomeControlCenter *self)
 
   /* Main scrolled window */
   priv->scrolled_window = W (priv->builder, "scrolledwindow1");
-  reparent_notebook_page (priv, priv->scrolled_window);
 
   gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, -1);
   priv->main_vbox = W (priv->builder, "main-vbox");
