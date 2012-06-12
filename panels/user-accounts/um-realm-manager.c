@@ -104,6 +104,7 @@ on_realm_proxy_created (GObject *source,
                 /* Add it to the manager, unless race */
                 have = g_hash_table_lookup (self->realms, info);
                 if (have == NULL) {
+                        g_dbus_proxy_set_default_timeout (proxy, G_MAXINT);
                         g_hash_table_insert (self->realms,
                                              g_variant_ref_sink (info), realm);
                         g_signal_emit (self, signals[REALM_ADDED], 0, realm);
@@ -344,6 +345,7 @@ um_realm_manager_new (GCancellable *cancellable,
                                     "g-bus-type", G_BUS_TYPE_SYSTEM,
                                     "g-object-path", "/org/freedesktop/realmd",
                                     "g-interface-name", "org.freedesktop.realmd.Provider",
+                                    "g-default-timeout", G_MAXINT,
                                     NULL);
 
         g_object_unref (async);
