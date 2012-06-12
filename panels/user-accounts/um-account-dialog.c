@@ -279,7 +279,9 @@ um_account_dialog_show (UmAccountDialog     *self,
         gtk_window_present (GTK_WINDOW (self));
         gtk_widget_grab_focus (self->name_entry);
 
-        self->valid_name = self->valid_username = TRUE;
+        self->valid_name = self->valid_username = FALSE;
+        gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK,
+                                           self->valid_name && self->valid_username);
 
         self->user_created_callback = user_created_callback;
         self->user_created_data = user_created_data;
