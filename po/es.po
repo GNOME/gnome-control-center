@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-06-12 13:13+0000\n"
-"PO-Revision-Date: 2012-06-12 17:36+0200\n"
+"POT-Creation-Date: 2012-06-12 19:33+0000\n"
+"PO-Revision-Date: 2012-06-13 10:04+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -3957,17 +3957,14 @@ msgid "Administrator"
 msgstr "Administrador"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:3
-#| msgid "Add Account"
 msgid "Add account"
 msgstr "Añadir cuenta"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
-#| msgid "My Account"
 msgid "_Local Account"
 msgstr "Cuenta _local"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:5
-#| msgid "_Fingerprint Login"
 msgid "_Enterprise Login"
 msgstr "Inicio de s_esión corporativo"
 
@@ -3980,17 +3977,14 @@ msgid "_Full name"
 msgstr "Nombre _completo"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
-#| msgid "_Account Type"
 msgid "Account _Type"
 msgstr "_Tipo de cuenta"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
-#| msgid "R_otation"
 msgid "_Domain"
 msgstr "_Dominio"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:10
-#| msgid "_Location name:"
 msgid "_Login Name"
 msgstr "Nombre de _inicio de sesión"
 
@@ -4004,13 +3998,10 @@ msgid "Tip: Enterprise domain or realm name"
 msgstr "Consejo: dominio de la empresa o nombre real"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
-#| msgid "Connection"
 msgid "C_ontinue"
 msgstr "C_ontinuar"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:14
-#| msgctxt "Account type"
-#| msgid "Administrator"
 msgid "Domain Administrator Login"
 msgstr "Inicio de sesión del administrador del dominio"
 
@@ -4025,14 +4016,10 @@ msgstr ""
 "sistema que escriba aquí la contraseña del dominio."
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:18
-#| msgctxt "Account type"
-#| msgid "Administrator"
 msgid "Administrator _Name"
 msgstr "_Nombre del administrador"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:19
-#| msgctxt "Account type"
-#| msgid "Administrator"
 msgid "Administrator Password"
 msgstr "Contraseña de administrador"
 
@@ -4337,23 +4324,19 @@ msgid "Unknown error"
 msgstr "Error desconocido"
 
 #: ../panels/user-accounts/um-account-dialog.c:171
-#| msgid "Failed to connect"
 msgid "Failed to add account"
 msgstr "Falló al añadir la cuenta"
 
 #: ../panels/user-accounts/um-account-dialog.c:358
 #: ../panels/user-accounts/um-account-dialog.c:401
-#| msgid "Failed to create user"
 msgid "Failed to register account"
 msgstr "Falló al registrar la cuenta"
 
 #: ../panels/user-accounts/um-account-dialog.c:555
-#| msgid "Failed to connect"
 msgid "Failed to join domain"
 msgstr "Falló al unirse al dominio"
 
 #: ../panels/user-accounts/um-account-dialog.c:605
-#| msgid "Failed to connect"
 msgid "Failed to log into domain"
 msgstr "Falló al iniciar sesión en el dominio"
 
@@ -4509,6 +4492,27 @@ msgstr "Examinar para buscar más imágenes…"
 msgid "Used by %s"
 msgstr "Usada por %s"
 
+#: ../panels/user-accounts/um-realm-manager.c:478
+#, c-format
+#| msgid "Tip: Enterprise domain or realm name"
+msgid "No such domain or realm found"
+msgstr "No existe el dominio o no se ha encontrado el reino"
+
+#: ../panels/user-accounts/um-realm-manager.c:684
+#, c-format
+msgid "Cannot log in as %s at the %s domain"
+msgstr "No se puede iniciar sesión como %s en el dominio %s"
+
+#: ../panels/user-accounts/um-realm-manager.c:689
+msgid "Invalid password, please try again"
+msgstr "Contraseña no válida, inténtelo de nuevo"
+
+#: ../panels/user-accounts/um-realm-manager.c:693
+#, c-format
+#| msgid "Could not connect to system bus: %s"
+msgid "Couldn't connect to the %s domain: %s"
+msgstr "No se pudo conectar al dominio %s: %s"
+
 #: ../panels/user-accounts/um-user-manager.c:466
 #, c-format
 msgid "A user with name '%s' already exists."
@@ -4516,7 +4520,6 @@ msgstr "Ya existe un usuario con el nombre «%s»."
 
 #: ../panels/user-accounts/um-user-manager.c:473
 #, c-format
-#| msgid "A user with the username '%s' already exists"
 msgid "No user with the name '%s' exists."
 msgstr "No existe ningún usuario con el nombre «%s»"
 
@@ -5579,9 +5582,6 @@ msgstr "Todas las configuraciones"
 
 #~ msgid "Secure HTTP Proxy:"
 #~ msgstr "Proxy para HTTP seguro:"
-
-#~ msgid "Could not connect to system bus: %s"
-#~ msgstr "No se pudo conectar con el bus del sistema: %s"
 
 #~ msgid "LowContrast"
 #~ msgstr "ContrasteBajo"
