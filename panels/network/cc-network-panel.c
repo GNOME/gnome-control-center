@@ -3561,24 +3561,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
                           G_CALLBACK (wireless_ap_changed_cb),
                           panel);
 
-        renderer = panel_cell_renderer_mode_new ();
-        gtk_cell_renderer_set_padding (renderer, 4, 0);
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
-                                    renderer,
-                                    FALSE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
-                                        "mode", PANEL_WIRELESS_COLUMN_MODE,
-                                        NULL);
-
-        renderer = panel_cell_renderer_security_new ();
-        gtk_cell_renderer_set_padding (renderer, 4, 0);
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
-                                    renderer,
-                                    FALSE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
-                                        "security", PANEL_WIRELESS_COLUMN_SECURITY,
-                                        NULL);
-
         /* sort networks in drop down */
         sortable = GTK_TREE_SORTABLE (gtk_builder_get_object (panel->priv->builder,
                                                               "liststore_wireless_network"));
@@ -3591,6 +3573,15 @@ cc_network_panel_init (CcNetworkPanel *panel)
                                          sortable,
                                          NULL);
 
+        renderer = panel_cell_renderer_mode_new ();
+        gtk_cell_renderer_set_padding (renderer, 4, 0);
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
+                                    renderer,
+                                    FALSE);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
+                                        "mode", PANEL_WIRELESS_COLUMN_MODE,
+                                        NULL);
+
         renderer = panel_cell_renderer_signal_new ();
         gtk_cell_renderer_set_padding (renderer, 4, 0);
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
@@ -3598,6 +3589,15 @@ cc_network_panel_init (CcNetworkPanel *panel)
                                     FALSE);
         gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
                                         "signal", PANEL_WIRELESS_COLUMN_STRENGTH,
+                                        NULL);
+
+        renderer = panel_cell_renderer_security_new ();
+        gtk_cell_renderer_set_padding (renderer, 4, 0);
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
+                                    renderer,
+                                    FALSE);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
+                                        "security", PANEL_WIRELESS_COLUMN_SECURITY,
                                         NULL);
 
         /* use NetworkManager client */
