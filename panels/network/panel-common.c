@@ -113,6 +113,7 @@ panel_device_to_localized_string (NMDevice *device)
  * panel_device_to_sortable_string:
  *
  * Try to return order of approximate connection speed.
+ * But sort wifi first, since thats the common case.
  **/
 const gchar *
 panel_device_to_sortable_string (NMDevice *device)
@@ -121,10 +122,10 @@ panel_device_to_sortable_string (NMDevice *device)
         NMDeviceModemCapabilities caps;
         switch (nm_device_get_device_type (device)) {
         case NM_DEVICE_TYPE_ETHERNET:
-                value = "1";
+                value = "2";
                 break;
         case NM_DEVICE_TYPE_WIFI:
-                value = "2";
+                value = "1";
                 break;
         case NM_DEVICE_TYPE_MODEM:
                 caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
