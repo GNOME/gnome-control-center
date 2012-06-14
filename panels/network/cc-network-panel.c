@@ -3393,15 +3393,17 @@ network_add_shell_header_widgets_cb (gpointer user_data)
         CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
         gboolean ret;
         GtkWidget *box;
+        GtkWidget *label;
         GtkWidget *widget;
 
         box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3);
         /* TRANSLATORS: this is to disable the radio hardware in the
          * network panel */
-        widget = gtk_label_new (_("Airplane Mode"));
-        gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
-        gtk_widget_set_visible (widget, TRUE);
+        label = gtk_label_new_with_mnemonic (_("Air_plane Mode"));
+        gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
+        gtk_widget_set_visible (label, TRUE);
         widget = gtk_switch_new ();
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
         gtk_widget_set_visible (widget, TRUE);
         cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (panel)), box);
