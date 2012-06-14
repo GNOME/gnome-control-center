@@ -71,7 +71,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -82,13 +81,13 @@
             </child>
             <child>
               <object class="GtkButton" id="create_button">
-                <property name="label" translatable="yes">Create...</property>
+                <property name="label" translatable="yes">C_reate...</property>
                 <property name="use_action_appearance">False</property>
+                <property name="use_underline">True</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -114,7 +113,9 @@
               <object class="GtkLabel" id="label_1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Interface</property>
+                <property name="label" translatable="yes">_Interface</property>
+                <property name="use_underline">True</property>
+                <property name="mnemonic_widget">connection_type_combo</property>
               </object>
               <packing>
                 <property name="expand">False</property>
