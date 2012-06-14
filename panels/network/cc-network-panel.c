@@ -197,30 +197,17 @@ cc_network_panel_dispose (GObject *object)
 {
         CcNetworkPanelPrivate *priv = CC_NETWORK_PANEL (object)->priv;
 
-        if (priv->proxy_settings) {
-                g_object_unref (priv->proxy_settings);
-                priv->proxy_settings = NULL;
-        }
-        if (priv->cancellable != NULL) {
+        g_clear_object (&priv->proxy_settings);
+
+        if (priv->cancellable != NULL)
                 g_cancellable_cancel (priv->cancellable);
-                g_object_unref (priv->cancellable);
-                priv->cancellable = NULL;
-        }
-        if (priv->builder != NULL) {
-                g_object_unref (priv->builder);
-                priv->builder = NULL;
-        }
-        if (priv->client != NULL) {
-                g_object_unref (priv->client);
-                priv->client = NULL;
-        }
-        if (priv->remote_settings != NULL) {
-                g_object_unref (priv->remote_settings);
-                priv->remote_settings = NULL;
-        }
-        if (priv->kill_switch_header != NULL) {
-                g_clear_object (&priv->kill_switch_header);
-        }
+
+        g_clear_object (&priv->cancellable);
+        g_clear_object (&priv->builder);
+        g_clear_object (&priv->client);
+        g_clear_object (&priv->remote_settings);
+        g_clear_object (&priv->kill_switch_header);
+
         if (priv->refresh_idle != 0) {
                 g_source_remove (priv->refresh_idle);
                 priv->refresh_idle = 0;
