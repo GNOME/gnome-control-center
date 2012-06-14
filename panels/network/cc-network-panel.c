@@ -525,7 +525,6 @@ out:
                 g_variant_unref (result);
         if (proxy != NULL)
                 g_object_unref (proxy);
-        return;
 }
 
 static void
@@ -594,7 +593,6 @@ panel_device_got_modem_manager_gsm_cb (GObject *source_object,
 out:
         if (proxy != NULL)
                 g_object_unref (proxy);
-        return;
 }
 
 static void
