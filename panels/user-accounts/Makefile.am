@@ -104,8 +104,19 @@ frob_account_dialog_CFLAGS = \
 	$(AM_CFLAGS) \
 	-DUIDIR=\""$(pkgdatadir)/ui/user-accounts"\"
 
+polkitdir = $(datadir)/polkit-1/actions
+polkit_in_files = org.gnome.controlcenter.user-accounts.policy.in
+
+@INTLTOOL_POLICY_RULE@
+polkit_DATA = $(polkit_in_files:.policy.in=.policy)
+
+EXTRA_DIST =				\
+	$(polkit_in_files)		\
+	$(NULL)
+
 CLEANFILES =				\
 	$(BUILT_SOURCES)		\
+	$(polkit_DATA)			\
 	$(NULL)
 
 MAINTAINERCLEANFILES =                  \

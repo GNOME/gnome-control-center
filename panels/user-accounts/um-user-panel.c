@@ -1223,7 +1223,7 @@ setup_main_window (UmUserPanelPrivate *d)
         g_signal_connect (button, "clicked",
                           G_CALLBACK (change_fingerprint), d);
 
-        d->permission = (GPermission *)polkit_permission_new_sync ("org.freedesktop.accounts.user-administration", NULL, NULL, NULL);
+        d->permission = (GPermission *)polkit_permission_new_sync ("org.gnome.controlcenter.user-accounts.administration", NULL, NULL, NULL);
         g_signal_connect (d->permission, "notify",
                           G_CALLBACK (on_permission_changed), d);
         on_permission_changed (d->permission, NULL, d);
