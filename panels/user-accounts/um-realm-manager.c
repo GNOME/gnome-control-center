@@ -282,12 +282,45 @@ on_realm_diagnostics (GDBusConnection *connection,
                       gpointer user_data)
 {
         const gchar *message;
+        const gchar *unused;
 
-        if (g_variant_is_of_type (parameters, G_VARIANT_TYPE ("(s)"))) {
+        if (g_variant_is_of_type (parameters, G_VARIANT_TYPE ("(ss)"))) {
                 /* Data is already formatted appropriately for stderr */
-                g_variant_get (parameters, "(&s)", &message);
+                g_variant_get (parameters, "(&s&s)", &message, &unused);
                 g_printerr ("%s", message);
         }
+}
+
+static gboolean
+number_at_least (const gchar *number,
+                 guint minimum)
+{
+        gchar *end;
+
+        if (strtol (number, &end, 10) < (long)minimum)
+                return FALSE;
+        if (!end || *end != '\0')
+                return FALSE;
+        return TRUE;
+}
+
+static gboolean
+version_compare (const char *version,
+                 guint req_major,
+                 guint req_minor)
+{
+        gboolean match = FALSE;
+        gchar **parts;
+
+        parts = g_strsplit (version, ".", 2);
+
+        if (parts[0] && parts[1]) {
+                match = number_at_least (parts[0], req_major) &&
+                        number_at_least (parts[1], req_minor);
+        }
+
+        g_strfreev (parts);
+        return match;
 }
 
 static void
@@ -298,6 +331,7 @@ on_realm_manager_async_init (GObject *source,
         GSimpleAsyncResult *async = G_SIMPLE_ASYNC_RESULT (user_data);
         UmRealmManager *self;
         GError *error = NULL;
+        const gchar *version;
         GDBusProxy *proxy;
         GObject *object;
         guint sig;
@@ -306,6 +340,20 @@ on_realm_manager_async_init (GObject *source,
 
         if (error != NULL)
                 g_simple_async_result_take_error (async, error);
+
+        /* This is temporary until the dbus interface stabilizes */
+        if (object) {
+                version = um_realm_provider_get_version (UM_REALM_PROVIDER (object));
+                if (!version_compare (version, 0, 2)) {
+                        /* No need to bother translators with this temporary message */
+                        g_simple_async_result_set_error (async, UM_REALM_ERROR,
+                                                         UM_REALM_ERROR_GENERIC,
+                                                         "Unsupported version of realmd: %s", version);
+                        g_object_unref (object);
+                        object = NULL;
+                }
+        }
+
         if (object != NULL) {
                 proxy = G_DBUS_PROXY (object);
                 sig = g_dbus_connection_signal_subscribe (g_dbus_proxy_get_connection (proxy),
@@ -450,7 +498,7 @@ um_realm_manager_discover (UmRealmManager *self,
         discover->cancellable = cancellable ? g_object_ref (cancellable) : NULL;
         g_simple_async_result_set_op_res_gpointer (res, discover, discover_closure_free);
 
-        um_realm_provider_call_discover (UM_REALM_PROVIDER (self), input, cancellable,
+        um_realm_provider_call_discover (UM_REALM_PROVIDER (self), input, "", cancellable,
                                          on_provider_discover, g_object_ref (res));
 
         g_object_unref (res);
@@ -516,6 +564,7 @@ um_realm_join (UmRealmKerberos *realm,
         um_realm_kerberos_call_enroll_with_credential_cache (realm,
                                                              g_variant_ref_sink (creds),
                                                              g_variant_ref_sink (options),
+                                                             "",
                                                              cancellable,
                                                              callback,
                                                              user_data);

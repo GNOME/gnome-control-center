@@ -13,6 +13,16 @@
 	<interface name="org.freedesktop.realmd.Provider">
 
 		<!--
+		 * The name of the provider
+		-->
+		<property name="Name" type="s" access="read"/>
+
+		<!--
+		 * A version number for the provider
+		-->
+		<property name="Version" type="s" access="read"/>
+
+		<!--
 		 * A list of known, enrolled or discovered realms.
 		 * Each realm is a DBus object and is represeted by a:
 		 *   s: DBus bus name of the realm
@@ -28,6 +38,8 @@
 		<method name="Discover">
 			<!-- The input string -->
 			<arg name="string" type="s" direction="in"/>
+
+			<arg name="operation_id" type="s" direction="in"/>
 
 			<!-- Returned match relevance -->
 			<arg name="relevance" type="i" direction="out"/>
@@ -47,6 +59,7 @@
 	<interface name="org.freedesktop.realmd.Diagnostics">
 		<signal name="Diagnostics">
 			<arg name="data" type="s"/>
+			<arg name="operation_id" type="s"/>
 		</signal>
 	</interface>
 
@@ -66,6 +79,11 @@
 		<property name="Domain" type="s" access="read"/>
 
 		<!--
+		 * The server software, for information only. eg: active-directory
+		-->
+		<property name="Details" type="a{ss}" access="read"/>
+
+		<!--
 		 * The suggested Administrator login name for this realm
 		-->
 		<property name="SuggestedAdministrator" type="s" access="read"/>
@@ -83,6 +101,7 @@
 			<arg name="principal" type="s" direction="in"/>
 			<arg name="password" type="s" direction="in"/>
 			<arg name="options" type="a{sv}" direction="in"/>
+			<arg name="operation_id" type="s" direction="in"/>
 		</method>
 
 		<!--
@@ -95,6 +114,7 @@
 				<annotation name="org.gtk.GDBus.C.ForceGVariant" value="yup"/>
 			</arg>
 			<arg name="options" type="a{sv}" direction="in"/>
+			<arg name="operation_id" type="s" direction="in"/>
 		</method>
 
 		<!--
@@ -105,6 +125,7 @@
 			<arg name="principal" type="s" direction="in"/>
 			<arg name="password" type="s" direction="in"/>
 			<arg name="options" type="a{sv}" direction="in"/>
+			<arg name="operation_id" type="s" direction="in"/>
 		</method>
 
 		<!--
@@ -117,6 +138,7 @@
 				<annotation name="org.gtk.GDBus.C.ForceGVariant" value="yup"/>
 			</arg>
 			<arg name="options" type="a{sv}" direction="in"/>
+			<arg name="operation_id" type="s" direction="in"/>
 		</method>
 
 		<!--
@@ -139,6 +161,7 @@
 		<method name="ChangePermittedLogins">
 			<arg name="add" type="as" direction="in"/>
 			<arg name="remove" type="as" direction="in"/>
+			<arg name="operation_id" type="s" direction="in"/>
 		</method>
 
 	</interface>
