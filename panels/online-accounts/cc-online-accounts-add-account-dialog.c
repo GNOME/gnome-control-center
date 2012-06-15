@@ -260,10 +260,10 @@ goa_panel_add_account_dialog_init (GoaPanelAddAccountDialog *add_account)
   gtk_container_add (GTK_CONTAINER (vbox), grid);
 
   label = gtk_label_new (NULL);
-  markup = g_strconcat ("<b>", _("Add Account"), "</b>", NULL);
+  markup = g_strconcat ("<b><span size=\"large\">", _("Add Account"), "</span></b>", NULL);
   gtk_label_set_markup (GTK_LABEL (label), markup);
   g_free (markup);
-  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+  gtk_misc_set_alignment (GTK_MISC (label), 0.5, 0.5);
   gtk_container_add (GTK_CONTAINER (grid), label);
 
   priv->list_store = gtk_list_store_new (N_COLUMNS, GOA_TYPE_PROVIDER, G_TYPE_ICON, G_TYPE_STRING);
