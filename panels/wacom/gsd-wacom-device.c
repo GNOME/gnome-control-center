@@ -29,7 +29,6 @@
 #include <X11/Xatom.h>
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-rr.h>
-#include <libgnome-desktop/gnome-rr-config.h>
 
 #include <libwacom/libwacom.h>
 #include <X11/extensions/XInput.h>
@@ -321,6 +320,7 @@ struct GsdWacomDevicePrivate
 	char *tool_name;
 	gboolean reversible;
 	gboolean is_screen_tablet;
+	gboolean is_fallback;
 	GList *styli;
 	GsdWacomStylus *last_stylus;
 	GList *buttons;
@@ -399,11 +399,11 @@ setup_property_notify (GsdWacomDevice *device)
 
 	evmask.deviceid = device->priv->device_id;
 	evmask.mask_len = XIMaskLen (XI_PropertyEvent);
-	evmask.mask = g_malloc0(evmask.mask_len * sizeof(char));
+	evmask.mask = g_new0 (guchar, evmask.mask_len);
 	XISetMask (evmask.mask, XI_PropertyEvent);
 
 	dpy = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
-	XISelectEvents (dpy, DefaultRootWindow(dpy), &evmask, 1);
+	XISelectEvents (dpy, DefaultRootWindow (dpy), &evmask, 1);
 
 	g_free (evmask.mask);
 
@@ -491,62 +491,52 @@ get_device_type (XDeviceInfo *dev)
 }
 
 /* Finds an output which matches the given EDID information. Any NULL
- * parameter will be interpreted to match any value.
- */
-static GnomeRROutputInfo*
-find_output_by_edid (const gchar *vendor, const gchar *product, const gchar *serial)
+ * parameter will be interpreted to match any value. */
+static GnomeRROutput *
+find_output_by_edid (GnomeRRScreen *rr_screen, const gchar *vendor, const gchar *product, const gchar *serial)
 {
-	GError *error = NULL;
-	GnomeRRScreen *rr_screen;
-	GnomeRRConfig *rr_config;
-	GnomeRROutputInfo **rr_output_info;
-        GnomeRROutputInfo *retval = NULL;
+	GnomeRROutput **rr_outputs;
+	GnomeRROutput *retval = NULL;
+	guint i;
 
-	rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
-	if (rr_screen == NULL) {
-		g_warning ("Failed to create GnomeRRScreen: %s", error->message);
-		g_error_free (error);
-		return NULL;
-	}
-	rr_config = gnome_rr_config_new_current (rr_screen, &error);
-	if (rr_config == NULL) {
-		g_warning ("Failed to get current screen configuration: %s", error->message);
-		g_error_free (error);
-		g_object_unref (rr_screen);
-		return NULL;
-	}
-	rr_output_info = gnome_rr_config_get_outputs (rr_config);
+	rr_outputs = gnome_rr_screen_list_outputs (rr_screen);
 
-	for (; *rr_output_info != NULL; rr_output_info++) {
-		gchar *o_vendor;
-		gchar *o_product;
-		gchar *o_serial;
+	for (i = 0; rr_outputs[i] != NULL; i++) {
+		gchar *o_vendor_s;
+		gchar *o_product_s;
+		int o_product;
+		gchar *o_serial_s;
+		int o_serial;
 		gboolean match;
 
-		o_vendor = g_malloc0 (4);
-		gnome_rr_output_info_get_vendor (*rr_output_info, o_vendor);
-		o_product = g_strdup_printf ("%d", gnome_rr_output_info_get_product (*rr_output_info));
-		o_serial  = g_strdup_printf ("%d", gnome_rr_output_info_get_serial  (*rr_output_info));
+		if (!gnome_rr_output_is_connected (rr_outputs[i]))
+			continue;
+
+		if (!gnome_rr_output_get_ids_from_edid (rr_outputs[i],
+						        &o_vendor_s,
+						        &o_product,
+						        &o_serial))
+			continue;
+
+		o_product_s = g_strdup_printf ("%d", o_product);
+		o_serial_s  = g_strdup_printf ("%d", o_serial);
 
 		g_debug ("Checking for match between '%s','%s','%s' and '%s','%s','%s'", \
-		         vendor,product,serial, o_vendor,o_product,o_serial);
+		         vendor, product, serial, o_vendor_s, o_product_s, o_serial_s);
 
-		match = (vendor  == NULL || g_strcmp0 (vendor,  o_vendor)  == 0) && \
-		        (product == NULL || g_strcmp0 (product, o_product) == 0) && \
-		        (serial  == NULL || g_strcmp0 (serial,  o_serial)  == 0);
+		match = (vendor  == NULL || g_strcmp0 (vendor,  o_vendor_s)  == 0) && \
+		        (product == NULL || g_strcmp0 (product, o_product_s) == 0) && \
+		        (serial  == NULL || g_strcmp0 (serial,  o_serial_s)  == 0);
 
-		g_free (o_vendor);
-		g_free (o_product);
-		g_free (o_serial);
+		g_free (o_vendor_s);
+		g_free (o_product_s);
+		g_free (o_serial_s);
 
 		if (match) {
-			retval = g_object_ref (*rr_output_info);
+			retval = g_object_ref (rr_outputs[i]);
 			break;
 		}
 	}
-
-	g_object_unref (rr_config);
-	g_object_unref (rr_screen);
 
 	if (retval == NULL)
 		g_debug ("Did not find a matching output for EDID '%s,%s,%s'",
@@ -555,27 +545,55 @@ find_output_by_edid (const gchar *vendor, const gchar *product, const gchar *ser
 	return retval;
 }
 
-static GnomeRROutputInfo*
-find_output_by_heuristic (GsdWacomDevice *device)
+static GnomeRROutput*
+find_builtin_output (GnomeRRScreen *rr_screen)
 {
-	GnomeRROutputInfo *rr_output_info;
+	GnomeRROutput **rr_outputs;
+	GnomeRROutput *retval = NULL;
+	guint i;
+
+	rr_outputs = gnome_rr_screen_list_outputs (rr_screen);
+	for (i = 0; rr_outputs[i] != NULL; i++) {
+		if (!gnome_rr_output_is_connected (rr_outputs[i]))
+			continue;
+
+		if (gnome_rr_output_is_laptop(rr_outputs[i])) {
+			retval = g_object_ref (rr_outputs[i]);
+			break;
+		}
+	}
+
+	if (retval == NULL)
+		g_debug ("Did not find a built-in monitor");
+
+	return retval;
+}
+
+static GnomeRROutput *
+find_output_by_heuristic (GnomeRRScreen *rr_screen, GsdWacomDevice *device)
+{
+	GnomeRROutput *rr_output;
 
 	/* TODO: This heuristic will fail for non-Wacom display
 	 * tablets and may give the wrong result if multiple Wacom
 	 * display tablets are connected.
 	 */
-	rr_output_info = find_output_by_edid("WAC", NULL, NULL);
-	return rr_output_info;
+	rr_output = find_output_by_edid (rr_screen, "WAC", NULL, NULL);
+
+	if (!rr_output)
+		rr_output = find_builtin_output (rr_screen);
+
+	return rr_output;
 }
 
-static GnomeRROutputInfo*
-find_output_by_display (GsdWacomDevice *device)
+static GnomeRROutput *
+find_output_by_display (GnomeRRScreen *rr_screen, GsdWacomDevice *device)
 {
 	gsize n;
 	GSettings *tablet;
 	GVariant *display;
 	const gchar **edid;
-	GnomeRROutputInfo *ret;
+	GnomeRROutput *ret;
 
 	if (device == NULL)
 		return NULL;
@@ -590,10 +608,10 @@ find_output_by_display (GsdWacomDevice *device)
 		goto out;
 	}
 
-	if (strlen(edid[0]) == 0 || strlen(edid[1]) == 0 || strlen(edid[2]) == 0)
+	if (strlen (edid[0]) == 0 || strlen (edid[1]) == 0 || strlen (edid[2]) == 0)
 		goto out;
 
-	ret = find_output_by_edid (edid[0], edid[1], edid[2]);
+	ret = find_output_by_edid (rr_screen, edid[0], edid[1], edid[2]);
 
 out:
 	g_free (edid);
@@ -602,15 +620,25 @@ out:
 	return ret;
 }
 
-static GnomeRROutputInfo*
+static gboolean
+is_on (GnomeRROutput *output)
+{
+	GnomeRRCrtc *crtc;
+
+	crtc = gnome_rr_output_get_crtc (output);
+	if (!crtc)
+		return FALSE;
+	return gnome_rr_crtc_get_current_mode (crtc) != NULL;
+}
+
+static GnomeRROutput *
 find_output_by_monitor (GdkScreen *screen,
 			int        monitor)
 {
 	GError *error = NULL;
 	GnomeRRScreen *rr_screen;
-	GnomeRRConfig *rr_config;
-	GnomeRROutputInfo **rr_output_infos;
-	GnomeRROutputInfo *ret;
+	GnomeRROutput **rr_outputs;
+	GnomeRROutput *ret;
 	guint i;
 
 	ret = NULL;
@@ -622,33 +650,30 @@ find_output_by_monitor (GdkScreen *screen,
 		return NULL;
 	}
 
-	rr_config = gnome_rr_config_new_current (rr_screen, &error);
-	if (rr_screen == NULL) {
-		g_warning ("gnome_rr_config_new_current() failed: %s", error->message);
-		g_error_free (error);
-		g_object_unref (rr_screen);
-		return NULL;
-	}
+	rr_outputs = gnome_rr_screen_list_outputs (rr_screen);
 
-	rr_output_infos = gnome_rr_config_get_outputs (rr_config);
+	for (i = 0; rr_outputs[i] != NULL; i++) {
+		GnomeRROutput *rr_output;
+		GnomeRRCrtc *crtc;
+		int x, y;
 
-	for (i = 0; rr_output_infos[i] != NULL; i++) {
-		GnomeRROutputInfo *info;
-		int x, y, w, h;
+		rr_output = rr_outputs[i];
 
-		info = rr_output_infos[i];
-
-		if (!gnome_rr_output_info_is_active (info))
+		if (!is_on (rr_output))
 			continue;
 
-		gnome_rr_output_info_get_geometry (info, &x, &y, &w, &h);
+		crtc = gnome_rr_output_get_crtc (rr_output);
+		if (!crtc)
+			continue;
+
+		gnome_rr_crtc_get_position (crtc, &x, &y);
+
 		if (monitor == gdk_screen_get_monitor_at_point (screen, x, y)) {
-			ret = g_object_ref (info);
+			ret = g_object_ref (rr_output);
 			break;
 		}
 	}
 
-	g_object_unref (rr_config);
 	g_object_unref (rr_screen);
 
 	if (ret == NULL)
@@ -658,54 +683,54 @@ find_output_by_monitor (GdkScreen *screen,
 }
 
 static void
-set_display_by_output (GsdWacomDevice    *device,
-                       GnomeRROutputInfo *rr_output_info)
+set_display_by_output (GsdWacomDevice  *device,
+                       GnomeRROutput   *rr_output)
 {
 	GSettings   *tablet;
 	GVariant    *c_array;
 	GVariant    *n_array;
 	gsize        nvalues;
-	gchar       *o_vendor, *o_product, *o_serial;
+	gchar       *o_vendor_s, *o_product_s, *o_serial_s;
+	int          o_product, o_serial;
 	const gchar *values[3];
 
 	tablet  = gsd_wacom_device_get_settings (device);
 	c_array = g_settings_get_value (tablet, "display");
 	g_variant_get_strv (c_array, &nvalues);
 	if (nvalues != 3) {
-		g_warning("Unable set set display property. Got %"G_GSIZE_FORMAT" items; expected %d items.\n", nvalues, 4);
+		g_warning ("Unable set set display property. Got %"G_GSIZE_FORMAT" items; expected %d items.\n", nvalues, 4);
 		return;
 	}
 
-	if (rr_output_info == NULL)
-	{
-		o_vendor  = g_strdup ("");
-		o_product = g_strdup ("");
-		o_serial  = g_strdup ("");
-	}
-	else
-	{
-		o_vendor = g_malloc0 (4);
-		gnome_rr_output_info_get_vendor (rr_output_info, o_vendor);
-		o_product = g_strdup_printf ("%d", gnome_rr_output_info_get_product (rr_output_info));
-		o_serial  = g_strdup_printf ("%d", gnome_rr_output_info_get_serial  (rr_output_info));
+	if (rr_output == NULL ||
+	    !gnome_rr_output_get_ids_from_edid (rr_output,
+					        &o_vendor_s,
+					        &o_product,
+					        &o_serial)) {
+		o_vendor_s  = g_strdup ("");
+		o_product_s = g_strdup ("");
+		o_serial_s  = g_strdup ("");
+	} else {
+		o_product_s = g_strdup_printf ("%d", o_product);
+		o_serial_s  = g_strdup_printf ("%d", o_serial);
 	}
 
-	values[0] = o_vendor;
-	values[1] = o_product;
-	values[2] = o_serial;
-	n_array = g_variant_new_strv((const gchar * const *) &values, 3);
+	values[0] = o_vendor_s;
+	values[1] = o_product_s;
+	values[2] = o_serial_s;
+	n_array = g_variant_new_strv ((const gchar * const *) &values, 3);
 	g_settings_set_value (tablet, "display", n_array);
 
-	g_free (o_vendor);
-	g_free (o_product);
-	g_free (o_serial);
+	g_free (o_vendor_s);
+	g_free (o_product_s);
+	g_free (o_serial_s);
 }
 
 void
 gsd_wacom_device_set_display (GsdWacomDevice *device,
                               int             monitor)
 {
-	GnomeRROutputInfo *output = NULL;
+	GnomeRROutput *output = NULL;
 
         g_return_if_fail (GSD_IS_WACOM_DEVICE (device));
 
@@ -714,26 +739,37 @@ gsd_wacom_device_set_display (GsdWacomDevice *device,
 	set_display_by_output (device, output);
 }
 
-static GnomeRROutputInfo*
+static GnomeRROutput *
 find_output (GsdWacomDevice *device)
 {
-	GnomeRROutputInfo *rr_output_info;
+	GError *error = NULL;
+	GnomeRRScreen *rr_screen;
+	GnomeRROutput *rr_output;
 
-	rr_output_info = find_output_by_display(device);
+	rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
+	if (rr_screen == NULL) {
+		g_warning ("Failed to create GnomeRRScreen: %s", error->message);
+		g_error_free (error);
+		return NULL;
+	}
 
-	if (rr_output_info == NULL) {
+	rr_output = find_output_by_display (rr_screen, device);
+
+	if (rr_output == NULL) {
 		if (gsd_wacom_device_is_screen_tablet (device)) {
-			rr_output_info = find_output_by_heuristic (device);
-			if (rr_output_info == NULL) {
+			rr_output = find_output_by_heuristic (rr_screen, device);
+			if (rr_output == NULL) {
 				g_warning ("No fuzzy match based on heuristics was found.");
 			} else {
-				g_warning("Automatically mapping tablet to heuristically-found display.");
-				set_display_by_output (device, rr_output_info);
+				g_warning ("Automatically mapping tablet to heuristically-found display.");
+				set_display_by_output (device, rr_output);
 			}
 		}
 	}
 
-	return rr_output_info;
+	g_object_unref (rr_screen);
+
+	return rr_output;
 }
 
 static void
@@ -767,29 +803,32 @@ calculate_transformation_matrix (const GdkRectangle mapped, const GdkRectangle d
 int
 gsd_wacom_device_get_display_monitor (GsdWacomDevice *device)
 {
+	GnomeRROutput *rr_output;
+	GnomeRRMode *mode;
+	GnomeRRCrtc *crtc;
 	gint area[4];
-	gboolean is_active;
-	GnomeRROutputInfo *rr_output_info;
 
         g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), -1);
 
-	rr_output_info = find_output(device);
-	if (rr_output_info == NULL)
+	rr_output = find_output (device);
+	if (rr_output == NULL)
 		return -1;
 
-	is_active = gnome_rr_output_info_is_active (rr_output_info);
-	gnome_rr_output_info_get_geometry (rr_output_info, &area[0], &area[1], &area[2], &area[3]);
-
-	g_object_unref (rr_output_info);
-
-	if (!is_active)
-	{
+	if (!is_on (rr_output)) {
 		g_warning ("Output is not active.");
 		return -1;
 	}
 
-	if (area[2] <= 0 || area[3] <= 0)
-	{
+	crtc = gnome_rr_output_get_crtc (rr_output);
+	gnome_rr_crtc_get_position (crtc, &area[0], &area[1]);
+
+	mode = gnome_rr_crtc_get_current_mode (crtc);
+	area[2] = gnome_rr_mode_get_width (mode);
+	area[3] = gnome_rr_mode_get_height (mode);
+
+	g_object_unref (rr_output);
+
+	if (area[2] <= 0 || area[3] <= 0) {
 		g_warning ("Output has non-positive area.");
 		return -1;
 	}
@@ -1150,7 +1189,7 @@ gsd_wacom_device_update_from_db (GsdWacomDevice *device,
 		int num_styli;
 		guint i;
 
-		ids = libwacom_get_supported_styli(wacom_device, &num_styli);
+		ids = libwacom_get_supported_styli (wacom_device, &num_styli);
 		g_assert (num_styli >= 1);
 		for (i = 0; i < num_styli; i++)
 			add_stylus_to_device (device, settings_path, ids[i]);
@@ -1220,6 +1259,7 @@ gsd_wacom_device_constructor (GType                     type,
 			 gdk_device_get_name (device->priv->gdk_device),
 			 device->priv->path);
 
+		device->priv->is_fallback = TRUE;
 		wacom_error = libwacom_error_new ();
 		wacom_device = libwacom_new_from_path (db, device->priv->path, TRUE, wacom_error);
 		if (wacom_device == NULL) {
@@ -1459,6 +1499,14 @@ gsd_wacom_device_is_screen_tablet (GsdWacomDevice *device)
 	return device->priv->is_screen_tablet;
 }
 
+gboolean
+gsd_wacom_device_is_fallback (GsdWacomDevice *device)
+{
+	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), FALSE);
+
+	return device->priv->is_fallback;
+}
+
 GSettings *
 gsd_wacom_device_get_settings (GsdWacomDevice *device)
 {
@@ -1564,7 +1612,7 @@ gsd_wacom_device_get_area (GsdWacomDevice *device)
 
 	device_area = g_new0 (int, nitems);
 	for (i = 0; i < nitems; i++)
-		device_area[i] = ((long*)data)[i];
+		device_area[i] = ((long *)data)[i];
 
 	XFree (data);
 	XCloseDevice (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), xdevice);
