@@ -67,6 +67,9 @@ static void on_toolbar_add_button_clicked (GtkToolButton *button,
 static void on_toolbar_remove_button_clicked (GtkToolButton *button,
                                               gpointer       user_data);
 
+static void on_add_button_clicked (GtkButton *button,
+                                   gpointer   user_data);
+
 static void on_account_changed (GoaClient  *client,
                                 GoaObject  *object,
                                 gpointer    user_data);
@@ -98,6 +101,7 @@ goa_panel_finalize (GObject *object)
 static void
 goa_panel_init (GoaPanel *panel)
 {
+  GtkWidget *button;
   GtkWidget *w;
   GError *error;
   GtkStyleContext *context;
@@ -138,6 +142,12 @@ goa_panel_init (GoaPanel *panel)
   g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview)),
                     "changed",
                     G_CALLBACK (on_tree_view_selection_changed),
+                    panel);
+
+  button = GTK_WIDGET (gtk_builder_get_object (panel->builder, "accounts-button-add"));
+  g_signal_connect (button,
+                    "clicked",
+                    G_CALLBACK (on_add_button_clicked),
                     panel);
 
   panel->accounts_vbox = GTK_WIDGET (gtk_builder_get_object (panel->builder, "accounts-vbox"));
@@ -271,7 +281,16 @@ show_page (GoaPanel *panel,
 static void
 show_page_nothing_selected (GoaPanel *panel)
 {
+  GtkWidget *box;
+  GtkWidget *label;
+
   show_page (panel, 0);
+
+  box = GTK_WIDGET (gtk_builder_get_object (panel->builder, "accounts-tree-box"));
+  gtk_widget_set_sensitive (box, FALSE);
+
+  label = GTK_WIDGET (gtk_builder_get_object (panel->builder, "accounts-tree-label"));
+  gtk_widget_show (label);
 }
 
 static void
@@ -339,6 +358,7 @@ show_page_account (GoaPanel  *panel,
 {
   GList *children;
   GList *l;
+  GtkWidget *box;
   GtkWidget *grid;
   GtkWidget *left_grid;
   GtkWidget *right_grid;
@@ -351,6 +371,11 @@ show_page_account (GoaPanel  *panel,
   provider = NULL;
 
   show_page (panel, 1);
+  box = GTK_WIDGET (gtk_builder_get_object (panel->builder, "accounts-tree-box"));
+  gtk_widget_set_sensitive (box, TRUE);
+
+  label = GTK_WIDGET (gtk_builder_get_object (panel->builder, "accounts-tree-label"));
+  gtk_widget_hide (label);
 
   /* Out with the old */
   children = gtk_container_get_children (GTK_CONTAINER (panel->accounts_vbox));
@@ -459,10 +484,8 @@ on_account_changed (GoaClient  *client,
 /* ---------------------------------------------------------------------------------------------------- */
 
 static void
-on_toolbar_add_button_clicked (GtkToolButton *button,
-                               gpointer       user_data)
+add_account (GoaPanel *panel)
 {
-  GoaPanel *panel = GOA_PANEL (user_data);
   GtkWindow *parent;
   GtkWidget *dialog;
   gint response;
@@ -541,6 +564,16 @@ on_toolbar_add_button_clicked (GtkToolButton *button,
   g_list_free (providers);
 }
 
+/* ---------------------------------------------------------------------------------------------------- */
+
+static void
+on_toolbar_add_button_clicked (GtkToolButton *button,
+                               gpointer       user_data)
+{
+  GoaPanel *panel = GOA_PANEL (user_data);
+  add_account (panel);
+}
+
 static void
 remove_account_cb (GoaAccount    *account,
                    GAsyncResult  *res,
@@ -610,4 +643,14 @@ on_toolbar_remove_button_clicked (GtkToolButton *button,
         }
       g_object_unref (object);
     }
+}
+
+/* ---------------------------------------------------------------------------------------------------- */
+
+static void
+on_add_button_clicked (GtkButton *button,
+                       gpointer   user_data)
+{
+  GoaPanel *panel = GOA_PANEL (user_data);
+  add_account (panel);
 }
