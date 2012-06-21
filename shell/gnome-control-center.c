@@ -641,6 +641,7 @@ setup_search (GnomeControlCenter *shell)
   gtk_tree_view_append_column (GTK_TREE_VIEW (priv->search_view), column);
 
   priv->search_scrolled = W (priv->builder, "search-scrolled-window");
+  gtk_container_add (GTK_CONTAINER (priv->search_scrolled), search_view);
 
   g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->search_view)),
                     "changed",
