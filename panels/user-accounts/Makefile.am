@@ -30,12 +30,12 @@ BUILT_SOURCES = \
 libuser_accounts_la_SOURCES =		\
 	um-account-type.h		\
 	um-account-type.c 		\
-	um-alarm.h			\
-	um-alarm.c			\
-	um-identity-manager.h		\
-	um-identity-manager.c		\
-	um-identity.h			\
-	um-identity.c			\
+	gsd-alarm.h			\
+	gsd-alarm.c			\
+	gsd-identity-manager.h		\
+	gsd-identity-manager.c		\
+	gsd-identity.h			\
+	gsd-identity.c			\
 	$(kerberos_sources)		\
 	um-user.h 			\
 	um-user.c 			\
@@ -71,10 +71,10 @@ libuser_accounts_la_SOURCES =		\
 
 if BUILD_KERBEROS
 libuser_accounts_la_SOURCES +=		\
-	um-kerberos-identity-manager.h	\
-	um-kerberos-identity-manager.c	\
-	um-kerberos-identity.h		\
-	um-kerberos-identity.c
+	gsd-kerberos-identity-manager.h	\
+	gsd-kerberos-identity-manager.c	\
+	gsd-kerberos-identity.h		\
+	gsd-kerberos-identity.c
 endif
 
 

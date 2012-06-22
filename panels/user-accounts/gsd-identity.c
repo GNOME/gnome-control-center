@@ -23,37 +23,35 @@
 #include <glib-object.h>
 #include <glib/gi18n.h>
 
-#include "um-identity.h"
+#include "gsd-identity.h"
 
-G_DEFINE_INTERFACE (UmIdentity, um_identity, G_TYPE_OBJECT);
+G_DEFINE_INTERFACE (GsdIdentity, gsd_identity, G_TYPE_OBJECT);
 
 static void
-um_identity_default_init (UmIdentityInterface *interface)
+gsd_identity_default_init (GsdIdentityInterface *interface)
 {
 }
 
 GQuark
-um_identity_error_quark (void)
+gsd_identity_error_quark (void)
 {
         static GQuark error_quark = 0;
 
         if (error_quark == 0) {
-                error_quark = g_quark_from_static_string ("um-identity-error");
+                error_quark = g_quark_from_static_string ("gsd-identity-error");
         }
 
         return error_quark;
 }
 
 const char *
-um_identity_get_identifier (UmIdentity *self)
+gsd_identity_get_identifier (GsdIdentity *self)
 {
-        g_return_val_if_fail (UM_IDENTITY_GET_IFACE (self)->get_identifier, NULL);
-        return UM_IDENTITY_GET_IFACE (self)->get_identifier (self);
+        return GSD_IDENTITY_GET_IFACE (self)->get_identifier (self);
 }
 
 gboolean
-um_identity_is_signed_in (UmIdentity *self)
+gsd_identity_is_signed_in (GsdIdentity *self)
 {
-        g_return_val_if_fail (UM_IDENTITY_GET_IFACE (self)->is_signed_in, FALSE);
-        return UM_IDENTITY_GET_IFACE (self)->is_signed_in (self);
+        return GSD_IDENTITY_GET_IFACE (self)->is_signed_in (self);
 }

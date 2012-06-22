@@ -544,6 +544,11 @@ on_realm_joined (GObject *source,
         um_realm_join_finish (self->selected_realm,
                               result, &error);
 
+        /* If we're already enrolled treat that as a success */
+        if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_ALREADY_ENROLLED)) {
+                g_clear_error (&error);
+        }
+
         /* Yay, joined the domain, register the user locally */
         if (error == NULL) {
                 enterprise_permit_user_login (self);

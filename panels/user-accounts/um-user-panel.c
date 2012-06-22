@@ -41,10 +41,10 @@
 
 #include "um-user.h"
 #include "um-user-manager.h"
-#include "um-identity-manager.h"
+#include "gsd-identity-manager.h"
 
 #ifdef HAVE_KERBEROS
-#include "um-kerberos-identity-manager.h"
+#include "gsd-kerberos-identity-manager.h"
 #endif
 
 #include "cc-strength-bar.h"
@@ -71,7 +71,7 @@ G_DEFINE_DYNAMIC_TYPE (UmUserPanel, um_user_panel, CC_TYPE_PANEL)
 typedef struct {
         UmUserPanelPrivate *d;
         char *identifier;
-        UmIdentity *identity;
+        GsdIdentity *identity;
         GtkWidget *box;
         GtkWidget *label;
         GtkWidget *button;
@@ -86,7 +86,7 @@ struct _UmUserPanelPrivate {
         GtkWidget *language_chooser;
 
         GHashTable *accessible_realms;
-        UmIdentityManager *identity_manager;
+        GsdIdentityManager *identity_manager;
         UmAccountDialog *account_dialog;
         UmPasswordDialog *password_dialog;
         UmPhotoDialog *photo_dialog;
@@ -1445,7 +1445,7 @@ setup_main_window (UmUserPanelPrivate *d)
 #ifdef HAVE_KERBEROS
 static void
 remove_accessible_realm_for_identity (UmUserPanelPrivate *d,
-                                      UmIdentity         *identity)
+                                      GsdIdentity         *identity)
 {
         GtkWidget *grid;
         Realm *realm;
@@ -1455,7 +1455,7 @@ remove_accessible_realm_for_identity (UmUserPanelPrivate *d,
 
         realm = g_hash_table_lookup (d->accessible_realms,
                                      (gpointer)
-                                     um_identity_get_identifier (identity));
+                                     gsd_identity_get_identifier (identity));
 
         if (realm == NULL) {
                 return;
@@ -1494,33 +1494,33 @@ remove_accessible_realm_for_identity (UmUserPanelPrivate *d,
 
 static void
 rename_accessible_realm_for_identity (UmUserPanelPrivate *d,
-                                      UmIdentity         *identity)
+                                      GsdIdentity        *identity)
 {
         Realm *realm;
         char *name;
 
         realm = g_hash_table_lookup (d->accessible_realms,
                                      (gpointer)
-                                     um_identity_get_identifier (identity));
+                                     gsd_identity_get_identifier (identity));
 
         if (realm == NULL) {
                 return;
         }
 
-        name = um_identity_manager_name_identity (d->identity_manager,
+        name = gsd_identity_manager_name_identity (d->identity_manager,
                                                   identity);
         gtk_label_set_text (GTK_LABEL (realm->label), name);
         g_free (name);
 }
 
 static void
-on_signed_out (UmIdentityManager *manager,
-               GAsyncResult      *result,
-               gpointer           user_data)
+on_signed_out (GsdIdentityManager *manager,
+               GAsyncResult       *result,
+               gpointer            user_data)
 {
-        UmIdentity *identity = UM_IDENTITY (user_data);
+        GsdIdentity *identity = GSD_IDENTITY (user_data);
 
-        um_identity_manager_sign_identity_out_finish (manager,
+        gsd_identity_manager_sign_identity_out_finish (manager,
                                                       result,
                                                       NULL);
         g_object_unref (identity);
@@ -1532,25 +1532,25 @@ on_sign_out_clicked (GtkButton          *button,
 {
         UmUserPanelPrivate *d = realm->d;
 
-        um_identity_manager_sign_identity_out (d->identity_manager, realm->identity, NULL,
+        gsd_identity_manager_sign_identity_out (d->identity_manager, realm->identity, NULL,
                                                (GAsyncReadyCallback) on_signed_out,
                                                g_object_ref (realm->identity));
 }
 
 static Realm *
 realm_new (UmUserPanelPrivate *d,
-           UmIdentity         *identity)
+           GsdIdentity         *identity)
 {
         Realm *realm;
         char *name;
 
         realm = g_slice_new (Realm);
         realm->d = d;
-        realm->identifier = g_strdup (um_identity_get_identifier (identity));
+        realm->identifier = g_strdup (gsd_identity_get_identifier (identity));
         realm->identity = identity;
         realm->box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 
-        name = um_identity_manager_name_identity (d->identity_manager,
+        name = gsd_identity_manager_name_identity (d->identity_manager,
                                                   identity);
         realm->label = gtk_label_new (name);
         g_free (name);
@@ -1583,7 +1583,7 @@ realm_free (Realm *realm)
 
 static void
 add_accessible_realm_for_identity (UmUserPanelPrivate *d,
-                                   UmIdentity         *identity)
+                                   GsdIdentity        *identity)
 {
         Realm *realm;
         GtkWidget *grid;
@@ -1610,49 +1610,49 @@ add_accessible_realm_for_identity (UmUserPanelPrivate *d,
 }
 
 static void
-on_identity_added (UmIdentityManager  *manager,
-                   UmIdentity         *identity,
-                   UmUserPanelPrivate *d)
+on_identity_added (GsdIdentityManager  *manager,
+                   GsdIdentity         *identity,
+                   UmUserPanelPrivate  *d)
 {
         add_accessible_realm_for_identity (d, identity);
 }
 
 static void
-on_identity_renewed (UmIdentityManager  *manager,
-                     UmIdentity         *identity,
-                     UmUserPanelPrivate *d)
+on_identity_refreshed (GsdIdentityManager  *manager,
+                       GsdIdentity         *identity,
+                       UmUserPanelPrivate  *d)
 {
         add_accessible_realm_for_identity (d, identity);
 }
 
 static void
-on_identity_removed (UmIdentityManager  *manager,
-                     UmIdentity         *identity,
-                     UmUserPanelPrivate *d)
+on_identity_removed (GsdIdentityManager  *manager,
+                     GsdIdentity         *identity,
+                     UmUserPanelPrivate  *d)
 {
         remove_accessible_realm_for_identity (d, identity);
 }
 
 static void
-on_identity_expired (UmIdentityManager  *manager,
-                     UmIdentity         *identity,
-                     UmUserPanelPrivate *d)
+on_identity_expired (GsdIdentityManager  *manager,
+                     GsdIdentity         *identity,
+                     UmUserPanelPrivate  *d)
 {
         remove_accessible_realm_for_identity (d, identity);
 }
 
 static void
-on_identity_renamed (UmIdentityManager  *manager,
-                     UmIdentity         *identity,
-                     UmUserPanelPrivate *d)
+on_identity_renamed (GsdIdentityManager  *manager,
+                     GsdIdentity         *identity,
+                     UmUserPanelPrivate  *d)
 {
         rename_accessible_realm_for_identity (d, identity);
 }
 
 static void
-on_identities_listed (UmIdentityManager  *manager,
-                      GAsyncResult       *result,
-                      UmUserPanelPrivate *d)
+on_identities_listed (GsdIdentityManager  *manager,
+                      GAsyncResult        *result,
+                      UmUserPanelPrivate  *d)
 {
         GError *error = NULL;
         GList *identities, *node;
@@ -1673,15 +1673,15 @@ on_identities_listed (UmIdentityManager  *manager,
                           d);
 
         g_signal_connect (manager,
-                          "identity-renewed",
-                          G_CALLBACK (on_identity_renewed),
+                          "identity-refreshed",
+                          G_CALLBACK (on_identity_refreshed),
                           d);
         g_signal_connect (manager,
                           "identity-renamed",
                           G_CALLBACK (on_identity_renamed),
                           d);
 
-        identities = um_identity_manager_list_identities_finish (manager,
+        identities = gsd_identity_manager_list_identities_finish (manager,
                                                                  result,
                                                                  &error);
 
@@ -1695,9 +1695,9 @@ on_identities_listed (UmIdentityManager  *manager,
         }
 
 	for (node = identities; node != NULL; node = node->next) {
-                UmIdentity *identity = node->data;
+                GsdIdentity *identity = node->data;
 
-                if (um_identity_is_signed_in (identity))
+                if (gsd_identity_is_signed_in (identity))
                         add_accessible_realm_for_identity (d, identity);
         }
 }
@@ -1710,8 +1710,8 @@ setup_realms (UmUserPanelPrivate *d)
         d->accessible_realms = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                       NULL, (GDestroyNotify) realm_free);
 
-        d->identity_manager = um_kerberos_identity_manager_new ();
-        um_identity_manager_list_identities (d->identity_manager, NULL,
+        d->identity_manager = gsd_kerberos_identity_manager_new ();
+        gsd_identity_manager_list_identities (d->identity_manager, NULL,
                                              (GAsyncReadyCallback) on_identities_listed, d);
 #endif
 }
