@@ -33,7 +33,6 @@
 
 #include "gvc-speaker-test.h"
 #include "gvc-mixer-stream.h"
-#include "gvc-mixer-card.h"
 
 #define GVC_SPEAKER_TEST_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GVC_TYPE_SPEAKER_TEST, GvcSpeakerTestPrivate))
 
@@ -41,7 +40,7 @@ struct GvcSpeakerTestPrivate
 {
         GtkWidget       *channel_controls[PA_CHANNEL_POSITION_MAX];
         ca_context      *canberra;
-        GvcMixerCard    *card;
+        GvcMixerStream  *stream;
         GvcMixerControl *control;
 };
 
@@ -53,7 +52,7 @@ enum {
 
 enum {
         PROP_0,
-        PROP_CARD,
+        PROP_STREAM,
         PROP_CONTROL
 };
 
@@ -89,14 +88,14 @@ gvc_speaker_test_set_property (GObject       *object,
         GvcSpeakerTest *self = GVC_SPEAKER_TEST (object);
 
         switch (prop_id) {
-        case PROP_CARD:
-                self->priv->card = g_value_dup_object (value);
+        case PROP_STREAM:
+                self->priv->stream = g_value_dup_object (value);
                 if (self->priv->control != NULL)
                         update_channel_map (self);
                 break;
         case PROP_CONTROL:
                 self->priv->control = g_value_dup_object (value);
-                if (self->priv->card != NULL)
+                if (self->priv->stream != NULL)
                         update_channel_map (self);
                 break;
         default:
@@ -114,8 +113,8 @@ gvc_speaker_test_get_property (GObject     *object,
         GvcSpeakerTest *self = GVC_SPEAKER_TEST (object);
 
         switch (prop_id) {
-        case PROP_CARD:
-                g_value_set_object (value, self->priv->card);
+        case PROP_STREAM:
+                g_value_set_object (value, self->priv->stream);
                 break;
         case PROP_CONTROL:
                 g_value_set_object (value, self->priv->control);
@@ -136,11 +135,11 @@ gvc_speaker_test_class_init (GvcSpeakerTestClass *klass)
         object_class->get_property = gvc_speaker_test_get_property;
 
         g_object_class_install_property (object_class,
-                                         PROP_CARD,
-                                         g_param_spec_object ("card",
-                                                              "card",
-                                                              "The card",
-                                                              GVC_TYPE_MIXER_CARD,
+                                         PROP_STREAM,
+                                         g_param_spec_object ("stream",
+                                                              "stream",
+                                                              "The stream",
+                                                              GVC_TYPE_MIXER_STREAM,
                                                               G_PARAM_READWRITE|G_PARAM_CONSTRUCT));
         g_object_class_install_property (object_class,
                                          PROP_CONTROL,
@@ -331,7 +330,7 @@ channel_control_new (ca_context *canberra, pa_channel_position_t position)
         gtk_box_pack_start (GTK_BOX (control), label, FALSE, FALSE, 0);
 
         test_button = gtk_button_new_with_label (_("Test"));
-        
+
         g_signal_connect (G_OBJECT (test_button), "clicked",
                           G_CALLBACK (on_test_button_clicked), control);
         g_object_set_data (G_OBJECT (control), "button", test_button);
@@ -366,68 +365,22 @@ create_channel_controls (GvcSpeakerTest *speaker_test)
         }
 }
 
-static const GvcChannelMap *
-get_channel_map_for_card (GvcMixerControl *control,
-                          GvcMixerCard    *card,
-                          char           **output_name)
-{
-        int card_index;
-        GSList *sinks, *l;
-        GvcMixerStream *stream;
-        const GvcChannelMap *map;
-
-        /* This gets the channel map for the only
-         * output for the card */
-
-        card_index = gvc_mixer_card_get_index (card);
-        if (card_index == PA_INVALID_INDEX)
-                return NULL;
-        sinks = gvc_mixer_control_get_sinks (control);
-        stream = NULL;
-        for (l = sinks; l != NULL; l = l->next) {
-                GvcMixerStream *s = l->data;
-                if (gvc_mixer_stream_get_card_index (s) == card_index) {
-                        stream = g_object_ref (s);
-                        break;
-                }
-        }
-        g_slist_free (sinks);
-
-        g_assert (stream);
-
-        g_debug ("Found stream '%s' for card '%s'",
-                 gvc_mixer_stream_get_name (stream),
-                 gvc_mixer_card_get_name (card));
-
-        *output_name = g_strdup (gvc_mixer_stream_get_name (stream));
-        map = gvc_mixer_stream_get_channel_map (stream);
-
-        g_debug ("Got channel map '%s' for port '%s'",
-                 gvc_channel_map_get_mapping (map), *output_name);
-
-        return map;
-}
-
 static void
 update_channel_map (GvcSpeakerTest *speaker_test)
 {
         guint i;
         const GvcChannelMap *map;
-        char *output_name;
 
         g_return_if_fail (speaker_test->priv->control != NULL);
-        g_return_if_fail (speaker_test->priv->card != NULL);
+        g_return_if_fail (speaker_test->priv->stream != NULL);
 
         g_debug ("XXX update_channel_map called XXX");
 
-        map = get_channel_map_for_card (speaker_test->priv->control,
-                                        speaker_test->priv->card,
-                                        &output_name);
-
+        map = gvc_mixer_stream_get_channel_map (speaker_test->priv->stream);
         g_return_if_fail (map != NULL);
 
-        ca_context_change_device (speaker_test->priv->canberra, output_name);
-        g_free (output_name);
+        ca_context_change_device (speaker_test->priv->canberra,
+                                  gvc_mixer_stream_get_name (speaker_test->priv->stream));
 
         for (i = 0; i < G_N_ELEMENTS (position_table); i += 3) {
                 gtk_widget_set_visible (speaker_test->priv->channel_controls[position_table[i]],
@@ -494,8 +447,8 @@ gvc_speaker_test_finalize (GObject *object)
 
         g_return_if_fail (speaker_test->priv != NULL);
 
-        g_object_unref (speaker_test->priv->card);
-        speaker_test->priv->card = NULL;
+        g_object_unref (speaker_test->priv->stream);
+        speaker_test->priv->stream = NULL;
 
         g_object_unref (speaker_test->priv->control);
         speaker_test->priv->control = NULL;
@@ -508,15 +461,15 @@ gvc_speaker_test_finalize (GObject *object)
 
 GtkWidget *
 gvc_speaker_test_new (GvcMixerControl *control,
-                      GvcMixerCard *card)
+                      GvcMixerStream  *stream)
 {
         GObject *speaker_test;
 
-        g_return_val_if_fail (card != NULL, NULL);
+        g_return_val_if_fail (stream != NULL, NULL);
         g_return_val_if_fail (control != NULL, NULL);
 
         speaker_test = g_object_new (GVC_TYPE_SPEAKER_TEST,
-                                  "card", card,
+                                  "stream", stream,
                                   "control", control,
                                   NULL);
 

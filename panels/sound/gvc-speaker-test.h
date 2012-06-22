@@ -50,7 +50,7 @@ typedef struct
 GType               gvc_speaker_test_get_type            (void);
 
 GtkWidget *         gvc_speaker_test_new                 (GvcMixerControl *control,
-                                                          GvcMixerCard *card);
+                                                          GvcMixerStream  *stream);
 
 G_END_DECLS
 
