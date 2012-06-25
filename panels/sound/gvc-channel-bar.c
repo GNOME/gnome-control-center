@@ -112,7 +112,7 @@ _scale_box_new (GvcChannelBar *bar)
         if (priv->orientation == GTK_ORIENTATION_VERTICAL) {
                 bar->priv->scale_box = box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 
-                priv->scale = gtk_vscale_new (priv->adjustment);
+                priv->scale = gtk_scale_new (GTK_ORIENTATION_VERTICAL, priv->adjustment);
 
                 gtk_widget_set_size_request (priv->scale, -1, SCALE_SIZE);
                 gtk_range_set_inverted (GTK_RANGE (priv->scale), TRUE);
