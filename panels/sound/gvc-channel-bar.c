@@ -382,14 +382,6 @@ on_scale_button_press_event (GtkWidget      *widget,
                              GdkEventButton *event,
                              GvcChannelBar  *bar)
 {
-        /* HACK: we want the behaviour you get with the middle button, so we
-         * mangle the event.  clicking with other buttons moves the slider in
-         * step increments, clicking with the middle button moves the slider to
-         * the location of the click.
-         */
-        if (event->button == 1)
-                event->button = 2;
-
         bar->priv->click_lock = TRUE;
 
         return FALSE;
@@ -402,10 +394,6 @@ on_scale_button_release_event (GtkWidget      *widget,
 {
         GtkAdjustment *adj;
         gdouble value;
-
-        /* HACK: see on_scale_button_press_event() */
-        if (event->button == 1)
-                event->button = 2;
 
         bar->priv->click_lock = FALSE;
 
