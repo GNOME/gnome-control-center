@@ -109,7 +109,7 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 
 	settings = gsd_wacom_device_get_settings (self->priv->device);
 	monitor = gsd_wacom_device_get_display_monitor (self->priv->device);
-	single_mon = (monitor != -1);
+	single_mon = (monitor != GSD_WACOM_SET_ALL_MONITORS);
 
 	g_signal_handlers_block_by_func (G_OBJECT (self->priv->checkbutton), checkbutton_toggled_cb, self);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(self->priv->checkbutton), single_mon);
@@ -182,7 +182,7 @@ update_ui (CcWacomMappingPanel *self)
 static void
 update_mapping (CcWacomMappingPanel *self)
 {
-	int monitor = -1;
+	int monitor = GSD_WACOM_SET_ALL_MONITORS;
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->priv->checkbutton))) {
 		GtkTreeIter iter;
