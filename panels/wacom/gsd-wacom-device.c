@@ -558,7 +558,7 @@ find_builtin_output (GnomeRRScreen *rr_screen)
 			continue;
 
 		if (gnome_rr_output_is_laptop(rr_outputs[i])) {
-			retval = g_object_ref (rr_outputs[i]);
+			retval = rr_outputs[i];
 			break;
 		}
 	}
