@@ -109,6 +109,12 @@ enum {
 };
 
 enum {
+        PANEL_MOBILEBB_COLUMN_ID,
+        PANEL_MOBILEBB_COLUMN_TITLE,
+        PANEL_MOBILEBB_COLUMN_LAST
+};
+
+enum {
         PROP_0,
         PROP_ARGV
 };
@@ -2022,11 +2028,64 @@ device_refresh_wimax_ui (CcNetworkPanel *panel, NetDevice *device)
 }
 
 static void
+device_add_device_connections (CcNetworkPanel *panel,
+                               NMDevice *nm_device,
+                               GtkListStore *liststore,
+                               GtkComboBox *combobox)
+{
+        CcNetworkPanelPrivate *priv = panel->priv;
+        GSList *filtered;
+        GSList *list, *l;
+        GtkTreeIter treeiter;
+        NMActiveConnection *active_connection;
+        NMConnection *connection;
+
+        /* get the list of available connections for this device */
+        list = nm_remote_settings_list_connections (panel->priv->remote_settings);
+        filtered = nm_device_filter_connections (nm_device, list);
+        gtk_list_store_clear (liststore);
+        active_connection = nm_device_get_active_connection (nm_device);
+        for (l = filtered; l; l = g_slist_next (l)) {
+                connection = NM_CONNECTION (l->data);
+                gtk_list_store_append (liststore, &treeiter);
+                gtk_list_store_set (liststore,
+                                    &treeiter,
+                                    PANEL_MOBILEBB_COLUMN_ID, nm_connection_get_uuid (connection),
+                                    PANEL_MOBILEBB_COLUMN_TITLE, nm_connection_get_id (connection),
+                                    -1);
+
+                /* is this already activated? */
+                if (active_connection != NULL &&
+                    g_strcmp0 (nm_connection_get_path (connection),
+                               nm_active_connection_get_connection (active_connection)) == 0) {
+                        priv->updating_device = TRUE;
+                        gtk_combo_box_set_active_iter (combobox, &treeiter);
+                        priv->updating_device = FALSE;
+                }
+
+        }
+
+        /* add new connection entry */
+        gtk_list_store_append (liststore, &treeiter);
+        gtk_list_store_set (liststore,
+                            &treeiter,
+                            PANEL_MOBILEBB_COLUMN_ID, NULL,
+                            PANEL_MOBILEBB_COLUMN_TITLE, _("Add new connection"),
+                            -1);
+
+        g_slist_free (list);
+        g_slist_free (filtered);
+}
+
+static void
 device_refresh_modem_ui (CcNetworkPanel *panel, NetDevice *device)
 {
+        CcNetworkPanelPrivate *priv = panel->priv;
         NMDeviceModemCapabilities caps;
         NMDevice *nm_device;
         const char *str;
+        GtkListStore *liststore;
+        GtkWidget *widget;
 
         nm_device = net_device_get_nm_device (device);
 
@@ -2052,6 +2111,15 @@ device_refresh_modem_ui (CcNetworkPanel *panel, NetDevice *device)
                                        "provider",
                                        str);
         }
+
+        /* add possible connections to device */
+        liststore = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
+                                                            "liststore_mobile_connections"));
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "combobox_mobilebb_network"));
+        device_add_device_connections (panel,
+                                       nm_device,
+                                       liststore,
+                                       GTK_COMBO_BOX (widget));
 }
 
 static void
@@ -2983,6 +3051,61 @@ connect_to_hidden_network (CcNetworkPanel *panel)
 }
 
 static void
+mobile_connection_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
+{
+        gboolean ret;
+        gchar *object_path = NULL;
+        GtkTreeIter iter;
+        GtkTreeModel *model;
+        NetObject *object;
+        NMConnection *connection;
+        NMDevice *device;
+
+        if (panel->priv->updating_device)
+                goto out;
+
+        ret = gtk_combo_box_get_active_iter (combo_box, &iter);
+        if (!ret)
+                goto out;
+
+        object = get_selected_object (panel);
+        if (object == NULL)
+                goto out;
+
+        device = net_device_get_nm_device (NET_DEVICE (object));
+        if (device == NULL)
+                goto out;
+
+        /* get entry */
+        model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo_box));
+        gtk_tree_model_get (model, &iter,
+                            PANEL_MOBILEBB_COLUMN_ID, &object_path,
+                            -1);
+        if (g_strcmp0 (object_path, NULL) == 0) {
+                cc_network_panel_connect_to_3g_network (panel,
+                                                        panel->priv->client,
+                                                        panel->priv->remote_settings,
+                                                        device);
+                goto out;
+        }
+
+        /* activate the connection */
+        g_debug ("try to switch to connection %s", object_path);
+        connection = (NMConnection*) nm_remote_settings_get_connection_by_path (panel->priv->remote_settings,
+                                                                                object_path);
+        if (connection != NULL) {
+                nm_device_disconnect (device, NULL, NULL);
+                nm_client_activate_connection (panel->priv->client,
+                                               connection,
+                                               device, NULL,
+                                               connection_activate_cb, panel);
+                goto out;
+        }
+out:
+        g_free (object_path);
+}
+
+static void
 wireless_ap_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
 {
         const GByteArray *ssid;
@@ -3678,6 +3801,20 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
         /* add the virtual proxy device */
         panel_add_proxy_device (panel);
+
+        /* setup mobile combobox model */
+        combobox = GTK_COMBO_BOX (gtk_builder_get_object (panel->priv->builder,
+                                                          "combobox_mobilebb_network"));
+        g_signal_connect (combobox, "changed",
+                          G_CALLBACK (mobile_connection_changed_cb),
+                          panel);
+        renderer = gtk_cell_renderer_text_new ();
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
+                                    renderer,
+                                    FALSE);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
+                                        "text", PANEL_MOBILEBB_COLUMN_TITLE,
+                                        NULL);
 
         /* setup wireless combobox model */
         combobox = GTK_COMBO_BOX (gtk_builder_get_object (panel->priv->builder,
