@@ -2051,12 +2051,6 @@ device_refresh_modem_ui (CcNetworkPanel *panel, NetDevice *device)
                                        "mobilebb",
                                        "provider",
                                        str);
-
-                /* device speed */
-                panel_set_widget_data (panel,
-                                       "mobilebb",
-                                       "speed",
-                                       NULL);
         }
 }
 
