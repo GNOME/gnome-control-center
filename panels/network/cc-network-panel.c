@@ -652,14 +652,10 @@ object_removed_cb (NetObject *object, CcNetworkPanel *panel)
 static void
 register_object_interest (CcNetworkPanel *panel, NetObject *object)
 {
-        g_signal_connect (object,
-                          "changed",
-                          G_CALLBACK (object_changed_cb),
-                          panel);
-        g_signal_connect (object,
-                          "removed",
-                          G_CALLBACK (object_removed_cb),
-                          panel);
+        g_signal_connect_object (object, "changed",
+                                 G_CALLBACK (object_changed_cb), panel, 0);
+        g_signal_connect_object (object, "removed",
+                                 G_CALLBACK (object_removed_cb), panel, 0);
 }
 
 static void
@@ -734,8 +730,8 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         g_debug ("device %s type %i",
                  nm_device_get_udi (device),
                  nm_device_get_device_type (device));
-        g_signal_connect (G_OBJECT (device), "notify::state",
-                          (GCallback) device_state_notify_changed_cb, panel);
+        g_signal_connect_object (G_OBJECT (device), "notify::state",
+                                 (GCallback) device_state_notify_changed_cb, panel, 0);
 
         /* do we have to get additonal data from ModemManager */
         if (type == NM_DEVICE_TYPE_MODEM) {
