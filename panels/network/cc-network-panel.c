@@ -2073,7 +2073,8 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
         nm_device = net_device_get_nm_device (device);
         type = nm_device_get_device_type (nm_device);
         is_hotspot = device_is_hotspot (panel, nm_device);
-        g_debug ("device %s type %i", nm_device_get_udi (nm_device), type);
+        g_debug ("device %s type %i (is-hotspot: %i)",
+                 nm_device_get_udi (nm_device), type, is_hotspot);
 
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "notebook_types"));
 
@@ -2099,6 +2100,8 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                                 gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 4);
                                 sub_pane = "mobilebb";
                                 device_refresh_modem_ui (panel, device);
+                        } else {
+                                g_warning ("unknown modem capabilities: %i", caps);
                         }
                 }
                 break;
