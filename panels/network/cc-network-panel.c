@@ -105,6 +105,7 @@ enum {
         PANEL_WIRELESS_COLUMN_STRENGTH,
         PANEL_WIRELESS_COLUMN_MODE,
         PANEL_WIRELESS_COLUMN_SECURITY,
+        PANEL_WIRELESS_COLUMN_ACTIVE,
         PANEL_WIRELESS_COLUMN_LAST
 };
 
@@ -970,29 +971,33 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
         GtkListStore *liststore_wireless_network;
         GtkTreeIter treeiter;
         GtkWidget *widget;
+        gboolean is_active_ap;
 
         ssid = nm_access_point_get_ssid (ap);
         if (ssid == NULL)
                 return;
         ssid_text = nm_utils_escape_ssid (ssid->data, ssid->len);
 
+        is_active_ap = active && nm_utils_same_ssid (ssid, nm_access_point_get_ssid (active), TRUE);
+
         liststore_wireless_network = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                                      "liststore_wireless_network"));
 
         object_path = nm_object_get_path (NM_OBJECT (ap));
-        gtk_list_store_append (liststore_wireless_network, &treeiter);
-        gtk_list_store_set (liststore_wireless_network,
-                            &treeiter,
-                            PANEL_WIRELESS_COLUMN_ID, object_path,
-                            PANEL_WIRELESS_COLUMN_TITLE, ssid_text,
-                            PANEL_WIRELESS_COLUMN_SORT, ssid_text,
-                            PANEL_WIRELESS_COLUMN_STRENGTH, nm_access_point_get_strength (ap),
-                            PANEL_WIRELESS_COLUMN_MODE, nm_access_point_get_mode (ap),
-                            PANEL_WIRELESS_COLUMN_SECURITY, get_access_point_security (ap),
-                            -1);
+        gtk_list_store_insert_with_values (liststore_wireless_network,
+                                           &treeiter,
+                                           -1,
+                                           PANEL_WIRELESS_COLUMN_ID, object_path,
+                                           PANEL_WIRELESS_COLUMN_TITLE, ssid_text,
+                                           PANEL_WIRELESS_COLUMN_SORT, ssid_text,
+                                           PANEL_WIRELESS_COLUMN_STRENGTH, nm_access_point_get_strength (ap),
+                                           PANEL_WIRELESS_COLUMN_MODE, nm_access_point_get_mode (ap),
+                                           PANEL_WIRELESS_COLUMN_SECURITY, get_access_point_security (ap),
+                                           PANEL_WIRELESS_COLUMN_ACTIVE, is_active_ap,
+                                           -1);
 
         /* is this what we're on already? */
-        if (active && nm_utils_same_ssid (ssid, nm_access_point_get_ssid (active), TRUE)) {
+        if (is_active_ap) {
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                              "combobox_wireless_network_name"));
                 gtk_combo_box_set_active_iter (GTK_COMBO_BOX (widget), &treeiter);
@@ -3203,13 +3208,21 @@ wireless_ap_model_sort_cb (GtkTreeModel *model,
 {
         gchar *str_a;
         gchar *str_b;
+        gint strength_a;
+        gint strength_b;
+        gboolean active_a;
+        gboolean active_b;
         gint retval;
 
         gtk_tree_model_get (model, a,
                             PANEL_WIRELESS_COLUMN_SORT, &str_a,
+                            PANEL_WIRELESS_COLUMN_STRENGTH, &strength_a,
+                            PANEL_WIRELESS_COLUMN_ACTIVE, &active_a,
                             -1);
         gtk_tree_model_get (model, b,
                             PANEL_WIRELESS_COLUMN_SORT, &str_b,
+                            PANEL_WIRELESS_COLUMN_STRENGTH, &strength_b,
+                            PANEL_WIRELESS_COLUMN_ACTIVE, &active_b,
                             -1);
 
         /* special case blank entries to the bottom */
@@ -3222,12 +3235,24 @@ wireless_ap_model_sort_cb (GtkTreeModel *model,
                 goto out;
         }
 
+        if (active_a) {
+                retval = -1;
+                goto out;
+        }
+
+        if (active_b) {
+                retval = 1;
+                goto out;
+        }
+
         /* case sensitive search like before */
-        g_debug ("compare %s with %s", str_a, str_b);
-        retval = g_strcmp0 (str_a, str_b);
+        g_debug ("compare %s (%d) with %s (%d)", str_a, strength_a, str_b, strength_b);
+        retval = strength_b - strength_a;
+
 out:
         g_free (str_a);
         g_free (str_b);
+
         return retval;
 }
 
@@ -3828,8 +3853,9 @@ cc_network_panel_init (CcNetworkPanel *panel)
         gtk_tree_sortable_set_sort_func (sortable,
                                          PANEL_WIRELESS_COLUMN_SORT,
                                          wireless_ap_model_sort_cb,
-                                         sortable,
+                                         panel,
                                          NULL);
+
 
         renderer = panel_cell_renderer_mode_new ();
         gtk_cell_renderer_set_padding (renderer, 4, 0);
