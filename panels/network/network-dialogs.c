@@ -485,9 +485,17 @@ cc_network_panel_connect_to_3g_network (CcNetworkPanel   *panel,
 	if (caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) {
                 wizard = nma_mobile_wizard_new (GTK_WINDOW (toplevel), NULL, NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS, FALSE,
                                                 gsm_mobile_wizard_done, closure);
+		if (wizard == NULL) {
+			g_warning ("failed to construct GSM wizard");
+			return;
+		}
 	} else if (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) {
 		wizard = nma_mobile_wizard_new (GTK_WINDOW (toplevel), NULL, NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO, FALSE,
                                                 cdma_mobile_wizard_done, closure);
+		if (wizard == NULL) {
+			g_warning ("failed to construct CDMA wizard");
+			return;
+		}
         } else {
                 g_warning ("Network panel loaded with connect-3g but the selected device"
                            " does not support GSM or CDMA");
