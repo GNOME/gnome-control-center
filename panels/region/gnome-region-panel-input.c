@@ -25,6 +25,7 @@
 
 #include <glib.h>
 #include <glib/gi18n.h>
+#include <gio/gdesktopappinfo.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-xkb-info.h>
@@ -49,6 +50,7 @@ enum {
   NAME_COLUMN,
   TYPE_COLUMN,
   ID_COLUMN,
+  SETUP_COLUMN,
   N_COLUMNS
 };
 
@@ -105,6 +107,19 @@ engine_get_display_name (IBusEngineDesc *engine_desc)
   return display_name;
 }
 
+static GDesktopAppInfo *
+setup_app_info_for_id (const gchar *id)
+{
+  GDesktopAppInfo *app_info;
+  gchar *desktop_file_name;
+
+  desktop_file_name = g_strdup_printf ("ibus-setup-%s.desktop", id);
+  app_info = g_desktop_app_info_new (desktop_file_name);
+  g_free (desktop_file_name);
+
+  return app_info;
+}
+
 static void
 update_ibus_active_sources (GtkBuilder *builder)
 {
@@ -127,17 +142,22 @@ update_ibus_active_sources (GtkBuilder *builder)
       if (g_str_equal (type, INPUT_SOURCE_TYPE_IBUS))
         {
           IBusEngineDesc *engine_desc = NULL;
+          GDesktopAppInfo *app_info = NULL;
           gchar *display_name = NULL;
 
           engine_desc = g_hash_table_lookup (ibus_engines, id);
           if (engine_desc)
             {
               display_name = engine_get_display_name (engine_desc);
+              app_info = setup_app_info_for_id (id);
 
               gtk_list_store_set (GTK_LIST_STORE (model), &iter,
                                   NAME_COLUMN, display_name,
+                                  SETUP_COLUMN, app_info,
                                   -1);
               g_free (display_name);
+              if (app_info)
+                g_object_unref (app_info);
             }
         }
 
@@ -293,6 +313,7 @@ populate_with_active_sources (GtkListStore *store)
   const gchar *type;
   const gchar *id;
   gchar *display_name;
+  GDesktopAppInfo *app_info;
   GtkTreeIter tree_iter;
 
   sources = g_settings_get_value (input_sources_settings, KEY_INPUT_SOURCES);
@@ -301,6 +322,7 @@ populate_with_active_sources (GtkListStore *store)
   while (g_variant_iter_next (&iter, "(&s&s)", &type, &id))
     {
       display_name = NULL;
+      app_info = NULL;
 
       if (g_str_equal (type, INPUT_SOURCE_TYPE_XKB))
         {
@@ -321,7 +343,10 @@ populate_with_active_sources (GtkListStore *store)
             engine_desc = g_hash_table_lookup (ibus_engines, id);
 
           if (engine_desc)
-            display_name = engine_get_display_name (engine_desc);
+            {
+              display_name = engine_get_display_name (engine_desc);
+              app_info = setup_app_info_for_id (id);
+            }
 #else
           g_warning ("IBus input source type specified but IBus support was not compiled");
           continue;
@@ -338,8 +363,11 @@ populate_with_active_sources (GtkListStore *store)
                           NAME_COLUMN, display_name,
                           TYPE_COLUMN, type,
                           ID_COLUMN, id,
+                          SETUP_COLUMN, app_info,
                           -1);
       g_free (display_name);
+      if (app_info)
+        g_object_unref (app_info);
     }
 
   g_variant_unref (sources);
@@ -384,17 +412,13 @@ get_selected_iter (GtkBuilder    *builder,
 }
 
 static gint
-find_selected_layout_idx (GtkBuilder *builder)
+idx_from_model_iter (GtkTreeModel *model,
+                     GtkTreeIter  *iter)
 {
-  GtkTreeIter iter;
-  GtkTreeModel *model;
   GtkTreePath *path;
   gint idx;
 
-  if (!get_selected_iter (builder, &model, &iter))
-    return -1;
-
-  path = gtk_tree_model_get_path (model, &iter);
+  path = gtk_tree_model_get_path (model, iter);
   if (path == NULL)
     return -1;
 
@@ -411,24 +435,45 @@ update_button_sensitivity (GtkBuilder *builder)
   GtkWidget *up_button;
   GtkWidget *down_button;
   GtkWidget *show_button;
+  GtkWidget *settings_button;
   GtkTreeView *tv;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
   gint n_active;
   gint index;
+  gboolean settings_sensitive;
+  GDesktopAppInfo *app_info;
 
   remove_button = WID("input_source_remove");
   show_button = WID("input_source_show");
   up_button = WID("input_source_move_up");
   down_button = WID("input_source_move_down");
+  settings_button = WID("input_source_settings");
 
   tv = GTK_TREE_VIEW (WID ("active_input_sources"));
-
   n_active = gtk_tree_model_iter_n_children (gtk_tree_view_get_model (tv), NULL);
-  index = find_selected_layout_idx (builder);
+
+  if (get_selected_iter (builder, &model, &iter))
+    {
+      index = idx_from_model_iter (model, &iter);
+      gtk_tree_model_get (model, &iter, SETUP_COLUMN, &app_info, -1);
+    }
+  else
+    {
+      index = -1;
+      app_info = NULL;
+    }
+
+  settings_sensitive = (index >= 0 && app_info != NULL);
+
+  if (app_info)
+    g_object_unref (app_info);
 
   gtk_widget_set_sensitive (remove_button, index >= 0 && n_active > 1);
   gtk_widget_set_sensitive (show_button, index >= 0);
   gtk_widget_set_sensitive (up_button, index > 0);
   gtk_widget_set_sensitive (down_button, index >= 0 && index < n_active - 1);
+  gtk_widget_set_sensitive (settings_button, settings_sensitive);
 }
 
 static void
@@ -470,12 +515,18 @@ chooser_response (GtkWidget *chooser, gint response_id, gpointer data)
           gchar *name;
           gchar *type;
           gchar *id;
+          GDesktopAppInfo *app_info = NULL;
 
           gtk_tree_model_get (model, &iter,
                               NAME_COLUMN, &name,
                               TYPE_COLUMN, &type,
                               ID_COLUMN, &id,
                               -1);
+
+#ifdef HAVE_IBUS
+          if (g_str_equal (type, INPUT_SOURCE_TYPE_IBUS))
+            app_info = setup_app_info_for_id (id);
+#endif
 
           tv = GTK_TREE_VIEW (WID ("active_input_sources"));
           child_model = GTK_LIST_STORE (tree_view_get_actual_model (tv));
@@ -486,10 +537,13 @@ chooser_response (GtkWidget *chooser, gint response_id, gpointer data)
                               NAME_COLUMN, name,
                               TYPE_COLUMN, type,
                               ID_COLUMN, id,
+                              SETUP_COLUMN, app_info,
                               -1);
           g_free (name);
           g_free (type);
           g_free (id);
+          if (app_info)
+            g_object_unref (app_info);
 
           gtk_tree_model_filter_convert_child_iter_to_iter (GTK_TREE_MODEL_FILTER (gtk_tree_view_get_model (tv)),
                                                             &filter_iter,
@@ -712,6 +766,39 @@ show_selected_layout (GtkButton *button, gpointer data)
   g_free (id);
 }
 
+static void
+show_selected_settings (GtkButton *button, gpointer data)
+{
+  GtkBuilder *builder = data;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  GdkAppLaunchContext *ctx;
+  GDesktopAppInfo *app_info;
+  GError *error = NULL;
+
+  g_debug ("show selected layout");
+
+  if (!get_selected_iter (builder, &model, &iter))
+    return;
+
+  gtk_tree_model_get (model, &iter, SETUP_COLUMN, &app_info, -1);
+
+  if (!app_info)
+    return;
+
+  ctx = gdk_display_get_app_launch_context (gdk_display_get_default ());
+  gdk_app_launch_context_set_timestamp (ctx, gtk_get_current_event_time ());
+
+  if (!g_app_info_launch (G_APP_INFO (app_info), NULL, G_APP_LAUNCH_CONTEXT (ctx), &error))
+    {
+      g_warning ("Failed to launch input source setup: %s", error->message);
+      g_error_free (error);
+    }
+
+  g_object_unref (ctx);
+  g_object_unref (app_info);
+}
+
 static gboolean
 go_to_shortcuts (GtkLinkButton *button,
                  CcRegionPanel *panel)
@@ -840,7 +927,11 @@ setup_input_tabs (GtkBuilder    *builder,
   gtk_tree_view_column_add_attribute (column, cell, "text", NAME_COLUMN);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
-  store = gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+  store = gtk_list_store_new (4,
+                              G_TYPE_STRING,
+                              G_TYPE_STRING,
+                              G_TYPE_STRING,
+                              G_TYPE_DESKTOP_APP_INFO);
 
   populate_with_active_sources (store);
 
@@ -870,6 +961,8 @@ setup_input_tabs (GtkBuilder    *builder,
                     G_CALLBACK (move_selected_input_down), builder);
   g_signal_connect (WID("input_source_show"), "clicked",
                     G_CALLBACK (show_selected_layout), builder);
+  g_signal_connect (WID("input_source_settings"), "clicked",
+                    G_CALLBACK (show_selected_settings), builder);
 
   /* use an em dash is no shortcut */
   update_shortcuts (builder);
