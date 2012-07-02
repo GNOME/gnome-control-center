@@ -870,7 +870,10 @@ setup_input_tabs (GtkBuilder    *builder,
   GtkTreeSelection *selection;
 
   input_sources_settings = g_settings_new (GNOME_DESKTOP_INPUT_SOURCES_DIR);
-  xkb_info = gnome_xkb_info_new ();
+  g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) g_object_unref, input_sources_settings);
+
+  if (!xkb_info)
+    xkb_info = gnome_xkb_info_new ();
 
 #ifdef HAVE_IBUS
   ibus_init ();
