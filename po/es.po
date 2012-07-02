@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-06-25 14:19+0000\n"
-"PO-Revision-Date: 2012-06-26 20:15+0200\n"
+"POT-Creation-Date: 2012-06-28 12:46+0000\n"
+"PO-Revision-Date: 2012-07-02 16:55+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1487,7 +1487,7 @@ msgstr "<Acción desconocida>"
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/keyboard-shortcuts.c:1025
-#: ../panels/sound/gvc-mixer-control.c:1087
+#: ../panels/sound/gvc-mixer-control.c:1127
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Disabled"
@@ -1665,7 +1665,7 @@ msgid "Touchpad"
 msgstr "Touchpad"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/cc-network-panel.c:299
+#: ../panels/network/cc-network-panel.c:305
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgstr ""
@@ -1676,92 +1676,97 @@ msgstr ""
 #. * network, then anyone else on that network can tell your
 #. * machine that it should proxy all of your web traffic
 #. * through them.
-#: ../panels/network/cc-network-panel.c:307
+#: ../panels/network/cc-network-panel.c:313
 msgid "This is not recommended for untrusted public networks."
 msgstr "No se recomienda para redes públicas en las que no se confía."
 
 #. TRANSLATORS: this is when the access point is not listed
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
-#: ../panels/network/cc-network-panel.c:1028
+#: ../panels/network/cc-network-panel.c:1034
 msgctxt "Wireless access point"
 msgid "Other..."
 msgstr "Otra…"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:1192
-#: ../panels/network/cc-network-panel.c:1737
+#: ../panels/network/cc-network-panel.c:1198
+#: ../panels/network/cc-network-panel.c:1743
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1196
-#: ../panels/network/cc-network-panel.c:1741
+#: ../panels/network/cc-network-panel.c:1202
+#: ../panels/network/cc-network-panel.c:1747
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1200
+#: ../panels/network/cc-network-panel.c:1206
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:1205
+#: ../panels/network/cc-network-panel.c:1211
 msgid "Enterprise"
 msgstr "Empresa"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:1211
-#: ../panels/network/cc-network-panel.c:1732
+#: ../panels/network/cc-network-panel.c:1217
+#: ../panels/network/cc-network-panel.c:1738
 #: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:324
 #: ../panels/wacom/cc-wacom-page.c:341
 msgid "None"
 msgstr "Ninguna"
 
-#: ../panels/network/cc-network-panel.c:1837
+#: ../panels/network/cc-network-panel.c:1843
 msgid "Hotspot"
 msgstr "«Hotspot»"
 
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1844
+#: ../panels/network/cc-network-panel.c:1850
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: ../panels/network/cc-network-panel.c:2201 ../panels/network/network.ui.h:11
+#: ../panels/network/cc-network-panel.c:2073
+#| msgid "Add an online account"
+msgid "Add new connection"
+msgstr "Añadir una conexión nueva"
+
+#: ../panels/network/cc-network-panel.c:2266 ../panels/network/network.ui.h:11
 msgid "IPv4 Address"
 msgstr "Dirección IPv4"
 
-#: ../panels/network/cc-network-panel.c:2202 ../panels/network/network.ui.h:12
+#: ../panels/network/cc-network-panel.c:2267 ../panels/network/network.ui.h:12
 msgid "IPv6 Address"
 msgstr "Dirección IPv6"
 
-#: ../panels/network/cc-network-panel.c:2205
-#: ../panels/network/cc-network-panel.c:2208 ../panels/network/network.ui.h:27
+#: ../panels/network/cc-network-panel.c:2270
+#: ../panels/network/cc-network-panel.c:2273 ../panels/network/network.ui.h:27
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "Dirección IP"
 
-#: ../panels/network/cc-network-panel.c:2255
-#: ../panels/network/cc-network-panel.c:2630
+#: ../panels/network/cc-network-panel.c:2320
+#: ../panels/network/cc-network-panel.c:2695
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
 
-#: ../panels/network/cc-network-panel.c:2363
+#: ../panels/network/cc-network-panel.c:2428
 msgid "Proxy"
 msgstr "Proxy"
 
-#: ../panels/network/cc-network-panel.c:2437
+#: ../panels/network/cc-network-panel.c:2502
 msgid "Network proxy"
 msgstr "Proxy de la red"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2697
+#: ../panels/network/cc-network-panel.c:2762
 msgid "The system network services are not compatible with this version."
 msgstr "Los servicios de red del sistema no son compatibles con esta versión."
 
-#: ../panels/network/cc-network-panel.c:2899
+#: ../panels/network/cc-network-panel.c:2964
 #, c-format
 msgid ""
 "Network details for %s including password and any custom configuration will "
@@ -1770,46 +1775,47 @@ msgstr ""
 "Se perderán los detalles de la red %s, incluyendo la contraseña y cualquier "
 "configuración personalizada"
 
-#: ../panels/network/cc-network-panel.c:2909
+#: ../panels/network/cc-network-panel.c:2974
 msgid "Forget"
 msgstr "Olvidar"
 
-#: ../panels/network/cc-network-panel.c:3408
+#: ../panels/network/cc-network-panel.c:3528
 msgid "Not connected to the internet."
 msgstr "No conectado a Internet."
 
-#: ../panels/network/cc-network-panel.c:3409
+#: ../panels/network/cc-network-panel.c:3529
 msgid "Create the hotspot anyway?"
 msgstr "¿Crear el «hotspot» de todas formas?"
 
-#: ../panels/network/cc-network-panel.c:3427
+#: ../panels/network/cc-network-panel.c:3547
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
 msgstr "¿Desconectarse de %s y crear un «hotspot» nuevo?"
 
-#: ../panels/network/cc-network-panel.c:3430
+#: ../panels/network/cc-network-panel.c:3550
 msgid "This is your only connection to the internet."
 msgstr "Esta es su única conexión a Internet."
 
-#: ../panels/network/cc-network-panel.c:3448
+#: ../panels/network/cc-network-panel.c:3568
 msgid "Create _Hotspot"
 msgstr "Crear «_hotspot»"
 
-#: ../panels/network/cc-network-panel.c:3508
+#: ../panels/network/cc-network-panel.c:3628
 msgid "Stop hotspot and disconnect any users?"
 msgstr "¿Detener el «hotspot» y desconectar a los usuarios?"
 
-#: ../panels/network/cc-network-panel.c:3511
+#: ../panels/network/cc-network-panel.c:3631
 msgid "_Stop Hotspot"
 msgstr "_Detener «hotspot»"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:3530
+#: ../panels/network/cc-network-panel.c:3650
 msgid "Air_plane Mode"
 msgstr "Modo a_vión"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+#: ../panels/network/network.ui.h:28
 msgid "Network"
 msgstr "Red"
 
@@ -1917,71 +1923,71 @@ msgstr "IMEI"
 msgid "Provider"
 msgstr "Proveedor"
 
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network.ui.h:29
 msgid "VPN Type"
 msgstr "Tipo de VPN"
 
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network.ui.h:30
 msgid "Gateway"
 msgstr "Puerta de enlace"
 
-#: ../panels/network/network.ui.h:30
+#: ../panels/network/network.ui.h:31
 msgid "Group Name"
 msgstr "Nombre del grupo"
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network.ui.h:32
 msgid "Group Password"
 msgstr "Contraseña del grupo"
 
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network.ui.h:33
 msgid "Username"
 msgstr "Nombre de usuario"
 
-#: ../panels/network/network.ui.h:33
+#: ../panels/network/network.ui.h:34
 msgid "Disable VPN"
 msgstr "Desactivar VPN"
 
-#: ../panels/network/network.ui.h:34
+#: ../panels/network/network.ui.h:35
 msgid "_Configure..."
 msgstr "_Configurar…"
 
-#: ../panels/network/network.ui.h:35
+#: ../panels/network/network.ui.h:36
 msgid "_Method"
 msgstr "_Método"
 
-#: ../panels/network/network.ui.h:36
+#: ../panels/network/network.ui.h:37
 msgid "_Configuration URL"
 msgstr "URL de _configuración"
 
-#: ../panels/network/network.ui.h:37
+#: ../panels/network/network.ui.h:38
 msgid "_HTTP Proxy"
 msgstr "Proxy para _HTTP"
 
-#: ../panels/network/network.ui.h:38
+#: ../panels/network/network.ui.h:39
 msgid "H_TTPS Proxy"
 msgstr "Proxy para H_TTPS"
 
-#: ../panels/network/network.ui.h:39
+#: ../panels/network/network.ui.h:40
 msgid "_FTP Proxy"
 msgstr "Proxy para _FTP"
 
-#: ../panels/network/network.ui.h:40
+#: ../panels/network/network.ui.h:41
 msgid "_Socks Host"
 msgstr "_Servidor socks"
 
-#: ../panels/network/network.ui.h:41
+#: ../panels/network/network.ui.h:42
 msgid "HTTP Port"
 msgstr "Puerto HTTP"
 
-#: ../panels/network/network.ui.h:42
+#: ../panels/network/network.ui.h:43
 msgid "HTTPS Port"
 msgstr "Puerto HTTPS"
 
-#: ../panels/network/network.ui.h:43
+#: ../panels/network/network.ui.h:44
 msgid "FTP Port"
 msgstr "Puerto FTP"
 
-#: ../panels/network/network.ui.h:44
+#: ../panels/network/network.ui.h:45
 msgid "Socks Port"
 msgstr "Puerto Socks"
 
@@ -2353,7 +2359,6 @@ msgstr ""
 "Google;Facebook;Twitter;Yahoo;Web;En línea;Chat;Calendario;Correo-e;Contacto;"
 
 #: ../panels/online-accounts/online-accounts.ui.h:1
-#| msgid "Manage online accounts"
 msgid "No online accounts configured"
 msgstr "No hay cuentas en línea configuradas"
 
@@ -2362,7 +2367,6 @@ msgid "Remove Account"
 msgstr "Quitar cuenta"
 
 #: ../panels/online-accounts/online-accounts.ui.h:4
-#| msgid "Manage online accounts"
 msgid "Add an online account"
 msgstr "Añadir una cuenta en línea"
 
@@ -3398,7 +3402,7 @@ msgstr "_Perfil:"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1094
+#: ../panels/sound/gvc-mixer-control.c:1134
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -3407,14 +3411,14 @@ msgstr[1] "%u salidas"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1104
+#: ../panels/sound/gvc-mixer-control.c:1144
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u entrada"
 msgstr[1] "%u entradas"
 
-#: ../panels/sound/gvc-mixer-control.c:1402
+#: ../panels/sound/gvc-mixer-control.c:1442
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
 
@@ -4600,8 +4604,8 @@ msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
-"Es posible mantener la carpeta personal, el «spool» del correo y los "
-"archivos temporales al eliminar una cuenta de usuario."
+"Es posible mantener la carpeta personal, el «spool» del correo y los archivos "
+"temporales al eliminar una cuenta de usuario."
 
 #: ../panels/user-accounts/um-user-panel.c:454
 msgid "_Delete Files"
@@ -4829,67 +4833,67 @@ msgstr "Modo de seguimiento"
 msgid "Left-Handed Orientation"
 msgstr "Orientación para zurdos"
 
-#: ../panels/wacom/gsd-wacom-device.c:959
+#: ../panels/wacom/gsd-wacom-device.c:961
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Modo del anillo izquierdo nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:968
+#: ../panels/wacom/gsd-wacom-device.c:970
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Modo del anillo derecho nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:998
+#: ../panels/wacom/gsd-wacom-device.c:1000
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Modo de la banda táctil izquierda nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1007
+#: ../panels/wacom/gsd-wacom-device.c:1009
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Modo de la banda táctil derecha nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1024
+#: ../panels/wacom/gsd-wacom-device.c:1026
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Modo de cambio del anillo táctil izquierdo"
 
-#: ../panels/wacom/gsd-wacom-device.c:1026
+#: ../panels/wacom/gsd-wacom-device.c:1028
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Modo de cambio del anillo táctil derecho"
 
-#: ../panels/wacom/gsd-wacom-device.c:1029
+#: ../panels/wacom/gsd-wacom-device.c:1031
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Modo de cambio de la banda táctil izquierda"
 
-#: ../panels/wacom/gsd-wacom-device.c:1031
+#: ../panels/wacom/gsd-wacom-device.c:1033
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Modo de cambio de la banda táctil derecha"
 
-#: ../panels/wacom/gsd-wacom-device.c:1036
+#: ../panels/wacom/gsd-wacom-device.c:1038
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Modo de cambio nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1108
+#: ../panels/wacom/gsd-wacom-device.c:1110
 #, c-format
 msgid "Left Button #%d"
 msgstr "Botón izquierdo nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1111
+#: ../panels/wacom/gsd-wacom-device.c:1113
 #, c-format
 msgid "Right Button #%d"
 msgstr "Botón derecho nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1114
+#: ../panels/wacom/gsd-wacom-device.c:1116
 #, c-format
 msgid "Top Button #%d"
 msgstr "Botón superior nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1117
+#: ../panels/wacom/gsd-wacom-device.c:1119
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Botón inferior nº %d"
@@ -8111,5 +8115,4 @@ msgstr "Todas las configuraciones"
 #~ msgstr "No hay establecido ningún grupo para el URI «%s»"
 
 #~ msgid "No application with name '%s' registered a bookmark for '%s'"
-#~ msgstr ""
-#~ "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
+#~ msgstr "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
