@@ -41,7 +41,8 @@
 
 #define GNOME_DESKTOP_INPUT_SOURCES_DIR "org.gnome.desktop.input-sources"
 
-#define KEY_INPUT_SOURCES "sources"
+#define KEY_CURRENT_INPUT_SOURCE "current"
+#define KEY_INPUT_SOURCES        "sources"
 
 #define INPUT_SOURCE_TYPE_XKB  "xkb"
 #define INPUT_SOURCE_TYPE_IBUS "ibus"
@@ -373,23 +374,61 @@ update_configuration (GtkTreeModel *model)
   gchar *type;
   gchar *id;
   GVariantBuilder builder;
+  GVariant *old_sources;
+  const gchar *old_current_type;
+  const gchar *old_current_id;
+  guint old_current_index;
+  guint index;
+
+  old_sources = g_settings_get_value (input_sources_settings, KEY_INPUT_SOURCES);
+  old_current_index = g_settings_get_uint (input_sources_settings, KEY_CURRENT_INPUT_SOURCE);
+  g_variant_get_child (old_sources,
+                       old_current_index,
+                       "(&s&s)",
+                       &old_current_type,
+                       &old_current_id);
+  if (g_variant_n_children (old_sources) < 1)
+    {
+      g_warning ("No input source configured, resetting");
+      g_settings_reset (input_sources_settings, KEY_INPUT_SOURCES);
+      goto exit;
+    }
+  if (old_current_index >= g_variant_n_children (old_sources))
+    {
+      g_settings_set_uint (input_sources_settings,
+                           KEY_CURRENT_INPUT_SOURCE,
+                           g_variant_n_children (old_sources) - 1);
+    }
 
   g_variant_builder_init (&builder, G_VARIANT_TYPE ("a(ss)"));
-
+  index = 0;
   gtk_tree_model_get_iter_first (model, &iter);
-  do {
-    gtk_tree_model_get (model, &iter,
-                        TYPE_COLUMN, &type,
-                        ID_COLUMN, &id,
-                        -1);
-    g_variant_builder_add (&builder, "(ss)", type, id);
-    g_free (type);
-    g_free (id);
-  } while (gtk_tree_model_iter_next (model, &iter));
+  do
+    {
+      gtk_tree_model_get (model, &iter,
+                          TYPE_COLUMN, &type,
+                          ID_COLUMN, &id,
+                          -1);
+      if (index != old_current_index &&
+          g_str_equal (type, old_current_type) &&
+          g_str_equal (id, old_current_id))
+        {
+          g_settings_set_uint (input_sources_settings, KEY_CURRENT_INPUT_SOURCE, index);
+        }
+      g_variant_builder_add (&builder, "(ss)", type, id);
+      g_free (type);
+      g_free (id);
+      index += 1;
+    }
+  while (gtk_tree_model_iter_next (model, &iter));
 
   g_signal_handler_block (input_sources_settings, input_sources_settings_changed_id);
   g_settings_set_value (input_sources_settings, KEY_INPUT_SOURCES, g_variant_builder_end (&builder));
   g_signal_handler_unblock (input_sources_settings, input_sources_settings_changed_id);
+
+ exit:
+  g_settings_apply (input_sources_settings);
+  g_variant_unref (old_sources);
 }
 
 static gboolean
@@ -870,6 +909,7 @@ setup_input_tabs (GtkBuilder    *builder,
   GtkTreeSelection *selection;
 
   input_sources_settings = g_settings_new (GNOME_DESKTOP_INPUT_SOURCES_DIR);
+  g_settings_delay (input_sources_settings);
   g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) g_object_unref, input_sources_settings);
 
   if (!xkb_info)
