@@ -67,7 +67,7 @@ enum
   SECTION_N_COLUMNS
 };
 
-static GSettings *settings = NULL;
+static GSettings *binding_settings = NULL;
 static GtkWidget *custom_shortcut_dialog = NULL;
 static GtkWidget *custom_shortcut_name_entry = NULL;
 static GtkWidget *custom_shortcut_command_entry = NULL;
@@ -526,7 +526,7 @@ append_sections_from_gsettings (GtkBuilder *builder)
   /* load custom shortcuts from GSettings */
   entries = g_array_new (FALSE, TRUE, sizeof (KeyListEntry));
 
-  custom_paths = g_settings_get_strv (settings, "custom-keybindings");
+  custom_paths = g_settings_get_strv (binding_settings, "custom-keybindings");
   for (i = 0; custom_paths[i]; i++)
     {
       key.name = g_strdup (custom_paths[i]);
@@ -860,12 +860,12 @@ remove_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
   g_settings_apply (item->settings);
   g_settings_sync ();
 
-  settings_paths = g_settings_get_strv (settings, "custom-keybindings");
+  settings_paths = g_settings_get_strv (binding_settings, "custom-keybindings");
   g_variant_builder_init (&builder, G_VARIANT_TYPE ("as"));
   for (i = 0; settings_paths[i]; i++)
     if (strcmp (settings_paths[i], item->gsettings_path) != 0)
       g_variant_builder_add (&builder, "s", settings_paths[i]);
-  g_settings_set_value (settings,
+  g_settings_set_value (binding_settings,
                         "custom-keybindings", g_variant_builder_end (&builder));
   g_strfreev (settings_paths);
   g_object_unref (item);
@@ -1274,7 +1274,7 @@ find_free_settings_path ()
   char *dir = NULL;
   int i, num, n_names;
 
-  used_names = g_settings_get_strv (settings, "custom-keybindings");
+  used_names = g_settings_get_strv (binding_settings, "custom-keybindings");
   n_names = g_strv_length (used_names);
 
   for (num = 0; dir == NULL; num++)
@@ -1334,12 +1334,12 @@ add_custom_shortcut (GtkTreeView  *tree_view,
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
       gtk_list_store_set (GTK_LIST_STORE (model), &iter, DETAIL_KEYENTRY_COLUMN, item, -1);
 
-      settings_paths = g_settings_get_strv (settings, "custom-keybindings");
+      settings_paths = g_settings_get_strv (binding_settings, "custom-keybindings");
       g_variant_builder_init (&builder, G_VARIANT_TYPE ("as"));
       for (i = 0; settings_paths[i]; i++)
         g_variant_builder_add (&builder, "s", settings_paths[i]);
       g_variant_builder_add (&builder, "s", item->gsettings_path);
-      g_settings_set_value (settings, "custom-keybindings",
+      g_settings_set_value (binding_settings, "custom-keybindings",
                             g_variant_builder_end (&builder));
 
       /* make the new shortcut visible */
@@ -1605,7 +1605,7 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder,
                                                     "shortcut_treeview"));
 
-  settings = g_settings_new (BINDINGS_SCHEMA);
+  binding_settings = g_settings_new (BINDINGS_SCHEMA);
 
   g_signal_connect (treeview, "button_press_event",
                     G_CALLBACK (start_editing_cb), builder);
@@ -1723,4 +1723,6 @@ keyboard_shortcuts_dispose (CcPanel *panel)
       g_hash_table_destroy (kb_user_sections);
       kb_user_sections = NULL;
     }
+
+  g_clear_object (&binding_settings);
 }
