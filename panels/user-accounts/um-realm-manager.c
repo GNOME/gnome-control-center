@@ -600,7 +600,7 @@ um_realm_join_finish (UmRealmKerberos *self,
 
         if (g_str_equal (dbus_error, "org.freedesktop.realmd.Error.AuthFailed")) {
                 g_set_error (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_LOGIN,
-                             call_error->message);
+                             "%s", call_error->message);
                 g_error_free (call_error);
         } else {
                 g_propagate_error (error, call_error);

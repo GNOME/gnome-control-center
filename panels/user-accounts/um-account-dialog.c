@@ -111,7 +111,7 @@ show_error_dialog (UmAccountDialog *self,
                                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                          GTK_MESSAGE_ERROR,
                                          GTK_BUTTONS_CLOSE,
-                                         message);
+                                         "%s", message);
 
         gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
                                                   "%s", error->message);
