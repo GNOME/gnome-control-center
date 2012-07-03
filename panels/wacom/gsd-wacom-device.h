@@ -23,6 +23,7 @@
 #define __GSD_WACOM_DEVICE_MANAGER_H
 
 #include <glib-object.h>
+#include "gsd-enums.h"
 
 G_BEGIN_DECLS
 
@@ -128,6 +129,7 @@ void     gsd_wacom_device_set_display         (GsdWacomDevice    *device,
 gint     gsd_wacom_device_get_display_monitor (GsdWacomDevice *device);
 gboolean gsd_wacom_device_get_display_matrix  (GsdWacomDevice *device,
                                                float           matrix[NUM_ELEMS_MATRIX]);
+GsdWacomRotation gsd_wacom_device_get_display_rotation (GsdWacomDevice *device);
 
 GsdWacomDevice * gsd_wacom_device_new              (GdkDevice *device);
 GList          * gsd_wacom_device_list_styli       (GsdWacomDevice *device);
@@ -153,6 +155,9 @@ GsdWacomTabletButton *gsd_wacom_device_get_button   (GsdWacomDevice   *device,
 						     GtkDirectionType *dir);
 int gsd_wacom_device_set_next_mode                  (GsdWacomDevice *device,
 						     int             group_id);
+GsdWacomRotation gsd_wacom_device_rotation_name_to_type (const char *rotation);
+const char     * gsd_wacom_device_rotation_type_to_name (GsdWacomRotation type);
+
 
 /* Helper and debug functions */
 GsdWacomDevice * gsd_wacom_device_create_fake (GsdWacomDeviceType  type,

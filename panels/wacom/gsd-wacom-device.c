@@ -47,6 +47,17 @@
 #define WACOM_ERASER_SCHEMA "org.gnome.settings-daemon.peripherals.wacom.eraser"
 #define WACOM_BUTTON_SCHEMA "org.gnome.settings-daemon.peripherals.wacom.tablet-button"
 
+static struct {
+	GnomeRRRotation  rotation;
+	GsdWacomRotation rotation_wacom;
+	const gchar     *rotation_string;
+} rotation_table[] = {
+	{ GNOME_RR_ROTATION_0,   GSD_WACOM_ROTATION_NONE, "none" },
+	{ GNOME_RR_ROTATION_90,  GSD_WACOM_ROTATION_CCW,  "ccw"  },
+	{ GNOME_RR_ROTATION_180, GSD_WACOM_ROTATION_HALF, "half" },
+	{ GNOME_RR_ROTATION_270, GSD_WACOM_ROTATION_CW,   "cw"   }
+};
+
 static WacomDeviceDatabase *db = NULL;
 
 struct GsdWacomStylusPrivate
@@ -716,6 +727,18 @@ set_display_by_output (GsdWacomDevice  *device,
 	g_free (o_serial_s);
 }
 
+static GsdWacomRotation
+get_rotation_wacom (GnomeRRRotation rotation)
+{
+        guint i;
+
+        for (i = 0; i < G_N_ELEMENTS (rotation_table); i++) {
+                if (rotation_table[i].rotation & rotation)
+                        return (rotation_table[i].rotation_wacom);
+        }
+        g_assert_not_reached ();
+}
+
 void
 gsd_wacom_device_set_display (GsdWacomDevice *device,
                               int             monitor)
@@ -869,6 +892,31 @@ gsd_wacom_device_get_display_matrix (GsdWacomDevice *device, float matrix[NUM_EL
 	gdk_screen_get_monitor_geometry (screen, monitor, &display);
 	calculate_transformation_matrix (display, desktop, matrix);
 	return TRUE;
+}
+
+GsdWacomRotation
+gsd_wacom_device_get_display_rotation (GsdWacomDevice *device)
+{
+	GError *error = NULL;
+	GnomeRRScreen *rr_screen;
+	GnomeRROutput *rr_output;
+	GnomeRRRotation rotation = GNOME_RR_ROTATION_0;
+
+	rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
+	if (rr_screen == NULL) {
+		g_warning ("Failed to create GnomeRRScreen: %s", error->message);
+		g_error_free (error);
+		return -1;
+	}
+
+	rr_output = find_output (rr_screen, device);
+	if (rr_output) {
+		GnomeRRCrtc *crtc = gnome_rr_output_get_crtc (rr_output);
+		rotation = gnome_rr_crtc_get_current_rotation (crtc);
+	}
+	g_object_unref (rr_screen);
+
+	return get_rotation_wacom (rotation);
 }
 
 static void
@@ -1744,6 +1792,34 @@ gsd_wacom_device_get_button (GsdWacomDevice   *device,
 	default:
 		return NULL;
 	}
+}
+
+GsdWacomRotation
+gsd_wacom_device_rotation_name_to_type (const char *rotation)
+{
+        guint i;
+
+	g_return_val_if_fail (rotation != NULL, GSD_WACOM_ROTATION_NONE);
+
+        for (i = 0; i < G_N_ELEMENTS (rotation_table); i++) {
+                if (strcmp (rotation_table[i].rotation_string, rotation) == 0)
+                        return (rotation_table[i].rotation_wacom);
+        }
+
+	return GSD_WACOM_ROTATION_NONE;
+}
+
+const char *
+gsd_wacom_device_rotation_type_to_name (GsdWacomRotation type)
+{
+        guint i;
+
+        for (i = 0; i < G_N_ELEMENTS (rotation_table); i++) {
+                if (rotation_table[i].rotation_wacom == type)
+                        return (rotation_table[i].rotation_string);
+        }
+
+	return "none";
 }
 
 GsdWacomDevice *
