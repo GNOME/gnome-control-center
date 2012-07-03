@@ -725,6 +725,8 @@ display_mapping_button_clicked_cb (GtkButton   *button,
 	g_signal_connect (G_OBJECT (priv->dialog), "response",
 			  G_CALLBACK (display_mapping_dialog_closed), page);
 	gtk_widget_show_all (priv->dialog);
+
+	g_object_add_weak_pointer (G_OBJECT (priv->mapping), (gpointer *) &priv->dialog);
 }
 
 static void
@@ -866,6 +868,11 @@ cc_wacom_page_dispose (GObject *object)
 	if (priv->button_map) {
 		gtk_widget_destroy (priv->button_map);
 		priv->button_map = NULL;
+	}
+
+	if (priv->dialog) {
+		gtk_widget_destroy (priv->dialog);
+		priv->dialog = NULL;
 	}
 
 	if (priv->builder) {
