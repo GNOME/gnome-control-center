@@ -956,7 +956,6 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
         const gchar *object_path;
         GtkListStore *liststore_wireless_network;
         GtkTreeIter treeiter;
-        GtkWidget *widget;
         gboolean is_active_ap;
 
         ssid = nm_access_point_get_ssid (ap);
@@ -981,13 +980,6 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
                                            PANEL_WIRELESS_COLUMN_SECURITY, get_access_point_security (ap),
                                            PANEL_WIRELESS_COLUMN_ACTIVE, is_active_ap,
                                            -1);
-
-        /* is this what we're on already? */
-        if (is_active_ap) {
-                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "combobox_wireless_network_name"));
-                gtk_combo_box_set_active_iter (GTK_COMBO_BOX (widget), &treeiter);
-        }
 
         if (priv->arg_operation == OPERATION_CONNECT_8021X &&
             g_strcmp0(priv->arg_device, nm_object_get_path (NM_OBJECT (device))) == 0 &&
@@ -1862,7 +1854,6 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
         GtkWidget *sw;
         const GPtrArray *aps;
         GPtrArray *aps_unique = NULL;
-        GtkWidget *heading;
         NMDeviceState state;
         NMAccessPoint *ap;
         NMAccessPoint *active_ap;
@@ -1932,10 +1923,6 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
                                str_tmp);
         g_free (str_tmp);
 
-        heading = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                      "heading_wireless_network_name"));
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "combobox_wireless_network_name"));
         /* populate access point dropdown */
         if (is_hotspot || state == NM_DEVICE_STATE_UNAVAILABLE) {
         } else {
@@ -1949,12 +1936,6 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
                 for (i = 0; i < aps_unique->len; i++) {
                         ap = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, i));
                         add_access_point (panel, ap, active_ap, nm_device);
-                }
-                if (active_ap == NULL) {
-                        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                                     "combobox_wireless_network_name"));
-                        gtk_combo_box_set_active_iter (GTK_COMBO_BOX (widget), NULL);
-                        gtk_entry_set_text (GTK_ENTRY (gtk_bin_get_child (GTK_BIN (widget))), "");
                 }
 
                 panel->priv->updating_device = FALSE;
