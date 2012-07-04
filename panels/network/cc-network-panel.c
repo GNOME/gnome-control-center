@@ -956,6 +956,7 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
         GtkListStore *liststore_wireless_network;
         GtkTreeIter treeiter;
         gboolean is_active_ap;
+        gchar *title;
 
         ssid = nm_access_point_get_ssid (ap);
         if (ssid == NULL)
@@ -968,17 +969,19 @@ add_access_point (CcNetworkPanel *panel, NMAccessPoint *ap, NMAccessPoint *activ
                                                      "liststore_wireless_network"));
 
         object_path = nm_object_get_path (NM_OBJECT (ap));
+        title = g_markup_escape_text (ssid_text, -1);
         gtk_list_store_insert_with_values (liststore_wireless_network,
                                            &treeiter,
                                            -1,
                                            PANEL_WIRELESS_COLUMN_ID, object_path,
-                                           PANEL_WIRELESS_COLUMN_TITLE, ssid_text,
+                                           PANEL_WIRELESS_COLUMN_TITLE, title,
                                            PANEL_WIRELESS_COLUMN_SORT, ssid_text,
                                            PANEL_WIRELESS_COLUMN_STRENGTH, nm_access_point_get_strength (ap),
                                            PANEL_WIRELESS_COLUMN_MODE, nm_access_point_get_mode (ap),
                                            PANEL_WIRELESS_COLUMN_SECURITY, get_access_point_security (ap),
                                            PANEL_WIRELESS_COLUMN_ACTIVE, is_active_ap,
                                            -1);
+        g_free (title);
 
         if (priv->arg_operation == OPERATION_CONNECT_8021X &&
             g_strcmp0(priv->arg_device, nm_object_get_path (NM_OBJECT (device))) == 0 &&
@@ -1894,6 +1897,8 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
         can_start_hotspot = gtk_switch_get_active (GTK_SWITCH (sw)) &&
                             (perm == NM_CLIENT_PERMISSION_RESULT_YES ||
                              perm == NM_CLIENT_PERMISSION_RESULT_AUTH);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "start-hotspot-button"));
+        gtk_widget_set_sensitive (widget, can_start_hotspot);
 
         g_free (hotspot_ssid);
         g_free (hotspot_secret);
@@ -1936,17 +1941,19 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
         panel->priv->updating_device = TRUE;
         gtk_list_store_clear (liststore_wireless_network);
 
+        str_tmp = g_strdup_printf ("<b>%s</b>", _("Connect to a Hidden Network"));
         gtk_list_store_insert_with_values (liststore_wireless_network,
                                            &iter,
                                            -1,
                                            PANEL_WIRELESS_COLUMN_ID, "",
-                                           PANEL_WIRELESS_COLUMN_TITLE, "<b>Wireless Hotspot</b>",
-                                           PANEL_WIRELESS_COLUMN_SORT, "ap:hotspot",
+                                           PANEL_WIRELESS_COLUMN_TITLE, str_tmp,
+                                           PANEL_WIRELESS_COLUMN_SORT, "ap:hidden",
                                            PANEL_WIRELESS_COLUMN_STRENGTH, 0,
                                            PANEL_WIRELESS_COLUMN_MODE, 0,
                                            PANEL_WIRELESS_COLUMN_SECURITY, 0,
-                                           PANEL_WIRELESS_COLUMN_ACTIVE, is_hotspot,
+                                           PANEL_WIRELESS_COLUMN_ACTIVE, 0,
                                            -1);
+        g_free (str_tmp);
 
         aps = nm_device_wifi_get_access_points (NM_DEVICE_WIFI (nm_device));
         aps_unique = panel_get_strongest_unique_aps (aps);
@@ -3475,7 +3482,7 @@ start_hotspot_response_cb (GtkWidget *dialog, gint response, CcNetworkPanel *pan
 }
 
 static void
-start_hotspot (GtkButton *button, CcNetworkPanel *panel)
+start_hotspot (CcNetworkPanel *panel)
 {
         NetObject *object;
         NMDevice *device;
@@ -3696,7 +3703,7 @@ arrow_visible (GtkTreeModel *model,
                             PANEL_WIRELESS_COLUMN_SORT, &sort,
                             -1);
 
-        if (active || strcmp ("ap:hotspot", sort) == 0)
+        if (active || strcmp ("ap:hidden", sort) == 0)
                 ret = TRUE;
         else
                 ret = FALSE;
@@ -4078,9 +4085,9 @@ cc_network_panel_init (CcNetworkPanel *panel)
                           G_CALLBACK (mobilebb_enabled_toggled), panel);
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "hidden-wireless-button"));
+                                                     "start-hotspot-button"));
         g_signal_connect_swapped (widget, "clicked",
-                                  G_CALLBACK (connect_to_hidden_network), panel);
+                                  G_CALLBACK (start_hotspot), panel);
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "wireless-back-button"));
