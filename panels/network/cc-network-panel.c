@@ -2894,6 +2894,11 @@ wireless_button_clicked_cb (GtkButton *button, CcNetworkPanel *panel)
         GtkWidget *dialog;
         GtkWidget *window;
 
+        /* FIXME: find the currently shown network, and forget it
+         * The code below is not right, since it always forgets the
+         * currently active ap, also it uses the wireless combo to
+         * do so
+         */
         combobox = GTK_COMBO_BOX (gtk_builder_get_object (panel->priv->builder,
                                                           "combobox_wireless_network_name"));
         ret = gtk_combo_box_get_active_iter (combobox, &iter);
