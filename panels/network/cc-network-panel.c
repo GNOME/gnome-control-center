@@ -1867,6 +1867,7 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
         gchar *hotspot_security;
         gboolean can_start_hotspot;
         GtkTreeIter iter;
+        gint strength;
 
         nm_device = net_device_get_nm_device (device);
         state = nm_device_get_state (nm_device);
@@ -1912,6 +1913,22 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
                 str_tmp = g_strdup ("");
         panel_set_widget_data (panel, "wireless", "security", str_tmp);
         g_free (str_tmp);
+
+        if (active_ap)
+                strength = nm_access_point_get_strength (active_ap);
+        else
+                strength = 0;
+        if (strength < 20)
+                str_tmp = C_("Signal strength", "None");
+        else if (strength < 40)
+                str_tmp = C_("Signal strength", "Weak");
+        else if (strength < 50)
+                str_tmp = C_("Signal strength", "Ok");
+        else if (strength < 80)
+                str_tmp = C_("Signal strength", "Good");
+        else
+                str_tmp = C_("Signal strength", "Excellent");
+        panel_set_widget_data (panel, "wireless", "strength", str_tmp);
 
         /* populate wireless network list */
         liststore_wireless_network = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
@@ -2378,7 +2395,7 @@ refresh_ui_idle (gpointer data)
 
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                              "notebook_types"));
-                gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 2);
+                gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 4);
 
                 /* hide the switch until we get some more detail in the mockup */
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
@@ -4126,8 +4143,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
         /* hide implementation details */
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "notebook_types"));
-        gtk_notebook_set_show_tabs (GTK_NOTEBOOK (widget), FALSE);
-
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "vbox1"));
         gtk_widget_reparent (widget, (GtkWidget *) panel);
