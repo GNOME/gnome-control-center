@@ -23,6 +23,7 @@
 #define __GVC_MIXER_CARD_H
 
 #include <glib-object.h>
+#include <gio/gio.h>
 
 G_BEGIN_DECLS
 
@@ -78,6 +79,7 @@ const GList *         gvc_mixer_card_get_profiles      (GvcMixerCard *card);
 const GList *         gvc_mixer_card_get_ports         (GvcMixerCard *card);
 gboolean              gvc_mixer_card_change_profile    (GvcMixerCard *card,
                                                         const char *profile);
+GIcon *               gvc_mixer_card_get_gicon         (GvcMixerCard *card);
 
 /* private */
 gboolean              gvc_mixer_card_set_name          (GvcMixerCard *card,

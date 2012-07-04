@@ -319,6 +319,24 @@ gvc_mixer_card_set_profiles (GvcMixerCard *card,
 }
 
 /**
+ * gvc_mixer_card_get_gicon:
+ *
+ * @card:
+ *
+ * Return value: (transfer full) (element-type GIcon):
+ */
+GIcon *
+gvc_mixer_card_get_gicon (GvcMixerCard *card)
+{
+        g_return_val_if_fail (GVC_IS_MIXER_CARD (card), NULL);
+
+        if (card->priv->icon_name == NULL)
+                return NULL;
+
+        return g_themed_icon_new_with_default_fallbacks (card->priv->icon_name);
+}
+
+/**
  * gvc_mixer_card_set_ports:
  * @profiles: (transfer full) (element-type GvcMixerCardPort):
  */
