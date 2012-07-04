@@ -1848,6 +1848,8 @@ device_refresh_ethernet_ui (CcNetworkPanel *panel, NetDevice *device)
 
 }
 
+static void show_hotspot_details (CcNetworkPanel *panel);
+
 static void
 device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
 {
@@ -1924,16 +1926,16 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
         else
                 strength = 0;
         if (strength < 20)
-                str_tmp = C_("Signal strength", "None");
+                str = C_("Signal strength", "None");
         else if (strength < 40)
-                str_tmp = C_("Signal strength", "Weak");
+                str = C_("Signal strength", "Weak");
         else if (strength < 50)
-                str_tmp = C_("Signal strength", "Ok");
+                str = C_("Signal strength", "Ok");
         else if (strength < 80)
-                str_tmp = C_("Signal strength", "Good");
+                str = C_("Signal strength", "Good");
         else
-                str_tmp = C_("Signal strength", "Excellent");
-        panel_set_widget_data (panel, "wireless", "strength", str_tmp);
+                str = C_("Signal strength", "Excellent");
+        panel_set_widget_data (panel, "wireless", "strength", str);
 
         /* populate wireless network list */
         liststore_wireless_network = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
@@ -1986,6 +1988,9 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "button_wireless_button"));
         gtk_widget_set_visible (widget, active_ap != NULL);
+
+        if (is_hotspot)
+                show_hotspot_details (panel);
 }
 
 static void
@@ -3477,8 +3482,9 @@ start_hotspot_response_cb (GtkWidget *dialog, gint response, CcNetworkPanel *pan
 {
         if (response == GTK_RESPONSE_OK) {
                 start_shared_connection (panel);
+                show_hotspot_details (panel);
         }
-        gtk_widget_destroy (dialog);
+        gtk_widget_hide (dialog);
 }
 
 static void
@@ -3486,73 +3492,56 @@ start_hotspot (CcNetworkPanel *panel)
 {
         NetObject *object;
         NMDevice *device;
-        gboolean is_default;
         const GPtrArray *connections;
-        const GPtrArray *devices;
-        NMActiveConnection *c;
-        NMAccessPoint *ap;
         gchar *active_ssid;
-        gchar *warning;
-        gint i;
+        GtkWidget *dialog;
+        GtkWidget *window;
+        GtkWidget *widget;
+        GString *str;
 
-        warning = NULL;
+        active_ssid = NULL;
 
         object = get_selected_object (panel);
         device = net_device_get_nm_device (NET_DEVICE (object));
         connections = nm_client_get_active_connections (panel->priv->client);
-        if (connections == NULL || connections->len == 0) {
-                warning = g_strdup_printf ("%s\n\n%s",
-                                           _("Not connected to the internet."),
-                                           _("Create the hotspot anyway?"));
-        } else {
-                is_default = FALSE;
-                active_ssid = NULL;
+        if (connections) {
+                gint i;
                 for (i = 0; i < connections->len; i++) {
+                        NMActiveConnection *c;
+                        const GPtrArray *devices;
                         c = (NMActiveConnection *)connections->pdata[i];
                         devices = nm_active_connection_get_devices (c);
                         if (devices && devices->pdata[0] == device) {
+                                NMAccessPoint *ap;
                                 ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (device));
                                 active_ssid = nm_utils_ssid_to_utf8 (nm_access_point_get_ssid (ap));
-                                is_default = nm_active_connection_get_default (c);
                                 break;
                         }
                 }
-
-                if (active_ssid != NULL) {
-                        GString *str;
-                        str = g_string_new ("");
-                        g_string_append_printf (str, _("Disconnect from %s and create a new hotspot?"), active_ssid);
-                        if (is_default) {
-                                g_string_append (str, "\n\n");
-                                g_string_append (str, _("This is your only connection to the internet."));
-                        }
-                        warning = g_string_free (str, FALSE);
-                }
         }
 
-        if (warning != NULL) {
-                GtkWidget *dialog;
-                GtkWidget *window;
+        window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
 
-                window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
-                dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                                 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                 GTK_MESSAGE_OTHER,
-                                                 GTK_BUTTONS_NONE,
-                                                 "%s", warning);
-                gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-                                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                        _("Create _Hotspot"), GTK_RESPONSE_OK,
-                                        NULL);
-                g_signal_connect (dialog, "response",
-                                  G_CALLBACK (start_hotspot_response_cb), panel);
-                gtk_window_present (GTK_WINDOW (dialog));
+        dialog = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "hotspot-dialog"));
+        gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (window));
 
-                return;
-          }
+        str = g_string_new (_("If you have a connection to the Internet other than wireless, you can use it to share your internet connection with others."));
+        g_string_append (str, "\n\n");
 
-        /* if we get here, things look good to go ahead */
-        start_shared_connection (panel);
+        if (active_ssid)
+                g_string_append_printf (str, _("Switching on the wireless hotspot will disconnect you from <b>%s</b>."), active_ssid);
+
+        g_string_append (str, _("It is not possible to access the internet through your wireless while the hotspot is active."));
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "hotspot-dialog-content"));
+        gtk_label_set_markup (GTK_LABEL (widget), str->str);
+        g_string_free (str, TRUE);
+
+        g_signal_connect (dialog, "response",
+                          G_CALLBACK (start_hotspot_response_cb), panel);
+        gtk_window_present (GTK_WINDOW (dialog));
+
+        g_free (active_ssid);
 }
 
 static void
@@ -3582,17 +3571,20 @@ stop_shared_connection (CcNetworkPanel *panel)
         refresh_ui (panel);
 }
 
+static void show_wifi_list (CcNetworkPanel *panel);
+
 static void
 stop_hotspot_response_cb (GtkWidget *dialog, gint response, CcNetworkPanel *panel)
 {
         if (response == GTK_RESPONSE_OK) {
                 stop_shared_connection (panel);
+                show_wifi_list (panel);
         }
         gtk_widget_destroy (dialog);
 }
 
 static void
-stop_hotspot (GtkButton *button, CcNetworkPanel *panel)
+stop_hotspot (CcNetworkPanel *panel)
 {
         GtkWidget *dialog;
         GtkWidget *window;
@@ -3645,7 +3637,16 @@ network_add_shell_header_widgets_cb (gpointer user_data)
 }
 
 static void
-show_wifi_network (CcNetworkPanel *panel,
+show_wifi_list (CcNetworkPanel *panel)
+{
+        GtkWidget *nb;
+
+        nb = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "wireless-notebook"));
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (nb), 0);
+}
+
+static void
+show_wifi_details (CcNetworkPanel *panel,
                    GtkTreeView    *tv,
                    GtkTreePath    *path)
 {
@@ -3654,6 +3655,38 @@ show_wifi_network (CcNetworkPanel *panel,
         /* FIXME: show the right connection */
         nb = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "wireless-notebook"));
         gtk_notebook_set_current_page (GTK_NOTEBOOK (nb), 1);
+}
+
+static void
+show_hidden_details (CcNetworkPanel *panel)
+{
+        GtkWidget *nb;
+        GtkWidget *widget;
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "entry_hidden_name"));
+        gtk_entry_set_text (GTK_ENTRY (widget), "");
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "combo_hidden_security"));
+        gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 1);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "entry_hidden_password"));
+        gtk_entry_set_text (GTK_ENTRY (widget), "");
+
+        nb = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "wireless-notebook"));
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (nb), 2);
+}
+
+static void
+show_hotspot_details (CcNetworkPanel *panel)
+{
+        GtkWidget *nb;
+        GtkWidget *widget;
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "hotspot-off-switch"));
+        gtk_switch_set_active (GTK_SWITCH (widget), TRUE);
+
+        nb = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "wireless-notebook"));
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (nb), 3);
 }
 
 static void
@@ -3758,6 +3791,32 @@ over_arrow (CcNetworkPanel    *panel,
 }
 
 static gboolean
+is_hidden (CcNetworkPanel *panel,
+           GtkTreeView       *tv,
+           GtkTreePath       *path)
+{
+        GtkTreeModel *model;
+        GtkTreeIter iter;
+        gchar *sort;
+        gboolean ret;
+
+        model = gtk_tree_view_get_model (tv);
+        gtk_tree_model_get_iter (model, &iter, path);
+
+        gtk_tree_model_get (model, &iter,
+                            PANEL_WIRELESS_COLUMN_SORT, &sort,
+                            -1);
+        if (g_strcmp0 (sort, "ap:hidden") == 0)
+                ret = TRUE;
+        else
+                ret = FALSE;
+
+        g_free (sort);
+
+        return ret;
+}
+
+static gboolean
 wifi_button_release_event (GtkWidget      *widget,
                            GdkEventButton *event,
                            gpointer        user_data)
@@ -3778,14 +3837,45 @@ wifi_button_release_event (GtkWidget      *widget,
         if (!res)
                 return FALSE;
 
-        if (over_arrow (panel, tv, col, path, event->x, event->y))
-                show_wifi_network (panel, tv, path);
+        if (is_hidden (panel, tv, path))
+                show_hidden_details (panel);
+        else if (over_arrow (panel, tv, col, path, event->x, event->y))
+                show_wifi_details (panel, tv, path);
         else
                 connect_wifi_network (panel, tv, path);
 
         gtk_tree_path_free (path);
 
         return FALSE;
+}
+
+static void
+hidden_security_changed (GtkComboBox *combo, CcNetworkPanel *panel)
+{
+        GtkWidget *widget;
+        gint active;
+
+        active = gtk_combo_box_get_active (combo);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "entry_hidden_password"));
+
+        if (active == 0) {
+                gtk_entry_set_text (GTK_ENTRY (widget), "");
+                gtk_widget_set_sensitive (widget, FALSE);
+        }
+        else if (active == 1) {
+                gtk_widget_set_sensitive (widget, TRUE);
+        }
+}
+
+static void
+hotspot_switch_toggled (GtkWidget *sw, GParamSpec *pspec, CcNetworkPanel *panel)
+{
+        gboolean active;
+
+        active = gtk_switch_get_active (GTK_SWITCH (sw));
+
+        if (!active)
+                stop_hotspot (panel);
 }
 
 static void
@@ -4045,6 +4135,37 @@ cc_network_panel_init (CcNetworkPanel *panel)
         g_signal_connect (widget, "button-release-event",
                           G_CALLBACK (wifi_button_release_event), panel);
 
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "start-hotspot-button"));
+        g_signal_connect_swapped (widget, "clicked",
+                                  G_CALLBACK (start_hotspot), panel);
+
+        /* set up the wireless details page */
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "wireless-back-button"));
+        g_signal_connect_swapped (widget, "clicked",
+                                  G_CALLBACK (go_back_to_wireless_list), panel);
+
+        /* set up the hidden details page */
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "hidden-back-button"));
+        g_signal_connect_swapped (widget, "clicked",
+                                  G_CALLBACK (go_back_to_wireless_list), panel);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "combo_hidden_security"));
+        g_signal_connect (widget, "changed",
+                          G_CALLBACK (hidden_security_changed), panel);
+
+        /* set up the hotspot details page */
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "hotspot-off-switch"));
+
+        g_signal_connect (widget, "notify::active",
+                          G_CALLBACK (hotspot_switch_toggled), panel);
+
         /* use NetworkManager client */
         panel->priv->client = nm_client_new ();
         g_signal_connect (panel->priv->client, "notify::" NM_CLIENT_MANAGER_RUNNING,
@@ -4083,16 +4204,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
                           G_CALLBACK (wimax_enabled_toggled), panel);
         g_signal_connect (panel->priv->client, "notify::wwan-enabled",
                           G_CALLBACK (mobilebb_enabled_toggled), panel);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "start-hotspot-button"));
-        g_signal_connect_swapped (widget, "clicked",
-                                  G_CALLBACK (start_hotspot), panel);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "wireless-back-button"));
-        g_signal_connect_swapped (widget, "clicked",
-                                  G_CALLBACK (go_back_to_wireless_list), panel);
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "button_wired_options"));
