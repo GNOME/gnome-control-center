@@ -83,6 +83,10 @@ struct _CcNetworkPanelPrivate
         guint             refresh_idle;
         GtkWidget        *kill_switch_header;
 
+        /* for wifi details page */
+        gchar            *current_ssid;
+        gchar            *current_object_path;
+
         /* wireless dialog stuff */
         CmdlineOperation  arg_operation;
         gchar            *arg_device;
@@ -231,24 +235,27 @@ cc_network_panel_finalize (GObject *object)
         g_free (priv->arg_device);
         g_free (priv->arg_access_point);
 
+        g_free (priv->current_object_path);
+        g_free (priv->current_ssid);
+
         G_OBJECT_CLASS (cc_network_panel_parent_class)->finalize (object);
 }
 
 static const char *
 cc_network_panel_get_help_uri (CcPanel *panel)
 {
-	return "help:gnome-help/net";
+        return "help:gnome-help/net";
 }
 
 static void
 cc_network_panel_class_init (CcNetworkPanelClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+        CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
         g_type_class_add_private (klass, sizeof (CcNetworkPanelPrivate));
 
-	panel_class->get_help_uri = cc_network_panel_get_help_uri;
+        panel_class->get_help_uri = cc_network_panel_get_help_uri;
 
         object_class->get_property = cc_network_panel_get_property;
         object_class->set_property = cc_network_panel_set_property;
@@ -1986,7 +1993,7 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
 
         /* setup wireless button */
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "button_wireless_button"));
+                                                     "button_wireless_forget"));
         gtk_widget_set_visible (widget, active_ap != NULL);
 
         if (is_hotspot)
@@ -2785,7 +2792,7 @@ panel_check_network_manager_version (CcNetworkPanel *panel)
 }
 
 static void
-edit_connection (GtkButton *button, CcNetworkPanel *panel)
+edit_connection (CcNetworkPanel *panel)
 {
         NMConnection *c;
         const gchar *uuid;
@@ -2911,7 +2918,7 @@ out:
 }
 
 static void
-wireless_button_clicked_cb (GtkButton *button, CcNetworkPanel *panel)
+forget_wireless_connection (CcNetworkPanel *panel)
 {
         gboolean ret;
         gchar *ssid_pretty = NULL;
@@ -3641,6 +3648,9 @@ show_wifi_list (CcNetworkPanel *panel)
 {
         GtkWidget *nb;
 
+        g_clear_pointer (&panel->priv->current_object_path, g_free);
+        g_clear_pointer (panel->priv->current_ssid, g_free);
+
         nb = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "wireless-notebook"));
         gtk_notebook_set_current_page (GTK_NOTEBOOK (nb), 0);
 }
@@ -3651,8 +3661,22 @@ show_wifi_details (CcNetworkPanel *panel,
                    GtkTreePath    *path)
 {
         GtkWidget *nb;
+        GtkTreeModel *model;
+        GtkTreeIter iter;
+        gchar *ssid;
+        gchar *object_path;
 
-        /* FIXME: show the right connection */
+        g_free (panel->priv->current_object_path);
+        g_free (panel->priv->current_ssid);
+
+        model = gtk_tree_view_get_model (tv);
+        gtk_tree_model_get_iter (model, &iter, path);
+
+        gtk_tree_model_get (model, &iter,
+                            PANEL_WIRELESS_COLUMN_ID, &panel->priv->object_path,
+                            PANEL_WIRELESS_COLUMN_TITLE, &panel->priv->ssid,
+                            -1);
+
         nb = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "wireless-notebook"));
         gtk_notebook_set_current_page (GTK_NOTEBOOK (nb), 1);
 }
@@ -3711,16 +3735,6 @@ connect_wifi_network (CcNetworkPanel *panel,
 
         g_free (object_path);
         g_free (ssid);
-}
-
-static void
-go_back_to_wireless_list (gpointer user_data)
-{
-        CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
-        GtkWidget *nb;
-
-        nb = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "wireless-notebook"));
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (nb), 0);
 }
 
 static gboolean
@@ -3879,126 +3893,116 @@ hotspot_switch_toggled (GtkWidget *sw, GParamSpec *pspec, CcNetworkPanel *panel)
 }
 
 static void
-cc_network_panel_init (CcNetworkPanel *panel)
+proxy_page_init (CcNetworkPanel *panel)
 {
-        DBusGConnection *bus = NULL;
-        GError *error = NULL;
-        gint value;
-        GSettings *settings_tmp;
+        GSettings *proxy_settings;
+        GSettings *settings;
         GtkAdjustment *adjustment;
-        GtkCellRenderer *renderer;
-        GtkComboBox *combobox;
-        GtkStyleContext *context;
-        GtkTreeSelection *selection;
-        GtkTreeSortable *sortable;
         GtkWidget *widget;
-        GtkWidget *toplevel;
-        GtkTreeViewColumn *column;
-        GtkCellArea *area;
+        gint value;
 
-        panel->priv = NETWORK_PANEL_PRIVATE (panel);
+        proxy_settings = g_settings_new ("org.gnome.system.proxy");
+        panel->priv->proxy_settings = proxy_settings;
 
-        panel->priv->builder = gtk_builder_new ();
-        gtk_builder_add_from_file (panel->priv->builder,
-                                   GNOMECC_UI_DIR "/network.ui",
-                                   &error);
-        if (error != NULL) {
-                g_warning ("Could not load interface file: %s", error->message);
-                g_error_free (error);
-                return;
-        }
-
-        panel->priv->cancellable = g_cancellable_new ();
-
-        panel->priv->proxy_settings = g_settings_new ("org.gnome.system.proxy");
-        g_signal_connect (panel->priv->proxy_settings,
-                          "changed",
-                          G_CALLBACK (panel_settings_changed),
-                          panel);
+        g_signal_connect (proxy_settings, "changed",
+                          G_CALLBACK (panel_settings_changed), panel);
 
         /* explicitly set this to false as the panel has no way of
-         * linking the http and https proxies them together */
-        g_settings_set_boolean (panel->priv->proxy_settings,
-                                "use-same-proxy",
-                                FALSE);
+         * linking the http and https proxies them together
+         */
+        g_settings_set_boolean (proxy_settings, "use-same-proxy", FALSE);
 
         /* actions */
-        value = g_settings_get_enum (panel->priv->proxy_settings, "mode");
+        value = g_settings_get_enum (proxy_settings, "mode");
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "combobox_proxy_mode"));
         panel_set_value_for_combo (panel, GTK_COMBO_BOX (widget), value);
         g_signal_connect (widget, "changed",
-                          G_CALLBACK (panel_proxy_mode_combo_changed_cb),
-                          panel);
-
+                          G_CALLBACK (panel_proxy_mode_combo_changed_cb), panel);
         /* bind the proxy values */
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "entry_proxy_url"));
-        g_settings_bind (panel->priv->proxy_settings, "autoconfig-url",
+        g_settings_bind (proxy_settings, "autoconfig-url",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
 
         /* bind the HTTP proxy values */
-        settings_tmp = g_settings_get_child (panel->priv->proxy_settings, "http");
+        settings = g_settings_get_child (proxy_settings, "http");
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "entry_proxy_http"));
-        g_settings_bind (settings_tmp, "host",
+        g_settings_bind (settings, "host",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
+
         adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (panel->priv->builder,
                                                              "adjustment_proxy_port_http"));
-        g_settings_bind (settings_tmp, "port",
+        g_settings_bind (settings, "port",
                          adjustment, "value",
                          G_SETTINGS_BIND_DEFAULT);
-        g_object_unref (settings_tmp);
+        g_object_unref (settings);
 
         /* bind the HTTPS proxy values */
-        settings_tmp = g_settings_get_child (panel->priv->proxy_settings, "https");
+        settings = g_settings_get_child (proxy_settings, "https");
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "entry_proxy_https"));
-        g_settings_bind (settings_tmp, "host",
+        g_settings_bind (settings, "host",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
         adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (panel->priv->builder,
                                                              "adjustment_proxy_port_https"));
-        g_settings_bind (settings_tmp, "port",
+        g_settings_bind (settings, "port",
                          adjustment, "value",
                          G_SETTINGS_BIND_DEFAULT);
-        g_object_unref (settings_tmp);
+        g_object_unref (settings);
 
         /* bind the FTP proxy values */
-        settings_tmp = g_settings_get_child (panel->priv->proxy_settings, "ftp");
+        settings = g_settings_get_child (proxy_settings, "ftp");
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "entry_proxy_ftp"));
-        g_settings_bind (settings_tmp, "host",
+        g_settings_bind (settings, "host",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
         adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (panel->priv->builder,
                                                              "adjustment_proxy_port_ftp"));
-        g_settings_bind (settings_tmp, "port",
+        g_settings_bind (settings, "port",
                          adjustment, "value",
                          G_SETTINGS_BIND_DEFAULT);
-        g_object_unref (settings_tmp);
+        g_object_unref (settings);
 
         /* bind the SOCKS proxy values */
-        settings_tmp = g_settings_get_child (panel->priv->proxy_settings, "socks");
+        settings = g_settings_get_child (proxy_settings, "socks");
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "entry_proxy_socks"));
-        g_settings_bind (settings_tmp, "host",
+        g_settings_bind (settings, "host",
                          widget, "text",
                          G_SETTINGS_BIND_DEFAULT);
         adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (panel->priv->builder,
                                                              "adjustment_proxy_port_socks"));
-        g_settings_bind (settings_tmp, "port",
+        g_settings_bind (settings, "port",
                          adjustment, "value",
                          G_SETTINGS_BIND_DEFAULT);
-        g_object_unref (settings_tmp);
+        g_object_unref (settings);
+
+        /* add the virtual proxy device */
+        panel_add_proxy_device (panel);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "device_proxy_off_switch"));
+        g_signal_connect (widget, "notify::active",
+                          G_CALLBACK (device_off_toggled), panel);
+}
+
+static void
+device_list_init (CcNetworkPanel *panel)
+{
+        GtkWidget *widget;
+        GtkStyleContext *context;
+        GtkTreeSelection *selection;
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "treeview_devices"));
         panel_add_devices_columns (panel, GTK_TREE_VIEW (widget));
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-        gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
         g_signal_connect (selection, "changed",
                           G_CALLBACK (nm_devices_treeview_clicked_cb), panel);
 
@@ -4012,24 +4016,56 @@ cc_network_panel_init (CcNetworkPanel *panel)
         context = gtk_widget_get_style_context (widget);
         gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
-        /* add the virtual proxy device */
-        panel_add_proxy_device (panel);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "add_toolbutton"));
+        g_signal_connect (widget, "clicked",
+                          G_CALLBACK (add_connection_cb), panel);
 
-        /* setup mobile combobox model */
-        combobox = GTK_COMBO_BOX (gtk_builder_get_object (panel->priv->builder,
-                                                          "combobox_mobilebb_network"));
-        g_signal_connect (combobox, "changed",
-                          G_CALLBACK (mobile_connection_changed_cb),
-                          panel);
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "remove_toolbutton"));
+        g_signal_connect (widget, "clicked",
+                          G_CALLBACK (remove_connection), panel);
+
+}
+
+static void
+mobile_page_init (CcNetworkPanel *panel)
+{
+        GtkComboBox *combo;
+        GtkCellRenderer *renderer;
+        GtkWidget *widget;
+
+        combo = GTK_COMBO_BOX (gtk_builder_get_object (panel->priv->builder,
+                                                       "combobox_mobilebb_network"));
+        g_signal_connect (combo, "changed",
+                          G_CALLBACK (mobile_connection_changed_cb), panel);
+
         renderer = gtk_cell_renderer_text_new ();
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
-                                    renderer,
-                                    FALSE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo), renderer, FALSE);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo), renderer,
                                         "text", PANEL_MOBILEBB_COLUMN_TITLE,
                                         NULL);
 
-        /* sort networks in drop down */
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "device_mobilebb_off_switch"));
+        g_signal_connect (widget, "notify::active",
+                          G_CALLBACK (device_off_toggled), panel);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "button_mobilebb_options"));
+        g_signal_connect_swapped (widget, "clicked",
+                                  G_CALLBACK (edit_connection), panel);
+}
+
+static void
+wireless_page_init (CcNetworkPanel *panel)
+{
+        GtkTreeSortable *sortable;
+        GtkTreeViewColumn *column;
+        GtkCellArea *area;
+        GtkCellRenderer *renderer;
+        GtkWidget *widget;
+
         sortable = GTK_TREE_SORTABLE (gtk_builder_get_object (panel->priv->builder,
                                                               "liststore_wireless_network"));
         gtk_tree_sortable_set_sort_column_id (sortable,
@@ -4041,35 +4077,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
                                          panel,
                                          NULL);
 
-
-        renderer = panel_cell_renderer_mode_new ();
-        gtk_cell_renderer_set_padding (renderer, 4, 0);
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
-                                    renderer,
-                                    FALSE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
-                                        "mode", PANEL_WIRELESS_COLUMN_MODE,
-                                        NULL);
-
-        renderer = panel_cell_renderer_signal_new ();
-        gtk_cell_renderer_set_padding (renderer, 4, 0);
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
-                                    renderer,
-                                    FALSE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
-                                        "signal", PANEL_WIRELESS_COLUMN_STRENGTH,
-                                        NULL);
-
-        renderer = panel_cell_renderer_security_new ();
-        gtk_cell_renderer_set_padding (renderer, 4, 0);
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
-                                    renderer,
-                                    FALSE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
-                                        "security", PANEL_WIRELESS_COLUMN_SECURITY,
-                                        NULL);
-
-        /* set up wireless list */
         column = GTK_TREE_VIEW_COLUMN (gtk_builder_get_object (panel->priv->builder,
                                                                "wireless-list-column"));
         area = gtk_cell_layout_get_area (GTK_CELL_LAYOUT (column));
@@ -4123,7 +4130,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer, FALSE);
         g_object_set (renderer,
                       "follow-state", TRUE,
-                      "mode", GTK_CELL_RENDERER_MODE_ACTIVATABLE,
                       "visible", TRUE,
                       NULL);
         gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (column), renderer,
@@ -4140,19 +4146,34 @@ cc_network_panel_init (CcNetworkPanel *panel)
         g_signal_connect_swapped (widget, "clicked",
                                   G_CALLBACK (start_hotspot), panel);
 
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "device_wireless_off_switch"));
+        g_signal_connect (widget, "notify::active",
+                          G_CALLBACK (device_off_toggled), panel);
+
         /* set up the wireless details page */
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "wireless-back-button"));
         g_signal_connect_swapped (widget, "clicked",
-                                  G_CALLBACK (go_back_to_wireless_list), panel);
+                                  G_CALLBACK (show_wifi_list), panel);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "button_wireless_forget"));
+        g_signal_connect_swapped (widget, "clicked",
+                                  G_CALLBACK (forget_wireless_connection), panel);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "button_wireless_options"));
+        g_signal_connect_swapped (widget, "clicked",
+                                  G_CALLBACK (edit_connection), panel);
 
         /* set up the hidden details page */
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "hidden-back-button"));
         g_signal_connect_swapped (widget, "clicked",
-                                  G_CALLBACK (go_back_to_wireless_list), panel);
+                                  G_CALLBACK (show_wifi_list), panel);
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "combo_hidden_security"));
@@ -4166,6 +4187,70 @@ cc_network_panel_init (CcNetworkPanel *panel)
         g_signal_connect (widget, "notify::active",
                           G_CALLBACK (hotspot_switch_toggled), panel);
 
+}
+
+static void
+wired_page_init (CcNetworkPanel *panel)
+{
+        GtkWidget *widget;
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "device_wired_off_switch"));
+        g_signal_connect (widget, "notify::active",
+                          G_CALLBACK (device_off_toggled), panel);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "button_wired_options"));
+        g_signal_connect_swapped (widget, "clicked",
+                                  G_CALLBACK (edit_connection), panel);
+}
+
+static void
+vpn_page_init (CcNetworkPanel *panel)
+{
+        GtkWidget *widget;
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "device_vpn_off_switch"));
+        g_signal_connect (widget, "notify::active",
+                          G_CALLBACK (device_off_toggled), panel);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "button_vpn_options"));
+        g_signal_connect_swapped (widget, "clicked",
+                                  G_CALLBACK (edit_connection), panel);
+
+}
+
+static void
+cc_network_panel_init (CcNetworkPanel *panel)
+{
+        DBusGConnection *bus = NULL;
+        GError *error = NULL;
+        GtkWidget *toplevel;
+        GtkWidget *widget;
+
+        panel->priv = NETWORK_PANEL_PRIVATE (panel);
+
+        panel->priv->builder = gtk_builder_new ();
+        gtk_builder_add_from_file (panel->priv->builder,
+                                   GNOMECC_UI_DIR "/network.ui",
+                                   &error);
+        if (error != NULL) {
+                g_warning ("Could not load interface file: %s", error->message);
+                g_error_free (error);
+                return;
+        }
+
+        panel->priv->cancellable = g_cancellable_new ();
+
+        device_list_init (panel);
+        proxy_page_init (panel);
+        mobile_page_init (panel);
+        wireless_page_init (panel);
+        wired_page_init (panel);
+        vpn_page_init (panel);
+
         /* use NetworkManager client */
         panel->priv->client = nm_client_new ();
         g_signal_connect (panel->priv->client, "notify::" NM_CLIENT_MANAGER_RUNNING,
@@ -4176,71 +4261,12 @@ cc_network_panel_init (CcNetworkPanel *panel)
                           G_CALLBACK (device_added_cb), panel);
         g_signal_connect (panel->priv->client, "device-removed",
                           G_CALLBACK (device_removed_cb), panel);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "device_wired_off_switch"));
-        g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (device_off_toggled), panel);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "device_wireless_off_switch"));
-        g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (device_off_toggled), panel);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "device_mobilebb_off_switch"));
-        g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (device_off_toggled), panel);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "device_vpn_off_switch"));
-        g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (device_off_toggled), panel);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "device_proxy_off_switch"));
-        g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (device_off_toggled), panel);
-
         g_signal_connect (panel->priv->client, "notify::wireless-enabled",
                           G_CALLBACK (wireless_enabled_toggled), panel);
         g_signal_connect (panel->priv->client, "notify::wimax-enabled",
                           G_CALLBACK (wimax_enabled_toggled), panel);
         g_signal_connect (panel->priv->client, "notify::wwan-enabled",
                           G_CALLBACK (mobilebb_enabled_toggled), panel);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "button_wired_options"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (edit_connection), panel);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "button_wireless_options"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (edit_connection), panel);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "button_mobilebb_options"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (edit_connection), panel);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "button_vpn_options"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (edit_connection), panel);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "add_toolbutton"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (add_connection_cb), panel);
-
-        /* disable for now, until we actually show removable connections */
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "remove_toolbutton"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (remove_connection), panel);
-
-        /* setup wireless button */
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "button_wireless_button"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (wireless_button_clicked_cb), panel);
 
         /* add remote settings such as VPN settings as virtual devices */
         bus = dbus_g_bus_get (DBUS_BUS_SYSTEM, &error);
@@ -4258,15 +4284,11 @@ cc_network_panel_init (CcNetworkPanel *panel)
         toplevel = gtk_widget_get_toplevel (GTK_WIDGET (panel));
         g_signal_connect_after (toplevel, "map", G_CALLBACK (on_toplevel_map), panel);
 
-        /* hide implementation details */
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "notebook_types"));
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "vbox1"));
-        gtk_widget_reparent (widget, (GtkWidget *) panel);
-
         /* add kill switch widgets when dialog activated */
         panel->priv->add_header_widgets_idle = g_idle_add (network_add_shell_header_widgets_cb, panel);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,                                                           "network-panel-contents"));
+        gtk_widget_reparent (widget, (GtkWidget *) panel);
 }
 
 void
