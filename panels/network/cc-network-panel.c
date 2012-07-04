@@ -84,8 +84,7 @@ struct _CcNetworkPanelPrivate
         GtkWidget        *kill_switch_header;
 
         /* for wifi details page */
-        gchar            *current_ssid;
-        gchar            *current_object_path;
+        gchar            *ssid;
 
         /* wireless dialog stuff */
         CmdlineOperation  arg_operation;
@@ -235,8 +234,7 @@ cc_network_panel_finalize (GObject *object)
         g_free (priv->arg_device);
         g_free (priv->arg_access_point);
 
-        g_free (priv->current_object_path);
-        g_free (priv->current_ssid);
+        g_free (priv->ssid);
 
         G_OBJECT_CLASS (cc_network_panel_parent_class)->finalize (object);
 }
@@ -1858,100 +1856,72 @@ device_refresh_ethernet_ui (CcNetworkPanel *panel, NetDevice *device)
 static void show_hotspot_details (CcNetworkPanel *panel);
 
 static void
-device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
+refresh_hotspot_ui (CcNetworkPanel *panel, NMDevice *nm_device)
 {
-        GtkWidget *widget;
-        GtkWidget *sw;
-        const GPtrArray *aps;
-        GPtrArray *aps_unique = NULL;
-        NMDeviceState state;
-        NMAccessPoint *ap;
-        NMAccessPoint *active_ap;
-        const char *str;
-        gchar *str_tmp;
-        GtkListStore *liststore_wireless_network;
-        guint i;
-        NMDevice *nm_device;
-        NMClientPermissionResult perm;
-        gboolean is_hotspot;
         gchar *hotspot_ssid;
         gchar *hotspot_secret;
         gchar *hotspot_security;
-        gboolean can_start_hotspot;
-        GtkTreeIter iter;
-        gint strength;
+        const GByteArray *ssid;
 
-        nm_device = net_device_get_nm_device (device);
-        state = nm_device_get_state (nm_device);
-
-        refresh_header_ui (panel, nm_device, "wireless");
-
-        /* sort out hotspot ui */
-        is_hotspot = device_is_hotspot (panel, nm_device);
         hotspot_ssid = NULL;
         hotspot_secret = NULL;
         hotspot_security = NULL;
-        if (is_hotspot) {
-                const GByteArray *ssid;
-                ssid = device_get_hotspot_ssid (panel, nm_device);
-                if (ssid) {
-                        hotspot_ssid = nm_utils_ssid_to_utf8 (ssid);
-                }
-                device_get_hotspot_security_details (panel, nm_device, &hotspot_secret, &hotspot_security);
-        }
 
-        sw = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                 "device_wireless_off_switch"));
+        ssid = device_get_hotspot_ssid (panel, nm_device);
+        if (ssid)
+                hotspot_ssid = nm_utils_ssid_to_utf8 (ssid);
+        device_get_hotspot_security_details (panel, nm_device, &hotspot_secret, &hotspot_security);
+
+        panel_set_widget_data (panel, "hotspot", "name", hotspot_ssid);
+        panel_set_widget_data (panel, "hotspot", "connected", _("unknown"));
+        panel_set_widget_data (panel, "hotspot", "security", hotspot_security);
+
+        g_free (hotspot_ssid);
+        g_free (hotspot_secret);
+        g_free (hotspot_security);
+}
+
+static void
+refresh_wifi_list (CcNetworkPanel *panel, NMDevice *nm_device)
+{
+        GtkListStore *store;
+        gchar *str_tmp;
+        const GPtrArray *aps;
+        GPtrArray *aps_unique = NULL;
+        NMAccessPoint *ap;
+        NMAccessPoint *active_ap;
+        NMClientPermissionResult perm;
+        gboolean can_start_hotspot;
+        GtkWidget *widget;
+        GtkTreeIter iter;
+        gint i;
+        NMDeviceState state;
+
+        state = nm_device_get_state (nm_device);
+
+        /* update the device off switch */
+        wireless_enabled_toggled (panel->priv->client, NULL, panel);
+
+        /* update the hotspot button */
         perm = nm_client_get_permission_result (panel->priv->client, NM_CLIENT_PERMISSION_WIFI_SHARE_OPEN);
-        can_start_hotspot = gtk_switch_get_active (GTK_SWITCH (sw)) &&
+        can_start_hotspot = state != NM_DEVICE_STATE_UNAVAILABLE &&
                             (perm == NM_CLIENT_PERMISSION_RESULT_YES ||
                              perm == NM_CLIENT_PERMISSION_RESULT_AUTH);
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "start-hotspot-button"));
         gtk_widget_set_sensitive (widget, can_start_hotspot);
 
-        g_free (hotspot_ssid);
-        g_free (hotspot_secret);
-
-        /* device MAC */
-        str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (nm_device));
-        panel_set_widget_data (panel, "wireless", "mac", str);
-        /* security */
-        active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (nm_device));
-        if (state == NM_DEVICE_STATE_UNAVAILABLE)
-                str_tmp = NULL;
-        else if (is_hotspot)
-                str_tmp = hotspot_security;
-        else if (active_ap != NULL)
-                str_tmp = get_ap_security_string (active_ap);
-        else
-                str_tmp = g_strdup ("");
-        panel_set_widget_data (panel, "wireless", "security", str_tmp);
-        g_free (str_tmp);
-
-        if (active_ap)
-                strength = nm_access_point_get_strength (active_ap);
-        else
-                strength = 0;
-        if (strength < 20)
-                str = C_("Signal strength", "None");
-        else if (strength < 40)
-                str = C_("Signal strength", "Weak");
-        else if (strength < 50)
-                str = C_("Signal strength", "Ok");
-        else if (strength < 80)
-                str = C_("Signal strength", "Good");
-        else
-                str = C_("Signal strength", "Excellent");
-        panel_set_widget_data (panel, "wireless", "strength", str);
-
-        /* populate wireless network list */
-        liststore_wireless_network = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
-                                                                             "liststore_wireless_network"));
+        /* repopulate the wifi list */
         panel->priv->updating_device = TRUE;
-        gtk_list_store_clear (liststore_wireless_network);
+
+        store = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
+                                                        "liststore_wireless_network"));
+        gtk_list_store_clear (store);
+
+        if (state == NM_DEVICE_STATE_UNAVAILABLE)
+                goto out;
 
         str_tmp = g_strdup_printf ("<b>%s</b>", _("Connect to a Hidden Network"));
-        gtk_list_store_insert_with_values (liststore_wireless_network,
+        gtk_list_store_insert_with_values (store,
                                            &iter,
                                            -1,
                                            PANEL_WIRELESS_COLUMN_ID, "",
@@ -1964,6 +1934,7 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
                                            -1);
         g_free (str_tmp);
 
+        active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (nm_device));
         aps = nm_device_wifi_get_access_points (NM_DEVICE_WIFI (nm_device));
         aps_unique = panel_get_strongest_unique_aps (aps);
 
@@ -1972,32 +1943,116 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
                 add_access_point (panel, ap, active_ap, nm_device);
         }
 
-        panel->priv->updating_device = FALSE;
-
         g_ptr_array_unref (aps_unique);
 
+out:
+        panel->priv->updating_device = FALSE;
+}
+
+static void
+refresh_wifi_details (CcNetworkPanel *panel, NMDevice *nm_device)
+{
+        GtkWidget *widget;
+        const char *str;
+        gchar *str_tmp;
+        gint strength;
+        NMDeviceState state;
+        gboolean is_active;
+        NMAccessPoint *active_ap;
+        const GByteArray *ssid;
+        const gchar *ssid_tmp;
+        gint speed;
+
+        is_active = FALSE;
+        state = nm_device_get_state (nm_device);
+        active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (nm_device));
         if (active_ap) {
-                const GByteArray *ssid;
-                const gchar *ssid_text;
-
                 ssid = nm_access_point_get_ssid (active_ap);
-                if (ssid)
-                        ssid_text = nm_utils_escape_ssid (ssid->data, ssid->len);
-                else
-                        ssid_text = "";
-
-                widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "wireless-network-name-label"));
-
-                gtk_label_set_text (GTK_LABEL (widget), ssid_text);
+                if (ssid) {
+                        ssid_tmp = nm_utils_escape_ssid (ssid->data, ssid->len);
+                        if (g_strcmp0 (panel->priv->ssid, ssid_tmp) == 0)
+                               is_active = TRUE;
+                }
         }
 
-        /* setup wireless button */
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "button_wireless_forget"));
-        gtk_widget_set_visible (widget, active_ap != NULL);
+        if (state == NM_DEVICE_STATE_UNAVAILABLE)
+                is_active = FALSE;
 
-        if (is_hotspot)
+        str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (nm_device));
+        panel_set_widget_data (panel, "wireless", "mac", is_active ? str : NULL);
+
+        if (is_active)
+                speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (nm_device)) / 1000;
+        else
+                speed = 0;
+
+        /* Translators: network device speed */
+        str_tmp = g_strdup_printf (_("%d Mb/s"), speed);
+        panel_set_widget_data (panel, "wireless", "speed", speed > 0 ? str_tmp: NULL);
+        g_free (str_tmp);
+
+        /* security */
+        if (is_active)
+                str_tmp = get_ap_security_string (active_ap);
+        else
+                str_tmp = NULL;
+        panel_set_widget_data (panel, "wireless", "security", str_tmp);
+        g_free (str_tmp);
+
+        if (is_active)
+                strength = nm_access_point_get_strength (active_ap);
+        else
+                strength = -1;
+        if (strength < 0)
+                str = NULL;
+        if (strength < 20)
+                str = C_("Signal strength", "None");
+        else if (strength < 40)
+                str = C_("Signal strength", "Weak");
+        else if (strength < 50)
+                str = C_("Signal strength", "Ok");
+        else if (strength < 80)
+                str = C_("Signal strength", "Good");
+        else
+                str = C_("Signal strength", "Excellent");
+        panel_set_widget_data (panel, "wireless", "strength", str);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "wireless-network-name-label"));
+
+        gtk_label_set_text (GTK_LABEL (widget), panel->priv->ssid);
+
+          widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "label_wireless_status"));
+        if (is_active) {
+                gtk_label_set_label (GTK_LABEL (widget), panel_device_state_to_localized_string (nm_device));
+                gtk_widget_set_tooltip_text (widget, panel_device_state_reason_to_localized_string (nm_device));
+        }
+        else {
+                gtk_label_set_label (GTK_LABEL (widget), _("Disconnected"));
+                gtk_widget_set_tooltip_text (widget, NULL);
+        }
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "wireless-disconnect-button"));
+
+        gtk_widget_set_sensitive (widget, state == NM_DEVICE_STATE_ACTIVATED);
+}
+
+static void
+device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
+{
+        NMDevice *nm_device;
+
+        nm_device = net_device_get_nm_device (device);
+        if (device_is_hotspot (panel, nm_device)) {
+                refresh_hotspot_ui (panel, nm_device);
                 show_hotspot_details (panel);
+                return;
+        }
+
+        refresh_wifi_list (panel, nm_device);
+        refresh_wifi_details (panel, nm_device);
 }
 
 static void
@@ -3648,8 +3703,7 @@ show_wifi_list (CcNetworkPanel *panel)
 {
         GtkWidget *nb;
 
-        g_clear_pointer (&panel->priv->current_object_path, g_free);
-        g_clear_pointer (panel->priv->current_ssid, g_free);
+        g_clear_pointer (&panel->priv->ssid, g_free);
 
         nb = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "wireless-notebook"));
         gtk_notebook_set_current_page (GTK_NOTEBOOK (nb), 0);
@@ -3663,19 +3717,21 @@ show_wifi_details (CcNetworkPanel *panel,
         GtkWidget *nb;
         GtkTreeModel *model;
         GtkTreeIter iter;
-        gchar *ssid;
-        gchar *object_path;
+        NetObject *object;
+        NMDevice *nm_device;
 
-        g_free (panel->priv->current_object_path);
-        g_free (panel->priv->current_ssid);
+        g_free (panel->priv->ssid);
 
         model = gtk_tree_view_get_model (tv);
         gtk_tree_model_get_iter (model, &iter, path);
 
         gtk_tree_model_get (model, &iter,
-                            PANEL_WIRELESS_COLUMN_ID, &panel->priv->object_path,
                             PANEL_WIRELESS_COLUMN_TITLE, &panel->priv->ssid,
                             -1);
+
+        object = get_selected_object (panel);
+        nm_device = net_device_get_nm_device (NET_DEVICE (object));
+        refresh_wifi_details (panel, nm_device);
 
         nb = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "wireless-notebook"));
         gtk_notebook_set_current_page (GTK_NOTEBOOK (nb), 1);
