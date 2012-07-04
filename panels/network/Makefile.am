@@ -28,8 +28,6 @@ libnetwork_la_SOURCES =					\
 	panel-cell-renderer-security.h			\
 	panel-cell-renderer-signal.c			\
 	panel-cell-renderer-signal.h			\
-	panel-cell-renderer-arrow.c			\
-	panel-cell-renderer-arrow.h			\
 	network-dialogs.c				\
 	network-dialogs.h				\
 	cc-network-panel.c				\
