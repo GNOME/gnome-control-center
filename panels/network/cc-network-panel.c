@@ -1799,13 +1799,15 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
         } else {
                 str = g_string_new (panel_device_state_to_localized_string (device));
         }
-        if (speed  > 0) {
-                g_string_append (str, " - ");
-                /* Translators: network device speed */
-                g_string_append_printf (str, _("%d Mb/s"), speed);
-        }
         gtk_label_set_label (GTK_LABEL (widget), str->str);
         gtk_widget_set_tooltip_text (widget, panel_device_state_reason_to_localized_string (device));
+
+        if (speed > 0) {
+                g_string_set_size (str, 0);
+                /* Translators: network device speed */
+                g_string_append_printf (str, _("%d Mb/s"), speed);
+                panel_set_widget_data (panel, page_name, "speed", str->str);
+        }
 
         /* The options button is always enabled for wired connections,
          * and is sensitive for other connection types if the device
@@ -1839,10 +1841,7 @@ device_refresh_ethernet_ui (CcNetworkPanel *panel, NetDevice *device)
 
         /* device MAC */
         str = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (nm_device));
-        panel_set_widget_data (panel,
-                               "wired",
-                               "mac",
-                               str);
+        panel_set_widget_data (panel, "wired", "mac", str);
 
 }
 
@@ -1895,18 +1894,12 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
                             (perm == NM_CLIENT_PERMISSION_RESULT_YES ||
                              perm == NM_CLIENT_PERMISSION_RESULT_AUTH);
 
-        panel_set_widget_data (panel, "hotspot", "network_name", hotspot_ssid);
         g_free (hotspot_ssid);
-
-        panel_set_widget_data (panel, "hotspot", "security_key", hotspot_secret);
         g_free (hotspot_secret);
 
         /* device MAC */
         str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (nm_device));
-        panel_set_widget_data (panel,
-                               "wireless",
-                               "mac",
-                               str);
+        panel_set_widget_data (panel, "wireless", "mac", str);
         /* security */
         active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (nm_device));
         if (state == NM_DEVICE_STATE_UNAVAILABLE)
@@ -1917,10 +1910,7 @@ device_refresh_wifi_ui (CcNetworkPanel *panel, NetDevice *device)
                 str_tmp = get_ap_security_string (active_ap);
         else
                 str_tmp = g_strdup ("");
-        panel_set_widget_data (panel,
-                               "wireless",
-                               "security",
-                               str_tmp);
+        panel_set_widget_data (panel, "wireless", "security", str_tmp);
         g_free (str_tmp);
 
         /* populate wireless network list */
