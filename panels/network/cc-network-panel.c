@@ -2002,10 +2002,10 @@ refresh_wifi_details (CcNetworkPanel *panel, NMDevice *nm_device)
         if (is_active)
                 strength = nm_access_point_get_strength (active_ap);
         else
-                strength = -1;
-        if (strength < 0)
+                strength = 0;
+        if (strength <= 0)
                 str = NULL;
-        if (strength < 20)
+        else if (strength < 20)
                 str = C_("Signal strength", "None");
         else if (strength < 40)
                 str = C_("Signal strength", "Weak");
@@ -2975,35 +2975,21 @@ out:
 static void
 forget_wireless_connection (CcNetworkPanel *panel)
 {
-        gboolean ret;
         gchar *ssid_pretty = NULL;
-        gchar *ssid_target = NULL;
         gchar *warning = NULL;
-        GtkComboBox *combobox;
-        GtkTreeIter iter;
-        GtkTreeModel *model;
         GtkWidget *dialog;
         GtkWidget *window;
 
         /* FIXME: find the currently shown network, and forget it
-         * The code below is not right, since it always forgets the
-         * currently active ap, also it uses the wireless combo to
-         * do so
+         * The code below is not right, since it only works if we
+         * are looking at the currently active ap
          */
-        combobox = GTK_COMBO_BOX (gtk_builder_get_object (panel->priv->builder,
-                                                          "combobox_wireless_network_name"));
-        ret = gtk_combo_box_get_active_iter (combobox, &iter);
-        if (!ret)
+        if (!panel->priv->ssid)
                 goto out;
 
-        /* get entry */
-        model = gtk_combo_box_get_model (GTK_COMBO_BOX (combobox));
-        gtk_tree_model_get (model, &iter,
-                            PANEL_WIRELESS_COLUMN_TITLE, &ssid_target,
-                            -1);
+        ssid_pretty = g_strdup_printf ("<b>%s</b>", panel->priv->ssid);
+        warning = g_strdup_printf (_("Network details for %s including the password and any custom configuration will be lost"), ssid_pretty);
 
-        ssid_pretty = g_strdup_printf ("<b>%s</b>", ssid_target);
-        warning = g_strdup_printf (_("Network details for %s including password and any custom configuration will be lost"), ssid_pretty);
         window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
         dialog = gtk_message_dialog_new (GTK_WINDOW (window),
                                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -3013,15 +2999,32 @@ forget_wireless_connection (CcNetworkPanel *panel)
         gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog), warning);
         gtk_dialog_add_buttons (GTK_DIALOG (dialog),
                                 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                _("Forget"), GTK_RESPONSE_OK,
+                                _("_Forget"), GTK_RESPONSE_OK,
                                 NULL);
         g_signal_connect (dialog, "response",
                           G_CALLBACK (forget_network_response_cb), panel);
         gtk_window_present (GTK_WINDOW (dialog));
+
 out:
-        g_free (ssid_target);
         g_free (ssid_pretty);
         g_free (warning);
+}
+
+static void
+disconnect_wireless_connection (CcNetworkPanel *panel)
+{
+        NetObject *object;
+        NMDevice *device;
+
+        object = get_selected_object (panel);
+        if (object == NULL)
+                return;
+
+        device = net_device_get_nm_device (NET_DEVICE (object));
+        if (device == NULL)
+                return;
+
+        nm_device_disconnect (device, NULL, NULL);
 }
 
 static void
@@ -3590,8 +3593,13 @@ start_hotspot (CcNetworkPanel *panel)
         str = g_string_new (_("If you have a connection to the Internet other than wireless, you can use it to share your internet connection with others."));
         g_string_append (str, "\n\n");
 
-        if (active_ssid)
-                g_string_append_printf (str, _("Switching on the wireless hotspot will disconnect you from <b>%s</b>."), active_ssid);
+        if (active_ssid) {
+                gchar *ssid_pretty;
+
+                ssid_pretty = g_strdup_printf ("<b>%s</b>", active_ssid);
+                g_string_append_printf (str, _("Switching on the wireless hotspot will disconnect you from %s."), ssid_pretty);
+                g_free (ssid_pretty);
+        }
 
         g_string_append (str, _("It is not possible to access the internet through your wireless while the hotspot is active."));
 
@@ -4213,6 +4221,11 @@ wireless_page_init (CcNetworkPanel *panel)
                                                      "wireless-back-button"));
         g_signal_connect_swapped (widget, "clicked",
                                   G_CALLBACK (show_wifi_list), panel);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                     "wireless-disconnect-button"));
+        g_signal_connect_swapped (widget, "clicked",
+                                  G_CALLBACK (disconnect_wireless_connection), panel);
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "button_wireless_forget"));
