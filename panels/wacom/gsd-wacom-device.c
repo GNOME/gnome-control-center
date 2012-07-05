@@ -912,7 +912,8 @@ gsd_wacom_device_get_display_rotation (GsdWacomDevice *device)
 	rr_output = find_output (rr_screen, device);
 	if (rr_output) {
 		GnomeRRCrtc *crtc = gnome_rr_output_get_crtc (rr_output);
-		rotation = gnome_rr_crtc_get_current_rotation (crtc);
+		if (crtc)
+			rotation = gnome_rr_crtc_get_current_rotation (crtc);
 	}
 	g_object_unref (rr_screen);
 
