@@ -71,12 +71,10 @@ panel_cell_renderer_set_name (PanelCellRendererSecurity *renderer)
         if (icon_name != NULL) {
                 g_object_set (renderer,
                               "icon-name", icon_name,
-                              "visible", TRUE,
                               NULL);
         } else {
                 g_object_set (renderer,
-                              "icon-name", NULL,
-                              "visible", FALSE,
+                              "icon-name", "",
                               NULL);
         }
 }
