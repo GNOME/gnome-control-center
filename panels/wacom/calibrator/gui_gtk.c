@@ -36,6 +36,10 @@
 struct CalibArea
 {
     struct Calib calibrator;
+    XYinfo       axis;
+    gboolean     swap;
+    gboolean     success;
+
     double X[4], Y[4];
     int display_width, display_height;
     int time_elapsed;
@@ -45,6 +49,7 @@ struct CalibArea
     guint anim_id;
 
     GtkWidget *window;
+    GdkPixbuf *icon_success;
 
     FinishCallback callback;
     gpointer       user_data;
@@ -57,6 +62,7 @@ struct CalibArea
 /* Timeout parameters */
 #define TIME_STEP		100   /* in milliseconds */
 #define MAX_TIME		15000 /* 5000 = 5 sec */
+#define END_TIME		750   /*  750 = 0.75 sec */
 
 /* Clock appereance */
 #define CROSS_LINES		47
@@ -69,6 +75,9 @@ struct CalibArea
 /* Text printed on screen */
 #define HELP_TEXT_TITLE N_("Screen Calibration")
 #define HELP_TEXT_MAIN  N_("Please tap the target markers as they appear on screen to calibrate the tablet.")
+
+#define ICON_SUCCESS	"emblem-ok-symbolic"
+#define ICON_SIZE	300
 
 static void
 set_display_size(CalibArea *calib_area,
@@ -115,6 +124,27 @@ resize_display(CalibArea *calib_area)
 }
 
 static void
+draw_success_icon (CalibArea *area, cairo_t *cr)
+{
+    GtkWidget *widget;
+    GtkStyleContext *context;
+    gint icon_width, icon_height;
+    gdouble x;
+    gdouble y;
+
+    widget = GTK_WIDGET (area->window);
+    context = gtk_widget_get_style_context (widget);
+
+    icon_width = gdk_pixbuf_get_width (area->icon_success);
+    icon_height = gdk_pixbuf_get_height (area->icon_success);
+
+    x = (area->display_width - icon_width) / 2;
+    y = (area->display_height - icon_height) / 2;
+
+    gtk_render_icon (context, cr, area->icon_success, x, y);
+}
+
+static void
 draw(GtkWidget *widget, cairo_t *cr, gpointer data)
 {
     CalibArea *calib_area = (CalibArea*)data;
@@ -134,6 +164,12 @@ draw(GtkWidget *widget, cairo_t *cr, gpointer data)
     cairo_set_operator (cr, CAIRO_OPERATOR_CLEAR);
     cairo_paint (cr);
     cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
+
+    /* If calibration is successful, just draw the tick */
+    if (calib_area->icon_success) {
+        draw_success_icon (calib_area, cr);
+        return;
+    }
 
     /* Print the help lines */
     layout = pango_layout_new (gtk_widget_get_pango_context (widget));
@@ -257,11 +293,61 @@ on_delete_event (GtkWidget *widget,
 }
 
 static gboolean
+draw_success_end_wait_callback (CalibArea *area)
+{
+    on_delete_event (NULL, NULL, area);
+
+    return FALSE;
+}
+
+static void
+set_calibration_status (CalibArea *area)
+{
+	GtkIconTheme *icon_theme;
+	GtkIconInfo  *icon_info;
+	GdkRGBA       white;
+
+	icon_theme = gtk_icon_theme_get_default ();
+	icon_info = gtk_icon_theme_lookup_icon (icon_theme,
+						ICON_SUCCESS,
+						ICON_SIZE,
+						GTK_ICON_LOOKUP_USE_BUILTIN);
+	if (icon_info == NULL) {
+		g_warning ("Failed to find icon \"%s\"", ICON_SUCCESS);
+		goto out;
+	}
+
+	gdk_rgba_parse (&white, "White");
+	area->icon_success = gtk_icon_info_load_symbolic (icon_info,
+							  &white,
+							  NULL,
+							  NULL,
+							  NULL,
+							  NULL,
+							  NULL);
+	gtk_icon_info_free (icon_info);
+	if (!area->icon_success)
+		g_warning ("Failed to load icon \"%s\"", ICON_SUCCESS);
+
+out:
+	area->success = finish (&area->calibrator, &area->axis, &area->swap);
+	if (area->success && area->icon_success) {
+		redraw(area);
+		g_timeout_add(END_TIME, (GSourceFunc) draw_success_end_wait_callback, area);
+	} else {
+		on_delete_event (NULL, NULL, area);
+	}
+}
+
+static gboolean
 on_button_press_event(GtkWidget      *widget,
                       GdkEventButton *event,
                       CalibArea      *area)
 {
     gboolean success;
+
+    if (area->success)
+        return FALSE;
 
     /* Handle click */
     area->time_elapsed = 0;
@@ -275,7 +361,7 @@ on_button_press_event(GtkWidget      *widget,
     /* Are we done yet? */
     if (area->calibrator.num_clicks >= 4)
     {
-        on_delete_event (widget, NULL, area);
+        set_calibration_status (area);
         return FALSE;
     }
 
@@ -290,6 +376,8 @@ on_key_release_event(GtkWidget   *widget,
                      GdkEventKey *event,
                      CalibArea   *area)
 {
+    if (area->success)
+        return FALSE;
     if (event->type != GDK_KEY_RELEASE)
         return FALSE;
     if (event->keyval != GDK_KEY_Escape)
@@ -305,6 +393,9 @@ on_focus_out_event (GtkWidget *widget,
 		    GdkEvent  *event,
 		    CalibArea *area)
 {
+    if (area->success)
+        return FALSE;
+
     /* If the calibrator window looses focus, simply bail out... */
     on_delete_event (widget, NULL, area);
 
@@ -319,7 +410,7 @@ on_timer_signal(CalibArea *area)
     area->time_elapsed += TIME_STEP;
     if (area->time_elapsed > MAX_TIME)
     {
-        on_delete_event (NULL, NULL, area);
+        set_calibration_status (area);
         return FALSE;
     }
 
@@ -440,13 +531,12 @@ calib_area_finish (CalibArea *area,
 		   XYinfo    *new_axis,
 		   gboolean  *swap_xy)
 {
-	gboolean success;
-
 	g_return_val_if_fail (area != NULL, FALSE);
 
-	success = finish (&area->calibrator, new_axis, swap_xy);
+	*new_axis = area->axis;
+	*swap_xy  = area->swap;
 
-	if (success)
+	if (area->success)
 		g_debug ("Final calibration: %d, %d, %d, %d\n",
 			 new_axis->x_min,
 			 new_axis->y_min,
@@ -455,7 +545,7 @@ calib_area_finish (CalibArea *area,
 	else
 		g_debug ("Calibration was aborted or timed out");
 
-	return success;
+	return area->success;
 }
 
 void
@@ -467,6 +557,10 @@ calib_area_free (CalibArea *area)
 		g_source_remove (area->anim_id);
 		area->anim_id = 0;
 	}
+
+	if (area->icon_success)
+		g_object_unref (area->icon_success);
+
 	gtk_widget_destroy (area->window);
 	g_free (area);
 }
