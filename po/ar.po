@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-21 21:31+0200\n"
-"PO-Revision-Date: 2012-06-21 21:31+0200\n"
+"POT-Creation-Date: 2012-07-05 16:51+0200\n"
+"PO-Revision-Date: 2012-07-05 16:51+0200\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "Language: ar\n"
@@ -1480,7 +1480,7 @@ msgstr "<إجراء غير معروف>"
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/keyboard-shortcuts.c:1025
-#: ../panels/sound/gvc-mixer-control.c:1087
+#: ../panels/sound/gvc-mixer-control.c:1127
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Disabled"
@@ -1656,7 +1656,7 @@ msgid "Touchpad"
 msgstr "لوحة اللمس"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/cc-network-panel.c:299
+#: ../panels/network/cc-network-panel.c:293
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgstr "يستخدم الاكتشاف التلقائي للوسيط في حال لم يُعطَ مسار للإعداد."
@@ -1665,138 +1665,143 @@ msgstr "يستخدم الاكتشاف التلقائي للوسيط في حال 
 #. * network, then anyone else on that network can tell your
 #. * machine that it should proxy all of your web traffic
 #. * through them.
-#: ../panels/network/cc-network-panel.c:307
+#: ../panels/network/cc-network-panel.c:301
 msgid "This is not recommended for untrusted public networks."
 msgstr "لا يُنصَح بهذا مع الشبكات العامة غير الموثوقة."
 
 #. TRANSLATORS: this is when the access point is not listed
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
-#: ../panels/network/cc-network-panel.c:1028
+#: ../panels/network/cc-network-panel.c:1020
 msgctxt "Wireless access point"
 msgid "Other..."
 msgstr "أخرى..."
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:1192
-#: ../panels/network/cc-network-panel.c:1737
+#: ../panels/network/cc-network-panel.c:1184
+#: ../panels/network/cc-network-panel.c:1729
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1196
-#: ../panels/network/cc-network-panel.c:1741
+#: ../panels/network/cc-network-panel.c:1188
+#: ../panels/network/cc-network-panel.c:1733
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1200
+#: ../panels/network/cc-network-panel.c:1192
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:1205
+#: ../panels/network/cc-network-panel.c:1197
 msgid "Enterprise"
 msgstr "شركات"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:1211
-#: ../panels/network/cc-network-panel.c:1732
+#: ../panels/network/cc-network-panel.c:1203
+#: ../panels/network/cc-network-panel.c:1724
 #: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:324
 #: ../panels/wacom/cc-wacom-page.c:341
 msgid "None"
 msgstr "لا شيء"
 
-#: ../panels/network/cc-network-panel.c:1837
+#: ../panels/network/cc-network-panel.c:1829
 msgid "Hotspot"
 msgstr "نقطة اتصال"
 
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1844
+#: ../panels/network/cc-network-panel.c:1836
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d م.بايت\\ث"
 
-#: ../panels/network/cc-network-panel.c:2201 ../panels/network/network.ui.h:11
+#: ../panels/network/cc-network-panel.c:2059
+msgid "Add new connection"
+msgstr "أضف اتصالًا جديدا"
+
+#: ../panels/network/cc-network-panel.c:2252 ../panels/network/network.ui.h:11
 msgid "IPv4 Address"
 msgstr "عنوان IPv4"
 
-#: ../panels/network/cc-network-panel.c:2202 ../panels/network/network.ui.h:12
+#: ../panels/network/cc-network-panel.c:2253 ../panels/network/network.ui.h:12
 msgid "IPv6 Address"
 msgstr "عنوان IPv6"
 
-#: ../panels/network/cc-network-panel.c:2205
-#: ../panels/network/cc-network-panel.c:2208 ../panels/network/network.ui.h:27
+#: ../panels/network/cc-network-panel.c:2256
+#: ../panels/network/cc-network-panel.c:2259 ../panels/network/network.ui.h:27
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "عنوان IP"
 
-#: ../panels/network/cc-network-panel.c:2255
-#: ../panels/network/cc-network-panel.c:2630
+#: ../panels/network/cc-network-panel.c:2306
+#: ../panels/network/cc-network-panel.c:2681
 #, c-format
 msgid "%s VPN"
 msgstr "ش‌خ‌ف %s"
 
-#: ../panels/network/cc-network-panel.c:2363
+#: ../panels/network/cc-network-panel.c:2414
 msgid "Proxy"
 msgstr "الوسيط"
 
-#: ../panels/network/cc-network-panel.c:2437
+#: ../panels/network/cc-network-panel.c:2488
 msgid "Network proxy"
 msgstr "وسيط الشبكة"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2697
+#: ../panels/network/cc-network-panel.c:2748
 msgid "The system network services are not compatible with this version."
 msgstr "لا تتوافق خدمات الشبكة في النظام مع هذه الإصدارة."
 
-#: ../panels/network/cc-network-panel.c:2899
+#: ../panels/network/cc-network-panel.c:2950
 #, c-format
 msgid ""
 "Network details for %s including password and any custom configuration will "
 "be lost"
 msgstr "ستُفقد تفاصيل الشبكة لـ %s بما في ذلك كلمة السر وأي إعدادات مُخصصة"
 
-#: ../panels/network/cc-network-panel.c:2909
+#: ../panels/network/cc-network-panel.c:2960
 msgid "Forget"
 msgstr "انس"
 
-#: ../panels/network/cc-network-panel.c:3408
+#: ../panels/network/cc-network-panel.c:3534
 msgid "Not connected to the internet."
 msgstr "غير متّصِل بالإنترنت."
 
-#: ../panels/network/cc-network-panel.c:3409
+#: ../panels/network/cc-network-panel.c:3535
 msgid "Create the hotspot anyway?"
 msgstr "إنشاء نقطة اتصال على أي حال؟"
 
-#: ../panels/network/cc-network-panel.c:3427
+#: ../panels/network/cc-network-panel.c:3553
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
 msgstr "قطع الاتصال بـ %s وأنشئ نقطة اتصال جديدة؟"
 
-#: ../panels/network/cc-network-panel.c:3430
+#: ../panels/network/cc-network-panel.c:3556
 msgid "This is your only connection to the internet."
 msgstr "هذا اتصالك الوحيد بالإنترنت."
 
-#: ../panels/network/cc-network-panel.c:3448
+#: ../panels/network/cc-network-panel.c:3574
 msgid "Create _Hotspot"
 msgstr "أنشئ _نقطة اتصال"
 
-#: ../panels/network/cc-network-panel.c:3508
+#: ../panels/network/cc-network-panel.c:3634
 msgid "Stop hotspot and disconnect any users?"
 msgstr "إيقاف نقطة الاتصال وقطع الاتصال عن أي مستخدمين؟"
 
-#: ../panels/network/cc-network-panel.c:3511
+#: ../panels/network/cc-network-panel.c:3637
 msgid "_Stop Hotspot"
 msgstr "أو_قف نقطة الاتصال"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:3530
+#: ../panels/network/cc-network-panel.c:3656
 msgid "Air_plane Mode"
 msgstr "وضع ال_طائرة"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+#: ../panels/network/network.ui.h:28
 msgid "Network"
 msgstr "الشبكة"
 
@@ -1904,71 +1909,71 @@ msgstr "IMEI"
 msgid "Provider"
 msgstr "مقدم الخدمة"
 
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network.ui.h:29
 msgid "VPN Type"
 msgstr "نوع VPN"
 
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network.ui.h:30
 msgid "Gateway"
 msgstr "البوّابة"
 
-#: ../panels/network/network.ui.h:30
+#: ../panels/network/network.ui.h:31
 msgid "Group Name"
 msgstr "اسم المجموعة"
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network.ui.h:32
 msgid "Group Password"
 msgstr "كلمة سر المجموعة"
 
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network.ui.h:33
 msgid "Username"
 msgstr "اسم المستخدم"
 
-#: ../panels/network/network.ui.h:33
+#: ../panels/network/network.ui.h:34
 msgid "Disable VPN"
 msgstr "عطّل VPN"
 
-#: ../panels/network/network.ui.h:34
+#: ../panels/network/network.ui.h:35
 msgid "_Configure..."
 msgstr "ا_ضبط..."
 
-#: ../panels/network/network.ui.h:35
+#: ../panels/network/network.ui.h:36
 msgid "_Method"
 msgstr "ال_طريقة"
 
-#: ../panels/network/network.ui.h:36
+#: ../panels/network/network.ui.h:37
 msgid "_Configuration URL"
 msgstr "م_سار الإعداد"
 
-#: ../panels/network/network.ui.h:37
+#: ../panels/network/network.ui.h:38
 msgid "_HTTP Proxy"
 msgstr "وسيط _HTTP"
 
-#: ../panels/network/network.ui.h:38
+#: ../panels/network/network.ui.h:39
 msgid "H_TTPS Proxy"
 msgstr "وسيط H_TTPS"
 
-#: ../panels/network/network.ui.h:39
+#: ../panels/network/network.ui.h:40
 msgid "_FTP Proxy"
 msgstr "وسيط _FTP"
 
-#: ../panels/network/network.ui.h:40
+#: ../panels/network/network.ui.h:41
 msgid "_Socks Host"
 msgstr "مستضيف _Socks"
 
-#: ../panels/network/network.ui.h:41
+#: ../panels/network/network.ui.h:42
 msgid "HTTP Port"
 msgstr "منفذ HTTP"
 
-#: ../panels/network/network.ui.h:42
+#: ../panels/network/network.ui.h:43
 msgid "HTTPS Port"
 msgstr "منفذ HTTPS"
 
-#: ../panels/network/network.ui.h:43
+#: ../panels/network/network.ui.h:44
 msgid "FTP Port"
 msgstr "منفذ FTP"
 
-#: ../panels/network/network.ui.h:44
+#: ../panels/network/network.ui.h:45
 msgid "Socks Port"
 msgstr "منفذ Socks"
 
@@ -2289,39 +2294,39 @@ msgstr ""
 #. * The title is not visible when using GNOME Shell
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:252
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:263
-#: ../panels/online-accounts/online-accounts.ui.h:1
+#: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "أضف حسابا"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:321
+#: ../panels/online-accounts/cc-online-accounts-panel.c:340
 msgid "Error logging into the account"
 msgstr "خطأ عند الولوج إلى الحساب"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:369
+#: ../panels/online-accounts/cc-online-accounts-panel.c:394
 msgid "Expired credentials. Please log in again."
 msgstr "بيانات اعتماد مُنتهية. رجاءً لُج مجددا."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:372
+#: ../panels/online-accounts/cc-online-accounts-panel.c:397
 msgid "_Log In"
 msgstr "لُ_ج"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:528
+#: ../panels/online-accounts/cc-online-accounts-panel.c:551
 msgid "Error creating account"
 msgstr "خطأ أثناء إنشاء الحساب"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:560
+#: ../panels/online-accounts/cc-online-accounts-panel.c:593
 msgid "Error removing account"
 msgstr "خطأ أثناء إزالة الحساب"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:596
+#: ../panels/online-accounts/cc-online-accounts-panel.c:629
 msgid "Are you sure you want to remove the account?"
 msgstr "أمتأكد أنك تريد إزالة الحساب؟"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:598
+#: ../panels/online-accounts/cc-online-accounts-panel.c:631
 msgid "This will not remove the account on the server."
 msgstr "هذا لن يزيل الحساب على الخادوم."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:599
+#: ../panels/online-accounts/cc-online-accounts-panel.c:632
 msgid "_Remove"
 msgstr "أ_زل"
 
@@ -2338,13 +2343,25 @@ msgstr "أدِر حسابات الإنترنت"
 msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
 msgstr "جوجل;جووجل;فيسبوك;تويتر;ياهو;وب;ويب;محادثة;تقويم;بريد;اتصال;"
 
-#: ../panels/online-accounts/online-accounts.ui.h:2
-msgid "Remove Account"
-msgstr "أزِل حسابا"
+#: ../panels/online-accounts/online-accounts.ui.h:1
+msgid "No online accounts configured"
+msgstr "لم تُعد أي حسابات إنترنت"
 
 #: ../panels/online-accounts/online-accounts.ui.h:3
-msgid "Select an account"
-msgstr "اختر حسابًا"
+msgid "Remove Account"
+msgstr "أزِل الحساب"
+
+#: ../panels/online-accounts/online-accounts.ui.h:4
+msgid "Add an online account"
+msgstr "أضِف حساب إنترنت"
+
+#: ../panels/online-accounts/online-accounts.ui.h:5
+msgid ""
+"Adding an account allows your applications to access it for documents, mail, "
+"contacts, calendar, chat and more."
+msgstr ""
+"إضافة حساب تتيح للتطبيقات استخدامه للوصول إلى المستندات، والبريد، "
+"والمتراسلين، والتقويم، والدردشة، وغيرها."
 
 #: ../panels/power/cc-power-panel.c:171
 msgid "Unknown time"
@@ -3367,12 +3384,12 @@ msgstr "ال_تلاشي:"
 msgid "_Subwoofer:"
 msgstr "_سماعات كبيرة:"
 
-#: ../panels/sound/gvc-channel-bar.c:603 ../panels/sound/gvc-channel-bar.c:612
+#: ../panels/sound/gvc-channel-bar.c:613 ../panels/sound/gvc-channel-bar.c:622
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: ../panels/sound/gvc-channel-bar.c:607
+#: ../panels/sound/gvc-channel-bar.c:617
 msgctxt "volume"
 msgid "Unamplified"
 msgstr "غير مكبّر"
@@ -3383,7 +3400,7 @@ msgstr "ال_طور:"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1094
+#: ../panels/sound/gvc-mixer-control.c:1134
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -3396,7 +3413,7 @@ msgstr[5] "%u مَخْرَج"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1104
+#: ../panels/sound/gvc-mixer-control.c:1144
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
@@ -3407,7 +3424,7 @@ msgstr[3] "%u مَداخِل"
 msgstr[4] "%u مَدْخَلًا"
 msgstr[5] "%u مَدْخَل"
 
-#: ../panels/sound/gvc-mixer-control.c:1402
+#: ../panels/sound/gvc-mixer-control.c:1442
 msgid "System Sounds"
 msgstr "أصوات النظام"
 
@@ -4513,21 +4530,21 @@ msgstr "تصفّح لمزيد من الصور..."
 msgid "Used by %s"
 msgstr "يستخدمها %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:480
+#: ../panels/user-accounts/um-realm-manager.c:528
 #, c-format
 msgid "No such domain or realm found"
 msgstr "لم يعثر على هذا النطاق أو المجال"
 
-#: ../panels/user-accounts/um-realm-manager.c:686
+#: ../panels/user-accounts/um-realm-manager.c:735
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "تعذّر الولوج باسم %s في النطاق %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:691
+#: ../panels/user-accounts/um-realm-manager.c:740
 msgid "Invalid password, please try again"
 msgstr "كلمة سر خطأ؛ من فضلك أعد المحاولة"
 
-#: ../panels/user-accounts/um-realm-manager.c:695
+#: ../panels/user-accounts/um-realm-manager.c:744
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "تعذّر الاتصال بالنطاق %s:‏ %s"
@@ -4700,17 +4717,17 @@ msgstr "رجاءً انقر علامات الهدف الظاهرة على الش
 msgid "Mis-click detected, restarting..."
 msgstr "اكتُشفت نقرة خاطئة، يعيد بدء العملية..."
 
-#: ../panels/wacom/cc-wacom-mapping-panel.c:264
+#: ../panels/wacom/cc-wacom-mapping-panel.c:275
 msgid "Output:"
 msgstr "المَخْرَج:"
 
 #. Keep ratio switch
-#: ../panels/wacom/cc-wacom-mapping-panel.c:276
+#: ../panels/wacom/cc-wacom-mapping-panel.c:287
 msgid "Keep aspect ratio (letterbox):"
 msgstr "حافظ على نسبة العرض:"
 
 #. Whole-desktop checkbox
-#: ../panels/wacom/cc-wacom-mapping-panel.c:287
+#: ../panels/wacom/cc-wacom-mapping-panel.c:298
 msgid "Map to single monitor"
 msgstr "عيّن في شاشة واحدة"
 
@@ -4802,67 +4819,67 @@ msgstr "نمط التتبع"
 msgid "Left-Handed Orientation"
 msgstr "اتجاه لليد اليسرى"
 
-#: ../panels/wacom/gsd-wacom-device.c:959
+#: ../panels/wacom/gsd-wacom-device.c:1009
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:968
+#: ../panels/wacom/gsd-wacom-device.c:1018
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:998
+#: ../panels/wacom/gsd-wacom-device.c:1048
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:1007
+#: ../panels/wacom/gsd-wacom-device.c:1057
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:1024
+#: ../panels/wacom/gsd-wacom-device.c:1074
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:1026
+#: ../panels/wacom/gsd-wacom-device.c:1076
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:1029
+#: ../panels/wacom/gsd-wacom-device.c:1079
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:1031
+#: ../panels/wacom/gsd-wacom-device.c:1081
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:1036
+#: ../panels/wacom/gsd-wacom-device.c:1086
 #, c-format
 msgid "Mode Switch #%d"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:1108
+#: ../panels/wacom/gsd-wacom-device.c:1158
 #, c-format
 msgid "Left Button #%d"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:1111
+#: ../panels/wacom/gsd-wacom-device.c:1161
 #, c-format
 msgid "Right Button #%d"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:1114
+#: ../panels/wacom/gsd-wacom-device.c:1164
 #, c-format
 msgid "Top Button #%d"
 msgstr ""
 
-#: ../panels/wacom/gsd-wacom-device.c:1117
+#: ../panels/wacom/gsd-wacom-device.c:1167
 #, c-format
 msgid "Bottom Button #%d"
 msgstr ""
@@ -4988,6 +5005,9 @@ msgstr "تفضيلات;إعدادات;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "كل الإعدادات"
+
+#~ msgid "Select an account"
+#~ msgstr "اختر حسابًا"
 
 #~ msgid "To add a new account, first select the account type"
 #~ msgstr "لإضافة حساب جديد، اختر أولًا نوع الحساب"
