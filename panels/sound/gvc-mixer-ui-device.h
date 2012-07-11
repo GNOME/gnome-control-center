@@ -61,6 +61,7 @@ const gchar *  gvc_mixer_ui_device_get_port                    (GvcMixerUIDevice
 const gchar *  gvc_mixer_ui_device_get_best_profile            (GvcMixerUIDevice *dev,
                                                                 const gchar      *selected,
                                                                 const gchar      *current);
+const gchar *  gvc_mixer_ui_device_get_active_profile          (GvcMixerUIDevice* device);
 const gchar *  gvc_mixer_ui_device_get_matching_profile        (GvcMixerUIDevice *dev,
                                                                 const gchar      *profile);
 const gchar *  gvc_mixer_ui_device_get_user_preferred_profile  (GvcMixerUIDevice *dev);

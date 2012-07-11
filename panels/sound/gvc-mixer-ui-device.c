@@ -30,7 +30,7 @@ struct GvcMixerUIDevicePrivate
         gchar                      *first_line_desc;
         gchar                      *second_line_desc;
 
-        gint                        card_id;
+        GvcMixerCard               *card;
         gchar                      *port_name;
         gint                        stream_id;
         guint                       id;
@@ -50,7 +50,7 @@ enum
         PROP_0,
         PROP_DESC_LINE_1,
         PROP_DESC_LINE_2,
-        PROP_CARD_ID,
+        PROP_CARD,
         PROP_PORT_NAME,
         PROP_STREAM_ID,
         PROP_UI_DEVICE_TYPE,
@@ -92,8 +92,8 @@ gvc_mixer_ui_device_get_property  (GObject       *object,
         case PROP_DESC_LINE_2:
                 g_value_set_string (value, self->priv->second_line_desc);
                 break;
-        case PROP_CARD_ID:
-                g_value_set_int (value, self->priv->card_id);
+        case PROP_CARD:
+                g_value_set_pointer (value, self->priv->card);
                 break;
         case PROP_PORT_NAME:
                 g_value_set_string (value, self->priv->port_name);
@@ -134,10 +134,10 @@ gvc_mixer_ui_device_set_property  (GObject      *object,
                 g_debug ("gvc-mixer-output-set-property - 2nd line: %s\n",
                          self->priv->second_line_desc);
                 break;
-        case PROP_CARD_ID:
-                self->priv->card_id = g_value_get_int (value);
-                g_debug ("gvc-mixer-output-set-property - card id: %i\n",
-                         self->priv->card_id);
+        case PROP_CARD:
+                self->priv->card = g_value_get_pointer (value);
+                g_debug ("gvc-mixer-output-set-property - card: %p\n",
+                         self->priv->card);
                 break;
         case PROP_PORT_NAME:
                 g_free (self->priv->port_name);
@@ -177,7 +177,6 @@ gvc_mixer_ui_device_constructor (GType                  type,
         self = GVC_MIXER_UI_DEVICE (object);
         self->priv->id = get_next_output_serial ();
         self->priv->stream_id = GVC_MIXER_UI_DEVICE_INVALID;
-        self->priv->card_id = GVC_MIXER_UI_DEVICE_INVALID;
         return object;
 }
 
@@ -239,15 +238,12 @@ gvc_mixer_ui_device_class_init (GvcMixerUIDeviceClass *klass)
                                      G_PARAM_READWRITE);
         g_object_class_install_property (object_class, PROP_DESC_LINE_2, pspec);
 
-        pspec = g_param_spec_int ("card-id",
-                                  "Card id from pulse",
-                                  "Set/Get card id",
-                                  -1,
-                                  G_MAXINT,
-                                  GVC_MIXER_UI_DEVICE_INVALID,
-                                  G_PARAM_READWRITE);
+        pspec = g_param_spec_pointer ("card",
+                                      "Card from pulse",
+                                      "Set/Get card",
+                                      G_PARAM_READWRITE);
 
-        g_object_class_install_property (object_class, PROP_CARD_ID, pspec);
+        g_object_class_install_property (object_class, PROP_CARD, pspec);
 
         pspec = g_param_spec_string ("port-name",
                                      "port-name construct prop",
@@ -523,6 +519,21 @@ gvc_mixer_ui_device_get_best_profile (GvcMixerUIDevice *device,
         return result;
 }
 
+const gchar *
+gvc_mixer_ui_device_get_active_profile (GvcMixerUIDevice* device)
+{
+        GvcMixerCardProfile *profile;
+
+        g_return_val_if_fail (GVC_IS_MIXER_UI_DEVICE (device), NULL);
+
+        if (device->priv->card == NULL) {
+                g_warning ("Device did not have an appropriate card");
+                return NULL;
+        }
+
+        profile = gvc_mixer_card_get_profile (device->priv->card);
+        return gvc_mixer_ui_device_get_matching_profile (device, profile->profile);
+}
 
 gboolean
 gvc_mixer_ui_device_should_profiles_be_hidden (GvcMixerUIDevice *device)
