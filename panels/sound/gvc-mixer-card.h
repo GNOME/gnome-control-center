@@ -50,11 +50,11 @@ typedef struct
 
 typedef struct
 {
-        char *profile;
-        char *human_profile;
-        char *status;
-        guint priority;
-        guint n_sinks, n_sources;
+        char  *profile;
+        char  *human_profile;
+        char  *status;
+        guint  priority;
+        guint  n_sinks, n_sources;
 } GvcMixerCardProfile;
 
 typedef struct
