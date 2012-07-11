@@ -200,6 +200,7 @@ gvc_mixer_control_set_default_sink (GvcMixerControl *control,
         g_return_val_if_fail (GVC_IS_MIXER_CONTROL (control), FALSE);
         g_return_val_if_fail (GVC_IS_MIXER_STREAM (stream), FALSE);
 
+        g_debug ("about to set default sink on server");
         o = pa_context_set_default_sink (control->priv->pa_context,
                                          gvc_mixer_stream_get_name (stream),
                                          NULL,
@@ -709,6 +710,7 @@ update_server (GvcMixerControl      *control,
                 update_default_source_from_name (control, info->default_source_name);
         }
         if (info->default_sink_name != NULL) {
+                g_debug ("update server");
                 update_default_sink_from_name (control, info->default_sink_name);
         }
 }
@@ -1385,7 +1387,7 @@ _pa_context_get_server_info_cb (pa_context           *context,
                 g_warning ("Server info callback failure");
                 return;
         }
-
+        g_debug ("get server info");
         update_server (control, i);
         dec_outstanding (control);
 }
@@ -1729,9 +1731,8 @@ remove_sink_input (GvcMixerControl *control,
 {
         GvcMixerStream *stream;
 
-#if 0
         g_debug ("Removing sink input: index=%u", index);
-#endif
+
         stream = g_hash_table_lookup (control->priv->sink_inputs,
                                       GUINT_TO_POINTER (index));
         if (stream == NULL) {
@@ -1749,9 +1750,7 @@ remove_source_output (GvcMixerControl *control,
 {
         GvcMixerStream *stream;
 
-#if 0
         g_debug ("Removing source output: index=%u", index);
-#endif
 
         stream = g_hash_table_lookup (control->priv->source_outputs,
                                       GUINT_TO_POINTER (index));
