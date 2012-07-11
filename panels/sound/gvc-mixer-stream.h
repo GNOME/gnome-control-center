@@ -61,6 +61,7 @@ typedef struct
         char *port;
         char *human_port;
         guint priority;
+        gboolean available;
 } GvcMixerStreamPort;
 
 GType               gvc_mixer_stream_get_type        (void);
