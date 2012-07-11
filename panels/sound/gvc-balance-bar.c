@@ -477,27 +477,6 @@ on_scale_scroll_event (GtkWidget      *widget,
         return TRUE;
 }
 
-/* FIXME remove when we depend on a newer PA */
-static pa_cvolume *
-gvc_pa_cvolume_set_position (pa_cvolume *cv, const pa_channel_map *map, pa_channel_position_t t, pa_volume_t v) {
-        unsigned c;
-        gboolean good = FALSE;
-
-        g_assert(cv);
-        g_assert(map);
-
-        g_return_val_if_fail(pa_cvolume_compatible_with_channel_map(cv, map), NULL);
-        g_return_val_if_fail(t < PA_CHANNEL_POSITION_MAX, NULL);
-
-        for (c = 0; c < map->channels; c++)
-                if (map->map[c] == t) {
-                        cv->values[c] = v;
-                        good = TRUE;
-                }
-
-        return good ? cv : NULL;
-}
-
 static void
 on_adjustment_value_changed (GtkAdjustment *adjustment,
                              GvcBalanceBar *bar)
@@ -522,7 +501,7 @@ on_adjustment_value_changed (GtkAdjustment *adjustment,
                 pa_cvolume_set_fade (&cv, pa_map, val);
                 break;
         case BALANCE_TYPE_LFE:
-                gvc_pa_cvolume_set_position (&cv, pa_map, PA_CHANNEL_POSITION_LFE, val);
+                pa_cvolume_set_position (&cv, pa_map, PA_CHANNEL_POSITION_LFE, val);
                 break;
         }
 
