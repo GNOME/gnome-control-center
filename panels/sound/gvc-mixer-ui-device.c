@@ -27,22 +27,22 @@
 
 struct GvcMixerUIDevicePrivate
 {
-        gchar                                                *first_line_desc;
-        gchar                                                *second_line_desc;
+        gchar                      *first_line_desc;
+        gchar                      *second_line_desc;
 
-        gint                                                card_id;
-        gchar                                                *port_name;
-        gint                                                stream_id;
-        guint                                                id;
-        gboolean                                        port_available;
+        gint                        card_id;
+        gchar                      *port_name;
+        gint                        stream_id;
+        guint                       id;
+        gboolean                    port_available;
 
         /* These two lists contain pointers to GvcMixerCardProfile objects. Those objects are owned by GvcMixerCard. *
          * TODO: Do we want to add a weak reference to the GvcMixerCard for this reason? */
-        GList                                                *supported_profiles; /* all profiles supported by this port.*/
-        GList                                                *profiles; /* profiles to be added to combobox, subset of supported_profiles. */
-        GvcMixerUIDeviceDirection        type;
-        gboolean                                        disable_profile_swapping;
-        gchar                                                *user_preferred_profile;
+        GList                      *supported_profiles; /* all profiles supported by this port.*/
+        GList                      *profiles; /* profiles to be added to combobox, subset of supported_profiles. */
+        GvcMixerUIDeviceDirection   type;
+        gboolean                    disable_profile_swapping;
+        gchar                      *user_preferred_profile;
 };
 
 enum
