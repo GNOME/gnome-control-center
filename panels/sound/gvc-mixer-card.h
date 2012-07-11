@@ -81,6 +81,9 @@ gboolean              gvc_mixer_card_change_profile    (GvcMixerCard *card,
                                                         const char *profile);
 GIcon *               gvc_mixer_card_get_gicon         (GvcMixerCard *card);
 
+int                   gvc_mixer_card_profile_compare   (GvcMixerCardProfile *a,
+                                                        GvcMixerCardProfile *b);
+
 /* private */
 gboolean              gvc_mixer_card_set_name          (GvcMixerCard *card,
                                                         const char   *name);

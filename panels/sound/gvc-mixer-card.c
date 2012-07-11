@@ -290,9 +290,15 @@ gvc_mixer_card_get_ports (GvcMixerCard *card)
         return card->priv->ports;
 }
 
-static int
-sort_profiles (GvcMixerCardProfile *a,
-               GvcMixerCardProfile *b)
+/**
+ * gvc_mixer_card_profile_compare:
+ *
+ * Return value: 1 if @a has a higher priority, -1 if @b has a higher
+ * priority, 0 if @a and @b have the same priority.
+ */
+int
+gvc_mixer_card_profile_compare (GvcMixerCardProfile *a,
+                                GvcMixerCardProfile *b)
 {
         if (a->priority == b->priority)
                 return 0;
@@ -300,7 +306,6 @@ sort_profiles (GvcMixerCardProfile *a,
                 return 1;
         return -1;
 }
-
 
 /**
  * gvc_mixer_card_set_profiles:
@@ -313,7 +318,7 @@ gvc_mixer_card_set_profiles (GvcMixerCard *card,
         g_return_val_if_fail (GVC_IS_MIXER_CARD (card), FALSE);
         g_return_val_if_fail (card->priv->profiles == NULL, FALSE);
 
-        card->priv->profiles = g_list_sort (profiles, (GCompareFunc) sort_profiles);
+        card->priv->profiles = g_list_sort (profiles, (GCompareFunc) gvc_mixer_card_profile_compare);
 
         return TRUE;
 }
