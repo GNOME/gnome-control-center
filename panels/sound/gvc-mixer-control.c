@@ -3345,11 +3345,6 @@ gvc_mixer_control_new (const char *name)
         return GVC_MIXER_CONTROL (control);
 }
 
-/* FIXME: Remove when PA 0.9.23 is used */
-#ifndef PA_VOLUME_UI_MAX
-#define PA_VOLUME_UI_MAX pa_sw_volume_from_dB(+11.0)
-#endif
-
 gdouble
 gvc_mixer_control_get_vol_max_norm (GvcMixerControl *control)
 {
