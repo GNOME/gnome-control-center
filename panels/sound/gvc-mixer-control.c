@@ -136,7 +136,6 @@ static void
 gvc_mixer_control_stream_restore_cb (pa_context *c,
 				     GvcMixerStream *new_stream,
                                      const pa_ext_stream_restore_info *info,
-                                     int eol,
                                      GvcMixerControl *control)
 {
         pa_operation *o;
@@ -177,7 +176,7 @@ gvc_mixer_control_stream_restore_sink_cb (pa_context *c,
         GvcMixerControl *control = (GvcMixerControl *) userdata;
         if (eol || info == NULL || !g_str_has_prefix(info->name, "sink-input-by"))
                 return;
-        gvc_mixer_control_stream_restore_cb (c, control->priv->new_default_sink_stream, info, eol, control);
+        gvc_mixer_control_stream_restore_cb (c, control->priv->new_default_sink_stream, info, control);
 }
 
 static void
@@ -189,7 +188,7 @@ gvc_mixer_control_stream_restore_source_cb (pa_context *c,
         GvcMixerControl *control = (GvcMixerControl *) userdata;
         if (eol || info == NULL || !g_str_has_prefix(info->name, "source-output-by"))
                 return;
-        gvc_mixer_control_stream_restore_cb (c, control->priv->new_default_source_stream, info, eol, control);
+        gvc_mixer_control_stream_restore_cb (c, control->priv->new_default_source_stream, info, control);
 }
 
 gboolean
