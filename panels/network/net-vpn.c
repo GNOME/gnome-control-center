@@ -370,6 +370,13 @@ nm_device_refresh_vpn_ui (NetVpn *vpn)
 }
 
 static void
+vpn_proxy_refresh (NetObject *object)
+{
+        NetVpn *vpn = NET_VPN (object);
+        nm_device_refresh_vpn_ui (vpn);
+}
+
+static void
 device_off_toggled (GtkSwitch *sw,
                     GParamSpec *pspec,
                     NetVpn *vpn)
@@ -442,6 +449,7 @@ net_vpn_class_init (NetVpnClass *klass)
         object_class->finalize = net_vpn_finalize;
         parent_class->add_to_notebook = vpn_proxy_add_to_notebook;
         parent_class->delete = vpn_proxy_delete;
+        parent_class->refresh = vpn_proxy_refresh;
         g_type_class_add_private (klass, sizeof (NetVpnPrivate));
 }
 

@@ -43,6 +43,7 @@ state_changed_cb (NMDevice *device,
                   NetDevice *net_device)
 {
         net_object_emit_changed (NET_OBJECT (net_device));
+        net_object_refresh (NET_OBJECT (net_device));
 }
 
 void

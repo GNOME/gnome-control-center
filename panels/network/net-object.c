@@ -154,6 +154,14 @@ net_object_delete (NetObject *object)
                 klass->delete (object);
 }
 
+void
+net_object_refresh (NetObject *object)
+{
+        NetObjectClass *klass = NET_OBJECT_GET_CLASS (object);
+        if (klass->refresh != NULL)
+                klass->refresh (object);
+}
+
 /**
  * net_object_get_property:
  **/
