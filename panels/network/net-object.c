@@ -32,6 +32,15 @@ struct _NetObjectPrivate
 {
         gchar                           *id;
         gchar                           *title;
+        gboolean                         removable;
+};
+
+enum {
+        PROP_0,
+        PROP_ID,
+        PROP_TITLE,
+        PROP_REMOVABLE,
+        PROP_LAST
 };
 
 enum {
@@ -73,6 +82,20 @@ net_object_set_id (NetObject *object, const gchar *id)
         object->priv->id = g_strdup (id);
 }
 
+gboolean
+net_object_get_removable (NetObject *object)
+{
+        g_return_val_if_fail (NET_IS_OBJECT (object), FALSE);
+        return object->priv->removable;
+}
+
+void
+net_object_set_removable (NetObject *object, gboolean removable)
+{
+        g_return_if_fail (NET_IS_OBJECT (object));
+        object->priv->removable = removable;
+}
+
 const gchar *
 net_object_get_title (NetObject *object)
 {
@@ -85,6 +108,64 @@ net_object_set_title (NetObject *object, const gchar *title)
 {
         g_return_if_fail (NET_IS_OBJECT (object));
         object->priv->title = g_strdup (title);
+}
+
+/**
+ * net_object_get_property:
+ **/
+static void
+net_object_get_property (GObject *object_,
+                         guint prop_id,
+                         GValue *value,
+                         GParamSpec *pspec)
+{
+        NetObject *object = NET_OBJECT (object_);
+        NetObjectPrivate *priv = object->priv;
+
+        switch (prop_id) {
+        case PROP_ID:
+                g_value_set_string (value, priv->id);
+                break;
+        case PROP_TITLE:
+                g_value_set_string (value, priv->title);
+                break;
+        case PROP_REMOVABLE:
+                g_value_set_boolean (value, priv->removable);
+                break;
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+                break;
+        }
+}
+
+/**
+ * net_object_set_property:
+ **/
+static void
+net_object_set_property (GObject *object_,
+                         guint prop_id,
+                         const GValue *value,
+                         GParamSpec *pspec)
+{
+        NetObject *object = NET_OBJECT (object_);
+        NetObjectPrivate *priv = object->priv;
+
+        switch (prop_id) {
+        case PROP_ID:
+                g_free (priv->id);
+                priv->id = g_strdup (g_value_get_string (value));
+                break;
+        case PROP_TITLE:
+                g_free (priv->title);
+                priv->title = g_strdup (g_value_get_string (value));
+                break;
+        case PROP_REMOVABLE:
+                priv->removable = g_value_get_boolean (value);
+                break;
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+                break;
+        }
 }
 
 static void
@@ -102,8 +183,26 @@ net_object_finalize (GObject *object)
 static void
 net_object_class_init (NetObjectClass *klass)
 {
+        GParamSpec *pspec;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         object_class->finalize = net_object_finalize;
+        object_class->get_property = net_object_get_property;
+        object_class->set_property = net_object_set_property;
+
+        pspec = g_param_spec_string ("id", NULL, NULL,
+                                     NULL,
+                                     G_PARAM_READWRITE);
+        g_object_class_install_property (object_class, PROP_ID, pspec);
+
+        pspec = g_param_spec_string ("title", NULL, NULL,
+                                     NULL,
+                                     G_PARAM_READWRITE);
+        g_object_class_install_property (object_class, PROP_TITLE, pspec);
+
+        pspec = g_param_spec_boolean ("removable", NULL, NULL,
+                                      TRUE,
+                                      G_PARAM_READWRITE);
+        g_object_class_install_property (object_class, PROP_REMOVABLE, pspec);
 
         signals[SIGNAL_CHANGED] =
                 g_signal_new ("changed",
