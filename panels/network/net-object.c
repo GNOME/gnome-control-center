@@ -146,6 +146,14 @@ net_object_add_to_notebook (NetObject *object,
         return NULL;
 }
 
+void
+net_object_delete (NetObject *object)
+{
+        NetObjectClass *klass = NET_OBJECT_GET_CLASS (object);
+        if (klass->delete != NULL)
+                klass->delete (object);
+}
+
 /**
  * net_object_get_property:
  **/

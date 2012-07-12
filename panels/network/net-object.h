@@ -53,6 +53,7 @@ struct _NetObjectClass
         GtkWidget               *(*add_to_notebook)    (NetObject       *object,
                                                         GtkNotebook     *notebook,
                                                         GtkSizeGroup    *heading_size_group);
+        void                     (*delete)              (NetObject       *object);
 
         /* signal */
         void                     (* changed)            (NetObject      *object);
@@ -72,6 +73,7 @@ void             net_object_set_client                  (NetObject      *object,
                                                          NMClient       *client);
 void             net_object_emit_changed                (NetObject      *object);
 void             net_object_emit_removed                (NetObject      *object);
+void             net_object_delete                      (NetObject      *object);
 GtkWidget       *net_object_add_to_notebook             (NetObject      *object,
                                                          GtkNotebook    *notebook,
                                                          GtkSizeGroup   *heading_size_group);
