@@ -581,6 +581,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                             "liststore_devices"));
         net_device = net_device_new ();
+        net_object_set_client (NET_OBJECT (net_device), panel->priv->client);
         net_device_set_nm_device (net_device, device);
         net_object_set_id (NET_OBJECT (net_device), nm_device_get_udi (device));
         register_object_interest (panel, NET_OBJECT (net_device));

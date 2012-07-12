@@ -33,6 +33,7 @@ struct _NetObjectPrivate
         gchar                           *id;
         gchar                           *title;
         gboolean                         removable;
+        NMClient                        *client;
 };
 
 enum {
@@ -40,6 +41,7 @@ enum {
         PROP_ID,
         PROP_TITLE,
         PROP_REMOVABLE,
+        PROP_CLIENT,
         PROP_LAST
 };
 
@@ -110,6 +112,20 @@ net_object_set_title (NetObject *object, const gchar *title)
         object->priv->title = g_strdup (title);
 }
 
+NMClient *
+net_object_get_client (NetObject *object)
+{
+        g_return_val_if_fail (NET_IS_OBJECT (object), NULL);
+        return object->priv->client;
+}
+
+void
+net_object_set_client (NetObject *object, NMClient *client)
+{
+        g_return_if_fail (NET_IS_OBJECT (object));
+        object->priv->client = g_object_ref (client);
+}
+
 GtkWidget *
 net_object_add_to_notebook (NetObject *object,
                             GtkNotebook *notebook,
@@ -152,6 +168,9 @@ net_object_get_property (GObject *object_,
         case PROP_REMOVABLE:
                 g_value_set_boolean (value, priv->removable);
                 break;
+        case PROP_CLIENT:
+                g_value_set_object (value, priv->client);
+                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -182,6 +201,11 @@ net_object_set_property (GObject *object_,
         case PROP_REMOVABLE:
                 priv->removable = g_value_get_boolean (value);
                 break;
+        case PROP_CLIENT:
+                if (priv->client != NULL)
+                        g_object_unref (priv->client);
+                priv->client = g_object_ref (g_value_get_object (value));
+                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -196,6 +220,8 @@ net_object_finalize (GObject *object)
 
         g_free (priv->id);
         g_free (priv->title);
+        if (priv->client != NULL)
+                g_object_unref (priv->client);
 
         G_OBJECT_CLASS (net_object_parent_class)->finalize (object);
 }
@@ -223,6 +249,11 @@ net_object_class_init (NetObjectClass *klass)
                                       TRUE,
                                       G_PARAM_READWRITE);
         g_object_class_install_property (object_class, PROP_REMOVABLE, pspec);
+
+        pspec = g_param_spec_object ("client", NULL, NULL,
+                                     NM_TYPE_CLIENT,
+                                     G_PARAM_READWRITE);
+        g_object_class_install_property (object_class, PROP_CLIENT, pspec);
 
         signals[SIGNAL_CHANGED] =
                 g_signal_new ("changed",

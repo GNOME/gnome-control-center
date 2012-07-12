@@ -24,6 +24,7 @@
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
+#include <nm-client.h>
 
 G_BEGIN_DECLS
 
@@ -66,6 +67,9 @@ void             net_object_set_id                      (NetObject      *object,
 const gchar     *net_object_get_title                   (NetObject      *object);
 void             net_object_set_title                   (NetObject      *object,
                                                          const gchar    *title);
+NMClient        *net_object_get_client                  (NetObject      *object);
+void             net_object_set_client                  (NetObject      *object,
+                                                         NMClient       *client);
 void             net_object_emit_changed                (NetObject      *object);
 void             net_object_emit_removed                (NetObject      *object);
 GtkWidget       *net_object_add_to_notebook             (NetObject      *object,
