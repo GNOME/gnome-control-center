@@ -1299,34 +1299,6 @@ device_off_toggled (GtkSwitch      *sw,
         active = gtk_switch_get_active (sw);
 
         object = get_selected_object (panel);
-        if (NET_IS_VPN (object)) {
-
-                NMConnection *connection;
-
-                connection = net_vpn_get_connection (NET_VPN (object));
-                if (active)
-                        nm_client_activate_connection (panel->priv->client,
-                                                       connection, NULL, NULL,
-                                                       NULL, NULL);
-                else {
-                        const gchar *path;
-                        NMActiveConnection *a;
-                        const GPtrArray *acs;
-                        gint i;
-
-                        path = nm_connection_get_path (connection);
-
-                        acs = nm_client_get_active_connections (panel->priv->client);
-                        for (i = 0; i < acs->len; i++) {
-                                a = (NMActiveConnection*)acs->pdata[i];
-                                if (strcmp (nm_active_connection_get_connection (a), path) == 0) {
-                                        nm_client_deactivate_connection (panel->priv->client, a);
-                                        break;
-                                }
-                        }
-                }
-        }
-
         if (NET_IS_DEVICE (object)) {
                 device = net_device_get_nm_device (NET_DEVICE (object));
                 switch (nm_device_get_device_type (device)) {
@@ -2097,121 +2069,6 @@ out: ;
 }
 
 static void
-nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
-{
-        GtkWidget *widget;
-        GtkWidget *sw;
-        const gchar *sub_pane = "vpn";
-        const gchar *status;
-        CcNetworkPanelPrivate *priv = panel->priv;
-        const GPtrArray *acs;
-        NMActiveConnection *a;
-        gint i;
-        const gchar *path;
-        const gchar *apath;
-        NMVPNConnectionState state;
-        gchar *title;
-        GtkListStore *liststore_devices;
-        GtkTreeIter iter;
-
-        sw = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                 "device_vpn_off_switch"));
-        gtk_widget_set_visible (sw, TRUE);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "button_vpn_options"));
-        gtk_widget_set_visible (widget, TRUE);
-        gtk_widget_set_sensitive (widget, TRUE);
-
-        /* use proxy note page */
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "notebook_types"));
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 3);
-
-        /* set VPN icon */
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "image_vpn_device"));
-        gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-                                      "network-vpn",
-                                      GTK_ICON_SIZE_DIALOG);
-
-        /* update title */
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "label_vpn_device"));
-        title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (net_vpn_get_connection (vpn)));
-        net_object_set_title (NET_OBJECT (vpn), title);
-        gtk_label_set_label (GTK_LABEL (widget), title);
-
-        /* update list store title */
-        liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
-                                                                    "liststore_devices"));
-        if (find_model_iter_by_object (GTK_TREE_MODEL (liststore_devices), NET_OBJECT (vpn), &iter)) {
-                gtk_list_store_set (liststore_devices,
-                                    &iter,
-                                    PANEL_DEVICES_COLUMN_TITLE, title,
-                                    -1);
-        }
-        g_free (title);
-
-        /* use status */
-        state = net_vpn_get_state (vpn);
-
-        acs = nm_client_get_active_connections (priv->client);
-        if (acs != NULL) {
-                path = nm_connection_get_path (net_vpn_get_connection (vpn));
-                for (i = 0; i < acs->len; i++) {
-                        a = (NMActiveConnection*)acs->pdata[i];
-
-                        apath = nm_active_connection_get_connection (a);
-                        if (NM_IS_VPN_CONNECTION (a) && strcmp (apath, path) == 0) {
-                                state = nm_vpn_connection_get_vpn_state (NM_VPN_CONNECTION (a));
-                                break;
-                        }
-                }
-        }
-
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "label_vpn_status"));
-        status = panel_vpn_state_to_localized_string (state);
-        gtk_label_set_label (GTK_LABEL (widget), status);
-        priv->updating_device = TRUE;
-        gtk_switch_set_active (GTK_SWITCH (sw),
-                               state != NM_VPN_CONNECTION_STATE_FAILED &&
-                               state != NM_VPN_CONNECTION_STATE_DISCONNECTED);
-        priv->updating_device = FALSE;
-
-        /* service type */
-        panel_set_widget_data (panel,
-                               sub_pane,
-                               "service_type",
-                               net_vpn_get_service_type (vpn));
-
-        /* gateway */
-        panel_set_widget_data (panel,
-                               sub_pane,
-                               "gateway",
-                               net_vpn_get_gateway (vpn));
-
-        /* groupname */
-        panel_set_widget_data (panel,
-                               sub_pane,
-                               "group_name",
-                               net_vpn_get_id (vpn));
-
-        /* username */
-        panel_set_widget_data (panel,
-                               sub_pane,
-                               "username",
-                               net_vpn_get_username (vpn));
-
-        /* password */
-        panel_set_widget_data (panel,
-                               sub_pane,
-                               "group_password",
-                               net_vpn_get_password (vpn));
-}
-
-static void
 panel_set_notebook_page_for_object (CcNetworkPanel *panel, NetObject *object)
 {
         CcNetworkPanelPrivate *priv = panel->priv;
@@ -2272,18 +2129,6 @@ refresh_ui_idle (gpointer data)
         /* do we have a new-style NetObject-style panel widget */
         panel_set_notebook_page_for_object (panel, object);
 
-        /* VPN */
-        if (NET_IS_VPN (object)) {
-
-                nm_device_refresh_vpn_ui (panel, NET_VPN (object));
-
-                /* we're able to remove the VPN connection */
-                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "remove_toolbutton"));
-                gtk_widget_set_sensitive (widget, TRUE);
-                goto out;
-        }
-
         /* device */
         if (NET_IS_DEVICE (object)) {
 
@@ -2323,7 +2168,6 @@ panel_add_proxy_device (CcNetworkPanel *panel)
         GtkListStore *liststore_devices;
         GtkTreeIter iter;
         NetProxy *proxy;
-        GtkWidget *widget;
         GtkNotebook *notebook;
         GtkSizeGroup *size_group;
 
@@ -2519,6 +2363,8 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         GtkTreeIter iter;
         NetVpn *net_vpn;
         const gchar *id;
+        GtkNotebook *notebook;
+        GtkSizeGroup *size_group;
 
         /* does already exist */
         id = nm_connection_get_path (connection);
@@ -2528,8 +2374,18 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         /* add as a virtual object */
         net_vpn = net_vpn_new ();
         net_vpn_set_connection (net_vpn, connection);
+        net_object_set_client (NET_OBJECT (net_vpn), panel->priv->client);
         net_object_set_id (NET_OBJECT (net_vpn), id);
         register_object_interest (panel, NET_OBJECT (net_vpn));
+
+        /* add as a panel */
+        notebook = GTK_NOTEBOOK (gtk_builder_get_object (panel->priv->builder,
+                                                         "notebook_types"));
+        size_group = GTK_SIZE_GROUP (gtk_builder_get_object (panel->priv->builder,
+                                                             "sizegroup1"));
+        net_object_add_to_notebook (NET_OBJECT (net_vpn),
+                                    notebook,
+                                    size_group);
 
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
                                             "liststore_devices"));
@@ -2663,9 +2519,6 @@ edit_connection (GtkButton *button, CcNetworkPanel *panel)
         object = get_selected_object (panel);
         if (object == NULL)
                 return;
-        else if (NET_IS_VPN (object)) {
-                c = net_vpn_get_connection (NET_VPN (object));
-        }
         else {
                 device = net_device_get_nm_device (NET_DEVICE (object));
                 c = find_connection_for_device (panel, device);
@@ -2827,19 +2680,14 @@ static void
 remove_connection (GtkToolButton *button, CcNetworkPanel *panel)
 {
         NetObject *object;
-        NMConnection *connection;
 
         /* get current device */
         object = get_selected_object (panel);
         if (object == NULL)
                 return;
 
-        /* VPN */
-        if (NET_IS_VPN (object)) {
-                connection = net_vpn_get_connection (NET_VPN (object));
-                nm_remote_connection_delete (NM_REMOTE_CONNECTION (connection), NULL, panel);
-                return;
-        }
+        /* delete the object */
+        net_object_delete (object);
 }
 
 static void
@@ -3659,10 +3507,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
                                                      "device_mobilebb_off_switch"));
         g_signal_connect (widget, "notify::active",
                           G_CALLBACK (device_off_toggled), panel);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "device_vpn_off_switch"));
-        g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (device_off_toggled), panel);
 
         g_signal_connect (panel->priv->client, "notify::wireless-enabled",
                           G_CALLBACK (wireless_enabled_toggled), panel);
@@ -3692,11 +3536,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "button_mobilebb_options"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (edit_connection), panel);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "button_vpn_options"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (edit_connection), panel);
 

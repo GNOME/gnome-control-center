@@ -57,13 +57,6 @@ GType            net_vpn_get_type               (void);
 NetVpn          *net_vpn_new                    (void);
 void             net_vpn_set_connection         (NetVpn         *vpn,
                                                  NMConnection   *connection);
-NMConnection    *net_vpn_get_connection         (NetVpn         *vpn);
-const gchar     *net_vpn_get_service_type       (NetVpn         *vpn);
-const gchar     *net_vpn_get_gateway            (NetVpn         *vpn);
-const gchar     *net_vpn_get_id                 (NetVpn         *vpn);
-const gchar     *net_vpn_get_username           (NetVpn         *vpn);
-const gchar     *net_vpn_get_password           (NetVpn         *vpn);
-NMVPNConnectionState net_vpn_get_state          (NetVpn         *vpn);
 
 G_END_DECLS
 
