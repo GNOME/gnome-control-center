@@ -91,7 +91,9 @@ NetDevice *
 net_device_new (void)
 {
         NetDevice *device;
-        device = g_object_new (NET_TYPE_DEVICE, NULL);
+        device = g_object_new (NET_TYPE_DEVICE,
+                               "removable", TRUE,
+                               NULL);
         return NET_DEVICE (device);
 }
 

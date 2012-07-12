@@ -23,6 +23,7 @@
 #define __NET_OBJECT_H
 
 #include <glib-object.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
@@ -45,9 +46,16 @@ struct _NetObject
 
 struct _NetObjectClass
 {
-        GObjectClass                 parent_class;
-        void                        (* changed)         (NetObject      *object);
-        void                        (* removed)         (NetObject      *object);
+        GObjectClass             parent_class;
+
+        /* vtable */
+        GtkWidget               *(*add_to_notebook)    (NetObject       *object,
+                                                        GtkNotebook     *notebook,
+                                                        GtkSizeGroup    *heading_size_group);
+
+        /* signal */
+        void                     (* changed)            (NetObject      *object);
+        void                     (* removed)            (NetObject      *object);
 };
 
 GType            net_object_get_type                    (void);
@@ -60,6 +68,9 @@ void             net_object_set_title                   (NetObject      *object,
                                                          const gchar    *title);
 void             net_object_emit_changed                (NetObject      *object);
 void             net_object_emit_removed                (NetObject      *object);
+GtkWidget       *net_object_add_to_notebook             (NetObject      *object,
+                                                         GtkNotebook    *notebook,
+                                                         GtkSizeGroup   *heading_size_group);
 gboolean         net_object_get_removable               (NetObject      *object);
 void             net_object_set_removable               (NetObject      *object,
                                                          gboolean        removable);

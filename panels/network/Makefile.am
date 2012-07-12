@@ -22,6 +22,8 @@ libnetwork_la_SOURCES =					\
 	net-device.h					\
 	net-vpn.c					\
 	net-vpn.h					\
+	net-proxy.c					\
+	net-proxy.h					\
 	panel-cell-renderer-mode.c			\
 	panel-cell-renderer-mode.h			\
 	panel-cell-renderer-security.c			\
@@ -37,7 +39,9 @@ libnetwork_la_LIBADD = $(PANEL_LIBS) $(NETWORK_PANEL_LIBS) $(NETWORK_MANAGER_LIB
 libnetwork_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui
-dist_ui_DATA = network.ui
+dist_ui_DATA =						\
+	network-proxy.ui				\
+	network.ui
 
 @INTLTOOL_DESKTOP_RULE@
 

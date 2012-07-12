@@ -110,6 +110,26 @@ net_object_set_title (NetObject *object, const gchar *title)
         object->priv->title = g_strdup (title);
 }
 
+GtkWidget *
+net_object_add_to_notebook (NetObject *object,
+                            GtkNotebook *notebook,
+                            GtkSizeGroup *heading_size_group)
+{
+        GtkWidget *widget;
+        NetObjectClass *klass = NET_OBJECT_GET_CLASS (object);
+        if (klass->add_to_notebook != NULL) {
+                widget = klass->add_to_notebook (object,
+                                                 notebook,
+                                                 heading_size_group);
+                g_object_set_data_full (G_OBJECT (widget),
+                                        "NetObject::id",
+                                        g_strdup (object->priv->id),
+                                        g_free);
+                return widget;
+        }
+        return NULL;
+}
+
 /**
  * net_object_get_property:
  **/

@@ -47,6 +47,7 @@
 
 #include "net-object.h"
 #include "net-device.h"
+#include "net-proxy.h"
 #include "net-vpn.h"
 
 #include "panel-common.h"
@@ -73,7 +74,6 @@ typedef enum {
 struct _CcNetworkPanelPrivate
 {
         GCancellable     *cancellable;
-        GSettings        *proxy_settings;
         GtkBuilder       *builder;
         NMClient         *client;
         NMRemoteSettings *remote_settings;
@@ -197,8 +197,6 @@ cc_network_panel_dispose (GObject *object)
 {
         CcNetworkPanelPrivate *priv = CC_NETWORK_PANEL (object)->priv;
 
-        g_clear_object (&priv->proxy_settings);
-
         if (priv->cancellable != NULL)
                 g_cancellable_cancel (priv->cancellable);
 
@@ -263,59 +261,6 @@ cc_network_panel_class_finalize (CcNetworkPanelClass *klass)
 {
 }
 
-static void
-check_wpad_warning (CcNetworkPanel *panel)
-{
-        GtkWidget *widget;
-        gchar *autoconfig_url = NULL;
-        GString *string = NULL;
-        gboolean ret = FALSE;
-        guint mode;
-
-        string = g_string_new ("");
-
-        /* check we're using 'Automatic' */
-        mode = g_settings_get_enum (panel->priv->proxy_settings, "mode");
-        if (mode != 2)
-                goto out;
-
-        /* see if the PAC is blank */
-        autoconfig_url = g_settings_get_string (panel->priv->proxy_settings,
-                                                "autoconfig-url");
-        ret = autoconfig_url == NULL ||
-              autoconfig_url[0] == '\0';
-        if (!ret)
-                goto out;
-
-        g_string_append (string, "<small>");
-
-        /* TRANSLATORS: this is when the use leaves the PAC textbox blank */
-        g_string_append (string, _("Web Proxy Autodiscovery is used when a Configuration URL is not provided."));
-
-        g_string_append (string, "\n");
-
-        /* TRANSLATORS: WPAD is bad: if you enable it on an untrusted
-         * network, then anyone else on that network can tell your
-         * machine that it should proxy all of your web traffic
-         * through them. */
-        g_string_append (string, _("This is not recommended for untrusted public networks."));
-        g_string_append (string, "</small>");
-out:
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "label_proxy_warning"));
-        gtk_label_set_markup (GTK_LABEL (widget), string->str);
-        g_free (autoconfig_url);
-        g_string_free (string, TRUE);
-}
-
-static void
-panel_settings_changed (GSettings      *settings,
-                        const gchar    *key,
-                        CcNetworkPanel *panel)
-{
-        check_wpad_warning (panel);
-}
-
 static NetObject *
 get_selected_object (CcNetworkPanel *panel)
 {
@@ -337,117 +282,6 @@ get_selected_object (CcNetworkPanel *panel)
                             -1);
 
         return object;
-}
-
-static void
-panel_proxy_mode_combo_setup_widgets (CcNetworkPanel *panel, guint value)
-{
-        GtkWidget *widget;
-
-        /* hide or show the PAC text box */
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "heading_proxy_url"));
-        gtk_widget_set_visible (widget, value == 2);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "entry_proxy_url"));
-        gtk_widget_set_visible (widget, value == 2);
-
-        /* hide or show the manual entry text boxes */
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "heading_proxy_http"));
-        gtk_widget_set_visible (widget, value == 1);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "entry_proxy_http"));
-        gtk_widget_set_visible (widget, value == 1);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "spinbutton_proxy_http"));
-        gtk_widget_set_visible (widget, value == 1);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "heading_proxy_https"));
-        gtk_widget_set_visible (widget, value == 1);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "entry_proxy_https"));
-        gtk_widget_set_visible (widget, value == 1);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "spinbutton_proxy_https"));
-        gtk_widget_set_visible (widget, value == 1);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "heading_proxy_ftp"));
-        gtk_widget_set_visible (widget, value == 1);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "entry_proxy_ftp"));
-        gtk_widget_set_visible (widget, value == 1);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "spinbutton_proxy_ftp"));
-        gtk_widget_set_visible (widget, value == 1);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "heading_proxy_socks"));
-        gtk_widget_set_visible (widget, value == 1);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "entry_proxy_socks"));
-        gtk_widget_set_visible (widget, value == 1);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "spinbutton_proxy_socks"));
-        gtk_widget_set_visible (widget, value == 1);
-
-        /* perhaps show the wpad warning */
-        check_wpad_warning (panel);
-}
-
-static void
-panel_proxy_mode_combo_changed_cb (GtkWidget *widget, CcNetworkPanel *panel)
-{
-        gboolean ret;
-        gint value;
-        GtkTreeIter iter;
-        GtkTreeModel *model;
-
-        /* no selection */
-        ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
-        if (!ret)
-                return;
-
-        /* get entry */
-        model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-        gtk_tree_model_get (model, &iter,
-                            1, &value,
-                            -1);
-
-        /* set */
-        g_settings_set_enum (panel->priv->proxy_settings, "mode", value);
-
-        /* hide or show the correct widgets */
-        panel_proxy_mode_combo_setup_widgets (panel, value);
-}
-
-static void
-panel_set_value_for_combo (CcNetworkPanel *panel, GtkComboBox *combo_box, gint value)
-{
-        gboolean ret;
-        gint value_tmp;
-        GtkTreeIter iter;
-        GtkTreeModel *model;
-
-        /* get entry */
-        model = gtk_combo_box_get_model (combo_box);
-        ret = gtk_tree_model_get_iter_first (model, &iter);
-        if (!ret)
-                return;
-
-        /* try to make the UI match the setting */
-        do {
-                gtk_tree_model_get (model, &iter,
-                                    1, &value_tmp,
-                                    -1);
-                if (value == value_tmp) {
-                        gtk_combo_box_set_active_iter (combo_box, &iter);
-                        break;
-                }
-        } while (gtk_tree_model_iter_next (model, &iter));
-
-        /* hide or show the correct widgets */
-        panel_proxy_mode_combo_setup_widgets (panel, value);
 }
 
 static void
@@ -2376,6 +2210,41 @@ nm_device_refresh_vpn_ui (CcNetworkPanel *panel, NetVpn *vpn)
                                net_vpn_get_password (vpn));
 }
 
+static void
+panel_set_notebook_page_for_object (CcNetworkPanel *panel, NetObject *object)
+{
+        CcNetworkPanelPrivate *priv = panel->priv;
+        const gchar *id_tmp;
+        const gchar *needle;
+        GList *l;
+        GList *panels;
+        GtkNotebook *notebook;
+        GtkWidget *widget;
+        guint i = 0;
+
+        /* find the widget in the notebook that matches the object ID */
+        needle = net_object_get_id (object);
+        notebook = GTK_NOTEBOOK (gtk_builder_get_object (priv->builder,
+                                                         "notebook_types"));
+        panels = gtk_container_get_children (GTK_CONTAINER (notebook));
+        for (l = panels; l != NULL; l = l->next) {
+                widget = GTK_WIDGET (l->data);
+                id_tmp = g_object_get_data (G_OBJECT (widget), "NetObject::id");
+                if (g_strcmp0 (needle, id_tmp) == 0) {
+                        gtk_notebook_set_current_page (notebook, i);
+
+                        /* object is deletable? */
+                        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                                     "remove_toolbutton"));
+                        gtk_widget_set_sensitive (widget,
+                                                  net_object_get_removable (object));
+                        break;
+                }
+                i++;
+        }
+        g_list_free (panels);
+}
+
 static gboolean
 refresh_ui_idle (gpointer data)
 {
@@ -2399,42 +2268,12 @@ refresh_ui_idle (gpointer data)
 
         object = get_selected_object (panel);
 
-        /* this is the proxy settings device */
-        if (object == NULL) {
-
-                /* set header to something sane */
-                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "image_proxy_device"));
-                gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-                                              "preferences-system-network",
-                                              GTK_ICON_SIZE_DIALOG);
-                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "label_proxy_device"));
-                gtk_label_set_label (GTK_LABEL (widget),
-                                     _("Proxy"));
-                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "label_proxy_status"));
-                gtk_label_set_label (GTK_LABEL (widget), "");
-
-                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "notebook_types"));
-                gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 2);
-
-                /* hide the switch until we get some more detail in the mockup */
-                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "device_proxy_off_switch"));
-                if (widget != NULL)
-                        gtk_widget_hide (widget);
-
-                /* we shoulnd't be able to delete the proxy device */
-                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "remove_toolbutton"));
-                gtk_widget_set_sensitive (widget, FALSE);
-                goto out;
-        }
+        /* do we have a new-style NetObject-style panel widget */
+        panel_set_notebook_page_for_object (panel, object);
 
         /* VPN */
         if (NET_IS_VPN (object)) {
+
                 nm_device_refresh_vpn_ui (panel, NET_VPN (object));
 
                 /* we're able to remove the VPN connection */
@@ -2482,20 +2321,35 @@ panel_add_proxy_device (CcNetworkPanel *panel)
         gchar *title;
         GtkListStore *liststore_devices;
         GtkTreeIter iter;
+        NetProxy *proxy;
+        GtkWidget *widget;
+        GtkNotebook *notebook;
+        GtkSizeGroup *size_group;
 
+        /* add proxy to notebook */
+        proxy = net_proxy_new ();
+        notebook = GTK_NOTEBOOK (gtk_builder_get_object (panel->priv->builder,
+                                                         "notebook_types"));
+        size_group = GTK_SIZE_GROUP (gtk_builder_get_object (panel->priv->builder,
+                                                             "sizegroup1"));
+        net_object_add_to_notebook (NET_OBJECT (proxy),
+                                    notebook,
+                                    size_group);
+
+        /* add proxy to device list */
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
                                             "liststore_devices"));
         title = g_strdup_printf ("%s", _("Network proxy"));
-
         gtk_list_store_append (liststore_devices, &iter);
         gtk_list_store_set (liststore_devices,
                             &iter,
                             PANEL_DEVICES_COLUMN_ICON, "preferences-system-network",
                             PANEL_DEVICES_COLUMN_TITLE, title,
                             PANEL_DEVICES_COLUMN_SORT, "9",
-                            PANEL_DEVICES_COLUMN_OBJECT, NULL,
+                            PANEL_DEVICES_COLUMN_OBJECT, proxy,
                             -1);
         g_free (title);
+        g_object_unref (proxy);
 }
 
 static void
@@ -3678,9 +3532,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
 {
         DBusGConnection *bus = NULL;
         GError *error = NULL;
-        gint value;
-        GSettings *settings_tmp;
-        GtkAdjustment *adjustment;
         GtkCellRenderer *renderer;
         GtkComboBox *combobox;
         GtkStyleContext *context;
@@ -3702,90 +3553,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
         }
 
         panel->priv->cancellable = g_cancellable_new ();
-
-        panel->priv->proxy_settings = g_settings_new ("org.gnome.system.proxy");
-        g_signal_connect (panel->priv->proxy_settings,
-                          "changed",
-                          G_CALLBACK (panel_settings_changed),
-                          panel);
-
-        /* explicitly set this to false as the panel has no way of
-         * linking the http and https proxies them together */
-        g_settings_set_boolean (panel->priv->proxy_settings,
-                                "use-same-proxy",
-                                FALSE);
-
-        /* actions */
-        value = g_settings_get_enum (panel->priv->proxy_settings, "mode");
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "combobox_proxy_mode"));
-        panel_set_value_for_combo (panel, GTK_COMBO_BOX (widget), value);
-        g_signal_connect (widget, "changed",
-                          G_CALLBACK (panel_proxy_mode_combo_changed_cb),
-                          panel);
-
-        /* bind the proxy values */
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "entry_proxy_url"));
-        g_settings_bind (panel->priv->proxy_settings, "autoconfig-url",
-                         widget, "text",
-                         G_SETTINGS_BIND_DEFAULT);
-
-        /* bind the HTTP proxy values */
-        settings_tmp = g_settings_get_child (panel->priv->proxy_settings, "http");
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "entry_proxy_http"));
-        g_settings_bind (settings_tmp, "host",
-                         widget, "text",
-                         G_SETTINGS_BIND_DEFAULT);
-        adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (panel->priv->builder,
-                                                             "adjustment_proxy_port_http"));
-        g_settings_bind (settings_tmp, "port",
-                         adjustment, "value",
-                         G_SETTINGS_BIND_DEFAULT);
-        g_object_unref (settings_tmp);
-
-        /* bind the HTTPS proxy values */
-        settings_tmp = g_settings_get_child (panel->priv->proxy_settings, "https");
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "entry_proxy_https"));
-        g_settings_bind (settings_tmp, "host",
-                         widget, "text",
-                         G_SETTINGS_BIND_DEFAULT);
-        adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (panel->priv->builder,
-                                                             "adjustment_proxy_port_https"));
-        g_settings_bind (settings_tmp, "port",
-                         adjustment, "value",
-                         G_SETTINGS_BIND_DEFAULT);
-        g_object_unref (settings_tmp);
-
-        /* bind the FTP proxy values */
-        settings_tmp = g_settings_get_child (panel->priv->proxy_settings, "ftp");
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "entry_proxy_ftp"));
-        g_settings_bind (settings_tmp, "host",
-                         widget, "text",
-                         G_SETTINGS_BIND_DEFAULT);
-        adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (panel->priv->builder,
-                                                             "adjustment_proxy_port_ftp"));
-        g_settings_bind (settings_tmp, "port",
-                         adjustment, "value",
-                         G_SETTINGS_BIND_DEFAULT);
-        g_object_unref (settings_tmp);
-
-        /* bind the SOCKS proxy values */
-        settings_tmp = g_settings_get_child (panel->priv->proxy_settings, "socks");
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "entry_proxy_socks"));
-        g_settings_bind (settings_tmp, "host",
-                         widget, "text",
-                         G_SETTINGS_BIND_DEFAULT);
-        adjustment = GTK_ADJUSTMENT (gtk_builder_get_object (panel->priv->builder,
-                                                             "adjustment_proxy_port_socks"));
-        g_settings_bind (settings_tmp, "port",
-                         adjustment, "value",
-                         G_SETTINGS_BIND_DEFAULT);
-        g_object_unref (settings_tmp);
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "treeview_devices"));
@@ -3841,7 +3608,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
                                          panel,
                                          NULL);
 
-
         renderer = panel_cell_renderer_mode_new ();
         gtk_cell_renderer_set_padding (renderer, 4, 0);
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
@@ -3896,10 +3662,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
                                                      "device_vpn_off_switch"));
         g_signal_connect (widget, "notify::active",
                           G_CALLBACK (device_off_toggled), panel);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "device_proxy_off_switch"));
-        g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (device_off_toggled), panel);
 
         g_signal_connect (panel->priv->client, "notify::wireless-enabled",
                           G_CALLBACK (wireless_enabled_toggled), panel);
@@ -3916,7 +3678,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
                                                      "stop_hotspot_button"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (stop_hotspot), panel);
-
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "button_wired_options"));
