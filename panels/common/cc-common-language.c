@@ -61,21 +61,21 @@ cc_common_language_sort_languages (GtkTreeModel *model,
 
 	/* Sort before and after separator first */
 	if (sa && sb)
-		return 0;
-	if (sa)
-		return ulb ? 1 : -1;
-	if (sb)
-		return ula ? -1 : 1;
+		result 0;
+	else if (sa)
+		result = ulb ? 1 : -1;
+	else if (sb)
+		result = ula ? -1 : 1;
 
 	/* Sort user-languages first */
-	if (ula != ulb) {
+	else if (ula != ulb) {
 		if (ula)
-			return -1;
+			result = -1;
 		else
-			return 1;
+			result = 1;
 	}
 
-        if (!ca)
+        else if (!ca)
                 result = 1;
         else if (!cb)
                 result = -1;
