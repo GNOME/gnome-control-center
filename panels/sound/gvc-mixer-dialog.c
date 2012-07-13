@@ -130,6 +130,9 @@ static void     on_control_active_input_update (GvcMixerControl *control,
                                                 guint            id,
                                                 GvcMixerDialog  *dialog);
 
+static void     on_test_speakers_clicked (GvcComboBox *widget,
+                                          gpointer     user_data);
+
 
 G_DEFINE_TYPE (GvcMixerDialog, gvc_mixer_dialog, GTK_TYPE_VBOX)
 
@@ -253,13 +256,22 @@ update_output_settings (GvcMixerDialog      *dialog,
         }
 
         profiles = gvc_mixer_ui_device_get_profiles (device);
-        if (g_list_length ((GList *) profiles) >= 2) {
+        /* FIXME: How do we make sure the "Test speakers" button is shown
+         * even when there are no profiles to choose between? */
+        if (TRUE /*g_list_length((GList *) profiles) >= 2 */) {
                 const gchar *active_profile;
 
                 dialog->priv->output_profile_combo = gvc_combo_box_new (_("_Profile:"));
-                gvc_combo_box_set_profiles (GVC_COMBO_BOX (dialog->priv->output_profile_combo),
-                                            profiles);
 
+                g_object_set (G_OBJECT (dialog->priv->output_profile_combo), "button-label", _("_Test Speakers"), NULL);
+                g_object_set (G_OBJECT (dialog->priv->output_profile_combo),
+                              "show-button", TRUE, NULL);
+                g_signal_connect (G_OBJECT (dialog->priv->output_profile_combo), "button-clicked",
+                                  G_CALLBACK (on_test_speakers_clicked), dialog);
+
+                if (profiles)
+                        gvc_combo_box_set_profiles (GVC_COMBO_BOX (dialog->priv->output_profile_combo),
+                                                    profiles);
                 gtk_box_pack_start (GTK_BOX (dialog->priv->output_settings_box),
                                     dialog->priv->output_profile_combo,
                                     TRUE, FALSE, 6);
@@ -276,8 +288,9 @@ update_output_settings (GvcMixerDialog      *dialog,
                 g_object_set_data (G_OBJECT (dialog->priv->output_profile_combo),
                                    "uidevice",
                                    device);
-                g_signal_connect (G_OBJECT (dialog->priv->output_profile_combo), "changed",
-                                  G_CALLBACK (profile_selection_changed), dialog);
+                if (g_list_length((GList *) profiles))
+                        g_signal_connect (G_OBJECT (dialog->priv->output_profile_combo), "changed",
+                                          G_CALLBACK (profile_selection_changed), dialog);
 
                 gtk_widget_show (dialog->priv->output_profile_combo);
         }
@@ -1614,33 +1627,66 @@ on_test_speakers_clicked (GvcComboBox *widget,
                           gpointer     user_data)
 {
         GvcMixerDialog      *dialog = GVC_MIXER_DIALOG (user_data);
-        GvcMixerCard        *card;
-        GvcMixerCardProfile *profile;
+        GtkTreeModel        *model;
+        GtkTreeIter          iter;
+        gint                 stream_id;
+        gint                 active_output = GVC_MIXER_UI_DEVICE_INVALID;
+        GvcMixerUIDevice    *output;
+        GvcMixerStream      *stream;
         GtkWidget           *d, *speaker_test, *container;
         char                *title;
 
-        card = g_object_get_data (G_OBJECT (widget), "card");
-        if (card == NULL) {
-                g_warning ("Could not find card for combobox");
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->output_treeview));
+
+        if (gtk_tree_model_get_iter_first (model, &iter) == FALSE) {
+                g_warning ("The tree is empty => we have no device to test speakers with return");
                 return;
         }
-        profile = gvc_mixer_card_get_profile (card);
 
-        g_debug ("XXX Start speaker testing for profile '%s', card %s XXX",
-                 profile->profile, gvc_mixer_card_get_name (card));
+        do {
+                gboolean         is_selected = FALSE;
+                gint             id;
 
-        title = g_strdup_printf (_("Speaker Testing for %s"), gvc_mixer_card_get_name (card));
+                gtk_tree_model_get (model, &iter,
+                                    ID_COLUMN, &id,
+                                    ACTIVE_COLUMN, &is_selected,
+                                    -1);
+
+                if (is_selected) {
+                        active_output = id;
+                        break;
+                }
+        } while (gtk_tree_model_iter_next (model, &iter));
+
+        if (active_output == GVC_MIXER_UI_DEVICE_INVALID) {
+                g_warning ("Cant find the active output from the UI");
+                return;
+        }
+
+        output = gvc_mixer_control_lookup_output_id (dialog->priv->mixer_control, (guint)active_output);
+        stream_id = gvc_mixer_ui_device_get_stream_id (output);
+
+        if (stream_id == GVC_MIXER_UI_DEVICE_INVALID)
+                return;
+
+        g_debug ("Test speakers on '%s'", gvc_mixer_ui_device_get_description (output));
+
+        stream = gvc_mixer_control_lookup_stream_id (dialog->priv->mixer_control, stream_id);
+        if (stream == NULL) {
+                g_debug ("Stream/sink not found");
+                return;
+        }
+        title = g_strdup_printf (_("Speaker Testing for %s"), gvc_mixer_ui_device_get_description (output));
         d = gtk_dialog_new_with_buttons (title,
                                          GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (widget))),
                                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                          GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
                                          NULL);
-        /* FIXME: this should not be necessary */
         gtk_window_set_has_resize_grip (GTK_WINDOW (d), FALSE);
 
         g_free (title);
         speaker_test = gvc_speaker_test_new (dialog->priv->mixer_control,
-                                             card);
+                                             stream);
         gtk_widget_show (speaker_test);
         container = gtk_dialog_get_content_area (GTK_DIALOG (d));
         gtk_container_add (GTK_CONTAINER (container), speaker_test);
@@ -1696,7 +1742,7 @@ on_card_selection_changed (GtkTreeSelection *selection,
                             dialog->priv->hw_profile_combo,
                             TRUE, TRUE, 6);
         g_object_set (G_OBJECT (dialog->priv->hw_profile_combo),
-                      "show-button", current_profile->n_sinks == 1,
+                      "show-button", FALSE,
                       NULL);
         gtk_widget_show (dialog->priv->hw_profile_combo);
 
