@@ -1115,8 +1115,8 @@ gnome_control_center_init (GnomeControlCenter *self)
   /* connect various signals */
   priv->window = W (priv->builder, "main-window");
   g_signal_connect_swapped (priv->window, "delete-event", G_CALLBACK (g_object_unref), self);
-  g_signal_connect (priv->window, "key_press_event",
-                    G_CALLBACK (window_key_press_event), self);
+  g_signal_connect_after (priv->window, "key_press_event",
+                          G_CALLBACK (window_key_press_event), self);
 
   priv->notebook = W (priv->builder, "notebook");
   priv->scrolled_window = W (priv->builder, "scrolledwindow1");
