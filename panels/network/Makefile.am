@@ -41,6 +41,7 @@ libnetwork_la_LDFLAGS = $(PANEL_LDFLAGS)
 uidir = $(pkgdatadir)/ui
 dist_ui_DATA =						\
 	network-proxy.ui				\
+	network-vpn.ui					\
 	network.ui
 
 @INTLTOOL_DESKTOP_RULE@
