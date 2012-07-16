@@ -1102,12 +1102,20 @@ window_key_press_event (GtkWidget          *win,
 			GdkEventKey        *event,
 			GnomeControlCenter *self)
 {
+  GdkKeymap *keymap;
   gboolean retval;
+  GdkModifierType state;
+
+  if (event->state == 0)
+    return FALSE;
 
   retval = FALSE;
+  state = event->state;
+  keymap = gdk_keymap_get_default ();
+  gdk_keymap_add_virtual_modifiers (keymap, &state);
+  state = state & gtk_accelerator_get_default_mod_mask ();
 
-  if (event->state != 0 &&
-      (event->state & GDK_CONTROL_MASK))
+  if (state == GDK_CONTROL_MASK)
     {
       switch (event->keyval)
         {
