@@ -219,16 +219,6 @@ state_changed_cb (NMDevice *device,
         net_object_refresh (NET_OBJECT (net_device));
 }
 
-void
-net_device_set_nm_device (NetDevice *device, NMDevice *nm_device)
-{
-        device->priv->nm_device = g_object_ref (nm_device);
-        g_signal_connect (nm_device,
-                          "state-changed",
-                          G_CALLBACK (state_changed_cb),
-                          device);
-}
-
 NMDevice *
 net_device_get_nm_device (NetDevice *device)
 {

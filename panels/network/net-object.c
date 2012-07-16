@@ -95,13 +95,6 @@ net_object_get_removable (NetObject *object)
         return object->priv->removable;
 }
 
-void
-net_object_set_removable (NetObject *object, gboolean removable)
-{
-        g_return_if_fail (NET_IS_OBJECT (object));
-        object->priv->removable = removable;
-}
-
 const gchar *
 net_object_get_title (NetObject *object)
 {
@@ -121,13 +114,6 @@ net_object_get_client (NetObject *object)
 {
         g_return_val_if_fail (NET_IS_OBJECT (object), NULL);
         return object->priv->client;
-}
-
-void
-net_object_set_client (NetObject *object, NMClient *client)
-{
-        g_return_if_fail (NET_IS_OBJECT (object));
-        object->priv->client = g_object_ref (client);
 }
 
 NMRemoteSettings *
@@ -161,6 +147,7 @@ net_object_add_to_notebook (NetObject *object,
                                         g_free);
                 return widget;
         }
+        g_debug ("no klass->add_to_notebook for %s", object->priv->id);
         return NULL;
 }
 
@@ -242,9 +229,7 @@ net_object_set_property (GObject *object_,
                 priv->removable = g_value_get_boolean (value);
                 break;
         case PROP_CLIENT:
-                if (priv->client != NULL)
-                        g_object_unref (priv->client);
-                priv->client = g_object_ref (g_value_get_object (value));
+                priv->client = g_value_dup_object (value);
                 break;
         case PROP_REMOTE_SETTINGS:
                 priv->remote_settings = g_value_dup_object (value);
@@ -296,12 +281,12 @@ net_object_class_init (NetObjectClass *klass)
 
         pspec = g_param_spec_boolean ("removable", NULL, NULL,
                                       TRUE,
-                                      G_PARAM_READWRITE);
+                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
         g_object_class_install_property (object_class, PROP_REMOVABLE, pspec);
 
         pspec = g_param_spec_object ("client", NULL, NULL,
                                      NM_TYPE_CLIENT,
-                                     G_PARAM_READWRITE);
+                                     G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
         g_object_class_install_property (object_class, PROP_CLIENT, pspec);
 
         pspec = g_param_spec_object ("remote-settings", NULL, NULL,
@@ -334,13 +319,5 @@ static void
 net_object_init (NetObject *object)
 {
         object->priv = NET_OBJECT_GET_PRIVATE (object);
-}
-
-NetObject *
-net_object_new (void)
-{
-        NetObject *object;
-        object = g_object_new (NET_TYPE_OBJECT, NULL);
-        return NET_OBJECT (object);
 }
 

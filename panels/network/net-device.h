@@ -53,8 +53,6 @@ struct _NetDeviceClass
 
 GType            net_device_get_type                    (void);
 NetDevice       *net_device_new                         (void);
-void             net_device_set_nm_device               (NetDevice      *device,
-                                                         NMDevice       *nm_device);
 NMDevice        *net_device_get_nm_device               (NetDevice      *device);
 NMConnection    *net_device_get_find_connection         (NetDevice      *device);
 

@@ -483,14 +483,3 @@ net_vpn_init (NetVpn *vpn)
 
         nm_device_refresh_vpn_ui (vpn);
 }
-
-NetVpn *
-net_vpn_new (void)
-{
-        NetVpn *vpn;
-        vpn = g_object_new (NET_TYPE_VPN,
-                            "removable", TRUE,
-                            NULL);
-        return NET_VPN (vpn);
-}
-

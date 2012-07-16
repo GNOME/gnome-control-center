@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
  *
- * Copyright (C) 2010-2011 Richard Hughes <richard@hughsie.com>
+ * Copyright (C) 2010-2012 Richard Hughes <richard@hughsie.com>
  * Copyright (C) 2012 Thomas Bechtold <thomasbechtold@jpberlin.de>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -528,9 +528,9 @@ panel_refresh_killswitch_visibility (CcNetworkPanel *panel)
 static gboolean
 panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 {
+        const gchar *title;
         GtkListStore *liststore_devices;
         GtkTreeIter iter;
-        gchar *title = NULL;
         NMDeviceType type;
         NetDevice *net_device;
         CcNetworkPanelPrivate *priv = panel->priv;
@@ -573,15 +573,20 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                                           device);
         }
 
-        /* make title a bit bigger */
-        title = g_strdup_printf ("%s", panel_device_to_localized_string (device));
+        /* create device */
+        title = panel_device_to_localized_string (device);
+        net_device = g_object_new (NET_TYPE_DEVICE,
+                                   "removable", FALSE,
+                                   "cancellable", panel->priv->cancellable,
+                                   "client", panel->priv->client,
+                                   "remote-settings", panel->priv->remote_settings,
+                                   "nm-device", device,
+                                   "id", nm_device_get_udi (device),
+                                   "title", title,
+                                   NULL);
 
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                             "liststore_devices"));
-        net_device = net_device_new ();
-        net_object_set_client (NET_OBJECT (net_device), panel->priv->client);
-        net_device_set_nm_device (net_device, device);
-        net_object_set_id (NET_OBJECT (net_device), nm_device_get_udi (device));
         register_object_interest (panel, NET_OBJECT (net_device));
         gtk_list_store_append (liststore_devices, &iter);
         gtk_list_store_set (liststore_devices,
@@ -628,7 +633,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         }
 
 out:
-        g_free (title);
         return FALSE;
 }
 
@@ -2222,10 +2226,11 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
                 return;
 
         /* add as a virtual object */
-        net_vpn = net_vpn_new ();
-        net_vpn_set_connection (net_vpn, connection);
-        net_object_set_client (NET_OBJECT (net_vpn), panel->priv->client);
-        net_object_set_id (NET_OBJECT (net_vpn), id);
+        net_vpn = g_object_new (NET_TYPE_VPN,
+                                "removable", TRUE,
+                                "id", id,
+                                "client", panel->priv->client,
+                                NULL);
         register_object_interest (panel, NET_OBJECT (net_vpn));
 
         /* add as a panel */
