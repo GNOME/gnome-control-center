@@ -33,6 +33,12 @@ struct _NetDevicePrivate
         NMDevice                        *nm_device;
 };
 
+enum {
+        PROP_0,
+        PROP_DEVICE,
+        PROP_LAST
+};
+
 G_DEFINE_TYPE (NetDevice, net_device, NET_TYPE_OBJECT)
 
 static void
@@ -62,6 +68,54 @@ net_device_get_nm_device (NetDevice *device)
         return device->priv->nm_device;
 }
 
+/**
+ * net_device_get_property:
+ **/
+static void
+net_device_get_property (GObject *device_,
+                         guint prop_id,
+                         GValue *value,
+                         GParamSpec *pspec)
+{
+        NetDevice *net_device = NET_DEVICE (device_);
+        NetDevicePrivate *priv = net_device->priv;
+
+        switch (prop_id) {
+        case PROP_DEVICE:
+                g_value_set_object (value, priv->nm_device);
+                break;
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (net_device, prop_id, pspec);
+                break;
+        }
+}
+
+/**
+ * net_device_set_property:
+ **/
+static void
+net_device_set_property (GObject *device_,
+                         guint prop_id,
+                         const GValue *value,
+                         GParamSpec *pspec)
+{
+        NetDevice *net_device = NET_DEVICE (device_);
+        NetDevicePrivate *priv = net_device->priv;
+
+        switch (prop_id) {
+        case PROP_DEVICE:
+                priv->nm_device = g_value_dup_object (value);
+                g_signal_connect (priv->nm_device,
+                                  "state-changed",
+                                  G_CALLBACK (state_changed_cb),
+                                  net_device);
+                break;
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (net_device, prop_id, pspec);
+                break;
+        }
+}
+
 static void
 net_device_finalize (GObject *object)
 {
@@ -77,8 +131,17 @@ net_device_finalize (GObject *object)
 static void
 net_device_class_init (NetDeviceClass *klass)
 {
+        GParamSpec *pspec;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         object_class->finalize = net_device_finalize;
+        object_class->get_property = net_device_get_property;
+        object_class->set_property = net_device_set_property;
+
+        pspec = g_param_spec_object ("nm-device", NULL, NULL,
+                                     NM_TYPE_DEVICE,
+                                     G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
+        g_object_class_install_property (object_class, PROP_DEVICE, pspec);
+
         g_type_class_add_private (klass, sizeof (NetDevicePrivate));
 }
 
@@ -93,7 +156,7 @@ net_device_new (void)
 {
         NetDevice *device;
         device = g_object_new (NET_TYPE_DEVICE,
-                               "removable", TRUE,
+                               "removable", FALSE,
                                NULL);
         return NET_DEVICE (device);
 }
