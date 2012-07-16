@@ -206,6 +206,31 @@ void        ipp_attribute_free (IPPAttribute *attr);
 
 gchar      *get_standard_manufacturers_name (gchar *name);
 
+typedef void (*PGPCallback) (const gchar *ppd_filename,
+                             gpointer     user_data);
+
+void        printer_get_ppd_async (const gchar *printer_name,
+                                   PGPCallback  callback,
+                                   gpointer     user_data);
+
+typedef void (*GNDCallback) (cups_dest_t *destination,
+                             gpointer     user_data);
+
+void        get_named_dest_async (const gchar *printer_name,
+                                  GNDCallback  callback,
+                                  gpointer     user_data);
+
+typedef void (*PAOCallback) (gboolean success,
+                             gpointer user_data);
+
+void        printer_add_option_async (const gchar   *printer_name,
+                                      const gchar   *option_name,
+                                      gchar        **values,
+                                      gboolean       set_default,
+                                      GCancellable  *cancellable,
+                                      PAOCallback    callback,
+                                      gpointer       user_data);
+
 G_END_DECLS
 
 #endif /* __PP_UTILS_H */

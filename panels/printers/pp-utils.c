@@ -4195,3 +4195,288 @@ get_standard_manufacturers_name (gchar *name)
 
   return result;
 }
+
+typedef struct
+{
+  gchar        *printer_name;
+  gchar        *result;
+  PGPCallback   callback;
+  gpointer      user_data;
+  GMainContext *context;
+} PGPData;
+
+static gboolean
+printer_get_ppd_idle_cb (gpointer user_data)
+{
+  PGPData *data = (PGPData *) user_data;
+
+  data->callback (data->result, data->user_data);
+
+  return FALSE;
+}
+
+static void
+printer_get_ppd_data_free (gpointer user_data)
+{
+  PGPData *data = (PGPData *) user_data;
+
+  if (data->context)
+    g_main_context_unref (data->context);
+  g_free (data->result);
+  g_free (data->printer_name);
+  g_free (data);
+}
+
+static void
+printer_get_ppd_cb (gpointer user_data)
+{
+  PGPData *data = (PGPData *) user_data;
+  GSource *idle_source;
+
+  idle_source = g_idle_source_new ();
+  g_source_set_callback (idle_source,
+                         printer_get_ppd_idle_cb,
+                         data,
+                         printer_get_ppd_data_free);
+  g_source_attach (idle_source, data->context);
+  g_source_unref (idle_source);
+}
+
+static gpointer
+printer_get_ppd_func (gpointer user_data)
+{
+  PGPData *data = (PGPData *) user_data;
+
+  data->result = g_strdup (cupsGetPPD (data->printer_name));
+
+  printer_get_ppd_cb (data);
+
+  return NULL;
+}
+
+void
+printer_get_ppd_async (const gchar *printer_name,
+                       PGPCallback  callback,
+                       gpointer     user_data)
+{
+  PGPData *data;
+  GThread *thread;
+  GError  *error = NULL;
+
+  data = g_new0 (PGPData, 1);
+  data->printer_name = g_strdup (printer_name);
+  data->callback = callback;
+  data->user_data = user_data;
+  data->context = g_main_context_ref_thread_default ();
+
+  thread = g_thread_try_new ("printer-get-ppd",
+                             printer_get_ppd_func,
+                             data,
+                             &error);
+
+  if (!thread)
+    {
+      g_warning ("%s", error->message);
+      callback (NULL, user_data);
+
+      g_error_free (error);
+      printer_get_ppd_data_free (data);
+    }
+  else
+    {
+      g_thread_unref (thread);
+    }
+}
+
+typedef struct
+{
+  gchar        *printer_name;
+  cups_dest_t  *result;
+  GNDCallback   callback;
+  gpointer      user_data;
+  GMainContext *context;
+} GNDData;
+
+static gboolean
+get_named_dest_idle_cb (gpointer user_data)
+{
+  GNDData *data = (GNDData *) user_data;
+
+  data->callback (data->result, data->user_data);
+
+  return FALSE;
+}
+
+static void
+get_named_dest_data_free (gpointer user_data)
+{
+  GNDData *data = (GNDData *) user_data;
+
+  if (data->context)
+    g_main_context_unref (data->context);
+  g_free (data->printer_name);
+  g_free (data);
+}
+
+static void
+get_named_dest_cb (gpointer user_data)
+{
+  GNDData *data = (GNDData *) user_data;
+  GSource *idle_source;
+
+  idle_source = g_idle_source_new ();
+  g_source_set_callback (idle_source,
+                         get_named_dest_idle_cb,
+                         data,
+                         get_named_dest_data_free);
+  g_source_attach (idle_source, data->context);
+  g_source_unref (idle_source);
+}
+
+static gpointer
+get_named_dest_func (gpointer user_data)
+{
+  GNDData *data = (GNDData *) user_data;
+
+  data->result = cupsGetNamedDest (CUPS_HTTP_DEFAULT, data->printer_name, NULL);
+
+  get_named_dest_cb (data);
+
+  return NULL;
+}
+
+void
+get_named_dest_async (const gchar *printer_name,
+                      GNDCallback  callback,
+                      gpointer     user_data)
+{
+  GNDData *data;
+  GThread *thread;
+  GError  *error = NULL;
+
+  data = g_new0 (GNDData, 1);
+  data->printer_name = g_strdup (printer_name);
+  data->callback = callback;
+  data->user_data = user_data;
+  data->context = g_main_context_ref_thread_default ();
+
+  thread = g_thread_try_new ("get-named-dest",
+                             get_named_dest_func,
+                             data,
+                             &error);
+
+  if (!thread)
+    {
+      g_warning ("%s", error->message);
+      callback (NULL, user_data);
+
+      g_error_free (error);
+      get_named_dest_data_free (data);
+    }
+  else
+    {
+      g_thread_unref (thread);
+    }
+}
+
+typedef struct
+{
+  GCancellable *cancellable;
+  PAOCallback   callback;
+  gpointer      user_data;
+} PAOData;
+
+static void
+printer_add_option_async_dbus_cb (GObject      *source_object,
+                                  GAsyncResult *res,
+                                  gpointer      user_data)
+{
+  GVariant *output;
+  gboolean  success = FALSE;
+  PAOData  *data = (PAOData *) user_data;
+  GError   *error = NULL;
+
+  output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
+                                          res,
+                                          &error);
+  g_object_unref (source_object);
+
+  if (output)
+    {
+      const gchar *ret_error;
+
+      g_variant_get (output, "(&s)", &ret_error);
+      if (ret_error[0] != '\0')
+        g_warning ("%s", ret_error);
+      else
+        success = TRUE;
+
+      g_variant_unref (output);
+    }
+  else
+    {
+      if (error->code != G_IO_ERROR_CANCELLED)
+        g_warning ("%s", error->message);
+      g_error_free (error);
+    }
+
+  data->callback (success, data->user_data);
+
+  if (data->cancellable)
+    g_object_unref (data->cancellable);
+  g_free (data);
+}
+
+void
+printer_add_option_async (const gchar   *printer_name,
+                          const gchar   *option_name,
+                          gchar        **values,
+                          gboolean       set_default,
+                          GCancellable  *cancellable,
+                          PAOCallback    callback,
+                          gpointer       user_data)
+{
+  GVariantBuilder  array_builder;
+  GDBusConnection *bus;
+  PAOData         *data;
+  GError          *error = NULL;
+  gint             i;
+
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
+   {
+     g_warning ("Failed to get system bus: %s", error->message);
+     g_error_free (error);
+     callback (FALSE, user_data);
+     return;
+   }
+
+  g_variant_builder_init (&array_builder, G_VARIANT_TYPE ("as"));
+  if (values)
+    {
+      for (i = 0; values[i]; i++)
+        g_variant_builder_add (&array_builder, "s", values[i]);
+    }
+
+  data = g_new0 (PAOData, 1);
+  data->cancellable = cancellable;
+  data->callback = callback;
+  data->user_data = user_data;
+
+  g_dbus_connection_call (bus,
+                          MECHANISM_BUS,
+                          "/",
+                          MECHANISM_BUS,
+                          set_default ? "PrinterAddOptionDefault" :
+                                        "PrinterAddOption",
+                          g_variant_new ("(ssas)",
+                                         printer_name,
+                                         option_name,
+                                         &array_builder),
+                          G_VARIANT_TYPE ("(s)"),
+                          G_DBUS_CALL_FLAGS_NONE,
+                          -1,
+                          cancellable,
+                          printer_add_option_async_dbus_cb,
+                          data);
+}

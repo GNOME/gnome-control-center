@@ -4,6 +4,7 @@ uidir = $(pkgdatadir)/ui/printers
 dist_ui_DATA = \
 	new-printer-dialog.ui	\
 	ppd-selection-dialog.ui	\
+	options-dialog.ui	\
 	printers.ui
 
 INCLUDES = 						\
@@ -22,10 +23,16 @@ libprinters_la_SOURCES =		\
 	printers-module.c		\
 	pp-utils.c			\
 	pp-utils.h			\
+	pp-ppd-option-widget.c		\
+	pp-ppd-option-widget.h		\
+	pp-ipp-option-widget.c		\
+	pp-ipp-option-widget.h		\
 	pp-new-printer-dialog.c		\
 	pp-new-printer-dialog.h		\
 	pp-ppd-selection-dialog.c	\
 	pp-ppd-selection-dialog.h	\
+	pp-options-dialog.c	\
+	pp-options-dialog.h	\
 	cc-printers-panel.c		\
 	cc-printers-panel.h
 
