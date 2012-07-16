@@ -1920,7 +1920,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
 out: ;
 }
 
-static void
+static gboolean
 panel_set_notebook_page_for_object (CcNetworkPanel *panel, NetObject *object)
 {
         CcNetworkPanelPrivate *priv = panel->priv;
@@ -1930,6 +1930,7 @@ panel_set_notebook_page_for_object (CcNetworkPanel *panel, NetObject *object)
         GList *panels;
         GtkNotebook *notebook;
         GtkWidget *widget;
+        gboolean success = FALSE;
         guint i = 0;
 
         /* find the widget in the notebook that matches the object ID */
@@ -1948,11 +1949,13 @@ panel_set_notebook_page_for_object (CcNetworkPanel *panel, NetObject *object)
                                                                      "remove_toolbutton"));
                         gtk_widget_set_sensitive (widget,
                                                   net_object_get_removable (object));
+                        success = TRUE;
                         break;
                 }
                 i++;
         }
         g_list_free (panels);
+        return success;
 }
 
 static gboolean
@@ -1963,6 +1966,7 @@ refresh_ui_idle (gpointer data)
         GtkTreeIter iter;
         GtkTreeModel *model;
         GtkWidget *widget;
+        gboolean ret;
         NetObject *object = NULL;
         CcNetworkPanelPrivate *priv = panel->priv;
 
@@ -1979,10 +1983,10 @@ refresh_ui_idle (gpointer data)
         object = get_selected_object (panel);
 
         /* do we have a new-style NetObject-style panel widget */
-        panel_set_notebook_page_for_object (panel, object);
+        ret = panel_set_notebook_page_for_object (panel, object);
 
         /* device */
-        if (NET_IS_DEVICE (object)) {
+        if (!ret && NET_IS_DEVICE (object)) {
 
                 /* we're not yet able to remove the connection */
                 widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
