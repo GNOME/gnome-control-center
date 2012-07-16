@@ -56,7 +56,6 @@ enum {
 };
 
 static GSettings *input_sources_settings = NULL;
-static gulong input_sources_settings_changed_id = 0;
 static GnomeXkbInfo *xkb_info = NULL;
 
 #ifdef HAVE_IBUS
@@ -422,9 +421,7 @@ update_configuration (GtkTreeModel *model)
     }
   while (gtk_tree_model_iter_next (model, &iter));
 
-  g_signal_handler_block (input_sources_settings, input_sources_settings_changed_id);
   g_settings_set_value (input_sources_settings, KEY_INPUT_SOURCES, g_variant_builder_end (&builder));
-  g_signal_handler_unblock (input_sources_settings, input_sources_settings_changed_id);
 
  exit:
   g_settings_apply (input_sources_settings);
@@ -969,10 +966,10 @@ setup_input_tabs (GtkBuilder    *builder,
   g_signal_connect (WID("jump-to-shortcuts"), "activate-link",
                     G_CALLBACK (go_to_shortcuts), panel);
 
-  input_sources_settings_changed_id = g_signal_connect (G_OBJECT (input_sources_settings),
-                                                        "changed::" KEY_INPUT_SOURCES,
-                                                        G_CALLBACK (input_sources_changed),
-                                                        builder);
+  g_signal_connect (G_OBJECT (input_sources_settings),
+                    "changed::" KEY_INPUT_SOURCES,
+                    G_CALLBACK (input_sources_changed),
+                    builder);
 }
 
 static void
