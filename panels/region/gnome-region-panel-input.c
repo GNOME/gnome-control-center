@@ -606,9 +606,7 @@ remove_selected_input (GtkButton *button, gpointer data)
 {
   GtkBuilder *builder = data;
   GtkTreeModel *model;
-  GtkTreeModel *child_model;
   GtkTreeIter iter;
-  GtkTreeIter child_iter;
   GtkTreePath *path;
 
   g_debug ("remove selected input source");
@@ -618,11 +616,7 @@ remove_selected_input (GtkButton *button, gpointer data)
 
   path = gtk_tree_model_get_path (model, &iter);
 
-  child_model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (model));
-  gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),
-                                                    &child_iter,
-                                                    &iter);
-  gtk_list_store_remove (GTK_LIST_STORE (child_model), &child_iter);
+  gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 
   if (!gtk_tree_model_get_iter (model, &iter, path))
     gtk_tree_path_prev (path);
@@ -632,7 +626,7 @@ remove_selected_input (GtkButton *button, gpointer data)
   gtk_tree_path_free (path);
 
   update_button_sensitivity (builder);
-  update_configuration (child_model);
+  update_configuration (model);
 }
 
 static void
@@ -640,9 +634,7 @@ move_selected_input_up (GtkButton *button, gpointer data)
 {
   GtkBuilder *builder = data;
   GtkTreeModel *model;
-  GtkTreeModel *child_model;
   GtkTreeIter iter, prev;
-  GtkTreeIter child_iter, child_prev;
   GtkTreePath *path;
 
   g_debug ("move selected input source up");
@@ -656,20 +648,13 @@ move_selected_input_up (GtkButton *button, gpointer data)
 
   path = gtk_tree_model_get_path (model, &prev);
 
-  child_model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (model));
-  gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),
-                                                    &child_iter,
-                                                    &iter);
-  gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),
-                                                    &child_prev,
-                                                    &prev);
-  gtk_list_store_swap (GTK_LIST_STORE (child_model), &child_iter, &child_prev);
+  gtk_list_store_swap (GTK_LIST_STORE (model), &iter, &prev);
 
   set_selected_path (builder, path);
   gtk_tree_path_free (path);
 
   update_button_sensitivity (builder);
-  update_configuration (child_model);
+  update_configuration (model);
 }
 
 static void
@@ -677,9 +662,7 @@ move_selected_input_down (GtkButton *button, gpointer data)
 {
   GtkBuilder *builder = data;
   GtkTreeModel *model;
-  GtkTreeModel *child_model;
   GtkTreeIter iter, next;
-  GtkTreeIter child_iter, child_next;
   GtkTreePath *path;
 
   g_debug ("move selected input source down");
@@ -693,20 +676,13 @@ move_selected_input_down (GtkButton *button, gpointer data)
 
   path = gtk_tree_model_get_path (model, &next);
 
-  child_model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (model));
-  gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),
-                                                    &child_iter,
-                                                    &iter);
-  gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),
-                                                    &child_next,
-                                                    &next);
-  gtk_list_store_swap (GTK_LIST_STORE (child_model), &child_iter, &child_next);
+  gtk_list_store_swap (GTK_LIST_STORE (model), &iter, &next);
 
   set_selected_path (builder, path);
   gtk_tree_path_free (path);
 
   update_button_sensitivity (builder);
-  update_configuration (child_model);
+  update_configuration (model);
 }
 
 static void
