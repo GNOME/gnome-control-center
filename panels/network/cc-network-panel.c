@@ -120,7 +120,6 @@ enum {
 
 static void     refresh_ui      (CcNetworkPanel *panel);
 static NetObject *find_in_model_by_id (CcNetworkPanel *panel, const gchar *id);
-static gboolean find_model_iter_by_object (GtkTreeModel *model, const NetObject *object, GtkTreeIter *iter);
 
 static void
 cc_network_panel_get_property (GObject    *object,
@@ -541,7 +540,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 
         /* we don't support bluetooth devices yet -- no mockup */
         type = nm_device_get_device_type (device);
-
         if (type == NM_DEVICE_TYPE_BT)
                 goto out;
 
@@ -2184,28 +2182,6 @@ find_in_model_by_id (CcNetworkPanel *panel, const gchar *id)
         } while (object == NULL && gtk_tree_model_iter_next (model, &iter));
 out:
         return object;
-}
-
-static gboolean
-find_model_iter_by_object (GtkTreeModel *model, const NetObject *object, GtkTreeIter *iter)
-{
-        gboolean valid;
-        NetObject *object_tmp;
-
-        /* find iter in model according to the passed object */
-        valid = gtk_tree_model_get_iter_first (model, iter);
-        while (valid) {
-                gtk_tree_model_get (model, iter,
-                                    PANEL_DEVICES_COLUMN_OBJECT, &object_tmp,
-                                    -1);
-                if (object_tmp != NULL)
-                        g_object_unref (object_tmp);
-                if (object_tmp == object)
-                        return TRUE;
-                valid = gtk_tree_model_iter_next (model, iter);
-        }
-
-        return FALSE;
 }
 
 static void
