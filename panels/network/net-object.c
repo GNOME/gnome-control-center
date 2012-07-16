@@ -35,6 +35,7 @@ struct _NetObjectPrivate
         gboolean                         removable;
         GCancellable                    *cancellable;
         NMClient                        *client;
+        NMRemoteSettings                *remote_settings;
 };
 
 enum {
@@ -43,6 +44,7 @@ enum {
         PROP_TITLE,
         PROP_REMOVABLE,
         PROP_CLIENT,
+        PROP_REMOTE_SETTINGS,
         PROP_CANCELLABLE,
         PROP_LAST
 };
@@ -128,6 +130,13 @@ net_object_set_client (NetObject *object, NMClient *client)
         object->priv->client = g_object_ref (client);
 }
 
+NMRemoteSettings *
+net_object_get_remote_settings (NetObject *object)
+{
+        g_return_val_if_fail (NET_IS_OBJECT (object), NULL);
+        return object->priv->remote_settings;
+}
+
 GCancellable *
 net_object_get_cancellable (NetObject *object)
 {
@@ -196,6 +205,9 @@ net_object_get_property (GObject *object_,
         case PROP_CLIENT:
                 g_value_set_object (value, priv->client);
                 break;
+        case PROP_REMOTE_SETTINGS:
+                g_value_set_object (value, priv->remote_settings);
+                break;
         case PROP_CANCELLABLE:
                 g_value_set_object (value, priv->cancellable);
                 break;
@@ -234,6 +246,9 @@ net_object_set_property (GObject *object_,
                         g_object_unref (priv->client);
                 priv->client = g_object_ref (g_value_get_object (value));
                 break;
+        case PROP_REMOTE_SETTINGS:
+                priv->remote_settings = g_value_dup_object (value);
+                break;
         case PROP_CANCELLABLE:
                 priv->cancellable = g_value_dup_object (value);
                 break;
@@ -253,6 +268,8 @@ net_object_finalize (GObject *object)
         g_free (priv->title);
         if (priv->client != NULL)
                 g_object_unref (priv->client);
+        if (priv->remote_settings != NULL)
+                g_object_unref (priv->remote_settings);
         if (priv->cancellable != NULL)
                 g_object_unref (priv->cancellable);
         G_OBJECT_CLASS (net_object_parent_class)->finalize (object);
@@ -286,6 +303,11 @@ net_object_class_init (NetObjectClass *klass)
                                      NM_TYPE_CLIENT,
                                      G_PARAM_READWRITE);
         g_object_class_install_property (object_class, PROP_CLIENT, pspec);
+
+        pspec = g_param_spec_object ("remote-settings", NULL, NULL,
+                                     NM_TYPE_REMOTE_SETTINGS,
+                                     G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
+        g_object_class_install_property (object_class, PROP_REMOTE_SETTINGS, pspec);
 
         pspec = g_param_spec_object ("cancellable", NULL, NULL,
                                      G_TYPE_CANCELLABLE,

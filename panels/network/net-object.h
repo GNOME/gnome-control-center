@@ -25,6 +25,7 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 #include <nm-client.h>
+#include <nm-remote-settings.h>
 
 G_BEGIN_DECLS
 
@@ -70,6 +71,7 @@ const gchar     *net_object_get_title                   (NetObject      *object)
 void             net_object_set_title                   (NetObject      *object,
                                                          const gchar    *title);
 NMClient        *net_object_get_client                  (NetObject      *object);
+NMRemoteSettings *net_object_get_remote_settings        (NetObject      *object);
 void             net_object_set_client                  (NetObject      *object,
                                                          NMClient       *client);
 GCancellable    *net_object_get_cancellable             (NetObject      *object);
