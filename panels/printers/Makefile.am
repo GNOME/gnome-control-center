@@ -3,6 +3,7 @@ cappletname = printers
 uidir = $(pkgdatadir)/ui/printers
 dist_ui_DATA = \
 	new-printer-dialog.ui	\
+	ppd-selection-dialog.ui	\
 	printers.ui
 
 INCLUDES = 						\
@@ -18,12 +19,14 @@ ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libprinters.la
 
 libprinters_la_SOURCES =		\
-	printers-module.c	\
-	pp-utils.c	\
-	pp-utils.h	\
-	pp-new-printer-dialog.c	\
-	pp-new-printer-dialog.h	\
-	cc-printers-panel.c	\
+	printers-module.c		\
+	pp-utils.c			\
+	pp-utils.h			\
+	pp-new-printer-dialog.c		\
+	pp-new-printer-dialog.h		\
+	pp-ppd-selection-dialog.c	\
+	pp-ppd-selection-dialog.h	\
+	cc-printers-panel.c		\
 	cc-printers-panel.h
 
 libprinters_la_LIBADD = $(PRINTERS_PANEL_LIBS) $(PANEL_LIBS) $(CUPS_LIBS)

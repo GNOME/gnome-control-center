@@ -33,6 +33,7 @@
 
 #include "cc-editable-entry.h"
 #include "pp-new-printer-dialog.h"
+#include "pp-ppd-selection-dialog.h"
 #include "pp-utils.h"
 
 G_DEFINE_DYNAMIC_TYPE (CcPrintersPanel, cc_printers_panel, CC_TYPE_PANEL)
@@ -83,6 +84,7 @@ struct _CcPrintersPanelPrivate
   GSettings *lockdown_settings;
 
   PpNewPrinterDialog *pp_new_printer_dialog;
+  PpPPDSelectionDialog *pp_ppd_selection_dialog;
 
   GDBusProxy      *cups_proxy;
   GDBusConnection *cups_bus_connection;
@@ -91,13 +93,21 @@ struct _CcPrintersPanelPrivate
   guint            cups_status_check_id;
   guint            dbus_subscription_id;
 
+  GtkWidget    *popup_menu;
+  GList        *driver_change_list;
+  GCancellable *get_ppd_name_cancellable;
+  gboolean      getting_ppd_names;
+  PPDList      *all_ppds_list;
+  GHashTable   *preferred_drivers;
+  gboolean      getting_all_ppds;
+
   gpointer dummy;
 };
 
 static void actualize_jobs_list (CcPrintersPanel *self);
 static void actualize_printers_list (CcPrintersPanel *self);
 static void actualize_allowed_users_list (CcPrintersPanel *self);
-static void actualize_sensitivity (gpointer user_data);
+static void update_sensitivity (gpointer user_data);
 static void printer_disable_cb (GObject *gobject, GParamSpec *pspec, gpointer user_data);
 static void printer_set_default_cb (GtkToggleButton *button, gpointer user_data);
 static void detach_from_cups_notifier (gpointer data);
@@ -180,7 +190,22 @@ cc_printers_panel_dispose (GObject *object)
   detach_from_cups_notifier (CC_PRINTERS_PANEL (object));
 
   if (priv->cups_status_check_id > 0)
-    g_source_remove (priv->cups_status_check_id);
+    {
+      g_source_remove (priv->cups_status_check_id);
+      priv->cups_status_check_id = 0;
+    }
+
+  if (priv->all_ppds_list)
+    {
+      ppd_list_free (priv->all_ppds_list);
+      priv->all_ppds_list = NULL;
+    }
+
+  if (priv->preferred_drivers)
+    {
+      g_hash_table_unref (priv->preferred_drivers);
+      priv->preferred_drivers = NULL;
+    }
 
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->dispose (object);
 }
@@ -502,6 +527,8 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   cups_ptype_t            type = 0;
   GtkTreeIter             iter;
   GtkWidget              *widget;
+  GtkWidget              *model_button;
+  GtkWidget              *model_label;
   gboolean                sensitive;
   GValue                  value = G_VALUE_INIT;
   gchar                  *printer_make_and_model = NULL;
@@ -814,16 +841,23 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
         cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
 
 
-      widget = (GtkWidget*)
+      model_button = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-model-button");
+
+      model_label = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-model-label");
 
       if (printer_model)
         {
-          cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), printer_model);
+          gtk_button_set_label (GTK_BUTTON (model_button), printer_model);
+          gtk_label_set_text (GTK_LABEL (model_label), printer_model);
           g_free (printer_model);
         }
       else
-        cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), EMPTY_TEXT);
+        {
+          gtk_button_set_label (GTK_BUTTON (model_button), EMPTY_TEXT);
+          gtk_label_set_text (GTK_LABEL (model_label), EMPTY_TEXT);
+        }
 
 
       widget = (GtkWidget*)
@@ -918,8 +952,12 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), "");
 
       widget = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-model-button");
+      gtk_button_set_label (GTK_BUTTON (widget), "");
+
+      widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-model-label");
-      cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), "");
+      gtk_label_set_text (GTK_LABEL (widget), "");
 
       widget = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "printer-ip-address-label");
@@ -930,7 +968,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       cc_editable_entry_set_text (CC_EDITABLE_ENTRY (widget), "");
     }
 
-  actualize_sensitivity (self);
+  update_sensitivity (self);
 }
 
 static void
@@ -1157,7 +1195,7 @@ actualize_printers_list (CcPrintersPanel *self)
   g_free (current_printer_instance);
   g_object_unref (store);
 
-  actualize_sensitivity (self);
+  update_sensitivity (self);
 }
 
 static void
@@ -2180,6 +2218,475 @@ printer_location_edit_cb (GtkWidget *entry,
 }
 
 static void
+set_ppd_cb (gchar    *printer_name,
+            gboolean  success,
+            gpointer  user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  GList                  *iter;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  for (iter = priv->driver_change_list; iter; iter = iter->next)
+    {
+      if (g_strcmp0 ((gchar *) iter->data, printer_name) == 0)
+        {
+          priv->driver_change_list = g_list_remove_link (priv->driver_change_list, iter);
+          g_list_free_full (iter, g_free);
+          break;
+        }
+    }
+
+  update_sensitivity (self);
+
+  if (success)
+    {
+      actualize_printers_list (self);
+    }
+
+  g_free (printer_name);
+}
+
+static void
+select_ppd_manually (GtkMenuItem *menuitem,
+                     gpointer     user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  GtkFileFilter          *filter;
+  GtkWidget              *dialog;
+  gchar                  *printer_name = NULL;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  gtk_menu_shell_cancel (GTK_MENU_SHELL (priv->popup_menu));
+
+  dialog = gtk_file_chooser_dialog_new (_("Select PPD File"),
+                                        NULL,
+                                        GTK_FILE_CHOOSER_ACTION_OPEN,
+                                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                        GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+                                        NULL);
+
+  filter = gtk_file_filter_new ();
+  gtk_file_filter_set_name (filter,
+    _("PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"));
+  gtk_file_filter_add_pattern (filter, "*.ppd");
+  gtk_file_filter_add_pattern (filter, "*.PPD");
+  gtk_file_filter_add_pattern (filter, "*.ppd.gz");
+  gtk_file_filter_add_pattern (filter, "*.PPD.gz");
+  gtk_file_filter_add_pattern (filter, "*.PPD.GZ");
+
+  gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (dialog), filter);
+
+  if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
+    {
+      gchar *ppd_filename;
+
+      ppd_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
+
+      if (priv->current_dest >= 0 &&
+          priv->current_dest < priv->num_dests &&
+          priv->dests != NULL)
+        printer_name = priv->dests[priv->current_dest].name;
+
+      if (printer_name && ppd_filename)
+        {
+          priv->driver_change_list =
+            g_list_prepend (priv->driver_change_list, g_strdup (printer_name));
+          update_sensitivity (self);
+          printer_set_ppd_file_async (printer_name,
+                                      ppd_filename,
+                                      NULL,
+                                      set_ppd_cb,
+                                      user_data);
+        }
+
+      g_free (ppd_filename);
+    }
+
+  gtk_widget_destroy (dialog);
+}
+
+static void
+ppd_selection_dialog_response_cb (GtkDialog *dialog,
+                                  gint       response_id,
+                                  gpointer   user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  gchar                  *printer_name = NULL;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  if (response_id == GTK_RESPONSE_OK)
+    {
+      gchar *ppd_name;
+
+      ppd_name = pp_ppd_selection_dialog_get_ppd_name (priv->pp_ppd_selection_dialog);
+
+      if (priv->current_dest >= 0 &&
+          priv->current_dest < priv->num_dests &&
+          priv->dests != NULL)
+        printer_name = priv->dests[priv->current_dest].name;
+
+      if (printer_name && ppd_name)
+        {
+          priv->driver_change_list = g_list_prepend (priv->driver_change_list,
+                                                     g_strdup (printer_name));
+          update_sensitivity (self);
+          printer_set_ppd_async (printer_name,
+                                 ppd_name,
+                                 NULL,
+                                 set_ppd_cb,
+                                 user_data);
+        }
+
+      g_free (ppd_name);
+    }
+
+  pp_ppd_selection_dialog_free (priv->pp_ppd_selection_dialog);
+  priv->pp_ppd_selection_dialog = NULL;
+}
+
+static void
+select_ppd_in_dialog (GtkMenuItem *menuitem,
+                      gpointer     user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  GtkWidget              *widget;
+  gchar                  *device_id = NULL;
+  gchar                  *manufacturer = NULL;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "main-vbox");
+
+  if (!priv->pp_ppd_selection_dialog)
+    {
+      if (priv->current_dest >= 0 &&
+          priv->current_dest < priv->num_dests)
+        {
+          device_id =
+            get_ppd_attribute (priv->ppd_file_names[priv->current_dest],
+                               "1284DeviceID");
+
+          if (device_id)
+            {
+              manufacturer = get_tag_value (device_id, "mfg");
+              if (!manufacturer)
+                manufacturer = get_tag_value (device_id, "manufacturer");
+            }
+          else
+            {
+              manufacturer =
+                get_ppd_attribute (priv->ppd_file_names[priv->current_dest],
+                                   "Manufacturer");
+            }
+        }
+
+      priv->pp_ppd_selection_dialog = pp_ppd_selection_dialog_new (
+        GTK_WINDOW (gtk_widget_get_toplevel (widget)),
+        priv->all_ppds_list,
+        manufacturer,
+        ppd_selection_dialog_response_cb,
+        self);
+
+      g_free (manufacturer);
+      g_free (device_id);
+    }
+}
+
+static void
+set_ppd_from_list (GtkMenuItem *menuitem,
+                   gpointer     user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  gchar                  *printer_name = NULL;
+  gchar                  *ppd_name;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  ppd_name = (gchar *) g_object_get_data (G_OBJECT (menuitem), "ppd-name");
+
+  if (priv->current_dest >= 0 &&
+      priv->current_dest < priv->num_dests &&
+      priv->dests != NULL)
+    printer_name = priv->dests[priv->current_dest].name;
+
+  if (printer_name && ppd_name)
+    {
+      priv->driver_change_list = g_list_prepend (priv->driver_change_list,
+                                                 g_strdup (printer_name));
+      update_sensitivity (self);
+      printer_set_ppd_async (printer_name,
+                             ppd_name,
+                             NULL,
+                             set_ppd_cb,
+                             user_data);
+    }
+}
+
+static void
+ppd_names_free (gpointer user_data)
+{
+  PPDName **names = (PPDName **) user_data;
+  gint      i;
+
+  if (names)
+    {
+      for (i = 0; names[i]; i++)
+        {
+          g_free (names[i]->ppd_name);
+          g_free (names[i]->ppd_display_name);
+          g_free (names[i]);
+        }
+
+      g_free (names);
+    }
+}
+
+static void
+get_ppd_names_cb (PPDName     **names,
+                  const gchar  *printer_name,
+                  gboolean      cancelled,
+                  gpointer      user_data)
+{
+  CcPrintersPanelPrivate  *priv;
+  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
+  GtkWidget               *informal = NULL;
+  GtkWidget               *placeholders[3];
+  GtkWidget               *spinner;
+  gpointer                 value = NULL;
+  gboolean                 found = FALSE;
+  PPDName                **hash_names = NULL;
+  GList                   *children, *iter;
+  gint                     i;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  priv->getting_ppd_names = FALSE;
+
+  for (i = 0; i < 3; i++)
+    placeholders[i] = NULL;
+
+  children = gtk_container_get_children (GTK_CONTAINER (priv->popup_menu));
+  if (children)
+    {
+      for (iter = children; iter; iter = iter->next)
+        {
+          if (g_strcmp0 ((gchar *) g_object_get_data (G_OBJECT (iter->data), "purpose"),
+                         "informal") == 0)
+              informal = GTK_WIDGET (iter->data);
+          else if (g_strcmp0 ((gchar *) g_object_get_data (G_OBJECT (iter->data), "purpose"),
+                              "placeholder1") == 0)
+              placeholders[0] = GTK_WIDGET (iter->data);
+          else if (g_strcmp0 ((gchar *) g_object_get_data (G_OBJECT (iter->data), "purpose"),
+                              "placeholder2") == 0)
+              placeholders[1] = GTK_WIDGET (iter->data);
+          else if (g_strcmp0 ((gchar *) g_object_get_data (G_OBJECT (iter->data), "purpose"),
+                              "placeholder3") == 0)
+              placeholders[2] = GTK_WIDGET (iter->data);
+        }
+
+      g_list_free (children);
+    }
+
+  if (!priv->preferred_drivers)
+    {
+      priv->preferred_drivers = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                                       g_free, ppd_names_free);
+    }
+
+  if (!cancelled &&
+      !g_hash_table_lookup_extended (priv->preferred_drivers,
+                                     printer_name, NULL, NULL))
+    g_hash_table_insert (priv->preferred_drivers, g_strdup (printer_name), names);
+
+  if (priv->preferred_drivers &&
+      g_hash_table_lookup_extended (priv->preferred_drivers,
+                                    printer_name, NULL, &value))
+    {
+      hash_names = (PPDName **) value;
+      if (hash_names)
+        {
+          for (i = 0; hash_names[i]; i++)
+            {
+              if (placeholders[i])
+                {
+                  gtk_menu_item_set_label (GTK_MENU_ITEM (placeholders[i]),
+                                           hash_names[i]->ppd_display_name);
+                  g_object_set_data_full (G_OBJECT (placeholders[i]),
+                                          "ppd-name",
+                                          g_strdup (hash_names[i]->ppd_name),
+                                              g_free);
+                  g_signal_connect (placeholders[i],
+                                    "activate",
+                                    G_CALLBACK (set_ppd_from_list),
+                                    self);
+                  gtk_widget_set_sensitive (GTK_WIDGET (placeholders[i]), TRUE);
+                  gtk_widget_show (placeholders[i]);
+                }
+            }
+
+          found = TRUE;
+        }
+      else
+        {
+          found = FALSE;
+        }
+    }
+
+  if (informal)
+    {
+      gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (informal), FALSE);
+
+      spinner = gtk_image_menu_item_get_image (GTK_IMAGE_MENU_ITEM (informal));
+      if (spinner)
+        gtk_spinner_stop (GTK_SPINNER (spinner));
+
+      if (found)
+        gtk_widget_hide (informal);
+      else
+        gtk_menu_item_set_label (GTK_MENU_ITEM (informal), _("No suitable driver found"));
+    }
+
+  gtk_widget_show_all (priv->popup_menu);
+
+  update_sensitivity (self);
+}
+
+static void
+popup_menu_done (GtkMenuShell *menushell,
+                 gpointer      user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  if (priv->get_ppd_name_cancellable)
+    {
+      g_cancellable_cancel (priv->get_ppd_name_cancellable);
+      g_object_unref (priv->get_ppd_name_cancellable);
+      priv->get_ppd_name_cancellable = NULL;
+    }
+}
+
+static void
+popup_model_menu_cb (GtkButton *button,
+                     gpointer   user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  GtkWidget              *spinner;
+  GtkWidget              *item;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  priv->popup_menu = gtk_menu_new ();
+  g_signal_connect (priv->popup_menu,
+                    "selection-done",
+                    G_CALLBACK (popup_menu_done),
+                    user_data);
+
+  /*
+   * These placeholders are a workaround for a situation
+   * when we want to actually append new menu item in a callback.
+   * But unfortunately it is not possible to connect to "activate"
+   * signal of such menu item (appended after gtk_menu_popup()).
+   */
+  item = gtk_image_menu_item_new_with_label ("");
+  g_object_set_data_full (G_OBJECT (item), "purpose",
+                          g_strdup ("placeholder1"), g_free);
+  gtk_menu_shell_append (GTK_MENU_SHELL (priv->popup_menu), item);
+  gtk_widget_set_no_show_all (item, TRUE);
+  gtk_widget_hide (item);
+
+  item = gtk_image_menu_item_new_with_label ("");
+  g_object_set_data_full (G_OBJECT (item), "purpose",
+                          g_strdup ("placeholder2"), g_free);
+  gtk_menu_shell_append (GTK_MENU_SHELL (priv->popup_menu), item);
+  gtk_widget_set_no_show_all (item, TRUE);
+  gtk_widget_hide (item);
+
+  item = gtk_image_menu_item_new_with_label ("");
+  g_object_set_data_full (G_OBJECT (item), "purpose",
+                          g_strdup ("placeholder3"), g_free);
+  gtk_menu_shell_append (GTK_MENU_SHELL (priv->popup_menu), item);
+  gtk_widget_set_no_show_all (item, TRUE);
+  gtk_widget_hide (item);
+
+  item = gtk_image_menu_item_new_with_label (_("Searching for preferred drivers..."));
+  spinner = gtk_spinner_new ();
+  gtk_spinner_start (GTK_SPINNER (spinner));
+  gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), spinner);
+  gtk_image_menu_item_set_always_show_image (GTK_IMAGE_MENU_ITEM (item), TRUE);
+  g_object_set_data_full (G_OBJECT (item), "purpose",
+                          g_strdup ("informal"), g_free);
+  gtk_widget_set_sensitive (item, FALSE);
+  gtk_menu_shell_append (GTK_MENU_SHELL (priv->popup_menu), item);
+  gtk_widget_set_no_show_all (item, TRUE);
+  gtk_widget_show (item);
+
+  item = gtk_separator_menu_item_new ();
+  gtk_menu_shell_append (GTK_MENU_SHELL (priv->popup_menu), item);
+
+  item = gtk_menu_item_new_with_label (_("Select from database..."));
+  g_object_set_data_full (G_OBJECT (item), "purpose",
+                          g_strdup ("ppd-select"), g_free);
+  g_signal_connect (item, "activate", G_CALLBACK (select_ppd_in_dialog), self);
+  gtk_menu_shell_append (GTK_MENU_SHELL (priv->popup_menu), item);
+
+  item = gtk_separator_menu_item_new ();
+  gtk_menu_shell_append (GTK_MENU_SHELL (priv->popup_menu), item);
+
+  item = gtk_menu_item_new_with_label (_("Provide PPD File..."));
+  g_object_set_data_full (G_OBJECT (item), "purpose",
+                          g_strdup ("ppdfile-select"), g_free);
+  g_signal_connect (item, "activate", G_CALLBACK (select_ppd_manually), self);
+  gtk_menu_shell_append (GTK_MENU_SHELL (priv->popup_menu), item);
+
+  gtk_widget_show_all (priv->popup_menu);
+
+  gtk_menu_popup (GTK_MENU (priv->popup_menu),
+                  NULL, NULL, NULL, NULL, 0,
+                  gtk_get_current_event_time());
+
+  if (priv->current_dest >= 0 &&
+      priv->current_dest < priv->num_dests &&
+      priv->dests != NULL)
+    {
+      if (priv->preferred_drivers &&
+          g_hash_table_lookup_extended (priv->preferred_drivers,
+                                        priv->dests[priv->current_dest].name,
+                                        NULL, NULL))
+        {
+          get_ppd_names_cb (NULL,
+                            priv->dests[priv->current_dest].name,
+                            FALSE,
+                            user_data);
+        }
+      else
+        {
+          priv->get_ppd_name_cancellable = g_cancellable_new ();
+          priv->getting_ppd_names = TRUE;
+          get_ppd_names_async (priv->dests[priv->current_dest].name,
+                               3,
+                               priv->get_ppd_name_cancellable,
+                               get_ppd_names_cb,
+                               user_data);
+
+          update_sensitivity (self);
+        }
+    }
+}
+
+static void
 test_page_cb (GtkButton *button,
               gpointer   user_data)
 {
@@ -2303,7 +2810,7 @@ test_page_cb (GtkButton *button,
 }
 
 static void
-actualize_sensitivity (gpointer user_data)
+update_sensitivity (gpointer user_data)
 {
   CcPrintersPanelPrivate  *priv;
   CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
@@ -2312,9 +2819,12 @@ actualize_sensitivity (gpointer user_data)
   GtkWidget               *widget;
   gboolean                 is_authorized;
   gboolean                 is_discovered = FALSE;
+  gboolean                 is_class = FALSE;
+  gboolean                 is_changing_driver = FALSE;
   gboolean                 printer_selected;
   gboolean                 local_server = TRUE;
   gboolean                 no_cups = FALSE;
+  GList                   *iter;
   gint                     i;
 
   priv = PRINTERS_PANEL_PRIVATE (self);
@@ -2330,15 +2840,26 @@ actualize_sensitivity (gpointer user_data)
                      priv->dests != NULL;
 
   if (printer_selected)
-    for (i = 0; i < priv->dests[priv->current_dest].num_options; i++)
-      {
-        if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-type") == 0)
-          {
-            type = atoi (priv->dests[priv->current_dest].options[i].value);
-            is_discovered = type & CUPS_PRINTER_DISCOVERED;
-            break;
-          }
-      }
+    {
+      for (i = 0; i < priv->dests[priv->current_dest].num_options; i++)
+        {
+          if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-type") == 0)
+            {
+              type = atoi (priv->dests[priv->current_dest].options[i].value);
+              is_discovered = type & CUPS_PRINTER_DISCOVERED;
+              is_class = type & CUPS_PRINTER_CLASS;
+              break;
+            }
+        }
+
+      for (iter = priv->driver_change_list; iter; iter = iter->next)
+        {
+          if (g_strcmp0 ((gchar *) iter->data, priv->dests[priv->current_dest].name) == 0)
+            {
+              is_changing_driver = TRUE;
+            }
+        }
+    }
 
   cups_server = cupsServer ();
   if (cups_server &&
@@ -2390,6 +2911,19 @@ actualize_sensitivity (gpointer user_data)
 
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-location-label");
   cc_editable_entry_set_editable (CC_EDITABLE_ENTRY (widget), local_server && !is_discovered && is_authorized);
+
+  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "printer-model-notebook");
+  if (is_changing_driver)
+    {
+      gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 2);
+    }
+  else
+    {
+      if (local_server && !is_discovered && is_authorized && !is_class && !priv->getting_ppd_names)
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 0);
+      else
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
+    }
 }
 
 static void
@@ -2397,7 +2931,7 @@ on_permission_changed (GPermission *permission,
                        GParamSpec  *pspec,
                        gpointer     data)
 {
-  actualize_sensitivity (data);
+  update_sensitivity (data);
 }
 
 static void
@@ -2491,6 +3025,56 @@ cups_status_check (gpointer user_data)
 }
 
 static void
+get_all_ppds_async_cb (PPDList  *ppds,
+                       gpointer  user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+
+  priv = self->priv = PRINTERS_PANEL_PRIVATE (self);
+
+  priv->all_ppds_list = ppds;
+
+  priv->getting_all_ppds = FALSE;
+
+  if (priv->pp_ppd_selection_dialog)
+    pp_ppd_selection_dialog_set_ppd_list (priv->pp_ppd_selection_dialog,
+                                          priv->all_ppds_list);
+}
+
+static void
+update_label_padding (GtkWidget     *widget,
+                      GtkAllocation *allocation,
+                      gpointer       user_data)
+{
+  CcPrintersPanelPrivate *priv;
+  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  GtkAllocation           allocation1, allocation2;
+  GtkWidget              *label;
+  GtkWidget              *sublabel;
+  gint                    offset;
+  gint                    pad;
+
+  priv = PRINTERS_PANEL_PRIVATE (self);
+
+  sublabel = gtk_bin_get_child (GTK_BIN (widget));
+  if (sublabel)
+    {
+      gtk_widget_get_allocation (widget, &allocation1);
+      gtk_widget_get_allocation (sublabel, &allocation2);
+
+      offset = allocation2.x - allocation1.x;
+
+      label = (GtkWidget*)
+        gtk_builder_get_object (priv->builder, "printer-model-label");
+
+      gtk_misc_get_padding  (GTK_MISC (label), &pad, NULL);
+      if (offset != pad)
+        gtk_misc_set_padding (GTK_MISC (label), offset, 0);
+    }
+}
+
+static void
 cc_printers_panel_init (CcPrintersPanel *self)
 {
   CcPrintersPanelPrivate *priv;
@@ -2531,6 +3115,13 @@ cc_printers_panel_init (CcPrintersPanel *self)
 
   priv->permission = NULL;
   priv->lockdown_settings = NULL;
+
+  priv->getting_ppd_names = FALSE;
+
+  priv->all_ppds_list = NULL;
+  priv->getting_all_ppds = FALSE;
+
+  priv->preferred_drivers = NULL;
 
   builder_result = gtk_builder_add_objects_from_file (priv->builder,
                                                       DATADIR"/printers.ui",
@@ -2628,6 +3219,11 @@ cc_printers_panel_init (CcPrintersPanel *self)
                       G_CALLBACK (on_lockdown_settings_changed),
                       self);
 
+  widget = (GtkWidget*)
+    gtk_builder_get_object (priv->builder, "printer-model-button");
+  g_signal_connect (widget, "clicked", G_CALLBACK (popup_model_menu_cb), self);
+  g_signal_connect (widget, "size-allocate", G_CALLBACK (update_label_padding), self);
+
 
   /* Set junctions */
   widget = (GtkWidget*)
@@ -2666,10 +3262,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
     gtk_builder_get_object (priv->builder, "printer-ip-address-label");
   cc_editable_entry_set_selectable (CC_EDITABLE_ENTRY (widget), TRUE);
 
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "printer-model-label");
-  cc_editable_entry_set_selectable (CC_EDITABLE_ENTRY (widget), TRUE);
-
 
   /* Add unlock button */
   priv->permission = (GPermission *)polkit_permission_new_sync (
@@ -2693,6 +3285,9 @@ Please check your installation");
   populate_jobs_list (self);
   populate_allowed_users_list (self);
   attach_to_cups_notifier (self);
+
+  priv->getting_all_ppds = TRUE;
+  get_all_ppds_async (get_all_ppds_async_cb, self);
 
   http = httpConnectEncrypt (cupsServer (), ippPort (), cupsEncryption ());
   if (!http)

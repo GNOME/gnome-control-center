@@ -40,8 +40,23 @@ enum
 typedef struct
 {
   gchar *ppd_name;
+  gchar *ppd_display_name;
   gint   ppd_match_level;
 } PPDName;
+
+typedef struct
+{
+  gchar    *manufacturer_name;
+  gchar    *manufacturer_display_name;
+  PPDName **ppds;
+  gsize     num_of_ppds;
+} PPDManufacturerItem;
+
+typedef struct
+{
+  PPDManufacturerItem **manufacturers;
+  gsize                 num_of_manufacturers;
+} PPDList;
 
 gchar      *get_tag_value (const gchar *tag_string,
                            const gchar *tag_name);
@@ -115,6 +130,81 @@ gchar      *printer_get_hostname (cups_ptype_t  printer_type,
                                   const gchar  *printer_uri);
 
 void        printer_set_default_media_size (const gchar *printer_name);
+
+typedef void (*PSPCallback) (gchar    *printer_name,
+                             gboolean  success,
+                             gpointer  user_data);
+
+void        printer_set_ppd_async (const gchar  *printer_name,
+                                   const gchar  *ppd_name,
+                                   GCancellable *cancellable,
+                                   PSPCallback   callback,
+                                   gpointer      user_data);
+
+void        printer_set_ppd_file_async (const gchar *printer_name,
+                                        const gchar *ppd_filename,
+                                        GCancellable *cancellable,
+                                        PSPCallback   callback,
+                                        gpointer      user_data);
+
+typedef void (*GPNCallback) (PPDName     **names,
+                             const gchar  *printer_name,
+                             gboolean      cancelled,
+                             gpointer      user_data);
+
+void        get_ppd_names_async (gchar        *printer_name,
+                                 gint          count,
+                                 GCancellable *cancellable,
+                                 GPNCallback   callback,
+                                 gpointer      user_data);
+
+typedef void (*GAPCallback) (PPDList  *ppds,
+                             gpointer  user_data);
+
+void        get_all_ppds_async (GAPCallback callback,
+                                gpointer    user_data);
+
+PPDList    *ppd_list_copy (PPDList *list);
+void        ppd_list_free (PPDList *list);
+
+enum
+{
+  IPP_ATTRIBUTE_TYPE_INTEGER = 0,
+  IPP_ATTRIBUTE_TYPE_STRING,
+  IPP_ATTRIBUTE_TYPE_RANGE,
+  IPP_ATTRIBUTE_TYPE_BOOLEAN
+};
+
+typedef struct
+{
+  gboolean  boolean_value;
+  gchar    *string_value;
+  gint      integer_value;
+  gint      lower_range;
+  gint      upper_range;
+} IPPAttributeValue;
+
+typedef struct
+{
+  gchar             *attribute_name;
+  IPPAttributeValue *attribute_values;
+  gint               num_of_values;
+  gint               attribute_type;
+} IPPAttribute;
+
+typedef void (*GIACallback) (GHashTable *table,
+                             gpointer    user_data);
+
+void        get_ipp_attributes_async (const gchar  *printer_name,
+                                      gchar       **attributes_names,
+                                      GIACallback   callback,
+                                      gpointer      user_data);
+
+IPPAttribute *ipp_attribute_copy (IPPAttribute *attr);
+
+void        ipp_attribute_free (IPPAttribute *attr);
+
+gchar      *get_standard_manufacturers_name (gchar *name);
 
 G_END_DECLS
 
