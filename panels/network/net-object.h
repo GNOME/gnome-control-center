@@ -72,6 +72,7 @@ void             net_object_set_title                   (NetObject      *object,
 NMClient        *net_object_get_client                  (NetObject      *object);
 void             net_object_set_client                  (NetObject      *object,
                                                          NMClient       *client);
+GCancellable    *net_object_get_cancellable             (NetObject      *object);
 void             net_object_emit_changed                (NetObject      *object);
 void             net_object_emit_removed                (NetObject      *object);
 void             net_object_delete                      (NetObject      *object);

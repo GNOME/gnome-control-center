@@ -33,6 +33,7 @@ struct _NetObjectPrivate
         gchar                           *id;
         gchar                           *title;
         gboolean                         removable;
+        GCancellable                    *cancellable;
         NMClient                        *client;
 };
 
@@ -42,6 +43,7 @@ enum {
         PROP_TITLE,
         PROP_REMOVABLE,
         PROP_CLIENT,
+        PROP_CANCELLABLE,
         PROP_LAST
 };
 
@@ -126,6 +128,13 @@ net_object_set_client (NetObject *object, NMClient *client)
         object->priv->client = g_object_ref (client);
 }
 
+GCancellable *
+net_object_get_cancellable (NetObject *object)
+{
+        g_return_val_if_fail (NET_IS_OBJECT (object), NULL);
+        return object->priv->cancellable;
+}
+
 GtkWidget *
 net_object_add_to_notebook (NetObject *object,
                             GtkNotebook *notebook,
@@ -187,6 +196,9 @@ net_object_get_property (GObject *object_,
         case PROP_CLIENT:
                 g_value_set_object (value, priv->client);
                 break;
+        case PROP_CANCELLABLE:
+                g_value_set_object (value, priv->cancellable);
+                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -222,6 +234,9 @@ net_object_set_property (GObject *object_,
                         g_object_unref (priv->client);
                 priv->client = g_object_ref (g_value_get_object (value));
                 break;
+        case PROP_CANCELLABLE:
+                priv->cancellable = g_value_dup_object (value);
+                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -238,7 +253,8 @@ net_object_finalize (GObject *object)
         g_free (priv->title);
         if (priv->client != NULL)
                 g_object_unref (priv->client);
-
+        if (priv->cancellable != NULL)
+                g_object_unref (priv->cancellable);
         G_OBJECT_CLASS (net_object_parent_class)->finalize (object);
 }
 
@@ -270,6 +286,11 @@ net_object_class_init (NetObjectClass *klass)
                                      NM_TYPE_CLIENT,
                                      G_PARAM_READWRITE);
         g_object_class_install_property (object_class, PROP_CLIENT, pspec);
+
+        pspec = g_param_spec_object ("cancellable", NULL, NULL,
+                                     G_TYPE_CANCELLABLE,
+                                     G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
+        g_object_class_install_property (object_class, PROP_CANCELLABLE, pspec);
 
         signals[SIGNAL_CHANGED] =
                 g_signal_new ("changed",
