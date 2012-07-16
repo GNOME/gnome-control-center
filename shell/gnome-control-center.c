@@ -1282,8 +1282,8 @@ gnome_control_center_init (GnomeControlCenter *self)
   g_signal_connect (priv->window, "configure-event", G_CALLBACK (main_window_configure_cb), self);
   g_signal_connect (priv->window, "notify::application", G_CALLBACK (application_set_cb), self);
   g_signal_connect_swapped (priv->window, "delete-event", G_CALLBACK (g_object_unref), self);
-  g_signal_connect (priv->window, "key_press_event",
-                    G_CALLBACK (window_key_press_event), self);
+  g_signal_connect_after (priv->window, "key_press_event",
+                          G_CALLBACK (window_key_press_event), self);
 
   priv->notebook = W (priv->builder, "notebook");
 
