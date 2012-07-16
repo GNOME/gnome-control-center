@@ -128,7 +128,7 @@ update_ibus_active_sources (GtkBuilder *builder)
   gchar *type, *id;
 
   tv = GTK_TREE_VIEW (WID ("active_input_sources"));
-  model = tree_view_get_actual_model (tv);
+  model = gtk_tree_view_get_model (tv);
 
   gtk_tree_model_get_iter_first (model, &iter);
   do
