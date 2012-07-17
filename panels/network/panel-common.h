@@ -40,6 +40,9 @@ const gchar     *panel_device_state_reason_to_localized_string (NMDevice *device
 gboolean         panel_set_device_widget_details               (GtkBuilder *builder,
                                                                 const gchar *widget_suffix,
                                                                 const gchar *value);
+gboolean         panel_set_device_widget_header                (GtkBuilder *builder,
+                                                                const gchar *widget_suffix,
+                                                                const gchar *value);
 
 G_END_DECLS
 

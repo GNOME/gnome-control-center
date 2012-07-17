@@ -507,3 +507,23 @@ panel_set_device_widget_details (GtkBuilder *builder,
         }
         return TRUE;
 }
+
+
+gboolean
+panel_set_device_widget_header (GtkBuilder *builder,
+                                const gchar *widget_suffix,
+                                const gchar *heading)
+{
+        gchar *label_id = NULL;
+        GtkWidget *widget;
+
+        label_id = g_strdup_printf ("heading_%s", widget_suffix);
+        widget = GTK_WIDGET (gtk_builder_get_object (builder, label_id));
+        if (widget == NULL) {
+                g_critical ("no widget %s found", label_id);
+                return FALSE;
+        }
+        gtk_label_set_label (GTK_LABEL (widget), heading);
+        g_free (label_id);
+        return TRUE;
+}
