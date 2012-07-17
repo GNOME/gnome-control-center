@@ -814,11 +814,26 @@ input_sources_changed (GSettings  *settings,
 {
   GtkWidget *treeview;
   GtkTreeModel *store;
+  GtkTreePath *path;
+  GtkTreeIter iter;
+  GtkTreeModel *model;
 
   treeview = WID("active_input_sources");
   store = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
+
+  if (get_selected_iter (builder, &model, &iter))
+    path = gtk_tree_model_get_path (model, &iter);
+  else
+    path = NULL;
+
   gtk_list_store_clear (GTK_LIST_STORE (store));
   populate_with_active_sources (GTK_LIST_STORE (store));
+
+  if (path)
+    {
+      set_selected_path (builder, path);
+      gtk_tree_path_free (path);
+    }
 }
 
 static void
