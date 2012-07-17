@@ -530,7 +530,7 @@ chooser_response (GtkWidget *chooser, gint response_id, gpointer data)
         {
           GtkTreeView *tv;
           GtkListStore *my_model;
-          GtkTreeIter child_iter, filter_iter;
+          GtkTreeIter child_iter;
           gchar *name;
           gchar *type;
           gchar *id;
@@ -550,24 +550,19 @@ chooser_response (GtkWidget *chooser, gint response_id, gpointer data)
           tv = GTK_TREE_VIEW (WID ("active_input_sources"));
           my_model = GTK_LIST_STORE (gtk_tree_view_get_model (tv));
 
-          gtk_list_store_append (my_model, &child_iter);
-
-          gtk_list_store_set (my_model, &child_iter,
-                              NAME_COLUMN, name,
-                              TYPE_COLUMN, type,
-                              ID_COLUMN, id,
-                              SETUP_COLUMN, app_info,
-                              -1);
+          gtk_list_store_insert_with_values (my_model, &child_iter, -1,
+                                             NAME_COLUMN, name,
+                                             TYPE_COLUMN, type,
+                                             ID_COLUMN, id,
+                                             SETUP_COLUMN, app_info,
+                                             -1);
           g_free (name);
           g_free (type);
           g_free (id);
           if (app_info)
             g_object_unref (app_info);
 
-          gtk_tree_model_filter_convert_child_iter_to_iter (GTK_TREE_MODEL_FILTER (gtk_tree_view_get_model (tv)),
-                                                            &filter_iter,
-                                                            &child_iter);
-          gtk_tree_selection_select_iter (gtk_tree_view_get_selection (tv), &filter_iter);
+          gtk_tree_selection_select_iter (gtk_tree_view_get_selection (tv), &child_iter);
 
           update_button_sensitivity (builder);
           update_configuration (GTK_TREE_MODEL (my_model));
