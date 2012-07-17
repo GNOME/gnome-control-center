@@ -1958,7 +1958,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                         NMDeviceModemCapabilities caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
                         if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
                             (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
-                                gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 4);
+                                gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 2);
                                 sub_pane = "mobilebb";
                                 device_refresh_modem_ui (panel, device);
                         } else {
