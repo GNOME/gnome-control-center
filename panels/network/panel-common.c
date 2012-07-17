@@ -473,3 +473,37 @@ panel_device_state_reason_to_localized_string (NMDevice *device)
         }
         return value;
 }
+
+gboolean
+panel_set_device_widget_details (GtkBuilder *builder,
+                                 const gchar *widget_suffix,
+                                 const gchar *value)
+{
+        gchar *heading_id;
+        gchar *label_id;
+        GtkWidget *heading;
+        GtkWidget *widget;
+
+        /* hide the row if there is no value */
+        heading_id = g_strdup_printf ("heading_%s", widget_suffix);
+        label_id = g_strdup_printf ("label_%s", widget_suffix);
+        heading = GTK_WIDGET (gtk_builder_get_object (builder, heading_id));
+        widget = GTK_WIDGET (gtk_builder_get_object (builder, label_id));
+        if (heading == NULL || widget == NULL) {
+                g_critical ("no widgets %s, %s found", heading_id, label_id);
+                return FALSE;
+        }
+        g_free (heading_id);
+        g_free (label_id);
+
+        if (value == NULL) {
+                gtk_widget_hide (heading);
+                gtk_widget_hide (widget);
+        } else {
+                /* there exists a value */
+                gtk_widget_show (heading);
+                gtk_widget_show (widget);
+                gtk_label_set_label (GTK_LABEL (widget), value);
+        }
+        return TRUE;
+}

@@ -31,7 +31,7 @@
             <property name="row_spacing">10</property>
             <property name="column_spacing">6</property>
             <child>
-              <object class="GtkImage" id="image_vpn_device">
+              <object class="GtkImage" id="image_device">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">end</property>
@@ -56,7 +56,7 @@
                 <property name="hexpand">True</property>
                 <property name="spacing">3</property>
                 <child>
-                  <object class="GtkLabel" id="label_vpn_device">
+                  <object class="GtkLabel" id="label_device">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="xalign">0</property>
@@ -74,7 +74,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="label_vpn_status">
+                  <object class="GtkLabel" id="label_status">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="xalign">0</property>
@@ -95,12 +95,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="heading_vpn_service_type">
+              <object class="GtkLabel" id="heading_service_type">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">1</property>
                 <property name="label" translatable="yes">VPN Type</property>
-                <property name="mnemonic_widget">label_vpn_service_type</property>
+                <property name="mnemonic_widget">label_service_type</property>
                 <style>
                   <class name="dim-label"/>
                 </style>
@@ -113,12 +113,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="heading_vpn_gateway">
+              <object class="GtkLabel" id="heading_gateway">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">1</property>
                 <property name="label" translatable="yes">Gateway</property>
-                <property name="mnemonic_widget">label_vpn_gateway</property>
+                <property name="mnemonic_widget">label_gateway</property>
                 <style>
                   <class name="dim-label"/>
                 </style>
@@ -131,12 +131,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="heading_vpn_group_name">
+              <object class="GtkLabel" id="heading_group_name">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">1</property>
                 <property name="label" translatable="yes">Group Name</property>
-                <property name="mnemonic_widget">label_vpn_group_name</property>
+                <property name="mnemonic_widget">label_group_name</property>
                 <style>
                   <class name="dim-label"/>
                 </style>
@@ -149,12 +149,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="heading_vpn_group_password">
+              <object class="GtkLabel" id="heading_group_password">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">1</property>
                 <property name="label" translatable="yes">Group Password</property>
-                <property name="mnemonic_widget">label_vpn_group_password</property>
+                <property name="mnemonic_widget">label_group_password</property>
                 <style>
                   <class name="dim-label"/>
                 </style>
@@ -167,12 +167,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="heading_vpn_username">
+              <object class="GtkLabel" id="heading_username">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">1</property>
                 <property name="label" translatable="yes">Username</property>
-                <property name="mnemonic_widget">label_vpn_username</property>
+                <property name="mnemonic_widget">label_username</property>
                 <style>
                   <class name="dim-label"/>
                 </style>
@@ -185,7 +185,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label_vpn_service_type">
+              <object class="GtkLabel" id="label_service_type">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
@@ -200,7 +200,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label_vpn_gateway">
+              <object class="GtkLabel" id="label_gateway">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
@@ -215,7 +215,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label_vpn_group_name">
+              <object class="GtkLabel" id="label_group_name">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
@@ -230,7 +230,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label_vpn_group_password">
+              <object class="GtkLabel" id="label_group_password">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
@@ -245,7 +245,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="label_vpn_username">
+              <object class="GtkLabel" id="label_username">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
@@ -260,13 +260,13 @@
               </packing>
             </child>
             <child>
-              <object class="GtkAlignment" id="alignment_vpn_switch">
+              <object class="GtkAlignment" id="alignment_switch">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">end</property>
                 <property name="valign">start</property>
                 <child>
-                  <object class="GtkSwitch" id="device_vpn_off_switch">
+                  <object class="GtkSwitch" id="device_off_switch">
                     <property name="use_action_appearance">False</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -294,7 +294,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkButton" id="button_vpn_options">
+              <object class="GtkButton" id="button_options">
                 <property name="label" translatable="yes">_Configure...</property>
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
@@ -326,11 +326,11 @@
   </object>
   <object class="GtkSizeGroup" id="sizegroup1">
     <widgets>
-      <widget name="heading_vpn_service_type"/>
-      <widget name="heading_vpn_gateway"/>
-      <widget name="heading_vpn_group_name"/>
-      <widget name="heading_vpn_group_password"/>
-      <widget name="heading_vpn_username"/>
+      <widget name="heading_service_type"/>
+      <widget name="heading_gateway"/>
+      <widget name="heading_group_name"/>
+      <widget name="heading_group_password"/>
+      <widget name="heading_username"/>
     </widgets>
   </object>
 </interface>
