@@ -42,6 +42,12 @@ struct _NetVpnPrivate
         gboolean                 updating_device;
 };
 
+enum {
+        PROP_0,
+        PROP_CONNECTION,
+        PROP_LAST
+};
+
 G_DEFINE_TYPE (NetVpn, net_vpn, NET_TYPE_OBJECT)
 
 static void
@@ -78,7 +84,7 @@ net_vpn_connection_to_type (NMConnection *connection)
         return g_strdup (p ? p + 1 : type);
 }
 
-void
+static void
 net_vpn_set_connection (NetVpn *vpn, NMConnection *connection)
 {
         NetVpnPrivate *priv = vpn->priv;
@@ -428,6 +434,59 @@ edit_connection (GtkButton *button, NetVpn *vpn)
         g_free (cmdline);
 }
 
+/**
+ * net_vpn_get_property:
+ **/
+static void
+net_vpn_get_property (GObject *object,
+                      guint prop_id,
+                      GValue *value,
+                      GParamSpec *pspec)
+{
+        NetVpn *vpn = NET_VPN (object);
+        NetVpnPrivate *priv = vpn->priv;
+
+        switch (prop_id) {
+        case PROP_CONNECTION:
+                g_value_set_object (value, priv->connection);
+                break;
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (vpn, prop_id, pspec);
+                break;
+        }
+}
+
+/**
+ * net_vpn_set_property:
+ **/
+static void
+net_vpn_set_property (GObject *object,
+                      guint prop_id,
+                      const GValue *value,
+                      GParamSpec *pspec)
+{
+        NetVpn *vpn = NET_VPN (object);
+
+        switch (prop_id) {
+        case PROP_CONNECTION:
+                net_vpn_set_connection (vpn, g_value_get_object (value));
+                break;
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (vpn, prop_id, pspec);
+                break;
+        }
+}
+
+static void
+net_vpn_constructed (GObject *object)
+{
+        NetVpn *vpn = NET_VPN (object);
+
+        G_OBJECT_CLASS (net_vpn_parent_class)->constructed (object);
+
+        nm_device_refresh_vpn_ui (vpn);
+}
+
 static void
 net_vpn_finalize (GObject *object)
 {
@@ -443,13 +502,23 @@ net_vpn_finalize (GObject *object)
 static void
 net_vpn_class_init (NetVpnClass *klass)
 {
+        GParamSpec *pspec;
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         NetObjectClass *parent_class = NET_OBJECT_CLASS (klass);
 
+        object_class->get_property = net_vpn_get_property;
+        object_class->set_property = net_vpn_set_property;
+        object_class->constructed = net_vpn_constructed;
         object_class->finalize = net_vpn_finalize;
         parent_class->add_to_notebook = vpn_proxy_add_to_notebook;
         parent_class->delete = vpn_proxy_delete;
         parent_class->refresh = vpn_proxy_refresh;
+
+        pspec = g_param_spec_object ("connection", NULL, NULL,
+                                     NM_TYPE_CONNECTION,
+                                     G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
+        g_object_class_install_property (object_class, PROP_CONNECTION, pspec);
+
         g_type_class_add_private (klass, sizeof (NetVpnPrivate));
 }
 
@@ -480,6 +549,4 @@ net_vpn_init (NetVpn *vpn)
                                                      "button_vpn_options"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (edit_connection), vpn);
-
-        nm_device_refresh_vpn_ui (vpn);
 }

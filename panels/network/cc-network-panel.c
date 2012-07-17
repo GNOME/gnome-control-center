@@ -2209,6 +2209,7 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         net_vpn = g_object_new (NET_TYPE_VPN,
                                 "removable", TRUE,
                                 "id", id,
+                                "connection", connection,
                                 "client", panel->priv->client,
                                 NULL);
         register_object_interest (panel, NET_OBJECT (net_vpn));

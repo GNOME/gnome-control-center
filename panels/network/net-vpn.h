@@ -54,8 +54,6 @@ struct _NetVpnClass
 };
 
 GType            net_vpn_get_type               (void);
-void             net_vpn_set_connection         (NetVpn         *vpn,
-                                                 NMConnection   *connection);
 
 G_END_DECLS
 
