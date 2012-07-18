@@ -27,6 +27,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <glib/gi18n.h>
+#include <gdk/gdkx.h>
 #include <gtk/gtk.h>
 #include <cairo.h>
 
@@ -39,6 +40,7 @@ struct CalibArea
     XYinfo       axis;
     gboolean     swap;
     gboolean     success;
+    int          device_id;
 
     double X[4], Y[4];
     int display_width, display_height;
@@ -349,6 +351,15 @@ on_button_press_event(GtkWidget      *widget,
     if (area->success)
         return FALSE;
 
+    /* Check matching device ID if a device ID was provided */
+    if (area->device_id > -1) {
+        GdkDevice *device;
+
+        device = gdk_event_get_source_device ((GdkEvent *) event);
+        if (device != NULL && gdk_x11_device_get_id (device) != area->device_id)
+	    return FALSE;
+    }
+
     /* Handle click */
     area->time_elapsed = 0;
     success = add_click(&area->calibrator, (int)event->x_root, (int)event->y_root);
@@ -438,6 +449,7 @@ on_timer_signal(CalibArea *area)
 CalibArea *
 calib_area_new (GdkScreen      *screen,
 		int             monitor,
+		int             device_id,
 		FinishCallback  callback,
 		gpointer        user_data,
 		XYinfo         *old_axis,
@@ -462,6 +474,7 @@ calib_area_new (GdkScreen      *screen,
 	calib_area = g_new0 (CalibArea, 1);
 	calib_area->callback = callback;
 	calib_area->user_data = user_data;
+	calib_area->device_id = device_id;
 	calib_area->calibrator.old_axis.x_min = old_axis->x_min;
 	calib_area->calibrator.old_axis.x_max = old_axis->x_max;
 	calib_area->calibrator.old_axis.y_min = old_axis->y_min;

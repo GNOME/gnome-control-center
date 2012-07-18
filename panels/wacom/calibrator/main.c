@@ -400,7 +400,8 @@ int main(int argc, char** argv)
     gtk_init(&argc, &argv);
 
     calib_area = calib_area_new (NULL,
-				 0,
+				 0,  /* monitor */
+				 -1, /* -1 to ignore device ID */
 				 calibration_finished_cb,
 				 NULL,
 				 &calibrator->old_axis,

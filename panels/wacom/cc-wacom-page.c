@@ -179,7 +179,10 @@ run_calibration (CcWacomPage *page,
 		 gint        *cal,
 		 gint         monitor)
 {
-	XYinfo old_axis;
+	XYinfo              old_axis;
+	GdkDevice          *gdk_device;
+	CcWacomPagePrivate *priv;
+	int                 device_id;
 
 	g_assert (page->priv->area == NULL);
 
@@ -188,8 +191,17 @@ run_calibration (CcWacomPage *page,
 	old_axis.x_max = cal[2];
 	old_axis.y_max = cal[3];
 
+	priv = page->priv;
+	g_object_get (priv->stylus, "gdk-device", &gdk_device, NULL);
+
+	if (gdk_device != NULL)
+		g_object_get (gdk_device, "device-id", &device_id, NULL);
+	else
+		device_id = -1;
+
 	page->priv->area = calib_area_new (NULL,
 					   monitor,
+					   device_id,
 					   finish_calibration,
 					   page,
 					   &old_axis,
