@@ -43,6 +43,8 @@ gboolean         panel_set_device_widget_details               (GtkBuilder *buil
 gboolean         panel_set_device_widget_header                (GtkBuilder *builder,
                                                                 const gchar *widget_suffix,
                                                                 const gchar *value);
+void             panel_set_device_widgets                      (GtkBuilder *builder,
+                                                                NMDevice *device);
 
 G_END_DECLS
 
