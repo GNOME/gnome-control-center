@@ -148,7 +148,6 @@ set_calibration (gint      *cal,
 	g_settings_set_value (settings, "area", array);
 
 	g_free (tmp);
-	g_variant_unref (array);
 }
 
 static void
