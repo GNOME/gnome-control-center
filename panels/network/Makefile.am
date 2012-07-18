@@ -20,6 +20,8 @@ libnetwork_la_SOURCES =					\
 	net-object.h					\
 	net-device.c					\
 	net-device.h					\
+	net-device-wired.c				\
+	net-device-wired.h				\
 	net-vpn.c					\
 	net-vpn.h					\
 	net-proxy.c					\
@@ -42,6 +44,7 @@ uidir = $(pkgdatadir)/ui
 dist_ui_DATA =						\
 	network-proxy.ui				\
 	network-vpn.ui					\
+	network-wired.ui				\
 	network.ui
 
 @INTLTOOL_DESKTOP_RULE@

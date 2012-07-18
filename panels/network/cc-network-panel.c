@@ -45,6 +45,7 @@
 
 #include "net-object.h"
 #include "net-device.h"
+#include "net-device-wired.h"
 #include "net-proxy.h"
 #include "net-vpn.h"
 
@@ -533,6 +534,9 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         NMDeviceType type;
         NetDevice *net_device;
         CcNetworkPanelPrivate *priv = panel->priv;
+        GtkNotebook *notebook;
+        GtkSizeGroup *size_group;
+        GType device_g_type;
 
         /* do we have an existing object with this id? */
         if (find_in_model_by_id (panel, nm_device_get_udi (device)) != NULL)
@@ -571,9 +575,19 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                                           device);
         }
 
+        /* map the NMDeviceType to the GType */
+        switch (type) {
+        case NM_DEVICE_TYPE_ETHERNET:
+                device_g_type = NET_TYPE_DEVICE_WIRED;
+                break;
+        default:
+                device_g_type = NET_TYPE_DEVICE;
+                break;
+        }
+
         /* create device */
         title = panel_device_to_localized_string (device);
-        net_device = g_object_new (NET_TYPE_DEVICE,
+        net_device = g_object_new (device_g_type,
                                    "removable", FALSE,
                                    "cancellable", panel->priv->cancellable,
                                    "client", panel->priv->client,
@@ -582,6 +596,17 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                                    "id", nm_device_get_udi (device),
                                    "title", title,
                                    NULL);
+
+        /* add as a panel */
+        if (device_g_type != NET_TYPE_DEVICE) {
+                notebook = GTK_NOTEBOOK (gtk_builder_get_object (panel->priv->builder,
+                                                                 "notebook_types"));
+                size_group = GTK_SIZE_GROUP (gtk_builder_get_object (panel->priv->builder,
+                                                                     "sizegroup1"));
+                net_object_add_to_notebook (NET_OBJECT (net_device),
+                                            notebook,
+                                            size_group);
+        }
 
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                             "liststore_devices"));
@@ -860,81 +885,6 @@ add_access_point_other (CcNetworkPanel *panel)
                             PANEL_WIRELESS_COLUMN_SECURITY, NM_AP_SEC_UNKNOWN,
                             -1);
 }
-
-#if 0
-static gchar *
-ip4_address_as_string (guint32 ip)
-{
-        char buf[INET_ADDRSTRLEN+1];
-        struct in_addr tmp_addr;
-
-        memset (&buf, '\0', sizeof (buf));
-        tmp_addr.s_addr = ip;
-
-        if (inet_ntop (AF_INET, &tmp_addr, buf, INET_ADDRSTRLEN)) {
-                return g_strdup (buf);
-        } else {
-                g_warning ("error converting IP4 address 0x%X",
-                           ntohl (tmp_addr.s_addr));
-                return NULL;
-        }
-}
-
-static void
-panel_show_ip4_config (NMIP4Config *cfg)
-{
-        gchar *tmp;
-        const GArray *array;
-        const GPtrArray *ptr_array;
-        GSList *iter;
-        int i;
-
-        for (iter = (GSList *) nm_ip4_config_get_addresses (cfg); iter; iter = g_slist_next (iter)) {
-                NMIP4Address *addr = iter->data;
-                guint32 u;
-
-                tmp = ip4_address_as_string (nm_ip4_address_get_address (addr));
-                g_debug ("IP4 address: %s", tmp);
-                g_free (tmp);
-
-                u = nm_ip4_address_get_prefix (addr);
-                tmp = ip4_address_as_string (nm_utils_ip4_prefix_to_netmask (u));
-                g_debug ("IP4 prefix: %d (%s)", u, tmp);
-                g_free (tmp);
-
-                tmp = ip4_address_as_string (nm_ip4_address_get_gateway (addr));
-                g_debug ("IP4 gateway: %s", tmp);
-                g_free (tmp);
-        }
-
-        array = nm_ip4_config_get_nameservers (cfg);
-        if (array) {
-                g_debug ("IP4 DNS:");
-                for (i = 0; i < array->len; i++) {
-                        tmp = ip4_address_as_string (g_array_index (array, guint32, i));
-                        g_debug ("\t%s", tmp);
-                        g_free (tmp);
-                }
-        }
-
-        ptr_array = nm_ip4_config_get_domains (cfg);
-        if (ptr_array) {
-                g_debug ("IP4 domains:");
-                for (i = 0; i < ptr_array->len; i++)
-                        g_debug ("\t%s", (const char *) g_ptr_array_index (ptr_array, i));
-        }
-
-        array = nm_ip4_config_get_wins_servers (cfg);
-        if (array) {
-                g_debug ("IP4 WINS:");
-                for (i = 0; i < array->len; i++) {
-                        tmp = ip4_address_as_string (g_array_index (array, guint32, i));
-                        g_debug ("\t%s", tmp);
-                        g_free (tmp);
-                }
-        }
-}
-#endif
 
 static GPtrArray *
 panel_get_strongest_unique_aps (const GPtrArray *aps)
@@ -1277,25 +1227,6 @@ mobilebb_enabled_toggled (NMClient       *client,
         panel->priv->updating_device = FALSE;
 }
 
-static void
-update_off_switch_from_device_state (GtkSwitch *sw, NMDeviceState state, CcNetworkPanel *panel)
-{
-        panel->priv->updating_device = TRUE;
-        switch (state) {
-                case NM_DEVICE_STATE_UNMANAGED:
-                case NM_DEVICE_STATE_UNAVAILABLE:
-                case NM_DEVICE_STATE_DISCONNECTED:
-                case NM_DEVICE_STATE_DEACTIVATING:
-                case NM_DEVICE_STATE_FAILED:
-                        gtk_switch_set_active (sw, FALSE);
-                        break;
-                default:
-                        gtk_switch_set_active (sw, TRUE);
-                        break;
-        }
-        panel->priv->updating_device = FALSE;
-}
-
 static gboolean
 device_is_hotspot (CcNetworkPanel *panel,
                    NMDevice *device)
@@ -1453,12 +1384,6 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
         /* keep this in sync with the signal handler setup in cc_network_panel_init */
         switch (type) {
         case NM_DEVICE_TYPE_ETHERNET:
-                gtk_widget_set_visible (widget,
-                                        state != NM_DEVICE_STATE_UNAVAILABLE
-                                        && state != NM_DEVICE_STATE_UNMANAGED);
-                update_off_switch_from_device_state (GTK_SWITCH (widget), state, panel);
-                if (state != NM_DEVICE_STATE_UNAVAILABLE)
-                        speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (device));
                 break;
         case NM_DEVICE_TYPE_WIFI:
                 gtk_widget_show (widget);
@@ -1505,9 +1430,6 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
         g_free (wid_name);
         if (widget != NULL) {
                 switch (type) {
-                case NM_DEVICE_TYPE_ETHERNET:
-                        gtk_widget_set_sensitive (widget, TRUE);
-                        break;
                 default:
                         is_connected = find_connection_for_device (panel, device) != NULL;
                         gtk_widget_set_sensitive (widget, is_connected);
@@ -1515,25 +1437,6 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
                 }
         }
         g_string_free (str, TRUE);
-}
-
-static void
-device_refresh_ethernet_ui (CcNetworkPanel *panel, NetDevice *device)
-{
-        const char *str;
-        NMDevice *nm_device;
-
-        nm_device = net_device_get_nm_device (device);
-
-        refresh_header_ui (panel, nm_device, "wired");
-
-        /* device MAC */
-        str = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (nm_device));
-        panel_set_widget_data (panel,
-                               "wired",
-                               "mac",
-                               str);
-
 }
 
 static void
@@ -1793,12 +1696,9 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
 
         switch (type) {
         case NM_DEVICE_TYPE_ETHERNET:
-                gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 0);
-                sub_pane = "wired";
-                device_refresh_ethernet_ui (panel, device);
                 break;
         case NM_DEVICE_TYPE_WIFI:
-                gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
+                gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 0);
                 sub_pane = "wireless";
                 device_refresh_wifi_ui (panel, device);
                 break;
@@ -1810,7 +1710,7 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                         NMDeviceModemCapabilities caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
                         if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
                             (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
-                                gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 2);
+                                gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
                                 sub_pane = "mobilebb";
                                 device_refresh_modem_ui (panel, device);
                         } else {
@@ -3332,10 +3232,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
                           G_CALLBACK (device_removed_cb), panel);
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "device_wired_off_switch"));
-        g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (device_off_toggled), panel);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "device_wireless_off_switch"));
         g_signal_connect (widget, "notify::active",
                           G_CALLBACK (device_off_toggled), panel);
@@ -3359,11 +3255,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
                                                      "stop_hotspot_button"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (stop_hotspot), panel);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "button_wired_options"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (edit_connection), panel);
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "button_wireless_options"));
