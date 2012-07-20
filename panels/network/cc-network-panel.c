@@ -46,6 +46,7 @@
 #include "net-object.h"
 #include "net-device.h"
 #include "net-device-wired.h"
+#include "net-device-mobile.h"
 #include "net-proxy.h"
 #include "net-vpn.h"
 
@@ -313,108 +314,6 @@ select_tree_iter (CcNetworkPanel *panel, GtkTreeIter *iter)
 }
 
 static void
-panel_device_got_modem_manager_cb (GObject *source_object,
-                                   GAsyncResult *res,
-                                   gpointer user_data)
-{
-        GError *error = NULL;
-        GVariant *result = NULL;
-        GDBusProxy *proxy;
-        NMDevice *device = (NMDevice *) user_data;
-
-        proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-        if (proxy == NULL) {
-                g_warning ("Error creating ModemManager proxy: %s",
-                           error->message);
-                g_error_free (error);
-                goto out;
-        }
-
-        /* get the IMEI */
-        result = g_dbus_proxy_get_cached_property (proxy,
-                                                   "EquipmentIdentifier");
-
-        /* save */
-        g_object_set_data_full (G_OBJECT (device),
-                                "ControlCenter::EquipmentIdentifier",
-                                g_variant_dup_string (result, NULL),
-                                g_free);
-out:
-        if (result != NULL)
-                g_variant_unref (result);
-        if (proxy != NULL)
-                g_object_unref (proxy);
-}
-
-static void
-panel_get_registration_info_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
-{
-        gchar *operator_code = NULL;
-        GError *error = NULL;
-        guint registration_status;
-        GVariant *result = NULL;
-        gchar *operator_name = NULL;
-        gchar *operator_name_safe = NULL;
-        NMDevice *device = (NMDevice *) user_data;
-
-        result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
-        if (result == NULL) {
-                g_warning ("Error getting registration info: %s\n",
-                           error->message);
-                g_error_free (error);
-                return;
-        }
-
-        /* get values */
-        g_variant_get (result, "((uss))",
-                       &registration_status,
-                       &operator_code,
-                       &operator_name);
-        if (operator_name != NULL && operator_name[0] != '\0')
-                operator_name_safe = g_strescape (operator_name, NULL);
-
-        /* save */
-        g_object_set_data_full (G_OBJECT (device),
-                                "ControlCenter::OperatorName",
-                                operator_name_safe,
-                                g_free);
-
-        g_free (operator_name);
-        g_free (operator_code);
-        g_variant_unref (result);
-}
-
-static void
-panel_device_got_modem_manager_gsm_cb (GObject *source_object,
-                                       GAsyncResult *res,
-                                       gpointer user_data)
-{
-        GError *error = NULL;
-        GDBusProxy *proxy;
-        NMDevice *device = (NMDevice *) user_data;
-
-        proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-        if (proxy == NULL) {
-                g_warning ("Error creating ModemManager GSM proxy: %s\n",
-                           error->message);
-                g_error_free (error);
-                goto out;
-        }
-
-        g_dbus_proxy_call (proxy,
-                           "GetRegistrationInfo",
-                           NULL,
-                           G_DBUS_CALL_FLAGS_NONE,
-                           -1,
-                           NULL,
-                           panel_get_registration_info_cb,
-                           device);
-out:
-        if (proxy != NULL)
-                g_object_unref (proxy);
-}
-
-static void
 device_state_notify_changed_cb (NMDevice *device,
                                 GParamSpec *pspec,
                                 CcNetworkPanel *panel)
@@ -553,32 +452,13 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         g_signal_connect_object (G_OBJECT (device), "notify::state",
                                  (GCallback) device_state_notify_changed_cb, panel, 0);
 
-        /* do we have to get additonal data from ModemManager */
-        if (type == NM_DEVICE_TYPE_MODEM) {
-                g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
-                                          G_DBUS_PROXY_FLAGS_NONE,
-                                          NULL,
-                                          "org.freedesktop.ModemManager",
-                                          nm_device_get_udi (device),
-                                          "org.freedesktop.ModemManager.Modem",
-                                          panel->priv->cancellable,
-                                          panel_device_got_modem_manager_cb,
-                                          device);
-                g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
-                                          G_DBUS_PROXY_FLAGS_NONE,
-                                          NULL,
-                                          "org.freedesktop.ModemManager",
-                                          nm_device_get_udi (device),
-                                          "org.freedesktop.ModemManager.Modem.Gsm.Network",
-                                          panel->priv->cancellable,
-                                          panel_device_got_modem_manager_gsm_cb,
-                                          device);
-        }
-
         /* map the NMDeviceType to the GType */
         switch (type) {
         case NM_DEVICE_TYPE_ETHERNET:
                 device_g_type = NET_TYPE_DEVICE_WIRED;
+                break;
+        case NM_DEVICE_TYPE_MODEM:
+                device_g_type = NET_TYPE_DEVICE_MOBILE;
                 break;
         default:
                 device_g_type = NET_TYPE_DEVICE;
@@ -1200,33 +1080,6 @@ wimax_enabled_toggled (NMClient       *client,
         panel->priv->updating_device = FALSE;
 }
 
-static void
-mobilebb_enabled_toggled (NMClient       *client,
-                          GParamSpec     *pspec,
-                          CcNetworkPanel *panel)
-{
-        gboolean enabled;
-        GtkSwitch *sw;
-        NMDevice *device;
-        NetObject *object;
-
-        object = get_selected_object (panel);
-        if (object == NULL)
-                return;
-        device = net_device_get_nm_device (NET_DEVICE (object));
-
-        if (nm_device_get_device_type (device) != NM_DEVICE_TYPE_MODEM)
-                return;
-
-        enabled = nm_client_wwan_get_enabled (client);
-        sw = GTK_SWITCH (gtk_builder_get_object (panel->priv->builder,
-                                                 "device_mobilebb_off_switch"));
-
-        panel->priv->updating_device = TRUE;
-        gtk_switch_set_active (sw, enabled);
-        panel->priv->updating_device = FALSE;
-}
-
 static gboolean
 device_is_hotspot (CcNetworkPanel *panel,
                    NMDevice *device)
@@ -1397,8 +1250,6 @@ refresh_header_ui (CcNetworkPanel *panel, NMDevice *device, const char *page_nam
                 wimax_enabled_toggled (panel->priv->client, NULL, panel);
                 break;
         case NM_DEVICE_TYPE_MODEM:
-                gtk_widget_show (widget);
-                mobilebb_enabled_toggled (panel->priv->client, NULL, panel);
                 break;
         default:
                 gtk_widget_hide (widget);
@@ -1576,101 +1427,6 @@ device_refresh_wimax_ui (CcNetworkPanel *panel, NetDevice *device)
 }
 
 static void
-device_add_device_connections (CcNetworkPanel *panel,
-                               NMDevice *nm_device,
-                               GtkListStore *liststore,
-                               GtkComboBox *combobox)
-{
-        CcNetworkPanelPrivate *priv = panel->priv;
-        GSList *filtered;
-        GSList *list, *l;
-        GtkTreeIter treeiter;
-        NMActiveConnection *active_connection;
-        NMConnection *connection;
-
-        /* get the list of available connections for this device */
-        list = nm_remote_settings_list_connections (panel->priv->remote_settings);
-        filtered = nm_device_filter_connections (nm_device, list);
-        gtk_list_store_clear (liststore);
-        active_connection = nm_device_get_active_connection (nm_device);
-        for (l = filtered; l; l = g_slist_next (l)) {
-                connection = NM_CONNECTION (l->data);
-                gtk_list_store_append (liststore, &treeiter);
-                gtk_list_store_set (liststore,
-                                    &treeiter,
-                                    PANEL_MOBILEBB_COLUMN_ID, nm_connection_get_uuid (connection),
-                                    PANEL_MOBILEBB_COLUMN_TITLE, nm_connection_get_id (connection),
-                                    -1);
-
-                /* is this already activated? */
-                if (active_connection != NULL &&
-                    g_strcmp0 (nm_connection_get_path (connection),
-                               nm_active_connection_get_connection (active_connection)) == 0) {
-                        priv->updating_device = TRUE;
-                        gtk_combo_box_set_active_iter (combobox, &treeiter);
-                        priv->updating_device = FALSE;
-                }
-
-        }
-
-        /* add new connection entry */
-        gtk_list_store_append (liststore, &treeiter);
-        gtk_list_store_set (liststore,
-                            &treeiter,
-                            PANEL_MOBILEBB_COLUMN_ID, NULL,
-                            PANEL_MOBILEBB_COLUMN_TITLE, _("Add new connection"),
-                            -1);
-
-        g_slist_free (list);
-        g_slist_free (filtered);
-}
-
-static void
-device_refresh_modem_ui (CcNetworkPanel *panel, NetDevice *device)
-{
-        CcNetworkPanelPrivate *priv = panel->priv;
-        NMDeviceModemCapabilities caps;
-        NMDevice *nm_device;
-        const char *str;
-        GtkListStore *liststore;
-        GtkWidget *widget;
-
-        nm_device = net_device_get_nm_device (device);
-
-        refresh_header_ui (panel, nm_device, "mobilebb");
-
-        caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
-
-        if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
-            (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
-                /* IMEI */
-                str = g_object_get_data (G_OBJECT (nm_device),
-                                         "ControlCenter::EquipmentIdentifier");
-                panel_set_widget_data (panel,
-                                       "mobilebb",
-                                       "imei",
-                                       str);
-
-                /* operator name */
-                str = g_object_get_data (G_OBJECT (nm_device),
-                                         "ControlCenter::OperatorName");
-                panel_set_widget_data (panel,
-                                       "mobilebb",
-                                       "provider",
-                                       str);
-        }
-
-        /* add possible connections to device */
-        liststore = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
-                                                            "liststore_mobile_connections"));
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "combobox_mobilebb_network"));
-        device_add_device_connections (panel,
-                                       nm_device,
-                                       liststore,
-                                       GTK_COMBO_BOX (widget));
-}
-
-static void
 nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
 {
         CcNetworkPanelPrivate *priv = panel->priv;
@@ -1706,17 +1462,6 @@ nm_device_refresh_device_ui (CcNetworkPanel *panel, NetDevice *device)
                 device_refresh_wimax_ui (panel, device);
                 break;
         case NM_DEVICE_TYPE_MODEM:
-                {
-                        NMDeviceModemCapabilities caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
-                        if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
-                            (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
-                                gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
-                                sub_pane = "mobilebb";
-                                device_refresh_modem_ui (panel, device);
-                        } else {
-                                g_warning ("unknown modem capabilities: %i", caps);
-                        }
-                }
                 break;
         default:
                 g_assert_not_reached ();
@@ -2476,61 +2221,6 @@ connect_to_hidden_network (CcNetworkPanel *panel)
 }
 
 static void
-mobile_connection_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
-{
-        gboolean ret;
-        gchar *object_path = NULL;
-        GtkTreeIter iter;
-        GtkTreeModel *model;
-        NetObject *object;
-        NMConnection *connection;
-        NMDevice *device;
-
-        if (panel->priv->updating_device)
-                goto out;
-
-        ret = gtk_combo_box_get_active_iter (combo_box, &iter);
-        if (!ret)
-                goto out;
-
-        object = get_selected_object (panel);
-        if (object == NULL)
-                goto out;
-
-        device = net_device_get_nm_device (NET_DEVICE (object));
-        if (device == NULL)
-                goto out;
-
-        /* get entry */
-        model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo_box));
-        gtk_tree_model_get (model, &iter,
-                            PANEL_MOBILEBB_COLUMN_ID, &object_path,
-                            -1);
-        if (g_strcmp0 (object_path, NULL) == 0) {
-                cc_network_panel_connect_to_3g_network (panel,
-                                                        panel->priv->client,
-                                                        panel->priv->remote_settings,
-                                                        device);
-                goto out;
-        }
-
-        /* activate the connection */
-        g_debug ("try to switch to connection %s", object_path);
-        connection = (NMConnection*) nm_remote_settings_get_connection_by_path (panel->priv->remote_settings,
-                                                                                object_path);
-        if (connection != NULL) {
-                nm_device_disconnect (device, NULL, NULL);
-                nm_client_activate_connection (panel->priv->client,
-                                               connection,
-                                               device, NULL,
-                                               connection_activate_cb, panel);
-                goto out;
-        }
-out:
-        g_free (object_path);
-}
-
-static void
 wireless_ap_changed_cb (GtkComboBox *combo_box, CcNetworkPanel *panel)
 {
         const GByteArray *ssid;
@@ -3160,20 +2850,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
         /* add the virtual proxy device */
         panel_add_proxy_device (panel);
 
-        /* setup mobile combobox model */
-        combobox = GTK_COMBO_BOX (gtk_builder_get_object (panel->priv->builder,
-                                                          "combobox_mobilebb_network"));
-        g_signal_connect (combobox, "changed",
-                          G_CALLBACK (mobile_connection_changed_cb),
-                          panel);
-        renderer = gtk_cell_renderer_text_new ();
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combobox),
-                                    renderer,
-                                    FALSE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combobox), renderer,
-                                        "text", PANEL_MOBILEBB_COLUMN_TITLE,
-                                        NULL);
-
         /* setup wireless combobox model */
         combobox = GTK_COMBO_BOX (gtk_builder_get_object (panel->priv->builder,
                                                           "combobox_wireless_network_name"));
@@ -3235,17 +2911,11 @@ cc_network_panel_init (CcNetworkPanel *panel)
                                                      "device_wireless_off_switch"));
         g_signal_connect (widget, "notify::active",
                           G_CALLBACK (device_off_toggled), panel);
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "device_mobilebb_off_switch"));
-        g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (device_off_toggled), panel);
 
         g_signal_connect (panel->priv->client, "notify::wireless-enabled",
                           G_CALLBACK (wireless_enabled_toggled), panel);
         g_signal_connect (panel->priv->client, "notify::wimax-enabled",
                           G_CALLBACK (wimax_enabled_toggled), panel);
-        g_signal_connect (panel->priv->client, "notify::wwan-enabled",
-                          G_CALLBACK (mobilebb_enabled_toggled), panel);
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "start_hotspot_button"));
@@ -3258,11 +2928,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "button_wireless_options"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (edit_connection), panel);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "button_mobilebb_options"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (edit_connection), panel);
 

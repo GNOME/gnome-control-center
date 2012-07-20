@@ -22,6 +22,8 @@ libnetwork_la_SOURCES =					\
 	net-device.h					\
 	net-device-wired.c				\
 	net-device-wired.h				\
+	net-device-mobile.c				\
+	net-device-mobile.h				\
 	net-vpn.c					\
 	net-vpn.h					\
 	net-proxy.c					\
@@ -45,6 +47,7 @@ dist_ui_DATA =						\
 	network-proxy.ui				\
 	network-vpn.ui					\
 	network-wired.ui				\
+	network-mobile.ui				\
 	network.ui
 
 @INTLTOOL_DESKTOP_RULE@
