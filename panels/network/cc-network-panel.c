@@ -468,6 +468,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         /* create device */
         title = panel_device_to_localized_string (device);
         net_device = g_object_new (device_g_type,
+                                   "panel", panel,
                                    "removable", FALSE,
                                    "cancellable", panel->priv->cancellable,
                                    "client", panel->priv->client,
@@ -1852,6 +1853,7 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
 
         /* add as a virtual object */
         net_vpn = g_object_new (NET_TYPE_VPN,
+                                "panel", panel,
                                 "removable", TRUE,
                                 "id", id,
                                 "connection", connection,

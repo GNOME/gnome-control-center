@@ -30,6 +30,7 @@
 #include <nm-remote-connection.h>
 
 #include "panel-common.h"
+#include "network-dialogs.h"
 
 #include "net-device-mobile.h"
 
@@ -105,6 +106,7 @@ mobile_connection_changed_cb (GtkComboBox *combo_box, NetDeviceMobile *device_mo
         NMDevice *device;
         NMClient *client;
         NMRemoteSettings *remote_settings;
+        CcNetworkPanel *panel;
 
         if (device_mobile->priv->updating_device)
                 goto out;
@@ -125,12 +127,11 @@ mobile_connection_changed_cb (GtkComboBox *combo_box, NetDeviceMobile *device_mo
                             COLUMN_ID, &object_path,
                             -1);
         if (g_strcmp0 (object_path, NULL) == 0) {
-#if 0
+                panel = net_object_get_panel (NET_OBJECT (device_mobile));
                 cc_network_panel_connect_to_3g_network (panel,
                                                         client,
                                                         remote_settings,
                                                         device);
-#endif
                 goto out;
         }
 

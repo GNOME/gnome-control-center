@@ -36,6 +36,7 @@ struct _NetObjectPrivate
         GCancellable                    *cancellable;
         NMClient                        *client;
         NMRemoteSettings                *remote_settings;
+        CcNetworkPanel                  *panel;
 };
 
 enum {
@@ -46,6 +47,7 @@ enum {
         PROP_CLIENT,
         PROP_REMOTE_SETTINGS,
         PROP_CANCELLABLE,
+        PROP_PANEL,
         PROP_LAST
 };
 
@@ -130,6 +132,13 @@ net_object_get_cancellable (NetObject *object)
         return object->priv->cancellable;
 }
 
+CcNetworkPanel *
+net_object_get_panel (NetObject *object)
+{
+        g_return_val_if_fail (NET_IS_OBJECT (object), NULL);
+        return object->priv->panel;
+}
+
 GtkWidget *
 net_object_add_to_notebook (NetObject *object,
                             GtkNotebook *notebook,
@@ -206,6 +215,9 @@ net_object_get_property (GObject *object_,
         case PROP_CANCELLABLE:
                 g_value_set_object (value, priv->cancellable);
                 break;
+        case PROP_PANEL:
+                g_value_set_object (value, priv->panel);
+                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -245,6 +257,9 @@ net_object_set_property (GObject *object_,
         case PROP_CANCELLABLE:
                 priv->cancellable = g_value_dup_object (value);
                 break;
+        case PROP_PANEL:
+                priv->panel = g_value_dup_object (value);
+                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -265,6 +280,8 @@ net_object_finalize (GObject *object)
                 g_object_unref (priv->remote_settings);
         if (priv->cancellable != NULL)
                 g_object_unref (priv->cancellable);
+        if (priv->panel != NULL)
+                g_object_unref (priv->panel);
         G_OBJECT_CLASS (net_object_parent_class)->finalize (object);
 }
 
@@ -306,6 +323,11 @@ net_object_class_init (NetObjectClass *klass)
                                      G_TYPE_CANCELLABLE,
                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
         g_object_class_install_property (object_class, PROP_CANCELLABLE, pspec);
+
+        pspec = g_param_spec_object ("panel", NULL, NULL,
+                                     CC_TYPE_NETWORK_PANEL,
+                                     G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
+        g_object_class_install_property (object_class, PROP_PANEL, pspec);
 
         signals[SIGNAL_CHANGED] =
                 g_signal_new ("changed",

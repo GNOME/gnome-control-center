@@ -27,6 +27,8 @@
 #include <nm-client.h>
 #include <nm-remote-settings.h>
 
+#include "cc-network-panel.h"
+
 G_BEGIN_DECLS
 
 #define NET_TYPE_OBJECT          (net_object_get_type ())
@@ -73,6 +75,7 @@ void             net_object_set_title                   (NetObject      *object,
 NMClient        *net_object_get_client                  (NetObject      *object);
 NMRemoteSettings *net_object_get_remote_settings        (NetObject      *object);
 GCancellable    *net_object_get_cancellable             (NetObject      *object);
+CcNetworkPanel  *net_object_get_panel                   (NetObject      *object);
 void             net_object_emit_changed                (NetObject      *object);
 void             net_object_emit_removed                (NetObject      *object);
 void             net_object_delete                      (NetObject      *object);
