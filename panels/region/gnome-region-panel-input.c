@@ -893,25 +893,6 @@ setup_input_tabs (GtkBuilder    *builder,
   GtkListStore *store;
   GtkTreeSelection *selection;
 
-  input_sources_settings = g_settings_new (GNOME_DESKTOP_INPUT_SOURCES_DIR);
-  g_settings_delay (input_sources_settings);
-  g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) g_object_unref, input_sources_settings);
-
-  if (!xkb_info)
-    xkb_info = gnome_xkb_info_new ();
-
-#ifdef HAVE_IBUS
-  ibus_init ();
-  if (!ibus)
-    {
-      ibus = ibus_bus_new_async ();
-      g_signal_connect_swapped (ibus, "connected",
-                                G_CALLBACK (fetch_ibus_engines), builder);
-      g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) clear_ibus, NULL);
-    }
-  maybe_start_ibus ();
-#endif
-
   /* set up the list of active inputs */
   treeview = WID("active_input_sources");
   column = gtk_tree_view_column_new ();
@@ -926,13 +907,35 @@ setup_input_tabs (GtkBuilder    *builder,
                               G_TYPE_STRING,
                               G_TYPE_DESKTOP_APP_INFO);
 
+  gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), GTK_TREE_MODEL (store));
+
+  input_sources_settings = g_settings_new (GNOME_DESKTOP_INPUT_SOURCES_DIR);
+  g_settings_delay (input_sources_settings);
+  g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) g_object_unref, input_sources_settings);
+
+  if (!xkb_info)
+    xkb_info = gnome_xkb_info_new ();
+
+#ifdef HAVE_IBUS
+  ibus_init ();
+  if (!ibus)
+    {
+      ibus = ibus_bus_new_async ();
+      if (ibus_bus_is_connected (ibus))
+        fetch_ibus_engines (builder);
+      else
+        g_signal_connect_swapped (ibus, "connected",
+                                  G_CALLBACK (fetch_ibus_engines), builder);
+      g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) clear_ibus, NULL);
+    }
+  maybe_start_ibus ();
+#endif
+
   populate_with_active_sources (store);
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
   g_signal_connect_swapped (selection, "changed",
                             G_CALLBACK (update_button_sensitivity), builder);
-
-  gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), GTK_TREE_MODEL (store));
 
   /* set up the buttons */
   g_signal_connect (WID("input_source_add"), "clicked",
