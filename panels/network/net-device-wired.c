@@ -190,20 +190,7 @@ device_off_toggled (GtkSwitch *sw,
 static void
 edit_connection (GtkButton *button, NetDeviceWired *device_wired)
 {
-        const gchar *uuid;
-        gchar *cmdline;
-        GError *error = NULL;
-        NMConnection *connection;
-
-        connection = net_device_get_find_connection (NET_DEVICE (device_wired));
-        uuid = nm_connection_get_uuid (connection);
-        cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
-        g_debug ("Launching '%s'\n", cmdline);
-        if (!g_spawn_command_line_async (cmdline, &error)) {
-                g_warning ("Failed to launch nm-connection-editor: %s", error->message);
-                g_error_free (error);
-        }
-        g_free (cmdline);
+        net_object_edit (NET_OBJECT (device_wired));
 }
 
 static void

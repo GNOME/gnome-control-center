@@ -378,9 +378,16 @@ device_off_toggled (GtkSwitch *sw,
 static void
 edit_connection (GtkButton *button, NetVpn *vpn)
 {
+        net_object_edit (NET_OBJECT (vpn));
+}
+
+static void
+vpn_proxy_edit (NetObject *object)
+{
         const gchar *uuid;
         gchar *cmdline;
         GError *error = NULL;
+        NetVpn *vpn = NET_VPN (object);
 
         uuid = nm_connection_get_uuid (vpn->priv->connection);
         cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
@@ -471,6 +478,7 @@ net_vpn_class_init (NetVpnClass *klass)
         parent_class->add_to_notebook = vpn_proxy_add_to_notebook;
         parent_class->delete = vpn_proxy_delete;
         parent_class->refresh = vpn_proxy_refresh;
+        parent_class->edit = vpn_proxy_edit;
 
         pspec = g_param_spec_object ("connection", NULL, NULL,
                                      NM_TYPE_CONNECTION,
