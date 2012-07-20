@@ -20,6 +20,8 @@ libnetwork_la_SOURCES =					\
 	net-object.h					\
 	net-device.c					\
 	net-device.h					\
+	net-device-wifi.c				\
+	net-device-wifi.h				\
 	net-device-wired.c				\
 	net-device-wired.h				\
 	net-device-mobile.c				\
@@ -46,6 +48,7 @@ uidir = $(pkgdatadir)/ui
 dist_ui_DATA =						\
 	network-proxy.ui				\
 	network-vpn.ui					\
+	network-wifi.ui					\
 	network-wired.ui				\
 	network-mobile.ui				\
 	network.ui
