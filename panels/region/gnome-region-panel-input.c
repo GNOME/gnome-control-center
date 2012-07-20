@@ -126,12 +126,13 @@ update_ibus_active_sources (GtkBuilder *builder)
   GtkTreeModel *model;
   GtkTreeIter iter;
   gchar *type, *id;
+  gboolean ret;
 
   tv = GTK_TREE_VIEW (WID ("active_input_sources"));
   model = gtk_tree_view_get_model (tv);
 
-  gtk_tree_model_get_iter_first (model, &iter);
-  do
+  ret = gtk_tree_model_get_iter_first (model, &iter);
+  while (ret)
     {
       gtk_tree_model_get (model, &iter,
                           TYPE_COLUMN, &type,
@@ -157,8 +158,9 @@ update_ibus_active_sources (GtkBuilder *builder)
 
       g_free (type);
       g_free (id);
+
+      ret = gtk_tree_model_iter_next (model, &iter);
     }
-  while (gtk_tree_model_iter_next (model, &iter));
 }
 
 static void
