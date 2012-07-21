@@ -20,16 +20,16 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-07-17 04:00+0000\n"
-"PO-Revision-Date: 2012-07-17 12:03+0200\n"
+"POT-Creation-Date: 2012-07-20 23:05+0000\n"
+"PO-Revision-Date: 2012-07-21 17:48+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Gtranslator 2.91.4\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Gtranslator 2.91.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../panels/background/background.ui.h:1
 msgid "Add wallpaper"
@@ -154,7 +154,7 @@ msgstr "Fondo de pantalla;Pantalla;Escritorio;"
 
 #. TRANSLATORS: device type
 #: ../panels/bluetooth/bluetooth-properties.desktop.in.in.h:1
-#: ../panels/network/panel-common.c:100
+#: ../panels/network/panel-common.c:102
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -894,8 +894,8 @@ msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:426 ../panels/network/panel-common.c:80
-#: ../panels/network/panel-common.c:160
+#: ../panels/info/cc-info-panel.c:426 ../panels/network/panel-common.c:82
+#: ../panels/network/panel-common.c:162
 msgid "Unknown"
 msgstr "Desconocido"
 
@@ -1526,7 +1526,7 @@ msgid "_Reassign"
 msgstr "_Reasignar"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1618
-#: ../panels/wacom/cc-wacom-page.c:609
+#: ../panels/wacom/cc-wacom-page.c:620
 msgid "Action"
 msgstr "Acción"
 
@@ -1668,84 +1668,87 @@ msgstr "Touchpad"
 #. TRANSLATORS: this is when the access point is not listed
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
-#: ../panels/network/cc-network-panel.c:855
+#: ../panels/network/cc-network-panel.c:761
 msgctxt "Wireless access point"
 msgid "Other..."
 msgstr "Otra…"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:1019
-#: ../panels/network/cc-network-panel.c:1536
+#: ../panels/network/cc-network-panel.c:850
+#: ../panels/network/cc-network-panel.c:1173
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1023
-#: ../panels/network/cc-network-panel.c:1540
+#: ../panels/network/cc-network-panel.c:854
+#: ../panels/network/cc-network-panel.c:1177
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1027
+#: ../panels/network/cc-network-panel.c:858
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:1032
+#: ../panels/network/cc-network-panel.c:863
 msgid "Enterprise"
 msgstr "Empresa"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:1038
-#: ../panels/network/cc-network-panel.c:1531
-#: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:324
-#: ../panels/wacom/cc-wacom-page.c:341
+#: ../panels/network/cc-network-panel.c:869
+#: ../panels/network/cc-network-panel.c:1168
+#: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:335
+#: ../panels/wacom/cc-wacom-page.c:352
 msgid "None"
 msgstr "Ninguna"
 
-#: ../panels/network/cc-network-panel.c:1636
+#: ../panels/network/cc-network-panel.c:1265
 msgid "Hotspot"
 msgstr "«Hotspot»"
 
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1643
+#: ../panels/network/cc-network-panel.c:1272
+#: ../panels/network/net-device-mobile.c:261
+#: ../panels/network/net-device-wired.c:126
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: ../panels/network/cc-network-panel.c:1866
-msgid "Add new connection"
-msgstr "Añadir una conexión nueva"
-
-#: ../panels/network/cc-network-panel.c:2059 ../panels/network/network.ui.h:11
+#: ../panels/network/cc-network-panel.c:1557 ../panels/network/network.ui.h:11
+#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:690
 msgid "IPv4 Address"
 msgstr "Dirección IPv4"
 
-#: ../panels/network/cc-network-panel.c:2060 ../panels/network/network.ui.h:12
+#: ../panels/network/cc-network-panel.c:1558
+#: ../panels/network/network-mobile.ui.h:4 ../panels/network/network.ui.h:12
+#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:691
 msgid "IPv6 Address"
 msgstr "Dirección IPv6"
 
-#: ../panels/network/cc-network-panel.c:2063
-#: ../panels/network/cc-network-panel.c:2066 ../panels/network/network.ui.h:27
+#: ../panels/network/cc-network-panel.c:1561
+#: ../panels/network/cc-network-panel.c:1564
+#: ../panels/network/network-mobile.ui.h:3
+#: ../panels/network/panel-common.c:693 ../panels/network/panel-common.c:695
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "Dirección IP"
 
-#: ../panels/network/cc-network-panel.c:2187
+#: ../panels/network/cc-network-panel.c:1689
 msgid "Network proxy"
 msgstr "Proxy de la red"
 
-#: ../panels/network/cc-network-panel.c:2392 ../panels/network/net-vpn.c:314
+#: ../panels/network/cc-network-panel.c:1875 ../panels/network/net-vpn.c:278
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2459
+#: ../panels/network/cc-network-panel.c:1942
 msgid "The system network services are not compatible with this version."
 msgstr "Los servicios de red del sistema no son compatibles con esta versión."
 
-#: ../panels/network/cc-network-panel.c:2658
+#: ../panels/network/cc-network-panel.c:2141
 #, c-format
 msgid ""
 "Network details for %s including password and any custom configuration will "
@@ -1754,47 +1757,47 @@ msgstr ""
 "Se perderán los detalles de la red %s, incluyendo la contraseña y cualquier "
 "configuración personalizada"
 
-#: ../panels/network/cc-network-panel.c:2668
+#: ../panels/network/cc-network-panel.c:2151
 msgid "Forget"
 msgstr "Olvidar"
 
-#: ../panels/network/cc-network-panel.c:3237
+#: ../panels/network/cc-network-panel.c:2665
 msgid "Not connected to the internet."
 msgstr "No conectado a Internet."
 
-#: ../panels/network/cc-network-panel.c:3238
+#: ../panels/network/cc-network-panel.c:2666
 msgid "Create the hotspot anyway?"
 msgstr "¿Crear el «hotspot» de todas formas?"
 
-#: ../panels/network/cc-network-panel.c:3256
+#: ../panels/network/cc-network-panel.c:2684
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
 msgstr "¿Desconectarse de %s y crear un «hotspot» nuevo?"
 
-#: ../panels/network/cc-network-panel.c:3259
+#: ../panels/network/cc-network-panel.c:2687
 msgid "This is your only connection to the internet."
 msgstr "Esta es su única conexión a Internet."
 
-#: ../panels/network/cc-network-panel.c:3277
+#: ../panels/network/cc-network-panel.c:2705
 msgid "Create _Hotspot"
 msgstr "Crear «_hotspot»"
 
-#: ../panels/network/cc-network-panel.c:3337
+#: ../panels/network/cc-network-panel.c:2765
 msgid "Stop hotspot and disconnect any users?"
 msgstr "¿Detener el «hotspot» y desconectar a los usuarios?"
 
-#: ../panels/network/cc-network-panel.c:3340
+#: ../panels/network/cc-network-panel.c:2768
 msgid "_Stop Hotspot"
 msgstr "_Detener «hotspot»"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:3359
+#: ../panels/network/cc-network-panel.c:2787
 msgid "Air_plane Mode"
 msgstr "Modo a_vión"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network-mobile.ui.h:7
 msgid "Network"
 msgstr "Red"
 
@@ -1806,6 +1809,10 @@ msgstr "Configuración de red"
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
 msgid "Network;Wireless;IP;LAN;Proxy;"
 msgstr "Red;Inalámbrica;IP;LAN;Proxy;"
+
+#: ../panels/network/net-device-mobile.c:222
+msgid "Add new connection"
+msgstr "Añadir una conexión nueva"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: ../panels/network/net-proxy.c:67
@@ -1826,6 +1833,29 @@ msgstr "No se recomienda para redes públicas en las que no se confía."
 #: ../panels/network/net-proxy.c:367
 msgid "Proxy"
 msgstr "Proxy"
+
+#: ../panels/network/network-mobile.ui.h:1
+msgid "IMEI"
+msgstr "IMEI"
+
+#: ../panels/network/network-mobile.ui.h:2
+msgid "Provider"
+msgstr "Proveedor"
+
+#: ../panels/network/network-mobile.ui.h:5 ../panels/network/network.ui.h:13
+#: ../panels/network/network-wired.ui.h:5
+msgid "Default Route"
+msgstr "Ruta predeterminada"
+
+#: ../panels/network/network-mobile.ui.h:6 ../panels/network/network.ui.h:14
+#: ../panels/network/network-wired.ui.h:6
+msgid "DNS"
+msgstr "DNS"
+
+#: ../panels/network/network-mobile.ui.h:8 ../panels/network/network.ui.h:23
+#: ../panels/network/network-wired.ui.h:7
+msgid "_Options..."
+msgstr "_Opciones…"
 
 #: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
 msgctxt "proxy method"
@@ -1886,65 +1916,41 @@ msgstr "VPN"
 msgid "Add Device"
 msgstr "Añadir dispositivo"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:10 ../panels/network/network-wired.ui.h:1
 msgid "Hardware Address"
 msgstr "Dirección física"
 
-#: ../panels/network/network.ui.h:13
-msgid "Subnet Mask"
-msgstr "Máscara de subred"
-
-#: ../panels/network/network.ui.h:14
-msgid "Default Route"
-msgstr "Ruta predeterminada"
-
 #: ../panels/network/network.ui.h:15
-msgid "DNS"
-msgstr "DNS"
-
-#: ../panels/network/network.ui.h:16
 msgid "Device Off"
 msgstr "Dispositivo apagado"
 
-#: ../panels/network/network.ui.h:17
-msgid "_Options..."
-msgstr "_Opciones…"
-
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:16
 msgid "Security"
 msgstr "Seguridad"
 
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:17
 msgid "_Network Name"
 msgstr "_Nombre de red"
 
-#: ../panels/network/network.ui.h:20
+#: ../panels/network/network.ui.h:18
 msgid "Network Name"
 msgstr "Nombre de red"
 
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:19
 msgid "Security Key"
 msgstr "Clave de seguridad"
 
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:20
 msgid "_Forget Network"
 msgstr "_Olvidar red"
 
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:21
 msgid "_Use as Hotspot..."
 msgstr "_Usar como «hotspot»…"
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:22
 msgid "_Stop Hotspot..."
 msgstr "_Detener «hotspot»…"
-
-#: ../panels/network/network.ui.h:25
-msgid "IMEI"
-msgstr "IMEI"
-
-#: ../panels/network/network.ui.h:26
-msgid "Provider"
-msgstr "Proveedor"
 
 #: ../panels/network/network-vpn.ui.h:2
 msgid "VPN Type"
@@ -1970,316 +1976,320 @@ msgstr "Nombre de usuario"
 msgid "_Configure..."
 msgstr "_Configurar…"
 
+#: ../panels/network/network-wired.ui.h:4
+msgid "Subnet Mask"
+msgstr "Máscara de subred"
+
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:84
+#: ../panels/network/panel-common.c:86
 msgid "Wired"
 msgstr "Cableada"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:88
+#: ../panels/network/panel-common.c:90
 msgid "Wireless"
 msgstr "Inalámbrica"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:95
+#: ../panels/network/panel-common.c:97
 msgid "Mobile broadband"
 msgstr "Banda ancha móvil"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:104
+#: ../panels/network/panel-common.c:106
 msgid "Mesh"
 msgstr "Malla"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:164
+#: ../panels/network/panel-common.c:166
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:168
+#: ../panels/network/panel-common.c:170
 msgid "Infrastructure"
 msgstr "Infraestructura"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:192 ../panels/network/panel-common.c:253
+#: ../panels/network/panel-common.c:194 ../panels/network/panel-common.c:255
 msgid "Status unknown"
 msgstr "Estado desconocido"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:196
+#: ../panels/network/panel-common.c:198
 msgid "Unmanaged"
 msgstr "Sin gestionar"
 
-#: ../panels/network/panel-common.c:201
+#: ../panels/network/panel-common.c:203
 msgid "Firmware missing"
 msgstr "falta el «firmware»"
 
-#: ../panels/network/panel-common.c:204
+#: ../panels/network/panel-common.c:206
 msgid "Cable unplugged"
 msgstr "Cable desconectado"
 
-#: ../panels/network/panel-common.c:206
+#: ../panels/network/panel-common.c:208
 msgid "Unavailable"
 msgstr "No disponible"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:210
+#: ../panels/network/panel-common.c:212
 msgid "Disconnected"
 msgstr "Desconectada"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:217 ../panels/network/panel-common.c:259
+#: ../panels/network/panel-common.c:219 ../panels/network/panel-common.c:261
 msgid "Connecting"
 msgstr "Conectando"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:221 ../panels/network/panel-common.c:263
+#: ../panels/network/panel-common.c:223 ../panels/network/panel-common.c:265
 msgid "Authentication required"
 msgstr "Se necesita autenticación"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:225 ../panels/network/panel-common.c:267
+#: ../panels/network/panel-common.c:227 ../panels/network/panel-common.c:269
 msgid "Connected"
 msgstr "Conectado"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:229
+#: ../panels/network/panel-common.c:231
 msgid "Disconnecting"
 msgstr "Desconectando"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:233 ../panels/network/panel-common.c:271
+#: ../panels/network/panel-common.c:235 ../panels/network/panel-common.c:273
 msgid "Connection failed"
 msgstr "Falló la conexión"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:237 ../panels/network/panel-common.c:279
+#: ../panels/network/panel-common.c:239 ../panels/network/panel-common.c:281
 msgid "Status unknown (missing)"
 msgstr "Estado desconocido (ausente)"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:275
+#: ../panels/network/panel-common.c:277
 msgid "Not connected"
 msgstr "No conectado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:299
+#: ../panels/network/panel-common.c:301
 msgid "Configuration failed"
 msgstr "Falló la configuración"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:303
+#: ../panels/network/panel-common.c:305
 msgid "IP configuration failed"
 msgstr "Falló la configuración IP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:307
+#: ../panels/network/panel-common.c:309
 msgid "IP configuration expired"
 msgstr "La configuración IP ha expirado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:311
+#: ../panels/network/panel-common.c:313
 msgid "Secrets were required, but not provided"
 msgstr "Se necesitan secretos, pero no se han proporcionado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:315
+#: ../panels/network/panel-common.c:317
 msgid "802.1x supplicant disconnected"
 msgstr "Suplicante de 802.1x desconectado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:319
+#: ../panels/network/panel-common.c:321
 msgid "802.1x supplicant configuration failed"
 msgstr "Falló la configuración del suplicante de 802.1x"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:323
+#: ../panels/network/panel-common.c:325
 msgid "802.1x supplicant failed"
 msgstr "Falló el suplicante de 802.1x"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:327
+#: ../panels/network/panel-common.c:329
 msgid "802.1x supplicant took too long to authenticate"
 msgstr "El suplicante de 802.1x tardó mucho tiempo en autenticarse"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:331
+#: ../panels/network/panel-common.c:333
 msgid "PPP service failed to start"
 msgstr "Falló al iniciar el servicio de PPP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:335
+#: ../panels/network/panel-common.c:337
 msgid "PPP service disconnected"
 msgstr "Servicio PPP desconectado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:339
+#: ../panels/network/panel-common.c:341
 msgid "PPP failed"
 msgstr "PPP falló"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:343
+#: ../panels/network/panel-common.c:345
 msgid "DHCP client failed to start"
 msgstr "Falló al iniciar el cliente de DHCP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:347
+#: ../panels/network/panel-common.c:349
 msgid "DHCP client error"
 msgstr "Error del cliente de DHCP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:351
+#: ../panels/network/panel-common.c:353
 msgid "DHCP client failed"
 msgstr "Falló el cliente de DHCP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:355
+#: ../panels/network/panel-common.c:357
 msgid "Shared connection service failed to start"
 msgstr "Falló al iniciar el servicio de conexión compartida"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:359
+#: ../panels/network/panel-common.c:361
 msgid "Shared connection service failed"
 msgstr "Falló el servicio de conexión compartida"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:363
+#: ../panels/network/panel-common.c:365
 msgid "AutoIP service failed to start"
 msgstr "Falló al iniciar el servicio de AutoIP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:367
+#: ../panels/network/panel-common.c:369
 msgid "AutoIP service error"
 msgstr "Error del servicio de AutoIP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:371
+#: ../panels/network/panel-common.c:373
 msgid "AutoIP service failed"
 msgstr "Falló el servicio AutoIP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:375
+#: ../panels/network/panel-common.c:377
 msgid "Line busy"
 msgstr "Línea ocupada"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:379
+#: ../panels/network/panel-common.c:381
 msgid "No dial tone"
 msgstr "No hay tono de llamada"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:383
+#: ../panels/network/panel-common.c:385
 msgid "No carrier could be established"
 msgstr "No se pudo establecer el portador"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:387
+#: ../panels/network/panel-common.c:389
 msgid "Dialing request timed out"
 msgstr "Expiró el tiempo de solicitud de llamada"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:391
+#: ../panels/network/panel-common.c:393
 msgid "Dialing attempt failed"
 msgstr "Intento de llamada fallido"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:395
+#: ../panels/network/panel-common.c:397
 msgid "Modem initialization failed"
 msgstr "Falló la inicialización del módem"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:399
+#: ../panels/network/panel-common.c:401
 msgid "Failed to select the specified APN"
 msgstr "Falló al seleccionar el NPA especificado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:403
+#: ../panels/network/panel-common.c:405
 msgid "Not searching for networks"
 msgstr "No se están buscando redes"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:407
+#: ../panels/network/panel-common.c:409
 msgid "Network registration denied"
 msgstr "Registro de la red denegado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:411
+#: ../panels/network/panel-common.c:413
 msgid "Network registration timed out"
 msgstr "Expiró el tiempo de registro de la red"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:415
+#: ../panels/network/panel-common.c:417
 msgid "Failed to register with the requested network"
 msgstr "Falló al registrarse con la red solicitada"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:419
+#: ../panels/network/panel-common.c:421
 msgid "PIN check failed"
 msgstr "Falló la comprobación de l PIN"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:423
+#: ../panels/network/panel-common.c:425
 msgid "Firmware for the device may be missing"
 msgstr "Es posible que falte el firmware del dispositivo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:427
+#: ../panels/network/panel-common.c:429
 msgid "Connection disappeared"
 msgstr "La conexión ha desaparecido"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:431
+#: ../panels/network/panel-common.c:433
 msgid "Carrier/link changed"
 msgstr "Ha cambiado el portador/enlace"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:435
+#: ../panels/network/panel-common.c:437
 msgid "Existing connection was assumed"
 msgstr "Se asumió una conexión existente"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:439
+#: ../panels/network/panel-common.c:441
 msgid "Modem not found"
 msgstr "Módem no encontrado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:443
+#: ../panels/network/panel-common.c:445
 msgid "Bluetooth connection failed"
 msgstr "Falló la conexión Bluetooth"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:447
+#: ../panels/network/panel-common.c:449
 msgid "SIM Card not inserted"
 msgstr "Tarjeta SIM no insertada"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:451
+#: ../panels/network/panel-common.c:453
 msgid "SIM Pin required"
 msgstr "Se necesita el PIN de la SIM"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:455
+#: ../panels/network/panel-common.c:457
 msgid "SIM Puk required"
 msgstr "Se necesita el PUK de la SIM"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:459
+#: ../panels/network/panel-common.c:461
 msgid "SIM wrong"
 msgstr "SIM errónea"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:463
+#: ../panels/network/panel-common.c:465
 msgid "InfiniBand device does not support connected mode"
 msgstr "El dispositivo InfiniBand no soporta el modo conectado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:467
+#: ../panels/network/panel-common.c:469
 msgid "Connection dependency failed"
 msgstr "Falló la dependencia de la conexión"
 
@@ -2872,12 +2882,10 @@ msgid " "
 msgstr " "
 
 #: ../panels/printers/options-dialog.ui.h:2
-#| msgid "_Options"
 msgid "Options"
 msgstr "Opciones"
 
 #: ../panels/printers/options-dialog.ui.h:3
-#| msgid "Locations..."
 msgid "Loading options..."
 msgstr "Cargando opciones…"
 
@@ -2902,7 +2910,6 @@ msgid "Loading drivers database..."
 msgstr "Cargando bases de datos de controladores…"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:5
-#| msgid "Selecting finger"
 msgid "Select Printer Driver"
 msgstr "Seleccionar el controlador de la impresora"
 
@@ -2926,7 +2933,6 @@ msgstr "Margen corto (girar)"
 
 #. Translators: this is an option of "Orientation"
 #: ../panels/printers/pp-ipp-option-widget.c:71
-#| msgid "Port:"
 msgid "Portrait"
 msgstr "Vertical"
 
@@ -3013,22 +3019,18 @@ msgid "Two Sided"
 msgstr "Dos caras"
 
 #: ../panels/printers/pp-options-dialog.c:83
-#| msgid "Alert Type"
 msgid "Paper Type"
 msgstr "Tipo de papel"
 
 #: ../panels/printers/pp-options-dialog.c:84
-#| msgid "Input Sources"
 msgid "Paper Source"
 msgstr "Fuente de papel"
 
 #: ../panels/printers/pp-options-dialog.c:85
-#| msgid "Output"
 msgid "Output Tray"
 msgstr "Bandeja de salida"
 
 #: ../panels/printers/pp-options-dialog.c:86
-#| msgid "_Resolution"
 msgid "Resolution"
 msgstr "Resolución"
 
@@ -3048,13 +3050,11 @@ msgstr "Dos caras"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
 #: ../panels/printers/pp-options-dialog.c:557
-#| msgid "Left-Handed Orientation"
 msgid "Orientation"
 msgstr "Orientación"
 
 #. Translators: "General" tab contains general printer options
 #: ../panels/printers/pp-options-dialog.c:654
-#| msgid "General"
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "General"
@@ -3067,14 +3067,12 @@ msgstr "Configuración de página"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
 #: ../panels/printers/pp-options-dialog.c:660
-#| msgid "Printer Options"
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Opciones instalables"
 
 #. Translators: "Job" tab contains settings for jobs
 #: ../panels/printers/pp-options-dialog.c:663
-#| msgid "Jobs"
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Trabajo"
@@ -3087,7 +3085,6 @@ msgstr "Calidad de la imagen"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
 #: ../panels/printers/pp-options-dialog.c:669
-#| msgid "Color"
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Color"
@@ -3100,8 +3097,6 @@ msgstr "Terminando"
 
 #. Translators: "Advanced" tab contains all others settings
 #: ../panels/printers/pp-options-dialog.c:675
-#| msgctxt "print job"
-#| msgid "Canceled"
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Avanzado"
@@ -3109,7 +3104,6 @@ msgstr "Avanzado"
 #. Translators: Options of given printer (e.g. "MyPrinter Options")
 #: ../panels/printers/pp-options-dialog.c:934
 #, c-format
-#| msgid "_Options"
 msgid "%s Options"
 msgstr "Opciones de %s"
 
@@ -3117,7 +3111,6 @@ msgstr "Opciones de %s"
 #: ../panels/printers/pp-ppd-option-widget.c:75
 #: ../panels/printers/pp-ppd-option-widget.c:77
 #: ../panels/printers/pp-ppd-option-widget.c:85
-#| msgid "Autodetect"
 msgid "Auto Select"
 msgstr "Seleccionar automáticamente"
 
@@ -3127,7 +3120,6 @@ msgstr "Seleccionar automáticamente"
 #: ../panels/printers/pp-ppd-option-widget.c:81
 #: ../panels/printers/pp-ppd-option-widget.c:83
 #: ../panels/printers/pp-ppd-option-widget.c:87
-#| msgid "Make Default"
 msgid "Printer Default"
 msgstr "Impresora predeterminada"
 
@@ -3148,19 +3140,16 @@ msgstr "Convertir a PS nivel 2"
 
 #. Translators: this is an option of "GhostScript"
 #: ../panels/printers/pp-ppd-option-widget.c:95
-#| msgid "No profile"
 msgid "No pre-filtering"
 msgstr "Sin prefiltrado"
 
 #. Translators: Name of column showing printer manufacturers
 #: ../panels/printers/pp-ppd-selection-dialog.c:230
-#| msgid "Manufacturer:"
 msgid "Manufacturers"
 msgstr "Fabricantes"
 
 #. Translators: Name of column showing printer drivers
 #: ../panels/printers/pp-ppd-selection-dialog.c:242
-#| msgid "Driver"
 msgid "Drivers"
 msgstr "Controladores"
 
@@ -3528,6 +3517,10 @@ msgid "Locations..."
 msgstr "Ubicaciones…"
 
 #: ../panels/screen/screen.ui.h:17
+msgid "Show _notifications when locked"
+msgstr "Mostrar _notificaciones al bloquear"
+
+#: ../panels/screen/screen.ui.h:18
 msgid "Lock"
 msgstr "Bloquear"
 
@@ -4856,8 +4849,8 @@ msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
-"Es posible mantener la carpeta personal, el «spool» del correo y los archivos "
-"temporales al eliminar una cuenta de usuario."
+"Es posible mantener la carpeta personal, el «spool» del correo y los "
+"archivos temporales al eliminar una cuenta de usuario."
 
 #: ../panels/user-accounts/um-user-panel.c:453
 msgid "_Delete Files"
@@ -4967,11 +4960,11 @@ msgid "Map buttons to functions"
 msgstr "Mapear botones a funciones"
 
 #. Text printed on screen
-#: ../panels/wacom/calibrator/gui_gtk.c:76
+#: ../panels/wacom/calibrator/gui_gtk.c:78
 msgid "Screen Calibration"
 msgstr "Calibración de la pantalla"
 
-#: ../panels/wacom/calibrator/gui_gtk.c:77
+#: ../panels/wacom/calibrator/gui_gtk.c:79
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
@@ -4979,7 +4972,7 @@ msgstr ""
 "Pulse los marcadores objetivo a medida que aparecen en la pantalla para "
 "calibrar la tableta."
 
-#: ../panels/wacom/calibrator/gui_gtk.c:357
+#: ../panels/wacom/calibrator/gui_gtk.c:368
 msgid "Mis-click detected, restarting..."
 msgstr "Pulsación errónea detectada, reiniciando…"
 
@@ -5002,24 +4995,24 @@ msgstr "Mapear una única pantalla"
 msgid "%d of %d"
 msgstr "%d de %d"
 
-#: ../panels/wacom/cc-wacom-page.c:306
+#: ../panels/wacom/cc-wacom-page.c:317
 msgid "Switch Modes"
 msgstr "Cambiar modos"
 
-#: ../panels/wacom/cc-wacom-page.c:553
+#: ../panels/wacom/cc-wacom-page.c:564
 msgid "Up"
 msgstr "Arriba"
 
-#: ../panels/wacom/cc-wacom-page.c:553
+#: ../panels/wacom/cc-wacom-page.c:564
 msgid "Down"
 msgstr "Abajo"
 
-#: ../panels/wacom/cc-wacom-page.c:588
+#: ../panels/wacom/cc-wacom-page.c:599
 #: ../panels/wacom/cc-wacom-stylus-page.c:376
 msgid "Button"
 msgstr "Botón"
 
-#: ../panels/wacom/cc-wacom-page.c:714
+#: ../panels/wacom/cc-wacom-page.c:725
 msgid "Display Mapping"
 msgstr "Mostrar mapeo"
 
@@ -8355,4 +8348,5 @@ msgstr "Todas las configuraciones"
 #~ msgstr "No hay establecido ningún grupo para el URI «%s»"
 
 #~ msgid "No application with name '%s' registered a bookmark for '%s'"
-#~ msgstr "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
+#~ msgstr ""
+#~ "Ninguna aplicación con el nombre «%s» registró un marcador para «%s»"
