@@ -1940,11 +1940,33 @@ cc_info_panel_init (CcInfoPanel *self)
     }
   else
     {
-      g_signal_connect (self->priv->pk_proxy,
-                        "g-signal",
-                        G_CALLBACK (on_pk_signal),
-                        self);
-      refresh_updates (self);
+      GVariant *v;
+      guint32 major, minor, micro;
+
+      v = g_dbus_proxy_get_cached_property (self->priv->pk_proxy, "VersionMajor");
+      g_variant_get (v, "u", &major);
+      g_variant_unref (v);
+      v = g_dbus_proxy_get_cached_property (self->priv->pk_proxy, "VersionMinor");
+      g_variant_get (v, "u", &minor);
+      g_variant_unref (v);
+      v = g_dbus_proxy_get_cached_property (self->priv->pk_proxy, "VersionMicro");
+      g_variant_get (v, "u", &micro);
+      g_variant_unref (v);
+
+      if (major != 0 || minor != 8)
+        {
+          g_warning ("PackageKit version %u.%u.%u not supported", major, minor, micro);
+          g_clear_object (&self->priv->pk_proxy);
+          self->priv->updates_state = PK_NOT_AVAILABLE;
+        }
+      else
+        {
+          g_signal_connect (self->priv->pk_proxy,
+                            "g-signal",
+                            G_CALLBACK (on_pk_signal),
+                            self);
+          refresh_updates (self);
+        }
     }
 
   gtk_builder_add_from_file (self->priv->builder,
