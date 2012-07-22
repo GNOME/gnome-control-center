@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-17 13:26+0200\n"
-"PO-Revision-Date: 2012-07-17 13:25+0200\n"
+"POT-Creation-Date: 2012-07-22 22:40+0200\n"
+"PO-Revision-Date: 2012-07-22 23:23+0200\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "Language: ar\n"
@@ -150,7 +150,7 @@ msgstr "خلفية;شاشة;سطح المكتب;"
 
 #. TRANSLATORS: device type
 #: ../panels/bluetooth/bluetooth-properties.desktop.in.in.h:1
-#: ../panels/network/panel-common.c:100
+#: ../panels/network/panel-common.c:102
 msgid "Bluetooth"
 msgstr "بلوتوث"
 
@@ -890,8 +890,8 @@ msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:426 ../panels/network/panel-common.c:80
-#: ../panels/network/panel-common.c:160
+#: ../panels/info/cc-info-panel.c:426 ../panels/network/panel-common.c:82
+#: ../panels/network/panel-common.c:162
 msgid "Unknown"
 msgstr "غير معروف"
 
@@ -1516,7 +1516,7 @@ msgid "_Reassign"
 msgstr "أعِد ال_تعيين"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1618
-#: ../panels/wacom/cc-wacom-page.c:609
+#: ../panels/wacom/cc-wacom-page.c:620
 msgid "Action"
 msgstr "الإجراء"
 
@@ -1658,131 +1658,134 @@ msgstr "لوحة اللمس"
 #. TRANSLATORS: this is when the access point is not listed
 #. * in the dropdown (or hidden) and the user has to select
 #. * another entry manually
-#: ../panels/network/cc-network-panel.c:855
+#: ../panels/network/cc-network-panel.c:761
 msgctxt "Wireless access point"
 msgid "Other..."
 msgstr "أخرى..."
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:1019
-#: ../panels/network/cc-network-panel.c:1388
+#: ../panels/network/cc-network-panel.c:850
+#: ../panels/network/cc-network-panel.c:1173
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1023
-#: ../panels/network/cc-network-panel.c:1392
+#: ../panels/network/cc-network-panel.c:854
+#: ../panels/network/cc-network-panel.c:1177
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1027
+#: ../panels/network/cc-network-panel.c:858
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:1032
+#: ../panels/network/cc-network-panel.c:863
 msgid "Enterprise"
 msgstr "شركات"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:1038
-#: ../panels/network/cc-network-panel.c:1383
-#: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:324
-#: ../panels/wacom/cc-wacom-page.c:341
+#: ../panels/network/cc-network-panel.c:869
+#: ../panels/network/cc-network-panel.c:1168
+#: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:335
+#: ../panels/wacom/cc-wacom-page.c:352
 msgid "None"
 msgstr "لا شيء"
 
-#: ../panels/network/cc-network-panel.c:1488
+#: ../panels/network/cc-network-panel.c:1265
 msgid "Hotspot"
 msgstr "نقطة اتصال"
 
 #. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1495
+#: ../panels/network/cc-network-panel.c:1272
+#: ../panels/network/net-device-mobile.c:261
+#: ../panels/network/net-device-wired.c:126
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d م.بايت\\ث"
 
-#: ../panels/network/cc-network-panel.c:1718
-msgid "Add new connection"
-msgstr "أضف اتصالًا جديدا"
-
-#: ../panels/network/cc-network-panel.c:1911 ../panels/network/network.ui.h:11
+#: ../panels/network/cc-network-panel.c:1557 ../panels/network/network.ui.h:11
+#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:690
 msgid "IPv4 Address"
 msgstr "عنوان IPv4"
 
-#: ../panels/network/cc-network-panel.c:1912 ../panels/network/network.ui.h:12
+#: ../panels/network/cc-network-panel.c:1558
+#: ../panels/network/network-mobile.ui.h:4 ../panels/network/network.ui.h:12
+#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:691
 msgid "IPv6 Address"
 msgstr "عنوان IPv6"
 
-#: ../panels/network/cc-network-panel.c:1915
-#: ../panels/network/cc-network-panel.c:1918 ../panels/network/network.ui.h:27
+#: ../panels/network/cc-network-panel.c:1561
+#: ../panels/network/cc-network-panel.c:1564
+#: ../panels/network/network-mobile.ui.h:3
+#: ../panels/network/panel-common.c:693 ../panels/network/panel-common.c:695
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "عنوان IP"
 
-#: ../panels/network/cc-network-panel.c:2043
+#: ../panels/network/cc-network-panel.c:1689
 msgid "Network proxy"
 msgstr "وسيط الشبكة"
 
-#: ../panels/network/cc-network-panel.c:2227 ../panels/network/net-vpn.c:314
+#: ../panels/network/cc-network-panel.c:1875 ../panels/network/net-vpn.c:278
 #, c-format
 msgid "%s VPN"
 msgstr "ش‌خ‌ف %s"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2294
+#: ../panels/network/cc-network-panel.c:1942
 msgid "The system network services are not compatible with this version."
 msgstr "لا تتوافق خدمات الشبكة في النظام مع هذه الإصدارة."
 
-#: ../panels/network/cc-network-panel.c:2493
+#: ../panels/network/cc-network-panel.c:2141
 #, c-format
 msgid ""
 "Network details for %s including password and any custom configuration will "
 "be lost"
 msgstr "ستُفقد تفاصيل الشبكة لـ %s بما في ذلك كلمة السر وأي إعدادات مُخصصة"
 
-#: ../panels/network/cc-network-panel.c:2503
+#: ../panels/network/cc-network-panel.c:2151
 msgid "Forget"
 msgstr "انس"
 
-#: ../panels/network/cc-network-panel.c:3072
+#: ../panels/network/cc-network-panel.c:2665
 msgid "Not connected to the internet."
 msgstr "غير متّصِل بالإنترنت."
 
-#: ../panels/network/cc-network-panel.c:3073
+#: ../panels/network/cc-network-panel.c:2666
 msgid "Create the hotspot anyway?"
 msgstr "إنشاء نقطة اتصال على أي حال؟"
 
-#: ../panels/network/cc-network-panel.c:3091
+#: ../panels/network/cc-network-panel.c:2684
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
 msgstr "قطع الاتصال بـ %s وأنشئ نقطة اتصال جديدة؟"
 
-#: ../panels/network/cc-network-panel.c:3094
+#: ../panels/network/cc-network-panel.c:2687
 msgid "This is your only connection to the internet."
 msgstr "هذا اتصالك الوحيد بالإنترنت."
 
-#: ../panels/network/cc-network-panel.c:3112
+#: ../panels/network/cc-network-panel.c:2705
 msgid "Create _Hotspot"
 msgstr "أنشئ _نقطة اتصال"
 
-#: ../panels/network/cc-network-panel.c:3172
+#: ../panels/network/cc-network-panel.c:2765
 msgid "Stop hotspot and disconnect any users?"
 msgstr "إيقاف نقطة الاتصال وقطع الاتصال عن أي مستخدمين؟"
 
-#: ../panels/network/cc-network-panel.c:3175
+#: ../panels/network/cc-network-panel.c:2768
 msgid "_Stop Hotspot"
 msgstr "أو_قف نقطة الاتصال"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:3194
+#: ../panels/network/cc-network-panel.c:2787
 msgid "Air_plane Mode"
 msgstr "وضع ال_طائرة"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network-mobile.ui.h:7
 msgid "Network"
 msgstr "الشبكة"
 
@@ -1794,6 +1797,10 @@ msgstr "إعدادات الشّبكة"
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
 msgid "Network;Wireless;IP;LAN;Proxy;"
 msgstr "الشبكة;لاسلكي;عنوان أي بي;بروتوكول الإنترنت;الشبكة المحلية;الوسيط"
+
+#: ../panels/network/net-device-mobile.c:222
+msgid "Add new connection"
+msgstr "أضف اتصالًا جديدا"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: ../panels/network/net-proxy.c:67
@@ -1812,6 +1819,29 @@ msgstr "لا يُنصَح بهذا مع الشبكات العامة غير ال�
 #: ../panels/network/net-proxy.c:367
 msgid "Proxy"
 msgstr "الوسيط"
+
+#: ../panels/network/network-mobile.ui.h:1
+msgid "IMEI"
+msgstr "IMEI"
+
+#: ../panels/network/network-mobile.ui.h:2
+msgid "Provider"
+msgstr "مقدم الخدمة"
+
+#: ../panels/network/network-mobile.ui.h:5 ../panels/network/network.ui.h:13
+#: ../panels/network/network-wired.ui.h:5
+msgid "Default Route"
+msgstr "السبيل المبدئي"
+
+#: ../panels/network/network-mobile.ui.h:6 ../panels/network/network.ui.h:14
+#: ../panels/network/network-wired.ui.h:6
+msgid "DNS"
+msgstr "DNS"
+
+#: ../panels/network/network-mobile.ui.h:8 ../panels/network/network.ui.h:23
+#: ../panels/network/network-wired.ui.h:7
+msgid "_Options..."
+msgstr "ال_خيارات..."
 
 #: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
 msgctxt "proxy method"
@@ -1872,65 +1902,41 @@ msgstr "ش‌خ‌ف"
 msgid "Add Device"
 msgstr "أضف جهازًا"
 
-#: ../panels/network/network.ui.h:10
+#: ../panels/network/network.ui.h:10 ../panels/network/network-wired.ui.h:1
 msgid "Hardware Address"
 msgstr "عنوان العتاد"
 
-#: ../panels/network/network.ui.h:13
-msgid "Subnet Mask"
-msgstr "قناع الشبكة الفرعية"
-
-#: ../panels/network/network.ui.h:14
-msgid "Default Route"
-msgstr "السبيل المبدئي"
-
 #: ../panels/network/network.ui.h:15
-msgid "DNS"
-msgstr "DNS"
-
-#: ../panels/network/network.ui.h:16
 msgid "Device Off"
 msgstr "الجهاز متوقف"
 
-#: ../panels/network/network.ui.h:17
-msgid "_Options..."
-msgstr "ال_خيارات..."
-
-#: ../panels/network/network.ui.h:18
+#: ../panels/network/network.ui.h:16
 msgid "Security"
 msgstr "الأمن"
 
-#: ../panels/network/network.ui.h:19
+#: ../panels/network/network.ui.h:17
 msgid "_Network Name"
 msgstr "اسم ال_شبكة"
 
-#: ../panels/network/network.ui.h:20
+#: ../panels/network/network.ui.h:18
 msgid "Network Name"
 msgstr "اسم الشبكة"
 
-#: ../panels/network/network.ui.h:21
+#: ../panels/network/network.ui.h:19
 msgid "Security Key"
 msgstr "مفتاح الأمن"
 
-#: ../panels/network/network.ui.h:22
+#: ../panels/network/network.ui.h:20
 msgid "_Forget Network"
 msgstr "ان_سَ الشبكة"
 
-#: ../panels/network/network.ui.h:23
+#: ../panels/network/network.ui.h:21
 msgid "_Use as Hotspot..."
 msgstr "ا_ستخدم كنقطة اتصال..."
 
-#: ../panels/network/network.ui.h:24
+#: ../panels/network/network.ui.h:22
 msgid "_Stop Hotspot..."
 msgstr "أو_قف نقطة الاتصال..."
-
-#: ../panels/network/network.ui.h:25
-msgid "IMEI"
-msgstr "IMEI"
-
-#: ../panels/network/network.ui.h:26
-msgid "Provider"
-msgstr "مقدم الخدمة"
 
 #: ../panels/network/network-vpn.ui.h:2
 msgid "VPN Type"
@@ -1956,316 +1962,320 @@ msgstr "اسم المستخدم"
 msgid "_Configure..."
 msgstr "ا_ضبط..."
 
+#: ../panels/network/network-wired.ui.h:4
+msgid "Subnet Mask"
+msgstr "قناع الشبكة الفرعية"
+
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:84
+#: ../panels/network/panel-common.c:86
 msgid "Wired"
 msgstr "سلكية"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:88
+#: ../panels/network/panel-common.c:90
 msgid "Wireless"
 msgstr "لاسلكية"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:95
+#: ../panels/network/panel-common.c:97
 msgid "Mobile broadband"
 msgstr "هاتف محمول"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:104
+#: ../panels/network/panel-common.c:106
 msgid "Mesh"
 msgstr "عُرَوِيّة"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:164
+#: ../panels/network/panel-common.c:166
 msgid "Ad-hoc"
 msgstr "لا مركزية"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:168
+#: ../panels/network/panel-common.c:170
 msgid "Infrastructure"
 msgstr "مركزية"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:192 ../panels/network/panel-common.c:253
+#: ../panels/network/panel-common.c:194 ../panels/network/panel-common.c:255
 msgid "Status unknown"
 msgstr "الحالة غير معروفة"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:196
+#: ../panels/network/panel-common.c:198
 msgid "Unmanaged"
 msgstr "غير مُدار"
 
-#: ../panels/network/panel-common.c:201
+#: ../panels/network/panel-common.c:203
 msgid "Firmware missing"
 msgstr "البرمجية المغروسة غير متاحة"
 
-#: ../panels/network/panel-common.c:204
+#: ../panels/network/panel-common.c:206
 msgid "Cable unplugged"
 msgstr "الكبل مفصول"
 
-#: ../panels/network/panel-common.c:206
+#: ../panels/network/panel-common.c:208
 msgid "Unavailable"
 msgstr "غير متاح"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:210
+#: ../panels/network/panel-common.c:212
 msgid "Disconnected"
 msgstr "غير متّصل"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:217 ../panels/network/panel-common.c:259
+#: ../panels/network/panel-common.c:219 ../panels/network/panel-common.c:261
 msgid "Connecting"
 msgstr "يتّصل"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:221 ../panels/network/panel-common.c:263
+#: ../panels/network/panel-common.c:223 ../panels/network/panel-common.c:265
 msgid "Authentication required"
 msgstr "الاستيثاق مطلوب"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:225 ../panels/network/panel-common.c:267
+#: ../panels/network/panel-common.c:227 ../panels/network/panel-common.c:269
 msgid "Connected"
 msgstr "متّصل"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:229
+#: ../panels/network/panel-common.c:231
 msgid "Disconnecting"
 msgstr "يقطع الاتصال"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:233 ../panels/network/panel-common.c:271
+#: ../panels/network/panel-common.c:235 ../panels/network/panel-common.c:273
 msgid "Connection failed"
 msgstr "فشل الاتصال"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:237 ../panels/network/panel-common.c:279
+#: ../panels/network/panel-common.c:239 ../panels/network/panel-common.c:281
 msgid "Status unknown (missing)"
 msgstr "الحالة غير معروفة (مفقودة)"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:275
+#: ../panels/network/panel-common.c:277
 msgid "Not connected"
 msgstr "غير متّصِل"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:299
+#: ../panels/network/panel-common.c:301
 msgid "Configuration failed"
 msgstr "فشل الإعداد"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:303
+#: ../panels/network/panel-common.c:305
 msgid "IP configuration failed"
 msgstr "فشل إعداد رقم الإنترنت (IP)"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:307
+#: ../panels/network/panel-common.c:309
 msgid "IP configuration expired"
 msgstr "انتهت صلاحية إعداد رقم الإنترنت (IP)"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:311
+#: ../panels/network/panel-common.c:313
 msgid "Secrets were required, but not provided"
 msgstr "الأسرار مطلوبة لكن لم تُعطَ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:315
+#: ../panels/network/panel-common.c:317
 msgid "802.1x supplicant disconnected"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:319
+#: ../panels/network/panel-common.c:321
 msgid "802.1x supplicant configuration failed"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:323
+#: ../panels/network/panel-common.c:325
 msgid "802.1x supplicant failed"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:327
+#: ../panels/network/panel-common.c:329
 msgid "802.1x supplicant took too long to authenticate"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:331
+#: ../panels/network/panel-common.c:333
 msgid "PPP service failed to start"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:335
+#: ../panels/network/panel-common.c:337
 msgid "PPP service disconnected"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:339
+#: ../panels/network/panel-common.c:341
 msgid "PPP failed"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:343
+#: ../panels/network/panel-common.c:345
 msgid "DHCP client failed to start"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:347
+#: ../panels/network/panel-common.c:349
 msgid "DHCP client error"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:351
+#: ../panels/network/panel-common.c:353
 msgid "DHCP client failed"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:355
+#: ../panels/network/panel-common.c:357
 msgid "Shared connection service failed to start"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:359
+#: ../panels/network/panel-common.c:361
 msgid "Shared connection service failed"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:363
+#: ../panels/network/panel-common.c:365
 msgid "AutoIP service failed to start"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:367
+#: ../panels/network/panel-common.c:369
 msgid "AutoIP service error"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:371
+#: ../panels/network/panel-common.c:373
 msgid "AutoIP service failed"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:375
+#: ../panels/network/panel-common.c:377
 msgid "Line busy"
 msgstr "الخط مشغول"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:379
+#: ../panels/network/panel-common.c:381
 msgid "No dial tone"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:383
+#: ../panels/network/panel-common.c:385
 msgid "No carrier could be established"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:387
+#: ../panels/network/panel-common.c:389
 msgid "Dialing request timed out"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:391
+#: ../panels/network/panel-common.c:393
 msgid "Dialing attempt failed"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:395
+#: ../panels/network/panel-common.c:397
 msgid "Modem initialization failed"
 msgstr "فشلت تهيئة المودم"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:399
+#: ../panels/network/panel-common.c:401
 msgid "Failed to select the specified APN"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:403
+#: ../panels/network/panel-common.c:405
 msgid "Not searching for networks"
 msgstr "لن يبحث عن شبكة"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:407
+#: ../panels/network/panel-common.c:409
 msgid "Network registration denied"
 msgstr "رُفض تسجيل الشبكة"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:411
+#: ../panels/network/panel-common.c:413
 msgid "Network registration timed out"
 msgstr "انتهت مهلة تسجيل الشبكة"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:415
+#: ../panels/network/panel-common.c:417
 msgid "Failed to register with the requested network"
 msgstr "فشل تسجيل الشبكة المطلوبة"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:419
+#: ../panels/network/panel-common.c:421
 msgid "PIN check failed"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:423
+#: ../panels/network/panel-common.c:425
 msgid "Firmware for the device may be missing"
 msgstr "البرمجيات المضمنة التي يحتاجها الجهاز غير متاحة"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:427
+#: ../panels/network/panel-common.c:429
 msgid "Connection disappeared"
 msgstr "اختفى الاتصال"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:431
+#: ../panels/network/panel-common.c:433
 msgid "Carrier/link changed"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:435
+#: ../panels/network/panel-common.c:437
 msgid "Existing connection was assumed"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:439
+#: ../panels/network/panel-common.c:441
 msgid "Modem not found"
 msgstr "المودم غير موجود"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:443
+#: ../panels/network/panel-common.c:445
 msgid "Bluetooth connection failed"
 msgstr "فشل اتصال بلوتوث"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:447
+#: ../panels/network/panel-common.c:449
 msgid "SIM Card not inserted"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:451
+#: ../panels/network/panel-common.c:453
 msgid "SIM Pin required"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:455
+#: ../panels/network/panel-common.c:457
 msgid "SIM Puk required"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:459
+#: ../panels/network/panel-common.c:461
 msgid "SIM wrong"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:463
+#: ../panels/network/panel-common.c:465
 msgid "InfiniBand device does not support connected mode"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:467
+#: ../panels/network/panel-common.c:469
 msgid "Connection dependency failed"
 msgstr ""
 
@@ -3505,6 +3515,10 @@ msgid "Locations..."
 msgstr "الأماكن..."
 
 #: ../panels/screen/screen.ui.h:17
+msgid "Show _notifications when locked"
+msgstr "أظهر ال_تنبيهات عندما يكون موصدًا"
+
+#: ../panels/screen/screen.ui.h:18
 msgid "Lock"
 msgstr "أوصِد"
 
@@ -4932,17 +4946,17 @@ msgid "Map buttons to functions"
 msgstr "تعيين وظائف للأزرار"
 
 #. Text printed on screen
-#: ../panels/wacom/calibrator/gui_gtk.c:76
+#: ../panels/wacom/calibrator/gui_gtk.c:78
 msgid "Screen Calibration"
 msgstr "معايرة الشاشة"
 
-#: ../panels/wacom/calibrator/gui_gtk.c:77
+#: ../panels/wacom/calibrator/gui_gtk.c:79
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
 msgstr "رجاءً انقر علامات الهدف الظاهرة على الشاشة لمعايرة اللوح."
 
-#: ../panels/wacom/calibrator/gui_gtk.c:357
+#: ../panels/wacom/calibrator/gui_gtk.c:368
 msgid "Mis-click detected, restarting..."
 msgstr "اكتُشفت نقرة خاطئة، يعيد بدء العملية..."
 
@@ -4965,24 +4979,24 @@ msgstr "عيّن في شاشة واحدة"
 msgid "%d of %d"
 msgstr "%d من %d"
 
-#: ../panels/wacom/cc-wacom-page.c:306
+#: ../panels/wacom/cc-wacom-page.c:317
 msgid "Switch Modes"
 msgstr "بدّل الأنماط"
 
-#: ../panels/wacom/cc-wacom-page.c:553
+#: ../panels/wacom/cc-wacom-page.c:564
 msgid "Up"
 msgstr "أعلى"
 
-#: ../panels/wacom/cc-wacom-page.c:553
+#: ../panels/wacom/cc-wacom-page.c:564
 msgid "Down"
 msgstr "أسفل"
 
-#: ../panels/wacom/cc-wacom-page.c:588
+#: ../panels/wacom/cc-wacom-page.c:599
 #: ../panels/wacom/cc-wacom-stylus-page.c:376
 msgid "Button"
 msgstr "زر"
 
-#: ../panels/wacom/cc-wacom-page.c:714
+#: ../panels/wacom/cc-wacom-page.c:725
 msgid "Display Mapping"
 msgstr "اعرض المخطط"
 
