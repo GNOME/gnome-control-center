@@ -1830,7 +1830,7 @@ on_pk_get_tid_ready (GObject      *source,
       return;
     }
 
-  g_variant_get (result, "(s)", &tid);
+  g_variant_get (result, "(o)", &tid);
 
   self->priv->pk_transaction_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                                     G_DBUS_PROXY_FLAGS_NONE,
@@ -1856,7 +1856,7 @@ on_pk_get_tid_ready (GObject      *source,
 
   g_dbus_proxy_call (self->priv->pk_transaction_proxy,
                      "GetUpdates",
-                     g_variant_new ("(s)", "none"),
+                     g_variant_new ("(t)", 1), /* PK_FILTER_ENUM_NONE */
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
                      NULL,
@@ -1872,7 +1872,7 @@ refresh_updates (CcInfoPanel *self)
 
   g_assert (self->priv->pk_proxy != NULL);
   g_dbus_proxy_call (self->priv->pk_proxy,
-                     "GetTid",
+                     "CreateTransaction",
                      NULL,
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
