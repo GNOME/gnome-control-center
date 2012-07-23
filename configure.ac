@@ -81,7 +81,7 @@ dnl Check that we meet the  dependencies
 dnl ==============================================
 
 GLIB_REQUIRED_VERSION=2.31.0
-GTK_REQUIRED_VERSION=3.5.5
+GTK_REQUIRED_VERSION=3.5.8
 PA_REQUIRED_VERSION=2.0
 CANBERRA_REQUIRED_VERSION=0.13
 GDKPIXBUF_REQUIRED_VERSION=2.23.0
