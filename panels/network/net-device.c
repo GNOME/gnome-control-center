@@ -40,6 +40,7 @@
 struct _NetDevicePrivate
 {
         NMDevice                        *nm_device;
+        guint                            changed_id;
 };
 
 enum {
@@ -281,11 +282,15 @@ net_device_set_property (GObject *device_,
 
         switch (prop_id) {
         case PROP_DEVICE:
+                if (priv->changed_id != 0) {
+                        g_signal_handler_disconnect (priv->nm_device,
+                                                     priv->changed_id);
+                }
                 priv->nm_device = g_value_dup_object (value);
-                g_signal_connect (priv->nm_device,
-                                  "state-changed",
-                                  G_CALLBACK (state_changed_cb),
-                                  net_device);
+                priv->changed_id = g_signal_connect (priv->nm_device,
+                                                     "state-changed",
+                                                     G_CALLBACK (state_changed_cb),
+                                                     net_device);
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (net_device, prop_id, pspec);
@@ -299,6 +304,10 @@ net_device_finalize (GObject *object)
         NetDevice *device = NET_DEVICE (object);
         NetDevicePrivate *priv = device->priv;
 
+        if (priv->changed_id != 0) {
+                g_signal_handler_disconnect (priv->nm_device,
+                                             priv->changed_id);
+        }
         if (priv->nm_device != NULL)
                 g_object_unref (priv->nm_device);
 
