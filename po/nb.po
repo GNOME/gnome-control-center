@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.5.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-09 14:45+0200\n"
-"PO-Revision-Date: 2012-07-09 14:54+0200\n"
+"POT-Creation-Date: 2012-07-23 12:33+0200\n"
+"PO-Revision-Date: 2012-07-23 12:38+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -141,7 +141,7 @@ msgstr "Bakgrunn;Skjerm;Skrivebord;"
 
 #. TRANSLATORS: device type
 #: ../panels/bluetooth/bluetooth-properties.desktop.in.in.h:1
-#: ../panels/network/panel-common.c:100
+#: ../panels/network/panel-common.c:102
 msgid "Bluetooth"
 msgstr "Blåtann"
 
@@ -621,7 +621,7 @@ msgstr "Velg et språk"
 
 #: ../panels/common/language-chooser.ui.h:2
 #: ../panels/printers/new-printer-dialog.ui.h:4
-#: ../panels/user-accounts/um-user-panel.c:456
+#: ../panels/user-accounts/um-user-panel.c:455
 msgid "_Cancel"
 msgstr "A_vbryt"
 
@@ -879,8 +879,8 @@ msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:426 ../panels/network/panel-common.c:80
-#: ../panels/network/panel-common.c:160
+#: ../panels/info/cc-info-panel.c:426 ../panels/network/panel-common.c:82
+#: ../panels/network/panel-common.c:162
 msgid "Unknown"
 msgstr "Ukjent"
 
@@ -1470,7 +1470,7 @@ msgstr "<Ukjent handling>"
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/keyboard-shortcuts.c:1025
-#: ../panels/sound/gvc-mixer-control.c:1127
+#: ../panels/sound/gvc-mixer-control.c:1834
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Disabled"
@@ -1509,7 +1509,7 @@ msgid "_Reassign"
 msgstr "_Omfordel"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1618
-#: ../panels/wacom/cc-wacom-page.c:609
+#: ../panels/wacom/cc-wacom-page.c:620
 msgid "Action"
 msgstr "Handling"
 
@@ -1648,159 +1648,30 @@ msgstr "Aktiver h_orisontal rulling"
 msgid "Touchpad"
 msgstr "Pekeplate"
 
-#. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/cc-network-panel.c:293
-msgid ""
-"Web Proxy Autodiscovery is used when a Configuration URL is not provided."
-msgstr ""
-"Automatisk gjenkjenning av web-proxy brukes når en konfigurasjons-URL ikke "
-"oppgis."
+#: ../panels/network/cc-network-panel.c:627
+msgid "Network proxy"
+msgstr "Nettverksproxy"
 
-#. TRANSLATORS: WPAD is bad: if you enable it on an untrusted
-#. * network, then anyone else on that network can tell your
-#. * machine that it should proxy all of your web traffic
-#. * through them.
-#: ../panels/network/cc-network-panel.c:301
-msgid "This is not recommended for untrusted public networks."
-msgstr "Dette anbefales ikke for offentlige nettverk du ikke stoler på."
-
-#. TRANSLATORS: this is when the access point is not listed
-#. * in the dropdown (or hidden) and the user has to select
-#. * another entry manually
-#: ../panels/network/cc-network-panel.c:1020
-msgctxt "Wireless access point"
-msgid "Other..."
-msgstr "Annet …"
-
-#. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:1184
-#: ../panels/network/cc-network-panel.c:1729
-msgid "WEP"
-msgstr "WEP"
-
-#. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1188
-#: ../panels/network/cc-network-panel.c:1733
-msgid "WPA"
-msgstr "WPA"
-
-#. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1192
-msgid "WPA2"
-msgstr "WPA2"
-
-#. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:1197
-msgid "Enterprise"
-msgstr "Enterprise"
-
-#. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:1203
-#: ../panels/network/cc-network-panel.c:1724
-#: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:324
-#: ../panels/wacom/cc-wacom-page.c:341
-msgid "None"
-msgstr "Ingen"
-
-#: ../panels/network/cc-network-panel.c:1829
-msgid "Hotspot"
-msgstr "Hotspot"
-
-#. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1836
-#, c-format
-msgid "%d Mb/s"
-msgstr "%d MB/s"
-
-#: ../panels/network/cc-network-panel.c:2059
-msgid "Add new connection"
-msgstr "Legg til ny tilkobling"
-
-#: ../panels/network/cc-network-panel.c:2252 ../panels/network/network.ui.h:11
-msgid "IPv4 Address"
-msgstr "IPv4-adresse"
-
-#: ../panels/network/cc-network-panel.c:2253 ../panels/network/network.ui.h:12
-msgid "IPv6 Address"
-msgstr "IPv6-adresse"
-
-#: ../panels/network/cc-network-panel.c:2256
-#: ../panels/network/cc-network-panel.c:2259 ../panels/network/network.ui.h:27
-#: ../panels/printers/printers.ui.h:13
-msgid "IP Address"
-msgstr "IP-adresse"
-
-#: ../panels/network/cc-network-panel.c:2306
-#: ../panels/network/cc-network-panel.c:2681
+#: ../panels/network/cc-network-panel.c:811 ../panels/network/net-vpn.c:278
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: ../panels/network/cc-network-panel.c:2414
-msgid "Proxy"
-msgstr "Proxy"
-
-#: ../panels/network/cc-network-panel.c:2488
-msgid "Network proxy"
-msgstr "Nettverksproxy"
-
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2748
+#: ../panels/network/cc-network-panel.c:878
 msgid "The system network services are not compatible with this version."
 msgstr ""
 "Nettverkstjenesten for dette systemet er ikke kompatibelt med denne "
 "versjonen."
 
-#: ../panels/network/cc-network-panel.c:2950
-#, c-format
-msgid ""
-"Network details for %s including password and any custom configuration will "
-"be lost"
-msgstr ""
-"Nettverksdetaljer for %s inklusive passord og tilpasset konfigurasjon vil gå "
-"tapt"
-
-#: ../panels/network/cc-network-panel.c:2960
-msgid "Forget"
-msgstr "Glem"
-
-#: ../panels/network/cc-network-panel.c:3534
-msgid "Not connected to the internet."
-msgstr "Ikke koblet til internett."
-
-#: ../panels/network/cc-network-panel.c:3535
-msgid "Create the hotspot anyway?"
-msgstr "Lage hotspot likevel?"
-
-#: ../panels/network/cc-network-panel.c:3553
-#, c-format
-msgid "Disconnect from %s and create a new hotspot?"
-msgstr "Koble fra %s og lag ny hotspot?"
-
-#: ../panels/network/cc-network-panel.c:3556
-msgid "This is your only connection to the internet."
-msgstr "Dette er din eneste tilkobling til internett."
-
-#: ../panels/network/cc-network-panel.c:3574
-msgid "Create _Hotspot"
-msgstr "Lag _hotspot"
-
-#: ../panels/network/cc-network-panel.c:3634
-msgid "Stop hotspot and disconnect any users?"
-msgstr "Stoppe hotspot og koble fra alle brukere?"
-
-#: ../panels/network/cc-network-panel.c:3637
-msgid "_Stop Hotspot"
-msgstr "_Stopp hotspot"
-
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:3656
+#: ../panels/network/cc-network-panel.c:1013
 msgid "Air_plane Mode"
 msgstr "_Flymodus"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network-mobile.ui.h:7
 msgid "Network"
 msgstr "Nettverk"
 
@@ -1812,6 +1683,110 @@ msgstr "Innstillinger for nettverk"
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
 msgid "Network;Wireless;IP;LAN;Proxy;"
 msgstr "Nettverk;Trådløs;IP;LAN;Proxy;"
+
+#: ../panels/network/net-device-mobile.c:222
+msgid "Add new connection"
+msgstr "Legg til ny tilkobling"
+
+#. Translators: network device speed
+#: ../panels/network/net-device-mobile.c:261
+#: ../panels/network/net-device-wired.c:126
+#, c-format
+msgid "%d Mb/s"
+msgstr "%d MB/s"
+
+#. TRANSLATORS: this is when the use leaves the PAC textbox blank
+#: ../panels/network/net-proxy.c:67
+msgid ""
+"Web Proxy Autodiscovery is used when a Configuration URL is not provided."
+msgstr ""
+"Automatisk gjenkjenning av web-proxy brukes når en konfigurasjons-URL ikke "
+"oppgis."
+
+#. TRANSLATORS: WPAD is bad: if you enable it on an untrusted
+#. * network, then anyone else on that network can tell your
+#. * machine that it should proxy all of your web traffic
+#. * through them.
+#: ../panels/network/net-proxy.c:75
+msgid "This is not recommended for untrusted public networks."
+msgstr "Dette anbefales ikke for offentlige nettverk du ikke stoler på."
+
+#: ../panels/network/net-proxy.c:367
+msgid "Proxy"
+msgstr "Proxy"
+
+#: ../panels/network/network-mobile.ui.h:1
+msgid "IMEI"
+msgstr "IMEI"
+
+#: ../panels/network/network-mobile.ui.h:2
+msgid "Provider"
+msgstr "Tilbyder"
+
+#: ../panels/network/network-mobile.ui.h:3
+#: ../panels/network/panel-common.c:693 ../panels/network/panel-common.c:695
+#: ../panels/printers/printers.ui.h:13
+msgid "IP Address"
+msgstr "IP-adresse"
+
+#: ../panels/network/network-mobile.ui.h:4
+#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:691
+msgid "IPv6 Address"
+msgstr "IPv6-adresse"
+
+#: ../panels/network/network-mobile.ui.h:5
+#: ../panels/network/network-wired.ui.h:5
+msgid "Default Route"
+msgstr "Forvalgt rute"
+
+#: ../panels/network/network-mobile.ui.h:6
+#: ../panels/network/network-wired.ui.h:6
+msgid "DNS"
+msgstr "DNS"
+
+#: ../panels/network/network-mobile.ui.h:8
+#: ../panels/network/network-wired.ui.h:7
+msgid "_Options..."
+msgstr "_Alternativer …"
+
+#: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
+msgctxt "proxy method"
+msgid "None"
+msgstr "Ingen"
+
+#: ../panels/network/network-proxy.ui.h:2 ../panels/network/network.ui.h:6
+msgctxt "proxy method"
+msgid "Manual"
+msgstr "Manuell"
+
+#: ../panels/network/network-proxy.ui.h:3 ../panels/network/network.ui.h:7
+msgctxt "proxy method"
+msgid "Automatic"
+msgstr "Automatisk"
+
+#: ../panels/network/network-proxy.ui.h:4
+msgid "_Method"
+msgstr "_Metode"
+
+#: ../panels/network/network-proxy.ui.h:5
+msgid "_Configuration URL"
+msgstr "_Konfigurasjons-URL"
+
+#: ../panels/network/network-proxy.ui.h:6
+msgid "_HTTP Proxy"
+msgstr "_HTTP-proxy"
+
+#: ../panels/network/network-proxy.ui.h:7
+msgid "H_TTPS Proxy"
+msgstr "H_TTP-proxy"
+
+#: ../panels/network/network-proxy.ui.h:8
+msgid "_FTP Proxy"
+msgstr "_FTP-proxy"
+
+#: ../panels/network/network-proxy.ui.h:9
+msgid "_Socks Host"
+msgstr "_Socks-vert"
 
 #: ../panels/network/network.ui.h:1
 msgid "Select the interface to use for the new service"
@@ -1825,467 +1800,360 @@ msgstr "_Lag …"
 msgid "_Interface"
 msgstr "Grensesn_itt"
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "VPN"
-
-#: ../panels/network/network.ui.h:5
-msgctxt "proxy method"
-msgid "None"
-msgstr "Ingen"
-
-#: ../panels/network/network.ui.h:6
-msgctxt "proxy method"
-msgid "Manual"
-msgstr "Manuell"
-
-#: ../panels/network/network.ui.h:7
-msgctxt "proxy method"
-msgid "Automatic"
-msgstr "Automatisk"
 
 #: ../panels/network/network.ui.h:8
 msgid "Add Device"
 msgstr "Legg til enhet"
 
-#: ../panels/network/network.ui.h:10
-msgid "Hardware Address"
-msgstr "Maskinvareadresse"
-
-#: ../panels/network/network.ui.h:13
-msgid "Subnet Mask"
-msgstr "Subnettmaske"
-
-#: ../panels/network/network.ui.h:14
-msgid "Default Route"
-msgstr "Forvalgt rute"
-
-#: ../panels/network/network.ui.h:15
-msgid "DNS"
-msgstr "DNS"
-
-#: ../panels/network/network.ui.h:16
-msgid "Device Off"
-msgstr "Enhet av"
-
-#: ../panels/network/network.ui.h:17
-msgid "_Options..."
-msgstr "_Alternativer …"
-
-#: ../panels/network/network.ui.h:18
-msgid "Security"
-msgstr "Sikkerhet"
-
-#: ../panels/network/network.ui.h:19
-msgid "_Network Name"
-msgstr "_Nettverksnavn"
-
-#: ../panels/network/network.ui.h:20
-msgid "Network Name"
-msgstr "Nettverksnavn"
-
-#: ../panels/network/network.ui.h:21
-msgid "Security Key"
-msgstr "Sikkerhetsnøkkel"
-
-#: ../panels/network/network.ui.h:22
-msgid "_Forget Network"
-msgstr "_Glem nettverk"
-
-#: ../panels/network/network.ui.h:23
-msgid "_Use as Hotspot..."
-msgstr "Br_uk som hotspot …"
-
-#: ../panels/network/network.ui.h:24
-msgid "_Stop Hotspot..."
-msgstr "_Stopp hotspot …"
-
-#: ../panels/network/network.ui.h:25
-msgid "IMEI"
-msgstr "IMEI"
-
-#: ../panels/network/network.ui.h:26
-msgid "Provider"
-msgstr "Tilbyder"
-
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network-vpn.ui.h:2
 msgid "VPN Type"
 msgstr "Type VPN"
 
-#: ../panels/network/network.ui.h:30
+#: ../panels/network/network-vpn.ui.h:3
 msgid "Gateway"
 msgstr "Gateway"
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network-vpn.ui.h:4
 msgid "Group Name"
 msgstr "Gruppenavn"
 
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network-vpn.ui.h:5
 msgid "Group Password"
 msgstr "Gruppepassord"
 
-#: ../panels/network/network.ui.h:33
+#: ../panels/network/network-vpn.ui.h:6
 msgid "Username"
 msgstr "Brukernavn"
 
-#: ../panels/network/network.ui.h:34
-msgid "Disable VPN"
-msgstr "Slå av VPN"
-
-#: ../panels/network/network.ui.h:35
+#: ../panels/network/network-vpn.ui.h:7
 msgid "_Configure..."
 msgstr "_Konfigurer …"
 
-#: ../panels/network/network.ui.h:36
-msgid "_Method"
-msgstr "_Metode"
+#: ../panels/network/network-wired.ui.h:1
+msgid "Hardware Address"
+msgstr "Maskinvareadresse"
 
-#: ../panels/network/network.ui.h:37
-msgid "_Configuration URL"
-msgstr "_Konfigurasjons-URL"
+#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:690
+msgid "IPv4 Address"
+msgstr "IPv4-adresse"
 
-#: ../panels/network/network.ui.h:38
-msgid "_HTTP Proxy"
-msgstr "_HTTP-proxy"
-
-#: ../panels/network/network.ui.h:39
-msgid "H_TTPS Proxy"
-msgstr "H_TTP-proxy"
-
-#: ../panels/network/network.ui.h:40
-msgid "_FTP Proxy"
-msgstr "_FTP-proxy"
-
-#: ../panels/network/network.ui.h:41
-msgid "_Socks Host"
-msgstr "_Socks-vert"
-
-#: ../panels/network/network.ui.h:42
-msgid "HTTP Port"
-msgstr "HTTP-port"
-
-#: ../panels/network/network.ui.h:43
-msgid "HTTPS Port"
-msgstr "HTTP-port"
-
-#: ../panels/network/network.ui.h:44
-msgid "FTP Port"
-msgstr "FTP-port"
-
-#: ../panels/network/network.ui.h:45
-msgid "Socks Port"
-msgstr "Socks-port"
+#: ../panels/network/network-wired.ui.h:4
+msgid "Subnet Mask"
+msgstr "Subnettmaske"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:84
+#: ../panels/network/panel-common.c:86
 msgid "Wired"
 msgstr "Kablet"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:88
+#: ../panels/network/panel-common.c:90
 msgid "Wireless"
 msgstr "Trådløs"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:95
+#: ../panels/network/panel-common.c:97
 msgid "Mobile broadband"
 msgstr "Mobilt bredbånd"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:104
+#: ../panels/network/panel-common.c:106
 msgid "Mesh"
 msgstr "Mesh"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:164
+#: ../panels/network/panel-common.c:166
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:168
+#: ../panels/network/panel-common.c:170
 msgid "Infrastructure"
 msgstr "Infrastruktur"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:192 ../panels/network/panel-common.c:253
+#: ../panels/network/panel-common.c:194 ../panels/network/panel-common.c:255
 msgid "Status unknown"
 msgstr "Ukjent status"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:196
+#: ../panels/network/panel-common.c:198
 msgid "Unmanaged"
 msgstr "Ikke administrert"
 
-#: ../panels/network/panel-common.c:201
+#: ../panels/network/panel-common.c:203
 msgid "Firmware missing"
 msgstr "Fastvare mangler"
 
-#: ../panels/network/panel-common.c:204
+#: ../panels/network/panel-common.c:206
 msgid "Cable unplugged"
 msgstr "Kabel koblet fra"
 
-#: ../panels/network/panel-common.c:206
+#: ../panels/network/panel-common.c:208
 msgid "Unavailable"
 msgstr "Ikke tilgjengelig"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:210
+#: ../panels/network/panel-common.c:212
 msgid "Disconnected"
 msgstr "Frakoblet"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:217 ../panels/network/panel-common.c:259
+#: ../panels/network/panel-common.c:219 ../panels/network/panel-common.c:261
 msgid "Connecting"
 msgstr "Kobler til"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:221 ../panels/network/panel-common.c:263
+#: ../panels/network/panel-common.c:223 ../panels/network/panel-common.c:265
 msgid "Authentication required"
 msgstr "Autentisering kreves"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:225 ../panels/network/panel-common.c:267
+#: ../panels/network/panel-common.c:227 ../panels/network/panel-common.c:269
 msgid "Connected"
 msgstr "Tilkoblet"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:229
+#: ../panels/network/panel-common.c:231
 msgid "Disconnecting"
 msgstr "Kobler fra"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:233 ../panels/network/panel-common.c:271
+#: ../panels/network/panel-common.c:235 ../panels/network/panel-common.c:273
 msgid "Connection failed"
 msgstr "Tilkobling feilet"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:237 ../panels/network/panel-common.c:279
+#: ../panels/network/panel-common.c:239 ../panels/network/panel-common.c:281
 msgid "Status unknown (missing)"
 msgstr "Ukjent status (mangler)"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:275
+#: ../panels/network/panel-common.c:277
 msgid "Not connected"
 msgstr "Ikke tilkoblet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:299
+#: ../panels/network/panel-common.c:301
 msgid "Configuration failed"
 msgstr "Konfigurering feilet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:303
+#: ../panels/network/panel-common.c:305
 msgid "IP configuration failed"
 msgstr "IP-konfigurering feilet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:307
+#: ../panels/network/panel-common.c:309
 msgid "IP configuration expired"
 msgstr "IP-konfigurasjon har utløpt"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:311
+#: ../panels/network/panel-common.c:313
 msgid "Secrets were required, but not provided"
 msgstr "Hemmeligheter kreves men ble ikke oppgitt"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:315
+#: ../panels/network/panel-common.c:317
 msgid "802.1x supplicant disconnected"
 msgstr "802.1x-hjelper frakoblet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:319
+#: ../panels/network/panel-common.c:321
 msgid "802.1x supplicant configuration failed"
 msgstr "Konfigurering av 802.1x-hjelper feilet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:323
+#: ../panels/network/panel-common.c:325
 msgid "802.1x supplicant failed"
 msgstr "802.1x-hjelper feilet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:327
+#: ../panels/network/panel-common.c:329
 msgid "802.1x supplicant took too long to authenticate"
 msgstr "802.1x-hjelper brukte for lang tid på autentisering"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:331
+#: ../panels/network/panel-common.c:333
 msgid "PPP service failed to start"
 msgstr "Start av PPP-tjeneste feilet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:335
+#: ../panels/network/panel-common.c:337
 msgid "PPP service disconnected"
 msgstr "PPP-tjeneste koblet fra"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:339
+#: ../panels/network/panel-common.c:341
 msgid "PPP failed"
 msgstr "PPP feilet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:343
+#: ../panels/network/panel-common.c:345
 msgid "DHCP client failed to start"
 msgstr "DHCP-klient startet ikke"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:347
+#: ../panels/network/panel-common.c:349
 msgid "DHCP client error"
 msgstr "Feil i DHCP-klient"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:351
+#: ../panels/network/panel-common.c:353
 msgid "DHCP client failed"
 msgstr "DHCP-klient feilet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:355
+#: ../panels/network/panel-common.c:357
 msgid "Shared connection service failed to start"
 msgstr "Tjeneste for delt tilkobling startet ikke"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:359
+#: ../panels/network/panel-common.c:361
 msgid "Shared connection service failed"
 msgstr "Tjeneste for delt tilkobling feilet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:363
+#: ../panels/network/panel-common.c:365
 msgid "AutoIP service failed to start"
 msgstr "AutoIP-tjeneste startet ikke"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:367
+#: ../panels/network/panel-common.c:369
 msgid "AutoIP service error"
 msgstr "Feil i AutoIP-tjeneste"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:371
+#: ../panels/network/panel-common.c:373
 msgid "AutoIP service failed"
 msgstr "AutoIP-tjeneste feilet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:375
+#: ../panels/network/panel-common.c:377
 msgid "Line busy"
 msgstr "Linjen er opptatt"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:379
+#: ../panels/network/panel-common.c:381
 msgid "No dial tone"
 msgstr "Ingen summetone"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:383
+#: ../panels/network/panel-common.c:385
 msgid "No carrier could be established"
 msgstr "Klarte ikke å etablere bærekanal"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:387
+#: ../panels/network/panel-common.c:389
 msgid "Dialing request timed out"
 msgstr "Tidsavbrudd for oppringing"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:391
+#: ../panels/network/panel-common.c:393
 msgid "Dialing attempt failed"
 msgstr "Oppringingsforsøk feilet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:395
+#: ../panels/network/panel-common.c:397
 msgid "Modem initialization failed"
 msgstr "Initiering av modem feilet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:399
+#: ../panels/network/panel-common.c:401
 msgid "Failed to select the specified APN"
 msgstr "Klarte ikke å velge angitt APN"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:403
+#: ../panels/network/panel-common.c:405
 msgid "Not searching for networks"
 msgstr "Søker ikke etter nettverk"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:407
+#: ../panels/network/panel-common.c:409
 msgid "Network registration denied"
 msgstr "Nettverksregistrering nektet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:411
+#: ../panels/network/panel-common.c:413
 msgid "Network registration timed out"
 msgstr "Tidsavbrudd for nettverksregistrering"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:415
+#: ../panels/network/panel-common.c:417
 msgid "Failed to register with the requested network"
 msgstr "Klarte ikke å registrere med forespurt nettverk"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:419
+#: ../panels/network/panel-common.c:421
 msgid "PIN check failed"
 msgstr "PIN-sjekk feilet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:423
+#: ../panels/network/panel-common.c:425
 msgid "Firmware for the device may be missing"
 msgstr "Fastvare for enheten mangler kanskje"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:427
+#: ../panels/network/panel-common.c:429
 msgid "Connection disappeared"
 msgstr "Tilkobling forsvant"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:431
+#: ../panels/network/panel-common.c:433
 msgid "Carrier/link changed"
 msgstr "Bærekanal/tilkobling ble endret"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:435
+#: ../panels/network/panel-common.c:437
 msgid "Existing connection was assumed"
 msgstr "Eksisterende tilkobling ble antatt"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:439
+#: ../panels/network/panel-common.c:441
 msgid "Modem not found"
 msgstr "Modem ble ikke funnet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:443
+#: ../panels/network/panel-common.c:445
 msgid "Bluetooth connection failed"
 msgstr "Tilkobling med Bluetooth feilet"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:447
+#: ../panels/network/panel-common.c:449
 msgid "SIM Card not inserted"
 msgstr "SIM-kort ikke satt inn"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:451
+#: ../panels/network/panel-common.c:453
 msgid "SIM Pin required"
 msgstr "Pin for SIM kreves"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:455
+#: ../panels/network/panel-common.c:457
 msgid "SIM Puk required"
 msgstr "Puk for SIM kreves"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:459
+#: ../panels/network/panel-common.c:461
 msgid "SIM wrong"
 msgstr "Feil SIM"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:463
+#: ../panels/network/panel-common.c:465
 msgid "InfiniBand device does not support connected mode"
 msgstr "InfiniBand-enhet støtter ikke tilkoblet modus"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:467
+#: ../panels/network/panel-common.c:469
 msgid "Connection dependency failed"
 msgstr "Tilkoblingsavhengighet feilet"
 
@@ -2359,20 +2227,22 @@ msgstr "Legg til konto på nettet"
 msgid ""
 "Adding an account allows your applications to access it for documents, mail, "
 "contacts, calendar, chat and more."
-msgstr "Hvis du legger til en konto kan alle dine programmer bruke denne for dokumenter, e-post, kontakter, kalender, lynmeldinger og mer."
+msgstr ""
+"Hvis du legger til en konto kan alle dine programmer bruke denne for "
+"dokumenter, e-post, kontakter, kalender, lynmeldinger og mer."
 
-#: ../panels/power/cc-power-panel.c:171
+#: ../panels/power/cc-power-panel.c:170
 msgid "Unknown time"
 msgstr "Ukjent tid"
 
-#: ../panels/power/cc-power-panel.c:177
+#: ../panels/power/cc-power-panel.c:176
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minutt"
 msgstr[1] "%i minutter"
 
-#: ../panels/power/cc-power-panel.c:189
+#: ../panels/power/cc-power-panel.c:188
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -2381,170 +2251,170 @@ msgstr[1] "%i timer"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:197
+#: ../panels/power/cc-power-panel.c:196
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:198
+#: ../panels/power/cc-power-panel.c:197
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "time"
 msgstr[1] "timer"
 
-#: ../panels/power/cc-power-panel.c:199
+#: ../panels/power/cc-power-panel.c:198
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minutt"
 msgstr[1] "minutter"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:242
+#: ../panels/power/cc-power-panel.c:241
 #, c-format
 msgid "Charging - %s until fully charged"
 msgstr "Lader - fullt ladet om %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:250
+#: ../panels/power/cc-power-panel.c:249
 #, c-format
 msgid "Caution low battery, %s remaining"
 msgstr "Advarsel, lite batteri, %s gjenstår"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:258
+#: ../panels/power/cc-power-panel.c:257
 #, c-format
 msgid "Using battery power - %s remaining"
 msgstr "Bruker batteristrøm - %s gjenstår"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:275
+#: ../panels/power/cc-power-panel.c:274
 msgid "Charging"
 msgstr "Lader"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:280
+#: ../panels/power/cc-power-panel.c:279
 msgid "Using battery power"
 msgstr "Bruker batteristrøm"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:284
+#: ../panels/power/cc-power-panel.c:283
 msgid "Charging - fully charged"
 msgstr "Lader - fullt ladet"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:288
+#: ../panels/power/cc-power-panel.c:287
 msgid "Empty"
 msgstr "Tom"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:356
+#: ../panels/power/cc-power-panel.c:355
 #, c-format
 msgid "Caution low UPS, %s remaining"
 msgstr "Advarsel, lite strøm på UPS, %s gjenstår"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:362
+#: ../panels/power/cc-power-panel.c:361
 #, c-format
 msgid "Using UPS power - %s remaining"
 msgstr "Bruker UPS-strøm - %s gjenstår"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:380
+#: ../panels/power/cc-power-panel.c:379
 msgid "Caution low UPS"
 msgstr "Advarsel, lite strøm på UPS"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:385
+#: ../panels/power/cc-power-panel.c:384
 msgid "Using UPS power"
 msgstr "Bruker UPS-strøm"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:437
+#: ../panels/power/cc-power-panel.c:436
 msgid "Your secondary battery is fully charged"
 msgstr "Sekundært batteri er fullt ladet"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:441
+#: ../panels/power/cc-power-panel.c:440
 msgid "Your secondary battery is empty"
 msgstr "Sekundært batteri er tomt"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:524
+#: ../panels/power/cc-power-panel.c:523
 msgid "Wireless mouse"
 msgstr "Trådløs mus"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:528
+#: ../panels/power/cc-power-panel.c:527
 msgid "Wireless keyboard"
 msgstr "Trådløst tastatur"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:532
+#: ../panels/power/cc-power-panel.c:531
 msgid "Uninterruptible power supply"
 msgstr "Avbruddsfri strømforsyning"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:536
+#: ../panels/power/cc-power-panel.c:535
 msgid "Personal digital assistant"
 msgstr "Personlig digital assistent"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:540
+#: ../panels/power/cc-power-panel.c:539
 msgid "Cellphone"
 msgstr "Mobiltelefon"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:544
+#: ../panels/power/cc-power-panel.c:543
 msgid "Media player"
 msgstr "Musikkavspiller"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:548
+#: ../panels/power/cc-power-panel.c:547
 msgid "Tablet"
 msgstr "Tegnebrett"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:552
+#: ../panels/power/cc-power-panel.c:551
 msgid "Computer"
 msgstr "Datamaskin"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:556
+#: ../panels/power/cc-power-panel.c:555
 msgid "Battery"
 msgstr "Batteri"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:567
+#: ../panels/power/cc-power-panel.c:566
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Lader"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:574
+#: ../panels/power/cc-power-panel.c:573
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Advarsel"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:579
+#: ../panels/power/cc-power-panel.c:578
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Lav"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:584
+#: ../panels/power/cc-power-panel.c:583
 msgctxt "Battery power"
 msgid "Good"
 msgstr "God"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:589
+#: ../panels/power/cc-power-panel.c:588
 msgctxt "Battery power"
 msgid "Charging - fully charged"
 msgstr "Lader - fullt ladet"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:593
+#: ../panels/power/cc-power-panel.c:592
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Tom"
@@ -2607,125 +2477,125 @@ msgid "When power is _critically low"
 msgstr "Når strømmen er _kritisk lav"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:548
+#: ../panels/printers/cc-printers-panel.c:554
 msgid "Low on toner"
 msgstr "Lite toner"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:550
+#: ../panels/printers/cc-printers-panel.c:556
 msgid "Out of toner"
 msgstr "Ikke mer toner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:553
+#: ../panels/printers/cc-printers-panel.c:559
 msgid "Low on developer"
 msgstr "Lite utvikler"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:556
+#: ../panels/printers/cc-printers-panel.c:562
 msgid "Out of developer"
 msgstr "Ikke mer utvikler"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:558
+#: ../panels/printers/cc-printers-panel.c:564
 msgid "Low on a marker supply"
 msgstr "Lite farge igjen"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:560
+#: ../panels/printers/cc-printers-panel.c:566
 msgid "Out of a marker supply"
 msgstr "Tom for farge"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:562
+#: ../panels/printers/cc-printers-panel.c:568
 msgid "Open cover"
 msgstr "Åpne lokket"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:564
+#: ../panels/printers/cc-printers-panel.c:570
 msgid "Open door"
 msgstr "Åpne døren"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:566
+#: ../panels/printers/cc-printers-panel.c:572
 msgid "Low on paper"
 msgstr "Lite papir"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:568
+#: ../panels/printers/cc-printers-panel.c:574
 msgid "Out of paper"
 msgstr "Ikke mer papir"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:570
+#: ../panels/printers/cc-printers-panel.c:576
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Frakoblet"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:572
+#: ../panels/printers/cc-printers-panel.c:578
 msgctxt "printer state"
 msgid "Paused"
 msgstr "På pause"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:574
+#: ../panels/printers/cc-printers-panel.c:580
 msgid "Waste receptacle almost full"
 msgstr "Søppelkurven er nesten full"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:576
+#: ../panels/printers/cc-printers-panel.c:582
 msgid "Waste receptacle full"
 msgstr "Søppelkurven er full"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:578
+#: ../panels/printers/cc-printers-panel.c:584
 msgid "The optical photo conductor is near end of life"
 msgstr "Bildetrommelen er snart utbrukt"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:580
+#: ../panels/printers/cc-printers-panel.c:586
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Bildetrommelen fungerer ikke lenger"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:755
+#: ../panels/printers/cc-printers-panel.c:759
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Klar"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:759
+#: ../panels/printers/cc-printers-panel.c:763
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Prosesserer"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:763
+#: ../panels/printers/cc-printers-panel.c:767
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Stoppet"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:875
+#: ../panels/printers/cc-printers-panel.c:886
 msgid "Toner Level"
 msgstr "Tonernivå"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:878
+#: ../panels/printers/cc-printers-panel.c:889
 msgid "Ink Level"
 msgstr "Blekknivå"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:881
+#: ../panels/printers/cc-printers-panel.c:892
 msgid "Supply Level"
 msgstr "Beholdningsnivå"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:896
-#: ../panels/printers/cc-printers-panel.c:1291
+#: ../panels/printers/cc-printers-panel.c:907
+#: ../panels/printers/cc-printers-panel.c:1306
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -2733,80 +2603,106 @@ msgstr[0] "%u aktiv"
 msgstr[1] "%u aktive"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:1003
+#: ../panels/printers/cc-printers-panel.c:1018
 msgid "No printers available"
 msgstr "Ingen skrivere tilgjengelig"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1334
+#: ../panels/printers/cc-printers-panel.c:1349
 msgctxt "print job"
 msgid "Pending"
 msgstr "Utestående"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1338
+#: ../panels/printers/cc-printers-panel.c:1353
 msgctxt "print job"
 msgid "Held"
 msgstr "På hold"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1342
+#: ../panels/printers/cc-printers-panel.c:1357
 msgctxt "print job"
 msgid "Processing"
 msgstr "Prosesserer"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1346
+#: ../panels/printers/cc-printers-panel.c:1361
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Stoppet"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1350
+#: ../panels/printers/cc-printers-panel.c:1365
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Avbrutt"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1354
+#: ../panels/printers/cc-printers-panel.c:1369
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Avbrutt med feil"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1358
+#: ../panels/printers/cc-printers-panel.c:1373
 msgctxt "print job"
 msgid "Completed"
 msgstr "Fullført"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1438
+#: ../panels/printers/cc-printers-panel.c:1453
 msgid "Job Title"
 msgstr "Jobbtittel"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1447
+#: ../panels/printers/cc-printers-panel.c:1462
 msgid "Job State"
 msgstr "Tilstand for jobb"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1453
+#: ../panels/printers/cc-printers-panel.c:1468
 msgid "Time"
 msgstr "Tid"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2075
+#: ../panels/printers/cc-printers-panel.c:1860
 msgid "Failed to add new printer."
 msgstr "Klarte ikke å legge til ny skriver."
 
+#: ../panels/printers/cc-printers-panel.c:2012
+msgid "Select PPD File"
+msgstr "Velg PPD-fil"
+
+#: ../panels/printers/cc-printers-panel.c:2021
+msgid ""
+"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
+"PPD.GZ)"
+msgstr "PostScript Printer Description filer (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
+
+#: ../panels/printers/cc-printers-panel.c:2302
+msgid "No suitable driver found"
+msgstr "Ingen passende driver funnet"
+
+#: ../panels/printers/cc-printers-panel.c:2371
+msgid "Searching for preferred drivers..."
+msgstr "Søker etter foretrukne drivere …"
+
+#: ../panels/printers/cc-printers-panel.c:2386
+msgid "Select from database..."
+msgstr "Velg fra database …"
+
+#: ../panels/printers/cc-printers-panel.c:2395
+msgid "Provide PPD File..."
+msgstr "Oppgi en PPD-fil …"
+
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2279
-#: ../panels/printers/cc-printers-panel.c:2293
+#: ../panels/printers/cc-printers-panel.c:2533
+#: ../panels/printers/cc-printers-panel.c:2547
 msgid "Test page"
 msgstr "Testside"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2542
+#: ../panels/printers/cc-printers-panel.c:2909
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Klarte ikke å laste brukergrensesnitt: %s"
@@ -2841,6 +2737,81 @@ msgstr "_Søk etter adresse"
 #: ../panels/user-accounts/um-account-dialog.c:991
 msgid "_Add"
 msgstr "_Legg til"
+
+#: ../panels/printers/options-dialog.ui.h:1
+#: ../panels/printers/ppd-selection-dialog.ui.h:1
+msgid " "
+msgstr " "
+
+#: ../panels/printers/options-dialog.ui.h:2
+msgid "Options"
+msgstr "Alternativer"
+
+#: ../panels/printers/options-dialog.ui.h:3
+msgid "Loading options..."
+msgstr "Laster alternativer …"
+
+#: ../panels/printers/options-dialog.ui.h:4
+msgid "Close"
+msgstr "Lukk"
+
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+#: ../panels/user-accounts/data/photo-dialog.ui.h:8
+#: ../panels/user-accounts/um-account-dialog.c:990
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: ../panels/printers/ppd-selection-dialog.ui.h:3
+#: ../panels/user-accounts/data/photo-dialog.ui.h:9
+#: ../panels/user-accounts/um-photo-dialog.c:98
+msgid "Select"
+msgstr "Velg"
+
+#: ../panels/printers/ppd-selection-dialog.ui.h:4
+msgid "Loading drivers database..."
+msgstr "Laster driverdatabase …"
+
+#: ../panels/printers/ppd-selection-dialog.ui.h:5
+msgid "Select Printer Driver"
+msgstr "Velger skriverdriver"
+
+#. Translators: this is an option of "Two Sided"
+#: ../panels/printers/pp-ipp-option-widget.c:65
+#: ../panels/printers/pp-ppd-option-widget.c:69
+msgid "One Sided"
+msgstr "Ensidig"
+
+#. Translators: this is an option of "Two Sided"
+#: ../panels/printers/pp-ipp-option-widget.c:67
+#: ../panels/printers/pp-ppd-option-widget.c:71
+msgid "Long Edge (Standard)"
+msgstr "Lang kant (standard)"
+
+#. Translators: this is an option of "Two Sided"
+#: ../panels/printers/pp-ipp-option-widget.c:69
+#: ../panels/printers/pp-ppd-option-widget.c:73
+msgid "Short Edge (Flip)"
+msgstr "Kort kant (vend)"
+
+#. Translators: this is an option of "Orientation"
+#: ../panels/printers/pp-ipp-option-widget.c:71
+msgid "Portrait"
+msgstr "Portrett"
+
+#. Translators: this is an option of "Orientation"
+#: ../panels/printers/pp-ipp-option-widget.c:73
+msgid "Landscape"
+msgstr "Landskap"
+
+#. Translators: this is an option of "Orientation"
+#: ../panels/printers/pp-ipp-option-widget.c:75
+msgid "Reverse landscape"
+msgstr "Omvendt landskap"
+
+#. Translators: this is an option of "Orientation"
+#: ../panels/printers/pp-ipp-option-widget.c:77
+msgid "Reverse portrait"
+msgstr "Omvendt portrett"
 
 #: ../panels/printers/pp-new-printer-dialog.c:651
 msgid "Getting devices..."
@@ -2904,6 +2875,145 @@ msgstr "Åpner brannmur for Samba-tilkoblinger"
 msgid "Opening firewall for IPP connections"
 msgstr "Åpner brannmur for IPP-tilkoblinger"
 
+#: ../panels/printers/pp-options-dialog.c:82
+msgid "Two Sided"
+msgstr "Tosidig"
+
+#: ../panels/printers/pp-options-dialog.c:83
+msgid "Paper Type"
+msgstr "Papirtype"
+
+#: ../panels/printers/pp-options-dialog.c:84
+msgid "Paper Source"
+msgstr "Papirkilde"
+
+#: ../panels/printers/pp-options-dialog.c:85
+msgid "Output Tray"
+msgstr "Skuff"
+
+#: ../panels/printers/pp-options-dialog.c:86
+msgid "Resolution"
+msgstr "Oppløsning"
+
+#: ../panels/printers/pp-options-dialog.c:87
+msgid "GhostScript pre-filtering"
+msgstr "Forhåndsfiltrering med GhostScript"
+
+#. Translators: This option sets number of pages printed on one sheet
+#: ../panels/printers/pp-options-dialog.c:533
+msgid "Pages per side"
+msgstr "Sider per side"
+
+#. Translators: This option sets whether to print on both sides of paper
+#: ../panels/printers/pp-options-dialog.c:545
+msgid "Two-sided"
+msgstr "Tosidig"
+
+#. Translators: This option sets orientation of print (portrait, landscape...)
+#: ../panels/printers/pp-options-dialog.c:557
+msgid "Orientation"
+msgstr "Orientering"
+
+#. Translators: "General" tab contains general printer options
+#: ../panels/printers/pp-options-dialog.c:654
+msgctxt "Printer Option Group"
+msgid "General"
+msgstr "Generelt"
+
+#. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
+#: ../panels/printers/pp-options-dialog.c:657
+msgctxt "Printer Option Group"
+msgid "Page Setup"
+msgstr "Sideoppsett"
+
+#. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
+#: ../panels/printers/pp-options-dialog.c:660
+msgctxt "Printer Option Group"
+msgid "Installable Options"
+msgstr "Installerbare alternativer"
+
+#. Translators: "Job" tab contains settings for jobs
+#: ../panels/printers/pp-options-dialog.c:663
+msgctxt "Printer Option Group"
+msgid "Job"
+msgstr "Jobb"
+
+#. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
+#: ../panels/printers/pp-options-dialog.c:666
+msgctxt "Printer Option Group"
+msgid "Image Quality"
+msgstr "Bildekvalitet"
+
+#. Translators: "Color" tab contains color settings (e.g. color printing)
+#: ../panels/printers/pp-options-dialog.c:669
+msgctxt "Printer Option Group"
+msgid "Color"
+msgstr "Farge"
+
+#. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
+#: ../panels/printers/pp-options-dialog.c:672
+msgctxt "Printer Option Group"
+msgid "Finishing"
+msgstr "Fullføring"
+
+#. Translators: "Advanced" tab contains all others settings
+#: ../panels/printers/pp-options-dialog.c:675
+msgctxt "Printer Option Group"
+msgid "Advanced"
+msgstr "Avansert"
+
+#. Translators: Options of given printer (e.g. "MyPrinter Options")
+#: ../panels/printers/pp-options-dialog.c:934
+#, c-format
+msgid "%s Options"
+msgstr "Alternativer for %s"
+
+#. Translators: this is an option of "Paper Source"
+#: ../panels/printers/pp-ppd-option-widget.c:75
+#: ../panels/printers/pp-ppd-option-widget.c:77
+#: ../panels/printers/pp-ppd-option-widget.c:85
+msgid "Auto Select"
+msgstr "Automatisk valg"
+
+#. Translators: this is an option of "Paper Source"
+#. Translators: this is an option of "Resolution"
+#: ../panels/printers/pp-ppd-option-widget.c:79
+#: ../panels/printers/pp-ppd-option-widget.c:81
+#: ../panels/printers/pp-ppd-option-widget.c:83
+#: ../panels/printers/pp-ppd-option-widget.c:87
+msgid "Printer Default"
+msgstr "Forvalg for skriver"
+
+#. Translators: this is an option of "GhostScript"
+#: ../panels/printers/pp-ppd-option-widget.c:89
+msgid "Embed GhostScript fonts only"
+msgstr "Kun innebyggede GhostScript skrifter"
+
+#. Translators: this is an option of "GhostScript"
+#: ../panels/printers/pp-ppd-option-widget.c:91
+msgid "Convert to PS level 1"
+msgstr "Konverter til PS nivå 1"
+
+#. Translators: this is an option of "GhostScript"
+#: ../panels/printers/pp-ppd-option-widget.c:93
+msgid "Convert to PS level 2"
+msgstr "Konverter til PS nivå 2"
+
+#. Translators: this is an option of "GhostScript"
+#: ../panels/printers/pp-ppd-option-widget.c:95
+msgid "No pre-filtering"
+msgstr "Ingen forhåndsfiltrering"
+
+#. Translators: Name of column showing printer manufacturers
+#: ../panels/printers/pp-ppd-selection-dialog.c:230
+msgid "Manufacturers"
+msgstr "Produsenter"
+
+#. Translators: Name of column showing printer drivers
+#: ../panels/printers/pp-ppd-selection-dialog.c:242
+msgid "Drivers"
+msgstr "Drivere"
+
 #: ../panels/printers/printers.ui.h:1
 msgid "Add Printer"
 msgstr "Legg til skriver"
@@ -2940,62 +3050,82 @@ msgstr "Vi_s"
 msgid "Model"
 msgstr "Modell"
 
-#. Translators: This button executes command which prints test page.
+#: ../panels/printers/printers.ui.h:14
+msgid "page 1"
+msgstr "side 1"
+
 #: ../panels/printers/printers.ui.h:15
+msgid "label"
+msgstr "etikett"
+
+#: ../panels/printers/printers.ui.h:16
+msgid "page 2"
+msgstr "side 2"
+
+#: ../panels/printers/printers.ui.h:17
+msgid "Setting new driver..."
+msgstr "Setter ny driver …"
+
+#: ../panels/printers/printers.ui.h:18
+msgid "page 3"
+msgstr "side 3"
+
+#. Translators: This button executes command which prints test page.
+#: ../panels/printers/printers.ui.h:20
 msgid "Print _Test Page"
 msgstr "Skriv ut _testside"
 
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:17
+#: ../panels/printers/printers.ui.h:22
 msgid "_Options"
 msgstr "_Alternativer"
 
 #. Translators: Switch back to printer's info tab
-#: ../panels/printers/printers.ui.h:19
+#: ../panels/printers/printers.ui.h:24
 msgid "_Back"
 msgstr "Til_bake"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:21
+#: ../panels/printers/printers.ui.h:26
 msgid "Active Print Jobs"
 msgstr "Aktive utskriftsjobber"
 
-#: ../panels/printers/printers.ui.h:22
+#: ../panels/printers/printers.ui.h:27
 msgid "Resume Printing"
 msgstr "Gjenoppta utskrift"
 
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:28
 msgid "Pause Printing"
 msgstr "Sett utskrift på pause"
 
-#: ../panels/printers/printers.ui.h:24
+#: ../panels/printers/printers.ui.h:29
 msgid "Cancel Print Job"
 msgstr "Avbryt utskriftsjobb"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:26
+#: ../panels/printers/printers.ui.h:31
 msgid "Printer Options"
 msgstr "Alternativer for skriver"
 
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:32
 msgid "Add User"
 msgstr "Legg til bruker"
 
-#: ../panels/printers/printers.ui.h:28
+#: ../panels/printers/printers.ui.h:33
 msgid "Remove User"
 msgstr "Fjern bruker"
 
-#: ../panels/printers/printers.ui.h:29
+#: ../panels/printers/printers.ui.h:34
 msgid "Allowed users"
 msgstr "Tilatte brukere"
 
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:31
+#: ../panels/printers/printers.ui.h:36
 msgid "Add New Printer"
 msgstr "Legg til ny skriver"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:33
+#: ../panels/printers/printers.ui.h:38
 msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
@@ -3245,6 +3375,10 @@ msgid "Locations..."
 msgstr "Steder …"
 
 #: ../panels/screen/screen.ui.h:17
+msgid "Show _notifications when locked"
+msgstr "Vis varslinger _når låst"
+
+#: ../panels/screen/screen.ui.h:18
 msgid "Lock"
 msgstr "Lås"
 
@@ -3379,7 +3513,7 @@ msgstr "_Profil:"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1134
+#: ../panels/sound/gvc-mixer-control.c:1841
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -3388,14 +3522,14 @@ msgstr[1] "%u utganger"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1144
+#: ../panels/sound/gvc-mixer-control.c:1851
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u inngang"
 msgstr[1] "%u innganger"
 
-#: ../panels/sound/gvc-mixer-control.c:1442
+#: ../panels/sound/gvc-mixer-control.c:2375
 msgid "System Sounds"
 msgstr "Systemlyder"
 
@@ -3583,6 +3717,11 @@ msgstr "GOK"
 #: ../panels/universal-access/uap.ui.h:7
 msgid "OnBoard"
 msgstr "OnBoard"
+
+#: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:335
+#: ../panels/wacom/cc-wacom-page.c:352
+msgid "None"
+msgstr "Ingen"
 
 #: ../panels/universal-access/uap.ui.h:10
 #, no-c-format
@@ -4204,16 +4343,6 @@ msgstr "Bla gjennom"
 msgid "Photograph"
 msgstr "Bilde"
 
-#: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:990
-msgid "Cancel"
-msgstr "Avbryt"
-
-#: ../panels/user-accounts/data/photo-dialog.ui.h:9
-#: ../panels/user-accounts/um-photo-dialog.c:98
-msgid "Select"
-msgstr "Velg"
-
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgid "Account Information"
 msgstr "Kontoinformasjon"
@@ -4258,37 +4387,37 @@ msgstr "Håndter brukerkontoer"
 msgid "Authentication is required to change user data"
 msgstr "Autentisering kreves for å endre brukerdata"
 
-#: ../panels/user-accounts/pw-utils.c:93
-#: ../panels/user-accounts/um-password-dialog.c:553
+#: ../panels/user-accounts/pw-utils.c:94
+#: ../panels/user-accounts/um-password-dialog.c:552
 msgctxt "Password strength"
 msgid "Too short"
 msgstr "For kort"
 
-#: ../panels/user-accounts/pw-utils.c:98
+#: ../panels/user-accounts/pw-utils.c:99
 msgctxt "Password strength"
 msgid "Not good enough"
 msgstr "Ikke bra nok"
 
-#: ../panels/user-accounts/pw-utils.c:106
-#: ../panels/user-accounts/um-password-dialog.c:554
+#: ../panels/user-accounts/pw-utils.c:108
+#: ../panels/user-accounts/um-password-dialog.c:553
 msgctxt "Password strength"
 msgid "Weak"
 msgstr "Svakt"
 
-#: ../panels/user-accounts/pw-utils.c:108
-#: ../panels/user-accounts/um-password-dialog.c:555
+#: ../panels/user-accounts/pw-utils.c:111
+#: ../panels/user-accounts/um-password-dialog.c:554
 msgctxt "Password strength"
 msgid "Fair"
 msgstr "Bra"
 
-#: ../panels/user-accounts/pw-utils.c:110
-#: ../panels/user-accounts/um-password-dialog.c:556
+#: ../panels/user-accounts/pw-utils.c:114
+#: ../panels/user-accounts/um-password-dialog.c:555
 msgctxt "Password strength"
 msgid "Good"
 msgstr "God"
 
-#: ../panels/user-accounts/pw-utils.c:112
-#: ../panels/user-accounts/um-password-dialog.c:557
+#: ../panels/user-accounts/pw-utils.c:117
+#: ../panels/user-accounts/um-password-dialog.c:556
 msgctxt "Password strength"
 msgid "Strong"
 msgstr "Sterk"
@@ -4298,7 +4427,7 @@ msgid "Authentication failed"
 msgstr "Autentisering feilet"
 
 #: ../panels/user-accounts/run-passwd.c:506
-#: ../panels/user-accounts/um-password-dialog.c:240
+#: ../panels/user-accounts/um-password-dialog.c:239
 #, c-format
 msgid "The new password is too short"
 msgstr "Det nye passordet er for kort"
@@ -4449,47 +4578,47 @@ msgstr "Registrerer fingeravtrykk"
 msgid "Summary"
 msgstr "Sammendrag"
 
-#: ../panels/user-accounts/um-password-dialog.c:97
+#: ../panels/user-accounts/um-password-dialog.c:96
 msgid "_Generate a password"
 msgstr "_Generer et passord"
 
-#: ../panels/user-accounts/um-password-dialog.c:151
+#: ../panels/user-accounts/um-password-dialog.c:150
 msgid "Please choose another password."
 msgstr "Vennligst velg et annet passord."
 
-#: ../panels/user-accounts/um-password-dialog.c:160
+#: ../panels/user-accounts/um-password-dialog.c:159
 msgid "Please type your current password again."
 msgstr "Vennligst skriv inn nåværende passord igjen."
 
-#: ../panels/user-accounts/um-password-dialog.c:166
+#: ../panels/user-accounts/um-password-dialog.c:165
 msgid "Password could not be changed"
 msgstr "Passordet kunne ikke endres"
 
-#: ../panels/user-accounts/um-password-dialog.c:237
+#: ../panels/user-accounts/um-password-dialog.c:236
 msgid "You need to enter a new password"
 msgstr "Du må skrive inn et nytt passord"
 
-#: ../panels/user-accounts/um-password-dialog.c:246
+#: ../panels/user-accounts/um-password-dialog.c:245
 msgid "You need to confirm the password"
 msgstr "Du må bekrefte passordet"
 
-#: ../panels/user-accounts/um-password-dialog.c:249
+#: ../panels/user-accounts/um-password-dialog.c:248
 msgid "The passwords do not match"
 msgstr "Passordene er for like"
 
-#: ../panels/user-accounts/um-password-dialog.c:255
+#: ../panels/user-accounts/um-password-dialog.c:254
 msgid "You need to enter your current password"
 msgstr "Du må oppgi ditt nåværende passord"
 
-#: ../panels/user-accounts/um-password-dialog.c:258
+#: ../panels/user-accounts/um-password-dialog.c:257
 msgid "The current password is not correct"
 msgstr "Nåværende passord er ikke korrekt"
 
-#: ../panels/user-accounts/um-password-dialog.c:369
+#: ../panels/user-accounts/um-password-dialog.c:368
 msgid "Passwords do not match"
 msgstr "Passordene er ikke like"
 
-#: ../panels/user-accounts/um-password-dialog.c:395
+#: ../panels/user-accounts/um-password-dialog.c:394
 msgid "Wrong password"
 msgstr "Feil passord"
 
@@ -4543,20 +4672,20 @@ msgstr "Ingen bruker med navn «%s» eksisterer."
 msgid "This user does not exist."
 msgstr "Denne brukeren eksisterer ikke."
 
-#: ../panels/user-accounts/um-user-panel.c:365
+#: ../panels/user-accounts/um-user-panel.c:364
 msgid "Failed to delete user"
 msgstr "Klarte ikke å slette bruker"
 
-#: ../panels/user-accounts/um-user-panel.c:425
+#: ../panels/user-accounts/um-user-panel.c:424
 msgid "You cannot delete your own account."
 msgstr "Du kan ikke slette din egen konto."
 
-#: ../panels/user-accounts/um-user-panel.c:434
+#: ../panels/user-accounts/um-user-panel.c:433
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s er fremdeles logget inn"
 
-#: ../panels/user-accounts/um-user-panel.c:438
+#: ../panels/user-accounts/um-user-panel.c:437
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -4564,12 +4693,12 @@ msgstr ""
 "Hvis du sletter en innlogget bruker kan systemet ende opp i en inkonsistent "
 "tilstand."
 
-#: ../panels/user-accounts/um-user-panel.c:447
+#: ../panels/user-accounts/um-user-panel.c:446
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Vil du beholde filene til %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:451
+#: ../panels/user-accounts/um-user-panel.c:450
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -4577,38 +4706,38 @@ msgstr ""
 "Det er mulig å beholde hjemmekatalogen, e-postkøen og midlertidige filer når "
 "du sletter en brukerkonto."
 
-#: ../panels/user-accounts/um-user-panel.c:454
+#: ../panels/user-accounts/um-user-panel.c:453
 msgid "_Delete Files"
 msgstr "_Slett filer"
 
-#: ../panels/user-accounts/um-user-panel.c:455
+#: ../panels/user-accounts/um-user-panel.c:454
 msgid "_Keep Files"
 msgstr "_Behold filer"
 
-#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:506
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Konto deaktivert"
 
-#: ../panels/user-accounts/um-user-panel.c:515
+#: ../panels/user-accounts/um-user-panel.c:514
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Settes ved neste innlogging"
 
-#: ../panels/user-accounts/um-user-panel.c:518
+#: ../panels/user-accounts/um-user-panel.c:517
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ingen"
 
-#: ../panels/user-accounts/um-user-panel.c:856
+#: ../panels/user-accounts/um-user-panel.c:855
 msgid "Failed to contact the accounts service"
 msgstr "Klarte ikke å kontakte kontotjenesten"
 
-#: ../panels/user-accounts/um-user-panel.c:858
+#: ../panels/user-accounts/um-user-panel.c:857
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Sjekk at kontotjenesten er installert og aktivert."
 
-#: ../panels/user-accounts/um-user-panel.c:898
+#: ../panels/user-accounts/um-user-panel.c:897
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -4616,12 +4745,12 @@ msgstr ""
 "Klikk på *-ikonet\n"
 "for å gjøre endringer"
 
-#: ../panels/user-accounts/um-user-panel.c:936
+#: ../panels/user-accounts/um-user-panel.c:935
 msgid "Create a user account"
 msgstr "Lag en ny brukerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:947
-#: ../panels/user-accounts/um-user-panel.c:1237
+#: ../panels/user-accounts/um-user-panel.c:946
+#: ../panels/user-accounts/um-user-panel.c:1236
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -4629,12 +4758,12 @@ msgstr ""
 "Klikk på *-ikonet\n"
 "for å lage en brukerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:956
+#: ../panels/user-accounts/um-user-panel.c:955
 msgid "Delete the selected user account"
 msgstr "Slett valgt brukerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:968
-#: ../panels/user-accounts/um-user-panel.c:1242
+#: ../panels/user-accounts/um-user-panel.c:967
+#: ../panels/user-accounts/um-user-panel.c:1241
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -4642,11 +4771,11 @@ msgstr ""
 "Klikk på *-ikonet\n"
 "for å slette valgt brukerkonto"
 
-#: ../panels/user-accounts/um-user-panel.c:1145
+#: ../panels/user-accounts/um-user-panel.c:1144
 msgid "My Account"
 msgstr "Min konto"
 
-#: ../panels/user-accounts/um-user-panel.c:1155
+#: ../panels/user-accounts/um-user-panel.c:1154
 msgid "Other Accounts"
 msgstr "Andre kontoer"
 
@@ -4685,11 +4814,11 @@ msgid "Map buttons to functions"
 msgstr "Koble knapper til funksjoner"
 
 #. Text printed on screen
-#: ../panels/wacom/calibrator/gui_gtk.c:70
+#: ../panels/wacom/calibrator/gui_gtk.c:78
 msgid "Screen Calibration"
 msgstr "Kalibrering av skjerm"
 
-#: ../panels/wacom/calibrator/gui_gtk.c:71
+#: ../panels/wacom/calibrator/gui_gtk.c:79
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
@@ -4697,7 +4826,7 @@ msgstr ""
 "Vennligst tapp på målmarkørene når de vises på skjermen for å kalibrere "
 "tegnebrettet."
 
-#: ../panels/wacom/calibrator/gui_gtk.c:271
+#: ../panels/wacom/calibrator/gui_gtk.c:368
 msgid "Mis-click detected, restarting..."
 msgstr "Feil klikk oppdaget. Starter på nytt …"
 
@@ -4720,24 +4849,24 @@ msgstr "Tilegne til en enkelt skjerm"
 msgid "%d of %d"
 msgstr "%d av %d"
 
-#: ../panels/wacom/cc-wacom-page.c:306
+#: ../panels/wacom/cc-wacom-page.c:317
 msgid "Switch Modes"
 msgstr "Bytt modus"
 
-#: ../panels/wacom/cc-wacom-page.c:553
+#: ../panels/wacom/cc-wacom-page.c:564
 msgid "Up"
 msgstr "Opp"
 
-#: ../panels/wacom/cc-wacom-page.c:553
+#: ../panels/wacom/cc-wacom-page.c:564
 msgid "Down"
 msgstr "Ned"
 
-#: ../panels/wacom/cc-wacom-page.c:588
+#: ../panels/wacom/cc-wacom-page.c:599
 #: ../panels/wacom/cc-wacom-stylus-page.c:376
 msgid "Button"
 msgstr "Knapp"
 
-#: ../panels/wacom/cc-wacom-page.c:714
+#: ../panels/wacom/cc-wacom-page.c:725
 msgid "Display Mapping"
 msgstr "Vis kobling"
 
