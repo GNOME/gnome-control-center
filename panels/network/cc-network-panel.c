@@ -88,7 +88,6 @@ enum {
         PROP_ARGV
 };
 
-static void     refresh_ui      (CcNetworkPanel *panel);
 static NetObject *find_in_model_by_id (CcNetworkPanel *panel, const gchar *id);
 
 static void
@@ -282,20 +281,6 @@ select_tree_iter (CcNetworkPanel *panel, GtkTreeIter *iter)
 }
 
 static void
-device_state_notify_changed_cb (NMDevice *device,
-                                GParamSpec *pspec,
-                                CcNetworkPanel *panel)
-{
-        refresh_ui (panel);
-}
-
-static void
-object_changed_cb (NetObject *object, CcNetworkPanel *panel)
-{
-        refresh_ui (panel);
-}
-
-static void
 object_removed_cb (NetObject *object, CcNetworkPanel *panel)
 {
         gboolean ret;
@@ -332,15 +317,6 @@ object_removed_cb (NetObject *object, CcNetworkPanel *panel)
                 }
                 g_object_unref (object_tmp);
         } while (gtk_tree_model_iter_next (model, &iter));
-}
-
-static void
-register_object_interest (CcNetworkPanel *panel, NetObject *object)
-{
-        g_signal_connect_object (object, "changed",
-                                 G_CALLBACK (object_changed_cb), panel, 0);
-        g_signal_connect_object (object, "removed",
-                                 G_CALLBACK (object_removed_cb), panel, 0);
 }
 
 static void
@@ -419,8 +395,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         g_debug ("device %s type %i",
                  nm_device_get_udi (device),
                  nm_device_get_device_type (device));
-        g_signal_connect_object (G_OBJECT (device), "notify::state",
-                                 (GCallback) device_state_notify_changed_cb, panel, 0);
 
         /* map the NMDeviceType to the GType */
         switch (type) {
@@ -464,7 +438,8 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                             "liststore_devices"));
-        register_object_interest (panel, NET_OBJECT (net_device));
+        g_signal_connect_object (net_device, "removed",
+                                 G_CALLBACK (object_removed_cb), panel, 0);
         gtk_list_store_append (liststore_devices, &iter);
         gtk_list_store_set (liststore_devices,
                             &iter,
@@ -579,20 +554,30 @@ panel_add_devices_columns (CcNetworkPanel *panel, GtkTreeView *treeview)
         gtk_tree_view_column_set_expand (column, TRUE);
 }
 
-static gboolean
-panel_set_notebook_page_for_object (CcNetworkPanel *panel, NetObject *object)
+static void
+nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *panel)
 {
         CcNetworkPanelPrivate *priv = panel->priv;
         const gchar *id_tmp;
         const gchar *needle;
         GList *l;
-        GList *panels;
+        GList *panels = NULL;
         GtkNotebook *notebook;
+        GtkTreeIter iter;
+        GtkTreeModel *model;
         GtkWidget *widget;
-        gboolean success = FALSE;
         guint i = 0;
+        NetObject *object = NULL;
+
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                     "treeview_devices"));
+        if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
+                g_debug ("no row selected");
+                goto out;
+        }
 
         /* find the widget in the notebook that matches the object ID */
+        object = get_selected_object (panel);
         needle = net_object_get_id (object);
         notebook = GTK_NOTEBOOK (gtk_builder_get_object (priv->builder,
                                                          "notebook_types"));
@@ -608,67 +593,12 @@ panel_set_notebook_page_for_object (CcNetworkPanel *panel, NetObject *object)
                                                                      "remove_toolbutton"));
                         gtk_widget_set_sensitive (widget,
                                                   net_object_get_removable (object));
-                        success = TRUE;
                         break;
                 }
                 i++;
         }
-        g_list_free (panels);
-        return success;
-}
-
-static gboolean
-refresh_ui_idle (gpointer data)
-{
-        CcNetworkPanel *panel = data;
-        GtkTreeSelection *selection;
-        GtkTreeIter iter;
-        GtkTreeModel *model;
-        GtkWidget *widget;
-        gboolean ret;
-        NetObject *object = NULL;
-        CcNetworkPanelPrivate *priv = panel->priv;
-
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "treeview_devices"));
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-
-        /* will only work in single or browse selection mode! */
-        if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
-                g_debug ("no row selected");
-                goto out;
-        }
-
-        object = get_selected_object (panel);
-
-        /* do we have a new-style NetObject-style panel widget */
-        ret = panel_set_notebook_page_for_object (panel, object);
-        if (!ret && NET_IS_DEVICE (object)) {
-
-                /* we're not yet able to remove the connection */
-                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                             "remove_toolbutton"));
-                gtk_widget_set_sensitive (widget, FALSE);
-        }
 out:
-        priv->refresh_idle = 0;
-
-        return FALSE;
-}
-
-static void
-refresh_ui (CcNetworkPanel *panel)
-{
-        if (panel->priv->refresh_idle != 0)
-                return;
-
-        panel->priv->refresh_idle = g_idle_add (refresh_ui_idle, panel);
-}
-
-static void
-nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *panel)
-{
-        refresh_ui (panel);
+        g_list_free (panels);
 }
 
 static void
@@ -722,7 +652,6 @@ cc_network_panel_notify_enable_active_cb (GtkSwitch *sw,
 static void
 connection_state_changed (NMActiveConnection *c, GParamSpec *pspec, CcNetworkPanel *panel)
 {
-        refresh_ui (panel);
 }
 
 static void
@@ -752,8 +681,6 @@ active_connections_changed (NMClient *client, GParamSpec *pspec, gpointer user_d
                         g_object_set_data (G_OBJECT (connection), "has-state-changed-handler", GINT_TO_POINTER (TRUE));
                 }
         }
-
-        refresh_ui (panel);
 }
 
 static void
@@ -867,7 +794,8 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
                                 "connection", connection,
                                 "client", panel->priv->client,
                                 NULL);
-        register_object_interest (panel, NET_OBJECT (net_vpn));
+        g_signal_connect_object (net_vpn, "removed",
+                                 G_CALLBACK (object_removed_cb), panel, 0);
 
         /* add as a panel */
         notebook = GTK_NOTEBOOK (gtk_builder_get_object (panel->priv->builder,
