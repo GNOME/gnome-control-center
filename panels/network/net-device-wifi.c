@@ -1417,6 +1417,45 @@ show_wifi_list (NetDeviceWifi *device_wifi)
 }
 
 static gboolean
+arrow_visible (GtkTreeModel *model,
+               GtkTreeIter  *iter)
+{
+        gboolean active;
+        gboolean ret;
+        gchar *sort;
+
+        gtk_tree_model_get (model, iter,
+                            COLUMN_ACTIVE, &active,
+                            COLUMN_SORT, &sort,
+                            -1);
+
+        if (active || strcmp ("ap:hidden", sort) == 0)
+                ret = TRUE;
+        else
+                ret = FALSE;
+
+        g_free (sort);
+        return ret;
+}
+
+static void
+set_arrow_image (GtkCellLayout   *layout,
+                 GtkCellRenderer *cell,
+                 GtkTreeModel    *model,
+                 GtkTreeIter     *iter,
+                 gpointer         user_data)
+{
+        const gchar *icon;
+
+        if (arrow_visible (model, iter))
+                icon = "go-next-symbolic";
+        else
+                icon = "";
+
+        g_object_set (cell, "icon-name", icon, NULL);
+}
+
+static gboolean
 over_arrow (NetDeviceWifi    *device_wifi,
             GtkTreeView       *tv,
             GtkTreeViewColumn *col,
@@ -1431,8 +1470,8 @@ over_arrow (NetDeviceWifi    *device_wifi,
         model = gtk_tree_view_get_model (tv);
         gtk_tree_model_get_iter (model, &iter, path);
 
-//        if (!arrow_visible (model, &iter))
-//                return FALSE;
+        if (!arrow_visible (model, &iter))
+                return FALSE;
 
         width = gtk_tree_view_column_get_width (col);
 
@@ -1639,9 +1678,10 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer, FALSE);
         g_object_set (renderer,
                       "follow-state", TRUE,
-                      "icon-name", "go-next-symbolic",
                       "visible", TRUE,
                       NULL);
+        gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (column), renderer,
+                                            set_arrow_image, device_wifi, NULL);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "button_back"));
