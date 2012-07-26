@@ -26,10 +26,119 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <child>
-          <object class="GtkLabel" id="label4">
+          <object class="GtkScrolledWindow" id="scrolledwindow_list">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label">label</property>
+            <property name="can_focus">True</property>
+            <property name="hscrollbar_policy">never</property>
+            <child>
+              <object class="GtkViewport" id="viewport_list">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkBox" id="box_list">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkBox" id="box_list_heading">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_left">12</property>
+                        <property name="margin_right">12</property>
+                        <property name="margin_top">12</property>
+                        <property name="margin_bottom">6</property>
+                        <child>
+                          <object class="GtkLabel" id="heading_list">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="hexpand">True</property>
+                            <property name="label">Wireless</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                              <attribute name="scale" value="1.2"/>
+                            </attributes>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkSwitch" id="device_off_switch">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="halign">end</property>
+                            <property name="valign">start</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkTreeView" id="treeview_list">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="margin_left">12</property>
+                        <property name="margin_right">12</property>
+                        <property name="margin_top">6</property>
+                        <property name="margin_bottom">7</property>
+                        <property name="hexpand">True</property>
+                        <property name="model">liststore_network</property>
+                        <property name="headers_visible">False</property>
+                        <property name="headers_clickable">False</property>
+                        <property name="search_column">0</property>
+                        <child internal-child="selection">
+                          <object class="GtkTreeSelection" id="treeview_list_selection">
+                            <property name="mode">none</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeview_list_column"/>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="start_hotspot_button">
+                        <property name="label" translatable="yes">_Use as Hotspot...</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="halign">start</property>
+                        <property name="valign">end</property>
+                        <property name="margin_left">12</property>
+                        <property name="margin_right">12</property>
+                        <property name="margin_top">6</property>
+                        <property name="margin_bottom">12</property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
+                        <property name="use_underline">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
           </object>
         </child>
         <child type="tab">
@@ -55,24 +164,6 @@
                 <property name="valign">start</property>
                 <property name="row_spacing">10</property>
                 <property name="column_spacing">6</property>
-                <child>
-                  <object class="GtkImage" id="image_device">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="halign">end</property>
-                    <property name="valign">start</property>
-                    <property name="xalign">1</property>
-                    <property name="pixel_size">48</property>
-                    <property name="icon_name">network-wireless</property>
-                    <property name="icon-size">6</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">0</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
-                </child>
                 <child>
                   <object class="GtkVBox" id="vbox3">
                     <property name="visible">True</property>
@@ -294,11 +385,15 @@
                     <property name="halign">end</property>
                     <property name="valign">start</property>
                     <child>
-                      <object class="GtkSwitch" id="device_off_switch">
+                      <object class="GtkButton" id="button_disconnect">
+                        <property name="label">_Disconnect</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
                         <property name="halign">end</property>
-                        <property name="valign">start</property>
+                        <property name="valign">center</property>
+                        <property name="hexpand">True</property>
+                        <property name="use_underline">True</property>
                       </object>
                     </child>
                   </object>
@@ -323,25 +418,6 @@
                   <packing>
                     <property name="left_attach">0</property>
                     <property name="top_attach">2</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="heading_network_name">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="xalign">1</property>
-                    <property name="label" translatable="yes">_Network Name</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">combobox_network_name</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">3</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
@@ -396,26 +472,6 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkComboBox" id="combobox_network_name">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="model">liststore_network</property>
-                    <property name="has_entry">True</property>
-                    <property name="entry_text_column">1</property>
-                    <child internal-child="entry">
-                      <object class="GtkEntry" id="combobox-entry">
-                        <property name="can_focus">False</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="top_attach">3</property>
-                    <property name="width">2</property>
-                    <property name="height">1</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkLabel" id="label_hotspot_network_name">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
@@ -446,18 +502,42 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="button_forget">
-                    <property name="label" translatable="yes">_Forget Network</property>
+                  <object class="GtkButton" id="button_back">
+                    <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="use_underline">True</property>
+                    <property name="halign">start</property>
+                    <property name="valign">center</property>
+                    <property name="hexpand">True</property>
+                    <child>
+                      <object class="GtkArrow" id="arrow1">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="arrow_type">left</property>
+                      </object>
+                    </child>
                   </object>
                   <packing>
-                    <property name="left_attach">1</property>
-                    <property name="top_attach">4</property>
-                    <property name="width">2</property>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
                 </child>
                 <child>
                   <placeholder/>
@@ -475,15 +555,12 @@
                 <property name="can_focus">False</property>
                 <property name="margin_top">12</property>
                 <child>
-                  <object class="GtkButton" id="start_hotspot_button">
-                    <property name="label" translatable="yes">_Use as Hotspot...</property>
-                    <property name="visible">True</property>
+                  <object class="GtkButton" id="button_forget">
+                    <property name="label" translatable="yes">_Forget Network</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="halign">start</property>
                     <property name="valign">end</property>
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
                     <property name="use_underline">True</property>
                   </object>
                   <packing>
