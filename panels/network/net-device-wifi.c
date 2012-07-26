@@ -790,6 +790,11 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
                                                      "button_forget"));
         gtk_widget_set_visible (widget, active_ap != NULL);
 
+        /* only disconnect when connection active */
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
+                                                     "button_disconnect"));
+        gtk_widget_set_sensitive (widget, state == NM_DEVICE_STATE_ACTIVATED);
+
         /* device MAC */
         str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (nm_device));
         panel_set_device_widget_details (priv->builder, "mac", str);
