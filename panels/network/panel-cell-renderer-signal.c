@@ -66,7 +66,7 @@ panel_cell_renderer_set_name (PanelCellRendererSignal *renderer)
         GIcon *icon;
 
         /* the 'Other...' entry */
-        if (renderer->signal == 0) {
+        if (renderer->signal <= 0) {
                 g_object_set (renderer, "gicon", NULL, NULL);
                 return;
         }
