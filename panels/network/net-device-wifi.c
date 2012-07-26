@@ -130,18 +130,20 @@ get_access_point_security (NMAccessPoint *ap)
 static void
 add_access_point (NetDeviceWifi *device_wifi, NMAccessPoint *ap, NMAccessPoint *active, NMDevice *device)
 {
-        NetDeviceWifiPrivate *priv = device_wifi->priv;
         const GByteArray *ssid;
-        const gchar *ssid_text;
         const gchar *object_path;
+        const gchar *ssid_text;
+        gboolean is_active_ap;
+        gchar *title;
         GtkListStore *liststore_network;
         GtkTreeIter treeiter;
-        gboolean is_active_ap;
+        NetDeviceWifiPrivate *priv = device_wifi->priv;
 
         ssid = nm_access_point_get_ssid (ap);
         if (ssid == NULL)
                 return;
         ssid_text = nm_utils_escape_ssid (ssid->data, ssid->len);
+        title = g_markup_escape_text (ssid_text, -1);
 
         is_active_ap = active && nm_utils_same_ssid (ssid, nm_access_point_get_ssid (active), TRUE);
         if (is_active_ap)
@@ -155,7 +157,7 @@ add_access_point (NetDeviceWifi *device_wifi, NMAccessPoint *ap, NMAccessPoint *
                                            &treeiter,
                                            -1,
                                            COLUMN_ID, object_path,
-                                           COLUMN_TITLE, ssid_text,
+                                           COLUMN_TITLE, title,
                                            COLUMN_SORT, ssid_text,
                                            COLUMN_STRENGTH, nm_access_point_get_strength (ap),
                                            COLUMN_MODE, nm_access_point_get_mode (ap),
@@ -164,6 +166,7 @@ add_access_point (NetDeviceWifi *device_wifi, NMAccessPoint *ap, NMAccessPoint *
                                            COLUMN_AP_IN_RANGE, TRUE,
                                            COLUMN_AP_IS_SAVED, FALSE,
                                            -1);
+        g_free (title);
 
 //        if (priv->arg_operation == OPERATION_CONNECT_8021X &&
 //            g_strcmp0(priv->arg_device, nm_object_get_path (NM_OBJECT (device))) == 0 &&
