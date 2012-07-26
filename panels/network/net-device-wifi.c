@@ -85,11 +85,12 @@ device_wifi_proxy_add_to_notebook (NetObject *object,
         window = GTK_WINDOW (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "window_tmp"));
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "vbox5"));
+                                                     "notebook_view"));
         g_object_ref (widget);
         gtk_container_remove (GTK_CONTAINER (window), widget);
         gtk_notebook_append_page (notebook, widget, NULL);
         g_object_unref (widget);
+
         return widget;
 }
 
@@ -1525,6 +1526,11 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                                         "security", COLUMN_SECURITY,
                                         NULL);
 
+        /* setup view */
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
+                                                     "notebook_view"));
+        gtk_notebook_set_show_tabs (GTK_NOTEBOOK (widget), FALSE);
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "start_hotspot_button"));
