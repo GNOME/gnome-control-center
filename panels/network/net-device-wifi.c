@@ -638,6 +638,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         GString *string;
         GtkWidget *sw;
         GtkWidget *widget;
+        gint strength = 0;
         guint speed = 0;
         NMAccessPoint *active_ap;
         NMClientPermissionResult perm;
@@ -764,6 +765,27 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
                                          "security",
                                          str_tmp);
         g_free (str_tmp);
+
+if(0){
+        /* signal strength */
+        if (active_ap != NULL)
+                strength = nm_access_point_get_strength (active_ap);
+        if (strength <= 0)
+                str = NULL;
+        else if (strength < 20)
+                str = C_("Signal strength", "None");
+        else if (strength < 40)
+                str = C_("Signal strength", "Weak");
+        else if (strength < 50)
+                str = C_("Signal strength", "Ok");
+        else if (strength < 80)
+                str = C_("Signal strength", "Good");
+        else
+                str = C_("Signal strength", "Excellent");
+        panel_set_device_widget_details (device_wifi->priv->builder,
+                                         "strength",
+                                         str);
+}
 
         /* setup wireless button */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
