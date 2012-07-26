@@ -638,7 +638,6 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         gchar *hotspot_security;
         gchar *hotspot_ssid;
         gchar *str_tmp;
-        GString *string;
         GtkWidget *sw;
         GtkWidget *widget;
         gint strength = 0;
@@ -681,17 +680,18 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, wid_name));
         g_free (wid_name);
         if (is_hotspot) {
-                string = g_string_new (_("Hotspot"));
+                gtk_label_set_label (GTK_LABEL (widget), _("Hotspot"));
         } else {
-                string = g_string_new (panel_device_state_to_localized_string (nm_device));
+                gtk_label_set_label (GTK_LABEL (widget),
+                                     panel_device_state_to_localized_string (nm_device));
         }
-        if (speed  > 0) {
-                g_string_append (string, " - ");
-                /* Translators: network device speed */
-                g_string_append_printf (string, _("%d Mb/s"), speed);
-        }
-        gtk_label_set_label (GTK_LABEL (widget), string->str);
         gtk_widget_set_tooltip_text (widget, panel_device_state_reason_to_localized_string (nm_device));
+
+        /* Translators: network device speed */
+        str_tmp = g_strdup_printf (_("%d Mb/s"), speed);
+        panel_set_device_widget_details (device_wifi->priv->builder,
+                                         "speed",
+                                         str_tmp);
 
         /* The options button is always enabled for wired connections,
          * and is sensitive for other connection types if the device
@@ -707,7 +707,6 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
                         break;
                 }
         }
-        g_string_free (string, TRUE);
 
         /* sort out hotspot ui */
         is_hotspot = device_is_hotspot (device_wifi);
