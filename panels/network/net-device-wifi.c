@@ -766,7 +766,6 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
                                          str_tmp);
         g_free (str_tmp);
 
-if(0){
         /* signal strength */
         if (active_ap != NULL)
                 strength = nm_access_point_get_strength (active_ap);
@@ -785,7 +784,6 @@ if(0){
         panel_set_device_widget_details (device_wifi->priv->builder,
                                          "strength",
                                          str);
-}
 
         /* setup wireless button */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
