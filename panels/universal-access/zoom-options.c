@@ -40,11 +40,27 @@ struct _ZoomOptionsPrivate
   GtkWidget *push_radio;
   GtkWidget *proportional_radio;
   GtkWidget *extend_beyond_checkbox;
+  GtkWidget *brightness_slider;
+  GtkWidget *contrast_slider;
 
   GtkWidget *dialog;
 };
 
 G_DEFINE_TYPE (ZoomOptions, zoom_options, G_TYPE_OBJECT);
+
+static gchar *brightness_keys[] = {
+  "brightness-red",
+  "brightness-green",
+  "brightness-blue",
+  NULL
+};
+
+static gchar *contrast_keys[] = {
+  "contrast-red",
+  "contrast-green",
+  "contrast-blue",
+  NULL
+};
 
 inline void set_active (GtkWidget* toggle, gboolean sense);
 inline gboolean get_active (GtkWidget* toggle);
@@ -55,6 +71,10 @@ static void mouse_tracking_notify_cb (GSettings *settings, const gchar *key, Zoo
 static void scale_label (GtkBin *toggle, PangoAttrList *attrs);
 static void xhairs_color_opacity_changed (GtkColorButton *button, ZoomOptionsPrivate *priv);
 static void xhairs_length_add_marks (GtkScale *scale);
+static void effects_slider_set_value (GtkRange *slider, GSettings *settings);
+static void brightness_slider_notify_cb (GSettings *settings, const gchar *key, ZoomOptionsPrivate *priv);
+static void contrast_slider_notify_cb (GSettings *settings, const gchar *key, ZoomOptionsPrivate *priv);
+static void effects_slider_changed (GtkRange *slider, ZoomOptionsPrivate *priv);
 
 /* Utilties to save on line length */
 
@@ -338,6 +358,90 @@ static void xhairs_length_add_marks (GtkScale *scale)
 }
 
 static void
+init_effects_slider (GtkRange *slider,
+                     ZoomOptionsPrivate *priv,
+                     gchar **keys,
+                     GCallback notify_cb)
+{
+  gchar **key;
+  gchar *signal;
+
+  g_object_set_data (G_OBJECT (slider), "settings-keys", keys);
+  effects_slider_set_value (slider, priv->settings);
+
+  for (key = keys; *key; key++)
+    {
+      signal = g_strdup_printf ("changed::%s", *key);
+      g_signal_connect (G_OBJECT (priv->settings), signal, notify_cb, priv);
+      g_free (signal);
+    }
+  g_signal_connect (G_OBJECT (slider), "value-changed",
+                    G_CALLBACK (effects_slider_changed),
+                    priv);
+}
+
+static void
+effects_slider_set_value (GtkRange *slider, GSettings *settings)
+{
+    gchar **keys;
+    gdouble red, green, blue;
+    gdouble value;
+
+    keys = g_object_get_data (G_OBJECT (slider), "settings-keys");
+
+    red = g_settings_get_double (settings, keys[0]);
+    green = g_settings_get_double (settings, keys[1]);
+    blue = g_settings_get_double (settings, keys[2]);
+
+    if (red == green && green == blue)
+      value = red;
+    else
+      /* use NTSC conversion weights for reasonable average */
+      value = 0.299 * red + 0.587 * green + 0.114 * blue;
+
+    gtk_range_set_value (slider, value);
+}
+
+static void
+brightness_slider_notify_cb (GSettings *settings,
+                             const gchar *key,
+                             ZoomOptionsPrivate *priv)
+{
+  GtkRange *slider = GTK_RANGE (priv->brightness_slider);
+
+  g_signal_handlers_block_by_func (slider, effects_slider_changed, priv);
+  effects_slider_set_value (slider, settings);
+  g_signal_handlers_unblock_by_func (slider, effects_slider_changed, priv);
+}
+
+static void
+contrast_slider_notify_cb (GSettings *settings,
+                           const gchar *key,
+                           ZoomOptionsPrivate *priv)
+{
+  GtkRange *slider = GTK_RANGE (priv->contrast_slider);
+
+  g_signal_handlers_block_by_func (slider, effects_slider_changed, priv);
+  effects_slider_set_value (slider, settings);
+  g_signal_handlers_unblock_by_func (slider, effects_slider_changed, priv);
+}
+
+static void
+effects_slider_changed (GtkRange *slider, ZoomOptionsPrivate *priv)
+{
+  gchar **keys, **key;
+  gdouble value;
+
+  keys = g_object_get_data (G_OBJECT (slider), "settings-keys");
+  value = gtk_range_get_value (slider);
+
+  for (key = keys; *key; key++)
+    {
+      g_settings_set_double (priv->settings, *key, value);
+    }
+}
+
+static void
 zoom_option_close_dialog_cb (GtkWidget *closer, ZoomOptionsPrivate *priv)
 {
     if (priv->dialog != NULL)
@@ -466,10 +570,30 @@ zoom_options_init (ZoomOptions *self)
   g_settings_bind (priv->settings, "cross-hairs-clip", w, "active",
                    G_SETTINGS_BIND_INVERT_BOOLEAN);
 
-  /* ... Cross hairs: length */
+  /* ... Cross hairs: length ... */
   w = WID ("xHairsLengthSlider");
   xhairs_length_add_marks (GTK_SCALE (w));
   g_settings_bind (priv->settings, "cross-hairs-length",
+                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  /* ... Color effects ... */
+  w = WID ("inverseEnabledSwitch");
+  g_settings_bind (priv->settings, "invert-lightness", w, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  w = WID ("brightnessSlider");
+  priv->brightness_slider = w;
+  init_effects_slider (GTK_RANGE(w), priv, brightness_keys,
+                       G_CALLBACK (brightness_slider_notify_cb));
+
+  w = WID ("contrastSlider");
+  priv->contrast_slider = w;
+  init_effects_slider (GTK_RANGE(w), priv, contrast_keys,
+                       G_CALLBACK (contrast_slider_notify_cb));
+
+  w = WID ("grayscale_slider");
+  g_settings_bind (priv->settings, "color-saturation",
                    gtk_range_get_adjustment (GTK_RANGE (w)), "value",
                    G_SETTINGS_BIND_DEFAULT);
 
