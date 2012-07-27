@@ -146,9 +146,6 @@ add_access_point (NetDeviceWifi *device_wifi, NMAccessPoint *ap, NMAccessPoint *
         title = g_markup_escape_text (ssid_text, -1);
 
         is_active_ap = active && nm_utils_same_ssid (ssid, nm_access_point_get_ssid (active), TRUE);
-        if (is_active_ap)
-                device_wifi->priv->ssid = g_strdup (ssid_text);
-
         liststore_network = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                             "liststore_network"));
 
@@ -786,11 +783,6 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         panel_set_device_widget_details (device_wifi->priv->builder,
                                          "strength",
                                          str);
-
-        /* setup wireless button */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_forget"));
-        gtk_widget_set_visible (widget, active_ap != NULL);
 
         /* only disconnect when connection active */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
@@ -1542,14 +1534,101 @@ connect_wifi_network (NetDeviceWifi *device_wifi,
 }
 
 static void
+update_saved_last_used (NetDeviceWifi *device_wifi, const gchar *connection_id)
+{
+        gchar *last_used = NULL;
+        GDateTime *now = NULL;
+        GDateTime *then = NULL;
+        gint days;
+        GTimeSpan diff;
+        guint64 timestamp;
+        NMRemoteConnection *connection;
+        NMRemoteSettings *remote_settings;
+        NMSettingConnection *s_con;
+
+        remote_settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
+        connection = nm_remote_settings_get_connection_by_path (remote_settings, connection_id);
+        if (connection == NULL)
+                goto out;
+        s_con = nm_connection_get_setting_connection (NM_CONNECTION (connection));
+        if (s_con == NULL)
+                goto out;
+        timestamp = nm_setting_connection_get_timestamp (s_con);
+        if (timestamp == 0)
+                goto out;
+
+        /* calculate the amount of time that has elapsed */
+        now = g_date_time_new_now_utc ();
+        then = g_date_time_new_from_unix_utc (timestamp);
+        diff = g_date_time_difference  (now, then);
+        days = diff / G_TIME_SPAN_DAY;
+        last_used = g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
+out:
+        panel_set_device_widget_details (device_wifi->priv->builder,
+                                         "saved_last_used",
+                                         last_used);
+        if (now != NULL)
+                g_date_time_unref (now);
+        if (then != NULL)
+                g_date_time_unref (then);
+        g_free (last_used);
+}
+
+static void
 show_wifi_details (NetDeviceWifi *device_wifi,
                    GtkTreeView *tv,
                    GtkTreePath *path)
 {
         GtkWidget *widget;
+        gboolean ret;
+        gboolean in_range;
+        GtkTreeModel *model;
+        GtkTreeIter iter;
+        gchar *path_str;
+        gchar *id;
+
+        model = gtk_tree_view_get_model (tv);
+        path_str = gtk_tree_path_to_string (path);
+        ret = gtk_tree_model_get_iter_from_string (model, &iter, path_str);
+        if (!ret)
+                goto out;
+
+        /* get parameters about the selected connection */
+        g_free (device_wifi->priv->ssid);
+        gtk_tree_model_get (model, &iter,
+                            COLUMN_ID, &id,
+                            COLUMN_TITLE, &device_wifi->priv->ssid,
+                            COLUMN_AP_IN_RANGE, &in_range,
+                            -1);
+        g_debug ("ssid = %s, in-range = %i",
+                 device_wifi->priv->ssid, in_range);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "notebook_view"));
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
+        if (in_range) {
+                /* this is automatically key up to date */
+                gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
+                goto out;
+        }
+
+        /* update the last used label */
+        update_saved_last_used (device_wifi, id);
+
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 4);
+
+        /* set header with SSID */
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "label_saved_device"));
+        gtk_label_set_label (GTK_LABEL (widget), device_wifi->priv->ssid);
+
+        /* NM doesn't tell us this yet */
+        panel_set_device_widget_details (device_wifi->priv->builder,
+                                         "saved_security",
+                                         NULL);
+        panel_set_device_widget_details (device_wifi->priv->builder,
+                                         "saved_security_key",
+                                         NULL);
+out:
+        g_free (id);
+        g_free (path_str);
 }
 
 static void
@@ -1565,15 +1644,17 @@ arrow_visible (GtkTreeModel *model,
                GtkTreeIter  *iter)
 {
         gboolean active;
+        gboolean ap_is_saved;
         gboolean ret;
         gchar *sort;
 
         gtk_tree_model_get (model, iter,
                             COLUMN_ACTIVE, &active,
+                            COLUMN_AP_IS_SAVED, &ap_is_saved,
                             COLUMN_SORT, &sort,
                             -1);
 
-        if (active || strcmp ("ap:hidden", sort) == 0)
+        if (active || ap_is_saved || strcmp ("ap:hidden", sort) == 0)
                 ret = TRUE;
         else
                 ret = FALSE;
@@ -1844,17 +1925,19 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
 
         renderer = gtk_cell_renderer_pixbuf_new ();
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer, FALSE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer,
-                                        "visible", COLUMN_AP_IN_RANGE,
-                                        NULL);
         g_object_set (renderer,
                       "follow-state", TRUE,
+                      "visible", TRUE,
                       NULL);
         gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (column), renderer,
                                             set_arrow_image, device_wifi, NULL);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "button_back"));
+        g_signal_connect_swapped (widget, "clicked",
+                                  G_CALLBACK (show_wifi_list), device_wifi);
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
+                                                     "button_saved_back"));
         g_signal_connect_swapped (widget, "clicked",
                                   G_CALLBACK (show_wifi_list), device_wifi);
 
