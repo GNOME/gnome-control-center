@@ -47,12 +47,14 @@
 #define NET_DEVICE_WIFI_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_DEVICE_WIFI, NetDeviceWifiPrivate))
 
 static void nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi);
+static void show_wifi_list (NetDeviceWifi *device_wifi);
 
 struct _NetDeviceWifiPrivate
 {
         GtkBuilder              *builder;
         gboolean                 updating_device;
-        gchar                   *ssid;
+        gchar                   *selected_ssid_title;
+        gchar                   *selected_connection_id;
 };
 
 G_DEFINE_TYPE (NetDeviceWifi, net_device_wifi, NET_TYPE_DEVICE)
@@ -506,8 +508,8 @@ device_wifi_refresh_aps (NetDeviceWifi *device_wifi)
         NMDevice *nm_device;
 
         /* clear old value */
-        g_free (device_wifi->priv->ssid);
-        device_wifi->priv->ssid = NULL;
+        g_free (device_wifi->priv->selected_ssid_title);
+        device_wifi->priv->selected_ssid_title = NULL;
 
         /* populate access points */
         liststore_network = GTK_LIST_STORE (gtk_builder_get_object (device_wifi->priv->builder,
@@ -824,16 +826,56 @@ device_off_toggled (GtkSwitch *sw,
         nm_client_wireless_set_enabled (client, active);
 }
 
+
+static gboolean
+find_id_in_store (GtkTreeModel *model, GtkTreeIter *iter, const gchar *id_needle)
+{
+        gboolean found;
+        gchar *id;
+
+        found = gtk_tree_model_get_iter_first (model, iter);
+        while (found) {
+                gtk_tree_model_get (model, iter,
+                                    COLUMN_ID, &id,
+                                    -1);
+                if (g_strcmp0 (id_needle, id) == 0) {
+                        g_free (id);
+                        return TRUE;
+                }
+                g_free (id);
+                found = gtk_tree_model_iter_next (model, iter);
+        }
+        return FALSE;
+}
+
 static void
 forget_network_connection_delete_cb (NMRemoteConnection *connection,
                                      GError *error,
                                      gpointer user_data)
 {
-        if (error == NULL)
+        gboolean ret;
+        GtkTreeIter iter;
+        GtkTreeModel *model;
+        GtkTreeView *treeview;
+
+        NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (user_data);
+
+        if (error != NULL) {
+                g_warning ("failed to delete connection %s: %s",
+                           nm_object_get_path (NM_OBJECT (connection)),
+                           error->message);
                 return;
-        g_warning ("failed to delete connection %s: %s",
-                   nm_object_get_path (NM_OBJECT (connection)),
-                   error->message);
+        }
+
+        /* remove the entry from the list */
+        treeview = GTK_TREE_VIEW (gtk_builder_get_object (device_wifi->priv->builder,
+                                                         "treeview_list"));
+        model = gtk_tree_view_get_model (treeview);
+        ret = find_id_in_store (model, &iter,
+                                device_wifi->priv->selected_connection_id);
+        if (ret)
+                gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+        show_wifi_list (device_wifi);
 }
 
 static void
@@ -841,23 +883,22 @@ forget_network_response_cb (GtkWidget *dialog,
                             gint response,
                             NetDeviceWifi *device_wifi)
 {
-        NMDevice *device;
-        NMRemoteConnection *remote_connection;
+        NMRemoteConnection *connection;
+        NMRemoteSettings *remote_settings;
 
         if (response != GTK_RESPONSE_OK)
                 goto out;
 
-        device = net_device_get_nm_device (NET_DEVICE (device_wifi));
-        if (device == NULL)
-                goto out;
-
-        /* delete the connection */
-        remote_connection = NM_REMOTE_CONNECTION (find_connection_for_device (device_wifi, device));
-        if (remote_connection == NULL) {
+        remote_settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
+        connection = nm_remote_settings_get_connection_by_path (remote_settings, device_wifi->priv->selected_connection_id);
+        if (connection == NULL) {
                 g_warning ("failed to get remote connection");
                 goto out;
         }
-        nm_remote_connection_delete (remote_connection,
+
+        /* delete the connection */
+        g_debug ("deleting %s", device_wifi->priv->selected_connection_id);
+        nm_remote_connection_delete (connection,
                                      forget_network_connection_delete_cb,
                                      device_wifi);
 out:
@@ -883,7 +924,7 @@ forget_button_clicked_cb (GtkButton *button, NetDeviceWifi *device_wifi)
         GtkWidget *window;
         CcNetworkPanel *panel;
 
-        ssid_pretty = g_strdup_printf ("<b>%s</b>", device_wifi->priv->ssid);
+        ssid_pretty = g_strdup_printf ("<b>%s</b>", device_wifi->priv->selected_ssid_title);
         warning = g_strdup_printf (_("Network details for %s including password and any custom configuration will be lost"), ssid_pretty);
         panel = net_object_get_panel (NET_OBJECT (device_wifi));
         window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
@@ -1534,7 +1575,7 @@ connect_wifi_network (NetDeviceWifi *device_wifi,
 }
 
 static void
-update_saved_last_used (NetDeviceWifi *device_wifi, const gchar *connection_id)
+update_saved_last_used (NetDeviceWifi *device_wifi)
 {
         gchar *last_used = NULL;
         GDateTime *now = NULL;
@@ -1547,7 +1588,7 @@ update_saved_last_used (NetDeviceWifi *device_wifi, const gchar *connection_id)
         NMSettingConnection *s_con;
 
         remote_settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
-        connection = nm_remote_settings_get_connection_by_path (remote_settings, connection_id);
+        connection = nm_remote_settings_get_connection_by_path (remote_settings, device_wifi->priv->selected_connection_id);
         if (connection == NULL)
                 goto out;
         s_con = nm_connection_get_setting_connection (NM_CONNECTION (connection));
@@ -1585,7 +1626,6 @@ show_wifi_details (NetDeviceWifi *device_wifi,
         GtkTreeModel *model;
         GtkTreeIter iter;
         gchar *path_str;
-        gchar *id;
 
         model = gtk_tree_view_get_model (tv);
         path_str = gtk_tree_path_to_string (path);
@@ -1594,14 +1634,15 @@ show_wifi_details (NetDeviceWifi *device_wifi,
                 goto out;
 
         /* get parameters about the selected connection */
-        g_free (device_wifi->priv->ssid);
+        g_free (device_wifi->priv->selected_connection_id);
+        g_free (device_wifi->priv->selected_ssid_title);
         gtk_tree_model_get (model, &iter,
-                            COLUMN_ID, &id,
-                            COLUMN_TITLE, &device_wifi->priv->ssid,
+                            COLUMN_ID, &device_wifi->priv->selected_connection_id,
+                            COLUMN_TITLE, &device_wifi->priv->selected_ssid_title,
                             COLUMN_AP_IN_RANGE, &in_range,
                             -1);
         g_debug ("ssid = %s, in-range = %i",
-                 device_wifi->priv->ssid, in_range);
+                 device_wifi->priv->selected_ssid_title, in_range);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "notebook_view"));
         if (in_range) {
@@ -1611,13 +1652,13 @@ show_wifi_details (NetDeviceWifi *device_wifi,
         }
 
         /* update the last used label */
-        update_saved_last_used (device_wifi, id);
+        update_saved_last_used (device_wifi);
 
         gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 4);
 
         /* set header with SSID */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "label_saved_device"));
-        gtk_label_set_label (GTK_LABEL (widget), device_wifi->priv->ssid);
+        gtk_label_set_label (GTK_LABEL (widget), device_wifi->priv->selected_ssid_title);
 
         /* NM doesn't tell us this yet */
         panel_set_device_widget_details (device_wifi->priv->builder,
@@ -1627,7 +1668,6 @@ show_wifi_details (NetDeviceWifi *device_wifi,
                                          "saved_security_key",
                                          NULL);
 out:
-        g_free (id);
         g_free (path_str);
 }
 
@@ -1777,7 +1817,8 @@ net_device_wifi_finalize (GObject *object)
         NetDeviceWifiPrivate *priv = device_wifi->priv;
 
         g_object_unref (priv->builder);
-        g_free (priv->ssid);
+        g_free (priv->selected_ssid_title);
+        g_free (priv->selected_connection_id);
 
         G_OBJECT_CLASS (net_device_wifi_parent_class)->finalize (object);
 }
