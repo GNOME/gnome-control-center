@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-24 22:42+0200\n"
-"PO-Revision-Date: 2012-06-24 22:44+0200\n"
+"POT-Creation-Date: 2012-07-30 02:03+0200\n"
+"PO-Revision-Date: 2012-07-30 02:09+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician <gnome-l10n-gl@gnome.org>\n"
 "Language: gl\n"
@@ -154,7 +154,7 @@ msgstr "Fondo de pantalla;Pantalla;Escritorio;"
 
 #. TRANSLATORS: device type
 #: ../panels/bluetooth/bluetooth-properties.desktop.in.in.h:1
-#: ../panels/network/panel-common.c:100
+#: ../panels/network/panel-common.c:102
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -636,7 +636,7 @@ msgstr "Seleccione un idioma"
 
 #: ../panels/common/language-chooser.ui.h:2
 #: ../panels/printers/new-printer-dialog.ui.h:4
-#: ../panels/user-accounts/um-user-panel.c:456
+#: ../panels/user-accounts/um-user-panel.c:455
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -894,8 +894,8 @@ msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:426 ../panels/network/panel-common.c:80
-#: ../panels/network/panel-common.c:160
+#: ../panels/info/cc-info-panel.c:426 ../panels/network/panel-common.c:82
+#: ../panels/network/panel-common.c:162
 msgid "Unknown"
 msgstr "Descoñecido"
 
@@ -1487,7 +1487,7 @@ msgstr "<Acción descoñecida>"
 #. translators:
 #. * The device has been disabled
 #: ../panels/keyboard/keyboard-shortcuts.c:1025
-#: ../panels/sound/gvc-mixer-control.c:1087
+#: ../panels/sound/gvc-mixer-control.c:1834
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Disabled"
@@ -1524,7 +1524,7 @@ msgid "_Reassign"
 msgstr "_Reasignar"
 
 #: ../panels/keyboard/keyboard-shortcuts.c:1618
-#: ../panels/wacom/cc-wacom-page.c:609
+#: ../panels/wacom/cc-wacom-page.c:620
 msgid "Action"
 msgstr "Acción"
 
@@ -1663,152 +1663,28 @@ msgstr "Activar o desprazamento _horizontal"
 msgid "Touchpad"
 msgstr "Área táctil"
 
-#. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/cc-network-panel.c:299
-msgid ""
-"Web Proxy Autodiscovery is used when a Configuration URL is not provided."
-msgstr ""
-"O autodescubrimento do proxy web úsase cando non se fornece unha URL de "
-"configuración"
+#: ../panels/network/cc-network-panel.c:627
+msgid "Network proxy"
+msgstr "Proxy da rede"
 
-#. TRANSLATORS: WPAD is bad: if you enable it on an untrusted
-#. * network, then anyone else on that network can tell your
-#. * machine that it should proxy all of your web traffic
-#. * through them.
-#: ../panels/network/cc-network-panel.c:307
-msgid "This is not recommended for untrusted public networks."
-msgstr "Non se recomenda para redes públicas nas que non se confía."
-
-#. TRANSLATORS: this is when the access point is not listed
-#. * in the dropdown (or hidden) and the user has to select
-#. * another entry manually
-#: ../panels/network/cc-network-panel.c:1028
-msgctxt "Wireless access point"
-msgid "Other..."
-msgstr "Outro…"
-
-#. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:1192
-#: ../panels/network/cc-network-panel.c:1737
-msgid "WEP"
-msgstr "WEP"
-
-#. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1196
-#: ../panels/network/cc-network-panel.c:1741
-msgid "WPA"
-msgstr "WPA"
-
-#. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1200
-msgid "WPA2"
-msgstr "WPA2"
-
-#. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:1205
-msgid "Enterprise"
-msgstr "Empresarial"
-
-#. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:1211
-#: ../panels/network/cc-network-panel.c:1732
-#: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:324
-#: ../panels/wacom/cc-wacom-page.c:341
-msgid "None"
-msgstr "Ningunha"
-
-#: ../panels/network/cc-network-panel.c:1837
-msgid "Hotspot"
-msgstr "«Hotspot»"
-
-#. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1844
-#, c-format
-msgid "%d Mb/s"
-msgstr "%d Mb/s"
-
-#: ../panels/network/cc-network-panel.c:2201 ../panels/network/network.ui.h:11
-msgid "IPv4 Address"
-msgstr "Enderezo IPv4"
-
-#: ../panels/network/cc-network-panel.c:2202 ../panels/network/network.ui.h:12
-msgid "IPv6 Address"
-msgstr "Enderezo IPv6"
-
-#: ../panels/network/cc-network-panel.c:2205
-#: ../panels/network/cc-network-panel.c:2208 ../panels/network/network.ui.h:27
-#: ../panels/printers/printers.ui.h:13
-msgid "IP Address"
-msgstr "Enderezo IP"
-
-#: ../panels/network/cc-network-panel.c:2255
-#: ../panels/network/cc-network-panel.c:2630
+#: ../panels/network/cc-network-panel.c:811 ../panels/network/net-vpn.c:278
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
 
-#: ../panels/network/cc-network-panel.c:2363
-msgid "Proxy"
-msgstr "Proxy"
-
-#: ../panels/network/cc-network-panel.c:2437
-msgid "Network proxy"
-msgstr "Proxy da rede"
-
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2697
+#: ../panels/network/cc-network-panel.c:878
 msgid "The system network services are not compatible with this version."
 msgstr "Os servizos de rede do sistema non son compatíbeis con esta versión."
 
-#: ../panels/network/cc-network-panel.c:2899
-#, c-format
-msgid ""
-"Network details for %s including password and any custom configuration will "
-"be lost"
-msgstr ""
-"Perderanse os detalles da rede %s, incluíndo o contrasinal e calquera "
-"configuración personalizada"
-
-#: ../panels/network/cc-network-panel.c:2909
-msgid "Forget"
-msgstr "Esquecer"
-
-#: ../panels/network/cc-network-panel.c:3408
-msgid "Not connected to the internet."
-msgstr "Non conectado a Internet."
-
-#: ../panels/network/cc-network-panel.c:3409
-msgid "Create the hotspot anyway?"
-msgstr "Desexa crear o «hotspot» de todas formas?"
-
-#: ../panels/network/cc-network-panel.c:3427
-#, c-format
-msgid "Disconnect from %s and create a new hotspot?"
-msgstr "Desexa desconectarse de %s e crear un «hotspot» novo?"
-
-#: ../panels/network/cc-network-panel.c:3430
-msgid "This is your only connection to the internet."
-msgstr "Esta é a única conexión a Internet."
-
-#: ../panels/network/cc-network-panel.c:3448
-msgid "Create _Hotspot"
-msgstr "Crear «_hotspot»"
-
-#: ../panels/network/cc-network-panel.c:3508
-msgid "Stop hotspot and disconnect any users?"
-msgstr "Desexa deter o «hotspot» e desconectar aos usuarios?"
-
-#: ../panels/network/cc-network-panel.c:3511
-msgid "_Stop Hotspot"
-msgstr "_Deter «hotspot»"
-
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:3530
+#: ../panels/network/cc-network-panel.c:1013
 msgid "Air_plane Mode"
 msgstr "Modo a_vión"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+#: ../panels/network/network-mobile.ui.h:7
 msgid "Network"
 msgstr "Rede"
 
@@ -1820,6 +1696,236 @@ msgstr "Preferencias da rede"
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
 msgid "Network;Wireless;IP;LAN;Proxy;"
 msgstr "Rede;Sen fíos;IP;LAN;Proxy;"
+
+#: ../panels/network/net-device-mobile.c:222
+msgid "Add new connection"
+msgstr "Engadir nova conexión"
+
+#. Translators: network device speed
+#: ../panels/network/net-device-mobile.c:261
+#: ../panels/network/net-device-wifi.c:671
+#: ../panels/network/net-device-wired.c:126
+#, c-format
+msgid "%d Mb/s"
+msgstr "%d Mb/s"
+
+#. TRANSLATORS: this is when the access point is not listed
+#. * in the dropdown (or hidden) and the user has to select
+#. * another entry manually
+#: ../panels/network/net-device-wifi.c:199
+msgctxt "Wireless access point"
+msgid "Other..."
+msgstr "Outro…"
+
+#. TRANSLATORS: this WEP WiFi security
+#: ../panels/network/net-device-wifi.c:290
+#: ../panels/network/net-device-wifi.c:470
+msgid "WEP"
+msgstr "WEP"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/net-device-wifi.c:294
+#: ../panels/network/net-device-wifi.c:474
+msgid "WPA"
+msgstr "WPA"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/net-device-wifi.c:298
+msgid "WPA2"
+msgstr "WPA2"
+
+#. TRANSLATORS: this Enterprise WiFi security
+#: ../panels/network/net-device-wifi.c:303
+msgid "Enterprise"
+msgstr "Empresarial"
+
+#. TRANSLATORS: this no (!) WiFi security
+#: ../panels/network/net-device-wifi.c:309
+#: ../panels/network/net-device-wifi.c:465
+#: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:335
+#: ../panels/wacom/cc-wacom-page.c:352
+msgid "None"
+msgstr "Ningunha"
+
+#: ../panels/network/net-device-wifi.c:680
+msgid "Hotspot"
+msgstr "«Hotspot»"
+
+#: ../panels/network/net-device-wifi.c:758
+msgctxt "Signal strength"
+msgid "None"
+msgstr "Ningunha"
+
+#: ../panels/network/net-device-wifi.c:760
+msgctxt "Signal strength"
+msgid "Weak"
+msgstr "Débil"
+
+#: ../panels/network/net-device-wifi.c:762
+msgctxt "Signal strength"
+msgid "Ok"
+msgstr "Aceptábel"
+
+#: ../panels/network/net-device-wifi.c:764
+msgctxt "Signal strength"
+msgid "Good"
+msgstr "Boa"
+
+#: ../panels/network/net-device-wifi.c:766
+msgctxt "Signal strength"
+msgid "Excellent"
+msgstr "Excelente"
+
+#: ../panels/network/net-device-wifi.c:910
+#, c-format
+msgid ""
+"Network details for %s including password and any custom configuration will "
+"be lost"
+msgstr ""
+"Perderanse os detalles da rede %s, incluíndo o contrasinal e calquera "
+"configuración personalizada"
+
+#: ../panels/network/net-device-wifi.c:921
+msgid "Forget"
+msgstr "Esquecer"
+
+#: ../panels/network/net-device-wifi.c:1419
+msgid "Not connected to the internet."
+msgstr "Non conectado a Internet."
+
+#: ../panels/network/net-device-wifi.c:1420
+msgid "Create the hotspot anyway?"
+msgstr "Desexa crear o «hotspot» de todas formas?"
+
+#: ../panels/network/net-device-wifi.c:1438
+#, c-format
+msgid "Disconnect from %s and create a new hotspot?"
+msgstr "Desexa desconectarse de %s e crear un «hotspot» novo?"
+
+#: ../panels/network/net-device-wifi.c:1441
+msgid "This is your only connection to the internet."
+msgstr "Esta é a única conexión a Internet."
+
+#: ../panels/network/net-device-wifi.c:1461
+msgid "Create _Hotspot"
+msgstr "Crear «_hotspot»"
+
+#: ../panels/network/net-device-wifi.c:1522
+msgid "Stop hotspot and disconnect any users?"
+msgstr "Desexa deter o «hotspot» e desconectar aos usuarios?"
+
+#: ../panels/network/net-device-wifi.c:1525
+msgid "_Stop Hotspot"
+msgstr "_Deter «hotspot»"
+
+#: ../panels/network/net-device-wifi.c:1588
+#, c-format
+msgid "%i day ago"
+msgid_plural "%i days ago"
+msgstr[0] "Hai %i día"
+msgstr[1] "Hai %i días"
+
+#: ../panels/network/net-device-wifi.c:1923
+#: ../panels/network/network-wifi.ui.h:14
+msgid "Out of range"
+msgstr "Fóra de rango"
+
+#. TRANSLATORS: this is when the use leaves the PAC textbox blank
+#: ../panels/network/net-proxy.c:67
+msgid ""
+"Web Proxy Autodiscovery is used when a Configuration URL is not provided."
+msgstr ""
+"O autodescubrimento do proxy web úsase cando non se fornece unha URL de "
+"configuración"
+
+#. TRANSLATORS: WPAD is bad: if you enable it on an untrusted
+#. * network, then anyone else on that network can tell your
+#. * machine that it should proxy all of your web traffic
+#. * through them.
+#: ../panels/network/net-proxy.c:75
+msgid "This is not recommended for untrusted public networks."
+msgstr "Non se recomenda para redes públicas nas que non se confía."
+
+#: ../panels/network/net-proxy.c:367
+msgid "Proxy"
+msgstr "Proxy"
+
+#: ../panels/network/network-mobile.ui.h:1
+msgid "IMEI"
+msgstr "IMEI"
+
+#: ../panels/network/network-mobile.ui.h:2
+msgid "Provider"
+msgstr "Fornecedor"
+
+#: ../panels/network/network-mobile.ui.h:3
+#: ../panels/network/panel-common.c:693 ../panels/network/panel-common.c:695
+#: ../panels/printers/printers.ui.h:13
+msgid "IP Address"
+msgstr "Enderezo IP"
+
+#: ../panels/network/network-mobile.ui.h:4
+#: ../panels/network/network-wifi.ui.h:4
+#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:691
+msgid "IPv6 Address"
+msgstr "Enderezo IPv6"
+
+#: ../panels/network/network-mobile.ui.h:5
+#: ../panels/network/network-wifi.ui.h:5
+#: ../panels/network/network-wired.ui.h:5
+msgid "Default Route"
+msgstr "Ruta predeterminada"
+
+#: ../panels/network/network-mobile.ui.h:6
+#: ../panels/network/network-wifi.ui.h:6
+#: ../panels/network/network-wired.ui.h:6
+msgid "DNS"
+msgstr "DNS"
+
+#: ../panels/network/network-mobile.ui.h:8
+#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wired.ui.h:7
+msgid "_Options..."
+msgstr "_Opcións…"
+
+#: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
+msgctxt "proxy method"
+msgid "None"
+msgstr "Ningún"
+
+#: ../panels/network/network-proxy.ui.h:2 ../panels/network/network.ui.h:6
+msgctxt "proxy method"
+msgid "Manual"
+msgstr "Manual"
+
+#: ../panels/network/network-proxy.ui.h:3 ../panels/network/network.ui.h:7
+msgctxt "proxy method"
+msgid "Automatic"
+msgstr "Automático"
+
+#: ../panels/network/network-proxy.ui.h:4
+msgid "_Method"
+msgstr "_Método"
+
+#: ../panels/network/network-proxy.ui.h:5
+msgid "_Configuration URL"
+msgstr "URL de _configuración"
+
+#: ../panels/network/network-proxy.ui.h:6
+msgid "_HTTP Proxy"
+msgstr "Proxy para _HTTP"
+
+#: ../panels/network/network-proxy.ui.h:7
+msgid "H_TTPS Proxy"
+msgstr "Proxy para H_TTPS"
+
+#: ../panels/network/network-proxy.ui.h:8
+msgid "_FTP Proxy"
+msgstr "Proxy para _FTP"
+
+#: ../panels/network/network-proxy.ui.h:9
+msgid "_Socks Host"
+msgstr "_Servidor socks"
 
 #: ../panels/network/network.ui.h:1
 msgid "Select the interface to use for the new service"
@@ -1833,467 +1939,398 @@ msgstr "C_rear…"
 msgid "_Interface"
 msgstr "_Interface"
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "VPN"
-
-#: ../panels/network/network.ui.h:5
-msgctxt "proxy method"
-msgid "None"
-msgstr "Ningún"
-
-#: ../panels/network/network.ui.h:6
-msgctxt "proxy method"
-msgid "Manual"
-msgstr "Manual"
-
-#: ../panels/network/network.ui.h:7
-msgctxt "proxy method"
-msgid "Automatic"
-msgstr "Automático"
 
 #: ../panels/network/network.ui.h:8
 msgid "Add Device"
 msgstr "Engadir dispositivo"
 
-#: ../panels/network/network.ui.h:10
-msgid "Hardware Address"
-msgstr "Enderezo hardware"
-
-#: ../panels/network/network.ui.h:13
-msgid "Subnet Mask"
-msgstr "Máscara de rede"
-
-#: ../panels/network/network.ui.h:14
-msgid "Default Route"
-msgstr "Ruta predeterminada"
-
-#: ../panels/network/network.ui.h:15
-msgid "DNS"
-msgstr "DNS"
-
-#: ../panels/network/network.ui.h:16
-msgid "Device Off"
-msgstr "Dispositivo desactivado"
-
-#: ../panels/network/network.ui.h:17
-msgid "_Options..."
-msgstr "_Opcións…"
-
-#: ../panels/network/network.ui.h:18
-msgid "Security"
-msgstr "Seguranza"
-
-#: ../panels/network/network.ui.h:19
-msgid "_Network Name"
-msgstr "_Nome da rede"
-
-#: ../panels/network/network.ui.h:20
-msgid "Network Name"
-msgstr "Nombre de rede"
-
-#: ../panels/network/network.ui.h:21
-msgid "Security Key"
-msgstr "Chave de seguranza"
-
-#: ../panels/network/network.ui.h:22
-msgid "_Forget Network"
-msgstr "_Esquecer rede"
-
-#: ../panels/network/network.ui.h:23
-msgid "_Use as Hotspot..."
-msgstr "_Usar como «hotspot»…"
-
-#: ../panels/network/network.ui.h:24
-msgid "_Stop Hotspot..."
-msgstr "_Deter «hotspot»…"
-
-#: ../panels/network/network.ui.h:25
-msgid "IMEI"
-msgstr "IMEI"
-
-#: ../panels/network/network.ui.h:26
-msgid "Provider"
-msgstr "Fornecedor"
-
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network-vpn.ui.h:2
 msgid "VPN Type"
 msgstr "Tipo de VPN"
 
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network-vpn.ui.h:3
 msgid "Gateway"
 msgstr "Pasarela"
 
-#: ../panels/network/network.ui.h:30
+#: ../panels/network/network-vpn.ui.h:4
 msgid "Group Name"
 msgstr "Nome do grupo"
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network-vpn.ui.h:5
 msgid "Group Password"
 msgstr "Contrasinal do grupo"
 
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network-vpn.ui.h:6
 msgid "Username"
 msgstr "Nome de usuario"
 
-#: ../panels/network/network.ui.h:33
-msgid "Disable VPN"
-msgstr "Desactivar VPN"
-
-#: ../panels/network/network.ui.h:34
+#: ../panels/network/network-vpn.ui.h:7
 msgid "_Configure..."
 msgstr "_Configurar…"
 
-#: ../panels/network/network.ui.h:35
-msgid "_Method"
-msgstr "_Método"
+#: ../panels/network/network-wifi.ui.h:1
+msgid "_Use as Hotspot..."
+msgstr "_Usar como «hotspot»…"
 
-#: ../panels/network/network.ui.h:36
-msgid "_Configuration URL"
-msgstr "URL de _configuración"
+#: ../panels/network/network-wifi.ui.h:2
+#: ../panels/network/network-wired.ui.h:1
+msgid "Hardware Address"
+msgstr "Enderezo hardware"
 
-#: ../panels/network/network.ui.h:37
-msgid "_HTTP Proxy"
-msgstr "Proxy para _HTTP"
+#: ../panels/network/network-wifi.ui.h:3
+#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:690
+msgid "IPv4 Address"
+msgstr "Enderezo IPv4"
 
-#: ../panels/network/network.ui.h:38
-msgid "H_TTPS Proxy"
-msgstr "Proxy para H_TTPS"
+#: ../panels/network/network-wifi.ui.h:7
+msgid "Security"
+msgstr "Seguranza"
 
-#: ../panels/network/network.ui.h:39
-msgid "_FTP Proxy"
-msgstr "Proxy para _FTP"
+#: ../panels/network/network-wifi.ui.h:8
+msgid "Network Name"
+msgstr "Nombre de rede"
 
-#: ../panels/network/network.ui.h:40
-msgid "_Socks Host"
-msgstr "_Servidor socks"
+#: ../panels/network/network-wifi.ui.h:9
+msgid "Security Key"
+msgstr "Chave de seguranza"
 
-#: ../panels/network/network.ui.h:41
-msgid "HTTP Port"
-msgstr "Porto HTTP"
+#: ../panels/network/network-wifi.ui.h:10
+msgid "Strength"
+msgstr "Intensidade"
 
-#: ../panels/network/network.ui.h:42
-msgid "HTTPS Port"
-msgstr "Porto HTTPS"
+#: ../panels/network/network-wifi.ui.h:11
+msgid "Link speed"
+msgstr "Velocidade da ligazón"
 
-#: ../panels/network/network.ui.h:43
-msgid "FTP Port"
-msgstr "Porto FTP"
+#: ../panels/network/network-wifi.ui.h:12
+msgid "_Stop Hotspot..."
+msgstr "_Deter «hotspot»…"
 
-#: ../panels/network/network.ui.h:44
-msgid "Socks Port"
-msgstr "Porto Socks"
+#: ../panels/network/network-wifi.ui.h:15
+msgid "Last used"
+msgstr "Última vez usada"
+
+#: ../panels/network/network-wifi.ui.h:16
+msgid "_Forget Network"
+msgstr "_Esquecer rede"
+
+#: ../panels/network/network-wired.ui.h:4
+msgid "Subnet Mask"
+msgstr "Máscara de rede"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:84
+#: ../panels/network/panel-common.c:86
 msgid "Wired"
 msgstr "Con fíos"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:88
+#: ../panels/network/panel-common.c:90
 msgid "Wireless"
 msgstr "Sen fíos"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:95
+#: ../panels/network/panel-common.c:97
 msgid "Mobile broadband"
 msgstr "Banda larga móbil"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:104
+#: ../panels/network/panel-common.c:106
 msgid "Mesh"
 msgstr "Maia"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:164
+#: ../panels/network/panel-common.c:166
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:168
+#: ../panels/network/panel-common.c:170
 msgid "Infrastructure"
 msgstr "Infraestrutura"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:192 ../panels/network/panel-common.c:253
+#: ../panels/network/panel-common.c:194 ../panels/network/panel-common.c:255
 msgid "Status unknown"
 msgstr "Estado descoñecido"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:196
+#: ../panels/network/panel-common.c:198
 msgid "Unmanaged"
 msgstr "Sen xestionar"
 
-#: ../panels/network/panel-common.c:201
+#: ../panels/network/panel-common.c:203
 msgid "Firmware missing"
 msgstr "falta o «firmware»"
 
-#: ../panels/network/panel-common.c:204
+#: ../panels/network/panel-common.c:206
 msgid "Cable unplugged"
 msgstr "Cable desconectado"
 
-#: ../panels/network/panel-common.c:206
+#: ../panels/network/panel-common.c:208
 msgid "Unavailable"
 msgstr "Non dispoñíbel"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:210
+#: ../panels/network/panel-common.c:212
 msgid "Disconnected"
 msgstr "Desconectado"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:217 ../panels/network/panel-common.c:259
+#: ../panels/network/panel-common.c:219 ../panels/network/panel-common.c:261
 msgid "Connecting"
 msgstr "Conectando"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:221 ../panels/network/panel-common.c:263
+#: ../panels/network/panel-common.c:223 ../panels/network/panel-common.c:265
 msgid "Authentication required"
 msgstr "Requírese autenticación"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:225 ../panels/network/panel-common.c:267
+#: ../panels/network/panel-common.c:227 ../panels/network/panel-common.c:269
 msgid "Connected"
 msgstr "Conectado"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:229
+#: ../panels/network/panel-common.c:231
 msgid "Disconnecting"
 msgstr "Desconectado"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:233 ../panels/network/panel-common.c:271
+#: ../panels/network/panel-common.c:235 ../panels/network/panel-common.c:273
 msgid "Connection failed"
 msgstr "A conexión fallou"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:237 ../panels/network/panel-common.c:279
+#: ../panels/network/panel-common.c:239 ../panels/network/panel-common.c:281
 msgid "Status unknown (missing)"
 msgstr "Estado descoñecido (ausente)"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:275
+#: ../panels/network/panel-common.c:277
 msgid "Not connected"
 msgstr "Non conectado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:299
+#: ../panels/network/panel-common.c:301
 msgid "Configuration failed"
 msgstr "Fallou a configuración"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:303
+#: ../panels/network/panel-common.c:305
 msgid "IP configuration failed"
 msgstr "Fallou a configuración IP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:307
+#: ../panels/network/panel-common.c:309
 msgid "IP configuration expired"
 msgstr "A configuración IP expirou"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:311
+#: ../panels/network/panel-common.c:313
 msgid "Secrets were required, but not provided"
 msgstr "Precísanse segredos, pero non se forneceron"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:315
+#: ../panels/network/panel-common.c:317
 msgid "802.1x supplicant disconnected"
 msgstr "Suplicante de 802.1x desconectado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:319
+#: ../panels/network/panel-common.c:321
 msgid "802.1x supplicant configuration failed"
 msgstr "Fallou a configuración do suplicante de 802.1x"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:323
+#: ../panels/network/panel-common.c:325
 msgid "802.1x supplicant failed"
 msgstr "Fallou o suplicante de 802.1x"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:327
+#: ../panels/network/panel-common.c:329
 msgid "802.1x supplicant took too long to authenticate"
 msgstr "O suplicante de 802.1x tardou moito tempo en autenticarse"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:331
+#: ../panels/network/panel-common.c:333
 msgid "PPP service failed to start"
 msgstr "Produciuse un fallo ao iniciar o servizo de PPP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:335
+#: ../panels/network/panel-common.c:337
 msgid "PPP service disconnected"
 msgstr "Servizo PPP desconectado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:339
+#: ../panels/network/panel-common.c:341
 msgid "PPP failed"
 msgstr "PPP fallou"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:343
+#: ../panels/network/panel-common.c:345
 msgid "DHCP client failed to start"
 msgstr "O cliente DHCP fallou ao iniciar"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:347
+#: ../panels/network/panel-common.c:349
 msgid "DHCP client error"
 msgstr "Erro no cliente DHCP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:351
+#: ../panels/network/panel-common.c:353
 msgid "DHCP client failed"
 msgstr "O cliente DHCP fallou"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:355
+#: ../panels/network/panel-common.c:357
 msgid "Shared connection service failed to start"
 msgstr "O servizo de conexión compartida fallou ao iniciar"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:359
+#: ../panels/network/panel-common.c:361
 msgid "Shared connection service failed"
 msgstr "O servizo de conexión compartida fallou"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:363
+#: ../panels/network/panel-common.c:365
 msgid "AutoIP service failed to start"
 msgstr "O servizo AutoIP fallou ao iniciar"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:367
+#: ../panels/network/panel-common.c:369
 msgid "AutoIP service error"
 msgstr "Erro no servizo AutoIP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:371
+#: ../panels/network/panel-common.c:373
 msgid "AutoIP service failed"
 msgstr "O servizo AutoIP fallou"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:375
+#: ../panels/network/panel-common.c:377
 msgid "Line busy"
 msgstr "Liña ocupada"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:379
+#: ../panels/network/panel-common.c:381
 msgid "No dial tone"
 msgstr "Non hai ton de chamada"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:383
+#: ../panels/network/panel-common.c:385
 msgid "No carrier could be established"
 msgstr "Non foi posíbel estabelecer o «carrier»"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:387
+#: ../panels/network/panel-common.c:389
 msgid "Dialing request timed out"
 msgstr "Expirou o tempo de solicitude de chamada"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:391
+#: ../panels/network/panel-common.c:393
 msgid "Dialing attempt failed"
 msgstr "Intento de chamada fallado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:395
+#: ../panels/network/panel-common.c:397
 msgid "Modem initialization failed"
 msgstr "Fallou a inicialización do módem"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:399
+#: ../panels/network/panel-common.c:401
 msgid "Failed to select the specified APN"
 msgstr "Produciuse un fallo ao seleccionar o APN especificado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:403
+#: ../panels/network/panel-common.c:405
 msgid "Not searching for networks"
 msgstr "Non se están buscando redes"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:407
+#: ../panels/network/panel-common.c:409
 msgid "Network registration denied"
 msgstr "Rexistro da rede rexeitado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:411
+#: ../panels/network/panel-common.c:413
 msgid "Network registration timed out"
 msgstr "O rexistro na rede superou o tempo de espera"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:415
+#: ../panels/network/panel-common.c:417
 msgid "Failed to register with the requested network"
 msgstr "Produciuse un fallo ao rexistrarse na rede solicitada"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:419
+#: ../panels/network/panel-common.c:421
 msgid "PIN check failed"
 msgstr "Produciuse un fallo na comprobación do PIN"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:423
+#: ../panels/network/panel-common.c:425
 msgid "Firmware for the device may be missing"
 msgstr "É posíbel que falte o firmware do dispositivo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:427
+#: ../panels/network/panel-common.c:429
 msgid "Connection disappeared"
 msgstr "A conexión desapareceu"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:431
+#: ../panels/network/panel-common.c:433
 msgid "Carrier/link changed"
 msgstr "Cambiou o portador/ligazón"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:435
+#: ../panels/network/panel-common.c:437
 msgid "Existing connection was assumed"
 msgstr "Asumiuse unha conexión existente"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:439
+#: ../panels/network/panel-common.c:441
 msgid "Modem not found"
 msgstr "Módem non atopado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:443
+#: ../panels/network/panel-common.c:445
 msgid "Bluetooth connection failed"
 msgstr "Fallou a conexión Bluetooth"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:447
+#: ../panels/network/panel-common.c:449
 msgid "SIM Card not inserted"
 msgstr "Tarxeta SIM non insertada"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:451
+#: ../panels/network/panel-common.c:453
 msgid "SIM Pin required"
 msgstr "Requírese o PIN da SIM"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:455
+#: ../panels/network/panel-common.c:457
 msgid "SIM Puk required"
 msgstr "Requírese o PUK da SIM"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:459
+#: ../panels/network/panel-common.c:461
 msgid "SIM wrong"
 msgstr "SIM errónea"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:463
+#: ../panels/network/panel-common.c:465
 msgid "InfiniBand device does not support connected mode"
 msgstr "O dispositivo InfiniBand non admite o modo conectado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:467
+#: ../panels/network/panel-common.c:469
 msgid "Connection dependency failed"
 msgstr "Fallou a dependencia da conexión"
 
@@ -2301,39 +2338,39 @@ msgstr "Fallou a dependencia da conexión"
 #. * The title is not visible when using GNOME Shell
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:252
 #: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:263
-#: ../panels/online-accounts/online-accounts.ui.h:1
+#: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Engadir conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:321
+#: ../panels/online-accounts/cc-online-accounts-panel.c:340
 msgid "Error logging into the account"
 msgstr "Produciuse un erro ao iniciar a sesión na conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:369
+#: ../panels/online-accounts/cc-online-accounts-panel.c:394
 msgid "Expired credentials. Please log in again."
 msgstr "As credenciais expiraron. Inicie sesión de novo."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:372
+#: ../panels/online-accounts/cc-online-accounts-panel.c:397
 msgid "_Log In"
 msgstr "_Iniciar sesión"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:528
+#: ../panels/online-accounts/cc-online-accounts-panel.c:551
 msgid "Error creating account"
 msgstr "Produciuse un erro ao crear a conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:560
+#: ../panels/online-accounts/cc-online-accounts-panel.c:593
 msgid "Error removing account"
 msgstr "Produciuse un erro ao quitar a conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:596
+#: ../panels/online-accounts/cc-online-accounts-panel.c:629
 msgid "Are you sure you want to remove the account?"
 msgstr "Ten certeza que quere quitar a conta?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:598
+#: ../panels/online-accounts/cc-online-accounts-panel.c:631
 msgid "This will not remove the account on the server."
 msgstr "Isto non quitará a conta do servidor."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:599
+#: ../panels/online-accounts/cc-online-accounts-panel.c:632
 msgid "_Remove"
 msgstr "_Quitar"
 
@@ -2351,26 +2388,38 @@ msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
 msgstr ""
 "Google;Facebook;Twitter;Yahoo;Web;En liña;Chat;Calendario;Correo-e;Contacto;"
 
-#: ../panels/online-accounts/online-accounts.ui.h:2
+#: ../panels/online-accounts/online-accounts.ui.h:1
+msgid "No online accounts configured"
+msgstr "Non hai contas en liña configuradas"
+
+#: ../panels/online-accounts/online-accounts.ui.h:3
 msgid "Remove Account"
 msgstr "Quitar conta"
 
-#: ../panels/online-accounts/online-accounts.ui.h:3
-msgid "Select an account"
-msgstr "Seleccionar unha conta"
+#: ../panels/online-accounts/online-accounts.ui.h:4
+msgid "Add an online account"
+msgstr "Engadir unha conta en liña"
 
-#: ../panels/power/cc-power-panel.c:171
+#: ../panels/online-accounts/online-accounts.ui.h:5
+msgid ""
+"Adding an account allows your applications to access it for documents, mail, "
+"contacts, calendar, chat and more."
+msgstr ""
+"Engadir unha conta permite que os seu aplicativos accedan a documentos, "
+"correo-e, contactos, calendario, chat e máis."
+
+#: ../panels/power/cc-power-panel.c:170
 msgid "Unknown time"
 msgstr "Hora descoñecida"
 
-#: ../panels/power/cc-power-panel.c:177
+#: ../panels/power/cc-power-panel.c:176
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minuto"
 msgstr[1] "%i minutos"
 
-#: ../panels/power/cc-power-panel.c:189
+#: ../panels/power/cc-power-panel.c:188
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -2379,170 +2428,170 @@ msgstr[1] "%i horas"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:197
+#: ../panels/power/cc-power-panel.c:196
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:198
+#: ../panels/power/cc-power-panel.c:197
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "hora"
 msgstr[1] "horas"
 
-#: ../panels/power/cc-power-panel.c:199
+#: ../panels/power/cc-power-panel.c:198
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuto"
 msgstr[1] "minutos"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:242
+#: ../panels/power/cc-power-panel.c:241
 #, c-format
 msgid "Charging - %s until fully charged"
 msgstr "Cargando - %s até estar cargado completamente"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:250
+#: ../panels/power/cc-power-panel.c:249
 #, c-format
 msgid "Caution low battery, %s remaining"
 msgstr "Precaución, hai pouca carga na batería, quedan %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:258
+#: ../panels/power/cc-power-panel.c:257
 #, c-format
 msgid "Using battery power - %s remaining"
 msgstr "Usando a batería - falta quedan %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:275
+#: ../panels/power/cc-power-panel.c:274
 msgid "Charging"
 msgstr "Cargando"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:280
+#: ../panels/power/cc-power-panel.c:279
 msgid "Using battery power"
 msgstr "Usando a batería"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:284
+#: ../panels/power/cc-power-panel.c:283
 msgid "Charging - fully charged"
 msgstr "Cargando - cargado completamente"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:288
+#: ../panels/power/cc-power-panel.c:287
 msgid "Empty"
 msgstr "Baleira"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:356
+#: ../panels/power/cc-power-panel.c:355
 #, c-format
 msgid "Caution low UPS, %s remaining"
 msgstr "Precaución o SAI ten pouca batería, quedan %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:362
+#: ../panels/power/cc-power-panel.c:361
 #, c-format
 msgid "Using UPS power - %s remaining"
 msgstr "Usando a enerxía do SAI - quedan %s"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:380
+#: ../panels/power/cc-power-panel.c:379
 msgid "Caution low UPS"
 msgstr "Precaución o SAI ten pouca batería"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:385
+#: ../panels/power/cc-power-panel.c:384
 msgid "Using UPS power"
 msgstr "Usando enerxía do SAI"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:437
+#: ../panels/power/cc-power-panel.c:436
 msgid "Your secondary battery is fully charged"
 msgstr "A súa batería secundaria está cargada completamente"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:441
+#: ../panels/power/cc-power-panel.c:440
 msgid "Your secondary battery is empty"
 msgstr "Á súa batería secundaria está baleira"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:524
+#: ../panels/power/cc-power-panel.c:523
 msgid "Wireless mouse"
 msgstr "Rato sen fíos"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:528
+#: ../panels/power/cc-power-panel.c:527
 msgid "Wireless keyboard"
 msgstr "Teclado sen fíos"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:532
+#: ../panels/power/cc-power-panel.c:531
 msgid "Uninterruptible power supply"
 msgstr "Fonte de alimentación non interrompíbel"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:536
+#: ../panels/power/cc-power-panel.c:535
 msgid "Personal digital assistant"
 msgstr "Asistente persoal dixital"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:540
+#: ../panels/power/cc-power-panel.c:539
 msgid "Cellphone"
 msgstr "Teléfono móbil"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:544
+#: ../panels/power/cc-power-panel.c:543
 msgid "Media player"
 msgstr "Reprodutor de música"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:548
+#: ../panels/power/cc-power-panel.c:547
 msgid "Tablet"
 msgstr "Tableta"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:552
+#: ../panels/power/cc-power-panel.c:551
 msgid "Computer"
 msgstr "Computador"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:556
+#: ../panels/power/cc-power-panel.c:555
 msgid "Battery"
 msgstr "Batería"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:567
+#: ../panels/power/cc-power-panel.c:566
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Cargando"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:574
+#: ../panels/power/cc-power-panel.c:573
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Precaución"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:579
+#: ../panels/power/cc-power-panel.c:578
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Baixa"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:584
+#: ../panels/power/cc-power-panel.c:583
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Boa"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:589
+#: ../panels/power/cc-power-panel.c:588
 msgctxt "Battery power"
 msgid "Charging - fully charged"
 msgstr "Cargando - cargado completamente"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:593
+#: ../panels/power/cc-power-panel.c:592
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Baleir"
@@ -2605,125 +2654,125 @@ msgid "When power is _critically low"
 msgstr "_Cando a carga da batería é criticamente baixa"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:548
+#: ../panels/printers/cc-printers-panel.c:554
 msgid "Low on toner"
 msgstr "Toner baixo"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:550
+#: ../panels/printers/cc-printers-panel.c:556
 msgid "Out of toner"
 msgstr "Sen tóner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:553
+#: ../panels/printers/cc-printers-panel.c:559
 msgid "Low on developer"
 msgstr "Nivel de revelador baixo"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:556
+#: ../panels/printers/cc-printers-panel.c:562
 msgid "Out of developer"
 msgstr "Sen revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:558
+#: ../panels/printers/cc-printers-panel.c:564
 msgid "Low on a marker supply"
 msgstr "Marcador baixo"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:560
+#: ../panels/printers/cc-printers-panel.c:566
 msgid "Out of a marker supply"
 msgstr "Sen marcador"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:562
+#: ../panels/printers/cc-printers-panel.c:568
 msgid "Open cover"
 msgstr "Abrir cuberta"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:564
+#: ../panels/printers/cc-printers-panel.c:570
 msgid "Open door"
 msgstr "Abrir porta"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:566
+#: ../panels/printers/cc-printers-panel.c:572
 msgid "Low on paper"
 msgstr "Nivel de papel baixo"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:568
+#: ../panels/printers/cc-printers-panel.c:574
 msgid "Out of paper"
 msgstr "Sen papel"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:570
+#: ../panels/printers/cc-printers-panel.c:576
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Desconectada"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:572
+#: ../panels/printers/cc-printers-panel.c:578
 msgctxt "printer state"
 msgid "Paused"
 msgstr "Pausada"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:574
+#: ../panels/printers/cc-printers-panel.c:580
 msgid "Waste receptacle almost full"
 msgstr "O recipiente de refugallos está case cheo"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:576
+#: ../panels/printers/cc-printers-panel.c:582
 msgid "Waste receptacle full"
 msgstr "O recipiente dos refugallos está cheo"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:578
+#: ../panels/printers/cc-printers-panel.c:584
 msgid "The optical photo conductor is near end of life"
 msgstr "O condutor óptico está perto do final da súa vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:580
+#: ../panels/printers/cc-printers-panel.c:586
 msgid "The optical photo conductor is no longer functioning"
 msgstr "O condutor óptico xa non funciona"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:755
+#: ../panels/printers/cc-printers-panel.c:759
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Lista"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:759
+#: ../panels/printers/cc-printers-panel.c:763
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:763
+#: ../panels/printers/cc-printers-panel.c:767
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Detida"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:875
+#: ../panels/printers/cc-printers-panel.c:886
 msgid "Toner Level"
 msgstr "Nivel do tóner"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:878
+#: ../panels/printers/cc-printers-panel.c:889
 msgid "Ink Level"
 msgstr "Nivel de tinta"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:881
+#: ../panels/printers/cc-printers-panel.c:892
 msgid "Supply Level"
 msgstr "Nivel do suministro"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:896
-#: ../panels/printers/cc-printers-panel.c:1291
+#: ../panels/printers/cc-printers-panel.c:907
+#: ../panels/printers/cc-printers-panel.c:1306
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -2731,80 +2780,108 @@ msgstr[0] "%u activo"
 msgstr[1] "%u activos"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:1003
+#: ../panels/printers/cc-printers-panel.c:1018
 msgid "No printers available"
 msgstr "No hai impresoras dispoñíbeis"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1334
+#: ../panels/printers/cc-printers-panel.c:1349
 msgctxt "print job"
 msgid "Pending"
 msgstr "Pendente"
 
 #. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1338
+#: ../panels/printers/cc-printers-panel.c:1353
 msgctxt "print job"
 msgid "Held"
 msgstr "Retido"
 
 #. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1342
+#: ../panels/printers/cc-printers-panel.c:1357
 msgctxt "print job"
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1346
+#: ../panels/printers/cc-printers-panel.c:1361
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Detido"
 
 #. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1350
+#: ../panels/printers/cc-printers-panel.c:1365
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Cancelado"
 
 #. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1354
+#: ../panels/printers/cc-printers-panel.c:1369
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Abortado"
 
 #. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1358
+#: ../panels/printers/cc-printers-panel.c:1373
 msgctxt "print job"
 msgid "Completed"
 msgstr "Rematado"
 
 #. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1438
+#: ../panels/printers/cc-printers-panel.c:1453
 msgid "Job Title"
 msgstr "Título do traballo"
 
 #. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1447
+#: ../panels/printers/cc-printers-panel.c:1462
 msgid "Job State"
 msgstr "Estado do traballo"
 
 #. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1453
+#: ../panels/printers/cc-printers-panel.c:1468
 msgid "Time"
 msgstr "Tempo"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2075
+#: ../panels/printers/cc-printers-panel.c:1860
 msgid "Failed to add new printer."
 msgstr "Produciuse un fallo ao engadir unha nova impresora."
 
+#: ../panels/printers/cc-printers-panel.c:2012
+msgid "Select PPD File"
+msgstr "Seleccionar ficheiro PPD"
+
+#: ../panels/printers/cc-printers-panel.c:2021
+msgid ""
+"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
+"PPD.GZ)"
+msgstr ""
+"Ficheiros de descrición de impresora PostScript (*.ppd, *.PPD, *.ppd.gz, *."
+"PPD.gz, *.PPD.GZ)"
+
+#: ../panels/printers/cc-printers-panel.c:2302
+msgid "No suitable driver found"
+msgstr "Non se atopou ningún controlador axeitado"
+
+#: ../panels/printers/cc-printers-panel.c:2371
+msgid "Searching for preferred drivers..."
+msgstr "Buscando controladores prefiridos…"
+
+#: ../panels/printers/cc-printers-panel.c:2386
+msgid "Select from database..."
+msgstr "Seleccionar da base de datos…"
+
+#: ../panels/printers/cc-printers-panel.c:2395
+msgid "Provide PPD File..."
+msgstr "Fornecer ficheiro PPD…"
+
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2279
-#: ../panels/printers/cc-printers-panel.c:2293
+#: ../panels/printers/cc-printers-panel.c:2533
+#: ../panels/printers/cc-printers-panel.c:2547
 msgid "Test page"
 msgstr "Páxina de proba"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2542
+#: ../panels/printers/cc-printers-panel.c:2909
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Non foi posíbel cargar a IU: %s"
@@ -2839,6 +2916,81 @@ msgstr "Bu_scar por enderezo"
 #: ../panels/user-accounts/um-account-dialog.c:991
 msgid "_Add"
 msgstr "_Engadir"
+
+#: ../panels/printers/options-dialog.ui.h:1
+#: ../panels/printers/ppd-selection-dialog.ui.h:1
+msgid " "
+msgstr " "
+
+#: ../panels/printers/options-dialog.ui.h:2
+msgid "Options"
+msgstr "Opcións"
+
+#: ../panels/printers/options-dialog.ui.h:3
+msgid "Loading options..."
+msgstr "Cargando opcións…"
+
+#: ../panels/printers/options-dialog.ui.h:4
+msgid "Close"
+msgstr "Pechar"
+
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+#: ../panels/user-accounts/data/photo-dialog.ui.h:8
+#: ../panels/user-accounts/um-account-dialog.c:990
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: ../panels/printers/ppd-selection-dialog.ui.h:3
+#: ../panels/user-accounts/data/photo-dialog.ui.h:9
+#: ../panels/user-accounts/um-photo-dialog.c:98
+msgid "Select"
+msgstr "Seleccionar"
+
+#: ../panels/printers/ppd-selection-dialog.ui.h:4
+msgid "Loading drivers database..."
+msgstr "Cargando base de datos dos controladores…"
+
+#: ../panels/printers/ppd-selection-dialog.ui.h:5
+msgid "Select Printer Driver"
+msgstr "Seleccionar controlador da impresora"
+
+#. Translators: this is an option of "Two Sided"
+#: ../panels/printers/pp-ipp-option-widget.c:65
+#: ../panels/printers/pp-ppd-option-widget.c:69
+msgid "One Sided"
+msgstr "Unha cara"
+
+#. Translators: this is an option of "Two Sided"
+#: ../panels/printers/pp-ipp-option-widget.c:67
+#: ../panels/printers/pp-ppd-option-widget.c:71
+msgid "Long Edge (Standard)"
+msgstr "Marxe longo (estándar)"
+
+#. Translators: this is an option of "Two Sided"
+#: ../panels/printers/pp-ipp-option-widget.c:69
+#: ../panels/printers/pp-ppd-option-widget.c:73
+msgid "Short Edge (Flip)"
+msgstr "Marxe curto (xirar)"
+
+#. Translators: this is an option of "Orientation"
+#: ../panels/printers/pp-ipp-option-widget.c:71
+msgid "Portrait"
+msgstr "Vertical"
+
+#. Translators: this is an option of "Orientation"
+#: ../panels/printers/pp-ipp-option-widget.c:73
+msgid "Landscape"
+msgstr "Apaisado"
+
+#. Translators: this is an option of "Orientation"
+#: ../panels/printers/pp-ipp-option-widget.c:75
+msgid "Reverse landscape"
+msgstr "Apaisado invertido"
+
+#. Translators: this is an option of "Orientation"
+#: ../panels/printers/pp-ipp-option-widget.c:77
+msgid "Reverse portrait"
+msgstr "Vertical invertido"
 
 #: ../panels/printers/pp-new-printer-dialog.c:651
 msgid "Getting devices..."
@@ -2902,6 +3054,145 @@ msgstr "Abrindo a devasa para as conexións Samba"
 msgid "Opening firewall for IPP connections"
 msgstr "Abrindo a devasa para as conexións IPP"
 
+#: ../panels/printers/pp-options-dialog.c:82
+msgid "Two Sided"
+msgstr "Dúas caras"
+
+#: ../panels/printers/pp-options-dialog.c:83
+msgid "Paper Type"
+msgstr "Tipo de papel"
+
+#: ../panels/printers/pp-options-dialog.c:84
+msgid "Paper Source"
+msgstr "Fonte do papel"
+
+#: ../panels/printers/pp-options-dialog.c:85
+msgid "Output Tray"
+msgstr "Bandexa de saída"
+
+#: ../panels/printers/pp-options-dialog.c:86
+msgid "Resolution"
+msgstr "Resolución"
+
+#: ../panels/printers/pp-options-dialog.c:87
+msgid "GhostScript pre-filtering"
+msgstr "Prefiltrado GhostScript"
+
+#. Translators: This option sets number of pages printed on one sheet
+#: ../panels/printers/pp-options-dialog.c:533
+msgid "Pages per side"
+msgstr "Páxinas por cara"
+
+#. Translators: This option sets whether to print on both sides of paper
+#: ../panels/printers/pp-options-dialog.c:545
+msgid "Two-sided"
+msgstr "Dúas caras"
+
+#. Translators: This option sets orientation of print (portrait, landscape...)
+#: ../panels/printers/pp-options-dialog.c:557
+msgid "Orientation"
+msgstr "Orientación"
+
+#. Translators: "General" tab contains general printer options
+#: ../panels/printers/pp-options-dialog.c:654
+msgctxt "Printer Option Group"
+msgid "General"
+msgstr "Xeral"
+
+#. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
+#: ../panels/printers/pp-options-dialog.c:657
+msgctxt "Printer Option Group"
+msgid "Page Setup"
+msgstr "Configuración da páxina"
+
+#. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
+#: ../panels/printers/pp-options-dialog.c:660
+msgctxt "Printer Option Group"
+msgid "Installable Options"
+msgstr "Opcións instalábeis"
+
+#. Translators: "Job" tab contains settings for jobs
+#: ../panels/printers/pp-options-dialog.c:663
+msgctxt "Printer Option Group"
+msgid "Job"
+msgstr "Traballo"
+
+#. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
+#: ../panels/printers/pp-options-dialog.c:666
+msgctxt "Printer Option Group"
+msgid "Image Quality"
+msgstr "Calidade da imaxe"
+
+#. Translators: "Color" tab contains color settings (e.g. color printing)
+#: ../panels/printers/pp-options-dialog.c:669
+msgctxt "Printer Option Group"
+msgid "Color"
+msgstr "Cor"
+
+#. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
+#: ../panels/printers/pp-options-dialog.c:672
+msgctxt "Printer Option Group"
+msgid "Finishing"
+msgstr "Rematado"
+
+#. Translators: "Advanced" tab contains all others settings
+#: ../panels/printers/pp-options-dialog.c:675
+msgctxt "Printer Option Group"
+msgid "Advanced"
+msgstr "Avanzado"
+
+#. Translators: Options of given printer (e.g. "MyPrinter Options")
+#: ../panels/printers/pp-options-dialog.c:934
+#, c-format
+msgid "%s Options"
+msgstr "Opcións de %s"
+
+#. Translators: this is an option of "Paper Source"
+#: ../panels/printers/pp-ppd-option-widget.c:75
+#: ../panels/printers/pp-ppd-option-widget.c:77
+#: ../panels/printers/pp-ppd-option-widget.c:85
+msgid "Auto Select"
+msgstr "Seleccionar automaticamente"
+
+#. Translators: this is an option of "Paper Source"
+#. Translators: this is an option of "Resolution"
+#: ../panels/printers/pp-ppd-option-widget.c:79
+#: ../panels/printers/pp-ppd-option-widget.c:81
+#: ../panels/printers/pp-ppd-option-widget.c:83
+#: ../panels/printers/pp-ppd-option-widget.c:87
+msgid "Printer Default"
+msgstr "Impresora predeterminada"
+
+#. Translators: this is an option of "GhostScript"
+#: ../panels/printers/pp-ppd-option-widget.c:89
+msgid "Embed GhostScript fonts only"
+msgstr "Só empotrar tipografías GhostScript"
+
+#. Translators: this is an option of "GhostScript"
+#: ../panels/printers/pp-ppd-option-widget.c:91
+msgid "Convert to PS level 1"
+msgstr "Converter a PS nivel 1"
+
+#. Translators: this is an option of "GhostScript"
+#: ../panels/printers/pp-ppd-option-widget.c:93
+msgid "Convert to PS level 2"
+msgstr "Converter a PS nivel 2"
+
+#. Translators: this is an option of "GhostScript"
+#: ../panels/printers/pp-ppd-option-widget.c:95
+msgid "No pre-filtering"
+msgstr "Sen prefiltrado"
+
+#. Translators: Name of column showing printer manufacturers
+#: ../panels/printers/pp-ppd-selection-dialog.c:230
+msgid "Manufacturers"
+msgstr "Fabricantes"
+
+#. Translators: Name of column showing printer drivers
+#: ../panels/printers/pp-ppd-selection-dialog.c:242
+msgid "Drivers"
+msgstr "Controladores"
+
 #: ../panels/printers/printers.ui.h:1
 msgid "Add Printer"
 msgstr "Engadir impresora"
@@ -2938,62 +3229,82 @@ msgstr "_Mostrar"
 msgid "Model"
 msgstr "Modelo"
 
-#. Translators: This button executes command which prints test page.
+#: ../panels/printers/printers.ui.h:14
+msgid "page 1"
+msgstr "páxina 1"
+
 #: ../panels/printers/printers.ui.h:15
+msgid "label"
+msgstr "etiqueta"
+
+#: ../panels/printers/printers.ui.h:16
+msgid "page 2"
+msgstr "páxina 2"
+
+#: ../panels/printers/printers.ui.h:17
+msgid "Setting new driver..."
+msgstr "Estabelecendo o novo controlador…"
+
+#: ../panels/printers/printers.ui.h:18
+msgid "page 3"
+msgstr "páxina 3"
+
+#. Translators: This button executes command which prints test page.
+#: ../panels/printers/printers.ui.h:20
 msgid "Print _Test Page"
 msgstr "I_mprimir páxina de proba"
 
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:17
+#: ../panels/printers/printers.ui.h:22
 msgid "_Options"
 msgstr "_Opcións"
 
 #. Translators: Switch back to printer's info tab
-#: ../panels/printers/printers.ui.h:19
+#: ../panels/printers/printers.ui.h:24
 msgid "_Back"
 msgstr "_Atrás"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:21
+#: ../panels/printers/printers.ui.h:26
 msgid "Active Print Jobs"
 msgstr "Traballos da impresora activos"
 
-#: ../panels/printers/printers.ui.h:22
+#: ../panels/printers/printers.ui.h:27
 msgid "Resume Printing"
 msgstr "Reanudar impresión"
 
-#: ../panels/printers/printers.ui.h:23
+#: ../panels/printers/printers.ui.h:28
 msgid "Pause Printing"
 msgstr "Pausar impresión"
 
-#: ../panels/printers/printers.ui.h:24
+#: ../panels/printers/printers.ui.h:29
 msgid "Cancel Print Job"
 msgstr "Cancelar traballo de impresión"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:26
+#: ../panels/printers/printers.ui.h:31
 msgid "Printer Options"
 msgstr "Preferencias da impresora"
 
-#: ../panels/printers/printers.ui.h:27
+#: ../panels/printers/printers.ui.h:32
 msgid "Add User"
 msgstr "Engadir usuario"
 
-#: ../panels/printers/printers.ui.h:28
+#: ../panels/printers/printers.ui.h:33
 msgid "Remove User"
 msgstr "Quitar usuario"
 
-#: ../panels/printers/printers.ui.h:29
+#: ../panels/printers/printers.ui.h:34
 msgid "Allowed users"
 msgstr "Usuarios permitidos"
 
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:31
+#: ../panels/printers/printers.ui.h:36
 msgid "Add New Printer"
 msgstr "Engadir impresora nova"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:33
+#: ../panels/printers/printers.ui.h:38
 msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
@@ -3245,6 +3556,10 @@ msgid "Locations..."
 msgstr "Localizacións…"
 
 #: ../panels/screen/screen.ui.h:17
+msgid "Show _notifications when locked"
+msgstr "Mostrar _notificacións ao bloquear"
+
+#: ../panels/screen/screen.ui.h:18
 msgid "Lock"
 msgstr "Bloquear"
 
@@ -3364,12 +3679,12 @@ msgstr "_Esvaecer:"
 msgid "_Subwoofer:"
 msgstr "_Subwoofer:"
 
-#: ../panels/sound/gvc-channel-bar.c:603 ../panels/sound/gvc-channel-bar.c:612
+#: ../panels/sound/gvc-channel-bar.c:613 ../panels/sound/gvc-channel-bar.c:622
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: ../panels/sound/gvc-channel-bar.c:607
+#: ../panels/sound/gvc-channel-bar.c:617
 msgctxt "volume"
 msgid "Unamplified"
 msgstr "Sen amplificación"
@@ -3380,7 +3695,7 @@ msgstr "_Perfíl:"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1094
+#: ../panels/sound/gvc-mixer-control.c:1841
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -3389,14 +3704,14 @@ msgstr[1] "%u saídas"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1104
+#: ../panels/sound/gvc-mixer-control.c:1851
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u entrada"
 msgstr[1] "%u entradas"
 
-#: ../panels/sound/gvc-mixer-control.c:1402
+#: ../panels/sound/gvc-mixer-control.c:2375
 msgid "System Sounds"
 msgstr "Sistemas de son"
 
@@ -4209,16 +4524,6 @@ msgstr "Examinar"
 msgid "Photograph"
 msgstr "Fotografía"
 
-#: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:990
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: ../panels/user-accounts/data/photo-dialog.ui.h:9
-#: ../panels/user-accounts/um-photo-dialog.c:98
-msgid "Select"
-msgstr "Seleccionar"
-
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgid "Account Information"
 msgstr "Información da conta"
@@ -4263,37 +4568,37 @@ msgstr "Xestionar contas de usuario"
 msgid "Authentication is required to change user data"
 msgstr "Requírese autenticación para cambiar os datos do usuario"
 
-#: ../panels/user-accounts/pw-utils.c:93
-#: ../panels/user-accounts/um-password-dialog.c:553
+#: ../panels/user-accounts/pw-utils.c:94
+#: ../panels/user-accounts/um-password-dialog.c:552
 msgctxt "Password strength"
 msgid "Too short"
 msgstr "Demasiado curto"
 
-#: ../panels/user-accounts/pw-utils.c:98
+#: ../panels/user-accounts/pw-utils.c:99
 msgctxt "Password strength"
 msgid "Not good enough"
 msgstr "Non é boa dabondo"
 
-#: ../panels/user-accounts/pw-utils.c:106
-#: ../panels/user-accounts/um-password-dialog.c:554
+#: ../panels/user-accounts/pw-utils.c:108
+#: ../panels/user-accounts/um-password-dialog.c:553
 msgctxt "Password strength"
 msgid "Weak"
 msgstr "Débil"
 
-#: ../panels/user-accounts/pw-utils.c:108
-#: ../panels/user-accounts/um-password-dialog.c:555
+#: ../panels/user-accounts/pw-utils.c:111
+#: ../panels/user-accounts/um-password-dialog.c:554
 msgctxt "Password strength"
 msgid "Fair"
 msgstr "Aceptábel"
 
-#: ../panels/user-accounts/pw-utils.c:110
-#: ../panels/user-accounts/um-password-dialog.c:556
+#: ../panels/user-accounts/pw-utils.c:114
+#: ../panels/user-accounts/um-password-dialog.c:555
 msgctxt "Password strength"
 msgid "Good"
 msgstr "Boa"
 
-#: ../panels/user-accounts/pw-utils.c:112
-#: ../panels/user-accounts/um-password-dialog.c:557
+#: ../panels/user-accounts/pw-utils.c:117
+#: ../panels/user-accounts/um-password-dialog.c:556
 msgctxt "Password strength"
 msgid "Strong"
 msgstr "Forte"
@@ -4303,7 +4608,7 @@ msgid "Authentication failed"
 msgstr "Fallou a autenticación"
 
 #: ../panels/user-accounts/run-passwd.c:506
-#: ../panels/user-accounts/um-password-dialog.c:240
+#: ../panels/user-accounts/um-password-dialog.c:239
 #, c-format
 msgid "The new password is too short"
 msgstr "O novo contrasinal é demasiado curto"
@@ -4456,47 +4761,47 @@ msgstr "Rexistrando pegadas dixitais"
 msgid "Summary"
 msgstr "Resumo"
 
-#: ../panels/user-accounts/um-password-dialog.c:97
+#: ../panels/user-accounts/um-password-dialog.c:96
 msgid "_Generate a password"
 msgstr "_Xerar un contrasinal"
 
-#: ../panels/user-accounts/um-password-dialog.c:151
+#: ../panels/user-accounts/um-password-dialog.c:150
 msgid "Please choose another password."
 msgstr "Seleccione outro contrasinal."
 
-#: ../panels/user-accounts/um-password-dialog.c:160
+#: ../panels/user-accounts/um-password-dialog.c:159
 msgid "Please type your current password again."
 msgstr "Escriba o seu contrasinal actual de novo."
 
-#: ../panels/user-accounts/um-password-dialog.c:166
+#: ../panels/user-accounts/um-password-dialog.c:165
 msgid "Password could not be changed"
 msgstr "Non foi posíbel cambiar o contrasinal"
 
-#: ../panels/user-accounts/um-password-dialog.c:237
+#: ../panels/user-accounts/um-password-dialog.c:236
 msgid "You need to enter a new password"
 msgstr "Debe escribir un novo contrasinal"
 
-#: ../panels/user-accounts/um-password-dialog.c:246
+#: ../panels/user-accounts/um-password-dialog.c:245
 msgid "You need to confirm the password"
 msgstr "Debe confirmar o contrasinal"
 
-#: ../panels/user-accounts/um-password-dialog.c:249
+#: ../panels/user-accounts/um-password-dialog.c:248
 msgid "The passwords do not match"
 msgstr "Os contrasinais non coninciden"
 
-#: ../panels/user-accounts/um-password-dialog.c:255
+#: ../panels/user-accounts/um-password-dialog.c:254
 msgid "You need to enter your current password"
 msgstr "Debe escribir o seu contrasinal actual"
 
-#: ../panels/user-accounts/um-password-dialog.c:258
+#: ../panels/user-accounts/um-password-dialog.c:257
 msgid "The current password is not correct"
 msgstr "O contrasinal actual non é correcto"
 
-#: ../panels/user-accounts/um-password-dialog.c:369
+#: ../panels/user-accounts/um-password-dialog.c:368
 msgid "Passwords do not match"
 msgstr "Os contrasinais non coinciden"
 
-#: ../panels/user-accounts/um-password-dialog.c:395
+#: ../panels/user-accounts/um-password-dialog.c:394
 msgid "Wrong password"
 msgstr "Contrasinal incorrecto"
 
@@ -4550,20 +4855,20 @@ msgstr "Non existe ningún usuario co nome «%s»"
 msgid "This user does not exist."
 msgstr "Este usuario non existe."
 
-#: ../panels/user-accounts/um-user-panel.c:365
+#: ../panels/user-accounts/um-user-panel.c:364
 msgid "Failed to delete user"
 msgstr "Produciuse un fallo ao eliminar o usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:425
+#: ../panels/user-accounts/um-user-panel.c:424
 msgid "You cannot delete your own account."
 msgstr "Non pode eliminar a súa propia conta."
 
-#: ../panels/user-accounts/um-user-panel.c:434
+#: ../panels/user-accounts/um-user-panel.c:433
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s aínda ten a sesión iniciada"
 
-#: ../panels/user-accounts/um-user-panel.c:438
+#: ../panels/user-accounts/um-user-panel.c:437
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -4571,12 +4876,12 @@ msgstr ""
 "Se elimina un usuario mentres ten a sesión iniciada pode poñer deixar o "
 "sistema nun estado inconsistente."
 
-#: ../panels/user-accounts/um-user-panel.c:447
+#: ../panels/user-accounts/um-user-panel.c:446
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Desexa manter os ficheiros de %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:451
+#: ../panels/user-accounts/um-user-panel.c:450
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -4584,38 +4889,38 @@ msgstr ""
 "É posíbel manter o cartafol persoal, a caixa de correo e os ficheiros "
 "temporais ao eliminar unha conta de usuario."
 
-#: ../panels/user-accounts/um-user-panel.c:454
+#: ../panels/user-accounts/um-user-panel.c:453
 msgid "_Delete Files"
 msgstr "_Borrar os ficheiros"
 
-#: ../panels/user-accounts/um-user-panel.c:455
+#: ../panels/user-accounts/um-user-panel.c:454
 msgid "_Keep Files"
 msgstr "_Manter os ficheiros"
 
-#: ../panels/user-accounts/um-user-panel.c:507
+#: ../panels/user-accounts/um-user-panel.c:506
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Conta desactivada"
 
-#: ../panels/user-accounts/um-user-panel.c:515
+#: ../panels/user-accounts/um-user-panel.c:514
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Para configurar no seguinte inicio de sesión"
 
-#: ../panels/user-accounts/um-user-panel.c:518
+#: ../panels/user-accounts/um-user-panel.c:517
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ningún"
 
-#: ../panels/user-accounts/um-user-panel.c:856
+#: ../panels/user-accounts/um-user-panel.c:855
 msgid "Failed to contact the accounts service"
 msgstr "Produciuse un fallo ao contactar co servizo de contas"
 
-#: ../panels/user-accounts/um-user-panel.c:858
+#: ../panels/user-accounts/um-user-panel.c:857
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que o servizo de contas está instalado e activado."
 
-#: ../panels/user-accounts/um-user-panel.c:898
+#: ../panels/user-accounts/um-user-panel.c:897
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -4623,12 +4928,12 @@ msgstr ""
 "Para realizar os cambios,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:936
+#: ../panels/user-accounts/um-user-panel.c:935
 msgid "Create a user account"
 msgstr "Crear unha conta de usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:947
-#: ../panels/user-accounts/um-user-panel.c:1237
+#: ../panels/user-accounts/um-user-panel.c:946
+#: ../panels/user-accounts/um-user-panel.c:1236
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -4636,12 +4941,12 @@ msgstr ""
 "Para crear unha conta de usuario,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:956
+#: ../panels/user-accounts/um-user-panel.c:955
 msgid "Delete the selected user account"
 msgstr "Eliminar a conta de usuario seleccionada"
 
-#: ../panels/user-accounts/um-user-panel.c:968
-#: ../panels/user-accounts/um-user-panel.c:1242
+#: ../panels/user-accounts/um-user-panel.c:967
+#: ../panels/user-accounts/um-user-panel.c:1241
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -4649,11 +4954,11 @@ msgstr ""
 "Para eliminar a conta de usuario seleccionada,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1145
+#: ../panels/user-accounts/um-user-panel.c:1144
 msgid "My Account"
 msgstr "A miña conta"
 
-#: ../panels/user-accounts/um-user-panel.c:1155
+#: ../panels/user-accounts/um-user-panel.c:1154
 msgid "Other Accounts"
 msgstr "Outras contas"
 
@@ -4692,11 +4997,11 @@ msgid "Map buttons to functions"
 msgstr "Mapear botóns a funcións"
 
 #. Text printed on screen
-#: ../panels/wacom/calibrator/gui_gtk.c:70
+#: ../panels/wacom/calibrator/gui_gtk.c:78
 msgid "Screen Calibration"
 msgstr "Calibración de pantalla"
 
-#: ../panels/wacom/calibrator/gui_gtk.c:71
+#: ../panels/wacom/calibrator/gui_gtk.c:79
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
@@ -4704,21 +5009,21 @@ msgstr ""
 "Prema nos marcadores obxectivo a medida que aparezan na pantalla para "
 "calibrar a tableta."
 
-#: ../panels/wacom/calibrator/gui_gtk.c:271
+#: ../panels/wacom/calibrator/gui_gtk.c:368
 msgid "Mis-click detected, restarting..."
 msgstr "Pulsación errónea detectada, reiniciando…"
 
-#: ../panels/wacom/cc-wacom-mapping-panel.c:264
+#: ../panels/wacom/cc-wacom-mapping-panel.c:275
 msgid "Output:"
 msgstr "Saída:"
 
 #. Keep ratio switch
-#: ../panels/wacom/cc-wacom-mapping-panel.c:276
+#: ../panels/wacom/cc-wacom-mapping-panel.c:287
 msgid "Keep aspect ratio (letterbox):"
 msgstr "Manter relación de aspecto («letterbox»):"
 
 #. Whole-desktop checkbox
-#: ../panels/wacom/cc-wacom-mapping-panel.c:287
+#: ../panels/wacom/cc-wacom-mapping-panel.c:298
 msgid "Map to single monitor"
 msgstr "Asignar a unha única pantalla"
 
@@ -4727,24 +5032,24 @@ msgstr "Asignar a unha única pantalla"
 msgid "%d of %d"
 msgstr "%d de %d"
 
-#: ../panels/wacom/cc-wacom-page.c:306
+#: ../panels/wacom/cc-wacom-page.c:317
 msgid "Switch Modes"
 msgstr "Cambiar modos"
 
-#: ../panels/wacom/cc-wacom-page.c:553
+#: ../panels/wacom/cc-wacom-page.c:564
 msgid "Up"
 msgstr "Arriba"
 
-#: ../panels/wacom/cc-wacom-page.c:553
+#: ../panels/wacom/cc-wacom-page.c:564
 msgid "Down"
 msgstr "Abaixo"
 
-#: ../panels/wacom/cc-wacom-page.c:588
+#: ../panels/wacom/cc-wacom-page.c:599
 #: ../panels/wacom/cc-wacom-stylus-page.c:376
 msgid "Button"
 msgstr "Botón"
 
-#: ../panels/wacom/cc-wacom-page.c:714
+#: ../panels/wacom/cc-wacom-page.c:725
 msgid "Display Mapping"
 msgstr "Mostrar mapeo"
 
@@ -4810,67 +5115,67 @@ msgstr "Modo de seguimento"
 msgid "Left-Handed Orientation"
 msgstr "Orientación para zurdos"
 
-#: ../panels/wacom/gsd-wacom-device.c:959
+#: ../panels/wacom/gsd-wacom-device.c:1010
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Modo de anel esquerdo #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:968
+#: ../panels/wacom/gsd-wacom-device.c:1019
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Modo de anel dereito #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:998
+#: ../panels/wacom/gsd-wacom-device.c:1049
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Modo de banda táctil esquerda nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1007
+#: ../panels/wacom/gsd-wacom-device.c:1058
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Modo de banda táctil dereita nº %d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1024
+#: ../panels/wacom/gsd-wacom-device.c:1075
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Modo de cambio do anel táctil esquerdo"
 
-#: ../panels/wacom/gsd-wacom-device.c:1026
+#: ../panels/wacom/gsd-wacom-device.c:1077
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Modo de cambio do anel táctil dereito"
 
-#: ../panels/wacom/gsd-wacom-device.c:1029
+#: ../panels/wacom/gsd-wacom-device.c:1080
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Modo de cambio da banda táctil esquerda"
 
-#: ../panels/wacom/gsd-wacom-device.c:1031
+#: ../panels/wacom/gsd-wacom-device.c:1082
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Modo de cambio da banda táctil dereita"
 
-#: ../panels/wacom/gsd-wacom-device.c:1036
+#: ../panels/wacom/gsd-wacom-device.c:1087
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Modo conmutador #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1108
+#: ../panels/wacom/gsd-wacom-device.c:1159
 #, c-format
 msgid "Left Button #%d"
 msgstr "Botón esquerdo #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1111
+#: ../panels/wacom/gsd-wacom-device.c:1162
 #, c-format
 msgid "Right Button #%d"
 msgstr "Botón dereito #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1114
+#: ../panels/wacom/gsd-wacom-device.c:1165
 #, c-format
 msgid "Top Button #%d"
 msgstr "Botón superior #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1117
+#: ../panels/wacom/gsd-wacom-device.c:1168
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Botón inferior #%d"
@@ -4997,6 +5302,30 @@ msgstr "Preferencias;Configuración;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "Todas as preferencias"
+
+#~ msgid "Device Off"
+#~ msgstr "Dispositivo desactivado"
+
+#~ msgid "_Network Name"
+#~ msgstr "_Nome da rede"
+
+#~ msgid "Disable VPN"
+#~ msgstr "Desactivar VPN"
+
+#~ msgid "HTTP Port"
+#~ msgstr "Porto HTTP"
+
+#~ msgid "HTTPS Port"
+#~ msgstr "Porto HTTPS"
+
+#~ msgid "FTP Port"
+#~ msgstr "Porto FTP"
+
+#~ msgid "Socks Port"
+#~ msgstr "Porto Socks"
+
+#~ msgid "Select an account"
+#~ msgstr "Seleccionar unha conta"
 
 #~ msgid "To add a new account, first select the account type"
 #~ msgstr "Para engadir unha nova conta, seleccione primeiro o tipo de conta"
@@ -5419,9 +5748,6 @@ msgstr "Todas as preferencias"
 #~ msgid "<b>System settings</b>"
 #~ msgstr "<b>Configuracións do sistema</b>"
 
-#~ msgid "label"
-#~ msgstr "etiqueta"
-
 #~ msgctxt "universal access, contrast"
 #~ msgid "<span size=\"x-large\">High/Inverse</span>"
 #~ msgstr "<span size=\"x-large\">Alto/invertido</span>"
@@ -5548,18 +5874,6 @@ msgstr "Todas as preferencias"
 
 #~ msgid "AM"
 #~ msgstr "AM"
-
-#~ msgid " "
-#~ msgstr " "
-
-#~ msgid "page 1"
-#~ msgstr "páxina 1"
-
-#~ msgid "page 2"
-#~ msgstr "páxina 2"
-
-#~ msgid "page 3"
-#~ msgstr "páxina 3"
 
 #~ msgid "Set the system proxy settings"
 #~ msgstr "Configurar os axustes do proxy do sistema"
@@ -6077,9 +6391,6 @@ msgstr "Todas as preferencias"
 
 #~ msgid "Network Proxy Preferences"
 #~ msgstr "Preferencias do proxy de rede"
-
-#~ msgid "Port:"
-#~ msgstr "Porto:"
 
 #~ msgid "S_ocks host:"
 #~ msgstr "Host de s_ocks:"
@@ -6610,9 +6921,6 @@ msgstr "Todas as preferencias"
 
 #~ msgid "Opera"
 #~ msgstr "Opera"
-
-#~ msgid "Make Default"
-#~ msgstr "Facer predefinido"
 
 #~ msgid "Panel icon"
 #~ msgstr "Icona do panel"
