@@ -572,19 +572,21 @@ get_ipv4_config_name_servers_as_string (NMIP4Config *ip4_config)
         struct in_addr addr;
         gchar tmp[INET_ADDRSTRLEN];
         int i;
-
-        dns = g_string_new (NULL);
+        gchar *str = NULL;
 
         array = nm_ip4_config_get_nameservers (ip4_config);
-        if (array) {
-                for (i = 0; i < array->len; i++) {
-                        addr.s_addr = g_array_index (array, guint32, i);
-                        if (inet_ntop (AF_INET, &addr, tmp, sizeof(tmp)))
-                                g_string_append_printf (dns, "%s ", tmp);
-                }
-        }
+        if (array == NULL || array->len == 0)
+                goto out;
 
-        return g_string_free (dns, FALSE);
+        dns = g_string_new (NULL);
+        for (i = 0; i < array->len; i++) {
+                addr.s_addr = g_array_index (array, guint32, i);
+                if (inet_ntop (AF_INET, &addr, tmp, sizeof(tmp)))
+                        g_string_append_printf (dns, "%s ", tmp);
+        }
+        str = g_string_free (dns, FALSE);
+out:
+        return str;
 }
 
 static gchar *
