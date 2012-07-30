@@ -388,14 +388,9 @@ device_is_hotspot (NetDeviceWifi *device_wifi)
         NMDevice *device;
 
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
-        if (nm_device_get_device_type (device) != NM_DEVICE_TYPE_WIFI) {
-                return FALSE;
-        }
-
         c = find_connection_for_device (device_wifi, device);
-        if (c == NULL) {
+        if (c == NULL)
                 return FALSE;
-        }
 
         s_ip4 = nm_connection_get_setting_ip4_config (c);
         if (g_strcmp0 (nm_setting_ip4_config_get_method (s_ip4),
@@ -454,15 +449,13 @@ device_get_hotspot_security_details (NetDeviceWifi *device_wifi,
         const gchar *tmp_security;
 
         c = find_connection_for_device (device_wifi, device);
-        if (c == NULL) {
+        if (c == NULL)
                 return;
-        }
 
         sw = nm_connection_get_setting_wireless (c);
         sws = nm_connection_get_setting_wireless_security (c);
-        if (sw == NULL || sws == NULL) {
+        if (sw == NULL || sws == NULL)
                 return;
-        }
 
         tmp_secret = NULL;
         tmp_security = _("None");
@@ -490,13 +483,10 @@ device_get_hotspot_security_details (NetDeviceWifi *device_wifi,
                 return;
         }
 
-        if (secret) {
+        if (secret)
                 *secret = g_strdup (tmp_secret);
-        }
-
-        if (security) {
+        if (security)
                 *security = g_strdup (tmp_security);
-        }
 }
 
 static void
