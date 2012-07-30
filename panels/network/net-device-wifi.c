@@ -185,18 +185,20 @@ add_access_point_other (NetDeviceWifi *device_wifi)
         NetDeviceWifiPrivate *priv = device_wifi->priv;
         GtkListStore *liststore_network;
         GtkTreeIter treeiter;
+        gchar *title;
 
         liststore_network = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                                      "liststore_network"));
 
+        /* TRANSLATORS: this is when the access point is not listed in
+        *  the dropdown (or hidden) and the user has to select another
+        *  entry manually */
+        title = g_strdup_printf ("<b>%s</b>", _("Connect to a Hidden Network"));
         gtk_list_store_append (liststore_network, &treeiter);
         gtk_list_store_set (liststore_network,
                             &treeiter,
                             COLUMN_ID, "ap-other...",
-                            /* TRANSLATORS: this is when the access point is not listed
-                             * in the dropdown (or hidden) and the user has to select
-                             * another entry manually */
-                            COLUMN_TITLE, C_("Wireless access point", "Other..."),
+                            COLUMN_TITLE, title,
                             /* always last */
                             COLUMN_SORT, "",
                             COLUMN_STRENGTH, 0,
@@ -205,6 +207,7 @@ add_access_point_other (NetDeviceWifi *device_wifi)
                             COLUMN_AP_IN_RANGE, FALSE,
                             COLUMN_AP_IS_SAVED, FALSE,
                             -1);
+        g_free (title);
 }
 
 static GPtrArray *
@@ -1083,16 +1086,6 @@ wireless_ap_model_sort_cb (GtkTreeModel *model,
                             COLUMN_ACTIVE, &active_b,
                             COLUMN_AP_IN_RANGE, &ap_b,
                             -1);
-
-        /* special case blank entries to the bottom */
-        if (g_strcmp0 (str_a, "") == 0) {
-                retval = 1;
-                goto out;
-        }
-        if (g_strcmp0 (str_b, "") == 0) {
-                retval = -1;
-                goto out;
-        }
 
         /* active entry first */
         if (active_a) {
