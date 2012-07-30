@@ -1532,6 +1532,7 @@ connect_wifi_network (NetDeviceWifi *device_wifi,
         gchar *ssid;
         GtkTreeIter iter;
         GtkTreeModel *model;
+        NM80211Mode mode;
 
         model = gtk_tree_view_get_model (tv);
         gtk_tree_model_get_iter (model, &iter, path);
@@ -1540,9 +1541,10 @@ connect_wifi_network (NetDeviceWifi *device_wifi,
                             COLUMN_ID, &object_path,
                             COLUMN_TITLE, &ssid,
                             COLUMN_AP_IN_RANGE, &ap_in_range,
+                            COLUMN_MODE, &mode,
                             -1);
 
-        if (ap_in_range)
+        if (ap_in_range || mode == NM_802_11_MODE_UNKNOWN)
                 wireless_try_to_connect (device_wifi, ssid, object_path);
 
         g_free (object_path);
