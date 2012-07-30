@@ -557,6 +557,8 @@ get_ipv4_config_address_as_string (NMIP4Config *ip4_config, const char *what)
 
         if (!inet_ntop (AF_INET, &addr, tmp, sizeof(tmp)))
                 goto out;
+        if (g_strcmp0 (tmp, "0.0.0.0") == 0)
+                goto out;
         str = g_strdup (tmp);
 out:
         return str;
