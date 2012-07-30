@@ -1773,12 +1773,21 @@ net_device_wifi_constructed (GObject *object)
         NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (object);
         NMClient *client;
         NMRemoteSettings *remote_settings;
+        NMClientPermissionResult perm;
+        GtkWidget *widget;
 
         G_OBJECT_CLASS (net_device_wifi_parent_class)->constructed (object);
 
         client = net_object_get_client (NET_OBJECT (device_wifi));
         g_signal_connect (client, "notify::wireless-enabled",
                           G_CALLBACK (wireless_enabled_toggled), device_wifi);
+
+        /* only show the button if the user can create a hotspot */
+        perm = nm_client_get_permission_result (client, NM_CLIENT_PERMISSION_WIFI_SHARE_OPEN);
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
+                                                     "start_hotspot_button"));
+        gtk_widget_set_sensitive (widget, perm == NM_CLIENT_PERMISSION_RESULT_YES ||
+                                          perm == NM_CLIENT_PERMISSION_RESULT_AUTH);
 
         remote_settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
         g_signal_connect (remote_settings, "connections-read",
