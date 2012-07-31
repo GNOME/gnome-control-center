@@ -96,8 +96,7 @@ on_realm_proxy_created (GObject *source,
         realm = um_realm_kerberos_proxy_new_finish (result, &error);
         if (error == NULL) {
                 proxy = G_DBUS_PROXY (realm);
-                info = g_variant_new ("(sos)",
-                                      g_dbus_proxy_get_name (proxy),
+                info = g_variant_new ("(os)",
                                       g_dbus_proxy_get_object_path (proxy),
                                       g_dbus_proxy_get_interface_name (proxy));
 
@@ -142,7 +141,6 @@ um_realm_manager_load (UmRealmManager *self,
         UmRealmKerberos *realm;
         const gchar *path;
         const gchar *iface;
-        const gchar *name;
 
         g_return_if_fail (realms != NULL);
 
@@ -161,11 +159,12 @@ um_realm_manager_load (UmRealmManager *self,
                         break;
                 realm = g_hash_table_lookup (self->realms, info);
                 if (realm == NULL) {
-                        g_variant_get (info, "(&s&o&s)", &name, &path, &iface);
+                        g_variant_get (info, "(&o&s)", &path, &iface);
                         if (g_str_equal (iface, "org.freedesktop.realmd.Kerberos")) {
                                 um_realm_kerberos_proxy_new (connection,
                                                              G_DBUS_PROXY_FLAGS_NONE,
-                                                             name, path, cancellable,
+                                                             "org.freedesktop.realmd",
+                                                             path, cancellable,
                                                              on_realm_proxy_created,
                                                              g_object_ref (async));
                                 load->outstanding++;
@@ -203,9 +202,9 @@ um_realm_manager_load_finish (UmRealmManager *self,
 static guint
 hash_realm_info (gconstpointer value)
 {
-        const gchar *name, *path, *iface;
-        g_variant_get ((GVariant *)value, "(&s&o&s)", &name, &path, &iface);
-        return g_str_hash (name) ^ g_str_hash (path) ^ g_str_hash (iface);
+        const gchar *path, *iface;
+        g_variant_get ((GVariant *)value, "(&o&s)", &path, &iface);
+        return g_str_hash (path) ^ g_str_hash (iface);
 }
 
 static void
@@ -346,7 +345,7 @@ on_realm_manager_async_init (GObject *source,
         /* This is temporary until the dbus interface stabilizes */
         if (object) {
                 version = um_realm_provider_get_version (UM_REALM_PROVIDER (object));
-                if (!version_compare (version, 0, 2)) {
+                if (!version_compare (version, 0, 6)) {
                         /* No need to bother translators with this temporary message */
                         g_simple_async_result_set_error (async, UM_REALM_ERROR,
                                                          UM_REALM_ERROR_GENERIC,
@@ -359,8 +358,8 @@ on_realm_manager_async_init (GObject *source,
         if (object != NULL) {
                 proxy = G_DBUS_PROXY (object);
                 sig = g_dbus_connection_signal_subscribe (g_dbus_proxy_get_connection (proxy),
-                                                          g_dbus_proxy_get_name_owner (proxy),
-                                                          "org.freedesktop.realmd.Diagnostics",
+                                                          "org.freedesktop.realmd",
+                                                          "org.freedesktop.realmd.Service",
                                                           "Diagnostics",
                                                           NULL,
                                                           NULL,
@@ -489,6 +488,7 @@ um_realm_manager_discover (UmRealmManager *self,
 {
         GSimpleAsyncResult *res;
         DiscoverClosure *discover;
+        GVariant *options;
 
         g_return_if_fail (UM_IS_REALM_MANAGER (self));
         g_return_if_fail (input != NULL);
@@ -500,9 +500,13 @@ um_realm_manager_discover (UmRealmManager *self,
         discover->cancellable = cancellable ? g_object_ref (cancellable) : NULL;
         g_simple_async_result_set_op_res_gpointer (res, discover, discover_closure_free);
 
-        um_realm_provider_call_discover (UM_REALM_PROVIDER (self), input, "", cancellable,
+	options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
+	g_variant_ref_sink (options);
+
+        um_realm_provider_call_discover (UM_REALM_PROVIDER (self), input, options, cancellable,
                                          on_provider_discover, g_object_ref (res));
 
+        g_variant_unref (options);
         g_object_unref (res);
 }
 
@@ -543,36 +547,131 @@ um_realm_manager_get_realms (UmRealmManager *self)
         return g_hash_table_get_values (self->realms);
 }
 
-void
-um_realm_join (UmRealmKerberos *realm,
-               GBytes *credentials,
-               GCancellable *cancellable,
-               GAsyncReadyCallback callback,
-               gpointer user_data)
+static const gchar *
+find_supported_credentials (UmRealmKerberos *realm,
+                            const gchar *owner)
 {
+        const gchar *cred_owner;
+        const gchar *cred_type;
+        GVariant *supported;
+        GVariantIter iter;
+
+        supported = um_realm_kerberos_get_supported_enroll_credentials (realm);
+        g_return_val_if_fail (supported != NULL, NULL);
+
+        g_variant_iter_init (&iter, supported);
+        while (g_variant_iter_loop (&iter, "(&s&s)", &cred_type, &cred_owner)) {
+        	g_printerr ("%s %s %s\n", cred_type, cred_owner, owner);
+                if (g_str_equal (owner, cred_owner)) {
+                        if (g_str_equal (cred_type, "ccache") ||
+                            g_str_equal (cred_type, "password")) {
+                                return g_intern_string (cred_type);
+                        }
+                }
+        }
+
+        return NULL;
+}
+
+static void
+on_realm_join_complete (GObject *source,
+                        GAsyncResult *result,
+                        gpointer user_data)
+{
+	GSimpleAsyncResult *async = G_SIMPLE_ASYNC_RESULT (user_data);
+	g_simple_async_result_set_op_res_gpointer (async, g_object_ref (result), g_object_unref);
+	g_simple_async_result_complete_in_idle (async);
+	g_object_unref (async);
+}
+
+static gboolean
+realm_join_as_owner (UmRealmKerberos *realm,
+                     const gchar *owner,
+                     const gchar *login,
+                     const gchar *password,
+                     GBytes *credentials,
+                     GCancellable *cancellable,
+                     GAsyncReadyCallback callback,
+                     gpointer user_data)
+{
+        GSimpleAsyncResult *async;
+        GVariant *contents;
         GVariant *options;
         GVariant *creds;
+        const gchar *type;
 
-        g_return_if_fail (UM_REALM_IS_KERBEROS (realm));
-        g_return_if_fail (credentials != NULL);
-        g_return_if_fail (cancellable == NULL || G_IS_CANCELLABLE (cancellable));
+        type = find_supported_credentials (realm, owner);
+        if (type == NULL)
+                return FALSE;
 
-        creds = g_variant_new_from_data (G_VARIANT_TYPE ("ay"),
-                                         g_bytes_get_data (credentials, NULL),
-                                         g_bytes_get_size (credentials),
-                                         TRUE, (GDestroyNotify)g_bytes_unref, credentials);
+        async = g_simple_async_result_new (G_OBJECT (realm), callback, user_data,
+                                           realm_join_as_owner);
+
+        if (g_str_equal (type, "ccache")) {
+                contents = g_variant_new_from_data (G_VARIANT_TYPE ("ay"),
+                                                    g_bytes_get_data (credentials, NULL),
+                                                    g_bytes_get_size (credentials),
+                                                    TRUE, (GDestroyNotify)g_bytes_unref, credentials);
+
+        } else if (g_str_equal (type, "password")) {
+                contents = g_variant_new ("(ss)", login, password);
+
+        } else {
+                g_assert_not_reached ();
+        }
+
+        creds = g_variant_new ("(ss@v)", type, owner, g_variant_new_variant (contents));
         options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
 
-        um_realm_kerberos_call_enroll_with_credential_cache (realm,
-                                                             g_variant_ref_sink (creds),
-                                                             g_variant_ref_sink (options),
-                                                             "",
-                                                             cancellable,
-                                                             callback,
-                                                             user_data);
+        um_realm_kerberos_call_enroll (realm, g_variant_ref_sink (creds),
+                                       g_variant_ref_sink (options),
+                                       cancellable, on_realm_join_complete, g_object_ref (async));
 
         g_variant_unref (options);
         g_variant_unref (creds);
+        g_object_unref (async);
+
+        return TRUE;
+}
+
+gboolean
+um_realm_join_as_user (UmRealmKerberos *realm,
+                       const gchar *login,
+                       const gchar *password,
+                       GBytes *credentials,
+                       GCancellable *cancellable,
+                       GAsyncReadyCallback callback,
+                       gpointer user_data)
+{
+        g_return_val_if_fail (UM_REALM_IS_KERBEROS (realm), FALSE);
+        g_return_val_if_fail (credentials != NULL, FALSE);
+        g_return_val_if_fail (cancellable == NULL || G_IS_CANCELLABLE (cancellable), FALSE);
+        g_return_val_if_fail (login != NULL, FALSE);
+        g_return_val_if_fail (password != NULL, FALSE);
+        g_return_val_if_fail (credentials != NULL, FALSE);
+
+        return realm_join_as_owner (realm, "user", login, password, credentials,
+                                    cancellable, callback, user_data);
+}
+
+gboolean
+um_realm_join_as_admin (UmRealmKerberos *realm,
+                        const gchar *login,
+                        const gchar *password,
+                        GBytes *credentials,
+                        GCancellable *cancellable,
+                        GAsyncReadyCallback callback,
+                        gpointer user_data)
+{
+        g_return_val_if_fail (UM_REALM_IS_KERBEROS (realm), FALSE);
+        g_return_val_if_fail (credentials != NULL, FALSE);
+        g_return_val_if_fail (cancellable == NULL || G_IS_CANCELLABLE (cancellable), FALSE);
+        g_return_val_if_fail (login != NULL, FALSE);
+        g_return_val_if_fail (password != NULL, FALSE);
+        g_return_val_if_fail (credentials != NULL, FALSE);
+
+        return realm_join_as_owner (realm, "administrator", login, password, credentials,
+                                    cancellable, callback, user_data);
 }
 
 gboolean
@@ -582,13 +681,13 @@ um_realm_join_finish (UmRealmKerberos *self,
 {
         GError *call_error = NULL;
         gchar *dbus_error;
+        GAsyncResult *async;
 
         g_return_val_if_fail (UM_REALM_IS_KERBEROS (self), FALSE);
         g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
 
-        um_realm_kerberos_call_enroll_with_credential_cache_finish (self,
-                                                                    result,
-                                                                    &call_error);
+        async = g_simple_async_result_get_op_res_gpointer (G_SIMPLE_ASYNC_RESULT (result));
+        um_realm_kerberos_call_enroll_finish (self, async, &call_error);
         if (call_error == NULL)
                 return TRUE;
 

@@ -383,8 +383,8 @@ on_permit_user_login (GObject *source,
         GError *error = NULL;
         gchar *login;
 
-        um_realm_kerberos_call_change_permitted_logins_finish (UM_REALM_KERBEROS (source),
-                                                               result, &error);
+        um_realm_kerberos_call_change_login_policy_finish (UM_REALM_KERBEROS (source),
+                                                           result, &error);
         if (error == NULL) {
 
                 /*
@@ -416,6 +416,7 @@ enterprise_permit_user_login (UmAccountDialog *self)
         gchar *login;
         const gchar *add[2];
         const gchar *remove[1];
+        GVariant *options;
 
         login = enterprise_calculate_login (self);
 
@@ -423,12 +424,16 @@ enterprise_permit_user_login (UmAccountDialog *self)
         add[1] = NULL;
         remove[0] = NULL;
 
-        um_realm_kerberos_call_change_permitted_logins (self->selected_realm,
-                                                        add, remove, "",
-                                                        self->cancellable,
-                                                        on_permit_user_login,
-                                                        g_object_ref (self));
+        options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
 
+        um_realm_kerberos_call_change_login_policy (self->selected_realm, "",
+                                                    add, remove,
+                                                    g_variant_ref_sink (options),
+                                                    self->cancellable,
+                                                    on_permit_user_login,
+                                                    g_object_ref (self));
+
+        g_variant_unref (options);
         g_free (login);
 }
 
@@ -508,9 +513,16 @@ on_join_login (GObject *source,
 
         /* Logged in as admin successfully, use creds to join domain */
         if (error == NULL) {
-                um_realm_join (self->selected_realm,
-                               creds, self->cancellable, on_realm_joined,
-                               g_object_ref (self));
+                if (!um_realm_join_as_admin (self->selected_realm,
+                                             gtk_entry_get_text (self->join_name),
+                                             gtk_entry_get_text (self->join_password),
+                                             creds, self->cancellable, on_realm_joined,
+                                             g_object_ref (self))) {
+                        show_error_dialog (self, _("No supported way to authenticate with this domain"), NULL);
+                        g_message ("Authenticating as admin is not supported by the realm");
+                        finish_action (self);
+                }
+
                 g_bytes_unref (creds);
 
         /* Couldn't login as admin, show prompt again */
@@ -584,12 +596,15 @@ on_realm_login (GObject *source,
                         enterprise_permit_user_login (self);
 
                 /* Join the domain, try using the user's creds */
-                } else {
-                        um_realm_join (self->selected_realm,
-                                       creds,
-                                       self->cancellable,
-                                       on_realm_joined,
-                                       g_object_ref (self));
+                } else if (!um_realm_join_as_user (self->selected_realm,
+                                                   gtk_entry_get_text (self->enterprise_login),
+                                                   gtk_entry_get_text (self->enterprise_password),
+                                                   creds, self->cancellable,
+                                                   on_realm_joined,
+                                                   g_object_ref (self))) {
+
+                        /* If we can't do user aauth, try to authenticate as admin */
+                        join_show_prompt (self, NULL);
                 }
 
                 g_bytes_unref (creds);

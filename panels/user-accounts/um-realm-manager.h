@@ -75,11 +75,23 @@ gboolean         um_realm_login_finish            (GAsyncResult *result,
                                                    GBytes **credentials,
                                                    GError **error);
 
-void             um_realm_join                    (UmRealmKerberos *realm,
+gboolean         um_realm_join_as_user            (UmRealmKerberos *realm,
+                                                   const gchar *login,
+                                                   const gchar *password,
                                                    GBytes *credentials,
                                                    GCancellable *cancellable,
                                                    GAsyncReadyCallback callback,
-                                                   gpointer user_data);
+                                                   gpointer user_data)
+                                                   G_GNUC_WARN_UNUSED_RESULT;
+
+gboolean         um_realm_join_as_admin           (UmRealmKerberos *realm,
+                                                   const gchar *login,
+                                                   const gchar *password,
+                                                   GBytes *credentials,
+                                                   GCancellable *cancellable,
+                                                   GAsyncReadyCallback callback,
+                                                   gpointer user_data)
+                                                   G_GNUC_WARN_UNUSED_RESULT;
 
 gboolean         um_realm_join_finish             (UmRealmKerberos *self,
                                                    GAsyncResult *result,

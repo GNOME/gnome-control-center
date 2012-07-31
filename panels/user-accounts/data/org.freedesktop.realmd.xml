@@ -25,11 +25,10 @@
 		<!--
 		 * A list of known, enrolled or discovered realms.
 		 * Each realm is a DBus object and is represeted by a:
-		 *   s: DBus bus name of the realm
 		 *   o: DBus object path of the realm
 		 *   s: DBus interface name, like 'ofr.Kerberos' (below)
 		-->
-		<property name="Realms" type="a(sos)" access="read"/>
+		<property name="Realms" type="a(os)" access="read"/>
 
 		<!--
 		 * Discover whether a string represents a realm that a provider
@@ -38,29 +37,40 @@
 		<method name="Discover">
 			<!-- The input string -->
 			<arg name="string" type="s" direction="in"/>
-
-			<arg name="operation_id" type="s" direction="in"/>
+			<arg name="options" type="a{sv}" direction="in"/>
 
 			<!-- Returned match relevance -->
 			<arg name="relevance" type="i" direction="out"/>
 
 			<!-- The realm objects: bus name, object path, interface -->
-			<arg name="realm" type="a(sos)" direction="out"/>
+			<arg name="realm" type="a(os)" direction="out"/>
 		</method>
 	</interface>
 
-	<!--
-	 * This interface is implemented by Providers and Realms to provide
-	 * additional information when an long running operation is happening
-	 *
-	 * In particular you can connect to the "Diagnostics" signal when
-	 * during an enroll or unenroll to get details.
-	-->
-	<interface name="org.freedesktop.realmd.Diagnostics">
+	<interface name="org.freedesktop.realmd.Service">
+		<method name="Cancel">
+			<arg name="operation_id" type="s" direction="in"/>
+		</method>
+
+		<method name="SetLocale">
+			<arg name="locale" type="s" direction="in"/>
+		</method>
+
 		<signal name="Diagnostics">
 			<arg name="data" type="s"/>
 			<arg name="operation_id" type="s"/>
 		</signal>
+
+		<!--
+		 * Normally realmd waits until all clients have disconnected
+		 * before exiting. For long lived clients, they can call
+		 * Release() allow realmd to quit. This is an optimization.
+		 * The daemon will not exit immediately. It is safe to call
+		 * this multiple times.
+		-->
+		<method name="Release">
+			<!-- no arguments -->
+		</method>
 	</interface>
 
 	<!--
@@ -94,51 +104,23 @@
 		<property name="Enrolled" type="b" access="read"/>
 
 		<!--
-		 * Enroll the machine in this realm using an administrative
-		 * account and a password.
+		 * Credentials: (ssv)
+		 *  type: 'ccache', 'password', 'automatic'
+		 *  owner: 'administrator', 'user', 'computer', 'secret'
+		 *  contents: ay, ss, b
 		-->
-		<method name="EnrollWithPassword">
-			<arg name="principal" type="s" direction="in"/>
-			<arg name="password" type="s" direction="in"/>
+		<property name="SupportedEnrollCredentials" type="a(ss)" access="read"/>
+
+		<property name="SupportedUnenrollCredentials" type="a(ss)" access="read"/>
+
+		<method name="Enroll">
+			<arg name="credentials" type="(ssv)" direction="in"/>
 			<arg name="options" type="a{sv}" direction="in"/>
-			<arg name="operation_id" type="s" direction="in"/>
 		</method>
 
-		<!--
-		 * Enroll the machine in this realm using kerberos cached
-		 * administrative credentials.
-		-->
-		<method name="EnrollWithCredentialCache">
-			<!-- The contents of a kerberos cache file containing administrative credentials -->
-			<arg name="kerberos_cache" type="ay" direction="in">
-				<annotation name="org.gtk.GDBus.C.ForceGVariant" value="yup"/>
-			</arg>
+		<method name="Unenroll">
+			<arg name="credentials" type="(ssv)" direction="in"/>
 			<arg name="options" type="a{sv}" direction="in"/>
-			<arg name="operation_id" type="s" direction="in"/>
-		</method>
-
-		<!--
-		 * Unenroll the machine from this realm using an administrative
-		 * account and a password.
-		-->
-		<method name="UnenrollWithPassword">
-			<arg name="principal" type="s" direction="in"/>
-			<arg name="password" type="s" direction="in"/>
-			<arg name="options" type="a{sv}" direction="in"/>
-			<arg name="operation_id" type="s" direction="in"/>
-		</method>
-
-		<!--
-		 * Unenroll the machine from this realm using a kerberos cached
-		 * administrative credentials.
-		-->
-		<method name="UnenrollWithCredentialCache">
-			<!-- The contents of a kerberos cache file containing administrative credentials -->
-			<arg name="kerberos_cache" type="ay" direction="in">
-				<annotation name="org.gtk.GDBus.C.ForceGVariant" value="yup"/>
-			</arg>
-			<arg name="options" type="a{sv}" direction="in"/>
-			<arg name="operation_id" type="s" direction="in"/>
 		</method>
 
 		<!--
@@ -150,18 +132,25 @@
 		<property name="LoginFormat" type="s" access="read"/>
 
 		<!--
+		 * The policy for logins using this realm.
+		 * 'allow-any-login' 'allow-permitted-logins' 'deny-any-login'
+		-->
+		<property name="LoginPolicy" type="s" access="read"/>
+
+		<!--
 		 * The list of permitted logins in the LoginFormat style
 		-->
 		<property name="PermittedLogins" type="as" access="read"/>
 
 		<!--
 		 * Change the PermittedLogins property. Should take effect
-		 * immediately. Some providers may not enforce this :S
+		 * immediately.
 		-->
-		<method name="ChangePermittedLogins">
-			<arg name="add" type="as" direction="in"/>
-			<arg name="remove" type="as" direction="in"/>
-			<arg name="operation_id" type="s" direction="in"/>
+		<method name="ChangeLoginPolicy">
+			<arg name="login_policy" type="s" direction="in"/>
+			<arg name="permitted_add" type="as" direction="in"/>
+			<arg name="permitted_remove" type="as" direction="in"/>
+			<arg name="options" type="a{sv}" direction="in"/>
 		</method>
 
 	</interface>
