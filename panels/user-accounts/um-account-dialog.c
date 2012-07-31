@@ -113,8 +113,11 @@ show_error_dialog (UmAccountDialog *self,
                                          GTK_BUTTONS_CLOSE,
                                          "%s", message);
 
-        gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-                                                  "%s", error->message);
+        if (error != NULL) {
+                g_dbus_error_strip_remote_error (error);
+                gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                                          "%s", error->message);
+        }
 
         g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
         gtk_window_present (GTK_WINDOW (dialog));
