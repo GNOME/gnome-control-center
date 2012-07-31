@@ -178,6 +178,8 @@ um_realm_manager_load (UmRealmManager *self,
 
         if (load->outstanding == 0)
                 g_simple_async_result_complete_in_idle (async);
+
+        g_object_unref (async);
 }
 
 static GList *
