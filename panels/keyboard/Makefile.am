@@ -10,6 +10,8 @@ libkeyboard_la_SOURCES =   \
 	cc-keyboard-panel.h		\
 	cc-keyboard-item.c		\
 	cc-keyboard-item.h		\
+	cc-keyboard-option.c		\
+	cc-keyboard-option.h		\
 	wm-common.c			\
 	wm-common.h			\
 	keyboard-general.c		\

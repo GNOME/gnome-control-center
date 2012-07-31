@@ -22,8 +22,10 @@
 #include <config.h>
 
 #include <glib/gi18n.h>
+
 #include "keyboard-shortcuts.h"
 #include "cc-keyboard-item.h"
+#include "cc-keyboard-option.h"
 #include "wm-common.h"
 
 #define BINDINGS_SCHEMA "org.gnome.settings-daemon.plugins.media-keys"
@@ -53,10 +55,17 @@ typedef struct
   char *name; /* GSettings schema path, or GSettings key name depending on type */
 } KeyListEntry;
 
+typedef enum
+{
+  SHORTCUT_TYPE_KEY_ENTRY,
+  SHORTCUT_TYPE_XKB_OPTION,
+} ShortcutType;
+
 enum
 {
   DETAIL_DESCRIPTION_COLUMN,
   DETAIL_KEYENTRY_COLUMN,
+  DETAIL_TYPE_COLUMN,
   DETAIL_N_COLUMNS
 };
 
@@ -668,34 +677,53 @@ accel_set_func (GtkTreeViewColumn *tree_column,
                 GtkTreeIter       *iter,
                 gpointer           data)
 {
-  CcKeyboardItem *item;
+  gpointer entry;
+  ShortcutType type;
 
   gtk_tree_model_get (model, iter,
-                      DETAIL_KEYENTRY_COLUMN, &item,
+                      DETAIL_KEYENTRY_COLUMN, &entry,
+                      DETAIL_TYPE_COLUMN, &type,
                       -1);
 
-  if (item == NULL)
-    g_object_set (cell,
-                  "visible", FALSE,
-                  NULL);
-  else if (! item->editable)
-    g_object_set (cell,
-                  "visible", TRUE,
-                  "editable", FALSE,
-                  "accel-key", item->keyval,
-                  "accel-mods", item->mask,
-                  "keycode", item->keycode,
-                  "style", PANGO_STYLE_ITALIC,
-                  NULL);
-  else
-    g_object_set (cell,
-                  "visible", TRUE,
-                  "editable", TRUE,
-                  "accel-key", item->keyval,
-                  "accel-mods", item->mask,
-                  "keycode", item->keycode,
-                  "style", PANGO_STYLE_NORMAL,
-                  NULL);
+  gtk_cell_renderer_set_visible (cell, FALSE);
+
+  if (type == SHORTCUT_TYPE_XKB_OPTION &&
+      GTK_IS_CELL_RENDERER_COMBO (cell))
+    {
+      CcKeyboardOption *option = entry;
+
+      gtk_cell_renderer_set_visible (cell, TRUE);
+      g_object_set (cell,
+                    "model", cc_keyboard_option_get_store (option),
+                    "text", cc_keyboard_option_get_current_value_description (option),
+                    NULL);
+    }
+  else if (type == SHORTCUT_TYPE_KEY_ENTRY &&
+           GTK_IS_CELL_RENDERER_TEXT (cell) &&
+           !GTK_IS_CELL_RENDERER_COMBO (cell) &&
+           entry != NULL)
+    {
+      CcKeyboardItem *item = entry;
+
+      gtk_cell_renderer_set_visible (cell, TRUE);
+
+      if (item->editable)
+        g_object_set (cell,
+                      "editable", TRUE,
+                      "accel-key", item->keyval,
+                      "accel-mods", item->mask,
+                      "keycode", item->keycode,
+                      "style", PANGO_STYLE_NORMAL,
+                      NULL);
+      else
+        g_object_set (cell,
+                      "editable", FALSE,
+                      "accel-key", item->keyval,
+                      "accel-mods", item->mask,
+                      "keycode", item->keycode,
+                      "style", PANGO_STYLE_ITALIC,
+                      NULL);
+    }
 }
 
 static void
@@ -705,21 +733,34 @@ description_set_func (GtkTreeViewColumn *tree_column,
                       GtkTreeIter       *iter,
                       gpointer           data)
 {
+  gchar *description;
   CcKeyboardItem *item;
+  ShortcutType type;
 
   gtk_tree_model_get (model, iter,
+                      DETAIL_DESCRIPTION_COLUMN, &description,
                       DETAIL_KEYENTRY_COLUMN, &item,
+                      DETAIL_TYPE_COLUMN, &type,
                       -1);
 
-  if (item != NULL)
-    g_object_set (cell,
-                  "editable", FALSE,
-                  "text", item->description != NULL ?
-                          item->description : _("<Unknown Action>"),
-                  NULL);
+  if (type == SHORTCUT_TYPE_XKB_OPTION)
+    {
+      g_object_set (cell, "text", description, NULL);
+    }
   else
-    g_object_set (cell,
-                  "editable", FALSE, NULL);
+    {
+      if (item != NULL)
+        g_object_set (cell,
+                      "editable", FALSE,
+                      "text", item->description != NULL ?
+                      item->description : _("<Unknown Action>"),
+                      NULL);
+      else
+        g_object_set (cell,
+                      "editable", FALSE, NULL);
+    }
+
+  g_free (description);
 }
 
 static void
@@ -730,16 +771,40 @@ shortcut_selection_changed (GtkTreeSelection *selection, gpointer data)
   GtkTreeIter iter;
   CcKeyboardItem *item;
   gboolean can_remove;
+  ShortcutType type;
 
   can_remove = FALSE;
   if (gtk_tree_selection_get_selected (selection, &model, &iter))
     {
-      gtk_tree_model_get (model, &iter, DETAIL_KEYENTRY_COLUMN, &item, -1);
-      if (item && item->command != NULL && item->editable)
+      gtk_tree_model_get (model, &iter,
+                          DETAIL_KEYENTRY_COLUMN, &item,
+                          DETAIL_TYPE_COLUMN, &type,
+                          -1);
+      if (type == SHORTCUT_TYPE_KEY_ENTRY &&
+          item && item->command != NULL && item->editable)
         can_remove = TRUE;
     }
 
   gtk_widget_set_sensitive (button, can_remove);
+}
+
+static void
+fill_xkb_options_shortcuts (GtkTreeModel *model)
+{
+  GList *l;
+  GtkTreeIter iter;
+
+  for (l = cc_keyboard_option_get_all (); l; l = l->next)
+    {
+      CcKeyboardOption *option = l->data;
+
+      gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+                          DETAIL_DESCRIPTION_COLUMN, cc_keyboard_option_get_description (option),
+                          DETAIL_KEYENTRY_COLUMN, option,
+                          DETAIL_TYPE_COLUMN, SHORTCUT_TYPE_XKB_OPTION,
+                          -1);
+    }
 }
 
 static void
@@ -769,7 +834,6 @@ section_selection_changed (GtkTreeSelection *selection, gpointer data)
           g_free (description);
           return;
         }
-      g_free (description);
 
       gtk_widget_set_sensitive (WID (builder, "remove-toolbutton"), FALSE);
 
@@ -787,8 +851,14 @@ section_selection_changed (GtkTreeSelection *selection, gpointer data)
           gtk_list_store_set (GTK_LIST_STORE (shortcut_model), &new_row,
                               DETAIL_DESCRIPTION_COLUMN, item->description,
                               DETAIL_KEYENTRY_COLUMN, item,
+                              DETAIL_TYPE_COLUMN, SHORTCUT_TYPE_KEY_ENTRY,
                               -1);
         }
+
+      if (g_str_equal (description, _("Typing")))
+        fill_xkb_options_shortcuts (shortcut_model);
+
+      g_free (description);
     }
 }
 
@@ -907,6 +977,7 @@ start_editing_cb (GtkTreeView    *tree_view,
 {
   GtkTreePath *path;
   GtkTreeViewColumn *column;
+  GtkCellRenderer *cell = user_data;
 
   if (event->window != gtk_tree_view_get_bin_window (tree_view))
     return FALSE;
@@ -920,12 +991,20 @@ start_editing_cb (GtkTreeView    *tree_view,
       GtkTreeModel *model;
       GtkTreeIter iter;
       CcKeyboardItem *item;
+      ShortcutType type;
 
       model = gtk_tree_view_get_model (tree_view);
       gtk_tree_model_get_iter (model, &iter, path);
       gtk_tree_model_get (model, &iter,
                           DETAIL_KEYENTRY_COLUMN, &item,
+                          DETAIL_TYPE_COLUMN, &type,
                          -1);
+
+      if (type == SHORTCUT_TYPE_XKB_OPTION)
+        {
+          gtk_tree_path_free (path);
+          return FALSE;
+        }
 
       /* if only the accel can be edited on the selected row
        * always select the accel column */
@@ -933,19 +1012,20 @@ start_editing_cb (GtkTreeView    *tree_view,
           column == gtk_tree_view_get_column (tree_view, 0))
         {
           gtk_widget_grab_focus (GTK_WIDGET (tree_view));
-          gtk_tree_view_set_cursor (tree_view, path,
-                                    gtk_tree_view_get_column (tree_view, 0),
+          gtk_tree_view_set_cursor (tree_view,
+                                    path,
+                                    column,
                                     FALSE);
           update_custom_shortcut (model, &iter);
         }
       else
         {
           gtk_widget_grab_focus (GTK_WIDGET (tree_view));
-          gtk_tree_view_set_cursor (tree_view,
-                                    path,
-                                    item->desc_editable ? column :
-                                    gtk_tree_view_get_column (tree_view, 1),
-                                    TRUE);
+          gtk_tree_view_set_cursor_on_cell (tree_view,
+                                            path,
+                                            gtk_tree_view_get_column (tree_view, 1),
+                                            cell,
+                                            TRUE);
         }
       g_signal_stop_emission_by_name (tree_view, "button_press_event");
       gtk_tree_path_free (path);
@@ -954,20 +1034,26 @@ start_editing_cb (GtkTreeView    *tree_view,
 }
 
 static void
-start_editing_kb_cb (GtkTreeView *treeview,
-                          GtkTreePath *path,
-                          GtkTreeViewColumn *column,
-                          gpointer user_data)
+start_editing_kb_cb (GtkTreeView       *treeview,
+                     GtkTreePath       *path,
+                     GtkTreeViewColumn *column,
+                     gpointer           user_data)
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
   CcKeyboardItem *item;
+  ShortcutType type;
+  GtkCellRenderer *cell = user_data;
 
   model = gtk_tree_view_get_model (treeview);
   gtk_tree_model_get_iter (model, &iter, path);
   gtk_tree_model_get (model, &iter,
                       DETAIL_KEYENTRY_COLUMN, &item,
+                      DETAIL_TYPE_COLUMN, &type,
                       -1);
+
+  if (type == SHORTCUT_TYPE_XKB_OPTION)
+    return;
 
   /* if only the accel can be edited on the selected row
    * always select the accel column */
@@ -975,18 +1061,20 @@ start_editing_kb_cb (GtkTreeView *treeview,
       column == gtk_tree_view_get_column (treeview, 0))
     {
       gtk_widget_grab_focus (GTK_WIDGET (treeview));
-      gtk_tree_view_set_cursor (treeview, path,
-                                gtk_tree_view_get_column (treeview, 0),
+      gtk_tree_view_set_cursor (treeview,
+                                path,
+                                column,
                                 FALSE);
       update_custom_shortcut (model, &iter);
     }
   else
     {
        gtk_widget_grab_focus (GTK_WIDGET (treeview));
-       gtk_tree_view_set_cursor (treeview,
-                                 path,
-                                 gtk_tree_view_get_column (treeview, 1),
-                                 TRUE);
+       gtk_tree_view_set_cursor_on_cell (treeview,
+                                         path,
+                                         gtk_tree_view_get_column (treeview, 1),
+                                         cell,
+                                         TRUE);
     }
 }
 
@@ -1466,6 +1554,74 @@ sections_separator_func (GtkTreeModel *model,
 }
 
 static void
+xkb_options_combo_changed (GtkCellRendererCombo *combo,
+                           gchar                *model_path,
+                           GtkTreeIter          *model_iter,
+                           gpointer              data)
+{
+  GtkTreeView *shortcut_treeview;
+  GtkTreeModel *shortcut_model;
+  GtkTreeIter shortcut_iter;
+  GtkTreeSelection *selection;
+  CcKeyboardOption *option;
+  ShortcutType type;
+  GtkBuilder *builder = data;
+
+  shortcut_treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder, "shortcut_treeview"));
+  selection = gtk_tree_view_get_selection (shortcut_treeview);
+  if (!gtk_tree_selection_get_selected (selection, &shortcut_model, &shortcut_iter))
+    return;
+
+  gtk_tree_model_get (shortcut_model, &shortcut_iter,
+                      DETAIL_KEYENTRY_COLUMN, &option,
+                      DETAIL_TYPE_COLUMN, &type,
+                      -1);
+
+  if (type != SHORTCUT_TYPE_XKB_OPTION)
+    return;
+
+  cc_keyboard_option_set_selection (option, model_iter);
+}
+
+static gboolean
+poke_xkb_option_row (GtkTreeModel *model,
+                     GtkTreePath  *path,
+                     GtkTreeIter  *iter,
+                     gpointer      option)
+{
+  gpointer item;
+
+  gtk_tree_model_get (model, iter,
+                      DETAIL_KEYENTRY_COLUMN, &item,
+                      -1);
+
+  if (item != option)
+    return FALSE;
+
+  gtk_tree_model_row_changed (model, path, iter);
+  return TRUE;
+}
+
+static void
+xkb_option_changed (CcKeyboardOption *option,
+                    gpointer          data)
+{
+  GtkTreeModel *model = data;
+
+  gtk_tree_model_foreach (model, poke_xkb_option_row, option);
+}
+
+static void
+setup_keyboard_options (GtkListStore *store)
+{
+  GList *l;
+
+  for (l = cc_keyboard_option_get_all (); l; l = l->next)
+    g_signal_connect (l->data, "changed",
+                      G_CALLBACK (xkb_option_changed), store);
+}
+
+static void
 setup_dialog (CcPanel *panel, GtkBuilder *builder)
 {
   GtkCellRenderer *renderer;
@@ -1529,11 +1685,6 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
 
   binding_settings = g_settings_new (BINDINGS_SCHEMA);
 
-  g_signal_connect (treeview, "button_press_event",
-                    G_CALLBACK (start_editing_cb), builder);
-  g_signal_connect (treeview, "row-activated",
-                    G_CALLBACK (start_editing_kb_cb), NULL);
-
   renderer = gtk_cell_renderer_text_new ();
   g_object_set (G_OBJECT (renderer), "ellipsize", PANGO_ELLIPSIZE_END, NULL);
 
@@ -1548,10 +1699,14 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
                                                "accel-mode", GTK_CELL_RENDERER_ACCEL_MODE_OTHER,
                                                NULL);
 
+  g_signal_connect (treeview, "button_press_event",
+                    G_CALLBACK (start_editing_cb), renderer);
+  g_signal_connect (treeview, "row-activated",
+                    G_CALLBACK (start_editing_kb_cb), renderer);
+
   g_signal_connect (renderer, "accel_edited",
                     G_CALLBACK (accel_edited_callback),
                     treeview);
-
   g_signal_connect (renderer, "accel_cleared",
                     G_CALLBACK (accel_cleared_callback),
                     treeview);
@@ -1561,11 +1716,27 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   gtk_tree_view_column_set_resizable (column, FALSE);
   gtk_tree_view_column_set_expand (column, FALSE);
 
+  renderer = (GtkCellRenderer *) g_object_new (GTK_TYPE_CELL_RENDERER_COMBO,
+                                               "has-entry", FALSE,
+                                               "text-column", XKB_OPTION_DESCRIPTION_COLUMN,
+                                               "editable", TRUE,
+                                               "ellipsize", PANGO_ELLIPSIZE_END,
+                                               "width-chars", 25,
+                                               NULL);
+  g_signal_connect (renderer, "changed",
+                    G_CALLBACK (xkb_options_combo_changed), builder);
+
+  gtk_tree_view_column_pack_end (column, renderer, FALSE);
+
+  gtk_tree_view_column_set_cell_data_func (column, renderer, accel_set_func, NULL, NULL);
+
   gtk_tree_view_append_column (treeview, column);
 
-  model = gtk_list_store_new (DETAIL_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+  model = gtk_list_store_new (DETAIL_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER, G_TYPE_INT);
   gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (model));
   g_object_unref (model);
+
+  setup_keyboard_options (model);
 
   widget = GTK_WIDGET (gtk_builder_get_object (builder, "actions_swindow"));
   context = gtk_widget_get_style_context (widget);
@@ -1639,4 +1810,6 @@ keyboard_shortcuts_dispose (CcPanel *panel)
     }
 
   g_clear_object (&binding_settings);
+
+  cc_keyboard_option_clear_all ();
 }
