@@ -48,15 +48,17 @@
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="vbox1">
+          <object class="GtkBox" id="vbox1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="border_width">5</property>
+            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkVBox" id="vbox50">
+              <object class="GtkBox" id="vbox50">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="spacing">10</property>
+                <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkLabel" id="label61">
                     <property name="visible">True</property>
@@ -79,10 +81,11 @@
                     <property name="can_focus">False</property>
                     <property name="left_padding">12</property>
                     <child>
-                      <object class="GtkVBox" id="vbox51">
+                      <object class="GtkBox" id="vbox51">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="spacing">6</property>
+                        <property name="orientation">vertical</property>
                         <child>
                           <object class="GtkTable" id="table5">
                             <property name="visible">True</property>
@@ -185,15 +188,17 @@
   <object class="GtkWindow" id="window1">
     <property name="can_focus">False</property>
     <child>
-      <object class="GtkVBox" id="info_vbox">
+      <object class="GtkBox" id="info_vbox">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="border_width">10</property>
+        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkHBox" id="hbox1">
+          <object class="GtkBox" id="hbox1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="spacing">10</property>
+            <property name="orientation">horizontal</property>
             <child>
               <object class="GtkScrolledWindow" id="scrolledwindow1">
                 <property name="visible">True</property>
@@ -218,10 +223,11 @@
               </packing>
             </child>
             <child>
-              <object class="GtkVBox" id="detail_vbox">
+              <object class="GtkBox" id="detail_vbox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="spacing">20</property>
+                <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkNotebook" id="notebook">
                     <property name="visible">True</property>
@@ -234,10 +240,11 @@
                         <property name="can_focus">False</property>
                         <property name="top_padding">20</property>
                         <child>
-                          <object class="GtkVBox" id="vbox2">
+                          <object class="GtkBox" id="vbox2">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="spacing">18</property>
+                            <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkImage" id="system_image">
                                 <property name="visible">True</property>
@@ -542,10 +549,11 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkHButtonBox" id="hbuttonbox1">
+                              <object class="GtkButtonBox" id="hbuttonbox1">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="layout_style">end</property>
+                                <property name="orientation">horizontal</property>
                                 <child>
                                   <placeholder/>
                                 </child>
@@ -586,13 +594,14 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkVBox" id="default_apps_container">
+                      <object class="GtkBox" id="default_apps_container">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">center</property>
                         <property name="valign">start</property>
                         <property name="border_width">20</property>
                         <property name="spacing">10</property>
+                        <property name="orientation">vertical</property>
                         <child>
                           <object class="GtkTable" id="default_apps_table">
                             <property name="visible">True</property>
@@ -819,31 +828,35 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkHBox" id="media_preferences_vbox">
+                      <object class="GtkBox" id="media_preferences_vbox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="orientation">horizontal</property>
                         <child>
                           <object class="GtkAlignment" id="alignment1">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkVBox" id="media_preferences_vbox3">
+                              <object class="GtkBox" id="media_preferences_vbox3">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="border_width">10</property>
                                 <property name="spacing">10</property>
+                                <property name="orientation">vertical</property>
                                 <child>
-                                  <object class="GtkVBox" id="media_handling_vbox">
+                                  <object class="GtkBox" id="media_handling_vbox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <property name="spacing">10</property>
                                     <property name="valign">start</property>
                                     <property name="vexpand">False</property>
+                                    <property name="orientation">vertical</property>
                                     <child>
-                                      <object class="GtkVBox" id="vbox44">
+                                      <object class="GtkBox" id="vbox44">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="spacing">10</property>
+                                        <property name="orientation">vertical</property>
                                         <child>
                                           <object class="GtkLabel" id="label42">
                                             <property name="visible">True</property>
@@ -866,10 +879,11 @@
                                             <property name="can_focus">False</property>
                                             <property name="left_padding">12</property>
                                             <child>
-                                              <object class="GtkVBox" id="vbox52">
+                                              <object class="GtkBox" id="vbox52">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="spacing">6</property>
+                                                <property name="orientation">vertical</property>
                                                 <child>
                                                   <object class="GtkTable" id="table4">
                                                     <property name="visible">True</property>
@@ -1051,9 +1065,10 @@
                                                   </packing>
                                                 </child>
                                                 <child>
-                                                  <object class="GtkHBox" id="hbox2">
+                                                  <object class="GtkBox" id="hbox2">
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">False</property>
+                                                    <property name="orientation">horizontal</property>
                                                     <child>
                                                       <object class="GtkButton" id="extra_options_button">
                                                         <property name="label" translatable="yes">_Other Media...</property>
@@ -1239,11 +1254,12 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkHBox" id="graphics_fallback_switch_box">
+                              <object class="GtkBox" id="graphics_fallback_switch_box">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="halign">start</property>
                                 <property name="valign">center</property>
+                                <property name="orientation">horizontal</property>
                                 <child>
                                   <placeholder/>
                                 </child>
