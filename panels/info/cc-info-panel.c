@@ -1237,6 +1237,7 @@ other_type_combo_box_changed (GtkComboBox *combo_box,
   GtkTreeModel *model;
   char *x_content_type;
   GtkWidget *action_container;
+  GtkWidget *action_label;
 
   x_content_type = NULL;
 
@@ -1263,6 +1264,11 @@ other_type_combo_box_changed (GtkComboBox *combo_box,
   gtk_box_pack_start (GTK_BOX (action_container), self->priv->other_application_combo, TRUE, TRUE, 0);
   prepare_combo_box (self, self->priv->other_application_combo, NULL);
   gtk_widget_show (self->priv->other_application_combo);
+
+  action_label = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
+                                                     "media_other_action_label"));
+
+  gtk_label_set_mnemonic_widget (GTK_LABEL (action_label), self->priv->other_application_combo);
 
   g_free (x_content_type);
 }
