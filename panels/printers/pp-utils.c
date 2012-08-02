@@ -3814,20 +3814,37 @@ static const struct {
   const char *normalized_name;
   const char *display_name;
 } manufacturers_names[] = {
+  { "alps", "Alps" },
+  { "anitech", "Anitech" },
+  { "apple", "Apple" },
   { "apollo", "Apollo" },
   { "brother", "Brother" },
   { "canon", "Canon" },
+  { "citizen", "Citizen" },
+  { "citoh", "Citoh" },
+  { "compaq", "Compaq" },
+  { "dec", "DEC" },
   { "dell", "Dell" },
+  { "dnp", "DNP" },
+  { "dymo", "Dymo" },
   { "epson", "Epson" },
-  { "gelsprinter", "GelSprinter" },
+  { "fujifilm", "Fujifilm" },
+  { "fujitsu", "Fujitsu" },
+  { "gelsprinter", "Ricoh" },
   { "generic", "Generic" },
+  { "genicom", "Genicom" },
   { "gestetner", "Gestetner" },
   { "hewlett packard", "Hewlett-Packard" },
+  { "heidelberg", "Heidelberg" },
+  { "hitachi", "Hitachi" },
   { "hp", "Hewlett-Packard" },
   { "ibm", "IBM" },
+  { "imagen", "Imagen" },
   { "imagistics", "Imagistics" },
   { "infoprint", "InfoPrint" },
   { "infotec", "Infotec" },
+  { "intellitech", "Intellitech" },
+  { "kodak", "Kodak" },
   { "konica minolta", "Minolta" },
   { "kyocera", "Kyocera" },
   { "kyocera mita", "Kyocera" },
@@ -3836,20 +3853,37 @@ static const struct {
   { "lexmark", "Lexmark" },
   { "minolta", "Minolta" },
   { "minolta qms", "Minolta" },
+  { "mitsubishi", "Mitsubishi" },
   { "nec", "NEC" },
   { "nrg", "NRG" },
   { "oce", "Oce" },
   { "oki", "Oki" },
   { "oki data corp", "Oki" },
+  { "olivetti", "Olivetti" },
+  { "olympus", "Olympus" },
   { "panasonic", "Panasonic" },
+  { "pcpi", "PCPI" },
+  { "pentax", "Pentax" },
+  { "qms", "QMS" },
+  { "raven", "Raven" },
+  { "raw", "Raw" },
   { "ricoh", "Ricoh" },
   { "samsung", "Samsung" },
   { "savin", "Savin" },
+  { "seiko", "Seiko" },
   { "sharp", "Sharp" },
+  { "shinko", "Shinko" },
+  { "sipix", "SiPix" },
   { "sony", "Sony" },
+  { "star", "Star" },
+  { "tally", "Tally" },
   { "tektronix", "Tektronix" },
+  { "texas instruments", "Texas Instruments" },
+  { "toshiba", "Toshiba" },
   { "toshiba tec corp.", "Toshiba" },
+  { "xante", "Xante" },
   { "xerox", "Xerox" },
+  { "zebra", "Zebra" },
 };
 
 static gpointer
@@ -3867,6 +3901,7 @@ get_all_ppds_func (gpointer user_data)
   gchar           *ppd_device_id;
   gchar           *ppd_name;
   gchar           *ppd_product;
+  gchar           *ppd_make;
   gchar           *mfg;
   gchar           *mfg_normalized;
   gchar           *mdl;
@@ -3883,7 +3918,7 @@ get_all_ppds_func (gpointer user_data)
        * This hash contains names of manufacturers as keys and
        * values are GLists of PPD names.
        */
-      ppds_hash = g_hash_table_new (g_str_hash, g_str_equal);
+      ppds_hash = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
       /*
        * This hash contains all possible names of manufacturers as keys
@@ -3912,6 +3947,10 @@ get_all_ppds_func (gpointer user_data)
           ppd_make_and_model = NULL;
           ppd_name = NULL;
           ppd_product = NULL;
+          ppd_make = NULL;
+          mfg = NULL;
+          mfg_normalized = NULL;
+          mdl = NULL;
 
           while (attr != NULL && attr->group_tag == IPP_TAG_PRINTER)
             {
@@ -3927,75 +3966,88 @@ get_all_ppds_func (gpointer user_data)
               else if (g_strcmp0 (attr->name, "ppd-product") == 0 &&
                        attr->value_tag == IPP_TAG_TEXT)
                 ppd_product = attr->values[0].string.text;
+              else if (g_strcmp0 (attr->name, "ppd-make") == 0 &&
+                       attr->value_tag == IPP_TAG_TEXT)
+                ppd_make = attr->values[0].string.text;
 
               attr = attr->next;
             }
 
-          if (ppd_make_and_model && ppd_name && ppd_product && ppd_device_id)
+          /* Get manufacturer's name */
+          if (ppd_device_id && ppd_device_id[0] != '\0')
             {
               mfg = get_tag_value (ppd_device_id, "mfg");
               if (!mfg)
                 mfg = get_tag_value (ppd_device_id, "manufacturer");
               mfg_normalized = normalize (mfg);
+            }
 
-              if (mfg_normalized)
+          if (!mfg &&
+              ppd_make &&
+              ppd_make[0] != '\0')
+            {
+              mfg = g_strdup (ppd_make);
+              mfg_normalized = normalize (ppd_make);
+            }
+
+          /* Get model */
+          if (ppd_make_and_model &&
+              ppd_make_and_model[0] != '\0')
+            {
+              mdl = g_strdup (ppd_make_and_model);
+            }
+
+          if (!mdl &&
+              ppd_product &&
+              ppd_product[0] != '\0')
+            {
+              mdl = g_strdup (ppd_product);
+            }
+
+          if (!mdl &&
+              ppd_device_id &&
+              ppd_device_id[0] != '\0')
+            {
+              mdl = get_tag_value (ppd_device_id, "mdl");
+              if (!mdl)
+                mdl = get_tag_value (ppd_device_id, "model");
+            }
+
+          if (ppd_name && ppd_name[0] != '\0' &&
+              mdl && mdl[0] != '\0' &&
+              mfg && mfg[0] != '\0')
+            {
+              manufacturer_display_name = g_hash_table_lookup (manufacturers_hash, mfg_normalized);
+              if (!manufacturer_display_name)
                 {
-                  manufacturer_display_name = g_hash_table_lookup (manufacturers_hash, mfg_normalized);
-                  if (!manufacturer_display_name)
-                    {
-                      g_hash_table_insert (manufacturers_hash, mfg_normalized, mfg);
-                    }
-                  else
-                    {
-                      g_free (mfg_normalized);
-                      mfg_normalized = normalize (manufacturer_display_name);
-                    }
+                  g_hash_table_insert (manufacturers_hash, g_strdup (mfg_normalized), g_strdup (mfg));
+                }
+              else
+                {
+                  g_free (mfg_normalized);
+                  mfg_normalized = normalize (manufacturer_display_name);
+                }
 
-                  item = g_new0 (PPDName, 1);
-                  item->ppd_name = g_strdup (ppd_name);
+              item = g_new0 (PPDName, 1);
+              item->ppd_name = g_strdup (ppd_name);
+              item->ppd_display_name = g_strdup (mdl);
+              item->ppd_match_level = -1;
 
-                  mdl = get_tag_value (ppd_device_id, "mdl");
-                  if (!mdl)
-                    mdl = get_tag_value (ppd_device_id, "model");
-
-                  if (!item->ppd_display_name &&
-                      ppd_make_and_model &&
-                      ppd_make_and_model[0] != '\0')
-                    {
-                      item->ppd_display_name = g_strdup (ppd_make_and_model);
-                    }
-
-                  if (!item->ppd_display_name &&
-                      ppd_product &&
-                      ppd_product[0] != '\0')
-                    {
-                      item->ppd_display_name = g_strdup (ppd_product);
-                    }
-
-                  if (!item->ppd_display_name &&
-                      mdl && mdl[0] != '\0')
-                    {
-                      item->ppd_display_name = mdl;
-                    }
-                  else
-                    {
-                      g_free (mdl);
-                    }
-
-                  item->ppd_match_level = -1;
-
-                  list = g_hash_table_lookup (ppds_hash, mfg_normalized);
-                  if (list)
-                    {
-                      list = g_list_append (list, item);
-                    }
-                  else
-                    {
-                      list = g_list_append (list, item);
-                      g_hash_table_insert (ppds_hash, mfg_normalized, list);
-                    }
+              list = g_hash_table_lookup (ppds_hash, mfg_normalized);
+              if (list)
+                {
+                  list = g_list_append (list, item);
+                }
+              else
+                {
+                  list = g_list_append (list, item);
+                  g_hash_table_insert (ppds_hash, g_strdup (mfg_normalized), list);
                 }
             }
+
+          g_free (mdl);
+          g_free (mfg);
+          g_free (mfg_normalized);
 
           if (attr == NULL)
             break;

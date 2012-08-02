@@ -2127,11 +2127,17 @@ select_ppd_in_dialog (GtkMenuItem *menuitem,
               if (!manufacturer)
                 manufacturer = get_tag_value (device_id, "manufacturer");
             }
-          else
+
+          if (manufacturer == NULL)
             {
               manufacturer =
                 get_ppd_attribute (priv->ppd_file_names[priv->current_dest],
                                    "Manufacturer");
+            }
+
+          if (manufacturer == NULL)
+            {
+              manufacturer = g_strdup ("Raw");
             }
         }
 
