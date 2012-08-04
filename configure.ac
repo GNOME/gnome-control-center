@@ -35,6 +35,8 @@ x_libs="$X_PRE_LIBS $X_LIBS -lX11 $X_EXTRA_LIBS"
 
 AC_PATH_PROG([GLIB_MKENUMS],[glib-mkenums])
 
+AC_PATH_PROG([XSLTPROC], [xsltproc])
+
 dnl Region panel
 savecppflags=$CPPFLAGS
 CPPFLAGS="$CPPFLAGS $X_CFLAGS"
@@ -479,6 +481,7 @@ panels/wacom/gnome-wacom-panel.desktop.in
 po/Makefile.in
 shell/Makefile
 shell/gnome-control-center.desktop.in
+man/Makefile
 ])
 
 AC_MSG_NOTICE([gnome-control-center was configured with the following options:])
