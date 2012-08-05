@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-07-26 07:49+0000\n"
-"PO-Revision-Date: 2012-07-26 23:10+0200\n"
+"POT-Creation-Date: 2012-07-30 09:05+0000\n"
+"PO-Revision-Date: 2012-08-05 12:13+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -1699,55 +1699,80 @@ msgstr "Додајте нову везу"
 
 #. Translators: network device speed
 #: ../panels/network/net-device-mobile.c:261
-#: ../panels/network/net-device-wifi.c:562
+#: ../panels/network/net-device-wifi.c:697
 #: ../panels/network/net-device-wired.c:126
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#. TRANSLATORS: this is when the access point is not listed
-#. * in the dropdown (or hidden) and the user has to select
-#. * another entry manually
-#: ../panels/network/net-device-wifi.c:197
-msgctxt "Wireless access point"
-msgid "Other..."
-msgstr "Остали..."
+#. TRANSLATORS: this is when the access point is not listed in
+#. *  the dropdown (or hidden) and the user has to select another
+#. *  entry manually
+#: ../panels/network/net-device-wifi.c:196
+msgid "Connect to a Hidden Network"
+msgstr "Повежите се на скривену мрежу"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/net-device-wifi.c:286
+#: ../panels/network/net-device-wifi.c:293
 #: ../panels/network/net-device-wifi.c:466
 msgid "WEP"
 msgstr "ВЕП"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:290
+#: ../panels/network/net-device-wifi.c:297
 #: ../panels/network/net-device-wifi.c:470
 msgid "WPA"
 msgstr "ВПА"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:294
+#: ../panels/network/net-device-wifi.c:301
 msgid "WPA2"
 msgstr "ВПА2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/net-device-wifi.c:299
+#: ../panels/network/net-device-wifi.c:306
 msgid "Enterprise"
 msgstr "Ентерпрајз"
 
 #. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/net-device-wifi.c:305
+#: ../panels/network/net-device-wifi.c:312
 #: ../panels/network/net-device-wifi.c:461
 #: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:335
 #: ../panels/wacom/cc-wacom-page.c:352
 msgid "None"
 msgstr "Ништа"
 
-#: ../panels/network/net-device-wifi.c:555
-msgid "Hotspot"
-msgstr "Врућа тачка"
+#: ../panels/network/net-device-wifi.c:738
+#| msgid "None"
+msgctxt "Signal strength"
+msgid "None"
+msgstr "Нема сигнала"
 
-#: ../panels/network/net-device-wifi.c:781
+#: ../panels/network/net-device-wifi.c:740
+#| msgctxt "Password strength"
+#| msgid "Weak"
+msgctxt "Signal strength"
+msgid "Weak"
+msgstr "Слаб сигнал"
+
+#: ../panels/network/net-device-wifi.c:742
+msgctxt "Signal strength"
+msgid "Ok"
+msgstr "Добар сигнал"
+
+#: ../panels/network/net-device-wifi.c:744
+#| msgctxt "Battery power"
+#| msgid "Good"
+msgctxt "Signal strength"
+msgid "Good"
+msgstr "Одличан сигнал"
+
+#: ../panels/network/net-device-wifi.c:746
+msgctxt "Signal strength"
+msgid "Excellent"
+msgstr "Изврстан сигнал"
+
+#: ../panels/network/net-device-wifi.c:890
 #, c-format
 msgid ""
 "Network details for %s including password and any custom configuration will "
@@ -1756,38 +1781,53 @@ msgstr ""
 "Детаљи мреже за „%s“ укључујући лозинку и сва произвољна подешавања ће бити "
 "изгубљени"
 
-#: ../panels/network/net-device-wifi.c:792
+#: ../panels/network/net-device-wifi.c:901
 msgid "Forget"
 msgstr "Заборави"
 
-#: ../panels/network/net-device-wifi.c:1287
+#: ../panels/network/net-device-wifi.c:1403
 msgid "Not connected to the internet."
 msgstr "Нисте повезани на интернет."
 
-#: ../panels/network/net-device-wifi.c:1288
+#: ../panels/network/net-device-wifi.c:1404
 msgid "Create the hotspot anyway?"
 msgstr "Да ипак направим врућу тачку?"
 
-#: ../panels/network/net-device-wifi.c:1306
+#: ../panels/network/net-device-wifi.c:1422
 #, c-format
 msgid "Disconnect from %s and create a new hotspot?"
 msgstr "Да прекинем везу са %s и да направим нову врућу тачку?"
 
-#: ../panels/network/net-device-wifi.c:1309
+#: ../panels/network/net-device-wifi.c:1425
 msgid "This is your only connection to the internet."
 msgstr "Ово је ваша једина веза са интернетом."
 
-#: ../panels/network/net-device-wifi.c:1329
+#: ../panels/network/net-device-wifi.c:1445
 msgid "Create _Hotspot"
 msgstr "Направи _врућу тачку"
 
-#: ../panels/network/net-device-wifi.c:1390
+#: ../panels/network/net-device-wifi.c:1512
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Да зауставим врућу тачку и да искључим све кориснике?"
 
-#: ../panels/network/net-device-wifi.c:1393
+#: ../panels/network/net-device-wifi.c:1515
 msgid "_Stop Hotspot"
 msgstr "_Заустави врућу тачку"
+
+#: ../panels/network/net-device-wifi.c:1580
+#, c-format
+msgid "%i day ago"
+msgid_plural "%i days ago"
+msgstr[0] "Пре %i дан"
+msgstr[1] "Пре %i дана"
+msgstr[2] "Пре %i дана"
+msgstr[3] "Пре једног дана"
+
+#: ../panels/network/net-device-wifi.c:1924
+#: ../panels/network/network-wifi.ui.h:17
+#| msgid "Out of toner"
+msgid "Out of range"
+msgstr "Изван опсега"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: ../panels/network/net-proxy.c:67
@@ -1818,31 +1858,31 @@ msgid "Provider"
 msgstr "Достављач"
 
 #: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:693 ../panels/network/panel-common.c:695
+#: ../panels/network/panel-common.c:697 ../panels/network/panel-common.c:699
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "ИП адреса"
 
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-wifi.ui.h:3
-#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:691
+#: ../panels/network/network-wifi.ui.h:4
+#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:695
 msgid "IPv6 Address"
 msgstr "ИПв6 адреса"
 
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-wifi.ui.h:4
+#: ../panels/network/network-wifi.ui.h:5
 #: ../panels/network/network-wired.ui.h:5
 msgid "Default Route"
 msgstr "Подразумевана рута"
 
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-wifi.ui.h:5
+#: ../panels/network/network-wifi.ui.h:6
 #: ../panels/network/network-wired.ui.h:6
 msgid "DNS"
 msgstr "ДНС"
 
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wifi.ui.h:10
 #: ../panels/network/network-wired.ui.h:7
 msgid "_Options..."
 msgstr "_Опције..."
@@ -1931,42 +1971,74 @@ msgid "_Configure..."
 msgstr "_Подеси..."
 
 #: ../panels/network/network-wifi.ui.h:1
+msgid "_Use as Hotspot..."
+msgstr "_Користи као врућу тачку..."
+
+#: ../panels/network/network-wifi.ui.h:2
 #: ../panels/network/network-wired.ui.h:1
 msgid "Hardware Address"
 msgstr "Хардверска адреса"
 
-#: ../panels/network/network-wifi.ui.h:2
-#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:690
+#: ../panels/network/network-wifi.ui.h:3
+#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:694
 msgid "IPv4 Address"
 msgstr "ИПв4 адреса"
 
-#: ../panels/network/network-wifi.ui.h:6
+#: ../panels/network/network-wifi.ui.h:7
 msgid "Security"
 msgstr "Безбедност"
 
-#: ../panels/network/network-wifi.ui.h:7
-msgid "_Network Name"
-msgstr "_Назив мреже"
-
 #: ../panels/network/network-wifi.ui.h:8
+#| msgid "Length:"
+msgid "Strength"
+msgstr "Јачина"
+
+#: ../panels/network/network-wifi.ui.h:9
+#| msgid "Cursor blink speed"
+msgid "Link speed"
+msgstr "Брзина везе"
+
+#: ../panels/network/network-wifi.ui.h:11
+#| msgid "Wireless mouse"
+msgid "Wireless Hotspot"
+msgstr "Тачка бежичног приступа"
+
+#: ../panels/network/network-wifi.ui.h:12
+msgid "Switch off to connect to a wireless network"
+msgstr "Искључите да се повежете на бежичну мрежу"
+
+#: ../panels/network/network-wifi.ui.h:13
 msgid "Network Name"
 msgstr "Назив мреже"
 
-#: ../panels/network/network-wifi.ui.h:9
+#: ../panels/network/network-wifi.ui.h:14
+#| msgid "Connected"
+msgid "Connected Devices"
+msgstr "Прикључени уређаји"
+
+#: ../panels/network/network-wifi.ui.h:15
+#| msgid "Security Key"
+msgid "Security type"
+msgstr "Врста безбедности"
+
+#: ../panels/network/network-wifi.ui.h:16
+#| msgid "Security Key"
+msgid "Security key"
+msgstr "Кључ безбедности"
+
+#: ../panels/network/network-wifi.ui.h:18
 msgid "Security Key"
 msgstr "Кључ безбедности"
 
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:19
+#| msgctxt "printer state"
+#| msgid "Paused"
+msgid "Last used"
+msgstr "Коришћена"
+
+#: ../panels/network/network-wifi.ui.h:20
 msgid "_Forget Network"
 msgstr "_Заборави мрежу"
-
-#: ../panels/network/network-wifi.ui.h:11
-msgid "_Use as Hotspot..."
-msgstr "_Користи као врућу тачку..."
-
-#: ../panels/network/network-wifi.ui.h:12
-msgid "_Stop Hotspot..."
-msgstr "_Заустави врућу тачку..."
 
 #: ../panels/network/network-wired.ui.h:4
 msgid "Subnet Mask"
@@ -1975,17 +2047,17 @@ msgstr "Маска подмреже"
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:86
 msgid "Wired"
-msgstr "Жичани"
+msgstr "Жичана"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:90
 msgid "Wireless"
-msgstr "Бежични"
+msgstr "Бежична"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:97
 msgid "Mobile broadband"
-msgstr "Мобилни широкопојасни"
+msgstr "Мобилна широкопојасна"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:106
@@ -2040,7 +2112,7 @@ msgstr "Повезујем се"
 #. TRANSLATORS: VPN status
 #: ../panels/network/panel-common.c:223 ../panels/network/panel-common.c:265
 msgid "Authentication required"
-msgstr "Потребна је пријава"
+msgstr "Потребно је потврђивање идентитета"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
@@ -2378,7 +2450,7 @@ msgid_plural "%i hours"
 msgstr[0] "%i сат"
 msgstr[1] "%i сата"
 msgstr[2] "%i сати"
-msgstr[3] ""
+msgstr[3] "Један сат"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
@@ -2402,7 +2474,7 @@ msgid_plural "minutes"
 msgstr[0] "минут"
 msgstr[1] "минута"
 msgstr[2] "минута"
-msgstr[3] ""
+msgstr[3] "минут"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #: ../panels/power/cc-power-panel.c:241
@@ -2817,8 +2889,8 @@ msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
 msgstr ""
-"Датотеке описа Пост скрипт штампача (*.ppd,*.PPD, *.ppd.gz, *PPD.gz, "
-"*.PPD.GZ)"
+"Датотеке описа Пост скрипт штампача (*.ppd,*.PPD, *.ppd.gz, *PPD.gz, *.PPD."
+"GZ)"
 
 #: ../panels/printers/cc-printers-panel.c:2302
 msgid "No suitable driver found"
@@ -3832,9 +3904,9 @@ msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;"
 "AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys;"
 msgstr ""
-"Тастатура;Миш;a11y;Приступачност;Контраст;Зум;Читач екрана;текст;словни "
-"лик;величина;Приступ Иксу;Лепљиви тастери;Спори тастери;Одскочни "
-"тастери;Тастери миша;"
+"Тастатура;Миш;a11y;Приступачност;Контраст;Зум;Читач екрана;текст;словни лик;"
+"величина;Приступ Иксу;Лепљиви тастери;Спори тастери;Одскочни тастери;Тастери "
+"миша;"
 
 #: ../panels/universal-access/uap.ui.h:1
 msgctxt "universal access, contrast"
@@ -5269,137 +5341,154 @@ msgstr "Поставке;Подешавања;"
 msgid "All Settings"
 msgstr "Сва подешавања"
 
-msgid ""
-"Benchmarking involves measuring the transfer rate on various area of the "
-"device as well as measuring how long it takes to seek from one random area "
-"to another. Please back up important data before using the write benchmark."
-msgstr ""
-"Оцењивање обухвата мерење стопе преноса на разним областима уређаја као и "
-"мерење потребног времена за прелажење са једне произвољне области на другу. "
-"Направите резерву важних података пре коришћења оцењивања писања."
+#~ msgctxt "Wireless access point"
+#~ msgid "Other..."
+#~ msgstr "Остали..."
 
-msgid "Also perform _write-benchmark"
-msgstr "Такође изврши оцену _писања"
+#~ msgid "Hotspot"
+#~ msgstr "Врућа тачка"
 
-msgid ""
-"Bechmarking the write-rate of a disk requires exclusive access to the disk "
-"(e.g. the disk or its partitions cannot be mounted or in use) and involves "
-"reading data and then writing it back. As a result, the contents of the disk "
-"is not changed.\n"
-"\n"
-"If not checked, the write-part of the benchmark will not be done but on the "
-"other hand exclusive access to the device is not needed (e.g. the disk or "
-"device can be in use) ."
-msgstr ""
-"Оцењивање стопе писања диска захтева нарочити приступ диску (нпр. диск или "
-"партиције не могу бити прикачене или у употреби) и обухвата читање података "
-"и њихово поновно писање. Као резултат, садржај диска није измењен.\n"
-"\n"
-"Ако није изабрано, корак писања при оцењивању неће бити спроведен али са "
-"друге стране нарочити приступ диску није потребан (нпр. диск или уређај може "
-"бити у употреби)."
+#~ msgid "_Network Name"
+#~ msgstr "_Назив мреже"
 
-msgid ""
-"Number of samples. Bigger number produces a more accurate picture of access "
-"time patterns but takes more time."
-msgstr ""
-"Број узорака. Већи број даје тачнију слику шаблона времена приступа али "
-"одузима више времена."
+#~ msgid "_Stop Hotspot..."
+#~ msgstr "_Заустави врућу тачку..."
 
-msgid ""
-"The number of MiB (1048576 bytes) to read/write for each sample. Big sample "
-"sizes tend to produce more accurate benchmarks at the cost of the benchmark "
-"taking more time."
-msgstr ""
-"Број у MiB (1048576 бајта) за читање/писање сваког узорка. Велике величине "
-"узорка теже тачнијем оцењивању уз одузимање више времена."
+#~ msgid ""
+#~ "Benchmarking involves measuring the transfer rate on various area of the "
+#~ "device as well as measuring how long it takes to seek from one random "
+#~ "area to another. Please back up important data before using the write "
+#~ "benchmark."
+#~ msgstr ""
+#~ "Оцењивање обухвата мерење стопе преноса на разним областима уређаја као и "
+#~ "мерење потребног времена за прелажење са једне произвољне области на "
+#~ "другу. Направите резерву важних података пре коришћења оцењивања писања."
 
-msgid ""
-"Number of samples. Bigger number produces more smooth graphs but the "
-"benchmark will take more time."
-msgstr ""
-"Број узорака. Већи бројеви дају тачније графиконе али ће оцењивање трајати "
-"дуже."
+#~ msgid "Also perform _write-benchmark"
+#~ msgstr "Такође изврши оцену _писања"
 
-msgid ""
-"Agressive spin-down may wear out the drive faster than anticipated. Please "
-"check the “Start/Stop Count” SMART attribute from time to time"
-msgstr ""
-"Нападно успоравање може да оштети уређај брже него што је предвиђено. Молим "
-"с времена на време проверите СМАРТ особину „Број покретања/заустављања“"
+#~ msgid ""
+#~ "Bechmarking the write-rate of a disk requires exclusive access to the "
+#~ "disk (e.g. the disk or its partitions cannot be mounted or in use) and "
+#~ "involves reading data and then writing it back. As a result, the contents "
+#~ "of the disk is not changed.\n"
+#~ "\n"
+#~ "If not checked, the write-part of the benchmark will not be done but on "
+#~ "the other hand exclusive access to the device is not needed (e.g. the "
+#~ "disk or device can be in use) ."
+#~ msgstr ""
+#~ "Оцењивање стопе писања диска захтева нарочити приступ диску (нпр. диск "
+#~ "или партиције не могу бити прикачене или у употреби) и обухвата читање "
+#~ "података и њихово поновно писање. Као резултат, садржај диска није "
+#~ "измењен.\n"
+#~ "\n"
+#~ "Ако није изабрано, корак писања при оцењивању неће бити спроведен али са "
+#~ "друге стране нарочити приступ диску није потребан (нпр. диск или уређај "
+#~ "може бити у употреби)."
 
-msgid "Wake-Up from Standby"
-msgstr "Изађи из приправности"
+#~ msgid ""
+#~ "Number of samples. Bigger number produces a more accurate picture of "
+#~ "access time patterns but takes more time."
+#~ msgstr ""
+#~ "Број узорака. Већи број даје тачнију слику шаблона времена приступа али "
+#~ "одузима више времена."
 
-msgid "Cannot open `%s' - maybe the volume isn't mounted?"
-msgstr "Не могу да отворим „%s“ — можда диск није ни прикачен?"
+#~ msgid ""
+#~ "The number of MiB (1048576 bytes) to read/write for each sample. Big "
+#~ "sample sizes tend to produce more accurate benchmarks at the cost of the "
+#~ "benchmark taking more time."
+#~ msgstr ""
+#~ "Број у MiB (1048576 бајта) за читање/писање сваког узорка. Велике "
+#~ "величине узорка теже тачнијем оцењивању уз одузимање више времена."
 
-msgid "Non-fatal error: error setting autoclear to TRUE: %s (%s, %d)\n"
-msgstr ""
-"Не-кобна грешка: грешка постављања самочишћења на изабрано: %s (%s, %d)\n"
+#~ msgid ""
+#~ "Number of samples. Bigger number produces more smooth graphs but the "
+#~ "benchmark will take more time."
+#~ msgstr ""
+#~ "Број узорака. Већи бројеви дају тачније графиконе али ће оцењивање "
+#~ "трајати дуже."
 
-msgctxt "benchmarking"
-msgid "Expected to write %lld bytes, only wrote %lld: %m"
-msgstr "Очекивах да запишем %lld бајт/а, записах само %lld: %m"
+#~ msgid ""
+#~ "Agressive spin-down may wear out the drive faster than anticipated. "
+#~ "Please check the “Start/Stop Count” SMART attribute from time to time"
+#~ msgstr ""
+#~ "Нападно успоравање може да оштети уређај брже него што је предвиђено. "
+#~ "Молим с времена на време проверите СМАРТ особину „Број покретања/"
+#~ "заустављања“"
 
-msgctxt "apm-level"
-msgid "%d (Spin-down permitted)"
-msgstr "%d (заустављање завртаја је допуштено)"
+#~ msgid "Wake-Up from Standby"
+#~ msgstr "Изађи из приправности"
 
-msgid "ATA Secure Erase"
-msgstr "Безбедно АТА брисање"
+#~ msgid "Cannot open `%s' - maybe the volume isn't mounted?"
+#~ msgstr "Не могу да отворим „%s“ — можда диск није ни прикачен?"
 
-msgid "ATA Enhanced Secure Erase"
-msgstr "Побољшано безбедно АТА брисање"
+#~ msgid "Non-fatal error: error setting autoclear to TRUE: %s (%s, %d)\n"
+#~ msgstr ""
+#~ "Не-кобна грешка: грешка постављања самочишћења на изабрано: %s (%s, %d)\n"
 
-msgid ""
-"All data on the disk will be lost but may still be recoverable by data "
-"recovery services"
-msgstr ""
-"Сви подаци на диску ће бити изгубљени али би још увек могли бити повраћени "
-"услугама опорављања података"
+#~ msgctxt "benchmarking"
+#~ msgid "Expected to write %lld bytes, only wrote %lld: %m"
+#~ msgstr "Очекивах да запишем %lld бајт/а, записах само %lld: %m"
 
-msgid ""
-"<b>Tip</b>: If you are planning to recycle, sell or give away your old "
-"computer or disk, you should use a more thorough erase type to keep your "
-"private information from falling into the wrong hands"
-msgstr ""
-"<b>Савет</b>: Ако планирате да рециклирате, продате или дате некоме ваш "
-"стари рачунар или диск, треба да користите детаљније брисање да ваши лични "
-"подаци не би дошли у погрешне руке"
+#~ msgctxt "apm-level"
+#~ msgid "%d (Spin-down permitted)"
+#~ msgstr "%d (заустављање завртаја је допуштено)"
 
-msgid ""
-"All data on the disk will be overwritten and will likely not be recoverable "
-"by data recovery services"
-msgstr ""
-"Сви подаци на диску ће бити преписани и највероватније њихов повраћај неће "
-"бити могућ услугама опорављања података"
+#~ msgid "ATA Secure Erase"
+#~ msgstr "Безбедно АТА брисање"
 
-msgid ""
-"<b>WARNING</b>: The Secure Erase command may take a very long time to "
-"complete, can't be canceled and may not work properly with some hardware. In "
-"the worst case, your drive may be rendered unusable or your system may crash "
-"or lock up. Before proceeding, please read the article about <a "
-"href='https://ata.wiki.kernel.org/index.php/ATA_Secure_Erase'>ATA Secure "
-"Erase</a> and make sure you understand the risks"
-msgstr ""
-"<b>УПОЗОРЕЊЕ</b>: Наредба безбедног брисања може да потраје поприлично дуго, "
-"не може бити отказана и можда неће радити исправно на неким уређајима. У "
-"најгорем случају, ваш диск може постати неупотребљив или ваш систем може да "
-"се уруши или да се закључа. Пре него што наставите, прочитајте чланак о <a "
-"href='https://ata.wiki.kernel.org/index.php/ATA_Secure_Erase'>Безбедном АТА "
-"брисању</a> и будите сигурни да сте разумели ризик"
+#~ msgid "ATA Enhanced Secure Erase"
+#~ msgstr "Побољшано безбедно АТА брисање"
 
-msgid ""
-"All data on the volume will be lost but may still be recoverable by data "
-"recovery services"
-msgstr ""
-"Сви подаци на диску ће бити изгубљени али би још увек могли бити повраћени "
-"услугама опорављања података"
+#~ msgid ""
+#~ "All data on the disk will be lost but may still be recoverable by data "
+#~ "recovery services"
+#~ msgstr ""
+#~ "Сви подаци на диску ће бити изгубљени али би још увек могли бити "
+#~ "повраћени услугама опорављања података"
 
-msgid ""
-"All data on the volume will be overwritten and will likely not be "
-"recoverable by data recovery services"
-msgstr ""
-"Сви подаци на диску ће бити преписани и највероватније њихов повраћај неће "
-"бити могућ услугама опорављања података"
+#~ msgid ""
+#~ "<b>Tip</b>: If you are planning to recycle, sell or give away your old "
+#~ "computer or disk, you should use a more thorough erase type to keep your "
+#~ "private information from falling into the wrong hands"
+#~ msgstr ""
+#~ "<b>Савет</b>: Ако планирате да рециклирате, продате или дате некоме ваш "
+#~ "стари рачунар или диск, треба да користите детаљније брисање да ваши "
+#~ "лични подаци не би дошли у погрешне руке"
+
+#~ msgid ""
+#~ "All data on the disk will be overwritten and will likely not be "
+#~ "recoverable by data recovery services"
+#~ msgstr ""
+#~ "Сви подаци на диску ће бити преписани и највероватније њихов повраћај "
+#~ "неће бити могућ услугама опорављања података"
+
+#~ msgid ""
+#~ "<b>WARNING</b>: The Secure Erase command may take a very long time to "
+#~ "complete, can't be canceled and may not work properly with some hardware. "
+#~ "In the worst case, your drive may be rendered unusable or your system may "
+#~ "crash or lock up. Before proceeding, please read the article about <a "
+#~ "href='https://ata.wiki.kernel.org/index.php/ATA_Secure_Erase'>ATA Secure "
+#~ "Erase</a> and make sure you understand the risks"
+#~ msgstr ""
+#~ "<b>УПОЗОРЕЊЕ</b>: Наредба безбедног брисања може да потраје поприлично "
+#~ "дуго, не може бити отказана и можда неће радити исправно на неким "
+#~ "уређајима. У најгорем случају, ваш диск може постати неупотребљив или ваш "
+#~ "систем може да се уруши или да се закључа. Пре него што наставите, "
+#~ "прочитајте чланак о <a href='https://ata.wiki.kernel.org/index.php/"
+#~ "ATA_Secure_Erase'>Безбедном АТА брисању</a> и будите сигурни да сте "
+#~ "разумели ризик"
+
+#~ msgid ""
+#~ "All data on the volume will be lost but may still be recoverable by data "
+#~ "recovery services"
+#~ msgstr ""
+#~ "Сви подаци на диску ће бити изгубљени али би још увек могли бити "
+#~ "повраћени услугама опорављања података"
+
+#~ msgid ""
+#~ "All data on the volume will be overwritten and will likely not be "
+#~ "recoverable by data recovery services"
+#~ msgstr ""
+#~ "Сви подаци на диску ће бити преписани и највероватније њихов повраћај "
+#~ "неће бити могућ услугама опорављања података"
