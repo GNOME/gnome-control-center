@@ -35,7 +35,17 @@ x_libs="$X_PRE_LIBS $X_LIBS -lX11 $X_EXTRA_LIBS"
 
 AC_PATH_PROG([GLIB_MKENUMS],[glib-mkenums])
 
-AC_PATH_PROG([XSLTPROC], [xsltproc])
+AC_ARG_ENABLE(documentation,
+              AC_HELP_STRING([--enable-documentation],
+                             [build documentation]),,
+              enable_documentation=yes)
+if test x$enable_documentation = xyes; then
+   AC_PATH_PROG([XSLTPROC], [xsltproc])
+   if test x$XSLTPROC = x; then
+      AC_MSG_ERROR([xsltproc is required to build documentation])
+   fi
+fi
+AM_CONDITIONAL(BUILD_DOCUMENTATION, test x$enable_documentation = xyes)
 
 dnl Region panel
 savecppflags=$CPPFLAGS
