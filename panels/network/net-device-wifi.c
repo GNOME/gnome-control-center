@@ -1221,25 +1221,14 @@ is_hotspot_connection (NMConnection *connection)
 }
 
 static void
-activate_cb (NMClient           *client,
-             NMActiveConnection *connection,
-             GError             *error,
-             NetDeviceWifi     *device_wifi)
+show_hotspot_ui (NetDeviceWifi *device_wifi)
 {
         GtkWidget *widget;
         GtkSwitch *sw;
 
-        if (error) {
-                g_warning ("Failed to add new connection: (%d) %s",
-                           error->code,
-                           error->message);
-                return;
-        }
-
         /* show hotspot tab */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "notebook_view"));
         gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 3);
-        nm_device_wifi_refresh_ui (device_wifi);
 
         /* force switch to on as this succeeded */
         sw = GTK_SWITCH (gtk_builder_get_object (device_wifi->priv->builder,
@@ -1247,7 +1236,24 @@ activate_cb (NMClient           *client,
         device_wifi->priv->updating_device = TRUE;
         gtk_switch_set_active (sw, TRUE);
         device_wifi->priv->updating_device = FALSE;
+}
 
+static void
+activate_cb (NMClient           *client,
+             NMActiveConnection *connection,
+             GError             *error,
+             NetDeviceWifi     *device_wifi)
+{
+        if (error != NULL) {
+                g_warning ("Failed to add new connection: (%d) %s",
+                           error->code,
+                           error->message);
+                return;
+        }
+
+        /* show hotspot tab */
+        nm_device_wifi_refresh_ui (device_wifi);
+        show_hotspot_ui (device_wifi);
 }
 
 static void
@@ -1761,7 +1767,16 @@ static void
 remote_settings_read_cb (NMRemoteSettings *remote_settings,
                          NetDeviceWifi *device_wifi)
 {
+        gboolean is_hotspot;
+
         device_wifi_refresh_saved_connections (device_wifi);
+
+        /* go straight to the hotspot UI */
+        is_hotspot = device_is_hotspot (device_wifi);
+        if (is_hotspot) {
+                nm_device_wifi_refresh_hotspot (device_wifi);
+                show_hotspot_ui (device_wifi);
+        }
 }
 
 static void
