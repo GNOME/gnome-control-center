@@ -808,8 +808,10 @@ rebuild_resolution_combo (CcDisplayPanel *self)
   for (i = 0; modes[i] != NULL; ++i)
     add_mode (self, modes[i], output_width, output_height, preferred_id);
 
-  /* And force the preferred mode in the drop-down */
-  add_mode (self, mode, output_width, output_height, preferred_id);
+  /* And force the preferred mode in the drop-down (when not in clone mode)
+   * https://bugzilla.gnome.org/show_bug.cgi?id=680969 */
+  if (!gnome_rr_config_get_clone (self->priv->current_configuration))
+   add_mode (self, mode, output_width, output_height, preferred_id);
 
   current = make_resolution_string (output_width, output_height);
 
