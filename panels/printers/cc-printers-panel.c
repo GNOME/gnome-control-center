@@ -97,10 +97,16 @@ struct _CcPrintersPanelPrivate
   gboolean      getting_ppd_names;
   PPDList      *all_ppds_list;
   GHashTable   *preferred_drivers;
-  gboolean      getting_all_ppds;
+  GCancellable *get_all_ppds_cancellable;
 
   gpointer dummy;
 };
+
+typedef struct
+{
+  gchar        *printer_name;
+  GCancellable *cancellable;
+} SetPPDItem;
 
 static void actualize_jobs_list (CcPrintersPanel *self);
 static void actualize_printers_list (CcPrintersPanel *self);
@@ -191,6 +197,31 @@ cc_printers_panel_dispose (GObject *object)
     {
       g_hash_table_unref (priv->preferred_drivers);
       priv->preferred_drivers = NULL;
+    }
+
+  if (priv->get_all_ppds_cancellable)
+    {
+      g_cancellable_cancel (priv->get_all_ppds_cancellable);
+      g_object_unref (priv->get_all_ppds_cancellable);
+      priv->get_all_ppds_cancellable = NULL;
+    }
+
+  if (priv->driver_change_list)
+    {
+      GList *iter;
+
+      for (iter = priv->driver_change_list; iter; iter = iter->next)
+        {
+          SetPPDItem *item = (SetPPDItem *) iter->data;
+
+          g_cancellable_cancel (item->cancellable);
+          g_object_unref (item->cancellable);
+          g_free (item->printer_name);
+          g_free (item);
+        }
+
+      g_list_free (priv->driver_change_list);
+      priv->driver_change_list = NULL;
     }
 
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->dispose (object);
@@ -1977,10 +2008,16 @@ set_ppd_cb (gchar    *printer_name,
 
   for (iter = priv->driver_change_list; iter; iter = iter->next)
     {
-      if (g_strcmp0 ((gchar *) iter->data, printer_name) == 0)
+      SetPPDItem *item = (SetPPDItem *) iter->data;
+
+      if (g_strcmp0 (item->printer_name, printer_name) == 0)
         {
           priv->driver_change_list = g_list_remove_link (priv->driver_change_list, iter);
-          g_list_free_full (iter, g_free);
+
+          g_object_unref (item->cancellable);
+          g_free (item->printer_name);
+          g_free (item);
+          g_list_free (iter);
           break;
         }
     }
@@ -2040,12 +2077,18 @@ select_ppd_manually (GtkMenuItem *menuitem,
 
       if (printer_name && ppd_filename)
         {
+          SetPPDItem *item;
+
+          item = g_new0 (SetPPDItem, 1);
+          item->printer_name = g_strdup (printer_name);
+          item->cancellable = g_cancellable_new ();
+
           priv->driver_change_list =
-            g_list_prepend (priv->driver_change_list, g_strdup (printer_name));
+            g_list_prepend (priv->driver_change_list, item);
           update_sensitivity (self);
           printer_set_ppd_file_async (printer_name,
                                       ppd_filename,
-                                      NULL,
+                                      item->cancellable,
                                       set_ppd_cb,
                                       user_data);
         }
@@ -2080,12 +2123,18 @@ ppd_selection_dialog_response_cb (GtkDialog *dialog,
 
       if (printer_name && ppd_name)
         {
+          SetPPDItem *item;
+
+          item = g_new0 (SetPPDItem, 1);
+          item->printer_name = g_strdup (printer_name);
+          item->cancellable = g_cancellable_new ();
+
           priv->driver_change_list = g_list_prepend (priv->driver_change_list,
-                                                     g_strdup (printer_name));
+                                                     item);
           update_sensitivity (self);
           printer_set_ppd_async (printer_name,
                                  ppd_name,
-                                 NULL,
+                                 item->cancellable,
                                  set_ppd_cb,
                                  user_data);
         }
@@ -2173,12 +2222,18 @@ set_ppd_from_list (GtkMenuItem *menuitem,
 
   if (printer_name && ppd_name)
     {
+      SetPPDItem *item;
+
+      item = g_new0 (SetPPDItem, 1);
+      item->printer_name = g_strdup (printer_name);
+      item->cancellable = g_cancellable_new ();
+
       priv->driver_change_list = g_list_prepend (priv->driver_change_list,
-                                                 g_strdup (printer_name));
+                                                 item);
       update_sensitivity (self);
       printer_set_ppd_async (printer_name,
                              ppd_name,
-                             NULL,
+                             item->cancellable,
                              set_ppd_cb,
                              user_data);
     }
@@ -2607,7 +2662,9 @@ update_sensitivity (gpointer user_data)
 
       for (iter = priv->driver_change_list; iter; iter = iter->next)
         {
-          if (g_strcmp0 ((gchar *) iter->data, priv->dests[priv->current_dest].name) == 0)
+          SetPPDItem *item = (SetPPDItem *) iter->data;
+
+          if (g_strcmp0 (item->printer_name, priv->dests[priv->current_dest].name) == 0)
             {
               is_changing_driver = TRUE;
             }
@@ -2820,11 +2877,12 @@ get_all_ppds_async_cb (PPDList  *ppds,
 
   priv->all_ppds_list = ppds;
 
-  priv->getting_all_ppds = FALSE;
-
   if (priv->pp_ppd_selection_dialog)
     pp_ppd_selection_dialog_set_ppd_list (priv->pp_ppd_selection_dialog,
                                           priv->all_ppds_list);
+
+  g_object_unref (priv->get_all_ppds_cancellable);
+  priv->get_all_ppds_cancellable = NULL;
 }
 
 static void
@@ -2901,7 +2959,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   priv->getting_ppd_names = FALSE;
 
   priv->all_ppds_list = NULL;
-  priv->getting_all_ppds = FALSE;
+  priv->get_all_ppds_cancellable = NULL;
 
   priv->preferred_drivers = NULL;
 
@@ -3049,8 +3107,10 @@ Please check your installation");
   populate_jobs_list (self);
   attach_to_cups_notifier (self);
 
-  priv->getting_all_ppds = TRUE;
-  get_all_ppds_async (get_all_ppds_async_cb, self);
+  priv->get_all_ppds_cancellable = g_cancellable_new ();
+  get_all_ppds_async (priv->get_all_ppds_cancellable,
+                      get_all_ppds_async_cb,
+                      self);
 
   http = httpConnectEncrypt (cupsServer (), ippPort (), cupsEncryption ());
   if (!http)

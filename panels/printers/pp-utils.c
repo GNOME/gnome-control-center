@@ -2846,9 +2846,12 @@ printer_set_ppd_async_dbus_cb (GObject      *source_object,
       g_error_free (error);
     }
 
-  data->callback (g_strdup (data->printer_name),
-                  result,
-                  data->user_data);
+  /* Don't call callback if cancelled */
+  if (!data->cancellable ||
+      !g_cancellable_is_cancelled (data->cancellable))
+    data->callback (g_strdup (data->printer_name),
+                    result,
+                    data->user_data);
 
   if (data->cancellable)
     g_object_unref (data->cancellable);
@@ -3770,6 +3773,7 @@ get_ppd_names_async (gchar        *printer_name,
 typedef struct
 {
   PPDList      *result;
+  GCancellable *cancellable;
   GAPCallback   callback;
   gpointer      user_data;
   GMainContext *context;
@@ -3780,7 +3784,17 @@ get_all_ppds_idle_cb (gpointer user_data)
 {
   GAPData *data = (GAPData *) user_data;
 
-  data->callback (data->result, data->user_data);
+  /* Don't call callback if cancelled */
+  if (data->cancellable &&
+      g_cancellable_is_cancelled (data->cancellable))
+    {
+      ppd_list_free (data->result);
+      data->result = NULL;
+    }
+  else
+    {
+      data->callback (data->result, data->user_data);
+    }
 
   return FALSE;
 }
@@ -3792,6 +3806,8 @@ get_all_ppds_data_free (gpointer user_data)
 
   if (data->context)
     g_main_context_unref (data->context);
+  if (data->cancellable)
+    g_object_unref (data->cancellable);
   g_free (data);
 }
 
@@ -4121,14 +4137,17 @@ get_all_ppds_func (gpointer user_data)
  * Get names of all installed PPDs sorted by manufacturers names.
  */
 void
-get_all_ppds_async (GAPCallback callback,
-                    gpointer    user_data)
+get_all_ppds_async (GCancellable *cancellable,
+                    GAPCallback   callback,
+                    gpointer      user_data)
 {
   GAPData *data;
   GThread *thread;
   GError  *error = NULL;
 
   data = g_new0 (GAPData, 1);
+  if (cancellable)
+    data->cancellable = g_object_ref (cancellable);
   data->callback = callback;
   data->user_data = user_data;
   data->context = g_main_context_ref_thread_default ();

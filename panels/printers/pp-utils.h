@@ -161,8 +161,9 @@ void        get_ppd_names_async (gchar        *printer_name,
 typedef void (*GAPCallback) (PPDList  *ppds,
                              gpointer  user_data);
 
-void        get_all_ppds_async (GAPCallback callback,
-                                gpointer    user_data);
+void        get_all_ppds_async (GCancellable *cancellable,
+                                GAPCallback   callback,
+                                gpointer      user_data);
 
 PPDList    *ppd_list_copy (PPDList *list);
 void        ppd_list_free (PPDList *list);
