@@ -603,7 +603,7 @@ on_realm_login (GObject *source,
                                                    on_realm_joined,
                                                    g_object_ref (self))) {
 
-                        /* If we can't do user aauth, try to authenticate as admin */
+                        /* If we can't do user auth, try to authenticate as admin */
                         join_show_prompt (self, NULL);
                 }
 
