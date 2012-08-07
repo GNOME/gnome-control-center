@@ -241,6 +241,12 @@ cc_printers_panel_get_permission (CcPanel *panel)
   return priv->permission;
 }
 
+static const char *
+cc_printers_panel_get_help_uri (CcPanel *panel)
+{
+  return "help:gnome-help/printing";
+}
+
 static void
 cc_printers_panel_class_init (CcPrintersPanelClass *klass)
 {
@@ -255,6 +261,7 @@ cc_printers_panel_class_init (CcPrintersPanelClass *klass)
   object_class->finalize = cc_printers_panel_finalize;
 
   panel_class->get_permission = cc_printers_panel_get_permission;
+  panel_class->get_help_uri = cc_printers_panel_get_help_uri;
 }
 
 static void
