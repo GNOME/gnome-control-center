@@ -381,16 +381,9 @@ find_connection_for_device (NetDeviceWifi *device_wifi,
 }
 
 static gboolean
-device_is_hotspot (NetDeviceWifi *device_wifi)
+connection_is_shared (NMConnection *c)
 {
-        NMConnection *c;
         NMSettingIP4Config *s_ip4;
-        NMDevice *device;
-
-        device = net_device_get_nm_device (NET_DEVICE (device_wifi));
-        c = find_connection_for_device (device_wifi, device);
-        if (c == NULL)
-                return FALSE;
 
         s_ip4 = nm_connection_get_setting_ip4_config (c);
         if (g_strcmp0 (nm_setting_ip4_config_get_method (s_ip4),
@@ -399,6 +392,20 @@ device_is_hotspot (NetDeviceWifi *device_wifi)
         }
 
         return TRUE;
+}
+
+static gboolean
+device_is_hotspot (NetDeviceWifi *device_wifi)
+{
+        NMConnection *c;
+        NMDevice *device;
+
+        device = net_device_get_nm_device (NET_DEVICE (device_wifi));
+        c = find_connection_for_device (device_wifi, device);
+        if (c == NULL)
+                return FALSE;
+
+        return connection_is_shared (c);
 }
 
 static const GByteArray *
@@ -610,7 +617,8 @@ device_wifi_refresh_saved_connections (NetDeviceWifi *device_wifi)
         filtered = nm_device_filter_connections (nm_device, connections);
         for (l = filtered; l; l = l->next) {
                 NMConnection *connection = l->data;
-                add_saved_connection (device_wifi, connection, nm_device);
+                if (!connection_is_shared (connection))
+                        add_saved_connection (device_wifi, connection, nm_device);
         }
         device_wifi->priv->updating_device = FALSE;
 
