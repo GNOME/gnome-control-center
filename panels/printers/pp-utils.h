@@ -232,6 +232,32 @@ void        printer_add_option_async (const gchar   *printer_name,
                                       PAOCallback    callback,
                                       gpointer       user_data);
 
+typedef void (*CGJCallback) (cups_job_t *jobs,
+                             gint        num_of_jobs,
+                             gpointer    user_data);
+
+void        cups_get_jobs_async (const gchar *printer_name,
+                                 gboolean     my_jobs,
+                                 gint         which_jobs,
+                                 CGJCallback  callback,
+                                 gpointer     user_data);
+
+typedef void (*JCPCallback) (gpointer user_data);
+
+void job_cancel_purge_async (gint          job_id,
+                             gboolean      job_purge,
+                             GCancellable *cancellable,
+                             JCPCallback   callback,
+                             gpointer      user_data);
+
+typedef void (*JSHUCallback) (gpointer user_data);
+
+void job_set_hold_until_async (gint          job_id,
+                               const gchar  *job_hold_until,
+                               GCancellable *cancellable,
+                               JSHUCallback  callback,
+                               gpointer      user_data);
+
 G_END_DECLS
 
 #endif /* __PP_UTILS_H */

@@ -4551,3 +4551,268 @@ printer_add_option_async (const gchar   *printer_name,
                           printer_add_option_async_dbus_cb,
                           data);
 }
+
+typedef struct
+{
+  gchar        *printer_name;
+  gboolean      my_jobs;
+  gint          which_jobs;
+  cups_job_t   *jobs;
+  gint          num_of_jobs;
+  CGJCallback   callback;
+  gpointer      user_data;
+  GMainContext *context;
+} CGJData;
+
+static gboolean
+cups_get_jobs_idle_cb (gpointer user_data)
+{
+  CGJData *data = (CGJData *) user_data;
+
+  data->callback (data->jobs,
+                  data->num_of_jobs,
+                  data->user_data);
+
+  return FALSE;
+}
+
+static void
+cups_get_jobs_data_free (gpointer user_data)
+{
+  CGJData *data = (CGJData *) user_data;
+
+  if (data->context)
+    g_main_context_unref (data->context);
+  g_free (data->printer_name);
+  g_free (data);
+}
+
+static void
+cups_get_jobs_cb (gpointer user_data)
+{
+  CGJData *data = (CGJData *) user_data;
+  GSource *idle_source;
+
+  idle_source = g_idle_source_new ();
+  g_source_set_callback (idle_source,
+                         cups_get_jobs_idle_cb,
+                         data,
+                         cups_get_jobs_data_free);
+  g_source_attach (idle_source, data->context);
+  g_source_unref (idle_source);
+}
+
+static gpointer
+cups_get_jobs_func (gpointer user_data)
+{
+  CGJData *data = (CGJData *) user_data;
+
+  data->num_of_jobs = cupsGetJobs (&data->jobs,
+                                   data->printer_name,
+                                   data->my_jobs ? 1 : 0,
+                                   data->which_jobs);
+
+  cups_get_jobs_cb (data);
+
+  return NULL;
+}
+
+void
+cups_get_jobs_async (const gchar *printer_name,
+                     gboolean     my_jobs,
+                     gint         which_jobs,
+                     CGJCallback  callback,
+                     gpointer     user_data)
+{
+  CGJData *data;
+  GThread *thread;
+  GError  *error = NULL;
+
+  data = g_new0 (CGJData, 1);
+  data->printer_name = g_strdup (printer_name);
+  data->my_jobs = my_jobs;
+  data->which_jobs = which_jobs;
+  data->callback = callback;
+  data->user_data = user_data;
+  data->context = g_main_context_ref_thread_default ();
+
+  thread = g_thread_try_new ("cups-get-jobs",
+                             cups_get_jobs_func,
+                             data,
+                             &error);
+
+  if (!thread)
+    {
+      g_warning ("%s", error->message);
+      callback (NULL, 0, user_data);
+
+      g_error_free (error);
+      cups_get_jobs_data_free (data);
+    }
+  else
+    {
+      g_thread_unref (thread);
+    }
+}
+
+typedef struct
+{
+  GCancellable *cancellable;
+  JCPCallback   callback;
+  gpointer      user_data;
+} JCPData;
+
+static void
+job_cancel_purge_async_dbus_cb (GObject      *source_object,
+                                GAsyncResult *res,
+                                gpointer      user_data)
+{
+  GVariant *output;
+  JCPData  *data = (JCPData *) user_data;
+  GError   *error = NULL;
+
+  output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
+                                          res,
+                                          &error);
+  g_object_unref (source_object);
+
+  if (output)
+    {
+      g_variant_unref (output);
+    }
+  else
+    {
+      if (!g_cancellable_is_cancelled (data->cancellable))
+        g_warning ("%s", error->message);
+      g_error_free (error);
+    }
+
+  data->callback (data->user_data);
+
+  if (data->cancellable)
+    g_object_unref (data->cancellable);
+  g_free (data);
+}
+
+void
+job_cancel_purge_async (gint          job_id,
+                        gboolean      job_purge,
+                        GCancellable *cancellable,
+                        JCPCallback   callback,
+                        gpointer      user_data)
+{
+  GDBusConnection *bus;
+  JCPData         *data;
+  GError          *error = NULL;
+
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
+    {
+      g_warning ("Failed to get session bus: %s", error->message);
+      g_error_free (error);
+      callback (user_data);
+      return;
+    }
+
+  data = g_new0 (JCPData, 1);
+  if (cancellable)
+    data->cancellable = g_object_ref (cancellable);
+  data->callback = callback;
+  data->user_data = user_data;
+
+  g_dbus_connection_call (bus,
+                          MECHANISM_BUS,
+                          "/",
+                          MECHANISM_BUS,
+                          "JobCancelPurge",
+                          g_variant_new ("(ib)",
+                                         job_id,
+                                         job_purge),
+                          G_VARIANT_TYPE ("(s)"),
+                          G_DBUS_CALL_FLAGS_NONE,
+                          -1,
+                          NULL,
+                          job_cancel_purge_async_dbus_cb,
+                          data);
+}
+
+typedef struct
+{
+  GCancellable *cancellable;
+  JSHUCallback  callback;
+  gpointer      user_data;
+} JSHUData;
+
+static void
+job_set_hold_until_async_dbus_cb (GObject      *source_object,
+                                  GAsyncResult *res,
+                                  gpointer      user_data)
+{
+  GVariant *output;
+  JSHUData *data = (JSHUData *) user_data;
+  GError   *error = NULL;
+
+  output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
+                                          res,
+                                          &error);
+  g_object_unref (source_object);
+
+  if (output)
+    {
+      g_variant_unref (output);
+    }
+  else
+    {
+      if (!g_cancellable_is_cancelled (data->cancellable))
+        g_warning ("%s", error->message);
+      g_error_free (error);
+    }
+
+  data->callback (data->user_data);
+
+  if (data->cancellable)
+    g_object_unref (data->cancellable);
+  g_free (data);
+}
+
+void
+job_set_hold_until_async (gint          job_id,
+                          const gchar  *job_hold_until,
+                          GCancellable *cancellable,
+                          JSHUCallback  callback,
+                          gpointer      user_data)
+{
+  GDBusConnection *bus;
+  JSHUData        *data;
+  GError          *error = NULL;
+
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
+    {
+      g_warning ("Failed to get session bus: %s", error->message);
+      g_error_free (error);
+      callback (user_data);
+      return;
+    }
+
+  data = g_new0 (JSHUData, 1);
+  if (cancellable)
+    data->cancellable = g_object_ref (cancellable);
+  data->callback = callback;
+  data->user_data = user_data;
+
+  g_dbus_connection_call (bus,
+                          MECHANISM_BUS,
+                          "/",
+                          MECHANISM_BUS,
+                          "JobSetHoldUntil",
+                          g_variant_new ("(is)",
+                                         job_id,
+                                         job_hold_until),
+                          G_VARIANT_TYPE ("(s)"),
+                          G_DBUS_CALL_FLAGS_NONE,
+                          -1,
+                          NULL,
+                          job_set_hold_until_async_dbus_cb,
+                          data);
+}

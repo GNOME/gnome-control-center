@@ -5,6 +5,7 @@ dist_ui_DATA = \
 	new-printer-dialog.ui	\
 	ppd-selection-dialog.ui	\
 	options-dialog.ui	\
+	jobs-dialog.ui		\
 	printers.ui
 
 INCLUDES = 						\
@@ -31,8 +32,10 @@ libprinters_la_SOURCES =		\
 	pp-new-printer-dialog.h		\
 	pp-ppd-selection-dialog.c	\
 	pp-ppd-selection-dialog.h	\
-	pp-options-dialog.c	\
-	pp-options-dialog.h	\
+	pp-options-dialog.c		\
+	pp-options-dialog.h		\
+	pp-jobs-dialog.c		\
+	pp-jobs-dialog.h		\
 	cc-printers-panel.c		\
 	cc-printers-panel.h
 
