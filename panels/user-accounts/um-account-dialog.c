@@ -427,13 +427,11 @@ enterprise_permit_user_login (UmAccountDialog *self)
         options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
 
         um_realm_kerberos_call_change_login_policy (self->selected_realm, "",
-                                                    add, remove,
-                                                    g_variant_ref_sink (options),
+                                                    add, remove, options,
                                                     self->cancellable,
                                                     on_permit_user_login,
                                                     g_object_ref (self));
 
-        g_variant_unref (options);
         g_free (login);
 }
 

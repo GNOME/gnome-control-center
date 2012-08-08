@@ -501,12 +501,10 @@ um_realm_manager_discover (UmRealmManager *self,
         g_simple_async_result_set_op_res_gpointer (res, discover, discover_closure_free);
 
 	options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
-	g_variant_ref_sink (options);
 
         um_realm_provider_call_discover (UM_REALM_PROVIDER (self), input, options, cancellable,
                                          on_provider_discover, g_object_ref (res));
 
-        g_variant_unref (options);
         g_object_unref (res);
 }
 
@@ -620,15 +618,12 @@ realm_join_as_owner (UmRealmKerberos *realm,
                 g_assert_not_reached ();
         }
 
-        creds = g_variant_new ("(ss@v)", type, owner, g_variant_new_variant (contents));
+        creds = g_variant_new ("(ssv)", type, owner, contents);
         options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
 
-        um_realm_kerberos_call_enroll (realm, g_variant_ref_sink (creds),
-                                       g_variant_ref_sink (options),
+        um_realm_kerberos_call_enroll (realm, creds, options,
                                        cancellable, on_realm_join_complete, g_object_ref (async));
 
-        g_variant_unref (options);
-        g_variant_unref (creds);
         g_object_unref (async);
 
         return TRUE;
