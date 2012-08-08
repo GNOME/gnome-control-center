@@ -677,17 +677,13 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         NMDeviceState state;
         NMClient *client;
         NetDeviceWifiPrivate *priv = device_wifi->priv;
+        gchar *title;
 
         nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
         state = nm_device_get_state (nm_device);
         is_hotspot = device_is_hotspot (device_wifi);
         if (is_hotspot)
                 nm_device_wifi_refresh_hotspot (device_wifi);
-
-        /* set device kind */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "label_device"));
-        gtk_label_set_label (GTK_LABEL (widget),
-                             panel_device_to_localized_string (nm_device));
 
         /* set up the device on/off switch */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "device_off_switch"));
@@ -747,6 +743,22 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         panel_set_device_widget_details (device_wifi->priv->builder,
                                          "strength",
                                          str);
+
+        title = NULL;
+        if (active_ap != NULL) {
+                const GByteArray *ssid;
+                ssid = nm_access_point_get_ssid (active_ap);
+                if (ssid) {
+                        const gchar *ssid_text;
+                        ssid_text = nm_utils_escape_ssid (ssid->data, ssid->len);
+                        title = g_markup_escape_text (ssid_text, -1);
+                }
+        }
+
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "label_device"));
+        gtk_label_set_label (GTK_LABEL (widget),
+                             title ? title : panel_device_to_localized_string (nm_device));
+        g_free (title);
 
         /* only disconnect when connection active */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
