@@ -37,6 +37,47 @@
 
 #define DBUS_TIMEOUT 120000
 
+#if (CUPS_VERSION_MAJOR > 1) || (CUPS_VERSION_MINOR > 5)
+#define HAVE_CUPS_1_6 1
+#endif
+
+#ifndef HAVE_CUPS_1_6
+#define ippGetCount(attr)     attr->num_values
+#define ippGetGroupTag(attr)  attr->group_tag
+#define ippGetValueTag(attr)  attr->value_tag
+#define ippGetName(attr)      attr->name
+#define ippGetStatusCode(ipp) ipp->request.status.status_code
+#define ippGetInteger(attr, element) attr->values[element].integer
+#define ippGetString(attr, element, language) attr->values[element].string.text
+#define ippGetBoolean(attr, element) attr->values[element].boolean
+
+static int
+ippGetRange (ipp_attribute_t *attr,
+             int element,
+             int *upper)
+{
+  *upper = attr->values[element].range.upper;
+  return (attr->values[element].range.lower);
+}
+
+static ipp_attribute_t *
+ippFirstAttribute (ipp_t *ipp)
+{
+  if (!ipp)
+    return (NULL);
+  return (ipp->current = ipp->attrs);
+}
+
+static ipp_attribute_t *
+ippNextAttribute (ipp_t *ipp)
+{
+  if (!ipp || !ipp->current)
+    return (NULL);
+  return (ipp->current = ipp->current->next);
+}
+#endif
+
+
 gchar *
 get_tag_value (const gchar *tag_string, const gchar *tag_name)
 {
@@ -877,10 +918,10 @@ get_ppd_name (gchar *device_id,
       gchar           *mfg = NULL;
       gchar           *mdl = NULL;
       gchar           *tmp = NULL;
-      gchar           *ppd_device_id;
-      gchar           *ppd_make_and_model;
-      gchar           *ppd_name;
-      gchar           *ppd_product;
+      const gchar     *ppd_device_id;
+      const gchar     *ppd_make_and_model;
+      const gchar     *ppd_name;
+      const gchar     *ppd_product;
       gchar          **equivalents = NULL;
       gint             i;
 
@@ -937,12 +978,12 @@ DBus method \"GetBestDrivers\". Using fallback solution for now.");
               response = cupsDoRequest (http, request, "/");
 
               if (response &&
-                  response->request.status.status_code <= IPP_OK_CONFLICT)
+                  ippGetStatusCode (response) <= IPP_OK_CONFLICT)
                 {
-                  for (attr = response->attrs; attr != NULL; attr = attr->next)
+                  for (attr = ippFirstAttribute (response); attr != NULL; attr = ippNextAttribute (response))
                     {
-                      while (attr != NULL && attr->group_tag != IPP_TAG_PRINTER)
-                        attr = attr->next;
+                      while (attr != NULL && ippGetGroupTag (attr) != IPP_TAG_PRINTER)
+                        attr = ippNextAttribute (response);
 
                       if (attr == NULL)
                         break;
@@ -952,22 +993,22 @@ DBus method \"GetBestDrivers\". Using fallback solution for now.");
                       ppd_name = NULL;
                       ppd_product = NULL;
 
-                      while (attr != NULL && attr->group_tag == IPP_TAG_PRINTER)
+                      while (attr != NULL && ippGetGroupTag (attr) == IPP_TAG_PRINTER)
                         {
-                          if (g_strcmp0 (attr->name, "ppd-device-id") == 0 &&
-                              attr->value_tag == IPP_TAG_TEXT)
-                            ppd_device_id = attr->values[0].string.text;
-                          else if (g_strcmp0 (attr->name, "ppd-make-and-model") == 0 &&
-                                   attr->value_tag == IPP_TAG_TEXT)
-                            ppd_make_and_model = attr->values[0].string.text;
-                          else if (g_strcmp0 (attr->name, "ppd-name") == 0 &&
-                                   attr->value_tag == IPP_TAG_NAME)
-                            ppd_name = attr->values[0].string.text;
-                          else if (g_strcmp0 (attr->name, "ppd-product") == 0 &&
-                                   attr->value_tag == IPP_TAG_TEXT)
-                            ppd_product = attr->values[0].string.text;
+                          if (g_strcmp0 (ippGetName (attr), "ppd-device-id") == 0 &&
+                              ippGetValueTag (attr) == IPP_TAG_TEXT)
+                            ppd_device_id = (gchar *) ippGetString (attr, 0, NULL);
+                          else if (g_strcmp0 (ippGetName (attr), "ppd-make-and-model") == 0 &&
+                                   ippGetValueTag (attr) == IPP_TAG_TEXT)
+                            ppd_make_and_model = ippGetString (attr, 0, NULL);
+                          else if (g_strcmp0 (ippGetName (attr), "ppd-name") == 0 &&
+                                   ippGetValueTag (attr) == IPP_TAG_NAME)
+                            ppd_name = ippGetString (attr, 0, NULL);
+                          else if (g_strcmp0 (ippGetName (attr), "ppd-product") == 0 &&
+                                   ippGetValueTag (attr) == IPP_TAG_TEXT)
+                            ppd_product = ippGetString (attr, 0, NULL);
 
-                          attr = attr->next;
+                          attr = ippNextAttribute (response);
                         }
 
                       if (ppd_device_id && ppd_name)
@@ -1011,15 +1052,15 @@ DBus method \"GetBestDrivers\". Using fallback solution for now.");
               response = cupsDoRequest (http, request, "/");
 
               if (response &&
-                  response->request.status.status_code <= IPP_OK_CONFLICT)
+                  ippGetStatusCode (response) <= IPP_OK_CONFLICT)
                 {
                   for (i = 0; equivalents && equivalents[i]; i++)
                     {
                       eq_normalized = normalize (equivalents[i]);
-                      for (attr = response->attrs; attr != NULL; attr = attr->next)
+                      for (attr = ippFirstAttribute (response); attr != NULL; attr = ippNextAttribute (response))
                         {
-                          while (attr != NULL && attr->group_tag != IPP_TAG_PRINTER)
-                            attr = attr->next;
+                          while (attr != NULL && ippGetGroupTag (attr) != IPP_TAG_PRINTER)
+                            attr = ippNextAttribute (response);
 
                           if (attr == NULL)
                             break;
@@ -1029,22 +1070,22 @@ DBus method \"GetBestDrivers\". Using fallback solution for now.");
                           ppd_name = NULL;
                           ppd_product = NULL;
 
-                          while (attr != NULL && attr->group_tag == IPP_TAG_PRINTER)
+                          while (attr != NULL && ippGetGroupTag (attr) == IPP_TAG_PRINTER)
                             {
-                              if (g_strcmp0 (attr->name, "ppd-device-id") == 0 &&
-                                  attr->value_tag == IPP_TAG_TEXT)
-                                ppd_device_id = attr->values[0].string.text;
-                              else if (g_strcmp0 (attr->name, "ppd-make-and-model") == 0 &&
-                                       attr->value_tag == IPP_TAG_TEXT)
-                                ppd_make_and_model = attr->values[0].string.text;
-                              else if (g_strcmp0 (attr->name, "ppd-name") == 0 &&
-                                       attr->value_tag == IPP_TAG_NAME)
-                                ppd_name = attr->values[0].string.text;
-                              else if (g_strcmp0 (attr->name, "ppd-product") == 0 &&
-                                       attr->value_tag == IPP_TAG_TEXT)
-                                ppd_product = attr->values[0].string.text;
+                              if (g_strcmp0 (ippGetName (attr), "ppd-device-id") == 0 &&
+                                  ippGetValueTag (attr) == IPP_TAG_TEXT)
+                                ppd_device_id = ippGetString (attr, 0, NULL);
+                              else if (g_strcmp0 (ippGetName (attr), "ppd-make-and-model") == 0 &&
+                                       ippGetValueTag (attr) == IPP_TAG_TEXT)
+                                ppd_make_and_model = ippGetString (attr, 0, NULL);
+                              else if (g_strcmp0 (ippGetName (attr), "ppd-name") == 0 &&
+                                       ippGetValueTag (attr) == IPP_TAG_NAME)
+                                ppd_name = ippGetString (attr, 0, NULL);
+                              else if (g_strcmp0 (ippGetName (attr), "ppd-product") == 0 &&
+                                       ippGetValueTag (attr) == IPP_TAG_TEXT)
+                                ppd_product = ippGetString (attr, 0, NULL);
 
-                              attr = attr->next;
+                              attr = ippNextAttribute (response);
                             }
 
                           if (ppd_device_id && ppd_name)
@@ -1354,23 +1395,23 @@ ccGetAllowedUsers (gchar ***allowed_users, const char *printer_name)
       ipp_attribute_t *attr = NULL;
       ipp_attribute_t *allowed = NULL;
 
-      for (attr = response->attrs; attr != NULL; attr = attr->next)
+      for (attr = ippFirstAttribute (response); attr != NULL; attr = ippNextAttribute (response))
         {
-          if (attr->group_tag == IPP_TAG_PRINTER &&
-              attr->value_tag == IPP_TAG_NAME &&
-              !g_strcmp0 (attr->name, "requesting-user-name-allowed"))
+          if (ippGetGroupTag (attr) == IPP_TAG_PRINTER &&
+              ippGetValueTag (attr) == IPP_TAG_NAME &&
+              !g_strcmp0 (ippGetName (attr), "requesting-user-name-allowed"))
             allowed = attr;
         }
 
-      if (allowed && allowed->num_values > 0)
+      if (allowed && ippGetCount (allowed) > 0)
         {
           int i;
 
-          num_allowed_users = allowed->num_values;
+          num_allowed_users = ippGetCount (allowed);
           users = g_new (gchar*, num_allowed_users);
 
           for (i = 0; i < num_allowed_users; i ++)
-            users[i] = g_strdup (allowed->values[i].string.text);
+            users[i] = g_strdup (ippGetString (allowed, i, NULL));
         }
       ippDelete(response);
     }
@@ -1456,12 +1497,12 @@ renew_cups_subscription (gint id,
                     "notify-lease-duration", lease_duration);
       response = cupsDoRequest (http, request, "/");
       if (response != NULL &&
-          response->request.status.status_code <= IPP_OK_CONFLICT) {
+          ippGetStatusCode (response) <= IPP_OK_CONFLICT) {
         if ((attr = ippFindAttribute (response, "notify-lease-duration",
                                       IPP_TAG_INTEGER)) == NULL)
           g_debug ("No notify-lease-duration in response!\n");
         else
-          if (attr->values[0].integer == lease_duration)
+          if (ippGetInteger (attr, 0) == lease_duration)
             result = id;
       }
     }
@@ -1483,12 +1524,12 @@ renew_cups_subscription (gint id,
       response = cupsDoRequest (http, request, "/");
 
       if (response != NULL &&
-          response->request.status.status_code <= IPP_OK_CONFLICT) {
+          ippGetStatusCode (response) <= IPP_OK_CONFLICT) {
         if ((attr = ippFindAttribute (response, "notify-subscription-id",
                                       IPP_TAG_INTEGER)) == NULL)
           g_debug ("No notify-subscription-id in response!\n");
         else
-          result = attr->values[0].integer;
+          result = ippGetInteger (attr, 0);
       }
     }
 
@@ -1657,38 +1698,38 @@ printer_rename (const gchar *old_name,
 
       if (response)
         {
-          if (response->request.status.status_code <= IPP_OK_CONFLICT)
+          if (ippGetStatusCode (response) <= IPP_OK_CONFLICT)
             {
               attr = ippFindAttribute (response, "printer-error-policy", IPP_TAG_NAME);
               if (attr)
-                error_policy = g_strdup (attr->values[0].string.text);
+                error_policy = g_strdup (ippGetString (attr, 0, NULL));
 
               attr = ippFindAttribute (response, "printer-op-policy", IPP_TAG_NAME);
               if (attr)
-                op_policy = g_strdup (attr->values[0].string.text);
+                op_policy = g_strdup (ippGetString (attr, 0, NULL));
 
               attr = ippFindAttribute (response, "requesting-user-name-allowed", IPP_TAG_NAME);
-              if (attr && attr->num_values > 0)
+              if (attr && ippGetCount (attr) > 0)
                 {
-                  users_allowed = g_new0 (gchar *, attr->num_values + 1);
-                  for (i = 0; i < attr->num_values; i++)
-                    users_allowed[i] = g_strdup (attr->values[i].string.text);
+                  users_allowed = g_new0 (gchar *, ippGetCount (attr) + 1);
+                  for (i = 0; i < ippGetCount (attr); i++)
+                    users_allowed[i] = g_strdup (ippGetString (attr, i, NULL));
                 }
 
               attr = ippFindAttribute (response, "requesting-user-name-denied", IPP_TAG_NAME);
-              if (attr && attr->num_values > 0)
+              if (attr && ippGetCount (attr) > 0)
                 {
-                  users_denied = g_new0 (gchar *, attr->num_values + 1);
-                  for (i = 0; i < attr->num_values; i++)
-                    users_denied[i] = g_strdup (attr->values[i].string.text);
+                  users_denied = g_new0 (gchar *, ippGetCount (attr) + 1);
+                  for (i = 0; i < ippGetCount (attr); i++)
+                    users_denied[i] = g_strdup (ippGetString (attr, i, NULL));
                 }
 
               attr = ippFindAttribute (response, "member-names", IPP_TAG_NAME);
-              if (attr && attr->num_values > 0)
+              if (attr && ippGetCount (attr) > 0)
                 {
-                  member_names = g_new0 (gchar *, attr->num_values + 1);
-                  for (i = 0; i < attr->num_values; i++)
-                    member_names[i] = g_strdup (attr->values[i].string.text);
+                  member_names = g_new0 (gchar *, ippGetCount (attr) + 1);
+                  for (i = 0; i < ippGetCount (attr); i++)
+                    member_names[i] = g_strdup (ippGetString (attr, i, NULL));
                 }
             }
           ippDelete (response);
@@ -2650,56 +2691,56 @@ get_ipp_attributes_func (gpointer user_data)
 
   if (response)
     {
-      if (response->request.status.status_code <= IPP_OK_CONFLICT)
+      if (ippGetStatusCode (response) <= IPP_OK_CONFLICT)
         {
           for (j = 0; j < length; j++)
             {
               attr = ippFindAttribute (response, requested_attrs[j], IPP_TAG_ZERO);
-              if (attr && attr->num_values > 0 && attr->value_tag != IPP_TAG_NOVALUE)
+              if (attr && ippGetCount (attr) > 0 && ippGetValueTag (attr) != IPP_TAG_NOVALUE)
                 {
                   IPPAttribute *attribute;
 
                   attribute = g_new0 (IPPAttribute, 1);
                   attribute->attribute_name = g_strdup (requested_attrs[j]);
-                  attribute->attribute_values = g_new0 (IPPAttributeValue, attr->num_values);
-                  attribute->num_of_values = attr->num_values;
+                  attribute->attribute_values = g_new0 (IPPAttributeValue, ippGetCount (attr));
+                  attribute->num_of_values = ippGetCount (attr);
 
-                  if (attr->value_tag == IPP_TAG_INTEGER ||
-                      attr->value_tag == IPP_TAG_ENUM)
+                  if (ippGetValueTag (attr) == IPP_TAG_INTEGER ||
+                      ippGetValueTag (attr) == IPP_TAG_ENUM)
                     {
                       attribute->attribute_type = IPP_ATTRIBUTE_TYPE_INTEGER;
 
-                      for (i = 0; i < attr->num_values; i++)
-                        attribute->attribute_values[i].integer_value = attr->values[i].integer;
+                      for (i = 0; i < ippGetCount (attr); i++)
+                        attribute->attribute_values[i].integer_value = ippGetInteger (attr, i);
                     }
-                  else if (attr->value_tag == IPP_TAG_NAME ||
-                           attr->value_tag == IPP_TAG_STRING ||
-                           attr->value_tag == IPP_TAG_TEXT ||
-                           attr->value_tag == IPP_TAG_URI ||
-                           attr->value_tag == IPP_TAG_KEYWORD ||
-                           attr->value_tag == IPP_TAG_URISCHEME)
+                  else if (ippGetValueTag (attr) == IPP_TAG_NAME ||
+                           ippGetValueTag (attr) == IPP_TAG_STRING ||
+                           ippGetValueTag (attr) == IPP_TAG_TEXT ||
+                           ippGetValueTag (attr) == IPP_TAG_URI ||
+                           ippGetValueTag (attr) == IPP_TAG_KEYWORD ||
+                           ippGetValueTag (attr) == IPP_TAG_URISCHEME)
                     {
                       attribute->attribute_type = IPP_ATTRIBUTE_TYPE_STRING;
 
-                      for (i = 0; i < attr->num_values; i++)
-                        attribute->attribute_values[i].string_value = g_strdup (attr->values[i].string.text);
+                      for (i = 0; i < ippGetCount (attr); i++)
+                        attribute->attribute_values[i].string_value = g_strdup (ippGetString (attr, i, NULL));
                     }
-                  else if (attr->value_tag == IPP_TAG_RANGE)
+                  else if (ippGetValueTag (attr) == IPP_TAG_RANGE)
                     {
                       attribute->attribute_type = IPP_ATTRIBUTE_TYPE_RANGE;
 
-                      for (i = 0; i < attr->num_values; i++)
+                      for (i = 0; i < ippGetCount (attr); i++)
                         {
-                          attribute->attribute_values[i].lower_range = attr->values[i].range.lower;
-                          attribute->attribute_values[i].upper_range = attr->values[i].range.upper;
+                          attribute->attribute_values[i].lower_range =
+                            ippGetRange (attr, i, &(attribute->attribute_values[i].upper_range));
                         }
                     }
-                  else if (attr->value_tag == IPP_TAG_BOOLEAN)
+                  else if (ippGetValueTag (attr) == IPP_TAG_BOOLEAN)
                     {
                       attribute->attribute_type = IPP_ATTRIBUTE_TYPE_BOOLEAN;
 
-                      for (i = 0; i < attr->num_values; i++)
-                        attribute->attribute_values[i].boolean_value = attr->values[i].boolean;
+                      for (i = 0; i < ippGetCount (attr); i++)
+                        attribute->attribute_values[i].boolean_value = ippGetBoolean (attr, i);
                     }
 
                   if (!data->result)
@@ -3913,11 +3954,11 @@ get_all_ppds_func (gpointer user_data)
   ipp_t           *request;
   ipp_t           *response;
   GList           *list;
-  gchar           *ppd_make_and_model;
-  gchar           *ppd_device_id;
-  gchar           *ppd_name;
-  gchar           *ppd_product;
-  gchar           *ppd_make;
+  const gchar     *ppd_make_and_model;
+  const gchar     *ppd_device_id;
+  const gchar     *ppd_name;
+  const gchar     *ppd_product;
+  const gchar     *ppd_make;
   gchar           *mfg;
   gchar           *mfg_normalized;
   gchar           *mdl;
@@ -3928,7 +3969,7 @@ get_all_ppds_func (gpointer user_data)
   response = cupsDoRequest (CUPS_HTTP_DEFAULT, request, "/");
 
   if (response &&
-      response->request.status.status_code <= IPP_OK_CONFLICT)
+      ippGetStatusCode (response) <= IPP_OK_CONFLICT)
     {
       /*
        * This hash contains names of manufacturers as keys and
@@ -3951,10 +3992,10 @@ get_all_ppds_func (gpointer user_data)
                                g_strdup (manufacturers_names[i].display_name));
         }
 
-      for (attr = response->attrs; attr != NULL; attr = attr->next)
+      for (attr = ippFirstAttribute (response); attr != NULL; attr = ippNextAttribute (response))
         {
-          while (attr != NULL && attr->group_tag != IPP_TAG_PRINTER)
-            attr = attr->next;
+          while (attr != NULL && ippGetGroupTag (attr) != IPP_TAG_PRINTER)
+            attr = ippNextAttribute (response);
 
           if (attr == NULL)
             break;
@@ -3968,25 +4009,25 @@ get_all_ppds_func (gpointer user_data)
           mfg_normalized = NULL;
           mdl = NULL;
 
-          while (attr != NULL && attr->group_tag == IPP_TAG_PRINTER)
+          while (attr != NULL && ippGetGroupTag (attr) == IPP_TAG_PRINTER)
             {
-              if (g_strcmp0 (attr->name, "ppd-device-id") == 0 &&
-                  attr->value_tag == IPP_TAG_TEXT)
-                ppd_device_id = attr->values[0].string.text;
-              else if (g_strcmp0 (attr->name, "ppd-make-and-model") == 0 &&
-                       attr->value_tag == IPP_TAG_TEXT)
-                ppd_make_and_model = attr->values[0].string.text;
-              else if (g_strcmp0 (attr->name, "ppd-name") == 0 &&
-                       attr->value_tag == IPP_TAG_NAME)
-                ppd_name = attr->values[0].string.text;
-              else if (g_strcmp0 (attr->name, "ppd-product") == 0 &&
-                       attr->value_tag == IPP_TAG_TEXT)
-                ppd_product = attr->values[0].string.text;
-              else if (g_strcmp0 (attr->name, "ppd-make") == 0 &&
-                       attr->value_tag == IPP_TAG_TEXT)
-                ppd_make = attr->values[0].string.text;
+              if (g_strcmp0 (ippGetName (attr), "ppd-device-id") == 0 &&
+                  ippGetValueTag (attr) == IPP_TAG_TEXT)
+                ppd_device_id = ippGetString (attr, 0, NULL);
+              else if (g_strcmp0 (ippGetName (attr), "ppd-make-and-model") == 0 &&
+                       ippGetValueTag (attr) == IPP_TAG_TEXT)
+                ppd_make_and_model = ippGetString (attr, 0, NULL);
+              else if (g_strcmp0 (ippGetName (attr), "ppd-name") == 0 &&
+                       ippGetValueTag (attr) == IPP_TAG_NAME)
+                ppd_name = ippGetString (attr, 0, NULL);
+              else if (g_strcmp0 (ippGetName (attr), "ppd-product") == 0 &&
+                       ippGetValueTag (attr) == IPP_TAG_TEXT)
+                ppd_product = ippGetString (attr, 0, NULL);
+              else if (g_strcmp0 (ippGetName (attr), "ppd-make") == 0 &&
+                       ippGetValueTag (attr) == IPP_TAG_TEXT)
+                ppd_make = ippGetString (attr, 0, NULL);
 
-              attr = attr->next;
+              attr = ippNextAttribute (response);
             }
 
           /* Get manufacturer's name */

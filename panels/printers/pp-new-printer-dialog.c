@@ -59,6 +59,14 @@
 
 #define ALLOWED_CHARACTERS "abcdefghijklmnopqrtsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
 
+#if (CUPS_VERSION_MAJOR > 1) || (CUPS_VERSION_MINOR > 5)
+#define HAVE_CUPS_1_6 1
+#endif
+
+#ifndef HAVE_CUPS_1_6
+#define ippGetState(ipp) ipp->state
+#endif
+
 static void pp_new_printer_dialog_hide (PpNewPrinterDialog *pp);
 static void actualize_devices_list (PpNewPrinterDialog *pp);
 
@@ -1760,7 +1768,7 @@ new_printer_add_button_cb (GtkButton *button,
                                                           _("Automatic configuration"));
                   if (response)
                     {
-                      if (response->state == IPP_ERROR)
+                      if (ippGetState (response) == IPP_ERROR)
                         g_warning ("An error has occured during automatic configuration of new printer.");
                       ippDelete (response);
                     }
