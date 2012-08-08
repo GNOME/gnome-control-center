@@ -74,7 +74,38 @@ static void on_account_changed (GoaClient  *client,
                                 GoaObject  *object,
                                 gpointer    user_data);
 
+static gboolean select_account_by_id (GoaPanel    *panel,
+                                      const gchar *account_id);
+
 G_DEFINE_DYNAMIC_TYPE (GoaPanel, goa_panel, CC_TYPE_PANEL);
+
+enum {
+  PROP_0,
+  PROP_ARGV
+};
+
+static void
+goa_panel_set_property (GObject *object,
+                        guint property_id,
+                        const GValue *value,
+                        GParamSpec *pspec)
+{
+  switch (property_id)
+    {
+      case PROP_ARGV:
+        {
+          gchar **args;
+
+          args = g_value_get_boxed (value);
+
+          if (args != NULL && *args != '\0')
+            select_account_by_id (GOA_PANEL (object), args[0]);
+          return;
+        }
+    }
+
+  G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+}
 
 static void
 goa_panel_finalize (GObject *object)
@@ -228,9 +259,14 @@ goa_panel_get_help_uri (CcPanel *panel)
 static void
 goa_panel_class_init (GoaPanelClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   panel_class->get_help_uri = goa_panel_get_help_uri;
+
+  object_class->set_property = goa_panel_set_property;
+
+  g_object_class_override_property (object_class, PROP_ARGV, "argv");
 }
 
 static void
@@ -434,6 +470,36 @@ show_page_account (GoaPanel  *panel,
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
+
+static gboolean
+select_account_by_id (GoaPanel    *panel,
+                      const gchar *account_id)
+{
+  GoaObject *goa_object = NULL;
+  GtkTreeIter iter;
+  gboolean iter_set = FALSE;
+
+  goa_object = goa_client_lookup_by_id (panel->client, account_id);
+  if (goa_object != NULL)
+    {
+      iter_set = goa_panel_accounts_model_get_iter_for_object (panel->accounts_model,
+                                                               goa_object,
+                                                               &iter);
+      g_object_unref (goa_object);
+    }
+
+  if (iter_set)
+    {
+      GtkTreeView *tree_view;
+      GtkTreeSelection *selection;
+
+      tree_view = GTK_TREE_VIEW (panel->accounts_treeview);
+      selection = gtk_tree_view_get_selection (tree_view);
+      gtk_tree_selection_select_iter (selection, &iter);
+    }
+
+  return iter_set;
+}
 
 static void
 on_tree_view_selection_changed (GtkTreeSelection *selection,
