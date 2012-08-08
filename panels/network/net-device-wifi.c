@@ -1434,8 +1434,10 @@ start_hotspot (GtkButton *button, NetDeviceWifi *device_wifi)
         str = g_string_new (_("If you have a connection to the Internet other than wireless, you can use it to share your internet connection with others."));
         g_string_append (str, "\n\n");
 
-        if (active_ssid)
+        if (active_ssid) {
                 g_string_append_printf (str, _("Switching on the wireless hotspot will disconnect you from <b>%s</b>."), active_ssid);
+                g_string_append (str, " ");
+        }
 
         g_string_append (str, _("It is not possible to access the internet through your wireless while the hotspot is active."));
 
