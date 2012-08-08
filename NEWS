@@ -1,4 +1,52 @@
 ==========================
+Version 3.5.6 (2012-08-08)
+==========================
+
+- Add man page
+
+Display:
+- Fix possible error when the preferred mode is only
+  available on one of the two outputs in mirror mode
+
+Wacom:
+- Fix critical warning after calibration
+- Only do calibration for the selected tool
+
+Region:
+- Make ibus code more robust
+- Handle being opened twice gracefully
+- Require ibus 1.4.99 if ibus support is requested
+
+User accounts:
+- Update for realmd 0.6
+- Strip remote D-Bus errors from user-visible messages
+- Fix memory leaks
+
+Network:
+- Refactoring for mobile broadband support and bug fixes
+- Split the wireless panel
+- Only show extra details for the active connection
+- Add network strength to the details panel
+- Only show the disconnect button when a device is fully activated
+- Fix crash with Access Points with non UTF-8 names
+- Forget the last selected wireless network when the button is clicked
+- Improve hotspot dialogue
+
+Printers:
+- Add support for CUPS 1.6
+- Don't restrict the PPD list to PPDs with DeviceIDs
+- Cancel async operations correctly
+- Move jobs to a separate dialogue
+
+Brightness & Lock:
+- Make "show notifications" available even if we don't lock
+  the screen automatically
+
+Info:
+- Adapt for changed API in PackageKit
+- Small UI bug fixes
+
+==========================
 Version 3.5.5 (2012-07-16)
 ==========================
 
