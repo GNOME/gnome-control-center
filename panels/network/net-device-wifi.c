@@ -1837,6 +1837,7 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
         GtkTreeSortable *sortable;
         GtkTreeViewColumn *column;
         GtkCellArea *area;
+        GdkRGBA transparent = { 0.0, 0.0, 0.0, 0.0 };
 
         device_wifi->priv = NET_DEVICE_WIFI_GET_PRIVATE (device_wifi);
 
@@ -1988,4 +1989,8 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                                                      "switch_hotspot_off"));
         g_signal_connect (widget, "notify::active",
                           G_CALLBACK (switch_hotspot_changed_cb), device_wifi);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
+                                                     "viewport_list"));
+        gtk_widget_override_background_color (widget, 0, &transparent);
 }
