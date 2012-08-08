@@ -667,7 +667,6 @@ static void
 nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
 {
         const gchar *str;
-        gboolean is_connected;
         gboolean is_hotspot;
         gchar *str_tmp = NULL;
         GtkWidget *widget;
@@ -713,13 +712,6 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         gtk_label_set_label (GTK_LABEL (widget),
                              panel_device_state_to_localized_string (nm_device));
         gtk_widget_set_tooltip_text (widget, panel_device_state_reason_to_localized_string (nm_device));
-
-        /* The options button is always enabled for wired connections,
-         * and is sensitive for other connection types if the device
-         * is currently connected */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "button_options"));
-        is_connected = find_connection_for_device (device_wifi, nm_device) != NULL;
-        gtk_widget_set_sensitive (widget, is_connected);
 
         /* device MAC */
         str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (nm_device));
