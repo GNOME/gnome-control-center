@@ -559,7 +559,6 @@ find_supported_credentials (UmRealmKerberos *realm,
 
         g_variant_iter_init (&iter, supported);
         while (g_variant_iter_loop (&iter, "(&s&s)", &cred_type, &cred_owner)) {
-        	g_printerr ("%s %s %s\n", cred_type, cred_owner, owner);
                 if (g_str_equal (owner, cred_owner)) {
                         if (g_str_equal (cred_type, "ccache") ||
                             g_str_equal (cred_type, "password")) {
