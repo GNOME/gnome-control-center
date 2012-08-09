@@ -516,7 +516,6 @@ free_dests (CcPrintersPanel *self)
 enum
 {
   NOTEBOOK_INFO_PAGE = 0,
-  NOTEBOOK_OPTIONS_PAGE,
   NOTEBOOK_NO_PRINTERS_PAGE,
   NOTEBOOK_NO_CUPS_PAGE,
   NOTEBOOK_N_PAGES
@@ -2458,21 +2457,6 @@ on_lockdown_settings_changed (GSettings  *settings,
 }
 
 static void
-go_back_cb (GtkButton *button,
-            gpointer   user_data)
-{
-  CcPrintersPanelPrivate  *priv;
-  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
-  GtkWidget               *widget;
-
-  priv = PRINTERS_PANEL_PRIVATE (self);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "notebook");
-  gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), NOTEBOOK_INFO_PAGE);
-}
-
-static void
 printer_options_response_cb (GtkDialog *dialog,
                              gint       response_id,
                              gpointer   user_data)
@@ -2723,10 +2707,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "print-test-page-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (test_page_cb), self);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (priv->builder, "back-button-2");
-  g_signal_connect (widget, "clicked", G_CALLBACK (go_back_cb), self);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (priv->builder, "printer-jobs-button");
