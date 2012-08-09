@@ -196,6 +196,9 @@ setup_dialog (GtkBuilder *dialog)
 	g_settings_bind (touchpad_settings, "tap-to-click",
 			 WID ("tap_to_click_toggle"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
+	g_settings_bind (touchpad_settings, "natural-scroll",
+			 WID ("natural_scroll_toggle"), "active",
+			 G_SETTINGS_BIND_DEFAULT);
 
 	g_signal_connect (WID ("touchpad_pointer_speed_scale"), "value-changed",
 			  G_CALLBACK (pointer_speed_scale_event), dialog);
