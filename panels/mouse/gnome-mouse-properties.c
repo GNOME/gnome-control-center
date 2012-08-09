@@ -134,6 +134,25 @@ synaptics_check_capabilities (GtkBuilder *dialog)
 	XFreeDeviceList (devicelist);
 }
 
+static void
+pointer_speed_scale_event (GtkRange *scale, GtkBuilder *dialog)
+{
+	gdouble value;
+	GSettings *settings;
+	GtkAdjustment *adjustment;
+
+	if (GTK_WIDGET (scale) == WID ("pointer_speed_scale"))
+		settings = mouse_settings;
+	else
+		settings = touchpad_settings;
+
+	g_settings_set_double (settings, "motion-acceleration", gtk_range_get_value (scale));
+
+	adjustment = gtk_range_get_adjustment (scale);
+	value = gtk_adjustment_get_upper (adjustment) - gtk_range_get_value (scale) + 1;
+	g_settings_set_int (settings, "motion-threshold", value);
+}
+
 /* Set up the property editors in the dialog. */
 static void
 setup_dialog (GtkBuilder *dialog)
@@ -157,12 +176,8 @@ setup_dialog (GtkBuilder *dialog)
 			 G_SETTINGS_BIND_DEFAULT);
 
 	/* speed */
-	g_settings_bind (mouse_settings, "motion-acceleration",
-			 gtk_range_get_adjustment (GTK_RANGE (WID ("acceleration_scale"))), "value",
-			 G_SETTINGS_BIND_DEFAULT);
-	g_settings_bind (mouse_settings, "motion-threshold",
-			 gtk_range_get_adjustment (GTK_RANGE (WID ("sensitivity_scale"))), "value",
-			 G_SETTINGS_BIND_DEFAULT);
+	g_signal_connect (WID ("pointer_speed_scale"), "value-changed",
+			  G_CALLBACK (pointer_speed_scale_event), dialog);
 
 	/* Trackpad page */
 	touchpad_present = touchpad_is_present ();
@@ -181,12 +196,9 @@ setup_dialog (GtkBuilder *dialog)
 	g_settings_bind (touchpad_settings, "tap-to-click",
 			 WID ("tap_to_click_toggle"), "active",
 			 G_SETTINGS_BIND_DEFAULT);
-	g_settings_bind (touchpad_settings, "motion-acceleration",
-			 gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad_acceleration_scale"))), "value",
-			 G_SETTINGS_BIND_DEFAULT);
-	g_settings_bind (touchpad_settings, "motion-threshold",
-			 gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad_sensitivity_scale"))), "value",
-			 G_SETTINGS_BIND_DEFAULT);
+
+	g_signal_connect (WID ("touchpad_pointer_speed_scale"), "value-changed",
+			  G_CALLBACK (pointer_speed_scale_event), dialog);
 
 	if (touchpad_present) {
 		synaptics_check_capabilities (dialog);
@@ -206,25 +218,19 @@ create_dialog (GtkBuilder *dialog)
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 	gtk_size_group_add_widget (size_group, WID ("primary_button_label"));
-	gtk_size_group_add_widget (size_group, WID ("acceleration_label"));
-	gtk_size_group_add_widget (size_group, WID ("sensitivity_label"));
+	gtk_size_group_add_widget (size_group, WID ("pointer_speed_label"));
 	gtk_size_group_add_widget (size_group, WID ("double_click_label"));
-	gtk_size_group_add_widget (size_group, WID ("touchpad_acceleration_label"));
-	gtk_size_group_add_widget (size_group, WID ("touchpad_sensitivity_label"));
+	gtk_size_group_add_widget (size_group, WID ("touchpad_pointer_speed_label"));
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-	gtk_size_group_add_widget (size_group, WID ("acceleration_fast_label"));
-	gtk_size_group_add_widget (size_group, WID ("sensitivity_high_label"));
+	gtk_size_group_add_widget (size_group, WID ("pointer_speed_fast_label"));
 	gtk_size_group_add_widget (size_group, WID ("double_click_fast_label"));
-	gtk_size_group_add_widget (size_group, WID ("touchpad_acceleration_fast_label"));
-	gtk_size_group_add_widget (size_group, WID ("touchpad_sensitivity_high_label"));
+	gtk_size_group_add_widget (size_group, WID ("touchpad_pointer_speed_fast_label"));
 
 	size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-	gtk_size_group_add_widget (size_group, WID ("acceleration_slow_label"));
-	gtk_size_group_add_widget (size_group, WID ("sensitivity_low_label"));
+	gtk_size_group_add_widget (size_group, WID ("pointer_speed_slow_label"));
 	gtk_size_group_add_widget (size_group, WID ("double_click_slow_label"));
-	gtk_size_group_add_widget (size_group, WID ("touchpad_acceleration_slow_label"));
-	gtk_size_group_add_widget (size_group, WID ("touchpad_sensitivity_low_label"));
+	gtk_size_group_add_widget (size_group, WID ("touchpad_pointer_speed_slow_label"));
 }
 
 /* Callback issued when a button is clicked on the dialog */
