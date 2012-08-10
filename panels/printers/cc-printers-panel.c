@@ -547,6 +547,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
   GtkWidget              *widget;
   GtkWidget              *model_button;
   GtkWidget              *model_label;
+  gboolean                is_accepting_jobs = TRUE;
   GValue                  value = G_VALUE_INIT;
   gchar                  *printer_make_and_model = NULL;
   gchar                  *printer_model = NULL;
@@ -610,8 +611,8 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
       N_("Out of paper"),
       /* Translators: The printer is offline */
       NC_("printer state", "Offline"),
-      /* Translators: Someone has paused the Printer */
-      NC_("printer state", "Paused"),
+      /* Translators: Someone has stopped the Printer */
+      NC_("printer state", "Stopped"),
       /* Translators: The printer marker supply waste receptacle is almost full */
       N_("Waste receptacle almost full"),
       /* Translators: The printer marker supply waste receptacle is full */
@@ -666,6 +667,13 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
             printer_type = priv->dests[priv->current_dest].options[i].value;
           else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "device-uri") == 0)
             device_uri = priv->dests[priv->current_dest].options[i].value;
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-is-accepting-jobs") == 0)
+            {
+              if (g_strcmp0 (priv->dests[priv->current_dest].options[i].value, "true") == 0)
+                is_accepting_jobs = TRUE;
+              else
+                is_accepting_jobs = FALSE;
+            }
         }
 
       if (priv->ppd_file_names[priv->current_dest] == NULL)
@@ -778,8 +786,16 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
           switch (printer_state)
             {
               case 3:
-                /* Translators: Printer's state (can start new job without waiting) */
-                status = g_strdup ( C_("printer state", "Ready"));
+                if (is_accepting_jobs)
+                  {
+                    /* Translators: Printer's state (can start new job without waiting) */
+                    status = g_strdup ( C_("printer state", "Ready"));
+                  }
+                else
+                  {
+                    /* Translators: Printer's state (printer is ready but doesn't accept new jobs) */
+                    status = g_strdup ( C_("printer state", "Does not accept jobs"));
+                  }
                 break;
               case 4:
                 /* Translators: Printer's state (jobs are processing) */
@@ -881,7 +897,7 @@ printer_selection_changed_cb (GtkTreeSelection *selection,
         gtk_builder_get_object (priv->builder, "printer-disable-switch");
 
       g_signal_handlers_block_by_func (G_OBJECT (widget), printer_disable_cb, self);
-      gtk_switch_set_active (GTK_SWITCH (widget), printer_state != 5);
+      gtk_switch_set_active (GTK_SWITCH (widget), printer_state != 5 && is_accepting_jobs);
       g_signal_handlers_unblock_by_func (G_OBJECT (widget), printer_disable_cb, self);
 
 
@@ -1437,6 +1453,7 @@ printer_disable_cb (GObject    *gobject,
   CcPrintersPanelPrivate *priv;
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   gboolean                paused = FALSE;
+  gboolean                is_accepting_jobs = TRUE;
   char                   *name = NULL;
   int                     i;
 
@@ -1452,11 +1469,34 @@ printer_disable_cb (GObject    *gobject,
         {
           if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-state") == 0)
             paused = (g_strcmp0 (priv->dests[priv->current_dest].options[i].value, "5") == 0);
+          else if (g_strcmp0 (priv->dests[priv->current_dest].options[i].name, "printer-is-accepting-jobs") == 0)
+            {
+              if (g_strcmp0 (priv->dests[priv->current_dest].options[i].value, "true") == 0)
+                is_accepting_jobs = TRUE;
+              else
+                is_accepting_jobs = FALSE;
+            }
         }
     }
 
-  if (name && printer_set_enabled (name, paused))
-    actualize_printers_list (self);
+  if (name)
+    {
+      if (!paused && is_accepting_jobs)
+        {
+          printer_set_enabled (name, FALSE);
+          printer_set_accepting_jobs (name, FALSE, NULL);
+        }
+      else
+        {
+          if (paused)
+            printer_set_enabled (name, TRUE);
+
+          if (!is_accepting_jobs)
+            printer_set_accepting_jobs (name, TRUE, NULL);
+        }
+
+      actualize_printers_list (self);
+    }
 }
 
 typedef struct {
