@@ -3,8 +3,7 @@ cappletname = background
 
 uidir = $(pkgdatadir)/ui/background
 dist_ui_DATA = \
-	background.ui \
-	display-overlay.png
+	background.ui
 
 slideshowicondir = $(datadir)/icons/hicolor/scalable/categories/
 dist_slideshowicon_DATA = slideshow-symbolic.svg

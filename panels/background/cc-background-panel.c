@@ -62,7 +62,6 @@ struct _CcBackgroundPanelPrivate
 
   GtkWidget *spinner;
 
-  GdkPixbuf *display_overlay;
   GdkPixbuf *display_screenshot;
   char *screenshot_path;
 };
@@ -108,12 +107,6 @@ cc_background_panel_dispose (GObject *object)
     {
       g_object_unref (priv->thumb_factory);
       priv->thumb_factory = NULL;
-    }
-
-  if (priv->display_overlay)
-    {
-      g_object_unref (priv->display_overlay);
-      priv->display_overlay = NULL;
     }
 
   if (priv->display_screenshot)
@@ -242,14 +235,6 @@ update_display_preview (CcBackgroundPanel *panel)
     {
       gdk_cairo_set_source_pixbuf (cr,
                                    pixbuf,
-                                   0, 0);
-      cairo_paint (cr);
-    }
-
-  if (priv->display_overlay)
-    {
-      gdk_cairo_set_source_pixbuf (cr,
-                                   priv->display_overlay,
                                    0, 0);
       cairo_paint (cr);
     }
@@ -727,10 +712,6 @@ cc_background_panel_init (CcBackgroundPanel *self)
                     self);
 
   priv->copy_cancellable = g_cancellable_new ();
-
-  priv->display_overlay = gdk_pixbuf_new_from_file (DATADIR
-                                                    "/display-overlay.png",
-                                                    NULL);
 
   priv->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 
