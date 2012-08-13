@@ -769,8 +769,10 @@ section_selection_changed (GtkTreeSelection *selection, gpointer data)
       if (keys == NULL)
         {
           g_warning ("Can't find section %s in sections hash table!!!", description);
+          g_free (description);
           return;
         }
+      g_free (description);
 
       gtk_widget_set_sensitive (WID (builder, "remove-toolbutton"), FALSE);
 
