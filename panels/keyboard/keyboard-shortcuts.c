@@ -247,8 +247,6 @@ append_section (GtkBuilder         *builder,
   /* Add the keys to the hash table */
   if (is_new)
     {
-      static gboolean have_sep = FALSE;
-
       g_hash_table_insert (hash, g_strdup (title), keys_array);
 
       /* Append the section to the left tree view */
@@ -257,16 +255,6 @@ append_section (GtkBuilder         *builder,
                           SECTION_DESCRIPTION_COLUMN, title,
                           SECTION_GROUP_COLUMN, group,
                           -1);
-      if (!have_sep && group != BINDING_GROUP_SYSTEM)
-        {
-          have_sep = TRUE;
-          /* Append the section to the left tree view */
-          gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-          gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-                              SECTION_DESCRIPTION_COLUMN, NULL,
-                              SECTION_GROUP_COLUMN, BINDING_GROUP_SYSTEM,
-                              -1);
-        }
     }
 }
 
@@ -654,6 +642,13 @@ reload_sections (GtkBuilder *builder)
 
   g_hash_table_destroy (loaded_files);
   g_strfreev (wm_keybindings);
+
+  /* Add a separator */
+  gtk_list_store_append (GTK_LIST_STORE (section_model), &iter);
+  gtk_list_store_set (GTK_LIST_STORE (section_model), &iter,
+                      SECTION_DESCRIPTION_COLUMN, NULL,
+                      SECTION_GROUP_COLUMN, BINDING_GROUP_SYSTEM,
+                      -1);
 
   /* Load custom keybindings */
   append_sections_from_gsettings (builder);
