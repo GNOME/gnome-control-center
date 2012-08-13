@@ -1418,65 +1418,6 @@ remove_button_clicked (GtkWidget  *button,
 }
 
 static int
-keyentry_sort_func (GtkTreeModel *model,
-                    GtkTreeIter  *a,
-                    GtkTreeIter  *b,
-                    gpointer      user_data)
-{
-  CcKeyboardItem *item_a;
-  CcKeyboardItem *item_b;
-  int retval;
-
-  item_a = NULL;
-  gtk_tree_model_get (model, a,
-                      DETAIL_KEYENTRY_COLUMN, &item_a,
-                      -1);
-
-  item_b = NULL;
-  gtk_tree_model_get (model, b,
-                      DETAIL_KEYENTRY_COLUMN, &item_b,
-                      -1);
-
-  if (item_a && item_b)
-    {
-      if ((item_a->keyval || item_a->keycode) &&
-          (item_b->keyval || item_b->keycode))
-        {
-          gchar *name_a, *name_b;
-
-          name_a = binding_name (item_a->keyval,
-                                 item_a->keycode,
-                                 item_a->mask,
-                                 TRUE);
-
-          name_b = binding_name (item_b->keyval,
-                                 item_b->keycode,
-                                 item_b->mask,
-                                 TRUE);
-
-          retval = g_utf8_collate (name_a, name_b);
-
-          g_free (name_a);
-          g_free (name_b);
-        }
-      else if (item_a->keyval || item_a->keycode)
-        retval = -1;
-      else if (item_b->keyval || item_b->keycode)
-        retval = 1;
-      else
-        retval = 0;
-    }
-  else if (item_a)
-    retval = -1;
-  else if (item_b)
-    retval = 1;
-  else
-    retval = 0;
-
-  return retval;
-}
-
-static int
 section_sort_item  (GtkTreeModel *model,
                     GtkTreeIter  *a,
                     GtkTreeIter  *b,
@@ -1612,15 +1553,12 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   renderer = gtk_cell_renderer_text_new ();
   g_object_set (G_OBJECT (renderer), "ellipsize", PANGO_ELLIPSIZE_END, NULL);
 
-  column = gtk_tree_view_column_new_with_attributes (_("Action"),
-                                                     renderer,
-                                                     NULL);
+  column = gtk_tree_view_column_new_with_attributes (NULL, renderer, NULL);
   gtk_tree_view_column_set_cell_data_func (column, renderer, description_set_func, NULL, NULL);
   gtk_tree_view_column_set_resizable (column, FALSE);
   gtk_tree_view_column_set_expand (column, TRUE);
 
   gtk_tree_view_append_column (treeview, column);
-  gtk_tree_view_column_set_sort_column_id (column, DETAIL_DESCRIPTION_COLUMN);
 
   renderer = (GtkCellRenderer *) g_object_new (GTK_TYPE_CELL_RENDERER_ACCEL,
                                                "accel-mode", GTK_CELL_RENDERER_ACCEL_MODE_OTHER,
@@ -1634,19 +1572,14 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
                     G_CALLBACK (accel_cleared_callback),
                     treeview);
 
-  column = gtk_tree_view_column_new_with_attributes (_("Shortcut"), renderer, NULL);
+  column = gtk_tree_view_column_new_with_attributes (NULL, renderer, NULL);
   gtk_tree_view_column_set_cell_data_func (column, renderer, accel_set_func, NULL, NULL);
   gtk_tree_view_column_set_resizable (column, FALSE);
   gtk_tree_view_column_set_expand (column, FALSE);
 
   gtk_tree_view_append_column (treeview, column);
-  gtk_tree_view_column_set_sort_column_id (column, DETAIL_KEYENTRY_COLUMN);
 
   model = gtk_list_store_new (DETAIL_N_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model),
-                                   DETAIL_KEYENTRY_COLUMN,
-                                   keyentry_sort_func,
-                                   NULL, NULL);
   gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (model));
   g_object_unref (model);
 
