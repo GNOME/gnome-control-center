@@ -87,7 +87,6 @@ enum {
         TITLE_COL,
         HEADING_ROW_COL,
         SORT_KEY_COL,
-        AUTOLOGIN_COL,
         NUM_USER_LIST_COLS
 };
 
@@ -131,7 +130,6 @@ user_added (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
         gchar *text;
         GtkTreeSelection *selection;
         gint sort_key;
-        gboolean is_autologin;
 
         g_debug ("user added: %d %s\n", um_user_get_uid (user), um_user_get_real_name (user));
         widget = get_widget (d, "list-treeview");
@@ -141,8 +139,6 @@ user_added (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
 
         pixbuf = um_user_render_icon (user, TRUE, 48);
         text = get_name_col_str (user);
-
-        is_autologin = um_user_get_automatic_login (user);
 
         if (um_user_get_uid (user) == getuid ()) {
                 sort_key = 1;
@@ -160,7 +156,6 @@ user_added (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
                             TITLE_COL, NULL,
                             HEADING_ROW_COL, FALSE,
                             SORT_KEY_COL, sort_key,
-                            AUTOLOGIN_COL, is_autologin,
                             -1);
         g_object_unref (pixbuf);
         g_free (text);
@@ -256,7 +251,6 @@ user_changed (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
         UmUser *current;
         GdkPixbuf *pixbuf;
         char *text;
-        gboolean is_autologin;
 
         tv = (GtkTreeView *)get_widget (d, "list-treeview");
         model = gtk_tree_view_get_model (tv);
@@ -268,13 +262,11 @@ user_changed (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
                 if (current == user) {
                         pixbuf = um_user_render_icon (user, TRUE, 48);
                         text = get_name_col_str (user);
-                        is_autologin = um_user_get_automatic_login (user);
 
                         gtk_list_store_set (GTK_LIST_STORE (model), &iter,
                                             USER_COL, user,
                                             FACE_COL, pixbuf,
                                             NAME_COL, text,
-                                            AUTOLOGIN_COL, is_autologin,
                                             -1);
                         g_object_unref (pixbuf);
                         g_free (text);
@@ -1115,24 +1107,6 @@ match_user (GtkTreeModel *model,
 }
 
 static void
-autologin_cell_data_func (GtkTreeViewColumn    *tree_column,
-                          GtkCellRenderer      *cell,
-                          GtkTreeModel         *model,
-                          GtkTreeIter          *iter,
-                          UmUserPanelPrivate   *d)
-{
-        gboolean is_autologin;
-
-        gtk_tree_model_get (model, iter, AUTOLOGIN_COL, &is_autologin, -1);
-
-        if (is_autologin) {
-                g_object_set (cell, "icon-name", "emblem-default-symbolic", NULL);
-        } else {
-                g_object_set (cell, "icon-name", NULL, NULL);
-        }
-}
-
-static void
 setup_main_window (UmUserPanelPrivate *d)
 {
         GtkWidget *userlist;
@@ -1157,8 +1131,7 @@ setup_main_window (UmUserPanelPrivate *d)
                                     G_TYPE_BOOLEAN,
                                     G_TYPE_STRING,
                                     G_TYPE_BOOLEAN,
-                                    G_TYPE_INT,
-                                    G_TYPE_BOOLEAN);
+                                    G_TYPE_INT);
         model = (GtkTreeModel *)store;
         gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (model), sort_users, NULL, NULL);
         gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model), GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID, GTK_SORT_ASCENDING);
@@ -1179,7 +1152,6 @@ setup_main_window (UmUserPanelPrivate *d)
                             TITLE_COL, title,
                             HEADING_ROW_COL, TRUE,
                             SORT_KEY_COL, 0,
-                            AUTOLOGIN_COL, FALSE,
                             -1);
         g_free (title);
 
@@ -1189,7 +1161,6 @@ setup_main_window (UmUserPanelPrivate *d)
                             TITLE_COL, title,
                             HEADING_ROW_COL, TRUE,
                             SORT_KEY_COL, 2,
-                            AUTOLOGIN_COL, FALSE,
                             -1);
         g_free (title);
 
@@ -1207,15 +1178,6 @@ setup_main_window (UmUserPanelPrivate *d)
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), cell, TRUE);
         gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "markup", TITLE_COL);
         gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "visible", HEADING_ROW_COL);
-        cell = gtk_cell_renderer_pixbuf_new ();
-        g_object_set (cell, "follow-state", TRUE, NULL);
-        gtk_tree_view_column_pack_start (column, cell, FALSE);
-        gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "visible", USER_ROW_COL);
-        gtk_tree_view_column_set_cell_data_func (column,
-                                                 cell,
-                                                 (GtkTreeCellDataFunc) autologin_cell_data_func,
-                                                 d,
-                                                 NULL);
 
         gtk_tree_view_append_column (GTK_TREE_VIEW (userlist), column);
 
