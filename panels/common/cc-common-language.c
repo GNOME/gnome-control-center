@@ -537,6 +537,9 @@ cc_common_language_get_initial_languages (void)
         if (gdm_language_has_translations ("ru") ||
             gdm_language_has_translations ("ru_RU"))
                  g_hash_table_insert (ht, g_strdup ("ru_RU.utf8"), g_strdup (_("Russian")));
+        if (gdm_language_has_translations ("ar") ||
+            gdm_language_has_translations ("ar_EG"))
+                g_hash_table_insert (ht, g_strdup ("ar_EG.utf8"), g_strdup (_("Arabic")));
 
         /* Add the languages used by other users on the system */
         add_other_users_language (ht);
