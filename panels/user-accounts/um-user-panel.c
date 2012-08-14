@@ -67,7 +67,6 @@ struct _UmUserPanelPrivate {
         GPermission *permission;
         GtkWidget *language_chooser;
 
-        UmAccountDialog *account_dialog;
         UmPasswordDialog *password_dialog;
         UmPhotoDialog *photo_dialog;
 };
@@ -303,6 +302,7 @@ select_created_user (GObject *object,
                      gpointer user_data)
 {
         UmUserPanelPrivate *d = user_data;
+        UmAccountDialog *dialog;
         GtkTreeView *tv;
         GtkTreeModel *model;
         GtkTreeSelection *selection;
@@ -311,7 +311,10 @@ select_created_user (GObject *object,
         GtkTreePath *path;
         UmUser *user;
 
-        user = um_account_dialog_finish (UM_ACCOUNT_DIALOG (object), result);
+        dialog = UM_ACCOUNT_DIALOG (object);
+        user = um_account_dialog_finish (dialog, result);
+        gtk_widget_destroy (GTK_WIDGET (dialog));
+
         if (user == NULL)
                 return;
 
@@ -340,8 +343,10 @@ select_created_user (GObject *object,
 static void
 add_user (GtkButton *button, UmUserPanelPrivate *d)
 {
-        um_account_dialog_show (d->account_dialog,
-                                GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
+        UmAccountDialog *dialog;
+
+        dialog = um_account_dialog_new ();
+        um_account_dialog_show (dialog, GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)),
                                 select_created_user, d);
 }
 
@@ -1278,7 +1283,6 @@ um_user_panel_init (UmUserPanel *self)
         }
 
         setup_main_window (d);
-        d->account_dialog = um_account_dialog_new ();
         d->password_dialog = um_password_dialog_new ();
         button = get_widget (d, "user-icon-button");
         d->photo_dialog = um_photo_dialog_new (button);
@@ -1303,10 +1307,6 @@ um_user_panel_dispose (GObject *object)
         if (priv->builder) {
                 g_object_unref (priv->builder);
                 priv->builder = NULL;
-        }
-        if (priv->account_dialog) {
-                gtk_widget_destroy (GTK_WIDGET (priv->account_dialog));
-                priv->account_dialog = NULL;
         }
         if (priv->password_dialog) {
                 um_password_dialog_free (priv->password_dialog);
