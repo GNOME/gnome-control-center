@@ -573,6 +573,7 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
         GtkWidget *widget;
         GtkTreeModel *model;
         GtkTreeIter iter;
+        gboolean show;
 
         pixbuf = um_user_render_icon (user, FALSE, 48);
         image = get_widget (d, "user-icon-image");
@@ -611,18 +612,23 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
         um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (widget), &iter);
         g_free (lang);
 
+        /* Fingerprint: show when self, possible, and local account */
         widget = get_widget (d, "account-fingerprint-notebook");
         label = get_widget (d, "account-fingerprint-label");
         label2 = get_widget (d, "account-fingerprint-value-label");
         label3 = get_widget (d, "account-fingerprint-button-label");
-        if (um_user_get_uid (user) != getuid() ||
-            !set_fingerprint_label (label2, label3)) {
-                gtk_widget_hide (label);
-                gtk_widget_hide (widget);
-        } else {
-                gtk_widget_show (label);
-                gtk_widget_show (widget);
-        }
+        show = (um_user_get_uid (user) == getuid() &&
+                um_user_is_local_account (user) &&
+                set_fingerprint_label (label2, label3));
+        gtk_widget_set_visible (label, show);
+        gtk_widget_set_visible (widget, show);
+
+        /* Autologin: show when local account */
+        widget = get_widget (d, "autologin-switch");
+        label = get_widget (d, "autologin-label");
+        show = um_user_is_local_account (user);
+        gtk_widget_set_visible (widget, show);
+        gtk_widget_set_visible (label, show);
 }
 
 static void on_permission_changed (GPermission *permission, GParamSpec *pspec, gpointer data);
@@ -978,7 +984,13 @@ on_permission_changed (GPermission *permission,
                 g_object_unref (icon);
         }
 
-        if (is_authorized) {
+        if (!um_user_is_local_account (user)) {
+                um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-type-combo")), FALSE);
+                remove_unlock_tooltip (get_widget (d, "account-type-combo"));
+                gtk_widget_set_sensitive (GTK_WIDGET (get_widget (d, "autologin-switch")), FALSE);
+                remove_unlock_tooltip (get_widget (d, "autologin-switch"));
+
+        } else if (is_authorized && um_user_is_local_account (user)) {
                 um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-type-combo")), TRUE);
                 remove_unlock_tooltip (get_widget (d, "account-type-combo"));
                 gtk_widget_set_sensitive (GTK_WIDGET (get_widget (d, "autologin-switch")), TRUE);
@@ -991,12 +1003,24 @@ on_permission_changed (GPermission *permission,
                 add_unlock_tooltip (get_widget (d, "autologin-switch"));
         }
 
+        /* The full name entry: insensitive if remote or not authorized and not self */
+        widget = get_widget (d, "full-name-entry");
+        if (!um_user_is_local_account (user)) {
+                cc_editable_entry_set_editable (CC_EDITABLE_ENTRY (widget), FALSE);
+                remove_unlock_tooltip (widget);
+
+        } else if (is_authorized || self_selected) {
+                cc_editable_entry_set_editable (CC_EDITABLE_ENTRY (widget), TRUE);
+                remove_unlock_tooltip (widget);
+
+        } else {
+                cc_editable_entry_set_editable (CC_EDITABLE_ENTRY (widget), FALSE);
+                add_unlock_tooltip (widget);
+        }
+
         if (is_authorized || self_selected) {
                 gtk_widget_show (get_widget (d, "user-icon-button"));
                 gtk_widget_hide (get_widget (d, "user-icon-nonbutton"));
-
-                cc_editable_entry_set_editable (CC_EDITABLE_ENTRY (get_widget (d, "full-name-entry")), TRUE);
-                remove_unlock_tooltip (get_widget (d, "full-name-entry"));
 
                 um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-language-combo")), TRUE);
                 remove_unlock_tooltip (get_widget (d, "account-language-combo"));
@@ -1009,9 +1033,6 @@ on_permission_changed (GPermission *permission,
         else {
                 gtk_widget_hide (get_widget (d, "user-icon-button"));
                 gtk_widget_show (get_widget (d, "user-icon-nonbutton"));
-
-                cc_editable_entry_set_editable (CC_EDITABLE_ENTRY (get_widget (d, "full-name-entry")), FALSE);
-                add_unlock_tooltip (get_widget (d, "full-name-entry"));
 
                 um_editable_combo_set_editable (UM_EDITABLE_COMBO (get_widget (d, "account-language-combo")), FALSE);
                 add_unlock_tooltip (get_widget (d, "account-language-combo"));
