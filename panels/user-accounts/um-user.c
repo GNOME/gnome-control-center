@@ -63,6 +63,7 @@ typedef struct {
         gboolean        locked;
         gboolean        automatic_login;
         gboolean        system_account;
+        gboolean        local_account;
 } UserProperties;
 
 static void
@@ -144,6 +145,9 @@ user_properties_get (GDBusConnection *bus,
                 }
                 else if (strcmp (key, "SystemAccount") == 0) {
                         g_variant_get (value, "b", &props->system_account);
+                }
+                else if (strcmp (key, "LocalAccount") == 0) {
+                        g_variant_get (value, "b", &props->local_account);
                 }
                 else if (strcmp (key, "PasswordMode") == 0) {
                         g_variant_get (value, "i", &props->password_mode);
@@ -677,6 +681,14 @@ um_user_is_system_account (UmUser *user)
         g_return_val_if_fail (UM_IS_USER (user), FALSE);
 
         return user->props->system_account;
+}
+
+gboolean
+um_user_is_local_account (UmUser   *user)
+{
+        g_return_val_if_fail (UM_IS_USER (user), FALSE);
+
+        return user->props->local_account;
 }
 
 const gchar *
