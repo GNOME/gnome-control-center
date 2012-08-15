@@ -32,6 +32,7 @@ struct _ZoomOptionsPrivate
 {
   GtkBuilder *builder;
   GSettings *settings;
+  GSettings *application_settings;
 
   GtkWidget *position_combobox;
   GtkWidget *follow_mouse_radio;
@@ -378,6 +379,7 @@ init_effects_slider (GtkRange *slider,
   g_signal_connect (G_OBJECT (slider), "value-changed",
                     G_CALLBACK (effects_slider_changed),
                     priv);
+  gtk_scale_add_mark (GTK_SCALE (slider), 0, GTK_POS_BOTTOM, NULL);
 }
 
 static void
@@ -467,6 +469,8 @@ zoom_options_dispose (GObject *object)
       priv->settings = NULL;
     }
 
+  g_clear_object (&priv->application_settings);
+
   if (priv->dialog)
     {
       gtk_widget_destroy (priv->dialog);
@@ -520,10 +524,16 @@ zoom_options_init (ZoomOptions *self)
     }
 
   priv->settings = g_settings_new ("org.gnome.desktop.a11y.magnifier");
+  priv->application_settings = g_settings_new ("org.gnome.desktop.a11y.applications");
 
   pango_attrs = pango_attr_list_new ();
   attr = pango_attr_scale_new (FONT_SCALE);
   pango_attr_list_insert (pango_attrs, attr);
+
+  /* Zoom switch */
+  g_settings_bind (priv->application_settings, "screen-magnifier-enabled",
+                   WID ("seeing_zoom_switch"), "active",
+                   G_SETTINGS_BIND_DEFAULT);
 
   /* Magnification factor */
   w = WID ("magFactorSpinButton");
@@ -596,7 +606,7 @@ zoom_options_init (ZoomOptions *self)
   g_settings_bind (priv->settings, "color-saturation",
                    gtk_range_get_adjustment (GTK_RANGE (w)), "value",
                    G_SETTINGS_BIND_DEFAULT);
-
+  gtk_scale_add_mark (GTK_SCALE(w), 1.0, GTK_POS_BOTTOM, NULL);
   /* ... Window itself ... */
   priv->dialog = WID ("magPrefsDialog");
 
