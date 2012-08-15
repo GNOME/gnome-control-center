@@ -296,7 +296,7 @@ init_xhairs_color_opacity (GtkColorButton *color_button, GSettings *settings)
     gdk_rgba_parse (&rgba, color_setting);
 
     rgba.alpha = g_settings_get_double (settings, "cross-hairs-opacity");
-    gtk_color_button_set_rgba (color_button, &rgba);
+    gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (color_button), &rgba);
 }
 
 static void
@@ -308,10 +308,13 @@ xhairs_color_notify_cb (GSettings *settings, gchar *key, GtkColorButton *button)
 static void
 xhairs_opacity_notify_cb (GSettings *settings, gchar *key, GtkColorButton *button)
 {
+    GdkRGBA rgba;
     gdouble opacity;
 
     opacity = g_settings_get_double (settings, key);
-    gtk_color_button_set_alpha (button, opacity * 65535);
+    gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (button), &rgba);
+    rgba.alpha = opacity * 65535;
+    gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (button), &rgba);
 }
 
 #define TO_HEX(x) (int) ((gdouble) x * 255.0)
@@ -321,7 +324,7 @@ xhairs_color_opacity_changed (GtkColorButton *button, ZoomOptionsPrivate *priv)
     GdkRGBA rgba;
     gchar *color_string;
 
-    gtk_color_button_get_rgba (button, &rgba);
+    gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (button), &rgba);
     color_string = g_strdup_printf ("#%02x%02x%02x",
                                     TO_HEX(rgba.red),
                                     TO_HEX(rgba.green),
