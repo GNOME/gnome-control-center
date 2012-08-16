@@ -79,20 +79,12 @@ cc_background_panel_dispose (GObject *object)
 {
   CcBackgroundPanelPrivate *priv = CC_BACKGROUND_PANEL (object)->priv;
 
-  if (priv->builder)
-    {
-      g_object_unref (priv->builder);
-      priv->builder = NULL;
+  g_clear_object (&priv->builder);
 
-      /* destroying the builder object will also destroy the spinner */
-      priv->spinner = NULL;
-    }
+  /* destroying the builder object will also destroy the spinner */
+  priv->spinner = NULL;
 
-  if (priv->settings)
-    {
-      g_object_unref (priv->settings);
-      priv->settings = NULL;
-    }
+  g_clear_object (&priv->settings);
 
   if (priv->copy_cancellable)
     {
@@ -103,17 +95,8 @@ cc_background_panel_dispose (GObject *object)
       priv->copy_cancellable = NULL;
     }
 
-  if (priv->thumb_factory)
-    {
-      g_object_unref (priv->thumb_factory);
-      priv->thumb_factory = NULL;
-    }
-
-  if (priv->display_screenshot)
-    {
-      g_object_unref (priv->display_screenshot);
-      priv->display_screenshot = NULL;
-    }
+  g_clear_object (&priv->thumb_factory);
+  g_clear_object (&priv->display_screenshot);
 
   g_free (priv->screenshot_path);
   priv->screenshot_path = NULL;
@@ -128,11 +111,7 @@ cc_background_panel_finalize (GObject *object)
 {
   CcBackgroundPanelPrivate *priv = CC_BACKGROUND_PANEL (object)->priv;
 
-  if (priv->current_background)
-    {
-      g_object_unref (priv->current_background);
-      priv->current_background = NULL;
-    }
+  g_clear_object (&priv->current_background);
 
   G_OBJECT_CLASS (cc_background_panel_parent_class)->finalize (object);
 }
@@ -375,7 +354,7 @@ on_preview_draw (GtkWidget         *widget,
 }
 
 static void
-load_current_bg (CcBackgroundPanel *self)
+reload_current_bg (CcBackgroundPanel *self)
 {
   CcBackgroundPanelPrivate *priv;
   CcBackgroundItem *saved, *configured;
@@ -434,6 +413,7 @@ load_current_bg (CcBackgroundPanel *self)
   if (saved != NULL)
     g_object_unref (saved);
 
+  g_clear_object (&priv->current_background);
   priv->current_background = configured;
   cc_background_item_load (priv->current_background, NULL);
 }
@@ -476,6 +456,8 @@ copy_finished_cb (GObject      *source_object,
     }
   item = g_object_get_data (source_object, "item");
 
+  g_settings_apply (priv->settings);
+
   /* the panel may have been destroyed before the callback is run, so be sure
    * to check the widgets are not NULL */
 
@@ -510,7 +492,7 @@ set_background (CcBackgroundPanel *panel,
 {
   CcBackgroundPanelPrivate *priv = panel->priv;
   GDesktopBackgroundStyle style;
-  gboolean draw_preview = TRUE;
+  gboolean save_settings = TRUE;
   const char *uri;
   CcBackgroundItemFlags flags;
   char *filename;
@@ -599,7 +581,7 @@ set_background (CcBackgroundPanel *panel,
       g_free (dest_uri);
 
       /* delay the updated drawing of the preview until the copy finishes */
-      draw_preview = FALSE;
+      save_settings = FALSE;
     }
   else
     {
@@ -624,13 +606,11 @@ set_background (CcBackgroundPanel *panel,
   g_settings_set_string (priv->settings, WP_PCOLOR_KEY, cc_background_item_get_pcolor (item));
   g_settings_set_string (priv->settings, WP_SCOLOR_KEY, cc_background_item_get_scolor (item));
 
-  /* Apply all changes */
-  g_settings_apply (priv->settings);
-
   /* update the preview information */
-  if (draw_preview != FALSE)
+  if (save_settings != FALSE)
     {
-      update_preview (priv, item);
+      /* Apply all changes */
+      g_settings_apply (priv->settings);
 
       /* Save the source XML if there is one */
       filename = get_save_path ();
@@ -671,6 +651,15 @@ on_background_button_clicked (GtkButton         *button,
                                 GTK_WINDOW (gtk_widget_get_toplevel (WID ("background-panel"))));
   gtk_widget_show (dialog);
   g_signal_connect (dialog, "response", G_CALLBACK (on_chooser_dialog_response), self);
+}
+
+static void
+on_settings_changed (GSettings         *settings,
+                     gchar             *key,
+                     CcBackgroundPanel *self)
+{
+  reload_current_bg (self);
+  update_preview (self->priv, NULL);
 }
 
 static void
@@ -715,9 +704,10 @@ cc_background_panel_init (CcBackgroundPanel *self)
 
   priv->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 
-  load_current_bg (self);
-
+  reload_current_bg (self);
   update_preview (priv, NULL);
+
+  g_signal_connect (priv->settings, "changed", G_CALLBACK (on_settings_changed), self);
 
   widget = WID ("background-set-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (on_background_button_clicked), self);
