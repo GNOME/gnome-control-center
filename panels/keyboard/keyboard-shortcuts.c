@@ -112,7 +112,7 @@ get_hash_for_group (BindingGroupType group)
       hash = kb_user_sections;
       break;
     default:
-      g_assert_not_reached ();
+      hash = NULL;
     }
   return hash;
 }
@@ -189,6 +189,8 @@ append_section (GtkBuilder         *builder,
   gboolean is_new;
 
   hash = get_hash_for_group (group);
+  if (!hash)
+    return;
 
   sort_model = gtk_tree_view_get_model (GTK_TREE_VIEW (gtk_builder_get_object (builder, "section_treeview")));
   model = gtk_tree_model_sort_get_model (GTK_TREE_MODEL_SORT (sort_model));
@@ -647,7 +649,7 @@ reload_sections (GtkBuilder *builder)
   gtk_list_store_append (GTK_LIST_STORE (section_model), &iter);
   gtk_list_store_set (GTK_LIST_STORE (section_model), &iter,
                       SECTION_DESCRIPTION_COLUMN, NULL,
-                      SECTION_GROUP_COLUMN, BINDING_GROUP_SYSTEM,
+                      SECTION_GROUP_COLUMN, BINDING_GROUP_SEPARATOR,
                       -1);
 
   /* Load custom keybindings */
@@ -1129,6 +1131,8 @@ accel_edited_callback (GtkCellRendererText   *cell,
           GHashTable *table;
 
           table = get_hash_for_group (i);
+          if (!table)
+            continue;
           g_hash_table_find (table, (GHRFunc) cb_check_for_uniqueness, &data);
         }
     }
@@ -1438,23 +1442,10 @@ section_sort_item  (GtkTreeModel *model,
                       SECTION_GROUP_COLUMN, &b_group,
                       -1);
 
-  if (a_group == b_group)
-    {
-      /* separators go after the section */
-      if (a_desc == NULL)
-        ret = 1;
-      else if (b_desc == NULL)
-        ret = -1;
-      else
-        ret = g_utf8_collate (a_desc, b_desc);
-    }
+  if (a_group == b_group && a_desc && b_desc)
+    ret = g_utf8_collate (a_desc, b_desc);
   else
-    {
-      if (a_group < b_group)
-        ret = -1;
-      else
-        ret = 1;
-    }
+    ret = a_group - b_group;
 
   g_free (a_desc);
   g_free (b_desc);
@@ -1467,18 +1458,11 @@ sections_separator_func (GtkTreeModel *model,
                          GtkTreeIter  *iter,
                          gpointer      data)
 {
-  char    *description;
-  gboolean is_separator;
+  BindingGroupType type;
 
-  description = NULL;
-  is_separator = FALSE;
+  gtk_tree_model_get (model, iter, SECTION_GROUP_COLUMN, &type, -1);
 
-  gtk_tree_model_get (model, iter, SECTION_DESCRIPTION_COLUMN, &description, -1);
-  if (description == NULL)
-    is_separator = TRUE;
-  g_free (description);
-
-  return is_separator;
+  return type == BINDING_GROUP_SEPARATOR;
 }
 
 static void
