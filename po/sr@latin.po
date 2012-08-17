@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-08-08 04:49+0000\n"
-"PO-Revision-Date: 2012-08-08 07:16+0200\n"
+"POT-Creation-Date: 2012-08-17 06:22+0000\n"
+"PO-Revision-Date: 2012-08-17 12:07+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -484,6 +484,7 @@ msgstr "Veb kamerica"
 
 #: ../panels/color/color.ui.h:3
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
+#: ../panels/universal-access/zoom-options.ui.h:30
 msgid "Color"
 msgstr "Boja"
 
@@ -1087,7 +1088,6 @@ msgid "Select how other media should be handled"
 msgstr "Izaberite kako treba da se rukuje ostalim medijima"
 
 #: ../panels/info/info.ui.h:2
-#| msgid "_Action"
 msgid "_Action:"
 msgstr "_Radnja:"
 
@@ -1736,10 +1736,12 @@ msgid "Enterprise"
 msgstr "Enterprajz"
 
 #. TRANSLATORS: this no (!) WiFi security
+#. short delay
 #: ../panels/network/net-device-wifi.c:312
 #: ../panels/network/net-device-wifi.c:468
-#: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:335
-#: ../panels/wacom/cc-wacom-page.c:352
+#: ../panels/universal-access/uap.ui.h:8
+#: ../panels/universal-access/zoom-options.ui.h:32
+#: ../panels/wacom/cc-wacom-page.c:335 ../panels/wacom/cc-wacom-page.c:352
 msgid "None"
 msgstr "Ništa"
 
@@ -1819,7 +1821,7 @@ msgstr[1] "Pre %i dana"
 msgstr[2] "Pre %i dana"
 msgstr[3] "Pre jednog dana"
 
-#: ../panels/network/net-device-wifi.c:1933
+#: ../panels/network/net-device-wifi.c:1934
 #: ../panels/network/network-wifi.ui.h:19
 msgid "Out of range"
 msgstr "Izvan opsega"
@@ -2004,7 +2006,6 @@ msgid "Link speed"
 msgstr "Brzina veze"
 
 #: ../panels/network/network-wifi.ui.h:13
-#| msgid "Copy Settings..."
 msgid "_Settings..."
 msgstr "_Podešavanja..."
 
@@ -2681,129 +2682,129 @@ msgid "When power is _critically low"
 msgstr "Kada je napajanje kritično _nisko"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:578
+#: ../panels/printers/cc-printers-panel.c:587
 msgid "Low on toner"
 msgstr "Ponestaje tonera"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:580
+#: ../panels/printers/cc-printers-panel.c:589
 msgid "Out of toner"
 msgstr "Nema više tonera"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:583
+#: ../panels/printers/cc-printers-panel.c:592
 msgid "Low on developer"
 msgstr "Ponestaje razvijača"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:586
+#: ../panels/printers/cc-printers-panel.c:595
 msgid "Out of developer"
 msgstr "Nema više razvijača"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:588
+#: ../panels/printers/cc-printers-panel.c:597
 msgid "Low on a marker supply"
 msgstr "Ponestaje markera"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:590
+#: ../panels/printers/cc-printers-panel.c:599
 msgid "Out of a marker supply"
 msgstr "Nema više mastila"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:592
+#: ../panels/printers/cc-printers-panel.c:601
 msgid "Open cover"
 msgstr "Otvoren poklopac"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:594
+#: ../panels/printers/cc-printers-panel.c:603
 msgid "Open door"
 msgstr "Otvorena vratanca"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:596
+#: ../panels/printers/cc-printers-panel.c:605
 msgid "Low on paper"
 msgstr "Ponestaje papira"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:598
+#: ../panels/printers/cc-printers-panel.c:607
 msgid "Out of paper"
 msgstr "Nema više papira"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:600
+#: ../panels/printers/cc-printers-panel.c:609
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Isključen"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:602
+#: ../panels/printers/cc-printers-panel.c:611
 msgctxt "printer state"
 msgid "Paused"
 msgstr "Pauziran"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:604
+#: ../panels/printers/cc-printers-panel.c:613
 msgid "Waste receptacle almost full"
 msgstr "Posuda za otpad je skoro puna"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:606
+#: ../panels/printers/cc-printers-panel.c:615
 msgid "Waste receptacle full"
 msgstr "Posuda za otpad je puna"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:608
+#: ../panels/printers/cc-printers-panel.c:617
 msgid "The optical photo conductor is near end of life"
 msgstr "Optički provodnik fotografija je pri kraju života"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:610
+#: ../panels/printers/cc-printers-panel.c:619
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Optički provodnik fotografija više ne funkcioniše"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:761
+#: ../panels/printers/cc-printers-panel.c:770
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Spreman"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:765
+#: ../panels/printers/cc-printers-panel.c:774
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Obrađujem"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:769
+#: ../panels/printers/cc-printers-panel.c:778
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Zaustavljen"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:888
+#: ../panels/printers/cc-printers-panel.c:897
 msgid "Toner Level"
 msgstr "Nivo tonera"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:891
+#: ../panels/printers/cc-printers-panel.c:900
 msgid "Ink Level"
 msgstr "Nivoa mastila"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:894
+#: ../panels/printers/cc-printers-panel.c:903
 msgid "Supply Level"
 msgstr "Nivo zaliha"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:1005
+#: ../panels/printers/cc-printers-panel.c:1014
 msgid "No printers available"
 msgstr "Nema dostupnih štampača"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1281
+#: ../panels/printers/cc-printers-panel.c:1290
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -2813,15 +2814,15 @@ msgstr[2] "%u aktivnih"
 msgstr[3] "Jedan aktivan"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1577
+#: ../panels/printers/cc-printers-panel.c:1586
 msgid "Failed to add new printer."
 msgstr "Nisam uspeo da dodam novi štampač."
 
-#: ../panels/printers/cc-printers-panel.c:1735
+#: ../panels/printers/cc-printers-panel.c:1744
 msgid "Select PPD File"
 msgstr "Izaberite PPD datoteku"
 
-#: ../panels/printers/cc-printers-panel.c:1744
+#: ../panels/printers/cc-printers-panel.c:1753
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -2829,36 +2830,36 @@ msgstr ""
 "Datoteke opisa Post skript štampača (*.ppd,*.PPD, *.ppd.gz, *PPD.gz, *.PPD."
 "GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2049
+#: ../panels/printers/cc-printers-panel.c:2058
 msgid "No suitable driver found"
 msgstr "Nisu pronađeni odgovarajući upravljački programi"
 
-#: ../panels/printers/cc-printers-panel.c:2118
+#: ../panels/printers/cc-printers-panel.c:2127
 msgid "Searching for preferred drivers..."
 msgstr "Tražim podesne upravljačke programe..."
 
-#: ../panels/printers/cc-printers-panel.c:2133
+#: ../panels/printers/cc-printers-panel.c:2142
 msgid "Select from database..."
 msgstr "Izaberi iz baze podataka..."
 
-#: ../panels/printers/cc-printers-panel.c:2142
+#: ../panels/printers/cc-printers-panel.c:2151
 msgid "Provide PPD File..."
 msgstr "Priloži PPD datoteku..."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2280
-#: ../panels/printers/cc-printers-panel.c:2294
+#: ../panels/printers/cc-printers-panel.c:2289
+#: ../panels/printers/cc-printers-panel.c:2303
 msgid "Test page"
 msgstr "Probna stranica"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2679
+#: ../panels/printers/cc-printers-panel.c:2673
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Ne mogu da učitam sučelje: %s"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:147
+#: ../panels/printers/pp-new-printer-dialog.c:155
 msgid "Printers"
 msgstr "Štampači"
 
@@ -2884,7 +2885,6 @@ msgstr "Zatvori"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
 #: ../panels/printers/jobs-dialog.ui.h:4
-#| msgid "Active Print Jobs"
 msgid "Active Jobs"
 msgstr "Aktivni poslovi"
 
@@ -2914,7 +2914,7 @@ msgid "_Search by Address"
 msgstr "_Traži po adresi"
 
 #: ../panels/printers/new-printer-dialog.ui.h:5
-#: ../panels/user-accounts/um-account-dialog.c:1009
+#: ../panels/user-accounts/um-account-dialog.c:1007
 msgid "_Add"
 msgstr "_Dodaj"
 
@@ -2928,7 +2928,7 @@ msgstr "Učitavam opcije..."
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1008
+#: ../panels/user-accounts/um-account-dialog.c:1006
 msgid "Cancel"
 msgstr "Otkaži"
 
@@ -3043,25 +3043,24 @@ msgstr "Vreme"
 
 #: ../panels/printers/pp-jobs-dialog.c:484
 #, c-format
-#| msgid "Active Print Jobs"
 msgid "%s Active Jobs"
 msgstr "Aktivni poslovi %s"
 
-#: ../panels/printers/pp-new-printer-dialog.c:651
+#: ../panels/printers/pp-new-printer-dialog.c:659
 msgid "Getting devices..."
 msgstr "Preuzimam uređaje..."
 
 #. Translators: No localy connected printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1234
+#: ../panels/printers/pp-new-printer-dialog.c:1242
 msgid "No local printers found"
 msgstr "Nisam pronašao lokalne štampače"
 
 #. Translators: No network printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1247
+#: ../panels/printers/pp-new-printer-dialog.c:1255
 msgid "No network printers found"
 msgstr "Nisam pronašao mrežne štampače"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1339
+#: ../panels/printers/pp-new-printer-dialog.c:1347
 msgid ""
 "FirewallD is not running. Network printer detection needs services mdns, "
 "ipp, ipp-client and samba-client enabled on firewall."
@@ -3070,42 +3069,42 @@ msgstr ""
 "usluge mdns, ipp, ipp-klijent i samba-klijent na mrežnoj barijeri."
 
 #. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:1367
-#: ../panels/printers/pp-new-printer-dialog.c:1372
+#: ../panels/printers/pp-new-printer-dialog.c:1375
+#: ../panels/printers/pp-new-printer-dialog.c:1380
 msgid "Devices"
 msgstr "Uređaji"
 
 #. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:1397
+#: ../panels/printers/pp-new-printer-dialog.c:1405
 msgctxt "printer type"
 msgid "Local"
 msgstr "Lokalni"
 
 #. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:1399
+#: ../panels/printers/pp-new-printer-dialog.c:1407
 msgctxt "printer type"
 msgid "Network"
 msgstr "Mrežni"
 
 #. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:1440
+#: ../panels/printers/pp-new-printer-dialog.c:1448
 msgid "Device types"
 msgstr "Vrsta uređaja"
 
 #. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:1760
+#: ../panels/printers/pp-new-printer-dialog.c:1768
 msgid "Automatic configuration"
 msgstr "Automatsko podešavanje"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1783
+#: ../panels/printers/pp-new-printer-dialog.c:1791
 msgid "Opening firewall for mDNS connections"
 msgstr "Otvaram mrežnu barijeru za mDNS veze"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1792
+#: ../panels/printers/pp-new-printer-dialog.c:1800
 msgid "Opening firewall for Samba connections"
 msgstr "Otvaram mrežnu barijeru za Samba veze"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1801
+#: ../panels/printers/pp-new-printer-dialog.c:1809
 msgid "Opening firewall for IPP connections"
 msgstr "Otvaram mrežnu barijeru za IPP veze"
 
@@ -3314,35 +3313,13 @@ msgstr "Odštampaj _probnu stranicu"
 msgid "_Options"
 msgstr "_Opcije"
 
-#. Translators: Switch back to printer's info tab
-#: ../panels/printers/printers.ui.h:24
-msgid "_Back"
-msgstr "_Nazad"
-
-#. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:26
-msgid "Printer Options"
-msgstr "Opcije štampača"
-
-#: ../panels/printers/printers.ui.h:27
-msgid "Add User"
-msgstr "Dodaj korisnika"
-
-#: ../panels/printers/printers.ui.h:28
-msgid "Remove User"
-msgstr "Ukloni korisnika"
-
-#: ../panels/printers/printers.ui.h:29
-msgid "Allowed users"
-msgstr "Dozvoljeni korisnici"
-
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:31
+#: ../panels/printers/printers.ui.h:24
 msgid "Add New Printer"
 msgstr "Dodaj novi štampač"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:33
+#: ../panels/printers/printers.ui.h:26
 msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
@@ -4034,7 +4011,7 @@ msgstr "Veliki tekst"
 
 #: ../panels/universal-access/uap.ui.h:33
 msgid "Seeing"
-msgstr "Gledanje"
+msgstr "Vidnost"
 
 #: ../panels/universal-access/uap.ui.h:34
 msgid "Visual Alerts"
@@ -4066,7 +4043,7 @@ msgstr "Probni _bljesak"
 
 #: ../panels/universal-access/uap.ui.h:42
 msgid "Hearing"
-msgstr "Slušanje"
+msgstr "Čujnost"
 
 #: ../panels/universal-access/uap.ui.h:43
 msgid "On Screen Keyboard"
@@ -4134,7 +4111,7 @@ msgstr "Zanemaruje uzastopne dvostruke pritiske na taster"
 
 #: ../panels/universal-access/uap.ui.h:66
 msgid "Acc_eptance delay:"
-msgstr "Ka_šnjenje prihvatanja:"
+msgstr "Zastoj _prihvatanja:"
 
 #: ../panels/universal-access/uap.ui.h:67
 msgid "Bounce keys typing delay"
@@ -4204,116 +4181,175 @@ msgstr "Podešavanja miša"
 msgid "Pointing and Clicking"
 msgstr "Ukazivanje i klikanje"
 
-#: ../panels/universal-access/zoom-options.c:333
+#: ../panels/universal-access/zoom-options.c:357
 msgctxt "Distance"
 msgid "Short"
 msgstr "Kratko"
 
-#: ../panels/universal-access/zoom-options.c:334
+#: ../panels/universal-access/zoom-options.c:358
 msgctxt "Distance"
 msgid "¼ Screen"
 msgstr "1/4 ekrana"
 
-#: ../panels/universal-access/zoom-options.c:335
+#: ../panels/universal-access/zoom-options.c:359
 msgctxt "Distance"
 msgid "½ Screen"
 msgstr "1/2 ekrana"
 
-#: ../panels/universal-access/zoom-options.c:336
+#: ../panels/universal-access/zoom-options.c:360
 msgctxt "Distance"
 msgid "¾ Screen"
 msgstr "3/4 ekrana"
 
-#: ../panels/universal-access/zoom-options.c:337
+#: ../panels/universal-access/zoom-options.c:361
 msgctxt "Distance"
 msgid "Long"
 msgstr "Veliko"
 
 #: ../panels/universal-access/zoom-options.ui.h:1
+msgid "Full Screen"
+msgstr "Ceo ekran"
+
+#: ../panels/universal-access/zoom-options.ui.h:2
+msgid "Top Half"
+msgstr "Gornja polovina"
+
+#: ../panels/universal-access/zoom-options.ui.h:3
+msgid "Bottom Half"
+msgstr "Donja polovina"
+
+#: ../panels/universal-access/zoom-options.ui.h:4
+msgid "Left Half"
+msgstr "Leva polovina"
+
+#: ../panels/universal-access/zoom-options.ui.h:5
+msgid "Right Half"
+msgstr "Desna polovina"
+
+#: ../panels/universal-access/zoom-options.ui.h:6
 msgid "Zoom Options"
 msgstr "Opcije uvećanja"
 
-#: ../panels/universal-access/zoom-options.ui.h:2
+#: ../panels/universal-access/zoom-options.ui.h:7
+#| msgctxt "background, style"
+#| msgid "Zoom"
+msgid "Zoom"
+msgstr "Uvećano"
+
+#: ../panels/universal-access/zoom-options.ui.h:8
 msgid "Magnification:"
 msgstr "Uvećavanje:"
 
-#: ../panels/universal-access/zoom-options.ui.h:3
+#: ../panels/universal-access/zoom-options.ui.h:9
 msgid "Follow mouse cursor"
 msgstr "Prati kursor miša"
 
-#: ../panels/universal-access/zoom-options.ui.h:4
+#: ../panels/universal-access/zoom-options.ui.h:10
 msgid "Screen part:"
 msgstr "Deo ekrana:"
 
-#: ../panels/universal-access/zoom-options.ui.h:5
+#: ../panels/universal-access/zoom-options.ui.h:11
 msgid "Magnifier extends outside of screen"
 msgstr "Lupa se prostire izvan ekrana"
 
-#: ../panels/universal-access/zoom-options.ui.h:6
+#: ../panels/universal-access/zoom-options.ui.h:12
 msgid "Keep magnifier cursor centered"
 msgstr "Drži kursor lupe po sredini"
 
-#: ../panels/universal-access/zoom-options.ui.h:7
+#: ../panels/universal-access/zoom-options.ui.h:13
 msgid "Magnifier cursor pushes contents around"
 msgstr "Kursor lupe gura sadržaje unaokolo"
 
-#: ../panels/universal-access/zoom-options.ui.h:8
+#: ../panels/universal-access/zoom-options.ui.h:14
 msgid "Magnifier cursor moves with contents"
 msgstr "Kursor lupe se pomera sa sadržajima"
 
-#: ../panels/universal-access/zoom-options.ui.h:9
+#: ../panels/universal-access/zoom-options.ui.h:15
 msgid "Magnifier Position:"
 msgstr "Položaj lupe:"
 
-#: ../panels/universal-access/zoom-options.ui.h:10
+#: ../panels/universal-access/zoom-options.ui.h:16
+#| msgid "Magnifier Position:"
+msgid "Magnifier"
+msgstr "Lupa"
+
+#: ../panels/universal-access/zoom-options.ui.h:17
 msgid "Thickness:"
 msgstr "Debljina:"
 
 #. short delay
-#: ../panels/universal-access/zoom-options.ui.h:12
+#: ../panels/universal-access/zoom-options.ui.h:19
 msgid "Thin"
 msgstr "Tanko"
 
 #. long delay
-#: ../panels/universal-access/zoom-options.ui.h:14
+#: ../panels/universal-access/zoom-options.ui.h:21
 msgid "Thick"
 msgstr "Debelo"
 
-#: ../panels/universal-access/zoom-options.ui.h:15
+#: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Length:"
 msgstr "Trajanje:"
 
-#: ../panels/universal-access/zoom-options.ui.h:16
+#: ../panels/universal-access/zoom-options.ui.h:23
 msgid "Color:"
 msgstr "Boja:"
 
-#: ../panels/universal-access/zoom-options.ui.h:17
+#: ../panels/universal-access/zoom-options.ui.h:24
 msgid "Crosshairs:"
 msgstr "Ukrštanje:"
 
-#: ../panels/universal-access/zoom-options.ui.h:18
+#: ../panels/universal-access/zoom-options.ui.h:25
 msgid "Overlaps mouse cursor"
-msgstr "Preklapa kursor miša"
+msgstr "Preklopi kursor miša"
 
-#: ../panels/universal-access/zoom-options.ui.h:19
-msgid "Full Screen"
-msgstr "Ceo ekran"
+#: ../panels/universal-access/zoom-options.ui.h:26
+#| msgid "Crosshairs:"
+msgid "Crosshairs"
+msgstr "Ukrštanje"
 
-#: ../panels/universal-access/zoom-options.ui.h:20
-msgid "Top Half"
-msgstr "Gornja polovina"
+#: ../panels/universal-access/zoom-options.ui.h:27
+msgid "White on black:"
+msgstr "Bela na crnoj:"
 
-#: ../panels/universal-access/zoom-options.ui.h:21
-msgid "Bottom Half"
-msgstr "Donja polovina"
+#: ../panels/universal-access/zoom-options.ui.h:28
+#| msgid "Brightness"
+msgid "Brightness:"
+msgstr "Osvetljenje:"
 
-#: ../panels/universal-access/zoom-options.ui.h:22
-msgid "Left Half"
-msgstr "Leva polovina"
+#: ../panels/universal-access/zoom-options.ui.h:29
+#| msgid "High Contrast"
+msgid "Contrast:"
+msgstr "Kontrast:"
 
-#: ../panels/universal-access/zoom-options.ui.h:23
-msgid "Right Half"
-msgstr "Desna polovina"
+#. long delay
+#: ../panels/universal-access/zoom-options.ui.h:34
+msgid "Full"
+msgstr "Normalan"
+
+#. short delay
+#: ../panels/universal-access/zoom-options.ui.h:36
+#| msgctxt "Mouse sensitivity"
+#| msgid "Low"
+msgid "Low"
+msgstr "Nizak"
+
+#. long delay
+#: ../panels/universal-access/zoom-options.ui.h:38
+#| msgctxt "Mouse sensitivity"
+#| msgid "High"
+msgid "High"
+msgstr "Visok"
+
+#: ../panels/universal-access/zoom-options.ui.h:39
+#| msgid "Sound Effects"
+msgid "Color Effects:"
+msgstr "Dejstva boje:"
+
+#: ../panels/universal-access/zoom-options.ui.h:40
+#| msgid "Sound Effects"
+msgid "Color Effects"
+msgstr "Dejstva boje"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:1
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
@@ -4703,15 +4739,15 @@ msgstr "Nisam uspeo da dodam nalog"
 msgid "Failed to register account"
 msgstr "Nisam uspeo da upišem nalog"
 
-#: ../panels/user-accounts/um-account-dialog.c:521
+#: ../panels/user-accounts/um-account-dialog.c:519
 msgid "No supported way to authenticate with this domain"
 msgstr "Nema podržanog načina za potvrđivanje identiteta sa ovim domenom"
 
-#: ../panels/user-accounts/um-account-dialog.c:573
+#: ../panels/user-accounts/um-account-dialog.c:571
 msgid "Failed to join domain"
 msgstr "Nisam uspeo da pristupim domenu"
 
-#: ../panels/user-accounts/um-account-dialog.c:626
+#: ../panels/user-accounts/um-account-dialog.c:624
 msgid "Failed to log into domain"
 msgstr "Nisam uspeo da se prijavim na domen"
 
@@ -4867,21 +4903,21 @@ msgstr "Potražite još slika..."
 msgid "Used by %s"
 msgstr "Koristi je „%s“"
 
-#: ../panels/user-accounts/um-realm-manager.c:534
+#: ../panels/user-accounts/um-realm-manager.c:532
 #, c-format
 msgid "No such domain or realm found"
 msgstr "Nije pronađen takav domen ili područje"
 
-#: ../panels/user-accounts/um-realm-manager.c:836
+#: ../panels/user-accounts/um-realm-manager.c:830
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Ne mogu da se prijavim kao „%s“ na domenu %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:841
+#: ../panels/user-accounts/um-realm-manager.c:835
 msgid "Invalid password, please try again"
 msgstr "Neispravna lozinka, pokušajte ponovo"
 
-#: ../panels/user-accounts/um-realm-manager.c:845
+#: ../panels/user-accounts/um-realm-manager.c:839
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Ne mogu da se povežem na domen „%s“: %s"
@@ -5347,6 +5383,21 @@ msgstr "Postavke;Podešavanja;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "Sva podešavanja"
+
+#~ msgid "_Back"
+#~ msgstr "_Nazad"
+
+#~ msgid "Printer Options"
+#~ msgstr "Opcije štampača"
+
+#~ msgid "Add User"
+#~ msgstr "Dodaj korisnika"
+
+#~ msgid "Remove User"
+#~ msgstr "Ukloni korisnika"
+
+#~ msgid "Allowed users"
+#~ msgstr "Dozvoljeni korisnici"
 
 #~ msgid "Acti_on:"
 #~ msgstr "_Radnja:"
