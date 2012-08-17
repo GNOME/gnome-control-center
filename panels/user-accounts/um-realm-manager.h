@@ -63,8 +63,7 @@ GList *          um_realm_manager_discover_finish (UmRealmManager *self,
 
 GList *          um_realm_manager_get_realms      (UmRealmManager *self);
 
-void             um_realm_login                   (const gchar *realm_name,
-                                                   const gchar *domain,
+void             um_realm_login                   (UmRealmObject *realm,
                                                    const gchar *login,
                                                    const gchar *password,
                                                    GCancellable *cancellable,
@@ -75,7 +74,7 @@ gboolean         um_realm_login_finish            (GAsyncResult *result,
                                                    GBytes **credentials,
                                                    GError **error);
 
-gboolean         um_realm_join_as_user            (UmRealmKerberos *realm,
+gboolean         um_realm_join_as_user            (UmRealmObject *realm,
                                                    const gchar *login,
                                                    const gchar *password,
                                                    GBytes *credentials,
@@ -84,7 +83,7 @@ gboolean         um_realm_join_as_user            (UmRealmKerberos *realm,
                                                    gpointer user_data)
                                                    G_GNUC_WARN_UNUSED_RESULT;
 
-gboolean         um_realm_join_as_admin           (UmRealmKerberos *realm,
+gboolean         um_realm_join_as_admin           (UmRealmObject *realm,
                                                    const gchar *login,
                                                    const gchar *password,
                                                    GBytes *credentials,
@@ -93,10 +92,14 @@ gboolean         um_realm_join_as_admin           (UmRealmKerberos *realm,
                                                    gpointer user_data)
                                                    G_GNUC_WARN_UNUSED_RESULT;
 
-gboolean         um_realm_join_finish             (UmRealmKerberos *self,
+gboolean         um_realm_join_finish             (UmRealmObject *realm,
                                                    GAsyncResult *result,
                                                    GError **error);
 
+gboolean         um_realm_is_configured           (UmRealmObject *realm);
+
+gchar *          um_realm_calculate_login         (UmRealmCommon *realm,
+                                                   const gchar *username);
 
 G_END_DECLS
 

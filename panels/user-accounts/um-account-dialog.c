@@ -84,7 +84,7 @@ struct _UmAccountDialog {
         GtkEntry *enterprise_login;
         GtkEntry *enterprise_password;
         UmRealmManager *realm_manager;
-        UmRealmKerberos *selected_realm;
+        UmRealmObject *selected_realm;
 
         /* Join credential dialog */
         GtkDialog *join_dialog;
@@ -316,24 +316,28 @@ enterprise_validate (UmAccountDialog *self)
 
 static void
 enterprise_add_realm (UmAccountDialog *self,
-                      UmRealmKerberos *realm)
+                      UmRealmObject *realm)
 {
         GtkTreeIter iter;
+        UmRealmCommon *common;
+
+        common = um_realm_object_get_common (realm);
 
         gtk_list_store_append (self->enterprise_realms, &iter);
         gtk_list_store_set (self->enterprise_realms, &iter,
-                            0, um_realm_kerberos_get_domain (realm),
+                            0, um_realm_common_get_name (common),
                             1, realm,
                             -1);
 
-        /* Select the domain if appropriate */
-        if (!self->enterprise_domain_chosen && um_realm_kerberos_get_enrolled (realm))
+        if (!self->enterprise_domain_chosen && um_realm_is_configured (realm))
                 gtk_combo_box_set_active_iter (self->enterprise_domain, &iter);
+
+        g_object_unref (common);
 }
 
 static void
 on_manager_realm_added (UmRealmManager  *manager,
-                        UmRealmKerberos *realm,
+                        UmRealmObject   *realm,
                         gpointer         user_data)
 {
         UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
@@ -366,25 +370,19 @@ on_register_user (GObject *source,
         }
 }
 
-static gchar *
-enterprise_calculate_login (UmAccountDialog *self)
-{
-        const gchar *format = um_realm_kerberos_get_login_format (self->selected_realm);
-        return g_strdup_printf (format, gtk_entry_get_text (self->enterprise_login));
-}
-
 static void
 on_permit_user_login (GObject *source,
                       GAsyncResult *result,
                       gpointer user_data)
 {
         UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        UmRealmCommon *common;
         UmUserManager *manager;
         GError *error = NULL;
         gchar *login;
 
-        um_realm_kerberos_call_change_login_policy_finish (UM_REALM_KERBEROS (source),
-                                                           result, &error);
+        common = UM_REALM_COMMON (source);
+        um_realm_common_call_change_login_policy_finish (common, result, &error);
         if (error == NULL) {
 
                 /*
@@ -393,7 +391,9 @@ on_permit_user_login (GObject *source,
                  * sure all that is functional.
                  */
                 manager = um_user_manager_ref_default ();
-                login = enterprise_calculate_login (self);
+                login = um_realm_calculate_login (common, gtk_entry_get_text (self->enterprise_login));
+                g_return_if_fail (login != NULL);
+
                 um_user_manager_cache_user (manager, login, self->cancellable,
                                             on_register_user, g_object_ref (self),
                                             g_object_unref);
@@ -413,12 +413,16 @@ on_permit_user_login (GObject *source,
 static void
 enterprise_permit_user_login (UmAccountDialog *self)
 {
+        UmRealmCommon *common;
         gchar *login;
         const gchar *add[2];
         const gchar *remove[1];
         GVariant *options;
 
-        login = enterprise_calculate_login (self);
+        common = um_realm_object_get_common (self->selected_realm);
+
+        login = um_realm_calculate_login (common, gtk_entry_get_text (self->enterprise_login));
+        g_return_if_fail (login != NULL);
 
         add[0] = login;
         add[1] = NULL;
@@ -426,12 +430,13 @@ enterprise_permit_user_login (UmAccountDialog *self)
 
         options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
 
-        um_realm_kerberos_call_change_login_policy (self->selected_realm, "",
-                                                    add, remove, options,
-                                                    self->cancellable,
-                                                    on_permit_user_login,
-                                                    g_object_ref (self));
+        um_realm_common_call_change_login_policy (common, "",
+                                                  add, remove, options,
+                                                  self->cancellable,
+                                                  on_permit_user_login,
+                                                  g_object_ref (self));
 
+        g_object_unref (common);
         g_free (login);
 }
 
@@ -449,8 +454,7 @@ on_join_response (GtkDialog *dialog,
         }
 
         /* Prompted for some admin credentials, try to use them to log in */
-        um_realm_login (um_realm_kerberos_get_name (self->selected_realm),
-                        um_realm_kerberos_get_domain (self->selected_realm),
+        um_realm_login (self->selected_realm,
                         gtk_entry_get_text (self->join_name),
                         gtk_entry_get_text (self->join_password),
                         self->cancellable,
@@ -462,19 +466,24 @@ static void
 join_show_prompt (UmAccountDialog *self,
                   GError *error)
 {
+        UmRealmKerberosMembership *membership;
+        UmRealmKerberos *kerberos;
         const gchar *name;
 
         gtk_entry_set_text (self->join_password, "");
         gtk_widget_grab_focus (GTK_WIDGET (self->join_password));
 
+        kerberos = um_realm_object_get_kerberos (self->selected_realm);
+        membership = um_realm_object_get_kerberos_membership (self->selected_realm);
+
         gtk_label_set_text (self->join_domain,
-                            um_realm_kerberos_get_domain (self->selected_realm));
+                            um_realm_kerberos_get_domain_name (kerberos));
 
         clear_entry_validation_error (self->join_name);
         clear_entry_validation_error (self->join_password);
 
         if (!self->join_prompted) {
-                name = um_realm_kerberos_get_suggested_administrator (self->selected_realm);
+                name = um_realm_kerberos_membership_get_suggested_administrator (membership);
                 if (name && !g_str_equal (name, "")) {
                         gtk_entry_set_text (self->join_name, name);
                 } else {
@@ -494,6 +503,8 @@ join_show_prompt (UmAccountDialog *self,
         gtk_window_present (GTK_WINDOW (self->join_dialog));
 
         self->join_prompted = TRUE;
+        g_object_unref (kerberos);
+        g_object_unref (membership);
 
         /* And now we wait for on_join_response() */
 }
@@ -590,7 +601,7 @@ on_realm_login (GObject *source,
         if (error == NULL) {
 
                 /* Already joined to the domain, just register this user */
-                if (um_realm_kerberos_get_enrolled (self->selected_realm)) {
+                if (um_realm_is_configured (self->selected_realm)) {
                         enterprise_permit_user_login (self);
 
                 /* Join the domain, try using the user's creds */
@@ -635,8 +646,7 @@ enterprise_check_login (UmAccountDialog *self)
 {
         g_assert (self->selected_realm);
 
-        um_realm_login (um_realm_kerberos_get_name (self->selected_realm),
-                        um_realm_kerberos_get_domain (self->selected_realm),
+        um_realm_login (self->selected_realm,
                         gtk_entry_get_text (self->enterprise_login),
                         gtk_entry_get_text (self->enterprise_password),
                         self->cancellable,

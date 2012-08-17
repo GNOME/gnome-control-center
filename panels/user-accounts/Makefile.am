@@ -78,7 +78,9 @@ libuser_accounts_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 um-realm-generated.c: $(srcdir)/data/org.freedesktop.realmd.xml
 	$(AM_V_GEN) gdbus-codegen --interface-prefix org.freedesktop.realmd. \
-		--generate-c-code um-realm-generated --c-namespace UmRealm $<
+		--generate-c-code um-realm-generated --c-namespace UmRealm \
+		--annotate "org.freedesktop.realmd.Realm" org.gtk.GDBus.C.Name Common \
+		--c-generate-object-manager $<
 um-realm-generated.h: um-realm-generated.c
 
 noinst_PROGRAMS = frob-account-dialog
