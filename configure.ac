@@ -186,8 +186,11 @@ AC_ARG_ENABLE([cups],
 if test x"$enable_cups" != x"no" ; then
   AC_PROG_SED
 
-  AC_PATH_PROG(CUPS_CONFIG, cups-config,
-               AC_MSG_ERROR([cups-config not found but CUPS support requested]))
+  AC_PATH_PROG(CUPS_CONFIG, cups-config)
+
+  if test x$CUPS_CONFIG = x; then
+    AC_MSG_ERROR([cups-config not found but CUPS support requested])
+  fi
 
   CUPS_API_VERSION=`$CUPS_CONFIG --api-version`
   CUPS_API_MAJOR=`echo $ECHO_N $CUPS_API_VERSION | cut -d . -f 1`
