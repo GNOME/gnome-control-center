@@ -1,6 +1,7 @@
 INCLUDES =					\
 	-I$(top_srcdir)				\
-	$(SHELL_CFLAGS)
+	$(SHELL_CFLAGS)				\
+	$(CHEESE_CFLAGS)
 
 bin_PROGRAMS = gnome-control-center
 
@@ -34,7 +35,8 @@ gnome_control_center_SOURCES =			\
 	$(MARSHAL_FILES)
 
 gnome_control_center_LDADD =			\
-	$(SHELL_LIBS)
+	$(SHELL_LIBS)				\
+	$(CHEESE_LIBS)
 
 gnome_control_center_LDFLAGS = -export-dynamic
 

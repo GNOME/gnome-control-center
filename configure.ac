@@ -120,8 +120,7 @@ COMMON_MODULES="gtk+-3.0 >= $GTK_REQUIRED_VERSION
 PKG_CHECK_MODULES(LIBGNOME_CONTROL_CENTER, $COMMON_MODULES)
 PKG_CHECK_MODULES(LIBLANGUAGE, $COMMON_MODULES gnome-desktop-3.0 fontconfig)
 PKG_CHECK_MODULES(LIBSHORTCUTS, $COMMON_MODULES x11)
-PKG_CHECK_MODULES(SHELL, $COMMON_MODULES libgnome-menu-3.0 gio-unix-2.0 x11 clutter-gtk-1.0 
-                  clutter-1.0 >= $CLUTTER_REQUIRED_VERSION)
+PKG_CHECK_MODULES(SHELL, $COMMON_MODULES libgnome-menu-3.0 gio-unix-2.0 x11)
 PKG_CHECK_MODULES(BACKGROUND_PANEL, $COMMON_MODULES libxml-2.0 gnome-desktop-3.0
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
 PKG_CHECK_MODULES(DATETIME_PANEL, $COMMON_MODULES
@@ -218,7 +217,7 @@ AC_ARG_WITH([cheese],
             with_cheese=auto)
 
 if test x"$with_cheese" != x"no" ; then
-   PKG_CHECK_MODULES(CHEESE, gstreamer-0.10 cheese-gtk >= 3.3.5 cheese, [have_cheese=yes], [have_cheese=no])
+   PKG_CHECK_MODULES(CHEESE, gstreamer-0.10 cheese-gtk >= 3.3.5 cheese clutter-gtk-1.0, [have_cheese=yes], [have_cheese=no])
    if test x${have_cheese} = xyes; then
      AC_DEFINE(HAVE_CHEESE, 1, [Define to 1 to enable cheese webcam support])
    fi

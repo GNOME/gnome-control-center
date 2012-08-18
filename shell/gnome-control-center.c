@@ -28,7 +28,9 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
+#ifdef HAVE_CHEESE
 #include <clutter-gtk/clutter-gtk.h>
+#endif /* HAVE_CHEESE */
 #define GMENU_I_KNOW_THIS_IS_UNSTABLE
 #include <gmenu-tree.h>
 
@@ -1314,11 +1316,13 @@ gnome_control_center_init (GnomeControlCenter *self)
 
   priv = self->priv = CONTROL_CENTER_PRIVATE (self);
 
+#ifdef HAVE_CHEESE
   if (gtk_clutter_init (NULL, NULL) != CLUTTER_INIT_SUCCESS)
     {
       g_critical ("Clutter-GTK init failed");
       return;
     }
+#endif /* HAVE_CHEESE */
 
   priv->monitor_num = -1;
   self->priv->small_screen = SMALL_SCREEN_UNSET;
