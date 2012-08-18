@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-08-17 06:22+0000\n"
-"PO-Revision-Date: 2012-08-17 12:07+0200\n"
+"POT-Creation-Date: 2012-08-17 22:26+0000\n"
+"PO-Revision-Date: 2012-08-18 07:44+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -23,72 +23,71 @@ msgstr ""
 "n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Project-Style: gnome\n"
 
-#: ../panels/background/background.ui.h:1
-msgid "Add wallpaper"
-msgstr "Dodajte pozadinu"
-
-#: ../panels/background/background.ui.h:2
-msgid "Remove wallpaper"
-msgstr "Uklonite pozadinu"
-
 #. This refers to a slideshow background
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:2
 msgid "Changes throughout the day"
 msgstr "Promene tokom celog dana"
 
-#: ../panels/background/background.ui.h:5
-msgid "Primary Color"
-msgstr "Osnovna boja"
-
-#: ../panels/background/background.ui.h:6
-msgid "Swap colors"
-msgstr "Boje razmene"
-
-#: ../panels/background/background.ui.h:7
-msgid "Secondary color"
-msgstr "Dodatna boja"
-
-#: ../panels/background/background.ui.h:8
+#: ../panels/background/background.ui.h:3
 msgctxt "background, style"
 msgid "Tile"
 msgstr "Popločano"
 
-#: ../panels/background/background.ui.h:9
+#: ../panels/background/background.ui.h:4
 msgctxt "background, style"
 msgid "Zoom"
 msgstr "Uvećano"
 
-#: ../panels/background/background.ui.h:10
+#: ../panels/background/background.ui.h:5
 msgctxt "background, style"
 msgid "Center"
 msgstr "Centrirano"
 
-#: ../panels/background/background.ui.h:11
+#: ../panels/background/background.ui.h:6
 msgctxt "background, style"
 msgid "Scale"
 msgstr "Srazmerno"
 
-#: ../panels/background/background.ui.h:12
+#: ../panels/background/background.ui.h:7
 msgctxt "background, style"
 msgid "Fill"
 msgstr "Popunjeno"
 
-#: ../panels/background/background.ui.h:13
+#: ../panels/background/background.ui.h:8
 msgctxt "background, style"
 msgid "Span"
 msgstr "Rasprostrto"
 
-#: ../panels/background/bg-colors-source.c:46
-msgid "Horizontal Gradient"
-msgstr "Vodoravni preliv"
+#. translators: This is the title of the wallpaper chooser dialog.
+#: ../panels/background/cc-background-chooser-dialog.c:199
+#| msgid "Background"
+msgid "Select Background"
+msgstr "Izaberite pozadinu"
 
-#: ../panels/background/bg-colors-source.c:47
-msgid "Vertical Gradient"
-msgstr "Uspravni preliv"
+#: ../panels/background/cc-background-chooser-dialog.c:218
+msgid "Wallpapers"
+msgstr "Pozadina"
 
-#: ../panels/background/bg-colors-source.c:48
-msgid "Solid Color"
-msgstr "Jednobojno"
+#: ../panels/background/cc-background-chooser-dialog.c:227
+#| msgid "Picture CD"
+msgid "Pictures"
+msgstr "Slike"
+
+#: ../panels/background/cc-background-chooser-dialog.c:235
+#| msgid "Color"
+msgid "Colors"
+msgstr "Boje"
+
+#: ../panels/background/cc-background-chooser-dialog.c:244
+msgid "Flickr"
+msgstr "Flikr"
+
+#: ../panels/background/cc-background-chooser-dialog.c:280
+#: ../panels/printers/ppd-selection-dialog.ui.h:3
+#: ../panels/user-accounts/data/photo-dialog.ui.h:9
+#: ../panels/user-accounts/um-photo-dialog.c:98
+msgid "Select"
+msgstr "Izaberi"
 
 #: ../panels/background/cc-background-item.c:148
 msgid "multiple sizes"
@@ -105,31 +104,9 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Nema pozadine za radnu površ"
 
-#: ../panels/background/cc-background-panel.c:1018
-#: ../panels/user-accounts/data/photo-dialog.ui.h:4
-#: ../panels/user-accounts/um-photo-dialog.c:218
-msgid "Browse for more pictures"
-msgstr "Potražite još slika"
-
-#: ../panels/background/cc-background-panel.c:1110
+#: ../panels/background/cc-background-panel.c:390
 msgid "Current background"
 msgstr "Trenutna pozadina"
-
-#: ../panels/background/cc-background-panel.c:1220
-msgid "Wallpapers"
-msgstr "Pozadina"
-
-#: ../panels/background/cc-background-panel.c:1227
-msgid "Pictures Folder"
-msgstr "Fascikla sa slikama"
-
-#: ../panels/background/cc-background-panel.c:1234
-msgid "Colors & Gradients"
-msgstr "Boje i prelivi"
-
-#: ../panels/background/cc-background-panel.c:1242
-msgid "Flickr"
-msgstr "Flikr"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:1
 msgid "Background"
@@ -2932,12 +2909,6 @@ msgstr "Učitavam opcije..."
 msgid "Cancel"
 msgstr "Otkaži"
 
-#: ../panels/printers/ppd-selection-dialog.ui.h:3
-#: ../panels/user-accounts/data/photo-dialog.ui.h:9
-#: ../panels/user-accounts/um-photo-dialog.c:98
-msgid "Select"
-msgstr "Izaberi"
-
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
 msgid "Loading drivers database..."
 msgstr "Učitavam bazu podataka upravljačkih programa..."
@@ -4231,8 +4202,6 @@ msgid "Zoom Options"
 msgstr "Opcije uvećanja"
 
 #: ../panels/universal-access/zoom-options.ui.h:7
-#| msgctxt "background, style"
-#| msgid "Zoom"
 msgid "Zoom"
 msgstr "Uvećano"
 
@@ -4269,7 +4238,6 @@ msgid "Magnifier Position:"
 msgstr "Položaj lupe:"
 
 #: ../panels/universal-access/zoom-options.ui.h:16
-#| msgid "Magnifier Position:"
 msgid "Magnifier"
 msgstr "Lupa"
 
@@ -4304,7 +4272,6 @@ msgid "Overlaps mouse cursor"
 msgstr "Preklopi kursor miša"
 
 #: ../panels/universal-access/zoom-options.ui.h:26
-#| msgid "Crosshairs:"
 msgid "Crosshairs"
 msgstr "Ukrštanje"
 
@@ -4313,12 +4280,10 @@ msgid "White on black:"
 msgstr "Bela na crnoj:"
 
 #: ../panels/universal-access/zoom-options.ui.h:28
-#| msgid "Brightness"
 msgid "Brightness:"
 msgstr "Osvetljenje:"
 
 #: ../panels/universal-access/zoom-options.ui.h:29
-#| msgid "High Contrast"
 msgid "Contrast:"
 msgstr "Kontrast:"
 
@@ -4329,25 +4294,19 @@ msgstr "Normalan"
 
 #. short delay
 #: ../panels/universal-access/zoom-options.ui.h:36
-#| msgctxt "Mouse sensitivity"
-#| msgid "Low"
 msgid "Low"
 msgstr "Nizak"
 
 #. long delay
 #: ../panels/universal-access/zoom-options.ui.h:38
-#| msgctxt "Mouse sensitivity"
-#| msgid "High"
 msgid "High"
 msgstr "Visok"
 
 #: ../panels/universal-access/zoom-options.ui.h:39
-#| msgid "Sound Effects"
 msgid "Color Effects:"
 msgstr "Dejstva boje:"
 
 #: ../panels/universal-access/zoom-options.ui.h:40
-#| msgid "Sound Effects"
 msgid "Color Effects"
 msgstr "Dejstva boje"
 
@@ -4588,6 +4547,11 @@ msgstr ""
 #: ../panels/user-accounts/data/photo-dialog.ui.h:3
 msgid "Gallery"
 msgstr "Zbirka"
+
+#: ../panels/user-accounts/data/photo-dialog.ui.h:4
+#: ../panels/user-accounts/um-photo-dialog.c:218
+msgid "Browse for more pictures"
+msgstr "Potražite još slika"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:5
 msgid "Take a photograph"
@@ -5383,6 +5347,36 @@ msgstr "Postavke;Podešavanja;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "Sva podešavanja"
+
+#~ msgid "Add wallpaper"
+#~ msgstr "Dodajte pozadinu"
+
+#~ msgid "Remove wallpaper"
+#~ msgstr "Uklonite pozadinu"
+
+#~ msgid "Primary Color"
+#~ msgstr "Osnovna boja"
+
+#~ msgid "Swap colors"
+#~ msgstr "Boje razmene"
+
+#~ msgid "Secondary color"
+#~ msgstr "Dodatna boja"
+
+#~ msgid "Horizontal Gradient"
+#~ msgstr "Vodoravni preliv"
+
+#~ msgid "Vertical Gradient"
+#~ msgstr "Uspravni preliv"
+
+#~ msgid "Solid Color"
+#~ msgstr "Jednobojno"
+
+#~ msgid "Pictures Folder"
+#~ msgstr "Fascikla sa slikama"
+
+#~ msgid "Colors & Gradients"
+#~ msgstr "Boje i prelivi"
 
 #~ msgid "_Back"
 #~ msgstr "_Nazad"
