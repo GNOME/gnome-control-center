@@ -92,6 +92,63 @@ struct _GnomeControlCenterPrivate
   CcSmallScreen small_screen;
 };
 
+/* Notebook helpers */
+static GtkWidget *
+notebook_get_selected_page (GtkWidget *notebook)
+{
+  int curr;
+
+  curr = gtk_notebook_get_current_page (GTK_NOTEBOOK (notebook));
+  if (curr == -1)
+    return NULL;
+  return gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), curr);
+}
+
+static void
+notebook_select_page (GtkWidget *notebook,
+		      GtkWidget *page)
+{
+  int i, num;
+
+  num = gtk_notebook_get_n_pages (GTK_NOTEBOOK (notebook));
+  for (i = 0; i < num; i++)
+    {
+      if (gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i) == page)
+        {
+          gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), i);
+          return;
+        }
+    }
+
+  g_warning ("Couldn't select GtkNotebook page %p", page);
+}
+
+static void
+notebook_remove_page (GtkWidget *notebook,
+		      GtkWidget *page)
+{
+  int i, num;
+
+  num = gtk_notebook_get_n_pages (GTK_NOTEBOOK (notebook));
+  for (i = 0; i < num; i++)
+    {
+      if (gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook), i) == page)
+        {
+          gtk_notebook_remove_page (GTK_NOTEBOOK (notebook), i);
+          return;
+        }
+    }
+
+  g_warning ("Couldn't find GtkNotebook page to remove %p", page);
+}
+
+static void
+notebook_add_page (GtkWidget *notebook,
+		   GtkWidget *page)
+{
+  gtk_notebook_append_page (GTK_NOTEBOOK (notebook), page, NULL);
+}
+
 static const gchar *
 get_icon_name_from_g_icon (GIcon *gicon)
 {
