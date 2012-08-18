@@ -353,18 +353,6 @@ create_dialog (GtkBuilder *dialog)
 /* Callback issued when a button is clicked on the dialog */
 
 static void
-dialog_response_cb (GtkDialog *dialog, gint response_id, gpointer user_data)
-{
-/*
-	if (response_id == GTK_RESPONSE_HELP)
-		capplet_help (GTK_WINDOW (dialog),
-			      "goscustperiph-5");
-	else
-		gtk_main_quit ();
-*/
-}
-
-static void
 device_changed (GdkDeviceManager *device_manager,
 		GdkDevice        *device,
 		GtkBuilder       *dialog)
@@ -385,8 +373,6 @@ device_changed (GdkDeviceManager *device_manager,
 GtkWidget *
 gnome_mouse_properties_init (GtkBuilder *dialog)
 {
-	GtkWidget      *dialog_win;
-
 	mouse_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.mouse");
 	touchpad_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.touchpad");
 
@@ -397,18 +383,9 @@ gnome_mouse_properties_init (GtkBuilder *dialog)
 					      G_CALLBACK (device_changed), dialog);
 
 	create_dialog (dialog);
+	setup_dialog (dialog);
 
-	if (dialog) {
-		setup_dialog (dialog);
-
-		dialog_win = WID ("mouse_properties_dialog");
-		g_signal_connect (dialog_win, "response",
-				  G_CALLBACK (dialog_response_cb), NULL);
-	} else {
-		dialog_win = NULL;
-	}
-
-	return dialog_win;
+	return WID ("mouse_properties_dialog");
 }
 
 void
