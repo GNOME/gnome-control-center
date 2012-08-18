@@ -54,6 +54,8 @@
 
 #include "cc-common-language.h"
 
+#define USER_ACCOUNTS_PERMISSION "org.gnome.controlcenter.user-accounts.administration"
+
 G_DEFINE_DYNAMIC_TYPE (UmUserPanel, um_user_panel, CC_TYPE_PANEL)
 
 #define UM_USER_PANEL_PRIVATE(o) \
@@ -635,10 +637,11 @@ selected_user_changed (GtkTreeSelection *selection, UmUserPanelPrivate *d)
         if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
                 gtk_tree_model_get (model, &iter, USER_COL, &user, -1);
                 show_user (user, d);
-                on_permission_changed (d->permission, NULL, d);
+                if (d->permission != NULL)
+                        on_permission_changed (d->permission, NULL, d);
                 gtk_widget_set_sensitive (get_widget (d, "main-user-vbox"), TRUE);
                 g_object_unref (user);
-        } else {                
+        } else {
                 gtk_widget_set_sensitive (get_widget (d, "main-user-vbox"), FALSE);
         }
 }
@@ -1120,6 +1123,7 @@ setup_main_window (UmUserPanelPrivate *d)
         gint expander_size;
         gchar *title;
         GIcon *icon;
+        GError *error = NULL;
         gchar *names[3];
 
         userlist = get_widget (d, "list-treeview");
@@ -1227,10 +1231,15 @@ setup_main_window (UmUserPanelPrivate *d)
         g_signal_connect (button, "clicked",
                           G_CALLBACK (change_fingerprint), d);
 
-        d->permission = (GPermission *)polkit_permission_new_sync ("org.gnome.controlcenter.user-accounts.administration", NULL, NULL, NULL);
-        g_signal_connect (d->permission, "notify",
-                          G_CALLBACK (on_permission_changed), d);
-        on_permission_changed (d->permission, NULL, d);
+        d->permission = (GPermission *)polkit_permission_new_sync (USER_ACCOUNTS_PERMISSION, NULL, NULL, &error);
+        if (d->permission != NULL) {
+                g_signal_connect (d->permission, "notify",
+                                  G_CALLBACK (on_permission_changed), d);
+                on_permission_changed (d->permission, NULL, d);
+        } else {
+                g_warning ("Cannot create '%s' permission: %s", USER_ACCOUNTS_PERMISSION, error->message);
+                g_error_free (error);
+        }
 
         button = get_widget (d, "add-user-toolbutton");
         names[0] = "changes-allow-symbolic";
