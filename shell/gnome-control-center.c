@@ -36,7 +36,6 @@
 #include "cc-shell.h"
 #include "cc-shell-category-view.h"
 #include "cc-shell-model.h"
-#include "cc-notebook.h"
 
 G_DEFINE_TYPE (GnomeControlCenter, gnome_control_center, CC_TYPE_SHELL)
 

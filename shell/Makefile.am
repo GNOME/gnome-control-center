@@ -19,8 +19,6 @@ gnome_control_center_SOURCES =			\
 	cc-shell-log.h				\
 	gnome-control-center.c			\
 	gnome-control-center.h			\
-	cc-notebook.c				\
-	cc-notebook.h				\
 	cc-shell-category-view.c		\
 	cc-shell-category-view.h		\
 	cc-shell-item-view.c			\
@@ -64,11 +62,6 @@ directorydir = $(datadir)/desktop-directories
 directory_in_files = gnomecc.directory.in
 directory_DATA = $(directory_in_files:.directory.in=.directory)
 @INTLTOOL_DIRECTORY_RULE@
-
-noinst_PROGRAMS = test-notebook
-test_notebook_SOURCES = test-notebook.c cc-notebook.c cc-notebook.h
-test_notebook_CFLAGS = $(SHELL_CFLAGS)
-test_notebook_LDADD = $(SHELL_LIBS)
 
 EXTRA_DIST =					\
 	$(ui_DATA)				\
