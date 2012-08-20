@@ -26,6 +26,16 @@ libmouse_properties_la_SOURCES =	\
 libmouse_properties_la_LIBADD = $(PANEL_LIBS) $(MOUSE_PANEL_LIBS)
 libmouse_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
 
+test_gnome_mouse_test_SOURCES =			\
+	gnome-mouse-test.c		\
+	gnome-mouse-test.h		\
+	test-gnome-mouse-test.c
+
+noinst_PROGRAMS = test-gnome-mouse-test
+
+test_gnome_mouse_test_CPPFLAGS = $(INCLUDES)
+test_gnome_mouse_test_LDADD = $(PANEL_LIBS) $(MOUSE_PANEL_LIBS)
+
 @INTLTOOL_DESKTOP_RULE@
 
 pixmapdir  = $(pkgdatadir)/pixmaps
