@@ -158,7 +158,7 @@ static void
 setup_dialog (GtkBuilder *dialog)
 {
 	GtkRadioButton *radio;
-	gboolean        touchpad_present;
+	gboolean        touchpad_present, mouse_present;
 
 	/* Orientation radio buttons */
 	radio = GTK_RADIO_BUTTON (WID ("left_handed_radio"));
@@ -175,7 +175,10 @@ setup_dialog (GtkBuilder *dialog)
 			 gtk_range_get_adjustment (GTK_RANGE (WID ("double_click_scale"))), "value",
 			 G_SETTINGS_BIND_DEFAULT);
 
-	/* speed */
+	/* Mouse section */
+	mouse_present = mouse_is_present ();
+	gtk_widget_set_visible (WID ("mouse_vbox"), mouse_present);
+
 	g_signal_connect (WID ("pointer_speed_scale"), "value-changed",
 			  G_CALLBACK (pointer_speed_scale_event), dialog);
 
@@ -254,6 +257,9 @@ device_changed (GdkDeviceManager *device_manager,
 		setup_scrollmethod_radios (dialog);
 		changing_scroll = FALSE;
 	}
+
+	present = mouse_is_present ();
+	gtk_widget_set_visible (WID ("mouse_vbox"), present);
 }
 
 GtkWidget *
