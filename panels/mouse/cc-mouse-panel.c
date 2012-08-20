@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010 Intel, Inc
+ * Copyright (C) 2012 Red Hat, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,24 +18,37 @@
  *
  * Authors: Thomas Wood <thomas.wood@intel.com>
  *          Rodrigo Moya <rodrigo@gnome.org>
+ *          Ondrej Holy <oholy@redhat.com>
  *
  */
 
 #include "cc-mouse-panel.h"
 #include "gnome-mouse-properties.h"
+#include "gnome-mouse-test.h"
 #include <gtk/gtk.h>
+
+#include <glib/gi18n.h>
 
 G_DEFINE_DYNAMIC_TYPE (CcMousePanel, cc_mouse_panel, CC_TYPE_PANEL)
 
 #define MOUSE_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_MOUSE_PANEL, CcMousePanelPrivate))
 
+#define WID(x) (GtkWidget*) gtk_builder_get_object (dialog, x)
+
 struct _CcMousePanelPrivate
 {
   GtkBuilder *builder;
   GtkWidget  *widget;
+  GtkWidget  *prefs_widget;
+  GtkWidget  *test_widget;
+  GtkWidget  *shell_header;
 };
 
+enum {
+  CC_MOUSE_PAGE_PREFS,
+  CC_MOUSE_PAGE_TEST
+};
 
 static void
 cc_mouse_panel_get_property (GObject    *object,
@@ -67,10 +81,18 @@ cc_mouse_panel_dispose (GObject *object)
 {
   CcMousePanelPrivate *priv = CC_MOUSE_PANEL (object)->priv;
 
-  if (priv->widget)
+  g_clear_object (&priv->shell_header);
+
+  if (priv->prefs_widget)
     {
-      gnome_mouse_properties_dispose (priv->widget);
-      priv->widget = NULL;
+      gnome_mouse_properties_dispose (priv->prefs_widget);
+      priv->prefs_widget = NULL;
+    }
+
+  if (priv->test_widget)
+    {
+      gnome_mouse_test_dispose (priv->test_widget);
+      priv->test_widget = NULL;
     }
 
   if (priv->builder)
@@ -108,11 +130,52 @@ cc_mouse_panel_class_finalize (CcMousePanelClass *klass)
 {
 }
 
+/* Toggle between mouse panel properties and testing area. */
+static void
+shell_test_button_toggle_event (GtkToggleButton *button, CcMousePanel *panel)
+{
+  GtkBuilder *dialog = panel->priv->builder;
+  GtkNotebook *notebook = GTK_NOTEBOOK (panel->priv->widget);
+  gint page_num;
+
+  if (gtk_toggle_button_get_active (button))
+    page_num = CC_MOUSE_PAGE_TEST;
+  else
+    page_num = CC_MOUSE_PAGE_PREFS;
+
+  gtk_notebook_set_current_page (notebook, page_num);
+}
+
+/* Add test area toggle to shell header. */
+static gboolean
+add_shell_test_button_cb (gpointer user_data)
+{
+  CcMousePanel *panel = CC_MOUSE_PANEL (user_data);
+  GtkWidget *box, *button;
+
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
+
+  button = gtk_toggle_button_new_with_mnemonic (_("_Test Your Settings"));
+  gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
+  gtk_widget_set_visible (button, TRUE);
+
+  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (panel)), box);
+  gtk_widget_set_visible (box, TRUE);
+
+  panel->priv->shell_header = g_object_ref (box);
+
+  g_signal_connect (GTK_BUTTON (button), "toggled",
+                    G_CALLBACK (shell_test_button_toggle_event),
+                    panel);
+
+  return FALSE;
+}
+
 static void
 cc_mouse_panel_init (CcMousePanel *self)
 {
   CcMousePanelPrivate *priv;
-  GtkWidget *prefs_widget;
+  GtkBuilder *dialog;
   GError *error = NULL;
 
   priv = self->priv = MOUSE_PANEL_PRIVATE (self);
@@ -128,12 +191,31 @@ cc_mouse_panel_init (CcMousePanel *self)
       return;
     }
 
-  priv->widget = gnome_mouse_properties_init (priv->builder);
+  gtk_builder_add_from_file (priv->builder,
+                             GNOMECC_UI_DIR "/gnome-mouse-test.ui",
+                             &error);
+  if (error != NULL)
+    {
+      g_warning ("Error loading UI file: %s", error->message);
+      return;
+    }
 
-  prefs_widget = (GtkWidget*) gtk_builder_get_object (priv->builder,
-                                                      "prefs_widget");
+  dialog = priv->builder;
 
-  gtk_widget_reparent (prefs_widget, GTK_WIDGET (self));
+  priv->prefs_widget = gnome_mouse_properties_init (priv->builder);
+  priv->test_widget = gnome_mouse_test_init (priv->builder);
+
+  priv->widget = gtk_notebook_new ();
+  gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->widget), FALSE);
+  gtk_notebook_set_show_border (GTK_NOTEBOOK (priv->widget), FALSE);
+
+  gtk_widget_reparent (WID ("prefs_widget"), priv->widget);
+  gtk_widget_reparent (WID ("test_widget"), priv->widget);
+
+  gtk_container_add (GTK_CONTAINER (self), priv->widget);
+  gtk_widget_show (priv->widget);
+
+  g_idle_add (add_shell_test_button_cb, self);
 }
 
 void

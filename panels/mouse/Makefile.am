@@ -21,7 +21,9 @@ libmouse_properties_la_SOURCES =	\
 	gnome-mouse-properties.c	\
 	gnome-mouse-properties.h	\
 	gsd-input-helper.c		\
-	gsd-input-helper.h
+	gsd-input-helper.h		\
+	gnome-mouse-test.c		\
+	gnome-mouse-test.h
 
 libmouse_properties_la_LIBADD = $(PANEL_LIBS) $(MOUSE_PANEL_LIBS)
 libmouse_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
@@ -45,7 +47,9 @@ pixmap_DATA = \
 	double-click-maybe.png
 
 uidir   = $(pkgdatadir)/ui
-ui_DATA = gnome-mouse-properties.ui
+ui_DATA =				\
+	gnome-mouse-properties.ui	\
+	gnome-mouse-test.ui
 
 desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-mouse-panel.desktop.in
