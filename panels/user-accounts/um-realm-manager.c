@@ -243,10 +243,10 @@ um_realm_manager_new_finish (GAsyncResult *result,
         }
 
         version = um_realm_provider_get_version (self->provider);
-        if (!version_compare (version, 0, 7)) {
+        if (version == NULL || !version_compare (version, 0, 7)) {
                 /* No need to bother translators with this temporary message */
                 g_set_error (error, UM_REALM_ERROR, UM_REALM_ERROR_GENERIC,
-                             "Unsupported version of realmd: %s", version);
+                             "realmd version should be at least 0.7");
                 g_object_unref (self);
                 return NULL;
         }
