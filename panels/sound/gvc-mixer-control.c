@@ -486,7 +486,7 @@ gvc_mixer_control_lookup_input_id (GvcMixerControl *control,
  * gvc_mixer_control_get_stream_from_device:
  * @control:
  * @device:
- * Returns: (transfer container) (element-type Gvc.MixerStream):
+ * Returns: (transfer none):
  */
 GvcMixerStream *
 gvc_mixer_control_get_stream_from_device (GvcMixerControl *control,
