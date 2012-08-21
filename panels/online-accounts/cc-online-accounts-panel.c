@@ -59,6 +59,14 @@ struct _GoaPanelClass
   CcPanelClass parent_class;
 };
 
+static void on_model_row_deleted (GtkTreeModel *tree_model,
+                                  GtkTreePath  *path,
+                                  gpointer      user_data);
+static void on_model_row_inserted (GtkTreeModel *tree_model,
+                                   GtkTreePath  *path,
+                                   GtkTreeIter  *iter,
+                                   gpointer      user_data);
+
 static void on_tree_view_selection_changed (GtkTreeSelection *selection,
                                             gpointer          user_data);
 
@@ -116,7 +124,12 @@ goa_panel_finalize (GObject *object)
                                         G_CALLBACK (on_tree_view_selection_changed),
                                         panel);
   if (panel->accounts_model != NULL)
-    g_object_unref (panel->accounts_model);
+    {
+      g_signal_handlers_disconnect_by_func (panel->accounts_model, G_CALLBACK (on_model_row_deleted), panel);
+      g_signal_handlers_disconnect_by_func (panel->accounts_model, G_CALLBACK (on_model_row_inserted), panel);
+      g_clear_object (&panel->accounts_model);
+    }
+
   if (panel->client != NULL)
     {
       g_signal_handlers_disconnect_by_func (panel->client,
@@ -202,6 +215,8 @@ goa_panel_init (GoaPanel *panel)
 
   panel->accounts_model = goa_panel_accounts_model_new (panel->client);
   gtk_tree_view_set_model (GTK_TREE_VIEW (panel->accounts_treeview), GTK_TREE_MODEL (panel->accounts_model));
+  g_signal_connect (panel->accounts_model, "row-deleted", G_CALLBACK (on_model_row_deleted), panel);
+  g_signal_connect (panel->accounts_model, "row-inserted", G_CALLBACK (on_model_row_inserted), panel);
 
   column = gtk_tree_view_column_new ();
   gtk_tree_view_append_column (GTK_TREE_VIEW (panel->accounts_treeview), column);
@@ -545,6 +560,58 @@ on_account_changed (GoaClient  *client,
         show_page_account (panel, selected_object);
       g_object_unref (selected_object);
     }
+}
+
+/* ---------------------------------------------------------------------------------------------------- */
+
+static void
+on_model_row_changed (GtkTreeModel *tree_model,
+                      GtkTreePath  *path,
+                      GtkTreeIter  *iter,
+                      gpointer      user_data)
+{
+  GtkTreeSelection *selection = GTK_TREE_SELECTION (user_data);
+
+  gtk_tree_selection_select_iter (selection, iter);
+  g_signal_handlers_disconnect_by_func (tree_model, G_CALLBACK (on_model_row_changed), user_data);
+}
+
+static void
+on_model_row_deleted (GtkTreeModel *tree_model,
+                      GtkTreePath  *path,
+                      gpointer      user_data)
+{
+  GoaPanel *panel = GOA_PANEL (user_data);
+  GtkTreeIter iter;
+  GtkTreeSelection *selection;
+
+  if (!gtk_tree_model_get_iter (tree_model, &iter, path))
+    {
+      if (!gtk_tree_path_prev (path))
+        return;
+    }
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview));
+  gtk_tree_selection_select_path (selection, path);
+}
+
+static void
+on_model_row_inserted (GtkTreeModel *tree_model,
+                       GtkTreePath  *path,
+                       GtkTreeIter  *iter,
+                       gpointer      user_data)
+{
+  GoaPanel *panel = GOA_PANEL (user_data);
+  GtkTreeSelection *selection;
+
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview));
+  if (gtk_tree_selection_get_selected (selection, NULL, NULL))
+    return;
+
+  /* An empty row has been inserted and is going to be filled in, so
+   * we expect selection to stay valid.
+   */
+  g_signal_connect (tree_model, "row-changed", G_CALLBACK (on_model_row_changed), selection);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
