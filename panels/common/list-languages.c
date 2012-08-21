@@ -12,9 +12,11 @@ int main (int argc, char **argv)
 	if (argc > 1) {
 		guint i;
 		for (i = 1; i < argc; i++) {
-			char *lang;
-			lang = gdm_get_language_from_name (argv[i], NULL);
-			g_print ("%s == %s\n", argv[i], lang);
+			char *lang, *norm;
+			norm = gdm_normalize_language_name (argv[i]);
+			lang = gdm_get_language_from_name (norm, NULL);
+			g_print ("%s (norm: %s) == %s\n", argv[i], norm, lang);
+			g_free (norm);
 			g_free (lang);
 		}
 		return 0;
