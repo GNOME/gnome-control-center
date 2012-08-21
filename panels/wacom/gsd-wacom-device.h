@@ -122,6 +122,9 @@ typedef enum {
         WACOM_TYPE_ALL     =     WACOM_TYPE_STYLUS | WACOM_TYPE_ERASER | WACOM_TYPE_CURSOR | WACOM_TYPE_PAD | WACOM_TYPE_TOUCH
 } GsdWacomDeviceType;
 
+/* We use -1 for entire screen when setting/getting monitor value */
+#define GSD_WACOM_SET_ALL_MONITORS -1
+
 GType gsd_wacom_device_get_type     (void);
 
 void     gsd_wacom_device_set_display         (GsdWacomDevice    *device,

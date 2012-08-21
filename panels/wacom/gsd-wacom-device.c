@@ -756,7 +756,7 @@ gsd_wacom_device_set_display (GsdWacomDevice *device,
 		return;
 	}
 
-	if (monitor >= 0)
+	if (monitor > GSD_WACOM_SET_ALL_MONITORS)
 		output = find_output_by_monitor (rr_screen, gdk_screen_get_default (), monitor);
 	set_display_by_output (device, output);
 
@@ -823,25 +823,25 @@ gsd_wacom_device_get_display_monitor (GsdWacomDevice *device)
 	GnomeRRCrtc *crtc;
 	gint area[4];
 
-        g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), -1);
+        g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), GSD_WACOM_SET_ALL_MONITORS);
 
 	rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
 	if (rr_screen == NULL) {
 		g_warning ("Failed to create GnomeRRScreen: %s", error->message);
 		g_error_free (error);
-		return -1;
+		return GSD_WACOM_SET_ALL_MONITORS;
 	}
 
 	rr_output = find_output (rr_screen, device);
 	if (rr_output == NULL) {
 		g_object_unref (rr_screen);
-		return -1;
+		return GSD_WACOM_SET_ALL_MONITORS;
 	}
 
 	if (!is_on (rr_output)) {
 		g_warning ("Output is not active.");
 		g_object_unref (rr_screen);
-		return -1;
+		return GSD_WACOM_SET_ALL_MONITORS;
 	}
 
 	crtc = gnome_rr_output_get_crtc (rr_output);
@@ -855,7 +855,7 @@ gsd_wacom_device_get_display_monitor (GsdWacomDevice *device)
 
 	if (area[2] <= 0 || area[3] <= 0) {
 		g_warning ("Output has non-positive area.");
-		return -1;
+		return GSD_WACOM_SET_ALL_MONITORS;
 	}
 
 	g_debug ("Area: %d,%d %dx%d", area[0], area[1], area[2], area[3]);
@@ -906,7 +906,7 @@ gsd_wacom_device_get_display_rotation (GsdWacomDevice *device)
 	if (rr_screen == NULL) {
 		g_warning ("Failed to create GnomeRRScreen: %s", error->message);
 		g_error_free (error);
-		return -1;
+		return GSD_WACOM_ROTATION_NONE;
 	}
 
 	rr_output = find_output (rr_screen, device);

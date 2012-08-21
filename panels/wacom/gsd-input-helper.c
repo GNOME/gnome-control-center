@@ -188,6 +188,12 @@ device_info_is_touchscreen (XDeviceInfo *device_info)
         return (device_info->type == XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XI_TOUCHSCREEN, False));
 }
 
+gboolean
+device_info_is_mouse (XDeviceInfo *device_info)
+{
+        return (device_info->type == XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XI_MOUSE, False));
+}
+
 static gboolean
 device_type_is_present (InfoIdentifyFunc info_func,
                         DeviceIdentifyFunc device_func)
@@ -248,6 +254,13 @@ touchpad_is_present (void)
 {
         return device_type_is_present (device_info_is_touchpad,
                                        device_is_touchpad);
+}
+
+gboolean
+mouse_is_present (void)
+{
+        return device_type_is_present (device_info_is_mouse,
+                                       NULL);
 }
 
 char *
