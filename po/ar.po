@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-12 12:49+0200\n"
-"PO-Revision-Date: 2012-08-12 12:49+0200\n"
+"POT-Creation-Date: 2012-08-21 18:56+0200\n"
+"PO-Revision-Date: 2012-08-21 18:55+0200\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "Language: ar\n"
@@ -27,72 +27,68 @@ msgstr ""
 "X-Generator: Virtaal 0.7.0\n"
 "X-Project-Style: gnome\n"
 
-#: ../panels/background/background.ui.h:1
-msgid "Add wallpaper"
-msgstr "أضف خلفية"
-
-#: ../panels/background/background.ui.h:2
-msgid "Remove wallpaper"
-msgstr "أزل الخلفية"
-
 #. This refers to a slideshow background
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:2
 msgid "Changes throughout the day"
 msgstr "تتغير طوال اليوم"
 
-#: ../panels/background/background.ui.h:5
-msgid "Primary Color"
-msgstr "اللون الأساسي"
-
-#: ../panels/background/background.ui.h:6
-msgid "Swap colors"
-msgstr "بدّل الألوان"
-
-#: ../panels/background/background.ui.h:7
-msgid "Secondary color"
-msgstr "اللون الثانوي"
-
-#: ../panels/background/background.ui.h:8
+#: ../panels/background/background.ui.h:3
 msgctxt "background, style"
 msgid "Tile"
 msgstr "مبلّطة"
 
-#: ../panels/background/background.ui.h:9
+#: ../panels/background/background.ui.h:4
 msgctxt "background, style"
 msgid "Zoom"
 msgstr "مُقرَّبة"
 
-#: ../panels/background/background.ui.h:10
+#: ../panels/background/background.ui.h:5
 msgctxt "background, style"
 msgid "Center"
 msgstr "موسَّطة"
 
-#: ../panels/background/background.ui.h:11
+#: ../panels/background/background.ui.h:6
 msgctxt "background, style"
 msgid "Scale"
 msgstr "محجّمة"
 
-#: ../panels/background/background.ui.h:12
+#: ../panels/background/background.ui.h:7
 msgctxt "background, style"
 msgid "Fill"
 msgstr "مملوءة"
 
-#: ../panels/background/background.ui.h:13
+#: ../panels/background/background.ui.h:8
 msgctxt "background, style"
 msgid "Span"
 msgstr "موسّعة"
 
-#: ../panels/background/bg-colors-source.c:46
-msgid "Horizontal Gradient"
-msgstr "تدرج أفقي"
+#. translators: This is the title of the wallpaper chooser dialog.
+#: ../panels/background/cc-background-chooser-dialog.c:199
+msgid "Select Background"
+msgstr "اختر خلفية"
 
-#: ../panels/background/bg-colors-source.c:47
-msgid "Vertical Gradient"
-msgstr "تدرج رأسي"
+#: ../panels/background/cc-background-chooser-dialog.c:218
+msgid "Wallpapers"
+msgstr "خلفيات"
 
-#: ../panels/background/bg-colors-source.c:48
-msgid "Solid Color"
-msgstr "لون سادة"
+#: ../panels/background/cc-background-chooser-dialog.c:227
+msgid "Pictures"
+msgstr "صور"
+
+#: ../panels/background/cc-background-chooser-dialog.c:235
+msgid "Colors"
+msgstr "ألوان"
+
+#: ../panels/background/cc-background-chooser-dialog.c:244
+msgid "Flickr"
+msgstr "فلِكَر"
+
+#: ../panels/background/cc-background-chooser-dialog.c:280
+#: ../panels/printers/ppd-selection-dialog.ui.h:3
+#: ../panels/user-accounts/data/photo-dialog.ui.h:9
+#: ../panels/user-accounts/um-photo-dialog.c:98
+msgid "Select"
+msgstr "اختر"
 
 #: ../panels/background/cc-background-item.c:148
 msgid "multiple sizes"
@@ -109,31 +105,9 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "لا خلفية لسطح المكتب"
 
-#: ../panels/background/cc-background-panel.c:1018
-#: ../panels/user-accounts/data/photo-dialog.ui.h:4
-#: ../panels/user-accounts/um-photo-dialog.c:218
-msgid "Browse for more pictures"
-msgstr "تصفّح لمزيد من الصور"
-
-#: ../panels/background/cc-background-panel.c:1110
+#: ../panels/background/cc-background-panel.c:390
 msgid "Current background"
 msgstr "الخلفية الحالية"
-
-#: ../panels/background/cc-background-panel.c:1220
-msgid "Wallpapers"
-msgstr "خلفيات"
-
-#: ../panels/background/cc-background-panel.c:1227
-msgid "Pictures Folder"
-msgstr "مجلّد الصور"
-
-#: ../panels/background/cc-background-panel.c:1234
-msgid "Colors & Gradients"
-msgstr "ألوان وتدرجات"
-
-#: ../panels/background/cc-background-panel.c:1242
-msgid "Flickr"
-msgstr "فلِكَر"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:1
 msgid "Background"
@@ -174,7 +148,7 @@ msgstr "الاتصال"
 msgid "Paired"
 msgstr "مقترن"
 
-#: ../panels/bluetooth/bluetooth.ui.h:5
+#: ../panels/bluetooth/bluetooth.ui.h:5 ../panels/wacom/cc-wacom-page.c:754
 msgid "Type"
 msgstr "النوع"
 
@@ -489,6 +463,7 @@ msgstr "كامرة شبكية"
 
 #: ../panels/color/color.ui.h:3
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
+#: ../panels/universal-access/zoom-options.ui.h:30
 msgid "Color"
 msgstr "الألوان"
 
@@ -634,7 +609,7 @@ msgstr "اختر لغة"
 
 #: ../panels/common/language-chooser.ui.h:2
 #: ../panels/printers/new-printer-dialog.ui.h:4
-#: ../panels/user-accounts/um-user-panel.c:455
+#: ../panels/user-accounts/um-user-panel.c:462
 msgid "_Cancel"
 msgstr "أ_لغِ"
 
@@ -1026,7 +1001,7 @@ msgid "Software"
 msgstr "برمجيات"
 
 #: ../panels/info/cc-info-panel.c:1483
-#: ../panels/keyboard/keyboard-shortcuts.c:1569
+#: ../panels/keyboard/keyboard-shortcuts.c:1647
 msgid "Section"
 msgstr "القسم"
 
@@ -1226,9 +1201,11 @@ msgid "Eject"
 msgstr "أخرِج"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
-#: ../panels/region/gnome-region-panel.ui.h:30
-msgid "Input Sources"
-msgstr "مصادر الإدخال"
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
+#: ../panels/keyboard/keyboard-shortcuts.c:858
+#: ../panels/universal-access/uap.ui.h:71
+msgid "Typing"
+msgstr "الكتابة"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:2
 #: ../panels/region/gnome-region-panel.ui.h:26
@@ -1272,27 +1249,30 @@ msgstr "ابحث"
 msgid "Screenshots"
 msgstr "لقطات الشاشة"
 
-#: ../panels/keyboard/01-screenshot.xml.in.h:2
-msgid "Take a screenshot"
-msgstr "التقط صورة للشاشة"
-
+#. translators: Pictures is the name of the XDG Pictures directory
 #: ../panels/keyboard/01-screenshot.xml.in.h:3
-msgid "Take a screenshot of a window"
-msgstr "التقط صورة لنافذة"
+msgid "Save a screenshot to Pictures"
+msgstr "احفظ لقطة شاشة في مجلد الصور"
 
-#: ../panels/keyboard/01-screenshot.xml.in.h:4
-msgid "Take a screenshot of an area"
-msgstr "التقط صورة لمنطقة محددة"
-
+#. translators: Pictures is the name of the XDG Pictures directory
 #: ../panels/keyboard/01-screenshot.xml.in.h:5
+msgid "Save a screenshot of a window to Pictures"
+msgstr "احفظ لقطة شاشة لنافذة في مجلد الصور"
+
+#. translators: Pictures is the name of the XDG Pictures directory
+#: ../panels/keyboard/01-screenshot.xml.in.h:7
+msgid "Save a screenshot of an area to Pictures"
+msgstr "احفظ لقطة شاشة لمنطقة في مجلد الصور"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:8
 msgid "Copy a screenshot to clipboard"
 msgstr "انسخ اللقطة إلى الحافظة"
 
-#: ../panels/keyboard/01-screenshot.xml.in.h:6
+#: ../panels/keyboard/01-screenshot.xml.in.h:9
 msgid "Copy a screenshot of a window to clipboard"
 msgstr "انسخ لقطة النافذة إلى الحافظة"
 
-#: ../panels/keyboard/01-screenshot.xml.in.h:7
+#: ../panels/keyboard/01-screenshot.xml.in.h:10
 msgid "Copy a screenshot of an area to clipboard"
 msgstr "انسخ لقطة المنطقة المحددة إلى الحافظة"
 
@@ -1346,6 +1326,25 @@ msgstr "صغّر النص"
 msgid "High contrast on or off"
 msgstr "شغّل أو عطّل التباين العال"
 
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/cc-keyboard-option.c:241
+#: ../panels/keyboard/cc-keyboard-option.c:347
+#: ../panels/keyboard/keyboard-shortcuts.c:1112
+#: ../panels/sound/gvc-mixer-control.c:1834
+#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
+msgid "Disabled"
+msgstr "معطّل"
+
+#: ../panels/keyboard/cc-keyboard-option.c:315
+msgid "Alternative Characters Key"
+msgstr "مفتاح الحروف البديلة"
+
+#: ../panels/keyboard/cc-keyboard-option.c:320
+msgid "Compose Key"
+msgstr "مفتاح التركيب"
+
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "Keyboard"
@@ -1390,14 +1389,13 @@ msgstr "ال_سرعة:"
 
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
-#: ../panels/mouse/gnome-mouse-properties.ui.h:24
 #: ../panels/universal-access/uap.ui.h:52
 msgid "Short"
 msgstr "قصير"
 
 #. slow acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
 msgid "Slow"
 msgstr "بطيء"
 
@@ -1407,14 +1405,13 @@ msgstr "سرعة تكرار المفاتيح"
 
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
-#: ../panels/mouse/gnome-mouse-properties.ui.h:26
 #: ../panels/universal-access/uap.ui.h:55
 msgid "Long"
 msgstr "طويل"
 
 #. fast acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
-#: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
 msgid "Fast"
 msgstr "سريع"
 
@@ -1438,11 +1435,6 @@ msgstr "سرعة ومضات المؤشر"
 msgid "Layout Settings"
 msgstr "إعدادات التخطيط"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/universal-access/uap.ui.h:71
-msgid "Typing"
-msgstr "الكتابة"
-
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
 msgid "Add Shortcut"
 msgstr "أضف اختصارًا"
@@ -1465,28 +1457,19 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "الاختصارات"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:553
-#: ../panels/keyboard/keyboard-shortcuts.c:561
-#: ../panels/keyboard/keyboard-shortcuts.c:873
-#: ../panels/keyboard/keyboard-shortcuts.c:1325
-#: ../panels/keyboard/keyboard-shortcuts.c:1329
+#: ../panels/keyboard/keyboard-shortcuts.c:552
+#: ../panels/keyboard/keyboard-shortcuts.c:560
+#: ../panels/keyboard/keyboard-shortcuts.c:942
+#: ../panels/keyboard/keyboard-shortcuts.c:1414
+#: ../panels/keyboard/keyboard-shortcuts.c:1418
 msgid "Custom Shortcuts"
 msgstr "اختصارات مخصصة"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:721
+#: ../panels/keyboard/keyboard-shortcuts.c:756
 msgid "<Unknown Action>"
 msgstr "<إجراء غير معروف>"
 
-#. translators:
-#. * The device has been disabled
-#: ../panels/keyboard/keyboard-shortcuts.c:1025
-#: ../panels/sound/gvc-mixer-control.c:1834
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
-#: ../panels/user-accounts/um-fingerprint-dialog.c:216
-msgid "Disabled"
-msgstr "معطّل"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1164
+#: ../panels/keyboard/keyboard-shortcuts.c:1253
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1496,7 +1479,7 @@ msgstr ""
 "الاختصار \"%s\" لا يمكن استخدامه لأن الطباعة بهذا المفتاح ستصبح متعذرة.\n"
 "حاول رجاءً استخدام مفتاح مع Ctrl أو Alt أو Shift في نفس الوقت."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1196
+#: ../panels/keyboard/keyboard-shortcuts.c:1285
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1505,24 +1488,19 @@ msgstr ""
 "الاختصار \"%s\" مستخدم في:\n"
 "\"%s\""
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1201
+#: ../panels/keyboard/keyboard-shortcuts.c:1290
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "إذا أعدت تعيين الاختصار \"%s\" فسيُعطّل الاختصار \"%s\"."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1207
+#: ../panels/keyboard/keyboard-shortcuts.c:1296
 msgid "_Reassign"
 msgstr "أعِد ال_تعيين"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1618
-#: ../panels/wacom/cc-wacom-page.c:620
-msgid "Action"
-msgstr "الإجراء"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1640
-msgid "Shortcut"
-msgstr "الاختصار"
+#: ../panels/mouse/cc-mouse-panel.c:158
+msgid "_Test Your Settings"
+msgstr "اختبر إ_عداداتك"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse & Touchpad"
@@ -1545,115 +1523,57 @@ msgstr "تفضيلات الفأرة"
 msgid "General"
 msgstr "عام"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgid "_Right-handed"
-msgstr "فأرة لليد الي_منى"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
-msgid "_Left-handed"
-msgstr "فأرة لليد اليسر_ى"
-
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-msgid "Sh_ow position of pointer when the Control key is pressed"
-msgstr "أ_ظهر موقع الفأرة عند ضغط مفتاح Ctrl"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:6
-msgid "Pointer Speed"
-msgstr "سرعة المؤشر"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
-msgid "A_cceleration:"
-msgstr "ال_تسارع:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
-msgid "_Sensitivity:"
-msgstr "الح_ساسية:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
-msgctxt "Mouse sensitivity"
-msgid "Low"
-msgstr "قليلة"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
-msgctxt "Mouse sensitivity"
-msgid "High"
-msgstr "عالية"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
-msgid "Drag and Drop"
-msgstr "السحب والإفلات"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
-msgid "Thr_eshold:"
-msgstr "ال_عتبة:"
-
-#. small threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
-#: ../panels/universal-access/uap.ui.h:84
-msgid "Small"
-msgstr "صغير"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
-msgid "Drag Threshold"
-msgstr "اسحب العتبة"
-
-#. large threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:21
-#: ../panels/universal-access/uap.ui.h:86
-msgid "Large"
-msgstr "كبير"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:22
-msgid "Double-Click Timeout"
-msgstr "مهلة النقر المزدوج"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:23
-msgid "_Timeout:"
-msgstr "ا_لمهلة:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:25
 msgid "Double-click timeout"
 msgstr "مهلة النقر المزدوج"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:27
-msgid "To test your settings, try to double-click on the face."
-msgstr "لاختبار إعدادات النقر المزدوج، جرّب النقر المزدوج على الوجه."
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+msgid "_Double-click"
+msgstr "الن_قر المزدوج"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+msgid "Primary _button"
+msgstr "الزر الأس_اسي"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+msgid "_Left"
+msgstr "الأي_سر"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+msgid "_Right"
+msgstr "الأي_من"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:12
 msgid "Mouse"
 msgstr "الفأرة"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:29
-msgid "Disable _touchpad while typing"
-msgstr "_عطّل لوحة اللمس أثناء الكتابة"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+msgid "_Pointer speed"
+msgstr "سرعة المؤ_شر"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:30
-msgid "Enable _mouse clicks with touchpad"
-msgstr "فعّل _نقرات الفأرة في لوحة اللمس"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
-msgid "Scrolling"
-msgstr "اللف"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:32
-msgid "_Disabled"
-msgstr "مع_طّل"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:33
-msgid "_Edge scrolling"
-msgstr "اللف عند ال_حافة"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:34
-msgid "Two-_finger scrolling"
-msgstr "اللف بأ_صبعين"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:35
-msgid "Enable h_orizontal scrolling"
-msgstr "فعّل اللف الأ_فقي"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:36
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Touchpad"
 msgstr "لوحة اللمس"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+msgid "Disable while _typing"
+msgstr "_عطّل أثناء الكتابة"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+msgid "Tap to _click"
+msgstr "الن_قر بالإصبع"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+msgid "Two _finger scroll"
+msgstr "اللف بأ_صبعين"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+msgid "C_ontent sticks to fingers"
+msgstr "يلت_صق المحتوى بالإصابع"
+
+#: ../panels/mouse/gnome-mouse-test.ui.h:1
+msgid "To test your settings, try to double-click on the face."
+msgstr "لاختبار إعدادات النقر المزدوج، جرّب النقر المزدوج على الوجه."
 
 #: ../panels/network/cc-network-panel.c:627
 msgid "Network proxy"
@@ -1731,10 +1651,12 @@ msgid "Enterprise"
 msgstr "شركات"
 
 #. TRANSLATORS: this no (!) WiFi security
+#. short delay
 #: ../panels/network/net-device-wifi.c:312
 #: ../panels/network/net-device-wifi.c:468
-#: ../panels/universal-access/uap.ui.h:8 ../panels/wacom/cc-wacom-page.c:335
-#: ../panels/wacom/cc-wacom-page.c:352
+#: ../panels/universal-access/uap.ui.h:8
+#: ../panels/universal-access/zoom-options.ui.h:32
+#: ../panels/wacom/cc-wacom-page.c:118 ../panels/wacom/cc-wacom-page.c:369
 msgid "None"
 msgstr "لا شيء"
 
@@ -2230,7 +2152,7 @@ msgstr "الخط مشغول"
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:381
 msgid "No dial tone"
-msgstr ""
+msgstr "الخط مقطوع"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:385
@@ -2240,12 +2162,12 @@ msgstr ""
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:389
 msgid "Dialing request timed out"
-msgstr ""
+msgstr "انتهت مهلة الاتصال الهاتفي"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:393
 msgid "Dialing attempt failed"
-msgstr ""
+msgstr "فشل الاتصال الهاتفي"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:397
@@ -2350,35 +2272,35 @@ msgstr ""
 msgid "Add Account"
 msgstr "أضف حسابا"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:340
+#: ../panels/online-accounts/cc-online-accounts-panel.c:376
 msgid "Error logging into the account"
 msgstr "خطأ عند الولوج إلى الحساب"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:394
+#: ../panels/online-accounts/cc-online-accounts-panel.c:430
 msgid "Expired credentials. Please log in again."
 msgstr "بيانات اعتماد مُنتهية. رجاءً لُج مجددا."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:397
+#: ../panels/online-accounts/cc-online-accounts-panel.c:433
 msgid "_Log In"
 msgstr "لُ_ج"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:551
+#: ../panels/online-accounts/cc-online-accounts-panel.c:617
 msgid "Error creating account"
 msgstr "خطأ أثناء إنشاء الحساب"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:593
+#: ../panels/online-accounts/cc-online-accounts-panel.c:659
 msgid "Error removing account"
 msgstr "خطأ أثناء إزالة الحساب"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:629
+#: ../panels/online-accounts/cc-online-accounts-panel.c:695
 msgid "Are you sure you want to remove the account?"
 msgstr "أمتأكد أنك تريد إزالة الحساب؟"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:631
+#: ../panels/online-accounts/cc-online-accounts-panel.c:697
 msgid "This will not remove the account on the server."
 msgstr "هذا لن يزيل الحساب على الخادوم."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:632
+#: ../panels/online-accounts/cc-online-accounts-panel.c:698
 msgid "_Remove"
 msgstr "أ_زل"
 
@@ -2908,7 +2830,7 @@ msgid "_Search by Address"
 msgstr "ا_بحث حسب العنوان"
 
 #: ../panels/printers/new-printer-dialog.ui.h:5
-#: ../panels/user-accounts/um-account-dialog.c:1007
+#: ../panels/user-accounts/um-account-dialog.c:1017
 msgid "_Add"
 msgstr "أ_ضف"
 
@@ -2922,15 +2844,9 @@ msgstr "يُحمّل الخيارات..."
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1006
+#: ../panels/user-accounts/um-account-dialog.c:1016
 msgid "Cancel"
 msgstr "ألغِ"
-
-#: ../panels/printers/ppd-selection-dialog.ui.h:3
-#: ../panels/user-accounts/data/photo-dialog.ui.h:9
-#: ../panels/user-accounts/um-photo-dialog.c:98
-msgid "Select"
-msgstr "اختر"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
 msgid "Loading drivers database..."
@@ -3481,6 +3397,10 @@ msgstr "Ctrl+Alt+Shift+Space"
 #: ../panels/region/gnome-region-panel.ui.h:28
 msgid "Shortcut Settings"
 msgstr "إعدادات الاختصار"
+
+#: ../panels/region/gnome-region-panel.ui.h:30
+msgid "Input Sources"
+msgstr "مصادر الإدخال"
 
 #. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
 #: ../panels/region/gnome-region-panel.ui.h:33
@@ -4166,6 +4086,16 @@ msgstr "ال_تأخير:"
 msgid "Motion _threshold:"
 msgstr "عتبة الحر_كة:"
 
+#. small threshold
+#: ../panels/universal-access/uap.ui.h:84
+msgid "Small"
+msgstr "صغير"
+
+#. large threshold
+#: ../panels/universal-access/uap.ui.h:86
+msgid "Large"
+msgstr "كبير"
+
 #: ../panels/universal-access/uap.ui.h:87
 msgid "Mouse Settings"
 msgstr "إعدادات الفأرة"
@@ -4174,116 +4104,163 @@ msgstr "إعدادات الفأرة"
 msgid "Pointing and Clicking"
 msgstr "التأشير والنقر"
 
-#: ../panels/universal-access/zoom-options.c:333
+#: ../panels/universal-access/zoom-options.c:357
 msgctxt "Distance"
 msgid "Short"
 msgstr "قصيرة"
 
-#: ../panels/universal-access/zoom-options.c:334
+#: ../panels/universal-access/zoom-options.c:358
 msgctxt "Distance"
 msgid "¼ Screen"
 msgstr "¼ الشاشة"
 
-#: ../panels/universal-access/zoom-options.c:335
+#: ../panels/universal-access/zoom-options.c:359
 msgctxt "Distance"
 msgid "½ Screen"
 msgstr "½ الشاشة"
 
-#: ../panels/universal-access/zoom-options.c:336
+#: ../panels/universal-access/zoom-options.c:360
 msgctxt "Distance"
 msgid "¾ Screen"
 msgstr "¾ الشاشة"
 
-#: ../panels/universal-access/zoom-options.c:337
+#: ../panels/universal-access/zoom-options.c:361
 msgctxt "Distance"
 msgid "Long"
 msgstr "طويلة"
 
 #: ../panels/universal-access/zoom-options.ui.h:1
+msgid "Full Screen"
+msgstr "ملء الشاشة"
+
+#: ../panels/universal-access/zoom-options.ui.h:2
+msgid "Top Half"
+msgstr "النصف العلوي"
+
+#: ../panels/universal-access/zoom-options.ui.h:3
+msgid "Bottom Half"
+msgstr "النصف السفلي"
+
+#: ../panels/universal-access/zoom-options.ui.h:4
+msgid "Left Half"
+msgstr "النصف الأيسر"
+
+#: ../panels/universal-access/zoom-options.ui.h:5
+msgid "Right Half"
+msgstr "النصف الأيمن"
+
+#: ../panels/universal-access/zoom-options.ui.h:6
 msgid "Zoom Options"
 msgstr "خيارات التقريب"
 
-#: ../panels/universal-access/zoom-options.ui.h:2
+#: ../panels/universal-access/zoom-options.ui.h:7
+msgid "Zoom"
+msgstr "التقريب"
+
+#: ../panels/universal-access/zoom-options.ui.h:8
 msgid "Magnification:"
 msgstr "التكبير:"
 
-#: ../panels/universal-access/zoom-options.ui.h:3
+#: ../panels/universal-access/zoom-options.ui.h:9
 msgid "Follow mouse cursor"
 msgstr "يتبع مؤشر الفأرة"
 
-#: ../panels/universal-access/zoom-options.ui.h:4
+#: ../panels/universal-access/zoom-options.ui.h:10
 msgid "Screen part:"
 msgstr "جزء من الشاشة:"
 
-#: ../panels/universal-access/zoom-options.ui.h:5
+#: ../panels/universal-access/zoom-options.ui.h:11
 msgid "Magnifier extends outside of screen"
-msgstr "المكبِّر يمتد لخارج الشاشة"
+msgstr "المكبِّرة تمتد لخارج الشاشة"
 
-#: ../panels/universal-access/zoom-options.ui.h:6
+#: ../panels/universal-access/zoom-options.ui.h:12
 msgid "Keep magnifier cursor centered"
-msgstr "أبق المؤشر متمركزًا المكبِّر"
+msgstr "أبق المؤشر متمركزًا المكبِّرة"
 
-#: ../panels/universal-access/zoom-options.ui.h:7
+#: ../panels/universal-access/zoom-options.ui.h:13
 msgid "Magnifier cursor pushes contents around"
-msgstr "المؤشر يدفع المكبِّر نحو المحتوى"
+msgstr "المؤشر يدفع المكبِّرة نحو المحتوى"
 
-#: ../panels/universal-access/zoom-options.ui.h:8
+#: ../panels/universal-access/zoom-options.ui.h:14
 msgid "Magnifier cursor moves with contents"
-msgstr "المؤشر يحرّك المكبِّر مع المحتوى"
+msgstr "المؤشر يحرّك المكبِّرة مع المحتوى"
 
-#: ../panels/universal-access/zoom-options.ui.h:9
+#: ../panels/universal-access/zoom-options.ui.h:15
 msgid "Magnifier Position:"
-msgstr "موضع المُكبِّر:"
+msgstr "موضع المُكبِّرة:"
 
-#: ../panels/universal-access/zoom-options.ui.h:10
+#: ../panels/universal-access/zoom-options.ui.h:16
+msgid "Magnifier"
+msgstr "المكبّرة"
+
+#: ../panels/universal-access/zoom-options.ui.h:17
 msgid "Thickness:"
-msgstr "الثخانة:"
+msgstr "السماكة:"
 
 #. short delay
-#: ../panels/universal-access/zoom-options.ui.h:12
+#: ../panels/universal-access/zoom-options.ui.h:19
 msgid "Thin"
 msgstr "نحيف"
 
 #. long delay
-#: ../panels/universal-access/zoom-options.ui.h:14
+#: ../panels/universal-access/zoom-options.ui.h:21
 msgid "Thick"
-msgstr "ثخين"
+msgstr "سميك"
 
-#: ../panels/universal-access/zoom-options.ui.h:15
+#: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Length:"
 msgstr "الطول:"
 
-#: ../panels/universal-access/zoom-options.ui.h:16
+#: ../panels/universal-access/zoom-options.ui.h:23
 msgid "Color:"
 msgstr "اللون:"
 
-#: ../panels/universal-access/zoom-options.ui.h:17
+#: ../panels/universal-access/zoom-options.ui.h:24
 msgid "Crosshairs:"
 msgstr "محاور الهدف:"
 
-#: ../panels/universal-access/zoom-options.ui.h:18
+#: ../panels/universal-access/zoom-options.ui.h:25
 msgid "Overlaps mouse cursor"
 msgstr "تداخل مع مؤشر الفأرة"
 
-#: ../panels/universal-access/zoom-options.ui.h:19
-msgid "Full Screen"
-msgstr "ملء الشاشة"
+#: ../panels/universal-access/zoom-options.ui.h:26
+msgid "Crosshairs"
+msgstr "محاور الهدف"
 
-#: ../panels/universal-access/zoom-options.ui.h:20
-msgid "Top Half"
-msgstr "النصف العلوي"
+#: ../panels/universal-access/zoom-options.ui.h:27
+msgid "White on black:"
+msgstr "أبيض على أسود:"
 
-#: ../panels/universal-access/zoom-options.ui.h:21
-msgid "Bottom Half"
-msgstr "النصف السفلي"
+#: ../panels/universal-access/zoom-options.ui.h:28
+msgid "Brightness:"
+msgstr "السطوع:"
 
-#: ../panels/universal-access/zoom-options.ui.h:22
-msgid "Left Half"
-msgstr "النصف الأيسر"
+#: ../panels/universal-access/zoom-options.ui.h:29
+msgid "Contrast:"
+msgstr "التباين:"
 
-#: ../panels/universal-access/zoom-options.ui.h:23
-msgid "Right Half"
-msgstr "النصف الأيمن"
+#. long delay
+#: ../panels/universal-access/zoom-options.ui.h:34
+msgid "Full"
+msgstr "كامل"
+
+#. short delay
+#: ../panels/universal-access/zoom-options.ui.h:36
+msgid "Low"
+msgstr "منخفض"
+
+#. long delay
+#: ../panels/universal-access/zoom-options.ui.h:38
+msgid "High"
+msgstr "عال"
+
+#: ../panels/universal-access/zoom-options.ui.h:39
+msgid "Color Effects:"
+msgstr "المؤثرات اللونية:"
+
+#: ../panels/universal-access/zoom-options.ui.h:40
+msgid "Color Effects"
+msgstr "المؤثرات اللونية"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:1
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
@@ -4320,6 +4297,7 @@ msgid "_Full name"
 msgstr "الاسم بال_كامل"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:8
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
 msgid "Account _Type"
 msgstr "_نوع الحساب"
 
@@ -4516,6 +4494,11 @@ msgstr "اختر صورة هذا الحساب في شاشة الولوج."
 msgid "Gallery"
 msgstr "المعرض"
 
+#: ../panels/user-accounts/data/photo-dialog.ui.h:4
+#: ../panels/user-accounts/um-photo-dialog.c:218
+msgid "Browse for more pictures"
+msgstr "تصفّح لمزيد من الصور"
+
 #: ../panels/user-accounts/data/photo-dialog.ui.h:5
 msgid "Take a photograph"
 msgstr "التقط صورة"
@@ -4539,10 +4522,6 @@ msgstr "أضِف حساب مستخدِم"
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:5
 msgid "Remove User Account"
 msgstr "أزِل حساب مستخدِم"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
-msgid "Account _type"
-msgstr "_نوع الحساب"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "Login Options"
@@ -4661,20 +4640,20 @@ msgstr "عطل غير معروف"
 msgid "Failed to add account"
 msgstr "فشلت إضافة الحساب"
 
-#: ../panels/user-accounts/um-account-dialog.c:362
+#: ../panels/user-accounts/um-account-dialog.c:366
 #: ../panels/user-accounts/um-account-dialog.c:405
 msgid "Failed to register account"
 msgstr "فشل تسجيل المستخدم"
 
-#: ../panels/user-accounts/um-account-dialog.c:519
+#: ../panels/user-accounts/um-account-dialog.c:530
 msgid "No supported way to authenticate with this domain"
 msgstr "لا توجد طريقة مدعومة للاستيثاق مع هذا النطاق"
 
-#: ../panels/user-accounts/um-account-dialog.c:571
+#: ../panels/user-accounts/um-account-dialog.c:582
 msgid "Failed to join domain"
 msgstr "فشل الانضمام إلى النطاق"
 
-#: ../panels/user-accounts/um-account-dialog.c:624
+#: ../panels/user-accounts/um-account-dialog.c:635
 msgid "Failed to log into domain"
 msgstr "فشل الولوج إلى النطاق"
 
@@ -4824,21 +4803,21 @@ msgstr "تصفّح لمزيد من الصور..."
 msgid "Used by %s"
 msgstr "يستخدمها %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:532
+#: ../panels/user-accounts/um-realm-manager.c:368
 #, c-format
 msgid "No such domain or realm found"
 msgstr "لم يعثر على هذا النطاق أو المجال"
 
-#: ../panels/user-accounts/um-realm-manager.c:830
+#: ../panels/user-accounts/um-realm-manager.c:743
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "تعذّر الولوج باسم %s في النطاق %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:835
+#: ../panels/user-accounts/um-realm-manager.c:748
 msgid "Invalid password, please try again"
 msgstr "كلمة سر خطأ؛ من فضلك أعد المحاولة"
 
-#: ../panels/user-accounts/um-realm-manager.c:839
+#: ../panels/user-accounts/um-realm-manager.c:752
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "تعذّر الاتصال بالنطاق %s:‏ %s"
@@ -4857,31 +4836,31 @@ msgstr "اسم المستخدم '%s' موجود بالفعل."
 msgid "This user does not exist."
 msgstr "المستخدم غير موجود."
 
-#: ../panels/user-accounts/um-user-panel.c:364
+#: ../panels/user-accounts/um-user-panel.c:371
 msgid "Failed to delete user"
 msgstr "فشل حذف المستخدم"
 
-#: ../panels/user-accounts/um-user-panel.c:424
+#: ../panels/user-accounts/um-user-panel.c:431
 msgid "You cannot delete your own account."
 msgstr "لا يمكنك حذف حسابك أنت."
 
-#: ../panels/user-accounts/um-user-panel.c:433
+#: ../panels/user-accounts/um-user-panel.c:440
 #, c-format
 msgid "%s is still logged in"
 msgstr "ما يزال %s والجا"
 
-#: ../panels/user-accounts/um-user-panel.c:437
+#: ../panels/user-accounts/um-user-panel.c:444
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "حذف مستخدم أثناء ولوجه قد يترك النظام في حالة غير مستقرة."
 
-#: ../panels/user-accounts/um-user-panel.c:446
+#: ../panels/user-accounts/um-user-panel.c:453
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "أتريد إبقاء ملفات %s؟"
 
-#: ../panels/user-accounts/um-user-panel.c:450
+#: ../panels/user-accounts/um-user-panel.c:457
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -4889,38 +4868,38 @@ msgstr ""
 "من الممكن الإبقاء على مجلد المنزل وخزانة البريد والملفات المؤقتة عند حذف "
 "حساب مستخدم."
 
-#: ../panels/user-accounts/um-user-panel.c:453
+#: ../panels/user-accounts/um-user-panel.c:460
 msgid "_Delete Files"
 msgstr "ا_حذف الملفات"
 
-#: ../panels/user-accounts/um-user-panel.c:454
+#: ../panels/user-accounts/um-user-panel.c:461
 msgid "_Keep Files"
 msgstr "أ_بقِ الملفات"
 
-#: ../panels/user-accounts/um-user-panel.c:506
+#: ../panels/user-accounts/um-user-panel.c:513
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "الحساب معطّل"
 
-#: ../panels/user-accounts/um-user-panel.c:514
+#: ../panels/user-accounts/um-user-panel.c:521
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "لتوضع مع الولوج التالي"
 
-#: ../panels/user-accounts/um-user-panel.c:517
+#: ../panels/user-accounts/um-user-panel.c:524
 msgctxt "Password mode"
 msgid "None"
 msgstr "بدون"
 
-#: ../panels/user-accounts/um-user-panel.c:855
+#: ../panels/user-accounts/um-user-panel.c:869
 msgid "Failed to contact the accounts service"
 msgstr "فشل الاتصال بخدمة الحسابات"
 
-#: ../panels/user-accounts/um-user-panel.c:857
+#: ../panels/user-accounts/um-user-panel.c:871
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "رجاء تأكّد من أن AccountService مثبّتة ومفعّلة."
 
-#: ../panels/user-accounts/um-user-panel.c:897
+#: ../panels/user-accounts/um-user-panel.c:911
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -4928,12 +4907,12 @@ msgstr ""
 "انقر على أيقونة *\n"
 "لعمل أي تغييرات"
 
-#: ../panels/user-accounts/um-user-panel.c:935
+#: ../panels/user-accounts/um-user-panel.c:949
 msgid "Create a user account"
 msgstr "أنشئ حساب مستخدِم"
 
-#: ../panels/user-accounts/um-user-panel.c:946
-#: ../panels/user-accounts/um-user-panel.c:1236
+#: ../panels/user-accounts/um-user-panel.c:960
+#: ../panels/user-accounts/um-user-panel.c:1271
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -4941,12 +4920,12 @@ msgstr ""
 "لإنشاء حساب مستخدِم،\n"
 "انقر أولًا على أيقونة *"
 
-#: ../panels/user-accounts/um-user-panel.c:955
+#: ../panels/user-accounts/um-user-panel.c:969
 msgid "Delete the selected user account"
 msgstr "احذف حساب المستخدِم المختار"
 
-#: ../panels/user-accounts/um-user-panel.c:967
-#: ../panels/user-accounts/um-user-panel.c:1241
+#: ../panels/user-accounts/um-user-panel.c:981
+#: ../panels/user-accounts/um-user-panel.c:1276
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -4954,11 +4933,11 @@ msgstr ""
 "لحذف حساب المستخدم المختار،\n"
 "انقر أولًا على أيقونة *"
 
-#: ../panels/user-accounts/um-user-panel.c:1144
+#: ../panels/user-accounts/um-user-panel.c:1174
 msgid "My Account"
 msgstr "حسابي"
 
-#: ../panels/user-accounts/um-user-panel.c:1154
+#: ../panels/user-accounts/um-user-panel.c:1184
 msgid "Other Accounts"
 msgstr "الحسابات الأخرى"
 
@@ -5030,24 +5009,36 @@ msgstr "عيّن في شاشة واحدة"
 msgid "%d of %d"
 msgstr "%d من %d"
 
-#: ../panels/wacom/cc-wacom-page.c:317
-msgid "Switch Modes"
-msgstr "بدّل الأنماط"
+#: ../panels/wacom/cc-wacom-page.c:119
+msgid "Send Keystroke"
+msgstr "أرسل ضغطة الزر"
 
-#: ../panels/wacom/cc-wacom-page.c:564
+#: ../panels/wacom/cc-wacom-page.c:120
+msgid "Switch Monitor"
+msgstr "بدّل الشاشة"
+
+#: ../panels/wacom/cc-wacom-page.c:599
 msgid "Up"
 msgstr "أعلى"
 
-#: ../panels/wacom/cc-wacom-page.c:564
+#: ../panels/wacom/cc-wacom-page.c:599
 msgid "Down"
 msgstr "أسفل"
 
-#: ../panels/wacom/cc-wacom-page.c:599
+#: ../panels/wacom/cc-wacom-page.c:636
+msgid "Switch Modes"
+msgstr "بدّل الأنماط"
+
+#: ../panels/wacom/cc-wacom-page.c:722
 #: ../panels/wacom/cc-wacom-stylus-page.c:376
 msgid "Button"
 msgstr "زر"
 
-#: ../panels/wacom/cc-wacom-page.c:725
+#: ../panels/wacom/cc-wacom-page.c:775
+msgid "Action"
+msgstr "الإجراء"
+
+#: ../panels/wacom/cc-wacom-page.c:884
 msgid "Display Mapping"
 msgstr "اعرض المخطط"
 
@@ -5300,6 +5291,87 @@ msgstr "تفضيلات;إعدادات;"
 msgid "All Settings"
 msgstr "كل الإعدادات"
 
+#~ msgid "Add wallpaper"
+#~ msgstr "أضف خلفية"
+
+#~ msgid "Remove wallpaper"
+#~ msgstr "أزل الخلفية"
+
+#~ msgid "Swap colors"
+#~ msgstr "بدّل الألوان"
+
+#~ msgid "Secondary color"
+#~ msgstr "اللون الثانوي"
+
+#~ msgid "Horizontal Gradient"
+#~ msgstr "تدرج أفقي"
+
+#~ msgid "Vertical Gradient"
+#~ msgstr "تدرج رأسي"
+
+#~ msgid "Solid Color"
+#~ msgstr "لون سادة"
+
+#~ msgid "Pictures Folder"
+#~ msgstr "مجلّد الصور"
+
+#~ msgid "Colors & Gradients"
+#~ msgstr "ألوان وتدرجات"
+
+#~ msgid "Take a screenshot"
+#~ msgstr "التقط صورة للشاشة"
+
+#~ msgid "Shortcut"
+#~ msgstr "الاختصار"
+
+#~ msgid "_Right-handed"
+#~ msgstr "فأرة لليد الي_منى"
+
+#~ msgid "_Left-handed"
+#~ msgstr "فأرة لليد اليسر_ى"
+
+#~ msgid "Sh_ow position of pointer when the Control key is pressed"
+#~ msgstr "أ_ظهر موقع الفأرة عند ضغط مفتاح Ctrl"
+
+#~ msgid "A_cceleration:"
+#~ msgstr "ال_تسارع:"
+
+#~ msgid "_Sensitivity:"
+#~ msgstr "الح_ساسية:"
+
+#~ msgid "Drag and Drop"
+#~ msgstr "السحب والإفلات"
+
+#~ msgid "Thr_eshold:"
+#~ msgstr "ال_عتبة:"
+
+#~ msgid "Drag Threshold"
+#~ msgstr "اسحب العتبة"
+
+#~ msgid "Double-Click Timeout"
+#~ msgstr "مهلة النقر المزدوج"
+
+#~ msgid "_Timeout:"
+#~ msgstr "ا_لمهلة:"
+
+#~ msgid "Enable _mouse clicks with touchpad"
+#~ msgstr "فعّل _نقرات الفأرة في لوحة اللمس"
+
+#~ msgid "Scrolling"
+#~ msgstr "اللف"
+
+#~ msgid "_Disabled"
+#~ msgstr "مع_طّل"
+
+#~ msgid "_Edge scrolling"
+#~ msgstr "اللف عند ال_حافة"
+
+#~ msgid "Enable h_orizontal scrolling"
+#~ msgstr "فعّل اللف الأ_فقي"
+
+#~ msgid "Account _type"
+#~ msgstr "_نوع الحساب"
+
 #~ msgid "Acti_on:"
 #~ msgstr "الإ_جراء:"
 
@@ -5437,9 +5509,6 @@ msgstr "كل الإعدادات"
 #~ msgid "Change contrast:"
 #~ msgstr "غيّر التباين:"
 
-#~ msgid "_Contrast:"
-#~ msgstr "الت_باين:"
-
 #~ msgid "_Text size:"
 #~ msgstr "حجم ال_نص:"
 
@@ -5498,9 +5567,6 @@ msgstr "كل الإعدادات"
 
 #~ msgid "_Photos:"
 #~ msgstr "_صور:"
-
-#~ msgid "Magnifier zoom out"
-#~ msgstr "تبعيد المُكبِّرة"
 
 #~ msgid "Toggle contrast"
 #~ msgstr "بدّل التباين"
@@ -6095,9 +6161,6 @@ msgstr "كل الإعدادات"
 
 #~ msgid "Choose type of click with mo_use gestures"
 #~ msgstr "اختر نو_ع النقر بحركات الفأرة"
-
-#~ msgid "D_ouble click:"
-#~ msgstr "الن_قر المزدوج:"
 
 #~ msgid "D_rag click:"
 #~ msgstr "نقر ال_سحب:"
