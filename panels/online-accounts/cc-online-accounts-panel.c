@@ -280,6 +280,7 @@ goa_panel_class_init (GoaPanelClass *klass)
   panel_class->get_help_uri = goa_panel_get_help_uri;
 
   object_class->set_property = goa_panel_set_property;
+  object_class->finalize = goa_panel_finalize;
 
   g_object_class_override_property (object_class, PROP_ARGV, "argv");
 }
@@ -287,10 +288,6 @@ goa_panel_class_init (GoaPanelClass *klass)
 static void
 goa_panel_class_finalize (GoaPanelClass *klass)
 {
-  GObjectClass *gobject_class;
-
-  gobject_class = G_OBJECT_CLASS (klass);
-  gobject_class->finalize = goa_panel_finalize;
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
