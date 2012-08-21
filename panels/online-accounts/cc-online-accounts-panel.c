@@ -220,15 +220,13 @@ goa_panel_init (GoaPanel *panel)
 static void
 goa_panel_class_init (GoaPanelClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  object_class->finalize = goa_panel_finalize;
 }
 
 static void
 goa_panel_class_finalize (GoaPanelClass *klass)
 {
-  GObjectClass *gobject_class;
-
-  gobject_class = G_OBJECT_CLASS (klass);
-  gobject_class->finalize = goa_panel_finalize;
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
