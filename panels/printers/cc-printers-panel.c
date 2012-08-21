@@ -216,11 +216,6 @@ cc_printers_panel_class_init (CcPrintersPanelClass *klass)
 }
 
 static void
-cc_printers_panel_class_finalize (CcPrintersPanelClass *klass)
-{
-}
-
-static void
 on_cups_notification (GDBusConnection *connection,
                       const char      *sender_name,
                       const char      *object_path,
