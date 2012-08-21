@@ -959,6 +959,8 @@ bar_set_stream (GvcMixerDialog *dialog,
         g_signal_handlers_disconnect_by_func (adj, on_adjustment_value_changed, dialog);
 
         g_object_set_data (G_OBJECT (bar), "gvc-mixer-dialog-stream", stream);
+        g_object_set_data (G_OBJECT (bar), "gvc-mixer-dialog-stream-id",
+                           GUINT_TO_POINTER (gvc_mixer_stream_get_id (stream)));
         g_object_set_data (G_OBJECT (adj), "gvc-mixer-dialog-stream", stream);
         g_object_set_data (G_OBJECT (adj), "gvc-mixer-dialog-bar", bar);
 
@@ -1355,6 +1357,8 @@ remove_stream (GvcMixerDialog  *dialog,
                guint            id)
 {
         GtkWidget *bar;
+        guint output_id, input_id;
+
         bar = g_hash_table_lookup (dialog->priv->bars, GUINT_TO_POINTER (id));
         if (bar != NULL) {
                 g_hash_table_remove (dialog->priv->bars, GUINT_TO_POINTER (id));
@@ -1364,7 +1368,21 @@ remove_stream (GvcMixerDialog  *dialog,
                 if (dialog->priv->num_apps == 0) {
                         gtk_widget_show (dialog->priv->no_apps_label);
                 }
+                return;
         }
+
+	output_id = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (dialog->priv->output_bar), "gvc-mixer-dialog-stream-id"));
+	input_id = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (dialog->priv->input_bar), "gvc-mixer-dialog-stream-id"));
+
+	if (output_id == id)
+		bar = dialog->priv->output_bar;
+	else if (input_id == id)
+		bar = dialog->priv->input_bar;
+	else
+		return;
+
+	g_object_set_data (G_OBJECT (bar), "gvc-mixer-dialog-stream-id", NULL);
+	g_object_set_data (G_OBJECT (bar), "gvc-mixer-dialog-stream", NULL);
 }
 
 static void
