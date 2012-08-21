@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.3.91\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-20 23:13+0800\n"
-"PO-Revision-Date: 2012-08-20 21:08+0800\n"
+"POT-Creation-Date: 2012-08-21 19:27+0800\n"
+"PO-Revision-Date: 2012-08-21 14:52+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Taiwan) <zh-l10n@lists.linux.org.tw>\n"
 "Language: \n"
@@ -984,7 +984,7 @@ msgid "Software"
 msgstr "軟體"
 
 #: ../panels/info/cc-info-panel.c:1483
-#: ../panels/keyboard/keyboard-shortcuts.c:1507
+#: ../panels/keyboard/keyboard-shortcuts.c:1647
 msgid "Section"
 msgstr "節"
 
@@ -1186,9 +1186,11 @@ msgid "Eject"
 msgstr "退出"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
-#: ../panels/region/gnome-region-panel.ui.h:30
-msgid "Input Sources"
-msgstr "輸入來源"
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
+#: ../panels/keyboard/keyboard-shortcuts.c:858
+#: ../panels/universal-access/uap.ui.h:71
+msgid "Typing"
+msgstr "輸入"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:2
 #: ../panels/region/gnome-region-panel.ui.h:26
@@ -1309,6 +1311,25 @@ msgstr "將文字縮小"
 msgid "High contrast on or off"
 msgstr "高對比開或關"
 
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/cc-keyboard-option.c:241
+#: ../panels/keyboard/cc-keyboard-option.c:347
+#: ../panels/keyboard/keyboard-shortcuts.c:1112
+#: ../panels/sound/gvc-mixer-control.c:1834
+#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
+msgid "Disabled"
+msgstr "已停用"
+
+#: ../panels/keyboard/cc-keyboard-option.c:315
+msgid "Alternative Characters Key"
+msgstr "替代的字元鍵"
+
+#: ../panels/keyboard/cc-keyboard-option.c:320
+msgid "Compose Key"
+msgstr "組合鍵"
+
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "Keyboard"
@@ -1353,14 +1374,13 @@ msgstr "速度(_S)："
 
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
-#: ../panels/mouse/gnome-mouse-properties.ui.h:24
 #: ../panels/universal-access/uap.ui.h:52
 msgid "Short"
 msgstr "短"
 
 #. slow acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
 msgid "Slow"
 msgstr "慢速"
 
@@ -1370,14 +1390,13 @@ msgstr "按鍵重複速度"
 
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
-#: ../panels/mouse/gnome-mouse-properties.ui.h:26
 #: ../panels/universal-access/uap.ui.h:55
 msgid "Long"
 msgstr "長"
 
 #. fast acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
-#: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
 msgid "Fast"
 msgstr "快速"
 
@@ -1401,11 +1420,6 @@ msgstr "游標閃爍速度"
 msgid "Layout Settings"
 msgstr "配置設定值"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/universal-access/uap.ui.h:71
-msgid "Typing"
-msgstr "輸入"
-
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
 msgid "Add Shortcut"
 msgstr "加入捷徑鍵"
@@ -1427,28 +1441,19 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "快捷鍵"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:541
-#: ../panels/keyboard/keyboard-shortcuts.c:549
-#: ../panels/keyboard/keyboard-shortcuts.c:870
-#: ../panels/keyboard/keyboard-shortcuts.c:1322
-#: ../panels/keyboard/keyboard-shortcuts.c:1326
+#: ../panels/keyboard/keyboard-shortcuts.c:552
+#: ../panels/keyboard/keyboard-shortcuts.c:560
+#: ../panels/keyboard/keyboard-shortcuts.c:942
+#: ../panels/keyboard/keyboard-shortcuts.c:1414
+#: ../panels/keyboard/keyboard-shortcuts.c:1418
 msgid "Custom Shortcuts"
 msgstr "自訂捷徑鍵"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:716
+#: ../panels/keyboard/keyboard-shortcuts.c:756
 msgid "<Unknown Action>"
 msgstr "<行動設定不詳>"
 
-#. translators:
-#. * The device has been disabled
-#: ../panels/keyboard/keyboard-shortcuts.c:1022
-#: ../panels/sound/gvc-mixer-control.c:1834
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
-#: ../panels/user-accounts/um-fingerprint-dialog.c:216
-msgid "Disabled"
-msgstr "已停用"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1161
+#: ../panels/keyboard/keyboard-shortcuts.c:1253
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1458,7 +1463,7 @@ msgstr ""
 "捷徑“%s”無法使用，原因是會無法按下此按鍵。\n"
 "請試用其它的按鍵：如同時使用 Control，Alt  或 Shift。"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1193
+#: ../panels/keyboard/keyboard-shortcuts.c:1285
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1467,15 +1472,19 @@ msgstr ""
 "捷徑鍵“%s”己經使用於：\n"
 "“%s”"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1198
+#: ../panels/keyboard/keyboard-shortcuts.c:1290
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "如果您重新指派捷徑鍵為「%s」，「%s」的捷徑鍵就會停用。"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1204
+#: ../panels/keyboard/keyboard-shortcuts.c:1296
 msgid "_Reassign"
 msgstr "重新指派(_R)"
+
+#: ../panels/mouse/cc-mouse-panel.c:158
+msgid "_Test Your Settings"
+msgstr "測試您的設定值(_T)"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse & Touchpad"
@@ -1500,115 +1509,57 @@ msgstr "滑鼠偏好設定"
 msgid "General"
 msgstr "一般"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgid "_Right-handed"
-msgstr "慣用右手(_R)"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
-msgid "_Left-handed"
-msgstr "慣用左手(_L)"
-
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-msgid "Sh_ow position of pointer when the Control key is pressed"
-msgstr "當按下 Control 時顯示游標的位置(_O)"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:6
-msgid "Pointer Speed"
-msgstr "指標速度"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
-msgid "A_cceleration:"
-msgstr "加速度(_C)："
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
-msgid "_Sensitivity:"
-msgstr "敏感度(_S)："
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
-msgctxt "Mouse sensitivity"
-msgid "Low"
-msgstr "低"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
-msgctxt "Mouse sensitivity"
-msgid "High"
-msgstr "高"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
-msgid "Drag and Drop"
-msgstr "拖放"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
-msgid "Thr_eshold:"
-msgstr "分辨距離(_E)："
-
-#. small threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
-#: ../panels/universal-access/uap.ui.h:84
-msgid "Small"
-msgstr "小"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:19
-msgid "Drag Threshold"
-msgstr "拖曳距離界限"
-
-#. large threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:21
-#: ../panels/universal-access/uap.ui.h:86
-msgid "Large"
-msgstr "大"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:22
-msgid "Double-Click Timeout"
-msgstr "雙擊分辨時間"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:23
-msgid "_Timeout:"
-msgstr "時限(_T)："
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:25
 msgid "Double-click timeout"
 msgstr "雙擊分辨時間"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:27
-msgid "To test your settings, try to double-click on the face."
-msgstr "要測試您的設定值，請試著在這個臉上雙擊。"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+msgid "_Double-click"
+msgstr "雙擊(_D)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:28
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+msgid "Primary _button"
+msgstr "主要按鈕(_B)"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+msgid "_Left"
+msgstr "左(_L)"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+msgid "_Right"
+msgstr "右(_R)"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:12
 msgid "Mouse"
 msgstr "滑鼠"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:29
-msgid "Disable _touchpad while typing"
-msgstr "打字時停用觸控板(_T)"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+msgid "_Pointer speed"
+msgstr "指標速度(_P)"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:30
-msgid "Enable _mouse clicks with touchpad"
-msgstr "啟用觸控板的滑鼠點擊(_M)"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
-msgid "Scrolling"
-msgstr "捲動方式"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:32
-msgid "_Disabled"
-msgstr "已停用(_D)"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:33
-msgid "_Edge scrolling"
-msgstr "邊緣捲動(_E)"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:34
-msgid "Two-_finger scrolling"
-msgstr "兩點捲動(_F)"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:35
-msgid "Enable h_orizontal scrolling"
-msgstr "啟用水平捲動(_O)"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:36
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Touchpad"
 msgstr "觸控板"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+msgid "Disable while _typing"
+msgstr "打字時停用(_T)"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+msgid "Tap to _click"
+msgstr "輕觸表示點擊(_C)"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+msgid "Two _finger scroll"
+msgstr "兩指捲動(_F)"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+msgid "C_ontent sticks to fingers"
+msgstr "連結到手指的內容(_O)"
+
+#: ../panels/mouse/gnome-mouse-test.ui.h:1
+msgid "To test your settings, try to double-click on the face."
+msgstr "要測試您的設定值，請試著在這個臉上雙擊。"
 
 #: ../panels/network/cc-network-panel.c:627
 msgid "Network proxy"
@@ -3402,6 +3353,10 @@ msgstr "Ctrl+Alt+Shift+Space"
 msgid "Shortcut Settings"
 msgstr "捷徑設定值"
 
+#: ../panels/region/gnome-region-panel.ui.h:30
+msgid "Input Sources"
+msgstr "輸入來源"
+
 #. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
 #: ../panels/region/gnome-region-panel.ui.h:33
 msgid "Display language:"
@@ -4078,6 +4033,16 @@ msgstr "延遲(_E)："
 #: ../panels/universal-access/uap.ui.h:82
 msgid "Motion _threshold:"
 msgstr "移動速度(_M)："
+
+#. small threshold
+#: ../panels/universal-access/uap.ui.h:84
+msgid "Small"
+msgstr "小"
+
+#. large threshold
+#: ../panels/universal-access/uap.ui.h:86
+msgid "Large"
+msgstr "大"
 
 #: ../panels/universal-access/uap.ui.h:87
 msgid "Mouse Settings"
@@ -5269,14 +5234,64 @@ msgstr "Preferences;Settings;偏好設定;設定值;"
 msgid "All Settings"
 msgstr "所有設定值"
 
+#~ msgid "_Right-handed"
+#~ msgstr "慣用右手(_R)"
+
+#~ msgid "_Left-handed"
+#~ msgstr "慣用左手(_L)"
+
+#~ msgid "Sh_ow position of pointer when the Control key is pressed"
+#~ msgstr "當按下 Control 時顯示游標的位置(_O)"
+
+#~ msgid "A_cceleration:"
+#~ msgstr "加速度(_C)："
+
+#~ msgid "_Sensitivity:"
+#~ msgstr "敏感度(_S)："
+
+#~ msgctxt "Mouse sensitivity"
+#~ msgid "Low"
+#~ msgstr "低"
+
+#~ msgctxt "Mouse sensitivity"
+#~ msgid "High"
+#~ msgstr "高"
+
+#~ msgid "Drag and Drop"
+#~ msgstr "拖放"
+
+#~ msgid "Thr_eshold:"
+#~ msgstr "分辨距離(_E)："
+
+#~ msgid "Drag Threshold"
+#~ msgstr "拖曳距離界限"
+
+#~ msgid "Double-Click Timeout"
+#~ msgstr "雙擊分辨時間"
+
+#~ msgid "_Timeout:"
+#~ msgstr "時限(_T)："
+
+#~ msgid "Enable _mouse clicks with touchpad"
+#~ msgstr "啟用觸控板的滑鼠點擊(_M)"
+
+#~ msgid "Scrolling"
+#~ msgstr "捲動方式"
+
+#~ msgid "_Disabled"
+#~ msgstr "已停用(_D)"
+
+#~ msgid "_Edge scrolling"
+#~ msgstr "邊緣捲動(_E)"
+
+#~ msgid "Enable h_orizontal scrolling"
+#~ msgstr "啟用水平捲動(_O)"
+
 #~ msgid "Add wallpaper"
 #~ msgstr "加入桌布"
 
 #~ msgid "Remove wallpaper"
 #~ msgstr "移除桌布"
-
-#~ msgid "Primary Color"
-#~ msgstr "主要顏色"
 
 #~ msgid "Swap colors"
 #~ msgstr "交換顏色"
