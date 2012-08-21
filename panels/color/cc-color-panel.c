@@ -30,7 +30,7 @@
 
 #define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
 
-G_DEFINE_DYNAMIC_TYPE (CcColorPanel, cc_color_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (CcColorPanel, cc_color_panel)
 
 #define COLOR_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_COLOR_PANEL, CcColorPanelPrivate))
@@ -2374,11 +2374,6 @@ cc_color_panel_class_init (CcColorPanelClass *klass)
   object_class->set_property = cc_color_panel_set_property;
   object_class->dispose = cc_color_panel_dispose;
   object_class->finalize = cc_color_panel_finalize;
-}
-
-static void
-cc_color_panel_class_finalize (CcColorPanelClass *klass)
-{
 }
 
 static void

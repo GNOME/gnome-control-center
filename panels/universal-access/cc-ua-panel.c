@@ -42,7 +42,7 @@
 #define KEY_ICON_THEME          "icon-theme"
 
 
-G_DEFINE_DYNAMIC_TYPE (CcUaPanel, cc_ua_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (CcUaPanel, cc_ua_panel)
 
 #define UA_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_UA_PANEL, CcUaPanelPrivate))
@@ -176,11 +176,6 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   object_class->set_property = cc_ua_panel_set_property;
   object_class->dispose = cc_ua_panel_dispose;
   object_class->finalize = cc_ua_panel_finalize;
-}
-
-static void
-cc_ua_panel_class_finalize (CcUaPanelClass *klass)
-{
 }
 
 static gchar *sticky_keys_section[] = {

@@ -37,7 +37,7 @@
 #include <glib/gi18n.h>
 #include <gdesktop-enums.h>
 
-G_DEFINE_DYNAMIC_TYPE (CcDisplayPanel, cc_display_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (CcDisplayPanel, cc_display_panel)
 
 #define DISPLAY_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_DISPLAY_PANEL, CcDisplayPanelPrivate))
@@ -200,11 +200,6 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   object_class->set_property = cc_display_panel_set_property;
   object_class->dispose = cc_display_panel_dispose;
   object_class->finalize = cc_display_panel_finalize;
-}
-
-static void
-cc_display_panel_class_finalize (CcDisplayPanelClass *klass)
-{
 }
 
 static void

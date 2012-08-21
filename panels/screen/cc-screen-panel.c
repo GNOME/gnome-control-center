@@ -21,7 +21,7 @@
 
 #include "cc-screen-panel.h"
 
-G_DEFINE_DYNAMIC_TYPE (CcScreenPanel, cc_screen_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (CcScreenPanel, cc_screen_panel)
 
 #define SCREEN_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_SCREEN_PANEL, CcScreenPanelPrivate))
@@ -170,11 +170,6 @@ cc_screen_panel_class_init (CcScreenPanelClass *klass)
   object_class->finalize = cc_screen_panel_finalize;
 
   panel_class->get_help_uri = cc_screen_panel_get_help_uri;
-}
-
-static void
-cc_screen_panel_class_finalize (CcScreenPanelClass *klass)
-{
 }
 
 static void

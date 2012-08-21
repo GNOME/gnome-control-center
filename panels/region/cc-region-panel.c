@@ -27,7 +27,7 @@
 #include "gnome-region-panel-formats.h"
 #include "gnome-region-panel-system.h"
 
-G_DEFINE_DYNAMIC_TYPE (CcRegionPanel, cc_region_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (CcRegionPanel, cc_region_panel)
 
 #define REGION_PANEL_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_REGION_PANEL, CcRegionPanelPrivate))
 
@@ -127,11 +127,6 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
 	object_class->finalize = cc_region_panel_finalize;
 
 	g_object_class_override_property (object_class, PROP_ARGV, "argv");
-}
-
-static void
-cc_region_panel_class_finalize (CcRegionPanelClass * klass)
-{
 }
 
 static void

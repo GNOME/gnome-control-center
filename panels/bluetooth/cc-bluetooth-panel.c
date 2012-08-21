@@ -36,7 +36,7 @@
 #include <bluetooth-chooser.h>
 #include <bluetooth-plugin-manager.h>
 
-G_DEFINE_DYNAMIC_TYPE (CcBluetoothPanel, cc_bluetooth_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (CcBluetoothPanel, cc_bluetooth_panel)
 
 #define BLUETOOTH_PANEL_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_BLUETOOTH_PANEL, CcBluetoothPanelPrivate))
 
@@ -85,11 +85,6 @@ cc_bluetooth_panel_class_init (CcBluetoothPanelClass *klass)
 	panel_class->get_help_uri = cc_bluetooth_panel_get_help_uri;
 
 	g_type_class_add_private (klass, sizeof (CcBluetoothPanelPrivate));
-}
-
-static void
-cc_bluetooth_panel_class_finalize (CcBluetoothPanelClass *klass)
-{
 }
 
 static void

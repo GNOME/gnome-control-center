@@ -30,7 +30,7 @@
 
 #define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
 
-G_DEFINE_DYNAMIC_TYPE (CcPowerPanel, cc_power_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (CcPowerPanel, cc_power_panel)
 
 #define POWER_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_POWER_PANEL, CcPowerPanelPrivate))
@@ -148,11 +148,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   object_class->finalize = cc_power_panel_finalize;
 
   panel_class->get_help_uri = cc_power_panel_get_help_uri;
-}
-
-static void
-cc_power_panel_class_finalize (CcPowerPanelClass *klass)
-{
 }
 
 static gchar *

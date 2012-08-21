@@ -56,7 +56,7 @@
 
 #define USER_ACCOUNTS_PERMISSION "org.gnome.controlcenter.user-accounts.administration"
 
-G_DEFINE_DYNAMIC_TYPE (UmUserPanel, um_user_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (UmUserPanel, um_user_panel)
 
 #define UM_USER_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), UM_TYPE_USER_PANEL, UmUserPanelPrivate))
@@ -1383,11 +1383,6 @@ um_user_panel_class_init (UmUserPanelClass *klass)
         panel_class->get_help_uri = um_user_panel_get_help_uri;
 
         g_type_class_add_private (klass, sizeof (UmUserPanelPrivate));
-}
-
-static void
-um_user_panel_class_finalize (UmUserPanelClass *klass)
-{
 }
 
 void

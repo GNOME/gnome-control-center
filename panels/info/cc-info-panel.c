@@ -56,7 +56,7 @@
 
 #define WID(w) (GtkWidget *) gtk_builder_get_object (self->priv->builder, w)
 
-G_DEFINE_DYNAMIC_TYPE (CcInfoPanel, cc_info_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (CcInfoPanel, cc_info_panel)
 
 #define INFO_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_INFO_PANEL, CcInfoPanelPrivate))
@@ -565,11 +565,6 @@ cc_info_panel_class_init (CcInfoPanelClass *klass)
   object_class->set_property = cc_info_panel_set_property;
   object_class->dispose = cc_info_panel_dispose;
   object_class->finalize = cc_info_panel_finalize;
-}
-
-static void
-cc_info_panel_class_finalize (CcInfoPanelClass *klass)
-{
 }
 
 static char *

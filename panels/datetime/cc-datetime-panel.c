@@ -40,7 +40,7 @@
 #define DEFAULT_TZ "Europe/London"
 #define GETTEXT_PACKAGE_TIMEZONES GETTEXT_PACKAGE "-timezones"
 
-G_DEFINE_DYNAMIC_TYPE (CcDateTimePanel, cc_date_time_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (CcDateTimePanel, cc_date_time_panel)
 
 #define DATE_TIME_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_DATE_TIME_PANEL, CcDateTimePanelPrivate))
@@ -195,12 +195,6 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
 
   panel_class->get_permission = cc_date_time_panel_get_permission;
   panel_class->get_help_uri   = cc_date_time_panel_get_help_uri;
-}
-
-static void
-cc_date_time_panel_class_finalize (CcDateTimePanelClass *klass)
-{
-
 }
 
 static void clock_settings_changed_cb (GSettings       *settings,

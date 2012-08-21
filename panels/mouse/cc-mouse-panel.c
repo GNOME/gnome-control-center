@@ -29,7 +29,7 @@
 
 #include <glib/gi18n.h>
 
-G_DEFINE_DYNAMIC_TYPE (CcMousePanel, cc_mouse_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (CcMousePanel, cc_mouse_panel)
 
 #define MOUSE_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_MOUSE_PANEL, CcMousePanelPrivate))
@@ -123,11 +123,6 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   object_class->get_property = cc_mouse_panel_get_property;
   object_class->set_property = cc_mouse_panel_set_property;
   object_class->dispose = cc_mouse_panel_dispose;
-}
-
-static void
-cc_mouse_panel_class_finalize (CcMousePanelClass *klass)
-{
 }
 
 /* Toggle between mouse panel properties and testing area. */

@@ -42,7 +42,7 @@
 
 #include "network-dialogs.h"
 
-G_DEFINE_DYNAMIC_TYPE (CcNetworkPanel, cc_network_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (CcNetworkPanel, cc_network_panel)
 
 #define NETWORK_PANEL_PRIVATE(o) \
         (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_NETWORK_PANEL, CcNetworkPanelPrivate))
@@ -220,11 +220,6 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
         object_class->finalize = cc_network_panel_finalize;
 
         g_object_class_override_property (object_class, PROP_ARGV, "argv");
-}
-
-static void
-cc_network_panel_class_finalize (CcNetworkPanelClass *klass)
-{
 }
 
 static NetObject *

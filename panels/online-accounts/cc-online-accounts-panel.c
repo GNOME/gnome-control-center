@@ -85,7 +85,7 @@ static void on_account_changed (GoaClient  *client,
 static gboolean select_account_by_id (GoaPanel    *panel,
                                       const gchar *account_id);
 
-G_DEFINE_DYNAMIC_TYPE (GoaPanel, goa_panel, CC_TYPE_PANEL);
+CC_PANEL_REGISTER (GoaPanel, goa_panel);
 
 enum {
   PROP_0,
@@ -283,11 +283,6 @@ goa_panel_class_init (GoaPanelClass *klass)
   object_class->finalize = goa_panel_finalize;
 
   g_object_class_override_property (object_class, PROP_ARGV, "argv");
-}
-
-static void
-goa_panel_class_finalize (GoaPanelClass *klass)
-{
 }
 
 /* ---------------------------------------------------------------------------------------------------- */

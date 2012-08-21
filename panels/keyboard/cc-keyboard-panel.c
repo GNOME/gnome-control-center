@@ -23,7 +23,7 @@
 #include "keyboard-general.h"
 #include "keyboard-shortcuts.h"
 
-G_DEFINE_DYNAMIC_TYPE (CcKeyboardPanel, cc_keyboard_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (CcKeyboardPanel, cc_keyboard_panel)
 
 #define KEYBOARD_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_KEYBOARD_PANEL, CcKeyboardPanelPrivate))
@@ -169,11 +169,6 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
   object_class->finalize = cc_keyboard_panel_finalize;
 
   g_object_class_override_property (object_class, PROP_ARGV, "argv");
-}
-
-static void
-cc_keyboard_panel_class_finalize (CcKeyboardPanelClass *klass)
-{
 }
 
 static void

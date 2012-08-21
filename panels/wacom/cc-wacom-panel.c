@@ -31,7 +31,7 @@
 
 #define WID(x) (GtkWidget *) gtk_builder_get_object (priv->builder, x)
 
-G_DEFINE_DYNAMIC_TYPE (CcWacomPanel, cc_wacom_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (CcWacomPanel, cc_wacom_panel)
 
 #define WACOM_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_WACOM_PANEL, CcWacomPanelPrivate))
@@ -130,11 +130,6 @@ cc_wacom_panel_class_init (CcWacomPanelClass *klass)
 	object_class->get_property = cc_wacom_panel_get_property;
 	object_class->set_property = cc_wacom_panel_set_property;
 	object_class->dispose = cc_wacom_panel_dispose;
-}
-
-static void
-cc_wacom_panel_class_finalize (CcWacomPanelClass *klass)
-{
 }
 
 static void

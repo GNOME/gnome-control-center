@@ -38,6 +38,20 @@ G_BEGIN_DECLS
 #define CC_IS_PANEL_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), CC_TYPE_PANEL))
 #define CC_PANEL_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), CC_TYPE_PANEL, CcPanelClass))
 
+/*•
+ * Utility macro used to register panels
+ *
+ * use: CC_PANEL_REGISTER (PluginName, plugin_name)
+ */
+#define CC_PANEL_REGISTER(PluginName, plugin_name)                             \
+        G_DEFINE_DYNAMIC_TYPE (PluginName,                                     \
+                               plugin_name,                                    \
+                               CC_TYPE_PANEL)                                  \
+static void                                                                    \
+plugin_name##_class_finalize (PluginName##Class *plugin_name##_class)          \
+{                                                                              \
+}
+
 typedef struct CcPanelPrivate CcPanelPrivate;
 
 typedef struct _CcPanel       CcPanel;

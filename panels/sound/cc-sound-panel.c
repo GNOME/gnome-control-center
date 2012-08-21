@@ -34,7 +34,7 @@
 #include "cc-sound-panel.h"
 #include "gvc-mixer-dialog.h"
 
-G_DEFINE_DYNAMIC_TYPE (CcSoundPanel, cc_sound_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (CcSoundPanel, cc_sound_panel)
 
 enum {
         PROP_0,
@@ -85,11 +85,6 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
         object_class->set_property = cc_sound_panel_set_property;
 
         g_object_class_override_property (object_class, PROP_ARGV, "argv");
-}
-
-static void
-cc_sound_panel_class_finalize (CcSoundPanelClass *klass)
-{
 }
 
 static void

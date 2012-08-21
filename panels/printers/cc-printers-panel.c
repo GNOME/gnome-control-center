@@ -38,7 +38,7 @@
 #include "pp-jobs-dialog.h"
 #include "pp-utils.h"
 
-G_DEFINE_DYNAMIC_TYPE (CcPrintersPanel, cc_printers_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (CcPrintersPanel, cc_printers_panel)
 
 #define PRINTERS_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_PRINTERS_PANEL, CcPrintersPanelPrivate))

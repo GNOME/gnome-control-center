@@ -42,7 +42,7 @@
 #define WP_PCOLOR_KEY "primary-color"
 #define WP_SCOLOR_KEY "secondary-color"
 
-G_DEFINE_DYNAMIC_TYPE (CcBackgroundPanel, cc_background_panel, CC_TYPE_PANEL)
+CC_PANEL_REGISTER (CcBackgroundPanel, cc_background_panel)
 
 #define BACKGROUND_PANEL_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_BACKGROUND_PANEL, CcBackgroundPanelPrivate))
@@ -128,11 +128,6 @@ cc_background_panel_class_init (CcBackgroundPanelClass *klass)
 
   object_class->dispose = cc_background_panel_dispose;
   object_class->finalize = cc_background_panel_finalize;
-}
-
-static void
-cc_background_panel_class_finalize (CcBackgroundPanelClass *klass)
-{
 }
 
 static void
