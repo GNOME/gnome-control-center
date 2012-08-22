@@ -165,10 +165,39 @@ compare_mac_device_with_mac_connection (NMDevice *device,
         return FALSE;
 }
 
+static GSList *
+valid_connections_for_device (NMRemoteSettings *remote_settings,
+                              NetDevice *device)
+{
+        GSList *all, *filtered, *iterator, *valid;
+        NMConnection *connection;
+        NMSettingConnection *s_con;
+
+        all = nm_remote_settings_list_connections (remote_settings);
+        filtered = nm_device_filter_connections (device->priv->nm_device, all);
+        g_slist_free (all);
+
+        valid = NULL;
+        for (iterator = filtered; iterator; iterator = iterator->next) {
+                connection = iterator->data;
+                s_con = nm_connection_get_setting_connection (connection);
+                if (!s_con)
+                        continue;
+
+                if (nm_setting_connection_get_master (s_con))
+                        continue;
+
+                valid = g_slist_prepend (valid, connection);
+        }
+        g_slist_free (filtered);
+
+        return g_slist_reverse (valid);
+}
+
 NMConnection *
 net_device_get_find_connection (NetDevice *device)
 {
-        GSList *list, *filtered, *iterator;
+        GSList *list, *iterator;
         NMConnection *connection = NULL;
         NMActiveConnection *ac;
         NMRemoteSettings *remote_settings;
@@ -182,17 +211,16 @@ net_device_get_find_connection (NetDevice *device)
         }
 
         /* not found in active connections - check all available connections */
-        list = nm_remote_settings_list_connections (remote_settings);
-        filtered = nm_device_filter_connections (device->priv->nm_device, list);
-        if (filtered != NULL) {
+        list = valid_connections_for_device (remote_settings, device);
+        if (list != NULL) {
                 /* if list has only one connection, use this connection */
-                if (g_slist_length (filtered) == 1) {
-                        connection = filtered->data;
+                if (g_slist_length (list) == 1) {
+                        connection = list->data;
                         goto out;
                 }
 
                 /* is there connection with the MAC address of the device? */
-                for (iterator = filtered; iterator; iterator = iterator->next) {
+                for (iterator = list; iterator; iterator = iterator->next) {
                         connection = iterator->data;
                         if (compare_mac_device_with_mac_connection (device->priv->nm_device,
                                                                     connection)) {
@@ -205,7 +233,6 @@ net_device_get_find_connection (NetDevice *device)
         connection = NULL;
 out:
         g_slist_free (list);
-        g_slist_free (filtered);
         return connection;
 }
 
