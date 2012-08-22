@@ -149,20 +149,14 @@ static gboolean
 spawn_passwd (PasswdHandler *passwd_handler, GError **error)
 {
         gchar   *argv[2];
-        gchar   *envp[1];
+        gchar  **envp;
         gint    my_stdin, my_stdout, my_stderr;
 
         argv[0] = "/usr/bin/passwd";    /* Is it safe to rely on a hard-coded path? */
         argv[1] = NULL;
 
-        envp[0] = NULL;                 /* If we pass an empty array as the environment,
-                                         * will the childs environment be empty, and the
-                                         * locales set to the C default? From the manual:
-                                         * "If envp is NULL, the child inherits its
-                                         * parent'senvironment."
-                                         * If I'm wrong here, we somehow have to set
-                                         * the locales here.
-                                         */
+        envp = g_get_environ ();
+        envp = g_environ_setenv (envp, "LC_ALL", "C", TRUE);
 
         if (!g_spawn_async_with_pipes (NULL,                            /* Working directory */
                                        argv,                            /* Argument vector */
@@ -179,8 +173,12 @@ spawn_passwd (PasswdHandler *passwd_handler, GError **error)
                 /* An error occured */
                 free_passwd_resources (passwd_handler);
 
+                g_strfreev (envp);
+
                 return FALSE;
         }
+
+        g_strfreev (envp);
 
         /* 2>&1 */
         if (dup2 (my_stderr, my_stdout) == -1) {
