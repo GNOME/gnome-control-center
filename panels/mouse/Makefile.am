@@ -43,6 +43,7 @@ uidir   = $(pkgdatadir)/ui
 ui_DATA =				\
 	gnome-mouse-properties.ui	\
 	gnome-mouse-test.ui		\
+	scroll-test-gegl.svg		\
 	scroll-test.svg
 
 desktopdir = $(datadir)/applications

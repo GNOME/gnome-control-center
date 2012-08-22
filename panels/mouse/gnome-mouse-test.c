@@ -45,12 +45,16 @@
 #define INNER_CIRCLE_SIZE (52.0 / 180 * size)
 
 static void setup_information_label (GtkWidget *widget);
+static void setup_scroll_image      (GtkWidget *widget);
 
 enum
 {
 	DOUBLE_CLICK_TEST_OFF,
 	DOUBLE_CLICK_TEST_MAYBE,
-	DOUBLE_CLICK_TEST_ON
+	DOUBLE_CLICK_TEST_ON,
+	DOUBLE_CLICK_TEST_STILL_ON,
+	DOUBLE_CLICK_TEST_ALMOST_THERE,
+	DOUBLE_CLICK_TEST_GEGL
 };
 
 /* State in testing the double-click speed. Global for a great deal of
@@ -63,6 +67,7 @@ static GSettings *mouse_settings = NULL;
 
 static gint information_label_timeout_id = 0;
 static gint button_drawing_area_timeout_id = 0;
+static gint scroll_image_timeout_id = 0;
 
 /* Double Click handling */
 
@@ -98,6 +103,18 @@ information_label_timeout (struct test_data_t *data)
 	return FALSE;
 }
 
+/* Timeout for the scroll image */
+
+static gboolean
+scroll_image_timeout (struct test_data_t *data)
+{
+	setup_scroll_image (data->widget);
+
+	*data->timeout_id = 0;
+
+	return FALSE;
+}
+
 /* Set information label according global state variables. */
 
 static void
@@ -118,17 +135,21 @@ setup_information_label (GtkWidget *widget)
 		return;
 	}
 
-	double_click = (double_click_state == DOUBLE_CLICK_TEST_ON);
-	switch (button_state) {
-	case 1:
-		message = (double_click) ? _("Double click, primary button") : _("Single click, primary button");
-		break;
-	case 2:
-		message = (double_click) ? _("Double click, middle button") : _("Single click, middle button");
-		break;
-	case 3:
-		message = (double_click) ? _("Double click, secondary button") : _("Single click, secondary button");
-		break;
+	if (double_click_state == DOUBLE_CLICK_TEST_GEGL) {
+		message = _("Five clicks, GEGL time!"), "</b>";
+	} else {
+		double_click = (double_click_state >= DOUBLE_CLICK_TEST_ON);
+		switch (button_state) {
+		case 1:
+			message = (double_click) ? _("Double click, primary button") : _("Single click, primary button");
+			break;
+		case 2:
+			message = (double_click) ? _("Double click, middle button") : _("Single click, middle button");
+			break;
+		case 3:
+			message = (double_click) ? _("Double click, secondary button") : _("Single click, secondary button");
+			break;
+		}
 	}
 
 	label_text = g_strconcat ("<b>", message, "</b>", NULL);
@@ -141,6 +162,36 @@ setup_information_label (GtkWidget *widget)
 						      (GSourceFunc) information_label_timeout,
 						      &data);
 }
+
+/* Update scroll image according to the global state variables */
+
+static void
+setup_scroll_image (GtkWidget *widget)
+{
+	static struct test_data_t data;
+	char *filename;
+
+	if (scroll_image_timeout_id != 0) {
+		g_source_remove (scroll_image_timeout_id);
+		scroll_image_timeout_id = 0;
+	}
+
+	if (double_click_state == DOUBLE_CLICK_TEST_GEGL)
+		filename = GNOMECC_UI_DIR "/scroll-test-gegl.svg";
+	else
+		filename = GNOMECC_UI_DIR "/scroll-test.svg";
+	gtk_image_set_from_file (GTK_IMAGE (widget), filename);
+
+	if (double_click_state != DOUBLE_CLICK_TEST_GEGL)
+		return;
+
+	data.widget = widget;
+	data.timeout_id = &scroll_image_timeout_id;
+	scroll_image_timeout_id = g_timeout_add (5000,
+						 (GSourceFunc) scroll_image_timeout,
+						 &data);
+}
+
 
 /* Callback issued when the user clicks the double click testing area. */
 
@@ -175,14 +226,19 @@ button_drawing_area_button_press_event (GtkWidget      *widget,
 		button_drawing_area_timeout_id = g_timeout_add (double_click_time, (GSourceFunc) test_maybe_timeout, &data);
 		break;
 	case DOUBLE_CLICK_TEST_MAYBE:
+	case DOUBLE_CLICK_TEST_ON:
+	case DOUBLE_CLICK_TEST_STILL_ON:
+	case DOUBLE_CLICK_TEST_ALMOST_THERE:
 		if (event->time - double_click_timestamp < double_click_time) {
-			double_click_state = DOUBLE_CLICK_TEST_ON;
+			double_click_state++;
 			data.widget = widget;
 			data.timeout_id = &button_drawing_area_timeout_id;
 			button_drawing_area_timeout_id = g_timeout_add (2500, (GSourceFunc) test_maybe_timeout, &data);
+		} else {
+			test_maybe_timeout (&data);
 		}
 		break;
-	case DOUBLE_CLICK_TEST_ON:
+	case DOUBLE_CLICK_TEST_GEGL:
 		double_click_state = DOUBLE_CLICK_TEST_OFF;
 		break;
 	}
@@ -193,6 +249,7 @@ button_drawing_area_button_press_event (GtkWidget      *widget,
 
 	button_state = event->button;
 	setup_information_label (WID ("information_label"));
+	setup_scroll_image (WID ("image"));
 
 	return TRUE;
 }
@@ -212,6 +269,9 @@ button_drawing_area_draw_event (GtkWidget  *widget,
 
 	switch (double_click_state) {
 	case DOUBLE_CLICK_TEST_ON:
+	case DOUBLE_CLICK_TEST_STILL_ON:
+	case DOUBLE_CLICK_TEST_ALMOST_THERE:
+	case DOUBLE_CLICK_TEST_GEGL:
 		gdk_rgba_parse (&outer_color, "#729fcf");
 		gdk_rgba_parse (&inner_color, "#729fcf");
 		break;
@@ -296,6 +356,11 @@ gnome_mouse_test_dispose (GtkWidget *widget)
 	if (information_label_timeout_id != 0) {
 		g_source_remove (information_label_timeout_id);
 		information_label_timeout_id = 0;
+	}
+
+	if (scroll_image_timeout_id != 0) {
+		g_source_remove (scroll_image_timeout_id);
+		scroll_image_timeout_id = 0;
 	}
 
 	if (button_drawing_area_timeout_id != 0) {
