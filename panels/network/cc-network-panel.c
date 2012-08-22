@@ -380,16 +380,10 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         if (find_in_model_by_id (panel, nm_device_get_udi (device)) != NULL)
                 goto out;
 
-        /* we don't support bluetooth devices yet -- no mockup */
         type = nm_device_get_device_type (device);
-        if (type == NM_DEVICE_TYPE_BT)
-                goto out;
-        if (type == NM_DEVICE_TYPE_WIMAX)
-                goto out;
 
         g_debug ("device %s type %i",
-                 nm_device_get_udi (device),
-                 nm_device_get_device_type (device));
+                 nm_device_get_udi (device), type);
 
         /* map the NMDeviceType to the GType */
         switch (type) {
@@ -403,8 +397,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                 device_g_type = NET_TYPE_DEVICE_WIFI;
                 break;
         default:
-                device_g_type = NET_TYPE_DEVICE;
-                break;
+                goto out;
         }
 
         /* create device */
