@@ -129,7 +129,6 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
 static void
 shell_test_button_toggle_event (GtkToggleButton *button, CcMousePanel *panel)
 {
-  GtkBuilder *dialog = panel->priv->builder;
   GtkNotebook *notebook = GTK_NOTEBOOK (panel->priv->widget);
   gint page_num;
 
