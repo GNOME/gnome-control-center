@@ -331,8 +331,9 @@ device_off_toggled (GtkSwitch *sw,
                 if (connection == NULL)
                         return;
                 nm_client_activate_connection (client,
-                                               connection, NULL, NULL,
-                                               NULL, NULL);
+                                               connection,
+                                               net_device_get_nm_device (NET_DEVICE (device_mobile)),
+                                               NULL, NULL, NULL);
         } else {
                 connection = net_device_get_find_connection (NET_DEVICE (device_mobile));
                 if (connection == NULL)
