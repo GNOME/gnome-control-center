@@ -35,6 +35,8 @@
 
 #include "cc-background-chooser-dialog.h"
 
+#include "bg-pictures-source.h"
+
 #define WP_PATH_ID "org.gnome.desktop.background"
 #define WP_URI_KEY "picture-uri"
 #define WP_OPTIONS_KEY "picture-options"
