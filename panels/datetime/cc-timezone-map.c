@@ -45,6 +45,7 @@ typedef struct
 struct _CcTimezoneMapPrivate
 {
   GdkPixbuf *orig_background;
+  GdkPixbuf *orig_background_dim;
   GdkPixbuf *orig_color_map;
 
   GdkPixbuf *background;
@@ -143,11 +144,8 @@ cc_timezone_map_dispose (GObject *object)
 {
   CcTimezoneMapPrivate *priv = CC_TIMEZONE_MAP (object)->priv;
 
-  if (priv->orig_background)
-    {
-      g_object_unref (priv->orig_background);
-      priv->orig_background = NULL;
-    }
+  g_clear_object (&priv->orig_background);
+  g_clear_object (&priv->orig_background_dim);
 
   if (priv->orig_color_map)
     {
@@ -226,11 +224,17 @@ cc_timezone_map_size_allocate (GtkWidget     *widget,
                                GtkAllocation *allocation)
 {
   CcTimezoneMapPrivate *priv = CC_TIMEZONE_MAP (widget)->priv;
+  GdkPixbuf *pixbuf;
 
   if (priv->background)
     g_object_unref (priv->background);
 
-  priv->background = gdk_pixbuf_scale_simple (priv->orig_background,
+  if (!gtk_widget_is_sensitive (widget))
+    pixbuf = priv->orig_background_dim;
+  else
+    pixbuf = priv->orig_background;
+
+  priv->background = gdk_pixbuf_scale_simple (pixbuf,
                                               allocation->width,
                                               allocation->height,
                                               GDK_INTERP_BILINEAR);
@@ -255,7 +259,6 @@ cc_timezone_map_realize (GtkWidget *widget)
 {
   GdkWindowAttr attr = { 0, };
   GtkAllocation allocation;
-  GdkCursor *cursor;
   GdkWindow *window;
 
   gtk_widget_get_allocation (widget, &allocation);
@@ -273,9 +276,6 @@ cc_timezone_map_realize (GtkWidget *widget)
 
   window = gdk_window_new (gtk_widget_get_parent_window (widget), &attr,
                            GDK_WA_X | GDK_WA_Y);
-
-  cursor = gdk_cursor_new (GDK_HAND2);
-  gdk_window_set_cursor (window, cursor);
 
   gdk_window_set_user_data (window, widget);
   gtk_widget_set_window (widget, window);
@@ -330,6 +330,7 @@ cc_timezone_map_draw (GtkWidget *widget,
   GError *err = NULL;
   gdouble pointx, pointy;
   char buf[16];
+  const char *fmt;
 
   gtk_widget_get_allocation (widget, &alloc);
 
@@ -338,7 +339,12 @@ cc_timezone_map_draw (GtkWidget *widget,
   cairo_paint (cr);
 
   /* paint hilight */
-  file = g_strdup_printf (DATADIR "/timezone_%s.png",
+  if (gtk_widget_is_sensitive (widget))
+    fmt = DATADIR "/timezone_%s.png";
+  else
+    fmt = DATADIR "/timezone_%s_dim.png";
+
+  file = g_strdup_printf (fmt,
                           g_ascii_formatd (buf, sizeof (buf),
                                            "%g", priv->selected_offset));
   orig_hilight = gdk_pixbuf_new_from_file (file, &err);
@@ -396,6 +402,39 @@ cc_timezone_map_draw (GtkWidget *widget,
   return TRUE;
 }
 
+static void
+update_cursor (GtkWidget *widget)
+{
+  GdkWindow *window;
+  GdkCursor *cursor = NULL;
+
+  if (!gtk_widget_get_realized (widget))
+    return;
+
+  if (gtk_widget_is_sensitive (widget))
+    {
+      GdkDisplay *display;
+      display = gtk_widget_get_display (widget);
+      cursor = gdk_cursor_new_for_display (display, GDK_HAND2);
+    }
+
+  window = gtk_widget_get_window (widget);
+  gdk_window_set_cursor (window, cursor);
+
+  if (cursor)
+    g_object_unref (cursor);
+}
+
+static void
+cc_timezone_map_state_flags_changed (GtkWidget     *widget,
+                                     GtkStateFlags  prev_state)
+{
+  update_cursor (widget);
+
+  if (GTK_WIDGET_CLASS (cc_timezone_map_parent_class)->state_flags_changed)
+    GTK_WIDGET_CLASS (cc_timezone_map_parent_class)->state_flags_changed (widget, prev_state);
+}
+
 
 static void
 cc_timezone_map_class_init (CcTimezoneMapClass *klass)
@@ -415,6 +454,7 @@ cc_timezone_map_class_init (CcTimezoneMapClass *klass)
   widget_class->size_allocate = cc_timezone_map_size_allocate;
   widget_class->realize = cc_timezone_map_realize;
   widget_class->draw = cc_timezone_map_draw;
+  widget_class->state_flags_changed = cc_timezone_map_state_flags_changed;
 
   signals[LOCATION_CHANGED] = g_signal_new ("location-changed",
                                             CC_TYPE_TIMEZONE_MAP,
@@ -545,6 +585,16 @@ cc_timezone_map_init (CcTimezoneMap *self)
                                                     &err);
 
   if (!priv->orig_background)
+    {
+      g_warning ("Could not load background image: %s",
+                 (err) ? err->message : "Unknown error");
+      g_clear_error (&err);
+    }
+
+  priv->orig_background_dim = gdk_pixbuf_new_from_file (DATADIR "/bg_dim.png",
+                                                        &err);
+
+  if (!priv->orig_background_dim)
     {
       g_warning ("Could not load background image: %s",
                  (err) ? err->message : "Unknown error");

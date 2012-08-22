@@ -20,48 +20,89 @@ uidir = $(pkgdatadir)/ui/datetime
 dist_ui_DATA = \
 	datetime.ui \
 	data/bg.png \
+	data/bg_dim.png \
 	data/cc.png \
 	data/pin.png \
 	data/timezone_0.png \
+	data/timezone_0_dim.png \
 	data/timezone_-10.png \
+	data/timezone_-10_dim.png \
 	data/timezone_10.png \
+	data/timezone_10_dim.png \
 	data/timezone_10.5.png \
+	data/timezone_10.5_dim.png \
 	data/timezone_-1.png \
+	data/timezone_-1_dim.png \
 	data/timezone_1.png \
+	data/timezone_1_dim.png \
 	data/timezone_-11.png \
+	data/timezone_-11_dim.png \
 	data/timezone_11.png \
+	data/timezone_11_dim.png \
 	data/timezone_11.5.png \
+	data/timezone_11.5_dim.png \
 	data/timezone_12.png \
+	data/timezone_12_dim.png \
 	data/timezone_12.75.png \
+	data/timezone_12.75_dim.png \
 	data/timezone_13.png \
+	data/timezone_13_dim.png \
 	data/timezone_14.png \
+	data/timezone_14_dim.png \
 	data/timezone_-2.png \
+	data/timezone_-2_dim.png \
 	data/timezone_2.png \
+	data/timezone_2_dim.png \
 	data/timezone_-3.png \
+	data/timezone_-3_dim.png \
 	data/timezone_3.png \
+	data/timezone_3_dim.png \
 	data/timezone_-3.5.png \
+	data/timezone_-3.5_dim.png \
 	data/timezone_3.5.png \
+	data/timezone_3.5_dim.png \
 	data/timezone_-4.png \
+	data/timezone_-4_dim.png \
 	data/timezone_4.png \
+	data/timezone_4_dim.png \
 	data/timezone_-4.5.png \
+	data/timezone_-4.5_dim.png \
 	data/timezone_4.5.png \
+	data/timezone_4.5_dim.png \
 	data/timezone_-5.png \
+	data/timezone_-5_dim.png \
 	data/timezone_5.png \
+	data/timezone_5_dim.png \
 	data/timezone_-5.5.png \
+	data/timezone_-5.5_dim.png \
 	data/timezone_5.5.png \
+	data/timezone_5.5_dim.png \
 	data/timezone_5.75.png \
+	data/timezone_5.75_dim.png \
 	data/timezone_-6.png \
+	data/timezone_-6_dim.png \
 	data/timezone_6.png \
+	data/timezone_6_dim.png \
 	data/timezone_6.5.png \
+	data/timezone_6.5_dim.png \
 	data/timezone_-7.png \
+	data/timezone_-7_dim.png \
 	data/timezone_7.png \
+	data/timezone_7_dim.png \
 	data/timezone_-8.png \
+	data/timezone_-8_dim.png \
 	data/timezone_8.png \
+	data/timezone_8_dim.png \
 	data/timezone_8.75.png \
+	data/timezone_8.75_dim.png \
 	data/timezone_-9.png \
+	data/timezone_-9_dim.png \
 	data/timezone_9.png \
+	data/timezone_9_dim.png \
 	data/timezone_-9.5.png \
-	data/timezone_9.5.png
+	data/timezone_-9.5_dim.png \
+	data/timezone_9.5.png \
+	data/timezone_9.5_dim.png
 
 tzdatadir = $(pkgdatadir)/datetime
 dist_tzdata_DATA = backward
