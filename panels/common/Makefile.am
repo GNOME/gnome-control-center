@@ -36,4 +36,9 @@ uidir = $(pkgdatadir)/ui
 dist_ui_DATA = \
 	language-chooser.ui
 
+rulesdir = $(datadir)/polkit-1/rules.d/
+rules_DATA = gnome-control-center.rules
+
+EXTRA_DIST = $(rules_DATA)
+
 -include $(top_srcdir)/git.mk
