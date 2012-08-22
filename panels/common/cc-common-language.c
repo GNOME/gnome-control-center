@@ -61,7 +61,7 @@ cc_common_language_sort_languages (GtkTreeModel *model,
 
 	/* Sort before and after separator first */
 	if (sa && sb)
-		result 0;
+		result = 0;
 	else if (sa)
 		result = ulb ? 1 : -1;
 	else if (sb)
