@@ -36,6 +36,16 @@
 
 #define WID(x) (GtkWidget*) gtk_builder_get_object (dialog, x)
 
+/* Click test button sizes. */
+#define SHADOW_SIZE (10.0 / 180 * size)
+#define SHADOW_SHIFT_Y (-1.0 / 180 * size)
+#define SHADOW_OPACITY (0.15 / 180 * size)
+#define OUTER_CIRCLE_SIZE (22.0 / 180 * size)
+#define ANNULUS_SIZE (6.0 / 180 * size)
+#define INNER_CIRCLE_SIZE (52.0 / 180 * size)
+
+static void setup_information_label (GtkWidget *widget);
+
 enum
 {
 	DOUBLE_CLICK_TEST_OFF,
@@ -47,14 +57,19 @@ enum
  * convenience
  */
 static gint double_click_state = DOUBLE_CLICK_TEST_OFF;
+static gint button_state = 0;
+
 static GSettings *mouse_settings = NULL;
+
+static gint information_label_timeout_id = 0;
+static gint button_drawing_area_timeout_id = 0;
 
 /* Double Click handling */
 
 struct test_data_t
 {
 	gint *timeout_id;
-	GtkWidget *image;
+	GtkWidget *widget;
 };
 
 /* Timeout for the double click test */
@@ -64,52 +79,103 @@ test_maybe_timeout (struct test_data_t *data)
 {
 	double_click_state = DOUBLE_CLICK_TEST_OFF;
 
-	gtk_image_set_from_icon_name (GTK_IMAGE (data->image), "face-plain", GTK_ICON_SIZE_DIALOG);
+	gtk_widget_queue_draw (data->widget);
 
 	*data->timeout_id = 0;
 
 	return FALSE;
 }
 
+/* Timeout for the information label */
+
+static gboolean
+information_label_timeout (struct test_data_t *data)
+{
+	setup_information_label (data->widget);
+
+	*data->timeout_id = 0;
+
+	return FALSE;
+}
+
+/* Set information label according global state variables. */
+
+static void
+setup_information_label (GtkWidget *widget)
+{
+	static struct test_data_t data;
+	gchar *message = NULL;
+	gchar *label_text = NULL;
+	gboolean double_click;
+
+	if (information_label_timeout_id != 0)
+		g_source_remove (information_label_timeout_id);
+
+	if (double_click_state == DOUBLE_CLICK_TEST_OFF) {
+		gtk_label_set_label (GTK_LABEL (widget), _("Try clicking, double clicking, scrolling"));
+		return;
+	}
+
+	double_click = (double_click_state == DOUBLE_CLICK_TEST_ON);
+	switch (button_state) {
+	case 1:
+		message = (double_click) ? _("Double click, primary button") : _("Single click, primary button");
+		break;
+	case 2:
+		message = (double_click) ? _("Double click, middle button") : _("Single click, middle button");
+		break;
+	case 3:
+		message = (double_click) ? _("Double click, secondary button") : _("Single click, secondary button");
+		break;
+	}
+
+	label_text = g_strconcat ("<b>", message, "</b>", NULL);
+	gtk_label_set_markup (GTK_LABEL (widget), label_text);
+	g_free (label_text);
+
+	data.widget = widget;
+	data.timeout_id = &information_label_timeout_id;
+	information_label_timeout_id = g_timeout_add (2500,
+						      (GSourceFunc) information_label_timeout,
+						      &data);
+}
+
 /* Callback issued when the user clicks the double click testing area. */
 
 static gboolean
-event_box_button_press_event (GtkWidget   *widget,
-			      GdkEventButton *event,
-			      GtkBuilder   *dialog)
+button_drawing_area_button_press_event (GtkWidget      *widget,
+					GdkEventButton *event,
+					GtkBuilder     *dialog)
 {
 	gint                       double_click_time;
 	static struct test_data_t  data;
-	static gint                test_on_timeout_id     = 0;
-	static gint                test_maybe_timeout_id  = 0;
 	static guint32             double_click_timestamp = 0;
-	GtkWidget                 *image;
 
-	if (event->type != GDK_BUTTON_PRESS)
+	if (event->type != GDK_BUTTON_PRESS || event->button > 3)
 		return FALSE;
-
-	image = g_object_get_data (G_OBJECT (widget), "image");
 
 	double_click_time = g_settings_get_int (mouse_settings, "double-click");
 
-	if (test_maybe_timeout_id != 0)
-		g_source_remove  (test_maybe_timeout_id);
-	if (test_on_timeout_id != 0)
-		g_source_remove (test_on_timeout_id);
+	if (button_drawing_area_timeout_id != 0)
+		g_source_remove  (button_drawing_area_timeout_id);
+
+	/* Ignore fake double click using different buttons. */
+	if (double_click_state != DOUBLE_CLICK_TEST_OFF && button_state != event->button)
+		double_click_state = DOUBLE_CLICK_TEST_OFF;
 
 	switch (double_click_state) {
 	case DOUBLE_CLICK_TEST_OFF:
 		double_click_state = DOUBLE_CLICK_TEST_MAYBE;
-		data.image = image;
-		data.timeout_id = &test_maybe_timeout_id;
-		test_maybe_timeout_id = g_timeout_add (double_click_time, (GSourceFunc) test_maybe_timeout, &data);
+		data.widget = widget;
+		data.timeout_id = &button_drawing_area_timeout_id;
+		button_drawing_area_timeout_id = g_timeout_add (double_click_time, (GSourceFunc) test_maybe_timeout, &data);
 		break;
 	case DOUBLE_CLICK_TEST_MAYBE:
 		if (event->time - double_click_timestamp < double_click_time) {
 			double_click_state = DOUBLE_CLICK_TEST_ON;
-			data.image = image;
-			data.timeout_id = &test_on_timeout_id;
-			test_on_timeout_id = g_timeout_add (2500, (GSourceFunc) test_maybe_timeout, &data);
+			data.widget = widget;
+			data.timeout_id = &button_drawing_area_timeout_id;
+			button_drawing_area_timeout_id = g_timeout_add (2500, (GSourceFunc) test_maybe_timeout, &data);
 		}
 		break;
 	case DOUBLE_CLICK_TEST_ON:
@@ -119,35 +185,90 @@ event_box_button_press_event (GtkWidget   *widget,
 
 	double_click_timestamp = event->time;
 
+	gtk_widget_queue_draw (widget);
+
+	button_state = event->button;
+	setup_information_label (WID ("information_label"));
+
+	return TRUE;
+}
+
+static gboolean
+button_drawing_area_draw_event (GtkWidget  *widget,
+				cairo_t    *cr,
+				GtkBuilder *dialog)
+{
+	gdouble center_x, center_y, size;
+	GdkRGBA inner_color, outer_color;
+	cairo_pattern_t *pattern;
+
+	size = MIN (gtk_widget_get_allocated_width (widget), gtk_widget_get_allocated_height (widget));
+	center_x = gtk_widget_get_allocated_width (widget) / 2.0;
+	center_y = gtk_widget_get_allocated_height (widget) / 2.0;
+
 	switch (double_click_state) {
 	case DOUBLE_CLICK_TEST_ON:
-		gtk_image_set_from_icon_name (GTK_IMAGE (image), "face-laugh", GTK_ICON_SIZE_INVALID);
+		gdk_rgba_parse (&outer_color, "#729fcf");
+		gdk_rgba_parse (&inner_color, "#729fcf");
 		break;
 	case DOUBLE_CLICK_TEST_MAYBE:
-		gtk_image_set_from_icon_name (GTK_IMAGE (image), "face-smile", GTK_ICON_SIZE_INVALID);
+		gdk_rgba_parse (&outer_color, "#729fcf");
+		gdk_rgba_parse (&inner_color, "#ffffff");
 		break;
 	case DOUBLE_CLICK_TEST_OFF:
-		gtk_image_set_from_icon_name (GTK_IMAGE (image), "face-plain", GTK_ICON_SIZE_INVALID);
+		gdk_rgba_parse (&outer_color, "#ffffff");
+		gdk_rgba_parse (&inner_color, "#ffffff");
 		break;
 	}
 
-	return TRUE;
+	/* Draw shadow. */
+	cairo_rectangle (cr, center_x - size / 2,  center_y - size / 2, size, size);
+	pattern = cairo_pattern_create_radial (center_x, center_y, 0, center_x, center_y, size);
+	cairo_pattern_add_color_stop_rgba (pattern, 0.5 - SHADOW_SIZE / size, 0, 0, 0, SHADOW_OPACITY);
+	cairo_pattern_add_color_stop_rgba (pattern, 0.5, 0, 0, 0, 0);
+	cairo_set_source (cr, pattern);
+	cairo_fill (cr);
+
+	/* Draw outer circle. */
+	cairo_set_line_width (cr, OUTER_CIRCLE_SIZE);
+	cairo_arc (cr, center_x, center_y + SHADOW_SHIFT_Y,
+		   INNER_CIRCLE_SIZE + ANNULUS_SIZE + OUTER_CIRCLE_SIZE / 2,
+		   0, 2 * G_PI);
+	gdk_cairo_set_source_rgba (cr, &outer_color);
+	cairo_stroke (cr);
+
+	/* Draw inner circle. */
+	cairo_set_line_width (cr, 0);
+	cairo_arc (cr, center_x, center_y + SHADOW_SHIFT_Y,
+		   INNER_CIRCLE_SIZE,
+		   0, 2 * G_PI);
+	gdk_cairo_set_source_rgba (cr, &inner_color);
+	cairo_fill (cr);
+
+	return FALSE;
 }
 
 /* Set up the property editors in the dialog. */
 static void
 setup_dialog (GtkBuilder *dialog)
 {
-	GtkImage *image;
+	GtkAdjustment *adjustment;
+	GdkRGBA color;
 
-	image = GTK_IMAGE (WID ("double_click_image"));
+	g_signal_connect (WID ("button_drawing_area"), "button_press_event",
+			  G_CALLBACK (button_drawing_area_button_press_event),
+			  dialog);
+	g_signal_connect (WID ("button_drawing_area"), "draw",
+			  G_CALLBACK (button_drawing_area_draw_event),
+			  dialog);
 
-	gtk_image_set_from_icon_name (image, "face-plain", GTK_ICON_SIZE_INVALID);
-	gtk_image_set_pixel_size (image, 256);
+	adjustment = GTK_ADJUSTMENT (WID ("scrolled_window_adjustment"));
+	gtk_adjustment_set_value (adjustment,
+				  gtk_adjustment_get_upper (adjustment));
 
-	g_object_set_data (G_OBJECT (WID ("double_click_eventbox")), "image", GTK_WIDGET (image));
-	g_signal_connect (WID ("double_click_eventbox"), "button_press_event",
-			  G_CALLBACK (event_box_button_press_event), dialog);
+	gdk_rgba_parse (&color, "#565854");
+	gtk_widget_override_background_color (WID ("viewport"), GTK_STATE_FLAG_NORMAL, &color);
+	gtk_widget_override_background_color (WID ("button_drawing_area"), GTK_STATE_FLAG_NORMAL, &color);
 }
 
 GtkWidget *
@@ -167,5 +288,11 @@ gnome_mouse_test_dispose (GtkWidget *widget)
 		g_object_unref (mouse_settings);
 		mouse_settings = NULL;
 	}
+
+	if (information_label_timeout_id != 0)
+		g_source_remove (information_label_timeout_id);
+
+	if (button_drawing_area_timeout_id != 0)
+		g_source_remove  (button_drawing_area_timeout_id);
 }
 

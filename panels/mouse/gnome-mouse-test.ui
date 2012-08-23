@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkAdjustment" id="scrolled_window_adjustment">
+    <property name="upper">100</property>
+    <property name="value">100</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
   <object class="GtkWindow" id="mouse_test_window">
     <property name="can_focus">False</property>
     <child>
       <object class="GtkGrid" id="test_widget">
+        <property name="height_request">400</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="hexpand">True</property>
         <property name="vexpand">True</property>
-        <property name="border_width">15</property>
-        <property name="column_spacing">10</property>
         <child>
-          <object class="GtkLabel" id="label33">
+          <object class="GtkLabel" id="information_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-            <property name="halign">center</property>
+            <property name="margin_top">5</property>
             <property name="hexpand">True</property>
-            <property name="xalign">0</property>
-            <property name="label" translatable="yes">To test your settings, try to double-click on the face.</property>
+            <property name="ypad">5</property>
+            <property name="label" translatable="yes">Try clicking, double clicking, scrolling</property>
             <property name="wrap">True</property>
           </object>
           <packing>
@@ -30,21 +35,58 @@
           </packing>
         </child>
         <child>
-          <object class="GtkEventBox" id="double_click_eventbox">
+          <object class="GtkScrolledWindow" id="scrolledwindow">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
+            <property name="can_focus">True</property>
             <property name="hexpand">True</property>
             <property name="vexpand">True</property>
-            <property name="visible_window">False</property>
+            <property name="vadjustment">scrolled_window_adjustment</property>
+            <property name="hscrollbar_policy">never</property>
+            <property name="vscrollbar_policy">always</property>
+            <property name="shadow_type">in</property>
             <child>
-              <object class="GtkImage" id="double_click_image">
+              <object class="GtkViewport" id="viewport">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                <property name="stock">gtk-missing-image</property>
+                <child>
+                  <object class="GtkGrid" id="grid1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImage" id="image">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_left">35</property>
+                        <property name="margin_right">35</property>
+                        <property name="pixbuf">scroll-test.svg</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">0</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkDrawingArea" id="button_drawing_area">
+                        <property name="width_request">180</property>
+                        <property name="height_request">180</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="events">GDK_BUTTON_PRESS_MASK | GDK_STRUCTURE_MASK</property>
+                        <property name="margin_top">20</property>
+                        <property name="margin_bottom">20</property>
+                        <property name="hexpand">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">1</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
@@ -57,11 +99,5 @@
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkAdjustment" id="scrolled_window_adjustment">
-    <property name="upper">100</property>
-    <property name="value">100</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
   </object>
 </interface>

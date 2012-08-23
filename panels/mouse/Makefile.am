@@ -7,7 +7,6 @@ INCLUDES = 						\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
-	-DPIXMAP_DIR=\""$(datadir)/gnome-control-center/pixmaps"\"	\
 	$(NULL)
 
 
@@ -40,16 +39,11 @@ test_gnome_mouse_test_LDADD = $(PANEL_LIBS) $(MOUSE_PANEL_LIBS)
 
 @INTLTOOL_DESKTOP_RULE@
 
-pixmapdir  = $(pkgdatadir)/pixmaps
-pixmap_DATA = \
-	double-click-on.png		\
-	double-click-off.png		\
-	double-click-maybe.png
-
 uidir   = $(pkgdatadir)/ui
 ui_DATA =				\
 	gnome-mouse-properties.ui	\
-	gnome-mouse-test.ui
+	gnome-mouse-test.ui		\
+	scroll-test.svg
 
 desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-mouse-panel.desktop.in
@@ -62,6 +56,6 @@ update-from-gsd:
 	git commit -m "mouse: Update from gnome-settings-daemon" $(INPUTFILES)
 
 CLEANFILES = $(Desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = $(ui_DATA) $(pixmap_DATA)
+EXTRA_DIST = $(ui_DATA)
 
 -include $(top_srcdir)/git.mk
