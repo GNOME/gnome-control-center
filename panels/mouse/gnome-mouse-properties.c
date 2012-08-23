@@ -237,6 +237,8 @@ create_dialog (GtkBuilder *dialog)
 	gtk_size_group_add_widget (size_group, WID ("pointer_speed_slow_label"));
 	gtk_size_group_add_widget (size_group, WID ("double_click_slow_label"));
 	gtk_size_group_add_widget (size_group, WID ("touchpad_pointer_speed_slow_label"));
+
+	gtk_widget_set_direction (WID ("primary_button_box"), GTK_TEXT_DIR_LTR);
 }
 
 /* Callback issued when a button is clicked on the dialog */
