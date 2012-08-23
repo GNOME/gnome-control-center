@@ -169,9 +169,13 @@ cc_display_panel_finalize (GObject *object)
     g_object_unref (self->priv->clock_settings);
 
   shell = cc_panel_get_shell (CC_PANEL (self));
-  toplevel = cc_shell_get_toplevel (shell);
-  g_signal_handler_disconnect (G_OBJECT (toplevel),
-                               self->priv->focus_id);
+  if (shell != NULL)
+    {
+      toplevel = cc_shell_get_toplevel (shell);
+      if (toplevel != NULL)
+        g_signal_handler_disconnect (G_OBJECT (toplevel),
+                                     self->priv->focus_id);
+    }
 
   gnome_rr_labeler_hide (self->priv->labeler);
   g_object_unref (self->priv->labeler);
