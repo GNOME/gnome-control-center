@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-08-20 18:21+0000\n"
-"PO-Revision-Date: 2012-08-20 20:35+0200\n"
+"POT-Creation-Date: 2012-08-22 15:17+0000\n"
+"PO-Revision-Date: 2012-08-23 17:19+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -109,7 +109,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Sin fondo de escritorio"
 
-#: ../panels/background/cc-background-panel.c:390
+#: ../panels/background/cc-background-panel.c:387
 msgid "Current background"
 msgstr "Fondo actual"
 
@@ -152,7 +152,7 @@ msgstr "Conexión"
 msgid "Paired"
 msgstr "Emparejado"
 
-#: ../panels/bluetooth/bluetooth.ui.h:5
+#: ../panels/bluetooth/bluetooth.ui.h:5 ../panels/wacom/cc-wacom-page.c:754
 msgid "Type"
 msgstr "Tipo"
 
@@ -186,41 +186,41 @@ msgctxt "Power"
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:290
+#: ../panels/bluetooth/cc-bluetooth-panel.c:285
 msgid "Yes"
 msgstr "Sí"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:290
+#: ../panels/bluetooth/cc-bluetooth-panel.c:285
 msgid "No"
 msgstr "No"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:402
+#: ../panels/bluetooth/cc-bluetooth-panel.c:397
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth está desactivado"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:407
+#: ../panels/bluetooth/cc-bluetooth-panel.c:402
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "El Bluetooth está físicamente desactivado"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:411
+#: ../panels/bluetooth/cc-bluetooth-panel.c:406
 msgid "No Bluetooth adapters found"
 msgstr "No se encontraron adaptadores Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:544
+#: ../panels/bluetooth/cc-bluetooth-panel.c:539
 msgid "Visibility"
 msgstr "Visibilidad"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:548
+#: ../panels/bluetooth/cc-bluetooth-panel.c:543
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Visibilidad de «%s»"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:592
+#: ../panels/bluetooth/cc-bluetooth-panel.c:587
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "¿Quitar «%s» de la lista de dispositivos?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:594
+#: ../panels/bluetooth/cc-bluetooth-panel.c:589
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
@@ -313,7 +313,7 @@ msgstr "Perfiles disponibles"
 
 #. TRANSLATORS: column for device list
 #: ../panels/color/cc-color-panel.c:824
-#: ../panels/sound/gvc-mixer-dialog.c:1516
+#: ../panels/sound/gvc-mixer-dialog.c:1525
 msgid "Device"
 msgstr "Dispositivo"
 
@@ -572,24 +572,32 @@ msgstr "Español"
 msgid "Chinese (simplified)"
 msgstr "Chino (simplificado)"
 
+#: ../panels/common/cc-common-language.c:539
+msgid "Russian"
+msgstr "Ruso"
+
+#: ../panels/common/cc-common-language.c:542
+msgid "Arabic"
+msgstr "Árabe"
+
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:565
+#: ../panels/common/cc-common-language.c:571
 msgid "United States"
 msgstr "Estados Unidos"
 
-#: ../panels/common/cc-common-language.c:566
+#: ../panels/common/cc-common-language.c:572
 msgid "Germany"
 msgstr "Alemania"
 
-#: ../panels/common/cc-common-language.c:567
+#: ../panels/common/cc-common-language.c:573
 msgid "France"
 msgstr "Francia"
 
-#: ../panels/common/cc-common-language.c:568
+#: ../panels/common/cc-common-language.c:574
 msgid "Spain"
 msgstr "España"
 
-#: ../panels/common/cc-common-language.c:569
+#: ../panels/common/cc-common-language.c:575
 msgid "China"
 msgstr "China"
 
@@ -746,22 +754,22 @@ msgid "To change time or date settings, you need to authenticate."
 msgstr ""
 "Para cambiar la configuración de la fecha o de la hora, debe autenticarse."
 
-#: ../panels/display/cc-display-panel.c:482
+#: ../panels/display/cc-display-panel.c:477
 msgctxt "display panel, rotation"
 msgid "Normal"
 msgstr "Normal"
 
-#: ../panels/display/cc-display-panel.c:483
+#: ../panels/display/cc-display-panel.c:478
 msgctxt "display panel, rotation"
 msgid "Counterclockwise"
 msgstr "Antihorario"
 
-#: ../panels/display/cc-display-panel.c:484
+#: ../panels/display/cc-display-panel.c:479
 msgctxt "display panel, rotation"
 msgid "Clockwise"
 msgstr "Horario"
 
-#: ../panels/display/cc-display-panel.c:485
+#: ../panels/display/cc-display-panel.c:480
 msgctxt "display panel, rotation"
 msgid "180 Degrees"
 msgstr "180 grados"
@@ -771,59 +779,59 @@ msgstr "180 grados"
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #.
-#: ../panels/display/cc-display-panel.c:622
+#: ../panels/display/cc-display-panel.c:617
 msgid "Mirror Displays"
 msgstr "Espejar pantallas"
 
-#: ../panels/display/cc-display-panel.c:646
+#: ../panels/display/cc-display-panel.c:641
 #: ../panels/display/display-capplet.ui.h:1
 msgid "Monitor"
 msgstr "Monitor"
 
-#: ../panels/display/cc-display-panel.c:747
+#: ../panels/display/cc-display-panel.c:742
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d x %d (%s)"
 
-#: ../panels/display/cc-display-panel.c:749
+#: ../panels/display/cc-display-panel.c:744
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/cc-display-panel.c:1658
+#: ../panels/display/cc-display-panel.c:1653
 msgid "Drag to change primary display."
 msgstr "Arrastrar para cambiar la pantalla principal."
 
-#: ../panels/display/cc-display-panel.c:1716
+#: ../panels/display/cc-display-panel.c:1711
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
 msgstr ""
 "Seleccionar un monitor para cambiar sus propiedades; arrastrarlo lo reubica."
 
-#: ../panels/display/cc-display-panel.c:2104
+#: ../panels/display/cc-display-panel.c:2099
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/cc-display-panel.c:2106
+#: ../panels/display/cc-display-panel.c:2101
 msgid "%a %l:%M %p"
 msgstr "%a %H:%M"
 
-#: ../panels/display/cc-display-panel.c:2268
-#: ../panels/display/cc-display-panel.c:2320
+#: ../panels/display/cc-display-panel.c:2263
+#: ../panels/display/cc-display-panel.c:2315
 #, c-format
 msgid "Failed to apply configuration: %s"
 msgstr "Falló al aplicar la configuración: %s"
 
-#: ../panels/display/cc-display-panel.c:2348
+#: ../panels/display/cc-display-panel.c:2343
 msgid "Could not save the monitor configuration"
 msgstr "No se pudo guardar la configuración del monitor"
 
-#: ../panels/display/cc-display-panel.c:2408
+#: ../panels/display/cc-display-panel.c:2403
 msgid "Could not detect displays"
 msgstr "No se pudieron detectar las pantallas"
 
-#: ../panels/display/cc-display-panel.c:2602
+#: ../panels/display/cc-display-panel.c:2597
 msgid "Could not get screen information"
 msgstr "No se pudo obtener la información de la pantalla"
 
@@ -876,20 +884,20 @@ msgstr "Desconocido"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:587
+#: ../panels/info/cc-info-panel.c:582
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:746
+#: ../panels/info/cc-info-panel.c:741
 msgid "Unknown model"
 msgstr "Modelo desconocido"
 
-#: ../panels/info/cc-info-panel.c:829
+#: ../panels/info/cc-info-panel.c:824
 msgid "The next login will attempt to use the standard experience."
 msgstr "El siguiente inicio de sesión intentará usar la decoración estándar."
 
-#: ../panels/info/cc-info-panel.c:831
+#: ../panels/info/cc-info-panel.c:826
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
@@ -899,53 +907,53 @@ msgstr ""
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:873
+#: ../panels/info/cc-info-panel.c:868
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "Alternativo"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:879
+#: ../panels/info/cc-info-panel.c:874
 msgctxt "Experience"
 msgid "Standard"
 msgstr "Estándar"
 
-#: ../panels/info/cc-info-panel.c:1202
+#: ../panels/info/cc-info-panel.c:1197
 msgid "Ask what to do"
 msgstr "Preguntar qué hacer"
 
-#: ../panels/info/cc-info-panel.c:1206
+#: ../panels/info/cc-info-panel.c:1201
 msgid "Do nothing"
 msgstr "No hacer nada"
 
-#: ../panels/info/cc-info-panel.c:1210
+#: ../panels/info/cc-info-panel.c:1205
 msgid "Open folder"
 msgstr "Abrir carpeta"
 
-#: ../panels/info/cc-info-panel.c:1301
+#: ../panels/info/cc-info-panel.c:1296
 msgid "Other Media"
 msgstr "Otros soportes"
 
-#: ../panels/info/cc-info-panel.c:1332
+#: ../panels/info/cc-info-panel.c:1327
 msgid "Select an application for audio CDs"
 msgstr "Seleccionar una aplicación para CD de sonido"
 
-#: ../panels/info/cc-info-panel.c:1333
+#: ../panels/info/cc-info-panel.c:1328
 msgid "Select an application for video DVDs"
 msgstr "Seleccionar una aplicación para DVD de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1334
+#: ../panels/info/cc-info-panel.c:1329
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "Seleccionar una aplicación que ejecutar cuando se conecta un reproductor de "
 "música"
 
-#: ../panels/info/cc-info-panel.c:1335
+#: ../panels/info/cc-info-panel.c:1330
 msgid "Select an application to run when a camera is connected"
 msgstr "Seleccionar una aplicación que ejecutar cuando se conecta una cámara"
 
-#: ../panels/info/cc-info-panel.c:1336
+#: ../panels/info/cc-info-panel.c:1331
 msgid "Select an application for software CDs"
 msgstr "Seleccionar una aplicación para CD de software"
 
@@ -954,93 +962,93 @@ msgstr "Seleccionar una aplicación para CD de software"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1348
+#: ../panels/info/cc-info-panel.c:1343
 msgid "audio DVD"
 msgstr "DVD de sonido"
 
-#: ../panels/info/cc-info-panel.c:1349
+#: ../panels/info/cc-info-panel.c:1344
 msgid "blank Blu-ray disc"
 msgstr "disco Blu-ray virgen"
 
-#: ../panels/info/cc-info-panel.c:1350
+#: ../panels/info/cc-info-panel.c:1345
 msgid "blank CD disc"
 msgstr "CD virgen"
 
-#: ../panels/info/cc-info-panel.c:1351
+#: ../panels/info/cc-info-panel.c:1346
 msgid "blank DVD disc"
 msgstr "DVD virgen"
 
-#: ../panels/info/cc-info-panel.c:1352
+#: ../panels/info/cc-info-panel.c:1347
 msgid "blank HD DVD disc"
 msgstr "disco HD DVD virgen"
 
-#: ../panels/info/cc-info-panel.c:1353
+#: ../panels/info/cc-info-panel.c:1348
 msgid "Blu-ray video disc"
 msgstr "Disco Blu-ray de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1354
+#: ../panels/info/cc-info-panel.c:1349
 msgid "e-book reader"
 msgstr "lector de libros electrónicos"
 
-#: ../panels/info/cc-info-panel.c:1355
+#: ../panels/info/cc-info-panel.c:1350
 msgid "HD DVD video disc"
 msgstr "Disco HD DVD de vídeo"
 
-#: ../panels/info/cc-info-panel.c:1356
+#: ../panels/info/cc-info-panel.c:1351
 msgid "Picture CD"
 msgstr "CD de imágenes"
 
-#: ../panels/info/cc-info-panel.c:1357
+#: ../panels/info/cc-info-panel.c:1352
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: ../panels/info/cc-info-panel.c:1358
+#: ../panels/info/cc-info-panel.c:1353
 msgid "Video CD"
 msgstr "Video CD"
 
-#: ../panels/info/cc-info-panel.c:1359
+#: ../panels/info/cc-info-panel.c:1354
 msgid "Windows software"
 msgstr "Software de Windows"
 
-#: ../panels/info/cc-info-panel.c:1360
+#: ../panels/info/cc-info-panel.c:1355
 msgid "Software"
 msgstr "Software"
 
-#: ../panels/info/cc-info-panel.c:1483
+#: ../panels/info/cc-info-panel.c:1478
 #: ../panels/keyboard/keyboard-shortcuts.c:1647
 msgid "Section"
 msgstr "Sección"
 
-#: ../panels/info/cc-info-panel.c:1492 ../panels/info/info.ui.h:11
+#: ../panels/info/cc-info-panel.c:1487 ../panels/info/info.ui.h:11
 msgid "Overview"
 msgstr "Visión general"
 
-#: ../panels/info/cc-info-panel.c:1498 ../panels/info/info.ui.h:18
+#: ../panels/info/cc-info-panel.c:1493 ../panels/info/info.ui.h:18
 msgid "Default Applications"
 msgstr "Aplicaciones predeterminadas"
 
-#: ../panels/info/cc-info-panel.c:1503 ../panels/info/info.ui.h:26
+#: ../panels/info/cc-info-panel.c:1498 ../panels/info/info.ui.h:26
 msgid "Removable Media"
 msgstr "Soportes extraíbles"
 
-#: ../panels/info/cc-info-panel.c:1508 ../panels/info/info.ui.h:10
+#: ../panels/info/cc-info-panel.c:1503 ../panels/info/info.ui.h:10
 msgid "Graphics"
 msgstr "Gráficos"
 
-#: ../panels/info/cc-info-panel.c:1710
+#: ../panels/info/cc-info-panel.c:1705
 #, c-format
 msgid "Version %s"
 msgstr "Versión %s"
 
-#: ../panels/info/cc-info-panel.c:1760
+#: ../panels/info/cc-info-panel.c:1755
 msgid "Install Updates"
 msgstr "Instalar actualizaciones"
 
-#: ../panels/info/cc-info-panel.c:1764
+#: ../panels/info/cc-info-panel.c:1759
 msgid "System Up-To-Date"
 msgstr "Sistema al día"
 
-#: ../panels/info/cc-info-panel.c:1768
+#: ../panels/info/cc-info-panel.c:1763
 msgid "Checking for Updates"
 msgstr "Comprobando actualizaciones"
 
@@ -1333,6 +1341,26 @@ msgstr "Reducir el tamaño del texto:"
 msgid "High contrast on or off"
 msgstr "Contraste alto activado o desactivado"
 
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/cc-keyboard-option.c:241
+#: ../panels/keyboard/cc-keyboard-option.c:347
+#: ../panels/keyboard/keyboard-shortcuts.c:1112
+#: ../panels/sound/gvc-mixer-control.c:1834
+#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
+msgid "Disabled"
+msgstr "Desactivado"
+
+#: ../panels/keyboard/cc-keyboard-option.c:315
+msgid "Alternative Characters Key"
+msgstr "Tecla de caracteres alternativos"
+
+#: ../panels/keyboard/cc-keyboard-option.c:320
+#| msgid "Mouse Keys"
+msgid "Compose Key"
+msgstr "Tecla de composición"
+
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "Keyboard"
@@ -1458,15 +1486,6 @@ msgstr "Combinación personalizada"
 msgid "<Unknown Action>"
 msgstr "<Acción desconocida>"
 
-#. translators:
-#. * The device has been disabled
-#: ../panels/keyboard/keyboard-shortcuts.c:1112
-#: ../panels/sound/gvc-mixer-control.c:1834
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
-#: ../panels/user-accounts/um-fingerprint-dialog.c:216
-msgid "Disabled"
-msgstr "Desactivado"
-
 #: ../panels/keyboard/keyboard-shortcuts.c:1253
 #, c-format
 msgid ""
@@ -1498,6 +1517,11 @@ msgstr "Si reasigna la combinación a «%s» se desactivará la combinación «%
 msgid "_Reassign"
 msgstr "_Reasignar"
 
+#: ../panels/mouse/cc-mouse-panel.c:152
+#| msgid "Your settings"
+msgid "_Test Your Settings"
+msgstr "_Comprobar su configuración"
+
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse & Touchpad"
 msgstr "Ratón y «touchpad»"
@@ -1524,24 +1548,18 @@ msgid "Double-click timeout"
 msgstr "Tiempo de espera de la pulsación doble"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:8
-#| msgid "D_ouble click:"
 msgid "_Double-click"
 msgstr "_Doble pulsación"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:9
-#| msgid "Primary Color"
 msgid "Primary _button"
 msgstr "_Botón primario"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:10
-#| msgctxt "balance"
-#| msgid "Left"
 msgid "_Left"
 msgstr "I_zquierda"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
-#| msgctxt "balance"
-#| msgid "Right"
 msgid "_Right"
 msgstr "_Derecha"
 
@@ -1550,7 +1568,6 @@ msgid "Mouse"
 msgstr "Ratón"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:13
-#| msgid "Pointer Speed"
 msgid "_Pointer speed"
 msgstr "_Velocidad del puntero"
 
@@ -1559,7 +1576,6 @@ msgid "Touchpad"
 msgstr "Touchpad"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
-#| msgid "Disable _touchpad while typing"
 msgid "Disable while _typing"
 msgstr "Desac_tivar al escribir"
 
@@ -1568,7 +1584,6 @@ msgid "Tap to _click"
 msgstr "Tocar para pulsar"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:17
-#| msgid "Two-_finger scrolling"
 msgid "Two _finger scroll"
 msgstr "Despla_zamiento con dos dedos"
 
@@ -1576,23 +1591,27 @@ msgstr "Despla_zamiento con dos dedos"
 msgid "C_ontent sticks to fingers"
 msgstr "El c_ontenido se adhiere a los dedos"
 
-#: ../panels/network/cc-network-panel.c:627
+#: ../panels/mouse/gnome-mouse-test.ui.h:1
+msgid "To test your settings, try to double-click on the face."
+msgstr "Para probar su configuración pruebe a pulsar dos veces sobre la cara."
+
+#: ../panels/network/cc-network-panel.c:615
 msgid "Network proxy"
 msgstr "Proxy de la red"
 
-#: ../panels/network/cc-network-panel.c:811 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:799 ../panels/network/net-vpn.c:278
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:878
+#: ../panels/network/cc-network-panel.c:866
 msgid "The system network services are not compatible with this version."
 msgstr "Los servicios de red del sistema no son compatibles con esta versión."
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:1013
+#: ../panels/network/cc-network-panel.c:1001
 msgid "Air_plane Mode"
 msgstr "Modo a_vión"
 
@@ -1657,7 +1676,7 @@ msgstr "Empresa"
 #: ../panels/network/net-device-wifi.c:468
 #: ../panels/universal-access/uap.ui.h:8
 #: ../panels/universal-access/zoom-options.ui.h:32
-#: ../panels/wacom/cc-wacom-page.c:335 ../panels/wacom/cc-wacom-page.c:352
+#: ../panels/wacom/cc-wacom-page.c:118 ../panels/wacom/cc-wacom-page.c:369
 msgid "None"
 msgstr "Ninguna"
 
@@ -2275,35 +2294,35 @@ msgstr "Falló la dependencia de la conexión"
 msgid "Add Account"
 msgstr "Añadir cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:376
+#: ../panels/online-accounts/cc-online-accounts-panel.c:383
 msgid "Error logging into the account"
 msgstr "Error al iniciar sesión en la cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:430
+#: ../panels/online-accounts/cc-online-accounts-panel.c:437
 msgid "Expired credentials. Please log in again."
 msgstr "Las credenciales han expirado. Inicie sesión de nuevo."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:433
+#: ../panels/online-accounts/cc-online-accounts-panel.c:440
 msgid "_Log In"
 msgstr "_Iniciar sesión"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:617
+#: ../panels/online-accounts/cc-online-accounts-panel.c:676
 msgid "Error creating account"
 msgstr "Error al crear la cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:659
+#: ../panels/online-accounts/cc-online-accounts-panel.c:718
 msgid "Error removing account"
 msgstr "Error al quitar la cuenta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:695
+#: ../panels/online-accounts/cc-online-accounts-panel.c:754
 msgid "Are you sure you want to remove the account?"
 msgstr "¿Está seguro de que quiere quitar la cuenta?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:697
+#: ../panels/online-accounts/cc-online-accounts-panel.c:756
 msgid "This will not remove the account on the server."
 msgstr "Esto no quitará la cuenta en el servidor."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:698
+#: ../panels/online-accounts/cc-online-accounts-panel.c:757
 msgid "_Remove"
 msgstr "_Quitar"
 
@@ -2341,18 +2360,18 @@ msgstr ""
 "añadir una cuenta permite que sus aplicaciones accedan a documentos, correo-"
 "e, contactos, calendario, chat y más."
 
-#: ../panels/power/cc-power-panel.c:170
+#: ../panels/power/cc-power-panel.c:165
 msgid "Unknown time"
 msgstr "Tiempo desconocido"
 
-#: ../panels/power/cc-power-panel.c:176
+#: ../panels/power/cc-power-panel.c:171
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minuto"
 msgstr[1] "%i minutos"
 
-#: ../panels/power/cc-power-panel.c:188
+#: ../panels/power/cc-power-panel.c:183
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -2361,170 +2380,170 @@ msgstr[1] "%i horas"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:196
+#: ../panels/power/cc-power-panel.c:191
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:197
+#: ../panels/power/cc-power-panel.c:192
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "hora"
 msgstr[1] "horas"
 
-#: ../panels/power/cc-power-panel.c:198
+#: ../panels/power/cc-power-panel.c:193
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuto"
 msgstr[1] "minutos"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:241
+#: ../panels/power/cc-power-panel.c:236
 #, c-format
 msgid "Charging - %s until fully charged"
 msgstr "Cargando: %s hasta que se cargue del todo"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:249
+#: ../panels/power/cc-power-panel.c:244
 #, c-format
 msgid "Caution low battery, %s remaining"
 msgstr "Batería baja, quedan %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:257
+#: ../panels/power/cc-power-panel.c:252
 #, c-format
 msgid "Using battery power - %s remaining"
 msgstr "Usando la batería: quedan %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:274
+#: ../panels/power/cc-power-panel.c:269
 msgid "Charging"
 msgstr "Cargando"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:279
+#: ../panels/power/cc-power-panel.c:274
 msgid "Using battery power"
 msgstr "Usando la batería"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:283
+#: ../panels/power/cc-power-panel.c:278
 msgid "Charging - fully charged"
 msgstr "Cargando: carga completada"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:287
+#: ../panels/power/cc-power-panel.c:282
 msgid "Empty"
 msgstr "Vacía"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:355
+#: ../panels/power/cc-power-panel.c:350
 #, c-format
 msgid "Caution low UPS, %s remaining"
 msgstr "SAI bajo, quedan %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:361
+#: ../panels/power/cc-power-panel.c:356
 #, c-format
 msgid "Using UPS power - %s remaining"
 msgstr "Usando el SAI: quedan %s"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:379
+#: ../panels/power/cc-power-panel.c:374
 msgid "Caution low UPS"
 msgstr "SAI bajo"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:384
+#: ../panels/power/cc-power-panel.c:379
 msgid "Using UPS power"
 msgstr "Usando el SAI"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:436
+#: ../panels/power/cc-power-panel.c:431
 msgid "Your secondary battery is fully charged"
 msgstr "La batería está cargada completamente"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:440
+#: ../panels/power/cc-power-panel.c:435
 msgid "Your secondary battery is empty"
 msgstr "La batería secundaria está vacía"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:523
+#: ../panels/power/cc-power-panel.c:518
 msgid "Wireless mouse"
 msgstr "Ratón inalámbrico"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:527
+#: ../panels/power/cc-power-panel.c:522
 msgid "Wireless keyboard"
 msgstr "Teclado inalámbrico"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:531
+#: ../panels/power/cc-power-panel.c:526
 msgid "Uninterruptible power supply"
 msgstr "Fuente de alimentación no interrumplible"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:535
+#: ../panels/power/cc-power-panel.c:530
 msgid "Personal digital assistant"
 msgstr "Asistente digital personal"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:539
+#: ../panels/power/cc-power-panel.c:534
 msgid "Cellphone"
 msgstr "Teléfono móvil"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:543
+#: ../panels/power/cc-power-panel.c:538
 msgid "Media player"
 msgstr "Reproductor multimedia"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:547
+#: ../panels/power/cc-power-panel.c:542
 msgid "Tablet"
 msgstr "Tableta"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:551
+#: ../panels/power/cc-power-panel.c:546
 msgid "Computer"
 msgstr "Equipo"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:555
+#: ../panels/power/cc-power-panel.c:550
 msgid "Battery"
 msgstr "Batería"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:566
+#: ../panels/power/cc-power-panel.c:561
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Cargando"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:573
+#: ../panels/power/cc-power-panel.c:568
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Precaución"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:578
+#: ../panels/power/cc-power-panel.c:573
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Baja"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:583
+#: ../panels/power/cc-power-panel.c:578
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Bien"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:588
+#: ../panels/power/cc-power-panel.c:583
 msgctxt "Battery power"
 msgid "Charging - fully charged"
 msgstr "Cargando: cargada completamente"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:592
+#: ../panels/power/cc-power-panel.c:587
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Vacía"
@@ -2587,129 +2606,129 @@ msgid "When power is _critically low"
 msgstr "_Cuando la carga está críticamente baja"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:587
+#: ../panels/printers/cc-printers-panel.c:582
 msgid "Low on toner"
 msgstr "Tóner bajo"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:589
+#: ../panels/printers/cc-printers-panel.c:584
 msgid "Out of toner"
 msgstr "Sin tóner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:592
+#: ../panels/printers/cc-printers-panel.c:587
 msgid "Low on developer"
 msgstr "Nivel de revelador bajo"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:595
+#: ../panels/printers/cc-printers-panel.c:590
 msgid "Out of developer"
 msgstr "Sin revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:597
+#: ../panels/printers/cc-printers-panel.c:592
 msgid "Low on a marker supply"
 msgstr "Marcador bajo"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:599
+#: ../panels/printers/cc-printers-panel.c:594
 msgid "Out of a marker supply"
 msgstr "Sin marcador"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:601
+#: ../panels/printers/cc-printers-panel.c:596
 msgid "Open cover"
 msgstr "Abrir cubierta"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:603
+#: ../panels/printers/cc-printers-panel.c:598
 msgid "Open door"
 msgstr "Abrir puerta"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:605
+#: ../panels/printers/cc-printers-panel.c:600
 msgid "Low on paper"
 msgstr "Nivel de papel bajo"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:607
+#: ../panels/printers/cc-printers-panel.c:602
 msgid "Out of paper"
 msgstr "Sin papel"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:609
+#: ../panels/printers/cc-printers-panel.c:604
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Desconectada"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:611
+#: ../panels/printers/cc-printers-panel.c:606
 msgctxt "printer state"
 msgid "Paused"
 msgstr "Pausada"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:613
+#: ../panels/printers/cc-printers-panel.c:608
 msgid "Waste receptacle almost full"
 msgstr "Recipiente de residuos casi lleno"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:615
+#: ../panels/printers/cc-printers-panel.c:610
 msgid "Waste receptacle full"
 msgstr "Receptáculo de residuos lleno"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:617
+#: ../panels/printers/cc-printers-panel.c:612
 msgid "The optical photo conductor is near end of life"
 msgstr "El conductor óptico está cerca del final de su vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:619
+#: ../panels/printers/cc-printers-panel.c:614
 msgid "The optical photo conductor is no longer functioning"
 msgstr "El conductor óptico ya no funciona"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:770
+#: ../panels/printers/cc-printers-panel.c:765
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Preparada"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:774
+#: ../panels/printers/cc-printers-panel.c:769
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Procesando"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:778
+#: ../panels/printers/cc-printers-panel.c:773
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Detenida"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:897
+#: ../panels/printers/cc-printers-panel.c:892
 msgid "Toner Level"
 msgstr "Nivel de tóner"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:900
+#: ../panels/printers/cc-printers-panel.c:895
 msgid "Ink Level"
 msgstr "Nivel de tinta"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:903
+#: ../panels/printers/cc-printers-panel.c:898
 msgid "Supply Level"
 msgstr "Nivel del suministro"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:1014
+#: ../panels/printers/cc-printers-panel.c:1009
 msgid "No printers available"
 msgstr "No hay impresoras disponibles"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1290
+#: ../panels/printers/cc-printers-panel.c:1285
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -2717,15 +2736,15 @@ msgstr[0] "%u activo"
 msgstr[1] "%u activos"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1586
+#: ../panels/printers/cc-printers-panel.c:1581
 msgid "Failed to add new printer."
 msgstr "Falló al añadir una impresora nueva."
 
-#: ../panels/printers/cc-printers-panel.c:1744
+#: ../panels/printers/cc-printers-panel.c:1739
 msgid "Select PPD File"
 msgstr "Seleccionar archivo PPD"
 
-#: ../panels/printers/cc-printers-panel.c:1753
+#: ../panels/printers/cc-printers-panel.c:1748
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -2733,30 +2752,30 @@ msgstr ""
 "Archivos de descripción de impresora PostScript (*.ppd, *.PPD, *.ppd.gz, *."
 "PPD.gz, *.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2058
+#: ../panels/printers/cc-printers-panel.c:2053
 msgid "No suitable driver found"
 msgstr "No se ha encontrado ningún controlador adecuado"
 
-#: ../panels/printers/cc-printers-panel.c:2127
+#: ../panels/printers/cc-printers-panel.c:2122
 msgid "Searching for preferred drivers..."
 msgstr "Buscando controladores preferidos…"
 
-#: ../panels/printers/cc-printers-panel.c:2142
+#: ../panels/printers/cc-printers-panel.c:2137
 msgid "Select from database..."
 msgstr "Seleccionar de la base de datos…"
 
-#: ../panels/printers/cc-printers-panel.c:2151
+#: ../panels/printers/cc-printers-panel.c:2146
 msgid "Provide PPD File..."
 msgstr "Proporcionar archivo PPD…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2289
-#: ../panels/printers/cc-printers-panel.c:2303
+#: ../panels/printers/cc-printers-panel.c:2284
+#: ../panels/printers/cc-printers-panel.c:2298
 msgid "Test page"
 msgstr "Página de prueba"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2673
+#: ../panels/printers/cc-printers-panel.c:2668
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No se pudo cargar la IU: %s"
@@ -3539,7 +3558,7 @@ msgstr "Vaso"
 msgid "Sonar"
 msgstr "Sonar"
 
-#: ../panels/sound/gvc-applet.c:270 ../panels/sound/gvc-mixer-dialog.c:1768
+#: ../panels/sound/gvc-applet.c:270 ../panels/sound/gvc-mixer-dialog.c:1656
 msgid "Output"
 msgstr "Salida"
 
@@ -3547,7 +3566,7 @@ msgstr "Salida"
 msgid "Sound Output Volume"
 msgstr "Volumen de salida del sonido"
 
-#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1809
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1697
 msgid "Input"
 msgstr "Entrada"
 
@@ -3607,7 +3626,8 @@ msgctxt "volume"
 msgid "Unamplified"
 msgstr "Sin amplificar"
 
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1622
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:260
+#: ../panels/sound/gvc-mixer-dialog.c:521
 msgid "_Profile:"
 msgstr "_Perfil:"
 
@@ -3633,76 +3653,61 @@ msgstr[1] "%u entradas"
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
 
-#: ../panels/sound/gvc-mixer-dialog.c:324
-#: ../panels/sound/gvc-mixer-dialog.c:635
-msgid "Co_nnector:"
-msgstr "Co_nector:"
+#: ../panels/sound/gvc-mixer-dialog.c:262
+msgid "_Test Speakers"
+msgstr "_Probar los altavoces"
 
-#: ../panels/sound/gvc-mixer-dialog.c:541
+#: ../panels/sound/gvc-mixer-dialog.c:426
 msgid "Peak detect"
 msgstr "Detección de picos"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1497
-#: ../panels/sound/gvc-mixer-dialog.c:1710
+#: ../panels/sound/gvc-mixer-dialog.c:1506
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "Nombre"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1564
+#: ../panels/sound/gvc-mixer-dialog.c:1588
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Prueba de altavoces para %s"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1623
-msgid "_Test Speakers"
-msgstr "_Probar los altavoces"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1754
+#: ../panels/sound/gvc-mixer-dialog.c:1642
 msgid "_Output volume:"
 msgstr "Volumen de sali_da:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1773
+#: ../panels/sound/gvc-mixer-dialog.c:1661
 msgid "C_hoose a device for sound output:"
 msgstr "_Elegir un dispositivo para la salida de sonido:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1798
-#: ../panels/sound/gvc-mixer-dialog.c:1927
+#: ../panels/sound/gvc-mixer-dialog.c:1686
 msgid "Settings for the selected device:"
 msgstr "Configuración para el dispositivo seleccionado:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1816
+#: ../panels/sound/gvc-mixer-dialog.c:1704
 msgid "_Input volume:"
 msgstr "Volumen de _entrada:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1839
+#: ../panels/sound/gvc-mixer-dialog.c:1727
 msgid "Input level:"
 msgstr "Nivel de entrada:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1867
+#: ../panels/sound/gvc-mixer-dialog.c:1755
 msgid "C_hoose a device for sound input:"
 msgstr "_Elegir un dispositivo para la entrada de sonido:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1894
-msgid "Hardware"
-msgstr "Hardware"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1899
-msgid "C_hoose a device to configure:"
-msgstr "_Elegir un dispositivo para configurar:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1938
+#: ../panels/sound/gvc-mixer-dialog.c:1782
 msgid "Sound Effects"
 msgstr "Efectos de sonido"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1945
+#: ../panels/sound/gvc-mixer-dialog.c:1789
 msgid "_Alert volume:"
 msgstr "Volumen de _alerta:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1958
+#: ../panels/sound/gvc-mixer-dialog.c:1802
 msgid "Applications"
 msgstr "Aplicaciones"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1962
+#: ../panels/sound/gvc-mixer-dialog.c:1806
 msgid "No application is currently playing or recording audio."
 msgstr "Actualmente ninguna aplicación está reproduciendo o grabando sonido."
 
@@ -3734,16 +3739,16 @@ msgstr "Del tema"
 msgid "C_hoose an alert sound:"
 msgstr "_Elegir un sonido de alerta:"
 
-#: ../panels/sound/gvc-speaker-test.c:221
+#: ../panels/sound/gvc-speaker-test.c:220
 msgid "Stop"
 msgstr "Detener"
 
-#: ../panels/sound/gvc-speaker-test.c:221
-#: ../panels/sound/gvc-speaker-test.c:333
+#: ../panels/sound/gvc-speaker-test.c:220
+#: ../panels/sound/gvc-speaker-test.c:332
 msgid "Test"
 msgstr "Probar"
 
-#: ../panels/sound/gvc-speaker-test.c:229
+#: ../panels/sound/gvc-speaker-test.c:228
 msgid "Subwoofer"
 msgstr "Subwoofer"
 
@@ -3768,8 +3773,8 @@ msgstr "Silenciado"
 msgid "Custom"
 msgstr "Personalizado"
 
-#: ../panels/universal-access/cc-ua-panel.c:291
-#: ../panels/universal-access/cc-ua-panel.c:297
+#: ../panels/universal-access/cc-ua-panel.c:286
+#: ../panels/universal-access/cc-ua-panel.c:292
 msgid "No shortcut set"
 msgstr "No existe ningún atajo configurado"
 
@@ -5014,28 +5019,37 @@ msgstr "Mapear una única pantalla"
 msgid "%d of %d"
 msgstr "%d de %d"
 
-#: ../panels/wacom/cc-wacom-page.c:317
-msgid "Switch Modes"
-msgstr "Cambiar modos"
+#: ../panels/wacom/cc-wacom-page.c:119
+msgid "Send Keystroke"
+msgstr "Enviar pulsación de tecla"
 
-#: ../panels/wacom/cc-wacom-page.c:564
+#: ../panels/wacom/cc-wacom-page.c:120
+#| msgid "Switch Modes"
+msgid "Switch Monitor"
+msgstr "Cambiar monitor"
+
+#: ../panels/wacom/cc-wacom-page.c:599
 msgid "Up"
 msgstr "Arriba"
 
-#: ../panels/wacom/cc-wacom-page.c:564
+#: ../panels/wacom/cc-wacom-page.c:599
 msgid "Down"
 msgstr "Abajo"
 
-#: ../panels/wacom/cc-wacom-page.c:599
+#: ../panels/wacom/cc-wacom-page.c:636
+msgid "Switch Modes"
+msgstr "Cambiar modos"
+
+#: ../panels/wacom/cc-wacom-page.c:722
 #: ../panels/wacom/cc-wacom-stylus-page.c:376
 msgid "Button"
 msgstr "Botón"
 
-#: ../panels/wacom/cc-wacom-page.c:620
+#: ../panels/wacom/cc-wacom-page.c:775
 msgid "Action"
 msgstr "Acción"
 
-#: ../panels/wacom/cc-wacom-page.c:725
+#: ../panels/wacom/cc-wacom-page.c:884
 msgid "Display Mapping"
 msgstr "Mostrar mapeo"
 
@@ -5289,6 +5303,15 @@ msgstr "Preferencias;Configuración;"
 msgid "All Settings"
 msgstr "Todas las configuraciones"
 
+#~ msgid "Co_nnector:"
+#~ msgstr "Co_nector:"
+
+#~ msgid "Hardware"
+#~ msgstr "Hardware"
+
+#~ msgid "C_hoose a device to configure:"
+#~ msgstr "_Elegir un dispositivo para configurar:"
+
 #~ msgid "_Right-handed"
 #~ msgstr "_Diestro"
 
@@ -5326,10 +5349,6 @@ msgstr "Todas las configuraciones"
 
 #~ msgid "_Timeout:"
 #~ msgstr "_Tiempo de espera:"
-
-#~ msgid "To test your settings, try to double-click on the face."
-#~ msgstr ""
-#~ "Para probar su configuración pruebe a pulsar dos veces sobre la cara."
 
 #~ msgid "Enable _mouse clicks with touchpad"
 #~ msgstr "Activar pul_saciones del ratón con el touchpad"
