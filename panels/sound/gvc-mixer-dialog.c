@@ -1568,7 +1568,7 @@ on_test_speakers_clicked (GvcComboBox *widget,
         } while (gtk_tree_model_iter_next (model, &iter));
 
         if (active_output == GVC_MIXER_UI_DEVICE_INVALID) {
-                g_warning ("Cant find the active output from the UI");
+                g_warning ("Can't find the active output from the UI");
                 return;
         }
 
