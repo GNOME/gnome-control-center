@@ -1190,7 +1190,7 @@ add_stream (GvcMixerControl *control,
                        gvc_mixer_stream_get_id (stream));
 }
 
-/* This method will match individual stream ports against it's corresponding device
+/* This method will match individual stream ports against its corresponding device
  * It does this by:
  * - iterates through our devices and finds the one where the card-id on the device is the same as the card-id on the stream
  *   and the port-name on the device is the same as the streamport-name.
@@ -1266,7 +1266,7 @@ match_stream_with_devices (GvcMixerControl    *control,
 }
 
 /*
- * This method attempts to match a sink or source with it's relevant UI device.
+ * This method attempts to match a sink or source with its relevant UI device.
  * GvcMixerStream can represent both a sink or source.
  * Using static card port introspection implies that we know beforehand what
  * outputs and inputs are available to the user.
@@ -1274,7 +1274,7 @@ match_stream_with_devices (GvcMixerControl    *control,
  * For instance we might be able to see that there is a HDMI port available but if
  * we are on the default analog stereo output profile there is no valid sink for
  * that HDMI device. We first need to change profile and when update_sink() is called
- * only then can we match the new hdmi sink with it's corresponding device.
+ * only then can we match the new hdmi sink with its corresponding device.
  *
  * Firstly it checks to see if the incoming stream has no ports.
  * - If a stream has no ports but has a valid card ID (bluetooth), it will attempt
@@ -1970,7 +1970,7 @@ match_card_port_with_existing_device (GvcMixerControl   *control,
 
                 if (g_strcmp0 (card_port->port, device_port_name) == 0 &&
                         device_card == card) {
-                        g_debug ("Found the relevant device %s, update it's port availability flag to %i, is_output %i",
+                        g_debug ("Found the relevant device %s, update its port availability flag to %i, is_output %i",
                                  device_port_name,
                                  available,
                                  is_output);
