@@ -86,7 +86,7 @@ bg_colors_source_init (BgColorsSource *self)
       /* It does have a URI, it's "none" */
 
       g_object_set (G_OBJECT (item),
-                    "uri", "file:///" DATADIR "/gnome-shell/theme/noise-texture.png",
+                    "uri", "file:///" DATADIR "/gnome-control-center/pixmaps/noise-texture-light.png",
 		    "primary-color", items[i].pcolor,
 		    "secondary-color", items[i].pcolor,
 		    "shading", items[i].type,

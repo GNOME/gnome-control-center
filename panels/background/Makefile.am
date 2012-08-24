@@ -19,6 +19,7 @@ INCLUDES =						\
 	-DUIDIR="\"$(uidir)\""				\
 	-DDATADIR="\"$(datadir)\""			\
 	-DGNOME_DESKTOP_USE_UNSTABLE_API		\
+	-DPIXMAP_DIR=\""$(datadir)/gnome-control-center/pixmaps"\"	\
 	$(NULL)
 
 ccpanelsdir = $(PANELS_DIR)
@@ -83,6 +84,10 @@ gdesktop-enums-types.c: $(GDESKTOP_PREFIX)/include/gsettings-desktop-schemas/gde
 	&& rm -f xgen-gtbc
 
 @INTLTOOL_DESKTOP_RULE@
+
+pixmapdir  = $(pkgdatadir)/pixmaps
+pixmap_DATA = \
+	noise-texture-light.png
 
 desktopdir = $(datadir)/applications
 desktop_in_files = gnome-background-panel.desktop.in
