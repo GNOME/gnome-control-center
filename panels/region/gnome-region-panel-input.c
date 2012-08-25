@@ -61,6 +61,7 @@ static GnomeXkbInfo *xkb_info = NULL;
 #ifdef HAVE_IBUS
 static IBusBus *ibus = NULL;
 static GHashTable *ibus_engines = NULL;
+static GCancellable *ibus_cancellable = NULL;
 static guint shell_name_watch_id = 0;
 
 static const gchar *supported_ibus_engines[] = {
@@ -80,6 +81,18 @@ static gboolean   input_chooser_get_selected (GtkWidget     *chooser,
                                               GtkTreeIter   *iter);
 static GtkTreeModel *tree_view_get_actual_model (GtkTreeView *tv);
 
+static gboolean
+strv_contains (const gchar * const *strv,
+               const gchar         *str)
+{
+  const gchar * const *p = strv;
+  for (p = strv; *p; p++)
+    if (g_strcmp0 (*p, str) == 0)
+      return TRUE;
+
+  return FALSE;
+}
+
 #ifdef HAVE_IBUS
 static void
 clear_ibus (void)
@@ -89,6 +102,8 @@ clear_ibus (void)
       g_bus_unwatch_name (shell_name_watch_id);
       shell_name_watch_id = 0;
     }
+  g_cancellable_cancel (ibus_cancellable);
+  g_clear_object (&ibus_cancellable);
   g_clear_pointer (&ibus_engines, g_hash_table_destroy);
   g_clear_object (&ibus);
 }
@@ -176,23 +191,53 @@ update_ibus_active_sources (GtkBuilder *builder)
 }
 
 static void
-fetch_ibus_engines (GtkBuilder *builder)
+fetch_ibus_engines_result (GObject      *object,
+                           GAsyncResult *result,
+                           GtkBuilder   *builder)
 {
-  IBusEngineDesc **engines, **iter;
-  const gchar *name;
+  GList *list, *l;
+  GError *error;
 
-  ibus_engines = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_object_unref);
+  error = NULL;
+  list = ibus_bus_list_engines_async_finish (ibus, result, &error);
 
-  engines = ibus_bus_get_engines_by_names (ibus, supported_ibus_engines);
-  for (iter = engines; *iter; ++iter)
+  g_clear_object (&ibus_cancellable);
+
+  if (!list && error)
     {
-      name = ibus_engine_desc_get_name (*iter);
-      g_hash_table_replace (ibus_engines, (gpointer)name, *iter);
+      g_warning ("Couldn't finish IBus request: %s", error->message);
+      g_error_free (error);
+      return;
     }
 
-  g_free (engines);
+  /* Maps engine ids to engine description objects */
+  ibus_engines = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_object_unref);
+
+  for (l = list; l; l = l->next)
+    {
+      IBusEngineDesc *engine = l->data;
+      const gchar *engine_id = ibus_engine_desc_get_name (engine);
+
+      if (strv_contains (supported_ibus_engines, engine_id))
+        g_hash_table_replace (ibus_engines, (gpointer)engine_id, engine);
+      else
+        g_object_unref (engine);
+    }
+  g_list_free (list);
 
   update_ibus_active_sources (builder);
+}
+
+static void
+fetch_ibus_engines (GtkBuilder *builder)
+{
+  ibus_cancellable = g_cancellable_new ();
+
+  ibus_bus_list_engines_async (ibus,
+                               -1,
+                               ibus_cancellable,
+                               (GAsyncReadyCallback)fetch_ibus_engines_result,
+                               builder);
 
   /* We've got everything we needed, don't want to be called again. */
   g_signal_handlers_disconnect_by_func (ibus, fetch_ibus_engines, builder);
