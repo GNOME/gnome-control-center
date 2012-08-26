@@ -61,6 +61,7 @@ static GnomeXkbInfo *xkb_info = NULL;
 #ifdef HAVE_IBUS
 static IBusBus *ibus = NULL;
 static GHashTable *ibus_engines = NULL;
+static guint shell_name_watch_id = 0;
 
 static const gchar *supported_ibus_engines[] = {
   "bopomofo",
@@ -83,6 +84,11 @@ static GtkTreeModel *tree_view_get_actual_model (GtkTreeView *tv);
 static void
 clear_ibus (void)
 {
+  if (shell_name_watch_id > 0)
+    {
+      g_bus_unwatch_name (shell_name_watch_id);
+      shell_name_watch_id = 0;
+    }
   g_clear_pointer (&ibus_engines, g_hash_table_destroy);
   g_clear_object (&ibus);
 }
@@ -205,6 +211,26 @@ maybe_start_ibus (void)
                                         NULL,
                                         NULL,
                                         NULL));
+}
+
+static void
+on_shell_appeared (GDBusConnection *connection,
+                   const gchar     *name,
+                   const gchar     *name_owner,
+                   gpointer         data)
+{
+  GtkBuilder *builder = data;
+
+  if (!ibus)
+    {
+      ibus = ibus_bus_new_async ();
+      if (ibus_bus_is_connected (ibus))
+        fetch_ibus_engines (builder);
+      else
+        g_signal_connect_swapped (ibus, "connected",
+                                  G_CALLBACK (fetch_ibus_engines), builder);
+    }
+  maybe_start_ibus ();
 }
 #endif  /* HAVE_IBUS */
 
@@ -982,17 +1008,14 @@ setup_input_tabs (GtkBuilder    *builder,
 
 #ifdef HAVE_IBUS
   ibus_init ();
-  if (!ibus)
-    {
-      ibus = ibus_bus_new_async ();
-      if (ibus_bus_is_connected (ibus))
-        fetch_ibus_engines (builder);
-      else
-        g_signal_connect_swapped (ibus, "connected",
-                                  G_CALLBACK (fetch_ibus_engines), builder);
-      g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) clear_ibus, NULL);
-    }
-  maybe_start_ibus ();
+  shell_name_watch_id = g_bus_watch_name (G_BUS_TYPE_SESSION,
+                                          "org.gnome.Shell",
+                                          G_BUS_NAME_WATCHER_FLAGS_NONE,
+                                          on_shell_appeared,
+                                          NULL,
+                                          builder,
+                                          NULL);
+  g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) clear_ibus, NULL);
 #endif
 
   populate_with_active_sources (store);
