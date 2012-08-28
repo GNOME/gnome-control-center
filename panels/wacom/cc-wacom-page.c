@@ -115,10 +115,12 @@ static struct {
        GsdWacomActionType  action_type;
        const gchar        *action_name;
 } action_table[] = {
-       { GSD_WACOM_ACTION_TYPE_NONE,           N_("None")                },
-       { GSD_WACOM_ACTION_TYPE_CUSTOM,         N_("Send Keystroke")      },
-       { GSD_WACOM_ACTION_TYPE_SWITCH_MONITOR, N_("Switch Monitor")      }
+       { GSD_WACOM_ACTION_TYPE_NONE,           NC_("Wacom action-type", "None")                },
+       { GSD_WACOM_ACTION_TYPE_CUSTOM,         NC_("Wacom action-type", "Send Keystroke")      },
+       { GSD_WACOM_ACTION_TYPE_SWITCH_MONITOR, NC_("Wacom action-type", "Switch Monitor")      }
 };
+
+#define WACOM_C(x) g_dpgettext2(NULL, "Wacom action-type", x)
 
 static void
 update_tablet_ui (CcWacomPage *page,
@@ -366,7 +368,7 @@ accel_set_func (GtkTreeViewColumn *tree_column,
 			      "accel-key", 0,
 			      "accel-mods", 0,
 			      "style", PANGO_STYLE_NORMAL,
-			      "text", _("None"),
+			      "text", C_("Wacom action-type", "None"),
 			      NULL);
 		g_free (str);
 		return;
@@ -604,7 +606,7 @@ add_button_to_store (GtkListStore         *model,
 	gtk_list_store_append (model, &new_row);
 	gtk_list_store_set (model, &new_row,
 			    MAPPING_DESCRIPTION_COLUMN, dir_name ? dir_name : button->name,
-			    MAPPING_TYPE_COLUMN, _(action_table[type].action_name),
+			    MAPPING_TYPE_COLUMN, WACOM_C(action_table[type].action_name),
 			    MAPPING_BUTTON_COLUMN, button,
 			    MAPPING_BUTTON_DIRECTION, dir,
 			    -1);
@@ -643,7 +645,7 @@ action_set_func (GtkTreeViewColumn *tree_column,
 			      "visible", TRUE,
 			      "editable", FALSE,
 			      "style", PANGO_STYLE_NORMAL,
-			      "text", _(action_table[GSD_WACOM_ACTION_TYPE_CUSTOM].action_name),
+			      "text", WACOM_C(action_table[GSD_WACOM_ACTION_TYPE_CUSTOM].action_name),
 			      NULL);
 		return;
 	}
@@ -658,7 +660,7 @@ action_set_func (GtkTreeViewColumn *tree_column,
 		      "visible", TRUE,
 		      "editable", TRUE,
 		      "style", PANGO_STYLE_NORMAL,
-		      "text",  _(action_table[type].action_name),
+		      "text",  WACOM_C(action_table[type].action_name),
 		      NULL);
 }
 
@@ -683,7 +685,7 @@ combo_action_cell_changed (GtkCellRendererCombo *cell,
 
 	gtk_tree_model_get (GTK_TREE_MODEL (priv->action_store), new_iter, ACTION_TYPE_COLUMN, &type, -1);
 	gtk_tree_model_get_iter (model, &iter, path);
-	gtk_list_store_set (GTK_LIST_STORE (model), &iter, MAPPING_TYPE_COLUMN, _(action_table[type].action_name), -1);
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter, MAPPING_TYPE_COLUMN, WACOM_C(action_table[type].action_name), -1);
 	gtk_tree_path_free (path);
 
 	gtk_tree_model_get (model, &iter, MAPPING_BUTTON_COLUMN, &button, -1);
@@ -738,7 +740,7 @@ setup_mapping_treeview (CcWacomPage *page)
 
 		gtk_list_store_append (priv->action_store, &iter);
 		gtk_list_store_set (priv->action_store, &iter,
-		                    ACTION_NAME_COLUMN, _(action_table[i].action_name),
+		                    ACTION_NAME_COLUMN, WACOM_C(action_table[i].action_name),
 		                    ACTION_TYPE_COLUMN, action_table[i].action_type, -1);
 	}
 	renderer = gtk_cell_renderer_combo_new ();
