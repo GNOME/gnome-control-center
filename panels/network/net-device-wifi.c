@@ -308,8 +308,7 @@ get_ap_security_string (NMAccessPoint *ap)
         if (str->len > 0)
                 g_string_set_size (str, str->len - 2);
         else {
-                /* TRANSLATORS: this no (!) WiFi security */
-                g_string_append (str, _("None"));
+                g_string_append (str, C_("Wifi security", "None"));
         }
         return g_string_free (str, FALSE);
 }
@@ -465,7 +464,7 @@ device_get_hotspot_security_details (NetDeviceWifi *device_wifi,
                 return;
 
         tmp_secret = NULL;
-        tmp_security = _("None");
+        tmp_security = C_("Wifi security", "None");
 
         key_mgmt = nm_setting_wireless_security_get_key_mgmt (sws);
         if (strcmp (key_mgmt, "none") == 0) {
