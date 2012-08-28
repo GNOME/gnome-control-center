@@ -50,6 +50,7 @@ CC_PANEL_REGISTER (CcBluetoothPanel, cc_bluetooth_panel)
 struct CcBluetoothPanelPrivate {
 	GtkBuilder          *builder;
 	GtkWidget           *chooser;
+	char                *selected_bdaddr;
 	BluetoothClient     *client;
 	BluetoothKillswitch *killswitch;
 	gboolean             debug;
@@ -107,6 +108,8 @@ cc_bluetooth_panel_finalize (GObject *object)
 		g_object_unref (self->priv->client);
 		self->priv->client = NULL;
 	}
+
+	g_clear_pointer (&self->priv->selected_bdaddr, g_free);
 
 	G_OBJECT_CLASS (cc_bluetooth_panel_parent_class)->finalize (object);
 }
@@ -255,10 +258,12 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 	gtk_widget_hide (WID ("browse_box"));
 	gtk_widget_hide (WID ("send_box"));
 
-	/* Remove the extra setup widgets */
-	remove_extra_setup_widgets (self);
-
 	bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
+
+	/* Remove the extra setup widgets */
+	if (g_strcmp0 (self->priv->selected_bdaddr, bdaddr) != 0)
+		remove_extra_setup_widgets (self);
+
 	if (bdaddr == NULL) {
 		gtk_widget_set_sensitive (WID ("properties_vbox"), FALSE);
 		gtk_switch_set_active (button, FALSE);
@@ -329,14 +334,17 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 		}
 
 		/* Extra widgets */
-		add_extra_setup_widgets (self, bdaddr);
+		if (g_strcmp0 (self->priv->selected_bdaddr, bdaddr) != 0)
+			add_extra_setup_widgets (self, bdaddr);
 
 		gtk_label_set_text (GTK_LABEL (WID ("address_label")), bdaddr);
-		g_free (bdaddr);
 
 		gtk_widget_set_sensitive (WID ("button_delete"), TRUE);
 		set_notebook_page (self, NOTEBOOK_PAGE_PROPS);
 	}
+
+	g_free (self->priv->selected_bdaddr);
+	self->priv->selected_bdaddr = bdaddr;
 
 	g_signal_handlers_unblock_by_func (button, switch_connected_active_changed, self);
 }
