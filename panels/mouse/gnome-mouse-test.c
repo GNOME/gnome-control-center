@@ -108,8 +108,10 @@ setup_information_label (GtkWidget *widget)
 	gchar *label_text = NULL;
 	gboolean double_click;
 
-	if (information_label_timeout_id != 0)
+	if (information_label_timeout_id != 0) {
 		g_source_remove (information_label_timeout_id);
+		information_label_timeout_id = 0;
+	}
 
 	if (double_click_state == DOUBLE_CLICK_TEST_OFF) {
 		gtk_label_set_label (GTK_LABEL (widget), _("Try clicking, double clicking, scrolling"));
@@ -156,8 +158,10 @@ button_drawing_area_button_press_event (GtkWidget      *widget,
 
 	double_click_time = g_settings_get_int (mouse_settings, "double-click");
 
-	if (button_drawing_area_timeout_id != 0)
+	if (button_drawing_area_timeout_id != 0) {
 		g_source_remove  (button_drawing_area_timeout_id);
+		button_drawing_area_timeout_id = 0;
+	}
 
 	/* Ignore fake double click using different buttons. */
 	if (double_click_state != DOUBLE_CLICK_TEST_OFF && button_state != event->button)
@@ -289,10 +293,14 @@ gnome_mouse_test_dispose (GtkWidget *widget)
 		mouse_settings = NULL;
 	}
 
-	if (information_label_timeout_id != 0)
+	if (information_label_timeout_id != 0) {
 		g_source_remove (information_label_timeout_id);
+		information_label_timeout_id = 0;
+	}
 
-	if (button_drawing_area_timeout_id != 0)
+	if (button_drawing_area_timeout_id != 0) {
 		g_source_remove  (button_drawing_area_timeout_id);
+		button_drawing_area_timeout_id = 0;
+	}
 }
 
