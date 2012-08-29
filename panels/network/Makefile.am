@@ -22,8 +22,10 @@ libnetwork_la_SOURCES =					\
 	net-device.h					\
 	net-device-wifi.c				\
 	net-device-wifi.h				\
-	net-device-wired.c				\
-	net-device-wired.h				\
+	net-device-simple.c				\
+	net-device-simple.h				\
+	net-device-ethernet.c				\
+	net-device-ethernet.h				\
 	net-device-mobile.c				\
 	net-device-mobile.h				\
 	net-vpn.c					\
@@ -55,7 +57,7 @@ dist_ui_DATA =						\
 	network-proxy.ui				\
 	network-vpn.ui					\
 	network-wifi.ui					\
-	network-wired.ui				\
+	network-simple.ui				\
 	network-mobile.ui				\
 	network.ui
 

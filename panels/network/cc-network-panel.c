@@ -33,7 +33,7 @@
 #include "net-device.h"
 #include "net-device-mobile.h"
 #include "net-device-wifi.h"
-#include "net-device-wired.h"
+#include "net-device-ethernet.h"
 #include "net-object.h"
 #include "net-proxy.h"
 #include "net-vpn.h"
@@ -493,7 +493,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         /* map the NMDeviceType to the GType */
         switch (type) {
         case NM_DEVICE_TYPE_ETHERNET:
-                device_g_type = NET_TYPE_DEVICE_WIRED;
+                device_g_type = NET_TYPE_DEVICE_ETHERNET;
                 break;
         case NM_DEVICE_TYPE_MODEM:
                 device_g_type = NET_TYPE_DEVICE_MOBILE;

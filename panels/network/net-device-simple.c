@@ -1,6 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
  *
  * Copyright (C) 2011-2012 Richard Hughes <richard@hughsie.com>
+ * Copyright (C) 2012 Red Hat, Inc.
  *
  * Licensed under the GNU General Public License Version 2
  *
@@ -26,41 +27,40 @@
 
 #include <nm-client.h>
 #include <nm-device.h>
-#include <nm-device-ethernet.h>
 #include <nm-remote-connection.h>
 
 #include "panel-common.h"
 
-#include "net-device-wired.h"
+#include "net-device-simple.h"
 
-#define NET_DEVICE_WIRED_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_DEVICE_WIRED, NetDeviceWiredPrivate))
+#define NET_DEVICE_SIMPLE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_DEVICE_SIMPLE, NetDeviceSimplePrivate))
 
-struct _NetDeviceWiredPrivate
+struct _NetDeviceSimplePrivate
 {
-        GtkBuilder              *builder;
-        gboolean                 updating_device;
+        GtkBuilder *builder;
+        gboolean    updating_device;
 };
 
-G_DEFINE_TYPE (NetDeviceWired, net_device_wired, NET_TYPE_DEVICE)
+G_DEFINE_TYPE (NetDeviceSimple, net_device_simple, NET_TYPE_DEVICE)
 
 static GtkWidget *
-device_wired_proxy_add_to_notebook (NetObject *object,
-                                    GtkNotebook *notebook,
-                                    GtkSizeGroup *heading_size_group)
+device_simple_proxy_add_to_notebook (NetObject *object,
+                                     GtkNotebook *notebook,
+                                     GtkSizeGroup *heading_size_group)
 {
         GtkWidget *widget;
         GtkWindow *window;
-        NetDeviceWired *device_wired = NET_DEVICE_WIRED (object);
+        NetDeviceSimple *device_simple = NET_DEVICE_SIMPLE (object);
 
         /* add widgets to size group */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wired->priv->builder,
+        widget = GTK_WIDGET (gtk_builder_get_object (device_simple->priv->builder,
                                                      "heading_ipv4"));
         gtk_size_group_add_widget (heading_size_group, widget);
 
         /* reparent */
-        window = GTK_WINDOW (gtk_builder_get_object (device_wired->priv->builder,
+        window = GTK_WINDOW (gtk_builder_get_object (device_simple->priv->builder,
                                                      "window_tmp"));
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wired->priv->builder,
+        widget = GTK_WIDGET (gtk_builder_get_object (device_simple->priv->builder,
                                                      "vbox6"));
         g_object_ref (widget);
         gtk_container_remove (GTK_CONTAINER (window), widget);
@@ -72,9 +72,9 @@ device_wired_proxy_add_to_notebook (NetObject *object,
 static void
 update_off_switch_from_device_state (GtkSwitch *sw,
                                      NMDeviceState state,
-                                     NetDeviceWired *device_wired)
+                                     NetDeviceSimple *device_simple)
 {
-        device_wired->priv->updating_device = TRUE;
+        device_simple->priv->updating_device = TRUE;
         switch (state) {
                 case NM_DEVICE_STATE_UNMANAGED:
                 case NM_DEVICE_STATE_UNAVAILABLE:
@@ -87,25 +87,29 @@ update_off_switch_from_device_state (GtkSwitch *sw,
                         gtk_switch_set_active (sw, TRUE);
                         break;
         }
-        device_wired->priv->updating_device = FALSE;
+        device_simple->priv->updating_device = FALSE;
 }
 
 static void
-nm_device_wired_refresh_ui (NetDeviceWired *device_wired)
+nm_device_simple_refresh_ui (NetDeviceSimple *device_simple)
 {
-        const char *str;
+        char *hwaddr;
         GString *status;
         GtkWidget *widget;
-        guint speed = 0;
+        char *speed = NULL;
         NMDevice *nm_device;
         NMDeviceState state;
-        NetDeviceWiredPrivate *priv = device_wired->priv;
+        NetDeviceSimplePrivate *priv = device_simple->priv;
 
         /* set device kind */
-        nm_device = net_device_get_nm_device (NET_DEVICE (device_wired));
+        nm_device = net_device_get_nm_device (NET_DEVICE (device_simple));
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_device"));
         gtk_label_set_label (GTK_LABEL (widget),
                              panel_device_to_localized_string (nm_device));
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "image_device"));
+        gtk_image_set_from_icon_name (GTK_IMAGE (widget),
+                                      panel_device_to_icon_name (nm_device),
+                                      GTK_ICON_SIZE_DIALOG);
 
         /* set up the device on/off switch */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "device_off_switch"));
@@ -113,42 +117,42 @@ nm_device_wired_refresh_ui (NetDeviceWired *device_wired)
         gtk_widget_set_visible (widget,
                                 state != NM_DEVICE_STATE_UNAVAILABLE
                                 && state != NM_DEVICE_STATE_UNMANAGED);
-        update_off_switch_from_device_state (GTK_SWITCH (widget), state, device_wired);
+        update_off_switch_from_device_state (GTK_SWITCH (widget), state, device_simple);
 
         /* set device state, with status and optionally speed */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_status"));
         status = g_string_new (panel_device_state_to_localized_string (nm_device));
         if (state != NM_DEVICE_STATE_UNAVAILABLE)
-                speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (nm_device));
-        if (speed  > 0) {
-                g_string_append (status, " - ");
-                /* Translators: network device speed */
-                g_string_append_printf (status, _("%d Mb/s"), speed);
-        }
+                speed = net_device_simple_get_speed (device_simple);
+        if (speed)
+                g_string_append_printf (status, " - %s", speed);
         gtk_label_set_label (GTK_LABEL (widget), status->str);
         g_string_free (status, TRUE);
         gtk_widget_set_tooltip_text (widget,
                                      panel_device_state_reason_to_localized_string (nm_device));
 
         /* device MAC */
-        str = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (nm_device));
-        panel_set_device_widget_details (priv->builder, "mac", str);
+        g_object_get (G_OBJECT (nm_device),
+                      "hw-address", &hwaddr,
+                      NULL);
+        panel_set_device_widget_details (priv->builder, "mac", hwaddr);
+        g_free (hwaddr);
 
         /* set IP entries */
         panel_set_device_widgets (priv->builder, nm_device);
 }
 
 static void
-device_wired_refresh (NetObject *object)
+device_simple_refresh (NetObject *object)
 {
-        NetDeviceWired *device_wired = NET_DEVICE_WIRED (object);
-        nm_device_wired_refresh_ui (device_wired);
+        NetDeviceSimple *device_simple = NET_DEVICE_SIMPLE (object);
+        nm_device_simple_refresh_ui (device_simple);
 }
 
 static void
 device_off_toggled (GtkSwitch *sw,
                     GParamSpec *pspec,
-                    NetDeviceWired *device_wired)
+                    NetDeviceSimple *device_simple)
 {
         const gchar *path;
         const GPtrArray *acs;
@@ -158,25 +162,25 @@ device_off_toggled (GtkSwitch *sw,
         NMConnection *connection;
         NMClient *client;
 
-        if (device_wired->priv->updating_device)
+        if (device_simple->priv->updating_device)
                 return;
 
         active = gtk_switch_get_active (sw);
         if (active) {
-                client = net_object_get_client (NET_OBJECT (device_wired));
-                connection = net_device_get_find_connection (NET_DEVICE (device_wired));
+                client = net_object_get_client (NET_OBJECT (device_simple));
+                connection = net_device_get_find_connection (NET_DEVICE (device_simple));
                 if (connection == NULL)
                         return;
                 nm_client_activate_connection (client,
                                                connection,
-                                               net_device_get_nm_device (NET_DEVICE (device_wired)),
+                                               net_device_get_nm_device (NET_DEVICE (device_simple)),
                                                NULL, NULL, NULL);
         } else {
-                connection = net_device_get_find_connection (NET_DEVICE (device_wired));
+                connection = net_device_get_find_connection (NET_DEVICE (device_simple));
                 if (connection == NULL)
                         return;
                 path = nm_connection_get_path (connection);
-                client = net_object_get_client (NET_OBJECT (device_wired));
+                client = net_object_get_client (NET_OBJECT (device_simple));
                 acs = nm_client_get_active_connections (client);
                 for (i = 0; i < acs->len; i++) {
                         a = (NMActiveConnection*)acs->pdata[i];
@@ -189,56 +193,65 @@ device_off_toggled (GtkSwitch *sw,
 }
 
 static void
-edit_connection (GtkButton *button, NetDeviceWired *device_wired)
+edit_connection (GtkButton *button, NetDeviceSimple *device_simple)
 {
-        net_object_edit (NET_OBJECT (device_wired));
+        net_object_edit (NET_OBJECT (device_simple));
 }
 
 static void
-net_device_wired_constructed (GObject *object)
+net_device_simple_constructed (GObject *object)
 {
-        NetDeviceWired *device_wired = NET_DEVICE_WIRED (object);
+        NetDeviceSimple *device_simple = NET_DEVICE_SIMPLE (object);
 
-        G_OBJECT_CLASS (net_device_wired_parent_class)->constructed (object);
+        G_OBJECT_CLASS (net_device_simple_parent_class)->constructed (object);
 
-        nm_device_wired_refresh_ui (device_wired);
+        nm_device_simple_refresh_ui (device_simple);
 }
 
 static void
-net_device_wired_finalize (GObject *object)
+net_device_simple_finalize (GObject *object)
 {
-        NetDeviceWired *device_wired = NET_DEVICE_WIRED (object);
-        NetDeviceWiredPrivate *priv = device_wired->priv;
+        NetDeviceSimple *device_simple = NET_DEVICE_SIMPLE (object);
+        NetDeviceSimplePrivate *priv = device_simple->priv;
 
         g_object_unref (priv->builder);
 
-        G_OBJECT_CLASS (net_device_wired_parent_class)->finalize (object);
+        G_OBJECT_CLASS (net_device_simple_parent_class)->finalize (object);
+}
+
+static char *
+device_simple_get_speed (NetDeviceSimple *simple)
+{
+        return NULL;
 }
 
 static void
-net_device_wired_class_init (NetDeviceWiredClass *klass)
+net_device_simple_class_init (NetDeviceSimpleClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         NetObjectClass *parent_class = NET_OBJECT_CLASS (klass);
+        NetDeviceSimpleClass *simple_class = NET_DEVICE_SIMPLE_CLASS (klass);
 
-        object_class->finalize = net_device_wired_finalize;
-        object_class->constructed = net_device_wired_constructed;
-        parent_class->add_to_notebook = device_wired_proxy_add_to_notebook;
-        parent_class->refresh = device_wired_refresh;
-        g_type_class_add_private (klass, sizeof (NetDeviceWiredPrivate));
+        object_class->finalize = net_device_simple_finalize;
+        object_class->constructed = net_device_simple_constructed;
+        parent_class->add_to_notebook = device_simple_proxy_add_to_notebook;
+        parent_class->refresh = device_simple_refresh;
+        simple_class->get_speed = device_simple_get_speed;
+
+        g_type_class_add_private (klass, sizeof (NetDeviceSimplePrivate));
 }
 
 static void
-net_device_wired_init (NetDeviceWired *device_wired)
+net_device_simple_init (NetDeviceSimple *device_simple)
 {
         GError *error = NULL;
         GtkWidget *widget;
 
-        device_wired->priv = NET_DEVICE_WIRED_GET_PRIVATE (device_wired);
+        device_simple->priv = NET_DEVICE_SIMPLE_GET_PRIVATE (device_simple);
 
-        device_wired->priv->builder = gtk_builder_new ();
-        gtk_builder_add_from_file (device_wired->priv->builder,
-                                   GNOMECC_UI_DIR "/network-wired.ui",
+        device_simple->priv->builder = gtk_builder_new ();
+        gtk_builder_add_from_file (device_simple->priv->builder,
+                                   GNOMECC_UI_DIR "/network-simple.ui",
                                    &error);
         if (error != NULL) {
                 g_warning ("Could not load interface file: %s", error->message);
@@ -246,14 +259,22 @@ net_device_wired_init (NetDeviceWired *device_wired)
                 return;
         }
 
-        /* setup wired combobox model */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wired->priv->builder,
+        /* setup simple combobox model */
+        widget = GTK_WIDGET (gtk_builder_get_object (device_simple->priv->builder,
                                                      "device_off_switch"));
         g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (device_off_toggled), device_wired);
+                          G_CALLBACK (device_off_toggled), device_simple);
 
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wired->priv->builder,
+        widget = GTK_WIDGET (gtk_builder_get_object (device_simple->priv->builder,
                                                      "button_options"));
         g_signal_connect (widget, "clicked",
-                          G_CALLBACK (edit_connection), device_wired);
+                          G_CALLBACK (edit_connection), device_simple);
+}
+
+char *
+net_device_simple_get_speed (NetDeviceSimple *device_simple)
+{
+        NetDeviceSimpleClass *klass = NET_DEVICE_SIMPLE_GET_CLASS (device_simple);
+
+        return klass->get_speed (device_simple);
 }
