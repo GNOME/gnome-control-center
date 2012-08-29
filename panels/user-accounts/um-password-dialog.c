@@ -646,7 +646,7 @@ um_password_dialog_set_user (UmPasswordDialog *um,
         if (user) {
                 um->user = g_object_ref (user);
 
-                pixbuf = um_user_render_icon (user, FALSE, 48);
+                pixbuf = um_user_render_icon (user, UM_ICON_STYLE_NONE, 48);
                 gtk_image_set_from_pixbuf (GTK_IMAGE (um->user_icon), pixbuf);
                 g_object_unref (pixbuf);
 

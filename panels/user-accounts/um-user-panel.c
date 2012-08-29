@@ -137,7 +137,7 @@ user_added (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
         store = GTK_LIST_STORE (model);
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
 
-        pixbuf = um_user_render_icon (user, TRUE, 48);
+        pixbuf = um_user_render_icon (user, UM_ICON_STYLE_FRAME | UM_ICON_STYLE_STATUS, 48);
         text = get_name_col_str (user);
 
         if (um_user_get_uid (user) == getuid ()) {
@@ -260,7 +260,7 @@ user_changed (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
         do {
                 gtk_tree_model_get (model, &iter, USER_COL, &current, -1);
                 if (current == user) {
-                        pixbuf = um_user_render_icon (user, TRUE, 48);
+                        pixbuf = um_user_render_icon (user, UM_ICON_STYLE_FRAME | UM_ICON_STYLE_STATUS, 48);
                         text = get_name_col_str (user);
 
                         gtk_list_store_set (GTK_LIST_STORE (model), &iter,
@@ -567,7 +567,7 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
         GtkTreeIter iter;
         gboolean show, enable;
 
-        pixbuf = um_user_render_icon (user, FALSE, 48);
+        pixbuf = um_user_render_icon (user, UM_ICON_STYLE_NONE, 48);
         image = get_widget (d, "user-icon-image");
         gtk_image_set_from_pixbuf (GTK_IMAGE (image), pixbuf);
         image = get_widget (d, "user-icon-image2");

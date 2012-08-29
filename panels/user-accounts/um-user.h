@@ -45,6 +45,12 @@ typedef enum {
         UM_PASSWORD_MODE_ENABLED
 } UmPasswordMode;
 
+typedef enum {
+        UM_ICON_STYLE_NONE   = 0,
+        UM_ICON_STYLE_FRAME  = 1 << 0,
+        UM_ICON_STYLE_STATUS = 1 << 1
+} UmIconStyle;
+
 typedef struct _UmUser UmUser;
 
 GType          um_user_get_type            (void) G_GNUC_CONST;
@@ -95,9 +101,9 @@ void           um_user_set_password        (UmUser      *user,
                                             const gchar *password_hint);
 gboolean       um_user_is_logged_in        (UmUser   *user);
 
-GdkPixbuf     *um_user_render_icon         (UmUser   *user,
-                                            gboolean  framed,
-                                            gint      icon_size);
+GdkPixbuf     *um_user_render_icon         (UmUser     *user,
+                                            UmIconStyle style,
+                                            gint        icon_size);
 gint           um_user_collate             (UmUser   *user1,
                                             UmUser   *user2);
 
