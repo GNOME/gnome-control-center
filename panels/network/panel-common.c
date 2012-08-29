@@ -87,7 +87,7 @@ panel_device_to_localized_string (NMDevice *device)
                 break;
         case NM_DEVICE_TYPE_WIFI:
                 /* TRANSLATORS: device type */
-                value = _("Wireless");
+                value = _("Wi-Fi");
                 break;
         case NM_DEVICE_TYPE_MODEM:
                 caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
