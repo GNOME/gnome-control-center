@@ -206,7 +206,7 @@ button_drawing_area_draw_event (GtkWidget  *widget,
 	GdkRGBA inner_color, outer_color;
 	cairo_pattern_t *pattern;
 
-	size = MIN (gtk_widget_get_allocated_width (widget), gtk_widget_get_allocated_height (widget));
+	size = MAX (MIN (gtk_widget_get_allocated_width (widget), gtk_widget_get_allocated_height (widget)), 1);
 	center_x = gtk_widget_get_allocated_width (widget) / 2.0;
 	center_y = gtk_widget_get_allocated_height (widget) / 2.0;
 
