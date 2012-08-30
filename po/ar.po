@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-26 05:12+0200\n"
-"PO-Revision-Date: 2012-08-26 05:14+0200\n"
+"POT-Creation-Date: 2012-08-30 22:21+0200\n"
+"PO-Revision-Date: 2012-08-30 22:21+0200\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "Language: ar\n"
@@ -148,7 +148,7 @@ msgstr "الاتصال"
 msgid "Paired"
 msgstr "مقترن"
 
-#: ../panels/bluetooth/bluetooth.ui.h:5 ../panels/wacom/cc-wacom-page.c:754
+#: ../panels/bluetooth/bluetooth.ui.h:5 ../panels/wacom/cc-wacom-page.c:756
 msgid "Type"
 msgstr "النوع"
 
@@ -160,7 +160,7 @@ msgstr "العنوان"
 msgid "Mouse and Touchpad Settings"
 msgstr "إعدادات الفأرة ولوحة اللمس"
 
-#: ../panels/bluetooth/bluetooth.ui.h:8 ../panels/universal-access/uap.ui.h:41
+#: ../panels/bluetooth/bluetooth.ui.h:8 ../panels/universal-access/uap.ui.h:38
 msgid "Sound Settings"
 msgstr "إعدادات الصوت"
 
@@ -463,7 +463,6 @@ msgstr "كامرة شبكية"
 
 #: ../panels/color/color.ui.h:3
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
-#: ../panels/universal-access/zoom-options.ui.h:30
 msgid "Color"
 msgstr "الألوان"
 
@@ -1211,7 +1210,7 @@ msgstr "أخرِج"
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
 #: ../panels/keyboard/keyboard-shortcuts.c:858
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Typing"
 msgstr "الكتابة"
 
@@ -1397,7 +1396,7 @@ msgstr "ال_سرعة:"
 
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Short"
 msgstr "قصير"
 
@@ -1413,7 +1412,7 @@ msgstr "سرعة تكرار المفاتيح"
 
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Long"
 msgstr "طويل"
 
@@ -1579,9 +1578,34 @@ msgstr "اللف بأ_صبعين"
 msgid "C_ontent sticks to fingers"
 msgstr "يلت_صق المحتوى بالإصابع"
 
+#: ../panels/mouse/gnome-mouse-test.c:117
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
-msgid "To test your settings, try to double-click on the face."
-msgstr "لاختبار إعدادات النقر المزدوج، جرّب النقر المزدوج على الوجه."
+msgid "Try clicking, double clicking, scrolling"
+msgstr "جرب النقر والنقر المزدوج والتمرير"
+
+#: ../panels/mouse/gnome-mouse-test.c:124
+msgid "Double click, primary button"
+msgstr "نقرة مزدوجة، الزر الأساسي"
+
+#: ../panels/mouse/gnome-mouse-test.c:124
+msgid "Single click, primary button"
+msgstr "نقرة مفردة، الزر الأساسي"
+
+#: ../panels/mouse/gnome-mouse-test.c:127
+msgid "Double click, middle button"
+msgstr "نقرة مزدوجة، الزر الأوسط"
+
+#: ../panels/mouse/gnome-mouse-test.c:127
+msgid "Single click, middle button"
+msgstr "نقرة مفردة، الزر الأوسط"
+
+#: ../panels/mouse/gnome-mouse-test.c:130
+msgid "Double click, secondary button"
+msgstr "نقرة مزدوجة، الزر الثانوي"
+
+#: ../panels/mouse/gnome-mouse-test.c:130
+msgid "Single click, secondary button"
+msgstr "نقرة مفردة، الزر الثانوي"
 
 #: ../panels/network/cc-network-panel.c:615
 msgid "Network proxy"
@@ -1623,7 +1647,7 @@ msgstr "أضف اتصالًا جديدا"
 
 #. Translators: network device speed
 #: ../panels/network/net-device-mobile.c:261
-#: ../panels/network/net-device-wifi.c:700
+#: ../panels/network/net-device-wifi.c:699
 #: ../panels/network/net-device-wired.c:126
 #, c-format
 msgid "%d Mb/s"
@@ -1638,13 +1662,13 @@ msgstr "اتّصل بشبكة مخفية"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/net-device-wifi.c:293
-#: ../panels/network/net-device-wifi.c:473
+#: ../panels/network/net-device-wifi.c:472
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: ../panels/network/net-device-wifi.c:297
-#: ../panels/network/net-device-wifi.c:477
+#: ../panels/network/net-device-wifi.c:476
 msgid "WPA"
 msgstr "WPA"
 
@@ -1658,53 +1682,49 @@ msgstr "WPA2"
 msgid "Enterprise"
 msgstr "شركات"
 
-#. TRANSLATORS: this no (!) WiFi security
-#. short delay
-#: ../panels/network/net-device-wifi.c:312
-#: ../panels/network/net-device-wifi.c:468
-#: ../panels/universal-access/uap.ui.h:8
-#: ../panels/universal-access/zoom-options.ui.h:32
-#: ../panels/wacom/cc-wacom-page.c:118 ../panels/wacom/cc-wacom-page.c:369
+#: ../panels/network/net-device-wifi.c:311
+#: ../panels/network/net-device-wifi.c:467
+msgctxt "Wifi security"
 msgid "None"
-msgstr "لا شيء"
+msgstr "بدون"
 
-#: ../panels/network/net-device-wifi.c:734
+#: ../panels/network/net-device-wifi.c:733
 msgctxt "Signal strength"
 msgid "None"
 msgstr "لا إشارة"
 
-#: ../panels/network/net-device-wifi.c:736
+#: ../panels/network/net-device-wifi.c:735
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "ضعيفة"
 
-#: ../panels/network/net-device-wifi.c:738
+#: ../panels/network/net-device-wifi.c:737
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "معقولة"
 
-#: ../panels/network/net-device-wifi.c:740
+#: ../panels/network/net-device-wifi.c:739
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "جيّدة"
 
-#: ../panels/network/net-device-wifi.c:742
+#: ../panels/network/net-device-wifi.c:741
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "ممتازة"
 
-#: ../panels/network/net-device-wifi.c:902
+#: ../panels/network/net-device-wifi.c:901
 #, c-format
 msgid ""
 "Network details for %s including password and any custom configuration will "
 "be lost"
 msgstr "ستُفقد تفاصيل الشبكة لـ %s بما في ذلك كلمة السر وأي إعدادات مُخصصة"
 
-#: ../panels/network/net-device-wifi.c:913
+#: ../panels/network/net-device-wifi.c:912
 msgid "Forget"
 msgstr "انس"
 
-#: ../panels/network/net-device-wifi.c:1438
+#: ../panels/network/net-device-wifi.c:1437
 msgid ""
 "If you have a connection to the Internet other than wireless, you can use it "
 "to share your internet connection with others."
@@ -1712,26 +1732,26 @@ msgstr ""
 "إذا كان لديك اتصال بالإنترنت غير الاتصال اللاسلكي فيمكنك مشاركة اتصالك "
 "بالإنترنت مع الآخرين."
 
-#: ../panels/network/net-device-wifi.c:1442
+#: ../panels/network/net-device-wifi.c:1441
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "تشغيل نقطة الاتصال اللاسلكي ستفصلك عن <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1446
+#: ../panels/network/net-device-wifi.c:1445
 msgid ""
 "It is not possible to access the internet through your wireless while the "
 "hotspot is active."
 msgstr "لا يمكن استخدام الاتصال اللاسلكي عند تفعيل نقطة الاتصال."
 
-#: ../panels/network/net-device-wifi.c:1512
+#: ../panels/network/net-device-wifi.c:1511
 msgid "Stop hotspot and disconnect any users?"
 msgstr "إيقاف نقطة الاتصال وقطع الاتصال عن أي مستخدمين؟"
 
-#: ../panels/network/net-device-wifi.c:1515
+#: ../panels/network/net-device-wifi.c:1514
 msgid "_Stop Hotspot"
 msgstr "أو_قف نقطة الاتصال"
 
-#: ../panels/network/net-device-wifi.c:1580
+#: ../panels/network/net-device-wifi.c:1579
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -1742,7 +1762,7 @@ msgstr[3] "منذ %i أيام"
 msgstr[4] "منذ %i يوما"
 msgstr[5] "منذ %i يوم"
 
-#: ../panels/network/net-device-wifi.c:1934
+#: ../panels/network/net-device-wifi.c:1933
 #: ../panels/network/network-wifi.ui.h:19
 msgid "Out of range"
 msgstr "خارج المدى"
@@ -3827,6 +3847,10 @@ msgstr "GOK"
 msgid "OnBoard"
 msgstr "OnBoard"
 
+#: ../panels/universal-access/uap.ui.h:8
+msgid "None"
+msgstr "لا شيء"
+
 #: ../panels/universal-access/uap.ui.h:10
 #, no-c-format
 msgid "75%"
@@ -3868,233 +3892,221 @@ msgid "Larger"
 msgstr "أكبر"
 
 #: ../panels/universal-access/uap.ui.h:21
-msgid "Dasher"
-msgstr "داشر"
-
-#: ../panels/universal-access/uap.ui.h:22
-msgid "Nomon"
-msgstr "Nomon"
-
-#: ../panels/universal-access/uap.ui.h:23
-msgid "Caribou"
-msgstr "كاريبو"
-
-#: ../panels/universal-access/uap.ui.h:24
 msgid "High Contrast"
 msgstr "تباين عال"
 
-#: ../panels/universal-access/uap.ui.h:25
+#: ../panels/universal-access/uap.ui.h:22
 msgid "Beep on Caps and Num Lock"
 msgstr "صفّر عند ضغط مفتاح الحروف العالية وقفل الأرقام"
 
-#: ../panels/universal-access/uap.ui.h:26
+#: ../panels/universal-access/uap.ui.h:23
 msgid "Options..."
 msgstr "الخيارات..."
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Screen Reader"
 msgstr "قارئ الشاشة"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Turn on or off:"
 msgstr "شغِّل أو عطِّل:"
 
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:26
 msgctxt "universal access, zoom"
 msgid "Zoom"
 msgstr "تكبير"
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Zoom in:"
 msgstr "قرّب:"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Zoom out:"
 msgstr "بعّد:"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Large Text"
 msgstr "نص كبير"
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Seeing"
 msgstr "النظر"
 
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Visual Alerts"
 msgstr "التنبيهات البصرية"
 
-#: ../panels/universal-access/uap.ui.h:35
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "أظهر مؤشرا بصريا عند حدوث تنبيه صوتي"
 
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Flash the window title"
 msgstr "أومض عنوان النافذة"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:34
 msgid "Flash the entire screen"
 msgstr "أومض كل الشاشة"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:35
 msgid "Closed Captioning"
 msgstr "كتابة الأصوات على الشاشة"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Display a textual description of speech and sounds"
 msgstr "اعرض وصفا نصيا للكلام والصوت"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:37
 msgid "_Test flash"
 msgstr "ا_ختبر الوميض"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Hearing"
 msgstr "السمع"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:40
 msgid "On Screen Keyboard"
 msgstr "لوحة مفاتيح على الشاشة"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:41
 msgid "Sticky Keys"
 msgstr "مفاتيح ملتصقة"
 
-#: ../panels/universal-access/uap.ui.h:45
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "تعتبر تتابعا من المفاتيح المُغيِّرة كما لو كان اختصارا"
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:43
 msgid "_Disable if two keys are pressed together"
 msgstr "_عطِّل إذا ضُغط مفتاحان في آن واحد"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Beep when a _modifer key is pressed"
 msgstr "صفّر عند ضغط مفاتيح الم_غيّرات"
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:45
 msgid "Slow Keys"
 msgstr "مفاتيح بطيئة"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "تضع تأخيرا بين ضغط المفتاح وقبوله"
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:47
 msgid "A_cceptance delay:"
 msgstr "تأخير ال_قبول:"
 
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Slow keys typing delay"
 msgstr "تأخير الكتابة للمفاتيح البطيئة"
 
 #. This string is part of a line of checkboxes: Beep when a key is [ ] pressed  [ ] accepted  [ ] rejected
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Beep when a key is"
 msgstr "صفّر إذا كان المفتاح"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:56
 msgid "pressed"
 msgstr "ضُغِطَ"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:58
 msgid "accepted"
 msgstr "قُبِلَ"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:60
 msgid "rejected"
 msgstr "رُفِضَ"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Bounce Keys"
 msgstr "مفاتيح قافزة"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Ignores fast duplicate keypresses"
 msgstr "تجاهل الضغطات المكررة السريعة للمفاتيح"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Acc_eptance delay:"
 msgstr "تأخير ال_قبول:"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Bounce keys typing delay"
 msgstr "تأخير الكتابة للمفاتيح القافزة"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Beep when a key is _rejected"
 msgstr "صفّر إذا _رُفض مفتاح"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Enable by Keyboard"
 msgstr "فعّل من لوحة المفاتيح"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "فعّل أو عطّل خصائص الإتاحة باستخدام لوحة المفاتيح"
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Mouse Keys"
 msgstr "مفاتيح الفأرة"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Control the pointer using the keypad"
 msgstr "تحكم في المؤشر باستخدام لوحة المفاتيح"
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Video Mouse"
 msgstr "فأرة الفديو"
 
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Control the pointer using the video camera."
 msgstr "تحكم في المؤشر باستخدام كمرة فديو."
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Simulated Secondary Click"
 msgstr "محاكاة النقر الثانوي"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:74
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "ابتدئ نقرة ثانوية عن طريق الاستمرار بضغط الزر الأولي"
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Secondary click delay"
 msgstr "تأخير النقر الثانوي"
 
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:76
 msgid "Hover Click"
 msgstr "النقر السلبي"
 
-#: ../panels/universal-access/uap.ui.h:80
+#: ../panels/universal-access/uap.ui.h:77
 msgid "Trigger a click when the pointer hovers"
 msgstr "ابتدئ نقرة عند حومان المؤشر"
 
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:78
 msgid "D_elay:"
 msgstr "ال_تأخير:"
 
-#: ../panels/universal-access/uap.ui.h:82
+#: ../panels/universal-access/uap.ui.h:79
 msgid "Motion _threshold:"
 msgstr "عتبة الحر_كة:"
 
 #. small threshold
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:81
 msgid "Small"
 msgstr "صغير"
 
 #. large threshold
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:83
 msgid "Large"
 msgstr "كبير"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:84
 msgid "Mouse Settings"
 msgstr "إعدادات الفأرة"
 
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:85
 msgid "Pointing and Clicking"
 msgstr "التأشير والنقر"
 
@@ -4233,26 +4245,36 @@ msgstr "السطوع:"
 msgid "Contrast:"
 msgstr "التباين:"
 
-#. long delay
-#: ../panels/universal-access/zoom-options.ui.h:34
+#: ../panels/universal-access/zoom-options.ui.h:30
+msgctxt "Zoom Grayscale"
+msgid "Color"
+msgstr "اللون"
+
+#: ../panels/universal-access/zoom-options.ui.h:31
+msgctxt "Zoom Grayscale"
+msgid "None"
+msgstr "بلا"
+
+#: ../panels/universal-access/zoom-options.ui.h:32
+msgctxt "Zoom Grayscale"
 msgid "Full"
 msgstr "كامل"
 
 #. short delay
-#: ../panels/universal-access/zoom-options.ui.h:36
+#: ../panels/universal-access/zoom-options.ui.h:34
 msgid "Low"
 msgstr "منخفض"
 
 #. long delay
-#: ../panels/universal-access/zoom-options.ui.h:38
+#: ../panels/universal-access/zoom-options.ui.h:36
 msgid "High"
 msgstr "عال"
 
-#: ../panels/universal-access/zoom-options.ui.h:39
+#: ../panels/universal-access/zoom-options.ui.h:37
 msgid "Color Effects:"
 msgstr "المؤثرات اللونية:"
 
-#: ../panels/universal-access/zoom-options.ui.h:40
+#: ../panels/universal-access/zoom-options.ui.h:38
 msgid "Color Effects"
 msgstr "المؤثرات اللونية"
 
@@ -5003,36 +5025,43 @@ msgstr "عيّن في شاشة واحدة"
 msgid "%d of %d"
 msgstr "%d من %d"
 
+#: ../panels/wacom/cc-wacom-page.c:118 ../panels/wacom/cc-wacom-page.c:371
+msgctxt "Wacom action-type"
+msgid "None"
+msgstr "لا شيء"
+
 #: ../panels/wacom/cc-wacom-page.c:119
+msgctxt "Wacom action-type"
 msgid "Send Keystroke"
 msgstr "أرسل ضغطة الزر"
 
 #: ../panels/wacom/cc-wacom-page.c:120
+msgctxt "Wacom action-type"
 msgid "Switch Monitor"
 msgstr "بدّل الشاشة"
 
-#: ../panels/wacom/cc-wacom-page.c:599
+#: ../panels/wacom/cc-wacom-page.c:601
 msgid "Up"
 msgstr "أعلى"
 
-#: ../panels/wacom/cc-wacom-page.c:599
+#: ../panels/wacom/cc-wacom-page.c:601
 msgid "Down"
 msgstr "أسفل"
 
-#: ../panels/wacom/cc-wacom-page.c:636
+#: ../panels/wacom/cc-wacom-page.c:638
 msgid "Switch Modes"
 msgstr "بدّل الأنماط"
 
-#: ../panels/wacom/cc-wacom-page.c:722
+#: ../panels/wacom/cc-wacom-page.c:724
 #: ../panels/wacom/cc-wacom-stylus-page.c:376
 msgid "Button"
 msgstr "زر"
 
-#: ../panels/wacom/cc-wacom-page.c:775
+#: ../panels/wacom/cc-wacom-page.c:777
 msgid "Action"
 msgstr "الإجراء"
 
-#: ../panels/wacom/cc-wacom-page.c:884
+#: ../panels/wacom/cc-wacom-page.c:886
 msgid "Display Mapping"
 msgstr "اعرض المخطط"
 
@@ -5284,6 +5313,18 @@ msgstr "تفضيلات;إعدادات;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "كل الإعدادات"
+
+#~ msgid "To test your settings, try to double-click on the face."
+#~ msgstr "لاختبار إعدادات النقر المزدوج، جرّب النقر المزدوج على الوجه."
+
+#~ msgid "Dasher"
+#~ msgstr "داشر"
+
+#~ msgid "Nomon"
+#~ msgstr "Nomon"
+
+#~ msgid "Caribou"
+#~ msgstr "كاريبو"
 
 #~ msgid "Co_nnector:"
 #~ msgstr "المو_صّل:"
