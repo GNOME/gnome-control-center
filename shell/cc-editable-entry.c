@@ -147,38 +147,6 @@ cc_editable_entry_get_selectable (CcEditableEntry *e)
         return e->priv->selectable;
 }
 
-static void
-update_entry_font (GtkWidget        *widget,
-                   CcEditableEntry *e)
-{
-        CcEditableEntryPrivate *priv = e->priv;
-        PangoFontDescription *desc;
-        GtkStyleContext *style;
-        gint size;
-
-        if (!priv->weight_set && !priv->scale_set)
-                return;
-
-        g_signal_handlers_block_by_func (widget, update_entry_font, e);
-
-        gtk_widget_override_font (widget, NULL);        
-
-        style = gtk_widget_get_style_context (widget);
-        desc = pango_font_description_copy 
-                (gtk_style_context_get_font (style, gtk_widget_get_state_flags (widget)));
-
-        if (priv->weight_set)
-                pango_font_description_set_weight (desc, priv->weight);
-        if (priv->scale_set) {
-                size = pango_font_description_get_size (desc);
-                pango_font_description_set_size (desc, priv->scale * size);
-        }
-        gtk_widget_override_font (widget, desc);
-
-        pango_font_description_free (desc);
-
-        g_signal_handlers_unblock_by_func (widget, update_entry_font, e);
-}
 
 static void
 update_fonts (CcEditableEntry *e)
@@ -203,10 +171,9 @@ update_fonts (CcEditableEntry *e)
 
         label = gtk_bin_get_child (GTK_BIN (priv->button));
         gtk_label_set_attributes (GTK_LABEL (label), attrs);
+        gtk_entry_set_attributes (priv->entry, attrs);
 
         pango_attr_list_unref (attrs);
-
-        update_entry_font ((GtkWidget *)priv->entry, e);
 }
 
 void
@@ -526,7 +493,6 @@ cc_editable_entry_init (CcEditableEntry *e)
         g_signal_connect (priv->entry, "activate", G_CALLBACK (entry_activated), e);
         g_signal_connect (priv->entry, "focus-out-event", G_CALLBACK (entry_focus_out), e);
         g_signal_connect (priv->entry, "key-press-event", G_CALLBACK (entry_key_press), e);
-        g_signal_connect (priv->entry, "style-updated", G_CALLBACK (update_entry_font), e);
         g_signal_connect (gtk_bin_get_child (GTK_BIN (priv->button)), "size-allocate", G_CALLBACK (update_button_padding), e);
 
         gtk_container_add (GTK_CONTAINER (e), (GtkWidget*)priv->notebook);
