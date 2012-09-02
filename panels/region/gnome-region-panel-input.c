@@ -195,6 +195,7 @@ fetch_ibus_engines_result (GObject      *object,
                            GAsyncResult *result,
                            GtkBuilder   *builder)
 {
+  gboolean show_all_sources;
   GList *list, *l;
   GError *error;
 
@@ -210,6 +211,8 @@ fetch_ibus_engines_result (GObject      *object,
       return;
     }
 
+  show_all_sources = g_settings_get_boolean (input_sources_settings, "show-all-sources");
+
   /* Maps engine ids to engine description objects */
   ibus_engines = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_object_unref);
 
@@ -218,7 +221,7 @@ fetch_ibus_engines_result (GObject      *object,
       IBusEngineDesc *engine = l->data;
       const gchar *engine_id = ibus_engine_desc_get_name (engine);
 
-      if (strv_contains (supported_ibus_engines, engine_id))
+      if (show_all_sources || strv_contains (supported_ibus_engines, engine_id))
         g_hash_table_replace (ibus_engines, (gpointer)engine_id, engine);
       else
         g_object_unref (engine);
