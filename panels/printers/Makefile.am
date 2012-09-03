@@ -22,6 +22,8 @@ ccpanels_LTLIBRARIES = libprinters.la
 
 libprinters_la_SOURCES =		\
 	printers-module.c		\
+	pp-host.c			\
+	pp-host.h			\
 	pp-cups.c			\
 	pp-cups.h			\
 	pp-utils.c			\
