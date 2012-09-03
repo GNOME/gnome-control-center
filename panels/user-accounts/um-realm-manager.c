@@ -318,9 +318,9 @@ on_provider_discover (GObject *source,
 
         } else {
                 g_simple_async_result_take_error (async, error);
-                g_simple_async_result_complete (async);
         }
 
+        g_simple_async_result_complete (async);
         g_object_unref (async);
 }
 
