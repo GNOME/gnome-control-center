@@ -36,6 +36,46 @@
 static GDBusProxy *proxy = NULL;
 
 static void
+logout_requested (GtkButton *button,
+		  gpointer   user_data)
+{
+	GError     *error;
+	GDBusProxy *sm_proxy;
+	GVariant *res;
+
+	error = NULL;
+	sm_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+						  G_DBUS_PROXY_FLAGS_NONE,
+						  NULL,
+						  "org.gnome.SessionManager",
+						  "/org/gnome/SessionManager",
+						  "org.gnome.SessionManager",
+						  NULL,
+						  &error);
+
+	if (sm_proxy == NULL) {
+		g_warning ("Failed to contact gnome session service: %s", error->message);
+		g_error_free (error);
+		return;
+	}
+
+	res = g_dbus_proxy_call_sync (sm_proxy,
+				      "Logout",
+				      g_variant_new ("(u)", 0),
+				      G_DBUS_CALL_FLAGS_NONE,
+				      -1,
+				      NULL,
+				      &error);
+	if (res == NULL) {
+		g_warning ("Logout failed: %s", error->message);
+		g_error_free (error);
+	} else
+		g_variant_unref (res);
+
+	g_object_unref (sm_proxy);
+}
+
+static void
 selection_changed (GtkTreeSelection *selection,
                    GtkBuilder       *builder)
 {
@@ -46,6 +86,7 @@ selection_changed (GtkTreeSelection *selection,
 	GVariant *variant;
 	GError *error = NULL;
 	char *object_path;
+	GtkWidget *widget;
 
 	if (gtk_tree_selection_get_selected (selection, &model, &iter) == FALSE) {
 		g_warning ("No selected languages, this shouldn't happen");
@@ -114,7 +155,10 @@ selection_changed (GtkTreeSelection *selection,
         formats_update_language (builder, locale);
         system_update_language (builder, locale);
 
-	/* And done */
+	/* And done, ask for logout */
+	//FIXME we should only do that if it wasn't the original language we started the session with
+	widget = (GtkWidget *)gtk_builder_get_object (builder, "logout_button");
+	gtk_widget_show (widget);
 
 bail:
 	if (variant != NULL)
@@ -202,13 +246,17 @@ setup_language (GtkBuilder *builder)
         widget = (GtkWidget *)gtk_builder_get_object (builder, "language-toolbar");
         context = gtk_widget_get_style_context (widget);
         gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
-	
+
 	treeview = GTK_WIDGET (gtk_builder_get_object (builder, "display_language_treeview"));
 
 	/* Connect buttons */
 	widget = (GtkWidget *)gtk_builder_get_object (builder, "language_add");
 	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (add_language), treeview);	
+			  G_CALLBACK (add_language), treeview);
+
+	widget = (GtkWidget *)gtk_builder_get_object (builder, "logout_button");
+	g_signal_connect (widget, "clicked",
+			  G_CALLBACK (logout_requested), NULL);
 
 	/* Setup accounts service */
 	proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
