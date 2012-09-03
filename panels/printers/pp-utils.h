@@ -77,19 +77,8 @@ typedef struct
 gchar      *get_tag_value (const gchar *tag_string,
                            const gchar *tag_name);
 
-PPDName    *get_ppd_name (gchar *device_id,
-                          gchar *device_make_and_model,
-                          gchar *device_uri);
-
 char       *get_dest_attr (const char *dest_name,
                            const char *attr);
-
-ipp_t      *execute_maintenance_command (const char *printer_name,
-                                         const char *command,
-                                         const char *title);
-
-int         ccGetAllowedUsers (gchar      ***allowed_users,
-                               const char   *printer_name);
 
 gchar      *get_ppd_attribute (const gchar *ppd_file_name,
                                const gchar *attribute_name);
