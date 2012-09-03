@@ -22,6 +22,7 @@
 #define __PP_UTILS_H__
 
 #include <gtk/gtk.h>
+#include <cups/cups.h>
 
 G_BEGIN_DECLS
 
