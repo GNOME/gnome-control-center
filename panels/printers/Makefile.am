@@ -22,6 +22,8 @@ ccpanels_LTLIBRARIES = libprinters.la
 
 libprinters_la_SOURCES =		\
 	printers-module.c		\
+	pp-cups.c			\
+	pp-cups.h			\
 	pp-utils.c			\
 	pp-utils.h			\
 	pp-ppd-option-widget.c		\
