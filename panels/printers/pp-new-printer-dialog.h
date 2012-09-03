@@ -25,15 +25,40 @@
 
 G_BEGIN_DECLS
 
-typedef struct _PpNewPrinterDialog PpNewPrinterDialog;
+#define PP_TYPE_NEW_PRINTER_DIALOG            (pp_new_printer_dialog_get_type ())
+#define PP_NEW_PRINTER_DIALOG(object)         (G_TYPE_CHECK_INSTANCE_CAST ((object), PP_TYPE_NEW_PRINTER_DIALOG, PpNewPrinterDialog))
+#define PP_NEW_PRINTER_DIALOG_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), PP_TYPE_NEW_PRINTER_DIALOG, PpNewPrinterDialogClass))
+#define PP_IS_NEW_PRINTER_DIALOG(object)      (G_TYPE_CHECK_INSTANCE_TYPE ((object), PP_TYPE_NEW_PRINTER_DIALOG))
+#define PP_IS_NEW_PRINTER_DIALOG_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), PP_TYPE_NEW_PRINTER_DIALOG))
+#define PP_NEW_PRINTER_DIALOG_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), PP_TYPE_NEW_PRINTER_DIALOG, PpNewPrinterDialogClass))
 
-typedef void (*UserResponseCallback) (GtkDialog *dialog, gint response_id, gpointer user_data);
+typedef struct _PpNewPrinterDialog        PpNewPrinterDialog;
+typedef struct _PpNewPrinterDialogClass   PpNewPrinterDialogClass;
+typedef struct _PpNewPrinterDialogPrivate PpNewPrinterDialogPrivate;
 
-PpNewPrinterDialog *pp_new_printer_dialog_new  (GtkWindow            *parent,
-                                                UserResponseCallback  user_callback,
-                                                gpointer              user_data);
-void                pp_new_printer_dialog_free (PpNewPrinterDialog   *dialog);
+struct _PpNewPrinterDialog
+{
+  GObject                    parent_instance;
+  PpNewPrinterDialogPrivate *priv;
+};
+
+struct _PpNewPrinterDialogClass
+{
+  GObjectClass parent_class;
+
+  void (*pre_response)  (PpNewPrinterDialog *dialog,
+                         const gchar        *device_name,
+                         const gchar        *device_location,
+                         const gchar        *device_make_and_model,
+                         gboolean            is_network_device);
+
+  void (*response)      (PpNewPrinterDialog *dialog,
+                         gint                response_id);
+};
+
+GType               pp_new_printer_dialog_get_type (void) G_GNUC_CONST;
+PpNewPrinterDialog *pp_new_printer_dialog_new      (GtkWindow *parent);
 
 G_END_DECLS
 
-#endif
+#endif /* __PP_NEW_PRINTER_DIALOG_H__ */
