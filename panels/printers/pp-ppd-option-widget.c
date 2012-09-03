@@ -619,6 +619,8 @@ update_widget (PpPPDOptionWidget *widget)
                         widget);
 
   printer_get_ppd_async (priv->printer_name,
+                         NULL,
+                         0,
                          printer_get_ppd_cb,
                          widget);
 }

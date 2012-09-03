@@ -4305,6 +4305,8 @@ get_standard_manufacturers_name (gchar *name)
 typedef struct
 {
   gchar        *printer_name;
+  gchar        *host_name;
+  gint          port;
   gchar        *result;
   PGPCallback   callback;
   gpointer      user_data;
@@ -4330,6 +4332,7 @@ printer_get_ppd_data_free (gpointer user_data)
     g_main_context_unref (data->context);
   g_free (data->result);
   g_free (data->printer_name);
+  g_free (data->host_name);
   g_free (data);
 }
 
@@ -4353,7 +4356,21 @@ printer_get_ppd_func (gpointer user_data)
 {
   PGPData *data = (PGPData *) user_data;
 
-  data->result = g_strdup (cupsGetPPD (data->printer_name));
+  if (data->host_name)
+    {
+      http_t *http;
+
+      http = httpConnect (data->host_name, data->port);
+      if (http)
+        {
+          data->result = g_strdup (cupsGetPPD2 (http, data->printer_name));
+          httpClose (http);
+        }
+    }
+  else
+    {
+      data->result = g_strdup (cupsGetPPD (data->printer_name));
+    }
 
   printer_get_ppd_cb (data);
 
@@ -4362,6 +4379,8 @@ printer_get_ppd_func (gpointer user_data)
 
 void
 printer_get_ppd_async (const gchar *printer_name,
+                       const gchar *host_name,
+                       gint         port,
                        PGPCallback  callback,
                        gpointer     user_data)
 {
@@ -4371,6 +4390,8 @@ printer_get_ppd_async (const gchar *printer_name,
 
   data = g_new0 (PGPData, 1);
   data->printer_name = g_strdup (printer_name);
+  data->host_name = g_strdup (host_name);
+  data->port = port;
   data->callback = callback;
   data->user_data = user_data;
   data->context = g_main_context_ref_thread_default ();

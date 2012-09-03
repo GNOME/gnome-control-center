@@ -797,6 +797,8 @@ populate_options (PpOptionsDialog *dialog)
   gtk_widget_show (widget);
 
   printer_get_ppd_async (dialog->printer_name,
+                         NULL,
+                         0,
                          printer_get_ppd_cb,
                          dialog);
 

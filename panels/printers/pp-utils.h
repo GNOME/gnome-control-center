@@ -227,6 +227,8 @@ typedef void (*PGPCallback) (const gchar *ppd_filename,
                              gpointer     user_data);
 
 void        printer_get_ppd_async (const gchar *printer_name,
+                                   const gchar *host_name,
+                                   gint         port,
                                    PGPCallback  callback,
                                    gpointer     user_data);
 
