@@ -29,12 +29,6 @@
 
 #include "pp-utils.h"
 
-#define MECHANISM_BUS "org.opensuse.CupsPkHelper.Mechanism"
-
-#define SCP_BUS   "org.fedoraproject.Config.Printing"
-#define SCP_PATH  "/org/fedoraproject/Config/Printing"
-#define SCP_IFACE "org.fedoraproject.Config.Printing"
-
 #define DBUS_TIMEOUT 120000
 
 #if (CUPS_VERSION_MAJOR > 1) || (CUPS_VERSION_MINOR > 5)

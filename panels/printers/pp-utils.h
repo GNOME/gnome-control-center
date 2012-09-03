@@ -24,6 +24,14 @@
 #include <gtk/gtk.h>
 #include <cups/cups.h>
 
+#define ALLOWED_CHARACTERS "abcdefghijklmnopqrtsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
+
+#define MECHANISM_BUS "org.opensuse.CupsPkHelper.Mechanism"
+
+#define SCP_BUS   "org.fedoraproject.Config.Printing"
+#define SCP_PATH  "/org/fedoraproject/Config/Printing"
+#define SCP_IFACE "org.fedoraproject.Config.Printing"
+
 G_BEGIN_DECLS
 
 /*

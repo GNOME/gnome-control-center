@@ -42,8 +42,6 @@
 #include <gdk/gdkx.h>
 #endif
 
-#define MECHANISM_BUS "org.opensuse.CupsPkHelper.Mechanism"
-
 #define PACKAGE_KIT_BUS "org.freedesktop.PackageKit"
 #define PACKAGE_KIT_PATH "/org/freedesktop/PackageKit"
 #define PACKAGE_KIT_MODIFY_IFACE "org.freedesktop.PackageKit.Modify"
@@ -52,12 +50,6 @@
 #define FIREWALLD_BUS "org.fedoraproject.FirewallD"
 #define FIREWALLD_PATH "/org/fedoraproject/FirewallD"
 #define FIREWALLD_IFACE "org.fedoraproject.FirewallD"
-
-#define SCP_BUS   "org.fedoraproject.Config.Printing"
-#define SCP_PATH  "/org/fedoraproject/Config/Printing"
-#define SCP_IFACE "org.fedoraproject.Config.Printing"
-
-#define ALLOWED_CHARACTERS "abcdefghijklmnopqrtsuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_"
 
 #if (CUPS_VERSION_MAJOR > 1) || (CUPS_VERSION_MINOR > 5)
 #define HAVE_CUPS_1_6 1
