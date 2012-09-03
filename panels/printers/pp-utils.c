@@ -4589,6 +4589,292 @@ printer_add_option_async (const gchar   *printer_name,
 
 typedef struct
 {
+  GCancellable *cancellable;
+  GCDCallback   callback;
+  gpointer      user_data;
+  GList        *backend_list;
+} GCDData;
+
+static gint
+get_suffix_index (gchar *string)
+{
+  gchar *number;
+  gchar *endptr;
+  gint   index = -1;
+
+  number = g_strrstr (string, ":");
+  if (number)
+    {
+      number++;
+      index = g_ascii_strtoll (number, &endptr, 10);
+      if (index == 0 && endptr == number)
+        index = -1;
+    }
+
+  return index;
+}
+
+static void
+get_cups_devices_async_dbus_cb (GObject      *source_object,
+                                GAsyncResult *res,
+                                gpointer      user_data)
+
+{
+  PpPrintDevice **devices = NULL;
+  GVariant       *output;
+  GCDData        *data = (GCDData *) user_data;
+  GError         *error = NULL;
+  GList          *result = NULL;
+  gint            num_of_devices = 0;
+
+  output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
+                                          res,
+                                          &error);
+
+  if (output)
+    {
+      const gchar *ret_error;
+      GVariant    *devices_variant = NULL;
+
+      g_variant_get (output, "(&s@a{ss})",
+                     &ret_error,
+                     &devices_variant);
+
+      if (ret_error[0] != '\0')
+        {
+          g_warning ("%s", ret_error);
+        }
+
+      if (devices_variant)
+        {
+          GVariantIter *iter;
+          GVariant     *item;
+          gchar        *key;
+          gchar        *value;
+          gint          index = -1, max_index = -1, i;
+
+          g_variant_get (devices_variant, "a{ss}", &iter);
+          while ((item = g_variant_iter_next_value (iter)))
+            {
+              g_variant_get (item, "{ss}", &key, &value);
+
+              index = get_suffix_index (key);
+              if (index > max_index)
+                max_index = index;
+
+              g_free (key);
+              g_free (value);
+              g_variant_unref (item);
+            }
+
+          if (max_index >= 0)
+            {
+              num_of_devices = max_index + 1;
+              devices = g_new0 (PpPrintDevice *, num_of_devices);
+
+              g_variant_get (devices_variant, "a{ss}", &iter);
+              while ((item = g_variant_iter_next_value (iter)))
+                {
+                  g_variant_get (item, "{ss}", &key, &value);
+
+                  index = get_suffix_index (key);
+                  if (index >= 0)
+                    {
+                      if (!devices[index])
+                        devices[index] = g_new0 (PpPrintDevice, 1);
+
+                      if (g_str_has_prefix (key, "device-class"))
+                        devices[index]->device_class = g_strdup (value);
+                      else if (g_str_has_prefix (key, "device-id"))
+                        devices[index]->device_id = g_strdup (value);
+                      else if (g_str_has_prefix (key, "device-info"))
+                        devices[index]->device_info = g_strdup (value);
+                      else if (g_str_has_prefix (key, "device-make-and-model"))
+                        {
+                          devices[index]->device_make_and_model = g_strdup (value);
+                          devices[index]->device_name = g_strdup (value);
+                        }
+                      else if (g_str_has_prefix (key, "device-uri"))
+                        devices[index]->device_uri = g_strdup (value);
+                      else if (g_str_has_prefix (key, "device-location"))
+                        devices[index]->device_location = g_strdup (value);
+
+                      devices[index]->acquisition_method = ACQUISITION_METHOD_DEFAULT_CUPS_SERVER;
+                    }
+
+                  g_free (key);
+                  g_free (value);
+                  g_variant_unref (item);
+                }
+
+              for (i = 0; i < num_of_devices; i++)
+                result = g_list_append (result, devices[i]);
+
+              g_free (devices);
+            }
+
+          g_variant_unref (devices_variant);
+        }
+
+      g_variant_unref (output);
+    }
+  else
+    {
+      if (error->domain != G_IO_ERROR ||
+          error->code != G_IO_ERROR_CANCELLED)
+        g_warning ("%s", error->message);
+      g_error_free (error);
+
+      data->callback (result,
+                      TRUE,
+                      g_cancellable_is_cancelled (data->cancellable),
+                      data->user_data);
+
+      g_list_free_full (data->backend_list, g_free);
+      data->backend_list = NULL;
+      g_object_unref (source_object);
+      if (data->cancellable)
+        g_object_unref (data->cancellable);
+      g_free (data);
+
+      return;
+    }
+
+  if (data->backend_list)
+    {
+      if (!g_cancellable_is_cancelled (data->cancellable))
+        {
+          GVariantBuilder include_scheme_builder;
+
+          data->callback (result,
+                          FALSE,
+                          FALSE,
+                          data->user_data);
+
+          g_variant_builder_init (&include_scheme_builder, G_VARIANT_TYPE ("as"));
+          g_variant_builder_add (&include_scheme_builder, "s", data->backend_list->data);
+
+          g_free (data->backend_list->data);
+          data->backend_list = g_list_remove_link (data->backend_list, data->backend_list);
+
+          g_dbus_connection_call (G_DBUS_CONNECTION (g_object_ref (source_object)),
+                                  MECHANISM_BUS,
+                                  "/",
+                                  MECHANISM_BUS,
+                                  "DevicesGet",
+                                  g_variant_new ("(iiasas)",
+                                                 0,
+                                                 0,
+                                                 &include_scheme_builder,
+                                                 NULL),
+                                  G_VARIANT_TYPE ("(sa{ss})"),
+                                  G_DBUS_CALL_FLAGS_NONE,
+                                  DBUS_TIMEOUT,
+                                  data->cancellable,
+                                  get_cups_devices_async_dbus_cb,
+                                  user_data);
+          return;
+        }
+      else
+        {
+          data->callback (result,
+                          TRUE,
+                          TRUE,
+                          data->user_data);
+
+          g_list_free_full (data->backend_list, g_free);
+          data->backend_list = NULL;
+        }
+    }
+  else
+    {
+      data->callback (result,
+                      TRUE,
+                      g_cancellable_is_cancelled (data->cancellable),
+                      data->user_data);
+    }
+
+  g_object_unref (source_object);
+  if (data->cancellable)
+    g_object_unref (data->cancellable);
+  g_free (data);
+}
+
+void
+get_cups_devices_async (GCancellable *cancellable,
+                        GCDCallback   callback,
+                        gpointer      user_data)
+{
+  GDBusConnection *bus;
+  GVariantBuilder  include_scheme_builder;
+  GCDData         *data;
+  GError          *error = NULL;
+  gint             i;
+  const gchar     *backends[] =
+    {"hpfax", "ncp", "beh", "bluetooth", "snmp",
+     "dnssd", "hp", "ipp", "lpd", "parallel",
+     "serial", "socket", "usb", NULL};
+
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!bus)
+   {
+     g_warning ("Failed to get system bus: %s", error->message);
+     g_error_free (error);
+     callback (NULL, TRUE, FALSE, user_data);
+     return;
+   }
+
+  data = g_new0 (GCDData, 1);
+  if (cancellable)
+    data->cancellable = g_object_ref (cancellable);
+  data->callback = callback;
+  data->user_data = user_data;
+  for (i = 0; backends[i]; i++)
+    data->backend_list = g_list_prepend (data->backend_list, g_strdup (backends[i]));
+
+  g_variant_builder_init (&include_scheme_builder, G_VARIANT_TYPE ("as"));
+  g_variant_builder_add (&include_scheme_builder, "s", data->backend_list->data);
+
+  g_free (data->backend_list->data);
+  data->backend_list = g_list_remove_link (data->backend_list, data->backend_list);
+
+  g_dbus_connection_call (bus,
+                          MECHANISM_BUS,
+                          "/",
+                          MECHANISM_BUS,
+                          "DevicesGet",
+                          g_variant_new ("(iiasas)",
+                                         0,
+                                         0,
+                                         &include_scheme_builder,
+                                         NULL),
+                          G_VARIANT_TYPE ("(sa{ss})"),
+                          G_DBUS_CALL_FLAGS_NONE,
+                          DBUS_TIMEOUT,
+                          cancellable,
+                          get_cups_devices_async_dbus_cb,
+                          data);
+}
+
+void
+pp_print_device_free (PpPrintDevice *device)
+{
+  if (device)
+    {
+      g_free (device->device_class);
+      g_free (device->device_id);
+      g_free (device->device_info);
+      g_free (device->device_make_and_model);
+      g_free (device->device_uri);
+      g_free (device->device_location);
+      g_free (device->device_name);
+      g_free (device->device_ppd);
+      g_free (device);
+    }
+}
+
+typedef struct
+{
   gchar        *printer_name;
   gboolean      my_jobs;
   gint          which_jobs;
