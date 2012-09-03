@@ -97,8 +97,10 @@ on_object_added (GDBusObjectManager *manager,
                  GDBusObject *object,
                  gpointer user_data)
 {
-        if (is_realm_with_kerberos_and_membership (object))
+        if (is_realm_with_kerberos_and_membership (object)) {
+                g_debug ("Saw realm: %s", g_dbus_object_get_object_path (object));
                 g_signal_emit (user_data, signals[REALM_ADDED], 0, object);
+        }
 }
 
 static void
@@ -195,6 +197,8 @@ um_realm_manager_new (GCancellable *cancellable,
                       GAsyncReadyCallback callback,
                       gpointer user_data)
 {
+        g_debug ("Connecting to realmd...");
+
         g_async_initable_new_async (UM_TYPE_REALM_MANAGER, G_PRIORITY_DEFAULT,
                                     cancellable, callback, user_data,
                                     "flags", G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE,
@@ -225,6 +229,8 @@ um_realm_manager_new_finish (GAsyncResult *result,
 
         self = UM_REALM_MANAGER (ret);
         connection = g_dbus_object_manager_client_get_connection (G_DBUS_OBJECT_MANAGER_CLIENT (self));
+
+        g_debug ("Connected to realmd, checking version...");
 
         /*
          * TODO: Remove this version checking. This is temporary code, so
@@ -262,6 +268,7 @@ um_realm_manager_new_finish (GAsyncResult *result,
                                                   NULL);
         self->diagnostics_sig = sig;
 
+        g_debug ("Created realm manager");
         return self;
 }
 
@@ -299,10 +306,12 @@ on_provider_discover (GObject *source,
         if (error == NULL) {
                 for (i = 0; realms[i]; i++) {
                         object = g_dbus_object_manager_get_object (discover->manager, realms[i]);
-                        if (object == NULL)
+                        if (object == NULL) {
                                 g_warning ("Realm is not in object manager: %s", realms[i]);
-                        else
+                        } else {
+                                g_debug ("Discovered realm: %s", realms[i]);
                                 discover->realms = g_list_prepend (discover->realms, object);
+                        }
                 }
 
         } else {
@@ -327,6 +336,8 @@ um_realm_manager_discover (UmRealmManager *self,
         g_return_if_fail (UM_IS_REALM_MANAGER (self));
         g_return_if_fail (input != NULL);
         g_return_if_fail (cancellable == NULL || G_IS_CANCELLABLE (cancellable));
+
+        g_debug ("Discovering realms for: %s", input);
 
         res = g_simple_async_result_new (G_OBJECT (self), callback, user_data,
                                          um_realm_manager_discover);
@@ -474,6 +485,9 @@ on_realm_join_complete (GObject *source,
                         gpointer user_data)
 {
 	GSimpleAsyncResult *async = G_SIMPLE_ASYNC_RESULT (user_data);
+
+	g_debug ("Completed Join() method call");
+
 	g_simple_async_result_set_op_res_gpointer (async, g_object_ref (result), g_object_unref);
 	g_simple_async_result_complete_in_idle (async);
 	g_object_unref (async);
@@ -501,6 +515,7 @@ realm_join_as_owner (UmRealmObject *realm,
 
         type = find_supported_credentials (membership, owner);
         if (type == NULL) {
+                g_debug ("Couldn't find supported credential type for owner: %s", owner);
                 g_object_unref (membership);
                 return FALSE;
         }
@@ -509,12 +524,14 @@ realm_join_as_owner (UmRealmObject *realm,
                                            realm_join_as_owner);
 
         if (g_str_equal (type, "ccache")) {
+                g_debug ("Using a kerberos credential cache to join the realm");
                 contents = g_variant_new_from_data (G_VARIANT_TYPE ("ay"),
                                                     g_bytes_get_data (credentials, NULL),
                                                     g_bytes_get_size (credentials),
                                                     TRUE, (GDestroyNotify)g_bytes_unref, credentials);
 
         } else if (g_str_equal (type, "password")) {
+                g_debug ("Using a user/password to join the realm");
                 contents = g_variant_new ("(ss)", login, password);
 
         } else {
@@ -523,6 +540,8 @@ realm_join_as_owner (UmRealmObject *realm,
 
         creds = g_variant_new ("(ssv)", type, owner, contents);
         options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
+
+        g_debug ("Calling the Join() method with %s credentials", owner);
 
         um_realm_kerberos_membership_call_join (membership, creds, options,
                                                 cancellable, on_realm_join_complete,
@@ -599,6 +618,7 @@ um_realm_join_finish (UmRealmObject *realm,
 
         dbus_error = g_dbus_error_get_remote_error (call_error);
         if (dbus_error == NULL) {
+                g_debug ("Join() failed because of %s", call_error->message);
                 g_propagate_error (error, call_error);
                 return FALSE;
         }
@@ -606,10 +626,12 @@ um_realm_join_finish (UmRealmObject *realm,
         g_dbus_error_strip_remote_error (call_error);
 
         if (g_str_equal (dbus_error, "org.freedesktop.realmd.Error.AuthenticationFailed")) {
+                g_debug ("Join() failed because of invalid/insufficient credentials");
                 g_set_error (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_LOGIN,
                              "%s", call_error->message);
                 g_error_free (call_error);
         } else {
+                g_debug ("Join() failed because of %s", call_error->message);
                 g_propagate_error (error, call_error);
         }
 
@@ -653,10 +675,16 @@ login_perform_kinit (krb5_context k5,
 
         name = g_strdup_printf ("%s@%s", login, realm);
         code = krb5_parse_name (k5, name, &principal);
-        g_free (name);
 
-        if (code != 0)
+        if (code != 0) {
+                g_debug ("Couldn't parse principal name: %s: %s",
+                         name, krb5_get_error_message (k5, code));
+                g_free (name);
                 return code;
+        }
+
+        g_debug ("Using principal name to kinit: %s", name);
+        g_free (name);
 
         if (filename == NULL)
                 code = krb5_cc_default (k5, &ccache);
@@ -665,6 +693,9 @@ login_perform_kinit (krb5_context k5,
 
         if (code != 0) {
                 krb5_free_principal (k5, principal);
+                g_debug ("Couldn't open credential cache: %s: %s",
+                         filename ? filename : "<default>",
+                         krb5_get_error_message (k5, code));
                 return code;
         }
 
@@ -682,8 +713,12 @@ login_perform_kinit (krb5_context k5,
         krb5_cc_close (k5, ccache);
         krb5_free_principal (k5, principal);
 
-        if (code == 0)
+        if (code == 0) {
+                g_debug ("kinit succeeded");
                 krb5_free_cred_contents (k5, &creds);
+        } else {
+                g_debug ("kinit failed: %s", krb5_get_error_message (k5, code));
+        }
 
         return code;
 }
@@ -726,8 +761,10 @@ kinit_thread_func (GSimpleAsyncResult *async,
                         g_file_get_contents (filename, &contents, &length, &error);
                         if (error == NULL) {
                                 login->credentials = g_bytes_new_take (contents, length);
+                                g_debug ("Read in credential cache: %s", filename);
                         } else {
-                                g_warning ("Couldn't read credential cache: %s", error->message);
+                                g_warning ("Couldn't read credential cache: %s: %s",
+                                           filename, error->message);
                                 g_error_free (error);
                         }
                 }
@@ -755,6 +792,7 @@ kinit_thread_func (GSimpleAsyncResult *async,
 
         if (filename) {
                 g_unlink (filename);
+                g_debug ("Deleted credential cache: %s", filename);
                 g_free (filename);
         }
 
