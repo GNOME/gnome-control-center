@@ -29,7 +29,8 @@
 
 #include "pp-utils.h"
 
-#define DBUS_TIMEOUT 120000
+#define DBUS_TIMEOUT      120000
+#define DBUS_TIMEOUT_LONG 600000
 
 #if (CUPS_VERSION_MAJOR > 1) || (CUPS_VERSION_MINOR > 5)
 #define HAVE_CUPS_1_6 1
@@ -3457,7 +3458,7 @@ get_device_attributes_cb (gchar    *device_id,
                                          device_uri),
                           G_VARIANT_TYPE ("(a(ss))"),
                           G_DBUS_CALL_FLAGS_NONE,
-                          DBUS_TIMEOUT,
+                          DBUS_TIMEOUT_LONG,
                           data->cancellable,
                           get_ppd_names_async_dbus_scb,
                           data);
@@ -3751,7 +3752,6 @@ get_device_attributes_async (const gchar  *printer_name,
   if (!printer_name)
    {
      callback (NULL, NULL, NULL, user_data);
-
      return;
    }
 
@@ -4605,7 +4605,7 @@ printer_add_option_async (const gchar   *printer_name,
                                          &array_builder),
                           G_VARIANT_TYPE ("(s)"),
                           G_DBUS_CALL_FLAGS_NONE,
-                          -1,
+                          DBUS_TIMEOUT,
                           cancellable,
                           printer_add_option_async_dbus_cb,
                           data);
