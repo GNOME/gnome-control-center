@@ -613,12 +613,14 @@ rebuild_mirror_screens (CcDisplayPanel *self)
 static char *
 mirror_monitor_name (void)
 {
+  /* Keep this string in sync with gnome-desktop/libgnome-desktop/gnome-rr-labeler.c */
+
   /* Translators:  this is the feature where what you see on your laptop's
-   * screen is the same as your external monitor.  Here, "Mirror" is being
-   * used as an adjective, not as a verb.  For example, the Spanish
-   * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
+   * screen is the same as your external projector.  Here, "Mirrored" is being
+   * used as an adjective.  For example, the Spanish translation could be
+   * "Pantallas en Espejo".
    */
-  return g_strdup (_("Mirror Displays"));
+  return g_strdup (_("Mirrored Displays"));
 }
 
 static void
