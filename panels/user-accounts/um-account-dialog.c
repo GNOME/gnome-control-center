@@ -126,6 +126,8 @@ show_error_dialog (UmAccountDialog *self,
 static void
 begin_action (UmAccountDialog *self)
 {
+        g_debug ("Beginning action, disabling dialog controls");
+
         gtk_widget_set_sensitive (self->container_widget, FALSE);
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
 
@@ -136,6 +138,8 @@ begin_action (UmAccountDialog *self)
 static void
 finish_action (UmAccountDialog *self)
 {
+        g_debug ("Completed action, enabling dialog controls");
+
         gtk_widget_set_sensitive (self->container_widget, TRUE);
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, TRUE);
 
@@ -171,11 +175,13 @@ create_user_done (UmUserManager   *manager,
 
         error = NULL;
         if (!um_user_manager_create_user_finish (manager, res, &user, &error)) {
+                g_debug ("Failed to create user: %s", error->message);
                 if (!g_error_matches (error, UM_USER_MANAGER_ERROR, UM_USER_MANAGER_ERROR_PERMISSION_DENIED))
                        show_error_dialog (self, _("Failed to add account"), error);
                 g_error_free (error);
                 gtk_widget_grab_focus (self->local_name);
         } else {
+                g_debug ("Created user: %s", um_user_get_user_name (user));
                 complete_dialog (self, user);
         }
 }
@@ -197,6 +203,8 @@ local_create_user (UmAccountDialog *self)
         model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->local_account_type));
         gtk_combo_box_get_active_iter (GTK_COMBO_BOX (self->local_account_type), &iter);
         gtk_tree_model_get (model, &iter, 1, &account_type, -1);
+
+        g_debug ("Creating local user: %s", username);
 
         manager = um_user_manager_ref_default ();
         um_user_manager_create_user (manager,
@@ -321,6 +329,9 @@ enterprise_add_realm (UmAccountDialog *self,
         GtkTreeIter iter;
         UmRealmCommon *common;
 
+        g_debug ("Adding new realm to drop down: %s",
+                 g_dbus_object_get_object_path (G_DBUS_OBJECT (realm)));
+
         common = um_realm_object_get_common (realm);
 
         gtk_list_store_append (self->enterprise_realms, &iter);
@@ -359,6 +370,7 @@ on_register_user (GObject *source,
 
         /* This is where we're finally done */
         if (error == NULL) {
+                g_debug ("Successfully cached remote user: %s", um_user_get_user_name (user));
                 finish_action (self);
                 complete_dialog (self, user);
 
@@ -394,6 +406,8 @@ on_permit_user_login (GObject *source,
                 login = um_realm_calculate_login (common, gtk_entry_get_text (self->enterprise_login));
                 g_return_if_fail (login != NULL);
 
+                g_debug ("Caching remote user: %s", login);
+
                 um_user_manager_cache_user (manager, login, self->cancellable,
                                             on_register_user, g_object_ref (self),
                                             g_object_unref);
@@ -428,6 +442,7 @@ enterprise_permit_user_login (UmAccountDialog *self)
         add[1] = NULL;
         remove[0] = NULL;
 
+        g_debug ("Permitting login for: %s", login);
         options = g_variant_new_array (G_VARIANT_TYPE ("{sv}"), NULL, 0);
 
         um_realm_common_call_change_login_policy (common, "",
@@ -452,6 +467,8 @@ on_join_response (GtkDialog *dialog,
                 finish_action (self);
                 return;
         }
+
+        g_debug ("Logging in as admin user: %s", gtk_entry_get_text (self->join_name));
 
         /* Prompted for some admin credentials, try to use them to log in */
         um_realm_login (self->selected_realm,
@@ -485,19 +502,23 @@ join_show_prompt (UmAccountDialog *self,
         if (!self->join_prompted) {
                 name = um_realm_kerberos_membership_get_suggested_administrator (membership);
                 if (name && !g_str_equal (name, "")) {
+                        g_debug ("Suggesting admin user: %s", name);
                         gtk_entry_set_text (self->join_name, name);
                 } else {
                         gtk_widget_grab_focus (GTK_WIDGET (self->join_name));
                 }
 
         } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD)) {
+                g_debug ("Bad admin password: %s", error->message);
                 set_entry_validation_error (self->join_password, error->message);
 
         } else {
+                g_debug ("Admin login failure: %s", error->message);
                 g_dbus_error_strip_remote_error (error);
                 set_entry_validation_error (self->join_name, error->message);
         }
 
+        g_debug ("Showing admin password dialog");
         gtk_window_set_transient_for (GTK_WINDOW (self->join_dialog), GTK_WINDOW (self));
         gtk_window_set_modal (GTK_WINDOW (self->join_dialog), TRUE);
         gtk_window_present (GTK_WINDOW (self->join_dialog));
@@ -570,11 +591,13 @@ on_realm_joined (GObject *source,
 
         /* Yay, joined the domain, register the user locally */
         if (error == NULL) {
+                g_debug ("Joining realm completed successfully");
                 enterprise_permit_user_login (self);
 
         /* Credential failure while joining domain, prompt for admin creds */
         } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_LOGIN) ||
                    g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD)) {
+                g_debug ("Joining realm failed due to credentials");
                 join_show_prompt (self, error);
 
         /* Other failure */
@@ -602,6 +625,7 @@ on_realm_login (GObject *source,
 
                 /* Already joined to the domain, just register this user */
                 if (um_realm_is_configured (self->selected_realm)) {
+                        g_debug ("Already joined to this realm");
                         enterprise_permit_user_login (self);
 
                 /* Join the domain, try using the user's creds */
@@ -613,6 +637,7 @@ on_realm_login (GObject *source,
                                                    g_object_ref (self))) {
 
                         /* If we can't do user auth, try to authenticate as admin */
+                        g_debug ("Cannot join with user credentials");
                         join_show_prompt (self, NULL);
                 }
 
@@ -620,11 +645,13 @@ on_realm_login (GObject *source,
 
         /* A problem with the user's login name or password */
         } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_LOGIN)) {
+                g_debug ("Problem with the user's login: %s", error->message);
                 set_entry_validation_error (self->enterprise_login, error->message);
                 finish_action (self);
                 gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_login));
 
         } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD)) {
+                g_debug ("Problem with the user's password: %s", error->message);
                 set_entry_validation_error (self->enterprise_password, error->message);
                 finish_action (self);
                 gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_password));
