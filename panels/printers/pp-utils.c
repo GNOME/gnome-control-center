@@ -2532,7 +2532,7 @@ printer_get_hostname (cups_ptype_t  printer_type,
 }
 
 /* Returns default media size for current locale */
-static const gchar *
+const gchar *
 get_paper_size_from_locale ()
 {
   if (g_str_equal (gtk_paper_size_get_default (), GTK_PAPER_NAME_LETTER))

@@ -289,6 +289,8 @@ typedef struct{
 
 void        pp_print_device_free (PpPrintDevice *device);
 
+const gchar *get_paper_size_from_locale (void);
+
 typedef void (*GCDCallback) (GList          *devices,
                              gboolean        finished,
                              gboolean        cancelled,
