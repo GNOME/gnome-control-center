@@ -3188,7 +3188,10 @@ get_ppds_attribute_async (gchar       **ppds_names,
   GError  *error = NULL;
 
   if (!ppds_names || !attribute_name)
-    callback (NULL, user_data);
+    {
+      callback (NULL, user_data);
+      return;
+    }
 
   data = g_new0 (GPAData, 1);
   data->ppds_names = g_strdupv (ppds_names);
