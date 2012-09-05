@@ -25,6 +25,10 @@
 
 #include "pp-utils.h"
 
+#if (CUPS_VERSION_MAJOR > 1) || (CUPS_VERSION_MINOR > 5)
+#define HAVE_CUPS_1_6 1
+#endif
+
 #ifndef HAVE_CUPS_1_6
 #define ippGetCount(attr)     attr->num_values
 #define ippGetValueTag(attr)  attr->value_tag
