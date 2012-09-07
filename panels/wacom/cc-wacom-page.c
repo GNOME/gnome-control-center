@@ -117,7 +117,8 @@ static struct {
 } action_table[] = {
        { GSD_WACOM_ACTION_TYPE_NONE,           NC_("Wacom action-type", "None")                },
        { GSD_WACOM_ACTION_TYPE_CUSTOM,         NC_("Wacom action-type", "Send Keystroke")      },
-       { GSD_WACOM_ACTION_TYPE_SWITCH_MONITOR, NC_("Wacom action-type", "Switch Monitor")      }
+       { GSD_WACOM_ACTION_TYPE_SWITCH_MONITOR, NC_("Wacom action-type", "Switch Monitor")      },
+       { GSD_WACOM_ACTION_TYPE_HELP,           NC_("Wacom action-type", "Show On-Screen Help") }
 };
 
 #define WACOM_C(x) g_dpgettext2(NULL, "Wacom action-type", x)
@@ -736,6 +737,11 @@ setup_mapping_treeview (CcWacomPage *page)
 		/* Screen tablets cannot switch monitors (as the monitor is the tablet) */
 		if (action_table[i].action_type == GSD_WACOM_ACTION_TYPE_SWITCH_MONITOR &&
 		    gsd_wacom_device_is_screen_tablet (priv->stylus))
+			continue;
+
+		/* Do not list on-screen help if libwacom do no provide a layout */
+		if (action_table[i].action_type == GSD_WACOM_ACTION_TYPE_HELP &&
+		    gsd_wacom_device_get_layout_path (priv->stylus) == NULL)
 			continue;
 
 		gtk_list_store_append (priv->action_store, &iter);
