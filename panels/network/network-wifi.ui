@@ -119,8 +119,6 @@
   </object>
   <object class="GtkListStore" id="liststore_network">
     <columns>
-      <!-- column-name gchararray -->
-      <column type="gchararray"/>
       <!-- column-name ap-id -->
       <column type="gchararray"/>
       <!-- column-name connection-id -->
@@ -128,16 +126,20 @@
       <!-- column-name title -->
       <column type="gchararray"/>
       <!-- column-name sortable -->
-      <column type="guint"/>
+      <column type="gchararray"/>
       <!-- column-name strength -->
       <column type="guint"/>
       <!-- column-name mode -->
       <column type="guint"/>
       <!-- column-name security -->
-      <column type="gboolean"/>
+      <column type="guint"/>
       <!-- column-name active -->
       <column type="gboolean"/>
       <!-- column-name ap-in-range -->
+      <column type="gboolean"/>
+      <!-- column-name ap-out-of-range -->
+      <column type="gboolean"/>
+      <!-- column-name is-saved -->
       <column type="gboolean"/>
     </columns>
   </object>
