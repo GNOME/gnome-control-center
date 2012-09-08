@@ -1,36 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkListStore" id="liststore_network">
-    <columns>
-      <!-- column-name id -->
-      <column type="gchararray"/>
-      <!-- column-name title -->
-      <column type="gchararray"/>
-      <!-- column-name sortable -->
-      <column type="gchararray"/>
-      <!-- column-name strength -->
-      <column type="guint"/>
-      <!-- column-name mode -->
-      <column type="guint"/>
-      <!-- column-name security -->
-      <column type="guint"/>
-      <!-- column-name active -->
-      <column type="gboolean"/>
-      <!-- column-name ap-in-range -->
-      <column type="gboolean"/>
-      <!-- column-name ap-is-saved -->
-      <column type="gboolean"/>
-    </columns>
-  </object>
   <object class="GtkDialog" id="hotspot-dialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
-    <property name="type_hint">dialog</property>
-    <property name="destroy_with_parent">True</property>
     <property name="modal">True</property>
-    <property name="title"></property>
-    <property name="border-width">5</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="type_hint">dialog</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="hotspot-dialog-vbox1">
         <property name="can_focus">False</property>
@@ -40,8 +16,8 @@
           <object class="GtkBox" id="hotspot-dialog-box1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="border_width">5</property>
             <property name="spacing">12</property>
-            <property name="border-width">5</property>
             <child>
               <object class="GtkImage" id="hotspot-dialog-image">
                 <property name="visible">True</property>
@@ -96,15 +72,12 @@
           <object class="GtkButtonBox" id="hotspot-dialog-action_area1">
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
-            <property name="spacing">6</property>
             <child>
               <object class="GtkButton" id="hotspot-cancel-button">
                 <property name="label">gtk-cancel</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -116,13 +89,11 @@
             <child>
               <object class="GtkButton" id="hotspot-turn-on-button">
                 <property name="label" translatable="yes">_Turn On</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
                 <property name="has_default">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_underline">True</property>
               </object>
               <packing>
@@ -145,6 +116,28 @@
       <action-widget response="-6">hotspot-cancel-button</action-widget>
       <action-widget response="-5">hotspot-turn-on-button</action-widget>
     </action-widgets>
+  </object>
+  <object class="GtkListStore" id="liststore_network">
+    <columns>
+      <!-- column-name id -->
+      <column type="gchararray"/>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+      <!-- column-name sortable -->
+      <column type="gchararray"/>
+      <!-- column-name strength -->
+      <column type="guint"/>
+      <!-- column-name mode -->
+      <column type="guint"/>
+      <!-- column-name security -->
+      <column type="guint"/>
+      <!-- column-name active -->
+      <column type="gboolean"/>
+      <!-- column-name ap-in-range -->
+      <column type="gboolean"/>
+      <!-- column-name ap-is-saved -->
+      <column type="gboolean"/>
+    </columns>
   </object>
   <object class="GtkWindow" id="window_tmp">
     <property name="can_focus">False</property>
@@ -229,6 +222,9 @@
                         <property name="headers_visible">False</property>
                         <property name="headers_clickable">False</property>
                         <property name="search_column">0</property>
+                        <child internal-child="selection">
+                          <object class="GtkTreeSelection" id="treeview-selection1"/>
+                        </child>
                         <child>
                           <object class="GtkTreeViewColumn" id="treeview_list_column"/>
                         </child>
@@ -511,7 +507,7 @@
                     <property name="halign">end</property>
                     <property name="valign">start</property>
                     <child>
-                      <object class="GtkButton" id="button_disconnect">
+                      <object class="GtkButton" id="button_disconnect1">
                         <property name="label">_Disconnect</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -564,7 +560,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="button_back">
+                  <object class="GtkButton" id="button_back1">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
@@ -665,7 +661,23 @@
                 <property name="can_focus">False</property>
                 <property name="margin_top">12</property>
                 <child>
-                  <object class="GtkButton" id="button_options">
+                  <object class="GtkButton" id="button_forget1">
+                    <property name="label" translatable="yes">_Forget Network</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="halign">start</property>
+                    <property name="valign">end</property>
+                    <property name="use_underline">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="button_options1">
                     <property name="label" translatable="yes">_Settings...</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -1091,7 +1103,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="button_saved_back">
+                  <object class="GtkButton" id="button_back4">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
@@ -1154,14 +1166,43 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button_forget">
-                <property name="label" translatable="yes">_Forget Network</property>
+              <object class="GtkBox" id="box4">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="halign">start</property>
-                <property name="valign">end</property>
-                <property name="use_underline">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkButton" id="button_forget4">
+                    <property name="label" translatable="yes">_Forget Network</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="halign">start</property>
+                    <property name="valign">end</property>
+                    <property name="use_underline">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="button_options4">
+                    <property name="label" translatable="yes">_Settings...</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="halign">end</property>
+                    <property name="valign">end</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="use_underline">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
