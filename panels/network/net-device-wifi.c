@@ -948,7 +948,7 @@ forget_button_clicked_cb (GtkButton *button, NetDeviceWifi *device_wifi)
         CcNetworkPanel *panel;
 
         ssid_pretty = g_strdup_printf ("<b>%s</b>", device_wifi->priv->selected_ssid_title);
-        warning = g_strdup_printf (_("Network details for %s including password and any custom configuration will be lost"), ssid_pretty);
+        warning = g_strdup_printf (_("Network details for %s including password and any custom configuration will be lost."), ssid_pretty);
         panel = net_object_get_panel (NET_OBJECT (device_wifi));
         window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
         dialog = gtk_message_dialog_new (GTK_WINDOW (window),
