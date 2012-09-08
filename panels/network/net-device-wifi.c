@@ -1702,28 +1702,10 @@ show_wifi_details (NetDeviceWifi *device_wifi,
                  device_wifi->priv->selected_ssid_title, in_range);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "notebook_view"));
-        if (TRUE) {
-                nm_device_wifi_refresh_ui (device_wifi);
-                gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
-                goto out;
-        }
 
-        /* update the last used label */
-        update_saved_last_used (device_wifi);
+        nm_device_wifi_refresh_ui (device_wifi);
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
 
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 4);
-
-        /* set header with SSID */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "label_saved_device"));
-        gtk_label_set_label (GTK_LABEL (widget), device_wifi->priv->selected_ssid_title);
-
-        /* NM doesn't tell us this yet */
-        panel_set_device_widget_details (device_wifi->priv->builder,
-                                         "saved_security",
-                                         NULL);
-        panel_set_device_widget_details (device_wifi->priv->builder,
-                                         "saved_security_key",
-                                         NULL);
 out:
         g_free (path_str);
 }
