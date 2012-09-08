@@ -763,7 +763,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
 
         /* only disconnect when connection active */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_disconnect"));
+                                                     "button_disconnect1"));
         gtk_widget_set_sensitive (widget, state == NM_DEVICE_STATE_ACTIVATED);
 
         /* device MAC */
@@ -1860,6 +1860,32 @@ net_device_wifi_finalize (GObject *object)
 }
 
 static void
+device_wifi_edit (NetObject *object)
+{
+        const gchar *uuid;
+        gchar *cmdline;
+        GError *error = NULL;
+        NetDeviceWifi *device = NET_DEVICE_WIFI (object);
+        NMRemoteSettings *settings;
+        NMRemoteConnection *connection;
+
+        settings = net_object_get_remote_settings (object);
+        connection = nm_remote_settings_get_connection_by_path (settings, device->priv->selected_connection_id);
+        if (connection == NULL) {
+                g_warning ("failed to get remote connection");
+                return;
+        }
+        uuid = nm_connection_get_uuid (NM_CONNECTION (connection));
+        cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
+        g_debug ("Launching '%s'\n", cmdline);
+        if (!g_spawn_command_line_async (cmdline, &error)) {
+                g_warning ("Failed to launch nm-connection-editor: %s", error->message);
+                g_error_free (error);
+        }
+        g_free (cmdline);
+}
+
+static void
 net_device_wifi_class_init (NetDeviceWifiClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -1869,6 +1895,8 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
         object_class->constructed = net_device_wifi_constructed;
         parent_class->add_to_notebook = device_wifi_proxy_add_to_notebook;
         parent_class->refresh = device_wifi_refresh;
+        parent_class->edit = device_wifi_edit;
+
         g_type_class_add_private (klass, sizeof (NetDeviceWifiPrivate));
 }
 
@@ -1902,17 +1930,25 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                           G_CALLBACK (device_off_toggled), device_wifi);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_options"));
+                                                     "button_options1"));
+        g_signal_connect (widget, "clicked",
+                          G_CALLBACK (edit_connection), device_wifi);
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
+                                                     "button_options4"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (edit_connection), device_wifi);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_forget"));
+                                                     "button_forget1"));
+        g_signal_connect (widget, "clicked",
+                          G_CALLBACK (forget_button_clicked_cb), device_wifi);
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
+                                                     "button_forget4"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (forget_button_clicked_cb), device_wifi);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_disconnect"));
+                                                     "button_disconnect1"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (disconnect_button_clicked_cb), device_wifi);
 
@@ -2022,11 +2058,11 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                                             set_arrow_image, device_wifi, NULL);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_back"));
+                                                     "button_back1"));
         g_signal_connect_swapped (widget, "clicked",
                                   G_CALLBACK (show_wifi_list), device_wifi);
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_saved_back"));
+                                                     "button_back4"));
         g_signal_connect_swapped (widget, "clicked",
                                   G_CALLBACK (show_wifi_list), device_wifi);
 
