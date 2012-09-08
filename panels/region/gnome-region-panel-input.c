@@ -585,26 +585,25 @@ update_configuration (GtkTreeModel *model)
   const gchar *old_current_type;
   const gchar *old_current_id;
   guint old_current_index;
+  guint old_n_sources;
   guint index;
 
   old_sources = g_settings_get_value (input_sources_settings, KEY_INPUT_SOURCES);
   old_current_index = g_settings_get_uint (input_sources_settings, KEY_CURRENT_INPUT_SOURCE);
-  g_variant_get_child (old_sources,
-                       old_current_index,
-                       "(&s&s)",
-                       &old_current_type,
-                       &old_current_id);
-  if (g_variant_n_children (old_sources) < 1)
+  old_n_sources = g_variant_n_children (old_sources);
+
+  if (old_n_sources > 0 && old_current_index < old_n_sources)
     {
-      g_warning ("No input source configured, resetting");
-      g_settings_reset (input_sources_settings, KEY_INPUT_SOURCES);
-      goto exit;
+      g_variant_get_child (old_sources,
+                           old_current_index,
+                           "(&s&s)",
+                           &old_current_type,
+                           &old_current_id);
     }
-  if (old_current_index >= g_variant_n_children (old_sources))
+  else
     {
-      g_settings_set_uint (input_sources_settings,
-                           KEY_CURRENT_INPUT_SOURCE,
-                           g_variant_n_children (old_sources) - 1);
+      old_current_type = "";
+      old_current_id = "";
     }
 
   g_variant_builder_init (&builder, G_VARIANT_TYPE ("a(ss)"));
@@ -630,9 +629,8 @@ update_configuration (GtkTreeModel *model)
   while (gtk_tree_model_iter_next (model, &iter));
 
   g_settings_set_value (input_sources_settings, KEY_INPUT_SOURCES, g_variant_builder_end (&builder));
-
- exit:
   g_settings_apply (input_sources_settings);
+
   g_variant_unref (old_sources);
 }
 
