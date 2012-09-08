@@ -1649,8 +1649,10 @@ update_saved_last_used (NetDeviceWifi *device_wifi)
         if (s_con == NULL)
                 goto out;
         timestamp = nm_setting_connection_get_timestamp (s_con);
-        if (timestamp == 0)
+        if (timestamp == 0) {
+                last_used = g_strdup (_("never"));
                 goto out;
+        }
 
         /* calculate the amount of time that has elapsed */
         now = g_date_time_new_now_utc ();
