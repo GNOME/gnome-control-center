@@ -663,6 +663,8 @@ nm_device_wifi_refresh_hotspot (NetDeviceWifi *device_wifi)
         g_free (hotspot_ssid);
 }
 
+static void update_saved_last_used (NetDeviceWifi *device_wifi);
+
 static void
 nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
 {
@@ -809,6 +811,11 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
                 panel_unset_device_widgets (priv->builder);
         else
                 panel_set_device_widgets (priv->builder, nm_device);
+
+        if (ap != active_ap)
+                update_saved_last_used (device_wifi);
+        else
+                panel_set_device_widget_details (priv->builder, "last_used", NULL);
 
         /* update list of APs */
         device_wifi_refresh_aps (device_wifi);
@@ -1654,6 +1661,9 @@ update_saved_last_used (NetDeviceWifi *device_wifi)
 out:
         panel_set_device_widget_details (device_wifi->priv->builder,
                                          "saved_last_used",
+                                         last_used);
+        panel_set_device_widget_details (device_wifi->priv->builder,
+                                         "last_used",
                                          last_used);
         if (now != NULL)
                 g_date_time_unref (now);
