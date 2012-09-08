@@ -699,3 +699,13 @@ panel_set_device_widgets (GtkBuilder *builder, NMDevice *device)
                 panel_set_device_widget_header (builder, "ipv6", _("IP Address"));
         }
 }
+
+void
+panel_unset_device_widgets (GtkBuilder *builder)
+{
+        panel_set_device_widget_details (builder, "ipv4", NULL);
+        panel_set_device_widget_details (builder, "ipv6", NULL);
+        panel_set_device_widget_details (builder, "dns", NULL);
+        panel_set_device_widget_details (builder, "route", NULL);
+        panel_set_device_widget_details (builder, "subnet", NULL);
+}

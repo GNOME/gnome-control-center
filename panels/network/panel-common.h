@@ -45,6 +45,7 @@ gboolean         panel_set_device_widget_header                (GtkBuilder *buil
                                                                 const gchar *value);
 void             panel_set_device_widgets                      (GtkBuilder *builder,
                                                                 NMDevice *device);
+void             panel_unset_device_widgets                    (GtkBuilder *builder);
 
 G_END_DECLS
 
