@@ -583,6 +583,7 @@ add_saved_connection (NetDeviceWifi *device_wifi, NMConnection *connection, NMDe
         if (find_ssid_in_store (GTK_TREE_MODEL (store), &iter, ssid_text))
                 gtk_list_store_set (store, &iter,
                                     COLUMN_ID, id,
+                                    COLUMN_AP_IS_SAVED, TRUE,
                                     -1);
         else
                 gtk_list_store_insert_with_values (store, &iter,
