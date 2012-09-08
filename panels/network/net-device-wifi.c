@@ -181,7 +181,7 @@ add_access_point (NetDeviceWifi *device_wifi, NMAccessPoint *ap, NMAccessPoint *
 }
 
 static void
-add_access_point_other (NetDeviceWifi *device_wifi)
+add_connect_to_hidden (NetDeviceWifi *device_wifi)
 {
         NetDeviceWifiPrivate *priv = device_wifi->priv;
         GtkListStore *liststore_network;
@@ -191,9 +191,9 @@ add_access_point_other (NetDeviceWifi *device_wifi)
         liststore_network = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                                      "liststore_network"));
 
-        /* TRANSLATORS: this is when the access point is not listed in
-        *  the dropdown (or hidden) and the user has to select another
-        *  entry manually */
+        /* TRANSLATORS: this is when the access point is not shown
+         * in the list and the user has to enter the SSID manually
+         */
         title = g_strdup_printf ("<b>%s</b>", _("Connect to a Hidden Network"));
         gtk_list_store_append (liststore_network, &treeiter);
         gtk_list_store_set (liststore_network,
@@ -525,7 +525,7 @@ device_wifi_refresh_aps (NetDeviceWifi *device_wifi)
                 ap = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, i));
                 add_access_point (device_wifi, ap, active_ap, nm_device);
         }
-        add_access_point_other (device_wifi);
+        add_connect_to_hidden (device_wifi);
 
         device_wifi->priv->updating_device = FALSE;
         g_ptr_array_unref (aps_unique);
