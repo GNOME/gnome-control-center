@@ -1067,12 +1067,6 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
         g_debug ("try to connect to WIFI network %s [%s]",
                  ssid_target, ap_object_path);
 
-        /* hidden networks */
-        if (g_strcmp0 (ap_object_path, "ap-other...") == 0) {
-                connect_to_hidden_network (device_wifi);
-                goto out;
-        }
-
         /* look for an existing connection we can use */
         remote_settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
         list = nm_remote_settings_list_connections (remote_settings);
@@ -1616,7 +1610,9 @@ connect_wifi_network (NetDeviceWifi *device_wifi,
                             COLUMN_MODE, &mode,
                             -1);
 
-        if (connection_id)
+        if (g_strcmp0 (connection_id, "ap-other...") == 0)
+                connect_to_hidden_network (device_wifi);
+        else if (connection_id)
                 activate_connection (device_wifi, connection_id);
         else if (ap_in_range || mode == NM_802_11_MODE_UNKNOWN)
                 wireless_try_to_connect (device_wifi, ssid, ap_object_path);
