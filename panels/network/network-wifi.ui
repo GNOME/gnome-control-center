@@ -119,16 +119,26 @@
   </object>
   <object class="GtkListStore" id="liststore_network">
     <columns>
-      <column type="gchararray"/> <!-- column-name ap-id -->
-      <column type="gchararray"/> <!-- column-name connection-id -->
-      <column type="gchararray"/> <!-- column-name title -->
-      <column type="gchararray"/> <!-- column-name sortable -->
-      <column type="guint"/> <!-- column-name strength -->
-      <column type="guint"/> <!-- column-name mode -->
-      <column type="guint"/> <!-- column-name security -->
-      <column type="gboolean"/> <!-- column-name active -->
-      <column type="gboolean"/> <!-- column-name ap-in-range -->
-      <column type="gboolean"/> <!-- column-name ap-is-saved -->
+      <!-- column-name gchararray -->
+      <column type="gchararray"/>
+      <!-- column-name ap-id -->
+      <column type="gchararray"/>
+      <!-- column-name connection-id -->
+      <column type="gchararray"/>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+      <!-- column-name sortable -->
+      <column type="guint"/>
+      <!-- column-name strength -->
+      <column type="guint"/>
+      <!-- column-name mode -->
+      <column type="guint"/>
+      <!-- column-name security -->
+      <column type="gboolean"/>
+      <!-- column-name active -->
+      <column type="gboolean"/>
+      <!-- column-name ap-in-range -->
+      <column type="gboolean"/>
     </columns>
   </object>
   <object class="GtkWindow" id="window_tmp">
@@ -493,32 +503,6 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkAlignment" id="alignment_switch">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="halign">end</property>
-                    <property name="valign">start</property>
-                    <child>
-                      <object class="GtkButton" id="button_disconnect1">
-                        <property name="label">_Disconnect</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="halign">end</property>
-                        <property name="valign">center</property>
-                        <property name="hexpand">True</property>
-                        <property name="use_underline">True</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="left_attach">2</property>
-                    <property name="top_attach">0</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkLabel" id="heading_security">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
@@ -637,6 +621,52 @@
                     <property name="left_attach">1</property>
                     <property name="top_attach">4</property>
                     <property name="width">2</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="box5">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkButton" id="button_disconnect1">
+                        <property name="label">_Disconnect</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="no_show_all">True</property>
+                        <property name="halign">end</property>
+                        <property name="valign">center</property>
+                        <property name="hexpand">True</property>
+                        <property name="use_underline">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="button_connect1">
+                        <property name="label" translatable="yes">_Connect</property>
+                        <property name="use_underline">True</property>
+                        <property name="visible">False</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="no_show_all">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">2</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
                 </child>
