@@ -41,6 +41,7 @@
 #include "panel-cell-renderer-mode.h"
 #include "panel-cell-renderer-signal.h"
 #include "panel-cell-renderer-security.h"
+#include "panel-cell-renderer-separator.h"
 
 #include "net-device-wifi.h"
 
@@ -1667,12 +1668,13 @@ arrow_visible (GtkTreeModel *model,
                             COLUMN_SORT, &sort,
                             -1);
 
-        if (active || ap_is_saved || strcmp ("ap:hidden", sort) == 0)
+        if (active || ap_is_saved)
                 ret = TRUE;
         else
                 ret = FALSE;
 
         g_free (sort);
+
         return ret;
 }
 
@@ -1770,6 +1772,48 @@ remote_settings_read_cb (NMRemoteSettings *remote_settings,
                 nm_device_wifi_refresh_hotspot (device_wifi);
                 show_hotspot_ui (device_wifi);
         }
+}
+
+static gboolean
+separator_visible (GtkTreeModel *model,
+                   GtkTreeIter  *iter)
+{
+        gboolean active;
+        gboolean ap_is_saved;
+        gboolean ap_in_range;
+        gchar *sort;
+        gboolean ret;
+
+        gtk_tree_model_get (model, iter,
+                            COLUMN_ACTIVE, &active,
+                            COLUMN_AP_IS_SAVED, &ap_is_saved,
+                            COLUMN_AP_IN_RANGE, &ap_in_range,
+                            COLUMN_SORT, &sort,
+                            -1);
+
+        if (!active && ap_is_saved && ap_in_range)
+                ret = TRUE;
+        else
+                ret = FALSE;
+
+        g_free (sort);
+
+        return ret;
+
+}
+
+static void
+set_draw_separator (GtkCellLayout   *layout,
+                    GtkCellRenderer *cell,
+                    GtkTreeModel    *model,
+                    GtkTreeIter     *iter,
+                    gpointer         user_data)
+{
+        gboolean draw;
+
+        draw = separator_visible (model, iter);
+
+        g_object_set (cell, "draw", draw, NULL);
 }
 
 static void
@@ -1955,6 +1999,17 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                                         "security", COLUMN_SECURITY,
                                         "visible", COLUMN_AP_IN_RANGE,
                                         NULL);
+
+        renderer = panel_cell_renderer_separator_new ();
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer, FALSE);
+        g_object_set (renderer,
+                      "visible", TRUE,
+                      "sensitive", FALSE,
+                      "draw", TRUE,
+                      NULL);
+        gtk_cell_renderer_set_fixed_size (renderer, 1, -1);
+        gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (column), renderer,
+                                            set_draw_separator, device_wifi, NULL);
 
         renderer = gtk_cell_renderer_pixbuf_new ();
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer, FALSE);
