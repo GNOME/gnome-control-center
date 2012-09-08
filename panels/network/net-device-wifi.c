@@ -71,6 +71,7 @@ enum {
         COLUMN_SECURITY,
         COLUMN_ACTIVE,
         COLUMN_AP_IN_RANGE,
+        COLUMN_AP_OUT_OF_RANGE,
         COLUMN_AP_IS_SAVED,
         COLUMN_LAST
 };
@@ -166,6 +167,7 @@ add_access_point (NetDeviceWifi *device_wifi, NMAccessPoint *ap, NMAccessPoint *
                                            COLUMN_SECURITY, get_access_point_security (ap),
                                            COLUMN_ACTIVE, is_active_ap,
                                            COLUMN_AP_IN_RANGE, TRUE,
+                                           COLUMN_AP_OUT_OF_RANGE, FALSE,
                                            COLUMN_AP_IS_SAVED, FALSE,
                                            -1);
         g_free (title);
@@ -209,6 +211,7 @@ add_connect_to_hidden (NetDeviceWifi *device_wifi)
                             COLUMN_MODE, NM_802_11_MODE_UNKNOWN,
                             COLUMN_SECURITY, NM_AP_SEC_UNKNOWN,
                             COLUMN_AP_IN_RANGE, FALSE,
+                            COLUMN_AP_OUT_OF_RANGE, FALSE,
                             COLUMN_AP_IS_SAVED, FALSE,
                             -1);
         g_free (title);
@@ -595,6 +598,7 @@ add_saved_connection (NetDeviceWifi *device_wifi, NMConnection *connection, NMDe
                                                    COLUMN_SECURITY, 0,
                                                    COLUMN_ACTIVE, FALSE,
                                                    COLUMN_AP_IN_RANGE, FALSE,
+                                                   COLUMN_AP_OUT_OF_RANGE, TRUE,
                                                    COLUMN_AP_IS_SAVED, TRUE,
                                                    -1);
         g_free (title);
@@ -680,7 +684,6 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         NMClient *client;
         NMAccessPoint *ap;
         NetDeviceWifiPrivate *priv = device_wifi->priv;
-        gchar *title;
 
         is_hotspot = device_is_hotspot (device_wifi);
         if (is_hotspot) {
@@ -697,6 +700,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         else {
                 ap = NULL;
         }
+
         active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (nm_device));
 
         state = nm_device_get_state (nm_device);
@@ -721,7 +725,10 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         /* set device state, with status and optionally speed */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "label_status"));
         if (ap != active_ap) {
-                gtk_label_set_label (GTK_LABEL (widget), _("Not connected"));
+                if (ap)
+                        gtk_label_set_label (GTK_LABEL (widget), _("Not connected"));
+                else
+                        gtk_label_set_label (GTK_LABEL (widget), _("Out of range"));
                 gtk_widget_set_tooltip_text (widget, "");
         } else {
                 gtk_label_set_label (GTK_LABEL (widget),
@@ -765,31 +772,12 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
                                          "strength",
                                          str);
 
-        title = NULL;
-        if (ap != NULL) {
-                const GByteArray *ssid;
-                ssid = nm_access_point_get_ssid (ap);
-                if (ssid) {
-                        const gchar *ssid_text;
-                        ssid_text = nm_utils_escape_ssid (ssid->data, ssid->len);
-                        title = g_markup_escape_text (ssid_text, -1);
-                }
-        }
-
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "label_device"));
         gtk_label_set_label (GTK_LABEL (widget),
-                             title ? title : panel_device_to_localized_string (nm_device));
-        g_free (title);
+                             priv->selected_ssid_title ? priv->selected_ssid_title : panel_device_to_localized_string (nm_device));
 
         /* only disconnect when connection active */
-        if (ap != active_ap) {
-                widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                             "button_disconnect1"));
-                gtk_widget_hide (widget);
-                widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                             "button_connect1"));
-                gtk_widget_show (widget);
-        } else {
+        if (ap == active_ap) {
                 widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                              "button_disconnect1"));
                 gtk_widget_set_sensitive (widget, state == NM_DEVICE_STATE_ACTIVATED);
@@ -797,6 +785,14 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
                 widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                              "button_connect1"));
                 gtk_widget_hide (widget);
+        } else {
+                widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
+                                                             "button_disconnect1"));
+                gtk_widget_hide (widget);
+                widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
+                                                             "button_connect1"));
+                gtk_widget_show (widget);
+                gtk_widget_set_sensitive (widget, ap != NULL);
         }
 
         /* device MAC */
@@ -1706,7 +1702,7 @@ show_wifi_details (NetDeviceWifi *device_wifi,
                  device_wifi->priv->selected_ssid_title, in_range);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "notebook_view"));
-        if (in_range) {
+        if (TRUE) {
                 nm_device_wifi_refresh_ui (device_wifi);
                 gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
                 goto out;
@@ -2099,7 +2095,7 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
         renderer = gtk_cell_renderer_text_new ();
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer, FALSE);
         gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer,
-                                        "visible", COLUMN_AP_IS_SAVED,
+                                        "visible", COLUMN_AP_OUT_OF_RANGE,
                                         NULL);
         g_object_set (renderer,
                       "text", _("Out of range"),
