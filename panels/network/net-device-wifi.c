@@ -1657,7 +1657,12 @@ update_saved_last_used (NetDeviceWifi *device_wifi)
         then = g_date_time_new_from_unix_utc (timestamp);
         diff = g_date_time_difference  (now, then);
         days = diff / G_TIME_SPAN_DAY;
-        last_used = g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
+        if (days == 0)
+                last_used = g_strdup (_("today"));
+        else if (days == 1)
+                last_used = g_strdup (_("yesterday"));
+        else
+                last_used = g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
 out:
         panel_set_device_widget_details (device_wifi->priv->builder,
                                          "saved_last_used",
