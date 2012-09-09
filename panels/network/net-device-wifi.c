@@ -1659,9 +1659,6 @@ update_saved_last_used (NetDeviceWifi *device_wifi)
                 last_used = g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
 out:
         panel_set_device_widget_details (device_wifi->priv->builder,
-                                         "saved_last_used",
-                                         last_used);
-        panel_set_device_widget_details (device_wifi->priv->builder,
                                          "last_used",
                                          last_used);
         if (now != NULL)
@@ -1882,6 +1879,21 @@ set_draw_separator (GtkCellLayout   *layout,
 }
 
 static void
+switch_page_cb (GtkNotebook   *notebook,
+                GtkWidget     *page,
+                guint          page_num,
+                NetDeviceWifi *device_wifi)
+{
+        GtkWidget *widget;
+
+        if (page_num == 1) {
+                widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
+                                                             "button_back1"));
+                gtk_widget_grab_focus (widget);
+        }
+}
+
+static void
 net_device_wifi_constructed (GObject *object)
 {
         NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (object);
@@ -1998,17 +2010,9 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                                                      "button_options1"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (edit_connection), device_wifi);
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_options4"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (edit_connection), device_wifi);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "button_forget1"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (forget_button_clicked_cb), device_wifi);
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_forget4"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (forget_button_clicked_cb), device_wifi);
 
@@ -2130,16 +2134,14 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                                                      "button_back1"));
         g_signal_connect_swapped (widget, "clicked",
                                   G_CALLBACK (show_wifi_list), device_wifi);
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_back4"));
-        g_signal_connect_swapped (widget, "clicked",
-                                  G_CALLBACK (show_wifi_list), device_wifi);
 
         /* setup view */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "notebook_view"));
         gtk_notebook_set_show_tabs (GTK_NOTEBOOK (widget), FALSE);
         gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 0);
+        g_signal_connect_after (widget, "switch-page",
+                                G_CALLBACK (switch_page_cb), device_wifi);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "start_hotspot_button"));
