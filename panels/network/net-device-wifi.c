@@ -667,7 +667,56 @@ nm_device_wifi_refresh_hotspot (NetDeviceWifi *device_wifi)
         g_free (hotspot_ssid);
 }
 
-static void update_saved_last_used (NetDeviceWifi *device_wifi);
+static void
+update_last_used (NetDeviceWifi *device_wifi)
+{
+        NetDeviceWifiPrivate *priv = device_wifi->priv;
+        gchar *last_used = NULL;
+        GDateTime *now = NULL;
+        GDateTime *then = NULL;
+        gint days;
+        GTimeSpan diff;
+        guint64 timestamp;
+        NMRemoteConnection *connection;
+        NMRemoteSettings *settings;
+        NMSettingConnection *s_con;
+
+        if (priv->selected_connection_id == NULL)
+                goto out;
+
+        settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
+        connection = nm_remote_settings_get_connection_by_path (settings,
+                                                                priv->selected_connection_id);
+        s_con = nm_connection_get_setting_connection (NM_CONNECTION (connection));
+        if (s_con == NULL)
+                goto out;
+        timestamp = nm_setting_connection_get_timestamp (s_con);
+        if (timestamp == 0) {
+                last_used = g_strdup (_("never"));
+                goto out;
+        }
+
+        /* calculate the amount of time that has elapsed */
+        now = g_date_time_new_now_utc ();
+        then = g_date_time_new_from_unix_utc (timestamp);
+        diff = g_date_time_difference  (now, then);
+        days = diff / G_TIME_SPAN_DAY;
+        if (days == 0)
+                last_used = g_strdup (_("today"));
+        else if (days == 1)
+                last_used = g_strdup (_("yesterday"));
+        else
+                last_used = g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
+out:
+        panel_set_device_widget_details (device_wifi->priv->builder,
+                                         "last_used",
+                                         last_used);
+        if (now != NULL)
+                g_date_time_unref (now);
+        if (then != NULL)
+                g_date_time_unref (then);
+        g_free (last_used);
+}
 
 static void
 nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
@@ -809,7 +858,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
                 panel_set_device_widgets (priv->builder, nm_device);
 
         if (ap != active_ap)
-                update_saved_last_used (device_wifi);
+                update_last_used (device_wifi);
         else
                 panel_set_device_widget_details (priv->builder, "last_used", NULL);
 
@@ -1621,54 +1670,6 @@ connect_wifi_network (NetDeviceWifi *device_wifi,
 }
 
 static void
-update_saved_last_used (NetDeviceWifi *device_wifi)
-{
-        gchar *last_used = NULL;
-        GDateTime *now = NULL;
-        GDateTime *then = NULL;
-        gint days;
-        GTimeSpan diff;
-        guint64 timestamp;
-        NMRemoteConnection *connection;
-        NMRemoteSettings *remote_settings;
-        NMSettingConnection *s_con;
-
-        remote_settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
-        connection = nm_remote_settings_get_connection_by_path (remote_settings, device_wifi->priv->selected_connection_id);
-        if (connection == NULL)
-                goto out;
-        s_con = nm_connection_get_setting_connection (NM_CONNECTION (connection));
-        if (s_con == NULL)
-                goto out;
-        timestamp = nm_setting_connection_get_timestamp (s_con);
-        if (timestamp == 0) {
-                last_used = g_strdup (_("never"));
-                goto out;
-        }
-
-        /* calculate the amount of time that has elapsed */
-        now = g_date_time_new_now_utc ();
-        then = g_date_time_new_from_unix_utc (timestamp);
-        diff = g_date_time_difference  (now, then);
-        days = diff / G_TIME_SPAN_DAY;
-        if (days == 0)
-                last_used = g_strdup (_("today"));
-        else if (days == 1)
-                last_used = g_strdup (_("yesterday"));
-        else
-                last_used = g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
-out:
-        panel_set_device_widget_details (device_wifi->priv->builder,
-                                         "last_used",
-                                         last_used);
-        if (now != NULL)
-                g_date_time_unref (now);
-        if (then != NULL)
-                g_date_time_unref (then);
-        g_free (last_used);
-}
-
-static void
 show_wifi_details (NetDeviceWifi *device_wifi,
                    GtkTreeView *tv,
                    GtkTreePath *path)
@@ -1986,7 +1987,6 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
         GtkTreeSortable *sortable;
         GtkTreeViewColumn *column;
         GtkCellArea *area;
-        GdkRGBA transparent = { 0.0, 0.0, 0.0, 0.0 };
 
         device_wifi->priv = NET_DEVICE_WIFI_GET_PRIVATE (device_wifi);
 
@@ -2155,8 +2155,4 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                                                      "switch_hotspot_off"));
         g_signal_connect (widget, "notify::active",
                           G_CALLBACK (switch_hotspot_changed_cb), device_wifi);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "viewport_list"));
-        gtk_widget_override_background_color (widget, 0, &transparent);
 }
