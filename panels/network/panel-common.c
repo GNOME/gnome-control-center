@@ -649,12 +649,6 @@ panel_set_device_widgets (GtkBuilder *builder, NMDevice *device)
                                                  str_tmp);
                 g_free (str_tmp);
 
-                /* IPv4 netmask */
-                str_tmp = get_ipv4_config_address_as_string (ip4_config, "netmask");
-                panel_set_device_widget_details (builder,
-                                                 "subnet",
-                                                 str_tmp);
-                g_free (str_tmp);
         } else {
                 /* IPv4 address */
                 panel_set_device_widget_details (builder,
@@ -707,5 +701,4 @@ panel_unset_device_widgets (GtkBuilder *builder)
         panel_set_device_widget_details (builder, "ipv6", NULL);
         panel_set_device_widget_details (builder, "dns", NULL);
         panel_set_device_widget_details (builder, "route", NULL);
-        panel_set_device_widget_details (builder, "subnet", NULL);
 }
