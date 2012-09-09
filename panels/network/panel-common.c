@@ -665,11 +665,6 @@ panel_set_device_widgets (GtkBuilder *builder, NMDevice *device)
                 panel_set_device_widget_details (builder,
                                                  "route",
                                                  NULL);
-
-                /* IPv4 netmask */
-                panel_set_device_widget_details (builder,
-                                                 "subnet",
-                                                 NULL);
         }
 
         /* get IPv6 parameters */
