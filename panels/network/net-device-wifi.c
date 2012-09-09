@@ -2077,7 +2077,7 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                                     FALSE);
         g_object_set (renderer, "follow-state", TRUE, NULL);
         gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer,
-                                        "mode", COLUMN_MODE,
+                                        "ap-mode", COLUMN_MODE,
                                         NULL);
 
         renderer = gtk_cell_renderer_text_new ();

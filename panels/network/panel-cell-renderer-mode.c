@@ -29,7 +29,7 @@
 
 enum {
         PROP_0,
-        PROP_MODE,
+        PROP_AP_MODE,
         PROP_LAST
 };
 
@@ -47,7 +47,7 @@ panel_cell_renderer_mode_get_property (GObject *object, guint param_id,
         PanelCellRendererMode *renderer = PANEL_CELL_RENDERER_MODE (object);
 
         switch (param_id) {
-        case PROP_MODE:
+        case PROP_AP_MODE:
                 g_value_set_uint (value, renderer->mode);
                 break;
         default:
@@ -80,7 +80,7 @@ panel_cell_renderer_mode_set_property (GObject *object, guint param_id,
         PanelCellRendererMode *renderer = PANEL_CELL_RENDERER_MODE (object);
 
         switch (param_id) {
-        case PROP_MODE:
+        case PROP_AP_MODE:
                 renderer->mode = g_value_get_uint (value);
                 panel_cell_renderer_set_name (renderer);
                 break;
@@ -116,8 +116,8 @@ panel_cell_renderer_mode_class_init (PanelCellRendererModeClass *class)
         object_class->get_property = panel_cell_renderer_mode_get_property;
         object_class->set_property = panel_cell_renderer_mode_set_property;
 
-        g_object_class_install_property (object_class, PROP_MODE,
-                                         g_param_spec_uint ("mode", NULL,
+        g_object_class_install_property (object_class, PROP_AP_MODE,
+                                         g_param_spec_uint ("ap-mode", NULL,
                                                             NULL,
                                                             0, G_MAXUINT, 0,
                                                             G_PARAM_READWRITE));
