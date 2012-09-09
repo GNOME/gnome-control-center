@@ -1750,7 +1750,7 @@ set_arrow_image (GtkCellLayout   *layout,
         const gchar *icon;
 
         if (arrow_visible (model, iter))
-                icon = "go-next-symbolic";
+                icon = "go-next";
         else
                 icon = "";
 
@@ -2052,6 +2052,8 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
         g_object_set (renderer,
                       "follow-state", TRUE,
                       "icon-name", "object-select-symbolic",
+                      "xpad", 6,
+                      "ypad", 6,
                       NULL);
         gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer,
                                         "visible", COLUMN_ACTIVE,
@@ -2126,6 +2128,8 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
         g_object_set (renderer,
                       "follow-state", TRUE,
                       "visible", TRUE,
+                      "xpad", 6,
+                      "ypad", 6,
                       NULL);
         gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (column), renderer,
                                             set_arrow_image, device_wifi, NULL);
