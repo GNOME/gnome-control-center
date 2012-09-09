@@ -42,6 +42,8 @@
 #include "panel-cell-renderer-signal.h"
 #include "panel-cell-renderer-security.h"
 #include "panel-cell-renderer-separator.h"
+#include "panel-cell-renderer-text.h"
+#include "panel-cell-renderer-pixbuf.h"
 
 #include "net-device-wifi.h"
 
@@ -1758,63 +1760,6 @@ set_arrow_image (GtkCellLayout   *layout,
         g_object_set (cell, "icon-name", icon, NULL);
 }
 
-static gboolean
-over_arrow (NetDeviceWifi    *device_wifi,
-            GtkTreeView       *tv,
-            GtkTreeViewColumn *col,
-            GtkTreePath       *path,
-            gint               x,
-            gint               y)
-{
-        GtkTreeModel *model;
-        GtkTreeIter iter;
-        gint width;
-
-        model = gtk_tree_view_get_model (tv);
-        gtk_tree_model_get_iter (model, &iter, path);
-
-        if (!arrow_visible (model, &iter))
-                return FALSE;
-
-        width = gtk_tree_view_column_get_width (col);
-
-        /* FIXME: get actual arrow size */
-        if (x < width - 20)
-                return FALSE;
-
-        return TRUE;
-}
-
-static gboolean
-wifi_button_release_event (GtkWidget      *widget,
-                           GdkEventButton *event,
-                           gpointer        user_data)
-{
-        gboolean res;
-        GtkTreePath *path;
-        GtkTreeViewColumn *col;
-        GtkTreeView *tv = GTK_TREE_VIEW (widget);
-        NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (user_data);
-
-        if (event->type != GDK_BUTTON_RELEASE)
-                return TRUE;
-
-        res = gtk_tree_view_get_path_at_pos (tv,
-                                             (int) event->x, (int) event->y,
-                                             &path, &col, NULL, NULL);
-
-        if (!res)
-                return FALSE;
-
-        if (over_arrow (device_wifi, tv, col, path, event->x, event->y))
-                show_wifi_details (device_wifi, tv, path);
-        else
-                connect_wifi_network (device_wifi, tv, path);
-
-        gtk_tree_path_free (path);
-        return FALSE;
-}
-
 static void
 edit_connection (GtkButton *button, NetDeviceWifi *device_wifi)
 {
@@ -1979,11 +1924,60 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
 }
 
 static void
+activate_ssid_cb (PanelCellRendererText *cell,
+                  const gchar           *path,
+                  NetDeviceWifi         *device_wifi)
+{
+        GtkTreeView *tv;
+        GtkTreePath *tpath;
+
+        g_print ("activate ssid!\n");
+
+        tv = GTK_TREE_VIEW (gtk_builder_get_object (device_wifi->priv->builder,
+                                                    "treeview_list"));
+        tpath = gtk_tree_path_new_from_string (path);
+
+        connect_wifi_network (device_wifi, tv, tpath);
+
+        gtk_tree_path_free (tpath);
+}
+
+static void
+activate_arrow_cb (PanelCellRendererText *cell,
+                  const gchar           *path,
+                  NetDeviceWifi         *device_wifi)
+{
+        GtkTreeView *tv;
+        GtkTreeModel *model;
+        GtkTreePath *tpath;
+        GtkTreeIter iter;
+
+        g_print ("activate arrow!\n");
+
+        tv = GTK_TREE_VIEW (gtk_builder_get_object (device_wifi->priv->builder,
+                                                    "treeview_list"));
+        model = gtk_tree_view_get_model (tv);
+        tpath = gtk_tree_path_new_from_string (path);
+        gtk_tree_model_get_iter (model, &iter, tpath);
+
+        if (arrow_visible (model, &iter))
+                show_wifi_details (device_wifi, tv, tpath);
+        gtk_tree_path_free (tpath);
+}
+
+static void
 net_device_wifi_init (NetDeviceWifi *device_wifi)
 {
         GError *error = NULL;
         GtkWidget *widget;
-        GtkCellRenderer *renderer;
+        GtkCellRenderer *renderer1;
+        GtkCellRenderer *renderer2;
+        GtkCellRenderer *renderer3;
+        GtkCellRenderer *renderer4;
+        GtkCellRenderer *renderer5;
+        GtkCellRenderer *renderer6;
+        GtkCellRenderer *renderer7;
+        GtkCellRenderer *renderer8;
         GtkTreeSortable *sortable;
         GtkTreeViewColumn *column;
         GtkCellArea *area;
@@ -2027,8 +2021,6 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "treeview_list"));
-        g_signal_connect (widget, "button-release-event",
-                          G_CALLBACK (wifi_button_release_event), device_wifi);
 
         /* sort networks in drop down */
         sortable = GTK_TREE_SORTABLE (gtk_builder_get_object (device_wifi->priv->builder,
@@ -2047,97 +2039,114 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                                                                "treeview_list_column"));
         area = gtk_cell_layout_get_area (GTK_CELL_LAYOUT (column));
 
-        renderer = gtk_cell_renderer_pixbuf_new ();
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer, FALSE);
-        g_object_set (renderer,
+        renderer1 = gtk_cell_renderer_pixbuf_new ();
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer1, FALSE);
+        g_object_set (renderer1,
                       "follow-state", TRUE,
                       "icon-name", "object-select-symbolic",
                       "xpad", 6,
                       "ypad", 6,
                       NULL);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer,
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer1,
                                         "visible", COLUMN_ACTIVE,
                                         NULL);
-        gtk_cell_area_cell_set (area, renderer, "align", TRUE, NULL);
+        gtk_cell_area_cell_set (area, renderer1, "align", TRUE, NULL);
 
-        renderer = gtk_cell_renderer_text_new ();
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer, TRUE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer,
+        renderer2 = panel_cell_renderer_text_new ();
+        g_object_set (renderer2,
+                      "mode", GTK_CELL_RENDERER_MODE_ACTIVATABLE,
+                      NULL);
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer2, TRUE);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer2,
                                         "markup", COLUMN_TITLE,
                                         NULL);
-        gtk_cell_area_cell_set (area, renderer,
+        gtk_cell_area_cell_set (area, renderer2,
                                 "align", TRUE,
                                 "expand", TRUE,
                                 NULL);
+        g_signal_connect (renderer2, "activate",
+                          G_CALLBACK (activate_ssid_cb), device_wifi);
 
-        renderer = panel_cell_renderer_mode_new ();
-        gtk_cell_renderer_set_padding (renderer, 4, 0);
+        renderer3 = panel_cell_renderer_mode_new ();
+        gtk_cell_renderer_set_padding (renderer3, 4, 0);
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column),
-                                    renderer,
+                                    renderer3,
                                     FALSE);
-        g_object_set (renderer, "follow-state", TRUE, NULL);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer,
+        g_object_set (renderer3, "follow-state", TRUE, NULL);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer3,
                                         "ap-mode", COLUMN_MODE,
                                         NULL);
 
-        renderer = gtk_cell_renderer_text_new ();
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer, FALSE);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer,
+        renderer4 = gtk_cell_renderer_text_new ();
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer4, FALSE);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer4,
                                         "visible", COLUMN_AP_OUT_OF_RANGE,
                                         NULL);
-        g_object_set (renderer,
+        g_object_set (renderer4,
                       "text", _("Out of range"),
+                      "mode", GTK_CELL_RENDERER_MODE_INERT,
                       "xalign", 1.0,
                       NULL);
 
-        renderer = panel_cell_renderer_signal_new ();
-        gtk_cell_renderer_set_padding (renderer, 4, 0);
+        renderer5 = panel_cell_renderer_signal_new ();
+        gtk_cell_renderer_set_padding (renderer5, 4, 0);
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column),
-                                    renderer,
+                                    renderer5,
                                     FALSE);
-        g_object_set (renderer, "follow-state", TRUE, NULL);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer,
+        g_object_set (renderer5, "follow-state", TRUE, NULL);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer5,
                                         "signal", COLUMN_STRENGTH,
                                         "visible", COLUMN_AP_IN_RANGE,
                                         NULL);
 
-        renderer = panel_cell_renderer_security_new ();
-        gtk_cell_renderer_set_padding (renderer, 4, 0);
+        renderer6 = panel_cell_renderer_security_new ();
+        gtk_cell_renderer_set_padding (renderer6, 4, 0);
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column),
-                                    renderer,
+                                    renderer6,
                                     FALSE);
-        g_object_set (renderer, "follow-state", TRUE, NULL);
-        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer,
+        g_object_set (renderer6, "follow-state", TRUE, NULL);
+        gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer6,
                                         "security", COLUMN_SECURITY,
                                         "visible", COLUMN_AP_IN_RANGE,
                                         NULL);
 
-        renderer = panel_cell_renderer_separator_new ();
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer, FALSE);
-        g_object_set (renderer,
+        renderer7 = panel_cell_renderer_separator_new ();
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer7, FALSE);
+        g_object_set (renderer7,
                       "visible", TRUE,
                       "sensitive", FALSE,
                       "draw", TRUE,
                       NULL);
-        gtk_cell_renderer_set_fixed_size (renderer, 1, -1);
-        gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (column), renderer,
+        gtk_cell_renderer_set_fixed_size (renderer7, 1, -1);
+        gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (column), renderer7,
                                             set_draw_separator, device_wifi, NULL);
 
-        renderer = gtk_cell_renderer_pixbuf_new ();
-        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer, FALSE);
-        g_object_set (renderer,
+        renderer8 = panel_cell_renderer_pixbuf_new ();
+        gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer8, FALSE);
+        g_object_set (renderer8,
+                      "mode", GTK_CELL_RENDERER_MODE_ACTIVATABLE,
                       "follow-state", TRUE,
                       "visible", TRUE,
                       "xpad", 6,
                       "ypad", 6,
                       NULL);
-        gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (column), renderer,
+        gtk_cell_layout_set_cell_data_func (GTK_CELL_LAYOUT (column), renderer8,
                                             set_arrow_image, device_wifi, NULL);
+        g_signal_connect (renderer8, "activate",
+                          G_CALLBACK (activate_arrow_cb), device_wifi);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "button_back1"));
         g_signal_connect_swapped (widget, "clicked",
                                   G_CALLBACK (show_wifi_list), device_wifi);
+
+        /* draw focus around everything but the arrow */
+        gtk_cell_area_add_focus_sibling (area, renderer2, renderer1);
+        gtk_cell_area_add_focus_sibling (area, renderer2, renderer3);
+        gtk_cell_area_add_focus_sibling (area, renderer2, renderer4);
+        gtk_cell_area_add_focus_sibling (area, renderer2, renderer5);
+        gtk_cell_area_add_focus_sibling (area, renderer2, renderer6);
+        gtk_cell_area_add_focus_sibling (area, renderer2, renderer7);
 
         /* setup view */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
