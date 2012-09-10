@@ -29,8 +29,6 @@ G_BEGIN_DECLS
 
 typedef struct _PpPPDSelectionDialog PpPPDSelectionDialog;
 
-typedef void (*UserResponseCallback) (GtkDialog *dialog, gint response_id, gpointer user_data);
-
 PpPPDSelectionDialog *pp_ppd_selection_dialog_new          (GtkWindow                 *parent,
                                                             PPDList                   *ppd_list,
                                                             gchar                     *manufacturer,

@@ -23,12 +23,11 @@
 #define __PP_JOBS_DIALOG_H__
 
 #include <gtk/gtk.h>
+#include "pp-utils.h"
 
 G_BEGIN_DECLS
 
 typedef struct _PpJobsDialog PpJobsDialog;
-
-typedef void (*UserResponseCallback) (GtkDialog *dialog, gint response_id, gpointer user_data);
 
 PpJobsDialog *pp_jobs_dialog_new    (GtkWindow            *parent,
                                      UserResponseCallback  user_callback,
