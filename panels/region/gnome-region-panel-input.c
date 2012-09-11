@@ -68,6 +68,8 @@ static const gchar *supported_ibus_engines[] = {
   /* Simplified Chinese */
   "pinyin",
   "bopomofo",
+  "wubi",
+  "erbi",
   /* Default in Fedora, where ibus-libpinyin replaces ibus-pinyin */
   "libpinyin",
   "libbopomofo",
