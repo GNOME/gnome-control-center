@@ -94,7 +94,7 @@ static const gchar *supported_ibus_engines[] = {
   "m17n:th:pattachote",
   "m17n:th:tis820",
 
-  /* Vietnamese (confirmation needed, maybe add more) */
+  /* Vietnamese */
   "m17n:vi:tcvn",
   "m17n:vi:telex",
   "m17n:vi:viqr",
