@@ -219,6 +219,36 @@ static const gchar *supported_ibus_engines[] = {
   "m17n:iu:phonetic",
   "m17n:nsk:phonetic",
   "m17n:oj:phonetic",
+
+  /* Non-trivial engines, like transliteration-based instead of
+     keymap-based.  Confirmation needed that the engines below are
+     actually used by local language users. */
+
+  /* Tibetan */
+  "m17n:bo:ewts",
+  "m17n:bo:tcrc",
+  "m17n:bo:wylie",
+
+  /* Esperanto */
+  "m17n:eo:h-f",
+  "m17n:eo:h",
+  "m17n:eo:plena",
+  "m17n:eo:q",
+  "m17n:eo:vi",
+  "m17n:eo:x",
+
+  /* Russian */
+  "m17n:ru:translit",
+
+  /* Classical Greek */
+  "m17n:grc:mizuochi",
+
+  /* Lao */
+  "m17n:lo:lrt",
+
+  /* Postfix modifier input methods */
+  "m17n:da:post",
+  "m17n:sv:post",
   NULL
 };
 #endif  /* HAVE_IBUS */
