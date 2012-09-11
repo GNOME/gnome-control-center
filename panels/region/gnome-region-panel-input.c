@@ -197,6 +197,28 @@ static const gchar *supported_ibus_engines[] = {
 
   /* Urdu */
   "m17n:ur:phonetic",
+
+  /* No corresponding XKB map available for the languages */
+
+  /* Chinese Yi */
+  "m17n:ii:phonetic",
+
+  /* Tai-Viet */
+  "m17n:tai:sonla",
+
+  /* Kazakh in Arabic script */
+  "m17n:kk:arabic",
+
+  /* Yiddish */
+  "m17n:yi:yivo",
+
+  /* Canadian Aboriginal languages */
+  "m17n:ath:phonetic",
+  "m17n:bla:phonetic",
+  "m17n:cr:western",
+  "m17n:iu:phonetic",
+  "m17n:nsk:phonetic",
+  "m17n:oj:phonetic",
   NULL
 };
 #endif  /* HAVE_IBUS */
