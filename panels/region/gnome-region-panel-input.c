@@ -505,6 +505,49 @@ populate_model (GtkListStore *store,
   g_hash_table_destroy (active_sources_table);
 }
 
+static GVariant *
+create_source_from_current_xkb_config (void)
+{
+  GVariantBuilder builder;
+  XkbRF_VarDefsRec *xkb_var_defs;
+  gchar *tmp;
+  gchar *source_id = NULL;
+  gchar **layouts = NULL;
+  gchar **variants = NULL;
+
+  g_variant_builder_init (&builder, G_VARIANT_TYPE ("a(ss)"));
+
+  gnome_xkb_info_get_var_defs (&tmp, &xkb_var_defs);
+  g_free (tmp);
+
+  if (xkb_var_defs->layout)
+    layouts = g_strsplit (xkb_var_defs->layout, ",", 2);
+  if (xkb_var_defs->variant)
+    variants = g_strsplit (xkb_var_defs->variant, ",", 2);
+
+  if (layouts && layouts[0] && layouts[0][0])
+    source_id = g_strdup_printf ("%s", layouts[0]);
+  else
+    goto out;
+
+  if (variants && variants[0] && variants[0][0])
+    {
+      tmp = source_id;
+      source_id = g_strdup_printf ("%s+%s", tmp, variants[0]);
+      g_free (tmp);
+    }
+
+  g_variant_builder_add (&builder, "(ss)", INPUT_SOURCE_TYPE_XKB, source_id);
+
+ out:
+  g_free (source_id);
+  g_strfreev (layouts);
+  g_strfreev (variants);
+  gnome_xkb_info_free_var_defs (xkb_var_defs);
+
+  return g_variant_builder_end (&builder);
+}
+
 static void
 populate_with_active_sources (GtkListStore *store)
 {
@@ -518,6 +561,11 @@ populate_with_active_sources (GtkListStore *store)
   GtkTreeIter tree_iter;
 
   sources = g_settings_get_value (input_sources_settings, KEY_INPUT_SOURCES);
+  if (g_variant_n_children (sources) < 1)
+    {
+      g_variant_unref (sources);
+      sources = create_source_from_current_xkb_config ();
+    }
 
   g_variant_iter_init (&iter, sources);
   while (g_variant_iter_next (&iter, "(&s&s)", &type, &id))
