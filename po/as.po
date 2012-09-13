@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: as\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
 "cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-11 11:28+0000\n"
-"PO-Revision-Date: 2012-09-11 20:46+0530\n"
+"POT-Creation-Date: 2012-09-13 14:48+0000\n"
+"PO-Revision-Date: 2012-09-13 21:04+0530\n"
 "Last-Translator: Nilamdyuti Goswami <ngoswami@redhat.com>\n"
 "Language-Team: as_IN <kde-i18n-doc@kde.org>\n"
 "Language: \n"
@@ -762,7 +762,6 @@ msgstr "১৮০ ডিগ্ৰিসমূহ"
 #. * "Pantallas en Espejo".
 #.
 #: ../panels/display/cc-display-panel.c:623
-#| msgid "Mirror Displays"
 msgid "Mirrored Displays"
 msgstr "আইনা কৰা প্ৰদৰ্শনসমূহ"
 
@@ -1573,17 +1572,14 @@ msgid "Five clicks, GEGL time!"
 msgstr "পাঁচবাৰ ক্লিক, GEGL সময়!"
 
 #: ../panels/mouse/gnome-mouse-test.c:144
-#| msgid "Double-click timeout"
 msgid "Double click, primary button"
 msgstr "দুবাৰ ক্লিক, প্ৰাথমিক বুটাম"
 
 #: ../panels/mouse/gnome-mouse-test.c:144
-#| msgid "Primary _button"
 msgid "Single click, primary button"
 msgstr "এবাৰ ক্লিক, প্ৰাথমিক বুটাম"
 
 #: ../panels/mouse/gnome-mouse-test.c:147
-#| msgid "Double-click timeout"
 msgid "Double click, middle button"
 msgstr "দুবাৰ ক্লিক, মাজৰ বুটাম"
 
@@ -1592,7 +1588,6 @@ msgid "Single click, middle button"
 msgstr "এবাৰ ক্লিক, মাজৰ বুটাম"
 
 #: ../panels/mouse/gnome-mouse-test.c:150
-#| msgid "Double-click timeout"
 msgid "Double click, secondary button"
 msgstr "দুবাৰ ক্লিক, দ্বিতীয় বুটাম"
 
@@ -1640,87 +1635,119 @@ msgstr "নতুন সংযোগ যোগ কৰক"
 
 #. Translators: network device speed
 #: ../panels/network/net-device-mobile.c:261
-#: ../panels/network/net-device-wifi.c:699
+#: ../panels/network/net-device-wifi.c:770
 #: ../panels/network/net-device-wired.c:126
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#. TRANSLATORS: this is when the access point is not listed in
-#. *  the dropdown (or hidden) and the user has to select another
-#. *  entry manually
-#: ../panels/network/net-device-wifi.c:196
+#. TRANSLATORS: this is when the access point is not shown
+#. * in the list and the user has to enter the SSID manually
+#.
+#: ../panels/network/net-device-wifi.c:203
 msgid "Connect to a Hidden Network"
 msgstr "এটা লুকুৱা নেটৱাৰ্কৰ সৈতে সংযোগ কৰক"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/net-device-wifi.c:293
-#: ../panels/network/net-device-wifi.c:472
+#: ../panels/network/net-device-wifi.c:302
+#: ../panels/network/net-device-wifi.c:481
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:297
-#: ../panels/network/net-device-wifi.c:476
+#: ../panels/network/net-device-wifi.c:306
+#: ../panels/network/net-device-wifi.c:485
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:301
+#: ../panels/network/net-device-wifi.c:310
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/net-device-wifi.c:306
+#: ../panels/network/net-device-wifi.c:315
 msgid "Enterprise"
 msgstr "এন্টাৰপ্ৰাইজ"
 
-#: ../panels/network/net-device-wifi.c:311
-#: ../panels/network/net-device-wifi.c:467
-#| msgid "None"
+#: ../panels/network/net-device-wifi.c:320
+#: ../panels/network/net-device-wifi.c:476
 msgctxt "Wifi security"
 msgid "None"
 msgstr "কোনো নহয়"
 
-#: ../panels/network/net-device-wifi.c:733
+#: ../panels/network/net-device-wifi.c:697
+msgid "never"
+msgstr "কেতিয়াও নহয়"
+
+#: ../panels/network/net-device-wifi.c:707
+msgid "today"
+msgstr "আজি"
+
+#: ../panels/network/net-device-wifi.c:709
+msgid "yesterday"
+msgstr "যোৱাকালী"
+
+#: ../panels/network/net-device-wifi.c:711
+#, c-format
+msgid "%i day ago"
+msgid_plural "%i days ago"
+msgstr[0] "%i দিন আগত"
+msgstr[1] "%i দিন আগত"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/net-device-wifi.c:780
+#: ../panels/network/panel-common.c:277
+msgid "Not connected"
+msgstr "সংযোগ বিহীন"
+
+#: ../panels/network/net-device-wifi.c:782
+#: ../panels/network/net-device-wifi.c:2086
+msgid "Out of range"
+msgstr "বিস্তাৰৰ বাহিৰ"
+
+#: ../panels/network/net-device-wifi.c:813
 msgctxt "Signal strength"
 msgid "None"
 msgstr "কোনো নহয়"
 
-#: ../panels/network/net-device-wifi.c:735
+#: ../panels/network/net-device-wifi.c:815
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "দুৰ্বল"
 
-#: ../panels/network/net-device-wifi.c:737
+#: ../panels/network/net-device-wifi.c:817
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "ঠিক আছে"
 
-#: ../panels/network/net-device-wifi.c:739
+#: ../panels/network/net-device-wifi.c:819
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "ভাল"
 
-#: ../panels/network/net-device-wifi.c:741
+#: ../panels/network/net-device-wifi.c:821
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "উত্তম"
 
-#: ../panels/network/net-device-wifi.c:901
+#: ../panels/network/net-device-wifi.c:1005
 #, c-format
+#| msgid ""
+#| "Network details for %s including password and any custom configuration "
+#| "will be lost"
 msgid ""
 "Network details for %s including password and any custom configuration will "
-"be lost"
+"be lost."
 msgstr ""
-"%s ৰ বাবে নেটৱাৰ্ক বিৱৰণসমূহ পাছৱাৰ্ড আৰু কোনো স্বনিৰ্বাচিত সংৰূপ অন্তৰ্ভুক্ত কৰাকৈ "
-"হেৰাই যাব"
+"%s ৰ বাবে নোটৱাৰ্ক বিৱৰণসমূহ পাছৱাৰ্ড আৰু কোনো স্বনিৰ্বাচিত সংৰূপ অন্তৰ্ভুক্ত কৰাকৈ হেৰাই "
+"যাব।"
 
-#: ../panels/network/net-device-wifi.c:912
+#: ../panels/network/net-device-wifi.c:1016
 msgid "Forget"
 msgstr "পাহৰি যাওক"
 
-#: ../panels/network/net-device-wifi.c:1437
+#: ../panels/network/net-device-wifi.c:1552
 msgid ""
 "If you have a connection to the Internet other than wireless, you can use it "
 "to share your internet connection with others."
@@ -1728,36 +1755,24 @@ msgstr ""
 "যদি আপোনাৰ ইন্টাৰনেটলে বেতাঁৰৰ বাহিৰে অন্য সংযোগ উপলব্ধ আছে, আপুনি ইয়াক আপোনাৰ "
 "সংযোগ অন্যৰ সৈতে অংশীদাৰী কৰাৰ বাবে ব্যৱহাৰ কৰিব পাৰে।"
 
-#: ../panels/network/net-device-wifi.c:1441
+#: ../panels/network/net-device-wifi.c:1556
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "বেতাঁৰ হটস্পট আৰম্ভ কৰিলে আপুনি <b>%s</b> ৰ পৰা বিচ্ছিন্নিত হব।"
 
-#: ../panels/network/net-device-wifi.c:1445
+#: ../panels/network/net-device-wifi.c:1560
 msgid ""
 "It is not possible to access the internet through your wireless while the "
 "hotspot is active."
 msgstr "হটস্পট সক্ৰিয় থকা অৱস্থাত আপোনাৰ বেতাঁৰৰ সহায়ত ইন্টাৰনেট অভিগম কৰাটো সম্ভব নহয়।"
 
-#: ../panels/network/net-device-wifi.c:1511
+#: ../panels/network/net-device-wifi.c:1626
 msgid "Stop hotspot and disconnect any users?"
 msgstr "হটস্পট বন্ধ কৰি কোনো ব্যৱহাৰকাৰী বিচ্ছিন্ন কৰিব নে?"
 
-#: ../panels/network/net-device-wifi.c:1514
+#: ../panels/network/net-device-wifi.c:1629
 msgid "_Stop Hotspot"
 msgstr "হটস্পট বন্ধ কৰক (_S)"
-
-#: ../panels/network/net-device-wifi.c:1579
-#, c-format
-msgid "%i day ago"
-msgid_plural "%i days ago"
-msgstr[0] "%i দিন আগত"
-msgstr[1] "%i দিন আগত"
-
-#: ../panels/network/net-device-wifi.c:1933
-#: ../panels/network/network-wifi.ui.h:19
-msgid "Out of range"
-msgstr "বিস্তাৰৰ বাহিৰ"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: ../panels/network/net-proxy.c:67
@@ -1785,31 +1800,31 @@ msgid "Provider"
 msgstr "প্ৰদানকাৰী"
 
 #: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:697 ../panels/network/panel-common.c:699
+#: ../panels/network/panel-common.c:686 ../panels/network/panel-common.c:688
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "IP ঠিকনা"
 
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-wifi.ui.h:7
-#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:695
+#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:684
 msgid "IPv6 Address"
 msgstr "IPv6 ঠিকনা"
 
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-wifi.ui.h:8
-#: ../panels/network/network-wired.ui.h:5
+#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wired.ui.h:4
 msgid "Default Route"
 msgstr "অবিকল্পিত পথ"
 
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-wifi.ui.h:9
-#: ../panels/network/network-wired.ui.h:6
+#: ../panels/network/network-wifi.ui.h:14
+#: ../panels/network/network-wired.ui.h:5
 msgid "DNS"
 msgstr "DNS"
 
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-wired.ui.h:7
+#: ../panels/network/network-wired.ui.h:6
 msgid "_Options..."
 msgstr "বিকল্পসমূহ (_O)..."
 
@@ -1914,66 +1929,63 @@ msgid "_Use as Hotspot..."
 msgstr "হটস্পট হিচাপে ব্যৱহাৰ কৰক (_U)..."
 
 #: ../panels/network/network-wifi.ui.h:5
+#| msgid "Connected"
+msgid "_Connect"
+msgstr "সংযোগ কৰক (_C)"
+
+#: ../panels/network/network-wifi.ui.h:6
+msgid "Last used"
+msgstr "সৰ্বশেষ ব্যৱহৃত"
+
+#: ../panels/network/network-wifi.ui.h:7
 #: ../panels/network/network-wired.ui.h:1
 msgid "Hardware Address"
 msgstr "হাৰ্ডৱেৰ ঠিকনা"
 
-#: ../panels/network/network-wifi.ui.h:6
-#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:694
-msgid "IPv4 Address"
-msgstr "IPv4 ঠিকনা"
-
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:8
 msgid "Security"
 msgstr "সুৰক্ষা"
 
-#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wifi.ui.h:9
 msgid "Strength"
 msgstr "শক্তি"
 
-#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wifi.ui.h:10
 msgid "Link speed"
 msgstr "সংযোগৰ গতী"
 
-#: ../panels/network/network-wifi.ui.h:13
-msgid "_Settings..."
-msgstr "সংহতিসমূহ (_S)..."
-
-#: ../panels/network/network-wifi.ui.h:14
-msgid "Switch off to connect to a wireless network"
-msgstr "এটা বেতাঁৰ নেটৱাৰ্কৰ সৈতে সংযোগ কৰিবলে বন্ধ কৰক"
+#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:683
+msgid "IPv4 Address"
+msgstr "IPv4 ঠিকনা"
 
 #: ../panels/network/network-wifi.ui.h:15
-msgid "Network Name"
-msgstr "নেটৱাৰ্কৰ নাম"
-
-#: ../panels/network/network-wifi.ui.h:16
-msgid "Connected Devices"
-msgstr "সংযুক্ত ডিভাইচসমূহ"
-
-#: ../panels/network/network-wifi.ui.h:17
-msgid "Security type"
-msgstr "সুৰক্ষা ধৰণ"
-
-#: ../panels/network/network-wifi.ui.h:18
-msgid "Security key"
-msgstr "সুৰক্ষা কি'"
-
-#: ../panels/network/network-wifi.ui.h:20
-msgid "Security Key"
-msgstr "সুৰক্ষা কি"
-
-#: ../panels/network/network-wifi.ui.h:21
-msgid "Last used"
-msgstr "সৰ্বশেষ ব্যৱহৃত"
-
-#: ../panels/network/network-wifi.ui.h:22
 msgid "_Forget Network"
 msgstr "নেটৱাৰ্ক পাহৰি যাওক (_F)"
 
-#: ../panels/network/network-wired.ui.h:4
-msgid "Subnet Mask"
-msgstr "চাবনেট মাস্ক"
+#: ../panels/network/network-wifi.ui.h:16
+msgid "_Settings..."
+msgstr "সংহতিসমূহ (_S)..."
+
+#: ../panels/network/network-wifi.ui.h:17
+msgid "Switch off to connect to a wireless network"
+msgstr "এটা বেতাঁৰ নেটৱাৰ্কৰ সৈতে সংযোগ কৰিবলে বন্ধ কৰক"
+
+#: ../panels/network/network-wifi.ui.h:18
+msgid "Network Name"
+msgstr "নেটৱাৰ্কৰ নাম"
+
+#: ../panels/network/network-wifi.ui.h:19
+msgid "Connected Devices"
+msgstr "সংযুক্ত ডিভাইচসমূহ"
+
+#: ../panels/network/network-wifi.ui.h:20
+msgid "Security type"
+msgstr "সুৰক্ষা ধৰণ"
+
+#: ../panels/network/network-wifi.ui.h:21
+msgid "Security key"
+msgstr "সুৰক্ষা কি'"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:86
@@ -2062,11 +2074,6 @@ msgstr "সংযোগ ব্যৰ্থ"
 #: ../panels/network/panel-common.c:239 ../panels/network/panel-common.c:281
 msgid "Status unknown (missing)"
 msgstr "অৱস্থা অজ্ঞাত (সন্ধানহিন)"
-
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:277
-msgid "Not connected"
-msgstr "সংযোগ বিহীন"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:301
@@ -2687,7 +2694,6 @@ msgstr "অপ্টিকেল ফ'টো পৰিবাহক কাৰ্�
 
 #. Translators: Printer's state (printer is being configured right now)
 #: ../panels/printers/cc-printers-panel.c:724
-#| msgid "_Configuration URL"
 msgctxt "printer state"
 msgid "Configuring"
 msgstr "সংৰূপণ কৰা হৈছে"
@@ -2727,7 +2733,6 @@ msgstr "যোগান স্তৰ"
 
 #. Translators: Printer's state (printer is being installed right now)
 #: ../panels/printers/cc-printers-panel.c:930
-#| msgid "Install"
 msgctxt "printer state"
 msgid "Installing"
 msgstr "ইনস্টল কৰা হৈছে"
@@ -2839,7 +2844,6 @@ msgid "Add a New Printer"
 msgstr "এটা নতুন প্ৰিন্টাৰ যোগ কৰক"
 
 #: ../panels/printers/new-printer-dialog.ui.h:4
-#| msgid "No network printers found"
 msgid "Search for network printers or filter result"
 msgstr "নেটৱাৰ্ক প্ৰিন্টাৰৰ বাবে সন্ধান কৰক অথবা ফলাফল ফিল্টাৰ কৰক"
 
@@ -2967,7 +2971,6 @@ msgstr "%s সক্ৰিয় কাৰ্য্যসমূহ"
 
 #. Translators: No printers were found
 #: ../panels/printers/pp-new-printer-dialog.c:1291
-#| msgid "No tablet detected"
 msgid "No printers detected."
 msgstr "কোনো প্ৰিন্টাৰ চিনাক্ত কৰা হোৱা নাই।"
 
@@ -4163,19 +4166,16 @@ msgid "Contrast:"
 msgstr "কনট্ৰাস্ট:"
 
 #: ../panels/universal-access/zoom-options.ui.h:30
-#| msgid "Color"
 msgctxt "Zoom Grayscale"
 msgid "Color"
 msgstr "ৰঙ"
 
 #: ../panels/universal-access/zoom-options.ui.h:31
-#| msgid "None"
 msgctxt "Zoom Grayscale"
 msgid "None"
 msgstr "কোনো নহয়"
 
 #: ../panels/universal-access/zoom-options.ui.h:32
-#| msgid "Full"
 msgctxt "Zoom Grayscale"
 msgid "Full"
 msgstr "পূৰ্ণ"
@@ -4955,19 +4955,16 @@ msgid "%d of %d"
 msgstr "%d ৰ %d"
 
 #: ../panels/wacom/cc-wacom-page.c:118 ../panels/wacom/cc-wacom-page.c:371
-#| msgid "None"
 msgctxt "Wacom action-type"
 msgid "None"
 msgstr "কোনো নহয়"
 
 #: ../panels/wacom/cc-wacom-page.c:119
-#| msgid "Send Keystroke"
 msgctxt "Wacom action-type"
 msgid "Send Keystroke"
 msgstr "কি'স্ট্ৰৌক পঠাওক"
 
 #: ../panels/wacom/cc-wacom-page.c:120
-#| msgid "Switch Monitor"
 msgctxt "Wacom action-type"
 msgid "Switch Monitor"
 msgstr "চুইচ পৰ্যবেক্ষক"
@@ -5245,6 +5242,12 @@ msgstr "পছন্দসমূহ;সংহতিসমূহ;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "সকলো সংহতি"
+
+#~ msgid "Security Key"
+#~ msgstr "সুৰক্ষা কি"
+
+#~ msgid "Subnet Mask"
+#~ msgstr "চাবনেট মাস্ক"
 
 #~ msgid "To test your settings, try to double-click on the face."
 #~ msgstr "আপোনাৰ সংহতিসমূহ পৰিক্ষা কৰিবলে, মুখত দুবাৰ-ক্লিক কৰাৰ চেষ্টা কৰক"
