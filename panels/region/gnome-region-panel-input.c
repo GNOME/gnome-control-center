@@ -107,9 +107,6 @@ static const gchar *supported_ibus_engines[] = {
   "m17n:si:trans",
   "sayura",
 
-  /* Farsi (confirmation needed) */
-  "m17n:fa:isiri",
-
   /* Amharic (confirmation needed) */
   "m17n:am:sera",
 
