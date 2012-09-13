@@ -29,13 +29,17 @@
 
 #include <glib/gi18n.h>
 
+#define GNOME_DESKTOP_USE_UNSTABLE_API
+#include <libgnome-desktop/gnome-xkb-info.h>
+
 #include "cc-common-language.h"
 #include "gdm-languages.h"
 #include "gnome-region-panel-system.h"
+#include "gnome-region-panel-input.h"
 
 #define WID(s) GTK_WIDGET(gtk_builder_get_object (dialog, s))
 
-static GSettings *locale_settings;
+static GSettings *locale_settings, *input_sources_settings;
 static GDBusProxy *localed_proxy;
 static GPermission *localed_permission;
 
@@ -72,13 +76,14 @@ update_copy_button (GtkBuilder *dialog)
 
         button = WID ("copy_settings_button");
 
-        /* If the version of localed doesn't include layouts... */
-        if (system_input_source) {
+        if (user_input_source && user_input_source[0]) {
                 layouts_differ = (g_strcmp0 (user_input_source, system_input_source) != 0);
                 if (layouts_differ == FALSE)
                         layouts_differ = (g_strcmp0 (user_input_variants, system_input_variants) != 0);
-        } else
+        } else {
+                /* Nothing to copy */
                 layouts_differ = FALSE;
+        }
 
         if (g_strcmp0 (user_lang, system_lang) == 0 &&
             g_strcmp0 (user_region, system_region) == 0 &&
@@ -131,6 +136,75 @@ system_update_language (GtkBuilder *dialog, const gchar *language)
 }
 
 static void
+input_sources_changed (GSettings *settings,
+                       const gchar *key,
+                       GtkBuilder *dialog)
+{
+        GString *disp, *list, *variants;
+        GtkWidget *label;
+        GnomeXkbInfo *xkb_info;
+        GVariantIter iter;
+        GVariant *sources;
+        const gchar *type;
+        const gchar *id;
+
+        sources = g_settings_get_value (input_sources_settings, "sources");
+        if (g_variant_n_children (sources) < 1) {
+                g_variant_unref (sources);
+                sources = create_source_from_current_xkb_config ();
+        }
+
+        xkb_info = gnome_xkb_info_new ();
+
+        label = WID ("user_input_source");
+        disp = g_string_new ("");
+        list = g_string_new ("");
+        variants = g_string_new ("");
+
+        g_variant_iter_init (&iter, sources);
+        while (g_variant_iter_next (&iter, "(&s&s)", &type, &id)) {
+                /* We can't copy non-XKB layouts to the system yet */
+                if (g_str_equal (type, "xkb")) {
+                        char **split;
+                        gchar *layout, *variant;
+                        const char *name;
+
+                        gnome_xkb_info_get_layout_info (xkb_info, id, &name, NULL, NULL, NULL);
+                        if (disp->str[0] != '\0')
+                                g_string_append (disp, ", ");
+                        g_string_append (disp, name);
+
+                        split = g_strsplit (id, "+", 2);
+
+                        if (split == NULL || split[0] == NULL)
+                                continue;
+
+                        layout = split[0];
+                        variant = split[1];
+
+                        if (list->str[0] != '\0') {
+                                g_string_append (list, ",");
+                                g_string_append (variants, ",");
+                        }
+                        g_string_append (list, layout);
+                        g_string_append (variants, variant ? variant : "");
+
+                        g_strfreev (split);
+                }
+        }
+        g_variant_unref (sources);
+        g_object_unref (xkb_info);
+
+        g_object_set_data_full (G_OBJECT (label), "input_source", g_string_free (list, FALSE), g_free);
+        g_object_set_data_full (G_OBJECT (label), "input_variants", g_string_free (variants, FALSE), g_free);
+
+        gtk_label_set_text (GTK_LABEL (label), disp->str);
+        g_string_free (disp, TRUE);
+
+        update_copy_button (dialog);
+}
+
+static void
 update_property (GDBusProxy *proxy,
                  const char *property)
 {
@@ -164,7 +238,13 @@ on_localed_properties_changed (GDBusProxy   *proxy,
                                const gchar **invalidated_properties,
                                GtkBuilder   *dialog)
 {
-        GVariant *v;
+        GVariant *v, *w;
+        GtkWidget *label;
+        GnomeXkbInfo *xkb_info;
+        char **layouts;
+        char **variants;
+        GString *disp;
+        guint i, n;
 
         if (invalidated_properties != NULL) {
                 guint i;
@@ -173,6 +253,8 @@ on_localed_properties_changed (GDBusProxy   *proxy,
                                 update_property (proxy, "Locale");
                         else if (g_str_equal (invalidated_properties[i], "X11Layout"))
                                 update_property (proxy, "X11Layout");
+                        else if (g_str_equal (invalidated_properties[i], "X11Variant"))
+                                update_property (proxy, "X11Variant");
                 }
         }
 
@@ -223,6 +305,59 @@ on_localed_properties_changed (GDBusProxy   *proxy,
                 }
                 g_variant_unref (v);
         }
+
+        label = WID ("system_input_source");
+        v = g_dbus_proxy_get_cached_property (proxy, "X11Layout");
+        if (v) {
+                layouts = g_strsplit (g_variant_get_string (v, NULL), ",", -1);
+                g_object_set_data_full (G_OBJECT (label), "input_source",
+                                        g_variant_dup_string (v, NULL), g_free);
+                g_variant_unref (v);
+        } else {
+                g_object_set_data_full (G_OBJECT (label), "input_source", NULL, g_free);
+                update_copy_button (dialog);
+                return;
+        }
+
+        w = g_dbus_proxy_get_cached_property (proxy, "X11Variant");
+        if (w) {
+                variants = g_strsplit (g_variant_get_string (w, NULL), ",", -1);
+                g_object_set_data_full (G_OBJECT (label), "input_variants",
+                                        g_variant_dup_string (w, NULL), g_free);
+                g_variant_unref (w);
+        } else {
+                g_object_set_data_full (G_OBJECT (label), "input_variants", NULL, g_free);
+        }
+
+        if (variants && variants[0])
+                n = MIN (g_strv_length (layouts), g_strv_length (variants));
+        else
+                n = g_strv_length (layouts);
+
+        xkb_info = gnome_xkb_info_new ();
+        disp = g_string_new ("");
+        for (i = 0; i < n && layouts[i][0]; i++) {
+                const char *name;
+                char *id;
+
+                if (variants && variants[i] && variants[i][0])
+                        id = g_strdup_printf ("%s+%s", layouts[i], variants[i]);
+                else
+                        id = g_strdup (layouts[i]);
+
+                gnome_xkb_info_get_layout_info (xkb_info, id, &name, NULL, NULL, NULL);
+                if (disp->str[0] != '\0')
+                        disp = g_string_append (disp, ", ");
+                disp = g_string_append (disp, name ? name : id);
+
+                g_free (id);
+        }
+        gtk_label_set_text (GTK_LABEL (label), disp->str);
+        g_string_free (disp, TRUE);
+
+        g_strfreev (variants);
+        g_strfreev (layouts);
+        g_object_unref (xkb_info);
 
         update_copy_button (dialog);
 }
@@ -295,6 +430,11 @@ copy_settings (GtkButton *button, GtkBuilder *dialog)
         label = WID ("user_input_source");
         layout = g_object_get_data (G_OBJECT (label), "input_source");
         variants = g_object_get_data (G_OBJECT (label), "input_variants");
+
+        if (layout == NULL || layout[0] == '\0') {
+                g_debug ("Not calling SetX11Keyboard, as there are no XKB input sources in the user's settings");
+                return;
+        }
 
         g_dbus_proxy_call (localed_proxy,
                            "SetX11Keyboard",
@@ -378,12 +518,19 @@ setup_system (GtkBuilder *dialog)
                           G_CALLBACK (locale_settings_changed), dialog);
         g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, locale_settings);
 
+        input_sources_settings = g_settings_new ("org.gnome.desktop.input-sources");
+        g_signal_connect (input_sources_settings, "changed::sources",
+                          G_CALLBACK (input_sources_changed), dialog);
+        g_object_weak_ref (G_OBJECT (dialog), (GWeakNotify) g_object_unref, input_sources_settings);
+
         /* Display user settings */
         language = cc_common_language_get_current_language ();
         system_update_language (dialog, language);
         g_free (language);
 
         locale_settings_changed (locale_settings, "region", dialog);
+
+        input_sources_changed (input_sources_settings, "sources", dialog);
 
         bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
         g_dbus_proxy_new (bus,

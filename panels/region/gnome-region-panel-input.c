@@ -505,7 +505,7 @@ populate_model (GtkListStore *store,
   g_hash_table_destroy (active_sources_table);
 }
 
-static GVariant *
+GVariant *
 create_source_from_current_xkb_config (void)
 {
   GVariantBuilder builder;
