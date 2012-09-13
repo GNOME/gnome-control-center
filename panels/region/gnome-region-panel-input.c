@@ -109,9 +109,6 @@ static const gchar *supported_ibus_engines[] = {
   "m17n:si:trans",
   "sayura",
 
-  /* Amharic (confirmation needed) */
-  "m17n:am:sera",
-
   /* Indic */
   /* https://fedoraproject.org/wiki/I18N/Indic#Keyboard_Layouts */
 
@@ -236,6 +233,9 @@ static const gchar *supported_ibus_engines[] = {
   "m17n:eo:q",
   "m17n:eo:vi",
   "m17n:eo:x",
+
+  /* Amharic */
+  "m17n:am:sera",
 
   /* Russian */
   "m17n:ru:translit",
