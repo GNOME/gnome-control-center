@@ -235,11 +235,9 @@ goa_panel_add_account_dialog_init (GoaPanelAddAccountDialog *add_account)
   GtkCellRenderer *renderer;
   GtkTreeSelection *selection;
   GtkTreeViewColumn *column;
-  GtkWidget *label;
   GtkWidget *sw;
   GtkWidget *vbox;
   GtkWidget *grid;
-  gchar *markup;
 
   add_account->priv = GOA_ADD_ACCOUNT_DIALOG_GET_PRIVATE (add_account);
   priv = add_account->priv;
@@ -247,8 +245,7 @@ goa_panel_add_account_dialog_init (GoaPanelAddAccountDialog *add_account)
   gtk_container_set_border_width (GTK_CONTAINER (add_account), 6);
   gtk_window_set_modal (GTK_WINDOW (add_account), TRUE);
   gtk_window_set_resizable (GTK_WINDOW (add_account), FALSE);
-  /* translators: This is the title of the "Add Account" dialogue.
-   * The title is not visible when using GNOME Shell */
+  /* translators: This is the title of the "Add Account" dialog. */
   gtk_window_set_title (GTK_WINDOW (add_account), _("Add Account"));
 
   vbox = gtk_dialog_get_content_area (GTK_DIALOG (add_account));
@@ -258,13 +255,6 @@ goa_panel_add_account_dialog_init (GoaPanelAddAccountDialog *add_account)
   gtk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_VERTICAL);
   gtk_grid_set_row_spacing (GTK_GRID (grid), 12);
   gtk_container_add (GTK_CONTAINER (vbox), grid);
-
-  label = gtk_label_new (NULL);
-  markup = g_strconcat ("<b><span size=\"large\">", _("Add Account"), "</span></b>", NULL);
-  gtk_label_set_markup (GTK_LABEL (label), markup);
-  g_free (markup);
-  gtk_misc_set_alignment (GTK_MISC (label), 0.5, 0.5);
-  gtk_container_add (GTK_CONTAINER (grid), label);
 
   priv->list_store = gtk_list_store_new (N_COLUMNS, GOA_TYPE_PROVIDER, G_TYPE_ICON, G_TYPE_STRING);
 
