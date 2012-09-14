@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-11 11:28+0000\n"
-"PO-Revision-Date: 2012-09-12 07:20+0530\n"
+"POT-Creation-Date: 2012-09-13 14:48+0000\n"
+"PO-Revision-Date: 2012-09-14 07:24+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
 "Language: pa\n"
@@ -767,7 +767,6 @@ msgstr "180 ਡਿਗਰੀ"
 #. * "Pantallas en Espejo".
 #.
 #: ../panels/display/cc-display-panel.c:623
-#| msgid "Mirror Displays"
 msgid "Mirrored Displays"
 msgstr "ਮਿਰਰ ਕੀਤੇ ਡਿਸਪਲੇਅ"
 
@@ -1650,86 +1649,119 @@ msgstr "ਨਵਾਂ ਕੁਨੈਕਸ਼ਨ ਸ਼ਾਮਲ ਕਰੋ"
 
 #. Translators: network device speed
 #: ../panels/network/net-device-mobile.c:261
-#: ../panels/network/net-device-wifi.c:699
+#: ../panels/network/net-device-wifi.c:770
 #: ../panels/network/net-device-wired.c:126
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#. TRANSLATORS: this is when the access point is not listed in
-#. *  the dropdown (or hidden) and the user has to select another
-#. *  entry manually
-#: ../panels/network/net-device-wifi.c:196
+#. TRANSLATORS: this is when the access point is not shown
+#. * in the list and the user has to enter the SSID manually
+#.
+#: ../panels/network/net-device-wifi.c:203
 msgid "Connect to a Hidden Network"
 msgstr "ਲੁਕਵੇਂ ਨੈੱਟਵਕ ਨਾਲ ਕੁਨੈਕਟ ਕਰੋ"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/net-device-wifi.c:293
-#: ../panels/network/net-device-wifi.c:472
+#: ../panels/network/net-device-wifi.c:302
+#: ../panels/network/net-device-wifi.c:481
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:297
-#: ../panels/network/net-device-wifi.c:476
+#: ../panels/network/net-device-wifi.c:306
+#: ../panels/network/net-device-wifi.c:485
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:301
+#: ../panels/network/net-device-wifi.c:310
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/net-device-wifi.c:306
+#: ../panels/network/net-device-wifi.c:315
 msgid "Enterprise"
 msgstr "ਇੰਟਰਪ੍ਰਾਈਜ਼"
 
-#: ../panels/network/net-device-wifi.c:311
-#: ../panels/network/net-device-wifi.c:467
+#: ../panels/network/net-device-wifi.c:320
+#: ../panels/network/net-device-wifi.c:476
 msgctxt "Wifi security"
 msgid "None"
 msgstr "ਕੋਈ ਨਹੀਂ"
 
-#: ../panels/network/net-device-wifi.c:733
+#: ../panels/network/net-device-wifi.c:697
+msgid "never"
+msgstr "ਕਦੇ ਨਹੀਂ"
+
+#: ../panels/network/net-device-wifi.c:707
+msgid "today"
+msgstr "ਅੱਜ"
+
+#: ../panels/network/net-device-wifi.c:709
+msgid "yesterday"
+msgstr "ਕੱਲ੍ਹ"
+
+#: ../panels/network/net-device-wifi.c:711
+#, c-format
+msgid "%i day ago"
+msgid_plural "%i days ago"
+msgstr[0] "%i ਦਿਨ ਪਹਿਲਾਂ"
+msgstr[1] "%i ਦਿਨ ਪਹਿਲਾਂ"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/net-device-wifi.c:780
+#: ../panels/network/panel-common.c:277
+msgid "Not connected"
+msgstr "ਕੁਨੈਕਟ ਨਹੀਂ ਹੈ"
+
+#: ../panels/network/net-device-wifi.c:782
+#: ../panels/network/net-device-wifi.c:2086
+msgid "Out of range"
+msgstr "ਹੱਦ ਤੋਂ ਬਾਹਰ"
+
+#: ../panels/network/net-device-wifi.c:813
 msgctxt "Signal strength"
 msgid "None"
 msgstr "ਕੋਈ ਨਹੀਂ"
 
-#: ../panels/network/net-device-wifi.c:735
+#: ../panels/network/net-device-wifi.c:815
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "ਕਮਜ਼ੋਰ"
 
-#: ../panels/network/net-device-wifi.c:737
+#: ../panels/network/net-device-wifi.c:817
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "ਠੀਕ ਹੈ"
 
-#: ../panels/network/net-device-wifi.c:739
+#: ../panels/network/net-device-wifi.c:819
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "ਚੰਗਾ"
 
-#: ../panels/network/net-device-wifi.c:741
+#: ../panels/network/net-device-wifi.c:821
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "ਬਹੁਤ ਵਧੀਆ"
 
-#: ../panels/network/net-device-wifi.c:901
+#: ../panels/network/net-device-wifi.c:1005
 #, c-format
+#| msgid ""
+#| "Network details for %s including password and any custom configuration "
+#| "will be lost"
 msgid ""
 "Network details for %s including password and any custom configuration will "
-"be lost"
+"be lost."
 msgstr ""
 "%s ਲਈ ਨੈੱਟਵਰਕ ਵੇਰਵਾ, ਜਿਸ ਵਿੱਚ ਪਾਸਵਰਡ ਅਤੇ ਹੋਰ ਪਸੰਦੀਦਾ ਸੰਰਚਨਾ ਦਿੱਤੀ ਸੀ, ਖਤਮ ਹੋ "
 "ਜਾਵੇਗਾ।"
 
-#: ../panels/network/net-device-wifi.c:912
+#: ../panels/network/net-device-wifi.c:1016
 msgid "Forget"
 msgstr "ਭੁੱਲੋ"
 
-#: ../panels/network/net-device-wifi.c:1437
+#: ../panels/network/net-device-wifi.c:1552
 msgid ""
 "If you have a connection to the Internet other than wireless, you can use it "
 "to share your internet connection with others."
@@ -1738,38 +1770,26 @@ msgstr ""
 "ਨੂੰ ਹੋਰਾਂ ਨਾਲ ਆਪਣੇ ਇੰਟਰਨੈੱਟ "
 "ਕੁਨੈਕਸ਼ਨ ਨੂੰ ਸਾਂਝਾ ਕਰਨ ਲਈ ਵਰਤ ਸਕਦੇ ਹੋ।"
 
-#: ../panels/network/net-device-wifi.c:1441
+#: ../panels/network/net-device-wifi.c:1556
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "ਬੇਤਾਰ ਹਾਟਸਪਾਟ ਚਾਲੂ ਕਰਨ ਨਾਲ ਤੁਹਾਨੂੰ <b>%s</b> ਤੋਂ ਡਿਸ-ਕੁਨੈਕਟ ਕੀਤਾ ਜਾਵੇਗਾ।"
 
-#: ../panels/network/net-device-wifi.c:1445
+#: ../panels/network/net-device-wifi.c:1560
 msgid ""
 "It is not possible to access the internet through your wireless while the "
 "hotspot is active."
 msgstr ""
 "ਤੁਹਾਡੇ ਬੇਤਾਰ ਰਾਹੀਂ ਇੰਟਰਨੈੱਟ ਵਰਤਣਾ ਸੰਭਵ ਨਹੀਂ ਹੈ, ਜਦੋਂ ਕਿ ਹਾਟਸਪਾਟ ਸਰਗਰਮ ਹੋਵੇ।"
 
-#: ../panels/network/net-device-wifi.c:1511
+#: ../panels/network/net-device-wifi.c:1626
 msgid "Stop hotspot and disconnect any users?"
 msgstr "ਕੀ ਹਾਟਸਪਾਟ ਰੋਕਣਾ ਹੈ ਅਤੇ ਯੂਜ਼ਰ ਨੂੰ ਡਿਸ-ਕੁਨੈਕਟ ਕਰਨਾ ਹੈ?"
 
-#: ../panels/network/net-device-wifi.c:1514
+#: ../panels/network/net-device-wifi.c:1629
 msgid "_Stop Hotspot"
 msgstr "ਹਾਟਸਪਾਟ ਰੋਕੋ(_S)"
-
-#: ../panels/network/net-device-wifi.c:1579
-#, c-format
-msgid "%i day ago"
-msgid_plural "%i days ago"
-msgstr[0] "%i ਦਿਨ ਪਹਿਲਾਂ"
-msgstr[1] "%i ਦਿਨ ਪਹਿਲਾਂ"
-
-#: ../panels/network/net-device-wifi.c:1933
-#: ../panels/network/network-wifi.ui.h:19
-msgid "Out of range"
-msgstr "ਹੱਦ ਤੋਂ ਬਾਹਰ"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: ../panels/network/net-proxy.c:67
@@ -1799,31 +1819,31 @@ msgid "Provider"
 msgstr "ਪਰੋਵਾਇਡਰ"
 
 #: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:697 ../panels/network/panel-common.c:699
+#: ../panels/network/panel-common.c:686 ../panels/network/panel-common.c:688
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "IP ਐਡਰੈੱਸ"
 
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-wifi.ui.h:7
-#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:695
+#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:684
 msgid "IPv6 Address"
 msgstr "IPv6 ਐਡਰੈੱਸ"
 
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-wifi.ui.h:8
-#: ../panels/network/network-wired.ui.h:5
+#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wired.ui.h:4
 msgid "Default Route"
 msgstr "ਡਿਫਾਲਟ ਰੂਟ"
 
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-wifi.ui.h:9
-#: ../panels/network/network-wired.ui.h:6
+#: ../panels/network/network-wifi.ui.h:14
+#: ../panels/network/network-wired.ui.h:5
 msgid "DNS"
 msgstr "DNS"
 
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-wired.ui.h:7
+#: ../panels/network/network-wired.ui.h:6
 msgid "_Options..."
 msgstr "ਚੋਣਾਂ(_O)..."
 
@@ -1928,66 +1948,63 @@ msgid "_Use as Hotspot..."
 msgstr "ਹਾਟਸਪਾਟ ਵਜੋਂ ਵਰਤੋਂ(_U)..."
 
 #: ../panels/network/network-wifi.ui.h:5
+#| msgid "Connected"
+msgid "_Connect"
+msgstr "ਕੁਨੈਕਸ਼ਨ ਕਰੋ(_C)"
+
+#: ../panels/network/network-wifi.ui.h:6
+msgid "Last used"
+msgstr "ਆਖਰੀ ਵਰਤੋਂ"
+
+#: ../panels/network/network-wifi.ui.h:7
 #: ../panels/network/network-wired.ui.h:1
 msgid "Hardware Address"
 msgstr "ਹਾਰਡਵੇਅਰ ਐਡਰੈੱਸ"
 
-#: ../panels/network/network-wifi.ui.h:6
-#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:694
-msgid "IPv4 Address"
-msgstr "IPv4 ਐਡਰੈੱਸ"
-
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:8
 msgid "Security"
 msgstr "ਸੁਰੱਖਿਆ"
 
-#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wifi.ui.h:9
 msgid "Strength"
 msgstr "ਤਾਕਤ"
 
-#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wifi.ui.h:10
 msgid "Link speed"
 msgstr "ਲਿੰਕ ਸਪੀਡ"
 
-#: ../panels/network/network-wifi.ui.h:13
-msgid "_Settings..."
-msgstr "ਸੈਟਿੰਗ(_S)..."
-
-#: ../panels/network/network-wifi.ui.h:14
-msgid "Switch off to connect to a wireless network"
-msgstr "ਬੇਤਾਰ ਨੈੱਟਵਰਕ ਨਾਲ ਕੁਨੈਕਟ ਕਰਨ ਲਈ ਬੰਦ ਕਰੋ"
+#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:683
+msgid "IPv4 Address"
+msgstr "IPv4 ਐਡਰੈੱਸ"
 
 #: ../panels/network/network-wifi.ui.h:15
-msgid "Network Name"
-msgstr "ਨੈੱਟਵਰਕ ਨਾਂ"
-
-#: ../panels/network/network-wifi.ui.h:16
-msgid "Connected Devices"
-msgstr "ਕੁਨੈਕਟ ਹੋਏ ਜੰਤਰ"
-
-#: ../panels/network/network-wifi.ui.h:17
-msgid "Security type"
-msgstr "ਸੁਰੱਖਿਆ ਕਿਸਮ"
-
-#: ../panels/network/network-wifi.ui.h:18
-msgid "Security key"
-msgstr "ਸੁਰੱਖਿਆ ਕੁੰਜੀ"
-
-#: ../panels/network/network-wifi.ui.h:20
-msgid "Security Key"
-msgstr "ਸੁਰੱਖਿਆ ਕੁੰਜੀ"
-
-#: ../panels/network/network-wifi.ui.h:21
-msgid "Last used"
-msgstr "ਆਖਰੀ ਵਰਤੋਂ"
-
-#: ../panels/network/network-wifi.ui.h:22
 msgid "_Forget Network"
 msgstr "ਨੈੱਟਵਰਕ ਭੁੱਲ ਜਾਓ(_F)"
 
-#: ../panels/network/network-wired.ui.h:4
-msgid "Subnet Mask"
-msgstr "ਸਬਨੈੱਟ ਮਾਸਟ"
+#: ../panels/network/network-wifi.ui.h:16
+msgid "_Settings..."
+msgstr "ਸੈਟਿੰਗ(_S)..."
+
+#: ../panels/network/network-wifi.ui.h:17
+msgid "Switch off to connect to a wireless network"
+msgstr "ਬੇਤਾਰ ਨੈੱਟਵਰਕ ਨਾਲ ਕੁਨੈਕਟ ਕਰਨ ਲਈ ਬੰਦ ਕਰੋ"
+
+#: ../panels/network/network-wifi.ui.h:18
+msgid "Network Name"
+msgstr "ਨੈੱਟਵਰਕ ਨਾਂ"
+
+#: ../panels/network/network-wifi.ui.h:19
+msgid "Connected Devices"
+msgstr "ਕੁਨੈਕਟ ਹੋਏ ਜੰਤਰ"
+
+#: ../panels/network/network-wifi.ui.h:20
+msgid "Security type"
+msgstr "ਸੁਰੱਖਿਆ ਕਿਸਮ"
+
+#: ../panels/network/network-wifi.ui.h:21
+msgid "Security key"
+msgstr "ਸੁਰੱਖਿਆ ਕੁੰਜੀ"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:86
@@ -2076,11 +2093,6 @@ msgstr "ਕੁਨੈਕਸ਼ਨ ਫੇਲ੍ਹ ਹੈ"
 #: ../panels/network/panel-common.c:239 ../panels/network/panel-common.c:281
 msgid "Status unknown (missing)"
 msgstr "ਹਾਲਤ ਅਣਜਾਣ (ਗੁੰਮ)"
-
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:277
-msgid "Not connected"
-msgstr "ਕੁਨੈਕਟ ਨਹੀਂ ਹੈ"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:301
@@ -2705,7 +2717,6 @@ msgstr "ਓਪਟੀਕਲ ਫੋਟੋ ਕੰਡਕਟਰ ਹੁਣ ਕੰਮ �
 
 #. Translators: Printer's state (printer is being configured right now)
 #: ../panels/printers/cc-printers-panel.c:724
-#| msgid "_Configuration URL"
 msgctxt "printer state"
 msgid "Configuring"
 msgstr "ਸੰਰਚਨਾ ਜਾਰੀ"
@@ -2745,7 +2756,6 @@ msgstr "ਸਪਲਾਈ ਲੈਵਲ"
 
 #. Translators: Printer's state (printer is being installed right now)
 #: ../panels/printers/cc-printers-panel.c:930
-#| msgid "Install"
 msgctxt "printer state"
 msgid "Installing"
 msgstr "ਇੰਸਟਾਲ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
@@ -2858,7 +2868,6 @@ msgid "Add a New Printer"
 msgstr "ਨਵਾਂ ਪਰਿੰਟਰ ਸ਼ਾਮਲ"
 
 #: ../panels/printers/new-printer-dialog.ui.h:4
-#| msgid "No network printers found"
 msgid "Search for network printers or filter result"
 msgstr "ਨੈੱਟਵਰਕ ਪਰਿੰਟਰ ਲੱਭੋ ਜਾਂ ਨਤੀਜਾ ਫਿਲਟਰ ਕਰੋ"
 
@@ -2986,7 +2995,6 @@ msgstr "%s ਸਰਗਰਮ ਜਾਬ"
 
 #. Translators: No printers were found
 #: ../panels/printers/pp-new-printer-dialog.c:1291
-#| msgid "No tablet detected"
 msgid "No printers detected."
 msgstr "ਕੋਈ ਪਰਿੰਟਰ ਨਹੀਂ ਮਿਲਿਆ।"
 
@@ -5269,6 +5277,12 @@ msgstr "ਮੇਰੀ ਪਸੰਦ;ਸੈਟਿੰਗ;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "ਸਭ ਸੈਟਿੰਗ"
+
+#~ msgid "Security Key"
+#~ msgstr "ਸੁਰੱਖਿਆ ਕੁੰਜੀ"
+
+#~ msgid "Subnet Mask"
+#~ msgstr "ਸਬਨੈੱਟ ਮਾਸਟ"
 
 #~ msgid "A_ddress:"
 #~ msgstr "ਐਡਰੈੱਸ(_d):"
