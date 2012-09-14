@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-07 12:34+0000\n"
-"PO-Revision-Date: 2012-09-07 19:29+0300\n"
+"POT-Creation-Date: 2012-09-13 14:48+0000\n"
+"PO-Revision-Date: 2012-09-14 13:21+0300\n"
 "Last-Translator: Kasia Bondarava <kasia.bondarava@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -77,7 +77,7 @@ msgstr "Колеры"
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/cc-background-chooser-dialog.c:280
+#: ../panels/background/cc-background-chooser-dialog.c:286
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
 #: ../panels/user-accounts/um-photo-dialog.c:98
@@ -1586,7 +1586,8 @@ msgstr "_Змесціва чапляецца за пальцы"
 #: ../panels/mouse/gnome-mouse-test.c:134
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
 msgid "Try clicking, double clicking, scrolling"
-msgstr "Паспрабуйце папстрыкаць (адзін раз і двойчы), а таксама пракруціць змесціва"
+msgstr ""
+"Паспрабуйце папстрыкаць (адзін раз і двойчы), а таксама пракруціць змесціва"
 
 #: ../panels/mouse/gnome-mouse-test.c:139
 msgid "Five clicks, GEGL time!"
@@ -1656,113 +1657,60 @@ msgstr "Дадаць новае злучэнне"
 
 #. Translators: network device speed
 #: ../panels/network/net-device-mobile.c:261
-#: ../panels/network/net-device-wifi.c:699
+#: ../panels/network/net-device-wifi.c:770
 #: ../panels/network/net-device-wired.c:126
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Мб/с"
 
-#. TRANSLATORS: this is when the access point is not listed in
-#. *  the dropdown (or hidden) and the user has to select another
-#. *  entry manually
-#: ../panels/network/net-device-wifi.c:196
+#. TRANSLATORS: this is when the access point is not shown
+#. * in the list and the user has to enter the SSID manually
+#.
+#: ../panels/network/net-device-wifi.c:203
 msgid "Connect to a Hidden Network"
 msgstr "Злучыцца са схаванай сеткай"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/net-device-wifi.c:293
-#: ../panels/network/net-device-wifi.c:472
+#: ../panels/network/net-device-wifi.c:302
+#: ../panels/network/net-device-wifi.c:481
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:297
-#: ../panels/network/net-device-wifi.c:476
+#: ../panels/network/net-device-wifi.c:306
+#: ../panels/network/net-device-wifi.c:485
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:301
+#: ../panels/network/net-device-wifi.c:310
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/net-device-wifi.c:306
+#: ../panels/network/net-device-wifi.c:315
 msgid "Enterprise"
 msgstr "Enterprise"
 
-#: ../panels/network/net-device-wifi.c:311
-#: ../panels/network/net-device-wifi.c:467
+#: ../panels/network/net-device-wifi.c:320
+#: ../panels/network/net-device-wifi.c:476
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Няма"
 
-#: ../panels/network/net-device-wifi.c:733
-msgctxt "Signal strength"
-msgid "None"
-msgstr "Няма"
+#: ../panels/network/net-device-wifi.c:697
+msgid "never"
+msgstr "ніколі"
 
-#: ../panels/network/net-device-wifi.c:735
-msgctxt "Signal strength"
-msgid "Weak"
-msgstr "Слабы"
+#: ../panels/network/net-device-wifi.c:707
+msgid "today"
+msgstr "сёння"
 
-#: ../panels/network/net-device-wifi.c:737
-msgctxt "Signal strength"
-msgid "Ok"
-msgstr "Здавальняючы"
+#: ../panels/network/net-device-wifi.c:709
+msgid "yesterday"
+msgstr "учора"
 
-#: ../panels/network/net-device-wifi.c:739
-msgctxt "Signal strength"
-msgid "Good"
-msgstr "Добры"
-
-#: ../panels/network/net-device-wifi.c:741
-msgctxt "Signal strength"
-msgid "Excellent"
-msgstr "Выдатны"
-
-#: ../panels/network/net-device-wifi.c:901
-#, c-format
-msgid ""
-"Network details for %s including password and any custom configuration will "
-"be lost"
-msgstr ""
-"Інфармацыя аб сетцы %s разам з паролем і іншымі настройкамі будзе незваротна "
-"страчана"
-
-#: ../panels/network/net-device-wifi.c:912
-msgid "Forget"
-msgstr "Забыць настройкі"
-
-#: ../panels/network/net-device-wifi.c:1437
-msgid ""
-"If you have a connection to the Internet other than wireless, you can use it "
-"to share your internet connection with others."
-msgstr ""
-"Калі вы маеце правадное злучэнне з сецівам, вы можаце падзяліцца ім з астатнімі."
-
-#: ../panels/network/net-device-wifi.c:1441
-#, c-format
-msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
-msgstr "Уключэнне хотспота патрабуе адлучэння ад <b>%s</b>."
-
-#: ../panels/network/net-device-wifi.c:1445
-msgid ""
-"It is not possible to access the internet through your wireless while the "
-"hotspot is active."
-msgstr ""
-"Вы не можаце атрымаць доступ да бесправадного сеціва, пакуль уключаны хотспот."
-
-#: ../panels/network/net-device-wifi.c:1511
-msgid "Stop hotspot and disconnect any users?"
-msgstr "Спыніць хотспот і адлучыць усіх карыстальнікаў?"
-
-#: ../panels/network/net-device-wifi.c:1514
-msgid "_Stop Hotspot"
-msgstr "_Спыніць хотспот"
-
-#: ../panels/network/net-device-wifi.c:1579
+#: ../panels/network/net-device-wifi.c:711
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -1770,10 +1718,83 @@ msgstr[0] "%i дзень таму"
 msgstr[1] "%i дні таму"
 msgstr[2] "%i дзён таму"
 
-#: ../panels/network/net-device-wifi.c:1933
-#: ../panels/network/network-wifi.ui.h:19
+#. TRANSLATORS: VPN status
+#: ../panels/network/net-device-wifi.c:780
+#: ../panels/network/panel-common.c:277
+msgid "Not connected"
+msgstr "Не злучана"
+
+#: ../panels/network/net-device-wifi.c:782
+#: ../panels/network/net-device-wifi.c:2086
 msgid "Out of range"
 msgstr "Па-за дыяпазонам"
+
+#: ../panels/network/net-device-wifi.c:813
+msgctxt "Signal strength"
+msgid "None"
+msgstr "Няма"
+
+#: ../panels/network/net-device-wifi.c:815
+msgctxt "Signal strength"
+msgid "Weak"
+msgstr "Слабы"
+
+#: ../panels/network/net-device-wifi.c:817
+msgctxt "Signal strength"
+msgid "Ok"
+msgstr "Здавальняючы"
+
+#: ../panels/network/net-device-wifi.c:819
+msgctxt "Signal strength"
+msgid "Good"
+msgstr "Добры"
+
+#: ../panels/network/net-device-wifi.c:821
+msgctxt "Signal strength"
+msgid "Excellent"
+msgstr "Выдатны"
+
+#: ../panels/network/net-device-wifi.c:1005
+#, c-format
+msgid ""
+"Network details for %s including password and any custom configuration will "
+"be lost."
+msgstr ""
+"Інфармацыя аб сетцы %s разам з паролем і іншымі настройкамі будзе незваротна "
+"страчана."
+
+#: ../panels/network/net-device-wifi.c:1016
+msgid "Forget"
+msgstr "Забыць настройкі"
+
+#: ../panels/network/net-device-wifi.c:1552
+msgid ""
+"If you have a connection to the Internet other than wireless, you can use it "
+"to share your internet connection with others."
+msgstr ""
+"Калі вы маеце правадное злучэнне з сецівам, вы можаце падзяліцца ім з "
+"астатнімі."
+
+#: ../panels/network/net-device-wifi.c:1556
+#, c-format
+msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
+msgstr "Уключэнне хотспота патрабуе адлучэння ад <b>%s</b>."
+
+#: ../panels/network/net-device-wifi.c:1560
+msgid ""
+"It is not possible to access the internet through your wireless while the "
+"hotspot is active."
+msgstr ""
+"Вы не можаце атрымаць доступ да бесправадного сеціва, пакуль уключаны "
+"хотспот."
+
+#: ../panels/network/net-device-wifi.c:1626
+msgid "Stop hotspot and disconnect any users?"
+msgstr "Спыніць хотспот і адлучыць усіх карыстальнікаў?"
+
+#: ../panels/network/net-device-wifi.c:1629
+msgid "_Stop Hotspot"
+msgstr "_Спыніць хотспот"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: ../panels/network/net-proxy.c:67
@@ -1804,31 +1825,31 @@ msgid "Provider"
 msgstr "Правайдар"
 
 #: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:697 ../panels/network/panel-common.c:699
+#: ../panels/network/panel-common.c:686 ../panels/network/panel-common.c:688
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "IP-адрас"
 
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-wifi.ui.h:7
-#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:695
+#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:684
 msgid "IPv6 Address"
 msgstr "IPv6-адрас"
 
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-wifi.ui.h:8
-#: ../panels/network/network-wired.ui.h:5
+#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wired.ui.h:4
 msgid "Default Route"
 msgstr "Прадвызначаны маршрут"
 
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-wifi.ui.h:9
-#: ../panels/network/network-wired.ui.h:6
+#: ../panels/network/network-wifi.ui.h:14
+#: ../panels/network/network-wired.ui.h:5
 msgid "DNS"
 msgstr "DNS"
 
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-wired.ui.h:7
+#: ../panels/network/network-wired.ui.h:6
 msgid "_Options..."
 msgstr "_Параметры..."
 
@@ -1933,66 +1954,62 @@ msgid "_Use as Hotspot..."
 msgstr "_Ужыць для хотспота..."
 
 #: ../panels/network/network-wifi.ui.h:5
+msgid "_Connect"
+msgstr "_Злучыць"
+
+#: ../panels/network/network-wifi.ui.h:6
+msgid "Last used"
+msgstr "Апошняе выкарыстанне"
+
+#: ../panels/network/network-wifi.ui.h:7
 #: ../panels/network/network-wired.ui.h:1
 msgid "Hardware Address"
 msgstr "Апаратны адрас"
 
-#: ../panels/network/network-wifi.ui.h:6
-#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:694
-msgid "IPv4 Address"
-msgstr "IPv4-адрас"
-
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:8
 msgid "Security"
 msgstr "Бяспека"
 
-#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wifi.ui.h:9
 msgid "Strength"
 msgstr "Магутнасць сігналу"
 
-#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wifi.ui.h:10
 msgid "Link speed"
 msgstr "Хуткасць злучэння"
 
-#: ../panels/network/network-wifi.ui.h:13
-msgid "_Settings..."
-msgstr "_Настройкі..."
-
-#: ../panels/network/network-wifi.ui.h:14
-msgid "Switch off to connect to a wireless network"
-msgstr "Выключыце, каб злучыцца з бесправадной сеткай"
+#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:683
+msgid "IPv4 Address"
+msgstr "IPv4-адрас"
 
 #: ../panels/network/network-wifi.ui.h:15
-msgid "Network Name"
-msgstr "Назва сеткі"
-
-#: ../panels/network/network-wifi.ui.h:16
-msgid "Connected Devices"
-msgstr "Далучаныя прыстасаванні"
-
-#: ../panels/network/network-wifi.ui.h:17
-msgid "Security type"
-msgstr "Тып бяспекі"
-
-#: ../panels/network/network-wifi.ui.h:18
-msgid "Security key"
-msgstr "Ключ бяспекі"
-
-#: ../panels/network/network-wifi.ui.h:20
-msgid "Security Key"
-msgstr "Ключ бяспекі"
-
-#: ../panels/network/network-wifi.ui.h:21
-msgid "Last used"
-msgstr "Апошняе выкарыстанне"
-
-#: ../panels/network/network-wifi.ui.h:22
 msgid "_Forget Network"
 msgstr "_Забыць пра сетку"
 
-#: ../panels/network/network-wired.ui.h:4
-msgid "Subnet Mask"
-msgstr "Маска падсеткі"
+#: ../panels/network/network-wifi.ui.h:16
+msgid "_Settings..."
+msgstr "_Настройкі..."
+
+#: ../panels/network/network-wifi.ui.h:17
+msgid "Switch off to connect to a wireless network"
+msgstr "Выключыце, каб злучыцца з бесправадной сеткай"
+
+#: ../panels/network/network-wifi.ui.h:18
+msgid "Network Name"
+msgstr "Назва сеткі"
+
+#: ../panels/network/network-wifi.ui.h:19
+msgid "Connected Devices"
+msgstr "Далучаныя прыстасаванні"
+
+#: ../panels/network/network-wifi.ui.h:20
+msgid "Security type"
+msgstr "Тып бяспекі"
+
+#: ../panels/network/network-wifi.ui.h:21
+msgid "Security key"
+msgstr "Ключ бяспекі"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:86
@@ -2081,11 +2098,6 @@ msgstr "Не ўдалося злучыцца"
 #: ../panels/network/panel-common.c:239 ../panels/network/panel-common.c:281
 msgid "Status unknown (missing)"
 msgstr "Невядомы стан (адсутнічае)"
-
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:277
-msgid "Not connected"
-msgstr "Не злучана"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:301
@@ -2377,11 +2389,11 @@ msgstr ""
 "Калі вы дадасце конт, гэта дазволіць праграмам атрымаць доступ да "
 "дакументаў, пошты, кантактаў, календара, чату і іншых магчымасцяў."
 
-#: ../panels/power/cc-power-panel.c:165
+#: ../panels/power/cc-power-panel.c:157
 msgid "Unknown time"
 msgstr "Невядомы час"
 
-#: ../panels/power/cc-power-panel.c:171
+#: ../panels/power/cc-power-panel.c:163
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -2389,7 +2401,7 @@ msgstr[0] "%i хвіліна"
 msgstr[1] "%i хвіліны"
 msgstr[2] "%i хвілін"
 
-#: ../panels/power/cc-power-panel.c:183
+#: ../panels/power/cc-power-panel.c:175
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -2399,19 +2411,19 @@ msgstr[2] "%i гадзін"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:191
+#: ../panels/power/cc-power-panel.c:183
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:192
+#: ../panels/power/cc-power-panel.c:184
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "гадзіна"
 msgstr[1] "гадзіны"
 msgstr[2] "гадзін"
 
-#: ../panels/power/cc-power-panel.c:193
+#: ../panels/power/cc-power-panel.c:185
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "хвіліна"
@@ -2419,152 +2431,152 @@ msgstr[1] "хвіліны"
 msgstr[2] "хвілін"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:236
+#: ../panels/power/cc-power-panel.c:228
 #, c-format
 msgid "Charging - %s until fully charged"
 msgstr "Зарадка - %s да поўнага зараду"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:244
+#: ../panels/power/cc-power-panel.c:236
 #, c-format
 msgid "Caution low battery, %s remaining"
 msgstr "Увага: нізкі зарад батарэі, засталося %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:252
+#: ../panels/power/cc-power-panel.c:244
 #, c-format
 msgid "Using battery power - %s remaining"
 msgstr "Сілкаванне з батарэі - засталося %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:269
+#: ../panels/power/cc-power-panel.c:261
 msgid "Charging"
 msgstr "Зарадка"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:274
+#: ../panels/power/cc-power-panel.c:266
 msgid "Using battery power"
 msgstr "Сілкуючыся з батарэі"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:278
+#: ../panels/power/cc-power-panel.c:270
 msgid "Charging - fully charged"
 msgstr "Зарадка - батарэя поўнасцю зараджана"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:282
+#: ../panels/power/cc-power-panel.c:274
 msgid "Empty"
 msgstr "Няма зараду"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:350
+#: ../panels/power/cc-power-panel.c:342
 #, c-format
 msgid "Caution low UPS, %s remaining"
 msgstr "Увага: нізкі зарад UPS, засталося %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:356
+#: ../panels/power/cc-power-panel.c:348
 #, c-format
 msgid "Using UPS power - %s remaining"
 msgstr "Сілкаванне з UPS - засталося %s"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:374
+#: ../panels/power/cc-power-panel.c:366
 msgid "Caution low UPS"
 msgstr "Увага: нізкі зарад UPS"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:379
+#: ../panels/power/cc-power-panel.c:371
 msgid "Using UPS power"
 msgstr "Сілкаванне з UPS"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:431
+#: ../panels/power/cc-power-panel.c:423
 msgid "Your secondary battery is fully charged"
 msgstr "Дадатковая батарэя поўнасцю зараджана"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:435
+#: ../panels/power/cc-power-panel.c:427
 msgid "Your secondary battery is empty"
 msgstr "Дадатковая батарэя поўнасцю разраджана"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:518
+#: ../panels/power/cc-power-panel.c:510
 msgid "Wireless mouse"
 msgstr "Бесправадная мыш"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:522
+#: ../panels/power/cc-power-panel.c:514
 msgid "Wireless keyboard"
 msgstr "Бесправадная клавіятура"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:526
+#: ../panels/power/cc-power-panel.c:518
 msgid "Uninterruptible power supply"
 msgstr "Крыніца бесперабойнага сілкавання"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:530
+#: ../panels/power/cc-power-panel.c:522
 msgid "Personal digital assistant"
 msgstr "Асабісты лічбавы памочнік"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:534
+#: ../panels/power/cc-power-panel.c:526
 msgid "Cellphone"
 msgstr "Мабільны тэлефон"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:538
+#: ../panels/power/cc-power-panel.c:530
 msgid "Media player"
 msgstr "Медыяплэер"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:542
+#: ../panels/power/cc-power-panel.c:534
 msgid "Tablet"
 msgstr "Планшэт"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:546
+#: ../panels/power/cc-power-panel.c:538
 msgid "Computer"
 msgstr "Камп'ютар"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:550
+#: ../panels/power/cc-power-panel.c:542
 msgid "Battery"
 msgstr "Батарэя"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:561
+#: ../panels/power/cc-power-panel.c:553
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Зарадка"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:568
+#: ../panels/power/cc-power-panel.c:560
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Увага"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:573
+#: ../panels/power/cc-power-panel.c:565
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Нізкі"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:578
+#: ../panels/power/cc-power-panel.c:570
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Добра"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:583
+#: ../panels/power/cc-power-panel.c:575
 msgctxt "Battery power"
 msgid "Charging - fully charged"
 msgstr "Зарадка - батарэя поўнасцю зараджана"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:587
+#: ../panels/power/cc-power-panel.c:579
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Няма зараду"
