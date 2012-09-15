@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-07 06:47+0200\n"
-"PO-Revision-Date: 2012-03-07 06:46+0200\n"
+"POT-Creation-Date: 2012-09-15 09:37+0300\n"
+"PO-Revision-Date: 2012-09-15 09:36+0300\n"
 "Last-Translator: Ivaylo Valkov <ivaylo@e-valkov.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "Language: bg\n"
@@ -27,66 +27,68 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: ../panels/background/background.ui.h:1
-msgid "Add wallpaper"
-msgstr "Добавяне на фон"
-
-#: ../panels/background/background.ui.h:2
-msgid "Remove wallpaper"
-msgstr "Премахване на фон"
-
 #. This refers to a slideshow background
-#: ../panels/background/background.ui.h:4
+#: ../panels/background/background.ui.h:2
 msgid "Changes throughout the day"
 msgstr "Периодична смяна"
 
-#: ../panels/background/background.ui.h:5
-msgid "Primary Color"
-msgstr "Основен цвят"
-
-#: ../panels/background/background.ui.h:6
-msgid "Swap colors"
-msgstr "Размяна на цветовете"
-
-#: ../panels/background/background.ui.h:7
-msgid "Secondary color"
-msgstr "Втори цвят"
-
-#: ../panels/background/background.ui.h:8
+#: ../panels/background/background.ui.h:3
+msgctxt "background, style"
 msgid "Tile"
 msgstr "на плочки"
 
-#: ../panels/background/background.ui.h:9
+#: ../panels/background/background.ui.h:4
+msgctxt "background, style"
 msgid "Zoom"
 msgstr "дисплеят да е вътре"
 
-#: ../panels/background/background.ui.h:10
+#: ../panels/background/background.ui.h:5
+msgctxt "background, style"
 msgid "Center"
 msgstr "в центъра на екрана"
 
-#: ../panels/background/background.ui.h:11
+#: ../panels/background/background.ui.h:6
+msgctxt "background, style"
 msgid "Scale"
 msgstr "увеличаване в екрана"
 
-#: ../panels/background/background.ui.h:12
+#: ../panels/background/background.ui.h:7
+msgctxt "background, style"
 msgid "Fill"
 msgstr "запълване"
 
-#: ../panels/background/background.ui.h:13
+#: ../panels/background/background.ui.h:8
+msgctxt "background, style"
 msgid "Span"
 msgstr "пренасяне"
 
-#: ../panels/background/bg-colors-source.c:46
-msgid "Horizontal Gradient"
-msgstr "хоризонтална преливка"
+#. translators: This is the title of the wallpaper chooser dialog.
+#: ../panels/background/cc-background-chooser-dialog.c:199
+msgid "Select Background"
+msgstr "Избор на фон"
 
-#: ../panels/background/bg-colors-source.c:47
-msgid "Vertical Gradient"
-msgstr "вертикална преливка"
+#: ../panels/background/cc-background-chooser-dialog.c:218
+msgid "Wallpapers"
+msgstr "Фонове"
 
-#: ../panels/background/bg-colors-source.c:48
-msgid "Solid Color"
-msgstr "плътен цвят"
+#: ../panels/background/cc-background-chooser-dialog.c:227
+msgid "Pictures"
+msgstr "Изображения"
+
+#: ../panels/background/cc-background-chooser-dialog.c:235
+msgid "Colors"
+msgstr "Цветове"
+
+#: ../panels/background/cc-background-chooser-dialog.c:244
+msgid "Flickr"
+msgstr "Flickr"
+
+#: ../panels/background/cc-background-chooser-dialog.c:286
+#: ../panels/printers/ppd-selection-dialog.ui.h:3
+#: ../panels/user-accounts/data/photo-dialog.ui.h:9
+#: ../panels/user-accounts/um-photo-dialog.c:98
+msgid "Select"
+msgstr "Избор"
 
 #: ../panels/background/cc-background-item.c:148
 msgid "multiple sizes"
@@ -103,31 +105,9 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Без фон на работния плот"
 
-#: ../panels/background/cc-background-panel.c:1001
-#: ../panels/user-accounts/data/photo-dialog.ui.h:4
-#: ../panels/user-accounts/um-photo-dialog.c:218
-msgid "Browse for more pictures"
-msgstr "Разглеждане за други изображения"
-
-#: ../panels/background/cc-background-panel.c:1093
+#: ../panels/background/cc-background-panel.c:387
 msgid "Current background"
 msgstr "Текущ фон"
-
-#: ../panels/background/cc-background-panel.c:1203
-msgid "Wallpapers"
-msgstr "Фонове"
-
-#: ../panels/background/cc-background-panel.c:1210
-msgid "Pictures Folder"
-msgstr "Папка с изображения"
-
-#: ../panels/background/cc-background-panel.c:1217
-msgid "Colors & Gradients"
-msgstr "Цветове и преливки"
-
-#: ../panels/background/cc-background-panel.c:1225
-msgid "Flickr"
-msgstr "Flickr"
 
 #: ../panels/background/gnome-background-panel.desktop.in.in.h:1
 msgid "Background"
@@ -144,7 +124,7 @@ msgstr "Фон;Екран;Работен плот"
 
 #. TRANSLATORS: device type
 #: ../panels/bluetooth/bluetooth-properties.desktop.in.in.h:1
-#: ../panels/network/panel-common.c:99
+#: ../panels/network/panel-common.c:102
 msgid "Bluetooth"
 msgstr "Мрежа през Bluetooth"
 
@@ -168,7 +148,7 @@ msgstr "Свързване"
 msgid "Paired"
 msgstr "Сдвоени"
 
-#: ../panels/bluetooth/bluetooth.ui.h:5
+#: ../panels/bluetooth/bluetooth.ui.h:5 ../panels/wacom/cc-wacom-page.c:756
 msgid "Type"
 msgstr "Вид"
 
@@ -180,11 +160,11 @@ msgstr "Адрес"
 msgid "Mouse and Touchpad Settings"
 msgstr "Настройки на мишката и сензорния панел"
 
-#: ../panels/bluetooth/bluetooth.ui.h:8 ../panels/universal-access/uap.ui.h:43
+#: ../panels/bluetooth/bluetooth.ui.h:8 ../panels/universal-access/uap.ui.h:38
 msgid "Sound Settings"
 msgstr "Настройки на звука"
 
-#: ../panels/bluetooth/bluetooth.ui.h:9 ../panels/universal-access/uap.ui.h:74
+#: ../panels/bluetooth/bluetooth.ui.h:9
 msgid "Keyboard Settings"
 msgstr "Настройки на клавиатурата"
 
@@ -202,41 +182,41 @@ msgctxt "Power"
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:281
+#: ../panels/bluetooth/cc-bluetooth-panel.c:290
 msgid "Yes"
 msgstr "Да"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:281
+#: ../panels/bluetooth/cc-bluetooth-panel.c:290
 msgid "No"
 msgstr "Не"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:393
+#: ../panels/bluetooth/cc-bluetooth-panel.c:405
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth е изключен"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:398
+#: ../panels/bluetooth/cc-bluetooth-panel.c:410
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Bluetooth е изключен с бутон"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:402
+#: ../panels/bluetooth/cc-bluetooth-panel.c:414
 msgid "No Bluetooth adapters found"
 msgstr "Липсват адаптери за Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:535
+#: ../panels/bluetooth/cc-bluetooth-panel.c:547
 msgid "Visibility"
 msgstr "Видимост"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:539
+#: ../panels/bluetooth/cc-bluetooth-panel.c:551
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Видимост на „%s“"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:583
+#: ../panels/bluetooth/cc-bluetooth-panel.c:595
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Да се премахване ли „%s“ от списъка с устройства?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:585
+#: ../panels/bluetooth/cc-bluetooth-panel.c:597
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
@@ -296,55 +276,55 @@ msgid "All files"
 msgstr "Всички файлове"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:504
+#: ../panels/color/cc-color-panel.c:522
 msgid "Available Profiles for Displays"
 msgstr "Налични профили за екрани"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:508
+#: ../panels/color/cc-color-panel.c:526
 msgid "Available Profiles for Scanners"
 msgstr "Налични профили за скенери"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:512
+#: ../panels/color/cc-color-panel.c:530
 msgid "Available Profiles for Printers"
 msgstr "Налични профили за принтери"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:516
+#: ../panels/color/cc-color-panel.c:534
 msgid "Available Profiles for Cameras"
 msgstr "Налични профили за цифрови фотоапарати"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:520
+#: ../panels/color/cc-color-panel.c:538
 msgid "Available Profiles for Webcams"
 msgstr "Налични профили за уеб камери"
 
 #. TRANSLATORS: this is the dialog title in the 'Add profile' UI
 #. * where the device type is not recognised
 #. Profiles that can be added to the device
-#: ../panels/color/cc-color-panel.c:525 ../panels/color/color.ui.h:2
+#: ../panels/color/cc-color-panel.c:543 ../panels/color/color.ui.h:2
 msgid "Available Profiles"
 msgstr "Налични профили"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:806
-#: ../panels/sound/gvc-mixer-dialog.c:1516
+#: ../panels/color/cc-color-panel.c:824
+#: ../panels/sound/gvc-mixer-dialog.c:1525
 msgid "Device"
 msgstr "Устройство"
 
 #. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:841
+#: ../panels/color/cc-color-panel.c:859
 msgid "Calibration"
 msgstr "Калибриране"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:873
+#: ../panels/color/cc-color-panel.c:891
 msgid "Create a color profile for the selected device"
 msgstr "Създаване на цветови профил за избраното устройство"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:887 ../panels/color/cc-color-panel.c:911
+#: ../panels/color/cc-color-panel.c:905 ../panels/color/cc-color-panel.c:929
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -352,40 +332,40 @@ msgstr ""
 "Колориметърът не е открит. Проверете дали е правилно свързан и включен."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:920
+#: ../panels/color/cc-color-panel.c:938
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Колориметърът не поддържа профилиране на принтери."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:931
+#: ../panels/color/cc-color-panel.c:949
 msgid "The device type is not currently supported."
 msgstr "Видът на устройството в момента не е поддържан."
 
 #. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:1004
+#: ../panels/color/cc-color-panel.c:1022
 msgid "Cannot remove automatically added profile"
 msgstr "Автоматично добавени профили не могат да бъдат премахвани"
 
 #. TRANSLATORS: this is when there is no profile for the device
-#: ../panels/color/cc-color-panel.c:1339
+#: ../panels/color/cc-color-panel.c:1359
 msgid "No profile"
 msgstr "Не е наличен профил"
 
-#: ../panels/color/cc-color-panel.c:1370
+#: ../panels/color/cc-color-panel.c:1390
 #, c-format
 msgid "%i year"
 msgid_plural "%i years"
 msgstr[0] "%i година"
 msgstr[1] "%i години"
 
-#: ../panels/color/cc-color-panel.c:1381
+#: ../panels/color/cc-color-panel.c:1401
 #, c-format
 msgid "%i month"
 msgid_plural "%i months"
 msgstr[0] "%i месец"
 msgstr[1] "%i месеци"
 
-#: ../panels/color/cc-color-panel.c:1392
+#: ../panels/color/cc-color-panel.c:1412
 #, c-format
 msgid "%i week"
 msgid_plural "%i weeks"
@@ -393,40 +373,40 @@ msgstr[0] "%i седмица"
 msgstr[1] "%i седмици"
 
 #. fallback
-#: ../panels/color/cc-color-panel.c:1399
+#: ../panels/color/cc-color-panel.c:1419
 #, c-format
 msgid "Less than 1 week"
 msgstr "По-малко от 1 седмица"
 
-#: ../panels/color/cc-color-panel.c:1461
+#: ../panels/color/cc-color-panel.c:1481
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "Стандартно ЧЗС (RGB)"
 
-#: ../panels/color/cc-color-panel.c:1466
+#: ../panels/color/cc-color-panel.c:1486
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "Стандартно ЦМЖК (CMYK)"
 
-#: ../panels/color/cc-color-panel.c:1471
+#: ../panels/color/cc-color-panel.c:1491
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "Стандартно сиво"
 
-#: ../panels/color/cc-color-panel.c:1589 ../panels/color/cc-color-panel.c:1630
-#: ../panels/color/cc-color-panel.c:1641 ../panels/color/cc-color-panel.c:1652
+#: ../panels/color/cc-color-panel.c:1609 ../panels/color/cc-color-panel.c:1650
+#: ../panels/color/cc-color-panel.c:1661 ../panels/color/cc-color-panel.c:1672
 msgid "Uncalibrated"
 msgstr "Без калибриране"
 
-#: ../panels/color/cc-color-panel.c:1592
+#: ../panels/color/cc-color-panel.c:1612
 msgid "This device is not color managed."
 msgstr "Цветовете на устройството не се управляват."
 
-#: ../panels/color/cc-color-panel.c:1633
+#: ../panels/color/cc-color-panel.c:1653
 msgid "This device is using manufacturing calibrated data."
 msgstr "Устройството използва данни за калибриране зададени при производство."
 
-#: ../panels/color/cc-color-panel.c:1644
+#: ../panels/color/cc-color-panel.c:1664
 msgid ""
 "This device does not have a profile suitable for whole-screen color "
 "correction."
@@ -434,42 +414,42 @@ msgstr ""
 "За устройството няма наличен профил, необходим за цветова корекция на целия "
 "екран."
 
-#: ../panels/color/cc-color-panel.c:1677
+#: ../panels/color/cc-color-panel.c:1697
 msgid "This device has an old profile that may no longer be accurate."
 msgstr "Устройството има профил, който е стар и може да не е точен."
 
 #. TRANSLATORS: this is when the calibration profile age is not
 #. * specified as it has been autogenerated from the hardware
-#: ../panels/color/cc-color-panel.c:1705
+#: ../panels/color/cc-color-panel.c:1725
 msgid "Not specified"
 msgstr "Не e указано"
 
 #. add the 'No devices detected' entry
-#: ../panels/color/cc-color-panel.c:1889
+#: ../panels/color/cc-color-panel.c:1910
 msgid "No devices supporting color management detected"
 msgstr "Не са открити устройства, които поддържат управление на цветовете"
 
-#: ../panels/color/cc-color-panel.c:2118
+#: ../panels/color/cc-color-panel.c:2139
 msgctxt "Device kind"
 msgid "Display"
 msgstr "Екран"
 
-#: ../panels/color/cc-color-panel.c:2120
+#: ../panels/color/cc-color-panel.c:2141
 msgctxt "Device kind"
 msgid "Scanner"
 msgstr "Скенер"
 
-#: ../panels/color/cc-color-panel.c:2122
+#: ../panels/color/cc-color-panel.c:2143
 msgctxt "Device kind"
 msgid "Printer"
 msgstr "Принтер"
 
-#: ../panels/color/cc-color-panel.c:2124
+#: ../panels/color/cc-color-panel.c:2145
 msgctxt "Device kind"
 msgid "Camera"
 msgstr "Фотоапарат"
 
-#: ../panels/color/cc-color-panel.c:2126
+#: ../panels/color/cc-color-panel.c:2147
 msgctxt "Device kind"
 msgid "Webcam"
 msgstr "Уеб камера"
@@ -510,8 +490,8 @@ msgid "Remove a device"
 msgstr "Премахване на устройство"
 
 #: ../panels/color/color.ui.h:12
-msgid "Set this device for all users on this computer"
-msgstr "Задаване на устройството за всички потребители на този компютър"
+msgid "Set this profile for all users on this computer"
+msgstr "Задаване на профила за всички потребители на този компютър"
 
 #: ../panels/color/color.ui.h:13
 msgid "Add profile"
@@ -562,56 +542,64 @@ msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Цвят;ICC;Профил;Калибриране;Принтер;Екран;"
 
 #. Add some common languages first
-#: ../panels/common/cc-common-language.c:513
+#: ../panels/common/cc-common-language.c:523
 msgid "English"
 msgstr "Английски"
 
-#: ../panels/common/cc-common-language.c:515
+#: ../panels/common/cc-common-language.c:525
 msgid "British English"
 msgstr "Британски английски"
 
-#: ../panels/common/cc-common-language.c:517
+#: ../panels/common/cc-common-language.c:528
 msgid "German"
 msgstr "Немски"
 
-#: ../panels/common/cc-common-language.c:519
+#: ../panels/common/cc-common-language.c:531
 msgid "French"
 msgstr "Френски"
 
-#: ../panels/common/cc-common-language.c:521
+#: ../panels/common/cc-common-language.c:534
 msgid "Spanish"
 msgstr "Испански"
 
-#: ../panels/common/cc-common-language.c:523
+#: ../panels/common/cc-common-language.c:536
 msgid "Chinese (simplified)"
 msgstr "Китайски (опростен)"
 
+#: ../panels/common/cc-common-language.c:539
+msgid "Russian"
+msgstr "Руски"
+
+#: ../panels/common/cc-common-language.c:542
+msgid "Arabic"
+msgstr "Арабски"
+
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:552
+#: ../panels/common/cc-common-language.c:571
 msgid "United States"
 msgstr "САЩ"
 
-#: ../panels/common/cc-common-language.c:553
+#: ../panels/common/cc-common-language.c:572
 msgid "Germany"
 msgstr "Германия"
 
-#: ../panels/common/cc-common-language.c:554
+#: ../panels/common/cc-common-language.c:573
 msgid "France"
 msgstr "Франция"
 
-#: ../panels/common/cc-common-language.c:555
+#: ../panels/common/cc-common-language.c:574
 msgid "Spain"
 msgstr "Испания"
 
-#: ../panels/common/cc-common-language.c:556
+#: ../panels/common/cc-common-language.c:575
 msgid "China"
 msgstr "Китай"
 
-#: ../panels/common/cc-language-chooser.c:119
+#: ../panels/common/cc-language-chooser.c:122
 msgid "Other..."
 msgstr "други…"
 
-#: ../panels/common/cc-language-chooser.c:290
+#: ../panels/common/cc-language-chooser.c:296
 msgid "Select a region"
 msgstr "Избор на регион"
 
@@ -624,8 +612,8 @@ msgid "Select a language"
 msgstr "Избор на език"
 
 #: ../panels/common/language-chooser.ui.h:2
-#: ../panels/printers/new-printer-dialog.ui.h:4
-#: ../panels/user-accounts/um-user-panel.c:446
+#: ../panels/printers/new-printer-dialog.ui.h:1
+#: ../panels/user-accounts/um-user-panel.c:462
 msgid "_Cancel"
 msgstr "_Отказ"
 
@@ -739,7 +727,7 @@ msgid "December"
 msgstr "декември"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:1
-msgid "Date and Time"
+msgid "Date & Time"
 msgstr "Дата и час"
 
 #: ../panels/datetime/gnome-datetime-panel.desktop.in.in.h:2
@@ -761,55 +749,56 @@ msgstr ""
 "Ще трябва да се идентифицирате, за да промените настройките на датата или "
 "времето."
 
-#: ../panels/display/cc-display-panel.c:475
+#: ../panels/display/cc-display-panel.c:481
 msgctxt "display panel, rotation"
 msgid "Normal"
 msgstr "нормално състояние"
 
-#: ../panels/display/cc-display-panel.c:476
+#: ../panels/display/cc-display-panel.c:482
 msgctxt "display panel, rotation"
 msgid "Counterclockwise"
 msgstr "обратно на часовниковата стрелка"
 
-#: ../panels/display/cc-display-panel.c:477
+#: ../panels/display/cc-display-panel.c:483
 msgctxt "display panel, rotation"
 msgid "Clockwise"
 msgstr "по часовниковата стрелка"
 
-#: ../panels/display/cc-display-panel.c:478
+#: ../panels/display/cc-display-panel.c:484
 msgctxt "display panel, rotation"
 msgid "180 Degrees"
 msgstr "на 180°"
 
+#. Keep this string in sync with gnome-desktop/libgnome-desktop/gnome-rr-labeler.c
 #. Translators:  this is the feature where what you see on your laptop's
-#. * screen is the same as your external monitor.  Here, "Mirror" is being
-#. * used as an adjective, not as a verb.  For example, the Spanish
-#. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
+#. * screen is the same as your external projector.  Here, "Mirrored" is being
+#. * used as an adjective.  For example, the Spanish translation could be
+#. * "Pantallas en Espejo".
 #.
-#: ../panels/display/cc-display-panel.c:615
-msgid "Mirror Displays"
+#: ../panels/display/cc-display-panel.c:623
+msgid "Mirrored Displays"
 msgstr "Еднакво изображение на екраните"
 
-#: ../panels/display/cc-display-panel.c:639
+#: ../panels/display/cc-display-panel.c:647
 #: ../panels/display/display-capplet.ui.h:1
 msgid "Monitor"
 msgstr "Екран"
 
-#: ../panels/display/cc-display-panel.c:745
+#: ../panels/display/cc-display-panel.c:748
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d × %d (%s)"
 
-#: ../panels/display/cc-display-panel.c:747
+#: ../panels/display/cc-display-panel.c:750
 #, c-format
 msgid "%d x %d"
 msgstr "%d × %d"
 
-#: ../panels/display/cc-display-panel.c:1654
+#: ../panels/display/cc-display-panel.c:1659
 msgid "Drag to change primary display."
 msgstr "Влачете, за да промените основния екран."
 
-#: ../panels/display/cc-display-panel.c:1712
+#: ../panels/display/cc-display-panel.c:1717
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
@@ -817,29 +806,29 @@ msgstr ""
 "Изберете екран, за да промените настройките му. С влачене променяте "
 "положението му."
 
-#: ../panels/display/cc-display-panel.c:2100
+#: ../panels/display/cc-display-panel.c:2105
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/cc-display-panel.c:2102
+#: ../panels/display/cc-display-panel.c:2107
 msgid "%a %l:%M %p"
 msgstr "%a %k:%M"
 
-#: ../panels/display/cc-display-panel.c:2264
-#: ../panels/display/cc-display-panel.c:2316
+#: ../panels/display/cc-display-panel.c:2269
+#: ../panels/display/cc-display-panel.c:2321
 #, c-format
 msgid "Failed to apply configuration: %s"
 msgstr "Неуспешно прилагане на настройката: „%s“"
 
-#: ../panels/display/cc-display-panel.c:2344
+#: ../panels/display/cc-display-panel.c:2349
 msgid "Could not save the monitor configuration"
 msgstr "Неуспешно запазване на настройките на екрана"
 
-#: ../panels/display/cc-display-panel.c:2404
+#: ../panels/display/cc-display-panel.c:2409
 msgid "Could not detect displays"
 msgstr "Неуспешно откриване на екрани"
 
-#: ../panels/display/cc-display-panel.c:2598
+#: ../panels/display/cc-display-panel.c:2603
 msgid "Could not get screen information"
 msgstr "Неуспешно получаване на информацията за екрана"
 
@@ -879,36 +868,36 @@ msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Панел;Проектор;xrandr;Екран;Разделителна способност;Опресняване;"
 
 #. Translators: VESA is an techncial acronym, don't translate it.
-#: ../panels/info/cc-info-panel.c:401
+#: ../panels/info/cc-info-panel.c:413
 #, c-format
 msgid "VESA: %s"
 msgstr "VESA: %s"
 
 #. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:425 ../panels/network/panel-common.c:79
-#: ../panels/network/panel-common.c:158
+#: ../panels/info/cc-info-panel.c:437 ../panels/network/panel-common.c:82
+#: ../panels/network/panel-common.c:162
 msgid "Unknown"
 msgstr "Неизвестен"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:586
+#: ../panels/info/cc-info-panel.c:593
 #, c-format
 msgid "%d-bit"
 msgstr "%d-битова"
 
-#: ../panels/info/cc-info-panel.c:743
+#: ../panels/info/cc-info-panel.c:752
 msgid "Unknown model"
 msgstr "Неизвестен модел"
 
-#: ../panels/info/cc-info-panel.c:826
+#: ../panels/info/cc-info-panel.c:835
 msgid "The next login will attempt to use the standard experience."
 msgstr ""
 "При следващото влизане ще се направи опит да се използва стандартната "
 "графична среда."
 
-#: ../panels/info/cc-info-panel.c:828
+#: ../panels/info/cc-info-panel.c:837
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
@@ -918,49 +907,53 @@ msgstr ""
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:870
+#: ../panels/info/cc-info-panel.c:879
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "резервна"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:876
+#: ../panels/info/cc-info-panel.c:885
 msgctxt "Experience"
 msgid "Standard"
 msgstr "стандартна"
 
-#: ../panels/info/cc-info-panel.c:1199
+#: ../panels/info/cc-info-panel.c:1227
 msgid "Ask what to do"
 msgstr "да се пита за действие"
 
-#: ../panels/info/cc-info-panel.c:1203
+#: ../panels/info/cc-info-panel.c:1231
 msgid "Do nothing"
 msgstr "нищо да не се прави"
 
-#: ../panels/info/cc-info-panel.c:1207
+#: ../panels/info/cc-info-panel.c:1235
 msgid "Open folder"
 msgstr "отваряне на папката"
 
-#: ../panels/info/cc-info-panel.c:1322
+#: ../panels/info/cc-info-panel.c:1326
+msgid "Other Media"
+msgstr "Други носители"
+
+#: ../panels/info/cc-info-panel.c:1357
 msgid "Select an application for audio CDs"
 msgstr "Изберете програма, с която да отваряте аудио дискове (CD)"
 
-#: ../panels/info/cc-info-panel.c:1323
+#: ../panels/info/cc-info-panel.c:1358
 msgid "Select an application for video DVDs"
 msgstr "Изберете програма, с която да отваряте видео дискове (DVD)"
 
-#: ../panels/info/cc-info-panel.c:1324
+#: ../panels/info/cc-info-panel.c:1359
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "Изберете програма, която да се изпълнява при свързване на преносимо "
 "устройство за музика"
 
-#: ../panels/info/cc-info-panel.c:1325
+#: ../panels/info/cc-info-panel.c:1360
 msgid "Select an application to run when a camera is connected"
 msgstr "Изберете програма, която да се изпълнява при свързване на камера"
 
-#: ../panels/info/cc-info-panel.c:1326
+#: ../panels/info/cc-info-panel.c:1361
 msgid "Select an application for software CDs"
 msgstr "Изберете програма, с която да се отварят дискове с програми"
 
@@ -969,85 +962,93 @@ msgstr "Изберете програма, с която да се отваря�
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1338
+#: ../panels/info/cc-info-panel.c:1373
 msgid "audio DVD"
 msgstr "аудио диск – DVD"
 
-#: ../panels/info/cc-info-panel.c:1339
+#: ../panels/info/cc-info-panel.c:1374
 msgid "blank Blu-ray disc"
 msgstr "празен диск – Blu-ray"
 
-#: ../panels/info/cc-info-panel.c:1340
+#: ../panels/info/cc-info-panel.c:1375
 msgid "blank CD disc"
 msgstr "празен диск – CD"
 
-#: ../panels/info/cc-info-panel.c:1341
+#: ../panels/info/cc-info-panel.c:1376
 msgid "blank DVD disc"
 msgstr "празен диск – DVD"
 
-#: ../panels/info/cc-info-panel.c:1342
+#: ../panels/info/cc-info-panel.c:1377
 msgid "blank HD DVD disc"
 msgstr "празен диск – HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1343
+#: ../panels/info/cc-info-panel.c:1378
 msgid "Blu-ray video disc"
 msgstr "видео диск – Blu-ray"
 
-#: ../panels/info/cc-info-panel.c:1344
+#: ../panels/info/cc-info-panel.c:1379
 msgid "e-book reader"
 msgstr "четец на електронни книги"
 
-#: ../panels/info/cc-info-panel.c:1345
+#: ../panels/info/cc-info-panel.c:1380
 msgid "HD DVD video disc"
 msgstr "видео диск – HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1346
+#: ../panels/info/cc-info-panel.c:1381
 msgid "Picture CD"
 msgstr "диск с изображения – CD"
 
-#: ../panels/info/cc-info-panel.c:1347
+#: ../panels/info/cc-info-panel.c:1382
 msgid "Super Video CD"
 msgstr "видео диск – Super Video CD"
 
-#: ../panels/info/cc-info-panel.c:1348
+#: ../panels/info/cc-info-panel.c:1383
 msgid "Video CD"
 msgstr "видео диск – Video CD"
 
-#: ../panels/info/cc-info-panel.c:1471
-#: ../panels/keyboard/keyboard-shortcuts.c:1569
+#: ../panels/info/cc-info-panel.c:1384
+msgid "Windows software"
+msgstr "Програми за Уиндоус"
+
+#: ../panels/info/cc-info-panel.c:1385
+msgid "Software"
+msgstr "Програми"
+
+#: ../panels/info/cc-info-panel.c:1508
+#: ../panels/keyboard/keyboard-shortcuts.c:1647
 msgid "Section"
 msgstr "Раздел"
 
-#: ../panels/info/cc-info-panel.c:1480 ../panels/info/info.ui.h:11
+#: ../panels/info/cc-info-panel.c:1517 ../panels/info/info.ui.h:11
 msgid "Overview"
 msgstr "Преглед"
 
-#: ../panels/info/cc-info-panel.c:1486 ../panels/info/info.ui.h:18
+#: ../panels/info/cc-info-panel.c:1523 ../panels/info/info.ui.h:18
 msgid "Default Applications"
 msgstr "Стандартни програми"
 
-#: ../panels/info/cc-info-panel.c:1491 ../panels/info/info.ui.h:26
+#: ../panels/info/cc-info-panel.c:1528 ../panels/info/info.ui.h:26
 msgid "Removable Media"
 msgstr "Преносими носители"
 
-#: ../panels/info/cc-info-panel.c:1496 ../panels/info/info.ui.h:10
+#: ../panels/info/cc-info-panel.c:1533 ../panels/info/info.ui.h:10
 msgid "Graphics"
 msgstr "Графика"
 
-#: ../panels/info/cc-info-panel.c:1698
+#: ../panels/info/cc-info-panel.c:1735
 #, c-format
 msgid "Version %s"
 msgstr "Версия %s"
 
-#: ../panels/info/cc-info-panel.c:1748
+#: ../panels/info/cc-info-panel.c:1785
 msgid "Install Updates"
 msgstr "Инсталиране на обновления"
 
-#: ../panels/info/cc-info-panel.c:1752
+#: ../panels/info/cc-info-panel.c:1789
 msgid "System Up-To-Date"
 msgstr "Системата е обновена"
 
-#: ../panels/info/cc-info-panel.c:1756
+#: ../panels/info/cc-info-panel.c:1793
 msgid "Checking for Updates"
 msgstr "Проверка за обновления"
 
@@ -1074,8 +1075,8 @@ msgid "Select how other media should be handled"
 msgstr "Изберете как да се управляват другите видове носители"
 
 #: ../panels/info/info.ui.h:2
-msgid "Acti_on:"
-msgstr "_Действие"
+msgid "_Action:"
+msgstr "_Действие:"
 
 #: ../panels/info/info.ui.h:3
 msgid "_Type:"
@@ -1216,6 +1217,23 @@ msgstr "Следваща песен"
 msgid "Eject"
 msgstr "Изваждане"
 
+#: ../panels/keyboard/01-input-sources.xml.in.h:1
+#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
+#: ../panels/keyboard/keyboard-shortcuts.c:858
+#: ../panels/universal-access/uap.ui.h:68
+msgid "Typing"
+msgstr "Писане"
+
+#: ../panels/keyboard/01-input-sources.xml.in.h:2
+#: ../panels/region/gnome-region-panel.ui.h:26
+msgid "Switch to next source"
+msgstr "Превключване към следващия вход"
+
+#: ../panels/keyboard/01-input-sources.xml.in.h:3
+#: ../panels/region/gnome-region-panel.ui.h:24
+msgid "Switch to previous source"
+msgstr "Превключване към предишния вход"
+
 #: ../panels/keyboard/01-launchers.xml.in.h:1
 msgid "Launchers"
 msgstr "Стартери"
@@ -1248,32 +1266,35 @@ msgstr "Търсене"
 msgid "Screenshots"
 msgstr "Снимки на екрана"
 
-#: ../panels/keyboard/01-screenshot.xml.in.h:2
-msgid "Take a screenshot"
-msgstr "Снимане на екрана"
-
+#. translators: Pictures is the name of the XDG Pictures directory
 #: ../panels/keyboard/01-screenshot.xml.in.h:3
-msgid "Take a screenshot of a window"
-msgstr "Снимка на отделен прозорец"
+msgid "Save a screenshot to Pictures"
+msgstr "Запазване на снимка на екрана в папката „Изображения“"
 
-#: ../panels/keyboard/01-screenshot.xml.in.h:4
-msgid "Take a screenshot of an area"
-msgstr "Снимка на област от екрана"
-
+#. translators: Pictures is the name of the XDG Pictures directory
 #: ../panels/keyboard/01-screenshot.xml.in.h:5
+msgid "Save a screenshot of a window to Pictures"
+msgstr "Запазване на снимка на прозорец в папката „Изображения“"
+
+#. translators: Pictures is the name of the XDG Pictures directory
+#: ../panels/keyboard/01-screenshot.xml.in.h:7
+msgid "Save a screenshot of an area to Pictures"
+msgstr "Запазване на снимка от област на екрана в папката „Изображения“"
+
+#: ../panels/keyboard/01-screenshot.xml.in.h:8
 msgid "Copy a screenshot to clipboard"
 msgstr "Копиране на снимка на екрана в буфера за обмен"
 
-#: ../panels/keyboard/01-screenshot.xml.in.h:6
+#: ../panels/keyboard/01-screenshot.xml.in.h:9
 msgid "Copy a screenshot of a window to clipboard"
 msgstr "Копиране на снимка на отделен прозорец в буфера за обмен"
 
-#: ../panels/keyboard/01-screenshot.xml.in.h:7
+#: ../panels/keyboard/01-screenshot.xml.in.h:10
 msgid "Copy a screenshot of an area to clipboard"
 msgstr "Копиране на снимка на област от екрана в буфера за обмен"
 
 #: ../panels/keyboard/01-system.xml.in.h:1
-#: ../panels/region/gnome-region-panel.ui.h:40
+#: ../panels/region/gnome-region-panel.ui.h:39
 msgid "System"
 msgstr "Система"
 
@@ -1322,6 +1343,25 @@ msgstr "Намаляване на размера на текста"
 msgid "High contrast on or off"
 msgstr "Включване/изключване на високия контраст"
 
+#. translators:
+#. * The device has been disabled
+#: ../panels/keyboard/cc-keyboard-option.c:241
+#: ../panels/keyboard/cc-keyboard-option.c:347
+#: ../panels/keyboard/keyboard-shortcuts.c:1112
+#: ../panels/sound/gvc-mixer-control.c:1834
+#: ../panels/user-accounts/um-fingerprint-dialog.c:215
+#: ../panels/user-accounts/um-fingerprint-dialog.c:216
+msgid "Disabled"
+msgstr "изключен"
+
+#: ../panels/keyboard/cc-keyboard-option.c:315
+msgid "Alternative Characters Key"
+msgstr "Клавиш за избор на други знаци"
+
+#: ../panels/keyboard/cc-keyboard-option.c:320
+msgid "Compose Key"
+msgstr "Клавиш Compose"
+
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
 msgid "Keyboard"
@@ -1366,15 +1406,13 @@ msgstr "_Скорост:"
 
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
-#: ../panels/mouse/gnome-mouse-properties.ui.h:26
-#: ../panels/universal-access/uap.ui.h:55
-#: ../panels/universal-access/zoom-options.c:333
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Short"
 msgstr "късо"
 
 #. slow acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
 msgid "Slow"
 msgstr "бавна"
 
@@ -1384,15 +1422,13 @@ msgstr "Скорост на повтаряне на клавишите"
 
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
-#: ../panels/mouse/gnome-mouse-properties.ui.h:28
-#: ../panels/universal-access/uap.ui.h:58
-#: ../panels/universal-access/zoom-options.c:337
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Long"
 msgstr "дълго"
 
 #. fast acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
-#: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
 msgid "Fast"
 msgstr "бърза"
 
@@ -1416,11 +1452,6 @@ msgstr "Скорост на мигане на курсора"
 msgid "Layout Settings"
 msgstr "Настройки на подредбата"
 
-#: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/universal-access/uap.ui.h:75
-msgid "Typing"
-msgstr "Писане"
-
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:20
 msgid "Add Shortcut"
 msgstr "Добавяне на клавишна комбинация"
@@ -1439,31 +1470,23 @@ msgstr ""
 "въведете новата комбинация, или натиснете „Backspace“ за изчистване."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:23
+#: ../panels/region/gnome-region-panel.ui.h:29
 msgid "Shortcuts"
 msgstr "Клавишни комбинации"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:553
-#: ../panels/keyboard/keyboard-shortcuts.c:561
-#: ../panels/keyboard/keyboard-shortcuts.c:873
-#: ../panels/keyboard/keyboard-shortcuts.c:1325
-#: ../panels/keyboard/keyboard-shortcuts.c:1329
+#: ../panels/keyboard/keyboard-shortcuts.c:552
+#: ../panels/keyboard/keyboard-shortcuts.c:560
+#: ../panels/keyboard/keyboard-shortcuts.c:942
+#: ../panels/keyboard/keyboard-shortcuts.c:1414
+#: ../panels/keyboard/keyboard-shortcuts.c:1418
 msgid "Custom Shortcuts"
 msgstr "Потребителски клавишни комбинации"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:721
+#: ../panels/keyboard/keyboard-shortcuts.c:756
 msgid "<Unknown Action>"
 msgstr "<Неизвестно действие>"
 
-#. translators:
-#. * The device has been disabled
-#: ../panels/keyboard/keyboard-shortcuts.c:1025
-#: ../panels/sound/gvc-mixer-control.c:1087
-#: ../panels/user-accounts/um-fingerprint-dialog.c:215
-#: ../panels/user-accounts/um-fingerprint-dialog.c:216
-msgid "Disabled"
-msgstr "изключен"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1164
+#: ../panels/keyboard/keyboard-shortcuts.c:1253
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1474,7 +1497,7 @@ msgstr ""
 "се въвежда самостоятелно.\n"
 "Комбинирайте го с някой от клавишите „Control“, „Alt“ или „Shift“."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1196
+#: ../panels/keyboard/keyboard-shortcuts.c:1285
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1483,7 +1506,7 @@ msgstr ""
 "Клавишната комбинация „%s“ вече се използва за:\n"
 "„%s“"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1201
+#: ../panels/keyboard/keyboard-shortcuts.c:1290
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
@@ -1491,21 +1514,16 @@ msgstr ""
 "Ако прехвърлите клавишната комбинация на „%s“, комбинацията „%s“ ще бъде "
 "изключена."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1207
+#: ../panels/keyboard/keyboard-shortcuts.c:1296
 msgid "_Reassign"
 msgstr "_Прехвърляне"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1618
-#: ../panels/wacom/cc-wacom-page.c:582
-msgid "Action"
-msgstr "Действие"
-
-#: ../panels/keyboard/keyboard-shortcuts.c:1640
-msgid "Shortcut"
-msgstr "Клавишна комбинация"
+#: ../panels/mouse/cc-mouse-panel.c:152
+msgid "_Test Your Settings"
+msgstr "_Изпробване на настройки"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
-msgid "Mouse and Touchpad"
+msgid "Mouse & Touchpad"
 msgstr "Мишка и сензорен панел"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:2
@@ -1526,271 +1544,109 @@ msgstr "Настройки на мишката"
 msgid "General"
 msgstr "Общи"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:3
-msgid "_Right-handed"
-msgstr "За _дясна ръка"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
-msgid "_Left-handed"
-msgstr "За _лява ръка"
-
 #: ../panels/mouse/gnome-mouse-properties.ui.h:5
-msgid "Sh_ow position of pointer when the Control key is pressed"
-msgstr "П_оказване на позицията на курсора при натискане на клавиша „Control“"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:6
-msgid "Pointer Speed"
-msgstr "Скорост на показалеца"
-
-# Напасване по настройките на клавиатурата. Ако се използва „ускорение“,
-# преводите „бавна“ и „бърза“ по-нататък, трябва да са в среден
-# род. Това ще развали превода за клавиатура.
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
-msgid "A_cceleration:"
-msgstr "_Скорост:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
-msgid "_Sensitivity:"
-msgstr "_Чувствителност:"
-
-#. low sensitivity
-#. TRANSLATORS: secondary battery
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
-#: ../panels/power/cc-power-panel.c:570
-msgid "Low"
-msgstr "ниска"
-
-#. high sensitivity
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
-msgid "High"
-msgstr "висока"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
-msgid "Drag and Drop"
-msgstr "Влачене и пускане"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
-msgid "Thr_eshold:"
-msgstr "П_раг:"
-
-#. small threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:20
-#: ../panels/universal-access/uap.ui.h:87
-msgid "Small"
-msgstr "малък"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:21
-msgid "Drag Threshold"
-msgstr "Праг за влачене"
-
-#. large threshold
-#: ../panels/mouse/gnome-mouse-properties.ui.h:23
-#: ../panels/universal-access/uap.ui.h:89
-msgid "Large"
-msgstr "голям"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:24
-msgid "Double-Click Timeout"
-msgstr "Закъснение между две натискания"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:25
-msgid "_Timeout:"
-msgstr "_Закъснение:"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:27
 msgid "Double-click timeout"
 msgstr "Закъснение между две натискания"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:29
-msgid "To test your settings, try to double-click on the face."
-msgstr ""
-"За да тествате настройките за двойно натискане, пробвайте с мишката върху "
-"лицето."
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+msgid "_Double-click"
+msgstr "_Двойно натискане"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:30
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+msgid "Primary _button"
+msgstr "Основен _бутон"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+msgid "_Left"
+msgstr "_Ляв"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+msgid "_Right"
+msgstr "_Десен"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:12
 msgid "Mouse"
 msgstr "Мишка"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:31
-msgid "Disable _touchpad while typing"
-msgstr "_Изключване на сензорния панел при писане"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+msgid "_Pointer speed"
+msgstr "Скорост на _показалеца"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:32
-msgid "Enable _mouse clicks with touchpad"
-msgstr "_Натискане на мишката чрез потупване на панела"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:33
-msgid "Scrolling"
-msgstr "Придвижване"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:34
-msgid "_Disabled"
-msgstr "_Изключен"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:35
-msgid "_Edge scrolling"
-msgstr "_Чрез ръба на панела"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:36
-msgid "Two-_finger scrolling"
-msgstr "Придвижване с _два пръста"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:37
-msgid "Enable h_orizontal scrolling"
-msgstr "Включване на _хоризонтално придвижване"
-
-#: ../panels/mouse/gnome-mouse-properties.ui.h:38
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Touchpad"
 msgstr "Сензорен панел"
 
-#. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: ../panels/network/cc-network-panel.c:273
-msgid ""
-"Web Proxy Autodiscovery is used when a Configuration URL is not provided."
-msgstr ""
-"Автоматичното откриване на уеб сървър-посредник се използва, когато не е "
-"зададен адрес за настройка."
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+msgid "Disable while _typing"
+msgstr "_Изключване при писане"
 
-#. TRANSLATORS: WPAD is bad: if you enable it on an untrusted
-#. * network, then anyone else on that network can tell your
-#. * machine that it should proxy all of your web traffic
-#. * through them.
-#: ../panels/network/cc-network-panel.c:281
-msgid "This is not recommended for untrusted public networks."
-msgstr "Не се препоръчва за недоверени общодостъпни мрежи."
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+msgid "Tap to _click"
+msgstr "_Натискане чрез чукване"
 
-#. TRANSLATORS: this is when the access point is not listed
-#. * in the dropdown (or hidden) and the user has to select
-#. * another entry manually
-#: ../panels/network/cc-network-panel.c:1001
-msgctxt "Wireless access point"
-msgid "Other..."
-msgstr "Друга…"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+msgid "Two _finger scroll"
+msgstr "Придвижване с _два пръста"
 
-#. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/cc-network-panel.c:1159
-#: ../panels/network/cc-network-panel.c:1566
-msgid "WEP"
-msgstr "WEP"
+#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+msgid "C_ontent sticks to fingers"
+msgstr "С_ъдържанието да прилепва към пръстите"
 
-#. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1163
-#: ../panels/network/cc-network-panel.c:1570
-msgid "WPA"
-msgstr "WPA"
+#: ../panels/mouse/gnome-mouse-test.c:134
+#: ../panels/mouse/gnome-mouse-test.ui.h:1
+msgid "Try clicking, double clicking, scrolling"
+msgstr "Изпробвайте натискане,  двойно натискане и придвижване"
 
-#. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/cc-network-panel.c:1167
-msgid "WPA2"
-msgstr "WPA2"
+#: ../panels/mouse/gnome-mouse-test.c:139
+msgid "Five clicks, GEGL time!"
+msgstr "Пет натискания — време е за GEGL"
 
-#. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/cc-network-panel.c:1172
-msgid "Enterprise"
-msgstr "Корпоративна"
+#: ../panels/mouse/gnome-mouse-test.c:144
+msgid "Double click, primary button"
+msgstr "Двойно натискане на основния бутон"
 
-#. TRANSLATORS: this no (!) WiFi security
-#: ../panels/network/cc-network-panel.c:1178
-#: ../panels/network/cc-network-panel.c:1561
-#: ../panels/universal-access/uap.ui.h:5 ../panels/wacom/cc-wacom-page.c:297
-#: ../panels/wacom/cc-wacom-page.c:314
-msgid "None"
-msgstr "Без"
+#: ../panels/mouse/gnome-mouse-test.c:144
+msgid "Single click, primary button"
+msgstr "Натискане на основния бутон"
 
-#: ../panels/network/cc-network-panel.c:1665
-msgid "Hotspot"
-msgstr "Точка за безжичен достъп"
+#: ../panels/mouse/gnome-mouse-test.c:147
+msgid "Double click, middle button"
+msgstr "Двойно натискане на средния бутон"
 
-#. Translators: network device speed
-#: ../panels/network/cc-network-panel.c:1672
-#, c-format
-msgid "%d Mb/s"
-msgstr "%d Mb/s"
+#: ../panels/mouse/gnome-mouse-test.c:147
+msgid "Single click, middle button"
+msgstr "Натискане на средния бутон"
 
-#: ../panels/network/cc-network-panel.c:2018 ../panels/network/network.ui.h:11
-msgid "IPv4 Address"
-msgstr "Адрес (IPv4)"
+#: ../panels/mouse/gnome-mouse-test.c:150
+msgid "Double click, secondary button"
+msgstr "Двойно натискане на втория бутон"
 
-#: ../panels/network/cc-network-panel.c:2019 ../panels/network/network.ui.h:12
-msgid "IPv6 Address"
-msgstr "Адрес (IPv6)"
+#: ../panels/mouse/gnome-mouse-test.c:150
+msgid "Single click, secondary button"
+msgstr "Натискане на втория бутон"
 
-#: ../panels/network/cc-network-panel.c:2022
-#: ../panels/network/cc-network-panel.c:2025 ../panels/network/network.ui.h:27
-#: ../panels/printers/printers.ui.h:13
-msgid "IP Address"
-msgstr "Адрес по IP"
+#: ../panels/network/cc-network-panel.c:615
+msgid "Network proxy"
+msgstr "Мрежов сървър-посредник"
 
-#: ../panels/network/cc-network-panel.c:2072
-#: ../panels/network/cc-network-panel.c:2447
+#: ../panels/network/cc-network-panel.c:799 ../panels/network/net-vpn.c:278
 #, c-format
 msgid "%s VPN"
 msgstr "ВЧМ „%s“"
 
-#: ../panels/network/cc-network-panel.c:2180
-msgid "Proxy"
-msgstr "Сървър-посредник"
-
-#: ../panels/network/cc-network-panel.c:2254
-msgid "Network proxy"
-msgstr "Мрежов сървър-посредник"
-
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:2514
+#: ../panels/network/cc-network-panel.c:866
 msgid "The system network services are not compatible with this version."
 msgstr "Мрежовите услуги на системата не се поддържат в тази версия."
 
-#: ../panels/network/cc-network-panel.c:2712
-#, c-format
-msgid ""
-"Network details for %s including password and any custom configuration will "
-"be lost"
-msgstr ""
-"Данните за мрежата „%s“, включително пароли и потребителски настройки ще "
-"бъдат изгубени"
-
-#: ../panels/network/cc-network-panel.c:2722
-msgid "Forget"
-msgstr "Премахване"
-
-#: ../panels/network/cc-network-panel.c:3221
-msgid "Not connected to the internet."
-msgstr "Няма връзка към Интернет."
-
-#: ../panels/network/cc-network-panel.c:3222
-msgid "Create the hotspot anyway?"
-msgstr "Създаване на точка за безжичен достъп въпреки това?"
-
-#: ../panels/network/cc-network-panel.c:3240
-#, c-format
-msgid "Disconnect from %s and create a new hotspot?"
-msgstr ""
-"Прекъсване на връзката с „%s“ и създаване на нова точка за безжичен достъп?"
-
-#: ../panels/network/cc-network-panel.c:3243
-msgid "This is your only connection to the internet."
-msgstr "Това е единствената ви връзка към Интернет."
-
-#: ../panels/network/cc-network-panel.c:3261
-msgid "Create _Hotspot"
-msgstr "Създаване на _точка за безжичен достъп"
-
-#: ../panels/network/cc-network-panel.c:3321
-msgid "Stop hotspot and disconnect any users?"
-msgstr ""
-"Спиране на точката за безжичен достъп и изключване на всички потребители?"
-
-#: ../panels/network/cc-network-panel.c:3324
-msgid "_Stop Hotspot"
-msgstr "_Спиране на точката за безжичен достъп"
-
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:3342
-msgid "Airplane Mode"
-msgstr "Режим „В самолет“"
+#: ../panels/network/cc-network-panel.c:1001
+msgid "Air_plane Mode"
+msgstr "Режим „В само_лет“"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
+#: ../panels/network/network-mobile.ui.h:7
 msgid "Network"
 msgstr "Мрежови"
 
@@ -1803,316 +1659,724 @@ msgstr "Мрежови настройки"
 msgid "Network;Wireless;IP;LAN;Proxy;"
 msgstr "Мрежа;Безжична;IP;LAN;Сървър-посредник;"
 
+#: ../panels/network/net-device-mobile.c:222
+msgid "Add new connection"
+msgstr "Добавяне на нова връзка"
+
+#. Translators: network device speed
+#: ../panels/network/net-device-mobile.c:261
+#: ../panels/network/net-device-wifi.c:770
+#: ../panels/network/net-device-wired.c:126
+#, c-format
+msgid "%d Mb/s"
+msgstr "%d Mb/s"
+
+#. TRANSLATORS: this is when the access point is not shown
+#. * in the list and the user has to enter the SSID manually
+#.
+#: ../panels/network/net-device-wifi.c:203
+msgid "Connect to a Hidden Network"
+msgstr "Свързване към скрита мрежа"
+
+#. TRANSLATORS: this WEP WiFi security
+#: ../panels/network/net-device-wifi.c:302
+#: ../panels/network/net-device-wifi.c:481
+msgid "WEP"
+msgstr "WEP"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/net-device-wifi.c:306
+#: ../panels/network/net-device-wifi.c:485
+msgid "WPA"
+msgstr "WPA"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/net-device-wifi.c:310
+msgid "WPA2"
+msgstr "WPA2"
+
+#. TRANSLATORS: this Enterprise WiFi security
+#: ../panels/network/net-device-wifi.c:315
+msgid "Enterprise"
+msgstr "Корпоративна"
+
+#: ../panels/network/net-device-wifi.c:320
+#: ../panels/network/net-device-wifi.c:476
+msgctxt "Wifi security"
+msgid "None"
+msgstr "Без"
+
+#: ../panels/network/net-device-wifi.c:697
+msgid "never"
+msgstr "никога"
+
+#: ../panels/network/net-device-wifi.c:707
+msgid "today"
+msgstr "днес"
+
+#: ../panels/network/net-device-wifi.c:709
+msgid "yesterday"
+msgstr "вчера"
+
+#: ../panels/network/net-device-wifi.c:711
+#, c-format
+msgid "%i day ago"
+msgid_plural "%i days ago"
+msgstr[0] "преди %i ден"
+msgstr[1] "преди %i дни"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/net-device-wifi.c:780
+#: ../panels/network/panel-common.c:277
+msgid "Not connected"
+msgstr "Без връзка"
+
+#: ../panels/network/net-device-wifi.c:782
+#: ../panels/network/net-device-wifi.c:2086
+msgid "Out of range"
+msgstr "Извън обхват"
+
+#: ../panels/network/net-device-wifi.c:813
+msgctxt "Signal strength"
+msgid "None"
+msgstr "Няма сигнал"
+
+#: ../panels/network/net-device-wifi.c:815
+msgctxt "Signal strength"
+msgid "Weak"
+msgstr "Слаб сигнал"
+
+#: ../panels/network/net-device-wifi.c:817
+msgctxt "Signal strength"
+msgid "Ok"
+msgstr "Задоволителен сигнал"
+
+#: ../panels/network/net-device-wifi.c:819
+msgctxt "Signal strength"
+msgid "Good"
+msgstr "Добър сигнал"
+
+#: ../panels/network/net-device-wifi.c:821
+msgctxt "Signal strength"
+msgid "Excellent"
+msgstr "Отличен сигнал"
+
+#: ../panels/network/net-device-wifi.c:1005
+#, c-format
+msgid ""
+"Network details for %s including password and any custom configuration will "
+"be lost."
+msgstr ""
+"Данните за мрежата „%s“, включително пароли и потребителски настройки ще "
+"бъдат изгубени."
+
+#: ../panels/network/net-device-wifi.c:1016
+msgid "Forget"
+msgstr "Премахване"
+
+#: ../panels/network/net-device-wifi.c:1552
+msgid ""
+"If you have a connection to the Internet other than wireless, you can use it "
+"to share your internet connection with others."
+msgstr ""
+"Ако имате друга връзка към Интернет освен безжична мрежа,  можете да я "
+"използвате за споделяне на Интернет с други хора."
+
+#: ../panels/network/net-device-wifi.c:1556
+#, c-format
+msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
+msgstr ""
+"Ако включите точката за безжичен достъп, връзката ви към <b>%s</b> ще бъде "
+"прекъсната."
+
+#: ../panels/network/net-device-wifi.c:1560
+msgid ""
+"It is not possible to access the internet through your wireless while the "
+"hotspot is active."
+msgstr ""
+"Не е възможно да ползвате Интернет през безжична мрежа докато точката за "
+"безжичен достъп е включена."
+
+#: ../panels/network/net-device-wifi.c:1626
+msgid "Stop hotspot and disconnect any users?"
+msgstr ""
+"Спиране на точката за безжичен достъп и изключване на всички потребители?"
+
+#: ../panels/network/net-device-wifi.c:1629
+msgid "_Stop Hotspot"
+msgstr "_Спиране на точката за безжичен достъп"
+
+#. TRANSLATORS: this is when the use leaves the PAC textbox blank
+#: ../panels/network/net-proxy.c:67
+msgid ""
+"Web Proxy Autodiscovery is used when a Configuration URL is not provided."
+msgstr ""
+"Автоматичното откриване на уеб сървър-посредник се използва, когато не е "
+"зададен адрес за настройка."
+
+#. TRANSLATORS: WPAD is bad: if you enable it on an untrusted
+#. * network, then anyone else on that network can tell your
+#. * machine that it should proxy all of your web traffic
+#. * through them.
+#: ../panels/network/net-proxy.c:75
+msgid "This is not recommended for untrusted public networks."
+msgstr "Не се препоръчва за недоверени общодостъпни мрежи."
+
+#: ../panels/network/net-proxy.c:367
+msgid "Proxy"
+msgstr "Сървър-посредник"
+
+#: ../panels/network/network-mobile.ui.h:1
+msgid "IMEI"
+msgstr "Международен идентификатор за мобилни устройства (IMEI)"
+
+#: ../panels/network/network-mobile.ui.h:2
+msgid "Provider"
+msgstr "Доставчик"
+
+#: ../panels/network/network-mobile.ui.h:3
+#: ../panels/network/panel-common.c:686 ../panels/network/panel-common.c:688
+#: ../panels/printers/printers.ui.h:13
+msgid "IP Address"
+msgstr "Адрес по IP"
+
+#: ../panels/network/network-mobile.ui.h:4
+#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:684
+msgid "IPv6 Address"
+msgstr "Адрес (IPv6)"
+
+#: ../panels/network/network-mobile.ui.h:5
+#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wired.ui.h:4
+msgid "Default Route"
+msgstr "Стандартен маршрут"
+
+#: ../panels/network/network-mobile.ui.h:6
+#: ../panels/network/network-wifi.ui.h:14
+#: ../panels/network/network-wired.ui.h:5
+msgid "DNS"
+msgstr "Система от имена (DNS)"
+
+#: ../panels/network/network-mobile.ui.h:8
+#: ../panels/network/network-wired.ui.h:6
+msgid "_Options..."
+msgstr "Настро_йки…"
+
+#: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
+msgctxt "proxy method"
+msgid "None"
+msgstr "без"
+
+#: ../panels/network/network-proxy.ui.h:2 ../panels/network/network.ui.h:6
+msgctxt "proxy method"
+msgid "Manual"
+msgstr "ръчна настройка"
+
+#: ../panels/network/network-proxy.ui.h:3 ../panels/network/network.ui.h:7
+msgctxt "proxy method"
+msgid "Automatic"
+msgstr "автоматично разпознаване"
+
+#: ../panels/network/network-proxy.ui.h:4
+msgid "_Method"
+msgstr "_Метод"
+
+#: ../panels/network/network-proxy.ui.h:5
+msgid "_Configuration URL"
+msgstr "Адрес за _настройка"
+
+#: ../panels/network/network-proxy.ui.h:6
+msgid "_HTTP Proxy"
+msgstr "_Сървър-посредник за HTTP "
+
+#: ../panels/network/network-proxy.ui.h:7
+msgid "H_TTPS Proxy"
+msgstr "_HTTPS сървър-посредник"
+
+#: ../panels/network/network-proxy.ui.h:8
+msgid "_FTP Proxy"
+msgstr "Сървър-_посредник за FTP"
+
+#: ../panels/network/network-proxy.ui.h:9
+msgid "_Socks Host"
+msgstr "_Хост за Socks:"
+
 #: ../panels/network/network.ui.h:1
 msgid "Select the interface to use for the new service"
 msgstr "Изберете устройството, което ще се използва за новата услуга"
 
 #: ../panels/network/network.ui.h:2
-msgid "Create..."
-msgstr "Създаване…"
+msgid "C_reate..."
+msgstr "С_ъздаване…"
 
 #: ../panels/network/network.ui.h:3
-msgid "Interface"
-msgstr "Устройство"
+msgid "_Interface"
+msgstr "_Устройство"
 
-#: ../panels/network/network.ui.h:4
+#: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "ВЧМ"
-
-#: ../panels/network/network.ui.h:5
-msgctxt "proxy method"
-msgid "None"
-msgstr "без"
-
-#: ../panels/network/network.ui.h:6
-msgctxt "proxy method"
-msgid "Manual"
-msgstr "ръчна настройка"
-
-#: ../panels/network/network.ui.h:7
-msgctxt "proxy method"
-msgid "Automatic"
-msgstr "автоматично разпознаване"
 
 #: ../panels/network/network.ui.h:8
 msgid "Add Device"
 msgstr "Добавяне на устройство"
 
-#: ../panels/network/network.ui.h:10
-msgid "Hardware Address"
-msgstr "Апаратен адрес"
-
-#: ../panels/network/network.ui.h:13
-msgid "Subnet Mask"
-msgstr "Мрежова маска"
-
-#: ../panels/network/network.ui.h:14
-msgid "Default Route"
-msgstr "Стандартен маршрут"
-
-#: ../panels/network/network.ui.h:15
-msgid "DNS"
-msgstr "Система от имена (DNS)"
-
-#: ../panels/network/network.ui.h:16
-msgid "Device Off"
-msgstr "Изключване на устройството"
-
-#: ../panels/network/network.ui.h:17
-#: ../panels/region/gnome-region-panel.ui.h:26
-msgid "_Options..."
-msgstr "Настро_йки…"
-
-#: ../panels/network/network.ui.h:18
-msgid "Security"
-msgstr "Сигурност"
-
-#: ../panels/network/network.ui.h:19
-msgid "_Network Name"
-msgstr "Име на _мрежата"
-
-#: ../panels/network/network.ui.h:20
-msgid "Network Name"
-msgstr "Име на мрежата"
-
-#: ../panels/network/network.ui.h:21
-msgid "Security Key"
-msgstr "Ключ за сигурност"
-
-#: ../panels/network/network.ui.h:22
-msgid "Forget Network"
-msgstr "Премахване на мрежата"
-
-#: ../panels/network/network.ui.h:23
-msgid "_Use as Hotspot..."
-msgstr "_Използване като точка за безжичен достъп…"
-
-#: ../panels/network/network.ui.h:24
-msgid "_Stop Hotspot..."
-msgstr "_Спиране на точката за безжичен достъп…"
-
-#: ../panels/network/network.ui.h:25
-msgid "IMEI"
-msgstr "Международен идентификатор за мобилни устройства (IMEI)"
-
-#: ../panels/network/network.ui.h:26
-msgid "Provider"
-msgstr "Доставчик"
-
-#: ../panels/network/network.ui.h:28
+#: ../panels/network/network-vpn.ui.h:2
 msgid "VPN Type"
 msgstr "Вид на ВЧМ"
 
-#: ../panels/network/network.ui.h:29
+#: ../panels/network/network-vpn.ui.h:3
 msgid "Gateway"
 msgstr "Шлюз"
 
-#: ../panels/network/network.ui.h:30
+#: ../panels/network/network-vpn.ui.h:4
 msgid "Group Name"
 msgstr "Име на групата"
 
-#: ../panels/network/network.ui.h:31
+#: ../panels/network/network-vpn.ui.h:5
 msgid "Group Password"
 msgstr "Парола на групата"
 
-#: ../panels/network/network.ui.h:32
+#: ../panels/network/network-vpn.ui.h:6
 msgid "Username"
 msgstr "Потребителско име"
 
-#: ../panels/network/network.ui.h:33
-msgid "Disable VPN"
-msgstr "Изключване на ВЧМ"
-
-#: ../panels/network/network.ui.h:34
+#: ../panels/network/network-vpn.ui.h:7
 msgid "_Configure..."
 msgstr "_Настройване…"
 
-#: ../panels/network/network.ui.h:35
-msgid "_Method"
-msgstr "_Метод"
+#: ../panels/network/network-wifi.ui.h:1
+msgid "Wireless Hotspot"
+msgstr "Точка за безжичен достъп"
 
-#: ../panels/network/network.ui.h:36
-msgid "_Configuration URL"
-msgstr "Адрес за _настройка"
-
-#: ../panels/network/network.ui.h:37
-msgid "_HTTP Proxy"
-msgstr "_Сървър-посредник за HTTP "
-
-#: ../panels/network/network.ui.h:38
-msgid "H_TTPS Proxy"
-msgstr "_HTTPS сървър-посредник"
-
-#: ../panels/network/network.ui.h:39
-msgid "_FTP Proxy"
-msgstr "Сървър-_посредник за FTP"
-
-#: ../panels/network/network.ui.h:40
-msgid "_Socks Host"
-msgstr "_Хост за Socks:"
-
-#: ../panels/network/network.ui.h:41
-msgid "HTTP Port"
-msgstr "Порт за HTTP"
-
-#: ../panels/network/network.ui.h:42
-msgid "HTTPS Port"
-msgstr "Порт за HTTPS"
-
-#: ../panels/network/network.ui.h:43
-msgid "FTP Port"
-msgstr "Порт за FTP"
-
-#: ../panels/network/network.ui.h:44
-msgid "Socks Port"
-msgstr "Порт за Socks"
+#: ../panels/network/network-wifi.ui.h:2
+msgid "_Turn On"
+msgstr "_Включване"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:83
+#: ../panels/network/network-wifi.ui.h:3 ../panels/network/panel-common.c:90
+msgid "Wireless"
+msgstr "Безжична мрежа"
+
+#: ../panels/network/network-wifi.ui.h:4
+msgid "_Use as Hotspot..."
+msgstr "_Използване като точка за безжичен достъп…"
+
+#: ../panels/network/network-wifi.ui.h:5
+msgid "_Connect"
+msgstr "_Свързване"
+
+#: ../panels/network/network-wifi.ui.h:6
+msgid "Last used"
+msgstr "Последно ползване"
+
+#: ../panels/network/network-wifi.ui.h:7
+#: ../panels/network/network-wired.ui.h:1
+msgid "Hardware Address"
+msgstr "Апаратен адрес"
+
+#: ../panels/network/network-wifi.ui.h:8
+msgid "Security"
+msgstr "Сигурност"
+
+#: ../panels/network/network-wifi.ui.h:9
+msgid "Strength"
+msgstr "Надеждност"
+
+#: ../panels/network/network-wifi.ui.h:10
+msgid "Link speed"
+msgstr "Скорост на връзката"
+
+#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:683
+msgid "IPv4 Address"
+msgstr "Адрес (IPv4)"
+
+#: ../panels/network/network-wifi.ui.h:15
+msgid "_Forget Network"
+msgstr "_Премахване на мрежата"
+
+#: ../panels/network/network-wifi.ui.h:16
+msgid "_Settings..."
+msgstr "_Настройки…"
+
+#: ../panels/network/network-wifi.ui.h:17
+msgid "Switch off to connect to a wireless network"
+msgstr "Изключете,  за да се свържете към безжична мрежа"
+
+#: ../panels/network/network-wifi.ui.h:18
+msgid "Network Name"
+msgstr "Име на мрежата"
+
+#: ../panels/network/network-wifi.ui.h:19
+msgid "Connected Devices"
+msgstr "Свързани устройства"
+
+#: ../panels/network/network-wifi.ui.h:20
+msgid "Security type"
+msgstr "Вид на сигурността"
+
+#: ../panels/network/network-wifi.ui.h:21
+msgid "Security key"
+msgstr "Ключ за сигурност"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:86
 msgid "Wired"
 msgstr "Жична мрежа"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:87
-msgid "Wireless"
-msgstr "Безжична мрежа"
-
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:94
+#: ../panels/network/panel-common.c:97
 msgid "Mobile broadband"
 msgstr "Мобилна широколентова мрежа"
 
 #. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:103
+#: ../panels/network/panel-common.c:106
 msgid "Mesh"
 msgstr "Децентрализирана мрежа (Mesh)"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:162
+#: ../panels/network/panel-common.c:166
 msgid "Ad-hoc"
 msgstr "Децентрализирана мрежа (Ad-hoc)"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:166
+#: ../panels/network/panel-common.c:170
 msgid "Infrastructure"
 msgstr "Инфраструктура"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:190 ../panels/network/panel-common.c:251
+#: ../panels/network/panel-common.c:194 ../panels/network/panel-common.c:255
 msgid "Status unknown"
 msgstr "Неизвестно състояние"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:194
+#: ../panels/network/panel-common.c:198
 msgid "Unmanaged"
 msgstr "Без управление"
 
-#: ../panels/network/panel-common.c:199
+#: ../panels/network/panel-common.c:203
 msgid "Firmware missing"
 msgstr "Липсва фърмуер"
 
-#: ../panels/network/panel-common.c:202
+#: ../panels/network/panel-common.c:206
 msgid "Cable unplugged"
 msgstr "Кабелът е изваден"
 
-#: ../panels/network/panel-common.c:204
+#: ../panels/network/panel-common.c:208
 msgid "Unavailable"
 msgstr "Недостъпна"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:208
+#: ../panels/network/panel-common.c:212
 msgid "Disconnected"
 msgstr "Без връзка"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:215 ../panels/network/panel-common.c:257
+#: ../panels/network/panel-common.c:219 ../panels/network/panel-common.c:261
 msgid "Connecting"
 msgstr "Свързване"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:219 ../panels/network/panel-common.c:261
+#: ../panels/network/panel-common.c:223 ../panels/network/panel-common.c:265
 msgid "Authentication required"
 msgstr "Изисква се удостоверяване"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:223 ../panels/network/panel-common.c:265
+#: ../panels/network/panel-common.c:227 ../panels/network/panel-common.c:269
 msgid "Connected"
 msgstr "Връзката е осъществена"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:227
+#: ../panels/network/panel-common.c:231
 msgid "Disconnecting"
 msgstr "Прекъсване на връзката"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:231 ../panels/network/panel-common.c:269
+#: ../panels/network/panel-common.c:235 ../panels/network/panel-common.c:273
 msgid "Connection failed"
 msgstr "Връзката е неуспешна"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:235 ../panels/network/panel-common.c:277
+#: ../panels/network/panel-common.c:239 ../panels/network/panel-common.c:281
 msgid "Status unknown (missing)"
 msgstr "Състоянието на връзката е неизвестно (липсва информация)"
 
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:273
-msgid "Not connected"
-msgstr "Без връзка"
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:301
+msgid "Configuration failed"
+msgstr "Неуспешно настройване"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:305
-msgid "Error logging into the account"
-msgstr "Неуспешно влизане в регистрацията"
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:305
+msgid "IP configuration failed"
+msgstr "Неуспешно настройване на IP адреса"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:351
-msgid "Expired credentials. Please log in again."
-msgstr "Регистрацията е изтекла. Влезете отново."
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:309
+msgid "IP configuration expired"
+msgstr "Изтече времето за настройката на IP адреса"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:354
-msgid "_Log In"
-msgstr "_Влизане"
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:313
+msgid "Secrets were required, but not provided"
+msgstr "Не бяха предоставени задължителните данни за установяване на връзката"
 
-#. translators: This is the title of the "Add Account" dialogue.
-#. * The title is not visible when using GNOME Shell
-#: ../panels/online-accounts/cc-online-accounts-panel.c:461
-#: ../panels/online-accounts/online-accounts.ui.h:1
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:317
+msgid "802.1x supplicant disconnected"
+msgstr ""
+"Връзката (802.1x) беше прекъсната от програмата за удостоверяване "
+"(supplicant)"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:321
+msgid "802.1x supplicant configuration failed"
+msgstr ""
+"Неуспех при настройка на програмата за удостоверяване (supplicant) на "
+"връзката (802.1x)"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:325
+msgid "802.1x supplicant failed"
+msgstr ""
+"Програмата за удостоверяване (supplicant) на връзката (802.1x) приключи "
+"неуспешно"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:329
+msgid "802.1x supplicant took too long to authenticate"
+msgstr ""
+"Удостоверяването на връзката (802.1x) отне на програмата (supplicant) повече "
+"време от стандартното"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:333
+msgid "PPP service failed to start"
+msgstr "Неуспешно стартиране на услугата за връзка чрез PPP"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:337
+msgid "PPP service disconnected"
+msgstr "Услугата за връзка чрез PPP е прекъсната"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:341
+msgid "PPP failed"
+msgstr "Услугата за връзка чрез PPP приключи неуспешно"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:345
+msgid "DHCP client failed to start"
+msgstr ""
+"Неуспешно стартиране на клиента за автоматична настройка на връзката (DHCP)"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:349
+msgid "DHCP client error"
+msgstr "Грешка на клиента за автоматична настройка на връзката (DHCP)"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:353
+msgid "DHCP client failed"
+msgstr ""
+"Клиентът за автоматична настройка на връзката (DHCP) приключи неуспешно"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:357
+msgid "Shared connection service failed to start"
+msgstr "Неуспешно стартиране на услугата за споделяне на връзката"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:361
+msgid "Shared connection service failed"
+msgstr "Услугата за споделяне на връзката приключи неуспешно"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:365
+msgid "AutoIP service failed to start"
+msgstr ""
+"Неуспешно стартиране на услугата за локална връзка (AutoIP, 169.254.0.0/16, "
+"fe80::/10)"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:369
+msgid "AutoIP service error"
+msgstr ""
+"Грешка в услугата за локална връзка (AutoIP, 169.254.0.0/16, fe80::/10)"
+
+# AutoIP = link-local
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:373
+msgid "AutoIP service failed"
+msgstr ""
+"Услугата за локална връзка (AutoIP, 169.254.0.0/16, fe80::/10) приключи "
+"неуспешно"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:377
+msgid "Line busy"
+msgstr "Линията е заета"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:381
+msgid "No dial tone"
+msgstr "Няма сигнал"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:385
+msgid "No carrier could be established"
+msgstr "Неуспешно установяване на носещата честота"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:389
+msgid "Dialing request timed out"
+msgstr "Времето на заявката за набиране изтече"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:393
+msgid "Dialing attempt failed"
+msgstr "Опитът за набиране приключи неуспешно"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:397
+msgid "Modem initialization failed"
+msgstr "Неуспешно инициализиране на модема"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:401
+msgid "Failed to select the specified APN"
+msgstr "Неуспешно избиране на зададената точка за достъп (APN)"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:405
+msgid "Not searching for networks"
+msgstr "Не се търсят мрежи"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:409
+msgid "Network registration denied"
+msgstr "Регистрацията в мрежата е отхвърлена"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:413
+msgid "Network registration timed out"
+msgstr "Времето на заявката за регистрация в мрежата изтече"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:417
+msgid "Failed to register with the requested network"
+msgstr "Неуспешна регистрация в заявената мрежа"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:421
+msgid "PIN check failed"
+msgstr "Неуспешна проверка на кода (PIN)"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:425
+msgid "Firmware for the device may be missing"
+msgstr "Възможно е фърмуерът за устройството да липсва"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:429
+msgid "Connection disappeared"
+msgstr "Връзката се изгуби"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:433
+msgid "Carrier/link changed"
+msgstr "Носещата честота/връзката се промени"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:437
+msgid "Existing connection was assumed"
+msgstr "Предполагаше се съществуваща връзка"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:441
+msgid "Modem not found"
+msgstr "Не е открит модем"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:445
+msgid "Bluetooth connection failed"
+msgstr "Неуспешна връзка чрез Bluetooth"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:449
+msgid "SIM Card not inserted"
+msgstr " SIM картата не е поставена"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:453
+msgid "SIM Pin required"
+msgstr "Необходим е код (PIN) за  SIM картата"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:457
+msgid "SIM Puk required"
+msgstr "Необходим е код (PUK) за SIM картата"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:461
+msgid "SIM wrong"
+msgstr "Грешна SIM карта"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:465
+msgid "InfiniBand device does not support connected mode"
+msgstr ""
+"Устройството (InfiniBand) не поддържа режима „установена връзка“ (connected "
+"mode)"
+
+#. TRANSLATORS: device status reason
+#: ../panels/network/panel-common.c:469
+msgid "Connection dependency failed"
+msgstr "Неуспешно активиране на зависимост за връзката"
+
+#. translators: This is the title of the "Add Account" dialog.
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:249
+#: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Добавяне на регистрация"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:466
-msgid "To add a new account, first select the account type"
-msgstr "За да добавите нова регистрация, изберете нейния вид."
+#: ../panels/online-accounts/cc-online-accounts-panel.c:383
+msgid "Error logging into the account"
+msgstr "Неуспешно влизане в регистрацията"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:469
-msgid "Account Type:"
-msgstr "Вид на регистрацията:"
+#: ../panels/online-accounts/cc-online-accounts-panel.c:437
+msgid "Expired credentials. Please log in again."
+msgstr "Регистрацията е изтекла. Влезете отново."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:497
-msgid "_Add..."
-msgstr "_Добавяне…"
+#: ../panels/online-accounts/cc-online-accounts-panel.c:440
+msgid "_Log In"
+msgstr "_Влизане"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:550
+#: ../panels/online-accounts/cc-online-accounts-panel.c:676
 msgid "Error creating account"
 msgstr "Неуспешно създаване на регистрацията"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:584
+#: ../panels/online-accounts/cc-online-accounts-panel.c:718
 msgid "Error removing account"
 msgstr "Неуспех при премахване на регистрация"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:620
+#: ../panels/online-accounts/cc-online-accounts-panel.c:754
 msgid "Are you sure you want to remove the account?"
 msgstr "Наистина ли желаете да премахнете регистрацията?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:622
+#: ../panels/online-accounts/cc-online-accounts-panel.c:756
 msgid "This will not remove the account on the server."
 msgstr "Действието няма да премахне регистрацията на сървъра."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:623
+#: ../panels/online-accounts/cc-online-accounts-panel.c:757
 msgid "_Remove"
 msgstr "_Премахване"
 
@@ -2130,26 +2394,38 @@ msgid "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;"
 msgstr ""
 "Google;Facebook;Twitter;Yahoo;Уеб;В мрежа;Разговор;Календар;Поща;Контакт;"
 
-#: ../panels/online-accounts/online-accounts.ui.h:2
+#: ../panels/online-accounts/online-accounts.ui.h:1
+msgid "No online accounts configured"
+msgstr "Няма настроени мрежови регистрации"
+
+#: ../panels/online-accounts/online-accounts.ui.h:3
 msgid "Remove Account"
 msgstr "Премахване на регистрация"
 
-#: ../panels/online-accounts/online-accounts.ui.h:3
-msgid "Select an account"
-msgstr "Избиране на регистрация"
+#: ../panels/online-accounts/online-accounts.ui.h:4
+msgid "Add an online account"
+msgstr "Добавяне на мрежова регистрация"
 
-#: ../panels/power/cc-power-panel.c:162
+#: ../panels/online-accounts/online-accounts.ui.h:5
+msgid ""
+"Adding an account allows your applications to access it for documents, mail, "
+"contacts, calendar, chat and more."
+msgstr ""
+"Добавянето на регистрация позволява на програмите да я използват за достъп "
+"до документи, поща, контакти, календар, разговори и др."
+
+#: ../panels/power/cc-power-panel.c:157
 msgid "Unknown time"
 msgstr "Неизвестно време"
 
-#: ../panels/power/cc-power-panel.c:168
+#: ../panels/power/cc-power-panel.c:163
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i минута"
 msgstr[1] "%i минути"
 
-#: ../panels/power/cc-power-panel.c:180
+#: ../panels/power/cc-power-panel.c:175
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -2158,161 +2434,174 @@ msgstr[1] "%i часа"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:188
+#: ../panels/power/cc-power-panel.c:183
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s и %i %s"
 
-#: ../panels/power/cc-power-panel.c:189
+#: ../panels/power/cc-power-panel.c:184
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "час"
 msgstr[1] "часа"
 
-#: ../panels/power/cc-power-panel.c:190
+#: ../panels/power/cc-power-panel.c:185
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "минута"
 msgstr[1] "минути"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:233
+#: ../panels/power/cc-power-panel.c:228
 #, c-format
 msgid "Charging - %s until fully charged"
 msgstr "Зареждане. Остават %s до пълно зареждане"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:241
+#: ../panels/power/cc-power-panel.c:236
 #, c-format
 msgid "Caution low battery, %s remaining"
 msgstr "Внимание нисък заряд на батерията. Остават %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:249
+#: ../panels/power/cc-power-panel.c:244
 #, c-format
 msgid "Using battery power - %s remaining"
 msgstr "Работа от батерии. Остават %s"
 
 #. TRANSLATORS: primary battery
-#. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:266 ../panels/power/cc-power-panel.c:558
+#: ../panels/power/cc-power-panel.c:261
 msgid "Charging"
 msgstr "Зареждане"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:271
+#: ../panels/power/cc-power-panel.c:266
 msgid "Using battery power"
 msgstr "Работа от батерии"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:275 ../panels/power/cc-power-panel.c:580
+#: ../panels/power/cc-power-panel.c:270
 msgid "Charging - fully charged"
 msgstr "Зареждане. Пълно зареждане"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:279 ../panels/power/cc-power-panel.c:584
+#: ../panels/power/cc-power-panel.c:274
 msgid "Empty"
 msgstr "Разредена"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:347
+#: ../panels/power/cc-power-panel.c:342
 #, c-format
 msgid "Caution low UPS, %s remaining"
 msgstr ""
 "Внимание: нисък заряд на непрекъсваемото токозахранване (UPS). Остават %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:353
+#: ../panels/power/cc-power-panel.c:348
 #, c-format
 msgid "Using UPS power - %s remaining"
 msgstr "Работа от непрекъсваемо токозахранване (UPS). Остават %s"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:371
+#: ../panels/power/cc-power-panel.c:366
 msgid "Caution low UPS"
 msgstr "Внимание: нисък заряд на непрекъсваемото токозахранване (UPS)"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:376
+#: ../panels/power/cc-power-panel.c:371
 msgid "Using UPS power"
 msgstr "Работа от непрекъсваемо токозахранване (UPS)"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:428
+#: ../panels/power/cc-power-panel.c:423
 msgid "Your secondary battery is fully charged"
 msgstr "Допълнителната батерия е напълно заредена"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:432
+#: ../panels/power/cc-power-panel.c:427
 msgid "Your secondary battery is empty"
 msgstr "Допълнителната батерия е разредена"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:515
+#: ../panels/power/cc-power-panel.c:510
 msgid "Wireless mouse"
 msgstr "Безжична мишка"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:519
+#: ../panels/power/cc-power-panel.c:514
 msgid "Wireless keyboard"
 msgstr "Безжична клавиатура"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:523
+#: ../panels/power/cc-power-panel.c:518
 msgid "Uninterruptible power supply"
 msgstr "Непрекъсваемо токозахранване"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:527
+#: ../panels/power/cc-power-panel.c:522
 msgid "Personal digital assistant"
 msgstr "Цифров помощник"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:531
+#: ../panels/power/cc-power-panel.c:526
 msgid "Cellphone"
 msgstr "Мобилен телефон"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:535
+#: ../panels/power/cc-power-panel.c:530
 msgid "Media player"
 msgstr "Музикално устройство"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:539
+#: ../panels/power/cc-power-panel.c:534
 msgid "Tablet"
 msgstr "Таблет"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:543
+#: ../panels/power/cc-power-panel.c:538
 msgid "Computer"
 msgstr "Компютър"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:547
+#: ../panels/power/cc-power-panel.c:542
 msgid "Battery"
 msgstr "Батерия"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:565
+#: ../panels/power/cc-power-panel.c:553
+msgctxt "Battery power"
+msgid "Charging"
+msgstr "Зареждане"
+
+#. TRANSLATORS: secondary battery
+#: ../panels/power/cc-power-panel.c:560
+msgctxt "Battery power"
 msgid "Caution"
 msgstr "Внимание"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:575
+#: ../panels/power/cc-power-panel.c:565
+msgctxt "Battery power"
+msgid "Low"
+msgstr "Нисък заряд"
+
+#. TRANSLATORS: secondary battery
+#: ../panels/power/cc-power-panel.c:570
+msgctxt "Battery power"
 msgid "Good"
 msgstr "В добро състояние"
 
-#: ../panels/power/cc-power-panel.c:1077
-msgid "Tip:"
-msgstr "Подсказка:"
+#. TRANSLATORS: primary battery
+#: ../panels/power/cc-power-panel.c:575
+msgctxt "Battery power"
+msgid "Charging - fully charged"
+msgstr "Зареждане. Пълно зареждане"
 
-#: ../panels/power/cc-power-panel.c:1078
-msgid "Brightness Settings"
-msgstr "Настройки на яркостта"
-
-#: ../panels/power/cc-power-panel.c:1079
-msgid "affect how much power is used"
-msgstr "влияе на консумацията на енергия"
+#. TRANSLATORS: primary battery
+#: ../panels/power/cc-power-panel.c:579
+msgctxt "Battery power"
+msgid "Empty"
+msgstr "Разредена батерия"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -2372,212 +2661,193 @@ msgid "When power is _critically low"
 msgstr "При _критично нисък заряд"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:541
+#: ../panels/printers/cc-printers-panel.c:589
 msgid "Low on toner"
 msgstr "Тонерът е на привършване"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:543
+#: ../panels/printers/cc-printers-panel.c:591
 msgid "Out of toner"
 msgstr "Тонерът свърши"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:546
+#: ../panels/printers/cc-printers-panel.c:594
 msgid "Low on developer"
 msgstr "Проявителят е на привършване"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:549
+#: ../panels/printers/cc-printers-panel.c:597
 msgid "Out of developer"
 msgstr "Проявителят свърши"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:551
+#: ../panels/printers/cc-printers-panel.c:599
 msgid "Low on a marker supply"
 msgstr "Мастилото е на привършване"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:553
+#: ../panels/printers/cc-printers-panel.c:601
 msgid "Out of a marker supply"
 msgstr "Мастилото свърши"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:555
+#: ../panels/printers/cc-printers-panel.c:603
 msgid "Open cover"
 msgstr "Отворен капак"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:557
+#: ../panels/printers/cc-printers-panel.c:605
 msgid "Open door"
 msgstr "Отворена вратичка"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:559
+#: ../panels/printers/cc-printers-panel.c:607
 msgid "Low on paper"
 msgstr "Хартията е на привършване"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:561
+#: ../panels/printers/cc-printers-panel.c:609
 msgid "Out of paper"
 msgstr "Хартията свърши"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:563
+#: ../panels/printers/cc-printers-panel.c:611
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Изключен"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:565
+#: ../panels/printers/cc-printers-panel.c:613
 msgctxt "printer state"
 msgid "Paused"
 msgstr "На пауза"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:567
+#: ../panels/printers/cc-printers-panel.c:615
 msgid "Waste receptacle almost full"
 msgstr "Контейнерът за отпадъчно мастило е почти пълен"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:569
+#: ../panels/printers/cc-printers-panel.c:617
 msgid "Waste receptacle full"
 msgstr "Контейнерът за отпадъчно мастило е пълен"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:571
+#: ../panels/printers/cc-printers-panel.c:619
 msgid "The optical photo conductor is near end of life"
 msgstr "Барабанът е почти износен"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:573
+#: ../panels/printers/cc-printers-panel.c:621
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Барабанът е износен"
 
+#. Translators: Printer's state (printer is being configured right now)
+#: ../panels/printers/cc-printers-panel.c:724
+msgctxt "printer state"
+msgid "Configuring"
+msgstr "Настройване"
+
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:748
+#: ../panels/printers/cc-printers-panel.c:781
 msgctxt "printer state"
 msgid "Ready"
 msgstr "в готовност"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:752
+#: ../panels/printers/cc-printers-panel.c:785
 msgctxt "printer state"
 msgid "Processing"
 msgstr "обработване"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:756
+#: ../panels/printers/cc-printers-panel.c:789
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "спрян"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:868
+#: ../panels/printers/cc-printers-panel.c:906
 msgid "Toner Level"
 msgstr "Ниво на тонера"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:871
+#: ../panels/printers/cc-printers-panel.c:909
 msgid "Ink Level"
 msgstr "Ниво на мастилото"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:874
+#: ../panels/printers/cc-printers-panel.c:912
 msgid "Supply Level"
 msgstr "Ниво на консуматива"
 
+#. Translators: Printer's state (printer is being installed right now)
+#: ../panels/printers/cc-printers-panel.c:930
+msgctxt "printer state"
+msgid "Installing"
+msgstr "Инсталиране"
+
+#. Translators: There are no printers available (none is configured or CUPS is not running)
+#: ../panels/printers/cc-printers-panel.c:1107
+msgid "No printers available"
+msgstr "Не са налични принтери"
+
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:889
-#: ../panels/printers/cc-printers-panel.c:1284
+#: ../panels/printers/cc-printers-panel.c:1411
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
 msgstr[0] "%u активна"
 msgstr[1] "%u активни"
 
-#. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:996
-msgid "No printers available"
-msgstr "Не са налични принтери"
-
-#. Translators: Job's state (job is waiting to be printed)
-#: ../panels/printers/cc-printers-panel.c:1327
-msgctxt "print job"
-msgid "Pending"
-msgstr "в опашката"
-
-#. Translators: Job's state (job is held for printing)
-#: ../panels/printers/cc-printers-panel.c:1331
-msgctxt "print job"
-msgid "Held"
-msgstr "задържана"
-
-#. Translators: Job's state (job is currently printing)
-#: ../panels/printers/cc-printers-panel.c:1335
-msgctxt "print job"
-msgid "Processing"
-msgstr "обработвана"
-
-#. Translators: Job's state (job has been stopped)
-#: ../panels/printers/cc-printers-panel.c:1339
-msgctxt "print job"
-msgid "Stopped"
-msgstr "спряна"
-
-#. Translators: Job's state (job has been canceled)
-#: ../panels/printers/cc-printers-panel.c:1343
-msgctxt "print job"
-msgid "Canceled"
-msgstr "отказана"
-
-#. Translators: Job's state (job has aborted due to error)
-#: ../panels/printers/cc-printers-panel.c:1347
-msgctxt "print job"
-msgid "Aborted"
-msgstr "прекъсната"
-
-#. Translators: Job's state (job has completed successfully)
-#: ../panels/printers/cc-printers-panel.c:1351
-msgctxt "print job"
-msgid "Completed"
-msgstr "завършена"
-
-#. Translators: Name of column showing titles of print jobs
-#: ../panels/printers/cc-printers-panel.c:1431
-msgid "Job Title"
-msgstr "Име на задачата"
-
-#. Translators: Name of column showing statuses of print jobs
-#: ../panels/printers/cc-printers-panel.c:1440
-msgid "Job State"
-msgstr "Състояние на задачата"
-
-#. Translators: Name of column showing times of creation of print jobs
-#: ../panels/printers/cc-printers-panel.c:1446
-msgid "Time"
-msgstr "Време"
-
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:2068
+#: ../panels/printers/cc-printers-panel.c:1731
 msgid "Failed to add new printer."
 msgstr "Неуспешно добавяне на нов принтер."
 
+#: ../panels/printers/cc-printers-panel.c:1896
+msgid "Select PPD File"
+msgstr "Избор на файл – PPD"
+
+#: ../panels/printers/cc-printers-panel.c:1905
+msgid ""
+"PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
+"PPD.GZ)"
+msgstr ""
+"Файлове на PostScript за описание на принтери (*.ppd, *.PPD, *.ppd.gz, *.PPD."
+"gz, *.PPD.GZ)"
+
+#: ../panels/printers/cc-printers-panel.c:2210
+msgid "No suitable driver found"
+msgstr "Не е открит подходящ драйвер"
+
+#: ../panels/printers/cc-printers-panel.c:2279
+msgid "Searching for preferred drivers..."
+msgstr "Търсене на предпочитани драйвери…"
+
+#: ../panels/printers/cc-printers-panel.c:2294
+msgid "Select from database..."
+msgstr "Избор от списък…"
+
+#: ../panels/printers/cc-printers-panel.c:2303
+msgid "Provide PPD File..."
+msgstr "Задаване на файла с описанието (PPD)…"
+
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2272
-#: ../panels/printers/cc-printers-panel.c:2286
+#: ../panels/printers/cc-printers-panel.c:2454
+#: ../panels/printers/cc-printers-panel.c:2477
 msgid "Test page"
 msgstr "Пробна страница"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2535
+#: ../panels/printers/cc-printers-panel.c:2880
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Неуспешно зареждане на файла с потребителския интерфейс „%s“"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:147
 msgid "Printers"
 msgstr "Принтери"
 
@@ -2590,84 +2860,312 @@ msgstr "Промяна на настройките на принтера"
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Принтер;Опашка;Печат;Хартия;Мастило;Тонер;"
 
-#: ../panels/printers/new-printer-dialog.ui.h:1
-msgid "Add a New Printer"
-msgstr "Добавяне на нов принтер"
+#: ../panels/printers/jobs-dialog.ui.h:1
+#: ../panels/printers/options-dialog.ui.h:1
+#: ../panels/printers/ppd-selection-dialog.ui.h:1
+msgid " "
+msgstr " "
+
+#: ../panels/printers/jobs-dialog.ui.h:2
+#: ../panels/printers/options-dialog.ui.h:4
+msgid "Close"
+msgstr "Затваряне"
+
+#. Translators: This tab contains list of active print jobs of the selected printer
+#: ../panels/printers/jobs-dialog.ui.h:4
+msgid "Active Jobs"
+msgstr "Активни задачи"
+
+#: ../panels/printers/jobs-dialog.ui.h:5
+msgid "Resume Printing"
+msgstr "Продължаване на печата"
+
+#: ../panels/printers/jobs-dialog.ui.h:6
+msgid "Pause Printing"
+msgstr "Пауза на печата"
+
+#: ../panels/printers/jobs-dialog.ui.h:7
+msgid "Cancel Print Job"
+msgstr "Отказване на задача за печат"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
-msgid "A_ddress:"
-msgstr "А_дрес:"
-
-#: ../panels/printers/new-printer-dialog.ui.h:3
-msgid "_Search by Address"
-msgstr "_Търсене по адрес"
-
-#: ../panels/printers/new-printer-dialog.ui.h:5
+#: ../panels/user-accounts/um-account-dialog.c:1017
 msgid "_Add"
 msgstr "_Добавяне"
 
-#: ../panels/printers/pp-new-printer-dialog.c:649
-msgid "Getting devices..."
-msgstr "Откриване на устройства…"
+#: ../panels/printers/new-printer-dialog.ui.h:3
+msgid "Add a New Printer"
+msgstr "Добавяне на нов принтер"
 
-#. Translators: No localy connected printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1232
-msgid "No local printers found"
-msgstr "Не са открити локални принтери"
+#: ../panels/printers/new-printer-dialog.ui.h:4
+msgid "Search for network printers or filter result"
+msgstr "Търсене на мрежови принтери или филтриране на резултатите "
 
-#. Translators: No network printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1245
-msgid "No network printers found"
-msgstr "Не са открити мрежови принтери"
+#: ../panels/printers/options-dialog.ui.h:2
+msgid "Options"
+msgstr "Настройки"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1337
-msgid ""
-"FirewallD is not running. Network printer detection needs services mdns, "
-"ipp, ipp-client and samba-client enabled on firewall."
-msgstr ""
-"Демонът FirewallD не е стартиран. За откриването на мрежов принтери е "
-"необходимо услугите mdns, ipp, ipp-client и samba-client да се включени в "
-"защитната стена."
+#: ../panels/printers/options-dialog.ui.h:3
+msgid "Loading options..."
+msgstr "Зареждане на настройките…"
 
-#. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:1365
-#: ../panels/printers/pp-new-printer-dialog.c:1370
-msgid "Devices"
-msgstr "Устройства"
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+#: ../panels/user-accounts/data/photo-dialog.ui.h:8
+#: ../panels/user-accounts/um-account-dialog.c:1016
+msgid "Cancel"
+msgstr "Отказ"
 
-#. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:1395
-msgctxt "printer type"
-msgid "Local"
-msgstr "На тази машина"
+#: ../panels/printers/ppd-selection-dialog.ui.h:4
+msgid "Loading drivers database..."
+msgstr "Зареждане на списъка с драйвери…"
 
-#. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:1397
-msgctxt "printer type"
-msgid "Network"
-msgstr "Мрежов"
+#: ../panels/printers/ppd-selection-dialog.ui.h:5
+msgid "Select Printer Driver"
+msgstr "Избор на драйвер за принтер"
 
-#. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:1438
-msgid "Device types"
-msgstr "Вид на устройството"
+#. Translators: this is an option of "Two Sided"
+#: ../panels/printers/pp-ipp-option-widget.c:65
+#: ../panels/printers/pp-ppd-option-widget.c:69
+msgid "One Sided"
+msgstr "Едностранно"
 
-#. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:1770
-msgid "Automatic configuration"
-msgstr "Автоматична настройка"
+#. Translators: this is an option of "Two Sided"
+#: ../panels/printers/pp-ipp-option-widget.c:67
+#: ../panels/printers/pp-ppd-option-widget.c:71
+msgid "Long Edge (Standard)"
+msgstr "По-дългата страна (стандартно)"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1869
-msgid "Opening firewall for mDNS connections"
-msgstr "Разрешаване на връзките за mDNS в защитната стена"
+#. Translators: this is an option of "Two Sided"
+#: ../panels/printers/pp-ipp-option-widget.c:69
+#: ../panels/printers/pp-ppd-option-widget.c:73
+msgid "Short Edge (Flip)"
+msgstr "По-късата страна (завъртане)"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1878
-msgid "Opening firewall for Samba connections"
-msgstr "Разрешаване на връзките за Samba в защитната стена"
+#. Translators: this is an option of "Orientation"
+#: ../panels/printers/pp-ipp-option-widget.c:71
+msgid "Portrait"
+msgstr "Вертикална"
 
-#: ../panels/printers/pp-new-printer-dialog.c:1887
-msgid "Opening firewall for IPP connections"
-msgstr "Разрешаване на връзките за IPP в защитната стена"
+#. Translators: this is an option of "Orientation"
+#: ../panels/printers/pp-ipp-option-widget.c:73
+msgid "Landscape"
+msgstr "Хоризонтална"
+
+#. Translators: this is an option of "Orientation"
+#: ../panels/printers/pp-ipp-option-widget.c:75
+msgid "Reverse landscape"
+msgstr "Вертикална, обърната"
+
+#. Translators: this is an option of "Orientation"
+#: ../panels/printers/pp-ipp-option-widget.c:77
+msgid "Reverse portrait"
+msgstr "Хоризонтална, обърната"
+
+#. Translators: Job's state (job is waiting to be printed)
+#: ../panels/printers/pp-jobs-dialog.c:143
+msgctxt "print job"
+msgid "Pending"
+msgstr "в опашката"
+
+#. Translators: Job's state (job is held for printing)
+#: ../panels/printers/pp-jobs-dialog.c:147
+msgctxt "print job"
+msgid "Held"
+msgstr "задържана"
+
+#. Translators: Job's state (job is currently printing)
+#: ../panels/printers/pp-jobs-dialog.c:151
+msgctxt "print job"
+msgid "Processing"
+msgstr "обработвана"
+
+#. Translators: Job's state (job has been stopped)
+#: ../panels/printers/pp-jobs-dialog.c:155
+msgctxt "print job"
+msgid "Stopped"
+msgstr "спряна"
+
+#. Translators: Job's state (job has been canceled)
+#: ../panels/printers/pp-jobs-dialog.c:159
+msgctxt "print job"
+msgid "Canceled"
+msgstr "отказана"
+
+#. Translators: Job's state (job has aborted due to error)
+#: ../panels/printers/pp-jobs-dialog.c:163
+msgctxt "print job"
+msgid "Aborted"
+msgstr "прекъсната"
+
+#. Translators: Job's state (job has completed successfully)
+#: ../panels/printers/pp-jobs-dialog.c:167
+msgctxt "print job"
+msgid "Completed"
+msgstr "завършена"
+
+#. Translators: Name of column showing titles of print jobs
+#: ../panels/printers/pp-jobs-dialog.c:289
+msgid "Job Title"
+msgstr "Име на задачата"
+
+#. Translators: Name of column showing statuses of print jobs
+#: ../panels/printers/pp-jobs-dialog.c:298
+msgid "Job State"
+msgstr "Състояние на задачата"
+
+#. Translators: Name of column showing times of creation of print jobs
+#: ../panels/printers/pp-jobs-dialog.c:304
+msgid "Time"
+msgstr "Време"
+
+#: ../panels/printers/pp-jobs-dialog.c:484
+#, c-format
+msgid "%s Active Jobs"
+msgstr "Активни задачи – %s"
+
+#. Translators: No printers were found
+#: ../panels/printers/pp-new-printer-dialog.c:1291
+msgid "No printers detected."
+msgstr "Не е открит принтер."
+
+#: ../panels/printers/pp-options-dialog.c:82
+msgid "Two Sided"
+msgstr "Двустранно"
+
+#: ../panels/printers/pp-options-dialog.c:83
+msgid "Paper Type"
+msgstr "Вид на хартията"
+
+#: ../panels/printers/pp-options-dialog.c:84
+msgid "Paper Source"
+msgstr "Източник на хартията"
+
+#: ../panels/printers/pp-options-dialog.c:85
+msgid "Output Tray"
+msgstr "Изходяща тава"
+
+#: ../panels/printers/pp-options-dialog.c:86
+msgid "Resolution"
+msgstr "Разделителна способност"
+
+#: ../panels/printers/pp-options-dialog.c:87
+msgid "GhostScript pre-filtering"
+msgstr "Предварителен филтър на GhostScript"
+
+#. Translators: This option sets number of pages printed on one sheet
+#: ../panels/printers/pp-options-dialog.c:533
+msgid "Pages per side"
+msgstr "Страници на лист"
+
+#. Translators: This option sets whether to print on both sides of paper
+#: ../panels/printers/pp-options-dialog.c:545
+msgid "Two-sided"
+msgstr "Двустранно"
+
+#. Translators: This option sets orientation of print (portrait, landscape...)
+#: ../panels/printers/pp-options-dialog.c:557
+msgid "Orientation"
+msgstr "Ориентация"
+
+#. Translators: "General" tab contains general printer options
+#: ../panels/printers/pp-options-dialog.c:654
+msgctxt "Printer Option Group"
+msgid "General"
+msgstr "Общи"
+
+#. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
+#: ../panels/printers/pp-options-dialog.c:657
+msgctxt "Printer Option Group"
+msgid "Page Setup"
+msgstr "Настройка на страницата"
+
+#. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
+#: ../panels/printers/pp-options-dialog.c:660
+msgctxt "Printer Option Group"
+msgid "Installable Options"
+msgstr "Апаратни настройки"
+
+#. Translators: "Job" tab contains settings for jobs
+#: ../panels/printers/pp-options-dialog.c:663
+msgctxt "Printer Option Group"
+msgid "Job"
+msgstr "Задача"
+
+#. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
+#: ../panels/printers/pp-options-dialog.c:666
+msgctxt "Printer Option Group"
+msgid "Image Quality"
+msgstr "Качество на изображенията"
+
+#. Translators: "Color" tab contains color settings (e.g. color printing)
+#: ../panels/printers/pp-options-dialog.c:669
+msgctxt "Printer Option Group"
+msgid "Color"
+msgstr "Цвят"
+
+#. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
+#: ../panels/printers/pp-options-dialog.c:672
+msgctxt "Printer Option Group"
+msgid "Finishing"
+msgstr "Довършителни"
+
+#. Translators: "Advanced" tab contains all others settings
+#: ../panels/printers/pp-options-dialog.c:675
+msgctxt "Printer Option Group"
+msgid "Advanced"
+msgstr "Разширени"
+
+#. Translators: Options of given printer (e.g. "MyPrinter Options")
+#: ../panels/printers/pp-options-dialog.c:936
+#, c-format
+msgid "%s Options"
+msgstr "Настройки – %s"
+
+#. Translators: this is an option of "Paper Source"
+#: ../panels/printers/pp-ppd-option-widget.c:75
+#: ../panels/printers/pp-ppd-option-widget.c:77
+#: ../panels/printers/pp-ppd-option-widget.c:85
+msgid "Auto Select"
+msgstr "Автоматичен избор"
+
+#. Translators: this is an option of "Paper Source"
+#. Translators: this is an option of "Resolution"
+#: ../panels/printers/pp-ppd-option-widget.c:79
+#: ../panels/printers/pp-ppd-option-widget.c:81
+#: ../panels/printers/pp-ppd-option-widget.c:83
+#: ../panels/printers/pp-ppd-option-widget.c:87
+msgid "Printer Default"
+msgstr "Стандартното за принтера"
+
+#. Translators: this is an option of "GhostScript"
+#: ../panels/printers/pp-ppd-option-widget.c:89
+msgid "Embed GhostScript fonts only"
+msgstr "Вграждане само на шрифтовете на GhostScript"
+
+#. Translators: this is an option of "GhostScript"
+#: ../panels/printers/pp-ppd-option-widget.c:91
+msgid "Convert to PS level 1"
+msgstr "Преобразуване към PostScript, ниво 1"
+
+#. Translators: this is an option of "GhostScript"
+#: ../panels/printers/pp-ppd-option-widget.c:93
+msgid "Convert to PS level 2"
+msgstr "Преобразуване към PostScript, ниво 2"
+
+#. Translators: this is an option of "GhostScript"
+#: ../panels/printers/pp-ppd-option-widget.c:95
+msgid "No pre-filtering"
+msgstr "Без предварителен филтър"
+
+#. Translators: Name of column showing printer manufacturers
+#: ../panels/printers/pp-ppd-selection-dialog.c:230
+msgid "Manufacturers"
+msgstr "Производители"
+
+#. Translators: Name of column showing printer drivers
+#: ../panels/printers/pp-ppd-selection-dialog.c:242
+msgid "Drivers"
+msgstr "Драйвери"
 
 #: ../panels/printers/printers.ui.h:1
 msgid "Add Printer"
@@ -2698,7 +3196,7 @@ msgstr "По по_дразбиране"
 msgid "Jobs"
 msgstr "Задачи"
 
-#. Tanslators: Switch to tab containing printer's jobs
+#. Tanslators: Opens a dialog containing printer's jobs
 #: ../panels/printers/printers.ui.h:11
 msgid "_Show"
 msgstr "_Показване"
@@ -2707,70 +3205,50 @@ msgstr "_Показване"
 msgid "Model"
 msgstr "Модел"
 
-#. Translators: This button executes command which prints test page.
+#: ../panels/printers/printers.ui.h:14
+msgid "page 1"
+msgstr "страница 1"
+
 #: ../panels/printers/printers.ui.h:15
+msgid "label"
+msgstr "етикет"
+
+#: ../panels/printers/printers.ui.h:16
+msgid "page 2"
+msgstr "страница 2"
+
+#: ../panels/printers/printers.ui.h:17
+msgid "Setting new driver..."
+msgstr "Настройване на нов драйвер…"
+
+#: ../panels/printers/printers.ui.h:18
+msgid "page 3"
+msgstr "страница 3"
+
+#. Translators: This button executes command which prints test page.
+#: ../panels/printers/printers.ui.h:20
 msgid "Print _Test Page"
 msgstr "Печат на _пробна страница"
 
 #. Translators: This button opens printer's options tab
-#: ../panels/printers/printers.ui.h:17
+#: ../panels/printers/printers.ui.h:22
 msgid "_Options"
 msgstr "_Настройки"
 
-#. Translators: Switch back to printer's info tab
-#: ../panels/printers/printers.ui.h:19
-msgid "_Back"
-msgstr "На_зад"
-
-#. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:21
-msgid "Active Print Jobs"
-msgstr "Активни задачи за печат"
-
-#: ../panels/printers/printers.ui.h:22
-msgid "Resume Printing"
-msgstr "Продължаване на печата"
-
-#: ../panels/printers/printers.ui.h:23
-msgid "Pause Printing"
-msgstr "Пауза на печата"
-
-#: ../panels/printers/printers.ui.h:24
-msgid "Cancel Print Job"
-msgstr "Отказване на задача за печат"
-
-#. Translators: This tab contains list of active print jobs of the selected printer
-#: ../panels/printers/printers.ui.h:26
-msgid "Printer Options"
-msgstr "Настройки на принтера"
-
-#: ../panels/printers/printers.ui.h:27
-msgid "Add User"
-msgstr "Добавяне на потребител"
-
-#: ../panels/printers/printers.ui.h:28
-msgid "Remove User"
-msgstr "Премахване на потребител"
-
-#: ../panels/printers/printers.ui.h:29
-msgid "Allowed users"
-msgstr "Потребители с разрешен достъп"
-
 #. Translators: This button adds new printer.
-#: ../panels/printers/printers.ui.h:31
+#: ../panels/printers/printers.ui.h:24
 msgid "Add New Printer"
 msgstr "Добавяне на нов принтер"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: ../panels/printers/printers.ui.h:33
+#: ../panels/printers/printers.ui.h:26
 msgid ""
 "Sorry! The system printing service\n"
 "doesn't seem to be available."
 msgstr "Изглежда, че системната услуга за печат не е налична."
 
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:1
-#: ../panels/region/gnome-region-panel.ui.h:1
-msgid "Region and Language"
+msgid "Region & Language"
 msgstr "Регион и език"
 
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:2
@@ -2790,23 +3268,15 @@ msgstr "имперска"
 msgid "Metric"
 msgstr "метрична"
 
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:1
-msgid "Choose a Layout"
-msgstr "Избиране на клавиатурна подредба"
+#: ../panels/region/gnome-region-panel-input-chooser.ui.h:1
+msgid "Choose an input source"
+msgstr "Изберете вход"
 
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:2
-msgid "Preview"
-msgstr "Предварителен преглед"
-
-#: ../panels/region/gnome-region-panel-layout-chooser.ui.h:3
+#: ../panels/region/gnome-region-panel-input-chooser.ui.h:2
 msgid "Select an input source to add"
 msgstr "Избор и добавяне на вход"
 
-#: ../panels/region/gnome-region-panel-options-dialog.ui.h:1
-msgid "Keyboard Layout Options"
-msgstr "Настройки на подредбата"
-
-#: ../panels/region/gnome-region-panel-system.c:417
+#: ../panels/region/gnome-region-panel-system.c:330
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings."
@@ -2814,8 +3284,8 @@ msgstr ""
 "Екранът за вход, системните регистрации и новите потребители използват "
 "системните настройки за „Регион и език“."
 
-#: ../panels/region/gnome-region-panel-system.c:422
-#: ../panels/region/gnome-region-panel.ui.h:32
+#: ../panels/region/gnome-region-panel-system.c:335
+#: ../panels/region/gnome-region-panel.ui.h:31
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings. You may change the system settings to match "
@@ -2825,14 +3295,18 @@ msgstr ""
 "системните настройки за „Регион и език“. Можете да зададете вашите настройки "
 "като системни."
 
-#: ../panels/region/gnome-region-panel-system.c:425
+#: ../panels/region/gnome-region-panel-system.c:338
 msgid "Copy Settings"
 msgstr "Копиране на настройки"
 
-#: ../panels/region/gnome-region-panel-system.c:428
-#: ../panels/region/gnome-region-panel.ui.h:39
+#: ../panels/region/gnome-region-panel-system.c:341
+#: ../panels/region/gnome-region-panel.ui.h:38
 msgid "Copy Settings..."
 msgstr "Копиране на настройки…"
+
+#: ../panels/region/gnome-region-panel.ui.h:1
+msgid "Region and Language"
+msgstr "Регион и език"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
 msgid "Select a display language (change will be applied next time you log in)"
@@ -2840,16 +3314,16 @@ msgstr ""
 "Изберете език за интерфейса. Промените ще са достъпни при следващото влизане."
 
 #: ../panels/region/gnome-region-panel.ui.h:3
-msgid "Install languages..."
-msgstr "Инсталиране на езици…"
-
-#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Add Language"
 msgstr " Добавяне на език"
 
-#: ../panels/region/gnome-region-panel.ui.h:5
+#: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Remove Language"
 msgstr "Премахване на език"
+
+#: ../panels/region/gnome-region-panel.ui.h:5
+msgid "Install languages..."
+msgstr "Инсталиране на езици…"
 
 #: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Language"
@@ -2896,95 +3370,72 @@ msgid "Formats"
 msgstr "Формати"
 
 #: ../panels/region/gnome-region-panel.ui.h:17
-msgid "Add Layout"
-msgstr "Добавяне на подредба"
+msgid "Select keyboards or other input sources"
+msgstr "Избор на клавиатура и други входни устройства"
 
 #: ../panels/region/gnome-region-panel.ui.h:18
-msgid "Remove Layout"
-msgstr "Премахване на подредба"
+msgid "Add Input Source"
+msgstr "Добавяне на вход"
 
 #: ../panels/region/gnome-region-panel.ui.h:19
-msgid "Move Up"
-msgstr "Придвижване нагоре"
+msgid "Remove Input Source"
+msgstr "Премахване на входа"
 
 #: ../panels/region/gnome-region-panel.ui.h:20
-msgid "Move Down"
-msgstr "Придвижване надолу"
+msgid "Move Input Source Up"
+msgstr "Преместване на входа нагоре"
 
 #: ../panels/region/gnome-region-panel.ui.h:21
-msgid "Preview Layout"
-msgstr "Преглед на подредбата"
+msgid "Move Input Source Down"
+msgstr "Преместване на входа надолу"
 
 #: ../panels/region/gnome-region-panel.ui.h:22
-msgid "Use the same layout for all windows"
-msgstr "Една и съща подредба за всички прозорци"
+msgid "Input Source Settings"
+msgstr "Настройки на входа"
 
 #: ../panels/region/gnome-region-panel.ui.h:23
-msgid "Allow different layouts for individual windows"
-msgstr "Отделна подредба за всеки прозорец"
-
-#: ../panels/region/gnome-region-panel.ui.h:24
-msgid "New windows use the default layout"
-msgstr "Новите прозорци използват стандартната подредба"
+msgid "Show Keyboard Layout"
+msgstr "Показване на клавиатурната подредба"
 
 #: ../panels/region/gnome-region-panel.ui.h:25
-msgid "New windows use the previous window's layout"
-msgstr "Новите прозорци използват последната активна подредбата"
+msgid "Ctrl+Alt+Space"
+msgstr "Ctrl+Alt+Space"
 
 #: ../panels/region/gnome-region-panel.ui.h:27
-msgid "View and edit keyboard layout options"
-msgstr "Разглеждане и редактиране на настройките на подредбата"
+msgid "Ctrl+Alt+Shift+Space"
+msgstr "Ctrl+Alt+Shift+Space"
 
 #: ../panels/region/gnome-region-panel.ui.h:28
-msgid "Reset to De_faults"
-msgstr "_Стандартни настройки"
+msgid "Shortcut Settings"
+msgstr "Настройки на бързите клавиши"
 
-#: ../panels/region/gnome-region-panel.ui.h:29
-msgid ""
-"Replace the current keyboard layout settings with the\n"
-"default settings"
-msgstr ""
-"Замяна на текущите настройки на подредбата\n"
-"на клавиатурата със стандартните"
-
-#: ../panels/region/gnome-region-panel.ui.h:31
-msgid "Layouts"
-msgstr "Подредби"
+#: ../panels/region/gnome-region-panel.ui.h:30
+msgid "Input Sources"
+msgstr "Входове"
 
 #. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
-#: ../panels/region/gnome-region-panel.ui.h:34
+#: ../panels/region/gnome-region-panel.ui.h:33
 msgid "Display language:"
 msgstr "Език за показване:"
 
-#: ../panels/region/gnome-region-panel.ui.h:35
+#: ../panels/region/gnome-region-panel.ui.h:34
 msgid "Input source:"
 msgstr "Вход:"
 
-#: ../panels/region/gnome-region-panel.ui.h:36
+#: ../panels/region/gnome-region-panel.ui.h:35
 msgid "Format:"
 msgstr "Формат:"
 
-#: ../panels/region/gnome-region-panel.ui.h:37
+#: ../panels/region/gnome-region-panel.ui.h:36
 msgid "Your settings"
 msgstr "Вашите настройки"
 
-#: ../panels/region/gnome-region-panel.ui.h:38
+#: ../panels/region/gnome-region-panel.ui.h:37
 msgid "System settings"
 msgstr "Системни настройки"
 
-#: ../panels/region/gnome-region-panel-xkblt.c:210
-msgid "Layout"
-msgstr "Подредба"
-
-# На едното място е в женски род — подредба, на другото май е мъжки.
-# Затова вместо „стандартно“ ползвам „По подразбиране“.
-#: ../panels/region/gnome-region-panel-xkbot.c:229
-#: ../panels/sound/gvc-sound-theme-chooser.c:585
-msgid "Default"
-msgstr "По подразбиране"
-
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:1
-msgid "Brightness and Lock"
+msgid "Brightness & Lock"
 msgstr "Яркост и заключване"
 
 #: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
@@ -3042,6 +3493,10 @@ msgid "Locations..."
 msgstr "Местоположения…"
 
 #: ../panels/screen/screen.ui.h:17
+msgid "Show _notifications when locked"
+msgstr "Показване на _уведомления след заключване на екрана"
+
+#: ../panels/screen/screen.ui.h:18
 msgid "Lock"
 msgstr "Заключване"
 
@@ -3075,8 +3530,9 @@ msgstr "Промяна на силата на звука и звуците св�
 
 #. Translators: those are keywords for the sound control-center panel
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
-msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;"
-msgstr "Карта;Микрофон;Сила на звука;Затихване;Баланс;Bluetooth;Слушалки;"
+msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
+msgstr ""
+"Карта;Микрофон;Сила на звука;Затихване;Баланс;Bluetooth;Слушалки;Звук;Аудио;"
 
 #. Translators: This is the name of an audio file that sounds like the bark of a dog.
 #. You might want to translate it into the equivalent words of your language.
@@ -3102,7 +3558,7 @@ msgstr "Стъкло"
 msgid "Sonar"
 msgstr "Сонар"
 
-#: ../panels/sound/gvc-applet.c:270 ../panels/sound/gvc-mixer-dialog.c:1768
+#: ../panels/sound/gvc-applet.c:270 ../panels/sound/gvc-mixer-dialog.c:1656
 msgid "Output"
 msgstr "Изход"
 
@@ -3110,7 +3566,7 @@ msgstr "Изход"
 msgid "Sound Output Volume"
 msgstr "Сила на изхода"
 
-#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1809
+#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1697
 msgid "Input"
 msgstr "Вход"
 
@@ -3160,23 +3616,24 @@ msgstr "_Затихване:"
 msgid "_Subwoofer:"
 msgstr "_Бас:"
 
-#: ../panels/sound/gvc-channel-bar.c:603 ../panels/sound/gvc-channel-bar.c:612
+#: ../panels/sound/gvc-channel-bar.c:613 ../panels/sound/gvc-channel-bar.c:622
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: ../panels/sound/gvc-channel-bar.c:607
+#: ../panels/sound/gvc-channel-bar.c:617
 msgctxt "volume"
 msgid "Unamplified"
 msgstr "Без усилване"
 
-#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:1622
+#: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:260
+#: ../panels/sound/gvc-mixer-dialog.c:521
 msgid "_Profile:"
 msgstr "_Профил:"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1094
+#: ../panels/sound/gvc-mixer-control.c:1841
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -3185,87 +3642,72 @@ msgstr[1] "%u изхода"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1104
+#: ../panels/sound/gvc-mixer-control.c:1851
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u вход"
 msgstr[1] "%u входа"
 
-#: ../panels/sound/gvc-mixer-control.c:1402
+#: ../panels/sound/gvc-mixer-control.c:2375
 msgid "System Sounds"
 msgstr "Системни звуци"
 
-#: ../panels/sound/gvc-mixer-dialog.c:324
-#: ../panels/sound/gvc-mixer-dialog.c:635
-msgid "Co_nnector:"
-msgstr "На_крайник:"
+#: ../panels/sound/gvc-mixer-dialog.c:262
+msgid "_Test Speakers"
+msgstr "_Изпробване на високоговорителите"
 
-#: ../panels/sound/gvc-mixer-dialog.c:541
+#: ../panels/sound/gvc-mixer-dialog.c:426
 msgid "Peak detect"
 msgstr "Засичане на връхната точка"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1497
-#: ../panels/sound/gvc-mixer-dialog.c:1710
+#: ../panels/sound/gvc-mixer-dialog.c:1506
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "Име"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1564
+#: ../panels/sound/gvc-mixer-dialog.c:1588
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Изпробване на високоговорител към „%s“"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1623
-msgid "_Test Speakers"
-msgstr "_Изпробване на високоговорителите"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1754
+#: ../panels/sound/gvc-mixer-dialog.c:1642
 msgid "_Output volume:"
 msgstr "Сила на _изхода:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1773
+#: ../panels/sound/gvc-mixer-dialog.c:1661
 msgid "C_hoose a device for sound output:"
 msgstr "_Избор на изходно звуково устройство:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1798
-#: ../panels/sound/gvc-mixer-dialog.c:1927
+#: ../panels/sound/gvc-mixer-dialog.c:1686
 msgid "Settings for the selected device:"
 msgstr "Настройки на избраното устройство:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1816
+#: ../panels/sound/gvc-mixer-dialog.c:1704
 msgid "_Input volume:"
 msgstr "Сила на _входа:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1839
+#: ../panels/sound/gvc-mixer-dialog.c:1727
 msgid "Input level:"
 msgstr "Ниво на входа:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1867
+#: ../panels/sound/gvc-mixer-dialog.c:1755
 msgid "C_hoose a device for sound input:"
 msgstr "_Избор на входно звуково устройство:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1894
-msgid "Hardware"
-msgstr "Хардуер"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1899
-msgid "C_hoose a device to configure:"
-msgstr "_Избор на устройство за настройване:"
-
-#: ../panels/sound/gvc-mixer-dialog.c:1938
+#: ../panels/sound/gvc-mixer-dialog.c:1782
 msgid "Sound Effects"
 msgstr "Звукови ефекти"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1945
+#: ../panels/sound/gvc-mixer-dialog.c:1789
 msgid "_Alert volume:"
 msgstr "Сила на _известяването:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1958
+#: ../panels/sound/gvc-mixer-dialog.c:1802
 msgid "Applications"
 msgstr "Програми"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1962
+#: ../panels/sound/gvc-mixer-dialog.c:1806
 msgid "No application is currently playing or recording audio."
 msgstr "В момента никоя програма не записва и не възпроизвежда звук."
 
@@ -3286,6 +3728,12 @@ msgstr "Настройки на звука"
 msgid "Testing event sound"
 msgstr "Проба на звука за събитие"
 
+# На едното място е в женски род — подредба, на другото май е мъжки.
+# Затова вместо „стандартно“ ползвам „По подразбиране“.
+#: ../panels/sound/gvc-sound-theme-chooser.c:585
+msgid "Default"
+msgstr "По подразбиране"
+
 #: ../panels/sound/gvc-sound-theme-chooser.c:586
 msgid "From theme"
 msgstr "От тема"
@@ -3294,16 +3742,16 @@ msgstr "От тема"
 msgid "C_hoose an alert sound:"
 msgstr "_Избор на звук за известяване:"
 
-#: ../panels/sound/gvc-speaker-test.c:221
+#: ../panels/sound/gvc-speaker-test.c:220
 msgid "Stop"
 msgstr "Спиране"
 
-#: ../panels/sound/gvc-speaker-test.c:221
-#: ../panels/sound/gvc-speaker-test.c:333
+#: ../panels/sound/gvc-speaker-test.c:220
+#: ../panels/sound/gvc-speaker-test.c:332
 msgid "Test"
 msgstr "Изпробване"
 
-#: ../panels/sound/gvc-speaker-test.c:229
+#: ../panels/sound/gvc-speaker-test.c:228
 msgid "Subwoofer"
 msgstr "Бас"
 
@@ -3329,8 +3777,8 @@ msgstr "Заглушен"
 msgid "Custom"
 msgstr "Потребителски"
 
-#: ../panels/universal-access/cc-ua-panel.c:446
-#: ../panels/universal-access/cc-ua-panel.c:452
+#: ../panels/universal-access/cc-ua-panel.c:286
+#: ../panels/universal-access/cc-ua-panel.c:292
 msgid "No shortcut set"
 msgstr "Не е зададена клавишна комбинация"
 
@@ -3349,426 +3797,472 @@ msgstr ""
 "на мишката;"
 
 #: ../panels/universal-access/uap.ui.h:1
-msgid "On screen keyboard"
-msgstr "Екранна клавиатура"
+msgctxt "universal access, contrast"
+msgid "Low"
+msgstr "нисък"
 
-# Dahser е име на програма.
 #: ../panels/universal-access/uap.ui.h:2
-msgid "Dasher"
-msgstr "Dasher"
-
-# Nomon е име на програма.
-#: ../panels/universal-access/uap.ui.h:3
-msgid "Nomon"
-msgstr "Nomon"
-
-# Caribou е име на програма.
-#: ../panels/universal-access/uap.ui.h:4
-msgid "Caribou"
-msgstr "Caribou"
-
-#: ../panels/universal-access/uap.ui.h:7
-#, no-c-format
-msgid "75%"
-msgstr "75%"
-
-#: ../panels/universal-access/uap.ui.h:8
-msgctxt "universal access, text size"
-msgid "Small"
-msgstr "малък"
-
-#: ../panels/universal-access/uap.ui.h:10
-#, no-c-format
-msgid "100%"
-msgstr "100%"
-
-#: ../panels/universal-access/uap.ui.h:11
-msgctxt "universal access, text size"
+msgctxt "universal access, contrast"
 msgid "Normal"
 msgstr "нормален"
 
-#: ../panels/universal-access/uap.ui.h:13
-#, no-c-format
-msgid "125%"
-msgstr "125%"
+#: ../panels/universal-access/uap.ui.h:3
+msgctxt "universal access, contrast"
+msgid "High"
+msgstr "висок"
 
-#: ../panels/universal-access/uap.ui.h:14
-msgctxt "universal access, text size"
-msgid "Large"
-msgstr "голям"
+#: ../panels/universal-access/uap.ui.h:4
+msgctxt "universal access, contrast"
+msgid "High/Inverse"
+msgstr "висок/обърнат"
 
-#: ../panels/universal-access/uap.ui.h:16
-#, no-c-format
-msgid "150%"
-msgstr "150%"
+#: ../panels/universal-access/uap.ui.h:5
+msgid "On screen keyboard"
+msgstr "Екранна клавиатура"
 
-#: ../panels/universal-access/uap.ui.h:17
-msgctxt "universal access, text size"
-msgid "Larger"
-msgstr "по-голям"
-
-#: ../panels/universal-access/uap.ui.h:18
+#: ../panels/universal-access/uap.ui.h:6
 msgid "GOK"
 msgstr "GOK"
 
 # OnBoard е име на програма.
-#: ../panels/universal-access/uap.ui.h:19
+#: ../panels/universal-access/uap.ui.h:7
 msgid "OnBoard"
 msgstr "OnBorad"
 
+#: ../panels/universal-access/uap.ui.h:8
+msgid "None"
+msgstr "Без"
+
+#: ../panels/universal-access/uap.ui.h:10
+#, no-c-format
+msgid "75%"
+msgstr "75%"
+
+#: ../panels/universal-access/uap.ui.h:11
+msgctxt "universal access, text size"
+msgid "Small"
+msgstr "малък"
+
+#: ../panels/universal-access/uap.ui.h:13
+#, no-c-format
+msgid "100%"
+msgstr "100%"
+
+#: ../panels/universal-access/uap.ui.h:14
+msgctxt "universal access, text size"
+msgid "Normal"
+msgstr "нормален"
+
+#: ../panels/universal-access/uap.ui.h:16
+#, no-c-format
+msgid "125%"
+msgstr "125%"
+
+#: ../panels/universal-access/uap.ui.h:17
+msgctxt "universal access, text size"
+msgid "Large"
+msgstr "голям"
+
+#: ../panels/universal-access/uap.ui.h:19
+#, no-c-format
+msgid "150%"
+msgstr "150%"
+
 #: ../panels/universal-access/uap.ui.h:20
-msgid "Change contrast:"
-msgstr "Промяна на контраста:"
+msgctxt "universal access, text size"
+msgid "Larger"
+msgstr "по-голям"
 
 #: ../panels/universal-access/uap.ui.h:21
-msgid "_Contrast:"
-msgstr "_Контраст:"
+msgid "High Contrast"
+msgstr "Висок контраст"
 
 #: ../panels/universal-access/uap.ui.h:22
-msgid "_Text size:"
-msgstr "Размер на _текста:"
+msgid "Beep on Caps and Num Lock"
+msgstr "Звук при натискане на клавишите „Caps“ и „Num Lock“"
 
 #: ../panels/universal-access/uap.ui.h:23
-msgid "Increase size:"
-msgstr "Увеличаване на размера:"
-
-#: ../panels/universal-access/uap.ui.h:24
-msgid "Decrease size:"
-msgstr "Намаляване на размера:"
-
-#. Translators: this refers to theme contrast and font size
-#: ../panels/universal-access/uap.ui.h:26
-msgctxt "universal access, seeing"
-msgid "Display"
-msgstr "Екран"
-
-#: ../panels/universal-access/uap.ui.h:27
-msgid "Turn on or off:"
-msgstr "Включване или изключване:"
-
-#: ../panels/universal-access/uap.ui.h:28
-msgid "Zoom in:"
-msgstr "Увеличаване:"
-
-#: ../panels/universal-access/uap.ui.h:29
-msgid "Zoom out:"
-msgstr "Намаляване:"
-
-#: ../panels/universal-access/uap.ui.h:30
 msgid "Options..."
 msgstr "Настройки…"
 
-#. Translators: this refers to screen magnifier
-#: ../panels/universal-access/uap.ui.h:32
-msgctxt "universal access, seeing"
-msgid "Zoom"
-msgstr "Увеличение"
-
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Screen Reader"
 msgstr "Екранен четец"
 
-#: ../panels/universal-access/uap.ui.h:34
-msgid "Beep when Caps and Num Lock are used"
-msgstr "Звук при натискане на клавишите „Caps“ и „Num Lock“"
+#: ../panels/universal-access/uap.ui.h:25
+msgid "Turn on or off:"
+msgstr "Включване или изключване:"
 
-#: ../panels/universal-access/uap.ui.h:35
+#: ../panels/universal-access/uap.ui.h:26
+msgctxt "universal access, zoom"
+msgid "Zoom"
+msgstr "Увеличение"
+
+#: ../panels/universal-access/uap.ui.h:27
+msgid "Zoom in:"
+msgstr "Увеличаване:"
+
+#: ../panels/universal-access/uap.ui.h:28
+msgid "Zoom out:"
+msgstr "Намаляване:"
+
+#: ../panels/universal-access/uap.ui.h:29
+msgid "Large Text"
+msgstr "голям текст"
+
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Seeing"
 msgstr "Зрение"
 
-#: ../panels/universal-access/uap.ui.h:36
-msgid "Use a visual indication when an alert sound occurs"
-msgstr "Едновременно зрително и звуковото известяване"
-
-#: ../panels/universal-access/uap.ui.h:37
-msgid "_Test flash"
-msgstr "_Проба на проблясването"
-
-#: ../panels/universal-access/uap.ui.h:38
-msgid "Flash the window title"
-msgstr "Проблясване на заглавната лента на прозореца"
-
-#: ../panels/universal-access/uap.ui.h:39
-msgid "Flash the entire screen"
-msgstr "Проблясване на целия екран"
-
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Visual Alerts"
 msgstr "Зрителни известия"
 
-#: ../panels/universal-access/uap.ui.h:41
-msgid "Display a textual description of speech and sounds"
-msgstr "Показване на текстово описание на речта и звуците"
+#: ../panels/universal-access/uap.ui.h:32
+msgid "Use a visual indication when an alert sound occurs"
+msgstr "Едновременно зрително и звуковото известяване"
+
+#: ../panels/universal-access/uap.ui.h:33
+msgid "Flash the window title"
+msgstr "Проблясване на заглавната лента на прозореца"
+
+#: ../panels/universal-access/uap.ui.h:34
+msgid "Flash the entire screen"
+msgstr "Проблясване на целия екран"
 
 # Имаше дискусия в списъка на преводачите относно термина „Closed
 # captions“. Дискусията се въртеше около WebKit и използването на
 # термина основно за видео потоци и файлове. Тук, в контекста на
 # „универсален достъп“, субтитри определено не е подходящо.
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:35
 msgid "Closed Captioning"
 msgstr "Екранни надписи"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:36
+msgid "Display a textual description of speech and sounds"
+msgstr "Показване на текстово описание на речта и звуците"
+
+#: ../panels/universal-access/uap.ui.h:37
+msgid "_Test flash"
+msgstr "_Проба на проблясването"
+
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Hearing"
 msgstr "Слух"
 
-#: ../panels/universal-access/uap.ui.h:45
-msgid "Screen keyboard"
+#: ../panels/universal-access/uap.ui.h:40
+msgid "On Screen Keyboard"
 msgstr "Екранна клавиатура"
 
-#: ../panels/universal-access/uap.ui.h:46
-msgid "Typing Assistant"
-msgstr "Помощ при писане"
-
-#: ../panels/universal-access/uap.ui.h:47
-msgid "_Turn on accessibility features from the keyboard"
-msgstr "_Включване на достъпността чрез клавиатурата"
-
-#: ../panels/universal-access/uap.ui.h:48
-msgid "Treats a sequence of modifier keys as a key combination"
-msgstr "Използване на модификаторите на клавиши като клавишни комбинации"
-
-#: ../panels/universal-access/uap.ui.h:49
-msgid "_Disable if two keys are pressed together"
-msgstr "_Изключване при натискането на два клавиша едновременно"
-
-#: ../panels/universal-access/uap.ui.h:50
-msgid "Beep when a _modifer key is pressed"
-msgstr "Звук при натискане на _модификатор"
-
-#: ../panels/universal-access/uap.ui.h:51
+#: ../panels/universal-access/uap.ui.h:41
 msgid "Sticky Keys"
 msgstr "Лепкави клавиши"
 
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:42
+msgid "Treats a sequence of modifier keys as a key combination"
+msgstr "Използване на модификаторите на клавиши като клавишни комбинации"
+
+#: ../panels/universal-access/uap.ui.h:43
+msgid "_Disable if two keys are pressed together"
+msgstr "_Изключване при натискането на два клавиша едновременно"
+
+#: ../panels/universal-access/uap.ui.h:44
+msgid "Beep when a _modifer key is pressed"
+msgstr "Звук при натискане на _модификатор"
+
+#: ../panels/universal-access/uap.ui.h:45
+msgid "Slow Keys"
+msgstr "Бавни клавиши"
+
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "Въвеждане на закъснение между натискането на клавиш и отчитането му"
 
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/uap.ui.h:47
 msgid "A_cceptance delay:"
 msgstr "За_къснение при отчитане:"
 
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Slow keys typing delay"
 msgstr "Забавяне за бавните клавиши"
 
 #. This string is part of a line of checkboxes: Beep when a key is [ ] pressed  [ ] accepted  [ ] rejected
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Beep when a key is"
 msgstr "Звук, когато клавишът е"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:56
 msgid "pressed"
 msgstr "натиснат"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:58
 msgid "accepted"
 msgstr "приет"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:60
 msgid "rejected"
 msgstr "отхвърлен"
 
-#: ../panels/universal-access/uap.ui.h:67
-msgid "Slow Keys"
-msgstr "Бавни клавиши"
-
-#: ../panels/universal-access/uap.ui.h:68
-msgid "Ignores fast duplicate keypresses"
-msgstr "Игнориране на бързо натискане на еднакви клавиши"
-
-#: ../panels/universal-access/uap.ui.h:69
-msgid "Acc_eptance delay:"
-msgstr "Зак_ъснение при отчитане:"
-
-#: ../panels/universal-access/uap.ui.h:70
-msgid "Bounce keys typing delay"
-msgstr "Забавяне за подскачащите клавиши"
-
-#: ../panels/universal-access/uap.ui.h:71
-msgid "Beep when a key is _rejected"
-msgstr "Звук при _отхвърляне на клавиша"
-
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Bounce Keys"
 msgstr "Подскачащи клавиши"
 
-#: ../panels/universal-access/uap.ui.h:73
-msgid "Type here to test settings"
-msgstr "Пишете, за да изпробвате настройките"
+#: ../panels/universal-access/uap.ui.h:62
+msgid "Ignores fast duplicate keypresses"
+msgstr "Игнориране на бързо натискане на еднакви клавиши"
 
-#: ../panels/universal-access/uap.ui.h:76
-msgid "Control the pointer using the keypad"
-msgstr "Движение на показалеца чрез клавиатурата"
+#: ../panels/universal-access/uap.ui.h:63
+msgid "Acc_eptance delay:"
+msgstr "Зак_ъснение при отчитане:"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:64
+msgid "Bounce keys typing delay"
+msgstr "Забавяне за подскачащите клавиши"
+
+#: ../panels/universal-access/uap.ui.h:65
+msgid "Beep when a key is _rejected"
+msgstr "Звук при _отхвърляне на клавиша"
+
+#: ../panels/universal-access/uap.ui.h:66
+msgid "Enable by Keyboard"
+msgstr "Включване чрез клавиатурата"
+
+#: ../panels/universal-access/uap.ui.h:67
+msgid "Turn accessibility features on and off using the keyboard"
+msgstr "Включване и изключване на достъпността чрез клавиатурата"
+
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Mouse Keys"
 msgstr "Бутони на мишката"
 
-#: ../panels/universal-access/uap.ui.h:78
-msgid "Control the pointer using the video camera."
-msgstr "Движение на показалеца чрез видеокамерата."
+#: ../panels/universal-access/uap.ui.h:70
+msgid "Control the pointer using the keypad"
+msgstr "Движение на показалеца чрез клавиатурата"
 
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Video Mouse"
 msgstr "Видео мишка"
 
-#: ../panels/universal-access/uap.ui.h:80
-msgid "Trigger a secondary click by holding down the primary button"
-msgstr "Второ натискане при задържане на основния бутон"
+#: ../panels/universal-access/uap.ui.h:72
+msgid "Control the pointer using the video camera."
+msgstr "Движение на показалеца чрез видеокамерата."
 
-#: ../panels/universal-access/uap.ui.h:81
-msgid "Secondary click delay"
-msgstr "Закъснение при повторно натискане"
-
-#: ../panels/universal-access/uap.ui.h:82
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Simulated Secondary Click"
 msgstr "Симулирано повторно натискане"
 
-#: ../panels/universal-access/uap.ui.h:83
-msgid "Trigger a click when the pointer hovers"
-msgstr "Натискане при посочване с мишката"
+#: ../panels/universal-access/uap.ui.h:74
+msgid "Trigger a secondary click by holding down the primary button"
+msgstr "Второ натискане при задържане на основния бутон"
 
-#: ../panels/universal-access/uap.ui.h:84
-msgid "D_elay:"
-msgstr "_Закъснение:"
+#: ../panels/universal-access/uap.ui.h:75
+msgid "Secondary click delay"
+msgstr "Закъснение при повторно натискане"
 
-#: ../panels/universal-access/uap.ui.h:85
-msgid "Motion _threshold:"
-msgstr "П_раг на движение:"
-
-#: ../panels/universal-access/uap.ui.h:90
+#: ../panels/universal-access/uap.ui.h:76
 msgid "Hover Click"
 msgstr "Натискане чрез задържане"
 
-#: ../panels/universal-access/uap.ui.h:91
+#: ../panels/universal-access/uap.ui.h:77
+msgid "Trigger a click when the pointer hovers"
+msgstr "Натискане при посочване с мишката"
+
+#: ../panels/universal-access/uap.ui.h:78
+msgid "D_elay:"
+msgstr "_Закъснение:"
+
+#: ../panels/universal-access/uap.ui.h:79
+msgid "Motion _threshold:"
+msgstr "П_раг на движение:"
+
+#. small threshold
+#: ../panels/universal-access/uap.ui.h:81
+msgid "Small"
+msgstr "малък"
+
+#. large threshold
+#: ../panels/universal-access/uap.ui.h:83
+msgid "Large"
+msgstr "голям"
+
+#: ../panels/universal-access/uap.ui.h:84
 msgid "Mouse Settings"
 msgstr "Настройки на мишката"
 
-#: ../panels/universal-access/uap.ui.h:92
+#: ../panels/universal-access/uap.ui.h:85
 msgid "Pointing and Clicking"
 msgstr "Посочване и натискане"
 
-#: ../panels/universal-access/uap.ui.h:93
-msgctxt "universal access, contrast"
-msgid "Low"
-msgstr "нисък"
+#: ../panels/universal-access/zoom-options.c:357
+msgctxt "Distance"
+msgid "Short"
+msgstr "късо"
 
-#: ../panels/universal-access/uap.ui.h:94
-msgctxt "universal access, contrast"
-msgid "Normal"
-msgstr "нормален"
-
-#: ../panels/universal-access/uap.ui.h:95
-msgctxt "universal access, contrast"
-msgid "High"
-msgstr "висок"
-
-#: ../panels/universal-access/uap.ui.h:96
-msgctxt "universal access, contrast"
-msgid "High/Inverse"
-msgstr "висок/обърнат"
-
-#: ../panels/universal-access/zoom-options.c:334
-msgid "1/4 Screen"
+#: ../panels/universal-access/zoom-options.c:358
+msgctxt "Distance"
+msgid "¼ Screen"
 msgstr "¼ екран"
 
-#: ../panels/universal-access/zoom-options.c:335
-msgid "1/2 Screen"
+#: ../panels/universal-access/zoom-options.c:359
+msgctxt "Distance"
+msgid "½ Screen"
 msgstr "½ екран"
 
-#: ../panels/universal-access/zoom-options.c:336
-msgid "3/4 Screen"
+#: ../panels/universal-access/zoom-options.c:360
+msgctxt "Distance"
+msgid "¾ Screen"
 msgstr "¾ екран"
 
+#: ../panels/universal-access/zoom-options.c:361
+msgctxt "Distance"
+msgid "Long"
+msgstr "дълго"
+
 #: ../panels/universal-access/zoom-options.ui.h:1
+msgid "Full Screen"
+msgstr "На цял екран"
+
+#: ../panels/universal-access/zoom-options.ui.h:2
+msgid "Top Half"
+msgstr "Горната половина"
+
+#: ../panels/universal-access/zoom-options.ui.h:3
+msgid "Bottom Half"
+msgstr "Долната половина"
+
+#: ../panels/universal-access/zoom-options.ui.h:4
+msgid "Left Half"
+msgstr "Лявата половина"
+
+#: ../panels/universal-access/zoom-options.ui.h:5
+msgid "Right Half"
+msgstr "Дясната половина"
+
+#: ../panels/universal-access/zoom-options.ui.h:6
 msgid "Zoom Options"
 msgstr "Настройки на лупата"
 
-#: ../panels/universal-access/zoom-options.ui.h:2
+#: ../panels/universal-access/zoom-options.ui.h:7
+msgid "Zoom"
+msgstr "дисплеят да е вътре"
+
+#: ../panels/universal-access/zoom-options.ui.h:8
 msgid "Magnification:"
 msgstr "Мащаб:"
 
-#: ../panels/universal-access/zoom-options.ui.h:3
+#: ../panels/universal-access/zoom-options.ui.h:9
 msgid "Follow mouse cursor"
 msgstr "Следване на показалеца на мишката"
 
-#: ../panels/universal-access/zoom-options.ui.h:4
+#: ../panels/universal-access/zoom-options.ui.h:10
 msgid "Screen part:"
 msgstr "Част на екрана:"
 
-#: ../panels/universal-access/zoom-options.ui.h:5
+#: ../panels/universal-access/zoom-options.ui.h:11
 msgid "Magnifier extends outside of screen"
 msgstr "Лупата да излиза извън екрана"
 
-#: ../panels/universal-access/zoom-options.ui.h:6
+#: ../panels/universal-access/zoom-options.ui.h:12
 msgid "Keep magnifier cursor centered"
 msgstr "Показалецът на мишката да е в средата на лупата"
 
-#: ../panels/universal-access/zoom-options.ui.h:7
+#: ../panels/universal-access/zoom-options.ui.h:13
 msgid "Magnifier cursor pushes contents around"
 msgstr "Показалецът на мишката да избутва лупата"
 
-#: ../panels/universal-access/zoom-options.ui.h:8
+#: ../panels/universal-access/zoom-options.ui.h:14
 msgid "Magnifier cursor moves with contents"
 msgstr "Показалецът на мишката да се движи заедно с лупата"
 
-#: ../panels/universal-access/zoom-options.ui.h:9
+#: ../panels/universal-access/zoom-options.ui.h:15
 msgid "Magnifier Position:"
 msgstr "Положение на лупата:"
 
-#: ../panels/universal-access/zoom-options.ui.h:10
+#: ../panels/universal-access/zoom-options.ui.h:16
+msgid "Magnifier"
+msgstr "Лупа"
+
+#: ../panels/universal-access/zoom-options.ui.h:17
 msgid "Thickness:"
 msgstr "Дебелина:"
 
 #. short delay
-#: ../panels/universal-access/zoom-options.ui.h:12
+#: ../panels/universal-access/zoom-options.ui.h:19
 msgid "Thin"
 msgstr "тънка"
 
 #. long delay
-#: ../panels/universal-access/zoom-options.ui.h:14
+#: ../panels/universal-access/zoom-options.ui.h:21
 msgid "Thick"
 msgstr "дебела"
 
-#: ../panels/universal-access/zoom-options.ui.h:15
+#: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Length:"
 msgstr "Дължина:"
 
-#: ../panels/universal-access/zoom-options.ui.h:16
+#: ../panels/universal-access/zoom-options.ui.h:23
 msgid "Color:"
 msgstr "Цвят:"
 
-#: ../panels/universal-access/zoom-options.ui.h:17
+#: ../panels/universal-access/zoom-options.ui.h:24
 msgid "Crosshairs:"
 msgstr "Кръстачка:"
 
-#: ../panels/universal-access/zoom-options.ui.h:18
+#: ../panels/universal-access/zoom-options.ui.h:25
 msgid "Overlaps mouse cursor"
 msgstr "Лупата да е върху показалеца на мишката"
 
-#: ../panels/universal-access/zoom-options.ui.h:19
-msgid "Full Screen"
-msgstr "На цял екран"
+#: ../panels/universal-access/zoom-options.ui.h:26
+msgid "Crosshairs"
+msgstr "Кръстачка"
 
-#: ../panels/universal-access/zoom-options.ui.h:20
-msgid "Top Half"
-msgstr "Горната половина"
+#: ../panels/universal-access/zoom-options.ui.h:27
+msgid "White on black:"
+msgstr "Бяло на черно:"
 
-#: ../panels/universal-access/zoom-options.ui.h:21
-msgid "Bottom Half"
-msgstr "Долната половина"
+#: ../panels/universal-access/zoom-options.ui.h:28
+msgid "Brightness:"
+msgstr "Яркост:"
 
-#: ../panels/universal-access/zoom-options.ui.h:22
-msgid "Left Half"
-msgstr "Лявата половина"
+#: ../panels/universal-access/zoom-options.ui.h:29
+msgid "Contrast:"
+msgstr "Контраст:"
 
-#: ../panels/universal-access/zoom-options.ui.h:23
-msgid "Right Half"
-msgstr "Дясната половина"
+#: ../panels/universal-access/zoom-options.ui.h:30
+msgctxt "Zoom Grayscale"
+msgid "Color"
+msgstr "Цвят"
+
+#: ../panels/universal-access/zoom-options.ui.h:31
+msgctxt "Zoom Grayscale"
+msgid "None"
+msgstr "Без"
+
+#: ../panels/universal-access/zoom-options.ui.h:32
+msgctxt "Zoom Grayscale"
+msgid "Full"
+msgstr "Цялостно"
+
+#. short delay
+#: ../panels/universal-access/zoom-options.ui.h:34
+msgid "Low"
+msgstr "късо"
+
+#. long delay
+#: ../panels/universal-access/zoom-options.ui.h:36
+msgid "High"
+msgstr "дълго"
+
+#: ../panels/universal-access/zoom-options.ui.h:37
+msgid "Color Effects:"
+msgstr "Цветови ефекти:"
+
+#: ../panels/universal-access/zoom-options.ui.h:38
+msgid "Color Effects"
+msgstr "Цветови ефекти"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:1
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:1
@@ -3785,24 +4279,72 @@ msgid "Administrator"
 msgstr "администратор"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:3
+msgid "Add account"
+msgstr "Добавяне на регистрация"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:4
+msgid "_Local Account"
+msgstr "_Локална регистрация"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:5
+msgid "_Enterprise Login"
+msgstr "_Корпоративен вход"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "_Username"
 msgstr "Потребителско _име"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:4
-msgid "Create new account"
-msgstr "Създаване на нова регистрация"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:5
+#: ../panels/user-accounts/data/account-dialog.ui.h:7
 msgid "_Full name"
 msgstr "_Пълно име"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:6
-msgid "_Account Type"
-msgstr "Вид на _регистрацията"
+#: ../panels/user-accounts/data/account-dialog.ui.h:8
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
+msgid "Account _Type"
+msgstr "_Вид на регистрацията"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:7
-msgid "Cr_eate"
-msgstr "_Създаване"
+#: ../panels/user-accounts/data/account-dialog.ui.h:9
+msgid "_Domain"
+msgstr "_Домейн"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:10
+msgid "_Login Name"
+msgstr "_Име за вход"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:11
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "_Password"
+msgstr "_Парола"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:12
+msgid "Tip: Enterprise domain or realm name"
+msgstr "Напътствие: Името на домейна или областта"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:13
+msgid "C_ontinue"
+msgstr "Пр_одължаване"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:14
+msgid "Domain Administrator Login"
+msgstr "Вход за администратора на домейна"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:15
+msgid ""
+"In order to use enterpise logins, this computer needs to be\n"
+"enrolled in the domain. Please have your network administrator\n"
+"type their domain password here."
+msgstr ""
+"За да влезете в корпоративната мрежа, компютърът ви трябва да бъде "
+"регистриран в домейна ѝ. Помолете вашия мрежови администратор да въведе "
+"паролата си тук."
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:18
+msgid "Administrator _Name"
+msgstr "_Име на администратора"
+
+#: ../panels/user-accounts/data/account-dialog.ui.h:19
+msgid "Administrator Password"
+msgstr "Парола на администратора"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Left thumb"
@@ -3916,8 +4458,8 @@ msgid "_New password"
 msgstr "_Нова парола"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:10
-msgid "Choose a generated password"
-msgstr "Изберете автоматично създадена парола"
+msgid "Generate a password"
+msgstr "Създаване на парола"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:11
 msgid "Fair"
@@ -3961,6 +4503,11 @@ msgstr ""
 msgid "Gallery"
 msgstr "Галерия"
 
+#: ../panels/user-accounts/data/photo-dialog.ui.h:4
+#: ../panels/user-accounts/um-photo-dialog.c:218
+msgid "Browse for more pictures"
+msgstr "Разглеждане за други изображения"
+
 #: ../panels/user-accounts/data/photo-dialog.ui.h:5
 msgid "Take a photograph"
 msgstr "Снимане на снимка"
@@ -3972,15 +4519,6 @@ msgstr "Разглеждане"
 #: ../panels/user-accounts/data/photo-dialog.ui.h:7
 msgid "Photograph"
 msgstr "Снимка"
-
-#: ../panels/user-accounts/data/photo-dialog.ui.h:8
-msgid "Cancel"
-msgstr "Отказ"
-
-#: ../panels/user-accounts/data/photo-dialog.ui.h:9
-#: ../panels/user-accounts/um-photo-dialog.c:98
-msgid "Select"
-msgstr "Избор"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:3
 msgid "Account Information"
@@ -3994,17 +4532,9 @@ msgstr "Добавяне на потребителска регистрация"
 msgid "Remove User Account"
 msgstr "Премахване на потребителска регистрация"
 
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:6
-msgid "Account _type"
-msgstr "_Вид на регистрацията"
-
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:7
 msgid "Login Options"
 msgstr "Настройки за влизане"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
-msgid "_Password"
-msgstr "_Парола"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:9
 msgid "A_utomatic Login"
@@ -4022,59 +4552,119 @@ msgstr "Снимка за потребителя"
 msgid "_Language"
 msgstr "_Език"
 
-#: ../panels/user-accounts/run-passwd.c:426
+#: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
+msgid "Manage user accounts"
+msgstr "Управление на потребителски регистрации"
+
+#: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:2
+msgid "Authentication is required to change user data"
+msgstr "Изисква се удостоверяване за промяна на потребителските данни"
+
+#: ../panels/user-accounts/pw-utils.c:94
+#: ../panels/user-accounts/um-password-dialog.c:569
+msgctxt "Password strength"
+msgid "Too short"
+msgstr "Прекалено къса"
+
+#: ../panels/user-accounts/pw-utils.c:99
+msgctxt "Password strength"
+msgid "Not good enough"
+msgstr "Не достатъчно добра"
+
+#: ../panels/user-accounts/pw-utils.c:108
+#: ../panels/user-accounts/um-password-dialog.c:570
+msgctxt "Password strength"
+msgid "Weak"
+msgstr "Слаба"
+
+#: ../panels/user-accounts/pw-utils.c:111
+#: ../panels/user-accounts/um-password-dialog.c:571
+msgctxt "Password strength"
+msgid "Fair"
+msgstr "Приемлива"
+
+#: ../panels/user-accounts/pw-utils.c:114
+#: ../panels/user-accounts/um-password-dialog.c:572
+msgctxt "Password strength"
+msgid "Good"
+msgstr "Добра"
+
+#: ../panels/user-accounts/pw-utils.c:117
+#: ../panels/user-accounts/um-password-dialog.c:573
+msgctxt "Password strength"
+msgid "Strong"
+msgstr "Силна"
+
+#: ../panels/user-accounts/run-passwd.c:424
 msgid "Authentication failed"
 msgstr "Неуспешно удостоверяване"
 
-#: ../panels/user-accounts/run-passwd.c:506
-#: ../panels/user-accounts/um-password-dialog.c:375
+#: ../panels/user-accounts/run-passwd.c:504
+#: ../panels/user-accounts/um-password-dialog.c:239
 #, c-format
 msgid "The new password is too short"
 msgstr "Новата паролата е прекалено кратка"
 
-#: ../panels/user-accounts/run-passwd.c:512
+#: ../panels/user-accounts/run-passwd.c:510
 #, c-format
 msgid "The new password is too simple"
 msgstr "Паролата е прекалено лесна"
 
-#: ../panels/user-accounts/run-passwd.c:518
+#: ../panels/user-accounts/run-passwd.c:516
 #, c-format
 msgid "The old and new passwords are too similar"
 msgstr "Старата и новата пароли са много близки"
 
-#: ../panels/user-accounts/run-passwd.c:521
+#: ../panels/user-accounts/run-passwd.c:519
 #, c-format
 msgid "The new password has already been used recently."
 msgstr "Новата парола е ползвана прекалено скоро в миналото"
 
-#: ../panels/user-accounts/run-passwd.c:524
+#: ../panels/user-accounts/run-passwd.c:522
 #, c-format
 msgid "The new password must contain numeric or special characters"
 msgstr "Новата парола трябва да съдържа цифри или специални знаци"
 
-#: ../panels/user-accounts/run-passwd.c:528
+#: ../panels/user-accounts/run-passwd.c:526
 #, c-format
 msgid "The old and new passwords are the same"
 msgstr "Старата и новата пароли са еднакви"
 
-#: ../panels/user-accounts/run-passwd.c:532
+#: ../panels/user-accounts/run-passwd.c:530
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
 msgstr "Паролата ви е променена откакто първоначално сте се удостоверили!"
 
-#: ../panels/user-accounts/run-passwd.c:536
+#: ../panels/user-accounts/run-passwd.c:534
 #, c-format
 msgid "The new password does not contain enough different characters"
 msgstr "Новата парола не съдържа достатъчно различни знаци"
 
-#: ../panels/user-accounts/run-passwd.c:540
+#: ../panels/user-accounts/run-passwd.c:538
 #, c-format
 msgid "Unknown error"
 msgstr "Непозната грешка"
 
-#: ../panels/user-accounts/um-account-dialog.c:73
-msgid "Failed to create user"
-msgstr "Неуспешно създаване на потребител"
+#: ../panels/user-accounts/um-account-dialog.c:175
+msgid "Failed to add account"
+msgstr "Неуспех при добавяне на регистрация"
+
+#: ../panels/user-accounts/um-account-dialog.c:366
+#: ../panels/user-accounts/um-account-dialog.c:405
+msgid "Failed to register account"
+msgstr "Свързването чрез регистрацията е неуспешно"
+
+#: ../panels/user-accounts/um-account-dialog.c:530
+msgid "No supported way to authenticate with this domain"
+msgstr "Няма поддръжка за удостоверяването на този домейн"
+
+#: ../panels/user-accounts/um-account-dialog.c:582
+msgid "Failed to join domain"
+msgstr "Неуспех при присъединяване към областта"
+
+#: ../panels/user-accounts/um-account-dialog.c:635
+msgid "Failed to log into domain"
+msgstr "Неуспех при вход в домейна"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:139
 msgid ""
@@ -4168,77 +4758,47 @@ msgstr "Записване на пръстови отпечатъци"
 msgid "Summary"
 msgstr "Обобщение"
 
-#: ../panels/user-accounts/um-password-dialog.c:179
-msgid "More choices..."
-msgstr "други възможности…"
+#: ../panels/user-accounts/um-password-dialog.c:96
+msgid "_Generate a password"
+msgstr "_Създаване на парола"
 
-#: ../panels/user-accounts/um-password-dialog.c:285
+#: ../panels/user-accounts/um-password-dialog.c:150
 msgid "Please choose another password."
 msgstr "Изберете друга парола."
 
-#: ../panels/user-accounts/um-password-dialog.c:294
+#: ../panels/user-accounts/um-password-dialog.c:159
 msgid "Please type your current password again."
 msgstr "Въведете отново текущата си парола."
 
-#: ../panels/user-accounts/um-password-dialog.c:300
+#: ../panels/user-accounts/um-password-dialog.c:165
 msgid "Password could not be changed"
 msgstr "Паролата не бе сменена"
 
-#: ../panels/user-accounts/um-password-dialog.c:372
+#: ../panels/user-accounts/um-password-dialog.c:236
 msgid "You need to enter a new password"
 msgstr "Необходимо е да въведете нова парола"
 
-#: ../panels/user-accounts/um-password-dialog.c:381
+#: ../panels/user-accounts/um-password-dialog.c:245
 msgid "You need to confirm the password"
 msgstr "Необходимо е да потвърдите паролата"
 
-#: ../panels/user-accounts/um-password-dialog.c:384
+#: ../panels/user-accounts/um-password-dialog.c:248
 msgid "The passwords do not match"
 msgstr "Паролите не съвпадат"
 
-#: ../panels/user-accounts/um-password-dialog.c:390
+#: ../panels/user-accounts/um-password-dialog.c:254
 msgid "You need to enter your current password"
 msgstr "Необходимо е да въведете текущата си парола"
 
-#: ../panels/user-accounts/um-password-dialog.c:393
+#: ../panels/user-accounts/um-password-dialog.c:257
 msgid "The current password is not correct"
 msgstr "Неправилна текуща парола"
 
-#: ../panels/user-accounts/um-password-dialog.c:466
-#: ../panels/user-accounts/um-password-dialog.c:693
-msgctxt "Password strength"
-msgid "Too short"
-msgstr "Прекалено къса"
-
-#: ../panels/user-accounts/um-password-dialog.c:469
-#: ../panels/user-accounts/um-password-dialog.c:694
-msgctxt "Password strength"
-msgid "Weak"
-msgstr "Слаба"
-
-#: ../panels/user-accounts/um-password-dialog.c:471
-#: ../panels/user-accounts/um-password-dialog.c:695
-msgctxt "Password strength"
-msgid "Fair"
-msgstr "Приемлива"
-
-#: ../panels/user-accounts/um-password-dialog.c:473
-#: ../panels/user-accounts/um-password-dialog.c:696
-msgctxt "Password strength"
-msgid "Good"
-msgstr "Добра"
-
-#: ../panels/user-accounts/um-password-dialog.c:475
-#: ../panels/user-accounts/um-password-dialog.c:697
-msgctxt "Password strength"
-msgid "Strong"
-msgstr "Силна"
-
-#: ../panels/user-accounts/um-password-dialog.c:514
+#: ../panels/user-accounts/um-password-dialog.c:347
 msgid "Passwords do not match"
 msgstr "Паролите не съвпадат"
 
-#: ../panels/user-accounts/um-password-dialog.c:540
+#: ../panels/user-accounts/um-password-dialog.c:409
 msgid "Wrong password"
 msgstr "Грешна парола"
 
@@ -4259,29 +4819,53 @@ msgstr "Разглеждане за други изображения…"
 msgid "Used by %s"
 msgstr "Използва се от „%s“"
 
-#: ../panels/user-accounts/um-user-manager.c:463
+#: ../panels/user-accounts/um-realm-manager.c:368
+#, c-format
+msgid "No such domain or realm found"
+msgstr "Такъв домейн или област липсват"
+
+#: ../panels/user-accounts/um-realm-manager.c:743
+#, c-format
+msgid "Cannot log in as %s at the %s domain"
+msgstr "Неуспех при влизане като „%s“ в домейна „%s“"
+
+#: ../panels/user-accounts/um-realm-manager.c:748
+msgid "Invalid password, please try again"
+msgstr "Неправилна парола. Опитайте отново"
+
+#: ../panels/user-accounts/um-realm-manager.c:752
+#, c-format
+msgid "Couldn't connect to the %s domain: %s"
+msgstr "Неуспех при свързване с домейна „%s“: %s"
+
+#: ../panels/user-accounts/um-user-manager.c:466
 #, c-format
 msgid "A user with name '%s' already exists."
 msgstr "Вече съществува потребител с име „%s“."
 
-#: ../panels/user-accounts/um-user-manager.c:569
+#: ../panels/user-accounts/um-user-manager.c:473
+#, c-format
+msgid "No user with the name '%s' exists."
+msgstr "Не съществува потребител с име „%s“."
+
+#: ../panels/user-accounts/um-user-manager.c:631
 msgid "This user does not exist."
 msgstr "Не съществува такъв потребител."
 
-#: ../panels/user-accounts/um-user-panel.c:355
+#: ../panels/user-accounts/um-user-panel.c:371
 msgid "Failed to delete user"
 msgstr "Неуспешно изтриване на потребител"
 
-#: ../panels/user-accounts/um-user-panel.c:415
+#: ../panels/user-accounts/um-user-panel.c:431
 msgid "You cannot delete your own account."
 msgstr "Невъзможно е да изтриете собствената си регистрация."
 
-#: ../panels/user-accounts/um-user-panel.c:424
+#: ../panels/user-accounts/um-user-panel.c:440
 #, c-format
 msgid "%s is still logged in"
 msgstr "„%s“ все още е включен"
 
-#: ../panels/user-accounts/um-user-panel.c:428
+#: ../panels/user-accounts/um-user-panel.c:444
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -4289,12 +4873,12 @@ msgstr ""
 "Изтриването на влезли потребители може да доведе системата до неправилно "
 "състояние."
 
-#: ../panels/user-accounts/um-user-panel.c:437
+#: ../panels/user-accounts/um-user-panel.c:453
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Желаете ли да запазите файловете на „%s“?"
 
-#: ../panels/user-accounts/um-user-panel.c:441
+#: ../panels/user-accounts/um-user-panel.c:457
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -4302,38 +4886,38 @@ msgstr ""
 "Възможно е да запазите домашната папка, пощенската кореспонденция и "
 "временните файлове, когато изтривате съответната потребителска регистрация."
 
-#: ../panels/user-accounts/um-user-panel.c:444
+#: ../panels/user-accounts/um-user-panel.c:460
 msgid "_Delete Files"
 msgstr "_Изтриване на файловете"
 
-#: ../panels/user-accounts/um-user-panel.c:445
+#: ../panels/user-accounts/um-user-panel.c:461
 msgid "_Keep Files"
 msgstr "_Запазване на файловете"
 
-#: ../panels/user-accounts/um-user-panel.c:497
+#: ../panels/user-accounts/um-user-panel.c:513
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "регистрацията е изключена"
 
-#: ../panels/user-accounts/um-user-panel.c:505
+#: ../panels/user-accounts/um-user-panel.c:521
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "ще бъде избрана при следващото влизане"
 
-#: ../panels/user-accounts/um-user-panel.c:508
+#: ../panels/user-accounts/um-user-panel.c:524
 msgctxt "Password mode"
 msgid "None"
 msgstr "без"
 
-#: ../panels/user-accounts/um-user-panel.c:843
+#: ../panels/user-accounts/um-user-panel.c:869
 msgid "Failed to contact the accounts service"
 msgstr "Неуспешно свързване с услугата за регистрации"
 
-#: ../panels/user-accounts/um-user-panel.c:845
+#: ../panels/user-accounts/um-user-panel.c:871
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Уверете се дали програмата „AcountService“ е инсталирана и включена."
 
-#: ../panels/user-accounts/um-user-panel.c:885
+#: ../panels/user-accounts/um-user-panel.c:911
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -4341,12 +4925,12 @@ msgstr ""
 "За да правите промени,\n"
 "натиснете иконата „*“"
 
-#: ../panels/user-accounts/um-user-panel.c:923
+#: ../panels/user-accounts/um-user-panel.c:949
 msgid "Create a user account"
 msgstr "Създаване на потребителска регистрация"
 
-#: ../panels/user-accounts/um-user-panel.c:934
-#: ../panels/user-accounts/um-user-panel.c:1221
+#: ../panels/user-accounts/um-user-panel.c:960
+#: ../panels/user-accounts/um-user-panel.c:1271
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -4354,12 +4938,12 @@ msgstr ""
 "За да създадете потребителска регистрация,\n"
 "първо натиснете иконата „*“"
 
-#: ../panels/user-accounts/um-user-panel.c:943
+#: ../panels/user-accounts/um-user-panel.c:969
 msgid "Delete the selected user account"
 msgstr "Изтриване на избраната потребителска регистрация"
 
-#: ../panels/user-accounts/um-user-panel.c:955
-#: ../panels/user-accounts/um-user-panel.c:1226
+#: ../panels/user-accounts/um-user-panel.c:981
+#: ../panels/user-accounts/um-user-panel.c:1276
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -4367,11 +4951,11 @@ msgstr ""
 "За да изтриете избраната потребителска регистрация,\n"
 "първо натиснете иконата „*“"
 
-#: ../panels/user-accounts/um-user-panel.c:1132
+#: ../panels/user-accounts/um-user-panel.c:1174
 msgid "My Account"
 msgstr "Моята регистрация"
 
-#: ../panels/user-accounts/um-user-panel.c:1142
+#: ../panels/user-accounts/um-user-panel.c:1184
 msgid "Other Accounts"
 msgstr "Други регистрации"
 
@@ -4401,9 +4985,93 @@ msgstr ""
 " ➣ цифри\n"
 " ➣ кой да е от символите „.“ (точка), „-“ (тире) и „_“ (долно тире)"
 
+#: ../panels/wacom/button-mapping.ui.h:1
+msgid "Map Buttons"
+msgstr "Функции на бутоните"
+
+#: ../panels/wacom/button-mapping.ui.h:2
+msgid "Map buttons to functions"
+msgstr "Настройване на функциите на бутоните"
+
+#. Text printed on screen
+#: ../panels/wacom/calibrator/gui_gtk.c:78
+msgid "Screen Calibration"
+msgstr "Калибриране на екрана"
+
+#: ../panels/wacom/calibrator/gui_gtk.c:79
+msgid ""
+"Please tap the target markers as they appear on screen to calibrate the "
+"tablet."
+msgstr "Потупайте целевите места на екрана на таблета, за да го калибрирате."
+
+#: ../panels/wacom/calibrator/gui_gtk.c:368
+msgid "Mis-click detected, restarting..."
+msgstr "Погрешно потупване, ново калибриране…"
+
+#: ../panels/wacom/cc-wacom-mapping-panel.c:275
+msgid "Output:"
+msgstr "Изход:"
+
+#. Keep ratio switch
+#: ../panels/wacom/cc-wacom-mapping-panel.c:287
+msgid "Keep aspect ratio (letterbox):"
+msgstr "Запазване на пропорцията (портрет):"
+
+#. Whole-desktop checkbox
+#: ../panels/wacom/cc-wacom-mapping-panel.c:298
+msgid "Map to single monitor"
+msgstr "Настройване към единствен монитор"
+
+#: ../panels/wacom/cc-wacom-nav-button.c:89
+#, c-format
+msgid "%d of %d"
+msgstr "%d от общо %d"
+
+#: ../panels/wacom/cc-wacom-page.c:118 ../panels/wacom/cc-wacom-page.c:371
+msgctxt "Wacom action-type"
+msgid "None"
+msgstr "Без"
+
+#: ../panels/wacom/cc-wacom-page.c:119
+msgctxt "Wacom action-type"
+msgid "Send Keystroke"
+msgstr "Натискане на бутон"
+
+#: ../panels/wacom/cc-wacom-page.c:120
+msgctxt "Wacom action-type"
+msgid "Switch Monitor"
+msgstr "Смяна на монитора"
+
+#: ../panels/wacom/cc-wacom-page.c:601
+msgid "Up"
+msgstr "Нагоре"
+
+#: ../panels/wacom/cc-wacom-page.c:601
+msgid "Down"
+msgstr "Надолу"
+
+#: ../panels/wacom/cc-wacom-page.c:638
+msgid "Switch Modes"
+msgstr "Режими на превключвателите"
+
+#: ../panels/wacom/cc-wacom-page.c:724
+#: ../panels/wacom/cc-wacom-stylus-page.c:376
+msgid "Button"
+msgstr "Бутон"
+
+#: ../panels/wacom/cc-wacom-page.c:777
+msgid "Action"
+msgstr "Действие"
+
+# Показва се в заглавната част на прозореца
+#: ../panels/wacom/cc-wacom-page.c:886
+msgid "Display Mapping"
+msgstr "Настроени функции на бутоните"
+
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:1
-msgid "Wacom Graphics Tablet"
-msgstr "Графичен таблет"
+#: ../panels/wacom/gnome-wacom-properties.ui.h:7
+msgid "Wacom Tablet"
+msgstr "Таблет"
 
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:2
 msgid "Set your Wacom tablet preferences"
@@ -4438,10 +5106,6 @@ msgstr "Включете или свържете таблета си от Wacom"
 msgid "Bluetooth Settings"
 msgstr "Настройки на подредбата"
 
-#: ../panels/wacom/gnome-wacom-properties.ui.h:7
-msgid "Wacom Tablet"
-msgstr "Таблет"
-
 #: ../panels/wacom/gnome-wacom-properties.ui.h:8
 msgid "Map to Monitor..."
 msgstr "Настройване към монитор…"
@@ -4465,6 +5129,71 @@ msgstr "Режим на следене"
 #: ../panels/wacom/gnome-wacom-properties.ui.h:13
 msgid "Left-Handed Orientation"
 msgstr "Ориентация за лява ръка"
+
+#: ../panels/wacom/gsd-wacom-device.c:1010
+#, c-format
+msgid "Left Ring Mode #%d"
+msgstr "Режим на левия пръстен № %d"
+
+#: ../panels/wacom/gsd-wacom-device.c:1019
+#, c-format
+msgid "Right Ring Mode #%d"
+msgstr "Режим на десния пръстен № %d"
+
+#: ../panels/wacom/gsd-wacom-device.c:1049
+#, c-format
+msgid "Left Touchstrip Mode #%d"
+msgstr "Режим на лявата сензорна лента № %d"
+
+#: ../panels/wacom/gsd-wacom-device.c:1058
+#, c-format
+msgid "Right Touchstrip Mode #%d"
+msgstr "Режим на дясната сензорна лента № %d"
+
+#: ../panels/wacom/gsd-wacom-device.c:1075
+#, c-format
+msgid "Left Touchring Mode Switch"
+msgstr "Превключвател на режима на левия сензорен пръстен"
+
+#: ../panels/wacom/gsd-wacom-device.c:1077
+#, c-format
+msgid "Right Touchring Mode Switch"
+msgstr "Превключвател на режима на десния сензорен пръстен"
+
+#: ../panels/wacom/gsd-wacom-device.c:1080
+#, c-format
+msgid "Left Touchstrip Mode Switch"
+msgstr "Превключвател на режима на лявата сензорна лента"
+
+#: ../panels/wacom/gsd-wacom-device.c:1082
+#, c-format
+msgid "Right Touchstrip Mode Switch"
+msgstr "Превключвател на режима на дясната сензорна лента"
+
+#: ../panels/wacom/gsd-wacom-device.c:1087
+#, c-format
+msgid "Mode Switch #%d"
+msgstr "Превключвател на режима № %d"
+
+#: ../panels/wacom/gsd-wacom-device.c:1159
+#, c-format
+msgid "Left Button #%d"
+msgstr "Ляв бутон № %d"
+
+#: ../panels/wacom/gsd-wacom-device.c:1162
+#, c-format
+msgid "Right Button #%d"
+msgstr "Десен бутон № %d"
+
+#: ../panels/wacom/gsd-wacom-device.c:1165
+#, c-format
+msgid "Top Button #%d"
+msgstr "Горен бутон № %d"
+
+#: ../panels/wacom/gsd-wacom-device.c:1168
+#, c-format
+msgid "Bottom Button #%d"
+msgstr "Долен бутон № %d"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:1
 msgid "No Action"
@@ -4534,121 +5263,6 @@ msgstr "Долен бутон"
 msgid "Tip Pressure Feel"
 msgstr "Усещане на натиска на писеца"
 
-#: ../panels/wacom/button-mapping.ui.h:1
-msgid "Map Buttons"
-msgstr "Функции на бутоните"
-
-#: ../panels/wacom/button-mapping.ui.h:2
-msgid "Map buttons to functions"
-msgstr "Настройване на функциите на бутоните"
-
-#: ../panels/wacom/gsd-wacom-device.c:909
-#, c-format
-msgid "Left Ring Mode #%d"
-msgstr "Режим на левия пръстен № %d"
-
-#: ../panels/wacom/gsd-wacom-device.c:916
-#, c-format
-msgid "Right Ring Mode #%d"
-msgstr "Режим на десния пръстен № %d"
-
-#: ../panels/wacom/gsd-wacom-device.c:944
-#, c-format
-msgid "Left Touchstrip Mode #%d"
-msgstr "Режим на лявата сензорна лента № %d"
-
-#: ../panels/wacom/gsd-wacom-device.c:951
-#, c-format
-msgid "Right Touchstrip Mode #%d"
-msgstr "Режим на дясната сензорна лента № %d"
-
-#: ../panels/wacom/gsd-wacom-device.c:966
-#, c-format
-msgid "Left Touchring Mode Switch"
-msgstr "Превключвател на режима на левия сензорен пръстен"
-
-#: ../panels/wacom/gsd-wacom-device.c:968
-#, c-format
-msgid "Right Touchring Mode Switch"
-msgstr "Превключвател на режима на десния сензорен пръстен"
-
-#: ../panels/wacom/gsd-wacom-device.c:971
-#, c-format
-msgid "Left Touchstrip Mode Switch"
-msgstr "Превключвател на режима на лявата сензорна лента"
-
-#: ../panels/wacom/gsd-wacom-device.c:973
-#, c-format
-msgid "Right Touchstrip Mode Switch"
-msgstr "Превключвател на режима на дясната сензорна лента"
-
-#: ../panels/wacom/gsd-wacom-device.c:978
-#, c-format
-msgid "Mode Switch #%d"
-msgstr "Превключвател на режима № %d"
-
-#: ../panels/wacom/gsd-wacom-device.c:1050
-#, c-format
-msgid "Left Button #%d"
-msgstr "Ляв бутон № %d"
-
-#: ../panels/wacom/gsd-wacom-device.c:1053
-#, c-format
-msgid "Right Button #%d"
-msgstr "Десен бутон № %d"
-
-#: ../panels/wacom/gsd-wacom-device.c:1056
-#, c-format
-msgid "Top Button #%d"
-msgstr "Горен бутон № %d"
-
-#: ../panels/wacom/gsd-wacom-device.c:1059
-#, c-format
-msgid "Bottom Button #%d"
-msgstr "Долен бутон № %d"
-
-#. Text printed on screen
-#: ../panels/wacom/calibrator/gui_gtk.c:70
-msgid "Screen Calibration"
-msgstr "Калибриране на екрана"
-
-#: ../panels/wacom/calibrator/gui_gtk.c:71
-msgid ""
-"Please tap the target markers as they appear on screen to calibrate the "
-"tablet."
-msgstr "Потупайте целевите места на екрана на таблета, за да го калибрирате."
-
-#: ../panels/wacom/calibrator/gui_gtk.c:271
-msgid "Mis-click detected, restarting..."
-msgstr "Погрешно потупване, ново калибриране…"
-
-#: ../panels/wacom/cc-wacom-nav-button.c:89
-#, c-format
-msgid "%d of %d"
-msgstr "%d от общо %d"
-
-#: ../panels/wacom/cc-wacom-stylus-page.c:376
-#: ../panels/wacom/cc-wacom-page.c:561
-msgid "Button"
-msgstr "Бутон"
-
-#: ../panels/wacom/cc-wacom-page.c:279
-msgid "Switch Modes"
-msgstr "Режими на превключвателите"
-
-#: ../panels/wacom/cc-wacom-page.c:526
-msgid "Up"
-msgstr "Нагоре"
-
-#: ../panels/wacom/cc-wacom-page.c:526
-msgid "Down"
-msgstr "Надолу"
-
-# Показва се в заглавната част на прозореца
-#: ../panels/wacom/cc-wacom-page.c:681
-msgid "Display Mapping"
-msgstr "Настроени функции на бутоните"
-
 #: ../shell/control-center.c:58
 msgid "Enable verbose mode"
 msgstr "Включване на подробен режим"
@@ -4679,6 +5293,14 @@ msgstr ""
 "%s\n"
 "Използвайте „%s --help“, за да видите пълен списък с валидните опции от "
 "командния ред.\n"
+
+#: ../shell/control-center.c:211
+msgid "Help"
+msgstr "Помощ"
+
+#: ../shell/control-center.c:212
+msgid "Quit"
+msgstr "Спиране на програмата"
 
 #: ../shell/gnomecc.directory.in.h:1
 msgid "Control Center"
