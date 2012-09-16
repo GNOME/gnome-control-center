@@ -1096,6 +1096,7 @@
                                 <property name="bottom_attach">2</property>
                                 <property name="x_padding">3</property>
                                 <property name="y_padding">3</property>
+                                <property name="y_options">GTK_FILL</property>
                               </packing>
                             </child>
                             <child>
@@ -1105,6 +1106,7 @@
                                 <property name="xalign">0</property>
                                 <property name="yalign">0</property>
                                 <property name="wrap">True</property>
+                                <property name="width-chars">18</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -1113,6 +1115,7 @@
                                 <property name="bottom_attach">2</property>
                                 <property name="x_padding">3</property>
                                 <property name="y_padding">3</property>
+                                <property name="y_options">GTK_FILL</property>
                               </packing>
                             </child>
                             <child>
@@ -1223,6 +1226,7 @@
                                 <property name="bottom_attach">2</property>
                                 <property name="x_padding">3</property>
                                 <property name="y_padding">3</property>
+                                <property name="y_options">GTK_FILL</property>
                               </packing>
                             </child>
                             <child>
@@ -1232,6 +1236,7 @@
                                 <property name="xalign">0</property>
                                 <property name="yalign">0</property>
                                 <property name="wrap">True</property>
+                                <property name="width-chars">18</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -1240,6 +1245,7 @@
                                 <property name="bottom_attach">2</property>
                                 <property name="x_padding">3</property>
                                 <property name="y_padding">3</property>
+                                <property name="y_options">GTK_FILL</property>
                               </packing>
                             </child>
                             <child>
@@ -1350,5 +1356,12 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkSizeGroup" id="system-input-source-sizegroup">
+    <property name="mode">vertical</property>
+    <widgets>
+      <widget name="user_input_source"/>
+      <widget name="system_input_source"/>
+    </widgets>
   </object>
 </interface>
