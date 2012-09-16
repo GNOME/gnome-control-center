@@ -1194,17 +1194,10 @@ user_to_device (double *x, double *y,
   gdouble ox, oy;
   user_to_device_data* data = user_data;
 
-  /* Required in case the user does transformations (eg. translates) */
+  /* The translations by the user */
   cairo_user_to_device (data->cr, x, y);
 
-  /* The device offset is different for a full redraw.
-   * So we cannot make assumptions about it. */
-  cairo_surface_get_device_offset(cairo_get_target(data->cr), &ox, &oy);
-
-  *x -= ox;
-  *y -= oy;
-
-  /* The input_window does not of the allocation offset. */
+  /* The position of the widget on the window. */
   *x -= data->allocation.x;
   *y -= data->allocation.y;
 }
