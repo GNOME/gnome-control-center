@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.3.91\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-05 19:58+0800\n"
-"PO-Revision-Date: 2012-09-05 19:58+0800\n"
+"POT-Creation-Date: 2012-09-16 12:22+0800\n"
+"PO-Revision-Date: 2012-09-16 12:22+0800\n"
 "Last-Translator: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>\n"
 "Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "Language: \n"
@@ -22,6 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.5.3\n"
 
 #. This refers to a slideshow background
 #: ../panels/background/background.ui.h:2
@@ -79,7 +80,7 @@ msgstr "顏色"
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/cc-background-chooser-dialog.c:280
+#: ../panels/background/cc-background-chooser-dialog.c:286
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
 #: ../panels/user-accounts/um-photo-dialog.c:98
@@ -178,41 +179,41 @@ msgctxt "Power"
 msgid "Bluetooth"
 msgstr "藍牙"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:285
+#: ../panels/bluetooth/cc-bluetooth-panel.c:290
 msgid "Yes"
 msgstr "是"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:285
+#: ../panels/bluetooth/cc-bluetooth-panel.c:290
 msgid "No"
 msgstr "否"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:397
+#: ../panels/bluetooth/cc-bluetooth-panel.c:405
 msgid "Bluetooth is disabled"
 msgstr "藍牙已停用"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:402
+#: ../panels/bluetooth/cc-bluetooth-panel.c:410
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "藍牙已被硬件開關停用"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:406
+#: ../panels/bluetooth/cc-bluetooth-panel.c:414
 msgid "No Bluetooth adapters found"
 msgstr "找不到藍牙接配器"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:539
+#: ../panels/bluetooth/cc-bluetooth-panel.c:547
 msgid "Visibility"
 msgstr "顯示狀態"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:543
+#: ../panels/bluetooth/cc-bluetooth-panel.c:551
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "「%s」的顯示狀態"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:587
+#: ../panels/bluetooth/cc-bluetooth-panel.c:595
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "是否從裝置的清單中移除「%s」？"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:589
+#: ../panels/bluetooth/cc-bluetooth-panel.c:597
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr "如果你刪除此裝置，下次使用時必須再次設定它。"
@@ -1554,32 +1555,36 @@ msgstr "兩指捲動(_F)"
 msgid "C_ontent sticks to fingers"
 msgstr "連結到手指的內容(_O)"
 
-#: ../panels/mouse/gnome-mouse-test.c:117
+#: ../panels/mouse/gnome-mouse-test.c:134
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
 msgid "Try clicking, double clicking, scrolling"
 msgstr "嘗試點選、連按兩下、捲動"
 
-#: ../panels/mouse/gnome-mouse-test.c:124
+#: ../panels/mouse/gnome-mouse-test.c:139
+msgid "Five clicks, GEGL time!"
+msgstr "五次點擊，GEGL 時間！"
+
+#: ../panels/mouse/gnome-mouse-test.c:144
 msgid "Double click, primary button"
 msgstr "連按兩下，主要按鈕"
 
-#: ../panels/mouse/gnome-mouse-test.c:124
+#: ../panels/mouse/gnome-mouse-test.c:144
 msgid "Single click, primary button"
 msgstr "點選，主要按鈕"
 
-#: ../panels/mouse/gnome-mouse-test.c:127
+#: ../panels/mouse/gnome-mouse-test.c:147
 msgid "Double click, middle button"
 msgstr "連按兩下，中央按鈕"
 
-#: ../panels/mouse/gnome-mouse-test.c:127
+#: ../panels/mouse/gnome-mouse-test.c:147
 msgid "Single click, middle button"
 msgstr "點選，中央按鈕"
 
-#: ../panels/mouse/gnome-mouse-test.c:130
+#: ../panels/mouse/gnome-mouse-test.c:150
 msgid "Double click, secondary button"
 msgstr "連按兩下，次要按鈕"
 
-#: ../panels/mouse/gnome-mouse-test.c:130
+#: ../panels/mouse/gnome-mouse-test.c:150
 msgid "Single click, secondary button"
 msgstr "點選，次要按鈕"
 
@@ -1623,118 +1628,136 @@ msgstr "加入新連線"
 
 #. Translators: network device speed
 #: ../panels/network/net-device-mobile.c:261
-#: ../panels/network/net-device-wifi.c:699
+#: ../panels/network/net-device-wifi.c:770
 #: ../panels/network/net-device-wired.c:126
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#. TRANSLATORS: this is when the access point is not listed in
-#. *  the dropdown (or hidden) and the user has to select another
-#. *  entry manually
-#: ../panels/network/net-device-wifi.c:196
+#. TRANSLATORS: this is when the access point is not shown
+#. * in the list and the user has to enter the SSID manually
+#.
+#: ../panels/network/net-device-wifi.c:203
 msgid "Connect to a Hidden Network"
 msgstr "連接到隱藏的無線網絡"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/net-device-wifi.c:293
-#: ../panels/network/net-device-wifi.c:472
+#: ../panels/network/net-device-wifi.c:302
+#: ../panels/network/net-device-wifi.c:481
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:297
-#: ../panels/network/net-device-wifi.c:476
+#: ../panels/network/net-device-wifi.c:306
+#: ../panels/network/net-device-wifi.c:485
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:301
+#: ../panels/network/net-device-wifi.c:310
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/net-device-wifi.c:306
+#: ../panels/network/net-device-wifi.c:315
 msgid "Enterprise"
 msgstr "企業版"
 
-#: ../panels/network/net-device-wifi.c:311
-#: ../panels/network/net-device-wifi.c:467
+#: ../panels/network/net-device-wifi.c:320
+#: ../panels/network/net-device-wifi.c:476
 msgctxt "Wifi security"
 msgid "None"
 msgstr "沒有"
 
-#: ../panels/network/net-device-wifi.c:733
-msgctxt "Signal strength"
-msgid "None"
-msgstr "沒有"
+#: ../panels/network/net-device-wifi.c:697
+msgid "never"
+msgstr "永不"
 
-#: ../panels/network/net-device-wifi.c:735
-msgctxt "Signal strength"
-msgid "Weak"
-msgstr "太弱"
+#: ../panels/network/net-device-wifi.c:707
+msgid "today"
+msgstr "今日"
 
-#: ../panels/network/net-device-wifi.c:737
-msgctxt "Signal strength"
-msgid "Ok"
-msgstr "確定"
+#: ../panels/network/net-device-wifi.c:709
+msgid "yesterday"
+msgstr "昨日"
 
-#: ../panels/network/net-device-wifi.c:739
-msgctxt "Signal strength"
-msgid "Good"
-msgstr "良好"
-
-#: ../panels/network/net-device-wifi.c:741
-msgctxt "Signal strength"
-msgid "Excellent"
-msgstr "很好"
-
-#: ../panels/network/net-device-wifi.c:901
-#, c-format
-msgid ""
-"Network details for %s including password and any custom configuration will "
-"be lost"
-msgstr "%s 的網絡詳細資料包含密碼及任何自選的組態都會消失"
-
-#: ../panels/network/net-device-wifi.c:912
-msgid "Forget"
-msgstr "遺忘"
-
-#: ../panels/network/net-device-wifi.c:1437
-msgid ""
-"If you have a connection to the Internet other than wireless, you can use it "
-"to share your internet connection with others."
-msgstr "如果你有無線網絡以外的方式連線到互聯網，你可以使用它來與其他人分享你的互聯網連線。"
-
-#: ../panels/network/net-device-wifi.c:1441
-#, c-format
-msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
-msgstr "切換無線網絡熱點會讓你從 <b>%s</b> 斷線。"
-
-#: ../panels/network/net-device-wifi.c:1445
-msgid ""
-"It is not possible to access the internet through your wireless while the "
-"hotspot is active."
-msgstr "當熱點在使用中時是沒有辦法透過無線網絡存取互聯網的。"
-
-#: ../panels/network/net-device-wifi.c:1511
-msgid "Stop hotspot and disconnect any users?"
-msgstr "停止熱點並中斷任何使用者的連線？"
-
-#: ../panels/network/net-device-wifi.c:1514
-msgid "_Stop Hotspot"
-msgstr "停止熱點(_S)"
-
-#: ../panels/network/net-device-wifi.c:1579
+#: ../panels/network/net-device-wifi.c:711
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
 msgstr[0] "%i 天以前"
 
-#: ../panels/network/net-device-wifi.c:1933
-#: ../panels/network/network-wifi.ui.h:19
+#. TRANSLATORS: VPN status
+#: ../panels/network/net-device-wifi.c:780
+#: ../panels/network/panel-common.c:277
+msgid "Not connected"
+msgstr "未連線"
+
+#: ../panels/network/net-device-wifi.c:782
+#: ../panels/network/net-device-wifi.c:2086
 msgid "Out of range"
 msgstr "超過範圍"
+
+#: ../panels/network/net-device-wifi.c:813
+msgctxt "Signal strength"
+msgid "None"
+msgstr "沒有"
+
+#: ../panels/network/net-device-wifi.c:815
+msgctxt "Signal strength"
+msgid "Weak"
+msgstr "太弱"
+
+#: ../panels/network/net-device-wifi.c:817
+msgctxt "Signal strength"
+msgid "Ok"
+msgstr "確定"
+
+#: ../panels/network/net-device-wifi.c:819
+msgctxt "Signal strength"
+msgid "Good"
+msgstr "良好"
+
+#: ../panels/network/net-device-wifi.c:821
+msgctxt "Signal strength"
+msgid "Excellent"
+msgstr "很好"
+
+#: ../panels/network/net-device-wifi.c:1005
+#, c-format
+msgid ""
+"Network details for %s including password and any custom configuration will "
+"be lost."
+msgstr "%s 的網絡詳細資料包含密碼及任何自選的組態都會消失。"
+
+#: ../panels/network/net-device-wifi.c:1016
+msgid "Forget"
+msgstr "遺忘"
+
+#: ../panels/network/net-device-wifi.c:1552
+msgid ""
+"If you have a connection to the Internet other than wireless, you can use it "
+"to share your internet connection with others."
+msgstr "如果你有無線網絡以外的方式連線到互聯網，你可以使用它來與其他人分享你的互聯網連線。"
+
+#: ../panels/network/net-device-wifi.c:1556
+#, c-format
+msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
+msgstr "切換無線網絡熱點會讓你從 <b>%s</b> 斷線。"
+
+#: ../panels/network/net-device-wifi.c:1560
+msgid ""
+"It is not possible to access the internet through your wireless while the "
+"hotspot is active."
+msgstr "當熱點在使用中時是沒有辦法透過無線網絡存取互聯網的。"
+
+#: ../panels/network/net-device-wifi.c:1626
+msgid "Stop hotspot and disconnect any users?"
+msgstr "停止熱點並中斷任何使用者的連線？"
+
+#: ../panels/network/net-device-wifi.c:1629
+msgid "_Stop Hotspot"
+msgstr "停止熱點(_S)"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: ../panels/network/net-proxy.c:67
@@ -1763,31 +1786,31 @@ msgid "Provider"
 msgstr "供應商"
 
 #: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:697 ../panels/network/panel-common.c:699
+#: ../panels/network/panel-common.c:686 ../panels/network/panel-common.c:688
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "IP 位址"
 
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-wifi.ui.h:7
-#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:695
+#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:684
 msgid "IPv6 Address"
 msgstr "IPv6 位址"
 
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-wifi.ui.h:8
-#: ../panels/network/network-wired.ui.h:5
+#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wired.ui.h:4
 msgid "Default Route"
 msgstr "預設路由"
 
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-wifi.ui.h:9
-#: ../panels/network/network-wired.ui.h:6
+#: ../panels/network/network-wifi.ui.h:14
+#: ../panels/network/network-wired.ui.h:5
 msgid "DNS"
 msgstr "DNS"
 
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-wired.ui.h:7
+#: ../panels/network/network-wired.ui.h:6
 msgid "_Options..."
 msgstr "選項(_O)…"
 
@@ -1892,66 +1915,62 @@ msgid "_Use as Hotspot..."
 msgstr "做為熱點(_U)…"
 
 #: ../panels/network/network-wifi.ui.h:5
+msgid "_Connect"
+msgstr "連接(_C)"
+
+#: ../panels/network/network-wifi.ui.h:6
+msgid "Last used"
+msgstr "最後使用的"
+
+#: ../panels/network/network-wifi.ui.h:7
 #: ../panels/network/network-wired.ui.h:1
 msgid "Hardware Address"
 msgstr "硬件位址"
 
-#: ../panels/network/network-wifi.ui.h:6
-#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:694
-msgid "IPv4 Address"
-msgstr "IPv4 位址"
-
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:8
 msgid "Security"
 msgstr "安全性"
 
-#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wifi.ui.h:9
 msgid "Strength"
 msgstr "強度"
 
-#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wifi.ui.h:10
 msgid "Link speed"
 msgstr "連線速度"
 
-#: ../panels/network/network-wifi.ui.h:13
-msgid "_Settings..."
-msgstr "設定值(_S)…"
-
-#: ../panels/network/network-wifi.ui.h:14
-msgid "Switch off to connect to a wireless network"
-msgstr "關閉連線到無線網絡"
+#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:683
+msgid "IPv4 Address"
+msgstr "IPv4 位址"
 
 #: ../panels/network/network-wifi.ui.h:15
-msgid "Network Name"
-msgstr "網絡名稱"
-
-#: ../panels/network/network-wifi.ui.h:16
-msgid "Connected Devices"
-msgstr "已連線的裝置"
-
-#: ../panels/network/network-wifi.ui.h:17
-msgid "Security type"
-msgstr "安全性類型"
-
-#: ../panels/network/network-wifi.ui.h:18
-msgid "Security key"
-msgstr "安全密碼匙"
-
-#: ../panels/network/network-wifi.ui.h:20
-msgid "Security Key"
-msgstr "安全密碼匙"
-
-#: ../panels/network/network-wifi.ui.h:21
-msgid "Last used"
-msgstr "最後使用的"
-
-#: ../panels/network/network-wifi.ui.h:22
 msgid "_Forget Network"
 msgstr "忘卻網絡(_F)"
 
-#: ../panels/network/network-wired.ui.h:4
-msgid "Subnet Mask"
-msgstr "子網絡遮罩"
+#: ../panels/network/network-wifi.ui.h:16
+msgid "_Settings..."
+msgstr "設定值(_S)…"
+
+#: ../panels/network/network-wifi.ui.h:17
+msgid "Switch off to connect to a wireless network"
+msgstr "關閉連線到無線網絡"
+
+#: ../panels/network/network-wifi.ui.h:18
+msgid "Network Name"
+msgstr "網絡名稱"
+
+#: ../panels/network/network-wifi.ui.h:19
+msgid "Connected Devices"
+msgstr "已連線的裝置"
+
+#: ../panels/network/network-wifi.ui.h:20
+msgid "Security type"
+msgstr "安全性類型"
+
+#: ../panels/network/network-wifi.ui.h:21
+msgid "Security key"
+msgstr "安全密碼匙"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:86
@@ -2040,11 +2059,6 @@ msgstr "連線失敗"
 #: ../panels/network/panel-common.c:239 ../panels/network/panel-common.c:281
 msgid "Status unknown (missing)"
 msgstr "狀態不詳（缺乏）"
-
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:277
-msgid "Not connected"
-msgstr "未連線"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:301
@@ -2261,10 +2275,8 @@ msgstr "InfiniBand 裝置不支援已連接模式"
 msgid "Connection dependency failed"
 msgstr "連線相根據性解析失敗"
 
-#. translators: This is the title of the "Add Account" dialogue.
-#. * The title is not visible when using GNOME Shell
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:252
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:263
+#. translators: This is the title of the "Add Account" dialog.
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:249
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "加入帳號"
@@ -2332,17 +2344,17 @@ msgid ""
 "contacts, calendar, chat and more."
 msgstr "加入一個帳號以允許你的應用程式存取它用於文件、郵件、聯絡人、行事曆、聊天等等。"
 
-#: ../panels/power/cc-power-panel.c:165
+#: ../panels/power/cc-power-panel.c:157
 msgid "Unknown time"
 msgstr "不明的時間"
 
-#: ../panels/power/cc-power-panel.c:171
+#: ../panels/power/cc-power-panel.c:163
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i 分鐘"
 
-#: ../panels/power/cc-power-panel.c:183
+#: ../panels/power/cc-power-panel.c:175
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -2350,168 +2362,168 @@ msgstr[0] "%i 小時"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:191
+#: ../panels/power/cc-power-panel.c:183
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:192
+#: ../panels/power/cc-power-panel.c:184
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "小時"
 
-#: ../panels/power/cc-power-panel.c:193
+#: ../panels/power/cc-power-panel.c:185
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "分鐘"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:236
+#: ../panels/power/cc-power-panel.c:228
 #, c-format
 msgid "Charging - %s until fully charged"
 msgstr "充電 - 到完全充飽前還有 %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:244
+#: ../panels/power/cc-power-panel.c:236
 #, c-format
 msgid "Caution low battery, %s remaining"
 msgstr "注意電池電力低落，剩下 %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:252
+#: ../panels/power/cc-power-panel.c:244
 #, c-format
 msgid "Using battery power - %s remaining"
 msgstr "使用電池電力 - 剩下 %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:269
+#: ../panels/power/cc-power-panel.c:261
 msgid "Charging"
 msgstr "充電"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:274
+#: ../panels/power/cc-power-panel.c:266
 msgid "Using battery power"
 msgstr "使用電池電力"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:278
+#: ../panels/power/cc-power-panel.c:270
 msgid "Charging - fully charged"
 msgstr "充電 - 已完全充飽"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:282
+#: ../panels/power/cc-power-panel.c:274
 msgid "Empty"
 msgstr "沒電"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:350
+#: ../panels/power/cc-power-panel.c:342
 #, c-format
 msgid "Caution low UPS, %s remaining"
 msgstr "注意 UPS 電力低落，剩下 %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:356
+#: ../panels/power/cc-power-panel.c:348
 #, c-format
 msgid "Using UPS power - %s remaining"
 msgstr "使用 UPS 電力 - 剩下 %s"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:374
+#: ../panels/power/cc-power-panel.c:366
 msgid "Caution low UPS"
 msgstr "注意 UPS 電力低落"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:379
+#: ../panels/power/cc-power-panel.c:371
 msgid "Using UPS power"
 msgstr "使用 UPS 電力"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:431
+#: ../panels/power/cc-power-panel.c:423
 msgid "Your secondary battery is fully charged"
 msgstr "你的第二電池已完全充飽"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:435
+#: ../panels/power/cc-power-panel.c:427
 msgid "Your secondary battery is empty"
 msgstr "你的第二電池已經沒電"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:518
+#: ../panels/power/cc-power-panel.c:510
 msgid "Wireless mouse"
 msgstr "無線滑鼠"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:522
+#: ../panels/power/cc-power-panel.c:514
 msgid "Wireless keyboard"
 msgstr "無線鍵盤"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:526
+#: ../panels/power/cc-power-panel.c:518
 msgid "Uninterruptible power supply"
 msgstr "不斷電系統"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:530
+#: ../panels/power/cc-power-panel.c:522
 msgid "Personal digital assistant"
 msgstr "個人數碼助理"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:534
+#: ../panels/power/cc-power-panel.c:526
 msgid "Cellphone"
 msgstr "手機"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:538
+#: ../panels/power/cc-power-panel.c:530
 msgid "Media player"
 msgstr "媒體播放器"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:542
+#: ../panels/power/cc-power-panel.c:534
 msgid "Tablet"
 msgstr "繪圖板"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:546
+#: ../panels/power/cc-power-panel.c:538
 msgid "Computer"
 msgstr "電腦"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:550
+#: ../panels/power/cc-power-panel.c:542
 msgid "Battery"
 msgstr "電池"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:561
+#: ../panels/power/cc-power-panel.c:553
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "充電"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:568
+#: ../panels/power/cc-power-panel.c:560
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "注意"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:573
+#: ../panels/power/cc-power-panel.c:565
 msgctxt "Battery power"
 msgid "Low"
 msgstr "低"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:578
+#: ../panels/power/cc-power-panel.c:570
 msgctxt "Battery power"
 msgid "Good"
 msgstr "良好"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:583
+#: ../panels/power/cc-power-panel.c:575
 msgctxt "Battery power"
 msgid "Charging - fully charged"
 msgstr "充電 - 已完全充飽"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:587
+#: ../panels/power/cc-power-panel.c:579
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "沒電"
@@ -5187,6 +5199,12 @@ msgstr "Preferences;Settings;偏好設定;設定值;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "所有設定值"
+
+#~ msgid "Security Key"
+#~ msgstr "安全金鑰"
+
+#~ msgid "Subnet Mask"
+#~ msgstr "子網路遮罩"
 
 #~ msgid "To test your settings, try to double-click on the face."
 #~ msgstr "要測試您的設定值，請試著在這個臉上雙擊。"
