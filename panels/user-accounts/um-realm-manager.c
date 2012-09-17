@@ -313,6 +313,7 @@ on_provider_discover (GObject *source,
                                 discover->realms = g_list_prepend (discover->realms, object);
                         }
                 }
+                g_strfreev (realms);
 
         } else {
                 g_simple_async_result_take_error (async, error);
