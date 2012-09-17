@@ -107,7 +107,10 @@ user_properties_get (GDBusConnection *bus,
                 return NULL;
         }
 
+        /* Add some defaults that may not be received from some AccountsService versions */
         props = g_new0 (UserProperties, 1);
+        props->local_account = TRUE;
+
         g_variant_get (result, "(a{sv})", &iter);
         while (g_variant_iter_loop (iter, "{&sv}", &key, &value)) {
                 if (strcmp (key, "Uid") == 0) {
