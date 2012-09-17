@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-17 20:40+0100\n"
-"PO-Revision-Date: 2012-09-17 20:40+0100\n"
+"POT-Creation-Date: 2012-09-17 20:45+0100\n"
+"PO-Revision-Date: 2012-09-17 20:45+0100\n"
 "Last-Translator: Bruce Cowan <bruce@bcowan.me.uk>\n"
 "Language-Team: British English <en@li.org>\n"
 "Language: en_GB\n"
@@ -77,7 +77,7 @@ msgstr "Colours"
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/cc-background-chooser-dialog.c:280
+#: ../panels/background/cc-background-chooser-dialog.c:286
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
 #: ../panels/user-accounts/um-photo-dialog.c:98
@@ -176,41 +176,41 @@ msgctxt "Power"
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:285
+#: ../panels/bluetooth/cc-bluetooth-panel.c:290
 msgid "Yes"
 msgstr "Yes"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:285
+#: ../panels/bluetooth/cc-bluetooth-panel.c:290
 msgid "No"
 msgstr "No"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:397
+#: ../panels/bluetooth/cc-bluetooth-panel.c:405
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth is disabled"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:402
+#: ../panels/bluetooth/cc-bluetooth-panel.c:410
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Bluetooth is disabled by hardware switch"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:406
+#: ../panels/bluetooth/cc-bluetooth-panel.c:414
 msgid "No Bluetooth adapters found"
 msgstr "No Bluetooth adapters found"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:539
+#: ../panels/bluetooth/cc-bluetooth-panel.c:547
 msgid "Visibility"
 msgstr "Visibility"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:543
+#: ../panels/bluetooth/cc-bluetooth-panel.c:551
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Visibility of “%s”"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:587
+#: ../panels/bluetooth/cc-bluetooth-panel.c:595
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Remove '%s' from the list of devices?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:589
+#: ../panels/bluetooth/cc-bluetooth-panel.c:597
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
@@ -603,7 +603,7 @@ msgid "Select a language"
 msgstr "Select a language"
 
 #: ../panels/common/language-chooser.ui.h:2
-#: ../panels/printers/new-printer-dialog.ui.h:4
+#: ../panels/printers/new-printer-dialog.ui.h:1
 #: ../panels/user-accounts/um-user-panel.c:462
 msgid "_Cancel"
 msgstr "_Cancel"
@@ -1571,32 +1571,36 @@ msgstr "Two _finger scroll"
 msgid "C_ontent sticks to fingers"
 msgstr "C_ontent sticks to fingers"
 
-#: ../panels/mouse/gnome-mouse-test.c:117
+#: ../panels/mouse/gnome-mouse-test.c:134
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
 msgid "Try clicking, double clicking, scrolling"
 msgstr "Try clicking, double clicking, scrolling"
 
-#: ../panels/mouse/gnome-mouse-test.c:124
+#: ../panels/mouse/gnome-mouse-test.c:139
+msgid "Five clicks, GEGL time!"
+msgstr "Five clicks, GEGL time!"
+
+#: ../panels/mouse/gnome-mouse-test.c:144
 msgid "Double click, primary button"
 msgstr "Double click, primary button"
 
-#: ../panels/mouse/gnome-mouse-test.c:124
+#: ../panels/mouse/gnome-mouse-test.c:144
 msgid "Single click, primary button"
 msgstr "Single click, primary button"
 
-#: ../panels/mouse/gnome-mouse-test.c:127
+#: ../panels/mouse/gnome-mouse-test.c:147
 msgid "Double click, middle button"
 msgstr "Double click, middle button"
 
-#: ../panels/mouse/gnome-mouse-test.c:127
+#: ../panels/mouse/gnome-mouse-test.c:147
 msgid "Single click, middle button"
 msgstr "Single click, middle button"
 
-#: ../panels/mouse/gnome-mouse-test.c:130
+#: ../panels/mouse/gnome-mouse-test.c:150
 msgid "Double click, secondary button"
 msgstr "Double click, secondary button"
 
-#: ../panels/mouse/gnome-mouse-test.c:130
+#: ../panels/mouse/gnome-mouse-test.c:150
 msgid "Single click, secondary button"
 msgstr "Single click, secondary button"
 
@@ -1640,125 +1644,143 @@ msgstr "Add new connection"
 
 #. Translators: network device speed
 #: ../panels/network/net-device-mobile.c:261
-#: ../panels/network/net-device-wifi.c:699
+#: ../panels/network/net-device-wifi.c:770
 #: ../panels/network/net-device-wired.c:126
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#. TRANSLATORS: this is when the access point is not listed in
-#. *  the dropdown (or hidden) and the user has to select another
-#. *  entry manually
-#: ../panels/network/net-device-wifi.c:196
+#. TRANSLATORS: this is when the access point is not shown
+#. * in the list and the user has to enter the SSID manually
+#.
+#: ../panels/network/net-device-wifi.c:203
 msgid "Connect to a Hidden Network"
 msgstr "Connect to a Hidden Network"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/net-device-wifi.c:293
-#: ../panels/network/net-device-wifi.c:472
+#: ../panels/network/net-device-wifi.c:302
+#: ../panels/network/net-device-wifi.c:481
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:297
-#: ../panels/network/net-device-wifi.c:476
+#: ../panels/network/net-device-wifi.c:306
+#: ../panels/network/net-device-wifi.c:485
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:301
+#: ../panels/network/net-device-wifi.c:310
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/net-device-wifi.c:306
+#: ../panels/network/net-device-wifi.c:315
 msgid "Enterprise"
 msgstr "Enterprise"
 
-#: ../panels/network/net-device-wifi.c:311
-#: ../panels/network/net-device-wifi.c:467
+#: ../panels/network/net-device-wifi.c:320
+#: ../panels/network/net-device-wifi.c:476
 msgctxt "Wifi security"
 msgid "None"
 msgstr "None"
 
-#: ../panels/network/net-device-wifi.c:733
-msgctxt "Signal strength"
-msgid "None"
-msgstr "None"
+#: ../panels/network/net-device-wifi.c:697
+msgid "never"
+msgstr "never"
 
-#: ../panels/network/net-device-wifi.c:735
-msgctxt "Signal strength"
-msgid "Weak"
-msgstr "Weak"
+#: ../panels/network/net-device-wifi.c:707
+msgid "today"
+msgstr "today"
 
-#: ../panels/network/net-device-wifi.c:737
-msgctxt "Signal strength"
-msgid "Ok"
-msgstr "Ok"
+#: ../panels/network/net-device-wifi.c:709
+msgid "yesterday"
+msgstr "yesterday"
 
-#: ../panels/network/net-device-wifi.c:739
-msgctxt "Signal strength"
-msgid "Good"
-msgstr "Good"
-
-#: ../panels/network/net-device-wifi.c:741
-msgctxt "Signal strength"
-msgid "Excellent"
-msgstr "Excellent"
-
-#: ../panels/network/net-device-wifi.c:901
-#, c-format
-msgid ""
-"Network details for %s including password and any custom configuration will "
-"be lost"
-msgstr ""
-"Network details for %s including password and any custom configuration will "
-"be lost"
-
-#: ../panels/network/net-device-wifi.c:912
-msgid "Forget"
-msgstr "Forget"
-
-#: ../panels/network/net-device-wifi.c:1437
-msgid ""
-"If you have a connection to the Internet other than wireless, you can use it "
-"to share your internet connection with others."
-msgstr ""
-"If you have a connection to the Internet other than wireless, you can use it "
-"to share your internet connection with others."
-
-#: ../panels/network/net-device-wifi.c:1441
-#, c-format
-msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
-msgstr "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
-
-#: ../panels/network/net-device-wifi.c:1445
-msgid ""
-"It is not possible to access the internet through your wireless while the "
-"hotspot is active."
-msgstr ""
-"It is not possible to access the internet through your wireless while the "
-"hotspot is active."
-
-#: ../panels/network/net-device-wifi.c:1511
-msgid "Stop hotspot and disconnect any users?"
-msgstr "Stop hotspot and disconnect any users?"
-
-#: ../panels/network/net-device-wifi.c:1514
-msgid "_Stop Hotspot"
-msgstr "_Stop Hotspot"
-
-#: ../panels/network/net-device-wifi.c:1579
+#: ../panels/network/net-device-wifi.c:711
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
 msgstr[0] "%i day ago"
 msgstr[1] "%i days ago"
 
-#: ../panels/network/net-device-wifi.c:1933
-#: ../panels/network/network-wifi.ui.h:19
+#. TRANSLATORS: VPN status
+#: ../panels/network/net-device-wifi.c:780
+#: ../panels/network/panel-common.c:277
+msgid "Not connected"
+msgstr "Not connected"
+
+#: ../panels/network/net-device-wifi.c:782
+#: ../panels/network/net-device-wifi.c:2086
 msgid "Out of range"
 msgstr "Out of range"
+
+#: ../panels/network/net-device-wifi.c:813
+msgctxt "Signal strength"
+msgid "None"
+msgstr "None"
+
+#: ../panels/network/net-device-wifi.c:815
+msgctxt "Signal strength"
+msgid "Weak"
+msgstr "Weak"
+
+#: ../panels/network/net-device-wifi.c:817
+msgctxt "Signal strength"
+msgid "Ok"
+msgstr "Ok"
+
+#: ../panels/network/net-device-wifi.c:819
+msgctxt "Signal strength"
+msgid "Good"
+msgstr "Good"
+
+#: ../panels/network/net-device-wifi.c:821
+msgctxt "Signal strength"
+msgid "Excellent"
+msgstr "Excellent"
+
+#: ../panels/network/net-device-wifi.c:1005
+#, c-format
+msgid ""
+"Network details for %s including password and any custom configuration will "
+"be lost."
+msgstr ""
+"Network details for %s including password and any custom configuration will "
+"be lost."
+
+#: ../panels/network/net-device-wifi.c:1016
+msgid "Forget"
+msgstr "Forget"
+
+#: ../panels/network/net-device-wifi.c:1552
+msgid ""
+"If you have a connection to the Internet other than wireless, you can use it "
+"to share your internet connection with others."
+msgstr ""
+"If you have a connection to the Internet other than wireless, you can use it "
+"to share your internet connection with others."
+
+#: ../panels/network/net-device-wifi.c:1556
+#, c-format
+msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
+msgstr "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
+
+#: ../panels/network/net-device-wifi.c:1560
+msgid ""
+"It is not possible to access the internet through your wireless while the "
+"hotspot is active."
+msgstr ""
+"It is not possible to access the internet through your wireless while the "
+"hotspot is active."
+
+#: ../panels/network/net-device-wifi.c:1626
+msgid "Stop hotspot and disconnect any users?"
+msgstr "Stop hotspot and disconnect any users?"
+
+#: ../panels/network/net-device-wifi.c:1629
+msgid "_Stop Hotspot"
+msgstr "_Stop Hotspot"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: ../panels/network/net-proxy.c:67
@@ -1788,31 +1810,31 @@ msgid "Provider"
 msgstr "Provider"
 
 #: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:697 ../panels/network/panel-common.c:699
+#: ../panels/network/panel-common.c:686 ../panels/network/panel-common.c:688
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "IP Address"
 
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-wifi.ui.h:7
-#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:695
+#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:684
 msgid "IPv6 Address"
 msgstr "IPv6 Address"
 
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-wifi.ui.h:8
-#: ../panels/network/network-wired.ui.h:5
+#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wired.ui.h:4
 msgid "Default Route"
 msgstr "Default Route"
 
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-wifi.ui.h:9
-#: ../panels/network/network-wired.ui.h:6
+#: ../panels/network/network-wifi.ui.h:14
+#: ../panels/network/network-wired.ui.h:5
 msgid "DNS"
 msgstr "DNS"
 
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-wired.ui.h:7
+#: ../panels/network/network-wired.ui.h:6
 msgid "_Options..."
 msgstr "_Options…"
 
@@ -1917,66 +1939,62 @@ msgid "_Use as Hotspot..."
 msgstr "_Use as Hotspot…"
 
 #: ../panels/network/network-wifi.ui.h:5
+msgid "_Connect"
+msgstr "_Connect"
+
+#: ../panels/network/network-wifi.ui.h:6
+msgid "Last used"
+msgstr "Last used"
+
+#: ../panels/network/network-wifi.ui.h:7
 #: ../panels/network/network-wired.ui.h:1
 msgid "Hardware Address"
 msgstr "Hardware Address"
 
-#: ../panels/network/network-wifi.ui.h:6
-#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:694
-msgid "IPv4 Address"
-msgstr "IPv4 Address"
-
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:8
 msgid "Security"
 msgstr "Security"
 
-#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wifi.ui.h:9
 msgid "Strength"
 msgstr "Strength"
 
-#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wifi.ui.h:10
 msgid "Link speed"
 msgstr "Link speed"
 
-#: ../panels/network/network-wifi.ui.h:13
-msgid "_Settings..."
-msgstr "_Settings…"
-
-#: ../panels/network/network-wifi.ui.h:14
-msgid "Switch off to connect to a wireless network"
-msgstr "Switch off to connect to a wireless network"
+#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:683
+msgid "IPv4 Address"
+msgstr "IPv4 Address"
 
 #: ../panels/network/network-wifi.ui.h:15
-msgid "Network Name"
-msgstr "Network Name"
-
-#: ../panels/network/network-wifi.ui.h:16
-msgid "Connected Devices"
-msgstr "Connected Devices"
-
-#: ../panels/network/network-wifi.ui.h:17
-msgid "Security type"
-msgstr "Security type"
-
-#: ../panels/network/network-wifi.ui.h:18
-msgid "Security key"
-msgstr "Security key"
-
-#: ../panels/network/network-wifi.ui.h:20
-msgid "Security Key"
-msgstr "Security Key"
-
-#: ../panels/network/network-wifi.ui.h:21
-msgid "Last used"
-msgstr "Last used"
-
-#: ../panels/network/network-wifi.ui.h:22
 msgid "_Forget Network"
 msgstr "_Forget Network"
 
-#: ../panels/network/network-wired.ui.h:4
-msgid "Subnet Mask"
-msgstr "Subnet Mask"
+#: ../panels/network/network-wifi.ui.h:16
+msgid "_Settings..."
+msgstr "_Settings…"
+
+#: ../panels/network/network-wifi.ui.h:17
+msgid "Switch off to connect to a wireless network"
+msgstr "Switch off to connect to a wireless network"
+
+#: ../panels/network/network-wifi.ui.h:18
+msgid "Network Name"
+msgstr "Network Name"
+
+#: ../panels/network/network-wifi.ui.h:19
+msgid "Connected Devices"
+msgstr "Connected Devices"
+
+#: ../panels/network/network-wifi.ui.h:20
+msgid "Security type"
+msgstr "Security type"
+
+#: ../panels/network/network-wifi.ui.h:21
+msgid "Security key"
+msgstr "Security key"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:86
@@ -2065,11 +2083,6 @@ msgstr "Connection failed"
 #: ../panels/network/panel-common.c:239 ../panels/network/panel-common.c:281
 msgid "Status unknown (missing)"
 msgstr "Status unknown (missing)"
-
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:277
-msgid "Not connected"
-msgstr "Not connected"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:301
@@ -2286,10 +2299,8 @@ msgstr "InfiniBand device does not support connected mode"
 msgid "Connection dependency failed"
 msgstr "Connection dependency failed"
 
-#. translators: This is the title of the "Add Account" dialogue.
-#. * The title is not visible when using GNOME Shell
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:252
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:263
+#. translators: This is the title of the "Add Account" dialog.
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:249
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Add Account"
@@ -2359,18 +2370,18 @@ msgstr ""
 "Adding an account allows your applications to access it for documents, mail, "
 "contacts, calendar, chat and more."
 
-#: ../panels/power/cc-power-panel.c:165
+#: ../panels/power/cc-power-panel.c:157
 msgid "Unknown time"
 msgstr "Unknown time"
 
-#: ../panels/power/cc-power-panel.c:171
+#: ../panels/power/cc-power-panel.c:163
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minute"
 msgstr[1] "%i minutes"
 
-#: ../panels/power/cc-power-panel.c:183
+#: ../panels/power/cc-power-panel.c:175
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -2379,170 +2390,170 @@ msgstr[1] "%i hours"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:191
+#: ../panels/power/cc-power-panel.c:183
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:192
+#: ../panels/power/cc-power-panel.c:184
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "hour"
 msgstr[1] "hours"
 
-#: ../panels/power/cc-power-panel.c:193
+#: ../panels/power/cc-power-panel.c:185
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minute"
 msgstr[1] "minutes"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:236
+#: ../panels/power/cc-power-panel.c:228
 #, c-format
 msgid "Charging - %s until fully charged"
 msgstr "Charging - %s until fully charged"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:244
+#: ../panels/power/cc-power-panel.c:236
 #, c-format
 msgid "Caution low battery, %s remaining"
 msgstr "Caution low battery, %s remaining"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:252
+#: ../panels/power/cc-power-panel.c:244
 #, c-format
 msgid "Using battery power - %s remaining"
 msgstr "Using battery power - %s remaining"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:269
+#: ../panels/power/cc-power-panel.c:261
 msgid "Charging"
 msgstr "Charging"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:274
+#: ../panels/power/cc-power-panel.c:266
 msgid "Using battery power"
 msgstr "Using battery power"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:278
+#: ../panels/power/cc-power-panel.c:270
 msgid "Charging - fully charged"
 msgstr "Charging - fully charged"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:282
+#: ../panels/power/cc-power-panel.c:274
 msgid "Empty"
 msgstr "Empty"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:350
+#: ../panels/power/cc-power-panel.c:342
 #, c-format
 msgid "Caution low UPS, %s remaining"
 msgstr "Caution low UPS, %s remaining"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:356
+#: ../panels/power/cc-power-panel.c:348
 #, c-format
 msgid "Using UPS power - %s remaining"
 msgstr "Using UPS power - %s remaining"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:374
+#: ../panels/power/cc-power-panel.c:366
 msgid "Caution low UPS"
 msgstr "Caution low UPS"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:379
+#: ../panels/power/cc-power-panel.c:371
 msgid "Using UPS power"
 msgstr "Using UPS power"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:431
+#: ../panels/power/cc-power-panel.c:423
 msgid "Your secondary battery is fully charged"
 msgstr "Your secondary battery is fully charged"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:435
+#: ../panels/power/cc-power-panel.c:427
 msgid "Your secondary battery is empty"
 msgstr "Your secondary battery is empty"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:518
+#: ../panels/power/cc-power-panel.c:510
 msgid "Wireless mouse"
 msgstr "Wireless mouse"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:522
+#: ../panels/power/cc-power-panel.c:514
 msgid "Wireless keyboard"
 msgstr "Wireless keyboard"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:526
+#: ../panels/power/cc-power-panel.c:518
 msgid "Uninterruptible power supply"
 msgstr "Uninterruptible power supply"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:530
+#: ../panels/power/cc-power-panel.c:522
 msgid "Personal digital assistant"
 msgstr "Personal digital assistant"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:534
+#: ../panels/power/cc-power-panel.c:526
 msgid "Cellphone"
 msgstr "Mobile phone"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:538
+#: ../panels/power/cc-power-panel.c:530
 msgid "Media player"
 msgstr "Media player"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:542
+#: ../panels/power/cc-power-panel.c:534
 msgid "Tablet"
 msgstr "Tablet"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:546
+#: ../panels/power/cc-power-panel.c:538
 msgid "Computer"
 msgstr "Computer"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:550
+#: ../panels/power/cc-power-panel.c:542
 msgid "Battery"
 msgstr "Battery"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:561
+#: ../panels/power/cc-power-panel.c:553
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Charging"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:568
+#: ../panels/power/cc-power-panel.c:560
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Caution"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:573
+#: ../panels/power/cc-power-panel.c:565
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Low"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:578
+#: ../panels/power/cc-power-panel.c:570
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Good"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:583
+#: ../panels/power/cc-power-panel.c:575
 msgctxt "Battery power"
 msgid "Charging - fully charged"
 msgstr "Charging - fully charged"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:587
+#: ../panels/power/cc-power-panel.c:579
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Empty"
@@ -2605,129 +2616,141 @@ msgid "When power is _critically low"
 msgstr "When power is _critically low"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:582
+#: ../panels/printers/cc-printers-panel.c:589
 msgid "Low on toner"
 msgstr "Low on toner"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:584
+#: ../panels/printers/cc-printers-panel.c:591
 msgid "Out of toner"
 msgstr "Out of toner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:587
+#: ../panels/printers/cc-printers-panel.c:594
 msgid "Low on developer"
 msgstr "Low on developer"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:590
+#: ../panels/printers/cc-printers-panel.c:597
 msgid "Out of developer"
 msgstr "Out of developer"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:592
+#: ../panels/printers/cc-printers-panel.c:599
 msgid "Low on a marker supply"
 msgstr "Low on a marker supply"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:594
+#: ../panels/printers/cc-printers-panel.c:601
 msgid "Out of a marker supply"
 msgstr "Out of a marker supply"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:596
+#: ../panels/printers/cc-printers-panel.c:603
 msgid "Open cover"
 msgstr "Open cover"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:598
+#: ../panels/printers/cc-printers-panel.c:605
 msgid "Open door"
 msgstr "Open door"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:600
+#: ../panels/printers/cc-printers-panel.c:607
 msgid "Low on paper"
 msgstr "Low on paper"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:602
+#: ../panels/printers/cc-printers-panel.c:609
 msgid "Out of paper"
 msgstr "Out of paper"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:604
+#: ../panels/printers/cc-printers-panel.c:611
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Offline"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:606
+#: ../panels/printers/cc-printers-panel.c:613
 msgctxt "printer state"
 msgid "Paused"
 msgstr "Paused"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:608
+#: ../panels/printers/cc-printers-panel.c:615
 msgid "Waste receptacle almost full"
 msgstr "Waste receptacle almost full"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:610
+#: ../panels/printers/cc-printers-panel.c:617
 msgid "Waste receptacle full"
 msgstr "Waste receptacle full"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:612
+#: ../panels/printers/cc-printers-panel.c:619
 msgid "The optical photo conductor is near end of life"
 msgstr "The optical photo conductor is near end of life"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:614
+#: ../panels/printers/cc-printers-panel.c:621
 msgid "The optical photo conductor is no longer functioning"
 msgstr "The optical photo conductor is no longer functioning"
 
+#. Translators: Printer's state (printer is being configured right now)
+#: ../panels/printers/cc-printers-panel.c:724
+msgctxt "printer state"
+msgid "Configuring"
+msgstr "Configuring"
+
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:765
+#: ../panels/printers/cc-printers-panel.c:781
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Ready"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:769
+#: ../panels/printers/cc-printers-panel.c:785
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Processing"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:773
+#: ../panels/printers/cc-printers-panel.c:789
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Stopped"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:892
+#: ../panels/printers/cc-printers-panel.c:906
 msgid "Toner Level"
 msgstr "Toner Level"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:895
+#: ../panels/printers/cc-printers-panel.c:909
 msgid "Ink Level"
 msgstr "Ink Level"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:898
+#: ../panels/printers/cc-printers-panel.c:912
 msgid "Supply Level"
 msgstr "Supply Level"
 
+#. Translators: Printer's state (printer is being installed right now)
+#: ../panels/printers/cc-printers-panel.c:930
+msgctxt "printer state"
+msgid "Installing"
+msgstr "Installing"
+
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:1009
+#: ../panels/printers/cc-printers-panel.c:1107
 msgid "No printers available"
 msgstr "No printers available"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1285
+#: ../panels/printers/cc-printers-panel.c:1411
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -2735,15 +2758,15 @@ msgstr[0] "%u active"
 msgstr[1] "%u active"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1581
+#: ../panels/printers/cc-printers-panel.c:1731
 msgid "Failed to add new printer."
 msgstr "Failed to add new printer."
 
-#: ../panels/printers/cc-printers-panel.c:1739
+#: ../panels/printers/cc-printers-panel.c:1896
 msgid "Select PPD File"
 msgstr "Select PPD File"
 
-#: ../panels/printers/cc-printers-panel.c:1748
+#: ../panels/printers/cc-printers-panel.c:1905
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -2751,36 +2774,35 @@ msgstr ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2053
+#: ../panels/printers/cc-printers-panel.c:2210
 msgid "No suitable driver found"
 msgstr "No suitable driver found"
 
-#: ../panels/printers/cc-printers-panel.c:2122
+#: ../panels/printers/cc-printers-panel.c:2279
 msgid "Searching for preferred drivers..."
 msgstr "Searching for preferred drivers…"
 
-#: ../panels/printers/cc-printers-panel.c:2137
+#: ../panels/printers/cc-printers-panel.c:2294
 msgid "Select from database..."
 msgstr "Select from database…"
 
-#: ../panels/printers/cc-printers-panel.c:2146
+#: ../panels/printers/cc-printers-panel.c:2303
 msgid "Provide PPD File..."
 msgstr "Provide PPD File…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2284
-#: ../panels/printers/cc-printers-panel.c:2298
+#: ../panels/printers/cc-printers-panel.c:2454
+#: ../panels/printers/cc-printers-panel.c:2477
 msgid "Test page"
 msgstr "Test page"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2668
+#: ../panels/printers/cc-printers-panel.c:2880
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Could not load ui: %s"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:155
 msgid "Printers"
 msgstr "Printers"
 
@@ -2821,22 +2843,18 @@ msgstr "Pause Printing"
 msgid "Cancel Print Job"
 msgstr "Cancel Print Job"
 
-#: ../panels/printers/new-printer-dialog.ui.h:1
+#: ../panels/printers/new-printer-dialog.ui.h:2
+#: ../panels/user-accounts/um-account-dialog.c:1044
+msgid "_Add"
+msgstr "_Add"
+
+#: ../panels/printers/new-printer-dialog.ui.h:3
 msgid "Add a New Printer"
 msgstr "Add a New Printer"
 
-#: ../panels/printers/new-printer-dialog.ui.h:2
-msgid "A_ddress:"
-msgstr "A_ddress:"
-
-#: ../panels/printers/new-printer-dialog.ui.h:3
-msgid "_Search by Address"
-msgstr "_Search by Address"
-
-#: ../panels/printers/new-printer-dialog.ui.h:5
-#: ../panels/user-accounts/um-account-dialog.c:1017
-msgid "_Add"
-msgstr "_Add"
+#: ../panels/printers/new-printer-dialog.ui.h:4
+msgid "Search for network printers or filter result"
+msgstr "Search for network printers or filter result"
 
 #: ../panels/printers/options-dialog.ui.h:2
 msgid "Options"
@@ -2848,7 +2866,7 @@ msgstr "Loading options…"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1016
+#: ../panels/user-accounts/um-account-dialog.c:1043
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -2960,67 +2978,10 @@ msgstr "Time"
 msgid "%s Active Jobs"
 msgstr "%s Active Jobs"
 
-#: ../panels/printers/pp-new-printer-dialog.c:659
-msgid "Getting devices..."
-msgstr "Getting devices…"
-
-#. Translators: No localy connected printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1242
-msgid "No local printers found"
-msgstr "No local printers found"
-
-#. Translators: No network printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1255
-msgid "No network printers found"
-msgstr "No network printers found"
-
-#: ../panels/printers/pp-new-printer-dialog.c:1347
-msgid ""
-"FirewallD is not running. Network printer detection needs services mdns, "
-"ipp, ipp-client and samba-client enabled on firewall."
-msgstr ""
-"FirewallD is not running. Network printer detection needs services mdns, "
-"ipp, ipp-client and samba-client enabled on firewall."
-
-#. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:1375
-#: ../panels/printers/pp-new-printer-dialog.c:1380
-msgid "Devices"
-msgstr "Devices"
-
-#. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:1405
-msgctxt "printer type"
-msgid "Local"
-msgstr "Local"
-
-#. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:1407
-msgctxt "printer type"
-msgid "Network"
-msgstr "Network"
-
-#. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:1448
-msgid "Device types"
-msgstr "Device types"
-
-#. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:1768
-msgid "Automatic configuration"
-msgstr "Automatic configuration"
-
-#: ../panels/printers/pp-new-printer-dialog.c:1791
-msgid "Opening firewall for mDNS connections"
-msgstr "Opening firewall for mDNS connections"
-
-#: ../panels/printers/pp-new-printer-dialog.c:1800
-msgid "Opening firewall for Samba connections"
-msgstr "Opening firewall for Samba connections"
-
-#: ../panels/printers/pp-new-printer-dialog.c:1809
-msgid "Opening firewall for IPP connections"
-msgstr "Opening firewall for IPP connections"
+#. Translators: No printers were found
+#: ../panels/printers/pp-new-printer-dialog.c:1291
+msgid "No printers detected."
+msgstr "No printers detected."
 
 #: ../panels/printers/pp-options-dialog.c:82
 msgid "Two Sided"
@@ -3110,7 +3071,7 @@ msgid "Advanced"
 msgstr "Advanced"
 
 #. Translators: Options of given printer (e.g. "MyPrinter Options")
-#: ../panels/printers/pp-options-dialog.c:934
+#: ../panels/printers/pp-options-dialog.c:936
 #, c-format
 msgid "%s Options"
 msgstr "%s Options"
@@ -3270,7 +3231,7 @@ msgstr "Choose an input source"
 msgid "Select an input source to add"
 msgstr "Select an input source to add"
 
-#: ../panels/region/gnome-region-panel-system.c:330
+#: ../panels/region/gnome-region-panel-system.c:470
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings."
@@ -3278,7 +3239,7 @@ msgstr ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings."
 
-#: ../panels/region/gnome-region-panel-system.c:335
+#: ../panels/region/gnome-region-panel-system.c:475
 #: ../panels/region/gnome-region-panel.ui.h:31
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
@@ -3289,11 +3250,11 @@ msgstr ""
 "Region and Language settings. You may change the system settings to match "
 "yours."
 
-#: ../panels/region/gnome-region-panel-system.c:338
+#: ../panels/region/gnome-region-panel-system.c:478
 msgid "Copy Settings"
 msgstr "Copy Settings"
 
-#: ../panels/region/gnome-region-panel-system.c:341
+#: ../panels/region/gnome-region-panel-system.c:481
 #: ../panels/region/gnome-region-panel.ui.h:38
 msgid "Copy Settings..."
 msgstr "Copy Settings…"
@@ -4627,24 +4588,24 @@ msgstr "The new password does not contain enough different characters"
 msgid "Unknown error"
 msgstr "Unknown error"
 
-#: ../panels/user-accounts/um-account-dialog.c:175
+#: ../panels/user-accounts/um-account-dialog.c:180
 msgid "Failed to add account"
 msgstr "Failed to add account"
 
-#: ../panels/user-accounts/um-account-dialog.c:366
-#: ../panels/user-accounts/um-account-dialog.c:405
+#: ../panels/user-accounts/um-account-dialog.c:378
+#: ../panels/user-accounts/um-account-dialog.c:419
 msgid "Failed to register account"
 msgstr "Failed to register account"
 
-#: ../panels/user-accounts/um-account-dialog.c:530
+#: ../panels/user-accounts/um-account-dialog.c:551
 msgid "No supported way to authenticate with this domain"
 msgstr "No supported way to authenticate with this domain"
 
-#: ../panels/user-accounts/um-account-dialog.c:582
+#: ../panels/user-accounts/um-account-dialog.c:605
 msgid "Failed to join domain"
 msgstr "Failed to join domain"
 
-#: ../panels/user-accounts/um-account-dialog.c:635
+#: ../panels/user-accounts/um-account-dialog.c:662
 msgid "Failed to log into domain"
 msgstr "Failed to log into domain"
 
@@ -4799,21 +4760,21 @@ msgstr "Browse for more pictures…"
 msgid "Used by %s"
 msgstr "Used by %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:368
+#: ../panels/user-accounts/um-realm-manager.c:379
 #, c-format
 msgid "No such domain or realm found"
 msgstr "No such domain or realm found"
 
-#: ../panels/user-accounts/um-realm-manager.c:743
+#: ../panels/user-accounts/um-realm-manager.c:780
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Cannot log in as %s at the %s domain"
 
-#: ../panels/user-accounts/um-realm-manager.c:748
+#: ../panels/user-accounts/um-realm-manager.c:785
 msgid "Invalid password, please try again"
 msgstr "Invalid password, please try again"
 
-#: ../panels/user-accounts/um-realm-manager.c:752
+#: ../panels/user-accounts/um-realm-manager.c:789
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Couldn't connect to the %s domain: %s"
@@ -4889,15 +4850,15 @@ msgctxt "Password mode"
 msgid "None"
 msgstr "None"
 
-#: ../panels/user-accounts/um-user-panel.c:869
+#: ../panels/user-accounts/um-user-panel.c:871
 msgid "Failed to contact the accounts service"
 msgstr "Failed to contact the accounts service"
 
-#: ../panels/user-accounts/um-user-panel.c:871
+#: ../panels/user-accounts/um-user-panel.c:873
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Please make sure that the AccountService is installed and enabled."
 
-#: ../panels/user-accounts/um-user-panel.c:911
+#: ../panels/user-accounts/um-user-panel.c:913
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -4905,12 +4866,12 @@ msgstr ""
 "To make changes,\n"
 "click the * icon first"
 
-#: ../panels/user-accounts/um-user-panel.c:949
+#: ../panels/user-accounts/um-user-panel.c:951
 msgid "Create a user account"
 msgstr "Create a user account"
 
-#: ../panels/user-accounts/um-user-panel.c:960
-#: ../panels/user-accounts/um-user-panel.c:1271
+#: ../panels/user-accounts/um-user-panel.c:962
+#: ../panels/user-accounts/um-user-panel.c:1273
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -4918,12 +4879,12 @@ msgstr ""
 "To create a user account,\n"
 "click the * icon first"
 
-#: ../panels/user-accounts/um-user-panel.c:969
+#: ../panels/user-accounts/um-user-panel.c:971
 msgid "Delete the selected user account"
 msgstr "Delete the selected user account"
 
-#: ../panels/user-accounts/um-user-panel.c:981
-#: ../panels/user-accounts/um-user-panel.c:1276
+#: ../panels/user-accounts/um-user-panel.c:983
+#: ../panels/user-accounts/um-user-panel.c:1278
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -4931,11 +4892,11 @@ msgstr ""
 "To delete the selected user account,\n"
 "click the * icon first"
 
-#: ../panels/user-accounts/um-user-panel.c:1174
+#: ../panels/user-accounts/um-user-panel.c:1176
 msgid "My Account"
 msgstr "My Account"
 
-#: ../panels/user-accounts/um-user-panel.c:1184
+#: ../panels/user-accounts/um-user-panel.c:1186
 msgid "Other Accounts"
 msgstr "Other Accounts"
 
@@ -5298,27 +5259,56 @@ msgstr "Preferences;Settings;"
 msgid "All Settings"
 msgstr "All Settings"
 
-#~ msgid "Five clicks, GEGL time!"
-#~ msgstr "Five clicks, GEGL time!"
+#~ msgid "Security Key"
+#~ msgstr "Security Key"
 
-#, fuzzy
-#~| msgid "Connected"
-#~ msgid "_Connect"
-#~ msgstr "Connected"
+#~ msgid "Subnet Mask"
+#~ msgstr "Subnet Mask"
 
-#~ msgctxt "printer state"
-#~ msgid "Configuring"
-#~ msgstr "Configuring"
+#~ msgid "A_ddress:"
+#~ msgstr "A_ddress:"
 
-#~ msgctxt "printer state"
-#~ msgid "Installing"
-#~ msgstr "Installing"
+#~ msgid "_Search by Address"
+#~ msgstr "_Search by Address"
 
-#~ msgid "Search for network printers or filter result"
-#~ msgstr "Search for network printers or filter result"
+#~ msgid "Getting devices..."
+#~ msgstr "Getting devices…"
 
-#~ msgid "No printers detected."
-#~ msgstr "No printers detected."
+#~ msgid "No local printers found"
+#~ msgstr "No local printers found"
+
+#~ msgid ""
+#~ "FirewallD is not running. Network printer detection needs services mdns, "
+#~ "ipp, ipp-client and samba-client enabled on firewall."
+#~ msgstr ""
+#~ "FirewallD is not running. Network printer detection needs services mdns, "
+#~ "ipp, ipp-client and samba-client enabled on firewall."
+
+#~ msgid "Devices"
+#~ msgstr "Devices"
+
+#~ msgctxt "printer type"
+#~ msgid "Local"
+#~ msgstr "Local"
+
+#~ msgctxt "printer type"
+#~ msgid "Network"
+#~ msgstr "Network"
+
+#~ msgid "Device types"
+#~ msgstr "Device types"
+
+#~ msgid "Automatic configuration"
+#~ msgstr "Automatic configuration"
+
+#~ msgid "Opening firewall for mDNS connections"
+#~ msgstr "Opening firewall for mDNS connections"
+
+#~ msgid "Opening firewall for Samba connections"
+#~ msgstr "Opening firewall for Samba connections"
+
+#~ msgid "Opening firewall for IPP connections"
+#~ msgstr "Opening firewall for IPP connections"
 
 #~ msgid "Add wallpaper"
 #~ msgstr "Add wallpaper"
