@@ -573,7 +573,7 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
         GtkWidget *widget;
         GtkTreeModel *model;
         GtkTreeIter iter;
-        gboolean show;
+        gboolean show, enable;
 
         pixbuf = um_user_render_icon (user, FALSE, 48);
         image = get_widget (d, "user-icon-image");
@@ -593,6 +593,8 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
 
         widget = get_widget (d, "account-password-button");
         um_editable_button_set_text (UM_EDITABLE_BUTTON (widget), get_password_mode_text (user));
+        enable = um_user_is_local_account (user);
+        gtk_widget_set_sensitive (widget, enable);
 
         widget = get_widget (d, "autologin-switch");
         g_signal_handlers_block_by_func (widget, autologin_changed, d);
