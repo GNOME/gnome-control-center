@@ -993,6 +993,7 @@ cc_power_panel_init (CcPowerPanel *self)
   GError     *error;
   GtkWidget  *widget;
   gint        value;
+  char       *text;
 
   self->priv = POWER_PANEL_PRIVATE (self);
 
@@ -1070,8 +1071,11 @@ cc_power_panel_init (CcPowerPanel *self)
   widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder,
                                                "label_screen_settings"));
   /* TRANSLATORS: this is a link to the "Brightness and Lock" control center panel */
-  gtk_label_set_markup (GTK_LABEL (widget),
-                        "<span size=\"small\">Tip: <a href=\"screen\">screen brightness</a> affects how much power is used</span>");
+  text = g_strdup_printf ("<span size=\"small\">%s</span>",
+                          _("Tip: <a href=\"screen\">screen brightness</a> affects how much power is used"));
+  gtk_label_set_markup (GTK_LABEL (widget), text);
+  g_free (text);
+
   g_signal_connect (widget, "activate-link",
                     G_CALLBACK (activate_link_cb),
                     self);
