@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-13 17:02+0200\n"
+"POT-Creation-Date: 2012-09-19 01:04+0200\n"
 "PO-Revision-Date: 2012-09-13 17:03+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
@@ -1014,7 +1014,7 @@ msgid "Software"
 msgstr "Oprogramowanie"
 
 #: ../panels/info/cc-info-panel.c:1508
-#: ../panels/keyboard/keyboard-shortcuts.c:1647
+#: ../panels/keyboard/keyboard-shortcuts.c:1667
 msgid "Section"
 msgstr "Sekcja"
 
@@ -1216,7 +1216,6 @@ msgstr "Wysunięcie"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/keyboard/keyboard-shortcuts.c:858
 #: ../panels/universal-access/uap.ui.h:68
 msgid "Typing"
 msgstr "Pisanie"
@@ -1344,7 +1343,7 @@ msgstr "Włączenie lub wyłączenie wysokiego kontrastu"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:241
 #: ../panels/keyboard/cc-keyboard-option.c:347
-#: ../panels/keyboard/keyboard-shortcuts.c:1112
+#: ../panels/keyboard/keyboard-shortcuts.c:1132
 #: ../panels/sound/gvc-mixer-control.c:1834
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
@@ -1471,19 +1470,16 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "Skróty"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:552
-#: ../panels/keyboard/keyboard-shortcuts.c:560
-#: ../panels/keyboard/keyboard-shortcuts.c:942
-#: ../panels/keyboard/keyboard-shortcuts.c:1414
-#: ../panels/keyboard/keyboard-shortcuts.c:1418
+#: ../panels/keyboard/keyboard-shortcuts.c:557
+#: ../panels/keyboard/keyboard-shortcuts.c:565
 msgid "Custom Shortcuts"
 msgstr "Własne skróty"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:756
+#: ../panels/keyboard/keyboard-shortcuts.c:776
 msgid "<Unknown Action>"
 msgstr "<Nieznane działanie>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1253
+#: ../panels/keyboard/keyboard-shortcuts.c:1273
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1494,7 +1490,7 @@ msgstr ""
 "używając wybranego klawisza.\n"
 "Proszę spróbować w połączeniu z klawiszem takim jak Ctrl, Alt lub Shift."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1285
+#: ../panels/keyboard/keyboard-shortcuts.c:1305
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1503,14 +1499,14 @@ msgstr ""
 "Skrót \"%s\" jest już wykorzystywany przez\n"
 " \"%s\""
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1290
+#: ../panels/keyboard/keyboard-shortcuts.c:1310
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr ""
 "Jeśli skrót zostanie zmieniony na \"%s\", skrót \"%s\" zostanie wyłączony."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1296
+#: ../panels/keyboard/keyboard-shortcuts.c:1316
 msgid "_Reassign"
 msgstr "_Zmień"
 
@@ -1836,19 +1832,19 @@ msgid "IP Address"
 msgstr "Adres IP"
 
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wifi.ui.h:13
 #: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:684
 msgid "IPv6 Address"
 msgstr "Adres IPv6"
 
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wifi.ui.h:14
 #: ../panels/network/network-wired.ui.h:4
 msgid "Default Route"
 msgstr "Domyślna trasa"
 
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-wifi.ui.h:14
+#: ../panels/network/network-wifi.ui.h:15
 #: ../panels/network/network-wired.ui.h:5
 msgid "DNS"
 msgstr "DNS"
@@ -1947,7 +1943,7 @@ msgstr "Hotspot bezprzewodowy"
 
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Turn On"
-msgstr "_Włączony"
+msgstr "_Włącz"
 
 #. TRANSLATORS: device type
 #: ../panels/network/network-wifi.ui.h:3 ../panels/network/panel-common.c:90
@@ -1959,60 +1955,64 @@ msgid "_Use as Hotspot..."
 msgstr "_Użyj jako hotspot..."
 
 #: ../panels/network/network-wifi.ui.h:5
+msgid "_Disconnect"
+msgstr "_Rozłącz"
+
+#: ../panels/network/network-wifi.ui.h:6
 msgid "_Connect"
 msgstr "Połą_cz"
 
-#: ../panels/network/network-wifi.ui.h:6
+#: ../panels/network/network-wifi.ui.h:7
 msgid "Last used"
 msgstr "Ostatnio użyta"
 
-#: ../panels/network/network-wifi.ui.h:7
+#: ../panels/network/network-wifi.ui.h:8
 #: ../panels/network/network-wired.ui.h:1
 msgid "Hardware Address"
 msgstr "Adres sprzętowy"
 
-#: ../panels/network/network-wifi.ui.h:8
+#: ../panels/network/network-wifi.ui.h:9
 msgid "Security"
 msgstr "Zabezpieczenia"
 
-#: ../panels/network/network-wifi.ui.h:9
+#: ../panels/network/network-wifi.ui.h:10
 msgid "Strength"
 msgstr "Siła sygnału"
 
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:11
 msgid "Link speed"
 msgstr "Prędkość połączenia"
 
-#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wifi.ui.h:12
 #: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:683
 msgid "IPv4 Address"
 msgstr "Adres IPv4"
 
-#: ../panels/network/network-wifi.ui.h:15
+#: ../panels/network/network-wifi.ui.h:16
 msgid "_Forget Network"
 msgstr "_Zapomnij sieć"
 
-#: ../panels/network/network-wifi.ui.h:16
+#: ../panels/network/network-wifi.ui.h:17
 msgid "_Settings..."
 msgstr "_Ustawienia..."
 
-#: ../panels/network/network-wifi.ui.h:17
+#: ../panels/network/network-wifi.ui.h:18
 msgid "Switch off to connect to a wireless network"
 msgstr "Należy wyłączyć, aby połączyć się z siecią bezprzewodową"
 
-#: ../panels/network/network-wifi.ui.h:18
+#: ../panels/network/network-wifi.ui.h:19
 msgid "Network Name"
 msgstr "Nazwa sieci"
 
-#: ../panels/network/network-wifi.ui.h:19
+#: ../panels/network/network-wifi.ui.h:20
 msgid "Connected Devices"
 msgstr "Połączone urządzenia"
 
-#: ../panels/network/network-wifi.ui.h:20
+#: ../panels/network/network-wifi.ui.h:21
 msgid "Security type"
 msgstr "Typ zabezpieczeń"
 
-#: ../panels/network/network-wifi.ui.h:21
+#: ../panels/network/network-wifi.ui.h:22
 msgid "Security key"
 msgstr "Klucz zabezpieczeń"
 
@@ -2320,10 +2320,8 @@ msgstr "Urządzenie InfiniBand nie obsługuje trybu połączonego"
 msgid "Connection dependency failed"
 msgstr "Zależność połączenia się nie powiodła"
 
-#. translators: This is the title of the "Add Account" dialogue.
-#. * The title is not visible when using GNOME Shell
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:252
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:263
+#. translators: This is the title of the "Add Account" dialog.
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:249
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Dodanie konta"
@@ -2588,6 +2586,13 @@ msgstr "Ładowanie - w pełni naładowano"
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Pusty"
+
+#: ../panels/power/cc-power-panel.c:1075
+msgid ""
+"Tip: <a href=\"screen\">screen brightness</a> affects how much power is used"
+msgstr ""
+"Wskazówka: <a href=\"screen\">jasność ekranu</a> ma wpływ na zużycie "
+"zasilania"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -2878,7 +2883,7 @@ msgid "Cancel Print Job"
 msgstr "Anuluj zadanie drukowania"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1017
+#: ../panels/user-accounts/um-account-dialog.c:1044
 msgid "_Add"
 msgstr "_Dodaj"
 
@@ -2900,7 +2905,7 @@ msgstr "Wczytywanie opcji..."
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1016
+#: ../panels/user-accounts/um-account-dialog.c:1043
 msgid "Cancel"
 msgstr "Anuluj"
 
@@ -3263,7 +3268,7 @@ msgstr "Wybór źródła wprowadzania"
 msgid "Select an input source to add"
 msgstr "Wybór źródła wprowadzania do dodania"
 
-#: ../panels/region/gnome-region-panel-system.c:330
+#: ../panels/region/gnome-region-panel-system.c:470
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings."
@@ -3271,7 +3276,7 @@ msgstr ""
 "Ekran logowania, konta systemowe i nowe konta użytkowników używają "
 "systemowych ustawień dla regionu i języka."
 
-#: ../panels/region/gnome-region-panel-system.c:335
+#: ../panels/region/gnome-region-panel-system.c:475
 #: ../panels/region/gnome-region-panel.ui.h:31
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
@@ -3282,11 +3287,11 @@ msgstr ""
 "systemowych ustawień dla regionu i języka. Można je zmienić, aby pasowały do "
 "ustawień bieżącego użytkownika."
 
-#: ../panels/region/gnome-region-panel-system.c:338
+#: ../panels/region/gnome-region-panel-system.c:478
 msgid "Copy Settings"
 msgstr "Skopiuj ustawienia"
 
-#: ../panels/region/gnome-region-panel-system.c:341
+#: ../panels/region/gnome-region-panel-system.c:481
 #: ../panels/region/gnome-region-panel.ui.h:38
 msgid "Copy Settings..."
 msgstr "Skopiuj ustawienia..."
@@ -4014,7 +4019,7 @@ msgstr "Włączanie za pomocą klawiatury"
 
 #: ../panels/universal-access/uap.ui.h:67
 msgid "Turn accessibility features on and off using the keyboard"
-msgstr "Włączenie funkcji dostępności za pomocą klawiatury"
+msgstr "Włączanie funkcji dostępności za pomocą klawiatury"
 
 #: ../panels/universal-access/uap.ui.h:69
 msgid "Mouse Keys"
@@ -4130,11 +4135,11 @@ msgstr "Opcje powiększania"
 
 #: ../panels/universal-access/zoom-options.ui.h:7
 msgid "Zoom"
-msgstr "Powiększenie"
+msgstr "Powiększanie"
 
 #: ../panels/universal-access/zoom-options.ui.h:8
 msgid "Magnification:"
-msgstr "Powiększanie:"
+msgstr "Powiększenie:"
 
 #: ../panels/universal-access/zoom-options.ui.h:9
 msgid "Follow mouse cursor"
@@ -4227,7 +4232,7 @@ msgstr "Brak"
 #: ../panels/universal-access/zoom-options.ui.h:32
 msgctxt "Zoom Grayscale"
 msgid "Full"
-msgstr "Pełna"
+msgstr "Pełny"
 
 #. short delay
 #: ../panels/universal-access/zoom-options.ui.h:34
@@ -4631,24 +4636,24 @@ msgstr "Nowe hasło nie zawiera wystarczającej liczby różnych znaków"
 msgid "Unknown error"
 msgstr "Nieznany błąd"
 
-#: ../panels/user-accounts/um-account-dialog.c:175
+#: ../panels/user-accounts/um-account-dialog.c:180
 msgid "Failed to add account"
 msgstr "Dodanie konta się nie powiodło"
 
-#: ../panels/user-accounts/um-account-dialog.c:366
-#: ../panels/user-accounts/um-account-dialog.c:405
+#: ../panels/user-accounts/um-account-dialog.c:378
+#: ../panels/user-accounts/um-account-dialog.c:419
 msgid "Failed to register account"
 msgstr "Zarejestrowanie konta się nie powiodło"
 
-#: ../panels/user-accounts/um-account-dialog.c:530
+#: ../panels/user-accounts/um-account-dialog.c:551
 msgid "No supported way to authenticate with this domain"
 msgstr "Brak obsługiwanego sposobu na uwierzytelnienie w tej domenie"
 
-#: ../panels/user-accounts/um-account-dialog.c:582
+#: ../panels/user-accounts/um-account-dialog.c:605
 msgid "Failed to join domain"
 msgstr "Dołączenie do domeny się nie powiodło"
 
-#: ../panels/user-accounts/um-account-dialog.c:635
+#: ../panels/user-accounts/um-account-dialog.c:662
 msgid "Failed to log into domain"
 msgstr "Zalogowanie do domeny się nie powiodło"
 
@@ -4806,21 +4811,21 @@ msgstr "Przeglądaj inne obrazy..."
 msgid "Used by %s"
 msgstr "Używane przez %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:368
+#: ../panels/user-accounts/um-realm-manager.c:379
 #, c-format
 msgid "No such domain or realm found"
 msgstr "Nie odnaleziono takiej domeny lub obszaru"
 
-#: ../panels/user-accounts/um-realm-manager.c:743
+#: ../panels/user-accounts/um-realm-manager.c:780
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Nie można zalogować jako %s w domenie %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:748
+#: ../panels/user-accounts/um-realm-manager.c:785
 msgid "Invalid password, please try again"
 msgstr "Nieprawidłowe hasło. Proszę spróbować ponownie"
 
-#: ../panels/user-accounts/um-realm-manager.c:752
+#: ../panels/user-accounts/um-realm-manager.c:789
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Nie można połączyć z domeną %s: %s"
@@ -4896,16 +4901,16 @@ msgctxt "Password mode"
 msgid "None"
 msgstr "Brak"
 
-#: ../panels/user-accounts/um-user-panel.c:869
+#: ../panels/user-accounts/um-user-panel.c:871
 msgid "Failed to contact the accounts service"
 msgstr "Skontaktowanie się z usługą kont się nie powiodło"
 
-#: ../panels/user-accounts/um-user-panel.c:871
+#: ../panels/user-accounts/um-user-panel.c:873
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Proszę się upewnić, że usługa AccountService jest zainstalowana i włączona."
 
-#: ../panels/user-accounts/um-user-panel.c:911
+#: ../panels/user-accounts/um-user-panel.c:913
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -4913,12 +4918,12 @@ msgstr ""
 "Aby wprowadzić zmiany,\n"
 "najpierw należy kliknąć ikonę *"
 
-#: ../panels/user-accounts/um-user-panel.c:949
+#: ../panels/user-accounts/um-user-panel.c:951
 msgid "Create a user account"
 msgstr "Tworzy konto użytkownika"
 
-#: ../panels/user-accounts/um-user-panel.c:960
-#: ../panels/user-accounts/um-user-panel.c:1271
+#: ../panels/user-accounts/um-user-panel.c:962
+#: ../panels/user-accounts/um-user-panel.c:1273
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -4926,12 +4931,12 @@ msgstr ""
 "Aby utworzyć konto użytkownika,\n"
 "najpierw należy kliknąć ikonę *"
 
-#: ../panels/user-accounts/um-user-panel.c:969
+#: ../panels/user-accounts/um-user-panel.c:971
 msgid "Delete the selected user account"
 msgstr "Usuwa wybrane konto użytkownika"
 
-#: ../panels/user-accounts/um-user-panel.c:981
-#: ../panels/user-accounts/um-user-panel.c:1276
+#: ../panels/user-accounts/um-user-panel.c:983
+#: ../panels/user-accounts/um-user-panel.c:1278
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -4939,11 +4944,11 @@ msgstr ""
 "Aby usunąć wybrane konto użytkownika,\n"
 "najpierw należy kliknąć ikonę *"
 
-#: ../panels/user-accounts/um-user-panel.c:1174
+#: ../panels/user-accounts/um-user-panel.c:1176
 msgid "My Account"
 msgstr "Moje konto"
 
-#: ../panels/user-accounts/um-user-panel.c:1184
+#: ../panels/user-accounts/um-user-panel.c:1186
 msgid "Other Accounts"
 msgstr "Inne konta"
 
