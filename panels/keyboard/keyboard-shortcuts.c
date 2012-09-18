@@ -569,8 +569,9 @@ append_sections_from_gsettings (GtkBuilder *builder)
 }
 
 static void
-reload_sections (GtkBuilder *builder)
+reload_sections (CcPanel *panel)
 {
+  GtkBuilder *builder;
   gchar **wm_keybindings;
   GDir *dir;
   GtkTreeModel *sort_model;
@@ -582,6 +583,9 @@ reload_sections (GtkBuilder *builder)
   GtkTreeSelection *selection;
   GtkTreeIter iter;
   GHashTable *loaded_files;
+  const char *section_to_set;
+
+  builder = g_object_get_data (G_OBJECT (panel), "builder");
 
   section_treeview = GTK_TREE_VIEW (gtk_builder_get_object (builder, "section_treeview"));
   sort_model = gtk_tree_view_get_model (section_treeview);
@@ -669,10 +673,21 @@ reload_sections (GtkBuilder *builder)
   /* Load custom keybindings */
   append_sections_from_gsettings (builder);
 
-  /* Select the first item */
+  /* Select the first item, or the requested section, if any */
+  section_to_set = g_object_get_data (G_OBJECT (panel), "section-to-set");
+  if (section_to_set != NULL)
+    {
+      if (keyboard_shortcuts_set_section (panel, section_to_set))
+        {
+          g_object_set_data (G_OBJECT (panel), "section-to-set", NULL);
+          return;
+	}
+    }
   gtk_tree_model_get_iter_first (sort_model, &iter);
   selection = gtk_tree_view_get_selection (section_treeview);
   gtk_tree_selection_select_iter (selection, &iter);
+
+  g_object_set_data (G_OBJECT (panel), "section-to-set", NULL);
 }
 
 static void
@@ -1781,18 +1796,69 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
 }
 
 static void
-on_window_manager_change (const char *wm_name, GtkBuilder *builder)
+on_window_manager_change (const char *wm_name, CcPanel *panel)
 {
-  reload_sections (builder);
+  reload_sections (panel);
 }
 
 void
 keyboard_shortcuts_init (CcPanel *panel, GtkBuilder *builder)
 {
+  g_object_set_data (G_OBJECT (panel), "builder", builder);
   wm_common_register_window_manager_change ((GFunc) on_window_manager_change,
-                                            builder);
+                                            panel);
   setup_dialog (panel, builder);
-  reload_sections (builder);
+  reload_sections (panel);
+}
+
+gboolean
+keyboard_shortcuts_set_section (CcPanel *panel, const char *section)
+{
+  GtkBuilder *builder;
+  GtkTreeModel *section_model;
+  GtkTreeIter iter;
+  gboolean found, cont;
+
+  builder = g_object_get_data (G_OBJECT (panel), "builder");
+  if (builder == NULL)
+    {
+      /* Remember the section name to be set later */
+      g_object_set_data_full (G_OBJECT (panel), "section-to-set", g_strdup (section), g_free);
+      return TRUE;
+    }
+  section_model = gtk_tree_view_get_model (GTK_TREE_VIEW (WID (builder, "section_treeview")));
+  cont = gtk_tree_model_get_iter_first (section_model, &iter);
+  found = FALSE;
+  while (cont)
+    {
+      char *id;
+
+      gtk_tree_model_get (section_model, &iter,
+                          SECTION_ID_COLUMN, &id,
+                          -1);
+
+      if (g_strcmp0 (id, section) == 0)
+        {
+          found = TRUE;
+          g_free (id);
+          break;
+        }
+      g_free (id);
+      cont = gtk_tree_model_iter_next (section_model, &iter);
+    }
+  if (found)
+    {
+      GtkTreeSelection *selection;
+
+      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (WID (builder, "section_treeview")));
+      gtk_tree_selection_select_iter (selection, &iter);
+    }
+  else
+    {
+      g_warning ("Could not find section '%s' to switch to.", section);
+    }
+
+  return found;
 }
 
 void

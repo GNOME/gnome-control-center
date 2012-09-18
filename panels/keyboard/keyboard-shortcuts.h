@@ -23,4 +23,5 @@
 #include <shell/cc-panel.h>
 
 void keyboard_shortcuts_init (CcPanel *panel, GtkBuilder *builder);
+gboolean keyboard_shortcuts_set_section (CcPanel *panel, const char *section);
 void keyboard_shortcuts_dispose (CcPanel *panel);
