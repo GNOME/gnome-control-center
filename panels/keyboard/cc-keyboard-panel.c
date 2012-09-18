@@ -59,20 +59,29 @@ enum {
 
 static void
 cc_keyboard_panel_set_page (CcKeyboardPanel *panel,
-                            const gchar   *page)
+                            const gchar     *page,
+                            const gchar     *section)
 {
   GtkWidget *notebook;
   gint page_num;
 
   if (g_strcmp0 (page, "typing") == 0)
     page_num = TYPING_PAGE;
-  else
+  else if (g_strcmp0 (page, "shortcuts") == 0)
     page_num = SHORTCUTS_PAGE;
+  else {
+    g_warning ("Could not switch to non-existent page '%s'", page);
+    return;
+  }
 
   notebook = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder, "keyboard_notebook"));
   gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), page_num);
-}
 
+  if (page_num == SHORTCUTS_PAGE &&
+      section != NULL) {
+    keyboard_shortcuts_set_section (CC_PANEL (panel), section);
+  }
+}
 
 static void
 cc_keyboard_panel_set_property (GObject      *object,
@@ -90,7 +99,7 @@ cc_keyboard_panel_set_property (GObject      *object,
       args = g_value_get_boxed (value);
 
       if (args && args[0]) {
-        cc_keyboard_panel_set_page (panel, args[0]);
+        cc_keyboard_panel_set_page (panel, args[0], args[1]);
       }
       break;
     }
