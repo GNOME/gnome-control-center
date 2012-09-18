@@ -30,9 +30,11 @@
 
 #define BINDINGS_SCHEMA "org.gnome.settings-daemon.plugins.media-keys"
 #define CUSTOM_KEYS_BASENAME "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
+#define CUSTOM_SHORTCUTS_ID "custom"
 #define WID(builder, name) (GTK_WIDGET (gtk_builder_get_object (builder, name)))
 
 typedef struct {
+  /* The untranslated name, combine with ->package to translate */
   char *name;
   /* The group of keybindings (system or application) */
   char *group;
@@ -72,6 +74,7 @@ enum
 enum
 {
   SECTION_DESCRIPTION_COLUMN,
+  SECTION_ID_COLUMN,
   SECTION_GROUP_COLUMN,
   SECTION_N_COLUMNS
 };
@@ -186,6 +189,7 @@ item_changed (CcKeyboardItem *item,
 static void
 append_section (GtkBuilder         *builder,
                 const gchar        *title,
+                const gchar        *id,
                 BindingGroupType    group,
                 const KeyListEntry *keys_list)
 {
@@ -208,7 +212,7 @@ append_section (GtkBuilder         *builder,
 
   /* Add all CcKeyboardItems for this section */
   is_new = FALSE;
-  keys_array = g_hash_table_lookup (hash, title);
+  keys_array = g_hash_table_lookup (hash, id);
   if (keys_array == NULL)
     {
       keys_array = g_ptr_array_new ();
@@ -258,12 +262,13 @@ append_section (GtkBuilder         *builder,
   /* Add the keys to the hash table */
   if (is_new)
     {
-      g_hash_table_insert (hash, g_strdup (title), keys_array);
+      g_hash_table_insert (hash, g_strdup (id), keys_array);
 
       /* Append the section to the left tree view */
       gtk_list_store_append (GTK_LIST_STORE (model), &iter);
       gtk_list_store_set (GTK_LIST_STORE (model), &iter,
                           SECTION_DESCRIPTION_COLUMN, title,
+                          SECTION_ID_COLUMN, id,
                           SECTION_GROUP_COLUMN, group,
                           -1);
     }
@@ -495,7 +500,7 @@ append_sections_from_file (GtkBuilder *builder, const gchar *path, const char *d
   else
     group = BINDING_GROUP_APPS;
 
-  append_section (builder, title, group, keys);
+  append_section (builder, title, keylist->name, group, keys);
 
   g_free (keylist->name);
   g_free (keylist->package);
@@ -549,7 +554,7 @@ append_sections_from_gsettings (GtkBuilder *builder)
       g_array_append_val (entries, key);
 
       keys = (KeyListEntry *) entries->data;
-      append_section (builder, _("Custom Shortcuts"), BINDING_GROUP_USER, keys);
+      append_section (builder, _("Custom Shortcuts"), CUSTOM_SHORTCUTS_ID, BINDING_GROUP_USER, keys);
       for (i = 0; i < entries->len; ++i)
         {
           g_free (keys[i].name);
@@ -557,7 +562,7 @@ append_sections_from_gsettings (GtkBuilder *builder)
     }
   else
     {
-      append_section (builder, _("Custom Shortcuts"), BINDING_GROUP_USER, NULL);
+      append_section (builder, _("Custom Shortcuts"), CUSTOM_SHORTCUTS_ID, BINDING_GROUP_USER, NULL);
     }
 
   g_array_free (entries, TRUE);
@@ -819,19 +824,19 @@ section_selection_changed (GtkTreeSelection *selection, gpointer data)
       GPtrArray *keys;
       GtkWidget *shortcut_treeview;
       GtkTreeModel *shortcut_model;
-      gchar *description;
+      gchar *id;
       BindingGroupType group;
       gint i;
 
       gtk_tree_model_get (model, &iter,
-                          SECTION_DESCRIPTION_COLUMN, &description,
+                          SECTION_ID_COLUMN, &id,
                           SECTION_GROUP_COLUMN, &group, -1);
 
-      keys = g_hash_table_lookup (get_hash_for_group (group), description);
+      keys = g_hash_table_lookup (get_hash_for_group (group), id);
       if (keys == NULL)
         {
-          g_warning ("Can't find section %s in sections hash table!!!", description);
-          g_free (description);
+          g_warning ("Can't find section %s in sections hash table.", id);
+          g_free (id);
           return;
         }
 
@@ -855,10 +860,10 @@ section_selection_changed (GtkTreeSelection *selection, gpointer data)
                               -1);
         }
 
-      if (g_str_equal (description, _("Typing")))
+      if (g_str_equal (id, "Typing"))
         fill_xkb_options_shortcuts (shortcut_model);
 
-      g_free (description);
+      g_free (id);
     }
 }
 
@@ -939,7 +944,7 @@ remove_custom_shortcut (GtkTreeModel *model, GtkTreeIter *iter)
   g_strfreev (settings_paths);
   g_object_unref (item);
 
-  keys_array = g_hash_table_lookup (get_hash_for_group (BINDING_GROUP_USER), _("Custom Shortcuts"));
+  keys_array = g_hash_table_lookup (get_hash_for_group (BINDING_GROUP_USER), CUSTOM_SHORTCUTS_ID);
   g_ptr_array_remove (keys_array, item);
 
   gtk_list_store_remove (GTK_LIST_STORE (model), iter);
@@ -1411,11 +1416,11 @@ add_custom_shortcut (GtkTreeView  *tree_view,
       int i;
 
       hash = get_hash_for_group (BINDING_GROUP_USER);
-      keys_array = g_hash_table_lookup (hash, _("Custom Shortcuts"));
+      keys_array = g_hash_table_lookup (hash, CUSTOM_SHORTCUTS_ID);
       if (keys_array == NULL)
         {
           keys_array = g_ptr_array_new ();
-          g_hash_table_insert (hash, g_strdup (_("Custom Shortcuts")), keys_array);
+          g_hash_table_insert (hash, g_strdup (CUSTOM_SHORTCUTS_ID), keys_array);
         }
 
       g_ptr_array_add (keys_array, item);
@@ -1655,7 +1660,7 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
 
   gtk_tree_view_append_column (treeview, column);
 
-  model = gtk_list_store_new (SECTION_N_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
+  model = gtk_list_store_new (SECTION_N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INT);
   sort_model = GTK_TREE_MODEL_SORT (gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (model)));
   gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (sort_model));
   g_object_unref (model);
