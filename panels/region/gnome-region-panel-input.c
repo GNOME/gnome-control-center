@@ -1138,7 +1138,7 @@ go_to_shortcuts (GtkLinkButton *button,
                  CcRegionPanel *panel)
 {
   CcShell *shell;
-  const gchar *argv[] = { "shortcuts", NULL };
+  const gchar *argv[] = { "shortcuts", "Typing", NULL };
   GError *error = NULL;
 
   shell = cc_panel_get_shell (CC_PANEL (panel));
