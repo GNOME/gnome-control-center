@@ -1551,7 +1551,7 @@ start_hotspot (GtkButton *button, NetDeviceWifi *device_wifi)
         dialog = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "hotspot-dialog"));
         gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (window));
 
-        str = g_string_new (_("If you have a connection to the Internet other than wireless, you can use it to share your internet connection with others."));
+        str = g_string_new (_("If you have a connection to the Internet other than wireless, you can set up a wireless hotspot to share the connection with others."));
         g_string_append (str, "\n\n");
 
         if (active_ssid) {
@@ -1559,7 +1559,7 @@ start_hotspot (GtkButton *button, NetDeviceWifi *device_wifi)
                 g_string_append (str, " ");
         }
 
-        g_string_append (str, _("It is not possible to access the internet through your wireless while the hotspot is active."));
+        g_string_append (str, _("It is not possible to access the Internet through your wireless while the hotspot is active."));
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "hotspot-dialog-content"));
         gtk_label_set_markup (GTK_LABEL (widget), str->str);
