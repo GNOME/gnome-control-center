@@ -18,16 +18,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-08-24 18:09+0000\n"
-"PO-Revision-Date: 2012-07-13 15:34+0900\n"
-"Last-Translator: Jiro Matsuzawa <jmatsuzawa@gnome.org>\n"
+"POT-Creation-Date: 2012-09-19 00:52+0000\n"
+"PO-Revision-Date: 2012-09-19 12:25+0000\n"
+"Last-Translator: Noriko Mizumoto <noriko@fedoraproject.org>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 1.0\n"
 
 #. This refers to a slideshow background
 #: ../panels/background/background.ui.h:2
@@ -87,7 +86,7 @@ msgstr "色"
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/cc-background-chooser-dialog.c:280
+#: ../panels/background/cc-background-chooser-dialog.c:286
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
 #: ../panels/user-accounts/um-photo-dialog.c:98
@@ -152,7 +151,7 @@ msgstr "接続"
 msgid "Paired"
 msgstr "ペアリング済"
 
-#: ../panels/bluetooth/bluetooth.ui.h:5 ../panels/wacom/cc-wacom-page.c:754
+#: ../panels/bluetooth/bluetooth.ui.h:5 ../panels/wacom/cc-wacom-page.c:756
 msgid "Type"
 msgstr "種類"
 
@@ -164,7 +163,7 @@ msgstr "アドレス"
 msgid "Mouse and Touchpad Settings"
 msgstr "マウスとタッチパッドの設定"
 
-#: ../panels/bluetooth/bluetooth.ui.h:8 ../panels/universal-access/uap.ui.h:41
+#: ../panels/bluetooth/bluetooth.ui.h:8 ../panels/universal-access/uap.ui.h:38
 msgid "Sound Settings"
 msgstr "サウンドの設定"
 
@@ -186,41 +185,41 @@ msgctxt "Power"
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:285
+#: ../panels/bluetooth/cc-bluetooth-panel.c:290
 msgid "Yes"
 msgstr "はい"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:285
+#: ../panels/bluetooth/cc-bluetooth-panel.c:290
 msgid "No"
 msgstr "いいえ"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:397
+#: ../panels/bluetooth/cc-bluetooth-panel.c:405
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth は無効になっています"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:402
+#: ../panels/bluetooth/cc-bluetooth-panel.c:410
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Bluetooth はハードウェア側のスイッチで無効にされています"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:406
+#: ../panels/bluetooth/cc-bluetooth-panel.c:414
 msgid "No Bluetooth adapters found"
 msgstr "Bluetooth のアダプターが見つかりません"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:539
+#: ../panels/bluetooth/cc-bluetooth-panel.c:547
 msgid "Visibility"
 msgstr "検出可能にする"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:543
+#: ../panels/bluetooth/cc-bluetooth-panel.c:551
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "“%s” を検出可能にする"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:587
+#: ../panels/bluetooth/cc-bluetooth-panel.c:595
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "デバイスの一覧から '%s' を削除しますか?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:589
+#: ../panels/bluetooth/cc-bluetooth-panel.c:597
 msgid "If you remove the device, you will have to set it up again before next use."
 msgstr "デバイスを削除すると、次回利用時には再度設定が必要になります。"
 
@@ -449,7 +448,6 @@ msgstr "ウェブカム"
 
 #: ../panels/color/color.ui.h:3
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
-#: ../panels/universal-access/zoom-options.ui.h:30
 msgid "Color"
 msgstr "色"
 
@@ -557,11 +555,11 @@ msgstr "中国語 (簡体字)"
 
 #: ../panels/common/cc-common-language.c:539
 msgid "Russian"
-msgstr ""
+msgstr "ロシア語"
 
 #: ../panels/common/cc-common-language.c:542
 msgid "Arabic"
-msgstr ""
+msgstr "アラビア語"
 
 #. Add some common regions
 #: ../panels/common/cc-common-language.c:571
@@ -601,7 +599,7 @@ msgid "Select a language"
 msgstr "言語を選択してください"
 
 #: ../panels/common/language-chooser.ui.h:2
-#: ../panels/printers/new-printer-dialog.ui.h:4
+#: ../panels/printers/new-printer-dialog.ui.h:1
 #: ../panels/user-accounts/um-user-panel.c:462
 msgid "_Cancel"
 msgstr "キャンセル(_C)"
@@ -756,61 +754,62 @@ msgctxt "display panel, rotation"
 msgid "180 Degrees"
 msgstr "180度"
 
+#. Keep this string in sync with gnome-desktop/libgnome-desktop/gnome-rr-labeler.c
 #. Translators:  this is the feature where what you see on your laptop's
-#. * screen is the same as your external monitor.  Here, "Mirror" is being
-#. * used as an adjective, not as a verb.  For example, the Spanish
-#. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
+#. * screen is the same as your external projector.  Here, "Mirrored" is being
+#. * used as an adjective.  For example, the Spanish translation could be
+#. * "Pantallas en Espejo".
 #.
-#: ../panels/display/cc-display-panel.c:621
-msgid "Mirror Displays"
-msgstr "ディスプレイをミラー"
+#: ../panels/display/cc-display-panel.c:623
+msgid "Mirrored Displays"
+msgstr "ミラーされたディスプレイ"
 
-#: ../panels/display/cc-display-panel.c:645
+#: ../panels/display/cc-display-panel.c:647
 #: ../panels/display/display-capplet.ui.h:1
 msgid "Monitor"
 msgstr "モニター"
 
-#: ../panels/display/cc-display-panel.c:746
+#: ../panels/display/cc-display-panel.c:748
 #, c-format
 msgid "%d x %d (%s)"
 msgstr "%d x %d (%s)"
 
-#: ../panels/display/cc-display-panel.c:748
+#: ../panels/display/cc-display-panel.c:750
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../panels/display/cc-display-panel.c:1657
+#: ../panels/display/cc-display-panel.c:1659
 msgid "Drag to change primary display."
 msgstr "第 1 ディスプレイを変更するにはドラッグしてください。"
 
-#: ../panels/display/cc-display-panel.c:1715
+#: ../panels/display/cc-display-panel.c:1717
 msgid "Select a monitor to change its properties; drag it to rearrange its placement."
 msgstr "設定を変更するモニターを選んでください。ドラッグして位置を調整してください。"
 
-#: ../panels/display/cc-display-panel.c:2103
+#: ../panels/display/cc-display-panel.c:2105
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/cc-display-panel.c:2105
+#: ../panels/display/cc-display-panel.c:2107
 msgid "%a %l:%M %p"
 msgstr "%p%l:%M (%a)"
 
-#: ../panels/display/cc-display-panel.c:2267
-#: ../panels/display/cc-display-panel.c:2319
+#: ../panels/display/cc-display-panel.c:2269
+#: ../panels/display/cc-display-panel.c:2321
 #, c-format
 msgid "Failed to apply configuration: %s"
 msgstr "設定の適用に失敗しました: %s"
 
-#: ../panels/display/cc-display-panel.c:2347
+#: ../panels/display/cc-display-panel.c:2349
 msgid "Could not save the monitor configuration"
 msgstr "モニターの設定を保存できませんでした"
 
-#: ../panels/display/cc-display-panel.c:2407
+#: ../panels/display/cc-display-panel.c:2409
 msgid "Could not detect displays"
 msgstr "ディスプレイを検出できませんでした"
 
-#: ../panels/display/cc-display-panel.c:2601
+#: ../panels/display/cc-display-panel.c:2603
 msgid "Could not get screen information"
 msgstr "スクリーンの情報を取得できませんでした"
 
@@ -988,7 +987,7 @@ msgid "Software"
 msgstr "ソフトウェア"
 
 #: ../panels/info/cc-info-panel.c:1508
-#: ../panels/keyboard/keyboard-shortcuts.c:1647
+#: ../panels/keyboard/keyboard-shortcuts.c:1667
 msgid "Section"
 msgstr "セクション"
 
@@ -1185,8 +1184,7 @@ msgstr "取り出し"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/keyboard/keyboard-shortcuts.c:858
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Typing"
 msgstr "タイピング"
 
@@ -1313,7 +1311,7 @@ msgstr "ハイコントラストのオン/オフを切り替える"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:241
 #: ../panels/keyboard/cc-keyboard-option.c:347
-#: ../panels/keyboard/keyboard-shortcuts.c:1112
+#: ../panels/keyboard/keyboard-shortcuts.c:1132
 #: ../panels/sound/gvc-mixer-control.c:1834
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
@@ -1322,7 +1320,7 @@ msgstr "無効"
 
 #: ../panels/keyboard/cc-keyboard-option.c:315
 msgid "Alternative Characters Key"
-msgstr ""
+msgstr "代替文字キー"
 
 #: ../panels/keyboard/cc-keyboard-option.c:320
 msgid "Compose Key"
@@ -1372,7 +1370,7 @@ msgstr "速度(_S):"
 
 #. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
-#: ../panels/universal-access/uap.ui.h:52
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Short"
 msgstr "短い"
 
@@ -1388,7 +1386,7 @@ msgstr "押したキーをリピートする際の速さです"
 
 #. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
-#: ../panels/universal-access/uap.ui.h:55
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Long"
 msgstr "長い"
 
@@ -1436,19 +1434,16 @@ msgstr "ショートカットを編集するには、対応する行をクリッ
 msgid "Shortcuts"
 msgstr "ショートカット"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:552
-#: ../panels/keyboard/keyboard-shortcuts.c:560
-#: ../panels/keyboard/keyboard-shortcuts.c:942
-#: ../panels/keyboard/keyboard-shortcuts.c:1414
-#: ../panels/keyboard/keyboard-shortcuts.c:1418
+#: ../panels/keyboard/keyboard-shortcuts.c:557
+#: ../panels/keyboard/keyboard-shortcuts.c:565
 msgid "Custom Shortcuts"
 msgstr "独自のショートカット"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:756
+#: ../panels/keyboard/keyboard-shortcuts.c:776
 msgid "<Unknown Action>"
 msgstr "<不明な操作>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1253
+#: ../panels/keyboard/keyboard-shortcuts.c:1273
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type using this key.\n"
@@ -1457,21 +1452,21 @@ msgstr ""
 "このキーでは入力できないので \"%s\" というショートカットキーは利用できません。\n"
 "[Ctrl] や [Alt] や [Shift] といった修飾キーを併用するようにしてください。"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1285
+#: ../panels/keyboard/keyboard-shortcuts.c:1305
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
 "\"%s\""
 msgstr ""
-"\"%s\" というショートカットは既に登録済です:\n"
+"\"%s\" というショートカットはすでに登録済みです:\n"
 "\"%s\""
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1290
+#: ../panels/keyboard/keyboard-shortcuts.c:1310
 #, c-format
 msgid "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "ショートカットを \"%s\" に変更すると、\"%s\" というショートカットが無効になります。"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1296
+#: ../panels/keyboard/keyboard-shortcuts.c:1316
 msgid "_Reassign"
 msgstr "割り当てる(_R)"
 
@@ -1548,9 +1543,38 @@ msgstr "二指でのスクロール(_F)"
 msgid "C_ontent sticks to fingers"
 msgstr "指を動かす方向にコンテンツが移動 (ナチュラル)(_O)"
 
+#: ../panels/mouse/gnome-mouse-test.c:134
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
-msgid "To test your settings, try to double-click on the face."
-msgstr "設定の確認をする場合は、顔のアイコンをダブルクリックしてみてください。"
+msgid "Try clicking, double clicking, scrolling"
+msgstr "クリック、ダブルクリック、スクロールを試してください"
+
+#: ../panels/mouse/gnome-mouse-test.c:139
+msgid "Five clicks, GEGL time!"
+msgstr "クリック 5 回、GEGLタイム"
+
+#: ../panels/mouse/gnome-mouse-test.c:144
+msgid "Double click, primary button"
+msgstr "ダブルクリック、主ボタン"
+
+#: ../panels/mouse/gnome-mouse-test.c:144
+msgid "Single click, primary button"
+msgstr "シングルクリック、主ボタン"
+
+#: ../panels/mouse/gnome-mouse-test.c:147
+msgid "Double click, middle button"
+msgstr "ダブルクリック、中央ボタン"
+
+#: ../panels/mouse/gnome-mouse-test.c:147
+msgid "Single click, middle button"
+msgstr "シングルクリック、中央ボタン"
+
+#: ../panels/mouse/gnome-mouse-test.c:150
+msgid "Double click, secondary button"
+msgstr "ダブルクリック、副ボタン"
+
+#: ../panels/mouse/gnome-mouse-test.c:150
+msgid "Single click, secondary button"
+msgstr "シングルクリック、副ボタン"
 
 #: ../panels/network/cc-network-panel.c:615
 msgid "Network proxy"
@@ -1587,133 +1611,135 @@ msgid "Network;Wireless;IP;LAN;Proxy;"
 msgstr "Network;Wireless;IP;LAN;Proxy;ネットワーク;無線;プロキシ;"
 
 #: ../panels/network/net-device-mobile.c:222
-#, fuzzy
-#| msgid "Manage online accounts"
 msgid "Add new connection"
-msgstr "オンラインアカウント管理"
+msgstr "新規の接続を追加"
 
 #. Translators: network device speed
 #: ../panels/network/net-device-mobile.c:261
-#: ../panels/network/net-device-wifi.c:700
+#: ../panels/network/net-device-wifi.c:770
 #: ../panels/network/net-device-wired.c:126
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#. TRANSLATORS: this is when the access point is not listed in
-#. *  the dropdown (or hidden) and the user has to select another
-#. *  entry manually
-#: ../panels/network/net-device-wifi.c:196
+#. TRANSLATORS: this is when the access point is not shown
+#. * in the list and the user has to enter the SSID manually
+#.
+#: ../panels/network/net-device-wifi.c:203
 msgid "Connect to a Hidden Network"
-msgstr ""
+msgstr "非表示のネットワークに接続"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/net-device-wifi.c:293
-#: ../panels/network/net-device-wifi.c:473
+#: ../panels/network/net-device-wifi.c:302
+#: ../panels/network/net-device-wifi.c:481
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:297
-#: ../panels/network/net-device-wifi.c:477
+#: ../panels/network/net-device-wifi.c:306
+#: ../panels/network/net-device-wifi.c:485
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:301
+#: ../panels/network/net-device-wifi.c:310
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/net-device-wifi.c:306
+#: ../panels/network/net-device-wifi.c:315
 msgid "Enterprise"
 msgstr "Enterprise"
 
-#. TRANSLATORS: this no (!) WiFi security
-#. short delay
-#: ../panels/network/net-device-wifi.c:312
-#: ../panels/network/net-device-wifi.c:468
-#: ../panels/universal-access/uap.ui.h:8
-#: ../panels/universal-access/zoom-options.ui.h:32
-#: ../panels/wacom/cc-wacom-page.c:118 ../panels/wacom/cc-wacom-page.c:369
+#: ../panels/network/net-device-wifi.c:320
+#: ../panels/network/net-device-wifi.c:476
+msgctxt "Wifi security"
 msgid "None"
-msgstr "何もしない"
+msgstr "なし"
 
-#: ../panels/network/net-device-wifi.c:734
-#, fuzzy
-#| msgid "None"
+#: ../panels/network/net-device-wifi.c:697
+msgid "never"
+msgstr "まったくない"
+
+#: ../panels/network/net-device-wifi.c:707
+msgid "today"
+msgstr "今日"
+
+#: ../panels/network/net-device-wifi.c:709
+msgid "yesterday"
+msgstr "昨日"
+
+#: ../panels/network/net-device-wifi.c:711
+#, c-format
+msgid "%i day ago"
+msgid_plural "%i days ago"
+msgstr[0] "%i 日前"
+
+#. TRANSLATORS: VPN status
+#: ../panels/network/net-device-wifi.c:780
+#: ../panels/network/panel-common.c:277
+msgid "Not connected"
+msgstr "接続していない"
+
+#: ../panels/network/net-device-wifi.c:782
+#: ../panels/network/net-device-wifi.c:2086
+msgid "Out of range"
+msgstr "範囲外"
+
+#: ../panels/network/net-device-wifi.c:813
 msgctxt "Signal strength"
 msgid "None"
-msgstr "何もしない"
+msgstr "なし"
 
-#: ../panels/network/net-device-wifi.c:736
-#, fuzzy
-#| msgctxt "Password strength"
-#| msgid "Weak"
+#: ../panels/network/net-device-wifi.c:815
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "弱い"
 
-#: ../panels/network/net-device-wifi.c:738
+#: ../panels/network/net-device-wifi.c:817
 msgctxt "Signal strength"
 msgid "Ok"
-msgstr ""
+msgstr "OK"
 
-#: ../panels/network/net-device-wifi.c:740
-#, fuzzy
-#| msgctxt "Battery power"
-#| msgid "Good"
+#: ../panels/network/net-device-wifi.c:819
 msgctxt "Signal strength"
 msgid "Good"
-msgstr "充分"
+msgstr "良い"
 
-#: ../panels/network/net-device-wifi.c:742
+#: ../panels/network/net-device-wifi.c:821
 msgctxt "Signal strength"
 msgid "Excellent"
-msgstr ""
+msgstr "非常に良い"
 
-#: ../panels/network/net-device-wifi.c:902
+#: ../panels/network/net-device-wifi.c:1005
 #, c-format
-msgid "Network details for %s including password and any custom configuration will be lost"
-msgstr "ネットワーク %s のパスワードや独自の設定など、詳細な設定は失われます"
+msgid "Network details for %s including password and any custom configuration will be lost."
+msgstr "パスワードや独自の設定など、 %s のネットワーク詳細はすべて失われることになります。"
 
-#: ../panels/network/net-device-wifi.c:913
+#: ../panels/network/net-device-wifi.c:1016
 msgid "Forget"
 msgstr "破棄"
 
-#: ../panels/network/net-device-wifi.c:1438
+#: ../panels/network/net-device-wifi.c:1552
 msgid "If you have a connection to the Internet other than wireless, you can use it to share your internet connection with others."
-msgstr ""
+msgstr "ワイヤレス以外のインターネット接続がある場合には、 他の人とそのインターネット接続を共有することができます。"
 
-#: ../panels/network/net-device-wifi.c:1442
+#: ../panels/network/net-device-wifi.c:1556
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
-msgstr ""
+msgstr "ワイヤレスホットスポットをオンにすると <b>%s</b> の接続が切断されます。"
 
-#: ../panels/network/net-device-wifi.c:1446
+#: ../panels/network/net-device-wifi.c:1560
 msgid "It is not possible to access the internet through your wireless while the hotspot is active."
-msgstr ""
+msgstr "ホットスポットがアクティブな場合、ワイヤレスによるインターネット接続は できません。"
 
-#: ../panels/network/net-device-wifi.c:1512
+#: ../panels/network/net-device-wifi.c:1626
 msgid "Stop hotspot and disconnect any users?"
 msgstr "アクセスポイントを停止し、ユーザーを切断しますか?"
 
-#: ../panels/network/net-device-wifi.c:1515
+#: ../panels/network/net-device-wifi.c:1629
 msgid "_Stop Hotspot"
 msgstr "停止(_S)"
-
-#: ../panels/network/net-device-wifi.c:1580
-#, c-format
-msgid "%i day ago"
-msgid_plural "%i days ago"
-msgstr[0] ""
-
-#: ../panels/network/net-device-wifi.c:1934
-#: ../panels/network/network-wifi.ui.h:19
-#, fuzzy
-#| msgid "Out of toner"
-msgid "Out of range"
-msgstr "トナーが空です"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: ../panels/network/net-proxy.c:67
@@ -1741,31 +1767,31 @@ msgid "Provider"
 msgstr "プロバイダー"
 
 #: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:697 ../panels/network/panel-common.c:699
+#: ../panels/network/panel-common.c:686 ../panels/network/panel-common.c:688
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "IP アドレス"
 
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-wifi.ui.h:7
-#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:695
+#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:684
 msgid "IPv6 Address"
 msgstr "IPv6 アドレス"
 
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-wifi.ui.h:8
-#: ../panels/network/network-wired.ui.h:5
+#: ../panels/network/network-wifi.ui.h:14
+#: ../panels/network/network-wired.ui.h:4
 msgid "Default Route"
 msgstr "デフォルトルート"
 
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-wifi.ui.h:9
-#: ../panels/network/network-wired.ui.h:6
+#: ../panels/network/network-wifi.ui.h:15
+#: ../panels/network/network-wired.ui.h:5
 msgid "DNS"
 msgstr "DNS"
 
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-wired.ui.h:7
+#: ../panels/network/network-wired.ui.h:6
 msgid "_Options..."
 msgstr "オプション(_O)..."
 
@@ -1853,14 +1879,12 @@ msgid "_Configure..."
 msgstr "設定(_C)..."
 
 #: ../panels/network/network-wifi.ui.h:1
-#, fuzzy
-#| msgid "Wireless mouse"
 msgid "Wireless Hotspot"
-msgstr "ワイヤレスマウス"
+msgstr "ワイヤレスホットスポット"
 
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Turn On"
-msgstr ""
+msgstr "オン(_T)"
 
 #. TRANSLATORS: device type
 #: ../panels/network/network-wifi.ui.h:3 ../panels/network/panel-common.c:90
@@ -1872,81 +1896,66 @@ msgid "_Use as Hotspot..."
 msgstr "アクセスポイントとして使用(_U)..."
 
 #: ../panels/network/network-wifi.ui.h:5
+msgid "_Disconnect"
+msgstr "切断(_D)"
+
+#: ../panels/network/network-wifi.ui.h:6
+msgid "_Connect"
+msgstr "接続(_C)"
+
+#: ../panels/network/network-wifi.ui.h:7
+msgid "Last used"
+msgstr "最後の利用"
+
+#: ../panels/network/network-wifi.ui.h:8
 #: ../panels/network/network-wired.ui.h:1
 msgid "Hardware Address"
 msgstr "ハードウェア・アドレス"
 
-#: ../panels/network/network-wifi.ui.h:6
-#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:694
-msgid "IPv4 Address"
-msgstr "IPv4 アドレス"
-
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:9
 msgid "Security"
 msgstr "セキュリティ"
 
-#: ../panels/network/network-wifi.ui.h:11
-#, fuzzy
-#| msgid "Length:"
+#: ../panels/network/network-wifi.ui.h:10
 msgid "Strength"
 msgstr "長さ:"
 
-#: ../panels/network/network-wifi.ui.h:12
-#, fuzzy
-#| msgid "Cursor blink speed"
+#: ../panels/network/network-wifi.ui.h:11
 msgid "Link speed"
-msgstr "カーソルが点滅する速さです"
+msgstr "リンクの速度"
 
-#: ../panels/network/network-wifi.ui.h:13
-#, fuzzy
-#| msgid "Copy Settings..."
-msgid "_Settings..."
-msgstr "設定のコピー..."
-
-#: ../panels/network/network-wifi.ui.h:14
-msgid "Switch off to connect to a wireless network"
-msgstr ""
-
-#: ../panels/network/network-wifi.ui.h:15
-msgid "Network Name"
-msgstr "ネットワーク名"
+#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:683
+msgid "IPv4 Address"
+msgstr "IPv4 アドレス"
 
 #: ../panels/network/network-wifi.ui.h:16
-#, fuzzy
-#| msgid "Connected"
-msgid "Connected Devices"
-msgstr "接続"
-
-#: ../panels/network/network-wifi.ui.h:17
-#, fuzzy
-#| msgid "Security Key"
-msgid "Security type"
-msgstr "セキュリティキー"
-
-#: ../panels/network/network-wifi.ui.h:18
-#, fuzzy
-#| msgid "Security Key"
-msgid "Security key"
-msgstr "セキュリティキー"
-
-#: ../panels/network/network-wifi.ui.h:20
-msgid "Security Key"
-msgstr "セキュリティキー"
-
-#: ../panels/network/network-wifi.ui.h:21
-#, fuzzy
-#| msgctxt "printer state"
-#| msgid "Paused"
-msgid "Last used"
-msgstr "一時停止中"
-
-#: ../panels/network/network-wifi.ui.h:22
 msgid "_Forget Network"
 msgstr "ネットワークを破棄(_F)"
 
-#: ../panels/network/network-wired.ui.h:4
-msgid "Subnet Mask"
-msgstr "サブネットマスク"
+#: ../panels/network/network-wifi.ui.h:17
+msgid "_Settings..."
+msgstr "設定(_S)..."
+
+#: ../panels/network/network-wifi.ui.h:18
+msgid "Switch off to connect to a wireless network"
+msgstr "ワイヤレスネットワークへの接続をオフにする"
+
+#: ../panels/network/network-wifi.ui.h:19
+msgid "Network Name"
+msgstr "ネットワーク名"
+
+#: ../panels/network/network-wifi.ui.h:20
+msgid "Connected Devices"
+msgstr "接続しているデバイス"
+
+#: ../panels/network/network-wifi.ui.h:21
+msgid "Security type"
+msgstr "セキュリティタイプ"
+
+#: ../panels/network/network-wifi.ui.h:22
+msgid "Security key"
+msgstr "セキュリティキー"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:86
@@ -2036,261 +2045,223 @@ msgstr "接続失敗"
 msgid "Status unknown (missing)"
 msgstr "ステータス不明 (見つからない)"
 
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:277
-msgid "Not connected"
-msgstr "接続していない"
-
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:301
-#, fuzzy
-#| msgid "Connection failed"
 msgid "Configuration failed"
-msgstr "接続失敗"
+msgstr "設定に失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:305
-#, fuzzy
-#| msgid "Connection failed"
 msgid "IP configuration failed"
-msgstr "接続失敗"
+msgstr "IP設定に失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:309
-#, fuzzy
-#| msgid "_Configuration URL"
 msgid "IP configuration expired"
-msgstr "設定 URL(_C)"
+msgstr "IP設定の期限切れ"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:313
 msgid "Secrets were required, but not provided"
-msgstr ""
+msgstr "秘密の情報が必要でしたが入力されませんでした"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:317
 msgid "802.1x supplicant disconnected"
-msgstr ""
+msgstr "802.1x サプリカントが切断されました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:321
 msgid "802.1x supplicant configuration failed"
-msgstr ""
+msgstr "802.1x サプリカントの設定に失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:325
 msgid "802.1x supplicant failed"
-msgstr ""
+msgstr "802.1x サプリカントが失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:329
 msgid "802.1x supplicant took too long to authenticate"
-msgstr ""
+msgstr "802.1x サプリカントの認証に時間がかかりすぎました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:333
 msgid "PPP service failed to start"
-msgstr ""
+msgstr "PPPサービスの起動に失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:337
-#, fuzzy
-#| msgid "Disconnected"
 msgid "PPP service disconnected"
-msgstr "切断"
+msgstr "PPPサービスの接続を切断しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:341
-#, fuzzy
-#| msgid "Paired"
 msgid "PPP failed"
-msgstr "ペアリング済"
+msgstr "PPP が失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:345
 msgid "DHCP client failed to start"
-msgstr ""
+msgstr "DHCPクライアントの起動に失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:349
 msgid "DHCP client error"
-msgstr ""
+msgstr "DHCPクライアントにエラーが発生しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:353
-#, fuzzy
-#| msgid "Connection failed"
 msgid "DHCP client failed"
-msgstr "接続失敗"
+msgstr "DHCPクライアントが失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:357
 msgid "Shared connection service failed to start"
-msgstr ""
+msgstr "共有接続サービスの起動に失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:361
-#, fuzzy
-#| msgid "Connection failed"
 msgid "Shared connection service failed"
-msgstr "接続失敗"
+msgstr "共有接続サービスが失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:365
 msgid "AutoIP service failed to start"
-msgstr ""
+msgstr "AutoIP サービスの起動に失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:369
 msgid "AutoIP service error"
-msgstr ""
+msgstr "AutoIP サービスにエラーが発生しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:373
-#, fuzzy
-#| msgid "Authentication failed"
 msgid "AutoIP service failed"
-msgstr "認証に失敗しました"
+msgstr "AutoIP サービスが失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:377
 msgid "Line busy"
-msgstr ""
+msgstr "回線が使用中です"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:381
 msgid "No dial tone"
-msgstr ""
+msgstr "発信音がありません"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:385
 msgid "No carrier could be established"
-msgstr ""
+msgstr "キャリアの確立ができませんでした"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:389
 msgid "Dialing request timed out"
-msgstr ""
+msgstr "発信要求がタイムアウトしました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:393
 msgid "Dialing attempt failed"
-msgstr ""
+msgstr "発信の試行に失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:397
-#, fuzzy
-#| msgid "Authentication failed"
 msgid "Modem initialization failed"
-msgstr "認証に失敗しました"
+msgstr "モデムの初期化に失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:401
-#, fuzzy
-#| msgid "Failed to delete user"
 msgid "Failed to select the specified APN"
-msgstr "ユーザーの削除に失敗しました"
+msgstr "指定されたAPNの選択に失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:405
 msgid "Not searching for networks"
-msgstr ""
+msgstr "ネットワーク検索をしていません"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:409
-#, fuzzy
-#| msgid "Network settings"
 msgid "Network registration denied"
-msgstr "ネットワークの設定"
+msgstr "ネットワーク登録が拒否されました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:413
 msgid "Network registration timed out"
-msgstr ""
+msgstr "ネットワーク登録がタイムアウトしました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:417
 msgid "Failed to register with the requested network"
-msgstr ""
+msgstr "要求されたネットワークへの登録に失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:421
 msgid "PIN check failed"
-msgstr ""
+msgstr "PINチェックに失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:425
 msgid "Firmware for the device may be missing"
-msgstr ""
+msgstr "このデバイスのファームウェアがないようです"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:429
-#, fuzzy
-#| msgid "Connection failed"
 msgid "Connection disappeared"
-msgstr "接続失敗"
+msgstr "接続が消失しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:433
 msgid "Carrier/link changed"
-msgstr ""
+msgstr "キャリア／リンクが変更されました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:437
 msgid "Existing connection was assumed"
-msgstr ""
+msgstr "既存の接続とみなされました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:441
 msgid "Modem not found"
-msgstr ""
+msgstr "モデムが見つかりませんでした"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:445
-#, fuzzy
-#| msgid "Connection failed"
 msgid "Bluetooth connection failed"
-msgstr "接続失敗"
+msgstr "Bluetooth接続に失敗しました"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:449
 msgid "SIM Card not inserted"
-msgstr ""
+msgstr "SIMカードが挿入されていません"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:453
 msgid "SIM Pin required"
-msgstr ""
+msgstr "SIMのPIN番号が必要です"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:457
 msgid "SIM Puk required"
-msgstr ""
+msgstr "SIMのPUKが必要です"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:461
-#, fuzzy
-#| msgctxt "Password strength"
-#| msgid "Strong"
 msgid "SIM wrong"
-msgstr "強い"
+msgstr "SIMが違います"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:465
 msgid "InfiniBand device does not support connected mode"
-msgstr ""
+msgstr "InfiniBandデバイスは接続モードに対応していません"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:469
-#, fuzzy
-#| msgid "Connection failed"
 msgid "Connection dependency failed"
-msgstr "接続失敗"
+msgstr "接続が依存するデバイス等の準備ができません"
 
-#. translators: This is the title of the "Add Account" dialogue.
-#. * The title is not visible when using GNOME Shell
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:252
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:263
+#. translators: This is the title of the "Add Account" dialog.
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:249
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "アカウントの追加"
@@ -2356,17 +2327,17 @@ msgstr "オンラインアカウントの追加"
 msgid "Adding an account allows your applications to access it for documents, mail, contacts, calendar, chat and more."
 msgstr "アカウントを追加すると、お使いのアプリケーションがそのアカウントのドキュメントやメール、連絡先、カレンダー、チャットなどにアクセスできるようになります。"
 
-#: ../panels/power/cc-power-panel.c:165
+#: ../panels/power/cc-power-panel.c:157
 msgid "Unknown time"
 msgstr "不明"
 
-#: ../panels/power/cc-power-panel.c:171
+#: ../panels/power/cc-power-panel.c:163
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i 分"
 
-#: ../panels/power/cc-power-panel.c:183
+#: ../panels/power/cc-power-panel.c:175
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -2374,171 +2345,175 @@ msgstr[0] "%i 時間"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:191
+#: ../panels/power/cc-power-panel.c:183
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:192
+#: ../panels/power/cc-power-panel.c:184
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "時間"
 
-#: ../panels/power/cc-power-panel.c:193
+#: ../panels/power/cc-power-panel.c:185
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "分"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:236
+#: ../panels/power/cc-power-panel.c:228
 #, c-format
 msgid "Charging - %s until fully charged"
 msgstr "充電中 - フル充電まで %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:244
+#: ../panels/power/cc-power-panel.c:236
 #, c-format
 msgid "Caution low battery, %s remaining"
 msgstr "バッテリー残量が少ないので注意 - 残り %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:252
+#: ../panels/power/cc-power-panel.c:244
 #, c-format
 msgid "Using battery power - %s remaining"
 msgstr "バッテリー電源の使用中 - 残り %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:269
+#: ../panels/power/cc-power-panel.c:261
 msgid "Charging"
 msgstr "充電中"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:274
+#: ../panels/power/cc-power-panel.c:266
 msgid "Using battery power"
 msgstr "バッテリー電源の使用中"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:278
+#: ../panels/power/cc-power-panel.c:270
 msgid "Charging - fully charged"
 msgstr "充電中 - フル充電されています"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:282
+#: ../panels/power/cc-power-panel.c:274
 msgid "Empty"
 msgstr "空"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:350
+#: ../panels/power/cc-power-panel.c:342
 #, c-format
 msgid "Caution low UPS, %s remaining"
 msgstr "UPS 電源の残量低下に注意 - 残り %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:356
+#: ../panels/power/cc-power-panel.c:348
 #, c-format
 msgid "Using UPS power - %s remaining"
 msgstr "UPS 電源の使用中 - 残り %s"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:374
+#: ../panels/power/cc-power-panel.c:366
 msgid "Caution low UPS"
 msgstr "UPS 電源の残量低下に注意"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:379
+#: ../panels/power/cc-power-panel.c:371
 msgid "Using UPS power"
 msgstr "UPS 電源の使用中"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:431
+#: ../panels/power/cc-power-panel.c:423
 msgid "Your secondary battery is fully charged"
 msgstr "第2バッテリーはフル充電されています"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:435
+#: ../panels/power/cc-power-panel.c:427
 msgid "Your secondary battery is empty"
 msgstr "第2バッテリーは空です"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:518
+#: ../panels/power/cc-power-panel.c:510
 msgid "Wireless mouse"
 msgstr "ワイヤレスマウス"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:522
+#: ../panels/power/cc-power-panel.c:514
 msgid "Wireless keyboard"
 msgstr "ワイヤレスキーボード"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:526
+#: ../panels/power/cc-power-panel.c:518
 msgid "Uninterruptible power supply"
 msgstr "無停電電源装置"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:530
+#: ../panels/power/cc-power-panel.c:522
 msgid "Personal digital assistant"
 msgstr "携帯情報端末"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:534
+#: ../panels/power/cc-power-panel.c:526
 msgid "Cellphone"
 msgstr "携帯電話"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:538
+#: ../panels/power/cc-power-panel.c:530
 msgid "Media player"
 msgstr "音楽プレイヤー"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:542
+#: ../panels/power/cc-power-panel.c:534
 msgid "Tablet"
 msgstr "タブレット"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:546
+#: ../panels/power/cc-power-panel.c:538
 msgid "Computer"
 msgstr "コンピューター"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:550
+#: ../panels/power/cc-power-panel.c:542
 msgid "Battery"
 msgstr "バッテリー"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:561
+#: ../panels/power/cc-power-panel.c:553
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "充電中"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:568
+#: ../panels/power/cc-power-panel.c:560
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "注意"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:573
+#: ../panels/power/cc-power-panel.c:565
 msgctxt "Battery power"
 msgid "Low"
 msgstr "少ない"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:578
+#: ../panels/power/cc-power-panel.c:570
 msgctxt "Battery power"
 msgid "Good"
 msgstr "充分"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:583
+#: ../panels/power/cc-power-panel.c:575
 msgctxt "Battery power"
 msgid "Charging - fully charged"
 msgstr "充電中 - フル充電されています"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:587
+#: ../panels/power/cc-power-panel.c:579
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "空"
+
+#: ../panels/power/cc-power-panel.c:1075
+msgid "Tip: <a href=\"screen\">screen brightness</a> affects how much power is used"
+msgstr "ヒント: <a href=\"screen\">画面の明るさ</a> は使用する電力量に影響します。"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -2598,183 +2573,188 @@ msgid "When power is _critically low"
 msgstr "電力がひどく低下したときの動作(_C)"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:582
+#: ../panels/printers/cc-printers-panel.c:589
 msgid "Low on toner"
 msgstr "トナーの残量が少ないです"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:584
+#: ../panels/printers/cc-printers-panel.c:591
 msgid "Out of toner"
 msgstr "トナーが空です"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:587
+#: ../panels/printers/cc-printers-panel.c:594
 msgid "Low on developer"
 msgstr "現像液が少ないです"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:590
+#: ../panels/printers/cc-printers-panel.c:597
 msgid "Out of developer"
 msgstr "現像液が空です"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:592
+#: ../panels/printers/cc-printers-panel.c:599
 msgid "Low on a marker supply"
 msgstr "インクが少なくなっています"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:594
+#: ../panels/printers/cc-printers-panel.c:601
 msgid "Out of a marker supply"
 msgstr "インクが切れています"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:596
+#: ../panels/printers/cc-printers-panel.c:603
 msgid "Open cover"
 msgstr "カバーが開いています"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:598
+#: ../panels/printers/cc-printers-panel.c:605
 msgid "Open door"
 msgstr "扉が開いています"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:600
+#: ../panels/printers/cc-printers-panel.c:607
 msgid "Low on paper"
 msgstr "紙が少なくなっています"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:602
+#: ../panels/printers/cc-printers-panel.c:609
 msgid "Out of paper"
 msgstr "紙が空です"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:604
+#: ../panels/printers/cc-printers-panel.c:611
 msgctxt "printer state"
 msgid "Offline"
 msgstr "オフライン"
 
 #. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:606
+#: ../panels/printers/cc-printers-panel.c:613
 msgctxt "printer state"
 msgid "Paused"
 msgstr "一時停止中"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:608
+#: ../panels/printers/cc-printers-panel.c:615
 msgid "Waste receptacle almost full"
 msgstr "廃インクタンクがもう少しでいっぱいです"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:610
+#: ../panels/printers/cc-printers-panel.c:617
 msgid "Waste receptacle full"
 msgstr "廃インクタンクがいっぱいです"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:612
+#: ../panels/printers/cc-printers-panel.c:619
 msgid "The optical photo conductor is near end of life"
 msgstr "感光体の寿命が近づいています"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:614
+#: ../panels/printers/cc-printers-panel.c:621
 msgid "The optical photo conductor is no longer functioning"
 msgstr "感光体の寿命です"
 
+#. Translators: Printer's state (printer is being configured right now)
+#: ../panels/printers/cc-printers-panel.c:724
+msgctxt "printer state"
+msgid "Configuring"
+msgstr "設定中"
+
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:765
+#: ../panels/printers/cc-printers-panel.c:781
 msgctxt "printer state"
 msgid "Ready"
 msgstr "準備完了"
 
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:769
+#: ../panels/printers/cc-printers-panel.c:785
 msgctxt "printer state"
 msgid "Processing"
 msgstr "処理中"
 
 #. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:773
+#: ../panels/printers/cc-printers-panel.c:789
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "停止中"
 
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:892
+#: ../panels/printers/cc-printers-panel.c:906
 msgid "Toner Level"
 msgstr "トナーの量"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:895
+#: ../panels/printers/cc-printers-panel.c:909
 msgid "Ink Level"
 msgstr "インクの量"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:898
+#: ../panels/printers/cc-printers-panel.c:912
 msgid "Supply Level"
 msgstr "サプライの量"
 
+#. Translators: Printer's state (printer is being installed right now)
+#: ../panels/printers/cc-printers-panel.c:930
+msgctxt "printer state"
+msgid "Installing"
+msgstr "インストール中"
+
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:1009
+#: ../panels/printers/cc-printers-panel.c:1107
 msgid "No printers available"
 msgstr "利用できるプリンターがありません"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1285
+#: ../panels/printers/cc-printers-panel.c:1411
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
 msgstr[0] "%u 個がアクティブ"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1581
+#: ../panels/printers/cc-printers-panel.c:1731
 msgid "Failed to add new printer."
 msgstr "新しいプリンターを追加できませんでした。"
 
-#: ../panels/printers/cc-printers-panel.c:1739
-#, fuzzy
-#| msgid "Select ICC Profile File"
+#: ../panels/printers/cc-printers-panel.c:1896
 msgid "Select PPD File"
-msgstr "ICC プロファイルの選択"
+msgstr "PPDファイルの選択"
 
-#: ../panels/printers/cc-printers-panel.c:1748
+#: ../panels/printers/cc-printers-panel.c:1905
 msgid "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
-msgstr ""
+msgstr "PostScript Printer Description ファイル(*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2053
-#, fuzzy
-#| msgid "No local printers found"
+#: ../panels/printers/cc-printers-panel.c:2210
 msgid "No suitable driver found"
-msgstr "接続されているプリンターが見つかりませんでした"
+msgstr "適切なドライバーが見つかりませんでした"
 
-#: ../panels/printers/cc-printers-panel.c:2122
+#: ../panels/printers/cc-printers-panel.c:2279
 msgid "Searching for preferred drivers..."
-msgstr ""
+msgstr "推奨ドライバーの検索中..."
 
-#: ../panels/printers/cc-printers-panel.c:2137
+#: ../panels/printers/cc-printers-panel.c:2294
 msgid "Select from database..."
-msgstr ""
+msgstr "データベースから選択..."
 
-#: ../panels/printers/cc-printers-panel.c:2146
-#, fuzzy
-#| msgid "Browse Files..."
+#: ../panels/printers/cc-printers-panel.c:2303
 msgid "Provide PPD File..."
-msgstr "ファイルを参照..."
+msgstr "PPDファイルを指定..."
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2284
-#: ../panels/printers/cc-printers-panel.c:2298
+#: ../panels/printers/cc-printers-panel.c:2454
+#: ../panels/printers/cc-printers-panel.c:2477
 msgid "Test page"
 msgstr "テストページ"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2668
+#: ../panels/printers/cc-printers-panel.c:2880
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "ui ファイルを読み込めませんでした: %s"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:1
-#: ../panels/printers/pp-new-printer-dialog.c:155
 msgid "Printers"
 msgstr "プリンター"
 
@@ -2791,19 +2771,17 @@ msgstr "Printer;Queue;Print;Paper;Ink;Toner;プリンター;キュー;印刷;紙
 #: ../panels/printers/options-dialog.ui.h:1
 #: ../panels/printers/ppd-selection-dialog.ui.h:1
 msgid " "
-msgstr ""
+msgstr " "
 
 #: ../panels/printers/jobs-dialog.ui.h:2
 #: ../panels/printers/options-dialog.ui.h:4
 msgid "Close"
-msgstr ""
+msgstr "閉じる"
 
 #. Translators: This tab contains list of active print jobs of the selected printer
 #: ../panels/printers/jobs-dialog.ui.h:4
-#, fuzzy
-#| msgid "Active Print Jobs"
 msgid "Active Jobs"
-msgstr "アクティブな印刷ジョブ"
+msgstr "アクティブなジョブ"
 
 #: ../panels/printers/jobs-dialog.ui.h:5
 msgid "Resume Printing"
@@ -2817,88 +2795,78 @@ msgstr "印刷を一時停止"
 msgid "Cancel Print Job"
 msgstr "印刷ジョブをキャンセル"
 
-#: ../panels/printers/new-printer-dialog.ui.h:1
-msgid "Add a New Printer"
-msgstr "新しいプリンターの追加"
-
 #: ../panels/printers/new-printer-dialog.ui.h:2
-msgid "A_ddress:"
-msgstr "アドレス(_D):"
-
-#: ../panels/printers/new-printer-dialog.ui.h:3
-msgid "_Search by Address"
-msgstr "アドレスで検索(_S)"
-
-#: ../panels/printers/new-printer-dialog.ui.h:5
-#: ../panels/user-accounts/um-account-dialog.c:1017
+#: ../panels/user-accounts/um-account-dialog.c:1044
 msgid "_Add"
 msgstr "追加(_A)"
 
+#: ../panels/printers/new-printer-dialog.ui.h:3
+msgid "Add a New Printer"
+msgstr "新しいプリンターの追加"
+
+#: ../panels/printers/new-printer-dialog.ui.h:4
+msgid "Search for network printers or filter result"
+msgstr "ネットワークプリンターの検索または結果をフィルター"
+
 #: ../panels/printers/options-dialog.ui.h:2
-#, fuzzy
-#| msgid "_Options"
 msgid "Options"
-msgstr "オプション(_O)"
+msgstr "オプション"
 
 #: ../panels/printers/options-dialog.ui.h:3
-#, fuzzy
-#| msgid "Locations..."
 msgid "Loading options..."
-msgstr "場所..."
+msgstr "オプションをロード中..."
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1016
+#: ../panels/user-accounts/um-account-dialog.c:1043
 msgid "Cancel"
 msgstr "キャンセル"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
 msgid "Loading drivers database..."
-msgstr ""
+msgstr "ドライバーのデータベースをロード中..."
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:5
-#, fuzzy
-#| msgid "Selecting finger"
 msgid "Select Printer Driver"
-msgstr "指の選択"
+msgstr "プリンタードライバーの選択"
 
 #. Translators: this is an option of "Two Sided"
 #: ../panels/printers/pp-ipp-option-widget.c:65
 #: ../panels/printers/pp-ppd-option-widget.c:69
 msgid "One Sided"
-msgstr ""
+msgstr "片面"
 
 #. Translators: this is an option of "Two Sided"
 #: ../panels/printers/pp-ipp-option-widget.c:67
 #: ../panels/printers/pp-ppd-option-widget.c:71
 msgid "Long Edge (Standard)"
-msgstr ""
+msgstr "長辺とじ(標準)"
 
 #. Translators: this is an option of "Two Sided"
 #: ../panels/printers/pp-ipp-option-widget.c:69
 #: ../panels/printers/pp-ppd-option-widget.c:73
 msgid "Short Edge (Flip)"
-msgstr ""
+msgstr "短辺とじ(フリップ)"
 
 #. Translators: this is an option of "Orientation"
 #: ../panels/printers/pp-ipp-option-widget.c:71
 msgid "Portrait"
-msgstr ""
+msgstr "縦方向"
 
 #. Translators: this is an option of "Orientation"
 #: ../panels/printers/pp-ipp-option-widget.c:73
 msgid "Landscape"
-msgstr ""
+msgstr "横方向"
 
 #. Translators: this is an option of "Orientation"
 #: ../panels/printers/pp-ipp-option-widget.c:75
 msgid "Reverse landscape"
-msgstr ""
+msgstr "横方向(逆向き)"
 
 #. Translators: this is an option of "Orientation"
 #: ../panels/printers/pp-ipp-option-widget.c:77
 msgid "Reverse portrait"
-msgstr ""
+msgstr "縦方向(逆向き)"
 
 #. Translators: Job's state (job is waiting to be printed)
 #: ../panels/printers/pp-jobs-dialog.c:143
@@ -2959,144 +2927,74 @@ msgid "Time"
 msgstr "時刻"
 
 #: ../panels/printers/pp-jobs-dialog.c:484
-#, fuzzy, c-format
-#| msgid "Active Print Jobs"
+#, c-format
 msgid "%s Active Jobs"
-msgstr "アクティブな印刷ジョブ"
+msgstr "%s個のアクティブなジョブ"
 
-#: ../panels/printers/pp-new-printer-dialog.c:659
-msgid "Getting devices..."
-msgstr "デバイスの取得中..."
-
-#. Translators: No localy connected printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1242
-msgid "No local printers found"
-msgstr "接続されているプリンターが見つかりませんでした"
-
-#. Translators: No network printers were found
-#: ../panels/printers/pp-new-printer-dialog.c:1255
-msgid "No network printers found"
-msgstr "ネットワークプリンターが見つかりませんでした"
-
-#: ../panels/printers/pp-new-printer-dialog.c:1347
-msgid "FirewallD is not running. Network printer detection needs services mdns, ipp, ipp-client and samba-client enabled on firewall."
-msgstr "ファイアウォールデーモンが起動していません。ネットワークプリンターを検出するには、mDNS、IPP、IPP クライアント、SMB クライアントがファイアウォールで利用可能でなければなりません。"
-
-#. Translators: Column of devices which can be installed
-#: ../panels/printers/pp-new-printer-dialog.c:1375
-#: ../panels/printers/pp-new-printer-dialog.c:1380
-msgid "Devices"
-msgstr "デバイス"
-
-#. Translators: Local means local printers
-#: ../panels/printers/pp-new-printer-dialog.c:1405
-msgctxt "printer type"
-msgid "Local"
-msgstr "ローカル"
-
-#. Translators: Network means network printers
-#: ../panels/printers/pp-new-printer-dialog.c:1407
-msgctxt "printer type"
-msgid "Network"
-msgstr "ネットワーク"
-
-#. Translators: Device types column (network or local)
-#: ../panels/printers/pp-new-printer-dialog.c:1448
-msgid "Device types"
-msgstr "デバイスの種類"
-
-#. Translators: Name of job which makes printer to autoconfigure itself
-#: ../panels/printers/pp-new-printer-dialog.c:1768
-msgid "Automatic configuration"
-msgstr "自動設定"
-
-#: ../panels/printers/pp-new-printer-dialog.c:1791
-msgid "Opening firewall for mDNS connections"
-msgstr "mDNS 接続にファイアウォールを開放"
-
-#: ../panels/printers/pp-new-printer-dialog.c:1800
-msgid "Opening firewall for Samba connections"
-msgstr "Samba 接続にファイアウォールを開放"
-
-#: ../panels/printers/pp-new-printer-dialog.c:1809
-msgid "Opening firewall for IPP connections"
-msgstr "IPP 接続にファイアウォールを開放"
+#. Translators: No printers were found
+#: ../panels/printers/pp-new-printer-dialog.c:1291
+msgid "No printers detected."
+msgstr "プリンターを検出できません"
 
 #: ../panels/printers/pp-options-dialog.c:82
 msgid "Two Sided"
-msgstr ""
+msgstr "両面"
 
 #: ../panels/printers/pp-options-dialog.c:83
-#, fuzzy
-#| msgid "VPN Type"
 msgid "Paper Type"
-msgstr "VPN の種類"
+msgstr "用紙の種類"
 
 #: ../panels/printers/pp-options-dialog.c:84
-#, fuzzy
-#| msgid "Input Sources"
 msgid "Paper Source"
-msgstr "入力ソース"
+msgstr "給紙元"
 
 #: ../panels/printers/pp-options-dialog.c:85
-#, fuzzy
-#| msgid "Output"
 msgid "Output Tray"
-msgstr "出力"
+msgstr "出力トレイ"
 
 #: ../panels/printers/pp-options-dialog.c:86
-#, fuzzy
-#| msgid "_Resolution"
 msgid "Resolution"
-msgstr "解像度(_R)"
+msgstr "解像度"
 
 #: ../panels/printers/pp-options-dialog.c:87
 msgid "GhostScript pre-filtering"
-msgstr ""
+msgstr "GhostScriptのプレフィルタリング"
 
 #. Translators: This option sets number of pages printed on one sheet
 #: ../panels/printers/pp-options-dialog.c:533
 msgid "Pages per side"
-msgstr ""
+msgstr "片面のページ数"
 
 #. Translators: This option sets whether to print on both sides of paper
 #: ../panels/printers/pp-options-dialog.c:545
 msgid "Two-sided"
-msgstr ""
+msgstr "両面"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
 #: ../panels/printers/pp-options-dialog.c:557
-#, fuzzy
-#| msgid "Left-Handed Orientation"
 msgid "Orientation"
-msgstr "左手用"
+msgstr "向き"
 
 #. Translators: "General" tab contains general printer options
 #: ../panels/printers/pp-options-dialog.c:654
-#, fuzzy
-#| msgid "General"
 msgctxt "Printer Option Group"
 msgid "General"
-msgstr "全般"
+msgstr "汎用"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
 #: ../panels/printers/pp-options-dialog.c:657
 msgctxt "Printer Option Group"
 msgid "Page Setup"
-msgstr ""
+msgstr "ページ設定"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
 #: ../panels/printers/pp-options-dialog.c:660
-#, fuzzy
-#| msgid "Printer Options"
 msgctxt "Printer Option Group"
 msgid "Installable Options"
-msgstr "プリンターのオプション"
+msgstr "インストール可能なオプション"
 
 #. Translators: "Job" tab contains settings for jobs
 #: ../panels/printers/pp-options-dialog.c:663
-#, fuzzy
-#| msgid "Jobs"
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "ジョブ"
@@ -3105,12 +3003,10 @@ msgstr "ジョブ"
 #: ../panels/printers/pp-options-dialog.c:666
 msgctxt "Printer Option Group"
 msgid "Image Quality"
-msgstr ""
+msgstr "画質"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
 #: ../panels/printers/pp-options-dialog.c:669
-#, fuzzy
-#| msgid "Color"
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "色"
@@ -3119,32 +3015,26 @@ msgstr "色"
 #: ../panels/printers/pp-options-dialog.c:672
 msgctxt "Printer Option Group"
 msgid "Finishing"
-msgstr ""
+msgstr "表面処理"
 
 #. Translators: "Advanced" tab contains all others settings
 #: ../panels/printers/pp-options-dialog.c:675
-#, fuzzy
-#| msgctxt "print job"
-#| msgid "Canceled"
 msgctxt "Printer Option Group"
 msgid "Advanced"
-msgstr "キャンセル"
+msgstr "高度"
 
 #. Translators: Options of given printer (e.g. "MyPrinter Options")
-#: ../panels/printers/pp-options-dialog.c:934
-#, fuzzy, c-format
-#| msgid "_Options"
+#: ../panels/printers/pp-options-dialog.c:936
+#, c-format
 msgid "%s Options"
-msgstr "オプション(_O)"
+msgstr "%s個のオプション"
 
 #. Translators: this is an option of "Paper Source"
 #: ../panels/printers/pp-ppd-option-widget.c:75
 #: ../panels/printers/pp-ppd-option-widget.c:77
 #: ../panels/printers/pp-ppd-option-widget.c:85
-#, fuzzy
-#| msgid "Select"
 msgid "Auto Select"
-msgstr "選択"
+msgstr "自動選択"
 
 #. Translators: this is an option of "Paper Source"
 #. Translators: this is an option of "Resolution"
@@ -3152,44 +3042,36 @@ msgstr "選択"
 #: ../panels/printers/pp-ppd-option-widget.c:81
 #: ../panels/printers/pp-ppd-option-widget.c:83
 #: ../panels/printers/pp-ppd-option-widget.c:87
-#, fuzzy
-#| msgid "Default"
 msgid "Printer Default"
-msgstr "デフォルト"
+msgstr "プリンターのデフォルト"
 
 #. Translators: this is an option of "GhostScript"
 #: ../panels/printers/pp-ppd-option-widget.c:89
 msgid "Embed GhostScript fonts only"
-msgstr ""
+msgstr "内蔵GhostScriptフォントのみ"
 
 #. Translators: this is an option of "GhostScript"
 #: ../panels/printers/pp-ppd-option-widget.c:91
 msgid "Convert to PS level 1"
-msgstr ""
+msgstr "PSレベル1に変換"
 
 #. Translators: this is an option of "GhostScript"
 #: ../panels/printers/pp-ppd-option-widget.c:93
 msgid "Convert to PS level 2"
-msgstr ""
+msgstr "PSレベル2に変換"
 
 #. Translators: this is an option of "GhostScript"
 #: ../panels/printers/pp-ppd-option-widget.c:95
-#, fuzzy
-#| msgid "No profile"
 msgid "No pre-filtering"
-msgstr "プロファイルなし"
+msgstr "プレフィルタリングなし"
 
 #. Translators: Name of column showing printer manufacturers
 #: ../panels/printers/pp-ppd-selection-dialog.c:230
-#, fuzzy
-#| msgid "Manufacturer:"
 msgid "Manufacturers"
-msgstr "製造元:"
+msgstr "製造元"
 
 #. Translators: Name of column showing printer drivers
 #: ../panels/printers/pp-ppd-selection-dialog.c:242
-#, fuzzy
-#| msgid "Driver"
 msgid "Drivers"
 msgstr "ドライバー"
 
@@ -3231,25 +3113,23 @@ msgstr "型式"
 
 #: ../panels/printers/printers.ui.h:14
 msgid "page 1"
-msgstr ""
+msgstr "ページ1"
 
 #: ../panels/printers/printers.ui.h:15
 msgid "label"
-msgstr ""
+msgstr "ラベル"
 
 #: ../panels/printers/printers.ui.h:16
 msgid "page 2"
-msgstr ""
+msgstr "ページ2"
 
 #: ../panels/printers/printers.ui.h:17
-#, fuzzy
-#| msgid "Getting devices..."
 msgid "Setting new driver..."
-msgstr "デバイスの取得中..."
+msgstr "新規ドライバーの設定中..."
 
 #: ../panels/printers/printers.ui.h:18
 msgid "page 3"
-msgstr ""
+msgstr "ページ3"
 
 #. Translators: This button executes command which prints test page.
 #: ../panels/printers/printers.ui.h:20
@@ -3304,20 +3184,20 @@ msgstr "入力ソースの選択"
 msgid "Select an input source to add"
 msgstr "追加する入力ソースを選択"
 
-#: ../panels/region/gnome-region-panel-system.c:330
+#: ../panels/region/gnome-region-panel-system.c:470
 msgid "The login screen, system accounts and new user accounts use the system-wide Region and Language settings."
 msgstr "ログイン画面、システムアカウント、および新規のユーザーアカウントでは、システムワイドの地域と言語の設定が使用されます。"
 
-#: ../panels/region/gnome-region-panel-system.c:335
+#: ../panels/region/gnome-region-panel-system.c:475
 #: ../panels/region/gnome-region-panel.ui.h:31
 msgid "The login screen, system accounts and new user accounts use the system-wide Region and Language settings. You may change the system settings to match yours."
 msgstr "ログイン画面、システムアカウント、および新規のユーザーアカウントでは、システムワイドの地域と言語の設定が使用されます。システム設定をユーザー設定に合わせることができます。"
 
-#: ../panels/region/gnome-region-panel-system.c:338
+#: ../panels/region/gnome-region-panel-system.c:478
 msgid "Copy Settings"
 msgstr "設定のコピー"
 
-#: ../panels/region/gnome-region-panel-system.c:341
+#: ../panels/region/gnome-region-panel-system.c:481
 #: ../panels/region/gnome-region-panel.ui.h:38
 msgid "Copy Settings..."
 msgstr "設定のコピー..."
@@ -3512,7 +3392,7 @@ msgstr "場所..."
 
 #: ../panels/screen/screen.ui.h:17
 msgid "Show _notifications when locked"
-msgstr ""
+msgstr "ロック時に通知を表示する(_N)"
 
 #: ../panels/screen/screen.ui.h:18
 msgid "Lock"
@@ -3834,6 +3714,10 @@ msgstr "GOK"
 msgid "OnBoard"
 msgstr "OnBoard"
 
+#: ../panels/universal-access/uap.ui.h:8
+msgid "None"
+msgstr "何もしない"
+
 #: ../panels/universal-access/uap.ui.h:10
 #, no-c-format
 msgid "75%"
@@ -3875,236 +3759,222 @@ msgid "Larger"
 msgstr "特大"
 
 #: ../panels/universal-access/uap.ui.h:21
-msgid "Dasher"
-msgstr "Dasher"
-
-#: ../panels/universal-access/uap.ui.h:22
-msgid "Nomon"
-msgstr "Nomon"
-
-#: ../panels/universal-access/uap.ui.h:23
-msgid "Caribou"
-msgstr "Caribou"
-
-#: ../panels/universal-access/uap.ui.h:24
 msgid "High Contrast"
 msgstr "ハイコントラスト"
 
-#: ../panels/universal-access/uap.ui.h:25
-#, fuzzy
-#| msgid "Beep when Caps and Num Lock are used"
+#: ../panels/universal-access/uap.ui.h:22
 msgid "Beep on Caps and Num Lock"
-msgstr "Caps Lock か Num Lock が有効になっていればビープ音を鳴らす"
+msgstr "Caps Lock と Num Lock を切り替えるとビープ音を鳴らす"
 
-#: ../panels/universal-access/uap.ui.h:26
+#: ../panels/universal-access/uap.ui.h:23
 msgid "Options..."
 msgstr "オプション..."
 
-#: ../panels/universal-access/uap.ui.h:27
+#: ../panels/universal-access/uap.ui.h:24
 msgid "Screen Reader"
 msgstr "スクリーンリーダー"
 
-#: ../panels/universal-access/uap.ui.h:28
+#: ../panels/universal-access/uap.ui.h:25
 msgid "Turn on or off:"
 msgstr "オン/オフ の切り替え:"
 
-#: ../panels/universal-access/uap.ui.h:29
+#: ../panels/universal-access/uap.ui.h:26
 msgctxt "universal access, zoom"
 msgid "Zoom"
 msgstr "ズーム"
 
-#: ../panels/universal-access/uap.ui.h:30
+#: ../panels/universal-access/uap.ui.h:27
 msgid "Zoom in:"
 msgstr "ズームイン:"
 
-#: ../panels/universal-access/uap.ui.h:31
+#: ../panels/universal-access/uap.ui.h:28
 msgid "Zoom out:"
 msgstr "ズームアウト:"
 
-#: ../panels/universal-access/uap.ui.h:32
+#: ../panels/universal-access/uap.ui.h:29
 msgid "Large Text"
 msgstr "大きな文字"
 
-#: ../panels/universal-access/uap.ui.h:33
+#: ../panels/universal-access/uap.ui.h:30
 msgid "Seeing"
 msgstr "視覚"
 
-#: ../panels/universal-access/uap.ui.h:34
+#: ../panels/universal-access/uap.ui.h:31
 msgid "Visual Alerts"
 msgstr "視覚警告"
 
-#: ../panels/universal-access/uap.ui.h:35
+#: ../panels/universal-access/uap.ui.h:32
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "警告音が鳴った場合に視覚的に警告を表示する"
 
-#: ../panels/universal-access/uap.ui.h:36
+#: ../panels/universal-access/uap.ui.h:33
 msgid "Flash the window title"
 msgstr "ウィンドウのタイトルバーをひらめかせる"
 
-#: ../panels/universal-access/uap.ui.h:37
+#: ../panels/universal-access/uap.ui.h:34
 msgid "Flash the entire screen"
 msgstr "画面全体をひらめかせる"
 
-#: ../panels/universal-access/uap.ui.h:38
+#: ../panels/universal-access/uap.ui.h:35
 msgid "Closed Captioning"
 msgstr "クローズドキャプション"
 
-#: ../panels/universal-access/uap.ui.h:39
+#: ../panels/universal-access/uap.ui.h:36
 msgid "Display a textual description of speech and sounds"
 msgstr "音声に関する説明を文章で表示する"
 
-#: ../panels/universal-access/uap.ui.h:40
+#: ../panels/universal-access/uap.ui.h:37
 msgid "_Test flash"
 msgstr "動作確認(_T)"
 
-#: ../panels/universal-access/uap.ui.h:42
+#: ../panels/universal-access/uap.ui.h:39
 msgid "Hearing"
 msgstr "聴覚"
 
-#: ../panels/universal-access/uap.ui.h:43
+#: ../panels/universal-access/uap.ui.h:40
 msgid "On Screen Keyboard"
 msgstr "オンスクリーンキーボード"
 
-#: ../panels/universal-access/uap.ui.h:44
+#: ../panels/universal-access/uap.ui.h:41
 msgid "Sticky Keys"
 msgstr "固定キー"
 
-#: ../panels/universal-access/uap.ui.h:45
+#: ../panels/universal-access/uap.ui.h:42
 msgid "Treats a sequence of modifier keys as a key combination"
 msgstr "修飾キーに続いてキーを押下したらそのキーと修飾キーを同時に押下したものと扱う"
 
-#: ../panels/universal-access/uap.ui.h:46
+#: ../panels/universal-access/uap.ui.h:43
 msgid "_Disable if two keys are pressed together"
 msgstr "同時に 2 つのキーを押したら無効にする(_D)"
 
-#: ../panels/universal-access/uap.ui.h:47
+#: ../panels/universal-access/uap.ui.h:44
 msgid "Beep when a _modifer key is pressed"
 msgstr "修飾キーを押したらビープ音を鳴らす(_M)"
 
-#: ../panels/universal-access/uap.ui.h:48
+#: ../panels/universal-access/uap.ui.h:45
 msgid "Slow Keys"
 msgstr "スローキー"
 
-#: ../panels/universal-access/uap.ui.h:49
+#: ../panels/universal-access/uap.ui.h:46
 msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgstr "キーを押下してから入力と認識されるまでに一定の間隔を設定する"
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:47
 msgid "A_cceptance delay:"
 msgstr "認識するまでの間隔(_C):"
 
-#: ../panels/universal-access/uap.ui.h:53
+#: ../panels/universal-access/uap.ui.h:50
 msgid "Slow keys typing delay"
 msgstr "スローキーの入力間隔"
 
 #. This string is part of a line of checkboxes: Beep when a key is [ ] pressed  [ ] accepted  [ ] rejected
-#: ../panels/universal-access/uap.ui.h:57
+#: ../panels/universal-access/uap.ui.h:54
 msgid "Beep when a key is"
 msgstr "キーが次のときビープ音を鳴らす: "
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:59
+#: ../panels/universal-access/uap.ui.h:56
 msgid "pressed"
 msgstr "押された"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:58
 msgid "accepted"
 msgstr "認識された"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:60
 msgid "rejected"
 msgstr "拒否された"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Bounce Keys"
 msgstr "バウンスキー"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Ignores fast duplicate keypresses"
 msgstr "同じキーを繰り返し押した場合は無視する"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Acc_eptance delay:"
 msgstr "認識するまでの間隔(_E):"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Bounce keys typing delay"
 msgstr "バウンスキーの入力間隔"
 
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Beep when a key is _rejected"
 msgstr "キー入力が拒否されたらビープ音を鳴らす(_R)"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Enable by Keyboard"
 msgstr "キーボードによる有効化"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "アクセシビリティ機能のオン/オフをキーボードで切り替える"
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Mouse Keys"
 msgstr "マウスキー"
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Control the pointer using the keypad"
 msgstr "キーパッドでポインターを制御する"
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Video Mouse"
 msgstr "ビデオマウス"
 
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Control the pointer using the video camera."
 msgstr "ビデオカメラでポインターを制御する。"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Simulated Secondary Click"
 msgstr "副ボタンのクリックの代替"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:74
 msgid "Trigger a secondary click by holding down the primary button"
-msgstr "第一ボタンを押したままにすると第二ボタンのクリックとみなす"
+msgstr "主ボタンを押したままにすると副ボタンのクリックとみなす"
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Secondary click delay"
 msgstr "副ボタンのクリックの間隔"
 
 # See also ja.po of mousetweak
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:76
 msgid "Hover Click"
 msgstr "ホバークリック"
 
-#: ../panels/universal-access/uap.ui.h:80
+#: ../panels/universal-access/uap.ui.h:77
 msgid "Trigger a click when the pointer hovers"
 msgstr "ポインターの移動を停止したらクリック動作を行う"
 
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:78
 msgid "D_elay:"
 msgstr "認識するまでの間隔(_E):"
 
-#: ../panels/universal-access/uap.ui.h:82
+#: ../panels/universal-access/uap.ui.h:79
 msgid "Motion _threshold:"
 msgstr "ジェスチャーのしきい値(_T):"
 
 #. small threshold
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:81
 msgid "Small"
 msgstr "小さい"
 
 #. large threshold
-#: ../panels/universal-access/uap.ui.h:86
+#: ../panels/universal-access/uap.ui.h:83
 msgid "Large"
 msgstr "大きい"
 
-#: ../panels/universal-access/uap.ui.h:87
+#: ../panels/universal-access/uap.ui.h:84
 msgid "Mouse Settings"
 msgstr "マウスの設定"
 
-#: ../panels/universal-access/uap.ui.h:88
+#: ../panels/universal-access/uap.ui.h:85
 msgid "Pointing and Clicking"
 msgstr "ポインター操作とクリック"
 
@@ -4246,26 +4116,36 @@ msgstr "明るさ:"
 msgid "Contrast:"
 msgstr "コントラスト:"
 
-#. long delay
-#: ../panels/universal-access/zoom-options.ui.h:34
+#: ../panels/universal-access/zoom-options.ui.h:30
+msgctxt "Zoom Grayscale"
+msgid "Color"
+msgstr "色"
+
+#: ../panels/universal-access/zoom-options.ui.h:31
+msgctxt "Zoom Grayscale"
+msgid "None"
+msgstr "白黒"
+
+#: ../panels/universal-access/zoom-options.ui.h:32
+msgctxt "Zoom Grayscale"
 msgid "Full"
-msgstr "フルカラー"
+msgstr "カラー"
 
 #. short delay
-#: ../panels/universal-access/zoom-options.ui.h:36
+#: ../panels/universal-access/zoom-options.ui.h:34
 msgid "Low"
 msgstr "低い"
 
 #. long delay
-#: ../panels/universal-access/zoom-options.ui.h:38
+#: ../panels/universal-access/zoom-options.ui.h:36
 msgid "High"
 msgstr "高い"
 
-#: ../panels/universal-access/zoom-options.ui.h:39
+#: ../panels/universal-access/zoom-options.ui.h:37
 msgid "Color Effects:"
 msgstr "色の設定:"
 
-#: ../panels/universal-access/zoom-options.ui.h:40
+#: ../panels/universal-access/zoom-options.ui.h:38
 msgid "Color Effects"
 msgstr "色の設定"
 
@@ -4288,16 +4168,12 @@ msgid "Add account"
 msgstr "アカウントの追加"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:4
-#, fuzzy
-#| msgid "My Account"
 msgid "_Local Account"
-msgstr "自分のアカウント"
+msgstr "ローカルのアカウント(_L)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:5
-#, fuzzy
-#| msgid "_Fingerprint Login"
 msgid "_Enterprise Login"
-msgstr "指紋認証ログイン(_F)"
+msgstr "エンタープライズのログイン(_E)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
 msgid "_Username"
@@ -4313,14 +4189,12 @@ msgid "Account _Type"
 msgstr "アカウントの種類(_T)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:9
-#, fuzzy
-#| msgid "R_otation"
 msgid "_Domain"
-msgstr "回転(_O)"
+msgstr "ドメイン(_D)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:10
 msgid "_Login Name"
-msgstr ""
+msgstr "ログイン名(_L)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:11
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
@@ -4329,20 +4203,15 @@ msgstr "パスワード(_P)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:12
 msgid "Tip: Enterprise domain or realm name"
-msgstr ""
+msgstr "ヒント: エンタープライズドメイン名または領域名"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
-#, fuzzy
-#| msgid "Connection"
 msgid "C_ontinue"
-msgstr "接続"
+msgstr "続ける(_O)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:14
-#, fuzzy
-#| msgctxt "Account type"
-#| msgid "Administrator"
 msgid "Domain Administrator Login"
-msgstr "管理者"
+msgstr "ドメイン管理者のログイン"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:15
 msgid ""
@@ -4350,20 +4219,17 @@ msgid ""
 "enrolled in the domain. Please have your network administrator\n"
 "type their domain password here."
 msgstr ""
+"エンタープライズのログインを使用するには、 このコンピューターを\n"
+"ドメインに登録する必要があります。ネットワーク管理者にドメインの\n"
+"パスワード入力を行ってもらってください。"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:18
-#, fuzzy
-#| msgctxt "Account type"
-#| msgid "Administrator"
 msgid "Administrator _Name"
-msgstr "管理者"
+msgstr "管理者名(_N)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:19
-#, fuzzy
-#| msgctxt "Account type"
-#| msgid "Administrator"
 msgid "Administrator Password"
-msgstr "管理者"
+msgstr "管理者のパスワード"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Left thumb"
@@ -4468,10 +4334,8 @@ msgid "_New password"
 msgstr "新しいパスワード(_N)"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:10
-#, fuzzy
-#| msgid "Set a password now"
 msgid "Generate a password"
-msgstr "いまパスワードを設定する"
+msgstr "パスワードの生成"
 
 #: ../panels/user-accounts/data/password-dialog.ui.h:11
 msgid "Fair"
@@ -4563,16 +4427,12 @@ msgid "_Language"
 msgstr "言語(_L)"
 
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
-#, fuzzy
-#| msgid "Manage online accounts"
 msgid "Manage user accounts"
-msgstr "オンラインアカウント管理"
+msgstr "ユーザーアカウントの管理"
 
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:2
-#, fuzzy
-#| msgid "Authentication required"
 msgid "Authentication is required to change user data"
-msgstr "認証が要求されました"
+msgstr "ユーザーのデータを変更するには認証が必要になります"
 
 #: ../panels/user-accounts/pw-utils.c:94
 #: ../panels/user-accounts/um-password-dialog.c:569
@@ -4583,7 +4443,7 @@ msgstr "短すぎる"
 #: ../panels/user-accounts/pw-utils.c:99
 msgctxt "Password strength"
 msgid "Not good enough"
-msgstr ""
+msgstr "不十分"
 
 #: ../panels/user-accounts/pw-utils.c:108
 #: ../panels/user-accounts/um-password-dialog.c:570
@@ -4632,7 +4492,7 @@ msgstr "新旧のパスワードが酷似しています"
 #: ../panels/user-accounts/run-passwd.c:519
 #, c-format
 msgid "The new password has already been used recently."
-msgstr "新しいパスワードは最近、既に使われています。"
+msgstr "新しいパスワードは最近使用したものです。"
 
 #: ../panels/user-accounts/run-passwd.c:522
 #, c-format
@@ -4659,30 +4519,26 @@ msgstr "新しいパスワードには十分な種類の文字が含まれてい
 msgid "Unknown error"
 msgstr "原因不明のエラー"
 
-#: ../panels/user-accounts/um-account-dialog.c:175
-#, fuzzy
-#| msgid "Select an account"
+#: ../panels/user-accounts/um-account-dialog.c:180
 msgid "Failed to add account"
-msgstr "アカウントの選択"
+msgstr "アカウントの追加に失敗しました"
 
-#: ../panels/user-accounts/um-account-dialog.c:366
-#: ../panels/user-accounts/um-account-dialog.c:405
-#, fuzzy
-#| msgid "Failed to create user"
+#: ../panels/user-accounts/um-account-dialog.c:378
+#: ../panels/user-accounts/um-account-dialog.c:419
 msgid "Failed to register account"
-msgstr "ユーザーの作成に失敗しました"
+msgstr "アカウントの登録に失敗しました"
 
-#: ../panels/user-accounts/um-account-dialog.c:530
+#: ../panels/user-accounts/um-account-dialog.c:551
 msgid "No supported way to authenticate with this domain"
-msgstr ""
+msgstr "このドメインで認証を行う方法はサポートされていません"
 
-#: ../panels/user-accounts/um-account-dialog.c:582
+#: ../panels/user-accounts/um-account-dialog.c:605
 msgid "Failed to join domain"
-msgstr ""
+msgstr "ドメインの参加に失敗しました"
 
-#: ../panels/user-accounts/um-account-dialog.c:635
+#: ../panels/user-accounts/um-account-dialog.c:662
 msgid "Failed to log into domain"
-msgstr ""
+msgstr "ドメインへのログインに失敗しました"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:139
 msgid "You are not allowed to access the device. Contact your system administrator."
@@ -4765,10 +4621,8 @@ msgid "Summary"
 msgstr "概要"
 
 #: ../panels/user-accounts/um-password-dialog.c:96
-#, fuzzy
-#| msgid "Set a password now"
 msgid "_Generate a password"
-msgstr "いまパスワードを設定する"
+msgstr "パスワードの生成(_G)"
 
 #: ../panels/user-accounts/um-password-dialog.c:150
 msgid "Please choose another password."
@@ -4827,39 +4681,38 @@ msgstr "他の画像も参照..."
 msgid "Used by %s"
 msgstr "%s に使用されています"
 
-#: ../panels/user-accounts/um-realm-manager.c:368
+#: ../panels/user-accounts/um-realm-manager.c:379
 #, c-format
 msgid "No such domain or realm found"
-msgstr ""
+msgstr "そのようなドメインや領域は見つかりませんでした"
 
-#: ../panels/user-accounts/um-realm-manager.c:743
+#: ../panels/user-accounts/um-realm-manager.c:780
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
-msgstr ""
+msgstr "%2$s ドメインに %1$s としてログインできません"
 
-#: ../panels/user-accounts/um-realm-manager.c:748
+#: ../panels/user-accounts/um-realm-manager.c:785
 msgid "Invalid password, please try again"
-msgstr ""
+msgstr "無効なパスワードです、やり直してください"
 
-#: ../panels/user-accounts/um-realm-manager.c:752
+#: ../panels/user-accounts/um-realm-manager.c:789
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
-msgstr ""
+msgstr "%sドメインに接続できませんでした: %s"
 
 #: ../panels/user-accounts/um-user-manager.c:466
 #, c-format
 msgid "A user with name '%s' already exists."
-msgstr "'%s' という名のユーザーはすでに存在しています。"
+msgstr "'%s' という名前のユーザーはすでに存在します。"
 
 #: ../panels/user-accounts/um-user-manager.c:473
-#, fuzzy, c-format
-#| msgid "A user with the username '%s' already exists"
+#, c-format
 msgid "No user with the name '%s' exists."
-msgstr "'%s' というユーザーはすでに存在しています"
+msgstr "'%s' という名前のユーザーは存在しません。"
 
 #: ../panels/user-accounts/um-user-manager.c:631
 msgid "This user does not exist."
-msgstr "このユーザーは存在していません。"
+msgstr "このユーザーは存在しません。"
 
 #: ../panels/user-accounts/um-user-panel.c:371
 msgid "Failed to delete user"
@@ -4910,26 +4763,26 @@ msgctxt "Password mode"
 msgid "None"
 msgstr "なし"
 
-#: ../panels/user-accounts/um-user-panel.c:869
+#: ../panels/user-accounts/um-user-panel.c:871
 msgid "Failed to contact the accounts service"
 msgstr "アカウントサービスの接続に失敗しました"
 
-#: ../panels/user-accounts/um-user-panel.c:871
+#: ../panels/user-accounts/um-user-panel.c:873
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "AccountService がインストールされ、有効になっているか確認してください。"
 
-#: ../panels/user-accounts/um-user-panel.c:911
+#: ../panels/user-accounts/um-user-panel.c:913
 msgid ""
 "To make changes,\n"
 "click the * icon first"
 msgstr "変更するには、まず * アイコンをクリックしてください"
 
-#: ../panels/user-accounts/um-user-panel.c:949
+#: ../panels/user-accounts/um-user-panel.c:951
 msgid "Create a user account"
 msgstr "新規ユーザーアカウントの作成"
 
-#: ../panels/user-accounts/um-user-panel.c:960
-#: ../panels/user-accounts/um-user-panel.c:1271
+#: ../panels/user-accounts/um-user-panel.c:962
+#: ../panels/user-accounts/um-user-panel.c:1273
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -4937,12 +4790,12 @@ msgstr ""
 "ユーザーアカウントを作成するには、\n"
 "まず * アイコンをクリックしてください"
 
-#: ../panels/user-accounts/um-user-panel.c:969
+#: ../panels/user-accounts/um-user-panel.c:971
 msgid "Delete the selected user account"
 msgstr "選択したユーザーアカウントを削除します"
 
-#: ../panels/user-accounts/um-user-panel.c:981
-#: ../panels/user-accounts/um-user-panel.c:1276
+#: ../panels/user-accounts/um-user-panel.c:983
+#: ../panels/user-accounts/um-user-panel.c:1278
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -4950,18 +4803,18 @@ msgstr ""
 "選択したユーザーアカウントを削除するには、\n"
 "まず * アイコンをクリックしてください"
 
-#: ../panels/user-accounts/um-user-panel.c:1174
+#: ../panels/user-accounts/um-user-panel.c:1176
 msgid "My Account"
 msgstr "自分のアカウント"
 
-#: ../panels/user-accounts/um-user-panel.c:1184
+#: ../panels/user-accounts/um-user-panel.c:1186
 msgid "Other Accounts"
 msgstr "他のアカウント"
 
 #: ../panels/user-accounts/um-utils.c:512
 #, c-format
 msgid "A user with the username '%s' already exists"
-msgstr "'%s' というユーザーはすでに存在しています"
+msgstr "'%s' というユーザーはすでに存在します"
 
 #: ../panels/user-accounts/um-utils.c:516
 #, c-format
@@ -5025,38 +4878,43 @@ msgstr "単一画面にマッピング"
 msgid "%d of %d"
 msgstr "%d / %d"
 
+#: ../panels/wacom/cc-wacom-page.c:118 ../panels/wacom/cc-wacom-page.c:371
+msgctxt "Wacom action-type"
+msgid "None"
+msgstr "なし"
+
 #: ../panels/wacom/cc-wacom-page.c:119
+msgctxt "Wacom action-type"
 msgid "Send Keystroke"
-msgstr ""
+msgstr "キー入力の送信"
 
 #: ../panels/wacom/cc-wacom-page.c:120
-#, fuzzy
-#| msgid "Switch Modes"
+msgctxt "Wacom action-type"
 msgid "Switch Monitor"
-msgstr "スイッチモード"
+msgstr "モニターの切り替え"
 
-#: ../panels/wacom/cc-wacom-page.c:599
+#: ../panels/wacom/cc-wacom-page.c:601
 msgid "Up"
 msgstr "上"
 
-#: ../panels/wacom/cc-wacom-page.c:599
+#: ../panels/wacom/cc-wacom-page.c:601
 msgid "Down"
 msgstr "下"
 
-#: ../panels/wacom/cc-wacom-page.c:636
+#: ../panels/wacom/cc-wacom-page.c:638
 msgid "Switch Modes"
 msgstr "スイッチモード"
 
-#: ../panels/wacom/cc-wacom-page.c:722
+#: ../panels/wacom/cc-wacom-page.c:724
 #: ../panels/wacom/cc-wacom-stylus-page.c:376
 msgid "Button"
 msgstr "ボタン"
 
-#: ../panels/wacom/cc-wacom-page.c:775
+#: ../panels/wacom/cc-wacom-page.c:777
 msgid "Action"
 msgstr "操作"
 
-#: ../panels/wacom/cc-wacom-page.c:884
+#: ../panels/wacom/cc-wacom-page.c:886
 msgid "Display Mapping"
 msgstr "画面のマッピング"
 
@@ -5314,6 +5172,65 @@ msgstr "Preferences;Settings;設定"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "すべての設定"
+
+#~ msgid "Security Key"
+#~ msgstr "セキュリティキー"
+
+#~ msgid "Subnet Mask"
+#~ msgstr "サブネットマスク"
+
+#~ msgid "A_ddress:"
+#~ msgstr "アドレス(_D):"
+
+#~ msgid "_Search by Address"
+#~ msgstr "アドレスで検索(_S)"
+
+#~ msgid "Getting devices..."
+#~ msgstr "デバイスの取得中..."
+
+#~ msgid "No local printers found"
+#~ msgstr "接続されているプリンターが見つかりませんでした"
+
+#~ msgid "FirewallD is not running. Network printer detection needs services mdns, ipp, ipp-client and samba-client enabled on firewall."
+#~ msgstr "ファイアウォールデーモンが起動していません。ネットワークプリンターを検出するには、mDNS、IPP、IPP クライアント、SMB クライアントがファイアウォールで利用可能でなければなりません。"
+
+#~ msgid "Devices"
+#~ msgstr "デバイス"
+
+#~ msgctxt "printer type"
+#~ msgid "Local"
+#~ msgstr "ローカル"
+
+#~ msgctxt "printer type"
+#~ msgid "Network"
+#~ msgstr "ネットワーク"
+
+#~ msgid "Device types"
+#~ msgstr "デバイスの種類"
+
+#~ msgid "Automatic configuration"
+#~ msgstr "自動設定"
+
+#~ msgid "Opening firewall for mDNS connections"
+#~ msgstr "mDNS 接続にファイアウォールを開放"
+
+#~ msgid "Opening firewall for Samba connections"
+#~ msgstr "Samba 接続にファイアウォールを開放"
+
+#~ msgid "Opening firewall for IPP connections"
+#~ msgstr "IPP 接続にファイアウォールを開放"
+
+#~ msgid "To test your settings, try to double-click on the face."
+#~ msgstr "設定の確認をする場合は、顔のアイコンをダブルクリックしてみてください。"
+
+#~ msgid "Dasher"
+#~ msgstr "Dasher"
+
+#~ msgid "Nomon"
+#~ msgstr "Nomon"
+
+#~ msgid "Caribou"
+#~ msgstr "Caribou"
 
 #~ msgid "Co_nnector:"
 #~ msgstr "コネクター(_N):"
