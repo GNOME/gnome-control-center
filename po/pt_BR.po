@@ -29,9 +29,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-17 12:28+0000\n"
-"PO-Revision-Date: 2012-09-17 10:05-0200\n"
-"Last-Translator: Djavan Fagundes <djavan@comum.org>\n"
+"POT-Creation-Date: 2012-09-19 06:38+0000\n"
+"PO-Revision-Date: 2012-09-19 03:46-0300\n"
+"Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -1026,7 +1026,7 @@ msgid "Software"
 msgstr "Software"
 
 #: ../panels/info/cc-info-panel.c:1508
-#: ../panels/keyboard/keyboard-shortcuts.c:1647
+#: ../panels/keyboard/keyboard-shortcuts.c:1667
 msgid "Section"
 msgstr "Seção"
 
@@ -1227,7 +1227,6 @@ msgstr "Ejetar"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/keyboard/keyboard-shortcuts.c:858
 #: ../panels/universal-access/uap.ui.h:68
 msgid "Typing"
 msgstr "Digitação"
@@ -1355,7 +1354,7 @@ msgstr "Ativar ou desativar alto contraste"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:241
 #: ../panels/keyboard/cc-keyboard-option.c:347
-#: ../panels/keyboard/keyboard-shortcuts.c:1112
+#: ../panels/keyboard/keyboard-shortcuts.c:1132
 #: ../panels/sound/gvc-mixer-control.c:1834
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
@@ -1482,19 +1481,16 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "Atalhos"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:552
-#: ../panels/keyboard/keyboard-shortcuts.c:560
-#: ../panels/keyboard/keyboard-shortcuts.c:942
-#: ../panels/keyboard/keyboard-shortcuts.c:1414
-#: ../panels/keyboard/keyboard-shortcuts.c:1418
+#: ../panels/keyboard/keyboard-shortcuts.c:557
+#: ../panels/keyboard/keyboard-shortcuts.c:565
 msgid "Custom Shortcuts"
 msgstr "Atalhos personalizados"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:756
+#: ../panels/keyboard/keyboard-shortcuts.c:776
 msgid "<Unknown Action>"
 msgstr "<Ação desconhecida>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1253
+#: ../panels/keyboard/keyboard-shortcuts.c:1273
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1505,7 +1501,7 @@ msgstr ""
 "usando esta tecla.\n"
 "Por favor, tente usar uma tecla como Control, Alt ou Shift simultaneamente."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1285
+#: ../panels/keyboard/keyboard-shortcuts.c:1305
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1514,14 +1510,14 @@ msgstr ""
 "O atalho \"%s\" já está sendo usado por\n"
 "\"%s\""
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1290
+#: ../panels/keyboard/keyboard-shortcuts.c:1310
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr ""
 "Se você reatribuir o atalho para \"%s\", o atalho \"%s\" será desativado."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1296
+#: ../panels/keyboard/keyboard-shortcuts.c:1316
 msgid "_Reassign"
 msgstr "_Reatribuir"
 
@@ -1770,9 +1766,6 @@ msgstr "Excelente"
 
 #: ../panels/network/net-device-wifi.c:1005
 #, c-format
-#| msgid ""
-#| "Network details for %s including password and any custom configuration "
-#| "will be lost"
 msgid ""
 "Network details for %s including password and any custom configuration will "
 "be lost."
@@ -1849,19 +1842,19 @@ msgid "IP Address"
 msgstr "Endereço IP"
 
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wifi.ui.h:13
 #: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:684
 msgid "IPv6 Address"
 msgstr "Endereço IPv6"
 
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wifi.ui.h:14
 #: ../panels/network/network-wired.ui.h:4
 msgid "Default Route"
 msgstr "Rota padrão"
 
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-wifi.ui.h:14
+#: ../panels/network/network-wifi.ui.h:15
 #: ../panels/network/network-wired.ui.h:5
 msgid "DNS"
 msgstr "DNS"
@@ -1972,61 +1965,64 @@ msgid "_Use as Hotspot..."
 msgstr "_Usar como Hotspot..."
 
 #: ../panels/network/network-wifi.ui.h:5
-#| msgid "Connected"
+msgid "_Disconnect"
+msgstr "_Desconectar"
+
+#: ../panels/network/network-wifi.ui.h:6
 msgid "_Connect"
 msgstr "_Conectado"
 
-#: ../panels/network/network-wifi.ui.h:6
+#: ../panels/network/network-wifi.ui.h:7
 msgid "Last used"
 msgstr "Último uso"
 
-#: ../panels/network/network-wifi.ui.h:7
+#: ../panels/network/network-wifi.ui.h:8
 #: ../panels/network/network-wired.ui.h:1
 msgid "Hardware Address"
 msgstr "Endereço físico"
 
-#: ../panels/network/network-wifi.ui.h:8
+#: ../panels/network/network-wifi.ui.h:9
 msgid "Security"
 msgstr "Segurança"
 
-#: ../panels/network/network-wifi.ui.h:9
+#: ../panels/network/network-wifi.ui.h:10
 msgid "Strength"
 msgstr "Força"
 
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:11
 msgid "Link speed"
 msgstr "Velocidade do link"
 
-#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wifi.ui.h:12
 #: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:683
 msgid "IPv4 Address"
 msgstr "Endereço IPv4"
 
-#: ../panels/network/network-wifi.ui.h:15
+#: ../panels/network/network-wifi.ui.h:16
 msgid "_Forget Network"
 msgstr "_Esquecer rede"
 
-#: ../panels/network/network-wifi.ui.h:16
+#: ../panels/network/network-wifi.ui.h:17
 msgid "_Settings..."
 msgstr "_Configurações.. "
 
-#: ../panels/network/network-wifi.ui.h:17
+#: ../panels/network/network-wifi.ui.h:18
 msgid "Switch off to connect to a wireless network"
 msgstr "Desligando a conexão para se conectar a uma rede sem fio"
 
-#: ../panels/network/network-wifi.ui.h:18
+#: ../panels/network/network-wifi.ui.h:19
 msgid "Network Name"
 msgstr "Nome da rede"
 
-#: ../panels/network/network-wifi.ui.h:19
+#: ../panels/network/network-wifi.ui.h:20
 msgid "Connected Devices"
 msgstr "Dispositivos conectados"
 
-#: ../panels/network/network-wifi.ui.h:20
+#: ../panels/network/network-wifi.ui.h:21
 msgid "Security type"
 msgstr "Tipo de segurança"
 
-#: ../panels/network/network-wifi.ui.h:21
+#: ../panels/network/network-wifi.ui.h:22
 msgid "Security key"
 msgstr "Chave de segurança"
 
@@ -2595,6 +2591,13 @@ msgstr "Carregando - completamente carregada"
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Vazia"
+
+#: ../panels/power/cc-power-panel.c:1075
+msgid ""
+"Tip: <a href=\"screen\">screen brightness</a> affects how much power is used"
+msgstr ""
+"Dica: o <a href=\"screen\">brilho da tela</a> afeta o quanto de energia é "
+"usado"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -4318,10 +4321,6 @@ msgid "Domain Administrator Login"
 msgstr "Login de administrador de domínio"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:15
-#| msgid ""
-#| "In order to use enterpise logins, this computer needs to be\n"
-#| "enrolled in the domain. Please have your network administrator\n"
-#| "type their domain password here."
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -4903,17 +4902,17 @@ msgctxt "Password mode"
 msgid "None"
 msgstr "Nenhum"
 
-#: ../panels/user-accounts/um-user-panel.c:869
+#: ../panels/user-accounts/um-user-panel.c:871
 msgid "Failed to contact the accounts service"
 msgstr "Falhou ao contactar o serviço de contas"
 
-#: ../panels/user-accounts/um-user-panel.c:871
+#: ../panels/user-accounts/um-user-panel.c:873
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Por favor, certifique-se de que o Serviço de Contas esteja instalado "
 "corretamente."
 
-#: ../panels/user-accounts/um-user-panel.c:911
+#: ../panels/user-accounts/um-user-panel.c:913
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -4921,12 +4920,12 @@ msgstr ""
 "Para fazer alterações,\n"
 "clique no ícone * primeiro"
 
-#: ../panels/user-accounts/um-user-panel.c:949
+#: ../panels/user-accounts/um-user-panel.c:951
 msgid "Create a user account"
 msgstr "Cria uma conta de usuário"
 
-#: ../panels/user-accounts/um-user-panel.c:960
-#: ../panels/user-accounts/um-user-panel.c:1271
+#: ../panels/user-accounts/um-user-panel.c:962
+#: ../panels/user-accounts/um-user-panel.c:1273
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -4934,12 +4933,12 @@ msgstr ""
 "Para criar uma conta de usuário,\n"
 "clique primeiro no ícone *"
 
-#: ../panels/user-accounts/um-user-panel.c:969
+#: ../panels/user-accounts/um-user-panel.c:971
 msgid "Delete the selected user account"
 msgstr "Exclui a conta de usuário selecionada"
 
-#: ../panels/user-accounts/um-user-panel.c:981
-#: ../panels/user-accounts/um-user-panel.c:1276
+#: ../panels/user-accounts/um-user-panel.c:983
+#: ../panels/user-accounts/um-user-panel.c:1278
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -4947,11 +4946,11 @@ msgstr ""
 "Para excluir a conta de usuário selecionada,\n"
 "clique primeiro no ícone *"
 
-#: ../panels/user-accounts/um-user-panel.c:1174
+#: ../panels/user-accounts/um-user-panel.c:1176
 msgid "My Account"
 msgstr "Minha conta"
 
-#: ../panels/user-accounts/um-user-panel.c:1184
+#: ../panels/user-accounts/um-user-panel.c:1186
 msgid "Other Accounts"
 msgstr "Outras contas"
 
