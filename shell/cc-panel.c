@@ -212,7 +212,7 @@ cc_panel_class_init (CcPanelClass *klass)
                               "Argument vector",
                               "Additional arguments passed on the command line",
                               G_TYPE_STRV,
-                              G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT_ONLY);
+                              G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS);
   g_object_class_install_property (object_class, PROP_ARGV, pspec);
 }
 
