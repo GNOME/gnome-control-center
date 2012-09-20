@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-13 14:48+0000\n"
-"PO-Revision-Date: 2012-09-14 09:42+0200\n"
+"POT-Creation-Date: 2012-09-18 22:53+0000\n"
+"PO-Revision-Date: 2012-09-20 20:56+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -1010,7 +1010,7 @@ msgid "Software"
 msgstr "Програми"
 
 #: ../panels/info/cc-info-panel.c:1508
-#: ../panels/keyboard/keyboard-shortcuts.c:1647
+#: ../panels/keyboard/keyboard-shortcuts.c:1667
 msgid "Section"
 msgstr "Одељак"
 
@@ -1212,7 +1212,6 @@ msgstr "Избаци"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/keyboard/keyboard-shortcuts.c:858
 #: ../panels/universal-access/uap.ui.h:68
 msgid "Typing"
 msgstr "Куцање"
@@ -1340,7 +1339,7 @@ msgstr "Укључи/искључи велики контраст"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:241
 #: ../panels/keyboard/cc-keyboard-option.c:347
-#: ../panels/keyboard/keyboard-shortcuts.c:1112
+#: ../panels/keyboard/keyboard-shortcuts.c:1132
 #: ../panels/sound/gvc-mixer-control.c:1834
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
@@ -1467,19 +1466,16 @@ msgstr ""
 msgid "Shortcuts"
 msgstr "Пречице"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:552
-#: ../panels/keyboard/keyboard-shortcuts.c:560
-#: ../panels/keyboard/keyboard-shortcuts.c:942
-#: ../panels/keyboard/keyboard-shortcuts.c:1414
-#: ../panels/keyboard/keyboard-shortcuts.c:1418
+#: ../panels/keyboard/keyboard-shortcuts.c:557
+#: ../panels/keyboard/keyboard-shortcuts.c:565
 msgid "Custom Shortcuts"
 msgstr "Произвољне пречице"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:756
+#: ../panels/keyboard/keyboard-shortcuts.c:776
 msgid "<Unknown Action>"
 msgstr "<Непозната радња>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1253
+#: ../panels/keyboard/keyboard-shortcuts.c:1273
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1490,7 +1486,7 @@ msgstr ""
 "овај тастер.\n"
 "Пробајте да придодате тастер као што је „Цтрл, Алт или Шифт“."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1285
+#: ../panels/keyboard/keyboard-shortcuts.c:1305
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1499,13 +1495,13 @@ msgstr ""
 "Пречица „%s“ се већ користи за\n"
 "„%s“"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1290
+#: ../panels/keyboard/keyboard-shortcuts.c:1310
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Уколико доделите пречицу за „%s“, пречица „%s“ ће бити искључена."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1296
+#: ../panels/keyboard/keyboard-shortcuts.c:1316
 msgid "_Reassign"
 msgstr "_Поново додели"
 
@@ -1755,9 +1751,6 @@ msgstr "Изврстан сигнал"
 
 #: ../panels/network/net-device-wifi.c:1005
 #, c-format
-#| msgid ""
-#| "Network details for %s including password and any custom configuration "
-#| "will be lost"
 msgid ""
 "Network details for %s including password and any custom configuration will "
 "be lost."
@@ -1833,19 +1826,19 @@ msgid "IP Address"
 msgstr "ИП адреса"
 
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wifi.ui.h:13
 #: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:684
 msgid "IPv6 Address"
 msgstr "ИПв6 адреса"
 
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wifi.ui.h:14
 #: ../panels/network/network-wired.ui.h:4
 msgid "Default Route"
 msgstr "Подразумевана рута"
 
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-wifi.ui.h:14
+#: ../panels/network/network-wifi.ui.h:15
 #: ../panels/network/network-wired.ui.h:5
 msgid "DNS"
 msgstr "ДНС"
@@ -1956,61 +1949,65 @@ msgid "_Use as Hotspot..."
 msgstr "_Користи као врућу тачку..."
 
 #: ../panels/network/network-wifi.ui.h:5
-#| msgid "Connected"
+#| msgid "Disconnected"
+msgid "_Disconnect"
+msgstr "_Прекини везу"
+
+#: ../panels/network/network-wifi.ui.h:6
 msgid "_Connect"
 msgstr "_Повежи"
 
-#: ../panels/network/network-wifi.ui.h:6
+#: ../panels/network/network-wifi.ui.h:7
 msgid "Last used"
 msgstr "Коришћена"
 
-#: ../panels/network/network-wifi.ui.h:7
+#: ../panels/network/network-wifi.ui.h:8
 #: ../panels/network/network-wired.ui.h:1
 msgid "Hardware Address"
 msgstr "Хардверска адреса"
 
-#: ../panels/network/network-wifi.ui.h:8
+#: ../panels/network/network-wifi.ui.h:9
 msgid "Security"
 msgstr "Безбедност"
 
-#: ../panels/network/network-wifi.ui.h:9
+#: ../panels/network/network-wifi.ui.h:10
 msgid "Strength"
 msgstr "Јачина"
 
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:11
 msgid "Link speed"
 msgstr "Брзина везе"
 
-#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wifi.ui.h:12
 #: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:683
 msgid "IPv4 Address"
 msgstr "ИПв4 адреса"
 
-#: ../panels/network/network-wifi.ui.h:15
+#: ../panels/network/network-wifi.ui.h:16
 msgid "_Forget Network"
 msgstr "_Заборави мрежу"
 
-#: ../panels/network/network-wifi.ui.h:16
+#: ../panels/network/network-wifi.ui.h:17
 msgid "_Settings..."
 msgstr "_Подешавања..."
 
-#: ../panels/network/network-wifi.ui.h:17
+#: ../panels/network/network-wifi.ui.h:18
 msgid "Switch off to connect to a wireless network"
 msgstr "Искључите да се повежете на бежичну мрежу"
 
-#: ../panels/network/network-wifi.ui.h:18
+#: ../panels/network/network-wifi.ui.h:19
 msgid "Network Name"
 msgstr "Назив мреже"
 
-#: ../panels/network/network-wifi.ui.h:19
+#: ../panels/network/network-wifi.ui.h:20
 msgid "Connected Devices"
 msgstr "Прикључени уређаји"
 
-#: ../panels/network/network-wifi.ui.h:20
+#: ../panels/network/network-wifi.ui.h:21
 msgid "Security type"
 msgstr "Врста безбедности"
 
-#: ../panels/network/network-wifi.ui.h:21
+#: ../panels/network/network-wifi.ui.h:22
 msgid "Security key"
 msgstr "Кључ безбедности"
 
@@ -2317,10 +2314,8 @@ msgstr "Инфинибанд уређаји не подржавају повез
 msgid "Connection dependency failed"
 msgstr "Није успела зависност везе"
 
-#. translators: This is the title of the "Add Account" dialogue.
-#. * The title is not visible when using GNOME Shell
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:252
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:263
+#. translators: This is the title of the "Add Account" dialog.
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:249
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Додај налог"
@@ -2586,6 +2581,13 @@ msgstr "Пуњење — потпуно напуњена"
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Празна"
+
+#: ../panels/power/cc-power-panel.c:1075
+msgid ""
+"Tip: <a href=\"screen\">screen brightness</a> affects how much power is used"
+msgstr ""
+"Савет: <a href=\"screen\">осветљеност екрана</a> утиче на потрошњу ел. "
+"енергије"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -2877,7 +2879,7 @@ msgid "Cancel Print Job"
 msgstr "Откажи посао штампања"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1017
+#: ../panels/user-accounts/um-account-dialog.c:1044
 msgid "_Add"
 msgstr "_Додај"
 
@@ -2899,7 +2901,7 @@ msgstr "Учитавам опције..."
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1016
+#: ../panels/user-accounts/um-account-dialog.c:1043
 msgid "Cancel"
 msgstr "Откажи"
 
@@ -3264,7 +3266,7 @@ msgstr "Изаберите извор увоза"
 msgid "Select an input source to add"
 msgstr "Изаберите извор уноса за додавање"
 
-#: ../panels/region/gnome-region-panel-system.c:330
+#: ../panels/region/gnome-region-panel-system.c:470
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings."
@@ -3272,7 +3274,7 @@ msgstr ""
 "Екран за пријаву, налози система и налози нових корисника користе свеопшта "
 "системска подешавања региона и језика."
 
-#: ../panels/region/gnome-region-panel-system.c:335
+#: ../panels/region/gnome-region-panel-system.c:475
 #: ../panels/region/gnome-region-panel.ui.h:31
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
@@ -3283,11 +3285,11 @@ msgstr ""
 "системска подешавања региона и језика. Можете да измените подешавања система "
 "да би одговарала вашим."
 
-#: ../panels/region/gnome-region-panel-system.c:338
+#: ../panels/region/gnome-region-panel-system.c:478
 msgid "Copy Settings"
 msgstr "Умножи подешавања"
 
-#: ../panels/region/gnome-region-panel-system.c:341
+#: ../panels/region/gnome-region-panel-system.c:481
 #: ../panels/region/gnome-region-panel.ui.h:38
 msgid "Copy Settings..."
 msgstr "Умножи подешавања..."
@@ -4630,24 +4632,24 @@ msgstr "Нова лозинка не садржи довољно различи�
 msgid "Unknown error"
 msgstr "Непозната грешка"
 
-#: ../panels/user-accounts/um-account-dialog.c:175
+#: ../panels/user-accounts/um-account-dialog.c:180
 msgid "Failed to add account"
 msgstr "Нисам успео да додам налог"
 
-#: ../panels/user-accounts/um-account-dialog.c:366
-#: ../panels/user-accounts/um-account-dialog.c:405
+#: ../panels/user-accounts/um-account-dialog.c:378
+#: ../panels/user-accounts/um-account-dialog.c:419
 msgid "Failed to register account"
 msgstr "Нисам успео да упишем налог"
 
-#: ../panels/user-accounts/um-account-dialog.c:530
+#: ../panels/user-accounts/um-account-dialog.c:551
 msgid "No supported way to authenticate with this domain"
 msgstr "Нема подржаног начина за потврђивање идентитета са овим доменом"
 
-#: ../panels/user-accounts/um-account-dialog.c:582
+#: ../panels/user-accounts/um-account-dialog.c:605
 msgid "Failed to join domain"
 msgstr "Нисам успео да приступим домену"
 
-#: ../panels/user-accounts/um-account-dialog.c:635
+#: ../panels/user-accounts/um-account-dialog.c:662
 msgid "Failed to log into domain"
 msgstr "Нисам успео да се пријавим на домен"
 
@@ -4803,21 +4805,21 @@ msgstr "Потражите још слика..."
 msgid "Used by %s"
 msgstr "Користи је „%s“"
 
-#: ../panels/user-accounts/um-realm-manager.c:368
+#: ../panels/user-accounts/um-realm-manager.c:379
 #, c-format
 msgid "No such domain or realm found"
 msgstr "Није пронађен такав домен или подручје"
 
-#: ../panels/user-accounts/um-realm-manager.c:743
+#: ../panels/user-accounts/um-realm-manager.c:780
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Не могу да се пријавим као „%s“ на домену %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:748
+#: ../panels/user-accounts/um-realm-manager.c:785
 msgid "Invalid password, please try again"
 msgstr "Неисправна лозинка, покушајте поново"
 
-#: ../panels/user-accounts/um-realm-manager.c:752
+#: ../panels/user-accounts/um-realm-manager.c:789
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Не могу да се повежем на домен „%s“: %s"
@@ -4893,15 +4895,15 @@ msgctxt "Password mode"
 msgid "None"
 msgstr "Ништа"
 
-#: ../panels/user-accounts/um-user-panel.c:869
+#: ../panels/user-accounts/um-user-panel.c:871
 msgid "Failed to contact the accounts service"
 msgstr "Нисам успео да контактирам услугу налога"
 
-#: ../panels/user-accounts/um-user-panel.c:871
+#: ../panels/user-accounts/um-user-panel.c:873
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Молим проверите да ли је Услуга налога инсталирана и укључена."
 
-#: ../panels/user-accounts/um-user-panel.c:911
+#: ../panels/user-accounts/um-user-panel.c:913
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -4909,12 +4911,12 @@ msgstr ""
 "Да направите измене,\n"
 "кликните прво на иконицу *"
 
-#: ../panels/user-accounts/um-user-panel.c:949
+#: ../panels/user-accounts/um-user-panel.c:951
 msgid "Create a user account"
 msgstr "Направите кориснички налог"
 
-#: ../panels/user-accounts/um-user-panel.c:960
-#: ../panels/user-accounts/um-user-panel.c:1271
+#: ../panels/user-accounts/um-user-panel.c:962
+#: ../panels/user-accounts/um-user-panel.c:1273
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -4922,12 +4924,12 @@ msgstr ""
 "Да направите кориснички налог,\n"
 "кликните прво на иконицу *"
 
-#: ../panels/user-accounts/um-user-panel.c:969
+#: ../panels/user-accounts/um-user-panel.c:971
 msgid "Delete the selected user account"
 msgstr "Обришите изабрани кориснички налог"
 
-#: ../panels/user-accounts/um-user-panel.c:981
-#: ../panels/user-accounts/um-user-panel.c:1276
+#: ../panels/user-accounts/um-user-panel.c:983
+#: ../panels/user-accounts/um-user-panel.c:1278
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -4935,11 +4937,11 @@ msgstr ""
 "Да обришете изабрани кориснички налог,\n"
 "кликните прво на иконицу *"
 
-#: ../panels/user-accounts/um-user-panel.c:1174
+#: ../panels/user-accounts/um-user-panel.c:1176
 msgid "My Account"
 msgstr "Мој налог"
 
-#: ../panels/user-accounts/um-user-panel.c:1184
+#: ../panels/user-accounts/um-user-panel.c:1186
 msgid "Other Accounts"
 msgstr "Остали налози"
 
