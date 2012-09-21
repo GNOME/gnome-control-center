@@ -35,7 +35,7 @@ void cc_network_panel_connect_to_8021x_network (CcNetworkPanel   *panel,
                                                 NMClient         *client,
                                                 NMRemoteSettings *settings,
                                                 NMDevice         *device,
-                                                NMAccessPoint    *ap);
+                                                const gchar      *arg_access_point);
 
 void cc_network_panel_connect_to_3g_network (CcNetworkPanel   *panel,
                                              NMClient         *client,

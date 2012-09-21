@@ -382,8 +382,8 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 
         type = nm_device_get_device_type (device);
 
-        g_debug ("device %s type %i",
-                 nm_device_get_udi (device), type);
+        g_debug ("device %s type %i path %s",
+                 nm_device_get_udi (device), type, nm_object_get_path (NM_OBJECT (device)));
 
         /* map the NMDeviceType to the GType */
         switch (type) {
@@ -458,15 +458,15 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                                 priv->arg_operation = OPERATION_NULL; /* done */
                                 select_tree_iter (panel, &iter);
                                 return TRUE;
-                        } else if (priv->arg_operation == OPERATION_CONNECT_8021X
-                                   || priv->arg_operation == OPERATION_SHOW_DEVICE) {
+                        } else if (priv->arg_operation == OPERATION_CONNECT_8021X) {
+                                cc_network_panel_connect_to_8021x_network (panel, priv->client, priv->remote_settings, device, priv->arg_access_point);
+                                priv->arg_operation = OPERATION_NULL; /* done */
                                 select_tree_iter (panel, &iter);
-
-                                /* 802.11 wireless stuff must be handled in add_access_point, but
-                                   we still select the right page here, whereas if we're just showing
-                                   the device, we're done right away */
-                                if (priv->arg_operation == OPERATION_SHOW_DEVICE)
-                                        priv->arg_operation = OPERATION_NULL;
+                                return TRUE;
+                        }
+                        else if (priv->arg_operation == OPERATION_SHOW_DEVICE) {
+                                select_tree_iter (panel, &iter);
+                                priv->arg_operation = OPERATION_NULL;
                                 return TRUE;
                         }
                 }

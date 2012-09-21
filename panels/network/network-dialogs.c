@@ -27,6 +27,7 @@
 #include <nm-setting-cdma.h>
 #include <nm-setting-serial.h>
 #include <nm-device-modem.h>
+#include <nm-device-wifi.h>
 
 #include "network-dialogs.h"
 #include "nm-wireless-dialog.h"
@@ -249,6 +250,7 @@ cc_network_panel_connect_to_hidden_network (CcNetworkPanel   *panel,
                                             NMClient         *client,
                                             NMRemoteSettings *settings)
 {
+        g_debug ("connect to hidden wifi");
         show_wireless_dialog (panel, client, settings,
                               nma_wireless_dialog_new_for_other (client, settings));
 }
@@ -258,7 +260,7 @@ cc_network_panel_connect_to_8021x_network (CcNetworkPanel   *panel,
                                            NMClient         *client,
                                            NMRemoteSettings *settings,
                                            NMDevice         *device,
-                                           NMAccessPoint    *ap)
+                                           const gchar      *arg_access_point)
 {
 	NMConnection *connection;
 	NMSettingConnection *s_con;
@@ -268,6 +270,14 @@ cc_network_panel_connect_to_8021x_network (CcNetworkPanel   *panel,
 	NM80211ApSecurityFlags wpa_flags, rsn_flags;
 	GtkWidget *dialog;
 	char *uuid;
+        NMAccessPoint *ap;
+
+        g_debug ("connect to 8021x wifi");
+        ap = nm_device_wifi_get_access_point_by_path (NM_DEVICE_WIFI (device), arg_access_point);
+        if (ap == NULL) {
+                g_warning ("didn't find access point with path %s", arg_access_point);
+                return;
+        }
 
         /* If the AP is WPA[2]-Enterprise then we need to set up a minimal 802.1x
 	 * setting and ask the user for more information.
@@ -470,6 +480,7 @@ cc_network_panel_connect_to_3g_network (CcNetworkPanel   *panel,
         NMAMobileWizard *wizard;
 	NMDeviceModemCapabilities caps;
 
+        g_debug ("connect to 3g");
         if (!NM_IS_DEVICE_MODEM (device)) {
                 g_warning ("Network panel loaded with connect-3g but the selected device"
                            " is not a modem");

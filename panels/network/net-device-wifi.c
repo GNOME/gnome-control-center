@@ -173,17 +173,6 @@ add_access_point (NetDeviceWifi *device_wifi, NMAccessPoint *ap, NMAccessPoint *
                                            COLUMN_AP_IS_SAVED, FALSE,
                                            -1);
         g_free (title);
-
-//        if (priv->arg_operation == OPERATION_CONNECT_8021X &&
-//            g_strcmp0(priv->arg_device, nm_object_get_path (NM_OBJECT (device))) == 0 &&
-//            g_strcmp0(priv->arg_access_point, object_path) == 0) {
-//                cc_network_panel_connect_to_8021x_network (panel,
-//                                                           priv->client,
-//                                                           priv->remote_settings,
-//                                                           device,
-//                                                           ap);
-//                priv->arg_operation = OPERATION_NULL; /* done */
-//        }
 }
 
 static void
