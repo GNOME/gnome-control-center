@@ -31,8 +31,6 @@ G_BEGIN_DECLS
 void setup_input_tabs (GtkBuilder    *builder,
                        CcRegionPanel *self);
 
-GVariant * create_source_from_current_xkb_config (void);
-
 G_END_DECLS
 
 #endif  /* __GNOME_KEYBOARD_PROPERTY_INPUT_H */

@@ -35,7 +35,6 @@
 #include "cc-common-language.h"
 #include "gdm-languages.h"
 #include "gnome-region-panel-system.h"
-#include "gnome-region-panel-input.h"
 
 #define WID(s) GTK_WIDGET(gtk_builder_get_object (dialog, s))
 
@@ -149,11 +148,6 @@ input_sources_changed (GSettings *settings,
         const gchar *id;
 
         sources = g_settings_get_value (input_sources_settings, "sources");
-        if (g_variant_n_children (sources) < 1) {
-                g_variant_unref (sources);
-                sources = create_source_from_current_xkb_config ();
-        }
-
         xkb_info = gnome_xkb_info_new ();
 
         label = WID ("user_input_source");
