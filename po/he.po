@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-07 16:14+0300\n"
-"PO-Revision-Date: 2012-09-07 16:18+0200\n"
+"POT-Creation-Date: 2012-09-22 14:57+0300\n"
+"PO-Revision-Date: 2012-09-22 14:58+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <he@li.org>\n"
 "Language: he\n"
@@ -78,7 +78,7 @@ msgstr "צבעים"
 msgid "Flickr"
 msgstr "Flickr"
 
-#: ../panels/background/cc-background-chooser-dialog.c:280
+#: ../panels/background/cc-background-chooser-dialog.c:286
 #: ../panels/printers/ppd-selection-dialog.ui.h:3
 #: ../panels/user-accounts/data/photo-dialog.ui.h:9
 #: ../panels/user-accounts/um-photo-dialog.c:98
@@ -992,7 +992,7 @@ msgid "Software"
 msgstr "תכנה"
 
 #: ../panels/info/cc-info-panel.c:1508
-#: ../panels/keyboard/keyboard-shortcuts.c:1647
+#: ../panels/keyboard/keyboard-shortcuts.c:1667
 msgid "Section"
 msgstr "אגף"
 
@@ -1193,7 +1193,6 @@ msgstr "שליפה"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/keyboard/keyboard-shortcuts.c:858
 #: ../panels/universal-access/uap.ui.h:68
 msgid "Typing"
 msgstr "הקלדה"
@@ -1321,7 +1320,7 @@ msgstr "ביטול/הפעלה של ניגודיות גבוהה"
 #. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:241
 #: ../panels/keyboard/cc-keyboard-option.c:347
-#: ../panels/keyboard/keyboard-shortcuts.c:1112
+#: ../panels/keyboard/keyboard-shortcuts.c:1132
 #: ../panels/sound/gvc-mixer-control.c:1834
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
@@ -1444,19 +1443,16 @@ msgstr "כדי לערוך מקש קיצור דרך, יש ללחוץ על השו�
 msgid "Shortcuts"
 msgstr "קיצורי דרך"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:552
-#: ../panels/keyboard/keyboard-shortcuts.c:560
-#: ../panels/keyboard/keyboard-shortcuts.c:942
-#: ../panels/keyboard/keyboard-shortcuts.c:1414
-#: ../panels/keyboard/keyboard-shortcuts.c:1418
+#: ../panels/keyboard/keyboard-shortcuts.c:557
+#: ../panels/keyboard/keyboard-shortcuts.c:565
 msgid "Custom Shortcuts"
 msgstr "קיצורי דרך מותאמים אישית"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:756
+#: ../panels/keyboard/keyboard-shortcuts.c:776
 msgid "<Unknown Action>"
 msgstr "<פעולה לא ידועה>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1253
+#: ../panels/keyboard/keyboard-shortcuts.c:1273
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type using this key.\n"
@@ -1465,7 +1461,7 @@ msgstr ""
 "לא ניתן להשתמש בקיצור הדרך „%s“ מכיוון שלא ניתן יהיה להקליד באמצעות מקש זה.\n"
 "נא לנסות מקש או צירוף מקשים שונה כגון לחיצה על Ctrl, Alt או Shift יחדיו."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1285
+#: ../panels/keyboard/keyboard-shortcuts.c:1305
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1474,12 +1470,12 @@ msgstr ""
 "קיצור הדרך „%s“ כבר משמש ל:\n"
 "„%s“"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1290
+#: ../panels/keyboard/keyboard-shortcuts.c:1310
 #, c-format
 msgid "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "אם קיצור הדרך יוקצה מחדש אל „%s“, קיצור הדרך „%s“ יבוטל."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1296
+#: ../panels/keyboard/keyboard-shortcuts.c:1316
 msgid "_Reassign"
 msgstr "הקצאה _מחדש"
 
@@ -1630,103 +1626,60 @@ msgstr "הוספת התחברות חדשה"
 
 #. Translators: network device speed
 #: ../panels/network/net-device-mobile.c:261
-#: ../panels/network/net-device-wifi.c:699
+#: ../panels/network/net-device-wifi.c:770
 #: ../panels/network/net-device-wired.c:126
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d מסל״ש"
 
-#. TRANSLATORS: this is when the access point is not listed in
-#. *  the dropdown (or hidden) and the user has to select another
-#. *  entry manually
-#: ../panels/network/net-device-wifi.c:196
+#. TRANSLATORS: this is when the access point is not shown
+#. * in the list and the user has to enter the SSID manually
+#.
+#: ../panels/network/net-device-wifi.c:203
 msgid "Connect to a Hidden Network"
 msgstr "התחברות לרשת אלחוטית"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/net-device-wifi.c:293
-#: ../panels/network/net-device-wifi.c:472
+#: ../panels/network/net-device-wifi.c:302
+#: ../panels/network/net-device-wifi.c:481
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:297
-#: ../panels/network/net-device-wifi.c:476
+#: ../panels/network/net-device-wifi.c:306
+#: ../panels/network/net-device-wifi.c:485
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:301
+#: ../panels/network/net-device-wifi.c:310
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/net-device-wifi.c:306
+#: ../panels/network/net-device-wifi.c:315
 msgid "Enterprise"
 msgstr "ארגוני"
 
-#: ../panels/network/net-device-wifi.c:311
-#: ../panels/network/net-device-wifi.c:467
+#: ../panels/network/net-device-wifi.c:320
+#: ../panels/network/net-device-wifi.c:476
 msgctxt "Wifi security"
 msgid "None"
 msgstr "ללא"
 
-#: ../panels/network/net-device-wifi.c:733
-msgctxt "Signal strength"
-msgid "None"
-msgstr "ללא"
+#: ../panels/network/net-device-wifi.c:697
+msgid "never"
+msgstr "מעולם לא"
 
-#: ../panels/network/net-device-wifi.c:735
-msgctxt "Signal strength"
-msgid "Weak"
-msgstr "חלש"
+#: ../panels/network/net-device-wifi.c:707
+msgid "today"
+msgstr "היום"
 
-#: ../panels/network/net-device-wifi.c:737
-msgctxt "Signal strength"
-msgid "Ok"
-msgstr "טוב"
+#: ../panels/network/net-device-wifi.c:709
+msgid "yesterday"
+msgstr "אתמול"
 
-#: ../panels/network/net-device-wifi.c:739
-msgctxt "Signal strength"
-msgid "Good"
-msgstr "טוב"
-
-#: ../panels/network/net-device-wifi.c:741
-msgctxt "Signal strength"
-msgid "Excellent"
-msgstr "מצוין"
-
-#: ../panels/network/net-device-wifi.c:901
-#, c-format
-msgid "Network details for %s including password and any custom configuration will be lost"
-msgstr "פרטי הרשת עבור %s לרבות ססמה ותצורה מיוחדת כלשהי ילכו לאיבוד"
-
-#: ../panels/network/net-device-wifi.c:912
-msgid "Forget"
-msgstr "התעלמות"
-
-#: ../panels/network/net-device-wifi.c:1437
-msgid "If you have a connection to the Internet other than wireless, you can use it to share your internet connection with others."
-msgstr "אם יש לך חיבור לאינטרנט שאינו אלחוטי, ניתן להשתמש בכלי זה כדי לשתף את חיבור האינטרנט שלך עם אחרים."
-
-#: ../panels/network/net-device-wifi.c:1441
-#, c-format
-msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
-msgstr "מעבר למצב נקודה אלחוטית תנתק אותך מהרשת <b>%s</b>."
-
-#: ../panels/network/net-device-wifi.c:1445
-msgid "It is not possible to access the internet through your wireless while the hotspot is active."
-msgstr "לא ניתן לגשת לאינטרנט דרך הכרטיס האלחוטי בזמן שהנקודה האלחוטית פעילה."
-
-#: ../panels/network/net-device-wifi.c:1511
-msgid "Stop hotspot and disconnect any users?"
-msgstr "האם לעצור את נקודת הגישה ולנתק את כל המשתמשים ?"
-
-#: ../panels/network/net-device-wifi.c:1514
-msgid "_Stop Hotspot"
-msgstr "_עצירת נקודת הגישה"
-
-#: ../panels/network/net-device-wifi.c:1579
+#: ../panels/network/net-device-wifi.c:711
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -1734,10 +1687,71 @@ msgstr[0] "אתמול"
 msgstr[1] "לפני %i ימים"
 msgstr[2] "שלשום"
 
-#: ../panels/network/net-device-wifi.c:1933
-#: ../panels/network/network-wifi.ui.h:19
+#. TRANSLATORS: VPN status
+#: ../panels/network/net-device-wifi.c:780
+#: ../panels/network/panel-common.c:277
+msgid "Not connected"
+msgstr "לא מחובר"
+
+#: ../panels/network/net-device-wifi.c:782
+#: ../panels/network/net-device-wifi.c:2086
 msgid "Out of range"
 msgstr "מחוץ לטווח"
+
+#: ../panels/network/net-device-wifi.c:813
+msgctxt "Signal strength"
+msgid "None"
+msgstr "ללא"
+
+#: ../panels/network/net-device-wifi.c:815
+msgctxt "Signal strength"
+msgid "Weak"
+msgstr "חלש"
+
+#: ../panels/network/net-device-wifi.c:817
+msgctxt "Signal strength"
+msgid "Ok"
+msgstr "טוב"
+
+#: ../panels/network/net-device-wifi.c:819
+msgctxt "Signal strength"
+msgid "Good"
+msgstr "טוב"
+
+#: ../panels/network/net-device-wifi.c:821
+msgctxt "Signal strength"
+msgid "Excellent"
+msgstr "מצוין"
+
+#: ../panels/network/net-device-wifi.c:1005
+#, c-format
+msgid "Network details for %s including password and any custom configuration will be lost."
+msgstr "פרטי הרשת עבור %s לרבות ססמה ותצורה מיוחדת כלשהי ילכו לאיבוד."
+
+#: ../panels/network/net-device-wifi.c:1016
+msgid "Forget"
+msgstr "התעלמות"
+
+#: ../panels/network/net-device-wifi.c:1552
+msgid "If you have a connection to the Internet other than wireless, you can use it to share your internet connection with others."
+msgstr "אם יש לך חיבור לאינטרנט שאינו אלחוטי, ניתן להשתמש בכלי זה כדי לשתף את חיבור האינטרנט שלך עם אחרים."
+
+#: ../panels/network/net-device-wifi.c:1556
+#, c-format
+msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
+msgstr "מעבר למצב נקודה אלחוטית תנתק אותך מהרשת <b>%s</b>."
+
+#: ../panels/network/net-device-wifi.c:1560
+msgid "It is not possible to access the internet through your wireless while the hotspot is active."
+msgstr "לא ניתן לגשת לאינטרנט דרך הכרטיס האלחוטי בזמן שהנקודה האלחוטית פעילה."
+
+#: ../panels/network/net-device-wifi.c:1626
+msgid "Stop hotspot and disconnect any users?"
+msgstr "האם לעצור את נקודת הגישה ולנתק את כל המשתמשים ?"
+
+#: ../panels/network/net-device-wifi.c:1629
+msgid "_Stop Hotspot"
+msgstr "_עצירת נקודת הגישה"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: ../panels/network/net-proxy.c:67
@@ -1765,33 +1779,33 @@ msgid "Provider"
 msgstr "ספק"
 
 #: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:697
-#: ../panels/network/panel-common.c:699
+#: ../panels/network/panel-common.c:686
+#: ../panels/network/panel-common.c:688
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "כתובת IP"
 
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-wifi.ui.h:7
+#: ../panels/network/network-wifi.ui.h:13
 #: ../panels/network/network-wired.ui.h:3
-#: ../panels/network/panel-common.c:695
+#: ../panels/network/panel-common.c:684
 msgid "IPv6 Address"
 msgstr "כתובת IPv6"
 
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-wifi.ui.h:8
-#: ../panels/network/network-wired.ui.h:5
+#: ../panels/network/network-wifi.ui.h:14
+#: ../panels/network/network-wired.ui.h:4
 msgid "Default Route"
 msgstr "נתיב בררת המחדל"
 
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-wifi.ui.h:9
-#: ../panels/network/network-wired.ui.h:6
+#: ../panels/network/network-wifi.ui.h:15
+#: ../panels/network/network-wired.ui.h:5
 msgid "DNS"
 msgstr "DNS"
 
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-wired.ui.h:7
+#: ../panels/network/network-wired.ui.h:6
 msgid "_Options..."
 msgstr "_אפשרויות..."
 
@@ -1901,67 +1915,67 @@ msgid "_Use as Hotspot..."
 msgstr "שימוש _כנקודת גישה..."
 
 #: ../panels/network/network-wifi.ui.h:5
+msgid "_Disconnect"
+msgstr "_ניתוק"
+
+#: ../panels/network/network-wifi.ui.h:6
+msgid "_Connect"
+msgstr "_חיבור"
+
+#: ../panels/network/network-wifi.ui.h:7
+msgid "Last used"
+msgstr "שימוש אחרון"
+
+#: ../panels/network/network-wifi.ui.h:8
 #: ../panels/network/network-wired.ui.h:1
 msgid "Hardware Address"
 msgstr "כתובת חומרה"
 
-#: ../panels/network/network-wifi.ui.h:6
-#: ../panels/network/network-wired.ui.h:2
-#: ../panels/network/panel-common.c:694
-msgid "IPv4 Address"
-msgstr "כתובת IPv4"
-
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:9
 msgid "Security"
 msgstr "אבטחה"
 
-#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wifi.ui.h:10
 msgid "Strength"
 msgstr "עצמה"
 
-#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wifi.ui.h:11
 msgid "Link speed"
 msgstr "מהירות הקישור"
 
-#: ../panels/network/network-wifi.ui.h:13
-msgid "_Settings..."
-msgstr "ה_גדרות..."
-
-#: ../panels/network/network-wifi.ui.h:14
-msgid "Switch off to connect to a wireless network"
-msgstr "יש לכבות כדי להתחבר לרשתות אלחוטיות"
-
-#: ../panels/network/network-wifi.ui.h:15
-msgid "Network Name"
-msgstr "שם הרשת"
+#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wired.ui.h:2
+#: ../panels/network/panel-common.c:683
+msgid "IPv4 Address"
+msgstr "כתובת IPv4"
 
 #: ../panels/network/network-wifi.ui.h:16
-msgid "Connected Devices"
-msgstr "התקנים מחוברים"
-
-#: ../panels/network/network-wifi.ui.h:17
-msgid "Security type"
-msgstr "סוג האבטחה"
-
-#: ../panels/network/network-wifi.ui.h:18
-msgid "Security key"
-msgstr "מפתח אבטחה"
-
-#: ../panels/network/network-wifi.ui.h:20
-msgid "Security Key"
-msgstr "מפתח אבטחה"
-
-#: ../panels/network/network-wifi.ui.h:21
-msgid "Last used"
-msgstr "שימוש אחרון"
-
-#: ../panels/network/network-wifi.ui.h:22
 msgid "_Forget Network"
 msgstr "מחיקת ה_גדרות הרשת"
 
-#: ../panels/network/network-wired.ui.h:4
-msgid "Subnet Mask"
-msgstr "מסכת רשת"
+#: ../panels/network/network-wifi.ui.h:17
+msgid "_Settings..."
+msgstr "ה_גדרות..."
+
+#: ../panels/network/network-wifi.ui.h:18
+msgid "Switch off to connect to a wireless network"
+msgstr "יש לכבות כדי להתחבר לרשתות אלחוטיות"
+
+#: ../panels/network/network-wifi.ui.h:19
+msgid "Network Name"
+msgstr "שם הרשת"
+
+#: ../panels/network/network-wifi.ui.h:20
+msgid "Connected Devices"
+msgstr "התקנים מחוברים"
+
+#: ../panels/network/network-wifi.ui.h:21
+msgid "Security type"
+msgstr "סוג האבטחה"
+
+#: ../panels/network/network-wifi.ui.h:22
+msgid "Security key"
+msgstr "מפתח אבטחה"
 
 #. TRANSLATORS: device type
 #: ../panels/network/panel-common.c:86
@@ -2056,11 +2070,6 @@ msgstr "החיבור נכשל"
 #: ../panels/network/panel-common.c:281
 msgid "Status unknown (missing)"
 msgstr "המצב אינו ידוע (חסר)"
-
-#. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:277
-msgid "Not connected"
-msgstr "לא מחובר"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:301
@@ -2277,10 +2286,8 @@ msgstr "התקן InfiniBand אינו תומך במצב מחובר"
 msgid "Connection dependency failed"
 msgstr "תלות החיבור נכשלה"
 
-#. translators: This is the title of the "Add Account" dialogue.
-#. * The title is not visible when using GNOME Shell
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:252
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:263
+#. translators: This is the title of the "Add Account" dialog.
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:249
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "הוספת חשבון"
@@ -2346,11 +2353,11 @@ msgstr "הוספת חשבון מקוון"
 msgid "Adding an account allows your applications to access it for documents, mail, contacts, calendar, chat and more."
 msgstr "הוספת חשבון מאפשרת ליישום שלך לגשת באמצעותו למסמכים, דוא״ל, אנשי קשר, יומן, תכנית הצ׳אט ועוד."
 
-#: ../panels/power/cc-power-panel.c:165
+#: ../panels/power/cc-power-panel.c:157
 msgid "Unknown time"
 msgstr "זמן בלתי ידוע"
 
-#: ../panels/power/cc-power-panel.c:171
+#: ../panels/power/cc-power-panel.c:163
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -2358,7 +2365,7 @@ msgstr[0] "דקה"
 msgstr[1] "%i דקות"
 msgstr[2] "2 דקות"
 
-#: ../panels/power/cc-power-panel.c:183
+#: ../panels/power/cc-power-panel.c:175
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -2368,19 +2375,19 @@ msgstr[2] "שעתיים"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:191
+#: ../panels/power/cc-power-panel.c:183
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:192
+#: ../panels/power/cc-power-panel.c:184
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "שעה"
 msgstr[1] "שעות"
 msgstr[2] "שעתיים"
 
-#: ../panels/power/cc-power-panel.c:193
+#: ../panels/power/cc-power-panel.c:185
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "דקה"
@@ -2388,155 +2395,159 @@ msgstr[1] "דקות"
 msgstr[2] "דקות"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:236
+#: ../panels/power/cc-power-panel.c:228
 #, c-format
 msgid "Charging - %s until fully charged"
 msgstr "בטעינה - %s עד לטעינה מלאה"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:244
+#: ../panels/power/cc-power-panel.c:236
 #, c-format
 msgid "Caution low battery, %s remaining"
 msgstr "אזהרה, הסוללה חלשה, נותרו %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:252
+#: ../panels/power/cc-power-panel.c:244
 #, c-format
 msgid "Using battery power - %s remaining"
 msgstr "מופעל באמצעות סוללה - נותרו %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:269
+#: ../panels/power/cc-power-panel.c:261
 msgid "Charging"
 msgstr "בטעינה"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:274
+#: ../panels/power/cc-power-panel.c:266
 msgid "Using battery power"
 msgstr "מופעל באמצעות סוללה"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:278
+#: ../panels/power/cc-power-panel.c:270
 msgid "Charging - fully charged"
 msgstr "בטעינה - הטעינה הושלמה"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:282
+#: ../panels/power/cc-power-panel.c:274
 msgid "Empty"
 msgstr "ריקה"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:350
+#: ../panels/power/cc-power-panel.c:342
 #, c-format
 msgid "Caution low UPS, %s remaining"
 msgstr "אזהרה, עצמת האל־פסק נמוכה, נותרו %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:356
+#: ../panels/power/cc-power-panel.c:348
 #, c-format
 msgid "Using UPS power - %s remaining"
 msgstr "שימוש בעצמת האל־פסק - נותרו %s"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:374
+#: ../panels/power/cc-power-panel.c:366
 msgid "Caution low UPS"
 msgstr "אזהרה, עצמת האל־פסק חלשה"
 
 #. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:379
+#: ../panels/power/cc-power-panel.c:371
 msgid "Using UPS power"
 msgstr "שימוש באל־פסק"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:431
+#: ../panels/power/cc-power-panel.c:423
 msgid "Your secondary battery is fully charged"
 msgstr "הסוללה המשנית שלך טעונה במלואה"
 
 #. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:435
+#: ../panels/power/cc-power-panel.c:427
 msgid "Your secondary battery is empty"
 msgstr "הסוללה המשנית שלך ריקה"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:518
+#: ../panels/power/cc-power-panel.c:510
 msgid "Wireless mouse"
 msgstr "עכבר אלחוטי"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:522
+#: ../panels/power/cc-power-panel.c:514
 msgid "Wireless keyboard"
 msgstr "מקלדת אלחוטית"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:526
+#: ../panels/power/cc-power-panel.c:518
 msgid "Uninterruptible power supply"
 msgstr "אל־פסק"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:530
+#: ../panels/power/cc-power-panel.c:522
 msgid "Personal digital assistant"
 msgstr "עוזר דיגיטלי אישי"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:534
+#: ../panels/power/cc-power-panel.c:526
 msgid "Cellphone"
 msgstr "טלפון סלולרי"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:538
+#: ../panels/power/cc-power-panel.c:530
 msgid "Media player"
 msgstr "נגן מדיה"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:542
+#: ../panels/power/cc-power-panel.c:534
 msgid "Tablet"
 msgstr "משטח"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:546
+#: ../panels/power/cc-power-panel.c:538
 msgid "Computer"
 msgstr "מחשב"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:550
+#: ../panels/power/cc-power-panel.c:542
 msgid "Battery"
 msgstr "סוללה"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:561
+#: ../panels/power/cc-power-panel.c:553
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "בטעינה"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:568
+#: ../panels/power/cc-power-panel.c:560
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "אזהרה"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:573
+#: ../panels/power/cc-power-panel.c:565
 msgctxt "Battery power"
 msgid "Low"
 msgstr "נמוך"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:578
+#: ../panels/power/cc-power-panel.c:570
 msgctxt "Battery power"
 msgid "Good"
 msgstr "טוב"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:583
+#: ../panels/power/cc-power-panel.c:575
 msgctxt "Battery power"
 msgid "Charging - fully charged"
 msgstr "בטעינה - הטעינה הושלמה"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:587
+#: ../panels/power/cc-power-panel.c:579
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "ריקה"
+
+#: ../panels/power/cc-power-panel.c:1075
+msgid "Tip: <a href=\"screen\">screen brightness</a> affects how much power is used"
+msgstr "עצה: <a href=\"screen\">בהירות המסך</a> משפיעה על צריכת החשמל"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -2825,7 +2836,7 @@ msgid "Cancel Print Job"
 msgstr "ביטול משימות הדפסה"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1017
+#: ../panels/user-accounts/um-account-dialog.c:1044
 msgid "_Add"
 msgstr "הו_ספה"
 
@@ -2847,7 +2858,7 @@ msgstr "האפשרויות נטענות..."
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1016
+#: ../panels/user-accounts/um-account-dialog.c:1043
 msgid "Cancel"
 msgstr "ביטול"
 
@@ -3212,20 +3223,20 @@ msgstr "נא לבחור מקור קלט"
 msgid "Select an input source to add"
 msgstr "נא לבחור מקור קלט להוספה"
 
-#: ../panels/region/gnome-region-panel-system.c:330
+#: ../panels/region/gnome-region-panel-system.c:470
 msgid "The login screen, system accounts and new user accounts use the system-wide Region and Language settings."
 msgstr "מסך הכניסה, חשבונות המערכת וחשבונות המשתמש החדשים משתמשים בהגדרות השפה והאזור הכלליות."
 
-#: ../panels/region/gnome-region-panel-system.c:335
+#: ../panels/region/gnome-region-panel-system.c:475
 #: ../panels/region/gnome-region-panel.ui.h:31
 msgid "The login screen, system accounts and new user accounts use the system-wide Region and Language settings. You may change the system settings to match yours."
 msgstr "מסך הכניסה, חשבונות המערכת וחשבונות המשתמש החדשים משתמשים בהגדרות השפה והאזור הכלליות. ניתן לשנות את הגדרות המערכת כדי שיתאימו להעדפותיך."
 
-#: ../panels/region/gnome-region-panel-system.c:338
+#: ../panels/region/gnome-region-panel-system.c:478
 msgid "Copy Settings"
 msgstr "העתקת ההגדרות"
 
-#: ../panels/region/gnome-region-panel-system.c:341
+#: ../panels/region/gnome-region-panel-system.c:481
 #: ../panels/region/gnome-region-panel.ui.h:38
 msgid "Copy Settings..."
 msgstr "העתקת ההגדרות..."
@@ -4550,24 +4561,24 @@ msgstr "הססמה החדשה לא מכילה מספיק תווים השונים
 msgid "Unknown error"
 msgstr "שגיאה בלתי ידועה"
 
-#: ../panels/user-accounts/um-account-dialog.c:175
+#: ../panels/user-accounts/um-account-dialog.c:180
 msgid "Failed to add account"
 msgstr "הוספת החשבון נכשלה"
 
-#: ../panels/user-accounts/um-account-dialog.c:366
-#: ../panels/user-accounts/um-account-dialog.c:405
+#: ../panels/user-accounts/um-account-dialog.c:378
+#: ../panels/user-accounts/um-account-dialog.c:419
 msgid "Failed to register account"
 msgstr "הרשמת החשבון נכשלה"
 
-#: ../panels/user-accounts/um-account-dialog.c:530
+#: ../panels/user-accounts/um-account-dialog.c:551
 msgid "No supported way to authenticate with this domain"
 msgstr "אין שיטה נתמכת לאימות עם מתחם זה (domain)"
 
-#: ../panels/user-accounts/um-account-dialog.c:582
+#: ../panels/user-accounts/um-account-dialog.c:605
 msgid "Failed to join domain"
 msgstr "ההצטרפות למתחם נכשלה"
 
-#: ../panels/user-accounts/um-account-dialog.c:635
+#: ../panels/user-accounts/um-account-dialog.c:662
 msgid "Failed to log into domain"
 msgstr "הכניסה למתחם נכשלה"
 
@@ -4712,21 +4723,21 @@ msgstr "עיון אחר תמונות נוספות..."
 msgid "Used by %s"
 msgstr "בשימוש על ידי %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:368
+#: ../panels/user-accounts/um-realm-manager.c:379
 #, c-format
 msgid "No such domain or realm found"
 msgstr "לא נמצאו מתחם או תחום כאלה"
 
-#: ../panels/user-accounts/um-realm-manager.c:743
+#: ../panels/user-accounts/um-realm-manager.c:780
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "לא ניתן להיכנס בשם %s למתחם %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:748
+#: ../panels/user-accounts/um-realm-manager.c:785
 msgid "Invalid password, please try again"
 msgstr "הססמה שגויה, נא לנסות שוב"
 
-#: ../panels/user-accounts/um-realm-manager.c:752
+#: ../panels/user-accounts/um-realm-manager.c:789
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "לא ניתן להתחבר אל המתחם %s:‏ %s"
@@ -4794,15 +4805,15 @@ msgctxt "Password mode"
 msgid "None"
 msgstr "אין"
 
-#: ../panels/user-accounts/um-user-panel.c:869
+#: ../panels/user-accounts/um-user-panel.c:871
 msgid "Failed to contact the accounts service"
 msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
 
-#: ../panels/user-accounts/um-user-panel.c:871
+#: ../panels/user-accounts/um-user-panel.c:873
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
 
-#: ../panels/user-accounts/um-user-panel.c:911
+#: ../panels/user-accounts/um-user-panel.c:913
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -4810,12 +4821,12 @@ msgstr ""
 "כדי לערוך שינויים,\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:949
+#: ../panels/user-accounts/um-user-panel.c:951
 msgid "Create a user account"
 msgstr "יצירת חשבון משתמש"
 
-#: ../panels/user-accounts/um-user-panel.c:960
-#: ../panels/user-accounts/um-user-panel.c:1271
+#: ../panels/user-accounts/um-user-panel.c:962
+#: ../panels/user-accounts/um-user-panel.c:1273
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -4823,12 +4834,12 @@ msgstr ""
 "כדי ליצור משתמש,\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:969
+#: ../panels/user-accounts/um-user-panel.c:971
 msgid "Delete the selected user account"
 msgstr "מחיקת חשבון המשתמש הנבחר"
 
-#: ../panels/user-accounts/um-user-panel.c:981
-#: ../panels/user-accounts/um-user-panel.c:1276
+#: ../panels/user-accounts/um-user-panel.c:983
+#: ../panels/user-accounts/um-user-panel.c:1278
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -4836,11 +4847,11 @@ msgstr ""
 "כדי למחוק את המשתמש הנבחר\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: ../panels/user-accounts/um-user-panel.c:1174
+#: ../panels/user-accounts/um-user-panel.c:1176
 msgid "My Account"
 msgstr "החשבון שלי"
 
-#: ../panels/user-accounts/um-user-panel.c:1184
+#: ../panels/user-accounts/um-user-panel.c:1186
 msgid "Other Accounts"
 msgstr "חשבונות אחרים"
 
@@ -5201,6 +5212,12 @@ msgstr "העדפות;הגדרות;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "כל ההגדרות"
+
+#~ msgid "Security Key"
+#~ msgstr "מפתח אבטחה"
+
+#~ msgid "Subnet Mask"
+#~ msgstr "מסכת רשת"
 
 #~ msgid "To test your settings, try to double-click on the face."
 #~ msgstr "כדי לבדוק את ההגדרות שלך, יש ללחוץ פעמיים על הפרצוף."
