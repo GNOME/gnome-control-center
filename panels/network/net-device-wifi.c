@@ -1739,12 +1739,23 @@ set_arrow_image (GtkCellLayout   *layout,
                  GtkTreeIter     *iter,
                  gpointer         user_data)
 {
+        NetDeviceWifi *device = user_data;
         const gchar *icon;
 
-        if (arrow_visible (model, iter))
-                icon = "go-next";
-        else
+        if (arrow_visible (model, iter)) {
+                GtkWidget *widget;
+
+                widget = GTK_WIDGET (gtk_builder_get_object (device->priv->builder,
+                                                             "treeview_list"));
+
+                if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL)
+                        icon = "go-previous";
+                else
+                        icon = "go-next";
+        }
+        else {
                 icon = "";
+        }
 
         g_object_set (cell, "icon-name", icon, NULL);
 }
