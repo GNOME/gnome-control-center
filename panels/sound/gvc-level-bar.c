@@ -583,6 +583,8 @@ gvc_level_bar_draw (GtkWidget *widget,
 
         bar = GVC_LEVEL_BAR (widget);
 
+        cairo_save (cr);
+
         if (bar->priv->orientation == GTK_ORIENTATION_VERTICAL) {
                 int i;
                 int by;
@@ -622,6 +624,11 @@ gvc_level_bar_draw (GtkWidget *widget,
                 int i;
                 int bx;
 
+                if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL) {
+                        cairo_scale (cr, -1, 1);
+                        cairo_translate (cr, -gtk_widget_get_allocated_width (widget), 0);
+                }
+
                 for (i = 0; i < NUM_BOXES; i++) {
                         bx = i * bar->priv->layout.delta;
                         curved_rectangle (cr,
@@ -654,6 +661,8 @@ gvc_level_bar_draw (GtkWidget *widget,
                         cairo_stroke (cr);
                 }
         }
+
+        cairo_restore (cr);
 
         return FALSE;
 }
