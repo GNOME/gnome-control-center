@@ -120,23 +120,11 @@ goa_panel_finalize (GObject *object)
 {
   GoaPanel *panel = GOA_PANEL (object);
 
-  g_signal_handlers_disconnect_by_func (gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview)),
-                                        G_CALLBACK (on_tree_view_selection_changed),
-                                        panel);
   if (panel->accounts_model != NULL)
-    {
-      g_signal_handlers_disconnect_by_func (panel->accounts_model, G_CALLBACK (on_model_row_deleted), panel);
-      g_signal_handlers_disconnect_by_func (panel->accounts_model, G_CALLBACK (on_model_row_inserted), panel);
-      g_clear_object (&panel->accounts_model);
-    }
+    g_clear_object (&panel->accounts_model);
 
   if (panel->client != NULL)
-    {
-      g_signal_handlers_disconnect_by_func (panel->client,
-                                            G_CALLBACK (on_account_changed),
-                                            panel);
-      g_object_unref (panel->client);
-    }
+    g_object_unref (panel->client);
   g_object_unref (panel->builder);
 
   G_OBJECT_CLASS (goa_panel_parent_class)->finalize (object);
