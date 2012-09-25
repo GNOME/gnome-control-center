@@ -1208,6 +1208,7 @@ setup_main_window (UmUserPanelPrivate *d)
         gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "markup", TITLE_COL);
         gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "visible", HEADING_ROW_COL);
         cell = gtk_cell_renderer_pixbuf_new ();
+        g_object_set (cell, "follow-state", TRUE, NULL);
         gtk_tree_view_column_pack_start (column, cell, FALSE);
         gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (column), cell, "visible", USER_ROW_COL);
         gtk_tree_view_column_set_cell_data_func (column,
