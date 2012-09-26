@@ -542,6 +542,55 @@ add_other_users_language (GHashTable *ht)
 
 #define TRANSLATED_LANG(x) g_strdup(dgettext("iso_639", x))
 
+static void
+insert_language (GHashTable *ht,
+		 const char *short_lang,
+		 const char *long_lang,
+		 gboolean    in_iso_639,
+		 const char *lang_label)
+{
+	const char *lang;
+	char *old_lang;
+	char *label;
+	char *key;
+
+	if (gdm_language_has_translations (long_lang))
+		lang = long_lang;
+	else if (short_lang != NULL && gdm_language_has_translations (short_lang))
+		lang = short_lang;
+	else {
+		g_warning ("%s lacks translations, why is it default?", long_lang);
+		return;
+	}
+
+	g_debug ("We have translations for %s", lang);
+
+	key = g_strdup_printf ("%s.utf8", long_lang);
+
+	old_lang = g_strdup (setlocale (LC_MESSAGES, NULL));
+	setlocale (LC_MESSAGES, key);
+	g_debug ("Set new lang '%s' (old lang: %s)", key, old_lang);
+	if (in_iso_639)
+		label = dgettext ("iso_639", lang_label);
+	else
+		label = gettext (lang_label);
+	/* We don't have a translation for lang_label in
+	 * its own language? */
+	if (g_strcmp0 (label, lang_label) == 0 &&
+	    g_str_has_prefix (long_lang, "en_") == FALSE) {
+		g_warning ("No translation for %s in %s, trying in current language", lang_label, key);
+		setlocale (LC_MESSAGES, old_lang);
+		g_debug ("Resetting to old lang '%s'", old_lang);
+		label = _(lang_label);
+		g_hash_table_insert (ht, key, g_strdup (label));
+	} else {
+		g_hash_table_insert (ht, key, g_strdup (label));
+		setlocale (LC_MESSAGES, old_lang);
+		g_debug ("Resetting to old lang '%s'", old_lang);
+	}
+	g_free (old_lang);
+}
+
 GHashTable *
 cc_common_language_get_initial_languages (void)
 {
@@ -551,31 +600,18 @@ cc_common_language_get_initial_languages (void)
 
         ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
-        /* Add some common languages first */
-        g_hash_table_insert (ht, g_strdup ("en_US.utf8"), TRANSLATED_LANG("English"));
-        if (gdm_language_has_translations ("en_GB"))
-                g_hash_table_insert (ht, g_strdup ("en_GB.utf8"), g_strdup (_("British English")));
-        if (gdm_language_has_translations ("de") ||
-            gdm_language_has_translations ("de_DE"))
-                g_hash_table_insert (ht, g_strdup ("de_DE.utf8"), TRANSLATED_LANG("German"));
-        if (gdm_language_has_translations ("fr") ||
-            gdm_language_has_translations ("fr_FR"))
-                g_hash_table_insert (ht, g_strdup ("fr_FR.utf8"), TRANSLATED_LANG("French"));
-        if (gdm_language_has_translations ("es") ||
-            gdm_language_has_translations ("es_ES"))
-                g_hash_table_insert (ht, g_strdup ("es_ES.utf8"), TRANSLATED_LANG("Spanish"));
-        if (gdm_language_has_translations ("zh_CN"))
-                g_hash_table_insert (ht, g_strdup ("zh_CN.utf8"), g_strdup (_("Chinese (simplified)")));
-        if (gdm_language_has_translations ("ja") ||
-            gdm_language_has_translations ("ja_JP"))
-                g_hash_table_insert (ht, g_strdup ("ja_JP.utf8"), TRANSLATED_LANG("Japanese"));
-        if (gdm_language_has_translations ("ru") ||
-            gdm_language_has_translations ("ru_RU"))
-                 g_hash_table_insert (ht, g_strdup ("ru_RU.utf8"), TRANSLATED_LANG("Russian"));
-        if (gdm_language_has_translations ("ar") ||
-            gdm_language_has_translations ("ar_EG"))
-                g_hash_table_insert (ht, g_strdup ("ar_EG.utf8"), TRANSLATED_LANG("Arabic"));
-
+        /* Add some common languages first,
+         * only the languages not listed in ISO-639 are
+         * marked for translation */
+        insert_language (ht, "en", "en_US", TRUE, "English");
+        insert_language (ht, NULL, "en_GB", FALSE, N_("British English"));
+        insert_language (ht, "de", "de_DE", TRUE, "German");
+        insert_language (ht, "fr", "fr_FR", TRUE, "French");
+        insert_language (ht, "es", "es_ES", FALSE, N_("Spanish"));
+        insert_language (ht, NULL, "zh_CN", FALSE, N_("Chinese (simplified)"));
+        insert_language (ht, "ja", "ja_JP", TRUE, "Japanese");
+        insert_language (ht, "ru", "ru_RU", FALSE, "Russian");
+        insert_language (ht, "ar", "ar_EG", TRUE, "Arabic");
         /* Add the languages used by other users on the system */
         add_other_users_language (ht);
 
