@@ -564,6 +564,9 @@ cc_common_language_get_initial_languages (void)
                 g_hash_table_insert (ht, g_strdup ("es_ES.utf8"), g_strdup (_("Spanish")));
         if (gdm_language_has_translations ("zh_CN"))
                 g_hash_table_insert (ht, g_strdup ("zh_CN.utf8"), g_strdup (_("Chinese (simplified)")));
+        if (gdm_language_has_translations ("ja") ||
+            gdm_language_has_translations ("ja_JP"))
+                g_hash_table_insert (ht, g_strdup ("ja_JP.utf8"), g_strdup (_("Japanese")));
         if (gdm_language_has_translations ("ru") ||
             gdm_language_has_translations ("ru_RU"))
                  g_hash_table_insert (ht, g_strdup ("ru_RU.utf8"), g_strdup (_("Russian")));
