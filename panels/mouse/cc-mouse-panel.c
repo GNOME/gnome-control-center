@@ -132,10 +132,18 @@ shell_test_button_toggle_event (GtkToggleButton *button, CcMousePanel *panel)
   GtkNotebook *notebook = GTK_NOTEBOOK (panel->priv->widget);
   gint page_num;
 
-  if (gtk_toggle_button_get_active (button))
+  if (gtk_toggle_button_get_active (button)) {
+    GtkBuilder *dialog = panel->priv->builder;
+    GtkAdjustment *adjustment;
+
     page_num = CC_MOUSE_PAGE_TEST;
-  else
+
+    adjustment = GTK_ADJUSTMENT (WID ("scrolled_window_adjustment"));
+    gtk_adjustment_set_value (adjustment,
+                              gtk_adjustment_get_upper (adjustment));
+  } else {
     page_num = CC_MOUSE_PAGE_PREFS;
+  }
 
   gtk_notebook_set_current_page (notebook, page_num);
 }
