@@ -87,6 +87,7 @@ selection_changed (GtkTreeSelection *selection,
 	GError *error = NULL;
 	char *object_path;
 	GtkWidget *widget;
+	char *old_lang;
 
 	if (gtk_tree_selection_get_selected (selection, &model, &iter) == FALSE) {
 		g_warning ("No selected languages, this shouldn't happen");
@@ -155,9 +156,14 @@ selection_changed (GtkTreeSelection *selection,
         formats_update_language (builder, locale);
         system_update_language (builder, locale);
 
-	/* And done, ask for logout */
-	//FIXME we should only do that if it wasn't the original language we started the session with
+	/* Offer log out in the new language */
 	widget = (GtkWidget *)gtk_builder_get_object (builder, "logout_button");
+	old_lang = g_strdup (setlocale (LC_MESSAGES, NULL));
+	setlocale (LC_MESSAGES, locale);
+	gtk_button_set_label (GTK_BUTTON (widget), _("Log out for changes to take effect"));
+	setlocale (LC_MESSAGES, old_lang);
+	g_free (old_lang);
+
 	gtk_widget_show (widget);
 
 bail:
