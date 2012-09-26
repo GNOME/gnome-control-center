@@ -405,9 +405,12 @@ cc_common_language_select_current_language (GtkTreeView *treeview)
 	GtkTreeIter iter;
 	gboolean cont;
 	char *lang;
+	gboolean found;
 
 	lang = cc_common_language_get_current_language ();
+	g_debug ("Trying to select lang '%s' in treeview", lang);
 	model = gtk_tree_view_get_model (treeview);
+	found = FALSE;
 	cont = gtk_tree_model_get_iter_first (model, &iter);
 	while (cont) {
 		char *locale;
@@ -418,6 +421,10 @@ cc_common_language_select_current_language (GtkTreeView *treeview)
 		if (locale != NULL &&
 		    g_str_equal (locale, lang)) {
 			GtkTreeSelection *selection;
+
+			g_debug ("Found '%s' in treeview", locale);
+
+			found = TRUE;
 			selection = gtk_tree_view_get_selection (treeview);
 			gtk_tree_selection_select_iter (selection, &iter);
 			g_free (locale);
@@ -428,6 +435,9 @@ cc_common_language_select_current_language (GtkTreeView *treeview)
 		cont = gtk_tree_model_iter_next (model, &iter);
 	}
 	g_free (lang);
+
+	if (found == FALSE)
+		g_warning ("Could not find current language '%s' in the treeview", lang);
 }
 
 static void
