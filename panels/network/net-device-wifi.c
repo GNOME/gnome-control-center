@@ -780,7 +780,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
 
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "label_device"));
         gtk_label_set_label (GTK_LABEL (widget),
-                             priv->selected_ssid_title ? priv->selected_ssid_title : panel_device_to_localized_string (nm_device));
+                             priv->selected_ssid_title ? priv->selected_ssid_title : net_object_get_title (NET_OBJECT (device_wifi)));
 
         /* only disconnect when connection active */
         if (ap == active_ap) {

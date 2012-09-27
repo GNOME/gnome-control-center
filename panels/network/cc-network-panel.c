@@ -29,6 +29,7 @@
 #include "nm-client.h"
 #include "nm-device.h"
 #include "nm-device-modem.h"
+#include <libnm-gtk/nm-ui-utils.h>
 
 #include "net-device.h"
 #include "net-device-mobile.h"
@@ -381,6 +382,54 @@ panel_refresh_killswitch_visibility (CcNetworkPanel *panel)
                                 show_flight_toggle);
 }
 
+static void
+panel_refresh_device_titles (CcNetworkPanel *panel)
+{
+        GPtrArray *ndarray, *nmdarray;
+        NetDevice **devices;
+        NMDevice **nm_devices;
+        gchar **titles;
+        gint i, num_devices;
+        NetObject *object;
+        GtkTreeIter iter;
+        GtkTreeModel *model;
+
+        model = GTK_TREE_MODEL (gtk_builder_get_object (panel->priv->builder,
+                                                        "liststore_devices"));
+        if (!gtk_tree_model_get_iter_first (model, &iter))
+                return;
+        ndarray = g_ptr_array_new_with_free_func (g_object_unref);
+        nmdarray = g_ptr_array_new ();
+        do {
+                gtk_tree_model_get (model, &iter,
+                                    PANEL_DEVICES_COLUMN_OBJECT, &object,
+                                    -1);
+                if (NET_IS_DEVICE (object)) {
+                        g_ptr_array_add (ndarray, object);
+                        g_ptr_array_add (nmdarray, net_device_get_nm_device (NET_DEVICE (object)));
+                }
+        } while (gtk_tree_model_iter_next (model, &iter));
+
+        if (!ndarray->len) {
+                g_ptr_array_free (ndarray, TRUE);
+                g_ptr_array_free (nmdarray, TRUE);
+                return;
+        }
+
+        devices = (NetDevice **)ndarray->pdata;
+        nm_devices = (NMDevice **)nmdarray->pdata;
+        num_devices = ndarray->len;
+
+        titles = nma_utils_disambiguate_device_names (nm_devices, num_devices);
+        for (i = 0; i < num_devices; i++) {
+                net_object_set_title (NET_OBJECT (devices[i]), titles[i]);
+                g_free (titles[i]);
+        }
+        g_free (titles);
+        g_ptr_array_free (ndarray, TRUE);
+        g_ptr_array_free (nmdarray, TRUE);
+}
+
 static gboolean
 handle_argv_for_device (CcNetworkPanel *panel,
 			NMDevice       *device,
@@ -471,7 +520,6 @@ handle_argv (CcNetworkPanel *panel)
 static gboolean
 panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 {
-        const gchar *title;
         GtkListStore *liststore_devices;
         GtkTreeIter iter;
         NMDeviceType type;
@@ -506,7 +554,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         }
 
         /* create device */
-        title = panel_device_to_localized_string (device);
         net_device = g_object_new (device_g_type,
                                    "panel", panel,
                                    "removable", FALSE,
@@ -515,7 +562,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                                    "remote-settings", panel->priv->remote_settings,
                                    "nm-device", device,
                                    "id", nm_device_get_udi (device),
-                                   "title", title,
                                    NULL);
 
         /* add as a panel */
@@ -538,7 +584,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                             &iter,
                             PANEL_DEVICES_COLUMN_ICON, panel_device_to_icon_name (device),
                             PANEL_DEVICES_COLUMN_SORT, panel_device_to_sortable_string (device),
-                            PANEL_DEVICES_COLUMN_TITLE, title,
                             PANEL_DEVICES_COLUMN_OBJECT, net_device,
                             -1);
 
@@ -577,6 +622,25 @@ panel_remove_device (CcNetworkPanel *panel, NMDevice *device)
 }
 
 static void
+get_object_title (GtkTreeViewColumn *column,
+                  GtkCellRenderer   *cell,
+                  GtkTreeModel      *model,
+                  GtkTreeIter       *iter,
+                  gpointer           data)
+{
+        NetObject *object;
+
+        gtk_tree_model_get (model, iter,
+                            PANEL_DEVICES_COLUMN_OBJECT, &object,
+                            -1);
+        if (!object)
+                return;
+
+        g_object_set (cell, "text", net_object_get_title (object), NULL);
+        g_object_unref (object);
+}
+
+static void
 panel_add_devices_columns (CcNetworkPanel *panel, GtkTreeView *treeview)
 {
         CcNetworkPanelPrivate *priv = panel->priv;
@@ -600,9 +664,11 @@ panel_add_devices_columns (CcNetworkPanel *panel, GtkTreeView *treeview)
                       "wrap-mode", PANGO_WRAP_WORD,
                       "ellipsize", PANGO_ELLIPSIZE_END,
                       NULL);
-        column = gtk_tree_view_column_new_with_attributes ("title", renderer,
-                                                           "markup", PANEL_DEVICES_COLUMN_TITLE,
-                                                           NULL);
+        column = gtk_tree_view_column_new_with_attributes ("title", renderer, NULL);
+        gtk_tree_view_column_set_cell_data_func (GTK_TREE_VIEW_COLUMN (column),
+                                                 renderer,
+                                                 get_object_title,
+                                                 NULL, NULL);
         gtk_tree_view_column_set_sort_column_id (column, PANEL_DEVICES_COLUMN_SORT);
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
                                             "liststore_devices"));
@@ -682,11 +748,11 @@ panel_add_proxy_device (CcNetworkPanel *panel)
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
                                             "liststore_devices"));
         title = g_strdup_printf ("%s", _("Network proxy"));
+        net_object_set_title (NET_OBJECT (proxy), title);
         gtk_list_store_append (liststore_devices, &iter);
         gtk_list_store_set (liststore_devices,
                             &iter,
                             PANEL_DEVICES_COLUMN_ICON, "preferences-system-network",
-                            PANEL_DEVICES_COLUMN_TITLE, title,
                             PANEL_DEVICES_COLUMN_SORT, "9",
                             PANEL_DEVICES_COLUMN_OBJECT, proxy,
                             -1);
@@ -746,6 +812,7 @@ device_added_cb (NMClient *client, NMDevice *device, CcNetworkPanel *panel)
         g_debug ("New device added");
         panel_add_device (panel, device);
         panel_refresh_killswitch_visibility (panel);
+        panel_refresh_device_titles (panel);
 }
 
 static void
@@ -754,6 +821,7 @@ device_removed_cb (NMClient *client, NMDevice *device, CcNetworkPanel *panel)
         g_debug ("Device removed");
         panel_remove_device (panel, device);
         panel_refresh_killswitch_visibility (panel);
+        panel_refresh_device_titles (panel);
 }
 
 static void
@@ -791,6 +859,8 @@ out:
                 /* select the first device */
                 select_first_device (panel);
         }
+
+        panel_refresh_device_titles (panel);
 
         g_debug ("Calling handle_argv() after cold-plugging devices");
         handle_argv (panel);
@@ -833,7 +903,6 @@ static void
 panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
 {
         gchar *title;
-        gchar *title_markup;
         GtkListStore *liststore_devices;
         GtkTreeIter iter;
         NetVpn *net_vpn;
@@ -869,19 +938,16 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
                                             "liststore_devices"));
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (connection));
-        title_markup = g_strdup (title);
 
         net_object_set_title (NET_OBJECT (net_vpn), title);
         gtk_list_store_append (liststore_devices, &iter);
         gtk_list_store_set (liststore_devices,
                             &iter,
                             PANEL_DEVICES_COLUMN_ICON, "network-vpn",
-                            PANEL_DEVICES_COLUMN_TITLE, title_markup,
                             PANEL_DEVICES_COLUMN_SORT, "5",
                             PANEL_DEVICES_COLUMN_OBJECT, net_vpn,
                             -1);
         g_free (title);
-        g_free (title_markup);
 }
 
 static void

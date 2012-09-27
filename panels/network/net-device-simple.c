@@ -101,11 +101,11 @@ nm_device_simple_refresh_ui (NetDeviceSimple *device_simple)
         NMDeviceState state;
         NetDeviceSimplePrivate *priv = device_simple->priv;
 
-        /* set device kind */
         nm_device = net_device_get_nm_device (NET_DEVICE (device_simple));
+
+        /* set device kind */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_device"));
-        gtk_label_set_label (GTK_LABEL (widget),
-                             panel_device_to_localized_string (nm_device));
+        g_object_bind_property (device_simple, "title", widget, "label", 0);
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "image_device"));
         gtk_image_set_from_icon_name (GTK_IMAGE (widget),
                                       panel_device_to_icon_name (nm_device),

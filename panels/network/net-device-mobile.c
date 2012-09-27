@@ -240,11 +240,11 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
         NMDeviceModemCapabilities caps;
         NMDevice *nm_device;
 
-        /* set device kind */
         nm_device = net_device_get_nm_device (NET_DEVICE (device_mobile));
+
+        /* set device kind */
         widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->priv->builder, "label_device"));
-        gtk_label_set_label (GTK_LABEL (widget),
-                             panel_device_to_localized_string (nm_device));
+        g_object_bind_property (device_mobile, "title", widget, "label", 0);
 
         /* set up the device on/off switch */
         widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->priv->builder, "device_off_switch"));
