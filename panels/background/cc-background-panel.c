@@ -227,6 +227,7 @@ on_screenshot_finished (GObject *source,
   CcBackgroundPanelPrivate *priv = panel->priv;
   GError *error;
   GdkRectangle rect;
+  GdkRectangle workarea_rect;
   GtkWidget *widget;
   GdkPixbuf *pixbuf;
   cairo_surface_t *surface;
@@ -269,11 +270,12 @@ on_screenshot_finished (GObject *source,
   /* clear the workarea */
   widget = WID ("background-desktop-drawingarea");
   primary = gdk_screen_get_primary_monitor (gtk_widget_get_screen (widget));
-  gdk_screen_get_monitor_workarea (gtk_widget_get_screen (widget), primary, &rect);
+  gdk_screen_get_monitor_geometry (gtk_widget_get_screen (widget), primary, &rect);
+  gdk_screen_get_monitor_workarea (gtk_widget_get_screen (widget), primary, &workarea_rect);
 
   cairo_save (cr);
   cairo_set_operator (cr, CAIRO_OPERATOR_CLEAR);
-  cairo_rectangle (cr, rect.x, rect.y, rect.width, rect.height);
+  cairo_rectangle (cr, workarea_rect.x - rect.x, workarea_rect.y - rect.y, rect.width, rect.height);
   cairo_fill (cr);
   cairo_restore (cr);
 
