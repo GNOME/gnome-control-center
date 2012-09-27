@@ -218,23 +218,28 @@ update_display_preview (CcBackgroundPanel *panel)
   cairo_destroy (cr);
 }
 
+typedef struct {
+  CcBackgroundPanel *panel;
+  GdkRectangle capture_rect;
+  GdkRectangle monitor_rect;
+  GdkRectangle workarea_rect;
+  gboolean whole_monitor;
+} ScreenshotData;
+
 static void
 on_screenshot_finished (GObject *source,
                         GAsyncResult *res,
                         gpointer user_data)
 {
-  CcBackgroundPanel *panel = user_data;
+  ScreenshotData *data = user_data;
+  CcBackgroundPanel *panel = data->panel;
   CcBackgroundPanelPrivate *priv = panel->priv;
   GError *error;
-  GdkRectangle rect;
-  GdkRectangle workarea_rect;
-  GtkWidget *widget;
   GdkPixbuf *pixbuf;
   cairo_surface_t *surface;
   cairo_t *cr;
   int width;
   int height;
-  int primary;
 
   error = NULL;
   g_dbus_connection_call_finish (panel->priv->connection,
@@ -263,27 +268,30 @@ on_screenshot_finished (GObject *source,
   surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
                                         width, height);
   cr = cairo_create (surface);
-  gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
+  gdk_cairo_set_source_pixbuf (cr, pixbuf, data->capture_rect.x, data->capture_rect.y);
   cairo_paint (cr);
   g_object_unref (pixbuf);
 
-  /* clear the workarea */
-  widget = WID ("background-desktop-drawingarea");
-  primary = gdk_screen_get_primary_monitor (gtk_widget_get_screen (widget));
-  gdk_screen_get_monitor_geometry (gtk_widget_get_screen (widget), primary, &rect);
-  gdk_screen_get_monitor_workarea (gtk_widget_get_screen (widget), primary, &workarea_rect);
-
-  cairo_save (cr);
-  cairo_set_operator (cr, CAIRO_OPERATOR_CLEAR);
-  cairo_rectangle (cr, workarea_rect.x - rect.x, workarea_rect.y - rect.y, workarea_rect.width, workarea_rect.height);
-  cairo_fill (cr);
-  cairo_restore (cr);
+  if (data->whole_monitor) {
+    /* clear the workarea */
+    cairo_save (cr);
+    cairo_set_operator (cr, CAIRO_OPERATOR_CLEAR);
+    cairo_rectangle (cr, data->workarea_rect.x - data->monitor_rect.x,
+                     data->workarea_rect.y - data->monitor_rect.y,
+                     data->workarea_rect.width,
+                     data->workarea_rect.height);
+    cairo_fill (cr);
+    cairo_restore (cr);
+  }
 
   g_clear_object (&panel->priv->display_screenshot);
   panel->priv->display_screenshot = gdk_pixbuf_get_from_surface (surface,
                                                                  0, 0,
-                                                                 width,
-                                                                 height);
+                                                                 data->monitor_rect.width,
+                                                                 data->monitor_rect.height);
+
+  g_free (data);
+
   /* remove the temporary file created by the shell */
   g_unlink (panel->priv->screenshot_path);
   g_free (priv->screenshot_path);
@@ -296,16 +304,52 @@ on_screenshot_finished (GObject *source,
   update_display_preview (panel);
 }
 
-static void
-get_screenshot_async (CcBackgroundPanel *panel,
-                      GdkRectangle      *rectangle)
+static gboolean
+calculate_contiguous_workarea (ScreenshotData *data)
 {
+  /* Optimise for the shell panel being the only non-workarea
+   * object at the top of the screen */
+  if (data->workarea_rect.x != data->monitor_rect.x)
+    return FALSE;
+  if ((data->workarea_rect.y + data->workarea_rect.height) != (data->monitor_rect.y + data->monitor_rect.height))
+    return FALSE;
+
+  data->capture_rect.x = data->monitor_rect.x;
+  data->capture_rect.width = data->monitor_rect.width;
+  data->capture_rect.y = data->monitor_rect.y;
+  data->capture_rect.height = data->monitor_rect.height - data->workarea_rect.height;
+
+  return TRUE;
+}
+
+static void
+get_screenshot_async (CcBackgroundPanel *panel)
+{
+  CcBackgroundPanelPrivate *priv = panel->priv;
   gchar *path, *tmpname;
   const gchar *method_name;
   GVariant *method_params;
+  GtkWidget *widget;
+  ScreenshotData *data;
+  int primary;
+
+  data = g_new0 (ScreenshotData, 1);
+  data->panel = panel;
+
+  widget = WID ("background-desktop-drawingarea");
+  primary = gdk_screen_get_primary_monitor (gtk_widget_get_screen (widget));
+  gdk_screen_get_monitor_geometry (gtk_widget_get_screen (widget), primary, &data->monitor_rect);
+  gdk_screen_get_monitor_workarea (gtk_widget_get_screen (widget), primary, &data->workarea_rect);
+  if (calculate_contiguous_workarea (data)) {
+    g_debug ("Capturing only a portion of the screen");
+  } else {
+    g_debug ("Capturing the whole screen");
+    data->whole_monitor = TRUE;
+    data->capture_rect = data->monitor_rect;
+  }
 
   g_debug ("Trying to capture rectangle %dx%d (at %d,%d)",
-           rectangle->width, rectangle->height, rectangle->x, rectangle->y);
+           data->capture_rect.width, data->capture_rect.height, data->capture_rect.x, data->capture_rect.y);
 
   path = g_build_filename (g_get_user_cache_dir (), "gnome-control-center", NULL);
   g_mkdir_with_parents (path, 0700);
@@ -318,8 +362,8 @@ get_screenshot_async (CcBackgroundPanel *panel,
 
   method_name = "ScreenshotArea";
   method_params = g_variant_new ("(iiiibs)",
-                                 rectangle->x, rectangle->y,
-                                 rectangle->width, rectangle->height,
+                                 data->capture_rect.x, data->capture_rect.y,
+                                 data->capture_rect.width, data->capture_rect.height,
                                  FALSE, /* flash */
                                  panel->priv->screenshot_path);
 
@@ -334,7 +378,7 @@ get_screenshot_async (CcBackgroundPanel *panel,
                           -1,
                           NULL,
                           on_screenshot_finished,
-                          panel);
+                          data);
 }
 
 static gboolean
@@ -346,12 +390,7 @@ on_preview_draw (GtkWidget         *widget,
   if (panel->priv->display_screenshot == NULL
       && panel->priv->screenshot_path == NULL)
     {
-      GdkRectangle rect;
-      int primary;
-
-      primary = gdk_screen_get_primary_monitor (gtk_widget_get_screen (widget));
-      gdk_screen_get_monitor_geometry (gtk_widget_get_screen (widget), primary, &rect);
-      get_screenshot_async (panel, &rect);
+      get_screenshot_async (panel);
     }
   else
     update_display_preview (panel);
