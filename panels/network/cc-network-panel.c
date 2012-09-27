@@ -195,9 +195,9 @@ cc_network_panel_dispose (GObject *object)
 static void
 cc_network_panel_finalize (GObject *object)
 {
-        CcNetworkPanelPrivate *priv = CC_NETWORK_PANEL (object)->priv;
-        g_free (priv->arg_device);
-        g_free (priv->arg_access_point);
+        CcNetworkPanel *panel = CC_NETWORK_PANEL (object);
+
+        reset_command_line_args (panel);
 
         G_OBJECT_CLASS (cc_network_panel_parent_class)->finalize (object);
 }
@@ -453,24 +453,24 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                         else
                                 cc_network_panel_connect_to_hidden_network (panel, priv->client, priv->remote_settings);
 
-                        priv->arg_operation = OPERATION_NULL; /* done */
+                        reset_command_line_args (panel); /* done */
                         return TRUE;
                 } else if (g_strcmp0 (nm_object_get_path (NM_OBJECT (device)), priv->arg_device) == 0) {
                         if (priv->arg_operation == OPERATION_CONNECT_MOBILE) {
                                 cc_network_panel_connect_to_3g_network (panel, priv->client, priv->remote_settings, device);
 
-                                priv->arg_operation = OPERATION_NULL; /* done */
+                                reset_command_line_args (panel); /* done */
                                 select_tree_iter (panel, &iter);
                                 return TRUE;
                         } else if (priv->arg_operation == OPERATION_CONNECT_8021X) {
                                 cc_network_panel_connect_to_8021x_network (panel, priv->client, priv->remote_settings, device, priv->arg_access_point);
-                                priv->arg_operation = OPERATION_NULL; /* done */
+                                reset_command_line_args (panel); /* done */
                                 select_tree_iter (panel, &iter);
                                 return TRUE;
                         }
                         else if (priv->arg_operation == OPERATION_SHOW_DEVICE) {
                                 select_tree_iter (panel, &iter);
-                                priv->arg_operation = OPERATION_NULL;
+                                reset_command_line_args (panel); /* done */
                                 return TRUE;
                         }
                 }

@@ -218,6 +218,8 @@ show_wireless_dialog (CcNetworkPanel   *panel,
         GtkWidget *toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)));
         WirelessDialogClosure *closure;
 
+        g_debug ("About to parent and show a network dialog");
+
         g_assert (gtk_widget_is_toplevel (toplevel));
         g_object_set (G_OBJECT (dialog),
                       "modal", TRUE,
