@@ -302,6 +302,9 @@ get_screenshot_async (CcBackgroundPanel *panel,
   const gchar *method_name;
   GVariant *method_params;
 
+  g_debug ("Trying to capture rectangle %dx%d (at %d,%d)",
+           rectangle->width, rectangle->height, rectangle->x, rectangle->y);
+
   path = g_build_filename (g_get_user_cache_dir (), "gnome-control-center", NULL);
   g_mkdir_with_parents (path, 0700);
 
