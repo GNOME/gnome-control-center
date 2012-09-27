@@ -320,6 +320,7 @@ on_localed_properties_changed (GDBusProxy   *proxy,
                                         g_variant_dup_string (w, NULL), g_free);
                 g_variant_unref (w);
         } else {
+                variants = NULL;
                 g_object_set_data_full (G_OBJECT (label), "input_variants", NULL, g_free);
         }
 
