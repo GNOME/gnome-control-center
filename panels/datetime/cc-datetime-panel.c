@@ -748,6 +748,10 @@ on_clock_changed (GnomeWallClock  *clock,
 		  GParamSpec      *pspec,
 		  CcDateTimePanel *panel)
 {
+  CcDateTimePanelPrivate *priv = panel->priv;
+
+  g_date_time_unref (priv->date);
+  priv->date = g_date_time_new_now_local ();
   update_time (panel);
 }
 
