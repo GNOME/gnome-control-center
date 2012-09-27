@@ -233,6 +233,7 @@ on_screenshot_finished (GObject *source,
   cairo_t *cr;
   int width;
   int height;
+  int primary;
 
   error = NULL;
   g_dbus_connection_call_finish (panel->priv->connection,
@@ -266,8 +267,9 @@ on_screenshot_finished (GObject *source,
   g_object_unref (pixbuf);
 
   /* clear the workarea */
-   widget = WID ("background-desktop-drawingarea");
-  gdk_screen_get_monitor_workarea (gtk_widget_get_screen (widget), 0, &rect);
+  widget = WID ("background-desktop-drawingarea");
+  primary = gdk_screen_get_primary_monitor (gtk_widget_get_screen (widget));
+  gdk_screen_get_monitor_workarea (gtk_widget_get_screen (widget), primary, &rect);
 
   cairo_save (cr);
   cairo_set_operator (cr, CAIRO_OPERATOR_CLEAR);
@@ -340,8 +342,10 @@ on_preview_draw (GtkWidget         *widget,
       && panel->priv->screenshot_path == NULL)
     {
       GdkRectangle rect;
+      int primary;
 
-      gdk_screen_get_monitor_geometry (gtk_widget_get_screen (widget), 0, &rect);
+      primary = gdk_screen_get_primary_monitor (gtk_widget_get_screen (widget));
+      gdk_screen_get_monitor_geometry (gtk_widget_get_screen (widget), primary, &rect);
       get_screenshot_async (panel, &rect);
     }
   else
