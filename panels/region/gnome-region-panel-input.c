@@ -309,8 +309,12 @@ setup_app_info_for_id (const gchar *id)
 {
   GDesktopAppInfo *app_info;
   gchar *desktop_file_name;
+  gchar **strv;
 
-  desktop_file_name = g_strdup_printf ("ibus-setup-%s.desktop", id);
+  strv = g_strsplit (id, ":", 2);
+  desktop_file_name = g_strdup_printf ("ibus-setup-%s.desktop", strv[0]);
+  g_strfreev (strv);
+
   app_info = g_desktop_app_info_new (desktop_file_name);
   g_free (desktop_file_name);
 
@@ -1060,6 +1064,7 @@ show_selected_settings (GtkButton *button, gpointer data)
   GtkTreeIter iter;
   GdkAppLaunchContext *ctx;
   GDesktopAppInfo *app_info;
+  gchar *id;
   GError *error = NULL;
 
   g_debug ("show selected layout");
@@ -1074,6 +1079,12 @@ show_selected_settings (GtkButton *button, gpointer data)
 
   ctx = gdk_display_get_app_launch_context (gdk_display_get_default ());
   gdk_app_launch_context_set_timestamp (ctx, gtk_get_current_event_time ());
+
+  gtk_tree_model_get (model, &iter, ID_COLUMN, &id, -1);
+  g_app_launch_context_setenv (G_APP_LAUNCH_CONTEXT (ctx),
+                               "IBUS_ENGINE_NAME",
+                               id);
+  g_free (id);
 
   if (!g_app_info_launch (G_APP_INFO (app_info), NULL, G_APP_LAUNCH_CONTEXT (ctx), &error))
     {
