@@ -1931,7 +1931,7 @@ activate_ssid_cb (PanelCellRendererText *cell,
         GtkTreeView *tv;
         GtkTreePath *tpath;
 
-        g_print ("activate ssid!\n");
+        g_debug ("activate ssid!\n");
 
         tv = GTK_TREE_VIEW (gtk_builder_get_object (device_wifi->priv->builder,
                                                     "treeview_list"));
@@ -1952,7 +1952,7 @@ activate_arrow_cb (PanelCellRendererText *cell,
         GtkTreePath *tpath;
         GtkTreeIter iter;
 
-        g_print ("activate arrow!\n");
+        g_debug ("activate arrow!\n");
 
         tv = GTK_TREE_VIEW (gtk_builder_get_object (device_wifi->priv->builder,
                                                     "treeview_list"));
