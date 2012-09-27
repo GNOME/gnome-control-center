@@ -121,6 +121,14 @@ cmdline_operation_from_string (const gchar *string)
 }
 
 static void
+reset_command_line_args (CcNetworkPanel *self)
+{
+	self->priv->arg_operation = OPERATION_NULL;
+	g_clear_pointer (&self->priv->arg_device, g_free);
+	g_clear_pointer (&self->priv->arg_access_point, g_free);
+}
+
+static void
 cc_network_panel_set_property (GObject      *object,
                                guint         property_id,
                                const GValue *value,
@@ -133,11 +141,7 @@ cc_network_panel_set_property (GObject      *object,
         case PROP_ARGV: {
                 gchar **args;
 
-                priv->arg_operation = OPERATION_NULL;
-                g_free (priv->arg_device);
-                priv->arg_device = NULL;
-                g_free (priv->arg_access_point);
-                priv->arg_access_point = NULL;
+                reset_command_line_args (self);
 
                 args = g_value_get_boxed (value);
 
