@@ -89,6 +89,7 @@ enum {
 };
 
 static NetObject *find_in_model_by_id (CcNetworkPanel *panel, const gchar *id);
+static void handle_argv (CcNetworkPanel *panel);
 
 static void
 cc_network_panel_get_property (GObject    *object,
@@ -154,6 +155,8 @@ cc_network_panel_set_property (GObject      *object,
                                 priv->arg_device = g_strdup (args[1]);
                         if (args[0] && args[1] && args[2])
                                 priv->arg_access_point = g_strdup (args[2]);
+
+                        handle_argv (self);
                 }
                 break;
         }
@@ -368,6 +371,89 @@ panel_refresh_killswitch_visibility (CcNetworkPanel *panel)
 }
 
 static gboolean
+handle_argv_for_device (CcNetworkPanel *panel,
+			NMDevice       *device,
+			GtkTreeIter    *iter)
+{
+        CcNetworkPanelPrivate *priv = panel->priv;
+        NMDeviceType type;
+
+        if (priv->arg_operation == OPERATION_NULL)
+                return TRUE;
+
+        type = nm_device_get_device_type (device);
+
+        if (type == NM_DEVICE_TYPE_WIFI &&
+            (priv->arg_operation == OPERATION_CREATE_WIFI ||
+             priv->arg_operation == OPERATION_CONNECT_HIDDEN)) {
+                g_debug ("Selecting wifi device");
+                select_tree_iter (panel, iter);
+
+                if (priv->arg_operation == OPERATION_CREATE_WIFI)
+                        cc_network_panel_create_wifi_network (panel, priv->client, priv->remote_settings);
+                else
+                        cc_network_panel_connect_to_hidden_network (panel, priv->client, priv->remote_settings);
+
+                reset_command_line_args (panel); /* done */
+                return TRUE;
+        } else if (g_strcmp0 (nm_object_get_path (NM_OBJECT (device)), priv->arg_device) == 0) {
+                if (priv->arg_operation == OPERATION_CONNECT_MOBILE) {
+                        cc_network_panel_connect_to_3g_network (panel, priv->client, priv->remote_settings, device);
+
+                        reset_command_line_args (panel); /* done */
+                        select_tree_iter (panel, iter);
+                        return TRUE;
+                } else if (priv->arg_operation == OPERATION_CONNECT_8021X) {
+                        cc_network_panel_connect_to_8021x_network (panel, priv->client, priv->remote_settings, device, priv->arg_access_point);
+                        reset_command_line_args (panel); /* done */
+                        select_tree_iter (panel, iter);
+                        return TRUE;
+                }
+                else if (priv->arg_operation == OPERATION_SHOW_DEVICE) {
+                        select_tree_iter (panel, iter);
+                        reset_command_line_args (panel); /* done */
+                        return TRUE;
+                }
+        }
+
+        return FALSE;
+}
+
+static void
+handle_argv (CcNetworkPanel *panel)
+{
+        GtkTreeModel *model;
+        GtkTreeIter iter;
+        gboolean ret;
+
+        if (panel->priv->arg_operation == OPERATION_NULL)
+                return;
+
+        model = GTK_TREE_MODEL (gtk_builder_get_object (panel->priv->builder,
+                                                        "liststore_devices"));
+        ret = gtk_tree_model_get_iter_first (model, &iter);
+        while (ret) {
+                GObject *object_tmp;
+                NMDevice *device;
+                gboolean done;
+
+                gtk_tree_model_get (model, &iter,
+                                    PANEL_DEVICES_COLUMN_OBJECT, &object_tmp,
+                                    -1);
+                g_object_get (object_tmp, "nm-device", &device, NULL);
+                done = handle_argv_for_device (panel, device, &iter);
+
+                g_object_unref (object_tmp);
+                g_object_unref (device);
+
+                if (done)
+                        break;
+
+                ret = gtk_tree_model_iter_next (model, &iter);
+        }
+}
+
+static gboolean
 panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 {
         const gchar *title;
@@ -440,41 +526,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                             PANEL_DEVICES_COLUMN_TITLE, title,
                             PANEL_DEVICES_COLUMN_OBJECT, net_device,
                             -1);
-
-        if (priv->arg_operation != OPERATION_NULL) {
-                if (type == NM_DEVICE_TYPE_WIFI &&
-                    (priv->arg_operation == OPERATION_CREATE_WIFI ||
-                     priv->arg_operation == OPERATION_CONNECT_HIDDEN)) {
-                        g_debug ("Selecting wifi device");
-                        select_tree_iter (panel, &iter);
-
-                        if (priv->arg_operation == OPERATION_CREATE_WIFI)
-                                cc_network_panel_create_wifi_network (panel, priv->client, priv->remote_settings);
-                        else
-                                cc_network_panel_connect_to_hidden_network (panel, priv->client, priv->remote_settings);
-
-                        reset_command_line_args (panel); /* done */
-                        return TRUE;
-                } else if (g_strcmp0 (nm_object_get_path (NM_OBJECT (device)), priv->arg_device) == 0) {
-                        if (priv->arg_operation == OPERATION_CONNECT_MOBILE) {
-                                cc_network_panel_connect_to_3g_network (panel, priv->client, priv->remote_settings, device);
-
-                                reset_command_line_args (panel); /* done */
-                                select_tree_iter (panel, &iter);
-                                return TRUE;
-                        } else if (priv->arg_operation == OPERATION_CONNECT_8021X) {
-                                cc_network_panel_connect_to_8021x_network (panel, priv->client, priv->remote_settings, device, priv->arg_access_point);
-                                reset_command_line_args (panel); /* done */
-                                select_tree_iter (panel, &iter);
-                                return TRUE;
-                        }
-                        else if (priv->arg_operation == OPERATION_SHOW_DEVICE) {
-                                select_tree_iter (panel, &iter);
-                                reset_command_line_args (panel); /* done */
-                                return TRUE;
-                        }
-                }
-        }
 
 out:
         return FALSE;
@@ -726,6 +777,8 @@ out:
                 /* select the first device */
                 select_first_device (panel);
         }
+
+        handle_argv (panel);
 }
 
 static NetObject *
