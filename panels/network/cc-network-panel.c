@@ -60,6 +60,7 @@ struct _CcNetworkPanelPrivate
 {
         GCancellable     *cancellable;
         GtkBuilder       *builder;
+        GtkWidget        *treeview;
         NMClient         *client;
         NMRemoteSettings *remote_settings;
         gboolean          updating_device;
@@ -232,15 +233,12 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
 static NetObject *
 get_selected_object (CcNetworkPanel *panel)
 {
-        GtkWidget *widget;
         GtkTreeSelection *selection;
         GtkTreeModel *model;
         GtkTreeIter iter;
         NetObject *object = NULL;
 
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "treeview_devices"));
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->priv->treeview));
         if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
                 return NULL;
         }
@@ -256,12 +254,9 @@ static void
 select_first_device (CcNetworkPanel *panel)
 {
         GtkTreePath *path;
-        GtkWidget *widget;
         GtkTreeSelection *selection;
 
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "treeview_devices"));
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->priv->treeview));
 
         /* select the first device */
         path = gtk_tree_path_new_from_string ("0");
@@ -272,12 +267,9 @@ select_first_device (CcNetworkPanel *panel)
 static void
 select_tree_iter (CcNetworkPanel *panel, GtkTreeIter *iter)
 {
-        GtkTreeView *widget;
         GtkTreeSelection *selection;
 
-        widget = GTK_TREE_VIEW (gtk_builder_get_object (panel->priv->builder,
-                                                        "treeview_devices"));
-        selection = gtk_tree_view_get_selection (widget);
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->priv->treeview));
 
         gtk_tree_selection_select_iter (selection, iter);
 }
@@ -289,12 +281,9 @@ object_removed_cb (NetObject *object, CcNetworkPanel *panel)
         NetObject *object_tmp;
         GtkTreeIter iter;
         GtkTreeModel *model;
-        GtkWidget *widget;
         GtkTreeSelection *selection;
 
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "treeview_devices"));
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->priv->treeview));
 
         /* remove device from model */
         model = GTK_TREE_MODEL (gtk_builder_get_object (panel->priv->builder,
@@ -612,8 +601,6 @@ nm_devices_treeview_clicked_cb (GtkTreeSelection *selection, CcNetworkPanel *pan
         guint i = 0;
         NetObject *object = NULL;
 
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                     "treeview_devices"));
         if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
                 g_debug ("no row selected");
                 goto out;
@@ -1099,10 +1086,10 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
         panel->priv->cancellable = g_cancellable_new ();
 
-        widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "treeview_devices"));
-        panel_add_devices_columns (panel, GTK_TREE_VIEW (widget));
-        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+        panel->priv->treeview = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                                                    "treeview_devices"));
+        panel_add_devices_columns (panel, GTK_TREE_VIEW (panel->priv->treeview));
+        selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->priv->treeview));
         gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
         g_signal_connect (selection, "changed",
                           G_CALLBACK (nm_devices_treeview_clicked_cb), panel);
