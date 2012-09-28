@@ -563,7 +563,7 @@ panel_add_devices_columns (CcNetworkPanel *panel, GtkTreeView *treeview)
         g_object_set (renderer, "stock-size", gtk_icon_size_from_name ("cc-sidebar-list"), NULL);
         gtk_cell_renderer_set_padding (renderer, 4, 4);
 
-        column = gtk_tree_view_column_new_with_attributes ("", renderer,
+        column = gtk_tree_view_column_new_with_attributes ("icon", renderer,
                                                            "icon-name", PANEL_DEVICES_COLUMN_ICON,
                                                            NULL);
         gtk_tree_view_append_column (treeview, column);
@@ -572,8 +572,9 @@ panel_add_devices_columns (CcNetworkPanel *panel, GtkTreeView *treeview)
         renderer = gtk_cell_renderer_text_new ();
         g_object_set (renderer,
                       "wrap-mode", PANGO_WRAP_WORD,
+                      "ellipsize", PANGO_ELLIPSIZE_END,
                       NULL);
-        column = gtk_tree_view_column_new_with_attributes ("", renderer,
+        column = gtk_tree_view_column_new_with_attributes ("title", renderer,
                                                            "markup", PANEL_DEVICES_COLUMN_TITLE,
                                                            NULL);
         gtk_tree_view_column_set_sort_column_id (column, PANEL_DEVICES_COLUMN_SORT);
@@ -1096,6 +1097,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "devices_scrolledwindow"));
+        gtk_widget_set_size_request (widget, 200, -1);
         context = gtk_widget_get_style_context (widget);
         gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
 

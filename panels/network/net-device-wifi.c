@@ -2055,6 +2055,7 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
         renderer2 = panel_cell_renderer_text_new ();
         g_object_set (renderer2,
                       "mode", GTK_CELL_RENDERER_MODE_ACTIVATABLE,
+                      "ellipsize", PANGO_ELLIPSIZE_END,
                       NULL);
         gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (column), renderer2, TRUE);
         gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (column), renderer2,

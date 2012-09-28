@@ -216,6 +216,7 @@
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
                     <property name="shadow_type">in</property>
+                    <property name="hscrollbar_policy">never</property>
                     <child>
                       <object class="GtkTreeView" id="treeview_list">
                         <property name="visible">True</property>
@@ -232,7 +233,9 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkTreeViewColumn" id="treeview_list_column"/>
+                          <object class="GtkTreeViewColumn" id="treeview_list_column">
+                            <property name="title">Column</property>
+                          </object>
                         </child>
                       </object>
                     </child>
