@@ -57,6 +57,7 @@ enum {
 
 static GSettings *input_sources_settings = NULL;
 static GnomeXkbInfo *xkb_info = NULL;
+static GtkWidget *input_chooser = NULL; /* weak pointer */
 
 #ifdef HAVE_IBUS
 static IBusBus *ibus = NULL;
@@ -253,6 +254,8 @@ static const gchar *supported_ibus_engines[] = {
 };
 #endif  /* HAVE_IBUS */
 
+static void       populate_model             (GtkListStore  *store,
+                                              GtkListStore  *active_sources_store);
 static GtkWidget *input_chooser_new          (GtkWindow     *main_window,
                                               GtkListStore  *active_sources);
 static gboolean   input_chooser_get_selected (GtkWidget     *chooser,
@@ -322,6 +325,22 @@ setup_app_info_for_id (const gchar *id)
 }
 
 static void
+input_chooser_repopulate (GtkListStore *active_sources_store)
+{
+  GtkBuilder *builder;
+  GtkListStore *model;
+
+  if (!input_chooser)
+    return;
+
+  builder = g_object_get_data (G_OBJECT (input_chooser), "builder");
+  model = GTK_LIST_STORE (gtk_builder_get_object (builder, "input_source_model"));
+
+  gtk_list_store_clear (model);
+  populate_model (model, active_sources_store);
+}
+
+static void
 update_ibus_active_sources (GtkBuilder *builder)
 {
   GtkTreeView *tv;
@@ -368,6 +387,8 @@ update_ibus_active_sources (GtkBuilder *builder)
 
       ret = gtk_tree_model_iter_next (model, &iter);
     }
+
+  input_chooser_repopulate (GTK_LIST_STORE (model));
 }
 
 static void
@@ -1446,6 +1467,8 @@ input_chooser_new (GtkWindow    *main_window,
                              GNOMECC_UI_DIR "/gnome-region-panel-input-chooser.ui",
                              NULL);
   chooser = WID ("input_source_chooser");
+  input_chooser = chooser;
+  g_object_add_weak_pointer (G_OBJECT (chooser), (gpointer *) &input_chooser);
   g_object_set_data_full (G_OBJECT (chooser), "builder", builder, g_object_unref);
 
   filtered_list = WID ("filtered_input_source_list");
