@@ -1,4 +1,7 @@
+#include "config.h"
+
 #include <glib.h>
+#include <glib/gi18n.h>
 #include <glib-object.h>
 #include "gdm-languages.h"
 
@@ -6,6 +9,9 @@ int main (int argc, char **argv)
 {
 	char **langs;
 	guint i;
+
+	setlocale (LC_ALL, NULL);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
 	g_type_init ();
 
