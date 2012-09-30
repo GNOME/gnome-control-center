@@ -275,7 +275,7 @@ on_screenshot_finished (GObject *source,
 
   cairo_save (cr);
   cairo_set_operator (cr, CAIRO_OPERATOR_CLEAR);
-  cairo_rectangle (cr, workarea_rect.x - rect.x, workarea_rect.y - rect.y, rect.width, rect.height);
+  cairo_rectangle (cr, workarea_rect.x - rect.x, workarea_rect.y - rect.y, workarea_rect.width, workarea_rect.height);
   cairo_fill (cr);
   cairo_restore (cr);
 
