@@ -424,7 +424,7 @@ handle_argv (CcNetworkPanel *panel)
         while (ret) {
                 GObject *object_tmp;
                 NMDevice *device;
-                gboolean done;
+                gboolean done = FALSE;
 
                 gtk_tree_model_get (model, &iter,
                                     PANEL_DEVICES_COLUMN_OBJECT, &object_tmp,
@@ -438,7 +438,7 @@ handle_argv (CcNetworkPanel *panel)
                 g_object_unref (object_tmp);
 
                 if (done)
-                        break;
+                        return;
 
                 ret = gtk_tree_model_iter_next (model, &iter);
         }
