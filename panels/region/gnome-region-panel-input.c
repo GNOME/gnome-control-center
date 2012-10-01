@@ -196,6 +196,30 @@ static const gchar *supported_ibus_engines[] = {
   /* Urdu */
   "m17n:ur:phonetic",
 
+  /* Inscript2 - https://bugzilla.gnome.org/show_bug.cgi?id=684854 */
+  "m17n:as:inscript2",
+  "m17n:bn:inscript2",
+  "m17n:brx:inscript2-deva",
+  "m17n:doi:inscript2-deva",
+  "m17n:gu:inscript2",
+  "m17n:hi:inscript2",
+  "m17n:kn:inscript2",
+  "m17n:kok:inscript2-deva",
+  "m17n:mai:inscript2",
+  "m17n:ml:inscript2",
+  "m17n:mni:inscript2-beng",
+  "m17n:mni:inscript2-mtei",
+  "m17n:mr:inscript2",
+  "m17n:ne:inscript2-deva",
+  "m17n:or:inscript2",
+  "m17n:pa:inscript2-guru",
+  "m17n:sa:inscript2",
+  "m17n:sat:inscript2-deva",
+  "m17n:sat:inscript2-olck",
+  "m17n:sd:inscript2-deva",
+  "m17n:ta:inscript2",
+  "m17n:te:inscript2",
+
   /* No corresponding XKB map available for the languages */
 
   /* Chinese Yi */
