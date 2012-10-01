@@ -175,39 +175,6 @@ add_access_point (NetDeviceWifi *device_wifi, NMAccessPoint *ap, NMAccessPoint *
         g_free (title);
 }
 
-static void
-add_connect_to_hidden (NetDeviceWifi *device_wifi)
-{
-        NetDeviceWifiPrivate *priv = device_wifi->priv;
-        GtkListStore *liststore_network;
-        GtkTreeIter treeiter;
-        gchar *title;
-
-        liststore_network = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
-                                                     "liststore_network"));
-
-        /* TRANSLATORS: this is when the access point is not shown
-         * in the list and the user has to enter the SSID manually
-         */
-        title = g_strdup_printf ("<b>%s</b>", _("Connect to a Hidden Network"));
-        gtk_list_store_append (liststore_network, &treeiter);
-        gtk_list_store_set (liststore_network,
-                            &treeiter,
-                            COLUMN_CONNECTION_ID, "ap-other...",
-                            COLUMN_ACCESS_POINT_ID, "ap-other...",
-                            COLUMN_TITLE, title,
-                            /* always last */
-                            COLUMN_SORT, "",
-                            COLUMN_STRENGTH, 0,
-                            COLUMN_MODE, NM_802_11_MODE_UNKNOWN,
-                            COLUMN_SECURITY, NM_AP_SEC_UNKNOWN,
-                            COLUMN_AP_IN_RANGE, FALSE,
-                            COLUMN_AP_OUT_OF_RANGE, FALSE,
-                            COLUMN_AP_IS_SAVED, FALSE,
-                            -1);
-        g_free (title);
-}
-
 static GPtrArray *
 panel_get_strongest_unique_aps (const GPtrArray *aps)
 {
@@ -518,7 +485,6 @@ device_wifi_refresh_aps (NetDeviceWifi *device_wifi)
                 ap = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, i));
                 add_access_point (device_wifi, ap, active_ap, nm_device);
         }
-        add_connect_to_hidden (device_wifi);
 
         device_wifi->priv->updating_device = FALSE;
         g_ptr_array_unref (aps_unique);
@@ -1692,9 +1658,7 @@ connect_wifi_network (NetDeviceWifi *device_wifi,
                             COLUMN_AP_IN_RANGE, &ap_in_range,
                             COLUMN_MODE, &mode,
                             -1);
-        if (g_strcmp0 (connection_id, "ap-other...") == 0) {
-                connect_to_hidden_network (device_wifi);
-        } else if (ap_in_range) {
+        if (ap_in_range) {
                 if (connection_id)
                         activate_connection (device_wifi, connection_id);
                 else
@@ -2209,6 +2173,12 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                                                      "start_hotspot_button"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (start_hotspot), device_wifi);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
+                                                     "connect_hidden_button"));
+        g_signal_connect_swapped (widget, "clicked",
+                                  G_CALLBACK (connect_to_hidden_network), device_wifi);
+
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "switch_hotspot_off"));
         g_signal_connect (widget, "notify::active",
