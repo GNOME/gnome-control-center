@@ -233,7 +233,9 @@ show_wireless_dialog (CcNetworkPanel   *panel,
                                G_CALLBACK (wireless_dialog_response_cb),
                                closure, wireless_dialog_closure_closure_notify, 0);
 
-        gtk_widget_show (dialog);
+        g_object_bind_property (G_OBJECT (toplevel), "visible",
+                                G_OBJECT (dialog), "visible",
+                                G_BINDING_SYNC_CREATE);
 }
 
 void
