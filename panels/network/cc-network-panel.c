@@ -429,11 +429,13 @@ handle_argv (CcNetworkPanel *panel)
                 gtk_tree_model_get (model, &iter,
                                     PANEL_DEVICES_COLUMN_OBJECT, &object_tmp,
                                     -1);
-                g_object_get (object_tmp, "nm-device", &device, NULL);
-                done = handle_argv_for_device (panel, device, &iter);
+                if (g_object_class_find_property (G_OBJECT_GET_CLASS (object_tmp), "nm-device") != NULL) {
+                        g_object_get (object_tmp, "nm-device", &device, NULL);
+                        done = handle_argv_for_device (panel, device, &iter);
+                        g_object_unref (device);
+                }
 
                 g_object_unref (object_tmp);
-                g_object_unref (device);
 
                 if (done)
                         break;
