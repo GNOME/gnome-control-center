@@ -157,6 +157,7 @@ cc_network_panel_set_property (GObject      *object,
                         if (args[0] && args[1] && args[2])
                                 priv->arg_access_point = g_strdup (args[2]);
 
+                        g_debug ("Calling handle_argv() after setting property");
                         handle_argv (self);
                 }
                 break;
@@ -442,6 +443,8 @@ handle_argv (CcNetworkPanel *panel)
 
                 ret = gtk_tree_model_iter_next (model, &iter);
         }
+
+        g_debug ("Could not handle argv operation, no matching device yet?");
 }
 
 static gboolean
@@ -768,6 +771,7 @@ out:
                 select_first_device (panel);
         }
 
+        g_debug ("Calling handle_argv() after cold-plugging devices");
         handle_argv (panel);
 }
 
