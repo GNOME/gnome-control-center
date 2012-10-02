@@ -1692,12 +1692,16 @@ connect_wifi_network (NetDeviceWifi *device_wifi,
                             COLUMN_AP_IN_RANGE, &ap_in_range,
                             COLUMN_MODE, &mode,
                             -1);
-        if (g_strcmp0 (connection_id, "ap-other...") == 0)
+        if (g_strcmp0 (connection_id, "ap-other...") == 0) {
                 connect_to_hidden_network (device_wifi);
-        else if (ap_in_range)
-                wireless_try_to_connect (device_wifi, ssid, ap_object_path);
-        else
+        } else if (ap_in_range) {
+                if (connection_id)
+                        activate_connection (device_wifi, connection_id);
+                else
+                        wireless_try_to_connect (device_wifi, ssid, ap_object_path);
+        } else {
                 g_warning ("can't connect");
+        }
 
         g_free (ap_object_path);
         g_free (connection_id);
