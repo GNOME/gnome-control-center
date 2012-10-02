@@ -551,7 +551,8 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                 device_g_type = NET_TYPE_DEVICE_WIFI;
                 break;
         default:
-                goto out;
+                device_g_type = NET_TYPE_DEVICE_SIMPLE;
+                break;
         }
 
         /* create device */

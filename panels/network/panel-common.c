@@ -63,6 +63,7 @@ panel_device_to_icon_name (NMDevice *device)
                 }
                 break;
         default:
+                value = "network-idle";
                 break;
         }
         return value;
