@@ -1080,6 +1080,28 @@ activate_connection (NetDeviceWifi *device_wifi,
                                        connection_activate_cb, device_wifi);
 }
 
+static gboolean
+is_8021x (NMDevice   *device,
+          const char *ap_object_path)
+{
+        NM80211ApSecurityFlags wpa_flags, rsn_flags;
+        NMAccessPoint *ap;
+
+        ap = nm_device_wifi_get_access_point_by_path (NM_DEVICE_WIFI (device),
+                                                      ap_object_path);
+        if (!ap)
+                return FALSE;
+
+        rsn_flags = nm_access_point_get_rsn_flags (ap);
+        if (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_802_1X)
+                return TRUE;
+
+        wpa_flags = nm_access_point_get_wpa_flags (ap);
+        if (wpa_flags & NM_802_11_AP_SEC_KEY_MGMT_802_1X)
+                return TRUE;
+        return FALSE;
+}
+
 static void
 wireless_try_to_connect (NetDeviceWifi *device_wifi,
                          const gchar *ssid_target,
@@ -1147,12 +1169,30 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
         }
 
         /* create one, as it's missing */
-        g_debug ("no existing connection found for %s, creating",
-                 ssid_target);
-        nm_client_add_and_activate_connection (client,
-                                               NULL,
-                                               device, ap_object_path,
-                                               connection_add_activate_cb, device_wifi);
+        g_debug ("no existing connection found for %s, creating", ssid_target);
+
+        if (!is_8021x (device, ap_object_path)) {
+                g_debug ("no existing connection found for %s, creating and activating one", ssid_target);
+                nm_client_add_and_activate_connection (client,
+                                                       NULL,
+                                                       device, ap_object_path,
+                                                       connection_add_activate_cb, device_wifi);
+        } else {
+                CcNetworkPanel *panel;
+                GPtrArray *array;
+
+                g_debug ("no existing connection found for %s, creating", ssid_target);
+                array = g_ptr_array_new ();
+                g_ptr_array_add (array, "connect-8021x-wifi");
+                g_ptr_array_add (array, (gpointer) nm_object_get_path (NM_OBJECT (device)));
+                g_ptr_array_add (array, (gpointer) ap_object_path);
+                g_ptr_array_add (array, NULL);
+
+                panel = net_object_get_panel (NET_OBJECT (device_wifi));
+                g_object_set (G_OBJECT (panel), "argv", array->pdata, NULL);
+
+                g_ptr_array_free (array, FALSE);
+        }
 out:
         return;
 }
