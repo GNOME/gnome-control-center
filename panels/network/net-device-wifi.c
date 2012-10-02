@@ -1089,7 +1089,6 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
         const gchar *ssid_tmp;
         GSList *list, *l;
         GSList *filtered;
-        NMConnection *connection;
         NMConnection *connection_activate = NULL;
         NMDevice *device;
         NMSettingWireless *setting_wireless;
@@ -1116,6 +1115,8 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
         filtered = nm_device_filter_connections (device, list);
         g_debug ("%i suitable remote connections to check", g_slist_length (filtered));
         for (l = filtered; l; l = g_slist_next (l)) {
+                NMConnection *connection;
+
                 connection = NM_CONNECTION (l->data);
                 setting_wireless = nm_connection_get_setting_wireless (connection);
                 if (!NM_IS_SETTING_WIRELESS (setting_wireless))
