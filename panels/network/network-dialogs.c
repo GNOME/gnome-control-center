@@ -473,6 +473,25 @@ done:
         nma_mobile_wizard_destroy (wizard);
 }
 
+static void
+toplevel_shown (GtkWindow       *toplevel,
+                GParamSpec      *pspec,
+                NMAMobileWizard *wizard)
+{
+        gboolean visible = FALSE;
+
+        g_object_get (G_OBJECT (toplevel), "visible", &visible, NULL);
+        if (visible)
+                nma_mobile_wizard_present (wizard);
+}
+
+static gboolean
+show_wizard_idle_cb (NMAMobileWizard *wizard)
+{
+        nma_mobile_wizard_present (wizard);
+        return FALSE;
+}
+
 void
 cc_network_panel_connect_to_3g_network (CcNetworkPanel   *panel,
                                         NMClient         *client,
@@ -483,6 +502,7 @@ cc_network_panel_connect_to_3g_network (CcNetworkPanel   *panel,
         MobileDialogClosure *closure;
         NMAMobileWizard *wizard;
 	NMDeviceModemCapabilities caps;
+        gboolean visible = FALSE;
 
         g_debug ("connect to 3g");
         if (!NM_IS_DEVICE_MODEM (device)) {
@@ -518,5 +538,13 @@ cc_network_panel_connect_to_3g_network (CcNetworkPanel   *panel,
                 return;
         }
 
-        nma_mobile_wizard_present (wizard);
+        g_object_get (G_OBJECT (toplevel), "visible", &visible, NULL);
+        if (visible) {
+                g_debug ("Scheduling showing the Mobile wizard");
+                g_idle_add ((GSourceFunc) show_wizard_idle_cb, wizard);
+        } else {
+                g_debug ("Will show wizard a bit later, toplevel is not visible");
+                g_signal_connect (G_OBJECT (toplevel), "notify::visible",
+                                  G_CALLBACK (toplevel_shown), wizard);
+        }
 }
