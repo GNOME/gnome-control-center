@@ -1037,6 +1037,9 @@ connection_add_activate_cb (NMClient *client,
 
         if (connection == NULL) {
                 /* failed to activate */
+                g_debug ("Failed to add and activate connection '%d': %s",
+                         error->code,
+                         error->message);
                 nm_device_wifi_refresh_ui (device_wifi);
         }
 }
@@ -1051,6 +1054,9 @@ connection_activate_cb (NMClient *client,
 
         if (connection == NULL) {
                 /* failed to activate */
+                g_debug ("Failed to activate connection '%d': %s",
+                         error->code,
+                         error->message);
                 nm_device_wifi_refresh_ui (device_wifi);
         }
 }
