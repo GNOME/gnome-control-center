@@ -130,6 +130,22 @@ reset_command_line_args (CcNetworkPanel *self)
 	g_clear_pointer (&self->priv->arg_access_point, g_free);
 }
 
+static gboolean
+verify_argv (CcNetworkPanel *self,
+	     const char    **args)
+{
+	switch (self->priv->arg_operation) {
+	case OPERATION_CONNECT_MOBILE:
+	case OPERATION_CONNECT_8021X:
+	case OPERATION_SHOW_DEVICE:
+		if (self->priv->arg_device == NULL)
+			g_warning ("Operation %s requires an object path", args[0]);
+		return FALSE;
+	default:
+		return TRUE;
+	}
+}
+
 static void
 cc_network_panel_set_property (GObject      *object,
                                guint         property_id,
@@ -156,6 +172,11 @@ cc_network_panel_set_property (GObject      *object,
                                 priv->arg_device = g_strdup (args[1]);
                         if (args[0] && args[1] && args[2])
                                 priv->arg_access_point = g_strdup (args[2]);
+
+                        if (verify_argv (self, (const char **) args) == FALSE) {
+                                reset_command_line_args (self);
+                                return;
+                        }
 
                         g_debug ("Calling handle_argv() after setting property");
                         handle_argv (self);
