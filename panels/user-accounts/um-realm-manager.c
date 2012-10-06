@@ -312,6 +312,7 @@ on_provider_discover (GObject *source,
         DiscoverClosure *discover = g_simple_async_result_get_op_res_gpointer (async);
         GDBusObject *object;
         GError *error = NULL;
+        gboolean no_membership = FALSE;
         gchar **realms;
         gint relevance;
         gint i;
@@ -324,12 +325,22 @@ on_provider_discover (GObject *source,
                         if (object == NULL) {
                                 g_warning ("Realm is not in object manager: %s", realms[i]);
                         } else {
-                                g_debug ("Discovered realm: %s", realms[i]);
-                                discover->realms = g_list_prepend (discover->realms, object);
+                                if (is_realm_with_kerberos_and_membership (object)) {
+                                        g_debug ("Discovered realm: %s", realms[i]);
+                                        discover->realms = g_list_prepend (discover->realms, object);
+                                } else {
+                                        g_debug ("Realm does not support kerberos membership: %s", realms[i]);
+                                        no_membership = TRUE;
+                                        g_object_unref (object);
+                                }
                         }
                 }
                 g_strfreev (realms);
 
+                if (!discover->realms && no_membership) {
+                        g_simple_async_result_set_error (async, UM_REALM_ERROR, UM_REALM_ERROR_GENERIC,
+                                                         _("Cannot automatically join this type of domain"));
+                }
         } else {
                 g_simple_async_result_take_error (async, error);
         }
