@@ -160,36 +160,85 @@ on_realm_diagnostics (GDBusConnection *connection,
         }
 }
 
-static gboolean
-number_at_least (const gchar *number,
-                 guint minimum)
-{
-        gchar *end;
+typedef struct {
+        GCancellable *cancellable;
+        UmRealmManager *manager;
+} NewClosure;
 
-        if (strtol (number, &end, 10) < (long)minimum)
-                return FALSE;
-        if (!end || *end != '\0')
-                return FALSE;
-        return TRUE;
+static void
+new_closure_free (gpointer data)
+{
+        NewClosure *closure = data;
+        g_clear_object (&closure->cancellable);
+        g_clear_object (&closure->manager);
+        g_slice_free (NewClosure, closure);
 }
 
-static gboolean
-version_compare (const char *version,
-                 guint req_major,
-                 guint req_minor)
+static void
+on_provider_new (GObject *source,
+                 GAsyncResult *result,
+                 gpointer user_data)
 {
-        gboolean match = FALSE;
-        gchar **parts;
+        GSimpleAsyncResult *async = G_SIMPLE_ASYNC_RESULT (user_data);
+        NewClosure *closure = g_simple_async_result_get_op_res_gpointer (async);
+        GError *error = NULL;
+        UmRealmProvider *provider;
 
-        parts = g_strsplit (version, ".", 2);
+        provider = um_realm_provider_proxy_new_finish (result, &error);
+        closure->manager->provider = provider;
 
-        if (parts[0] && parts[1]) {
-                match = number_at_least (parts[0], req_major) &&
-                        number_at_least (parts[1], req_minor);
+        if (error == NULL)
+                g_debug ("Created realm manager");
+        else
+                g_simple_async_result_take_error (async, error);
+        g_simple_async_result_complete (async);
+
+        g_object_unref (async);
+}
+
+static void
+on_manager_new (GObject *source,
+                GAsyncResult *result,
+                gpointer user_data)
+{
+        GSimpleAsyncResult *async = G_SIMPLE_ASYNC_RESULT (user_data);
+        NewClosure *closure = g_simple_async_result_get_op_res_gpointer (async);
+        GDBusConnection *connection;
+        GError *error = NULL;
+        GObject *object;
+        guint sig;
+
+        object = g_async_initable_new_finish (G_ASYNC_INITABLE (source), result, &error);
+        if (error == NULL) {
+                closure->manager = UM_REALM_MANAGER (object);
+                connection = g_dbus_object_manager_client_get_connection (G_DBUS_OBJECT_MANAGER_CLIENT (object));
+
+                g_debug ("Connected to realmd");
+
+                sig = g_dbus_connection_signal_subscribe (connection,
+                                                          "org.freedesktop.realmd",
+                                                          "org.freedesktop.realmd.Service",
+                                                          "Diagnostics",
+                                                          NULL,
+                                                          NULL,
+                                                          G_DBUS_SIGNAL_FLAGS_NONE,
+                                                          on_realm_diagnostics,
+                                                          NULL,
+                                                          NULL);
+                closure->manager->diagnostics_sig = sig;
+
+                um_realm_provider_proxy_new (connection,
+                                             G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES,
+                                             "org.freedesktop.realmd",
+                                             "/org/freedesktop/realmd",
+                                             closure->cancellable,
+                                             on_provider_new, g_object_ref (async));
+        } else {
+                g_simple_async_result_take_error (async, error);
+                g_simple_async_result_complete (async);
         }
 
-        g_strfreev (parts);
-        return match;
+        g_object_unref (async);
 }
 
 void
@@ -197,79 +246,45 @@ um_realm_manager_new (GCancellable *cancellable,
                       GAsyncReadyCallback callback,
                       gpointer user_data)
 {
+        GSimpleAsyncResult *async;
+        NewClosure *closure;
+
         g_debug ("Connecting to realmd...");
 
+        async = g_simple_async_result_new (NULL, callback, user_data,
+                                           um_realm_manager_new);
+        closure = g_slice_new (NewClosure);
+        closure->cancellable = cancellable ? g_object_ref (cancellable) : NULL;
+        g_simple_async_result_set_op_res_gpointer (async, closure, new_closure_free);
+
         g_async_initable_new_async (UM_TYPE_REALM_MANAGER, G_PRIORITY_DEFAULT,
-                                    cancellable, callback, user_data,
+                                    cancellable, on_manager_new, g_object_ref (async),
                                     "flags", G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE,
                                     "name", "org.freedesktop.realmd",
                                     "bus-type", G_BUS_TYPE_SYSTEM,
                                     "object-path", "/org/freedesktop/realmd",
                                     "get-proxy-type-func", um_realm_object_manager_client_get_proxy_type,
                                     NULL);
+
+        g_object_unref (async);
 }
 
 UmRealmManager *
 um_realm_manager_new_finish (GAsyncResult *result,
                              GError **error)
 {
-        UmRealmManager *self;
-        GDBusConnection *connection;
-        GObject *source_object;
-        const gchar *version;
-        GObject *ret;
-        guint sig;
+        GSimpleAsyncResult *async;
+        NewClosure *closure;
 
-        source_object = g_async_result_get_source_object (result);
-        ret = g_async_initable_new_finish (G_ASYNC_INITABLE (source_object), result, error);
-        g_object_unref (source_object);
+        g_return_val_if_fail (g_simple_async_result_is_valid (result, NULL,
+                                                              um_realm_manager_new), NULL);
 
-        if (ret == NULL)
+        async = G_SIMPLE_ASYNC_RESULT (result);
+        if (g_simple_async_result_propagate_error (async, error))
                 return NULL;
 
-        self = UM_REALM_MANAGER (ret);
-        connection = g_dbus_object_manager_client_get_connection (G_DBUS_OBJECT_MANAGER_CLIENT (self));
-
-        g_debug ("Connected to realmd, checking version...");
-
-        /*
-         * TODO: Remove this version checking. This is temporary code, so
-         * just use sync here. Shortly we'll be stabilizing the realmd
-         * interfaces.
-         */
-
-        self->provider = um_realm_provider_proxy_new_sync (connection, G_DBUS_PROXY_FLAGS_NONE,
-                                                           "org.freedesktop.realmd",
-                                                           "/org/freedesktop/realmd",
-                                                           NULL, error);
-        if (self->provider == NULL) {
-                g_object_unref (self);
-                return NULL;
-        }
-
-        version = um_realm_provider_get_version (self->provider);
-        if (version == NULL || !version_compare (version, 0, 7)) {
-                /* No need to bother translators with this temporary message */
-                g_set_error (error, UM_REALM_ERROR, UM_REALM_ERROR_GENERIC,
-                             "realmd version should be at least 0.7");
-                g_object_unref (self);
-                return NULL;
-        }
-
-        sig = g_dbus_connection_signal_subscribe (connection,
-                                                  "org.freedesktop.realmd",
-                                                  "org.freedesktop.realmd.Service",
-                                                  "Diagnostics",
-                                                  NULL,
-                                                  NULL,
-                                                  G_DBUS_SIGNAL_FLAGS_NONE,
-                                                  on_realm_diagnostics,
-                                                  NULL,
-                                                  NULL);
-        self->diagnostics_sig = sig;
-
-        g_debug ("Created realm manager");
-        return self;
+        closure = g_simple_async_result_get_op_res_gpointer (async);
+        return g_object_ref (closure->manager);
 }
 
 typedef struct {
