@@ -309,8 +309,13 @@ on_provider_discover (GObject *source,
                         if (object == NULL) {
                                 g_warning ("Realm is not in object manager: %s", realms[i]);
                         } else {
-                                g_debug ("Discovered realm: %s", realms[i]);
-                                discover->realms = g_list_prepend (discover->realms, object);
+                                if (is_realm_with_kerberos_and_membership (object)) {
+                                        g_debug ("Discovered realm: %s", realms[i]);
+                                        discover->realms = g_list_prepend (discover->realms, object);
+                                } else {
+                                        g_debug ("Realm does not support kerberos membership: %s", realms[i]);
+                                        g_object_unref (object);
+                                }
                         }
                 }
                 g_strfreev (realms);
