@@ -86,7 +86,7 @@ gdesktop-enums-types.c: $(GDESKTOP_PREFIX)/include/gsettings-desktop-schemas/gde
 @INTLTOOL_DESKTOP_RULE@
 
 pixmapdir  = $(pkgdatadir)/pixmaps
-pixmap_DATA = \
+dist_pixmap_DATA = \
 	noise-texture-light.png
 
 desktopdir = $(datadir)/applications
