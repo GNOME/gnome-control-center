@@ -156,6 +156,7 @@ static const gchar *supported_ibus_engines[] = {
   /* Marathi */
   "m17n:mr:inscript",
   "m17n:mr:itrans",
+  "m17n:mr:phonetic",
 
   /* Nepali */
   "m17n:ne:rom",
