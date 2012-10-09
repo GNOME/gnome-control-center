@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-19 06:38+0000\n"
-"PO-Revision-Date: 2012-09-19 09:03+0100\n"
+"POT-Creation-Date: 2012-10-09 08:53+0000\n"
+"PO-Revision-Date: 2012-10-09 11:01+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: \n"
@@ -102,7 +102,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Ni ozadja namizja"
 
-#: ../panels/background/cc-background-panel.c:387
+#: ../panels/background/cc-background-panel.c:396
 msgid "Current background"
 msgstr "Trenutno ozadje"
 
@@ -457,6 +457,7 @@ msgstr "Spletna kamera"
 
 #: ../panels/color/color.ui.h:3
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
+#: ../panels/universal-access/zoom-options.ui.h:28
 msgid "Color"
 msgstr "Barva"
 
@@ -538,56 +539,56 @@ msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Barva;ICC;Profil;Umerjanje;Tiskalnik;Zaslon;"
 
 #. Add some common languages first
-#: ../panels/common/cc-common-language.c:523
+#: ../panels/common/cc-common-language.c:533
 msgid "English"
 msgstr "angleško"
 
-#: ../panels/common/cc-common-language.c:525
+#: ../panels/common/cc-common-language.c:535
 msgid "British English"
 msgstr "britansko angleško"
 
-#: ../panels/common/cc-common-language.c:528
+#: ../panels/common/cc-common-language.c:538
 msgid "German"
 msgstr "nemško"
 
-#: ../panels/common/cc-common-language.c:531
+#: ../panels/common/cc-common-language.c:541
 msgid "French"
 msgstr "francosko"
 
-#: ../panels/common/cc-common-language.c:534
+#: ../panels/common/cc-common-language.c:544
 msgid "Spanish"
 msgstr "špansko"
 
-#: ../panels/common/cc-common-language.c:536
+#: ../panels/common/cc-common-language.c:546
 msgid "Chinese (simplified)"
 msgstr "kitajsko poenostavljeno"
 
-#: ../panels/common/cc-common-language.c:539
+#: ../panels/common/cc-common-language.c:549
 msgid "Russian"
 msgstr "rusko"
 
-#: ../panels/common/cc-common-language.c:542
+#: ../panels/common/cc-common-language.c:552
 msgid "Arabic"
 msgstr "arabsko"
 
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:571
+#: ../panels/common/cc-common-language.c:581
 msgid "United States"
 msgstr "Združene države Amerike"
 
-#: ../panels/common/cc-common-language.c:572
+#: ../panels/common/cc-common-language.c:582
 msgid "Germany"
 msgstr "Nemčija"
 
-#: ../panels/common/cc-common-language.c:573
+#: ../panels/common/cc-common-language.c:583
 msgid "France"
 msgstr "Francija"
 
-#: ../panels/common/cc-common-language.c:574
+#: ../panels/common/cc-common-language.c:584
 msgid "Spain"
 msgstr "Španija"
 
-#: ../panels/common/cc-common-language.c:575
+#: ../panels/common/cc-common-language.c:585
 msgid "China"
 msgstr "Kitajska"
 
@@ -609,7 +610,7 @@ msgstr "Izbor jezika"
 
 #: ../panels/common/language-chooser.ui.h:2
 #: ../panels/printers/new-printer-dialog.ui.h:1
-#: ../panels/user-accounts/um-user-panel.c:462
+#: ../panels/user-accounts/um-user-panel.c:454
 msgid "_Cancel"
 msgstr "_Prekliči"
 
@@ -1198,17 +1199,17 @@ msgstr "Izvrzi"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Typing"
 msgstr "Tipkanje"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:2
-#: ../panels/region/gnome-region-panel.ui.h:26
+#: ../panels/region/gnome-region-panel.ui.h:25
 msgid "Switch to next source"
 msgstr "Preklopi na naslednji vir"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:3
-#: ../panels/region/gnome-region-panel.ui.h:24
+#: ../panels/region/gnome-region-panel.ui.h:23
 msgid "Switch to previous source"
 msgstr "Preklopi na predhodni vir"
 
@@ -1272,7 +1273,7 @@ msgid "Copy a screenshot of an area to clipboard"
 msgstr "Kopiraj zaslonsko sliko področja v odložišče"
 
 #: ../panels/keyboard/01-system.xml.in.h:1
-#: ../panels/region/gnome-region-panel.ui.h:39
+#: ../panels/region/gnome-region-panel.ui.h:38
 msgid "System"
 msgstr "Sistem"
 
@@ -1382,31 +1383,27 @@ msgstr "_Zamik:"
 msgid "_Speed:"
 msgstr "_Hitrost:"
 
-#. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
-#: ../panels/universal-access/uap.ui.h:49
+msgctxt "keyboard, delay"
 msgid "Short"
 msgstr "Kratek"
 
-#. slow acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
+msgctxt "keyboard, speed"
 msgid "Slow"
-msgstr "Počasno"
+msgstr "Počasi"
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:11
 msgid "Repeat keys speed"
 msgstr "Hitrost ponovitve tipk"
 
-#. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
-#: ../panels/universal-access/uap.ui.h:52
+msgctxt "keyboard, delay"
 msgid "Long"
 msgstr "Dolg"
 
-#. fast acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
+msgctxt "keyboard, speed"
 msgid "Fast"
 msgstr "Hitro"
 
@@ -1444,7 +1441,7 @@ msgid "To edit a shortcut, click the row and hold down the new keys or press Bac
 msgstr "Za urejanje bližnjice kliknite ustrezno vrstico in vnesite novo bližnjico ali pa izbrišite staro."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:23
-#: ../panels/region/gnome-region-panel.ui.h:29
+#: ../panels/region/gnome-region-panel.ui.h:28
 msgid "Shortcuts"
 msgstr "Tipkovne bližnjice"
 
@@ -1484,7 +1481,7 @@ msgstr "V primeru, da določite bližnjico kot \"%s\", bo bližnjica \"%s\" onem
 msgid "_Reassign"
 msgstr "_Določitev bližnjice"
 
-#: ../panels/mouse/cc-mouse-panel.c:152
+#: ../panels/mouse/cc-mouse-panel.c:160
 msgid "_Test Your Settings"
 msgstr "_Preizkus nastavitev"
 
@@ -1509,51 +1506,63 @@ msgstr "Možnosti miške"
 msgid "General"
 msgstr "Splošno"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+#: ../panels/mouse/gnome-mouse-properties.ui.h:3
+msgctxt "mouse, speed"
+msgid "Slow"
+msgstr "Počasi"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
 msgid "Double-click timeout"
 msgstr "Časovna omejitev dvojnega klika"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+msgctxt "mouse, speed"
+msgid "Fast"
+msgstr "Hitro"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "_Double-click"
 msgstr "_Dvojni klik"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
 msgid "Primary _button"
 msgstr "Osnovni _gumb"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+msgctxt "mouse, left button as primary"
 msgid "_Left"
 msgstr "_Levo"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+msgctxt "mouse, right button as primary"
 msgid "_Right"
 msgstr "_Desno"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "Mouse"
 msgstr "Miška"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
 msgid "_Pointer speed"
 msgstr "_Hitrost kazalnika"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:12
 msgid "Touchpad"
 msgstr "Sledilna ploščica"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
 msgid "Disable while _typing"
 msgstr "Onemogoči med _tipkanjem"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Tap to _click"
 msgstr "Udarjanje za _klik"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
 msgid "Two _finger scroll"
 msgstr "Dvo-_prstno drsenje"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
 msgid "C_ontent sticks to fingers"
 msgstr "V_sebina se prilepi na prste"
 
@@ -1590,24 +1599,24 @@ msgstr "Dvojni klik, drugi gumb"
 msgid "Single click, secondary button"
 msgstr "Enojni klik, drugi gumb"
 
-#: ../panels/network/cc-network-panel.c:615
+#: ../panels/network/cc-network-panel.c:684
 msgid "Network proxy"
 msgstr "Omrežni posredniški strežnik"
 
-#: ../panels/network/cc-network-panel.c:799
+#: ../panels/network/cc-network-panel.c:871
 #: ../panels/network/net-vpn.c:278
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:866
+#: ../panels/network/cc-network-panel.c:938
 msgid "The system network services are not compatible with this version."
 msgstr "Sistemske omrežne storitve niso podprte s to različico."
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:1001
+#: ../panels/network/cc-network-panel.c:1073
 msgid "Air_plane Mode"
 msgstr "_Letalski način"
 
@@ -1631,60 +1640,53 @@ msgstr "Dodaj novo povezavo"
 
 #. Translators: network device speed
 #: ../panels/network/net-device-mobile.c:261
-#: ../panels/network/net-device-wifi.c:770
+#: ../panels/network/net-device-wifi.c:725
 #: ../panels/network/net-device-wired.c:126
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#. TRANSLATORS: this is when the access point is not shown
-#. * in the list and the user has to enter the SSID manually
-#.
-#: ../panels/network/net-device-wifi.c:203
-msgid "Connect to a Hidden Network"
-msgstr "Povezava s skritim omrežjem"
-
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/net-device-wifi.c:302
-#: ../panels/network/net-device-wifi.c:481
+#: ../panels/network/net-device-wifi.c:258
+#: ../panels/network/net-device-wifi.c:437
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:306
-#: ../panels/network/net-device-wifi.c:485
+#: ../panels/network/net-device-wifi.c:262
+#: ../panels/network/net-device-wifi.c:441
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:310
+#: ../panels/network/net-device-wifi.c:266
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/net-device-wifi.c:315
+#: ../panels/network/net-device-wifi.c:271
 msgid "Enterprise"
 msgstr "Podjetniški"
 
-#: ../panels/network/net-device-wifi.c:320
-#: ../panels/network/net-device-wifi.c:476
+#: ../panels/network/net-device-wifi.c:276
+#: ../panels/network/net-device-wifi.c:432
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Brez"
 
-#: ../panels/network/net-device-wifi.c:697
+#: ../panels/network/net-device-wifi.c:652
 msgid "never"
 msgstr "nikoli"
 
-#: ../panels/network/net-device-wifi.c:707
+#: ../panels/network/net-device-wifi.c:662
 msgid "today"
 msgstr "danes"
 
-#: ../panels/network/net-device-wifi.c:709
+#: ../panels/network/net-device-wifi.c:664
 msgid "yesterday"
 msgstr "včeraj"
 
-#: ../panels/network/net-device-wifi.c:711
+#: ../panels/network/net-device-wifi.c:666
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -1694,68 +1696,68 @@ msgstr[2] "pred %i dnevoma"
 msgstr[3] "pred %i dnevi"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/net-device-wifi.c:780
+#: ../panels/network/net-device-wifi.c:735
 #: ../panels/network/panel-common.c:277
 msgid "Not connected"
 msgstr "Brez povezave"
 
-#: ../panels/network/net-device-wifi.c:782
-#: ../panels/network/net-device-wifi.c:2086
+#: ../panels/network/net-device-wifi.c:737
+#: ../panels/network/net-device-wifi.c:2099
 msgid "Out of range"
 msgstr "Izven dosega"
 
-#: ../panels/network/net-device-wifi.c:813
+#: ../panels/network/net-device-wifi.c:768
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Brez"
 
-#: ../panels/network/net-device-wifi.c:815
+#: ../panels/network/net-device-wifi.c:770
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Šibko"
 
-#: ../panels/network/net-device-wifi.c:817
+#: ../panels/network/net-device-wifi.c:772
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "V redu"
 
-#: ../panels/network/net-device-wifi.c:819
+#: ../panels/network/net-device-wifi.c:774
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Dobro"
 
-#: ../panels/network/net-device-wifi.c:821
+#: ../panels/network/net-device-wifi.c:776
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Odlično"
 
-#: ../panels/network/net-device-wifi.c:1005
+#: ../panels/network/net-device-wifi.c:960
 #, c-format
 msgid "Network details for %s including password and any custom configuration will be lost."
 msgstr "Omrežne podrobnosti o %s, nastavitve po meri in pripadajoče geslo bodo izgubljeni."
 
-#: ../panels/network/net-device-wifi.c:1016
+#: ../panels/network/net-device-wifi.c:971
 msgid "Forget"
 msgstr "Prezri"
 
-#: ../panels/network/net-device-wifi.c:1552
-msgid "If you have a connection to the Internet other than wireless, you can use it to share your internet connection with others."
-msgstr "V kolikor imate povezavo v omrežje, ki ni brezžična, jo lahko delite z drugimi uporabniki za dostop do interneta."
+#: ../panels/network/net-device-wifi.c:1554
+msgid "If you have a connection to the Internet other than wireless, you can set up a wireless hotspot to share the connection with others."
+msgstr "V kolikor imate povezavo v omrežje, ki ni brezžična, jo lahko delite kot vročo točko z drugimi uporabniki za dostop do interneta."
 
-#: ../panels/network/net-device-wifi.c:1556
+#: ../panels/network/net-device-wifi.c:1558
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Preklop na brezžično vročo točko bo prekinilo povezavo z <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1560
-msgid "It is not possible to access the internet through your wireless while the hotspot is active."
+#: ../panels/network/net-device-wifi.c:1562
+msgid "It is not possible to access the Internet through your wireless while the hotspot is active."
 msgstr "Ni mogoč dostop do interneta preko brezžične povezave, kadar je vroča točka dejavna."
 
-#: ../panels/network/net-device-wifi.c:1626
+#: ../panels/network/net-device-wifi.c:1628
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Ali naj se zaustavi vroča vstopna točka in se prekine povezava vseh uporabnikov?"
 
-#: ../panels/network/net-device-wifi.c:1629
+#: ../panels/network/net-device-wifi.c:1631
 msgid "_Stop Hotspot"
 msgstr "_Zaustavi vročo vstopno točko"
 
@@ -1792,20 +1794,20 @@ msgid "IP Address"
 msgstr "IP naslov"
 
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wifi.ui.h:14
 #: ../panels/network/network-wired.ui.h:3
 #: ../panels/network/panel-common.c:684
 msgid "IPv6 Address"
 msgstr "Naslov IPv6"
 
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-wifi.ui.h:14
+#: ../panels/network/network-wifi.ui.h:15
 #: ../panels/network/network-wired.ui.h:4
 msgid "Default Route"
 msgstr "Privzeta smer"
 
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-wifi.ui.h:15
+#: ../panels/network/network-wifi.ui.h:16
 #: ../panels/network/network-wired.ui.h:5
 msgid "DNS"
 msgstr "DNS"
@@ -1921,65 +1923,69 @@ msgid "_Use as Hotspot..."
 msgstr "Uporabi kot _vročo vstopno točko"
 
 #: ../panels/network/network-wifi.ui.h:5
+msgid "_Connect to Hidden Network..."
+msgstr "Povezava s _skritim omrežjem ..."
+
+#: ../panels/network/network-wifi.ui.h:6
 msgid "_Disconnect"
 msgstr "_Prekini povezavo"
 
-#: ../panels/network/network-wifi.ui.h:6
+#: ../panels/network/network-wifi.ui.h:7
 msgid "_Connect"
 msgstr "_Poveži"
 
-#: ../panels/network/network-wifi.ui.h:7
+#: ../panels/network/network-wifi.ui.h:8
 msgid "Last used"
 msgstr "Nazadnje uporabljeno"
 
-#: ../panels/network/network-wifi.ui.h:8
+#: ../panels/network/network-wifi.ui.h:9
 #: ../panels/network/network-wired.ui.h:1
 msgid "Hardware Address"
 msgstr "Strojni naslov"
 
-#: ../panels/network/network-wifi.ui.h:9
+#: ../panels/network/network-wifi.ui.h:10
 msgid "Security"
 msgstr "Varnost"
 
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:11
 msgid "Strength"
 msgstr "Jakost"
 
-#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wifi.ui.h:12
 msgid "Link speed"
 msgstr "Hitrost povezave"
 
-#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wifi.ui.h:13
 #: ../panels/network/network-wired.ui.h:2
 #: ../panels/network/panel-common.c:683
 msgid "IPv4 Address"
 msgstr "Naslov IPv4"
 
-#: ../panels/network/network-wifi.ui.h:16
+#: ../panels/network/network-wifi.ui.h:17
 msgid "_Forget Network"
 msgstr "_Prezri omrežje"
 
-#: ../panels/network/network-wifi.ui.h:17
+#: ../panels/network/network-wifi.ui.h:18
 msgid "_Settings..."
 msgstr "_Nastavitve ..."
 
-#: ../panels/network/network-wifi.ui.h:18
+#: ../panels/network/network-wifi.ui.h:19
 msgid "Switch off to connect to a wireless network"
 msgstr "Izklopi za povezavo v brezžično omrežje"
 
-#: ../panels/network/network-wifi.ui.h:19
+#: ../panels/network/network-wifi.ui.h:20
 msgid "Network Name"
 msgstr "Ime omrežja"
 
-#: ../panels/network/network-wifi.ui.h:20
+#: ../panels/network/network-wifi.ui.h:21
 msgid "Connected Devices"
 msgstr "Priklopljene naprave"
 
-#: ../panels/network/network-wifi.ui.h:21
+#: ../panels/network/network-wifi.ui.h:22
 msgid "Security type"
 msgstr "Varnostna vrsta"
 
-#: ../panels/network/network-wifi.ui.h:22
+#: ../panels/network/network-wifi.ui.h:23
 msgid "Security key"
 msgstr "Varnostni ključ"
 
@@ -2298,35 +2304,35 @@ msgstr "Odvisnost povezave je spodletela"
 msgid "Add Account"
 msgstr "Dodaj račun"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:383
+#: ../panels/online-accounts/cc-online-accounts-panel.c:371
 msgid "Error logging into the account"
 msgstr "Napaka med prijavljanjem v račun"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:437
+#: ../panels/online-accounts/cc-online-accounts-panel.c:425
 msgid "Expired credentials. Please log in again."
 msgstr "Poverilo je pretečeno. Za nadaljevanje se je treba znova prijaviti. "
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:440
+#: ../panels/online-accounts/cc-online-accounts-panel.c:428
 msgid "_Log In"
 msgstr "_Prijava"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:676
+#: ../panels/online-accounts/cc-online-accounts-panel.c:664
 msgid "Error creating account"
 msgstr "Napaka med ustvarjanjem računa"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:718
+#: ../panels/online-accounts/cc-online-accounts-panel.c:706
 msgid "Error removing account"
 msgstr "Napaka med odstranjevanjem računa"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:754
+#: ../panels/online-accounts/cc-online-accounts-panel.c:742
 msgid "Are you sure you want to remove the account?"
 msgstr "Ali ste prepričani, da želite izbrisati račun?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:756
+#: ../panels/online-accounts/cc-online-accounts-panel.c:744
 msgid "This will not remove the account on the server."
 msgstr "S tem dejanjem ne bo odstranjen račun s strežnika."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:757
+#: ../panels/online-accounts/cc-online-accounts-panel.c:745
 msgid "_Remove"
 msgstr "_Odstrani"
 
@@ -3234,21 +3240,21 @@ msgstr "Izbor vhodnega vira"
 msgid "Select an input source to add"
 msgstr "Izberite izvorni vir za dodajanje"
 
-#: ../panels/region/gnome-region-panel-system.c:470
+#: ../panels/region/gnome-region-panel-system.c:465
 msgid "The login screen, system accounts and new user accounts use the system-wide Region and Language settings."
 msgstr "Prijavni zaslon, sistemski računi in novi uporabniški računi uporabljajo sistemske nastavitve področij in jezika."
 
-#: ../panels/region/gnome-region-panel-system.c:475
-#: ../panels/region/gnome-region-panel.ui.h:31
+#: ../panels/region/gnome-region-panel-system.c:470
+#: ../panels/region/gnome-region-panel.ui.h:30
 msgid "The login screen, system accounts and new user accounts use the system-wide Region and Language settings. You may change the system settings to match yours."
 msgstr "Prijavni zaslon, sistemski računi in novi uporabniški računi uporabljajo sistemske nastavitve področij in jezika. Te je mogoče kasneje prilagoditi vsakemu računu posebej."
 
-#: ../panels/region/gnome-region-panel-system.c:478
+#: ../panels/region/gnome-region-panel-system.c:473
 msgid "Copy Settings"
 msgstr "Nastavitve kopiranja"
 
-#: ../panels/region/gnome-region-panel-system.c:481
-#: ../panels/region/gnome-region-panel.ui.h:38
+#: ../panels/region/gnome-region-panel-system.c:476
+#: ../panels/region/gnome-region-panel.ui.h:37
 msgid "Copy Settings..."
 msgstr "Nastavitve kopiranja ..."
 
@@ -3265,119 +3271,115 @@ msgid "Add Language"
 msgstr "Dodaj jezik"
 
 #: ../panels/region/gnome-region-panel.ui.h:4
-msgid "Remove Language"
-msgstr "Odstrani jezik"
-
-#: ../panels/region/gnome-region-panel.ui.h:5
 msgid "Install languages..."
 msgstr "Namesti jezike ..."
 
-#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:5
 msgid "Language"
 msgstr "Jezik"
 
-#: ../panels/region/gnome-region-panel.ui.h:7
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Select a region (change will be applied the next time you log in)"
 msgstr "Izbor področja (sprememba bo uporabljena ob naslednji prijavi)"
 
-#: ../panels/region/gnome-region-panel.ui.h:8
+#: ../panels/region/gnome-region-panel.ui.h:7
 msgid "Add Region"
 msgstr "Dodaj področje"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid "Remove Region"
 msgstr "Odstrani področje"
 
-#: ../panels/region/gnome-region-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Dates"
 msgstr "Datumi"
 
-#: ../panels/region/gnome-region-panel.ui.h:11
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "Times"
 msgstr "Čas"
 
-#: ../panels/region/gnome-region-panel.ui.h:12
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Numbers"
 msgstr "Števila"
 
-#: ../panels/region/gnome-region-panel.ui.h:13
+#: ../panels/region/gnome-region-panel.ui.h:12
 msgid "Currency"
 msgstr "Valuta"
 
-#: ../panels/region/gnome-region-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "Measurement"
 msgstr "Merjenje"
 
-#: ../panels/region/gnome-region-panel.ui.h:15
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "Examples"
 msgstr "Primeri"
 
-#: ../panels/region/gnome-region-panel.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:15
 msgid "Formats"
 msgstr "Zapisi"
 
-#: ../panels/region/gnome-region-panel.ui.h:17
+#: ../panels/region/gnome-region-panel.ui.h:16
 msgid "Select keyboards or other input sources"
 msgstr "Izbor tipkovnice oziroma drugega vhodnega vira"
 
-#: ../panels/region/gnome-region-panel.ui.h:18
+#: ../panels/region/gnome-region-panel.ui.h:17
 msgid "Add Input Source"
 msgstr "Dodaj vhodni vir"
 
-#: ../panels/region/gnome-region-panel.ui.h:19
+#: ../panels/region/gnome-region-panel.ui.h:18
 msgid "Remove Input Source"
 msgstr "Odstrani vhodni vir"
 
-#: ../panels/region/gnome-region-panel.ui.h:20
+#: ../panels/region/gnome-region-panel.ui.h:19
 msgid "Move Input Source Up"
 msgstr "Premakni vhodni vir navzgor"
 
-#: ../panels/region/gnome-region-panel.ui.h:21
+#: ../panels/region/gnome-region-panel.ui.h:20
 msgid "Move Input Source Down"
 msgstr "Premakni vhodni vir navzdol"
 
-#: ../panels/region/gnome-region-panel.ui.h:22
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "Input Source Settings"
 msgstr "Nastavitve vhodnega vira"
 
-#: ../panels/region/gnome-region-panel.ui.h:23
+#: ../panels/region/gnome-region-panel.ui.h:22
 msgid "Show Keyboard Layout"
 msgstr "Pokaži razporeditev tipkovnice"
 
-#: ../panels/region/gnome-region-panel.ui.h:25
+#: ../panels/region/gnome-region-panel.ui.h:24
 msgid "Ctrl+Alt+Space"
 msgstr "Ctrl+Alt+Preslednica"
 
-#: ../panels/region/gnome-region-panel.ui.h:27
+#: ../panels/region/gnome-region-panel.ui.h:26
 msgid "Ctrl+Alt+Shift+Space"
 msgstr "Ctrl+Alt+Shift+Preslednica"
 
-#: ../panels/region/gnome-region-panel.ui.h:28
+#: ../panels/region/gnome-region-panel.ui.h:27
 msgid "Shortcut Settings"
 msgstr "Nastavitve tipkovnih bližnjic"
 
-#: ../panels/region/gnome-region-panel.ui.h:30
+#: ../panels/region/gnome-region-panel.ui.h:29
 msgid "Input Sources"
 msgstr "Vhodni viri"
 
 #. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
-#: ../panels/region/gnome-region-panel.ui.h:33
+#: ../panels/region/gnome-region-panel.ui.h:32
 msgid "Display language:"
 msgstr "Jezik vmesnika:"
 
-#: ../panels/region/gnome-region-panel.ui.h:34
+#: ../panels/region/gnome-region-panel.ui.h:33
 msgid "Input source:"
 msgstr "Vir vhoda:"
 
-#: ../panels/region/gnome-region-panel.ui.h:35
+#: ../panels/region/gnome-region-panel.ui.h:34
 msgid "Format:"
 msgstr "Oblika:"
 
-#: ../panels/region/gnome-region-panel.ui.h:36
+#: ../panels/region/gnome-region-panel.ui.h:35
 msgid "Your settings"
 msgstr "Osebne nastavitve"
 
-#: ../panels/region/gnome-region-panel.ui.h:37
+#: ../panels/region/gnome-region-panel.ui.h:36
 msgid "System settings"
 msgstr "Sistemske nastavitve"
 
@@ -3742,6 +3744,7 @@ msgid "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;s
 msgstr "Tipkovnica;Miška;a11y;Dostopnost;Kontrast;Približanje;Zaslonski bralnik;besedilo;pisava;velikost;AccessX;Lepljive tipke;Počasne tipke;Odskočne tipke;Tipke miške;"
 
 #: ../panels/universal-access/uap.ui.h:1
+#: ../panels/universal-access/zoom-options.ui.h:33
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Nizek"
@@ -3752,6 +3755,7 @@ msgid "Normal"
 msgstr "Običajen"
 
 #: ../panels/universal-access/uap.ui.h:3
+#: ../panels/universal-access/zoom-options.ui.h:34
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Visok"
@@ -3922,117 +3926,127 @@ msgstr "Nastavi zamik med pritiskom in sprejemom tipke"
 msgid "A_cceptance delay:"
 msgstr "Pretek _natančnosti:"
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:48
+msgctxt "universal access, delay"
+msgid "Short"
+msgstr "Kratek"
+
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Slow keys typing delay"
 msgstr "Časovni zamik počasnih tipk"
 
+#: ../panels/universal-access/uap.ui.h:50
+msgctxt "universal access, delay"
+msgid "Long"
+msgstr "Dolg"
+
 #. This string is part of a line of checkboxes: Beep when a key is [ ] pressed  [ ] accepted  [ ] rejected
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Beep when a key is"
 msgstr "Zapiskaj, kadar je tipka"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:54
 msgid "pressed"
 msgstr "pritisnjeno"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:56
 msgid "accepted"
 msgstr "sprejeto"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:58
 msgid "rejected"
 msgstr "zavrnjeno"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Bounce Keys"
 msgstr "Odskočne tipke"
 
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Ignores fast duplicate keypresses"
 msgstr "Prezre hitre podvojene pritiske tipk"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Acc_eptance delay:"
 msgstr "Pretek na_tančnosti:"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Bounce keys typing delay"
 msgstr "Časovni zamik podvojenih pritiskov tipk"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Beep when a key is _rejected"
 msgstr "Zapiskaj, kadar je tipka zav_rnjena"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Enable by Keyboard"
 msgstr "Omogoči s tipkovnico"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "Vklopi ali izklopi zmožnosti dostopnosti s tipkovnico"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Mouse Keys"
 msgstr "Tipke miške"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Control the pointer using the keypad"
 msgstr "Kazalnik je mogoče upravljati s številčno tipkovnico"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Video Mouse"
 msgstr "Video miška"
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Control the pointer using the video camera."
 msgstr "Nadzor kazalnika z uporabo video kamere."
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Simulated Secondary Click"
 msgstr "Oponašanje drugotnega klika"
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Sproži drugotni klik s tiščanjem osnovnega gumba"
 
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Secondary click delay"
 msgstr "Časovni zamik drugotnega klika"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:74
 msgid "Hover Click"
 msgstr "Klik z ledbenjem"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Trigger a click when the pointer hovers"
 msgstr "Sproži klik ob ledbenju kazalnika nad mestom"
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:76
 msgid "D_elay:"
 msgstr "_Premor:"
 
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:77
 msgid "Motion _threshold:"
 msgstr "_Prag premikanja:"
 
-#. small threshold
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:78
+msgctxt "universal access, threshold"
 msgid "Small"
 msgstr "Majhen"
 
-#. large threshold
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:79
+msgctxt "universal access, threshold"
 msgid "Large"
 msgstr "Velik"
 
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:80
 msgid "Mouse Settings"
 msgstr "Nastavitve miške"
 
-#: ../panels/universal-access/uap.ui.h:85
+#: ../panels/universal-access/uap.ui.h:81
 msgid "Pointing and Clicking"
 msgstr "Kazanje in klikanje"
 
@@ -4129,78 +4143,73 @@ msgstr "Povečevalo"
 msgid "Thickness:"
 msgstr "Debelina:"
 
-#. short delay
-#: ../panels/universal-access/zoom-options.ui.h:19
+#: ../panels/universal-access/zoom-options.ui.h:18
+msgctxt "universal access, thickness"
 msgid "Thin"
-msgstr "Tanko"
+msgstr "Tanek"
 
-#. long delay
-#: ../panels/universal-access/zoom-options.ui.h:21
+#: ../panels/universal-access/zoom-options.ui.h:19
+msgctxt "universal access, thickness"
 msgid "Thick"
-msgstr "Debelo"
+msgstr "Debel"
 
-#: ../panels/universal-access/zoom-options.ui.h:22
+#: ../panels/universal-access/zoom-options.ui.h:20
 msgid "Length:"
 msgstr "Dolžina:"
 
-#: ../panels/universal-access/zoom-options.ui.h:23
+#: ../panels/universal-access/zoom-options.ui.h:21
 msgid "Color:"
 msgstr "Barva:"
 
-#: ../panels/universal-access/zoom-options.ui.h:24
+#: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Crosshairs:"
 msgstr "Merki:"
 
-#: ../panels/universal-access/zoom-options.ui.h:25
+#: ../panels/universal-access/zoom-options.ui.h:23
 msgid "Overlaps mouse cursor"
 msgstr "Prekrivanje kazalke miške"
 
-#: ../panels/universal-access/zoom-options.ui.h:26
+#: ../panels/universal-access/zoom-options.ui.h:24
 msgid "Crosshairs"
 msgstr "Merki"
 
-#: ../panels/universal-access/zoom-options.ui.h:27
+#: ../panels/universal-access/zoom-options.ui.h:25
 msgid "White on black:"
 msgstr "Črno na belem:"
 
-#: ../panels/universal-access/zoom-options.ui.h:28
+#: ../panels/universal-access/zoom-options.ui.h:26
 msgid "Brightness:"
 msgstr "Svetlost:"
 
-#: ../panels/universal-access/zoom-options.ui.h:29
+#: ../panels/universal-access/zoom-options.ui.h:27
 msgid "Contrast:"
 msgstr "Kontrast:"
 
-#: ../panels/universal-access/zoom-options.ui.h:30
-msgctxt "Zoom Grayscale"
-msgid "Color"
-msgstr "Barva"
-
-#: ../panels/universal-access/zoom-options.ui.h:31
-msgctxt "Zoom Grayscale"
+#: ../panels/universal-access/zoom-options.ui.h:29
+msgctxt "universal access, color"
 msgid "None"
 msgstr "Brez"
 
-#: ../panels/universal-access/zoom-options.ui.h:32
-msgctxt "Zoom Grayscale"
+#: ../panels/universal-access/zoom-options.ui.h:30
+msgctxt "universal access, color"
 msgid "Full"
-msgstr "Polno"
+msgstr "Polna"
 
-#. short delay
-#: ../panels/universal-access/zoom-options.ui.h:34
+#: ../panels/universal-access/zoom-options.ui.h:31
+msgctxt "universal access, brightness"
 msgid "Low"
-msgstr "nizka"
+msgstr "Nizka"
 
-#. long delay
-#: ../panels/universal-access/zoom-options.ui.h:36
+#: ../panels/universal-access/zoom-options.ui.h:32
+msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Visoka"
 
-#: ../panels/universal-access/zoom-options.ui.h:37
+#: ../panels/universal-access/zoom-options.ui.h:35
 msgid "Color Effects:"
 msgstr "Barvni učinki:"
 
-#: ../panels/universal-access/zoom-options.ui.h:38
+#: ../panels/universal-access/zoom-options.ui.h:36
 msgid "Color Effects"
 msgstr "Barvni učinki"
 
@@ -4769,64 +4778,64 @@ msgstr "Uporabnik z imenom '%s' ne obstaja."
 msgid "This user does not exist."
 msgstr "Uporabnik ne obstaja."
 
-#: ../panels/user-accounts/um-user-panel.c:371
+#: ../panels/user-accounts/um-user-panel.c:363
 msgid "Failed to delete user"
 msgstr "Napaka med brisanjem uporabnika"
 
-#: ../panels/user-accounts/um-user-panel.c:431
+#: ../panels/user-accounts/um-user-panel.c:423
 msgid "You cannot delete your own account."
 msgstr "Ni mogoče izbrisati lastnega računa."
 
-#: ../panels/user-accounts/um-user-panel.c:440
+#: ../panels/user-accounts/um-user-panel.c:432
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s je še vedno prijavljen"
 
-#: ../panels/user-accounts/um-user-panel.c:444
+#: ../panels/user-accounts/um-user-panel.c:436
 msgid "Deleting a user while they are logged in can leave the system in an inconsistent state."
 msgstr "Izbris uporabnika, ki je trenutno prijavljen, lahko vpliva na delovanje sistema."
 
-#: ../panels/user-accounts/um-user-panel.c:453
+#: ../panels/user-accounts/um-user-panel.c:445
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Ali želite obdržati datoteke uporabnika %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:457
+#: ../panels/user-accounts/um-user-panel.c:449
 msgid "It is possible to keep the home directory, mail spool and temporary files around when deleting a user account."
 msgstr "Mogoče je ohraniti domačo mapo, vrstilno mapo pošte in začasne datoteke tudi med brisanjem uporabniškega računa."
 
-#: ../panels/user-accounts/um-user-panel.c:460
+#: ../panels/user-accounts/um-user-panel.c:452
 msgid "_Delete Files"
 msgstr "_Izbriši datoteke"
 
-#: ../panels/user-accounts/um-user-panel.c:461
+#: ../panels/user-accounts/um-user-panel.c:453
 msgid "_Keep Files"
 msgstr "_Ohrani datoteke"
 
-#: ../panels/user-accounts/um-user-panel.c:513
+#: ../panels/user-accounts/um-user-panel.c:505
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Račun je onemogočen"
 
-#: ../panels/user-accounts/um-user-panel.c:521
+#: ../panels/user-accounts/um-user-panel.c:513
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Nastavljeno bo ob naslednji prijavi"
 
-#: ../panels/user-accounts/um-user-panel.c:524
+#: ../panels/user-accounts/um-user-panel.c:516
 msgctxt "Password mode"
 msgid "None"
 msgstr "Brez"
 
-#: ../panels/user-accounts/um-user-panel.c:871
+#: ../panels/user-accounts/um-user-panel.c:863
 msgid "Failed to contact the accounts service"
 msgstr "Napaka med povezovanjem s storitvijo računov"
 
-#: ../panels/user-accounts/um-user-panel.c:873
+#: ../panels/user-accounts/um-user-panel.c:865
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Prepričajte se, da je paket AccoutnService nameščen in omogočen."
 
-#: ../panels/user-accounts/um-user-panel.c:913
+#: ../panels/user-accounts/um-user-panel.c:905
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -4834,12 +4843,12 @@ msgstr ""
 "Za spreminjanje,\n"
 "kliknite na ikono *"
 
-#: ../panels/user-accounts/um-user-panel.c:951
+#: ../panels/user-accounts/um-user-panel.c:943
 msgid "Create a user account"
 msgstr "Ustvari uporabniški račun"
 
-#: ../panels/user-accounts/um-user-panel.c:962
-#: ../panels/user-accounts/um-user-panel.c:1273
+#: ../panels/user-accounts/um-user-panel.c:954
+#: ../panels/user-accounts/um-user-panel.c:1236
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -4847,12 +4856,12 @@ msgstr ""
 "Za ustvarjanje uporabniškega računa,\n"
 "kliknite na ikono *"
 
-#: ../panels/user-accounts/um-user-panel.c:971
+#: ../panels/user-accounts/um-user-panel.c:963
 msgid "Delete the selected user account"
 msgstr "Izbriši izbran uporabniški račun"
 
-#: ../panels/user-accounts/um-user-panel.c:983
-#: ../panels/user-accounts/um-user-panel.c:1278
+#: ../panels/user-accounts/um-user-panel.c:975
+#: ../panels/user-accounts/um-user-panel.c:1241
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -4860,11 +4869,11 @@ msgstr ""
 "Za izbris izbranega uporabniškega računa,\n"
 "kliknite na ikono *"
 
-#: ../panels/user-accounts/um-user-panel.c:1176
+#: ../panels/user-accounts/um-user-panel.c:1149
 msgid "My Account"
 msgstr "Moj račun"
 
-#: ../panels/user-accounts/um-user-panel.c:1186
+#: ../panels/user-accounts/um-user-panel.c:1158
 msgid "Other Accounts"
 msgstr "Drugi računi"
 
@@ -5225,6 +5234,17 @@ msgstr "Možnosti;Nastavitve;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "Vse nastavitve"
+
+#~ msgid "Remove Language"
+#~ msgstr "Odstrani jezik"
+#~ msgctxt "Zoom Grayscale"
+
+#~ msgid "Color"
+#~ msgstr "Barva"
+#~ msgctxt "Zoom Grayscale"
+
+#~ msgid "None"
+#~ msgstr "Brez"
 
 #~ msgid "Security Key"
 #~ msgstr "Varnostni ključ"
