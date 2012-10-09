@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-19 02:51+0200\n"
-"PO-Revision-Date: 2012-09-19 02:51+0200\n"
+"POT-Creation-Date: 2012-10-09 10:58+0200\n"
+"PO-Revision-Date: 2012-10-09 11:06+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: gnome-l10n-gl@gnome.org\n"
 "Language: gl\n"
@@ -107,7 +107,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Sen fondo de escritorio"
 
-#: ../panels/background/cc-background-panel.c:387
+#: ../panels/background/cc-background-panel.c:396
 msgid "Current background"
 msgstr "Fondo actual"
 
@@ -459,6 +459,7 @@ msgstr "Cámara web"
 
 #: ../panels/color/color.ui.h:3
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:1
+#: ../panels/universal-access/zoom-options.ui.h:28
 msgid "Color"
 msgstr "Cor"
 
@@ -545,56 +546,56 @@ msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Cor;ICC;Perfil;Calibrado;Impresora;Pantalla;"
 
 #. Add some common languages first
-#: ../panels/common/cc-common-language.c:523
+#: ../panels/common/cc-common-language.c:533
 msgid "English"
 msgstr "Inglés"
 
-#: ../panels/common/cc-common-language.c:525
+#: ../panels/common/cc-common-language.c:535
 msgid "British English"
 msgstr "Inglés británico"
 
-#: ../panels/common/cc-common-language.c:528
+#: ../panels/common/cc-common-language.c:538
 msgid "German"
 msgstr "Alemán"
 
-#: ../panels/common/cc-common-language.c:531
+#: ../panels/common/cc-common-language.c:541
 msgid "French"
 msgstr "Francés"
 
-#: ../panels/common/cc-common-language.c:534
+#: ../panels/common/cc-common-language.c:544
 msgid "Spanish"
 msgstr "Español"
 
-#: ../panels/common/cc-common-language.c:536
+#: ../panels/common/cc-common-language.c:546
 msgid "Chinese (simplified)"
 msgstr "Chinés (Simplificado)"
 
-#: ../panels/common/cc-common-language.c:539
+#: ../panels/common/cc-common-language.c:549
 msgid "Russian"
 msgstr "Ruso"
 
-#: ../panels/common/cc-common-language.c:542
+#: ../panels/common/cc-common-language.c:552
 msgid "Arabic"
 msgstr "Árabe"
 
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:571
+#: ../panels/common/cc-common-language.c:581
 msgid "United States"
 msgstr "Estados Unidos de América"
 
-#: ../panels/common/cc-common-language.c:572
+#: ../panels/common/cc-common-language.c:582
 msgid "Germany"
 msgstr "Alemaña"
 
-#: ../panels/common/cc-common-language.c:573
+#: ../panels/common/cc-common-language.c:583
 msgid "France"
 msgstr "Francia"
 
-#: ../panels/common/cc-common-language.c:574
+#: ../panels/common/cc-common-language.c:584
 msgid "Spain"
 msgstr "España"
 
-#: ../panels/common/cc-common-language.c:575
+#: ../panels/common/cc-common-language.c:585
 msgid "China"
 msgstr "China"
 
@@ -616,7 +617,7 @@ msgstr "Seleccione un idioma"
 
 #: ../panels/common/language-chooser.ui.h:2
 #: ../panels/printers/new-printer-dialog.ui.h:1
-#: ../panels/user-accounts/um-user-panel.c:462
+#: ../panels/user-accounts/um-user-panel.c:454
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -1215,17 +1216,17 @@ msgstr "Expulsar"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Typing"
 msgstr "Escritura"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:2
-#: ../panels/region/gnome-region-panel.ui.h:26
+#: ../panels/region/gnome-region-panel.ui.h:25
 msgid "Switch to next source"
 msgstr "Cambiar á seguinte orixe"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:3
-#: ../panels/region/gnome-region-panel.ui.h:24
+#: ../panels/region/gnome-region-panel.ui.h:23
 msgid "Switch to previous source"
 msgstr "Cambiar ao orixe anterior"
 
@@ -1289,7 +1290,7 @@ msgid "Copy a screenshot of an area to clipboard"
 msgstr "Copiar unha captura de pantalla dunha área ao portapapeis"
 
 #: ../panels/keyboard/01-system.xml.in.h:1
-#: ../panels/region/gnome-region-panel.ui.h:39
+#: ../panels/region/gnome-region-panel.ui.h:38
 msgid "System"
 msgstr "Sistema"
 
@@ -1399,15 +1400,13 @@ msgstr "_Atraso:"
 msgid "_Speed:"
 msgstr "_Velocidade:"
 
-#. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
-#: ../panels/universal-access/uap.ui.h:49
+msgctxt "keyboard, delay"
 msgid "Short"
 msgstr "Curto"
 
-#. slow acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
+msgctxt "keyboard, speed"
 msgid "Slow"
 msgstr "Lenta"
 
@@ -1415,15 +1414,13 @@ msgstr "Lenta"
 msgid "Repeat keys speed"
 msgstr "Velocidade de repetición de teclas"
 
-#. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
-#: ../panels/universal-access/uap.ui.h:52
+msgctxt "keyboard, delay"
 msgid "Long"
 msgstr "Longo"
 
-#. fast acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
+msgctxt "keyboard, speed"
 msgid "Fast"
 msgstr "Rápida"
 
@@ -1465,7 +1462,7 @@ msgstr ""
 "combinación de teclas nova, ou prema a tecla de «Retroceso» para limpar todo."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:23
-#: ../panels/region/gnome-region-panel.ui.h:29
+#: ../panels/region/gnome-region-panel.ui.h:28
 msgid "Shortcuts"
 msgstr "Atallos de teclado"
 
@@ -1508,7 +1505,7 @@ msgstr "Se reasigna o atallo para «%s», desactivarase o atallo «%s»."
 msgid "_Reassign"
 msgstr "_Reasignar"
 
-#: ../panels/mouse/cc-mouse-panel.c:152
+#: ../panels/mouse/cc-mouse-panel.c:160
 msgid "_Test Your Settings"
 msgstr "_Comprobar a súa configuración"
 
@@ -1533,51 +1530,63 @@ msgstr "Preferencias do rato"
 msgid "General"
 msgstr "Xeral"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+#: ../panels/mouse/gnome-mouse-properties.ui.h:3
+msgctxt "mouse, speed"
+msgid "Slow"
+msgstr "Lenta"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
 msgid "Double-click timeout"
 msgstr "Tempo de espera da pulsación dobre"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+msgctxt "mouse, speed"
+msgid "Fast"
+msgstr "Rápida"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "_Double-click"
 msgstr "_Dupla pulsación"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
 msgid "Primary _button"
 msgstr "_Botón primario"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+msgctxt "mouse, left button as primary"
 msgid "_Left"
 msgstr "_Esquerda"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+msgctxt "mouse, right button as primary"
 msgid "_Right"
 msgstr "_Dereita"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "Mouse"
 msgstr "Rato"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
 msgid "_Pointer speed"
 msgstr "Velocidade do _punteiro"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:12
 msgid "Touchpad"
 msgstr "Área táctil"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
 msgid "Disable while _typing"
 msgstr "Desac_tivar ao escribir"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Tap to _click"
 msgstr "Tocar para _premer"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
 msgid "Two _finger scroll"
 msgstr "Despra_zamento con dous dedos"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
 msgid "C_ontent sticks to fingers"
 msgstr "O c_ontido pégase aos dedos"
 
@@ -1614,23 +1623,23 @@ msgstr "Dobre clic, botón secundario"
 msgid "Single click, secondary button"
 msgstr "Un clic, botón secundario"
 
-#: ../panels/network/cc-network-panel.c:615
+#: ../panels/network/cc-network-panel.c:684
 msgid "Network proxy"
 msgstr "Proxy da rede"
 
-#: ../panels/network/cc-network-panel.c:799 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:871 ../panels/network/net-vpn.c:278
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:866
+#: ../panels/network/cc-network-panel.c:938
 msgid "The system network services are not compatible with this version."
 msgstr "Os servizos de rede do sistema non son compatíbeis con esta versión."
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:1001
+#: ../panels/network/cc-network-panel.c:1073
 msgid "Air_plane Mode"
 msgstr "Modo a_vión"
 
@@ -1654,60 +1663,53 @@ msgstr "Engadir nova conexión"
 
 #. Translators: network device speed
 #: ../panels/network/net-device-mobile.c:261
-#: ../panels/network/net-device-wifi.c:770
+#: ../panels/network/net-device-wifi.c:725
 #: ../panels/network/net-device-wired.c:126
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#. TRANSLATORS: this is when the access point is not shown
-#. * in the list and the user has to enter the SSID manually
-#.
-#: ../panels/network/net-device-wifi.c:203
-msgid "Connect to a Hidden Network"
-msgstr "Conectar a unha rede sen fíos oculta"
-
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/net-device-wifi.c:302
-#: ../panels/network/net-device-wifi.c:481
+#: ../panels/network/net-device-wifi.c:258
+#: ../panels/network/net-device-wifi.c:437
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:306
-#: ../panels/network/net-device-wifi.c:485
+#: ../panels/network/net-device-wifi.c:262
+#: ../panels/network/net-device-wifi.c:441
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:310
+#: ../panels/network/net-device-wifi.c:266
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/net-device-wifi.c:315
+#: ../panels/network/net-device-wifi.c:271
 msgid "Enterprise"
 msgstr "Empresarial"
 
-#: ../panels/network/net-device-wifi.c:320
-#: ../panels/network/net-device-wifi.c:476
+#: ../panels/network/net-device-wifi.c:276
+#: ../panels/network/net-device-wifi.c:432
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Ningunha"
 
-#: ../panels/network/net-device-wifi.c:697
+#: ../panels/network/net-device-wifi.c:652
 msgid "never"
 msgstr "nunca"
 
-#: ../panels/network/net-device-wifi.c:707
+#: ../panels/network/net-device-wifi.c:662
 msgid "today"
 msgstr "hoxe"
 
-#: ../panels/network/net-device-wifi.c:709
+#: ../panels/network/net-device-wifi.c:664
 msgid "yesterday"
 msgstr "onte"
 
-#: ../panels/network/net-device-wifi.c:711
+#: ../panels/network/net-device-wifi.c:666
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -1715,42 +1717,42 @@ msgstr[0] "Hai %i día"
 msgstr[1] "Hai %i días"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/net-device-wifi.c:780
+#: ../panels/network/net-device-wifi.c:735
 #: ../panels/network/panel-common.c:277
 msgid "Not connected"
 msgstr "Non conectado"
 
-#: ../panels/network/net-device-wifi.c:782
-#: ../panels/network/net-device-wifi.c:2086
+#: ../panels/network/net-device-wifi.c:737
+#: ../panels/network/net-device-wifi.c:2099
 msgid "Out of range"
 msgstr "Fóra de rango"
 
-#: ../panels/network/net-device-wifi.c:813
+#: ../panels/network/net-device-wifi.c:768
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Ningunha"
 
-#: ../panels/network/net-device-wifi.c:815
+#: ../panels/network/net-device-wifi.c:770
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Débil"
 
-#: ../panels/network/net-device-wifi.c:817
+#: ../panels/network/net-device-wifi.c:772
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Aceptábel"
 
-#: ../panels/network/net-device-wifi.c:819
+#: ../panels/network/net-device-wifi.c:774
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Boa"
 
-#: ../panels/network/net-device-wifi.c:821
+#: ../panels/network/net-device-wifi.c:776
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Excelente"
 
-#: ../panels/network/net-device-wifi.c:1005
+#: ../panels/network/net-device-wifi.c:960
 #, c-format
 msgid ""
 "Network details for %s including password and any custom configuration will "
@@ -1759,36 +1761,36 @@ msgstr ""
 "Perderanse os detalles da rede %s, incluíndo o contrasinal e calquera "
 "configuración personalizada."
 
-#: ../panels/network/net-device-wifi.c:1016
+#: ../panels/network/net-device-wifi.c:971
 msgid "Forget"
 msgstr "Esquecer"
 
-#: ../panels/network/net-device-wifi.c:1552
+#: ../panels/network/net-device-wifi.c:1554
 msgid ""
-"If you have a connection to the Internet other than wireless, you can use it "
-"to share your internet connection with others."
+"If you have a connection to the Internet other than wireless, you can set up "
+"a wireless hotspot to share the connection with others."
 msgstr ""
-"Se ten unha conexión a Internet aparte da sen fíos, pode usala para "
-"compartir a súa conexión a Internet con outros."
+"Se ten unha conexión a Internet aparte da sen fíos, pode configurar un punto "
+"de acceso sen fíos para compartir a súa conexión a Internet con outros."
 
-#: ../panels/network/net-device-wifi.c:1556
+#: ../panels/network/net-device-wifi.c:1558
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Cambiar ao «hotspot» sen fíos desconectaralle de <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1560
+#: ../panels/network/net-device-wifi.c:1562
 msgid ""
-"It is not possible to access the internet through your wireless while the "
+"It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
 msgstr ""
-"Non é posíbel acceder á Internet usando a conexión sen fíos mentres o "
+"Non é posíbel acceder á internet usando a conexión sen fíos mentres o "
 "«hotspot» está activado."
 
-#: ../panels/network/net-device-wifi.c:1626
+#: ../panels/network/net-device-wifi.c:1628
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Desexa deter o «hotspot» e desconectar aos usuarios?"
 
-#: ../panels/network/net-device-wifi.c:1629
+#: ../panels/network/net-device-wifi.c:1631
 msgid "_Stop Hotspot"
 msgstr "_Deter «hotspot»"
 
@@ -1827,19 +1829,19 @@ msgid "IP Address"
 msgstr "Enderezo IP"
 
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/network-wifi.ui.h:14
 #: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:684
 msgid "IPv6 Address"
 msgstr "Enderezo IPv6"
 
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-wifi.ui.h:14
+#: ../panels/network/network-wifi.ui.h:15
 #: ../panels/network/network-wired.ui.h:4
 msgid "Default Route"
 msgstr "Ruta predeterminada"
 
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-wifi.ui.h:15
+#: ../panels/network/network-wifi.ui.h:16
 #: ../panels/network/network-wired.ui.h:5
 msgid "DNS"
 msgstr "DNS"
@@ -1950,64 +1952,68 @@ msgid "_Use as Hotspot..."
 msgstr "_Usar como «hotspot»…"
 
 #: ../panels/network/network-wifi.ui.h:5
+msgid "_Connect to Hidden Network..."
+msgstr "_Conectar a unha rede oculta…"
+
+#: ../panels/network/network-wifi.ui.h:6
 msgid "_Disconnect"
 msgstr "_Desconectado"
 
-#: ../panels/network/network-wifi.ui.h:6
+#: ../panels/network/network-wifi.ui.h:7
 msgid "_Connect"
 msgstr "_Conectado"
 
-#: ../panels/network/network-wifi.ui.h:7
+#: ../panels/network/network-wifi.ui.h:8
 msgid "Last used"
 msgstr "Última vez usada"
 
-#: ../panels/network/network-wifi.ui.h:8
+#: ../panels/network/network-wifi.ui.h:9
 #: ../panels/network/network-wired.ui.h:1
 msgid "Hardware Address"
 msgstr "Enderezo hardware"
 
-#: ../panels/network/network-wifi.ui.h:9
+#: ../panels/network/network-wifi.ui.h:10
 msgid "Security"
 msgstr "Seguranza"
 
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:11
 msgid "Strength"
 msgstr "Intensidade"
 
-#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wifi.ui.h:12
 msgid "Link speed"
 msgstr "Velocidade da ligazón"
 
-#: ../panels/network/network-wifi.ui.h:12
+#: ../panels/network/network-wifi.ui.h:13
 #: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:683
 msgid "IPv4 Address"
 msgstr "Enderezo IPv4"
 
-#: ../panels/network/network-wifi.ui.h:16
+#: ../panels/network/network-wifi.ui.h:17
 msgid "_Forget Network"
 msgstr "_Esquecer rede"
 
-#: ../panels/network/network-wifi.ui.h:17
+#: ../panels/network/network-wifi.ui.h:18
 msgid "_Settings..."
 msgstr "_Configuración..."
 
-#: ../panels/network/network-wifi.ui.h:18
+#: ../panels/network/network-wifi.ui.h:19
 msgid "Switch off to connect to a wireless network"
 msgstr "Apagar para conectarse a unha rede sen fíos"
 
-#: ../panels/network/network-wifi.ui.h:19
+#: ../panels/network/network-wifi.ui.h:20
 msgid "Network Name"
 msgstr "Nombre de rede"
 
-#: ../panels/network/network-wifi.ui.h:20
+#: ../panels/network/network-wifi.ui.h:21
 msgid "Connected Devices"
 msgstr "Dispositivos conectados"
 
-#: ../panels/network/network-wifi.ui.h:21
+#: ../panels/network/network-wifi.ui.h:22
 msgid "Security type"
 msgstr "Tipo de seguranza"
 
-#: ../panels/network/network-wifi.ui.h:22
+#: ../panels/network/network-wifi.ui.h:23
 msgid "Security key"
 msgstr "Chave de seguranza"
 
@@ -2320,35 +2326,35 @@ msgstr "Fallou a dependencia da conexión"
 msgid "Add Account"
 msgstr "Engadir conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:383
+#: ../panels/online-accounts/cc-online-accounts-panel.c:371
 msgid "Error logging into the account"
 msgstr "Produciuse un erro ao iniciar a sesión na conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:437
+#: ../panels/online-accounts/cc-online-accounts-panel.c:425
 msgid "Expired credentials. Please log in again."
 msgstr "As credenciais expiraron. Inicie sesión de novo."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:440
+#: ../panels/online-accounts/cc-online-accounts-panel.c:428
 msgid "_Log In"
 msgstr "_Iniciar sesión"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:676
+#: ../panels/online-accounts/cc-online-accounts-panel.c:664
 msgid "Error creating account"
 msgstr "Produciuse un erro ao crear a conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:718
+#: ../panels/online-accounts/cc-online-accounts-panel.c:706
 msgid "Error removing account"
 msgstr "Produciuse un erro ao quitar a conta"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:754
+#: ../panels/online-accounts/cc-online-accounts-panel.c:742
 msgid "Are you sure you want to remove the account?"
 msgstr "Ten certeza que quere retirar a conta?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:756
+#: ../panels/online-accounts/cc-online-accounts-panel.c:744
 msgid "This will not remove the account on the server."
 msgstr "Isto non retirará a conta do servidor."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:757
+#: ../panels/online-accounts/cc-online-accounts-panel.c:745
 msgid "_Remove"
 msgstr "_Retirar"
 
@@ -3255,7 +3261,7 @@ msgstr "Seleccione unha orixe da entrada"
 msgid "Select an input source to add"
 msgstr "Seleccione unha orixe de entrada para engadir"
 
-#: ../panels/region/gnome-region-panel-system.c:470
+#: ../panels/region/gnome-region-panel-system.c:465
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings."
@@ -3263,8 +3269,8 @@ msgstr ""
 "A pantalla de inicio de sesión, as contas do sistema e as contas dos "
 "usuarios novos usan as preferencias de «Rexión e idioma» do sistema."
 
-#: ../panels/region/gnome-region-panel-system.c:475
-#: ../panels/region/gnome-region-panel.ui.h:31
+#: ../panels/region/gnome-region-panel-system.c:470
+#: ../panels/region/gnome-region-panel.ui.h:30
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings. You may change the system settings to match "
@@ -3274,12 +3280,12 @@ msgstr ""
 "as opicións de «Rexión e idioma». Pode cambiar as preferencias do sistema "
 "para axeitalas ás súas."
 
-#: ../panels/region/gnome-region-panel-system.c:478
+#: ../panels/region/gnome-region-panel-system.c:473
 msgid "Copy Settings"
 msgstr "Copiar configuración"
 
-#: ../panels/region/gnome-region-panel-system.c:481
-#: ../panels/region/gnome-region-panel.ui.h:38
+#: ../panels/region/gnome-region-panel-system.c:476
+#: ../panels/region/gnome-region-panel.ui.h:37
 msgid "Copy Settings..."
 msgstr "Copiar configuración…"
 
@@ -3298,120 +3304,116 @@ msgid "Add Language"
 msgstr "Engadir idioma"
 
 #: ../panels/region/gnome-region-panel.ui.h:4
-msgid "Remove Language"
-msgstr "Retirar idioma"
-
-#: ../panels/region/gnome-region-panel.ui.h:5
 msgid "Install languages..."
 msgstr "Instalar idiomas…"
 
-#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:5
 msgid "Language"
 msgstr "Idioma"
 
-#: ../panels/region/gnome-region-panel.ui.h:7
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Select a region (change will be applied the next time you log in)"
 msgstr ""
 "Seleccione unha rexión (o cambio aplicarase a próxima vez que inicie sesión)"
 
-#: ../panels/region/gnome-region-panel.ui.h:8
+#: ../panels/region/gnome-region-panel.ui.h:7
 msgid "Add Region"
 msgstr "Engadir rexión"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid "Remove Region"
 msgstr "Retirar rexión"
 
-#: ../panels/region/gnome-region-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Dates"
 msgstr "Datas"
 
-#: ../panels/region/gnome-region-panel.ui.h:11
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "Times"
 msgstr "Horas"
 
-#: ../panels/region/gnome-region-panel.ui.h:12
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Numbers"
 msgstr "Números"
 
-#: ../panels/region/gnome-region-panel.ui.h:13
+#: ../panels/region/gnome-region-panel.ui.h:12
 msgid "Currency"
 msgstr "Moeda"
 
-#: ../panels/region/gnome-region-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "Measurement"
 msgstr "Medida"
 
-#: ../panels/region/gnome-region-panel.ui.h:15
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "Examples"
 msgstr "Exemplos"
 
-#: ../panels/region/gnome-region-panel.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:15
 msgid "Formats"
 msgstr "Formatos"
 
-#: ../panels/region/gnome-region-panel.ui.h:17
+#: ../panels/region/gnome-region-panel.ui.h:16
 msgid "Select keyboards or other input sources"
 msgstr "Seleccione os teclados ou outros orixes de entrada"
 
-#: ../panels/region/gnome-region-panel.ui.h:18
+#: ../panels/region/gnome-region-panel.ui.h:17
 msgid "Add Input Source"
 msgstr "Engadir orixe de entrada"
 
-#: ../panels/region/gnome-region-panel.ui.h:19
+#: ../panels/region/gnome-region-panel.ui.h:18
 msgid "Remove Input Source"
 msgstr "Retirar orixe de entrada"
 
-#: ../panels/region/gnome-region-panel.ui.h:20
+#: ../panels/region/gnome-region-panel.ui.h:19
 msgid "Move Input Source Up"
 msgstr "Mover orixe de entrada arriba"
 
-#: ../panels/region/gnome-region-panel.ui.h:21
+#: ../panels/region/gnome-region-panel.ui.h:20
 msgid "Move Input Source Down"
 msgstr "Mover orixe de entrada abaixo"
 
-#: ../panels/region/gnome-region-panel.ui.h:22
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "Input Source Settings"
 msgstr "Preferencias das orixes de entrada"
 
-#: ../panels/region/gnome-region-panel.ui.h:23
+#: ../panels/region/gnome-region-panel.ui.h:22
 msgid "Show Keyboard Layout"
 msgstr "Mostrar a distribución do teclado"
 
-#: ../panels/region/gnome-region-panel.ui.h:25
+#: ../panels/region/gnome-region-panel.ui.h:24
 msgid "Ctrl+Alt+Space"
 msgstr "Ctrl+Alt+Espacio"
 
-#: ../panels/region/gnome-region-panel.ui.h:27
+#: ../panels/region/gnome-region-panel.ui.h:26
 msgid "Ctrl+Alt+Shift+Space"
 msgstr "Ctrl+Alt+Maiús+Espacio"
 
-#: ../panels/region/gnome-region-panel.ui.h:28
+#: ../panels/region/gnome-region-panel.ui.h:27
 msgid "Shortcut Settings"
 msgstr "Preferencias de atallos"
 
-#: ../panels/region/gnome-region-panel.ui.h:30
+#: ../panels/region/gnome-region-panel.ui.h:29
 msgid "Input Sources"
 msgstr "Orixes de entrada"
 
 #. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
-#: ../panels/region/gnome-region-panel.ui.h:33
+#: ../panels/region/gnome-region-panel.ui.h:32
 msgid "Display language:"
 msgstr "Mostrar idioma:"
 
-#: ../panels/region/gnome-region-panel.ui.h:34
+#: ../panels/region/gnome-region-panel.ui.h:33
 msgid "Input source:"
 msgstr "Orixe de entrada:"
 
-#: ../panels/region/gnome-region-panel.ui.h:35
+#: ../panels/region/gnome-region-panel.ui.h:34
 msgid "Format:"
 msgstr "Formato:"
 
-#: ../panels/region/gnome-region-panel.ui.h:36
+#: ../panels/region/gnome-region-panel.ui.h:35
 msgid "Your settings"
 msgstr "As súas preferencias"
 
-#: ../panels/region/gnome-region-panel.ui.h:37
+#: ../panels/region/gnome-region-panel.ui.h:36
 msgid "System settings"
 msgstr "Preferencias do sistema"
 
@@ -3773,6 +3775,7 @@ msgstr ""
 "de teclas;Teclas do rato"
 
 #: ../panels/universal-access/uap.ui.h:1
+#: ../panels/universal-access/zoom-options.ui.h:33
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Baixa"
@@ -3783,6 +3786,7 @@ msgid "Normal"
 msgstr "Normal"
 
 #: ../panels/universal-access/uap.ui.h:3
+#: ../panels/universal-access/zoom-options.ui.h:34
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Alta"
@@ -3954,117 +3958,127 @@ msgstr "Engade un atraso entre cando se preme unha tecla e cando se acepta"
 msgid "A_cceptance delay:"
 msgstr "_Atraso na aceptación:"
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:48
+msgctxt "universal access, delay"
+msgid "Short"
+msgstr "Curto"
+
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Slow keys typing delay"
 msgstr "Retardo das teclas lentas ao escribir"
 
+#: ../panels/universal-access/uap.ui.h:50
+msgctxt "universal access, delay"
+msgid "Long"
+msgstr "Longo"
+
 #. This string is part of a line of checkboxes: Beep when a key is [ ] pressed  [ ] accepted  [ ] rejected
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Beep when a key is"
 msgstr "Pitar cando a tecla é"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:54
 msgid "pressed"
 msgstr "premida"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:56
 msgid "accepted"
 msgstr "aceptada"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:58
 msgid "rejected"
 msgstr "rexeitada"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Bounce Keys"
 msgstr "Teclas de rebote"
 
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Ignores fast duplicate keypresses"
 msgstr "Ignorar as pulsacións duplicadas rápidas"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Acc_eptance delay:"
 msgstr "_Retardo na aceptación:"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Bounce keys typing delay"
 msgstr "Retardo de pulsación do rexeite de teclas"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Beep when a key is _rejected"
 msgstr "Pitar ao _rexeitar unha tecla"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Enable by Keyboard"
 msgstr "Activar co teclado"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "Activar as características de accesibilidade desde o teclado"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Mouse Keys"
 msgstr "Teclas do rato"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Control the pointer using the keypad"
 msgstr "Controlar o punteiro usando o teclado numérico"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Video Mouse"
 msgstr "Rato do vídeo"
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Control the pointer using the video camera."
 msgstr "Controlar o punteiro usando a cámara de vídeo."
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Simulated Secondary Click"
 msgstr "Clic secundario simulado"
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Iniciar un clic secundario ao manter o botón primario"
 
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Secondary click delay"
 msgstr "Retardo da pulsación secundaria"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:74
 msgid "Hover Click"
 msgstr "Premer ao enfocar"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Trigger a click when the pointer hovers"
 msgstr "Iniciar un clic cando se pasa por enriba o punteiro"
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:76
 msgid "D_elay:"
 msgstr "_Retardo:"
 
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:77
 msgid "Motion _threshold:"
 msgstr "Limiar de _movemento:"
 
-#. small threshold
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:78
+msgctxt "universal access, threshold"
 msgid "Small"
 msgstr "Pequeno"
 
-#. large threshold
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:79
+msgctxt "universal access, threshold"
 msgid "Large"
 msgstr "Grande"
 
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:80
 msgid "Mouse Settings"
 msgstr "Preferencias do rato"
 
-#: ../panels/universal-access/uap.ui.h:85
+#: ../panels/universal-access/uap.ui.h:81
 msgid "Pointing and Clicking"
 msgstr "Apuntar e premer"
 
@@ -4161,78 +4175,73 @@ msgstr "Lupa"
 msgid "Thickness:"
 msgstr "Grosor:"
 
-#. short delay
-#: ../panels/universal-access/zoom-options.ui.h:19
+#: ../panels/universal-access/zoom-options.ui.h:18
+msgctxt "universal access, thickness"
 msgid "Thin"
 msgstr "Fino"
 
-#. long delay
-#: ../panels/universal-access/zoom-options.ui.h:21
+#: ../panels/universal-access/zoom-options.ui.h:19
+msgctxt "universal access, thickness"
 msgid "Thick"
 msgstr "Groso"
 
-#: ../panels/universal-access/zoom-options.ui.h:22
+#: ../panels/universal-access/zoom-options.ui.h:20
 msgid "Length:"
 msgstr "Lonxitude:"
 
-#: ../panels/universal-access/zoom-options.ui.h:23
+#: ../panels/universal-access/zoom-options.ui.h:21
 msgid "Color:"
 msgstr "Cor:"
 
-#: ../panels/universal-access/zoom-options.ui.h:24
+#: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Crosshairs:"
 msgstr "Cruces:"
 
-#: ../panels/universal-access/zoom-options.ui.h:25
+#: ../panels/universal-access/zoom-options.ui.h:23
 msgid "Overlaps mouse cursor"
 msgstr "Sobrepon o cursor do rato"
 
-#: ../panels/universal-access/zoom-options.ui.h:26
+#: ../panels/universal-access/zoom-options.ui.h:24
 msgid "Crosshairs"
 msgstr "Cruces"
 
-#: ../panels/universal-access/zoom-options.ui.h:27
+#: ../panels/universal-access/zoom-options.ui.h:25
 msgid "White on black:"
 msgstr "Branco sobre negro:"
 
-#: ../panels/universal-access/zoom-options.ui.h:28
+#: ../panels/universal-access/zoom-options.ui.h:26
 msgid "Brightness:"
 msgstr "Brillo:"
 
-#: ../panels/universal-access/zoom-options.ui.h:29
+#: ../panels/universal-access/zoom-options.ui.h:27
 msgid "Contrast:"
 msgstr "Contraste:"
 
-#: ../panels/universal-access/zoom-options.ui.h:30
-msgctxt "Zoom Grayscale"
-msgid "Color"
-msgstr "Cor"
-
-#: ../panels/universal-access/zoom-options.ui.h:31
-msgctxt "Zoom Grayscale"
+#: ../panels/universal-access/zoom-options.ui.h:29
+msgctxt "universal access, color"
 msgid "None"
 msgstr "Ningunha"
 
-#: ../panels/universal-access/zoom-options.ui.h:32
-msgctxt "Zoom Grayscale"
+#: ../panels/universal-access/zoom-options.ui.h:30
+msgctxt "universal access, color"
 msgid "Full"
 msgstr "Completo"
 
-#. short delay
-#: ../panels/universal-access/zoom-options.ui.h:34
+#: ../panels/universal-access/zoom-options.ui.h:31
+msgctxt "universal access, brightness"
 msgid "Low"
 msgstr "Baixo"
 
-#. long delay
-#: ../panels/universal-access/zoom-options.ui.h:36
+#: ../panels/universal-access/zoom-options.ui.h:32
+msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Alto"
 
-#: ../panels/universal-access/zoom-options.ui.h:37
+#: ../panels/universal-access/zoom-options.ui.h:35
 msgid "Color Effects:"
 msgstr "Efectos de cor:"
 
-#: ../panels/universal-access/zoom-options.ui.h:38
+#: ../panels/universal-access/zoom-options.ui.h:36
 msgid "Color Effects"
 msgstr "Efectos de cor"
 
@@ -4823,20 +4832,20 @@ msgstr "Non existe ningún usuario co nome «%s»"
 msgid "This user does not exist."
 msgstr "Este usuario non existe."
 
-#: ../panels/user-accounts/um-user-panel.c:371
+#: ../panels/user-accounts/um-user-panel.c:363
 msgid "Failed to delete user"
 msgstr "Produciuse un erro ao eliminar o usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:431
+#: ../panels/user-accounts/um-user-panel.c:423
 msgid "You cannot delete your own account."
 msgstr "Non pode eliminar a súa propia conta."
 
-#: ../panels/user-accounts/um-user-panel.c:440
+#: ../panels/user-accounts/um-user-panel.c:432
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s aínda ten a sesión iniciada"
 
-#: ../panels/user-accounts/um-user-panel.c:444
+#: ../panels/user-accounts/um-user-panel.c:436
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -4844,12 +4853,12 @@ msgstr ""
 "Se elimina un usuario mentres ten a sesión iniciada pode poñer deixar o "
 "sistema nun estado inconsistente."
 
-#: ../panels/user-accounts/um-user-panel.c:453
+#: ../panels/user-accounts/um-user-panel.c:445
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Desexa manter os ficheiros de %s?"
 
-#: ../panels/user-accounts/um-user-panel.c:457
+#: ../panels/user-accounts/um-user-panel.c:449
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -4857,38 +4866,38 @@ msgstr ""
 "É posíbel manter o cartafol persoal, a caixa de correo e os ficheiros "
 "temporais ao eliminar unha conta de usuario."
 
-#: ../panels/user-accounts/um-user-panel.c:460
+#: ../panels/user-accounts/um-user-panel.c:452
 msgid "_Delete Files"
 msgstr "_Eliminar os ficheiros"
 
-#: ../panels/user-accounts/um-user-panel.c:461
+#: ../panels/user-accounts/um-user-panel.c:453
 msgid "_Keep Files"
 msgstr "_Manter os ficheiros"
 
-#: ../panels/user-accounts/um-user-panel.c:513
+#: ../panels/user-accounts/um-user-panel.c:505
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Conta desactivada"
 
-#: ../panels/user-accounts/um-user-panel.c:521
+#: ../panels/user-accounts/um-user-panel.c:513
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Para configurar no seguinte inicio de sesión"
 
-#: ../panels/user-accounts/um-user-panel.c:524
+#: ../panels/user-accounts/um-user-panel.c:516
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ningún"
 
-#: ../panels/user-accounts/um-user-panel.c:871
+#: ../panels/user-accounts/um-user-panel.c:863
 msgid "Failed to contact the accounts service"
 msgstr "Produciuse un erro ao contactar co servizo de contas"
 
-#: ../panels/user-accounts/um-user-panel.c:873
+#: ../panels/user-accounts/um-user-panel.c:865
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que o servizo de contas está instalado e activado."
 
-#: ../panels/user-accounts/um-user-panel.c:913
+#: ../panels/user-accounts/um-user-panel.c:905
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -4896,12 +4905,12 @@ msgstr ""
 "Para realizar os cambios,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:951
+#: ../panels/user-accounts/um-user-panel.c:943
 msgid "Create a user account"
 msgstr "Crear unha conta de usuario"
 
-#: ../panels/user-accounts/um-user-panel.c:962
-#: ../panels/user-accounts/um-user-panel.c:1273
+#: ../panels/user-accounts/um-user-panel.c:954
+#: ../panels/user-accounts/um-user-panel.c:1236
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -4909,12 +4918,12 @@ msgstr ""
 "Para crear unha conta de usuario,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:971
+#: ../panels/user-accounts/um-user-panel.c:963
 msgid "Delete the selected user account"
 msgstr "Eliminar a conta de usuario seleccionada"
 
-#: ../panels/user-accounts/um-user-panel.c:983
-#: ../panels/user-accounts/um-user-panel.c:1278
+#: ../panels/user-accounts/um-user-panel.c:975
+#: ../panels/user-accounts/um-user-panel.c:1241
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -4922,11 +4931,11 @@ msgstr ""
 "Para eliminar a conta de usuario seleccionada,\n"
 "primeiro prema na icona *"
 
-#: ../panels/user-accounts/um-user-panel.c:1176
+#: ../panels/user-accounts/um-user-panel.c:1149
 msgid "My Account"
 msgstr "A miña conta"
 
-#: ../panels/user-accounts/um-user-panel.c:1186
+#: ../panels/user-accounts/um-user-panel.c:1158
 msgid "Other Accounts"
 msgstr "Outras contas"
 
@@ -5289,6 +5298,17 @@ msgstr "Preferencias;Configuración;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "Todas as preferencias"
+
+#~ msgid "Remove Language"
+#~ msgstr "Retirar idioma"
+
+#~ msgctxt "Zoom Grayscale"
+#~ msgid "Color"
+#~ msgstr "Cor"
+
+#~ msgctxt "Zoom Grayscale"
+#~ msgid "None"
+#~ msgstr "Ningunha"
 
 #~ msgid "Security Key"
 #~ msgstr "Chave de seguranza"
