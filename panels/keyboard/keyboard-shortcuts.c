@@ -79,6 +79,7 @@ enum
   SECTION_N_COLUMNS
 };
 
+static GRegex *pictures_regex = NULL;
 static GSettings *binding_settings = NULL;
 static GtkWidget *custom_shortcut_dialog = NULL;
 static GtkWidget *custom_shortcut_name_entry = NULL;
@@ -274,6 +275,30 @@ append_section (GtkBuilder         *builder,
     }
 }
 
+static char *
+replace_pictures_folder (const char *description)
+{
+  const char *path;
+  char *dirname;
+  char *ret;
+
+  if (description == NULL)
+    return NULL;
+
+  if (strstr (description, "$PICTURES") == NULL)
+    return g_strdup (description);
+
+  path = g_get_user_special_dir (G_USER_DIRECTORY_PICTURES);
+  dirname = g_filename_display_basename (path);
+  ret = g_regex_replace (pictures_regex, description, -1,
+                         0, dirname, 0, NULL);
+  g_free (dirname);
+  if (ret == NULL)
+    return g_strdup (description);
+
+  return ret;
+}
+
 static void
 parse_start_tag (GMarkupParseContext *ctx,
                  const gchar         *element_name,
@@ -405,7 +430,7 @@ parse_start_tag (GMarkupParseContext *ctx,
 
   key.name = g_strdup (name);
   key.type = CC_KEYBOARD_ITEM_TYPE_GSETTINGS;
-  key.description = g_strdup (description);
+  key.description = replace_pictures_folder (description);
   key.gettext_package = g_strdup (keylist->package);
   key.schema = schema ? g_strdup (schema) : g_strdup (keylist->schema);
   g_array_append_val (keylist->entries, key);
@@ -1807,6 +1832,7 @@ keyboard_shortcuts_init (CcPanel *panel, GtkBuilder *builder)
   g_object_set_data (G_OBJECT (panel), "builder", builder);
   wm_common_register_window_manager_change ((GFunc) on_window_manager_change,
                                             panel);
+  pictures_regex = g_regex_new ("\\$PICTURES", 0, 0, NULL);
   setup_dialog (panel, builder);
   reload_sections (panel);
 }
@@ -1878,6 +1904,11 @@ keyboard_shortcuts_dispose (CcPanel *panel)
     {
       g_hash_table_destroy (kb_user_sections);
       kb_user_sections = NULL;
+    }
+  if (pictures_regex != NULL)
+    {
+      g_regex_unref (pictures_regex);
+      pictures_regex = NULL;
     }
 
   g_clear_object (&binding_settings);
