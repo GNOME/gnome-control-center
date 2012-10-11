@@ -185,6 +185,7 @@ setup_dialog (GtkBuilder *dialog)
 	/* Trackpad page */
 	touchpad_present = touchpad_is_present ();
 	gtk_widget_set_visible (WID ("touchpad_vbox"), touchpad_present);
+	gtk_widget_set_visible (WID ("touchpad_enabled_switch"), mouse_present);
 
 	g_settings_bind (touchpad_settings, "touchpad-enabled",
 			 WID ("touchpad_enabled_switch"), "active",
@@ -262,6 +263,7 @@ device_changed (GdkDeviceManager *device_manager,
 
 	present = mouse_is_present ();
 	gtk_widget_set_visible (WID ("mouse_vbox"), present);
+	gtk_widget_set_visible (WID ("touchpad_enabled_switch"), present);
 }
 
 GtkWidget *
