@@ -232,7 +232,11 @@ get_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data
       gtk_widget_hide (WID ("brightness-frame"));
       g_object_set (G_OBJECT (WID ("turn-off-alignment")), "left-padding", 0, NULL);
 
-      g_warning ("Error getting brightness: %s", error->message);
+      if (error->message &&
+      	  strstr (error->message, "No backlight devices present") == NULL)
+        {
+          g_warning ("Error getting brightness: %s", error->message);
+        }
       g_error_free (error);
       return;
     }
