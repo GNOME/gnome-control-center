@@ -445,6 +445,7 @@ on_permit_user_login (GObject *source,
                 show_error_dialog (self, _("Failed to register account"), error);
                 g_message ("Couldn't permit logins on account: %s", error->message);
                 finish_action (self);
+                g_error_free (error);
         }
 
         g_object_unref (self);
@@ -631,9 +632,9 @@ on_realm_joined (GObject *source,
                 show_error_dialog (self, _("Failed to join domain"), error);
                 g_message ("Failed to join the domain: %s", error->message);
                 finish_action (self);
-                g_error_free (error);
         }
 
+        g_clear_error (&error);
         g_object_unref (self);
 }
 
