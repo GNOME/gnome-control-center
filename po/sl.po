@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-10-10 16:57+0000\n"
-"PO-Revision-Date: 2012-10-10 22:05+0100\n"
+"POT-Creation-Date: 2012-10-13 10:38+0000\n"
+"PO-Revision-Date: 2012-10-14 15:47+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: \n"
@@ -119,9 +119,7 @@ msgstr "Spremeni ozadje"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Slika ozadja;Zaslon;Namizje"
 
-#. TRANSLATORS: device type
 #: ../panels/bluetooth/bluetooth-properties.desktop.in.in.h:1
-#: ../panels/network/panel-common.c:102
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -863,11 +861,9 @@ msgstr "Pult;Projektor;xrandr;Zaslon;Ločljivost;Osveževanje;"
 msgid "VESA: %s"
 msgstr "VESA: %s"
 
-#. TRANSLATORS: device type
 #. TRANSLATORS: AP type
 #: ../panels/info/cc-info-panel.c:437
-#: ../panels/network/panel-common.c:82
-#: ../panels/network/panel-common.c:162
+#: ../panels/network/panel-common.c:119
 msgid "Unknown"
 msgstr "Neznano"
 
@@ -1599,24 +1595,24 @@ msgstr "Dvojni klik, drugi gumb"
 msgid "Single click, secondary button"
 msgstr "Enojni klik, drugi gumb"
 
-#: ../panels/network/cc-network-panel.c:684
+#: ../panels/network/cc-network-panel.c:750
 msgid "Network proxy"
 msgstr "Omrežni posredniški strežnik"
 
-#: ../panels/network/cc-network-panel.c:871
+#: ../panels/network/cc-network-panel.c:940
 #: ../panels/network/net-vpn.c:278
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:938
+#: ../panels/network/cc-network-panel.c:1004
 msgid "The system network services are not compatible with this version."
 msgstr "Sistemske omrežne storitve niso podprte s to različico."
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:1073
+#: ../panels/network/cc-network-panel.c:1139
 msgid "Air_plane Mode"
 msgstr "_Letalski način"
 
@@ -1631,20 +1627,20 @@ msgstr "Omrežne nastavitve"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-msgid "Network;Wireless;IP;LAN;Proxy;"
-msgstr "Omrežje;Brezžično;IP;LAN;Posredniški strežnik"
+msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
+msgstr "Omrežje;Brezžično;Wi-Fi;Wifi;IP;LAN;Proxy;Posredniški;Širokopasovno;Modem;Bluetooth;"
+
+#. Translators: network device speed
+#: ../panels/network/net-device-ethernet.c:49
+#: ../panels/network/net-device-mobile.c:261
+#: ../panels/network/net-device-wifi.c:725
+#, c-format
+msgid "%d Mb/s"
+msgstr "%d Mb/s"
 
 #: ../panels/network/net-device-mobile.c:222
 msgid "Add new connection"
 msgstr "Dodaj novo povezavo"
-
-#. Translators: network device speed
-#: ../panels/network/net-device-mobile.c:261
-#: ../panels/network/net-device-wifi.c:725
-#: ../panels/network/net-device-wired.c:126
-#, c-format
-msgid "%d Mb/s"
-msgstr "%d Mb/s"
 
 #. TRANSLATORS: this WEP WiFi security
 #: ../panels/network/net-device-wifi.c:258
@@ -1697,7 +1693,7 @@ msgstr[3] "pred %i dnevi"
 
 #. TRANSLATORS: VPN status
 #: ../panels/network/net-device-wifi.c:735
-#: ../panels/network/panel-common.c:277
+#: ../panels/network/panel-common.c:234
 msgid "Not connected"
 msgstr "Brez povezave"
 
@@ -1787,33 +1783,33 @@ msgid "Provider"
 msgstr "Ponudnik"
 
 #: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:686
-#: ../panels/network/panel-common.c:688
+#: ../panels/network/panel-common.c:643
+#: ../panels/network/panel-common.c:645
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "IP naslov"
 
 #: ../panels/network/network-mobile.ui.h:4
+#: ../panels/network/network-simple.ui.h:3
 #: ../panels/network/network-wifi.ui.h:14
-#: ../panels/network/network-wired.ui.h:3
-#: ../panels/network/panel-common.c:684
+#: ../panels/network/panel-common.c:641
 msgid "IPv6 Address"
 msgstr "Naslov IPv6"
 
 #: ../panels/network/network-mobile.ui.h:5
+#: ../panels/network/network-simple.ui.h:4
 #: ../panels/network/network-wifi.ui.h:15
-#: ../panels/network/network-wired.ui.h:4
 msgid "Default Route"
 msgstr "Privzeta smer"
 
 #: ../panels/network/network-mobile.ui.h:6
+#: ../panels/network/network-simple.ui.h:5
 #: ../panels/network/network-wifi.ui.h:16
-#: ../panels/network/network-wired.ui.h:5
 msgid "DNS"
 msgstr "DNS"
 
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-wired.ui.h:6
+#: ../panels/network/network-simple.ui.h:6
 msgid "_Options..."
 msgstr "_Možnosti ..."
 
@@ -1858,6 +1854,17 @@ msgstr "Posredniški strežnik _FTP"
 #: ../panels/network/network-proxy.ui.h:9
 msgid "_Socks Host"
 msgstr "_Gostitelj vtičev"
+
+#: ../panels/network/network-simple.ui.h:1
+#: ../panels/network/network-wifi.ui.h:9
+msgid "Hardware Address"
+msgstr "Strojni naslov"
+
+#: ../panels/network/network-simple.ui.h:2
+#: ../panels/network/network-wifi.ui.h:13
+#: ../panels/network/panel-common.c:640
+msgid "IPv4 Address"
+msgstr "Naslov IPv4"
 
 #: ../panels/network/network.ui.h:1
 msgid "Select the interface to use for the new service"
@@ -1905,18 +1912,16 @@ msgid "_Configure..."
 msgstr "_Nastavi ..."
 
 #: ../panels/network/network-wifi.ui.h:1
-msgid "Wireless Hotspot"
-msgstr "Brezžična dostopna točka"
+msgid "Wi-Fi Hotspot"
+msgstr "Vroča točka Wi-Fi"
 
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Turn On"
 msgstr "_Vklopi"
 
-#. TRANSLATORS: device type
 #: ../panels/network/network-wifi.ui.h:3
-#: ../panels/network/panel-common.c:90
-msgid "Wireless"
-msgstr "Brezžično"
+msgid "Wi-Fi"
+msgstr "Wi-Fi"
 
 #: ../panels/network/network-wifi.ui.h:4
 msgid "_Use as Hotspot..."
@@ -1938,11 +1943,6 @@ msgstr "_Poveži"
 msgid "Last used"
 msgstr "Nazadnje uporabljeno"
 
-#: ../panels/network/network-wifi.ui.h:9
-#: ../panels/network/network-wired.ui.h:1
-msgid "Hardware Address"
-msgstr "Strojni naslov"
-
 #: ../panels/network/network-wifi.ui.h:10
 msgid "Security"
 msgstr "Varnost"
@@ -1955,12 +1955,6 @@ msgstr "Jakost"
 msgid "Link speed"
 msgstr "Hitrost povezave"
 
-#: ../panels/network/network-wifi.ui.h:13
-#: ../panels/network/network-wired.ui.h:2
-#: ../panels/network/panel-common.c:683
-msgid "IPv4 Address"
-msgstr "Naslov IPv4"
-
 #: ../panels/network/network-wifi.ui.h:17
 msgid "_Forget Network"
 msgstr "_Prezri omrežje"
@@ -1970,7 +1964,7 @@ msgid "_Settings..."
 msgstr "_Nastavitve ..."
 
 #: ../panels/network/network-wifi.ui.h:19
-msgid "Switch off to connect to a wireless network"
+msgid "Switch off to connect to a Wi-Fi network"
 msgstr "Izklopi za povezavo v brezžično omrežje"
 
 #: ../panels/network/network-wifi.ui.h:20
@@ -1989,312 +1983,297 @@ msgstr "Varnostna vrsta"
 msgid "Security key"
 msgstr "Varnostni ključ"
 
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:86
-msgid "Wired"
-msgstr "Žično"
-
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:97
-msgid "Mobile broadband"
-msgstr "Mobilni širokopasovni dostop"
-
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:106
-msgid "Mesh"
-msgstr "Mreženje"
-
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:166
+#: ../panels/network/panel-common.c:123
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:170
+#: ../panels/network/panel-common.c:127
 msgid "Infrastructure"
 msgstr "Infrastruktura"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:194
-#: ../panels/network/panel-common.c:255
+#: ../panels/network/panel-common.c:151
+#: ../panels/network/panel-common.c:212
 msgid "Status unknown"
 msgstr "Neznano stanje"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:198
+#: ../panels/network/panel-common.c:155
 msgid "Unmanaged"
 msgstr "Neupravljano"
 
-#: ../panels/network/panel-common.c:203
+#: ../panels/network/panel-common.c:160
 msgid "Firmware missing"
 msgstr "Manjka strojna programska oprema"
 
-#: ../panels/network/panel-common.c:206
+#: ../panels/network/panel-common.c:163
 msgid "Cable unplugged"
 msgstr "Kabel ni priklopljen"
 
-#: ../panels/network/panel-common.c:208
+#: ../panels/network/panel-common.c:165
 msgid "Unavailable"
 msgstr "Nedostopno"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:212
+#: ../panels/network/panel-common.c:169
 msgid "Disconnected"
 msgstr "Prekinjena povezava"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:219
-#: ../panels/network/panel-common.c:261
+#: ../panels/network/panel-common.c:176
+#: ../panels/network/panel-common.c:218
 msgid "Connecting"
 msgstr "V povezovanju"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:223
-#: ../panels/network/panel-common.c:265
+#: ../panels/network/panel-common.c:180
+#: ../panels/network/panel-common.c:222
 msgid "Authentication required"
 msgstr "Zahtevana je overitev"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:227
-#: ../panels/network/panel-common.c:269
+#: ../panels/network/panel-common.c:184
+#: ../panels/network/panel-common.c:226
 msgid "Connected"
 msgstr "Povezano"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:231
+#: ../panels/network/panel-common.c:188
 msgid "Disconnecting"
 msgstr "Prekinjanje povezave"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:235
-#: ../panels/network/panel-common.c:273
+#: ../panels/network/panel-common.c:192
+#: ../panels/network/panel-common.c:230
 msgid "Connection failed"
 msgstr "Povezovanje je spodletelo"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:239
-#: ../panels/network/panel-common.c:281
+#: ../panels/network/panel-common.c:196
+#: ../panels/network/panel-common.c:238
 msgid "Status unknown (missing)"
 msgstr "Stanje baterije ni znano (manjka)"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:301
+#: ../panels/network/panel-common.c:258
 msgid "Configuration failed"
 msgstr "Nastavitev je spodletela"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:305
+#: ../panels/network/panel-common.c:262
 msgid "IP configuration failed"
 msgstr "Nastavljanje IP je spodletelo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:309
+#: ../panels/network/panel-common.c:266
 msgid "IP configuration expired"
 msgstr "Nastavitev IP je časovno poteklo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:313
+#: ../panels/network/panel-common.c:270
 msgid "Secrets were required, but not provided"
 msgstr "Zahtevana so bila ustrezna gesla, ki pa niso bila podana"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:317
+#: ../panels/network/panel-common.c:274
 msgid "802.1x supplicant disconnected"
 msgstr "Prosilnik 802.1X je odklopljen"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:321
+#: ../panels/network/panel-common.c:278
 msgid "802.1x supplicant configuration failed"
 msgstr "Nastavitev prosilnika 802.1X je spodletela"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:325
+#: ../panels/network/panel-common.c:282
 msgid "802.1x supplicant failed"
 msgstr "Prosilnik 802.1X je spodletel"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:329
+#: ../panels/network/panel-common.c:286
 msgid "802.1x supplicant took too long to authenticate"
 msgstr "Prosilnik 802.1X je potreboval preveč časa za overjanje"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:333
+#: ../panels/network/panel-common.c:290
 msgid "PPP service failed to start"
 msgstr "Storitev PPP ni uspešno zagnana"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:337
+#: ../panels/network/panel-common.c:294
 msgid "PPP service disconnected"
 msgstr "Storitev PPP je prekinjena"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:341
+#: ../panels/network/panel-common.c:298
 msgid "PPP failed"
 msgstr "PPP je spodletel"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:345
+#: ../panels/network/panel-common.c:302
 msgid "DHCP client failed to start"
 msgstr "Začenjanje odjemalca DHCP je spodletelo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:349
+#: ../panels/network/panel-common.c:306
 msgid "DHCP client error"
 msgstr "Napaka odjemalca DHCP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:353
+#: ../panels/network/panel-common.c:310
 msgid "DHCP client failed"
 msgstr "Odjemalec DHCP je spodletel"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:357
+#: ../panels/network/panel-common.c:314
 msgid "Shared connection service failed to start"
 msgstr "Začenjanje storitve souporabe povezave je spodletelo."
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:361
+#: ../panels/network/panel-common.c:318
 msgid "Shared connection service failed"
 msgstr "Storitev souporabe povezave je spodletela."
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:365
+#: ../panels/network/panel-common.c:322
 msgid "AutoIP service failed to start"
 msgstr "Začenjanje storitve AutoIP je spodletelo."
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:369
+#: ../panels/network/panel-common.c:326
 msgid "AutoIP service error"
 msgstr "Napaka storitve AutoIP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:373
+#: ../panels/network/panel-common.c:330
 msgid "AutoIP service failed"
 msgstr "Storitev AutoIP je spodletela"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:377
+#: ../panels/network/panel-common.c:334
 msgid "Line busy"
 msgstr "Povezava je zasedena"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:381
+#: ../panels/network/panel-common.c:338
 msgid "No dial tone"
 msgstr "Ni klicnega signala"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:385
+#: ../panels/network/panel-common.c:342
 msgid "No carrier could be established"
 msgstr "Ni mogoče vzpostaviti signala povezave"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:389
+#: ../panels/network/panel-common.c:346
 msgid "Dialing request timed out"
 msgstr "Zahteva klicanja je časovno potekla"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:393
+#: ../panels/network/panel-common.c:350
 msgid "Dialing attempt failed"
 msgstr "Poskus klicanja je spodletel"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:397
+#: ../panels/network/panel-common.c:354
 msgid "Modem initialization failed"
 msgstr "Začenjanje modema je spodletelo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:401
+#: ../panels/network/panel-common.c:358
 msgid "Failed to select the specified APN"
 msgstr "Izbor določenega APN je spodletel"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:405
+#: ../panels/network/panel-common.c:362
 msgid "Not searching for networks"
 msgstr "Iskanje omrežij ni dejavno"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:409
+#: ../panels/network/panel-common.c:366
 msgid "Network registration denied"
 msgstr "Vpis omrežja je zavrnjen"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:413
+#: ../panels/network/panel-common.c:370
 msgid "Network registration timed out"
 msgstr "Čas za vpis omrežja je potekel"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:417
+#: ../panels/network/panel-common.c:374
 msgid "Failed to register with the requested network"
 msgstr "Vpis v zahtevano omrežju je spodletela"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:421
+#: ../panels/network/panel-common.c:378
 msgid "PIN check failed"
 msgstr "Preverjanje PIN je spodletelo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:425
+#: ../panels/network/panel-common.c:382
 msgid "Firmware for the device may be missing"
 msgstr "Napravi morda manjka zahtevana strojna programska oprema"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:429
+#: ../panels/network/panel-common.c:386
 msgid "Connection disappeared"
 msgstr "Dejavna povezava je izginila"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:433
+#: ../panels/network/panel-common.c:390
 msgid "Carrier/link changed"
 msgstr "Signal/Povezava se je spremenila"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:437
+#: ../panels/network/panel-common.c:394
 msgid "Existing connection was assumed"
 msgstr "Predviden je bila obstoječa povezava"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:441
+#: ../panels/network/panel-common.c:398
 msgid "Modem not found"
 msgstr "Modema ni mogoče najti"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:445
+#: ../panels/network/panel-common.c:402
 msgid "Bluetooth connection failed"
 msgstr "Povezava Bluetooth je spodletela"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:449
+#: ../panels/network/panel-common.c:406
 msgid "SIM Card not inserted"
 msgstr "Kartica SIM ni vstavljena"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:453
+#: ../panels/network/panel-common.c:410
 msgid "SIM Pin required"
 msgstr "Zahtevana je šifra SIM PIN"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:457
+#: ../panels/network/panel-common.c:414
 msgid "SIM Puk required"
 msgstr "Zahtevana je šifra SIM PUK"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:461
+#: ../panels/network/panel-common.c:418
 msgid "SIM wrong"
 msgstr "Kartica SIM je neustrezna"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:465
+#: ../panels/network/panel-common.c:422
 msgid "InfiniBand device does not support connected mode"
 msgstr "Naprava InfiniBand ne podpira povezanega načina"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:469
+#: ../panels/network/panel-common.c:426
 msgid "Connection dependency failed"
 msgstr "Odvisnost povezave je spodletela"
 
@@ -5235,6 +5214,24 @@ msgstr "Možnosti;Nastavitve;"
 msgid "All Settings"
 msgstr "Vse nastavitve"
 
+#~ msgid "Network;Wireless;IP;LAN;Proxy;"
+#~ msgstr "Omrežje;Brezžično;IP;LAN;Posredniški strežnik"
+
+#~ msgid "Wireless Hotspot"
+#~ msgstr "Brezžična dostopna točka"
+
+#~ msgid "Wireless"
+#~ msgstr "Brezžično"
+
+#~ msgid "Wired"
+#~ msgstr "Žično"
+
+#~ msgid "Mobile broadband"
+#~ msgstr "Mobilni širokopasovni dostop"
+
+#~ msgid "Mesh"
+#~ msgstr "Mreženje"
+
 #~ msgid "Remove Language"
 #~ msgstr "Odstrani jezik"
 #~ msgctxt "Zoom Grayscale"
@@ -5339,9 +5336,6 @@ msgstr "Vse nastavitve"
 
 #~ msgid "Other..."
 #~ msgstr "Drugo ..."
-
-#~ msgid "Hotspot"
-#~ msgstr "Vroča vstopna točka"
 
 #~ msgid "Not connected to the internet."
 #~ msgstr "Ni povezave v internet."
