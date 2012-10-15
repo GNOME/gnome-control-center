@@ -883,6 +883,126 @@ info_panel_setup_graphics (CcInfoPanel  *self)
 }
 
 static void
+move_one_up (GtkWidget *table,
+	     GtkWidget *child)
+{
+  int top_attach, bottom_attach;
+
+  gtk_container_child_get (GTK_CONTAINER (table),
+                           child,
+                           "top-attach", &top_attach,
+                           "bottom-attach", &bottom_attach,
+                           NULL);
+  gtk_container_child_set (GTK_CONTAINER (table),
+                           child,
+                           "top-attach", top_attach - 1,
+                           "bottom-attach", bottom_attach - 1,
+                           NULL);
+}
+
+static struct {
+  const char *id;
+  const char *display;
+} const virt_tech[] = {
+  { "kvm", "KVM" },
+  { "qemu", "QEmu" },
+  { "vmware", "VMWare" },
+  { "microsoft", "Microsoft" },
+  { "oracle", "Oracle" },
+  { "xen", "Xen" },
+  { "bochs", "Bochs" },
+  { "chroot", "chroot" },
+  { "openvz", "OpenVZ" },
+  { "lxc", "LXC" },
+  { "lxc-libvirt", "LXC (libvirt)" },
+  { "systemd-nspawn", "systemd (nspawn)" }
+};
+
+static void
+set_virtualization_label (CcInfoPanel  *self,
+			  const char   *virt)
+{
+  const char *display_name;
+  GtkWidget *widget;
+  guint i;
+
+  if (virt == NULL || *virt == '\0')
+  {
+    gtk_widget_hide (WID ("virt_type_label"));
+    gtk_widget_hide (WID ("label18"));
+    move_one_up (WID("table1"), WID("label8"));
+    move_one_up (WID("table1"), WID("disk_label"));
+    return;
+  }
+
+  display_name = NULL;
+  for (i = 0; i < G_N_ELEMENTS (virt_tech); i++)
+    {
+      if (g_str_equal (virt_tech[i].id, virt) == 0)
+        {
+          display_name = _(virt_tech[i].display);
+          break;
+        }
+    }
+
+  widget = WID ("virt_type_label");
+  gtk_label_set_text (GTK_LABEL (widget), display_name ? display_name : virt);
+}
+
+static void
+info_panel_setup_virt (CcInfoPanel  *self)
+{
+  GError *error = NULL;
+  GDBusProxy *systemd_proxy;
+  GVariant *variant;
+  GVariant *inner;
+  char *str;
+
+  str = NULL;
+
+  systemd_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                 G_DBUS_PROXY_FLAGS_NONE,
+                                                 NULL,
+                                                 "org.freedesktop.systemd1",
+                                                 "/org/freedesktop/systemd1",
+                                                 "org.freedesktop.systemd1",
+                                                 NULL,
+                                                 &error);
+
+  if (systemd_proxy == NULL)
+    {
+      g_debug ("systemd not available, bailing: %s", error->message);
+      g_error_free (error);
+      goto bail;
+    }
+
+  variant = g_dbus_proxy_call_sync (systemd_proxy,
+                                    "org.freedesktop.DBus.Properties.Get",
+                                    g_variant_new ("(ss)", "org.freedesktop.systemd1.Manager", "Virtualization"),
+                                    G_DBUS_CALL_FLAGS_NONE,
+                                    -1,
+                                    NULL,
+                                    &error);
+  if (variant == NULL)
+    {
+      g_debug ("Failed to get property '%s': %s", "Virtualization", error->message);
+      g_error_free (error);
+      g_object_unref (systemd_proxy);
+      goto bail;
+    }
+
+  g_variant_get (variant, "(v)", &inner);
+  str = g_variant_dup_string (inner, NULL);
+  g_variant_unref (variant);
+
+  g_object_unref (systemd_proxy);
+
+bail:
+  set_virtualization_label (self, str);
+  g_free (str);
+}
+
+static void
 default_app_changed (GtkAppChooserButton *button,
                      CcInfoPanel         *self)
 {
@@ -2022,6 +2142,7 @@ cc_info_panel_init (CcInfoPanel *self)
   info_panel_setup_default_apps (self);
   info_panel_setup_media (self);
   info_panel_setup_graphics (self);
+  info_panel_setup_virt (self);
 }
 
 void
