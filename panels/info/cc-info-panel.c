@@ -535,32 +535,14 @@ cc_info_panel_finalize (GObject *object)
 {
   CcInfoPanelPrivate *priv = CC_INFO_PANEL (object)->priv;
 
-  if (priv->cancellable != NULL)
-    {
-      g_cancellable_cancel (priv->cancellable);
-      priv->cancellable = NULL;
-    }
+  g_clear_pointer (&priv->cancellable, g_cancellable_cancel);
   g_free (priv->gnome_version);
   g_free (priv->gnome_date);
   g_free (priv->gnome_distributor);
 
-  if (priv->hostnamed_proxy != NULL)
-    {
-      g_object_unref (priv->hostnamed_proxy);
-      priv->hostnamed_proxy = NULL;
-    }
-
-  if (priv->media_settings != NULL)
-    {
-      g_object_unref (priv->media_settings);
-      priv->media_settings = NULL;
-    }
-
-  if (priv->session_settings != NULL)
-    {
-      g_object_unref (priv->session_settings);
-      priv->session_settings = NULL;
-    }
+  g_clear_object (&priv->hostnamed_proxy);
+  g_clear_object (&priv->media_settings);
+  g_clear_object (&priv->session_settings);
 
   G_OBJECT_CLASS (cc_info_panel_parent_class)->finalize (object);
 }
