@@ -2002,11 +2002,9 @@ cc_info_panel_init (CcInfoPanel *self)
         }
     }
 
-  gtk_builder_add_from_file (self->priv->builder,
-                             GNOMECC_UI_DIR "/info.ui",
-                             &error);
-
-  if (error != NULL)
+  if (gtk_builder_add_from_file (self->priv->builder,
+                                 GNOMECC_UI_DIR "/info.ui",
+                                 &error) == 0)
     {
       g_warning ("Could not load interface file: %s", error->message);
       g_error_free (error);
