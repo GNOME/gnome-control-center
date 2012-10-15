@@ -1963,10 +1963,12 @@ cc_info_panel_init (CcInfoPanel *self)
                                                         "/org/freedesktop/PackageKit",
                                                         "org.freedesktop.PackageKit",
                                                         NULL,
-                                                        NULL);
+                                                        &error);
   if (self->priv->pk_proxy == NULL)
     {
-      g_warning ("Unable to get PackageKit proxy object");
+      g_warning ("Unable to get PackageKit proxy object: %s", error->message);
+      g_error_free (error);
+      error = NULL;
       self->priv->updates_state = PK_NOT_AVAILABLE;
     }
   else
