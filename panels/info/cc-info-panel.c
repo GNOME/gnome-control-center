@@ -1940,55 +1940,67 @@ on_updates_button_clicked (GtkWidget   *widget,
 }
 
 static void
-info_panel_setup_updates (CcInfoPanel *self)
+got_pk_proxy_cb (GObject *source_object,
+		 GAsyncResult *res,
+		 CcInfoPanel *self)
 {
   GError *error = NULL;
+  GVariant *v;
+  guint32 major, minor, micro;
 
-  self->priv->pk_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                                        G_DBUS_PROXY_FLAGS_NONE,
-                                                        NULL,
-                                                        "org.freedesktop.PackageKit",
-                                                        "/org/freedesktop/PackageKit",
-                                                        "org.freedesktop.PackageKit",
-                                                        NULL,
-                                                        &error);
+  self->priv->pk_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+
   if (self->priv->pk_proxy == NULL)
     {
       g_warning ("Unable to get PackageKit proxy object: %s", error->message);
       g_error_free (error);
-      error = NULL;
       self->priv->updates_state = PK_NOT_AVAILABLE;
+      refresh_update_button (self);
+      return;
+    }
+
+  v = g_dbus_proxy_get_cached_property (self->priv->pk_proxy, "VersionMajor");
+  g_variant_get (v, "u", &major);
+  g_variant_unref (v);
+  v = g_dbus_proxy_get_cached_property (self->priv->pk_proxy, "VersionMinor");
+  g_variant_get (v, "u", &minor);
+  g_variant_unref (v);
+  v = g_dbus_proxy_get_cached_property (self->priv->pk_proxy, "VersionMicro");
+  g_variant_get (v, "u", &micro);
+  g_variant_unref (v);
+
+  if (major != 0 || minor != 8)
+    {
+      g_warning ("PackageKit version %u.%u.%u not supported", major, minor, micro);
+      g_clear_object (&self->priv->pk_proxy);
+      self->priv->updates_state = PK_NOT_AVAILABLE;
+      refresh_update_button (self);
     }
   else
     {
-      GVariant *v;
-      guint32 major, minor, micro;
-
-      v = g_dbus_proxy_get_cached_property (self->priv->pk_proxy, "VersionMajor");
-      g_variant_get (v, "u", &major);
-      g_variant_unref (v);
-      v = g_dbus_proxy_get_cached_property (self->priv->pk_proxy, "VersionMinor");
-      g_variant_get (v, "u", &minor);
-      g_variant_unref (v);
-      v = g_dbus_proxy_get_cached_property (self->priv->pk_proxy, "VersionMicro");
-      g_variant_get (v, "u", &micro);
-      g_variant_unref (v);
-
-      if (major != 0 || minor != 8)
-        {
-          g_warning ("PackageKit version %u.%u.%u not supported", major, minor, micro);
-          g_clear_object (&self->priv->pk_proxy);
-          self->priv->updates_state = PK_NOT_AVAILABLE;
-        }
-      else
-        {
-          g_signal_connect (self->priv->pk_proxy,
-                            "g-signal",
-                            G_CALLBACK (on_pk_signal),
-                            self);
-          refresh_updates (self);
-        }
+      g_signal_connect (self->priv->pk_proxy,
+                        "g-signal",
+                        G_CALLBACK (on_pk_signal),
+                        self);
+      refresh_updates (self);
     }
+}
+
+static void
+info_panel_setup_updates (CcInfoPanel *self)
+{
+  self->priv->updates_state = CHECKING_UPDATES;
+  refresh_update_button (self);
+
+  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+                            G_DBUS_PROXY_FLAGS_NONE,
+                            NULL,
+                            "org.freedesktop.PackageKit",
+                            "/org/freedesktop/PackageKit",
+                            "org.freedesktop.PackageKit",
+                            NULL,
+                            (GAsyncReadyCallback) got_pk_proxy_cb,
+                            self);
 }
 
 static void
