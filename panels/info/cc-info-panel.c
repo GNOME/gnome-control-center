@@ -1940,21 +1940,9 @@ on_updates_button_clicked (GtkWidget   *widget,
 }
 
 static void
-cc_info_panel_init (CcInfoPanel *self)
+info_panel_setup_updates (CcInfoPanel *self)
 {
   GError *error = NULL;
-  GtkWidget *widget;
-
-  self->priv = INFO_PANEL_PRIVATE (self);
-
-  self->priv->builder = gtk_builder_new ();
-
-  self->priv->session_settings = g_settings_new (GNOME_SESSION_MANAGER_SCHEMA);
-  self->priv->media_settings = g_settings_new (MEDIA_HANDLING_SCHEMA);
-
-  self->priv->session_bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
-
-  g_assert (self->priv->session_bus);
 
   self->priv->pk_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                         G_DBUS_PROXY_FLAGS_NONE,
@@ -2001,6 +1989,24 @@ cc_info_panel_init (CcInfoPanel *self)
           refresh_updates (self);
         }
     }
+}
+
+static void
+cc_info_panel_init (CcInfoPanel *self)
+{
+  GError *error = NULL;
+  GtkWidget *widget;
+
+  self->priv = INFO_PANEL_PRIVATE (self);
+
+  self->priv->builder = gtk_builder_new ();
+
+  self->priv->session_settings = g_settings_new (GNOME_SESSION_MANAGER_SCHEMA);
+  self->priv->media_settings = g_settings_new (MEDIA_HANDLING_SCHEMA);
+
+  self->priv->session_bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
+
+  g_assert (self->priv->session_bus);
 
   if (gtk_builder_add_from_file (self->priv->builder,
                                  GNOMECC_UI_DIR "/info.ui",
@@ -2016,6 +2022,7 @@ cc_info_panel_init (CcInfoPanel *self)
   widget = WID ("updates_button");
   g_signal_connect (widget, "clicked", G_CALLBACK (on_updates_button_clicked), self);
 
+  info_panel_setup_updates (self);
   info_panel_setup_selector (self);
   info_panel_setup_overview (self);
   info_panel_setup_default_apps (self);
