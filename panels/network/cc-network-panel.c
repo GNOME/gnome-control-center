@@ -138,9 +138,10 @@ verify_argv (CcNetworkPanel *self,
 	case OPERATION_CONNECT_MOBILE:
 	case OPERATION_CONNECT_8021X:
 	case OPERATION_SHOW_DEVICE:
-		if (self->priv->arg_device == NULL)
+		if (self->priv->arg_device == NULL) {
 			g_warning ("Operation %s requires an object path", args[0]);
-		return FALSE;
+		        return FALSE;
+                }
 	default:
 		return TRUE;
 	}
