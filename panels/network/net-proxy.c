@@ -141,6 +141,12 @@ panel_proxy_mode_combo_setup_widgets (NetProxy *proxy, guint value)
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
                                                      "spinbutton_proxy_socks"));
         gtk_widget_set_visible (widget, value == 1);
+        widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
+                                                     "heading_proxy_ignore"));
+        gtk_widget_set_visible (widget, value == 1);
+        widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
+                                                     "entry_proxy_ignore"));
+        gtk_widget_set_visible (widget, value == 1);
 
         /* perhaps show the wpad warning */
         check_wpad_warning (proxy);
@@ -248,6 +254,45 @@ net_proxy_class_init (NetProxyClass *klass)
         object_class->finalize = net_proxy_finalize;
         parent_class->add_to_notebook = net_proxy_add_to_notebook;
         g_type_class_add_private (klass, sizeof (NetProxyPrivate));
+}
+
+static gboolean
+get_ignore_hosts (GValue   *value,
+                  GVariant *variant,
+                  gpointer  user_data)
+{
+        int i;
+        gsize n = 0, avlen;
+        gchar buffer[10240];
+        gchar *p = buffer;
+        const gchar **av = g_variant_get_strv (variant, &avlen);
+
+        if (avlen > 0) {
+                n = g_strlcpy (p, av[0], sizeof buffer);
+                for (i = 1; i < avlen; i ++)
+                        n += g_snprintf (p + n, sizeof (buffer) - n, ", %s", av[i]);
+        }
+        g_free (av);
+        g_value_set_string (value, buffer);
+
+        return TRUE;
+}
+
+static GVariant *
+set_ignore_hosts (const GValue       *value,
+                  const GVariantType *expected_type,
+                  gpointer            user_data)
+{
+        GVariant *result;
+        const gchar *sv;
+        gchar **av;
+
+        sv = g_value_get_string (value);
+        av = g_strsplit (sv, ",", 0);
+        result = g_variant_new_strv ((const gchar * const *)av, -1);
+        g_strfreev (av);
+
+        return result;
 }
 
 static void
@@ -368,6 +413,14 @@ net_proxy_init (NetProxy *proxy)
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
                                                      "label_proxy_status"));
         gtk_label_set_label (GTK_LABEL (widget), "");
+
+        /* bind the proxy ignore hosts */
+        widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
+                                                     "entry_proxy_ignore"));
+        g_settings_bind_with_mapping (proxy->priv->settings, "ignore-hosts",
+                                      widget, "text",
+                                      G_SETTINGS_BIND_DEFAULT, get_ignore_hosts, set_ignore_hosts,
+                                      NULL, NULL);
 
         /* hide the switch until we get some more detail in the mockup */
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
