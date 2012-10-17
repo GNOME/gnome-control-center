@@ -61,6 +61,7 @@ struct _CcBackgroundPanelPrivate
   CcBackgroundItem *current_background;
 
   GCancellable *copy_cancellable;
+  GCancellable *capture_cancellable;
 
   GtkWidget *spinner;
 
@@ -95,6 +96,15 @@ cc_background_panel_dispose (GObject *object)
 
       g_object_unref (priv->copy_cancellable);
       priv->copy_cancellable = NULL;
+    }
+
+  if (priv->capture_cancellable)
+    {
+      /* cancel screenshot operations */
+      g_cancellable_cancel (priv->capture_cancellable);
+
+      g_object_unref (priv->capture_cancellable);
+      priv->capture_cancellable = NULL;
     }
 
   g_clear_object (&priv->thumb_factory);
@@ -242,6 +252,10 @@ on_screenshot_finished (GObject *source,
                                  &error);
 
   if (error != NULL) {
+    if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+      g_error_free (error);
+      return;
+    }
     g_debug ("Unable to get screenshot: %s",
              error->message);
     g_error_free (error);
@@ -332,7 +346,7 @@ get_screenshot_async (CcBackgroundPanel *panel,
                           NULL,
                           G_DBUS_CALL_FLAGS_NONE,
                           -1,
-                          NULL,
+                          priv->capture_cancellable,
                           on_screenshot_finished,
                           panel);
 }
@@ -709,6 +723,7 @@ cc_background_panel_init (CcBackgroundPanel *self)
                     self);
 
   priv->copy_cancellable = g_cancellable_new ();
+  priv->capture_cancellable = g_cancellable_new ();
 
   priv->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 
