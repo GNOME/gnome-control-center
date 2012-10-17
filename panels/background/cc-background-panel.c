@@ -455,9 +455,11 @@ copy_finished_cb (GObject      *source_object,
 
   if (!g_file_copy_finish (G_FILE (source_object), result, &err))
     {
-      if (err->code != G_IO_ERROR_CANCELLED)
-        g_warning ("Failed to copy image to cache location: %s", err->message);
-
+      if (g_error_matches (err, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+        g_error_free (err);
+        return;
+      }
+      g_warning ("Failed to copy image to cache location: %s", err->message);
       g_error_free (err);
     }
   item = g_object_get_data (source_object, "item");
