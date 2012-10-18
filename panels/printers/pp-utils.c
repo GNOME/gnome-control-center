@@ -359,7 +359,6 @@ printer_rename (const gchar *old_name,
   cups_job_t       *jobs = NULL;
   GDBusConnection  *bus;
   const char       *printer_location = NULL;
-  const char       *ppd_filename = NULL;
   const char       *printer_info = NULL;
   const char       *printer_uri = NULL;
   const char       *device_uri = NULL;
@@ -371,6 +370,8 @@ printer_rename (const gchar *old_name,
   gboolean          printer_shared = FALSE;
   GError           *error = NULL;
   http_t           *http;
+  gchar            *ppd_link;
+  gchar            *ppd_filename = NULL;
   gchar           **sheets = NULL;
   gchar           **users_allowed = NULL;
   gchar           **users_denied = NULL;
@@ -526,7 +527,15 @@ printer_rename (const gchar *old_name,
         }
     }
 
-  ppd_filename = cupsGetPPD (old_name);
+  ppd_link = g_strdup (cupsGetPPD (old_name));
+  if (ppd_link)
+    {
+      ppd_filename = g_file_read_link (ppd_link, NULL);
+
+      if (!ppd_filename)
+        ppd_filename = g_strdup (ppd_link);
+    }
+
 
   bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
   if (!bus)
@@ -582,8 +591,12 @@ printer_rename (const gchar *old_name,
         }
     }
 
-  if (ppd_filename)
-    g_unlink (ppd_filename);
+  if (ppd_link)
+    {
+      g_unlink (ppd_link);
+      g_free (ppd_link);
+      g_free (ppd_filename);
+    }
 
   num_dests = cupsGetDests (&dests);
   dest = cupsGetDest (new_name, NULL, num_dests, dests);
