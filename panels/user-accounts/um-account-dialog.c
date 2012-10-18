@@ -326,19 +326,45 @@ static void
 enterprise_add_realm (UmAccountDialog *self,
                       UmRealmObject *realm)
 {
+        GtkTreeModel *model;
         GtkTreeIter iter;
         UmRealmCommon *common;
-
-        g_debug ("Adding new realm to drop down: %s",
-                 g_dbus_object_get_object_path (G_DBUS_OBJECT (realm)));
+        const gchar *realm_name;
+        gboolean match;
+        gboolean ret;
+        gchar *name;
 
         common = um_realm_object_get_common (realm);
+        realm_name = um_realm_common_get_name (common);
+
+        /*
+         * Don't add a second realm if we already have one with this name.
+         * Sometimes realmd returns to realms for the same name, if it has
+         * different ways to use that realm. The first one that realmd
+         * returns is the one it prefers.
+         */
+
+        model = GTK_TREE_MODEL (self->enterprise_realms);
+        ret = gtk_tree_model_get_iter_first (model, &iter);
+        while (ret) {
+                gtk_tree_model_get (model, &iter, 0, &name, -1);
+                match = (g_strcmp0 (name, realm_name) == 0);
+                g_free (name);
+                if (match) {
+                        g_debug ("ignoring duplicate realm: %s", realm_name);
+                        return;
+                }
+                ret = gtk_tree_model_iter_next (model, &iter);
+        }
 
         gtk_list_store_append (self->enterprise_realms, &iter);
         gtk_list_store_set (self->enterprise_realms, &iter,
-                            0, um_realm_common_get_name (common),
+                            0, realm_name,
                             1, realm,
                             -1);
+
+        g_debug ("added realm to drop down: %s %s", realm_name,
+                 g_dbus_object_get_object_path (G_DBUS_OBJECT (realm)));
 
         if (!self->enterprise_domain_chosen && um_realm_is_configured (realm))
                 gtk_combo_box_set_active_iter (self->enterprise_domain, &iter);
