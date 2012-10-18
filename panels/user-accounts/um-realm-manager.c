@@ -97,6 +97,13 @@ on_object_added (GDBusObjectManager *manager,
                  GDBusObject *object,
                  gpointer user_data)
 {
+        GList *interfaces, *l;
+
+        interfaces = g_dbus_object_get_interfaces (object);
+        for (l = interfaces; l != NULL; l = g_list_next (l))
+                on_interface_added (manager, object, l->data);
+        g_list_free_full (interfaces, g_object_unref);
+
         if (is_realm_with_kerberos_and_membership (object)) {
                 g_debug ("Saw realm: %s", g_dbus_object_get_object_path (object));
                 g_signal_emit (user_data, signals[REALM_ADDED], 0, object);
@@ -187,10 +194,12 @@ on_provider_new (GObject *source,
         provider = um_realm_provider_proxy_new_finish (result, &error);
         closure->manager->provider = provider;
 
-        if (error == NULL)
+        if (error == NULL) {
+                g_dbus_proxy_set_default_timeout (G_DBUS_PROXY (closure->manager->provider), -1);
                 g_debug ("Created realm manager");
-        else
+        } else {
                 g_simple_async_result_take_error (async, error);
+        }
         g_simple_async_result_complete (async);
 
         g_object_unref (async);
