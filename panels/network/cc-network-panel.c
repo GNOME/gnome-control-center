@@ -35,6 +35,7 @@
 #include "net-device-mobile.h"
 #include "net-device-wifi.h"
 #include "net-device-ethernet.h"
+#include "net-device-bond.h"
 #include "net-object.h"
 #include "net-proxy.h"
 #include "net-vpn.h"
@@ -383,6 +384,32 @@ panel_refresh_killswitch_visibility (CcNetworkPanel *panel)
                                 show_flight_toggle);
 }
 
+GPtrArray *
+cc_network_panel_get_devices (CcNetworkPanel *panel)
+{
+        GPtrArray *devices;
+        GtkTreeModel *model;
+        GtkTreeIter iter;
+        NetObject *object;
+
+        devices = g_ptr_array_new_with_free_func (g_object_unref);
+
+        model = GTK_TREE_MODEL (gtk_builder_get_object (panel->priv->builder,
+                                                        "liststore_devices"));
+        if (!gtk_tree_model_get_iter_first (model, &iter))
+                return devices;
+
+        do {
+                gtk_tree_model_get (model, &iter,
+                                    PANEL_DEVICES_COLUMN_OBJECT, &object,
+                                    -1);
+                if (NET_IS_DEVICE (object))
+                        g_ptr_array_add (devices, object);
+        } while (gtk_tree_model_iter_next (model, &iter));
+
+        return devices;
+}
+
 static void
 panel_refresh_device_titles (CcNetworkPanel *panel)
 {
@@ -391,31 +418,16 @@ panel_refresh_device_titles (CcNetworkPanel *panel)
         NMDevice **nm_devices;
         gchar **titles;
         gint i, num_devices;
-        NetObject *object;
-        GtkTreeIter iter;
-        GtkTreeModel *model;
 
-        model = GTK_TREE_MODEL (gtk_builder_get_object (panel->priv->builder,
-                                                        "liststore_devices"));
-        if (!gtk_tree_model_get_iter_first (model, &iter))
-                return;
-        ndarray = g_ptr_array_new_with_free_func (g_object_unref);
-        nmdarray = g_ptr_array_new ();
-        do {
-                gtk_tree_model_get (model, &iter,
-                                    PANEL_DEVICES_COLUMN_OBJECT, &object,
-                                    -1);
-                if (NET_IS_DEVICE (object)) {
-                        g_ptr_array_add (ndarray, object);
-                        g_ptr_array_add (nmdarray, net_device_get_nm_device (NET_DEVICE (object)));
-                }
-        } while (gtk_tree_model_iter_next (model, &iter));
-
+        ndarray = cc_network_panel_get_devices (panel);
         if (!ndarray->len) {
                 g_ptr_array_free (ndarray, TRUE);
-                g_ptr_array_free (nmdarray, TRUE);
                 return;
         }
+
+        nmdarray = g_ptr_array_new ();
+        for (i = 0; i < ndarray->len; i++)
+                g_ptr_array_add (nmdarray, net_device_get_nm_device (ndarray->pdata[i]));
 
         devices = (NetDevice **)ndarray->pdata;
         nm_devices = (NMDevice **)nmdarray->pdata;
@@ -549,6 +561,9 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                 break;
         case NM_DEVICE_TYPE_WIFI:
                 device_g_type = NET_TYPE_DEVICE_WIFI;
+                break;
+        case NM_DEVICE_TYPE_BOND:
+                device_g_type = NET_TYPE_DEVICE_BOND;
                 break;
         default:
                 device_g_type = NET_TYPE_DEVICE_SIMPLE;

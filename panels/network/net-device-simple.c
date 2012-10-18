@@ -278,3 +278,36 @@ net_device_simple_get_speed (NetDeviceSimple *device_simple)
 
         return klass->get_speed (device_simple);
 }
+
+void
+net_device_simple_add_row (NetDeviceSimple *device_simple,
+                           const char      *label_string,
+                           const char      *property_name)
+{
+        NetDeviceSimplePrivate *priv = device_simple->priv;
+        GtkGrid *grid;
+        GtkWidget *label, *value;
+        GtkStyleContext *context;
+        gint top_attach;
+
+        grid = GTK_GRID (gtk_builder_get_object (priv->builder, "grid"));
+
+        label = gtk_label_new (label_string);
+        gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
+        gtk_container_add (GTK_CONTAINER (grid), label);
+
+        context = gtk_widget_get_style_context (label);
+        gtk_style_context_add_class (context, "dim-label");
+        gtk_widget_show (label);
+
+        gtk_container_child_get (GTK_CONTAINER (grid), label,
+                                 "top-attach", &top_attach,
+                                 NULL);
+
+        value = gtk_label_new (NULL);
+        gtk_misc_set_alignment (GTK_MISC (value), 0.0, 0.5);
+        g_object_bind_property (device_simple, property_name, value, "label", 0);
+        gtk_grid_attach (grid, value, 1, top_attach, 1, 1);
+        gtk_widget_show (value);
+}
+

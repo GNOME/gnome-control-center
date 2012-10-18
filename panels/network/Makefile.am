@@ -28,6 +28,8 @@ libnetwork_la_SOURCES =					\
 	net-device-ethernet.h				\
 	net-device-mobile.c				\
 	net-device-mobile.h				\
+	net-device-bond.c				\
+	net-device-bond.h				\
 	net-vpn.c					\
 	net-vpn.h					\
 	net-proxy.c					\

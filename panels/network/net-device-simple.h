@@ -57,6 +57,10 @@ GType net_device_simple_get_type               (void);
 
 char *net_device_simple_get_speed              (NetDeviceSimple *device_simple);
 
+void  net_device_simple_add_row                (NetDeviceSimple *device_simple,
+                                                const char      *label,
+                                                const char      *property_name);
+
 G_END_DECLS
 
 #endif /* __NET_DEVICE_SIMPLE_H */
