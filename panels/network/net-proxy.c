@@ -322,12 +322,6 @@ net_proxy_init (NetProxy *proxy)
                           G_CALLBACK (settings_changed_cb),
                           proxy);
 
-        /* explicitly set this to false as the panel has no way of
-         * linking the http and https proxies them together */
-        g_settings_set_boolean (proxy->priv->settings,
-                                "use-same-proxy",
-                                FALSE);
-
         /* actions */
         value = g_settings_get_enum (proxy->priv->settings, "mode");
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
