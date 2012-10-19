@@ -346,7 +346,7 @@ get_screenshot_async (CcBackgroundPanel *panel,
                           NULL,
                           G_DBUS_CALL_FLAGS_NONE,
                           -1,
-                          priv->capture_cancellable,
+                          panel->priv->capture_cancellable,
                           on_screenshot_finished,
                           panel);
 }
