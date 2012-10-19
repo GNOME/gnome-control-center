@@ -593,7 +593,8 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
         gtk_switch_set_active (GTK_SWITCH (widget), um_user_get_automatic_login (user));
         g_signal_handlers_unblock_by_func (widget, autologin_changed, d);
 
-        gtk_widget_set_sensitive (widget, !um_user_get_locked (user));
+        if (um_user_get_locked (user))
+                gtk_widget_set_sensitive (widget, FALSE);
 
         widget = get_widget (d, "account-language-combo");
         model = um_editable_combo_get_model (UM_EDITABLE_COMBO (widget));
