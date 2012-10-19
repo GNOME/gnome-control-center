@@ -20,6 +20,8 @@
 
 #include "config.h"
 
+#include <string.h>
+
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 
@@ -194,6 +196,24 @@ device_info_is_mouse (XDeviceInfo *device_info)
         return (device_info->type == XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XI_MOUSE, False));
 }
 
+gboolean
+device_info_is_trackball (XDeviceInfo *device_info)
+{
+        gboolean retval;
+
+        retval = (device_info->type == XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XI_TRACKBALL, False));
+        if (retval == FALSE &&
+            device_info->name != NULL) {
+                char *lowercase;
+
+                lowercase = g_ascii_strdown (device_info->name, -1);
+                retval = strstr (lowercase, "trackball") != NULL;
+                g_free (lowercase);
+        }
+
+        return retval;
+}
+
 static gboolean
 device_type_is_present (InfoIdentifyFunc info_func,
                         DeviceIdentifyFunc device_func)
@@ -260,6 +280,13 @@ gboolean
 mouse_is_present (void)
 {
         return device_type_is_present (device_info_is_mouse,
+                                       NULL);
+}
+
+gboolean
+trackball_is_present (void)
+{
+        return device_type_is_present (device_info_is_trackball,
                                        NULL);
 }
 
@@ -493,7 +520,7 @@ run_custom_command (GdkDevice              *device,
         g_free (argv[4]);
         g_free (argv[5]);
 
-        return (exit_status == 0);
+        return (exit_status == 1);
 }
 
 GList *

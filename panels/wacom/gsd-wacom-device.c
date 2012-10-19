@@ -335,6 +335,8 @@ struct GsdWacomDevicePrivate
 	GList *styli;
 	GsdWacomStylus *last_stylus;
 	GList *buttons;
+	gint num_rings;
+	gint num_strips;
 	GHashTable *modes; /* key = int (group), value = int (index) */
 	GHashTable *num_modes; /* key = int (group), value = int (index) */
 	GSettings *wacom_settings;
@@ -999,6 +1001,7 @@ gsd_wacom_device_add_ring_modes (WacomDevice      *wacom_device,
 {
 	GList *l;
 	guint num_modes;
+	guint group;
 	guint i;
 	char *name, *id;
 
@@ -1006,21 +1009,53 @@ gsd_wacom_device_add_ring_modes (WacomDevice      *wacom_device,
 
 	if ((direction & WACOM_BUTTON_POSITION_LEFT) && libwacom_has_ring (wacom_device)) {
 		num_modes = libwacom_get_ring_num_modes (wacom_device);
-		for (i = 1; i <= num_modes; i++) {
-			name = g_strdup_printf (_("Left Ring Mode #%d"), i);
-			id = g_strdup_printf ("left-ring-mode-%d", i);
-			l = g_list_append (l, gsd_wacom_tablet_button_new (name, id, settings_path, WACOM_TABLET_BUTTON_TYPE_ELEVATOR, flags_to_group (WACOM_BUTTON_RING_MODESWITCH), i - 1));
-			g_free (name);
-			g_free (id);
+		group = flags_to_group (WACOM_BUTTON_RING_MODESWITCH);
+		if (num_modes == 0) {
+			/* If no mode is available, we use "left-ring-mode-1" for backward compat */
+			l = g_list_append (l, gsd_wacom_tablet_button_new (_("Left Ring"),
+									   "left-ring-mode-1",
+									   settings_path,
+									   WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+									   group,
+									   0));
+		} else {
+			for (i = 1; i <= num_modes; i++) {
+				name = g_strdup_printf (_("Left Ring Mode #%d"), i);
+				id = g_strdup_printf ("left-ring-mode-%d", i);
+				l = g_list_append (l, gsd_wacom_tablet_button_new (name,
+				                                                   id,
+				                                                   settings_path,
+				                                                   WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+				                                                   group,
+				                                                   i - 1));
+				g_free (name);
+				g_free (id);
+			}
 		}
 	} else if ((direction & WACOM_BUTTON_POSITION_RIGHT) && libwacom_has_ring2 (wacom_device)) {
 		num_modes = libwacom_get_ring2_num_modes (wacom_device);
-		for (i = 1; i <= num_modes; i++) {
-			name = g_strdup_printf (_("Right Ring Mode #%d"), i);
-			id = g_strdup_printf ("right-ring-mode-%d", i);
-			l = g_list_append (l, gsd_wacom_tablet_button_new (name, id, settings_path, WACOM_TABLET_BUTTON_TYPE_ELEVATOR, flags_to_group (WACOM_BUTTON_RING2_MODESWITCH), i - 1));
-			g_free (name);
-			g_free (id);
+		group = flags_to_group (WACOM_BUTTON_RING2_MODESWITCH);
+		if (num_modes == 0) {
+			/* If no mode is available, we use "right-ring-mode-1" for backward compat */
+			l = g_list_append (l, gsd_wacom_tablet_button_new (_("Right Ring"),
+									   "right-ring-mode-1",
+									   settings_path,
+									   WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+									   group,
+									   0));
+		} else {
+			for (i = 1; i <= num_modes; i++) {
+				name = g_strdup_printf (_("Right Ring Mode #%d"), i);
+				id = g_strdup_printf ("right-ring-mode-%d", i);
+				l = g_list_append (l, gsd_wacom_tablet_button_new (name,
+				                                                   id,
+				                                                   settings_path,
+				                                                   WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+				                                                   group,
+				                                                   i - 1));
+				g_free (name);
+				g_free (id);
+			}
 		}
 	}
 
@@ -1035,6 +1070,7 @@ gsd_wacom_device_add_strip_modes (WacomDevice      *wacom_device,
 	GList *l;
 	guint num_modes;
 	guint num_strips;
+	guint group;
 	guint i;
 	char *name, *id;
 
@@ -1045,21 +1081,53 @@ gsd_wacom_device_add_strip_modes (WacomDevice      *wacom_device,
 
 	if ((direction & WACOM_BUTTON_POSITION_LEFT) && num_strips >= 1) {
 		num_modes = libwacom_get_strips_num_modes (wacom_device);
-		for (i = 1; i <= num_modes; i++) {
-			name = g_strdup_printf (_("Left Touchstrip Mode #%d"), i);
-			id = g_strdup_printf ("left-strip-mode-%d", i);
-			l = g_list_append (l, gsd_wacom_tablet_button_new (name, id, settings_path, WACOM_TABLET_BUTTON_TYPE_ELEVATOR, flags_to_group (WACOM_BUTTON_TOUCHSTRIP_MODESWITCH), i - 1));
-			g_free (name);
-			g_free (id);
+		group = flags_to_group (WACOM_BUTTON_TOUCHSTRIP_MODESWITCH);
+		if (num_modes == 0) {
+			/* If no mode is available, we use "left-strip-mode-1" for backward compat */
+			l = g_list_append (l, gsd_wacom_tablet_button_new (_("Left Touchstrip"),
+									   "left-strip-mode-1",
+									   settings_path,
+									   WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+									   group,
+									   0));
+		} else {
+			for (i = 1; i <= num_modes; i++) {
+				name = g_strdup_printf (_("Left Touchstrip Mode #%d"), i);
+				id = g_strdup_printf ("left-strip-mode-%d", i);
+				l = g_list_append (l, gsd_wacom_tablet_button_new (name,
+				                                                   id,
+				                                                   settings_path,
+				                                                   WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+				                                                   group,
+				                                                   i - 1));
+				g_free (name);
+				g_free (id);
+			}
 		}
 	} else if ((direction & WACOM_BUTTON_POSITION_RIGHT) && num_strips >= 2) {
 		num_modes = libwacom_get_strips_num_modes (wacom_device);
-		for (i = 1; i <= num_modes; i++) {
-			name = g_strdup_printf (_("Right Touchstrip Mode #%d"), i);
-			id = g_strdup_printf ("right-strip-mode-%d", i);
-			l = g_list_append (l, gsd_wacom_tablet_button_new (name, id, settings_path, WACOM_TABLET_BUTTON_TYPE_ELEVATOR, flags_to_group (WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH), i - 1));
-			g_free (name);
-			g_free (id);
+		group = flags_to_group (WACOM_BUTTON_TOUCHSTRIP2_MODESWITCH);
+		if (num_modes == 0) {
+			/* If no mode is available, we use "right-strip-mode-1" for backward compat */
+			l = g_list_append (l, gsd_wacom_tablet_button_new (_("Right Touchstrip"),
+									   "right-strip-mode-1",
+									   settings_path,
+									   WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+									   group,
+									   0));
+		} else {
+			for (i = 1; i <= num_modes; i++) {
+				name = g_strdup_printf (_("Right Touchstrip Mode #%d"), i);
+				id = g_strdup_printf ("right-strip-mode-%d", i);
+				l = g_list_append (l, gsd_wacom_tablet_button_new (name,
+				                                                   id,
+				                                                   settings_path,
+				                                                   WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+				                                                   group,
+				                                                   i - 1));
+				g_free (name);
+				g_free (id);
+			}
 		}
 	}
 
@@ -1135,14 +1203,13 @@ gsd_wacom_device_add_buttons_dir (WacomDevice      *wacom_device,
 		l = g_list_append (l, gsd_wacom_tablet_button_new (name, id, settings_path, WACOM_TABLET_BUTTON_TYPE_HARDCODED, flags_to_group (flags), -1));
 		g_free (name);
 		g_free (id);
-
-		if (flags & WACOM_BUTTON_RINGS_MODESWITCH)
-			l = g_list_concat (l, gsd_wacom_device_add_ring_modes (wacom_device, settings_path, direction));
-		else if (flags & WACOM_BUTTON_TOUCHSTRIPS_MODESWITCH)
-			l = g_list_concat (l, gsd_wacom_device_add_strip_modes (wacom_device, settings_path, direction));
-		else
-			g_warning ("Unhandled modeswitches");
 	}
+
+	/* Handle touch{strips,rings} */
+	if (libwacom_has_ring2 (wacom_device) || libwacom_has_ring (wacom_device))
+		l = g_list_concat (l, gsd_wacom_device_add_ring_modes (wacom_device, settings_path, direction));
+	if  (libwacom_get_num_strips (wacom_device) > 0)
+		l = g_list_concat (l, gsd_wacom_device_add_strip_modes (wacom_device, settings_path, direction));
 
 	return l;
 }
@@ -1170,6 +1237,21 @@ gsd_wacom_device_add_buttons (GsdWacomDevice *device,
 		ret = g_list_concat (ret, l);
 
 	device->priv->buttons = ret;
+}
+
+static void
+gsd_wacom_device_get_modeswitches (WacomDevice      *wacom_device,
+				   gint             *num_rings,
+				   gint             *num_strips)
+{
+	*num_strips = libwacom_get_num_strips (wacom_device);
+
+	if (libwacom_has_ring2 (wacom_device))
+		*num_rings = 2;
+	else if  (libwacom_has_ring (wacom_device))
+		*num_rings = 1;
+	else
+		*num_rings = 0;
 }
 
 static void
@@ -1230,6 +1312,9 @@ gsd_wacom_device_update_from_db (GsdWacomDevice *device,
 	}
 
 	if (device->priv->type == WACOM_TYPE_PAD) {
+		gsd_wacom_device_get_modeswitches (wacom_device,
+						   &device->priv->num_rings,
+						   &device->priv->num_strips);
 		gsd_wacom_device_add_buttons (device, wacom_device, settings_path);
 		gsd_wacom_device_add_modes (device, wacom_device);
 	}
@@ -1556,6 +1641,22 @@ gsd_wacom_device_is_fallback (GsdWacomDevice *device)
 	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), FALSE);
 
 	return device->priv->is_fallback;
+}
+
+gint
+gsd_wacom_device_get_num_strips (GsdWacomDevice *device)
+{
+	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), 0);
+
+	return device->priv->num_strips;
+}
+
+gint
+gsd_wacom_device_get_num_rings (GsdWacomDevice *device)
+{
+	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), 0);
+
+	return device->priv->num_rings;
 }
 
 GSettings *
