@@ -160,6 +160,9 @@ PKG_CHECK_MODULES(USER_ACCOUNTS_PANEL, $COMMON_MODULES
                   pwquality
                   libsystemd-login)
 
+PKG_CHECK_MODULES(GVC, gobject-2.0 libpulse libpulse-mainloop-glib)
+AM_CONDITIONAL(HAVE_INTROSPECTION, false)
+
 GDESKTOP_PREFIX=`$PKG_CONFIG --variable prefix gsettings-desktop-schemas`
 AC_SUBST(GDESKTOP_PREFIX)
 
@@ -426,6 +429,7 @@ panels/online-accounts/icons/32x32/Makefile
 panels/online-accounts/icons/48x48/Makefile
 panels/online-accounts/icons/256x256/Makefile
 panels/sound/Makefile
+panels/sound/gvc/Makefile
 panels/sound/data/Makefile
 panels/sound/data/gnome-sound-panel.desktop.in
 panels/sound/data/symbolic-icons/Makefile

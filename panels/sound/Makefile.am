@@ -1,4 +1,4 @@
-SUBDIRS = data
+SUBDIRS = data gvc
 
 # This is used in PANEL_CFLAGS
 cappletname = sound
@@ -8,6 +8,7 @@ ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libsound.la
 
 AM_CPPFLAGS =					\
+	-I$(srcdir)/gvc/			\
 	$(PANEL_CFLAGS) 			\
 	$(SOUND_PANEL_CFLAGS)			\
 	-DLOCALE_DIR=\""$(datadir)/locale"\"	\
@@ -18,40 +19,19 @@ AM_CPPFLAGS =					\
 	-DICON_DATA_DIR="\"$(pkgdatadir)/icons\"" \
 	$(NULL)
 
-noinst_LTLIBRARIES = libgnomevolumecontrol.la
-libgnomevolumecontrol_la_SOURCES =		\
-	gvc-mixer-card.h			\
-	gvc-mixer-card.c			\
-	gvc-mixer-card-private.h		\
-	gvc-mixer-stream.h			\
-	gvc-mixer-stream.c			\
-	gvc-mixer-stream-private.h		\
-	gvc-channel-map.h			\
-	gvc-channel-map.c			\
-	gvc-channel-map-private.h		\
-	gvc-mixer-ui-device.h			\
-	gvc-mixer-ui-device.c			\
-	gvc-mixer-sink.h			\
-	gvc-mixer-sink.c			\
-	gvc-mixer-source.h			\
-	gvc-mixer-source.c			\
-	gvc-mixer-sink-input.h			\
-	gvc-mixer-sink-input.c			\
-	gvc-mixer-source-output.h		\
-	gvc-mixer-source-output.c		\
-	gvc-mixer-event-role.h			\
-	gvc-mixer-event-role.c			\
-	gvc-mixer-control.h			\
-	gvc-mixer-control.c			\
-	gvc-mixer-control-private.h		\
+# Needed because Automake complains if
+# the same source file is used in a library
+# and in an executable
+noinst_LTLIBRARIES = libgvcgtk.la
+libgvcgtk_la_SOURCES = 				\
 	gvc-channel-bar.h			\
 	gvc-channel-bar.c			\
-	gvc-pulseaudio-fake.h			\
 	$(NULL)
 
 libsound_la_LIBADD =				\
 	-lm					\
-	libgnomevolumecontrol.la		\
+	gvc/libgvc.la				\
+	libgvcgtk.la				\
 	$(PANEL_LIBS)				\
 	$(SOUND_PANEL_LIBS)			\
 	$(NULL)
