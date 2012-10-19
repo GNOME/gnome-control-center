@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-10-17 16:20+0000\n"
-"PO-Revision-Date: 2012-10-18 08:03+0100\n"
+"POT-Creation-Date: 2012-10-19 13:55+0000\n"
+"PO-Revision-Date: 2012-10-19 23:33+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: \n"
@@ -2840,7 +2840,7 @@ msgid "Cancel Print Job"
 msgstr "Prekliči posel tiskalnika"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1044
+#: ../panels/user-accounts/um-account-dialog.c:1070
 msgid "_Add"
 msgstr "_Dodaj"
 
@@ -2862,7 +2862,7 @@ msgstr "Možnosti nalaganja ..."
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
 #: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1043
+#: ../panels/user-accounts/um-account-dialog.c:1069
 msgid "Cancel"
 msgstr "Prekliči"
 
@@ -4574,20 +4574,20 @@ msgstr "Neznana napaka"
 msgid "Failed to add account"
 msgstr "Dodajanje računa je spodletelo"
 
-#: ../panels/user-accounts/um-account-dialog.c:378
-#: ../panels/user-accounts/um-account-dialog.c:419
+#: ../panels/user-accounts/um-account-dialog.c:404
+#: ../panels/user-accounts/um-account-dialog.c:445
 msgid "Failed to register account"
 msgstr "Vpis računa je spodletel"
 
-#: ../panels/user-accounts/um-account-dialog.c:551
+#: ../panels/user-accounts/um-account-dialog.c:577
 msgid "No supported way to authenticate with this domain"
 msgstr "Ni podprtega načina za overitev s to domeno"
 
-#: ../panels/user-accounts/um-account-dialog.c:605
+#: ../panels/user-accounts/um-account-dialog.c:631
 msgid "Failed to join domain"
 msgstr "Pridružitev v domeno je spodletela"
 
-#: ../panels/user-accounts/um-account-dialog.c:662
+#: ../panels/user-accounts/um-account-dialog.c:688
 msgid "Failed to log into domain"
 msgstr "Prijava v domeno je spodletela"
 
@@ -4732,25 +4732,25 @@ msgstr "Brskanje med več slikami ..."
 msgid "Used by %s"
 msgstr "Uporablja ga %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:342
+#: ../panels/user-accounts/um-realm-manager.c:351
 msgid "Cannot automatically join this type of domain"
 msgstr "Ni mogoče samodejno pridružiti tej vrsti domene"
 
-#: ../panels/user-accounts/um-realm-manager.c:405
+#: ../panels/user-accounts/um-realm-manager.c:414
 #, c-format
 msgid "No such domain or realm found"
 msgstr "Ni mogoče najti take domene ali takega področja"
 
-#: ../panels/user-accounts/um-realm-manager.c:806
+#: ../panels/user-accounts/um-realm-manager.c:815
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Ni se mogoče prijaviti kot %s v domeno %s."
 
-#: ../panels/user-accounts/um-realm-manager.c:811
+#: ../panels/user-accounts/um-realm-manager.c:820
 msgid "Invalid password, please try again"
 msgstr "Napačno geslo, poskusite znova."
 
-#: ../panels/user-accounts/um-realm-manager.c:815
+#: ../panels/user-accounts/um-realm-manager.c:824
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Z domeno %s povezava ni mogoča: %s"
@@ -5037,67 +5037,87 @@ msgstr "Način sledenja"
 msgid "Left-Handed Orientation"
 msgstr "Levoročna usmerjenost"
 
-#: ../panels/wacom/gsd-wacom-device.c:1010
+#. If no mode is available, we use "left-ring-mode-1" for backward compat
+#: ../panels/wacom/gsd-wacom-device.c:1015
+msgid "Left Ring"
+msgstr "Levi drsni obroč"
+
+#: ../panels/wacom/gsd-wacom-device.c:1023
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Levi način drsnega obroča #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1019
+#. If no mode is available, we use "right-ring-mode-1" for backward compat
+#: ../panels/wacom/gsd-wacom-device.c:1040
+msgid "Right Ring"
+msgstr "Desni drsni obroč"
+
+#: ../panels/wacom/gsd-wacom-device.c:1048
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Desni način drsnega obroča #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1049
+#. If no mode is available, we use "left-strip-mode-1" for backward compat
+#: ../panels/wacom/gsd-wacom-device.c:1087
+msgid "Left Touchstrip"
+msgstr "Levi način drsne ploščice"
+
+#: ../panels/wacom/gsd-wacom-device.c:1095
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Levi način drsne ploščice #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1058
+#. If no mode is available, we use "right-strip-mode-1" for backward compat
+#: ../panels/wacom/gsd-wacom-device.c:1112
+msgid "Right Touchstrip"
+msgstr "Desni način drsne ploščice"
+
+#: ../panels/wacom/gsd-wacom-device.c:1120
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Desni način drsne ploščice #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1075
+#: ../panels/wacom/gsd-wacom-device.c:1143
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Levi gumb preklopa drsnega obroča"
 
-#: ../panels/wacom/gsd-wacom-device.c:1077
+#: ../panels/wacom/gsd-wacom-device.c:1145
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Desni gumb preklopa drsnega obroča"
 
-#: ../panels/wacom/gsd-wacom-device.c:1080
+#: ../panels/wacom/gsd-wacom-device.c:1148
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Levi gumb preklopa drsne ploščice"
 
-#: ../panels/wacom/gsd-wacom-device.c:1082
+#: ../panels/wacom/gsd-wacom-device.c:1150
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Desni gumb preklopa drsne ploščice"
 
-#: ../panels/wacom/gsd-wacom-device.c:1087
+#: ../panels/wacom/gsd-wacom-device.c:1155
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Gumb preklopa #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1159
+#: ../panels/wacom/gsd-wacom-device.c:1226
 #, c-format
 msgid "Left Button #%d"
 msgstr "Levi gumb #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1162
+#: ../panels/wacom/gsd-wacom-device.c:1229
 #, c-format
 msgid "Right Button #%d"
 msgstr "Desni gumb #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1165
+#: ../panels/wacom/gsd-wacom-device.c:1232
 #, c-format
 msgid "Top Button #%d"
 msgstr "Zgornji gumb #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1168
+#: ../panels/wacom/gsd-wacom-device.c:1235
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Spodnji gumb #%d"
