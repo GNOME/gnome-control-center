@@ -36,6 +36,7 @@
 #include <gtk/gtk.h>
 
 #include <gio/gunixoutputstream.h>
+#include <systemd/sd-login.h>
 
 #include "um-user.h"
 #include "um-account-type.h"
@@ -942,10 +943,6 @@ um_user_set_password (UmUser      *user,
         }
 }
 
-#ifdef HAVE_SYSTEMD
-
-#include <systemd/sd-login.h>
-
 gboolean
 um_user_is_logged_in (UmUser *user)
 {
@@ -955,43 +952,6 @@ um_user_is_logged_in (UmUser *user)
 
   return n_sessions > 0;
 }
-
-#else
-
-gboolean
-um_user_is_logged_in (UmUser *user)
-{
-        GVariant *result;
-        GVariantIter *iter;
-        gint n_sessions;
-        GError *error = NULL;
-
-        result = g_dbus_connection_call_sync (user->bus,
-                                              "org.freedesktop.ConsoleKit",
-                                              "/org/freedesktop/ConsoleKit/Manager",
-                                              "org.freedesktop.ConsoleKit.Manager",
-                                              "GetSessionsForUnixUser",
-                                              g_variant_new ("(u)", um_user_get_uid (user)),
-                                              G_VARIANT_TYPE ("(ao)"),
-                                              G_DBUS_CALL_FLAGS_NONE,
-                                              -1,
-                                              NULL,
-                                              &error);
-        if (!result) {
-                g_warning ("GetSessionsForUnixUser failed: %s", error->message);
-                g_error_free (error);
-                return FALSE;
-        }
-  
-        g_variant_get (result, "(ao)", &iter);
-        n_sessions = g_variant_iter_n_children (iter);
-        g_variant_iter_free (iter);
-        g_variant_unref (result);
-
-        return n_sessions > 0;
-}
-
-#endif
 
 void
 um_user_set_automatic_login (UmUser   *user,

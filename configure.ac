@@ -63,17 +63,6 @@ CPPFLAGS=$savecppflags
 
 AC_CHECK_LIB(m, floor)
 
-AC_ARG_ENABLE([systemd],
-              AS_HELP_STRING([--enable-systemd], [Use systemd]),
-              [with_systemd=$enableval],
-              [with_systemd=no])
-if test "$with_systemd" = "yes" ; then
-  SYSTEMD=libsystemd-login
-  AC_DEFINE(HAVE_SYSTEMD, 1, [Define to 1 if systemd is available])
-else
-  SYSTEMD=
-fi
-
 # IBus support
 IBUS_REQUIRED_VERSION=1.4.99
 
@@ -158,7 +147,7 @@ PKG_CHECK_MODULES(USER_ACCOUNTS_PANEL, $COMMON_MODULES
                   gnome-desktop-3.0
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION
                   pwquality
-                  $SYSTEMD)
+                  libsystemd-login)
 
 GDESKTOP_PREFIX=`$PKG_CONFIG --variable prefix gsettings-desktop-schemas`
 AC_SUBST(GDESKTOP_PREFIX)
@@ -523,11 +512,6 @@ if test "x$with_libsocialweb" = "xyes"; then
 	AC_MSG_NOTICE([** libsocialweb (Background panel Flickr support)])
 else
 	AC_MSG_NOTICE([   Background panel Flickr support disabled])
-fi
-if test "x$with_systemd" = "xyes"; then
-	AC_MSG_NOTICE([** systemd (Systemd session tracking)])
-else
-	AC_MSG_NOTICE([   Using ConsoleKit for session tracking])
 fi
 if test "x$have_wacom" = "xyes"; then
 	AC_MSG_NOTICE([** wacom (Wacom tablet panel)])
