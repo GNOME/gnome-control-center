@@ -374,12 +374,18 @@ device_get_hotspot_security_details (NetDeviceWifi *device_wifi,
         tmp_secret = NULL;
         tmp_security = C_("Wifi security", "None");
 
+        /* Key management values:
+         * "none" = WEP
+         * "wpa-none" = WPAv1 Ad-Hoc mode (not supported in NM >= 0.9.4)
+         * "wpa-psk" = WPAv2 Ad-Hoc mode (eg IBSS RSN) and AP-mode WPA v1 and v2
+         */
         key_mgmt = nm_setting_wireless_security_get_key_mgmt (sws);
         if (strcmp (key_mgmt, "none") == 0) {
                 tmp_secret = nm_setting_wireless_security_get_wep_key (sws, 0);
                 tmp_security = _("WEP");
         }
-        else if (strcmp (key_mgmt, "wpa-none") == 0) {
+        else if (strcmp (key_mgmt, "wpa-none") == 0 ||
+                 strcmp (key_mgmt, "wpa-psk") == 0) {
                 tmp_secret = nm_setting_wireless_security_get_psk (sws);
                 tmp_security = _("WPA");
         } else {
@@ -893,7 +899,8 @@ is_hotspot_connection (NMConnection *connection)
                 return FALSE;
         }
         sw = nm_connection_get_setting_wireless (connection);
-        if (g_strcmp0 (nm_setting_wireless_get_mode (sw), "adhoc") != 0) {
+        if (g_strcmp0 (nm_setting_wireless_get_mode (sw), "adhoc") != 0 &&
+            g_strcmp0 (nm_setting_wireless_get_mode (sw), "ap") != 0) {
                 return FALSE;
         }
         if (g_strcmp0 (nm_setting_wireless_get_security (sw), "802-11-wireless-security") != 0) {
@@ -970,6 +977,7 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         GSList *connections;
         GSList *l;
         NMClient *client;
+        const char *mode;
 
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
         g_assert (nm_device_get_device_type (device) == NM_DEVICE_TYPE_WIFI);
@@ -1009,8 +1017,15 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         nm_connection_add_setting (c, (NMSetting *)sc);
 
         sw = (NMSettingWireless *)nm_setting_wireless_new ();
+
+	/* Use real AP mode if the device supports it */
+        if (nm_device_wifi_get_capabilities (NM_DEVICE_WIFI (device)) & NM_WIFI_DEVICE_CAP_AP)
+		mode = NM_SETTING_WIRELESS_MODE_AP;
+        else
+                mode = NM_SETTING_WIRELESS_MODE_ADHOC;
+
         g_object_set (sw,
-                      "mode", "adhoc",
+                      "mode", mode,
                       "security", "802-11-wireless-security",
                       NULL);
 
