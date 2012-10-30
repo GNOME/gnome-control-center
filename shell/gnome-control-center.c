@@ -966,8 +966,6 @@ _shell_set_active_panel_from_id (CcShell      *shell,
       return TRUE;
     }
 
-  g_clear_pointer (&priv->current_panel_id, g_free);
-
   /* clear any custom widgets */
   _shell_remove_all_custom_widgets (priv);
 
@@ -1009,6 +1007,8 @@ _shell_set_active_panel_from_id (CcShell      *shell,
                                              &iter);
     }
 
+  old_panel = priv->current_panel_box;
+
   if (!name)
     {
       g_warning ("Could not find settings panel \"%s\"", start_id);
@@ -1025,7 +1025,12 @@ _shell_set_active_panel_from_id (CcShell      *shell,
     }
   else
     {
+      /* Successful activation */
+      g_free (priv->current_panel_id);
       priv->current_panel_id = g_strdup (start_id);
+
+      if (old_panel)
+        notebook_remove_page (priv->notebook, old_panel);
     }
 
   g_free (name);
