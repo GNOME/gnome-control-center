@@ -79,6 +79,15 @@ else
         IBUS_MODULE=
 fi
 
+# EggListBox submodule
+prev_top_build_prefix=$ac_top_build_prefix
+prev_ac_configure_args=$ac_configure_args
+AX_CONFIG_DIR([egg-list-box])
+ac_top_build_prefix=$prev_top_build_prefix
+ac_configure_args=$prev_ac_configure_args
+
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:"$ac_top_build_prefix"egg-list-box
+
 dnl ==============================================
 dnl Check that we meet the  dependencies
 dnl ==============================================
@@ -109,7 +118,9 @@ COMMON_MODULES="gtk+-3.0 >= $GTK_REQUIRED_VERSION
 
 PKG_CHECK_MODULES(LIBLANGUAGE, $COMMON_MODULES gnome-desktop-3.0 fontconfig)
 PKG_CHECK_MODULES(LIBSHORTCUTS, $COMMON_MODULES x11)
-PKG_CHECK_MODULES(SHELL, $COMMON_MODULES libgnome-menu-3.0 x11)
+# egg-list-box is a static library, so it must be shared among all panels
+# or it breaks GType registration
+PKG_CHECK_MODULES(SHELL, $COMMON_MODULES libgnome-menu-3.0 x11 egg-list-box)
 PKG_CHECK_MODULES(BACKGROUND_PANEL, $COMMON_MODULES libxml-2.0 gnome-desktop-3.0
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
 PKG_CHECK_MODULES(DATETIME_PANEL, $COMMON_MODULES

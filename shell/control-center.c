@@ -29,6 +29,7 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include <libnotify/notify.h>
+#include <egg-list-box.h>
 
 #ifdef GDK_WINDOWING_X11
 #include <X11/Xlib.h>
@@ -241,6 +242,8 @@ main (int argc, char **argv)
 
   gtk_init (&argc, &argv);
   cc_shell_log_init ();
+
+  g_type_ensure (egg_list_box_get_type ());
 
   /* register a symbolic icon size for use in sidebar lists */
   gtk_icon_size_register ("cc-sidebar-list", 24, 24);

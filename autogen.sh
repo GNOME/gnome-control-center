@@ -18,6 +18,18 @@ DIE=0
 
 rm -f .using-gnome-libs-package
 
+# Fetch submodules if needed
+if test ! -f egg-list-box/COPYING;
+then
+  echo "+ Setting up submodules"
+  git submodule init
+fi
+git submodule update
+
+cd egg-list-box
+sh autogen.sh --no-configure
+cd ..
+
 if ! which gnome-autogen.sh ; then
   echo "You need to install the gnome-common module and make"
   echo "sure the gnome-autogen.sh script is in your \$PATH."

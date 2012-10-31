@@ -1,6 +1,6 @@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
-SUBDIRS = po shell panels
+SUBDIRS = po egg-list-box shell panels
 if BUILD_DOCUMENTATION
 SUBDIRS += man
 endif
