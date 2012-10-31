@@ -137,6 +137,7 @@ PKG_CHECK_MODULES(MEDIA_PANEL, $COMMON_MODULES)
 PKG_CHECK_MODULES(MOUSE_PANEL, $COMMON_MODULES xi >= 1.2
                   gnome-settings-daemon >= $GSD_REQUIRED_VERSION x11)
 PKG_CHECK_MODULES(NETWORK_PANEL, $COMMON_MODULES)
+PKG_CHECK_MODULES(NOTIFICATIONS_PANEL, $COMMON_MODULES libgnome-menu-3.0)
 PKG_CHECK_MODULES(ONLINE_ACCOUNTS_PANEL, $COMMON_MODULES goa-1.0 goa-backend-1.0 >= $GOA_REQUIRED_VERSION)
 PKG_CHECK_MODULES(POWER_PANEL, $COMMON_MODULES upower-glib >= 0.9.1
                   gnome-settings-daemon >= $GSD_REQUIRED_VERSION)
@@ -488,6 +489,8 @@ panels/privacy/Makefile
 panels/privacy/gnome-privacy-panel.desktop.in
 panels/network/Makefile
 panels/network/gnome-network-panel.desktop.in
+panels/notifications/Makefile
+panels/notifications/gnome-notifications-panel.desktop.in
 panels/universal-access/Makefile
 panels/universal-access/gnome-universal-access-panel.desktop.in
 panels/user-accounts/Makefile

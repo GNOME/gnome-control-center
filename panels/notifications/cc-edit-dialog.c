@@ -1,0 +1,119 @@
+/* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*- */
+/*
+ * Copyright (C) 2012 Giovanni Campagna <scampa.giovanni@gmail.com>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General
+ * Public License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+ * Boston, MA 02111-1307, USA.
+ *
+ */
+
+#include "config.h"
+
+#include <string.h>
+#include <glib/gi18n-lib.h>
+#include <glib.h>
+#include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
+
+#include "cc-notifications-panel.h"
+
+static struct {
+  const char *setting_key;
+  const char *label;
+  gboolean bold;
+} policy_settings[] = {
+  /* TRANSLATORS: this is the per application switch for message tray usage. */
+  { "enable",                  NC_("notifications", "Notifications"),               TRUE  },
+  /* TRANSLATORS: this is the setting to configure sounds associated with notifications */
+  { "enable-sound-alerts",     NC_("notifications", "Sound Alerts"),                FALSE },
+  { "show-banners",            NC_("notifications", "Show Popup Banners"),          FALSE },
+  /* TRANSLATORS: banners here refers to message tray notifications in the middle of the screen */
+  { "force-expanded",          NC_("notifications", "Show Details in Banners"),     FALSE },
+  { "show-in-lock-screen",     NC_("notifications", "View in Lock Screen"),         FALSE },
+  { "resident-in-lock-screen", NC_("notifications", "Show Details in Lock Screen"), FALSE }
+};
+
+void
+cc_build_edit_dialog (CcNotificationsPanel *panel,
+                      GAppInfo             *app,
+                      GSettings            *settings)
+{
+  GtkWindow *shell;
+  GtkDialog *win;
+  GtkWidget *content_area;
+  GtkGrid *content_grid;
+  int i;
+
+  shell = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (panel)));
+
+  win = GTK_DIALOG (gtk_dialog_new ());
+  g_object_set (win,
+                "modal", TRUE,
+                "title", g_app_info_get_name (app),
+                "width-request", 450,
+                "transient-for", shell,
+                NULL);
+  gtk_dialog_add_button (win, "gtk-close", GTK_RESPONSE_CLOSE);
+  gtk_dialog_set_default_response (win, GTK_RESPONSE_CLOSE);
+
+  content_area = gtk_dialog_get_content_area (win);
+  content_grid = GTK_GRID (gtk_grid_new ());
+  g_object_set (content_grid,
+                "row-spacing", 10,
+                "margin-left", 15,
+                "margin-right", 5,
+                NULL);
+  gtk_container_add (GTK_CONTAINER (content_area), GTK_WIDGET (content_grid));
+
+  for (i = 0; i < G_N_ELEMENTS (policy_settings); i++)
+    {
+      GtkWidget *label;
+      GtkWidget *_switch;
+
+      label = gtk_label_new (g_dpgettext2 (GETTEXT_PACKAGE,
+                                           "notifications",
+                                           policy_settings[i].label));
+      g_object_set (label,
+                    "xalign", 0.0,
+                    "hexpand", TRUE,
+                    NULL);
+
+      if (policy_settings[i].bold)
+        {
+          PangoAttrList *list;
+          PangoAttribute *weight;
+          list = pango_attr_list_new ();
+          weight = pango_attr_weight_new (PANGO_WEIGHT_BOLD);
+
+          pango_attr_list_insert (list, weight);
+          gtk_label_set_attributes (GTK_LABEL (label), list);
+
+          pango_attr_list_unref (list);
+        }
+
+      _switch = gtk_switch_new ();
+      g_settings_bind (settings, policy_settings[i].setting_key,
+                       _switch, "active",
+                       G_SETTINGS_BIND_DEFAULT);
+
+      gtk_grid_attach (content_grid, GTK_WIDGET (label),
+                       0, i, 1, 1);
+      gtk_grid_attach (content_grid, _switch,
+                       1, i, 1, 1);
+    }
+
+  g_signal_connect (win, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+  gtk_widget_show_all (GTK_WIDGET (win));
+}

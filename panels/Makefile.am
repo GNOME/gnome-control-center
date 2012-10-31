@@ -6,6 +6,7 @@ SUBDIRS= \
 	color \
 	display \
 	mouse \
+	notifications \
 	online-accounts \
 	region \
 	info \

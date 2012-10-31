@@ -39,6 +39,7 @@ gnome_control_center_LDADD =						\
 	$(top_builddir)/panels/info/libinfo.la				\
 	$(top_builddir)/panels/keyboard/libkeyboard.la			\
 	$(top_builddir)/panels/mouse/libmouse-properties.la		\
+	$(top_builddir)/panels/notifications/libnotifications.la	\
 	$(top_builddir)/panels/online-accounts/libonline-accounts.la	\
 	$(top_builddir)/panels/power/libpower.la			\
 	$(top_builddir)/panels/privacy/libprivacy.la			\

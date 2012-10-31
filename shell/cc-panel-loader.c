@@ -40,6 +40,7 @@ extern GType cc_mouse_panel_get_type (void);
 #ifdef BUILD_NETWORK
 extern GType cc_network_panel_get_type (void);
 #endif /* BUILD_NETWORK */
+extern GType cc_notifications_panel_get_type (void);
 extern GType cc_goa_panel_get_type (void);
 extern GType cc_power_panel_get_type (void);
 #ifdef BUILD_PRINTERS
@@ -73,6 +74,7 @@ static struct {
 #ifdef BUILD_NETWORK
   { "network",          cc_network_panel_get_type    },
 #endif
+  { "notifications",    cc_notifications_panel_get_type },
   { "online-accounts",  cc_goa_panel_get_type        },
   { "power",            cc_power_panel_get_type      },
 #ifdef BUILD_PRINTERS
