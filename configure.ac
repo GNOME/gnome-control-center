@@ -103,7 +103,7 @@ NETWORK_MANAGER_REQUIRED_VERSION=0.8.995
 NETWORK_MANAGER_APPLET_REQUIRED_VERSION=0.9.7
 LIBNOTIFY_REQUIRED_VERSION=0.7.3
 GNOME_DESKTOP_REQUIRED_VERSION=3.5.91
-SCHEMAS_REQUIRED_VERSION=3.5.91
+SCHEMAS_REQUIRED_VERSION=3.7.0
 LIBWACOM_REQUIRED_VERSION=0.6
 CLUTTER_REQUIRED_VERSION=1.11.3
 GOA_REQUIRED_VERSION=3.5.90
@@ -148,6 +148,7 @@ PKG_CHECK_MODULES(REGION_PANEL, $COMMON_MODULES
                   gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
                   $IBUS_MODULE)
 PKG_CHECK_MODULES(SCREEN_PANEL, $COMMON_MODULES)
+PKG_CHECK_MODULES(SEARCH_PANEL, $COMMON_MODULES)
 PKG_CHECK_MODULES(SOUND_PANEL, $COMMON_MODULES libxml-2.0
                   libcanberra-gtk3 >= $CANBERRA_REQUIRED_VERSION
                   libpulse >= $PA_REQUIRED_VERSION
@@ -428,6 +429,8 @@ panels/online-accounts/icons/24x24/Makefile
 panels/online-accounts/icons/32x32/Makefile
 panels/online-accounts/icons/48x48/Makefile
 panels/online-accounts/icons/256x256/Makefile
+panels/search/Makefile
+panels/search/gnome-search-panel.desktop.in
 panels/sound/Makefile
 panels/sound/gvc/Makefile
 panels/sound/data/Makefile
