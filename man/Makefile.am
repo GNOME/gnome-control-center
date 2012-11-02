@@ -17,3 +17,5 @@ xml_files = $(man_MANS:.1=.xml)
 EXTRA_DIST = $(xml_files)
 
 DISTCLEANFILES = $(man_MANS)
+
+-include $(top_srcdir)/git.mk
