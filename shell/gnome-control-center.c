@@ -1016,12 +1016,8 @@ _shell_set_active_panel_from_id (CcShell      *shell,
   else if (activate_panel (GNOME_CONTROL_CENTER (shell), start_id, argv, desktop,
                            name, gicon) == FALSE)
     {
-      /* Failed to activate the panel for some reason */
-      old_panel = priv->current_panel_box;
-      priv->current_panel_box = NULL;
-      notebook_select_page (priv->notebook, priv->scrolled_window);
-      if (old_panel)
-        notebook_remove_page (priv->notebook, old_panel);
+      /* Failed to activate the panel for some reason,
+       * let's keep the old panel around instead */
     }
   else
     {
