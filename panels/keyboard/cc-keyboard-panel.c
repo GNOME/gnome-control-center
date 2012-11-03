@@ -138,7 +138,7 @@ cc_keyboard_panel_constructor (GType                  gtype,
 static const char *
 cc_keyboard_panel_get_help_uri (CcPanel *panel)
 {
-  return "help:gnome-help/prefs";
+  return "help:gnome-help/keyboard";
 }
 
 static void
