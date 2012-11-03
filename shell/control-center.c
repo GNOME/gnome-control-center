@@ -216,6 +216,9 @@ application_startup_cb (GApplication       *application,
   gtk_application_set_app_menu (GTK_APPLICATION (application),
                                 G_MENU_MODEL (menu));
 
+  gtk_application_add_accelerator (GTK_APPLICATION (application),
+                                   "F1", "app.help", NULL);
+
   /* nothing else to do here, we don't want to show a window before
    * we've looked at the commandline
    */
