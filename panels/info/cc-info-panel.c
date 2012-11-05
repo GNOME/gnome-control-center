@@ -55,6 +55,8 @@
 #define GNOME_SESSION_MANAGER_SCHEMA        "org.gnome.desktop.session"
 #define KEY_SESSION_NAME          "session-name"
 
+#define SET_HOSTNAME_TIMEOUT 1
+
 #define WID(w) (GtkWidget *) gtk_builder_get_object (self->priv->builder, w)
 
 CC_PANEL_REGISTER (CcInfoPanel, cc_info_panel)
@@ -109,6 +111,7 @@ struct _CcInfoPanelPrivate
   GDBusProxy          *pk_proxy;
   GDBusProxy          *pk_transaction_proxy;
   GDBusProxy          *hostnamed_proxy;
+  guint                set_hostname_timeout_source_id;
   GSettings           *session_settings;
 
   GraphicsData  *graphics_data;
@@ -116,6 +119,7 @@ struct _CcInfoPanelPrivate
 
 static void get_primary_disc_info_start (CcInfoPanel *self);
 static void refresh_update_button (CcInfoPanel *self);
+static void info_panel_set_hostname (CcInfoPanel *self);
 
 typedef struct
 {
@@ -472,6 +476,37 @@ get_current_is_fallback (CcInfoPanel  *self)
   return is_fallback;
 }
 
+static gboolean
+set_hostname_timeout (CcInfoPanel *self)
+{
+  self->priv->set_hostname_timeout_source_id = 0;
+
+  info_panel_set_hostname (self);
+
+  return FALSE;
+}
+
+static void
+remove_hostname_timeout (CcInfoPanel *panel)
+{
+  CcInfoPanelPrivate *priv = panel->priv;
+
+  if (priv->set_hostname_timeout_source_id)
+    g_source_remove (priv->set_hostname_timeout_source_id);
+
+  priv->set_hostname_timeout_source_id = 0;
+}
+
+static void
+reset_hostname_timeout (CcInfoPanel *panel)
+{
+  remove_hostname_timeout (panel);
+
+  panel->priv->set_hostname_timeout_source_id = g_timeout_add_seconds (SET_HOSTNAME_TIMEOUT,
+                                                                       (GSourceFunc) set_hostname_timeout,
+                                                                       panel);
+}
+
 static void
 cc_info_panel_get_property (GObject    *object,
                             guint       property_id,
@@ -502,6 +537,12 @@ static void
 cc_info_panel_dispose (GObject *object)
 {
   CcInfoPanelPrivate *priv = CC_INFO_PANEL (object)->priv;
+
+  if (priv->set_hostname_timeout_source_id)
+    {
+      remove_hostname_timeout (CC_INFO_PANEL (object));
+      set_hostname_timeout (CC_INFO_PANEL (object));
+    }
 
   if (priv->builder != NULL)
     {
@@ -1704,12 +1745,14 @@ info_panel_get_hostname (CcInfoPanel  *self)
 }
 
 static void
-info_panel_set_hostname (CcInfoPanel *self,
-                         const char  *text)
+info_panel_set_hostname (CcInfoPanel *self)
 {
   char *hostname;
   GVariant *variant;
   GError *error = NULL;
+  const gchar *text;
+
+  text = gtk_entry_get_text (GTK_ENTRY (WID ("name_entry")));
 
   g_debug ("Setting PrettyHostname to '%s'", text);
   variant = g_dbus_proxy_call_sync (self->priv->hostnamed_proxy,
@@ -1754,10 +1797,7 @@ static void
 text_changed_cb (GtkEntry        *entry,
                  CcInfoPanel     *self)
 {
-  const char *text;
-
-  text = gtk_entry_get_text (GTK_ENTRY (entry));
-  info_panel_set_hostname (self, text);
+  reset_hostname_timeout (self);
 }
 
 static void
