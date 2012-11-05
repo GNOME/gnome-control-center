@@ -313,15 +313,21 @@ on_localed_properties_changed (GDBusProxy   *proxy,
                 return;
         }
 
+        variants = NULL;
+        g_object_set_data_full (G_OBJECT (label), "input_variants", NULL, g_free);
+
         w = g_dbus_proxy_get_cached_property (proxy, "X11Variant");
         if (w) {
-                variants = g_strsplit (g_variant_get_string (w, NULL), ",", -1);
-                g_object_set_data_full (G_OBJECT (label), "input_variants",
-                                        g_variant_dup_string (w, NULL), g_free);
+                const char *variants_str;
+
+                variants_str = g_variant_get_string (w, NULL);
+                g_debug ("Got variants '%s'", variants_str);
+                if (variants_str && *variants_str != '\0') {
+                        variants = g_strsplit (variants_str, ",", -1);
+                        g_object_set_data_full (G_OBJECT (label), "input_variants",
+                                                g_strdup (variants_str), g_free);
+                }
                 g_variant_unref (w);
-        } else {
-                variants = NULL;
-                g_object_set_data_full (G_OBJECT (label), "input_variants", NULL, g_free);
         }
 
         if (variants && variants[0])
