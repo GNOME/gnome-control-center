@@ -82,7 +82,7 @@ application_command_line_cb (GApplication  *application,
 
   argv = g_application_command_line_get_arguments (command_line, &argc);
 
-  context = g_option_context_new (N_("- System Settings"));
+  context = g_option_context_new (N_("- Settings"));
   g_option_context_add_main_entries (context, all_options, GETTEXT_PACKAGE);
   g_option_context_set_translation_domain(context, GETTEXT_PACKAGE);
   g_option_context_add_group (context, gtk_get_option_group (TRUE));
