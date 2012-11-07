@@ -110,21 +110,6 @@ cc_mouse_panel_get_help_uri (CcPanel *panel)
   return "help:gnome-help/mouse";
 }
 
-static void
-cc_mouse_panel_class_init (CcMousePanelClass *klass)
-{
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
-
-  g_type_class_add_private (klass, sizeof (CcMousePanelPrivate));
-
-  panel_class->get_help_uri = cc_mouse_panel_get_help_uri;
-
-  object_class->get_property = cc_mouse_panel_get_property;
-  object_class->set_property = cc_mouse_panel_set_property;
-  object_class->dispose = cc_mouse_panel_dispose;
-}
-
 /* Toggle between mouse panel properties and testing area. */
 static void
 shell_test_button_toggle_event (GtkToggleButton *button, CcMousePanel *panel)
@@ -148,29 +133,29 @@ shell_test_button_toggle_event (GtkToggleButton *button, CcMousePanel *panel)
   gtk_notebook_set_current_page (notebook, page_num);
 }
 
-/* Add test area toggle to shell header. */
-static gboolean
-add_shell_test_button_cb (gpointer user_data)
+static void
+cc_mouse_panel_constructed (GObject *object)
 {
-  CcMousePanel *panel = CC_MOUSE_PANEL (user_data);
+  CcMousePanel *self = CC_MOUSE_PANEL (object);
   GtkWidget *box, *button;
 
+  G_OBJECT_CLASS (cc_mouse_panel_parent_class)->constructed (object);
+
+  /* Add test area toggle to shell header. */
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
 
   button = gtk_toggle_button_new_with_mnemonic (_("_Test Your Settings"));
   gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
   gtk_widget_set_visible (button, TRUE);
 
-  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (panel)), box);
+  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)), box);
   gtk_widget_set_visible (box, TRUE);
 
-  panel->priv->shell_header = g_object_ref (box);
+  self->priv->shell_header = g_object_ref (box);
 
   g_signal_connect (GTK_BUTTON (button), "toggled",
                     G_CALLBACK (shell_test_button_toggle_event),
-                    panel);
-
-  return FALSE;
+                    self);
 }
 
 static void
@@ -216,8 +201,22 @@ cc_mouse_panel_init (CcMousePanel *self)
 
   gtk_container_add (GTK_CONTAINER (self), priv->widget);
   gtk_widget_show (priv->widget);
+}
 
-  g_idle_add (add_shell_test_button_cb, self);
+static void
+cc_mouse_panel_class_init (CcMousePanelClass *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+
+  g_type_class_add_private (klass, sizeof (CcMousePanelPrivate));
+
+  panel_class->get_help_uri = cc_mouse_panel_get_help_uri;
+
+  object_class->get_property = cc_mouse_panel_get_property;
+  object_class->set_property = cc_mouse_panel_set_property;
+  object_class->dispose = cc_mouse_panel_dispose;
+  object_class->constructed = cc_mouse_panel_constructed;
 }
 
 void
