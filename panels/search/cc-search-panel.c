@@ -20,6 +20,7 @@
  */
 
 #include "cc-search-panel.h"
+#include "cc-search-locations-dialog.h"
 
 #include <egg-list-box/egg-list-box.h>
 #include <gio/gdesktopappinfo.h>
@@ -38,6 +39,8 @@ struct _CcSearchPanelPrivate
 
   GSettings  *search_settings;
   GHashTable *sort_order;
+
+  GtkWidget  *locations_dialog;
 };
 
 #define SHELL_PROVIDER_GROUP "Shell Search Provider"
@@ -242,6 +245,22 @@ up_button_clicked (GtkWidget *widget,
                    CcSearchPanel *self)
 {
   search_panel_move_selected (self, FALSE);
+}
+
+static void
+settings_button_clicked (GtkWidget *widget,
+                         gpointer user_data)
+{
+  CcSearchPanel *self = user_data;
+
+  if (self->priv->locations_dialog == NULL)
+    {
+      self->priv->locations_dialog = cc_search_locations_dialog_new (self);
+      g_object_add_weak_pointer (G_OBJECT (self->priv->locations_dialog),
+                                 (gpointer *) &self->priv->locations_dialog);
+    }
+
+  gtk_window_present (GTK_WINDOW (self->priv->locations_dialog));
 }
 
 static GVariant *
@@ -510,6 +529,9 @@ cc_search_panel_finalize (GObject *object)
   g_clear_object (&priv->search_settings);
   g_hash_table_destroy (priv->sort_order);
 
+  if (priv->locations_dialog)
+    gtk_widget_destroy (priv->locations_dialog);
+
   G_OBJECT_CLASS (cc_search_panel_parent_class)->finalize (object);
 }
 
@@ -590,6 +612,10 @@ cc_search_panel_init (CcSearchPanel *self)
   g_signal_connect (self->priv->down_button, "clicked",
                     G_CALLBACK (down_button_clicked), self);
   gtk_widget_set_sensitive (self->priv->down_button, FALSE);
+
+  widget = WID ("settings_button");
+  g_signal_connect (widget, "clicked",
+                    G_CALLBACK (settings_button_clicked), self);
 
   self->priv->search_settings = g_settings_new ("org.gnome.desktop.search-providers");
   self->priv->sort_order = g_hash_table_new_full (g_str_hash, g_str_equal,

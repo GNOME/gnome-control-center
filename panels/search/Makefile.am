@@ -15,6 +15,8 @@ ccpanels_LTLIBRARIES = libsearch.la
 
 libsearch_la_SOURCES =		\
 	search-module.c		\
+	cc-search-locations-dialog.c \
+	cc-search-locations-dialog.h \
 	cc-search-panel.c	\
 	cc-search-panel.h
 
@@ -22,7 +24,9 @@ libsearch_la_LIBADD = $(PANEL_LIBS) $(SEARCH_PANEL_LIBS)
 libsearch_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui
-dist_ui_DATA = search.ui
+dist_ui_DATA = 		\
+	search.ui 	\
+	search-locations-dialog.ui
 
 @INTLTOOL_DESKTOP_RULE@
 
