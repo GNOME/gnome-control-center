@@ -66,7 +66,6 @@ struct _CcNetworkPanelPrivate
         NMClient         *client;
         NMRemoteSettings *remote_settings;
         gboolean          updating_device;
-        guint             add_header_widgets_idle;
         guint             nm_warning_idle;
         guint             refresh_idle;
         GtkWidget        *kill_switch_header;
@@ -213,10 +212,6 @@ cc_network_panel_dispose (GObject *object)
                 g_source_remove (priv->nm_warning_idle);
                 priv->nm_warning_idle = 0;
         }
-        if (priv->add_header_widgets_idle != 0) {
-                g_source_remove (priv->add_header_widgets_idle);
-                priv->add_header_widgets_idle = 0;
-        }
 
         G_OBJECT_CLASS (cc_network_panel_parent_class)->dispose (object);
 }
@@ -238,6 +233,100 @@ cc_network_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
+cc_network_panel_notify_enable_active_cb (GtkSwitch *sw,
+                                          GParamSpec *pspec,
+                                          CcNetworkPanel *panel)
+{
+        gboolean enable;
+
+        /* set enabled state */
+        enable = !gtk_switch_get_active (sw);
+        nm_client_wireless_set_enabled (panel->priv->client, enable);
+}
+
+static void
+panel_refresh_killswitch_visibility (CcNetworkPanel *panel)
+{
+        gboolean ret;
+        gboolean show_flight_toggle = FALSE;
+        GtkTreeIter iter;
+        GtkTreeModel *model;
+        NetObject *object_tmp;
+        NMDeviceModemCapabilities caps;
+        NMDevice *nm_device;
+
+        /* find any wireless devices in model */
+        model = GTK_TREE_MODEL (gtk_builder_get_object (panel->priv->builder,
+                                                        "liststore_devices"));
+        ret = gtk_tree_model_get_iter_first (model, &iter);
+        if (!ret)
+                return;
+        do {
+                gtk_tree_model_get (model, &iter,
+                                    PANEL_DEVICES_COLUMN_OBJECT, &object_tmp,
+                                    -1);
+                if (NET_IS_DEVICE (object_tmp)) {
+                        nm_device = net_device_get_nm_device (NET_DEVICE (object_tmp));
+                        switch (nm_device_get_device_type (nm_device)) {
+                        case NM_DEVICE_TYPE_WIFI:
+                        case NM_DEVICE_TYPE_WIMAX:
+                                show_flight_toggle = TRUE;
+                                break;
+                        case NM_DEVICE_TYPE_MODEM:
+                                {
+                                caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
+                                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
+                                    (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO))
+                                        show_flight_toggle = TRUE;
+                                }
+                                break;
+                        default:
+                                break;
+                        }
+                }
+                if (object_tmp != NULL)
+                        g_object_unref (object_tmp);
+        } while (!show_flight_toggle && gtk_tree_model_iter_next (model, &iter));
+
+        /* only show toggle if there are wireless devices */
+        gtk_widget_set_visible (panel->priv->kill_switch_header,
+                                show_flight_toggle);
+}
+
+static void
+cc_network_panel_constructed (GObject *object)
+{
+        CcNetworkPanel *panel = CC_NETWORK_PANEL (object);
+        gboolean ret;
+        GtkWidget *box;
+        GtkWidget *label;
+        GtkWidget *widget;
+
+        G_OBJECT_CLASS (cc_network_panel_parent_class)->constructed (object);
+
+        /* add kill switch widgets  */
+        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3);
+        /* TRANSLATORS: this is to disable the radio hardware in the
+         * network panel */
+        label = gtk_label_new_with_mnemonic (_("Air_plane Mode"));
+        gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
+        gtk_widget_set_visible (label, TRUE);
+        widget = gtk_switch_new ();
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
+        gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
+        gtk_widget_set_visible (widget, TRUE);
+        cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (panel)), box);
+        panel->priv->kill_switch_header = g_object_ref (box);
+
+        ret = nm_client_wireless_get_enabled (panel->priv->client);
+        gtk_switch_set_active (GTK_SWITCH (widget), !ret);
+        g_signal_connect (GTK_SWITCH (widget), "notify::active",
+                          G_CALLBACK (cc_network_panel_notify_enable_active_cb),
+                          panel);
+        panel_refresh_killswitch_visibility (panel);
+}
+
+static void
 cc_network_panel_class_init (CcNetworkPanelClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -251,6 +340,7 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
         object_class->set_property = cc_network_panel_set_property;
         object_class->dispose = cc_network_panel_dispose;
         object_class->finalize = cc_network_panel_finalize;
+        object_class->constructed = cc_network_panel_constructed;
 
         g_object_class_override_property (object_class, PROP_ARGV, "argv");
 }
@@ -333,55 +423,6 @@ object_removed_cb (NetObject *object, CcNetworkPanel *panel)
                 }
                 g_object_unref (object_tmp);
         } while (gtk_tree_model_iter_next (model, &iter));
-}
-
-static void
-panel_refresh_killswitch_visibility (CcNetworkPanel *panel)
-{
-        gboolean ret;
-        gboolean show_flight_toggle = FALSE;
-        GtkTreeIter iter;
-        GtkTreeModel *model;
-        NetObject *object_tmp;
-        NMDeviceModemCapabilities caps;
-        NMDevice *nm_device;
-
-        /* find any wireless devices in model */
-        model = GTK_TREE_MODEL (gtk_builder_get_object (panel->priv->builder,
-                                                        "liststore_devices"));
-        ret = gtk_tree_model_get_iter_first (model, &iter);
-        if (!ret)
-                return;
-        do {
-                gtk_tree_model_get (model, &iter,
-                                    PANEL_DEVICES_COLUMN_OBJECT, &object_tmp,
-                                    -1);
-                if (NET_IS_DEVICE (object_tmp)) {
-                        nm_device = net_device_get_nm_device (NET_DEVICE (object_tmp));
-                        switch (nm_device_get_device_type (nm_device)) {
-                        case NM_DEVICE_TYPE_WIFI:
-                        case NM_DEVICE_TYPE_WIMAX:
-                                show_flight_toggle = TRUE;
-                                break;
-                        case NM_DEVICE_TYPE_MODEM:
-                                {
-                                caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
-                                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
-                                    (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO))
-                                        show_flight_toggle = TRUE;
-                                }
-                                break;
-                        default:
-                                break;
-                        }
-                }
-                if (object_tmp != NULL)
-                        g_object_unref (object_tmp);
-        } while (!show_flight_toggle && gtk_tree_model_iter_next (model, &iter));
-
-        /* only show toggle if there are wireless devices */
-        gtk_widget_set_visible (panel->priv->kill_switch_header,
-                                show_flight_toggle);
 }
 
 GPtrArray *
@@ -778,18 +819,6 @@ panel_add_proxy_device (CcNetworkPanel *panel)
 }
 
 static void
-cc_network_panel_notify_enable_active_cb (GtkSwitch *sw,
-                                          GParamSpec *pspec,
-                                          CcNetworkPanel *panel)
-{
-        gboolean enable;
-
-        /* set enabled state */
-        enable = !gtk_switch_get_active (sw);
-        nm_client_wireless_set_enabled (panel->priv->client, enable);
-}
-
-static void
 connection_state_changed (NMActiveConnection *c, GParamSpec *pspec, CcNetworkPanel *panel)
 {
 }
@@ -878,6 +907,7 @@ out:
         }
 
         panel_refresh_device_titles (panel);
+        panel_refresh_killswitch_visibility (panel);
 
         g_debug ("Calling handle_argv() after cold-plugging devices");
         handle_argv (panel);
@@ -1141,38 +1171,6 @@ on_toplevel_map (GtkWidget      *widget,
         }
 }
 
-static gboolean
-network_add_shell_header_widgets_cb (gpointer user_data)
-{
-        CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
-        gboolean ret;
-        GtkWidget *box;
-        GtkWidget *label;
-        GtkWidget *widget;
-
-        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 3);
-        /* TRANSLATORS: this is to disable the radio hardware in the
-         * network panel */
-        label = gtk_label_new_with_mnemonic (_("Air_plane Mode"));
-        gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
-        gtk_widget_set_visible (label, TRUE);
-        widget = gtk_switch_new ();
-        gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
-        gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
-        gtk_widget_set_visible (widget, TRUE);
-        cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (panel)), box);
-        panel->priv->kill_switch_header = g_object_ref (box);
-
-        ret = nm_client_wireless_get_enabled (panel->priv->client);
-        gtk_switch_set_active (GTK_SWITCH (widget), !ret);
-        g_signal_connect (GTK_SWITCH (widget), "notify::active",
-                          G_CALLBACK (cc_network_panel_notify_enable_active_cb),
-                          panel);
-        panel_refresh_killswitch_visibility (panel);
-
-        return FALSE;
-}
-
 static void
 cc_network_panel_init (CcNetworkPanel *panel)
 {
@@ -1265,9 +1263,6 @@ cc_network_panel_init (CcNetworkPanel *panel)
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "vbox1"));
         gtk_widget_reparent (widget, (GtkWidget *) panel);
-
-        /* add kill switch widgets when dialog activated */
-        panel->priv->add_header_widgets_idle = g_idle_add (network_add_shell_header_widgets_cb, panel);
 }
 
 void
