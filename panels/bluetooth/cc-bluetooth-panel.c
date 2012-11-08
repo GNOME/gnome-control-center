@@ -418,7 +418,6 @@ cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 	BluetoothKillswitchState state;
 	char *path;
 	gboolean powered, sensitive;
-	GtkSwitch *button;
 
 	g_object_get (G_OBJECT (self->priv->client),
 		      "default-adapter", &path,
@@ -455,12 +454,6 @@ cc_bluetooth_panel_update_power (CcBluetoothPanel *self)
 	g_free (path);
 	gtk_widget_set_sensitive (WID ("box_power") , sensitive);
 	gtk_widget_set_sensitive (WID ("box_vis") , sensitive);
-
-	button = GTK_SWITCH (WID ("switch_bluetooth"));
-
-	g_signal_handlers_block_by_func (button, power_callback, self);
-	gtk_switch_set_active (button, powered);
-	g_signal_handlers_unblock_by_func (button, power_callback, self);
 }
 
 static void
@@ -739,12 +732,34 @@ cc_bluetooth_panel_update_state (CcBluetoothPanel *self)
 }
 
 static void
+cc_bluetooth_panel_update_powered_state (CcBluetoothPanel *self)
+{
+	gboolean powered;
+
+	g_object_get (G_OBJECT (self->priv->client),
+		      "default-adapter-powered", &powered,
+		      NULL);
+	gtk_switch_set_active (GTK_SWITCH (WID ("switch_bluetooth")), powered);
+}
+
+static void
+default_adapter_power_changed (BluetoothClient  *client,
+			       GParamSpec       *spec,
+			       CcBluetoothPanel *self)
+{
+	g_debug ("Default adapter power changed");
+	cc_bluetooth_panel_update_powered_state (self);
+}
+
+static void
 default_adapter_changed (BluetoothClient  *client,
 			 GParamSpec       *spec,
 			 CcBluetoothPanel *self)
 {
+	g_debug ("Default adapter changed");
 	cc_bluetooth_panel_update_state (self);
 	cc_bluetooth_panel_update_power (self);
+	cc_bluetooth_panel_update_powered_state (self);
 }
 
 static void
@@ -752,6 +767,7 @@ killswitch_changed (BluetoothKillswitch      *killswitch,
 		    BluetoothKillswitchState  state,
 		    CcBluetoothPanel         *self)
 {
+	g_debug ("Killswitch changed to state '%s' (%d)", bluetooth_killswitch_state_to_string (state) , state);
 	cc_bluetooth_panel_update_state (self);
 	cc_bluetooth_panel_update_power (self);
 }
@@ -792,6 +808,8 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	cc_bluetooth_panel_update_state (self);
 	g_signal_connect (G_OBJECT (self->priv->client), "notify::default-adapter",
 			  G_CALLBACK (default_adapter_changed), self);
+	g_signal_connect (G_OBJECT (self->priv->client), "notify::default-adapter-powered",
+			  G_CALLBACK (default_adapter_power_changed), self);
 
 	/* The discoverable button */
 	cc_bluetooth_panel_update_visibility (self);
