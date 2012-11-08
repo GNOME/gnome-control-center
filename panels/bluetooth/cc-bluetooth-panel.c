@@ -54,6 +54,7 @@ struct CcBluetoothPanelPrivate {
 	BluetoothClient     *client;
 	BluetoothKillswitch *killswitch;
 	gboolean             debug;
+	GHashTable          *connecting_devices;
 };
 
 static void cc_bluetooth_panel_finalize (GObject *object);
@@ -109,9 +110,34 @@ cc_bluetooth_panel_finalize (GObject *object)
 		self->priv->client = NULL;
 	}
 
+	g_clear_pointer (&self->priv->connecting_devices, g_hash_table_destroy);
 	g_clear_pointer (&self->priv->selected_bdaddr, g_free);
 
 	G_OBJECT_CLASS (cc_bluetooth_panel_parent_class)->finalize (object);
+}
+
+static void
+remove_connecting (CcBluetoothPanel *self,
+		   const char       *bdaddr)
+{
+	g_hash_table_remove (self->priv->connecting_devices, bdaddr);
+}
+
+static void
+add_connecting (CcBluetoothPanel *self,
+		const char       *bdaddr)
+{
+	g_hash_table_insert (self->priv->connecting_devices,
+			     g_strdup (bdaddr),
+			     GINT_TO_POINTER (1));
+}
+
+static gboolean
+is_connecting (CcBluetoothPanel *self,
+	       const char       *bdaddr)
+{
+	return GPOINTER_TO_INT (g_hash_table_lookup (self->priv->connecting_devices,
+						     bdaddr));
 }
 
 typedef struct {
@@ -134,7 +160,7 @@ connect_done (GObject      *source_object,
 
 	self = data->self;
 
-	/* Check whether the same device is now selected */
+	/* Check whether the same device is now selected, and update the UI */
 	bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
 	if (g_strcmp0 (bdaddr, data->bdaddr) == 0) {
 		GtkSwitch *button;
@@ -145,6 +171,8 @@ connect_done (GObject      *source_object,
 			gtk_switch_set_active (button, !gtk_switch_get_active (button));
 		gtk_widget_set_sensitive (GTK_WIDGET (button), TRUE);
 	}
+
+	remove_connecting (self, data->bdaddr);
 
 	g_free (bdaddr);
 	g_object_unref (data->self);
@@ -160,6 +188,13 @@ switch_connected_active_changed (GtkSwitch        *button,
 	char *proxy;
 	GValue value = { 0, };
 	ConnectData *data;
+	char *bdaddr;
+
+	bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
+	if (is_connecting (self, bdaddr)) {
+		g_free (bdaddr);
+		return;
+	}
 
 	if (bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (self->priv->chooser),
 							"proxy", &value) == FALSE) {
@@ -173,7 +208,7 @@ switch_connected_active_changed (GtkSwitch        *button,
 		return;
 
 	data = g_new0 (ConnectData, 1);
-	data->bdaddr = bluetooth_chooser_get_selected_device (BLUETOOTH_CHOOSER (self->priv->chooser));
+	data->bdaddr = bdaddr;
 	data->self = g_object_ref (self);
 
 	bluetooth_client_connect_service (self->priv->client,
@@ -183,8 +218,7 @@ switch_connected_active_changed (GtkSwitch        *button,
 					  connect_done,
 					  data);
 
-	/* FIXME: make a note somewhere that the button for that
-	 * device should be disabled */
+	add_connecting (self, data->bdaddr);
 	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
 	g_free (proxy);
 }
@@ -736,6 +770,10 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	bluetooth_plugin_manager_init ();
 	self->priv->killswitch = bluetooth_killswitch_new ();
 	self->priv->client = bluetooth_client_new ();
+	self->priv->connecting_devices = g_hash_table_new_full (g_str_hash,
+								g_str_equal,
+								(GDestroyNotify) g_free,
+								NULL);
 	self->priv->debug = g_getenv ("BLUETOOTH_DEBUG") != NULL;
 
 	self->priv->builder = gtk_builder_new ();
