@@ -730,11 +730,9 @@ static void
 cc_bluetooth_panel_update_state (CcBluetoothPanel *self)
 {
 	char *bdaddr;
-	gboolean powered;
 
 	g_object_get (G_OBJECT (self->priv->client),
 		      "default-adapter", &bdaddr,
-		      "default-adapter-powered", &powered,
 		      NULL);
 	gtk_widget_set_sensitive (WID ("toolbar"), (bdaddr != NULL));
 	g_free (bdaddr);
