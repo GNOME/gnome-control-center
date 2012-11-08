@@ -97,18 +97,9 @@ cc_bluetooth_panel_finalize (GObject *object)
 	bluetooth_plugin_manager_cleanup ();
 
 	self = CC_BLUETOOTH_PANEL (object);
-	if (self->priv->builder) {
-		g_object_unref (self->priv->builder);
-		self->priv->builder = NULL;
-	}
-	if (self->priv->killswitch) {
-		g_object_unref (self->priv->killswitch);
-		self->priv->killswitch = NULL;
-	}
-	if (self->priv->client) {
-		g_object_unref (self->priv->client);
-		self->priv->client = NULL;
-	}
+	g_clear_object (&self->priv->builder);
+	g_clear_object (&self->priv->killswitch);
+	g_clear_object (&self->priv->client);
 
 	g_clear_pointer (&self->priv->connecting_devices, g_hash_table_destroy);
 	g_clear_pointer (&self->priv->selected_bdaddr, g_free);
