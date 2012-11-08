@@ -107,6 +107,22 @@ cc_bluetooth_panel_finalize (GObject *object)
 	G_OBJECT_CLASS (cc_bluetooth_panel_parent_class)->finalize (object);
 }
 
+enum {
+	CONNECTING_NOTEBOOK_PAGE_SWITCH = 0,
+	CONNECTING_NOTEBOOK_PAGE_SPINNER = 1
+};
+
+static void
+set_connecting_page (CcBluetoothPanel *self,
+		     int               page)
+{
+	if (page == CONNECTING_NOTEBOOK_PAGE_SPINNER)
+		gtk_spinner_start (GTK_SPINNER (WID ("connecting_spinner")));
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (WID ("connecting_notebook")), page);
+	if (page == CONNECTING_NOTEBOOK_PAGE_SWITCH)
+		gtk_spinner_start (GTK_SPINNER (WID ("connecting_spinner")));
+}
+
 static void
 remove_connecting (CcBluetoothPanel *self,
 		   const char       *bdaddr)
@@ -160,7 +176,7 @@ connect_done (GObject      *source_object,
 		/* Reset the switch if it failed */
 		if (success == FALSE)
 			gtk_switch_set_active (button, !gtk_switch_get_active (button));
-		gtk_widget_set_sensitive (GTK_WIDGET (button), TRUE);
+		set_connecting_page (self, CONNECTING_NOTEBOOK_PAGE_SWITCH);
 	}
 
 	remove_connecting (self, data->bdaddr);
@@ -210,7 +226,7 @@ switch_connected_active_changed (GtkSwitch        *button,
 					  data);
 
 	add_connecting (self, data->bdaddr);
-	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
+	set_connecting_page (self, CONNECTING_NOTEBOOK_PAGE_SPINNER);
 	g_free (proxy);
 }
 
@@ -305,8 +321,14 @@ cc_bluetooth_panel_update_properties (CcBluetoothPanel *self)
 
 		gtk_widget_set_sensitive (WID ("properties_vbox"), TRUE);
 
-		connected = bluetooth_chooser_get_selected_device_is_connected (BLUETOOTH_CHOOSER (self->priv->chooser));
-		gtk_switch_set_active (button, connected);
+		if (is_connecting (self, bdaddr)) {
+			gtk_switch_set_active (button, TRUE);
+			set_connecting_page (self, CONNECTING_NOTEBOOK_PAGE_SPINNER);
+		} else {
+			connected = bluetooth_chooser_get_selected_device_is_connected (BLUETOOTH_CHOOSER (self->priv->chooser));
+			gtk_switch_set_active (button, connected);
+			set_connecting_page (self, CONNECTING_NOTEBOOK_PAGE_SWITCH);
+		}
 
 		/* Paired */
 		bluetooth_chooser_get_selected_device_info (BLUETOOTH_CHOOSER (self->priv->chooser),
