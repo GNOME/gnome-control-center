@@ -286,7 +286,6 @@ static GtkWidget *input_chooser_new          (GtkWindow     *main_window,
 static gboolean   input_chooser_get_selected (GtkWidget     *chooser,
                                               GtkTreeModel **model,
                                               GtkTreeIter   *iter);
-static GtkTreeModel *tree_view_get_actual_model (GtkTreeView *tv);
 
 static gboolean
 strv_contains (const gchar * const *strv,
@@ -375,7 +374,7 @@ update_ibus_active_sources (GtkBuilder *builder)
   gboolean ret;
 
   tv = GTK_TREE_VIEW (WID ("active_input_sources"));
-  model = tree_view_get_actual_model (tv);
+  model = gtk_tree_view_get_model (tv);
 
   ret = gtk_tree_model_get_iter_first (model, &iter);
   while (ret)
@@ -388,22 +387,17 @@ update_ibus_active_sources (GtkBuilder *builder)
       if (g_str_equal (type, INPUT_SOURCE_TYPE_IBUS))
         {
           IBusEngineDesc *engine_desc = NULL;
-          GDesktopAppInfo *app_info = NULL;
           gchar *display_name = NULL;
 
           engine_desc = g_hash_table_lookup (ibus_engines, id);
           if (engine_desc)
             {
               display_name = engine_get_display_name (engine_desc);
-              app_info = setup_app_info_for_id (id);
 
               gtk_list_store_set (GTK_LIST_STORE (model), &iter,
                                   NAME_COLUMN, display_name,
-                                  SETUP_COLUMN, app_info,
                                   -1);
               g_free (display_name);
-              if (app_info)
-                g_object_unref (app_info);
             }
         }
 
@@ -645,10 +639,9 @@ populate_with_active_sources (GtkListStore *store)
             engine_desc = g_hash_table_lookup (ibus_engines, id);
 
           if (engine_desc)
-            {
-              display_name = engine_get_display_name (engine_desc);
-              app_info = setup_app_info_for_id (id);
-            }
+            display_name = engine_get_display_name (engine_desc);
+
+          app_info = setup_app_info_for_id (id);
 #else
           g_warning ("IBus input source type specified but IBus support was not compiled");
           continue;
@@ -662,7 +655,7 @@ populate_with_active_sources (GtkListStore *store)
 
       gtk_list_store_append (store, &tree_iter);
       gtk_list_store_set (store, &tree_iter,
-                          NAME_COLUMN, display_name,
+                          NAME_COLUMN, display_name ? display_name : id,
                           TYPE_COLUMN, type,
                           ID_COLUMN, id,
                           SETUP_COLUMN, app_info,
@@ -823,16 +816,6 @@ set_selected_path (GtkBuilder  *builder,
   gtk_tree_selection_select_path (selection, path);
 }
 
-static GtkTreeModel *
-tree_view_get_actual_model (GtkTreeView *tv)
-{
-  GtkTreeModel *filtered_store;
-
-  filtered_store = gtk_tree_view_get_model (tv);
-
-  return gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (filtered_store));
-}
-
 static void
 chooser_response (GtkWidget *chooser, gint response_id, gpointer data)
 {
@@ -846,8 +829,8 @@ chooser_response (GtkWidget *chooser, gint response_id, gpointer data)
       if (input_chooser_get_selected (chooser, &model, &iter))
         {
           GtkTreeView *tv;
-          GtkListStore *child_model;
-          GtkTreeIter child_iter, filter_iter;
+          GtkListStore *my_model;
+          GtkTreeIter child_iter;
           gchar *name;
           gchar *type;
           gchar *id;
@@ -865,29 +848,24 @@ chooser_response (GtkWidget *chooser, gint response_id, gpointer data)
 #endif
 
           tv = GTK_TREE_VIEW (WID ("active_input_sources"));
-          child_model = GTK_LIST_STORE (tree_view_get_actual_model (tv));
+          my_model = GTK_LIST_STORE (gtk_tree_view_get_model (tv));
 
-          gtk_list_store_append (child_model, &child_iter);
-
-          gtk_list_store_set (child_model, &child_iter,
-                              NAME_COLUMN, name,
-                              TYPE_COLUMN, type,
-                              ID_COLUMN, id,
-                              SETUP_COLUMN, app_info,
-                              -1);
+          gtk_list_store_insert_with_values (my_model, &child_iter, -1,
+                                             NAME_COLUMN, name,
+                                             TYPE_COLUMN, type,
+                                             ID_COLUMN, id,
+                                             SETUP_COLUMN, app_info,
+                                             -1);
           g_free (name);
           g_free (type);
           g_free (id);
           if (app_info)
             g_object_unref (app_info);
 
-          gtk_tree_model_filter_convert_child_iter_to_iter (GTK_TREE_MODEL_FILTER (gtk_tree_view_get_model (tv)),
-                                                            &filter_iter,
-                                                            &child_iter);
-          gtk_tree_selection_select_iter (gtk_tree_view_get_selection (tv), &filter_iter);
+          gtk_tree_selection_select_iter (gtk_tree_view_get_selection (tv), &child_iter);
 
           update_button_sensitivity (builder);
-          update_configuration (GTK_TREE_MODEL (child_model));
+          update_configuration (GTK_TREE_MODEL (my_model));
         }
       else
         {
@@ -911,7 +889,7 @@ add_input (GtkButton *button, gpointer data)
 
   toplevel = gtk_widget_get_toplevel (WID ("region_notebook"));
   treeview = WID ("active_input_sources");
-  active_sources = GTK_LIST_STORE (tree_view_get_actual_model (GTK_TREE_VIEW (treeview)));
+  active_sources = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (treeview)));
 
   chooser = input_chooser_new (GTK_WINDOW (toplevel), active_sources);
   g_signal_connect (chooser, "response",
@@ -923,9 +901,7 @@ remove_selected_input (GtkButton *button, gpointer data)
 {
   GtkBuilder *builder = data;
   GtkTreeModel *model;
-  GtkTreeModel *child_model;
   GtkTreeIter iter;
-  GtkTreeIter child_iter;
   GtkTreePath *path;
 
   g_debug ("remove selected input source");
@@ -935,11 +911,7 @@ remove_selected_input (GtkButton *button, gpointer data)
 
   path = gtk_tree_model_get_path (model, &iter);
 
-  child_model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (model));
-  gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),
-                                                    &child_iter,
-                                                    &iter);
-  gtk_list_store_remove (GTK_LIST_STORE (child_model), &child_iter);
+  gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 
   if (!gtk_tree_model_get_iter (model, &iter, path))
     gtk_tree_path_prev (path);
@@ -949,7 +921,7 @@ remove_selected_input (GtkButton *button, gpointer data)
   gtk_tree_path_free (path);
 
   update_button_sensitivity (builder);
-  update_configuration (child_model);
+  update_configuration (model);
 }
 
 static void
@@ -957,9 +929,7 @@ move_selected_input_up (GtkButton *button, gpointer data)
 {
   GtkBuilder *builder = data;
   GtkTreeModel *model;
-  GtkTreeModel *child_model;
   GtkTreeIter iter, prev;
-  GtkTreeIter child_iter, child_prev;
   GtkTreePath *path;
 
   g_debug ("move selected input source up");
@@ -973,20 +943,13 @@ move_selected_input_up (GtkButton *button, gpointer data)
 
   path = gtk_tree_model_get_path (model, &prev);
 
-  child_model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (model));
-  gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),
-                                                    &child_iter,
-                                                    &iter);
-  gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),
-                                                    &child_prev,
-                                                    &prev);
-  gtk_list_store_swap (GTK_LIST_STORE (child_model), &child_iter, &child_prev);
+  gtk_list_store_swap (GTK_LIST_STORE (model), &iter, &prev);
 
   set_selected_path (builder, path);
   gtk_tree_path_free (path);
 
   update_button_sensitivity (builder);
-  update_configuration (child_model);
+  update_configuration (model);
 }
 
 static void
@@ -994,9 +957,7 @@ move_selected_input_down (GtkButton *button, gpointer data)
 {
   GtkBuilder *builder = data;
   GtkTreeModel *model;
-  GtkTreeModel *child_model;
   GtkTreeIter iter, next;
-  GtkTreeIter child_iter, child_next;
   GtkTreePath *path;
 
   g_debug ("move selected input source down");
@@ -1010,20 +971,13 @@ move_selected_input_down (GtkButton *button, gpointer data)
 
   path = gtk_tree_model_get_path (model, &next);
 
-  child_model = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (model));
-  gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),
-                                                    &child_iter,
-                                                    &iter);
-  gtk_tree_model_filter_convert_iter_to_child_iter (GTK_TREE_MODEL_FILTER (model),
-                                                    &child_next,
-                                                    &next);
-  gtk_list_store_swap (GTK_LIST_STORE (child_model), &child_iter, &child_next);
+  gtk_list_store_swap (GTK_LIST_STORE (model), &iter, &next);
 
   set_selected_path (builder, path);
   gtk_tree_path_free (path);
 
   update_button_sensitivity (builder);
-  update_configuration (child_model);
+  update_configuration (model);
 }
 
 static void
@@ -1172,7 +1126,7 @@ input_sources_changed (GSettings  *settings,
   GtkTreeModel *model;
 
   treeview = WID("active_input_sources");
-  store = tree_view_get_actual_model (GTK_TREE_VIEW (treeview));
+  store = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
 
   if (get_selected_iter (builder, &model, &iter))
     path = gtk_tree_model_get_path (model, &iter);
@@ -1234,23 +1188,6 @@ update_shortcuts (GtkBuilder *builder)
   g_free (next);
 }
 
-static gboolean
-active_sources_visible_func (GtkTreeModel *model,
-                             GtkTreeIter  *iter,
-                             gpointer      data)
-{
-  gchar *display_name;
-
-  gtk_tree_model_get (model, iter, NAME_COLUMN, &display_name, -1);
-
-  if (!display_name)
-    return FALSE;
-
-  g_free (display_name);
-
-  return TRUE;
-}
-
 void
 setup_input_tabs (GtkBuilder    *builder,
                   CcRegionPanel *panel)
@@ -1259,7 +1196,6 @@ setup_input_tabs (GtkBuilder    *builder,
   GtkTreeViewColumn *column;
   GtkCellRenderer *cell;
   GtkListStore *store;
-  GtkTreeModel *filtered_store;
   GtkTreeSelection *selection;
 
   /* set up the list of active inputs */
@@ -1302,17 +1238,6 @@ setup_input_tabs (GtkBuilder    *builder,
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
   g_signal_connect_swapped (selection, "changed",
                             G_CALLBACK (update_button_sensitivity), builder);
-
-  /* Some input source types might have their info loaded
-   * asynchronously. In that case we don't want to show them
-   * immediately so we use a filter model on top of the real model
-   * which mirrors the GSettings key. */
-  filtered_store = gtk_tree_model_filter_new (GTK_TREE_MODEL (store), NULL);
-  gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filtered_store),
-                                          active_sources_visible_func,
-                                          NULL,
-                                          NULL);
-  gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), filtered_store);
 
   /* set up the buttons */
   g_signal_connect (WID("input_source_add"), "clicked",
