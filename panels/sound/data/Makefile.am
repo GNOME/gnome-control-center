@@ -7,9 +7,6 @@ SUBDIRS =			\
 	$(NULL)
 
 @INTLTOOL_DESKTOP_RULE@
-autostartdir = $(sysconfdir)/xdg/autostart
-autostart_in_files = gnome-sound-applet.desktop.in
-autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
 
 appsdir = $(datadir)/applications
 apps_in_files = gnome-sound-panel.desktop.in
@@ -40,10 +37,6 @@ endif
 
 CLEANFILES =					\
 	gnome-sound-panel.desktop		\
-	$(NULL)
-
-DISTCLEANFILES =				\
-	gnome-sound-applet.desktop		\
 	$(NULL)
 
 -include $(top_srcdir)/git.mk

@@ -7,10 +7,6 @@ NULL =
 ccpanelsdir = $(PANELS_DIR)
 ccpanels_LTLIBRARIES = libsound.la
 
-bin_PROGRAMS =					\
-	gnome-sound-applet			\
-	$(NULL)
-
 AM_CPPFLAGS =					\
 	$(PANEL_CFLAGS) 			\
 	$(SOUND_PANEL_CFLAGS)			\
@@ -51,22 +47,6 @@ libgnomevolumecontrol_la_SOURCES =		\
 	gvc-channel-bar.h			\
 	gvc-channel-bar.c			\
 	gvc-pulseaudio-fake.h			\
-	$(NULL)
-
-gnome_sound_applet_LDADD =			\
-	-lm					\
-	libgnomevolumecontrol.la		\
-	$(SOUND_PANEL_LIBS)			\
-	$(NULL)
-
-gnome_sound_applet_SOURCES =			\
-	gvc-stream-status-icon.h		\
-	gvc-stream-status-icon.c		\
-	gvc-applet.h				\
-	gvc-applet.c				\
-	gvc-log.h				\
-	gvc-log.c				\
-	applet-main.c				\
 	$(NULL)
 
 libsound_la_LIBADD =				\
