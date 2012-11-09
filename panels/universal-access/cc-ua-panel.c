@@ -58,7 +58,6 @@ struct _CcUaPanelPrivate
   GSettings *mediakeys_settings;
 
   ZoomOptions *zoom_options;
-  guint shell_watch_id;
 };
 
 
@@ -92,12 +91,6 @@ static void
 cc_ua_panel_dispose (GObject *object)
 {
   CcUaPanelPrivate *priv = CC_UA_PANEL (object)->priv;
-
-  if (priv->shell_watch_id)
-    {
-      g_bus_unwatch_name (priv->shell_watch_id);
-      priv->shell_watch_id = 0;
-    }
 
   if (priv->builder)
     {
@@ -302,29 +295,6 @@ cc_ua_panel_set_shortcut_label (CcUaPanel  *self,
 	g_free (text);
 }
 
-static void
-shell_vanished_cb (GDBusConnection *connection,
-		   const gchar *name,
-		   CcUaPanel   *self)
-{
-  CcUaPanelPrivate *priv = self->priv;
-
-  gtk_widget_hide (WID (priv->builder, "zoom_label_box"));
-  gtk_widget_hide (WID (priv->builder, "zoom_value_box"));
-}
-
-static void
-shell_appeared_cb (GDBusConnection *connection,
-		   const gchar *name,
-		   const gchar *name_owner,
-		   CcUaPanel   *self)
-{
-  CcUaPanelPrivate *priv = self->priv;
-
-  gtk_widget_show (WID (priv->builder, "zoom_label_box"));
-  gtk_widget_show (WID (priv->builder, "zoom_value_box"));
-}
-
 static gboolean
 get_large_text_mapping (GValue   *value,
                         GVariant *variant,
@@ -421,13 +391,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                    WID (priv->builder, "seeing_toggle_keys_switch"), "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  priv->shell_watch_id = g_bus_watch_name (G_BUS_TYPE_SESSION,
-					   "org.gnome.Shell",
-					   G_BUS_NAME_WATCHER_FLAGS_NONE,
-					   (GBusNameAppearedCallback) shell_appeared_cb,
-					   (GBusNameVanishedCallback) shell_vanished_cb,
-					   self,
-					   NULL);
   g_signal_connect (WID (priv->builder, "seeing_zoom_preferences_button"),
                     "clicked",
                     G_CALLBACK (zoom_options_launch_cb), self);
