@@ -38,6 +38,8 @@
 #include "net-proxy.h"
 #include "net-vpn.h"
 
+#include "rfkill-glib.h"
+
 #include "panel-common.h"
 
 #include "network-dialogs.h"
@@ -67,7 +69,12 @@ struct _CcNetworkPanelPrivate
         guint             add_header_widgets_idle;
         guint             nm_warning_idle;
         guint             refresh_idle;
+
+        /* Killswitch stuff */
         GtkWidget        *kill_switch_header;
+        RfkillGlib       *rfkill;
+        GtkSwitch        *rfkill_switch;
+        GHashTable       *killswitches;
 
         /* wireless dialog stuff */
         CmdlineOperation  arg_operation;
@@ -202,6 +209,9 @@ cc_network_panel_dispose (GObject *object)
         g_clear_object (&priv->client);
         g_clear_object (&priv->remote_settings);
         g_clear_object (&priv->kill_switch_header);
+        g_clear_object (&priv->rfkill);
+        g_clear_pointer (&priv->killswitches, g_hash_table_destroy);
+        priv->rfkill_switch = NULL;
 
         if (priv->refresh_idle != 0) {
                 g_source_remove (priv->refresh_idle);
@@ -651,11 +661,18 @@ cc_network_panel_notify_enable_active_cb (GtkSwitch *sw,
                                           GParamSpec *pspec,
                                           CcNetworkPanel *panel)
 {
-        gboolean enable;
+	gboolean enable;
+	struct rfkill_event event;
 
-        /* set enabled state */
-        enable = !gtk_switch_get_active (sw);
-        nm_client_wireless_set_enabled (panel->priv->client, enable);
+	enable = gtk_switch_get_active (sw);
+	g_debug ("Setting killswitch to %d", enable);
+
+	memset (&event, 0, sizeof(event));
+	event.op = RFKILL_OP_CHANGE_ALL;
+	event.type = RFKILL_TYPE_ALL;
+	event.soft = enable ? 1 : 0;
+	if (rfkill_glib_send_event (panel->priv->rfkill, &event) < 0)
+		g_warning ("Setting the killswitch %s failed", enable ? "on" : "off");
 }
 
 static void
@@ -1008,11 +1025,64 @@ on_toplevel_map (GtkWidget      *widget,
         }
 }
 
+static void
+rfkill_changed (RfkillGlib     *rfkill,
+		GList          *events,
+		CcNetworkPanel *panel)
+{
+	gboolean enabled;
+	GList *l;
+	GHashTableIter iter;
+	gpointer key, value;
+
+	enabled = TRUE;
+
+	for (l = events; l != NULL; l = l->next) {
+		struct rfkill_event *event = l->data;
+
+		if (event->op == RFKILL_OP_ADD)
+			g_hash_table_insert (panel->priv->killswitches,
+					     GINT_TO_POINTER (event->idx),
+					     GINT_TO_POINTER (event->soft || event->hard));
+		else if (event->op == RFKILL_OP_CHANGE)
+			g_hash_table_insert (panel->priv->killswitches,
+					     GINT_TO_POINTER (event->idx),
+					     GINT_TO_POINTER (event->soft || event->hard));
+		else if (event->op == RFKILL_OP_DEL)
+			g_hash_table_remove (panel->priv->killswitches,
+					     GINT_TO_POINTER (event->idx));
+	}
+
+	g_hash_table_iter_init (&iter, panel->priv->killswitches);
+	while (g_hash_table_iter_next (&iter, &key, &value)) {
+		int idx, state;
+
+		idx = GPOINTER_TO_INT (key);
+		state = GPOINTER_TO_INT (value);
+		g_debug ("Killswitch %d is %s", idx, state ? "enabled" : "disabled");
+
+		/* A single device that's enabled? airplane mode is off */
+		if (state == FALSE) {
+			enabled = FALSE;
+			break;
+		}
+	}
+
+	if (enabled != gtk_switch_get_active (panel->priv->rfkill_switch)) {
+		g_signal_handlers_block_by_func (panel->priv->rfkill_switch,
+						 cc_network_panel_notify_enable_active_cb,
+						 panel);
+		gtk_switch_set_active (panel->priv->rfkill_switch, enabled);
+		g_signal_handlers_unblock_by_func (panel->priv->rfkill_switch,
+						 cc_network_panel_notify_enable_active_cb,
+						 panel);
+	}
+}
+
 static gboolean
 network_add_shell_header_widgets_cb (gpointer user_data)
 {
         CcNetworkPanel *panel = CC_NETWORK_PANEL (user_data);
-        gboolean ret;
         GtkWidget *box;
         GtkWidget *label;
         GtkWidget *widget;
@@ -1027,12 +1097,18 @@ network_add_shell_header_widgets_cb (gpointer user_data)
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
         gtk_widget_show_all (box);
+        panel->priv->rfkill_switch = GTK_SWITCH (widget);
         cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (panel)), box);
         panel->priv->kill_switch_header = g_object_ref (box);
 
-        ret = nm_client_wireless_get_enabled (panel->priv->client);
-        gtk_switch_set_active (GTK_SWITCH (widget), !ret);
-        g_signal_connect (GTK_SWITCH (widget), "notify::active",
+        panel->priv->killswitches = g_hash_table_new (g_direct_hash, g_direct_equal);
+        panel->priv->rfkill = rfkill_glib_new ();
+        g_signal_connect (G_OBJECT (panel->priv->rfkill), "changed",
+                          G_CALLBACK (rfkill_changed), panel);
+        if (rfkill_glib_open (panel->priv->rfkill) < 0)
+                gtk_widget_hide (box);
+
+        g_signal_connect (panel->priv->rfkill_switch, "notify::active",
                           G_CALLBACK (cc_network_panel_notify_enable_active_cb),
                           panel);
 
