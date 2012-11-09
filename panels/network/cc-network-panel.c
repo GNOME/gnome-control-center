@@ -245,55 +245,6 @@ cc_network_panel_notify_enable_active_cb (GtkSwitch *sw,
 }
 
 static void
-panel_refresh_killswitch_visibility (CcNetworkPanel *panel)
-{
-        gboolean ret;
-        gboolean show_flight_toggle = FALSE;
-        GtkTreeIter iter;
-        GtkTreeModel *model;
-        NetObject *object_tmp;
-        NMDeviceModemCapabilities caps;
-        NMDevice *nm_device;
-
-        /* find any wireless devices in model */
-        model = GTK_TREE_MODEL (gtk_builder_get_object (panel->priv->builder,
-                                                        "liststore_devices"));
-        ret = gtk_tree_model_get_iter_first (model, &iter);
-        if (!ret)
-                return;
-        do {
-                gtk_tree_model_get (model, &iter,
-                                    PANEL_DEVICES_COLUMN_OBJECT, &object_tmp,
-                                    -1);
-                if (NET_IS_DEVICE (object_tmp)) {
-                        nm_device = net_device_get_nm_device (NET_DEVICE (object_tmp));
-                        switch (nm_device_get_device_type (nm_device)) {
-                        case NM_DEVICE_TYPE_WIFI:
-                        case NM_DEVICE_TYPE_WIMAX:
-                                show_flight_toggle = TRUE;
-                                break;
-                        case NM_DEVICE_TYPE_MODEM:
-                                {
-                                caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
-                                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
-                                    (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO))
-                                        show_flight_toggle = TRUE;
-                                }
-                                break;
-                        default:
-                                break;
-                        }
-                }
-                if (object_tmp != NULL)
-                        g_object_unref (object_tmp);
-        } while (!show_flight_toggle && gtk_tree_model_iter_next (model, &iter));
-
-        /* only show toggle if there are wireless devices */
-        gtk_widget_set_visible (panel->priv->kill_switch_header,
-                                show_flight_toggle);
-}
-
-static void
 cc_network_panel_constructed (GObject *object)
 {
         CcNetworkPanel *panel = CC_NETWORK_PANEL (object);
@@ -314,7 +265,7 @@ cc_network_panel_constructed (GObject *object)
         widget = gtk_switch_new ();
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
-        gtk_widget_set_visible (widget, TRUE);
+        gtk_widget_show_all (box);
         cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (panel)), box);
         panel->priv->kill_switch_header = g_object_ref (box);
 
@@ -323,7 +274,6 @@ cc_network_panel_constructed (GObject *object)
         g_signal_connect (GTK_SWITCH (widget), "notify::active",
                           G_CALLBACK (cc_network_panel_notify_enable_active_cb),
                           panel);
-        panel_refresh_killswitch_visibility (panel);
 }
 
 static void
@@ -857,7 +807,6 @@ device_added_cb (NMClient *client, NMDevice *device, CcNetworkPanel *panel)
 {
         g_debug ("New device added");
         panel_add_device (panel, device);
-        panel_refresh_killswitch_visibility (panel);
         panel_refresh_device_titles (panel);
 }
 
@@ -866,7 +815,6 @@ device_removed_cb (NMClient *client, NMDevice *device, CcNetworkPanel *panel)
 {
         g_debug ("Device removed");
         panel_remove_device (panel, device);
-        panel_refresh_killswitch_visibility (panel);
         panel_refresh_device_titles (panel);
 }
 
@@ -907,7 +855,6 @@ out:
         }
 
         panel_refresh_device_titles (panel);
-        panel_refresh_killswitch_visibility (panel);
 
         g_debug ("Calling handle_argv() after cold-plugging devices");
         handle_argv (panel);
