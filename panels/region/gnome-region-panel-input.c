@@ -63,7 +63,6 @@ static GtkWidget *input_chooser = NULL; /* weak pointer */
 static IBusBus *ibus = NULL;
 static GHashTable *ibus_engines = NULL;
 static GCancellable *ibus_cancellable = NULL;
-static guint shell_name_watch_id = 0;
 
 static const gchar *supported_ibus_engines[] = {
   /* Simplified Chinese */
@@ -303,11 +302,6 @@ strv_contains (const gchar * const *strv,
 static void
 clear_ibus (void)
 {
-  if (shell_name_watch_id > 0)
-    {
-      g_bus_unwatch_name (shell_name_watch_id);
-      shell_name_watch_id = 0;
-    }
   g_cancellable_cancel (ibus_cancellable);
   g_clear_object (&ibus_cancellable);
   g_clear_pointer (&ibus_engines, g_hash_table_destroy);
@@ -479,26 +473,6 @@ maybe_start_ibus (void)
                                         NULL,
                                         NULL,
                                         NULL));
-}
-
-static void
-on_shell_appeared (GDBusConnection *connection,
-                   const gchar     *name,
-                   const gchar     *name_owner,
-                   gpointer         data)
-{
-  GtkBuilder *builder = data;
-
-  if (!ibus)
-    {
-      ibus = ibus_bus_new_async ();
-      if (ibus_bus_is_connected (ibus))
-        fetch_ibus_engines (builder);
-      else
-        g_signal_connect_swapped (ibus, "connected",
-                                  G_CALLBACK (fetch_ibus_engines), builder);
-    }
-  maybe_start_ibus ();
 }
 #endif  /* HAVE_IBUS */
 
@@ -1223,14 +1197,17 @@ setup_input_tabs (GtkBuilder    *builder,
 
 #ifdef HAVE_IBUS
   ibus_init ();
-  shell_name_watch_id = g_bus_watch_name (G_BUS_TYPE_SESSION,
-                                          "org.gnome.Shell",
-                                          G_BUS_NAME_WATCHER_FLAGS_NONE,
-                                          on_shell_appeared,
-                                          NULL,
-                                          builder,
-                                          NULL);
-  g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) clear_ibus, NULL);
+  if (!ibus)
+    {
+      ibus = ibus_bus_new_async ();
+      if (ibus_bus_is_connected (ibus))
+        fetch_ibus_engines (builder);
+      else
+        g_signal_connect_swapped (ibus, "connected",
+                                  G_CALLBACK (fetch_ibus_engines), builder);
+      g_object_weak_ref (G_OBJECT (builder), (GWeakNotify) clear_ibus, NULL);
+    }
+  maybe_start_ibus ();
 #endif
 
   populate_with_active_sources (store);
