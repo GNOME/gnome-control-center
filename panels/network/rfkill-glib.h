@@ -21,45 +21,45 @@
  *
  */
 
-#ifndef __RFKILL_GLIB_H
-#define __RFKILL_GLIB_H
+#ifndef __CC_RFKILL_GLIB_H
+#define __CC_RFKILL_GLIB_H
 
 #include <glib-object.h>
 #include "rfkill.h"
 
 G_BEGIN_DECLS
 
-#define RFKILL_TYPE_GLIB (rfkill_glib_get_type())
-#define RFKILL_GLIB(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
-		RFKILL_TYPE_GLIB, RfkillGlib))
-#define RFKILL_GLIB_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST((klass), \
-		RFKILL_TYPE_GLIB, RfkillGlibClass))
+#define CC_RFKILL_TYPE_GLIB (cc_rfkill_glib_get_type())
+#define CC_RFKILL_GLIB(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), \
+		CC_RFKILL_TYPE_GLIB, CcRfkillGlib))
+#define CC_RFKILL_GLIB_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST((klass), \
+		CC_RFKILL_TYPE_GLIB, CcRfkillGlibClass))
 #define RFKILL_IS_GLIB(obj) (G_TYPE_CHECK_INSTANCE_TYPE((obj), \
-		RFKILL_TYPE_GLIB))
+		CC_RFKILL_TYPE_GLIB))
 #define RFKILL_IS_GLIB_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass), \
-		RFKILL_TYPE_GLIB))
+		CC_RFKILL_TYPE_GLIB))
 #define RFKILL_GET_GLIB_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS((obj), \
-		RFKILL_TYPE_GLIB, RfkillGlibClass))
+		CC_RFKILL_TYPE_GLIB, CcRfkillGlibClass))
 
-typedef struct RfkillGlibPrivate RfkillGlibPrivate;
+typedef struct CcRfkillGlibPrivate CcRfkillGlibPrivate;
 
-typedef struct _RfkillGlib {
+typedef struct _CcRfkillGlib {
 	GObject parent;
-	RfkillGlibPrivate *priv;
-} RfkillGlib;
+	CcRfkillGlibPrivate *priv;
+} CcRfkillGlib;
 
-typedef struct _RfkillGlibClass {
+typedef struct _CcRfkillGlibClass {
 	GObjectClass parent_class;
 
-	void (*changed) (RfkillGlib *rfkill, GList *events);
-} RfkillGlibClass;
+	void (*changed) (CcRfkillGlib *rfkill, GList *events);
+} CcRfkillGlibClass;
 
-GType rfkill_glib_get_type(void);
+GType cc_rfkill_glib_get_type(void);
 
-RfkillGlib *rfkill_glib_new (void);
-int rfkill_glib_open (RfkillGlib *rfkill);
-int rfkill_glib_send_event (RfkillGlib *rfkill, struct rfkill_event *event);
+CcRfkillGlib *cc_rfkill_glib_new (void);
+int cc_rfkill_glib_open (CcRfkillGlib *rfkill);
+int cc_rfkill_glib_send_event (CcRfkillGlib *rfkill, struct rfkill_event *event);
 
 G_END_DECLS
 
-#endif /* __RFKILL_GLIB_H */
+#endif /* __CC_RFKILL_GLIB_H */

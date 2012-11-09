@@ -72,7 +72,7 @@ struct _CcNetworkPanelPrivate
 
         /* Killswitch stuff */
         GtkWidget        *kill_switch_header;
-        RfkillGlib       *rfkill;
+        CcRfkillGlib       *rfkill;
         GtkSwitch        *rfkill_switch;
         GHashTable       *killswitches;
 
@@ -671,7 +671,7 @@ cc_network_panel_notify_enable_active_cb (GtkSwitch *sw,
 	event.op = RFKILL_OP_CHANGE_ALL;
 	event.type = RFKILL_TYPE_ALL;
 	event.soft = enable ? 1 : 0;
-	if (rfkill_glib_send_event (panel->priv->rfkill, &event) < 0)
+	if (cc_rfkill_glib_send_event (panel->priv->rfkill, &event) < 0)
 		g_warning ("Setting the killswitch %s failed", enable ? "on" : "off");
 }
 
@@ -1026,7 +1026,7 @@ on_toplevel_map (GtkWidget      *widget,
 }
 
 static void
-rfkill_changed (RfkillGlib     *rfkill,
+rfkill_changed (CcRfkillGlib     *rfkill,
 		GList          *events,
 		CcNetworkPanel *panel)
 {
@@ -1102,10 +1102,10 @@ network_add_shell_header_widgets_cb (gpointer user_data)
         panel->priv->kill_switch_header = g_object_ref (box);
 
         panel->priv->killswitches = g_hash_table_new (g_direct_hash, g_direct_equal);
-        panel->priv->rfkill = rfkill_glib_new ();
+        panel->priv->rfkill = cc_rfkill_glib_new ();
         g_signal_connect (G_OBJECT (panel->priv->rfkill), "changed",
                           G_CALLBACK (rfkill_changed), panel);
-        if (rfkill_glib_open (panel->priv->rfkill) < 0)
+        if (cc_rfkill_glib_open (panel->priv->rfkill) < 0)
                 gtk_widget_hide (box);
 
         g_signal_connect (panel->priv->rfkill_switch, "notify::active",
