@@ -1816,11 +1816,10 @@ info_panel_setup_hostname (CcInfoPanel  *self,
 
   entry = WID ("name_entry");
 
-  if (g_permission_get_allowed (permission) != FALSE)
-    {
-      g_debug ("Not allowed to change the hostname");
-      gtk_widget_set_sensitive (entry, TRUE);
-    }
+  if (g_permission_get_allowed (permission))
+    gtk_widget_set_sensitive (entry, TRUE);
+  else
+    g_debug ("Not allowed to change the hostname");
 
   self->priv->hostnamed_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                                G_DBUS_PROXY_FLAGS_NONE,
