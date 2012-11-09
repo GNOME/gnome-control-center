@@ -43,19 +43,19 @@ enum {
 
 static int signals[LAST_SIGNAL] = { 0 };
 
-#define RFKILL_GLIB_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
-				RFKILL_TYPE_GLIB, RfkillGlibPrivate))
+#define CC_RFKILL_GLIB_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), \
+				CC_RFKILL_TYPE_GLIB, CcRfkillGlibPrivate))
 
-struct RfkillGlibPrivate {
+struct CcRfkillGlibPrivate {
 	int fd;
 	GIOChannel *channel;
 	guint watch_id;
 };
 
-G_DEFINE_TYPE(RfkillGlib, rfkill_glib, G_TYPE_OBJECT)
+G_DEFINE_TYPE(CcRfkillGlib, cc_rfkill_glib, G_TYPE_OBJECT)
 
 int
-rfkill_glib_send_event (RfkillGlib *rfkill, struct rfkill_event *event)
+cc_rfkill_glib_send_event (CcRfkillGlib *rfkill, struct rfkill_event *event)
 {
 	g_return_val_if_fail (RFKILL_IS_GLIB (rfkill), -1);
 	g_return_val_if_fail (rfkill->priv->fd > 0, -1);
@@ -112,7 +112,7 @@ print_event (struct rfkill_event *event)
 }
 
 static void
-emit_changed_signal_and_free (RfkillGlib *rfkill,
+emit_changed_signal_and_free (CcRfkillGlib *rfkill,
 			      GList      *events)
 {
 	if (events == NULL)
@@ -127,7 +127,7 @@ emit_changed_signal_and_free (RfkillGlib *rfkill,
 static gboolean
 event_cb (GIOChannel   *source,
 	  GIOCondition  condition,
-	  RfkillGlib   *rfkill)
+	  CcRfkillGlib   *rfkill)
 {
 	GList *events;
 
@@ -170,19 +170,19 @@ event_cb (GIOChannel   *source,
 }
 
 static void
-rfkill_glib_init (RfkillGlib *rfkill)
+cc_rfkill_glib_init (CcRfkillGlib *rfkill)
 {
-	RfkillGlibPrivate *priv;
+	CcRfkillGlibPrivate *priv;
 
-	priv = RFKILL_GLIB_GET_PRIVATE (rfkill);
+	priv = CC_RFKILL_GLIB_GET_PRIVATE (rfkill);
 	rfkill->priv = priv;
 	rfkill->priv->fd = -1;
 }
 
 int
-rfkill_glib_open (RfkillGlib *rfkill)
+cc_rfkill_glib_open (CcRfkillGlib *rfkill)
 {
-	RfkillGlibPrivate *priv;
+	CcRfkillGlibPrivate *priv;
 	int fd;
 	int ret;
 	GList *events;
@@ -252,12 +252,12 @@ rfkill_glib_open (RfkillGlib *rfkill)
 }
 
 static void
-rfkill_glib_finalize (GObject *object)
+cc_rfkill_glib_finalize (GObject *object)
 {
-	RfkillGlib *rfkill;
-	RfkillGlibPrivate *priv;
+	CcRfkillGlib *rfkill;
+	CcRfkillGlibPrivate *priv;
 
-	rfkill = RFKILL_GLIB (object);
+	rfkill = CC_RFKILL_GLIB (object);
 	priv = rfkill->priv;
 
 	/* cleanup monitoring */
@@ -270,30 +270,30 @@ rfkill_glib_finalize (GObject *object)
 	close(priv->fd);
 	priv->fd = -1;
 
-	G_OBJECT_CLASS(rfkill_glib_parent_class)->finalize(object);
+	G_OBJECT_CLASS(cc_rfkill_glib_parent_class)->finalize(object);
 }
 
 static void
-rfkill_glib_class_init(RfkillGlibClass *klass)
+cc_rfkill_glib_class_init(CcRfkillGlibClass *klass)
 {
 	GObjectClass *object_class = (GObjectClass *) klass;
 
-	g_type_class_add_private(klass, sizeof(RfkillGlibPrivate));
-	object_class->finalize = rfkill_glib_finalize;
+	g_type_class_add_private(klass, sizeof(CcRfkillGlibPrivate));
+	object_class->finalize = cc_rfkill_glib_finalize;
 
 	signals[CHANGED] =
 		g_signal_new ("changed",
 			      G_TYPE_FROM_CLASS (klass),
 			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (RfkillGlibClass, changed),
+			      G_STRUCT_OFFSET (CcRfkillGlibClass, changed),
 			      NULL, NULL,
 			      NULL,
 			      G_TYPE_NONE, 1, G_TYPE_POINTER);
 
 }
 
-RfkillGlib *
-rfkill_glib_new (void)
+CcRfkillGlib *
+cc_rfkill_glib_new (void)
 {
-	return RFKILL_GLIB (g_object_new (RFKILL_TYPE_GLIB, NULL));
+	return CC_RFKILL_GLIB (g_object_new (CC_RFKILL_TYPE_GLIB, NULL));
 }
