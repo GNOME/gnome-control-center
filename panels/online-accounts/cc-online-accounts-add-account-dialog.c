@@ -164,6 +164,7 @@ goa_panel_add_account_dialog_realize (GtkWidget *widget)
 {
   GoaPanelAddAccountDialog *add_account = GOA_PANEL_ADD_ACCOUNT_DIALOG (widget);
   GoaPanelAddAccountDialogPrivate *priv = add_account->priv;
+  GtkWidget *button;
   GtkWindow *parent;
 
   parent = gtk_window_get_transient_for (GTK_WINDOW (add_account));
@@ -179,6 +180,9 @@ goa_panel_add_account_dialog_realize (GtkWidget *widget)
   gtk_tree_view_set_model (GTK_TREE_VIEW (priv->tree_view), GTK_TREE_MODEL (priv->list_store));
 
   GTK_WIDGET_CLASS (goa_panel_add_account_dialog_parent_class)->realize (widget);
+
+  button = gtk_dialog_get_widget_for_response (GTK_DIALOG (add_account), GTK_RESPONSE_CANCEL);
+  gtk_widget_grab_focus (button);
 }
 
 static void
