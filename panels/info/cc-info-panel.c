@@ -112,7 +112,6 @@ struct _CcInfoPanelPrivate
   GDBusProxy          *pk_transaction_proxy;
   GDBusProxy          *hostnamed_proxy;
   guint                set_hostname_timeout_source_id;
-  GSettings           *session_settings;
 
   GraphicsData  *graphics_data;
 };
@@ -444,39 +443,6 @@ get_graphics_data (void)
 }
 
 static gboolean
-get_current_is_fallback (CcInfoPanel  *self)
-{
-  GError   *error;
-  GVariant *reply;
-  GVariant *reply_str;
-  gboolean  is_fallback;
-
-  error = NULL;
-  if (!(reply = g_dbus_connection_call_sync (self->priv->session_bus,
-                                             "org.gnome.SessionManager",
-                                             "/org/gnome/SessionManager",
-                                             "org.freedesktop.DBus.Properties",
-                                             "Get",
-                                             g_variant_new ("(ss)", "org.gnome.SessionManager", "session-name"),
-                                             (GVariantType*)"(v)",
-                                             0,
-                                             -1,
-                                             NULL, &error)))
-    {
-      g_warning ("Failed to get fallback mode: %s", error->message);
-      g_clear_error (&error);
-      return FALSE;
-    }
-
-  g_variant_get (reply, "(v)", &reply_str);
-  is_fallback = g_strcmp0 ("gnome-fallback", g_variant_get_string (reply_str, NULL)) == 0;
-  g_variant_unref (reply_str);
-  g_variant_unref (reply);
-
-  return is_fallback;
-}
-
-static gboolean
 set_hostname_timeout (CcInfoPanel *self)
 {
   self->priv->set_hostname_timeout_source_id = 0;
@@ -583,7 +549,6 @@ cc_info_panel_finalize (GObject *object)
 
   g_clear_object (&priv->hostnamed_proxy);
   g_clear_object (&priv->media_settings);
-  g_clear_object (&priv->session_settings);
 
   G_OBJECT_CLASS (cc_info_panel_parent_class)->finalize (object);
 }
@@ -833,94 +798,13 @@ on_section_changed (GtkTreeSelection  *selection,
   gtk_tree_path_free (path);
 }
 
-static gboolean
-switch_fallback_get_mapping (GValue    *value,
-                             GVariant  *variant,
-                             gpointer   data)
-{
-  const char *setting;
-
-  setting = g_variant_get_string (variant, NULL);
-  g_value_set_boolean (value, strcmp (setting, "gnome") != 0);
-  return TRUE;
-}
-
-static void
-toggle_fallback_warning_label (CcInfoPanel *self,
-                               gboolean     visible)
-{
-  GtkWidget  *widget;
-  const char *text;
-
-  widget = WID ("graphics_logout_warning_label");
-
-  if (self->priv->is_fallback)
-    text = _("The next login will attempt to use the standard experience.");
-  else
-    text = _("The next login will use the fallback mode intended for unsupported graphics hardware.");
-
-  gtk_label_set_text (GTK_LABEL (widget), text);
-
-  if (visible)
-    gtk_widget_show (widget);
-  else
-    gtk_widget_hide (widget);
-}
-
-static GVariant *
-switch_fallback_set_mapping (const GValue        *value,
-                             const GVariantType  *expected_type,
-                             gpointer             data)
-{
-  CcInfoPanel *self = data;
-  gboolean     is_set;
-
-  is_set = g_value_get_boolean (value);
-  if (is_set != self->priv->is_fallback)
-    toggle_fallback_warning_label (self, TRUE);
-  else
-    toggle_fallback_warning_label (self, FALSE);
-
-  return g_variant_new_string (is_set ? "gnome-fallback" : "gnome");
-}
-
 static void
 info_panel_setup_graphics (CcInfoPanel  *self)
 {
   GtkWidget *widget;
-  GtkSwitch *sw;
-  char *text;
 
   widget = WID ("graphics_driver_label");
   gtk_label_set_markup (GTK_LABEL (widget), self->priv->graphics_data->hardware_string);
-
-  self->priv->is_fallback = get_current_is_fallback (self);
-  if (self->priv->is_fallback)
-    {
-      /* translators: The hardware is not able to run GNOME 3's
-       * shell, so we use the GNOME "Fallback" session */
-      text = g_strdup (C_("Experience", "Fallback"));
-    }
-  else
-    {
-      /* translators: The hardware is able to run GNOME 3's
-       * shell, also called "Standard" experience */
-      text = g_strdup (C_("Experience", "Standard"));
-    }
-  widget = WID ("graphics_experience_label");
-  gtk_label_set_markup (GTK_LABEL (widget), text ? text : "");
-  g_free (text);
-
-  widget = WID ("graphics_fallback_switch_box");
-  sw = GTK_SWITCH (gtk_switch_new ());
-  g_settings_bind_with_mapping (self->priv->session_settings, KEY_SESSION_NAME,
-                                sw, "active", 0,
-                                switch_fallback_get_mapping,
-                                switch_fallback_set_mapping, self, NULL);
-  gtk_box_pack_start (GTK_BOX (widget), GTK_WIDGET (sw), FALSE, FALSE, 0);
-  gtk_widget_show_all (GTK_WIDGET (sw));
-  widget = WID ("fallback-label");
-  gtk_label_set_mnemonic_widget (GTK_LABEL (widget), GTK_WIDGET (sw));
 }
 
 static void
@@ -2154,7 +2038,6 @@ cc_info_panel_init (CcInfoPanel *self)
 
   self->priv->builder = gtk_builder_new ();
 
-  self->priv->session_settings = g_settings_new (GNOME_SESSION_MANAGER_SCHEMA);
   self->priv->media_settings = g_settings_new (MEDIA_HANDLING_SCHEMA);
 
   self->priv->session_bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
