@@ -292,7 +292,8 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
 
         caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
         if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
-            (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
+            (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) ||
+            (caps & NM_DEVICE_MODEM_CAPABILITY_LTE)) {
                 device_mobile_refresh_operator_name (device_mobile);
                 device_mobile_refresh_equipment_id (device_mobile);
         }
@@ -531,7 +532,8 @@ net_device_mobile_constructed (GObject *object)
         /* Only load proxies if we have broadband modems */
         caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
         if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
-            (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
+            (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) ||
+            (caps & NM_DEVICE_MODEM_CAPABILITY_LTE)) {
                 g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
                                           G_DBUS_PROXY_FLAGS_NONE,
                                           NULL,
