@@ -40,8 +40,9 @@ static void nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile);
 
 struct _NetDeviceMobilePrivate
 {
-        GtkBuilder              *builder;
-        gboolean                 updating_device;
+        GtkBuilder *builder;
+        gboolean    updating_device;
+        GDBusProxy *gsm_proxy;
 };
 
 enum {
@@ -227,9 +228,28 @@ device_add_device_connections (NetDeviceMobile *device_mobile,
 }
 
 static void
-nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
+device_mobile_refresh_equipment_id (NetDeviceMobile *device_mobile)
 {
         const char *str;
+
+        str = g_object_get_data (G_OBJECT (device_mobile),
+                                 "ControlCenter::EquipmentIdentifier");
+        panel_set_device_widget_details (device_mobile->priv->builder, "imei", str);
+}
+
+static void
+device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
+{
+        const char *str;
+
+        str = g_object_get_data (G_OBJECT (device_mobile),
+                                 "ControlCenter::OperatorName");
+        panel_set_device_widget_details (device_mobile->priv->builder, "provider", str);
+}
+
+static void
+nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
+{
         gboolean is_connected;
         GString *status;
         GtkListStore *liststore;
@@ -273,19 +293,8 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
         caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (nm_device));
         if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
             (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
-                /* IMEI */
-                str = g_object_get_data (G_OBJECT (nm_device),
-                                         "ControlCenter::EquipmentIdentifier");
-                panel_set_device_widget_details (device_mobile->priv->builder,
-                                                 "imei",
-                                                 str);
-
-                /* operator name */
-                str = g_object_get_data (G_OBJECT (nm_device),
-                                         "ControlCenter::OperatorName");
-                panel_set_device_widget_details (device_mobile->priv->builder,
-                                                 "provider",
-                                                 str);
+                device_mobile_refresh_operator_name (device_mobile);
+                device_mobile_refresh_equipment_id (device_mobile);
         }
 
         /* add possible connections to device */
@@ -359,20 +368,20 @@ edit_connection (GtkButton *button, NetDeviceMobile *device_mobile)
 
 static void
 device_mobile_device_got_modem_manager_cb (GObject *source_object,
-                                   GAsyncResult *res,
-                                   gpointer user_data)
+                                           GAsyncResult *res,
+                                           gpointer user_data)
 {
         GError *error = NULL;
         GVariant *result = NULL;
         GDBusProxy *proxy;
-        NMDevice *device = (NMDevice *) user_data;
+        NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
 
         proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-        if (proxy == NULL) {
+        if (!proxy) {
                 g_warning ("Error creating ModemManager proxy: %s",
                            error->message);
                 g_error_free (error);
-                goto out;
+                return;
         }
 
         /* get the IMEI */
@@ -380,27 +389,47 @@ device_mobile_device_got_modem_manager_cb (GObject *source_object,
                                                    "EquipmentIdentifier");
 
         /* save */
-        g_object_set_data_full (G_OBJECT (device),
-                                "ControlCenter::EquipmentIdentifier",
-                                g_variant_dup_string (result, NULL),
-                                g_free);
-out:
-        if (result != NULL)
+        if (result) {
+                g_object_set_data_full (G_OBJECT (device_mobile),
+                                        "ControlCenter::EquipmentIdentifier",
+                                        g_variant_dup_string (result, NULL),
+                                        g_free);
                 g_variant_unref (result);
-        if (proxy != NULL)
-                g_object_unref (proxy);
+        }
+
+        device_mobile_refresh_equipment_id (device_mobile);
+        g_object_unref (proxy);
 }
 
 static void
-device_mobile_get_registration_info_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+device_mobile_save_operator_name (NetDeviceMobile *device_mobile,
+                                  const gchar *operator_name)
+{
+        gchar *operator_name_safe = NULL;
+
+        if (operator_name != NULL && operator_name[0] != '\0')
+                operator_name_safe = g_strescape (operator_name, NULL);
+
+        /* save */
+        g_object_set_data_full (G_OBJECT (device_mobile),
+                                "ControlCenter::OperatorName",
+                                operator_name_safe,
+                                g_free);
+        /* refresh */
+        device_mobile_refresh_operator_name (device_mobile);
+}
+
+static void
+device_mobile_get_registration_info_cb (GObject *source_object,
+                                        GAsyncResult *res,
+                                        gpointer user_data)
 {
         gchar *operator_code = NULL;
         GError *error = NULL;
         guint registration_status;
         GVariant *result = NULL;
         gchar *operator_name = NULL;
-        gchar *operator_name_safe = NULL;
-        NMDevice *device = (NMDevice *) user_data;
+        NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
 
         result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
         if (result == NULL) {
@@ -415,14 +444,9 @@ device_mobile_get_registration_info_cb (GObject *source_object, GAsyncResult *re
                        &registration_status,
                        &operator_code,
                        &operator_name);
-        if (operator_name != NULL && operator_name[0] != '\0')
-                operator_name_safe = g_strescape (operator_name, NULL);
 
-        /* save */
-        g_object_set_data_full (G_OBJECT (device),
-                                "ControlCenter::OperatorName",
-                                operator_name_safe,
-                                g_free);
+        /* save and refresh */
+        device_mobile_save_operator_name (device_mobile, operator_name);
 
         g_free (operator_name);
         g_free (operator_code);
@@ -430,33 +454,64 @@ device_mobile_get_registration_info_cb (GObject *source_object, GAsyncResult *re
 }
 
 static void
+device_mobile_gsm_signal_cb (GDBusProxy *proxy,
+                             gchar      *sender_name,
+                             gchar      *signal_name,
+                             GVariant   *parameters,
+                             gpointer    user_data)
+{
+        guint registration_status = 0;
+        gchar *operator_code = NULL;
+        gchar *operator_name = NULL;
+        NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
+
+        if (!g_str_equal (signal_name, "RegistrationInfo"))
+                return;
+
+        g_variant_get (parameters,
+                       "(uss)",
+                       &registration_status,
+                       &operator_code,
+                       &operator_name);
+
+        /* save and refresh */
+        device_mobile_save_operator_name (device_mobile, operator_name);
+
+        g_free (operator_code);
+        g_free (operator_name);
+}
+
+static void
 device_mobile_device_got_modem_manager_gsm_cb (GObject *source_object,
-                                       GAsyncResult *res,
-                                       gpointer user_data)
+                                               GAsyncResult *res,
+                                               gpointer user_data)
 {
         GError *error = NULL;
-        GDBusProxy *proxy;
-        NMDevice *device = (NMDevice *) user_data;
+        NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
 
-        proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
-        if (proxy == NULL) {
+        device_mobile->priv->gsm_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+        if (device_mobile->priv->gsm_proxy == NULL) {
                 g_warning ("Error creating ModemManager GSM proxy: %s\n",
                            error->message);
                 g_error_free (error);
-                goto out;
+                return;
         }
 
-        g_dbus_proxy_call (proxy,
+        /* Setup value updates */
+        g_signal_connect (device_mobile->priv->gsm_proxy,
+                          "g-signal",
+                          G_CALLBACK (device_mobile_gsm_signal_cb),
+                          device_mobile);
+
+        /* Load initial value */
+        g_dbus_proxy_call (device_mobile->priv->gsm_proxy,
                            "GetRegistrationInfo",
                            NULL,
                            G_DBUS_CALL_FLAGS_NONE,
                            -1,
                            NULL,
                            device_mobile_get_registration_info_cb,
-                           device);
-out:
-        if (proxy != NULL)
-                g_object_unref (proxy);
+                           device_mobile);
 }
 
 static void
@@ -466,29 +521,36 @@ net_device_mobile_constructed (GObject *object)
         NetDeviceMobile *device_mobile = NET_DEVICE_MOBILE (object);
         NMClient *client;
         NMDevice *device;
+        NMDeviceModemCapabilities caps;
 
         G_OBJECT_CLASS (net_device_mobile_parent_class)->constructed (object);
 
         device = net_device_get_nm_device (NET_DEVICE (device_mobile));
         cancellable = net_object_get_cancellable (NET_OBJECT (device_mobile));
-        g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
-                                  G_DBUS_PROXY_FLAGS_NONE,
-                                  NULL,
-                                  "org.freedesktop.ModemManager",
-                                  nm_device_get_udi (device),
-                                  "org.freedesktop.ModemManager.Modem",
-                                  cancellable,
-                                  device_mobile_device_got_modem_manager_cb,
-                                  device);
-        g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
-                                  G_DBUS_PROXY_FLAGS_NONE,
-                                  NULL,
-                                  "org.freedesktop.ModemManager",
-                                  nm_device_get_udi (device),
-                                  "org.freedesktop.ModemManager.Modem.Gsm.Network",
-                                  cancellable,
-                                  device_mobile_device_got_modem_manager_gsm_cb,
-                                  device);
+
+        /* Only load proxies if we have broadband modems */
+        caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
+        if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
+            (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
+                g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+                                          G_DBUS_PROXY_FLAGS_NONE,
+                                          NULL,
+                                          "org.freedesktop.ModemManager",
+                                          nm_device_get_udi (device),
+                                          "org.freedesktop.ModemManager.Modem",
+                                          cancellable,
+                                          device_mobile_device_got_modem_manager_cb,
+                                          device_mobile);
+                g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+                                          G_DBUS_PROXY_FLAGS_NONE,
+                                          NULL,
+                                          "org.freedesktop.ModemManager",
+                                          nm_device_get_udi (device),
+                                          "org.freedesktop.ModemManager.Modem.Gsm.Network",
+                                          cancellable,
+                                          device_mobile_device_got_modem_manager_gsm_cb,
+                                          device_mobile);
+        }
 
         client = net_object_get_client (NET_OBJECT (device_mobile));
         g_signal_connect (client, "notify::wwan-enabled",
@@ -498,14 +560,15 @@ net_device_mobile_constructed (GObject *object)
 }
 
 static void
-net_device_mobile_finalize (GObject *object)
+net_device_mobile_dispose (GObject *object)
 {
         NetDeviceMobile *device_mobile = NET_DEVICE_MOBILE (object);
         NetDeviceMobilePrivate *priv = device_mobile->priv;
 
-        g_object_unref (priv->builder);
+        g_clear_object (&priv->builder);
+        g_clear_object (&priv->gsm_proxy);
 
-        G_OBJECT_CLASS (net_device_mobile_parent_class)->finalize (object);
+        G_OBJECT_CLASS (net_device_mobile_parent_class)->dispose (object);
 }
 
 static void
@@ -514,7 +577,7 @@ net_device_mobile_class_init (NetDeviceMobileClass *klass)
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         NetObjectClass *parent_class = NET_OBJECT_CLASS (klass);
 
-        object_class->finalize = net_device_mobile_finalize;
+        object_class->dispose = net_device_mobile_dispose;
         object_class->constructed = net_device_mobile_constructed;
         parent_class->add_to_notebook = device_mobile_proxy_add_to_notebook;
         parent_class->refresh = device_mobile_refresh;
