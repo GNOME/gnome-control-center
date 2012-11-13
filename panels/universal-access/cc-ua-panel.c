@@ -40,7 +40,7 @@
 #define KEY_TEXT_SCALING_FACTOR "text-scaling-factor"
 #define KEY_GTK_THEME           "gtk-theme"
 #define KEY_ICON_THEME          "icon-theme"
-
+#define KEY_WM_THEME            "theme"
 
 CC_PANEL_REGISTER (CcUaPanel, cc_ua_panel)
 
@@ -349,19 +349,24 @@ set_contrast_mapping (const GValue       *value,
                       gpointer            user_data)
 {
   gboolean hc;
-  GSettings *settings = user_data;
+  CcUaPanel *self = user_data;
+  CcUaPanelPrivate *priv = self->priv;
   GVariant *ret = NULL;
 
   hc = g_value_get_boolean (value);
   if (hc)
     {
       ret = g_variant_new_string (HIGH_CONTRAST_THEME);
-      g_settings_set_string (settings, KEY_ICON_THEME, HIGH_CONTRAST_THEME);
+      g_settings_set_string (priv->interface_settings, KEY_ICON_THEME, HIGH_CONTRAST_THEME);
+
+      g_settings_set_string (priv->wm_settings, KEY_WM_THEME, HIGH_CONTRAST_THEME);
     }
   else
     {
-      g_settings_reset (settings, KEY_GTK_THEME);
-      g_settings_reset (settings, KEY_ICON_THEME);
+      g_settings_reset (priv->interface_settings, KEY_GTK_THEME);
+      g_settings_reset (priv->interface_settings, KEY_ICON_THEME);
+
+      g_settings_reset (priv->wm_settings, KEY_WM_THEME);
     }
 
   return ret;
@@ -377,7 +382,7 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                                 "active", G_SETTINGS_BIND_DEFAULT,
                                 get_contrast_mapping,
                                 set_contrast_mapping,
-                                priv->interface_settings,
+                                self,
                                 NULL);
   g_settings_bind_with_mapping (priv->interface_settings, KEY_TEXT_SCALING_FACTOR,
                                 WID (priv->builder, "seeing_large_text_switch"),
