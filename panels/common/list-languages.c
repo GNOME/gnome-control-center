@@ -14,8 +14,6 @@ int main (int argc, char **argv)
 	setlocale (LC_ALL, NULL);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
-	g_type_init ();
-
 	if (argc > 1) {
 		guint i;
 		for (i = 1; i < argc; i++) {
