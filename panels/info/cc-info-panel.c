@@ -412,8 +412,7 @@ get_graphics_data_xorg_vesa_hardware (void)
       tmp = g_match_info_fetch (match, 1);
       pretty_tmp = prettify_info (tmp);
       g_free (tmp);
-      /* Translators: VESA is an techncial acronym, don't translate it. */
-      result = g_strdup_printf (_("VESA: %s"), pretty_tmp); 
+      result = g_strdup_printf ("VESA: %s", pretty_tmp);
       g_free (pretty_tmp);
     }
   g_match_info_free (match);
