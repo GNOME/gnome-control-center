@@ -47,12 +47,10 @@ cc_language_chooser_get_language (GtkWidget *chooser)
         tv = (GtkTreeView *) g_object_get_data (G_OBJECT (chooser), "list");
         selection = gtk_tree_view_get_selection (tv);
 
-        gdk_threads_enter ();
         if (gtk_tree_selection_get_selected (selection, &model, &iter))
                 gtk_tree_model_get (model, &iter, LOCALE_COL, &lang, -1);
         else
                 lang = NULL;
-        gdk_threads_leave ();
 
         return lang;
 }
@@ -248,9 +246,7 @@ filter_languages (GtkTreeModel *model,
 		return TRUE;
 	}
 
-	gdk_threads_enter ();
 	gtk_tree_model_get (model, iter, DISPLAY_LOCALE_COL, &locale, -1);
-	gdk_threads_leave ();
 
 	l = g_utf8_casefold (locale, -1);
 

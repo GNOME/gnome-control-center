@@ -308,7 +308,7 @@ cc_common_language_add_available_languages (GtkListStore *store,
   data->regions = regions;
   data->position = 0;
 
-  return gdk_threads_add_idle (add_one_language, data);
+  return g_idle_add (add_one_language, data);
 }
 
 gchar *
