@@ -978,23 +978,20 @@ static void
 info_panel_setup_default_app (CcInfoPanel    *self,
                               DefaultAppData *data,
                               guint           left_attach,
-                              guint           right_attach,
-                              guint           top_attach,
-                              guint           bottom_attach)
+                              guint           top_attach)
 {
   GtkWidget *button;
-  GtkWidget *table;
+  GtkWidget *grid;
   GtkWidget *label;
 
-  table = WID ("default_apps_table");
+  grid = WID ("default_apps_grid");
 
   button = gtk_app_chooser_button_new (data->content_type);
   g_object_set_data (G_OBJECT (button), "cc-default-app-data", data);
 
   gtk_app_chooser_button_set_show_default_item (GTK_APP_CHOOSER_BUTTON (button), TRUE);
-  gtk_table_attach (GTK_TABLE (table), button,
-                    left_attach, right_attach,
-                    top_attach, bottom_attach, GTK_FILL, 0, 0, 0);
+  gtk_grid_attach (GTK_GRID (grid), button, left_attach, top_attach,
+                   1, 1);
   g_signal_connect (G_OBJECT (button), "changed",
                     G_CALLBACK (default_app_changed), self);
   gtk_widget_show (button);
@@ -1024,7 +1021,7 @@ info_panel_setup_default_apps (CcInfoPanel  *self)
   for (i = 0; i < G_N_ELEMENTS(preferred_app_infos); i++)
     {
       info_panel_setup_default_app (self, &preferred_app_infos[i],
-                                    1, 2, i, i+1);
+                                    1, i);
     }
 }
 
