@@ -20,6 +20,7 @@
  */
 
 #include "cc-screen-panel.h"
+#include <string.h>
 
 CC_PANEL_REGISTER (CcScreenPanel, cc_screen_panel)
 
