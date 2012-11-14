@@ -754,3 +754,25 @@ cc_search_locations_dialog_new (CcSearchPanel *self)
 
   return locations_dialog;
 }
+
+gboolean
+cc_search_locations_dialog_is_available (void)
+{
+  const gchar * const *schemas;
+  const gchar *schema;
+  gint idx;
+  gboolean found = FALSE;
+
+  schemas = g_settings_list_schemas ();
+  for (idx = 0; schemas[idx] != NULL; idx++)
+    {
+      schema = schemas[idx];
+      if (g_strcmp0 (schema, TRACKER_SCHEMA) == 0)
+        {
+          found = TRUE;
+          break;
+        }
+    }
+
+  return found;
+}

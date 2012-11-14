@@ -616,6 +616,7 @@ cc_search_panel_init (CcSearchPanel *self)
   widget = WID ("settings_button");
   g_signal_connect (widget, "clicked",
                     G_CALLBACK (settings_button_clicked), self);
+  gtk_widget_set_sensitive (widget, cc_search_locations_dialog_is_available ());
 
   self->priv->search_settings = g_settings_new ("org.gnome.desktop.search-providers");
   self->priv->sort_order = g_hash_table_new_full (g_str_hash, g_str_equal,

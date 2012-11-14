@@ -26,4 +26,6 @@
 
 GtkWidget *cc_search_locations_dialog_new (CcSearchPanel *panel);
 
+gboolean cc_search_locations_dialog_is_available (void);
+
 #endif /* _CC_SEARCH_LOCATIONS_DIALOG_H */
