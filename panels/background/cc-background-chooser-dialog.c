@@ -257,7 +257,7 @@ cc_background_chooser_dialog_init (CcBackgroundChooserDialog *chooser)
   gtk_widget_set_vexpand (sw_content, TRUE);
   gtk_container_add (GTK_CONTAINER (grid), sw_content);
   g_object_set (sw_content,
-                "width-request", 850,
+                "width-request", 860,
                 "height-request", 550,
                 NULL);
 
