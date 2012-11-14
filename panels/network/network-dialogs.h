@@ -24,23 +24,23 @@
 #include <nm-remote-settings.h>
 #include <nm-device.h>
 #include <nm-access-point.h>
-#include "cc-network-panel.h"
+#include <gtk/gtk.h>
 
-void cc_network_panel_create_wifi_network (CcNetworkPanel   *panel,
+void cc_network_panel_create_wifi_network (GtkWidget        *toplevel,
 					   NMClient         *client,
 					   NMRemoteSettings *settings);
 
-void cc_network_panel_connect_to_hidden_network (CcNetworkPanel   *panel,
+void cc_network_panel_connect_to_hidden_network (GtkWidget        *toplevel,
 						 NMClient         *client,
 						 NMRemoteSettings *settings);
 
-void cc_network_panel_connect_to_8021x_network (CcNetworkPanel   *panel,
+void cc_network_panel_connect_to_8021x_network (GtkWidget        *toplevel,
                                                 NMClient         *client,
                                                 NMRemoteSettings *settings,
                                                 NMDevice         *device,
                                                 const gchar      *arg_access_point);
 
-void cc_network_panel_connect_to_3g_network (CcNetworkPanel   *panel,
+void cc_network_panel_connect_to_3g_network (GtkWidget        *toplevel,
                                              NMClient         *client,
                                              NMRemoteSettings *settings,
                                              NMDevice         *device);

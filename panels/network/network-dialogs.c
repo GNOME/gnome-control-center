@@ -20,7 +20,6 @@
  * Copyright 2008 - 2011 Red Hat, Inc. 
  */
 
-#include <shell/cc-shell.h>
 #include <nm-utils.h>
 #include <nm-connection.h>
 #include <nm-setting-gsm.h>
@@ -210,12 +209,11 @@ done:
 }
 
 static void
-show_wireless_dialog (CcNetworkPanel   *panel,
+show_wireless_dialog (GtkWidget        *toplevel,
 		      NMClient         *client,
 		      NMRemoteSettings *settings,
 		      GtkWidget        *dialog)
 {
-        GtkWidget *toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)));
         WirelessDialogClosure *closure;
 
         g_debug ("About to parent and show a network dialog");
@@ -239,28 +237,28 @@ show_wireless_dialog (CcNetworkPanel   *panel,
 }
 
 void
-cc_network_panel_create_wifi_network (CcNetworkPanel   *panel,
+cc_network_panel_create_wifi_network (GtkWidget        *toplevel,
 				      NMClient         *client,
 				      NMRemoteSettings *settings)
 {
   if (wifi_can_create_wifi_network (client)) {
-          show_wireless_dialog (panel, client, settings,
+          show_wireless_dialog (toplevel, client, settings,
                                 nma_wifi_dialog_new_for_create (client, settings));
   }
 }
 
 void
-cc_network_panel_connect_to_hidden_network (CcNetworkPanel   *panel,
+cc_network_panel_connect_to_hidden_network (GtkWidget        *toplevel,
                                             NMClient         *client,
                                             NMRemoteSettings *settings)
 {
         g_debug ("connect to hidden wifi");
-        show_wireless_dialog (panel, client, settings,
+        show_wireless_dialog (toplevel, client, settings,
                               nma_wifi_dialog_new_for_other (client, settings));
 }
 
 void
-cc_network_panel_connect_to_8021x_network (CcNetworkPanel   *panel,
+cc_network_panel_connect_to_8021x_network (GtkWidget        *toplevel,
                                            NMClient         *client,
                                            NMRemoteSettings *settings,
                                            NMDevice         *device,
@@ -321,7 +319,7 @@ cc_network_panel_connect_to_8021x_network (CcNetworkPanel   *panel,
         nm_connection_add_setting (connection, NM_SETTING (s_8021x));
 
         dialog = nma_wifi_dialog_new (client, settings, connection, device, ap, FALSE);
-        show_wireless_dialog (panel, client, settings, dialog);
+        show_wireless_dialog (toplevel, client, settings, dialog);
 }
 
 static void
@@ -493,12 +491,11 @@ show_wizard_idle_cb (NMAMobileWizard *wizard)
 }
 
 void
-cc_network_panel_connect_to_3g_network (CcNetworkPanel   *panel,
+cc_network_panel_connect_to_3g_network (GtkWidget        *toplevel,
                                         NMClient         *client,
                                         NMRemoteSettings *settings,
                                         NMDevice         *device)
 {
-        GtkWidget *toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)));
         MobileDialogClosure *closure;
         NMAMobileWizard *wizard;
 	NMDeviceModemCapabilities caps;

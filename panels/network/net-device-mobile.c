@@ -108,6 +108,7 @@ mobile_connection_changed_cb (GtkComboBox *combo_box, NetDeviceMobile *device_mo
         NMClient *client;
         NMRemoteSettings *remote_settings;
         CcNetworkPanel *panel;
+        GtkWidget *toplevel;
 
         if (device_mobile->priv->updating_device)
                 goto out;
@@ -129,7 +130,8 @@ mobile_connection_changed_cb (GtkComboBox *combo_box, NetDeviceMobile *device_mo
                             -1);
         if (g_strcmp0 (object_path, NULL) == 0) {
                 panel = net_object_get_panel (NET_OBJECT (device_mobile));
-                cc_network_panel_connect_to_3g_network (panel,
+                toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)));
+                cc_network_panel_connect_to_3g_network (toplevel,
                                                         client,
                                                         remote_settings,
                                                         device);

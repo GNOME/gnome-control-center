@@ -517,6 +517,7 @@ handle_argv_for_device (CcNetworkPanel *panel,
 {
         CcNetworkPanelPrivate *priv = panel->priv;
         NMDeviceType type;
+        GtkWidget *toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)));
 
         if (priv->arg_operation == OPERATION_NULL)
                 return TRUE;
@@ -530,21 +531,21 @@ handle_argv_for_device (CcNetworkPanel *panel,
                 select_tree_iter (panel, iter);
 
                 if (priv->arg_operation == OPERATION_CREATE_WIFI)
-                        cc_network_panel_create_wifi_network (panel, priv->client, priv->remote_settings);
+                        cc_network_panel_create_wifi_network (toplevel, priv->client, priv->remote_settings);
                 else
-                        cc_network_panel_connect_to_hidden_network (panel, priv->client, priv->remote_settings);
+                        cc_network_panel_connect_to_hidden_network (toplevel, priv->client, priv->remote_settings);
 
                 reset_command_line_args (panel); /* done */
                 return TRUE;
         } else if (g_strcmp0 (nm_object_get_path (NM_OBJECT (device)), priv->arg_device) == 0) {
                 if (priv->arg_operation == OPERATION_CONNECT_MOBILE) {
-                        cc_network_panel_connect_to_3g_network (panel, priv->client, priv->remote_settings, device);
+                        cc_network_panel_connect_to_3g_network (toplevel, priv->client, priv->remote_settings, device);
 
                         reset_command_line_args (panel); /* done */
                         select_tree_iter (panel, iter);
                         return TRUE;
                 } else if (priv->arg_operation == OPERATION_CONNECT_8021X) {
-                        cc_network_panel_connect_to_8021x_network (panel, priv->client, priv->remote_settings, device, priv->arg_access_point);
+                        cc_network_panel_connect_to_8021x_network (toplevel, priv->client, priv->remote_settings, device, priv->arg_access_point);
                         reset_command_line_args (panel); /* done */
                         select_tree_iter (panel, iter);
                         return TRUE;

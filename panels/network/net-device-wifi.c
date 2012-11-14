@@ -985,11 +985,13 @@ connect_to_hidden_network (NetDeviceWifi *device_wifi)
         NMRemoteSettings *remote_settings;
         NMClient *client;
         CcNetworkPanel *panel;
+        GtkWidget *toplevel;
 
         remote_settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
         client = net_object_get_client (NET_OBJECT (device_wifi));
         panel = net_object_get_panel (NET_OBJECT (device_wifi));
-        cc_network_panel_connect_to_hidden_network (panel, client, remote_settings);
+        toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel)));
+        cc_network_panel_connect_to_hidden_network (toplevel, client, remote_settings);
 }
 
 static void
