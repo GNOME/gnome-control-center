@@ -74,6 +74,10 @@ generate_one_password (GtkWidget        *widget,
         gtk_entry_set_text (GTK_ENTRY (um->password_entry), pwd);
         gtk_entry_set_text (GTK_ENTRY (um->verify_entry), "");
 
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (um->show_password_button),
+                                      TRUE);
+
         g_free (pwd);
 }
 
