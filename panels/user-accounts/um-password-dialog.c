@@ -58,9 +58,6 @@ struct _UmPasswordDialog {
         gboolean   old_password_ok;
 
         PasswdHandler *passwd_handler;
-
-        gchar **generated;
-        gint next_generated;
 };
 
 static void
