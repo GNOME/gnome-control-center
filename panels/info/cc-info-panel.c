@@ -1651,7 +1651,7 @@ info_panel_set_hostname (CcInfoPanel *self)
       g_variant_unref (variant);
     }
 
-  /* Set the static hostname */
+  /* Set the static and transient hostname */
   hostname = pretty_hostname_to_static (text, FALSE);
   g_assert (hostname);
 
@@ -1664,6 +1664,22 @@ info_panel_set_hostname (CcInfoPanel *self)
   if (variant == NULL)
     {
       g_warning ("Could not set StaticHostname: %s", error->message);
+      g_error_free (error);
+    }
+  else
+    {
+      g_variant_unref (variant);
+    }
+
+  g_debug ("Setting Hostname to '%s'", hostname);
+  variant = g_dbus_proxy_call_sync (self->priv->hostnamed_proxy,
+                                    "SetHostname",
+                                    g_variant_new ("(sb)", hostname, FALSE),
+                                    G_DBUS_CALL_FLAGS_NONE,
+                                    -1, NULL, &error);
+  if (variant == NULL)
+    {
+      g_warning ("Could not set Hostname: %s", error->message);
       g_error_free (error);
     }
   else
