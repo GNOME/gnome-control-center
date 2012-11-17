@@ -34,8 +34,185 @@ struct _CcPrivacyPanelPrivate
   GtkBuilder *builder;
   GtkWidget  *list_box;
 
+  GSettings  *lockdown_settings;
   GSettings  *lock_settings;
 };
+
+static void
+update_lock_screen_sensitivity (CcPrivacyPanel *self)
+{
+  GtkWidget *widget;
+  gboolean   locked;
+
+  locked = g_settings_get_boolean (self->priv->lockdown_settings, "disable-lock-screen");
+
+  widget = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "screen_lock_dialog_grid"));
+  gtk_widget_set_sensitive (widget, !locked);
+}
+
+static void
+on_lockdown_settings_changed (GSettings      *settings,
+                              const char     *key,
+                              CcPrivacyPanel *panel)
+{
+  if (g_str_equal (key, "disable-lock-screen") == FALSE)
+    return;
+
+  update_lock_screen_sensitivity (panel);
+}
+
+static gboolean
+on_off_label_mapping_get (GValue   *value,
+                          GVariant *variant,
+                          gpointer  user_data)
+{
+  g_value_set_string (value, g_variant_get_boolean (variant) ? _("On") : _("Off"));
+
+  return TRUE;
+}
+
+static GtkWidget *
+get_on_off_label (GSettings *settings,
+                  const gchar *key)
+{
+  GtkWidget *w;
+
+  w = gtk_label_new ("");
+  g_settings_bind_with_mapping (settings, key,
+                                w, "label",
+                                G_SETTINGS_BIND_GET,
+                                on_off_label_mapping_get,
+                                NULL,
+                                NULL,
+                                NULL);
+  return w;
+}
+
+static void
+add_row (CcPrivacyPanel *self,
+         const gchar    *label,
+         const gchar    *dialog_id,
+         GtkWidget      *status)
+{
+  GtkWidget *box, *w;
+
+  gtk_widget_set_valign (self->priv->list_box, GTK_ALIGN_FILL);
+
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  g_object_set_data (G_OBJECT (box), "dialog-id", (gpointer)dialog_id);
+  gtk_widget_set_hexpand (box, TRUE);
+  gtk_container_set_border_width (GTK_CONTAINER (box), 6);
+  gtk_container_add (GTK_CONTAINER (self->priv->list_box), box);
+
+  w = gtk_label_new (label);
+  gtk_container_add (GTK_CONTAINER (box), w);
+  gtk_box_pack_end (GTK_BOX (box), status, FALSE, FALSE, 0);
+
+  gtk_widget_show_all (box);
+}
+
+static void
+lock_combo_changed_cb (GtkWidget      *widget,
+                       CcPrivacyPanel *self)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  guint delay;
+  gboolean ret;
+
+  /* no selection */
+  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
+  if (!ret)
+    return;
+
+  /* get entry */
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
+  gtk_tree_model_get (model, &iter,
+                      1, &delay,
+                      -1);
+  g_settings_set (self->priv->lock_settings, "lock-delay", "u", delay);
+}
+
+static void
+set_lock_value_for_combo (GtkComboBox    *combo_box,
+                          CcPrivacyPanel *self)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  guint value;
+  gint value_tmp, value_prev;
+  gboolean ret;
+  guint i;
+
+  /* get entry */
+  model = gtk_combo_box_get_model (combo_box);
+  ret = gtk_tree_model_get_iter_first (model, &iter);
+  if (!ret)
+    return;
+
+  value_prev = 0;
+  i = 0;
+
+  /* try to make the UI match the lock setting */
+  g_settings_get (self->priv->lock_settings, "lock-delay", "u", &value);
+  do
+    {
+      gtk_tree_model_get (model, &iter,
+                          1, &value_tmp,
+                          -1);
+      if (value == value_tmp ||
+          (value_tmp > value_prev && value < value_tmp))
+        {
+          gtk_combo_box_set_active_iter (combo_box, &iter);
+          return;
+        }
+      value_prev = value_tmp;
+      i++;
+    } while (gtk_tree_model_iter_next (model, &iter));
+
+  /* If we didn't find the setting in the list */
+  gtk_combo_box_set_active (combo_box, i - 1);
+}
+
+static void
+add_screen_lock (CcPrivacyPanel *self)
+{
+  GtkWidget *w;
+  GtkWidget *dialog;
+
+  self->priv->lock_settings = g_settings_new ("org.gnome.desktop.screensaver");
+  w = get_on_off_label (self->priv->lock_settings, "lock-enabled");
+  add_row (self, _("Screen Lock"), "screen_lock_dialog", w);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "screen_lock_done"));
+  dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "screen_lock_dialog"));
+  g_signal_connect_swapped (w, "clicked",
+                            G_CALLBACK (gtk_widget_hide), dialog);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "automatic_screen_lock"));
+  g_settings_bind (self->priv->lock_settings, "lock-enabled",
+                   w, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "lock_after_label"));
+  g_settings_bind (self->priv->lock_settings, "lock-enabled",
+                   w, "sensitive",
+                   G_SETTINGS_BIND_GET);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "lock_after_combo"));
+  g_settings_bind (self->priv->lock_settings, "lock-enabled",
+                   w, "sensitive",
+                   G_SETTINGS_BIND_GET);
+
+  set_lock_value_for_combo (GTK_COMBO_BOX (w), self);
+  g_signal_connect (w, "changed",
+                    G_CALLBACK (lock_combo_changed_cb), self);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "show_notifications"));
+  g_settings_bind (self->priv->lock_settings, "show-notifications",
+                   w, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+}
 
 static void
 cc_privacy_panel_finalize (GObject *object)
@@ -43,6 +220,7 @@ cc_privacy_panel_finalize (GObject *object)
   CcPrivacyPanelPrivate *priv = CC_PRIVACY_PANEL (object)->priv;
 
   g_clear_object (&priv->builder);
+  g_clear_object (&priv->lockdown_settings);
   g_clear_object (&priv->lock_settings);
 
   G_OBJECT_CLASS (cc_privacy_panel_parent_class)->finalize (object);
@@ -121,6 +299,13 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   egg_list_box_set_separator_funcs (EGG_LIST_BOX (widget),
                                     update_separator_func,
                                     NULL, NULL);
+
+  add_screen_lock (self);
+
+  self->priv->lockdown_settings = g_settings_new ("org.gnome.desktop.lockdown");
+  g_signal_connect (self->priv->lockdown_settings, "changed",
+                    G_CALLBACK (on_lockdown_settings_changed), self);
+  update_lock_screen_sensitivity (self);
 
   widget = WID ("privacy_vbox");
   gtk_widget_reparent (widget, (GtkWidget *) self);
