@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.7.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-05 18:22+0100\n"
-"PO-Revision-Date: 2012-11-05 18:28+0100\n"
+"POT-Creation-Date: 2012-11-17 12:13+0100\n"
+"PO-Revision-Date: 2012-11-17 16:04+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -133,79 +133,88 @@ msgstr "Fjern enhet"
 msgid "Connection"
 msgstr "Tilkobling"
 
-#: ../panels/bluetooth/bluetooth.ui.h:4
+#: ../panels/bluetooth/bluetooth.ui.h:4 ../panels/printers/printers.ui.h:14
+msgid "page 1"
+msgstr "side 1"
+
+#: ../panels/bluetooth/bluetooth.ui.h:5 ../panels/printers/printers.ui.h:16
+msgid "page 2"
+msgstr "side 2"
+
+#: ../panels/bluetooth/bluetooth.ui.h:6
 msgid "Paired"
 msgstr "Koblet"
 
-#: ../panels/bluetooth/bluetooth.ui.h:5 ../panels/wacom/cc-wacom-page.c:756
+#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:756
 msgid "Type"
 msgstr "Type:"
 
-#: ../panels/bluetooth/bluetooth.ui.h:6
+#: ../panels/bluetooth/bluetooth.ui.h:8
 msgid "Address"
 msgstr "Adresse"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7
+#: ../panels/bluetooth/bluetooth.ui.h:9
 msgid "Mouse and Touchpad Settings"
 msgstr "Innstillinger for mus og pekeplate"
 
-#: ../panels/bluetooth/bluetooth.ui.h:8 ../panels/universal-access/uap.ui.h:38
+#: ../panels/bluetooth/bluetooth.ui.h:10
+#: ../panels/universal-access/uap.ui.h:38
 msgid "Sound Settings"
 msgstr "Innstillinger for lyd"
 
-#: ../panels/bluetooth/bluetooth.ui.h:9
+#: ../panels/bluetooth/bluetooth.ui.h:11
 msgid "Keyboard Settings"
 msgstr "Innstillinger for tastatur"
 
-#: ../panels/bluetooth/bluetooth.ui.h:10
+#: ../panels/bluetooth/bluetooth.ui.h:12
 msgid "Send Files..."
 msgstr "Send filer …"
 
-#: ../panels/bluetooth/bluetooth.ui.h:11
+#: ../panels/bluetooth/bluetooth.ui.h:13
 msgid "Browse Files..."
 msgstr "Bla gjennom filer …"
 
 #. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
-#: ../panels/bluetooth/bluetooth.ui.h:13
+#: ../panels/bluetooth/bluetooth.ui.h:15
 msgctxt "Power"
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:290
+#: ../panels/bluetooth/cc-bluetooth-panel.c:337
 msgid "Yes"
 msgstr "Ja"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:290
+#: ../panels/bluetooth/cc-bluetooth-panel.c:337
 msgid "No"
 msgstr "Nei"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:405
+#: ../panels/bluetooth/cc-bluetooth-panel.c:451
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth er slått av"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:410
+#: ../panels/bluetooth/cc-bluetooth-panel.c:456
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Bluetooth er slått av med maskinvarebryter"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:414
+#: ../panels/bluetooth/cc-bluetooth-panel.c:460
 msgid "No Bluetooth adapters found"
 msgstr "Ingen Bluetooth-kort funnet"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:547
+#: ../panels/bluetooth/cc-bluetooth-panel.c:587
 msgid "Visibility"
 msgstr "Synlighet"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:551
+#: ../panels/bluetooth/cc-bluetooth-panel.c:591
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Synlighet for «%s»"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:595
+#: ../panels/bluetooth/cc-bluetooth-panel.c:635
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Fjern «%s» fra listen med enheter?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:597
+#: ../panels/bluetooth/cc-bluetooth-panel.c:637
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
@@ -584,11 +593,11 @@ msgstr "Spania"
 msgid "China"
 msgstr "Kina"
 
-#: ../panels/common/cc-language-chooser.c:122
+#: ../panels/common/cc-language-chooser.c:120
 msgid "Other..."
 msgstr "Annet …"
 
-#: ../panels/common/cc-language-chooser.c:296
+#: ../panels/common/cc-language-chooser.c:292
 msgid "Select a region"
 msgstr "Velg en region"
 
@@ -853,87 +862,55 @@ msgstr "Bytt oppløsing og posisjon for skjermer og prosjektorer"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Panel;Prosjektor;xrandr;Skjerm;Oppløsning;Oppdater;"
 
-#. Translators: VESA is an techncial acronym, don't translate it.
-#: ../panels/info/cc-info-panel.c:413
-#, c-format
-msgid "VESA: %s"
-msgstr "VESA: %s"
-
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:437 ../panels/network/panel-common.c:120
+#: ../panels/info/cc-info-panel.c:439 ../panels/network/panel-common.c:120
 msgid "Unknown"
 msgstr "Ukjent"
 
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:575
+#: ../panels/info/cc-info-panel.c:580
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
-#: ../panels/info/cc-info-panel.c:734
+#: ../panels/info/cc-info-panel.c:739
 msgid "Unknown model"
 msgstr "Ukjent modell"
 
-#: ../panels/info/cc-info-panel.c:817
-msgid "The next login will attempt to use the standard experience."
-msgstr "Neste pålogging vil forsøke å bruke standard brukeropplevelse."
-
-#: ../panels/info/cc-info-panel.c:819
-msgid ""
-"The next login will use the fallback mode intended for unsupported graphics "
-"hardware."
-msgstr ""
-"Neste pålogging vil bruke reserveløsning ment for grafikkmaskinvare som ikke "
-"er støttet."
-
-#. translators: The hardware is not able to run GNOME 3's
-#. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:861
-msgctxt "Experience"
-msgid "Fallback"
-msgstr "Reserveløsning"
-
-#. translators: The hardware is able to run GNOME 3's
-#. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:867
-msgctxt "Experience"
-msgid "Standard"
-msgstr "Standard"
-
-#: ../panels/info/cc-info-panel.c:1329
+#: ../panels/info/cc-info-panel.c:1250
 msgid "Ask what to do"
 msgstr "Spør hvs som skal gjøres"
 
-#: ../panels/info/cc-info-panel.c:1333
+#: ../panels/info/cc-info-panel.c:1254
 msgid "Do nothing"
 msgstr "Ikke gjør noe"
 
-#: ../panels/info/cc-info-panel.c:1337
+#: ../panels/info/cc-info-panel.c:1258
 msgid "Open folder"
 msgstr "Åpne mappe"
 
-#: ../panels/info/cc-info-panel.c:1428
+#: ../panels/info/cc-info-panel.c:1349
 msgid "Other Media"
 msgstr "Annet medie"
 
-#: ../panels/info/cc-info-panel.c:1459
+#: ../panels/info/cc-info-panel.c:1380
 msgid "Select an application for audio CDs"
 msgstr "Velg et program for lyd-CDer"
 
-#: ../panels/info/cc-info-panel.c:1460
+#: ../panels/info/cc-info-panel.c:1381
 msgid "Select an application for video DVDs"
 msgstr "Velg et program for video-DVDer"
 
-#: ../panels/info/cc-info-panel.c:1461
+#: ../panels/info/cc-info-panel.c:1382
 msgid "Select an application to run when a music player is connected"
 msgstr "Velg et program som skal kjøres når en musikkavspiller kobles til"
 
-#: ../panels/info/cc-info-panel.c:1462
+#: ../panels/info/cc-info-panel.c:1383
 msgid "Select an application to run when a camera is connected"
 msgstr "Velg et program som skal kjøres når et kamera kobles til"
 
-#: ../panels/info/cc-info-panel.c:1463
+#: ../panels/info/cc-info-panel.c:1384
 msgid "Select an application for software CDs"
 msgstr "Velg et program for programvare-CDer"
 
@@ -942,93 +919,93 @@ msgstr "Velg et program for programvare-CDer"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1475
+#: ../panels/info/cc-info-panel.c:1396
 msgid "audio DVD"
 msgstr "Lyd-DVD"
 
-#: ../panels/info/cc-info-panel.c:1476
+#: ../panels/info/cc-info-panel.c:1397
 msgid "blank Blu-ray disc"
 msgstr "Tom Blu-ray-plate"
 
-#: ../panels/info/cc-info-panel.c:1477
+#: ../panels/info/cc-info-panel.c:1398
 msgid "blank CD disc"
 msgstr "Tom CD-plate"
 
-#: ../panels/info/cc-info-panel.c:1478
+#: ../panels/info/cc-info-panel.c:1399
 msgid "blank DVD disc"
 msgstr "Tom DVD-plate"
 
-#: ../panels/info/cc-info-panel.c:1479
+#: ../panels/info/cc-info-panel.c:1400
 msgid "blank HD DVD disc"
 msgstr "tom HD-DVD plate"
 
-#: ../panels/info/cc-info-panel.c:1480
+#: ../panels/info/cc-info-panel.c:1401
 msgid "Blu-ray video disc"
 msgstr "Blu-ray videoplate"
 
-#: ../panels/info/cc-info-panel.c:1481
+#: ../panels/info/cc-info-panel.c:1402
 msgid "e-book reader"
 msgstr "E-bokleser"
 
-#: ../panels/info/cc-info-panel.c:1482
+#: ../panels/info/cc-info-panel.c:1403
 msgid "HD DVD video disc"
 msgstr "HD-DVD-videoplate"
 
-#: ../panels/info/cc-info-panel.c:1483
+#: ../panels/info/cc-info-panel.c:1404
 msgid "Picture CD"
 msgstr "Bilde-CD"
 
-#: ../panels/info/cc-info-panel.c:1484
+#: ../panels/info/cc-info-panel.c:1405
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: ../panels/info/cc-info-panel.c:1485
+#: ../panels/info/cc-info-panel.c:1406
 msgid "Video CD"
 msgstr "Video-CD"
 
-#: ../panels/info/cc-info-panel.c:1486
+#: ../panels/info/cc-info-panel.c:1407
 msgid "Windows software"
 msgstr "Windows programvare"
 
-#: ../panels/info/cc-info-panel.c:1487
+#: ../panels/info/cc-info-panel.c:1408
 msgid "Software"
 msgstr "Programvare"
 
-#: ../panels/info/cc-info-panel.c:1610
+#: ../panels/info/cc-info-panel.c:1531
 #: ../panels/keyboard/keyboard-shortcuts.c:1692
 msgid "Section"
 msgstr "Seksjon"
 
-#: ../panels/info/cc-info-panel.c:1619 ../panels/info/info.ui.h:12
+#: ../panels/info/cc-info-panel.c:1540 ../panels/info/info.ui.h:12
 msgid "Overview"
 msgstr "Oversikt"
 
-#: ../panels/info/cc-info-panel.c:1625 ../panels/info/info.ui.h:19
+#: ../panels/info/cc-info-panel.c:1546 ../panels/info/info.ui.h:19
 msgid "Default Applications"
 msgstr "Forvalgte programmer"
 
-#: ../panels/info/cc-info-panel.c:1630 ../panels/info/info.ui.h:27
+#: ../panels/info/cc-info-panel.c:1551 ../panels/info/info.ui.h:27
 msgid "Removable Media"
 msgstr "Avtagbare medier"
 
-#: ../panels/info/cc-info-panel.c:1635 ../panels/info/info.ui.h:10
+#: ../panels/info/cc-info-panel.c:1556 ../panels/info/info.ui.h:10
 msgid "Graphics"
 msgstr "Grafikk"
 
-#: ../panels/info/cc-info-panel.c:1837
+#: ../panels/info/cc-info-panel.c:1772
 #, c-format
 msgid "Version %s"
 msgstr "Versjon %s"
 
-#: ../panels/info/cc-info-panel.c:1887
+#: ../panels/info/cc-info-panel.c:1822
 msgid "Install Updates"
 msgstr "Installer oppdateringer"
 
-#: ../panels/info/cc-info-panel.c:1891
+#: ../panels/info/cc-info-panel.c:1826
 msgid "System Up-To-Date"
 msgstr "Systemet er oppdatert"
 
-#: ../panels/info/cc-info-panel.c:1895
+#: ../panels/info/cc-info-panel.c:1830
 msgid "Checking for Updates"
 msgstr "Ser etter oppdateringer"
 
@@ -1145,15 +1122,6 @@ msgstr "_Aldri spør eller start programmer når et medie settes inn"
 #: ../panels/info/info.ui.h:28
 msgid "Driver"
 msgstr "Driver"
-
-#: ../panels/info/info.ui.h:29
-msgid "Experience"
-msgstr "Opplevelse"
-
-#. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
-#: ../panels/info/info.ui.h:31
-msgid "Forced _Fallback Mode"
-msgstr "Tvungen _bruk av reserveløsning"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:1
 msgid "Sound and Media"
@@ -1492,7 +1460,7 @@ msgstr ""
 msgid "_Reassign"
 msgstr "_Omfordel"
 
-#: ../panels/mouse/cc-mouse-panel.c:160
+#: ../panels/mouse/cc-mouse-panel.c:147
 msgid "_Test Your Settings"
 msgstr "_Test dine innstillinger"
 
@@ -1610,27 +1578,27 @@ msgstr "Dobbeltklikk, sekundærknapp"
 msgid "Single click, secondary button"
 msgstr "Enkeltklikk, sekundærknapp"
 
-#: ../panels/network/cc-network-panel.c:767
+#. TRANSLATORS: this is to disable the radio hardware in the
+#. * network panel
+#: ../panels/network/cc-network-panel.c:332
+msgid "Air_plane Mode"
+msgstr "_Flymodus"
+
+#: ../panels/network/cc-network-panel.c:834
 msgid "Network proxy"
 msgstr "Nettverksproxy"
 
-#: ../panels/network/cc-network-panel.c:957 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1010 ../panels/network/net-vpn.c:278
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1021
+#: ../panels/network/cc-network-panel.c:1074
 msgid "The system network services are not compatible with this version."
 msgstr ""
 "Nettverkstjenesten for dette systemet er ikke kompatibelt med denne "
 "versjonen."
-
-#. TRANSLATORS: this is to disable the radio hardware in the
-#. * network panel
-#: ../panels/network/cc-network-panel.c:1156
-msgid "Air_plane Mode"
-msgstr "_Flymodus"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 #: ../panels/network/network-mobile.ui.h:7
@@ -2302,7 +2270,7 @@ msgid "Connection dependency failed"
 msgstr "Tilkoblingsavhengighet feilet"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:249
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:253
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Legg til konto"
@@ -3168,17 +3136,9 @@ msgstr "Vi_s"
 msgid "Model"
 msgstr "Modell"
 
-#: ../panels/printers/printers.ui.h:14
-msgid "page 1"
-msgstr "side 1"
-
 #: ../panels/printers/printers.ui.h:15
 msgid "label"
 msgstr "etikett"
-
-#: ../panels/printers/printers.ui.h:16
-msgid "page 2"
-msgstr "side 2"
 
 #: ../panels/printers/printers.ui.h:17
 msgid "Setting new driver..."
@@ -3461,33 +3421,13 @@ msgstr "Vis varslinger _når låst"
 msgid "Lock"
 msgstr "Lås"
 
-#: ../panels/sound/applet-main.c:49
-msgid "Enable debugging code"
-msgstr "Aktiver feilsøkingsmodus"
-
-#: ../panels/sound/applet-main.c:50
-msgid "Version of this application"
-msgstr "Versjon av dette programmet"
-
-#: ../panels/sound/applet-main.c:62
-msgid " — GNOME Volume Control Applet"
-msgstr " – Panelprogram for volumkontroll"
-
-#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:1
-msgid "Volume Control"
-msgstr "Volumkontroll"
-
-#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:2
-msgid "Show desktop volume control"
-msgstr "Vis volumkontroll for skrivebordet"
-
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:1
 msgid "Sound"
 msgstr "Lyd"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
-msgid "Change sound volume and sound events"
-msgstr "Endre lydvolum og lydeffekter"
+msgid "Change sound volume and event sounds"
+msgstr "Endre lydvolum og lyder for hendelser"
 
 #. Translators: those are keywords for the sound control-center panel
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
@@ -3517,22 +3457,6 @@ msgstr "Glass"
 #: ../panels/sound/data/sounds/gnome-sounds-default.xml.in.in.h:12
 msgid "Sonar"
 msgstr "Sonar"
-
-#: ../panels/sound/gvc-applet.c:270 ../panels/sound/gvc-mixer-dialog.c:1656
-msgid "Output"
-msgstr "Utgang"
-
-#: ../panels/sound/gvc-applet.c:272
-msgid "Sound Output Volume"
-msgstr "Utgangsvolum for lyd"
-
-#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1697
-msgid "Input"
-msgstr "Inngang"
-
-#: ../panels/sound/gvc-applet.c:278
-msgid "Microphone Volume"
-msgstr "Volum for mikrofon"
 
 #: ../panels/sound/gvc-balance-bar.c:111
 msgctxt "balance"
@@ -3635,6 +3559,10 @@ msgstr "Test av høyttaler for %s"
 msgid "_Output volume:"
 msgstr "_Utgangsvolum:"
 
+#: ../panels/sound/gvc-mixer-dialog.c:1656
+msgid "Output"
+msgstr "Utgang"
+
 #: ../panels/sound/gvc-mixer-dialog.c:1661
 msgid "C_hoose a device for sound output:"
 msgstr "_Velg en enhet som lydutgang:"
@@ -3642,6 +3570,10 @@ msgstr "_Velg en enhet som lydutgang:"
 #: ../panels/sound/gvc-mixer-dialog.c:1686
 msgid "Settings for the selected device:"
 msgstr "Innstillinger for valgt enhet:"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1697
+msgid "Input"
+msgstr "Inngang"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1704
 msgid "_Input volume:"
@@ -3712,29 +3644,12 @@ msgstr "Test"
 msgid "Subwoofer"
 msgstr "Basselement"
 
-#: ../panels/sound/gvc-stream-status-icon.c:236
-#, c-format
-msgid "Failed to start Sound Preferences: %s"
-msgstr "Klarte ikke å starte brukervalg for lyd: %s"
-
-#: ../panels/sound/gvc-stream-status-icon.c:262
-msgid "_Mute"
-msgstr "_Demp"
-
-#: ../panels/sound/gvc-stream-status-icon.c:271
-msgid "_Sound Preferences"
-msgstr "Brukervalg for _lyd"
-
-#: ../panels/sound/gvc-stream-status-icon.c:416
-msgid "Muted"
-msgstr "Dempet"
-
 #: ../panels/sound/sound-theme-file-utils.c:292
 msgid "Custom"
 msgstr "Egendefinert"
 
-#: ../panels/universal-access/cc-ua-panel.c:286
-#: ../panels/universal-access/cc-ua-panel.c:292
+#: ../panels/universal-access/cc-ua-panel.c:279
+#: ../panels/universal-access/cc-ua-panel.c:285
 msgid "No shortcut set"
 msgstr "Ingen snarvei satt"
 
@@ -4361,8 +4276,8 @@ msgstr ""
 "fingeravtrykkleser."
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
-msgid "User Accounts"
-msgstr "Brukerkontoer"
+msgid "Users"
+msgstr "Brukere"
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:2
 msgid "Add or remove users"
@@ -5258,8 +5173,8 @@ msgid "Panel to display"
 msgstr "Panel som skal vises"
 
 #: ../shell/control-center.c:85
-msgid "- System Settings"
-msgstr "- Systeminnstillinger"
+msgid "- Settings"
+msgstr "- Innstillinger"
 
 #: ../shell/control-center.c:93
 #, c-format
@@ -5284,8 +5199,8 @@ msgid "Control Center"
 msgstr "Kontrollsenter"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:1
-msgid "System Settings"
-msgstr "Systeminnstillinger"
+msgid "Settings"
+msgstr "Innstillinger"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
