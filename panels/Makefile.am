@@ -13,7 +13,8 @@ SUBDIRS= \
 	keyboard \
 	universal-access \
 	user-accounts \
-	datetime
+	datetime \
+	privacy
 
 if BUILD_WACOM
 SUBDIRS += wacom
