@@ -14,7 +14,8 @@ SUBDIRS= \
 	universal-access \
 	user-accounts \
 	datetime \
-	search
+	search \
+	privacy
 
 if BUILD_WACOM
 SUBDIRS += wacom

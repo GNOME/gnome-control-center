@@ -143,6 +143,7 @@ PKG_CHECK_MODULES(POWER_PANEL, $COMMON_MODULES upower-glib >= 0.9.1
 PKG_CHECK_MODULES(COLOR_PANEL, $COMMON_MODULES colord >= 0.1.8)
 PKG_CHECK_MODULES(PRINTERS_PANEL, $COMMON_MODULES
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
+PKG_CHECK_MODULES(PRIVACY_PANEL, $COMMON_MODULES egg-list-box)
 PKG_CHECK_MODULES(REGION_PANEL, $COMMON_MODULES
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
                   gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
@@ -487,6 +488,8 @@ panels/color/icons/256x256/Makefile
 panels/color/icons/scalable/Makefile
 panels/printers/Makefile
 panels/printers/gnome-printers-panel.desktop.in
+panels/privacy/Makefile
+panels/privacy/gnome-privacy-panel.desktop.in
 panels/network/Makefile
 panels/network/gnome-network-panel.desktop.in
 panels/universal-access/Makefile
