@@ -36,6 +36,8 @@ struct _CcPrivacyPanelPrivate
 
   GSettings  *lockdown_settings;
   GSettings  *lock_settings;
+  GSettings  *shell_settings;
+  GSettings  *privacy_settings;
 };
 
 static void
@@ -82,6 +84,33 @@ get_on_off_label (GSettings *settings,
                                 w, "label",
                                 G_SETTINGS_BIND_GET,
                                 on_off_label_mapping_get,
+                                NULL,
+                                NULL,
+                                NULL);
+  return w;
+}
+
+static gboolean
+visible_label_mapping_get (GValue   *value,
+                           GVariant *variant,
+                           gpointer  user_data)
+{
+  g_value_set_string (value, g_variant_get_boolean (variant) ? _("Hidden") : _("Visible"));
+
+  return TRUE;
+}
+
+static GtkWidget *
+get_visible_label (GSettings *settings,
+                   const gchar *key)
+{
+  GtkWidget *w;
+
+  w = gtk_label_new ("");
+  g_settings_bind_with_mapping (settings, key,
+                                w, "label",
+                                G_SETTINGS_BIND_GET,
+                                visible_label_mapping_get,
                                 NULL,
                                 NULL,
                                 NULL);
@@ -180,7 +209,6 @@ add_screen_lock (CcPrivacyPanel *self)
   GtkWidget *w;
   GtkWidget *dialog;
 
-  self->priv->lock_settings = g_settings_new ("org.gnome.desktop.screensaver");
   w = get_on_off_label (self->priv->lock_settings, "lock-enabled");
   add_row (self, _("Screen Lock"), "screen_lock_dialog", w);
 
@@ -215,6 +243,67 @@ add_screen_lock (CcPrivacyPanel *self)
 }
 
 static void
+stealth_mode_changed (GSettings   *settings,
+                      const gchar *key,
+                      gpointer     data)
+{
+  CcPrivacyPanel *self = data;
+  gboolean stealth_mode;
+  GtkWidget *w;
+
+  stealth_mode = g_settings_get_boolean (settings, "hide-identity");
+
+  if (stealth_mode)
+    {
+      g_settings_set_boolean (self->priv->lock_settings, "show-full-name", FALSE);
+      g_settings_set_boolean (self->priv->shell_settings, "show-full-name", FALSE);
+    }
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "full_name_top_bar"));
+  gtk_widget_set_sensitive (w, !stealth_mode);
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "full_name_lock_screen"));
+  gtk_widget_set_sensitive (w, !stealth_mode);
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "full_name_top_bar_label"));
+  gtk_widget_set_sensitive (w, !stealth_mode);
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "full_name_lock_screen_label"));
+  gtk_widget_set_sensitive (w, !stealth_mode);
+}
+
+static void
+add_name_visibility (CcPrivacyPanel *self)
+{
+  GtkWidget *w;
+  GtkWidget *dialog;
+
+  w = get_visible_label (self->priv->privacy_settings, "hide-identity");
+  add_row (self, _("Name & Visibility"), "name_dialog", w);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "name_done"));
+  dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "name_dialog"));
+  g_signal_connect_swapped (w, "clicked",
+                            G_CALLBACK (gtk_widget_hide), dialog);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "stealth_mode"));
+  g_settings_bind (self->priv->privacy_settings, "hide-identity",
+                   w, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "full_name_top_bar"));
+  g_settings_bind (self->priv->shell_settings, "show-full-name",
+                   w, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "full_name_lock_screen"));
+  g_settings_bind (self->priv->lock_settings, "show-full-name",
+                   w, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  g_signal_connect (self->priv->privacy_settings, "changed::hide-identity",
+                    G_CALLBACK (stealth_mode_changed), self);
+
+}
+
+static void
 cc_privacy_panel_finalize (GObject *object)
 {
   CcPrivacyPanelPrivate *priv = CC_PRIVACY_PANEL (object)->priv;
@@ -222,6 +311,8 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_object (&priv->builder);
   g_clear_object (&priv->lockdown_settings);
   g_clear_object (&priv->lock_settings);
+  g_clear_object (&priv->shell_settings);
+  g_clear_object (&priv->privacy_settings);
 
   G_OBJECT_CLASS (cc_privacy_panel_parent_class)->finalize (object);
 }
@@ -300,9 +391,14 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
                                     update_separator_func,
                                     NULL, NULL);
 
-  add_screen_lock (self);
-
   self->priv->lockdown_settings = g_settings_new ("org.gnome.desktop.lockdown");
+  self->priv->lock_settings = g_settings_new ("org.gnome.desktop.screensaver");
+  self->priv->shell_settings = g_settings_new ("org.gnome.shell");
+  self->priv->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
+
+  add_screen_lock (self);
+  add_name_visibility (self);
+
   g_signal_connect (self->priv->lockdown_settings, "changed",
                     G_CALLBACK (on_lockdown_settings_changed), self);
   update_lock_screen_sensitivity (self);
