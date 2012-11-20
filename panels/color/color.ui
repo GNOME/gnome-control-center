@@ -1,125 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkDialog" id="dialog_assign">
-    <property name="can_focus">False</property>
-    <property name="border_width">5</property>
-    <property name="title"> </property>
-    <property name="resizable">False</property>
-    <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="destroy_with_parent">True</property>
-    <property name="icon_name">gnome-color-manager</property>
-    <property name="type_hint">dialog</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="skip_pager_hint">True</property>
-    <property name="transient_for">dialog_prefs</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="dialog-vbox3">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action_area3">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <object class="GtkButton" id="button_assign_cancel">
-                <property name="label">gtk-cancel</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
-                <property name="use_stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="button_assign_ok">
-                <property name="label">gtk-add</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
-                <property name="use_stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkVBox" id="vbox5">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="spacing">9</property>
-            <child>
-              <object class="GtkHBox" id="hbox29">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <child>
-                  <object class="GtkLabel" id="label_assign_title">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="label" translatable="yes" comments="Profiles that can be added to the device">Available Profiles</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBox" id="combobox_profile">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_right">5</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-    <action-widgets>
-      <action-widget response="0">button_assign_cancel</action-widget>
-      <action-widget response="0">button_assign_ok</action-widget>
-    </action-widgets>
-  </object>
   <object class="GtkWindow" id="dialog_prefs">
     <property name="can_focus">False</property>
     <property name="border_width">12</property>
@@ -171,7 +52,6 @@
                 <property name="receives_default">True</property>
                 <property name="has_tooltip">True</property>
                 <property name="tooltip_text" translatable="yes">Learn more about color management</property>
-                <property name="use_action_appearance">False</property>
                 <property name="relief">none</property>
                 <property name="xalign">0.50999999046325684</property>
                 <property name="uri">help:gnome-help/color-whyimportant</property>
@@ -224,7 +104,6 @@
                   <object class="GtkToolItem" id="left_button_group">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="use_action_appearance">False</property>
                     <child>
                       <object class="GtkBox" id="left_button_group_box">
                         <property name="visible">True</property>
@@ -233,10 +112,10 @@
                           <object class="GtkButton" id="toolbutton_device_add">
                             <property name="label" translatable="yes">Add device</property>
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="receives_default">False</property>
                             <property name="has_tooltip">True</property>
                             <property name="tooltip_text" translatable="yes">Add a virtual device</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
@@ -249,10 +128,10 @@
                           <object class="GtkButton" id="toolbutton_device_remove">
                             <property name="label" translatable="yes">Delete device</property>
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="receives_default">False</property>
                             <property name="has_tooltip">True</property>
                             <property name="tooltip_text" translatable="yes">Remove a device</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
@@ -264,10 +143,10 @@
                         <child>
                           <object class="GtkButton" id="toolbutton_device_default">
                             <property name="label" translatable="yes">Set for all users</property>
+                            <property name="can_focus">False</property>
                             <property name="receives_default">False</property>
                             <property name="has_tooltip">True</property>
                             <property name="tooltip_text" translatable="yes">Set this profile for all users on this computer</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
@@ -287,7 +166,6 @@
                   <object class="GtkToolItem" id="right_button_group">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="use_action_appearance">False</property>
                     <child>
                       <object class="GtkBox" id="right_button_group_box">
                         <property name="visible">True</property>
@@ -296,8 +174,8 @@
                           <object class="GtkButton" id="toolbutton_profile_add">
                             <property name="label" translatable="yes">Add profile</property>
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="receives_default">False</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
@@ -309,10 +187,10 @@
                         <child>
                           <object class="GtkButton" id="toolbutton_device_calibrate">
                             <property name="label" translatable="yes">Calibrate…</property>
+                            <property name="can_focus">False</property>
                             <property name="receives_default">False</property>
                             <property name="has_tooltip">True</property>
                             <property name="tooltip_text" translatable="yes">Calibrate the device</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
@@ -324,8 +202,8 @@
                         <child>
                           <object class="GtkButton" id="toolbutton_profile_remove">
                             <property name="label" translatable="yes">Remove profile</property>
+                            <property name="can_focus">False</property>
                             <property name="receives_default">False</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
@@ -337,8 +215,8 @@
                         <child>
                           <object class="GtkButton" id="toolbutton_profile_view">
                             <property name="label" translatable="yes">View details</property>
+                            <property name="can_focus">False</property>
                             <property name="receives_default">False</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="use_underline">True</property>
                           </object>
                           <packing>
@@ -371,6 +249,115 @@
       </object>
     </child>
   </object>
+  <object class="GtkDialog" id="dialog_assign">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="title"> Add Profile</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="icon_name">gnome-color-manager</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="skip_pager_hint">True</property>
+    <property name="transient_for">dialog_prefs</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="dialog-vbox3">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="dialog-action_area3">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="button_assign_import">
+                <property name="label" translatable="yes">Import File...</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_assign_cancel">
+                <property name="label">gtk-cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+                <property name="secondary">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_assign_ok">
+                <property name="label">gtk-add</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolledwindow_assign">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="border_width">5</property>
+            <property name="hscrollbar_policy">never</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkTreeView" id="treeview_assign">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="model">liststore_assign</property>
+                <property name="headers_visible">False</property>
+                <property name="enable_search">False</property>
+                <property name="search_column">0</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection" id="treeview-selection2"/>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="0">button_assign_import</action-widget>
+      <action-widget response="0">button_assign_cancel</action-widget>
+      <action-widget response="0">button_assign_ok</action-widget>
+    </action-widgets>
+  </object>
   <object class="GtkDialog" id="dialog_virtual">
     <property name="can_focus">False</property>
     <property name="border_width">15</property>
@@ -401,7 +388,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -416,7 +402,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -622,6 +607,16 @@
       <action-widget response="0">button_virtual_cancel</action-widget>
       <action-widget response="0">button_virtual_add</action-widget>
     </action-widgets>
+  </object>
+  <object class="GtkListStore" id="liststore_assign">
+    <columns>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+      <!-- column-name profile -->
+      <column type="GObject"/>
+      <!-- column-name kind -->
+      <column type="guint"/>
+    </columns>
   </object>
   <object class="GtkSizeGroup" id="sizegroup_buttons"/>
   <object class="GtkSizeGroup" id="sizegroup_combos"/>

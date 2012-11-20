@@ -70,11 +70,6 @@ enum {
   GCM_PREFS_COMBO_COLUMN_NUM_COLUMNS
 };
 
-typedef enum {
-  GCM_PREFS_ENTRY_TYPE_PROFILE,
-  GCM_PREFS_ENTRY_TYPE_IMPORT
-} GcmPrefsEntryType;
-
 #define GCM_SETTINGS_SCHEMA                             "org.gnome.settings-daemon.plugins.color"
 #define GCM_SETTINGS_RECALIBRATE_PRINTER_THRESHOLD      "recalibrate-printer-threshold"
 #define GCM_SETTINGS_RECALIBRATE_DISPLAY_THRESHOLD      "recalibrate-display-threshold"
@@ -85,63 +80,61 @@ typedef enum {
 static void     gcm_prefs_device_add_cb (GtkWidget *widget, CcColorPanel *prefs);
 
 static void
-gcm_prefs_combobox_add_profile (GtkWidget *widget,
+gcm_prefs_combobox_add_profile (CcColorPanel *prefs,
                                 CdProfile *profile,
-                                GcmPrefsEntryType entry_type,
                                 GtkTreeIter *iter)
 {
   const gchar *id;
-  GtkTreeModel *model;
   GtkTreeIter iter_tmp;
   GString *string;
+  GtkListStore *list_store;
+  gchar *escaped = NULL;
+  guint kind = 0;
 
   /* iter is optional */
   if (iter == NULL)
     iter = &iter_tmp;
 
   /* use description */
-  if (entry_type == GCM_PREFS_ENTRY_TYPE_IMPORT)
-    {
-      /* TRANSLATORS: this is where the user can click and import a profile */
-      string = g_string_new (_("Other profile…"));
-    }
-  else
-    {
-      string = g_string_new (cd_profile_get_title (profile));
+  string = g_string_new (cd_profile_get_title (profile));
 
-      /* any source prefix? */
-      id = cd_profile_get_metadata_item (profile,
-                                         CD_PROFILE_METADATA_DATA_SOURCE);
-      if (g_strcmp0 (id, CD_PROFILE_METADATA_DATA_SOURCE_EDID) == 0)
-        {
-          /* TRANSLATORS: this is a profile prefix to signify the
-           * profile has been auto-generated for this hardware */
-          g_string_prepend (string, _("Default: "));
-        }
+  /* any source prefix? */
+  id = cd_profile_get_metadata_item (profile,
+                                     CD_PROFILE_METADATA_DATA_SOURCE);
+  if (g_strcmp0 (id, CD_PROFILE_METADATA_DATA_SOURCE_EDID) == 0)
+    {
+      /* TRANSLATORS: this is a profile prefix to signify the
+       * profile has been auto-generated for this hardware */
+      g_string_prepend (string, _("Default: "));
+      kind = 1;
+    }
 #if CD_CHECK_VERSION(0,1,14)
-      if (g_strcmp0 (id, CD_PROFILE_METADATA_DATA_SOURCE_STANDARD) == 0)
-        {
-          /* TRANSLATORS: this is a profile prefix to signify the
-           * profile his a standard space like AdobeRGB */
-          g_string_prepend (string, _("Colorspace: "));
-        }
-      if (g_strcmp0 (id, CD_PROFILE_METADATA_DATA_SOURCE_TEST) == 0)
-        {
-          /* TRANSLATORS: this is a profile prefix to signify the
-           * profile is a test profile */
-          g_string_prepend (string, _("Test profile: "));
-        }
-#endif
+  if (g_strcmp0 (id, CD_PROFILE_METADATA_DATA_SOURCE_STANDARD) == 0)
+    {
+      /* TRANSLATORS: this is a profile prefix to signify the
+       * profile his a standard space like AdobeRGB */
+      g_string_prepend (string, _("Colorspace: "));
+      kind = 2;
     }
+  if (g_strcmp0 (id, CD_PROFILE_METADATA_DATA_SOURCE_TEST) == 0)
+    {
+      /* TRANSLATORS: this is a profile prefix to signify the
+       * profile is a test profile */
+      g_string_prepend (string, _("Test profile: "));
+      kind = 3;
+    }
+#endif
 
-  /* also add profile */
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
-  gtk_list_store_append (GTK_LIST_STORE(model), iter);
-  gtk_list_store_set (GTK_LIST_STORE(model), iter,
-                      GCM_PREFS_COMBO_COLUMN_TEXT, string->str,
+  escaped = g_markup_escape_text (string->str, -1);
+  list_store = GTK_LIST_STORE(gtk_builder_get_object (prefs->priv->builder,
+                                                      "liststore_assign"));
+  gtk_list_store_append (list_store, iter);
+  gtk_list_store_set (list_store, iter,
+                      GCM_PREFS_COMBO_COLUMN_TEXT, escaped,
                       GCM_PREFS_COMBO_COLUMN_PROFILE, profile,
-                      GCM_PREFS_COMBO_COLUMN_TYPE, entry_type,
+                      GCM_PREFS_COMBO_COLUMN_TYPE, kind,
                       -1);
+
   g_string_free (string, TRUE);
 }
 
@@ -389,14 +382,6 @@ gcm_prefs_combo_sort_func_cb (GtkTreeModel *model,
 }
 
 static gboolean
-gcm_prefs_combo_set_default_cb (gpointer user_data)
-{
-  GtkWidget *widget = GTK_WIDGET (user_data);
-  gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
-  return FALSE;
-}
-
-static gboolean
 gcm_prefs_profile_exists_in_array (GPtrArray *array, CdProfile *profile)
 {
   CdProfile *profile_tmp;
@@ -413,7 +398,6 @@ gcm_prefs_profile_exists_in_array (GPtrArray *array, CdProfile *profile)
 
 static void
 gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
-                                             GtkWidget *widget,
                                              GPtrArray *profiles)
 {
   CdProfile *profile_tmp;
@@ -421,20 +405,20 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
   GError *error = NULL;
   GPtrArray *profile_array = NULL;
   GtkTreeIter iter;
-  GtkTreeModel *model;
+  GtkListStore *list_store;
   guint i;
   CcColorPanelPrivate *priv = prefs->priv;
 
-  /* clear existing entries */
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
-  gtk_list_store_clear (GTK_LIST_STORE (model));
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
+  list_store = GTK_LIST_STORE(gtk_builder_get_object (prefs->priv->builder,
+                                                      "liststore_assign"));
+  gtk_list_store_clear (list_store);
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (list_store),
                                         GCM_PREFS_COMBO_COLUMN_TEXT,
                                         GTK_SORT_ASCENDING);
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (model),
+  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (list_store),
                                    GCM_PREFS_COMBO_COLUMN_TEXT,
                                    gcm_prefs_combo_sort_func_cb,
-                                   model, NULL);
+                                   list_store, NULL);
 
   /* get profiles */
   profile_array = cd_client_get_profiles_sync (priv->client,
@@ -484,17 +468,10 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
 #endif
 
       /* add */
-      gcm_prefs_combobox_add_profile (widget,
+      gcm_prefs_combobox_add_profile (prefs,
                                       profile_tmp,
-                                      GCM_PREFS_ENTRY_TYPE_PROFILE,
                                       &iter);
     }
-
-  /* add a import entry */
-#if CD_CHECK_VERSION(0,1,12)
-  gcm_prefs_combobox_add_profile (widget, NULL, GCM_PREFS_ENTRY_TYPE_IMPORT, NULL);
-#endif
-  g_idle_add (gcm_prefs_combo_set_default_cb, widget);
 out:
   if (profile_array != NULL)
     g_ptr_array_unref (profile_array);
@@ -503,47 +480,17 @@ out:
 static void
 gcm_prefs_profile_add_cb (GtkWidget *widget, CcColorPanel *prefs)
 {
-  const gchar *title;
   GPtrArray *profiles;
   CcColorPanelPrivate *priv = prefs->priv;
 
   /* add profiles of the right kind */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "combobox_profile"));
   profiles = cd_device_get_profiles (priv->current_device);
-  gcm_prefs_add_profiles_suitable_for_devices (prefs, widget, profiles);
+  gcm_prefs_add_profiles_suitable_for_devices (prefs, profiles);
 
-  /* set the title */
+  /* make insensitve until we have a selection */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "label_assign_title"));
-  switch (cd_device_get_kind (priv->current_device)) {
-    case CD_DEVICE_KIND_DISPLAY:
-      /* TRANSLATORS: this is the dialog title in the 'Add profile' UI */
-      title = _("Available Profiles for Displays");
-      break;
-    case CD_DEVICE_KIND_SCANNER:
-      /* TRANSLATORS: this is the dialog title in the 'Add profile' UI */
-      title = _("Available Profiles for Scanners");
-      break;
-    case CD_DEVICE_KIND_PRINTER:
-      /* TRANSLATORS: this is the dialog title in the 'Add profile' UI */
-      title = _("Available Profiles for Printers");
-      break;
-    case CD_DEVICE_KIND_CAMERA:
-      /* TRANSLATORS: this is the dialog title in the 'Add profile' UI */
-      title = _("Available Profiles for Cameras");
-      break;
-    case CD_DEVICE_KIND_WEBCAM:
-      /* TRANSLATORS: this is the dialog title in the 'Add profile' UI */
-      title = _("Available Profiles for Webcams");
-      break;
-    default:
-      /* TRANSLATORS: this is the dialog title in the 'Add profile' UI
-       * where the device type is not recognised */
-      title = _("Available Profiles");
-      break;
-  }
-  gtk_label_set_label (GTK_LABEL (widget), title);
+                                               "button_assign_ok"));
+  gtk_widget_set_sensitive (widget, FALSE);
 
   /* show the dialog */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
@@ -716,6 +663,7 @@ gcm_prefs_button_assign_ok_cb (GtkWidget *widget, CcColorPanel *prefs)
   CdProfile *profile = NULL;
   gboolean ret = FALSE;
   GError *error = NULL;
+  GtkTreeSelection *selection;
   CcColorPanelPrivate *priv = prefs->priv;
 
   /* hide window */
@@ -723,13 +671,12 @@ gcm_prefs_button_assign_ok_cb (GtkWidget *widget, CcColorPanel *prefs)
                                                "dialog_assign"));
   gtk_widget_hide (widget);
 
-  /* get entry */
+  /* get the selected profile */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "combobox_profile"));
-  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
-  if (!ret)
+                                               "treeview_assign"));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+  if (!gtk_tree_selection_get_selected (selection, &model, &iter))
     goto out;
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
   gtk_tree_model_get (model, &iter,
                       GCM_PREFS_COMBO_COLUMN_PROFILE, &profile,
                       -1);
@@ -879,6 +826,23 @@ gcm_prefs_add_devices_columns (CcColorPanel *prefs,
 }
 
 static void
+gcm_prefs_add_profiles_columns (CcColorPanel *prefs,
+                                GtkTreeView *treeview)
+{
+  GtkCellRenderer *renderer;
+  GtkTreeViewColumn *column;
+
+  /* text */
+  renderer = gtk_cell_renderer_text_new ();
+  column = gtk_tree_view_column_new ();
+  gtk_tree_view_column_pack_start (column, renderer, TRUE);
+  gtk_tree_view_column_add_attribute (column, renderer,
+                                      "markup", GCM_PREFS_COMBO_COLUMN_TEXT);
+  gtk_tree_view_column_set_expand (column, TRUE);
+  gtk_tree_view_append_column (treeview, column);
+}
+
+static void
 gcm_prefs_set_calibrate_button_sensitivity (CcColorPanel *prefs)
 {
   gboolean ret = FALSE;
@@ -975,11 +939,6 @@ gcm_prefs_device_clicked (CcColorPanel *prefs, CdDevice *device)
   g_debug ("selected device is: %s",
            cd_device_get_id (device));
 
-  /* make sure selectable */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "combobox_profile"));
-  gtk_widget_set_sensitive (widget, TRUE);
-
   /* can we delete this device? */
   device_mode = cd_device_get_mode (priv->current_device);
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
@@ -1038,6 +997,22 @@ gcm_prefs_profile_clicked (CcColorPanel *prefs, CdProfile *profile, CdDevice *de
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "toolbutton_device_remove"));
   gtk_widget_set_visible (widget, FALSE);
+}
+
+static void
+gcm_prefs_profiles_treeview_clicked_cb (GtkTreeSelection *selection,
+                                        CcColorPanel *prefs)
+{
+  GtkWidget *widget;
+
+  /* get selection */
+  if (!gtk_tree_selection_get_selected (selection, NULL, NULL))
+    return;
+
+  /* as soon as anything is selected, make the Add button sensitive */
+  widget = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
+                                               "button_assign_ok"));
+  gtk_widget_set_sensitive (widget, TRUE);
 }
 
 static void
@@ -1119,6 +1094,21 @@ gcm_prefs_treeview_row_activated_cb (GtkTreeView *tree_view,
   gcm_prefs_profile_make_default_internal (prefs, model, &iter);
 }
 
+static void
+gcm_prefs_profiles_row_activated_cb (GtkTreeView *tree_view,
+                                     GtkTreePath *path,
+                                     GtkTreeViewColumn *column,
+                                     CcColorPanel *prefs)
+{
+  GtkTreeIter iter;
+  gboolean ret;
+
+  ret = gtk_tree_model_get_iter (gtk_tree_view_get_model (tree_view), &iter, path);
+  if (!ret)
+    return;
+  gcm_prefs_button_assign_ok_cb (NULL, prefs);
+}
+
 static const gchar *
 gcm_prefs_device_kind_to_sort (CdDeviceKind kind)
 {
@@ -1173,102 +1163,39 @@ out:
 }
 
 static void
-gcm_prefs_set_combo_simple_text (GtkWidget *combo_box)
-{
-  GtkCellRenderer *renderer;
-  GtkListStore *store;
-
-  store = gtk_list_store_new (GCM_PREFS_COMBO_COLUMN_NUM_COLUMNS,
-                              G_TYPE_STRING,
-                              CD_TYPE_PROFILE,
-                              G_TYPE_UINT);
-  gtk_combo_box_set_model (GTK_COMBO_BOX (combo_box),
-                           GTK_TREE_MODEL (store));
-  g_object_unref (store);
-
-  renderer = gtk_cell_renderer_text_new ();
-  g_object_set (renderer,
-                "ellipsize", PANGO_ELLIPSIZE_END,
-                "wrap-mode", PANGO_WRAP_WORD_CHAR,
-                NULL);
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box), renderer, TRUE);
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo_box), renderer,
-                                  "text", GCM_PREFS_COMBO_COLUMN_TEXT,
-                                  NULL);
-}
-
-static void
-gcm_prefs_profile_combo_changed_cb (GtkWidget *widget,
-                                    CcColorPanel *prefs)
+gcm_prefs_button_assign_import_cb (GtkWidget *widget,
+                                   CcColorPanel *prefs)
 {
   GFile *file = NULL;
   GError *error = NULL;
-  gboolean ret;
   CdProfile *profile = NULL;
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  GcmPrefsEntryType entry_type;
   CcColorPanelPrivate *priv = prefs->priv;
 
-  /* no devices */
-  if (priv->current_device == NULL)
-    return;
-
-  /* no selection */
-  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
-  if (!ret)
-    return;
-
-  /* get entry */
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
-  gtk_tree_model_get (model, &iter,
-                      GCM_PREFS_COMBO_COLUMN_TYPE, &entry_type,
-                      -1);
-
-  /* import */
-  if (entry_type == GCM_PREFS_ENTRY_TYPE_IMPORT)
+  file = gcm_prefs_file_chooser_get_icc_profile (prefs);
+  if (file == NULL)
     {
-      file = gcm_prefs_file_chooser_get_icc_profile (prefs);
-      if (file == NULL)
-        {
-          g_warning ("failed to get ICC file");
-          gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
-
-          /* if we've got no other existing profiles to choose, then
-           * just close the assign dialog */
-          gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
-          gtk_tree_model_get (model, &iter,
-                              GCM_PREFS_COMBO_COLUMN_TYPE, &entry_type,
-                              -1);
-          if (entry_type == GCM_PREFS_ENTRY_TYPE_IMPORT)
-            {
-              widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                                           "dialog_assign"));
-              gtk_widget_hide (widget);
-            }
-          goto out;
-        }
+      g_warning ("failed to get ICC file");
+      widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                                   "dialog_assign"));
+      gtk_widget_hide (widget);
+      goto out;
+    }
 
 #if CD_CHECK_VERSION(0,1,12)
-      profile = cd_client_import_profile_sync (priv->client,
-                                               file,
-                                               priv->cancellable,
-                                               &error);
-      if (profile == NULL)
-        {
-          g_warning ("failed to get imported profile: %s", error->message);
-          g_error_free (error);
-          goto out;
-        }
+  profile = cd_client_import_profile_sync (priv->client,
+                                           file,
+                                           priv->cancellable,
+                                           &error);
+  if (profile == NULL)
+    {
+      g_warning ("failed to get imported profile: %s", error->message);
+      g_error_free (error);
+      goto out;
+    }
 #endif
 
-      /* add to combobox */
-      gtk_list_store_append (GTK_LIST_STORE(model), &iter);
-      gtk_list_store_set (GTK_LIST_STORE(model), &iter,
-                          GCM_PREFS_COMBO_COLUMN_PROFILE, profile,
-                          -1);
-      gtk_combo_box_set_active_iter (GTK_COMBO_BOX (widget), &iter);
-    }
+  /* add to list view */
+  gcm_prefs_profile_add_cb (NULL, prefs);
 out:
   if (file != NULL)
     g_object_unref (file);
@@ -2453,6 +2380,23 @@ cc_color_panel_init (CcColorPanel *prefs)
   /* add columns to the tree view */
   gcm_prefs_add_devices_columns (prefs, GTK_TREE_VIEW (widget));
 
+  /* add columns to profile tree view */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "treeview_assign"));
+  gcm_prefs_add_profiles_columns (prefs, GTK_TREE_VIEW (widget));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+  g_signal_connect (selection, "changed",
+                    G_CALLBACK (gcm_prefs_profiles_treeview_clicked_cb),
+                    prefs);
+  g_signal_connect (GTK_TREE_VIEW (widget), "row-activated",
+                    G_CALLBACK (gcm_prefs_profiles_row_activated_cb),
+                    prefs);
+
+  /* make larger by default */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "scrolledwindow_assign"));
+  gtk_widget_set_size_request (widget, -1, 250);
+
   /* force to be at least ~6 rows high */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "scrolledwindow_devices"));
@@ -2530,11 +2474,9 @@ cc_color_panel_init (CcColorPanel *prefs)
 
   /* setup icc profiles list */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "combobox_profile"));
-  gcm_prefs_set_combo_simple_text (widget);
-  gtk_widget_set_sensitive (widget, FALSE);
-  g_signal_connect (G_OBJECT (widget), "changed",
-                    G_CALLBACK (gcm_prefs_profile_combo_changed_cb), prefs);
+                                               "button_assign_import"));
+  g_signal_connect (widget, "clicked",
+                    G_CALLBACK (gcm_prefs_button_assign_import_cb), prefs);
 
   /* use a device client array */
   priv->client = cd_client_new ();
