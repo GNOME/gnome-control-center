@@ -67,6 +67,7 @@ enum {
   GCM_PREFS_COMBO_COLUMN_TEXT,
   GCM_PREFS_COMBO_COLUMN_PROFILE,
   GCM_PREFS_COMBO_COLUMN_TYPE,
+  GCM_PREFS_COMBO_COLUMN_WARNING_FILENAME,
   GCM_PREFS_COMBO_COLUMN_NUM_COLUMNS
 };
 
@@ -90,6 +91,10 @@ gcm_prefs_combobox_add_profile (CcColorPanel *prefs,
   GtkListStore *list_store;
   gchar *escaped = NULL;
   guint kind = 0;
+  const gchar *warning = NULL;
+#if CD_CHECK_VERSION(0,1,25)
+  gchar **warnings;
+#endif
 
   /* iter is optional */
   if (iter == NULL)
@@ -125,6 +130,13 @@ gcm_prefs_combobox_add_profile (CcColorPanel *prefs,
     }
 #endif
 
+  /* is the profile faulty */
+#if CD_CHECK_VERSION(0,1,25)
+  warnings = cd_profile_get_warnings (profile);
+  if (warnings != NULL && warnings[0] != NULL)
+    warning = "dialog-warning-symbolic";
+#endif
+
   escaped = g_markup_escape_text (string->str, -1);
   list_store = GTK_LIST_STORE(gtk_builder_get_object (prefs->priv->builder,
                                                       "liststore_assign"));
@@ -133,6 +145,7 @@ gcm_prefs_combobox_add_profile (CcColorPanel *prefs,
                       GCM_PREFS_COMBO_COLUMN_TEXT, escaped,
                       GCM_PREFS_COMBO_COLUMN_PROFILE, profile,
                       GCM_PREFS_COMBO_COLUMN_TYPE, kind,
+                      GCM_PREFS_COMBO_COLUMN_WARNING_FILENAME, warning,
                       -1);
 
   g_string_free (string, TRUE);
@@ -596,30 +609,13 @@ out:
 }
 
 static void
-gcm_prefs_profile_view_cb (GtkWidget *widget, CcColorPanel *prefs)
+gcm_prefs_profile_view (CcColorPanel *prefs, CdProfile *profile)
 {
-  CdProfile *profile = NULL;
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  GtkTreeSelection *selection;
-  gchar *options = NULL;
   GPtrArray *argv = NULL;
   guint xid;
   gboolean ret;
   GError *error = NULL;
   CcColorPanelPrivate *priv = prefs->priv;
-
-  /* get the selected row */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "treeview_devices"));
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-  if (!gtk_tree_selection_get_selected (selection, &model, &iter))
-    g_assert_not_reached ();
-
-  /* get currentlt selected item */
-  gtk_tree_model_get (model, &iter,
-                      GCM_PREFS_COLUMN_PROFILE, &profile,
-                      -1);
 
   /* get xid */
   xid = gdk_x11_window_get_xid (gtk_widget_get_window (GTK_WIDGET (priv->main_window)));
@@ -641,9 +637,67 @@ gcm_prefs_profile_view_cb (GtkWidget *widget, CcColorPanel *prefs)
     }
 
   g_ptr_array_unref (argv);
-  g_free (options);
+}
+
+static void
+gcm_prefs_profile_assign_link_activate_cb (GtkLabel *label,
+                                           const gchar *uri,
+                                           CcColorPanel *prefs)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  CdProfile *profile = NULL;
+  GtkTreeSelection *selection;
+  CcColorPanelPrivate *priv = prefs->priv;
+  GtkWidget *widget;
+
+  /* get the selected profile */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "treeview_assign"));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+  if (!gtk_tree_selection_get_selected (selection, &model, &iter))
+    goto out;
+  gtk_tree_model_get (model, &iter,
+                      GCM_PREFS_COMBO_COLUMN_PROFILE, &profile,
+                      -1);
+  if (profile == NULL)
+    {
+        g_warning ("failed to get the active profile");
+        goto out;
+    }
+
+  /* show it in the viewer */
+  gcm_prefs_profile_view (prefs, profile);
+out:
   if (profile != NULL)
     g_object_unref (profile);
+}
+
+static void
+gcm_prefs_profile_view_cb (GtkWidget *widget, CcColorPanel *prefs)
+{
+  CdProfile *profile = NULL;
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GtkTreeSelection *selection;
+  CcColorPanelPrivate *priv = prefs->priv;
+
+  /* get the selected row */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "treeview_devices"));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+  if (!gtk_tree_selection_get_selected (selection, &model, &iter))
+    g_assert_not_reached ();
+
+  /* get currentlt selected item */
+  gtk_tree_model_get (model, &iter,
+                      GCM_PREFS_COLUMN_PROFILE, &profile,
+                      -1);
+
+  /* open up gcm-viewer as a info pane */
+  gcm_prefs_profile_view (prefs, profile);
+
+  g_object_unref (profile);
 }
 
 static void
@@ -840,6 +894,15 @@ gcm_prefs_add_profiles_columns (CcColorPanel *prefs,
                                       "markup", GCM_PREFS_COMBO_COLUMN_TEXT);
   gtk_tree_view_column_set_expand (column, TRUE);
   gtk_tree_view_append_column (treeview, column);
+
+  /* image */
+  column = gtk_tree_view_column_new ();
+  renderer = gtk_cell_renderer_pixbuf_new ();
+  g_object_set (renderer, "stock-size", GTK_ICON_SIZE_MENU, NULL);
+  gtk_tree_view_column_pack_start (column, renderer, FALSE);
+  gtk_tree_view_column_add_attribute (column, renderer,
+                                      "icon-name", GCM_PREFS_COMBO_COLUMN_WARNING_FILENAME);
+  gtk_tree_view_append_column (treeview, column);
 }
 
 static void
@@ -1004,15 +1067,36 @@ gcm_prefs_profiles_treeview_clicked_cb (GtkTreeSelection *selection,
                                         CcColorPanel *prefs)
 {
   GtkWidget *widget;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  CdProfile *profile = NULL;
+#if CD_CHECK_VERSION(0,1,25)
+  gchar **warnings;
+#endif
 
   /* get selection */
-  if (!gtk_tree_selection_get_selected (selection, NULL, NULL))
+  if (!gtk_tree_selection_get_selected (selection, &model, &iter))
     return;
+  gtk_tree_model_get (model, &iter,
+                      GCM_PREFS_COMBO_COLUMN_PROFILE, &profile,
+                      -1);
+
 
   /* as soon as anything is selected, make the Add button sensitive */
   widget = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
                                                "button_assign_ok"));
   gtk_widget_set_sensitive (widget, TRUE);
+
+  /* is the profile faulty */
+  widget = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
+                                               "label_assign_warning"));
+#if CD_CHECK_VERSION(0,1,25)
+  warnings = cd_profile_get_warnings (profile);
+  gtk_widget_set_visible (widget, warnings != NULL && warnings[0] != NULL);
+#else
+  gtk_widget_set_visible (widget, FALSE);
+#endif
+  g_object_unref (profile);
 }
 
 static void
@@ -2358,6 +2442,12 @@ cc_color_panel_init (CcColorPanel *prefs)
                                                "toolbutton_profile_view"));
   g_signal_connect (widget, "clicked",
                     G_CALLBACK (gcm_prefs_profile_view_cb), prefs);
+
+  /* href */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "label_assign_warning"));
+  g_signal_connect (widget, "activate-link",
+                    G_CALLBACK (gcm_prefs_profile_assign_link_activate_cb), prefs);
 
   /* create device tree view */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
