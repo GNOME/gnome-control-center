@@ -19,6 +19,8 @@ libdisplay_la_SOURCES =		\
 	display-module.c	\
 	cc-display-panel.c	\
 	cc-display-panel.h	\
+	cc-rr-labeler.c		\
+	cc-rr-labeler.h		\
 	scrollarea.c		\
 	scrollarea.h		\
 	$(MARSHALFILES)

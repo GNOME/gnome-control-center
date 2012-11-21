@@ -31,11 +31,12 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-rr.h>
 #include <libgnome-desktop/gnome-rr-config.h>
-#include <libgnome-desktop/gnome-rr-labeler.h>
 #include <gdk/gdkx.h>
 #include <X11/Xlib.h>
 #include <glib/gi18n.h>
 #include <gdesktop-enums.h>
+
+#include "cc-rr-labeler.h"
 
 CC_PANEL_REGISTER (CcDisplayPanel, cc_display_panel)
 
@@ -68,7 +69,7 @@ struct _CcDisplayPanelPrivate
 {
   GnomeRRScreen       *screen;
   GnomeRRConfig  *current_configuration;
-  GnomeRRLabeler *labeler;
+  CcRRLabeler *labeler;
   GnomeRROutputInfo         *current_output;
 
   GSettings      *clock_settings;
@@ -177,7 +178,7 @@ cc_display_panel_finalize (GObject *object)
                                      self->priv->focus_id);
     }
 
-  gnome_rr_labeler_hide (self->priv->labeler);
+  cc_rr_labeler_hide (self->priv->labeler);
   g_object_unref (self->priv->labeler);
 
   G_OBJECT_CLASS (cc_display_panel_parent_class)->finalize (object);
@@ -261,13 +262,13 @@ on_screen_changed (GnomeRRScreen *scr,
   self->priv->current_output = NULL;
 
   if (self->priv->labeler) {
-    gnome_rr_labeler_hide (self->priv->labeler);
+    cc_rr_labeler_hide (self->priv->labeler);
     g_object_unref (self->priv->labeler);
   }
 
-  self->priv->labeler = gnome_rr_labeler_new (self->priv->current_configuration);
+  self->priv->labeler = cc_rr_labeler_new (self->priv->current_configuration);
   if (gtk_widget_has_focus (self->priv->panel))
-     gnome_rr_labeler_show (self->priv->labeler);
+     cc_rr_labeler_show (self->priv->labeler);
 
   select_current_output_from_dialog_position (self);
 }
@@ -638,7 +639,7 @@ rebuild_current_monitor_label (CcDisplayPanel *self)
         tmp = g_strdup (gnome_rr_output_info_get_display_name (self->priv->current_output));
 
       str = g_strdup_printf ("<b>%s</b>", tmp);
-      gnome_rr_labeler_get_rgba_for_output (self->priv->labeler, self->priv->current_output, &color);
+      cc_rr_labeler_get_rgba_for_output (self->priv->labeler, self->priv->current_output, &color);
       use_color = TRUE;
       g_free (tmp);
     }
@@ -2030,7 +2031,7 @@ paint_output (CcDisplayPanel *self, cairo_t *cr, int i)
   cairo_rectangle (cr, x, y, w * scale + 0.5, h * scale + 0.5);
   cairo_clip_preserve (cr);
 
-  gnome_rr_labeler_get_rgba_for_output (self->priv->labeler, output, &output_color);
+  cc_rr_labeler_get_rgba_for_output (self->priv->labeler, output, &output_color);
   r = output_color.red;
   g = output_color.green;
   b = output_color.blue;
@@ -2515,9 +2516,9 @@ dialog_toplevel_focus_changed (GtkWindow      *window,
   if (self->priv->labeler == NULL)
     return;
   if (gtk_window_has_toplevel_focus (window))
-    gnome_rr_labeler_show (self->priv->labeler);
+    cc_rr_labeler_show (self->priv->labeler);
   else
-    gnome_rr_labeler_hide (self->priv->labeler);
+    cc_rr_labeler_hide (self->priv->labeler);
 }
 
 static void
