@@ -50,6 +50,7 @@
 #include "um-fingerprint-dialog.h"
 #include "um-utils.h"
 #include "um-resources.h"
+#include "um-history-dialog.h"
 
 #include "cc-common-language.h"
 
@@ -70,6 +71,7 @@ struct _CcUserPanelPrivate {
 
         UmPasswordDialog *password_dialog;
         UmPhotoDialog *photo_dialog;
+        UmHistoryDialog *history_dialog;
 };
 
 static GtkWidget *
@@ -680,6 +682,11 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
         }
         gtk_widget_set_visible (widget, show);
         gtk_widget_set_visible (label, show);
+
+        enable = act_user_get_login_history (user) != NULL;
+        widget = get_widget (d, "last-login-history-button");
+        gtk_widget_set_visible (widget, show);
+        gtk_widget_set_sensitive (widget, enable);
 }
 
 static void on_permission_changed (GPermission *permission, GParamSpec *pspec, gpointer data);
@@ -851,6 +858,19 @@ change_fingerprint (GtkButton *button, CcUserPanelPrivate *d)
         label = get_widget (d, "account-fingerprint-value-label");
         label2 = get_widget (d, "account-fingerprint-button-label");
         fingerprint_button_clicked (GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)), label, label2, user);
+
+        g_object_unref (user);
+}
+
+static void
+show_history (GtkButton *button, CcUserPanelPrivate *d)
+{
+        ActUser *user;
+
+        user = get_selected_user (d);
+
+        um_history_dialog_set_user (d->history_dialog, user);
+        um_history_dialog_show (d->history_dialog, GTK_WINDOW (gtk_widget_get_toplevel (d->main_box)));
 
         g_object_unref (user);
 }
@@ -1276,6 +1296,10 @@ setup_main_window (CcUserPanelPrivate *d)
         g_signal_connect (button, "clicked",
                           G_CALLBACK (change_fingerprint), d);
 
+        button = get_widget (d, "last-login-history-button");
+        g_signal_connect (button, "clicked",
+                          G_CALLBACK (show_history), d);
+
         d->permission = (GPermission *)polkit_permission_new_sync (USER_ACCOUNTS_PERMISSION, NULL, NULL, &error);
         if (d->permission != NULL) {
                 g_signal_connect (d->permission, "notify",
@@ -1340,6 +1364,7 @@ cc_user_panel_init (CcUserPanel *self)
         d->photo_dialog = um_photo_dialog_new (button);
         d->main_box = get_widget (d, "accounts-vbox");
         gtk_widget_reparent (d->main_box, GTK_WIDGET (self));
+        d->history_dialog = um_history_dialog_new ();
 
         context = gtk_widget_get_style_context (get_widget (d, "list-scrolledwindow"));
         gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
@@ -1363,6 +1388,10 @@ cc_user_panel_dispose (GObject *object)
         if (priv->photo_dialog) {
                 um_photo_dialog_free (priv->photo_dialog);
                 priv->photo_dialog = NULL;
+        }
+        if (priv->history_dialog) {
+                um_history_dialog_free (priv->history_dialog);
+                priv->history_dialog = NULL;
         }
         if (priv->language_chooser) {
                 gtk_widget_destroy (priv->language_chooser);
