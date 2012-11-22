@@ -69,6 +69,7 @@ const gchar   *um_user_get_location        (UmUser   *user);
 const gchar   *um_user_get_home_directory  (UmUser   *user);
 const gchar   *um_user_get_shell           (UmUser   *user);
 gulong         um_user_get_login_frequency (UmUser   *user);
+gint64         um_user_get_login_time      (UmUser   *user);
 gint           um_user_get_password_mode   (UmUser   *user);
 const gchar   *um_user_get_password_hint   (UmUser   *user);
 const gchar   *um_user_get_icon_file       (UmUser   *user);

@@ -553,6 +553,35 @@ autologin_changed (GObject            *object,
         g_object_unref (user);
 }
 
+static gchar *
+get_login_time_text (UmUser *user)
+{
+        gchar *text, *date_str, *time_str;
+        GDateTime *date_time;
+        gint64 time;
+
+        time = um_user_get_login_time (user);
+        if (um_user_is_logged_in (user)) {
+                text = g_strdup (_("Logged in"));
+        }
+        else if (time > 0) {
+                date_time = g_date_time_new_from_unix_local (time);
+                date_str = get_smart_date (date_time);
+                time_str = g_date_time_format (date_time, "%k:%M");
+
+                text = g_strconcat (date_str, ", ", time_str, NULL);
+
+                g_date_time_unref (date_time);
+                g_free (date_str);
+                g_free (time_str);
+        }
+        else {
+                text = g_strdup ("—");
+        }
+
+        return text;
+}
+
 static void
 show_user (UmUser *user, UmUserPanelPrivate *d)
 {
@@ -561,11 +590,12 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
         GtkWidget *label2;
         GtkWidget *label3;
         GdkPixbuf *pixbuf;
-        gchar *lang;
+        gchar *lang, *text;
         GtkWidget *widget;
         GtkTreeModel *model;
         GtkTreeIter iter;
         gboolean show, enable;
+        UmUser *current;
 
         pixbuf = um_user_render_icon (user, UM_ICON_STYLE_NONE, 48);
         image = get_widget (d, "user-icon-image");
@@ -622,6 +652,21 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
         widget = get_widget (d, "autologin-switch");
         label = get_widget (d, "autologin-label");
         show = um_user_is_local_account (user);
+        gtk_widget_set_visible (widget, show);
+        gtk_widget_set_visible (label, show);
+
+        /* Last login: show when administrator or current user */
+        widget = get_widget (d, "last-login-value-label");
+        label = get_widget (d, "last-login-label");
+
+        current = um_user_manager_get_user_by_id (d->um, getuid ());
+        show = um_user_get_uid (user) == getuid () ||
+               um_user_get_account_type (current) == UM_ACCOUNT_TYPE_ADMINISTRATOR;
+        if (show) {
+                text = get_login_time_text (user);
+                gtk_label_set_text (GTK_LABEL (widget), text);
+                g_free (text);
+        }
         gtk_widget_set_visible (widget, show);
         gtk_widget_set_visible (label, show);
 }

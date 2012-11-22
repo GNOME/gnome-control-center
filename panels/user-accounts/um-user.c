@@ -60,6 +60,7 @@ typedef struct {
         gchar          *language;
         gchar          *location;
         guint64         login_frequency;
+        gint64          login_time;
         gchar          *icon_file;
         gboolean        locked;
         gboolean        automatic_login;
@@ -137,6 +138,9 @@ user_properties_get (GDBusConnection *bus,
                 }
                 else if (strcmp (key, "LoginFrequency") == 0) {
                         g_variant_get (value, "t", &props->login_frequency);
+                }
+                else if (strcmp (key, "LoginTime") == 0) {
+                        g_variant_get (value, "x", &props->login_time);
                 }
                 else if (strcmp (key, "IconFile") == 0) {
                         g_variant_get (value, "s", &props->icon_file);
@@ -302,6 +306,14 @@ um_user_get_login_frequency (UmUser *user)
         g_return_val_if_fail (UM_IS_USER (user), 0);
 
         return user->props->login_frequency;
+}
+
+gint64
+um_user_get_login_time (UmUser *user)
+{
+        g_return_val_if_fail (UM_IS_USER (user), 0);
+
+        return user->props->login_time;
 }
 
 gint

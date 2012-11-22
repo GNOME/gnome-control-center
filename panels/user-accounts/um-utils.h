@@ -65,6 +65,8 @@ gboolean is_valid_username                (const gchar     *name,
 void     generate_username_choices        (const gchar     *name,
                                            GtkListStore    *store);
 
+gchar *  get_smart_date                   (GDateTime *date);
+
 G_END_DECLS
 
 #endif
