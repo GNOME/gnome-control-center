@@ -102,23 +102,24 @@ static void
 update_logout_button (GtkBuilder *builder,
 		      const char *locale)
 {
-	GtkWidget *widget;
+	GtkWidget *button, *notebook;
 	char *old_lang;
 
 	/* Offer log out in the new language, unless it is
 	 * the original session language */
-	widget = (GtkWidget *)gtk_builder_get_object (builder, "logout_button");
+	button = (GtkWidget *)gtk_builder_get_object (builder, "logout_button");
+	notebook = (GtkWidget *)gtk_builder_get_object (builder, "logout_notebook");
 
 	if (is_old_locale (locale) == FALSE) {
 		old_lang = g_strdup (setlocale (LC_MESSAGES, NULL));
 		setlocale (LC_MESSAGES, locale);
-		gtk_button_set_label (GTK_BUTTON (widget), _("Log out for changes to take effect"));
+		gtk_button_set_label (GTK_BUTTON (button), _("Log out for changes to take effect"));
 		setlocale (LC_MESSAGES, old_lang);
 		g_free (old_lang);
 
-		gtk_widget_show (widget);
+		gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 1);
 	} else {
-		gtk_widget_hide (widget);
+		gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
 	}
 }
 
