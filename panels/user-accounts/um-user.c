@@ -872,7 +872,7 @@ make_crypted (const gchar *plain)
         rand = g_rand_new ();
         salt = g_string_sized_new (21);
 
-        /* SHA 256 */
+        /* SHA 512 */
         g_string_append (salt, "$6$");
         for (i = 0; i < 16; i++) {
                 g_string_append_c (salt, salt_char (rand));
