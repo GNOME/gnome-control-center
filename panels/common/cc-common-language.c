@@ -34,6 +34,8 @@
 
 #include "gdm-languages.h"
 
+static char *get_lang_for_user_object_path (const char *path);
+
 static gint
 cc_common_language_sort_languages (GtkTreeModel *model,
 				   GtkTreeIter  *a,
@@ -315,7 +317,14 @@ gchar *
 cc_common_language_get_current_language (void)
 {
         gchar *language;
+        char *path;
         const gchar *locale;
+
+	path = g_strdup_printf ("/org/freedesktop/Accounts/User%d", getuid ());
+        language = get_lang_for_user_object_path (path);
+        g_free (path);
+        if (language != NULL && *language != '\0')
+                return language;
 
         locale = (const gchar *) setlocale (LC_MESSAGES, NULL);
         if (locale)
