@@ -25,6 +25,7 @@
 
 #include <string.h>
 #include <glib/gi18n.h>
+#include <locale.h>
 
 #include "gnome-region-panel-lang.h"
 #include "gnome-region-panel-formats.h"
@@ -34,30 +35,16 @@
 #include "gdm-languages.h"
 
 static GDBusProxy *proxy = NULL;
+static GDBusProxy *sm_proxy = NULL;
 
 static void
 logout_requested (GtkButton *button,
 		  gpointer   user_data)
 {
-	GError     *error;
-	GDBusProxy *sm_proxy;
+	GError   *error = NULL;
 	GVariant *res;
 
-	error = NULL;
-	sm_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
-						  G_DBUS_PROXY_FLAGS_NONE,
-						  NULL,
-						  "org.gnome.SessionManager",
-						  "/org/gnome/SessionManager",
-						  "org.gnome.SessionManager",
-						  NULL,
-						  &error);
-
-	if (sm_proxy == NULL) {
-		g_warning ("Failed to contact gnome session service: %s", error->message);
-		g_error_free (error);
-		return;
-	}
+	g_return_if_fail (sm_proxy != NULL);
 
 	res = g_dbus_proxy_call_sync (sm_proxy,
 				      "Logout",
@@ -71,8 +58,39 @@ logout_requested (GtkButton *button,
 		g_error_free (error);
 	} else
 		g_variant_unref (res);
+}
 
-	g_object_unref (sm_proxy);
+static gboolean
+is_old_locale (const char *new_locale)
+{
+	GError *error = NULL;
+	GVariant *variant;
+	char *old_locale;
+	gboolean ret = FALSE;
+
+	variant = g_dbus_proxy_call_sync (sm_proxy,
+					  "GetLocale",
+					  g_variant_new ("(i)", LC_MESSAGES),
+					  G_DBUS_CALL_FLAGS_NONE,
+					  -1,
+					  NULL,
+					  &error);
+	if (variant == NULL) {
+		g_warning ("Could not get current locale: %s", error->message);
+		g_error_free (error);
+		return FALSE;
+	}
+
+	g_variant_get (variant, "(s)", &old_locale);
+
+	g_debug ("Comparing locale '%s' (old) and '%s' (new)",
+		 old_locale, new_locale);
+	if (g_strcmp0 (old_locale, new_locale) == 0)
+		ret = TRUE;
+
+	g_free (old_locale);
+
+	return ret;
 }
 
 static void
@@ -156,15 +174,21 @@ selection_changed (GtkTreeSelection *selection,
         formats_update_language (builder, locale);
         system_update_language (builder, locale);
 
-	/* Offer log out in the new language */
+	/* Offer log out in the new language, unless it is
+	 * the original session language */
 	widget = (GtkWidget *)gtk_builder_get_object (builder, "logout_button");
-	old_lang = g_strdup (setlocale (LC_MESSAGES, NULL));
-	setlocale (LC_MESSAGES, locale);
-	gtk_button_set_label (GTK_BUTTON (widget), _("Log out for changes to take effect"));
-	setlocale (LC_MESSAGES, old_lang);
-	g_free (old_lang);
 
-	gtk_widget_show (widget);
+	if (is_old_locale (locale) == FALSE) {
+		old_lang = g_strdup (setlocale (LC_MESSAGES, NULL));
+		setlocale (LC_MESSAGES, locale);
+		gtk_button_set_label (GTK_BUTTON (widget), _("Log out for changes to take effect"));
+		setlocale (LC_MESSAGES, old_lang);
+		g_free (old_lang);
+
+		gtk_widget_show (widget);
+	} else {
+		gtk_widget_hide (widget);
+	}
 
 bail:
 	if (variant != NULL)
@@ -276,9 +300,25 @@ setup_language (GtkBuilder *builder)
 
 	if (proxy == NULL) {
 		g_warning ("Failed to contact accounts service: %s", error->message);
-		g_error_free (error);
+		g_clear_error (&error);
 	} else {
 		g_object_weak_ref (G_OBJECT (treeview), (GWeakNotify) g_object_unref, proxy);
+	}
+
+	/* And the session proxy */
+	sm_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+						  G_DBUS_PROXY_FLAGS_NONE,
+						  NULL,
+						  "org.gnome.SessionManager",
+						  "/org/gnome/SessionManager",
+						  "org.gnome.SessionManager",
+						  NULL,
+						  &error);
+	if (sm_proxy == NULL) {
+		g_warning ("Failed to contact accounts service: %s", error->message);
+		g_error_free (error);
+	} else {
+		g_object_weak_ref (G_OBJECT (treeview), (GWeakNotify) g_object_unref, sm_proxy);
 	}
 
 	/* Add user languages */
