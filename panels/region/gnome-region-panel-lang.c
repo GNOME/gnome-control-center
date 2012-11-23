@@ -36,6 +36,7 @@
 
 static GDBusProxy *proxy = NULL;
 static GDBusProxy *sm_proxy = NULL;
+static char *old_locale = NULL;
 
 static void
 logout_requested (GtkButton *button,
@@ -60,13 +61,11 @@ logout_requested (GtkButton *button,
 		g_variant_unref (res);
 }
 
-static gboolean
-is_old_locale (const char *new_locale)
+static void
+set_old_locale (void)
 {
 	GError *error = NULL;
 	GVariant *variant;
-	char *old_locale;
-	gboolean ret = FALSE;
 
 	variant = g_dbus_proxy_call_sync (sm_proxy,
 					  "GetLocale",
@@ -78,17 +77,23 @@ is_old_locale (const char *new_locale)
 	if (variant == NULL) {
 		g_warning ("Could not get current locale: %s", error->message);
 		g_error_free (error);
-		return FALSE;
+		return;
 	}
 
 	g_variant_get (variant, "(s)", &old_locale);
+
+	g_variant_unref (variant);
+}
+
+static gboolean
+is_old_locale (const char *new_locale)
+{
+	gboolean ret = FALSE;
 
 	g_debug ("Comparing locale '%s' (old) and '%s' (new)",
 		 old_locale, new_locale);
 	if (g_strcmp0 (old_locale, new_locale) == 0)
 		ret = TRUE;
-
-	g_free (old_locale);
 
 	return ret;
 }
@@ -328,6 +333,8 @@ setup_language (GtkBuilder *builder)
 		g_error_free (error);
 	} else {
 		g_object_weak_ref (G_OBJECT (treeview), (GWeakNotify) g_object_unref, sm_proxy);
+		set_old_locale ();
+		g_object_weak_ref (G_OBJECT (treeview), (GWeakNotify) g_free, old_locale);
 	}
 
 	/* Add user languages */
