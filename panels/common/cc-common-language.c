@@ -440,6 +440,36 @@ cc_common_language_select_current_language (GtkTreeView *treeview)
 		g_warning ("Could not find current language '%s' in the treeview", lang);
 }
 
+static char *
+get_lang_for_user_object_path (const char *path)
+{
+	GError *error = NULL;
+	GDBusProxy *user;
+	GVariant *props;
+	char *lang;
+
+	user = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+					      G_DBUS_PROXY_FLAGS_NONE,
+					      NULL,
+					      "org.freedesktop.Accounts",
+					      path,
+					      "org.freedesktop.Accounts.User",
+					      NULL,
+					      &error);
+	if (user == NULL) {
+		g_warning ("Failed to get proxy for user '%s': %s",
+			   path, error->message);
+		g_error_free (error);
+		return NULL;
+	}
+	props = g_dbus_proxy_get_cached_property (user, "Language");
+	lang = g_variant_dup_string (props, NULL);
+
+	g_variant_unref (props);
+	g_object_unref (user);
+	return lang;
+}
+
 static void
 add_other_users_language (GHashTable *ht)
 {
@@ -476,29 +506,11 @@ add_other_users_language (GHashTable *ht)
         }
         g_variant_get (variant, "(ao)", &vi);
         while (g_variant_iter_loop (vi, "o", &str)) {
-                GDBusProxy *user;
-                GVariant *props;
-                const char *lang;
+                char *lang;
                 char *name;
                 char *language;
 
-                user = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                                      G_DBUS_PROXY_FLAGS_NONE,
-                                                      NULL,
-                                                      "org.freedesktop.Accounts",
-                                                      str,
-                                                      "org.freedesktop.Accounts.User",
-                                                      NULL,
-                                                      &error);
-                if (user == NULL) {
-                        g_warning ("Failed to get proxy for user '%s': %s",
-                                   str, error->message);
-                        g_error_free (error);
-                        error = NULL;
-                        continue;
-                }
-                props = g_dbus_proxy_get_cached_property (user, "Language");
-                lang = g_variant_get_string (props, NULL);
+                lang = get_lang_for_user_object_path (str);
                 if (lang != NULL && *lang != '\0' &&
                     cc_common_language_has_font (lang) &&
                     gdm_language_has_translations (lang)) {
@@ -511,8 +523,7 @@ add_other_users_language (GHashTable *ht)
                                 g_free (name);
                         }
                 }
-                g_variant_unref (props);
-                g_object_unref (user);
+                g_free (lang);
         }
         g_variant_iter_free (vi);
         g_variant_unref (variant);
