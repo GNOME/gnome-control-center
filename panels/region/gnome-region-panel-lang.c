@@ -94,6 +94,30 @@ is_old_locale (const char *new_locale)
 }
 
 static void
+update_logout_button (GtkBuilder *builder,
+		      const char *locale)
+{
+	GtkWidget *widget;
+	char *old_lang;
+
+	/* Offer log out in the new language, unless it is
+	 * the original session language */
+	widget = (GtkWidget *)gtk_builder_get_object (builder, "logout_button");
+
+	if (is_old_locale (locale) == FALSE) {
+		old_lang = g_strdup (setlocale (LC_MESSAGES, NULL));
+		setlocale (LC_MESSAGES, locale);
+		gtk_button_set_label (GTK_BUTTON (widget), _("Log out for changes to take effect"));
+		setlocale (LC_MESSAGES, old_lang);
+		g_free (old_lang);
+
+		gtk_widget_show (widget);
+	} else {
+		gtk_widget_hide (widget);
+	}
+}
+
+static void
 selection_changed (GtkTreeSelection *selection,
                    GtkBuilder       *builder)
 {
@@ -104,8 +128,6 @@ selection_changed (GtkTreeSelection *selection,
 	GVariant *variant;
 	GError *error = NULL;
 	char *object_path;
-	GtkWidget *widget;
-	char *old_lang;
 
 	if (gtk_tree_selection_get_selected (selection, &model, &iter) == FALSE) {
 		g_warning ("No selected languages, this shouldn't happen");
@@ -174,21 +196,7 @@ selection_changed (GtkTreeSelection *selection,
         formats_update_language (builder, locale);
         system_update_language (builder, locale);
 
-	/* Offer log out in the new language, unless it is
-	 * the original session language */
-	widget = (GtkWidget *)gtk_builder_get_object (builder, "logout_button");
-
-	if (is_old_locale (locale) == FALSE) {
-		old_lang = g_strdup (setlocale (LC_MESSAGES, NULL));
-		setlocale (LC_MESSAGES, locale);
-		gtk_button_set_label (GTK_BUTTON (widget), _("Log out for changes to take effect"));
-		setlocale (LC_MESSAGES, old_lang);
-		g_free (old_lang);
-
-		gtk_widget_show (widget);
-	} else {
-		gtk_widget_hide (widget);
-	}
+        update_logout_button (builder, locale);
 
 bail:
 	if (variant != NULL)
@@ -268,6 +276,7 @@ setup_language (GtkBuilder *builder)
 	GtkWidget *widget;
 	GtkStyleContext *context;
 	GtkTreeSelection *selection;
+	char *locale;
 
         /* Setup junction between toolbar and treeview */
         widget = (GtkWidget *)gtk_builder_get_object (builder, "language-swindow");
@@ -327,6 +336,10 @@ setup_language (GtkBuilder *builder)
 
         /* And select the current language */
         cc_common_language_select_current_language (GTK_TREE_VIEW (treeview));
+
+        /* Show the logout button if necessary */
+        locale = cc_common_language_get_current_language ();
+        update_logout_button (builder, locale);
 
         /* And now listen for changes */
         selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
