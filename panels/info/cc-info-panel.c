@@ -569,15 +569,47 @@ static char *
 get_os_type (void)
 {
   int bits;
+  char *buffer;
+  char *name;
+  char *result;
+
+  name = NULL;
+
+  if (g_file_get_contents ("/etc/os-release", &buffer, NULL, NULL))
+    {
+       char *start, *end;
+
+       start = end = NULL;
+       if ((start = strstr (buffer, "PRETTY_NAME=\"")) != NULL)
+         {
+           start += strlen ("PRETTY_NAME=\"");
+           end = strchr (start, '"');
+         }
+
+       if (start != NULL && end != NULL)
+         {
+           name = g_strndup (start, end - start);
+         }
+
+       g_free (buffer);
+    }
 
   if (GLIB_SIZEOF_VOID_P == 8)
     bits = 64;
   else
     bits = 32;
 
-  /* translators: This is the type of architecture, for example:
-   * "64-bit" or "32-bit" */
-  return g_strdup_printf (_("%d-bit"), bits);
+  /* translators: This is the name of the OS, followed by the type
+   * of architecture, for example:
+   * "Fedora 18 (Spherical Cow) 64-bit" or "Ubuntu (Oneric Ocelot) 32-bit" */
+  if (name)
+    result = g_strdup_printf (_("%s %d-bit"), name, bits);
+  else
+    result = g_strdup_printf (_("%d-bit"), bits);
+
+  g_free (name);
+
+  return result;
 }
 
 static void
