@@ -293,7 +293,7 @@ stealth_mode_changed (GSettings   *settings,
   gboolean stealth_mode;
   GtkWidget *w;
 
-  stealth_mode = g_settings_get_boolean (settings, "stealth-mode");
+  stealth_mode = g_settings_get_boolean (settings, "hide-identity");
 
   if (stealth_mode)
     {
@@ -317,7 +317,7 @@ add_name_visibility (CcPrivacyPanel *self)
   GtkWidget *w;
   GtkWidget *dialog;
 
-  w = get_visible_label (self->priv->privacy_settings, "stealth-mode");
+  w = get_visible_label (self->priv->privacy_settings, "hide-identity");
   add_row (self, _("Name & Visibility"), "name_dialog", w);
 
   w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "name_done"));
@@ -326,7 +326,7 @@ add_name_visibility (CcPrivacyPanel *self)
                             G_CALLBACK (gtk_widget_hide), dialog);
 
   w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "stealth_mode"));
-  g_settings_bind (self->priv->privacy_settings, "stealth-mode",
+  g_settings_bind (self->priv->privacy_settings, "hide-identity",
                    w, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
@@ -340,7 +340,7 @@ add_name_visibility (CcPrivacyPanel *self)
                    w, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  g_signal_connect (self->priv->privacy_settings, "changed::stealth-mode",
+  g_signal_connect (self->priv->privacy_settings, "changed::hide-identity",
                     G_CALLBACK (stealth_mode_changed), self);
 }
 
