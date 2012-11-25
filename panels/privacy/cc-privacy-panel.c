@@ -250,6 +250,7 @@ add_screen_lock (CcPrivacyPanel *self)
 {
   GtkWidget *w;
   GtkWidget *dialog;
+  GtkWidget *label;
 
   w = get_on_off_label (self->priv->lock_settings, "lock-enabled");
   add_row (self, _("Screen Lock"), "screen_lock_dialog", w);
@@ -264,15 +265,14 @@ add_screen_lock (CcPrivacyPanel *self)
                    w, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "lock_after_label"));
-  g_settings_bind (self->priv->lock_settings, "lock-enabled",
-                   w, "sensitive",
-                   G_SETTINGS_BIND_GET);
-
   w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "lock_after_combo"));
   g_settings_bind (self->priv->lock_settings, "lock-enabled",
                    w, "sensitive",
                    G_SETTINGS_BIND_GET);
+
+  label = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "lock_after_label"));
+
+  g_object_bind_property (w, "sensitive", label, "sensitive", G_BINDING_DEFAULT);
 
   set_lock_value_for_combo (GTK_COMBO_BOX (w), self);
   g_signal_connect (w, "changed",
@@ -342,6 +342,116 @@ add_name_visibility (CcPrivacyPanel *self)
 
   g_signal_connect (self->priv->privacy_settings, "changed::hide-identity",
                     G_CALLBACK (stealth_mode_changed), self);
+}
+
+static void
+retain_history_combo_changed_cb (GtkWidget      *widget,
+                                 CcPrivacyPanel *self)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  gint value;
+  gboolean ret;
+
+  /* no selection */
+  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
+  if (!ret)
+    return;
+
+  /* get entry */
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
+  gtk_tree_model_get (model, &iter,
+                      1, &value,
+                      -1);
+  g_settings_set (self->priv->privacy_settings, "retain-recent-files-for", "i", value);
+}
+
+static void
+set_retain_history_value_for_combo (GtkComboBox    *combo_box,
+                                    CcPrivacyPanel *self)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  gint value;
+  gint value_tmp, value_prev;
+  gboolean ret;
+  guint i;
+
+  /* get entry */
+  model = gtk_combo_box_get_model (combo_box);
+  ret = gtk_tree_model_get_iter_first (model, &iter);
+  if (!ret)
+    return;
+
+  value_prev = 0;
+  i = 0;
+
+  /* try to make the UI match the setting */
+  g_settings_get (self->priv->privacy_settings, "retain-recent-files-for", "i", &value);
+  do
+    {
+      gtk_tree_model_get (model, &iter,
+                          1, &value_tmp,
+                          -1);
+      if (value == value_tmp ||
+          (value_tmp > value_prev && value < value_tmp))
+        {
+          gtk_combo_box_set_active_iter (combo_box, &iter);
+          return;
+        }
+      value_prev = value_tmp;
+      i++;
+    } while (gtk_tree_model_iter_next (model, &iter));
+
+  /* If we didn't find the setting in the list */
+  gtk_combo_box_set_active (combo_box, i - 1);
+}
+
+static void
+clear_recent (CcPrivacyPanel *self)
+{
+  GtkRecentManager *m;
+
+  m = gtk_recent_manager_get_default ();
+  gtk_recent_manager_purge_items (m, NULL);
+}
+
+static void
+add_usage_history (CcPrivacyPanel *self)
+{
+  GtkWidget *w;
+  GtkWidget *dialog;
+  GtkWidget *label;
+
+  w = get_on_off_label (self->priv->privacy_settings, "keep-recent-files");
+  add_row (self, _("Usage & History"), "recent_dialog", w);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "recent_done"));
+  dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "recent_dialog"));
+  g_signal_connect_swapped (w, "clicked",
+                            G_CALLBACK (gtk_widget_hide), dialog);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "recently_used_switch"));
+  g_settings_bind (self->priv->privacy_settings, "keep-recent-files",
+                   w, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "retain_history_combo"));
+  set_retain_history_value_for_combo (GTK_COMBO_BOX (w), self);
+  g_signal_connect (w, "changed",
+                    G_CALLBACK (retain_history_combo_changed_cb), self);
+
+  g_settings_bind (self->priv->privacy_settings, "keep-recent-files",
+                   w, "sensitive",
+                   G_SETTINGS_BIND_GET);
+
+  label = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "retain_history_label"));
+
+  g_object_bind_property (w, "sensitive", label, "sensitive", G_BINDING_DEFAULT);
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "clear_recent_button"));
+  g_signal_connect_swapped (w, "clicked",
+                            G_CALLBACK (clear_recent), self);
+
 }
 
 static void
@@ -568,6 +678,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
 
   add_screen_lock (self);
   add_name_visibility (self);
+  add_usage_history (self);
   add_trash_temp (self);
 
   g_signal_connect (self->priv->lockdown_settings, "changed",
