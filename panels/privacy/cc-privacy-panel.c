@@ -37,6 +37,7 @@ struct _CcPrivacyPanelPrivate
   GSettings  *lockdown_settings;
   GSettings  *lock_settings;
   GSettings  *shell_settings;
+  GSettings  *housekeeping_settings;
   GSettings  *privacy_settings;
 };
 
@@ -115,6 +116,47 @@ get_visible_label (GSettings *settings,
                                 NULL,
                                 NULL);
   return w;
+}
+
+typedef struct
+{
+  GtkWidget *label;
+  const gchar *key1;
+  const gchar *key2;
+} Label2Data;
+
+static void
+set_on_off_label2 (GSettings   *settings,
+                   const gchar *key,
+                   gpointer     user_data)
+{
+  Label2Data *data = user_data;
+  gboolean v1, v2;
+
+  v1 = g_settings_get_boolean (settings, data->key1);
+  v2 = g_settings_get_boolean (settings, data->key2);
+
+  gtk_label_set_label (GTK_LABEL (data->label), (v1 || v2) ? _("On") : _("Off"));
+}
+
+static GtkWidget *
+get_on_off_label2 (GSettings *settings,
+                   const gchar *key1,
+                   const gchar *key2)
+{
+  Label2Data *data;
+
+  data = g_new (Label2Data, 1);
+  data->label = gtk_label_new ("");
+  data->key1 = g_strdup (key1);
+  data->key2 = g_strdup (key2);
+
+  g_signal_connect (settings, "changed",
+                    G_CALLBACK (set_on_off_label2), data);
+
+  set_on_off_label2 (settings, key1, data);
+
+  return data->label;
 }
 
 static void
@@ -300,7 +342,134 @@ add_name_visibility (CcPrivacyPanel *self)
 
   g_signal_connect (self->priv->privacy_settings, "changed::stealth-mode",
                     G_CALLBACK (stealth_mode_changed), self);
+}
 
+static void
+purge_after_combo_changed_cb (GtkWidget      *widget,
+                              CcPrivacyPanel *self)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  guint value;
+  gboolean ret;
+
+  /* no selection */
+  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
+  if (!ret)
+    return;
+
+  /* get entry */
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
+  gtk_tree_model_get (model, &iter,
+                      1, &value,
+                      -1);
+  g_settings_set (self->priv->housekeeping_settings, "purge-after", "u", value);
+}
+
+static void
+set_purge_after_value_for_combo (GtkComboBox    *combo_box,
+                                 CcPrivacyPanel *self)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  guint value;
+  gint value_tmp, value_prev;
+  gboolean ret;
+  guint i;
+
+  /* get entry */
+  model = gtk_combo_box_get_model (combo_box);
+  ret = gtk_tree_model_get_iter_first (model, &iter);
+  if (!ret)
+    return;
+
+  value_prev = 0;
+  i = 0;
+
+  /* try to make the UI match the purge setting */
+  g_settings_get (self->priv->housekeeping_settings, "purge-after", "u", &value);
+  do
+    {
+      gtk_tree_model_get (model, &iter,
+                          1, &value_tmp,
+                          -1);
+      if (value == value_tmp ||
+          (value_tmp > value_prev && value < value_tmp))
+        {
+          gtk_combo_box_set_active_iter (combo_box, &iter);
+          return;
+        }
+      value_prev = value_tmp;
+      i++;
+    } while (gtk_tree_model_iter_next (model, &iter));
+
+  /* If we didn't find the setting in the list */
+  gtk_combo_box_set_active (combo_box, i - 1);
+}
+
+static void
+empty_trash (CcPrivacyPanel *self)
+{
+  GDBusConnection *bus;
+  bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
+  g_dbus_connection_call (bus,
+                          "org.gnome.SettingsDaemon",
+                          "/org/gnome/SettingsDaemon/Housekeeping",
+                          "org.gnome.SettingsDaemon.Housekeeping",
+                          "EmptyTrash",
+                          NULL, NULL, 0, -1, NULL, NULL, NULL);
+  g_object_unref (bus);
+}
+
+static void
+purge_temp (CcPrivacyPanel *self)
+{
+  GDBusConnection *bus;
+  bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
+  g_dbus_connection_call (bus,
+                          "org.gnome.SettingsDaemon",
+                          "/org/gnome/SettingsDaemon/Housekeeping",
+                          "org.gnome.SettingsDaemon.Housekeeping",
+                          "RemoveTempFiles",
+                          NULL, NULL, 0, -1, NULL, NULL, NULL);
+  g_object_unref (bus);
+}
+
+static void
+add_trash_temp (CcPrivacyPanel *self)
+{
+  GtkWidget *w;
+  GtkWidget *dialog;
+
+  w = get_on_off_label2 (self->priv->housekeeping_settings, "purge-trash", "purge-temp-files");
+  add_row (self, _("Purge Trash & Temporary Files"), "trash_dialog", w);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "trash_done"));
+  dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "trash_dialog"));
+  g_signal_connect_swapped (w, "clicked",
+                            G_CALLBACK (gtk_widget_hide), dialog);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "purge_trash_switch"));
+  g_settings_bind (self->priv->housekeeping_settings, "purge-trash",
+                   w, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "purge_temp_switch"));
+  g_settings_bind (self->priv->housekeeping_settings, "purge-temp-files",
+                   w, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "purge_after_combo"));
+
+  set_purge_after_value_for_combo (GTK_COMBO_BOX (w), self);
+  g_signal_connect (w, "changed",
+                    G_CALLBACK (purge_after_combo_changed_cb), self);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "empty_trash_button"));
+  g_signal_connect_swapped (w, "clicked", G_CALLBACK (empty_trash), self);
+
+  w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "purge_temp_button"));
+  g_signal_connect_swapped (w, "clicked", G_CALLBACK (purge_temp), self);
 }
 
 static void
@@ -312,6 +481,7 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_object (&priv->lockdown_settings);
   g_clear_object (&priv->lock_settings);
   g_clear_object (&priv->shell_settings);
+  g_clear_object (&priv->housekeeping_settings);
   g_clear_object (&priv->privacy_settings);
 
   G_OBJECT_CLASS (cc_privacy_panel_parent_class)->finalize (object);
@@ -393,10 +563,12 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   self->priv->lockdown_settings = g_settings_new ("org.gnome.desktop.lockdown");
   self->priv->lock_settings = g_settings_new ("org.gnome.desktop.screensaver");
   self->priv->shell_settings = g_settings_new ("org.gnome.shell");
+  self->priv->housekeeping_settings = g_settings_new ("org.gnome.settings-daemon.plugins.housekeeping");
   self->priv->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
 
   add_screen_lock (self);
   add_name_visibility (self);
+  add_trash_temp (self);
 
   g_signal_connect (self->priv->lockdown_settings, "changed",
                     G_CALLBACK (on_lockdown_settings_changed), self);
