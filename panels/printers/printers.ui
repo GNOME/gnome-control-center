@@ -146,6 +146,9 @@
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
                         <property name="text">---</property>
+                        <accessibility>
+                          <relation type="labelled-by" target="label10"/>
+                        </accessibility>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -237,13 +240,17 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="printer-jobs-button">
-                        <property name="label" translatable="yes" comments="Tanslators: Opens a dialog containing printer's jobs">_Show</property>
+                        <property name="label" translatable="yes" comments="Translators: Opens a dialog containing printer's jobs">Show _Jobs</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="use_underline">True</property>
                         <property name="halign">GTK_ALIGN_END</property>
                         <property name="valign">GTK_ALIGN_CENTER</property>
+                        <accessibility>
+                          <relation type="labelled-by" target="label3"/>
+                          <relation type="labelled-by" target="printer-jobs-label"/>
+                        </accessibility>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>
@@ -328,6 +335,9 @@
                             <property name="use_action_appearance">False</property>
                             <property name="relief">none</property>
                             <property name="xalign">0</property>
+                            <accessibility>
+                              <relation type="labelled-by" target="label14"/>
+                            </accessibility>
                           </object>
                         </child>
                         <child type="tab">
@@ -400,6 +410,9 @@
                         <property name="visible">True</property>
                         <property name="xalign">0</property>
                         <property name="text">---</property>
+                        <accessibility>
+                          <relation type="labelled-by" target="label15"/>
+                        </accessibility>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
