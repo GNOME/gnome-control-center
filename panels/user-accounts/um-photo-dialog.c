@@ -247,7 +247,7 @@ static void
 none_icon_selected (GtkMenuItem   *menuitem,
                     UmPhotoDialog *um)
 {
-        um_user_set_icon_file (um->user, NULL);
+        um_user_set_icon_file (um->user, "");
 }
 
 static void
