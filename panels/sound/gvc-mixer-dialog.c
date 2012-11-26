@@ -361,6 +361,11 @@ on_monitor_read_callback (pa_stream *s,
                 return;
         }
 
+        if (!data) {
+                pa_stream_drop (s);
+                return;
+        }
+
         assert (length > 0);
         assert (length % sizeof (float) == 0);
 
