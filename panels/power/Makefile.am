@@ -19,6 +19,16 @@ libpower_la_SOURCES =		\
 
 libpower_la_LIBADD = $(PANEL_LIBS) $(POWER_PANEL_LIBS)
 
+if BUILD_BLUETOOTH
+INCLUDES += $(BLUETOOTH_CFLAGS)
+libpower_la_LIBADD += $(BLUETOOTH_LIBS)
+endif
+
+if BUILD_NETWORK
+INCLUDES += $(NETWORK_MANAGER_CFLAGS)
+libpower_la_LIBADD += $(NETWORK_MANAGER_LIBS)
+endif
+
 uidir = $(pkgdatadir)/ui
 dist_ui_DATA = power.ui
 

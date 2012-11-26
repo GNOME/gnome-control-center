@@ -182,6 +182,9 @@ else
 	AC_DEFINE(BUILD_NETWORK, 1, [Define to 1 to build the Network panel])
 fi
 AM_CONDITIONAL(BUILD_NETWORK, [test x$have_networkmanager = xyes])
+if test x${have_networkmanager} = xyes; then
+  AC_DEFINE(HAVE_NETWORK_MANAGER, 1, [Define to 1 if NetworkManager is available])
+fi
 
 # Check for gnome-bluetooth
 PKG_CHECK_MODULES(BLUETOOTH, $COMMON_MODULES gnome-bluetooth-1.0 >= 3.5.5,
@@ -190,6 +193,9 @@ if test "x$have_bluetooth" = xyes ; then
 	AC_DEFINE(BUILD_BLUETOOTH, 1, [Define to 1 to build the Network panel])
 fi
 AM_CONDITIONAL(BUILD_BLUETOOTH, [test x$have_bluetooth = xyes])
+if test x${have_bluetooth} = xyes; then
+  AC_DEFINE(HAVE_BLUETOOTH, 1, [Define to 1 if bluetooth support is available])
+fi
 
 # Check for CUPS 1.4 or newer
 AC_ARG_ENABLE([cups],
