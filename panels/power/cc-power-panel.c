@@ -25,6 +25,7 @@
 #include <libupower-glib/upower.h>
 #include <glib/gi18n.h>
 #include <gnome-settings-daemon/gsd-enums.h>
+#include "egg-list-box.h"
 
 #include "cc-power-panel.h"
 
@@ -44,6 +45,11 @@ struct _CcPowerPanelPrivate
   GDBusProxy    *proxy;
   UpClient      *up_client;
   GtkWidget     *levelbar_primary;
+  GDBusProxy    *screen_proxy;
+  GSettings     *session_settings;
+  GtkWidget     *screen_power_saving;
+  GtkWidget     *brightness_scale;
+  gboolean       setting_brightness;
 };
 
 enum
@@ -89,6 +95,11 @@ cc_power_panel_dispose (GObject *object)
       g_object_unref (priv->gsd_settings);
       priv->gsd_settings = NULL;
     }
+  if (priv->session_settings)
+    {
+      g_object_unref (priv->session_settings);
+      priv->session_settings = NULL;
+    }
   if (priv->cancellable != NULL)
     {
       g_cancellable_cancel (priv->cancellable);
@@ -104,6 +115,11 @@ cc_power_panel_dispose (GObject *object)
     {
       g_object_unref (priv->proxy);
       priv->proxy = NULL;
+    }
+  if (priv->screen_proxy != NULL)
+    {
+      g_object_unref (priv->screen_proxy);
+      priv->screen_proxy = NULL;
     }
   if (priv->up_client != NULL)
     {
@@ -769,6 +785,117 @@ on_properties_changed (GDBusProxy *proxy,
 }
 
 static void
+set_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+{
+  GError *error = NULL;
+  GVariant *result;
+  CcPowerPanelPrivate *priv = CC_POWER_PANEL (user_data)->priv;
+
+  /* not setting, so pay attention to changed signals */
+  priv->setting_brightness = FALSE;
+  result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
+  if (result == NULL)
+    {
+      g_printerr ("Error setting brightness: %s\n", error->message);
+      g_error_free (error);
+      return;
+    }
+}
+
+static void
+brightness_slider_value_changed_cb (GtkRange *range, gpointer user_data)
+{
+  guint percentage;
+  CcPowerPanelPrivate *priv = CC_POWER_PANEL (user_data)->priv;
+
+  /* do not loop */
+  if (priv->setting_brightness)
+    return;
+
+  priv->setting_brightness = TRUE;
+
+  /* push this to g-p-m */
+  percentage = (guint) gtk_range_get_value (range);
+  g_dbus_proxy_call (priv->screen_proxy,
+                     "SetPercentage",
+                     g_variant_new ("(u)",
+                                    percentage),
+                     G_DBUS_CALL_FLAGS_NONE,
+                     -1,
+                     priv->cancellable,
+                     set_brightness_cb,
+                     user_data);
+}
+
+static void
+get_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+{
+  GError *error = NULL;
+  GVariant *result;
+  guint brightness;
+  GtkRange *range;
+  CcPowerPanel *self = CC_POWER_PANEL (user_data);
+
+  result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
+  if (result == NULL)
+    {
+      /* We got cancelled, so we're probably exiting */
+      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          g_error_free (error);
+          return;
+        }
+
+      gtk_widget_hide (self->priv->screen_power_saving);
+
+      if (error->message &&
+          strstr (error->message, "No backlight devices present") == NULL)
+        {
+          g_warning ("Error getting brightness: %s", error->message);
+        }
+      g_error_free (error);
+      return;
+    }
+
+  /* set the slider */
+  g_variant_get (result, "(u)", &brightness);
+  range = GTK_RANGE (self->priv->brightness_scale);
+  gtk_range_set_range (range, 0, 100);
+  gtk_range_set_increments (range, 1, 10);
+  gtk_range_set_value (range, brightness);
+  g_signal_connect (range, "value-changed",
+                    G_CALLBACK (brightness_slider_value_changed_cb), user_data);
+  g_variant_unref (result);
+}
+
+static void
+on_signal (GDBusProxy *proxy,
+           gchar      *sender_name,
+           gchar      *signal_name,
+           GVariant   *parameters,
+           gpointer    user_data)
+{
+  CcPowerPanel *self = CC_POWER_PANEL (user_data);
+
+  if (g_strcmp0 (signal_name, "Changed") == 0)
+    {
+      /* changed, but ignoring */
+      if (self->priv->setting_brightness)
+        return;
+
+      /* retrieve the value again from g-s-d */
+      g_dbus_proxy_call (self->priv->screen_proxy,
+                         "GetPercentage",
+                         NULL,
+                         G_DBUS_CALL_FLAGS_NONE,
+                         200, /* we don't want to randomly move the bar */
+                         self->priv->cancellable,
+                         get_brightness_cb,
+                         user_data);
+    }
+}
+
+static void
 got_power_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 {
   GError *error = NULL;
@@ -802,6 +929,35 @@ got_power_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_dat
                      200, /* we don't want to randomly expand the dialog */
                      priv->cancellable,
                      get_devices_cb,
+                     user_data);
+}
+
+static void
+got_screen_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
+{
+  GError *error = NULL;
+  CcPowerPanelPrivate *priv = CC_POWER_PANEL (user_data)->priv;
+
+  priv->screen_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  if (priv->screen_proxy == NULL)
+    {
+      g_printerr ("Error creating proxy: %s\n", error->message);
+      g_error_free (error);
+      return;
+    }
+
+  /* we want to change the bar if the user presses brightness buttons */
+  g_signal_connect (priv->screen_proxy, "g-signal",
+                    G_CALLBACK (on_signal), user_data);
+
+  /* get the initial state */
+  g_dbus_proxy_call (priv->screen_proxy,
+                     "GetPercentage",
+                     NULL,
+                     G_DBUS_CALL_FLAGS_NONE,
+                     200, /* we don't want to randomly move the bar */
+                     priv->cancellable,
+                     get_brightness_cb,
                      user_data);
 }
 
@@ -988,6 +1144,240 @@ activate_link_cb (GtkLabel *label, gchar *uri, CcPowerPanel *self)
 }
 
 static void
+update_separator_func (GtkWidget **separator,
+                       GtkWidget  *child,
+                       GtkWidget  *before,
+                       gpointer    user_data)
+{
+  if (*separator == NULL)
+    {
+      *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show (*separator);
+    }
+}
+
+static void
+activate_child (CcPowerPanel *self,
+                GtkWidget    *child)
+{
+  GtkWidget *w;
+  GtkWidget *toplevel;
+
+  if (child != self->priv->screen_power_saving)
+    return;
+
+  w = WID (self->priv->builder, "screen_power_saving_dialog");
+
+  toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+  gtk_window_set_transient_for (GTK_WINDOW (w), GTK_WINDOW (toplevel));
+  gtk_window_set_modal (GTK_WINDOW (w), TRUE);
+  gtk_window_present (GTK_WINDOW (w));
+}
+
+static gboolean
+on_off_label_mapping_get (GValue   *value,
+                          GVariant *variant,
+                          gpointer  user_data)
+{
+  g_value_set_string (value, g_variant_get_boolean (variant) ? _("On") : _("Off"));
+
+  return TRUE;
+}
+
+static GtkWidget *
+get_on_off_label (GSettings   *settings,
+                  const gchar *key)
+{
+  GtkWidget *w;
+
+  w = gtk_label_new ("");
+  g_settings_bind_with_mapping (settings, key,
+                                w, "label",
+                                G_SETTINGS_BIND_GET,
+                                on_off_label_mapping_get,
+                                NULL,
+                                NULL,
+                                NULL);
+  return w;
+}
+
+static void
+set_idle_delay_from_dpms (CcPowerPanel *self,
+                          int           value)
+{
+  guint off_delay;
+
+  off_delay = 0;
+
+  if (value > 0)
+    off_delay = (guint) value;
+
+  g_settings_set (self->priv->session_settings, "idle-delay", "u", off_delay);
+}
+
+static void
+dpms_combo_changed_cb (GtkWidget *widget, CcPowerPanel *self)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  gint value;
+  gboolean ret;
+
+  /* no selection */
+  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter);
+  if (!ret)
+    return;
+
+  /* get entry */
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
+  gtk_tree_model_get (model, &iter,
+                      1, &value,
+                      -1);
+
+  /* set both battery and ac keys */
+  g_settings_set_int (self->priv->gsd_settings, "sleep-display-ac", value);
+  g_settings_set_int (self->priv->gsd_settings, "sleep-display-battery", value);
+
+  set_idle_delay_from_dpms (self, value);
+}
+
+static void
+set_dpms_value_for_combo (GtkComboBox *combo_box, CcPowerPanel *self)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  gint value;
+  gint value_tmp, value_prev;
+  gboolean ret;
+  guint i;
+
+  /* get entry */
+  model = gtk_combo_box_get_model (combo_box);
+  ret = gtk_tree_model_get_iter_first (model, &iter);
+  if (!ret)
+    return;
+
+  value_prev = 0;
+  i = 0;
+
+  /* try to make the UI match the AC setting */
+  value = g_settings_get_int (self->priv->gsd_settings, "sleep-display-ac");
+  do
+    {
+      gtk_tree_model_get (model, &iter,
+                          1, &value_tmp,
+                          -1);
+      if (value == value_tmp ||
+          (value_tmp > value_prev && value < value_tmp))
+        {
+          gtk_combo_box_set_active_iter (combo_box, &iter);
+          return;
+        }
+      value_prev = value_tmp;
+      i++;
+    } while (gtk_tree_model_iter_next (model, &iter));
+
+  /* If we didn't find the setting in the list */
+  gtk_combo_box_set_active (combo_box, i - 1);
+}
+
+static void
+add_power_saving_section (CcPowerPanel *self)
+{
+  GtkWidget *vbox;
+  GtkWidget *widget, *box, *label, *scale;
+  GtkWidget *dialog;
+  gchar *s;
+
+  vbox = WID (self->priv->builder, "vbox_power");
+
+  s = g_strdup_printf ("<b>%s</b>", _("Power Saving"));
+  widget = gtk_label_new (s);
+  g_free (s);
+  gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
+  gtk_misc_set_alignment (GTK_MISC (widget), 0, 0.5);
+  gtk_widget_set_margin_left (widget, 50);
+  gtk_widget_set_margin_right (widget, 50);
+  gtk_widget_set_margin_top (widget, 24);
+  gtk_widget_set_margin_bottom (widget, 6);
+  gtk_box_pack_start (GTK_BOX (vbox), widget, FALSE, TRUE, 0);
+  gtk_widget_show (widget);
+
+  widget = GTK_WIDGET (egg_list_box_new ());
+  egg_list_box_set_separator_funcs (EGG_LIST_BOX (widget),
+                                    update_separator_func,
+                                    NULL, NULL);
+  g_signal_connect_swapped (widget, "child-activated",
+                            G_CALLBACK (activate_child), self);
+
+
+  box = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
+                                  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
+  gtk_widget_set_margin_left (box, 50);
+  gtk_widget_set_margin_right (box, 50);
+  gtk_widget_show (box);
+  egg_list_box_add_to_scrolled (EGG_LIST_BOX (widget), GTK_SCROLLED_WINDOW (box));
+  gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
+
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  label = gtk_label_new (_("Screen _Brightness"));
+  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+  gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
+  gtk_widget_set_margin_left (label, 12);
+  gtk_widget_set_margin_right (label, 50);
+  gtk_widget_set_margin_top (label, 6);
+  gtk_widget_set_margin_bottom (label, 6);
+  gtk_box_pack_start (GTK_BOX (box), label, FALSE, TRUE, 0);
+
+  scale = gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL, 0, 100, 1);
+  gtk_scale_set_draw_value (GTK_SCALE (scale), FALSE);
+  gtk_widget_set_margin_left (scale, 12);
+  gtk_widget_set_margin_right (scale, 12);
+  gtk_box_pack_start (GTK_BOX (box), scale, TRUE, TRUE, 0);
+  self->priv->brightness_scale = scale;
+
+  gtk_container_add (GTK_CONTAINER (widget), box);
+
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  label = gtk_label_new (_("Screen Power _Saving"));
+  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+  gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
+  gtk_widget_set_margin_left (label, 12);
+  gtk_widget_set_margin_right (label, 12);
+  gtk_widget_set_margin_top (label, 6);
+  gtk_widget_set_margin_bottom (label, 6);
+  gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+
+  label = get_on_off_label (self->priv->gsd_settings, "idle-dim-battery");
+  gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
+  gtk_widget_set_margin_left (label, 12);
+  gtk_widget_set_margin_right (label, 12);
+  gtk_box_pack_start (GTK_BOX (box), label, FALSE, TRUE, 0);
+
+  gtk_container_add (GTK_CONTAINER (widget), box);
+  self->priv->screen_power_saving = box;
+
+  gtk_widget_show_all (widget);
+
+  dialog = WID (self->priv->builder, "screen_power_saving_dialog");
+  widget = WID (self->priv->builder, "power_saving_done");
+  g_signal_connect_swapped (widget, "clicked",
+                            G_CALLBACK (gtk_widget_hide), dialog);
+
+  widget = WID (self->priv->builder, "dim_screen_check");
+  g_settings_bind (self->priv->gsd_settings, "idle-dim-battery",
+                   widget, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  widget = WID (self->priv->builder, "turn_off_combo");
+  set_dpms_value_for_combo (GTK_COMBO_BOX (widget), self);
+  g_signal_connect (widget, "changed",
+                    G_CALLBACK (dpms_combo_changed_cb),
+                    self);
+}
+
+static void
 cc_power_panel_init (CcPowerPanel *self)
 {
   GError     *error;
@@ -1027,16 +1417,25 @@ cc_power_panel_init (CcPowerPanel *self)
                             got_power_proxy_cb,
                             self);
 
+  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+                            G_DBUS_PROXY_FLAGS_NONE,
+                            NULL,
+                            "org.gnome.SettingsDaemon",
+                            "/org/gnome/SettingsDaemon/Power",
+                            "org.gnome.SettingsDaemon.Power.Screen",
+                            self->priv->cancellable,
+                            got_screen_proxy_cb,
+                            self);
+
   /* find out if there are any battery or UPS devices attached
    * and setup UI accordingly */
   self->priv->up_client = up_client_new ();
   set_ac_battery_ui_mode (self);
 
   self->priv->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
-  g_signal_connect (self->priv->gsd_settings,
-                    "changed",
-                    G_CALLBACK (on_lock_settings_changed),
-                    self);
+  g_signal_connect (self->priv->gsd_settings, "changed",
+                    G_CALLBACK (on_lock_settings_changed), self);
+  self->priv->session_settings = g_settings_new ("org.gnome.desktop.session");
 
   /* auto-sleep time */
   value = g_settings_get_int (self->priv->gsd_settings, "sleep-inactive-ac-timeout");
@@ -1079,6 +1478,8 @@ cc_power_panel_init (CcPowerPanel *self)
   g_signal_connect (widget, "activate-link",
                     G_CALLBACK (activate_link_cb),
                     self);
+
+  add_power_saving_section (self);
 
   widget = WID (self->priv->builder, "vbox_power");
   gtk_widget_reparent (widget, (GtkWidget *) self);
