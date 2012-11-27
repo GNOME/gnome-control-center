@@ -540,6 +540,8 @@ add_other_users_language (GHashTable *ht)
         g_object_unref (proxy);
 }
 
+#define TRANSLATED_LANG(x) g_strdup(dgettext("iso_639", x))
+
 GHashTable *
 cc_common_language_get_initial_languages (void)
 {
@@ -550,29 +552,29 @@ cc_common_language_get_initial_languages (void)
         ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
         /* Add some common languages first */
-        g_hash_table_insert (ht, g_strdup ("en_US.utf8"), g_strdup (_("English")));
+        g_hash_table_insert (ht, g_strdup ("en_US.utf8"), TRANSLATED_LANG("English"));
         if (gdm_language_has_translations ("en_GB"))
                 g_hash_table_insert (ht, g_strdup ("en_GB.utf8"), g_strdup (_("British English")));
         if (gdm_language_has_translations ("de") ||
             gdm_language_has_translations ("de_DE"))
-                g_hash_table_insert (ht, g_strdup ("de_DE.utf8"), g_strdup (_("German")));
+                g_hash_table_insert (ht, g_strdup ("de_DE.utf8"), TRANSLATED_LANG("German"));
         if (gdm_language_has_translations ("fr") ||
             gdm_language_has_translations ("fr_FR"))
-                g_hash_table_insert (ht, g_strdup ("fr_FR.utf8"), g_strdup (_("French")));
+                g_hash_table_insert (ht, g_strdup ("fr_FR.utf8"), TRANSLATED_LANG("French"));
         if (gdm_language_has_translations ("es") ||
             gdm_language_has_translations ("es_ES"))
-                g_hash_table_insert (ht, g_strdup ("es_ES.utf8"), g_strdup (_("Spanish")));
+                g_hash_table_insert (ht, g_strdup ("es_ES.utf8"), TRANSLATED_LANG("Spanish"));
         if (gdm_language_has_translations ("zh_CN"))
                 g_hash_table_insert (ht, g_strdup ("zh_CN.utf8"), g_strdup (_("Chinese (simplified)")));
         if (gdm_language_has_translations ("ja") ||
             gdm_language_has_translations ("ja_JP"))
-                g_hash_table_insert (ht, g_strdup ("ja_JP.utf8"), g_strdup (_("Japanese")));
+                g_hash_table_insert (ht, g_strdup ("ja_JP.utf8"), TRANSLATED_LANG("Japanese"));
         if (gdm_language_has_translations ("ru") ||
             gdm_language_has_translations ("ru_RU"))
-                 g_hash_table_insert (ht, g_strdup ("ru_RU.utf8"), g_strdup (_("Russian")));
+                 g_hash_table_insert (ht, g_strdup ("ru_RU.utf8"), TRANSLATED_LANG("Russian"));
         if (gdm_language_has_translations ("ar") ||
             gdm_language_has_translations ("ar_EG"))
-                g_hash_table_insert (ht, g_strdup ("ar_EG.utf8"), g_strdup (_("Arabic")));
+                g_hash_table_insert (ht, g_strdup ("ar_EG.utf8"), TRANSLATED_LANG("Arabic"));
 
         /* Add the languages used by other users on the system */
         add_other_users_language (ht);
