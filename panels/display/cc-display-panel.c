@@ -751,9 +751,9 @@ make_resolution_string (int width, int height)
   }
 
   if (aspect != NULL)
-    return g_strdup_printf (_("%d\342\200\211\303\227\342\200\211%d (%s)"), width, height, aspect);
+    return g_strdup_printf ("%d\342\200\211\303\227\342\200\211%d (%s)", width, height, aspect);
   else
-    return g_strdup_printf (_("%d\342\200\211\303\227\342\200\211%d"), width, height);
+    return g_strdup_printf ("%d\342\200\211\303\227\342\200\211%d", width, height);
 }
 
 static void
