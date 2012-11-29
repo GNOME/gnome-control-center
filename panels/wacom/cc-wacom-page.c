@@ -603,6 +603,10 @@ add_button_to_store (GtkListStore         *model,
 		dir_name = NULL;
 	}
 
+	/* Sanity check */
+	if (type >= G_N_ELEMENTS(action_table))
+		type = GSD_WACOM_ACTION_TYPE_NONE;
+
 	gtk_list_store_append (model, &new_row);
 	gtk_list_store_set (model, &new_row,
 			    MAPPING_DESCRIPTION_COLUMN, dir_name ? dir_name : button->name,
@@ -656,6 +660,10 @@ action_set_func (GtkTreeViewColumn *tree_column,
 	}
 
 	type = g_settings_get_enum (button->settings, ACTION_TYPE_KEY);
+	/* Sanity check */
+	if (type >= G_N_ELEMENTS(action_table))
+		type = GSD_WACOM_ACTION_TYPE_NONE;
+
 	g_object_set (cell,
 		      "visible", TRUE,
 		      "editable", TRUE,
