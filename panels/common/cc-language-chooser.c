@@ -241,11 +241,13 @@ filter_languages (GtkTreeModel *model,
 
 	filter_string = g_object_get_data (G_OBJECT (model), "filter-string");
 
-	if (filter_string == NULL) {
+	if (filter_string == NULL)
 		return TRUE;
-	}
 
 	gtk_tree_model_get (model, iter, DISPLAY_LOCALE_COL, &locale, -1);
+	if (locale == NULL)
+		return FALSE;
+
 	l = g_utf8_casefold (locale, -1);
 
 	visible = strstr (l, filter_string) != NULL;
