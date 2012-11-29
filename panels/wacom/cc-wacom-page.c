@@ -357,7 +357,8 @@ accel_set_func (GtkTreeViewColumn *tree_column,
 		return;
 	}
 
-	if (button->type == WACOM_TABLET_BUTTON_TYPE_ELEVATOR)
+	if (button->type == WACOM_TABLET_BUTTON_TYPE_STRIP ||
+	    button->type == WACOM_TABLET_BUTTON_TYPE_RING)
 		str = get_elevator_shortcut_string (button->settings, dir);
 	else
 		str = g_settings_get_string (button->settings, CUSTOM_ACTION_KEY);
@@ -500,7 +501,8 @@ accel_edited_callback (GtkCellRendererText   *cell,
 
   str = gtk_accelerator_name (keyval, mask);
 
-  if (button->type == WACOM_TABLET_BUTTON_TYPE_ELEVATOR) {
+  if (button->type == WACOM_TABLET_BUTTON_TYPE_STRIP ||
+      button->type == WACOM_TABLET_BUTTON_TYPE_RING) {
     char *strs[3];
     char **strv;
 
@@ -557,7 +559,8 @@ accel_cleared_callback (GtkCellRendererText *cell,
     return;
 
   /* Unset the key */
-  if (button->type == WACOM_TABLET_BUTTON_TYPE_ELEVATOR) {
+  if (button->type == WACOM_TABLET_BUTTON_TYPE_STRIP ||
+      button->type == WACOM_TABLET_BUTTON_TYPE_RING) {
     char *strs[3];
     char **strv;
 
@@ -597,9 +600,15 @@ add_button_to_store (GtkListStore         *model,
 	char *dir_name;
 
 	if (dir == GTK_DIR_UP || dir == GTK_DIR_DOWN) {
-		dir_name = g_strdup_printf ("%s (%s)",
-					    button->name,
-					    dir == GTK_DIR_UP ? _("Up") : _("Down"));
+		if (button->type == WACOM_TABLET_BUTTON_TYPE_RING) {
+			dir_name = g_strdup_printf ("%s (%s)",
+						    button->name,
+						    dir == GTK_DIR_UP ? _("CCW") : _("CW"));
+		} else {
+			dir_name = g_strdup_printf ("%s (%s)",
+						    button->name,
+						    dir == GTK_DIR_UP ? _("Up") : _("Down"));
+		}
 	} else {
 		dir_name = NULL;
 	}
@@ -641,7 +650,8 @@ action_set_func (GtkTreeViewColumn *tree_column,
 		return;
 	}
 
-	if (button->type == WACOM_TABLET_BUTTON_TYPE_ELEVATOR) {
+	if (button->type == WACOM_TABLET_BUTTON_TYPE_STRIP ||
+	    button->type == WACOM_TABLET_BUTTON_TYPE_RING) {
 		g_object_set (cell,
 			      "visible", TRUE,
 			      "editable", FALSE,
@@ -799,7 +809,8 @@ setup_mapping_treeview (CcWacomPage *page)
 		if (button->settings)
 			type = g_settings_get_enum (button->settings, ACTION_TYPE_KEY);
 
-		if (button->type == WACOM_TABLET_BUTTON_TYPE_ELEVATOR) {
+		if (button->type == WACOM_TABLET_BUTTON_TYPE_STRIP ||
+		    button->type == WACOM_TABLET_BUTTON_TYPE_RING) {
 			add_button_to_store (model, button, GTK_DIR_UP, GSD_WACOM_ACTION_TYPE_CUSTOM);
 			add_button_to_store (model, button, GTK_DIR_DOWN, GSD_WACOM_ACTION_TYPE_CUSTOM);
 		} else {
