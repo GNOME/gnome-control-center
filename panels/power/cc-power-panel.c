@@ -25,7 +25,7 @@
 #include <libupower-glib/upower.h>
 #include <glib/gi18n.h>
 #include <gnome-settings-daemon/gsd-enums.h>
-#include "egg-list-box.h"
+#include "egg-list-box/egg-list-box.h"
 
 #include "cc-power-panel.h"
 
@@ -1174,33 +1174,6 @@ activate_child (CcPowerPanel *self,
   gtk_window_present (GTK_WINDOW (w));
 }
 
-static gboolean
-on_off_label_mapping_get (GValue   *value,
-                          GVariant *variant,
-                          gpointer  user_data)
-{
-  g_value_set_string (value, g_variant_get_boolean (variant) ? _("On") : _("Off"));
-
-  return TRUE;
-}
-
-static GtkWidget *
-get_on_off_label (GSettings   *settings,
-                  const gchar *key)
-{
-  GtkWidget *w;
-
-  w = gtk_label_new ("");
-  g_settings_bind_with_mapping (settings, key,
-                                w, "label",
-                                G_SETTINGS_BIND_GET,
-                                on_off_label_mapping_get,
-                                NULL,
-                                NULL,
-                                NULL);
-  return w;
-}
-
 static void
 set_idle_delay_from_dpms (CcPowerPanel *self,
                           int           value)
@@ -1286,7 +1259,7 @@ add_power_saving_section (CcPowerPanel *self)
 {
   GtkWidget *vbox;
   GtkWidget *widget, *box, *label, *scale;
-  GtkWidget *dialog;
+  GtkWidget *sw;
   gchar *s;
 
   vbox = WID (self->priv->builder, "vbox_power");
@@ -1349,32 +1322,18 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_widget_set_margin_bottom (label, 6);
   gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
-  label = get_on_off_label (self->priv->gsd_settings, "idle-dim-battery");
-  gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
-  gtk_widget_set_margin_left (label, 12);
-  gtk_widget_set_margin_right (label, 12);
-  gtk_box_pack_start (GTK_BOX (box), label, FALSE, TRUE, 0);
-
+  /* FIXME: implement and use a screen-power-saving setting */
+  sw = gtk_switch_new ();
+  g_settings_bind (self->priv->gsd_settings, "idle-dim-battery",
+                   sw, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+  gtk_widget_set_margin_left (sw, 12);
+  gtk_widget_set_margin_right (sw, 12);
+  gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
   gtk_container_add (GTK_CONTAINER (widget), box);
-  self->priv->screen_power_saving = box;
 
   gtk_widget_show_all (widget);
-
-  dialog = WID (self->priv->builder, "screen_power_saving_dialog");
-  widget = WID (self->priv->builder, "power_saving_done");
-  g_signal_connect_swapped (widget, "clicked",
-                            G_CALLBACK (gtk_widget_hide), dialog);
-
-  widget = WID (self->priv->builder, "dim_screen_check");
-  g_settings_bind (self->priv->gsd_settings, "idle-dim-battery",
-                   widget, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  widget = WID (self->priv->builder, "turn_off_combo");
-  set_dpms_value_for_combo (GTK_COMBO_BOX (widget), self);
-  g_signal_connect (widget, "changed",
-                    G_CALLBACK (dpms_combo_changed_cb),
-                    self);
 }
 
 static void
