@@ -48,6 +48,7 @@ struct _CcPowerPanelPrivate
 
   GtkWidget     *battery_section;
   GtkWidget     *battery_list;
+  GtkWidget     *label_battery_addon;
   GtkSizeGroup  *battery_sizegroup;
   GtkSizeGroup  *charge_sizegroup;
 
@@ -182,6 +183,11 @@ add_primary (CcPowerPanel *panel,
   gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
   gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
 
+  priv->label_battery_addon = label = gtk_label_new ("");
+  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+  gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
+  gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
+
   s = g_strdup_printf ("%d%%", (int)percentage);
   label = gtk_label_new (s);
   g_free (s);
@@ -201,6 +207,7 @@ add_primary (CcPowerPanel *panel,
 
   gtk_container_add (GTK_CONTAINER (priv->battery_list), box);
   gtk_widget_show_all (box);
+  gtk_widget_hide (priv->label_battery_addon);
 
   g_object_set_data (G_OBJECT (box), "primary", GINT_TO_POINTER (TRUE));
 }
@@ -364,7 +371,6 @@ set_device_battery_additional (CcPowerPanel *panel, GVariant *device)
 {
   CcPowerPanelPrivate *priv = panel->priv;
   gchar *details = NULL;
-  GtkWidget *widget;
   UpDeviceState state;
 
   /* set the device */
@@ -392,16 +398,15 @@ set_device_battery_additional (CcPowerPanel *panel, GVariant *device)
         break;
     }
   if (details == NULL)
-    goto out;
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "label_battery_addon"));
-  gtk_label_set_label (GTK_LABEL (widget), details);
+    {
+      gtk_widget_hide (priv->label_battery_addon);
+    }
+  else
+    {
+      gtk_label_set_label (GTK_LABEL (priv->label_battery_addon), details);
+      gtk_widget_show (priv->label_battery_addon);
+    }
 
-  /* show the addon device */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "box_battery_addon"));
-  gtk_widget_show (widget);
-out:
   g_free (details);
 }
 
@@ -652,7 +657,7 @@ get_devices_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
       g_variant_unref (child);
     }
 
-#if 1
+#if 0
   g_print ("adding fake devices\n");
   child = g_variant_new_parsed ("('/',%u,'',%d,%u,%t)",
                                 UP_DEVICE_KIND_MOUSE, 100.0,
@@ -660,9 +665,9 @@ get_devices_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
   add_device_secondary (panel, child);
   g_variant_unref (child);
   child = g_variant_new_parsed ("('/',%u,'',%d,%u,%t)",
-                                UP_DEVICE_KIND_KEYBOARD, 11.0,
-                                UP_DEVICE_STATE_DISCHARGING, 200);
-  add_device_secondary (panel, child);
+                                UP_DEVICE_KIND_BATTERY, 11.0,
+                                UP_DEVICE_STATE_FULLY_CHARGED, 200);
+  set_device_battery_additional (panel, child);
   g_variant_unref (child);
 #endif
 
@@ -671,6 +676,7 @@ get_devices_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
 
   children = gtk_container_get_children (GTK_CONTAINER (priv->battery_list));
   gtk_widget_set_visible (priv->battery_section, children != NULL);
+  gtk_widget_queue_resize (priv->battery_section);
   g_list_free (children);
 }
 
@@ -1484,8 +1490,6 @@ cc_power_panel_init (CcPowerPanel *self)
                             got_screen_proxy_cb,
                             self);
 
-  /* find out if there are any battery or UPS devices attached
-   * and setup UI accordingly */
   self->priv->up_client = up_client_new ();
 
   self->priv->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
