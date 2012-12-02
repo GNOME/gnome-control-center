@@ -177,6 +177,9 @@ if test "x$have_networkmanager" = xno ; then
         AC_MSG_WARN(*** Network panel will not be built (NetworkManager ~0.9 or newer not found) ***)
 fi
 AM_CONDITIONAL(BUILD_NETWORK, [test x$have_networkmanager = xyes])
+if test x${have_networkmanager} = xyes; then
+  AC_DEFINE(HAVE_NETWORK_MANAGER, 1, [Define to 1 if NetworkManager is available])
+fi
 
 # Check for gnome-bluetooth
 PKG_CHECK_MODULES(BLUETOOTH, $COMMON_MODULES gnome-bluetooth-1.0 >= 3.5.5,

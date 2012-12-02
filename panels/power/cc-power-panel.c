@@ -31,6 +31,10 @@
 #include <bluetooth-killswitch.h>
 #endif
 
+#ifdef HAVE_NETWORK_MANAGER
+#include <nm-client.h>
+#endif
+
 #include "cc-power-panel.h"
 
 #define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
@@ -69,6 +73,12 @@ struct _CcPowerPanelPrivate
   BluetoothKillswitch *bt_killswitch;
   GtkWidget           *bt_switch;
 #endif
+
+#ifdef HAVE_NETWORK_MANAGER
+  NMClient      *nm_client;
+  GtkWidget     *wifi_switch;
+  GtkWidget     *wifi_row;
+#endif
 };
 
 enum
@@ -96,6 +106,9 @@ cc_power_panel_dispose (GObject *object)
   g_clear_object (&priv->up_client);
 #ifdef HAVE_BLUETOOTH
   g_clear_object (&priv->bt_killswitch);
+#endif
+#ifdef HAVE_NETWORK_MANAGER
+  g_clear_object (&priv->nm_client);
 #endif
 
   G_OBJECT_CLASS (cc_power_panel_parent_class)->dispose (object);
@@ -676,7 +689,7 @@ get_devices_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
       g_variant_unref (child);
     }
 
-#if 1
+#if 0
   g_print ("adding fake devices\n");
   child = g_variant_new_parsed ("('/',%u,'',%d,%u,%t)",
                                 UP_DEVICE_KIND_MOUSE, 100.0,
@@ -1112,15 +1125,99 @@ bt_killswitch_state_changed (BluetoothKillswitch      *killswitch,
                              BluetoothKillswitchState  state,
                              CcPowerPanel             *panel)
 {
-  gboolean enabled;
+  CcPowerPanelPrivate *priv = panel->priv;
+  gboolean active;
+  gboolean sensitive;
 
   g_debug ("bt killswitch state changed to %s", bluetooth_killswitch_state_to_string (state));
 
-  enabled = state == BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED;
+  active = state == BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED;
+  sensitive = state != BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED;
 
-  g_signal_handlers_block_by_func (panel->priv->bt_switch, bt_switch_changed, panel);
-  gtk_switch_set_active (GTK_SWITCH (panel->priv->bt_switch), enabled);
-  g_signal_handlers_unblock_by_func (panel->priv->bt_switch, bt_switch_changed, panel);
+  g_signal_handlers_block_by_func (priv->bt_switch, bt_switch_changed, panel);
+  gtk_switch_set_active (GTK_SWITCH (priv->bt_switch), active);
+  gtk_widget_set_sensitive (priv->bt_switch, sensitive);
+  g_signal_handlers_unblock_by_func (priv->bt_switch, bt_switch_changed, panel);
+}
+#endif
+
+#ifdef HAVE_NETWORK_MANAGER
+static gboolean
+has_wifi_devices (NMClient *client)
+{
+  const GPtrArray *devices;
+  NMDevice *device;
+  gint i;
+
+  if (!nm_client_get_manager_running (client))
+    return FALSE;
+
+  devices = nm_client_get_devices (client);
+  if (devices == NULL)
+    return FALSE;
+
+  for (i = 0; i < devices->len; i++)
+    {
+      device = g_ptr_array_index (devices, i);
+      switch (nm_device_get_device_type (device))
+        {
+        case NM_DEVICE_TYPE_WIFI:
+        case NM_DEVICE_TYPE_WIMAX:
+          return TRUE;
+        default:
+          break;
+        }
+    }
+
+  return FALSE;
+}
+
+static void
+wifi_switch_changed (GtkSwitch    *sw,
+                     GParamSpec   *pspec,
+                     CcPowerPanel *panel)
+{
+  gboolean enabled;
+
+  enabled = gtk_switch_get_active (sw);
+  g_debug ("Setting wifi %s", enabled ? "enabled" : "disabled");
+  nm_client_wireless_set_enabled (panel->priv->nm_client, enabled);
+}
+
+static void
+nm_client_state_changed (NMClient     *client,
+                         GParamSpec   *pspec,
+                         CcPowerPanel *self)
+{
+  CcPowerPanelPrivate *priv = self->priv;
+  gboolean visible;
+  gboolean active;
+  gboolean sensitive;
+
+  visible = has_wifi_devices (priv->nm_client);
+  active = nm_client_networking_get_enabled (client) &&
+           nm_client_wireless_get_enabled (client) &&
+           nm_client_wireless_hardware_get_enabled (client);
+  sensitive = nm_client_networking_get_enabled (client) &&
+              nm_client_wireless_hardware_get_enabled (client);
+
+  g_debug ("wifi state changed to %s", active ? "enabled" : "disabled");
+
+  g_signal_handlers_block_by_func (priv->wifi_switch, wifi_switch_changed, self);
+  gtk_switch_set_active (GTK_SWITCH (priv->wifi_switch), active);
+  gtk_widget_set_sensitive (priv->wifi_switch, sensitive);
+  gtk_widget_set_visible (priv->wifi_row, visible);
+  g_signal_handlers_unblock_by_func (priv->wifi_switch, wifi_switch_changed, self);
+}
+
+static void
+nm_device_changed (NMClient     *client,
+                   NMDevice     *device,
+                   CcPowerPanel *self)
+{
+  CcPowerPanelPrivate *priv = self->priv;
+
+  gtk_widget_set_visible (priv->wifi_row, has_wifi_devices (priv->nm_client));
 }
 #endif
 
@@ -1202,6 +1299,37 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
   gtk_container_add (GTK_CONTAINER (widget), box);
 
+#ifdef HAVE_NETWORK_MANAGER
+  priv->nm_client = nm_client_new ();
+  g_signal_connect (priv->nm_client, "notify",
+                    G_CALLBACK (nm_client_state_changed), self);
+  g_signal_connect (priv->nm_client, "device-added",
+                    G_CALLBACK (nm_device_changed), self);
+  g_signal_connect (priv->nm_client, "device-removed",
+                    G_CALLBACK (nm_device_changed), self);
+
+  priv->wifi_row = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
+  label = gtk_label_new (_("_Wi-Fi"));
+  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+  gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
+  gtk_widget_set_margin_left (label, 12);
+  gtk_widget_set_margin_right (label, 12);
+  gtk_widget_set_margin_top (label, 6);
+  gtk_widget_set_margin_bottom (label, 6);
+  gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+
+  priv->wifi_switch = sw = gtk_switch_new ();
+  gtk_widget_set_margin_left (sw, 12);
+  gtk_widget_set_margin_right (sw, 12);
+  gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
+  gtk_container_add (GTK_CONTAINER (widget), box);
+  nm_device_changed (priv->nm_client, NULL, self);
+
+  g_signal_connect (G_OBJECT (priv->wifi_switch), "notify::active",
+                    G_CALLBACK (wifi_switch_changed), self);
+#endif
+
 #ifdef HAVE_BLUETOOTH
   {
     BluetoothKillswitchState bt_state;
@@ -1220,6 +1348,7 @@ add_power_saving_section (CcPowerPanel *self)
         gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
         priv->bt_switch = sw = gtk_switch_new ();
+        gtk_widget_set_sensitive (priv->bt_switch, bt_state == BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED);
         gtk_widget_set_margin_left (sw, 12);
         gtk_widget_set_margin_right (sw, 12);
         gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
