@@ -2276,7 +2276,7 @@ popup_model_menu_cb (GtkButton *button,
   gtk_widget_set_no_show_all (item, TRUE);
   gtk_widget_hide (item);
 
-  item = gtk_image_menu_item_new_with_label (_("Searching for preferred drivers..."));
+  item = gtk_image_menu_item_new_with_label (_("Searching for preferred drivers…"));
   spinner = gtk_spinner_new ();
   gtk_spinner_start (GTK_SPINNER (spinner));
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), spinner);
@@ -2291,7 +2291,7 @@ popup_model_menu_cb (GtkButton *button,
   item = gtk_separator_menu_item_new ();
   gtk_menu_shell_append (GTK_MENU_SHELL (priv->popup_menu), item);
 
-  item = gtk_menu_item_new_with_label (_("Select from database..."));
+  item = gtk_menu_item_new_with_label (_("Select from database…"));
   g_object_set_data_full (G_OBJECT (item), "purpose",
                           g_strdup ("ppd-select"), g_free);
   g_signal_connect (item, "activate", G_CALLBACK (select_ppd_in_dialog), self);
@@ -2300,7 +2300,7 @@ popup_model_menu_cb (GtkButton *button,
   item = gtk_separator_menu_item_new ();
   gtk_menu_shell_append (GTK_MENU_SHELL (priv->popup_menu), item);
 
-  item = gtk_menu_item_new_with_label (_("Provide PPD File..."));
+  item = gtk_menu_item_new_with_label (_("Provide PPD File…"));
   g_object_set_data_full (G_OBJECT (item), "purpose",
                           g_strdup ("ppdfile-select"), g_free);
   g_signal_connect (item, "activate", G_CALLBACK (select_ppd_manually), self);
