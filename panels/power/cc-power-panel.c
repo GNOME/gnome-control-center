@@ -27,6 +27,10 @@
 #include <gnome-settings-daemon/gsd-enums.h>
 #include "egg-list-box/egg-list-box.h"
 
+#ifdef HAVE_BLUETOOTH
+#include <bluetooth-killswitch.h>
+#endif
+
 #include "cc-power-panel.h"
 
 #define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
@@ -60,6 +64,11 @@ struct _CcPowerPanelPrivate
   GtkWidget     *automatic_suspend_label;
   GtkWidget     *critical_battery_row;
   GtkWidget     *critical_battery_combo;
+
+#ifdef HAVE_BLUETOOTH
+  BluetoothKillswitch *bt_killswitch;
+  GtkWidget           *bt_switch;
+#endif
 };
 
 enum
@@ -85,6 +94,9 @@ cc_power_panel_dispose (GObject *object)
   g_clear_object (&priv->proxy);
   g_clear_object (&priv->screen_proxy);
   g_clear_object (&priv->up_client);
+#ifdef HAVE_BLUETOOTH
+  g_clear_object (&priv->bt_killswitch);
+#endif
 
   G_OBJECT_CLASS (cc_power_panel_parent_class)->dispose (object);
 }
@@ -1070,6 +1082,41 @@ update_separator_func (GtkWidget **separator,
     }
 }
 
+#ifdef HAVE_BLUETOOTH
+static void
+bt_switch_changed (GtkSwitch    *sw,
+                   GParamSpec   *pspec,
+                   CcPowerPanel *panel)
+{
+  BluetoothKillswitchState state;
+
+  if (gtk_switch_get_active (sw))
+    state = BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED;
+  else
+    state = BLUETOOTH_KILLSWITCH_STATE_SOFT_BLOCKED;
+
+  g_debug ("Setting bt killswitch to %s", bluetooth_killswitch_state_to_string (state));
+
+  bluetooth_killswitch_set_state (panel->priv->bt_killswitch, state);
+}
+
+static void
+bt_killswitch_state_changed (BluetoothKillswitch      *killswitch,
+                             BluetoothKillswitchState  state,
+                             CcPowerPanel             *panel)
+{
+  gboolean enabled;
+
+  g_debug ("bt killswitch state changed to %s", bluetooth_killswitch_state_to_string (state));
+
+  enabled = state == BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED;
+
+  g_signal_handlers_block_by_func (panel->priv->bt_switch, bt_switch_changed, panel);
+  gtk_switch_set_active (GTK_SWITCH (panel->priv->bt_switch), enabled);
+  g_signal_handlers_unblock_by_func (panel->priv->bt_switch, bt_switch_changed, panel);
+}
+#endif
+
 static void
 add_power_saving_section (CcPowerPanel *self)
 {
@@ -1109,7 +1156,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
 
   priv->brightness_row = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-  label = gtk_label_new (_("Screen _Brightness"));
+  label = gtk_label_new (_("_Screen Brightness"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_widget_set_margin_left (label, 12);
@@ -1128,7 +1175,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_container_add (GTK_CONTAINER (widget), box);
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-  label = gtk_label_new (_("Screen Power _Saving"));
+  label = gtk_label_new (_("Screen _Power Saving"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_widget_set_margin_left (label, 12);
@@ -1147,6 +1194,39 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
   gtk_container_add (GTK_CONTAINER (widget), box);
+
+#ifdef HAVE_BLUETOOTH
+  {
+    BluetoothKillswitchState bt_state;
+    priv->bt_killswitch = bluetooth_killswitch_new ();
+    bt_state = bluetooth_killswitch_get_state (priv->bt_killswitch);
+    if (bt_state != BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER)
+      {
+        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+        label = gtk_label_new (_("_Bluetooth"));
+        gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+        gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
+        gtk_widget_set_margin_left (label, 12);
+        gtk_widget_set_margin_right (label, 12);
+        gtk_widget_set_margin_top (label, 6);
+        gtk_widget_set_margin_bottom (label, 6);
+        gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+
+        priv->bt_switch = sw = gtk_switch_new ();
+        gtk_widget_set_margin_left (sw, 12);
+        gtk_widget_set_margin_right (sw, 12);
+        gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
+        gtk_container_add (GTK_CONTAINER (widget), box);
+
+        bt_killswitch_state_changed (priv->bt_killswitch, bt_state, self);
+        g_signal_connect (G_OBJECT (priv->bt_killswitch), "state-changed",
+                          G_CALLBACK (bt_killswitch_state_changed), self);
+        g_signal_connect (G_OBJECT (priv->bt_switch), "notify::active",
+                          G_CALLBACK (bt_switch_changed), self);
+      }
+    }
+#endif
 
   gtk_widget_show_all (widget);
 }

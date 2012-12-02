@@ -182,6 +182,9 @@ AM_CONDITIONAL(BUILD_NETWORK, [test x$have_networkmanager = xyes])
 PKG_CHECK_MODULES(BLUETOOTH, $COMMON_MODULES gnome-bluetooth-1.0 >= 3.5.5,
 		  [have_bluetooth=yes], have_bluetooth=no)
 AM_CONDITIONAL(BUILD_BLUETOOTH, [test x$have_bluetooth = xyes])
+if test x${have_bluetooth} = xyes; then
+  AC_DEFINE(HAVE_BLUETOOTH, 1, [Define to 1 if bluetooth support is available])
+fi
 
 # Check for CUPS 1.4 or newer
 AC_ARG_ENABLE([cups],
