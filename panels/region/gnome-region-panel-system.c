@@ -479,7 +479,7 @@ on_permission_changed (GPermission *permission,
                         gtk_button_set_label (GTK_BUTTON (button), _("Copy Settings"));
                 }
                 else {
-                        gtk_button_set_label (GTK_BUTTON (button), _("Copy Settings..."));
+                        gtk_button_set_label (GTK_BUTTON (button), _("Copy Settings…"));
                 }
         }
 }
