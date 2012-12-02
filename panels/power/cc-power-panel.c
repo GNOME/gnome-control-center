@@ -73,37 +73,17 @@ cc_power_panel_dispose (GObject *object)
 {
   CcPowerPanelPrivate *priv = CC_POWER_PANEL (object)->priv;
 
-  if (priv->gsd_settings)
-    {
-      g_object_unref (priv->gsd_settings);
-      priv->gsd_settings = NULL;
-    }
+  g_clear_object (&priv->gsd_settings);
   if (priv->cancellable != NULL)
     {
       g_cancellable_cancel (priv->cancellable);
       g_object_unref (priv->cancellable);
       priv->cancellable = NULL;
     }
-  if (priv->builder != NULL)
-    {
-      g_object_unref (priv->builder);
-      priv->builder = NULL;
-    }
-  if (priv->proxy != NULL)
-    {
-      g_object_unref (priv->proxy);
-      priv->proxy = NULL;
-    }
-  if (priv->screen_proxy != NULL)
-    {
-      g_object_unref (priv->screen_proxy);
-      priv->screen_proxy = NULL;
-    }
-  if (priv->up_client != NULL)
-    {
-      g_object_unref (priv->up_client);
-      priv->up_client = NULL;
-    }
+  g_clear_object (&priv->builder);
+  g_clear_object (&priv->proxy);
+  g_clear_object (&priv->screen_proxy);
+  g_clear_object (&priv->up_client);
 
   G_OBJECT_CLASS (cc_power_panel_parent_class)->dispose (object);
 }
@@ -596,7 +576,6 @@ get_devices_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
   panel = CC_POWER_PANEL (user_data);
   priv = panel->priv;
 
-  /* remove all secondary batteries */
   children = gtk_container_get_children (GTK_CONTAINER (priv->battery_list));
   for (l = children; l != NULL; l = l->next)
     gtk_container_remove (GTK_CONTAINER (priv->battery_list), l->data);
