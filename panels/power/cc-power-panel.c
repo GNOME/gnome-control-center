@@ -177,11 +177,11 @@ add_primary (CcPowerPanel *panel,
   GtkWidget *levelbar;
   gchar *s;
 
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
   box2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_size_group_add_widget (priv->battery_sizegroup, box2);
   gtk_widget_set_margin_left (box2, 12);
-  gtk_widget_set_margin_right (box2, 50);
+  gtk_widget_set_margin_right (box2, 12);
   gtk_widget_set_margin_top (box2, 6);
   gtk_widget_set_margin_bottom (box2, 6);
   gtk_box_pack_start (GTK_BOX (box), box2, FALSE, TRUE, 0);
@@ -200,22 +200,26 @@ add_primary (CcPowerPanel *panel,
   gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
   gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
 
+  box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  gtk_widget_set_margin_left (box2, 6);
+  gtk_widget_set_margin_right (box2, 6);
   s = g_strdup_printf ("%d%%", (int)percentage);
   label = gtk_label_new (s);
   g_free (s);
   gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
   gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_box_pack_start (GTK_BOX (box), label, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (box2), label, FALSE, TRUE, 0);
   gtk_size_group_add_widget (priv->charge_sizegroup, label);
 
   levelbar = gtk_level_bar_new ();
   gtk_level_bar_set_value (GTK_LEVEL_BAR (levelbar), percentage / 100.0);
-  gtk_widget_set_margin_left (levelbar, 0);
-  gtk_widget_set_margin_right (levelbar, 12);
+  gtk_widget_set_margin_left (levelbar, 6);
+  gtk_widget_set_margin_right (levelbar, 6);
   gtk_widget_set_hexpand (levelbar, TRUE);
   gtk_widget_set_halign (levelbar, GTK_ALIGN_FILL);
   gtk_widget_set_valign (levelbar, GTK_ALIGN_CENTER);
-  gtk_box_pack_start (GTK_BOX (box), levelbar, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (box2), levelbar, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (box), box2, TRUE, TRUE, 0);
 
   gtk_container_add (GTK_CONTAINER (priv->battery_list), box);
   gtk_widget_show_all (box);
@@ -432,6 +436,7 @@ add_device_secondary (CcPowerPanel *panel,
   UpDeviceKind kind;
   UpDeviceState state;
   GtkWidget *hbox;
+  GtkWidget *box2;
   GtkWidget *widget;
   GString *status;
   GString *description;
@@ -529,33 +534,35 @@ add_device_secondary (CcPowerPanel *panel,
   g_string_append (status, "</small>");
 
   /* create the new widget */
-  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
   widget = gtk_label_new ("");
   gtk_misc_set_alignment (GTK_MISC (widget), 0.0f, 0.5f);
   gtk_label_set_markup (GTK_LABEL (widget), description->str);
   gtk_widget_set_margin_left (widget, 12);
-  gtk_widget_set_margin_right (widget, 50);
+  gtk_widget_set_margin_right (widget, 12);
   gtk_widget_set_margin_top (widget, 6);
   gtk_widget_set_margin_bottom (widget, 6);
   gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, TRUE, 0);
   gtk_size_group_add_widget (priv->battery_sizegroup, widget);
 
+  box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
   s = g_strdup_printf ("%d%%", (int)percentage);
   widget = gtk_label_new (s);
   g_free (s);
   gtk_misc_set_alignment (GTK_MISC (widget), 1, 0.5);
   gtk_style_context_add_class (gtk_widget_get_style_context (widget), GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (box2), widget, FALSE, TRUE, 0);
   gtk_size_group_add_widget (priv->charge_sizegroup, widget);
 
   widget = gtk_level_bar_new ();
-  gtk_widget_set_margin_left (widget, 0);
-  gtk_widget_set_margin_right (widget, 12);
+  gtk_widget_set_margin_left (widget, 6);
+  gtk_widget_set_margin_right (widget, 6);
   gtk_widget_set_halign (widget, TRUE);
   gtk_widget_set_halign (widget, GTK_ALIGN_FILL);
   gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
   gtk_level_bar_set_value (GTK_LEVEL_BAR (widget), percentage / 100.0f);
-  gtk_box_pack_start (GTK_BOX (hbox), widget, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (box2), widget, TRUE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (hbox), box2, TRUE, TRUE, 0);
   gtk_widget_show_all (hbox);
 
   gtk_container_add (GTK_CONTAINER (priv->battery_list), hbox);
@@ -669,7 +676,7 @@ get_devices_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
       g_variant_unref (child);
     }
 
-#if 0
+#if 1
   g_print ("adding fake devices\n");
   child = g_variant_new_parsed ("('/',%u,'',%d,%u,%t)",
                                 UP_DEVICE_KIND_MOUSE, 100.0,
@@ -1155,12 +1162,12 @@ add_power_saving_section (CcPowerPanel *self)
   egg_list_box_add_to_scrolled (EGG_LIST_BOX (widget), GTK_SCROLLED_WINDOW (box));
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
 
-  priv->brightness_row = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  priv->brightness_row = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
   label = gtk_label_new (_("_Screen Brightness"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_widget_set_margin_left (label, 12);
-  gtk_widget_set_margin_right (label, 50);
+  gtk_widget_set_margin_right (label, 12);
   gtk_widget_set_margin_top (label, 6);
   gtk_widget_set_margin_bottom (label, 6);
   gtk_box_pack_start (GTK_BOX (box), label, FALSE, TRUE, 0);
@@ -1174,7 +1181,7 @@ add_power_saving_section (CcPowerPanel *self)
 
   gtk_container_add (GTK_CONTAINER (widget), box);
 
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
   label = gtk_label_new (_("Screen _Power Saving"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
@@ -1202,7 +1209,7 @@ add_power_saving_section (CcPowerPanel *self)
     bt_state = bluetooth_killswitch_get_state (priv->bt_killswitch);
     if (bt_state != BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER)
       {
-        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
         label = gtk_label_new (_("_Bluetooth"));
         gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
         gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
@@ -1386,12 +1393,12 @@ add_automatic_suspend_section (CcPowerPanel *self)
   egg_list_box_add_to_scrolled (EGG_LIST_BOX (widget), GTK_SCROLLED_WINDOW (box));
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
 
-  self->priv->automatic_suspend_row = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  self->priv->automatic_suspend_row = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
   label = gtk_label_new (_("_Automatic Suspend"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_widget_set_margin_left (label, 12);
-  gtk_widget_set_margin_right (label, 50);
+  gtk_widget_set_margin_right (label, 12);
   gtk_widget_set_margin_top (label, 6);
   gtk_widget_set_margin_bottom (label, 6);
   gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
@@ -1410,7 +1417,7 @@ add_automatic_suspend_section (CcPowerPanel *self)
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_widget_set_margin_left (label, 12);
-  gtk_widget_set_margin_right (label, 50);
+  gtk_widget_set_margin_right (label, 12);
   gtk_widget_set_margin_top (label, 6);
   gtk_widget_set_margin_bottom (label, 6);
   gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
@@ -1438,6 +1445,7 @@ add_automatic_suspend_section (CcPowerPanel *self)
   dialog = GTK_WIDGET (gtk_builder_get_object (priv->builder, "automatic_suspend_dialog"));
   sw = GTK_WIDGET (gtk_builder_get_object (priv->builder, "automatic_suspend_close"));
   g_signal_connect_swapped (sw, "clicked", G_CALLBACK (gtk_widget_hide), dialog);
+  g_signal_connect (dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
   sw = GTK_WIDGET (gtk_builder_get_object (priv->builder, "suspend_on_battery_switch"));
   g_settings_bind_with_mapping (priv->gsd_settings, "sleep-inactive-battery-type",
