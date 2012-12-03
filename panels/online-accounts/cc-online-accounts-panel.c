@@ -143,6 +143,8 @@ goa_panel_init (GoaPanel *panel)
   GtkTreeIter iter;
   GNetworkMonitor *monitor;
 
+  monitor = g_network_monitor_get_default();
+
   panel->builder = gtk_builder_new ();
   error = NULL;
   if (gtk_builder_add_from_file (panel->builder,
@@ -157,6 +159,9 @@ goa_panel_init (GoaPanel *panel)
 
   panel->toolbar = GTK_WIDGET (gtk_builder_get_object (panel->builder, "accounts-tree-toolbar"));
   panel->toolbar_add_button = GTK_WIDGET (gtk_builder_get_object (panel->builder, "accounts-tree-toolbutton-add"));
+  g_object_bind_property (monitor, "network-available",
+                          panel->toolbar_add_button, "sensitive",
+                          G_BINDING_SYNC_CREATE);
   g_signal_connect (panel->toolbar_add_button,
                     "clicked",
                     G_CALLBACK (on_toolbar_add_button_clicked),
@@ -179,12 +184,9 @@ goa_panel_init (GoaPanel *panel)
                     panel);
 
   button = GTK_WIDGET (gtk_builder_get_object (panel->builder, "accounts-button-add"));
-
-  monitor = g_network_monitor_get_default();
   g_object_bind_property (monitor, "network-available",
                           button, "sensitive",
                           G_BINDING_SYNC_CREATE);
-
   g_signal_connect (button,
                     "clicked",
                     G_CALLBACK (on_add_button_clicked),
