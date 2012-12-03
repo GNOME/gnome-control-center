@@ -58,7 +58,11 @@ load_pixbuf_for_gicon (GIcon *icon)
     }
   else
     {
-      g_warning ("Could not find icon");
+      char *name;
+
+      name = g_icon_to_string (icon);
+      g_warning ("Could not find icon '%s'", name);
+      g_free (name);
     }
 
   return pixbuf;
