@@ -22,6 +22,7 @@
 
 #include "config.h"
 
+#include <gio/gio.h>
 #include <string.h>
 #include <glib/gi18n-lib.h>
 
@@ -140,6 +141,7 @@ goa_panel_init (GoaPanel *panel)
   GtkTreeViewColumn *column;
   GtkCellRenderer *renderer;
   GtkTreeIter iter;
+  GNetworkMonitor *monitor;
 
   panel->builder = gtk_builder_new ();
   error = NULL;
@@ -177,6 +179,12 @@ goa_panel_init (GoaPanel *panel)
                     panel);
 
   button = GTK_WIDGET (gtk_builder_get_object (panel->builder, "accounts-button-add"));
+
+  monitor = g_network_monitor_get_default();
+  g_object_bind_property (monitor, "network-available",
+                          button, "sensitive",
+                          G_BINDING_SYNC_CREATE);
+
   g_signal_connect (button,
                     "clicked",
                     G_CALLBACK (on_add_button_clicked),
