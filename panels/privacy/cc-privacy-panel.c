@@ -43,7 +43,6 @@ struct _CcPrivacyPanelPrivate
   GSettings  *lockdown_settings;
   GSettings  *lock_settings;
   GSettings  *shell_settings;
-  GSettings  *housekeeping_settings;
   GSettings  *privacy_settings;
 };
 
@@ -597,7 +596,6 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_object (&priv->lockdown_settings);
   g_clear_object (&priv->lock_settings);
   g_clear_object (&priv->shell_settings);
-  g_clear_object (&priv->housekeeping_settings);
   g_clear_object (&priv->privacy_settings);
 
   G_OBJECT_CLASS (cc_privacy_panel_parent_class)->finalize (object);
@@ -680,7 +678,6 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   self->priv->lockdown_settings = g_settings_new ("org.gnome.desktop.lockdown");
   self->priv->lock_settings = g_settings_new ("org.gnome.desktop.screensaver");
   self->priv->shell_settings = g_settings_new ("org.gnome.shell");
-  self->priv->housekeeping_settings = g_settings_new ("org.gnome.settings-daemon.plugins.housekeeping");
   self->priv->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
 
   add_screen_lock (self);
