@@ -61,7 +61,7 @@ const GOptionEntry all_options[] = {
   { "help", 'h', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &show_help, N_("Show help options"), NULL },
   { "help-all", 0, G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &show_help_all, N_("Show help options"), NULL },
   { "help-gtk", 0, G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &show_help_gtk, N_("Show help options"), NULL },
-  { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &start_panels, N_("Panel to display"), NULL },
+  { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &start_panels, N_("Panel to display"), N_("[PANEL] [ARGUMENT…]") },
   { NULL, 0, 0, 0, NULL, NULL, NULL } /* end the list */
 };
 
