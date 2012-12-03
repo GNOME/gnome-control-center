@@ -523,7 +523,7 @@ place_separator_func (GtkWidget **separator,
       gtk_widget_set_halign (w, GTK_ALIGN_START);
       gtk_style_context_add_class (gtk_widget_get_style_context (w), "dim-label");
 
-      g_object_ref (w);
+      g_object_ref_sink (w);
       *separator = w;
 
       g_free (text);
