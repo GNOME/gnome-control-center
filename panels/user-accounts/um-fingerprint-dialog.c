@@ -256,7 +256,7 @@ static void
 delete_fingerprints_question (GtkWindow *parent,
                               GtkWidget *label1,
                               GtkWidget *label2,
-                              UmUser    *user)
+                              ActUser   *user)
 {
         GtkWidget *question;
         GtkWidget *button;
@@ -628,7 +628,7 @@ static void
 enroll_fingerprints (GtkWindow *parent,
                      GtkWidget *label1,
                      GtkWidget *label2,
-                     UmUser    *user)
+                     ActUser   *user)
 {
         GDBusProxy *device;
         GtkBuilder *dialog;
@@ -766,7 +766,7 @@ void
 fingerprint_button_clicked (GtkWindow *parent,
                             GtkWidget *label1,
                             GtkWidget *label2,
-                            UmUser    *user)
+                            ActUser   *user)
 {
         bindtextdomain ("fprintd", GNOMELOCALEDIR);
         bind_textdomain_codeset ("fprintd", "UTF-8");

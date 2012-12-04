@@ -29,9 +29,9 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <act/act.h>
 
 #include "um-password-dialog.h"
-#include "um-user-manager.h"
 #include "um-utils.h"
 #include "run-passwd.h"
 #include "pw-utils.h"
@@ -51,7 +51,7 @@ struct _UmPasswordDialog {
         GtkWidget *show_password_button;
         GtkWidget *ok_button;
 
-        UmUser *user;
+        ActUser *user;
 
         GtkWidget *old_password_label;
         GtkWidget *old_password_entry;
@@ -205,26 +205,51 @@ accept_password_dialog (GtkButton        *button,
         password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
         hint = gtk_entry_get_text (GTK_ENTRY (um->normal_hint_entry));
 
-        if (mode == UM_PASSWORD_DIALOG_MODE_NORMAL && um_user_get_uid (um->user) == getuid ()) {
-                GdkDisplay *display;
-                GdkCursor *cursor;
+        switch (mode) {
+                case UM_PASSWORD_DIALOG_MODE_NORMAL:
+                        if (act_user_get_uid (um->user) == getuid ()) {
+                                GdkDisplay *display;
+                                GdkCursor *cursor;
 
-                /* When setting a password for the current user,
-                 * use passwd directly, to preserve the audit trail
-                 * and to e.g. update the keyring password.
-                 */
-                passwd_change_password (um->passwd_handler, password, (PasswdCallback) password_changed_cb, um);
-                gtk_widget_set_sensitive (um->dialog, FALSE);
-                display = gtk_widget_get_display (um->dialog);
-                cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
-                gdk_window_set_cursor (gtk_widget_get_window (um->dialog), cursor);
-                gdk_display_flush (display);
-                g_object_unref (cursor);
+                                /* When setting a password for the current user,
+                                 * use passwd directly, to preserve the audit trail
+                                 * and to e.g. update the keyring password.
+                                 */
+                                passwd_change_password (um->passwd_handler, password,
+                                                        (PasswdCallback) password_changed_cb, um);
+                                gtk_widget_set_sensitive (um->dialog, FALSE);
+                                display = gtk_widget_get_display (um->dialog);
+                                cursor = gdk_cursor_new_for_display (display, GDK_WATCH);
+                                gdk_window_set_cursor (gtk_widget_get_window (um->dialog), cursor);
+                                gdk_display_flush (display);
+                                g_object_unref (cursor);
+                                return;
+                        }
+
+                        act_user_set_password (um->user, password, hint);
+                        break;
+
+                case UM_PASSWORD_DIALOG_MODE_SET_AT_LOGIN:
+                        act_user_set_password_mode (um->user, ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
+                        break;
+
+                case UM_PASSWORD_DIALOG_MODE_NO_PASSWORD:
+                        act_user_set_password_mode (um->user, ACT_USER_PASSWORD_MODE_NONE);
+                        break;
+
+                case UM_PASSWORD_DIALOG_MODE_LOCK_ACCOUNT:
+                        act_user_set_locked (um->user, TRUE);
+                        break;
+
+                case UM_PASSWORD_DIALOG_MODE_UNLOCK_ACCOUNT:
+                        act_user_set_locked (um->user, FALSE);
+                        break;
+
+                default:
+                        g_assert_not_reached ();
         }
-        else {
-                um_user_set_password (um->user, mode, password, hint);
-                finish_password_change (um);
-        }
+
+        finish_password_change (um);
 }
 
 static void
@@ -330,7 +355,7 @@ update_password_strength (UmPasswordDialog *um)
 
         password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
         old_password = gtk_entry_get_text (GTK_ENTRY (um->old_password_entry));
-        username = um_user_get_user_name (um->user);
+        username = act_user_get_user_name (um->user);
 
         pw_strength (password, old_password, username,
                      &hint, &long_hint, &strength_level);
@@ -625,7 +650,7 @@ visible_func (GtkTreeModel     *model,
 {
         if (um->user) {
                 gint mode; 
-                gboolean locked = um_user_get_locked (um->user);
+                gboolean locked = act_user_get_locked (um->user);
 
                 gtk_tree_model_get (model, iter, 1, &mode, -1);
 
@@ -643,7 +668,7 @@ visible_func (GtkTreeModel     *model,
 
 void
 um_password_dialog_set_user (UmPasswordDialog *um,
-                             UmUser           *user)
+                             ActUser          *user)
 {
         GdkPixbuf *pixbuf;
         GtkTreeModel *model;
@@ -655,20 +680,20 @@ um_password_dialog_set_user (UmPasswordDialog *um,
         if (user) {
                 um->user = g_object_ref (user);
 
-                pixbuf = um_user_render_icon (user, UM_ICON_STYLE_NONE, 48);
+                pixbuf = render_user_icon (user, UM_ICON_STYLE_NONE, 48);
                 gtk_image_set_from_pixbuf (GTK_IMAGE (um->user_icon), pixbuf);
                 g_object_unref (pixbuf);
 
                 gtk_label_set_label (GTK_LABEL (um->user_name),
-                                     um_user_get_real_name (user));
+                                     act_user_get_real_name (user));
 
                 gtk_entry_set_text (GTK_ENTRY (um->password_entry), "");
                 gtk_entry_set_text (GTK_ENTRY (um->verify_entry), "");
                 gtk_entry_set_text (GTK_ENTRY (um->normal_hint_entry), "");
                 gtk_entry_set_text (GTK_ENTRY (um->old_password_entry), "");
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (um->show_password_button), FALSE);
-                if (um_user_get_uid (um->user) == getuid () &&
-                    um_user_get_password_mode (um->user) == UM_PASSWORD_MODE_REGULAR) {
+                if (act_user_get_uid (um->user) == getuid () &&
+                    act_user_get_password_mode (um->user) == ACT_USER_PASSWORD_MODE_REGULAR) {
                         gtk_widget_show (um->old_password_label);
                         gtk_widget_show (um->old_password_entry);
                         um->old_password_ok = FALSE;
@@ -678,7 +703,7 @@ um_password_dialog_set_user (UmPasswordDialog *um,
                         gtk_widget_hide (um->old_password_entry);
                         um->old_password_ok = TRUE;
                 }
-                if (um_user_get_uid (um->user) == getuid()) {
+                if (act_user_get_uid (um->user) == getuid()) {
                         if (um->passwd_handler != NULL)
                                 passwd_destroy (um->passwd_handler);
                         um->passwd_handler = passwd_init ();

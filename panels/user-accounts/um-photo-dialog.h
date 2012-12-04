@@ -23,7 +23,7 @@
 #define __UM_PHOTO_DIALOG_H__
 
 #include <gtk/gtk.h>
-#include "um-user.h"
+#include <act/act.h>
 
 G_BEGIN_DECLS
 
@@ -32,7 +32,7 @@ typedef struct _UmPhotoDialog UmPhotoDialog;
 UmPhotoDialog *um_photo_dialog_new      (GtkWidget     *button);
 void           um_photo_dialog_free     (UmPhotoDialog *dialog);
 void           um_photo_dialog_set_user (UmPhotoDialog *dialog,
-                                         UmUser        *user);
+                                         ActUser       *user);
 
 G_END_DECLS
 

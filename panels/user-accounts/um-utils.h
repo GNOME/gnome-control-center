@@ -23,8 +23,15 @@
 #define __UM_UTILS_H__
 
 #include <gtk/gtk.h>
+#include <act/act.h>
 
 G_BEGIN_DECLS
+
+typedef enum {
+        UM_ICON_STYLE_NONE   = 0,
+        UM_ICON_STYLE_FRAME  = 1 << 0,
+        UM_ICON_STYLE_STATUS = 1 << 1
+} UmIconStyle;
 
 void     setup_tooltip_with_embedded_icon (GtkWidget   *widget,
                                            const gchar *text,
@@ -66,6 +73,13 @@ void     generate_username_choices        (const gchar     *name,
                                            GtkListStore    *store);
 
 gchar *  get_smart_date                   (GDateTime *date);
+
+GdkPixbuf * render_user_icon              (ActUser         *user,
+                                           UmIconStyle      style,
+                                           gint             icon_size);
+
+void     set_user_icon_data               (ActUser         *user,
+                                           GdkPixbuf       *pixbuf);
 
 G_END_DECLS
 

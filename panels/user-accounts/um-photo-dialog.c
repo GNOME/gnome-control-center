@@ -26,6 +26,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <act/act.h>
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
 
@@ -36,7 +37,6 @@
 #endif /* HAVE_CHEESE */
 
 #include "um-photo-dialog.h"
-#include "um-user-manager.h"
 #include "um-crop-area.h"
 #include "um-utils.h"
 
@@ -55,7 +55,7 @@ struct _UmPhotoDialog {
 
         GnomeDesktopThumbnailFactory *thumb_factory;
 
-        UmUser *user;
+        ActUser *user;
 };
 
 static void
@@ -74,7 +74,7 @@ crop_dialog_response (GtkWidget     *dialog,
         pb = um_crop_area_get_picture (UM_CROP_AREA (um->crop_area));
         pb2 = gdk_pixbuf_scale_simple (pb, 96, 96, GDK_INTERP_BILINEAR);
 
-        um_user_set_icon_data (um->user, pb2);
+        set_user_icon_data (um->user, pb2);
 
         g_object_unref (pb2);
         g_object_unref (pb);
@@ -247,7 +247,7 @@ static void
 none_icon_selected (GtkMenuItem   *menuitem,
                     UmPhotoDialog *um)
 {
-        um_user_set_icon_file (um->user, "");
+        act_user_set_icon_file (um->user, "");
 }
 
 static void
@@ -276,7 +276,7 @@ webcam_response_cb (GtkDialog     *dialog,
                 g_object_get (G_OBJECT (dialog), "pixbuf", &pb, NULL);
                 pb2 = gdk_pixbuf_scale_simple (pb, 96, 96, GDK_INTERP_BILINEAR);
 
-                um_user_set_icon_data (um->user, pb2);
+                set_user_icon_data (um->user, pb2);
 
                 g_object_unref (pb2);
                 g_object_unref (pb);
@@ -337,7 +337,7 @@ stock_icon_selected (GtkMenuItem   *menuitem,
         const char *filename;
 
         filename = g_object_get_data (G_OBJECT (menuitem), "filename");
-        um_user_set_icon_file (um->user, filename);
+        act_user_set_icon_file (um->user, filename);
 }
 
 static GtkWidget *
@@ -652,11 +652,11 @@ set_tip (GtkWidget  *item,
 
 void
 um_photo_dialog_set_user (UmPhotoDialog *um,
-                          UmUser        *user)
+                          ActUser       *user)
 {
-        UmUserManager *manager;
+        ActUserManager *manager;
         GSList *list, *l;
-        UmUser *u;
+        ActUser *u;
         GIcon *icon;
         GEmblem *emblem;
         GList *children, *c;
@@ -675,9 +675,8 @@ um_photo_dialog_set_user (UmPhotoDialog *um,
                 children = gtk_container_get_children (GTK_CONTAINER (um->photo_popup));
                 g_list_foreach (children, (GFunc) clear_tip, NULL);
 
-                manager = um_user_manager_ref_default ();
-                list = um_user_manager_list_users (manager);
-                g_object_unref (manager);
+                manager = act_user_manager_get_default ();
+                list = act_user_manager_list_users (manager);
 
                 icon = g_themed_icon_new ("avatar-default");
                 emblem = g_emblem_new (icon);
@@ -689,7 +688,7 @@ um_photo_dialog_set_user (UmPhotoDialog *um,
                         u = l->data;
                         if (u == user)
                                 continue;
-                        filename = um_user_get_icon_file (u);
+                        filename = act_user_get_icon_file (u);
                         if (filename  == NULL)
                                 continue;
                         for (c = children; c; c = c->next) {
@@ -702,7 +701,7 @@ um_photo_dialog_set_user (UmPhotoDialog *um,
                                         char *tip;
 
                                         tip = g_strdup_printf (_("Used by %s"),
-                                                               um_user_get_real_name (u));
+                                                               act_user_get_real_name (u));
                                         set_tip (GTK_WIDGET (c->data), tip, emblem);
                                         g_free (tip);
                                         break;

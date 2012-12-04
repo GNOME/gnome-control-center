@@ -29,10 +29,6 @@ BUILT_SOURCES = \
 libuser_accounts_la_SOURCES =		\
 	um-account-type.h		\
 	um-account-type.c 		\
-	um-user.h 			\
-	um-user.c 			\
-	um-user-manager.h 		\
-	um-user-manager.c 		\
 	um-account-dialog.h		\
 	um-account-dialog.c		\
 	um-password-dialog.h		\
@@ -87,10 +83,6 @@ frob_account_dialog_SOURCES = \
 	um-account-dialog.c \
 	um-realm-manager.c \
 	um-realm-manager.h \
-	um-user.h \
-	um-user.c \
-	um-user-manager.c \
-	um-user-manager.h \
 	um-utils.h \
 	um-utils.c \
 	$(BUILT_SOURCES)

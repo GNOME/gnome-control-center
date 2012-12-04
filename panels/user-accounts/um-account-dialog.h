@@ -22,8 +22,8 @@
 #ifndef __UM_ACCOUNT_DIALOG_H__
 #define __UM_ACCOUNT_DIALOG_H__
 
+#include <act/act.h>
 #include <gtk/gtk.h>
-#include "um-user.h"
 
 G_BEGIN_DECLS
 
@@ -40,7 +40,7 @@ void             um_account_dialog_show     (UmAccountDialog     *self,
                                              GtkWindow           *parent,
                                              GAsyncReadyCallback  callback,
                                              gpointer             user_data);
-UmUser *         um_account_dialog_finish   (UmAccountDialog     *self,
+ActUser *        um_account_dialog_finish   (UmAccountDialog     *self,
                                              GAsyncResult        *result);
 
 G_END_DECLS

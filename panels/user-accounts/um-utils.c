@@ -27,8 +27,11 @@
 #include <pwd.h>
 #include <utmp.h>
 
-#include <glib.h>
+#include <gio/gio.h>
+#include <gio/gunixoutputstream.h>
 #include <glib/gi18n.h>
+#include <sys/stat.h>
+#include <glib/gstdio.h>
 
 #include "um-utils.h"
 
@@ -273,6 +276,7 @@ icon_released (GtkEntry             *entry,
         gtk_tooltip_trigger_tooltip_query (gtk_widget_get_display (GTK_WIDGET (entry)));
         g_object_set (settings, "gtk-tooltip-timeout", timeout, NULL);
 }
+
 
 
 void
@@ -781,4 +785,232 @@ get_smart_date (GDateTime *date)
         g_date_time_unref (today);
 
         return label;
+}
+
+
+static gboolean
+check_user_file (const char *filename,
+                 gssize      max_file_size)
+{
+        struct stat fileinfo;
+
+        if (max_file_size < 0) {
+                max_file_size = G_MAXSIZE;
+        }
+
+        /* Exists/Readable? */
+        if (stat (filename, &fileinfo) < 0) {
+                g_debug ("File does not exist");
+                return FALSE;
+        }
+
+        /* Is a regular file */
+        if (G_UNLIKELY (!S_ISREG (fileinfo.st_mode))) {
+                g_debug ("File is not a regular file");
+                return FALSE;
+        }
+
+        /* Size is sane? */
+        if (G_UNLIKELY (fileinfo.st_size > max_file_size)) {
+                g_debug ("File is too large");
+                return FALSE;
+        }
+
+        return TRUE;
+}
+
+static GdkPixbuf *
+frame_pixbuf (GdkPixbuf *source)
+{
+        GdkPixbuf       *dest;
+        cairo_t         *cr;
+        cairo_surface_t *surface;
+        guint            w;
+        guint            h;
+        int              frame_width;
+        double           radius;
+
+        frame_width = 2;
+
+        w = gdk_pixbuf_get_width (source) + frame_width * 2;
+        h = gdk_pixbuf_get_height (source) + frame_width * 2;
+        radius = w / 10;
+
+        surface = cairo_image_surface_create (CAIRO_FORMAT_ARGB32,
+                                              w, h);
+        cr = cairo_create (surface);
+        cairo_surface_destroy (surface);
+
+        /* set up image */
+        cairo_rectangle (cr, 0, 0, w, h);
+        cairo_set_source_rgba (cr, 1.0, 1.0, 1.0, 0.0);
+        cairo_fill (cr);
+
+        rounded_rectangle (cr, 1.0, 0.5, 0.5, radius, w - 1, h - 1);
+        cairo_set_source_rgba (cr, 0.5, 0.5, 0.5, 0.3);
+        cairo_fill_preserve (cr);
+
+        gdk_cairo_set_source_pixbuf (cr, source, frame_width, frame_width);
+        cairo_fill (cr);
+
+        dest = gdk_pixbuf_get_from_surface (surface, 0, 0, w, h);
+
+        cairo_destroy (cr);
+
+        return dest;
+}
+
+static GdkPixbuf *
+logged_in_pixbuf (GdkPixbuf *pixbuf)
+{
+        cairo_format_t format;
+        cairo_surface_t *surface;
+        cairo_pattern_t *pattern;
+        cairo_t *cr;
+        gint width, height;
+        GdkRGBA color;
+
+        width = gdk_pixbuf_get_width (pixbuf);
+        height = gdk_pixbuf_get_height (pixbuf);
+
+        g_return_val_if_fail (width > 15 && height > 15, pixbuf);
+
+        format = gdk_pixbuf_get_has_alpha (pixbuf) ? CAIRO_FORMAT_ARGB32 : CAIRO_FORMAT_RGB24;
+        surface = cairo_image_surface_create (format, width, height);
+        cr = cairo_create (surface);
+
+        gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
+        cairo_paint (cr);
+
+        /* Draw pattern */
+        cairo_rectangle (cr, 0, 0, width, height);
+        pattern = cairo_pattern_create_radial (width - 9.5, height - 10, 0, width - 8.5, height - 7.5, 7.7);
+        cairo_pattern_add_color_stop_rgb (pattern, 0, 0.4, 0.9, 0);
+        cairo_pattern_add_color_stop_rgb (pattern, 0.7, 0.3, 0.6, 0);
+        cairo_pattern_add_color_stop_rgb (pattern, 0.8, 0.4, 0.4, 0.4);
+        cairo_pattern_add_color_stop_rgba (pattern, 1.0, 0, 0, 0, 0);
+        cairo_set_source (cr, pattern);
+        cairo_fill (cr);
+
+        /* Draw border */
+        cairo_set_line_width (cr, 0.9);
+        cairo_arc (cr, width - 8.5, height - 8.5, 6, 0, 2 * G_PI);
+        gdk_rgba_parse (&color, "#ffffff");
+        gdk_cairo_set_source_rgba (cr, &color);
+        cairo_stroke (cr);
+
+        pixbuf = gdk_pixbuf_get_from_surface (surface, 0, 0, width, height);
+
+        cairo_surface_finish (surface);
+        cairo_destroy (cr);
+
+        return pixbuf;
+}
+
+#define MAX_FILE_SIZE     65536
+
+GdkPixbuf *
+render_user_icon (ActUser     *user,
+                  UmIconStyle  style,
+                  gint         icon_size)
+{
+        GdkPixbuf    *pixbuf;
+        GdkPixbuf    *framed;
+        gboolean      res;
+        GError       *error;
+        const gchar  *icon_file;
+
+        g_return_val_if_fail (ACT_IS_USER (user), NULL);
+        g_return_val_if_fail (icon_size > 12, NULL);
+
+        icon_file = act_user_get_icon_file (user);
+        pixbuf = NULL;
+        if (icon_file) {
+                res = check_user_file (icon_file, MAX_FILE_SIZE);
+                if (res) {
+                        pixbuf = gdk_pixbuf_new_from_file_at_size (icon_file,
+                                                                   icon_size,
+                                                                   icon_size,
+                                                                   NULL);
+                }
+                else {
+                        pixbuf = NULL;
+                }
+        }
+
+        if (pixbuf != NULL) {
+                goto out;
+        }
+
+        error = NULL;
+        pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
+
+                                           "avatar-default",
+                                           icon_size,
+                                           GTK_ICON_LOOKUP_FORCE_SIZE,
+                                           &error);
+        if (error) {
+                g_warning ("%s", error->message);
+                g_error_free (error);
+        }
+
+ out:
+
+        if (pixbuf != NULL && (style & UM_ICON_STYLE_FRAME)) {
+                framed = frame_pixbuf (pixbuf);
+                if (framed != NULL) {
+                        g_object_unref (pixbuf);
+                        pixbuf = framed;
+                }
+        }
+
+        if (pixbuf != NULL && (style & UM_ICON_STYLE_STATUS) && act_user_is_logged_in (user)) {
+                framed = logged_in_pixbuf (pixbuf);
+                if (framed != NULL) {
+                        g_object_unref (pixbuf);
+                        pixbuf = framed;
+                }
+        }
+
+        return pixbuf;
+}
+
+void
+set_user_icon_data (ActUser   *user,
+                    GdkPixbuf *pixbuf)
+{
+        gchar *path;
+        gint fd;
+        GOutputStream *stream;
+        GError *error;
+
+        path = g_build_filename (g_get_tmp_dir (), "gnome-control-center-user-icon-XXXXXX", NULL);
+        fd = g_mkstemp (path);
+
+        if (fd == -1) {
+                g_warning ("failed to create temporary file for image data");
+                g_free (path);
+                return;
+        }
+
+        stream = g_unix_output_stream_new (fd, TRUE);
+
+        error = NULL;
+        if (!gdk_pixbuf_save_to_stream (pixbuf, stream, "png", NULL, &error, NULL)) {
+                g_warning ("failed to save image: %s", error->message);
+                g_error_free (error);
+                g_object_unref (stream);
+                return;
+        }
+
+        g_object_unref (stream);
+
+        act_user_set_icon_file (user, path);
+
+        /* if we ever make the dbus call async, the g_remove call needs
+         * to wait for its completion
+         */
+        g_remove (path);
+
+        g_free (path);
 }

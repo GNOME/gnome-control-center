@@ -24,10 +24,10 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <act/act.h>
 
 #include "um-account-dialog.h"
 #include "um-realm-manager.h"
-#include "um-user-manager.h"
 #include "um-utils.h"
 
 typedef enum {
@@ -149,7 +149,7 @@ finish_action (UmAccountDialog *self)
 
 static void
 complete_dialog (UmAccountDialog *self,
-                 UmUser *user)
+                 ActUser         *user)
 {
         if (user != NULL) {
                 g_simple_async_result_set_op_res_gpointer (self->async,
@@ -162,11 +162,11 @@ complete_dialog (UmAccountDialog *self,
 }
 
 static void
-create_user_done (UmUserManager   *manager,
+create_user_done (ActUserManager  *manager,
                   GAsyncResult    *res,
                   UmAccountDialog *self)
 {
-        UmUser *user;
+        ActUser *user;
         GError *error;
 
         finish_action (self);
@@ -174,14 +174,16 @@ create_user_done (UmUserManager   *manager,
         /* Note that user is returned without an extra reference */
 
         error = NULL;
-        if (!um_user_manager_create_user_finish (manager, res, &user, &error)) {
+        user = act_user_manager_create_user_finish (manager, res, &error);
+
+        if (user == NULL) {
                 g_debug ("Failed to create user: %s", error->message);
-                if (!g_error_matches (error, UM_USER_MANAGER_ERROR, UM_USER_MANAGER_ERROR_PERMISSION_DENIED))
+                if (!g_error_matches (error, ACT_USER_MANAGER_ERROR, ACT_USER_MANAGER_ERROR_PERMISSION_DENIED))
                        show_error_dialog (self, _("Failed to add account"), error);
                 g_error_free (error);
                 gtk_widget_grab_focus (self->local_name);
         } else {
-                g_debug ("Created user: %s", um_user_get_user_name (user));
+                g_debug ("Created user: %s", act_user_get_user_name (user));
                 complete_dialog (self, user);
         }
 }
@@ -189,7 +191,7 @@ create_user_done (UmUserManager   *manager,
 static void
 local_create_user (UmAccountDialog *self)
 {
-        UmUserManager *manager;
+        ActUserManager *manager;
         const gchar *username;
         const gchar *name;
         gint account_type;
@@ -206,16 +208,14 @@ local_create_user (UmAccountDialog *self)
 
         g_debug ("Creating local user: %s", username);
 
-        manager = um_user_manager_ref_default ();
-        um_user_manager_create_user (manager,
-                                     username,
-                                     name,
-                                     account_type,
-                                     self->cancellable,
-                                     (GAsyncReadyCallback)create_user_done,
-                                     self,
-                                     NULL);
-        g_object_unref (manager);
+        manager = act_user_manager_get_default ();
+        act_user_manager_create_user_async (manager,
+                                            username,
+                                            name,
+                                            account_type,
+                                            self->cancellable,
+                                            (GAsyncReadyCallback)create_user_done,
+                                            self);
 }
 
 static gboolean
@@ -389,14 +389,13 @@ on_register_user (GObject *source,
 {
         UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
         GError *error = NULL;
-        UmUser *user = NULL;
+        ActUser *user;
 
-        um_user_manager_cache_user_finish (UM_USER_MANAGER (source),
-                                           result, &user, &error);
+        user = act_user_manager_cache_user_finish (ACT_USER_MANAGER (source), result, &error);
 
         /* This is where we're finally done */
-        if (error == NULL) {
-                g_debug ("Successfully cached remote user: %s", um_user_get_user_name (user));
+        if (user != NULL) {
+                g_debug ("Successfully cached remote user: %s", act_user_get_user_name (user));
                 finish_action (self);
                 complete_dialog (self, user);
 
@@ -406,6 +405,8 @@ on_register_user (GObject *source,
                 finish_action (self);
                 g_error_free (error);
         }
+
+        g_object_unref (self);
 }
 
 static void
@@ -415,7 +416,7 @@ on_permit_user_login (GObject *source,
 {
         UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
         UmRealmCommon *common;
-        UmUserManager *manager;
+        ActUserManager *manager;
         GError *error = NULL;
         gchar *login;
 
@@ -428,18 +429,16 @@ on_permit_user_login (GObject *source,
                  * should also lookup information about this via the realm and make
                  * sure all that is functional.
                  */
-                manager = um_user_manager_ref_default ();
+                manager = act_user_manager_get_default ();
                 login = um_realm_calculate_login (common, gtk_entry_get_text (self->enterprise_login));
                 g_return_if_fail (login != NULL);
 
                 g_debug ("Caching remote user: %s", login);
 
-                um_user_manager_cache_user (manager, login, self->cancellable,
-                                            on_register_user, g_object_ref (self),
-                                            g_object_unref);
+                act_user_manager_cache_user_async (manager, login, self->cancellable,
+                                                   on_register_user, g_object_ref (self));
 
                 g_free (login);
-                g_object_unref (manager);
 
         } else {
                 show_error_dialog (self, _("Failed to register account"), error);
@@ -1192,11 +1191,11 @@ um_account_dialog_show (UmAccountDialog     *self,
         gtk_widget_grab_focus (self->local_name);
 }
 
-UmUser *
+ActUser *
 um_account_dialog_finish (UmAccountDialog     *self,
                           GAsyncResult        *result)
 {
-        UmUser *user;
+        ActUser *user;
 
         g_return_val_if_fail (UM_IS_ACCOUNT_DIALOG (self), NULL);
         g_return_val_if_fail (g_simple_async_result_is_valid (result, G_OBJECT (self),

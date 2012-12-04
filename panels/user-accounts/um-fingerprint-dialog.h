@@ -18,11 +18,11 @@
  */
 
 #include <gtk/gtk.h>
-#include "um-user.h"
+#include <act/act.h>
 
 gboolean set_fingerprint_label (GtkWidget *label1,
                                 GtkWidget *label2);
 void fingerprint_button_clicked (GtkWindow *parent,
                                  GtkWidget *label1,
                                  GtkWidget *label2,
-                                 UmUser    *user);
+                                 ActUser   *user);

@@ -23,7 +23,7 @@
 #define __UM_PASSWORD_DIALOG_H__
 
 #include <gtk/gtk.h>
-#include "um-user.h"
+#include <act/act.h>
 
 G_BEGIN_DECLS
 
@@ -32,7 +32,7 @@ typedef struct _UmPasswordDialog UmPasswordDialog;
 UmPasswordDialog *um_password_dialog_new      (void);
 void              um_password_dialog_free     (UmPasswordDialog *dialog);
 void              um_password_dialog_set_user (UmPasswordDialog *dialog,
-                                               UmUser           *user);
+                                               ActUser          *user);
 void              um_password_dialog_set_privileged (UmPasswordDialog *dialog,
                                                      gboolean          privileged);
 void              um_password_dialog_show     (UmPasswordDialog *dialog,
