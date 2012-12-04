@@ -764,8 +764,13 @@ panel_add_devices_columns (CcNetworkPanel *panel, GtkTreeView *treeview)
 
         /* image */
         renderer = gtk_cell_renderer_pixbuf_new ();
-        g_object_set (renderer, "stock-size", gtk_icon_size_from_name ("cc-sidebar-list"), NULL);
-        gtk_cell_renderer_set_padding (renderer, 4, 4);
+        g_object_set (renderer,
+                      "width", 32,
+                      "xalign", 1.0,
+                      "stock-size", GTK_ICON_SIZE_MENU,
+                      "follow-state", TRUE,
+                      NULL);
+        gtk_cell_renderer_set_padding (renderer, 4, 10);
 
         column = gtk_tree_view_column_new_with_attributes ("icon", renderer,
                                                            "icon-name", PANEL_DEVICES_COLUMN_ICON,
@@ -866,7 +871,7 @@ panel_add_proxy_device (CcNetworkPanel *panel)
         gtk_list_store_append (liststore_devices, &iter);
         gtk_list_store_set (liststore_devices,
                             &iter,
-                            PANEL_DEVICES_COLUMN_ICON, "preferences-system-network",
+                            PANEL_DEVICES_COLUMN_ICON, "preferences-system-network-symbolic",
                             PANEL_DEVICES_COLUMN_SORT, "9",
                             PANEL_DEVICES_COLUMN_OBJECT, proxy,
                             -1);
@@ -1046,7 +1051,7 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
         gtk_list_store_append (liststore_devices, &iter);
         gtk_list_store_set (liststore_devices,
                             &iter,
-                            PANEL_DEVICES_COLUMN_ICON, "network-vpn",
+                            PANEL_DEVICES_COLUMN_ICON, "network-vpn-symbolic",
                             PANEL_DEVICES_COLUMN_SORT, "5",
                             PANEL_DEVICES_COLUMN_OBJECT, net_vpn,
                             -1);

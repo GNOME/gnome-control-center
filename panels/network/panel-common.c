@@ -45,25 +45,25 @@ panel_device_to_icon_name (NMDevice *device)
         case NM_DEVICE_TYPE_ETHERNET:
                 state = nm_device_get_state (device);
                 if (state == NM_DEVICE_STATE_UNAVAILABLE) {
-                        value = "network-wired-disconnected";
+                        value = "network-wired-disconnected-symbolic";
                 } else {
-                        value = "network-wired";
+                        value = "network-wired-symbolic";
                 }
                 break;
         case NM_DEVICE_TYPE_WIFI:
         case NM_DEVICE_TYPE_BT:
         case NM_DEVICE_TYPE_OLPC_MESH:
-                value = "network-wireless";
+                value = "network-wireless-signal-excellent-symbolic";
                 break;
         case NM_DEVICE_TYPE_MODEM:
                 caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
                 if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
                     (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
-                        value = "network-wireless";
+                        value = "network-wireless-signal-excellent-symbolic";
                 }
                 break;
         default:
-                value = "network-idle";
+                value = "network-idle-symbolic";
                 break;
         }
         return value;
