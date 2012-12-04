@@ -269,7 +269,6 @@ cc_language_chooser_new (GtkWidget *parent, gboolean regions)
         GtkWidget *list;
         GtkWidget *button;
 	GtkWidget *entry;
-        GtkWidget *widget;
         GHashTable *user_langs;
         GdkCursor *cursor;
         guint timeout;
@@ -289,9 +288,7 @@ cc_language_chooser_new (GtkWidget *parent, gboolean regions)
         chooser = (GtkWidget *) gtk_builder_get_object (builder, "dialog");
 
         if (regions) {
-                widget = (GtkWidget *) gtk_builder_get_object (builder, "title");
-                gtk_label_set_text (GTK_LABEL (widget), _("Select a region"));
-
+                gtk_window_set_title (GTK_WINDOW (chooser), _("Select a region"));
                 /* communicate the preference to finish_language_chooser() */
                 g_object_set_data (G_OBJECT (chooser), "regions", GINT_TO_POINTER (TRUE));
         }

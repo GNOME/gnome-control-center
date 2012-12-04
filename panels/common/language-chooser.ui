@@ -6,7 +6,7 @@
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="type_hint">dialog</property>
-    <property name="title"> </property>
+    <property name="title" translatable="yes">Select a language</property>
     <property name="icon_name">system-users</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="content-area">
@@ -15,18 +15,6 @@
         <property name="spacing">6</property>
 	<property name="margin_left">10</property>
    	<property name="margin_right">10</property>
-        <child>
-          <object class="GtkLabel" id="title">
-            <property name="visible">True</property>
-	    <property name="halign">start</property>
-            <property name="label" translatable="yes">Select a language</property>
-          </object>
-          <packing>
-            <property name="position">1</property>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-          </packing>
-        </child>
         <child>
           <object class="GtkScrolledWindow" id="scrolledwindow1">
             <property name="visible">True</property>
