@@ -664,6 +664,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
 
   scrolled_window = WID ("scrolled_window");
   widget = GTK_WIDGET (egg_list_box_new ());
+  egg_list_box_set_selection_mode (EGG_LIST_BOX (widget), GTK_SELECTION_NONE);
   egg_list_box_add_to_scrolled (EGG_LIST_BOX (widget), GTK_SCROLLED_WINDOW (scrolled_window));
   self->priv->list_box = widget;
   gtk_widget_show (widget);
