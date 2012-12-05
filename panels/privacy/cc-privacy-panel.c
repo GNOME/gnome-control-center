@@ -273,6 +273,8 @@ add_screen_lock (CcPrivacyPanel *self)
   dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "screen_lock_dialog"));
   g_signal_connect_swapped (w, "clicked",
                             G_CALLBACK (gtk_widget_hide), dialog);
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
   w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "automatic_screen_lock"));
   g_settings_bind (self->priv->lock_settings, "lock-enabled",
@@ -338,6 +340,8 @@ add_name_visibility (CcPrivacyPanel *self)
   dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "name_dialog"));
   g_signal_connect_swapped (w, "clicked",
                             G_CALLBACK (gtk_widget_hide), dialog);
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
   w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "stealth_mode"));
   g_settings_bind (self->priv->privacy_settings, "hide-identity",
@@ -444,6 +448,8 @@ add_usage_history (CcPrivacyPanel *self)
   dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "recent_dialog"));
   g_signal_connect_swapped (w, "clicked",
                             G_CALLBACK (gtk_widget_hide), dialog);
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
   w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "recently_used_switch"));
   g_settings_bind (self->priv->privacy_settings, REMEMBER_RECENT_FILES,
@@ -572,6 +578,8 @@ add_trash_temp (CcPrivacyPanel *self)
   dialog = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "trash_dialog"));
   g_signal_connect_swapped (w, "clicked",
                             G_CALLBACK (gtk_widget_hide), dialog);
+  g_signal_connect (dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
   w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "purge_trash_switch"));
   g_settings_bind (self->priv->privacy_settings, REMOVE_OLD_TRASH_FILES,
