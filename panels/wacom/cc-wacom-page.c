@@ -186,11 +186,11 @@ finish_calibration (CalibArea *area,
 		cal[2] = axis.x_max;
 		cal[3] = axis.y_max;
 
-		set_calibration(cal, 4, page->priv->wacom_settings);
+		set_calibration(cal, 4, priv->wacom_settings);
 	}
 
 	calib_area_free (area);
-	page->priv->area = NULL;
+	priv->area = NULL;
 	gtk_widget_set_sensitive (WID ("button-calibrate"), TRUE);
 }
 
@@ -219,14 +219,14 @@ run_calibration (CcWacomPage *page,
 	else
 		device_id = -1;
 
-	page->priv->area = calib_area_new (NULL,
-					   monitor,
-					   device_id,
-					   finish_calibration,
-					   page,
-					   &old_axis,
-					   THRESHOLD_MISCLICK,
-					   THRESHOLD_DOUBLECLICK);
+	priv->area = calib_area_new (NULL,
+				     monitor,
+				     device_id,
+				     finish_calibration,
+				     page,
+				     &old_axis,
+				     THRESHOLD_MISCLICK,
+				     THRESHOLD_DOUBLECLICK);
 
 	return FALSE;
 }
@@ -818,7 +818,7 @@ setup_mapping_treeview (CcWacomPage *page)
 	gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (model));
 
 	/* Fill it up! */
-	list = gsd_wacom_device_get_buttons (page->priv->pad);
+	list = gsd_wacom_device_get_buttons (priv->pad);
 	for (l = list; l != NULL; l = l->next) {
 		GsdWacomTabletButton *button = l->data;
 		GsdWacomActionType type = GSD_WACOM_ACTION_TYPE_NONE;
@@ -847,8 +847,8 @@ button_mapping_dialog_closed (GtkDialog   *dialog,
 
 	priv = page->priv;
 	gtk_widget_destroy (MWID ("button-mapping-dialog"));
-	g_object_unref (page->priv->mapping_builder);
-	page->priv->mapping_builder = NULL;
+	g_object_unref (priv->mapping_builder);
+	priv->mapping_builder = NULL;
 }
 
 static void
@@ -1285,21 +1285,21 @@ update_tablet_ui (CcWacomPage *page,
 
 	switch (layout) {
 	case LAYOUT_NORMAL:
-		remove_left_handed (page->priv);
-		remove_display_link (page->priv);
+		remove_left_handed (priv);
+		remove_display_link (priv);
 		break;
 	case LAYOUT_REVERSIBLE:
-		remove_display_link (page->priv);
+		remove_display_link (priv);
 		break;
 	case LAYOUT_SCREEN:
-		remove_left_handed (page->priv);
+		remove_left_handed (priv);
 
 		gtk_widget_destroy (WID ("combo-tabletmode"));
 		gtk_widget_destroy (WID ("label-trackingmode"));
 		gtk_widget_destroy (WID ("display-mapping-button"));
 
 		gtk_widget_show (WID ("button-calibrate"));
-		if (gsd_wacom_device_get_display_monitor (page->priv->stylus) >= 0)
+		if (gsd_wacom_device_get_display_monitor (priv->stylus) >= 0)
 			has_monitor = TRUE;
 		gtk_widget_set_sensitive (WID ("button-calibrate"), has_monitor);
 		gtk_widget_show (WID ("display-link"));
