@@ -310,8 +310,8 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_left">12</property>
-            <property name="margin_right">6</property>
-            <property name="margin_top">12</property>
+            <property name="margin_right">12</property>
+            <property name="margin_top">6</property>
             <property name="margin_bottom">12</property>
             <property name="xalign">0</property>
             <property name="label" translatable="yes">Remembering your history makes things easier to find again. These items are never shared over the network.</property>
@@ -330,13 +330,15 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="clear_recent_button">
-                <property name="label" translatable="yes">_Clear Recent History</property>
+                <property name="label" translatable="yes">Cl_ear Recent History</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_underline">True</property>
               </object>
               <packing>
+                <property name="secondary">True</property>
+                <property name="non-homogeneous">True</property>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">0</property>
@@ -344,7 +346,7 @@
             </child>
             <child>
               <object class="GtkButton" id="recent_done">
-                <property name="label" translatable="yes">_Done</property>
+                <property name="label" translatable="yes">_Close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
