@@ -755,7 +755,7 @@ get_cpu_info (const glibtop_sysinfo *info)
   /* count duplicates */
   for (i = 0; i != info->ncpu; ++i)
     {
-      const char * const keys[] = { "model name", "cpu" };
+      const char * const keys[] = { "model name", "cpu", "Processor" };
       char *model;
       int  *count;
 
