@@ -709,13 +709,11 @@ get_devices_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
                                 UP_DEVICE_STATE_DISCHARGING, 287);
   add_device_secondary (panel, child);
   g_variant_unref (child);
-#if 0
   child = g_variant_new_parsed ("('/',%u,'',%d,%u,%t)",
                                 UP_DEVICE_KIND_BATTERY, 11.0,
                                 UP_DEVICE_STATE_FULLY_CHARGED, 200);
   set_device_battery_additional (panel, child);
   g_variant_unref (child);
-#endif
 #endif
 
   g_variant_unref (untuple);
