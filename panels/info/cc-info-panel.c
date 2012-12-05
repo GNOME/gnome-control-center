@@ -768,7 +768,7 @@ get_cpu_info (const glibtop_sysinfo *info)
         }
 
       if (model == NULL)
-          model = _("Unknown model");
+          continue;
 
       count = g_hash_table_lookup (counts, model);
       if (count == NULL)
