@@ -52,14 +52,13 @@
       <object class="GtkBox" id="dialog-vbox2">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkButtonBox" id="dialog-action_area2">
             <property name="can_focus">False</property>
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="name_done">
-                <property name="label" translatable="yes">_Done</property>
+                <property name="label" translatable="yes">_Close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="can_default">True</property>
@@ -87,7 +86,7 @@
             <property name="can_focus">False</property>
             <property name="margin_left">12</property>
             <property name="margin_right">12</property>
-            <property name="margin_top">12</property>
+            <property name="margin_top">6</property>
             <property name="margin_bottom">12</property>
             <property name="label" translatable="yes">Control how you appear on the screen and the network.</property>
           </object>
@@ -102,10 +101,9 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_left">12</property>
-            <property name="margin_right">12</property>
-            <property name="margin_top">12</property>
+            <property name="margin_right">2</property>
+            <property name="margin_top">6</property>
             <property name="margin_bottom">12</property>
-            <property name="border_width">6</property>
             <property name="row_spacing">12</property>
             <property name="column_spacing">6</property>
             <child>
@@ -113,6 +111,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
+                <property name="hexpand">True</property>
                 <property name="label" translatable="yes">Display _full name in top bar</property>
                 <property name="use_underline">True</property>
                 <property name="mnemonic_widget">full_name_top_bar</property>
@@ -128,7 +127,7 @@
               <object class="GtkSwitch" id="full_name_top_bar">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="halign">start</property>
+                <property name="halign">end</property>
                 <property name="valign">center</property>
               </object>
               <packing>
@@ -143,6 +142,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
+                <property name="hexpand">True</property>
                 <property name="label" translatable="yes">Display full name in _lock screen</property>
                 <property name="use_underline">True</property>
                 <property name="mnemonic_widget">full_name_lock_screen</property>
@@ -158,7 +158,7 @@
               <object class="GtkSwitch" id="full_name_lock_screen">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="halign">start</property>
+                <property name="halign">end</property>
                 <property name="valign">center</property>
               </object>
               <packing>
@@ -173,7 +173,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="xalign">0</property>
-                <property name="label" translatable="yes">_Stealth mode</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">_Stealth Mode</property>
                 <property name="use_underline">True</property>
                 <property name="mnemonic_widget">stealth_mode</property>
                 <attributes>
@@ -191,7 +192,7 @@
               <object class="GtkSwitch" id="stealth_mode">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="halign">start</property>
+                <property name="halign">end</property>
                 <property name="valign">center</property>
               </object>
               <packing>
