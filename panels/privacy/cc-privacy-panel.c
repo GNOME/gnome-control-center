@@ -172,16 +172,23 @@ add_row (CcPrivacyPanel *self,
 {
   GtkWidget *box, *w;
 
-  gtk_widget_set_valign (self->priv->list_box, GTK_ALIGN_FILL);
-
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   g_object_set_data (G_OBJECT (box), "dialog-id", (gpointer)dialog_id);
   gtk_widget_set_hexpand (box, TRUE);
-  gtk_container_set_border_width (GTK_CONTAINER (box), 6);
   gtk_container_add (GTK_CONTAINER (self->priv->list_box), box);
 
   w = gtk_label_new (label);
+  gtk_widget_set_margin_left (w, 12);
+  gtk_widget_set_margin_right (w, 12);
+  gtk_widget_set_margin_top (w, 6);
+  gtk_widget_set_margin_bottom (w, 6);
+  gtk_widget_set_halign (w, GTK_ALIGN_START);
+  gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_container_add (GTK_CONTAINER (box), w);
+  gtk_widget_set_margin_left (status, 12);
+  gtk_widget_set_margin_right (status, 12);
+  gtk_widget_set_halign (w, GTK_ALIGN_END);
+  gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_box_pack_end (GTK_BOX (box), status, FALSE, FALSE, 0);
 
   gtk_widget_show_all (box);
