@@ -920,9 +920,11 @@ gvc_channel_bar_init (GvcChannelBar *bar)
 
         bar->priv->low_image = gtk_image_new_from_icon_name ("audio-volume-low-symbolic",
                                                              GTK_ICON_SIZE_MENU);
+        gtk_style_context_add_class (gtk_widget_get_style_context (bar->priv->low_image), "dim-label");
         gtk_widget_set_no_show_all (bar->priv->low_image, TRUE);
         bar->priv->high_image = gtk_image_new_from_icon_name ("audio-volume-high-symbolic",
                                                               GTK_ICON_SIZE_MENU);
+        gtk_style_context_add_class (gtk_widget_get_style_context (bar->priv->high_image), "dim-label");
         gtk_widget_set_no_show_all (bar->priv->high_image, TRUE);
 
         bar->priv->image = gtk_image_new ();
