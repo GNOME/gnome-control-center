@@ -309,11 +309,12 @@ parse_start_tag (GMarkupParseContext *ctx,
 {
   KeyList *keylist = (KeyList *) user_data;
   KeyListEntry key;
-  const char *name, *schema, *description, *package;
+  const char *name, *schema, *description, *package, *context, *orig_description;
 
   name = NULL;
   schema = NULL;
   package = NULL;
+  context = NULL;
 
   /* The top-level element, names the section in the tree */
   if (g_str_equal (element_name, "KeyListEntries"))
@@ -390,6 +391,8 @@ parse_start_tag (GMarkupParseContext *ctx,
 
   schema = NULL;
   description = NULL;
+  context = NULL;
+  orig_description = NULL;
 
   while (*attr_names && *attr_values)
     {
@@ -403,17 +406,12 @@ parse_start_tag (GMarkupParseContext *ctx,
 	   schema = *attr_values;
 	  }
 	} else if (g_str_equal (*attr_names, "description")) {
-          if (**attr_values) {
-            if (keylist->package)
-	      {
-	        description = dgettext (keylist->package, *attr_values);
-	      }
-	    else
-	      {
-	        description = _(*attr_values);
-	      }
-	  }
-        }
+          if (**attr_values)
+	    orig_description = *attr_values;
+        } else if (g_str_equal (*attr_names, "msgctxt")) {
+          if (**attr_values)
+            context = *attr_values;
+	}
 
       ++attr_names;
       ++attr_values;
@@ -427,6 +425,11 @@ parse_start_tag (GMarkupParseContext *ctx,
     g_debug ("Ignored GConf keyboard shortcut '%s'", name);
     return;
   }
+
+  if (context != NULL)
+    description = g_dpgettext2 (keylist->package, context, orig_description);
+  else
+    description = dgettext (keylist->package, orig_description);
 
   key.name = g_strdup (name);
   key.type = CC_KEYBOARD_ITEM_TYPE_GSETTINGS;
