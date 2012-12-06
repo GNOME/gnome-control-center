@@ -1333,6 +1333,7 @@ gnome_control_center_init (GnomeControlCenter *self)
   GError *err = NULL;
   GnomeControlCenterPrivate *priv;
   GdkScreen *screen;
+  GtkWidget *frame;
 
   priv = self->priv = CONTROL_CENTER_PRIVATE (self);
 
@@ -1378,6 +1379,11 @@ gnome_control_center_init (GnomeControlCenter *self)
   priv->main_vbox = W (priv->builder, "main-vbox");
   g_signal_connect (priv->notebook, "notify::page",
                     G_CALLBACK (notebook_page_notify_cb), priv);
+
+  /* Set the alignment for the home button */
+  frame = W(priv->builder, "home-aspect-frame");
+  if (gtk_widget_get_direction (frame) == GTK_TEXT_DIR_RTL)
+    g_object_set (frame, "xalign", 1.0, NULL);
 
   g_signal_connect (gtk_builder_get_object (priv->builder, "home-button"),
                     "clicked", G_CALLBACK (home_button_clicked_cb), self);
