@@ -2138,7 +2138,7 @@ update_card (GvcMixerControl      *control,
                 else {
                         for (i = 0; i < info->n_ports; i++) {
                                 if (g_strcmp0 (card_port->port, info->ports[i]->name) == 0) {
-                                        if (card_port->available != info->ports[i]->available) {
+                                        if ((card_port->available == PA_PORT_AVAILABLE_NO) !=  (info->ports[i]->available == PA_PORT_AVAILABLE_NO)) {
                                                 card_port->available = info->ports[i]->available;
                                                 g_debug ("sync port availability on card %i, card port name '%s', new available value %i",
                                                           gvc_mixer_card_get_index (card),
