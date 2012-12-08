@@ -1760,6 +1760,7 @@ cc_power_panel_init (CcPowerPanel *self)
   box = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_min_content_height (GTK_SCROLLED_WINDOW (box), 490);
   gtk_widget_show (box);
   gtk_container_add (GTK_CONTAINER (self), box);
   g_object_ref (widget);
