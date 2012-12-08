@@ -1687,6 +1687,7 @@ add_battery_section (CcPowerPanel *self)
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (box), GTK_SHADOW_IN);
   gtk_widget_set_margin_left (box, 50);
   gtk_widget_set_margin_right (box, 50);
+  gtk_widget_set_margin_top (box, 24);
   gtk_widget_set_margin_bottom (box, 24);
   egg_list_box_add_to_scrolled (EGG_LIST_BOX (widget), GTK_SCROLLED_WINDOW (box));
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
