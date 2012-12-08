@@ -195,8 +195,8 @@ add_primary (CcPowerPanel *panel,
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
   box2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
   gtk_size_group_add_widget (priv->battery_sizegroup, box2);
-  gtk_widget_set_margin_left (box2, 12);
-  gtk_widget_set_margin_right (box2, 12);
+  gtk_widget_set_margin_left (box2, 20);
+  gtk_widget_set_margin_right (box2, 20);
   gtk_widget_set_margin_top (box2, 6);
   gtk_widget_set_margin_bottom (box2, 6);
   gtk_box_pack_start (GTK_BOX (box), box2, FALSE, TRUE, 0);
@@ -215,9 +215,9 @@ add_primary (CcPowerPanel *panel,
   gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
   gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
 
-  box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-  gtk_widget_set_margin_left (box2, 6);
-  gtk_widget_set_margin_right (box2, 6);
+  box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+  gtk_widget_set_margin_left (box2, 20);
+  gtk_widget_set_margin_right (box2, 20);
   s = g_strdup_printf ("%d%%", (int)percentage);
   label = gtk_label_new (s);
   g_free (s);
@@ -228,8 +228,6 @@ add_primary (CcPowerPanel *panel,
 
   levelbar = gtk_level_bar_new ();
   gtk_level_bar_set_value (GTK_LEVEL_BAR (levelbar), percentage / 100.0);
-  gtk_widget_set_margin_left (levelbar, 6);
-  gtk_widget_set_margin_right (levelbar, 6);
   gtk_widget_set_hexpand (levelbar, TRUE);
   gtk_widget_set_halign (levelbar, GTK_ALIGN_FILL);
   gtk_widget_set_valign (levelbar, GTK_ALIGN_CENTER);
@@ -555,16 +553,16 @@ add_device_secondary (CcPowerPanel *panel,
   widget = gtk_label_new ("");
   gtk_misc_set_alignment (GTK_MISC (widget), 0.0f, 0.5f);
   gtk_label_set_markup (GTK_LABEL (widget), description->str);
-  gtk_widget_set_margin_left (widget, 12);
-  gtk_widget_set_margin_right (widget, 12);
+  gtk_widget_set_margin_left (widget, 20);
+  gtk_widget_set_margin_right (widget, 20);
   gtk_widget_set_margin_top (widget, 6);
   gtk_widget_set_margin_bottom (widget, 6);
   gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, TRUE, 0);
   gtk_size_group_add_widget (priv->battery_sizegroup, widget);
 
-  box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-  gtk_widget_set_margin_left (box2, 6);
-  gtk_widget_set_margin_right (box2, 6);
+  box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+  gtk_widget_set_margin_left (box2, 20);
+  gtk_widget_set_margin_right (box2, 20);
   s = g_strdup_printf ("%d%%", (int)percentage);
   widget = gtk_label_new (s);
   g_free (s);
@@ -574,8 +572,6 @@ add_device_secondary (CcPowerPanel *panel,
   gtk_size_group_add_widget (priv->charge_sizegroup, widget);
 
   widget = gtk_level_bar_new ();
-  gtk_widget_set_margin_left (widget, 6);
-  gtk_widget_set_margin_right (widget, 6);
   gtk_widget_set_halign (widget, TRUE);
   gtk_widget_set_halign (widget, GTK_ALIGN_FILL);
   gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
@@ -1251,8 +1247,8 @@ add_power_saving_section (CcPowerPanel *self)
   g_free (s);
   gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
   gtk_misc_set_alignment (GTK_MISC (widget), 0, 0.5);
-  gtk_widget_set_margin_left (widget, 50);
-  gtk_widget_set_margin_right (widget, 50);
+  gtk_widget_set_margin_left (widget, 56);
+  gtk_widget_set_margin_right (widget, 56);
   gtk_widget_set_margin_bottom (widget, 6);
   gtk_box_pack_start (GTK_BOX (vbox), widget, FALSE, TRUE, 0);
   gtk_widget_show (widget);
@@ -1278,21 +1274,21 @@ add_power_saving_section (CcPowerPanel *self)
   label = gtk_label_new (_("_Screen Brightness"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
-  gtk_widget_set_margin_left (label, 12);
-  gtk_widget_set_margin_right (label, 12);
+  gtk_widget_set_margin_left (label, 20);
+  gtk_widget_set_margin_right (label, 20);
   gtk_widget_set_margin_top (label, 6);
   gtk_widget_set_margin_bottom (label, 6);
   gtk_box_pack_start (GTK_BOX (box), label, FALSE, TRUE, 0);
   gtk_size_group_add_widget (priv->battery_sizegroup, label);
-  box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   label = gtk_label_new ("");
   gtk_box_pack_start (GTK_BOX (box2), label, FALSE, TRUE, 0);
   gtk_size_group_add_widget (priv->charge_sizegroup, label);
 
   priv->brightness_scale = scale = gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL, 0, 100, 1);
   gtk_scale_set_draw_value (GTK_SCALE (scale), FALSE);
-  gtk_widget_set_margin_left (scale, 12);
-  gtk_widget_set_margin_right (scale, 12);
+  gtk_widget_set_margin_left (scale, 20);
+  gtk_widget_set_margin_right (scale, 20);
   gtk_box_pack_start (GTK_BOX (box2), scale, TRUE, TRUE, 0);
   gtk_size_group_add_widget (priv->level_sizegroup, scale);
 
@@ -1304,8 +1300,8 @@ add_power_saving_section (CcPowerPanel *self)
   label = gtk_label_new (_("Screen _Power Saving"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
-  gtk_widget_set_margin_left (label, 12);
-  gtk_widget_set_margin_right (label, 12);
+  gtk_widget_set_margin_left (label, 20);
+  gtk_widget_set_margin_right (label, 20);
   gtk_widget_set_margin_top (label, 6);
   gtk_widget_set_margin_bottom (label, 6);
   gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
@@ -1315,8 +1311,8 @@ add_power_saving_section (CcPowerPanel *self)
   g_settings_bind (priv->gsd_settings, "idle-dim-battery",
                    sw, "active",
                    G_SETTINGS_BIND_DEFAULT);
-  gtk_widget_set_margin_left (sw, 12);
-  gtk_widget_set_margin_right (sw, 12);
+  gtk_widget_set_margin_left (sw, 20);
+  gtk_widget_set_margin_right (sw, 20);
   gtk_widget_set_valign (sw, GTK_ALIGN_CENTER);
   gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
@@ -1336,15 +1332,15 @@ add_power_saving_section (CcPowerPanel *self)
   label = gtk_label_new (_("_Wi-Fi"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
-  gtk_widget_set_margin_left (label, 12);
-  gtk_widget_set_margin_right (label, 12);
+  gtk_widget_set_margin_left (label, 20);
+  gtk_widget_set_margin_right (label, 20);
   gtk_widget_set_margin_top (label, 6);
   gtk_widget_set_margin_bottom (label, 6);
   gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
   priv->wifi_switch = sw = gtk_switch_new ();
-  gtk_widget_set_margin_left (sw, 12);
-  gtk_widget_set_margin_right (sw, 12);
+  gtk_widget_set_margin_left (sw, 20);
+  gtk_widget_set_margin_right (sw, 20);
   gtk_widget_set_valign (sw, GTK_ALIGN_CENTER);
   gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
@@ -1367,16 +1363,16 @@ add_power_saving_section (CcPowerPanel *self)
         label = gtk_label_new (_("_Bluetooth"));
         gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
         gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
-        gtk_widget_set_margin_left (label, 12);
-        gtk_widget_set_margin_right (label, 12);
+        gtk_widget_set_margin_left (label, 20);
+        gtk_widget_set_margin_right (label, 20);
         gtk_widget_set_margin_top (label, 6);
         gtk_widget_set_margin_bottom (label, 6);
         gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
         priv->bt_switch = sw = gtk_switch_new ();
         gtk_widget_set_sensitive (priv->bt_switch, bt_state == BLUETOOTH_KILLSWITCH_STATE_HARD_BLOCKED);
-        gtk_widget_set_margin_left (sw, 12);
-        gtk_widget_set_margin_right (sw, 12);
+        gtk_widget_set_margin_left (sw, 20);
+        gtk_widget_set_margin_right (sw, 20);
         gtk_widget_set_valign (sw, GTK_ALIGN_CENTER);
         gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
         gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
@@ -1526,7 +1522,7 @@ add_automatic_suspend_section (CcPowerPanel *self)
   g_free (s);
   gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
   gtk_misc_set_alignment (GTK_MISC (widget), 0, 0.5);
-  gtk_widget_set_margin_left (widget, 50);
+  gtk_widget_set_margin_left (widget, 56);
   gtk_widget_set_margin_right (widget, 50);
   gtk_widget_set_margin_bottom (widget, 6);
   gtk_box_pack_start (GTK_BOX (vbox), widget, FALSE, TRUE, 0);
@@ -1555,8 +1551,8 @@ add_automatic_suspend_section (CcPowerPanel *self)
   label = gtk_label_new (_("_Automatic Suspend"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
-  gtk_widget_set_margin_left (label, 12);
-  gtk_widget_set_margin_right (label, 12);
+  gtk_widget_set_margin_left (label, 20);
+  gtk_widget_set_margin_right (label, 20);
   gtk_widget_set_margin_top (label, 6);
   gtk_widget_set_margin_bottom (label, 6);
   gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
@@ -1564,8 +1560,8 @@ add_automatic_suspend_section (CcPowerPanel *self)
   priv->automatic_suspend_label = sw = gtk_label_new ("");
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
   gtk_misc_set_alignment (GTK_MISC (sw), 1, 0.5);
-  gtk_widget_set_margin_left (sw, 16);
-  gtk_widget_set_margin_right (sw, 16);
+  gtk_widget_set_margin_left (sw, 24);
+  gtk_widget_set_margin_right (sw, 24);
   gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
   gtk_container_add (GTK_CONTAINER (widget), box);
   gtk_size_group_add_widget (priv->row_sizegroup, box);
@@ -1575,16 +1571,16 @@ add_automatic_suspend_section (CcPowerPanel *self)
   label = gtk_label_new (_("When Battery Power is _Critical"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
-  gtk_widget_set_margin_left (label, 12);
-  gtk_widget_set_margin_right (label, 12);
+  gtk_widget_set_margin_left (label, 20);
+  gtk_widget_set_margin_right (label, 20);
   gtk_widget_set_margin_top (label, 6);
   gtk_widget_set_margin_bottom (label, 6);
   gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
 
   model = (GtkTreeModel*)gtk_builder_get_object (priv->builder, "liststore_critical");
   priv->critical_battery_combo = sw = gtk_combo_box_new_with_model (model);
-  gtk_widget_set_margin_left (sw, 12);
-  gtk_widget_set_margin_right (sw, 12);
+  gtk_widget_set_margin_left (sw, 20);
+  gtk_widget_set_margin_right (sw, 20);
   gtk_widget_set_valign (sw, GTK_ALIGN_CENTER);
 
   g_object_set_data (G_OBJECT (sw), "_gsettings_key", "critical-battery-action");
