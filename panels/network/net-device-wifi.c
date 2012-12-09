@@ -38,18 +38,20 @@
 
 #include "network-dialogs.h"
 #include "panel-common.h"
-#include "panel-cell-renderer-mode.h"
-#include "panel-cell-renderer-signal.h"
-#include "panel-cell-renderer-security.h"
-#include "panel-cell-renderer-separator.h"
-#include "panel-cell-renderer-text.h"
-#include "panel-cell-renderer-pixbuf.h"
 
 #include "egg-list-box/egg-list-box.h"
 
 #include "net-device-wifi.h"
 
 #define NET_DEVICE_WIFI_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_DEVICE_WIFI, NetDeviceWifiPrivate))
+
+typedef enum {
+  NM_AP_SEC_UNKNOWN,
+  NM_AP_SEC_NONE,
+  NM_AP_SEC_WEP,
+  NM_AP_SEC_WPA,
+  NM_AP_SEC_WPA2
+} NMAccessPointSecurity;
 
 static void nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi);
 static void show_wifi_list (NetDeviceWifi *device_wifi);
