@@ -143,16 +143,11 @@
                     <property name="margin_top">12</property>
                     <property name="margin_bottom">12</property>
                     <child>
-                      <object class="GtkLabel" id="heading_list">
+                      <object class="GtkImage" id="heading_image">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="halign">start</property>
-                        <property name="hexpand">True</property>
-                        <property name="label" translatable="yes">Wi-Fi</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                          <attribute name="scale" value="1.2"/>
-                        </attributes>
+                        <property name="icon_name">network-wireless</property>
+                        <property name="icon-size">6</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -161,11 +156,40 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkSwitch" id="device_off_switch">
+                      <object class="GtkBox" id="box4">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="halign">end</property>
-                        <property name="valign">start</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkLabel" id="heading_list">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="label" translatable="yes">Wi-Fi</property>
+                            <attributes>
+                              <attribute name="weight" value="bold"/>
+                              <attribute name="scale" value="1.2"/>
+                            </attributes>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="heading_status">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="label">Connected</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -173,9 +197,22 @@
                         <property name="position">1</property>
                       </packing>
                     </child>
+                    <child>
+                      <object class="GtkSwitch" id="device_off_switch">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="halign">end</property>
+                        <property name="valign">center</property>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
+                    <property name="expand">True</property>
                     <property name="fill">False</property>
                     <property name="position">0</property>
                   </packing>
