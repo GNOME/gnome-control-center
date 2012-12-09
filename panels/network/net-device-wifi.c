@@ -657,6 +657,10 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         else
                 panel_set_device_widget_details (priv->builder, "last_used", NULL);
 
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "heading_status"));
+        gtk_label_set_label (GTK_LABEL (widget),
+                             panel_device_state_to_localized_string (nm_device));
+
         /* update list of APs */
         populate_ap_list (device_wifi);
 }
