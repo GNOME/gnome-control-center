@@ -117,32 +117,6 @@
       <action-widget response="-5">hotspot-turn-on-button</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkListStore" id="liststore_network">
-    <columns>
-      <!-- column-name ap-id -->
-      <column type="gchararray"/>
-      <!-- column-name connection-id -->
-      <column type="gchararray"/>
-      <!-- column-name title -->
-      <column type="gchararray"/>
-      <!-- column-name sortable -->
-      <column type="gchararray"/>
-      <!-- column-name strength -->
-      <column type="guint"/>
-      <!-- column-name mode -->
-      <column type="guint"/>
-      <!-- column-name security -->
-      <column type="guint"/>
-      <!-- column-name active -->
-      <column type="gboolean"/>
-      <!-- column-name ap-in-range -->
-      <column type="gboolean"/>
-      <!-- column-name ap-out-of-range -->
-      <column type="gboolean"/>
-      <!-- column-name is-saved -->
-      <column type="gboolean"/>
-    </columns>
-  </object>
   <object class="GtkWindow" id="window_tmp">
     <property name="can_focus">False</property>
     <child>
@@ -215,30 +189,8 @@
                     <property name="margin_right">12</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="shadow_type">in</property>
                     <property name="hscrollbar_policy">never</property>
-                    <child>
-                      <object class="GtkTreeView" id="treeview_list">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                        <property name="model">liststore_network</property>
-                        <property name="headers_visible">False</property>
-                        <property name="headers_clickable">False</property>
-                        <property name="search_column">0</property>
-                        <child internal-child="selection">
-                          <object class="GtkTreeSelection" id="treeview-selection1">
-                            <property name="mode">none</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkTreeViewColumn" id="treeview_list_column">
-                            <property name="title">Column</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+                    <property name="shadow_type">in</property>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -256,7 +208,11 @@
             <child>
               <object class="GtkBox" id="list_actions">
                 <property name="visible">True</property>
-                <property name="orientation">horizontal</property>
+                <property name="can_focus">False</property>
+                <property name="margin_left">12</property>
+                <property name="margin_right">12</property>
+                <property name="margin_bottom">12</property>
+                <property name="hexpand">True</property>
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkButton" id="start_hotspot_button">
@@ -265,14 +221,12 @@
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
                     <property name="halign">start</property>
-                    <property name="margin_left">12</property>
-                    <property name="margin_bottom">12</property>
                     <property name="use_underline">True</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
-                    <property name="position">1</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
@@ -281,9 +235,22 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="halign">start</property>
-                    <property name="margin_left">12</property>
-                    <property name="margin_bottom">12</property>
+                    <property name="halign">center</property>
+                    <property name="use_underline">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="history_button">
+                    <property name="label" translatable="yes">_History</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="halign">end</property>
                     <property name="use_underline">True</property>
                   </object>
                   <packing>
@@ -295,7 +262,8 @@
               </object>
               <packing>
                 <property name="expand">False</property>
-                <property name="fill">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </object>
@@ -435,10 +403,10 @@
                 <child>
                   <object class="GtkLabel" id="label_last_used">
                     <property name="visible">True</property>
-                    <property name="selectable">True</property>
                     <property name="can_focus">True</property>
                     <property name="xalign">0</property>
                     <property name="label">today</property>
+                    <property name="selectable">True</property>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -534,10 +502,10 @@
                 <child>
                   <object class="GtkLabel" id="label_strength">
                     <property name="visible">True</property>
-                    <property name="selectable">True</property>
                     <property name="can_focus">True</property>
                     <property name="xalign">0</property>
                     <property name="label">Weak</property>
+                    <property name="selectable">True</property>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -567,10 +535,10 @@
                 <child>
                   <object class="GtkLabel" id="label_speed">
                     <property name="visible">True</property>
-                    <property name="selectable">True</property>
                     <property name="can_focus">True</property>
                     <property name="xalign">0</property>
                     <property name="label">1Mb/sec</property>
+                    <property name="selectable">True</property>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -600,10 +568,10 @@
                 <child>
                   <object class="GtkLabel" id="label_ipv4">
                     <property name="visible">True</property>
-                    <property name="selectable">True</property>
                     <property name="can_focus">True</property>
                     <property name="xalign">0</property>
                     <property name="label">127.0.0.1</property>
+                    <property name="selectable">True</property>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
@@ -633,10 +601,10 @@
                 <child>
                   <object class="GtkLabel" id="label_ipv6">
                     <property name="visible">True</property>
-                    <property name="selectable">True</property>
                     <property name="can_focus">True</property>
                     <property name="xalign">0</property>
                     <property name="label">::1</property>
+                    <property name="selectable">True</property>
                   </object>
                   <packing>
                     <property name="left_attach">1</property>
