@@ -1602,6 +1602,7 @@ static void
 make_row (GtkSizeGroup   *rows,
           GtkSizeGroup   *icons,
           GtkWidget      *forget,
+          NMDevice       *device,
           NMConnection   *connection,
           NMAccessPoint  *ap,
           NMAccessPoint  *active_ap,
@@ -1615,13 +1616,18 @@ make_row (GtkSizeGroup   *rows,
         gchar *title;
         gboolean active;
         gboolean in_range;
+        gboolean connecting;
         guint security;
         guint strength;
         const GByteArray *ssid;
         const gchar *icon_name;
         guint64 timestamp;
+        GtkSizeGroup *spinner_button_group;
+        NMDeviceState state;
 
         g_assert (connection || ap);
+
+        state = nm_device_get_state (device);
 
         if (connection != NULL) {
                 NMSettingWireless *sw;
@@ -1638,13 +1644,20 @@ make_row (GtkSizeGroup   *rows,
         title = g_markup_escape_text (nm_utils_escape_ssid (ssid->data, ssid->len), -1);
 
         if (ap != NULL) {
-                active = ap == active_ap;
                 in_range = TRUE;
+                active = (ap == active_ap) && (state == NM_DEVICE_STATE_ACTIVATED);
+                connecting = (ap == active_ap) &&
+                             (state == NM_DEVICE_STATE_PREPARE ||
+                              state == NM_DEVICE_STATE_CONFIG ||
+                              state == NM_DEVICE_STATE_IP_CONFIG ||
+                              state == NM_DEVICE_STATE_IP_CHECK ||
+                              state == NM_DEVICE_STATE_NEED_AUTH);
                 security = get_access_point_security (ap);
                 strength = nm_access_point_get_strength (ap);
         } else {
-                active = FALSE;
                 in_range = FALSE;
+                active = FALSE;
+                connecting = FALSE;
                 security = 0;
                 strength = 0;
         }
@@ -1680,18 +1693,38 @@ make_row (GtkSizeGroup   *rows,
 
         gtk_box_pack_start (GTK_BOX (row), gtk_label_new (""), TRUE, FALSE, 0);
 
+        spinner_button_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+        g_object_set_data_full (G_OBJECT (row), "spinner_button_group", spinner_button_group, g_object_unref);
         widget = NULL;
         if (connection) {
                 GtkWidget *image;
                 image = gtk_image_new_from_icon_name ("emblem-system-symbolic", GTK_ICON_SIZE_MENU);
+                gtk_widget_show (image);
                 widget = gtk_button_new ();
+                gtk_widget_set_no_show_all (widget, TRUE);
+                if (!connecting)
+                        gtk_widget_show (widget);
                 gtk_container_add (GTK_CONTAINER (widget), image);
                 gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
                 gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
                 gtk_box_pack_start (GTK_BOX (row), widget, FALSE, FALSE, 0);
+                gtk_size_group_add_widget (spinner_button_group, widget);
+                g_object_set_data (G_OBJECT (row), "edit", widget);
         }
         if (edit_out)
                 *edit_out = widget;
+
+        widget = gtk_spinner_new ();
+        gtk_widget_set_no_show_all (widget, TRUE);
+        if (connecting) {
+                gtk_widget_show (widget);
+                gtk_spinner_start (GTK_SPINNER (widget));
+        }
+        gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
+        gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
+        gtk_box_pack_start (GTK_BOX (row), widget, FALSE, FALSE, 0);
+        gtk_size_group_add_widget (spinner_button_group, widget);
+        g_object_set_data (G_OBJECT (row), "spinner", widget);
 
         box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         gtk_box_set_homogeneous (GTK_BOX (box), TRUE);
@@ -1772,14 +1805,15 @@ ap_sort (gconstpointer a, gconstpointer b, gpointer data)
         gboolean aa, ab;
         guint sa, sb;
 
+#if 0
         aa = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (a), "active"));
         ab = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (b), "active"));
-        sa = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (a), "strength"));
-        sb = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (b), "strength"));
-
         if (aa) return -1;
         if (ab) return 1;
+#endif
 
+        sa = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (a), "strength"));
+        sb = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (b), "strength"));
         if (sa > sb) return -1;
         if (sb > sa) return 1;
 
@@ -1883,7 +1917,7 @@ open_history (NetDeviceWifi *device_wifi)
                         ap = NULL;
                 }
 
-                make_row (rows, icons, forget, connection, ap, active_ap, &row, NULL, NULL);
+                make_row (rows, icons, forget, nm_device, connection, ap, active_ap, &row, NULL, NULL);
                 gtk_container_add (GTK_CONTAINER (list), row);
         }
 
@@ -1967,7 +2001,6 @@ populate_ap_list (NetDeviceWifi *device_wifi)
                 NMConnection *connection = NULL;
                 ap = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, i));
                 ssid_ap = nm_access_point_get_ssid (ap);
-
                 for (l = filtered; l; l = l->next) {
                         connection = l->data;
                         NMSetting *setting;
@@ -1984,7 +2017,7 @@ populate_ap_list (NetDeviceWifi *device_wifi)
                         connection = NULL;
                 }
 
-                make_row (rows, icons, NULL, connection, ap, active_ap, &row, NULL, &button);
+                make_row (rows, icons, NULL, nm_device, connection, ap, active_ap, &row, NULL, &button);
                 gtk_container_add (GTK_CONTAINER (list), row);
                 if (button) {
                         g_signal_connect (button, "clicked",
@@ -2001,11 +2034,18 @@ ap_activated (EggListBox *list, GtkWidget *row, NetDeviceWifi *device_wifi)
         NMAccessPoint *ap;
         NMClient *client;
         NMDevice *nm_device;
+        GtkWidget *spinner;
+        GtkWidget *edit;
 
         connection = NM_CONNECTION (g_object_get_data (G_OBJECT (row), "connection"));
         ap = NM_ACCESS_POINT (g_object_get_data (G_OBJECT (row), "ap"));
+        spinner = GTK_WIDGET (g_object_get_data (G_OBJECT (row), "spinner"));
+        edit = GTK_WIDGET (g_object_get_data (G_OBJECT (row), "edit"));
 
         if (ap != NULL) {
+                gtk_widget_hide (edit);
+                gtk_widget_show (spinner);
+                gtk_spinner_start (GTK_SPINNER (spinner));
                 if (connection != NULL) {
                         client = net_object_get_client (NET_OBJECT (device_wifi));
                         nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
