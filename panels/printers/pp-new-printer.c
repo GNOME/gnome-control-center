@@ -409,8 +409,8 @@ printer_add_real_async_dbus_cb (GObject      *source_object,
                                 GAsyncResult *res,
                                 gpointer      user_data)
 {
-  PpNewPrinter        *printer;
-  PpNewPrinterPrivate *priv;
+  PpNewPrinter        *printer = (PpNewPrinter *) user_data;
+  PpNewPrinterPrivate *priv = printer->priv;
   GVariant            *output;
   GError              *error = NULL;
 
@@ -426,7 +426,7 @@ printer_add_real_async_dbus_cb (GObject      *source_object,
       g_variant_get (output, "(&s)", &ret_error);
       if (ret_error[0] != '\0')
         {
-          g_warning ("%s", ret_error);
+          g_warning ("cups-pk-helper: addition of printer %s failed: %s", priv->name, ret_error);
         }
 
       g_variant_unref (output);
@@ -442,9 +442,6 @@ printer_add_real_async_dbus_cb (GObject      *source_object,
       error->domain != G_IO_ERROR ||
       error->code != G_IO_ERROR_CANCELLED)
     {
-      printer = (PpNewPrinter *) user_data;
-      priv = printer->priv;
-
       get_named_dest_async (priv->name,
                             printer_add_real_async_cb,
                             printer);
