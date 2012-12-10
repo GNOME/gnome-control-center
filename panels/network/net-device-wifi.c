@@ -1096,7 +1096,7 @@ show_hotspot_ui (NetDeviceWifi *device_wifi)
 
         /* show hotspot tab */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "notebook_view"));
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 3);
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
 
         /* force switch to on as this succeeded */
         sw = GTK_SWITCH (gtk_builder_get_object (device_wifi->priv->builder,
