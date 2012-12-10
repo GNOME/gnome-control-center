@@ -449,6 +449,28 @@ cc_common_language_select_current_language (GtkTreeView *treeview)
 		g_warning ("Could not find current language '%s' in the treeview", lang);
 }
 
+static gboolean
+user_language_has_translations (const char *locale)
+{
+        char *name, *language_code, *territory_code;
+        gboolean ret;
+
+        gdm_parse_language_name (locale,
+                                 &language_code,
+                                 &territory_code,
+                                 NULL, NULL);
+        name = g_strdup_printf ("%s%s%s",
+                                language_code,
+                                territory_code != NULL? "_" : "",
+                                territory_code != NULL? territory_code : "");
+        g_free (language_code);
+        g_free (territory_code);
+        ret = gdm_language_has_translations (name);
+        g_free (name);
+
+        return ret;
+}
+
 static char *
 get_lang_for_user_object_path (const char *path)
 {
@@ -522,7 +544,7 @@ add_other_users_language (GHashTable *ht)
                 lang = get_lang_for_user_object_path (str);
                 if (lang != NULL && *lang != '\0' &&
                     cc_common_language_has_font (lang) &&
-                    gdm_language_has_translations (lang)) {
+                    user_language_has_translations (lang)) {
                         name = gdm_normalize_language_name (lang);
                         if (!g_hash_table_lookup (ht, name)) {
                                 language = gdm_get_language_from_name (name, NULL);
