@@ -579,7 +579,7 @@ printer_rename (const gchar *old_name,
 
               g_variant_get (output, "(&s)", &ret_error);
               if (ret_error[0] != '\0')
-                g_warning ("%s", ret_error);
+                g_warning ("cups-pk-helper: rename of printer %s to %s failed: %s", old_name, new_name, ret_error);
 
               g_variant_unref (output);
             }
@@ -672,7 +672,7 @@ printer_set_location (const gchar *printer_name,
 
       g_variant_get (output, "(&s)", &ret_error);
       if (ret_error[0] != '\0')
-        g_warning ("%s", ret_error);
+        g_warning ("cups-pk-helper: setting of location for printer %s failed: %s", printer_name, ret_error);
       else
         result = TRUE;
 
@@ -730,7 +730,7 @@ printer_set_accepting_jobs (const gchar *printer_name,
 
       g_variant_get (output, "(&s)", &ret_error);
       if (ret_error[0] != '\0')
-        g_warning ("%s", ret_error);
+        g_warning ("cups-pk-helper: setting of acceptance of jobs for printer %s failed: %s", printer_name, ret_error);
       else
         result = TRUE;
       g_variant_unref (output);
@@ -783,7 +783,7 @@ printer_set_enabled (const gchar *printer_name,
 
       g_variant_get (output, "(&s)", &ret_error);
       if (ret_error[0] != '\0')
-        g_warning ("%s", ret_error);
+        g_warning ("cups-pk-helper: setting of enablement of printer %s failed: %s", printer_name, ret_error);
       else
         result = TRUE;
 
@@ -836,7 +836,7 @@ printer_delete (const gchar *printer_name)
 
       g_variant_get (output, "(&s)", &ret_error);
       if (ret_error[0] != '\0')
-        g_warning ("%s", ret_error);
+        g_warning ("cups-pk-helper: removing of printer %s failed: %s", printer_name, ret_error);
       else
         result = TRUE;
 
@@ -901,7 +901,7 @@ printer_set_default (const gchar *printer_name)
 
               g_variant_get (output, "(&s)", &ret_error);
               if (ret_error[0] != '\0')
-                g_warning ("%s", ret_error);
+                g_warning ("cups-pk-helper: setting default printer to %s failed: %s", printer_name, ret_error);
               else
                 result = TRUE;
 
@@ -964,7 +964,7 @@ printer_set_shared (const gchar *printer_name,
 
       g_variant_get (output, "(&s)", &ret_error);
       if (ret_error[0] != '\0')
-        g_warning ("%s", ret_error);
+        g_warning ("cups-pk-helper: setting of sharing of printer %s failed: %s", printer_name, ret_error);
       else
         result = TRUE;
 
@@ -1019,7 +1019,7 @@ printer_set_job_sheets (const gchar *printer_name,
 
       g_variant_get (output, "(&s)", &ret_error);
       if (ret_error[0] != '\0')
-        g_warning ("%s", ret_error);
+        g_warning ("cups-pk-helper: setting of job sheets for printer %s failed: %s", printer_name, ret_error);
       else
         result = TRUE;
 
@@ -1087,7 +1087,7 @@ printer_set_policy (const gchar *printer_name,
 
       g_variant_get (output, "(&s)", &ret_error);
       if (ret_error[0] != '\0')
-        g_warning ("%s", ret_error);
+        g_warning ("cups-pk-helper: setting of a policy for printer %s failed: %s", printer_name, ret_error);
       else
         result = TRUE;
 
@@ -1161,7 +1161,7 @@ printer_set_users (const gchar  *printer_name,
 
       g_variant_get (output, "(&s)", &ret_error);
       if (ret_error[0] != '\0')
-        g_warning ("%s", ret_error);
+        g_warning ("cups-pk-helper: setting of access list for printer %s failed: %s", printer_name, ret_error);
       else
         result = TRUE;
 
@@ -1215,7 +1215,7 @@ class_add_printer (const gchar *class_name,
 
       g_variant_get (output, "(&s)", &ret_error);
       if (ret_error[0] != '\0')
-        g_warning ("%s", ret_error);
+        g_warning ("cups-pk-helper: adding of printer %s to class %s failed: %s", printer_name, class_name, ret_error);
       else
         result = TRUE;
 
@@ -1382,7 +1382,7 @@ printer_set_default_media_size (const gchar *printer_name)
 
       g_variant_get (output, "(&s)", &ret_error);
       if (ret_error[0] != '\0')
-        g_warning ("%s", ret_error);
+        g_warning ("cups-pk-helper: setting of media size for printer %s failed: %s", printer_name, ret_error);
 
       g_variant_unref (output);
     }
@@ -1666,7 +1666,7 @@ printer_set_ppd_async_dbus_cb (GObject      *source_object,
 
       g_variant_get (output, "(&s)", &ret_error);
       if (ret_error[0] != '\0')
-        g_warning ("%s", ret_error);
+        g_warning ("cups-pk-helper: setting of driver for printer %s failed: %s", data->printer_name, ret_error);
       else
         result = TRUE;
 
@@ -2303,7 +2303,7 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
 
       if (ret_error[0] != '\0')
         {
-          g_warning ("%s", ret_error);
+          g_warning ("cups-pk-helper: getting of attributes for printer %s failed: %s", data->printer_name, ret_error);
         }
 
       if (devices_variant)
@@ -3334,7 +3334,7 @@ printer_add_option_async_dbus_cb (GObject      *source_object,
 
       g_variant_get (output, "(&s)", &ret_error);
       if (ret_error[0] != '\0')
-        g_warning ("%s", ret_error);
+        g_warning ("cups-pk-helper: setting of an option failed: %s", ret_error);
       else
         success = TRUE;
 
@@ -3463,7 +3463,7 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
 
       if (ret_error[0] != '\0')
         {
-          g_warning ("%s", ret_error);
+          g_warning ("cups-pk-helper: getting of CUPS devices failed: %s", ret_error);
         }
 
       if (devices_variant)
