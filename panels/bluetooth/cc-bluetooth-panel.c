@@ -404,7 +404,7 @@ power_callback (GObject          *object,
 	gboolean state;
 
 	state = gtk_switch_get_active (GTK_SWITCH (WID ("switch_bluetooth")));
-	g_debug ("Power switched to %s", state ? "off" : "on");
+	g_debug ("Power switched to %s", state ? "on" : "off");
 	bluetooth_killswitch_set_state (self->priv->killswitch,
 					state ? BLUETOOTH_KILLSWITCH_STATE_UNBLOCKED : BLUETOOTH_KILLSWITCH_STATE_SOFT_BLOCKED);
 }
