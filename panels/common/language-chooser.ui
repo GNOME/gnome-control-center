@@ -13,45 +13,51 @@
       <object class="GtkBox" id="content-area">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">6</property>
-	<property name="margin_left">10</property>
-   	<property name="margin_right">10</property>
+        <property name="spacing">2</property>
         <child>
-          <object class="GtkScrolledWindow" id="scrolledwindow1">
+          <object class="GtkBox" id="content-box">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hscrollbar_policy">never</property>
-            <property name="vscrollbar_policy">automatic</property>
-            <property name="shadow_type">in</property>
+            <property name="orientation">vertical</property>
+            <property name="border_width">5</property>
+            <property name="spacing">6</property>
             <child>
-              <object class="GtkTreeView" id="language-list">
+              <object class="GtkScrolledWindow" id="scrolledwindow1">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="headers_visible">False</property>
-                <property name="headers_clickable">False</property>
-                <property name="enable_search">False</property>
+                <property name="hscrollbar_policy">never</property>
+                <property name="vscrollbar_policy">automatic</property>
+                <property name="shadow_type">in</property>
+                <child>
+                  <object class="GtkTreeView" id="language-list">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="headers_visible">False</property>
+                    <property name="headers_clickable">False</property>
+                    <property name="enable_search">False</property>
+                  </object>
+                </child>
               </object>
+              <packing>
+                <property name="position">0</property>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="filter-entry">
+                <property name="visible">True</property>
+	        <property name="can_focus">True</property>
+	        <property name="secondary_icon_name">edit-find-symbolic</property>
+	        <property name="secondary_icon_activatable">False</property>
+	        <property name="secondary_icon_sensitive">False</property>
+              </object>
+              <packing>
+                <property name="position">1</property>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+              </packing>
             </child>
           </object>
-          <packing>
-            <property name="position">2</property>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkEntry" id="filter-entry">
-            <property name="visible">True</property>
-	    <property name="can_focus">True</property>
-	    <property name="secondary_icon_name">edit-find-symbolic</property>
-	    <property name="secondary_icon_activatable">False</property>
-	    <property name="secondary_icon_sensitive">False</property>
-          </object>
-          <packing>
-            <property name="position">3</property>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-          </packing>
         </child>
         <child internal-child="action_area">
           <object class="GtkButtonBox" id="action-area">
