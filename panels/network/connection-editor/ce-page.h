@@ -1,0 +1,106 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
+ *
+ * Copyright (C) 2012 Red Hat, Inc.
+ *
+ * Licensed under the GNU General Public License Version 2
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
+#ifndef __CE_PAGE_H
+#define __CE_PAGE_H
+
+#include <glib-object.h>
+
+#include <nm-connection.h>
+#include <nm-client.h>
+#include <nm-remote-settings.h>
+
+#include <gtk/gtk.h>
+
+G_BEGIN_DECLS
+
+#define CE_TYPE_PAGE          (ce_page_get_type ())
+#define CE_PAGE(o)            (G_TYPE_CHECK_INSTANCE_CAST ((o), CE_TYPE_PAGE, CEPage))
+#define CE_PAGE_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), CE_TYPE_PAGE, CEPageClass))
+#define CE_IS_PAGE(o)         (G_TYPE_CHECK_INSTANCE_TYPE ((o), CE_TYPE_PAGE))
+#define CE_IS_PAGE_CLASS(k)   (G_TYPE_CHECK_CLASS_TYPE ((k), CE_TYPE_PAGE))
+#define CE_PAGE_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), CE_TYPE_PAGE, CEPageClass))
+
+typedef struct _CEPage          CEPage;
+typedef struct _CEPageClass     CEPageClass;
+
+struct _CEPage
+{
+        GObject parent;
+
+        gboolean initialized;
+        GtkBuilder *builder;
+        GtkWidget *page;
+        gchar *title;
+        const gchar *security_setting;
+
+        NMConnection *connection;
+        NMClient *client;
+        NMRemoteSettings *settings;
+};
+
+struct _CEPageClass
+{
+        GObjectClass parent_class;
+
+        gboolean (*validate) (CEPage *page, NMConnection *connection, GError **error);
+        void (*changed)     (CEPage *page);
+        void (*initialized) (CEPage *page, GError *error);
+};
+
+GType        ce_page_get_type        (void);
+
+GtkWidget   *ce_page_get_page        (CEPage           *page);
+const gchar *ce_page_get_title       (CEPage           *page);
+const gchar *ce_page_get_security_setting (CEPage           *page);
+gboolean     ce_page_validate        (CEPage           *page,
+                                      NMConnection     *connection,
+                                      GError          **error);
+gboolean     ce_page_get_initialized (CEPage           *page);
+void         ce_page_changed         (CEPage           *page);
+CEPage      *ce_page_new             (GType             type,
+                                      NMConnection     *connection,
+                                      NMClient         *client,
+                                      NMRemoteSettings *settings,
+                                      const gchar      *ui_resource,
+                                      const gchar      *title);
+void         ce_page_complete_init   (CEPage           *page,
+                                      const gchar      *setting_name,
+                                      GHashTable       *secrets,
+                                      GError           *error);
+
+gchar      **ce_page_get_mac_list    (NMClient         *client,
+                                      GType             device_type,
+                                      const gchar      *mac_property);
+void         ce_page_setup_mac_combo (GtkComboBoxText  *combo,
+                                      const gchar      *current_mac,
+                                      gchar           **mac_list);
+void         ce_page_mac_to_entry    (const GByteArray *mac,
+                                      gint              type,
+                                      GtkEntry         *entry);
+GByteArray  *ce_page_entry_to_mac    (GtkEntry         *entry,
+                                      gint              type,
+                                      gboolean         *invalid);
+
+G_END_DECLS
+
+#endif /* __CE_PAGE_H */
+
