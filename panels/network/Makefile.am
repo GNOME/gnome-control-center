@@ -1,10 +1,13 @@
 cappletname = network
 
+SUBDIRS = wireless-security connection-editor
+
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(NETWORK_PANEL_CFLAGS)				\
 	$(NETWORK_MANAGER_CFLAGS)			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
+	-I$(srcdir)/wireless-security			\
 	$(NULL)
 
 noinst_LTLIBRARIES = libnetwork.la
@@ -43,7 +46,9 @@ libnetwork_la_SOURCES =					\
 	rfkill-glib.h					\
 	rfkill.h
 
-libnetwork_la_LIBADD = $(PANEL_LIBS) $(NETWORK_PANEL_LIBS) $(NETWORK_MANAGER_LIBS)
+libnetwork_la_LIBADD = $(PANEL_LIBS) $(NETWORK_PANEL_LIBS) $(NETWORK_MANAGER_LIBS) $(builddir)/connection-editor/libconnection-editor.la
+
+libnetwork_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/network.gresource.xml)
 cc-network-resources.c: network.gresource.xml $(resource_files)

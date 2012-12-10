@@ -41,6 +41,7 @@
 
 #include "egg-list-box/egg-list-box.h"
 
+#include "connection-editor/net-connection-editor.h"
 #include "net-device-wifi.h"
 
 #define NET_DEVICE_WIFI_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_DEVICE_WIFI, NetDeviceWifiPrivate))
@@ -265,29 +266,6 @@ wireless_enabled_toggled (NMClient       *client,
         device_wifi->priv->updating_device = FALSE;
 }
 
-#if 0
-static void
-update_off_switch_from_device_state (GtkSwitch *sw,
-                                     NMDeviceState state,
-                                     NetDeviceWifi *device_wifi)
-{
-        device_wifi->priv->updating_device = TRUE;
-        switch (state) {
-                case NM_DEVICE_STATE_UNMANAGED:
-                case NM_DEVICE_STATE_UNAVAILABLE:
-                case NM_DEVICE_STATE_DISCONNECTED:
-                case NM_DEVICE_STATE_DEACTIVATING:
-                case NM_DEVICE_STATE_FAILED:
-                        gtk_switch_set_active (sw, FALSE);
-                        break;
-                default:
-                        gtk_switch_set_active (sw, TRUE);
-                        break;
-        }
-        device_wifi->priv->updating_device = FALSE;
-}
-#endif
-
 static NMConnection *
 find_connection_for_device (NetDeviceWifi *device_wifi,
                             NMDevice       *device)
@@ -463,26 +441,17 @@ nm_device_wifi_refresh_hotspot (NetDeviceWifi *device_wifi)
 }
 
 static void
-update_last_used (NetDeviceWifi *device_wifi)
+update_last_used (NetDeviceWifi *device_wifi, NMConnection *connection)
 {
-        NetDeviceWifiPrivate *priv = device_wifi->priv;
         gchar *last_used = NULL;
         GDateTime *now = NULL;
         GDateTime *then = NULL;
         gint days;
         GTimeSpan diff;
         guint64 timestamp;
-        NMRemoteConnection *connection;
-        NMRemoteSettings *settings;
         NMSettingConnection *s_con;
 
-        if (priv->selected_connection_id == NULL)
-                goto out;
-
-        settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
-        connection = nm_remote_settings_get_connection_by_path (settings,
-                                                                priv->selected_connection_id);
-        s_con = nm_connection_get_setting_connection (NM_CONNECTION (connection));
+        s_con = nm_connection_get_setting_connection (connection);
         if (s_con == NULL)
                 goto out;
         timestamp = nm_setting_connection_get_timestamp (s_con);
@@ -527,7 +496,9 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         NMDeviceState state;
         NMClient *client;
         NMAccessPoint *ap;
+        NMConnection *connection;
         NetDeviceWifiPrivate *priv = device_wifi->priv;
+        GtkWidget *dialog;
 
         is_hotspot = device_is_hotspot (device_wifi);
         if (is_hotspot) {
@@ -537,13 +508,11 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
 
         nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
 
-        if (priv->selected_ap_id) {
-                ap = nm_device_wifi_get_access_point_by_path (NM_DEVICE_WIFI (nm_device),
-                                                              priv->selected_ap_id);
-        }
-        else {
-                ap = NULL;
-        }
+        dialog = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
+                                                     "details_dialog"));
+
+        ap = g_object_get_data (G_OBJECT (dialog), "ap");
+        connection = g_object_get_data (G_OBJECT (dialog), "connection");
 
         active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (nm_device));
 
@@ -565,20 +534,6 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         panel_set_device_widget_details (device_wifi->priv->builder,
                                          "speed",
                                          str_tmp);
-
-        /* set device state, with status and optionally speed */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "label_status"));
-        if (ap != active_ap) {
-                if (ap)
-                        gtk_label_set_label (GTK_LABEL (widget), _("Not connected"));
-                else
-                        gtk_label_set_label (GTK_LABEL (widget), _("Out of range"));
-                gtk_widget_set_tooltip_text (widget, "");
-        } else {
-                gtk_label_set_label (GTK_LABEL (widget),
-                                     panel_device_state_to_localized_string (nm_device));
-                gtk_widget_set_tooltip_text (widget, panel_device_state_reason_to_localized_string (nm_device));
-        }
 
         /* device MAC */
         str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (nm_device));
@@ -616,29 +571,6 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
                                          "strength",
                                          str);
 
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "label_device"));
-        gtk_label_set_label (GTK_LABEL (widget),
-                             priv->selected_ssid_title ? priv->selected_ssid_title : net_object_get_title (NET_OBJECT (device_wifi)));
-
-        /* only disconnect when connection active */
-        if (ap == active_ap) {
-                widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                             "button_disconnect1"));
-                gtk_widget_set_sensitive (widget, state == NM_DEVICE_STATE_ACTIVATED);
-                gtk_widget_show (widget);
-                widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                             "button_connect1"));
-                gtk_widget_hide (widget);
-        } else {
-                widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                             "button_disconnect1"));
-                gtk_widget_hide (widget);
-                widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                             "button_connect1"));
-                gtk_widget_show (widget);
-                gtk_widget_set_sensitive (widget, ap != NULL);
-        }
-
         /* device MAC */
         if (ap != active_ap)
                 str = NULL;
@@ -652,8 +584,8 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *device_wifi)
         else
                 panel_set_device_widgets (priv->builder, nm_device);
 
-        if (ap != active_ap)
-                update_last_used (device_wifi);
+        if (ap != active_ap && connection)
+                update_last_used (device_wifi, connection);
         else
                 panel_set_device_widget_details (priv->builder, "last_used", NULL);
 
@@ -687,103 +619,6 @@ device_off_toggled (GtkSwitch *sw,
         active = gtk_switch_get_active (sw);
         nm_client_wireless_set_enabled (client, active);
 }
-
-static void
-forget_network_connection_delete_cb (NMRemoteConnection *connection,
-                                     GError *error,
-                                     gpointer user_data)
-{
-        NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (user_data);
-
-        if (error != NULL) {
-                g_warning ("failed to delete connection %s: %s",
-                           nm_object_get_path (NM_OBJECT (connection)),
-                           error->message);
-                return;
-        }
-
-        /* remove the entry from the list */
-        populate_ap_list (device_wifi);
-        show_wifi_list (device_wifi);
-}
-
-static void
-forget_network_response_cb (GtkWidget *dialog,
-                            gint response,
-                            NetDeviceWifi *device_wifi)
-{
-        NMRemoteConnection *connection;
-        NMRemoteSettings *remote_settings;
-
-        if (response != GTK_RESPONSE_OK)
-                goto out;
-
-        remote_settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
-        connection = nm_remote_settings_get_connection_by_path (remote_settings, device_wifi->priv->selected_connection_id);
-        if (connection == NULL) {
-                g_warning ("failed to get remote connection");
-                goto out;
-        }
-
-        /* delete the connection */
-        g_debug ("deleting %s", device_wifi->priv->selected_connection_id);
-        nm_remote_connection_delete (connection,
-                                     forget_network_connection_delete_cb,
-                                     device_wifi);
-out:
-        gtk_widget_destroy (dialog);
-}
-
-static void
-disconnect_button_clicked_cb (GtkButton *button, NetDeviceWifi *device_wifi)
-{
-        NMDevice *device;
-        device = net_device_get_nm_device (NET_DEVICE (device_wifi));
-        if (device == NULL)
-                return;
-        nm_device_disconnect (device, NULL, NULL);
-}
-
-static void activate_connection (NetDeviceWifi *device, const gchar *id);
-
-static void
-connect_button_clicked_cb (GtkButton *button, NetDeviceWifi *device_wifi)
-{
-        if (device_wifi->priv->selected_connection_id)
-                activate_connection (device_wifi, device_wifi->priv->selected_connection_id);
-}
-
-static void
-forget_button_clicked_cb (GtkButton *button, NetDeviceWifi *device_wifi)
-{
-        gchar *ssid_pretty = NULL;
-        gchar *warning = NULL;
-        GtkWidget *dialog;
-        GtkWidget *window;
-        CcNetworkPanel *panel;
-
-        ssid_pretty = g_strdup_printf ("<b>%s</b>", device_wifi->priv->selected_ssid_title);
-        warning = g_strdup_printf (_("Network details for %s including password and any custom configuration will be lost."), ssid_pretty);
-        panel = net_object_get_panel (NET_OBJECT (device_wifi));
-        window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
-        dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                         GTK_MESSAGE_OTHER,
-                                         GTK_BUTTONS_NONE,
-                                         NULL);
-        gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog), warning);
-        gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-                                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                _("Forget"), GTK_RESPONSE_OK,
-                                NULL);
-        g_signal_connect (dialog, "response",
-                          G_CALLBACK (forget_network_response_cb), device_wifi);
-        gtk_window_present (GTK_WINDOW (dialog));
-
-        g_free (ssid_pretty);
-        g_free (warning);
-}
-
 
 static void
 connect_to_hidden_network (NetDeviceWifi *device_wifi)
@@ -833,25 +668,6 @@ connection_activate_cb (NMClient *client,
                          error->message);
                 nm_device_wifi_refresh_ui (device_wifi);
         }
-}
-
-static void
-activate_connection (NetDeviceWifi *device_wifi,
-                     const gchar   *connection_id)
-{
-        NMDevice *device;
-        NMClient *client;
-        NMRemoteSettings *settings;
-        NMRemoteConnection *connection;
-
-        device = net_device_get_nm_device (NET_DEVICE (device_wifi));
-        client = net_object_get_client (NET_OBJECT (device_wifi));
-        settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
-        connection = nm_remote_settings_get_connection_by_path (settings, connection_id);
-        nm_client_activate_connection (client,
-                                       NM_CONNECTION (connection),
-                                       device, NULL,
-                                       connection_activate_cb, device_wifi);
 }
 
 static gboolean
@@ -1105,7 +921,7 @@ show_hotspot_ui (NetDeviceWifi *device_wifi)
 
         /* show hotspot tab */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "notebook_view"));
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 3);
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
 
         /* force switch to on as this succeeded */
         sw = GTK_SWITCH (gtk_builder_get_object (device_wifi->priv->builder,
@@ -1398,12 +1214,6 @@ show_wifi_list (NetDeviceWifi *device_wifi)
         GtkWidget *widget;
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "notebook_view"));
         gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 0);
-}
-
-static void
-edit_connection (GtkButton *button, NetDeviceWifi *device_wifi)
-{
-        net_object_edit (NET_OBJECT (device_wifi));
 }
 
 static void
@@ -1826,6 +1636,41 @@ ap_sort (gconstpointer a, gconstpointer b, gpointer data)
 
         return 0;
 }
+
+static void
+editor_done (NetConnectionEditor *editor,
+             gboolean             success,
+             NetDeviceWifi       *device_wifi)
+{
+        g_object_unref (editor);
+}
+
+static void
+show_details_for_row (GtkButton *button, NetDeviceWifi *device_wifi)
+{
+        GtkWidget *row;
+        NMConnection *connection;
+        NMAccessPoint *ap;
+        GtkWidget *window;
+        NetConnectionEditor *editor;
+        NMClient *client;
+        NMRemoteSettings *settings;
+        NMDevice *device;
+
+        window = gtk_widget_get_toplevel (GTK_WIDGET (button));
+
+        row = GTK_WIDGET (g_object_get_data (G_OBJECT (button), "row"));
+        connection = NM_CONNECTION (g_object_get_data (G_OBJECT (row), "connection"));
+        ap = NM_ACCESS_POINT (g_object_get_data (G_OBJECT (row), "ap"));
+
+        device = net_device_get_nm_device (NET_DEVICE (device_wifi));
+        client = net_object_get_client (NET_OBJECT (device_wifi));
+        settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
+        editor = net_connection_editor_new (GTK_WINDOW (window), connection, device, ap, client, settings);
+        g_signal_connect (editor, "done", G_CALLBACK (editor_done), device_wifi);
+        net_connection_editor_run (editor);
+}
+
 static void
 open_history (NetDeviceWifi *device_wifi)
 {
@@ -1854,6 +1699,7 @@ open_history (NetDeviceWifi *device_wifi)
         window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
         gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (window));
         gtk_window_set_title (GTK_WINDOW (dialog), _("History"));
+        gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
         gtk_window_set_default_size (GTK_WINDOW (dialog), 600, 400);
 
         button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
@@ -1919,45 +1765,21 @@ open_history (NetDeviceWifi *device_wifi)
                         const GByteArray *ssid_ap;
                         ap = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, i));
                         ssid_ap = nm_access_point_get_ssid (ap);
-                        if (ssid->len == ssid_ap->len &&
-                            memcmp (ssid->data, ssid_ap->data, ssid->len) == 0)
+                        if (nm_utils_same_ssid (ssid, ssid_ap, TRUE))
                                 break;
                         ap = NULL;
                 }
 
-                make_row (rows, icons, forget, nm_device, connection, ap, active_ap, &row, NULL, NULL);
+                make_row (rows, icons, forget, nm_device, connection, ap, active_ap, &row, NULL, &button);
                 gtk_container_add (GTK_CONTAINER (list), row);
+                if (button) {
+                        g_signal_connect (button, "clicked",
+                                          G_CALLBACK (show_details_for_row), device_wifi);
+                        g_object_set_data (G_OBJECT (button), "row", row);
+                }
         }
 
         gtk_window_present (GTK_WINDOW (dialog));
-}
-
-static void
-show_details_for_row (GtkButton *button, NetDeviceWifi *device_wifi)
-{
-        GtkWidget *row;
-        NMConnection *connection;
-        NMAccessPoint *ap;
-        const GByteArray *ssid;
-        GtkWidget *widget;
-
-        row = GTK_WIDGET (g_object_get_data (G_OBJECT (button), "row"));
-        connection = NM_CONNECTION (g_object_get_data (G_OBJECT (row), "connection"));
-        ap = NM_ACCESS_POINT (g_object_get_data (G_OBJECT (row), "ap"));
-
-        g_free (device_wifi->priv->selected_connection_id);
-        g_free (device_wifi->priv->selected_ap_id);
-        g_free (device_wifi->priv->selected_ssid_title);
-
-        device_wifi->priv->selected_connection_id = g_strdup (nm_connection_get_path (connection));
-        device_wifi->priv->selected_ap_id = g_strdup (nm_object_get_path (NM_OBJECT (ap)));
-        ssid = nm_access_point_get_ssid (ap);
-        device_wifi->priv->selected_ssid_title = g_markup_escape_text (nm_utils_escape_ssid (ssid->data, ssid->len), -1);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "notebook_view"));
-
-        nm_device_wifi_refresh_ui (device_wifi);
-        gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 1);
 }
 
 static void
@@ -2019,8 +1841,7 @@ populate_ap_list (NetDeviceWifi *device_wifi)
 
                         setting = nm_connection_get_setting_by_name (connection, NM_SETTING_WIRELESS_SETTING_NAME);
                         ssid = nm_setting_wireless_get_ssid (NM_SETTING_WIRELESS (setting));
-                        if (ssid->len == ssid_ap->len &&
-                            memcmp (ssid->data, ssid_ap->data, ssid->len) == 0)
+                        if (nm_utils_same_ssid (ssid, ssid_ap, TRUE))
                                 break;
                         connection = NULL;
                 }
@@ -2101,30 +1922,6 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                                                      "device_off_switch"));
         g_signal_connect (widget, "notify::active",
                           G_CALLBACK (device_off_toggled), device_wifi);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_options1"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (edit_connection), device_wifi);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_forget1"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (forget_button_clicked_cb), device_wifi);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_disconnect1"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (disconnect_button_clicked_cb), device_wifi);
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_connect1"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (connect_button_clicked_cb), device_wifi);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_back1"));
-        g_signal_connect_swapped (widget, "clicked",
-                                  G_CALLBACK (show_wifi_list), device_wifi);
 
         swin = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                    "scrolledwindow_list"));
