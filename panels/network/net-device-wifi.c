@@ -1343,6 +1343,14 @@ stop_hotspot_response_cb (GtkWidget *dialog, gint response, NetDeviceWifi *devic
 {
         if (response == GTK_RESPONSE_OK) {
                 stop_shared_connection (device_wifi);
+        } else {
+                GtkWidget *sw;
+
+                sw = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
+                                                         "switch_hotspot_off"));
+                device_wifi->priv->updating_device = TRUE;
+                gtk_switch_set_active (GTK_SWITCH (sw), TRUE);
+                device_wifi->priv->updating_device = FALSE;
         }
         gtk_widget_destroy (dialog);
 }
