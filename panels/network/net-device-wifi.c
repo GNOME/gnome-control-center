@@ -680,103 +680,6 @@ device_off_toggled (GtkSwitch *sw,
 }
 
 static void
-forget_network_connection_delete_cb (NMRemoteConnection *connection,
-                                     GError *error,
-                                     gpointer user_data)
-{
-        NetDeviceWifi *device_wifi = NET_DEVICE_WIFI (user_data);
-
-        if (error != NULL) {
-                g_warning ("failed to delete connection %s: %s",
-                           nm_object_get_path (NM_OBJECT (connection)),
-                           error->message);
-                return;
-        }
-
-        /* remove the entry from the list */
-        populate_ap_list (device_wifi);
-        show_wifi_list (device_wifi);
-}
-
-static void
-forget_network_response_cb (GtkWidget *dialog,
-                            gint response,
-                            NetDeviceWifi *device_wifi)
-{
-        NMRemoteConnection *connection;
-        NMRemoteSettings *remote_settings;
-
-        if (response != GTK_RESPONSE_OK)
-                goto out;
-
-        remote_settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
-        connection = nm_remote_settings_get_connection_by_path (remote_settings, device_wifi->priv->selected_connection_id);
-        if (connection == NULL) {
-                g_warning ("failed to get remote connection");
-                goto out;
-        }
-
-        /* delete the connection */
-        g_debug ("deleting %s", device_wifi->priv->selected_connection_id);
-        nm_remote_connection_delete (connection,
-                                     forget_network_connection_delete_cb,
-                                     device_wifi);
-out:
-        gtk_widget_destroy (dialog);
-}
-
-static void
-disconnect_button_clicked_cb (GtkButton *button, NetDeviceWifi *device_wifi)
-{
-        NMDevice *device;
-        device = net_device_get_nm_device (NET_DEVICE (device_wifi));
-        if (device == NULL)
-                return;
-        nm_device_disconnect (device, NULL, NULL);
-}
-
-static void activate_connection (NetDeviceWifi *device, const gchar *id);
-
-static void
-connect_button_clicked_cb (GtkButton *button, NetDeviceWifi *device_wifi)
-{
-        if (device_wifi->priv->selected_connection_id)
-                activate_connection (device_wifi, device_wifi->priv->selected_connection_id);
-}
-
-static void
-forget_button_clicked_cb (GtkButton *button, NetDeviceWifi *device_wifi)
-{
-        gchar *ssid_pretty = NULL;
-        gchar *warning = NULL;
-        GtkWidget *dialog;
-        GtkWidget *window;
-        CcNetworkPanel *panel;
-
-        ssid_pretty = g_strdup_printf ("<b>%s</b>", device_wifi->priv->selected_ssid_title);
-        warning = g_strdup_printf (_("Network details for %s including password and any custom configuration will be lost."), ssid_pretty);
-        panel = net_object_get_panel (NET_OBJECT (device_wifi));
-        window = gtk_widget_get_toplevel (GTK_WIDGET (panel));
-        dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-                                         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                         GTK_MESSAGE_OTHER,
-                                         GTK_BUTTONS_NONE,
-                                         NULL);
-        gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog), warning);
-        gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-                                GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                _("Forget"), GTK_RESPONSE_OK,
-                                NULL);
-        g_signal_connect (dialog, "response",
-                          G_CALLBACK (forget_network_response_cb), device_wifi);
-        gtk_window_present (GTK_WINDOW (dialog));
-
-        g_free (ssid_pretty);
-        g_free (warning);
-}
-
-
-static void
 connect_to_hidden_network (NetDeviceWifi *device_wifi)
 {
         NMRemoteSettings *remote_settings;
@@ -824,25 +727,6 @@ connection_activate_cb (NMClient *client,
                          error->message);
                 nm_device_wifi_refresh_ui (device_wifi);
         }
-}
-
-static void
-activate_connection (NetDeviceWifi *device_wifi,
-                     const gchar   *connection_id)
-{
-        NMDevice *device;
-        NMClient *client;
-        NMRemoteSettings *settings;
-        NMRemoteConnection *connection;
-
-        device = net_device_get_nm_device (NET_DEVICE (device_wifi));
-        client = net_object_get_client (NET_OBJECT (device_wifi));
-        settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
-        connection = nm_remote_settings_get_connection_by_path (settings, connection_id);
-        nm_client_activate_connection (client,
-                                       NM_CONNECTION (connection),
-                                       device, NULL,
-                                       connection_activate_cb, device_wifi);
 }
 
 static gboolean
@@ -2174,25 +2058,6 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
                                                      "button_options1"));
         g_signal_connect (widget, "clicked",
                           G_CALLBACK (edit_connection), device_wifi);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_forget1"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (forget_button_clicked_cb), device_wifi);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_disconnect1"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (disconnect_button_clicked_cb), device_wifi);
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_connect1"));
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (connect_button_clicked_cb), device_wifi);
-
-        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
-                                                     "button_back1"));
-        g_signal_connect_swapped (widget, "clicked",
-                                  G_CALLBACK (show_wifi_list), device_wifi);
 
         swin = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                    "scrolledwindow_list"));
