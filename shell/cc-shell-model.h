@@ -83,7 +83,8 @@ CcShellModel *cc_shell_model_new (void);
 
 void cc_shell_model_add_item (CcShellModel   *model,
                               const gchar    *category_name,
-                              GMenuTreeEntry *item);
+                              GMenuTreeEntry *item,
+                              const char     *id);
 
 G_END_DECLS
 

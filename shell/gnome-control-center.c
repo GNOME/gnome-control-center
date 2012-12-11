@@ -330,17 +330,7 @@ item_activated_cb (CcShellCategoryView *view,
                    gchar               *desktop_file,
                    GnomeControlCenter  *shell)
 {
-  GError *err = NULL;
-
-  if (!cc_shell_set_active_panel_from_id (CC_SHELL (shell), id, NULL, &err))
-    {
-      /* TODO: show message to user */
-      if (err)
-        {
-          g_warning ("Could not active panel \"%s\": %s", id, err->message);
-          g_error_free (err);
-        }
-    }
+  cc_shell_set_active_panel_from_id (CC_SHELL (shell), id, NULL, NULL);
 }
 
 static gboolean
@@ -792,6 +782,20 @@ maybe_add_category_view (GnomeControlCenter *shell,
   g_hash_table_insert (shell->priv->category_views, g_strdup (name), categoryview);
 }
 
+static char *
+get_id_for_menu_entry (GMenuTreeEntry *item)
+{
+  const char *desktop_name;
+
+  desktop_name = gmenu_tree_entry_get_desktop_file_id (item);
+  if (!g_str_has_prefix (desktop_name, "gnome-") ||
+      !g_str_has_suffix (desktop_name, "-panel.desktop"))
+    return NULL;
+
+  return g_strndup (desktop_name + strlen ("gnome-"),
+                    strlen (desktop_name) - strlen ("-panel.desktop") - strlen ("gnome-"));
+}
+
 static void
 reload_menu (GnomeControlCenter *shell)
 {
@@ -832,10 +836,24 @@ reload_menu (GnomeControlCenter *shell)
             {
               if (sub_next_type == GMENU_TREE_ITEM_ENTRY)
                 {
-                  GMenuTreeEntry *item = gmenu_tree_iter_get_entry (sub_iter);
-                  cc_shell_model_add_item (CC_SHELL_MODEL (shell->priv->store),
-                                           dir_name,
-                                           item);
+                  GMenuTreeEntry *item;
+                  char *id;
+
+                  item = gmenu_tree_iter_get_entry (sub_iter);
+                  id = get_id_for_menu_entry (item);
+
+                  if (id != NULL &&
+                      g_io_extension_point_get_extension_by_name (shell->priv->extension_point, id))
+                    {
+                      cc_shell_model_add_item (CC_SHELL_MODEL (shell->priv->store),
+                                               dir_name, item, id);
+                    }
+                  else
+                    {
+                      g_warning ("Not adding broken desktop file %s",
+                                 gmenu_tree_entry_get_desktop_file_id (item));
+                    }
+                  g_free (id);
                   gmenu_tree_item_unref (item);
                 }
             }
