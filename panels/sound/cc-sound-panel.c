@@ -117,29 +117,3 @@ cc_sound_panel_init (CcSoundPanel *self)
         gtk_container_add (GTK_CONTAINER (self), GTK_WIDGET (self->dialog));
         gtk_widget_show (GTK_WIDGET (self->dialog));
 }
-
-void
-cc_sound_panel_register (GIOModule *module)
-{
-        cc_sound_panel_register_type (G_TYPE_MODULE (module));
-        g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,
-                                        CC_TYPE_SOUND_PANEL,
-                                        "sound", 0);
-}
-
-/* GIO extension stuff */
-void
-g_io_module_load (GIOModule *module)
-{
-        bindtextdomain (GETTEXT_PACKAGE, LOCALE_DIR);
-        bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-
-        /* register the panel */
-        cc_sound_panel_register (module);
-}
-
-void
-g_io_module_unload (GIOModule *module)
-{
-}
-

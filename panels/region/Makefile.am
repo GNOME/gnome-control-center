@@ -10,11 +10,9 @@ INCLUDES =						\
 	-I$(srcdir)/../common/				\
 	$(NULL)
 
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libregion.la
+noinst_LTLIBRARIES = libregion.la
 
 libregion_la_SOURCES =	\
-	region-module.c \
 	cc-region-panel.c \
 	cc-region-panel.h \
 	gnome-region-panel-formats.c \
@@ -28,8 +26,6 @@ libregion_la_SOURCES =	\
 	$(NULL)
 
 libregion_la_LIBADD = $(PANEL_LIBS) $(REGION_PANEL_LIBS) $(builddir)/../common/liblanguage.la
-
-libregion_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@
 

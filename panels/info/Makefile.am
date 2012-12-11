@@ -20,11 +20,9 @@ all-local: check-local
 check-local: test-hostname
 	$(builddir)/test-hostname $(srcdir)/hostnames-test.txt > /dev/null
 
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libinfo.la
+noinst_LTLIBRARIES = libinfo.la
 
 libinfo_la_SOURCES =		\
-	info-module.c		\
 	cc-info-panel.c		\
 	cc-info-panel.h		\
 	hostname-helper.c	\
@@ -33,7 +31,6 @@ libinfo_la_SOURCES =		\
 	gsd-disk-space-helper.c
 
 libinfo_la_LIBADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
-libinfo_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui
 dist_ui_DATA = info.ui GnomeLogoVerticalMedium.svg

@@ -652,13 +652,3 @@ cc_ua_panel_init (CcUaPanel *self)
 
   gtk_container_add (GTK_CONTAINER (self), widget);
 }
-
-void
-cc_ua_panel_register (GIOModule *module)
-{
-  cc_ua_panel_register_type (G_TYPE_MODULE (module));
-  g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,
-                                  CC_TYPE_UA_PANEL,
-                                  "universal-access", 0);
-}
-

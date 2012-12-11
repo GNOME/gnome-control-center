@@ -66,8 +66,6 @@ struct _CcScreenPanelClass
 
 GType cc_screen_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_screen_panel_register (GIOModule *module);
-
 G_END_DECLS
 
 #endif /* _CC_SCREEN_PANEL_H */

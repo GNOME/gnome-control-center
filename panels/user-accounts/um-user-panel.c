@@ -56,12 +56,12 @@
 
 #define USER_ACCOUNTS_PERMISSION "org.gnome.controlcenter.user-accounts.administration"
 
-CC_PANEL_REGISTER (UmUserPanel, um_user_panel)
+CC_PANEL_REGISTER (CcUserPanel, cc_user_panel)
 
 #define UM_USER_PANEL_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), UM_TYPE_USER_PANEL, UmUserPanelPrivate))
+  (G_TYPE_INSTANCE_GET_PRIVATE ((o), UM_TYPE_USER_PANEL, CcUserPanelPrivate))
 
-struct _UmUserPanelPrivate {
+struct _CcUserPanelPrivate {
         UmUserManager *um;
         GtkBuilder *builder;
 
@@ -74,7 +74,7 @@ struct _UmUserPanelPrivate {
 };
 
 static GtkWidget *
-get_widget (UmUserPanelPrivate *d, const char *name)
+get_widget (CcUserPanelPrivate *d, const char *name)
 {
         return (GtkWidget *)gtk_builder_get_object (d->builder, name);
 }
@@ -91,7 +91,7 @@ enum {
 };
 
 static UmUser *
-get_selected_user (UmUserPanelPrivate *d)
+get_selected_user (CcUserPanelPrivate *d)
 {
         GtkTreeView *tv;
         GtkTreeIter iter;
@@ -119,7 +119,7 @@ get_name_col_str (UmUser *user)
 }
 
 static void
-user_added (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
+user_added (UmUserManager *um, UmUser *user, CcUserPanelPrivate *d)
 {
         GtkWidget *widget;
         GtkTreeModel *model;
@@ -206,7 +206,7 @@ get_next_user_row (GtkTreeModel *model,
 }
 
 static void
-user_removed (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
+user_removed (UmUserManager *um, UmUser *user, CcUserPanelPrivate *d)
 {
         GtkTreeView *tv;
         GtkTreeModel *model;
@@ -239,10 +239,10 @@ user_removed (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
         }
 }
 
-static void show_user (UmUser *user, UmUserPanelPrivate *d);
+static void show_user (UmUser *user, CcUserPanelPrivate *d);
 
 static void
-user_changed (UmUserManager *um, UmUser *user, UmUserPanelPrivate *d)
+user_changed (UmUserManager *um, UmUser *user, CcUserPanelPrivate *d)
 {
         GtkTreeView *tv;
         GtkTreeSelection *selection;
@@ -295,7 +295,7 @@ select_created_user (GObject *object,
                      GAsyncResult *result,
                      gpointer user_data)
 {
-        UmUserPanelPrivate *d = user_data;
+        CcUserPanelPrivate *d = user_data;
         UmAccountDialog *dialog;
         GtkTreeView *tv;
         GtkTreeModel *model;
@@ -335,7 +335,7 @@ select_created_user (GObject *object,
 }
 
 static void
-add_user (GtkButton *button, UmUserPanelPrivate *d)
+add_user (GtkButton *button, CcUserPanelPrivate *d)
 {
         UmAccountDialog *dialog;
 
@@ -347,7 +347,7 @@ add_user (GtkButton *button, UmUserPanelPrivate *d)
 static void
 delete_user_done (UmUserManager     *manager,
                   GAsyncResult      *res,
-                  UmUserPanelPrivate *d)
+                  CcUserPanelPrivate *d)
 {
         GError *error;
 
@@ -376,7 +376,7 @@ delete_user_done (UmUserManager     *manager,
 static void
 delete_user_response (GtkWidget         *dialog,
                       gint               response_id,
-                      UmUserPanelPrivate *d)
+                      CcUserPanelPrivate *d)
 {
         UmUser *user;
         gboolean remove_files;
@@ -406,7 +406,7 @@ delete_user_response (GtkWidget         *dialog,
 }
 
 static void
-delete_user (GtkButton *button, UmUserPanelPrivate *d)
+delete_user (GtkButton *button, CcUserPanelPrivate *d)
 {
         UmUser *user;
         GtkWidget *dialog;
@@ -526,7 +526,7 @@ get_password_mode_text (UmUser *user)
 static void
 autologin_changed (GObject            *object,
                    GParamSpec         *pspec,
-                   UmUserPanelPrivate *d)
+                   CcUserPanelPrivate *d)
 {
         gboolean active;
         UmUser *user;
@@ -583,7 +583,7 @@ get_login_time_text (UmUser *user)
 }
 
 static void
-show_user (UmUser *user, UmUserPanelPrivate *d)
+show_user (UmUser *user, CcUserPanelPrivate *d)
 {
         GtkWidget *image;
         GtkWidget *label;
@@ -674,7 +674,7 @@ show_user (UmUser *user, UmUserPanelPrivate *d)
 static void on_permission_changed (GPermission *permission, GParamSpec *pspec, gpointer data);
 
 static void
-selected_user_changed (GtkTreeSelection *selection, UmUserPanelPrivate *d)
+selected_user_changed (GtkTreeSelection *selection, CcUserPanelPrivate *d)
 {
         GtkTreeModel *model;
         GtkTreeIter iter;
@@ -694,7 +694,7 @@ selected_user_changed (GtkTreeSelection *selection, UmUserPanelPrivate *d)
 
 static void
 change_name_done (GtkWidget          *entry,
-                  UmUserPanelPrivate *d)
+                  CcUserPanelPrivate *d)
 {
         const gchar *text;
         UmUser *user;
@@ -711,7 +711,7 @@ change_name_done (GtkWidget          *entry,
 
 static void
 account_type_changed (UmEditableCombo    *combo,
-                      UmUserPanelPrivate *d)
+                      CcUserPanelPrivate *d)
 {
         UmUser *user;
         GtkTreeModel *model;
@@ -734,7 +734,7 @@ account_type_changed (UmEditableCombo    *combo,
 static void
 language_response (GtkDialog         *dialog,
                    gint               response_id,
-                   UmUserPanelPrivate *d)
+                   CcUserPanelPrivate *d)
 {
         GtkWidget *combo;
         UmUser *user;
@@ -768,7 +768,7 @@ language_response (GtkDialog         *dialog,
 
 static void
 language_changed (UmEditableCombo    *combo,
-                  UmUserPanelPrivate *d)
+                  CcUserPanelPrivate *d)
 {
         GtkTreeModel *model;
         GtkTreeIter iter;
@@ -814,7 +814,7 @@ out:
 }
 
 static void
-change_password (GtkButton *button, UmUserPanelPrivate *d)
+change_password (GtkButton *button, CcUserPanelPrivate *d)
 {
         UmUser *user;
 
@@ -828,7 +828,7 @@ change_password (GtkButton *button, UmUserPanelPrivate *d)
 }
 
 static void
-change_fingerprint (GtkButton *button, UmUserPanelPrivate *d)
+change_fingerprint (GtkButton *button, CcUserPanelPrivate *d)
 {
         GtkWidget *label, *label2;
         UmUser *user;
@@ -895,7 +895,7 @@ dont_select_headings (GtkTreeSelection *selection,
 
 static void
 users_loaded (UmUserManager     *manager,
-              UmUserPanelPrivate *d)
+              CcUserPanelPrivate *d)
 {
         GSList *list, *l;
         UmUser *user;
@@ -969,7 +969,7 @@ on_permission_changed (GPermission *permission,
                        GParamSpec  *pspec,
                        gpointer     data)
 {
-        UmUserPanelPrivate *d = data;
+        CcUserPanelPrivate *d = data;
         gboolean is_authorized;
         gboolean self_selected;
         UmUser *user;
@@ -1153,7 +1153,7 @@ match_user (GtkTreeModel *model,
 }
 
 static void
-setup_main_window (UmUserPanelPrivate *d)
+setup_main_window (CcUserPanelPrivate *d)
 {
         GtkWidget *userlist;
         GtkTreeModel *model;
@@ -1291,9 +1291,9 @@ setup_main_window (UmUserPanelPrivate *d)
 }
 
 static void
-um_user_panel_init (UmUserPanel *self)
+cc_user_panel_init (CcUserPanel *self)
 {
-        UmUserPanelPrivate *d;
+        CcUserPanelPrivate *d;
         GError *error;
         volatile GType type G_GNUC_UNUSED;
         const gchar *filename;
@@ -1337,9 +1337,9 @@ um_user_panel_init (UmUserPanel *self)
 }
 
 static void
-um_user_panel_dispose (GObject *object)
+cc_user_panel_dispose (GObject *object)
 {
-        UmUserPanelPrivate *priv = UM_USER_PANEL (object)->priv;
+        CcUserPanelPrivate *priv = UM_USER_PANEL (object)->priv;
 
         if (priv->um) {
                 g_object_unref (priv->um);
@@ -1365,41 +1365,33 @@ um_user_panel_dispose (GObject *object)
                 g_object_unref (priv->permission);
                 priv->permission = NULL;
         }
-        G_OBJECT_CLASS (um_user_panel_parent_class)->dispose (object);
+        G_OBJECT_CLASS (cc_user_panel_parent_class)->dispose (object);
 }
 
 static GPermission *
-um_user_panel_get_permission (CcPanel *panel)
+cc_user_panel_get_permission (CcPanel *panel)
 {
-        UmUserPanelPrivate *priv = UM_USER_PANEL (panel)->priv;
+        CcUserPanelPrivate *priv = UM_USER_PANEL (panel)->priv;
 
         return priv->permission;
 }
 
 static const char *
-um_user_panel_get_help_uri (CcPanel *panel)
+cc_user_panel_get_help_uri (CcPanel *panel)
 {
 	return "help:gnome-help/user-accounts";
 }
 
 static void
-um_user_panel_class_init (UmUserPanelClass *klass)
+cc_user_panel_class_init (CcUserPanelClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
-        object_class->dispose = um_user_panel_dispose;
+        object_class->dispose = cc_user_panel_dispose;
 
-        panel_class->get_permission = um_user_panel_get_permission;
-        panel_class->get_help_uri = um_user_panel_get_help_uri;
+        panel_class->get_permission = cc_user_panel_get_permission;
+        panel_class->get_help_uri = cc_user_panel_get_help_uri;
 
-        g_type_class_add_private (klass, sizeof (UmUserPanelPrivate));
-}
-
-void
-um_user_panel_register (GIOModule *module)
-{
-        um_user_panel_register_type (G_TYPE_MODULE (module));
-        g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,
-                                        UM_TYPE_USER_PANEL, "user-accounts", 0);
+        g_type_class_add_private (klass, sizeof (CcUserPanelPrivate));
 }

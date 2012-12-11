@@ -4,8 +4,7 @@ SUBDIRS = data gvc
 cappletname = sound
 NULL =
 
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libsound.la
+noinst_LTLIBRARIES = libsound.la libgvcgtk.la
 
 AM_CPPFLAGS =					\
 	-I$(srcdir)/gvc/			\
@@ -22,7 +21,6 @@ AM_CPPFLAGS =					\
 # Needed because Automake complains if
 # the same source file is used in a library
 # and in an executable
-noinst_LTLIBRARIES = libgvcgtk.la
 libgvcgtk_la_SOURCES = 				\
 	gvc-channel-bar.h			\
 	gvc-channel-bar.c			\

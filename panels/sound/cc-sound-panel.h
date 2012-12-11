@@ -52,8 +52,6 @@ struct _CcSoundPanelClass {
 
 GType cc_sound_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_sound_panel_register (GIOModule *module);
-
 G_END_DECLS
 
 #endif /* _CC_SOUND_PANEL_H */

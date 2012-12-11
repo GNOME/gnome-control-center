@@ -1135,15 +1135,3 @@ cc_date_time_panel_init (CcDateTimePanel *self)
                     G_CALLBACK (on_permission_changed), self);
   on_permission_changed (priv->permission, NULL, self);
 }
-
-void
-cc_date_time_panel_register (GIOModule *module)
-{
-  bind_textdomain_codeset (GETTEXT_PACKAGE_TIMEZONES, "UTF-8");
-
-  cc_date_time_panel_register_type (G_TYPE_MODULE (module));
-  g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,
-                                  CC_TYPE_DATE_TIME_PANEL,
-                                  "datetime", 0);
-}
-

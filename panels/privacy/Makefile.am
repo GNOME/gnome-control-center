@@ -10,16 +10,13 @@ INCLUDES = 						\
 	-I$(top_srcdir)/panels/common/			\
 	$(NULL)
 
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libprivacy.la
+noinst_LTLIBRARIES = libprivacy.la
 
 libprivacy_la_SOURCES =		\
-	privacy-module.c		\
 	cc-privacy-panel.c	\
 	cc-privacy-panel.h
 
 libprivacy_la_LIBADD = $(PANEL_LIBS) $(PRIVACY_PANEL_LIBS)
-libprivacy_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui
 dist_ui_DATA = 		\

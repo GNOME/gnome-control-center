@@ -27,13 +27,13 @@
 
 G_BEGIN_DECLS
 
-#define GOA_TYPE_PANEL  (goa_panel_get_type ())
-#define GOA_PANEL(o)    (G_TYPE_CHECK_INSTANCE_CAST ((o), GOA_TYPE_PANEL, GoaPanel))
-#define GOA_IS_PANEL(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), GOA_TYPE_PANEL))
+#define CC_GOA_TYPE_PANEL  (cc_goa_panel_get_type ())
+#define CC_GOA_PANEL(o)    (G_TYPE_CHECK_INSTANCE_CAST ((o), CC_GOA_TYPE_PANEL, CcGoaPanel))
+#define CC_GOA_IS_PANEL(o) (G_TYPE_CHECK_INSTANCE_TYPE ((o), CC_GOA_TYPE_PANEL))
 
-typedef struct _GoaPanel              GoaPanel;
+typedef struct _CcGoaPanel              CcGoaPanel;
 
-GType      goa_panel_get_type   (void) G_GNUC_CONST;
+GType      cc_goa_panel_get_type   (void) G_GNUC_CONST;
 
 G_END_DECLS
 

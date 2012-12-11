@@ -19,6 +19,7 @@
  * Author: Thomas Wood <thos@gnome.org>
  */
 
+#include <config.h>
 
 #include "gnome-control-center.h"
 
@@ -54,6 +55,36 @@ G_DEFINE_TYPE (GnomeControlCenter, gnome_control_center, CC_TYPE_SHELL)
 #define SMALL_SCREEN_FIXED_HEIGHT 400
 
 #define MIN_ICON_VIEW_HEIGHT 300
+
+/* Extension points */
+extern GType cc_background_panel_get_type (void);
+#ifdef BUILD_BLUETOOTH
+extern GType cc_bluetooth_panel_get_type (void);
+#endif /* BUILD_BLUETOOTH */
+extern GType cc_color_panel_get_type (void);
+extern GType cc_date_time_panel_get_type (void);
+extern GType cc_display_panel_get_type (void);
+extern GType cc_info_panel_get_type (void);
+extern GType cc_keyboard_panel_get_type (void);
+extern GType cc_mouse_panel_get_type (void);
+#ifdef BUILD_NETWORK
+extern GType cc_network_panel_get_type (void);
+#endif /* BUILD_NETWORK */
+extern GType cc_goa_panel_get_type (void);
+extern GType cc_power_panel_get_type (void);
+#ifdef BUILD_PRINTERS
+extern GType cc_printers_panel_get_type (void);
+#endif /* BUILD_PRINTERS */
+extern GType cc_privacy_panel_get_type (void);
+extern GType cc_region_panel_get_type (void);
+extern GType cc_screen_panel_get_type (void);
+extern GType cc_search_panel_get_type (void);
+extern GType cc_sound_panel_get_type (void);
+extern GType cc_ua_panel_get_type (void);
+extern GType cc_user_panel_get_type (void);
+#ifdef BUILD_WACOM
+extern GType cc_wacom_panel_get_type (void);
+#endif /* BUILD_WACOM */
 
 typedef enum {
 	SMALL_SCREEN_UNSET,
@@ -184,41 +215,26 @@ activate_panel (GnomeControlCenter *shell,
 {
   GnomeControlCenterPrivate *priv = shell->priv;
   GType panel_type = G_TYPE_INVALID;
-  GList *panels, *l;
   GtkWidget *box;
   const gchar *icon_name;
-
-  /* check if there is an plugin that implements this panel */
-  panels = g_io_extension_point_get_extensions (priv->extension_point);
+  GIOExtension *extension;
 
   if (!desktop_file)
     return FALSE;
   if (!id)
     return FALSE;
 
-  for (l = panels; l != NULL; l = l->next)
-    {
-      GIOExtension *extension;
-      const gchar *name;
-
-      extension = l->data;
-
-      name = g_io_extension_get_name (extension);
-
-      if (!g_strcmp0 (name, id))
-        {
-          panel_type = g_io_extension_get_type (extension);
-          break;
-        }
-    }
-
-  if (panel_type == G_TYPE_INVALID)
+  /* check if there is an extension point that implements this panel */
+  extension = g_io_extension_point_get_extension_by_name (priv->extension_point, id);
+  if (extension == NULL)
     {
       g_warning ("Could not find the loadable module for panel '%s'", id);
       return FALSE;
     }
 
-  /* create the panel plugin */
+  panel_type = g_io_extension_get_type (extension);
+
+  /* create the panel */
   priv->current_panel = g_object_new (panel_type, "shell", shell, "argv", argv, NULL);
   cc_shell_set_active_panel (CC_SHELL (shell), CC_PANEL (priv->current_panel));
   gtk_widget_show (priv->current_panel);
@@ -862,10 +878,8 @@ setup_model (GnomeControlCenter *shell)
 }
 
 static void
-load_panel_plugins (GnomeControlCenter *shell)
+load_panel_modules (GnomeControlCenter *shell)
 {
-  GList *modules;
-
   /* only allow this function to be run once to prevent modules being loaded
    * twice
    */
@@ -878,12 +892,35 @@ load_panel_plugins (GnomeControlCenter *shell)
   shell->priv->extension_point
     = g_io_extension_point_register (CC_SHELL_PANEL_EXTENSION_POINT);
 
-  /* load all the plugins in the panels directory */
-  modules = g_io_modules_load_all_in_directory (PANELS_DIR);
-  g_list_free (modules);
-
+  g_type_ensure (cc_background_panel_get_type ());
+#ifdef BUILD_BLUETOOTH
+  g_type_ensure (cc_bluetooth_panel_get_type ());
+#endif /* BUILD_BLUETOOTH */
+  g_type_ensure (cc_color_panel_get_type ());
+  g_type_ensure (cc_date_time_panel_get_type ());
+  g_type_ensure (cc_display_panel_get_type ());
+  g_type_ensure (cc_info_panel_get_type ());
+  g_type_ensure (cc_keyboard_panel_get_type ());
+  g_type_ensure (cc_mouse_panel_get_type ());
+#ifdef BUILD_NETWORK
+  g_type_ensure (cc_network_panel_get_type ());
+#endif /* BUILD_NETWORK */
+  g_type_ensure (cc_goa_panel_get_type ());
+  g_type_ensure (cc_power_panel_get_type ());
+#ifdef BUILD_PRINTERS
+  g_type_ensure (cc_printers_panel_get_type ());
+#endif /* BUILD_PRINTERS */
+  g_type_ensure (cc_privacy_panel_get_type ());
+  g_type_ensure (cc_region_panel_get_type ());
+  g_type_ensure (cc_screen_panel_get_type ());
+  g_type_ensure (cc_search_panel_get_type ());
+  g_type_ensure (cc_sound_panel_get_type ());
+  g_type_ensure (cc_ua_panel_get_type ());
+  g_type_ensure (cc_user_panel_get_type ());
+#ifdef BUILD_WACOM
+  g_type_ensure (cc_wacom_panel_get_type ());
+#endif /* BUILD_WACOM */
 }
-
 
 static void
 home_button_clicked_cb (GtkButton *button,
@@ -1391,11 +1428,11 @@ gnome_control_center_init (GnomeControlCenter *self)
   /* keep a list of custom widgets to unload on panel change */
   priv->custom_widgets = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
 
+  /* load the panels that are implemented as builtin modules */
+  load_panel_modules (self);
+
   /* load the available settings panels */
   setup_model (self);
-
-  /* load the panels that are implemented as plugins */
-  load_panel_plugins (self);
 
   /* setup search functionality */
   setup_search (self);

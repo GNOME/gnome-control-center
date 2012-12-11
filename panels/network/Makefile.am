@@ -9,11 +9,9 @@ INCLUDES = 						\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	$(NULL)
 
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libnetwork.la
+noinst_LTLIBRARIES = libnetwork.la
 
 libnetwork_la_SOURCES =					\
-	network-module.c				\
 	panel-common.c					\
 	panel-common.h					\
 	net-object.c					\
@@ -55,7 +53,6 @@ libnetwork_la_SOURCES =					\
 	rfkill.h
 
 libnetwork_la_LIBADD = $(PANEL_LIBS) $(NETWORK_PANEL_LIBS) $(NETWORK_MANAGER_LIBS)
-libnetwork_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui
 dist_ui_DATA =						\

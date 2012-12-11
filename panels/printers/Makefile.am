@@ -17,11 +17,9 @@ INCLUDES = 						\
 	-DDATADIR="\"$(uidir)\""			\
 	$(NULL)
 
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libprinters.la
+noinst_LTLIBRARIES = libprinters.la
 
 libprinters_la_SOURCES =		\
-	printers-module.c		\
 	pp-new-printer.c		\
 	pp-new-printer.h		\
 	pp-maintenance-command.c	\
@@ -48,7 +46,6 @@ libprinters_la_SOURCES =		\
 	cc-printers-panel.h
 
 libprinters_la_LIBADD = $(PRINTERS_PANEL_LIBS) $(PANEL_LIBS) $(CUPS_LIBS)
-libprinters_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@
 

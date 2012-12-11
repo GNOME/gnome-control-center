@@ -51,8 +51,6 @@ struct CcBluetoothPanelClass {
 
 GType cc_bluetooth_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_bluetooth_panel_register (GIOModule *module);
-
 G_END_DECLS
 
 #endif /* _CC_BLUETOOTH_PANEL_H */

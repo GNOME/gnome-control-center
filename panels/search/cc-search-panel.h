@@ -66,8 +66,6 @@ struct _CcSearchPanelClass
 
 GType cc_search_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_search_panel_register (GIOModule *module);
-
 G_END_DECLS
 
 #endif /* _CC_SEARCH_PANEL_H */

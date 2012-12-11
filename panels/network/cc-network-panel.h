@@ -65,8 +65,6 @@ struct _CcNetworkPanelClass
 
 GType cc_network_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_network_panel_register (GIOModule *module);
-
 GPtrArray *cc_network_panel_get_devices (CcNetworkPanel *panel);
 
 G_END_DECLS

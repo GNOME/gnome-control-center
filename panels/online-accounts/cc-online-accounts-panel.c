@@ -36,9 +36,9 @@
 #include "cc-online-accounts-add-account-dialog.h"
 #include "cc-online-accounts-model.h"
 
-typedef struct _GoaPanelClass GoaPanelClass;
+typedef struct _CcGoaPanelClass CcGoaPanelClass;
 
-struct _GoaPanel
+struct _CcGoaPanel
 {
   CcPanel parent_instance;
 
@@ -55,7 +55,7 @@ struct _GoaPanel
   GtkWidget *accounts_vbox;
 };
 
-struct _GoaPanelClass
+struct _CcGoaPanelClass
 {
   CcPanelClass parent_class;
 };
@@ -83,10 +83,10 @@ static void on_account_changed (GoaClient  *client,
                                 GoaObject  *object,
                                 gpointer    user_data);
 
-static gboolean select_account_by_id (GoaPanel    *panel,
+static gboolean select_account_by_id (CcGoaPanel    *panel,
                                       const gchar *account_id);
 
-CC_PANEL_REGISTER (GoaPanel, goa_panel);
+CC_PANEL_REGISTER (CcGoaPanel, cc_goa_panel);
 
 enum {
   PROP_0,
@@ -94,7 +94,7 @@ enum {
 };
 
 static void
-goa_panel_set_property (GObject *object,
+cc_goa_panel_set_property (GObject *object,
                         guint property_id,
                         const GValue *value,
                         GParamSpec *pspec)
@@ -108,7 +108,7 @@ goa_panel_set_property (GObject *object,
           args = g_value_get_boxed (value);
 
           if (args != NULL && *args != '\0')
-            select_account_by_id (GOA_PANEL (object), args[0]);
+            select_account_by_id (CC_GOA_PANEL (object), args[0]);
           return;
         }
     }
@@ -117,9 +117,9 @@ goa_panel_set_property (GObject *object,
 }
 
 static void
-goa_panel_finalize (GObject *object)
+cc_goa_panel_finalize (GObject *object)
 {
-  GoaPanel *panel = GOA_PANEL (object);
+  CcGoaPanel *panel = CC_GOA_PANEL (object);
 
   if (panel->accounts_model != NULL)
     g_clear_object (&panel->accounts_model);
@@ -128,11 +128,11 @@ goa_panel_finalize (GObject *object)
     g_object_unref (panel->client);
   g_object_unref (panel->builder);
 
-  G_OBJECT_CLASS (goa_panel_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_goa_panel_parent_class)->finalize (object);
 }
 
 static void
-goa_panel_init (GoaPanel *panel)
+cc_goa_panel_init (CcGoaPanel *panel)
 {
   GtkWidget *button;
   GtkWidget *w;
@@ -264,21 +264,21 @@ goa_panel_init (GoaPanel *panel)
 }
 
 static const char *
-goa_panel_get_help_uri (CcPanel *panel)
+cc_goa_panel_get_help_uri (CcPanel *panel)
 {
   return "help:gnome-help/accounts";
 }
 
 static void
-goa_panel_class_init (GoaPanelClass *klass)
+cc_goa_panel_class_init (CcGoaPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
-  panel_class->get_help_uri = goa_panel_get_help_uri;
+  panel_class->get_help_uri = cc_goa_panel_get_help_uri;
 
-  object_class->set_property = goa_panel_set_property;
-  object_class->finalize = goa_panel_finalize;
+  object_class->set_property = cc_goa_panel_set_property;
+  object_class->finalize = cc_goa_panel_finalize;
 
   g_object_class_override_property (object_class, PROP_ARGV, "argv");
 }
@@ -286,32 +286,7 @@ goa_panel_class_init (GoaPanelClass *klass)
 /* ---------------------------------------------------------------------------------------------------- */
 
 static void
-goa_panel_register (GIOModule *module)
-{
-  goa_panel_register_type (G_TYPE_MODULE (module));
-  g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,
-                                  GOA_TYPE_PANEL,
-                                  "online-accounts",
-                                  0);
-}
-
-void
-g_io_module_load (GIOModule *module)
-{
-  bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-  goa_panel_register (module);
-}
-
-void
-g_io_module_unload (GIOModule *module)
-{
-}
-
-/* ---------------------------------------------------------------------------------------------------- */
-
-static void
-show_page (GoaPanel *panel,
+show_page (CcGoaPanel *panel,
            gint page_num)
 {
   GtkNotebook *notebook;
@@ -320,7 +295,7 @@ show_page (GoaPanel *panel,
 }
 
 static void
-show_page_nothing_selected (GoaPanel *panel)
+show_page_nothing_selected (CcGoaPanel *panel)
 {
   GtkWidget *box;
   GtkWidget *label;
@@ -339,7 +314,7 @@ on_info_bar_response (GtkInfoBar *info_bar,
                       gint        response_id,
                       gpointer    user_data)
 {
-  GoaPanel *panel = GOA_PANEL (user_data);
+  CcGoaPanel *panel = CC_GOA_PANEL (user_data);
   GtkTreeIter iter;
 
   if (gtk_tree_selection_get_selected (gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview)),
@@ -394,7 +369,7 @@ on_info_bar_response (GtkInfoBar *info_bar,
 }
 
 static void
-show_page_account (GoaPanel  *panel,
+show_page_account (CcGoaPanel  *panel,
                    GoaObject *object)
 {
   GList *children;
@@ -477,7 +452,7 @@ show_page_account (GoaPanel  *panel,
 /* ---------------------------------------------------------------------------------------------------- */
 
 static gboolean
-select_account_by_id (GoaPanel    *panel,
+select_account_by_id (CcGoaPanel    *panel,
                       const gchar *account_id)
 {
   GoaObject *goa_object = NULL;
@@ -510,7 +485,7 @@ static void
 on_tree_view_selection_changed (GtkTreeSelection *selection,
                                 gpointer          user_data)
 {
-  GoaPanel *panel = GOA_PANEL (user_data);
+  CcGoaPanel *panel = CC_GOA_PANEL (user_data);
   GtkTreeIter iter;
 
   if (gtk_tree_selection_get_selected (selection, NULL, &iter))
@@ -534,7 +509,7 @@ on_account_changed (GoaClient  *client,
                     GoaObject  *object,
                     gpointer    user_data)
 {
-  GoaPanel *panel = GOA_PANEL (user_data);
+  CcGoaPanel *panel = CC_GOA_PANEL (user_data);
   GtkTreeIter iter;
 
   if (gtk_tree_selection_get_selected (gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview)),
@@ -571,7 +546,7 @@ on_model_row_deleted (GtkTreeModel *tree_model,
                       GtkTreePath  *path,
                       gpointer      user_data)
 {
-  GoaPanel *panel = GOA_PANEL (user_data);
+  CcGoaPanel *panel = CC_GOA_PANEL (user_data);
   GtkTreeIter iter;
   GtkTreeSelection *selection;
 
@@ -591,7 +566,7 @@ on_model_row_inserted (GtkTreeModel *tree_model,
                        GtkTreeIter  *iter,
                        gpointer      user_data)
 {
-  GoaPanel *panel = GOA_PANEL (user_data);
+  CcGoaPanel *panel = CC_GOA_PANEL (user_data);
   GtkTreeSelection *selection;
 
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview));
@@ -607,7 +582,7 @@ on_model_row_inserted (GtkTreeModel *tree_model,
 /* ---------------------------------------------------------------------------------------------------- */
 
 static void
-add_account (GoaPanel *panel)
+add_account (CcGoaPanel *panel)
 {
   GtkWindow *parent;
   GtkWidget *dialog;
@@ -693,7 +668,7 @@ static void
 on_toolbar_add_button_clicked (GtkToolButton *button,
                                gpointer       user_data)
 {
-  GoaPanel *panel = GOA_PANEL (user_data);
+  CcGoaPanel *panel = CC_GOA_PANEL (user_data);
   add_account (panel);
 }
 
@@ -702,7 +677,7 @@ remove_account_cb (GoaAccount    *account,
                    GAsyncResult  *res,
                    gpointer       user_data)
 {
-  GoaPanel *panel = GOA_PANEL (user_data);
+  CcGoaPanel *panel = CC_GOA_PANEL (user_data);
   GError *error;
 
   error = NULL;
@@ -729,7 +704,7 @@ static void
 on_toolbar_remove_button_clicked (GtkToolButton *button,
                                   gpointer       user_data)
 {
-  GoaPanel *panel = GOA_PANEL (user_data);
+  CcGoaPanel *panel = CC_GOA_PANEL (user_data);
   GtkTreeIter iter;
 
   if (gtk_tree_selection_get_selected (gtk_tree_view_get_selection (GTK_TREE_VIEW (panel->accounts_treeview)),
@@ -774,6 +749,6 @@ static void
 on_add_button_clicked (GtkButton *button,
                        gpointer   user_data)
 {
-  GoaPanel *panel = GOA_PANEL (user_data);
+  CcGoaPanel *panel = CC_GOA_PANEL (user_data);
   add_account (panel);
 }

@@ -34,17 +34,48 @@ gnome_control_center_SOURCES =			\
 	cc-shell.h				\
 	$(MARSHAL_FILES)
 
-gnome_control_center_LDADD =			\
-	$(SHELL_LIBS)				\
-	$(CHEESE_LIBS)
-
 gnome_control_center_LDFLAGS = -export-dynamic
+
+gnome_control_center_LDADD =						\
+	$(SHELL_LIBS)							\
+	$(CHEESE_LIBS)							\
+	$(top_builddir)/panels/background/libbackground.la		\
+	$(top_builddir)/panels/color/libcolor.la			\
+	$(top_builddir)/panels/datetime/libdate_time.la			\
+	$(top_builddir)/panels/display/libdisplay.la			\
+	$(top_builddir)/panels/info/libinfo.la				\
+	$(top_builddir)/panels/keyboard/libkeyboard.la			\
+	$(top_builddir)/panels/mouse/libmouse-properties.la		\
+	$(top_builddir)/panels/online-accounts/libonline-accounts.la	\
+	$(top_builddir)/panels/power/libpower.la			\
+	$(top_builddir)/panels/privacy/libprivacy.la			\
+	$(top_builddir)/panels/region/libregion.la			\
+	$(top_builddir)/panels/screen/libscreen.la			\
+	$(top_builddir)/panels/search/libsearch.la			\
+	$(top_builddir)/panels/sound/libsound.la			\
+	$(top_builddir)/panels/universal-access/libuniversal-access.la	\
+	$(top_builddir)/panels/user-accounts/libuser-accounts.la
+
+if BUILD_WACOM
+gnome_control_center_LDADD += $(top_builddir)/panels/wacom/libwacom-properties.la
+endif
+
+if BUILD_PRINTERS
+gnome_control_center_LDADD += $(top_builddir)/panels/printers/libprinters.la
+endif
+
+if BUILD_NETWORK
+gnome_control_center_LDADD += $(top_builddir)/panels/network/libnetwork.la
+endif
+
+if BUILD_BLUETOOTH
+gnome_control_center_LDADD += $(top_builddir)/panels/bluetooth/libbluetooth.la
+endif
 
 AM_CPPFLAGS =							\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""		\
 	-DUIDIR="\"$(uidir)\""					\
-	-DMENUDIR="\"$(menudir)\""				\
-	-DPANELS_DIR="\"$(PANELS_DIR)\""
+	-DMENUDIR="\"$(menudir)\""
 
 menudir = $(sysconfdir)/xdg/menus
 menu_DATA = gnomecc.menu

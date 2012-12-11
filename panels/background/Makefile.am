@@ -22,8 +22,7 @@ INCLUDES =						\
 	-DPIXMAP_DIR=\""$(datadir)/gnome-control-center/pixmaps"\"	\
 	$(NULL)
 
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libbackground.la
+noinst_LTLIBRARIES = libbackground.la
 
 BUILT_SOURCES =            \
 	gdesktop-enums-types.c \
@@ -31,7 +30,6 @@ BUILT_SOURCES =            \
 
 libbackground_la_SOURCES =		\
 	$(BUILT_SOURCES)		\
-	background-module.c		\
 	cc-background-chooser-dialog.c	\
 	cc-background-chooser-dialog.h	\
 	cc-background-panel.c		\
@@ -51,7 +49,6 @@ libbackground_la_SOURCES =		\
 
 
 libbackground_la_LIBADD = $(PANEL_LIBS) $(BACKGROUND_PANEL_LIBS)
-libbackground_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 if WITH_LIBSOCIALWEB
 libbackground_la_SOURCES += bg-flickr-source.c bg-flickr-source.h

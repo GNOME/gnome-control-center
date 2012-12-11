@@ -67,8 +67,6 @@ struct _CcBackgroundPanelClass
 
 GType cc_background_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_background_panel_register (GIOModule *module);
-
 G_END_DECLS
 
 #endif /* _CC_BACKGROUND_PANEL_H */

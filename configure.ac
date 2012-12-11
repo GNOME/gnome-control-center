@@ -176,12 +176,17 @@ PKG_CHECK_MODULES(NETWORK_MANAGER, NetworkManager >= $NETWORK_MANAGER_REQUIRED_V
                   [have_networkmanager=yes], have_networkmanager=no)
 if test "x$have_networkmanager" = xno ; then
         AC_MSG_WARN(*** Network panel will not be built (NetworkManager ~0.9 or newer not found) ***)
+else
+	AC_DEFINE(BUILD_NETWORK, 1, [Define to 1 to build the Network panel])
 fi
 AM_CONDITIONAL(BUILD_NETWORK, [test x$have_networkmanager = xyes])
 
 # Check for gnome-bluetooth
 PKG_CHECK_MODULES(BLUETOOTH, $COMMON_MODULES gnome-bluetooth-1.0 >= 3.5.5,
 		  [have_bluetooth=yes], have_bluetooth=no)
+if test "x$have_bluetooth" = xyes ; then
+	AC_DEFINE(BUILD_BLUETOOTH, 1, [Define to 1 to build the Network panel])
+fi
 AM_CONDITIONAL(BUILD_BLUETOOTH, [test x$have_bluetooth = xyes])
 
 # Check for CUPS 1.4 or newer
@@ -209,6 +214,8 @@ if test x"$enable_cups" != x"no" ; then
             $CUPS_API_MAJOR -eq 1 -a $CUPS_API_MINOR -ge 4 ; then
     AC_MSG_ERROR([CUPS 1.4 or newer not found, but CUPS support requested])
   fi
+
+  AC_DEFINE(BUILD_PRINTERS, 1, [Define to 1 to build the Printers panel])
 
   CUPS_CFLAGS=`$CUPS_CONFIG --cflags | $SED -e 's/-O\w*//g' -e 's/-m\w*//g'`
   CUPS_LIBS=`$CUPS_CONFIG --libs`
@@ -246,6 +253,7 @@ case $host_os in
                         gnome-settings-daemon >= $GSD_REQUIRED_VERSION
                         xi >= 1.2 x11 libwacom >= $LIBWACOM_REQUIRED_VERSION
                         gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION)
+      AC_DEFINE(BUILD_WACOM, 1, [Define to 1 to build the Wacom panel])
       have_wacom=yes
     fi
     ;;
@@ -294,17 +302,11 @@ dnl =======================================
 dnl Panels
 dnl =======================================
 
-PANELS_DIR="${libdir}/control-center-1/panels"
-AC_SUBST(PANELS_DIR)
-
-PANEL_CFLAGS="-I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-cc-panel\\\"\""
+PANEL_CFLAGS="-I\$(top_srcdir)/ -DG_LOG_DOMAIN=\"\\\"\$(cappletname)-cc-panel\\\"\" -DPANEL_ID=\"\\\"\$(cappletname)\\\"\""
 AC_SUBST(PANEL_CFLAGS)
 
 PANEL_LIBS=""
 AC_SUBST(PANEL_LIBS)
-
-PANEL_LDFLAGS="-export_dynamic -avoid-version -module -no-undefined -export-symbols-regex '^g_io_module_(load|unload)'"
-AC_SUBST(PANEL_LDFLAGS)
 
 dnl ==============================================
 dnl libsocialweb

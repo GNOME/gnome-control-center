@@ -551,13 +551,3 @@ cc_screen_panel_init (CcScreenPanel *self)
   gtk_widget_reparent (widget, (GtkWidget *) self);
   g_object_set (self, "valign", GTK_ALIGN_START, NULL);
 }
-
-void
-cc_screen_panel_register (GIOModule *module)
-{
-  cc_screen_panel_register_type (G_TYPE_MODULE (module));
-  g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,
-                                  CC_TYPE_SCREEN_PANEL,
-                                  "screen", 0);
-}
-

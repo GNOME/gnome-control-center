@@ -218,13 +218,3 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   object_class->dispose = cc_mouse_panel_dispose;
   object_class->constructed = cc_mouse_panel_constructed;
 }
-
-void
-cc_mouse_panel_register (GIOModule *module)
-{
-  cc_mouse_panel_register_type (G_TYPE_MODULE (module));
-  g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,
-                                  CC_TYPE_MOUSE_PANEL,
-                                  "mouse", 0);
-}
-

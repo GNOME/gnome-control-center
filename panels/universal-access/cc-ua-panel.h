@@ -68,8 +68,6 @@ struct _CcUaPanelClass
 
 GType cc_ua_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_ua_panel_register (GIOModule *module);
-
 G_END_DECLS
 
 #endif /* _CC_UA_PANEL_H */

@@ -67,8 +67,6 @@ struct _CcColorPanelClass
 
 GType cc_color_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_color_panel_register (GIOModule *module);
-
 G_END_DECLS
 
 #endif /* _CC_COLOR_PANEL_H */

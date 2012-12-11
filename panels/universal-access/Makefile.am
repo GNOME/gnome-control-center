@@ -9,11 +9,9 @@ INCLUDES = 						\
 	-I$(top_srcdir)/panels/common/			\
 	$(NULL)
 
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libuniversal-access.la
+noinst_LTLIBRARIES = libuniversal-access.la
 
 libuniversal_access_la_SOURCES =		\
-	universal-access-module.c		\
 	cc-ua-panel.c				\
 	cc-ua-panel.h				\
 	cc-marshal.c				\
@@ -22,7 +20,6 @@ libuniversal_access_la_SOURCES =		\
 	zoom-options.h
 
 libuniversal_access_la_LIBADD = $(PANEL_LIBS) $(UNIVERSAL_ACCESS_PANEL_LIBS)
-libuniversal_access_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui
 dist_ui_DATA = uap.ui zoom-options.ui

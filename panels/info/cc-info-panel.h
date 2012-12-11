@@ -66,8 +66,6 @@ struct _CcInfoPanelClass
 
 GType cc_info_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_info_panel_register (GIOModule *module);
-
 G_END_DECLS
 
 #endif /* _CC_INFO_PANEL_H */

@@ -26,33 +26,31 @@
 
 G_BEGIN_DECLS
 
-#define UM_TYPE_USER_PANEL um_user_panel_get_type()
+#define UM_TYPE_USER_PANEL cc_user_panel_get_type()
 
-#define UM_USER_PANEL(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), UM_TYPE_USER_PANEL, UmUserPanel))
-#define UM_USER_PANEL_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), UM_TYPE_USER_PANEL, UmUserPanelClass))
+#define UM_USER_PANEL(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), UM_TYPE_USER_PANEL, CcUserPanel))
+#define UM_USER_PANEL_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), UM_TYPE_USER_PANEL, CcUserPanelClass))
 #define UM_IS_USER_PANEL(obj) (G_TYPE_CHECK_INSTANCE_TYPE ((obj), UM_TYPE_USER_PANEL))
 #define UM_IS_USER_PANEL_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), UM_TYPE_USER_PANEL))
-#define UM_USER_PANEL_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), UM_TYPE_USER_PANEL, UmUserPanelClass))
+#define UM_USER_PANEL_GET_CLASS(obj) (G_TYPE_INSTANCE_GET_CLASS ((obj), UM_TYPE_USER_PANEL, CcUserPanelClass))
 
-typedef struct _UmUserPanel UmUserPanel;
-typedef struct _UmUserPanelClass UmUserPanelClass;
-typedef struct _UmUserPanelPrivate UmUserPanelPrivate;
+typedef struct _CcUserPanel CcUserPanel;
+typedef struct _CcUserPanelClass CcUserPanelClass;
+typedef struct _CcUserPanelPrivate CcUserPanelPrivate;
 
-struct _UmUserPanel
+struct _CcUserPanel
 {
   CcPanel parent;
 
-  UmUserPanelPrivate *priv;
+  CcUserPanelPrivate *priv;
 };
 
-struct _UmUserPanelClass
+struct _CcUserPanelClass
 {
   CcPanelClass parent_class;
 };
 
-GType um_user_panel_get_type (void) G_GNUC_CONST;
-
-void  um_user_panel_register (GIOModule *module);
+GType cc_user_panel_get_type (void) G_GNUC_CONST;
 
 G_END_DECLS
 

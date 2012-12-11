@@ -66,8 +66,6 @@ struct _CcPowerPanelClass
 
 GType cc_power_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_power_panel_register (GIOModule *module);
-
 G_END_DECLS
 
 #endif /* _CC_POWER_PANEL_H */

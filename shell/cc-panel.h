@@ -43,14 +43,13 @@ G_BEGIN_DECLS
  *
  * use: CC_PANEL_REGISTER (PluginName, plugin_name)
  */
-#define CC_PANEL_REGISTER(PluginName, plugin_name)                             \
-        G_DEFINE_DYNAMIC_TYPE (PluginName,                                     \
-                               plugin_name,                                    \
-                               CC_TYPE_PANEL)                                  \
-static void                                                                    \
-plugin_name##_class_finalize (PluginName##Class *plugin_name##_class)          \
-{                                                                              \
-}
+#define CC_PANEL_REGISTER(PluginName, plugin_name)							\
+	G_DEFINE_TYPE_WITH_CODE (PluginName, plugin_name, CC_TYPE_PANEL,				\
+				 GIOExtensionPoint *ep;							\
+				 ep = g_io_extension_point_register ("CcPanel");			\
+				 g_io_extension_point_set_required_type (ep, CC_TYPE_PANEL);		\
+				 g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,	\
+								 g_define_type_id, PANEL_ID, 0))
 
 typedef struct CcPanelPrivate CcPanelPrivate;
 

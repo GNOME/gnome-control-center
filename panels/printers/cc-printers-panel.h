@@ -65,8 +65,6 @@ struct _CcPrintersPanelClass
 
 GType cc_printers_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_printers_panel_register (GIOModule *module);
-
 G_END_DECLS
 
 #endif /* _CC_PRINTERS_PANEL_H */

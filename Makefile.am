@@ -1,10 +1,10 @@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
-SUBDIRS = po egg-list-box shell panels
+SUBDIRS = po egg-list-box panels shell
 if BUILD_DOCUMENTATION
 SUBDIRS += man
 endif
-DIST_SUBDIRS = po shell panels man
+DIST_SUBDIRS = po panels shell man
 
 MAINTAINERCLEANFILES = \
 	$(srcdir)/INSTALL \

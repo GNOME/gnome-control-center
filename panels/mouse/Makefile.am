@@ -9,12 +9,9 @@ INCLUDES = 						\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
 	$(NULL)
 
-
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libmouse-properties.la
+noinst_LTLIBRARIES = libmouse-properties.la
 
 libmouse_properties_la_SOURCES =	\
-	mouse-module.c			\
 	cc-mouse-panel.c		\
 	cc-mouse-panel.h		\
 	gnome-mouse-properties.c	\
@@ -25,7 +22,6 @@ libmouse_properties_la_SOURCES =	\
 	gnome-mouse-test.h
 
 libmouse_properties_la_LIBADD = $(PANEL_LIBS) $(MOUSE_PANEL_LIBS)
-libmouse_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 test_gnome_mouse_test_SOURCES =			\
 	gnome-mouse-test.c		\

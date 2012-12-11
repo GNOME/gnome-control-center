@@ -12,12 +12,9 @@ INCLUDES = 						\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
 	$(NULL)
 
-
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libwacom-properties.la
+noinst_LTLIBRARIES = libwacom-properties.la
 
 libwacom_properties_la_SOURCES =	\
-	wacom-module.c			\
 	cc-wacom-panel.c		\
 	cc-wacom-panel.h		\
 	cc-wacom-page.c			\
@@ -35,7 +32,6 @@ libwacom_properties_la_SOURCES =	\
 	gsd-enums.h
 
 libwacom_properties_la_LIBADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS) $(builddir)/calibrator/libwacom-calibrator.la
-libwacom_properties_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 noinst_PROGRAMS = test-wacom
 

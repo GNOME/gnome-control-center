@@ -12,11 +12,9 @@ foo-marshal.c: foo-marshal.h
 foo-marshal.h: foo-marshal.list
 	$(AM_V_GEN) ( $(GLIB_GENMARSHAL) --prefix=foo_marshal $(srcdir)/foo-marshal.list --header > foo-marshal.h )
 
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libdisplay.la
+noinst_LTLIBRARIES = libdisplay.la
 
 libdisplay_la_SOURCES =		\
-	display-module.c	\
 	cc-display-panel.c	\
 	cc-display-panel.h	\
 	cc-rr-labeler.c		\
@@ -26,7 +24,6 @@ libdisplay_la_SOURCES =		\
 	$(MARSHALFILES)
 
 libdisplay_la_LIBADD = $(PANEL_LIBS) $(DISPLAY_PANEL_LIBS)
-libdisplay_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 # You will need a recent intltool or the patch from this bug
 # http://bugzilla.gnome.org/show_bug.cgi?id=462312

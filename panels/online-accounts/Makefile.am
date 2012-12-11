@@ -10,8 +10,7 @@ INCLUDES = 						\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	$(NULL)
 
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libonline-accounts.la
+noinst_LTLIBRARIES = libonline-accounts.la
 
 libonline_accounts_la_SOURCES =		\
 	cc-online-accounts-add-account-dialog.c	\

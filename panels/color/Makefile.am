@@ -11,16 +11,13 @@ INCLUDES = 						\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	$(NULL)
 
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libcolor.la
+noinst_LTLIBRARIES = libcolor.la
 
 libcolor_la_SOURCES =		\
-	color-module.c		\
 	cc-color-panel.c	\
 	cc-color-panel.h
 
 libcolor_la_LIBADD = $(PANEL_LIBS) $(COLOR_PANEL_LIBS)
-libcolor_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui
 dist_ui_DATA = color.ui

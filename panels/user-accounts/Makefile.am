@@ -4,8 +4,7 @@ SUBDIRS = data
 cappletname = user-accounts
 NULL =
 
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libuser-accounts.la
+noinst_LTLIBRARIES = libuser-accounts.la
 
 AM_CPPFLAGS =						\
 	-DDATADIR=\""$(datadir)"\"			\
@@ -57,7 +56,6 @@ libuser_accounts_la_SOURCES =		\
 	um-editable-combo.c		\
 	um-user-panel.h 		\
 	um-user-panel.c			\
-	um-user-module.c		\
 	um-realm-manager.c		\
 	um-realm-manager.h		\
 	$(BUILT_SOURCES)
@@ -65,7 +63,7 @@ libuser_accounts_la_SOURCES =		\
 libuser_accounts_la_LIBADD = 		\
 	$(PANEL_LIBS)			\
 	$(USER_ACCOUNTS_PANEL_LIBS)	\
-	$(top_builddir)/panels/common/liblanguage.la \
+	$(builddir)/../common/liblanguage.la	\
 	-lpwquality			\
 	-lcrypt				\
 	-lm
@@ -73,8 +71,6 @@ libuser_accounts_la_LIBADD = 		\
 if BUILD_CHEESE
 libuser_accounts_la_LIBADD += $(CHEESE_LIBS)
 endif
-
-libuser_accounts_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 um-realm-generated.c: $(srcdir)/data/org.freedesktop.realmd.xml
 	$(AM_V_GEN) gdbus-codegen --interface-prefix org.freedesktop.realmd. \

@@ -864,29 +864,3 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 
 	gtk_widget_show_all (GTK_WIDGET (self));
 }
-
-void
-cc_bluetooth_panel_register (GIOModule *module)
-{
-	cc_bluetooth_panel_register_type (G_TYPE_MODULE (module));
-	g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,
-					CC_TYPE_BLUETOOTH_PANEL,
-					"bluetooth", 0);
-}
-
-/* GIO extension stuff */
-void
-g_io_module_load (GIOModule *module)
-{
-	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-
-	/* register the panel */
-	cc_bluetooth_panel_register (module);
-}
-
-void
-g_io_module_unload (GIOModule *module)
-{
-}
-

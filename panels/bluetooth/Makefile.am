@@ -1,8 +1,7 @@
 # This is used in PANEL_CFLAGS
 cappletname = bluetooth
 
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libbluetooth.la
+noinst_LTLIBRARIES = libbluetooth.la
 
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
@@ -16,7 +15,6 @@ libbluetooth_la_SOURCES =			\
 	cc-bluetooth-panel.h
 
 libbluetooth_la_LIBADD = $(PANEL_LIBS) $(BLUETOOTH_LIBS)
-libbluetooth_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 desktopdir = $(datadir)/applications
 desktop_in_in_files = bluetooth-properties.desktop.in.in

@@ -160,12 +160,3 @@ cc_region_panel_init (CcRegionPanel * self)
 	setup_formats (priv->builder);
 	setup_system (priv->builder);
 }
-
-void
-cc_region_panel_register (GIOModule * module)
-{
-	cc_region_panel_register_type (G_TYPE_MODULE (module));
-	g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,
-					CC_TYPE_REGION_PANEL,
-					"region", 0);
-}

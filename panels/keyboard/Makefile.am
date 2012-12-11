@@ -1,11 +1,9 @@
 # This is used in PANEL_CFLAGS
 cappletname = keyboard
 
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libkeyboard.la
+noinst_LTLIBRARIES = libkeyboard.la
 
 libkeyboard_la_SOURCES =   \
-	keyboard-module.c		\
 	cc-keyboard-panel.c		\
 	cc-keyboard-panel.h		\
 	cc-keyboard-item.c		\
@@ -21,7 +19,6 @@ libkeyboard_la_SOURCES =   \
 
 libkeyboard_la_CFLAGS = $(PANEL_CFLAGS) $(KEYBOARD_PANEL_CFLAGS) -I$(top_srcdir)/panels/common/
 libkeyboard_la_LIBADD = $(PANEL_LIBS) $(KEYBOARD_PANEL_LIBS)
-libkeyboard_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 @INTLTOOL_DESKTOP_RULE@
 

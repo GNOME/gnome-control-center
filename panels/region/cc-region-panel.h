@@ -67,8 +67,6 @@ struct _CcRegionPanelClass
 
 GType cc_region_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_region_panel_register (GIOModule *module);
-
 G_END_DECLS
 
 #endif /* _CC_REGION_PANEL_H */

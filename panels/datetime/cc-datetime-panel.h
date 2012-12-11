@@ -67,8 +67,6 @@ struct _CcDateTimePanelClass
 
 GType cc_date_time_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_date_time_panel_register (GIOModule *module);
-
 G_END_DECLS
 
 #endif /* _CC_DATE_TIME_PANEL_H */

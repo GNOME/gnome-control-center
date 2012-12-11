@@ -136,8 +136,7 @@ check-local: test-timezone-gfx test-endianess test-timezone
 	$(builddir)/test-endianess
 #	$(builddir)/test-timezone
 
-ccpanelsdir = $(PANELS_DIR)
-ccpanels_LTLIBRARIES = libdate_time.la
+noinst_LTLIBRARIES = libdate_time.la
 
 
 # This requires running d-bus session and accessible timedate1 daemon
@@ -159,7 +158,6 @@ timedated.h: Makefile.am timedated1-interface.xml
 		$(srcdir)/timedated1-interface.xml
 
 libdate_time_la_SOURCES =	\
-	datetime-module.c	\
 	cc-datetime-panel.c	\
 	cc-datetime-panel.h	\
 	cc-timezone-map.c	\
@@ -171,8 +169,6 @@ libdate_time_la_SOURCES =	\
 	$(NULL)
 
 libdate_time_la_LIBADD = $(PANEL_LIBS) $(DATETIME_PANEL_LIBS)
-libdate_time_la_LDFLAGS = $(PANEL_LDFLAGS)
-
 
 polkitdir = $(datadir)/polkit-1/actions
 polkit_in_files = org.gnome.controlcenter.datetime.policy.in

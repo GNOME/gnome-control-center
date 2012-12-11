@@ -67,8 +67,6 @@ struct _CcKeyboardPanelClass
 
 GType cc_keyboard_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_keyboard_panel_register (GIOModule *module);
-
 G_END_DECLS
 
 #endif /* _CC_KEYBOARD_PANEL_H */

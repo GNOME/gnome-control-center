@@ -66,8 +66,6 @@ struct _CcPrivacyPanelClass
 
 GType cc_privacy_panel_get_type (void) G_GNUC_CONST;
 
-void  cc_privacy_panel_register (GIOModule *module);
-
 G_END_DECLS
 
 #endif /* _CC_PRIVACY_PANEL_H */

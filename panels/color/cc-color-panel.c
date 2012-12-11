@@ -2600,13 +2600,3 @@ cc_color_panel_init (CcColorPanel *prefs)
                     G_CALLBACK (gcm_prefs_window_realize_cb),
                     prefs);
 }
-
-void
-cc_color_panel_register (GIOModule *module)
-{
-  cc_color_panel_register_type (G_TYPE_MODULE (module));
-  g_io_extension_point_implement (CC_SHELL_PANEL_EXTENSION_POINT,
-                                  CC_TYPE_COLOR_PANEL,
-                                  "color", 0);
-}
-
