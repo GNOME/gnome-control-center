@@ -286,18 +286,6 @@ AC_SUBST(KRB5_LIBS)
 USER_ACCOUNTS_PANEL_CFLAGS="$USER_ACCOUNTS_PANEL_CFLAGS $KRB5_CFLAGS"
 USER_ACCOUNTS_PANEL_LIBS="$USER_ACCOUNTS_PANEL_LIBS $KRB5_LIBS"
 
-dnl ==============================================
-dnl End: Check that we meet the  dependencies
-dnl ==============================================
-
-AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal, no)
-
-if test x"$GLIB_GENMARSHAL" = xno; then
-  AC_MSG_ERROR([glib-genmarshal executable not found in your path - should be installed with glib])
-fi
-
-AC_SUBST(GLIB_GENMARSHAL)
-
 dnl =======================================
 dnl Panels
 dnl =======================================
