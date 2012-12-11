@@ -14,8 +14,6 @@ noinst_LTLIBRARIES = libuniversal-access.la
 libuniversal_access_la_SOURCES =		\
 	cc-ua-panel.c				\
 	cc-ua-panel.h				\
-	cc-marshal.c				\
-	cc-marshal.h				\
 	zoom-options.c				\
 	zoom-options.h
 
