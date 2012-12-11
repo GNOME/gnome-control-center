@@ -5,15 +5,6 @@ INCLUDES =					\
 
 bin_PROGRAMS = gnome-control-center
 
-MARSHAL_FILES = cc-shell-marshal.c cc-shell-marshal.h
-BUILT_SOURCES = $(MARSHAL_FILES)
-
-cc-shell-marshal.h: cc-shell-marshal.list
-	$(AM_V_GEN) $(GLIB_GENMARSHAL) --prefix=cc_shell_marshal $< --header > $@
-
-cc-shell-marshal.c: cc-shell-marshal.list
-	$(AM_V_GEN) $(GLIB_GENMARSHAL) --prefix=cc_shell_marshal $< --body --header > $@
-
 gnome_control_center_SOURCES =			\
 	control-center.c			\
 	cc-shell-log.c				\
@@ -100,8 +91,7 @@ EXTRA_DIST =					\
 	$(ui_DATA)				\
 	gnome-control-center.desktop.in.in	\
 	gnomecc.directory.in			\
-	gnomecc.menu.in				\
-	cc-shell-marshal.list
+	gnomecc.menu.in
 
 DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in gnomecc.directory gnomecc.menu
 

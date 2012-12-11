@@ -20,7 +20,6 @@
 
 #include "cc-shell-item-view.h"
 #include "cc-shell-model.h"
-#include "cc-shell-marshal.h"
 
 G_DEFINE_TYPE (CcShellItemView, cc_shell_item_view, GTK_TYPE_ICON_VIEW)
 
@@ -186,7 +185,7 @@ cc_shell_item_view_class_init (CcShellItemViewClass *klass)
                                                   0,
                                                   NULL,
                                                   NULL,
-                                                  cc_shell_marshal_VOID__STRING_STRING_STRING,
+                                                  g_cclosure_marshal_generic,
                                                   G_TYPE_NONE,
                                                   3,
                                                   G_TYPE_STRING,
