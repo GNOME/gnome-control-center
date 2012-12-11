@@ -264,21 +264,6 @@ add_one_language (gpointer d)
     goto next;
   }
 
-  /* Add separator between initial languages and new additions */
-  if (g_object_get_data (G_OBJECT (data->store), "needs-separator")) {
-    GtkTreeIter iter;
-
-    gtk_list_store_insert_with_values (GTK_LIST_STORE (data->store),
-                                       &iter,
-                                       -1,
-                                       LOCALE_COL, NULL,
-                                       DISPLAY_LOCALE_COL, "Don't show",
-                                       SEPARATOR_COL, TRUE,
-                                       USER_LANGUAGE, FALSE,
-                                       -1);
-    g_object_set_data (G_OBJECT (data->store), "needs-separator", NULL);
-  }
-
   gtk_list_store_insert_with_values (data->store,
                                      &iter,
                                      -1,
@@ -335,23 +320,27 @@ cc_common_language_get_current_language (void)
         return language;
 }
 
+typedef struct {
+	GtkListStore *store;
+	gboolean      user_lang;
+} LangForeachData;
+
 static void
 languages_foreach_cb (gpointer key,
 		      gpointer value,
 		      gpointer user_data)
 {
-	GtkListStore *store = (GtkListStore *) user_data;
+	LangForeachData *data = (LangForeachData *) user_data;
 	const char *locale = (const char *) key;
 	const char *display_locale = (const char *) value;
-	GtkTreeIter iter;
 
-        gtk_list_store_insert_with_values (store,
-                                           &iter,
+        gtk_list_store_insert_with_values (data->store,
+                                           NULL,
                                            -1,
                                            LOCALE_COL, locale,
                                            DISPLAY_LOCALE_COL, display_locale,
                                            SEPARATOR_COL, FALSE,
-                                           USER_LANGUAGE, TRUE,
+                                           USER_LANGUAGE, data->user_lang,
                                            -1);
 }
 
@@ -371,11 +360,14 @@ separator_func (GtkTreeModel *model,
 
 void
 cc_common_language_setup_list (GtkWidget    *treeview,
+			       GHashTable   *users,
 			       GHashTable   *initial)
 {
 	GtkCellRenderer *cell;
 	GtkTreeViewColumn *column;
 	GtkListStore *store;
+	LangForeachData data;
+	GList *langs, *l;
 
         cell = gtk_cell_renderer_text_new ();
 	g_object_set (cell,
@@ -396,14 +388,33 @@ cc_common_language_setup_list (GtkWidget    *treeview,
 
         gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), GTK_TREE_MODEL (store));
 
+        data.store = store;
+
+        /* Add the original users languages */
+        if (users != NULL && g_hash_table_size (users) > 0) {
+                data.user_lang = TRUE;
+                g_hash_table_foreach (users, (GHFunc) languages_foreach_cb, &data);
+
+                gtk_list_store_insert_with_values (store,
+                                                   NULL,
+                                                   -1,
+                                                   LOCALE_COL, NULL,
+                                                   DISPLAY_LOCALE_COL, "Don't show",
+                                                   SEPARATOR_COL, TRUE,
+                                                   USER_LANGUAGE, FALSE,
+                                                   -1);
+        }
 
         /* Add languages from the initial hashtable */
-        g_hash_table_foreach (initial, (GHFunc) languages_foreach_cb, store);
+        data.user_lang = FALSE;
+        langs = initial ? g_hash_table_get_keys (initial) : NULL;
+        for (l = langs; l != NULL; l = l->next) {
+                char *lang = l->data;
 
-        /* Mark the need for a separator if we had any languages added */
-        if (initial != NULL &&
-            g_hash_table_size (initial) > 0) {
-		g_object_set_data (G_OBJECT (store), "needs-separator", GINT_TO_POINTER (TRUE));
+                if (g_hash_table_lookup (users, lang) != NULL)
+                        continue;
+
+                languages_foreach_cb (lang, g_hash_table_lookup (initial, lang), &data);
 	}
 }
 
@@ -617,8 +628,6 @@ GHashTable *
 cc_common_language_get_initial_languages (void)
 {
         GHashTable *ht;
-        char *name;
-        char *language;
 
         ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
@@ -634,6 +643,19 @@ cc_common_language_get_initial_languages (void)
         insert_language (ht, "ja", "ja_JP", TRUE, "Japanese");
         insert_language (ht, "ru", "ru_RU", FALSE, "Russian");
         insert_language (ht, "ar", "ar_EG", TRUE, "Arabic");
+
+        return ht;
+}
+
+GHashTable *
+cc_common_language_get_user_languages (void)
+{
+        GHashTable *ht;
+        char *name;
+        char *language;
+
+        ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+
         /* Add the languages used by other users on the system */
         add_other_users_language (ht);
 

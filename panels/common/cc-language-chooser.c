@@ -310,7 +310,7 @@ cc_language_chooser_new (GtkWidget *parent, gboolean regions)
         gtk_widget_grab_focus (entry);
 
 	user_langs = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
-	cc_common_language_setup_list (list, user_langs);
+	cc_common_language_setup_list (list, user_langs, NULL);
 
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
 	filter_model = gtk_tree_model_filter_new (model, NULL);

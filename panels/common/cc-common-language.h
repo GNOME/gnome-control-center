@@ -47,9 +47,11 @@ gboolean cc_common_language_has_font                (const gchar  *locale);
 gchar   *cc_common_language_get_current_language    (void);
 
 GHashTable *cc_common_language_get_initial_languages   (void);
+GHashTable *cc_common_language_get_user_languages      (void);
 GHashTable *cc_common_language_get_initial_regions     (const gchar *lang);
 
 void     cc_common_language_setup_list              (GtkWidget    *treeview,
+						     GHashTable   *users,
 						     GHashTable   *initial);
 void     cc_common_language_select_current_language (GtkTreeView  *treeview);
 

@@ -277,7 +277,7 @@ void
 setup_language (GtkBuilder *builder)
 {
 	GtkWidget *treeview;
-	GHashTable *user_langs;
+	GHashTable *user_langs, *popular_langs;
 	GError *error = NULL;
 	GtkWidget *widget;
 	GtkStyleContext *context;
@@ -339,8 +339,14 @@ setup_language (GtkBuilder *builder)
 	}
 
 	/* Add user languages */
-	user_langs = cc_common_language_get_initial_languages ();
-	cc_common_language_setup_list (treeview, user_langs);
+	user_langs = cc_common_language_get_user_languages ();
+	popular_langs = cc_common_language_get_initial_languages ();
+	cc_common_language_setup_list (treeview, user_langs, popular_langs);
+
+	g_object_set_data_full (G_OBJECT (treeview), "user-langs",
+				user_langs, (GDestroyNotify) g_hash_table_destroy);
+	g_object_set_data_full (G_OBJECT (treeview), "popular-langs",
+				popular_langs, (GDestroyNotify) g_hash_table_destroy);
 
         /* And select the current language */
         cc_common_language_select_current_language (GTK_TREE_VIEW (treeview));
