@@ -491,6 +491,8 @@ panels/printers/gnome-printers-panel.desktop.in
 panels/privacy/Makefile
 panels/privacy/gnome-privacy-panel.desktop.in
 panels/network/Makefile
+panels/network/wireless-security/Makefile
+panels/network/connection-editor/Makefile
 panels/network/gnome-network-panel.desktop.in
 panels/universal-access/Makefile
 panels/universal-access/gnome-universal-access-panel.desktop.in

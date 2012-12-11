@@ -1,5 +1,7 @@
 cappletname = network
 
+SUBDIRS = wireless-security connection-editor
+
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(NETWORK_PANEL_CFLAGS)				\
@@ -7,6 +9,7 @@ INCLUDES = 						\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
+	-I$(srcdir)/wireless-security			\
 	$(NULL)
 
 ccpanelsdir = $(PANELS_DIR)
@@ -42,7 +45,8 @@ libnetwork_la_SOURCES =					\
 	rfkill-glib.h					\
 	rfkill.h
 
-libnetwork_la_LIBADD = $(PANEL_LIBS) $(NETWORK_PANEL_LIBS) $(NETWORK_MANAGER_LIBS)
+libnetwork_la_LIBADD = $(PANEL_LIBS) $(NETWORK_PANEL_LIBS) $(NETWORK_MANAGER_LIBS) $(builddir)/connection-editor/libconnection-editor.la
+
 libnetwork_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 uidir = $(pkgdatadir)/ui
