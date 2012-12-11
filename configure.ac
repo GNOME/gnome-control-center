@@ -410,7 +410,7 @@ panels/common/Makefile
 panels/background/Makefile
 panels/background/gnome-background-panel.desktop.in
 panels/bluetooth/Makefile
-panels/bluetooth/bluetooth-properties.desktop.in
+panels/bluetooth/gnome-bluetooth-panel.desktop.in
 panels/datetime/Makefile
 panels/datetime/gnome-datetime-panel.desktop.in
 panels/datetime/po-timezones/Makefile
