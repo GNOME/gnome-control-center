@@ -1107,6 +1107,7 @@ update_separator_func (GtkWidget **separator,
   if (*separator == NULL)
     {
       *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      g_object_ref_sink (*separator);
       gtk_widget_show (*separator);
     }
 }
