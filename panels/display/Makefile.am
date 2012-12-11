@@ -4,14 +4,6 @@ cappletname = display
 uidir = $(pkgdatadir)/ui
 dist_ui_DATA = display-capplet.ui
 
-MARSHALFILES = foo-marshal.c foo-marshal.h
-BUILT_SOURCES = $(MARSHALFILES)
-
-foo-marshal.c: foo-marshal.h
-	$(AM_V_GEN) ( $(GLIB_GENMARSHAL) --prefix=foo_marshal $(srcdir)/foo-marshal.list --header --body > foo-marshal.c )
-foo-marshal.h: foo-marshal.list
-	$(AM_V_GEN) ( $(GLIB_GENMARSHAL) --prefix=foo_marshal $(srcdir)/foo-marshal.list --header > foo-marshal.h )
-
 noinst_LTLIBRARIES = libdisplay.la
 
 libdisplay_la_SOURCES =		\
@@ -20,8 +12,7 @@ libdisplay_la_SOURCES =		\
 	cc-rr-labeler.c		\
 	cc-rr-labeler.h		\
 	scrollarea.c		\
-	scrollarea.h		\
-	$(MARSHALFILES)
+	scrollarea.h
 
 libdisplay_la_LIBADD = $(PANEL_LIBS) $(DISPLAY_PANEL_LIBS)
 
@@ -68,7 +59,5 @@ update-icon-cache:
 		echo "***   $(gtk_update_icon_cache)"; \
 	fi
 endif
-
-EXTRA_DIST = foo-marshal.list
 
 -include $(top_srcdir)/git.mk

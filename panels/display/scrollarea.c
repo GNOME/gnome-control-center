@@ -20,8 +20,6 @@
 
 #include <gdk/gdk.h>
 
-#include "foo-marshal.h"
-
 G_DEFINE_TYPE_WITH_CODE (FooScrollArea, foo_scroll_area, GTK_TYPE_CONTAINER,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_SCROLLABLE, NULL));
 
@@ -273,7 +271,7 @@ foo_scroll_area_class_init (FooScrollAreaClass *class)
                   G_STRUCT_OFFSET (FooScrollAreaClass,
                                    viewport_changed),
                   NULL, NULL,
-                  foo_marshal_VOID__BOXED_BOXED,
+                  g_cclosure_marshal_generic,
                   G_TYPE_NONE, 2,
                   GDK_TYPE_RECTANGLE,
                   GDK_TYPE_RECTANGLE);
@@ -285,7 +283,7 @@ foo_scroll_area_class_init (FooScrollAreaClass *class)
                   G_STRUCT_OFFSET (FooScrollAreaClass,
                                    paint),
                   NULL, NULL,
-                  g_cclosure_marshal_VOID__POINTER,
+                  g_cclosure_marshal_generic,
                   G_TYPE_NONE, 1,
                   G_TYPE_POINTER);
 }
