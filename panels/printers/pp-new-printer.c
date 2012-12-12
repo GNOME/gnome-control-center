@@ -1081,6 +1081,12 @@ get_missing_executables_cb (GObject      *source_object,
   GList    *executables = NULL;
   GList    *item;
 
+  if (data->ppd_file_name)
+    {
+      g_unlink (data->ppd_file_name);
+      g_clear_pointer (&data->ppd_file_name, g_free);
+    }
+
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
@@ -1156,12 +1162,6 @@ DBus method \"MissingExecutables\" to find missing executables and filters.");
     {
       g_object_unref (source_object);
       install_missing_executables_cb (data);
-    }
-
-  if (data->ppd_file_name)
-    {
-      g_unlink (data->ppd_file_name);
-      g_clear_pointer (&data->ppd_file_name, g_free);
     }
 }
 
