@@ -136,10 +136,8 @@ cc_shell_model_add_item (CcShellModel   *model,
   const gchar *comment = g_app_info_get_description (appinfo);
   GdkPixbuf *pixbuf = NULL;
   const char * const * keywords;
-  GDesktopAppInfo *app;
 
-  app = gmenu_tree_entry_get_app_info (item);
-  keywords = g_desktop_app_info_get_keywords (app);
+  keywords = g_desktop_app_info_get_keywords (G_DESKTOP_APP_INFO (appinfo));
 
   pixbuf = load_pixbuf_for_gicon (icon);
 
@@ -153,6 +151,4 @@ cc_shell_model_add_item (CcShellModel   *model,
                                      COL_GICON, icon,
                                      COL_KEYWORDS, keywords,
                                      -1);
-
-  g_object_unref (app);
 }
