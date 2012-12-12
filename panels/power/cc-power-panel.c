@@ -1260,15 +1260,13 @@ add_power_saving_section (CcPowerPanel *self)
                                     update_separator_func,
                                     NULL, NULL);
 
-  box = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
-                                  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (box), GTK_SHADOW_IN);
+  box = gtk_frame_new (NULL);
+  gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_IN);
   gtk_widget_set_margin_left (box, 50);
   gtk_widget_set_margin_right (box, 50);
   gtk_widget_set_margin_bottom (box, 24);
   gtk_widget_show (box);
-  egg_list_box_add_to_scrolled (EGG_LIST_BOX (widget), GTK_SCROLLED_WINDOW (box));
+  gtk_container_add (GTK_CONTAINER (box), widget);
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
 
   priv->brightness_row = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
@@ -1321,14 +1319,6 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_size_group_add_widget (priv->row_sizegroup, box);
 
 #ifdef HAVE_NETWORK_MANAGER
-  priv->nm_client = nm_client_new ();
-  g_signal_connect (priv->nm_client, "notify",
-                    G_CALLBACK (nm_client_state_changed), self);
-  g_signal_connect (priv->nm_client, "device-added",
-                    G_CALLBACK (nm_device_changed), self);
-  g_signal_connect (priv->nm_client, "device-removed",
-                    G_CALLBACK (nm_device_changed), self);
-
   priv->wifi_row = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
   label = gtk_label_new (_("_Wi-Fi"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
@@ -1347,6 +1337,14 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
   gtk_container_add (GTK_CONTAINER (widget), box);
   gtk_size_group_add_widget (priv->row_sizegroup, box);
+
+  priv->nm_client = nm_client_new ();
+  g_signal_connect (priv->nm_client, "notify",
+                    G_CALLBACK (nm_client_state_changed), self);
+  g_signal_connect (priv->nm_client, "device-added",
+                    G_CALLBACK (nm_device_changed), self);
+  g_signal_connect (priv->nm_client, "device-removed",
+                    G_CALLBACK (nm_device_changed), self);
   nm_device_changed (priv->nm_client, NULL, self);
 
   g_signal_connect (G_OBJECT (priv->wifi_switch), "notify::active",
@@ -1537,15 +1535,13 @@ add_automatic_suspend_section (CcPowerPanel *self)
   g_signal_connect_swapped (widget, "child-activated",
                             G_CALLBACK (activate_child), self);
 
-  box = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
-                                  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (box), GTK_SHADOW_IN);
+  box = gtk_frame_new (NULL);
+  gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_IN);
   gtk_widget_set_margin_left (box, 50);
   gtk_widget_set_margin_right (box, 50);
   gtk_widget_set_margin_bottom (box, 24);
   gtk_widget_show (box);
-  egg_list_box_add_to_scrolled (EGG_LIST_BOX (widget), GTK_SCROLLED_WINDOW (box));
+  gtk_container_add (GTK_CONTAINER (box), widget);
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
 
   self->priv->automatic_suspend_row = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
@@ -1678,17 +1674,25 @@ add_battery_section (CcPowerPanel *self)
                               device_sort_func, NULL, NULL);
   gtk_widget_show (widget);
 
-  priv->battery_section = box = gtk_scrolled_window_new (NULL, NULL);
-  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (box),
-                                  GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (box), GTK_SHADOW_IN);
+  priv->battery_section = box = gtk_frame_new (NULL);
+  gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_IN);
   gtk_widget_set_margin_left (box, 50);
   gtk_widget_set_margin_right (box, 50);
   gtk_widget_set_margin_top (box, 24);
   gtk_widget_set_margin_bottom (box, 24);
-  egg_list_box_add_to_scrolled (EGG_LIST_BOX (widget), GTK_SCROLLED_WINDOW (box));
+  gtk_container_add (GTK_CONTAINER (box), widget);
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
   gtk_widget_show (box);
+}
+
+static gboolean
+grr (gpointer data)
+{
+  CcPowerPanel *self = data;
+
+  gtk_widget_queue_resize (GTK_WIDGET (self));
+
+  return G_SOURCE_REMOVE;
 }
 
 static void
@@ -1767,6 +1771,8 @@ cc_power_panel_init (CcPowerPanel *self)
   gtk_style_context_add_class (gtk_widget_get_style_context (gtk_widget_get_parent (widget)), "view");
   gtk_style_context_add_class (gtk_widget_get_style_context (gtk_widget_get_parent (widget)), "content-view");
   g_object_unref (widget);
+
+  g_idle_add (grr, self);
 }
 
 void
