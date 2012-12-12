@@ -1147,19 +1147,19 @@ update_shortcut_label (GtkWidget  *widget,
 static void
 update_shortcuts (GtkBuilder *builder)
 {
-  char *previous, *next;
+  char **previous, **next;
   GSettings *settings;
 
-  settings = g_settings_new ("org.gnome.settings-daemon.plugins.media-keys");
+  settings = g_settings_new ("org.gnome.desktop.wm.keybindings");
 
-  previous = g_settings_get_string (settings, "switch-input-source-backward");
-  next = g_settings_get_string (settings, "switch-input-source");
+  previous = g_settings_get_strv (settings, "switch-input-source-backward");
+  next = g_settings_get_strv (settings, "switch-input-source");
 
-  update_shortcut_label (WID ("prev-source-shortcut-label"), previous);
-  update_shortcut_label (WID ("next-source-shortcut-label"), next);
+  update_shortcut_label (WID ("prev-source-shortcut-label"), previous[0]);
+  update_shortcut_label (WID ("next-source-shortcut-label"), next[0]);
 
-  g_free (previous);
-  g_free (next);
+  g_strfreev (previous);
+  g_strfreev (next);
 }
 
 void
