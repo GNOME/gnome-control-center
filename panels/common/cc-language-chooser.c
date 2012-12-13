@@ -286,6 +286,7 @@ cc_language_chooser_new (GtkWidget *parent, gboolean regions)
         }
 
         chooser = (GtkWidget *) gtk_builder_get_object (builder, "dialog");
+        gtk_window_set_default_size (GTK_WINDOW (chooser), 250, 400);
 
         if (regions) {
                 gtk_window_set_title (GTK_WINDOW (chooser), _("Select a region"));
