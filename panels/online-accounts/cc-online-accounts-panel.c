@@ -246,7 +246,7 @@ cc_goa_panel_init (CcGoaPanel *panel)
   renderer = gtk_cell_renderer_pixbuf_new ();
   gtk_tree_view_column_pack_end (column, renderer, FALSE);
   g_object_set (G_OBJECT (renderer),
-                "icon-name", "dialog-error-symbolic",
+                "icon-name", "dialog-warning-symbolic",
                 NULL);
   gtk_tree_view_column_set_attributes (column,
                                        renderer,
@@ -312,9 +312,8 @@ show_page_nothing_selected (CcGoaPanel *panel)
 }
 
 static void
-on_info_bar_response (GtkInfoBar *info_bar,
-                      gint        response_id,
-                      gpointer    user_data)
+on_sign_in_button_clicked (GtkButton *button,
+                           gpointer   user_data)
 {
   CcGoaPanel *panel = CC_GOA_PANEL (user_data);
   GtkTreeIter iter;
@@ -377,13 +376,14 @@ show_page_account (CcGoaPanel  *panel,
   GList *children;
   GList *l;
   GtkWidget *box;
+  GtkWidget *button;
   GtkWidget *grid;
   GtkWidget *left_grid;
   GtkWidget *right_grid;
-  GtkWidget *bar;
   GtkWidget *label;
   GoaProvider *provider;
   GoaAccount *account;
+  GtkWidget *image;
   const gchar *provider_type;
 
   provider = NULL;
@@ -408,13 +408,41 @@ show_page_account (CcGoaPanel  *panel,
   /* And in with the new */
   if (goa_account_get_attention_needed (account))
     {
-      bar = gtk_info_bar_new ();
-      label = gtk_label_new (_("Expired credentials. Please log in again."));
-      gtk_container_add (GTK_CONTAINER (gtk_info_bar_get_content_area (GTK_INFO_BAR (bar))), label);
-      if (provider != NULL)
-        gtk_info_bar_add_button (GTK_INFO_BAR (bar), _("_Log In"), GTK_RESPONSE_OK);
-      gtk_box_pack_start (GTK_BOX (panel->accounts_vbox), bar, FALSE, TRUE, 0);
-      g_signal_connect (bar, "response", G_CALLBACK (on_info_bar_response), panel);
+      GtkWidget *labels_grid;
+
+      grid = gtk_grid_new ();
+      gtk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_HORIZONTAL);
+      gtk_grid_set_column_spacing (GTK_GRID (grid), 12);
+
+      image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_SMALL_TOOLBAR);
+      gtk_widget_set_valign (image, GTK_ALIGN_CENTER);
+      gtk_container_add (GTK_CONTAINER (grid), image);
+
+      labels_grid = gtk_grid_new ();
+      gtk_widget_set_halign (labels_grid, GTK_ALIGN_FILL);
+      gtk_widget_set_hexpand (labels_grid, TRUE);
+      gtk_widget_set_valign (labels_grid, GTK_ALIGN_CENTER);
+      gtk_orientable_set_orientation (GTK_ORIENTABLE (labels_grid), GTK_ORIENTATION_VERTICAL);
+      gtk_grid_set_column_spacing (GTK_GRID (labels_grid), 0);
+      gtk_container_add (GTK_CONTAINER (grid), labels_grid);
+
+      label = gtk_label_new (_("Credentials have expired."));
+      gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+      gtk_container_add (GTK_CONTAINER (labels_grid), label);
+
+      label = gtk_label_new (_("Sign in to enable this account."));
+      gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+      gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
+      gtk_container_add (GTK_CONTAINER (labels_grid), label);
+
+      button = gtk_button_new_with_mnemonic (_("_Sign In"));
+      if (provider == NULL)
+        gtk_widget_set_sensitive (button, FALSE);
+      gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
+      gtk_container_add (GTK_CONTAINER (grid), button);
+      g_signal_connect (button, "clicked", G_CALLBACK (on_sign_in_button_clicked), panel);
+
+      gtk_box_pack_end (GTK_BOX (panel->accounts_vbox), grid, FALSE, TRUE, 0);
     }
 
   left_grid = gtk_grid_new ();
