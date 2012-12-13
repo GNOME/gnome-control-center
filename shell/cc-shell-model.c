@@ -22,6 +22,8 @@
 #include "cc-shell-model.h"
 #include <string.h>
 
+#include <gio/gdesktopappinfo.h>
+
 #define GNOME_SETTINGS_PANEL_ID_KEY "X-GNOME-Settings-Panel"
 #define GNOME_SETTINGS_PANEL_CATEGORY GNOME_SETTINGS_PANEL_ID_KEY
 #define GNOME_SETTINGS_PANEL_ID_KEYWORDS "Keywords"
@@ -105,7 +107,7 @@ static void
 cc_shell_model_init (CcShellModel *self)
 {
   GType types[] = {G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
-      GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_ICON, G_TYPE_STRV};
+      GDK_TYPE_PIXBUF, G_TYPE_UINT, G_TYPE_STRING, G_TYPE_ICON, G_TYPE_STRV};
 
   gtk_list_store_set_column_types (GTK_LIST_STORE (self),
                                    N_COLS, types);
@@ -124,15 +126,14 @@ cc_shell_model_new (void)
 }
 
 void
-cc_shell_model_add_item (CcShellModel   *model,
-                         const gchar    *category_name,
-                         GMenuTreeEntry *item,
-                         const char     *id)
+cc_shell_model_add_item (CcShellModel    *model,
+                         CcPanelCategory  category,
+                         GAppInfo        *appinfo,
+                         const char      *id)
 {
-  GAppInfo    *appinfo = G_APP_INFO (gmenu_tree_entry_get_app_info (item));
   GIcon       *icon = g_app_info_get_icon (appinfo);
   const gchar *name = g_app_info_get_name (appinfo);
-  const gchar *desktop = gmenu_tree_entry_get_desktop_file_path (item);
+  const gchar *desktop = g_desktop_app_info_get_filename (G_DESKTOP_APP_INFO (appinfo));
   const gchar *comment = g_app_info_get_description (appinfo);
   GdkPixbuf *pixbuf = NULL;
   const char * const * keywords;
@@ -146,7 +147,7 @@ cc_shell_model_add_item (CcShellModel   *model,
                                      COL_DESKTOP_FILE, desktop,
                                      COL_ID, id,
                                      COL_PIXBUF, pixbuf,
-                                     COL_CATEGORY, category_name,
+                                     COL_CATEGORY, category,
                                      COL_DESCRIPTION, comment,
                                      COL_GICON, icon,
                                      COL_KEYWORDS, keywords,

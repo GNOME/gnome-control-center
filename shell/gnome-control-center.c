@@ -32,13 +32,12 @@
 #ifdef HAVE_CHEESE
 #include <clutter-gtk/clutter-gtk.h>
 #endif /* HAVE_CHEESE */
-#define GMENU_I_KNOW_THIS_IS_UNSTABLE
-#include <gmenu-tree.h>
 
 #include "cc-panel.h"
 #include "cc-shell.h"
 #include "cc-shell-category-view.h"
 #include "cc-shell-model.h"
+#include "cc-panel-loader.h"
 
 G_DEFINE_TYPE (GnomeControlCenter, gnome_control_center, CC_TYPE_SHELL)
 
@@ -55,36 +54,6 @@ G_DEFINE_TYPE (GnomeControlCenter, gnome_control_center, CC_TYPE_SHELL)
 #define SMALL_SCREEN_FIXED_HEIGHT 400
 
 #define MIN_ICON_VIEW_HEIGHT 300
-
-/* Extension points */
-extern GType cc_background_panel_get_type (void);
-#ifdef BUILD_BLUETOOTH
-extern GType cc_bluetooth_panel_get_type (void);
-#endif /* BUILD_BLUETOOTH */
-extern GType cc_color_panel_get_type (void);
-extern GType cc_date_time_panel_get_type (void);
-extern GType cc_display_panel_get_type (void);
-extern GType cc_info_panel_get_type (void);
-extern GType cc_keyboard_panel_get_type (void);
-extern GType cc_mouse_panel_get_type (void);
-#ifdef BUILD_NETWORK
-extern GType cc_network_panel_get_type (void);
-#endif /* BUILD_NETWORK */
-extern GType cc_goa_panel_get_type (void);
-extern GType cc_power_panel_get_type (void);
-#ifdef BUILD_PRINTERS
-extern GType cc_printers_panel_get_type (void);
-#endif /* BUILD_PRINTERS */
-extern GType cc_privacy_panel_get_type (void);
-extern GType cc_region_panel_get_type (void);
-extern GType cc_screen_panel_get_type (void);
-extern GType cc_search_panel_get_type (void);
-extern GType cc_sound_panel_get_type (void);
-extern GType cc_ua_panel_get_type (void);
-extern GType cc_user_panel_get_type (void);
-#ifdef BUILD_WACOM
-extern GType cc_wacom_panel_get_type (void);
-#endif /* BUILD_WACOM */
 
 typedef enum {
 	SMALL_SCREEN_UNSET,
@@ -107,17 +76,13 @@ struct _GnomeControlCenterPrivate
   GtkWidget  *lock_button;
   GPtrArray  *custom_widgets;
 
-  GMenuTree  *menu_tree;
   GtkListStore *store;
-  GHashTable *category_views;
 
   GtkTreeModel *search_filter;
   GtkWidget *search_view;
   gchar *filter_string;
 
   guint32 last_time;
-
-  GIOExtensionPoint *extension_point;
 
   gchar *default_window_title;
   gchar *default_window_icon;
@@ -214,28 +179,15 @@ activate_panel (GnomeControlCenter *shell,
                 GIcon              *gicon)
 {
   GnomeControlCenterPrivate *priv = shell->priv;
-  GType panel_type = G_TYPE_INVALID;
   GtkWidget *box;
   const gchar *icon_name;
-  GIOExtension *extension;
 
   if (!desktop_file)
     return FALSE;
   if (!id)
     return FALSE;
 
-  /* check if there is an extension point that implements this panel */
-  extension = g_io_extension_point_get_extension_by_name (priv->extension_point, id);
-  if (extension == NULL)
-    {
-      g_warning ("Could not find the loadable module for panel '%s'", id);
-      return FALSE;
-    }
-
-  panel_type = g_io_extension_get_type (extension);
-
-  /* create the panel */
-  priv->current_panel = g_object_new (panel_type, "shell", shell, "argv", argv, NULL);
+  priv->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_SHELL (shell), id, argv));
   cc_shell_set_active_panel (CC_SHELL (shell), CC_PANEL (priv->current_panel));
   gtk_widget_show (priv->current_panel);
 
@@ -545,20 +497,15 @@ model_filter_func (GtkTreeModel              *model,
 }
 
 static gboolean
-category_filter_func (GtkTreeModel *model,
-                      GtkTreeIter  *iter,
-                      gchar        *filter)
+category_filter_func (GtkTreeModel    *model,
+                      GtkTreeIter     *iter,
+                      CcPanelCategory  filter)
 {
-  gchar *category;
-  gboolean result;
+  guint category;
 
   gtk_tree_model_get (model, iter, COL_CATEGORY, &category, -1);
 
-  result = (g_strcmp0 (category, filter) == 0);
-
-  g_free (category);
-
-  return result;
+  return (category == filter);
 }
 
 static void
@@ -734,16 +681,14 @@ setup_lock (GnomeControlCenter *shell)
 }
 
 static void
-maybe_add_category_view (GnomeControlCenter *shell,
-                         const char         *name)
+add_category_view (GnomeControlCenter *shell,
+                   CcPanelCategory     category,
+                   const char         *name)
 {
   GtkTreeModel *filter;
   GtkWidget *categoryview;
 
-  if (g_hash_table_lookup (shell->priv->category_views, name) != NULL)
-    return;
-
-  if (g_hash_table_size (shell->priv->category_views) > 0)
+  if (category > 0)
     {
       GtkWidget *separator;
       separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
@@ -758,7 +703,7 @@ maybe_add_category_view (GnomeControlCenter *shell,
                                       NULL);
   gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter),
                                           (GtkTreeModelFilterVisibleFunc) category_filter_func,
-                                          g_strdup (name), g_free);
+                                          GINT_TO_POINTER (category), NULL);
 
   categoryview = cc_shell_category_view_new (name, filter);
   gtk_box_pack_start (GTK_BOX (shell->priv->main_vbox), categoryview, FALSE, TRUE, 0);
@@ -778,101 +723,6 @@ maybe_add_category_view (GnomeControlCenter *shell,
   g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
                     "keynav-failed",
                     G_CALLBACK (keynav_failed), shell);
-
-  g_hash_table_insert (shell->priv->category_views, g_strdup (name), categoryview);
-}
-
-static char *
-get_id_for_menu_entry (GMenuTreeEntry *item)
-{
-  const char *desktop_name;
-
-  desktop_name = gmenu_tree_entry_get_desktop_file_id (item);
-  if (!g_str_has_prefix (desktop_name, "gnome-") ||
-      !g_str_has_suffix (desktop_name, "-panel.desktop"))
-    return NULL;
-
-  return g_strndup (desktop_name + strlen ("gnome-"),
-                    strlen (desktop_name) - strlen ("-panel.desktop") - strlen ("gnome-"));
-}
-
-static void
-reload_menu (GnomeControlCenter *shell)
-{
-  GError *error;
-  GMenuTreeDirectory *d;
-  GMenuTreeIter *iter;
-  GMenuTreeItemType next_type;
-
-  error = NULL;
-  if (!gmenu_tree_load_sync (shell->priv->menu_tree, &error))
-    {
-      g_warning ("Could not load control center menu: %s", error->message);
-      g_clear_error (&error);
-      return;
-    }
-
-
-  d = gmenu_tree_get_root_directory (shell->priv->menu_tree);
-  iter = gmenu_tree_directory_iter (d);
-
-  while ((next_type = gmenu_tree_iter_next (iter)) != GMENU_TREE_ITEM_INVALID)
-    {
-      if (next_type == GMENU_TREE_ITEM_DIRECTORY)
-        {
-          GMenuTreeDirectory *subdir;
-          const gchar *dir_name;
-          GMenuTreeIter *sub_iter;
-          GMenuTreeItemType sub_next_type;
-
-          subdir = gmenu_tree_iter_get_directory (iter);
-          dir_name = gmenu_tree_directory_get_name (subdir);
-
-          maybe_add_category_view (shell, dir_name);
-
-          /* add the items from this category to the model */
-          sub_iter = gmenu_tree_directory_iter (subdir);
-          while ((sub_next_type = gmenu_tree_iter_next (sub_iter)) != GMENU_TREE_ITEM_INVALID)
-            {
-              if (sub_next_type == GMENU_TREE_ITEM_ENTRY)
-                {
-                  GMenuTreeEntry *item;
-                  char *id;
-
-                  item = gmenu_tree_iter_get_entry (sub_iter);
-                  id = get_id_for_menu_entry (item);
-
-                  if (id != NULL &&
-                      g_io_extension_point_get_extension_by_name (shell->priv->extension_point, id))
-                    {
-                      cc_shell_model_add_item (CC_SHELL_MODEL (shell->priv->store),
-                                               dir_name, item, id);
-                    }
-                  else
-                    {
-                      g_warning ("Not adding broken desktop file %s",
-                                 gmenu_tree_entry_get_desktop_file_id (item));
-                    }
-                  g_free (id);
-                  gmenu_tree_item_unref (item);
-                }
-            }
-
-          gmenu_tree_iter_unref (sub_iter);
-          gmenu_tree_item_unref (subdir);
-        }
-    }
-
-  gmenu_tree_iter_unref (iter);
-  gmenu_tree_item_unref (d);
-}
-
-static void
-on_menu_changed (GMenuTree          *monitor,
-                 GnomeControlCenter *shell)
-{
-  gtk_list_store_clear (shell->priv->store);
-  reload_menu (shell);
 }
 
 static void
@@ -888,57 +738,13 @@ setup_model (GnomeControlCenter *shell)
                                        gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (shell->priv->scrolled_window)));
 
   priv->store = (GtkListStore *) cc_shell_model_new ();
-  priv->category_views = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-  priv->menu_tree = gmenu_tree_new_for_path (MENUDIR "/gnomecc.menu", 0);
 
-  reload_menu (shell);
+  /* Add categories */
+  add_category_view (shell, CC_CATEGORY_PERSONAL, C_("category", "Personal"));
+  add_category_view (shell, CC_CATEGORY_HARDWARE, C_("category", "Hardware"));
+  add_category_view (shell, CC_CATEGORY_SYSTEM, C_("category", "System"));
 
-  g_signal_connect (priv->menu_tree, "changed", G_CALLBACK (on_menu_changed), shell);
-}
-
-static void
-load_panel_modules (GnomeControlCenter *shell)
-{
-  /* only allow this function to be run once to prevent modules being loaded
-   * twice
-   */
-  if (shell->priv->extension_point)
-    return;
-
-  /* make sure the base type is registered */
-  g_type_from_name ("CcPanel");
-
-  shell->priv->extension_point
-    = g_io_extension_point_register (CC_SHELL_PANEL_EXTENSION_POINT);
-
-  g_type_ensure (cc_background_panel_get_type ());
-#ifdef BUILD_BLUETOOTH
-  g_type_ensure (cc_bluetooth_panel_get_type ());
-#endif /* BUILD_BLUETOOTH */
-  g_type_ensure (cc_color_panel_get_type ());
-  g_type_ensure (cc_date_time_panel_get_type ());
-  g_type_ensure (cc_display_panel_get_type ());
-  g_type_ensure (cc_info_panel_get_type ());
-  g_type_ensure (cc_keyboard_panel_get_type ());
-  g_type_ensure (cc_mouse_panel_get_type ());
-#ifdef BUILD_NETWORK
-  g_type_ensure (cc_network_panel_get_type ());
-#endif /* BUILD_NETWORK */
-  g_type_ensure (cc_goa_panel_get_type ());
-  g_type_ensure (cc_power_panel_get_type ());
-#ifdef BUILD_PRINTERS
-  g_type_ensure (cc_printers_panel_get_type ());
-#endif /* BUILD_PRINTERS */
-  g_type_ensure (cc_privacy_panel_get_type ());
-  g_type_ensure (cc_region_panel_get_type ());
-  g_type_ensure (cc_screen_panel_get_type ());
-  g_type_ensure (cc_search_panel_get_type ());
-  g_type_ensure (cc_sound_panel_get_type ());
-  g_type_ensure (cc_ua_panel_get_type ());
-  g_type_ensure (cc_user_panel_get_type ());
-#ifdef BUILD_WACOM
-  g_type_ensure (cc_wacom_panel_get_type ());
-#endif /* BUILD_WACOM */
+  cc_panel_loader_fill_model (CC_SHELL_MODEL (shell->priv->store));
 }
 
 static void
@@ -1194,18 +1000,6 @@ gnome_control_center_finalize (GObject *object)
       priv->default_window_icon = NULL;
     }
 
-  if (priv->menu_tree)
-    {
-      g_signal_handlers_disconnect_by_func (priv->menu_tree,
-					    G_CALLBACK (on_menu_changed), object);
-      g_object_unref (priv->menu_tree);
-    }
-
-  if (priv->category_views)
-    {
-      g_hash_table_destroy (priv->category_views);
-    }
-
   G_OBJECT_CLASS (gnome_control_center_parent_class)->finalize (object);
 }
 
@@ -1446,9 +1240,6 @@ gnome_control_center_init (GnomeControlCenter *self)
 
   /* keep a list of custom widgets to unload on panel change */
   priv->custom_widgets = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
-
-  /* load the panels that are implemented as builtin modules */
-  load_panel_modules (self);
 
   /* load the available settings panels */
   setup_model (self);

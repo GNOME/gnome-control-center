@@ -23,8 +23,6 @@
 #define _CC_SHELL_MODEL_H
 
 #include <gtk/gtk.h>
-#define GMENU_I_KNOW_THIS_IS_UNSTABLE
-#include <gmenu-tree.h>
 
 G_BEGIN_DECLS
 
@@ -52,6 +50,13 @@ G_BEGIN_DECLS
 
 typedef struct _CcShellModel CcShellModel;
 typedef struct _CcShellModelClass CcShellModelClass;
+
+typedef enum {
+  CC_CATEGORY_PERSONAL,
+  CC_CATEGORY_HARDWARE,
+  CC_CATEGORY_SYSTEM,
+  CC_CATEGORY_LAST
+} CcPanelCategory;
 
 enum
 {
@@ -82,8 +87,8 @@ GType cc_shell_model_get_type (void) G_GNUC_CONST;
 CcShellModel *cc_shell_model_new (void);
 
 void cc_shell_model_add_item (CcShellModel   *model,
-                              const gchar    *category_name,
-                              GMenuTreeEntry *item,
+                              CcPanelCategory category,
+                              GAppInfo       *appinfo,
                               const char     *id);
 
 G_END_DECLS
