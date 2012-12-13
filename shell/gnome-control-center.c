@@ -864,6 +864,7 @@ reload_menu (GnomeControlCenter *shell)
     }
 
   gmenu_tree_iter_unref (iter);
+  gmenu_tree_item_unref (d);
 }
 
 static void
