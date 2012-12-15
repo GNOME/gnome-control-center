@@ -1694,7 +1694,7 @@ show_details_for_row (GtkButton *button, NetDeviceWifi *device_wifi)
         settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
         editor = net_connection_editor_new (GTK_WINDOW (window), connection, device, ap, client, settings);
         g_signal_connect (editor, "done", G_CALLBACK (editor_done), device_wifi);
-        net_connection_editor_present (editor);
+        net_connection_editor_run (editor);
 }
 
 static void
