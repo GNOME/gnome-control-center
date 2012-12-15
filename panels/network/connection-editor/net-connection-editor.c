@@ -351,7 +351,7 @@ add_page (NetConnectionEditor *editor, CEPage *page)
 
 static void
 net_connection_editor_set_connection (NetConnectionEditor *editor,
-                              NMConnection        *connection)
+                                      NMConnection        *connection)
 {
         GSList *pages, *l;
 
@@ -365,7 +365,7 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
         add_page (editor, ce_page_ip4_new (editor->connection, editor->client, editor->settings));
         add_page (editor, ce_page_ip6_new (editor->connection, editor->client, editor->settings));
         add_page (editor, ce_page_security_new (editor->connection, editor->client, editor->settings));
-        add_page (editor, ce_page_reset_new (editor->connection, editor->client, editor->settings));
+        add_page (editor, ce_page_reset_new (editor->connection, editor->client, editor->settings, editor));
 
         pages = g_slist_copy (editor->initializing_pages);
         for (l = pages; l; l = l->next) {
@@ -414,4 +414,29 @@ void
 net_connection_editor_present (NetConnectionEditor *editor)
 {
         gtk_window_present (GTK_WINDOW (editor->window));
+}
+
+static void
+forgotten_cb (NMRemoteConnection *connection,
+              GError             *error,
+              gpointer            data)
+{
+        NetConnectionEditor *editor = data;
+
+        if (error != NULL) {
+                g_warning ("Failed to delete conneciton %s: %s",
+                           nm_connection_get_id (NM_CONNECTION (connection)),
+                           error->message);
+        }
+
+        cancel_editing (editor);
+}
+
+void
+net_connection_editor_forget (NetConnectionEditor *editor)
+{
+        if (NM_IS_REMOTE_CONNECTION (editor->orig_connection))
+                nm_remote_connection_delete (NM_REMOTE_CONNECTION (editor->orig_connection), forgotten_cb, editor);
+        else
+                g_print ("why u no remote connection ?!\n");
 }

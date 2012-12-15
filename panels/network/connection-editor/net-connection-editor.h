@@ -75,7 +75,8 @@ NetConnectionEditor *net_connection_editor_new      (GtkWindow        *parent_wi
                                                      NMAccessPoint    *ap,
                                                      NMClient         *client,
                                                      NMRemoteSettings *settings);
-void                 net_connection_editor_present  (NetConnectionEditor   *details);
+void                 net_connection_editor_present  (NetConnectionEditor   *editor);
+void                 net_connection_editor_forget   (NetConnectionEditor   *editor);
 
 G_END_DECLS
 
