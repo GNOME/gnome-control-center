@@ -39,7 +39,7 @@ forget_cb (GtkButton *button, CEPageReset *page)
 static void
 reset_cb (GtkButton *button, CEPageReset *page)
 {
-        g_print ("Reset is not implemented yet\n");
+        net_connection_editor_reset (page->editor);
 }
 
 static void

@@ -81,6 +81,7 @@ NetConnectionEditor *net_connection_editor_new      (GtkWindow        *parent_wi
 void                 net_connection_editor_run      (NetConnectionEditor   *editor);
 void                 net_connection_editor_present  (NetConnectionEditor   *editor);
 void                 net_connection_editor_forget   (NetConnectionEditor   *editor);
+void                 net_connection_editor_reset    (NetConnectionEditor   *editor);
 
 G_END_DECLS
 
