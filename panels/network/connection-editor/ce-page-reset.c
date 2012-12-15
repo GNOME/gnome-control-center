@@ -24,14 +24,34 @@
 #include <glib-object.h>
 #include <glib/gi18n.h>
 
+#include "net-connection-editor.h"
 #include "ce-page-reset.h"
 
 G_DEFINE_TYPE (CEPageReset, ce_page_reset, CE_TYPE_PAGE)
 
+
+static void
+forget_cb (GtkButton *button, CEPageReset *page)
+{
+        net_connection_editor_forget (page->editor);
+}
+
+static void
+reset_cb (GtkButton *button, CEPageReset *page)
+{
+        g_print ("Reset is not implemented yet\n");
+}
+
 static void
 connect_reset_page (CEPageReset *page)
 {
-        /* FIXME */
+        GtkWidget *widget;
+
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "button_forget"));
+        g_signal_connect (widget, "clicked", G_CALLBACK (forget_cb), page);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "button_reset"));
+        g_signal_connect (widget, "clicked", G_CALLBACK (reset_cb), page);
 }
 
 static gboolean
@@ -56,9 +76,10 @@ ce_page_reset_class_init (CEPageResetClass *class)
 }
 
 CEPage *
-ce_page_reset_new (NMConnection     *connection,
-                   NMClient         *client,
-                   NMRemoteSettings *settings)
+ce_page_reset_new (NMConnection        *connection,
+                   NMClient            *client,
+                   NMRemoteSettings    *settings,
+                   NetConnectionEditor *editor)
 {
         CEPageReset *page;
 
@@ -68,6 +89,7 @@ ce_page_reset_new (NMConnection     *connection,
                                            settings,
                                            "/org/gnome/control-center/network/reset-page.ui",
                                            _("Reset")));
+        page->editor = editor;
 
         connect_reset_page (page);
 

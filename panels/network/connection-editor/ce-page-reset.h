@@ -25,6 +25,7 @@
 #include <glib-object.h>
 
 #include <gtk/gtk.h>
+#include "net-connection-editor.h"
 #include "ce-page.h"
 
 G_BEGIN_DECLS
@@ -42,6 +43,8 @@ typedef struct _CEPageResetClass     CEPageResetClass;
 struct _CEPageReset
 {
         CEPage parent;
+
+        NetConnectionEditor *editor;
 };
 
 struct _CEPageResetClass
@@ -51,9 +54,10 @@ struct _CEPageResetClass
 
 GType   ce_page_reset_get_type (void);
 
-CEPage *ce_page_reset_new      (NMConnection     *connection,
-                                NMClient         *client,
-                                NMRemoteSettings *settings);
+CEPage *ce_page_reset_new      (NMConnection        *connection,
+                                NMClient            *client,
+                                NMRemoteSettings    *settings,
+                                NetConnectionEditor *editor);
 
 G_END_DECLS
 
