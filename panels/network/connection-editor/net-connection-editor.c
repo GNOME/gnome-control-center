@@ -489,3 +489,13 @@ net_connection_editor_forget (NetConnectionEditor *editor)
 {
         nm_remote_connection_delete (NM_REMOTE_CONNECTION (editor->orig_connection), forgotten_cb, editor);
 }
+
+void
+net_connection_editor_reset (NetConnectionEditor *editor)
+{
+        GHashTable *settings;
+
+        settings = nm_connection_to_hash (editor->orig_connection, NM_SETTING_HASH_FLAG_ALL);
+        nm_connection_replace_settings (editor->connection, settings, NULL);
+        g_hash_table_destroy (settings);
+}
