@@ -108,9 +108,8 @@ apply_edits (NetConnectionEditor *editor)
 static void
 net_connection_editor_init (NetConnectionEditor *editor)
 {
-        GtkTreeSelection *selection;
         GError *error = NULL;
-        GtkWidget *button;
+        GtkTreeSelection *selection;
 
         editor->builder = gtk_builder_new ();
 
@@ -123,13 +122,17 @@ net_connection_editor_init (NetConnectionEditor *editor)
                 return;
         }
 
-        /* set up widgets */
-
         editor->window = GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_dialog"));
         selection = GTK_TREE_SELECTION (gtk_builder_get_object (editor->builder,
                                                                 "details_page_list_selection"));
         g_signal_connect (selection, "changed",
                           G_CALLBACK (selection_changed), editor);
+}
+
+void
+net_connection_editor_run (NetConnectionEditor *editor)
+{
+        GtkWidget *button;
 
         button = GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_cancel_button"));
         g_signal_connect_swapped (button, "clicked",
@@ -140,6 +143,8 @@ net_connection_editor_init (NetConnectionEditor *editor)
         button = GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_apply_button"));
         g_signal_connect_swapped (button, "clicked",
                                   G_CALLBACK (apply_edits), editor);
+
+        net_connection_editor_present (editor);
 }
 
 static void
@@ -202,6 +207,31 @@ editor_is_initialized (NetConnectionEditor *editor)
 }
 
 static void
+update_sensitivity (NetConnectionEditor *editor)
+{
+        NMSettingConnection *sc;
+        gboolean sensitive;
+        GtkWidget *widget;
+        GSList *l;
+
+        if (!editor_is_initialized (editor))
+                return;
+
+        sc = nm_connection_get_setting_connection (editor->connection);
+
+        if (nm_setting_connection_get_read_only (sc)) {
+                sensitive = FALSE;
+        } else {
+                sensitive = editor->can_modify;
+        }
+
+        for (l = editor->pages; l; l = l->next) {
+                widget = ce_page_get_page (CE_PAGE (l->data));
+                gtk_widget_set_sensitive (widget, sensitive);
+        }
+}
+
+static void
 validate (NetConnectionEditor *editor)
 {
         gboolean valid = FALSE;
@@ -225,6 +255,7 @@ validate (NetConnectionEditor *editor)
                 }
         }
 
+        update_sensitivity (editor);
 done:
         gtk_widget_set_sensitive (GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_apply_button")), valid);
 }
@@ -385,6 +416,23 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
         g_slist_free (pages);
 }
 
+static void
+permission_changed (NMClient                 *client,
+                    NMClientPermission        permission,
+                    NMClientPermissionResult  result,
+                    NetConnectionEditor      *editor)
+{
+        if (permission != NM_CLIENT_PERMISSION_SETTINGS_MODIFY_SYSTEM)
+                return;
+
+        if (result == NM_CLIENT_PERMISSION_RESULT_YES || result == NM_CLIENT_PERMISSION_RESULT_AUTH)
+                editor->can_modify = TRUE;
+        else
+                editor->can_modify = FALSE;
+
+        validate (editor);
+}
+
 NetConnectionEditor *
 net_connection_editor_new (GtkWindow        *parent_window,
                            NMConnection     *connection,
@@ -407,6 +455,10 @@ net_connection_editor_new (GtkWindow        *parent_window,
         editor->device = g_object_ref (device);
         editor->client = g_object_ref (client);
         editor->settings = g_object_ref (settings);
+
+        editor->can_modify = nm_client_get_permission_result (client, NM_CLIENT_PERMISSION_SETTINGS_MODIFY_SYSTEM);
+        editor->permission_id = g_signal_connect (editor->client, "permission-changed",
+                                                  G_CALLBACK (permission_changed), editor);
 
         net_connection_editor_set_connection (editor, connection);
 
@@ -438,8 +490,5 @@ forgotten_cb (NMRemoteConnection *connection,
 void
 net_connection_editor_forget (NetConnectionEditor *editor)
 {
-        if (NM_IS_REMOTE_CONNECTION (editor->orig_connection))
-                nm_remote_connection_delete (NM_REMOTE_CONNECTION (editor->orig_connection), forgotten_cb, editor);
-        else
-                g_print ("why u no remote connection ?!\n");
+        nm_remote_connection_delete (NM_REMOTE_CONNECTION (editor->orig_connection), forgotten_cb, editor);
 }
