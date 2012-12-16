@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-11-03 14:35+0000\n"
-"PO-Revision-Date: 2012-10-27 15:35+0100\n"
+"POT-Creation-Date: 2012-11-09 13:13+0000\n"
+"PO-Revision-Date: 2012-12-09 13:34+0000\n"
 "Last-Translator: Pavol Klačanský <pavol@klacansky.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
@@ -152,85 +152,94 @@ msgstr "Odstrániť zariadenie"
 msgid "Connection"
 msgstr "Spojenie"
 
-#: ../panels/bluetooth/bluetooth.ui.h:4
+#: ../panels/bluetooth/bluetooth.ui.h:4 ../panels/printers/printers.ui.h:14
+msgid "page 1"
+msgstr "strana č. 1"
+
+#: ../panels/bluetooth/bluetooth.ui.h:5 ../panels/printers/printers.ui.h:16
+msgid "page 2"
+msgstr "strana č. 2"
+
+#: ../panels/bluetooth/bluetooth.ui.h:6
 msgid "Paired"
 msgstr "Spárované"
 
-#: ../panels/bluetooth/bluetooth.ui.h:5 ../panels/wacom/cc-wacom-page.c:756
+#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/wacom/cc-wacom-page.c:756
 msgid "Type"
 msgstr "Typ"
 
-#: ../panels/bluetooth/bluetooth.ui.h:6
+#: ../panels/bluetooth/bluetooth.ui.h:8
 msgid "Address"
 msgstr "Adresa"
 
 # GtkLinkButton label
-#: ../panels/bluetooth/bluetooth.ui.h:7
+#: ../panels/bluetooth/bluetooth.ui.h:9
 msgid "Mouse and Touchpad Settings"
 msgstr "Nastavenia myši a touchpadu"
 
 # GtkLinkButton label
-#: ../panels/bluetooth/bluetooth.ui.h:8 ../panels/universal-access/uap.ui.h:38
+#: ../panels/bluetooth/bluetooth.ui.h:10
+#: ../panels/universal-access/uap.ui.h:38
 msgid "Sound Settings"
 msgstr "Nastavenia zvuku"
 
 # GtkLinkButton label
-#: ../panels/bluetooth/bluetooth.ui.h:9
+#: ../panels/bluetooth/bluetooth.ui.h:11
 msgid "Keyboard Settings"
 msgstr "Nastavenia klávesnice"
 
 # GtkButton label
-#: ../panels/bluetooth/bluetooth.ui.h:10
+#: ../panels/bluetooth/bluetooth.ui.h:12
 msgid "Send Files..."
 msgstr "Odoslať súbory…"
 
 # GtkButton label
-#: ../panels/bluetooth/bluetooth.ui.h:11
+#: ../panels/bluetooth/bluetooth.ui.h:13
 msgid "Browse Files..."
 msgstr "Prehliadať súbory…"
 
 #. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
-#: ../panels/bluetooth/bluetooth.ui.h:13
+#: ../panels/bluetooth/bluetooth.ui.h:15
 msgctxt "Power"
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:290
+#: ../panels/bluetooth/cc-bluetooth-panel.c:337
 msgid "Yes"
 msgstr "Áno"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:290
+#: ../panels/bluetooth/cc-bluetooth-panel.c:337
 msgid "No"
 msgstr "Nie"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:405
+#: ../panels/bluetooth/cc-bluetooth-panel.c:451
 msgid "Bluetooth is disabled"
 msgstr "Bluetooth je zakázaný"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:410
+#: ../panels/bluetooth/cc-bluetooth-panel.c:456
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Bluetooth je zakázaný hardvérovým prepínačom"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:414
+#: ../panels/bluetooth/cc-bluetooth-panel.c:460
 msgid "No Bluetooth adapters found"
 msgstr "Nenašli sa žiadne Bluetooth adaptéry"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:547
+#: ../panels/bluetooth/cc-bluetooth-panel.c:587
 msgid "Visibility"
 msgstr "Viditeľnosť"
 
 # nazov zariadenia, napr. ubuntu-0
-#: ../panels/bluetooth/cc-bluetooth-panel.c:551
+#: ../panels/bluetooth/cc-bluetooth-panel.c:591
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Viditeľnosť zariadenia „%s“"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:595
+#: ../panels/bluetooth/cc-bluetooth-panel.c:635
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Odstrániť „%s“ zo zoznamu známych zariadení?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:597
+#: ../panels/bluetooth/cc-bluetooth-panel.c:637
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
@@ -549,14 +558,12 @@ msgstr "Výrobca:"
 msgid "Model:"
 msgstr "Model:"
 
-#  PM: znie mi to neprirodzene
 #: ../panels/color/color.ui.h:21
-#, fuzzy
 msgid ""
 "Image files can be dragged on this window to auto-complete the above fields."
 msgstr ""
-"Na automatické doplnenie údajov môžu byť na toto okno pretiahnuté súbory "
-"obrázkov."
+"Pretiahnutím súboru s obrázkom do tohto okna automaticky vyplníte polia "
+"vyššie."
 
 # desktop entry comment
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:2
@@ -776,13 +783,12 @@ msgstr "Hodiny;Čas;Zóna;Pásmo;Poloha;"
 msgid "Change system time and date settings"
 msgstr "Zmena systémového nastavenia času a dátumu"
 
-# PM: "Keď chcete zmeniť nastavenie... , musíte najskôr overiť svoju totožnosť"
 # policy message 
 #: ../panels/datetime/org.gnome.controlcenter.datetime.policy.in.h:2
-#, fuzzy
 msgid "To change time or date settings, you need to authenticate."
 msgstr ""
-"Aby ste zmenili nastavenia času a dátumu, musíte overiť svoju totožnosť."
+"Keď chcete zmeniť nastavenia času a dátumu, musíte najskôr overiť vašu "
+"totožnosť."
 
 #: ../panels/display/cc-display-panel.c:481
 msgctxt "display panel, rotation"
@@ -790,7 +796,10 @@ msgid "Normal"
 msgstr "Normálne"
 
 # PM: toto je trosku nepresné malo by tu byť O 90° proti smeru...
+# PK: preco o 90 stupnov? teoreticky to moze byt aj 30 stupnov
+# PM: a je to tak aj naozaj? Vie sa obraz na monitore otočiť len o 30 % danovu voľbou?
 #: ../panels/display/cc-display-panel.c:482
+#, fuzzy
 msgctxt "display panel, rotation"
 msgid "Counterclockwise"
 msgstr "Proti smeru hodinových ručičiek"
@@ -806,6 +815,7 @@ msgid "180 Degrees"
 msgstr "O 180 stupňov"
 
 # PM: dal by som obrazovky alebo zobrazovacie plochy - viackrát
+# PK: niekde sme davali displeje
 #. Keep this string in sync with gnome-desktop/libgnome-desktop/gnome-rr-labeler.c
 #. Translators:  this is the feature where what you see on your laptop's
 #. * screen is the same as your external projector.  Here, "Mirrored" is being
@@ -813,9 +823,8 @@ msgstr "O 180 stupňov"
 #. * "Pantallas en Espejo".
 #.
 #: ../panels/display/cc-display-panel.c:623
-#, fuzzy
 msgid "Mirrored Displays"
-msgstr "Zrkadlené monitory"
+msgstr "Zrkadlené displeje"
 
 #: ../panels/display/cc-display-panel.c:647
 #: ../panels/display/display-capplet.ui.h:1
@@ -883,11 +892,9 @@ msgstr "_Otočenie"
 msgid "_Mirror displays"
 msgstr "_Zrkadliť monitory"
 
-# PM: týmto sa myslí to, že nebude na výber tak veľa rozlíšení
 #: ../panels/display/display-capplet.ui.h:6
-#, fuzzy
 msgid "Note: may limit resolution options"
-msgstr "Poznámka: môže zúžiť možnosti rozlíšenia"
+msgstr "Poznámka: týmto sa myslí to, že nebude na výber tak veľa rozlíšení"
 
 # button
 #: ../panels/display/display-capplet.ui.h:7
@@ -895,11 +902,13 @@ msgid "_Detect Displays"
 msgstr "Rozpoznať _monitory"
 
 # PM: obrazovky alebo zobrazovacie plochy
+# PK: v ML sme sa dohodli na displeji
+# PM: to je síce pravda ale tu v niektorých prípadoch ide o to že to rozpoznáva zariadenia, vrátane CRT monitorov a projektorov. Takže by tu v niektorých prípadoch možno malo byť v originále "display devices" - ak chceš displeje tak je tu viackrát inde monitory napr aj o reťazec vyššie.
 # desktop entry name
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:1
 #, fuzzy
 msgid "Displays"
-msgstr "Monitory"
+msgstr "Displeje"
 
 # desktop entry comment
 #: ../panels/display/gnome-display-panel.desktop.in.in.h:2
@@ -912,36 +921,36 @@ msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Panel;Projektor;xrandr;Obrazovka;Rozlíšenie;Obnovovanie;"
 
 #. Translators: VESA is an techncial acronym, don't translate it.
-#: ../panels/info/cc-info-panel.c:413
+#: ../panels/info/cc-info-panel.c:417
 #, c-format
 msgid "VESA: %s"
 msgstr "VESA: %s"
 
 # grafika, AP typ
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:437 ../panels/network/panel-common.c:120
+#: ../panels/info/cc-info-panel.c:441 ../panels/network/panel-common.c:120
 msgid "Unknown"
 msgstr "Neznámy"
 
 # Typ OS
 #. translators: This is the type of architecture, for example:
 #. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:575
+#: ../panels/info/cc-info-panel.c:616
 #, c-format
 msgid "%d-bit"
 msgstr "%d bitový"
 
-#: ../panels/info/cc-info-panel.c:734
+#: ../panels/info/cc-info-panel.c:775
 msgid "Unknown model"
 msgstr "Neznámy model"
 
 # TODO nenávidím "experience"
 # PM: myslí sa s 3D efektami
-#: ../panels/info/cc-info-panel.c:817
+#: ../panels/info/cc-info-panel.c:858
 msgid "The next login will attempt to use the standard experience."
 msgstr "Nasledujúce prihlásenie sa vám pokúsi priniesť štandardný režim."
 
-#: ../panels/info/cc-info-panel.c:819
+#: ../panels/info/cc-info-panel.c:860
 msgid ""
 "The next login will use the fallback mode intended for unsupported graphics "
 "hardware."
@@ -951,55 +960,60 @@ msgstr ""
 
 #. translators: The hardware is not able to run GNOME 3's
 #. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:861
+#: ../panels/info/cc-info-panel.c:902
 msgctxt "Experience"
 msgid "Fallback"
 msgstr "Núdzový"
 
 #. translators: The hardware is able to run GNOME 3's
 #. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:867
+#: ../panels/info/cc-info-panel.c:908
 msgctxt "Experience"
 msgid "Standard"
 msgstr "Štandardný"
 
-#: ../panels/info/cc-info-panel.c:1329
+#: ../panels/info/cc-info-panel.c:1370
 msgid "Ask what to do"
 msgstr "Spýtať sa, čo robiť"
 
-#: ../panels/info/cc-info-panel.c:1333
+#: ../panels/info/cc-info-panel.c:1374
 msgid "Do nothing"
 msgstr "Nespraviť nič"
 
-#: ../panels/info/cc-info-panel.c:1337
+#: ../panels/info/cc-info-panel.c:1378
 msgid "Open folder"
 msgstr "Otvoriť priečinok"
 
-#: ../panels/info/cc-info-panel.c:1428
+#: ../panels/info/cc-info-panel.c:1469
 msgid "Other Media"
 msgstr "Ostatné nosiče"
 
 # PK: choose zvolit, select vybrat; viackrat
 # PM: môžeš to tak opraviť
-#: ../panels/info/cc-info-panel.c:1459
-#, fuzzy
+# PK: je to spravne
+# window heading
+#: ../panels/info/cc-info-panel.c:1500
 msgid "Select an application for audio CDs"
 msgstr "Vyberte si aplikáciu pre audio CD"
 
-#: ../panels/info/cc-info-panel.c:1460
+# window heading
+#: ../panels/info/cc-info-panel.c:1501
 msgid "Select an application for video DVDs"
 msgstr "Vyberte si aplikáciu pre video DVD"
 
-#: ../panels/info/cc-info-panel.c:1461
+#  window heading
+#: ../panels/info/cc-info-panel.c:1502
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "Vyberte si aplikáciu, ktorá sa spustí pri pripojení hudobného prehrávača"
 
-#: ../panels/info/cc-info-panel.c:1462
+# window heading
+#: ../panels/info/cc-info-panel.c:1503
 msgid "Select an application to run when a camera is connected"
 msgstr "Vyberte si aplikáciu, ktorá sa spustí pri pripojení fotoaparátu"
 
-#: ../panels/info/cc-info-panel.c:1463
+# window heading
+#: ../panels/info/cc-info-panel.c:1504
 msgid "Select an application for software CDs"
 msgstr "Vyberte si aplikáciu pre CD so softvérom"
 
@@ -1008,95 +1022,95 @@ msgstr "Vyberte si aplikáciu pre CD so softvérom"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1475
+#: ../panels/info/cc-info-panel.c:1516
 msgid "audio DVD"
 msgstr "audio DVD"
 
-#: ../panels/info/cc-info-panel.c:1476
+#: ../panels/info/cc-info-panel.c:1517
 msgid "blank Blu-ray disc"
 msgstr "prázdny disk Blu-ray"
 
-#: ../panels/info/cc-info-panel.c:1477
+#: ../panels/info/cc-info-panel.c:1518
 msgid "blank CD disc"
 msgstr "prázdny disk CD"
 
-#: ../panels/info/cc-info-panel.c:1478
+#: ../panels/info/cc-info-panel.c:1519
 msgid "blank DVD disc"
 msgstr "prázdny disk DVD"
 
-#: ../panels/info/cc-info-panel.c:1479
+#: ../panels/info/cc-info-panel.c:1520
 msgid "blank HD DVD disc"
 msgstr "prázdny disk HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1480
+#: ../panels/info/cc-info-panel.c:1521
 msgid "Blu-ray video disc"
 msgstr "video disk Blu-ray "
 
-#: ../panels/info/cc-info-panel.c:1481
+#: ../panels/info/cc-info-panel.c:1522
 msgid "e-book reader"
 msgstr "elektronická čítačka kníh"
 
-#: ../panels/info/cc-info-panel.c:1482
+#: ../panels/info/cc-info-panel.c:1523
 msgid "HD DVD video disc"
 msgstr "video disk HD DVD"
 
 # PM: je to názov formátu od Kodaku
-#: ../panels/info/cc-info-panel.c:1483
+#: ../panels/info/cc-info-panel.c:1524
 msgid "Picture CD"
 msgstr "Picture CD"
 
-#: ../panels/info/cc-info-panel.c:1484
+#: ../panels/info/cc-info-panel.c:1525
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: ../panels/info/cc-info-panel.c:1485
+#: ../panels/info/cc-info-panel.c:1526
 msgid "Video CD"
 msgstr "Video CD"
 
-#: ../panels/info/cc-info-panel.c:1486
+#: ../panels/info/cc-info-panel.c:1527
 msgid "Windows software"
 msgstr "Softvér systému Windows"
 
-#: ../panels/info/cc-info-panel.c:1487
+#: ../panels/info/cc-info-panel.c:1528
 msgid "Software"
 msgstr "Softvér"
 
-#: ../panels/info/cc-info-panel.c:1610
+#: ../panels/info/cc-info-panel.c:1651
 #: ../panels/keyboard/keyboard-shortcuts.c:1692
 msgid "Section"
 msgstr "Sekcia"
 
-#: ../panels/info/cc-info-panel.c:1619 ../panels/info/info.ui.h:12
+#: ../panels/info/cc-info-panel.c:1660 ../panels/info/info.ui.h:12
 msgid "Overview"
 msgstr "Prehľad"
 
-#: ../panels/info/cc-info-panel.c:1625 ../panels/info/info.ui.h:19
+#: ../panels/info/cc-info-panel.c:1666 ../panels/info/info.ui.h:19
 msgid "Default Applications"
 msgstr "Predvolené aplikácie"
 
-#: ../panels/info/cc-info-panel.c:1630 ../panels/info/info.ui.h:27
+#: ../panels/info/cc-info-panel.c:1671 ../panels/info/info.ui.h:27
 msgid "Removable Media"
 msgstr "Vymeniteľné nosiče"
 
-#: ../panels/info/cc-info-panel.c:1635 ../panels/info/info.ui.h:10
+#: ../panels/info/cc-info-panel.c:1676 ../panels/info/info.ui.h:10
 msgid "Graphics"
 msgstr "Grafika"
 
-#: ../panels/info/cc-info-panel.c:1837
+#: ../panels/info/cc-info-panel.c:1876
 #, c-format
 msgid "Version %s"
 msgstr "Verzia %s"
 
 # button
-#: ../panels/info/cc-info-panel.c:1887
+#: ../panels/info/cc-info-panel.c:1926
 msgid "Install Updates"
 msgstr "Nainštalovať aktualizácie"
 
-#: ../panels/info/cc-info-panel.c:1891
+#: ../panels/info/cc-info-panel.c:1930
 msgid "System Up-To-Date"
 msgstr "Systém je aktuálny"
 
-#: ../panels/info/cc-info-panel.c:1895
+#: ../panels/info/cc-info-panel.c:1934
 msgid "Checking for Updates"
 msgstr "Kontrolujú sa aktualizácie"
 
@@ -1246,11 +1260,9 @@ msgstr "Zvýšiť hlasitosť"
 msgid "Launch media player"
 msgstr "Spustiť prehrávač multimédií"
 
-# PM: neprekladáme to ako prehrať?
 #: ../panels/keyboard/00-multimedia.xml.in.h:6
-#, fuzzy
 msgid "Play (or play/pause)"
-msgstr "Hrať (alebo hrať/pozastaviť)"
+msgstr "Prehrať (alebo prehrať/pozastaviť)"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:7
 msgid "Pause playback"
@@ -1261,6 +1273,7 @@ msgid "Stop playback"
 msgstr "Zastaviť prehrávanie"
 
 # PM: myslí sa tým tlačidlo previous, takže asi skladba
+# PK: tu to moze byt aj video
 #: ../panels/keyboard/00-multimedia.xml.in.h:9
 msgid "Previous track"
 msgstr "Predchádzajúca stopa"
@@ -1570,7 +1583,7 @@ msgstr ""
 msgid "_Reassign"
 msgstr "P_rideliť"
 
-#: ../panels/mouse/cc-mouse-panel.c:160
+#: ../panels/mouse/cc-mouse-panel.c:147
 msgid "_Test Your Settings"
 msgstr "_Vyskúšať vaše nastavenia"
 
@@ -1637,8 +1650,8 @@ msgid "Mouse"
 msgstr "Myš"
 
 # PM: nehovoríme tomuto kurzor?
+#  PK: kurzor je v terminali
 #: ../panels/mouse/gnome-mouse-properties.ui.h:11
-#, fuzzy
 msgid "_Pointer speed"
 msgstr "Rých_losť ukazovateľa"
 
@@ -1650,28 +1663,22 @@ msgstr "Touchpad"
 msgid "Disable while _typing"
 msgstr "Zakázať počas _písania"
 
-# PM: dotykom/dotknutím
 #: ../panels/mouse/gnome-mouse-properties.ui.h:14
-#, fuzzy
 msgid "Tap to _click"
-msgstr "Kliknúť ť_uknutím"
+msgstr "Kliknúť dot_ykom"
 
 #: ../panels/mouse/gnome-mouse-properties.ui.h:15
 msgid "Two _finger scroll"
 msgstr "Rolovanie _dvoma prstami"
 
-# PM: nemá tu byť s prstami?
 #: ../panels/mouse/gnome-mouse-properties.ui.h:16
-#, fuzzy
 msgid "C_ontent sticks to fingers"
-msgstr "_Obsah sa posúva s prstom"
+msgstr "_Obsah sa posúva s prstami"
 
-# PM: klikanie a kliknutie ?
 #: ../panels/mouse/gnome-mouse-test.c:134
 #: ../panels/mouse/gnome-mouse-test.ui.h:1
-#, fuzzy
 msgid "Try clicking, double clicking, scrolling"
-msgstr "Vyskúšajte klikanie, dvojité kliknutie a rolovanie"
+msgstr "Vyskúšajte kliknutie, dvojité kliknutie a rolovanie"
 
 #: ../panels/mouse/gnome-mouse-test.c:139
 msgid "Five clicks, GEGL time!"
@@ -1701,26 +1708,26 @@ msgstr "Dvojité kliknutie, sekundárne tlačidlo"
 msgid "Single click, secondary button"
 msgstr "Kliknutie, sekundárne tlačidlo"
 
+#. TRANSLATORS: this is to disable the radio hardware in the
+#. * network panel
+#: ../panels/network/cc-network-panel.c:332
+msgid "Air_plane Mode"
+msgstr "Režim v _lietadle"
+
 #  PM: správne by malo byť Sprostredkovaná sieť
-#: ../panels/network/cc-network-panel.c:767
+#: ../panels/network/cc-network-panel.c:834
 msgid "Network proxy"
 msgstr "Sieťové proxy"
 
-#: ../panels/network/cc-network-panel.c:957 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1010 ../panels/network/net-vpn.c:278
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1021
+#: ../panels/network/cc-network-panel.c:1074
 msgid "The system network services are not compatible with this version."
 msgstr "Sieťové služby systému nie sú kompatibilné s touto verziou."
-
-#. TRANSLATORS: this is to disable the radio hardware in the
-#. * network panel
-#: ../panels/network/cc-network-panel.c:1156
-msgid "Air_plane Mode"
-msgstr "Režim v _lietadle"
 
 # desktop entry name
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
@@ -1859,6 +1866,8 @@ msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
 msgstr ""
+"Ak ste pripojený k internetu bez použitia bezdrôtovej siete, tak môžete "
+"vytvoriť bezdrôtový hotspot na zdieľanie pripojenia s ostatnými."
 
 #: ../panels/network/net-device-wifi.c:1558
 #, c-format
@@ -1956,25 +1965,20 @@ msgid "_Method"
 msgstr "_Metóda"
 
 #: ../panels/network/network-proxy.ui.h:5
-#, fuzzy
 msgid "_Configuration URL"
-msgstr "_URL automatického nastavenia"
+msgstr "_URL konfigurácie"
 
-# PM: keď je tu hostiteľ socks tak by tu ozaj mohol byť Sprostredkovateľ HTTP (Proxy je v nadpise)
 #: ../panels/network/network-proxy.ui.h:6
-#, fuzzy
 msgid "_HTTP Proxy"
-msgstr "_HTTP proxy"
+msgstr "Sprostredkovateľ _HTTP"
 
 #: ../panels/network/network-proxy.ui.h:7
-#, fuzzy
 msgid "H_TTPS Proxy"
-msgstr "H_TTPS proxy"
+msgstr "Sprostredkovateľ H_TTPS"
 
 #: ../panels/network/network-proxy.ui.h:8
-#, fuzzy
 msgid "_FTP Proxy"
-msgstr "_FTP proxy"
+msgstr "Sprostredkovateľ _FTP"
 
 #: ../panels/network/network-proxy.ui.h:9
 msgid "_Socks Host"
@@ -1982,7 +1986,7 @@ msgstr "Hostiteľ _Socks"
 
 #: ../panels/network/network-proxy.ui.h:10
 msgid "_Ignore Hosts"
-msgstr ""
+msgstr "_Ignorovať hostiteľov"
 
 #: ../panels/network/network-simple.ui.h:1
 #: ../panels/network/network-wifi.ui.h:9
@@ -2093,12 +2097,9 @@ msgstr "_Zabudnúť sieť"
 msgid "_Settings..."
 msgstr "Nas_tavenia…"
 
-# PM: čo tak Vypnutím sa pripojíte...
 #: ../panels/network/network-wifi.ui.h:19
-#, fuzzy
-#| msgid "Switch off to connect to a wireless network"
 msgid "Switch off to connect to a Wi-Fi network"
-msgstr "Vypnite pre pripojenie k Wi-Fi sieti"
+msgstr "Vypnutím sa pripojíte k Wi-Fi sieti"
 
 #: ../panels/network/network-wifi.ui.h:20
 msgid "Network Name"
@@ -2200,12 +2201,10 @@ msgstr "Nastavenie zlyhalo"
 msgid "IP configuration failed"
 msgstr "Nastavenie IP zlyhalo"
 
-# PM:zdá sa mi divné že vypršalo nastavenie, snáď platnosť nastavenia nie?
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:267
-#, fuzzy
 msgid "IP configuration expired"
-msgstr "Nastavenie IP vypršalo"
+msgstr "Platnosť nastavenia IP vypršala"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:271
@@ -2215,22 +2214,22 @@ msgstr ""
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:275
 msgid "802.1x supplicant disconnected"
-msgstr ""
+msgstr "Žiadateľ 802.1x bol odpojený"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:279
 msgid "802.1x supplicant configuration failed"
-msgstr ""
+msgstr "Zlyhalo nastavenia žiadateľa 802.1x"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:283
 msgid "802.1x supplicant failed"
-msgstr ""
+msgstr "Žiadateľ 802.1x zlyhal"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:287
 msgid "802.1x supplicant took too long to authenticate"
-msgstr ""
+msgstr "Overenie totožnosti žiadateľa 802.1x trvalo príliš dlho"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:291
@@ -2265,39 +2264,38 @@ msgstr "Klient DHCP zlyhal"
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:315
 msgid "Shared connection service failed to start"
-msgstr ""
+msgstr "Nepodarilo sa spustiť službu zdielaného pripojenia"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:319
-#, fuzzy
 msgid "Shared connection service failed"
-msgstr "Pripojenie zlyhalo"
+msgstr "Služba zdieľaného pripojenia zlyhala"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:323
 msgid "AutoIP service failed to start"
-msgstr ""
+msgstr "Nepodarilo sa spustiť službu AutoIP"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:327
 msgid "AutoIP service error"
-msgstr ""
+msgstr "Chyba služby AutoIP"
 
+# AutoIP je termin, ako napr. DHCP
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:331
-#, fuzzy
 msgid "AutoIP service failed"
-msgstr "Overenie totožnosti zlyhalo"
+msgstr "Služba AutoIP zlyhala "
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:335
 msgid "Line busy"
-msgstr ""
+msgstr "Linka je zaneprázdnená"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:339
 msgid "No dial tone"
-msgstr ""
+msgstr "Nie je oznamovací tón"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:343
@@ -2307,12 +2305,12 @@ msgstr ""
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:347
 msgid "Dialing request timed out"
-msgstr ""
+msgstr "Vypršal časový limit pre požiadavku na vytáčanie"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:351
 msgid "Dialing attempt failed"
-msgstr ""
+msgstr "Pokus o vytáčanie zlyhal"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:355
@@ -2331,19 +2329,18 @@ msgstr ""
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:367
-#, fuzzy
 msgid "Network registration denied"
-msgstr "Sieťové nastavenia"
+msgstr "Registrácia siete bola zamietnutá"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:371
 msgid "Network registration timed out"
-msgstr ""
+msgstr "Vypršal limit pre registráciu siete"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:375
 msgid "Failed to register with the requested network"
-msgstr ""
+msgstr "Nepodarilo sa zaregistrovať v požadovanej sieti"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:379
@@ -2403,7 +2400,7 @@ msgstr "Zlá karta SIM"
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:423
 msgid "InfiniBand device does not support connected mode"
-msgstr ""
+msgstr "Zariadenie InfiniBand nepodporuje pripojený režim"
 
 #. TRANSLATORS: device status reason
 #: ../panels/network/panel-common.c:427
@@ -2735,10 +2732,10 @@ msgid "On battery power"
 msgstr "Napájané z batérie"
 
 # čo za zapojenie sa myslí, a po novom by to malo byť zastrčenie
+# PK: ked je zastrceny v zasuvke
 #: ../panels/power/power.ui.h:9
-#, fuzzy
 msgid "When plugged in"
-msgstr "Pri zapojení"
+msgstr "Pri zastrčení do zásuvky"
 
 #: ../panels/power/power.ui.h:10
 msgid "Suspend when inactive for"
@@ -2905,6 +2902,8 @@ msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
 msgstr ""
+"Popisné tlačové súbory pre PostScript (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
+"PPD.GZ)"
 
 #: ../panels/printers/cc-printers-panel.c:2210
 msgid "No suitable driver found"
@@ -2984,11 +2983,10 @@ msgstr "Zrušiť tlačovú úlohu"
 msgid "_Add"
 msgstr "P_ridať"
 
-# PM: nemá tu byť pridajte?
+# window heading
 #: ../panels/printers/new-printer-dialog.ui.h:3
-#, fuzzy
 msgid "Add a New Printer"
-msgstr "Pridať novú tlačiareň"
+msgstr "Pridajte novú tlačiareň"
 
 # tooltip
 #: ../panels/printers/new-printer-dialog.ui.h:4
@@ -3017,43 +3015,46 @@ msgstr "Načítava sa databáza ovládačov…"
 msgid "Select Printer Driver"
 msgstr "Vyberte ovládač pre tlačiareň"
 
+# PK: prosim, ak mas tlaciaren otestuj, ja nemam
 #. Translators: this is an option of "Two Sided"
 #: ../panels/printers/pp-ipp-option-widget.c:65
 #: ../panels/printers/pp-ppd-option-widget.c:69
 msgid "One Sided"
-msgstr ""
+msgstr "Jednostranne"
 
+# ako sa prevrati stranka
 #. Translators: this is an option of "Two Sided"
 #: ../panels/printers/pp-ipp-option-widget.c:67
 #: ../panels/printers/pp-ppd-option-widget.c:71
 msgid "Long Edge (Standard)"
-msgstr ""
+msgstr "Dlhý okraj (štandard)"
 
+# ako sa prevrati stranka
 #. Translators: this is an option of "Two Sided"
 #: ../panels/printers/pp-ipp-option-widget.c:69
 #: ../panels/printers/pp-ppd-option-widget.c:73
 msgid "Short Edge (Flip)"
-msgstr ""
+msgstr "Krátky okraj (prevrátiť)"
 
 #. Translators: this is an option of "Orientation"
 #: ../panels/printers/pp-ipp-option-widget.c:71
 msgid "Portrait"
-msgstr ""
+msgstr "Na výšku"
 
 #. Translators: this is an option of "Orientation"
 #: ../panels/printers/pp-ipp-option-widget.c:73
 msgid "Landscape"
-msgstr ""
+msgstr "Na šírku"
 
 #. Translators: this is an option of "Orientation"
 #: ../panels/printers/pp-ipp-option-widget.c:75
 msgid "Reverse landscape"
-msgstr ""
+msgstr "Opačne na šírku"
 
 #. Translators: this is an option of "Orientation"
 #: ../panels/printers/pp-ipp-option-widget.c:77
 msgid "Reverse portrait"
-msgstr ""
+msgstr "Opačne na výšku"
 
 #. Translators: Job's state (job is waiting to be printed)
 #: ../panels/printers/pp-jobs-dialog.c:143
@@ -3097,12 +3098,11 @@ msgctxt "print job"
 msgid "Completed"
 msgstr "Dokončená"
 
-# PM: Toto je dobre? Chcelo by to aspon komentár prečo bol zvolený takýto preklad
+# ze je to ulohy vyplyva z kontextu
 #. Translators: Name of column showing titles of print jobs
 #: ../panels/printers/pp-jobs-dialog.c:289
-#, fuzzy
 msgid "Job Title"
-msgstr "Pozícia"
+msgstr "Názov"
 
 #. Translators: Name of column showing statuses of print jobs
 #: ../panels/printers/pp-jobs-dialog.c:298
@@ -3127,7 +3127,7 @@ msgstr "Neboli nájdené žiadne tlačiarne."
 
 #: ../panels/printers/pp-options-dialog.c:82
 msgid "Two Sided"
-msgstr ""
+msgstr "Obojstranne"
 
 #: ../panels/printers/pp-options-dialog.c:83
 msgid "Paper Type"
@@ -3176,12 +3176,14 @@ msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Nastavenie strany"
 
+# PK: viem ze je to inac, ale podstatu by to malo zachytit
+# MČ: možno by som použil „Rozšírenia“
+#  PK: podla popisu by to mal byt zoznam parametrov
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
 #: ../panels/printers/pp-options-dialog.c:660
-#, fuzzy
 msgctxt "Printer Option Group"
 msgid "Installable Options"
-msgstr "Možnosti tlačiarne"
+msgstr "Parametre"
 
 #. Translators: "Job" tab contains settings for jobs
 #: ../panels/printers/pp-options-dialog.c:663
@@ -3236,20 +3238,23 @@ msgstr "Automatický výber"
 msgid "Printer Default"
 msgstr "Predvolené hodnoty tlačiarne"
 
+#  combo box
 #. Translators: this is an option of "GhostScript"
 #: ../panels/printers/pp-ppd-option-widget.c:89
 msgid "Embed GhostScript fonts only"
-msgstr ""
+msgstr "Vkladať len písma GhostScript"
 
+# MČ: PostScript Level 1 - PostScript Verzie 1, ale pri PS sa verzie nazývajú Level. teda aspoň ja to tak chápem
 #. Translators: this is an option of "GhostScript"
 #: ../panels/printers/pp-ppd-option-widget.c:91
 msgid "Convert to PS level 1"
-msgstr ""
+msgstr "Konvertovať na PS verzie 1"
 
+# MČ: PostScript Level 1 - PostScript Verzie 1, ale pri PS sa verzie nazývajú Level. teda aspoň ja to tak chápem
 #. Translators: this is an option of "GhostScript"
 #: ../panels/printers/pp-ppd-option-widget.c:93
 msgid "Convert to PS level 2"
-msgstr ""
+msgstr "Konvertovať na PS verzie 2"
 
 #. Translators: this is an option of "GhostScript"
 #: ../panels/printers/pp-ppd-option-widget.c:95
@@ -3303,17 +3308,9 @@ msgstr "Z_obraziť"
 msgid "Model"
 msgstr "Model"
 
-#: ../panels/printers/printers.ui.h:14
-msgid "page 1"
-msgstr ""
-
 #: ../panels/printers/printers.ui.h:15
 msgid "label"
-msgstr ""
-
-#: ../panels/printers/printers.ui.h:16
-msgid "page 2"
-msgstr ""
+msgstr "menovka"
 
 #: ../panels/printers/printers.ui.h:17
 msgid "Setting new driver..."
@@ -3321,19 +3318,17 @@ msgstr "Nastavuje sa nový ovládač…"
 
 #: ../panels/printers/printers.ui.h:18
 msgid "page 3"
-msgstr ""
+msgstr "strana č. 3"
 
 #. Translators: This button executes command which prints test page.
 #: ../panels/printers/printers.ui.h:20
 msgid "Print _Test Page"
 msgstr "Vytlačiť _skúšobnú stranu"
 
-# PM: voľby?
 #. Translators: This button opens printer's options tab
 #: ../panels/printers/printers.ui.h:22
-#, fuzzy
 msgid "_Options"
-msgstr "_Možnosti"
+msgstr "_Voľby"
 
 #. Translators: This button adds new printer.
 #: ../panels/printers/printers.ui.h:24
@@ -3381,7 +3376,7 @@ msgstr "Výber zdroja vstupu"
 msgid "Select an input source to add"
 msgstr "Vyberte si zdroj vstupu, ktorý chcete pridať"
 
-#: ../panels/region/gnome-region-panel-system.c:465
+#: ../panels/region/gnome-region-panel-system.c:471
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings."
@@ -3389,7 +3384,7 @@ msgstr ""
 "Prihlasovacia obrazovka, systémové účty a nové používateľské účty používajú "
 "nastavenia regiónu a jazyka platné pre celý systém."
 
-#: ../panels/region/gnome-region-panel-system.c:470
+#: ../panels/region/gnome-region-panel-system.c:476
 #: ../panels/region/gnome-region-panel.ui.h:30
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
@@ -3400,11 +3395,11 @@ msgstr ""
 "nastavenia regiónu a jazyka platné pre celý systém. Môžete zmeniť systémové "
 "nastavenia, aby boli rovnaké ako vaše."
 
-#: ../panels/region/gnome-region-panel-system.c:473
+#: ../panels/region/gnome-region-panel-system.c:479
 msgid "Copy Settings"
 msgstr "Kopírovať nastavenia"
 
-#: ../panels/region/gnome-region-panel-system.c:476
+#: ../panels/region/gnome-region-panel-system.c:482
 #: ../panels/region/gnome-region-panel.ui.h:37
 msgid "Copy Settings..."
 msgstr "Kopírovať nastavenia…"
@@ -3579,22 +3574,18 @@ msgstr "2 minútach"
 msgid "3 minutes"
 msgstr "3 minútach"
 
-# PM:Šetriť energiu stlmením jasu
 # obrazovka je jasná z kontextu
 #: ../panels/screen/screen.ui.h:10
-#, fuzzy
 msgid "_Dim screen to save power"
-msgstr "Pre úsporu energie _znížiť jas"
+msgstr "Šetriť _energiu stlmením jasu"
 
 #: ../panels/screen/screen.ui.h:11
 msgid "Brightness"
 msgstr "Jas"
 
-# PM: Pri nečinnosti vypnúť obrazovku po:
 #: ../panels/screen/screen.ui.h:12
-#, fuzzy
 msgid "_Turn screen off when inactive for:"
-msgstr "_Vypnúť obrazovku pri nečinnosti po:"
+msgstr "_Pri nečinnosti vypnúť obrazovku po:"
 
 #: ../panels/screen/screen.ui.h:13
 msgid "_Lock screen after:"
@@ -3606,8 +3597,8 @@ msgid "Don't lock when at home"
 msgstr "Doma neuzamykať"
 
 # PM: nemyslia sa tým gepgrafocké polohy resp nejaké miesta / napr v škole doma a pod?
+# PK: je to link sem http://glade.gnome.org
 #: ../panels/screen/screen.ui.h:16
-#, fuzzy
 msgid "Locations..."
 msgstr "Umiestnenia…"
 
@@ -3638,31 +3629,29 @@ msgstr " — aplet Ovládanie hlasitosti GNOME"
 msgid "Volume Control"
 msgstr "Ovládanie hlasitosti"
 
-# PM: pracovnej plochy? nemyslí sa tu desktop enviroment  len to skrátene zapísali?
 # desktop entry comment
 #: ../panels/sound/data/gnome-sound-applet.desktop.in.h:2
-#, fuzzy
 msgid "Show desktop volume control"
-msgstr "Zobrazuje ovládanie hlasitosti pracovnej plochy"
+msgstr "Zobrazuje ovládanie hlasitosti pracovného prostredia"
 
 # desktop entry name
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:1
 msgid "Sound"
 msgstr "Zvuk"
 
-#  PM: čo za udalosti sa tým myslia ja tam vidím len zvukové efekty
+# events are e.g. "low battery"
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
-#, fuzzy
-msgid "Change sound volume and sound events"
-msgstr "Mení hlasitosť zvuku a zvukové udalosti"
+msgid "Change sound volume and event sounds"
+msgstr "Mení hlasitosť zvuku a zvukové upozornenia"
 
 # PM: Utíchanie je hovadina, podľa toho nikto nebude hľadať aplikáciu
+# PK: dal som tam prelinanie, kedze to je normalne v prehravacoch
 #. Translators: those are keywords for the sound control-center panel
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
 msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
 msgstr ""
 "Karta;Mikrofón;Reproduktor;Hlasitosť;Rovnováha;Bluetooth;Slúchadlo;Slúchadlá;"
-"Zvuk;Stereo;Mono;Efekty;"
+"Zvuk;Stereo;Mono;Efekty;Prelínanie;"
 
 #. Translators: This is the name of an audio file that sounds like the bark of a dog.
 #. You might want to translate it into the equivalent words of your language.
@@ -3832,11 +3821,9 @@ msgstr "Zv_oľte si zariadenie vstupu zvuku:"
 msgid "Sound Effects"
 msgstr "Zvukové efekty"
 
-# PM: tu má byť hlasitosť varovania?
 #: ../panels/sound/gvc-mixer-dialog.c:1789
-#, fuzzy
 msgid "_Alert volume:"
-msgstr "_Zvuk výstrahy:"
+msgstr "_Hlasitosť varovania:"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1802
 msgid "Applications"
@@ -4435,13 +4422,11 @@ msgstr "_Miestny účet"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:5
 msgid "_Enterprise Login"
-msgstr ""
+msgstr "_Firemné prihlásenie"
 
-# PM: používateľské meno
 #: ../panels/user-accounts/data/account-dialog.ui.h:6
-#, fuzzy
 msgid "_Username"
-msgstr "_Meno používateľa"
+msgstr "_Používateľské meno"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
 msgid "_Full name"
@@ -4467,16 +4452,16 @@ msgstr "_Heslo"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:12
 msgid "Tip: Enterprise domain or realm name"
-msgstr ""
+msgstr "Rada: Firemná doména alebo názov pôsobiska"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:13
 msgid "C_ontinue"
 msgstr "P_okračovať"
 
+# GtkLabel label
 #: ../panels/user-accounts/data/account-dialog.ui.h:14
-#, fuzzy
 msgid "Domain Administrator Login"
-msgstr "Správca"
+msgstr "Prihlásenie správcu domény"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:15
 msgid ""
@@ -4486,13 +4471,12 @@ msgid ""
 msgstr ""
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:18
-#, fuzzy
 msgid "Administrator _Name"
-msgstr "Správca"
+msgstr "_Meno správcu"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:19
 msgid "Administrator Password"
-msgstr "Správca"
+msgstr "Heslo správcu"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:1
 msgid "Left thumb"
@@ -4656,18 +4640,16 @@ msgid "Gallery"
 msgstr "Galéria"
 
 # PM: Získať viac obrázkov prehľadaním?
-# TODO
+# PK: mne to tam viac sedi takto
+# window title
 #: ../panels/user-accounts/data/photo-dialog.ui.h:4
 #: ../panels/user-accounts/um-photo-dialog.c:218
-#, fuzzy
 msgid "Browse for more pictures"
-msgstr "Prechádzať pre viac obrázkov"
+msgstr "Výber obrázka"
 
-# PK: odfotit
-# PŠ: nesúhlasím, podľa mňa to tam lepšie sedí takto
 #: ../panels/user-accounts/data/photo-dialog.ui.h:5
 msgid "Take a photograph"
-msgstr "Vyfotografovať"
+msgstr "Odfotiť"
 
 #: ../panels/user-accounts/data/photo-dialog.ui.h:6
 msgid "Browse"
@@ -4815,7 +4797,7 @@ msgstr "Zlyhala registrácia účtu"
 
 #: ../panels/user-accounts/um-account-dialog.c:577
 msgid "No supported way to authenticate with this domain"
-msgstr ""
+msgstr "Overenie totožnosti na tejto doméne nie je podporované"
 
 #: ../panels/user-accounts/um-account-dialog.c:631
 msgid "Failed to join domain"
@@ -4823,7 +4805,7 @@ msgstr ""
 
 #: ../panels/user-accounts/um-account-dialog.c:688
 msgid "Failed to log into domain"
-msgstr ""
+msgstr "Zlyhalo pripojenie do domény"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:139
 msgid ""
@@ -4969,8 +4951,8 @@ msgid "Take a photo..."
 msgstr "Odfotiť…"
 
 # PM: Získať viac obrazkov prechádzaním
+# PK: mne toto viac sedi
 #: ../panels/user-accounts/um-photo-dialog.c:479
-#, fuzzy
 msgid "Browse for more pictures..."
 msgstr "Prechádzať pre viac obrázkov…"
 
@@ -4980,29 +4962,27 @@ msgid "Used by %s"
 msgstr "Používa ho %s"
 
 #: ../panels/user-accounts/um-realm-manager.c:351
-#, fuzzy
-#| msgid "Cannot remove automatically added profile"
 msgid "Cannot automatically join this type of domain"
-msgstr "Nie je možné odstrániť automaticky pridaný profil"
+msgstr "S takýmto typom domény sa nedá automaticky spojiť"
 
 #: ../panels/user-accounts/um-realm-manager.c:414
 #, c-format
 msgid "No such domain or realm found"
-msgstr ""
+msgstr "Nebola nájdená taká doména alebo pôsobisko"
 
 #: ../panels/user-accounts/um-realm-manager.c:815
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
-msgstr ""
+msgstr "Nedá sa prihlásiť ako %s do domény %s"
 
 #: ../panels/user-accounts/um-realm-manager.c:820
 msgid "Invalid password, please try again"
-msgstr ""
+msgstr "Neplatné heslo, skúste to znovu"
 
 #: ../panels/user-accounts/um-realm-manager.c:824
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
-msgstr ""
+msgstr "Nepodarilo sa pripojiť k doméne %s: %s"
 
 #: ../panels/user-accounts/um-user-manager.c:466
 #, c-format
@@ -5084,32 +5064,28 @@ msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Uistite sa, prosím, že je služba AccountService nainštalovaná a povolená."
 
-# PM: keď chcete...
 # tooltip
 #: ../panels/user-accounts/um-user-panel.c:906
-#, fuzzy
 msgid ""
 "To make changes,\n"
 "click the * icon first"
 msgstr ""
-"Na vykonanie zmien\n"
-"najskôr kliknite na ikonu *"
+"Keď chcete vykonať zmeny,\n"
+"kliknite najprv na ikonu *"
 
 # tooltip
 #: ../panels/user-accounts/um-user-panel.c:944
 msgid "Create a user account"
 msgstr "Vytvorí používateľský účet"
 
-# PM: keď chcete...
 # tooltip
 #: ../panels/user-accounts/um-user-panel.c:955
 #: ../panels/user-accounts/um-user-panel.c:1237
-#, fuzzy
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
 msgstr ""
-"Pre vytvorenie používateľského účtu,\n"
+"Keď chcete vytvoriť používateľský účet,\n"
 "kliknite najprv na ikonu *"
 
 # tooltip
@@ -5117,16 +5093,14 @@ msgstr ""
 msgid "Delete the selected user account"
 msgstr "Odstráni vybraný používateľský účet"
 
-# PM: keď chcete...
 # tooltip
 #: ../panels/user-accounts/um-user-panel.c:976
 #: ../panels/user-accounts/um-user-panel.c:1242
-#, fuzzy
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
 msgstr ""
-"Pre odstránenie používateľského účtu,\n"
+"Keď chcete odstrániť používateľský účet,\n"
 "kliknite najprv na ikonu *"
 
 #: ../panels/user-accounts/um-user-panel.c:1150
@@ -5176,14 +5150,12 @@ msgstr ""
 msgid "Screen Calibration"
 msgstr "Kalibrovanie obrazovky"
 
-# tap nie je kliknite, dotknite sa
 #: ../panels/wacom/calibrator/gui_gtk.c:79
-#, fuzzy
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
 msgstr ""
-"Prosím, kliknite na cieľové značky, tak ako sa objavujú na obrazovke, pre "
+"Prosím, dotknite sa cieľových značiek, tak ako sa objavujú na obrazovke, pre "
 "kalibráciu tabletu."
 
 #: ../panels/wacom/calibrator/gui_gtk.c:368
@@ -5194,10 +5166,11 @@ msgstr ""
 msgid "Output:"
 msgstr "Výstup:"
 
+# * http://en.wikipedia.org/wiki/Letterboxing_(filming)
 #. Keep ratio switch
 #: ../panels/wacom/cc-wacom-mapping-panel.c:287
 msgid "Keep aspect ratio (letterbox):"
-msgstr ""
+msgstr "Zachovať pomer strán (širokouhlý):"
 
 #. Whole-desktop checkbox
 #: ../panels/wacom/cc-wacom-mapping-panel.c:298
@@ -5210,21 +5183,19 @@ msgid "%d of %d"
 msgstr "%d. z %d"
 
 #: ../panels/wacom/cc-wacom-page.c:118 ../panels/wacom/cc-wacom-page.c:371
-#, fuzzy
 msgctxt "Wacom action-type"
 msgid "None"
-msgstr "Nič"
+msgstr "Žiadny"
 
 #: ../panels/wacom/cc-wacom-page.c:119
 msgctxt "Wacom action-type"
 msgid "Send Keystroke"
-msgstr ""
+msgstr "Odoslať stlačenie klávesu"
 
 #: ../panels/wacom/cc-wacom-page.c:120
-#, fuzzy
 msgctxt "Wacom action-type"
 msgid "Switch Monitor"
-msgstr "Monitor"
+msgstr "Prepnúť monitor"
 
 #: ../panels/wacom/cc-wacom-page.c:601
 msgid "Up"
@@ -5234,9 +5205,10 @@ msgstr "Hore"
 msgid "Down"
 msgstr "Dole"
 
+# PK: tu mi viac sedi jednotne čislo
 #: ../panels/wacom/cc-wacom-page.c:638
 msgid "Switch Modes"
-msgstr ""
+msgstr "Prepnúť režim"
 
 #: ../panels/wacom/cc-wacom-page.c:724
 #: ../panels/wacom/cc-wacom-stylus-page.c:376
@@ -5303,11 +5275,9 @@ msgstr ""
 msgid "Calibrate..."
 msgstr "Kalibrovať…"
 
-# obrazovky
 #: ../panels/wacom/gnome-wacom-properties.ui.h:11
-#, fuzzy
 msgid "Adjust display resolution"
-msgstr "Prispôsobiť rozlíšenie monitora"
+msgstr "Prispôsobiť rozlíšenie displeja"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:12
 msgid "Tracking Mode"
@@ -5319,72 +5289,68 @@ msgstr ""
 
 #. If no mode is available, we use "left-ring-mode-1" for backward compat
 #: ../panels/wacom/gsd-wacom-device.c:1015
-#, fuzzy
-#| msgid "Left ring finger"
 msgid "Left Ring"
-msgstr "Ľavý prstenník"
+msgstr "Ľavý kruh"
 
 #: ../panels/wacom/gsd-wacom-device.c:1023
 #, c-format
 msgid "Left Ring Mode #%d"
-msgstr ""
+msgstr "Režim ľavého kruhu č. %d"
 
 #. If no mode is available, we use "right-ring-mode-1" for backward compat
 #: ../panels/wacom/gsd-wacom-device.c:1040
-#, fuzzy
-#| msgid "Right ring finger"
 msgid "Right Ring"
-msgstr "Pravý prstenník"
+msgstr "Pravý kruh"
 
 #: ../panels/wacom/gsd-wacom-device.c:1048
 #, c-format
 msgid "Right Ring Mode #%d"
-msgstr ""
+msgstr "Režim pravého kruhu č. %d"
 
 #. If no mode is available, we use "left-strip-mode-1" for backward compat
 #: ../panels/wacom/gsd-wacom-device.c:1087
 msgid "Left Touchstrip"
-msgstr ""
+msgstr "Ľavý dotykový pruh"
 
 #: ../panels/wacom/gsd-wacom-device.c:1095
 #, c-format
 msgid "Left Touchstrip Mode #%d"
-msgstr ""
+msgstr "Režim ľavého dotykového pruhu č. %d"
 
 #. If no mode is available, we use "right-strip-mode-1" for backward compat
 #: ../panels/wacom/gsd-wacom-device.c:1112
 msgid "Right Touchstrip"
-msgstr ""
+msgstr "Pravý dotykový pruh"
 
 #: ../panels/wacom/gsd-wacom-device.c:1120
 #, c-format
 msgid "Right Touchstrip Mode #%d"
-msgstr ""
+msgstr "Režim pravého dotykového pruhu č. %d"
 
 #: ../panels/wacom/gsd-wacom-device.c:1143
 #, c-format
 msgid "Left Touchring Mode Switch"
-msgstr ""
+msgstr "Prepínač režimu ľavého dotykového kruhu"
 
 #: ../panels/wacom/gsd-wacom-device.c:1145
 #, c-format
 msgid "Right Touchring Mode Switch"
-msgstr ""
+msgstr "Prepínač režimu ľavého dotykového kruhu"
 
 #: ../panels/wacom/gsd-wacom-device.c:1148
 #, c-format
 msgid "Left Touchstrip Mode Switch"
-msgstr ""
+msgstr "Prepínač režimu ľavého dotykového pruhu"
 
 #: ../panels/wacom/gsd-wacom-device.c:1150
 #, c-format
 msgid "Right Touchstrip Mode Switch"
-msgstr ""
+msgstr "Prepínač režimu pravého dotykového pruhu"
 
 #: ../panels/wacom/gsd-wacom-device.c:1155
 #, c-format
 msgid "Mode Switch #%d"
-msgstr ""
+msgstr "Prepínač režimu č. %d"
 
 #: ../panels/wacom/gsd-wacom-device.c:1226
 #, c-format
@@ -5446,11 +5412,9 @@ msgstr "Späť"
 msgid "Forward"
 msgstr "Dopredu"
 
-# PM: pero
 #: ../panels/wacom/wacom-stylus-page.ui.h:11
-#, fuzzy
 msgid "Stylus"
-msgstr "Stylus"
+msgstr "Pero"
 
 #: ../panels/wacom/wacom-stylus-page.ui.h:12
 msgid "Eraser Pressure Feel"
@@ -5474,11 +5438,9 @@ msgstr "Horné tlačidlo"
 msgid "Lower Button"
 msgstr "Spodné tlačidlo"
 
-# PM: hrotu
 #: ../panels/wacom/wacom-stylus-page.ui.h:17
-#, fuzzy
 msgid "Tip Pressure Feel"
-msgstr "Pocit tlaku špičky"
+msgstr "Pocit tlaku hrotu"
 
 # PM: takto to tuším máme v iných moduloch
 # cmd desc
@@ -5503,19 +5465,17 @@ msgid "Panel to display"
 msgstr "Panel na zobrazenie"
 
 #: ../shell/control-center.c:85
-msgid "- System Settings"
-msgstr "- nastavenia systému"
+msgid "- Settings"
+msgstr "- nastavenia"
 
-# Úplný zoznam dostupných volieb zobrazíte zadaním príkazu ...
 #: ../shell/control-center.c:93
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s\n"
 "Run '%s --help' to see a full list of available command line options.\n"
 msgstr ""
 "%s\n"
-"Na zobrazenie úplného zoznamu dostupných volieb príkazového riadka spustite "
-"„%s --help“.\n"
+"Úplný zoznam dostupných volieb zobrazíte zadaním príkazu „%s --help“.\n"
 
 #: ../shell/control-center.c:211
 msgid "Help"
@@ -5530,36 +5490,13 @@ msgid "Control Center"
 msgstr "Ovládacie centrum"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:1
-msgid "System Settings"
-msgstr "Nastavenia systému"
+msgid "Settings"
+msgstr "Nastavenia"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
-msgstr "Nastavenia;"
+msgstr "Nastavenia;Konfigurácia;"
 
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "Všetky nastavenia"
-
-#~ msgid "Network;Wireless;IP;LAN;Proxy;"
-#~ msgstr "Sieť;Bezdrôtová;IP;LAN;Proxy;"
-
-#~ msgid "Wireless"
-#~ msgstr "Bezdrôtová"
-
-#~ msgid "Wired"
-#~ msgstr "Drôtová"
-
-#~ msgid "Mobile broadband"
-#~ msgstr "Mobilná"
-
-#~ msgid "Mesh"
-#~ msgstr "Mesh"
-
-#~ msgctxt "Zoom Grayscale"
-#~ msgid "Color"
-#~ msgstr "Farba"
-
-#~ msgctxt "Zoom Grayscale"
-#~ msgid "None"
-#~ msgstr "Žiadna"
