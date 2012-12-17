@@ -52,6 +52,7 @@ struct _NetConnectionEditor
 
         NMConnection     *connection;
         NMConnection     *orig_connection;
+        gboolean          is_new_connection;
         NMAccessPoint    *ap;
 
         GtkBuilder       *builder;

@@ -99,6 +99,14 @@ void         ce_page_mac_to_entry    (const GByteArray *mac,
 GByteArray  *ce_page_entry_to_mac    (GtkEntry         *entry,
                                       gint              type,
                                       gboolean         *invalid);
+gint         ce_get_property_default (NMSetting        *setting,
+                                      const gchar      *property_name);
+gint         ce_spin_output_with_default (GtkSpinButton *spin,
+                                          gpointer       user_data);
+
+gchar * ce_page_get_next_available_name (GSList *connections, const gchar *format);
+
+
 
 G_END_DECLS
 

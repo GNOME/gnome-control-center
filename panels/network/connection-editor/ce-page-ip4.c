@@ -887,6 +887,10 @@ ce_page_ip4_new (NMConnection     *connection,
                                            _("IPv4")));
 
         page->setting = nm_connection_get_setting_ip4_config (connection);
+        if (!page->setting) {
+                page->setting = NM_SETTING_IP4_CONFIG (nm_setting_ip4_config_new ());
+                nm_connection_add_setting (connection, NM_SETTING (page->setting));
+        }
 
         connect_ip4_page (page);
 
