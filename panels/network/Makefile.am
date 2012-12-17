@@ -56,6 +56,7 @@ dist_ui_DATA =						\
 	network-wifi.ui					\
 	network-simple.ui				\
 	network-mobile.ui				\
+	network-ethernet.ui				\
 	network.ui
 
 @INTLTOOL_DESKTOP_RULE@

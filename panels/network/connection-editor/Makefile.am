@@ -16,7 +16,11 @@ libconnection_editor_la_SOURCES = 		\
 	ce-page-security.h			\
 	ce-page-security.c			\
 	ce-page-reset.h				\
-	ce-page-reset.c
+	ce-page-reset.c				\
+	ce-page-ethernet.h			\
+	ce-page-ethernet.c			\
+	ce-page-8021x-security.h		\
+	ce-page-8021x-security.c
 
 libconnection_editor_la_CPPFLAGS = 		\
 	-I$(srcdir)/../wireless-security	\
@@ -37,7 +41,8 @@ ui_DATA = 					\
 	ip4-page.ui				\
 	ip6-page.ui				\
 	reset-page.ui				\
-	security-page.ui
+	security-page.ui			\
+	ethernet-page.ui
 
 EXTRA_DIST = \
 	$(ui_DATA)

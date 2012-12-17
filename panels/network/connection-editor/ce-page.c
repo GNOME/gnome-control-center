@@ -28,6 +28,8 @@
 
 #include <nm-utils.h>
 
+#include <glib/gi18n.h>
+
 #include "ce-page.h"
 
 
@@ -224,20 +226,23 @@ ce_page_new (GType             type,
         page->title = g_strdup (title);
         page->client = client;
         page->settings= settings;
-        if (!gtk_builder_add_from_file (page->builder, ui_file, &error)) {
-                g_warning ("Couldn't load builder file: %s", error->message);
-                g_error_free (error);
-                g_object_unref (page);
-                return NULL;
-        }
-        page->page = GTK_WIDGET (gtk_builder_get_object (page->builder, "page"));
-        if (!page->page) {
-                g_warning ("Couldn't load page widget from %s", ui_file);
-                g_object_unref (page);
-                return NULL;
-        }
 
-        g_object_ref_sink (page->page);
+        if (ui_file) {
+                if (!gtk_builder_add_from_file (page->builder, ui_file, &error)) {
+                        g_warning ("Couldn't load builder file: %s", error->message);
+                        g_error_free (error);
+                        g_object_unref (page);
+                        return NULL;
+                }
+                page->page = GTK_WIDGET (gtk_builder_get_object (page->builder, "page"));
+                if (!page->page) {
+                        g_warning ("Couldn't load page widget from %s", ui_file);
+                        g_object_unref (page);
+                        return NULL;
+                }
+
+                g_object_ref_sink (page->page);
+        }
 
         return page;
 }
@@ -451,4 +456,93 @@ const gchar *
 ce_page_get_security_setting (CEPage *page)
 {
         return page->security_setting;
+}
+
+gint
+ce_get_property_default (NMSetting *setting, const gchar *property_name)
+{
+        GParamSpec *spec;
+        GValue value = { 0, };
+
+        spec = g_object_class_find_property (G_OBJECT_GET_CLASS (setting), property_name);
+        g_return_val_if_fail (spec != NULL, -1);
+
+        g_value_init (&value, spec->value_type);
+        g_param_value_set_default (spec, &value);
+
+        if (G_VALUE_HOLDS_CHAR (&value))
+                return (int) g_value_get_schar (&value);
+        else if (G_VALUE_HOLDS_INT (&value))
+                return g_value_get_int (&value);
+        else if (G_VALUE_HOLDS_INT64 (&value))
+                return (int) g_value_get_int64 (&value);
+        else if (G_VALUE_HOLDS_LONG (&value))
+                return (int) g_value_get_long (&value);
+        else if (G_VALUE_HOLDS_UINT (&value))
+                return (int) g_value_get_uint (&value);
+        else if (G_VALUE_HOLDS_UINT64 (&value))
+                return (int) g_value_get_uint64 (&value);
+        else if (G_VALUE_HOLDS_ULONG (&value))
+                return (int) g_value_get_ulong (&value);
+        else if (G_VALUE_HOLDS_UCHAR (&value))
+                return (int) g_value_get_uchar (&value);
+        g_return_val_if_fail (FALSE, 0);
+        return 0;
+}
+
+gint
+ce_spin_output_with_default (GtkSpinButton *spin, gpointer user_data)
+{
+        gint defvalue = GPOINTER_TO_INT (user_data);
+        gint val;
+        gchar *buf = NULL;
+
+        val = gtk_spin_button_get_value_as_int (spin);
+        if (val == defvalue)
+                buf = g_strdup (_("automatic"));
+        else
+                buf = g_strdup_printf ("%d", val);
+
+        if (strcmp (buf, gtk_entry_get_text (GTK_ENTRY (spin))))
+                gtk_entry_set_text (GTK_ENTRY (spin), buf);
+
+        g_free (buf);
+        return TRUE;
+}
+
+gchar *
+ce_page_get_next_available_name (GSList *connections, const gchar *format)
+{
+        GSList *names = NULL, *l;
+        gchar *cname = NULL;
+        gint i = 0;
+
+        for (l = connections; l; l = l->next) {
+                const gchar *id;
+
+                id = nm_connection_get_id (NM_CONNECTION (l->data));
+                g_assert (id);
+                names = g_slist_append (names, (gpointer) id);
+        }
+
+        /* Find the next available unique connection name */
+        while (!cname && (i++ < 10000)) {
+                gchar *temp;
+                gboolean found = FALSE;
+
+                temp = g_strdup_printf (format, i);
+                for (l = names; l; l = l->next) {
+                        if (!strcmp (l->data, temp)) {
+                                found = TRUE;
+                                break;
+                        }
+                }
+                if (!found)
+                        cname = temp;
+                else
+                        g_free (temp);
+        }
+        g_slist_free (names);
+
+        return cname;
 }

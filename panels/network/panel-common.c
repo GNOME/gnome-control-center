@@ -655,3 +655,21 @@ panel_unset_device_widgets (GtkBuilder *builder)
         panel_set_device_widget_details (builder, "dns", NULL);
         panel_set_device_widget_details (builder, "route", NULL);
 }
+
+gchar *
+panel_get_ip4_address_as_string (NMIP4Config *ip4, const gchar *what)
+{
+        return get_ipv4_config_address_as_string (ip4, what);
+}
+
+gchar *
+panel_get_ip4_dns_as_string (NMIP4Config *ip4)
+{
+        return get_ipv4_config_name_servers_as_string (ip4);
+}
+
+gchar *
+panel_get_ip6_address_as_string (NMIP6Config *ip6)
+{
+        return get_ipv6_config_address_as_string (ip6);
+}
