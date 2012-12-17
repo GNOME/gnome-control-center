@@ -1551,6 +1551,8 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   GtkWidget *widget;
   GtkTreeView *treeview;
   GtkTreeSelection *selection;
+  GtkTable *table;
+  GList *focus_chain;
   CcShell *shell;
   GtkListStore *model;
   GtkTreeModelSort *sort_model;
@@ -1659,6 +1661,15 @@ setup_dialog (CcPanel *panel, GtkBuilder *builder)
   widget = GTK_WIDGET (gtk_builder_get_object (builder, "shortcut-toolbar"));
   context = gtk_widget_get_style_context (widget);
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
+
+  /* set up the focus chain */
+  focus_chain = g_list_append (NULL, WID (builder, "sections_swindow"));
+  focus_chain = g_list_append (focus_chain, WID (builder, "actions_swindow"));
+  focus_chain = g_list_append (focus_chain, WID (builder, "shortcut-toolbar"));
+
+  table = GTK_TABLE (gtk_builder_get_object (builder, "shortcuts_table"));
+  gtk_container_set_focus_chain (GTK_CONTAINER (table), focus_chain);
+  g_list_free (focus_chain);
 
   /* set up the dialog */
   shell = cc_panel_get_shell (CC_PANEL (panel));
