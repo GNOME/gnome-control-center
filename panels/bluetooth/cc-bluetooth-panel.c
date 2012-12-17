@@ -55,9 +55,11 @@ struct CcBluetoothPanelPrivate {
 	BluetoothKillswitch *killswitch;
 	gboolean             debug;
 	GHashTable          *connecting_devices;
+	GtkWidget           *kill_switch_header;
 };
 
 static void cc_bluetooth_panel_finalize (GObject *object);
+static void cc_bluetooth_panel_constructed (GObject *object);
 
 static void
 launch_command (const char *command)
@@ -82,6 +84,7 @@ cc_bluetooth_panel_class_init (CcBluetoothPanelClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
+	object_class->constructed = cc_bluetooth_panel_constructed;
 	object_class->finalize = cc_bluetooth_panel_finalize;
 
 	panel_class->get_help_uri = cc_bluetooth_panel_get_help_uri;
@@ -103,6 +106,7 @@ cc_bluetooth_panel_finalize (GObject *object)
 
 	g_clear_pointer (&self->priv->connecting_devices, g_hash_table_destroy);
 	g_clear_pointer (&self->priv->selected_bdaddr, g_free);
+	g_clear_object (&self->priv->kill_switch_header);
 
 	G_OBJECT_CLASS (cc_bluetooth_panel_parent_class)->finalize (object);
 }
@@ -228,6 +232,20 @@ switch_connected_active_changed (GtkSwitch        *button,
 	add_connecting (self, data->bdaddr);
 	set_connecting_page (self, CONNECTING_NOTEBOOK_PAGE_SPINNER);
 	g_free (proxy);
+}
+
+static void
+cc_bluetooth_panel_constructed (GObject *object)
+{
+	CcBluetoothPanel *self = CC_BLUETOOTH_PANEL (object);
+
+	G_OBJECT_CLASS (cc_bluetooth_panel_parent_class)->constructed (object);
+
+	/* add kill switch widgets  */
+	self->priv->kill_switch_header = g_object_ref (WID ("box_power"));
+	cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)),
+					 self->priv->kill_switch_header);
+	gtk_widget_show_all (self->priv->kill_switch_header);
 }
 
 enum {
