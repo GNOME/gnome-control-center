@@ -41,16 +41,24 @@ typedef struct _NetDeviceEthernetClass     NetDeviceEthernetClass;
 
 struct _NetDeviceEthernet
 {
-         NetDeviceSimple                 parent;
-         NetDeviceEthernetPrivate          *priv;
+        NetDeviceSimple parent;
+
+        GtkBuilder *builder;
+
+        GtkWidget *list;
+        GtkWidget *scrolled_window;
+        GtkWidget *details;
+        GtkWidget *details_button;
+        GtkWidget *add_profile_button;
+        gboolean   updating_device;
 };
 
 struct _NetDeviceEthernetClass
 {
-        NetDeviceSimpleClass             parent_class;
+        NetDeviceSimpleClass parent_class;
 };
 
-GType            net_device_ethernet_get_type      (void);
+GType net_device_ethernet_get_type (void);
 
 G_END_DECLS
 

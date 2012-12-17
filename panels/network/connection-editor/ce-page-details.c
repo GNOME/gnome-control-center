@@ -26,6 +26,7 @@
 
 #include <nm-utils.h>
 #include <nm-device-wifi.h>
+#include <nm-device-ethernet.h>
 
 #include "../panel-common.h"
 #include "ce-page-details.h"
@@ -120,12 +121,35 @@ connect_details_page (CEPageDetails *page)
         NMDeviceState state;
         NMAccessPoint *active_ap;
         const gchar *str;
+        gboolean device_is_active;
+
+        if (NM_IS_DEVICE_WIFI (page->device))
+                active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (page->device));
+        else
+                active_ap = NULL;
 
         state = nm_device_get_state (page->device);
 
+        device_is_active = FALSE;
         speed = 0;
-        if (page->ap == active_ap && state != NM_DEVICE_STATE_UNAVAILABLE) {
-                speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (page->device)) / 1000;
+        if (active_ap && page->ap == active_ap && state != NM_DEVICE_STATE_UNAVAILABLE) {
+                device_is_active = TRUE;
+                if (NM_IS_DEVICE_WIFI (page->device))
+                        speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (page->device)) / 1000;
+        } else {
+                NMActiveConnection *ac;
+                const gchar *p1, *p2;
+
+                ac = nm_device_get_active_connection (page->device);
+                p1 = ac ? nm_active_connection_get_connection (ac) : NULL;
+                p2 = nm_connection_get_path (CE_PAGE (page)->connection);
+                if (g_strcmp0 (p1, p2) == 0) {
+                        device_is_active = TRUE;
+                        if (NM_IS_DEVICE_WIFI (page->device))
+                                speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (page->device)) / 1000;
+                        else if (NM_IS_DEVICE_ETHERNET (page->device))
+                                speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (page->device));
+                }
         }
         if (speed > 0)
                 str = g_strdup_printf (_("%d Mb/s"), speed);
@@ -133,11 +157,15 @@ connect_details_page (CEPageDetails *page)
                 str = NULL;
         panel_set_device_widget_details (CE_PAGE (page)->builder, "speed", str);
 
-        str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (page->device));
+        if (NM_IS_DEVICE_WIFI (page->device))
+                str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (page->device));
+        else if (NM_IS_DEVICE_ETHERNET (page->device))
+                str = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (page->device));
+
         panel_set_device_widget_details (CE_PAGE (page)->builder, "mac", str);
 
         str = NULL;
-        if (page->ap == active_ap)
+        if (device_is_active && active_ap)
                 str = get_ap_security_string (active_ap);
         panel_set_device_widget_details (CE_PAGE (page)->builder, "security", str);
 
@@ -160,12 +188,12 @@ connect_details_page (CEPageDetails *page)
         panel_set_device_widget_details (CE_PAGE (page)->builder, "strength", str);
 
         /* set IP entries */
-        if (page->ap != active_ap)
-                panel_unset_device_widgets (CE_PAGE (page)->builder);
-        else
+        if (device_is_active)
                 panel_set_device_widgets (CE_PAGE (page)->builder, page->device);
+        else
+                panel_unset_device_widgets (CE_PAGE (page)->builder);
 
-        if (page->ap != active_ap && CE_PAGE (page)->connection)
+        if (!device_is_active && CE_PAGE (page)->connection)
                 update_last_used (page, CE_PAGE (page)->connection);
         else
                 panel_set_device_widget_details (CE_PAGE (page)->builder, "last_used", NULL);

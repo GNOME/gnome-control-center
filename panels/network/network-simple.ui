@@ -10,7 +10,7 @@
         <property name="border_width">12</property>
         <property name="spacing">6</property>
         <child>
-          <object class="GtkGrid" id="grid">
+          <object class="GtkGrid" id="outer_grid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="valign">start</property>
@@ -82,174 +82,6 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="heading_mac">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="xalign">1</property>
-                <property name="label" translatable="yes">Hardware Address</property>
-                <property name="mnemonic_widget">label_mac</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="heading_ipv4">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="xalign">1</property>
-                <property name="label" translatable="yes">IPv4 Address</property>
-                <property name="mnemonic_widget">label_ipv4</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="heading_ipv6">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="xalign">1</property>
-                <property name="label" translatable="yes">IPv6 Address</property>
-                <property name="mnemonic_widget">label_ipv6</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="heading_route">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="xalign">1</property>
-                <property name="label" translatable="yes">Default Route</property>
-                <property name="mnemonic_widget">label_route</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="heading_dns">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="xalign">1</property>
-                <property name="yalign">0</property>
-                <property name="label" translatable="yes">DNS</property>
-                <property name="mnemonic_widget">label_dns</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label_mac">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="xalign">0</property>
-                <property name="label">AA:BB:CC:DD:55:66:77:88</property>
-                <property name="selectable">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">1</property>
-                <property name="width">2</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label_ipv4">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="xalign">0</property>
-                <property name="label">127.0.0.1</property>
-                <property name="selectable">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">3</property>
-                <property name="width">2</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label_ipv6">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="xalign">0</property>
-                <property name="label">::1</property>
-                <property name="selectable">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">4</property>
-                <property name="width">2</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label_route">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="xalign">0</property>
-                <property name="label">127.0.0.1</property>
-                <property name="selectable">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">5</property>
-                <property name="width">2</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label_dns">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="xalign">0</property>
-                <property name="yalign">0</property>
-                <property name="label">127.0.0.1</property>
-                <property name="wrap">True</property>
-                <property name="selectable">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">6</property>
-                <property name="width">2</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkAlignment" id="alignment_switch">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -272,13 +104,189 @@
               </packing>
             </child>
             <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
+              <object class="GtkGrid" id="grid">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">20</property>
+                <property name="orientation">vertical</property>
+                <property name="row_spacing">10</property>
+                <property name="column_spacing">6</property>
+                <property name="column_homogeneous">True</property>
+                <child>
+                  <object class="GtkLabel" id="heading_mac">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">Hardware Address</property>
+                    <property name="mnemonic_widget">label_mac</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="heading_ipv4">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">IPv4 Address</property>
+                    <property name="mnemonic_widget">label_ipv4</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">1</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="heading_ipv6">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">IPv6 Address</property>
+                    <property name="mnemonic_widget">label_ipv6</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">2</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="heading_route">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">1</property>
+                    <property name="label" translatable="yes">Default Route</property>
+                    <property name="mnemonic_widget">label_route</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">3</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="heading_dns">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">1</property>
+                    <property name="yalign">0</property>
+                    <property name="label" translatable="yes">DNS</property>
+                    <property name="mnemonic_widget">label_dns</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">4</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label_mac">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="xalign">0</property>
+                    <property name="label">AA:BB:CC:DD:55:66:77:88</property>
+                    <property name="selectable">True</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">0</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label_ipv4">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="xalign">0</property>
+                    <property name="label">127.0.0.1</property>
+                    <property name="selectable">True</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">1</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label_ipv6">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="xalign">0</property>
+                    <property name="label">::1</property>
+                    <property name="selectable">True</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">2</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label_route">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="xalign">0</property>
+                    <property name="label">127.0.0.1</property>
+                    <property name="selectable">True</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">3</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label_dns">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="xalign">0</property>
+                    <property name="yalign">0</property>
+                    <property name="label">127.0.0.1</property>
+                    <property name="wrap">True</property>
+                    <property name="selectable">True</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">4</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+                <property name="width">3</property>
+                <property name="height">1</property>
+              </packing>
             </child>
           </object>
           <packing>
@@ -321,13 +329,5 @@
       </object>
     </child>
   </object>
-  <object class="GtkSizeGroup" id="sizegroup1">
-    <widgets>
-      <widget name="heading_mac"/>
-      <widget name="heading_ipv4"/>
-      <widget name="heading_ipv6"/>
-      <widget name="heading_route"/>
-      <widget name="heading_dns"/>
-    </widgets>
-  </object>
+  <object class="GtkSizeGroup" id="sizegroup1"/>
 </interface>
