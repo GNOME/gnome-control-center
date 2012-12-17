@@ -21,7 +21,11 @@ libconnection_editor_la_SOURCES = 		\
 	ce-page-security.h			\
 	ce-page-security.c			\
 	ce-page-reset.h				\
-	ce-page-reset.c
+	ce-page-reset.c				\
+	ce-page-ethernet.h			\
+	ce-page-ethernet.c			\
+	ce-page-8021x-security.h		\
+	ce-page-8021x-security.c
 
 libconnection_editor_la_CPPFLAGS = 		\
 	-I$(srcdir)/../wireless-security	\

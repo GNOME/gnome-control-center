@@ -855,6 +855,10 @@ ce_page_ip6_new (NMConnection     *connection,
                                            _("IPv6")));
 
         page->setting = nm_connection_get_setting_ip6_config (connection);
+        if (!page->setting) {
+                page->setting = NM_SETTING_IP6_CONFIG (nm_setting_ip6_config_new ());
+                nm_connection_add_setting (connection, NM_SETTING (page->setting));
+        }
 
         connect_ip6_page (page);
 

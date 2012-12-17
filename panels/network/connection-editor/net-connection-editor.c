@@ -35,6 +35,8 @@
 #include "ce-page-ip6.h"
 #include "ce-page-security.h"
 #include "ce-page-reset.h"
+#include "ce-page-ethernet.h"
+#include "ce-page-8021x-security.h"
 
 #include "egg-list-box/egg-list-box.h"
 
@@ -88,7 +90,9 @@ update_complete (NetConnectionEditor *editor, GError *error)
 }
 
 static void
-updated_connection_cb (NMRemoteConnection *connection, GError *error, gpointer data)
+updated_connection_cb (NMRemoteConnection *connection,
+                       GError             *error,
+                       gpointer            data)
 {
         NetConnectionEditor *editor = data;
 
@@ -98,11 +102,36 @@ updated_connection_cb (NMRemoteConnection *connection, GError *error, gpointer d
 }
 
 static void
+added_connection_cb (NMRemoteSettings   *settings,
+                     NMRemoteConnection *connection,
+                     GError             *error,
+                     gpointer            data)
+{
+        NetConnectionEditor *editor = data;
+
+        if (error) {
+                g_warning ("Failed to add connection: %s", error->message);
+                /* Leave the editor open */
+                return;
+        }
+
+        update_complete (editor, error);
+}
+
+static void
 apply_edits (NetConnectionEditor *editor)
 {
         update_connection (editor);
-        nm_remote_connection_commit_changes (NM_REMOTE_CONNECTION (editor->orig_connection),
-                                             updated_connection_cb, editor);
+
+        if (!nm_remote_settings_get_connection_by_uuid (editor->settings, nm_connection_get_uuid (editor->orig_connection)))
+                nm_remote_settings_add_connection (editor->settings,
+                                                   editor->orig_connection,
+                                                   added_connection_cb,
+                                                   editor);
+        else {
+                nm_remote_connection_commit_changes (NM_REMOTE_CONNECTION (editor->orig_connection),
+                                                     updated_connection_cb, editor);
+        }
 }
 
 static void
@@ -194,8 +223,12 @@ net_connection_editor_update_title (NetConnectionEditor *editor)
         gchar *id;
 
         sw = nm_connection_get_setting_wireless (editor->connection);
-        ssid = nm_setting_wireless_get_ssid (sw);
-        id = nm_utils_ssid_to_utf8 (ssid);
+        if (sw) {
+                ssid = nm_setting_wireless_get_ssid (sw);
+                id = nm_utils_ssid_to_utf8 (ssid);
+        } else {
+                id = g_strdup (nm_connection_get_id (editor->connection));
+        }
         gtk_window_set_title (GTK_WINDOW (editor->window), id);
         g_free (id);
 }
@@ -388,17 +421,31 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
                                       NMConnection        *connection)
 {
         GSList *pages, *l;
+        NMSettingConnection *sc;
+        const gchar *type;
 
         editor->connection = nm_connection_duplicate (connection);
         editor->orig_connection = g_object_ref (connection);
 
         net_connection_editor_update_title (editor);
 
+        sc = nm_connection_get_setting_connection (connection);
+        type = nm_setting_connection_get_connection_type (sc);
+
         add_page (editor, ce_page_details_new (editor->connection, editor->client, editor->settings, editor->device, editor->ap));
-        add_page (editor, ce_page_wifi_new (editor->connection, editor->client, editor->settings));
+        if (strcmp (type, NM_SETTING_WIRELESS_SETTING_NAME) == 0)
+                add_page (editor, ce_page_wifi_new (editor->connection, editor->client, editor->settings));
+        else if (strcmp (type, NM_SETTING_WIRED_SETTING_NAME) == 0)
+                add_page (editor, ce_page_ethernet_new (editor->connection, editor->client, editor->settings));
+
         add_page (editor, ce_page_ip4_new (editor->connection, editor->client, editor->settings));
         add_page (editor, ce_page_ip6_new (editor->connection, editor->client, editor->settings));
-        add_page (editor, ce_page_security_new (editor->connection, editor->client, editor->settings));
+
+        if (strcmp (type, NM_SETTING_WIRELESS_SETTING_NAME) == 0)
+                add_page (editor, ce_page_security_new (editor->connection, editor->client, editor->settings));
+        else if (strcmp (type, NM_SETTING_WIRED_SETTING_NAME) == 0)
+                add_page (editor, ce_page_8021x_security_new (editor->connection, editor->client, editor->settings));
+
         add_page (editor, ce_page_reset_new (editor->connection, editor->client, editor->settings, editor));
 
         pages = g_slist_copy (editor->initializing_pages);
