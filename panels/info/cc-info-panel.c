@@ -977,6 +977,11 @@ default_app_changed (GtkAppChooserButton *button,
       g_error_free (error);
       error = NULL;
     }
+  else
+    {
+      g_debug ("Set '%s' as the default handler for '%s'",
+               g_app_info_get_name (info), app_data->content_type);
+    }
 
   if (app_data->extra_type_filter)
     {
@@ -997,6 +1002,11 @@ default_app_changed (GtkAppChooserButton *button,
                          "content type '%s': %s",
                          g_app_info_get_name (info), mime_types[i], error->message);
               g_error_free (error);
+            }
+          else
+            {
+              g_debug ("Set '%s' as the default handler for '%s'",
+              g_app_info_get_name (info), mime_types[i]);
             }
         }
 
