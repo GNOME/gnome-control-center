@@ -4,7 +4,7 @@ SUBDIRS = po egg-list-box panels shell
 if BUILD_DOCUMENTATION
 SUBDIRS += man
 endif
-DIST_SUBDIRS = po panels shell man
+DIST_SUBDIRS = egg-list-box po panels shell man
 
 MAINTAINERCLEANFILES = \
 	$(srcdir)/INSTALL \
