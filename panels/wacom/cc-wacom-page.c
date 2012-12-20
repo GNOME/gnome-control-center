@@ -681,7 +681,7 @@ action_set_func (GtkTreeViewColumn *tree_column,
 	}
 
 	type = g_settings_get_enum (button->settings, ACTION_TYPE_KEY);
-	if (action_type_is_valid (type) == FALSE);
+	if (action_type_is_valid (type) == FALSE)
 		type = GSD_WACOM_ACTION_TYPE_NONE;
 
 	g_object_set (cell,
