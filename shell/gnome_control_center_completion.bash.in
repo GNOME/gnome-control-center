@@ -1,0 +1,43 @@
+#!/bin/bash
+#
+# gnome-control-center tab completion for bash.
+
+_gnome_control_center()
+{
+	local cur prev command_list i v
+
+	cur=${COMP_WORDS[COMP_CWORD]}
+	prev=${COMP_WORDS[COMP_CWORD-1]}
+
+	case "$prev" in
+	-o|--overview)
+		command_list=""
+		;;
+	*)
+		if [ $prev = "gnome-control-center" ] ; then
+			command_list="--overview --verbose --version"
+			command_list="$command_list @PANELS@"
+		elif [ $prev = "--verbose" ]; then
+			command_list="@PANELS@"
+		fi
+
+		# FIXME
+		# Add the argvs for some of the panels that
+		# support it, such as network
+		for i in --overview --version @PANELS@; do
+			if [ $i = $prev ]; then
+				command_list=""
+			fi
+		done
+		;;
+	esac
+
+	for i in $command_list; do
+		if [ -z "${i/$cur*}" ]; then
+			COMPREPLY=( ${COMPREPLY[@]} $i )
+		fi
+	done
+}
+
+# load the completion
+complete -F _gnome_control_center gnome-control-center
