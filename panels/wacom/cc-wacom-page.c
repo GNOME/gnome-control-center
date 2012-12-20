@@ -603,11 +603,11 @@ add_button_to_store (GtkListStore         *model,
 		if (button->type == WACOM_TABLET_BUTTON_TYPE_RING) {
 			dir_name = g_strdup_printf ("%s (%s)",
 						    button->name,
-						    dir == GTK_DIR_UP ? _("CCW") : _("CW"));
+						    dir == GTK_DIR_UP ? "↺" : "↻");
 		} else {
 			dir_name = g_strdup_printf ("%s (%s)",
 						    button->name,
-						    dir == GTK_DIR_UP ? _("Up") : _("Down"));
+						    dir == GTK_DIR_UP ? C_("Wacom tablet button", "Up") : C_("Wacom tablet button", "Down"));
 		}
 	} else {
 		dir_name = NULL;
