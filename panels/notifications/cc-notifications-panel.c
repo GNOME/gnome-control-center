@@ -29,6 +29,7 @@
 
 #include <egg-list-box/egg-list-box.h>
 #include "cc-notifications-panel.h"
+#include "cc-edit-dialog.h"
 
 #define MASTER_SCHEMA "org.gnome.desktop.notifications"
 #define APP_SCHEMA MASTER_SCHEMA ".application"
