@@ -255,8 +255,10 @@ gsd_wacom_tablet_button_new (const char               *name,
 			     const char               *id,
 			     const char               *settings_path,
 			     GsdWacomTabletButtonType  type,
+			     GsdWacomTabletButtonPos   pos,
 			     int                       group_id,
-			     int                       idx)
+			     int                       idx,
+			     int                       status_led)
 {
 	GsdWacomTabletButton *ret;
 
@@ -273,6 +275,8 @@ gsd_wacom_tablet_button_new (const char               *name,
 	ret->group_id = group_id;
 	ret->idx = idx;
 	ret->type = type;
+	ret->pos = pos;
+	ret->status_led = status_led;
 
 	return ret;
 }
@@ -328,9 +332,11 @@ struct GsdWacomDevicePrivate
 	char *path;
 	char *machine_id;
 	const char *icon_name;
+	char *layout_path;
 	char *tool_name;
 	gboolean reversible;
 	gboolean is_screen_tablet;
+	gboolean is_isd; /* integrated system device */
 	gboolean is_fallback;
 	GList *styli;
 	GsdWacomStylus *last_stylus;
@@ -775,12 +781,10 @@ find_output (GnomeRRScreen  *rr_screen,
 	if (rr_output == NULL) {
 		if (gsd_wacom_device_is_screen_tablet (device)) {
 			rr_output = find_output_by_heuristic (rr_screen, device);
-			if (rr_output == NULL) {
+			if (rr_output == NULL)
 				g_warning ("No fuzzy match based on heuristics was found.");
-			} else {
+			else
 				g_warning ("Automatically mapping tablet to heuristically-found display.");
-				set_display_by_output (device, rr_output);
-			}
 		}
 	}
 
@@ -956,20 +960,77 @@ add_stylus_to_device (GsdWacomDevice *device,
 }
 
 int
-gsd_wacom_device_set_next_mode (GsdWacomDevice *device,
+gsd_wacom_device_get_num_modes (GsdWacomDevice *device,
 				int             group_id)
 {
-	int current_idx;
 	int num_modes;
+
+	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), -1);
+	num_modes = GPOINTER_TO_INT (g_hash_table_lookup (device->priv->num_modes, GINT_TO_POINTER(group_id)));
+
+	return num_modes;
+}
+
+int
+gsd_wacom_device_get_current_mode (GsdWacomDevice *device,
+				   int             group_id)
+{
+	int current_idx;
 
 	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), -1);
 	current_idx = GPOINTER_TO_INT (g_hash_table_lookup (device->priv->modes, GINT_TO_POINTER(group_id)));
 	/* That means that the mode doesn't exist, see gsd_wacom_device_add_modes() */
 	g_return_val_if_fail (current_idx != 0, -1);
 
-	current_idx++;
+	return current_idx;
+}
 
+int
+gsd_wacom_device_set_next_mode (GsdWacomDevice       *device,
+				GsdWacomTabletButton *button)
+{
+	GList *l;
+	int current_idx;
+	int num_modes;
+	int num_switches;
+	int group_id;
+
+	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), -1);
+
+	group_id = button->group_id;
+	current_idx = 0;
+	num_switches = 0;
 	num_modes = GPOINTER_TO_INT (g_hash_table_lookup (device->priv->num_modes, GINT_TO_POINTER(group_id)));
+
+	/*
+	 * Check if we have multiple mode-switch buttons for that
+	 * group, and if so, compute the current index based on
+	 * the position in the list...
+	 */
+	for (l = device->priv->buttons; l != NULL; l = l->next) {
+		GsdWacomTabletButton *b = l->data;
+		if (b->type != WACOM_TABLET_BUTTON_TYPE_HARDCODED)
+			continue;
+		if (button->group_id == b->group_id)
+			num_switches++;
+		if (g_strcmp0 (button->id, b->id) == 0)
+			current_idx = num_switches;
+	}
+
+	/* We should at least have found the current mode-switch button...
+	 * If not, then it means that the given button is not a valid
+	 * mode-switch.
+	 */
+	g_return_val_if_fail (num_switches != 0, -1);
+
+	/* Only one mode-switch? cycle through the modes */
+	if (num_switches == 1) {
+		current_idx = gsd_wacom_device_get_current_mode (device, group_id);
+		/* gsd_wacom_device_get_current_mode() returns -1 when the mode doesn't exist */
+		g_return_val_if_fail (current_idx > 0, -1);
+
+		current_idx++;
+	}
 
 	if (current_idx > num_modes)
 		current_idx = 1;
@@ -1015,9 +1076,11 @@ gsd_wacom_device_add_ring_modes (WacomDevice      *wacom_device,
 			l = g_list_append (l, gsd_wacom_tablet_button_new (_("Left Ring"),
 									   "left-ring-mode-1",
 									   settings_path,
-									   WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+									   WACOM_TABLET_BUTTON_TYPE_RING,
+									   WACOM_TABLET_BUTTON_POS_LEFT,
 									   group,
-									   0));
+									   0,
+									   GSD_WACOM_NO_LED));
 		} else {
 			for (i = 1; i <= num_modes; i++) {
 				name = g_strdup_printf (_("Left Ring Mode #%d"), i);
@@ -1025,9 +1088,11 @@ gsd_wacom_device_add_ring_modes (WacomDevice      *wacom_device,
 				l = g_list_append (l, gsd_wacom_tablet_button_new (name,
 				                                                   id,
 				                                                   settings_path,
-				                                                   WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+				                                                   WACOM_TABLET_BUTTON_TYPE_RING,
+										   WACOM_TABLET_BUTTON_POS_LEFT,
 				                                                   group,
-				                                                   i - 1));
+				                                                   i - 1,
+										   GSD_WACOM_NO_LED));
 				g_free (name);
 				g_free (id);
 			}
@@ -1040,9 +1105,11 @@ gsd_wacom_device_add_ring_modes (WacomDevice      *wacom_device,
 			l = g_list_append (l, gsd_wacom_tablet_button_new (_("Right Ring"),
 									   "right-ring-mode-1",
 									   settings_path,
-									   WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+									   WACOM_TABLET_BUTTON_TYPE_RING,
+									   WACOM_TABLET_BUTTON_POS_RIGHT,
 									   group,
-									   0));
+									   0,
+									   GSD_WACOM_NO_LED));
 		} else {
 			for (i = 1; i <= num_modes; i++) {
 				name = g_strdup_printf (_("Right Ring Mode #%d"), i);
@@ -1050,9 +1117,11 @@ gsd_wacom_device_add_ring_modes (WacomDevice      *wacom_device,
 				l = g_list_append (l, gsd_wacom_tablet_button_new (name,
 				                                                   id,
 				                                                   settings_path,
-				                                                   WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+				                                                   WACOM_TABLET_BUTTON_TYPE_RING,
+										   WACOM_TABLET_BUTTON_POS_RIGHT,
 				                                                   group,
-				                                                   i - 1));
+				                                                   i - 1,
+										   GSD_WACOM_NO_LED));
 				g_free (name);
 				g_free (id);
 			}
@@ -1087,9 +1156,11 @@ gsd_wacom_device_add_strip_modes (WacomDevice      *wacom_device,
 			l = g_list_append (l, gsd_wacom_tablet_button_new (_("Left Touchstrip"),
 									   "left-strip-mode-1",
 									   settings_path,
-									   WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+									   WACOM_TABLET_BUTTON_TYPE_STRIP,
+									   WACOM_TABLET_BUTTON_POS_LEFT,
 									   group,
-									   0));
+									   0,
+									   GSD_WACOM_NO_LED));
 		} else {
 			for (i = 1; i <= num_modes; i++) {
 				name = g_strdup_printf (_("Left Touchstrip Mode #%d"), i);
@@ -1097,9 +1168,11 @@ gsd_wacom_device_add_strip_modes (WacomDevice      *wacom_device,
 				l = g_list_append (l, gsd_wacom_tablet_button_new (name,
 				                                                   id,
 				                                                   settings_path,
-				                                                   WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+				                                                   WACOM_TABLET_BUTTON_TYPE_STRIP,
+										   WACOM_TABLET_BUTTON_POS_LEFT,
 				                                                   group,
-				                                                   i - 1));
+				                                                   i - 1,
+										   GSD_WACOM_NO_LED));
 				g_free (name);
 				g_free (id);
 			}
@@ -1112,9 +1185,11 @@ gsd_wacom_device_add_strip_modes (WacomDevice      *wacom_device,
 			l = g_list_append (l, gsd_wacom_tablet_button_new (_("Right Touchstrip"),
 									   "right-strip-mode-1",
 									   settings_path,
-									   WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+									   WACOM_TABLET_BUTTON_TYPE_STRIP,
+									   WACOM_TABLET_BUTTON_POS_RIGHT,
 									   group,
-									   0));
+									   0,
+									   GSD_WACOM_NO_LED));
 		} else {
 			for (i = 1; i <= num_modes; i++) {
 				name = g_strdup_printf (_("Right Touchstrip Mode #%d"), i);
@@ -1122,9 +1197,11 @@ gsd_wacom_device_add_strip_modes (WacomDevice      *wacom_device,
 				l = g_list_append (l, gsd_wacom_tablet_button_new (name,
 				                                                   id,
 				                                                   settings_path,
-				                                                   WACOM_TABLET_BUTTON_TYPE_ELEVATOR,
+				                                                   WACOM_TABLET_BUTTON_TYPE_STRIP,
+										   WACOM_TABLET_BUTTON_POS_RIGHT,
 				                                                   group,
-				                                                   i - 1));
+				                                                   i - 1,
+										   GSD_WACOM_NO_LED));
 				g_free (name);
 				g_free (id);
 			}
@@ -1155,6 +1232,23 @@ gsd_wacom_device_modeswitch_name (WacomButtonFlags flags,
 	return g_strdup_printf (_("Mode Switch #%d"), button_num);
 }
 
+static GsdWacomTabletButtonType
+gsd_wacom_device_button_pos (WacomButtonFlags flags)
+{
+	if (flags & WACOM_BUTTON_POSITION_LEFT)
+		return WACOM_TABLET_BUTTON_POS_LEFT;
+	else if (flags & WACOM_BUTTON_POSITION_RIGHT)
+		return WACOM_TABLET_BUTTON_POS_RIGHT;
+	else if (flags & WACOM_BUTTON_POSITION_TOP)
+		return WACOM_TABLET_BUTTON_POS_TOP;
+	else if (flags & WACOM_BUTTON_POSITION_BOTTOM)
+		return WACOM_TABLET_BUTTON_POS_BOTTOM;
+
+	g_warning ("Unhandled button position");
+
+	return WACOM_TABLET_BUTTON_POS_UNDEF;
+}
+
 static GList *
 gsd_wacom_device_add_buttons_dir (WacomDevice      *wacom_device,
 				  const char       *settings_path,
@@ -1181,7 +1275,14 @@ gsd_wacom_device_add_buttons_dir (WacomDevice      *wacom_device,
 
 		name = g_strdup_printf (button_str, button_num++);
 		id = g_strdup_printf ("%s%c", button_str_id, i);
-		l = g_list_append (l, gsd_wacom_tablet_button_new (name, id, settings_path, WACOM_TABLET_BUTTON_TYPE_NORMAL, flags_to_group (flags), -1));
+		l = g_list_append (l, gsd_wacom_tablet_button_new (name,
+		                                                   id,
+		                                                   settings_path,
+		                                                   WACOM_TABLET_BUTTON_TYPE_NORMAL,
+		                                                   gsd_wacom_device_button_pos (flags),
+		                                                   flags_to_group (flags),
+		                                                   -1,
+		                                                   GSD_WACOM_NO_LED));
 		g_free (name);
 		g_free (id);
 	}
@@ -1190,6 +1291,7 @@ gsd_wacom_device_add_buttons_dir (WacomDevice      *wacom_device,
 	for (i = 'A'; i < 'A' + num_buttons; i++) {
 		WacomButtonFlags flags;
 		char *name, *id;
+		int status_led;
 
 		flags = libwacom_get_button_flag (wacom_device, i);
 		if (!(flags & direction))
@@ -1200,7 +1302,15 @@ gsd_wacom_device_add_buttons_dir (WacomDevice      *wacom_device,
 
 		name = gsd_wacom_device_modeswitch_name (flags, button_num++);
 		id = g_strdup_printf ("%s%c", button_str_id, i);
-		l = g_list_append (l, gsd_wacom_tablet_button_new (name, id, settings_path, WACOM_TABLET_BUTTON_TYPE_HARDCODED, flags_to_group (flags), -1));
+		status_led = libwacom_get_button_led_group (wacom_device, i);
+		l = g_list_append (l, gsd_wacom_tablet_button_new (name,
+		                                                   id,
+		                                                   settings_path,
+		                                                   WACOM_TABLET_BUTTON_TYPE_HARDCODED,
+		                                                   gsd_wacom_device_button_pos (flags),
+		                                                   flags_to_group (flags),
+		                                                   -1,
+		                                                   status_led));
 		g_free (name);
 		g_free (id);
 	}
@@ -1292,6 +1402,7 @@ gsd_wacom_device_update_from_db (GsdWacomDevice *device,
 				 const char     *identifier)
 {
 	char *settings_path;
+	WacomIntegrationFlags integration_flags;
 
 	settings_path = g_strdup_printf (WACOM_DEVICE_CONFIG_BASE,
 					 device->priv->machine_id,
@@ -1300,10 +1411,13 @@ gsd_wacom_device_update_from_db (GsdWacomDevice *device,
 								 settings_path);
 
 	device->priv->name = g_strdup (libwacom_get_name (wacom_device));
+	device->priv->layout_path = g_strdup (libwacom_get_layout_filename (wacom_device));
 	device->priv->reversible = libwacom_is_reversible (wacom_device);
-	device->priv->is_screen_tablet = libwacom_is_builtin (wacom_device);
+	integration_flags = libwacom_get_integration_flags (wacom_device);
+	device->priv->is_screen_tablet = (integration_flags & WACOM_DEVICE_INTEGRATED_DISPLAY);
+	device->priv->is_isd = (integration_flags & WACOM_DEVICE_INTEGRATED_SYSTEM);
 	if (device->priv->is_screen_tablet) {
-		if (libwacom_get_class (wacom_device) == WCLASS_CINTIQ)
+		if (!device->priv->is_isd)
 			device->priv->icon_name = "wacom-tablet-cintiq";
 		else
 			device->priv->icon_name = "wacom-tablet-pc";
@@ -1547,6 +1661,8 @@ gsd_wacom_device_finalize (GObject *object)
                 p->num_modes = NULL;
         }
 
+	g_clear_pointer (&p->layout_path, g_free);
+
 	gdk_window_remove_filter (NULL,
 				  (GdkFilterFunc) filter_events,
 				  device);
@@ -1596,6 +1712,14 @@ gsd_wacom_device_get_name (GsdWacomDevice *device)
 }
 
 const char *
+gsd_wacom_device_get_layout_path (GsdWacomDevice *device)
+{
+	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), NULL);
+
+	return device->priv->layout_path;
+}
+
+const char *
 gsd_wacom_device_get_path (GsdWacomDevice *device)
 {
 	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), NULL);
@@ -1633,6 +1757,14 @@ gsd_wacom_device_is_screen_tablet (GsdWacomDevice *device)
 	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), FALSE);
 
 	return device->priv->is_screen_tablet;
+}
+
+gboolean
+gsd_wacom_device_is_isd (GsdWacomDevice *device)
+{
+	g_return_val_if_fail (GSD_IS_WACOM_DEVICE (device), FALSE);
+
+	return device->priv->is_isd;
 }
 
 gboolean

@@ -61,6 +61,7 @@ gboolean  device_is_touchpad       (XDevice                *xdevice);
 
 gboolean  device_info_is_touchpad    (XDeviceInfo         *device_info);
 gboolean  device_info_is_touchscreen (XDeviceInfo         *device_info);
+gboolean  device_info_is_tablet (XDeviceInfo         *device_info);
 gboolean  device_info_is_mouse       (XDeviceInfo         *device_info);
 gboolean  device_info_is_trackball   (XDeviceInfo         *device_info);
 

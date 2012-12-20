@@ -191,6 +191,13 @@ device_info_is_touchscreen (XDeviceInfo *device_info)
 }
 
 gboolean
+device_info_is_tablet (XDeviceInfo *device_info)
+{
+        /* Note that this doesn't match Wacom tablets */
+        return (device_info->type == XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XI_TABLET, False));
+}
+
+gboolean
 device_info_is_mouse (XDeviceInfo *device_info)
 {
         return (device_info->type == XInternAtom (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XI_MOUSE, False));
@@ -507,7 +514,7 @@ run_custom_command (GdkDevice              *device,
         argv[2] = (char *) custom_command_to_string (command);
         argv[3] = "-i";
         argv[4] = g_strdup_printf ("%d", id);
-        argv[5] = g_strdup_printf ("%s", gdk_device_get_name (device));
+        argv[5] = (char*) gdk_device_get_name (device);
         argv[6] = NULL;
 
         rc = g_spawn_sync (g_get_home_dir (), argv, NULL, G_SPAWN_SEARCH_PATH,
@@ -518,7 +525,6 @@ run_custom_command (GdkDevice              *device,
 
         g_free (argv[0]);
         g_free (argv[4]);
-        g_free (argv[5]);
 
         return (exit_status == 1);
 }
