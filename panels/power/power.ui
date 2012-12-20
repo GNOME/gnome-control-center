@@ -47,6 +47,10 @@
         <col id="0" translatable="yes">1 hour</col>
         <col id="1">3600</col>
       </row>
+      <row>
+        <col id="0" translatable="yes">Don't suspend</col>
+        <col id="1">0</col>
+      </row>
     </data>
   </object>
   <object class="GtkWindow" id="window_power">
@@ -58,35 +62,210 @@
         <property name="can_focus">False</property>
         <property name="border_width">12</property>
         <property name="spacing">3</property>
-      </object>
-    </child>
-  </object>
-
-  <object class="GtkDialog" id="automatic_suspend_dialog">
-    <property name="can_focus">False</property>
-    <property name="border_width">5</property>
-    <property name="title" translatable="yes">Automatic Suspend</property>
-    <property name="type_hint">dialog</property>
-    <property name="resizable">False</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="asdf">
-        <property name="can_focus">False</property>
-        <property name="resize_mode">immediate</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action_area1">
+        <child>
+          <object class="GtkGrid" id="grid_combos">
+            <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
+            <property name="margin_left">53</property>
+            <property name="margin_right">60</property>
+            <property name="margin_bottom">24</property>
+            <property name="orientation">vertical</property>
+            <property name="row_spacing">6</property>
+            <property name="column_spacing">12</property>
             <child>
-              <object class="GtkButton" id="automatic_suspend_close">
-                <property name="label" translatable="yes">_Close</property>
+              <object class="GtkLabel" id="label_header_battery">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="has_default">True</property>
-                <property name="receives_default">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">On battery power</property>
+                <property name="halign">center</property>
+                <attributes>
+                  <attribute name="scale" value="0.82999999999999996"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label_header_ac">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">When plugged in</property>
+                <property name="halign">center</property>
+                <attributes>
+                  <attribute name="scale" value="0.82999999999999996"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label7">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">end</property>
+                <property name="label" translatable="yes">Suspend when inactive for</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="combobox_sleep_battery">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="model">liststore_time</property>
+                <property name="hexpand">True</property>
+                <accessibility>
+                  <relation type="labelled-by" target="label_header_battery"/>
+                  <relation type="labelled-by" target="label7"/>
+                </accessibility>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="combobox_sleep_ac">
+                <property name="width_request">150</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="model">liststore_time</property>
+                <property name="hexpand">True</property>
+                <accessibility>
+                  <relation type="labelled-by" target="label_header_ac"/>
+                  <relation type="labelled-by" target="label7"/>
+                </accessibility>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label_critical">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">end</property>
+                <property name="label" translatable="yes">When power is _critically low</property>
                 <property name="use_underline">True</property>
+                <property name="mnemonic_widget">combobox_critical</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBox" id="combobox_critical">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="model">liststore_critical</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box_primary">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_left">53</property>
+            <property name="margin_right">60</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">3</property>
+            <child>
+              <object class="GtkBox" id="box_primary_header">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="spacing">3</property>
+                <child>
+                  <object class="GtkImage" id="image_primary_warning">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="icon_name">dialog-warning-symbolic</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label_battery_primary">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">0</property>
+                    <property name="label">55 minutes until fully charged</property>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="box_battery_addon">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="spacing">3</property>
+                    <child>
+                      <object class="GtkImage" id="image_battery_addon">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">1</property>
+                        <property name="stock">gtk-info</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_battery_addon">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">1</property>
+                        <property name="label">Your secondary battery is empty</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLevelBar" id="levelbar_primary">
+                <property name="can_focus">False</property>
+                <property name="visible">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -97,155 +276,85 @@
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
+            <property name="fill">False</property>
+            <property name="position">1</property>
           </packing>
         </child>
         <child>
-          <object class="GtkGrid" id="grid1">
+          <object class="GtkLabel" id="label_screen_settings">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_left">12</property>
-            <property name="margin_right">6</property>
-            <property name="margin_top">12</property>
-            <property name="margin_bottom">12</property>
-            <property name="row_spacing">12</property>
-            <property name="column_spacing">6</property>
+            <property name="margin_left">53</property>
+            <property name="margin_right">40</property>
+            <property name="xalign">0</property>
+            <property name="yalign">0.49000000953674316</property>
+            <property name="ypad">4</property>
+            <property name="label">Tip: &lt;a href="moo"&gt;Screen Settings&lt;/a&gt; affect how much power is used</property>
+            <property name="use_markup">True</property>
+            <property name="track_visited_links">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box_secondary">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_top">15</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">24</property>
             <child>
-              <object class="GtkSwitch" id="suspend_on_battery_switch">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="suspend_on_ac_switch">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="suspend_on_battery_label">
+              <object class="GtkSeparator" id="separator_secondary">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">When on _Battery Power</property>
-                <property name="use_underline">True</property>
-                <property name="mnemonic_widget">suspend_on_battery_switch</property>
               </object>
               <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="suspend_on_ac_label">
+              <object class="GtkGrid" id="grid_secondary">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">When _Plugged In</property>
-                <property name="use_underline">True</property>
-                <property name="mnemonic_widget">suspend_on_ac_switch</property>
+                <property name="margin_left">9</property>
+                <property name="margin_right">28</property>
+                <property name="margin_bottom">15</property>
+                <property name="row_spacing">18</property>
+                <property name="column_spacing">6</property>
+                <property name="column_homogeneous">True</property>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
               </object>
               <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="suspend_on_battery_delay_label">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Delay</property>
-                <property name="margin-left">20</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="suspend_on_ac_delay_label">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Delay</property>
-                <property name="margin-left">20</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="suspend_on_battery_delay_combo">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="entry_text_column">0</property>
-                <property name="model">liststore_time</property>
-                <property name="margin_left">4</property>
-                <property name="margin_right">4</property>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="suspend_on_ac_delay_combo">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="entry_text_column">0</property>
-                <property name="model">liststore_time</property>
-                <property name="margin_left">4</property>
-                <property name="margin_right">4</property>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
+            <property name="fill">False</property>
+            <property name="position">3</property>
           </packing>
         </child>
       </object>
     </child>
-    <action-widgets>
-      <action-widget response="0">automatic_suspend_close</action-widget>
-    </action-widgets>
+  </object>
+  <object class="GtkSizeGroup" id="sizegroup_combos">
+    <widgets>
+      <widget name="combobox_critical"/>
+      <widget name="combobox_sleep_battery"/>
+      <widget name="combobox_sleep_ac"/>
+    </widgets>
   </object>
 </interface>
-
