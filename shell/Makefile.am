@@ -68,14 +68,7 @@ endif
 
 AM_CPPFLAGS =							\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""		\
-	-DUIDIR="\"$(uidir)\""					\
-	-DMENUDIR="\"$(menudir)\""
-
-menudir = $(sysconfdir)/xdg/menus
-menu_DATA = gnomecc.menu
-
-gnomecc.menu: gnomecc.menu.in
-	$(AM_V_GEN) cat $< | sed 's,@applicationsdir@,$(datadir)/applications/,' > $@
+	-DUIDIR="\"$(uidir)\""
 
 uidir = $(pkgdatadir)/ui
 ui_DATA = shell.ui
@@ -85,17 +78,10 @@ sys_in_files = gnome-control-center.desktop.in
 sys_DATA = $(sys_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-directorydir = $(datadir)/desktop-directories
-directory_in_files = gnomecc.directory.in
-directory_DATA = $(directory_in_files:.directory.in=.directory)
-@INTLTOOL_DIRECTORY_RULE@
-
 EXTRA_DIST =					\
 	$(ui_DATA)				\
-	gnome-control-center.desktop.in.in	\
-	gnomecc.directory.in			\
-	gnomecc.menu.in
+	gnome-control-center.desktop.in.in
 
-DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in gnomecc.directory gnomecc.menu
+DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in
 
 -include $(top_srcdir)/git.mk
