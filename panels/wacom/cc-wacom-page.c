@@ -277,6 +277,17 @@ calibrate_button_clicked_cb (GtkButton   *button,
 	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
 }
 
+/* This avoids us crashing when a newer version of
+ * gnome-control-center has been used, and we load up an
+ * old one, as the action type if unknown to the old g-c-c */
+static gboolean
+action_type_is_valid (GsdWacomActionType type)
+{
+	if (type >= G_N_ELEMENTS(action_table))
+		return FALSE;
+	return TRUE;
+}
+
 static char *
 get_elevator_shortcut_string (GSettings        *settings,
 			      GtkDirectionType  dir)
@@ -613,8 +624,7 @@ add_button_to_store (GtkListStore         *model,
 		dir_name = NULL;
 	}
 
-	/* Sanity check */
-	if (type >= G_N_ELEMENTS(action_table))
+	if (action_type_is_valid (type) == FALSE)
 		type = GSD_WACOM_ACTION_TYPE_NONE;
 
 	gtk_list_store_append (model, &new_row);
@@ -671,8 +681,7 @@ action_set_func (GtkTreeViewColumn *tree_column,
 	}
 
 	type = g_settings_get_enum (button->settings, ACTION_TYPE_KEY);
-	/* Sanity check */
-	if (type >= G_N_ELEMENTS(action_table))
+	if (action_type_is_valid (type) == FALSE);
 		type = GSD_WACOM_ACTION_TYPE_NONE;
 
 	g_object_set (cell,
