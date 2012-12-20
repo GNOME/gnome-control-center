@@ -1,3 +1,99 @@
+=============
+Version 3.7.3
+=============
+
+- Remove fallback session handling code
+- Add search panel
+- Add privacy panel
+- Add notifications panel
+- Use the proper Unicode ellipsis (…) instead of three dots
+
+Shell:
+- Remove the previous panel when switching to a new one
+- Don't remove old panel if new one is broken
+- Add F1 shortcut to show the help
+- Rename to Settings
+- Ensure the home button is the correct height
+- Fix alignment of home button in RTL languages
+- Make all the plugins static
+
+Background:
+- Fix not having 3 columns in high contrast
+
+Color:
+- Do not use a combobox when listing profiles to add to devices
+
+Bluetooth:
+- Avoid possible loops when Connection fails
+- Fix main switch acting bizarrely
+- Use spinner when connecting
+- Align the device list with the all settings button
+- Remove ObexFTP browsing from the UI
+
+Network:
+- Make sure flight mode is always visible
+- Make sure Airplane mode switch everything off
+- Ensure IMEI is displayed and reload Operator Name when it changes
+- Also load IMEI and Operator Name for LTE-only modems
+
+Date & Time:
+- Do not offer the 12 hr clock in locales without AM/PM
+
+Keyboard:
+- Point to a more specific help page
+- Add support for msgctxt in keybindings
+- Improve shortcuts tab keynav
+
+Printers:
+- Show in Unity
+- Fix problems when adding new printers
+
+Background:
+- Hide in Unity
+
+Region:
+- Show in Unity
+- Fix possible crasher on startup when the X11Variant are empty
+- Offer logout options after changing language
+- Add Japanese to the popular languages
+- Show popular languages in their own language
+- Fix other user's languages never getting added
+- Make 'Add' dialogs consistent
+- Reinstate the separator in the languages list
+- Fix button alignment problem
+-  the language chooser resizing during load
+
+Sound:
+- Clarify "sound events"
+- Fix possible crasher
+- Use libgnome-volume-control
+
+Info:
+- Set the hostname only after a small delay
+
+Users:
+- Rename from User Accounts
+- Show the password by default once generated
+- Fix resetting one's avatar
+- Add "last login" field
+
+Online accounts:
+- Don't preselect the first item when adding an account
+- Align the accounts list with the all settings button
+- Only allow adding accounts if the network is available
+
+Universal Access:
+- Set the dialog hint on the zoom options
+- Also set the WM HighContrast theme when the switch is flipped
+
+Details:
+- Add distro information
+- Add CPU model on ARM
+- Avoid adding phantom "Unknown model" CPU on PPC64
+
+Wacom:
+- Add support for the new OSD help display
+
 ===========================
 Version 3.7.1 (2012-22-10)
 ===========================
