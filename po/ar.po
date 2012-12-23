@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-23 17:39+0200\n"
+"POT-Creation-Date: 2012-12-23 18:33+0200\n"
 "PO-Revision-Date: 2012-12-23 18:26+0200\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -496,7 +496,8 @@ msgstr "استورد ملفا…"
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
-msgstr "وجدت مشاكل ولن يعمل ملف الإعداد كما يجب. <a href=\"\">أظهر التفاصيل.</a>"
+msgstr ""
+"وجدت مشاكل ولن يعمل ملف الإعداد كما يجب. <a href=\"\">أظهر التفاصيل.</a>"
 
 #: ../panels/color/color.ui.h:18
 msgid "Device type:"
@@ -1251,9 +1252,12 @@ msgstr "صغّر النص"
 msgid "High contrast on or off"
 msgstr "شغّل أو عطّل التباين العال"
 
+#. translators:
+#. * The device has been disabled
 #: ../panels/keyboard/cc-keyboard-option.c:241
 #: ../panels/keyboard/cc-keyboard-option.c:347
 #: ../panels/keyboard/keyboard-shortcuts.c:1160
+#: ../panels/sound/gvc/gvc-mixer-control.c:1828
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Disabled"
@@ -3779,6 +3783,36 @@ msgstr "غير مكبّر"
 msgid "_Profile:"
 msgstr "ال_طور:"
 
+#. translators:
+#. * The number of sound outputs on a particular device
+#: ../panels/sound/gvc/gvc-mixer-control.c:1835
+#, c-format
+msgid "%u Output"
+msgid_plural "%u Outputs"
+msgstr[0] "لا مَخْرَج"
+msgstr[1] "مَخْرَج واحد"
+msgstr[2] "مَخْرَجين"
+msgstr[3] "%u مَخْارِج"
+msgstr[4] "%u مَخْرَجًا"
+msgstr[5] "%u مَخْرَج"
+
+#. translators:
+#. * The number of sound inputs on a particular device
+#: ../panels/sound/gvc/gvc-mixer-control.c:1845
+#, c-format
+msgid "%u Input"
+msgid_plural "%u Inputs"
+msgstr[0] "لا مَدْخَل"
+msgstr[1] "مَدْخَل واحد"
+msgstr[2] "مَدْخَلين"
+msgstr[3] "%u مَداخِل"
+msgstr[4] "%u مَدْخَلًا"
+msgstr[5] "%u مَدْخَل"
+
+#: ../panels/sound/gvc/gvc-mixer-control.c:2369
+msgid "System Sounds"
+msgstr "أصوات النظام"
+
 #: ../panels/sound/gvc-mixer-dialog.c:262
 msgid "_Test Speakers"
 msgstr "ا_ختبر السماعات"
@@ -5616,27 +5650,6 @@ msgstr "كل الإعدادات"
 
 #~ msgid "Microphone Volume"
 #~ msgstr "شدة صوت الميكروفون"
-
-#~ msgid "%u Output"
-#~ msgid_plural "%u Outputs"
-#~ msgstr[0] "لا مَخْرَج"
-#~ msgstr[1] "مَخْرَج واحد"
-#~ msgstr[2] "مَخْرَجين"
-#~ msgstr[3] "%u مَخْارِج"
-#~ msgstr[4] "%u مَخْرَجًا"
-#~ msgstr[5] "%u مَخْرَج"
-
-#~ msgid "%u Input"
-#~ msgid_plural "%u Inputs"
-#~ msgstr[0] "لا مَدْخَل"
-#~ msgstr[1] "مَدْخَل واحد"
-#~ msgstr[2] "مَدْخَلين"
-#~ msgstr[3] "%u مَداخِل"
-#~ msgstr[4] "%u مَدْخَلًا"
-#~ msgstr[5] "%u مَدْخَل"
-
-#~ msgid "System Sounds"
-#~ msgstr "أصوات النظام"
 
 #~ msgid "Failed to start Sound Preferences: %s"
 #~ msgstr "فشل بدء تفضيلات الصوت: %s"
