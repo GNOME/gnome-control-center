@@ -522,6 +522,7 @@ panels/wacom/calibrator/Makefile
 panels/wacom/gnome-wacom-panel.desktop.in
 po/Makefile.in
 libgd/Makefile
+search-provider/Makefile
 shell/Makefile
 shell/gnome-control-center.desktop.in
 man/Makefile

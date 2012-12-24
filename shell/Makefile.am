@@ -6,6 +6,14 @@ INCLUDES =					\
 
 all-local: check-local
 
+noinst_LTLIBRARIES = libshell.la
+
+libshell_la_SOURCES = \
+	cc-shell-model.c			\
+	cc-shell-model.h			\
+	cc-util.c				\
+	cc-util.h
+
 bin_PROGRAMS = gnome-control-center
 
 BUILT_SOURCES =			\
@@ -23,8 +31,6 @@ gnome_control_center_SOURCES =			\
 	cc-shell-category-view.h		\
 	cc-shell-item-view.c			\
 	cc-shell-item-view.h			\
-	cc-shell-model.c			\
-	cc-shell-model.h			\
 	cc-editable-entry.c			\
 	cc-editable-entry.h			\
 	cc-panel-loader.c			\
@@ -33,8 +39,6 @@ gnome_control_center_SOURCES =			\
 	cc-panel.h				\
 	cc-shell.c				\
 	cc-shell.h				\
-	cc-util.c				\
-	cc-util.h				\
 	hostname-helper.c			\
 	hostname-helper.h			\
 	cc-hostname-entry.c			\
@@ -44,6 +48,7 @@ gnome_control_center_SOURCES =			\
 gnome_control_center_LDFLAGS = -export-dynamic
 
 gnome_control_center_LDADD =						\
+	libshell.la							\
 	$(SHELL_LIBS)							\
 	$(CHEESE_LIBS)							\
 	$(top_builddir)/libgd/libgd.la					\
@@ -125,6 +130,5 @@ test_hostname_CFLAGS = $(INCLUDES)
 EXTRA_DIST += hostnames-test.txt
 check-local: test-hostname
 	$(builddir)/test-hostname $(srcdir)/hostnames-test.txt > /dev/null
-
 
 -include $(top_srcdir)/git.mk
