@@ -35,6 +35,10 @@
 #include <X11/Xlib.h>
 #endif
 
+#ifdef HAVE_CHEESE
+#include <cheese-gtk.h>
+#endif /* HAVE_CHEESE */
+
 #include "cc-shell-log.h"
 
 G_GNUC_NORETURN static gboolean
@@ -116,6 +120,10 @@ application_command_line_cb (GApplication  *application,
     }
 
   g_option_context_free (context);
+
+#ifdef HAVE_CHEESE
+  cheese_gtk_init (&argc, &argv);
+#endif /* HAVE_CHEESE */
 
   cc_shell_log_set_debug (verbose);
 
