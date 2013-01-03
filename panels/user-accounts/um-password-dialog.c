@@ -60,6 +60,14 @@ struct _UmPasswordDialog {
         PasswdHandler *passwd_handler;
 };
 
+typedef enum {
+        UM_PASSWORD_DIALOG_MODE_NORMAL = 0,
+        UM_PASSWORD_DIALOG_MODE_SET_AT_LOGIN,
+        UM_PASSWORD_DIALOG_MODE_NO_PASSWORD,
+        UM_PASSWORD_DIALOG_MODE_LOCK_ACCOUNT,
+        UM_PASSWORD_DIALOG_MODE_UNLOCK_ACCOUNT
+} UmPasswordDialogMode;
+
 static void
 generate_one_password (GtkWidget        *widget,
                        UmPasswordDialog *um)
@@ -197,7 +205,7 @@ accept_password_dialog (GtkButton        *button,
         password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
         hint = gtk_entry_get_text (GTK_ENTRY (um->normal_hint_entry));
 
-        if (mode == 0 && um_user_get_uid (um->user) == getuid ()) {
+        if (mode == UM_PASSWORD_DIALOG_MODE_NORMAL && um_user_get_uid (um->user) == getuid ()) {
                 GdkDisplay *display;
                 GdkCursor *cursor;
 
@@ -621,10 +629,10 @@ visible_func (GtkTreeModel     *model,
 
                 gtk_tree_model_get (model, iter, 1, &mode, -1);
 
-                if (mode == 3 && locked)
+                if (mode == UM_PASSWORD_DIALOG_MODE_LOCK_ACCOUNT && locked)
                         return FALSE;
 
-                if (mode == 4 && !locked)
+                if (mode == UM_PASSWORD_DIALOG_MODE_UNLOCK_ACCOUNT && !locked)
                         return FALSE;
 
                 return TRUE;
