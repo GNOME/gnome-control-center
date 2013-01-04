@@ -25,6 +25,7 @@
 #include <sys/wait.h>
 
 #include "cc-display-panel.h"
+#include "cc-display-resources.h"
 
 #include <gtk/gtk.h>
 #include "scrollarea.h"
@@ -2571,6 +2572,7 @@ dialog_map_event_cb (GtkWidget *widget, GdkEventAny *event, gpointer data)
 static void
 cc_display_panel_init (CcDisplayPanel *self)
 {
+  g_resources_register (cc_display_get_resource ());
 }
 
 static GObject *
@@ -2594,7 +2596,7 @@ cc_display_panel_constructor (GType                  gtype,
   error = NULL;
   self->priv->builder = builder = gtk_builder_new ();
 
-  if (!gtk_builder_add_objects_from_file (builder, UIDIR "/display-capplet.ui", objects, &error))
+  if (!gtk_builder_add_objects_from_resource (builder, "/org/gnome/control-center/display/display-capplet.ui", objects, &error))
     {
       g_warning ("Could not parse UI definition: %s", error->message);
       g_error_free (error);
