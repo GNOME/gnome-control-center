@@ -1,10 +1,6 @@
 # This is used in PANEL_CFLAGS
 cappletname = background
 
-uidir = $(pkgdatadir)/ui/background
-dist_ui_DATA = \
-	background.ui
-
 slideshowicondir = $(datadir)/icons/hicolor/scalable/categories/
 dist_slideshowicon_DATA = slideshow-symbolic.svg
 
@@ -15,17 +11,16 @@ INCLUDES =						\
 	$(PANEL_CFLAGS)					\
 	$(BACKGROUND_PANEL_CFLAGS)			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
-	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
-	-DUIDIR="\"$(uidir)\""				\
 	-DDATADIR="\"$(datadir)\""			\
 	-DGNOME_DESKTOP_USE_UNSTABLE_API		\
-	-DPIXMAP_DIR=\""$(datadir)/gnome-control-center/pixmaps"\"	\
 	$(NULL)
 
 noinst_LTLIBRARIES = libbackground.la
 
-BUILT_SOURCES =            \
-	gdesktop-enums-types.c \
+BUILT_SOURCES = 			\
+	cc-background-resources.c 	\
+	cc-background-resources.h 	\
+	gdesktop-enums-types.c		\
 	gdesktop-enums-types.h
 
 libbackground_la_SOURCES =		\
@@ -55,6 +50,12 @@ libbackground_la_SOURCES += bg-flickr-source.c bg-flickr-source.h
 INCLUDES += $(SOCIALWEB_CFLAGS)
 libbackground_la_LIBADD += $(SOCIALWEB_LIBS)
 endif
+
+resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/background.gresource.xml)
+cc-background-resources.c: background.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_background $<
+cc-background-resources.h: background.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name cc_background $<
 
 gdesktop-enums-types.h: stamp-gdesktop-enums-types.h
 	@true
@@ -91,5 +92,6 @@ desktop_in_files = gnome-background-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES) stamp-gdesktop-enums-types.h
+EXTRA_DIST = $(resource_files) background.gresource.xml
 
 -include $(top_srcdir)/git.mk

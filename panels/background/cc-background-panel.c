@@ -30,10 +30,10 @@
 
 #include "cc-background-panel.h"
 
-#include "cc-background-item.h"
-#include "cc-background-xml.h"
-
 #include "cc-background-chooser-dialog.h"
+#include "cc-background-item.h"
+#include "cc-background-resources.h"
+#include "cc-background-xml.h"
 
 #include "bg-pictures-source.h"
 
@@ -733,12 +733,13 @@ cc_background_panel_init (CcBackgroundPanel *self)
 
   priv = self->priv = BACKGROUND_PANEL_PRIVATE (self);
 
-  priv->builder = gtk_builder_new ();
   priv->connection = g_application_get_dbus_connection (g_application_get_default ());
+  g_resources_register (cc_background_get_resource ());
 
-  gtk_builder_add_objects_from_file (priv->builder,
-                                     UIDIR"/background.ui",
-                                     objects, &err);
+  priv->builder = gtk_builder_new ();
+  gtk_builder_add_objects_from_resource (priv->builder,
+                                         "/org/gnome/control-center/background/background.ui",
+                                         objects, &err);
 
   if (err)
     {
