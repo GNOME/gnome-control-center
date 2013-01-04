@@ -20,6 +20,8 @@
  */
 
 #include "cc-region-panel.h"
+#include "cc-region-resources.h"
+
 #include <gtk/gtk.h>
 
 #include "gnome-region-panel-input.h"
@@ -137,12 +139,13 @@ cc_region_panel_init (CcRegionPanel * self)
 	GError *error = NULL;
 
 	priv = self->priv = REGION_PANEL_PRIVATE (self);
+        g_resources_register (cc_region_get_resource ());
 
 	priv->builder = gtk_builder_new ();
 
-	gtk_builder_add_from_file (priv->builder,
-				   GNOMECC_UI_DIR "/gnome-region-panel.ui",
-				   &error);
+	gtk_builder_add_from_resource (priv->builder,
+                                       "/org/gnome/control-center/region/gnome-region-panel.ui",
+                                       &error);
 	if (error != NULL) {
 		g_warning ("Error loading UI file: %s", error->message);
 		g_error_free (error);

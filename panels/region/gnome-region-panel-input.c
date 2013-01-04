@@ -1390,9 +1390,9 @@ input_chooser_new (GtkWindow    *main_window,
   GtkTreeIter iter;
 
   builder = gtk_builder_new ();
-  gtk_builder_add_from_file (builder,
-                             GNOMECC_UI_DIR "/gnome-region-panel-input-chooser.ui",
-                             NULL);
+  gtk_builder_add_from_resource (builder,
+                                 "/org/gnome/control-center/region/gnome-region-panel-input-chooser.ui",
+                                 NULL);
   chooser = WID ("input_source_chooser");
   input_chooser = chooser;
   g_object_add_weak_pointer (G_OBJECT (chooser), (gpointer *) &input_chooser);
