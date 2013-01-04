@@ -3,11 +3,8 @@ cappletname = info
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(INFO_PANEL_CFLAGS)				\
-	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
-	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DDATADIR="\"$(datadir)\""			\
-	-DLIBEXECDIR="\"$(libexecdir)\""		\
 	$(NULL)
 
 noinst_PROGRAMS = test-hostname
@@ -22,7 +19,12 @@ check-local: test-hostname
 
 noinst_LTLIBRARIES = libinfo.la
 
+BUILT_SOURCES =			\
+	cc-info-resources.c	\
+	cc-info-resources.h
+
 libinfo_la_SOURCES =		\
+	$(BUILT_SOURCES)	\
 	cc-info-panel.c		\
 	cc-info-panel.h		\
 	hostname-helper.c	\
@@ -32,8 +34,11 @@ libinfo_la_SOURCES =		\
 
 libinfo_la_LIBADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
 
-uidir = $(pkgdatadir)/ui
-dist_ui_DATA = info.ui GnomeLogoVerticalMedium.svg
+resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/info.gresource.xml)
+cc-info-resources.c: info.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_info $<
+cc-info-resources.h: info.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name cc_info $<
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -47,7 +52,7 @@ update-from-gsd:
 	FILES="$(SPACEFILES)" DIR="$(SPACEDIR)" $(top_srcdir)/update-from-gsd.sh && changed=true ; \
 	git commit -m "info: Update from gnome-settings-daemon" $(SPACEFILES)
 
-CLEANFILES = $(desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = hostnames-test.txt
+CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
+EXTRA_DIST = hostnames-test.txt $(resource_files) info.gresource.xml
 
 -include $(top_srcdir)/git.mk

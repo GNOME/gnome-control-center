@@ -22,6 +22,7 @@
 #include <config.h>
 
 #include "cc-info-panel.h"
+#include "cc-info-resources.h"
 
 #include <polkit/polkit.h>
 
@@ -2047,6 +2048,7 @@ cc_info_panel_init (CcInfoPanel *self)
   GtkWidget *widget;
 
   self->priv = INFO_PANEL_PRIVATE (self);
+  g_resources_register (cc_info_get_resource ());
 
   self->priv->builder = gtk_builder_new ();
 
@@ -2056,9 +2058,9 @@ cc_info_panel_init (CcInfoPanel *self)
 
   g_assert (self->priv->session_bus);
 
-  if (gtk_builder_add_from_file (self->priv->builder,
-                                 GNOMECC_UI_DIR "/info.ui",
-                                 &error) == 0)
+  if (gtk_builder_add_from_resource (self->priv->builder,
+                                     "/org/gnome/control-center/info/info.ui",
+                                     &error) == 0)
     {
       g_warning ("Could not load interface file: %s", error->message);
       g_error_free (error);
