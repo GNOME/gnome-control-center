@@ -35,6 +35,7 @@ G_DEFINE_TYPE (CcTimezoneMap, cc_timezone_map, GTK_TYPE_WIDGET)
 #define PIN_HOT_POINT_X 8
 #define PIN_HOT_POINT_Y 14
 
+#define DATETIME_RESOURCE_PATH "/org/gnome/control-center/datetime"
 
 typedef struct
 {
@@ -343,14 +344,14 @@ cc_timezone_map_draw (GtkWidget *widget,
 
   /* paint hilight */
   if (gtk_widget_is_sensitive (widget))
-    fmt = DATADIR "/timezone_%s.png";
+    fmt = DATETIME_RESOURCE_PATH "/timezone_%s.png";
   else
-    fmt = DATADIR "/timezone_%s_dim.png";
+    fmt = DATETIME_RESOURCE_PATH "/timezone_%s_dim.png";
 
   file = g_strdup_printf (fmt,
                           g_ascii_formatd (buf, sizeof (buf),
                                            "%g", priv->selected_offset));
-  orig_hilight = gdk_pixbuf_new_from_file (file, &err);
+  orig_hilight = gdk_pixbuf_new_from_resource (file, &err);
   g_free (file);
   file = NULL;
 
@@ -374,7 +375,7 @@ cc_timezone_map_draw (GtkWidget *widget,
     }
 
   /* load pin icon */
-  pin = gdk_pixbuf_new_from_file (DATADIR "/pin.png", &err);
+  pin = gdk_pixbuf_new_from_resource (DATETIME_RESOURCE_PATH "/pin.png", &err);
 
   if (err)
     {
@@ -584,8 +585,8 @@ cc_timezone_map_init (CcTimezoneMap *self)
 
   priv = self->priv = TIMEZONE_MAP_PRIVATE (self);
 
-  priv->orig_background = gdk_pixbuf_new_from_file (DATADIR "/bg.png",
-                                                    &err);
+  priv->orig_background = gdk_pixbuf_new_from_resource (DATETIME_RESOURCE_PATH "/bg.png",
+                                                        &err);
 
   if (!priv->orig_background)
     {
@@ -594,8 +595,8 @@ cc_timezone_map_init (CcTimezoneMap *self)
       g_clear_error (&err);
     }
 
-  priv->orig_background_dim = gdk_pixbuf_new_from_file (DATADIR "/bg_dim.png",
-                                                        &err);
+  priv->orig_background_dim = gdk_pixbuf_new_from_resource (DATETIME_RESOURCE_PATH "/bg_dim.png",
+                                                            &err);
 
   if (!priv->orig_background_dim)
     {
@@ -604,8 +605,8 @@ cc_timezone_map_init (CcTimezoneMap *self)
       g_clear_error (&err);
     }
 
-  priv->orig_color_map = gdk_pixbuf_new_from_file (DATADIR "/cc.png",
-                                                   &err);
+  priv->orig_color_map = gdk_pixbuf_new_from_resource (DATETIME_RESOURCE_PATH "/cc.png",
+                                                       &err);
   if (!priv->orig_color_map)
     {
       g_warning ("Could not load background image: %s",

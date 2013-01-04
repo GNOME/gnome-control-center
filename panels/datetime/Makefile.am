@@ -16,94 +16,6 @@ dist_icons256_DATA = icons/256x256/preferences-system-time.png
 iconsscalabledir = $(datadir)/icons/hicolor/scalable/apps
 dist_iconsscalable_DATA = icons/scalable/preferences-system-time.svg
 
-uidir = $(pkgdatadir)/ui/datetime
-dist_ui_DATA = \
-	datetime.ui \
-	data/bg.png \
-	data/bg_dim.png \
-	data/cc.png \
-	data/pin.png \
-	data/timezone_0.png \
-	data/timezone_0_dim.png \
-	data/timezone_-10.png \
-	data/timezone_-10_dim.png \
-	data/timezone_10.png \
-	data/timezone_10_dim.png \
-	data/timezone_10.5.png \
-	data/timezone_10.5_dim.png \
-	data/timezone_-1.png \
-	data/timezone_-1_dim.png \
-	data/timezone_1.png \
-	data/timezone_1_dim.png \
-	data/timezone_-11.png \
-	data/timezone_-11_dim.png \
-	data/timezone_11.png \
-	data/timezone_11_dim.png \
-	data/timezone_11.5.png \
-	data/timezone_11.5_dim.png \
-	data/timezone_12.png \
-	data/timezone_12_dim.png \
-	data/timezone_12.75.png \
-	data/timezone_12.75_dim.png \
-	data/timezone_13.png \
-	data/timezone_13_dim.png \
-	data/timezone_14.png \
-	data/timezone_14_dim.png \
-	data/timezone_-2.png \
-	data/timezone_-2_dim.png \
-	data/timezone_2.png \
-	data/timezone_2_dim.png \
-	data/timezone_-3.png \
-	data/timezone_-3_dim.png \
-	data/timezone_3.png \
-	data/timezone_3_dim.png \
-	data/timezone_-3.5.png \
-	data/timezone_-3.5_dim.png \
-	data/timezone_3.5.png \
-	data/timezone_3.5_dim.png \
-	data/timezone_-4.png \
-	data/timezone_-4_dim.png \
-	data/timezone_4.png \
-	data/timezone_4_dim.png \
-	data/timezone_-4.5.png \
-	data/timezone_-4.5_dim.png \
-	data/timezone_4.5.png \
-	data/timezone_4.5_dim.png \
-	data/timezone_-5.png \
-	data/timezone_-5_dim.png \
-	data/timezone_5.png \
-	data/timezone_5_dim.png \
-	data/timezone_-5.5.png \
-	data/timezone_-5.5_dim.png \
-	data/timezone_5.5.png \
-	data/timezone_5.5_dim.png \
-	data/timezone_5.75.png \
-	data/timezone_5.75_dim.png \
-	data/timezone_-6.png \
-	data/timezone_-6_dim.png \
-	data/timezone_6.png \
-	data/timezone_6_dim.png \
-	data/timezone_6.5.png \
-	data/timezone_6.5_dim.png \
-	data/timezone_-7.png \
-	data/timezone_-7_dim.png \
-	data/timezone_7.png \
-	data/timezone_7_dim.png \
-	data/timezone_-8.png \
-	data/timezone_-8_dim.png \
-	data/timezone_8.png \
-	data/timezone_8_dim.png \
-	data/timezone_8.75.png \
-	data/timezone_8.75_dim.png \
-	data/timezone_-9.png \
-	data/timezone_-9_dim.png \
-	data/timezone_9.png \
-	data/timezone_9_dim.png \
-	data/timezone_-9.5.png \
-	data/timezone_-9.5_dim.png \
-	data/timezone_9.5.png \
-	data/timezone_9.5_dim.png
-
 tzdatadir = $(pkgdatadir)/datetime
 dist_tzdata_DATA = backward
 
@@ -112,7 +24,6 @@ AM_CPPFLAGS =						\
 	$(DATETIME_PANEL_CFLAGS)			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
-	-DDATADIR="\"$(uidir)\""			\
 	$(NULL)
 
 noinst_PROGRAMS = test-timezone-gfx test-endianess test-timezone
@@ -157,7 +68,20 @@ timedated.h: Makefile.am timedated1-interface.xml
 		--generate-c-code timedated			\
 		$(srcdir)/timedated1-interface.xml
 
+
+resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/datetime.gresource.xml)
+cc-datetime-resources.c: datetime.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_datetime $<
+cc-datetime-resources.h: datetime.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name cc_datetime $<
+
+BUILT_SOURCES = 		\
+	$(dbus_built_sources)	\
+	cc-datetime-resources.h	\
+	cc-datetime-resources.c
+
 libdate_time_la_SOURCES =	\
+	$(BUILT_SOURCES)	\
 	cc-datetime-panel.c	\
 	cc-datetime-panel.h	\
 	cc-timezone-map.c	\
@@ -165,7 +89,6 @@ libdate_time_la_SOURCES =	\
 	date-endian.c		\
 	date-endian.h		\
 	tz.c tz.h		\
-	$(dbus_built_sources)	\
 	$(NULL)
 
 libdate_time_la_LIBADD = $(PANEL_LIBS) $(DATETIME_PANEL_LIBS)
@@ -186,13 +109,13 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 CLEANFILES =					\
 	$(desktop_in_files)			\
 	$(desktop_DATA)				\
-	$(dbus_built_sources)			\
+	$(BUILT_SOURCES)			\
 	org.gnome.controlcenter.datetime.policy
 
 EXTRA_DIST =				\
 	timedated1-interface.xml	\
-	$(polkit_in_files)
-
-BUILT_SOURCES = $(dbus_built_sources)
+	$(polkit_in_files)		\
+	$(resource_files)		\
+	datetime.gresource.xml
 
 -include $(top_srcdir)/git.mk

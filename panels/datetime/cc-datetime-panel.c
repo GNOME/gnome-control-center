@@ -21,6 +21,7 @@
 
 #include "config.h"
 #include "cc-datetime-panel.h"
+#include "cc-datetime-resources.h"
 
 #include <langinfo.h>
 #include <sys/time.h>
@@ -959,6 +960,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   GError *error;
 
   priv = self->priv = DATE_TIME_PANEL_PRIVATE (self);
+  g_resources_register (cc_datetime_get_resource ());
 
   priv->cancellable = g_cancellable_new ();
   error = NULL;
@@ -974,9 +976,9 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   }
 
   priv->builder = gtk_builder_new ();
-
-  ret = gtk_builder_add_objects_from_file (priv->builder, DATADIR"/datetime.ui",
-                                           objects, &err);
+  ret = gtk_builder_add_objects_from_resource (priv->builder,
+                                               "/org/gnome/control-center/datetime/datetime.ui",
+                                               objects, &err);
 
   if (ret == 0)
     {
