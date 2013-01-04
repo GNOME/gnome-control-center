@@ -27,6 +27,7 @@
 
 #include "cc-wacom-panel.h"
 #include "cc-wacom-page.h"
+#include "cc-wacom-resources.h"
 #include "gsd-wacom-device.h"
 
 #define WID(x) (GtkWidget *) gtk_builder_get_object (priv->builder, x)
@@ -334,13 +335,14 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	};
 
 	priv = self->priv = WACOM_PANEL_PRIVATE (self);
+        g_resources_register (cc_wacom_get_resource ());
 
 	priv->builder = gtk_builder_new ();
 
-	gtk_builder_add_objects_from_file (priv->builder,
-					   GNOMECC_UI_DIR "/gnome-wacom-properties.ui",
-					   objects,
-					   &error);
+	gtk_builder_add_objects_from_resource (priv->builder,
+                                               "/org/gnome/control-center/wacom/gnome-wacom-properties.ui",
+                                               objects,
+                                               &error);
 	if (error != NULL)
 	{
 		g_warning ("Error loading UI file: %s", error->message);

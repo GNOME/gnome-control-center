@@ -8,13 +8,17 @@ INCLUDES = 						\
 	$(WACOM_PANEL_CFLAGS)				\
 	-I$(srcdir)/calibrator				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
-	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
 	$(NULL)
 
 noinst_LTLIBRARIES = libwacom-properties.la
 
+BUILT_SOURCES =			\
+	cc-wacom-resources.c	\
+	cc-wacom-resources.h
+
 libwacom_properties_la_SOURCES =	\
+	$(BUILT_SOURCES)		\
 	cc-wacom-panel.c		\
 	cc-wacom-panel.h		\
 	cc-wacom-page.c			\
@@ -36,6 +40,7 @@ libwacom_properties_la_LIBADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS) $(builddir)/ca
 noinst_PROGRAMS = test-wacom
 
 test_wacom_SOURCES =			\
+	$(BUILT_SOURCES)		\
 	test-wacom.c			\
 	cc-wacom-page.c			\
 	cc-wacom-page.h			\
@@ -54,21 +59,13 @@ test_wacom_SOURCES =			\
 test_wacom_CPPFLAGS = $(INCLUDES)
 test_wacom_LDADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS) $(builddir)/calibrator/libwacom-calibrator.la
 
+resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/wacom.gresource.xml)
+cc-wacom-resources.c: wacom.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_wacom $<
+cc-wacom-resources.h: wacom.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name cc_wacom $<
+
 @INTLTOOL_DESKTOP_RULE@
-
-pixmapdir = $(pkgdatadir)/ui
-pixmap_DATA =				\
-	wacom-tablet.svg		\
-	wacom-stylus.svg		\
-	wacom-stylus-airbrush.svg	\
-	wacom-stylus-inking.svg		\
-	wacom-stylus-art-pen.svg	\
-	wacom-stylus-classic.svg	\
-	wacom-tablet-cintiq.svg		\
-	wacom-tablet-pc.svg
-
-uidir   = $(pkgdatadir)/ui
-ui_DATA = gnome-wacom-properties.ui wacom-stylus-page.ui button-mapping.ui
 
 desktopdir = $(datadir)/applications
 desktop_in_files = gnome-wacom-panel.desktop.in
@@ -83,7 +80,7 @@ update-from-gsd:
 	FILES="$(COMMONFILES)" DIR="$(COMMONDIR)" $(top_srcdir)/update-from-gsd.sh && changed=true ; \
 	git commit -m "wacom: Update from gnome-settings-daemon" $(WACOMFILES) $(COMMONFILES)
 
-CLEANFILES = $(Desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = $(ui_DATA) $(pixmap_DATA)
+CLEANFILES = $(Desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
+EXTRA_DIST = $(resource_files) wacom.gresource.xml
 
 -include $(top_srcdir)/git.mk

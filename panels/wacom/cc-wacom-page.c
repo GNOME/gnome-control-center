@@ -864,9 +864,9 @@ map_buttons_button_clicked_cb (GtkButton   *button,
 
 	g_assert (priv->mapping_builder == NULL);
 	priv->mapping_builder = gtk_builder_new ();
-	gtk_builder_add_from_file (priv->mapping_builder,
-				   GNOMECC_UI_DIR "/button-mapping.ui",
-				   &error);
+	gtk_builder_add_from_resource (priv->mapping_builder,
+                                       "/org/gnome/control-center/wacom/button-mapping.ui",
+                                       &error);
 
 	if (error != NULL) {
 		g_warning ("Error loading UI file: %s", error->message);
@@ -1124,10 +1124,10 @@ cc_wacom_page_init (CcWacomPage *self)
 
 	priv->builder = gtk_builder_new ();
 
-	gtk_builder_add_objects_from_file (priv->builder,
-					   GNOMECC_UI_DIR "/gnome-wacom-properties.ui",
-					   objects,
-					   &error);
+	gtk_builder_add_objects_from_resource (priv->builder,
+                                               "/org/gnome/control-center/wacom/gnome-wacom-properties.ui",
+                                               objects,
+                                               &error);
 	if (error != NULL) {
 		g_warning ("Error loading UI file: %s", error->message);
 		g_object_unref (priv->builder);
@@ -1173,16 +1173,13 @@ set_icon_name (CcWacomPage *page,
 	       const char  *icon_name)
 {
 	CcWacomPagePrivate *priv;
-	char *filename, *path;
+	char *resource;
 
 	priv = page->priv;
 
-	filename = g_strdup_printf ("%s.svg", icon_name);
-	path = g_build_filename (GNOMECC_UI_DIR, filename, NULL);
-	g_free (filename);
-
-	gtk_image_set_from_file (GTK_IMAGE (WID (widget_name)), path);
-	g_free (path);
+	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s.svg", icon_name);
+	gtk_image_set_from_resource (GTK_IMAGE (WID (widget_name)), resource);
+	g_free (resource);
 }
 
 typedef struct {
