@@ -21,6 +21,7 @@
 
 #include "cc-search-panel.h"
 #include "cc-search-locations-dialog.h"
+#include "cc-search-resources.h"
 
 #include <egg-list-box/egg-list-box.h>
 #include <gio/gdesktopappinfo.h>
@@ -576,13 +577,14 @@ cc_search_panel_init (CcSearchPanel *self)
   guint res;
 
   self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, CC_TYPE_SEARCH_PANEL, CcSearchPanelPrivate);
+  g_resources_register (cc_search_get_resource ());
 
   self->priv->builder = gtk_builder_new ();
 
   error = NULL;
-  res = gtk_builder_add_from_file (self->priv->builder,
-                                   GNOMECC_UI_DIR "/search.ui",
-                                   &error);
+  res = gtk_builder_add_from_resource (self->priv->builder,
+                                       "/org/gnome/control-center/search/search.ui",
+                                       &error);
 
   if (res == 0)
     {

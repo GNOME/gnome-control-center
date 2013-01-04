@@ -705,9 +705,9 @@ cc_search_locations_dialog_new (CcSearchPanel *self)
   GError *error = NULL;
 
   dialog_builder = gtk_builder_new ();
-  gtk_builder_add_from_file (dialog_builder,
-                             GNOMECC_UI_DIR "/search-locations-dialog.ui",
-                             &error);
+  gtk_builder_add_from_resource (dialog_builder,
+                                 "/org/gnome/control-center/search/search-locations-dialog.ui",
+                                 &error);
 
   if (error != NULL)
     {
