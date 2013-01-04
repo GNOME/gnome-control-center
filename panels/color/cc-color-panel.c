@@ -39,7 +39,7 @@ struct _CcColorPanelPrivate
 {
   CdClient      *client;
   CdDevice      *current_device;
-  CdSensor      *sensor;
+  GPtrArray     *sensors;
   GCancellable  *cancellable;
   GDBusProxy    *proxy;
   GSettings     *settings;
@@ -912,6 +912,7 @@ gcm_prefs_set_calibrate_button_sensitivity (CcColorPanel *prefs)
   GtkWidget *widget;
   const gchar *tooltip;
   CdDeviceKind kind;
+  CdSensor *sensor_tmp;
   CcColorPanelPrivate *priv = prefs->priv;
 
   /* TRANSLATORS: this is when the button is sensitive */
@@ -927,11 +928,12 @@ gcm_prefs_set_calibrate_button_sensitivity (CcColorPanel *prefs)
     {
 
       /* find whether we have hardware installed */
-      if (priv->sensor == NULL) {
-        /* TRANSLATORS: this is when the button is insensitive */
-        tooltip = _("The measuring instrument is not detected. Please check it is turned on and correctly connected.");
-        goto out;
-      }
+      if (priv->sensors == NULL || priv->sensors->len == 0)
+        {
+          /* TRANSLATORS: this is when the button is insensitive */
+          tooltip = _("The measuring instrument is not detected. Please check it is turned on and correctly connected.");
+          goto out;
+        }
 
       /* success */
       ret = TRUE;
@@ -950,7 +952,7 @@ gcm_prefs_set_calibrate_button_sensitivity (CcColorPanel *prefs)
     {
 
     /* find whether we have hardware installed */
-    if (priv->sensor == NULL)
+    if (priv->sensors->len == 0)
       {
         /* TRANSLATORS: this is when the button is insensitive */
         tooltip = _("The measuring instrument is not detected. Please check it is turned on and correctly connected.");
@@ -958,7 +960,8 @@ gcm_prefs_set_calibrate_button_sensitivity (CcColorPanel *prefs)
       }
 
     /* find whether we have hardware installed */
-    ret = cd_sensor_has_cap (priv->sensor, CD_SENSOR_CAP_PRINTER);
+    sensor_tmp = g_ptr_array_index (priv->sensors, 0);
+    ret = cd_sensor_has_cap (sensor_tmp, CD_SENSOR_CAP_PRINTER);
     if (!ret)
       {
         /* TRANSLATORS: this is when the button is insensitive */
@@ -1290,17 +1293,15 @@ out:
 static void
 gcm_prefs_sensor_coldplug (CcColorPanel *prefs)
 {
-  GPtrArray *sensors;
-  GError *error = NULL;
-  gboolean ret;
   CcColorPanelPrivate *priv = prefs->priv;
+  CdSensor *sensor_tmp;
+  gboolean ret;
+  GError *error = NULL;
+  GPtrArray *sensors;
+  guint i;
 
   /* unref old */
-  if (priv->sensor != NULL)
-    {
-      g_object_unref (priv->sensor);
-      priv->sensor = NULL;
-    }
+  g_clear_pointer (&priv->sensors, g_ptr_array_unref);
 
   /* no present */
   sensors = cd_client_get_sensors_sync (priv->client, NULL, &error);
@@ -1313,16 +1314,20 @@ gcm_prefs_sensor_coldplug (CcColorPanel *prefs)
   if (sensors->len == 0)
     goto out;
 
-  /* save a copy of the sensor */
-  priv->sensor = g_object_ref (g_ptr_array_index (sensors, 0));
+  /* save a copy of the sensor list */
+  priv->sensors = g_ptr_array_ref (sensors);
 
-  /* connect to the sensor */
-  ret = cd_sensor_connect_sync (priv->sensor, NULL, &error);
-  if (!ret)
+  /* connect to each sensor */
+  for (i = 0; i < sensors->len; i++)
     {
-      g_warning ("%s", error->message);
-      g_error_free (error);
-      goto out;
+      sensor_tmp = g_ptr_array_index (sensors, i);
+      ret = cd_sensor_connect_sync (sensor_tmp, NULL, &error);
+      if (!ret)
+        {
+          g_warning ("%s", error->message);
+          g_error_free (error);
+          goto out;
+        }
     }
 out:
   if (sensors != NULL)
@@ -2338,7 +2343,7 @@ cc_color_panel_dispose (GObject *object)
   g_clear_object (&priv->builder);
   g_clear_object (&priv->client);
   g_clear_object (&priv->current_device);
-  g_clear_object (&priv->sensor);
+  g_clear_pointer (&priv->sensors, g_ptr_array_unref);
 
   G_OBJECT_CLASS (cc_color_panel_parent_class)->dispose (object);
 }
