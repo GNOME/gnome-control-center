@@ -3,14 +3,17 @@ cappletname = notifications
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(NOTIFICATIONS_PANEL_CFLAGS)			\
-	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
-	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	$(NULL)
 
 noinst_LTLIBRARIES = libnotifications.la
 
+BUILT_SOURCES =				\
+	cc-notifications-resources.c	\
+	cc-notifications-resources.h
+
 libnotifications_la_SOURCES =		\
+	$(BUILT_SOURCES)		\
 	cc-edit-dialog.c		\
 	cc-edit-dialog.h		\
 	cc-notifications-panel.c	\
@@ -18,8 +21,11 @@ libnotifications_la_SOURCES =		\
 
 libnotifications_la_LIBADD = $(NOTIFICATIONS_PANEL_LIBS) $(PANEL_LIBS)
 
-uidir = $(pkgdatadir)/ui
-dist_ui_DATA = notifications.ui
+resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/notifications.gresource.xml)
+cc-notifications-resources.c: notifications.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_notifications $<
+cc-notifications-resources.h: notifications.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name cc_notifications $<
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -27,6 +33,7 @@ desktopdir = $(datadir)/applications
 desktop_in_files = gnome-notifications-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
-CLEANFILES = $(desktop_in_files) $(desktop_DATA)
+CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
+EXTRA_DIST = $(resource_files) notifications.gresource.xml
 
 -include $(top_srcdir)/git.mk

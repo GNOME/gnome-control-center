@@ -29,6 +29,7 @@
 
 #include <egg-list-box/egg-list-box.h>
 #include "cc-notifications-panel.h"
+#include "cc-notifications-resources.h"
 #include "cc-edit-dialog.h"
 
 #define MASTER_SCHEMA "org.gnome.desktop.notifications"
@@ -114,13 +115,14 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
   GtkWidget *w;
   GError *error = NULL;
 
+  g_resources_register (cc_notifications_get_resource ());
   panel->known_applications = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                      NULL, g_free);
 
   panel->builder = gtk_builder_new ();
-  if (gtk_builder_add_from_file (panel->builder,
-                                 GNOMECC_UI_DIR "/notifications.ui",
-                                 &error) == 0)
+  if (gtk_builder_add_from_resource (panel->builder,
+                                     "/org/gnome/control-center/notifications/notifications.ui",
+                                     &error) == 0)
     {
       g_error ("Error loading UI file: %s", error->message);
       g_error_free (error);
