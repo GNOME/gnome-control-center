@@ -1236,7 +1236,7 @@ gnome_control_center_init (GnomeControlCenter *self)
   /* load the user interface */
   priv->builder = gtk_builder_new ();
 
-  if (!gtk_builder_add_from_file (priv->builder, UIDIR "/shell.ui", &err))
+  if (!gtk_builder_add_from_resource (priv->builder, "/org/gnome/control-center/shell/shell.ui", &err))
     {
       g_critical ("Could not build interface: %s", err->message);
       g_error_free (err);

@@ -5,7 +5,12 @@ INCLUDES =					\
 
 bin_PROGRAMS = gnome-control-center
 
+BUILT_SOURCES =			\
+	cc-shell-resources.c	\
+	cc-shell-resources.h
+
 gnome_control_center_SOURCES =			\
+	$(BUILT_SOURCES)			\
 	control-center.c			\
 	cc-shell-log.c				\
 	cc-shell-log.h				\
@@ -66,12 +71,13 @@ if BUILD_BLUETOOTH
 gnome_control_center_LDADD += $(top_builddir)/panels/bluetooth/libbluetooth.la
 endif
 
-AM_CPPFLAGS =							\
-	-DGNOMELOCALEDIR="\"$(datadir)/locale\""		\
-	-DUIDIR="\"$(uidir)\""
+AM_CPPFLAGS = -DGNOMELOCALEDIR="\"$(datadir)/locale\""
 
-uidir = $(pkgdatadir)/ui
-ui_DATA = shell.ui
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/shell.gresource.xml)
+cc-shell-resources.c: shell.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_shell $<
+cc-shell-resources.h: shell.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name cc_shell $<
 
 sysdir = $(datadir)/applications
 sys_in_files = gnome-control-center.desktop.in
@@ -85,12 +91,13 @@ gnome_control_center_completion.bash: gnome_control_center_completion.bash.in li
 	$(AM_V_GEN) cat $< | sed "s,@PANELS@,`$(srcdir)/list-panel.sh $(top_srcdir)`," > $@
 
 EXTRA_DIST =					\
-	$(ui_DATA)				\
+	$(resource_files)			\
+	shell.gresource.xml			\
 	gnome-control-center.desktop.in.in	\
 	$(completion_in_files)			\
 	list-panel.sh
 
-CLEANFILES = $(completion_DATA)
+CLEANFILES = $(BUILT_SOURCES) $(completion_DATA)
 DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in
 
 -include $(top_srcdir)/git.mk
