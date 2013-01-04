@@ -27,6 +27,7 @@
 #include <gdk/gdkx.h>
 
 #include "cc-color-panel.h"
+#include "cc-color-resources.h"
 
 #define WID(b, w) (GtkWidget *) gtk_builder_get_object (b, w)
 
@@ -2115,11 +2116,12 @@ cc_color_panel_init (CcColorPanel *prefs)
   GtkWidget *widget;
 
   priv = prefs->priv = COLOR_PANEL_PRIVATE (prefs);
+  g_resources_register (cc_color_get_resource ());
 
   priv->builder = gtk_builder_new ();
-  gtk_builder_add_from_file (priv->builder,
-                             GNOMECC_UI_DIR "/color.ui",
-                             &error);
+  gtk_builder_add_from_resource (priv->builder,
+                                 "/org/gnome/control-center/color/color.ui",
+                                 &error);
 
   if (error != NULL)
     {
