@@ -51,32 +51,6 @@ enum {
 };
 
 static void
-cc_mouse_panel_get_property (GObject    *object,
-                             guint       property_id,
-                             GValue     *value,
-                             GParamSpec *pspec)
-{
-  switch (property_id)
-    {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
-}
-
-static void
-cc_mouse_panel_set_property (GObject      *object,
-                             guint         property_id,
-                             const GValue *value,
-                             GParamSpec   *pspec)
-{
-  switch (property_id)
-    {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
-}
-
-static void
 cc_mouse_panel_dispose (GObject *object)
 {
   CcMousePanelPrivate *priv = CC_MOUSE_PANEL (object)->priv;
@@ -213,8 +187,6 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
 
   panel_class->get_help_uri = cc_mouse_panel_get_help_uri;
 
-  object_class->get_property = cc_mouse_panel_get_property;
-  object_class->set_property = cc_mouse_panel_set_property;
   object_class->dispose = cc_mouse_panel_dispose;
   object_class->constructed = cc_mouse_panel_constructed;
 }
