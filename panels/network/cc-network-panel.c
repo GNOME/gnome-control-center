@@ -24,6 +24,7 @@
 #include <stdlib.h>
 
 #include "cc-network-panel.h"
+#include "cc-network-resources.h"
 
 #include "nm-remote-settings.h"
 #include "nm-client.h"
@@ -1206,11 +1207,12 @@ cc_network_panel_init (CcNetworkPanel *panel)
         GtkWidget *toplevel;
 
         panel->priv = NETWORK_PANEL_PRIVATE (panel);
+        g_resources_register (cc_network_get_resource ());
 
         panel->priv->builder = gtk_builder_new ();
-        gtk_builder_add_from_file (panel->priv->builder,
-                                   GNOMECC_UI_DIR "/network.ui",
-                                   &error);
+        gtk_builder_add_from_resource (panel->priv->builder,
+                                       "/org/gnome/control-center/network/network.ui",
+                                       &error);
         if (error != NULL) {
                 g_warning ("Could not load interface file: %s", error->message);
                 g_error_free (error);

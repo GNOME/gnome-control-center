@@ -250,9 +250,9 @@ net_device_simple_init (NetDeviceSimple *device_simple)
         device_simple->priv = NET_DEVICE_SIMPLE_GET_PRIVATE (device_simple);
 
         device_simple->priv->builder = gtk_builder_new ();
-        gtk_builder_add_from_file (device_simple->priv->builder,
-                                   GNOMECC_UI_DIR "/network-simple.ui",
-                                   &error);
+        gtk_builder_add_from_resource (device_simple->priv->builder,
+                                       "/org/gnome/control-center/network/network-simple.ui",
+                                       &error);
         if (error != NULL) {
                 g_warning ("Could not load interface file: %s", error->message);
                 g_error_free (error);

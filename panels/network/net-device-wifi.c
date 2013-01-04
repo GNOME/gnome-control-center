@@ -1999,9 +1999,9 @@ net_device_wifi_init (NetDeviceWifi *device_wifi)
         device_wifi->priv = NET_DEVICE_WIFI_GET_PRIVATE (device_wifi);
 
         device_wifi->priv->builder = gtk_builder_new ();
-        gtk_builder_add_from_file (device_wifi->priv->builder,
-                                   GNOMECC_UI_DIR "/network-wifi.ui",
-                                   &error);
+        gtk_builder_add_from_resource (device_wifi->priv->builder,
+                                       "/org/gnome/control-center/network/network-wifi.ui",
+                                       &error);
         if (error != NULL) {
                 g_warning ("Could not load interface file: %s", error->message);
                 g_error_free (error);

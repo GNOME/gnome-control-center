@@ -307,9 +307,9 @@ net_proxy_init (NetProxy *proxy)
         proxy->priv = NET_PROXY_GET_PRIVATE (proxy);
 
         proxy->priv->builder = gtk_builder_new ();
-        gtk_builder_add_from_file (proxy->priv->builder,
-                                   GNOMECC_UI_DIR "/network-proxy.ui",
-                                   &error);
+        gtk_builder_add_from_resource (proxy->priv->builder,
+                                       "/org/gnome/control-center/network/network-proxy.ui",
+                                       &error);
         if (error != NULL) {
                 g_warning ("Could not load interface file: %s", error->message);
                 g_error_free (error);
