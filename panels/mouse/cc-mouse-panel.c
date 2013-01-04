@@ -23,6 +23,8 @@
  */
 
 #include "cc-mouse-panel.h"
+#include "cc-mouse-resources.h"
+
 #include "gnome-mouse-properties.h"
 #include "gnome-mouse-test.h"
 #include <gtk/gtk.h>
@@ -140,21 +142,22 @@ cc_mouse_panel_init (CcMousePanel *self)
   GError *error = NULL;
 
   priv = self->priv = MOUSE_PANEL_PRIVATE (self);
+  g_resources_register (cc_mouse_get_resource ());
 
   priv->builder = gtk_builder_new ();
 
-  gtk_builder_add_from_file (priv->builder,
-                             GNOMECC_UI_DIR "/gnome-mouse-properties.ui",
-                             &error);
+  gtk_builder_add_from_resource (priv->builder,
+                                 "/org/gnome/control-center/mouse/gnome-mouse-properties.ui",
+                                 &error);
   if (error != NULL)
     {
       g_warning ("Error loading UI file: %s", error->message);
       return;
     }
 
-  gtk_builder_add_from_file (priv->builder,
-                             GNOMECC_UI_DIR "/gnome-mouse-test.ui",
-                             &error);
+  gtk_builder_add_from_resource (priv->builder,
+                                 "/org/gnome/control-center/mouse/gnome-mouse-test.ui",
+                                 &error);
   if (error != NULL)
     {
       g_warning ("Error loading UI file: %s", error->message);

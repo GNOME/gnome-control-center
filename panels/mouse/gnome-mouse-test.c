@@ -169,7 +169,7 @@ static void
 setup_scroll_image (GtkWidget *widget)
 {
 	static struct test_data_t data;
-	char *filename;
+	const char *resource;
 
 	if (scroll_image_timeout_id != 0) {
 		g_source_remove (scroll_image_timeout_id);
@@ -177,10 +177,10 @@ setup_scroll_image (GtkWidget *widget)
 	}
 
 	if (double_click_state == DOUBLE_CLICK_TEST_GEGL)
-		filename = GNOMECC_UI_DIR "/scroll-test-gegl.svg";
+		resource = "/org/gnome/control-center/mouse/scroll-test-gegl.svg";
 	else
-		filename = GNOMECC_UI_DIR "/scroll-test.svg";
-	gtk_image_set_from_file (GTK_IMAGE (widget), filename);
+		resource = "/org/gnome/control-center/mouse/scroll-test.svg";
+	gtk_image_set_from_resource (GTK_IMAGE (widget), resource);
 
 	if (double_click_state != DOUBLE_CLICK_TEST_GEGL)
 		return;

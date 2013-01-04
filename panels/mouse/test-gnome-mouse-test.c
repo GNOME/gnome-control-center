@@ -1,6 +1,7 @@
 #include <config.h>
 #include <gtk/gtk.h>
 
+#include "cc-mouse-resources.h"
 #include "gnome-mouse-test.h"
 
 static gboolean
@@ -22,10 +23,11 @@ int main (int argc, char **argv)
   GError *error = NULL;
 
   gtk_init (&argc, &argv);
+  g_resources_register (cc_mouse_get_resource ());
 
   builder = gtk_builder_new ();
 
-  gtk_builder_add_from_file (builder, "gnome-mouse-test.ui", &error);
+  gtk_builder_add_from_resource (builder, "/org/gnome/control-center/mouse/gnome-mouse-test.ui", &error);
   if (error != NULL)
     {
       g_warning ("Error loading UI file: %s", error->message);
