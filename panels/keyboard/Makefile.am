@@ -3,7 +3,12 @@ cappletname = keyboard
 
 noinst_LTLIBRARIES = libkeyboard.la
 
+BUILT_SOURCES =			\
+	cc-keyboard-resources.c	\
+	cc-keyboard-resources.h
+
 libkeyboard_la_SOURCES =   \
+	$(BUILT_SOURCES)		\
 	cc-keyboard-panel.c		\
 	cc-keyboard-panel.h		\
 	cc-keyboard-item.c		\
@@ -20,10 +25,13 @@ libkeyboard_la_SOURCES =   \
 libkeyboard_la_CFLAGS = $(PANEL_CFLAGS) $(KEYBOARD_PANEL_CFLAGS) -I$(top_srcdir)/panels/common/
 libkeyboard_la_LIBADD = $(PANEL_LIBS) $(KEYBOARD_PANEL_LIBS)
 
-@INTLTOOL_DESKTOP_RULE@
+resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/keyboard.gresource.xml)
+cc-keyboard-resources.c: keyboard.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_keyboard $<
+cc-keyboard-resources.h: keyboard.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name cc_keyboard $<
 
-uidir   = $(pkgdatadir)/ui
-ui_DATA = gnome-keyboard-panel.ui
+@INTLTOOL_DESKTOP_RULE@
 
 desktopdir = $(datadir)/applications
 Desktop_in_files = gnome-keyboard-panel.desktop.in
@@ -45,16 +53,13 @@ pkgconfigdir = $(datadir)/pkgconfig
 pkgconfig_DATA = gnome-keybindings.pc
 
 INCLUDES = \
-	-DGNOMELOCALEDIR="\"$(datadir)/locale\"" \
-	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\"" \
-	-DGNOMECC_UI_DIR="\"$(uidir)\"" \
-	-DGNOMECC_KEYBINDINGS_DIR="\"$(pkgdatadir)/keybindings\""
+	-DGNOMELOCALEDIR="\"$(datadir)/locale\""
 
 CLEANFILES = \
 	$(Desktop_in_files) \
 	$(desktop_DATA) \
-	$(xml_DATA)
-EXTRA_DIST = $(ui_DATA) $(xml_in_files) gnome-keybindings.pc.in
-
+	$(xml_DATA) \
+	$(BUILT_SOURCES)
+EXTRA_DIST = $(xml_in_files) gnome-keybindings.pc.in $(resource_files) keyboard.gresource.xml
 
 -include $(top_srcdir)/git.mk

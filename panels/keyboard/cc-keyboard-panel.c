@@ -20,6 +20,8 @@
  */
 
 #include "cc-keyboard-panel.h"
+#include "cc-keyboard-resources.h"
+
 #include "keyboard-general.h"
 #include "keyboard-shortcuts.h"
 
@@ -168,15 +170,17 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 static void
 cc_keyboard_panel_init (CcKeyboardPanel *self)
 {
-  const gchar *uifile = GNOMECC_UI_DIR "/gnome-keyboard-panel.ui";
   CcKeyboardPanelPrivate *priv;
   GError *error = NULL;
 
   priv = self->priv = KEYBOARD_PANEL_PRIVATE (self);
+  g_resources_register (cc_keyboard_get_resource ());
 
   priv->builder = gtk_builder_new ();
 
-  if (gtk_builder_add_from_file (priv->builder, uifile, &error) == 0)
+  if (gtk_builder_add_from_resource (priv->builder,
+                                     "/org/gnome/control-center/keyboard/gnome-keyboard-panel.ui",
+                                     &error) == 0)
     {
       g_warning ("Could not load UI: %s", error->message);
       g_clear_error (&error);
