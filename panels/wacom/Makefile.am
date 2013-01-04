@@ -8,7 +8,6 @@ INCLUDES = 						\
 	$(WACOM_PANEL_CFLAGS)				\
 	-I$(srcdir)/calibrator				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
-	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
 	$(NULL)
 
 noinst_LTLIBRARIES = libwacom-properties.la
