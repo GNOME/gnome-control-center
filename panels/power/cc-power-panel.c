@@ -36,6 +36,7 @@
 #endif
 
 #include "cc-power-panel.h"
+#include "cc-power-resources.h"
 
 /* Uncomment this to test the behaviour of the panel in
  * battery-less situations:
@@ -1895,13 +1896,14 @@ cc_power_panel_init (CcPowerPanel *self)
   GtkWidget  *box;
 
   priv = self->priv = POWER_PANEL_PRIVATE (self);
+  g_resources_register (cc_power_get_resource ());
 
   priv->builder = gtk_builder_new ();
 
   error = NULL;
-  gtk_builder_add_from_file (priv->builder,
-                             GNOMECC_UI_DIR "/power.ui",
-                             &error);
+  gtk_builder_add_from_resource (self->priv->builder,
+                                 "/org/gnome/control-center/power/power.ui",
+                                 &error);
 
   if (error != NULL)
     {

@@ -5,15 +5,18 @@ SUBDIRS = icons
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(POWER_PANEL_CFLAGS)				\
-	-DGNOMECC_UI_DIR="\"$(uidir)\""			\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
-	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
 	-I$(srcdir)/../../shell/			\
 	$(NULL)
 
 noinst_LTLIBRARIES = libpower.la
 
+BUILT_SOURCES =			\
+	cc-power-resources.c	\
+	cc-power-resources.h
+
 libpower_la_SOURCES =		\
+	$(BUILT_SOURCES)	\
 	cc-power-panel.c	\
 	cc-power-panel.h
 
@@ -29,8 +32,11 @@ INCLUDES += $(NETWORK_MANAGER_CFLAGS)
 libpower_la_LIBADD += $(NETWORK_MANAGER_LIBS)
 endif
 
-uidir = $(pkgdatadir)/ui
-dist_ui_DATA = power.ui
+resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/power.gresource.xml)
+cc-power-resources.c: power.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_power $<
+cc-power-resources.h: power.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name cc_power $<
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -38,6 +44,7 @@ desktopdir = $(datadir)/applications
 desktop_in_files = gnome-power-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
-CLEANFILES = $(desktop_in_files) $(desktop_DATA)
+CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
+EXTRA_DIST = $(resource_files) power.gresource.xml
 
 -include $(top_srcdir)/git.mk
