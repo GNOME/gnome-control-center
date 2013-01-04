@@ -27,7 +27,9 @@
 #include <math.h>
 #include <glib/gi18n-lib.h>
 #include <gdesktop-enums.h>
+
 #include "cc-ua-panel.h"
+#include "cc-ua-resources.h"
 
 #include "zoom-options.h"
 
@@ -616,13 +618,14 @@ cc_ua_panel_init (CcUaPanel *self)
                        NULL };
 
   priv = self->priv = UA_PANEL_PRIVATE (self);
+  g_resources_register (cc_universal_access_get_resource ());
 
   priv->builder = gtk_builder_new ();
 
-  gtk_builder_add_objects_from_file (priv->builder,
-                                     GNOMECC_UI_DIR "/uap.ui",
-                                     objects,
-                                     &err);
+  gtk_builder_add_objects_from_resource (priv->builder,
+                                         "/org/gnome/control-center/universal-access/uap.ui",
+                                         objects,
+                                         &err);
 
   if (err)
     {

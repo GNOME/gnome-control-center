@@ -512,9 +512,9 @@ zoom_options_init (ZoomOptions *self)
   priv = self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, ZOOM_TYPE_OPTIONS, ZoomOptionsPrivate);
 
   priv->builder = gtk_builder_new ();
-  gtk_builder_add_from_file (priv->builder,
-                             GNOMECC_UI_DIR "/zoom-options.ui",
-                             &err);
+  gtk_builder_add_from_resource (priv->builder,
+                                 "/org/gnome/control-center/universal-access/zoom-options.ui",
+                                 &err);
   if (err)
     {
       g_warning ("Could not load interface file: %s", err->message);
