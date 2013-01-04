@@ -33,20 +33,6 @@ struct _CcKeyboardPanelPrivate
   GtkBuilder *builder;
 };
 
-
-static void
-cc_keyboard_panel_get_property (GObject    *object,
-                               guint       property_id,
-                               GValue     *value,
-                               GParamSpec *pspec)
-{
-  switch (property_id)
-    {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
-}
-
 enum {
   PROP_0,
   PROP_ARGV
@@ -172,7 +158,6 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
   panel_class->get_help_uri = cc_keyboard_panel_get_help_uri;
 
   object_class->constructor = cc_keyboard_panel_constructor;
-  object_class->get_property = cc_keyboard_panel_get_property;
   object_class->set_property = cc_keyboard_panel_set_property;
   object_class->dispose = cc_keyboard_panel_dispose;
   object_class->finalize = cc_keyboard_panel_finalize;
