@@ -1013,7 +1013,8 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
     }
 
   devices = up_client_get_devices (self->priv->up_client);
-g_print ("got %d devices from upower\n", devices->len);
+  g_debug ("got %d devices from upower\n", devices->len);
+
   for (i = 0; i < devices->len; i++)
     {
       device = g_ptr_array_index (devices, i);
