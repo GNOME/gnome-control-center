@@ -86,8 +86,11 @@ gnome_control_center_completion.bash: gnome_control_center_completion.bash.in li
 
 EXTRA_DIST =					\
 	$(ui_DATA)				\
-	gnome-control-center.desktop.in.in
+	gnome-control-center.desktop.in.in	\
+	$(completion_in_files)			\
+	list-panel.sh
 
+CLEANFILES = $(completion_DATA)
 DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in
 
 -include $(top_srcdir)/git.mk
