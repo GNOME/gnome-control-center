@@ -20,6 +20,8 @@
  */
 
 #include "cc-screen-panel.h"
+#include "cc-screen-resources.h"
+
 #include <string.h>
 
 CC_PANEL_REGISTER (CcScreenPanel, cc_screen_panel)
@@ -435,13 +437,14 @@ cc_screen_panel_init (CcScreenPanel *self)
   GtkWidget  *widget;
 
   self->priv = SCREEN_PANEL_PRIVATE (self);
+  g_resources_register (cc_screen_get_resource ());
 
   self->priv->builder = gtk_builder_new ();
 
   error = NULL;
-  gtk_builder_add_from_file (self->priv->builder,
-                             GNOMECC_UI_DIR "/screen.ui",
-                             &error);
+  gtk_builder_add_from_resource (self->priv->builder,
+                                 "/org/gnome/control-center/screen/screen.ui",
+                                 &error);
 
   if (error != NULL)
     {
