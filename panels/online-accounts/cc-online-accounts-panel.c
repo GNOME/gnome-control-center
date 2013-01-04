@@ -143,13 +143,14 @@ cc_goa_panel_init (CcGoaPanel *panel)
   GtkTreeIter iter;
   GNetworkMonitor *monitor;
 
+  g_resources_register (cc_online_accounts_get_resource ());
   monitor = g_network_monitor_get_default();
 
   panel->builder = gtk_builder_new ();
   error = NULL;
-  if (gtk_builder_add_from_file (panel->builder,
-                                 GNOMECC_UI_DIR "/online-accounts.ui",
-                                 &error) == 0)
+  if (gtk_builder_add_from_resource (panel->builder,
+                                     "/org/gnome/control-center/online-accounts/online-accounts.ui",
+                                     &error) == 0)
     {
       goa_warning ("Error loading UI file: %s (%s, %d)",
                    error->message, g_quark_to_string (error->domain), error->code);
