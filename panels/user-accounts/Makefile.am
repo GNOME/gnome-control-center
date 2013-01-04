@@ -7,9 +7,6 @@ NULL =
 noinst_LTLIBRARIES = libuser-accounts.la
 
 AM_CPPFLAGS =						\
-	-DDATADIR=\""$(datadir)"\"			\
-	-DUIDIR=\""$(pkgdatadir)/ui/user-accounts"\"	\
-	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\"       \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
 	-DUM_PIXMAP_DIR=\""$(pkgdatadir)/pixmaps"\"	\
 	-DHAVE_LIBPWQUALITY				\
@@ -23,8 +20,10 @@ AM_CPPFLAGS += $(CHEESE_CFLAGS)
 endif
 
 BUILT_SOURCES = \
-       um-realm-generated.c \
-       um-realm-generated.h
+	um-realm-generated.c \
+	um-realm-generated.h \
+	um-resources.c \
+	um-resources.h
 
 libuser_accounts_la_SOURCES =		\
 	um-account-type.h		\
@@ -75,6 +74,12 @@ um-realm-generated.c: $(srcdir)/data/org.freedesktop.realmd.xml
 		--c-generate-object-manager $<
 um-realm-generated.h: um-realm-generated.c
 
+resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/user-accounts.gresource.xml)
+um-resources.c: user-accounts.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name um $<
+um-resources.h: user-accounts.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name um $<
+
 noinst_PROGRAMS = frob-account-dialog
 
 frob_account_dialog_SOURCES = \
@@ -91,8 +96,7 @@ frob_account_dialog_LDADD = \
 	$(libuser_accounts_la_LIBADD)
 
 frob_account_dialog_CFLAGS = \
-	$(AM_CFLAGS) \
-	-DUIDIR=\""$(pkgdatadir)/ui/user-accounts"\"
+	$(AM_CFLAGS)
 
 polkitdir = $(datadir)/polkit-1/actions
 polkit_in_files = org.gnome.controlcenter.user-accounts.policy.in
@@ -102,6 +106,8 @@ polkit_DATA = $(polkit_in_files:.policy.in=.policy)
 
 EXTRA_DIST =				\
 	$(polkit_in_files)		\
+	$(resource_files)		\
+	user-accounts.gresource.xml	\
 	$(NULL)
 
 CLEANFILES =				\

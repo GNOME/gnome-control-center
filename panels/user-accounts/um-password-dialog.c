@@ -510,7 +510,6 @@ um_password_dialog_new (void)
 {
         GtkBuilder *builder;
         GError *error;
-        const gchar *filename;
         UmPasswordDialog *um;
         GtkWidget *widget;
         const char *old_label;
@@ -520,10 +519,9 @@ um_password_dialog_new (void)
         builder = gtk_builder_new ();
 
         error = NULL;
-        filename = UIDIR "/password-dialog.ui";
-        if (!g_file_test (filename, G_FILE_TEST_EXISTS))
-                filename = "data/password-dialog.ui";
-        if (!gtk_builder_add_from_file (builder, filename, &error)) {
+        if (!gtk_builder_add_from_resource (builder,
+                                            "/org/gnome/control-center/user-accounts/password-dialog.ui",
+                                            &error)) {
                 g_error ("%s", error->message);
                 g_error_free (error);
                 return NULL;

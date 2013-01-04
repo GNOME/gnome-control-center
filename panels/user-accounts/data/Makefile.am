@@ -1,12 +1,4 @@
-SUBDIRS = faces icons
-
-uidir = $(pkgdatadir)/ui/user-accounts
-ui_DATA = \
-	account-dialog.ui	\
-	password-dialog.ui	\
-	photo-dialog.ui		\
-	user-accounts-dialog.ui \
-	account-fingerprint.ui
+SUBDIRS = faces
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -16,8 +8,7 @@ desktop_DATA = $(Desktop_in_files:.desktop.in=.desktop)
 
 EXTRA_DIST = 					\
 	gnome-user-accounts-panel.desktop.in.in	\
-	org.freedesktop.realmd.xml		\
-	$(ui_DATA)
+	org.freedesktop.realmd.xml
 
 CLEANFILES =					\
 	gnome-user-accounts-panel.desktop	\

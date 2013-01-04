@@ -49,6 +49,7 @@
 #include "um-photo-dialog.h"
 #include "um-fingerprint-dialog.h"
 #include "um-utils.h"
+#include "um-resources.h"
 
 #include "cc-common-language.h"
 
@@ -1308,11 +1309,11 @@ cc_user_panel_init (CcUserPanel *self)
         CcUserPanelPrivate *d;
         GError *error;
         volatile GType type G_GNUC_UNUSED;
-        const gchar *filename;
         GtkWidget *button;
         GtkStyleContext *context;
 
         d = self->priv = UM_USER_PANEL_PRIVATE (self);
+        g_resources_register (um_get_resource ());
 
         /* register types that the builder might need */
         type = um_editable_button_get_type ();
@@ -1324,12 +1325,10 @@ cc_user_panel_init (CcUserPanel *self)
         d->builder = gtk_builder_new ();
         d->um = act_user_manager_get_default ();
 
-        filename = UIDIR "/user-accounts-dialog.ui";
-        if (!g_file_test (filename, G_FILE_TEST_EXISTS)) {
-                filename = "data/user-accounts-dialog.ui";
-        }
         error = NULL;
-        if (!gtk_builder_add_from_file (d->builder, filename, &error)) {
+        if (!gtk_builder_add_from_resource (d->builder,
+                                            "/org/gnome/control-center/user-accounts/user-accounts-dialog.ui",
+                                            &error)) {
                 g_error ("%s", error->message);
                 g_error_free (error);
                 return;
