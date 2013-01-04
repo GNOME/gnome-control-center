@@ -7,13 +7,15 @@ noinst_PROGRAMS = list-languages
 AM_CPPFLAGS =						\
 	$(PANEL_CFLAGS)					\
 	$(LIBLANGUAGE_CFLAGS)				\
-	-DDATADIR=\""$(datadir)"\"			\
-	-DUIDIR=\""$(pkgdatadir)/ui"\"			\
 	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\"       \
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"        \
-	-DUM_PIXMAP_DIR=\""$(pkgdatadir)/pixmaps"\"
+	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
+
+BUILT_SOURCES =			\
+	cc-common-resources.c	\
+	cc-common-resources.h
 
 liblanguage_la_SOURCES =		\
+	$(BUILT_SOURCES)		\
 	gdm-languages.h 		\
 	gdm-languages.c 		\
 	locarchive.h			\
@@ -29,14 +31,16 @@ list_languages_SOURCES = list-languages.c
 list_languages_LDADD = liblanguage.la
 list_languages_CFLAGS = $(LIBLANGUAGE_CFLAGS)
 
-uidir = $(pkgdatadir)/ui
-
-dist_ui_DATA = \
-	language-chooser.ui
+resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/common.gresource.xml)
+cc-common-resources.c: common.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_common $<
+cc-common-resources.h: common.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name cc_common $<
 
 rulesdir = $(datadir)/polkit-1/rules.d/
 rules_DATA = gnome-control-center.rules
 
-EXTRA_DIST = $(rules_DATA)
+EXTRA_DIST = $(rules_DATA) $(resource_files)
+CLEANFILES = $(BUILT_SOURCES)
 
 -include $(top_srcdir)/git.mk

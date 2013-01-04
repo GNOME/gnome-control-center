@@ -33,6 +33,7 @@
 
 #include "cc-language-chooser.h"
 #include "cc-common-language.h"
+#include "cc-common-resources.h"
 #include "gdm-languages.h"
 
 gchar *
@@ -263,7 +264,6 @@ GtkWidget *
 cc_language_chooser_new (GtkWidget *parent, gboolean regions)
 {
         GtkBuilder *builder;
-        const char *filename;
         GError *error = NULL;
         GtkWidget *chooser;
         GtkWidget *list;
@@ -275,11 +275,12 @@ cc_language_chooser_new (GtkWidget *parent, gboolean regions)
 	GtkTreeModel *model;
 	GtkTreeModel *filter_model;
 
+        g_resources_register (cc_common_get_resource ());
+
         builder = gtk_builder_new ();
-        filename = UIDIR "/language-chooser.ui";
-        if (!g_file_test (filename, G_FILE_TEST_EXISTS))
-                filename = "data/language-chooser.ui";
-        if (!gtk_builder_add_from_file (builder, filename, &error)) {
+        if (!gtk_builder_add_from_resource (builder,
+                                            "/org/gnome/control-center/common/language-chooser.ui",
+                                            &error)) {
                 g_warning ("failed to load language chooser: %s", error->message);
                 g_error_free (error);
                 return NULL;
