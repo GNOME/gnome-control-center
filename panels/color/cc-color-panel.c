@@ -1341,20 +1341,21 @@ gcm_prefs_client_sensor_changed_cb (CdClient *client,
 static const gchar *
 gcm_prefs_device_kind_to_icon_name (CdDeviceKind kind)
 {
-  switch (kind) {
-  case CD_DEVICE_KIND_DISPLAY:
-    return "video-display";
-  case CD_DEVICE_KIND_SCANNER:
-    return "scanner";
-  case CD_DEVICE_KIND_PRINTER:
-    return "printer";
-  case CD_DEVICE_KIND_CAMERA:
-    return "camera-photo";
-  case CD_DEVICE_KIND_WEBCAM:
-    return "camera-web";
-  default:
-    return "image-missing";
-  }
+  switch (kind)
+    {
+    case CD_DEVICE_KIND_DISPLAY:
+      return "video-display";
+    case CD_DEVICE_KIND_SCANNER:
+      return "scanner";
+    case CD_DEVICE_KIND_PRINTER:
+      return "printer";
+    case CD_DEVICE_KIND_CAMERA:
+      return "camera-photo";
+    case CD_DEVICE_KIND_WEBCAM:
+      return "camera-web";
+    default:
+      return "image-missing";
+    }
 }
 
 static GString *
