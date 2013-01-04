@@ -384,8 +384,12 @@ load_apps_thread (GTask        *task,
       GDesktopAppInfo *app;
 
       app = iter->data;
-      if (g_desktop_app_info_get_boolean (app, "X-GNOME-UsesNotifications"))
+      if (g_desktop_app_info_get_boolean (app, "X-GNOME-UsesNotifications")) {
         process_app_info (panel, task, G_APP_INFO (app));
+        g_debug ("Processing app '%s'", g_app_info_get_id (G_APP_INFO (app)));
+      } else {
+        g_debug ("Skipped app '%s', doesn't use notifications", g_app_info_get_id (G_APP_INFO (app)));
+      }
     }
 
   g_list_free_full (apps, g_object_unref);
