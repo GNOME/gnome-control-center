@@ -2331,37 +2331,14 @@ cc_color_panel_dispose (GObject *object)
 {
   CcColorPanelPrivate *priv = CC_COLOR_PANEL (object)->priv;
 
-  if (priv->settings)
-    {
-      g_object_unref (priv->settings);
-      priv->settings = NULL;
-    }
   if (priv->cancellable != NULL)
-    {
-      g_cancellable_cancel (priv->cancellable);
-      g_object_unref (priv->cancellable);
-      priv->cancellable = NULL;
-    }
-  if (priv->builder != NULL)
-    {
-      g_object_unref (priv->builder);
-      priv->builder = NULL;
-    }
-  if (priv->client != NULL)
-    {
-      g_object_unref (priv->client);
-      priv->client = NULL;
-    }
-  if (priv->current_device != NULL)
-    {
-      g_object_unref (priv->current_device);
-      priv->current_device = NULL;
-    }
-  if (priv->sensor != NULL)
-    {
-      g_object_unref (priv->sensor);
-      priv->sensor = NULL;
-    }
+    g_cancellable_cancel (priv->cancellable);
+  g_clear_object (&priv->settings);
+  g_clear_object (&priv->cancellable);
+  g_clear_object (&priv->builder);
+  g_clear_object (&priv->client);
+  g_clear_object (&priv->current_device);
+  g_clear_object (&priv->sensor);
 
   G_OBJECT_CLASS (cc_color_panel_parent_class)->dispose (object);
 }
