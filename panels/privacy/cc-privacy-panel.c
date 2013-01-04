@@ -20,6 +20,7 @@
  */
 
 #include "cc-privacy-panel.h"
+#include "cc-privacy-resources.h"
 
 #include <egg-list-box/egg-list-box.h>
 #include <gio/gdesktopappinfo.h>
@@ -666,13 +667,14 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   guint res;
 
   self->priv = G_TYPE_INSTANCE_GET_PRIVATE (self, CC_TYPE_PRIVACY_PANEL, CcPrivacyPanelPrivate);
+  g_resources_register (cc_privacy_get_resource ());
 
   self->priv->builder = gtk_builder_new ();
 
   error = NULL;
-  res = gtk_builder_add_from_file (self->priv->builder,
-                                   GNOMECC_UI_DIR "/privacy.ui",
-                                   &error);
+  res = gtk_builder_add_from_resource (self->priv->builder,
+                                       "/org/gnome/control-center/privacy/privacy.ui",
+                                       &error);
 
   if (res == 0)
     {
