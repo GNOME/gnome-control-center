@@ -1332,6 +1332,9 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_widget_set_margin_bottom (box2, 6);
   gtk_box_pack_start (GTK_BOX (box), box2, TRUE, TRUE, 0);
 
+  /* FIXME: Disabled until we figure out whether we want it implemented
+   * like this */
+#if 0
   label = gtk_label_new (_("Screen _Power Saving"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
@@ -1354,6 +1357,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
   gtk_container_add (GTK_CONTAINER (widget), box);
   gtk_size_group_add_widget (priv->row_sizegroup, box);
+#endif
 
 #ifdef HAVE_NETWORK_MANAGER
   priv->wifi_row = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
