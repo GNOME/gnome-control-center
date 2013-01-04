@@ -473,32 +473,6 @@ reset_hostname_timeout (CcInfoPanel *panel)
 }
 
 static void
-cc_info_panel_get_property (GObject    *object,
-                            guint       property_id,
-                            GValue     *value,
-                            GParamSpec *pspec)
-{
-  switch (property_id)
-    {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
-}
-
-static void
-cc_info_panel_set_property (GObject      *object,
-                            guint         property_id,
-                            const GValue *value,
-                            GParamSpec   *pspec)
-{
-  switch (property_id)
-    {
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-    }
-}
-
-static void
 cc_info_panel_dispose (GObject *object)
 {
   CcInfoPanelPrivate *priv = CC_INFO_PANEL (object)->priv;
@@ -559,8 +533,6 @@ cc_info_panel_class_init (CcInfoPanelClass *klass)
 
   g_type_class_add_private (klass, sizeof (CcInfoPanelPrivate));
 
-  object_class->get_property = cc_info_panel_get_property;
-  object_class->set_property = cc_info_panel_set_property;
   object_class->dispose = cc_info_panel_dispose;
   object_class->finalize = cc_info_panel_finalize;
 }
