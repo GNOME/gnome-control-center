@@ -368,9 +368,9 @@ pp_ppd_selection_dialog_new (GtkWindow            *parent,
   dialog->builder = gtk_builder_new ();
   dialog->parent = GTK_WIDGET (parent);
 
-  builder_result = gtk_builder_add_objects_from_file (dialog->builder,
-                                                      DATADIR"/ppd-selection-dialog.ui",
-                                                      objects, &error);
+  builder_result = gtk_builder_add_objects_from_resource (dialog->builder,
+                                                          "/org/gnome/control-center/printers/ppd-selection-dialog.ui",
+                                                          objects, &error);
 
   if (builder_result == 0)
     {

@@ -267,9 +267,9 @@ pp_new_printer_dialog_init (PpNewPrinterDialog *dialog)
 
   priv->builder = gtk_builder_new ();
 
-  builder_result = gtk_builder_add_objects_from_file (priv->builder,
-                                                      DATADIR"/new-printer-dialog.ui",
-                                                      objects, &error);
+  builder_result = gtk_builder_add_objects_from_resource (priv->builder,
+                                                          "/org/gnome/control-center/printers/new-printer-dialog.ui",
+                                                          objects, &error);
 
   if (builder_result == 0)
     {

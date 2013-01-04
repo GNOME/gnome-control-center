@@ -20,6 +20,7 @@
 #include <config.h>
 
 #include "cc-printers-panel.h"
+#include "cc-printers-resources.h"
 
 #include <string.h>
 #include <glib/gi18n-lib.h>
@@ -2833,6 +2834,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   guint                   builder_result;
 
   priv = self->priv = PRINTERS_PANEL_PRIVATE (self);
+  g_resources_register (cc_printers_get_resource ());
 
   /* initialize main data structure */
   priv->builder = gtk_builder_new ();
@@ -2870,9 +2872,9 @@ cc_printers_panel_init (CcPrintersPanel *self)
 
   priv->preferred_drivers = NULL;
 
-  builder_result = gtk_builder_add_objects_from_file (priv->builder,
-                                                      DATADIR"/printers.ui",
-                                                      objects, &error);
+  builder_result = gtk_builder_add_objects_from_resource (priv->builder,
+                                                          "/org/gnome/control-center/printers/printers.ui",
+                                                          objects, &error);
 
   if (builder_result == 0)
     {

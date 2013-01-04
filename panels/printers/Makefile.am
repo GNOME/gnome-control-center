@@ -1,25 +1,20 @@
 cappletname = printers
 
-uidir = $(pkgdatadir)/ui/printers
-dist_ui_DATA = \
-	new-printer-dialog.ui	\
-	ppd-selection-dialog.ui	\
-	options-dialog.ui	\
-	jobs-dialog.ui		\
-	printers.ui
-
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(PRINTERS_PANEL_CFLAGS)			\
 	-I$(top_srcdir)/shell/				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
-	-DGNOMECC_DATA_DIR="\"$(pkgdatadir)\""		\
-	-DDATADIR="\"$(uidir)\""			\
 	$(NULL)
 
 noinst_LTLIBRARIES = libprinters.la
 
+BUILT_SOURCES =			\
+	cc-printers-resources.c	\
+	cc-printers-resources.h
+
 libprinters_la_SOURCES =		\
+	$(BUILT_SOURCES)		\
 	pp-new-printer.c		\
 	pp-new-printer.h		\
 	pp-maintenance-command.c	\
@@ -47,12 +42,19 @@ libprinters_la_SOURCES =		\
 
 libprinters_la_LIBADD = $(PRINTERS_PANEL_LIBS) $(PANEL_LIBS) $(CUPS_LIBS)
 
+resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/printers.gresource.xml)
+cc-printers-resources.c: printers.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_printers $<
+cc-printers-resources.h: printers.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name cc_printers $<
+
 @INTLTOOL_DESKTOP_RULE@
 
 desktopdir = $(datadir)/applications
 desktop_in_files = gnome-printers-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
-CLEANFILES = $(desktop_in_files) $(desktop_DATA)
+CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
+EXTRA_DIST = $(resource_files) printers.gresource.xml
 
 -include $(top_srcdir)/git.mk
