@@ -29,6 +29,7 @@
 #include <shell/cc-shell.h>
 
 #include "cc-bluetooth-panel.h"
+#include "cc-bluetooth-resources.h"
 
 #include <bluetooth-client.h>
 #include <bluetooth-utils.h>
@@ -782,6 +783,7 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 	GtkStyleContext *context;
 
 	self->priv = BLUETOOTH_PANEL_PRIVATE (self);
+	g_resources_register (cc_bluetooth_get_resource ());
 
 	bluetooth_plugin_manager_init ();
 	self->priv->killswitch = bluetooth_killswitch_new ();
@@ -794,11 +796,11 @@ cc_bluetooth_panel_init (CcBluetoothPanel *self)
 
 	self->priv->builder = gtk_builder_new ();
 	gtk_builder_set_translation_domain (self->priv->builder, GETTEXT_PACKAGE);
-	gtk_builder_add_from_file (self->priv->builder,
-				   PKGDATADIR "/bluetooth.ui",
-				   &error);
+	gtk_builder_add_from_resource (self->priv->builder,
+                                       "/org/gnome/control-center/bluetooth/bluetooth.ui",
+                                       &error);
 	if (error != NULL) {
-		g_warning ("Failed to load '%s': %s", PKGDATADIR "/bluetooth.ui", error->message);
+		g_warning ("Could not load ui: %s", error->message);
 		g_error_free (error);
 		return;
 	}
