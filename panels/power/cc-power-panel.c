@@ -1402,7 +1402,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
 
-  label = gtk_label_new ("Turns off WWAN and WiMax devices");
+  label = gtk_label_new ("Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices");
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
   gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
