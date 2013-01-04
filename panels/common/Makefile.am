@@ -41,7 +41,7 @@ cc-common-resources.h: common.gresource.xml $(resource_files)
 rulesdir = $(datadir)/polkit-1/rules.d/
 rules_DATA = gnome-control-center.rules
 
-EXTRA_DIST = $(rules_DATA) $(resource_files)
+EXTRA_DIST = $(rules_DATA) $(resource_files) common.gresource.xml
 CLEANFILES = $(BUILT_SOURCES)
 
 -include $(top_srcdir)/git.mk
