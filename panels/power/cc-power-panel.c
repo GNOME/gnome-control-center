@@ -338,7 +338,7 @@ set_primary (CcPowerPanel *panel, UpDevice *device)
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
 
-  s = g_strdup_printf ("%d%%", (int)percentage);
+  s = g_strdup_printf ("%d%%", (int)(percentage + 0.5));
   label = gtk_label_new (s);
   g_free (s);
   gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
