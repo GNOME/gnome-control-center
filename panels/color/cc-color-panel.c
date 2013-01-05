@@ -78,8 +78,6 @@ enum {
 /* max number of devices and profiles to cause auto-expand at startup */
 #define GCM_PREFS_MAX_DEVICES_PROFILES_EXPANDED         5
 
-static void     gcm_prefs_device_add_cb (GtkWidget *widget, CcColorPanel *prefs);
-
 static void
 gcm_prefs_combobox_add_profile (CcColorPanel *prefs,
                                 CdProfile *profile,
@@ -194,13 +192,6 @@ gcm_prefs_treeview_popup_menu (CcColorPanel *prefs, GtkWidget *treeview)
                     prefs);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
 
-  /* TRANSLATORS: this is when the profile should be set for all users */
-  menuitem = gtk_menu_item_new_with_label (_("Create virtual device"));
-  g_signal_connect (menuitem, "activate",
-                    G_CALLBACK (gcm_prefs_device_add_cb),
-                    prefs);
-  gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
-
   gtk_widget_show_all (menu);
 
   /* Note: gdk_event_get_time() accepts a NULL argument */
@@ -293,30 +284,6 @@ gcm_prefs_calibrate_cb (GtkWidget *widget, CcColorPanel *prefs)
       g_error_free (error);
     }
   g_ptr_array_unref (argv);
-}
-
-static void
-gcm_prefs_device_add_cb (GtkWidget *widget, CcColorPanel *prefs)
-{
-  CcColorPanelPrivate *priv = prefs->priv;
-
-  /* show ui */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "dialog_virtual"));
-  gtk_widget_show (widget);
-  gtk_window_set_transient_for (GTK_WINDOW (widget),
-                                GTK_WINDOW (priv->main_window));
-
-  /* clear entries */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "combobox_virtual_type"));
-  gtk_combo_box_set_active (GTK_COMBO_BOX(widget), 0);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "entry_virtual_model"));
-  gtk_entry_set_text (GTK_ENTRY (widget), "");
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "entry_virtual_manufacturer"));
-  gtk_entry_set_text (GTK_ENTRY (widget), "");
 }
 
 static gboolean
@@ -774,25 +741,6 @@ gcm_prefs_profile_delete_event_cb (GtkWidget *widget,
 }
 
 static void
-gcm_prefs_delete_cb (GtkWidget *widget, CcColorPanel *prefs)
-{
-  gboolean ret = FALSE;
-  GError *error = NULL;
-  CcColorPanelPrivate *priv = prefs->priv;
-
-  /* try to delete device */
-  ret = cd_client_delete_device_sync (priv->client,
-                                      priv->current_device,
-                                      priv->cancellable,
-                                      &error);
-  if (!ret)
-    {
-      g_warning ("failed to delete device: %s", error->message);
-      g_error_free (error);
-    }
-}
-
-static void
 gcm_prefs_treeview_renderer_toggled (GtkCellRendererToggle *cell,
                                      const gchar *path, CcColorPanel *prefs)
 {
@@ -989,8 +937,6 @@ out:
 static void
 gcm_prefs_device_clicked (CcColorPanel *prefs, CdDevice *device)
 {
-  GtkWidget *widget;
-  CdDeviceMode device_mode;
   CcColorPanelPrivate *priv = prefs->priv;
 
   if (device == NULL)
@@ -1004,12 +950,6 @@ gcm_prefs_device_clicked (CcColorPanel *prefs, CdDevice *device)
   /* we have a new device */
   g_debug ("selected device is: %s",
            cd_device_get_id (device));
-
-  /* can we delete this device? */
-  device_mode = cd_device_get_mode (priv->current_device);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "toolbutton_device_remove"));
-  gtk_widget_set_visible (widget, device_mode == CD_DEVICE_MODE_VIRTUAL);
 
   /* can this device calibrate */
   gcm_prefs_set_calibrate_button_sensitivity (prefs);
@@ -1058,11 +998,6 @@ gcm_prefs_profile_clicked (CcColorPanel *prefs, CdProfile *profile, CdDevice *de
     }
   else
       gtk_widget_set_sensitive (widget, FALSE);
-
-  /* hide device specific stuff */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "toolbutton_device_remove"));
-  gtk_widget_set_visible (widget, FALSE);
 }
 
 static void
@@ -1133,9 +1068,6 @@ gcm_prefs_devices_treeview_clicked_cb (GtkTreeSelection *selection,
   gtk_widget_set_visible (widget, profile != NULL);
   if (profile)
     gtk_widget_set_sensitive (widget, !cd_profile_get_is_system_wide (profile));
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "toolbutton_device_add"));
-  gtk_widget_set_visible (widget, FALSE);
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "toolbutton_device_calibrate"));
   gtk_widget_set_visible (widget, profile == NULL);
@@ -2066,203 +1998,6 @@ out:
 }
 
 static void
-gcm_prefs_button_virtual_add_cb (GtkWidget *widget, CcColorPanel *prefs)
-{
-  CdDeviceKind device_kind;
-  CdDevice *device;
-  const gchar *model;
-  const gchar *manufacturer;
-  gchar *device_id;
-  GError *error = NULL;
-  GHashTable *device_props;
-  CcColorPanelPrivate *priv = prefs->priv;
-
-  /* get device details */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "combobox_virtual_type"));
-  device_kind = gtk_combo_box_get_active (GTK_COMBO_BOX(widget)) + 2;
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "entry_virtual_model"));
-  model = gtk_entry_get_text (GTK_ENTRY (widget));
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "entry_virtual_manufacturer"));
-  manufacturer = gtk_entry_get_text (GTK_ENTRY (widget));
-
-  /* create device */
-  device_id = g_strdup_printf ("%s-%s-%s",
-                               cd_device_kind_to_string (device_kind),
-                               manufacturer,
-                               model);
-  device_props = g_hash_table_new_full (g_str_hash, g_str_equal,
-                                        g_free, g_free);
-  g_hash_table_insert (device_props,
-                       g_strdup ("Kind"),
-                       g_strdup (cd_device_kind_to_string (device_kind)));
-  g_hash_table_insert (device_props,
-                       g_strdup ("Mode"),
-                       g_strdup (cd_device_mode_to_string (CD_DEVICE_MODE_VIRTUAL)));
-  g_hash_table_insert (device_props,
-                       g_strdup ("Colorspace"),
-                       g_strdup (cd_colorspace_to_string (CD_COLORSPACE_RGB)));
-  g_hash_table_insert (device_props,
-                       g_strdup ("Model"),
-                       g_strdup (model));
-  g_hash_table_insert (device_props,
-                       g_strdup ("Vendor"),
-                       g_strdup (manufacturer));
-  device = cd_client_create_device_sync (priv->client,
-                                         device_id,
-                                         CD_OBJECT_SCOPE_DISK,
-                                         device_props,
-                                         priv->cancellable,
-                                         &error);
-  if (device == NULL)
-    {
-      g_warning ("Failed to add create virtual device: %s",
-                 error->message);
-      g_error_free (error);
-      goto out;
-    }
-out:
-  g_hash_table_unref (device_props);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "dialog_virtual"));
-  gtk_widget_hide (widget);
-  g_free (device_id);
-}
-
-static void
-gcm_prefs_button_virtual_cancel_cb (GtkWidget *widget, CcColorPanel *prefs)
-{
-  CcColorPanelPrivate *priv = prefs->priv;
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "dialog_virtual"));
-  gtk_widget_hide (widget);
-}
-
-static gboolean
-gcm_prefs_virtual_delete_event_cb (GtkWidget *widget,
-                                   GdkEvent *event,
-                                   CcColorPanel *prefs)
-{
-  gcm_prefs_button_virtual_cancel_cb (widget, prefs);
-  return TRUE;
-}
-
-static const gchar *
-cd_device_kind_to_localised_string (CdDeviceKind device_kind)
-{
-  if (device_kind == CD_DEVICE_KIND_DISPLAY)
-    return C_("Device kind", "Display");
-  if (device_kind == CD_DEVICE_KIND_SCANNER)
-    return C_("Device kind", "Scanner");
-  if (device_kind == CD_DEVICE_KIND_PRINTER)
-    return C_("Device kind", "Printer");
-  if (device_kind == CD_DEVICE_KIND_CAMERA)
-    return C_("Device kind", "Camera");
-  if (device_kind == CD_DEVICE_KIND_WEBCAM)
-    return C_("Device kind", "Webcam");
-  return NULL;
-}
-
-static void
-gcm_prefs_setup_virtual_combobox (GtkWidget *widget)
-{
-  guint i;
-  const gchar *text;
-
-  for (i=CD_DEVICE_KIND_SCANNER; i<CD_DEVICE_KIND_LAST; i++)
-    {
-      text = cd_device_kind_to_localised_string (i);
-      if (text == NULL)
-        continue;
-      gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT(widget), text);
-    }
-  gtk_combo_box_set_active (GTK_COMBO_BOX (widget), CD_DEVICE_KIND_PRINTER - 2);
-}
-
-static gboolean
-gcm_prefs_virtual_set_from_file (CcColorPanel *prefs, GFile *file)
-{
-  /* TODO: use GCM to get the EXIF data */
-  return FALSE;
-}
-
-static void
-gcm_prefs_virtual_drag_data_received_cb (GtkWidget *widget,
-                                         GdkDragContext *context,
-                                         gint x, gint y,
-                                         GtkSelectionData *data,
-                                         guint info,
-                                         guint _time,
-                                         CcColorPanel *prefs)
-{
-  const guchar *filename;
-  gchar **filenames = NULL;
-  GFile *file = NULL;
-  guint i;
-  gboolean ret;
-
-  /* get filenames */
-  filename = gtk_selection_data_get_data (data);
-  if (filename == NULL)
-    {
-      gtk_drag_finish (context, FALSE, FALSE, _time);
-      goto out;
-    }
-
-  /* import this */
-  g_debug ("dropped: %p (%s)", data, filename);
-
-  /* split, as multiple drag targets are accepted */
-  filenames = g_strsplit_set ((const gchar *)filename, "\r\n", -1);
-  for (i = 0; filenames[i] != NULL; i++)
-    {
-      /* blank entry */
-      if (filenames[i][0] == '\0')
-        continue;
-
-      /* check this is a parsable file */
-      g_debug ("trying to set %s", filenames[i]);
-      file = g_file_new_for_uri (filenames[i]);
-      ret = gcm_prefs_virtual_set_from_file (prefs, file);
-      if (!ret)
-        {
-          g_debug ("%s did not set from file correctly",
-                   filenames[i]);
-          gtk_drag_finish (context, FALSE, FALSE, _time);
-          goto out;
-        }
-      g_object_unref (file);
-      file = NULL;
-    }
-
-  gtk_drag_finish (context, TRUE, FALSE, _time);
-out:
-  if (file != NULL)
-    g_object_unref (file);
-  g_strfreev (filenames);
-}
-
-static void
-gcm_prefs_setup_drag_and_drop (GtkWidget *widget)
-{
-  GtkTargetEntry entry;
-
-  /* setup a dummy entry */
-  entry.target = g_strdup ("text/plain");
-  entry.flags = GTK_TARGET_OTHER_APP;
-  entry.info = 0;
-
-  gtk_drag_dest_set (widget,
-                     GTK_DEST_DEFAULT_ALL,
-                     &entry,
-                     1,
-                     GDK_ACTION_MOVE | GDK_ACTION_COPY);
-  g_free (entry.target);
-}
-
-static void
 gcm_prefs_connect_cb (GObject *object,
                       GAsyncResult *res,
                       gpointer user_data)
@@ -2481,14 +2216,6 @@ cc_color_panel_init (CcColorPanel *prefs)
   g_signal_connect (widget, "clicked",
                     G_CALLBACK (gcm_prefs_default_cb), prefs);
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "toolbutton_device_remove"));
-  g_signal_connect (widget, "clicked",
-                    G_CALLBACK (gcm_prefs_delete_cb), prefs);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "toolbutton_device_add"));
-  g_signal_connect (widget, "clicked",
-                    G_CALLBACK (gcm_prefs_device_add_cb), prefs);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "toolbutton_device_calibrate"));
   g_signal_connect (widget, "clicked",
                     G_CALLBACK (gcm_prefs_calibrate_cb), prefs);
@@ -2504,32 +2231,6 @@ cc_color_panel_init (CcColorPanel *prefs)
   context = gtk_widget_get_style_context (widget);
   gtk_style_context_add_class (context, GTK_STYLE_CLASS_INLINE_TOOLBAR);
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
-
-  /* set up virtual dialog */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "dialog_virtual"));
-  g_signal_connect (widget, "delete-event",
-                    G_CALLBACK (gcm_prefs_virtual_delete_event_cb),
-                    prefs);
-  g_signal_connect (widget, "drag-data-received",
-                    G_CALLBACK (gcm_prefs_virtual_drag_data_received_cb),
-                    prefs);
-  gcm_prefs_setup_drag_and_drop (widget);
-
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "button_virtual_add"));
-  g_signal_connect (widget, "clicked",
-                    G_CALLBACK (gcm_prefs_button_virtual_add_cb),
-                    prefs);
-
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "button_virtual_cancel"));
-  g_signal_connect (widget, "clicked",
-                    G_CALLBACK (gcm_prefs_button_virtual_cancel_cb),
-                    prefs);
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "combobox_virtual_type"));
-  gcm_prefs_setup_virtual_combobox (widget);
 
   /* set up assign dialog */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
