@@ -1070,22 +1070,36 @@ static void
 bt_set_powered (BluetoothClient *client,
                 gboolean         powered)
 {
-  gchar *adapter_path;
+  GVariant *ret;
+  const gchar *adapter_path;
   GDBusConnection *bus;
 
-  g_object_get (client, "default-adapter", &adapter_path, NULL);
-
   bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
+
+  ret = g_dbus_connection_call_sync (bus,
+                                    "org.bluez",
+                                    "/",
+                                    "org.bluez.Manager",
+                                    "DefaultAdapter",
+                                    NULL,
+                                    NULL,
+                                    0,
+                                    G_MAXINT,
+                                    NULL, NULL);
+  g_variant_get (ret, "(&o)", &adapter_path);
+
   g_dbus_connection_call (bus,
                           "org.bluez",
                           adapter_path,
                           "org.freedesktop.Properties",
                           "SetProperty",
-                          g_variant_new ("sv", "Powered", g_variant_new_boolean (powered)),
+                          g_variant_new ("(sv)", "Powered", g_variant_new_boolean (powered)),
                           NULL,
                           0,
                           G_MAXINT,
                           NULL, NULL, NULL);
+
+  g_variant_unref (ret);
 }
 
 static void
