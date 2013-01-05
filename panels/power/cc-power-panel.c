@@ -1182,7 +1182,6 @@ has_mobile_devices (NMClient *client)
   NMDevice *device;
   gint i;
 
-  return TRUE;
   if (!nm_client_get_manager_running (client))
     return FALSE;
 
