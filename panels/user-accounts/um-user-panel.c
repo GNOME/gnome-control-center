@@ -108,11 +108,23 @@ get_selected_user (CcUserPanelPrivate *d)
         return NULL;
 }
 
+static const gchar *
+get_real_or_user_name (ActUser *user)
+{
+  const gchar *name;
+
+  name = act_user_get_real_name (user);
+  if (name == NULL)
+    name = act_user_get_user_name (user);
+
+  return name;
+}
+
 static char *
 get_name_col_str (ActUser *user)
 {
         return g_markup_printf_escaped ("<b>%s</b>\n<small>%s</small>",
-                                        act_user_get_real_name (user),
+                                        get_real_or_user_name (user),
                                         act_user_get_user_name (user));
 }
 
@@ -129,7 +141,7 @@ user_added (ActUserManager *um, ActUser *user, CcUserPanelPrivate *d)
         GtkTreeSelection *selection;
         gint sort_key;
 
-        g_debug ("user added: %d %s\n", act_user_get_uid (user), act_user_get_real_name (user));
+        g_debug ("user added: %d %s\n", act_user_get_uid (user), get_real_or_user_name (user));
         widget = get_widget (d, "list-treeview");
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
         store = GTK_LIST_STORE (model);
@@ -428,7 +440,7 @@ delete_user (GtkButton *button, CcUserPanelPrivate *d)
                                                  GTK_MESSAGE_INFO,
                                                  GTK_BUTTONS_CLOSE,
                                                  _("%s is still logged in"),
-                                                act_user_get_real_name (user));
+                                                get_real_or_user_name (user));
 
                 gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
                                                           _("Deleting a user while they are logged in can leave the system in an inconsistent state."));
@@ -441,7 +453,7 @@ delete_user (GtkButton *button, CcUserPanelPrivate *d)
                                                  GTK_MESSAGE_QUESTION,
                                                  GTK_BUTTONS_NONE,
                                                  _("Do you want to keep %s's files?"),
-                                                act_user_get_real_name (user));
+                                                get_real_or_user_name (user));
 
                 gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
                                                           _("It is possible to keep the home directory, mail spool and temporary files around when deleting a user account."));
@@ -924,7 +936,7 @@ users_loaded (ActUserManager     *manager,
 
         for (l = list; l; l = l->next) {
                 user = l->data;
-                g_debug ("adding user %s\n", act_user_get_real_name (user));
+                g_debug ("adding user %s\n", get_real_or_user_name (user));
                 user_added (d->um, user, d);
         }
         g_slist_free_full (list, g_object_unref);
