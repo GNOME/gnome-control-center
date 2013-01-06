@@ -114,43 +114,14 @@ out:
 }
 
 static void
-all_user_changed (GObject *sw, GParamSpec *pspec, CEPageDetails *page)
-{
-        gboolean all_users;
-        NMSettingConnection *sc;
-
-        sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
-        all_users = gtk_switch_get_active (GTK_SWITCH (sw));
-
-        g_object_set (sc, "permissions", NULL, NULL);
-        if (!all_users)
-                nm_setting_connection_add_permission (sc, "user", g_get_user_name (), NULL);
-}
-
-static void
 connect_details_page (CEPageDetails *page)
 {
-        GtkWidget *widget;
-        NMSettingConnection *sc;
         guint speed;
         guint strength;
         NMDeviceState state;
         NMAccessPoint *active_ap;
         const gchar *str;
         gboolean device_is_active;
-
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder,
-                                                     "auto_connect_switch"));
-        sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
-        g_object_bind_property (sc, "autoconnect",
-                                widget, "active",
-                                G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
-        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder,
-                                                     "all_user_switch"));
-        gtk_switch_set_active (GTK_SWITCH (widget),
-                               nm_setting_connection_get_num_permissions (sc) == 0);
-        g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (all_user_changed), page);
 
         if (NM_IS_DEVICE_WIFI (page->device))
                 active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (page->device));

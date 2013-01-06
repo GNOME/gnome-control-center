@@ -50,9 +50,24 @@ enum {
 };
 
 static void
+all_user_changed (GtkToggleButton *b, CEPageEthernet *page)
+{
+        gboolean all_users;
+        NMSettingConnection *sc;
+
+        sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
+        all_users = gtk_toggle_button_get_active (b);
+
+        g_object_set (sc, "permissions", NULL, NULL);
+        if (!all_users)
+                nm_setting_connection_add_permission (sc, "user", g_get_user_name (), NULL);
+}
+
+static void
 connect_ethernet_page (CEPageEthernet *page)
 {
         NMSettingWired *setting = page->setting_wired;
+        NMSettingConnection *sc;
         const char *port;
         const char *duplex;
         int port_idx = PORT_DEFAULT;
@@ -154,6 +169,19 @@ connect_ethernet_page (CEPageEthernet *page)
         gtk_widget_hide (widget);
         widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "check_renegotiate"));
         gtk_widget_hide (widget);
+
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder,
+                                                     "auto_connect_check"));
+        sc = nm_connection_get_setting_connection (CE_PAGE (page)->connection);
+        g_object_bind_property (sc, "autoconnect",
+                                widget, "active",
+                                G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+        widget = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder,
+                                                     "all_user_check"));
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget),
+                                      nm_setting_connection_get_num_permissions (sc) == 0);
+        g_signal_connect (widget, "toggled",
+                          G_CALLBACK (all_user_changed), page);
 }
 
 static void
