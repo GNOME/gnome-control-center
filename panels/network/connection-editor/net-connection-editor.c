@@ -433,6 +433,12 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
         type = nm_setting_connection_get_connection_type (sc);
 
         add_page (editor, ce_page_details_new (editor->connection, editor->client, editor->settings, editor->device, editor->ap));
+
+        if (strcmp (type, NM_SETTING_WIRELESS_SETTING_NAME) == 0)
+                add_page (editor, ce_page_security_new (editor->connection, editor->client, editor->settings));
+        else if (strcmp (type, NM_SETTING_WIRED_SETTING_NAME) == 0)
+                add_page (editor, ce_page_8021x_security_new (editor->connection, editor->client, editor->settings));
+
         if (strcmp (type, NM_SETTING_WIRELESS_SETTING_NAME) == 0)
                 add_page (editor, ce_page_wifi_new (editor->connection, editor->client, editor->settings));
         else if (strcmp (type, NM_SETTING_WIRED_SETTING_NAME) == 0)
@@ -440,11 +446,6 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
 
         add_page (editor, ce_page_ip4_new (editor->connection, editor->client, editor->settings));
         add_page (editor, ce_page_ip6_new (editor->connection, editor->client, editor->settings));
-
-        if (strcmp (type, NM_SETTING_WIRELESS_SETTING_NAME) == 0)
-                add_page (editor, ce_page_security_new (editor->connection, editor->client, editor->settings));
-        else if (strcmp (type, NM_SETTING_WIRED_SETTING_NAME) == 0)
-                add_page (editor, ce_page_8021x_security_new (editor->connection, editor->client, editor->settings));
 
         add_page (editor, ce_page_reset_new (editor->connection, editor->client, editor->settings, editor));
 
