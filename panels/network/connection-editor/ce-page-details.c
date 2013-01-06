@@ -88,7 +88,7 @@ update_last_used (CEPageDetails *page, NMConnection *connection)
                 goto out;
         timestamp = nm_setting_connection_get_timestamp (s_con);
         if (timestamp == 0) {
-                last_used = g_strdup (_("never"));
+                last_used = g_strdup (_("Never"));
                 goto out;
         }
 
@@ -99,9 +99,9 @@ update_last_used (CEPageDetails *page, NMConnection *connection)
         diff = g_date_time_difference  (now, then);
         days = diff / G_TIME_SPAN_DAY;
         if (days == 0)
-                last_used = g_strdup (_("today"));
+                last_used = g_strdup (_("Today"));
         else if (days == 1)
-                last_used = g_strdup (_("yesterday"));
+                last_used = g_strdup (_("Yesterday"));
         else
                 last_used = g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
 out:
