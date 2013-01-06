@@ -1633,7 +1633,7 @@ gvc_mixer_dialog_constructor (GType                  type,
         main_vbox = GTK_WIDGET (self);
         gtk_box_set_spacing (GTK_BOX (main_vbox), 2);
 
-        gtk_container_set_border_width (GTK_CONTAINER (self), 6);
+        gtk_container_set_border_width (GTK_CONTAINER (self), 12);
 
         self->priv->output_stream_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
         alignment = gtk_alignment_new (0, 0, 1, 1);

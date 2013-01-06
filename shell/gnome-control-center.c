@@ -195,7 +195,6 @@ activate_panel (GnomeControlCenter *shell,
                                   cc_panel_get_permission (CC_PANEL (priv->current_panel)));
 
   box = gtk_alignment_new (0, 0, 1, 1);
-  gtk_alignment_set_padding (GTK_ALIGNMENT (box), 6, 6, 6, 6);
 
   gtk_container_add (GTK_CONTAINER (box), priv->current_panel);
 

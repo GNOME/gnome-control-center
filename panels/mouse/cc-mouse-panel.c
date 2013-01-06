@@ -167,6 +167,10 @@ cc_mouse_panel_init (CcMousePanel *self)
   priv->test_widget = gnome_mouse_test_init (priv->builder);
 
   priv->widget = gtk_notebook_new ();
+  gtk_widget_set_margin_left (priv->widget, 6);
+  gtk_widget_set_margin_right (priv->widget, 6);
+  gtk_widget_set_margin_top (priv->widget, 6);
+  gtk_widget_set_margin_bottom (priv->widget, 6);
   gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->widget), FALSE);
   gtk_notebook_set_show_border (GTK_NOTEBOOK (priv->widget), FALSE);
 
