@@ -8,15 +8,15 @@
     <property name="margin_right">50</property>
     <property name="margin_top">12</property>
     <property name="margin_bottom">12</property>
-    <property name="row_spacing">10</property>
-    <property name="column_spacing">10</property>
+    <property name="row_spacing">20</property>
+    <property name="column_spacing">20</property>
     <child>
       <object class="GtkButton" id="button_reset">
         <property name="label" translatable="yes">_Reset</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
-        <property name="valign">start</property>
+        <property name="valign">center</property>
         <property name="use_underline">True</property>
       </object>
       <packing>
@@ -32,7 +32,7 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
-        <property name="valign">start</property>
+        <property name="valign">center</property>
         <property name="use_underline">True</property>
       </object>
       <packing>
@@ -48,7 +48,7 @@
         <property name="can_focus">False</property>
         <property name="hexpand">True</property>
         <property name="xalign">0</property>
-        <property name="label" translatable="yes">Reset the settings for this connection to their defaults, but remember as a preferred connection.</property>
+        <property name="label" translatable="yes">Reset the settings for this network, including passwords, but remember it as a preferred network</property>
         <property name="wrap">True</property>
         <property name="max_width_chars">40</property>
       </object>
@@ -65,7 +65,7 @@
         <property name="can_focus">False</property>
         <property name="hexpand">True</property>
         <property name="xalign">0</property>
-        <property name="label" translatable="yes">Remove all details relating to this network and do not try to automatically connect to it.</property>
+        <property name="label" translatable="yes">Remove all details relating to this network and do not try to automatically connect</property>
         <property name="wrap">True</property>
         <property name="max_width_chars">30</property>
       </object>
