@@ -784,6 +784,10 @@
         <property name="border_width">15</property>
         <property name="orientation">vertical</property>
         <property name="spacing">12</property>
+        <property name="margin-left">6</property>
+        <property name="margin-right">6</property>
+        <property name="margin-top">6</property>
+        <property name="margin-bottom">6</property>
         <child>
           <object class="GtkHBox" id="hbox3">
             <property name="visible">True</property>
@@ -852,13 +856,7 @@
                 <property name="can_focus">True</property>
                 <property name="shadow_type">in</property>
                 <child>
-                  <object class="GtkTreeView" id="treeview_devices">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <child internal-child="selection">
-                      <object class="GtkTreeSelection" id="treeview-selection"/>
-                    </child>
-                  </object>
+                  <placeholder/>
                 </child>
               </object>
               <packing>
@@ -869,7 +867,6 @@
             </child>
             <child>
               <object class="GtkToolbar" id="toolbar_devices">
-                <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="show_arrow">False</property>
                 <property name="icon_size">1</property>
@@ -896,6 +893,22 @@
                             <property name="position">1</property>
                           </packing>
                         </child>
+                        <child>
+                          <object class="GtkButton" id="toolbutton_device_enable">
+                            <property name="label" translatable="yes">Enable</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip_markup" translatable="yes">Set this profile for all users on this computer</property>
+                            <property name="tooltip_text" translatable="yes">Set this profile for all users on this computer</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
                       </object>
                     </child>
                   </object>
@@ -914,7 +927,6 @@
                         <child>
                           <object class="GtkButton" id="toolbutton_profile_add">
                             <property name="label" translatable="yes">Add profile</property>
-                            <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
@@ -982,9 +994,27 @@
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
+            <property name="expand">True</property>
             <property name="fill">True</property>
             <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label_no_devices">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Unable to detect any devices that can be color managed</property>
+            <style>
+              <class name="dim-label"/>
+            </style>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
           </packing>
         </child>
       </object>
@@ -1100,6 +1130,12 @@
     </widgets>
   </object>
   <object class="GtkSizeGroup" id="sizegroup_buttons"/>
+  <object class="GtkSizeGroup" id="sizegroup_buttons_enable">
+    <widgets>
+      <widget name="toolbutton_device_default"/>
+      <widget name="toolbutton_device_enable"/>
+    </widgets>
+  </object>
   <object class="GtkSizeGroup" id="sizegroup_combos"/>
   <object class="GtkSizeGroup" id="sizegroup_defaults"/>
   <object class="GtkSizeGroup" id="sizegroup_devices"/>

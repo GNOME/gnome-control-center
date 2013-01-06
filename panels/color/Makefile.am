@@ -21,6 +21,12 @@ libcolor_la_SOURCES =		\
 	cc-color-calibrate.h		\
 	cc-color-cell-renderer-text.c	\
 	cc-color-cell-renderer-text.h	\
+	cc-color-profile.c	\
+	cc-color-profile.h	\
+	cc-color-device.c	\
+	cc-color-device.h	\
+	cc-color-common.c	\
+	cc-color-common.h	\
 	cc-color-panel.c	\
 	cc-color-panel.h
 
