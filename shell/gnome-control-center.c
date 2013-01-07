@@ -441,21 +441,19 @@ model_filter_func (GtkTreeModel              *model,
                    GtkTreeIter               *iter,
                    GnomeControlCenterPrivate *priv)
 {
-  gchar *name, *description;
+  gchar *name;
   gchar *needle, *haystack;
   gboolean result;
   gchar **keywords;
 
   gtk_tree_model_get (model, iter,
                       COL_NAME, &name,
-                      COL_DESCRIPTION, &description,
                       COL_KEYWORDS, &keywords,
                       -1);
 
   if (!priv->filter_string || !name)
     {
       g_free (name);
-      g_free (description);
       g_strfreev (keywords);
       return FALSE;
     }
@@ -464,15 +462,6 @@ model_filter_func (GtkTreeModel              *model,
   haystack = g_utf8_casefold (name, -1);
 
   result = (strstr (haystack, needle) != NULL);
-
-  if (!result && description)
-    {
-      gchar *folded;
-
-      folded = g_utf8_casefold (description, -1);
-      result = (strstr (folded, needle) != NULL);
-      g_free (folded);
-    }
 
   if (!result && keywords)
     {
