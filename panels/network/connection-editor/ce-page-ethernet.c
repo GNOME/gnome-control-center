@@ -48,6 +48,15 @@ all_user_changed (GtkToggleButton *b, CEPageEthernet *page)
 }
 
 static void
+mtu_changed (GtkSpinButton *mtu, CEPageEthernet *page)
+{
+        if (gtk_spin_button_get_value_as_int (mtu) == 0)
+                gtk_widget_hide (page->mtu_label);
+        else
+                gtk_widget_show (page->mtu_label);
+}
+
+static void
 connect_ethernet_page (CEPageEthernet *page)
 {
         NMSettingWired *setting = page->setting_wired;
@@ -82,8 +91,10 @@ connect_ethernet_page (CEPageEthernet *page)
         g_signal_connect (page->mtu, "output",
                           G_CALLBACK (ce_spin_output_with_default),
                           GINT_TO_POINTER (mtu_def));
-
         gtk_spin_button_set_value (page->mtu, (gdouble) nm_setting_wired_get_mtu (setting));
+        g_signal_connect (page->mtu, "value-changed",
+                          G_CALLBACK (mtu_changed), page);
+        mtu_changed (page->mtu, page);
 
         g_signal_connect_swapped (page->name, "changed", G_CALLBACK (ce_page_changed), page);
         g_signal_connect_swapped (page->mtu, "value-changed", G_CALLBACK (ce_page_changed), page);
@@ -192,6 +203,7 @@ ce_page_ethernet_new (NMConnection     *connection,
         page->device_mac = GTK_COMBO_BOX_TEXT (gtk_builder_get_object (CE_PAGE (page)->builder, "combo_mac"));
         page->cloned_mac = GTK_ENTRY (gtk_builder_get_object (CE_PAGE (page)->builder, "entry_cloned_mac"));
         page->mtu = GTK_SPIN_BUTTON (gtk_builder_get_object (CE_PAGE (page)->builder, "spin_mtu"));
+        page->mtu_label = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "label_mtu"));
 
         page->setting_connection = nm_connection_get_setting_connection (connection);
         page->setting_wired = nm_connection_get_setting_wired (connection);

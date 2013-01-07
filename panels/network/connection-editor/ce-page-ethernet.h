@@ -51,11 +51,8 @@ struct _CEPageEthernet
         GtkEntry        *name;
         GtkComboBoxText *device_mac;
         GtkEntry        *cloned_mac;
-        GtkComboBox     *port;
-        GtkComboBox     *speed;
-        GtkToggleButton *duplex;
-        GtkToggleButton *autonegotiate;
         GtkSpinButton   *mtu;
+        GtkWidget       *mtu_label;
 };
 
 struct _CEPageEthernetClass
