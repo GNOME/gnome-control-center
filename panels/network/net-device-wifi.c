@@ -1463,6 +1463,9 @@ net_device_wifi_constructed (GObject *object)
         g_signal_connect (remote_settings, "connections-read",
                           G_CALLBACK (remote_settings_read_cb), device_wifi);
 
+        widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder, "heading_list"));
+        g_object_bind_property (device_wifi, "title", widget, "label", 0);
+
         nm_device_wifi_refresh_ui (device_wifi);
 }
 
