@@ -26,6 +26,8 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 
+#include "cc-color-calibrate.h"
+#include "cc-color-cell-renderer-text.h"
 #include "cc-color-panel.h"
 #include "cc-color-resources.h"
 
@@ -47,6 +49,7 @@ struct _CcColorPanelPrivate
   GtkBuilder    *builder;
   GtkTreeStore  *list_store_devices;
   GtkWidget     *main_window;
+  CcColorCalibrate *calibrate;
 };
 
 enum {
@@ -70,6 +73,29 @@ enum {
   GCM_PREFS_COMBO_COLUMN_TYPE,
   GCM_PREFS_COMBO_COLUMN_WARNING_FILENAME,
   GCM_PREFS_COMBO_COLUMN_NUM_COLUMNS
+};
+
+/* for the GtkListStores */
+enum {
+  COLUMN_CALIB_KIND_DESCRIPTION,
+  COLUMN_CALIB_KIND_CAP_VALUE,
+  COLUMN_CALIB_KIND_LAST
+};
+enum {
+  COLUMN_CALIB_QUALITY_DESCRIPTION,
+  COLUMN_CALIB_QUALITY_APPROX_TIME,
+  COLUMN_CALIB_QUALITY_VALUE,
+  COLUMN_CALIB_QUALITY_LAST
+};
+enum {
+  COLUMN_CALIB_SENSOR_OBJECT,
+  COLUMN_CALIB_SENSOR_DESCRIPTION,
+  COLUMN_CALIB_SENSOR_LAST
+};
+enum {
+  COLUMN_CALIB_TEMP_DESCRIPTION,
+  COLUMN_CALIB_TEMP_VALUE_K,
+  COLUMN_CALIB_TEMP_LAST
 };
 
 #define GCM_SETTINGS_SCHEMA                             "org.gnome.settings-daemon.plugins.color"
@@ -258,6 +284,308 @@ gcm_prefs_file_chooser_get_icc_profile (CcColorPanel *prefs)
 }
 
 static void
+gcm_prefs_calib_cancel_cb (GtkWidget *widget, CcColorPanel *prefs)
+{
+  widget = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
+                                               "assistant_calib"));
+  gtk_widget_hide (widget);
+}
+
+static gboolean
+gcm_prefs_calib_delayed_complete_cb (gpointer user_data)
+{
+  CcColorPanel *panel = CC_COLOR_PANEL (user_data);
+  GtkAssistant *assistant;
+  GtkWidget *widget;
+
+  assistant = GTK_ASSISTANT (gtk_builder_get_object (panel->priv->builder,
+                                                     "assistant_calib"));
+  widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                               "box_calib_brightness"));
+  gtk_assistant_set_page_complete (assistant, widget, TRUE);
+  return FALSE;
+}
+
+static void
+gcm_prefs_calib_prepare_cb (GtkAssistant *assistant,
+                            GtkWidget    *page,
+                            CcColorPanel *panel)
+{
+  GtkWidget *widget;
+
+  /* give the user the indication they should actually manually set the
+   * desired brightness rather than clicking blindly by delaying the
+   * "Next" button deliberately for a second or so */
+  widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
+                                               "box_calib_brightness"));
+  if (widget == page)
+  {
+    g_timeout_add_seconds (1, gcm_prefs_calib_delayed_complete_cb, panel);
+    return;
+  }
+
+  /* disable the brightness page as we don't want to show a 'Finished'
+   * button if the user goes back at any point */
+  gtk_assistant_set_page_complete (assistant, widget, FALSE);
+}
+
+static void
+gcm_prefs_calib_apply_cb (GtkWidget *widget, CcColorPanel *prefs)
+{
+  gboolean ret;
+  GError *error = NULL;
+  GtkWindow *window = NULL;
+
+  /* setup the calibration object with items that can fail */
+  ret = cc_color_calibrate_setup (prefs->priv->calibrate,
+                                  &error);
+  if (!ret)
+    {
+      g_warning ("failed to setup calibrate: %s", error->message);
+      g_error_free (error);
+      goto out;
+    }
+
+  /* actually start the calibration */
+  window = GTK_WINDOW (gtk_builder_get_object (prefs->priv->builder,
+                                               "assistant_calib"));
+  ret = cc_color_calibrate_start (prefs->priv->calibrate,
+                                  window,
+                                  &error);
+  if (!ret)
+    {
+      g_warning ("failed to start calibrate: %s", error->message);
+      g_error_free (error);
+      goto out;
+    }
+out:
+  if (window != NULL)
+    gtk_widget_hide (GTK_WIDGET (window));
+}
+
+static gboolean
+gcm_prefs_calib_delete_event_cb (GtkWidget *widget,
+                                 GdkEvent *event,
+                                 CcColorPanel *prefs)
+{
+  /* do not destroy the window */
+  gcm_prefs_calib_cancel_cb (widget, prefs);
+  return TRUE;
+}
+
+static void
+gcm_prefs_calib_temp_treeview_clicked_cb (GtkTreeSelection *selection,
+                                          CcColorPanel *prefs)
+{
+  CcColorPanelPrivate *priv = prefs->priv;
+  gboolean ret;
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GtkWidget *widget;
+  guint target_whitepoint;
+  GtkAssistant *assistant;
+
+  /* check to see if anything is selected */
+  ret = gtk_tree_selection_get_selected (selection, &model, &iter);
+  assistant = GTK_ASSISTANT (gtk_builder_get_object (prefs->priv->builder,
+                                                     "assistant_calib"));
+  widget = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
+                                               "box_calib_temp"));
+  gtk_assistant_set_page_complete (assistant, widget, ret);
+  if (!ret)
+    return;
+
+  gtk_tree_model_get (model, &iter,
+                      COLUMN_CALIB_TEMP_VALUE_K, &target_whitepoint,
+                      -1);
+  cc_color_calibrate_set_temperature (priv->calibrate, target_whitepoint);
+}
+
+static void
+gcm_prefs_calib_kind_treeview_clicked_cb (GtkTreeSelection *selection,
+                                          CcColorPanel *prefs)
+{
+  CcColorPanelPrivate *priv = prefs->priv;
+  CdSensorCap device_kind;
+  gboolean ret;
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GtkWidget *widget;
+  GtkAssistant *assistant;
+
+  /* check to see if anything is selected */
+  ret = gtk_tree_selection_get_selected (selection, &model, &iter);
+  assistant = GTK_ASSISTANT (gtk_builder_get_object (prefs->priv->builder,
+                                                     "assistant_calib"));
+  widget = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
+                                               "box_calib_kind"));
+  gtk_assistant_set_page_complete (assistant, widget, ret);
+  if (!ret)
+    return;
+
+  /* save the values if we have a selection */
+  gtk_tree_model_get (model, &iter,
+                      COLUMN_CALIB_KIND_CAP_VALUE, &device_kind,
+                      -1);
+  cc_color_calibrate_set_kind (priv->calibrate, device_kind);
+}
+
+static void
+gcm_prefs_calib_quality_treeview_clicked_cb (GtkTreeSelection *selection,
+                                             CcColorPanel *prefs)
+{
+  CcColorPanelPrivate *priv = prefs->priv;
+  CdProfileQuality quality;
+  gboolean ret;
+  GtkAssistant *assistant;
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GtkWidget *widget;
+
+  /* check to see if anything is selected */
+  ret = gtk_tree_selection_get_selected (selection, &model, &iter);
+  assistant = GTK_ASSISTANT (gtk_builder_get_object (prefs->priv->builder,
+                                                     "assistant_calib"));
+  widget = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
+                                               "box_calib_quality"));
+  gtk_assistant_set_page_complete (assistant, widget, ret);
+  if (!ret)
+    return;
+
+  /* save the values if we have a selection */
+  gtk_tree_model_get (model, &iter,
+                      COLUMN_CALIB_QUALITY_VALUE, &quality,
+                      -1);
+  cc_color_calibrate_set_quality (priv->calibrate, quality);
+}
+
+static void
+gcm_prefs_calib_sensor_treeview_clicked_cb (GtkTreeSelection *selection,
+                                             CcColorPanel *prefs)
+{
+  CcColorPanelPrivate *priv = prefs->priv;
+  gboolean ret;
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  GtkWidget *widget;
+  CdSensor *sensor;
+  GtkAssistant *assistant;
+
+  /* check to see if anything is selected */
+  ret = gtk_tree_selection_get_selected (selection, &model, &iter);
+  assistant = GTK_ASSISTANT (gtk_builder_get_object (prefs->priv->builder,
+                                                     "assistant_calib"));
+  widget = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
+                                               "box_calib_sensor"));
+  gtk_assistant_set_page_complete (assistant, widget, ret);
+  if (!ret)
+    return;
+
+  /* save the values if we have a selection */
+  gtk_tree_model_get (model, &iter,
+                      COLUMN_CALIB_SENSOR_OBJECT, &sensor,
+                      -1);
+  cc_color_calibrate_set_sensor (priv->calibrate, sensor);
+  g_object_unref (sensor);
+}
+
+static void
+gcm_prefs_calibrate_display (CcColorPanel *prefs)
+{
+  CcColorPanelPrivate *priv = prefs->priv;
+  CdSensor *sensor_tmp;
+  const gchar *tmp;
+  GtkListStore *liststore;
+  GtkTreeIter iter;
+  GtkWidget *page;
+  GtkWidget *widget;
+  guint i;
+
+  /* set target device */
+  cc_color_calibrate_set_device (priv->calibrate, priv->current_device);
+
+  /* add sensors to list */
+  liststore = GTK_LIST_STORE (gtk_builder_get_object (priv->builder,
+                                                      "liststore_calib_sensor"));
+  gtk_list_store_clear (liststore);
+  page = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
+                                             "box_calib_sensor"));
+  if (priv->sensors->len > 1)
+    {
+      for (i = 0; i < priv->sensors->len; i++)
+        {
+          sensor_tmp = g_ptr_array_index (priv->sensors, i);
+          gtk_list_store_append (liststore, &iter);
+          gtk_list_store_set (liststore, &iter,
+                              COLUMN_CALIB_SENSOR_OBJECT, sensor_tmp,
+                              COLUMN_CALIB_SENSOR_DESCRIPTION, cd_sensor_get_model (sensor_tmp),
+                              -1);
+        }
+      gtk_widget_set_visible (page, TRUE);
+    }
+  else
+    {
+      sensor_tmp = g_ptr_array_index (priv->sensors, 0);
+      cc_color_calibrate_set_sensor (priv->calibrate, sensor_tmp);
+      gtk_widget_set_visible (page, FALSE);
+    }
+
+  /* set default profile title */
+  tmp = cd_device_get_model (priv->current_device);
+  if (tmp == NULL)
+    tmp = cd_device_get_vendor (priv->current_device);
+  if (tmp == NULL)
+    tmp = _("Screen");
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "entry_calib_title"));
+  gtk_entry_set_text (GTK_ENTRY (widget), tmp);
+  cc_color_calibrate_set_title (priv->calibrate, tmp);
+
+  /* set the display whitepoint to D65 by default */
+  //FIXME?
+
+  /* show ui */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "assistant_calib"));
+  gtk_window_set_transient_for (GTK_WINDOW (widget),
+                                GTK_WINDOW (priv->main_window));
+  gtk_widget_show (widget);
+}
+
+static gboolean
+gcm_prefs_calib_treeview_realize_idle_cb (gpointer user_data)
+{
+  GtkWidget *widget = GTK_WIDGET (user_data);
+  GtkTreeSelection *selection;
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+  gtk_tree_selection_unselect_all (selection);
+  return FALSE;
+}
+
+static void
+gcm_prefs_calib_treeview_realize_cb (GtkWidget *widget, CcColorPanel *prefs)
+{
+  g_idle_add (gcm_prefs_calib_treeview_realize_idle_cb, widget);
+}
+
+static void
+gcm_prefs_title_entry_changed_cb (GtkWidget *widget,
+                                  GParamSpec *param_spec,
+                                  CcColorPanel *prefs)
+{
+  GtkAssistant *assistant;
+  GtkWidget *page;
+  const gchar *value;
+
+  assistant = GTK_ASSISTANT (gtk_builder_get_object (prefs->priv->builder,
+                                                     "assistant_calib"));
+  page = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
+                                             "box_calib_title"));
+  value = gtk_entry_get_text (GTK_ENTRY (widget));
+  gtk_assistant_set_page_complete (assistant, page, value[0] != '\0');
+}
+
+static void
 gcm_prefs_calibrate_cb (GtkWidget *widget, CcColorPanel *prefs)
 {
   gboolean ret;
@@ -265,6 +593,13 @@ gcm_prefs_calibrate_cb (GtkWidget *widget, CcColorPanel *prefs)
   guint xid;
   GPtrArray *argv;
   CcColorPanelPrivate *priv = prefs->priv;
+
+  /* use the new-style calibration helper */
+  if (cd_device_get_kind (priv->current_device) == CD_DEVICE_KIND_DISPLAY)
+    {
+      gcm_prefs_calibrate_display (prefs);
+      return;
+    }
 
   /* get xid */
   xid = gdk_x11_window_get_xid (gtk_widget_get_window (GTK_WIDGET (priv->main_window)));
@@ -2079,6 +2414,7 @@ cc_color_panel_dispose (GObject *object)
   g_clear_object (&priv->builder);
   g_clear_object (&priv->client);
   g_clear_object (&priv->current_device);
+  g_clear_object (&priv->calibrate);
   g_clear_pointer (&priv->sensors, g_ptr_array_unref);
 
   G_OBJECT_CLASS (cc_color_panel_parent_class)->dispose (object);
@@ -2111,8 +2447,10 @@ cc_color_panel_init (CcColorPanel *prefs)
 {
   CcColorPanelPrivate *priv;
   GError *error = NULL;
+  GtkCellRenderer *renderer;
   GtkStyleContext *context;
   GtkTreeSelection *selection;
+  GtkTreeViewColumn *column;
   GtkWidget *widget;
 
   priv = prefs->priv = COLOR_PANEL_PRIVATE (prefs);
@@ -2131,6 +2469,9 @@ cc_color_panel_init (CcColorPanel *prefs)
     }
 
   priv->cancellable = g_cancellable_new ();
+
+  /* can do native display calibration using colord-session */
+  priv->calibrate = cc_color_calibrate_new ();
 
   /* setup defaults */
   priv->settings = g_settings_new (GCM_SETTINGS_SCHEMA);
@@ -2253,6 +2594,124 @@ cc_color_panel_init (CcColorPanel *prefs)
                                                "button_assign_import"));
   g_signal_connect (widget, "clicked",
                     G_CALLBACK (gcm_prefs_button_assign_import_cb), prefs);
+
+  /* setup the calibration helper */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "assistant_calib"));
+  g_signal_connect (widget, "delete-event",
+                    G_CALLBACK (gcm_prefs_calib_delete_event_cb),
+                    prefs);
+  g_signal_connect (widget, "apply",
+                    G_CALLBACK (gcm_prefs_calib_apply_cb),
+                    prefs);
+  g_signal_connect (widget, "cancel",
+                    G_CALLBACK (gcm_prefs_calib_cancel_cb),
+                    prefs);
+  g_signal_connect (widget, "prepare",
+                    G_CALLBACK (gcm_prefs_calib_prepare_cb),
+                    prefs);
+
+  /* setup the calibration helper ::TreeView */
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "treeview_calib_quality"));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+  g_signal_connect (selection, "changed",
+                    G_CALLBACK (gcm_prefs_calib_quality_treeview_clicked_cb),
+                    prefs);
+  column = gtk_tree_view_column_new ();
+  renderer = gtk_cell_renderer_text_new ();
+  g_object_set (renderer,
+                "xpad", 9,
+                "ypad", 9,
+                NULL);
+  gtk_tree_view_column_pack_start (column, renderer, TRUE);
+  gtk_tree_view_column_add_attribute (column, renderer,
+                                      "markup", COLUMN_CALIB_QUALITY_DESCRIPTION);
+  gtk_tree_view_column_set_expand (column, TRUE);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (widget),
+                               GTK_TREE_VIEW_COLUMN (column));
+  column = gtk_tree_view_column_new ();
+  renderer = cc_color_cell_renderer_text_new ();
+  g_object_set (renderer,
+                "xpad", 9,
+                "ypad", 9,
+                "is-dim-label", TRUE,
+                NULL);
+  gtk_tree_view_column_pack_start (column, renderer, TRUE);
+  gtk_tree_view_column_add_attribute (column, renderer,
+                                      "markup", COLUMN_CALIB_QUALITY_APPROX_TIME);
+  gtk_tree_view_column_set_expand (column, FALSE);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (widget),
+                               GTK_TREE_VIEW_COLUMN (column));
+  g_signal_connect (widget, "realize",
+                    G_CALLBACK (gcm_prefs_calib_treeview_realize_cb), prefs);
+
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "treeview_calib_sensor"));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+  g_signal_connect (selection, "changed",
+                    G_CALLBACK (gcm_prefs_calib_sensor_treeview_clicked_cb),
+                    prefs);
+  column = gtk_tree_view_column_new ();
+  renderer = gtk_cell_renderer_text_new ();
+  g_object_set (renderer,
+                "xpad", 9,
+                "ypad", 9,
+                NULL);
+  gtk_tree_view_column_pack_start (column, renderer, TRUE);
+  gtk_tree_view_column_add_attribute (column, renderer,
+                                      "markup", COLUMN_CALIB_SENSOR_DESCRIPTION);
+  gtk_tree_view_column_set_expand (column, TRUE);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (widget),
+                               GTK_TREE_VIEW_COLUMN (column));
+  g_signal_connect (widget, "realize",
+                    G_CALLBACK (gcm_prefs_calib_treeview_realize_cb), prefs);
+
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "treeview_calib_kind"));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+  g_signal_connect (selection, "changed",
+                    G_CALLBACK (gcm_prefs_calib_kind_treeview_clicked_cb),
+                    prefs);
+  column = gtk_tree_view_column_new ();
+  renderer = gtk_cell_renderer_text_new ();
+  g_object_set (renderer,
+                "xpad", 9,
+                "ypad", 9,
+                NULL);
+  gtk_tree_view_column_pack_start (column, renderer, TRUE);
+  gtk_tree_view_column_add_attribute (column, renderer,
+                                      "markup", COLUMN_CALIB_KIND_DESCRIPTION);
+  gtk_tree_view_column_set_expand (column, TRUE);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (widget),
+                               GTK_TREE_VIEW_COLUMN (column));
+  g_signal_connect (widget, "realize",
+                    G_CALLBACK (gcm_prefs_calib_treeview_realize_cb), prefs);
+
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "treeview_calib_temp"));
+  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+  g_signal_connect (selection, "changed",
+                    G_CALLBACK (gcm_prefs_calib_temp_treeview_clicked_cb),
+                    prefs);
+  column = gtk_tree_view_column_new ();
+  renderer = gtk_cell_renderer_text_new ();
+  g_object_set (renderer,
+                "xpad", 9,
+                "ypad", 9,
+                NULL);
+  gtk_tree_view_column_pack_start (column, renderer, TRUE);
+  gtk_tree_view_column_add_attribute (column, renderer,
+                                      "markup", COLUMN_CALIB_TEMP_DESCRIPTION);
+  gtk_tree_view_column_set_expand (column, TRUE);
+  gtk_tree_view_append_column (GTK_TREE_VIEW (widget),
+                               GTK_TREE_VIEW_COLUMN (column));
+  g_signal_connect (widget, "realize",
+                    G_CALLBACK (gcm_prefs_calib_treeview_realize_cb), prefs);
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "entry_calib_title"));
+  g_signal_connect (widget, "notify::text",
+        G_CALLBACK (gcm_prefs_title_entry_changed_cb), prefs);
 
   /* use a device client array */
   priv->client = cd_client_new ();

@@ -17,6 +17,10 @@ BUILT_SOURCES =			\
 
 libcolor_la_SOURCES =		\
 	$(BUILT_SOURCES)	\
+	cc-color-calibrate.c		\
+	cc-color-calibrate.h		\
+	cc-color-cell-renderer-text.c	\
+	cc-color-cell-renderer-text.h	\
 	cc-color-panel.c	\
 	cc-color-panel.h
 

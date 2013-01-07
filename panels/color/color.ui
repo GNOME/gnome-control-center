@@ -1,99 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkWindow" id="dialog_prefs">
+  <object class="GtkAssistant" id="assistant_calib">
     <property name="can_focus">False</property>
-    <property name="border_width">12</property>
-    <property name="title" translatable="yes">Color</property>
-    <property name="window_position">center</property>
-    <property name="icon_name">preferences-system</property>
+    <property name="title" translatable="yes">Screen Calibration</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="transient_for">dialog_prefs</property>
     <child>
-      <object class="GtkBox" id="dialog-vbox1">
+      <object class="GtkBox" id="box_calib_quality">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="border_width">15</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">12</property>
-        <property name="margin-left">6</property>
-        <property name="margin-right">6</property>
-        <property name="margin-top">6</property>
-        <property name="margin-bottom">6</property>
+        <property name="spacing">9</property>
         <child>
-          <object class="GtkHBox" id="hbox3">
+          <object class="GtkLabel" id="label_calib_quality_message">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="spacing">9</property>
-            <child>
-              <object class="GtkLabel" id="label_intro">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">Each device needs an up to date color profile to be color managed.</property>
-                <property name="wrap">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label_padding">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLinkButton" id="linkbutton_help">
-                <property name="label" translatable="yes">Learn more</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="has_tooltip">True</property>
-                <property name="tooltip_text" translatable="yes">Learn more about color management</property>
-                <property name="relief">none</property>
-                <property name="xalign">0.50999999046325684</property>
-                <property name="uri">help:gnome-help/color-whyimportant</property>
-                <accessibility>
-                  <relation type="labelled-by" target="label_intro"/>
-                </accessibility>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
+            <property name="xalign">0</property>
+            <property name="xpad">6</property>
+            <property name="label" translatable="yes">Calibration will produce a profile that you can use to color manage your screen. The longer you spend on calibration, the better the quality of the color profile.</property>
+            <property name="wrap">True</property>
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">False</property>
+            <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
         </child>
         <child>
-          <object class="GtkVBox" id="vbox3">
+          <object class="GtkLabel" id="label_calib_quality_message2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="xalign">0</property>
+            <property name="xpad">6</property>
+            <property name="label" translatable="yes">You will not be able to use your computer while calibration takes place.</property>
+            <property name="wrap">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="box_label_calib_quality_header">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_top">12</property>
             <child>
-              <object class="GtkScrolledWindow" id="scrolledwindow_devices">
+              <object class="GtkLabel" id="label_calib_quality_header">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="shadow_type">in</property>
-                <child>
-                  <object class="GtkTreeView" id="treeview_devices">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <child internal-child="selection">
-                      <object class="GtkTreeSelection" id="treeview-selection"/>
-                    </child>
-                  </object>
-                </child>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="xpad">6</property>
+                <property name="label" translatable="yes" comments="This is the approximate time it takes to calibrate the display.">Quality</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -102,114 +68,18 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolbar" id="toolbar_devices">
+              <object class="GtkLabel" id="label_calib_quality_approx_time">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="show_arrow">False</property>
-                <property name="icon_size">1</property>
-                <child>
-                  <object class="GtkToolItem" id="left_button_group">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkBox" id="left_button_group_box">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkButton" id="toolbutton_device_default">
-                            <property name="label" translatable="yes">Set for all users</property>
-                            <property name="can_focus">False</property>
-                            <property name="receives_default">False</property>
-                            <property name="has_tooltip">True</property>
-                            <property name="tooltip_text" translatable="yes">Set this profile for all users on this computer</property>
-                            <property name="use_underline">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkToolItem" id="right_button_group">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkBox" id="right_button_group_box">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkButton" id="toolbutton_profile_add">
-                            <property name="label" translatable="yes">Add profile</property>
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="receives_default">False</property>
-                            <property name="use_underline">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="toolbutton_device_calibrate">
-                            <property name="label" translatable="yes">Calibrate…</property>
-                            <property name="can_focus">False</property>
-                            <property name="receives_default">False</property>
-                            <property name="has_tooltip">True</property>
-                            <property name="tooltip_text" translatable="yes">Calibrate the device</property>
-                            <property name="use_underline">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="toolbutton_profile_remove">
-                            <property name="label" translatable="yes">Remove profile</property>
-                            <property name="can_focus">False</property>
-                            <property name="receives_default">False</property>
-                            <property name="use_underline">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="toolbutton_profile_view">
-                            <property name="label" translatable="yes">View details</property>
-                            <property name="can_focus">False</property>
-                            <property name="receives_default">False</property>
-                            <property name="use_underline">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">3</property>
-                          </packing>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                  </packing>
-                </child>
+                <property name="xalign">1</property>
+                <property name="xpad">6</property>
+                <property name="label" translatable="yes" comments="This is the approximate time it takes to calibrate the display.">Approximate Time</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
               </object>
               <packing>
-                <property name="expand">False</property>
+                <property name="expand">True</property>
                 <property name="fill">True</property>
                 <property name="position">1</property>
               </packing>
@@ -218,9 +88,299 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolledwindow_calib_quality">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="hscrollbar_policy">never</property>
+            <property name="vscrollbar_policy">never</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkTreeView" id="treeview_calib_quality">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="model">liststore_calib_quality</property>
+                <property name="headers_visible">False</property>
+                <property name="search_column">0</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection" id="treeview-selection3"/>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="title" translatable="yes">Calibration Quality</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="box_calib_kind">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">9</property>
+        <child>
+          <object class="GtkLabel" id="label_calib_kind_message">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="xalign">0</property>
+            <property name="xpad">6</property>
+            <property name="label" translatable="yes">Select the type of display that is connected.</property>
+            <property name="wrap">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolledwindow_calib_kind">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="hscrollbar_policy">never</property>
+            <property name="vscrollbar_policy">never</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkTreeView" id="treeview_calib_kind">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="model">liststore_calib_kind</property>
+                <property name="headers_visible">False</property>
+                <property name="search_column">0</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection" id="treeview-selection5"/>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
             <property name="position">1</property>
           </packing>
         </child>
+      </object>
+      <packing>
+        <property name="title" translatable="yes">Display Type</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="box_calib_sensor">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">9</property>
+        <child>
+          <object class="GtkLabel" id="label_calib_sensor_message">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="xalign">0</property>
+            <property name="xpad">6</property>
+            <property name="label" translatable="yes">Select the sensor device you want to use for calibration.</property>
+            <property name="wrap">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolledwindow_calib_sensor">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="hscrollbar_policy">never</property>
+            <property name="vscrollbar_policy">never</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkTreeView" id="treeview_calib_sensor">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="model">liststore_calib_sensor</property>
+                <property name="headers_visible">False</property>
+                <property name="search_column">1</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection" id="treeview-selection4"/>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="title" translatable="yes">Calibration Device</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="box_calib_temp">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">9</property>
+        <child>
+          <object class="GtkLabel" id="label_calib_temp_message">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="xalign">0</property>
+            <property name="xpad">6</property>
+            <property name="label" translatable="yes">Select a display target white point. Most displays should be calibrated to a D65 illuminant.</property>
+            <property name="wrap">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolledwindow_calib_temp">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="hscrollbar_policy">never</property>
+            <property name="vscrollbar_policy">never</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkTreeView" id="treeview_calib_temp">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="model">liststore_calib_temp</property>
+                <property name="headers_visible">False</property>
+                <property name="search_column">0</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection" id="treeview-selection6"/>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="title" translatable="yes">Profile Whitepoint</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="box_calib_brightness">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">9</property>
+        <child>
+          <object class="GtkLabel" id="label_calib_brightness_message1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="xalign">0</property>
+            <property name="xpad">6</property>
+            <property name="label" translatable="yes">Please set the display to a brightness that is typical for you. Color management will be most accurate at this brightness level.</property>
+            <property name="wrap">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label_calib_brightness_message2">
+            <property name="can_focus">False</property>
+            <property name="xalign">0</property>
+            <property name="xpad">6</property>
+            <property name="label" translatable="yes">Alternatively, you can use the brightness level used with one of the other profiles for this device.</property>
+            <property name="wrap">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="title" translatable="yes">Display Brightness</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="box_calib_title">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">9</property>
+        <child>
+          <object class="GtkLabel" id="label_calib_title_message">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="xalign">0</property>
+            <property name="xpad">6</property>
+            <property name="label" translatable="yes">You can use a color profile on different computers, or even create profiles for different lighting conditions.</property>
+            <property name="wrap">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label_calib_title_header">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="xalign">0</property>
+            <property name="xpad">6</property>
+            <property name="label" translatable="yes">Profile Name:</property>
+            <property name="wrap">True</property>
+            <style>
+              <class name="dim-label"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="entry_calib_title">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="invisible_char">●</property>
+            <property name="truncate_multiline">True</property>
+            <property name="invisible_char_set">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="page_type">confirm</property>
+        <property name="title" translatable="yes">Profile Name</property>
+      </packing>
+    </child>
+    <child internal-child="action_area">
+      <object class="GtkBox" id="assistant-action_area1">
+        <property name="can_focus">False</property>
+        <property name="halign">end</property>
+        <property name="spacing">6</property>
       </object>
     </child>
   </object>
@@ -611,6 +771,225 @@
       <action-widget response="0">button_virtual_add</action-widget>
     </action-widgets>
   </object>
+  <object class="GtkWindow" id="dialog_prefs">
+    <property name="can_focus">False</property>
+    <property name="border_width">12</property>
+    <property name="title" translatable="yes">Color</property>
+    <property name="window_position">center</property>
+    <property name="icon_name">preferences-system</property>
+    <child>
+      <object class="GtkBox" id="dialog-vbox1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="border_width">15</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">12</property>
+        <child>
+          <object class="GtkHBox" id="hbox3">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="spacing">9</property>
+            <child>
+              <object class="GtkLabel" id="label_intro">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">Each device needs an up to date color profile to be color managed.</property>
+                <property name="wrap">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label_padding">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLinkButton" id="linkbutton_help">
+                <property name="label" translatable="yes">Learn more</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="has_tooltip">True</property>
+                <property name="tooltip_text" translatable="yes">Learn more about color management</property>
+                <property name="relief">none</property>
+                <property name="xalign">0.50999999046325684</property>
+                <property name="uri">help:gnome-help/color-whyimportant</property>
+                <accessibility>
+                  <relation type="labelled-by" target="label_intro"/>
+                </accessibility>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkVBox" id="vbox3">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkScrolledWindow" id="scrolledwindow_devices">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="shadow_type">in</property>
+                <child>
+                  <object class="GtkTreeView" id="treeview_devices">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <child internal-child="selection">
+                      <object class="GtkTreeSelection" id="treeview-selection"/>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolbar" id="toolbar_devices">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="show_arrow">False</property>
+                <property name="icon_size">1</property>
+                <child>
+                  <object class="GtkToolItem" id="left_button_group">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkBox" id="left_button_group_box">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <child>
+                          <object class="GtkButton" id="toolbutton_device_default">
+                            <property name="label" translatable="yes">Set for all users</property>
+                            <property name="can_focus">False</property>
+                            <property name="receives_default">False</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip_text" translatable="yes">Set this profile for all users on this computer</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToolItem" id="right_button_group">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkBox" id="right_button_group_box">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <child>
+                          <object class="GtkButton" id="toolbutton_profile_add">
+                            <property name="label" translatable="yes">Add profile</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="toolbutton_device_calibrate">
+                            <property name="label" translatable="yes">Calibrate…</property>
+                            <property name="can_focus">False</property>
+                            <property name="receives_default">False</property>
+                            <property name="has_tooltip">True</property>
+                            <property name="tooltip_text" translatable="yes">Calibrate the device</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="toolbutton_profile_remove">
+                            <property name="label" translatable="yes">Remove profile</property>
+                            <property name="can_focus">False</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="toolbutton_profile_view">
+                            <property name="label" translatable="yes">View details</property>
+                            <property name="can_focus">False</property>
+                            <property name="receives_default">False</property>
+                            <property name="use_underline">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">3</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkListStore" id="liststore_assign">
     <columns>
       <!-- column-name title -->
@@ -622,6 +1001,97 @@
       <!-- column-name warningfn -->
       <column type="gchararray"/>
     </columns>
+  </object>
+  <object class="GtkListStore" id="liststore_calib_kind">
+    <columns>
+      <!-- column-name display_kind -->
+      <column type="gchararray"/>
+      <!-- column-name kind -->
+      <column type="guint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">LCD</col>
+        <col id="1" translatable="yes">1</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">LED</col>
+        <col id="1" translatable="yes">8</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">CRT</col>
+        <col id="1" translatable="yes">2</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Projector</col>
+        <col id="1" translatable="yes">5</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="liststore_calib_quality">
+    <columns>
+      <!-- column-name quality -->
+      <column type="gchararray"/>
+      <!-- column-name approx_time -->
+      <column type="gchararray"/>
+      <!-- column-name value -->
+      <column type="guint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">High</col>
+        <col id="1" translatable="yes">40 minutes</col>
+        <col id="2" translatable="yes">2</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Medium</col>
+        <col id="1" translatable="yes">30 minutes</col>
+        <col id="2" translatable="yes">1</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Low</col>
+        <col id="1" translatable="yes">15 minutes</col>
+        <col id="2" translatable="yes">0</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="liststore_calib_sensor">
+    <columns>
+      <!-- column-name sensor -->
+      <column type="GObject"/>
+      <!-- column-name sensor_desc -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="liststore_calib_temp">
+    <columns>
+      <!-- column-name temp_desc -->
+      <column type="gchararray"/>
+      <!-- column-name temp_value -->
+      <column type="guint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Native to display</col>
+        <col id="1">0</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">D50 (Printing and publishing)</col>
+        <col id="1">5000</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">D55</col>
+        <col id="1">5500</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">D65 (Photography and graphics)</col>
+        <col id="1">6500</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">D75</col>
+        <col id="1">7500</col>
+      </row>
+    </data>
   </object>
   <object class="GtkSizeGroup" id="sizegroup_assign">
     <widgets>
