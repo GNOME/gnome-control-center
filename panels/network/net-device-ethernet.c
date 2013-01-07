@@ -351,6 +351,19 @@ populate_ui (NetDeviceEthernet *device)
         connections = valid_connections_for_device (settings, NET_DEVICE (device));
 
         n_connections = g_slist_length (connections);
+
+        if (n_connections > 4) {
+                gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (device->scrolled_window),
+                                                GTK_POLICY_NEVER,
+                                                GTK_POLICY_AUTOMATIC);
+                gtk_widget_set_vexpand (device->scrolled_window, TRUE);
+        } else {
+                gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (device->scrolled_window),
+                                                GTK_POLICY_NEVER,
+                                                GTK_POLICY_NEVER);
+                gtk_widget_set_vexpand (device->scrolled_window, FALSE);
+        }
+
         if (n_connections > 1) {
                 gtk_widget_hide (device->details);
                 gtk_widget_hide (device->details_button);
