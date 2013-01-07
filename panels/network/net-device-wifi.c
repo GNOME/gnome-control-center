@@ -266,29 +266,6 @@ wireless_enabled_toggled (NMClient       *client,
         device_wifi->priv->updating_device = FALSE;
 }
 
-#if 0
-static void
-update_off_switch_from_device_state (GtkSwitch *sw,
-                                     NMDeviceState state,
-                                     NetDeviceWifi *device_wifi)
-{
-        device_wifi->priv->updating_device = TRUE;
-        switch (state) {
-                case NM_DEVICE_STATE_UNMANAGED:
-                case NM_DEVICE_STATE_UNAVAILABLE:
-                case NM_DEVICE_STATE_DISCONNECTED:
-                case NM_DEVICE_STATE_DEACTIVATING:
-                case NM_DEVICE_STATE_FAILED:
-                        gtk_switch_set_active (sw, FALSE);
-                        break;
-                default:
-                        gtk_switch_set_active (sw, TRUE);
-                        break;
-        }
-        device_wifi->priv->updating_device = FALSE;
-}
-#endif
-
 static NMConnection *
 find_connection_for_device (NetDeviceWifi *device_wifi,
                             NMDevice       *device)
