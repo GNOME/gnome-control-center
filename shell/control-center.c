@@ -52,6 +52,7 @@ option_version_cb (const gchar *option_name,
 }
 
 static char **start_panels = NULL;
+static char *search_str = NULL;
 static gboolean show_overview = FALSE;
 static gboolean verbose = FALSE;
 static gboolean show_help = FALSE;
@@ -62,6 +63,7 @@ const GOptionEntry all_options[] = {
   { "version", 0, G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, option_version_cb, NULL, NULL },
   { "verbose", 'v', 0, G_OPTION_ARG_NONE, &verbose, N_("Enable verbose mode"), NULL },
   { "overview", 'o', 0, G_OPTION_ARG_NONE, &show_overview, N_("Show the overview"), NULL },
+  { "search", 's', 0, G_OPTION_ARG_STRING, &search_str, N_("Search for the string"), "SEARCH" },
   { "help", 'h', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &show_help, N_("Show help options"), NULL },
   { "help-all", 0, G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &show_help_all, N_("Show help options"), NULL },
   { "help-gtk", 0, G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &show_help_gtk, N_("Show help options"), NULL },
@@ -129,7 +131,11 @@ application_command_line_cb (GApplication  *application,
 
   gnome_control_center_show (shell, GTK_APPLICATION (application));
 
-  if (show_overview)
+  if (search_str)
+    {
+      gnome_control_center_set_search_item (shell, search_str);
+    }
+  else if (show_overview)
     {
       gnome_control_center_set_overview_page (shell);
     }

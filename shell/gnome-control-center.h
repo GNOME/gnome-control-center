@@ -74,6 +74,9 @@ void gnome_control_center_show (GnomeControlCenter *center, GtkApplication *app)
 
 void gnome_control_center_set_overview_page (GnomeControlCenter *center);
 
+void gnome_control_center_set_search_item (GnomeControlCenter *center,
+                                           const char         *search);
+
 G_END_DECLS
 
 #endif /* _GNOME_CONTROL_CENTER_H */
