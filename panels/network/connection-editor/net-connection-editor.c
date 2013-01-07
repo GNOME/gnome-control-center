@@ -123,12 +123,12 @@ apply_edits (NetConnectionEditor *editor)
 {
         update_connection (editor);
 
-        if (!nm_remote_settings_get_connection_by_uuid (editor->settings, nm_connection_get_uuid (editor->orig_connection)))
+        if (editor->is_new_connection) {
                 nm_remote_settings_add_connection (editor->settings,
                                                    editor->orig_connection,
                                                    added_connection_cb,
                                                    editor);
-        else {
+        } else {
                 nm_remote_connection_commit_changes (NM_REMOTE_CONNECTION (editor->orig_connection),
                                                      updated_connection_cb, editor);
         }
@@ -218,16 +218,20 @@ net_connection_editor_class_init (NetConnectionEditorClass *class)
 static void
 net_connection_editor_update_title (NetConnectionEditor *editor)
 {
-        NMSettingWireless *sw;
-        const GByteArray *ssid;
         gchar *id;
 
-        sw = nm_connection_get_setting_wireless (editor->connection);
-        if (sw) {
-                ssid = nm_setting_wireless_get_ssid (sw);
-                id = nm_utils_ssid_to_utf8 (ssid);
-        } else {
-                id = g_strdup (nm_connection_get_id (editor->connection));
+        if (editor->is_new_connection)
+                id = g_strdup (_("New Profile"));
+        else {
+                NMSettingWireless *sw;
+                sw = nm_connection_get_setting_wireless (editor->connection);
+                if (sw) {
+                        const GByteArray *ssid;
+                        ssid = nm_setting_wireless_get_ssid (sw);
+                        id = nm_utils_ssid_to_utf8 (ssid);
+                } else {
+                        id = g_strdup (nm_connection_get_id (editor->connection));
+                }
         }
         gtk_window_set_title (GTK_WINDOW (editor->window), id);
         g_free (id);
@@ -423,6 +427,16 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
         GSList *pages, *l;
         NMSettingConnection *sc;
         const gchar *type;
+
+        editor->is_new_connection = !nm_remote_settings_get_connection_by_uuid (editor->settings,
+                                                                                 nm_connection_get_uuid (connection));
+
+        if (editor->is_new_connection) {
+                GtkWidget *button;
+
+                button = GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_apply_button"));
+                gtk_button_set_label (GTK_BUTTON (button), _("_Add"));
+        }
 
         editor->connection = nm_connection_duplicate (connection);
         editor->orig_connection = g_object_ref (connection);
