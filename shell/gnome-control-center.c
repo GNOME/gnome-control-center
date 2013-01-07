@@ -559,12 +559,17 @@ search_entry_key_press_event_cb (GtkEntry    *entry,
 }
 
 static void
-on_search_selection_changed (GtkTreeSelection   *selection,
-                             GnomeControlCenter *shell)
+on_search_row_activated (GtkTreeView       *treeview,
+                         GtkTreePath       *path,
+                         GtkTreeViewColumn *column,
+                         GnomeControlCenter *shell)
 {
+  GtkTreeSelection *selection;
   GtkTreeModel *model;
   GtkTreeIter   iter;
   char         *id = NULL;
+
+  selection = gtk_tree_view_get_selection (treeview);
 
   if (!gtk_tree_selection_get_selected (selection, &model, &iter))
     return;
@@ -579,6 +584,49 @@ on_search_selection_changed (GtkTreeSelection   *selection,
   gtk_tree_selection_unselect_all (selection);
 
   g_free (id);
+}
+
+static gboolean
+on_search_button_press_event (GtkTreeView        *treeview,
+                              GdkEventButton     *event,
+                              GnomeControlCenter *shell)
+{
+  if (event->type == GDK_BUTTON_PRESS && event->button == 1)
+    {
+      GtkTreePath *path = NULL;
+      GtkTreeSelection *selection;
+      GtkTreeModel *model;
+      GtkTreeIter iter;
+
+      /* We don't check for the position being blank,
+       * it could be the dead space between columns */
+      gtk_tree_view_is_blank_at_pos (treeview,
+                                     event->x, event->y,
+                                     &path,
+                                     NULL,
+                                     NULL,
+                                     NULL);
+      if (path == NULL)
+        return FALSE;
+
+      model = gtk_tree_view_get_model (treeview);
+      if (gtk_tree_model_get_iter (model, &iter, path) == FALSE)
+        {
+          gtk_tree_path_free (path);
+          return FALSE;
+        }
+
+      selection = gtk_tree_view_get_selection (treeview);
+      gtk_tree_selection_select_iter (selection, &iter);
+
+      on_search_row_activated (treeview, NULL, NULL, shell);
+
+      gtk_tree_path_free (path);
+
+      return TRUE;
+    }
+
+  return FALSE;
 }
 
 static void
@@ -641,10 +689,10 @@ setup_search (GnomeControlCenter *shell)
   priv->search_scrolled = W (priv->builder, "search-scrolled-window");
   gtk_container_add (GTK_CONTAINER (priv->search_scrolled), search_view);
 
-  g_signal_connect (gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->search_view)),
-                    "changed",
-                    G_CALLBACK (on_search_selection_changed),
-                    shell);
+  g_signal_connect (priv->search_view, "row-activated",
+                    G_CALLBACK (on_search_row_activated), shell);
+  g_signal_connect (priv->search_view, "button-press-event",
+                    G_CALLBACK (on_search_button_press_event), shell);
 
   /* setup the search entry widget */
   widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "search-entry");
