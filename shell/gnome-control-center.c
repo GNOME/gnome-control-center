@@ -608,7 +608,6 @@ setup_search (GnomeControlCenter *shell)
 
   renderer = gtk_cell_renderer_pixbuf_new ();
   g_object_set (renderer,
-                "follow-state", TRUE,
                 "xpad", 15,
                 "ypad", 10,
                 "stock-size", GTK_ICON_SIZE_DIALOG,
