@@ -98,7 +98,7 @@ enum {
         PROP_ARGV
 };
 
-static NetObject *find_in_model_by_id (CcNetworkPanel *panel, const gchar *id);
+static NetObject *find_in_model_by_id (CcNetworkPanel *panel, const gchar *id, GtkTreeIter *iter_out);
 static void handle_argv (CcNetworkPanel *panel);
 
 static void
@@ -599,6 +599,28 @@ handle_argv (CcNetworkPanel *panel)
         g_debug ("Could not handle argv operation, no matching device yet?");
 }
 
+static void
+state_changed_cb (NMDevice *device,
+                  NMDeviceState new_state,
+                  NMDeviceState old_state,
+                  NMDeviceStateReason reason,
+                  CcNetworkPanel *panel)
+{
+        GtkListStore *store;
+        GtkTreeIter iter;
+
+        if (!find_in_model_by_id (panel, nm_device_get_udi (device), &iter)) {
+                return;
+        }
+
+        store = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
+                                                        "liststore_devices"));
+
+        gtk_list_store_set (store, &iter,
+                            PANEL_DEVICES_COLUMN_ICON, panel_device_to_icon_name (device),
+                           -1);
+}
+
 static gboolean
 panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 {
@@ -612,7 +634,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         GType device_g_type;
 
         /* do we have an existing object with this id? */
-        if (find_in_model_by_id (panel, nm_device_get_udi (device)) != NULL)
+        if (find_in_model_by_id (panel, nm_device_get_udi (device), NULL) != NULL)
                 goto out;
 
         type = nm_device_get_device_type (device);
@@ -672,6 +694,8 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                             PANEL_DEVICES_COLUMN_SORT, panel_device_to_sortable_string (device),
                             PANEL_DEVICES_COLUMN_OBJECT, net_device,
                             -1);
+        g_signal_connect (device, "state-changed",
+                          G_CALLBACK (state_changed_cb), panel);
 
 out:
         return FALSE;
@@ -939,7 +963,7 @@ out:
 }
 
 static NetObject *
-find_in_model_by_id (CcNetworkPanel *panel, const gchar *id)
+find_in_model_by_id (CcNetworkPanel *panel, const gchar *id, GtkTreeIter *iter_out)
 {
         gboolean ret;
         NetObject *object_tmp;
@@ -968,6 +992,8 @@ find_in_model_by_id (CcNetworkPanel *panel, const gchar *id)
                 }
         } while (object == NULL && gtk_tree_model_iter_next (model, &iter));
 out:
+        if (iter_out)
+                *iter_out = iter;
         return object;
 }
 
@@ -984,7 +1010,7 @@ panel_add_vpn_device (CcNetworkPanel *panel, NMConnection *connection)
 
         /* does already exist */
         id = nm_connection_get_path (connection);
-        if (find_in_model_by_id (panel, id) != NULL)
+        if (find_in_model_by_id (panel, id, NULL) != NULL)
                 return;
 
         /* add as a virtual object */
