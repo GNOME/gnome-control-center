@@ -50,6 +50,7 @@ struct _NetDeviceEthernet
         GtkWidget *details;
         GtkWidget *details_button;
         GtkWidget *add_profile_button;
+        gboolean   updating_device;
 };
 
 struct _NetDeviceEthernetClass
