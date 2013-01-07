@@ -267,8 +267,6 @@ device_ethernet_refresh_ui (NetDeviceEthernet *device)
                 g_string_append_printf (status, " - %s", speed);
         gtk_label_set_label (GTK_LABEL (widget), status->str);
         g_string_free (status, TRUE);
-        gtk_widget_set_tooltip_text (widget,
-                                     panel_device_state_reason_to_localized_string (nm_device));
 
         populate_ui (device);
 }
@@ -538,6 +536,7 @@ device_off_toggled (GtkSwitch         *sw,
         NMClient *client;
         NMDevice *nm_device;
         NMConnection *connection;
+        NMActiveConnection *a;
 
         if (device->updating_device)
                 return;
@@ -554,7 +553,10 @@ device_off_toggled (GtkSwitch         *sw,
                                                        NULL, NULL, NULL);
                 }
         } else {
-                nm_device_disconnect (nm_device, NULL, NULL);
+                a = nm_device_get_active_connection (nm_device);
+                if (a) {
+                        nm_client_deactivate_connection (client, a);
+                }
         }
 }
 
