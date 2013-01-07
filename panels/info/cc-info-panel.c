@@ -802,15 +802,6 @@ on_section_changed (GtkTreeSelection  *selection,
 }
 
 static void
-info_panel_setup_graphics (CcInfoPanel  *self)
-{
-  GtkWidget *widget;
-
-  widget = WID ("graphics_driver_label");
-  gtk_label_set_markup (GTK_LABEL (widget), self->priv->graphics_data->hardware_string);
-}
-
-static void
 move_one_up (GtkWidget *table,
 	     GtkWidget *child)
 {
@@ -1565,11 +1556,6 @@ info_panel_setup_selector (CcInfoPanel  *self)
                       _("Removable Media"),
                       -1);
 
-  gtk_list_store_append (model, &iter);
-  gtk_list_store_set (model, &iter, section_name_column,
-                      _("Graphics"),
-                      -1);
-
   g_signal_connect (selection, "changed",
                     G_CALLBACK (on_section_changed), self);
   on_section_changed (selection, self);
@@ -2089,6 +2075,5 @@ cc_info_panel_init (CcInfoPanel *self)
   info_panel_setup_overview (self);
   info_panel_setup_default_apps (self);
   info_panel_setup_media (self);
-  info_panel_setup_graphics (self);
   info_panel_setup_virt (self);
 }
