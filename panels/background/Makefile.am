@@ -51,7 +51,7 @@ INCLUDES += $(SOCIALWEB_CFLAGS)
 libbackground_la_LIBADD += $(SOCIALWEB_LIBS)
 endif
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/background.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/background.gresource.xml)
 cc-background-resources.c: background.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_background $<
 cc-background-resources.h: background.gresource.xml $(resource_files)

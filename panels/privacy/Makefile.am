@@ -20,7 +20,7 @@ libprivacy_la_SOURCES =		\
 
 libprivacy_la_LIBADD = $(PANEL_LIBS) $(PRIVACY_PANEL_LIBS)
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/privacy.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/privacy.gresource.xml)
 cc-privacy-resources.c: privacy.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_privacy $<
 cc-privacy-resources.h: privacy.gresource.xml $(resource_files)

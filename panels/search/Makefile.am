@@ -23,7 +23,7 @@ libsearch_la_SOURCES =		\
 
 libsearch_la_LIBADD = $(PANEL_LIBS) $(SEARCH_PANEL_LIBS)
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/search.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/search.gresource.xml)
 cc-search-resources.c: search.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_search $<
 cc-search-resources.h: search.gresource.xml $(resource_files)

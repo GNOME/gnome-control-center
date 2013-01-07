@@ -74,7 +74,7 @@ um-realm-generated.c: $(srcdir)/data/org.freedesktop.realmd.xml
 		--c-generate-object-manager $<
 um-realm-generated.h: um-realm-generated.c
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/user-accounts.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/user-accounts.gresource.xml)
 um-resources.c: user-accounts.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name um $<
 um-resources.h: user-accounts.gresource.xml $(resource_files)

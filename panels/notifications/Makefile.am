@@ -21,7 +21,7 @@ libnotifications_la_SOURCES =		\
 
 libnotifications_la_LIBADD = $(NOTIFICATIONS_PANEL_LIBS) $(PANEL_LIBS)
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/notifications.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/notifications.gresource.xml)
 cc-notifications-resources.c: notifications.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_notifications $<
 cc-notifications-resources.h: notifications.gresource.xml $(resource_files)

@@ -58,7 +58,7 @@ test_wacom_SOURCES =			\
 test_wacom_CPPFLAGS = $(INCLUDES)
 test_wacom_LDADD = $(PANEL_LIBS) $(WACOM_PANEL_LIBS) $(builddir)/calibrator/libwacom-calibrator.la
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/wacom.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/wacom.gresource.xml)
 cc-wacom-resources.c: wacom.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_wacom $<
 cc-wacom-resources.h: wacom.gresource.xml $(resource_files)

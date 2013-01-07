@@ -34,7 +34,7 @@ libinfo_la_SOURCES =		\
 
 libinfo_la_LIBADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/info.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/info.gresource.xml)
 cc-info-resources.c: info.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_info $<
 cc-info-resources.h: info.gresource.xml $(resource_files)

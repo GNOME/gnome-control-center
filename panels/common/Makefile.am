@@ -32,7 +32,7 @@ list_languages_SOURCES = list-languages.c
 list_languages_LDADD = liblanguage.la
 list_languages_CFLAGS = $(LIBLANGUAGE_CFLAGS)
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/common.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/common.gresource.xml)
 cc-common-resources.c: common.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_common $<
 cc-common-resources.h: common.gresource.xml $(resource_files)

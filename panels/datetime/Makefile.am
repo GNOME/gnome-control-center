@@ -69,7 +69,7 @@ timedated.h: Makefile.am timedated1-interface.xml
 		$(srcdir)/timedated1-interface.xml
 
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/datetime.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/datetime.gresource.xml)
 cc-datetime-resources.c: datetime.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_datetime $<
 cc-datetime-resources.h: datetime.gresource.xml $(resource_files)

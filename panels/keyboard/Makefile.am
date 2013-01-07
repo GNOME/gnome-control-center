@@ -25,7 +25,7 @@ libkeyboard_la_SOURCES =   \
 libkeyboard_la_CFLAGS = $(PANEL_CFLAGS) $(KEYBOARD_PANEL_CFLAGS) -I$(top_srcdir)/panels/common/
 libkeyboard_la_LIBADD = $(PANEL_LIBS) $(KEYBOARD_PANEL_LIBS)
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/keyboard.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/keyboard.gresource.xml)
 cc-keyboard-resources.c: keyboard.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_keyboard $<
 cc-keyboard-resources.h: keyboard.gresource.xml $(resource_files)

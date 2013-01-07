@@ -22,7 +22,7 @@ libcolor_la_SOURCES =		\
 
 libcolor_la_LIBADD = $(PANEL_LIBS) $(COLOR_PANEL_LIBS)
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/color.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/color.gresource.xml)
 cc-color-resources.c: color.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_color $<
 cc-color-resources.h: color.gresource.xml $(resource_files)

@@ -19,7 +19,7 @@ libscreen_la_SOURCES =		\
 
 libscreen_la_LIBADD = $(PANEL_LIBS) $(SCREEN_PANEL_LIBS)
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/screen.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/screen.gresource.xml)
 cc-screen-resources.c: screen.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_screen $<
 cc-screen-resources.h: screen.gresource.xml $(resource_files)

@@ -18,7 +18,7 @@ libdisplay_la_SOURCES =		\
 
 libdisplay_la_LIBADD = $(PANEL_LIBS) $(DISPLAY_PANEL_LIBS)
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/display.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/display.gresource.xml)
 cc-display-resources.c: display.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_display $<
 cc-display-resources.h: display.gresource.xml $(resource_files)

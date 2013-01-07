@@ -22,7 +22,7 @@ libuniversal_access_la_SOURCES =		\
 
 libuniversal_access_la_LIBADD = $(PANEL_LIBS) $(UNIVERSAL_ACCESS_PANEL_LIBS)
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/universal-access.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/universal-access.gresource.xml)
 cc-ua-resources.c: universal-access.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_universal_access $<
 cc-ua-resources.h: universal-access.gresource.xml $(resource_files)

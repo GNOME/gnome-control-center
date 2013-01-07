@@ -30,7 +30,7 @@ libregion_la_SOURCES =	\
 
 libregion_la_LIBADD = $(PANEL_LIBS) $(REGION_PANEL_LIBS) $(builddir)/../common/liblanguage.la
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/region.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/region.gresource.xml)
 cc-region-resources.c: region.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_region $<
 cc-region-resources.h: region.gresource.xml $(resource_files)

@@ -26,7 +26,7 @@ libonline_accounts_la_SOURCES =		\
 libonline_accounts_la_LIBADD = $(PANEL_LIBS) $(ONLINE_ACCOUNTS_PANEL_LIBS)
 libonline_accounts_la_LDFLAGS = $(PANEL_LDFLAGS)
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/online-accounts.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/online-accounts.gresource.xml)
 cc-online-accounts-resources.c: online-accounts.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_online_accounts $<
 cc-online-accounts-resources.h: online-accounts.gresource.xml $(resource_files)

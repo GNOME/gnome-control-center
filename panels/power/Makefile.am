@@ -32,7 +32,7 @@ INCLUDES += $(NETWORK_MANAGER_CFLAGS)
 libpower_la_LIBADD += $(NETWORK_MANAGER_LIBS)
 endif
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/power.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/power.gresource.xml)
 cc-power-resources.c: power.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_power $<
 cc-power-resources.h: power.gresource.xml $(resource_files)

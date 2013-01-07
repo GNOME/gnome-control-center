@@ -20,7 +20,7 @@ libbluetooth_la_SOURCES =			\
 
 libbluetooth_la_LIBADD = $(PANEL_LIBS) $(BLUETOOTH_LIBS)
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/bluetooth.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/bluetooth.gresource.xml)
 cc-bluetooth-resources.c: bluetooth.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_bluetooth $<
 cc-bluetooth-resources.h: bluetooth.gresource.xml $(resource_files)
