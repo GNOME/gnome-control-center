@@ -42,7 +42,7 @@ libprinters_la_SOURCES =		\
 
 libprinters_la_LIBADD = $(PRINTERS_PANEL_LIBS) $(PANEL_LIBS) $(CUPS_LIBS)
 
-resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/printers.gresource.xml)
+resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/printers.gresource.xml)
 cc-printers-resources.c: printers.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_printers $<
 cc-printers-resources.h: printers.gresource.xml $(resource_files)
