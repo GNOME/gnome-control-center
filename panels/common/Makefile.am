@@ -7,6 +7,7 @@ noinst_PROGRAMS = list-languages
 AM_CPPFLAGS =						\
 	$(PANEL_CFLAGS)					\
 	$(LIBLANGUAGE_CFLAGS)				\
+	-DDATADIR=\""$(datadir)"\"			\
 	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\"       \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
