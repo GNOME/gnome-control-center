@@ -88,7 +88,6 @@
                         <child>
                           <object class="GtkCellRendererText" id="padding_cell">
                             <property name="xpad">20</property>
-                            <property name="text"></property>
                           </object>
                         </child>
                       </object>
@@ -689,7 +688,6 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="hscrollbar_policy">never</property>
-                    <property name="shadow_type">none</property>
                     <child>
                       <object class="GtkViewport" id="viewport1">
                         <property name="visible">True</property>
@@ -698,12 +696,12 @@
                           <object class="GtkBox" id="box2">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
+                            <property name="margin_left">20</property>
+                            <property name="margin_right">20</property>
+                            <property name="margin_top">10</property>
+                            <property name="margin_bottom">10</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">10</property>
-                            <property name="margin-left">20</property>
-                            <property name="margin-right">20</property>
-                            <property name="margin-top">10</property>
-                            <property name="margin-bottom">10</property>
                             <child>
                               <object class="GtkBox" id="box5">
                                 <property name="visible">True</property>
@@ -1601,6 +1599,8 @@ here</property>
       <object class="GtkNotebook" id="notebook_view">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
+        <property name="show_tabs">False</property>
+        <property name="show_border">False</property>
         <child>
           <object class="GtkBox" id="box3">
             <property name="visible">True</property>
@@ -1610,7 +1610,7 @@ here</property>
               <object class="GtkBox" id="box_list">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="margin_bottom">12</property>
+                <property name="margin_bottom">18</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkBox" id="box_list_heading">
@@ -1620,6 +1620,7 @@ here</property>
                     <property name="margin_right">12</property>
                     <property name="margin_top">12</property>
                     <property name="margin_bottom">12</property>
+                    <property name="spacing">6</property>
                     <child>
                       <object class="GtkImage" id="heading_image">
                         <property name="visible">True</property>
@@ -1637,12 +1638,13 @@ here</property>
                       <object class="GtkBox" id="box4">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="hexpand">True</property>
                         <property name="orientation">vertical</property>
                         <child>
                           <object class="GtkLabel" id="heading_list">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="halign">start</property>
+                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Wi-Fi</property>
                             <attributes>
                               <attribute name="weight" value="bold"/>
@@ -1659,7 +1661,7 @@ here</property>
                           <object class="GtkLabel" id="heading_status">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="halign">start</property>
+                            <property name="xalign">0</property>
                             <property name="label">Connected</property>
                           </object>
                           <packing>
@@ -1681,6 +1683,7 @@ here</property>
                         <property name="can_focus">True</property>
                         <property name="halign">end</property>
                         <property name="valign">center</property>
+                        <property name="hexpand">True</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
