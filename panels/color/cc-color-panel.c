@@ -901,7 +901,7 @@ gcm_prefs_set_calibrate_button_sensitivity (CcColorPanel *prefs)
     {
 
     /* find whether we have hardware installed */
-    if (priv->sensors->len == 0)
+    if (priv->sensors == NULL || priv->sensors->len == 0)
       {
         /* TRANSLATORS: this is when the button is insensitive */
         tooltip = _("The measuring instrument is not detected. Please check it is turned on and correctly connected.");
