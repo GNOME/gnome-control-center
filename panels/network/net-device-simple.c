@@ -207,7 +207,7 @@ net_device_simple_constructed (GObject *object)
 
         G_OBJECT_CLASS (net_device_simple_parent_class)->constructed (object);
 
-        nm_device_simple_refresh_ui (device_simple);
+        net_object_refresh (NET_OBJECT (device_simple));
 }
 
 static void

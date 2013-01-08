@@ -194,8 +194,8 @@ valid_connections_for_device (NMRemoteSettings *remote_settings,
         return g_slist_reverse (valid);
 }
 
-NMConnection *
-net_device_get_find_connection (NetDevice *device)
+static NMConnection *
+net_device_real_get_find_connection (NetDevice *device)
 {
         GSList *list, *iterator;
         NMConnection *connection = NULL;
@@ -234,6 +234,12 @@ net_device_get_find_connection (NetDevice *device)
 out:
         g_slist_free (list);
         return connection;
+}
+
+NMConnection *
+net_device_get_find_connection (NetDevice *device)
+{
+        return NET_DEVICE_GET_CLASS (device)->get_find_connection (device);
 }
 
 static void
@@ -314,10 +320,13 @@ net_device_set_property (GObject *device_,
                                                      priv->changed_id);
                 }
                 priv->nm_device = g_value_dup_object (value);
-                priv->changed_id = g_signal_connect (priv->nm_device,
-                                                     "state-changed",
-                                                     G_CALLBACK (state_changed_cb),
-                                                     net_device);
+                if (priv->nm_device) {
+                        priv->changed_id = g_signal_connect (priv->nm_device,
+                                                             "state-changed",
+                                                             G_CALLBACK (state_changed_cb),
+                                                             net_device);
+                } else
+                        priv->changed_id = 0;
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (net_device, prop_id, pspec);
@@ -352,6 +361,7 @@ net_device_class_init (NetDeviceClass *klass)
         object_class->get_property = net_device_get_property;
         object_class->set_property = net_device_set_property;
         parent_class->edit = net_device_edit;
+        klass->get_find_connection = net_device_real_get_find_connection;
 
         pspec = g_param_spec_object ("nm-device", NULL, NULL,
                                      NM_TYPE_DEVICE,

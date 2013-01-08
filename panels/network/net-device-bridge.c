@@ -26,17 +26,17 @@
 
 #include <nm-client.h>
 #include <nm-device.h>
-#include <nm-device-bond.h>
+#include <nm-device-bridge.h>
 #include <nm-remote-connection.h>
 
 #include "panel-common.h"
 #include "cc-network-panel.h"
 
-#include "net-device-bond.h"
+#include "net-device-bridge.h"
 
-#define NET_DEVICE_BOND_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_DEVICE_BOND, NetDeviceBondPrivate))
+#define NET_DEVICE_BRIDGE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_DEVICE_BRIDGE, NetDeviceBridgePrivate))
 
-struct _NetDeviceBondPrivate {
+struct _NetDeviceBridgePrivate {
         char *slaves;
 };
 
@@ -46,37 +46,37 @@ enum {
         PROP_LAST
 };
 
-G_DEFINE_TYPE (NetDeviceBond, net_device_bond, NET_TYPE_VIRTUAL_DEVICE)
+G_DEFINE_TYPE (NetDeviceBridge, net_device_bridge, NET_TYPE_VIRTUAL_DEVICE)
 
 static void
-net_device_bond_get_property (GObject *object,
+net_device_bridge_get_property (GObject *object,
                               guint prop_id,
                               GValue *value,
                               GParamSpec *pspec)
 {
-        NetDeviceBond *device_bond = NET_DEVICE_BOND (object);
-        NetDeviceBondPrivate *priv = device_bond->priv;
+        NetDeviceBridge *device_bridge = NET_DEVICE_BRIDGE (object);
+        NetDeviceBridgePrivate *priv = device_bridge->priv;
 
         switch (prop_id) {
         case PROP_SLAVES:
                 g_value_set_string (value, priv->slaves);
                 break;
         default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (device_bond, prop_id, pspec);
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (device_bridge, prop_id, pspec);
                 break;
 
         }
 }
 
 static void
-net_device_bond_constructed (GObject *object)
+net_device_bridge_constructed (GObject *object)
 {
-        NetDeviceBond *device_bond = NET_DEVICE_BOND (object);
+        NetDeviceBridge *device_bridge = NET_DEVICE_BRIDGE (object);
 
-        net_virtual_device_add_row (NET_VIRTUAL_DEVICE (device_bond),
-                                    _("Bond slaves"), "slaves");
+        net_virtual_device_add_row (NET_VIRTUAL_DEVICE (device_bridge),
+                                    _("Bridge slaves"), "slaves");
 
-        G_OBJECT_CLASS (net_device_bond_parent_class)->constructed (object);
+        G_OBJECT_CLASS (net_device_bridge_parent_class)->constructed (object);
 }
 
 static void
@@ -84,9 +84,9 @@ nm_device_slaves_changed (GObject    *object,
                           GParamSpec *pspec,
                           gpointer    user_data)
 {
-        NetDeviceBond *device_bond = NET_DEVICE_BOND (user_data);
-        NetDeviceBondPrivate *priv = device_bond->priv;
-        NMDeviceBond *nm_device = NM_DEVICE_BOND (object);
+        NetDeviceBridge *device_bridge = NET_DEVICE_BRIDGE (user_data);
+        NetDeviceBridgePrivate *priv = device_bridge->priv;
+        NMDeviceBridge *nm_device = NM_DEVICE_BRIDGE (object);
         CcNetworkPanel *panel;
         GPtrArray *net_devices;
         NetDevice *net_device;
@@ -97,14 +97,14 @@ nm_device_slaves_changed (GObject    *object,
 
         g_free (priv->slaves);
 
-        slaves = nm_device_bond_get_slaves (nm_device);
+        slaves = nm_device_bridge_get_slaves (nm_device);
         if (!slaves) {
                 priv->slaves = g_strdup ("(none)");
-                g_object_notify (G_OBJECT (device_bond), "slaves");
+                g_object_notify (G_OBJECT (device_bridge), "slaves");
                 return;
         }
 
-        panel = net_object_get_panel (NET_OBJECT (device_bond));
+        panel = net_object_get_panel (NET_OBJECT (device_bridge));
         net_devices = cc_network_panel_get_devices (panel);
 
         str = g_string_new (NULL);
@@ -124,67 +124,67 @@ nm_device_slaves_changed (GObject    *object,
                         g_string_append (str, nm_device_get_iface (slave));
         }
         priv->slaves = g_string_free (str, FALSE);
-        g_object_notify (G_OBJECT (device_bond), "slaves");
+        g_object_notify (G_OBJECT (device_bridge), "slaves");
 }
 
 static void
-net_device_bond_device_set (NetVirtualDevice *virtual_device,
+net_device_bridge_device_set (NetVirtualDevice *virtual_device,
                             NMDevice         *nm_device)
 {
-        NetDeviceBond *device_bond = NET_DEVICE_BOND (virtual_device);
+        NetDeviceBridge *device_bridge = NET_DEVICE_BRIDGE (virtual_device);
 
         g_signal_connect (nm_device, "notify::slaves",
-                          G_CALLBACK (nm_device_slaves_changed), device_bond);
-        nm_device_slaves_changed (G_OBJECT (nm_device), NULL, device_bond);
+                          G_CALLBACK (nm_device_slaves_changed), device_bridge);
+        nm_device_slaves_changed (G_OBJECT (nm_device), NULL, device_bridge);
 }
 
 static void
-net_device_bond_device_unset (NetVirtualDevice *virtual_device,
+net_device_bridge_device_unset (NetVirtualDevice *virtual_device,
                               NMDevice         *nm_device)
 {
-        NetDeviceBond *device_bond = NET_DEVICE_BOND (virtual_device);
+        NetDeviceBridge *device_bridge = NET_DEVICE_BRIDGE (virtual_device);
 
         g_signal_handlers_disconnect_by_func (nm_device,
                                               G_CALLBACK (nm_device_slaves_changed),
-                                              device_bond);
-        nm_device_slaves_changed (G_OBJECT (nm_device), NULL, device_bond);
+                                              device_bridge);
+        nm_device_slaves_changed (G_OBJECT (nm_device), NULL, device_bridge);
 }
 
 static void
-net_device_bond_finalize (GObject *object)
+net_device_bridge_finalize (GObject *object)
 {
-        NetDeviceBond *device_bond = NET_DEVICE_BOND (object);
-        NetDeviceBondPrivate *priv = device_bond->priv;
+        NetDeviceBridge *device_bridge = NET_DEVICE_BRIDGE (object);
+        NetDeviceBridgePrivate *priv = device_bridge->priv;
 
         g_free (priv->slaves);
 
-        G_OBJECT_CLASS (net_device_bond_parent_class)->finalize (object);
+        G_OBJECT_CLASS (net_device_bridge_parent_class)->finalize (object);
 }
 
 static void
-net_device_bond_class_init (NetDeviceBondClass *klass)
+net_device_bridge_class_init (NetDeviceBridgeClass *klass)
 {
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
         NetVirtualDeviceClass *virtual_device_class = NET_VIRTUAL_DEVICE_CLASS (klass);
         GParamSpec *pspec;
 
-        object_class->constructed = net_device_bond_constructed;
-        object_class->finalize = net_device_bond_finalize;
-        object_class->get_property = net_device_bond_get_property;
+        object_class->constructed = net_device_bridge_constructed;
+        object_class->finalize = net_device_bridge_finalize;
+        object_class->get_property = net_device_bridge_get_property;
 
-        virtual_device_class->device_set = net_device_bond_device_set;
-        virtual_device_class->device_unset = net_device_bond_device_unset;
+        virtual_device_class->device_set = net_device_bridge_device_set;
+        virtual_device_class->device_unset = net_device_bridge_device_unset;
 
         pspec = g_param_spec_string ("slaves", NULL, NULL,
                                      NULL,
                                      G_PARAM_READABLE);
         g_object_class_install_property (object_class, PROP_SLAVES, pspec);
 
-        g_type_class_add_private (klass, sizeof (NetDeviceBondPrivate));
+        g_type_class_add_private (klass, sizeof (NetDeviceBridgePrivate));
 }
 
 static void
-net_device_bond_init (NetDeviceBond *device_bond)
+net_device_bridge_init (NetDeviceBridge *device_bridge)
 {
-        device_bond->priv = NET_DEVICE_BOND_GET_PRIVATE (device_bond);
+        device_bridge->priv = NET_DEVICE_BRIDGE_GET_PRIVATE (device_bridge);
 }
