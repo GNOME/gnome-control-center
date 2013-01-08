@@ -24,8 +24,6 @@
 #include "cc-info-panel.h"
 #include "cc-info-resources.h"
 
-#include <polkit/polkit.h>
-
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
@@ -37,7 +35,6 @@
 #include <glibtop/mem.h>
 #include <glibtop/sysinfo.h>
 
-#include "hostname-helper.h"
 #include "gsd-disk-space-helper.h"
 
 /* Autorun options */
@@ -55,8 +52,6 @@
 /* Session */
 #define GNOME_SESSION_MANAGER_SCHEMA        "org.gnome.desktop.session"
 #define KEY_SESSION_NAME          "session-name"
-
-#define SET_HOSTNAME_TIMEOUT 1
 
 #define WID(w) (GtkWidget *) gtk_builder_get_object (self->priv->builder, w)
 
@@ -111,15 +106,12 @@ struct _CcInfoPanelPrivate
   GDBusConnection     *session_bus;
   GDBusProxy          *pk_proxy;
   GDBusProxy          *pk_transaction_proxy;
-  GDBusProxy          *hostnamed_proxy;
-  guint                set_hostname_timeout_source_id;
 
   GraphicsData  *graphics_data;
 };
 
 static void get_primary_disc_info_start (CcInfoPanel *self);
 static void refresh_update_button (CcInfoPanel *self);
-static void info_panel_set_hostname (CcInfoPanel *self);
 
 typedef struct
 {
@@ -442,47 +434,10 @@ get_graphics_data (void)
   return result;
 }
 
-static gboolean
-set_hostname_timeout (CcInfoPanel *self)
-{
-  self->priv->set_hostname_timeout_source_id = 0;
-
-  info_panel_set_hostname (self);
-
-  return FALSE;
-}
-
-static void
-remove_hostname_timeout (CcInfoPanel *panel)
-{
-  CcInfoPanelPrivate *priv = panel->priv;
-
-  if (priv->set_hostname_timeout_source_id)
-    g_source_remove (priv->set_hostname_timeout_source_id);
-
-  priv->set_hostname_timeout_source_id = 0;
-}
-
-static void
-reset_hostname_timeout (CcInfoPanel *panel)
-{
-  remove_hostname_timeout (panel);
-
-  panel->priv->set_hostname_timeout_source_id = g_timeout_add_seconds (SET_HOSTNAME_TIMEOUT,
-                                                                       (GSourceFunc) set_hostname_timeout,
-                                                                       panel);
-}
-
 static void
 cc_info_panel_dispose (GObject *object)
 {
   CcInfoPanelPrivate *priv = CC_INFO_PANEL (object)->priv;
-
-  if (priv->set_hostname_timeout_source_id)
-    {
-      remove_hostname_timeout (CC_INFO_PANEL (object));
-      set_hostname_timeout (CC_INFO_PANEL (object));
-    }
 
   if (priv->builder != NULL)
     {
@@ -521,7 +476,6 @@ cc_info_panel_finalize (GObject *object)
   g_free (priv->gnome_date);
   g_free (priv->gnome_distributor);
 
-  g_clear_object (&priv->hostnamed_proxy);
   g_clear_object (&priv->media_settings);
 
   G_OBJECT_CLASS (cc_info_panel_parent_class)->finalize (object);
@@ -1564,192 +1518,6 @@ info_panel_setup_selector (CcInfoPanel  *self)
   gtk_widget_show_all (GTK_WIDGET (view));
 }
 
-static char *
-get_hostname_property (CcInfoPanel *self,
-		       const char  *property)
-{
-  GVariant *variant;
-  char *str;
-
-  variant = g_dbus_proxy_get_cached_property (self->priv->hostnamed_proxy,
-                                              property);
-  if (!variant)
-    {
-      GError *error = NULL;
-      GVariant *inner;
-
-      /* Work around systemd-hostname not sending us back
-       * the property value when changing values */
-      variant = g_dbus_proxy_call_sync (self->priv->hostnamed_proxy,
-                                        "org.freedesktop.DBus.Properties.Get",
-                                        g_variant_new ("(ss)", "org.freedesktop.hostname1", property),
-                                        G_DBUS_CALL_FLAGS_NONE,
-                                        -1,
-                                        NULL,
-                                        &error);
-      if (variant == NULL)
-        {
-          g_warning ("Failed to get property '%s': %s", property, error->message);
-          g_error_free (error);
-          return NULL;
-        }
-
-      g_variant_get (variant, "(v)", &inner);
-      str = g_variant_dup_string (inner, NULL);
-      g_variant_unref (variant);
-    }
-  else
-    {
-      str = g_variant_dup_string (variant, NULL);
-      g_variant_unref (variant);
-    }
-
-  return str;
-}
-
-static char *
-info_panel_get_hostname (CcInfoPanel  *self)
-{
-  char *str;
-
-  str = get_hostname_property (self, "PrettyHostname");
-
-  /* Empty strings means that we need to fallback */
-  if (str != NULL &&
-      *str == '\0')
-    {
-      g_free (str);
-      str = get_hostname_property (self, "Hostname");
-    }
-
-  return str;
-}
-
-static void
-info_panel_set_hostname (CcInfoPanel *self)
-{
-  char *hostname;
-  GVariant *variant;
-  GError *error = NULL;
-  const gchar *text;
-
-  text = gtk_entry_get_text (GTK_ENTRY (WID ("name_entry")));
-
-  g_debug ("Setting PrettyHostname to '%s'", text);
-  variant = g_dbus_proxy_call_sync (self->priv->hostnamed_proxy,
-                                    "SetPrettyHostname",
-                                    g_variant_new ("(sb)", text, FALSE),
-                                    G_DBUS_CALL_FLAGS_NONE,
-                                    -1, NULL, &error);
-  if (variant == NULL)
-    {
-      g_warning ("Could not set PrettyHostname: %s", error->message);
-      g_error_free (error);
-      error = NULL;
-    }
-  else
-    {
-      g_variant_unref (variant);
-    }
-
-  /* Set the static and transient hostname */
-  hostname = pretty_hostname_to_static (text, FALSE);
-  g_assert (hostname);
-
-  g_debug ("Setting StaticHostname to '%s'", hostname);
-  variant = g_dbus_proxy_call_sync (self->priv->hostnamed_proxy,
-                                    "SetStaticHostname",
-                                    g_variant_new ("(sb)", hostname, FALSE),
-                                    G_DBUS_CALL_FLAGS_NONE,
-                                    -1, NULL, &error);
-  if (variant == NULL)
-    {
-      g_warning ("Could not set StaticHostname: %s", error->message);
-      g_error_free (error);
-    }
-  else
-    {
-      g_variant_unref (variant);
-    }
-
-  g_debug ("Setting Hostname to '%s'", hostname);
-  variant = g_dbus_proxy_call_sync (self->priv->hostnamed_proxy,
-                                    "SetHostname",
-                                    g_variant_new ("(sb)", hostname, FALSE),
-                                    G_DBUS_CALL_FLAGS_NONE,
-                                    -1, NULL, &error);
-  if (variant == NULL)
-    {
-      g_warning ("Could not set Hostname: %s", error->message);
-      g_error_free (error);
-    }
-  else
-    {
-      g_variant_unref (variant);
-    }
-  g_free (hostname);
-}
-
-static void
-text_changed_cb (GtkEntry        *entry,
-                 CcInfoPanel     *self)
-{
-  reset_hostname_timeout (self);
-}
-
-static void
-info_panel_setup_hostname (CcInfoPanel  *self,
-                           GPermission  *permission)
-{
-  char *str;
-  GtkWidget *entry;
-  GError *error = NULL;
-
-  if (permission == NULL)
-    {
-      g_debug ("Will not show hostname, hostnamed not installed");
-      return;
-    }
-
-  entry = WID ("name_entry");
-
-  if (g_permission_get_allowed (permission))
-    gtk_widget_set_sensitive (entry, TRUE);
-  else
-    g_debug ("Not allowed to change the hostname");
-
-  self->priv->hostnamed_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                                               G_DBUS_PROXY_FLAGS_NONE,
-                                                               NULL,
-                                                               "org.freedesktop.hostname1",
-                                                               "/org/freedesktop/hostname1",
-                                                               "org.freedesktop.hostname1",
-                                                               NULL,
-                                                               &error);
-
-  /* This could only happen if the policy file was installed
-   * but not hostnamed, which points to a system bug */
-  if (self->priv->hostnamed_proxy == NULL)
-    {
-      g_debug ("Couldn't get hostnamed to start, bailing: %s", error->message);
-      g_error_free (error);
-      return;
-    }
-
-  gtk_widget_show (WID ("label4"));
-  gtk_widget_show (entry);
-
-  str = info_panel_get_hostname (self);
-  if (str != NULL)
-    gtk_entry_set_text (GTK_ENTRY (entry), str);
-  else
-    gtk_entry_set_text (GTK_ENTRY (entry), "");
-  g_free (str);
-
-  g_signal_connect (G_OBJECT (entry), "changed",
-		    G_CALLBACK (text_changed_cb), self);
-}
-
 static void
 info_panel_setup_overview (CcInfoPanel  *self)
 {
@@ -1758,11 +1526,6 @@ info_panel_setup_overview (CcInfoPanel  *self)
   glibtop_mem mem;
   const glibtop_sysinfo *info;
   char       *text;
-  GPermission *permission;
-
-  permission = polkit_permission_new_sync ("org.freedesktop.hostname1.set-static-hostname", NULL, NULL, NULL);
-  /* Is hostnamed installed? */
-    info_panel_setup_hostname (self, permission);
 
   res = load_gnome_version (&self->priv->gnome_version,
                             &self->priv->gnome_distributor,

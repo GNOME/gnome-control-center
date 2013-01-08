@@ -4,6 +4,8 @@ INCLUDES =					\
 	$(CHEESE_CFLAGS)			\
 	-I$(top_srcdir)/libgd
 
+all-local: check-local
+
 bin_PROGRAMS = gnome-control-center
 
 BUILT_SOURCES =			\
@@ -31,6 +33,10 @@ gnome_control_center_SOURCES =			\
 	cc-panel.h				\
 	cc-shell.c				\
 	cc-shell.h				\
+	hostname-helper.c			\
+	hostname-helper.h			\
+	cc-hostname-entry.c			\
+	cc-hostname-entry.h			\
 	$(MARSHAL_FILES)
 
 gnome_control_center_LDFLAGS = -export-dynamic
@@ -101,5 +107,15 @@ EXTRA_DIST =					\
 
 CLEANFILES = $(BUILT_SOURCES) $(completion_DATA)
 DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in
+
+noinst_PROGRAMS = test-hostname
+test_hostname_SOURCES = hostname-helper.c hostname-helper.h test-hostname.c
+test_hostname_LDADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
+test_hostname_CFLAGS = $(INCLUDES)
+
+EXTRA_DIST = hostnames-test.txt
+check-local: test-hostname
+	$(builddir)/test-hostname $(srcdir)/hostnames-test.txt > /dev/null
+
 
 -include $(top_srcdir)/git.mk

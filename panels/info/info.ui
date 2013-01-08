@@ -277,8 +277,8 @@
                                 <property name="row_spacing">5</property>
                                 <child>
                                   <object class="GtkLabel" id="label4">
+                                    <property name="visible">True</property>
                                     <property name="can_focus">False</property>
-                                    <property name="no_show_all">True</property>
                                     <property name="xalign">1</property>
                                     <property name="label" translatable="yes">Device name</property>
                                     <property name="mnemonic_widget">name_entry</property>
@@ -352,11 +352,9 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkEntry" id="name_entry">
-                                    <property name="visible">False</property>
+                                  <object class="CcHostnameEntry" id="name_entry">
+                                    <property name="visible">True</property>
                                     <property name="xalign">0</property>
-                                    <property name="text"></property>
-                                    <property name="sensitive">False</property>
                                   </object>
                                   <packing>
                                     <property name="left_attach">1</property>

@@ -123,7 +123,7 @@ PKG_CHECK_MODULES(LIBLANGUAGE, $COMMON_MODULES gnome-desktop-3.0 fontconfig)
 PKG_CHECK_MODULES(LIBSHORTCUTS, $COMMON_MODULES x11)
 # egg-list-box is a static library, so it must be shared among all panels
 # or it breaks GType registration
-PKG_CHECK_MODULES(SHELL, $COMMON_MODULES x11 egg-list-box)
+PKG_CHECK_MODULES(SHELL, $COMMON_MODULES x11 egg-list-box polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
 PKG_CHECK_MODULES(BACKGROUND_PANEL, $COMMON_MODULES libxml-2.0 gnome-desktop-3.0
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION)
 PKG_CHECK_MODULES(DATETIME_PANEL, $COMMON_MODULES
