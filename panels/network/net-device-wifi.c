@@ -1630,13 +1630,6 @@ ap_sort (gconstpointer a, gconstpointer b, gpointer data)
         gboolean aa, ab;
         guint sa, sb;
 
-#if 0
-        aa = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (a), "active"));
-        ab = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (b), "active"));
-        if (aa) return -1;
-        if (ab) return 1;
-#endif
-
         sa = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (a), "strength"));
         sb = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (b), "strength"));
         if (sa > sb) return -1;
