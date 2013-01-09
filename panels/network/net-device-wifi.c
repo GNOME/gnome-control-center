@@ -1710,7 +1710,8 @@ open_history (NetDeviceWifi *device_wifi)
         g_signal_connect_swapped (button, "clicked",
                                   G_CALLBACK (gtk_widget_destroy), dialog);
 
-        forget = gtk_button_new_with_mnemonic (_("_Forget"));
+        /* translators: This is the label for the "Forget wireless network" functionality */
+        forget = gtk_button_new_with_mnemonic (C_("Wi-Fi Network", "_Forget"));
         gtk_widget_show (forget);
         gtk_widget_set_sensitive (forget, FALSE);
         gtk_dialog_add_action_widget (GTK_DIALOG (dialog), forget, 0);
