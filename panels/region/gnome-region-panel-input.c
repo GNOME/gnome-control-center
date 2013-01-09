@@ -1240,6 +1240,18 @@ setup_input_tabs (GtkBuilder    *builder,
                     "changed::" KEY_INPUT_SOURCES,
                     G_CALLBACK (input_sources_changed),
                     builder);
+
+  g_settings_bind (input_sources_settings, "per-window",
+                   WID("per-window-radio-true"), "active",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (input_sources_settings, "per-window",
+                   WID("per-window-radio-false"), "active",
+                   G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
+  /* because we are in delay-apply mode */
+  g_signal_connect_swapped (WID("per-window-radio-true"), "clicked",
+                            G_CALLBACK (g_settings_apply), input_sources_settings);
+  g_signal_connect_swapped (WID("per-window-radio-false"), "clicked",
+                            G_CALLBACK (g_settings_apply), input_sources_settings);
 }
 
 static void
