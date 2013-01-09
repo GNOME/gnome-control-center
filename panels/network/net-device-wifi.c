@@ -1703,7 +1703,7 @@ open_history (NetDeviceWifi *device_wifi)
         gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
         gtk_window_set_default_size (GTK_WINDOW (dialog), 600, 400);
 
-        button = gtk_button_new_with_mnemonic (_("_Close"));
+        button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
         gtk_widget_set_can_default (button, TRUE);
         gtk_widget_show (button);
         gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, 0);
