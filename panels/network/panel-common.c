@@ -488,8 +488,8 @@ panel_set_device_widget_header (GtkBuilder *builder,
         return TRUE;
 }
 
-static gchar *
-get_ipv4_config_address_as_string (NMIP4Config *ip4_config, const char *what)
+gchar *
+panel_get_ip4_address_as_string (NMIP4Config *ip4_config, const char *what)
 {
         const GSList *list;
         struct in_addr addr;
@@ -522,8 +522,8 @@ out:
         return str;
 }
 
-static gchar *
-get_ipv4_config_name_servers_as_string (NMIP4Config *ip4_config)
+gchar *
+panel_get_ip4_dns_as_string (NMIP4Config *ip4_config)
 {
         const GArray *array;
         GString *dns;
@@ -547,8 +547,8 @@ out:
         return str;
 }
 
-static gchar *
-get_ipv6_config_address_as_string (NMIP6Config *ip6_config)
+gchar *
+panel_get_ip6_address_as_string (NMIP6Config *ip6_config)
 {
         const GSList *list;
         const struct in6_addr *addr;
@@ -586,7 +586,7 @@ panel_set_device_widgets (GtkBuilder *builder, NMDevice *device)
         if (ip4_config != NULL) {
 
                 /* IPv4 address */
-                str_tmp = get_ipv4_config_address_as_string (ip4_config, "address");
+                str_tmp = panel_get_ip4_address_as_string (ip4_config, "address");
                 panel_set_device_widget_details (builder,
                                                  "ipv4",
                                                  str_tmp);
@@ -594,14 +594,14 @@ panel_set_device_widgets (GtkBuilder *builder, NMDevice *device)
                 g_free (str_tmp);
 
                 /* IPv4 DNS */
-                str_tmp = get_ipv4_config_name_servers_as_string (ip4_config);
+                str_tmp = panel_get_ip4_dns_as_string (ip4_config);
                 panel_set_device_widget_details (builder,
                                                  "dns",
                                                  str_tmp);
                 g_free (str_tmp);
 
                 /* IPv4 route */
-                str_tmp = get_ipv4_config_address_as_string (ip4_config, "gateway");
+                str_tmp = panel_get_ip4_address_as_string (ip4_config, "gateway");
                 panel_set_device_widget_details (builder,
                                                  "route",
                                                  str_tmp);
@@ -628,7 +628,7 @@ panel_set_device_widgets (GtkBuilder *builder, NMDevice *device)
         /* get IPv6 parameters */
         ip6_config = nm_device_get_ip6_config (device);
         if (ip6_config != NULL) {
-                str_tmp = get_ipv6_config_address_as_string (ip6_config);
+                str_tmp = panel_get_ip6_address_as_string (ip6_config);
                 panel_set_device_widget_details (builder, "ipv6", str_tmp);
                 has_ip6 = str_tmp != NULL;
                 g_free (str_tmp);
@@ -654,22 +654,4 @@ panel_unset_device_widgets (GtkBuilder *builder)
         panel_set_device_widget_details (builder, "ipv6", NULL);
         panel_set_device_widget_details (builder, "dns", NULL);
         panel_set_device_widget_details (builder, "route", NULL);
-}
-
-gchar *
-panel_get_ip4_address_as_string (NMIP4Config *ip4, const gchar *what)
-{
-        return get_ipv4_config_address_as_string (ip4, what);
-}
-
-gchar *
-panel_get_ip4_dns_as_string (NMIP4Config *ip4)
-{
-        return get_ipv4_config_name_servers_as_string (ip4);
-}
-
-gchar *
-panel_get_ip6_address_as_string (NMIP6Config *ip6)
-{
-        return get_ipv6_config_address_as_string (ip6);
 }
