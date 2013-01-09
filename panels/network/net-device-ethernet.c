@@ -185,8 +185,8 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
         }
 
         if (ip4_address && ip6_address) {
-                add_details_row (details, i++, _("IP4 Address"), ip4_address);
-                add_details_row (details, i++, _("IP6 Address"), ip6_address);
+                add_details_row (details, i++, _("IPv4 Address"), ip4_address);
+                add_details_row (details, i++, _("IPv6 Address"), ip6_address);
         } else if (ip4_address) {
                 add_details_row (details, i++, _("IP Address"), ip4_address);
         } else if (ip6_address) {
