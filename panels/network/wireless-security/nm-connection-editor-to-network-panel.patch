@@ -1,0 +1,260 @@
+--- /home/hadess/Projects/jhbuild/network-manager-applet/src/wireless-security/eap-method.c	2012-12-11 15:51:57.191216362 +0100
++++ eap-method.c	2013-01-09 17:58:22.167402957 +0100
+@@ -203,7 +203,7 @@ eap_method_nag_user (EAPMethod *method)
+ 	return method->nag_dialog;
+ }
+ 
+-#define NAG_DIALOG_UI UIDIR "/nag-user-dialog.ui"
++#define NAG_DIALOG_UI "/org/gnome/control-center/network/nag-user-dialog.ui"
+ 
+ static gboolean
+ _get_ignore_ca_cert (const char *uuid, gboolean phase2)
+@@ -237,7 +237,7 @@ eap_method_nag_init (EAPMethod *method,
+ 	g_return_val_if_fail (ca_cert_chooser != NULL, FALSE);
+ 
+ 	method->nag_builder = gtk_builder_new ();
+-	if (!gtk_builder_add_from_file (method->nag_builder, NAG_DIALOG_UI, &error)) {
++	if (!gtk_builder_add_from_resource (method->nag_builder, NAG_DIALOG_UI, &error)) {
+ 		g_warning ("Couldn't load UI builder file " NAG_DIALOG_UI ": %s",
+ 		           error->message);
+ 		g_error_free (error);
+@@ -328,7 +328,7 @@ eap_method_init (gsize obj_size,
+                  EMFillConnectionFunc fill_connection,
+                  EMUpdateSecretsFunc update_secrets,
+                  EMDestroyFunc destroy,
+-                 const char *ui_file,
++                 const char *ui_resource,
+                  const char *ui_widget_name,
+                  const char *default_field,
+                  gboolean phase2)
+@@ -337,7 +337,7 @@ eap_method_init (gsize obj_size,
+ 	GError *error = NULL;
+ 
+ 	g_return_val_if_fail (obj_size > 0, NULL);
+-	g_return_val_if_fail (ui_file != NULL, NULL);
++	g_return_val_if_fail (ui_resource != NULL, NULL);
+ 	g_return_val_if_fail (ui_widget_name != NULL, NULL);
+ 
+ 	method = g_slice_alloc0 (obj_size);
+@@ -354,9 +354,9 @@ eap_method_init (gsize obj_size,
+ 	method->phase2 = phase2;
+ 
+ 	method->builder = gtk_builder_new ();
+-	if (!gtk_builder_add_from_file (method->builder, ui_file, &error)) {
++	if (!gtk_builder_add_from_resource (method->builder, ui_resource, &error)) {
+ 		g_warning ("Couldn't load UI builder file %s: %s",
+-		           ui_file, error->message);
++		           ui_resource, error->message);
+ 		eap_method_unref (method);
+ 		return NULL;
+ 	}
+@@ -364,7 +364,7 @@ eap_method_init (gsize obj_size,
+ 	method->ui_widget = GTK_WIDGET (gtk_builder_get_object (method->builder, ui_widget_name));
+ 	if (!method->ui_widget) {
+ 		g_warning ("Couldn't load UI widget '%s' from UI file %s",
+-		           ui_widget_name, ui_file);
++		           ui_widget_name, ui_resource);
+ 		eap_method_unref (method);
+ 		return NULL;
+ 	}
+--- /home/hadess/Projects/jhbuild/network-manager-applet/src/wireless-security/eap-method-fast.c	2012-12-11 15:47:51.346453837 +0100
++++ eap-method-fast.c	2013-01-09 17:58:22.165402936 +0100
+@@ -343,7 +343,7 @@ eap_method_fast_new (WirelessSecurity *w
+ 	                          fill_connection,
+ 	                          update_secrets,
+ 	                          destroy,
+-	                          UIDIR "/eap-method-fast.ui",
++	                          "/org/gnome/control-center/network/eap-method-fast.ui",
+ 	                          "eap_fast_notebook",
+ 	                          "eap_fast_anon_identity_entry",
+ 	                          FALSE);
+--- /home/hadess/Projects/jhbuild/network-manager-applet/src/wireless-security/eap-method.h	2012-12-11 15:51:57.191216362 +0100
++++ eap-method.h	2013-01-09 17:58:22.167402957 +0100
+@@ -96,7 +96,7 @@ EAPMethod *eap_method_init (gsize obj_si
+                             EMFillConnectionFunc fill_connection,
+                             EMUpdateSecretsFunc update_secrets,
+                             EMDestroyFunc destroy,
+-                            const char *ui_file,
++                            const char *ui_resource,
+                             const char *ui_widget_name,
+                             const char *default_field,
+                             gboolean phase2);
+--- /home/hadess/Projects/jhbuild/network-manager-applet/src/wireless-security/eap-method-leap.c	2012-12-11 15:51:57.190216351 +0100
++++ eap-method-leap.c	2013-01-09 17:58:22.166402947 +0100
+@@ -136,7 +136,7 @@ eap_method_leap_new (WirelessSecurity *w
+ 	                          fill_connection,
+ 	                          update_secrets,
+ 	                          NULL,
+-	                          UIDIR "/eap-method-leap.ui",
++	                          "/org/gnome/control-center/network/eap-method-leap.ui",
+ 	                          "eap_leap_notebook",
+ 	                          "eap_leap_username_entry",
+ 	                          FALSE);
+--- /home/hadess/Projects/jhbuild/network-manager-applet/src/wireless-security/eap-method-peap.c	2012-12-11 15:51:57.190216351 +0100
++++ eap-method-peap.c	2013-01-09 17:58:22.166402947 +0100
+@@ -327,7 +327,7 @@ eap_method_peap_new (WirelessSecurity *w
+ 	                          fill_connection,
+ 	                          update_secrets,
+ 	                          destroy,
+-	                          UIDIR "/eap-method-peap.ui",
++	                          "/org/gnome/control-center/network/eap-method-peap.ui",
+ 	                          "eap_peap_notebook",
+ 	                          "eap_peap_anon_identity_entry",
+ 	                          FALSE);
+--- /home/hadess/Projects/jhbuild/network-manager-applet/src/wireless-security/eap-method-simple.c	2012-12-11 15:51:57.190216351 +0100
++++ eap-method-simple.c	2013-01-09 17:58:22.166402947 +0100
+@@ -229,7 +229,7 @@ eap_method_simple_new (WirelessSecurity
+ 	                          fill_connection,
+ 	                          update_secrets,
+ 	                          NULL,
+-	                          UIDIR "/eap-method-simple.ui",
++	                          "/org/gnome/control-center/network/eap-method-simple.ui",
+ 	                          "eap_simple_notebook",
+ 	                          "eap_simple_username_entry",
+ 	                          phase2);
+--- /home/hadess/Projects/jhbuild/network-manager-applet/src/wireless-security/eap-method-tls.c	2012-12-11 15:51:57.190216351 +0100
++++ eap-method-tls.c	2013-01-09 17:58:22.167402957 +0100
+@@ -401,7 +401,7 @@ eap_method_tls_new (WirelessSecurity *ws
+ 	                          fill_connection,
+ 	                          update_secrets,
+ 	                          NULL,
+-	                          UIDIR "/eap-method-tls.ui",
++	                          "/org/gnome/control-center/network/eap-method-tls.ui",
+ 	                          "eap_tls_notebook",
+ 	                          "eap_tls_identity_entry",
+ 	                          phase2);
+--- /home/hadess/Projects/jhbuild/network-manager-applet/src/wireless-security/eap-method-ttls.c	2012-12-11 15:51:57.190216351 +0100
++++ eap-method-ttls.c	2013-01-09 17:58:22.167402957 +0100
+@@ -327,7 +327,7 @@ eap_method_ttls_new (WirelessSecurity *w
+ 	                          fill_connection,
+ 	                          update_secrets,
+ 	                          destroy,
+-	                          UIDIR "/eap-method-ttls.ui",
++	                          "/org/gnome/control-center/network/eap-method-ttls.ui",
+ 	                          "eap_ttls_notebook",
+ 	                          "eap_ttls_anon_identity_entry",
+ 	                          FALSE);
+--- /home/hadess/Projects/jhbuild/network-manager-applet/src/wireless-security/wireless-security.c	2012-12-11 15:51:57.191216362 +0100
++++ wireless-security.c	2013-01-09 17:58:22.168402968 +0100
+@@ -35,6 +35,7 @@
+ #include <nm-setting-8021x.h>
+ 
+ #include "wireless-security.h"
++#include "wireless-security-resources.h"
+ #include "eap-method.h"
+ 
+ GType
+@@ -43,6 +44,8 @@ wireless_security_get_g_type (void)
+ 	static GType type_id = 0;
+ 
+ 	if (!type_id) {
++		g_resources_register (wireless_security_get_resource ());
++
+ 		type_id = g_boxed_type_register_static ("WirelessSecurity",
+ 		                                        (GBoxedCopyFunc) wireless_security_ref,
+ 		                                        (GBoxedFreeFunc) wireless_security_unref);
+@@ -155,7 +158,7 @@ wireless_security_init (gsize obj_size,
+                         WSFillConnectionFunc fill_connection,
+                         WSUpdateSecretsFunc update_secrets,
+                         WSDestroyFunc destroy,
+-                        const char *ui_file,
++                        const char *ui_resource,
+                         const char *ui_widget_name,
+                         const char *default_field)
+ {
+@@ -163,7 +166,7 @@ wireless_security_init (gsize obj_size,
+ 	GError *error = NULL;
+ 
+ 	g_return_val_if_fail (obj_size > 0, NULL);
+-	g_return_val_if_fail (ui_file != NULL, NULL);
++	g_return_val_if_fail (ui_resource != NULL, NULL);
+ 	g_return_val_if_fail (ui_widget_name != NULL, NULL);
+ 
+ 	sec = g_slice_alloc0 (obj_size);
+@@ -180,9 +183,9 @@ wireless_security_init (gsize obj_size,
+ 	sec->default_field = default_field;
+ 
+ 	sec->builder = gtk_builder_new ();
+-	if (!gtk_builder_add_from_file (sec->builder, ui_file, &error)) {
++	if (!gtk_builder_add_from_resource (sec->builder, ui_resource, &error)) {
+ 		g_warning ("Couldn't load UI builder file %s: %s",
+-		           ui_file, error->message);
++		           ui_resource, error->message);
+ 		g_error_free (error);
+ 		wireless_security_unref (sec);
+ 		return NULL;
+@@ -191,7 +194,7 @@ wireless_security_init (gsize obj_size,
+ 	sec->ui_widget = GTK_WIDGET (gtk_builder_get_object (sec->builder, ui_widget_name));
+ 	if (!sec->ui_widget) {
+ 		g_warning ("Couldn't load UI widget '%s' from UI file %s",
+-		           ui_widget_name, ui_file);
++		           ui_widget_name, ui_resource);
+ 		wireless_security_unref (sec);
+ 		return NULL;
+ 	}
+--- /home/hadess/Projects/jhbuild/network-manager-applet/src/wireless-security/wireless-security.h	2012-12-11 15:51:57.191216362 +0100
++++ wireless-security.h	2013-01-09 17:58:22.168402968 +0100
+@@ -101,7 +101,7 @@ WirelessSecurity *wireless_security_init
+                                           WSFillConnectionFunc fill_connection,
+                                           WSUpdateSecretsFunc update_secrets,
+                                           WSDestroyFunc destroy,
+-                                          const char *ui_file,
++                                          const char *ui_resource,
+                                           const char *ui_widget_name,
+                                           const char *default_field);
+ 
+--- /home/hadess/Projects/jhbuild/network-manager-applet/src/wireless-security/ws-dynamic-wep.c	2012-12-11 15:51:57.191216362 +0100
++++ ws-dynamic-wep.c	2013-01-09 17:58:22.168402968 +0100
+@@ -120,7 +120,7 @@ ws_dynamic_wep_new (NMConnection *connec
+ 	                                 fill_connection,
+ 	                                 update_secrets,
+ 	                                 destroy,
+-	                                 UIDIR "/ws-dynamic-wep.ui",
++	                                 "/org/gnome/control-center/network/ws-dynamic-wep.ui",
+ 	                                 "dynamic_wep_notebook",
+ 	                                 NULL);
+ 	if (!parent)
+--- /home/hadess/Projects/jhbuild/network-manager-applet/src/wireless-security/ws-leap.c	2012-12-11 15:51:57.192216374 +0100
++++ ws-leap.c	2013-01-09 17:58:22.168402968 +0100
+@@ -140,7 +140,7 @@ ws_leap_new (NMConnection *connection, g
+ 	                                 fill_connection,
+ 	                                 update_secrets,
+ 	                                 NULL,
+-	                                 UIDIR "/ws-leap.ui",
++	                                 "/org/gnome/control-center/network/ws-leap.ui",
+ 	                                 "leap_notebook",
+ 	                                 "leap_username_entry");
+ 	if (!parent)
+--- /home/hadess/Projects/jhbuild/network-manager-applet/src/wireless-security/ws-wep-key.c	2012-12-11 15:51:57.192216374 +0100
++++ ws-wep-key.c	2013-01-09 17:58:22.168402968 +0100
+@@ -257,7 +257,7 @@ ws_wep_key_new (NMConnection *connection
+ 	                                 fill_connection,
+ 	                                 update_secrets,
+ 	                                 destroy,
+-	                                 UIDIR "/ws-wep-key.ui",
++	                                 "/org/gnome/control-center/network/ws-wep-key.ui",
+ 	                                 "wep_key_notebook",
+ 	                                 "wep_key_entry");
+ 	if (!parent)
+--- /home/hadess/Projects/jhbuild/network-manager-applet/src/wireless-security/ws-wpa-eap.c	2012-12-11 15:51:57.192216374 +0100
++++ ws-wpa-eap.c	2013-01-09 17:58:22.169402979 +0100
+@@ -116,7 +116,7 @@ ws_wpa_eap_new (NMConnection *connection
+ 	                                 fill_connection,
+ 	                                 update_secrets,
+ 	                                 destroy,
+-	                                 UIDIR "/ws-wpa-eap.ui",
++	                                 "/org/gnome/control-center/network/ws-wpa-eap.ui",
+ 	                                 "wpa_eap_notebook",
+ 	                                 NULL);
+ 	if (!parent)
+--- /home/hadess/Projects/jhbuild/network-manager-applet/src/wireless-security/ws-wpa-psk.c	2012-12-11 15:51:57.192216374 +0100
++++ ws-wpa-psk.c	2013-01-09 17:58:22.169402979 +0100
+@@ -157,7 +157,7 @@ ws_wpa_psk_new (NMConnection *connection
+ 	                                 fill_connection,
+ 	                                 update_secrets,
+ 	                                 NULL,
+-	                                 UIDIR "/ws-wpa-psk.ui",
++	                                 "/org/gnome/control-center/network/ws-wpa-psk.ui",
+ 	                                 "wpa_psk_notebook",
+ 	                                 "wpa_psk_entry");
+ 	if (!parent)

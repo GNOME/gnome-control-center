@@ -4,8 +4,7 @@ BUILT_SOURCES = \
 	wireless-security-resources.h \
 	wireless-security-resources.c
 
-libwireless_security_la_SOURCES = \
-	$(BUILT_SOURCES) \
+NM_APPLET_SOURCES = \
 	wireless-security.h \
 	wireless-security.c \
 	ws-wep-key.h \
@@ -35,6 +34,10 @@ libwireless_security_la_SOURCES = \
 	helpers.h \
 	helpers.c
 
+libwireless_security_la_SOURCES = \
+	$(BUILT_SOURCES) \
+	$(NM_APPLET_SOURCES)
+
 libwireless_security_la_CPPFLAGS = \
 	$(NETWORK_PANEL_CFLAGS) \
         $(NETWORK_MANAGER_CFLAGS)                       \
@@ -50,6 +53,12 @@ wireless-security-resources.c: wireless-security.gresource.xml $(resource_files)
 wireless-security-resources.h: wireless-security.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name wireless_security $<
 
-EXTRA_DIST = \
-	$(resource_files)
+WIRELESS_SECURITY_DIR=$(top_srcdir)/../network-manager-applet/src/wireless-security
+WIRELESS_SECURITY_FILES=$(NM_APPLET_SOURCES)
+update-from-nma:
+	FILES="$(WIRELESS_SECURITY_FILES)" DIR="$(WIRELESS_SECURITY_DIR)" $(top_srcdir)/update-from-gsd.sh && changed=true ; \
+	patch -p0 < $(srcdir)/nm-connection-editor-to-network-panel.patch ; \
+	git commit -m "network: Update wireless-security from network-manager-applet" $(WIRELESS_SECURITY_FILES)
+
+EXTRA_DIST = $(resource_files) nm-connection-editor-to-network-panel.patch
 
