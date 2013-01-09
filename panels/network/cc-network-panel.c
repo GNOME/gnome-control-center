@@ -46,6 +46,7 @@
 #include "panel-common.h"
 
 #include "network-dialogs.h"
+#include "connection-editor/net-connection-editor.h"
 
 CC_PANEL_REGISTER (CcNetworkPanel, cc_network_panel)
 
@@ -1151,45 +1152,25 @@ panel_check_network_manager_version (CcNetworkPanel *panel)
 }
 
 static void
+editor_done (NetConnectionEditor *editor,
+             gboolean             success,
+             gpointer             user_data)
+{
+        g_object_unref (editor);
+}
+
+static void
 add_connection_cb (GtkToolButton *button, CcNetworkPanel *panel)
 {
-        GtkWidget *dialog;
-        gint response;
+        NetConnectionEditor *editor;
+        GtkWindow *toplevel;
 
-        dialog = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
-                                                     "connection_type_dialog"));
-        gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (panel))));
-
-        response = gtk_dialog_run (GTK_DIALOG (dialog));
-
-        gtk_widget_hide (dialog);
-
-        if (response == GTK_RESPONSE_OK) {
-                GtkComboBox *combo;
-                GtkTreeModel *model;
-                GtkTreeIter iter;
-                gchar *type;
-                gchar *cmdline;
-                GError *error;
-
-                combo = GTK_COMBO_BOX (gtk_builder_get_object (panel->priv->builder,
-                                                               "connection_type_combo"));
-                model = gtk_combo_box_get_model (combo);
-                gtk_combo_box_get_active_iter (combo, &iter);
-                type = NULL;
-                gtk_tree_model_get (model, &iter, 1, &type, -1);
-
-                cmdline = g_strdup_printf ("nm-connection-editor --create --type %s", type);
-                g_debug ("Launching '%s'\n", cmdline);
-
-                error = NULL;
-                if (!g_spawn_command_line_async (cmdline, &error)) {
-                        g_warning ("Failed to launch nm-connection-editor: %s", error->message);
-                        g_error_free (error);
-                }
-                g_free (cmdline);
-                g_free (type);
-        }
+        toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (panel)));
+        editor = net_connection_editor_new (toplevel, NULL, NULL, NULL,
+                                            panel->priv->client,
+                                            panel->priv->remote_settings);
+        g_signal_connect (editor, "done", G_CALLBACK (editor_done), panel);
+        net_connection_editor_run (editor);
 }
 
 static void

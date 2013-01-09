@@ -34,8 +34,8 @@ GHashTable *vpn_get_plugins (GError **error);
 
 NMVpnPluginUiInterface *vpn_get_plugin_by_service (const char *service);
 
-typedef void (*VpnImportSuccessCallback) (NMConnection *connection, gpointer user_data);
-void vpn_import (VpnImportSuccessCallback callback, gpointer user_data);
+typedef void (*VpnImportCallback) (NMConnection *connection, gpointer user_data);
+void vpn_import (GtkWindow *parent, VpnImportCallback callback, gpointer user_data);
 
 void vpn_export (NMConnection *connection);
 
