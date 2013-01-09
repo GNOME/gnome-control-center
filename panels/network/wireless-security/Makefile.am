@@ -62,3 +62,4 @@ update-from-nma:
 
 EXTRA_DIST = $(resource_files) nm-connection-editor-to-network-panel.patch
 
+-include $(top_srcdir)/git.mk

@@ -45,3 +45,5 @@ net-connection-editor-resources.h: connection-editor.gresource.xml $(resource_fi
 
 EXTRA_DIST = \
 	$(resource_files)
+
+-include $(top_srcdir)/git.mk
