@@ -164,7 +164,7 @@ vpn_get_plugins (GError **error)
 }
 
 typedef struct {
-	VpnImportSuccessCallback callback;
+	VpnImportCallback callback;
 	gpointer user_data;
 } ActionInfo;
 
@@ -194,14 +194,12 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 		connection = nm_vpn_plugin_ui_interface_import (plugin, filename, &error);
 	}
 
-	if (connection)
-		info->callback (connection, info->user_data);
-	else {
+	if (!connection) {
 		GtkWidget *err_dialog;
 		char *bname = g_path_get_basename (filename);
 
-		err_dialog = gtk_message_dialog_new (NULL,
-		                                     GTK_DIALOG_DESTROY_WITH_PARENT,
+		err_dialog = gtk_message_dialog_new (GTK_WINDOW (dialog),
+		                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 		                                     GTK_MESSAGE_ERROR,
 		                                     GTK_BUTTONS_OK,
 		                                     _("Cannot import VPN connection"));
@@ -211,39 +209,43 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 		g_free (bname);
 		g_signal_connect (err_dialog, "delete-event", G_CALLBACK (gtk_widget_destroy), NULL);
 		g_signal_connect (err_dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
-		gtk_widget_show_all (err_dialog);
-		gtk_window_present (GTK_WINDOW (err_dialog));
+		gtk_dialog_run (GTK_DIALOG (err_dialog));
 	}
-
 	g_clear_error (&error);
 	g_free (filename);
 
 out:
 	gtk_widget_hide (dialog);
 	gtk_widget_destroy (dialog);
+
+	info->callback (connection, info->user_data);
 	g_free (info);
 }
 
 static void
 destroy_import_chooser (GtkWidget *dialog, gpointer user_data)
 {
-	g_free (user_data);
+	ActionInfo *info = (ActionInfo *) user_data;
+
 	gtk_widget_destroy (dialog);
+	info->callback (NULL, info->user_data);
+	g_free (info);
 }
 
 void
-vpn_import (VpnImportSuccessCallback callback, gpointer user_data)
+vpn_import (GtkWindow *parent, VpnImportCallback callback, gpointer user_data)
 {
 	GtkWidget *dialog;
 	ActionInfo *info;
 	const char *home_folder;
 
 	dialog = gtk_file_chooser_dialog_new (_("Select file to import"),
-	                                      NULL,
+	                                      parent,
 	                                      GTK_FILE_CHOOSER_ACTION_OPEN,
 	                                      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 	                                      GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
 	                                      NULL);
+	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 	home_folder = g_get_home_dir ();
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), home_folder);
 
