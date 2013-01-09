@@ -124,8 +124,10 @@ nm_device_simple_refresh_ui (NetDeviceSimple *device_simple)
         status = g_string_new (panel_device_state_to_localized_string (nm_device));
         if (state != NM_DEVICE_STATE_UNAVAILABLE)
                 speed = net_device_simple_get_speed (device_simple);
-        if (speed)
+        if (speed) {
                 g_string_append_printf (status, " - %s", speed);
+                g_free (speed);
+        }
         gtk_label_set_label (GTK_LABEL (widget), status->str);
         g_string_free (status, TRUE);
         gtk_widget_set_tooltip_text (widget,
