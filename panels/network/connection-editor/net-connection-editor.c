@@ -38,6 +38,7 @@
 #include "ce-page-ethernet.h"
 #include "ce-page-8021x-security.h"
 #include "ce-page-vpn.h"
+#include "vpn-helpers.h"
 
 #include "egg-list-box/egg-list-box.h"
 
@@ -276,9 +277,14 @@ net_connection_editor_update_title (NetConnectionEditor *editor)
 {
         gchar *id;
 
-        if (editor->is_new_connection)
-                id = g_strdup (_("New Profile"));
-        else {
+        if (editor->is_new_connection) {
+                if (editor->device) {
+                        id = g_strdup (_("New Profile"));
+                } else {
+                        /* Leave it set to "Add New Connection" */
+                        return;
+                }
+        } else {
                 NMSettingWireless *sw;
                 sw = nm_connection_get_setting_wireless (editor->connection);
                 if (sw) {
@@ -483,6 +489,8 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
         GSList *pages, *l;
         NMSettingConnection *sc;
         const gchar *type;
+        GtkTreeSelection *selection;
+        GtkTreePath *path;
 
         editor->is_new_connection = !nm_remote_settings_get_connection_by_uuid (editor->settings,
                                                                                  nm_connection_get_uuid (connection));
@@ -502,7 +510,8 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
         sc = nm_connection_get_setting_connection (connection);
         type = nm_setting_connection_get_connection_type (sc);
 
-        add_page (editor, ce_page_details_new (editor->connection, editor->client, editor->settings, editor->device, editor->ap));
+        if (!editor->is_new_connection)
+                add_page (editor, ce_page_details_new (editor->connection, editor->client, editor->settings, editor->device, editor->ap));
 
         if (strcmp (type, NM_SETTING_WIRELESS_SETTING_NAME) == 0)
                 add_page (editor, ce_page_security_new (editor->connection, editor->client, editor->settings));
@@ -524,7 +533,8 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
         add_page (editor, ce_page_ip4_new (editor->connection, editor->client, editor->settings));
         add_page (editor, ce_page_ip6_new (editor->connection, editor->client, editor->settings));
 
-        add_page (editor, ce_page_reset_new (editor->connection, editor->client, editor->settings, editor));
+        if (!editor->is_new_connection)
+                add_page (editor, ce_page_reset_new (editor->connection, editor->client, editor->settings, editor));
 
         pages = g_slist_copy (editor->initializing_pages);
         for (l = pages; l; l = l->next) {
@@ -539,6 +549,322 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
                 }
         }
         g_slist_free (pages);
+
+        selection = GTK_TREE_SELECTION (gtk_builder_get_object (editor->builder,
+                                                                "details_page_list_selection"));
+        path = gtk_tree_path_new_first ();
+        gtk_tree_selection_select_path (selection, path);
+        gtk_tree_path_free (path);
+}
+
+static void
+update_separator (GtkWidget **separator,
+                  GtkWidget  *child,
+                  GtkWidget  *before,
+                  gpointer    user_data)
+{
+  if (before == NULL)
+    return;
+
+  if (*separator == NULL)
+    {
+      *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
+      gtk_widget_show (*separator);
+      g_object_ref_sink (*separator);
+    }
+}
+
+typedef struct {
+        const char *name;
+        GType (*type_func) (void);
+} NetConnectionType;
+
+static const NetConnectionType connection_types[] = {
+        { N_("VPN"), nm_setting_vpn_get_type },
+        { N_("Bond"), nm_setting_bond_get_type },
+        { N_("Bridge"), nm_setting_bridge_get_type },
+        { N_("VLAN"), nm_setting_vlan_get_type }
+};
+static const NetConnectionType *vpn_connection_type = &connection_types[0];
+
+static NMConnection *
+complete_connection_for_type (NetConnectionEditor *editor, NMConnection *connection,
+                              const NetConnectionType *connection_type)
+{
+        NMSettingConnection *s_con;
+        NMSetting *s_type;
+        GType connection_gtype;
+
+        if (!connection)
+                connection = nm_connection_new ();
+
+        s_con = nm_connection_get_setting_connection (connection);
+        if (!s_con) {
+                s_con = NM_SETTING_CONNECTION (nm_setting_connection_new ());
+                nm_connection_add_setting (connection, NM_SETTING (s_con));
+        }
+
+        if (!nm_setting_connection_get_uuid (s_con)) {
+                gchar *uuid = nm_utils_uuid_generate ();
+                g_object_set (s_con,
+                              NM_SETTING_CONNECTION_UUID, uuid,
+                              NULL);
+                g_free (uuid);
+        }
+
+        if (!nm_setting_connection_get_id (s_con)) {
+                GSList *connections;
+                gchar *id, *id_pattern;
+
+                connections = nm_remote_settings_list_connections (editor->settings);
+                id_pattern = g_strdup_printf ("%s %%d", _(connection_type->name));
+                id = ce_page_get_next_available_name (connections, id_pattern);
+                g_object_set (s_con,
+                              NM_SETTING_CONNECTION_ID, id,
+                              NULL);
+                g_free (id);
+                g_free (id_pattern);
+                g_slist_free (connections);
+        }
+
+        connection_gtype = connection_type->type_func ();
+        s_type = nm_connection_get_setting (connection, connection_gtype);
+        if (!s_type) {
+                s_type = g_object_new (connection_gtype, NULL);
+                nm_connection_add_setting (connection, s_type);
+        }
+
+        if (!nm_setting_connection_get_connection_type (s_con)) {
+                g_object_set (s_con,
+                              NM_SETTING_CONNECTION_TYPE, nm_setting_get_name (s_type),
+                              NULL);
+        }
+
+        return connection;
+}
+
+static gint
+sort_vpn_plugins (gconstpointer a, gconstpointer b)
+{
+	NMVpnPluginUiInterface *aa = NM_VPN_PLUGIN_UI_INTERFACE (a);
+	NMVpnPluginUiInterface *bb = NM_VPN_PLUGIN_UI_INTERFACE (b);
+	char *aa_desc = NULL, *bb_desc = NULL;
+	int ret;
+
+	g_object_get (aa, NM_VPN_PLUGIN_UI_INTERFACE_NAME, &aa_desc, NULL);
+	g_object_get (bb, NM_VPN_PLUGIN_UI_INTERFACE_NAME, &bb_desc, NULL);
+
+	ret = g_strcmp0 (aa_desc, bb_desc);
+
+	g_free (aa_desc);
+	g_free (bb_desc);
+
+	return ret;
+}
+
+static void
+finish_add_connection (NetConnectionEditor *editor, NMConnection *connection)
+{
+        GtkNotebook *notebook;
+        GtkBin *frame;
+
+        frame = GTK_BIN (gtk_builder_get_object (editor->builder, "details_add_connection_frame"));
+        gtk_widget_destroy (gtk_bin_get_child (frame));
+
+        notebook = GTK_NOTEBOOK (gtk_builder_get_object (editor->builder, "details_toplevel_notebook"));
+        gtk_notebook_set_current_page (notebook, 0);
+        gtk_widget_show (GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_apply_button")));
+
+        if (connection)
+                net_connection_editor_set_connection (editor, connection);
+}
+
+static void
+vpn_import_complete (NMConnection *connection, gpointer user_data)
+{
+        NetConnectionEditor *editor = user_data;
+
+        if (!connection) {
+                /* The import code shows its own error dialogs. */
+                g_signal_emit (editor, signals[DONE], 0, FALSE);
+                return;
+        }
+
+        complete_connection_for_type (editor, connection, vpn_connection_type);
+        finish_add_connection (editor, connection);
+}
+
+static void
+vpn_type_activated (EggListBox *list, GtkWidget *row, NetConnectionEditor *editor)
+{
+        const char *service_name = g_object_get_data (G_OBJECT (row), "service_name");
+        NMConnection *connection;
+        NMSettingVPN *s_vpn;
+        NMSettingConnection *s_con;
+
+        if (!strcmp (service_name, "import")) {
+                vpn_import (GTK_WINDOW (editor->window), vpn_import_complete, editor);
+                return;
+        }
+
+        connection = complete_connection_for_type (editor, NULL, vpn_connection_type);
+        s_vpn = nm_connection_get_setting_vpn (connection);
+        g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, service_name, NULL);
+
+        /* Mark the connection as private to this user, and non-autoconnect */
+        s_con = nm_connection_get_setting_connection (connection);
+        g_object_set (s_con, NM_SETTING_CONNECTION_AUTOCONNECT, FALSE, NULL);
+        nm_setting_connection_add_permission (s_con, "user", g_get_user_name (), NULL);
+
+        finish_add_connection (editor, connection);
+}
+
+static void
+select_vpn_type (NetConnectionEditor *editor, EggListBox *list)
+{
+        GHashTable *vpn_plugins;
+        GHashTableIter vpn_iter;
+        gpointer service_name, vpn_plugin;
+        GList *children, *plugin_list, *iter;
+        GtkWidget *row, *name_label, *desc_label;
+        GError *error = NULL;
+
+        /* Get the available VPN types */
+        vpn_plugins = vpn_get_plugins (&error);
+        if (!vpn_plugins) {
+                net_connection_editor_error_dialog (editor,
+                                                    _("Could not load VPN plugins"),
+                                                    error->message);
+                g_error_free (error);
+                finish_add_connection (editor, NULL);
+                g_signal_emit (editor, signals[DONE], 0, FALSE);
+                return;
+        }
+        plugin_list = NULL;
+        g_hash_table_iter_init (&vpn_iter, vpn_plugins);
+        while (g_hash_table_iter_next (&vpn_iter, &service_name, &vpn_plugin))
+                plugin_list = g_list_prepend (plugin_list, vpn_plugin);
+        plugin_list = g_list_sort (plugin_list, sort_vpn_plugins);
+
+        /* Remove the previous menu contents */
+        children = gtk_container_get_children (GTK_CONTAINER (list));
+        for (iter = children; iter; iter = iter->next)
+                gtk_widget_destroy (iter->data);
+
+        /* Add the VPN types */
+        for (iter = plugin_list; iter; iter = iter->next) {
+                char *name, *desc, *desc_markup, *service_name;
+                GtkStyleContext *context;
+
+                g_object_get (iter->data,
+                              "name", &name,
+                              "desc", &desc,
+                              "service", &service_name,
+                              NULL);
+                desc_markup = g_markup_printf_escaped ("<span size='smaller'>%s</span>", desc);
+
+                row = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+                gtk_widget_set_margin_left (row, 12);
+                gtk_widget_set_margin_right (row, 12);
+                gtk_widget_set_margin_top (row, 12);
+                gtk_widget_set_margin_bottom (row, 12);
+
+                name_label = gtk_label_new (name);
+                gtk_misc_set_alignment (GTK_MISC (name_label), 0.0, 0.5);
+                gtk_box_pack_start (GTK_BOX (row), name_label, FALSE, TRUE, 0);
+
+                desc_label = gtk_label_new (NULL);
+                gtk_label_set_markup (GTK_LABEL (desc_label), desc_markup);
+                gtk_label_set_line_wrap (GTK_LABEL (desc_label), TRUE);
+                gtk_misc_set_alignment (GTK_MISC (desc_label), 0.0, 0.5);
+                context = gtk_widget_get_style_context (desc_label);
+                gtk_style_context_add_class (context, "dim-label");
+                gtk_box_pack_start (GTK_BOX (row), desc_label, FALSE, TRUE, 0);
+
+                g_free (name);
+                g_free (desc);
+                g_free (desc_markup);
+
+                gtk_widget_show_all (row);
+                g_object_set_data_full (G_OBJECT (row), "service_name", service_name, g_free);
+                gtk_container_add (GTK_CONTAINER (list), row);
+        }
+
+        /* Import */
+        row = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+        gtk_widget_set_margin_left (row, 12);
+        gtk_widget_set_margin_right (row, 12);
+        gtk_widget_set_margin_top (row, 12);
+        gtk_widget_set_margin_bottom (row, 12);
+
+        name_label = gtk_label_new (_("Import from file…"));
+        gtk_misc_set_alignment (GTK_MISC (name_label), 0.0, 0.5);
+        gtk_box_pack_start (GTK_BOX (row), name_label, FALSE, TRUE, 0);
+
+        gtk_widget_show_all (row);
+        g_object_set_data (G_OBJECT (row), "service_name", "import");
+        gtk_container_add (GTK_CONTAINER (list), row);
+
+        g_signal_connect (list, "child-activated",
+                          G_CALLBACK (vpn_type_activated), editor);
+}
+
+static void
+connection_type_activated (EggListBox *list, GtkWidget *row, NetConnectionEditor *editor)
+{
+        const NetConnectionType *connection_type = g_object_get_data (G_OBJECT (row), "connection_type");
+        NMConnection *connection;
+
+        g_signal_handlers_disconnect_by_func (list, G_CALLBACK (connection_type_activated), editor);
+
+        if (connection_type == vpn_connection_type) {
+                select_vpn_type (editor, list);
+                return;
+        }
+
+        connection = complete_connection_for_type (editor, NULL, connection_type);
+        finish_add_connection (editor, connection);
+}
+
+static void
+net_connection_editor_add_connection (NetConnectionEditor *editor)
+{
+        GtkNotebook *notebook;
+        GtkContainer *frame;
+        EggListBox *list;
+        int i;
+
+        notebook = GTK_NOTEBOOK (gtk_builder_get_object (editor->builder, "details_toplevel_notebook"));
+        frame = GTK_CONTAINER (gtk_builder_get_object (editor->builder, "details_add_connection_frame"));
+
+        list = egg_list_box_new ();
+        egg_list_box_set_selection_mode (list, GTK_SELECTION_NONE);
+        egg_list_box_set_separator_funcs (list, update_separator, NULL, NULL);
+        g_signal_connect (list, "child-activated",
+                          G_CALLBACK (connection_type_activated), editor);
+
+        for (i = 0; i < G_N_ELEMENTS (connection_types); i++) {
+                GtkWidget *row, *label;
+
+                row = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+                label = gtk_label_new (_(connection_types[i].name));
+                gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+                gtk_widget_set_margin_left (label, 12);
+                gtk_widget_set_margin_right (label, 12);
+                gtk_widget_set_margin_top (label, 12);
+                gtk_widget_set_margin_bottom (label, 12);
+                gtk_box_pack_start (GTK_BOX (row), label, FALSE, TRUE, 0);
+                g_object_set_data (G_OBJECT (row), "connection_type", (gpointer) &connection_types[i]);
+
+                gtk_container_add (GTK_CONTAINER (list), row);
+        }
+
+        gtk_widget_show_all (GTK_WIDGET (list));
+        gtk_container_add (frame, GTK_WIDGET (list));
+
+        gtk_notebook_set_current_page (notebook, 1);
+        gtk_widget_hide (GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_apply_button")));
+        gtk_window_set_title (GTK_WINDOW (editor->window), _("Add Network Connection"));
 }
 
 static void
@@ -586,7 +912,10 @@ net_connection_editor_new (GtkWindow        *parent_window,
         editor->permission_id = g_signal_connect (editor->client, "permission-changed",
                                                   G_CALLBACK (permission_changed), editor);
 
-        net_connection_editor_set_connection (editor, connection);
+        if (connection)
+                net_connection_editor_set_connection (editor, connection);
+        else
+                net_connection_editor_add_connection (editor);
 
         return editor;
 }
