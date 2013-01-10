@@ -343,9 +343,9 @@ get_item_views (GnomeControlCenter *shell)
 }
 
 static gboolean
-keynav_failed (GtkIconView        *current_view,
-               GtkDirectionType    direction,
-               GnomeControlCenter *shell)
+categories_keynav_failed (GtkIconView        *current_view,
+                          GtkDirectionType    direction,
+                          GnomeControlCenter *shell)
 {
   GList *views, *v;
   GtkIconView *new_view;
@@ -766,7 +766,7 @@ add_category_view (GnomeControlCenter *shell,
                     G_CALLBACK (category_focus_out), shell);
   g_signal_connect (cc_shell_category_view_get_item_view (CC_SHELL_CATEGORY_VIEW (categoryview)),
                     "keynav-failed",
-                    G_CALLBACK (keynav_failed), shell);
+                    G_CALLBACK (categories_keynav_failed), shell);
 }
 
 static void
