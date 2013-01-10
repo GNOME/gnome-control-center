@@ -94,6 +94,18 @@ static struct {
 
 static GHashTable *panel_types;
 
+GList *
+cc_panel_loader_get_panels (void)
+{
+  GList *l = NULL;
+  guint i;
+
+  for (i = 0; i < G_N_ELEMENTS (all_panels); i++)
+    l = g_list_prepend (l, (gpointer) all_panels[i].name);
+
+  return g_list_reverse (l);
+}
+
 static int
 parse_categories (GDesktopAppInfo *app)
 {

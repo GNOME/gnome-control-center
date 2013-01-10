@@ -25,6 +25,7 @@
 #include <stdlib.h>
 
 #include "gnome-control-center.h"
+#include "cc-panel-loader.h"
 
 #include <gtk/gtk.h>
 #include <string.h>
@@ -58,12 +59,14 @@ static gboolean verbose = FALSE;
 static gboolean show_help = FALSE;
 static gboolean show_help_gtk = FALSE;
 static gboolean show_help_all = FALSE;
+static gboolean list_panels = FALSE;
 
 const GOptionEntry all_options[] = {
   { "version", 0, G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, option_version_cb, NULL, NULL },
   { "verbose", 'v', 0, G_OPTION_ARG_NONE, &verbose, N_("Enable verbose mode"), NULL },
   { "overview", 'o', 0, G_OPTION_ARG_NONE, &show_overview, N_("Show the overview"), NULL },
   { "search", 's', 0, G_OPTION_ARG_STRING, &search_str, N_("Search for the string"), "SEARCH" },
+  { "list", 'l', 0, G_OPTION_ARG_NONE, &list_panels, N_("List possible panel names and exit"), NULL },
   { "help", 'h', G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &show_help, N_("Show help options"), NULL },
   { "help-all", 0, G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &show_help_all, N_("Show help options"), NULL },
   { "help-gtk", 0, G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_NONE, &show_help_gtk, N_("Show help options"), NULL },
@@ -118,6 +121,21 @@ application_command_line_cb (GApplication  *application,
       g_print ("%s", help);
       g_free (help);
       g_option_context_free (context);
+      return 0;
+    }
+
+  if (list_panels)
+    {
+      GList *panels, *l;
+
+      panels = cc_panel_loader_get_panels ();
+
+      g_print ("%s\n", _("Available panels:"));
+      for (l = panels; l != NULL; l = l->next)
+        g_print ("\t%s\n", (char *) l->data);
+
+      g_list_free (panels);
+
       return 0;
     }
 
