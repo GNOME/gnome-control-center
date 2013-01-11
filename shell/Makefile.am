@@ -1,7 +1,8 @@
 INCLUDES =					\
 	-I$(top_srcdir)				\
 	$(SHELL_CFLAGS)				\
-	$(CHEESE_CFLAGS)
+	$(CHEESE_CFLAGS)			\
+	-I$(top_srcdir)/libgd
 
 bin_PROGRAMS = gnome-control-center
 
@@ -37,6 +38,7 @@ gnome_control_center_LDFLAGS = -export-dynamic
 gnome_control_center_LDADD =						\
 	$(SHELL_LIBS)							\
 	$(CHEESE_LIBS)							\
+	$(top_builddir)/libgd/libgd.la					\
 	$(top_builddir)/panels/background/libbackground.la		\
 	$(top_builddir)/panels/color/libcolor.la			\
 	$(top_builddir)/panels/datetime/libdate_time.la			\

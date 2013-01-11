@@ -29,6 +29,8 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
+#include <libgd/gd-styled-text-renderer.h>
+
 #ifdef HAVE_CHEESE
 #include <clutter-gtk/clutter-gtk.h>
 #endif /* HAVE_CHEESE */
@@ -685,7 +687,8 @@ setup_search (GnomeControlCenter *shell)
   gtk_tree_view_column_set_expand (column, FALSE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (priv->search_view), column);
 
-  renderer = gtk_cell_renderer_text_new ();
+  renderer = gd_styled_text_renderer_new ();
+  gd_styled_text_renderer_add_class (GD_STYLED_TEXT_RENDERER (renderer), "dim-label");
   g_object_set (renderer,
                 "xpad", 15,
                 NULL);
