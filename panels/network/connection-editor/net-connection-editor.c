@@ -37,6 +37,7 @@
 #include "ce-page-reset.h"
 #include "ce-page-ethernet.h"
 #include "ce-page-8021x-security.h"
+#include "ce-page-vpn.h"
 
 #include "egg-list-box/egg-list-box.h"
 
@@ -457,6 +458,8 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
                 add_page (editor, ce_page_wifi_new (editor->connection, editor->client, editor->settings));
         else if (strcmp (type, NM_SETTING_WIRED_SETTING_NAME) == 0)
                 add_page (editor, ce_page_ethernet_new (editor->connection, editor->client, editor->settings));
+        else if (strcmp (type, NM_SETTING_VPN_SETTING_NAME) == 0)
+                add_page (editor, ce_page_vpn_new (editor->connection, editor->client, editor->settings));
 
         add_page (editor, ce_page_ip4_new (editor->connection, editor->client, editor->settings));
         add_page (editor, ce_page_ip6_new (editor->connection, editor->client, editor->settings));
@@ -514,7 +517,8 @@ net_connection_editor_new (GtkWindow        *parent_window,
         }
         if (ap)
                 editor->ap = g_object_ref (ap);
-        editor->device = g_object_ref (device);
+        if (device)
+                editor->device = g_object_ref (device);
         editor->client = g_object_ref (client);
         editor->settings = g_object_ref (settings);
 
