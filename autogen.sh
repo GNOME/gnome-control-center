@@ -5,6 +5,7 @@ srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
 PKG_NAME="control-center"
+ACLOCAL_FLAGS="-I libgd $ACLOCAL_FLAGS"
 
 (test -f $srcdir/configure.ac \
   && test -f $srcdir/autogen.sh \
@@ -19,12 +20,8 @@ DIE=0
 rm -f .using-gnome-libs-package
 
 # Fetch submodules if needed
-if test ! -f egg-list-box/COPYING;
-then
-  echo "+ Setting up submodules"
-  git submodule init
-fi
-git submodule update
+echo "+ Setting up submodules"
+git submodule update --init --recursive
 
 cd egg-list-box
 sh autogen.sh --no-configure

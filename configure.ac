@@ -117,6 +117,8 @@ COMMON_MODULES="gtk+-3.0 >= $GTK_REQUIRED_VERSION
  gsettings-desktop-schemas >= $SCHEMAS_REQUIRED_VERSION
  libnotify >= $LIBNOTIFY_REQUIRED_VERSION"
 
+LIBGD_INIT([_view-common])
+
 PKG_CHECK_MODULES(LIBLANGUAGE, $COMMON_MODULES gnome-desktop-3.0 fontconfig)
 PKG_CHECK_MODULES(LIBSHORTCUTS, $COMMON_MODULES x11)
 # egg-list-box is a static library, so it must be shared among all panels
@@ -502,6 +504,7 @@ panels/wacom/Makefile
 panels/wacom/calibrator/Makefile
 panels/wacom/gnome-wacom-panel.desktop.in
 po/Makefile.in
+libgd/Makefile
 shell/Makefile
 shell/gnome-control-center.desktop.in
 man/Makefile
