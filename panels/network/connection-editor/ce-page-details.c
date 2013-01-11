@@ -128,7 +128,7 @@ connect_details_page (CEPageDetails *page)
         else
                 active_ap = NULL;
 
-        state = nm_device_get_state (page->device);
+        state = page->device ? nm_device_get_state (page->device) : NM_DEVICE_STATE_DISCONNECTED;
 
         device_is_active = FALSE;
         speed = 0;
@@ -136,7 +136,7 @@ connect_details_page (CEPageDetails *page)
                 device_is_active = TRUE;
                 if (NM_IS_DEVICE_WIFI (page->device))
                         speed = nm_device_wifi_get_bitrate (NM_DEVICE_WIFI (page->device)) / 1000;
-        } else {
+        } else if (page->device) {
                 NMActiveConnection *ac;
                 const gchar *p1, *p2;
 

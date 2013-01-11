@@ -31,6 +31,8 @@
 #include "nm-remote-connection.h"
 #include "nm-setting-vpn.h"
 
+#include "connection-editor/net-connection-editor.h"
+
 #define NET_VPN_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_VPN, NetVpnPrivate))
 
 struct _NetVpnPrivate
@@ -382,21 +384,35 @@ edit_connection (GtkButton *button, NetVpn *vpn)
 }
 
 static void
+editor_done (NetConnectionEditor *editor,
+             gboolean             success,
+             NetVpn              *vpn)
+{
+        g_object_unref (editor);
+        net_object_refresh (NET_OBJECT (vpn));
+}
+
+static void
 vpn_proxy_edit (NetObject *object)
 {
-        const gchar *uuid;
-        gchar *cmdline;
-        GError *error = NULL;
         NetVpn *vpn = NET_VPN (object);
+        GtkWidget *button, *window;
+        NetConnectionEditor *editor;
+        NMClient *client;
+        NMRemoteSettings *settings;
 
-        uuid = nm_connection_get_uuid (vpn->priv->connection);
-        cmdline = g_strdup_printf ("nm-connection-editor --edit %s", uuid);
-        g_debug ("Launching '%s'\n", cmdline);
-        if (!g_spawn_command_line_async (cmdline, &error)) {
-                g_warning ("Failed to launch nm-connection-editor: %s", error->message);
-                g_error_free (error);
-        }
-        g_free (cmdline);
+        button = GTK_WIDGET (gtk_builder_get_object (vpn->priv->builder,
+                                                     "button_options"));
+        window = gtk_widget_get_toplevel (button);
+
+        client = net_object_get_client (object);
+        settings = net_object_get_remote_settings (object);
+
+        editor = net_connection_editor_new (GTK_WINDOW (window),
+                                            vpn->priv->connection,
+                                            NULL, NULL, client, settings);
+        g_signal_connect (editor, "done", G_CALLBACK (editor_done), vpn);
+        net_connection_editor_run (editor);
 }
 
 /**
