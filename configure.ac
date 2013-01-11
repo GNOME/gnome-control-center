@@ -182,6 +182,7 @@ AC_SUBST(GDESKTOP_PREFIX)
 # Check for NetworkManager ~0.9
 PKG_CHECK_MODULES(NETWORK_MANAGER, NetworkManager >= $NETWORK_MANAGER_REQUIRED_VERSION
                   libnm-glib >= $NETWORK_MANAGER_REQUIRED_VERSION
+                  libnm-glib-vpn >= $NETWORK_MANAGER_REQUIRED_VERSION
                   libnm-util >= $NETWORK_MANAGER_REQUIRED_VERSION
 		  libnm-gtk >= $NETWORK_MANAGER_APPLET_REQUIRED_VERSION,
                   [have_networkmanager=yes], have_networkmanager=no)
@@ -193,6 +194,15 @@ fi
 AM_CONDITIONAL(BUILD_NETWORK, [test x$have_networkmanager = xyes])
 if test x${have_networkmanager} = xyes; then
   AC_DEFINE(HAVE_NETWORK_MANAGER, 1, [Define to 1 if NetworkManager is available])
+  nm_prefix=`$PKG_CONFIG --variable prefix NetworkManager`
+  if test "$nm_prefix" = "/usr"; then
+     NM_VPN_CONFIG_DIR=/etc/NetworkManager/VPN
+  else
+     NM_VPN_CONFIG_DIR=$nm_prefix/etc/NetworkManager/VPN
+  fi
+  NM_VPN_MODULE_DIR=`$PKG_CONFIG --variable libdir NetworkManager`/NetworkManager
+  AC_SUBST(NM_VPN_CONFIG_DIR)
+  AC_SUBST(NM_VPN_MODULE_DIR)
 fi
 
 # Check for gnome-bluetooth
