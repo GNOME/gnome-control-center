@@ -86,6 +86,7 @@ struct _CcPowerPanelPrivate
   GtkWidget     *device_section;
   GtkWidget     *device_list;
 
+  GtkWidget     *dim_screen_row;
   GtkWidget     *brightness_row;
   GtkWidget     *brightness_scale;
   gboolean       setting_brightness;
@@ -842,6 +843,7 @@ get_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data
         }
 
       gtk_widget_hide (self->priv->brightness_row);
+      gtk_widget_hide (self->priv->dim_screen_row);
 
       if (error->message &&
           strstr (error->message, "No backlight devices present") == NULL)
@@ -1344,29 +1346,17 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_container_add (GTK_CONTAINER (widget), box);
   gtk_size_group_add_widget (priv->row_sizegroup, box);
 
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
+  priv->dim_screen_row = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
 
-  box2 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_widget_set_margin_left (box2, 20);
-  gtk_widget_set_margin_right (box2, 20);
-  gtk_widget_set_margin_top (box2, 6);
-  gtk_widget_set_margin_bottom (box2, 6);
-  gtk_box_pack_start (GTK_BOX (box), box2, TRUE, TRUE, 0);
-
-  /* FIXME: Disabled until we figure out whether we want it implemented
-   * like this */
-#if 0
-  label = gtk_label_new (_("Screen _Power Saving"));
+  label = gtk_label_new (_("Dim Screen when Inactive"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
-  gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
+  gtk_widget_set_margin_left (label, 20);
+  gtk_widget_set_margin_right (label, 20);
+  gtk_widget_set_margin_top (label, 6);
+  gtk_widget_set_margin_bottom (label, 6);
+  gtk_box_pack_start (GTK_BOX (priv->dim_screen_row), label, TRUE, TRUE, 0);
 
-  label = gtk_label_new ("Automatically dims and blanks the screen");
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-  gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
-
-  /* FIXME: implement and use a screen-power-saving setting */
   sw = gtk_switch_new ();
   g_settings_bind (priv->gsd_settings, "idle-dim-battery",
                    sw, "active",
@@ -1374,11 +1364,10 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_widget_set_margin_left (sw, 20);
   gtk_widget_set_margin_right (sw, 20);
   gtk_widget_set_valign (sw, GTK_ALIGN_CENTER);
-  gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
+  gtk_box_pack_start (GTK_BOX (priv->dim_screen_row), sw, FALSE, TRUE, 0);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
-  gtk_container_add (GTK_CONTAINER (widget), box);
-  gtk_size_group_add_widget (priv->row_sizegroup, box);
-#endif
+  gtk_container_add (GTK_CONTAINER (widget), priv->dim_screen_row);
+  gtk_size_group_add_widget (priv->row_sizegroup, priv->dim_screen_row);
 
 #ifdef HAVE_NETWORK_MANAGER
   priv->wifi_row = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
