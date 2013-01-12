@@ -35,6 +35,10 @@
 #include <glibtop/mem.h>
 #include <glibtop/sysinfo.h>
 
+#include <gdk/gdkx.h>
+#include <GL/gl.h>
+#include <GL/glx.h>
+
 #include "gsd-disk-space-helper.h"
 
 /* Autorun options */
@@ -297,54 +301,59 @@ graphics_data_free (GraphicsData *gdata)
 }
 
 static char *
-get_graphics_data_glx_renderer (void)
+get_graphics_data_glx_renderer ()
 {
-  GError     *error;
-  GRegex     *re;
-  GMatchInfo *match_info;
-  char       *output;
-  char       *result;
-  GString    *info;
+  Display *display;
+  int attributes[] = {
+    GLX_DRAWABLE_TYPE, GLX_WINDOW_BIT,
+    GLX_X_VISUAL_TYPE, GLX_TRUE_COLOR,
+    GLX_RENDER_TYPE, GLX_RGBA_BIT,
+    None
+  };
+  int nconfigs;
+  Window window;
+  GLXFBConfig *config;
+  GLXWindow glxwin;
+  GLXContext context;
+  char *renderer;
 
-  info = g_string_new (NULL);
+  gdk_error_trap_push ();
 
-  error = NULL;
-  g_spawn_command_line_sync ("glxinfo -l", &output, NULL, NULL, &error);
-  if (error != NULL)
-    {
-      g_warning ("Unable to get graphics info: %s", error->message);
-      g_error_free (error);
-      return NULL;
-    }
+  display = GDK_DISPLAY_XDISPLAY (gdk_display_get_default ());
 
-  re = g_regex_new ("^OpenGL renderer string: (.+)$", G_REGEX_MULTILINE, 0, &error);
-  if (re == NULL)
-    {
-      g_warning ("Error building regex: %s", error->message);
-      g_error_free (error);
-      goto out;
-    }
+  config = glXChooseFBConfig (display, DefaultScreen (display),
+                              attributes, &nconfigs);
+  if (config == NULL) {
+    g_warning ("Failed to get OpenGL configuration");
 
-  g_regex_match (re, output, 0, &match_info);
-  while (g_match_info_matches (match_info))
-    {
-      char *device;
+    gdk_error_trap_pop_ignored ();
+    return NULL;
+  }
 
-      device = g_match_info_fetch (match_info, 1);
-      g_string_append_printf (info, "%s ", device);
-      g_free (device);
+  window = XCreateSimpleWindow (display, DefaultRootWindow (display),
+                                0, 0, /* x, y */
+                                1, 1, /* width, height */
+                                0, 0, 0  /* border_width, border, background */);
+  glxwin = glXCreateWindow (display, *config, window, NULL);
 
-      g_match_info_next (match_info, NULL);
-    }
-  g_match_info_free (match_info);
-  g_regex_unref (re);
+  context = glXCreateNewContext (display, *config, GLX_RGBA_TYPE,
+                                 NULL, TRUE);
 
- out:
-  g_free (output);
-  result = prettify_info (info->str);
-  g_string_free (info, TRUE);
+  glXMakeContextCurrent (display, glxwin, glxwin, context);
+  renderer = (char *) glGetString (GL_RENDERER);
+  renderer = renderer ? prettify_info (renderer) : NULL;
 
-  return result;
+  glXMakeContextCurrent (display, None, None, NULL);
+  glXDestroyContext (display, context);
+  glXDestroyWindow (display, glxwin);
+  XDestroyWindow (display, window);
+
+  if (gdk_error_trap_pop () != Success) {
+    g_warning ("Failed to get OpenGL driver info");
+    return NULL;
+  }
+
+  return renderer;
 }
 
 static char *
