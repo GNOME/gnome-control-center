@@ -1113,6 +1113,13 @@ window_key_press_event (GtkWidget          *win,
             break;
         }
     }
+  else if ((state == GDK_MOD1_MASK && event->keyval == GDK_KEY_Up) ||
+           event->keyval == GDK_KEY_Back)
+    {
+      if (notebook_get_selected_page (self->priv->notebook) != self->priv->scrolled_window)
+        shell_show_overview_page (self);
+      retval = TRUE;
+    }
   return retval;
 }
 
