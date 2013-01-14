@@ -21,6 +21,8 @@
 
 #include "config.h"
 
+#ifdef HAVE_NM_UNSTABLE
+
 #include <glib-object.h>
 #include <glib/gi18n.h>
 
@@ -188,3 +190,5 @@ net_device_bridge_init (NetDeviceBridge *device_bridge)
 {
         device_bridge->priv = NET_DEVICE_BRIDGE_GET_PRIVATE (device_bridge);
 }
+
+#endif /* HAVE_NM_UNSTABLE */

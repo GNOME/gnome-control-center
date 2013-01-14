@@ -99,8 +99,10 @@ CANBERRA_REQUIRED_VERSION=0.13
 GDKPIXBUF_REQUIRED_VERSION=2.23.0
 POLKIT_REQUIRED_VERSION=0.103
 GSD_REQUIRED_VERSION=3.7.3
-NETWORK_MANAGER_REQUIRED_VERSION=0.9.7.995
-NETWORK_MANAGER_APPLET_REQUIRED_VERSION=0.9.7.995
+NETWORK_MANAGER_REQUIRED_VERSION=0.9.6.4
+NETWORK_MANAGER_DESIRED_VERSION=0.9.7.995
+NETWORK_MANAGER_APPLET_REQUIRED_VERSION=0.9.6
+NETWORK_MANAGER_APPLET_DESIRED_VERSION=0.9.7.995
 LIBNOTIFY_REQUIRED_VERSION=0.7.3
 GNOME_DESKTOP_REQUIRED_VERSION=3.7.5
 SCHEMAS_REQUIRED_VERSION=3.7.2.2
@@ -183,7 +185,7 @@ PKG_CHECK_MODULES(NETWORK_MANAGER, NetworkManager >= $NETWORK_MANAGER_REQUIRED_V
                   libnm-glib >= $NETWORK_MANAGER_REQUIRED_VERSION
                   libnm-glib-vpn >= $NETWORK_MANAGER_REQUIRED_VERSION
                   libnm-util >= $NETWORK_MANAGER_REQUIRED_VERSION
-		  libnm-gtk >= $NETWORK_MANAGER_APPLET_REQUIRED_VERSION,
+                  libnm-gtk >= $NETWORK_MANAGER_APPLET_REQUIRED_VERSION,
                   [have_networkmanager=yes], have_networkmanager=no)
 if test "x$have_networkmanager" = xno ; then
         AC_MSG_WARN(*** Network panel will not be built (NetworkManager $NETWORK_MANAGER_REQUIRED_VERSION or newer not found) ***)
@@ -197,6 +199,11 @@ if test x${have_networkmanager} = xyes; then
   NM_VPN_MODULE_DIR=`$PKG_CONFIG --variable plugindir NetworkManager`
   AC_SUBST(NM_VPN_CONFIG_DIR)
   AC_SUBST(NM_VPN_MODULE_DIR)
+
+  PKG_CHECK_MODULES(NM_UNSTABLE, NetworkManager >= $NETWORK_MANAGER_DESIRED_VERSION
+  				 libnm-gtk >= $NETWORK_MANAGER_APPLET_DESIRED_VERSION,
+                    [AC_DEFINE(HAVE_NM_UNSTABLE, 1, [Define if using NetworkManager and network-manager-applet from git master])],
+		    [:])
 fi
 
 # Check for gnome-bluetooth

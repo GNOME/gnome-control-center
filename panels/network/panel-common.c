@@ -70,6 +70,47 @@ panel_device_to_icon_name (NMDevice *device)
 }
 
 /**
+ * panel_device_to_localized_string:
+ **/
+const gchar *
+panel_device_to_localized_string (NMDevice *device)
+{
+        const gchar *value = NULL;
+        NMDeviceModemCapabilities caps;
+        switch (nm_device_get_device_type (device)) {
+        case NM_DEVICE_TYPE_ETHERNET:
+                /* TRANSLATORS: device type */
+                value = _("Wired");
+                break;
+        case NM_DEVICE_TYPE_WIFI:
+                /* TRANSLATORS: device type */
+                value = _("Wi-Fi");
+                break;
+        case NM_DEVICE_TYPE_MODEM:
+                caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
+                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
+                    (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
+                        /* TRANSLATORS: device type */
+                        value = _("Mobile broadband");
+                }
+                break;
+        case NM_DEVICE_TYPE_BT:
+                /* TRANSLATORS: device type */
+                value = _("Bluetooth");
+                break;
+        case NM_DEVICE_TYPE_OLPC_MESH:
+                /* TRANSLATORS: device type */
+                value = _("Mesh");
+                break;
+        default:
+                /* TRANSLATORS: device type */
+                value = _("Unknown");
+                break;
+        }
+        return value;
+}
+
+/**
  * panel_device_to_sortable_string:
  *
  * Try to return order of approximate connection speed.
