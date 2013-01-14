@@ -345,6 +345,68 @@ get_item_views (GnomeControlCenter *shell)
 }
 
 static gboolean
+is_prev_direction (GtkWidget *widget,
+                   GtkDirectionType direction)
+{
+  if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_LTR &&
+      direction == GTK_DIR_LEFT)
+    return TRUE;
+  if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL &&
+      direction == GTK_DIR_RIGHT)
+    return TRUE;
+  return FALSE;
+}
+
+static gboolean
+is_next_direction (GtkWidget *widget,
+                   GtkDirectionType direction)
+{
+  if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_LTR &&
+      direction == GTK_DIR_RIGHT)
+    return TRUE;
+  if (gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL &&
+      direction == GTK_DIR_LEFT)
+    return TRUE;
+  return FALSE;
+}
+
+static GtkTreePath *
+get_first_path (GtkIconView *view)
+{
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+
+  model = gtk_icon_view_get_model (view);
+  if (!gtk_tree_model_get_iter_first (model, &iter))
+    return NULL;
+  return gtk_tree_model_get_path (model, &iter);
+}
+
+static GtkTreePath *
+get_last_path (GtkIconView *view)
+{
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+  GtkTreePath *path;
+  gboolean ret;
+
+  model = gtk_icon_view_get_model (view);
+  if (!gtk_tree_model_get_iter_first (model, &iter))
+    return NULL;
+
+  ret = TRUE;
+  path = NULL;
+
+  while (ret)
+    {
+      g_clear_pointer (&path, gtk_tree_path_free);
+      path = gtk_tree_model_get_path (model, &iter);
+      ret = gtk_tree_model_iter_next (model, &iter);
+    }
+  return path;
+}
+
+static gboolean
 categories_keynav_failed (GtkIconView        *current_view,
                           GtkDirectionType    direction,
                           GnomeControlCenter *shell)
@@ -367,6 +429,8 @@ categories_keynav_failed (GtkIconView        *current_view,
       if (v->data == current_view)
         break;
     }
+
+  new_view = NULL;
 
   if (direction == GTK_DIR_DOWN && v != NULL && v->next != NULL)
     {
@@ -442,6 +506,70 @@ categories_keynav_failed (GtkIconView        *current_view,
       res = TRUE;
     }
 
+  if (is_prev_direction (GTK_WIDGET (current_view), direction) && v != NULL)
+    {
+      if (gtk_icon_view_get_cursor (current_view, &path, NULL))
+        {
+          if (v->prev)
+            new_view = v->prev->data;
+
+          if (gtk_tree_path_prev (path))
+            {
+              new_view = current_view;
+            }
+          else if (new_view != NULL)
+            {
+              path = get_last_path (new_view);
+            }
+          else
+            {
+              goto out;
+            }
+
+          gtk_icon_view_set_cursor (new_view, path, NULL, FALSE);
+          gtk_icon_view_select_path (new_view, path);
+          gtk_tree_path_free (path);
+          gtk_widget_grab_focus (GTK_WIDGET (new_view));
+
+          res = TRUE;
+        }
+    }
+
+  if (is_next_direction (GTK_WIDGET (current_view), direction) && v != NULL)
+    {
+      if (gtk_icon_view_get_cursor (current_view, &path, NULL))
+        {
+          GtkTreeIter iter;
+
+          if (v->next)
+            new_view = v->next->data;
+
+          gtk_tree_path_next (path);
+          model = gtk_icon_view_get_model (current_view);
+
+          if (gtk_tree_model_get_iter (model, &iter, path))
+            {
+              new_view = current_view;
+            }
+          else if (new_view != NULL)
+            {
+              path = get_first_path (new_view);
+            }
+          else
+            {
+              goto out;
+            }
+
+          gtk_icon_view_set_cursor (new_view, path, NULL, FALSE);
+          gtk_icon_view_select_path (new_view, path);
+          gtk_tree_path_free (path);
+          gtk_widget_grab_focus (GTK_WIDGET (new_view));
+
+          res = TRUE;
+        }
+    }
+
+out:
   g_list_free (views);
 
   return res;
