@@ -165,6 +165,7 @@ PKG_CHECK_MODULES(USER_ACCOUNTS_PANEL, $COMMON_MODULES
                   gdk-pixbuf-2.0 >= $GDKPIXBUF_REQUIRED_VERSION
                   pwquality
                   accountsservice >= $ACCOUNTSSERVICE_REQUIRED_VERSION)
+PKG_CHECK_MODULES(SHARING_PANEL, $COMMON_MODULES egg-list-box)
 
 PKG_CHECK_MODULES(GVC, gobject-2.0 libpulse libpulse-mainloop-glib)
 AM_CONDITIONAL(HAVE_INTROSPECTION, false)
@@ -432,6 +433,8 @@ panels/online-accounts/icons/48x48/Makefile
 panels/online-accounts/icons/256x256/Makefile
 panels/search/Makefile
 panels/search/gnome-search-panel.desktop.in
+panels/sharing/Makefile
+panels/sharing/gnome-sharing-panel.desktop.in
 panels/sound/Makefile
 panels/sound/gvc/Makefile
 panels/sound/data/Makefile

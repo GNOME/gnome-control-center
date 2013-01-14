@@ -1,0 +1,52 @@
+# This is used in PANEL_CFLAGS
+cappletname = sharing
+
+uidir = $(pkgdatadir)/ui/sharing
+
+AM_CPPFLAGS =						\
+	$(PANEL_CFLAGS)					\
+	$(SHARING_PANEL_CFLAGS)				\
+	$(NULL)
+
+noinst_LTLIBRARIES = libsharing.la
+
+BUILT_SOURCES = 		\
+	cc-sharing-resources.c	\
+	cc-sharing-resources.h	\
+	$(NULL)
+
+libsharing_la_SOURCES =		\
+	$(BUILT_SOURCES)	\
+	cc-sharing-panel.c	\
+	cc-sharing-panel.h	\
+	cc-remote-login.c	\
+	cc-remote-login.h	\
+	cc-media-sharing.c	\
+	cc-media-sharing.h	\
+	vino-preferences.c	\
+	vino-preferences.h	\
+	file-share-properties.c \
+	file-share-properties.h \
+	$(NULL)
+
+
+resource_files = $(shell glib-compile-resources --generate-dependencies $(srcdir)/sharing.gresource.xml)
+cc-sharing-resources.c: sharing.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_sharing $<
+cc-sharing-resources.h: sharing.gresource.xml $(resource_files)
+	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name cc_sharing $<
+
+
+libsharing_la_LIBADD = $(PANEL_LIBS) $(SHARING_PANEL_LIBS)
+libsharing_la_LDFLAGS = $(PANEL_LDFLAGS)
+
+@INTLTOOL_DESKTOP_RULE@
+
+desktopdir = $(datadir)/applications
+desktop_in_files = gnome-sharing-panel.desktop.in
+desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+
+CLEANFILES = $(desktop_in_files) $(desktop_DATA)
+EXTRA_DIST = $(resource_files)
+
+-include $(top_srcdir)/git.mk

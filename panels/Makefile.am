@@ -16,7 +16,8 @@ SUBDIRS= \
 	user-accounts \
 	datetime \
 	search \
-	privacy
+	privacy \
+	sharing
 
 if BUILD_WACOM
 SUBDIRS += wacom

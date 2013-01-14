@@ -59,6 +59,7 @@ gnome_control_center_LDADD =						\
 	$(top_builddir)/panels/region/libregion.la			\
 	$(top_builddir)/panels/screen/libscreen.la			\
 	$(top_builddir)/panels/search/libsearch.la			\
+	$(top_builddir)/panels/sharing/libsharing.la			\
 	$(top_builddir)/panels/sound/libsound.la			\
 	$(top_builddir)/panels/universal-access/libuniversal-access.la	\
 	$(top_builddir)/panels/user-accounts/libuser-accounts.la

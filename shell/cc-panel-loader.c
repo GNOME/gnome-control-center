@@ -50,6 +50,7 @@ extern GType cc_privacy_panel_get_type (void);
 extern GType cc_region_panel_get_type (void);
 extern GType cc_screen_panel_get_type (void);
 extern GType cc_search_panel_get_type (void);
+extern GType cc_sharing_panel_get_type (void);
 extern GType cc_sound_panel_get_type (void);
 extern GType cc_ua_panel_get_type (void);
 extern GType cc_user_panel_get_type (void);
@@ -84,6 +85,7 @@ static struct {
   { "region",           cc_region_panel_get_type     },
   { "screen",           cc_screen_panel_get_type     },
   { "search",           cc_search_panel_get_type     },
+  { "sharing",          cc_sharing_panel_get_type    },
   { "sound",            cc_sound_panel_get_type      },
   { "universal-access", cc_ua_panel_get_type         },
   { "user-accounts",    cc_user_panel_get_type       },
