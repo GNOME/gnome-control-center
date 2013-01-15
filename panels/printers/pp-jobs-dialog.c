@@ -429,12 +429,13 @@ pp_jobs_dialog_new (GtkWindow            *parent,
                     gpointer              user_data,
                     gchar                *printer_name)
 {
-  PpJobsDialog *dialog;
-  GtkWidget    *widget;
-  GError       *error = NULL;
-  gchar        *objects[] = { "jobs-dialog", NULL };
-  guint         builder_result;
-  gchar        *title;
+  GtkStyleContext *context;
+  PpJobsDialog    *dialog;
+  GtkWidget       *widget;
+  GError          *error = NULL;
+  gchar           *objects[] = { "jobs-dialog", NULL };
+  guint            builder_result;
+  gchar           *title;
 
   dialog = g_new0 (PpJobsDialog, 1);
 
@@ -478,6 +479,19 @@ pp_jobs_dialog_new (GtkWindow            *parent,
   widget = (GtkWidget*)
     gtk_builder_get_object (dialog->builder, "job-release-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (job_process_cb), dialog);
+
+
+  /* Set junctions */
+  widget = (GtkWidget*)
+    gtk_builder_get_object (dialog->builder, "queue-scrolledwindow");
+  context = gtk_widget_get_style_context (widget);
+  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (dialog->builder, "queue-toolbar");
+  context = gtk_widget_get_style_context (widget);
+  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
+
 
   widget = (GtkWidget*)
     gtk_builder_get_object (dialog->builder, "jobs-title");
