@@ -43,7 +43,6 @@ struct _CcPrivacyPanelPrivate
 
   GSettings  *lockdown_settings;
   GSettings  *lock_settings;
-  GSettings  *shell_settings;
   GSettings  *privacy_settings;
 };
 
@@ -315,7 +314,7 @@ stealth_mode_changed (GSettings   *settings,
   if (stealth_mode)
     {
       g_settings_set_boolean (self->priv->lock_settings, "show-full-name", FALSE);
-      g_settings_set_boolean (self->priv->shell_settings, "show-full-name", FALSE);
+      g_settings_set_boolean (self->priv->privacy_settings, "show-full-name-in-top-bar", FALSE);
     }
 
   w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "full_name_top_bar"));
@@ -350,7 +349,7 @@ add_name_visibility (CcPrivacyPanel *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "full_name_top_bar"));
-  g_settings_bind (self->priv->shell_settings, "show-full-name",
+  g_settings_bind (self->priv->privacy_settings, "show-full-name-in-top-bar",
                    w, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
@@ -613,7 +612,6 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_object (&priv->builder);
   g_clear_object (&priv->lockdown_settings);
   g_clear_object (&priv->lock_settings);
-  g_clear_object (&priv->shell_settings);
   g_clear_object (&priv->privacy_settings);
 
   G_OBJECT_CLASS (cc_privacy_panel_parent_class)->finalize (object);
@@ -700,7 +698,6 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
 
   self->priv->lockdown_settings = g_settings_new ("org.gnome.desktop.lockdown");
   self->priv->lock_settings = g_settings_new ("org.gnome.desktop.screensaver");
-  self->priv->shell_settings = g_settings_new ("org.gnome.shell");
   self->priv->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
 
   add_screen_lock (self);
