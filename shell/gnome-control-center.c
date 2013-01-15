@@ -287,7 +287,6 @@ static void
 item_activated_cb (CcShellCategoryView *view,
                    gchar               *name,
                    gchar               *id,
-                   gchar               *desktop_file,
                    GnomeControlCenter  *shell)
 {
   cc_shell_set_active_panel_from_id (CC_SHELL (shell), id, NULL, NULL);
