@@ -123,7 +123,7 @@ iconview_item_activated_cb (GtkIconView     *icon_view,
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
-  gchar *name, *desktop_file, *id;
+  gchar *name, *id;
 
   model = gtk_icon_view_get_model (icon_view);
 
@@ -135,14 +135,12 @@ iconview_item_activated_cb (GtkIconView     *icon_view,
 
   gtk_tree_model_get (model, &iter,
                       COL_NAME, &name,
-                      COL_DESKTOP_FILE, &desktop_file,
                       COL_ID, &id,
                       -1);
 
   g_signal_emit (cc_view, signals[DESKTOP_ITEM_ACTIVATED], 0,
-                 name, id, desktop_file);
+                 name, id);
 
-  g_free (desktop_file);
   g_free (name);
   g_free (id);
 }
@@ -187,8 +185,7 @@ cc_shell_item_view_class_init (CcShellItemViewClass *klass)
                                                   NULL,
                                                   g_cclosure_marshal_generic,
                                                   G_TYPE_NONE,
-                                                  3,
-                                                  G_TYPE_STRING,
+                                                  2,
                                                   G_TYPE_STRING,
                                                   G_TYPE_STRING);
 }

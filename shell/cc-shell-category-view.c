@@ -129,11 +129,12 @@ cc_shell_category_view_constructed (GObject *object)
   renderer = gtk_cell_renderer_pixbuf_new ();
   g_object_set (renderer,
                 "follow-state", TRUE,
+                "stock-size", GTK_ICON_SIZE_DIALOG,
                 NULL);
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (iconview),
                               renderer, FALSE);
   gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (iconview), renderer,
-                                 "pixbuf", COL_PIXBUF);
+                                 "gicon", COL_GICON);
 
   gtk_icon_view_set_text_column (GTK_ICON_VIEW (iconview), COL_NAME);
   gtk_icon_view_set_item_width (GTK_ICON_VIEW (iconview), 100);

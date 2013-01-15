@@ -61,11 +61,12 @@ typedef enum {
 enum
 {
   COL_NAME,
-  COL_DESKTOP_FILE,
+  COL_CASEFOLDED_NAME,
+  COL_APP,
   COL_ID,
-  COL_PIXBUF,
   COL_CATEGORY,
   COL_DESCRIPTION,
+  COL_CASEFOLDED_DESCRIPTION,
   COL_GICON,
   COL_KEYWORDS,
 
@@ -90,6 +91,10 @@ void cc_shell_model_add_item (CcShellModel   *model,
                               CcPanelCategory category,
                               GAppInfo       *appinfo,
                               const char     *id);
+
+gboolean cc_shell_model_iter_matches_search (CcShellModel *model,
+                                             GtkTreeIter  *iter,
+                                             const char   *term);
 
 G_END_DECLS
 

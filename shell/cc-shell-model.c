@@ -19,10 +19,12 @@
  * Author: Thomas Wood <thos@gnome.org>
  */
 
-#include "cc-shell-model.h"
 #include <string.h>
 
 #include <gio/gdesktopappinfo.h>
+
+#include "cc-shell-model.h"
+#include "cc-util.h"
 
 #define GNOME_SETTINGS_PANEL_ID_KEY "X-GNOME-Settings-Panel"
 #define GNOME_SETTINGS_PANEL_CATEGORY GNOME_SETTINGS_PANEL_ID_KEY
@@ -30,73 +32,6 @@
 
 
 G_DEFINE_TYPE (CcShellModel, cc_shell_model, GTK_TYPE_LIST_STORE)
-
-static GdkPixbuf *
-load_pixbuf_for_gicon (GIcon *icon)
-{
-  GtkIconTheme *theme;
-  GtkIconInfo *icon_info;
-  GdkPixbuf *pixbuf = NULL;
-  GError *err = NULL;
-
-  if (icon == NULL)
-    return NULL;
-
-  theme = gtk_icon_theme_get_default ();
-
-  icon_info = gtk_icon_theme_lookup_by_gicon (theme, icon,
-                                              48, GTK_ICON_LOOKUP_FORCE_SIZE);
-  if (icon_info)
-    {
-      pixbuf = gtk_icon_info_load_icon (icon_info, &err);
-      if (err)
-        {
-          g_warning ("Could not load icon '%s': %s",
-                     gtk_icon_info_get_filename (icon_info), err->message);
-          g_error_free (err);
-        }
-
-      gtk_icon_info_free (icon_info);
-    }
-  else
-    {
-      char *name;
-
-      name = g_icon_to_string (icon);
-      g_warning ("Could not find icon '%s'", name);
-      g_free (name);
-    }
-
-  return pixbuf;
-}
-
-static void
-icon_theme_changed (GtkIconTheme *theme,
-                    CcShellModel *self)
-{
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  gboolean cont;
-
-  model = GTK_TREE_MODEL (self);
-  cont = gtk_tree_model_get_iter_first (model, &iter);
-  while (cont)
-    {
-      GdkPixbuf *pixbuf;
-      GIcon *icon;
-
-      gtk_tree_model_get (model, &iter,
-                          COL_GICON, &icon,
-                          -1);
-      pixbuf = load_pixbuf_for_gicon (icon);
-      g_object_unref (icon);
-      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-                          COL_PIXBUF, pixbuf,
-                          -1);
-
-      cont = gtk_tree_model_iter_next (model, &iter);
-    }
-}
 
 static void
 cc_shell_model_class_init (CcShellModelClass *klass)
@@ -106,23 +41,38 @@ cc_shell_model_class_init (CcShellModelClass *klass)
 static void
 cc_shell_model_init (CcShellModel *self)
 {
-  GType types[] = {G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING,
-      GDK_TYPE_PIXBUF, G_TYPE_UINT, G_TYPE_STRING, G_TYPE_ICON, G_TYPE_STRV};
+  GType types[] = {G_TYPE_STRING, G_TYPE_STRING, G_TYPE_APP_INFO, G_TYPE_STRING,
+                   G_TYPE_UINT, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_ICON, G_TYPE_STRV};
 
   gtk_list_store_set_column_types (GTK_LIST_STORE (self),
                                    N_COLS, types);
 
   gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (self), COL_NAME,
                                         GTK_SORT_ASCENDING);
-
-  g_signal_connect (G_OBJECT (gtk_icon_theme_get_default ()), "changed",
-                    G_CALLBACK (icon_theme_changed), self);
 }
 
 CcShellModel *
 cc_shell_model_new (void)
 {
   return g_object_new (CC_TYPE_SHELL_MODEL, NULL);
+}
+
+static char **
+get_casefolded_keywords (GAppInfo *appinfo)
+{
+  const char * const * keywords;
+  char **casefolded_keywords;
+  int i, n;
+
+  keywords = g_desktop_app_info_get_keywords (G_DESKTOP_APP_INFO (appinfo));
+  n = keywords ? g_strv_length ((char**) keywords) : 0;
+  casefolded_keywords = g_new (char*, n+1);
+
+  for (i = 0; i < n; i++)
+    casefolded_keywords[i] = cc_util_normalize_casefold_and_unaccent (keywords[i]);
+  casefolded_keywords[n] = NULL;
+
+  return casefolded_keywords;
 }
 
 void
@@ -133,23 +83,62 @@ cc_shell_model_add_item (CcShellModel    *model,
 {
   GIcon       *icon = g_app_info_get_icon (appinfo);
   const gchar *name = g_app_info_get_name (appinfo);
-  const gchar *desktop = g_desktop_app_info_get_filename (G_DESKTOP_APP_INFO (appinfo));
   const gchar *comment = g_app_info_get_description (appinfo);
-  GdkPixbuf *pixbuf = NULL;
-  const char * const * keywords;
+  char **keywords;
+  char *casefolded_name, *casefolded_description;
 
-  keywords = g_desktop_app_info_get_keywords (G_DESKTOP_APP_INFO (appinfo));
-
-  pixbuf = load_pixbuf_for_gicon (icon);
+  casefolded_name = cc_util_normalize_casefold_and_unaccent (name);
+  casefolded_description = cc_util_normalize_casefold_and_unaccent (comment);
+  keywords = get_casefolded_keywords (appinfo);
 
   gtk_list_store_insert_with_values (GTK_LIST_STORE (model), NULL, 0,
                                      COL_NAME, name,
-                                     COL_DESKTOP_FILE, desktop,
+                                     COL_CASEFOLDED_NAME, casefolded_name,
+                                     COL_APP, appinfo,
                                      COL_ID, id,
-                                     COL_PIXBUF, pixbuf,
                                      COL_CATEGORY, category,
                                      COL_DESCRIPTION, comment,
+                                     COL_CASEFOLDED_DESCRIPTION, casefolded_description,
                                      COL_GICON, icon,
                                      COL_KEYWORDS, keywords,
                                      -1);
+
+  g_free (casefolded_name);
+  g_free (casefolded_description);
+  g_strfreev (keywords);
+}
+
+gboolean
+cc_shell_model_iter_matches_search (CcShellModel *model,
+                                    GtkTreeIter  *iter,
+                                    const char   *term)
+{
+  gchar *name, *description;
+  gboolean result;
+  gchar **keywords;
+
+  gtk_tree_model_get (GTK_TREE_MODEL (model), iter,
+                      COL_CASEFOLDED_NAME, &name,
+                      COL_CASEFOLDED_DESCRIPTION, &description,
+                      COL_KEYWORDS, &keywords,
+                      -1);
+
+  result = (strstr (name, term) != NULL);
+
+  if (!result && description)
+    result = (strstr (description, term) != NULL);
+
+  if (!result && keywords)
+    {
+      gint i;
+
+      for (i = 0; !result && keywords[i]; i++)
+        result = (strstr (keywords[i], term) == keywords[i]);
+    }
+
+  g_free (name);
+  g_free (description);
+  g_strfreev (keywords);
+
+  return result;
 }

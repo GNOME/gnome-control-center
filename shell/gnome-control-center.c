@@ -40,6 +40,7 @@
 #include "cc-shell-category-view.h"
 #include "cc-shell-model.h"
 #include "cc-panel-loader.h"
+#include "cc-util.h"
 
 G_DEFINE_TYPE (GnomeControlCenter, gnome_control_center, CC_TYPE_SHELL)
 
@@ -176,7 +177,6 @@ static gboolean
 activate_panel (GnomeControlCenter *shell,
                 const gchar        *id,
 		const gchar       **argv,
-                const gchar        *desktop_file,
                 const gchar        *name,
                 GIcon              *gicon)
 {
@@ -184,8 +184,6 @@ activate_panel (GnomeControlCenter *shell,
   GtkWidget *box;
   const gchar *icon_name;
 
-  if (!desktop_file)
-    return FALSE;
   if (!id)
     return FALSE;
 
@@ -580,47 +578,12 @@ model_filter_func (GtkTreeModel              *model,
                    GtkTreeIter               *iter,
                    GnomeControlCenterPrivate *priv)
 {
-  gchar *name;
-  gchar *needle, *haystack;
-  gboolean result;
-  gchar **keywords;
+  if (!priv->filter_string)
+    return FALSE;
 
-  gtk_tree_model_get (model, iter,
-                      COL_NAME, &name,
-                      COL_KEYWORDS, &keywords,
-                      -1);
-
-  if (!priv->filter_string || !name)
-    {
-      g_free (name);
-      g_strfreev (keywords);
-      return FALSE;
-    }
-
-  needle = g_utf8_casefold (priv->filter_string, -1);
-  haystack = g_utf8_casefold (name, -1);
-
-  result = (strstr (haystack, needle) != NULL);
-
-  if (!result && keywords)
-    {
-      gint i;
-      gchar *keyword;
-
-      for (i = 0; !result && keywords[i]; i++)
-        {
-          keyword = g_utf8_casefold (keywords[i], -1);
-          result = strstr (keyword, needle) == keyword;
-          g_free (keyword);
-        }
-    }
-
-  g_free (name);
-  g_free (haystack);
-  g_free (needle);
-  g_strfreev (keywords);
-
-  return result;
+  return cc_shell_model_iter_matches_search (CC_SHELL_MODEL (model),
+                                             iter,
+                                             priv->filter_string);
 }
 
 static gboolean
@@ -647,7 +610,7 @@ search_entry_changed_cb (GtkEntry           *entry,
     return;
 
   /* Don't re-filter for added trailing or leading spaces */
-  str = g_strdup (gtk_entry_get_text (entry));
+  str = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (entry));
   g_strstrip (str);
   if (!g_strcmp0 (str, priv->filter_string))
     {
@@ -991,7 +954,6 @@ _shell_set_active_panel_from_id (CcShell      *shell,
   GtkTreeIter iter;
   gboolean iter_valid;
   gchar *name = NULL;
-  gchar *desktop = NULL;
   GIcon *gicon = NULL;
   GnomeControlCenterPrivate *priv = GNOME_CONTROL_CENTER (shell)->priv;
   GtkWidget *old_panel;
@@ -1016,7 +978,6 @@ _shell_set_active_panel_from_id (CcShell      *shell,
 
       gtk_tree_model_get (GTK_TREE_MODEL (priv->store), &iter,
                           COL_NAME, &name,
-                          COL_DESKTOP_FILE, &desktop,
                           COL_GICON, &gicon,
                           COL_ID, &id,
                           -1);
@@ -1030,13 +991,11 @@ _shell_set_active_panel_from_id (CcShell      *shell,
         {
           g_free (id);
           g_free (name);
-          g_free (desktop);
 	  if (gicon)
 	    g_object_unref (gicon);
 
           name = NULL;
           id = NULL;
-          desktop = NULL;
           gicon = NULL;
         }
 
@@ -1050,7 +1009,7 @@ _shell_set_active_panel_from_id (CcShell      *shell,
     {
       g_warning ("Could not find settings panel \"%s\"", start_id);
     }
-  else if (activate_panel (GNOME_CONTROL_CENTER (shell), start_id, argv, desktop,
+  else if (activate_panel (GNOME_CONTROL_CENTER (shell), start_id, argv,
                            name, gicon) == FALSE)
     {
       /* Failed to activate the panel for some reason,
@@ -1067,7 +1026,6 @@ _shell_set_active_panel_from_id (CcShell      *shell,
     }
 
   g_free (name);
-  g_free (desktop);
   if (gicon)
     g_object_unref (gicon);
 

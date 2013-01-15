@@ -33,6 +33,8 @@ gnome_control_center_SOURCES =			\
 	cc-panel.h				\
 	cc-shell.c				\
 	cc-shell.h				\
+	cc-util.c				\
+	cc-util.h				\
 	hostname-helper.c			\
 	hostname-helper.h			\
 	cc-hostname-entry.c			\
