@@ -46,7 +46,7 @@ desktopdir = $(datadir)/applications
 desktop_in_files = gnome-sharing-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
-CLEANFILES = $(desktop_in_files) $(desktop_DATA)
-EXTRA_DIST = $(resource_files)
+CLEANFILES = $(desktop_in_files) $(desktop_DATA) $(BUILT_SOURCES)
+EXTRA_DIST = $(resource_files) sharing.gresource.xml
 
 -include $(top_srcdir)/git.mk
