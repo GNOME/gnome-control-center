@@ -229,19 +229,13 @@
           </packing>
         </child>
         <child>
-          <object class="GtkScrolledWindow" id="scrolledwindow2">
-            <property name="width_request">400</property>
+          <object class="GtkFrame" id="frame1">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="vexpand">True</property>
-            <property name="vscrollbar_policy">never</property>
+            <property name="can_focus">False</property>
+            <property name="label_xalign">0</property>
             <property name="shadow_type">in</property>
             <child>
-              <object class="GtkViewport" id="viewport1">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <child>
-                  <object class="EggListBox" id="main-list-box">
+              <object class="EggListBox" id="main-list-box">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -410,8 +404,6 @@
                       </object>
                     </child>
                   </object>
-                </child>
-              </object>
             </child>
           </object>
           <packing>
