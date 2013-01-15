@@ -92,6 +92,8 @@ frob_account_dialog_SOURCES = \
 	um-realm-manager.h \
 	um-utils.h \
 	um-utils.c \
+	pw-utils.h \
+	pw-utils.c \
 	$(BUILT_SOURCES)
 
 frob_account_dialog_LDADD = \

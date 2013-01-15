@@ -25,10 +25,14 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <act/act.h>
+#include <resolv.h>
 
 #include "um-account-dialog.h"
 #include "um-realm-manager.h"
 #include "um-utils.h"
+#include "pw-utils.h"
+
+#define PASSWORD_CHECK_TIMEOUT 1000
 
 typedef enum {
         UM_LOCAL,
@@ -65,18 +69,23 @@ struct _UmAccountDialog {
         GCancellable *cancellable;
         GPermission *permission;
         GtkSpinner *spinner;
-
-        /* Buttons to switch modes between local/enterprise */
         UmAccountMode mode;
-        GtkWidget *mode_container;
-        gboolean mode_updating;
-        GtkWidget *mode_buttons[NUM_MODES];
         GtkWidget *mode_areas[NUM_MODES];
 
         /* Local user account widgets */
         GtkWidget *local_username;
         GtkWidget *local_name;
+        GtkWidget *local_username_hint;
+        gint       local_username_timeout_id;
         GtkWidget *local_account_type;
+        ActUserPasswordMode local_password_mode;
+        GtkWidget *local_password_radio;
+        GtkWidget *local_password;
+        GtkWidget *local_verify;
+        gint       local_password_timeout_id;
+        GtkWidget *local_strength;
+        GtkWidget *local_strength_indicator;
+        GtkWidget *local_hint;
 
         /* Enterprise widgets */
         guint realmd_watch;
@@ -84,11 +93,15 @@ struct _UmAccountDialog {
         GtkListStore *enterprise_realms;
         GtkComboBox *enterprise_domain;
         GtkEntry *enterprise_domain_entry;
-        gboolean enterprise_domain_chosen;
         GtkEntry *enterprise_login;
         GtkEntry *enterprise_password;
         UmRealmManager *realm_manager;
         UmRealmObject *selected_realm;
+        gboolean enterprise_check_credentials;
+        GtkSpinner *enterprise_spinner;
+        GtkWidget *enterprise_checkmark;
+        GtkWidget *enterprise_hint;
+        gint       enterprise_domain_timeout_id;
 
         /* Join credential dialog */
         GtkDialog *join_dialog;
@@ -130,25 +143,37 @@ show_error_dialog (UmAccountDialog *self,
 static void
 begin_action (UmAccountDialog *self)
 {
+        GtkSpinner *spinner;
+
         g_debug ("Beginning action, disabling dialog controls");
 
-        gtk_widget_set_sensitive (self->container_widget, FALSE);
+        if (self->enterprise_check_credentials) {
+                gtk_widget_set_sensitive (self->container_widget, FALSE);
+        }
+        gtk_widget_set_sensitive (self->enterprise_button, FALSE);
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, FALSE);
 
-        gtk_widget_show (GTK_WIDGET (self->spinner));
-        gtk_spinner_start (self->spinner);
+        spinner = self->enterprise_check_credentials ? self->spinner : self->enterprise_spinner;
+        gtk_widget_show (GTK_WIDGET (spinner));
+        gtk_spinner_start (spinner);
 }
 
 static void
 finish_action (UmAccountDialog *self)
 {
-        g_debug ("Completed action, enabling dialog controls");
+        GtkSpinner *spinner;
 
-        gtk_widget_set_sensitive (self->container_widget, TRUE);
+        g_debug ("Completed domain action");
+
+        if (self->enterprise_check_credentials) {
+                gtk_widget_set_sensitive (self->container_widget, TRUE);
+        }
+        gtk_widget_set_sensitive (self->enterprise_button, TRUE);
         gtk_dialog_set_response_sensitive (GTK_DIALOG (self), GTK_RESPONSE_OK, TRUE);
 
-        gtk_widget_hide (GTK_WIDGET (self->spinner));
-        gtk_spinner_stop (self->spinner);
+        spinner = self->enterprise_check_credentials ? self->spinner : self->enterprise_spinner;
+        gtk_widget_hide (GTK_WIDGET (spinner));
+        gtk_spinner_stop (spinner);
 }
 
 static void
@@ -172,6 +197,7 @@ create_user_done (ActUserManager  *manager,
 {
         ActUser *user;
         GError *error;
+        const gchar *password;
 
         finish_action (self);
 
@@ -188,6 +214,14 @@ create_user_done (ActUserManager  *manager,
                 gtk_widget_grab_focus (self->local_name);
         } else {
                 g_debug ("Created user: %s", act_user_get_user_name (user));
+
+                /* Set a password for the user */
+                password = gtk_entry_get_text (GTK_ENTRY (self->local_password));
+                act_user_set_password_mode (user, self->local_password_mode);
+                if (self->local_password_mode == ACT_USER_PASSWORD_MODE_REGULAR) {
+                        act_user_set_password (user, password, "");
+                }
+
                 complete_dialog (self, user);
         }
 }
@@ -222,14 +256,53 @@ local_create_user (UmAccountDialog *self)
                                             self);
 }
 
+static gint
+update_password_strength (UmAccountDialog *self)
+{
+        const gchar *password;
+        const gchar *username;
+        const gchar *hint;
+        const gchar *long_hint;
+        const gchar *verify;
+        const gchar *strength_hint;
+        gint strength_level;
+
+        password = gtk_entry_get_text (GTK_ENTRY (self->local_password));
+        username = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (self->local_username));
+
+        pw_strength (password, NULL, username, &hint, &long_hint, &strength_level);
+
+        if (strlen (password) == 0) {
+                strength_hint = "";
+        } else {
+                strength_hint = hint;
+        }
+
+        gtk_label_set_label (GTK_LABEL (self->local_strength), strength_hint);
+        gtk_label_set_label (GTK_LABEL (self->local_hint), long_hint);
+        gtk_level_bar_set_value (GTK_LEVEL_BAR (self->local_strength_indicator), strength_level);
+
+        verify = gtk_entry_get_text (GTK_ENTRY (self->local_verify));
+        if (strlen (verify) == 0) {
+                gtk_widget_set_sensitive (self->local_verify, strength_level > 0);
+        }
+
+        return strength_level;
+}
+
 static gboolean
 local_validate (UmAccountDialog *self)
 {
         gboolean valid_login;
         gboolean valid_name;
+        gboolean valid_password;
         GtkWidget *entry;
         const gchar *name;
+        const gchar *password;
+        const gchar *verify;
         gchar *tip;
+        gchar *hint;
+        gint strength;
 
         name = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (self->local_username));
         valid_login = is_valid_username (name, &tip);
@@ -237,22 +310,71 @@ local_validate (UmAccountDialog *self)
         entry = gtk_bin_get_child (GTK_BIN (self->local_username));
         if (tip) {
                 set_entry_validation_error (GTK_ENTRY (entry), tip);
+                hint = g_strdup_printf ("%s.", tip);
                 g_free (tip);
         } else {
                 clear_entry_validation_error (GTK_ENTRY (entry));
+                hint = g_strdup (_("This will be used to name your home folder and can't be changed."));
         }
+        gtk_label_set_label (GTK_LABEL (self->local_username_hint), hint);
+        g_free (hint);
 
         name = gtk_entry_get_text (GTK_ENTRY (self->local_name));
         valid_name = is_valid_name (name);
 
-        return valid_name && valid_login;
+        password = gtk_entry_get_text (GTK_ENTRY (self->local_password));
+        verify = gtk_entry_get_text (GTK_ENTRY (self->local_verify));
+        if (self->local_password_mode == ACT_USER_PASSWORD_MODE_REGULAR) {
+                strength = update_password_strength (self);
+                valid_password = strength > 0 && strcmp (password, verify) == 0;
+        } else {
+                valid_password = TRUE;
+        }
+
+        return valid_name && valid_login && valid_password;
+}
+
+static gboolean
+local_username_timeout (UmAccountDialog *self)
+{
+        dialog_validate (self);
+
+        return FALSE;
+}
+
+static gboolean
+on_username_focus_out (GtkEntry *entry,
+                       GParamSpec *pspec,
+                       gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+
+        if (self->local_username_timeout_id != 0) {
+                g_source_remove (self->local_username_timeout_id);
+                self->local_username_timeout_id = 0;
+        }
+
+        local_username_timeout (self);
+
+        return FALSE;
 }
 
 static void
 on_username_changed (GtkComboBoxText *combo,
                      gpointer         user_data)
 {
-        dialog_validate (UM_ACCOUNT_DIALOG (user_data));
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        GtkWidget *entry;
+
+        if (self->local_username_timeout_id != 0) {
+                g_source_remove (self->local_username_timeout_id);
+                self->local_username_timeout_id = 0;
+        }
+
+        entry = gtk_bin_get_child (GTK_BIN (self->local_username));
+        clear_entry_validation_error (GTK_ENTRY (entry));
+
+        self->local_username_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) local_username_timeout, self);
 }
 
 static void
@@ -274,6 +396,96 @@ on_name_changed (GtkEditable *editable,
 }
 
 static void
+update_password_match (UmAccountDialog *self)
+{
+        const gchar *password;
+        const gchar *verify;
+
+        password = gtk_entry_get_text (GTK_ENTRY (self->local_password));
+        verify = gtk_entry_get_text (GTK_ENTRY (self->local_verify));
+        if (strlen (verify) != 0 && strcmp (password, verify) != 0) {
+                gtk_label_set_label (GTK_LABEL (self->local_hint), _("Passwords do not match."));
+                set_entry_validation_error (GTK_ENTRY (self->local_verify), _("Passwords do not match"));
+        } else {
+                clear_entry_validation_error (GTK_ENTRY (self->local_verify));
+        }
+}
+
+static gboolean
+local_password_timeout (UmAccountDialog *self)
+{
+        dialog_validate (self);
+        update_password_match (self);
+
+        return FALSE;
+}
+
+static gboolean
+on_password_focus_out (GtkEntry *entry,
+                     GParamSpec *pspec,
+                     gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+
+        if (self->local_password_timeout_id != 0) {
+                g_source_remove (self->local_password_timeout_id);
+                self->local_password_timeout_id = 0;
+        }
+
+        local_password_timeout (self);
+
+        return FALSE;
+}
+
+static void
+on_password_changed (GtkEntry *entry,
+                   GParamSpec *pspec,
+                   gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+
+        if (self->local_password_timeout_id != 0) {
+                g_source_remove (self->local_password_timeout_id);
+                self->local_password_timeout_id = 0;
+        }
+
+        clear_entry_validation_error (GTK_ENTRY (self->local_verify));
+
+        self->local_password_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) local_password_timeout, self);
+}
+
+static void
+on_password_radio_changed (GtkRadioButton *radio,
+                           gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        gboolean active;
+
+        active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (radio));
+        self->local_password_mode = active ? ACT_USER_PASSWORD_MODE_REGULAR : ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
+
+        gtk_widget_set_sensitive (self->local_password, active);
+        gtk_widget_set_sensitive (self->local_verify, active);
+        gtk_widget_set_sensitive (self->local_strength, active);
+        gtk_widget_set_sensitive (self->local_strength_indicator, active);
+        gtk_widget_set_sensitive (self->local_hint, active);
+
+        dialog_validate (self);
+}
+
+static void
+hint_allocate (GtkWidget       *label,
+               GtkAllocation   *allocation,
+               UmAccountDialog *self)
+{
+        gint height;
+
+        /* Allocate enought space for hint and don't change */
+        height = gtk_widget_get_allocated_height (self->local_strength);
+        gtk_widget_set_size_request (label, allocation->width, height * 3);
+}
+
+static void
 local_init (UmAccountDialog *self,
             GtkBuilder *builder)
 {
@@ -282,14 +494,53 @@ local_init (UmAccountDialog *self,
         widget = (GtkWidget *) gtk_builder_get_object (builder, "local-username");
         g_signal_connect (widget, "changed",
                           G_CALLBACK (on_username_changed), self);
+        g_signal_connect_after (widget, "focus-out-event", G_CALLBACK (on_username_focus_out), self);
         self->local_username = widget;
+        self->local_username_timeout_id = 0;
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "local-name");
         g_signal_connect (widget, "changed", G_CALLBACK (on_name_changed), self);
         self->local_name = widget;
 
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "local-username-hint");
+        self->local_username_hint = widget;
+
         widget = (GtkWidget *) gtk_builder_get_object (builder, "local-account-type");
         self->local_account_type = widget;
+
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "local-password-now-radio");
+        g_signal_connect (widget, "toggled", G_CALLBACK (on_password_radio_changed), self);
+        self->local_password_radio = widget;
+
+        self->local_password_mode = ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
+
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "local-password");
+        gtk_widget_set_sensitive (widget, FALSE);
+        g_signal_connect (widget, "notify::text", G_CALLBACK (on_password_changed), self);
+        g_signal_connect_after (widget, "focus-out-event", G_CALLBACK (on_password_focus_out), self);
+        self->local_password = widget;
+
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "local-verify");
+        gtk_widget_set_sensitive (widget, FALSE);
+        g_signal_connect (widget, "notify::text", G_CALLBACK (on_password_changed), self);
+        g_signal_connect_after (widget, "focus-out-event", G_CALLBACK (on_password_focus_out), self);
+        self->local_verify = widget;
+        self->local_password_timeout_id = 0;
+
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "local-strength");
+        gtk_widget_set_sensitive (widget, FALSE);
+        self->local_strength = widget;
+
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "local-strength-indicator");
+        gtk_widget_set_sensitive (widget, FALSE);
+        self->local_strength_indicator = widget;
+
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "local-hint");
+        gtk_widget_set_sensitive (widget, FALSE);
+        self->local_hint = widget;
+
+        dialog_validate (self);
+        update_password_strength (self);
 }
 
 static void
@@ -322,7 +573,7 @@ enterprise_validate (UmAccountDialog *self)
                 name = gtk_entry_get_text (self->enterprise_domain_entry);
         }
 
-        valid_domain = is_valid_name (name);
+        valid_domain = is_valid_name (name) && self->selected_realm != NULL;
         return valid_name && valid_domain;
 }
 
@@ -370,9 +621,6 @@ enterprise_add_realm (UmAccountDialog *self,
 
         g_debug ("added realm to drop down: %s %s", realm_name,
                  g_dbus_object_get_object_path (G_DBUS_OBJECT (realm)));
-
-        if (!self->enterprise_domain_chosen && um_realm_is_configured (realm))
-                gtk_combo_box_set_active_iter (self->enterprise_domain, &iter);
 
         g_object_unref (common);
 }
@@ -670,6 +918,7 @@ on_realm_login (GObject *source,
         UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
         GError *error = NULL;
         GBytes *creds = NULL;
+        const gchar *message;
 
         if (g_cancellable_is_cancelled (self->cancellable)) {
                 g_object_unref (self);
@@ -713,13 +962,17 @@ on_realm_login (GObject *source,
         /* A problem with the user's login name or password */
         } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_LOGIN)) {
                 g_debug ("Problem with the user's login: %s", error->message);
-                set_entry_validation_error (self->enterprise_login, error->message);
+                message = _("Login not recognized.\nPlease try again.");
+                set_entry_validation_error (self->enterprise_login, message);
+                gtk_label_set_text (GTK_LABEL (self->enterprise_hint), message);
                 finish_action (self);
                 gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_login));
 
         } else if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_BAD_PASSWORD)) {
                 g_debug ("Problem with the user's password: %s", error->message);
-                set_entry_validation_error (self->enterprise_password, error->message);
+                message = _("Invalid password.\nPlease try again.");
+                set_entry_validation_error (self->enterprise_password, message);
+                gtk_label_set_text (GTK_LABEL (self->enterprise_hint), message);
                 finish_action (self);
                 gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_password));
 
@@ -756,6 +1009,7 @@ on_realm_discover_input (GObject *source,
         UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
         GError *error = NULL;
         GList *realms;
+        gchar *message;
 
         if (g_cancellable_is_cancelled (self->cancellable)) {
                 g_object_unref (self);
@@ -769,47 +1023,72 @@ on_realm_discover_input (GObject *source,
         if (error == NULL) {
                 g_assert (realms != NULL);
                 self->selected_realm = g_object_ref (realms->data);
-                enterprise_check_login (self);
+
+                if (self->enterprise_check_credentials) {
+                        enterprise_check_login (self);
+                }
+                gtk_widget_show (self->enterprise_checkmark);
+                gtk_label_set_text (GTK_LABEL (self->enterprise_hint), "");
                 g_list_free_full (realms, g_object_unref);
 
         /* The domain is likely invalid*/
         } else {
-                finish_action (self);
                 g_message ("Couldn't discover domain: %s", error->message);
-                gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_domain_entry));
                 g_dbus_error_strip_remote_error (error);
-                set_entry_validation_error (self->enterprise_domain_entry,
-                                            error->message);
+
+                if (g_error_matches (error, UM_REALM_ERROR, UM_REALM_ERROR_GENERIC)) {
+                        message = g_strdup(_("Domain not found."));
+                } else {
+                        message = g_strdup_printf ("%s.", error->message);
+                }
+                set_entry_validation_error (self->enterprise_domain_entry, message);
+                gtk_label_set_text (GTK_LABEL (self->enterprise_hint), message);
+
+                g_free (message);
                 g_error_free (error);
+
+                if (self->enterprise_check_credentials) {
+                        finish_action (self);
+                        self->enterprise_check_credentials = FALSE;
+                }
+        }
+
+        if (!self->enterprise_check_credentials) {
+                finish_action (self);
+                dialog_validate (self);
         }
 
         g_object_unref (self);
 }
 
 static void
-enterprise_add_user (UmAccountDialog *self)
+enterprise_check_domain (UmAccountDialog *self)
 {
-        GtkTreeIter iter;
+        const gchar *domain;
+
+        domain = gtk_entry_get_text (self->enterprise_domain_entry);
+        if (strlen (domain) == 0) {
+                return;
+        }
 
         begin_action (self);
 
-        g_clear_object (&self->selected_realm);
         self->join_prompted = FALSE;
+        um_realm_manager_discover (self->realm_manager,
+                                   domain,
+                                   self->cancellable,
+                                   on_realm_discover_input,
+                                   g_object_ref (self));
+}
 
-        /* Already know about this realm, try to login as user */
-        if (gtk_combo_box_get_active_iter (self->enterprise_domain, &iter)) {
-                gtk_tree_model_get (gtk_combo_box_get_model (self->enterprise_domain),
-                                    &iter, 1, &self->selected_realm, -1);
-                enterprise_check_login (self);
+static void
+enterprise_add_user (UmAccountDialog *self)
+{
+        self->join_prompted = FALSE;
+        self->enterprise_check_credentials = TRUE;
+        begin_action (self);
+        enterprise_check_login (self);
 
-        /* Something the user typed, we need to discover realm */
-        } else {
-                um_realm_manager_discover (self->realm_manager,
-                                           gtk_entry_get_text (self->enterprise_domain_entry),
-                                           self->cancellable,
-                                           on_realm_discover_input,
-                                           g_object_ref (self));
-        }
 }
 
 static void
@@ -890,15 +1169,58 @@ on_realmd_disappeared (GDBusConnection *unused1,
         mode_change (self, UM_LOCAL);
 }
 
+static gboolean
+enterprise_domain_timeout (UmAccountDialog *self)
+{
+        enterprise_check_domain (self);
+
+        return FALSE;
+}
+
 static void
 on_domain_changed (GtkComboBox *widget,
                    gpointer user_data)
 {
         UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        GtkTreeIter iter;
 
+        if (self->enterprise_domain_timeout_id != 0) {
+                g_source_remove (self->enterprise_domain_timeout_id);
+                self->enterprise_domain_timeout_id = 0;
+        }
+
+        g_clear_object (&self->selected_realm);
+        if (gtk_combo_box_get_active_iter (self->enterprise_domain, &iter)) {
+                gtk_tree_model_get (gtk_combo_box_get_model (self->enterprise_domain), &iter, 1, &self->selected_realm, -1);
+                gtk_widget_show (self->enterprise_checkmark);
+        }
+        else {
+                gtk_widget_hide (self->enterprise_checkmark);
+                self->enterprise_domain_timeout_id = g_timeout_add (500, (GSourceFunc) enterprise_domain_timeout, self);
+        }
+
+        gtk_label_set_text (GTK_LABEL (self->enterprise_hint), "");
         dialog_validate (self);
-        self->enterprise_domain_chosen = TRUE;
         clear_entry_validation_error (self->enterprise_domain_entry);
+}
+
+static gboolean
+on_enterprise_domain_focus_out (GtkEntry *entry,
+                                GParamSpec *pspec,
+                                gpointer user_data)
+{
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+
+        if (self->enterprise_domain_timeout_id != 0) {
+                g_source_remove (self->enterprise_domain_timeout_id);
+                self->enterprise_domain_timeout_id = 0;
+        }
+
+        if (self->selected_realm == NULL) {
+                enterprise_check_domain (self);
+        }
+
+        return FALSE;
 }
 
 static void
@@ -906,8 +1228,10 @@ on_entry_changed (GtkEditable *editable,
                   gpointer user_data)
 {
         UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+
         dialog_validate (self);
         clear_entry_validation_error (GTK_ENTRY (editable));
+        clear_entry_validation_error (GTK_ENTRY (self->enterprise_password));
 }
 
 static void
@@ -917,14 +1241,26 @@ enterprise_init (UmAccountDialog *self,
         GtkWidget *widget;
 
         self->enterprise_realms = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_OBJECT);
+        self->enterprise_check_credentials = FALSE;
+
+        self->enterprise_hint = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-hint");
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-domain");
         g_signal_connect (widget, "changed", G_CALLBACK (on_domain_changed), self);
+        g_signal_connect_after (widget, "focus-out-event", G_CALLBACK (on_enterprise_domain_focus_out), self);
         self->enterprise_domain = GTK_COMBO_BOX (widget);
         gtk_combo_box_set_model (self->enterprise_domain,
                                  GTK_TREE_MODEL (self->enterprise_realms));
-        gtk_combo_box_set_entry_text_column (self->enterprise_domain, 0);
         self->enterprise_domain_entry = GTK_ENTRY (gtk_bin_get_child (GTK_BIN (widget)));
+        self->enterprise_domain_timeout_id = 0;
+
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-checkmark");
+        gtk_widget_hide (widget);
+        self->enterprise_checkmark = widget;
+
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-spinner");
+        gtk_widget_hide (widget);
+        self->enterprise_spinner = GTK_SPINNER (widget);
 
         widget = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-login");
         g_signal_connect (widget, "changed", G_CALLBACK (on_entry_changed), self);
@@ -934,9 +1270,12 @@ enterprise_init (UmAccountDialog *self,
         g_signal_connect (widget, "changed", G_CALLBACK (on_entry_changed), self);
         self->enterprise_password = GTK_ENTRY (widget);
 
+        /* Initialize enterprise domain from DHCP. */
+        res_init ();
+        gtk_entry_set_text (self->enterprise_domain_entry, _res.defdname);
+
         /* Initially we hide the 'Enterprise Login' stuff */
-        widget = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-button");
-        self->enterprise_button = widget;
+        widget = self->enterprise_button;
         gtk_widget_hide (widget);
 
         self->realmd_watch = g_bus_watch_name (G_BUS_TYPE_SYSTEM, "org.freedesktop.realmd",
@@ -973,87 +1312,31 @@ dialog_validate (UmAccountDialog *self)
 }
 
 static void
-label_set_bold (GtkLabel *label,
-                gboolean  bold)
-{
-        PangoAttrList *attrs;
-        PangoAttribute *attr;
-
-        attrs = pango_attr_list_new ();
-        attr = pango_attr_weight_new (bold ? PANGO_WEIGHT_BOLD : PANGO_WEIGHT_NORMAL);
-        pango_attr_list_insert (attrs, attr);
-        gtk_label_set_attributes (label, attrs);
-        pango_attr_list_unref (attrs);
-}
-
-
-static void
 mode_change (UmAccountDialog *self,
              UmAccountMode mode)
 {
-        GtkWidget *button;
-        gint visible_count = 0;
         gboolean active;
-        gint i;
 
-        g_assert (!self->mode_updating);
-        self->mode_updating = TRUE;
+        gtk_notebook_set_current_page (GTK_NOTEBOOK (self->container_widget), mode);
 
-        for (i = 0; i < NUM_MODES; i++) {
-                button = self->mode_buttons[i];
-                active = (i == (gint)mode);
-
-                /* The toggle state */
-                if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)) != active)
-                        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), active);
-
-                /* Make toggled buttons bold */
-                label_set_bold (GTK_LABEL (gtk_bin_get_child (GTK_BIN (button))), active);
-
-                /* Show the correct area */
-                gtk_widget_set_visible (GTK_WIDGET (self->mode_areas[i]), active);
-
-                if (gtk_widget_get_visible (button))
-                        visible_count++;
-        }
-
-        /* Show mode container if more than one visible */
-        gtk_widget_set_visible (GTK_WIDGET (self->mode_container), visible_count > 1);
+        /* The enterprise toggle state */
+        active = (mode == UM_ENTERPRISE);
+        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->enterprise_button)) != active)
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->enterprise_button), active);
 
         self->mode = mode;
-        self->mode_updating = FALSE;
         dialog_validate (self);
-}
-
-static void
-mode_toggled (UmAccountDialog *self,
-              GtkToggleButton *toggle,
-              UmAccountMode mode)
-{
-        if (self->mode_updating)
-                return;
-
-        /* Undo the toggle if already pressed */
-        if (!gtk_toggle_button_get_active (toggle))
-                gtk_toggle_button_set_active (toggle, TRUE);
-
-        /* Otherwise update mode */
-        else
-                mode_change (self, mode);
-}
-
-static void
-on_local_toggle (GtkToggleButton *toggle,
-                 gpointer user_data)
-{
-        mode_toggled (UM_ACCOUNT_DIALOG (user_data), toggle, UM_LOCAL);
 }
 
 static void
 on_enterprise_toggle (GtkToggleButton *toggle,
                       gpointer user_data)
 {
-        mode_toggled (UM_ACCOUNT_DIALOG (user_data), toggle, UM_ENTERPRISE);
+        UmAccountDialog *self = UM_ACCOUNT_DIALOG (user_data);
+        UmAccountMode mode;
+
+        mode = gtk_toggle_button_get_active (toggle) ? UM_ENTERPRISE : UM_LOCAL;
+        mode_change (self, mode);
 }
 
 static void
@@ -1062,19 +1345,13 @@ mode_init (UmAccountDialog *self,
 {
         GtkWidget *widget;
 
-        self->mode_container = (GtkWidget *) gtk_builder_get_object (builder, "account-mode");
-
         widget = (GtkWidget *) gtk_builder_get_object (builder, "local-area");
         self->mode_areas[UM_LOCAL] = widget;
         widget = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-area");
         self->mode_areas[UM_ENTERPRISE] = widget;
 
-        widget = (GtkWidget *) gtk_builder_get_object (builder, "local-button");
-        g_signal_connect (widget, "toggled", G_CALLBACK (on_local_toggle), self);
-        self->mode_buttons[UM_LOCAL] = widget;
-        widget = (GtkWidget *) gtk_builder_get_object (builder, "enterprise-button");
+        widget = self->enterprise_button;
         g_signal_connect (widget, "toggled", G_CALLBACK (on_enterprise_toggle), self);
-        self->mode_buttons[UM_ENTERPRISE] = widget;
 }
 
 static void
@@ -1103,7 +1380,7 @@ um_account_dialog_init (UmAccountDialog *self)
         content = gtk_dialog_get_content_area (dialog);
         gtk_container_set_border_width (GTK_CONTAINER (dialog), 5);
         gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-        gtk_window_set_title (GTK_WINDOW (dialog), " ");
+        gtk_window_set_title (GTK_WINDOW (dialog), _("Add User"));
         gtk_window_set_icon_name (GTK_WINDOW (dialog), "system-users");
 
         /* Rearrange the bottom of dialog, so we can have spinner on left */
@@ -1115,11 +1392,15 @@ um_account_dialog_init (UmAccountDialog *self)
         gtk_widget_show (box);
         g_object_unref (actions);
 
+        /* Create enterprise toggle button. */
+        self->enterprise_button = gtk_toggle_button_new_with_mnemonic (_("_Enterprise Login"));
+        gtk_container_set_border_width (GTK_CONTAINER (self->enterprise_button), 6);
+        gtk_box_pack_start (GTK_BOX (box), self->enterprise_button, FALSE, FALSE, 0);
+
         /* Create the spinner, but don't show it yet */
         self->spinner = GTK_SPINNER (gtk_spinner_new ());
         widget = gtk_alignment_new (0.5, 0.5, 1.0, 1.0);
-        gtk_alignment_set_padding (GTK_ALIGNMENT (widget), 0, 0, 12, 6);
-        gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
+        gtk_box_pack_end (GTK_BOX (box), widget, FALSE, FALSE, 0);
         gtk_container_add (GTK_CONTAINER (widget), GTK_WIDGET (self->spinner));
         gtk_widget_show (widget);
 
@@ -1217,6 +1498,21 @@ um_account_dialog_dispose (GObject *obj)
                 self->realm_manager = NULL;
         }
 
+        if (self->local_password_timeout_id != 0) {
+                g_source_remove (self->local_password_timeout_id);
+                self->local_password_timeout_id = 0;
+        }
+
+        if (self->local_username_timeout_id != 0) {
+                g_source_remove (self->local_username_timeout_id);
+                self->local_username_timeout_id = 0;
+        }
+
+        if (self->enterprise_domain_timeout_id != 0) {
+                g_source_remove (self->enterprise_domain_timeout_id);
+                self->enterprise_domain_timeout_id = 0;
+        }
+
         G_OBJECT_CLASS (um_account_dialog_parent_class)->dispose (obj);
 }
 
@@ -1258,6 +1554,8 @@ um_account_dialog_show (UmAccountDialog     *self,
                         GAsyncReadyCallback  callback,
                         gpointer             user_data)
 {
+        gint len;
+
         g_return_if_fail (UM_IS_ACCOUNT_DIALOG (self));
 
         /* Make sure not already doing an operation */
@@ -1282,6 +1580,14 @@ um_account_dialog_show (UmAccountDialog     *self,
         gtk_window_set_transient_for (GTK_WINDOW (self), parent);
         gtk_window_present (GTK_WINDOW (self));
         gtk_widget_grab_focus (self->local_name);
+
+        /* Allocate enought width for strength hint */
+        len = pw_strenght_hint_get_width_chars ();
+        gtk_label_set_width_chars (GTK_LABEL (self->local_strength), len);
+
+        /* Allocate enought space for password and username hints and do not change */
+        g_signal_connect (self->local_username_hint, "size-allocate", G_CALLBACK (hint_allocate), self);
+        g_signal_connect (self->local_hint, "size-allocate", G_CALLBACK (hint_allocate), self);
 }
 
 ActUser *
