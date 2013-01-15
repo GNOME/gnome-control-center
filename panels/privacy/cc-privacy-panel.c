@@ -313,7 +313,7 @@ stealth_mode_changed (GSettings   *settings,
 
   if (stealth_mode)
     {
-      g_settings_set_boolean (self->priv->lock_settings, "show-full-name", FALSE);
+      g_settings_set_boolean (self->priv->lock_settings, "show-full-name-in-top-bar", FALSE);
       g_settings_set_boolean (self->priv->privacy_settings, "show-full-name-in-top-bar", FALSE);
     }
 
@@ -354,7 +354,7 @@ add_name_visibility (CcPrivacyPanel *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "full_name_lock_screen"));
-  g_settings_bind (self->priv->lock_settings, "show-full-name",
+  g_settings_bind (self->priv->lock_settings, "show-full-name-in-top-bar",
                    w, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
