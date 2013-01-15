@@ -28,8 +28,14 @@
 #include "egg-list-box/egg-list-box.h"
 
 #ifdef HAVE_BLUETOOTH
-#include <bluetooth-client.h>
+/* Handling is broken:
+ * https://bugzilla.gnome.org/show_bug.cgi?id=691730
+ * https://bugzilla.gnome.org/show_bug.cgi?id=691151
+ * #include <bluetooth-client.h> */
+#undef HAVE_BLUETOOTH
 #endif
+
+
 
 #ifdef HAVE_NETWORK_MANAGER
 #include <nm-client.h>
