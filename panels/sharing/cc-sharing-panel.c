@@ -403,6 +403,15 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
   gchar **folders, **list;
   gboolean enabled;
   GtkListStore *store;
+  char *path;
+
+  path = g_find_program_in_path ("rygel");
+  if (path == NULL)
+    {
+      gtk_widget_hide (WID ("media-sharing-button"));
+      return;
+    }
+  g_free (path);
 
   cc_sharing_panel_bind_switch_to_label (WID ("share-media-switch"),
                                          WID ("media-sharing-status-label"));
