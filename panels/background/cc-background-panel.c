@@ -252,7 +252,7 @@ on_screenshot_finished (GObject *source,
   int height;
 
   error = NULL;
-  g_dbus_connection_call_finish (panel->priv->connection,
+  g_dbus_connection_call_finish (G_DBUS_CONNECTION (source),
                                  res,
                                  &error);
 
