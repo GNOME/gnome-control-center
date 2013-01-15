@@ -129,7 +129,7 @@ test_hostname_SOURCES = hostname-helper.c hostname-helper.h test-hostname.c
 test_hostname_LDADD = $(PANEL_LIBS) $(INFO_PANEL_LIBS)
 test_hostname_CFLAGS = $(INCLUDES)
 
-EXTRA_DIST = hostnames-test.txt
+EXTRA_DIST += hostnames-test.txt
 check-local: test-hostname
 	$(builddir)/test-hostname $(srcdir)/hostnames-test.txt > /dev/null
 
