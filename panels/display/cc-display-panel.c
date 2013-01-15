@@ -735,6 +735,9 @@ make_resolution_string (int width, int height)
     case 17:
       aspect = "16\342\210\2669";
       break;
+    case 23:
+      aspect = "21\342\210\2669";
+      break;
     case 12:
       aspect = "5\342\210\2664";
       break;
