@@ -84,6 +84,17 @@ endif
 
 AM_CPPFLAGS = -DGNOMELOCALEDIR="\"$(datadir)/locale\""
 
+menudir = $(sysconfdir)/xdg/menus
+menu_DATA = gnomecc.menu
+
+directorydir = $(datadir)/desktop-directories
+directory_in_files = gnomecc.directory.in
+directory_DATA = $(directory_in_files:.directory.in=.directory)
+@INTLTOOL_DIRECTORY_RULE@
+
+gnomecc.menu: gnomecc.menu.in
+	$(AM_V_GEN) cat $< | sed 's,@applicationsdir@,$(datadir)/applications/,' > $@
+
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/shell.gresource.xml)
 cc-shell-resources.c: shell.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_shell $<
@@ -106,10 +117,12 @@ EXTRA_DIST =					\
 	shell.gresource.xml			\
 	gnome-control-center.desktop.in.in	\
 	$(completion_in_files)			\
-	list-panel.sh
+	list-panel.sh				\
+	gnomecc.directory.in			\
+	gnomecc.menu.in
 
 CLEANFILES = $(BUILT_SOURCES) $(completion_DATA)
-DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in
+DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in gnomecc.directory gnomecc.menu
 
 noinst_PROGRAMS = test-hostname
 test_hostname_SOURCES = hostname-helper.c hostname-helper.h test-hostname.c

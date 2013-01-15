@@ -1,0 +1,84 @@
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+ "http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd">
+
+<Menu>
+  <Name>Control Center</Name>
+  <Directory>gnomecc.directory</Directory>
+
+  <!-- Read standard .directory and .desktop file locations -->
+  <AppDir>@applicationsdir@</AppDir>
+  <DefaultDirectoryDirs/>
+
+  <!-- Read in overrides and child menus from gnomecc-merged/ -->
+  <DefaultMergeDirs/>
+
+   <!-- Sort the control center categories -->
+   <Layout>
+     <Menuname>Personal</Menuname>
+     <Menuname>Hardware</Menuname>
+     <Menuname>System</Menuname>
+     <Menuname>Other</Menuname>
+     <Merge type="all" />
+   </Layout>
+
+  <!-- Stuff in the toplevel (Other category) -->
+  <Include>
+    <And>
+      <Category>Settings</Category>
+      <Not>
+        <Or>
+          <Category>X-GNOME-PersonalSettings</Category>
+          <Category>DesktopSettings</Category>
+          <Category>HardwareSettings</Category>
+          <Category>X-GNOME-SystemSettings</Category>
+          <Category>System</Category>
+        </Or>
+      </Not>
+    </And>
+  </Include>
+
+  <!-- Avoid the shell having a launcher for itself -->
+  <Exclude>
+    <Filename>gnome-control-center.desktop</Filename>
+  </Exclude>
+
+  <!-- Personal category -->
+  <Menu>
+    <Name>Personal</Name>
+    <Directory>Personal.directory</Directory>
+    <Include>
+      <And>
+        <Category>Settings</Category>
+        <Category>X-GNOME-PersonalSettings</Category>
+        <Category>X-GNOME-Settings-Panel</Category>
+      </And>
+    </Include>
+  </Menu> <!-- End Personal -->
+
+  <!-- Hardware category -->
+  <Menu>
+    <Name>Hardware</Name>
+    <Directory>Hardware.directory</Directory>
+    <Include>
+      <And>
+        <Category>Settings</Category>
+        <Category>HardwareSettings</Category>
+        <Category>X-GNOME-Settings-Panel</Category>
+      </And>
+    </Include>
+  </Menu> <!-- End Hardware -->
+
+  <!-- System category -->
+  <Menu>
+    <Name>System</Name>
+    <Directory>System.directory</Directory>
+    <Include>
+      <And>
+        <Category>Settings</Category>
+        <Category>X-GNOME-SystemSettings</Category>
+        <Category>X-GNOME-Settings-Panel</Category>
+      </And>
+    </Include>
+  </Menu> <!-- End System -->
+
+</Menu>     <!-- End CC -->
