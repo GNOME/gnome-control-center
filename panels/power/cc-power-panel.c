@@ -1358,7 +1358,7 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_box_pack_start (GTK_BOX (priv->dim_screen_row), label, TRUE, TRUE, 0);
 
   sw = gtk_switch_new ();
-  g_settings_bind (priv->gsd_settings, "idle-dim-battery",
+  g_settings_bind (priv->gsd_settings, "idle-dim",
                    sw, "active",
                    G_SETTINGS_BIND_DEFAULT);
   gtk_widget_set_margin_left (sw, 20);
