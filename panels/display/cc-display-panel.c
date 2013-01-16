@@ -715,9 +715,9 @@ make_resolution_string (int width, int height)
   const char *aspect = NULL;
 
     /* We use a number of Unicode characters below:
-     * \342\210\266 is U+2236 RATIO
-     * \342\200\211 is U+2009 THIN SPACE,
-     * \303\227\342 is U+00D7 MULTIPLICATION SIGN
+     * ∶ is U+2236 RATIO
+     *   is U+2009 THIN SPACE,
+     * × is U+00D7 MULTIPLICATION SIGN
      */
   if (width && height) {
     if (width > height)
@@ -727,37 +727,37 @@ make_resolution_string (int width, int height)
 
     switch (ratio) {
     case 13:
-      aspect = "4\342\210\2663";
+      aspect = "4∶3";
       break;
     case 16:
-      aspect = "16\342\210\26610";
+      aspect = "16∶10";
       break;
     case 17:
-      aspect = "16\342\210\2669";
+      aspect = "16∶9";
       break;
     case 23:
-      aspect = "21\342\210\2669";
+      aspect = "21∶9";
       break;
     case 12:
-      aspect = "5\342\210\2664";
+      aspect = "5∶4";
       break;
       /* This catches 1.5625 as well (1600x1024) when maybe it shouldn't. */
     case 15:
-      aspect = "3\342\210\2662";
+      aspect = "3∶2";
       break;
     case 18:
-      aspect = "9\342\210\2665";
+      aspect = "9∶5";
       break;
     case 10:
-      aspect = "1\342\210\2661";
+      aspect = "1∶1";
       break;
     }
   }
 
   if (aspect != NULL)
-    return g_strdup_printf ("%d\342\200\211\303\227\342\200\211%d (%s)", width, height, aspect);
+    return g_strdup_printf ("%d × %d (%s)", width, height, aspect);
   else
-    return g_strdup_printf ("%d\342\200\211\303\227\342\200\211%d", width, height);
+    return g_strdup_printf ("%d × %d", width, height);
 }
 
 static void
