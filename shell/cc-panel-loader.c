@@ -48,7 +48,6 @@ extern GType cc_printers_panel_get_type (void);
 #endif /* BUILD_PRINTERS */
 extern GType cc_privacy_panel_get_type (void);
 extern GType cc_region_panel_get_type (void);
-extern GType cc_screen_panel_get_type (void);
 extern GType cc_search_panel_get_type (void);
 extern GType cc_sharing_panel_get_type (void);
 extern GType cc_sound_panel_get_type (void);
@@ -83,7 +82,6 @@ static struct {
 #endif
   { "privacy",          cc_privacy_panel_get_type    },
   { "region",           cc_region_panel_get_type     },
-  { "screen",           cc_screen_panel_get_type     },
   { "search",           cc_search_panel_get_type     },
   { "sharing",          cc_sharing_panel_get_type    },
   { "sound",            cc_sound_panel_get_type      },

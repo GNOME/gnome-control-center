@@ -1,7 +1,6 @@
 SUBDIRS= \
 	common \
 	background \
-	screen \
 	power \
 	color \
 	display \
