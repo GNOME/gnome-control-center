@@ -68,6 +68,31 @@ typedef enum {
         UM_PASSWORD_DIALOG_MODE_UNLOCK_ACCOUNT
 } UmPasswordDialogMode;
 
+static int
+update_password_strength (UmPasswordDialog *um)
+{
+        const gchar *password;
+        const gchar *old_password;
+        const gchar *username;
+        gint strength_level;
+        const gchar *hint;
+        const gchar *long_hint;
+
+        password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
+        old_password = gtk_entry_get_text (GTK_ENTRY (um->old_password_entry));
+        username = act_user_get_user_name (um->user);
+
+        pw_strength (password, old_password, username,
+                     &hint, &long_hint, &strength_level);
+
+        gtk_level_bar_set_value (GTK_LEVEL_BAR (um->strength_indicator), strength_level);
+        gtk_label_set_label (GTK_LABEL (um->strength_indicator_label), hint);
+        gtk_widget_set_tooltip_text (um->strength_indicator, long_hint);
+        gtk_widget_set_tooltip_text (um->strength_indicator_label, long_hint);
+
+        return strength_level;
+}
+
 static void
 generate_one_password (GtkWidget        *widget,
                        UmPasswordDialog *um)
@@ -259,18 +284,20 @@ update_sensitivity (UmPasswordDialog *um)
         const gchar *old_password;
         const gchar *tooltip;
         gboolean can_change;
+        int strength_level;
 
         password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
         verify = gtk_entry_get_text (GTK_ENTRY (um->verify_entry));
         old_password = gtk_entry_get_text (GTK_ENTRY (um->old_password_entry));
+        strength_level = update_password_strength (um);
 
-        if (strlen (password) < pw_min_length ()) {
+        if (strength_level < 1) {
                 can_change = FALSE;
                 if (password[0] == '\0') {
                         tooltip = _("You need to enter a new password");
                 }
                 else {
-                        tooltip = _("The new password is too short");
+                        tooltip = _("The new password is not strong enough");
                 }
         }
         else if (strcmp (password, verify) != 0) {
@@ -341,29 +368,6 @@ show_password_toggled (GtkToggleButton  *button,
         active = gtk_toggle_button_get_active (button);
         gtk_entry_set_visibility (GTK_ENTRY (um->password_entry), active);
         gtk_entry_set_visibility (GTK_ENTRY (um->verify_entry), active);
-}
-
-static void
-update_password_strength (UmPasswordDialog *um)
-{
-        const gchar *password;
-        const gchar *old_password;
-        const gchar *username;
-        gint strength_level;
-        const gchar *hint;
-        const gchar *long_hint;
-
-        password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
-        old_password = gtk_entry_get_text (GTK_ENTRY (um->old_password_entry));
-        username = act_user_get_user_name (um->user);
-
-        pw_strength (password, old_password, username,
-                     &hint, &long_hint, &strength_level);
-
-        gtk_level_bar_set_value (GTK_LEVEL_BAR (um->strength_indicator), strength_level);
-        gtk_label_set_label (GTK_LABEL (um->strength_indicator_label), hint);
-        gtk_widget_set_tooltip_text (um->strength_indicator, long_hint);
-        gtk_widget_set_tooltip_text (um->strength_indicator_label, long_hint);
 }
 
 static void
