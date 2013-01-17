@@ -106,10 +106,10 @@ sys_DATA = $(sys_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 completiondir = $(datadir)/bash-completion/completions
-completion_in_files = gnome_control_center_completion.bash.in
-completion_DATA = $(completion_in_files:.bash.in=.bash)
-gnome_control_center_completion.bash: gnome_control_center_completion.bash.in list-panel.sh
-	$(AM_V_GEN) cat $< | sed "s,@PANELS@,`$(srcdir)/list-panel.sh $(top_srcdir)`," > $@
+completion_in_files = completions/gnome-control-center.in
+completion_DATA = $(completion_in_files:.in=)
+completions/gnome-control-center: completions/gnome-control-center.in list-panel.sh
+	$(AM_V_GEN) mkdir -p `dirname $@` && cat $< | sed "s,@PANELS@,`$(srcdir)/list-panel.sh $(top_srcdir)`," > $@
 
 EXTRA_DIST =					\
 	$(resource_files)			\
