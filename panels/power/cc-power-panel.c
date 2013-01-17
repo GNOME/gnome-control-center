@@ -66,6 +66,7 @@ CC_PANEL_REGISTER (CcPowerPanel, cc_power_panel)
 struct _CcPowerPanelPrivate
 {
   GSettings     *gsd_settings;
+  GSettings     *session_settings;
   GCancellable  *cancellable;
   GtkBuilder    *builder;
   UpClient      *up_client;
@@ -122,6 +123,7 @@ cc_power_panel_dispose (GObject *object)
   CcPowerPanelPrivate *priv = CC_POWER_PANEL (object)->priv;
 
   g_clear_object (&priv->gsd_settings);
+  g_clear_object (&priv->session_settings);
   if (priv->cancellable != NULL)
     {
       g_cancellable_cancel (priv->cancellable);
@@ -1283,13 +1285,38 @@ nm_device_changed (NMClient     *client,
 #endif
 
 static void
+combo_idle_delay_changed_cb (GtkWidget *widget, CcPowerPanel *self)
+{
+  GtkTreeIter iter;
+  GtkTreeModel *model;
+  gint value;
+  gboolean ret;
+
+  /* no selection */
+  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX(widget), &iter);
+  if (!ret)
+    return;
+
+  /* get entry */
+  model = gtk_combo_box_get_model (GTK_COMBO_BOX(widget));
+  gtk_tree_model_get (model, &iter,
+                      1, &value,
+                      -1);
+
+  /* set both keys */
+  g_settings_set_uint (self->priv->session_settings, "idle-delay", value);
+}
+
+static void
 add_power_saving_section (CcPowerPanel *self)
 {
   CcPowerPanelPrivate *priv = self->priv;
   GtkWidget *vbox;
   GtkWidget *widget, *box, *label, *scale;
+  GtkWidget *combo;
   GtkWidget *box2;
   GtkWidget *sw;
+  int value;
   gchar *s;
 
   vbox = WID (priv->builder, "vbox_power");
@@ -1368,6 +1395,33 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
   gtk_container_add (GTK_CONTAINER (widget), priv->dim_screen_row);
   gtk_size_group_add_widget (priv->row_sizegroup, priv->dim_screen_row);
+
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
+
+  label = gtk_label_new (_("Mark As Inactive After"));
+  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+  gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
+  gtk_widget_set_margin_left (label, 20);
+  gtk_widget_set_margin_right (label, 20);
+  gtk_widget_set_margin_top (label, 6);
+  gtk_widget_set_margin_bottom (label, 6);
+  gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+
+  combo = gtk_combo_box_text_new ();
+  gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX (combo), 0);
+  gtk_combo_box_set_model (GTK_COMBO_BOX (combo),
+                           GTK_TREE_MODEL (gtk_builder_get_object (priv->builder, "liststore_idle_time")));
+  value = g_settings_get_uint (priv->session_settings, "idle-delay");
+  set_value_for_combo (GTK_COMBO_BOX (combo), value);
+  g_signal_connect (combo, "changed",
+                    G_CALLBACK (combo_idle_delay_changed_cb), self);
+  gtk_widget_set_margin_left (combo, 20);
+  gtk_widget_set_margin_right (combo, 20);
+  gtk_widget_set_valign (combo, GTK_ALIGN_CENTER);
+  gtk_box_pack_start (GTK_BOX (box), combo, FALSE, TRUE, 0);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
+  gtk_container_add (GTK_CONTAINER (widget), box);
+  gtk_size_group_add_widget (priv->row_sizegroup, box);
 
 #ifdef HAVE_NETWORK_MANAGER
   priv->wifi_row = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
@@ -1922,6 +1976,7 @@ cc_power_panel_init (CcPowerPanel *self)
   priv->up_client = up_client_new ();
 
   priv->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
+  priv->session_settings = g_settings_new ("org.gnome.desktop.session");
 
   priv->row_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
   priv->battery_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);

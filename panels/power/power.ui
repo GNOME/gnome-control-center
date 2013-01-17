@@ -45,6 +45,40 @@
       </row>
     </data>
   </object>
+  <object class="GtkListStore" id="liststore_idle_time">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name value -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">1 minute</col>
+        <col id="1">60</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">2 minutes</col>
+        <col id="1">120</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">5 minutes</col>
+        <col id="1">300</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">10 minutes</col>
+        <col id="1">600</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">30 minutes</col>
+        <col id="1">1800</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Never</col>
+        <col id="1">0</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkWindow" id="window_power">
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
