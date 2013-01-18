@@ -53,6 +53,7 @@ struct _CcColorCalibratePrivate
   guint            gamma_size;
   CdProfileQuality quality;
   guint            target_whitepoint;   /* in Kelvin */
+  gdouble          target_gamma;
   gint             inhibit_fd;
 };
 
@@ -919,6 +920,10 @@ cc_color_calibrate_start (CcColorCalibrate *calibrate,
                          g_variant_new_uint32 (priv->target_whitepoint));
   g_variant_builder_add (&builder,
                          "{sv}",
+                         "Gamma",
+                         g_variant_new_double (priv->target_gamma));
+  g_variant_builder_add (&builder,
+                         "{sv}",
                          "Title",
                          g_variant_new_string (priv->title));
   g_variant_builder_add (&builder,
@@ -1052,6 +1057,7 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
   /* get defaults */
   settings = g_settings_new (COLORD_SETTINGS_SCHEMA);
   calibrate->priv->target_whitepoint = g_settings_get_int (settings, "display-whitepoint");
+  calibrate->priv->target_gamma = g_settings_get_double (settings, "display-gamma");
   g_object_unref (settings);
 
   /* connect to buttons */
