@@ -52,10 +52,9 @@ active_state_ready_callback (GObject      *source_object,
   g_variant_unref (tmp_variant);
 
   /* set the switch to the correct state */
+  g_object_set_data (G_OBJECT (gtkswitch), "set-from-dbus", GINT_TO_POINTER (1));
   gtk_switch_set_active (gtkswitch, active);
-
-  /* TODO: enable the switch when cc_remote_login_set_enabled is implemented */
-  /* gtk_widget_set_sensitive (gtkswitch, TRUE); */
+  gtk_widget_set_sensitive (gtkswitch, TRUE);
 }
 
 static void
@@ -135,14 +134,62 @@ void
 cc_remote_login_get_enabled (GtkSwitch *gtkswitch)
 {
   /* disable the switch until the current state is known */
-  gtk_widget_set_sensitive (gtkswitch, FALSE);
+  gtk_widget_set_sensitive (GTK_WIDGET (gtkswitch), FALSE);
 
   g_bus_get (G_BUS_TYPE_SYSTEM, NULL, bus_ready_callback, gtkswitch);
 }
 
-gboolean
-cc_remote_login_set_enabled (gboolean  enabled)
+
+static gint std_err;
+
+static void
+child_watch_func (GPid     pid,
+                  gint     status,
+                  gpointer gtkswitch)
 {
-  /* not implemented yet */
-  return FALSE;
+  if (status != 0)
+    {
+      g_warning ("Error enabling or disabling remote login service");
+
+      /* make sure the switch reflects the current status */
+      cc_remote_login_get_enabled (GTK_SWITCH (gtkswitch));
+    }
+  g_spawn_close_pid (pid);
+
+  gtk_widget_set_sensitive (GTK_WIDGET (gtkswitch), TRUE);
+}
+
+void
+cc_remote_login_set_enabled (GtkSwitch *gtkswitch)
+{
+  gchar *command[] = { "pkexec", LIBEXECDIR "/cc-remote-login-helper", NULL,
+      NULL };
+  GError *error = NULL;
+  GPid pid;
+
+
+  if (GPOINTER_TO_INT (g_object_get_data (G_OBJECT (gtkswitch), "set-from-dbus")) == 1)
+    {
+      g_object_set_data (G_OBJECT (gtkswitch), "set-from-dbus", NULL);
+      return;
+    }
+
+  if (gtk_switch_get_active (gtkswitch))
+    command[2] = "enable";
+  else
+    command[2] = "disable";
+
+  gtk_widget_set_sensitive (GTK_WIDGET (gtkswitch), FALSE);
+
+  g_spawn_async_with_pipes (NULL, command, NULL,
+                            G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD, NULL,
+                            NULL, &pid, NULL, NULL, &std_err, &error);
+
+  g_child_watch_add (pid, child_watch_func, gtkswitch);
+
+  if (error)
+    {
+      g_error ("Error running cc-remote-login-helper: %s", error->message);
+      g_clear_error (&error);
+    }
 }

@@ -6,6 +6,7 @@ uidir = $(pkgdatadir)/ui/sharing
 AM_CPPFLAGS =						\
 	$(PANEL_CFLAGS)					\
 	$(SHARING_PANEL_CFLAGS)				\
+	-DLIBEXECDIR=\"$(libexecdir)\"			\
 	$(NULL)
 
 noinst_LTLIBRARIES = libsharing.la
@@ -40,8 +41,22 @@ cc-sharing-resources.h: sharing.gresource.xml $(resource_files)
 libsharing_la_LIBADD = $(PANEL_LIBS) $(SHARING_PANEL_LIBS)
 libsharing_la_LDFLAGS = $(PANEL_LDFLAGS)
 
-@INTLTOOL_DESKTOP_RULE@
+libexec_PROGRAMS = cc-remote-login-helper
 
+cc_remote_login_helper_SOURCES = cc-remote-login-helper.c
+cc_remote_login_helper_LDADD = $(REMOTE_LOGIN_HELPER_LIBS)
+cc_remote_login_helper_CFLAGS = $(REMOTE_LOGIN_HELPER_CFLAGS)
+
+org.gnome.controlcenter.remote-login-helper.policy.in: org.gnome.controlcenter.remote-login-helper.policy.in.in Makefile
+	$(AM_V_GEN) sed -e "s|\@libexecdir\@|$(libexecdir)|" $< > $@
+
+@INTLTOOL_POLICY_RULE@
+polkit_policydir = $(datadir)/polkit-1/actions
+polkit_policy_in_files = org.gnome.controlcenter.remote-login-helper.policy.in
+polkit_policy_DATA = $(polkit_policy_in_files:.policy.in=.policy)
+
+
+@INTLTOOL_DESKTOP_RULE@
 desktopdir = $(datadir)/applications
 desktop_in_files = gnome-sharing-panel.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)

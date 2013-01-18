@@ -25,6 +25,6 @@
 #include <gtk/gtk.h>
 
 void cc_remote_login_get_enabled (GtkSwitch *gtkswitch);
-gboolean cc_remote_login_set_enabled (gboolean  enabled);
+void cc_remote_login_set_enabled (GtkSwitch *gtkswitch);
 
 #endif /* __CC_REMOTE_LOGIN_H__ **/

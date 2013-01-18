@@ -591,7 +591,7 @@ static void
 remote_login_switch_activate (GtkSwitch      *remote_login_switch,
                               CcSharingPanel *self)
 {
-  cc_remote_login_set_enabled (gtk_switch_get_active (remote_login_switch));
+  cc_remote_login_set_enabled (remote_login_switch);
 }
 
 static void
