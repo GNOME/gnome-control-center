@@ -58,6 +58,8 @@ struct _CcColorCalibratePrivate
 
 #define CD_SESSION_ERROR   cc_color_calibrate_error_quark()
 
+#define COLORD_SETTINGS_SCHEMA  "org.freedesktop.ColorHelper"
+
 G_DEFINE_TYPE (CcColorCalibrate, cc_color_calibrate, G_TYPE_OBJECT)
 
 static GQuark
@@ -1016,6 +1018,7 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
   CcColorCalibratePrivate *priv = calibrate->priv;
   GError *error = NULL;
   gint retval;
+  GSettings *settings;
   GtkBox *box;
   GtkWidget *widget;
   GtkWindow *window;
@@ -1046,8 +1049,10 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
   gtk_widget_set_vexpand (priv->sample_widget, FALSE);
   gtk_widget_set_hexpand (priv->sample_widget, FALSE);
 
-  /* get default: FIXME: get from colord */
-  calibrate->priv->target_whitepoint = 6500;
+  /* get defaults */
+  settings = g_settings_new (COLORD_SETTINGS_SCHEMA);
+  calibrate->priv->target_whitepoint = g_settings_get_int (settings, "display-whitepoint");
+  g_object_unref (settings);
 
   /* connect to buttons */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
