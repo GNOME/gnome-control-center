@@ -28,7 +28,7 @@ G_DEFINE_TYPE (CcShellItemView, cc_shell_item_view, GTK_TYPE_ICON_VIEW)
 
 struct _CcShellItemViewPrivate
 {
-  gboolean ignore_release;
+  gpointer padding;
 };
 
 
@@ -77,43 +77,6 @@ static void
 cc_shell_item_view_finalize (GObject *object)
 {
   G_OBJECT_CLASS (cc_shell_item_view_parent_class)->finalize (object);
-}
-
-static gboolean
-iconview_button_press_event_cb (GtkWidget       *widget,
-                                GdkEventButton  *event,
-                                CcShellItemView *cc_view)
-{
-  /* be sure to ignore double and triple clicks */
-  cc_view->priv->ignore_release = (event->type != GDK_BUTTON_PRESS);
-
-  return FALSE;
-}
-
-static gboolean
-iconview_button_release_event_cb (GtkWidget       *widget,
-                                  GdkEventButton  *event,
-                                  CcShellItemView *cc_view)
-{
-  CcShellItemViewPrivate *priv = cc_view->priv;
-
-  if (event->button == 1 && !priv->ignore_release)
-    {
-      GList *selection;
-
-      selection =
-        gtk_icon_view_get_selected_items (GTK_ICON_VIEW (cc_view));
-
-      if (!selection)
-        return TRUE;
-
-      gtk_icon_view_item_activated (GTK_ICON_VIEW (cc_view),
-                                    (GtkTreePath*) selection->data);
-
-      g_list_free (selection);
-    }
-
-  return TRUE;
 }
 
 static void
@@ -198,14 +161,12 @@ cc_shell_item_view_init (CcShellItemView *self)
   g_object_set (self, "margin", 0, NULL);
   g_signal_connect (self, "item-activated",
                     G_CALLBACK (iconview_item_activated_cb), self);
-  g_signal_connect (self, "button-press-event",
-                    G_CALLBACK (iconview_button_press_event_cb), self);
-  g_signal_connect (self, "button-release-event",
-                    G_CALLBACK (iconview_button_release_event_cb), self);
 }
 
 GtkWidget *
 cc_shell_item_view_new (void)
 {
-  return g_object_new (CC_TYPE_SHELL_ITEM_VIEW, NULL);
+  return g_object_new (CC_TYPE_SHELL_ITEM_VIEW,
+                       "activate-on-single-click", TRUE,
+                       NULL);
 }
