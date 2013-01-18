@@ -217,6 +217,61 @@ net_connection_editor_class_init (NetConnectionEditorClass *class)
 }
 
 static void
+net_connection_editor_error_dialog (NetConnectionEditor *editor,
+                                    const char *primary_text,
+                                    const char *secondary_text)
+{
+        GtkWidget *dialog;
+        GtkWindow *parent;
+
+        if (gtk_widget_is_visible (editor->window))
+                parent = GTK_WINDOW (editor->window);
+        else
+                parent = GTK_WINDOW (editor->parent_window);
+
+        dialog = gtk_message_dialog_new (parent,
+                                         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                         GTK_MESSAGE_ERROR,
+                                         GTK_BUTTONS_OK,
+                                         primary_text);
+
+        if (secondary_text) {
+                gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                                          "%s", secondary_text);
+        }
+
+        g_signal_connect (dialog, "delete-event", G_CALLBACK (gtk_widget_destroy), NULL);
+        g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+        gtk_dialog_run (GTK_DIALOG (dialog));
+}
+
+static void
+net_connection_editor_do_fallback (NetConnectionEditor *editor, const gchar *type)
+{
+        gchar *cmdline;
+        GError *error = NULL;
+
+        if (editor->is_new_connection) {
+                cmdline = g_strdup_printf ("nm-connection-editor --type='%s' --create", type);
+        } else {
+                cmdline = g_strdup_printf ("nm-connection-editor --edit='%s'",
+                                           nm_connection_get_uuid (editor->connection));
+        }
+
+        g_spawn_command_line_async (cmdline, &error);
+        g_free (cmdline);
+
+        if (error) {
+                net_connection_editor_error_dialog (editor,
+                                                    _("Unable to open connection editor"),
+                                                    error->message);
+                g_error_free (error);
+        }
+
+        g_signal_emit (editor, signals[DONE], 0, FALSE);
+}
+
+static void
 net_connection_editor_update_title (NetConnectionEditor *editor)
 {
         gchar *id;
@@ -460,6 +515,11 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
                 add_page (editor, ce_page_ethernet_new (editor->connection, editor->client, editor->settings));
         else if (strcmp (type, NM_SETTING_VPN_SETTING_NAME) == 0)
                 add_page (editor, ce_page_vpn_new (editor->connection, editor->client, editor->settings));
+        else {
+                /* Unsupported type */
+                net_connection_editor_do_fallback (editor, type);
+                return;
+        }
 
         add_page (editor, ce_page_ip4_new (editor->connection, editor->client, editor->settings));
         add_page (editor, ce_page_ip6_new (editor->connection, editor->client, editor->settings));
