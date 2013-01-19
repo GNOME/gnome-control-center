@@ -2008,7 +2008,5 @@ cc_power_panel_init (CcPowerPanel *self)
   g_object_ref (widget);
   gtk_widget_unparent (widget);
   gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (box), widget);
-  gtk_style_context_add_class (gtk_widget_get_style_context (gtk_widget_get_parent (widget)), "view");
-  gtk_style_context_add_class (gtk_widget_get_style_context (gtk_widget_get_parent (widget)), "content-view");
   g_object_unref (widget);
 }
