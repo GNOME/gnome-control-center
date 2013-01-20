@@ -28,6 +28,7 @@
 #include <gio/gdesktopappinfo.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
+#include <gdk/gdkx.h>
 #include <string.h>
 #include <libgd/gd-styled-text-renderer.h>
 
@@ -1317,6 +1318,27 @@ monitors_changed_cb (GdkScreen *screen,
 }
 
 static void
+gdk_window_set_cb (GObject    *object,
+                   GParamSpec *pspec,
+                   GnomeControlCenter *self)
+{
+  GdkWindow *window;
+  gchar *str;
+
+  if (!GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
+    return;
+
+  window = gtk_widget_get_window (GTK_WIDGET (self->priv->window));
+
+  if (!window)
+    return;
+
+  str = g_strdup_printf ("%u", (guint) GDK_WINDOW_XID (window));
+  g_setenv ("GNOME_CONTROL_CENTER_XID", str, TRUE);
+  g_free (str);
+}
+
+static void
 gnome_control_center_init (GnomeControlCenter *self)
 {
   GError *err = NULL;
@@ -1358,6 +1380,7 @@ gnome_control_center_init (GnomeControlCenter *self)
   g_signal_connect_swapped (priv->window, "delete-event", G_CALLBACK (g_object_unref), self);
   g_signal_connect_after (priv->window, "key_press_event",
                           G_CALLBACK (window_key_press_event), self);
+  g_signal_connect (priv->window, "notify::window", G_CALLBACK (gdk_window_set_cb), self);
 
   priv->notebook = W (priv->builder, "notebook");
 
