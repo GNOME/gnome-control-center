@@ -93,12 +93,6 @@ _scale_box_new (GvcBalanceBar *bar)
         priv->scale = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, priv->adjustment);
         gtk_widget_set_size_request (priv->scale, SCALE_SIZE, -1);
 
-        gtk_widget_set_name (priv->scale, "balance-bar-scale");
-        gtk_rc_parse_string ("style \"balance-bar-scale-style\" {\n"
-                             " GtkScale::trough-side-details = 0\n"
-                             "}\n"
-                             "widget \"*.balance-bar-scale\" style : rc \"balance-bar-scale-style\"\n");
-
         bar->priv->start_box = sbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         gtk_box_pack_start (GTK_BOX (box), sbox, FALSE, FALSE, 0);
 
