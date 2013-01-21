@@ -5,6 +5,7 @@
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Bluetooth Sharing</property>
+    <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox6">
@@ -41,6 +42,12 @@
           <object class="GtkGrid" id="grid1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">12</property>
+            <property name="margin_right">6</property>
+            <property name="margin_top">12</property>
+            <property name="margin_bottom">12</property>
+            <property name="row_spacing">12</property>
+            <property name="column_spacing">6</property>
             <child>
               <object class="GtkLabel" id="label1">
                 <property name="visible">True</property>
@@ -196,15 +203,16 @@
       <object class="GtkBox" id="sharing-panel">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="margin_left">128</property>
-        <property name="margin_right">128</property>
-        <property name="margin_top">16</property>
-        <property name="margin_bottom">16</property>
+        <property name="margin_left">134</property>
+        <property name="margin_right">134</property>
+        <property name="margin_top">22</property>
+        <property name="margin_bottom">22</property>
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkLabel" id="label6">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_bottom">6</property>
             <property name="xalign">0</property>
             <property name="label" translatable="yes">&lt;b&gt;Computer Name&lt;/b&gt;</property>
             <property name="use_markup">True</property>
@@ -430,6 +438,7 @@
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Media Sharing</property>
+    <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox2">
@@ -466,11 +475,16 @@
           <object class="GtkGrid" id="grid4">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">12</property>
+            <property name="margin_right">6</property>
+            <property name="margin_top">12</property>
+            <property name="margin_bottom">12</property>
+            <property name="row_spacing">12</property>
+            <property name="column_spacing">6</property>
             <child>
               <object class="GtkLabel" id="label13">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="margin_bottom">12</property>
                 <property name="xalign">0</property>
                 <property name="label" translatable="yes">Share Music, Photos and Videos with others on the current network.</property>
                 <property name="wrap">True</property>
@@ -635,6 +649,7 @@
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Personal File Sharing</property>
+    <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox5">
@@ -671,11 +686,16 @@
           <object class="GtkGrid" id="grid2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">12</property>
+            <property name="margin_right">6</property>
+            <property name="margin_top">12</property>
+            <property name="margin_bottom">12</property>
+            <property name="row_spacing">12</property>
+            <property name="column_spacing">6</property>
             <child>
               <object class="GtkLabel" id="personal-file-sharing-label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="margin_bottom">12</property>
                 <property name="xalign">0</property>
                 <property name="label" translatable="yes">Personal File Sharing allows you to share your Public folder with others on your current network using: &lt;a href="dav://%s"&gt;dav://%s&lt;/a&gt;</property>
                 <property name="use_markup">True</property>
@@ -721,6 +741,8 @@
               <object class="GtkGrid" id="require-password-grid">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="row_spacing">12</property>
+                <property name="column_spacing">6</property>
                 <child>
                   <object class="GtkLabel" id="label17">
                     <property name="visible">True</property>
@@ -806,6 +828,7 @@
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Remote Login</property>
+    <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox4">
@@ -847,11 +870,16 @@
               <object class="GtkGrid" id="grid5">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="margin_left">12</property>
+                <property name="margin_right">6</property>
+                <property name="margin_top">12</property>
+                <property name="margin_bottom">12</property>
+                <property name="row_spacing">12</property>
+                <property name="column_spacing">6</property>
                 <child>
                   <object class="GtkLabel" id="remote-login-label">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_bottom">12</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Allow remote users to connect using the Secure Shell command:
 &lt;a href="ssh %s"&gt;ssh %s&lt;/a&gt;</property>
@@ -918,6 +946,7 @@
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Screen Sharing</property>
+    <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox1">
@@ -959,11 +988,15 @@
               <object class="GtkGrid" id="grid3">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="margin_left">12</property>
+                <property name="margin_right">6</property>
+                <property name="margin_bottom">12</property>
+                <property name="row_spacing">12</property>
+                <property name="column_spacing">6</property>
                 <child>
                   <object class="GtkLabel" id="screen-sharing-label">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_bottom">12</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Allow remote users to view or control your screen by connecting to: &lt;a href="vnc://%s"&gt;vnc://%s&lt;/a&gt;</property>
                     <property name="use_markup">True</property>
@@ -1037,6 +1070,7 @@
                   <object class="GtkGrid" id="remote-control-grid">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="row_spacing">12</property>
                     <child>
                       <object class="GtkLabel" id="remote-control-require-password-label">
                         <property name="visible">True</property>
