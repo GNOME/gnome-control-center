@@ -70,6 +70,7 @@ gboolean  cc_color_calibrate_start          (CcColorCalibrate *calibrate,
                                              GError          **error);
 gboolean  cc_color_calibrate_setup          (CcColorCalibrate *calibrate,
                                              GError          **error);
+CdProfile *cc_color_calibrate_get_profile   (CcColorCalibrate *calibrate);
 
 G_END_DECLS
 

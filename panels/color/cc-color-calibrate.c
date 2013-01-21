@@ -42,6 +42,7 @@ struct _CcColorCalibratePrivate
   CdDevice        *device;
   CdSensorCap      device_kind;
   CdSensor        *sensor;
+  CdProfile       *profile;
   gchar           *title;
   GDBusProxy      *proxy_helper;
   GDBusProxy      *proxy_inhibit;
@@ -55,6 +56,7 @@ struct _CcColorCalibratePrivate
   guint            target_whitepoint;   /* in Kelvin */
   gdouble          target_gamma;
   gint             inhibit_fd;
+  CdSessionError   session_error_code;
 };
 
 #define CD_SESSION_ERROR   cc_color_calibrate_error_quark()
@@ -137,6 +139,12 @@ cc_color_calibrate_set_title (CcColorCalibrate *calibrate,
   calibrate->priv->title = g_strdup (title);
 }
 
+CdProfile *
+cc_color_calibrate_get_profile (CcColorCalibrate *calibrate)
+{
+  g_return_val_if_fail (CC_IS_COLOR_CALIB (calibrate), NULL);
+  return calibrate->priv->profile;
+}
 
 static guint
 _gnome_rr_output_get_gamma_size (GnomeRROutput *output)
@@ -433,6 +441,9 @@ cc_color_calibrate_finished (CcColorCalibrate *calibrate,
   const gchar *tmp;
   CcColorCalibratePrivate *priv = calibrate->priv;
 
+  /* save failure so we can get this after we've quit the loop */
+  calibrate->priv->session_error_code = code;
+
   /* show correct buttons */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "button_cancel"));
@@ -486,21 +497,27 @@ cc_color_calibrate_signal_cb (GDBusProxy *proxy,
   CdColorRGB color;
   CdColorRGB *color_tmp;
   CdSessionInteraction code;
-  const gchar *image;
+  const gchar *image = NULL;
   const gchar *message;
-  const gchar *str;
+  const gchar *profile_path = NULL;
+  const gchar *str = NULL;
   gboolean ret;
   GError *error = NULL;
   GPtrArray *array = NULL;
   GtkImage *img;
   GtkLabel *label;
   GVariantIter *iter;
+  GVariant *dict = NULL;
 
   if (g_strcmp0 (signal_name, "Finished") == 0)
     {
-      g_variant_get (parameters, "(u&s)",
+      g_variant_get (parameters, "(u@a{sv})",
                      &code,
-                     &str);
+                     &dict);
+      g_variant_lookup (dict, "ErrorDetails", "&s", &str);
+      ret = g_variant_lookup (dict, "ProfilePath", "&s", &profile_path);
+      if (ret)
+        priv->profile = cd_profile_new_with_object_path (profile_path);
       cc_color_calibrate_finished (calibrate, code, str);
       goto out;
     }
@@ -579,7 +596,8 @@ cc_color_calibrate_signal_cb (GDBusProxy *proxy,
     }
   g_warning ("got unknown signal %s", signal_name);
 out:
-  return;
+  if (dict != NULL)
+    g_variant_unref (dict);
 }
 
 static void
@@ -961,11 +979,20 @@ cc_color_calibrate_start (CcColorCalibrate *calibrate,
   cc_color_calibrate_inhibit (calibrate);
 
   g_main_loop_run (priv->loop);
-
   gtk_widget_hide (GTK_WIDGET (window));
 
   /* we can go idle now */
   cc_color_calibrate_uninhibit (calibrate);
+
+  /* see if we failed */
+  if (calibrate->priv->session_error_code != CD_SESSION_ERROR_NONE)
+    {
+      ret = FALSE;
+      g_set_error_literal (error,
+                           CD_SESSION_ERROR,
+                           CD_SESSION_ERROR_INTERNAL,
+                           "failed to calibrate");
+    }
 out:
   if (retval != NULL)
     g_variant_unref (retval);

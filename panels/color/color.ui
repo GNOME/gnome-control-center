@@ -376,6 +376,100 @@
         <property name="title" translatable="yes">Profile Name</property>
       </packing>
     </child>
+    <child>
+      <object class="GtkBox" id="box_calib_summary">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">9</property>
+        <child>
+          <object class="GtkLabel" id="label_calib_summary_title">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="xalign">0</property>
+            <property name="xpad">6</property>
+            <property name="label" translatable="yes">Profile successfully created!</property>
+            <property name="wrap">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button_calib_export">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="halign">center</property>
+            <child>
+              <object class="GtkBox" id="box3">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="border_width">24</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">9</property>
+                <child>
+                  <object class="GtkImage" id="image2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="pixel_size">48</property>
+                    <property name="icon_name">folder-symbolic</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Export</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="padding">24</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label_calib_summary_message">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="xalign">0</property>
+            <property name="xpad">6</property>
+            <property name="label" translatable="yes">You may find these instructions on how to use the profile on &lt;a href="linux"&gt;GNU/Linux&lt;/a&gt;, &lt;a href="osx"&gt;Apple OS X&lt;/a&gt; and &lt;a href="windows"&gt;Microsoft Windows&lt;/a&gt; systems useful.</property>
+            <property name="use_markup">True</property>
+            <property name="wrap">True</property>
+            <style>
+              <class name="dim-label"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="page_type">summary</property>
+        <property name="title" translatable="yes">Summary</property>
+      </packing>
+    </child>
     <child internal-child="action_area">
       <object class="GtkBox" id="assistant-action_area1">
         <property name="can_focus">False</property>

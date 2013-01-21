@@ -57,6 +57,7 @@ struct _CcColorPanelPrivate
   gchar         *list_box_filter;
   guint          list_box_selected_id;
   GtkSizeGroup  *list_box_size;
+  gboolean       is_live_cd;
 };
 
 enum {
@@ -317,12 +318,17 @@ gcm_prefs_calib_apply_cb (GtkWidget *widget, CcColorPanel *prefs)
   if (!ret)
     {
       g_warning ("failed to start calibrate: %s", error->message);
+      gtk_widget_hide (GTK_WIDGET (window));
       g_error_free (error);
       goto out;
     }
-out:
-  if (window != NULL)
+
+  /* if we are a LiveCD then don't close the window as there is another
+   * summary pane with the export button */
+  if (!prefs->priv->is_live_cd)
     gtk_widget_hide (GTK_WIDGET (window));
+out:
+  return;
 }
 
 static gboolean
@@ -753,6 +759,74 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
 out:
   if (profile_array != NULL)
     g_ptr_array_unref (profile_array);
+}
+
+static void
+gcm_prefs_calib_export_cb (GtkWidget *widget, CcColorPanel *prefs)
+{
+  CdProfile *profile;
+  gboolean ret;
+  gchar *default_name = NULL;
+  GError *error = NULL;
+  GFile *destination = NULL;
+  GFile *source = NULL;
+  GtkWidget *dialog;
+
+  /* TRANSLATORS: this is the dialog to save the ICC profile */
+  dialog = gtk_file_chooser_dialog_new (_("Save Profile"),
+                                        GTK_WINDOW (prefs->priv->main_window),
+                                        GTK_FILE_CHOOSER_ACTION_SAVE,
+                                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                        GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+                                        NULL);
+  gtk_file_chooser_set_do_overwrite_confirmation (GTK_FILE_CHOOSER (dialog), TRUE);
+
+  profile = cc_color_calibrate_get_profile (prefs->priv->calibrate);
+  ret = cd_profile_connect_sync (profile, NULL, &error);
+  if (!ret)
+    {
+      g_warning ("Failed to get imported profile: %s", error->message);
+      g_error_free (error);
+      goto out;
+    }
+  default_name = g_strdup_printf ("%s.icc", cd_profile_get_title (profile));
+  gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog), default_name);
+
+  if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
+    {
+      source = g_file_new_for_path (cd_profile_get_filename (profile));
+      destination = gtk_file_chooser_get_file (GTK_FILE_CHOOSER (dialog));
+      ret = g_file_copy (source,
+                         destination,
+                         G_FILE_COPY_OVERWRITE,
+                         NULL,
+                         NULL,
+                         NULL,
+                         &error);
+      if (!ret)
+        {
+          g_warning ("Failed to copy profile: %s", error->message);
+          g_error_free (error);
+          goto out;
+        }
+    }
+out:
+  gtk_widget_destroy (dialog);
+  g_free (default_name);
+  if (source != NULL)
+    g_object_unref (source);
+  if (destination != NULL)
+    g_object_unref (destination);
+}
+
+static void
+gcm_prefs_calib_export_link_cb (GtkLabel *widget,
+                                const gchar *url,
+                                CcColorPanel *prefs)
+{
+  gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (prefs->priv->main_window)),
+                "help:gnome-help/color-howtoimport",
+                GDK_CURRENT_TIME, NULL);
 }
 
 static void
@@ -1796,6 +1870,33 @@ gcm_prefs_connect_cb (GObject *object,
                          prefs);
 }
 
+static gboolean
+gcm_prefs_is_livecd (void)
+{
+  gboolean ret = TRUE;
+  gchar *data = NULL;
+  GError *error = NULL;
+
+  /* allow testing */
+  if (g_getenv ("CC_COLOR_PANEL_IS_LIVECD") != NULL)
+    goto out;
+
+  /* get the kernel commandline */
+  ret = g_file_get_contents ("/proc/cmdline", &data, NULL, &error);
+  if (!ret)
+    {
+      g_warning ("failed to get kernel command line: %s",
+      error->message);
+      g_error_free (error);
+      goto out;
+    }
+  ret = (g_strstr_len (data, -1, "liveimg") != NULL ||
+         g_strstr_len (data, -1, "casper") != NULL);
+out:
+  g_free (data);
+  return ret;
+}
+
 static void
 gcm_prefs_window_realize_cb (GtkWidget *widget, CcColorPanel *prefs)
 {
@@ -2074,6 +2175,9 @@ cc_color_panel_init (CcColorPanel *prefs)
   g_signal_connect (widget, "cancel",
                     G_CALLBACK (gcm_prefs_calib_cancel_cb),
                     prefs);
+  g_signal_connect (widget, "close",
+                    G_CALLBACK (gcm_prefs_calib_cancel_cb),
+                    prefs);
   g_signal_connect (widget, "prepare",
                     G_CALLBACK (gcm_prefs_calib_prepare_cb),
                     prefs);
@@ -2229,6 +2333,21 @@ cc_color_panel_init (CcColorPanel *prefs)
 
   /* set calibrate button sensitivity */
   gcm_prefs_set_calibrate_button_sensitivity (prefs);
+
+  /* show the confirmation export page if we are running from a LiveCD */
+  priv->is_live_cd = gcm_prefs_is_livecd ();
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "box_calib_summary"));
+  gtk_widget_set_visible (widget, priv->is_live_cd);
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "button_calib_export"));
+  g_signal_connect (widget, "clicked",
+                    G_CALLBACK (gcm_prefs_calib_export_cb), prefs);
+  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
+                                               "label_calib_summary_message"));
+  g_signal_connect (widget, "activate-link",
+                    G_CALLBACK (gcm_prefs_calib_export_link_cb), prefs);
+
 
   widget = WID (priv->builder, "dialog-vbox1");
   gtk_widget_reparent (widget, (GtkWidget *) prefs);
