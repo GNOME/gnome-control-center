@@ -271,8 +271,7 @@ cc_sharing_panel_setup_bluetooth_sharing_dialog (CcSharingPanel *self)
                                          WID ("bluetooth-sharing-status-label"));
 
   cc_sharing_panel_bind_switch_to_widgets (WID ("share-public-folder-switch"),
-                                           WID ("only-share-trusted-devices-switch"),
-                                           WID ("only-share-trusted-devices-label"),
+                                           WID ("only-share-trusted-devices-box"),
                                            NULL);
 
   cc_sharing_panel_bind_switch_to_widgets (WID ("save-received-files-to-downloads-switch"),
