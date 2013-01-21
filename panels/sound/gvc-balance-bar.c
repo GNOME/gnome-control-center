@@ -91,6 +91,7 @@ _scale_box_new (GvcBalanceBar *bar)
 
         bar->priv->scale_box = box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
         priv->scale = gtk_scale_new (GTK_ORIENTATION_HORIZONTAL, priv->adjustment);
+        gtk_scale_set_has_origin (GTK_SCALE (priv->scale), FALSE);
         gtk_widget_set_size_request (priv->scale, SCALE_SIZE, -1);
 
         bar->priv->start_box = sbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
