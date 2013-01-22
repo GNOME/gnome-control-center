@@ -104,6 +104,7 @@ cc_build_edit_dialog (CcNotificationsPanel *panel,
         }
 
       _switch = gtk_switch_new ();
+      gtk_label_set_mnemonic_widget (GTK_LABEL (label), _switch);
       g_settings_bind (settings, policy_settings[i].setting_key,
                        _switch, "active",
                        G_SETTINGS_BIND_DEFAULT);
