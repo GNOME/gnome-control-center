@@ -35,6 +35,7 @@
 
 #include "cc-online-accounts-add-account-dialog.h"
 #include "cc-online-accounts-model.h"
+#include "cc-online-accounts-resources.h"
 
 typedef struct _CcGoaPanelClass CcGoaPanelClass;
 
