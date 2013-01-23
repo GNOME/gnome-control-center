@@ -73,6 +73,9 @@ struct _CcPowerPanelPrivate
   GDBusProxy    *screen_proxy;
   gboolean       has_batteries;
 
+  GList         *boxes;
+  GList         *boxes_reverse;
+
   GtkSizeGroup  *row_sizegroup;
   GtkSizeGroup  *battery_sizegroup;
   GtkSizeGroup  *charge_sizegroup;
@@ -109,6 +112,8 @@ struct _CcPowerPanelPrivate
   GtkWidget     *mobile_switch;
   GtkWidget     *mobile_row;
 #endif
+
+  GtkAdjustment *focus_adjustment;
 };
 
 enum
@@ -139,6 +144,8 @@ cc_power_panel_dispose (GObject *object)
 #ifdef HAVE_NETWORK_MANAGER
   g_clear_object (&priv->nm_client);
 #endif
+  g_clear_pointer (&priv->boxes, g_list_free);
+  g_clear_pointer (&priv->boxes_reverse, g_list_free);
 
   G_OBJECT_CLASS (cc_power_panel_parent_class)->dispose (object);
 }
@@ -1284,6 +1291,66 @@ nm_device_changed (NMClient     *client,
 
 #endif
 
+static gboolean
+keynav_failed (GtkWidget *list, GtkDirectionType direction, CcPowerPanel *self)
+{
+  CcPowerPanelPrivate *priv = self->priv;
+  GtkWidget *next_list = NULL;
+  GList *item, *boxes_list;
+  gdouble value, lower, upper, page;
+
+  /* Find the list in the list of EggListBoxes */
+  if (direction == GTK_DIR_DOWN)
+    boxes_list = priv->boxes;
+  else
+    boxes_list = priv->boxes_reverse;
+
+  item = g_list_find (boxes_list, list);
+  g_assert (item);
+  item = item->next;
+  while (1)
+    {
+      if (item == NULL)
+        item = boxes_list;
+
+      /* Avoid looping */
+      if (item->data == list)
+        break;
+
+      if (gtk_widget_is_visible (item->data))
+        {
+          next_list = item->data;
+          break;
+        }
+
+    item = item->next;
+  }
+
+  if (next_list)
+    {
+      gtk_widget_child_focus (next_list, direction);
+      return TRUE;
+    }
+
+  value = gtk_adjustment_get_value (priv->focus_adjustment);
+  lower = gtk_adjustment_get_lower (priv->focus_adjustment);
+  upper = gtk_adjustment_get_upper (priv->focus_adjustment);
+  page  = gtk_adjustment_get_page_size (priv->focus_adjustment);
+
+  if (direction == GTK_DIR_UP && value > lower)
+    {
+      gtk_adjustment_set_value (priv->focus_adjustment, lower);
+      return TRUE;
+    }
+  else if (direction == GTK_DIR_DOWN && value < upper - page)
+    {
+      gtk_adjustment_set_value (priv->focus_adjustment, upper - page);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
 static void
 combo_idle_delay_changed_cb (GtkWidget *widget, CcPowerPanel *self)
 {
@@ -1333,6 +1400,8 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_widget_show (widget);
 
   widget = GTK_WIDGET (egg_list_box_new ());
+  priv->boxes_reverse = g_list_prepend (priv->boxes_reverse, widget);
+  g_signal_connect (widget, "keynav-failed", G_CALLBACK (keynav_failed), self);
   egg_list_box_set_selection_mode (EGG_LIST_BOX (widget), GTK_SELECTION_NONE);
   egg_list_box_set_separator_funcs (EGG_LIST_BOX (widget),
                                     update_separator_func,
@@ -1682,6 +1751,8 @@ add_automatic_suspend_section (CcPowerPanel *self)
   gtk_widget_show (widget);
 
   widget = GTK_WIDGET (egg_list_box_new ());
+  priv->boxes_reverse = g_list_prepend (priv->boxes_reverse, widget);
+  g_signal_connect (widget, "keynav-failed", G_CALLBACK (keynav_failed), self);
   egg_list_box_set_selection_mode (EGG_LIST_BOX (widget), GTK_SELECTION_NONE);
   egg_list_box_set_separator_funcs (EGG_LIST_BOX (widget),
                                     update_separator_func,
@@ -1853,6 +1924,8 @@ add_battery_section (CcPowerPanel *self)
   gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
 
   priv->battery_list = widget = GTK_WIDGET (egg_list_box_new ());
+  priv->boxes_reverse = g_list_prepend (priv->boxes_reverse, priv->battery_list);
+  g_signal_connect (widget, "keynav-failed", G_CALLBACK (keynav_failed), self);
   egg_list_box_set_selection_mode (EGG_LIST_BOX (widget), GTK_SELECTION_NONE);
   egg_list_box_set_separator_funcs (EGG_LIST_BOX (widget),
                                     update_separator_func,
@@ -1902,6 +1975,8 @@ add_device_section (CcPowerPanel *self)
   gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
 
   priv->device_list = widget = GTK_WIDGET (egg_list_box_new ());
+  priv->boxes_reverse = g_list_prepend (priv->boxes_reverse, priv->device_list);
+  g_signal_connect (widget, "keynav-failed", G_CALLBACK (keynav_failed), self);
   egg_list_box_set_selection_mode (EGG_LIST_BOX (widget), GTK_SELECTION_NONE);
   egg_list_box_set_separator_funcs (EGG_LIST_BOX (widget),
                                     update_separator_func,
@@ -1988,6 +2063,9 @@ cc_power_panel_init (CcPowerPanel *self)
   add_power_saving_section (self);
   add_automatic_suspend_section (self);
 
+  priv->boxes = g_list_copy (priv->boxes_reverse);
+  priv->boxes = g_list_reverse (priv->boxes);
+
   set_ac_battery_ui_mode (self);
   update_automatic_suspend_label (self);
 
@@ -2009,4 +2087,7 @@ cc_power_panel_init (CcPowerPanel *self)
   gtk_widget_unparent (widget);
   gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (box), widget);
   g_object_unref (widget);
+
+  priv->focus_adjustment = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (box));
+  gtk_container_set_focus_vadjustment (GTK_CONTAINER (widget), priv->focus_adjustment);
 }
