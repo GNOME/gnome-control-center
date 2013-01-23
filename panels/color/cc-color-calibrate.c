@@ -676,15 +676,6 @@ cc_color_calibrate_window_state_cb (GtkWidget *widget,
   /* check event */
   if (event->type != GDK_WINDOW_STATE)
     return TRUE;
-
-  /* did the user do alt-tab? */
-  if (event_state->changed_mask == GDK_WINDOW_STATE_FOCUSED &&
-      event_state->new_window_state & GDK_WINDOW_STATE_FULLSCREEN &&
-      (event_state->new_window_state & GDK_WINDOW_STATE_FOCUSED) == 0)
-    {
-      g_debug("unfocussed calibration invalid");
-      cc_color_calibrate_cancel (calibrate);
-    }
   if (event_state->changed_mask != GDK_WINDOW_STATE_FULLSCREEN)
     return TRUE;
 
