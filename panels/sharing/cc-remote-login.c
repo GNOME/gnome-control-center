@@ -52,8 +52,12 @@ active_state_ready_callback (GObject      *source_object,
   g_variant_unref (tmp_variant);
 
   /* set the switch to the correct state */
-  g_object_set_data (G_OBJECT (gtkswitch), "set-from-dbus", GINT_TO_POINTER (1));
-  gtk_switch_set_active (gtkswitch, active);
+  if (gtk_switch_get_active (gtkswitch) != active)
+    {
+      g_object_set_data (G_OBJECT (gtkswitch), "set-from-dbus",
+                         GINT_TO_POINTER (1));
+      gtk_switch_set_active (gtkswitch, active);
+    }
   gtk_widget_set_sensitive (gtkswitch, TRUE);
 }
 
