@@ -654,7 +654,7 @@ cc_sharing_panel_setup_screen_sharing_dialog (CcSharingPanel *self)
                                            WID ("remote-control-require-password-switch"),
                                            WID ("remote-control-require-password-label"),
                                            WID ("approve-all-connections-label"),
-                                           WID ("password-box"),
+                                           WID ("password-grid"),
                                            NULL);
 
   cc_sharing_panel_bind_switch_to_widgets (WID ("remote-control-require-password-switch"),
@@ -686,6 +686,10 @@ cc_sharing_panel_setup_screen_sharing_dialog (CcSharingPanel *self)
                                 "text",
                                 G_SETTINGS_BIND_DEFAULT,
                                 vino_get_password, vino_set_password, NULL, NULL);
+
+  g_object_bind_property (WID ("show-password-checkbutton"), "active",
+                          WID ("remote-control-password-entry"), "visibility",
+                          G_BINDING_SYNC_CREATE);
 }
 
 static void
