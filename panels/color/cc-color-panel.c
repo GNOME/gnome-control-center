@@ -2538,12 +2538,12 @@ cc_color_panel_init (CcColorPanel *prefs)
 
   /* use a device client array */
   priv->client = cd_client_new ();
-  g_signal_connect (priv->client, "device-added",
-                    G_CALLBACK (gcm_prefs_device_added_cb), prefs);
-  g_signal_connect (priv->client, "device-removed",
-                    G_CALLBACK (gcm_prefs_device_removed_cb), prefs);
-  g_signal_connect (priv->client, "changed",
-                    G_CALLBACK (gcm_prefs_changed_cb), prefs);
+  g_signal_connect_object (priv->client, "device-added",
+                           G_CALLBACK (gcm_prefs_device_added_cb), prefs, 0);
+  g_signal_connect_object (priv->client, "device-removed",
+                           G_CALLBACK (gcm_prefs_device_removed_cb), prefs, 0);
+  g_signal_connect_object (priv->client, "changed",
+                           G_CALLBACK (gcm_prefs_changed_cb), prefs, 0);
 
   /* connect to colord */
   cd_client_connect (priv->client,
@@ -2552,12 +2552,12 @@ cc_color_panel_init (CcColorPanel *prefs)
                      prefs);
 
   /* use the color sensor */
-  g_signal_connect (priv->client, "sensor-added",
-                    G_CALLBACK (gcm_prefs_client_sensor_changed_cb),
-                    prefs);
-  g_signal_connect (priv->client, "sensor-removed",
-                    G_CALLBACK (gcm_prefs_client_sensor_changed_cb),
-                    prefs);
+  g_signal_connect_object (priv->client, "sensor-added",
+                           G_CALLBACK (gcm_prefs_client_sensor_changed_cb),
+                           prefs, 0);
+  g_signal_connect_object (priv->client, "sensor-removed",
+                           G_CALLBACK (gcm_prefs_client_sensor_changed_cb),
+                           prefs, 0);
 
   /* set calibrate button sensitivity */
   gcm_prefs_set_calibrate_button_sensitivity (prefs);
