@@ -27,9 +27,11 @@
 #include <locale.h>
 #include <langinfo.h>
 #include <stdlib.h>
+#define GNOME_DESKTOP_USE_UNSTABLE_API
+#include <libgnome-desktop/gnome-languages.h>
+
 #include "cc-common-language.h"
 #include "cc-language-chooser.h"
-#include "gdm-languages.h"
 #include "gnome-region-panel-formats.h"
 
 static void
@@ -237,7 +239,7 @@ populate_regions (GtkBuilder *builder, const gchar *current_lang)
                 current_region = g_strdup (current_lang);
         }
         else if (!g_hash_table_lookup (ht, current_region)) {
-                name = gdm_get_region_from_name (current_region, NULL);
+                name = gnome_get_region_from_name (current_region, NULL);
                 g_hash_table_insert (ht, g_strdup (current_region), name);
         }
 

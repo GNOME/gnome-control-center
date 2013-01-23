@@ -34,7 +34,6 @@
 #include <ibus.h>
 #endif
 
-#include "gdm-languages.h"
 #include "gnome-region-panel-input.h"
 
 #define WID(s) GTK_WIDGET(gtk_builder_get_object (builder, s))

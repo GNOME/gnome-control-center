@@ -2,14 +2,10 @@
 cappletname = common
 
 noinst_LTLIBRARIES = liblanguage.la
-noinst_PROGRAMS = list-languages
 
 AM_CPPFLAGS =						\
 	$(PANEL_CFLAGS)					\
-	$(LIBLANGUAGE_CFLAGS)				\
-	-DDATADIR=\""$(datadir)"\"			\
-	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\"       \
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
+	$(LIBLANGUAGE_CFLAGS)
 
 BUILT_SOURCES =			\
 	cc-common-resources.c	\
@@ -17,9 +13,6 @@ BUILT_SOURCES =			\
 
 liblanguage_la_SOURCES =		\
 	$(BUILT_SOURCES)		\
-	gdm-languages.h 		\
-	gdm-languages.c 		\
-	locarchive.h			\
 	cc-common-language.c		\
 	cc-common-language.h		\
 	cc-language-chooser.c		\
@@ -27,10 +20,6 @@ liblanguage_la_SOURCES =		\
 
 liblanguage_la_LIBADD = 		\
 	$(LIBLANGUAGE_LIBS)
-
-list_languages_SOURCES = list-languages.c
-list_languages_LDADD = liblanguage.la
-list_languages_CFLAGS = $(LIBLANGUAGE_CFLAGS)
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/common.gresource.xml)
 cc-common-resources.c: common.gresource.xml $(resource_files)

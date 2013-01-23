@@ -30,10 +30,10 @@
 #include <glib/gi18n.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
+#include <libgnome-desktop/gnome-languages.h>
 #include <libgnome-desktop/gnome-xkb-info.h>
 
 #include "cc-common-language.h"
-#include "gdm-languages.h"
 #include "gnome-region-panel-system.h"
 
 #define WID(s) GTK_WIDGET(gtk_builder_get_object (dialog, s))
@@ -106,7 +106,7 @@ locale_settings_changed (GSettings *settings,
                 region = g_strdup ((gchar*)g_object_get_data (G_OBJECT (label), "language"));
         }
 
-        display_region = gdm_get_region_from_name (region, NULL);
+        display_region = gnome_get_region_from_name (region, NULL);
         label = WID ("user_format");
         gtk_label_set_text (GTK_LABEL (label), display_region);
         g_object_set_data_full (G_OBJECT (label), "region", g_strdup (region), g_free);
@@ -122,7 +122,7 @@ system_update_language (GtkBuilder *dialog, const gchar *language)
         gchar *display_language;
         GtkWidget *label;
 
-        display_language = gdm_get_language_from_name (language, NULL);
+        display_language = gnome_get_language_from_name (language, NULL);
         label = WID ("user_display_language");
         gtk_label_set_text (GTK_LABEL (label), display_language);
         g_object_set_data_full (G_OBJECT (label), "language", g_strdup (language), g_free);
@@ -283,7 +283,7 @@ on_localed_properties_changed (GDBusProxy   *proxy,
                 }
 
                 if (messages) {
-                        name = gdm_get_language_from_name (messages, NULL);
+                        name = gnome_get_language_from_name (messages, NULL);
                         label = WID ("system_display_language");
                         gtk_label_set_text (GTK_LABEL (label), name);
                         g_free (name);
@@ -291,7 +291,7 @@ on_localed_properties_changed (GDBusProxy   *proxy,
                 }
 
                 if (time) {
-                        name = gdm_get_region_from_name (time, NULL);
+                        name = gnome_get_region_from_name (time, NULL);
                         label = WID ("system_format");
                         gtk_label_set_text (GTK_LABEL (label), name);
                         g_free (name);

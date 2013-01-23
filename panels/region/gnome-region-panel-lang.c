@@ -32,7 +32,6 @@
 #include "gnome-region-panel-system.h"
 #include "cc-common-language.h"
 #include "cc-language-chooser.h"
-#include "gdm-languages.h"
 
 static GDBusProxy *proxy = NULL;
 static GDBusProxy *sm_proxy = NULL;

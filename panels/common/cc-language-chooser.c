@@ -34,7 +34,6 @@
 #include "cc-language-chooser.h"
 #include "cc-common-language.h"
 #include "cc-common-resources.h"
-#include "gdm-languages.h"
 
 gchar *
 cc_language_chooser_get_language (GtkWidget *chooser)

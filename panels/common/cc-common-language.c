@@ -30,9 +30,10 @@
 
 #include <fontconfig/fontconfig.h>
 
-#include "cc-common-language.h"
+#define GNOME_DESKTOP_USE_UNSTABLE_API
+#include <libgnome-desktop/gnome-languages.h>
 
-#include "gdm-languages.h"
+#include "cc-common-language.h"
 
 static char *get_lang_for_user_object_path (const char *path);
 
@@ -112,13 +113,13 @@ iter_for_language (GtkTreeModel *model,
                 g_free (l);
         } while (gtk_tree_model_iter_next (model, iter));
 
-        name = gdm_normalize_language_name (lang);
+        name = gnome_normalize_language_name (lang);
         if (name != NULL) {
                 if (region) {
-                        language = gdm_get_region_from_name (name, NULL);
+                        language = gnome_get_region_from_name (name, NULL);
                 }
                 else {
-                        language = gdm_get_language_from_name (name, NULL);
+                        language = gnome_get_language_from_name (name, NULL);
                 }
 
                 gtk_list_store_insert_with_values (GTK_LIST_STORE (model),
@@ -166,7 +167,7 @@ cc_common_language_has_font (const gchar *locale)
         object_set = NULL;
         font_set = NULL;
 
-        if (!gdm_parse_language_name (locale, &language_code, NULL, NULL, NULL))
+        if (!gnome_parse_language_name (locale, &language_code, NULL, NULL, NULL))
                 return FALSE;
 
         charset = FcLangGetCharSet ((FcChar8 *) language_code);
@@ -241,7 +242,7 @@ add_one_language (gpointer d)
     return FALSE;
   }
 
-  name = gdm_normalize_language_name (data->languages[data->position]);
+  name = gnome_normalize_language_name (data->languages[data->position]);
   if (g_hash_table_lookup (data->user_langs, name) != NULL) {
     g_free (name);
     goto next;
@@ -253,10 +254,10 @@ add_one_language (gpointer d)
   }
 
   if (data->regions) {
-    language = gdm_get_region_from_name (name, NULL);
+    language = gnome_get_region_from_name (name, NULL);
   }
   else {
-    language = gdm_get_language_from_name (name, NULL);
+    language = gnome_get_language_from_name (name, NULL);
   }
   if (!language) {
     g_debug ("Ignoring '%s' as a locale, because we couldn't figure the language name", name);
@@ -291,7 +292,7 @@ cc_common_language_add_available_languages (GtkListStore *store,
 
   data->store = g_object_ref (store);
   data->user_langs = g_hash_table_ref (user_langs);
-  data->languages = gdm_get_all_language_names ();
+  data->languages = gnome_get_all_language_names ();
   data->regions = regions;
   data->position = 0;
 
@@ -313,7 +314,7 @@ cc_common_language_get_current_language (void)
 
         locale = (const gchar *) setlocale (LC_MESSAGES, NULL);
         if (locale)
-                language = gdm_normalize_language_name (locale);
+                language = gnome_normalize_language_name (locale);
         else
                 language = NULL;
 
@@ -466,17 +467,17 @@ user_language_has_translations (const char *locale)
         char *name, *language_code, *territory_code;
         gboolean ret;
 
-        gdm_parse_language_name (locale,
-                                 &language_code,
-                                 &territory_code,
-                                 NULL, NULL);
+        gnome_parse_language_name (locale,
+                                   &language_code,
+                                   &territory_code,
+                                   NULL, NULL);
         name = g_strdup_printf ("%s%s%s",
                                 language_code,
                                 territory_code != NULL? "_" : "",
                                 territory_code != NULL? territory_code : "");
         g_free (language_code);
         g_free (territory_code);
-        ret = gdm_language_has_translations (name);
+        ret = gnome_language_has_translations (name);
         g_free (name);
 
         return ret;
@@ -556,9 +557,9 @@ add_other_users_language (GHashTable *ht)
                 if (lang != NULL && *lang != '\0' &&
                     cc_common_language_has_font (lang) &&
                     user_language_has_translations (lang)) {
-                        name = gdm_normalize_language_name (lang);
+                        name = gnome_normalize_language_name (lang);
                         if (!g_hash_table_lookup (ht, name)) {
-                                language = gdm_get_language_from_name (name, NULL);
+                                language = gnome_get_language_from_name (name, NULL);
                                 g_hash_table_insert (ht, name, language);
                         }
                         else {
@@ -587,9 +588,9 @@ insert_language (GHashTable *ht,
 	char *label;
 	char *key;
 
-	if (gdm_language_has_translations (long_lang))
+	if (gnome_language_has_translations (long_lang))
 		lang = long_lang;
-	else if (short_lang != NULL && gdm_language_has_translations (short_lang))
+	else if (short_lang != NULL && gnome_language_has_translations (short_lang))
 		lang = short_lang;
 	else {
 		g_warning ("%s lacks translations, why is it default?", long_lang);
@@ -662,7 +663,7 @@ cc_common_language_get_user_languages (void)
         /* Add current locale */
         name = cc_common_language_get_current_language ();
         if (g_hash_table_lookup (ht, name) == NULL) {
-                language = gdm_get_language_from_name (name, NULL);
+                language = gnome_get_language_from_name (name, NULL);
                 g_hash_table_insert (ht, name, language);
         } else {
                 g_free (name);
@@ -690,14 +691,14 @@ cc_common_language_get_initial_regions (const gchar *lang)
         g_hash_table_insert (ht, g_strdup ("zh_CN.utf8"), g_strdup (_("China")));
 #endif
 
-        gdm_parse_language_name (lang, &language, NULL, NULL, NULL);
-        langs = gdm_get_all_language_names ();
+        gnome_parse_language_name (lang, &language, NULL, NULL, NULL);
+        langs = gnome_get_all_language_names ();
         for (i = 0; langs[i]; i++) {
                 gchar *l, *s;
-                gdm_parse_language_name (langs[i], &l, NULL, NULL, NULL);
+                gnome_parse_language_name (langs[i], &l, NULL, NULL, NULL);
                 if (g_strcmp0 (language, l) == 0) {
                         if (!g_hash_table_lookup (ht, langs[i])) {
-                                s = gdm_get_region_from_name (langs[i], NULL);
+                                s = gnome_get_region_from_name (langs[i], NULL);
                                 g_hash_table_insert (ht, g_strdup (langs[i]), s);
                         }
                 }
