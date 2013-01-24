@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-24 00:37+0100\n"
-"PO-Revision-Date: 2013-01-24 21:58+0100\n"
+"POT-Creation-Date: 2013-01-24 22:11+0100\n"
+"PO-Revision-Date: 2013-01-24 22:11+0100\n"
 "Last-Translator: Luca Ferretti <lferrett@gnome.org>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -223,6 +223,131 @@ msgstr ""
 "Se si rimuove il dispositivo, sarà poi necessario impostarlo di nuovo prima "
 "del prossimo uso."
 
+#. TRANSLATORS: The user has to attach the sensor to the screen
+#: ../panels/color/cc-color-calibrate.c:360
+msgid "Place your calibration device over the square and press 'Start'"
+msgstr ""
+
+#. TRANSLATORS: Some calibration devices need the user to move a
+#. * dial or switch manually. We also show a picture showing them
+#. * what to do...
+#: ../panels/color/cc-color-calibrate.c:366
+msgid ""
+"Move your calibration device to the calibrate position and press 'Continue'"
+msgstr ""
+
+#. TRANSLATORS: Some calibration devices need the user to move a
+#. * dial or switch manually. We also show a picture showing them
+#. * what to do...
+#: ../panels/color/cc-color-calibrate.c:372
+msgid ""
+"Move your calibration device to the surface position and press 'Continue'"
+msgstr ""
+
+#. TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
+#. * is built into the palmrest and we need to fullscreen the
+#. * sample widget and shut the lid.
+#: ../panels/color/cc-color-calibrate.c:378
+msgid "Shut the laptop lid"
+msgstr ""
+
+#. TRANSLATORS: We suck, the calibation failed and we have no
+#. * good idea why or any suggestions
+#: ../panels/color/cc-color-calibrate.c:409
+#, fuzzy
+msgid "An internal error occurred that could not be recovered."
+msgstr "Si è verificato un errore interno."
+
+#. TRANSLATORS: Some required-at-runtime tools were not
+#. * installed, which should only affect insane distros
+#: ../panels/color/cc-color-calibrate.c:414
+msgid "Tools required for calibration are not installed."
+msgstr ""
+
+#. TRANSLATORS: The profile failed for some reason
+#: ../panels/color/cc-color-calibrate.c:420
+#, fuzzy
+msgid "The profile could not be generated."
+msgstr "Questo profilo potrebbe non essere più accurato"
+
+#. TRANSLATORS: The user specified a whitepoint that was
+#. * unobtainable with the hardware they've got -- see
+#. * https://en.wikipedia.org/wiki/White_point for details
+#: ../panels/color/cc-color-calibrate.c:426
+msgid "The target whitepoint was not obtainable."
+msgstr ""
+
+#. TRANSLATORS: the display calibration process is finished
+#: ../panels/color/cc-color-calibrate.c:466
+#, fuzzy
+msgid "Complete!"
+msgstr "Completato"
+
+#. TRANSLATORS: the display calibration failed, and we also show
+#. * the translated (or untranslated) error string after this
+#: ../panels/color/cc-color-calibrate.c:474
+#, fuzzy
+msgid "Calibration failed!"
+msgstr "Configurazione non riuscita"
+
+#. TRANSLATORS: The user can now remove the sensor from the screen
+#: ../panels/color/cc-color-calibrate.c:481
+msgid "You can remove the calibration device."
+msgstr ""
+
+#. TRANSLATORS: The user has to be careful not to knock the
+#. * display off the screen (although we do cope if this is
+#. * detected early enough)
+#: ../panels/color/cc-color-calibrate.c:552
+msgid "Do not disturb the calibration device while in progress"
+msgstr ""
+
+#. TRANSLATORS: This refers to the TFT display on a laptop
+#: ../panels/color/cc-color-common.c:41
+msgid "Laptop Screen"
+msgstr "Schermo del portatile"
+
+#. TRANSLATORS: This refers to the embedded webcam on a laptop
+#: ../panels/color/cc-color-common.c:50
+msgid "Built-in Webcam"
+msgstr "Webcam integrata"
+
+#. TRANSLATORS: an externally connected display, where %s is either the
+#. * model, vendor or ID, e.g. 'LP2480zx Monitor'
+#: ../panels/color/cc-color-common.c:65
+#, c-format
+msgid "%s Monitor"
+msgstr "Monitor %s"
+
+#. TRANSLATORS: a flatbed scanner device, e.g. 'Epson Scanner'
+#: ../panels/color/cc-color-common.c:69
+#, c-format
+msgid "%s Scanner"
+msgstr "Scanner %s"
+
+#. TRANSLATORS: a camera device, e.g. 'Nikon D60 Camera'
+#: ../panels/color/cc-color-common.c:73
+#, c-format
+msgid "%s Camera"
+msgstr "Fotocamera %s"
+
+#. TRANSLATORS: a printer device, e.g. 'Epson Photosmart Printer'
+#: ../panels/color/cc-color-common.c:77
+#, c-format
+msgid "%s Printer"
+msgstr "Stampante %s"
+
+#. TRANSLATORS: a webcam device, e.g. 'Philips HiDef Camera'
+#: ../panels/color/cc-color-common.c:81
+#, c-format
+msgid "%s Webcam"
+msgstr "Webcam %s"
+
+#. not calibrated
+#: ../panels/color/cc-color-device.c:303
+msgid "Not calibrated"
+msgstr "Non calibrato"
+
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
 #: ../panels/color/cc-color-panel.c:131
@@ -295,57 +420,6 @@ msgstr "Lo strumento di misura non supporta il profiling della stampante."
 msgid "The device type is not currently supported."
 msgstr "Il tipo di dispositivo non è al momento supportato."
 
-#. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:1247
-msgid "Cannot remove automatically added profile"
-msgstr "Impossibile rimuovere il profilo aggiunto in modo automatico"
-
-#. TRANSLATORS: This refers to the TFT display on a laptop
-#: ../panels/color/cc-color-common.c:41
-msgid "Laptop Screen"
-msgstr "Schermo del portatile"
-
-#. TRANSLATORS: This refers to the embedded webcam on a laptop
-#: ../panels/color/cc-color-common.c:50
-msgid "Built-in Webcam"
-msgstr "Webcam integrata"
-
-#. TRANSLATORS: an externally connected display, where %s is either the
-#. * model, vendor or ID, e.g. 'LP2480zx Monitor'
-#: ../panels/color/cc-color-common.c:65
-#, c-format
-msgid "%s Monitor"
-msgstr "Monitor %s"
-
-#. TRANSLATORS: a flatbed scanner device, e.g. 'Epson Scanner'
-#: ../panels/color/cc-color-common.c:69
-#, c-format
-msgid "%s Scanner"
-msgstr "Scanner %s"
-
-#. TRANSLATORS: a camera device, e.g. 'Nikon D60 Camera'
-#: ../panels/color/cc-color-common.c:73
-#, c-format
-msgid "%s Camera"
-msgstr "Fotocamera %s"
-
-#. TRANSLATORS: a printer device, e.g. 'Epson Photosmart Printer'
-#: ../panels/color/cc-color-common.c:77
-#, c-format
-msgid "%s Printer"
-msgstr "Stampante %s"
-
-#. TRANSLATORS: a webcam device, e.g. 'Philips HiDef Camera'
-#: ../panels/color/cc-color-common.c:81
-#, c-format
-msgid "%s Webcam"
-msgstr "Webcam %s"
-
-#. not calibrated
-#: ../panels/color/cc-color-device.c:303
-msgid "Not calibrated"
-msgstr "Non calibrato"
-
 #. TRANSLATORS: standard spaces are well known colorspaces like
 #. * sRGB, AdobeRGB and ProPhotoRGB
 #: ../panels/color/cc-color-profile.c:101
@@ -390,7 +464,6 @@ msgctxt "Profile quality"
 msgid "High Quality"
 msgstr "Qualità alta"
 
-# FIXME context
 #. TRANSLATORS: this default RGB space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
 #: ../panels/color/cc-color-profile.c:154
@@ -398,7 +471,6 @@ msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "RGB predefinito"
 
-# FIXME context
 #. TRANSLATORS: this default CMYK space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
 #: ../panels/color/cc-color-profile.c:161
@@ -406,7 +478,6 @@ msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "CMYK predefinito"
 
-# FIXME context
 #. TRANSLATORS: this default gray space is used for printers that
 #. * do not have additional printer profiles specified in the PPD
 #: ../panels/color/cc-color-profile.c:168
@@ -426,6 +497,35 @@ msgstr ""
 msgid "This profile may no longer be accurate"
 msgstr "Questo profilo potrebbe non essere più accurato"
 
+#: ../panels/color/color-calibrate.ui.h:1
+#, fuzzy
+msgid "Display Calibration"
+msgstr "Calibrazione schermo"
+
+# FIXME!!
+#: ../panels/color/color-calibrate.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+#: ../panels/user-accounts/data/photo-dialog.ui.h:8
+#: ../panels/user-accounts/um-account-dialog.c:1067
+msgid "Cancel"
+msgstr "Annulla"
+
+#. This starts the calibration process
+#: ../panels/color/color-calibrate.ui.h:4
+msgid "Start"
+msgstr ""
+
+#. This resumes the calibration process
+#: ../panels/color/color-calibrate.ui.h:6
+msgid "Resume"
+msgstr ""
+
+#. This button returns the user back to the color control panel
+#: ../panels/color/color-calibrate.ui.h:8
+#, fuzzy
+msgid "Done"
+msgstr "Eseguito."
+
 #. Text printed on screen
 #: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/gui_gtk.c:78
 msgid "Screen Calibration"
@@ -436,12 +536,16 @@ msgid ""
 "Calibration will produce a profile that you can use to color manage your "
 "screen. The longer you spend on calibration, the better the quality of the "
 "color profile."
-msgstr "La calibrazione produrrà un profilo che potrà essere usato per gestiore la gesione del colore dello schermo. Più tempo si dedica alla calibrazione, migliore sarà la qualità del profilo colore."
+msgstr ""
+"La calibrazione produrrà un profilo che potrà essere usato per gestiore la "
+"gesione del colore dello schermo. Più tempo si dedica alla calibrazione, "
+"migliore sarà la qualità del profilo colore."
 
 #: ../panels/color/color.ui.h:3
 msgid ""
 "You will not be able to use your computer while calibration takes place."
-msgstr "Non sarà possibile usare il computer mentre viene eseguita la calibrazione."
+msgstr ""
+"Non sarà possibile usare il computer mentre viene eseguita la calibrazione."
 
 #. This is the approximate time it takes to calibrate the display.
 #: ../panels/color/color.ui.h:5
@@ -469,7 +573,8 @@ msgstr "Tipo monitor"
 
 #: ../panels/color/color.ui.h:11
 msgid "Select the sensor device you want to use for calibration."
-msgstr "Selezionare il dispositivo sensore che si vuole usare per la calibrazione."
+msgstr ""
+"Selezionare il dispositivo sensore che si vuole usare per la calibrazione."
 
 #: ../panels/color/color.ui.h:12
 msgid "Calibration Device"
@@ -489,13 +594,18 @@ msgstr ""
 msgid ""
 "Please set the display to a brightness that is typical for you. Color "
 "management will be most accurate at this brightness level."
-msgstr "Regolare la luminosità del monitor in modo che sia quella usata abitualmente. La gestione del colore sarà più accurata a tale livello di luminosità."
+msgstr ""
+"Regolare la luminosità del monitor in modo che sia quella usata "
+"abitualmente. La gestione del colore sarà più accurata a tale livello di "
+"luminosità."
 
 #: ../panels/color/color.ui.h:16
 msgid ""
 "Alternatively, you can use the brightness level used with one of the other "
 "profiles for this device."
-msgstr "In alternativa è possibile usare il livello di luminosità usato con uno degli altri profili per questo dispositivo."
+msgstr ""
+"In alternativa è possibile usare il livello di luminosità usato con uno "
+"degli altri profili per questo dispositivo."
 
 #: ../panels/color/color.ui.h:17
 msgid "Display Brightness"
@@ -505,7 +615,9 @@ msgstr "Luminosità monitor"
 msgid ""
 "You can use a color profile on different computers, or even create profiles "
 "for different lighting conditions."
-msgstr "È possibile usare un profilo colore su diversi computer, o anche creare profili per diverse condizioni di illuminazione."
+msgstr ""
+"È possibile usare un profilo colore su diversi computer, o anche creare "
+"profili per diverse condizioni di illuminazione."
 
 #: ../panels/color/color.ui.h:19
 msgid "Profile Name:"
@@ -628,83 +740,68 @@ msgid "LCD"
 msgstr "LCD"
 
 #: ../panels/color/color.ui.h:45
-msgid "1"
-msgstr "1"
-
-#: ../panels/color/color.ui.h:46
 msgid "LED"
 msgstr "LED"
 
-#: ../panels/color/color.ui.h:47
-msgid "8"
-msgstr "8"
-
-#: ../panels/color/color.ui.h:48
+#: ../panels/color/color.ui.h:46
 msgid "CRT"
 msgstr "CRT"
 
-# FIXME not-translate
-#: ../panels/color/color.ui.h:49
-msgid "2"
-msgstr "2"
-
-#: ../panels/color/color.ui.h:50
+#: ../panels/color/color.ui.h:47
 msgid "Projector"
 msgstr "Proiettore"
 
-#: ../panels/color/color.ui.h:51
-msgid "5"
-msgstr "5"
-
 # FIXME missin context
-#: ../panels/color/color.ui.h:52
+#: ../panels/color/color.ui.h:48
+#, fuzzy
+msgctxt "Calibration quality"
 msgid "High"
 msgstr "Alta"
 
-#: ../panels/color/color.ui.h:53
+#: ../panels/color/color.ui.h:49
 msgid "40 minutes"
 msgstr "40 minuti"
 
 # FIXME (missing context)
-#: ../panels/color/color.ui.h:54
+#: ../panels/color/color.ui.h:50
+#, fuzzy
+msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Media"
 
-#: ../panels/color/color.ui.h:55 ../panels/power/power.ui.h:5
+#: ../panels/color/color.ui.h:51 ../panels/power/power.ui.h:5
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 minuti"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:52
+#, fuzzy
+msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Bassa"
 
-#: ../panels/color/color.ui.h:57
+#: ../panels/color/color.ui.h:53
 msgid "15 minutes"
 msgstr "15 minuti"
 
-#: ../panels/color/color.ui.h:58
-msgid "0"
-msgstr "0"
-
-#: ../panels/color/color.ui.h:59
+#: ../panels/color/color.ui.h:54
 #, fuzzy
 msgid "Native to display"
 msgstr "Pannello da mostrare"
 
-#: ../panels/color/color.ui.h:60
+#: ../panels/color/color.ui.h:55
 msgid "D50 (Printing and publishing)"
 msgstr ""
 
-#: ../panels/color/color.ui.h:61
+#: ../panels/color/color.ui.h:56
 msgid "D55"
 msgstr ""
 
-#: ../panels/color/color.ui.h:62
+#: ../panels/color/color.ui.h:57
 msgid "D65 (Photography and graphics)"
 msgstr ""
 
-#: ../panels/color/color.ui.h:63
+#: ../panels/color/color.ui.h:58
 msgid "D75"
 msgstr ""
 
@@ -3233,13 +3330,6 @@ msgstr "Opzioni"
 msgid "Loading options…"
 msgstr "Caricamento opzioni…"
 
-# FIXME!!
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-#: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1067
-msgid "Cancel"
-msgstr "Annulla"
-
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
 msgid "Loading drivers database..."
 msgstr "Caricamento driver database..."
@@ -4032,9 +4122,9 @@ msgid "Enable or disable remote login"
 msgstr "Abilitare o disabilita l'accesso remoto"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:2
-#, fuzzy
 msgid "Authentication is required to enable or disable remote login"
-msgstr "È necessario autenticarsi per cambiare i dati utente"
+msgstr ""
+"È necessario autenticarsi per abilitare o disabilitare l'accesso remoto"
 
 #: ../panels/sharing/sharing.ui.h:1
 msgid "Bluetooth Sharing"
@@ -6029,6 +6119,25 @@ msgstr "Preferenze;Impostazioni;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "Tutte le impostazioni"
+
+#~ msgid "1"
+#~ msgstr "1"
+
+#~ msgid "8"
+#~ msgstr "8"
+
+# FIXME not-translate
+#~ msgid "2"
+#~ msgstr "2"
+
+#~ msgid "5"
+#~ msgstr "5"
+
+#~ msgid "0"
+#~ msgstr "0"
+
+#~ msgid "Cannot remove automatically added profile"
+#~ msgstr "Impossibile rimuovere il profilo aggiunto in modo automatico"
 
 #~ msgid "No profile"
 #~ msgstr "Nessun profilo"
