@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-11 00:29+0100\n"
-"PO-Revision-Date: 2013-01-11 00:32+0100\n"
+"POT-Creation-Date: 2013-01-24 00:37+0100\n"
+"PO-Revision-Date: 2013-01-24 21:58+0100\n"
 "Last-Translator: Luca Ferretti <lferrett@gnome.org>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -179,8 +179,8 @@ msgid "Keyboard Settings"
 msgstr "Impostazioni tastiera"
 
 #: ../panels/bluetooth/bluetooth.ui.h:14
-msgid "Send Files..."
-msgstr "Invia file..."
+msgid "Send Files…"
+msgstr "Invia file…"
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:355
 msgid "Yes"
@@ -225,65 +225,58 @@ msgstr ""
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:112
+#: ../panels/color/cc-color-panel.c:131
 msgid "Default: "
 msgstr "Predefinito:"
 
 # FIXME: da verificare come è messo altrove
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:120
+#: ../panels/color/cc-color-panel.c:139
 msgid "Colorspace: "
 msgstr "Spazio colore:"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:127
+#: ../panels/color/cc-color-panel.c:146
 msgid "Test profile: "
 msgstr "Profilo di test:"
 
-#. TRANSLATORS: this is when the profile should be set for all users
-#: ../panels/color/cc-color-panel.c:190 ../panels/color/color.ui.h:5
-msgid "Set for all users"
-msgstr "Imposta per tutti gli utenti"
-
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:225
+#: ../panels/color/cc-color-panel.c:214
 msgid "Select ICC Profile File"
 msgstr "Selezionare file profilo ICC"
 
-#: ../panels/color/cc-color-panel.c:228
+#: ../panels/color/cc-color-panel.c:217
 msgid "_Import"
 msgstr "_Importa"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:239
+#: ../panels/color/cc-color-panel.c:228
 msgid "Supported ICC profiles"
 msgstr "Profili ICC supportati"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:246
+#: ../panels/color/cc-color-panel.c:235
 msgid "All files"
 msgstr "Tutti i file"
 
-#. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:774
-#: ../panels/sound/gvc-mixer-dialog.c:1530
-msgid "Device"
-msgstr "Dispositivo"
+#: ../panels/color/cc-color-panel.c:506
+msgid "Screen"
+msgstr "Schermo"
 
-#. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:809
-msgid "Calibration"
-msgstr "Calibrazione"
+#. TRANSLATORS: this is the dialog to save the ICC profile
+#: ../panels/color/cc-color-panel.c:776
+msgid "Save Profile"
+msgstr "Salva profilo"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:868
+#: ../panels/color/cc-color-panel.c:1137
 msgid "Create a color profile for the selected device"
 msgstr "Crea un profilo di colore per il dispositivo selezionato"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:883 ../panels/color/cc-color-panel.c:907
+#: ../panels/color/cc-color-panel.c:1152 ../panels/color/cc-color-panel.c:1176
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -293,182 +286,427 @@ msgstr ""
 
 # profiling?
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:917
+#: ../panels/color/cc-color-panel.c:1186
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Lo strumento di misura non supporta il profiling della stampante."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:928
+#: ../panels/color/cc-color-panel.c:1197
 msgid "The device type is not currently supported."
 msgstr "Il tipo di dispositivo non è al momento supportato."
 
 #. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:988
+#: ../panels/color/cc-color-panel.c:1247
 msgid "Cannot remove automatically added profile"
 msgstr "Impossibile rimuovere il profilo aggiunto in modo automatico"
 
-#. TRANSLATORS: this is when there is no profile for the device
-#: ../panels/color/cc-color-panel.c:1309
-msgid "No profile"
-msgstr "Nessun profilo"
+#. TRANSLATORS: This refers to the TFT display on a laptop
+#: ../panels/color/cc-color-common.c:41
+msgid "Laptop Screen"
+msgstr "Schermo del portatile"
 
-#: ../panels/color/cc-color-panel.c:1340
-#, c-format
-msgid "%i year"
-msgid_plural "%i years"
-msgstr[0] "%i anno"
-msgstr[1] "%i anni"
+#. TRANSLATORS: This refers to the embedded webcam on a laptop
+#: ../panels/color/cc-color-common.c:50
+msgid "Built-in Webcam"
+msgstr "Webcam integrata"
 
-#: ../panels/color/cc-color-panel.c:1351
+#. TRANSLATORS: an externally connected display, where %s is either the
+#. * model, vendor or ID, e.g. 'LP2480zx Monitor'
+#: ../panels/color/cc-color-common.c:65
 #, c-format
-msgid "%i month"
-msgid_plural "%i months"
-msgstr[0] "%i mese"
-msgstr[1] "%i mesi"
+msgid "%s Monitor"
+msgstr "Monitor %s"
 
-#: ../panels/color/cc-color-panel.c:1362
+#. TRANSLATORS: a flatbed scanner device, e.g. 'Epson Scanner'
+#: ../panels/color/cc-color-common.c:69
 #, c-format
-msgid "%i week"
-msgid_plural "%i weeks"
-msgstr[0] "%i settimana"
-msgstr[1] "%i settimane"
+msgid "%s Scanner"
+msgstr "Scanner %s"
 
-#. fallback
-#: ../panels/color/cc-color-panel.c:1369
+#. TRANSLATORS: a camera device, e.g. 'Nikon D60 Camera'
+#: ../panels/color/cc-color-common.c:73
 #, c-format
-msgid "Less than 1 week"
-msgstr "Meno di una settimana"
+msgid "%s Camera"
+msgstr "Fotocamera %s"
+
+#. TRANSLATORS: a printer device, e.g. 'Epson Photosmart Printer'
+#: ../panels/color/cc-color-common.c:77
+#, c-format
+msgid "%s Printer"
+msgstr "Stampante %s"
+
+#. TRANSLATORS: a webcam device, e.g. 'Philips HiDef Camera'
+#: ../panels/color/cc-color-common.c:81
+#, c-format
+msgid "%s Webcam"
+msgstr "Webcam %s"
+
+#. not calibrated
+#: ../panels/color/cc-color-device.c:303
+msgid "Not calibrated"
+msgstr "Non calibrato"
+
+#. TRANSLATORS: standard spaces are well known colorspaces like
+#. * sRGB, AdobeRGB and ProPhotoRGB
+#: ../panels/color/cc-color-profile.c:101
+#, fuzzy
+msgid "Standard Space"
+msgstr "Normale"
+
+#. TRANSLATORS: test profiles do things like changing the screen
+#. * a different color, or swap the red and green channels
+#: ../panels/color/cc-color-profile.c:107
+msgid "Test Profile"
+msgstr "Prova profilo"
+
+#. TRANSLATORS: automatic profiles are generated automatically
+#. * by the color management system based on manufacturing data,
+#. * for instance the default monitor profile is created from the
+#. * primaries specified in the monitor EDID
+#: ../panels/color/cc-color-profile.c:115
+msgctxt "Automatically generated profile"
+msgid "Automatic"
+msgstr "Automatico"
+
+#. TRANSLATORS: the profile quality - low quality profiles take
+#. * much less time to generate but may be a poor reflection of the
+#. * device capability
+#: ../panels/color/cc-color-profile.c:125
+msgctxt "Profile quality"
+msgid "Low Quality"
+msgstr "Qualità bassa"
+
+#. TRANSLATORS: the profile quality
+#: ../panels/color/cc-color-profile.c:130
+msgctxt "Profile quality"
+msgid "Medium Quality"
+msgstr "Qualità media"
+
+#. TRANSLATORS: the profile quality - high quality profiles take
+#. * a *long* time, and have the best calibration and
+#. * characterisation data.
+#: ../panels/color/cc-color-profile.c:137
+msgctxt "Profile quality"
+msgid "High Quality"
+msgstr "Qualità alta"
 
 # FIXME context
-#: ../panels/color/cc-color-panel.c:1431
+#. TRANSLATORS: this default RGB space is used for printers that
+#. * do not have additional printer profiles specified in the PPD
+#: ../panels/color/cc-color-profile.c:154
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "RGB predefinito"
 
 # FIXME context
-#: ../panels/color/cc-color-panel.c:1436
+#. TRANSLATORS: this default CMYK space is used for printers that
+#. * do not have additional printer profiles specified in the PPD
+#: ../panels/color/cc-color-profile.c:161
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "CMYK predefinito"
 
 # FIXME context
-#: ../panels/color/cc-color-panel.c:1441
+#. TRANSLATORS: this default gray space is used for printers that
+#. * do not have additional printer profiles specified in the PPD
+#: ../panels/color/cc-color-profile.c:168
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "Grigio predefinito"
 
-#: ../panels/color/cc-color-panel.c:1559 ../panels/color/cc-color-panel.c:1600
-#: ../panels/color/cc-color-panel.c:1611 ../panels/color/cc-color-panel.c:1622
-msgid "Uncalibrated"
-msgstr "Non calibrato"
-
-#: ../panels/color/cc-color-panel.c:1562
-msgid "This device is not color managed."
-msgstr "Nessuna gestione del colore per questo dispositivo."
-
-#: ../panels/color/cc-color-panel.c:1603
-msgid "This device is using manufacturing calibrated data."
-msgstr "Questo dispositivo sta usando dati calibrati di fabbrica."
-
-#: ../panels/color/cc-color-panel.c:1614
-msgid ""
-"This device does not have a profile suitable for whole-screen color "
-"correction."
+#: ../panels/color/cc-color-profile.c:192
+msgid "Vendor supplied factory calibration data"
 msgstr ""
-"Questo dispositivo non presenta un profilo adatto per la correzione del "
-"colore a intero schermo."
 
-#: ../panels/color/cc-color-panel.c:1647
-msgid "This device has an old profile that may no longer be accurate."
+#: ../panels/color/cc-color-profile.c:201
+msgid "Full-screen display correction not possible with this profile"
 msgstr ""
-"Questo dispositivo presenta un profilo vecchio che potrebbe non essere più "
-"accurato."
 
-# FIXME!!! cosa??
-#. TRANSLATORS: this is when the calibration profile age is not
-#. * specified as it has been autogenerated from the hardware
-#: ../panels/color/cc-color-panel.c:1675
-msgid "Not specified"
-msgstr "Non specificato"
+#: ../panels/color/cc-color-profile.c:223
+msgid "This profile may no longer be accurate"
+msgstr "Questo profilo potrebbe non essere più accurato"
 
-#. add the 'No devices detected' entry
-#: ../panels/color/cc-color-panel.c:1860
-msgid "No devices supporting color management detected"
-msgstr ""
-"Non è stato rilevato alcun dispositivo che supporti la gestione del colore"
-
-#: ../panels/color/color.ui.h:1
-#: ../panels/color/gnome-color-panel.desktop.in.in.h:1
-#: ../panels/universal-access/zoom-options.ui.h:28
-msgid "Color"
-msgstr "Colore"
+#. Text printed on screen
+#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/gui_gtk.c:78
+msgid "Screen Calibration"
+msgstr "Calibrazione schermo"
 
 #: ../panels/color/color.ui.h:2
-msgid "Each device needs an up to date color profile to be color managed."
-msgstr ""
-"Ciascun dispositivo necessita un profilo di colore aggiornato per poter "
-"gestire il colore."
+msgid ""
+"Calibration will produce a profile that you can use to color manage your "
+"screen. The longer you spend on calibration, the better the quality of the "
+"color profile."
+msgstr "La calibrazione produrrà un profilo che potrà essere usato per gestiore la gesione del colore dello schermo. Più tempo si dedica alla calibrazione, migliore sarà la qualità del profilo colore."
 
 #: ../panels/color/color.ui.h:3
-msgid "Learn more"
-msgstr "Maggiori informazioni"
+msgid ""
+"You will not be able to use your computer while calibration takes place."
+msgstr "Non sarà possibile usare il computer mentre viene eseguita la calibrazione."
 
-#: ../panels/color/color.ui.h:4
-msgid "Learn more about color management"
-msgstr "Maggiori informazioni sulla gestione del colore"
+#. This is the approximate time it takes to calibrate the display.
+#: ../panels/color/color.ui.h:5
+msgid "Quality"
+msgstr "Qualità"
 
-#: ../panels/color/color.ui.h:6
-msgid "Set this profile for all users on this computer"
-msgstr "Imposta questo profilo per tutti gli utenti del computer"
-
+#. This is the approximate time it takes to calibrate the display.
 #: ../panels/color/color.ui.h:7
-msgid "Add profile"
-msgstr "Aggiungi profilo"
+msgid "Approximate Time"
+msgstr "Tempo stimato"
 
-#: ../panels/color/color.ui.h:8 ../panels/wacom/gnome-wacom-properties.ui.h:10
-msgid "Calibrate…"
-msgstr "Calibra..."
+# non messo l'articolo perché è titolo di uno step dell'assistente, meglio
+# tenerli corti
+#: ../panels/color/color.ui.h:8
+msgid "Calibration Quality"
+msgstr "Qualità calibrazione"
 
 #: ../panels/color/color.ui.h:9
-msgid "Calibrate the device"
-msgstr "Calibra il dispositivo"
+msgid "Select the type of display that is connected."
+msgstr "Selezionare il tipo di display connesso."
 
 #: ../panels/color/color.ui.h:10
-msgid "Remove profile"
-msgstr "Rimuovi profilo"
+msgid "Display Type"
+msgstr "Tipo monitor"
 
 #: ../panels/color/color.ui.h:11
-msgid "View details"
-msgstr "Visualizza dettagli"
+msgid "Select the sensor device you want to use for calibration."
+msgstr "Selezionare il dispositivo sensore che si vuole usare per la calibrazione."
 
 #: ../panels/color/color.ui.h:12
-msgid "Import File…"
-msgstr "Importa file…"
+msgid "Calibration Device"
+msgstr "Dispositivo calibrazione"
 
 #: ../panels/color/color.ui.h:13
 msgid ""
-"Problems detected. The profile may not work correctly. <a href=\"\">Show "
-"details.</a>"
-msgstr "Rilevato un problema. Il profilo potrebbe non funzionare correttamente. <a href=\"\">Mostra dettagli.</a>"
+"Select a display target white point. Most displays should be calibrated to a "
+"D65 illuminant."
+msgstr ""
 
 #: ../panels/color/color.ui.h:14
+msgid "Profile Whitepoint"
+msgstr ""
+
+#: ../panels/color/color.ui.h:15
+msgid ""
+"Please set the display to a brightness that is typical for you. Color "
+"management will be most accurate at this brightness level."
+msgstr "Regolare la luminosità del monitor in modo che sia quella usata abitualmente. La gestione del colore sarà più accurata a tale livello di luminosità."
+
+#: ../panels/color/color.ui.h:16
+msgid ""
+"Alternatively, you can use the brightness level used with one of the other "
+"profiles for this device."
+msgstr "In alternativa è possibile usare il livello di luminosità usato con uno degli altri profili per questo dispositivo."
+
+#: ../panels/color/color.ui.h:17
+msgid "Display Brightness"
+msgstr "Luminosità monitor"
+
+#: ../panels/color/color.ui.h:18
+msgid ""
+"You can use a color profile on different computers, or even create profiles "
+"for different lighting conditions."
+msgstr "È possibile usare un profilo colore su diversi computer, o anche creare profili per diverse condizioni di illuminazione."
+
+#: ../panels/color/color.ui.h:19
+msgid "Profile Name:"
+msgstr "Nome del profilo:"
+
+#: ../panels/color/color.ui.h:20
+msgid "Profile Name"
+msgstr "Nome del profilo"
+
+#: ../panels/color/color.ui.h:21
+msgid "Profile successfully created!"
+msgstr "Creazione del profilo riuscita."
+
+#: ../panels/color/color.ui.h:22
+msgid "Export"
+msgstr "Esporta"
+
+#: ../panels/color/color.ui.h:23
+msgid ""
+"You may find these instructions on how to use the profile on <a href=\"linux"
+"\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
+"\">Microsoft Windows</a> systems useful."
+msgstr ""
+
+#: ../panels/color/color.ui.h:24
+#: ../panels/user-accounts/um-fingerprint-dialog.c:743
+msgid "Summary"
+msgstr "Riepilogo"
+
+#: ../panels/color/color.ui.h:25
+msgid "Import File…"
+msgstr "Importa file…"
+
+#: ../panels/color/color.ui.h:26
+msgid ""
+"Problems detected. The profile may not work correctly. <a href=\"\">Show "
+"details.</a>"
+msgstr ""
+"Rilevato un problema. Il profilo potrebbe non funzionare correttamente. <a "
+"href=\"\">Mostra dettagli.</a>"
+
+#: ../panels/color/color.ui.h:27
 msgid "Device type:"
 msgstr "Tipo dispositivo:"
 
-#: ../panels/color/color.ui.h:15
+#: ../panels/color/color.ui.h:28
 msgid "Manufacturer:"
 msgstr "Produttore:"
 
-#: ../panels/color/color.ui.h:16
+#: ../panels/color/color.ui.h:29
 msgid "Model:"
 msgstr "Modello:"
 
-#: ../panels/color/color.ui.h:17
+#: ../panels/color/color.ui.h:30
 msgid ""
 "Image files can be dragged on this window to auto-complete the above fields."
 msgstr ""
 "È possibile trascinare su questa finestra i file di immagine per completare "
 "automaticamente i campi."
+
+#: ../panels/color/color.ui.h:31
+#: ../panels/color/gnome-color-panel.desktop.in.in.h:1
+#: ../panels/universal-access/zoom-options.ui.h:28
+msgid "Color"
+msgstr "Colore"
+
+#: ../panels/color/color.ui.h:32
+msgid "Each device needs an up to date color profile to be color managed."
+msgstr ""
+"Ciascun dispositivo necessita un profilo di colore aggiornato per poter "
+"gestire il colore."
+
+#: ../panels/color/color.ui.h:33
+msgid "Learn more"
+msgstr "Maggiori informazioni"
+
+#: ../panels/color/color.ui.h:34
+msgid "Learn more about color management"
+msgstr "Maggiori informazioni sulla gestione del colore"
+
+#: ../panels/color/color.ui.h:35
+msgid "Set for all users"
+msgstr "Imposta per tutti gli utenti"
+
+#: ../panels/color/color.ui.h:36
+msgid "Set this profile for all users on this computer"
+msgstr "Imposta questo profilo per tutti gli utenti del computer"
+
+#: ../panels/color/color.ui.h:37
+msgid "Enable"
+msgstr "Abilita"
+
+#: ../panels/color/color.ui.h:38
+msgid "Add profile"
+msgstr "Aggiungi profilo"
+
+#: ../panels/color/color.ui.h:39
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+msgid "Calibrate…"
+msgstr "Calibra..."
+
+#: ../panels/color/color.ui.h:40
+msgid "Calibrate the device"
+msgstr "Calibra il dispositivo"
+
+#: ../panels/color/color.ui.h:41
+msgid "Remove profile"
+msgstr "Rimuovi profilo"
+
+#: ../panels/color/color.ui.h:42
+msgid "View details"
+msgstr "Visualizza dettagli"
+
+#: ../panels/color/color.ui.h:43
+msgid "Unable to detect any devices that can be color managed"
+msgstr ""
+
+#: ../panels/color/color.ui.h:44
+msgid "LCD"
+msgstr "LCD"
+
+#: ../panels/color/color.ui.h:45
+msgid "1"
+msgstr "1"
+
+#: ../panels/color/color.ui.h:46
+msgid "LED"
+msgstr "LED"
+
+#: ../panels/color/color.ui.h:47
+msgid "8"
+msgstr "8"
+
+#: ../panels/color/color.ui.h:48
+msgid "CRT"
+msgstr "CRT"
+
+# FIXME not-translate
+#: ../panels/color/color.ui.h:49
+msgid "2"
+msgstr "2"
+
+#: ../panels/color/color.ui.h:50
+msgid "Projector"
+msgstr "Proiettore"
+
+#: ../panels/color/color.ui.h:51
+msgid "5"
+msgstr "5"
+
+# FIXME missin context
+#: ../panels/color/color.ui.h:52
+msgid "High"
+msgstr "Alta"
+
+#: ../panels/color/color.ui.h:53
+msgid "40 minutes"
+msgstr "40 minuti"
+
+# FIXME (missing context)
+#: ../panels/color/color.ui.h:54
+msgid "Medium"
+msgstr "Media"
+
+#: ../panels/color/color.ui.h:55 ../panels/power/power.ui.h:5
+#: ../panels/privacy/privacy.ui.h:7
+msgid "30 minutes"
+msgstr "30 minuti"
+
+#: ../panels/color/color.ui.h:56
+msgid "Low"
+msgstr "Bassa"
+
+#: ../panels/color/color.ui.h:57
+msgid "15 minutes"
+msgstr "15 minuti"
+
+#: ../panels/color/color.ui.h:58
+msgid "0"
+msgstr "0"
+
+#: ../panels/color/color.ui.h:59
+#, fuzzy
+msgid "Native to display"
+msgstr "Pannello da mostrare"
+
+#: ../panels/color/color.ui.h:60
+msgid "D50 (Printing and publishing)"
+msgstr ""
+
+#: ../panels/color/color.ui.h:61
+msgid "D55"
+msgstr ""
+
+#: ../panels/color/color.ui.h:62
+msgid "D65 (Photography and graphics)"
+msgstr ""
+
+#: ../panels/color/color.ui.h:63
+msgid "D75"
+msgstr ""
 
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:2
 msgid "Color management settings"
@@ -711,11 +949,11 @@ msgstr "Monitor duplicati"
 msgid "Monitor"
 msgstr "Monitor"
 
-#: ../panels/display/cc-display-panel.c:1666
+#: ../panels/display/cc-display-panel.c:1669
 msgid "Drag to change primary display."
 msgstr "Trascinare per cambiare monitor primario."
 
-#: ../panels/display/cc-display-panel.c:1724
+#: ../panels/display/cc-display-panel.c:1727
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
@@ -724,30 +962,30 @@ msgstr ""
 "risistemare il suo posizionamento."
 
 # FIXME credo serva come 24 ore, sarebbe meglio commentarla
-#: ../panels/display/cc-display-panel.c:2112
+#: ../panels/display/cc-display-panel.c:2115
 msgid "%a %R"
 msgstr "%a %-k.%M"
 
 # FIXME credo serva come AM/PM, sarebbe meglio commentarla
-#: ../panels/display/cc-display-panel.c:2114
+#: ../panels/display/cc-display-panel.c:2117
 msgid "%a %l:%M %p"
 msgstr "%a %-l.%M %p"
 
-#: ../panels/display/cc-display-panel.c:2276
-#: ../panels/display/cc-display-panel.c:2328
+#: ../panels/display/cc-display-panel.c:2279
+#: ../panels/display/cc-display-panel.c:2331
 #, c-format
 msgid "Failed to apply configuration: %s"
 msgstr "Impostazione della configurazione non riuscita: %s"
 
-#: ../panels/display/cc-display-panel.c:2356
+#: ../panels/display/cc-display-panel.c:2359
 msgid "Could not save the monitor configuration"
 msgstr "Impossibile salvare la configurazione del monitor"
 
-#: ../panels/display/cc-display-panel.c:2416
+#: ../panels/display/cc-display-panel.c:2419
 msgid "Could not detect displays"
 msgstr "Impossibile rilevare i monitor"
 
-#: ../panels/display/cc-display-panel.c:2611
+#: ../panels/display/cc-display-panel.c:2614
 msgid "Could not get screen information"
 msgstr "Impossibile ottenere informazioni sullo schermo"
 
@@ -787,58 +1025,58 @@ msgstr ""
 "Pannello;Proiettore;xrandr;Schermo;Risoluzione;Dimensioni;Refresh;Display;"
 
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:440 ../panels/network/panel-common.c:120
+#: ../panels/info/cc-info-panel.c:441 ../panels/network/panel-common.c:120
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: ../panels/info/cc-info-panel.c:579
+#: ../panels/info/cc-info-panel.c:542
 #, c-format
 msgid "%s %d-bit"
 msgstr "%s %d-bit"
 
-#: ../panels/info/cc-info-panel.c:581
+#: ../panels/info/cc-info-panel.c:544
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bit"
 
 # modificato un po' rispetto originale per mantere "azione"
-#: ../panels/info/cc-info-panel.c:1256
+#: ../panels/info/cc-info-panel.c:1219
 msgid "Ask what to do"
 msgstr "Chiedere l'azione da intraprendere"
 
 # FIXME aggiungere contesto??
-#: ../panels/info/cc-info-panel.c:1260
+#: ../panels/info/cc-info-panel.c:1223
 msgid "Do nothing"
 msgstr "Nessuna azione"
 
-#: ../panels/info/cc-info-panel.c:1264
+#: ../panels/info/cc-info-panel.c:1227
 msgid "Open folder"
 msgstr "Aprire la cartella"
 
-#: ../panels/info/cc-info-panel.c:1355
+#: ../panels/info/cc-info-panel.c:1318
 msgid "Other Media"
 msgstr "Altri Supporti"
 
-#: ../panels/info/cc-info-panel.c:1386
+#: ../panels/info/cc-info-panel.c:1349
 msgid "Select an application for audio CDs"
 msgstr "Selezionare un'applicazione per i CD audio"
 
-#: ../panels/info/cc-info-panel.c:1387
+#: ../panels/info/cc-info-panel.c:1350
 msgid "Select an application for video DVDs"
 msgstr "Selezionare un'applicazione per i DVD video"
 
-#: ../panels/info/cc-info-panel.c:1388
+#: ../panels/info/cc-info-panel.c:1351
 msgid "Select an application to run when a music player is connected"
 msgstr ""
 "Selezionare un'applicazione da eseguire quando viene connesso un lettore "
 "musicale"
 
-#: ../panels/info/cc-info-panel.c:1389
+#: ../panels/info/cc-info-panel.c:1352
 msgid "Select an application to run when a camera is connected"
 msgstr ""
 "Selezionare un'applicazione da eseguire quando viene connessa una fotocamera"
 
-#: ../panels/info/cc-info-panel.c:1390
+#: ../panels/info/cc-info-panel.c:1353
 msgid "Select an application for software CDs"
 msgstr "Selezionare un'applicazione per i CD di software"
 
@@ -847,89 +1085,89 @@ msgstr "Selezionare un'applicazione per i CD di software"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1402
+#: ../panels/info/cc-info-panel.c:1365
 msgid "audio DVD"
 msgstr "DVD audio"
 
-#: ../panels/info/cc-info-panel.c:1403
+#: ../panels/info/cc-info-panel.c:1366
 msgid "blank Blu-ray disc"
 msgstr "Disco vuoto Blu-ray"
 
-#: ../panels/info/cc-info-panel.c:1404
+#: ../panels/info/cc-info-panel.c:1367
 msgid "blank CD disc"
 msgstr "Disco vuoto CD"
 
-#: ../panels/info/cc-info-panel.c:1405
+#: ../panels/info/cc-info-panel.c:1368
 msgid "blank DVD disc"
 msgstr "Disco vuoto DVD"
 
-#: ../panels/info/cc-info-panel.c:1406
+#: ../panels/info/cc-info-panel.c:1369
 msgid "blank HD DVD disc"
 msgstr "Disco vuoto HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1407
+#: ../panels/info/cc-info-panel.c:1370
 msgid "Blu-ray video disc"
 msgstr "Disco video Blu-ray"
 
-#: ../panels/info/cc-info-panel.c:1408
+#: ../panels/info/cc-info-panel.c:1371
 msgid "e-book reader"
 msgstr "E-book reader"
 
-#: ../panels/info/cc-info-panel.c:1409
+#: ../panels/info/cc-info-panel.c:1372
 msgid "HD DVD video disc"
 msgstr "Disco video HD DVD"
 
-#: ../panels/info/cc-info-panel.c:1410
+#: ../panels/info/cc-info-panel.c:1373
 msgid "Picture CD"
 msgstr "Picture CD"
 
-#: ../panels/info/cc-info-panel.c:1411
+#: ../panels/info/cc-info-panel.c:1374
 msgid "Super Video CD"
 msgstr "Super Video CD"
 
-#: ../panels/info/cc-info-panel.c:1412
+#: ../panels/info/cc-info-panel.c:1375
 msgid "Video CD"
 msgstr "Video CD"
 
-#: ../panels/info/cc-info-panel.c:1413
+#: ../panels/info/cc-info-panel.c:1376
 msgid "Windows software"
 msgstr "Software Windows"
 
-#: ../panels/info/cc-info-panel.c:1414
+#: ../panels/info/cc-info-panel.c:1377
 msgid "Software"
 msgstr "Software"
 
-#: ../panels/info/cc-info-panel.c:1537
+#: ../panels/info/cc-info-panel.c:1500
 #: ../panels/keyboard/keyboard-shortcuts.c:1697
 msgid "Section"
 msgstr "Sezione"
 
-#: ../panels/info/cc-info-panel.c:1546 ../panels/info/info.ui.h:13
+#: ../panels/info/cc-info-panel.c:1509 ../panels/info/info.ui.h:13
 msgid "Overview"
 msgstr "Panoramica"
 
-#: ../panels/info/cc-info-panel.c:1552 ../panels/info/info.ui.h:20
+#: ../panels/info/cc-info-panel.c:1515 ../panels/info/info.ui.h:20
 msgid "Default Applications"
 msgstr "Applicazioni predefinite"
 
-#: ../panels/info/cc-info-panel.c:1557 ../panels/info/info.ui.h:28
+#: ../panels/info/cc-info-panel.c:1520 ../panels/info/info.ui.h:28
 msgid "Removable Media"
 msgstr "Dispositivi rimovibili"
 
-#: ../panels/info/cc-info-panel.c:1773
+#: ../panels/info/cc-info-panel.c:1545
 #, c-format
 msgid "Version %s"
 msgstr "Versione %s"
 
-#: ../panels/info/cc-info-panel.c:1823
+#: ../panels/info/cc-info-panel.c:1595
 msgid "Install Updates"
 msgstr "Installa aggiornamenti"
 
-#: ../panels/info/cc-info-panel.c:1827
+#: ../panels/info/cc-info-panel.c:1599
 msgid "System Up-To-Date"
 msgstr "Sistema aggiornato"
 
-#: ../panels/info/cc-info-panel.c:1831
+#: ../panels/info/cc-info-panel.c:1603
 msgid "Checking for Updates"
 msgstr "Controllo aggiornamenti"
 
@@ -1220,8 +1458,9 @@ msgstr "Attiva o disattiva il contrasto elevato"
 
 #. translators:
 #. * The device has been disabled
-#: ../panels/keyboard/cc-keyboard-option.c:241
-#: ../panels/keyboard/cc-keyboard-option.c:347
+#: ../panels/keyboard/cc-keyboard-option.c:254
+#: ../panels/keyboard/cc-keyboard-option.c:304
+#: ../panels/keyboard/cc-keyboard-option.c:436
 #: ../panels/keyboard/keyboard-shortcuts.c:1160
 #: ../panels/sound/gvc/gvc-mixer-control.c:1828
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
@@ -1229,13 +1468,99 @@ msgstr "Attiva o disattiva il contrasto elevato"
 msgid "Disabled"
 msgstr "Disabilitato"
 
-#: ../panels/keyboard/cc-keyboard-option.c:315
+#: ../panels/keyboard/cc-keyboard-option.c:255
+msgid "Left Shift"
+msgstr "Maiusc sinistro"
+
+#: ../panels/keyboard/cc-keyboard-option.c:256
+msgid "Left Alt"
+msgstr "Alt sinistro"
+
+#: ../panels/keyboard/cc-keyboard-option.c:257
+msgid "Left Ctrl"
+msgstr "Ctrl sinistro"
+
+#: ../panels/keyboard/cc-keyboard-option.c:258
+msgid "Right Shift"
+msgstr "Maiusc destro"
+
+#: ../panels/keyboard/cc-keyboard-option.c:259
+msgid "Right Alt"
+msgstr "Alt destro"
+
+#: ../panels/keyboard/cc-keyboard-option.c:260
+msgid "Right Ctrl"
+msgstr "Ctrl destro"
+
+# così dice mclasen
+#: ../panels/keyboard/cc-keyboard-option.c:261
+msgid "Left Alt+Shift"
+msgstr "Alt+Maiusc sinistri"
+
+#: ../panels/keyboard/cc-keyboard-option.c:262
+msgid "Right Alt+Shift"
+msgstr "Alt+Maiusc destri"
+
+#: ../panels/keyboard/cc-keyboard-option.c:263
+msgid "Left Ctrl+Shift"
+msgstr ""
+
+#: ../panels/keyboard/cc-keyboard-option.c:264
+msgid "Right Ctrl+Shift"
+msgstr ""
+
+#: ../panels/keyboard/cc-keyboard-option.c:265
+msgid "Left+Right Shift"
+msgstr ""
+
+#: ../panels/keyboard/cc-keyboard-option.c:266
+msgid "Left+Right Alt"
+msgstr ""
+
+#: ../panels/keyboard/cc-keyboard-option.c:267
+msgid "Left+Right Ctrl"
+msgstr ""
+
+#: ../panels/keyboard/cc-keyboard-option.c:268
+msgid "Alt+Shift"
+msgstr "Alt+Maiusc"
+
+#: ../panels/keyboard/cc-keyboard-option.c:269
+msgid "Ctrl+Shift"
+msgstr "Ctrl+Maiusc"
+
+#: ../panels/keyboard/cc-keyboard-option.c:270
+msgid "Alt+Ctrl"
+msgstr "Alt+Ctrl"
+
+#: ../panels/keyboard/cc-keyboard-option.c:271
+msgid "Caps"
+msgstr ""
+
+#: ../panels/keyboard/cc-keyboard-option.c:272
+msgid "Shift+Caps"
+msgstr ""
+
+#: ../panels/keyboard/cc-keyboard-option.c:273
+msgid "Alt+Caps"
+msgstr ""
+
+#: ../panels/keyboard/cc-keyboard-option.c:274
+msgid "Ctrl+Caps"
+msgstr ""
+
+#: ../panels/keyboard/cc-keyboard-option.c:390
 msgid "Alternative Characters Key"
 msgstr ""
 
-#: ../panels/keyboard/cc-keyboard-option.c:320
+#: ../panels/keyboard/cc-keyboard-option.c:395
 msgid "Compose Key"
 msgstr "Tasto Compose"
+
+#: ../panels/keyboard/cc-keyboard-option.c:399
+#, fuzzy
+msgid "Modifiers-only switch to next source"
+msgstr "Passa a sorgente successiva"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
@@ -2238,16 +2563,16 @@ msgid "Show Details in Lock Screen"
 msgstr "Mostrare i dettagli nel blocco schermo"
 
 #: ../panels/notifications/cc-notifications-panel.c:203
-#: ../panels/power/cc-power-panel.c:1508 ../panels/power/cc-power-panel.c:1515
-#: ../panels/privacy/cc-privacy-panel.c:78
-#: ../panels/privacy/cc-privacy-panel.c:145
+#: ../panels/power/cc-power-panel.c:1557 ../panels/power/cc-power-panel.c:1564
+#: ../panels/privacy/cc-privacy-panel.c:77
+#: ../panels/privacy/cc-privacy-panel.c:144
 msgid "On"
 msgstr "On"
 
 #: ../panels/notifications/cc-notifications-panel.c:203
-#: ../panels/power/cc-power-panel.c:1502 ../panels/power/cc-power-panel.c:1513
-#: ../panels/privacy/cc-privacy-panel.c:78
-#: ../panels/privacy/cc-privacy-panel.c:145
+#: ../panels/power/cc-power-panel.c:1551 ../panels/power/cc-power-panel.c:1562
+#: ../panels/privacy/cc-privacy-panel.c:77
+#: ../panels/privacy/cc-privacy-panel.c:144
 msgid "Off"
 msgstr "Off"
 
@@ -2278,35 +2603,35 @@ msgstr "Mostrare nel blocco schermo"
 msgid "Add Account"
 msgstr "Aggiungi account"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:357
+#: ../panels/online-accounts/cc-online-accounts-panel.c:358
 msgid "Error logging into the account"
 msgstr "Errore nell'accedere all'account"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:411
+#: ../panels/online-accounts/cc-online-accounts-panel.c:412
 msgid "Expired credentials. Please log in again."
 msgstr "Credenziali scadute. Accedere di nuovo."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:414
+#: ../panels/online-accounts/cc-online-accounts-panel.c:415
 msgid "_Log In"
 msgstr "_Accedi"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:650
+#: ../panels/online-accounts/cc-online-accounts-panel.c:651
 msgid "Error creating account"
 msgstr "Errore nel creare l'account"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:692
+#: ../panels/online-accounts/cc-online-accounts-panel.c:693
 msgid "Error removing account"
 msgstr "Errore nel rimuovere l'account"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:728
+#: ../panels/online-accounts/cc-online-accounts-panel.c:729
 msgid "Are you sure you want to remove the account?"
 msgstr "Rimuovere veramente l'account?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:730
+#: ../panels/online-accounts/cc-online-accounts-panel.c:731
 msgid "This will not remove the account on the server."
 msgstr "In questo modo non verrà rimosso l'account sul server."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:731
+#: ../panels/online-accounts/cc-online-accounts-panel.c:732
 msgid "_Remove"
 msgstr "_Rimuovi"
 
@@ -2345,18 +2670,18 @@ msgstr ""
 "Aggiungendo un account le applicazioni potranno accedere ai relativi "
 "documenti, email, contatti, calendari, chat e altro."
 
-#: ../panels/power/cc-power-panel.c:168
+#: ../panels/power/cc-power-panel.c:177
 msgid "Unknown time"
 msgstr "Tempo sconosciuto"
 
-#: ../panels/power/cc-power-panel.c:174
+#: ../panels/power/cc-power-panel.c:183
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minuto"
 msgstr[1] "%i minuti"
 
-#: ../panels/power/cc-power-panel.c:186
+#: ../panels/power/cc-power-panel.c:195
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -2365,215 +2690,219 @@ msgstr[1] "%i ore"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:194
+#: ../panels/power/cc-power-panel.c:203
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s e %i %s"
 
-#: ../panels/power/cc-power-panel.c:195
+#: ../panels/power/cc-power-panel.c:204
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "ora"
 msgstr[1] "ore"
 
-#: ../panels/power/cc-power-panel.c:196
+#: ../panels/power/cc-power-panel.c:205
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuto"
 msgstr[1] "minuti"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:215
+#: ../panels/power/cc-power-panel.c:224
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s alla carica completa"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:222
+#: ../panels/power/cc-power-panel.c:231
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Attenzione: ancora %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:227
+#: ../panels/power/cc-power-panel.c:236
 #, c-format
 msgid "%s remaining"
 msgstr "ancora %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:232 ../panels/power/cc-power-panel.c:260
+#: ../panels/power/cc-power-panel.c:241 ../panels/power/cc-power-panel.c:269
 msgid "Fully charged"
 msgstr ""
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:236 ../panels/power/cc-power-panel.c:264
+#: ../panels/power/cc-power-panel.c:245 ../panels/power/cc-power-panel.c:273
 msgid "Empty"
 msgstr "Scarica"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:251
+#: ../panels/power/cc-power-panel.c:260
 msgid "Charging"
 msgstr "In carica"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:256
+#: ../panels/power/cc-power-panel.c:265
 msgid "Discharging"
 msgstr "In scarica"
 
-#: ../panels/power/cc-power-panel.c:308
+#: ../panels/power/cc-power-panel.c:317
 #, c-format
 msgid "Estimated battery capacity: %s"
 msgstr "Capacità stimata della batteria: %s"
 
-#: ../panels/power/cc-power-panel.c:384
+#: ../panels/power/cc-power-panel.c:393
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Principale"
 
-#: ../panels/power/cc-power-panel.c:386
+#: ../panels/power/cc-power-panel.c:395
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Aggiuntiva"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:468
+#: ../panels/power/cc-power-panel.c:477
 msgid "Wireless mouse"
 msgstr "Mouse wireless"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:472
+#: ../panels/power/cc-power-panel.c:481
 msgid "Wireless keyboard"
 msgstr "Tastiera wireless"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:476
+#: ../panels/power/cc-power-panel.c:485
 msgid "Uninterruptible power supply"
 msgstr "UPS"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:481
+#: ../panels/power/cc-power-panel.c:490
 msgid "Personal digital assistant"
 msgstr "PDA"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:485
+#: ../panels/power/cc-power-panel.c:494
 msgid "Cellphone"
 msgstr "Cellulare"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:489
+#: ../panels/power/cc-power-panel.c:498
 msgid "Media player"
 msgstr "Lettore multimediale"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:493
+#: ../panels/power/cc-power-panel.c:502
 msgid "Tablet"
 msgstr "Tavoletta Wacom"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:497
+#: ../panels/power/cc-power-panel.c:506
 msgid "Computer"
 msgstr "Computer"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:501 ../panels/power/cc-power-panel.c:709
-#: ../panels/power/cc-power-panel.c:1795
+#: ../panels/power/cc-power-panel.c:510 ../panels/power/cc-power-panel.c:718
+#: ../panels/power/cc-power-panel.c:1844
 msgid "Battery"
 msgstr "Batteria"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:510
+#: ../panels/power/cc-power-panel.c:519
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "In carica"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:517
+#: ../panels/power/cc-power-panel.c:526
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Attenzione"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:522
+#: ../panels/power/cc-power-panel.c:531
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Bassa"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:527
+#: ../panels/power/cc-power-panel.c:536
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Buona"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:532
+#: ../panels/power/cc-power-panel.c:541
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr ""
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:536
+#: ../panels/power/cc-power-panel.c:545
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Scarica"
 
-#: ../panels/power/cc-power-panel.c:707
+#: ../panels/power/cc-power-panel.c:716
 msgid "Batteries"
 msgstr "Batterie"
 
-#: ../panels/power/cc-power-panel.c:1048
+#: ../panels/power/cc-power-panel.c:1058
 msgid "When _idle"
 msgstr "Quando _inattivo"
 
-#: ../panels/power/cc-power-panel.c:1289
+#: ../panels/power/cc-power-panel.c:1324
 msgid "Power Saving"
 msgstr "Risparmio energetico"
 
-#: ../panels/power/cc-power-panel.c:1316
+#: ../panels/power/cc-power-panel.c:1351
 msgid "_Screen Brightness"
 msgstr "Luminosità dello _schermo"
 
-#: ../panels/power/cc-power-panel.c:1353
-msgid "Screen _Power Saving"
-msgstr "Risparmio _energetico dello schermo"
+#: ../panels/power/cc-power-panel.c:1378
+msgid "Dim Screen when Inactive"
+msgstr "Oscurare lo schermo quando inattivo"
 
-#: ../panels/power/cc-power-panel.c:1387
+#: ../panels/power/cc-power-panel.c:1401
+msgid "Mark As Inactive After"
+msgstr "Indica come inattivo dopo"
+
+#: ../panels/power/cc-power-panel.c:1436
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1415
+#: ../panels/power/cc-power-panel.c:1464
 msgid "_Mobile Broadband"
 msgstr "Banda larga _mobile"
 
-#: ../panels/power/cc-power-panel.c:1453
+#: ../panels/power/cc-power-panel.c:1502
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: ../panels/power/cc-power-panel.c:1504
+#: ../panels/power/cc-power-panel.c:1553
 msgid "When on battery power"
 msgstr "Quando a batteria"
 
-#: ../panels/power/cc-power-panel.c:1506
+#: ../panels/power/cc-power-panel.c:1555
 msgid "When plugged in"
 msgstr "Quando collegato"
 
-#: ../panels/power/cc-power-panel.c:1624
+#: ../panels/power/cc-power-panel.c:1673
 msgid "Suspend & Power Off"
 msgstr "Sospensione e spegnimento"
 
-#: ../panels/power/cc-power-panel.c:1653
+#: ../panels/power/cc-power-panel.c:1702
 msgid "_Automatic Suspend"
 msgstr "_Sospensione automatica"
 
-#: ../panels/power/cc-power-panel.c:1673
+#: ../panels/power/cc-power-panel.c:1722
 msgid "When Battery Power is _Critical"
 msgstr "Quando la carica della batteria è _critica"
 
-#: ../panels/power/cc-power-panel.c:1705
+#: ../panels/power/cc-power-panel.c:1754
 msgid "Power Off"
 msgstr "Spegni"
 
-#: ../panels/power/cc-power-panel.c:1845
+#: ../panels/power/cc-power-panel.c:1894
 msgid "Devices"
 msgstr "Dispositivi"
 
@@ -2587,7 +2916,9 @@ msgstr "Impostazioni di gestione alimentazione"
 
 #. Translators: those are keywords for the power control-center panel
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
-msgid "Power;Sleep;Suspend;Hibernate;Battery;"
+#, fuzzy
+msgid ""
+"Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
 msgstr ""
 "Alimentazione;Batterie;Sospensione;Ibernazione;Pausa;Energia;Risparmio;"
 
@@ -2600,41 +2931,46 @@ msgid "Power off"
 msgstr "Spegni"
 
 #: ../panels/power/power.ui.h:3 ../panels/privacy/privacy.ui.h:6
-#: ../panels/screen/screen.ui.h:6
 msgid "5 minutes"
 msgstr "5 minuti"
 
-#: ../panels/power/power.ui.h:4 ../panels/screen/screen.ui.h:7
+#: ../panels/power/power.ui.h:4
 msgid "10 minutes"
 msgstr "10 minuti"
 
-#: ../panels/power/power.ui.h:5 ../panels/privacy/privacy.ui.h:7
-#: ../panels/screen/screen.ui.h:8
-msgid "30 minutes"
-msgstr "30 minuti"
-
 #: ../panels/power/power.ui.h:6 ../panels/privacy/privacy.ui.h:8
-#: ../panels/screen/screen.ui.h:9
 msgid "1 hour"
 msgstr "1 ora"
 
-#: ../panels/power/power.ui.h:7
+#: ../panels/power/power.ui.h:7 ../panels/privacy/privacy.ui.h:3
+msgid "1 minute"
+msgstr "1 minuto"
+
+#: ../panels/power/power.ui.h:8 ../panels/privacy/privacy.ui.h:4
+msgid "2 minutes"
+msgstr "2 minuti"
+
+#: ../panels/power/power.ui.h:9
+msgid "Never"
+msgstr "Mai"
+
+#: ../panels/power/power.ui.h:10
 msgid "Automatic Suspend"
 msgstr "Sospensione automatica"
 
-#: ../panels/power/power.ui.h:8 ../panels/privacy/privacy.ui.h:10
+#: ../panels/power/power.ui.h:11 ../panels/privacy/privacy.ui.h:10
 msgid "_Close"
 msgstr "_Chiudi"
 
-#: ../panels/power/power.ui.h:9
+#: ../panels/power/power.ui.h:12
 msgid "When on _Battery Power"
 msgstr "Quando a _batteria"
 
-#: ../panels/power/power.ui.h:10
+#: ../panels/power/power.ui.h:13
 msgid "When _Plugged In"
 msgstr "Quando _collegato"
 
-#: ../panels/power/power.ui.h:11
+#: ../panels/power/power.ui.h:14
 msgid "Delay"
 msgstr "Ritardo"
 
@@ -2779,7 +3115,7 @@ msgid "No printers available"
 msgstr "Nessuna stampante disponibile"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1428
+#: ../panels/printers/cc-printers-panel.c:1429
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -2787,15 +3123,15 @@ msgstr[0] "%u attivo"
 msgstr[1] "%u attivi"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1772
+#: ../panels/printers/cc-printers-panel.c:1773
 msgid "Failed to add new printer."
 msgstr "Aggiunta della nuova stampante non riuscita."
 
-#: ../panels/printers/cc-printers-panel.c:1937
+#: ../panels/printers/cc-printers-panel.c:1938
 msgid "Select PPD File"
 msgstr "Selezionare file PPD"
 
-#: ../panels/printers/cc-printers-panel.c:1946
+#: ../panels/printers/cc-printers-panel.c:1947
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -2803,30 +3139,30 @@ msgstr ""
 "File PostScript Printer Description (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD."
 "GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2251
+#: ../panels/printers/cc-printers-panel.c:2252
 msgid "No suitable driver found"
 msgstr "Nessun driver adatto trovato"
 
-#: ../panels/printers/cc-printers-panel.c:2320
+#: ../panels/printers/cc-printers-panel.c:2321
 msgid "Searching for preferred drivers…"
 msgstr "Ricerca driver preferiti…"
 
-#: ../panels/printers/cc-printers-panel.c:2335
+#: ../panels/printers/cc-printers-panel.c:2336
 msgid "Select from database…"
 msgstr "Seleziona dal database…"
 
-#: ../panels/printers/cc-printers-panel.c:2344
+#: ../panels/printers/cc-printers-panel.c:2345
 msgid "Provide PPD File…"
 msgstr "Fornisci file PPD…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2495
-#: ../panels/printers/cc-printers-panel.c:2518
+#: ../panels/printers/cc-printers-panel.c:2496
+#: ../panels/printers/cc-printers-panel.c:2519
 msgid "Test page"
 msgstr "Pagina di test"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2922
+#: ../panels/printers/cc-printers-panel.c:2923
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Impossibile caricare l'interfaccia: %s"
@@ -3007,7 +3343,7 @@ msgstr "Stato lavoro"
 msgid "Time"
 msgstr "Data"
 
-#: ../panels/printers/pp-jobs-dialog.c:484
+#: ../panels/printers/pp-jobs-dialog.c:498
 #, c-format
 msgid "%s Active Jobs"
 msgstr "%s lavori attivi"
@@ -3233,27 +3569,27 @@ msgstr ""
 "Il servizio di sistema per la stampa\n"
 "sembra non essere disponibile."
 
-#: ../panels/privacy/cc-privacy-panel.c:105
+#: ../panels/privacy/cc-privacy-panel.c:104
 msgid "Hidden"
 msgstr "Nascosto"
 
-#: ../panels/privacy/cc-privacy-panel.c:105
+#: ../panels/privacy/cc-privacy-panel.c:104
 msgid "Visible"
 msgstr "Visibile"
 
-#: ../panels/privacy/cc-privacy-panel.c:271 ../panels/privacy/privacy.ui.h:32
+#: ../panels/privacy/cc-privacy-panel.c:270 ../panels/privacy/privacy.ui.h:32
 msgid "Screen Lock"
 msgstr "Blocco schermo"
 
-#: ../panels/privacy/cc-privacy-panel.c:338 ../panels/privacy/privacy.ui.h:9
+#: ../panels/privacy/cc-privacy-panel.c:337 ../panels/privacy/privacy.ui.h:9
 msgid "Name & Visibility"
 msgstr "Nome e visibilità"
 
-#: ../panels/privacy/cc-privacy-panel.c:446 ../panels/privacy/privacy.ui.h:27
+#: ../panels/privacy/cc-privacy-panel.c:445 ../panels/privacy/privacy.ui.h:27
 msgid "Usage & History"
 msgstr "Uso e cronologia"
 
-#: ../panels/privacy/cc-privacy-panel.c:576 ../panels/privacy/privacy.ui.h:37
+#: ../panels/privacy/cc-privacy-panel.c:575 ../panels/privacy/privacy.ui.h:37
 msgid "Purge Trash & Temporary Files"
 msgstr "Pulizia cestino e file temporanei"
 
@@ -3276,19 +3612,11 @@ msgstr ""
 msgid "Screen Turns Off"
 msgstr "Sospensione dello schermo"
 
-#: ../panels/privacy/privacy.ui.h:2 ../panels/screen/screen.ui.h:2
+#: ../panels/privacy/privacy.ui.h:2
 msgid "30 seconds"
 msgstr "30 secondi"
 
-#: ../panels/privacy/privacy.ui.h:3 ../panels/screen/screen.ui.h:3
-msgid "1 minute"
-msgstr "1 minuto"
-
-#: ../panels/privacy/privacy.ui.h:4 ../panels/screen/screen.ui.h:4
-msgid "2 minutes"
-msgstr "2 minuti"
-
-#: ../panels/privacy/privacy.ui.h:5 ../panels/screen/screen.ui.h:5
+#: ../panels/privacy/privacy.ui.h:5
 msgid "3 minutes"
 msgstr "3 minuti"
 
@@ -3611,56 +3939,6 @@ msgstr "Impostazioni personali"
 msgid "System settings"
 msgstr "Impostazioni del sistema"
 
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:1
-msgid "Brightness & Lock"
-msgstr "Luminosità e blocco"
-
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
-msgid "Screen brightness and lock settings"
-msgstr "Impostazioni di luminosità e blocco dello schermo"
-
-#. Translators: those are keywords for the brightness and lock control-center panel
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
-msgid "Brightness;Lock;Dim;Blank;Monitor;"
-msgstr "Luminosità;Blocco;Oscuramento;Blank;Monitor;"
-
-#: ../panels/screen/screen.ui.h:1
-msgid "Screen turns off"
-msgstr "Sospensione dello schermo"
-
-#: ../panels/screen/screen.ui.h:10
-msgid "_Dim screen to save power"
-msgstr "_Oscurare lo schermo per risparmiare energia"
-
-#: ../panels/screen/screen.ui.h:11
-msgid "Brightness"
-msgstr "Luminosità"
-
-#: ../panels/screen/screen.ui.h:12
-msgid "_Turn screen off when inactive for:"
-msgstr "_Sospendere lo schermo quando inattivo per:"
-
-#: ../panels/screen/screen.ui.h:13
-msgid "_Lock screen after:"
-msgstr "_Bloccare lo schermo dopo:"
-
-#. To translators: This asks whether you want to lock the screen (through the screensaver) when you're detected to be physically in your home (your house, etc.)
-#: ../panels/screen/screen.ui.h:15
-msgid "Don't lock when at home"
-msgstr "Non bloccare quando a casa"
-
-#: ../panels/screen/screen.ui.h:16
-msgid "Locations…"
-msgstr "Posizioni…"
-
-#: ../panels/screen/screen.ui.h:17
-msgid "Show _notifications when locked"
-msgstr "Mostrare le _notifiche quando bloccato"
-
-#: ../panels/screen/screen.ui.h:18
-msgid "Lock"
-msgstr "Blocco"
-
 #: ../panels/search/cc-search-locations-dialog.c:275
 msgid "Home"
 msgstr "Home"
@@ -3720,6 +3998,183 @@ msgstr "Sposta giù"
 msgid "Preferences"
 msgstr "Preferenze"
 
+#: ../panels/sharing/cc-sharing-panel.c:200
+msgctxt "service is enabled"
+msgid "On"
+msgstr "On"
+
+#: ../panels/sharing/cc-sharing-panel.c:202
+msgctxt "service is disabled"
+msgid "Off"
+msgstr "Off"
+
+#: ../panels/sharing/cc-sharing-panel.c:310
+msgid "Choose a Folder"
+msgstr "Scegliere una cartella"
+
+#: ../panels/sharing/cc-sharing-panel.c:488
+msgid "Copy"
+msgstr "Copia"
+
+#: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:1
+msgid "Sharing"
+msgstr "Condivisione"
+
+#. Translators: those are keywords for the sharing control-center panel
+#: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:3
+msgid ""
+"share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
+"pictures;photos;movies;server;renderer;"
+msgstr ""
+
+#: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
+msgid "Enable or disable remote login"
+msgstr "Abilitare o disabilita l'accesso remoto"
+
+#: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:2
+#, fuzzy
+msgid "Authentication is required to enable or disable remote login"
+msgstr "È necessario autenticarsi per cambiare i dati utente"
+
+#: ../panels/sharing/sharing.ui.h:1
+msgid "Bluetooth Sharing"
+msgstr "Condivisione Bluetooth"
+
+#: ../panels/sharing/sharing.ui.h:2
+msgid ""
+"Bluetooth Sharing allows you to share files with other Bluetooth enabled "
+"devices"
+msgstr ""
+"La condivisione Bluetooth consente di condividere file con altri dispositivi "
+"Bluetooth abilitati"
+
+#: ../panels/sharing/sharing.ui.h:3
+msgid "<b>Share Public Folder</b>"
+msgstr "<b>Condividere la cartella Pubblici</b>"
+
+#: ../panels/sharing/sharing.ui.h:4
+msgid "Only Receive From Trusted Devices"
+msgstr "Ricevere solo da dispositivi fidati"
+
+#: ../panels/sharing/sharing.ui.h:5
+msgid "<b>Save Received Files to Downloads Folder</b>"
+msgstr "<b>Salvare i file ricevuti nella cartella Scaricati</b>"
+
+# trusted è "fidato" in gnome-bluetooth, ma qui potrebbero 
+# averlo usato a sproposito e significare solo "paired" (associato)
+# da controllare
+#: ../panels/sharing/sharing.ui.h:6
+msgid "Only share with Trusted Devices"
+msgstr "Condividere solo con dispositivi fidati"
+
+#: ../panels/sharing/sharing.ui.h:7
+msgid "<b>Computer Name</b>"
+msgstr "<b>Nome del computer</b>"
+
+#: ../panels/sharing/sharing.ui.h:8
+msgid "Some services are disabled because of no network access."
+msgstr "Alcuni servizi sono disabilitati poiché non c'è accesso di rete."
+
+#: ../panels/sharing/sharing.ui.h:9
+msgid "Media Sharing"
+msgstr "Condivisione multimediale"
+
+#: ../panels/sharing/sharing.ui.h:10
+msgid "Share Music, Photos and Videos with others on the current network."
+msgstr "Condivide con altri musica, foto e video sulla rete in uso."
+
+#: ../panels/sharing/sharing.ui.h:11
+msgid "<b>Share Media On This Network</b>"
+msgstr "<b>Condividere file multimediali su questa rete</b>"
+
+#: ../panels/sharing/sharing.ui.h:12
+msgid "Shared Folders"
+msgstr "Cartelle condivise"
+
+#: ../panels/sharing/sharing.ui.h:13
+msgid "column"
+msgstr "colonna"
+
+#: ../panels/sharing/sharing.ui.h:14
+msgid "Add Folder"
+msgstr "Aggiungi cartella"
+
+#: ../panels/sharing/sharing.ui.h:15
+msgid "Remove Folder"
+msgstr "Rimuovi cartella"
+
+#: ../panels/sharing/sharing.ui.h:16
+msgid "Personal File Sharing"
+msgstr "Condivisione file personali"
+
+#: ../panels/sharing/sharing.ui.h:18
+#, no-c-format
+msgid ""
+"Personal File Sharing allows you to share your Public folder with others on "
+"your current network using: <a href=\"dav://%s\">dav://%s</a>"
+msgstr ""
+"La condivisione di file personali permette di condividere con altri la "
+"propria cartella Pubblici sulla rete attuale usando: <a href=\"dav://%s"
+"\">dav://%s</a>"
+
+#: ../panels/sharing/sharing.ui.h:19
+msgid "<b>Share Public Folder On This Network</b>"
+msgstr "<b>Condividere la cartella Pubblici su questa rete</b>"
+
+#: ../panels/sharing/sharing.ui.h:20
+msgid "Require Password"
+msgstr "Richiedere la password"
+
+#: ../panels/sharing/sharing.ui.h:21
+msgid "Password"
+msgstr "Password"
+
+#: ../panels/sharing/sharing.ui.h:22
+msgid "Remote Login"
+msgstr "Accesso remoto"
+
+#: ../panels/sharing/sharing.ui.h:24
+#, no-c-format
+msgid ""
+"Allow remote users to connect using the Secure Shell command:\n"
+"<a href=\"ssh %s\">ssh %s</a>"
+msgstr ""
+"Consente a utenti remoti di connettersi usando il comando Secure Shell:\n"
+"<a href=\"ssh %s\">ssh %s</a>"
+
+#: ../panels/sharing/sharing.ui.h:26
+msgid "<b>Remote Login</b>"
+msgstr "<b>Accesso remoto</b>"
+
+#: ../panels/sharing/sharing.ui.h:27
+msgid "Screen Sharing"
+msgstr "Condivisione schermo"
+
+#: ../panels/sharing/sharing.ui.h:29
+#, no-c-format
+msgid ""
+"Allow remote users to view or control your screen by connecting to: <a href="
+"\"vnc://%s\">vnc://%s</a>"
+msgstr ""
+"Consente a utenti remoti di visualizzare o controllare il proprio schermo "
+"connettendosi a <a href=\"vnc://%s\">vnc://%s</a>"
+
+#: ../panels/sharing/sharing.ui.h:30
+msgid "<b>Remote View</b>"
+msgstr "<b>Visualizzazione da remoto</b>"
+
+#: ../panels/sharing/sharing.ui.h:31
+msgid "<b>Remote Control</b>"
+msgstr "<b>Controllo da remoto</b>"
+
+#: ../panels/sharing/sharing.ui.h:32
+msgid "Approve All Connections"
+msgstr "Approvare tutte le connessioni"
+
+#: ../panels/sharing/sharing.ui.h:33
+msgid "Show Password"
+msgstr "Mostra password"
+
 # (ndt) dovrebbe essere la voce di menù
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:1
 msgid "Sound"
@@ -3760,45 +4215,45 @@ msgstr "Vetro"
 msgid "Sonar"
 msgstr "Sonar"
 
-#: ../panels/sound/gvc-balance-bar.c:111
+#: ../panels/sound/gvc-balance-bar.c:106
 msgctxt "balance"
 msgid "Left"
 msgstr "Sinistra"
 
-#: ../panels/sound/gvc-balance-bar.c:112
+#: ../panels/sound/gvc-balance-bar.c:107
 msgctxt "balance"
 msgid "Right"
 msgstr "Destra"
 
-#: ../panels/sound/gvc-balance-bar.c:115
+#: ../panels/sound/gvc-balance-bar.c:110
 msgctxt "balance"
 msgid "Rear"
 msgstr "Retro"
 
-#: ../panels/sound/gvc-balance-bar.c:116
+#: ../panels/sound/gvc-balance-bar.c:111
 msgctxt "balance"
 msgid "Front"
 msgstr "Fronte"
 
-#: ../panels/sound/gvc-balance-bar.c:119
+#: ../panels/sound/gvc-balance-bar.c:114
 msgctxt "balance"
 msgid "Minimum"
 msgstr "Minimo"
 
-#: ../panels/sound/gvc-balance-bar.c:120
+#: ../panels/sound/gvc-balance-bar.c:115
 msgctxt "balance"
 msgid "Maximum"
 msgstr "Massimo"
 
-#: ../panels/sound/gvc-balance-bar.c:295
+#: ../panels/sound/gvc-balance-bar.c:290
 msgid "_Balance:"
 msgstr "_Bilanciamento:"
 
-#: ../panels/sound/gvc-balance-bar.c:298
+#: ../panels/sound/gvc-balance-bar.c:293
 msgid "_Fade:"
 msgstr "_Dissolvenza:"
 
-#: ../panels/sound/gvc-balance-bar.c:301
+#: ../panels/sound/gvc-balance-bar.c:296
 msgid "_Subwoofer:"
 msgstr "Sub_woofer:"
 
@@ -3851,6 +4306,10 @@ msgstr "Rilevamento picco"
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "Nome"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1530
+msgid "Device"
+msgstr "Dispositivo"
 
 # (ndt) quello pare essere il nome della scheda audio
 #: ../panels/sound/gvc-mixer-dialog.c:1593
@@ -4943,10 +5402,6 @@ msgstr "Selezione dito"
 msgid "Enrolling fingerprints"
 msgstr "Registrazione impronte digitali"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:743
-msgid "Summary"
-msgstr "Riepilogo"
-
 #: ../panels/user-accounts/um-history-dialog.c:88
 msgid "This Week"
 msgstr "Questa settimana"
@@ -5196,11 +5651,6 @@ msgstr "Associa pulsanti"
 #: ../panels/wacom/button-mapping.ui.h:2
 msgid "Map buttons to functions"
 msgstr "Associa i pulsanti alle funzioni"
-
-#. Text printed on screen
-#: ../panels/wacom/calibrator/gui_gtk.c:78
-msgid "Screen Calibration"
-msgstr "Calibrazione schermo"
 
 #: ../panels/wacom/calibrator/gui_gtk.c:79
 msgid ""
@@ -5549,20 +5999,24 @@ msgid "Quit"
 msgstr "Esci"
 
 #. Add categories
-#: ../shell/gnome-control-center.c:787
+#: ../shell/gnome-control-center.c:881
 msgctxt "category"
 msgid "Personal"
 msgstr "Personale"
 
-#: ../shell/gnome-control-center.c:788
+#: ../shell/gnome-control-center.c:882
 msgctxt "category"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ../shell/gnome-control-center.c:789
+#: ../shell/gnome-control-center.c:883
 msgctxt "category"
 msgid "System"
 msgstr "Sistema"
+
+#: ../shell/gnomecc.directory.in.h:1
+msgid "Control Center"
+msgstr "Centro di controllo"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:1
 msgid "Settings"
@@ -5576,28 +6030,86 @@ msgstr "Preferenze;Impostazioni;"
 msgid "All Settings"
 msgstr "Tutte le impostazioni"
 
+#~ msgid "No profile"
+#~ msgstr "Nessun profilo"
+
+#~ msgid "%i year"
+#~ msgid_plural "%i years"
+#~ msgstr[0] "%i anno"
+#~ msgstr[1] "%i anni"
+
+#~ msgid "%i month"
+#~ msgid_plural "%i months"
+#~ msgstr[0] "%i mese"
+#~ msgstr[1] "%i mesi"
+
+#~ msgid "%i week"
+#~ msgid_plural "%i weeks"
+#~ msgstr[0] "%i settimana"
+#~ msgstr[1] "%i settimane"
+
+#~ msgid "Less than 1 week"
+#~ msgstr "Meno di una settimana"
+
+#~ msgid "This device is not color managed."
+#~ msgstr "Nessuna gestione del colore per questo dispositivo."
+
+#~ msgid "This device is using manufacturing calibrated data."
+#~ msgstr "Questo dispositivo sta usando dati calibrati di fabbrica."
+
+#~ msgid ""
+#~ "This device does not have a profile suitable for whole-screen color "
+#~ "correction."
+#~ msgstr ""
+#~ "Questo dispositivo non presenta un profilo adatto per la correzione del "
+#~ "colore a intero schermo."
+
+# FIXME!!! cosa??
+#~ msgid "Not specified"
+#~ msgstr "Non specificato"
+
+#~ msgid "No devices supporting color management detected"
+#~ msgstr ""
+#~ "Non è stato rilevato alcun dispositivo che supporti la gestione del colore"
+
+#~ msgid "Screen _Power Saving"
+#~ msgstr "Risparmio _energetico dello schermo"
+
+#~ msgid "Brightness & Lock"
+#~ msgstr "Luminosità e blocco"
+
+#~ msgid "Screen brightness and lock settings"
+#~ msgstr "Impostazioni di luminosità e blocco dello schermo"
+
+#~ msgid "Brightness;Lock;Dim;Blank;Monitor;"
+#~ msgstr "Luminosità;Blocco;Oscuramento;Blank;Monitor;"
+
+#~ msgid "Screen turns off"
+#~ msgstr "Sospensione dello schermo"
+
+#~ msgid "_Dim screen to save power"
+#~ msgstr "_Oscurare lo schermo per risparmiare energia"
+
+#~ msgid "_Turn screen off when inactive for:"
+#~ msgstr "_Sospendere lo schermo quando inattivo per:"
+
+#~ msgid "_Lock screen after:"
+#~ msgstr "_Bloccare lo schermo dopo:"
+
+#~ msgid "Don't lock when at home"
+#~ msgstr "Non bloccare quando a casa"
+
+#~ msgid "Locations…"
+#~ msgstr "Posizioni…"
+
+#~ msgid "Show _notifications when locked"
+#~ msgstr "Mostrare le _notifiche quando bloccato"
+
+#~ msgid "Lock"
+#~ msgstr "Blocco"
+
 #~ msgid "Create virtual device"
 #~ msgstr "Crea dispositivo virtuale"
-
-#~ msgctxt "Device kind"
-#~ msgid "Display"
-#~ msgstr "Monitor"
-
-#~ msgctxt "Device kind"
-#~ msgid "Scanner"
-#~ msgstr "Scanner"
-
-#~ msgctxt "Device kind"
-#~ msgid "Printer"
-#~ msgstr "Stampante"
-
-#~ msgctxt "Device kind"
-#~ msgid "Camera"
-#~ msgstr "Fotocamera"
-
-#~ msgctxt "Device kind"
-#~ msgid "Webcam"
-#~ msgstr "Webcam"
 
 #~ msgid "Add device"
 #~ msgstr "Aggiungi dispositivo"
@@ -5659,9 +6171,6 @@ msgstr "Tutte le impostazioni"
 
 #~ msgid "Don't suspend"
 #~ msgstr "Non sospendere"
-
-#~ msgid "Suspend when inactive for"
-#~ msgstr "Sospendere quando inattivo per"
 
 #~ msgid "Browse Files..."
 #~ msgstr "Esplora file..."
@@ -5829,9 +6338,6 @@ msgstr "Tutte le impostazioni"
 #~ msgid "Calibrate..."
 #~ msgstr "Calibra..."
 
-#~ msgid "Control Center"
-#~ msgstr "Centro di controllo"
-
 #~ msgid "Network;Wireless;IP;LAN;Proxy;"
 #~ msgstr "Rete;Network;Wireless;IP;LAN;Proxy;"
 
@@ -5941,9 +6447,6 @@ msgstr "Tutte le impostazioni"
 #~ msgid "Solid Color"
 #~ msgstr "Tinta unita"
 
-#~ msgid "Pictures Folder"
-#~ msgstr "Cartella Immagini"
-
 #~ msgid "Colors & Gradients"
 #~ msgstr "Colori e gradienti"
 
@@ -5999,9 +6502,6 @@ msgstr "Tutte le impostazioni"
 #~ msgid "_Edge scrolling"
 #~ msgstr "Scorrimento di _bordo"
 
-#~ msgid "Enable h_orizontal scrolling"
-#~ msgstr "Abilitare lo scorrimento _orizzontale"
-
 #~ msgctxt "Wireless access point"
 #~ msgid "Other..."
 #~ msgstr "Altri..."
@@ -6056,14 +6556,8 @@ msgstr "Tutte le impostazioni"
 #~ msgid "Add User"
 #~ msgstr "Aggiungi utente"
 
-#~ msgid "Remove User"
-#~ msgstr "Rimuovi utente"
-
 #~ msgid "Allowed users"
 #~ msgstr "Utenti ammessi"
-
-#~ msgid "Co_nnector:"
-#~ msgstr "Co_nnettore:"
 
 #~ msgid "C_hoose a device to configure:"
 #~ msgstr "_Scegliere un dispositivo da configurare:"
@@ -6095,9 +6589,6 @@ msgstr "Tutte le impostazioni"
 
 #~ msgid "affect how much power is used"
 #~ msgstr "hanno effetto sull'uso dell'alimentazione"
-
-#~ msgid "Choose a Layout"
-#~ msgstr "Scegliere una disposizione"
 
 #~ msgid "Preview"
 #~ msgstr "Anteprima"
@@ -6526,20 +7017,8 @@ msgstr "Tutte le impostazioni"
 #~ msgstr "Localizzazione del puntatore"
 
 # FIXME not-translate
-#~ msgid "16"
-#~ msgstr "16"
-
-# FIXME not-translate
 #~ msgid "2010"
 #~ msgstr "2010"
-
-# FIXME not-translate
-#~ msgid "22"
-#~ msgstr "22"
-
-# FIXME not-translate
-#~ msgid "45"
-#~ msgstr "45"
 
 #~ msgid "AM"
 #~ msgstr "AM"
