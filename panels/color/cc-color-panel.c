@@ -1219,34 +1219,12 @@ static void
 gcm_prefs_profile_clicked (CcColorPanel *prefs, CdProfile *profile, CdDevice *device)
 {
   GtkWidget *widget;
-  CdDeviceRelation relation;
   gchar *s;
   CcColorPanelPrivate *priv = prefs->priv;
 
   /* get profile */
   g_debug ("selected profile = %s",
      cd_profile_get_filename (profile));
-
-
-  /* find the profile relationship */
-  relation = cd_device_get_profile_relation_sync (device,
-                                                  profile,
-                                                  NULL, NULL);
-
-  /* we can only remove hard relationships */
-  widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
-                                               "toolbutton_profile_remove"));
-  if (relation == CD_DEVICE_RELATION_HARD)
-    {
-      gtk_widget_set_tooltip_text (widget, "");
-      gtk_widget_set_sensitive (widget, TRUE);
-    }
-  else
-    {
-      /* TRANSLATORS: this is when an auto-added profile cannot be removed */
-      gtk_widget_set_tooltip_text (widget, _("Cannot remove automatically added profile"));
-      gtk_widget_set_sensitive (widget, FALSE);
-    }
 
   /* allow getting profile info */
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
