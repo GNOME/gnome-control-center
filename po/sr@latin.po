@@ -5,14 +5,14 @@
 # Reviewed on 2005-03-03 by: Danilo Šegan <danilo@gnome.org>
 # Translated on 2006-03-11 by: Slobodan D. Sredojević <slobo@akrep.be>
 # Miloš Popović <gpopac@gmail.com>, 2010, 2011.
-# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2011, 2012.
+# Miroslav Nikolić <miroslavnikolic@rocketmail.com>, 2011, 2012, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2012-09-18 22:53+0000\n"
-"PO-Revision-Date: 2012-09-20 20:56+0200\n"
+"POT-Creation-Date: 2013-01-24 23:54+0000\n"
+"PO-Revision-Date: 2013-01-25 12:17+0200\n"
 "Last-Translator: Miroslav Nikolić <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
 "Language: sr\n"
@@ -101,7 +101,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Nema pozadine za radnu površ"
 
-#: ../panels/background/cc-background-panel.c:387
+#: ../panels/background/cc-background-panel.c:449
 msgid "Current background"
 msgstr "Trenutna pozadina"
 
@@ -118,209 +118,309 @@ msgstr "Promenite pozadinu"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Pozadina;Ekran;Radna površ;"
 
-#. TRANSLATORS: device type
-#: ../panels/bluetooth/bluetooth-properties.desktop.in.in.h:1
-#: ../panels/network/panel-common.c:102
+#: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
 msgid "Bluetooth"
 msgstr "Blutut"
 
-#: ../panels/bluetooth/bluetooth-properties.desktop.in.in.h:2
+#: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:2
 msgid "Configure Bluetooth settings"
 msgstr "Izmenite podešavanja blututa"
 
-#: ../panels/bluetooth/bluetooth.ui.h:1
-msgid "Set Up New Device"
-msgstr "Podesi novi uređaj"
-
-#: ../panels/bluetooth/bluetooth.ui.h:2 ../panels/network/network.ui.h:9
-msgid "Remove Device"
-msgstr "Ukloni uređaj"
-
-#: ../panels/bluetooth/bluetooth.ui.h:3
-msgid "Connection"
-msgstr "Veza"
-
-#: ../panels/bluetooth/bluetooth.ui.h:4
-msgid "Paired"
-msgstr "Uparen"
-
-#: ../panels/bluetooth/bluetooth.ui.h:5 ../panels/wacom/cc-wacom-page.c:756
-msgid "Type"
-msgstr "Vrsta"
-
-#: ../panels/bluetooth/bluetooth.ui.h:6
-msgid "Address"
-msgstr "Adresa"
-
-#: ../panels/bluetooth/bluetooth.ui.h:7
-msgid "Mouse and Touchpad Settings"
-msgstr "Podešavanja miša i dodirne table"
-
-#: ../panels/bluetooth/bluetooth.ui.h:8 ../panels/universal-access/uap.ui.h:38
-msgid "Sound Settings"
-msgstr "Podešavanja zvuka"
-
-#: ../panels/bluetooth/bluetooth.ui.h:9
-msgid "Keyboard Settings"
-msgstr "Podešavanja tastature"
-
-#: ../panels/bluetooth/bluetooth.ui.h:10
-msgid "Send Files..."
-msgstr "Pošalji datoteke..."
-
-#: ../panels/bluetooth/bluetooth.ui.h:11
-msgid "Browse Files..."
-msgstr "Razgledaj datoteke..."
-
 #. Translator: This string appears next to a toggle switch which controls enabling/disabling Bluetooth radio's on the device.
-#: ../panels/bluetooth/bluetooth.ui.h:13
+#: ../panels/bluetooth/bluetooth.ui.h:2
 msgctxt "Power"
 msgid "Bluetooth"
 msgstr "Blutut"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:290
+#: ../panels/bluetooth/bluetooth.ui.h:3
+msgid "Set Up New Device"
+msgstr "Podesi novi uređaj"
+
+#: ../panels/bluetooth/bluetooth.ui.h:4 ../panels/network/network.ui.h:9
+msgid "Remove Device"
+msgstr "Ukloni uređaj"
+
+#: ../panels/bluetooth/bluetooth.ui.h:5
+msgid "Connection"
+msgstr "Veza"
+
+#: ../panels/bluetooth/bluetooth.ui.h:6 ../panels/printers/printers.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:3
+msgid "page 1"
+msgstr "strana 1"
+
+#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/printers/printers.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:5
+msgid "page 2"
+msgstr "strana 2"
+
+#: ../panels/bluetooth/bluetooth.ui.h:8
+msgid "Paired"
+msgstr "Uparen"
+
+#: ../panels/bluetooth/bluetooth.ui.h:9 ../panels/wacom/cc-wacom-page.c:789
+msgid "Type"
+msgstr "Vrsta"
+
+#: ../panels/bluetooth/bluetooth.ui.h:10
+msgid "Address"
+msgstr "Adresa"
+
+#: ../panels/bluetooth/bluetooth.ui.h:11
+#| msgid "Mouse and Touchpad Settings"
+msgid "Mouse & Touchpad Settings"
+msgstr "Podešavanja miša i dodirne table"
+
+#: ../panels/bluetooth/bluetooth.ui.h:12
+#: ../panels/universal-access/uap.ui.h:38
+msgid "Sound Settings"
+msgstr "Podešavanja zvuka"
+
+#: ../panels/bluetooth/bluetooth.ui.h:13
+msgid "Keyboard Settings"
+msgstr "Podešavanja tastature"
+
+#: ../panels/bluetooth/bluetooth.ui.h:14
+#| msgid "Send Files..."
+msgid "Send Files…"
+msgstr "Pošalji datoteke…"
+
+#: ../panels/bluetooth/cc-bluetooth-panel.c:355
 msgid "Yes"
 msgstr "Da"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:290
+#: ../panels/bluetooth/cc-bluetooth-panel.c:355
 msgid "No"
 msgstr "Ne"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:405
+#: ../panels/bluetooth/cc-bluetooth-panel.c:469
 msgid "Bluetooth is disabled"
 msgstr "Blutut je isključen"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:410
+#: ../panels/bluetooth/cc-bluetooth-panel.c:474
 msgid "Bluetooth is disabled by hardware switch"
 msgstr "Blutut je isključen fizičkim prekidačem"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:414
+#: ../panels/bluetooth/cc-bluetooth-panel.c:478
 msgid "No Bluetooth adapters found"
 msgstr "Nisu pronađeni prilagođivači blututa"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:547
+#: ../panels/bluetooth/cc-bluetooth-panel.c:577
 msgid "Visibility"
 msgstr "Vidljivost"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:551
+#: ../panels/bluetooth/cc-bluetooth-panel.c:581
 #, c-format
 msgid "Visibility of “%s”"
 msgstr "Vidljivost za „%s“"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:595
+#: ../panels/bluetooth/cc-bluetooth-panel.c:625
 #, c-format
 msgid "Remove '%s' from the list of devices?"
 msgstr "Da uklonim „%s“ sa spiska uređaja?"
 
-#: ../panels/bluetooth/cc-bluetooth-panel.c:597
+#: ../panels/bluetooth/cc-bluetooth-panel.c:627
 msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr ""
 "Ukoliko uklonite uređaj, moraćete ponovo da ga podesite pre sledećeg "
 "korišćenja."
 
-#. TRANSLATORS: this is where the user can click and import a profile
-#: ../panels/color/cc-color-panel.c:106
-msgid "Other profile…"
-msgstr "Ostali profili…"
+#. TRANSLATORS: The user has to attach the sensor to the screen
+#: ../panels/color/cc-color-calibrate.c:360
+msgid "Place your calibration device over the square and press 'Start'"
+msgstr "Postavite uređaj za kalibraciju preko kvadrata i pritisnite „Počni“"
+
+#. TRANSLATORS: Some calibration devices need the user to move a
+#. * dial or switch manually. We also show a picture showing them
+#. * what to do...
+#: ../panels/color/cc-color-calibrate.c:366
+msgid ""
+"Move your calibration device to the calibrate position and press 'Continue'"
+msgstr ""
+"Pomerite uređaj za kalibraciju na položaj kalibracije i pritisnite „Nastavi“"
+
+#. TRANSLATORS: Some calibration devices need the user to move a
+#. * dial or switch manually. We also show a picture showing them
+#. * what to do...
+#: ../panels/color/cc-color-calibrate.c:372
+msgid ""
+"Move your calibration device to the surface position and press 'Continue'"
+msgstr ""
+"Pomerite uređaj za kalibraciju na položaj površine i pritisnite „Nastavi“"
+
+#. TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
+#. * is built into the palmrest and we need to fullscreen the
+#. * sample widget and shut the lid.
+#: ../panels/color/cc-color-calibrate.c:378
+msgid "Shut the laptop lid"
+msgstr "Isključite poklopac prenosnog računara"
+
+#. TRANSLATORS: We suck, the calibation failed and we have no
+#. * good idea why or any suggestions
+#: ../panels/color/cc-color-calibrate.c:409
+#| msgid "An internal error occurred."
+msgid "An internal error occurred that could not be recovered."
+msgstr "Došlo je do unutrašnje greške koja ne može biti oporavljena."
+
+#. TRANSLATORS: Some required-at-runtime tools were not
+#. * installed, which should only affect insane distros
+#: ../panels/color/cc-color-calibrate.c:414
+msgid "Tools required for calibration are not installed."
+msgstr "Alati potrebni za kalibraciju nisu instalirani."
+
+#. TRANSLATORS: The profile failed for some reason
+#: ../panels/color/cc-color-calibrate.c:420
+msgid "The profile could not be generated."
+msgstr "Profil ne može biti stvoren."
+
+#. TRANSLATORS: The user specified a whitepoint that was
+#. * unobtainable with the hardware they've got -- see
+#. * https://en.wikipedia.org/wiki/White_point for details
+#: ../panels/color/cc-color-calibrate.c:426
+msgid "The target whitepoint was not obtainable."
+msgstr "Bela tačka mete nije bila izvodljiva."
+
+#. TRANSLATORS: the display calibration process is finished
+#: ../panels/color/cc-color-calibrate.c:466
+#| msgctxt "print job"
+#| msgid "Completed"
+msgid "Complete!"
+msgstr "Završeno!"
+
+#. TRANSLATORS: the display calibration failed, and we also show
+#. * the translated (or untranslated) error string after this
+#: ../panels/color/cc-color-calibrate.c:474
+#| msgid "Configuration failed"
+msgid "Calibration failed!"
+msgstr "Kalibracija nije uspela!"
+
+#. TRANSLATORS: The user can now remove the sensor from the screen
+#: ../panels/color/cc-color-calibrate.c:481
+msgid "You can remove the calibration device."
+msgstr "Možete da uklonite uređaj za kalibraciju."
+
+#. TRANSLATORS: The user has to be careful not to knock the
+#. * display off the screen (although we do cope if this is
+#. * detected early enough)
+#: ../panels/color/cc-color-calibrate.c:552
+msgid "Do not disturb the calibration device while in progress"
+msgstr "Ne ometajte uređaj za kalibraciju dok je u radu"
+
+#. TRANSLATORS: This refers to the TFT display on a laptop
+#: ../panels/color/cc-color-common.c:41
+#| msgid "Lock screen"
+msgid "Laptop Screen"
+msgstr "Ekran prenosnog računara"
+
+#. TRANSLATORS: This refers to the embedded webcam on a laptop
+#: ../panels/color/cc-color-common.c:50
+#| msgid "Built-in"
+msgid "Built-in Webcam"
+msgstr "Ugrađena veb kamerica"
+
+#. TRANSLATORS: an externally connected display, where %s is either the
+#. * model, vendor or ID, e.g. 'LP2480zx Monitor'
+#: ../panels/color/cc-color-common.c:65
+#, c-format
+#| msgid "Monitor"
+msgid "%s Monitor"
+msgstr "%s monitor"
+
+#. TRANSLATORS: a flatbed scanner device, e.g. 'Epson Scanner'
+#: ../panels/color/cc-color-common.c:69
+#, c-format
+#| msgctxt "Device kind"
+#| msgid "Scanner"
+msgid "%s Scanner"
+msgstr "%s skener"
+
+#. TRANSLATORS: a camera device, e.g. 'Nikon D60 Camera'
+#: ../panels/color/cc-color-common.c:73
+#, c-format
+#| msgctxt "Device kind"
+#| msgid "Camera"
+msgid "%s Camera"
+msgstr "%s fotoaparat"
+
+#. TRANSLATORS: a printer device, e.g. 'Epson Photosmart Printer'
+#: ../panels/color/cc-color-common.c:77
+#, c-format
+#| msgctxt "Device kind"
+#| msgid "Printer"
+msgid "%s Printer"
+msgstr "%s štampač"
+
+#. TRANSLATORS: a webcam device, e.g. 'Philips HiDef Camera'
+#: ../panels/color/cc-color-common.c:81
+#, c-format
+#| msgctxt "Device kind"
+#| msgid "Webcam"
+msgid "%s Webcam"
+msgstr "%s veb kamerica"
+
+#. not calibrated
+#: ../panels/color/cc-color-device.c:303
+#| msgid "Uncalibrated"
+msgid "Not calibrated"
+msgstr "Nije kalibrisano"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:119
+#: ../panels/color/cc-color-panel.c:131
 msgid "Default: "
 msgstr "Osnovno: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:126
+#: ../panels/color/cc-color-panel.c:139
 msgid "Colorspace: "
 msgstr "Prostor boja: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:132
+#: ../panels/color/cc-color-panel.c:146
 msgid "Test profile: "
 msgstr "Probni profil: "
 
-#. TRANSLATORS: this is when the profile should be set for all users
-#: ../panels/color/cc-color-panel.c:185 ../panels/color/color.ui.h:11
-msgid "Set for all users"
-msgstr "Podesite za sve korisnike"
-
-#. TRANSLATORS: this is when the profile should be set for all users
-#: ../panels/color/cc-color-panel.c:192
-msgid "Create virtual device"
-msgstr "Napravite virtuelni uređaj"
-
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:227
+#: ../panels/color/cc-color-panel.c:214
 msgid "Select ICC Profile File"
 msgstr "Izaberi datoteku ICC profila"
 
-#: ../panels/color/cc-color-panel.c:230
+#: ../panels/color/cc-color-panel.c:217
 msgid "_Import"
 msgstr "_Uvezi"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:241
+#: ../panels/color/cc-color-panel.c:228
 msgid "Supported ICC profiles"
 msgstr "Podržani ICC profili"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:248
+#: ../panels/color/cc-color-panel.c:235
 msgid "All files"
 msgstr "Sve datoteke"
 
-#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:522
-msgid "Available Profiles for Displays"
-msgstr "Dostupni profili za ekrane"
+#: ../panels/color/cc-color-panel.c:506
+#| msgctxt "Distance"
+#| msgid "¼ Screen"
+msgid "Screen"
+msgstr "Ekran"
 
-#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:526
-msgid "Available Profiles for Scanners"
-msgstr "Dostupni profili za skenere"
-
-#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:530
-msgid "Available Profiles for Printers"
-msgstr "Dostupni profili za štampače"
-
-#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:534
-msgid "Available Profiles for Cameras"
-msgstr "Dostupni profili za fotoaparate"
-
-#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#: ../panels/color/cc-color-panel.c:538
-msgid "Available Profiles for Webcams"
-msgstr "Dostupni profili za veb kamerice"
-
-#. TRANSLATORS: this is the dialog title in the 'Add profile' UI
-#. * where the device type is not recognised
-#. Profiles that can be added to the device
-#: ../panels/color/cc-color-panel.c:543 ../panels/color/color.ui.h:2
-msgid "Available Profiles"
-msgstr "Dostupni profili"
-
-#. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:824
-#: ../panels/sound/gvc-mixer-dialog.c:1525
-msgid "Device"
-msgstr "Uređaj"
-
-#. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:859
-msgid "Calibration"
-msgstr "Kalibracija"
+#. TRANSLATORS: this is the dialog to save the ICC profile
+#: ../panels/color/cc-color-panel.c:776
+#| msgid "Remove profile"
+msgid "Save Profile"
+msgstr "Sačuvaj profil"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:891
+#: ../panels/color/cc-color-panel.c:1137
 msgid "Create a color profile for the selected device"
 msgstr "Napravite profil boje za izabrani uređaj"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:905 ../panels/color/cc-color-panel.c:929
+#: ../panels/color/cc-color-panel.c:1152 ../panels/color/cc-color-panel.c:1176
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -329,209 +429,419 @@ msgstr ""
 "ispravno priključen."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:938
+#: ../panels/color/cc-color-panel.c:1186
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Instrument za merenje ne podržava profilisanje štampača."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:949
+#: ../panels/color/cc-color-panel.c:1197
 msgid "The device type is not currently supported."
 msgstr "Tip uređaja trenutno nije podržan."
 
-#. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:1022
-msgid "Cannot remove automatically added profile"
-msgstr "Ne mogu da uklonim automatski dodat profil"
+#. TRANSLATORS: standard spaces are well known colorspaces like
+#. * sRGB, AdobeRGB and ProPhotoRGB
+#: ../panels/color/cc-color-profile.c:101
+#| msgctxt "Experience"
+#| msgid "Standard"
+msgid "Standard Space"
+msgstr "Uobičajeni prostor"
 
-#. TRANSLATORS: this is when there is no profile for the device
-#: ../panels/color/cc-color-panel.c:1359
-msgid "No profile"
-msgstr "Nema profila"
+#. TRANSLATORS: test profiles do things like changing the screen
+#. * a different color, or swap the red and green channels
+#: ../panels/color/cc-color-profile.c:107
+#| msgid "Test profile: "
+msgid "Test Profile"
+msgstr "Isprobaj profil"
 
-#: ../panels/color/cc-color-panel.c:1390
-#, c-format
-msgid "%i year"
-msgid_plural "%i years"
-msgstr[0] "%i godina"
-msgstr[1] "%i godine"
-msgstr[2] "%i godina"
-msgstr[3] "Jedna godina"
+#. TRANSLATORS: automatic profiles are generated automatically
+#. * by the color management system based on manufacturing data,
+#. * for instance the default monitor profile is created from the
+#. * primaries specified in the monitor EDID
+#: ../panels/color/cc-color-profile.c:115
+#| msgctxt "proxy method"
+#| msgid "Automatic"
+msgctxt "Automatically generated profile"
+msgid "Automatic"
+msgstr "Samostalni"
 
-#: ../panels/color/cc-color-panel.c:1401
-#, c-format
-msgid "%i month"
-msgid_plural "%i months"
-msgstr[0] "%i mesec"
-msgstr[1] "%i meseca"
-msgstr[2] "%i meseci"
-msgstr[3] "Jedan mesec"
+#. TRANSLATORS: the profile quality - low quality profiles take
+#. * much less time to generate but may be a poor reflection of the
+#. * device capability
+#: ../panels/color/cc-color-profile.c:125
+#| msgctxt "Printer Option Group"
+#| msgid "Image Quality"
+msgctxt "Profile quality"
+msgid "Low Quality"
+msgstr "Nizak kvalitet"
 
-#: ../panels/color/cc-color-panel.c:1412
-#, c-format
-msgid "%i week"
-msgid_plural "%i weeks"
-msgstr[0] "%i nedelja"
-msgstr[1] "%i nedelje"
-msgstr[2] "%i nedelja"
-msgstr[3] "Jedna nedelja"
+#. TRANSLATORS: the profile quality
+#: ../panels/color/cc-color-profile.c:130
+#| msgctxt "Printer Option Group"
+#| msgid "Image Quality"
+msgctxt "Profile quality"
+msgid "Medium Quality"
+msgstr "Osrednji kvalitet"
 
-#. fallback
-#: ../panels/color/cc-color-panel.c:1419
-#, c-format
-msgid "Less than 1 week"
-msgstr "Manje od jedne nedelje"
+#. TRANSLATORS: the profile quality - high quality profiles take
+#. * a *long* time, and have the best calibration and
+#. * characterisation data.
+#: ../panels/color/cc-color-profile.c:137
+#| msgctxt "Printer Option Group"
+#| msgid "Image Quality"
+msgctxt "Profile quality"
+msgid "High Quality"
+msgstr "Visok kvalitet"
 
-#: ../panels/color/cc-color-panel.c:1481
+#. TRANSLATORS: this default RGB space is used for printers that
+#. * do not have additional printer profiles specified in the PPD
+#: ../panels/color/cc-color-profile.c:154
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "Osnovna RGB"
 
-#: ../panels/color/cc-color-panel.c:1486
+#. TRANSLATORS: this default CMYK space is used for printers that
+#. * do not have additional printer profiles specified in the PPD
+#: ../panels/color/cc-color-profile.c:161
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "Osnovna CMUK"
 
-#: ../panels/color/cc-color-panel.c:1491
+#. TRANSLATORS: this default gray space is used for printers that
+#. * do not have additional printer profiles specified in the PPD
+#: ../panels/color/cc-color-profile.c:168
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "Osnovna siva"
 
-#: ../panels/color/cc-color-panel.c:1609 ../panels/color/cc-color-panel.c:1650
-#: ../panels/color/cc-color-panel.c:1661 ../panels/color/cc-color-panel.c:1672
-msgid "Uncalibrated"
-msgstr "Bez pojačanja"
+#: ../panels/color/cc-color-profile.c:192
+msgid "Vendor supplied factory calibration data"
+msgstr "Prodavac je dostavio podatke fabričke kalibracije"
 
-#: ../panels/color/cc-color-panel.c:1612
-msgid "This device is not color managed."
-msgstr "Ovaj uređaj nije upravljan bojom."
+#: ../panels/color/cc-color-profile.c:201
+msgid "Full-screen display correction not possible with this profile"
+msgstr "Ispravka prikaza preko celog ekrana nije moguća sa ovim profilom"
 
-#: ../panels/color/cc-color-panel.c:1653
-msgid "This device is using manufacturing calibrated data."
-msgstr "Ovaj uređaj koristi fabrički podešene podatke."
+#: ../panels/color/cc-color-profile.c:223
+#| msgid "This device has an old profile that may no longer be accurate."
+msgid "This profile may no longer be accurate"
+msgstr "Ovaj profil više ne može biti tačan"
 
-#: ../panels/color/cc-color-panel.c:1664
+#: ../panels/color/color-calibrate.ui.h:1
+#| msgid "Calibration"
+msgid "Display Calibration"
+msgstr "Prikaži kalibraciju"
+
+#: ../panels/color/color-calibrate.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+#: ../panels/user-accounts/data/photo-dialog.ui.h:8
+#: ../panels/user-accounts/um-account-dialog.c:1067
+msgid "Cancel"
+msgstr "Otkaži"
+
+#. This starts the calibration process
+#: ../panels/color/color-calibrate.ui.h:4
+msgid "Start"
+msgstr "Pokreni"
+
+#. This resumes the calibration process
+#: ../panels/color/color-calibrate.ui.h:6
+msgid "Resume"
+msgstr "Nastavi"
+
+#. This button returns the user back to the color control panel
+#: ../panels/color/color-calibrate.ui.h:8
+#| msgid "Done!"
+msgid "Done"
+msgstr "Obavljeno"
+
+#. Text printed on screen
+#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/gui_gtk.c:78
+msgid "Screen Calibration"
+msgstr "Kalibracija ekrana"
+
+#: ../panels/color/color.ui.h:2
 msgid ""
-"This device does not have a profile suitable for whole-screen color "
-"correction."
+"Calibration will produce a profile that you can use to color manage your "
+"screen. The longer you spend on calibration, the better the quality of the "
+"color profile."
 msgstr ""
-"Ovaj uređaj nema odgovarajući profil za popravku boje preko celog ekrana."
-
-#: ../panels/color/cc-color-panel.c:1697
-msgid "This device has an old profile that may no longer be accurate."
-msgstr "Ovaj uređaj poseduje stari profil koji možda više neće biti tačan."
-
-#. TRANSLATORS: this is when the calibration profile age is not
-#. * specified as it has been autogenerated from the hardware
-#: ../panels/color/cc-color-panel.c:1725
-msgid "Not specified"
-msgstr "Nije navedeno"
-
-#. add the 'No devices detected' entry
-#: ../panels/color/cc-color-panel.c:1910
-msgid "No devices supporting color management detected"
-msgstr "Nisu otkriveni uređaji koji podržavaju upravljanje bojama"
-
-#: ../panels/color/cc-color-panel.c:2139
-msgctxt "Device kind"
-msgid "Display"
-msgstr "Prikaz"
-
-#: ../panels/color/cc-color-panel.c:2141
-msgctxt "Device kind"
-msgid "Scanner"
-msgstr "Srazmerno"
-
-#: ../panels/color/cc-color-panel.c:2143
-msgctxt "Device kind"
-msgid "Printer"
-msgstr "Štampač"
-
-#: ../panels/color/cc-color-panel.c:2145
-msgctxt "Device kind"
-msgid "Camera"
-msgstr "Foto-aparat"
-
-#: ../panels/color/cc-color-panel.c:2147
-msgctxt "Device kind"
-msgid "Webcam"
-msgstr "Veb kamerica"
+"Kalibracija će proizvesti profil koji možete da koristite da upravljate bojom "
+"vašeg ekrana. Što duže bude trajala kalibracija, to će biti bolji kvalitet "
+"profila boje."
 
 #: ../panels/color/color.ui.h:3
-#: ../panels/color/gnome-color-panel.desktop.in.in.h:1
-msgid "Color"
-msgstr "Boja"
+msgid ""
+"You will not be able to use your computer while calibration takes place."
+msgstr "Nećete moći da koristite računar za vreme kalibracije."
 
-#: ../panels/color/color.ui.h:4
-msgid "Each device needs an up to date color profile to be color managed."
-msgstr ""
-"Svakom uređaju je potreban osveženi profil boje da bi bio upravljan bojom."
-
+#. This is the approximate time it takes to calibrate the display.
 #: ../panels/color/color.ui.h:5
-msgid "Learn more"
-msgstr "Saznajte više"
+#| msgctxt "Printer Option Group"
+#| msgid "Image Quality"
+msgid "Quality"
+msgstr "Kvalitet"
 
-#: ../panels/color/color.ui.h:6
-msgid "Learn more about color management"
-msgstr "Saznajte više o upravljanju bojama"
-
+#. This is the approximate time it takes to calibrate the display.
 #: ../panels/color/color.ui.h:7
-msgid "Add device"
-msgstr "Dodajte uređaj"
+msgid "Approximate Time"
+msgstr "Približno vreme"
 
 #: ../panels/color/color.ui.h:8
-msgid "Add a virtual device"
-msgstr "Dodajte virtuelni uređaj"
+#| msgid "Calibration"
+msgid "Calibration Quality"
+msgstr "Kvalitet kalibracije"
 
 #: ../panels/color/color.ui.h:9
-msgid "Delete device"
-msgstr "Obrišite uređaj"
+msgid "Select the type of display that is connected."
+msgstr "Izaberite vrstu ekrana koji je povezan."
 
 #: ../panels/color/color.ui.h:10
-msgid "Remove a device"
-msgstr "Uklonite uređaj"
+#| msgctxt "Device kind"
+#| msgid "Display"
+msgid "Display Type"
+msgstr "Vrsta ekrana"
+
+#: ../panels/color/color.ui.h:11
+msgid "Select the sensor device you want to use for calibration."
+msgstr "Izaberite uređaj senzora koji želite da koristite za kalibraciju."
 
 #: ../panels/color/color.ui.h:12
-msgid "Set this profile for all users on this computer"
-msgstr "Podesite ovaj profil za sve korisnike na ovom računaru"
+#| msgid "Calibration"
+msgid "Calibration Device"
+msgstr "Uređaj kalibracije"
 
 #: ../panels/color/color.ui.h:13
-msgid "Add profile"
-msgstr "Dodajte profil"
+msgid ""
+"Select a display target white point. Most displays should be calibrated to a "
+"D65 illuminant."
+msgstr ""
+"Izaberite belu tačku mete ekrana. Većina ekrana treba da bude kalibrisana na "
+"D65 osvetljenje."
 
 #: ../panels/color/color.ui.h:14
-msgid "Calibrate…"
-msgstr "Podesi…"
+msgid "Profile Whitepoint"
+msgstr "Bela tačka profila"
 
 #: ../panels/color/color.ui.h:15
-msgid "Calibrate the device"
-msgstr "Podesite uređaj"
+msgid ""
+"Please set the display to a brightness that is typical for you. Color "
+"management will be most accurate at this brightness level."
+msgstr ""
+"Molim podesite ekran na osvetljaj koji vam najviše odgovara. Upravljanje bojom "
+"će biti najtačnije na tom nivou osvetljaja."
 
 #: ../panels/color/color.ui.h:16
-msgid "Remove profile"
-msgstr "Uklonite profil"
+msgid ""
+"Alternatively, you can use the brightness level used with one of the other "
+"profiles for this device."
+msgstr ""
+"Ili drugačije, možete da koristite nivo osvetljaja korišćen sa jednim od "
+"drugih profila za ovaj uređaj."
 
 #: ../panels/color/color.ui.h:17
-msgid "View details"
-msgstr "Prikaži detalje"
+#| msgid "Brightness"
+msgid "Display Brightness"
+msgstr "Osvetljaj ekrana"
 
 #: ../panels/color/color.ui.h:18
+msgid ""
+"You can use a color profile on different computers, or even create profiles "
+"for different lighting conditions."
+msgstr ""
+"Možete da koristite profil boje na različitim računarima, ili čak da "
+"napravite profile za različite uslove osvetljenja."
+
+#: ../panels/color/color.ui.h:19
+#| msgid "_Profile:"
+msgid "Profile Name:"
+msgstr "Naziv profila:"
+
+#: ../panels/color/color.ui.h:20
+#| msgid "_Profile:"
+msgid "Profile Name"
+msgstr "Naziv profila"
+
+#: ../panels/color/color.ui.h:21
+msgid "Profile successfully created!"
+msgstr "Profil je uspešno napravljen!"
+
+#: ../panels/color/color.ui.h:22
+#| msgid "_Import"
+msgid "Export"
+msgstr "Izvezi"
+
+#: ../panels/color/color.ui.h:23
+msgid ""
+"You may find these instructions on how to use the profile on <a href=\"linux"
+"\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
+"\">Microsoft Windows</a> systems useful."
+msgstr ""
+
+#: ../panels/color/color.ui.h:24
+#: ../panels/user-accounts/um-fingerprint-dialog.c:743
+msgid "Summary"
+msgstr "Sažetak"
+
+#: ../panels/color/color.ui.h:25
+msgid "Import File…"
+msgstr "Uvezi datoteku…"
+
+#: ../panels/color/color.ui.h:26
+msgid ""
+"Problems detected. The profile may not work correctly. <a href=\"\">Show "
+"details.</a>"
+msgstr ""
+"Otkriven je problem. Profil ne može da radi ispravno. <a href=\"\">Prikaži "
+"pojedinosti.</a>"
+
+#: ../panels/color/color.ui.h:27
 msgid "Device type:"
 msgstr "Vrsta uređaja:"
 
-#: ../panels/color/color.ui.h:19
+#: ../panels/color/color.ui.h:28
 msgid "Manufacturer:"
 msgstr "Proizvođač:"
 
-#: ../panels/color/color.ui.h:20
+#: ../panels/color/color.ui.h:29
 msgid "Model:"
 msgstr "Model:"
 
-#: ../panels/color/color.ui.h:21
+#: ../panels/color/color.ui.h:30
 msgid ""
 "Image files can be dragged on this window to auto-complete the above fields."
 msgstr ""
 "Datoteke slika mogu biti prevučene na ovaj prozor da automatski dopune "
 "odgovarajuća polja."
+
+#: ../panels/color/color.ui.h:31
+#: ../panels/color/gnome-color-panel.desktop.in.in.h:1
+#: ../panels/universal-access/zoom-options.ui.h:28
+msgid "Color"
+msgstr "Boja"
+
+#: ../panels/color/color.ui.h:32
+msgid "Each device needs an up to date color profile to be color managed."
+msgstr ""
+"Svakom uređaju je potreban osveženi profil boje da bi bio upravljan bojom."
+
+#: ../panels/color/color.ui.h:33
+msgid "Learn more"
+msgstr "Saznajte više"
+
+#: ../panels/color/color.ui.h:34
+msgid "Learn more about color management"
+msgstr "Saznajte više o upravljanju bojama"
+
+#: ../panels/color/color.ui.h:35
+msgid "Set for all users"
+msgstr "Podesite za sve korisnike"
+
+#: ../panels/color/color.ui.h:36
+msgid "Set this profile for all users on this computer"
+msgstr "Podesite ovaj profil za sve korisnike na ovom računaru"
+
+#: ../panels/color/color.ui.h:37
+#| msgid "Enabled"
+msgid "Enable"
+msgstr "Uključi"
+
+#: ../panels/color/color.ui.h:38
+msgid "Add profile"
+msgstr "Dodajte profil"
+
+#: ../panels/color/color.ui.h:39
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+msgid "Calibrate…"
+msgstr "Podesi…"
+
+#: ../panels/color/color.ui.h:40
+msgid "Calibrate the device"
+msgstr "Podesite uređaj"
+
+#: ../panels/color/color.ui.h:41
+msgid "Remove profile"
+msgstr "Uklonite profil"
+
+#: ../panels/color/color.ui.h:42
+msgid "View details"
+msgstr "Prikaži detalje"
+
+#: ../panels/color/color.ui.h:43
+msgid "Unable to detect any devices that can be color managed"
+msgstr "Ne mogu da otkrijem ni jedan uređaj koji može biti upravljan bojom"
+
+#: ../panels/color/color.ui.h:44
+msgid "LCD"
+msgstr "LCD"
+
+#: ../panels/color/color.ui.h:45
+msgid "LED"
+msgstr "LED"
+
+#: ../panels/color/color.ui.h:46
+msgid "CRT"
+msgstr "CRT"
+
+#: ../panels/color/color.ui.h:47
+#| msgid "Co_nnector:"
+msgid "Projector"
+msgstr "Projektor"
+
+#: ../panels/color/color.ui.h:48
+#| msgid "High"
+msgctxt "Calibration quality"
+msgid "High"
+msgstr "Visok"
+
+#: ../panels/color/color.ui.h:49
+#| msgid "10 minutes"
+msgid "40 minutes"
+msgstr "40 minuta"
+
+#: ../panels/color/color.ui.h:50
+msgctxt "Calibration quality"
+msgid "Medium"
+msgstr "Srednji"
+
+#: ../panels/color/color.ui.h:51 ../panels/power/power.ui.h:5
+#: ../panels/privacy/privacy.ui.h:7
+msgid "30 minutes"
+msgstr "30 minuta"
+
+#: ../panels/color/color.ui.h:52
+#| msgid "Low"
+msgctxt "Calibration quality"
+msgid "Low"
+msgstr "Nizak"
+
+# bug(danilo): plural-forms
+#: ../panels/color/color.ui.h:53
+#| msgid "5 minutes"
+msgid "15 minutes"
+msgstr "15 minuta"
+
+#: ../panels/color/color.ui.h:54
+#| msgid "Panel to display"
+msgid "Native to display"
+msgstr ""
+
+#: ../panels/color/color.ui.h:55
+#| msgid "Pointing and Clicking"
+msgid "D50 (Printing and publishing)"
+msgstr "D50 (Štampanje i objavljivanje)"
+
+#: ../panels/color/color.ui.h:56
+msgid "D55"
+msgstr "D55"
+
+#: ../panels/color/color.ui.h:57
+msgid "D65 (Photography and graphics)"
+msgstr "D65 (Fotografija i grafika)"
+
+#: ../panels/color/color.ui.h:58
+#| msgid "75%"
+msgid "D75"
+msgstr "D75"
 
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:2
 msgid "Color management settings"
@@ -542,65 +852,45 @@ msgstr "Podešavanja upravljanja bojom"
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Boja;ICC;Profil;Kalibriraj;Štampač;Prikaz;"
 
-#. Add some common languages first
-#: ../panels/common/cc-common-language.c:523
-msgid "English"
-msgstr "Engleski"
-
-#: ../panels/common/cc-common-language.c:525
+#: ../panels/common/cc-common-language.c:638
 msgid "British English"
 msgstr "Britanski engleski"
 
-#: ../panels/common/cc-common-language.c:528
-msgid "German"
-msgstr "Nemački"
-
-#: ../panels/common/cc-common-language.c:531
-msgid "French"
-msgstr "Francuski"
-
-#: ../panels/common/cc-common-language.c:534
+#: ../panels/common/cc-common-language.c:641
 msgid "Spanish"
 msgstr "Španski"
 
-#: ../panels/common/cc-common-language.c:536
+#: ../panels/common/cc-common-language.c:642
 msgid "Chinese (simplified)"
 msgstr "Kineski (pojednostavljen)"
 
-#: ../panels/common/cc-common-language.c:539
-msgid "Russian"
-msgstr "Ruski"
-
-#: ../panels/common/cc-common-language.c:542
-msgid "Arabic"
-msgstr "Arapski"
-
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:571
+#: ../panels/common/cc-common-language.c:686
 msgid "United States"
 msgstr "Sjedinjene Američke Države"
 
-#: ../panels/common/cc-common-language.c:572
+#: ../panels/common/cc-common-language.c:687
 msgid "Germany"
 msgstr "Nemačka"
 
-#: ../panels/common/cc-common-language.c:573
+#: ../panels/common/cc-common-language.c:688
 msgid "France"
 msgstr "Francuska"
 
-#: ../panels/common/cc-common-language.c:574
+#: ../panels/common/cc-common-language.c:689
 msgid "Spain"
 msgstr "Španija"
 
-#: ../panels/common/cc-common-language.c:575
+#: ../panels/common/cc-common-language.c:690
 msgid "China"
 msgstr "Kina"
 
-#: ../panels/common/cc-language-chooser.c:122
-msgid "Other..."
-msgstr "Ostali..."
+#: ../panels/common/cc-language-chooser.c:121
+#| msgid "Other profile…"
+msgid "Other…"
+msgstr "Drugi…"
 
-#: ../panels/common/cc-language-chooser.c:296
+#: ../panels/common/cc-language-chooser.c:293
 msgid "Select a region"
 msgstr "Izaberite oblast"
 
@@ -614,7 +904,7 @@ msgstr "Izaberite jezik"
 
 #: ../panels/common/language-chooser.ui.h:2
 #: ../panels/printers/new-printer-dialog.ui.h:1
-#: ../panels/user-accounts/um-user-panel.c:462
+#: ../panels/user-accounts/um-user-panel.c:467
 msgid "_Cancel"
 msgstr "_Otkaži"
 
@@ -749,22 +1039,22 @@ msgid "To change time or date settings, you need to authenticate."
 msgstr ""
 "Da izmenite podešavanja vremena i datuma, morate da potvrdite identitet."
 
-#: ../panels/display/cc-display-panel.c:481
+#: ../panels/display/cc-display-panel.c:483
 msgctxt "display panel, rotation"
 msgid "Normal"
 msgstr "Normalno"
 
-#: ../panels/display/cc-display-panel.c:482
+#: ../panels/display/cc-display-panel.c:484
 msgctxt "display panel, rotation"
 msgid "Counterclockwise"
 msgstr "Suprotno smeru kazaljke na satu"
 
-#: ../panels/display/cc-display-panel.c:483
+#: ../panels/display/cc-display-panel.c:485
 msgctxt "display panel, rotation"
 msgid "Clockwise"
 msgstr "U smeru kazaljke na satu"
 
-#: ../panels/display/cc-display-panel.c:484
+#: ../panels/display/cc-display-panel.c:486
 msgctxt "display panel, rotation"
 msgid "180 Degrees"
 msgstr "180 stepeni"
@@ -775,30 +1065,27 @@ msgstr "180 stepeni"
 #. * used as an adjective.  For example, the Spanish translation could be
 #. * "Pantallas en Espejo".
 #.
-#: ../panels/display/cc-display-panel.c:623
+#. Keep this string in sync with gnome-control-center/capplets/display/xrandr-capplet.c:get_display_name()
+#. Translators:  this is the feature where what you see on your
+#. * laptop's screen is the same as your external projector.
+#. * Here, "Mirrored" is being used as an adjective.  For example,
+#. * the Spanish translation could be "Pantallas en Espejo".
+#.
+#: ../panels/display/cc-display-panel.c:625
+#: ../panels/display/cc-rr-labeler.c:449
 msgid "Mirrored Displays"
 msgstr "Ekrani u ogledalu"
 
-#: ../panels/display/cc-display-panel.c:647
+#: ../panels/display/cc-display-panel.c:649
 #: ../panels/display/display-capplet.ui.h:1
 msgid "Monitor"
 msgstr "Ekran"
 
-#: ../panels/display/cc-display-panel.c:748
-#, c-format
-msgid "%d x %d (%s)"
-msgstr "%d x %d (%s)"
-
-#: ../panels/display/cc-display-panel.c:750
-#, c-format
-msgid "%d x %d"
-msgstr "%d x %d"
-
-#: ../panels/display/cc-display-panel.c:1659
+#: ../panels/display/cc-display-panel.c:1669
 msgid "Drag to change primary display."
 msgstr "Prevucite da promenite primarnu prikaz."
 
-#: ../panels/display/cc-display-panel.c:1717
+#: ../panels/display/cc-display-panel.c:1727
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
@@ -806,29 +1093,29 @@ msgstr ""
 "Izaberite ekran da izmenite podešavanja. Prevucite ekrane da im promenite "
 "redosled."
 
-#: ../panels/display/cc-display-panel.c:2105
+#: ../panels/display/cc-display-panel.c:2115
 msgid "%a %R"
 msgstr "%a %R"
 
-#: ../panels/display/cc-display-panel.c:2107
+#: ../panels/display/cc-display-panel.c:2117
 msgid "%a %l:%M %p"
 msgstr "%a %l:%M %p"
 
-#: ../panels/display/cc-display-panel.c:2269
-#: ../panels/display/cc-display-panel.c:2321
+#: ../panels/display/cc-display-panel.c:2279
+#: ../panels/display/cc-display-panel.c:2331
 #, c-format
 msgid "Failed to apply configuration: %s"
 msgstr "Nisam uspeo da primenim podešavanje: %s"
 
-#: ../panels/display/cc-display-panel.c:2349
+#: ../panels/display/cc-display-panel.c:2359
 msgid "Could not save the monitor configuration"
 msgstr "Ne mogu da sačuvam podešavanja za ekran"
 
-#: ../panels/display/cc-display-panel.c:2409
+#: ../panels/display/cc-display-panel.c:2419
 msgid "Could not detect displays"
 msgstr "Ne mogu da nađem ekrane"
 
-#: ../panels/display/cc-display-panel.c:2603
+#: ../panels/display/cc-display-panel.c:2614
 msgid "Could not get screen information"
 msgstr "Ne mogu da dobijem podatke o ekranu"
 
@@ -866,89 +1153,55 @@ msgstr "Promenite rezoluciju i mesta ekrana i projektora"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Panel;Projektor;hrandr;Ekran;Rezolucija;Osvežavanje;"
 
-#. Translators: VESA is an techncial acronym, don't translate it.
-#: ../panels/info/cc-info-panel.c:413
-#, c-format
-msgid "VESA: %s"
-msgstr "VESA: %s"
-
-#. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:437 ../panels/network/panel-common.c:82
-#: ../panels/network/panel-common.c:162
+#: ../panels/info/cc-info-panel.c:441 ../panels/network/panel-common.c:120
 msgid "Unknown"
 msgstr "Nepoznato"
 
-#. translators: This is the type of architecture, for example:
-#. * "64-bit" or "32-bit"
-#: ../panels/info/cc-info-panel.c:593
+#: ../panels/info/cc-info-panel.c:542
+#, c-format
+#| msgid "%d-bit"
+msgid "%s %d-bit"
+msgstr "%s %d bita"
+
+#: ../panels/info/cc-info-panel.c:544
 #, c-format
 msgid "%d-bit"
 msgstr "%d-bita"
 
-#: ../panels/info/cc-info-panel.c:752
-msgid "Unknown model"
-msgstr "Nepoznat model"
-
-#: ../panels/info/cc-info-panel.c:835
-msgid "The next login will attempt to use the standard experience."
-msgstr "Sledeće prijavljivanje će pokušati da koristi standardni izgled."
-
-#: ../panels/info/cc-info-panel.c:837
-msgid ""
-"The next login will use the fallback mode intended for unsupported graphics "
-"hardware."
-msgstr ""
-"Sledeće prijavljivanje će koristiti režim prebacivanja koji je namenjen "
-"nepodržanom grafičkom hardveru."
-
-#. translators: The hardware is not able to run GNOME 3's
-#. * shell, so we use the GNOME "Fallback" session
-#: ../panels/info/cc-info-panel.c:879
-msgctxt "Experience"
-msgid "Fallback"
-msgstr "Prebacivanje"
-
-#. translators: The hardware is able to run GNOME 3's
-#. * shell, also called "Standard" experience
-#: ../panels/info/cc-info-panel.c:885
-msgctxt "Experience"
-msgid "Standard"
-msgstr "Standardno"
-
-#: ../panels/info/cc-info-panel.c:1227
+#: ../panels/info/cc-info-panel.c:1219
 msgid "Ask what to do"
 msgstr "Pitaj šta da radiš"
 
-#: ../panels/info/cc-info-panel.c:1231
+#: ../panels/info/cc-info-panel.c:1223
 msgid "Do nothing"
 msgstr "Ne radi ništa"
 
-#: ../panels/info/cc-info-panel.c:1235
+#: ../panels/info/cc-info-panel.c:1227
 msgid "Open folder"
 msgstr "Otvori fasciklu"
 
-#: ../panels/info/cc-info-panel.c:1326
+#: ../panels/info/cc-info-panel.c:1318
 msgid "Other Media"
 msgstr "Ostali mediji"
 
-#: ../panels/info/cc-info-panel.c:1357
+#: ../panels/info/cc-info-panel.c:1349
 msgid "Select an application for audio CDs"
 msgstr "Izaberite program za audio diskove (CD)"
 
-#: ../panels/info/cc-info-panel.c:1358
+#: ../panels/info/cc-info-panel.c:1350
 msgid "Select an application for video DVDs"
 msgstr "Izaberite program za video diskove (DVD)"
 
-#: ../panels/info/cc-info-panel.c:1359
+#: ../panels/info/cc-info-panel.c:1351
 msgid "Select an application to run when a music player is connected"
 msgstr "Izaberite program za pokretanje kada je priključen muzički plejer"
 
-#: ../panels/info/cc-info-panel.c:1360
+#: ../panels/info/cc-info-panel.c:1352
 msgid "Select an application to run when a camera is connected"
 msgstr "Izaberite program za pokretanje kada je priključena kamera"
 
-#: ../panels/info/cc-info-panel.c:1361
+#: ../panels/info/cc-info-panel.c:1353
 msgid "Select an application for software CDs"
 msgstr "Izaberite program za diskove sa softverom"
 
@@ -957,93 +1210,89 @@ msgstr "Izaberite program za diskove sa softverom"
 #. * If the shared-mime-info translation works for your language,
 #. * simply leave these untranslated.
 #.
-#: ../panels/info/cc-info-panel.c:1373
+#: ../panels/info/cc-info-panel.c:1365
 msgid "audio DVD"
 msgstr "audio DVD"
 
-#: ../panels/info/cc-info-panel.c:1374
+#: ../panels/info/cc-info-panel.c:1366
 msgid "blank Blu-ray disc"
 msgstr "prazan Blu-rej disk"
 
-#: ../panels/info/cc-info-panel.c:1375
+#: ../panels/info/cc-info-panel.c:1367
 msgid "blank CD disc"
 msgstr "prazan CD disk"
 
-#: ../panels/info/cc-info-panel.c:1376
+#: ../panels/info/cc-info-panel.c:1368
 msgid "blank DVD disc"
 msgstr "prazan DVD disk"
 
-#: ../panels/info/cc-info-panel.c:1377
+#: ../panels/info/cc-info-panel.c:1369
 msgid "blank HD DVD disc"
 msgstr "prazan HD DVD disk"
 
-#: ../panels/info/cc-info-panel.c:1378
+#: ../panels/info/cc-info-panel.c:1370
 msgid "Blu-ray video disc"
 msgstr "Blu-rej video disk"
 
-#: ../panels/info/cc-info-panel.c:1379
+#: ../panels/info/cc-info-panel.c:1371
 msgid "e-book reader"
 msgstr "čitač el. knjiga"
 
-#: ../panels/info/cc-info-panel.c:1380
+#: ../panels/info/cc-info-panel.c:1372
 msgid "HD DVD video disc"
 msgstr "HD DVD video disk"
 
-#: ../panels/info/cc-info-panel.c:1381
+#: ../panels/info/cc-info-panel.c:1373
 msgid "Picture CD"
 msgstr "CD sa slikama"
 
-#: ../panels/info/cc-info-panel.c:1382
+#: ../panels/info/cc-info-panel.c:1374
 msgid "Super Video CD"
 msgstr "Super video CD"
 
-#: ../panels/info/cc-info-panel.c:1383
+#: ../panels/info/cc-info-panel.c:1375
 msgid "Video CD"
 msgstr "Video CD"
 
-#: ../panels/info/cc-info-panel.c:1384
+#: ../panels/info/cc-info-panel.c:1376
 msgid "Windows software"
 msgstr "Vindouz programi"
 
-#: ../panels/info/cc-info-panel.c:1385
+#: ../panels/info/cc-info-panel.c:1377
 msgid "Software"
 msgstr "Programi"
 
-#: ../panels/info/cc-info-panel.c:1508
-#: ../panels/keyboard/keyboard-shortcuts.c:1667
+#: ../panels/info/cc-info-panel.c:1500
+#: ../panels/keyboard/keyboard-shortcuts.c:1697
 msgid "Section"
 msgstr "Odeljak"
 
-#: ../panels/info/cc-info-panel.c:1517 ../panels/info/info.ui.h:11
+#: ../panels/info/cc-info-panel.c:1509 ../panels/info/info.ui.h:13
 msgid "Overview"
 msgstr "Pregled"
 
-#: ../panels/info/cc-info-panel.c:1523 ../panels/info/info.ui.h:18
+#: ../panels/info/cc-info-panel.c:1515 ../panels/info/info.ui.h:20
 msgid "Default Applications"
 msgstr "Osnovni programi"
 
-#: ../panels/info/cc-info-panel.c:1528 ../panels/info/info.ui.h:26
+#: ../panels/info/cc-info-panel.c:1520 ../panels/info/info.ui.h:28
 msgid "Removable Media"
 msgstr "Izmenjivi diskovi"
 
-#: ../panels/info/cc-info-panel.c:1533 ../panels/info/info.ui.h:10
-msgid "Graphics"
-msgstr "Grafika"
-
-#: ../panels/info/cc-info-panel.c:1735
+#: ../panels/info/cc-info-panel.c:1545
 #, c-format
 msgid "Version %s"
 msgstr "Izdanje %s"
 
-#: ../panels/info/cc-info-panel.c:1785
+#: ../panels/info/cc-info-panel.c:1595
 msgid "Install Updates"
 msgstr "Instaliraj ažuriranja"
 
-#: ../panels/info/cc-info-panel.c:1789
+#: ../panels/info/cc-info-panel.c:1599
 msgid "System Up-To-Date"
 msgstr "Ažuriranja sistema"
 
-#: ../panels/info/cc-info-panel.c:1793
+#: ../panels/info/cc-info-panel.c:1603
 msgid "Checking for Updates"
 msgstr "Proveravam ažuriranja"
 
@@ -1089,82 +1338,81 @@ msgstr "Memorija"
 msgid "Processor"
 msgstr "Procesor"
 
-#: ../panels/info/info.ui.h:7
-msgid "OS type"
-msgstr "Operativni sistem"
-
+#. To translators: this field contains the distro name, version and type
 #: ../panels/info/info.ui.h:8
+msgid "Base system"
+msgstr "Osnovni sistem"
+
+#: ../panels/info/info.ui.h:9
 msgid "Disk"
 msgstr "Disk"
 
-#: ../panels/info/info.ui.h:9
-msgid "Calculating..."
-msgstr "Izračunavam..."
+#: ../panels/info/info.ui.h:10
+#| msgid "Calculating..."
+msgid "Calculating…"
+msgstr "Izračunavam…"
+
+#: ../panels/info/info.ui.h:11
+msgid "Graphics"
+msgstr "Grafika"
 
 #: ../panels/info/info.ui.h:12
+#| msgid "Calibration"
+msgid "Virtualization"
+msgstr "Virtuelizacija"
+
+#: ../panels/info/info.ui.h:14
 msgid "_Web"
 msgstr "_Veb"
 
-#: ../panels/info/info.ui.h:13
+#: ../panels/info/info.ui.h:15
 msgid "_Mail"
 msgstr "_Pošta"
 
-#: ../panels/info/info.ui.h:14
+#: ../panels/info/info.ui.h:16
 msgid "_Calendar"
 msgstr "_Kalendar"
 
-#: ../panels/info/info.ui.h:15
+#: ../panels/info/info.ui.h:17
 msgid "M_usic"
 msgstr "_Muzika"
 
-#: ../panels/info/info.ui.h:16
+#: ../panels/info/info.ui.h:18
 msgid "_Video"
 msgstr "_Video"
 
-#: ../panels/info/info.ui.h:17
+#: ../panels/info/info.ui.h:19
 msgid "_Photos"
 msgstr "_Fotografije"
 
-#: ../panels/info/info.ui.h:19
+#: ../panels/info/info.ui.h:21
 msgid "Select how media should be handled"
 msgstr "Izaberite kako treba da se rukuje medijima"
 
-#: ../panels/info/info.ui.h:20
+#: ../panels/info/info.ui.h:22
 msgid "CD _audio"
 msgstr "CD _audio"
 
-#: ../panels/info/info.ui.h:21
+#: ../panels/info/info.ui.h:23
 msgid "_DVD video"
 msgstr "_DVD video"
 
-#: ../panels/info/info.ui.h:22
+#: ../panels/info/info.ui.h:24
 msgid "_Music player"
 msgstr "_Muzički program"
 
-#: ../panels/info/info.ui.h:23
+#: ../panels/info/info.ui.h:25
 msgid "_Software"
 msgstr "_Softver"
 
-#: ../panels/info/info.ui.h:24
-msgid "_Other Media..."
-msgstr "_Ostali mediji..."
-
-#: ../panels/info/info.ui.h:25
-msgid "_Never prompt or start programs on media insertion"
-msgstr "_Nikada ne pitaj ili ne pokreći programe nakon ubacivanja medija"
+#: ../panels/info/info.ui.h:26
+#| msgid "Other Media"
+msgid "_Other Media…"
+msgstr "_Ostali mediji…"
 
 #: ../panels/info/info.ui.h:27
-msgid "Driver"
-msgstr "Upravljački program"
-
-#: ../panels/info/info.ui.h:28
-msgid "Experience"
-msgstr "Izgled"
-
-#. Hardware is not able to run GNOME 3's shell, so we might want to force running the 'Fallback' experience.
-#: ../panels/info/info.ui.h:30
-msgid "Forced _Fallback Mode"
-msgstr "Prisiljeni režim _prebacivanja"
+msgid "_Never prompt or start programs on media insertion"
+msgstr "_Nikada ne pitaj ili ne pokreći programe nakon ubacivanja medija"
 
 #: ../panels/keyboard/00-multimedia.xml.in.h:1
 msgid "Sound and Media"
@@ -1212,17 +1460,17 @@ msgstr "Izbaci"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:19
-#: ../panels/universal-access/uap.ui.h:68
+#: ../panels/universal-access/uap.ui.h:66
 msgid "Typing"
 msgstr "Kucanje"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:2
-#: ../panels/region/gnome-region-panel.ui.h:26
+#: ../panels/region/gnome-region-panel.ui.h:27
 msgid "Switch to next source"
 msgstr "Prebacite se na sledeći izvor"
 
 #: ../panels/keyboard/01-input-sources.xml.in.h:3
-#: ../panels/region/gnome-region-panel.ui.h:24
+#: ../panels/region/gnome-region-panel.ui.h:25
 msgid "Switch to previous source"
 msgstr "Prebacite se na prethodni izvor"
 
@@ -1251,6 +1499,8 @@ msgid "Home folder"
 msgstr "Lična fascikla"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:7
+#| msgid "Search"
+msgctxt "keybinding"
 msgid "Search"
 msgstr "Pretraga"
 
@@ -1258,20 +1508,23 @@ msgstr "Pretraga"
 msgid "Screenshots"
 msgstr "Snimci ekrana"
 
-#. translators: Pictures is the name of the XDG Pictures directory
+#. translators: $PICTURES will be replaced by the name of the XDG Pictures directory
 #: ../panels/keyboard/01-screenshot.xml.in.h:3
-msgid "Save a screenshot to Pictures"
-msgstr "Čuva snimak u fasciklu sa slikama"
+#| msgid "Save a screenshot to Pictures"
+msgid "Save a screenshot to $PICTURES"
+msgstr "Čuva snimak u fasciklu „$PICTURES“"
 
-#. translators: Pictures is the name of the XDG Pictures directory
+#. translators: $PICTURES will be replaced by the name of the XDG Pictures directory
 #: ../panels/keyboard/01-screenshot.xml.in.h:5
-msgid "Save a screenshot of a window to Pictures"
-msgstr "Čuva snimak prozora u fasciklu sa slikama"
+#| msgid "Save a screenshot of a window to Pictures"
+msgid "Save a screenshot of a window to $PICTURES"
+msgstr "Čuva snimak prozora u fasciklu „$PICTURES“"
 
-#. translators: Pictures is the name of the XDG Pictures directory
+#. translators: $PICTURES will be replaced by the name of the XDG Pictures directory
 #: ../panels/keyboard/01-screenshot.xml.in.h:7
-msgid "Save a screenshot of an area to Pictures"
-msgstr "Čuva snimak oblasti u fasciklu sa slikama"
+#| msgid "Save a screenshot of an area to Pictures"
+msgid "Save a screenshot of an area to $PICTURES"
+msgstr "Čuva snimak oblasti u fasciklu „$PICTURES“"
 
 #: ../panels/keyboard/01-screenshot.xml.in.h:8
 msgid "Copy a screenshot to clipboard"
@@ -1286,7 +1539,7 @@ msgid "Copy a screenshot of an area to clipboard"
 msgstr "Umnožava snimak oblasti u beležnicu"
 
 #: ../panels/keyboard/01-system.xml.in.h:1
-#: ../panels/region/gnome-region-panel.ui.h:39
+#: ../panels/region/gnome-region-panel.ui.h:43
 msgid "System"
 msgstr "Sistem"
 
@@ -1337,22 +1590,119 @@ msgstr "Uključi/isključi veliki kontrast"
 
 #. translators:
 #. * The device has been disabled
-#: ../panels/keyboard/cc-keyboard-option.c:241
-#: ../panels/keyboard/cc-keyboard-option.c:347
-#: ../panels/keyboard/keyboard-shortcuts.c:1132
-#: ../panels/sound/gvc-mixer-control.c:1834
+#: ../panels/keyboard/cc-keyboard-option.c:254
+#: ../panels/keyboard/cc-keyboard-option.c:304
+#: ../panels/keyboard/cc-keyboard-option.c:436
+#: ../panels/keyboard/keyboard-shortcuts.c:1160
+#: ../panels/sound/gvc/gvc-mixer-control.c:1828
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Disabled"
 msgstr "Isključeno"
 
-#: ../panels/keyboard/cc-keyboard-option.c:315
+#: ../panels/keyboard/cc-keyboard-option.c:255
+#| msgid "Left Half"
+msgid "Left Shift"
+msgstr "Levi šift"
+
+#: ../panels/keyboard/cc-keyboard-option.c:256
+#| msgid "Left Half"
+msgid "Left Alt"
+msgstr "Levi alt"
+
+#: ../panels/keyboard/cc-keyboard-option.c:257
+#| msgid "Left Half"
+msgid "Left Ctrl"
+msgstr "Levi ktrl"
+
+#: ../panels/keyboard/cc-keyboard-option.c:258
+#| msgid "Right Half"
+msgid "Right Shift"
+msgstr "Desni šift"
+
+#: ../panels/keyboard/cc-keyboard-option.c:259
+#| msgid "Right Half"
+msgid "Right Alt"
+msgstr "Desni alt"
+
+#: ../panels/keyboard/cc-keyboard-option.c:260
+#| msgid "Right Half"
+msgid "Right Ctrl"
+msgstr "Desni ktrl"
+
+#: ../panels/keyboard/cc-keyboard-option.c:261
+#| msgid "Left Half"
+msgid "Left Alt+Shift"
+msgstr "Levi alt+šift"
+
+#: ../panels/keyboard/cc-keyboard-option.c:262
+#| msgid "Right Half"
+msgid "Right Alt+Shift"
+msgstr "Desni alt+šift"
+
+#: ../panels/keyboard/cc-keyboard-option.c:263
+msgid "Left Ctrl+Shift"
+msgstr "Levi ktrl+šift"
+
+#: ../panels/keyboard/cc-keyboard-option.c:264
+#| msgid "Right Half"
+msgid "Right Ctrl+Shift"
+msgstr "Desni ktrl+šift"
+
+#: ../panels/keyboard/cc-keyboard-option.c:265
+msgid "Left+Right Shift"
+msgstr "Levi+desni šift"
+
+#: ../panels/keyboard/cc-keyboard-option.c:266
+msgid "Left+Right Alt"
+msgstr "Levi+desni alt"
+
+#: ../panels/keyboard/cc-keyboard-option.c:267
+msgid "Left+Right Ctrl"
+msgstr "Levi+desni ktrl"
+
+#: ../panels/keyboard/cc-keyboard-option.c:268
+#| msgid "Ctrl+Alt+Shift+Space"
+msgid "Alt+Shift"
+msgstr "Alt+šift"
+
+#: ../panels/keyboard/cc-keyboard-option.c:269
+#| msgid "Ctrl+Alt+Shift+Space"
+msgid "Ctrl+Shift"
+msgstr "Ktrl+šift"
+
+#: ../panels/keyboard/cc-keyboard-option.c:270
+msgid "Alt+Ctrl"
+msgstr "Alt+ktrl"
+
+#: ../panels/keyboard/cc-keyboard-option.c:271
+msgid "Caps"
+msgstr "Velika/mala slova"
+
+#: ../panels/keyboard/cc-keyboard-option.c:272
+msgid "Shift+Caps"
+msgstr "Šift+velika/mala slova"
+
+#: ../panels/keyboard/cc-keyboard-option.c:273
+msgid "Alt+Caps"
+msgstr "Alt+velika/mala slova"
+
+#: ../panels/keyboard/cc-keyboard-option.c:274
+msgid "Ctrl+Caps"
+msgstr "Ktrl+velika/mala slova"
+
+#: ../panels/keyboard/cc-keyboard-option.c:390
 msgid "Alternative Characters Key"
 msgstr "Tasteri zamenskih znakova"
 
-#: ../panels/keyboard/cc-keyboard-option.c:320
+#: ../panels/keyboard/cc-keyboard-option.c:395
 msgid "Compose Key"
 msgstr "Sastavni taster"
+
+#: ../panels/keyboard/cc-keyboard-option.c:399
+#| msgid "Switch to next source"
+msgid "Modifiers-only switch to next source"
+msgstr "Izmenjivači samo prebacuju na sledeći izvor"
 
 #: ../panels/keyboard/gnome-keyboard-panel.desktop.in.in.h:1
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:4
@@ -1396,15 +1746,15 @@ msgstr "_Zastoj:"
 msgid "_Speed:"
 msgstr "_Brzina:"
 
-#. short delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:9
-#: ../panels/universal-access/uap.ui.h:49
+#| msgid "Short"
+msgctxt "keyboard, delay"
 msgid "Short"
 msgstr "Kratak"
 
-#. slow acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:10
-#: ../panels/mouse/gnome-mouse-properties.ui.h:4
+#| msgid "Slow"
+msgctxt "keyboard, speed"
 msgid "Slow"
 msgstr "Mala"
 
@@ -1412,15 +1762,15 @@ msgstr "Mala"
 msgid "Repeat keys speed"
 msgstr "Brzina ponavljanja tastera"
 
-#. long delay
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:12
-#: ../panels/universal-access/uap.ui.h:52
+#| msgid "Long"
+msgctxt "keyboard, delay"
 msgid "Long"
 msgstr "Veliki"
 
-#. fast acceleration
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:13
-#: ../panels/mouse/gnome-mouse-properties.ui.h:7
+#| msgid "Fast"
+msgctxt "keyboard, speed"
 msgid "Fast"
 msgstr "Velika"
 
@@ -1462,20 +1812,20 @@ msgstr ""
 "kombinaciju tastera ili pritisnite „Backspace“ da obrišete prečicu."
 
 #: ../panels/keyboard/gnome-keyboard-panel.ui.h:23
-#: ../panels/region/gnome-region-panel.ui.h:29
+#: ../panels/region/gnome-region-panel.ui.h:30
 msgid "Shortcuts"
 msgstr "Prečice"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:557
-#: ../panels/keyboard/keyboard-shortcuts.c:565
+#: ../panels/keyboard/keyboard-shortcuts.c:585
+#: ../panels/keyboard/keyboard-shortcuts.c:593
 msgid "Custom Shortcuts"
 msgstr "Proizvoljne prečice"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:776
+#: ../panels/keyboard/keyboard-shortcuts.c:804
 msgid "<Unknown Action>"
 msgstr "<Nepoznata radnja>"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1273
+#: ../panels/keyboard/keyboard-shortcuts.c:1301
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type "
@@ -1486,7 +1836,7 @@ msgstr ""
 "ovaj taster.\n"
 "Probajte da pridodate taster kao što je „Ctrl, Alt ili Šift“."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1305
+#: ../panels/keyboard/keyboard-shortcuts.c:1333
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
@@ -1495,17 +1845,17 @@ msgstr ""
 "Prečica „%s“ se već koristi za\n"
 "„%s“"
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1310
+#: ../panels/keyboard/keyboard-shortcuts.c:1338
 #, c-format
 msgid ""
 "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr "Ukoliko dodelite prečicu za „%s“, prečica „%s“ će biti isključena."
 
-#: ../panels/keyboard/keyboard-shortcuts.c:1316
+#: ../panels/keyboard/keyboard-shortcuts.c:1344
 msgid "_Reassign"
 msgstr "_Ponovo dodeli"
 
-#: ../panels/mouse/cc-mouse-panel.c:152
+#: ../panels/mouse/cc-mouse-panel.c:123
 msgid "_Test Your Settings"
 msgstr "_Isprobajte podešavanja"
 
@@ -1530,51 +1880,67 @@ msgstr "Podešavanja miša"
 msgid "General"
 msgstr "Opšte"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+#: ../panels/mouse/gnome-mouse-properties.ui.h:3
+#| msgid "Slow"
+msgctxt "mouse, speed"
+msgid "Slow"
+msgstr "Mala"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:4
 msgid "Double-click timeout"
 msgstr "Vreme za dupli klik"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+#: ../panels/mouse/gnome-mouse-properties.ui.h:5
+#| msgid "Fast"
+msgctxt "mouse, speed"
+msgid "Fast"
+msgstr "Velika"
+
+#: ../panels/mouse/gnome-mouse-properties.ui.h:6
 msgid "_Double-click"
 msgstr "_Dvostruki klik"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+#: ../panels/mouse/gnome-mouse-properties.ui.h:7
 msgid "Primary _button"
 msgstr "Glavno _dugme"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:10
+#: ../panels/mouse/gnome-mouse-properties.ui.h:8
+#| msgid "_Left"
+msgctxt "mouse, left button as primary"
 msgid "_Left"
 msgstr "_Levo"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:11
+#: ../panels/mouse/gnome-mouse-properties.ui.h:9
+#| msgid "_Right"
+msgctxt "mouse, right button as primary"
 msgid "_Right"
 msgstr "_Desno"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:12
+#: ../panels/mouse/gnome-mouse-properties.ui.h:10
 msgid "Mouse"
 msgstr "Miš"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:13
+#: ../panels/mouse/gnome-mouse-properties.ui.h:11
 msgid "_Pointer speed"
 msgstr "_Brzina pokazivača"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:14
+#: ../panels/mouse/gnome-mouse-properties.ui.h:12
 msgid "Touchpad"
 msgstr "Dodirna tabla"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:15
+#: ../panels/mouse/gnome-mouse-properties.ui.h:13
 msgid "Disable while _typing"
 msgstr "Isključi dok _kucam"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:16
+#: ../panels/mouse/gnome-mouse-properties.ui.h:14
 msgid "Tap to _click"
 msgstr "Lupni za _klik"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:17
+#: ../panels/mouse/gnome-mouse-properties.ui.h:15
 msgid "Two _finger scroll"
 msgstr "Klizanje sa _dva prsta"
 
-#: ../panels/mouse/gnome-mouse-properties.ui.h:18
+#: ../panels/mouse/gnome-mouse-properties.ui.h:16
 msgid "C_ontent sticks to fingers"
 msgstr "Sadržaj se _lepi za prste"
 
@@ -1611,25 +1977,25 @@ msgstr "Dvostruki klik, pomoćno dugme"
 msgid "Single click, secondary button"
 msgstr "Jedan klik, pomoćno dugme"
 
-#: ../panels/network/cc-network-panel.c:615
+#. TRANSLATORS: this is to disable the radio hardware in the
+#. * network panel
+#: ../panels/network/cc-network-panel.c:333
+msgid "Air_plane Mode"
+msgstr "Režim u _avionu"
+
+#: ../panels/network/cc-network-panel.c:836
 msgid "Network proxy"
 msgstr "Mrežni posrednik"
 
-#: ../panels/network/cc-network-panel.c:799 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1012 ../panels/network/net-vpn.c:278
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:866
+#: ../panels/network/cc-network-panel.c:1076
 msgid "The system network services are not compatible with this version."
 msgstr "Mrežni servis na sistemu nije podržan u ovoj verziji."
-
-#. TRANSLATORS: this is to disable the radio hardware in the
-#. * network panel
-#: ../panels/network/cc-network-panel.c:1001
-msgid "Air_plane Mode"
-msgstr "Režim u _avionu"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 #: ../panels/network/network-mobile.ui.h:7
@@ -1642,69 +2008,66 @@ msgstr "Podešavanja mreže"
 
 #. Translators: those are keywords for the network control-center panel
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:4
-msgid "Network;Wireless;IP;LAN;Proxy;"
-msgstr "Mreža;Bežična;IP;LAN;Posrednik"
+msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
+msgstr "mreža;bežična;vaj-faj;LAN;posrednik;VAN;širokopojasna;modem;blutut;"
 
-#: ../panels/network/net-device-mobile.c:222
-msgid "Add new connection"
-msgstr "Dodajte novu vezu"
+#: ../panels/network/net-device-bond.c:131
+msgid "Bond slaves"
+msgstr ""
 
 #. Translators: network device speed
-#: ../panels/network/net-device-mobile.c:261
-#: ../panels/network/net-device-wifi.c:770
-#: ../panels/network/net-device-wired.c:126
+#: ../panels/network/net-device-ethernet.c:49
+#: ../panels/network/net-device-mobile.c:283
+#: ../panels/network/net-device-wifi.c:725
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#. TRANSLATORS: this is when the access point is not shown
-#. * in the list and the user has to enter the SSID manually
-#.
-#: ../panels/network/net-device-wifi.c:203
-msgid "Connect to a Hidden Network"
-msgstr "Povežite se na skrivenu mrežu"
+#: ../panels/network/net-device-mobile.c:225
+msgid "Add new connection"
+msgstr "Dodajte novu vezu"
 
 #. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/net-device-wifi.c:302
-#: ../panels/network/net-device-wifi.c:481
+#: ../panels/network/net-device-wifi.c:258
+#: ../panels/network/net-device-wifi.c:437
 msgid "WEP"
 msgstr "VEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:306
-#: ../panels/network/net-device-wifi.c:485
+#: ../panels/network/net-device-wifi.c:262
+#: ../panels/network/net-device-wifi.c:441
 msgid "WPA"
 msgstr "VPA"
 
 #. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:310
+#: ../panels/network/net-device-wifi.c:266
 msgid "WPA2"
 msgstr "VPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/net-device-wifi.c:315
+#: ../panels/network/net-device-wifi.c:271
 msgid "Enterprise"
 msgstr "Enterprajz"
 
-#: ../panels/network/net-device-wifi.c:320
-#: ../panels/network/net-device-wifi.c:476
+#: ../panels/network/net-device-wifi.c:276
+#: ../panels/network/net-device-wifi.c:432
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Ništa"
 
-#: ../panels/network/net-device-wifi.c:697
+#: ../panels/network/net-device-wifi.c:652
 msgid "never"
 msgstr "nikad"
 
-#: ../panels/network/net-device-wifi.c:707
+#: ../panels/network/net-device-wifi.c:662
 msgid "today"
 msgstr "danas"
 
-#: ../panels/network/net-device-wifi.c:709
+#: ../panels/network/net-device-wifi.c:664
 msgid "yesterday"
 msgstr "juče"
 
-#: ../panels/network/net-device-wifi.c:711
+#: ../panels/network/net-device-wifi.c:666
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -1714,42 +2077,42 @@ msgstr[2] "Pre %i dana"
 msgstr[3] "Pre jednog dana"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/net-device-wifi.c:780
-#: ../panels/network/panel-common.c:277
+#: ../panels/network/net-device-wifi.c:735
+#: ../panels/network/panel-common.c:235
 msgid "Not connected"
 msgstr "Niste povezani"
 
-#: ../panels/network/net-device-wifi.c:782
-#: ../panels/network/net-device-wifi.c:2086
+#: ../panels/network/net-device-wifi.c:737
+#: ../panels/network/net-device-wifi.c:2101
 msgid "Out of range"
 msgstr "Izvan opsega"
 
-#: ../panels/network/net-device-wifi.c:813
+#: ../panels/network/net-device-wifi.c:768
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Nema signala"
 
-#: ../panels/network/net-device-wifi.c:815
+#: ../panels/network/net-device-wifi.c:770
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Slab signal"
 
-#: ../panels/network/net-device-wifi.c:817
+#: ../panels/network/net-device-wifi.c:772
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Dobar signal"
 
-#: ../panels/network/net-device-wifi.c:819
+#: ../panels/network/net-device-wifi.c:774
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Odličan signal"
 
-#: ../panels/network/net-device-wifi.c:821
+#: ../panels/network/net-device-wifi.c:776
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Izvrstan signal"
 
-#: ../panels/network/net-device-wifi.c:1005
+#: ../panels/network/net-device-wifi.c:960
 #, c-format
 msgid ""
 "Network details for %s including password and any custom configuration will "
@@ -1758,36 +2121,42 @@ msgstr ""
 "Detalji mreže za „%s“ uključujući lozinku i sva proizvoljna podešavanja će biti "
 "izgubljeni."
 
-#: ../panels/network/net-device-wifi.c:1016
+#: ../panels/network/net-device-wifi.c:971
 msgid "Forget"
 msgstr "Zaboravi"
 
-#: ../panels/network/net-device-wifi.c:1552
-msgid ""
-"If you have a connection to the Internet other than wireless, you can use it "
-"to share your internet connection with others."
-msgstr ""
-"Ako imate neku drugu vezu na Internet osim bežične, možete da je koristite "
-"da delite vašu internet vezu sa drugima."
-
 #: ../panels/network/net-device-wifi.c:1556
+#| msgid ""
+#| "If you have a connection to the Internet other than wireless, you can use "
+#| "it to share your internet connection with others."
+msgid ""
+"If you have a connection to the Internet other than wireless, you can set up "
+"a wireless hotspot to share the connection with others."
+msgstr ""
+"Ako imate neku drugu vezu na Internet osim bežične, možete da podesite "
+"bežičnu vruću tačku da delite vezu sa drugima."
+
+#: ../panels/network/net-device-wifi.c:1560
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Uključivanjem bežične vruće tačke prekinućete vezu sa <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1560
+#: ../panels/network/net-device-wifi.c:1564
+#| msgid ""
+#| "It is not possible to access the internet through your wireless while the "
+#| "hotspot is active."
 msgid ""
-"It is not possible to access the internet through your wireless while the "
+"It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
 msgstr ""
-"Nije moguće pristupiti internetu preko vaše bežične dok je uključena vruća "
+"Nije moguće pristupiti Internetu preko vaše bežične dok je uključena vruća "
 "tačka."
 
-#: ../panels/network/net-device-wifi.c:1626
+#: ../panels/network/net-device-wifi.c:1630
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Da zaustavim vruću tačku i da isključim sve korisnike?"
 
-#: ../panels/network/net-device-wifi.c:1629
+#: ../panels/network/net-device-wifi.c:1633
 msgid "_Stop Hotspot"
 msgstr "_Zaustavi vruću tačku"
 
@@ -1807,7 +2176,7 @@ msgstr ""
 msgid "This is not recommended for untrusted public networks."
 msgstr "Ovo nije preporučljivo za nebezbedne, javne mreže."
 
-#: ../panels/network/net-proxy.c:367
+#: ../panels/network/net-proxy.c:406
 msgid "Proxy"
 msgstr "Posrednik"
 
@@ -1820,33 +2189,34 @@ msgid "Provider"
 msgstr "Dostavljač"
 
 #: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:686 ../panels/network/panel-common.c:688
+#: ../panels/network/panel-common.c:644 ../panels/network/panel-common.c:646
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "IP adresa"
 
 #: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-wifi.ui.h:13
-#: ../panels/network/network-wired.ui.h:3 ../panels/network/panel-common.c:684
+#: ../panels/network/network-simple.ui.h:3
+#: ../panels/network/network-wifi.ui.h:14 ../panels/network/panel-common.c:642
 msgid "IPv6 Address"
 msgstr "IPv6 adresa"
 
 #: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-wifi.ui.h:14
-#: ../panels/network/network-wired.ui.h:4
+#: ../panels/network/network-simple.ui.h:4
+#: ../panels/network/network-wifi.ui.h:15
 msgid "Default Route"
 msgstr "Podrazumevana ruta"
 
 #: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-wifi.ui.h:15
-#: ../panels/network/network-wired.ui.h:5
+#: ../panels/network/network-simple.ui.h:5
+#: ../panels/network/network-wifi.ui.h:16
 msgid "DNS"
 msgstr "DNS"
 
 #: ../panels/network/network-mobile.ui.h:8
-#: ../panels/network/network-wired.ui.h:6
-msgid "_Options..."
-msgstr "_Opcije..."
+#: ../panels/network/network-simple.ui.h:6
+#| msgid "_Options"
+msgid "_Options…"
+msgstr "_Opcije…"
 
 #: ../panels/network/network-proxy.ui.h:1 ../panels/network/network.ui.h:5
 msgctxt "proxy method"
@@ -1887,13 +2257,28 @@ msgstr "_FTP posrednik"
 msgid "_Socks Host"
 msgstr "_Priključci domaćina"
 
+#: ../panels/network/network-proxy.ui.h:10
+msgid "_Ignore Hosts"
+msgstr "_Zanemari domaćine"
+
+#: ../panels/network/network-simple.ui.h:1
+#: ../panels/network/network-wifi.ui.h:9
+msgid "Hardware Address"
+msgstr "Hardverska adresa"
+
+#: ../panels/network/network-simple.ui.h:2
+#: ../panels/network/network-wifi.ui.h:13 ../panels/network/panel-common.c:641
+msgid "IPv4 Address"
+msgstr "IPv4 adresa"
+
 #: ../panels/network/network.ui.h:1
 msgid "Select the interface to use for the new service"
 msgstr "Izaberite sučelje za novi servis"
 
 #: ../panels/network/network.ui.h:2
-msgid "C_reate..."
-msgstr "_Napravi..."
+#| msgid "Calibrate…"
+msgid "C_reate…"
+msgstr "_Napravi…"
 
 #: ../panels/network/network.ui.h:3
 msgid "_Interface"
@@ -1928,427 +2313,484 @@ msgid "Username"
 msgstr "Korisničko ime"
 
 #: ../panels/network/network-vpn.ui.h:7
-msgid "_Configure..."
-msgstr "_Podesi..."
+#| msgid "_Configure..."
+msgid "_Configure…"
+msgstr "_Podesi…"
 
 #: ../panels/network/network-wifi.ui.h:1
-msgid "Wireless Hotspot"
-msgstr "Tačka bežičnog pristupa"
+#| msgid "Hotspot"
+msgid "Wi-Fi Hotspot"
+msgstr "Bežična vruća tačka"
 
 #: ../panels/network/network-wifi.ui.h:2
 msgid "_Turn On"
 msgstr "_Uključi"
 
-#. TRANSLATORS: device type
-#: ../panels/network/network-wifi.ui.h:3 ../panels/network/panel-common.c:90
-msgid "Wireless"
+#: ../panels/network/network-wifi.ui.h:3
+msgid "Wi-Fi"
 msgstr "Bežična"
 
 #: ../panels/network/network-wifi.ui.h:4
-msgid "_Use as Hotspot..."
-msgstr "_Koristi kao vruću tačku..."
+#| msgid "_Use as Hotspot..."
+msgid "_Use as Hotspot…"
+msgstr "_Koristi kao vruću tačku…"
 
 #: ../panels/network/network-wifi.ui.h:5
-#| msgid "Disconnected"
+#| msgid "Connect to a Hidden Network"
+msgid "_Connect to Hidden Network…"
+msgstr "_Poveži se na skrivenu bežičnu mrežu…"
+
+#: ../panels/network/network-wifi.ui.h:6
 msgid "_Disconnect"
 msgstr "_Prekini vezu"
 
-#: ../panels/network/network-wifi.ui.h:6
+#: ../panels/network/network-wifi.ui.h:7
 msgid "_Connect"
 msgstr "_Poveži"
 
-#: ../panels/network/network-wifi.ui.h:7
+#: ../panels/network/network-wifi.ui.h:8
 msgid "Last used"
 msgstr "Korišćena"
 
-#: ../panels/network/network-wifi.ui.h:8
-#: ../panels/network/network-wired.ui.h:1
-msgid "Hardware Address"
-msgstr "Hardverska adresa"
-
-#: ../panels/network/network-wifi.ui.h:9
+#: ../panels/network/network-wifi.ui.h:10
 msgid "Security"
 msgstr "Bezbednost"
 
-#: ../panels/network/network-wifi.ui.h:10
+#: ../panels/network/network-wifi.ui.h:11
 msgid "Strength"
 msgstr "Jačina"
 
-#: ../panels/network/network-wifi.ui.h:11
+#: ../panels/network/network-wifi.ui.h:12
 msgid "Link speed"
 msgstr "Brzina veze"
 
-#: ../panels/network/network-wifi.ui.h:12
-#: ../panels/network/network-wired.ui.h:2 ../panels/network/panel-common.c:683
-msgid "IPv4 Address"
-msgstr "IPv4 adresa"
-
-#: ../panels/network/network-wifi.ui.h:16
+#: ../panels/network/network-wifi.ui.h:17
 msgid "_Forget Network"
 msgstr "_Zaboravi mrežu"
 
-#: ../panels/network/network-wifi.ui.h:17
-msgid "_Settings..."
-msgstr "_Podešavanja..."
-
 #: ../panels/network/network-wifi.ui.h:18
-msgid "Switch off to connect to a wireless network"
-msgstr "Isključite da se povežete na bežičnu mrežu"
+#| msgid "_Settings..."
+msgid "_Settings…"
+msgstr "_Podešavanja…"
 
 #: ../panels/network/network-wifi.ui.h:19
+#| msgid "Switch off to connect to a wireless network"
+msgid "Switch off to connect to a Wi-Fi network"
+msgstr "Isključite da se povežete na bežičnu mrežu"
+
+#: ../panels/network/network-wifi.ui.h:20
 msgid "Network Name"
 msgstr "Naziv mreže"
 
-#: ../panels/network/network-wifi.ui.h:20
+#: ../panels/network/network-wifi.ui.h:21
 msgid "Connected Devices"
 msgstr "Priključeni uređaji"
 
-#: ../panels/network/network-wifi.ui.h:21
+#: ../panels/network/network-wifi.ui.h:22
 msgid "Security type"
 msgstr "Vrsta bezbednosti"
 
-#: ../panels/network/network-wifi.ui.h:22
+#: ../panels/network/network-wifi.ui.h:23
 msgid "Security key"
 msgstr "Ključ bezbednosti"
 
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:86
-msgid "Wired"
-msgstr "Žičana"
-
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:97
-msgid "Mobile broadband"
-msgstr "Mobilna širokopojasna"
-
-#. TRANSLATORS: device type
-#: ../panels/network/panel-common.c:106
-msgid "Mesh"
-msgstr "Mreža"
-
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:166
+#: ../panels/network/panel-common.c:124
 msgid "Ad-hoc"
 msgstr "Ad-hok"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:170
+#: ../panels/network/panel-common.c:128
 msgid "Infrastructure"
 msgstr "Infrastrukturno"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:194 ../panels/network/panel-common.c:255
+#: ../panels/network/panel-common.c:152 ../panels/network/panel-common.c:213
 msgid "Status unknown"
 msgstr "Nepoznato stanje"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:198
+#: ../panels/network/panel-common.c:156
 msgid "Unmanaged"
 msgstr "Neupravljan"
 
-#: ../panels/network/panel-common.c:203
+#: ../panels/network/panel-common.c:161
 msgid "Firmware missing"
 msgstr "Nedostaje firmver"
 
-#: ../panels/network/panel-common.c:206
+#: ../panels/network/panel-common.c:164
 msgid "Cable unplugged"
 msgstr "Kabal je isključen"
 
-#: ../panels/network/panel-common.c:208
+#: ../panels/network/panel-common.c:166
 msgid "Unavailable"
 msgstr "Nedostupno"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:212
+#: ../panels/network/panel-common.c:170
 msgid "Disconnected"
 msgstr "Veza je prekinuta"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:219 ../panels/network/panel-common.c:261
+#: ../panels/network/panel-common.c:177 ../panels/network/panel-common.c:219
 msgid "Connecting"
 msgstr "Povezujem se"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:223 ../panels/network/panel-common.c:265
+#: ../panels/network/panel-common.c:181 ../panels/network/panel-common.c:223
 msgid "Authentication required"
 msgstr "Potrebno je potvrđivanje identiteta"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:227 ../panels/network/panel-common.c:269
+#: ../panels/network/panel-common.c:185 ../panels/network/panel-common.c:227
 msgid "Connected"
 msgstr "Povezani ste"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:231
+#: ../panels/network/panel-common.c:189
 msgid "Disconnecting"
 msgstr "Isključujem"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:235 ../panels/network/panel-common.c:273
+#: ../panels/network/panel-common.c:193 ../panels/network/panel-common.c:231
 msgid "Connection failed"
 msgstr "Povezivanje nije uspelo"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:239 ../panels/network/panel-common.c:281
+#: ../panels/network/panel-common.c:197 ../panels/network/panel-common.c:239
 msgid "Status unknown (missing)"
 msgstr "Stanje je nepoznato (nedostaje)"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:301
+#: ../panels/network/panel-common.c:259
 msgid "Configuration failed"
 msgstr "Nije uspelo podešavanje"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:305
+#: ../panels/network/panel-common.c:263
 msgid "IP configuration failed"
 msgstr "Nije uspelo podešavanje IP-a"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:309
+#: ../panels/network/panel-common.c:267
 msgid "IP configuration expired"
 msgstr "Isteklo je podešavanje IP-a"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:313
+#: ../panels/network/panel-common.c:271
 msgid "Secrets were required, but not provided"
 msgstr "Zatražene su tajne, ali nisu dostavljene"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:317
+#: ../panels/network/panel-common.c:275
 msgid "802.1x supplicant disconnected"
 msgstr "Prekinuta je veza sa 802.1x moliocem"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:321
+#: ../panels/network/panel-common.c:279
 msgid "802.1x supplicant configuration failed"
 msgstr "Nije uspelo podešavanje 802.1x molioca"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:325
+#: ../panels/network/panel-common.c:283
 msgid "802.1x supplicant failed"
 msgstr "802.1x molilac nije uspeo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:329
+#: ../panels/network/panel-common.c:287
 msgid "802.1x supplicant took too long to authenticate"
 msgstr "Potvrđivanje identiteta 802.1x molioca je trajalo predugo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:333
+#: ../panels/network/panel-common.c:291
 msgid "PPP service failed to start"
 msgstr "PPP usluga nije uspela da se pokrene"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:337
+#: ../panels/network/panel-common.c:295
 msgid "PPP service disconnected"
 msgstr "PPP usluga je isključena"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:341
+#: ../panels/network/panel-common.c:299
 msgid "PPP failed"
 msgstr "PPP nije uspelo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:345
+#: ../panels/network/panel-common.c:303
 msgid "DHCP client failed to start"
 msgstr "DHCP klijent nije uspeo da e pokrene"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:349
+#: ../panels/network/panel-common.c:307
 msgid "DHCP client error"
 msgstr "Greška DHCP klijenta"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:353
+#: ../panels/network/panel-common.c:311
 msgid "DHCP client failed"
 msgstr "DHCP klijent nije uspeo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:357
+#: ../panels/network/panel-common.c:315
 msgid "Shared connection service failed to start"
 msgstr "Usluga deljene veze nije uspela da se pokrene"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:361
+#: ../panels/network/panel-common.c:319
 msgid "Shared connection service failed"
 msgstr "Usluga deljene veze nije uspela"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:365
+#: ../panels/network/panel-common.c:323
 msgid "AutoIP service failed to start"
 msgstr "Usluga samostalnog IP-a nije uspela da se pokrene"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:369
+#: ../panels/network/panel-common.c:327
 msgid "AutoIP service error"
 msgstr "Greška usluge samostalnog IP-a"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:373
+#: ../panels/network/panel-common.c:331
 msgid "AutoIP service failed"
 msgstr "Usluga samostalnog IP-a nije uspela"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:377
+#: ../panels/network/panel-common.c:335
 msgid "Line busy"
 msgstr "Linija je zauzeta"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:381
+#: ../panels/network/panel-common.c:339
 msgid "No dial tone"
 msgstr "Nema tona pozivanja"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:385
+#: ../panels/network/panel-common.c:343
 msgid "No carrier could be established"
 msgstr "Nijedan nosač ne može biti uspostavljen"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:389
+#: ../panels/network/panel-common.c:347
 msgid "Dialing request timed out"
 msgstr "Isteklo je vreme zahteva pozivanja"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:393
+#: ../panels/network/panel-common.c:351
 msgid "Dialing attempt failed"
 msgstr "Pokušaj pozivanja nije uspeo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:397
+#: ../panels/network/panel-common.c:355
 msgid "Modem initialization failed"
 msgstr "Nije uspelo pokretanje modema"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:401
+#: ../panels/network/panel-common.c:359
 msgid "Failed to select the specified APN"
 msgstr "Nisam uspeo da izaberem navedeni NTP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:405
+#: ../panels/network/panel-common.c:363
 msgid "Not searching for networks"
 msgstr "Ne tražim mreže"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:409
+#: ../panels/network/panel-common.c:367
 msgid "Network registration denied"
 msgstr "Zavođenje mreže je odbijeno"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:413
+#: ../panels/network/panel-common.c:371
 msgid "Network registration timed out"
 msgstr "Isteklo je vreme za zavođenje mreže"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:417
+#: ../panels/network/panel-common.c:375
 msgid "Failed to register with the requested network"
 msgstr "Nisam uspeo da zavedem sa zahtevanom mrežom"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:421
+#: ../panels/network/panel-common.c:379
 msgid "PIN check failed"
 msgstr "Provera PIN-a nije uspela"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:425
+#: ../panels/network/panel-common.c:383
 msgid "Firmware for the device may be missing"
 msgstr "Možda nedostaje firmver za uređaj"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:429
+#: ../panels/network/panel-common.c:387
 msgid "Connection disappeared"
 msgstr "Veza je nestala"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:433
+#: ../panels/network/panel-common.c:391
 msgid "Carrier/link changed"
 msgstr "Izmenjen je nosač/veza"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:437
+#: ../panels/network/panel-common.c:395
 msgid "Existing connection was assumed"
 msgstr "Postojeća veza biće prisvojena"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:441
+#: ../panels/network/panel-common.c:399
 msgid "Modem not found"
 msgstr "Nije pronađen modem"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:445
+#: ../panels/network/panel-common.c:403
 msgid "Bluetooth connection failed"
 msgstr "Veza blututa nije uspela"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:449
+#: ../panels/network/panel-common.c:407
 msgid "SIM Card not inserted"
 msgstr "SIM kartica nije ubačena"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:453
+#: ../panels/network/panel-common.c:411
 msgid "SIM Pin required"
 msgstr "Potreban je SIM PIN"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:457
+#: ../panels/network/panel-common.c:415
 msgid "SIM Puk required"
 msgstr "Potreban je SIM PUK"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:461
+#: ../panels/network/panel-common.c:419
 msgid "SIM wrong"
 msgstr "Pogrešna SIM"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:465
+#: ../panels/network/panel-common.c:423
 msgid "InfiniBand device does not support connected mode"
 msgstr "Infiniband uređaji ne podržavaju povezani režim"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:469
+#: ../panels/network/panel-common.c:427
 msgid "Connection dependency failed"
 msgstr "Nije uspela zavisnost veze"
 
+#. TRANSLATORS: this is the per application switch for message tray usage.
+#: ../panels/notifications/cc-edit-dialog.c:38
+#| msgid "Magnification:"
+msgctxt "notifications"
+msgid "Notifications"
+msgstr "Obaveštenja"
+
+#. TRANSLATORS: this is the setting to configure sounds associated with notifications
+#: ../panels/notifications/cc-edit-dialog.c:40
+#| msgid "Sound Effects"
+msgctxt "notifications"
+msgid "Sound Alerts"
+msgstr "Zvučni efekti"
+
+#: ../panels/notifications/cc-edit-dialog.c:41
+msgctxt "notifications"
+msgid "Show Popup Banners"
+msgstr "Prikaži iskačuće vrpce"
+
+#. TRANSLATORS: banners here refers to message tray notifications in the middle of the screen
+#: ../panels/notifications/cc-edit-dialog.c:43
+msgctxt "notifications"
+msgid "Show Details in Banners"
+msgstr "Prikaži pojedinosti u vrpcama"
+
+#: ../panels/notifications/cc-edit-dialog.c:44
+#| msgid "Lock screen"
+msgctxt "notifications"
+msgid "View in Lock Screen"
+msgstr "Pregledaj u ekranu zaključavanja"
+
+#: ../panels/notifications/cc-edit-dialog.c:45
+msgctxt "notifications"
+msgid "Show Details in Lock Screen"
+msgstr "Prikaži podatke u ekranu zaključavanja"
+
+#: ../panels/notifications/cc-notifications-panel.c:203
+#: ../panels/power/cc-power-panel.c:1557 ../panels/power/cc-power-panel.c:1564
+#: ../panels/privacy/cc-privacy-panel.c:77
+#: ../panels/privacy/cc-privacy-panel.c:144
+msgid "On"
+msgstr "Uklj."
+
+#: ../panels/notifications/cc-notifications-panel.c:203
+#: ../panels/power/cc-power-panel.c:1551 ../panels/power/cc-power-panel.c:1562
+#: ../panels/privacy/cc-privacy-panel.c:77
+#: ../panels/privacy/cc-privacy-panel.c:144
+msgid "Off"
+msgstr "Isklj."
+
+#: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
+#| msgid "Magnification:"
+msgid "Notifications"
+msgstr "Obaveštenja"
+
+#: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:2
+#| msgid "Magnification:"
+msgid "Manage notifications"
+msgstr "Upravljajte obaveštenjima"
+
+#. Translators: those are keywords for the notifications control-center panel
+#: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:4
+msgid "Notifications;Banner;Message;Tray;Popup;"
+msgstr "obaveštenja;vrpca;poruka;fioka;iskočko;"
+
+#: ../panels/notifications/notifications.ui.h:1
+msgid "Show Pop Up Banners"
+msgstr "Prikaži iskačuće vrpce"
+
+#: ../panels/notifications/notifications.ui.h:2
+#| msgid "Lock screen"
+msgid "Show in Lock Screen"
+msgstr "Prikaži u ekranu zaključavanja"
+
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:249
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:253
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "Dodaj nalog"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:383
+#: ../panels/online-accounts/cc-online-accounts-panel.c:358
 msgid "Error logging into the account"
 msgstr "Greška prijavljivanja na nalog"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:437
+#: ../panels/online-accounts/cc-online-accounts-panel.c:412
 msgid "Expired credentials. Please log in again."
 msgstr "Istekla su punomoćstva. Molim prijavite se ponovo."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:440
+#: ../panels/online-accounts/cc-online-accounts-panel.c:415
 msgid "_Log In"
 msgstr "_Prijavi me"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:676
+#: ../panels/online-accounts/cc-online-accounts-panel.c:651
 msgid "Error creating account"
 msgstr "Greška u stvaranju naloga"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:718
+#: ../panels/online-accounts/cc-online-accounts-panel.c:693
 msgid "Error removing account"
 msgstr "Greška u uklanjanju naloga"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:754
+#: ../panels/online-accounts/cc-online-accounts-panel.c:729
 msgid "Are you sure you want to remove the account?"
 msgstr "Da li ste sigurni da želite da uklonite nalog?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:756
+#: ../panels/online-accounts/cc-online-accounts-panel.c:731
 msgid "This will not remove the account on the server."
 msgstr "Ovo neće ukloniti nalog na serveru."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:757
+#: ../panels/online-accounts/cc-online-accounts-panel.c:732
 msgid "_Remove"
 msgstr "_Ukloni"
 
@@ -2385,11 +2827,11 @@ msgstr ""
 "Dodavanje naloga omogućava vašim aplikacijama da mu pristupe zbog dokumenata, "
 "pošte, kontakata, kalendara, ćaskanja i drugih stvari."
 
-#: ../panels/power/cc-power-panel.c:157
+#: ../panels/power/cc-power-panel.c:177
 msgid "Unknown time"
 msgstr "Nepoznato vreme"
 
-#: ../panels/power/cc-power-panel.c:163
+#: ../panels/power/cc-power-panel.c:183
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -2398,7 +2840,7 @@ msgstr[1] "%i minuta"
 msgstr[2] "%i minuta"
 msgstr[3] "Jedan minut"
 
-#: ../panels/power/cc-power-panel.c:175
+#: ../panels/power/cc-power-panel.c:195
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -2409,12 +2851,12 @@ msgstr[3] "Jedan sat"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:183
+#: ../panels/power/cc-power-panel.c:203
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%d %s %d %s"
 
-#: ../panels/power/cc-power-panel.c:184
+#: ../panels/power/cc-power-panel.c:204
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "sat"
@@ -2423,7 +2865,7 @@ msgstr[2] "sati"
 msgstr[3] "sat"
 
 # bug(danilo): plural-forms
-#: ../panels/power/cc-power-panel.c:185
+#: ../panels/power/cc-power-panel.c:205
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minut"
@@ -2432,162 +2874,218 @@ msgstr[2] "minuta"
 msgstr[3] "minut"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:228
+#: ../panels/power/cc-power-panel.c:224
 #, c-format
-msgid "Charging - %s until fully charged"
-msgstr "Punjenje — %s do potpune napunjenosti"
+#| msgid "Charging - %s until fully charged"
+msgid "%s until fully charged"
+msgstr "%s do potpune napunjenosti"
+
+#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
+#: ../panels/power/cc-power-panel.c:231
+#, c-format
+#| msgid "Caution low UPS, %s remaining"
+msgid "Caution: %s remaining"
+msgstr "Pažnja: preostaje još %s rada"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #: ../panels/power/cc-power-panel.c:236
 #, c-format
-msgid "Caution low battery, %s remaining"
-msgstr "Baterija je skoro prazna, preostalo vreme: %s"
-
-#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:244
-#, c-format
-msgid "Using battery power - %s remaining"
-msgstr "Napajanje iz baterije obezbeđuje još %s rada"
+msgid "%s remaining"
+msgstr "Preostalo vreme: %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:261
-msgid "Charging"
-msgstr "Punjenje je u toku"
+#: ../panels/power/cc-power-panel.c:241 ../panels/power/cc-power-panel.c:269
+#| msgid "Full Screen"
+msgid "Fully charged"
+msgstr "Potpuno puna"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:266
-msgid "Using battery power"
-msgstr "Napajanje iz baterije"
-
-#. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:270
-msgid "Charging - fully charged"
-msgstr "Punjenje — potpuno napunjena"
-
-#. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:274
+#: ../panels/power/cc-power-panel.c:245 ../panels/power/cc-power-panel.c:273
 msgid "Empty"
 msgstr "Prazna"
 
-#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:342
+#. TRANSLATORS: primary battery
+#: ../panels/power/cc-power-panel.c:260
+msgid "Charging"
+msgstr "Puni se"
+
+#. TRANSLATORS: primary battery
+#: ../panels/power/cc-power-panel.c:265
+#| msgid "Charging"
+msgid "Discharging"
+msgstr "Prazni se"
+
+#: ../panels/power/cc-power-panel.c:317
 #, c-format
-msgid "Caution low UPS, %s remaining"
-msgstr "UPS je skoro prazan, obezbeđuje još %s rada"
+msgid "Estimated battery capacity: %s"
+msgstr "Procenjeni kapacitet baterije: %s"
 
-#. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:348
-#, c-format
-msgid "Using UPS power - %s remaining"
-msgstr "Napajanje iz UPS-a obezbeđuje još %s rada"
+#: ../panels/power/cc-power-panel.c:393
+msgctxt "Battery name"
+msgid "Main"
+msgstr "Glavna"
 
-#. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:366
-msgid "Caution low UPS"
-msgstr "UPS je skoro prazan"
-
-#. TRANSLATORS: UPS battery
-#: ../panels/power/cc-power-panel.c:371
-msgid "Using UPS power"
-msgstr "Napajanje iz UPS-a"
-
-#. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:423
-msgid "Your secondary battery is fully charged"
-msgstr "Vaša pomoćna baterija je potpuno napunjena"
-
-#. TRANSLATORS: secondary battery is normally in the media bay
-#: ../panels/power/cc-power-panel.c:427
-msgid "Your secondary battery is empty"
-msgstr "Vaša pomoćna baterija je prazna"
+#: ../panels/power/cc-power-panel.c:395
+msgctxt "Battery name"
+msgid "Extra"
+msgstr "Dodatna"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:510
+#: ../panels/power/cc-power-panel.c:477
 msgid "Wireless mouse"
 msgstr "Bežični miš"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:514
+#: ../panels/power/cc-power-panel.c:481
 msgid "Wireless keyboard"
 msgstr "Bežična tastatura"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:518
+#: ../panels/power/cc-power-panel.c:485
 msgid "Uninterruptible power supply"
 msgstr "Neprekidiv izvor napajanja"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:522
+#: ../panels/power/cc-power-panel.c:490
 msgid "Personal digital assistant"
 msgstr "Lični digitalni pomoćnik"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:526
+#: ../panels/power/cc-power-panel.c:494
 msgid "Cellphone"
 msgstr "Mobilni telefon"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:530
+#: ../panels/power/cc-power-panel.c:498
 msgid "Media player"
 msgstr "Muzički uređaj"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:534
+#: ../panels/power/cc-power-panel.c:502
 msgid "Tablet"
 msgstr "Tablica"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:538
+#: ../panels/power/cc-power-panel.c:506
 msgid "Computer"
 msgstr "Računar"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:542
+#: ../panels/power/cc-power-panel.c:510 ../panels/power/cc-power-panel.c:718
+#: ../panels/power/cc-power-panel.c:1844
 msgid "Battery"
 msgstr "Baterija"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:553
+#: ../panels/power/cc-power-panel.c:519
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Puni se"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:560
+#: ../panels/power/cc-power-panel.c:526
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Upozorenje"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:565
+#: ../panels/power/cc-power-panel.c:531
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Skoro prazna"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:570
+#: ../panels/power/cc-power-panel.c:536
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Puna"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:575
+#: ../panels/power/cc-power-panel.c:541
+#| msgid "Full Screen"
 msgctxt "Battery power"
-msgid "Charging - fully charged"
-msgstr "Punjenje — potpuno napunjena"
+msgid "Fully charged"
+msgstr "Potpuno puna"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:579
+#: ../panels/power/cc-power-panel.c:545
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Prazna"
 
-#: ../panels/power/cc-power-panel.c:1075
-msgid ""
-"Tip: <a href=\"screen\">screen brightness</a> affects how much power is used"
-msgstr ""
-"Savet: <a href=\"screen\">osvetljenost ekrana</a> utiče na potrošnju el. "
-"energije"
+#: ../panels/power/cc-power-panel.c:716
+#| msgid "Battery"
+msgid "Batteries"
+msgstr "Baterije"
+
+#: ../panels/power/cc-power-panel.c:1058
+msgid "When _idle"
+msgstr "Kada _miruje"
+
+#: ../panels/power/cc-power-panel.c:1324
+msgid "Power Saving"
+msgstr "Ušteda napajanja"
+
+#: ../panels/power/cc-power-panel.c:1351
+#| msgid "Brightness"
+msgid "_Screen Brightness"
+msgstr "_Osvetljaj ekrana"
+
+#: ../panels/power/cc-power-panel.c:1378
+#| msgid "Suspend when inactive for"
+msgid "Dim Screen when Inactive"
+msgstr "Zatamni ekran kada je neradan"
+
+#: ../panels/power/cc-power-panel.c:1401
+msgid "Mark As Inactive After"
+msgstr "Označi kao neradan nakon"
+
+#: ../panels/power/cc-power-panel.c:1436
+msgid "_Wi-Fi"
+msgstr "_Bežična"
+
+#: ../panels/power/cc-power-panel.c:1464
+#| msgid "Mobile broadband"
+msgid "_Mobile Broadband"
+msgstr "_Mobilna širokopojasna"
+
+#: ../panels/power/cc-power-panel.c:1502
+#| msgid "Bluetooth"
+msgid "_Bluetooth"
+msgstr "_Blutut"
+
+#: ../panels/power/cc-power-panel.c:1553
+#| msgid "On battery power"
+msgid "When on battery power"
+msgstr "Kada se napaja sa baterije"
+
+#: ../panels/power/cc-power-panel.c:1555
+msgid "When plugged in"
+msgstr "Kada je uključen"
+
+#: ../panels/power/cc-power-panel.c:1673
+msgid "Suspend & Power Off"
+msgstr "Obustavi i isključi"
+
+#: ../panels/power/cc-power-panel.c:1702
+#| msgctxt "proxy method"
+#| msgid "Automatic"
+msgid "_Automatic Suspend"
+msgstr "_Sam obustavi"
+
+#: ../panels/power/cc-power-panel.c:1722
+#| msgid "When power is _critically low"
+msgid "When Battery Power is _Critical"
+msgstr "Kad je napajanje baterije _kritično"
+
+#: ../panels/power/cc-power-panel.c:1754
+#| msgid "Power off"
+msgid "Power Off"
+msgstr "Isključi"
+
+#: ../panels/power/cc-power-panel.c:1894
+msgid "Devices"
+msgstr "Uređaji"
 
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:1
 msgid "Power"
@@ -2599,8 +3097,12 @@ msgstr "Podešavanja upravljanja napajanjem"
 
 #. Translators: those are keywords for the power control-center panel
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
-msgid "Power;Sleep;Suspend;Hibernate;Battery;"
-msgstr "Napajanje;Uspavljivanje;Obustava;Zamrzavanje;Baterija;"
+#| msgid "Power;Sleep;Suspend;Hibernate;Battery;"
+msgid ""
+"Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
+msgstr ""
+"napajanje;spavanje;obustava;zamrzavanje;baterija;osvetljaj;zatamnjenje;monitor;DPM"
+"S;mirovanje;"
 
 #: ../panels/power/power.ui.h:1
 msgid "Hibernate"
@@ -2611,178 +3113,196 @@ msgid "Power off"
 msgstr "Ugasi"
 
 # bug(danilo): plural-forms
-#: ../panels/power/power.ui.h:3 ../panels/screen/screen.ui.h:6
+#: ../panels/power/power.ui.h:3 ../panels/privacy/privacy.ui.h:6
 msgid "5 minutes"
 msgstr "5 minuta"
 
-#: ../panels/power/power.ui.h:4 ../panels/screen/screen.ui.h:7
+#: ../panels/power/power.ui.h:4
 msgid "10 minutes"
 msgstr "10 minuta"
 
-#: ../panels/power/power.ui.h:5 ../panels/screen/screen.ui.h:8
-msgid "30 minutes"
-msgstr "30 minuta"
-
-#: ../panels/power/power.ui.h:6 ../panels/screen/screen.ui.h:9
+#: ../panels/power/power.ui.h:6 ../panels/privacy/privacy.ui.h:8
 msgid "1 hour"
 msgstr "1 sat"
 
-#: ../panels/power/power.ui.h:7
-msgid "Don't suspend"
-msgstr "Nemoj obustavljati"
+#: ../panels/power/power.ui.h:7 ../panels/privacy/privacy.ui.h:3
+msgid "1 minute"
+msgstr "1 minut"
 
-#: ../panels/power/power.ui.h:8
-msgid "On battery power"
-msgstr "Napajanje iz baterije"
+# bug(danilo): plural-forms
+#: ../panels/power/power.ui.h:8 ../panels/privacy/privacy.ui.h:4
+msgid "2 minutes"
+msgstr "2 minuta"
 
 #: ../panels/power/power.ui.h:9
-msgid "When plugged in"
-msgstr "Kada je uključen"
+#| msgid "never"
+msgid "Never"
+msgstr "Nikad"
 
 #: ../panels/power/power.ui.h:10
-msgid "Suspend when inactive for"
-msgstr "Ako je neaktivan obustavi nakon"
+#| msgctxt "proxy method"
+#| msgid "Automatic"
+msgid "Automatic Suspend"
+msgstr "Sam obustavi"
 
-#: ../panels/power/power.ui.h:11
-msgid "When power is _critically low"
-msgstr "Kada je napajanje kritično _nisko"
+#: ../panels/power/power.ui.h:11 ../panels/privacy/privacy.ui.h:10
+#| msgid "Close"
+msgid "_Close"
+msgstr "_Zatvori"
+
+#: ../panels/power/power.ui.h:12
+#| msgid "On battery power"
+msgid "When on _Battery Power"
+msgstr "Kada se napaja sa _baterije"
+
+#: ../panels/power/power.ui.h:13
+#| msgid "When plugged in"
+msgid "When _Plugged In"
+msgstr "Kada je _uključen"
+
+#: ../panels/power/power.ui.h:14
+#| msgid "_Delay:"
+msgid "Delay"
+msgstr "Zastoj"
 
 #. Translators: The printer is low on toner
-#: ../panels/printers/cc-printers-panel.c:589
+#: ../panels/printers/cc-printers-panel.c:591
 msgid "Low on toner"
 msgstr "Ponestaje tonera"
 
 #. Translators: The printer has no toner left
-#: ../panels/printers/cc-printers-panel.c:591
+#: ../panels/printers/cc-printers-panel.c:593
 msgid "Out of toner"
 msgstr "Nema više tonera"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:594
+#: ../panels/printers/cc-printers-panel.c:596
 msgid "Low on developer"
 msgstr "Ponestaje razvijača"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: ../panels/printers/cc-printers-panel.c:597
+#: ../panels/printers/cc-printers-panel.c:599
 msgid "Out of developer"
 msgstr "Nema više razvijača"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:599
+#: ../panels/printers/cc-printers-panel.c:601
 msgid "Low on a marker supply"
 msgstr "Ponestaje markera"
 
 #. Translators: "marker" is one color bin of the printer
-#: ../panels/printers/cc-printers-panel.c:601
+#: ../panels/printers/cc-printers-panel.c:603
 msgid "Out of a marker supply"
 msgstr "Nema više mastila"
 
 #. Translators: One or more covers on the printer are open
-#: ../panels/printers/cc-printers-panel.c:603
+#: ../panels/printers/cc-printers-panel.c:605
 msgid "Open cover"
 msgstr "Otvoren poklopac"
 
 #. Translators: One or more doors on the printer are open
-#: ../panels/printers/cc-printers-panel.c:605
+#: ../panels/printers/cc-printers-panel.c:607
 msgid "Open door"
 msgstr "Otvorena vratanca"
 
 #. Translators: At least one input tray is low on media
-#: ../panels/printers/cc-printers-panel.c:607
+#: ../panels/printers/cc-printers-panel.c:609
 msgid "Low on paper"
 msgstr "Ponestaje papira"
 
 #. Translators: At least one input tray is empty
-#: ../panels/printers/cc-printers-panel.c:609
+#: ../panels/printers/cc-printers-panel.c:611
 msgid "Out of paper"
 msgstr "Nema više papira"
 
 #. Translators: The printer is offline
-#: ../panels/printers/cc-printers-panel.c:611
+#: ../panels/printers/cc-printers-panel.c:613
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Isključen"
 
-#. Translators: Someone has paused the Printer
-#: ../panels/printers/cc-printers-panel.c:613
+#. Translators: Someone has stopped the Printer
+#. Translators: Printer's state (no jobs can be processed)
+#: ../panels/printers/cc-printers-panel.c:615
+#: ../panels/printers/cc-printers-panel.c:806
 msgctxt "printer state"
-msgid "Paused"
-msgstr "Pauziran"
+msgid "Stopped"
+msgstr "Zaustavljen"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: ../panels/printers/cc-printers-panel.c:615
+#: ../panels/printers/cc-printers-panel.c:617
 msgid "Waste receptacle almost full"
 msgstr "Posuda za otpad je skoro puna"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: ../panels/printers/cc-printers-panel.c:617
+#: ../panels/printers/cc-printers-panel.c:619
 msgid "Waste receptacle full"
 msgstr "Posuda za otpad je puna"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:619
+#: ../panels/printers/cc-printers-panel.c:621
 msgid "The optical photo conductor is near end of life"
 msgstr "Optički provodnik fotografija je pri kraju života"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: ../panels/printers/cc-printers-panel.c:621
+#: ../panels/printers/cc-printers-panel.c:623
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Optički provodnik fotografija više ne funkcioniše"
 
 #. Translators: Printer's state (printer is being configured right now)
-#: ../panels/printers/cc-printers-panel.c:724
+#: ../panels/printers/cc-printers-panel.c:733
 msgctxt "printer state"
 msgid "Configuring"
 msgstr "Podešavam"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: ../panels/printers/cc-printers-panel.c:781
+#: ../panels/printers/cc-printers-panel.c:792
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Spreman"
 
+#. Translators: Printer's state (printer is ready but doesn't accept new jobs)
+#: ../panels/printers/cc-printers-panel.c:797
+msgctxt "printer state"
+msgid "Does not accept jobs"
+msgstr "Ne prihvata poslove"
+
 #. Translators: Printer's state (jobs are processing)
-#: ../panels/printers/cc-printers-panel.c:785
+#: ../panels/printers/cc-printers-panel.c:802
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Obrađujem"
 
-#. Translators: Printer's state (no jobs can be processed)
-#: ../panels/printers/cc-printers-panel.c:789
-msgctxt "printer state"
-msgid "Stopped"
-msgstr "Zaustavljen"
-
 #. Translators: Toner supply
-#: ../panels/printers/cc-printers-panel.c:906
+#: ../panels/printers/cc-printers-panel.c:923
 msgid "Toner Level"
 msgstr "Nivo tonera"
 
 #. Translators: Ink supply
-#: ../panels/printers/cc-printers-panel.c:909
+#: ../panels/printers/cc-printers-panel.c:926
 msgid "Ink Level"
 msgstr "Nivoa mastila"
 
 #. Translators: By supply we mean ink, toner, staples, water, ...
-#: ../panels/printers/cc-printers-panel.c:912
+#: ../panels/printers/cc-printers-panel.c:929
 msgid "Supply Level"
 msgstr "Nivo zaliha"
 
 #. Translators: Printer's state (printer is being installed right now)
-#: ../panels/printers/cc-printers-panel.c:930
+#: ../panels/printers/cc-printers-panel.c:947
 msgctxt "printer state"
 msgid "Installing"
 msgstr "Instaliram"
 
 #. Translators: There are no printers available (none is configured or CUPS is not running)
-#: ../panels/printers/cc-printers-panel.c:1107
+#: ../panels/printers/cc-printers-panel.c:1124
 msgid "No printers available"
 msgstr "Nema dostupnih štampača"
 
 #. Translators: there is n active print jobs on this printer
-#: ../panels/printers/cc-printers-panel.c:1411
+#: ../panels/printers/cc-printers-panel.c:1429
 #, c-format
 msgid "%u active"
 msgid_plural "%u active"
@@ -2792,46 +3312,49 @@ msgstr[2] "%u aktivnih"
 msgstr[3] "Jedan aktivan"
 
 #. Translators: Addition of the new printer failed.
-#: ../panels/printers/cc-printers-panel.c:1731
+#: ../panels/printers/cc-printers-panel.c:1773
 msgid "Failed to add new printer."
 msgstr "Nisam uspeo da dodam novi štampač."
 
-#: ../panels/printers/cc-printers-panel.c:1896
+#: ../panels/printers/cc-printers-panel.c:1938
 msgid "Select PPD File"
 msgstr "Izaberite PPD datoteku"
 
-#: ../panels/printers/cc-printers-panel.c:1905
+#: ../panels/printers/cc-printers-panel.c:1947
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
 msgstr ""
-"Datoteke opisa Post skript štampača (*.ppd,*.PPD, *.ppd.gz, *PPD.gz, *.PPD."
-"GZ)"
+"Datoteke opisa Post skript štampača (*.ppd,*.PPD, *.ppd.gz, *PPD.gz, "
+"*.PPD.GZ)"
 
-#: ../panels/printers/cc-printers-panel.c:2210
+#: ../panels/printers/cc-printers-panel.c:2252
 msgid "No suitable driver found"
 msgstr "Nisu pronađeni odgovarajući upravljački programi"
 
-#: ../panels/printers/cc-printers-panel.c:2279
-msgid "Searching for preferred drivers..."
-msgstr "Tražim podesne upravljačke programe..."
+#: ../panels/printers/cc-printers-panel.c:2321
+#| msgid "Searching for preferred drivers..."
+msgid "Searching for preferred drivers…"
+msgstr "Tražim podesne upravljačke programe…"
 
-#: ../panels/printers/cc-printers-panel.c:2294
-msgid "Select from database..."
-msgstr "Izaberi iz baze podataka..."
+#: ../panels/printers/cc-printers-panel.c:2336
+#| msgid "Select from database..."
+msgid "Select from database…"
+msgstr "Izaberi iz baze podataka…"
 
-#: ../panels/printers/cc-printers-panel.c:2303
-msgid "Provide PPD File..."
-msgstr "Priloži PPD datoteku..."
+#: ../panels/printers/cc-printers-panel.c:2345
+#| msgid "Provide PPD File..."
+msgid "Provide PPD File…"
+msgstr "Priloži PPD datoteku…"
 
 #. Translators: Name of job which makes printer to print test page
-#: ../panels/printers/cc-printers-panel.c:2454
-#: ../panels/printers/cc-printers-panel.c:2477
+#: ../panels/printers/cc-printers-panel.c:2496
+#: ../panels/printers/cc-printers-panel.c:2519
 msgid "Test page"
 msgstr "Probna stranica"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: ../panels/printers/cc-printers-panel.c:2880
+#: ../panels/printers/cc-printers-panel.c:2923
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Ne mogu da učitam sučelje: %s"
@@ -2847,7 +3370,7 @@ msgstr "Izmenite podešavanja štampača"
 #. Translators: those are keywords for the printing control-center panel
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
-msgstr "Štampač;Red;Štampa;Papir;Mastilo;Toner;"
+msgstr "štampač;red;štampa;papir;mastilo;toner;"
 
 #: ../panels/printers/jobs-dialog.ui.h:1
 #: ../panels/printers/options-dialog.ui.h:1
@@ -2857,6 +3380,7 @@ msgstr " "
 
 #: ../panels/printers/jobs-dialog.ui.h:2
 #: ../panels/printers/options-dialog.ui.h:4
+#: ../panels/user-accounts/data/history-dialog.ui.h:1
 msgid "Close"
 msgstr "Zatvori"
 
@@ -2879,7 +3403,7 @@ msgid "Cancel Print Job"
 msgstr "Otkaži posao štampanja"
 
 #: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1044
+#: ../panels/user-accounts/um-account-dialog.c:1068
 msgid "_Add"
 msgstr "_Dodaj"
 
@@ -2892,18 +3416,14 @@ msgid "Search for network printers or filter result"
 msgstr "Potražite štampače na mreži ili pročistite rezultat"
 
 #: ../panels/printers/options-dialog.ui.h:2
+#: ../panels/region/gnome-region-panel.ui.h:33
 msgid "Options"
 msgstr "Mogućnosti"
 
 #: ../panels/printers/options-dialog.ui.h:3
-msgid "Loading options..."
-msgstr "Učitavam opcije..."
-
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-#: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1043
-msgid "Cancel"
-msgstr "Otkaži"
+#| msgid "Loading options..."
+msgid "Loading options…"
+msgstr "Učitavam opcije…"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
 msgid "Loading drivers database..."
@@ -3008,7 +3528,7 @@ msgstr "Stanje posla"
 msgid "Time"
 msgstr "Vreme"
 
-#: ../panels/printers/pp-jobs-dialog.c:484
+#: ../panels/printers/pp-jobs-dialog.c:498
 #, c-format
 msgid "%s Active Jobs"
 msgstr "Aktivni poslovi %s"
@@ -3184,30 +3704,23 @@ msgstr "_Podrazumevano"
 msgid "Jobs"
 msgstr "Poslovi"
 
-#. Tanslators: Opens a dialog containing printer's jobs
+#. Translators: Opens a dialog containing printer's jobs
 #: ../panels/printers/printers.ui.h:11
-msgid "_Show"
-msgstr "_Prikaži"
+msgid "Show _Jobs"
+msgstr "Prikaži _poslove"
 
 #: ../panels/printers/printers.ui.h:12
 msgid "Model"
 msgstr "Mustra"
 
-#: ../panels/printers/printers.ui.h:14
-msgid "page 1"
-msgstr "strana 1"
-
 #: ../panels/printers/printers.ui.h:15
 msgid "label"
 msgstr "natpis"
 
-#: ../panels/printers/printers.ui.h:16
-msgid "page 2"
-msgstr "strana 2"
-
 #: ../panels/printers/printers.ui.h:17
-msgid "Setting new driver..."
-msgstr "Podešavam novi upravljački program..."
+#| msgid "Setting new driver..."
+msgid "Setting new driver…"
+msgstr "Podešavam novi upravljački program…"
 
 #: ../panels/printers/printers.ui.h:18
 msgid "page 3"
@@ -3237,6 +3750,199 @@ msgstr ""
 "Izgleda da nije dostupan pozadinski\n"
 "program za štampu."
 
+#: ../panels/privacy/cc-privacy-panel.c:104
+msgid "Hidden"
+msgstr "Skriven"
+
+#: ../panels/privacy/cc-privacy-panel.c:104
+#| msgid "Visibility"
+msgid "Visible"
+msgstr "Vidljiv"
+
+#: ../panels/privacy/cc-privacy-panel.c:270 ../panels/privacy/privacy.ui.h:32
+#| msgid "Screenshots"
+msgid "Screen Lock"
+msgstr "Zaključavanje ekrana"
+
+#: ../panels/privacy/cc-privacy-panel.c:337 ../panels/privacy/privacy.ui.h:9
+#| msgid "Visibility"
+msgid "Name & Visibility"
+msgstr "Naziv i vidljivost"
+
+#: ../panels/privacy/cc-privacy-panel.c:445 ../panels/privacy/privacy.ui.h:27
+msgid "Usage & History"
+msgstr "Upotreba i istorijat"
+
+#: ../panels/privacy/cc-privacy-panel.c:575 ../panels/privacy/privacy.ui.h:37
+msgid "Purge Trash & Temporary Files"
+msgstr "Očisti smeće i privremene datoteke"
+
+#: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:1
+msgid "Privacy"
+msgstr "Privatnost"
+
+#: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:2
+#| msgid "Your settings"
+msgid "Privacy settings"
+msgstr "Podešavanja privatnosti"
+
+#. Translators: those are keywords for the privacy control-center panel
+#: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:4
+msgid ""
+"screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
+"network;identity;"
+msgstr ""
+"ekran;zaključaj;dijagnoza;pad;urušavanje;lično;skorašnje;nedavno;privremen;prv;"
+"popis;naziv;mreža;identitet;"
+
+#: ../panels/privacy/privacy.ui.h:1
+#| msgid "Screen turns off"
+msgid "Screen Turns Off"
+msgstr "Ekran se isključuje"
+
+#: ../panels/privacy/privacy.ui.h:2
+msgid "30 seconds"
+msgstr "30 sekundi"
+
+# bug(danilo): plural-forms
+#: ../panels/privacy/privacy.ui.h:5
+msgid "3 minutes"
+msgstr "3 minuta"
+
+#: ../panels/privacy/privacy.ui.h:11
+msgid "Control how you appear on the screen and the network."
+msgstr "Upravljajte time kako izgledate na ekranu i na mreži."
+
+#: ../panels/privacy/privacy.ui.h:12
+msgid "Display _full name in top bar"
+msgstr "Prikaži _puno ime na gornjoj traci"
+
+#: ../panels/privacy/privacy.ui.h:13
+msgid "Display full name in _lock screen"
+msgstr "Prikaži puno ime u ekranu _zaključavanja"
+
+#: ../panels/privacy/privacy.ui.h:14
+#| msgid "Switch Modes"
+msgid "_Stealth Mode"
+msgstr ""
+
+#: ../panels/privacy/privacy.ui.h:15
+msgid "Immediately"
+msgstr "Odmah"
+
+#: ../panels/privacy/privacy.ui.h:16
+msgid "1 day"
+msgstr "1 dan"
+
+#: ../panels/privacy/privacy.ui.h:17
+msgid "2 days"
+msgstr "2 dana"
+
+#: ../panels/privacy/privacy.ui.h:18
+msgid "3 days"
+msgstr "3 dana"
+
+#: ../panels/privacy/privacy.ui.h:19
+msgid "4 days"
+msgstr "4 dana"
+
+#: ../panels/privacy/privacy.ui.h:20
+msgid "5 days"
+msgstr "5 dana"
+
+#: ../panels/privacy/privacy.ui.h:21
+msgid "6 days"
+msgstr "6 dana"
+
+#: ../panels/privacy/privacy.ui.h:22
+msgid "7 days"
+msgstr "7 dana"
+
+#: ../panels/privacy/privacy.ui.h:23
+msgid "14 days"
+msgstr "14 dana"
+
+#: ../panels/privacy/privacy.ui.h:24
+msgid "30 days"
+msgstr "30 dana"
+
+#: ../panels/privacy/privacy.ui.h:25
+msgid "Don't retain history"
+msgstr "Nemoj zadržati istorijat"
+
+#: ../panels/privacy/privacy.ui.h:26
+#| msgid "never"
+msgid "Forever"
+msgstr "Zauvek"
+
+#: ../panels/privacy/privacy.ui.h:28
+msgid ""
+"Remembering your history makes things easier to find again. These items are "
+"never shared over the network."
+msgstr ""
+"Pamćenje istorijata olakšava ponovno pronalaženje nekih stvari. Te stavke se "
+"nikada ne dele preko mreže."
+
+#: ../panels/privacy/privacy.ui.h:29
+msgid "Cl_ear Recent History"
+msgstr "Očisti _skorašnji istorijat"
+
+#: ../panels/privacy/privacy.ui.h:30
+msgid "_Recently Used"
+msgstr "_Skoro korišćeno"
+
+#: ../panels/privacy/privacy.ui.h:31
+msgid "Retain _History"
+msgstr "Zadrži _istorijat"
+
+#: ../panels/privacy/privacy.ui.h:33
+msgid "The Screen Lock protects your privacy when you are away."
+msgstr "Zaključavanje ekrana štiti vašu privatnost kada ste odsutni."
+
+#: ../panels/privacy/privacy.ui.h:34
+#| msgid "A_utomatic Login"
+msgid "Automatic Screen _Lock"
+msgstr "Samostalno _zaključavanje ekrana"
+
+#: ../panels/privacy/privacy.ui.h:35
+#| msgid "_Lock screen after:"
+msgid "Lock Screen _After"
+msgstr "_Zaključaj ekran nakon"
+
+#: ../panels/privacy/privacy.ui.h:36
+#| msgid "Show _notifications when locked"
+msgid "Show _Notifications"
+msgstr "Prikaži _obaveštenja"
+
+#: ../panels/privacy/privacy.ui.h:38
+msgid "_Empty Trash"
+msgstr "_Izbaci Smeće"
+
+#: ../panels/privacy/privacy.ui.h:39
+#| msgid "_Keep Files"
+msgid "_Purge Temporary Files"
+msgstr "_Pročisti privremene datoteke"
+
+#: ../panels/privacy/privacy.ui.h:40
+msgid ""
+"Automatically purge the Trash and temporary files to help keep your computer "
+"free of unnecessary sensitive information."
+msgstr ""
+"Samostalno će pročistiti smeće i privremene datoteke da bi vam pomogao da "
+"održite računar slobodnim od nepotrebnih osetljivih podataka."
+
+#: ../panels/privacy/privacy.ui.h:41
+msgid "Automatically Empty _Trash"
+msgstr "Sam izbaci _smeće"
+
+#: ../panels/privacy/privacy.ui.h:42
+msgid "Automatically Purge Temporary _Files"
+msgstr "Sam pročisti privremene _datoteke"
+
+#: ../panels/privacy/privacy.ui.h:43
+msgid "Purge _After"
+msgstr "Pročisti _nakon"
+
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:1
 msgid "Region & Language"
 msgstr "Region i jezik"
@@ -3247,8 +3953,9 @@ msgstr "Izmenite vaša podešavanja regiona i jezika"
 
 #. Translators: those are keywords for the region control-center panel
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
-msgid "Language;Layout;Keyboard;"
-msgstr "Jezik;Raspored;Tastatura;"
+#| msgid "Language;Layout;Keyboard;"
+msgid "Language;Layout;Keyboard;Input;"
+msgstr "jezik;raspored;tastatura;unos;"
 
 #: ../panels/region/gnome-region-panel-formats.c:142
 msgid "Imperial"
@@ -3259,14 +3966,16 @@ msgid "Metric"
 msgstr "Metrički"
 
 #: ../panels/region/gnome-region-panel-input-chooser.ui.h:1
-msgid "Choose an input source"
-msgstr "Izaberite izvor uvoza"
+#| msgid "Select an input source to add"
+msgid "Select an input source"
+msgstr "Izaberite izvor ulaza"
 
-#: ../panels/region/gnome-region-panel-input-chooser.ui.h:2
-msgid "Select an input source to add"
-msgstr "Izaberite izvor unosa za dodavanje"
+#: ../panels/region/gnome-region-panel-lang.c:116
+#: ../panels/region/gnome-region-panel.ui.h:4
+msgid "Log out for changes to take effect"
+msgstr "Odjavite se da bi izmene delovale"
 
-#: ../panels/region/gnome-region-panel-system.c:470
+#: ../panels/region/gnome-region-panel-system.c:471
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings."
@@ -3274,8 +3983,8 @@ msgstr ""
 "Ekran za prijavu, nalozi sistema i nalozi novih korisnika koriste sveopšta "
 "sistemska podešavanja regiona i jezika."
 
-#: ../panels/region/gnome-region-panel-system.c:475
-#: ../panels/region/gnome-region-panel.ui.h:31
+#: ../panels/region/gnome-region-panel-system.c:476
+#: ../panels/region/gnome-region-panel.ui.h:35
 msgid ""
 "The login screen, system accounts and new user accounts use the system-wide "
 "Region and Language settings. You may change the system settings to match "
@@ -3285,246 +3994,418 @@ msgstr ""
 "sistemska podešavanja regiona i jezika. Možete da izmenite podešavanja sistema "
 "da bi odgovarala vašim."
 
-#: ../panels/region/gnome-region-panel-system.c:478
+#: ../panels/region/gnome-region-panel-system.c:479
 msgid "Copy Settings"
 msgstr "Umnoži podešavanja"
 
-#: ../panels/region/gnome-region-panel-system.c:481
-#: ../panels/region/gnome-region-panel.ui.h:38
-msgid "Copy Settings..."
-msgstr "Umnoži podešavanja..."
+#: ../panels/region/gnome-region-panel-system.c:482
+#: ../panels/region/gnome-region-panel.ui.h:42
+#| msgid "Copy Settings"
+msgid "Copy Settings…"
+msgstr "Umnoži podešavanja…"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
 msgid "Region and Language"
 msgstr "Region i jezik"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
-msgid "Select a display language (change will be applied next time you log in)"
-msgstr ""
-"Izaberite jezik za prikaz (izmene će biti primenjene pri sledećem "
-"prijavljivanju)"
+#| msgid "Select a language"
+msgid "Select a display language"
+msgstr "Izaberite jezik za prikaz"
 
-#: ../panels/region/gnome-region-panel.ui.h:3
+#: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Add Language"
 msgstr "Dodaj jezik"
 
-#: ../panels/region/gnome-region-panel.ui.h:4
-msgid "Remove Language"
-msgstr "Ukloni jezik"
-
-#: ../panels/region/gnome-region-panel.ui.h:5
-msgid "Install languages..."
-msgstr "Instaliraj jezike..."
-
-#: ../panels/region/gnome-region-panel.ui.h:6
+#: ../panels/region/gnome-region-panel.ui.h:7
 msgid "Language"
 msgstr "Jezik"
 
-#: ../panels/region/gnome-region-panel.ui.h:7
+#: ../panels/region/gnome-region-panel.ui.h:8
 msgid "Select a region (change will be applied the next time you log in)"
 msgstr "Izaberite oblast (izmene će biti primenjene pri sledećem prijavljivanju)"
 
-#: ../panels/region/gnome-region-panel.ui.h:8
+#: ../panels/region/gnome-region-panel.ui.h:9
 msgid "Add Region"
 msgstr "Dodaj region"
 
-#: ../panels/region/gnome-region-panel.ui.h:9
+#: ../panels/region/gnome-region-panel.ui.h:10
 msgid "Remove Region"
 msgstr "Ukloni region"
 
-#: ../panels/region/gnome-region-panel.ui.h:10
+#: ../panels/region/gnome-region-panel.ui.h:11
 msgid "Dates"
 msgstr "Datumi"
 
-#: ../panels/region/gnome-region-panel.ui.h:11
+#: ../panels/region/gnome-region-panel.ui.h:12
 msgid "Times"
 msgstr "Vremena"
 
-#: ../panels/region/gnome-region-panel.ui.h:12
+#: ../panels/region/gnome-region-panel.ui.h:13
 msgid "Numbers"
 msgstr "Brojevi"
 
-#: ../panels/region/gnome-region-panel.ui.h:13
+#: ../panels/region/gnome-region-panel.ui.h:14
 msgid "Currency"
 msgstr "Valuta"
 
-#: ../panels/region/gnome-region-panel.ui.h:14
+#: ../panels/region/gnome-region-panel.ui.h:15
 msgid "Measurement"
 msgstr "Merenje"
 
-#: ../panels/region/gnome-region-panel.ui.h:15
+#: ../panels/region/gnome-region-panel.ui.h:16
 msgid "Examples"
 msgstr "Primeri"
 
-#: ../panels/region/gnome-region-panel.ui.h:16
+#: ../panels/region/gnome-region-panel.ui.h:17
 msgid "Formats"
 msgstr "Oblici"
 
-#: ../panels/region/gnome-region-panel.ui.h:17
+#: ../panels/region/gnome-region-panel.ui.h:18
 msgid "Select keyboards or other input sources"
 msgstr "Izaberite tastature ili druge izvore ulaza"
 
-#: ../panels/region/gnome-region-panel.ui.h:18
+#: ../panels/region/gnome-region-panel.ui.h:19
 msgid "Add Input Source"
 msgstr "Dodaj izvor ulaza"
 
-#: ../panels/region/gnome-region-panel.ui.h:19
+#: ../panels/region/gnome-region-panel.ui.h:20
 msgid "Remove Input Source"
 msgstr "Ukloni izvor ulaza"
 
-#: ../panels/region/gnome-region-panel.ui.h:20
+#: ../panels/region/gnome-region-panel.ui.h:21
 msgid "Move Input Source Up"
 msgstr "Pomeri izvor ulaza na gore"
 
-#: ../panels/region/gnome-region-panel.ui.h:21
+#: ../panels/region/gnome-region-panel.ui.h:22
 msgid "Move Input Source Down"
 msgstr "Pomeri izvor ulaza na dole"
 
-#: ../panels/region/gnome-region-panel.ui.h:22
+#: ../panels/region/gnome-region-panel.ui.h:23
 msgid "Input Source Settings"
 msgstr "Podešavanja izvora ulaza"
 
-#: ../panels/region/gnome-region-panel.ui.h:23
+#: ../panels/region/gnome-region-panel.ui.h:24
 msgid "Show Keyboard Layout"
 msgstr "Prikaži raspored tastature"
 
-#: ../panels/region/gnome-region-panel.ui.h:25
+#: ../panels/region/gnome-region-panel.ui.h:26
 msgid "Ctrl+Alt+Space"
 msgstr "Ktrl+Alt+Razmak"
 
-#: ../panels/region/gnome-region-panel.ui.h:27
+#: ../panels/region/gnome-region-panel.ui.h:28
 msgid "Ctrl+Alt+Shift+Space"
 msgstr "Ktrl+Alt+Šift+Razmak"
 
-#: ../panels/region/gnome-region-panel.ui.h:28
+#: ../panels/region/gnome-region-panel.ui.h:29
 msgid "Shortcut Settings"
 msgstr "Podešavanja prečica"
 
-#: ../panels/region/gnome-region-panel.ui.h:30
+#: ../panels/region/gnome-region-panel.ui.h:31
+msgid "Use the same source for all windows"
+msgstr "Koristi isti izvor za sve prozore"
+
+#: ../panels/region/gnome-region-panel.ui.h:32
+msgid "Allow different sources for each window"
+msgstr "Dopusti različite izvore za svaki prozor"
+
+#: ../panels/region/gnome-region-panel.ui.h:34
 msgid "Input Sources"
 msgstr "Izvori ulaza"
 
 #. 'display' means 'output' here, as in 'translated messages that are displayed to the user'
-#: ../panels/region/gnome-region-panel.ui.h:33
+#: ../panels/region/gnome-region-panel.ui.h:37
 msgid "Display language:"
 msgstr "Jezik prikaza:"
 
-#: ../panels/region/gnome-region-panel.ui.h:34
+#: ../panels/region/gnome-region-panel.ui.h:38
 msgid "Input source:"
 msgstr "Izvor ulaza:"
 
-#: ../panels/region/gnome-region-panel.ui.h:35
+#: ../panels/region/gnome-region-panel.ui.h:39
 msgid "Format:"
 msgstr "Oblik:"
 
-#: ../panels/region/gnome-region-panel.ui.h:36
+#: ../panels/region/gnome-region-panel.ui.h:40
 msgid "Your settings"
 msgstr "Vaša podešavanja"
 
-#: ../panels/region/gnome-region-panel.ui.h:37
+#: ../panels/region/gnome-region-panel.ui.h:41
 msgid "System settings"
 msgstr "Podešavanja sistema"
 
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:1
-msgid "Brightness & Lock"
-msgstr "Osvetljenost i zaključavanje"
+#: ../panels/search/cc-search-locations-dialog.c:275
+msgid "Home"
+msgstr "Lično"
 
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:2
-msgid "Screen brightness and lock settings"
-msgstr "Osvetljenost ekrana i podešavanja zaključavanja"
+#: ../panels/search/cc-search-locations-dialog.c:475
+msgid "Places"
+msgstr "Prečice"
 
-#. Translators: those are keywords for the brightness and lock control-center panel
-#: ../panels/screen/gnome-screen-panel.desktop.in.in.h:4
-msgid "Brightness;Lock;Dim;Blank;Monitor;"
-msgstr "Osvetljenje;Zaključaj;Zatamni;Prazno;Monitor;"
+#: ../panels/search/cc-search-locations-dialog.c:477
+msgid "Bookmarks"
+msgstr "Obeleživači"
 
-#: ../panels/screen/screen.ui.h:1
-msgid "Screen turns off"
-msgstr "Ekran se isključuje"
+#: ../panels/search/cc-search-locations-dialog.c:479
+#| msgid "Other..."
+msgid "Other"
+msgstr "Drugo"
 
-#: ../panels/screen/screen.ui.h:2
-msgid "30 seconds"
-msgstr "30 sekundi"
+#: ../panels/search/cc-search-locations-dialog.c:675
+#| msgid "Select a region"
+msgid "Select Location"
+msgstr "Izaberi mesto"
 
-#: ../panels/screen/screen.ui.h:3
-msgid "1 minute"
-msgstr "1 minut"
+#: ../panels/search/cc-search-panel.c:193
+#| msgid "No local printers found"
+msgid "No applications found"
+msgstr "Nisam pronašao programe"
 
-# bug(danilo): plural-forms
-#: ../panels/screen/screen.ui.h:4
-msgid "2 minutes"
-msgstr "2 minuta"
+#: ../panels/search/cc-search-panel.c:551
+#: ../panels/user-accounts/um-fingerprint-dialog.c:219
+#: ../panels/user-accounts/um-fingerprint-dialog.c:220
+msgid "Enabled"
+msgstr "Omogućeno"
 
-# bug(danilo): plural-forms
-#: ../panels/screen/screen.ui.h:5
-msgid "3 minutes"
-msgstr "3 minuta"
+#: ../panels/search/gnome-search-panel.desktop.in.in.h:1
+msgid "Search"
+msgstr "Pretraga"
 
-#: ../panels/screen/screen.ui.h:10
-msgid "_Dim screen to save power"
-msgstr "Za_tamni ekran da bi sačuvao energiju"
+#: ../panels/search/gnome-search-panel.desktop.in.in.h:2
+#| msgid "System settings"
+msgid "Search settings"
+msgstr ""
 
-#: ../panels/screen/screen.ui.h:11
-msgid "Brightness"
-msgstr "Osvetljenost"
+#. Translators: those are keywords for the search control-center panel
+#: ../panels/search/gnome-search-panel.desktop.in.in.h:4
+msgid "Search;Find;Index;Hide;Privacy;Results;"
+msgstr "nađi;traži;pronađi;potraži;popis;indeks;sakrij;privatnost;rezultati;"
 
-#: ../panels/screen/screen.ui.h:12
-msgid "_Turn screen off when inactive for:"
-msgstr "Kada je ekran neaktivan _isključi ga nakon:"
+#: ../panels/search/search-locations-dialog.ui.h:1
+#| msgid "Location"
+msgid "Search Locations"
+msgstr ""
 
-#: ../panels/screen/screen.ui.h:13
-msgid "_Lock screen after:"
-msgstr "_Zaključaj ekran nakon:"
+#: ../panels/search/search.ui.h:1
+msgid "Move Up"
+msgstr "Pomeri gore"
 
-#. To translators: This asks whether you want to lock the screen (through the screensaver) when you're detected to be physically in your home (your house, etc.)
-#: ../panels/screen/screen.ui.h:15
-msgid "Don't lock when at home"
-msgstr "Ne zaključavaj kada sam kod kuće"
+#: ../panels/search/search.ui.h:2
+#| msgid "Down"
+msgid "Move Down"
+msgstr "Pomeri dole"
 
-#: ../panels/screen/screen.ui.h:16
-msgid "Locations..."
-msgstr "Mesto..."
+#: ../panels/search/search.ui.h:3
+#| msgid "Mouse Preferences"
+msgid "Preferences"
+msgstr "Postavke"
 
-#: ../panels/screen/screen.ui.h:17
-msgid "Show _notifications when locked"
-msgstr "Prikaži _obaveštenja kada je zaključan"
+#: ../panels/sharing/cc-sharing-panel.c:200
+msgctxt "service is enabled"
+msgid "On"
+msgstr "Uklj."
 
-#: ../panels/screen/screen.ui.h:18
-msgid "Lock"
-msgstr "Zaključaj"
+#: ../panels/sharing/cc-sharing-panel.c:202
+msgctxt "service is disabled"
+msgid "Off"
+msgstr "Isklj."
 
-#: ../panels/sound/applet-main.c:49
-msgid "Enable debugging code"
-msgstr "Uključuje kod za ispravljanje grešaka"
+#: ../panels/sharing/cc-sharing-panel.c:310
+#| msgid "C_hoose an alert sound:"
+msgid "Choose a Folder"
+msgstr "Izaberite fasciklu"
 
-#: ../panels/sound/applet-main.c:50
-msgid "Version of this application"
-msgstr "Izdanje ovog programa"
+#: ../panels/sharing/cc-sharing-panel.c:488
+msgid "Copy"
+msgstr "Umnožavanje"
 
-#: ../panels/sound/applet-main.c:62
-msgid " — GNOME Volume Control Applet"
-msgstr " — Gnomovo programče za upravljanje jačinom zvuka"
+#: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:1
+#| msgid "Hearing"
+msgid "Sharing"
+msgstr "Deljenje"
 
-#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:1
-msgid "Volume Control"
-msgstr "Upravljanje jačinom zvuka"
+#. Translators: those are keywords for the sharing control-center panel
+#: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:3
+msgid ""
+"share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
+"pictures;photos;movies;server;renderer;"
+msgstr ""
+"deli;deljenje;ssh;bezbedna školjka;domaćin;naziv;udaljeno;radna površ;blutut;obe"
+"ks;medija;zvuk;audio;snimak;video;slike;fotografije;filmovi;server;iscrtavač"
+";"
 
-#: ../panels/sound/data/gnome-sound-applet.desktop.in.h:2
-msgid "Show desktop volume control"
-msgstr "Prikaži kontrolu jačine zvuka radne površi"
+#: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
+#| msgid "Enable h_orizontal scrolling"
+msgid "Enable or disable remote login"
+msgstr "Uključite ili isključite udaljeno prijavljivanje"
+
+#: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:2
+#| msgid "Authentication is required to change user data"
+msgid "Authentication is required to enable or disable remote login"
+msgstr ""
+"Potrebno je potvrđivanje identiteta za uključivanje ili isključivanje udaljenog "
+"prijavljivanja"
+
+#: ../panels/sharing/sharing.ui.h:1
+#| msgid "Bluetooth Settings"
+msgid "Bluetooth Sharing"
+msgstr "Deljenje Blututa"
+
+#: ../panels/sharing/sharing.ui.h:2
+msgid ""
+"Bluetooth Sharing allows you to share files with other Bluetooth enabled "
+"devices"
+msgstr ""
+"Deljenje blututa vam omogućava da delite datoteke sa drugim uključenim blutut "
+"uređajima"
+
+#: ../panels/sharing/sharing.ui.h:3
+msgid "<b>Share Public Folder</b>"
+msgstr "<b>Deli javnu fasciklu</b>"
+
+#: ../panels/sharing/sharing.ui.h:4
+msgid "Only Receive From Trusted Devices"
+msgstr "Samo primaj sa poverljivih uređaja"
+
+#: ../panels/sharing/sharing.ui.h:5
+msgid "<b>Save Received Files to Downloads Folder</b>"
+msgstr "<b>Sačuvaj primljene datoteke u fasciklu preuzimanja</b>"
+
+#: ../panels/sharing/sharing.ui.h:6
+msgid "Only share with Trusted Devices"
+msgstr "Samo deli sa poverljivim uređajima"
+
+#: ../panels/sharing/sharing.ui.h:7
+msgid "<b>Computer Name</b>"
+msgstr "<b>Naziv računara</b>"
+
+#: ../panels/sharing/sharing.ui.h:8
+msgid "Some services are disabled because of no network access."
+msgstr "Neke usluge su isključene jer nema pristupa na mrežu."
+
+#: ../panels/sharing/sharing.ui.h:9
+#| msgid "Media player"
+msgid "Media Sharing"
+msgstr "Deljenje medija"
+
+#: ../panels/sharing/sharing.ui.h:10
+msgid "Share Music, Photos and Videos with others on the current network."
+msgstr "Delite muziku, fotografije i snimke sa drugima na tekućoj mreži."
+
+#: ../panels/sharing/sharing.ui.h:11
+msgid "<b>Share Media On This Network</b>"
+msgstr "<b>Deli medije na ovoj mreži</b>"
+
+#: ../panels/sharing/sharing.ui.h:12
+#| msgid "Pictures Folder"
+msgid "Shared Folders"
+msgstr "Deljene fascikle"
+
+#: ../panels/sharing/sharing.ui.h:13
+msgid "column"
+msgstr "kolona"
+
+#: ../panels/sharing/sharing.ui.h:14
+#| msgid "Add profile"
+msgid "Add Folder"
+msgstr "Dodaj fasciklu"
+
+#: ../panels/sharing/sharing.ui.h:15
+#| msgid "Remove User"
+msgid "Remove Folder"
+msgstr "Ukloni fasciklu"
+
+#: ../panels/sharing/sharing.ui.h:16
+#| msgid "Personal digital assistant"
+msgid "Personal File Sharing"
+msgstr "Deljenje ličnih datoteka"
+
+#: ../panels/sharing/sharing.ui.h:18
+#, no-c-format
+msgid ""
+"Personal File Sharing allows you to share your Public folder with others on "
+"your current network using: <a href=\"dav://%s\">dav://%s</a>"
+msgstr ""
+"Deljenje ličnih datoteka vam omogućava da delite vašu javnu fasciklu sa "
+"drugima na vašoj tekućoj mreži koristeći: <a href=\"dav://%s\">dav://%s</a>"
+
+#: ../panels/sharing/sharing.ui.h:19
+msgid "<b>Share Public Folder On This Network</b>"
+msgstr "<b>Deli javnu fasciklu na ovoj mreži</b>"
+
+#: ../panels/sharing/sharing.ui.h:20
+#| msgid "Group Password"
+msgid "Require Password"
+msgstr "Zahteva lozinku"
+
+#: ../panels/sharing/sharing.ui.h:21
+#| msgid "_Password"
+msgid "Password"
+msgstr "Lozinka"
+
+#: ../panels/sharing/sharing.ui.h:22
+#| msgid "Remove Region"
+msgid "Remote Login"
+msgstr "Udaljeno prijavljivanje"
+
+#: ../panels/sharing/sharing.ui.h:24
+#, no-c-format
+msgid ""
+"Allow remote users to connect using the Secure Shell command:\n"
+"<a href=\"ssh %s\">ssh %s</a>"
+msgstr ""
+"Omogućava korisnicima da se povežu koristeći naredbu bezbedne školjke:\n"
+"<a href=\"ssh %s\">ssh %s</a>"
+
+#: ../panels/sharing/sharing.ui.h:26
+msgid "<b>Remote Login</b>"
+msgstr "<b>Udaljeno prijavljivanje</b>"
+
+#: ../panels/sharing/sharing.ui.h:27
+#| msgid "Screen part:"
+msgid "Screen Sharing"
+msgstr "Deljenje ekrana"
+
+#: ../panels/sharing/sharing.ui.h:29
+#, no-c-format
+msgid ""
+"Allow remote users to view or control your screen by connecting to: <a href="
+"\"vnc://%s\">vnc://%s</a>"
+msgstr ""
+"Omogućava udaljenim korisnicima da vide ili da upravljaju vašim ekranom tako "
+"što će se povezati na: <a href=\"vnc://%s\">vnc://%s</a>"
+
+#: ../panels/sharing/sharing.ui.h:30
+msgid "<b>Remote View</b>"
+msgstr "<b>Udaljeni pregled</b>"
+
+#: ../panels/sharing/sharing.ui.h:31
+msgid "<b>Remote Control</b>"
+msgstr "<b>Udaljeno upravljanje</b>"
+
+#: ../panels/sharing/sharing.ui.h:32
+#| msgid "Connection"
+msgid "Approve All Connections"
+msgstr "Odobri sve veze"
+
+#: ../panels/sharing/sharing.ui.h:33
+#| msgid "_Show password"
+msgid "Show Password"
+msgstr "Prikaži lozinku"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:1
 msgid "Sound"
 msgstr "Zvuk"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:2
-msgid "Change sound volume and sound events"
-msgstr "Izmenite jačinu zvuka i događaje zvuka"
+#| msgid "Change sound volume and sound events"
+msgid "Change sound volume and event sounds"
+msgstr "Izmenite jačinu zvuka i zvuke događaja"
 
 #. Translators: those are keywords for the sound control-center panel
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:4
 msgid "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;"
-msgstr "Kartica;Mikrofon;Jačina zvuka;Iščezavanje;Balans;Blutut;Slušalice;Zvuk;"
+msgstr "kartica;mikrofon;jačina zvuka;iščezavanje;balans;blutut;slušalice;zvuk;"
 
 #. Translators: This is the name of an audio file that sounds like the bark of a dog.
 #. You might want to translate it into the equivalent words of your language.
@@ -3550,61 +4431,45 @@ msgstr "Staklo"
 msgid "Sonar"
 msgstr "Sonar"
 
-#: ../panels/sound/gvc-applet.c:270 ../panels/sound/gvc-mixer-dialog.c:1656
-msgid "Output"
-msgstr "Izlaz"
-
-#: ../panels/sound/gvc-applet.c:272
-msgid "Sound Output Volume"
-msgstr "Jačina zvuka na izlazu"
-
-#: ../panels/sound/gvc-applet.c:276 ../panels/sound/gvc-mixer-dialog.c:1697
-msgid "Input"
-msgstr "Ulaz"
-
-#: ../panels/sound/gvc-applet.c:278
-msgid "Microphone Volume"
-msgstr "Jačina zvuka u mikrofonu"
-
-#: ../panels/sound/gvc-balance-bar.c:111
+#: ../panels/sound/gvc-balance-bar.c:106
 msgctxt "balance"
 msgid "Left"
 msgstr "Levo"
 
-#: ../panels/sound/gvc-balance-bar.c:112
+#: ../panels/sound/gvc-balance-bar.c:107
 msgctxt "balance"
 msgid "Right"
 msgstr "Desno"
 
-#: ../panels/sound/gvc-balance-bar.c:115
+#: ../panels/sound/gvc-balance-bar.c:110
 msgctxt "balance"
 msgid "Rear"
 msgstr "Iza"
 
-#: ../panels/sound/gvc-balance-bar.c:116
+#: ../panels/sound/gvc-balance-bar.c:111
 msgctxt "balance"
 msgid "Front"
 msgstr "Ispred"
 
-#: ../panels/sound/gvc-balance-bar.c:119
+#: ../panels/sound/gvc-balance-bar.c:114
 msgctxt "balance"
 msgid "Minimum"
 msgstr "Najmanje"
 
-#: ../panels/sound/gvc-balance-bar.c:120
+#: ../panels/sound/gvc-balance-bar.c:115
 msgctxt "balance"
 msgid "Maximum"
 msgstr "Najviše"
 
-#: ../panels/sound/gvc-balance-bar.c:295
+#: ../panels/sound/gvc-balance-bar.c:290
 msgid "_Balance:"
 msgstr "_Uravnoteženost:"
 
-#: ../panels/sound/gvc-balance-bar.c:298
+#: ../panels/sound/gvc-balance-bar.c:293
 msgid "_Fade:"
 msgstr "_Iščezavanje:"
 
-#: ../panels/sound/gvc-balance-bar.c:301
+#: ../panels/sound/gvc-balance-bar.c:296
 msgid "_Subwoofer:"
 msgstr "_Subvufer:"
 
@@ -3619,13 +4484,13 @@ msgid "Unamplified"
 msgstr "Bez pojačanja"
 
 #: ../panels/sound/gvc-combo-box.c:167 ../panels/sound/gvc-mixer-dialog.c:260
-#: ../panels/sound/gvc-mixer-dialog.c:521
+#: ../panels/sound/gvc-mixer-dialog.c:526
 msgid "_Profile:"
 msgstr "_Profil:"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1841
+#: ../panels/sound/gvc/gvc-mixer-control.c:1835
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -3636,7 +4501,7 @@ msgstr[3] "Jedan izlaz"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc-mixer-control.c:1851
+#: ../panels/sound/gvc/gvc-mixer-control.c:1845
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
@@ -3645,7 +4510,7 @@ msgstr[1] "%u ulaza"
 msgstr[2] "%u ulaza"
 msgstr[3] "Jedan ulaz"
 
-#: ../panels/sound/gvc-mixer-control.c:2375
+#: ../panels/sound/gvc/gvc-mixer-control.c:2369
 msgid "System Sounds"
 msgstr "Sistemski zvuci"
 
@@ -3653,57 +4518,69 @@ msgstr "Sistemski zvuci"
 msgid "_Test Speakers"
 msgstr "_Proveri zvučnike"
 
-#: ../panels/sound/gvc-mixer-dialog.c:426
+#: ../panels/sound/gvc-mixer-dialog.c:431
 msgid "Peak detect"
 msgstr "Otkrivanje vrhunca"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1506
+#: ../panels/sound/gvc-mixer-dialog.c:1511
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "Naziv"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1588
+#: ../panels/sound/gvc-mixer-dialog.c:1530
+msgid "Device"
+msgstr "Uređaj"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1593
 #, c-format
 msgid "Speaker Testing for %s"
 msgstr "Provera zvučnika za „%s“"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1642
+#: ../panels/sound/gvc-mixer-dialog.c:1647
 msgid "_Output volume:"
 msgstr "Jačina _izlaznog zvuka:"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1661
+msgid "Output"
+msgstr "Izlaz"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1666
 msgid "C_hoose a device for sound output:"
 msgstr "Izaberite uređaj kao zvučni i_zlaz:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1686
+#: ../panels/sound/gvc-mixer-dialog.c:1691
 msgid "Settings for the selected device:"
 msgstr "Podešavanja za izabrani uređaj:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1704
+#: ../panels/sound/gvc-mixer-dialog.c:1702
+msgid "Input"
+msgstr "Ulaz"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1709
 msgid "_Input volume:"
 msgstr "Jačina _ulaznog zvuka:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1727
+#: ../panels/sound/gvc-mixer-dialog.c:1732
 msgid "Input level:"
 msgstr "Nivo ulaza:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1755
+#: ../panels/sound/gvc-mixer-dialog.c:1760
 msgid "C_hoose a device for sound input:"
 msgstr "Izaberite uređaj kao zvučni u_laz:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1782
+#: ../panels/sound/gvc-mixer-dialog.c:1787
 msgid "Sound Effects"
 msgstr "Zvučni efekti"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1789
+#: ../panels/sound/gvc-mixer-dialog.c:1794
 msgid "_Alert volume:"
 msgstr "Jačina zvuka _upozorenja:"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1802
+#: ../panels/sound/gvc-mixer-dialog.c:1807
 msgid "Applications"
 msgstr "Programi"
 
-#: ../panels/sound/gvc-mixer-dialog.c:1806
+#: ../panels/sound/gvc-mixer-dialog.c:1811
 msgid "No application is currently playing or recording audio."
 msgstr "Nijedan program trenutno ne reprodukuje ili snima zvuk."
 
@@ -3748,29 +4625,12 @@ msgstr "Proveri"
 msgid "Subwoofer"
 msgstr "Subvufer"
 
-#: ../panels/sound/gvc-stream-status-icon.c:236
-#, c-format
-msgid "Failed to start Sound Preferences: %s"
-msgstr "Nisam uspeo da pokrenem podešavanja zvuka: %s"
-
-#: ../panels/sound/gvc-stream-status-icon.c:262
-msgid "_Mute"
-msgstr "Uti_šaj"
-
-#: ../panels/sound/gvc-stream-status-icon.c:271
-msgid "_Sound Preferences"
-msgstr "Podešavanja _zvuka"
-
-#: ../panels/sound/gvc-stream-status-icon.c:416
-msgid "Muted"
-msgstr "Utišan"
-
 #: ../panels/sound/sound-theme-file-utils.c:292
 msgid "Custom"
 msgstr "Proizvoljno"
 
-#: ../panels/universal-access/cc-ua-panel.c:286
-#: ../panels/universal-access/cc-ua-panel.c:292
+#: ../panels/universal-access/cc-ua-panel.c:281
+#: ../panels/universal-access/cc-ua-panel.c:287
 msgid "No shortcut set"
 msgstr "Prečica nije podešena"
 
@@ -3784,11 +4644,12 @@ msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Zoom;Screen Reader;text;font;size;"
 "AccessX;Sticky Keys;Slow Keys;Bounce Keys;Mouse Keys;"
 msgstr ""
-"Tastatura;Miš;a11y;Pristupačnost;Kontrast;Zum;Čitač ekrana;tekst;slovni lik;"
-"veličina;Pristup Iksu;Lepljivi tasteri;Spori tasteri;Odskočni tasteri;Tasteri "
-"miša;"
+"tastatura;miš;a11y;pristupačnost;kontrast;zum;čitač ekrana;tekst;slovni "
+"lik;veličina;pristup iksu;lepljivi tasteri;spori tasteri;odskočni "
+"tasteri;tasteri miša;"
 
 #: ../panels/universal-access/uap.ui.h:1
+#: ../panels/universal-access/zoom-options.ui.h:33
 msgctxt "universal access, contrast"
 msgid "Low"
 msgstr "Nizak"
@@ -3799,6 +4660,7 @@ msgid "Normal"
 msgstr "Normalan"
 
 #: ../panels/universal-access/uap.ui.h:3
+#: ../panels/universal-access/zoom-options.ui.h:34
 msgctxt "universal access, contrast"
 msgid "High"
 msgstr "Visok"
@@ -3873,8 +4735,9 @@ msgid "Beep on Caps and Num Lock"
 msgstr "Zapišti pri zaključavanju velikih slova i brojeva"
 
 #: ../panels/universal-access/uap.ui.h:23
-msgid "Options..."
-msgstr "Opcije..."
+#| msgid "Options"
+msgid "Options…"
+msgstr "Mogućnosti…"
 
 #: ../panels/universal-access/uap.ui.h:24
 msgid "Screen Reader"
@@ -3969,117 +4832,131 @@ msgstr "Ubacuje kašnjenje između pritiska tastera i njegovog prihvatanja"
 msgid "A_cceptance delay:"
 msgstr "_Kašnjenje prihvatanja:"
 
-#: ../panels/universal-access/uap.ui.h:50
+#: ../panels/universal-access/uap.ui.h:48
+#| msgid "Short"
+msgctxt "universal access, delay"
+msgid "Short"
+msgstr "Kratak"
+
+#: ../panels/universal-access/uap.ui.h:49
 msgid "Slow keys typing delay"
 msgstr "Zastoj kucanja sporih tastera"
 
+#: ../panels/universal-access/uap.ui.h:50
+#| msgid "Long"
+msgctxt "universal access, delay"
+msgid "Long"
+msgstr "Dug"
+
 #. This string is part of a line of checkboxes: Beep when a key is [ ] pressed  [ ] accepted  [ ] rejected
-#: ../panels/universal-access/uap.ui.h:54
+#: ../panels/universal-access/uap.ui.h:52
 msgid "Beep when a key is"
 msgstr "Zapišti kada je taster"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:56
+#: ../panels/universal-access/uap.ui.h:54
 msgid "pressed"
 msgstr "pritisnut"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:58
+#: ../panels/universal-access/uap.ui.h:56
 msgid "accepted"
 msgstr "prihvaćen"
 
 #. This completes the sentence "Beep when a key is"
-#: ../panels/universal-access/uap.ui.h:60
+#: ../panels/universal-access/uap.ui.h:58
 msgid "rejected"
 msgstr "odbijen"
 
-#: ../panels/universal-access/uap.ui.h:61
+#: ../panels/universal-access/uap.ui.h:59
 msgid "Bounce Keys"
 msgstr "Odskočni tasteri"
 
-#: ../panels/universal-access/uap.ui.h:62
+#: ../panels/universal-access/uap.ui.h:60
 msgid "Ignores fast duplicate keypresses"
 msgstr "Zanemaruje uzastopne dvostruke pritiske na taster"
 
-#: ../panels/universal-access/uap.ui.h:63
+#: ../panels/universal-access/uap.ui.h:61
 msgid "Acc_eptance delay:"
 msgstr "Zastoj _prihvatanja:"
 
-#: ../panels/universal-access/uap.ui.h:64
+#: ../panels/universal-access/uap.ui.h:62
 msgid "Bounce keys typing delay"
 msgstr "Zastoj kucanja odskočnih tastera"
 
-#: ../panels/universal-access/uap.ui.h:65
+#: ../panels/universal-access/uap.ui.h:63
 msgid "Beep when a key is _rejected"
 msgstr "Zapišti kada taster nije p_rihvaćen"
 
-#: ../panels/universal-access/uap.ui.h:66
+#: ../panels/universal-access/uap.ui.h:64
 msgid "Enable by Keyboard"
 msgstr "Uključi tastaturom"
 
-#: ../panels/universal-access/uap.ui.h:67
+#: ../panels/universal-access/uap.ui.h:65
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "Uključite/isključite funkcije pristupačnosti koristeći tastaturu"
 
-#: ../panels/universal-access/uap.ui.h:69
+#: ../panels/universal-access/uap.ui.h:67
 msgid "Mouse Keys"
 msgstr "Tasteri miša"
 
-#: ../panels/universal-access/uap.ui.h:70
+#: ../panels/universal-access/uap.ui.h:68
 msgid "Control the pointer using the keypad"
 msgstr "Kontroliši pokazivač koristeći tastaturu"
 
-#: ../panels/universal-access/uap.ui.h:71
+#: ../panels/universal-access/uap.ui.h:69
 msgid "Video Mouse"
 msgstr "Video miš"
 
-#: ../panels/universal-access/uap.ui.h:72
+#: ../panels/universal-access/uap.ui.h:70
 msgid "Control the pointer using the video camera."
 msgstr "Kontroliši pokazivač koristeći video kameru."
 
-#: ../panels/universal-access/uap.ui.h:73
+#: ../panels/universal-access/uap.ui.h:71
 msgid "Simulated Secondary Click"
 msgstr "Simulacija sekundarnog klika"
 
-#: ../panels/universal-access/uap.ui.h:74
+#: ../panels/universal-access/uap.ui.h:72
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Uključi/isključi sekundarni klik držeći pritisnut primarni taster"
 
-#: ../panels/universal-access/uap.ui.h:75
+#: ../panels/universal-access/uap.ui.h:73
 msgid "Secondary click delay"
 msgstr "Zastoj sekundarnog klika"
 
-#: ../panels/universal-access/uap.ui.h:76
+#: ../panels/universal-access/uap.ui.h:74
 msgid "Hover Click"
 msgstr "Klik lebdenja"
 
-#: ../panels/universal-access/uap.ui.h:77
+#: ../panels/universal-access/uap.ui.h:75
 msgid "Trigger a click when the pointer hovers"
 msgstr "Uključi/isključi klik kada pokazivač lebdi"
 
-#: ../panels/universal-access/uap.ui.h:78
+#: ../panels/universal-access/uap.ui.h:76
 msgid "D_elay:"
 msgstr "_Zastoj:"
 
-#: ../panels/universal-access/uap.ui.h:79
+#: ../panels/universal-access/uap.ui.h:77
 msgid "Motion _threshold:"
 msgstr "_Osetljivost na pokret:"
 
-#. small threshold
-#: ../panels/universal-access/uap.ui.h:81
+#: ../panels/universal-access/uap.ui.h:78
+#| msgid "Small"
+msgctxt "universal access, threshold"
 msgid "Small"
 msgstr "Mala"
 
-#. large threshold
-#: ../panels/universal-access/uap.ui.h:83
+#: ../panels/universal-access/uap.ui.h:79
+#| msgid "Large"
+msgctxt "universal access, threshold"
 msgid "Large"
 msgstr "Velika"
 
-#: ../panels/universal-access/uap.ui.h:84
+#: ../panels/universal-access/uap.ui.h:80
 msgid "Mouse Settings"
 msgstr "Podešavanja miša"
 
-#: ../panels/universal-access/uap.ui.h:85
+#: ../panels/universal-access/uap.ui.h:81
 msgid "Pointing and Clicking"
 msgstr "Ukazivanje i klikanje"
 
@@ -4176,78 +5053,80 @@ msgstr "Lupa"
 msgid "Thickness:"
 msgstr "Debljina:"
 
-#. short delay
-#: ../panels/universal-access/zoom-options.ui.h:19
+#: ../panels/universal-access/zoom-options.ui.h:18
+#| msgid "Thin"
+msgctxt "universal access, thickness"
 msgid "Thin"
 msgstr "Tanko"
 
-#. long delay
-#: ../panels/universal-access/zoom-options.ui.h:21
+#: ../panels/universal-access/zoom-options.ui.h:19
+#| msgid "Thick"
+msgctxt "universal access, thickness"
 msgid "Thick"
 msgstr "Debelo"
 
-#: ../panels/universal-access/zoom-options.ui.h:22
+#: ../panels/universal-access/zoom-options.ui.h:20
 msgid "Length:"
 msgstr "Trajanje:"
 
-#: ../panels/universal-access/zoom-options.ui.h:23
+#: ../panels/universal-access/zoom-options.ui.h:21
 msgid "Color:"
 msgstr "Boja:"
 
-#: ../panels/universal-access/zoom-options.ui.h:24
+#: ../panels/universal-access/zoom-options.ui.h:22
 msgid "Crosshairs:"
 msgstr "Ukrštanje:"
 
-#: ../panels/universal-access/zoom-options.ui.h:25
+#: ../panels/universal-access/zoom-options.ui.h:23
 msgid "Overlaps mouse cursor"
 msgstr "Preklopi kursor miša"
 
-#: ../panels/universal-access/zoom-options.ui.h:26
+#: ../panels/universal-access/zoom-options.ui.h:24
 msgid "Crosshairs"
 msgstr "Ukrštanje"
 
-#: ../panels/universal-access/zoom-options.ui.h:27
+#: ../panels/universal-access/zoom-options.ui.h:25
 msgid "White on black:"
 msgstr "Bela na crnoj:"
 
-#: ../panels/universal-access/zoom-options.ui.h:28
+#: ../panels/universal-access/zoom-options.ui.h:26
 msgid "Brightness:"
 msgstr "Osvetljenje:"
 
-#: ../panels/universal-access/zoom-options.ui.h:29
+#: ../panels/universal-access/zoom-options.ui.h:27
 msgid "Contrast:"
 msgstr "Kontrast:"
 
-#: ../panels/universal-access/zoom-options.ui.h:30
-msgctxt "Zoom Grayscale"
-msgid "Color"
-msgstr "Boja"
-
-#: ../panels/universal-access/zoom-options.ui.h:31
-msgctxt "Zoom Grayscale"
+#: ../panels/universal-access/zoom-options.ui.h:29
+#| msgid "None"
+msgctxt "universal access, color"
 msgid "None"
 msgstr "Ništa"
 
-#: ../panels/universal-access/zoom-options.ui.h:32
-msgctxt "Zoom Grayscale"
+#: ../panels/universal-access/zoom-options.ui.h:30
+#| msgctxt "Zoom Grayscale"
+#| msgid "Full"
+msgctxt "universal access, color"
 msgid "Full"
-msgstr "Normalan"
+msgstr "Pun"
 
-#. short delay
-#: ../panels/universal-access/zoom-options.ui.h:34
+#: ../panels/universal-access/zoom-options.ui.h:31
+#| msgid "Low"
+msgctxt "universal access, brightness"
 msgid "Low"
 msgstr "Nizak"
 
-#. long delay
-#: ../panels/universal-access/zoom-options.ui.h:36
+#: ../panels/universal-access/zoom-options.ui.h:32
+#| msgid "High"
+msgctxt "universal access, brightness"
 msgid "High"
 msgstr "Visok"
 
-#: ../panels/universal-access/zoom-options.ui.h:37
+#: ../panels/universal-access/zoom-options.ui.h:35
 msgid "Color Effects:"
 msgstr "Dejstva boje:"
 
-#: ../panels/universal-access/zoom-options.ui.h:38
+#: ../panels/universal-access/zoom-options.ui.h:36
 msgid "Color Effects"
 msgstr "Dejstva boje"
 
@@ -4366,7 +5245,7 @@ msgid "Right little finger"
 msgstr "Desni, mali prst"
 
 #: ../panels/user-accounts/data/account-fingerprint.ui.h:9
-#: ../panels/user-accounts/um-fingerprint-dialog.c:706
+#: ../panels/user-accounts/um-fingerprint-dialog.c:700
 msgid "Enable Fingerprint Login"
 msgstr "Omogući prijavljivanje otiskom prsta"
 
@@ -4391,8 +5270,9 @@ msgstr ""
 "preko čitača otisaka prstiju."
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
-msgid "User Accounts"
-msgstr "Korisnički nalozi"
+#| msgid "Username"
+msgid "Users"
+msgstr "Korisnici"
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:2
 msgid "Add or remove users"
@@ -4539,6 +5419,15 @@ msgstr "Ikonica korisnika"
 msgid "_Language"
 msgstr "_Jezik"
 
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
+#| msgid "A_utomatic Login"
+msgid "Last Login"
+msgstr "Poslednje prijavljivanje"
+
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
+msgid "History"
+msgstr "Istorijat"
+
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
 msgstr "Upravljajte korisničkim nalozima"
@@ -4548,7 +5437,7 @@ msgid "Authentication is required to change user data"
 msgstr "Potrebno je potvrđivanje identiteta za promenu korisničkih podataka"
 
 #: ../panels/user-accounts/pw-utils.c:94
-#: ../panels/user-accounts/um-password-dialog.c:569
+#: ../panels/user-accounts/um-password-dialog.c:601
 msgctxt "Password strength"
 msgid "Too short"
 msgstr "Prekratka"
@@ -4559,25 +5448,25 @@ msgid "Not good enough"
 msgstr "Nije dovoljno dobra"
 
 #: ../panels/user-accounts/pw-utils.c:108
-#: ../panels/user-accounts/um-password-dialog.c:570
+#: ../panels/user-accounts/um-password-dialog.c:602
 msgctxt "Password strength"
 msgid "Weak"
 msgstr "Slaba"
 
 #: ../panels/user-accounts/pw-utils.c:111
-#: ../panels/user-accounts/um-password-dialog.c:571
+#: ../panels/user-accounts/um-password-dialog.c:603
 msgctxt "Password strength"
 msgid "Fair"
 msgstr "Solidna"
 
 #: ../panels/user-accounts/pw-utils.c:114
-#: ../panels/user-accounts/um-password-dialog.c:572
+#: ../panels/user-accounts/um-password-dialog.c:604
 msgctxt "Password strength"
 msgid "Good"
 msgstr "Dobra"
 
 #: ../panels/user-accounts/pw-utils.c:117
-#: ../panels/user-accounts/um-password-dialog.c:573
+#: ../panels/user-accounts/um-password-dialog.c:605
 msgctxt "Password strength"
 msgid "Strong"
 msgstr "Jaka"
@@ -4587,7 +5476,7 @@ msgid "Authentication failed"
 msgstr "Potvrđivanje identiteta nije uspelo"
 
 #: ../panels/user-accounts/run-passwd.c:504
-#: ../panels/user-accounts/um-password-dialog.c:239
+#: ../panels/user-accounts/um-password-dialog.c:273
 #, c-format
 msgid "The new password is too short"
 msgstr "Nova lozinka je previše kratka"
@@ -4632,24 +5521,24 @@ msgstr "Nova lozinka ne sadrži dovoljno različitih znakova"
 msgid "Unknown error"
 msgstr "Nepoznata greška"
 
-#: ../panels/user-accounts/um-account-dialog.c:180
+#: ../panels/user-accounts/um-account-dialog.c:182
 msgid "Failed to add account"
 msgstr "Nisam uspeo da dodam nalog"
 
-#: ../panels/user-accounts/um-account-dialog.c:378
-#: ../panels/user-accounts/um-account-dialog.c:419
+#: ../panels/user-accounts/um-account-dialog.c:403
+#: ../panels/user-accounts/um-account-dialog.c:444
 msgid "Failed to register account"
 msgstr "Nisam uspeo da upišem nalog"
 
-#: ../panels/user-accounts/um-account-dialog.c:551
+#: ../panels/user-accounts/um-account-dialog.c:577
 msgid "No supported way to authenticate with this domain"
 msgstr "Nema podržanog načina za potvrđivanje identiteta sa ovim domenom"
 
-#: ../panels/user-accounts/um-account-dialog.c:605
+#: ../panels/user-accounts/um-account-dialog.c:631
 msgid "Failed to join domain"
 msgstr "Nisam uspeo da pristupim domenu"
 
-#: ../panels/user-accounts/um-account-dialog.c:662
+#: ../panels/user-accounts/um-account-dialog.c:688
 msgid "Failed to log into domain"
 msgstr "Nisam uspeo da se prijavim na domen"
 
@@ -4667,11 +5556,6 @@ msgstr "Uređaj je već u upotrebi."
 #: ../panels/user-accounts/um-fingerprint-dialog.c:143
 msgid "An internal error occurred."
 msgstr "Došlo je do greške unutar programa."
-
-#: ../panels/user-accounts/um-fingerprint-dialog.c:219
-#: ../panels/user-accounts/um-fingerprint-dialog.c:220
-msgid "Enabled"
-msgstr "Omogućeno"
 
 #: ../panels/user-accounts/um-fingerprint-dialog.c:268
 msgid "Delete registered fingerprints?"
@@ -4705,16 +5589,16 @@ msgstr "Ne mogu da pristupim uređaju „%s“"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: ../panels/user-accounts/um-fingerprint-dialog.c:603
+#: ../panels/user-accounts/um-fingerprint-dialog.c:599
 #, c-format
 msgid "Could not start finger capture on '%s' device"
 msgstr "Ne mogu da uhvatim otisak prsta sa uređaja „%s“"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:655
+#: ../panels/user-accounts/um-fingerprint-dialog.c:650
 msgid "Could not access any fingerprint readers"
 msgstr "Ne mogu da pristupim nijednom čitaču otisaka prstiju"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:656
+#: ../panels/user-accounts/um-fingerprint-dialog.c:651
 msgid "Please contact your system administrator for help."
 msgstr "Javite se administratoru sistema za pomoć."
 
@@ -4723,7 +5607,7 @@ msgstr "Javite se administratoru sistema za pomoć."
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: ../panels/user-accounts/um-fingerprint-dialog.c:740
+#: ../panels/user-accounts/um-fingerprint-dialog.c:734
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -4732,59 +5616,64 @@ msgstr ""
 "Morate sačuvati jedan od vaših otisaka prsta sa uređaja „%s“, kako bi "
 "omogućili prijavu na sistem otiskom prsta."
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:747
+#: ../panels/user-accounts/um-fingerprint-dialog.c:741
 msgid "Selecting finger"
 msgstr "Biram prst"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:748
+#: ../panels/user-accounts/um-fingerprint-dialog.c:742
 msgid "Enrolling fingerprints"
 msgstr "Upisujem otiske prstiju"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:749
-msgid "Summary"
-msgstr "Sažetak"
+#: ../panels/user-accounts/um-history-dialog.c:88
+msgid "This Week"
+msgstr "Ove sedmice"
 
-#: ../panels/user-accounts/um-password-dialog.c:96
+#: ../panels/user-accounts/um-history-dialog.c:91
+#| msgid "Last used"
+msgid "Last Week"
+msgstr "Prošle sedmice"
+
+#: ../panels/user-accounts/um-password-dialog.c:105
 msgid "_Generate a password"
 msgstr "Stvori _lozinku"
 
-#: ../panels/user-accounts/um-password-dialog.c:150
+#: ../panels/user-accounts/um-password-dialog.c:159
 msgid "Please choose another password."
 msgstr "Molim izaberite drugu lozinku."
 
-#: ../panels/user-accounts/um-password-dialog.c:159
+#: ../panels/user-accounts/um-password-dialog.c:168
 msgid "Please type your current password again."
 msgstr "Molim unesite vašu trenutnu lozinku ponovo."
 
-#: ../panels/user-accounts/um-password-dialog.c:165
+#: ../panels/user-accounts/um-password-dialog.c:174
 msgid "Password could not be changed"
 msgstr "Lozinka ne može biti promenjena"
 
-#: ../panels/user-accounts/um-password-dialog.c:236
+#: ../panels/user-accounts/um-password-dialog.c:270
 msgid "You need to enter a new password"
 msgstr "Morate da unesete novu lozinku"
 
-#: ../panels/user-accounts/um-password-dialog.c:245
+#: ../panels/user-accounts/um-password-dialog.c:279
 msgid "You need to confirm the password"
 msgstr "Morate da potvrdite lozinku"
 
-#: ../panels/user-accounts/um-password-dialog.c:248
+#: ../panels/user-accounts/um-password-dialog.c:282
 msgid "The passwords do not match"
 msgstr "Lozinke se ne podudaraju"
 
-#: ../panels/user-accounts/um-password-dialog.c:254
+#: ../panels/user-accounts/um-password-dialog.c:288
 msgid "You need to enter your current password"
 msgstr "Morate da unesete vašu trenutnu lozinku"
 
-#: ../panels/user-accounts/um-password-dialog.c:257
+#: ../panels/user-accounts/um-password-dialog.c:291
 msgid "The current password is not correct"
 msgstr "Trenutna lozinka nije tačna"
 
-#: ../panels/user-accounts/um-password-dialog.c:347
+#: ../panels/user-accounts/um-password-dialog.c:381
 msgid "Passwords do not match"
 msgstr "Lozinke se ne podudaraju"
 
-#: ../panels/user-accounts/um-password-dialog.c:409
+#: ../panels/user-accounts/um-password-dialog.c:443
 msgid "Wrong password"
 msgstr "Pogrešna lozinka"
 
@@ -4793,65 +5682,58 @@ msgid "Disable image"
 msgstr "Isključi sliku"
 
 #: ../panels/user-accounts/um-photo-dialog.c:461
-msgid "Take a photo..."
-msgstr "Snimite fotografiju..."
+#| msgid "Take a photo..."
+msgid "Take a photo…"
+msgstr "Snimite fotografiju…"
 
 #: ../panels/user-accounts/um-photo-dialog.c:479
-msgid "Browse for more pictures..."
-msgstr "Potražite još slika..."
+#| msgid "Browse for more pictures"
+msgid "Browse for more pictures…"
+msgstr "Potražite još slika…"
 
-#: ../panels/user-accounts/um-photo-dialog.c:704
+#: ../panels/user-accounts/um-photo-dialog.c:703
 #, c-format
 msgid "Used by %s"
 msgstr "Koristi je „%s“"
 
-#: ../panels/user-accounts/um-realm-manager.c:379
+#: ../panels/user-accounts/um-realm-manager.c:351
+#| msgid "Cannot remove automatically added profile"
+msgid "Cannot automatically join this type of domain"
+msgstr "Ne mogu sam da pristupim ovoj vrsti domena"
+
+#: ../panels/user-accounts/um-realm-manager.c:414
 #, c-format
 msgid "No such domain or realm found"
 msgstr "Nije pronađen takav domen ili područje"
 
-#: ../panels/user-accounts/um-realm-manager.c:780
+#: ../panels/user-accounts/um-realm-manager.c:815
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Ne mogu da se prijavim kao „%s“ na domenu %s"
 
-#: ../panels/user-accounts/um-realm-manager.c:785
+#: ../panels/user-accounts/um-realm-manager.c:820
 msgid "Invalid password, please try again"
 msgstr "Neispravna lozinka, pokušajte ponovo"
 
-#: ../panels/user-accounts/um-realm-manager.c:789
+#: ../panels/user-accounts/um-realm-manager.c:824
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Ne mogu da se povežem na domen „%s“: %s"
 
-#: ../panels/user-accounts/um-user-manager.c:466
-#, c-format
-msgid "A user with name '%s' already exists."
-msgstr "Korisnik sa imenom „%s“ već postoji."
-
-#: ../panels/user-accounts/um-user-manager.c:473
-#, c-format
-msgid "No user with the name '%s' exists."
-msgstr "Ne postoji korisnik sa korisničkim imenom „%s“."
-
-#: ../panels/user-accounts/um-user-manager.c:631
-msgid "This user does not exist."
-msgstr "Ovaj korisnik ne postoji."
-
-#: ../panels/user-accounts/um-user-panel.c:371
+#: ../panels/user-accounts/um-user-panel.c:376
 msgid "Failed to delete user"
 msgstr "Nisam uspeo da izbrišem korisnika"
 
-#: ../panels/user-accounts/um-user-panel.c:431
+#: ../panels/user-accounts/um-user-panel.c:436
 msgid "You cannot delete your own account."
 msgstr "Ne možete obrisati vaš lični nalog."
 
-#: ../panels/user-accounts/um-user-panel.c:440
+#: ../panels/user-accounts/um-user-panel.c:445
 #, c-format
 msgid "%s is still logged in"
 msgstr "„%s“ je i dalje prijavljen"
 
-#: ../panels/user-accounts/um-user-panel.c:444
+#: ../panels/user-accounts/um-user-panel.c:449
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -4859,12 +5741,12 @@ msgstr ""
 "Brisanje korisnika dok su prijavljeni može da ostavi sistem u neusklađenom "
 "stanju."
 
-#: ../panels/user-accounts/um-user-panel.c:453
+#: ../panels/user-accounts/um-user-panel.c:458
 #, c-format
 msgid "Do you want to keep %s's files?"
 msgstr "Da li želite da sačuvate datoteke korisnika „%s“?"
 
-#: ../panels/user-accounts/um-user-panel.c:457
+#: ../panels/user-accounts/um-user-panel.c:462
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -4872,38 +5754,42 @@ msgstr ""
 "Moguće je zadržati ličnu fasciklu, skladišta pošte i privremene datoteke "
 "prilikom brisanja korisničkog naloga."
 
-#: ../panels/user-accounts/um-user-panel.c:460
+#: ../panels/user-accounts/um-user-panel.c:465
 msgid "_Delete Files"
 msgstr "_Obriši datoteke"
 
-#: ../panels/user-accounts/um-user-panel.c:461
+#: ../panels/user-accounts/um-user-panel.c:466
 msgid "_Keep Files"
 msgstr "_Zadrži datoteke"
 
-#: ../panels/user-accounts/um-user-panel.c:513
+#: ../panels/user-accounts/um-user-panel.c:518
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Nalog je isključen"
 
-#: ../panels/user-accounts/um-user-panel.c:521
+#: ../panels/user-accounts/um-user-panel.c:526
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Za podešavanje prilikom narednog prijavljivanja"
 
-#: ../panels/user-accounts/um-user-panel.c:524
+#: ../panels/user-accounts/um-user-panel.c:529
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ništa"
 
-#: ../panels/user-accounts/um-user-panel.c:871
+#: ../panels/user-accounts/um-user-panel.c:578
+msgid "Logged in"
+msgstr "Prijavljen sam"
+
+#: ../panels/user-accounts/um-user-panel.c:941
 msgid "Failed to contact the accounts service"
 msgstr "Nisam uspeo da kontaktiram uslugu naloga"
 
-#: ../panels/user-accounts/um-user-panel.c:873
+#: ../panels/user-accounts/um-user-panel.c:943
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Molim proverite da li je Usluga naloga instalirana i uključena."
 
-#: ../panels/user-accounts/um-user-panel.c:913
+#: ../panels/user-accounts/um-user-panel.c:984
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -4911,12 +5797,12 @@ msgstr ""
 "Da napravite izmene,\n"
 "kliknite prvo na ikonicu *"
 
-#: ../panels/user-accounts/um-user-panel.c:951
+#: ../panels/user-accounts/um-user-panel.c:1022
 msgid "Create a user account"
 msgstr "Napravite korisnički nalog"
 
-#: ../panels/user-accounts/um-user-panel.c:962
-#: ../panels/user-accounts/um-user-panel.c:1273
+#: ../panels/user-accounts/um-user-panel.c:1033
+#: ../panels/user-accounts/um-user-panel.c:1319
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -4924,12 +5810,12 @@ msgstr ""
 "Da napravite korisnički nalog,\n"
 "kliknite prvo na ikonicu *"
 
-#: ../panels/user-accounts/um-user-panel.c:971
+#: ../panels/user-accounts/um-user-panel.c:1042
 msgid "Delete the selected user account"
 msgstr "Obrišite izabrani korisnički nalog"
 
-#: ../panels/user-accounts/um-user-panel.c:983
-#: ../panels/user-accounts/um-user-panel.c:1278
+#: ../panels/user-accounts/um-user-panel.c:1054
+#: ../panels/user-accounts/um-user-panel.c:1324
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -4937,29 +5823,29 @@ msgstr ""
 "Da obrišete izabrani korisnički nalog,\n"
 "kliknite prvo na ikonicu *"
 
-#: ../panels/user-accounts/um-user-panel.c:1176
+#: ../panels/user-accounts/um-user-panel.c:1228
 msgid "My Account"
 msgstr "Moj nalog"
 
-#: ../panels/user-accounts/um-user-panel.c:1186
+#: ../panels/user-accounts/um-user-panel.c:1237
 msgid "Other Accounts"
 msgstr "Ostali nalozi"
 
-#: ../panels/user-accounts/um-utils.c:512
+#: ../panels/user-accounts/um-utils.c:516
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "Korisnik sa korisničkim imenom „%s“ već postoji"
 
-#: ../panels/user-accounts/um-utils.c:516
+#: ../panels/user-accounts/um-utils.c:520
 #, c-format
 msgid "The username is too long"
 msgstr "Korisničko ime je predugo"
 
-#: ../panels/user-accounts/um-utils.c:519
+#: ../panels/user-accounts/um-utils.c:523
 msgid "The username cannot start with a '-'"
 msgstr "Korisničko ime ne može početi sa „-“"
 
-#: ../panels/user-accounts/um-utils.c:522
+#: ../panels/user-accounts/um-utils.c:526
 msgid ""
 "The username must only consist of:\n"
 " ➣ letters from the English alphabet\n"
@@ -4971,6 +5857,16 @@ msgstr ""
 " ➣ brojeve\n"
 " ➣ bilo koji od znakova: . - _"
 
+#: ../panels/user-accounts/um-utils.c:770
+#| msgid "today"
+msgid "Today"
+msgstr "Danas"
+
+#: ../panels/user-accounts/um-utils.c:773
+#| msgid "yesterday"
+msgid "Yesterday"
+msgstr "Juče"
+
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
 msgstr "Mapiraj dugmad"
@@ -4978,11 +5874,6 @@ msgstr "Mapiraj dugmad"
 #: ../panels/wacom/button-mapping.ui.h:2
 msgid "Map buttons to functions"
 msgstr "Mapirajte dugmad prema funkcijama"
-
-#. Text printed on screen
-#: ../panels/wacom/calibrator/gui_gtk.c:78
-msgid "Screen Calibration"
-msgstr "Kalibracija ekrana"
 
 #: ../panels/wacom/calibrator/gui_gtk.c:79
 msgid ""
@@ -5015,7 +5906,7 @@ msgstr "Mapiraj na jednom monitoru"
 msgid "%d of %d"
 msgstr "%d od %d"
 
-#: ../panels/wacom/cc-wacom-page.c:118 ../panels/wacom/cc-wacom-page.c:371
+#: ../panels/wacom/cc-wacom-page.c:118 ../panels/wacom/cc-wacom-page.c:384
 msgctxt "Wacom action-type"
 msgid "None"
 msgstr "Ništa"
@@ -5030,28 +5921,37 @@ msgctxt "Wacom action-type"
 msgid "Switch Monitor"
 msgstr "Promeni monitor"
 
-#: ../panels/wacom/cc-wacom-page.c:601
+#: ../panels/wacom/cc-wacom-page.c:121
+msgctxt "Wacom action-type"
+msgid "Show On-Screen Help"
+msgstr "Prikaži pomoć na ekranu"
+
+#: ../panels/wacom/cc-wacom-page.c:621
+#| msgid "Up"
+msgctxt "Wacom tablet button"
 msgid "Up"
 msgstr "Gore"
 
-#: ../panels/wacom/cc-wacom-page.c:601
+#: ../panels/wacom/cc-wacom-page.c:621
+#| msgid "Down"
+msgctxt "Wacom tablet button"
 msgid "Down"
 msgstr "Dole"
 
-#: ../panels/wacom/cc-wacom-page.c:638
+#: ../panels/wacom/cc-wacom-page.c:662
 msgid "Switch Modes"
 msgstr "Režimi prebacivanja"
 
-#: ../panels/wacom/cc-wacom-page.c:724
-#: ../panels/wacom/cc-wacom-stylus-page.c:376
+#: ../panels/wacom/cc-wacom-page.c:752
+#: ../panels/wacom/cc-wacom-stylus-page.c:373
 msgid "Button"
 msgstr "Dugme"
 
-#: ../panels/wacom/cc-wacom-page.c:777
+#: ../panels/wacom/cc-wacom-page.c:810
 msgid "Action"
 msgstr "Radnja"
 
-#: ../panels/wacom/cc-wacom-page.c:886
+#: ../panels/wacom/cc-wacom-page.c:920
 msgid "Display Mapping"
 msgstr "Prikazuje mapiranje"
 
@@ -5067,7 +5967,7 @@ msgstr "Podesite postavke vaše Vakom tablice"
 #. Translators: those are keywords for the wacom tablet control-center panel
 #: ../panels/wacom/gnome-wacom-panel.desktop.in.in.h:4
 msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
-msgstr "Tablica;Vakom;Penkalo;Brisač;Miš;"
+msgstr "tablica;vakom;penkalo;brisač;miš;"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:1
 msgid "Tablet (absolute)"
@@ -5094,16 +5994,14 @@ msgid "Bluetooth Settings"
 msgstr "Podešavanja Blututa"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:8
-msgid "Map to Monitor..."
-msgstr "Mapiraj monitor..."
+#| msgid "Map to Monitor..."
+msgid "Map to Monitor…"
+msgstr "Mapiraj monitor…"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:9
-msgid "Map Buttons..."
-msgstr "Mapiraj dugmad..."
-
-#: ../panels/wacom/gnome-wacom-properties.ui.h:10
-msgid "Calibrate..."
-msgstr "Podesi..."
+#| msgid "Map Buttons"
+msgid "Map Buttons…"
+msgstr "Mapiraj dugmad…"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Adjust display resolution"
@@ -5117,67 +6015,91 @@ msgstr "Režim praćenja"
 msgid "Left-Handed Orientation"
 msgstr "Levoruko usmerenje"
 
-#: ../panels/wacom/gsd-wacom-device.c:1010
+#. If no mode is available, we use "left-ring-mode-1" for backward compat
+#: ../panels/wacom/gsd-wacom-device.c:1076
+#| msgid "Left Ring Mode #%d"
+msgid "Left Ring"
+msgstr "Levi prsten"
+
+#: ../panels/wacom/gsd-wacom-device.c:1086
 #, c-format
 msgid "Left Ring Mode #%d"
 msgstr "Režim levog prstena #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1019
+#. If no mode is available, we use "right-ring-mode-1" for backward compat
+#: ../panels/wacom/gsd-wacom-device.c:1105
+#| msgid "Right Ring Mode #%d"
+msgid "Right Ring"
+msgstr "Desni prsten"
+
+#: ../panels/wacom/gsd-wacom-device.c:1115
 #, c-format
 msgid "Right Ring Mode #%d"
 msgstr "Režim desnog prstena #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1049
+#. If no mode is available, we use "left-strip-mode-1" for backward compat
+#: ../panels/wacom/gsd-wacom-device.c:1156
+#| msgid "Left Touchstrip Mode #%d"
+msgid "Left Touchstrip"
+msgstr "Leva dodirna traka"
+
+#: ../panels/wacom/gsd-wacom-device.c:1166
 #, c-format
 msgid "Left Touchstrip Mode #%d"
 msgstr "Režim leve dodirne trake #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1058
+#. If no mode is available, we use "right-strip-mode-1" for backward compat
+#: ../panels/wacom/gsd-wacom-device.c:1185
+#| msgid "Right Touchstrip Mode #%d"
+msgid "Right Touchstrip"
+msgstr "Desna dodirna traka"
+
+#: ../panels/wacom/gsd-wacom-device.c:1195
 #, c-format
 msgid "Right Touchstrip Mode #%d"
 msgstr "Režim desne dodirne trake #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1075
+#: ../panels/wacom/gsd-wacom-device.c:1220
 #, c-format
 msgid "Left Touchring Mode Switch"
 msgstr "Režim prekidača levog dodirnog prstena"
 
-#: ../panels/wacom/gsd-wacom-device.c:1077
+#: ../panels/wacom/gsd-wacom-device.c:1222
 #, c-format
 msgid "Right Touchring Mode Switch"
 msgstr "Režim prekidača desnog dodirnog prstena"
 
-#: ../panels/wacom/gsd-wacom-device.c:1080
+#: ../panels/wacom/gsd-wacom-device.c:1225
 #, c-format
 msgid "Left Touchstrip Mode Switch"
 msgstr "Režim prekidača leve dodirne trake"
 
-#: ../panels/wacom/gsd-wacom-device.c:1082
+#: ../panels/wacom/gsd-wacom-device.c:1227
 #, c-format
 msgid "Right Touchstrip Mode Switch"
 msgstr "Režim prekidača desne dodirne trake"
 
-#: ../panels/wacom/gsd-wacom-device.c:1087
+#: ../panels/wacom/gsd-wacom-device.c:1232
 #, c-format
 msgid "Mode Switch #%d"
 msgstr "Režim prekidača #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1159
+#: ../panels/wacom/gsd-wacom-device.c:1336
 #, c-format
 msgid "Left Button #%d"
 msgstr "Levo dugme #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1162
+#: ../panels/wacom/gsd-wacom-device.c:1339
 #, c-format
 msgid "Right Button #%d"
 msgstr "Desno dugme #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1165
+#: ../panels/wacom/gsd-wacom-device.c:1342
 #, c-format
 msgid "Top Button #%d"
 msgstr "Gornje dugme #%d"
 
-#: ../panels/wacom/gsd-wacom-device.c:1168
+#: ../panels/wacom/gsd-wacom-device.c:1345
 #, c-format
 msgid "Bottom Button #%d"
 msgstr "Donje dugme #%d"
@@ -5250,28 +6172,41 @@ msgstr "Donje dugme"
 msgid "Tip Pressure Feel"
 msgstr "Osećaj pritiska saveta"
 
-#: ../shell/control-center.c:58
+#: ../shell/control-center.c:66
 msgid "Enable verbose mode"
 msgstr "Uključuje režim ispisivanja"
 
-#: ../shell/control-center.c:59
+#: ../shell/control-center.c:67
 msgid "Show the overview"
 msgstr "Prikazuje pregled"
 
-#: ../shell/control-center.c:60 ../shell/control-center.c:61
-#: ../shell/control-center.c:62
+#: ../shell/control-center.c:68
+msgid "Search for the string"
+msgstr "Traži nisku"
+
+#: ../shell/control-center.c:69
+msgid "List possible panel names and exit"
+msgstr "Ispisuje moguće nazive panela i izlazi"
+
+#: ../shell/control-center.c:70 ../shell/control-center.c:71
+#: ../shell/control-center.c:72
 msgid "Show help options"
 msgstr "Prikazuje opcije za pomoć"
 
-#: ../shell/control-center.c:63
+#: ../shell/control-center.c:73
 msgid "Panel to display"
 msgstr "Panel za prikaz"
 
-#: ../shell/control-center.c:85
-msgid "- System Settings"
-msgstr "— Podešavanja sistema"
+#: ../shell/control-center.c:73
+msgid "[PANEL] [ARGUMENT…]"
+msgstr "[PANEL] [ARGUMENT…]"
 
-#: ../shell/control-center.c:93
+#: ../shell/control-center.c:95
+#| msgid "All Settings"
+msgid "- Settings"
+msgstr "— Podešavanja"
+
+#: ../shell/control-center.c:103
 #, c-format
 msgid ""
 "%s\n"
@@ -5281,373 +6216,50 @@ msgstr ""
 "Pokrenite „%s --help“ da ​​vidite potpun spisak dostupnih opcija linije "
 "naredbi.\n"
 
-#: ../shell/control-center.c:211
+#: ../shell/control-center.c:133
+#| msgid "Available Profiles"
+msgid "Available panels:"
+msgstr "Dostupni paneli:"
+
+#: ../shell/control-center.c:244
 msgid "Help"
 msgstr "Pomoć"
 
-#: ../shell/control-center.c:212
+#: ../shell/control-center.c:245
 msgid "Quit"
 msgstr "Izađi"
+
+#. Add categories
+#: ../shell/gnome-control-center.c:881
+msgctxt "category"
+msgid "Personal"
+msgstr "Lično"
+
+#: ../shell/gnome-control-center.c:882
+#| msgid "Hardware"
+msgctxt "category"
+msgid "Hardware"
+msgstr "Uređaji"
+
+#: ../shell/gnome-control-center.c:883
+#| msgid "System"
+msgctxt "category"
+msgid "System"
+msgstr "Sistem"
 
 #: ../shell/gnomecc.directory.in.h:1
 msgid "Control Center"
 msgstr "Upravljački centar"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:1 ../shell/shell.ui.h:1
-msgid "System Settings"
-msgstr "Podešavanja sistema"
+#| msgid "_Settings..."
+msgid "Settings"
+msgstr "Podešavanja"
 
 #: ../shell/gnome-control-center.desktop.in.in.h:2
 msgid "Preferences;Settings;"
-msgstr "Postavke;Podešavanja;"
+msgstr "postavke;podešavanja;"
 
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "Sva podešavanja"
-
-#~ msgid "Security Key"
-#~ msgstr "Ključ bezbednosti"
-
-#~ msgid "Subnet Mask"
-#~ msgstr "Maska podmreže"
-
-#~ msgid "Take a screenshot"
-#~ msgstr "Pravi snimak ekrana"
-
-#~ msgid "Shortcut"
-#~ msgstr "Prečica"
-
-#~ msgid "_Right-handed"
-#~ msgstr "_Miš za desnoruke"
-
-#~ msgid "_Left-handed"
-#~ msgstr "_Miš za levoruke"
-
-#~ msgid "Sh_ow position of pointer when the Control key is pressed"
-#~ msgstr "_Označi mesto pokazivača kada je pritisnut taster „Ktrl“"
-
-#~ msgid "A_cceleration:"
-#~ msgstr "_Ubrzanje:"
-
-#~ msgid "_Sensitivity:"
-#~ msgstr "_Osetljivost:"
-
-#~ msgctxt "Mouse sensitivity"
-#~ msgid "Low"
-#~ msgstr "Mala"
-
-#~ msgctxt "Mouse sensitivity"
-#~ msgid "High"
-#~ msgstr "Velika"
-
-#~ msgid "Drag and Drop"
-#~ msgstr "Prevlačenje stavki"
-
-#~ msgid "Thr_eshold:"
-#~ msgstr "_Osetljivost:"
-
-#~ msgid "Drag Threshold"
-#~ msgstr "Prag prevlačenja"
-
-#~ msgid "Double-Click Timeout"
-#~ msgstr "Vreme za dupli klik"
-
-#~ msgid "_Timeout:"
-#~ msgstr "_Vremenski rok:"
-
-#~ msgid "To test your settings, try to double-click on the face."
-#~ msgstr ""
-#~ "Da isprobate vaša podešavanja, pokušajte dvaput da kliknite na figuricu."
-
-#~ msgid "Enable _mouse clicks with touchpad"
-#~ msgstr "Uključi _klik na dodirnoj tabli"
-
-#~ msgid "Scrolling"
-#~ msgstr "Klizanje"
-
-#~ msgid "_Disabled"
-#~ msgstr "_Onemogućeno"
-
-#~ msgid "_Edge scrolling"
-#~ msgstr "Kli_zanje ivicom"
-
-#~ msgid "Enable h_orizontal scrolling"
-#~ msgstr "Uključi ho_rizontalno klizanje"
-
-#~ msgid "A_ddress:"
-#~ msgstr "_Adresa:"
-
-#~ msgid "_Search by Address"
-#~ msgstr "_Traži po adresi"
-
-#~ msgid "Getting devices..."
-#~ msgstr "Preuzimam uređaje..."
-
-#~ msgid "No local printers found"
-#~ msgstr "Nisam pronašao lokalne štampače"
-
-#~ msgid ""
-#~ "FirewallD is not running. Network printer detection needs services mdns, "
-#~ "ipp, ipp-client and samba-client enabled on firewall."
-#~ msgstr ""
-#~ "Mrežna barijera_D ne radi. Otkrivanje mrežnog štampača zahteva uključene "
-#~ "usluge mdns, ipp, ipp-klijent i samba-klijent na mrežnoj barijeri."
-
-#~ msgid "Devices"
-#~ msgstr "Uređaji"
-
-#~ msgctxt "printer type"
-#~ msgid "Local"
-#~ msgstr "Lokalni"
-
-#~ msgctxt "printer type"
-#~ msgid "Network"
-#~ msgstr "Mrežni"
-
-#~ msgid "Device types"
-#~ msgstr "Vrsta uređaja"
-
-#~ msgid "Automatic configuration"
-#~ msgstr "Automatsko podešavanje"
-
-#~ msgid "Opening firewall for mDNS connections"
-#~ msgstr "Otvaram mrežnu barijeru za mDNS veze"
-
-#~ msgid "Opening firewall for Samba connections"
-#~ msgstr "Otvaram mrežnu barijeru za Samba veze"
-
-#~ msgid "Opening firewall for IPP connections"
-#~ msgstr "Otvaram mrežnu barijeru za IPP veze"
-
-#~ msgid "Co_nnector:"
-#~ msgstr "Ko_nektor:"
-
-#~ msgid "Hardware"
-#~ msgstr "Hardver"
-
-#~ msgid "C_hoose a device to configure:"
-#~ msgstr "Iza_berite uređaj za podešavanje:"
-
-#~ msgid "Dasher"
-#~ msgstr "Jurišnik"
-
-#~ msgid "Nomon"
-#~ msgstr "Nomon"
-
-#~ msgid "Caribou"
-#~ msgstr "Irvas"
-
-#~ msgid "Account _type"
-#~ msgstr "Vrsta _naloga"
-
-#~ msgid "Add wallpaper"
-#~ msgstr "Dodajte pozadinu"
-
-#~ msgid "Remove wallpaper"
-#~ msgstr "Uklonite pozadinu"
-
-#~ msgid "Swap colors"
-#~ msgstr "Boje razmene"
-
-#~ msgid "Secondary color"
-#~ msgstr "Dodatna boja"
-
-#~ msgid "Horizontal Gradient"
-#~ msgstr "Vodoravni preliv"
-
-#~ msgid "Vertical Gradient"
-#~ msgstr "Uspravni preliv"
-
-#~ msgid "Solid Color"
-#~ msgstr "Jednobojno"
-
-#~ msgid "Pictures Folder"
-#~ msgstr "Fascikla sa slikama"
-
-#~ msgid "Colors & Gradients"
-#~ msgstr "Boje i prelivi"
-
-#~ msgid "_Back"
-#~ msgstr "_Nazad"
-
-#~ msgid "Printer Options"
-#~ msgstr "Opcije štampača"
-
-#~ msgid "Add User"
-#~ msgstr "Dodaj korisnika"
-
-#~ msgid "Remove User"
-#~ msgstr "Ukloni korisnika"
-
-#~ msgid "Allowed users"
-#~ msgstr "Dozvoljeni korisnici"
-
-#~ msgid "Acti_on:"
-#~ msgstr "_Radnja:"
-
-#~ msgid "Not connected to the internet."
-#~ msgstr "Niste povezani na internet."
-
-#~ msgid "Create the hotspot anyway?"
-#~ msgstr "Da ipak napravim vruću tačku?"
-
-#~ msgid "Disconnect from %s and create a new hotspot?"
-#~ msgstr "Da prekinem vezu sa %s i da napravim novu vruću tačku?"
-
-#~ msgid "This is your only connection to the internet."
-#~ msgstr "Ovo je vaša jedina veza sa internetom."
-
-#~ msgid "Create _Hotspot"
-#~ msgstr "Napravi _vruću tačku"
-
-#~ msgctxt "Wireless access point"
-#~ msgid "Other..."
-#~ msgstr "Ostali..."
-
-#~ msgid "Hotspot"
-#~ msgstr "Vruća tačka"
-
-#~ msgid "_Network Name"
-#~ msgstr "_Naziv mreže"
-
-#~ msgid "_Stop Hotspot..."
-#~ msgstr "_Zaustavi vruću tačku..."
-
-#~ msgid ""
-#~ "Benchmarking involves measuring the transfer rate on various area of the "
-#~ "device as well as measuring how long it takes to seek from one random "
-#~ "area to another. Please back up important data before using the write "
-#~ "benchmark."
-#~ msgstr ""
-#~ "Ocenjivanje obuhvata merenje stope prenosa na raznim oblastima uređaja kao i "
-#~ "merenje potrebnog vremena za prelaženje sa jedne proizvoljne oblasti na "
-#~ "drugu. Napravite rezervu važnih podataka pre korišćenja ocenjivanja pisanja."
-
-#~ msgid "Also perform _write-benchmark"
-#~ msgstr "Takođe izvrši ocenu _pisanja"
-
-#~ msgid ""
-#~ "Bechmarking the write-rate of a disk requires exclusive access to the "
-#~ "disk (e.g. the disk or its partitions cannot be mounted or in use) and "
-#~ "involves reading data and then writing it back. As a result, the contents "
-#~ "of the disk is not changed.\n"
-#~ "\n"
-#~ "If not checked, the write-part of the benchmark will not be done but on "
-#~ "the other hand exclusive access to the device is not needed (e.g. the "
-#~ "disk or device can be in use) ."
-#~ msgstr ""
-#~ "Ocenjivanje stope pisanja diska zahteva naročiti pristup disku (npr. disk "
-#~ "ili particije ne mogu biti prikačene ili u upotrebi) i obuhvata čitanje "
-#~ "podataka i njihovo ponovno pisanje. Kao rezultat, sadržaj diska nije "
-#~ "izmenjen.\n"
-#~ "\n"
-#~ "Ako nije izabrano, korak pisanja pri ocenjivanju neće biti sproveden ali sa "
-#~ "druge strane naročiti pristup disku nije potreban (npr. disk ili uređaj "
-#~ "može biti u upotrebi)."
-
-#~ msgid ""
-#~ "Number of samples. Bigger number produces a more accurate picture of "
-#~ "access time patterns but takes more time."
-#~ msgstr ""
-#~ "Broj uzoraka. Veći broj daje tačniju sliku šablona vremena pristupa ali "
-#~ "oduzima više vremena."
-
-#~ msgid ""
-#~ "The number of MiB (1048576 bytes) to read/write for each sample. Big "
-#~ "sample sizes tend to produce more accurate benchmarks at the cost of the "
-#~ "benchmark taking more time."
-#~ msgstr ""
-#~ "Broj u MiB (1048576 bajta) za čitanje/pisanje svakog uzorka. Velike "
-#~ "veličine uzorka teže tačnijem ocenjivanju uz oduzimanje više vremena."
-
-#~ msgid ""
-#~ "Number of samples. Bigger number produces more smooth graphs but the "
-#~ "benchmark will take more time."
-#~ msgstr ""
-#~ "Broj uzoraka. Veći brojevi daju tačnije grafikone ali će ocenjivanje "
-#~ "trajati duže."
-
-#~ msgid ""
-#~ "Agressive spin-down may wear out the drive faster than anticipated. "
-#~ "Please check the “Start/Stop Count” SMART attribute from time to time"
-#~ msgstr ""
-#~ "Napadno usporavanje može da ošteti uređaj brže nego što je predviđeno. "
-#~ "Molim s vremena na vreme proverite SMART osobinu „Broj pokretanja/"
-#~ "zaustavljanja“"
-
-#~ msgid "Wake-Up from Standby"
-#~ msgstr "Izađi iz pripravnosti"
-
-#~ msgid "Cannot open `%s' - maybe the volume isn't mounted?"
-#~ msgstr "Ne mogu da otvorim „%s“ — možda disk nije ni prikačen?"
-
-#~ msgid "Non-fatal error: error setting autoclear to TRUE: %s (%s, %d)\n"
-#~ msgstr ""
-#~ "Ne-kobna greška: greška postavljanja samočišćenja na izabrano: %s (%s, %d)\n"
-
-#~ msgctxt "benchmarking"
-#~ msgid "Expected to write %lld bytes, only wrote %lld: %m"
-#~ msgstr "Očekivah da zapišem %lld bajt/a, zapisah samo %lld: %m"
-
-#~ msgctxt "apm-level"
-#~ msgid "%d (Spin-down permitted)"
-#~ msgstr "%d (zaustavljanje zavrtaja je dopušteno)"
-
-#~ msgid "ATA Secure Erase"
-#~ msgstr "Bezbedno ATA brisanje"
-
-#~ msgid "ATA Enhanced Secure Erase"
-#~ msgstr "Poboljšano bezbedno ATA brisanje"
-
-#~ msgid ""
-#~ "All data on the disk will be lost but may still be recoverable by data "
-#~ "recovery services"
-#~ msgstr ""
-#~ "Svi podaci na disku će biti izgubljeni ali bi još uvek mogli biti "
-#~ "povraćeni uslugama oporavljanja podataka"
-
-#~ msgid ""
-#~ "<b>Tip</b>: If you are planning to recycle, sell or give away your old "
-#~ "computer or disk, you should use a more thorough erase type to keep your "
-#~ "private information from falling into the wrong hands"
-#~ msgstr ""
-#~ "<b>Savet</b>: Ako planirate da reciklirate, prodate ili date nekome vaš "
-#~ "stari računar ili disk, treba da koristite detaljnije brisanje da vaši "
-#~ "lični podaci ne bi došli u pogrešne ruke"
-
-#~ msgid ""
-#~ "All data on the disk will be overwritten and will likely not be "
-#~ "recoverable by data recovery services"
-#~ msgstr ""
-#~ "Svi podaci na disku će biti prepisani i najverovatnije njihov povraćaj "
-#~ "neće biti moguć uslugama oporavljanja podataka"
-
-#~ msgid ""
-#~ "<b>WARNING</b>: The Secure Erase command may take a very long time to "
-#~ "complete, can't be canceled and may not work properly with some hardware. "
-#~ "In the worst case, your drive may be rendered unusable or your system may "
-#~ "crash or lock up. Before proceeding, please read the article about <a "
-#~ "href='https://ata.wiki.kernel.org/index.php/ATA_Secure_Erase'>ATA Secure "
-#~ "Erase</a> and make sure you understand the risks"
-#~ msgstr ""
-#~ "<b>UPOZORENJE</b>: Naredba bezbednog brisanja može da potraje poprilično "
-#~ "dugo, ne može biti otkazana i možda neće raditi ispravno na nekim "
-#~ "uređajima. U najgorem slučaju, vaš disk može postati neupotrebljiv ili vaš "
-#~ "sistem može da se uruši ili da se zaključa. Pre nego što nastavite, "
-#~ "pročitajte članak o <a href='https://ata.wiki.kernel.org/index.php/"
-#~ "ATA_Secure_Erase'>Bezbednom ATA brisanju</a> i budite sigurni da ste "
-#~ "razumeli rizik"
-
-#~ msgid ""
-#~ "All data on the volume will be lost but may still be recoverable by data "
-#~ "recovery services"
-#~ msgstr ""
-#~ "Svi podaci na disku će biti izgubljeni ali bi još uvek mogli biti "
-#~ "povraćeni uslugama oporavljanja podataka"
-
-#~ msgid ""
-#~ "All data on the volume will be overwritten and will likely not be "
-#~ "recoverable by data recovery services"
-#~ msgstr ""
-#~ "Svi podaci na disku će biti prepisani i najverovatnije njihov povraćaj "
-#~ "neće biti moguć uslugama oporavljanja podataka"
