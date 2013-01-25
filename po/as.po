@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: as\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-01-23 20:37+0000\n"
-"PO-Revision-Date: 2013-01-25 13:41+0530\n"
+"POT-Creation-Date: 2013-01-25 08:11+0000\n"
+"PO-Revision-Date: 2013-01-25 14:55+0530\n"
 "Last-Translator: Nilamdyuti Goswami <ngoswami@redhat.com>\n"
 "Language-Team: Assamese <kde-i18n-doc@kde.org>\n"
 "Language: as_IN\n"
@@ -223,6 +223,132 @@ msgstr ""
 "যদি আপুনি ডিভাইচ আতৰায়, আপুনি ইয়াক পৰৱৰ্তী ব্যৱহাৰৰ আগত আকৌ সংস্থাপন কৰিব "
 "লাগিব।"
 
+#. TRANSLATORS: The user has to attach the sensor to the screen
+#: ../panels/color/cc-color-calibrate.c:360
+msgid "Place your calibration device over the square and press 'Start'"
+msgstr "আপোনাৰ মানাংকন ডিভাইচক বৰ্গৰ ওপৰত ৰাখি 'আৰম্ভ কৰক' টিপক"
+
+#. TRANSLATORS: Some calibration devices need the user to move a
+#. * dial or switch manually. We also show a picture showing them
+#. * what to do...
+#: ../panels/color/cc-color-calibrate.c:366
+msgid ""
+"Move your calibration device to the calibrate position and press 'Continue'"
+msgstr "আপোনাৰ মানাংকন ডিভাইচক মানাংকন অৱস্থানত ৰাখি 'অব্যাহত ৰাখক' টিপক"
+
+#. TRANSLATORS: Some calibration devices need the user to move a
+#. * dial or switch manually. We also show a picture showing them
+#. * what to do...
+#: ../panels/color/cc-color-calibrate.c:372
+msgid ""
+"Move your calibration device to the surface position and press 'Continue'"
+msgstr "আপোনাৰ মানাংকন ডিভাইচক পৃষ্ঠ অৱস্থানত ৰাখি 'অব্যাহত ৰাখক' টিপক"
+
+#. TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
+#. * is built into the palmrest and we need to fullscreen the
+#. * sample widget and shut the lid.
+#: ../panels/color/cc-color-calibrate.c:378
+msgid "Shut the laptop lid"
+msgstr "লেপটপ লিড বন্ধ কৰক"
+
+#. TRANSLATORS: We suck, the calibation failed and we have no
+#. * good idea why or any suggestions
+#: ../panels/color/cc-color-calibrate.c:409
+#| msgid "An internal error occurred."
+msgid "An internal error occurred that could not be recovered."
+msgstr "এটা অভ্যন্তৰীক ত্ৰুটি দেখা দিছে যাক উদ্ধাৰ কৰিব নোৱাৰি।"
+
+#. TRANSLATORS: Some required-at-runtime tools were not
+#. * installed, which should only affect insane distros
+#: ../panels/color/cc-color-calibrate.c:414
+msgid "Tools required for calibration are not installed."
+msgstr "মানাংকনৰ বাবে প্ৰয়োজনীয় সঁজুলিসমূহ ইনস্টল্ড নাই।"
+
+#. TRANSLATORS: The profile failed for some reason
+#: ../panels/color/cc-color-calibrate.c:420
+#| msgid "Theme cannot be deleted"
+msgid "The profile could not be generated."
+msgstr "আলেখ্য সৃজন কৰিব পৰা নগল।"
+
+#. TRANSLATORS: The user specified a whitepoint that was
+#. * unobtainable with the hardware they've got -- see
+#. * https://en.wikipedia.org/wiki/White_point for details
+#: ../panels/color/cc-color-calibrate.c:426
+msgid "The target whitepoint was not obtainable."
+msgstr "লক্ষ্য বগাবিন্দু অপ্ৰাপ্য আছিল।"
+
+#. TRANSLATORS: the display calibration process is finished
+#: ../panels/color/cc-color-calibrate.c:466
+#| msgctxt "print job"
+#| msgid "Completed"
+msgid "Complete!"
+msgstr "সম্পূৰ্ণ!"
+
+#. TRANSLATORS: the display calibration failed, and we also show
+#. * the translated (or untranslated) error string after this
+#: ../panels/color/cc-color-calibrate.c:474
+#| msgid "Configuration failed"
+msgid "Calibration failed!"
+msgstr "মানাংকন ব্যৰ্থ হল!"
+
+#. TRANSLATORS: The user can now remove the sensor from the screen
+#: ../panels/color/cc-color-calibrate.c:481
+msgid "You can remove the calibration device."
+msgstr "আপুনি মানাংকন ডিভাইচ আতৰাব পাৰে।"
+
+#. TRANSLATORS: The user has to be careful not to knock the
+#. * display off the screen (although we do cope if this is
+#. * detected early enough)
+#: ../panels/color/cc-color-calibrate.c:552
+msgid "Do not disturb the calibration device while in progress"
+msgstr "প্ৰগতিশীল অৱস্থাত মানাংকন ডিভাইচক অসুবিধা নিদিব"
+
+#. TRANSLATORS: This refers to the TFT display on a laptop
+#: ../panels/color/cc-color-common.c:41
+msgid "Laptop Screen"
+msgstr "লেপটপৰ পৰ্দা"
+
+#. TRANSLATORS: This refers to the embedded webcam on a laptop
+#: ../panels/color/cc-color-common.c:50
+msgid "Built-in Webcam"
+msgstr "বিল্ট-ইন ৱেবকেম"
+
+#. TRANSLATORS: an externally connected display, where %s is either the
+#. * model, vendor or ID, e.g. 'LP2480zx Monitor'
+#: ../panels/color/cc-color-common.c:65
+#, c-format
+msgid "%s Monitor"
+msgstr "%s মনিটৰ"
+
+#. TRANSLATORS: a flatbed scanner device, e.g. 'Epson Scanner'
+#: ../panels/color/cc-color-common.c:69
+#, c-format
+msgid "%s Scanner"
+msgstr "%s স্কেনাৰ"
+
+#. TRANSLATORS: a camera device, e.g. 'Nikon D60 Camera'
+#: ../panels/color/cc-color-common.c:73
+#, c-format
+msgid "%s Camera"
+msgstr "%s কেমেৰা"
+
+#. TRANSLATORS: a printer device, e.g. 'Epson Photosmart Printer'
+#: ../panels/color/cc-color-common.c:77
+#, c-format
+msgid "%s Printer"
+msgstr "%s প্ৰিন্টাৰ"
+
+#. TRANSLATORS: a webcam device, e.g. 'Philips HiDef Camera'
+#: ../panels/color/cc-color-common.c:81
+#, c-format
+msgid "%s Webcam"
+msgstr "%s ৱেবকেম"
+
+#. not calibrated
+#: ../panels/color/cc-color-device.c:303
+msgid "Not calibrated"
+msgstr "মানাংকিত নহয়"
+
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
 #: ../panels/color/cc-color-panel.c:131
@@ -261,14 +387,11 @@ msgid "All files"
 msgstr "সৰ্বধৰণৰ ফাইল"
 
 #: ../panels/color/cc-color-panel.c:506
-#| msgctxt "Distance"
-#| msgid "¼ Screen"
 msgid "Screen"
 msgstr "পৰ্দা"
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
 #: ../panels/color/cc-color-panel.c:776
-#| msgid "Save File"
 msgid "Save Profile"
 msgstr "আলেখ্য সংৰক্ষণ কৰক"
 
@@ -296,81 +419,15 @@ msgstr "মাপ লোৱা ডিভাইচয় প্ৰিন্টাৰ
 msgid "The device type is not currently supported."
 msgstr "ডিভাইচ ধৰণ বৰ্তমানে সমৰ্থিত নহয়।"
 
-#. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:1247
-msgid "Cannot remove automatically added profile"
-msgstr "স্বচালিতভাৱে যোগ কৰা আলেখ্য আতৰাব নোৱাৰি"
-
-#. TRANSLATORS: This refers to the TFT display on a laptop
-#: ../panels/color/cc-color-common.c:41
-#| msgid "Lock screen"
-msgid "Laptop Screen"
-msgstr "লেপটপৰ পৰ্দা"
-
-#. TRANSLATORS: This refers to the embedded webcam on a laptop
-#: ../panels/color/cc-color-common.c:50
-#| msgid "Built-in"
-msgid "Built-in Webcam"
-msgstr "বিল্ট-ইন ৱেবকেম"
-
-#. TRANSLATORS: an externally connected display, where %s is either the
-#. * model, vendor or ID, e.g. 'LP2480zx Monitor'
-#: ../panels/color/cc-color-common.c:65
-#, c-format
-#| msgid "Monitor"
-msgid "%s Monitor"
-msgstr "%s মনিটৰ"
-
-#. TRANSLATORS: a flatbed scanner device, e.g. 'Epson Scanner'
-#: ../panels/color/cc-color-common.c:69
-#, c-format
-#| msgctxt "Device kind"
-#| msgid "Scanner"
-msgid "%s Scanner"
-msgstr "%s স্কেনাৰ"
-
-#. TRANSLATORS: a camera device, e.g. 'Nikon D60 Camera'
-#: ../panels/color/cc-color-common.c:73
-#, c-format
-#| msgctxt "Device kind"
-#| msgid "Camera"
-msgid "%s Camera"
-msgstr "%s কেমেৰা"
-
-#. TRANSLATORS: a printer device, e.g. 'Epson Photosmart Printer'
-#: ../panels/color/cc-color-common.c:77
-#, c-format
-#| msgctxt "Device kind"
-#| msgid "Printer"
-msgid "%s Printer"
-msgstr "%s প্ৰিন্টাৰ"
-
-#. TRANSLATORS: a webcam device, e.g. 'Philips HiDef Camera'
-#: ../panels/color/cc-color-common.c:81
-#, c-format
-#| msgctxt "Device kind"
-#| msgid "Webcam"
-msgid "%s Webcam"
-msgstr "%s ৱেবকেম"
-
-#. not calibrated
-#: ../panels/color/cc-color-device.c:303
-#| msgid "Uncalibrated"
-msgid "Not calibrated"
-msgstr "মানাংকিত নহয়"
-
 #. TRANSLATORS: standard spaces are well known colorspaces like
 #. * sRGB, AdobeRGB and ProPhotoRGB
 #: ../panels/color/cc-color-profile.c:101
-#| msgctxt "Account type"
-#| msgid "Standard"
 msgid "Standard Space"
 msgstr "প্ৰামাণিক স্থান"
 
 #. TRANSLATORS: test profiles do things like changing the screen
 #. * a different color, or swap the red and green channels
 #: ../panels/color/cc-color-profile.c:107
-#| msgid "Test profile: "
 msgid "Test Profile"
 msgstr "পৰিক্ষামূলক আলেখ্য"
 
@@ -379,8 +436,6 @@ msgstr "পৰিক্ষামূলক আলেখ্য"
 #. * for instance the default monitor profile is created from the
 #. * primaries specified in the monitor EDID
 #: ../panels/color/cc-color-profile.c:115
-#| msgctxt "proxy method"
-#| msgid "Automatic"
 msgctxt "Automatically generated profile"
 msgid "Automatic"
 msgstr "স্বচালিত"
@@ -389,16 +444,12 @@ msgstr "স্বচালিত"
 #. * much less time to generate but may be a poor reflection of the
 #. * device capability
 #: ../panels/color/cc-color-profile.c:125
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "Low Quality"
 msgstr "নিম্ন গুণ"
 
 #. TRANSLATORS: the profile quality
 #: ../panels/color/cc-color-profile.c:130
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "Medium Quality"
 msgstr "মধ্যম গুণ"
@@ -407,8 +458,6 @@ msgstr "মধ্যম গুণ"
 #. * a *long* time, and have the best calibration and
 #. * characterisation data.
 #: ../panels/color/cc-color-profile.c:137
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "High Quality"
 msgstr "উচ্চ গুণ"
@@ -443,9 +492,37 @@ msgid "Full-screen display correction not possible with this profile"
 msgstr "এই আলেখ্যৰ সৈতে সম্পূৰ্ণ-পৰ্দা প্ৰদৰ্শন শুদ্ধ কৰা সম্ভব নহয়"
 
 #: ../panels/color/cc-color-profile.c:223
-#| msgid "This device has an old profile that may no longer be accurate."
 msgid "This profile may no longer be accurate"
 msgstr "এই আলেখ্য আৰু সঠিক নহব পাৰে"
+
+#: ../panels/color/color-calibrate.ui.h:1
+#| msgid "Screen Calibration"
+msgid "Display Calibration"
+msgstr "মানাংকন প্ৰদৰ্শন কৰক"
+
+#: ../panels/color/color-calibrate.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+#: ../panels/user-accounts/data/photo-dialog.ui.h:8
+#: ../panels/user-accounts/um-account-dialog.c:1067
+msgid "Cancel"
+msgstr "বাতিল কৰক"
+
+#. This starts the calibration process
+#: ../panels/color/color-calibrate.ui.h:4
+#| msgid "Start %s"
+msgid "Start"
+msgstr "আৰম্ভ কৰক"
+
+#. This resumes the calibration process
+#: ../panels/color/color-calibrate.ui.h:6
+msgid "Resume"
+msgstr "অব্যাহত ৰাখক"
+
+#. This button returns the user back to the color control panel
+#: ../panels/color/color-calibrate.ui.h:8
+#| msgid "Done!"
+msgid "Done"
+msgstr "কৰা হল"
 
 #. Text printed on screen
 #: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/gui_gtk.c:78
@@ -469,8 +546,6 @@ msgstr "মানাংকন হৈ থাকোতে আপুনি আপ�
 
 #. This is the approximate time it takes to calibrate the display.
 #: ../panels/color/color.ui.h:5
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgid "Quality"
 msgstr "গুণ"
 
@@ -480,7 +555,6 @@ msgid "Approximate Time"
 msgstr "আনুমানিক সময়"
 
 #: ../panels/color/color.ui.h:8
-#| msgid "Calibration"
 msgid "Calibration Quality"
 msgstr "মানাংকনৰ গুণ"
 
@@ -489,8 +563,6 @@ msgid "Select the type of display that is connected."
 msgstr "সংযুক্ত থকা প্ৰদৰ্শনৰ ধৰণ বাছক।"
 
 #: ../panels/color/color.ui.h:10
-#| msgctxt "Device kind"
-#| msgid "Display"
 msgid "Display Type"
 msgstr "প্ৰদৰ্শনৰ ধৰণ"
 
@@ -499,7 +571,6 @@ msgid "Select the sensor device you want to use for calibration."
 msgstr "মানাংকনৰ বাবে ব্যৱহাৰ কৰিব বিচৰা সংবেদনশীল ডিভাইচ বাছক।"
 
 #: ../panels/color/color.ui.h:12
-#| msgid "Calibration"
 msgid "Calibration Device"
 msgstr "মানাংকন ডিভাইচ"
 
@@ -509,11 +580,9 @@ msgid ""
 "D65 illuminant."
 msgstr ""
 "এটা প্ৰদৰ্শন লক্ষ্য বগা বিন্দু বাছক। বেছিৰভাগ প্ৰদৰ্শনক এটা D65 illuminant লে "
-"মানাংকন কৰিব "
-"লাগিব।"
+"মানাংকন কৰিব লাগিব।"
 
 #: ../panels/color/color.ui.h:14
-#| msgid "Large White Pointer"
 msgid "Profile Whitepoint"
 msgstr "আলেখ্য বগাবিন্দু"
 
@@ -532,11 +601,10 @@ msgid ""
 "profiles for this device."
 msgstr ""
 "বিকল্পভাৱে, আপুনি এই ডিভাইচৰ বাবে অন্য আলেখ্যসমূহৰ এটাৰ সৈতে ব্যৱহাৰ কৰা "
-"উজ্জ্বলতা স্তৰ "
-"ব্যৱহাৰ কৰিব পাৰিব।"
+"উজ্জ্বলতা "
+"স্তৰ ব্যৱহাৰ কৰিব পাৰিব।"
 
 #: ../panels/color/color.ui.h:17
-#| msgid "Brightness:"
 msgid "Display Brightness"
 msgstr "প্ৰদৰ্শনৰ উজ্জ্বলতা"
 
@@ -549,12 +617,10 @@ msgstr ""
 "উজ্জ্বলতা স্তৰৰ বাবে আলেখ্যসমূহ সৃষ্টি কৰিব পাৰিব।"
 
 #: ../panels/color/color.ui.h:19
-#| msgid "_Profile:"
 msgid "Profile Name:"
 msgstr "আলেখ্যৰ নাম:"
 
 #: ../panels/color/color.ui.h:20
-#| msgid "filename"
 msgid "Profile Name"
 msgstr "আলেখ্যৰ নাম"
 
@@ -563,7 +629,6 @@ msgid "Profile successfully created!"
 msgstr "আলেখ্য সফলভাৱে সৃষ্টি কৰা হৈছে!"
 
 #: ../panels/color/color.ui.h:22
-#| msgid "_Import"
 msgid "Export"
 msgstr "এক্সপোৰ্ট কৰক"
 
@@ -644,7 +709,6 @@ msgid "Set this profile for all users on this computer"
 msgstr "এই কমপিউটাৰৰ সকলো ব্যৱহাৰকাৰীৰ বাবে এই আলেখ্য সংহতি কৰক"
 
 #: ../panels/color/color.ui.h:37
-#| msgid "Enabled"
 msgid "Enable"
 msgstr "সামৰ্থবান কৰক"
 
@@ -678,90 +742,65 @@ msgid "LCD"
 msgstr "LCD"
 
 #: ../panels/color/color.ui.h:45
-msgid "1"
-msgstr "১"
-
-#: ../panels/color/color.ui.h:46
 msgid "LED"
 msgstr "LED"
 
-#: ../panels/color/color.ui.h:47
-msgid "8"
-msgstr "৮"
-
-#: ../panels/color/color.ui.h:48
+#: ../panels/color/color.ui.h:46
 msgid "CRT"
 msgstr "CRT"
 
-#: ../panels/color/color.ui.h:49
-msgid "2"
-msgstr "২"
-
-#: ../panels/color/color.ui.h:50
-#| msgid "Co_nnector:"
+#: ../panels/color/color.ui.h:47
 msgid "Projector"
 msgstr "প্ৰক্ষেপক"
 
-#: ../panels/color/color.ui.h:51
-msgid "5"
-msgstr "৫"
-
-#: ../panels/color/color.ui.h:52
-#| msgctxt "universal access, contrast"
+#: ../panels/color/color.ui.h:48
 #| msgid "High"
+msgctxt "Calibration quality"
 msgid "High"
 msgstr "উচ্চ"
 
-#: ../panels/color/color.ui.h:53
-#| msgid "10 minutes"
+#: ../panels/color/color.ui.h:49
 msgid "40 minutes"
 msgstr "৪০ মিনিট"
 
-#: ../panels/color/color.ui.h:54
-#| msgid "_Medium"
+#: ../panels/color/color.ui.h:50
+#| msgid "Medium"
+msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "মধ্যম"
 
-#: ../panels/color/color.ui.h:55 ../panels/power/power.ui.h:5
+#: ../panels/color/color.ui.h:51 ../panels/power/power.ui.h:5
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "৩০ মিনিট"
 
-#: ../panels/color/color.ui.h:56
-#| msgctxt "Battery power"
+#: ../panels/color/color.ui.h:52
 #| msgid "Low"
+msgctxt "Calibration quality"
 msgid "Low"
 msgstr "নিম্ন"
 
-#: ../panels/color/color.ui.h:57
-#| msgid "5 minutes"
+#: ../panels/color/color.ui.h:53
 msgid "15 minutes"
 msgstr "১৫ মিনিট"
 
-#: ../panels/color/color.ui.h:58
-msgid "0"
-msgstr "০"
-
-#: ../panels/color/color.ui.h:59
-#| msgid "Panel to display"
+#: ../panels/color/color.ui.h:54
 msgid "Native to display"
 msgstr "প্ৰদৰ্শন কৰিবলে স্থানীয়"
 
-#: ../panels/color/color.ui.h:60
-#| msgid "Pointing and Clicking"
+#: ../panels/color/color.ui.h:55
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (প্ৰিন্টিং আৰু প্ৰকাশন)"
 
-#: ../panels/color/color.ui.h:61
+#: ../panels/color/color.ui.h:56
 msgid "D55"
 msgstr "D55"
 
-#: ../panels/color/color.ui.h:62
+#: ../panels/color/color.ui.h:57
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (ফ'টোগ্ৰাফি আৰু গ্ৰাফিক্স)"
 
-#: ../panels/color/color.ui.h:63
-#| msgid "75%"
+#: ../panels/color/color.ui.h:58
 msgid "D75"
 msgstr "D75"
 
@@ -2945,7 +2984,6 @@ msgstr "শক্তি ব্যৱস্থাপনা সংহতিসম�
 
 #. Translators: those are keywords for the power control-center panel
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
-#| msgid "Power;Sleep;Suspend;Hibernate;Battery;"
 msgid ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
 msgstr ""
@@ -3255,12 +3293,6 @@ msgstr "বিকল্পসমূহ"
 #: ../panels/printers/options-dialog.ui.h:3
 msgid "Loading options…"
 msgstr "বিকল্পসমূহ ল'ড কৰা হৈছে…"
-
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-#: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1067
-msgid "Cancel"
-msgstr "বাতিল কৰক"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
 msgid "Loading drivers database..."
@@ -4193,7 +4225,6 @@ msgid "Approve All Connections"
 msgstr "সকলো সংযোগৰ অনুমতি দিয়ক"
 
 #: ../panels/sharing/sharing.ui.h:33
-#| msgid "_Show password"
 msgid "Show Password"
 msgstr "পাছৱাৰ্ড দেখুৱাওক"
 
@@ -6033,6 +6064,24 @@ msgstr "পছন্দসমূহ;সংহতিসমূহ;"
 msgid "All Settings"
 msgstr "সকলো সংহতি"
 
+#~ msgid "Cannot remove automatically added profile"
+#~ msgstr "স্বচালিতভাৱে যোগ কৰা আলেখ্য আতৰাব নোৱাৰি"
+
+#~ msgid "1"
+#~ msgstr "১"
+
+#~ msgid "8"
+#~ msgstr "৮"
+
+#~ msgid "2"
+#~ msgstr "২"
+
+#~ msgid "5"
+#~ msgstr "৫"
+
+#~ msgid "0"
+#~ msgstr "০"
+
 #~ msgid "No profile"
 #~ msgstr "কোনো আলেখ্য নাই"
 
@@ -7343,9 +7392,6 @@ msgstr "সকলো সংহতি"
 #~ msgid "Would you like to delete this theme?"
 #~ msgstr "আপুনি এই থিমটো আঁতৰাবলৈ ইচ্ছুক ?"
 
-#~ msgid "Theme cannot be deleted"
-#~ msgstr "থিম আঁতৰুৱা নাযাব"
-
 #~ msgid "Could not install theme engine"
 #~ msgstr "থিম ইঞ্জিন ইনস্টল কৰা নাযায়"
 
@@ -8253,10 +8299,6 @@ msgstr "সকলো সংহতি"
 
 #~ msgid "Your filter \"%s\" does not match any items."
 #~ msgstr "চিহ্নিত ফিল্টাৰ \"%s\" অনুযায়ী কোনো বস্তু পাওয়া যায়নি।"
-
-#~| msgid "<b>Start %s</b>"
-#~ msgid "Start %s"
-#~ msgstr "%s আৰম্ভ কৰুন"
 
 #~ msgid "Upgrade"
 #~ msgstr "উন্নহয়ন কৰক"
