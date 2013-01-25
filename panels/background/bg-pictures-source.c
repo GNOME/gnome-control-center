@@ -144,8 +144,8 @@ sort_func (GtkTreeModel *model,
 {
   CcBackgroundItem *item_a;
   CcBackgroundItem *item_b;
-  const char *name_a;
-  const char *name_b;
+  guint64 modified_a;
+  guint64 modified_b;
   int retval;
 
   gtk_tree_model_get (model, a,
@@ -155,10 +155,10 @@ sort_func (GtkTreeModel *model,
                       1, &item_b,
                       -1);
 
-  name_a = cc_background_item_get_name (item_a);
-  name_b = cc_background_item_get_name (item_b);
+  modified_a = cc_background_item_get_modified (item_a);
+  modified_b = cc_background_item_get_modified (item_b);
 
-  retval = g_utf8_collate (name_a, name_b);
+  retval = modified_b - modified_a;
 
   g_object_unref (item_a);
   g_object_unref (item_b);

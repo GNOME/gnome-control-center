@@ -50,6 +50,7 @@ struct CcBackgroundItemPrivate
         gboolean         is_deleted;
         gboolean         needs_download;
         CcBackgroundItemFlags flags;
+        guint64          modified;
 
         /* internal */
         GnomeBG         *bg;
@@ -71,7 +72,8 @@ enum {
         PROP_SOURCE_XML,
         PROP_FLAGS,
         PROP_SIZE,
-        PROP_NEEDS_DOWNLOAD
+        PROP_NEEDS_DOWNLOAD,
+        PROP_MODIFIED
 };
 
 static void     cc_background_item_class_init     (CcBackgroundItemClass *klass);
@@ -285,6 +287,7 @@ update_info (CcBackgroundItem *item,
                         item->priv->name = g_strdup (g_file_info_get_display_name (info));
 
                 item->priv->mime_type = g_strdup (g_file_info_get_content_type (info));
+                item->priv->modified = g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_TIME_MODIFIED);
         }
 
         if (info != NULL)
@@ -503,6 +506,14 @@ cc_background_item_get_needs_download (CcBackgroundItem *item)
 	return item->priv->needs_download;
 }
 
+guint64
+cc_background_item_get_modified (CcBackgroundItem *item)
+{
+	g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), 0);
+
+	return item->priv->modified;
+}
+
 static void
 cc_background_item_set_property (GObject      *object,
                                  guint         prop_id,
@@ -599,6 +610,9 @@ cc_background_item_get_property (GObject    *object,
 		break;
 	case PROP_NEEDS_DOWNLOAD:
 		g_value_set_boolean (value, self->priv->needs_download);
+		break;
+	case PROP_MODIFIED:
+		g_value_set_uint64 (value, self->priv->modified);
 		break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -725,6 +739,16 @@ cc_background_item_class_init (CcBackgroundItemClass *klass)
                                                                TRUE,
                                                                G_PARAM_READWRITE));
 
+        g_object_class_install_property (object_class,
+                                         PROP_MODIFIED,
+                                         g_param_spec_uint64 ("modified",
+                                                              "modified",
+                                                              NULL,
+                                                              0,
+                                                              G_MAXUINT64,
+                                                              0,
+                                                              G_PARAM_READABLE));
+
 
         g_type_class_add_private (klass, sizeof (CcBackgroundItemPrivate));
 }
@@ -742,6 +766,7 @@ cc_background_item_init (CcBackgroundItem *item)
         item->priv->secondary_color = g_strdup ("#000000000000");
         item->priv->needs_download = TRUE;
         item->priv->flags = 0;
+        item->priv->modified = 0;
 }
 
 static void
@@ -871,6 +896,7 @@ cc_background_item_dump (CcBackgroundItem *item)
 	if (priv->mime_type)
 		g_debug ("mime-type:\t\t%s", priv->mime_type);
 	g_debug ("dimensions:\t\t%d x %d", priv->width, priv->height);
+        g_debug ("modified: %u", priv->modified);
 	g_debug (" ");
 }
 
