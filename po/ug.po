@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-01-17 14:45+0000\n"
-"PO-Revision-Date: 2011-08-11 11:11+0600\n"
-"Last-Translator: Sahran <sahran.ug@gmail.com>\n"
+"POT-Creation-Date: 2013-01-25 18:34+0000\n"
+"PO-Revision-Date: 2013-01-26 13:05+0900\n"
+"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -163,9 +163,8 @@ msgid "Address"
 msgstr "ئادرېس"
 
 #: ../panels/bluetooth/bluetooth.ui.h:11
-#| msgid "Mouse and Touchpad Settings"
 msgid "Mouse & Touchpad Settings"
-msgstr ""
+msgstr "چاشقىنەك ۋە سېزىمچان تاختا تەڭشىكى"
 
 #: ../panels/bluetooth/bluetooth.ui.h:12
 #: ../panels/universal-access/uap.ui.h:38
@@ -177,8 +176,9 @@ msgid "Keyboard Settings"
 msgstr "ھەرپتاختا تەڭشەكلىرى‏"
 
 #: ../panels/bluetooth/bluetooth.ui.h:14
-msgid "Send Files..."
-msgstr "ھۆججەت يوللاۋاتىدۇ..."
+#| msgid "Send Files..."
+msgid "Send Files…"
+msgstr "ھۆججەت يوللاش…"
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:355
 msgid "Yes"
@@ -219,232 +219,603 @@ msgid ""
 "If you remove the device, you will have to set it up again before next use."
 msgstr "ئەگەر سىز بۇ ئۈسكىنىنى ئۆچۈرۈۋەتسىڭىز،كىيىن ئىشلەتكەندە قايتا تەڭشەش زۆرۈر بولىدۇ."
 
+#. TRANSLATORS: The user has to attach the sensor to the screen
+#: ../panels/color/cc-color-calibrate.c:360
+msgid "Place your calibration device over the square and press 'Start'"
+msgstr ""
+
+#. TRANSLATORS: Some calibration devices need the user to move a
+#. * dial or switch manually. We also show a picture showing them
+#. * what to do...
+#: ../panels/color/cc-color-calibrate.c:366
+msgid ""
+"Move your calibration device to the calibrate position and press 'Continue'"
+msgstr ""
+
+#. TRANSLATORS: Some calibration devices need the user to move a
+#. * dial or switch manually. We also show a picture showing them
+#. * what to do...
+#: ../panels/color/cc-color-calibrate.c:372
+msgid ""
+"Move your calibration device to the surface position and press 'Continue'"
+msgstr ""
+
+#. TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
+#. * is built into the palmrest and we need to fullscreen the
+#. * sample widget and shut the lid.
+#: ../panels/color/cc-color-calibrate.c:378
+msgid "Shut the laptop lid"
+msgstr ""
+
+#. TRANSLATORS: We suck, the calibation failed and we have no
+#. * good idea why or any suggestions
+#: ../panels/color/cc-color-calibrate.c:409
+#| msgid "An internal error occurred."
+msgid "An internal error occurred that could not be recovered."
+msgstr ""
+
+#. TRANSLATORS: Some required-at-runtime tools were not
+#. * installed, which should only affect insane distros
+#: ../panels/color/cc-color-calibrate.c:414
+msgid "Tools required for calibration are not installed."
+msgstr ""
+
+#. TRANSLATORS: The profile failed for some reason
+#: ../panels/color/cc-color-calibrate.c:420
+msgid "The profile could not be generated."
+msgstr ""
+
+#. TRANSLATORS: The user specified a whitepoint that was
+#. * unobtainable with the hardware they've got -- see
+#. * https://en.wikipedia.org/wiki/White_point for details
+#: ../panels/color/cc-color-calibrate.c:426
+msgid "The target whitepoint was not obtainable."
+msgstr "نىشاندىكى ئاق نۇقتىغا ئېرىشكىلى بولمايدۇ."
+
+#. TRANSLATORS: the display calibration process is finished
+#: ../panels/color/cc-color-calibrate.c:466
+#| msgctxt "print job"
+#| msgid "Completed"
+msgid "Complete!"
+msgstr "تامام!"
+
+#. TRANSLATORS: the display calibration failed, and we also show
+#. * the translated (or untranslated) error string after this
+#: ../panels/color/cc-color-calibrate.c:474
+#| msgid "Configuration failed"
+msgid "Calibration failed!"
+msgstr "تەڭشەش مەغلۇپ بولدى!"
+
+#. TRANSLATORS: The user can now remove the sensor from the screen
+#: ../panels/color/cc-color-calibrate.c:481
+msgid "You can remove the calibration device."
+msgstr "تەڭشەيدىغان ئۈسكۈنىنى چىقىرىۋەتسىڭىز بولمايدۇ."
+
+#. TRANSLATORS: The user has to be careful not to knock the
+#. * display off the screen (although we do cope if this is
+#. * detected early enough)
+#: ../panels/color/cc-color-calibrate.c:552
+msgid "Do not disturb the calibration device while in progress"
+msgstr ""
+
+#. TRANSLATORS: This refers to the TFT display on a laptop
+#: ../panels/color/cc-color-common.c:41
+#| msgid "Lock screen"
+msgid "Laptop Screen"
+msgstr ""
+
+#. TRANSLATORS: This refers to the embedded webcam on a laptop
+#: ../panels/color/cc-color-common.c:50
+#| msgid "Built-in"
+msgid "Built-in Webcam"
+msgstr "ئۆزىدىكى توركامېراسى"
+
+#. TRANSLATORS: an externally connected display, where %s is either the
+#. * model, vendor or ID, e.g. 'LP2480zx Monitor'
+#: ../panels/color/cc-color-common.c:65
+#, c-format
+#| msgid "Monitor"
+msgid "%s Monitor"
+msgstr "%s ئېكران"
+
+#. TRANSLATORS: a flatbed scanner device, e.g. 'Epson Scanner'
+#: ../panels/color/cc-color-common.c:69
+#, c-format
+#| msgctxt "Device kind"
+#| msgid "Scanner"
+msgid "%s Scanner"
+msgstr "%s شويلىلىغۇچ"
+
+#. TRANSLATORS: a camera device, e.g. 'Nikon D60 Camera'
+#: ../panels/color/cc-color-common.c:73
+#, c-format
+#| msgctxt "Device kind"
+#| msgid "Camera"
+msgid "%s Camera"
+msgstr "%s كامېرا"
+
+#. TRANSLATORS: a printer device, e.g. 'Epson Photosmart Printer'
+#: ../panels/color/cc-color-common.c:77
+#, c-format
+#| msgctxt "Device kind"
+#| msgid "Printer"
+msgid "%s Printer"
+msgstr "%s پرىنتېر"
+
+#. TRANSLATORS: a webcam device, e.g. 'Philips HiDef Camera'
+#: ../panels/color/cc-color-common.c:81
+#, c-format
+#| msgctxt "Device kind"
+#| msgid "Webcam"
+msgid "%s Webcam"
+msgstr "%s تور كامېراسى"
+
+#. not calibrated
+#: ../panels/color/cc-color-device.c:303
+#| msgid "Uncalibrated"
+msgid "Not calibrated"
+msgstr "تەڭشەلمىگەن"
+
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:112
+#: ../panels/color/cc-color-panel.c:131
 msgid "Default: "
 msgstr "كۆڭۈلدىكى: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:120
+#: ../panels/color/cc-color-panel.c:139
 msgid "Colorspace: "
 msgstr "رەڭ بوشلۇق: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:127
+#: ../panels/color/cc-color-panel.c:146
 msgid "Test profile: "
 msgstr "سىناق سەپلىمە ھۆججەت: "
 
-#. TRANSLATORS: this is when the profile should be set for all users
-#: ../panels/color/cc-color-panel.c:190 ../panels/color/color.ui.h:5
-msgid "Set for all users"
-msgstr "ھەممە ئىشلەتكۈچىنىڭ تەڭشىكى"
-
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:225
+#: ../panels/color/cc-color-panel.c:214
 msgid "Select ICC Profile File"
 msgstr "ICC سەپلىمە ھۆججەتنى تاللايدۇ"
 
-#: ../panels/color/cc-color-panel.c:228
+#: ../panels/color/cc-color-panel.c:217
 msgid "_Import"
 msgstr "ئىمپورت قىل(_I)"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:239
+#: ../panels/color/cc-color-panel.c:228
 msgid "Supported ICC profiles"
 msgstr "قوللايدىغان ICC سەپلىمە ھۆججەتلەر"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:246
+#: ../panels/color/cc-color-panel.c:235
 msgid "All files"
 msgstr "ھەممە ھۆججەتلەر"
 
-#. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:774
-#: ../panels/sound/gvc-mixer-dialog.c:1530
-msgid "Device"
-msgstr "ئۈسكۈنە"
+#: ../panels/color/cc-color-panel.c:506
+#| msgctxt "Distance"
+#| msgid "¼ Screen"
+msgid "Screen"
+msgstr "ئېكران"
 
-#. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:809
-msgid "Calibration"
-msgstr "تۈزىتىش"
+#. TRANSLATORS: this is the dialog to save the ICC profile
+#: ../panels/color/cc-color-panel.c:776
+#| msgid "Remove profile"
+msgid "Save Profile"
+msgstr "Profile نى ساقلاش"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:868
+#: ../panels/color/cc-color-panel.c:1137
 msgid "Create a color profile for the selected device"
 msgstr "تاللانغان ئۈسكۈنە ئۈچۈن بىر رەڭ سەپلىمە ھۆججىتى قۇرىدۇ"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:883 ../panels/color/cc-color-panel.c:907
+#: ../panels/color/cc-color-panel.c:1152 ../panels/color/cc-color-panel.c:1176
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
 msgstr "تەكشۈرىدىغان چالغۇ بايقالمىدى. ئۇنىڭ ئېچىلىپ توغرا باغلانغانلىقىنى تەكشۈرۈڭ."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:917
+#: ../panels/color/cc-color-panel.c:1186
 msgid "The measuring instrument does not support printer profiling."
 msgstr "تەكشۈرىدىغان چالغۇ پرىنتېر سەپلىمە ھۆججىتىنى قوللىمايدۇ."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:928
+#: ../panels/color/cc-color-panel.c:1197
 msgid "The device type is not currently supported."
 msgstr "بۇ خىل ئۈسكۈنە تىپىنى نۆۋەتتە قوللىمايدۇ."
 
-#. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:988
-msgid "Cannot remove automatically added profile"
-msgstr "ئۆزلۈكىدىن قوشۇلغان سەپلىمە ھۆججەتنى چىقىرىۋېتەلمەيدۇ"
+#. TRANSLATORS: standard spaces are well known colorspaces like
+#. * sRGB, AdobeRGB and ProPhotoRGB
+#: ../panels/color/cc-color-profile.c:101
+#| msgctxt "Account type"
+#| msgid "Standard"
+msgid "Standard Space"
+msgstr "ئۆلچەملىك بوشلۇق"
 
-#. TRANSLATORS: this is when there is no profile for the device
-#: ../panels/color/cc-color-panel.c:1309
-msgid "No profile"
-msgstr "سەپلىمە ھۆججەت يوق"
+#. TRANSLATORS: test profiles do things like changing the screen
+#. * a different color, or swap the red and green channels
+#: ../panels/color/cc-color-profile.c:107
+#| msgid "Test profile: "
+msgid "Test Profile"
+msgstr "سىناق سەپلىمە ھۆججەت(Profile)"
 
-#: ../panels/color/cc-color-panel.c:1340
-#, c-format
-msgid "%i year"
-msgid_plural "%i years"
-msgstr[0] "%i يىل"
+#. TRANSLATORS: automatic profiles are generated automatically
+#. * by the color management system based on manufacturing data,
+#. * for instance the default monitor profile is created from the
+#. * primaries specified in the monitor EDID
+#: ../panels/color/cc-color-profile.c:115
+#| msgctxt "proxy method"
+#| msgid "Automatic"
+msgctxt "Automatically generated profile"
+msgid "Automatic"
+msgstr "ئاپتوماتىك"
 
-#: ../panels/color/cc-color-panel.c:1351
-#, c-format
-msgid "%i month"
-msgid_plural "%i months"
-msgstr[0] "%i ئاي"
+#. TRANSLATORS: the profile quality - low quality profiles take
+#. * much less time to generate but may be a poor reflection of the
+#. * device capability
+#: ../panels/color/cc-color-profile.c:125
+#| msgctxt "Printer Option Group"
+#| msgid "Image Quality"
+msgctxt "Profile quality"
+msgid "Low Quality"
+msgstr "سۈپىتى تۆۋەن"
 
-#: ../panels/color/cc-color-panel.c:1362
-#, c-format
-msgid "%i week"
-msgid_plural "%i weeks"
-msgstr[0] "%i ھەپتە"
+#. TRANSLATORS: the profile quality
+#: ../panels/color/cc-color-profile.c:130
+#| msgctxt "Printer Option Group"
+#| msgid "Image Quality"
+msgctxt "Profile quality"
+msgid "Medium Quality"
+msgstr "سۈپىتى نورمال"
 
-#. fallback
-#: ../panels/color/cc-color-panel.c:1369
-#, c-format
-msgid "Less than 1 week"
-msgstr "بىر ھەپتىدىن قىسقا"
+#. TRANSLATORS: the profile quality - high quality profiles take
+#. * a *long* time, and have the best calibration and
+#. * characterisation data.
+#: ../panels/color/cc-color-profile.c:137
+#| msgctxt "Printer Option Group"
+#| msgid "Image Quality"
+msgctxt "Profile quality"
+msgid "High Quality"
+msgstr "سۈپىتى يۇقىرى"
 
-#: ../panels/color/cc-color-panel.c:1431
+#. TRANSLATORS: this default RGB space is used for printers that
+#. * do not have additional printer profiles specified in the PPD
+#: ../panels/color/cc-color-profile.c:154
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "كۆڭۈلدىكى RGB"
 
-#: ../panels/color/cc-color-panel.c:1436
+#. TRANSLATORS: this default CMYK space is used for printers that
+#. * do not have additional printer profiles specified in the PPD
+#: ../panels/color/cc-color-profile.c:161
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "كۆڭۈلدىكى CMYK"
 
-#: ../panels/color/cc-color-panel.c:1441
+#. TRANSLATORS: this default gray space is used for printers that
+#. * do not have additional printer profiles specified in the PPD
+#: ../panels/color/cc-color-profile.c:168
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "كۆڭۈلدىكى كۈلرەڭلىك"
 
-#: ../panels/color/cc-color-panel.c:1559 ../panels/color/cc-color-panel.c:1600
-#: ../panels/color/cc-color-panel.c:1611 ../panels/color/cc-color-panel.c:1622
-msgid "Uncalibrated"
-msgstr "تۈزىتىلمىگەن"
-
-#: ../panels/color/cc-color-panel.c:1562
-msgid "This device is not color managed."
-msgstr "بۇ ئۈسكۈنە رەڭ باشقۇرمايدۇ."
-
-#: ../panels/color/cc-color-panel.c:1603
-msgid "This device is using manufacturing calibrated data."
-msgstr "بۇ ئۈسكۈنە زاۋۇتتا تۈزىتىلگەن سانلىق-مەلۇماتنى ئىشلىتىۋاتىدۇ."
-
-#: ../panels/color/cc-color-panel.c:1614
-msgid ""
-"This device does not have a profile suitable for whole-screen color "
-"correction."
-msgstr "بۇ ئۈسكۈنە پۈتكۈل ئېكران رەڭ تۈزىتىش سەپلىمە ھۆججىتىنىڭ يۈرۈشلۈكى يوق."
-
-#: ../panels/color/cc-color-panel.c:1647
-msgid "This device has an old profile that may no longer be accurate."
-msgstr "بۇ ئۈسكۈنىنىڭ كونا سەپلىمە ھۆججىتى بار، توغرىلىقىنى سېلىشتۇرالمايدۇ."
-
-#. TRANSLATORS: this is when the calibration profile age is not
-#. * specified as it has been autogenerated from the hardware
-#: ../panels/color/cc-color-panel.c:1675
-msgid "Not specified"
-msgstr "بەلگىلەنمىگەن"
-
-#. add the 'No devices detected' entry
-#: ../panels/color/cc-color-panel.c:1860
-msgid "No devices supporting color management detected"
-msgstr "رەڭ باشقۇرۇشنى قوللايدىغان ھېچقانداق ئۈسكۈنە تېپىلمىدى"
-
-#: ../panels/color/color.ui.h:1
-#: ../panels/color/gnome-color-panel.desktop.in.in.h:1
-#: ../panels/universal-access/zoom-options.ui.h:28
-msgid "Color"
-msgstr "رەڭ"
-
-#: ../panels/color/color.ui.h:2
-msgid "Each device needs an up to date color profile to be color managed."
-msgstr "ھەر بىر ئۈسكۈنە رەڭ باشقۇرغۇچ ئارقىلىق رەڭ سەپلىمە ھۆججىتىنى يېڭىلاشقا ئېھتىياجلىق."
-
-#: ../panels/color/color.ui.h:3
-msgid "Learn more"
-msgstr "تەپسىلات بىلدۈرگۈسى"
-
-#: ../panels/color/color.ui.h:4
-msgid "Learn more about color management"
-msgstr "رەڭ باشقۇرۇش ھەققىدە تېخىمۇ كۆپ ئۇچۇر"
-
-#: ../panels/color/color.ui.h:6
-msgid "Set this profile for all users on this computer"
-msgstr "كومپيۇتېردىكى بارلىق ئىشلەتكۈچىدە مۇشۇ profile نى ئىشلەتسۇن"
-
-#: ../panels/color/color.ui.h:7
-msgid "Add profile"
-msgstr "سەپلىمە ھۆججەت قوش"
-
-#: ../panels/color/color.ui.h:8 ../panels/wacom/gnome-wacom-properties.ui.h:10
-msgid "Calibrate…"
-msgstr "تۈزەت…"
-
-#: ../panels/color/color.ui.h:9
-msgid "Calibrate the device"
-msgstr "ئۈسكۈنىنى تۈزەت"
-
-#: ../panels/color/color.ui.h:10
-msgid "Remove profile"
-msgstr "سەپلىمە ھۆججەت چىقىرىۋەت"
-
-#: ../panels/color/color.ui.h:11
-msgid "View details"
-msgstr "تەپسىلاتىنى كۆرسەت"
-
-#: ../panels/color/color.ui.h:12
-msgid "Import File…"
+#: ../panels/color/cc-color-profile.c:192
+msgid "Vendor supplied factory calibration data"
 msgstr ""
 
+#: ../panels/color/cc-color-profile.c:201
+msgid "Full-screen display correction not possible with this profile"
+msgstr ""
+
+#: ../panels/color/cc-color-profile.c:223
+#| msgid "This device has an old profile that may no longer be accurate."
+msgid "This profile may no longer be accurate"
+msgstr ""
+
+#: ../panels/color/color-calibrate.ui.h:1
+#| msgid "Calibration"
+msgid "Display Calibration"
+msgstr ""
+
+#: ../panels/color/color-calibrate.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+#: ../panels/user-accounts/data/photo-dialog.ui.h:8
+#: ../panels/user-accounts/um-account-dialog.c:1067
+msgid "Cancel"
+msgstr "ئەمەلدىن قالدۇر"
+
+#. This starts the calibration process
+#: ../panels/color/color-calibrate.ui.h:4
+msgid "Start"
+msgstr "باشلاش"
+
+#. This resumes the calibration process
+#: ../panels/color/color-calibrate.ui.h:6
+msgid "Resume"
+msgstr "داۋاملاشتۇر"
+
+#. This button returns the user back to the color control panel
+#: ../panels/color/color-calibrate.ui.h:8
+#| msgid "Done!"
+msgid "Done"
+msgstr "تامام"
+
+#. Text printed on screen
+#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/gui_gtk.c:78
+msgid "Screen Calibration"
+msgstr "ئېكراننى تەڭشەش"
+
+#: ../panels/color/color.ui.h:2
+msgid ""
+"Calibration will produce a profile that you can use to color manage your "
+"screen. The longer you spend on calibration, the better the quality of the "
+"color profile."
+msgstr ""
+
+#: ../panels/color/color.ui.h:3
+msgid ""
+"You will not be able to use your computer while calibration takes place."
+msgstr ""
+
+#. This is the approximate time it takes to calibrate the display.
+#: ../panels/color/color.ui.h:5
+#| msgctxt "Printer Option Group"
+#| msgid "Image Quality"
+msgid "Quality"
+msgstr "سۈپەت"
+
+#. This is the approximate time it takes to calibrate the display.
+#: ../panels/color/color.ui.h:7
+msgid "Approximate Time"
+msgstr ""
+
+#: ../panels/color/color.ui.h:8
+#| msgid "Calibration"
+msgid "Calibration Quality"
+msgstr "تەڭشەش سۈپىتى"
+
+#: ../panels/color/color.ui.h:9
+msgid "Select the type of display that is connected."
+msgstr ""
+
+#: ../panels/color/color.ui.h:10
+#| msgctxt "Device kind"
+#| msgid "Display"
+msgid "Display Type"
+msgstr "ئېكران تىپى"
+
+#: ../panels/color/color.ui.h:11
+msgid "Select the sensor device you want to use for calibration."
+msgstr ""
+
+#: ../panels/color/color.ui.h:12
+#| msgid "Calibration"
+msgid "Calibration Device"
+msgstr "تەڭشەش ئۈسكۈنىسى"
+
 #: ../panels/color/color.ui.h:13
+msgid ""
+"Select a display target white point. Most displays should be calibrated to a "
+"D65 illuminant."
+msgstr ""
+
+#: ../panels/color/color.ui.h:14
+msgid "Profile Whitepoint"
+msgstr ""
+
+#: ../panels/color/color.ui.h:15
+msgid ""
+"Please set the display to a brightness that is typical for you. Color "
+"management will be most accurate at this brightness level."
+msgstr ""
+
+#: ../panels/color/color.ui.h:16
+msgid ""
+"Alternatively, you can use the brightness level used with one of the other "
+"profiles for this device."
+msgstr ""
+
+#: ../panels/color/color.ui.h:17
+#| msgid "Brightness:"
+msgid "Display Brightness"
+msgstr "ئېكران يورۇقلۇقى"
+
+#: ../panels/color/color.ui.h:18
+msgid ""
+"You can use a color profile on different computers, or even create profiles "
+"for different lighting conditions."
+msgstr ""
+
+#: ../panels/color/color.ui.h:19
+#| msgid "_Profile:"
+msgid "Profile Name:"
+msgstr "سەپلىمە ھۆججەت ئاتى:"
+
+#: ../panels/color/color.ui.h:20
+#| msgid "_Profile:"
+msgid "Profile Name"
+msgstr "سەپلىمە ھۆججەت ئاتى"
+
+#: ../panels/color/color.ui.h:21
+msgid "Profile successfully created!"
+msgstr "سەپلىمە ھۆججەت مۇۋەپپەقىيەتلىك ياسالدى."
+
+#: ../panels/color/color.ui.h:22
+#| msgid "_Import"
+msgid "Export"
+msgstr "ئېكسپورت قىلىش"
+
+#: ../panels/color/color.ui.h:23
+msgid ""
+"You may find these instructions on how to use the profile on <a href=\"linux"
+"\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
+"\">Microsoft Windows</a> systems useful."
+msgstr ""
+
+#: ../panels/color/color.ui.h:24
+#: ../panels/user-accounts/um-fingerprint-dialog.c:743
+msgid "Summary"
+msgstr "ئۈزۈندى"
+
+#: ../panels/color/color.ui.h:25
+msgid "Import File…"
+msgstr "ھۆججەت ئىمپورت قىلىش"
+
+#: ../panels/color/color.ui.h:26
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
 msgstr ""
 
-#: ../panels/color/color.ui.h:14
+#: ../panels/color/color.ui.h:27
 msgid "Device type:"
 msgstr "ئۈسكۈنە تىپى:"
 
-#: ../panels/color/color.ui.h:15
+#: ../panels/color/color.ui.h:28
 msgid "Manufacturer:"
 msgstr "ياسىغۇچى:"
 
-#: ../panels/color/color.ui.h:16
+#: ../panels/color/color.ui.h:29
 msgid "Model:"
 msgstr "تىپى:"
 
-#: ../panels/color/color.ui.h:17
+#: ../panels/color/color.ui.h:30
 msgid ""
 "Image files can be dragged on this window to auto-complete the above fields."
 msgstr "سۈرەت ھۆججەتنى بۇ كۆزنەككە سۆرەپ ئۈستىدىكى سۆز بۆلەكلىرىنى ئۆزلۈكىدىن تولدۇرغىلى بولىدۇ."
+
+#: ../panels/color/color.ui.h:31
+#: ../panels/color/gnome-color-panel.desktop.in.in.h:1
+#: ../panels/universal-access/zoom-options.ui.h:28
+msgid "Color"
+msgstr "رەڭ"
+
+#: ../panels/color/color.ui.h:32
+msgid "Each device needs an up to date color profile to be color managed."
+msgstr "ھەر بىر ئۈسكۈنە رەڭ باشقۇرغۇچ ئارقىلىق رەڭ سەپلىمە ھۆججىتىنى يېڭىلاشقا ئېھتىياجلىق."
+
+#: ../panels/color/color.ui.h:33
+msgid "Learn more"
+msgstr "تەپسىلات بىلدۈرگۈسى"
+
+#: ../panels/color/color.ui.h:34
+msgid "Learn more about color management"
+msgstr "رەڭ باشقۇرۇش ھەققىدە تېخىمۇ كۆپ ئۇچۇر"
+
+#: ../panels/color/color.ui.h:35
+msgid "Set for all users"
+msgstr "ھەممە ئىشلەتكۈچىنىڭ تەڭشىكى"
+
+#: ../panels/color/color.ui.h:36
+msgid "Set this profile for all users on this computer"
+msgstr "كومپيۇتېردىكى بارلىق ئىشلەتكۈچىدە مۇشۇ profile نى ئىشلەتسۇن"
+
+#: ../panels/color/color.ui.h:37
+#| msgid "Enabled"
+msgid "Enable"
+msgstr "قوزغات"
+
+#: ../panels/color/color.ui.h:38
+msgid "Add profile"
+msgstr "سەپلىمە ھۆججەت قوش"
+
+#: ../panels/color/color.ui.h:39
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+msgid "Calibrate…"
+msgstr "تۈزەت…"
+
+#: ../panels/color/color.ui.h:40
+msgid "Calibrate the device"
+msgstr "ئۈسكۈنىنى تۈزەت"
+
+#: ../panels/color/color.ui.h:41
+msgid "Remove profile"
+msgstr "سەپلىمە ھۆججەت چىقىرىۋەت"
+
+#: ../panels/color/color.ui.h:42
+msgid "View details"
+msgstr "تەپسىلاتىنى كۆرسەت"
+
+#: ../panels/color/color.ui.h:43
+msgid "Unable to detect any devices that can be color managed"
+msgstr ""
+
+#: ../panels/color/color.ui.h:44
+msgid "LCD"
+msgstr "LCD"
+
+#: ../panels/color/color.ui.h:45
+msgid "LED"
+msgstr "LED"
+
+#: ../panels/color/color.ui.h:46
+msgid "CRT"
+msgstr "CRT"
+
+#: ../panels/color/color.ui.h:47
+#| msgid "Co_nnector:"
+msgid "Projector"
+msgstr "پرويېكتور"
+
+#: ../panels/color/color.ui.h:48
+#| msgctxt "universal access, contrast"
+#| msgid "High"
+msgctxt "Calibration quality"
+msgid "High"
+msgstr "يۇقىرى"
+
+#: ../panels/color/color.ui.h:49
+#| msgid "10 minutes"
+msgid "40 minutes"
+msgstr "40 مىنۇت"
+
+#: ../panels/color/color.ui.h:50
+msgctxt "Calibration quality"
+msgid "Medium"
+msgstr "ئوتتۇراھال"
+
+#: ../panels/color/color.ui.h:51 ../panels/power/power.ui.h:5
+#: ../panels/privacy/privacy.ui.h:7
+msgid "30 minutes"
+msgstr "30 مىنۇت"
+
+#: ../panels/color/color.ui.h:52
+#| msgctxt "Battery power"
+#| msgid "Low"
+msgctxt "Calibration quality"
+msgid "Low"
+msgstr "تۆۋەن"
+
+#: ../panels/color/color.ui.h:53
+#| msgid "5 minutes"
+msgid "15 minutes"
+msgstr "15 مىنۇت"
+
+#: ../panels/color/color.ui.h:54
+#| msgid "Panel to display"
+msgid "Native to display"
+msgstr ""
+
+#: ../panels/color/color.ui.h:55
+#| msgid "Pointing and Clicking"
+msgid "D50 (Printing and publishing)"
+msgstr "D50 (باسمىچىلىق ۋە نەشرىيات)"
+
+#: ../panels/color/color.ui.h:56
+msgid "D55"
+msgstr "D55"
+
+#: ../panels/color/color.ui.h:57
+msgid "D65 (Photography and graphics)"
+msgstr "D65 (سۈرەتچىلىك ۋە گرافىك)"
+
+#: ../panels/color/color.ui.h:58
+#| msgid "75%"
+msgid "D75"
+msgstr "D75"
 
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:2
 msgid "Color management settings"
@@ -455,51 +826,46 @@ msgstr "رەڭ باشقۇرۇش تەڭشىكى"
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "رەڭ;ICC;سەپلىمە ھۆججەت;تۈزىتىش;پرىنتېر;ئېكران;"
 
-#: ../panels/common/cc-common-language.c:638
+#: ../panels/common/cc-common-language.c:639
 msgid "British English"
 msgstr "ئەنگلىيە ئىنگلىزچە"
 
-#: ../panels/common/cc-common-language.c:641
+#: ../panels/common/cc-common-language.c:642
 msgid "Spanish"
 msgstr "ئىسپانچە"
 
-#: ../panels/common/cc-common-language.c:642
+#: ../panels/common/cc-common-language.c:643
 msgid "Chinese (simplified)"
 msgstr "ئاددىي خەنزۇچە"
 
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:686
+#: ../panels/common/cc-common-language.c:687
 msgid "United States"
 msgstr "ئامېرىكا قوشما شتاتلىرى"
 
-#: ../panels/common/cc-common-language.c:687
+#: ../panels/common/cc-common-language.c:688
 msgid "Germany"
 msgstr "گېرمانىيە"
 
-#: ../panels/common/cc-common-language.c:688
+#: ../panels/common/cc-common-language.c:689
 msgid "France"
 msgstr "فىرانسىيە"
 
-#: ../panels/common/cc-common-language.c:689
+#: ../panels/common/cc-common-language.c:690
 msgid "Spain"
 msgstr "ئىسپانىيە"
 
-#: ../panels/common/cc-common-language.c:690
+#: ../panels/common/cc-common-language.c:691
 msgid "China"
 msgstr "جۇڭگو"
 
-#: ../panels/common/cc-language-chooser.c:121
-#| msgid "Other profile…"
+#: ../panels/common/cc-language-chooser.c:120
 msgid "Other…"
 msgstr "باشقا…"
 
-#: ../panels/common/cc-language-chooser.c:293
+#: ../panels/common/cc-language-chooser.c:292
 msgid "Select a region"
 msgstr "رايون تاللاڭ"
-
-#: ../panels/common/gdm-languages.c:781
-msgid "Unspecified"
-msgstr "بەلگىلەنمىگەن"
 
 #: ../panels/common/language-chooser.ui.h:1
 msgid "Select a language"
@@ -760,9 +1126,8 @@ msgstr "نامەلۇم"
 
 #: ../panels/info/cc-info-panel.c:542
 #, c-format
-#| msgid "%d-bit"
 msgid "%s %d-bit"
-msgstr ""
+msgstr "%s %d-بىت"
 
 #: ../panels/info/cc-info-panel.c:544
 #, c-format
@@ -938,16 +1303,15 @@ msgstr "بىر تەرەپ قىلغۇچ"
 #. To translators: this field contains the distro name, version and type
 #: ../panels/info/info.ui.h:8
 msgid "Base system"
-msgstr ""
+msgstr "ئاساسى سىستېما"
 
 #: ../panels/info/info.ui.h:9
 msgid "Disk"
 msgstr "دىسكا"
 
 #: ../panels/info/info.ui.h:10
-#| msgid "Calculating..."
 msgid "Calculating…"
-msgstr ""
+msgstr "ھېسابلاش…"
 
 #: ../panels/info/info.ui.h:11
 msgid "Graphics"
@@ -1002,9 +1366,8 @@ msgid "_Software"
 msgstr "يۇمشاق دېتال(_S)"
 
 #: ../panels/info/info.ui.h:26
-#| msgid "Other Media"
 msgid "_Other Media…"
-msgstr ""
+msgstr "باشقا ۋاسىتە(_O)…"
 
 #: ../panels/info/info.ui.h:27
 msgid "_Never prompt or start programs on media insertion"
@@ -1095,7 +1458,6 @@ msgid "Home folder"
 msgstr "ماكان مۇندەرىجە"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:7
-#| msgid "Search"
 msgctxt "keybinding"
 msgid "Search"
 msgstr "ئىزدە"
@@ -1194,96 +1556,84 @@ msgid "Disabled"
 msgstr "ئىناۋەتسىز قىلىنغان"
 
 #: ../panels/keyboard/cc-keyboard-option.c:255
-#| msgid "Left Half"
 msgid "Left Shift"
 msgstr "سول Shift"
 
 #: ../panels/keyboard/cc-keyboard-option.c:256
-#| msgid "Left Half"
 msgid "Left Alt"
 msgstr "سول Alt"
 
 #: ../panels/keyboard/cc-keyboard-option.c:257
-#| msgid "Left Half"
 msgid "Left Ctrl"
-msgstr ""
+msgstr "سول Ctrl"
 
 #: ../panels/keyboard/cc-keyboard-option.c:258
-#| msgid "Right Half"
 msgid "Right Shift"
 msgstr "ئوڭ Shift"
 
 #: ../panels/keyboard/cc-keyboard-option.c:259
-#| msgid "Right Half"
 msgid "Right Alt"
-msgstr ""
+msgstr "ئوڭ Alt"
 
 #: ../panels/keyboard/cc-keyboard-option.c:260
-#| msgid "Right Half"
 msgid "Right Ctrl"
-msgstr ""
+msgstr "ئوڭ Ctrl"
 
 #: ../panels/keyboard/cc-keyboard-option.c:261
-#| msgid "Left Half"
 msgid "Left Alt+Shift"
-msgstr ""
+msgstr "سول Alt+Shift"
 
 #: ../panels/keyboard/cc-keyboard-option.c:262
-#| msgid "Right Half"
 msgid "Right Alt+Shift"
-msgstr ""
+msgstr "ئوڭ Alt+Shift"
 
 #: ../panels/keyboard/cc-keyboard-option.c:263
 msgid "Left Ctrl+Shift"
-msgstr ""
+msgstr "سول Ctrl+Shift"
 
 #: ../panels/keyboard/cc-keyboard-option.c:264
-#| msgid "Right Half"
 msgid "Right Ctrl+Shift"
-msgstr ""
+msgstr "ئوڭ Ctrl+Shift"
 
 #: ../panels/keyboard/cc-keyboard-option.c:265
 msgid "Left+Right Shift"
-msgstr ""
+msgstr "سول+ئوڭ Shift"
 
 #: ../panels/keyboard/cc-keyboard-option.c:266
-#| msgid "Left Ring"
 msgid "Left+Right Alt"
-msgstr ""
+msgstr "سول+ئوڭ Alt"
 
 #: ../panels/keyboard/cc-keyboard-option.c:267
 msgid "Left+Right Ctrl"
-msgstr ""
+msgstr "سول+ئوڭ Ctrl"
 
 #: ../panels/keyboard/cc-keyboard-option.c:268
-#| msgid "Ctrl+Alt+Shift+Space"
 msgid "Alt+Shift"
 msgstr "Alt+Shift"
 
 #: ../panels/keyboard/cc-keyboard-option.c:269
-#| msgid "Ctrl+Alt+Shift+Space"
 msgid "Ctrl+Shift"
-msgstr ""
+msgstr "Ctrl+Shift"
 
 #: ../panels/keyboard/cc-keyboard-option.c:270
 msgid "Alt+Ctrl"
-msgstr ""
+msgstr "Alt+Ctrl"
 
 #: ../panels/keyboard/cc-keyboard-option.c:271
 msgid "Caps"
-msgstr "چوقىسى"
+msgstr "Caps"
 
 #: ../panels/keyboard/cc-keyboard-option.c:272
 msgid "Shift+Caps"
-msgstr ""
+msgstr "Shift+Caps"
 
 #: ../panels/keyboard/cc-keyboard-option.c:273
 msgid "Alt+Caps"
-msgstr ""
+msgstr "Alt+Caps"
 
 #: ../panels/keyboard/cc-keyboard-option.c:274
 msgid "Ctrl+Caps"
-msgstr ""
+msgstr "Ctrl+Caps"
 
 #: ../panels/keyboard/cc-keyboard-option.c:390
 msgid "Alternative Characters Key"
@@ -1294,7 +1644,6 @@ msgid "Compose Key"
 msgstr "Compose كۇنۇپكىسى"
 
 #: ../panels/keyboard/cc-keyboard-option.c:399
-#| msgid "Switch to next source"
 msgid "Modifiers-only switch to next source"
 msgstr ""
 
@@ -1776,7 +2125,6 @@ msgstr "DNS"
 
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:6
-#| msgid "_Options"
 msgid "_Options…"
 msgstr "تاللانمىلار(_O)…"
 
@@ -1838,7 +2186,6 @@ msgid "Select the interface to use for the new service"
 msgstr "يېڭى مۇلازىمەتكە ئىشلىتىدىغان ئېغىزنى تاللاڭ"
 
 #: ../panels/network/network.ui.h:2
-#| msgid "Calibrate…"
 msgid "C_reate…"
 msgstr "قۇر(_R)…"
 
@@ -1875,9 +2222,8 @@ msgid "Username"
 msgstr "ئىشلەتكۈچى ئاتى"
 
 #: ../panels/network/network-vpn.ui.h:7
-#| msgid "_Configure..."
 msgid "_Configure…"
-msgstr ""
+msgstr "سەپلە(_C)…"
 
 #: ../panels/network/network-wifi.ui.h:1
 msgid "Wi-Fi Hotspot"
@@ -1892,14 +2238,12 @@ msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
 #: ../panels/network/network-wifi.ui.h:4
-#| msgid "_Use as Hotspot..."
 msgid "_Use as Hotspot…"
-msgstr ""
+msgstr "قىزىق نۇقتا سۈپىتىدە ئىشلەت(_U)…"
 
 #: ../panels/network/network-wifi.ui.h:5
-#| msgid "_Connect to Hidden Network..."
 msgid "_Connect to Hidden Network…"
-msgstr ""
+msgstr "يوشۇرۇن تورغا باغلا(_C)…"
 
 #: ../panels/network/network-wifi.ui.h:6
 msgid "_Disconnect"
@@ -1930,7 +2274,6 @@ msgid "_Forget Network"
 msgstr "تورنى ئۇنتۇپ كەت(_F)"
 
 #: ../panels/network/network-wifi.ui.h:18
-#| msgid "Settings"
 msgid "_Settings…"
 msgstr "تەڭشەكلەر(_S)…"
 
@@ -2244,14 +2587,12 @@ msgstr "باغلىنىشقا كېرەكلىك ئۈسكۈنە تەييار بول
 
 #. TRANSLATORS: this is the per application switch for message tray usage.
 #: ../panels/notifications/cc-edit-dialog.c:38
-#| msgid "Magnification:"
 msgctxt "notifications"
 msgid "Notifications"
 msgstr "ئۇقتۇرۇشلار"
 
 #. TRANSLATORS: this is the setting to configure sounds associated with notifications
 #: ../panels/notifications/cc-edit-dialog.c:40
-#| msgid "Sound Effects"
 msgctxt "notifications"
 msgid "Sound Alerts"
 msgstr ""
@@ -2268,7 +2609,6 @@ msgid "Show Details in Banners"
 msgstr ""
 
 #: ../panels/notifications/cc-edit-dialog.c:44
-#| msgid "Lock screen"
 msgctxt "notifications"
 msgid "View in Lock Screen"
 msgstr ""
@@ -2293,26 +2633,23 @@ msgid "Off"
 msgstr "تاقا"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
-#| msgid "Magnification:"
 msgid "Notifications"
 msgstr "ئۇقتۇرۇشلار"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:2
-#| msgid "Magnification:"
 msgid "Manage notifications"
-msgstr ""
+msgstr "ئۇقتۇرۇشلارنى باشقۇرۇش"
 
 #. Translators: those are keywords for the notifications control-center panel
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:4
 msgid "Notifications;Banner;Message;Tray;Popup;"
-msgstr ""
+msgstr "Notifications؛Banner؛Message؛Tray؛Popup؛ئۇقتۇرۇش؛ئۇچۇر؛قونداق؛سەكرىمە؛"
 
 #: ../panels/notifications/notifications.ui.h:1
 msgid "Show Pop Up Banners"
 msgstr ""
 
 #: ../panels/notifications/notifications.ui.h:2
-#| msgid "Lock screen"
 msgid "Show in Lock Screen"
 msgstr ""
 
@@ -2322,35 +2659,35 @@ msgstr ""
 msgid "Add Account"
 msgstr "ھېسابات قوشۇش"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:357
+#: ../panels/online-accounts/cc-online-accounts-panel.c:358
 msgid "Error logging into the account"
 msgstr "ھېساباتقا كىرىشتە خاتالىق كۆرۈلدى"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:411
+#: ../panels/online-accounts/cc-online-accounts-panel.c:412
 msgid "Expired credentials. Please log in again."
 msgstr "ئىسپاتنامىنىڭ ۋاقتى ئۆتكەن. قايتا كىرىڭ."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:414
+#: ../panels/online-accounts/cc-online-accounts-panel.c:415
 msgid "_Log In"
 msgstr "تىزىمغا كىر(_L)"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:650
+#: ../panels/online-accounts/cc-online-accounts-panel.c:651
 msgid "Error creating account"
 msgstr "ھېسابات قۇرۇۋاتقاندا خاتالىق كۆرۈلدى"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:692
+#: ../panels/online-accounts/cc-online-accounts-panel.c:693
 msgid "Error removing account"
 msgstr "ھېساباتنى چىقىرىۋېتىشتە خاتالىق كۆرۈلدى"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:728
+#: ../panels/online-accounts/cc-online-accounts-panel.c:729
 msgid "Are you sure you want to remove the account?"
 msgstr "ھېساباتنى راستلا چىقىرىۋېتەمسىز؟"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:730
+#: ../panels/online-accounts/cc-online-accounts-panel.c:731
 msgid "This will not remove the account on the server."
 msgstr "بۇ مۇلازىمېتىردىكى ھېساباتنى چىقىرىۋەتمەيدۇ."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:731
+#: ../panels/online-accounts/cc-online-accounts-panel.c:732
 msgid "_Remove"
 msgstr "چىقىرىۋەت(_R)"
 
@@ -2421,16 +2758,14 @@ msgstr[0] "مىنۇت"
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #: ../panels/power/cc-power-panel.c:224
 #, c-format
-#| msgid "Charging - %s until fully charged"
 msgid "%s until fully charged"
-msgstr ""
+msgstr "تولۇق توكلىنىشقا %s بار"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #: ../panels/power/cc-power-panel.c:231
 #, c-format
-#| msgid "Caution low UPS, %s remaining"
 msgid "Caution: %s remaining"
-msgstr ""
+msgstr "دىققەت: قالغىنى %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #: ../panels/power/cc-power-panel.c:236
@@ -2440,9 +2775,8 @@ msgstr "قالغىنى %s"
 
 #. TRANSLATORS: primary battery
 #: ../panels/power/cc-power-panel.c:241 ../panels/power/cc-power-panel.c:269
-#| msgid "Full Screen"
 msgid "Fully charged"
-msgstr ""
+msgstr "تولۇق توكلاندى"
 
 #. TRANSLATORS: primary battery
 #: ../panels/power/cc-power-panel.c:245 ../panels/power/cc-power-panel.c:273
@@ -2456,14 +2790,13 @@ msgstr "توكلاۋاتىدۇ"
 
 #. TRANSLATORS: primary battery
 #: ../panels/power/cc-power-panel.c:265
-#| msgid "UPS discharging"
 msgid "Discharging"
 msgstr "توكسىزلاۋاتىدۇ"
 
 #: ../panels/power/cc-power-panel.c:317
 #, c-format
 msgid "Estimated battery capacity: %s"
-msgstr ""
+msgstr "توكداننىڭ تەخمىنىي سىغىمى: %s"
 
 #: ../panels/power/cc-power-panel.c:393
 msgctxt "Battery name"
@@ -2547,10 +2880,9 @@ msgstr "ياخشى"
 
 #. TRANSLATORS: primary battery
 #: ../panels/power/cc-power-panel.c:541
-#| msgid "Full Screen"
 msgctxt "Battery power"
 msgid "Fully charged"
-msgstr ""
+msgstr "تولۇق توكلاندى"
 
 #. TRANSLATORS: primary battery
 #: ../panels/power/cc-power-panel.c:545
@@ -2559,25 +2891,22 @@ msgid "Empty"
 msgstr "بوش"
 
 #: ../panels/power/cc-power-panel.c:716
-#| msgid "Battery"
 msgid "Batteries"
 msgstr "توكدانلار"
 
 #: ../panels/power/cc-power-panel.c:1058
 msgid "When _idle"
-msgstr ""
+msgstr "بوش ۋاقىتتا(_I)"
 
 #: ../panels/power/cc-power-panel.c:1324
 msgid "Power Saving"
-msgstr ""
+msgstr "توك تېجەش"
 
 #: ../panels/power/cc-power-panel.c:1351
-#| msgid "Brightness"
 msgid "_Screen Brightness"
-msgstr ""
+msgstr "ئېكران يورۇقلۇقى(_S)"
 
 #: ../panels/power/cc-power-panel.c:1378
-#| msgid "Suspend when inactive for"
 msgid "Dim Screen when Inactive"
 msgstr ""
 
@@ -2586,24 +2915,20 @@ msgid "Mark As Inactive After"
 msgstr ""
 
 #: ../panels/power/cc-power-panel.c:1436
-#| msgid "Wi-Fi"
 msgid "_Wi-Fi"
-msgstr ""
+msgstr "_Wi-Fi"
 
 #: ../panels/power/cc-power-panel.c:1464
-#| msgid "Mobile broadband"
 msgid "_Mobile Broadband"
-msgstr ""
+msgstr "كۆچمە كەڭ بەلۋاغ(_M)"
 
 #: ../panels/power/cc-power-panel.c:1502
-#| msgid "Bluetooth"
 msgid "_Bluetooth"
-msgstr ""
+msgstr "كۆكچىش(_B)"
 
 #: ../panels/power/cc-power-panel.c:1553
-#| msgid "On battery power"
 msgid "When on battery power"
-msgstr ""
+msgstr "توكداندا ئىشلەۋاتقاندا"
 
 #: ../panels/power/cc-power-panel.c:1555
 msgid "When plugged in"
@@ -2611,21 +2936,17 @@ msgstr "توك مەنبەسى ئۇلانغاندا"
 
 #: ../panels/power/cc-power-panel.c:1673
 msgid "Suspend & Power Off"
-msgstr ""
+msgstr "توڭلات ۋە توكنى ئۈز"
 
 #: ../panels/power/cc-power-panel.c:1702
-#| msgctxt "proxy method"
-#| msgid "Automatic"
 msgid "_Automatic Suspend"
-msgstr ""
+msgstr "ئاپتوماتىك توڭلات(_A)"
 
 #: ../panels/power/cc-power-panel.c:1722
-#| msgid "When power is _critically low"
 msgid "When Battery Power is _Critical"
-msgstr ""
+msgstr "توكداننىڭ توكى تۆۋەنلەپ خەتەرلىك ھالەتكە كەلگەندە(_C)"
 
 #: ../panels/power/cc-power-panel.c:1754
-#| msgid "Power off"
 msgid "Power Off"
 msgstr "توكنى ئۈز"
 
@@ -2643,8 +2964,10 @@ msgstr "توك مەنبە باشقۇرۇش تەڭشىكى"
 
 #. Translators: those are keywords for the power control-center panel
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
-msgid "Power;Sleep;Suspend;Hibernate;Battery;"
-msgstr "توك مەنبە؛ئۇخلىتىش؛توڭلىتىش؛ئۈچەك؛توكدان؛"
+#| msgid "Power;Sleep;Suspend;Hibernate;Battery;"
+msgid ""
+"Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
+msgstr "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
 
 #: ../panels/power/power.ui.h:1
 msgid "Hibernate"
@@ -2662,10 +2985,6 @@ msgstr "5 مىنۇت"
 msgid "10 minutes"
 msgstr "10 مىنۇت"
 
-#: ../panels/power/power.ui.h:5 ../panels/privacy/privacy.ui.h:7
-msgid "30 minutes"
-msgstr "30 مىنۇت"
-
 #: ../panels/power/power.ui.h:6 ../panels/privacy/privacy.ui.h:8
 msgid "1 hour"
 msgstr "1 سائەت"
@@ -2679,33 +2998,26 @@ msgid "2 minutes"
 msgstr "2 مىنۇت"
 
 #: ../panels/power/power.ui.h:9
-#| msgid "never"
 msgid "Never"
 msgstr "ھەرگىز"
 
 #: ../panels/power/power.ui.h:10
-#| msgctxt "proxy method"
-#| msgid "Automatic"
 msgid "Automatic Suspend"
-msgstr ""
+msgstr "ئاپتوماتىك توڭلىتىش"
 
 #: ../panels/power/power.ui.h:11 ../panels/privacy/privacy.ui.h:10
-#| msgid "Close"
 msgid "_Close"
 msgstr "ياپ(_C)"
 
 #: ../panels/power/power.ui.h:12
-#| msgid "On battery power"
 msgid "When on _Battery Power"
-msgstr ""
+msgstr "توكداندا ئىشلەۋاتقاندا(_B)"
 
 #: ../panels/power/power.ui.h:13
-#| msgid "When plugged in"
 msgid "When _Plugged In"
-msgstr ""
+msgstr "توك مەنبەسى ئۇلانغاندا(_P)"
 
 #: ../panels/power/power.ui.h:14
-#| msgid "_Delay:"
 msgid "Delay"
 msgstr "كېچىكتۈر"
 
@@ -2872,19 +3184,16 @@ msgid "No suitable driver found"
 msgstr "مۇۋاپىق قوزغاتقۇ تېپىلمىدى"
 
 #: ../panels/printers/cc-printers-panel.c:2321
-#| msgid "Searching for preferred drivers..."
 msgid "Searching for preferred drivers…"
-msgstr ""
+msgstr "ئەڭ مۇۋاپىق قوزغاتقۇلارنى ئىزدەۋاتىدۇ…"
 
 #: ../panels/printers/cc-printers-panel.c:2336
-#| msgid "Select from database..."
 msgid "Select from database…"
-msgstr ""
+msgstr "سانداندىن تاللاش…"
 
 #: ../panels/printers/cc-printers-panel.c:2345
-#| msgid "Provide PPD File..."
 msgid "Provide PPD File…"
-msgstr ""
+msgstr "PPD ھۆججەت تەمىنلەش…"
 
 #. Translators: Name of job which makes printer to print test page
 #: ../panels/printers/cc-printers-panel.c:2496
@@ -2959,15 +3268,8 @@ msgid "Options"
 msgstr "تاللانما"
 
 #: ../panels/printers/options-dialog.ui.h:3
-#| msgid "Loading options..."
 msgid "Loading options…"
-msgstr ""
-
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-#: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1067
-msgid "Cancel"
-msgstr "ئەمەلدىن قالدۇر"
+msgstr "تاللانمىلارنى ئوقۇۋاتىدۇ…"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
 msgid "Loading drivers database..."
@@ -3251,7 +3553,7 @@ msgstr "ۋەزىپىلەر"
 #. Translators: Opens a dialog containing printer's jobs
 #: ../panels/printers/printers.ui.h:11
 msgid "Show _Jobs"
-msgstr ""
+msgstr "ۋەزىپىلەرنى كۆرسەت(_J)"
 
 #: ../panels/printers/printers.ui.h:12
 msgid "Model"
@@ -3262,9 +3564,8 @@ msgid "label"
 msgstr "ئەن"
 
 #: ../panels/printers/printers.ui.h:17
-#| msgid "Setting new driver..."
 msgid "Setting new driver…"
-msgstr ""
+msgstr "يېڭى قوزغاتقۇنى تەڭشەۋاتىدۇ…"
 
 #: ../panels/printers/printers.ui.h:18
 msgid "page 3"
@@ -3297,34 +3598,30 @@ msgid "Hidden"
 msgstr "يوشۇرۇن"
 
 #: ../panels/privacy/cc-privacy-panel.c:104
-#| msgid "Visibility"
 msgid "Visible"
 msgstr "كۆرۈنۈشچان"
 
 #: ../panels/privacy/cc-privacy-panel.c:270 ../panels/privacy/privacy.ui.h:32
-#| msgid "Screenshots"
 msgid "Screen Lock"
-msgstr ""
+msgstr "ئېكران قۇلۇپلاش"
 
 #: ../panels/privacy/cc-privacy-panel.c:337 ../panels/privacy/privacy.ui.h:9
-#| msgid "Visibility"
 msgid "Name & Visibility"
-msgstr ""
+msgstr "ئاتى ۋە كۆرۈنۈشچانلىقى"
 
 #: ../panels/privacy/cc-privacy-panel.c:445 ../panels/privacy/privacy.ui.h:27
 msgid "Usage & History"
-msgstr ""
+msgstr "ئىشلىتىلىش ئەھۋالى ۋە ئىز"
 
 #: ../panels/privacy/cc-privacy-panel.c:575 ../panels/privacy/privacy.ui.h:37
 msgid "Purge Trash & Temporary Files"
-msgstr ""
+msgstr "ئەخلەتخانىنى پاكىزلاش ۋە ۋاقىتلىق ھۆججەتلەر"
 
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:1
 msgid "Privacy"
 msgstr "شەخسىيەت"
 
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:2
-#| msgid "Your settings"
 msgid "Privacy settings"
 msgstr "شەخسىيەت تەڭشەكلىرى"
 
@@ -3333,12 +3630,11 @@ msgstr "شەخسىيەت تەڭشەكلىرى"
 msgid ""
 "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
 "network;identity;"
-msgstr ""
+msgstr "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;network;identity;"
 
 #: ../panels/privacy/privacy.ui.h:1
-#| msgid "Screen turns off"
 msgid "Screen Turns Off"
-msgstr ""
+msgstr "ئېكران تاقىلىدۇ"
 
 #: ../panels/privacy/privacy.ui.h:2
 msgid "30 seconds"
@@ -3361,13 +3657,12 @@ msgid "Display full name in _lock screen"
 msgstr ""
 
 #: ../panels/privacy/privacy.ui.h:14
-#| msgid "Switch Modes"
 msgid "_Stealth Mode"
 msgstr ""
 
 #: ../panels/privacy/privacy.ui.h:15
 msgid "Immediately"
-msgstr ""
+msgstr "دەرھال"
 
 #: ../panels/privacy/privacy.ui.h:16
 msgid "1 day"
@@ -3375,42 +3670,41 @@ msgstr "1 كۈن"
 
 #: ../panels/privacy/privacy.ui.h:17
 msgid "2 days"
-msgstr ""
+msgstr "2 كۈن"
 
 #: ../panels/privacy/privacy.ui.h:18
 msgid "3 days"
-msgstr ""
+msgstr "3 كۈن"
 
 #: ../panels/privacy/privacy.ui.h:19
 msgid "4 days"
-msgstr ""
+msgstr "4 كۈن"
 
 #: ../panels/privacy/privacy.ui.h:20
 msgid "5 days"
-msgstr ""
+msgstr "5 كۈن"
 
 #: ../panels/privacy/privacy.ui.h:21
 msgid "6 days"
-msgstr ""
+msgstr "6 كۈن"
 
 #: ../panels/privacy/privacy.ui.h:22
 msgid "7 days"
-msgstr ""
+msgstr "7 كۈن"
 
 #: ../panels/privacy/privacy.ui.h:23
 msgid "14 days"
-msgstr ""
+msgstr "14 كۈن"
 
 #: ../panels/privacy/privacy.ui.h:24
 msgid "30 days"
-msgstr ""
+msgstr "30 كۈن"
 
 #: ../panels/privacy/privacy.ui.h:25
 msgid "Don't retain history"
 msgstr ""
 
 #: ../panels/privacy/privacy.ui.h:26
-#| msgid "never"
 msgid "Forever"
 msgstr "مەڭگۈ"
 
@@ -3422,11 +3716,11 @@ msgstr ""
 
 #: ../panels/privacy/privacy.ui.h:29
 msgid "Cl_ear Recent History"
-msgstr ""
+msgstr "يېقىنقى تارىخنى تازىلا(_E)"
 
 #: ../panels/privacy/privacy.ui.h:30
 msgid "_Recently Used"
-msgstr ""
+msgstr "يېقىندا ئىشلىتىلگەنلىرى(_R)"
 
 #: ../panels/privacy/privacy.ui.h:31
 msgid "Retain _History"
@@ -3437,28 +3731,24 @@ msgid "The Screen Lock protects your privacy when you are away."
 msgstr ""
 
 #: ../panels/privacy/privacy.ui.h:34
-#| msgid "A_utomatic Login"
 msgid "Automatic Screen _Lock"
-msgstr ""
+msgstr "ئېكراننى ئاپتوماتىك قۇلۇپلاش"
 
 #: ../panels/privacy/privacy.ui.h:35
-#| msgid "_Lock screen after:"
 msgid "Lock Screen _After"
-msgstr ""
+msgstr "كۆرسىتىلگەن ۋاقىتتىن كېيىن ئېكراننى قۇلۇپلا(_A)"
 
 #: ../panels/privacy/privacy.ui.h:36
-#| msgid "Show _notifications when locked"
 msgid "Show _Notifications"
-msgstr ""
+msgstr "ئۇقتۇرۇش كۆرسەت(_N)"
 
 #: ../panels/privacy/privacy.ui.h:38
 msgid "_Empty Trash"
 msgstr "ئەخلەتخانا تازىلا(_E)"
 
 #: ../panels/privacy/privacy.ui.h:39
-#| msgid "_Keep Files"
 msgid "_Purge Temporary Files"
-msgstr ""
+msgstr "ۋاقىتلىق ھۆججەتلەرنى تازىلا(_F)"
 
 #: ../panels/privacy/privacy.ui.h:40
 msgid ""
@@ -3468,15 +3758,15 @@ msgstr ""
 
 #: ../panels/privacy/privacy.ui.h:41
 msgid "Automatically Empty _Trash"
-msgstr ""
+msgstr "ئەخلەتخانىنى ئاپتوماتىك تازىلا(_T)"
 
 #: ../panels/privacy/privacy.ui.h:42
 msgid "Automatically Purge Temporary _Files"
-msgstr ""
+msgstr "ۋاقىتلىق ھۆججەتلەرنى ئاپتوماتىك تازىلا(_F)"
 
 #: ../panels/privacy/privacy.ui.h:43
 msgid "Purge _After"
-msgstr ""
+msgstr "كۆرسىتىلگەن ۋاقىتتىن كېيىن تازىلا(_A)"
 
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:1
 msgid "Region & Language"
@@ -3488,24 +3778,22 @@ msgstr "رايون ۋە تىل تەڭشىكىڭىزنى ئۆزگەرتىدۇ"
 
 #. Translators: those are keywords for the region control-center panel
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
-#| msgid "Language;Layout;Keyboard;"
 msgid "Language;Layout;Keyboard;Input;"
-msgstr ""
+msgstr "Language؛Layout؛Keyboard؛Input؛تىل؛ھەرپتاختا؛كىرگۈزۈش؛"
 
-#: ../panels/region/gnome-region-panel-formats.c:142
+#: ../panels/region/gnome-region-panel-formats.c:144
 msgid "Imperial"
 msgstr "ئىمپېرىئال"
 
-#: ../panels/region/gnome-region-panel-formats.c:144
+#: ../panels/region/gnome-region-panel-formats.c:146
 msgid "Metric"
 msgstr "مېترىك"
 
 #: ../panels/region/gnome-region-panel-input-chooser.ui.h:1
-#| msgid "Select an input source to add"
 msgid "Select an input source"
 msgstr ""
 
-#: ../panels/region/gnome-region-panel-lang.c:116
+#: ../panels/region/gnome-region-panel-lang.c:115
 #: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Log out for changes to take effect"
 msgstr ""
@@ -3530,18 +3818,16 @@ msgstr "تەڭشەكنى كۆچۈرۈش"
 
 #: ../panels/region/gnome-region-panel-system.c:482
 #: ../panels/region/gnome-region-panel.ui.h:42
-#| msgid "Copy Settings"
 msgid "Copy Settings…"
-msgstr ""
+msgstr "تەڭشەكنى كۆچۈرۈش…"
 
 #: ../panels/region/gnome-region-panel.ui.h:1
 msgid "Region and Language"
 msgstr "رايون ۋە تىل"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
-#| msgid "Select a language"
 msgid "Select a display language"
-msgstr ""
+msgstr "كۆرسىتىلىدىغان تىلنى تاللايدۇ"
 
 #: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Add Language"
@@ -3632,14 +3918,12 @@ msgid "Shortcut Settings"
 msgstr "تېزلەتمە تەڭشىكى"
 
 #: ../panels/region/gnome-region-panel.ui.h:31
-#| msgid "Use the same layout for all windows"
 msgid "Use the same source for all windows"
-msgstr ""
+msgstr "ھەممە كۆزنەكلەرگە ئوخشاش مەنبەنى ئىشلەتسۇن"
 
 #: ../panels/region/gnome-region-panel.ui.h:32
-#| msgid "Allow different layouts for individual windows"
 msgid "Allow different sources for each window"
-msgstr ""
+msgstr "ھەر بىر كۆزنەكنىڭ ئايرىم-ئايرىم بولسۇن"
 
 #: ../panels/region/gnome-region-panel.ui.h:34
 msgid "Input Sources"
@@ -3679,19 +3963,16 @@ msgid "Bookmarks"
 msgstr "خەتكۈشلەر"
 
 #: ../panels/search/cc-search-locations-dialog.c:479
-#| msgid "Other..."
 msgid "Other"
 msgstr "باشقا"
 
 #: ../panels/search/cc-search-locations-dialog.c:675
-#| msgid "Select a region"
 msgid "Select Location"
-msgstr ""
+msgstr "ئورۇن تاللاش"
 
 #: ../panels/search/cc-search-panel.c:193
-#| msgid "Applications"
 msgid "No applications found"
-msgstr ""
+msgstr "پروگرامما تېپىلمىدى"
 
 #: ../panels/search/cc-search-panel.c:551
 #: ../panels/user-accounts/um-fingerprint-dialog.c:219
@@ -3704,31 +3985,27 @@ msgid "Search"
 msgstr "ئىزدە"
 
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:2
-#| msgid "System settings"
 msgid "Search settings"
-msgstr ""
+msgstr "ئىزدەش تەڭشىكى"
 
 #. Translators: those are keywords for the search control-center panel
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:4
 msgid "Search;Find;Index;Hide;Privacy;Results;"
-msgstr ""
+msgstr "Search;Find;Index;Hide;Privacy;Results;"
 
 #: ../panels/search/search-locations-dialog.ui.h:1
-#| msgid "Location"
 msgid "Search Locations"
-msgstr ""
+msgstr "ئورۇنلارنى ئىزدەش"
 
 #: ../panels/search/search.ui.h:1
 msgid "Move Up"
 msgstr "ئۈستىگە"
 
 #: ../panels/search/search.ui.h:2
-#| msgid "Down"
 msgid "Move Down"
 msgstr "پەسكە"
 
 #: ../panels/search/search.ui.h:3
-#| msgid "Mouse Preferences"
 msgid "Preferences"
 msgstr "مايىللىق"
 
@@ -3742,17 +4019,15 @@ msgctxt "service is disabled"
 msgid "Off"
 msgstr "تاقا"
 
-#: ../panels/sharing/cc-sharing-panel.c:311
-#| msgid "Choose a Layout"
+#: ../panels/sharing/cc-sharing-panel.c:310
 msgid "Choose a Folder"
-msgstr ""
+msgstr "قىسقۇچ تاللاڭ"
 
-#: ../panels/sharing/cc-sharing-panel.c:489
+#: ../panels/sharing/cc-sharing-panel.c:488
 msgid "Copy"
 msgstr "كۆچۈر"
 
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:1
-#| msgid "Hearing"
 msgid "Sharing"
 msgstr "ھەمبەھىر"
 
@@ -3761,10 +4036,19 @@ msgstr "ھەمبەھىر"
 msgid ""
 "share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
 "pictures;photos;movies;server;renderer;"
+msgstr "share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;pictures;photos;movies;server;renderer;"
+
+#: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
+#| msgid "Enable h_orizontal scrolling"
+msgid "Enable or disable remote login"
+msgstr ""
+
+#: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:2
+#| msgid "Authentication is required to change user data"
+msgid "Authentication is required to enable or disable remote login"
 msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:1
-#| msgid "Bluetooth Settings"
 msgid "Bluetooth Sharing"
 msgstr ""
 
@@ -3775,44 +4059,44 @@ msgid ""
 msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:3
-msgid "<b>Share Public Folder</b>"
+#| msgid "Shared Folders"
+msgid "Share Public Folder"
 msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:4
-msgid "Only share with Trusted Devices"
-msgstr ""
-
-#: ../panels/sharing/sharing.ui.h:5
 msgid "Only Receive From Trusted Devices"
 msgstr ""
 
+#: ../panels/sharing/sharing.ui.h:5
+msgid "Save Received Files to Downloads Folder"
+msgstr ""
+
 #: ../panels/sharing/sharing.ui.h:6
-msgid "<b>Save Received Files to Downloads Folder</b>"
+msgid "Only share with Trusted Devices"
 msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:7
-msgid "<b>Computer Name</b>"
-msgstr ""
+#| msgid "Computer"
+msgid "Computer Name"
+msgstr "كومپيۇتېر ئاتى"
 
 #: ../panels/sharing/sharing.ui.h:8
 msgid "Some services are disabled because of no network access."
 msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:9
-#| msgid "Media player"
 msgid "Media Sharing"
-msgstr ""
+msgstr "ۋاسىتە ھەمبەھىرلەش"
 
 #: ../panels/sharing/sharing.ui.h:10
 msgid "Share Music, Photos and Videos with others on the current network."
 msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:11
-msgid "<b>Share Media On This Network</b>"
+msgid "Share Media On This Network"
 msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:12
-#| msgid "Pictures Folder"
 msgid "Shared Folders"
 msgstr "ھەمبەھىرلەنگەن قىسقۇچلار"
 
@@ -3821,17 +4105,14 @@ msgid "column"
 msgstr "ئىستونلار"
 
 #: ../panels/sharing/sharing.ui.h:14
-#| msgid "Add profile"
 msgid "Add Folder"
 msgstr "قىسقۇچ قوشۇش"
 
 #: ../panels/sharing/sharing.ui.h:15
-#| msgid "Remove profile"
 msgid "Remove Folder"
 msgstr "قىسقۇچ چىقىرىۋېتىش"
 
 #: ../panels/sharing/sharing.ui.h:16
-#| msgid "Personal digital assistant"
 msgid "Personal File Sharing"
 msgstr "خۇسۇسىي ھۆججەت ھەمبەھىرى"
 
@@ -3843,21 +4124,18 @@ msgid ""
 msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:19
-msgid "<b>Share Public Folder On This Network</b>"
+msgid "Share Public Folder On This Network"
 msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:20
-#| msgid "Group Password"
 msgid "Require Password"
-msgstr ""
+msgstr "ئىم زۆرۈر"
 
 #: ../panels/sharing/sharing.ui.h:21
-#| msgid "_Password"
 msgid "Password"
 msgstr "ئىم"
 
 #: ../panels/sharing/sharing.ui.h:22
-#| msgid "Remove Region"
 msgid "Remote Login"
 msgstr "يىراقتىن كىرىش"
 
@@ -3869,33 +4147,34 @@ msgid ""
 msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:26
-msgid "<b>Remote Login</b>"
-msgstr ""
-
-#: ../panels/sharing/sharing.ui.h:27
-#| msgid "Screen part:"
 msgid "Screen Sharing"
 msgstr ""
 
-#: ../panels/sharing/sharing.ui.h:29
+#: ../panels/sharing/sharing.ui.h:28
 #, no-c-format
 msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
 "\"vnc://%s\">vnc://%s</a>"
 msgstr ""
 
+#: ../panels/sharing/sharing.ui.h:29
+#| msgid "Remote Login"
+msgid "Remote View"
+msgstr ""
+
 #: ../panels/sharing/sharing.ui.h:30
-msgid "<b>Remote View</b>"
+#| msgid "Volume Control"
+msgid "Remote Control"
 msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:31
-msgid "<b>Remote Control</b>"
+msgid "Approve All Connections"
 msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:32
-#| msgid "Connection"
-msgid "Approve All Connections"
-msgstr ""
+#| msgid "_Show password"
+msgid "Show Password"
+msgstr "ئىم كۆرسەت"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:1
 msgid "Sound"
@@ -3934,45 +4213,45 @@ msgstr "ئەينەكنىڭ جىرىڭلىشى"
 msgid "Sonar"
 msgstr "سونار"
 
-#: ../panels/sound/gvc-balance-bar.c:111
+#: ../panels/sound/gvc-balance-bar.c:106
 msgctxt "balance"
 msgid "Left"
 msgstr "سول"
 
-#: ../panels/sound/gvc-balance-bar.c:112
+#: ../panels/sound/gvc-balance-bar.c:107
 msgctxt "balance"
 msgid "Right"
 msgstr "ئوڭ"
 
-#: ../panels/sound/gvc-balance-bar.c:115
+#: ../panels/sound/gvc-balance-bar.c:110
 msgctxt "balance"
 msgid "Rear"
 msgstr "ئارقا تەرەپ"
 
-#: ../panels/sound/gvc-balance-bar.c:116
+#: ../panels/sound/gvc-balance-bar.c:111
 msgctxt "balance"
 msgid "Front"
 msgstr "ئالدى"
 
-#: ../panels/sound/gvc-balance-bar.c:119
+#: ../panels/sound/gvc-balance-bar.c:114
 msgctxt "balance"
 msgid "Minimum"
 msgstr "ئەڭ كىچىك"
 
-#: ../panels/sound/gvc-balance-bar.c:120
+#: ../panels/sound/gvc-balance-bar.c:115
 msgctxt "balance"
 msgid "Maximum"
 msgstr "ئەڭ چوڭ"
 
-#: ../panels/sound/gvc-balance-bar.c:295
+#: ../panels/sound/gvc-balance-bar.c:290
 msgid "_Balance:"
 msgstr "ھېساباتتىكى پۇل(_B):"
 
-#: ../panels/sound/gvc-balance-bar.c:298
+#: ../panels/sound/gvc-balance-bar.c:293
 msgid "_Fade:"
 msgstr "سۇسلاشتۇر(_F):"
 
-#: ../panels/sound/gvc-balance-bar.c:301
+#: ../panels/sound/gvc-balance-bar.c:296
 msgid "_Subwoofer:"
 msgstr "ئۇلترا تۆۋەن ئاۋاز(_S):"
 
@@ -4023,6 +4302,10 @@ msgstr "چوققا قىممەت بايقا"
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "ئاتى"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1530
+msgid "Device"
+msgstr "ئۈسكۈنە"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1593
 #, c-format
@@ -4225,9 +4508,8 @@ msgid "Beep on Caps and Num Lock"
 msgstr "Caps ۋە Num Lock كۇنۇپكىلىرىنى ئىشلەتكەندە ئاۋاز چىقارسۇن"
 
 #: ../panels/universal-access/uap.ui.h:23
-#| msgid "Options"
 msgid "Options…"
-msgstr ""
+msgstr "تاللانمىلار…"
 
 #: ../panels/universal-access/uap.ui.h:24
 msgid "Screen Reader"
@@ -4744,7 +5026,6 @@ msgid ""
 msgstr "بارماق ئىزىڭىز مۇۋەپپەقىيەتلىك ساقلاندى. ئەمدى بارماق ئىزى ئوقۇغۇچىڭىز ئارقىلىق تىزىمغا كىرەلەيسىز."
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
-#| msgid "Username"
 msgid "Users"
 msgstr "ئىشلەتكۈچىلەر"
 
@@ -4890,9 +5171,8 @@ msgid "_Language"
 msgstr "تىل(_L)"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
-#| msgid "A_utomatic Login"
 msgid "Last Login"
-msgstr ""
+msgstr "ئەڭ ئاخىرقى قېتىم كىرگەن ۋاقىت"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
@@ -5088,16 +5368,11 @@ msgstr "تاللانغان بارماق"
 msgid "Enrolling fingerprints"
 msgstr "بارماق ئىزى تىزىملىنىۋاتىدۇ"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:743
-msgid "Summary"
-msgstr "ئۈزۈندى"
-
 #: ../panels/user-accounts/um-history-dialog.c:88
 msgid "This Week"
 msgstr "بۇ ھەپتە"
 
 #: ../panels/user-accounts/um-history-dialog.c:91
-#| msgid "Last used"
 msgid "Last Week"
 msgstr "ئۆتكەن ھەپتە"
 
@@ -5150,14 +5425,12 @@ msgid "Disable image"
 msgstr "سۈرەتنى چەكلە"
 
 #: ../panels/user-accounts/um-photo-dialog.c:461
-#| msgid "Take a photo..."
 msgid "Take a photo…"
-msgstr ""
+msgstr "سۈرەت تارتىش…"
 
 #: ../panels/user-accounts/um-photo-dialog.c:479
-#| msgid "Browse for more pictures"
 msgid "Browse for more pictures…"
-msgstr ""
+msgstr "تېخىمۇ كۆپ سۈرەتكە كۆز يۈگۈرت…"
 
 #: ../panels/user-accounts/um-photo-dialog.c:703
 #, c-format
@@ -5242,7 +5515,7 @@ msgstr "يوق"
 
 #: ../panels/user-accounts/um-user-panel.c:578
 msgid "Logged in"
-msgstr ""
+msgstr "كىرگەن"
 
 #: ../panels/user-accounts/um-user-panel.c:941
 msgid "Failed to contact the accounts service"
@@ -5317,12 +5590,10 @@ msgstr "ئىشلەتكۈچى ئاتىنىڭ تەركىبىدە بولىدىغى�
 "  \"-\" خالىغان ھەرپ \".\"، \"_\"  ۋە ➣"
 
 #: ../panels/user-accounts/um-utils.c:770
-#| msgid "today"
 msgid "Today"
 msgstr "بۈگۈن"
 
 #: ../panels/user-accounts/um-utils.c:773
-#| msgid "yesterday"
 msgid "Yesterday"
 msgstr "تۈنۈگۈن"
 
@@ -5333,11 +5604,6 @@ msgstr "خەرىتە توپچىلار"
 #: ../panels/wacom/button-mapping.ui.h:2
 msgid "Map buttons to functions"
 msgstr "خەرىتە توپچىلار ئىقتىدارى"
-
-#. Text printed on screen
-#: ../panels/wacom/calibrator/gui_gtk.c:78
-msgid "Screen Calibration"
-msgstr "ئېكراننى تەڭشەش"
 
 #: ../panels/wacom/calibrator/gui_gtk.c:79
 msgid ""
@@ -5386,16 +5652,14 @@ msgstr "ئېكران ئالماشتۇرۇش"
 #: ../panels/wacom/cc-wacom-page.c:121
 msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
-msgstr ""
+msgstr "ئېكران ئۈستى ياردىمىنى كۆرسەت"
 
 #: ../panels/wacom/cc-wacom-page.c:621
-#| msgid "Up"
 msgctxt "Wacom tablet button"
 msgid "Up"
 msgstr "ئۈستى"
 
 #: ../panels/wacom/cc-wacom-page.c:621
-#| msgid "Down"
 msgctxt "Wacom tablet button"
 msgid "Down"
 msgstr "ئاستى"
@@ -5456,14 +5720,12 @@ msgid "Bluetooth Settings"
 msgstr "كۆكچىش تەڭشىكى"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:8
-#| msgid "Map to Monitor..."
 msgid "Map to Monitor…"
-msgstr ""
+msgstr "كۆزەتكۈچكە خەرىتىلەش…"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:9
-#| msgid "Map Buttons"
 msgid "Map Buttons…"
-msgstr ""
+msgstr "خەرىتە توپچىلار…"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:11
 msgid "Adjust display resolution"
@@ -5640,7 +5902,7 @@ msgstr "ئۈزۈندىنى كۆرسەت"
 
 #: ../shell/control-center.c:68
 msgid "Search for the string"
-msgstr ""
+msgstr "بۇ تېكىستنى ئىزدە"
 
 #: ../shell/control-center.c:69
 msgid "List possible panel names and exit"
@@ -5657,7 +5919,7 @@ msgstr "كۆرسىتىدىغان تاختا"
 
 #: ../shell/control-center.c:73
 msgid "[PANEL] [ARGUMENT…]"
-msgstr ""
+msgstr "[PANEL] [ARGUMENT…]"
 
 #: ../shell/control-center.c:95
 msgid "- Settings"
@@ -5672,7 +5934,6 @@ msgstr "%s\n"
 "'%s --help' ئىجرا قىلىپ بۇيرۇق قۇرىنىڭ تولۇق تاللانما تىزىمىنى كۆرۈڭ.\n"
 
 #: ../shell/control-center.c:133
-#| msgid "Available Profiles"
 msgid "Available panels:"
 msgstr ""
 
@@ -5685,19 +5946,17 @@ msgid "Quit"
 msgstr "ئاخىرلاشتۇر"
 
 #. Add categories
-#: ../shell/gnome-control-center.c:880
+#: ../shell/gnome-control-center.c:881
 msgctxt "category"
 msgid "Personal"
 msgstr "شەخسىي"
 
-#: ../shell/gnome-control-center.c:881
-#| msgid "Hardware"
+#: ../shell/gnome-control-center.c:882
 msgctxt "category"
 msgid "Hardware"
 msgstr "قاتتىق دېتال"
 
-#: ../shell/gnome-control-center.c:882
-#| msgid "System"
+#: ../shell/gnome-control-center.c:883
 msgctxt "category"
 msgid "System"
 msgstr "سىستېما"
@@ -5717,6 +5976,48 @@ msgstr "مايىللىق;تەڭشەكلەر;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "بارلىق تەڭشەكلەر"
+
+#~ msgid "Cannot remove automatically added profile"
+#~ msgstr "ئۆزلۈكىدىن قوشۇلغان سەپلىمە ھۆججەتنى چىقىرىۋېتەلمەيدۇ"
+
+#~ msgid "No profile"
+#~ msgstr "سەپلىمە ھۆججەت يوق"
+
+#~ msgid "%i year"
+#~ msgid_plural "%i years"
+#~ msgstr[0] "%i يىل"
+
+#~ msgid "%i month"
+#~ msgid_plural "%i months"
+#~ msgstr[0] "%i ئاي"
+
+#~ msgid "%i week"
+#~ msgid_plural "%i weeks"
+#~ msgstr[0] "%i ھەپتە"
+
+#~ msgid "Less than 1 week"
+#~ msgstr "بىر ھەپتىدىن قىسقا"
+
+#~ msgid "This device is not color managed."
+#~ msgstr "بۇ ئۈسكۈنە رەڭ باشقۇرمايدۇ."
+
+#~ msgid "This device is using manufacturing calibrated data."
+#~ msgstr "بۇ ئۈسكۈنە زاۋۇتتا تۈزىتىلگەن سانلىق-مەلۇماتنى ئىشلىتىۋاتىدۇ."
+
+#~ msgid ""
+#~ "This device does not have a profile suitable for whole-screen color "
+#~ "correction."
+#~ msgstr ""
+#~ "بۇ ئۈسكۈنە پۈتكۈل ئېكران رەڭ تۈزىتىش سەپلىمە ھۆججىتىنىڭ يۈرۈشلۈكى يوق."
+
+#~ msgid "Not specified"
+#~ msgstr "بەلگىلەنمىگەن"
+
+#~ msgid "No devices supporting color management detected"
+#~ msgstr "رەڭ باشقۇرۇشنى قوللايدىغان ھېچقانداق ئۈسكۈنە تېپىلمىدى"
+
+#~ msgid "Unspecified"
+#~ msgstr "بەلگىلەنمىگەن"
 
 #~| msgid "Browse for more pictures..."
 #~ msgid "Browse Files..."
@@ -5744,26 +6045,6 @@ msgstr "بارلىق تەڭشەكلەر"
 #~| msgid "Available Profiles"
 #~ msgid "Available Profiles for Webcams"
 #~ msgstr "ئىشلەتكىلى بولىدىغان تور كامېرا سەپلىمە ھۆججەتلىرى"
-
-#~ msgctxt "Device kind"
-#~ msgid "Display"
-#~ msgstr "كۆرسەت"
-
-#~ msgctxt "Device kind"
-#~ msgid "Scanner"
-#~ msgstr "سايلىغۇچ"
-
-#~ msgctxt "Device kind"
-#~ msgid "Printer"
-#~ msgstr "پرىنتېر"
-
-#~ msgctxt "Device kind"
-#~ msgid "Camera"
-#~ msgstr "كامېرا"
-
-#~ msgctxt "Device kind"
-#~ msgid "Webcam"
-#~ msgstr "ۋېبكامېرا"
 
 #~ msgid "Add device"
 #~ msgstr "ئۈسكۈنە قوش"
@@ -5950,9 +6231,6 @@ msgstr "بارلىق تەڭشەكلەر"
 
 #~ msgid " — GNOME Volume Control Applet"
 #~ msgstr " — گىنوم ئاۋاز تىزگىن قوللانچاق"
-
-#~ msgid "Volume Control"
-#~ msgstr "ئاۋاز تىزگىنى"
 
 #~ msgid "Show desktop volume control"
 #~ msgstr "ئۈستەلئۈستى ئاۋاز تىزگىننى كۆرسەت"
@@ -6158,9 +6436,6 @@ msgstr "بارلىق تەڭشەكلەر"
 #~ msgid "Enable _mouse clicks with touchpad"
 #~ msgstr "سەزگۈر تاختىدا چاشقىنەك چېكىشنى قوزغات(_M)"
 
-#~ msgid "Enable h_orizontal scrolling"
-#~ msgstr "توغرىسىغا سىيرىشنى قوزغات(_O)"
-
 #~ msgid "Scrolling"
 #~ msgstr "دومىلات"
 
@@ -6264,9 +6539,6 @@ msgstr "بارلىق تەڭشەكلەر"
 
 #~ msgid "Mute"
 #~ msgstr "ئۈنسىز"
-
-#~ msgid "Co_nnector:"
-#~ msgstr "باغلىغۇچ(_N):"
 
 #~ msgid "C_hoose a device to configure:"
 #~ msgstr "سەپلەيدىغان ئۈسكۈنە تاللاش(_H):"
