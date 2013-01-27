@@ -709,3 +709,53 @@ cc_common_language_get_initial_regions (const gchar *lang)
 
         return ht;
 }
+
+static void
+foreach_user_lang_cb (gpointer key,
+                      gpointer value,
+                      gpointer user_data)
+{
+        GtkListStore *store = (GtkListStore *) user_data;
+        const char *locale = (const char *) key;
+        const char *display_locale = (const char *) value;
+        GtkTreeIter iter;
+
+        gtk_list_store_append (store, &iter);
+        gtk_list_store_set (store, &iter,
+                            LOCALE_COL, locale,
+                            DISPLAY_LOCALE_COL, display_locale,
+                            -1);
+}
+
+void
+cc_common_language_add_user_languages (GtkTreeModel *model)
+{
+        char *name;
+        GtkTreeIter iter;
+        GtkListStore *store = GTK_LIST_STORE (model);
+        GHashTable *user_langs;
+        const char *display;
+
+        gtk_list_store_clear (store);
+
+        user_langs = cc_common_language_get_initial_languages ();
+
+        /* Add the current locale first */
+        name = cc_common_language_get_current_language ();
+        display = g_hash_table_lookup (user_langs, name);
+
+        gtk_list_store_append (store, &iter);
+        gtk_list_store_set (store, &iter, LOCALE_COL, name, DISPLAY_LOCALE_COL, display, -1);
+        g_hash_table_remove (user_langs, name);
+        g_free (name);
+
+        /* The rest of the languages */
+        g_hash_table_foreach (user_langs, (GHFunc) foreach_user_lang_cb, store);
+
+        /* And now the "Other…" selection */
+        gtk_list_store_append (store, &iter);
+        gtk_list_store_set (store, &iter, LOCALE_COL, NULL, DISPLAY_LOCALE_COL, _("Other…"), -1);
+
+        g_hash_table_destroy (user_langs);
+}
+

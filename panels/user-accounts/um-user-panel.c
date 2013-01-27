@@ -641,7 +641,7 @@ show_user (ActUser *user, CcUserPanelPrivate *d)
 
         widget = get_widget (d, "account-language-combo");
         model = um_editable_combo_get_model (UM_EDITABLE_COMBO (widget));
-        cc_add_user_languages (model);
+        cc_common_language_add_user_languages (model);
 
         lang = g_strdup (act_user_get_language (user));
         if (!lang)
