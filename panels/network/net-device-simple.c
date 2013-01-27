@@ -119,6 +119,10 @@ nm_device_simple_refresh_ui (NetDeviceSimple *device_simple)
                                 && state != NM_DEVICE_STATE_UNMANAGED);
         update_off_switch_from_device_state (GTK_SWITCH (widget), state, device_simple);
 
+        /* set up the Options button */
+        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_options"));
+        gtk_widget_set_visible (widget, state != NM_DEVICE_STATE_UNMANAGED);
+
         /* set device state, with status and optionally speed */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_status"));
         status = g_string_new (panel_device_state_to_localized_string (nm_device));
