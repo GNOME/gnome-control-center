@@ -26,8 +26,6 @@
 
 G_BEGIN_DECLS
 
-void              cc_add_user_languages            (GtkTreeModel *model);
-
 GtkWidget        *cc_language_chooser_new          (GtkWidget *parent,
                                                     gboolean   regions);
 void              cc_language_chooser_clear_filter (GtkWidget *chooser);
