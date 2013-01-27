@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center 3.7.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-20 14:08+0100\n"
-"PO-Revision-Date: 2013-01-20 15:11+0100\n"
+"POT-Creation-Date: 2013-01-27 12:34+0100\n"
+"PO-Revision-Date: 2013-01-27 12:50+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
 "Language: \n"
@@ -175,7 +175,7 @@ msgid "Keyboard Settings"
 msgstr "Innstillinger for tastatur"
 
 #: ../panels/bluetooth/bluetooth.ui.h:14
-msgid "Send Files..."
+msgid "Send Files…"
 msgstr "Send filer …"
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:355
@@ -219,66 +219,180 @@ msgstr ""
 "Hvis du fjerner enheten vil du måtte sette den opp på nytt før du bruker den "
 "igjen."
 
+#. TRANSLATORS: The user has to attach the sensor to the screen
+#: ../panels/color/cc-color-calibrate.c:360
+msgid "Place your calibration device over the square and press 'Start'"
+msgstr "Plasser kalibreringsenheten over firkanten og trykk «Start»"
+
+#. TRANSLATORS: Some calibration devices need the user to move a
+#. * dial or switch manually. We also show a picture showing them
+#. * what to do...
+#: ../panels/color/cc-color-calibrate.c:366
+msgid ""
+"Move your calibration device to the calibrate position and press 'Continue'"
+msgstr "Flytt kalibreringsenheten til kalibreringsposisjon og trykk «Fortsett»"
+
+#. TRANSLATORS: Some calibration devices need the user to move a
+#. * dial or switch manually. We also show a picture showing them
+#. * what to do...
+#: ../panels/color/cc-color-calibrate.c:372
+msgid ""
+"Move your calibration device to the surface position and press 'Continue'"
+msgstr "Flytt kalibreringsenheten til overflateposisjon og trykk «Fortsett»"
+
+#. TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
+#. * is built into the palmrest and we need to fullscreen the
+#. * sample widget and shut the lid.
+#: ../panels/color/cc-color-calibrate.c:378
+msgid "Shut the laptop lid"
+msgstr "Lukk lokket på bærbar"
+
+#. TRANSLATORS: We suck, the calibation failed and we have no
+#. * good idea why or any suggestions
+#: ../panels/color/cc-color-calibrate.c:409
+msgid "An internal error occurred that could not be recovered."
+msgstr "En intern feil oppsto som det ikke er mulig å rette opp."
+
+#. TRANSLATORS: Some required-at-runtime tools were not
+#. * installed, which should only affect insane distros
+#: ../panels/color/cc-color-calibrate.c:414
+msgid "Tools required for calibration are not installed."
+msgstr "Verktøy som kreves for kalibrering er ikke installert."
+
+#. TRANSLATORS: The profile failed for some reason
+#: ../panels/color/cc-color-calibrate.c:420
+msgid "The profile could not be generated."
+msgstr "Profilen kunne ikke genereres."
+
+#. TRANSLATORS: The user specified a whitepoint that was
+#. * unobtainable with the hardware they've got -- see
+#. * https://en.wikipedia.org/wiki/White_point for details
+#: ../panels/color/cc-color-calibrate.c:426
+msgid "The target whitepoint was not obtainable."
+msgstr "Hvitpunkt for mål kunne ikke hentes."
+
+#. TRANSLATORS: the display calibration process is finished
+#: ../panels/color/cc-color-calibrate.c:466
+msgid "Complete!"
+msgstr "Fullført"
+
+#. TRANSLATORS: the display calibration failed, and we also show
+#. * the translated (or untranslated) error string after this
+#: ../panels/color/cc-color-calibrate.c:474
+msgid "Calibration failed!"
+msgstr "Kalibrering feilet!"
+
+#. TRANSLATORS: The user can now remove the sensor from the screen
+#: ../panels/color/cc-color-calibrate.c:481
+msgid "You can remove the calibration device."
+msgstr "Du kan fjerne kalibreringsenheten."
+
+#. TRANSLATORS: The user has to be careful not to knock the
+#. * display off the screen (although we do cope if this is
+#. * detected early enough)
+#: ../panels/color/cc-color-calibrate.c:552
+msgid "Do not disturb the calibration device while in progress"
+msgstr "Ikke forstyrr kalibreringsenheten mens kalibrering pågår"
+
+#. TRANSLATORS: This refers to the TFT display on a laptop
+#: ../panels/color/cc-color-common.c:41
+msgid "Laptop Screen"
+msgstr "Skjerm på bærbar"
+
+#. TRANSLATORS: This refers to the embedded webcam on a laptop
+#: ../panels/color/cc-color-common.c:50
+msgid "Built-in Webcam"
+msgstr "Innebygget webkamera"
+
+#. TRANSLATORS: an externally connected display, where %s is either the
+#. * model, vendor or ID, e.g. 'LP2480zx Monitor'
+#: ../panels/color/cc-color-common.c:65
+#, c-format
+msgid "%s Monitor"
+msgstr "%s skjerm"
+
+#. TRANSLATORS: a flatbed scanner device, e.g. 'Epson Scanner'
+#: ../panels/color/cc-color-common.c:69
+#, c-format
+msgid "%s Scanner"
+msgstr "%s skanner"
+
+#. TRANSLATORS: a camera device, e.g. 'Nikon D60 Camera'
+#: ../panels/color/cc-color-common.c:73
+#, c-format
+msgid "%s Camera"
+msgstr "%s kamera"
+
+#. TRANSLATORS: a printer device, e.g. 'Epson Photosmart Printer'
+#: ../panels/color/cc-color-common.c:77
+#, c-format
+msgid "%s Printer"
+msgstr "%s skriver"
+
+#. TRANSLATORS: a webcam device, e.g. 'Philips HiDef Camera'
+#: ../panels/color/cc-color-common.c:81
+#, c-format
+msgid "%s Webcam"
+msgstr "%s webkamera"
+
+#. not calibrated
+#: ../panels/color/cc-color-device.c:303
+msgid "Not calibrated"
+msgstr "Ikke kalibrert"
+
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:112
+#: ../panels/color/cc-color-panel.c:131
 msgid "Default: "
 msgstr "Forvalg: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:120
+#: ../panels/color/cc-color-panel.c:139
 msgid "Colorspace: "
 msgstr "Fargeområde: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:127
+#: ../panels/color/cc-color-panel.c:146
 msgid "Test profile: "
 msgstr "Testprofil:"
 
-#. TRANSLATORS: this is when the profile should be set for all users
-#: ../panels/color/cc-color-panel.c:190 ../panels/color/color.ui.h:5
-msgid "Set for all users"
-msgstr "Sett for alle brukere"
-
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:225
+#: ../panels/color/cc-color-panel.c:214
 msgid "Select ICC Profile File"
 msgstr "Velg fil for ICC-profil"
 
-#: ../panels/color/cc-color-panel.c:228
+#: ../panels/color/cc-color-panel.c:217
 msgid "_Import"
 msgstr "_Importer"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:239
+#: ../panels/color/cc-color-panel.c:228
 msgid "Supported ICC profiles"
 msgstr "Støttede ICC-profiler"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:246
+#: ../panels/color/cc-color-panel.c:235
 msgid "All files"
 msgstr "Alle filer"
 
-#. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:774
-#: ../panels/sound/gvc-mixer-dialog.c:1530
-msgid "Device"
-msgstr "Enhet"
+#: ../panels/color/cc-color-panel.c:506
+msgid "Screen"
+msgstr "Skjerm"
 
-#. TRANSLATORS: column for device list
-#: ../panels/color/cc-color-panel.c:809
-msgid "Calibration"
-msgstr "Kalibrering"
+#. TRANSLATORS: this is the dialog to save the ICC profile
+#: ../panels/color/cc-color-panel.c:776
+msgid "Save Profile"
+msgstr "Lagre profil"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:868
+#: ../panels/color/cc-color-panel.c:1137
 msgid "Create a color profile for the selected device"
 msgstr "Lag en fargeprofil for valgt enhet"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:883 ../panels/color/cc-color-panel.c:907
+#: ../panels/color/cc-color-panel.c:1152 ../panels/color/cc-color-panel.c:1176
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -287,150 +401,229 @@ msgstr ""
 "tilkoblet."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:917
+#: ../panels/color/cc-color-panel.c:1186
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Måleinstrumentet støtter ikke profilering av skrivere."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:928
+#: ../panels/color/cc-color-panel.c:1197
 msgid "The device type is not currently supported."
 msgstr "Enhetstypen er ikke støttet."
 
-#. TRANSLATORS: this is when an auto-added profile cannot be removed
-#: ../panels/color/cc-color-panel.c:988
-msgid "Cannot remove automatically added profile"
-msgstr "Kan ikke fjerne profil som er lagt til automatisk"
+#. TRANSLATORS: standard spaces are well known colorspaces like
+#. * sRGB, AdobeRGB and ProPhotoRGB
+#: ../panels/color/cc-color-profile.c:101
+msgid "Standard Space"
+msgstr "Standard fargeområde"
 
-#. TRANSLATORS: this is when there is no profile for the device
-#: ../panels/color/cc-color-panel.c:1309
-msgid "No profile"
-msgstr "Ingen profil"
+#. TRANSLATORS: test profiles do things like changing the screen
+#. * a different color, or swap the red and green channels
+#: ../panels/color/cc-color-profile.c:107
+msgid "Test Profile"
+msgstr "Testprofil"
 
-#: ../panels/color/cc-color-panel.c:1340
-#, c-format
-msgid "%i year"
-msgid_plural "%i years"
-msgstr[0] "%i år"
-msgstr[1] "%i år"
+#. TRANSLATORS: automatic profiles are generated automatically
+#. * by the color management system based on manufacturing data,
+#. * for instance the default monitor profile is created from the
+#. * primaries specified in the monitor EDID
+#: ../panels/color/cc-color-profile.c:115
+msgctxt "Automatically generated profile"
+msgid "Automatic"
+msgstr "Automatisk"
 
-#: ../panels/color/cc-color-panel.c:1351
-#, c-format
-msgid "%i month"
-msgid_plural "%i months"
-msgstr[0] "%i måned"
-msgstr[1] "%i måneder"
+#. TRANSLATORS: the profile quality - low quality profiles take
+#. * much less time to generate but may be a poor reflection of the
+#. * device capability
+#: ../panels/color/cc-color-profile.c:125
+msgctxt "Profile quality"
+msgid "Low Quality"
+msgstr "Lav kvalitet"
 
-#: ../panels/color/cc-color-panel.c:1362
-#, c-format
-msgid "%i week"
-msgid_plural "%i weeks"
-msgstr[0] "%i uke"
-msgstr[1] "%i uker"
+#. TRANSLATORS: the profile quality
+#: ../panels/color/cc-color-profile.c:130
+msgctxt "Profile quality"
+msgid "Medium Quality"
+msgstr "Middels kvalitet"
 
-#. fallback
-#: ../panels/color/cc-color-panel.c:1369
-#, c-format
-msgid "Less than 1 week"
-msgstr "Mindre enn en uke"
+#. TRANSLATORS: the profile quality - high quality profiles take
+#. * a *long* time, and have the best calibration and
+#. * characterisation data.
+#: ../panels/color/cc-color-profile.c:137
+msgctxt "Profile quality"
+msgid "High Quality"
+msgstr "Høy kvalitet"
 
-#: ../panels/color/cc-color-panel.c:1431
+#. TRANSLATORS: this default RGB space is used for printers that
+#. * do not have additional printer profiles specified in the PPD
+#: ../panels/color/cc-color-profile.c:154
 msgctxt "Colorspace fallback"
 msgid "Default RGB"
 msgstr "Forvalgt RGB"
 
-#: ../panels/color/cc-color-panel.c:1436
+#. TRANSLATORS: this default CMYK space is used for printers that
+#. * do not have additional printer profiles specified in the PPD
+#: ../panels/color/cc-color-profile.c:161
 msgctxt "Colorspace fallback"
 msgid "Default CMYK"
 msgstr "Forvalgt CMYK"
 
-#: ../panels/color/cc-color-panel.c:1441
+#. TRANSLATORS: this default gray space is used for printers that
+#. * do not have additional printer profiles specified in the PPD
+#: ../panels/color/cc-color-profile.c:168
 msgctxt "Colorspace fallback"
 msgid "Default Gray"
 msgstr "Forvalgt grå"
 
-#: ../panels/color/cc-color-panel.c:1559 ../panels/color/cc-color-panel.c:1600
-#: ../panels/color/cc-color-panel.c:1611 ../panels/color/cc-color-panel.c:1622
-msgid "Uncalibrated"
-msgstr "Ikke kalibrert"
+#: ../panels/color/cc-color-profile.c:192
+msgid "Vendor supplied factory calibration data"
+msgstr "Kalibreringsdata fra fabrikken levert av forhandler"
 
-#: ../panels/color/cc-color-panel.c:1562
-msgid "This device is not color managed."
-msgstr "Denne enheten er ikke fargestyrt."
+#: ../panels/color/cc-color-profile.c:201
+msgid "Full-screen display correction not possible with this profile"
+msgstr "Skjermkorrigering i fullskjerm er ikke mulig med denne profilen"
 
-#: ../panels/color/cc-color-panel.c:1603
-msgid "This device is using manufacturing calibrated data."
-msgstr "Denne enheten bruker data kalibrert av produsenten."
+#: ../panels/color/cc-color-profile.c:223
+msgid "This profile may no longer be accurate"
+msgstr "Denne profilen er kanskje ikke nøyaktig lenger"
 
-#: ../panels/color/cc-color-panel.c:1614
-msgid ""
-"This device does not have a profile suitable for whole-screen color "
-"correction."
-msgstr ""
-"Denne enheten har ikke en profil som passer for fargekorrigering av hele "
-"skjermen."
+#: ../panels/color/color-calibrate.ui.h:1
+msgid "Display Calibration"
+msgstr "Kalibrering av skjerm"
 
-#: ../panels/color/cc-color-panel.c:1647
-msgid "This device has an old profile that may no longer be accurate."
-msgstr "Denne enheten har en gammel profil som kan være unøyaktig."
+#: ../panels/color/color-calibrate.ui.h:2
+#: ../panels/printers/ppd-selection-dialog.ui.h:2
+#: ../panels/user-accounts/data/photo-dialog.ui.h:8
+#: ../panels/user-accounts/um-account-dialog.c:1067
+msgid "Cancel"
+msgstr "Avbryt"
 
-#. TRANSLATORS: this is when the calibration profile age is not
-#. * specified as it has been autogenerated from the hardware
-#: ../panels/color/cc-color-panel.c:1675
-msgid "Not specified"
-msgstr "Ikke spesifisert"
+#. This starts the calibration process
+#: ../panels/color/color-calibrate.ui.h:4
+msgid "Start"
+msgstr "Start"
 
-#. add the 'No devices detected' entry
-#: ../panels/color/cc-color-panel.c:1860
-msgid "No devices supporting color management detected"
-msgstr "Fant ingen enheter som støtter fargehåndtering"
+#. This resumes the calibration process
+#: ../panels/color/color-calibrate.ui.h:6
+msgid "Resume"
+msgstr "Gjenoppta"
 
-#: ../panels/color/color.ui.h:1
-#: ../panels/color/gnome-color-panel.desktop.in.in.h:1
-#: ../panels/universal-access/zoom-options.ui.h:28
-msgid "Color"
-msgstr "Farge"
+#. This button returns the user back to the color control panel
+#: ../panels/color/color-calibrate.ui.h:8
+msgid "Done"
+msgstr "Ferdig"
+
+#. Text printed on screen
+#: ../panels/color/color.ui.h:1 ../panels/wacom/calibrator/gui_gtk.c:78
+msgid "Screen Calibration"
+msgstr "Kalibrering av skjerm"
 
 #: ../panels/color/color.ui.h:2
-msgid "Each device needs an up to date color profile to be color managed."
-msgstr "Hver enhet må ha en oppdatert fargeprofil for å bli fargestyrt."
+msgid ""
+"Calibration will produce a profile that you can use to color manage your "
+"screen. The longer you spend on calibration, the better the quality of the "
+"color profile."
+msgstr "Kalibrering vil lage en profil som du kan bruke til å styre farger på skjermen. Kvaliteten på fargeprofilen blir bedre hvis du bruker lang tid på kalibrering."
 
 #: ../panels/color/color.ui.h:3
-msgid "Learn more"
-msgstr "Lær mer"
+msgid ""
+"You will not be able to use your computer while calibration takes place."
+msgstr "Du vil ikke kunne bruke datamaskinen når kalibrering pågår."
 
-#: ../panels/color/color.ui.h:4
-msgid "Learn more about color management"
-msgstr "Lær mer om fargehåndtering"
+#. This is the approximate time it takes to calibrate the display.
+#: ../panels/color/color.ui.h:5
+msgid "Quality"
+msgstr "Kvalitet"
 
-#: ../panels/color/color.ui.h:6
-msgid "Set this profile for all users on this computer"
-msgstr "Angi denne profilen for alle brukere på denne datamaskinen"
-
+#. This is the approximate time it takes to calibrate the display.
 #: ../panels/color/color.ui.h:7
-msgid "Add profile"
-msgstr "Legg til profil:"
+msgid "Approximate Time"
+msgstr "Tilnærmet tid"
 
-#: ../panels/color/color.ui.h:8 ../panels/wacom/gnome-wacom-properties.ui.h:10
-msgid "Calibrate…"
-msgstr "Kalibrer …"
+#: ../panels/color/color.ui.h:8
+msgid "Calibration Quality"
+msgstr "Kvalitet på kalibrering"
 
 #: ../panels/color/color.ui.h:9
-msgid "Calibrate the device"
-msgstr "Kalibrer enheten"
+msgid "Select the type of display that is connected."
+msgstr "Velg type skjerm som er koblet til."
 
 #: ../panels/color/color.ui.h:10
-msgid "Remove profile"
-msgstr "Fjern profil"
+msgid "Display Type"
+msgstr "Type skjerm"
 
 #: ../panels/color/color.ui.h:11
-msgid "View details"
-msgstr "Vis detaljer"
+msgid "Select the sensor device you want to use for calibration."
+msgstr "Velg sensorenhet du vil bruke for kalibreringen."
 
 #: ../panels/color/color.ui.h:12
+msgid "Calibration Device"
+msgstr "Kalibreringsenhet"
+
+#: ../panels/color/color.ui.h:13
+msgid ""
+"Select a display target white point. Most displays should be calibrated to a "
+"D65 illuminant."
+msgstr "Velg et hvitpunkt for skjermen. De fleste skjermer bør kalibreres til en D65 lyskilde."
+
+#: ../panels/color/color.ui.h:14
+msgid "Profile Whitepoint"
+msgstr "Hvitpunkt for profil"
+
+#: ../panels/color/color.ui.h:15
+msgid ""
+"Please set the display to a brightness that is typical for you. Color "
+"management will be most accurate at this brightness level."
+msgstr "Vennligst sett skjermen til en lysstyrke som er typisk. Fargehåndtering vil bli mest nøyaktig ved dette nivået."
+
+#: ../panels/color/color.ui.h:16
+msgid ""
+"Alternatively, you can use the brightness level used with one of the other "
+"profiles for this device."
+msgstr ""
+
+#: ../panels/color/color.ui.h:17
+msgid "Display Brightness"
+msgstr "Lysstyrke for skjerm"
+
+#: ../panels/color/color.ui.h:18
+msgid ""
+"You can use a color profile on different computers, or even create profiles "
+"for different lighting conditions."
+msgstr ""
+
+#: ../panels/color/color.ui.h:19
+msgid "Profile Name:"
+msgstr "Navn på profil:"
+
+#: ../panels/color/color.ui.h:20
+msgid "Profile Name"
+msgstr "Navn på profil"
+
+#: ../panels/color/color.ui.h:21
+msgid "Profile successfully created!"
+msgstr "Oppretting av profil fullført!"
+
+#: ../panels/color/color.ui.h:22
+msgid "Export"
+msgstr "Eksporter"
+
+#: ../panels/color/color.ui.h:23
+msgid ""
+"You may find these instructions on how to use the profile on <a href=\"linux"
+"\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
+"\">Microsoft Windows</a> systems useful."
+msgstr ""
+
+#: ../panels/color/color.ui.h:24
+#: ../panels/user-accounts/um-fingerprint-dialog.c:743
+msgid "Summary"
+msgstr "Sammendrag"
+
+#: ../panels/color/color.ui.h:25
 msgid "Import File…"
 msgstr "Importer fil …"
 
-#: ../panels/color/color.ui.h:13
+#: ../panels/color/color.ui.h:26
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
@@ -438,24 +631,144 @@ msgstr ""
 "Problemet funnet. Profilen vil kanskje ikke fungere korrekt. <a href="
 "\"\">Vis detaljer.</a>"
 
-#: ../panels/color/color.ui.h:14
+#: ../panels/color/color.ui.h:27
 msgid "Device type:"
 msgstr "Type enhet:"
 
-#: ../panels/color/color.ui.h:15
+#: ../panels/color/color.ui.h:28
 msgid "Manufacturer:"
 msgstr "Produsent:"
 
-#: ../panels/color/color.ui.h:16
+#: ../panels/color/color.ui.h:29
 msgid "Model:"
 msgstr "Modell:"
 
-#: ../panels/color/color.ui.h:17
+#: ../panels/color/color.ui.h:30
 msgid ""
 "Image files can be dragged on this window to auto-complete the above fields."
 msgstr ""
 "Bildefiler kan dras til dette vinduet for å fullføre ovenstående felt "
 "automatisk."
+
+#: ../panels/color/color.ui.h:31
+#: ../panels/color/gnome-color-panel.desktop.in.in.h:1
+#: ../panels/universal-access/zoom-options.ui.h:28
+msgid "Color"
+msgstr "Farge"
+
+#: ../panels/color/color.ui.h:32
+msgid "Each device needs an up to date color profile to be color managed."
+msgstr "Hver enhet må ha en oppdatert fargeprofil for å bli fargestyrt."
+
+#: ../panels/color/color.ui.h:33
+msgid "Learn more"
+msgstr "Lær mer"
+
+#: ../panels/color/color.ui.h:34
+msgid "Learn more about color management"
+msgstr "Lær mer om fargehåndtering"
+
+#: ../panels/color/color.ui.h:35
+msgid "Set for all users"
+msgstr "Sett for alle brukere"
+
+#: ../panels/color/color.ui.h:36
+msgid "Set this profile for all users on this computer"
+msgstr "Angi denne profilen for alle brukere på denne datamaskinen"
+
+#: ../panels/color/color.ui.h:37
+msgid "Enable"
+msgstr "Slått på"
+
+#: ../panels/color/color.ui.h:38
+msgid "Add profile"
+msgstr "Legg til profil:"
+
+#: ../panels/color/color.ui.h:39
+#: ../panels/wacom/gnome-wacom-properties.ui.h:10
+msgid "Calibrate…"
+msgstr "Kalibrer …"
+
+#: ../panels/color/color.ui.h:40
+msgid "Calibrate the device"
+msgstr "Kalibrer enheten"
+
+#: ../panels/color/color.ui.h:41
+msgid "Remove profile"
+msgstr "Fjern profil"
+
+#: ../panels/color/color.ui.h:42
+msgid "View details"
+msgstr "Vis detaljer"
+
+#: ../panels/color/color.ui.h:43
+msgid "Unable to detect any devices that can be color managed"
+msgstr "Kan ikke finne noen enheter som støtter fargehåndtering"
+
+#: ../panels/color/color.ui.h:44
+msgid "LCD"
+msgstr "LCD"
+
+#: ../panels/color/color.ui.h:45
+msgid "LED"
+msgstr "LED"
+
+#: ../panels/color/color.ui.h:46
+msgid "CRT"
+msgstr "CRT"
+
+#: ../panels/color/color.ui.h:47
+msgid "Projector"
+msgstr "Prosjektor"
+
+#: ../panels/color/color.ui.h:48
+msgctxt "Calibration quality"
+msgid "High"
+msgstr "Høy"
+
+#: ../panels/color/color.ui.h:49
+msgid "40 minutes"
+msgstr "40 minutter"
+
+#: ../panels/color/color.ui.h:50
+msgctxt "Calibration quality"
+msgid "Medium"
+msgstr "Middels"
+
+#: ../panels/color/color.ui.h:51 ../panels/power/power.ui.h:5
+#: ../panels/privacy/privacy.ui.h:7
+msgid "30 minutes"
+msgstr "30 minutter"
+
+#: ../panels/color/color.ui.h:52
+msgctxt "Calibration quality"
+msgid "Low"
+msgstr "Lav"
+
+#: ../panels/color/color.ui.h:53
+msgid "15 minutes"
+msgstr "15 minutter"
+
+#: ../panels/color/color.ui.h:54
+#, fuzzy
+msgid "Native to display"
+msgstr "Panel som skal vises"
+
+#: ../panels/color/color.ui.h:55
+msgid "D50 (Printing and publishing)"
+msgstr "D50 (Utskrift og trykking)"
+
+#: ../panels/color/color.ui.h:56
+msgid "D55"
+msgstr "D55"
+
+#: ../panels/color/color.ui.h:57
+msgid "D65 (Photography and graphics)"
+msgstr "D65 (fotografi og grafikk)"
+
+#: ../panels/color/color.ui.h:58
+msgid "D75"
+msgstr "D75"
 
 #: ../panels/color/gnome-color-panel.desktop.in.in.h:2
 msgid "Color management settings"
@@ -466,50 +779,46 @@ msgstr "Innstillinger for fargestyring"
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Farge;ICC;Profil;Kalibrer;Skriver;Skjerm;"
 
-#: ../panels/common/cc-common-language.c:638
+#: ../panels/common/cc-common-language.c:639
 msgid "British English"
 msgstr "Britisk engelsk"
 
-#: ../panels/common/cc-common-language.c:641
+#: ../panels/common/cc-common-language.c:642
 msgid "Spanish"
 msgstr "Spansk"
 
-#: ../panels/common/cc-common-language.c:642
+#: ../panels/common/cc-common-language.c:643
 msgid "Chinese (simplified)"
 msgstr "Kinesisk (forenklet)"
 
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:686
+#: ../panels/common/cc-common-language.c:687
 msgid "United States"
 msgstr "USA"
 
-#: ../panels/common/cc-common-language.c:687
+#: ../panels/common/cc-common-language.c:688
 msgid "Germany"
 msgstr "Tyskland"
 
-#: ../panels/common/cc-common-language.c:688
+#: ../panels/common/cc-common-language.c:689
 msgid "France"
 msgstr "Frankrike"
 
-#: ../panels/common/cc-common-language.c:689
+#: ../panels/common/cc-common-language.c:690
 msgid "Spain"
 msgstr "Spania"
 
-#: ../panels/common/cc-common-language.c:690
+#: ../panels/common/cc-common-language.c:691
 msgid "China"
 msgstr "Kina"
 
-#: ../panels/common/cc-language-chooser.c:121
+#: ../panels/common/cc-language-chooser.c:120
 msgid "Other…"
 msgstr "Annet …"
 
-#: ../panels/common/cc-language-chooser.c:293
+#: ../panels/common/cc-language-chooser.c:292
 msgid "Select a region"
 msgstr "Velg en region"
-
-#: ../panels/common/gdm-languages.c:781
-msgid "Unspecified"
-msgstr "Uspesifisert"
 
 #: ../panels/common/language-chooser.ui.h:1
 msgid "Select a language"
@@ -2328,35 +2637,35 @@ msgstr "Vis ved låsing av skjerm"
 msgid "Add Account"
 msgstr "Legg til konto"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:357
+#: ../panels/online-accounts/cc-online-accounts-panel.c:358
 msgid "Error logging into the account"
 msgstr "Feil ved innlogging på kontoen"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:411
+#: ../panels/online-accounts/cc-online-accounts-panel.c:412
 msgid "Expired credentials. Please log in again."
 msgstr "Påloggingsinfirmasjon utløpt. Vennligst logg inn igjen."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:414
+#: ../panels/online-accounts/cc-online-accounts-panel.c:415
 msgid "_Log In"
 msgstr "_Logg inn"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:650
+#: ../panels/online-accounts/cc-online-accounts-panel.c:651
 msgid "Error creating account"
 msgstr "Feil under oppretting av konto"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:692
+#: ../panels/online-accounts/cc-online-accounts-panel.c:693
 msgid "Error removing account"
 msgstr "Feil under fjerning av konto"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:728
+#: ../panels/online-accounts/cc-online-accounts-panel.c:729
 msgid "Are you sure you want to remove the account?"
 msgstr "Er du sikker på at du vil fjerne kontoen?"
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:730
+#: ../panels/online-accounts/cc-online-accounts-panel.c:731
 msgid "This will not remove the account on the server."
 msgstr "Dette vil ikke fjerne kontoen på tjeneren."
 
-#: ../panels/online-accounts/cc-online-accounts-panel.c:731
+#: ../panels/online-accounts/cc-online-accounts-panel.c:732
 msgid "_Remove"
 msgstr "Fje_rn"
 
@@ -2640,8 +2949,9 @@ msgstr "Innstillinger for strømstyring"
 
 #. Translators: those are keywords for the power control-center panel
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
-msgid "Power;Sleep;Suspend;Hibernate;Battery;"
-msgstr "Strøm;Sove;Hvile;Dvale;Batteri;"
+msgid ""
+"Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
+msgstr "Strøm;Sove;Hvile;Dvale;Batteri;Lysstyrke;Demp;Skjerm;DPMS;"
 
 #: ../panels/power/power.ui.h:1
 msgid "Hibernate"
@@ -2658,10 +2968,6 @@ msgstr "5 minutter"
 #: ../panels/power/power.ui.h:4
 msgid "10 minutes"
 msgstr "10 minutter"
-
-#: ../panels/power/power.ui.h:5 ../panels/privacy/privacy.ui.h:7
-msgid "30 minutes"
-msgstr "30 minutter"
 
 #: ../panels/power/power.ui.h:6 ../panels/privacy/privacy.ui.h:8
 msgid "1 hour"
@@ -2951,12 +3257,6 @@ msgstr "Alternativer"
 #: ../panels/printers/options-dialog.ui.h:3
 msgid "Loading options…"
 msgstr "Laster alternativer …"
-
-#: ../panels/printers/ppd-selection-dialog.ui.h:2
-#: ../panels/user-accounts/data/photo-dialog.ui.h:8
-#: ../panels/user-accounts/um-account-dialog.c:1067
-msgid "Cancel"
-msgstr "Avbryt"
 
 #: ../panels/printers/ppd-selection-dialog.ui.h:4
 msgid "Loading drivers database..."
@@ -3476,11 +3776,11 @@ msgstr "Bytt region og språkinnstillinger"
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "Språk;Utforming;Tastatur;Inndata;"
 
-#: ../panels/region/gnome-region-panel-formats.c:142
+#: ../panels/region/gnome-region-panel-formats.c:144
 msgid "Imperial"
 msgstr "Imperisk"
 
-#: ../panels/region/gnome-region-panel-formats.c:144
+#: ../panels/region/gnome-region-panel-formats.c:146
 msgid "Metric"
 msgstr "Metrisk"
 
@@ -3488,7 +3788,7 @@ msgstr "Metrisk"
 msgid "Select an input source"
 msgstr "Velg en inndatakilde"
 
-#: ../panels/region/gnome-region-panel-lang.c:116
+#: ../panels/region/gnome-region-panel-lang.c:115
 #: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Log out for changes to take effect"
 msgstr "Logg ut for at endringene skal tre i kraft"
@@ -3719,11 +4019,11 @@ msgctxt "service is disabled"
 msgid "Off"
 msgstr "Av"
 
-#: ../panels/sharing/cc-sharing-panel.c:311
+#: ../panels/sharing/cc-sharing-panel.c:310
 msgid "Choose a Folder"
 msgstr "Velg en mappe"
 
-#: ../panels/sharing/cc-sharing-panel.c:489
+#: ../panels/sharing/cc-sharing-panel.c:488
 msgid "Copy"
 msgstr "Kopier"
 
@@ -3736,7 +4036,9 @@ msgstr "Deling"
 msgid ""
 "share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;"
 "pictures;photos;movies;server;renderer;"
-msgstr "del;deling;ssh;vert;navn;ekstern;skrivebord;blåtann;obex;media;lyd;video;bilder;foto;filmer;tjener;"
+msgstr ""
+"del;deling;ssh;vert;navn;ekstern;skrivebord;blåtann;obex;media;lyd;video;"
+"bilder;foto;filmer;tjener;"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
 msgid "Enable or disable remote login"
@@ -3754,31 +4056,32 @@ msgstr "Deling med Bluetooth"
 msgid ""
 "Bluetooth Sharing allows you to share files with other Bluetooth enabled "
 "devices"
-msgstr "Deling med Bluetooth lar deg dele filer med andre enheter som har Bluetooth"
+msgstr ""
+"Deling med Bluetooth lar deg dele filer med andre enheter som har Bluetooth"
 
 #: ../panels/sharing/sharing.ui.h:3
-msgid "<b>Share Public Folder</b>"
-msgstr "<b>Del offentlig mappe</b>"
+msgid "Share Public Folder"
+msgstr "Del offentlig mappe"
 
 #: ../panels/sharing/sharing.ui.h:4
-msgid "Only share with Trusted Devices"
-msgstr "Del kun med enheter du stoler på"
-
-#: ../panels/sharing/sharing.ui.h:5
 msgid "Only Receive From Trusted Devices"
 msgstr "Motta kun fra enheter du stoler på"
 
+#: ../panels/sharing/sharing.ui.h:5
+msgid "Save Received Files to Downloads Folder"
+msgstr "Lagre mottatte filer til nedlastingsmappen"
+
 #: ../panels/sharing/sharing.ui.h:6
-msgid "<b>Save Received Files to Downloads Folder</b>"
-msgstr ""
+msgid "Only share with Trusted Devices"
+msgstr "Del kun med enheter du stoler på"
 
 #: ../panels/sharing/sharing.ui.h:7
-msgid "<b>Computer Name</b>"
-msgstr "<b>Navn på datamaskin</b>"
+msgid "Computer Name"
+msgstr "Navn på datamaskin"
 
 #: ../panels/sharing/sharing.ui.h:8
 msgid "Some services are disabled because of no network access."
-msgstr ""
+msgstr "Npen tjenester er slått av fordi det ikke finnes nettverk."
 
 #: ../panels/sharing/sharing.ui.h:9
 msgid "Media Sharing"
@@ -3786,11 +4089,11 @@ msgstr "Deling av media"
 
 #: ../panels/sharing/sharing.ui.h:10
 msgid "Share Music, Photos and Videos with others on the current network."
-msgstr ""
+msgstr "Del musikk, bilder og videoer med andre på aktivt nettverk."
 
 #: ../panels/sharing/sharing.ui.h:11
-msgid "<b>Share Media On This Network</b>"
-msgstr ""
+msgid "Share Media On This Network"
+msgstr "Del media på dette nettverket"
 
 #: ../panels/sharing/sharing.ui.h:12
 msgid "Shared Folders"
@@ -3817,11 +4120,11 @@ msgstr "Personlig fildeling"
 msgid ""
 "Personal File Sharing allows you to share your Public folder with others on "
 "your current network using: <a href=\"dav://%s\">dav://%s</a>"
-msgstr ""
+msgstr "Personlig fildeling lar deg dele din offentlige mappe med andre på aktivt nettverk ved å bruke: <a href=\"dav://%s\"dav://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:19
-msgid "<b>Share Public Folder On This Network</b>"
-msgstr ""
+msgid "Share Public Folder On This Network"
+msgstr "Del offentlig mappe på dette nettverket"
 
 #: ../panels/sharing/sharing.ui.h:20
 msgid "Require Password"
@@ -3841,33 +4144,35 @@ msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 msgstr ""
+"Tillat at eksterne brukere kobler til med Secure Shell-kommandoen:\n"
+"<a href=\"ssh %s\">ssh %s</a>"
 
 #: ../panels/sharing/sharing.ui.h:26
-msgid "<b>Remote Login</b>"
-msgstr ""
-
-#: ../panels/sharing/sharing.ui.h:27
 msgid "Screen Sharing"
 msgstr "Deling av skjerm"
 
-#: ../panels/sharing/sharing.ui.h:29
+#: ../panels/sharing/sharing.ui.h:28
 #, no-c-format
 msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
 "\"vnc://%s\">vnc://%s</a>"
-msgstr ""
+msgstr "Tillat eksterne brukere å se eller kontrollere din skjerm ved å koble til: <a href=\"vnc://%s\">vnc://%s</a>"
+
+#: ../panels/sharing/sharing.ui.h:29
+msgid "Remote View"
+msgstr "Ekstern visning"
 
 #: ../panels/sharing/sharing.ui.h:30
-msgid "<b>Remote View</b>"
-msgstr ""
+msgid "Remote Control"
+msgstr "Fjernstyring"
 
 #: ../panels/sharing/sharing.ui.h:31
-msgid "<b>Remote Control</b>"
-msgstr ""
-
-#: ../panels/sharing/sharing.ui.h:32
 msgid "Approve All Connections"
 msgstr "Godkjenn alle tilkoblinger"
+
+#: ../panels/sharing/sharing.ui.h:32
+msgid "Show Password"
+msgstr "Vis passord"
 
 #: ../panels/sound/data/gnome-sound-panel.desktop.in.in.h:1
 msgid "Sound"
@@ -3906,45 +4211,45 @@ msgstr "Glass"
 msgid "Sonar"
 msgstr "Sonar"
 
-#: ../panels/sound/gvc-balance-bar.c:111
+#: ../panels/sound/gvc-balance-bar.c:106
 msgctxt "balance"
 msgid "Left"
 msgstr "Venstre"
 
-#: ../panels/sound/gvc-balance-bar.c:112
+#: ../panels/sound/gvc-balance-bar.c:107
 msgctxt "balance"
 msgid "Right"
 msgstr "Høyre"
 
-#: ../panels/sound/gvc-balance-bar.c:115
+#: ../panels/sound/gvc-balance-bar.c:110
 msgctxt "balance"
 msgid "Rear"
 msgstr "Bak"
 
-#: ../panels/sound/gvc-balance-bar.c:116
+#: ../panels/sound/gvc-balance-bar.c:111
 msgctxt "balance"
 msgid "Front"
 msgstr "Foran"
 
-#: ../panels/sound/gvc-balance-bar.c:119
+#: ../panels/sound/gvc-balance-bar.c:114
 msgctxt "balance"
 msgid "Minimum"
 msgstr "Minimum"
 
-#: ../panels/sound/gvc-balance-bar.c:120
+#: ../panels/sound/gvc-balance-bar.c:115
 msgctxt "balance"
 msgid "Maximum"
 msgstr "Maksimum"
 
-#: ../panels/sound/gvc-balance-bar.c:295
+#: ../panels/sound/gvc-balance-bar.c:290
 msgid "_Balance:"
 msgstr "_Balanse:"
 
-#: ../panels/sound/gvc-balance-bar.c:298
+#: ../panels/sound/gvc-balance-bar.c:293
 msgid "_Fade:"
 msgstr "_Fade:"
 
-#: ../panels/sound/gvc-balance-bar.c:301
+#: ../panels/sound/gvc-balance-bar.c:296
 msgid "_Subwoofer:"
 msgstr "_Basselement:"
 
@@ -3997,6 +4302,10 @@ msgstr "Bestem høyeste nivå"
 #: ../panels/sound/gvc-sound-theme-chooser.c:595
 msgid "Name"
 msgstr "Navn"
+
+#: ../panels/sound/gvc-mixer-dialog.c:1530
+msgid "Device"
+msgstr "Enhet"
 
 #: ../panels/sound/gvc-mixer-dialog.c:1593
 #, c-format
@@ -5072,10 +5381,6 @@ msgstr "Velger finger"
 msgid "Enrolling fingerprints"
 msgstr "Registrerer fingeravtrykk"
 
-#: ../panels/user-accounts/um-fingerprint-dialog.c:743
-msgid "Summary"
-msgstr "Sammendrag"
-
 #: ../panels/user-accounts/um-history-dialog.c:88
 msgid "This Week"
 msgstr "Denne uken"
@@ -5320,11 +5625,6 @@ msgstr "Tilegne knapper"
 #: ../panels/wacom/button-mapping.ui.h:2
 msgid "Map buttons to functions"
 msgstr "Koble knapper til funksjoner"
-
-#. Text printed on screen
-#: ../panels/wacom/calibrator/gui_gtk.c:78
-msgid "Screen Calibration"
-msgstr "Kalibrering av skjerm"
 
 #: ../panels/wacom/calibrator/gui_gtk.c:79
 msgid ""
@@ -5671,17 +5971,17 @@ msgid "Quit"
 msgstr "Avslutt"
 
 #. Add categories
-#: ../shell/gnome-control-center.c:880
+#: ../shell/gnome-control-center.c:881
 msgctxt "category"
 msgid "Personal"
 msgstr "Personlig"
 
-#: ../shell/gnome-control-center.c:881
+#: ../shell/gnome-control-center.c:882
 msgctxt "category"
 msgid "Hardware"
 msgstr "Maskinvare"
 
-#: ../shell/gnome-control-center.c:882
+#: ../shell/gnome-control-center.c:883
 msgctxt "category"
 msgid "System"
 msgstr "System"
