@@ -766,13 +766,14 @@ language_response (GtkDialog         *dialog,
         model = um_editable_combo_get_model (UM_EDITABLE_COMBO (combo));
 
         if (response_id == GTK_RESPONSE_OK) {
-                lang = cc_language_chooser_get_language (GTK_WIDGET (dialog));
+                lang = g_strdup (cc_language_chooser_get_language (GTK_WIDGET (dialog)));
                 act_user_set_language (user, lang);
         }
         else {
-                lang = g_strdup (act_user_get_language (user));
-                if (!lang)
+                lang = act_user_get_language (user);
+                if (!lang) {
                         lang = cc_common_language_get_current_language ();
+                }
         }
         cc_common_language_get_iter_for_language (model, lang, &iter);
         um_editable_combo_set_active_iter (UM_EDITABLE_COMBO (combo), &iter);
@@ -816,7 +817,7 @@ language_changed (UmEditableCombo    *combo,
                 goto out;
         }
 
-        d->language_chooser = cc_language_chooser_new (gtk_widget_get_toplevel (d->main_box), FALSE);
+        d->language_chooser = cc_language_chooser_new (gtk_widget_get_toplevel (d->main_box));
 
         g_signal_connect (d->language_chooser, "response",
                           G_CALLBACK (language_response), d);
