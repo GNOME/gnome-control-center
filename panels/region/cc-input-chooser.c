@@ -235,7 +235,7 @@ cc_input_chooser_new (GtkWindow    *main_window,
 
   builder = gtk_builder_new ();
   gtk_builder_add_from_resource (builder,
-                                 "/org/gnome/control-center/region/gnome-region-panel-input-chooser.ui",
+                                 "/org/gnome/control-center/region/input-chooser.ui",
                                  NULL);
   chooser = WID ("input_source_chooser");
   g_object_set_data_full (G_OBJECT (chooser), "builder", builder, g_object_unref);
