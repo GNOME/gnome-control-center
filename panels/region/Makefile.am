@@ -18,14 +18,14 @@ libregion_la_SOURCES =	\
 	$(BUILT_SOURCES) \
 	cc-region-panel.c \
 	cc-region-panel.h \
-	gnome-region-panel-formats.c \
-	gnome-region-panel-formats.h \
-	gnome-region-panel-lang.c \
-	gnome-region-panel-lang.h \
-	gnome-region-panel-system.c \
-	gnome-region-panel-system.h \
-	gnome-region-panel-input.c \
-	gnome-region-panel-input.h \
+	cc-format-chooser.c \
+	cc-format-chooser.h \
+	cc-input-options.c \
+	cc-input-options.h \
+	cc-input-chooser.c \
+	cc-input-chooser.h \
+	cc-ibus-utils.c	\
+	cc-ibus-utils.h \
 	$(NULL)
 
 libregion_la_LIBADD = $(PANEL_LIBS) $(REGION_PANEL_LIBS) $(builddir)/../common/liblanguage.la
