@@ -28,6 +28,7 @@
 #include <gio/gdesktopappinfo.h>
 
 #include "cc-notifications-panel.h"
+#include "cc-edit-dialog.h"
 
 static struct {
   const char *setting_key;
