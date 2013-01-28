@@ -56,35 +56,6 @@ device_ethernet_get_speed (NetDeviceSimple *device_simple)
                 return NULL;
 }
 
-static GSList *
-valid_connections_for_device (NMRemoteSettings *remote_settings,
-                              NetDevice        *device)
-{
-        GSList *all, *filtered, *iterator, *valid;
-        NMConnection *connection;
-        NMSettingConnection *s_con;
-
-        all = nm_remote_settings_list_connections (remote_settings);
-        filtered = nm_device_filter_connections (net_device_get_nm_device (device), all);
-        g_slist_free (all);
-
-        valid = NULL;
-        for (iterator = filtered; iterator; iterator = iterator->next) {
-                connection = iterator->data;
-                s_con = nm_connection_get_setting_connection (connection);
-                if (!s_con)
-                        continue;
-
-                if (nm_setting_connection_get_master (s_con))
-                        continue;
-
-                valid = g_slist_prepend (valid, connection);
-        }
-        g_slist_free (filtered);
-
-        return g_slist_reverse (valid);
-}
-
 static GtkWidget *
 device_ethernet_add_to_notebook (NetObject    *object,
                                  GtkNotebook  *notebook,
@@ -391,7 +362,6 @@ connection_removed (NMRemoteConnection *connection,
 static void
 populate_ui (NetDeviceEthernet *device)
 {
-        NMRemoteSettings *settings;
         GList *children, *c;
         GSList *connections, *l;
         NMConnection *connection;
@@ -409,10 +379,7 @@ populate_ui (NetDeviceEthernet *device)
         }
         g_list_free (children);
 
-        settings = net_object_get_remote_settings (NET_OBJECT (device));
-        connections = valid_connections_for_device (settings, NET_DEVICE (device));
-
-
+        connections = net_device_get_valid_connections (NET_DEVICE (device));
         for (l = connections; l; l = l->next) {
                 NMConnection *connection = l->data;
                 if (!g_object_get_data (G_OBJECT (connection), "removed_signal_handler")) {

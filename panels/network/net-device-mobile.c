@@ -184,21 +184,16 @@ device_add_device_connections (NetDeviceMobile *device_mobile,
                                GtkComboBox *combobox)
 {
         NetDeviceMobilePrivate *priv = device_mobile->priv;
-        GSList *filtered;
         GSList *list, *l;
         GtkTreeIter treeiter;
         NMActiveConnection *active_connection;
         NMConnection *connection;
-        NMRemoteSettings *remote_settings;
 
         /* get the list of available connections for this device */
-        remote_settings = net_object_get_remote_settings (NET_OBJECT (device_mobile));
-        g_assert (remote_settings != NULL);
-        list = nm_remote_settings_list_connections (remote_settings);
-        filtered = nm_device_filter_connections (nm_device, list);
+        list = net_device_get_valid_connections (NET_DEVICE (device_mobile));
         gtk_list_store_clear (liststore);
         active_connection = nm_device_get_active_connection (nm_device);
-        for (l = filtered; l; l = g_slist_next (l)) {
+        for (l = list; l; l = g_slist_next (l)) {
                 connection = NM_CONNECTION (l->data);
                 gtk_list_store_append (liststore, &treeiter);
                 gtk_list_store_set (liststore,
@@ -226,7 +221,6 @@ device_add_device_connections (NetDeviceMobile *device_mobile,
                             -1);
 
         g_slist_free (list);
-        g_slist_free (filtered);
 }
 
 static void

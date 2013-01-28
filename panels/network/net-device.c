@@ -165,35 +165,6 @@ compare_mac_device_with_mac_connection (NMDevice *device,
         return FALSE;
 }
 
-static GSList *
-valid_connections_for_device (NMRemoteSettings *remote_settings,
-                              NetDevice *device)
-{
-        GSList *all, *filtered, *iterator, *valid;
-        NMConnection *connection;
-        NMSettingConnection *s_con;
-
-        all = nm_remote_settings_list_connections (remote_settings);
-        filtered = nm_device_filter_connections (device->priv->nm_device, all);
-        g_slist_free (all);
-
-        valid = NULL;
-        for (iterator = filtered; iterator; iterator = iterator->next) {
-                connection = iterator->data;
-                s_con = nm_connection_get_setting_connection (connection);
-                if (!s_con)
-                        continue;
-
-                if (nm_setting_connection_get_master (s_con))
-                        continue;
-
-                valid = g_slist_prepend (valid, connection);
-        }
-        g_slist_free (filtered);
-
-        return g_slist_reverse (valid);
-}
-
 static NMConnection *
 net_device_real_get_find_connection (NetDevice *device)
 {
@@ -211,7 +182,7 @@ net_device_real_get_find_connection (NetDevice *device)
         }
 
         /* not found in active connections - check all available connections */
-        list = valid_connections_for_device (remote_settings, device);
+        list = net_device_get_valid_connections (device);
         if (list != NULL) {
                 /* if list has only one connection, use this connection */
                 if (g_slist_length (list) == 1) {
@@ -387,3 +358,36 @@ net_device_new (void)
         return NET_DEVICE (device);
 }
 
+GSList *
+net_device_get_valid_connections (NetDevice *device)
+{
+        GSList *all, *filtered, *iterator, *valid;
+        NMConnection *connection;
+        NMSettingConnection *s_con;
+        NMActiveConnection *active_connection;
+        const char *active_uuid;
+
+        all = nm_remote_settings_list_connections (net_object_get_remote_settings (NET_OBJECT (device)));
+        filtered = nm_device_filter_connections (net_device_get_nm_device (device), all);
+        g_slist_free (all);
+
+        active_connection = nm_device_get_active_connection (net_device_get_nm_device (device));
+        active_uuid = active_connection ? nm_active_connection_get_uuid (active_connection) : NULL;
+
+        valid = NULL;
+        for (iterator = filtered; iterator; iterator = iterator->next) {
+                connection = iterator->data;
+                s_con = nm_connection_get_setting_connection (connection);
+                if (!s_con)
+                        continue;
+
+                if (nm_setting_connection_get_master (s_con) &&
+                    g_strcmp0 (nm_setting_connection_get_uuid (s_con), active_uuid) != 0)
+                        continue;
+
+                valid = g_slist_prepend (valid, connection);
+        }
+        g_slist_free (filtered);
+
+        return g_slist_reverse (valid);
+}
