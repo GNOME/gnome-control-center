@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-01-25 13:13+0000\n"
-"PO-Revision-Date: 2013-01-25 14:47+0100\n"
+"POT-Creation-Date: 2013-01-25 18:34+0000\n"
+"PO-Revision-Date: 2013-01-28 12:32+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -175,10 +175,9 @@ msgid "Address"
 msgstr "Dirección"
 
 #: ../panels/bluetooth/bluetooth.ui.h:11
-#, fuzzy
 #| msgid "Mouse and Touchpad Settings"
 msgid "Mouse & Touchpad Settings"
-msgstr "Emparejado"
+msgstr "Configuración del ratón y del «touchpad»"
 
 #: ../panels/bluetooth/bluetooth.ui.h:12
 #: ../panels/universal-access/uap.ui.h:38
@@ -265,7 +264,6 @@ msgstr "Apagar la tapa del portátil"
 #. TRANSLATORS: We suck, the calibation failed and we have no
 #. * good idea why or any suggestions
 #: ../panels/color/cc-color-calibrate.c:409
-#| msgid "An internal error occurred."
 msgid "An internal error occurred that could not be recovered."
 msgstr "Ocurrió un error interno y no se pudo recuperar."
 
@@ -273,7 +271,7 @@ msgstr "Ocurrió un error interno y no se pudo recuperar."
 #. * installed, which should only affect insane distros
 #: ../panels/color/cc-color-calibrate.c:414
 msgid "Tools required for calibration are not installed."
-msgstr ""
+msgstr "Las herramientas requeridas para la calibración no están instaladas."
 
 #. TRANSLATORS: The profile failed for some reason
 #: ../panels/color/cc-color-calibrate.c:420
@@ -285,7 +283,7 @@ msgstr "No se puede generar el perfil"
 #. * https://en.wikipedia.org/wiki/White_point for details
 #: ../panels/color/cc-color-calibrate.c:426
 msgid "The target whitepoint was not obtainable."
-msgstr ""
+msgstr "No se pudo obtener el punto blanco del objetivo"
 
 #. TRANSLATORS: the display calibration process is finished
 #: ../panels/color/cc-color-calibrate.c:466
@@ -295,14 +293,13 @@ msgstr "Completado"
 #. TRANSLATORS: the display calibration failed, and we also show
 #. * the translated (or untranslated) error string after this
 #: ../panels/color/cc-color-calibrate.c:474
-#| msgid "Configuration failed"
 msgid "Calibration failed!"
 msgstr "Falló la configuración."
 
 #. TRANSLATORS: The user can now remove the sensor from the screen
 #: ../panels/color/cc-color-calibrate.c:481
 msgid "You can remove the calibration device."
-msgstr ""
+msgstr "Puede quitar el dispositivo de calibración."
 
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
@@ -320,7 +317,6 @@ msgstr "Bloquear la pantalla"
 
 #. TRANSLATORS: This refers to the embedded webcam on a laptop
 #: ../panels/color/cc-color-common.c:50
-#| msgid "Built-in"
 msgid "Built-in Webcam"
 msgstr "Cámara web integrada"
 
@@ -328,38 +324,30 @@ msgstr "Cámara web integrada"
 #. * model, vendor or ID, e.g. 'LP2480zx Monitor'
 #: ../panels/color/cc-color-common.c:65
 #, c-format
-#| msgid "Monitor"
 msgid "%s Monitor"
 msgstr "Monitor %s"
 
 #. TRANSLATORS: a flatbed scanner device, e.g. 'Epson Scanner'
 #: ../panels/color/cc-color-common.c:69
 #, c-format
-#| msgctxt "Device kind"
-#| msgid "Scanner"
 msgid "%s Scanner"
 msgstr "Escáner %s"
 
 #. TRANSLATORS: a camera device, e.g. 'Nikon D60 Camera'
 #: ../panels/color/cc-color-common.c:73
 #, c-format
-#| msgctxt "Device kind"
-#| msgid "Camera"
 msgid "%s Camera"
 msgstr "Cámara %s"
 
 #. TRANSLATORS: a printer device, e.g. 'Epson Photosmart Printer'
 #: ../panels/color/cc-color-common.c:77
 #, c-format
-#| msgid "Printer"
 msgid "%s Printer"
 msgstr "Impresora %s"
 
 #. TRANSLATORS: a webcam device, e.g. 'Philips HiDef Camera'
 #: ../panels/color/cc-color-common.c:81
 #, c-format
-#| msgctxt "Device kind"
-#| msgid "Webcam"
 msgid "%s Webcam"
 msgstr "Cámara web %s"
 
@@ -441,11 +429,10 @@ msgstr "El tipo de dispositivo actualmente no está soportado."
 #. TRANSLATORS: standard spaces are well known colorspaces like
 #. * sRGB, AdobeRGB and ProPhotoRGB
 #: ../panels/color/cc-color-profile.c:101
-#, fuzzy
 #| msgctxt "Experience"
 #| msgid "Standard"
 msgid "Standard Space"
-msgstr "Estándar"
+msgstr "Espacio estándar"
 
 #. TRANSLATORS: test profiles do things like changing the screen
 #. * a different color, or swap the red and green channels
@@ -466,16 +453,12 @@ msgstr "Automático"
 #. * much less time to generate but may be a poor reflection of the
 #. * device capability
 #: ../panels/color/cc-color-profile.c:125
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "Low Quality"
 msgstr "Calidad baja"
 
 #. TRANSLATORS: the profile quality
 #: ../panels/color/cc-color-profile.c:130
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "Medium Quality"
 msgstr "Calidad media"
@@ -484,8 +467,6 @@ msgstr "Calidad media"
 #. * a *long* time, and have the best calibration and
 #. * characterisation data.
 #: ../panels/color/cc-color-profile.c:137
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "High Quality"
 msgstr "Calidad alta"
@@ -520,16 +501,14 @@ msgid "Full-screen display correction not possible with this profile"
 msgstr ""
 
 #: ../panels/color/cc-color-profile.c:223
-#, fuzzy
 #| msgid "This device has an old profile that may no longer be accurate."
 msgid "This profile may no longer be accurate"
-msgstr "Este dispositivo tiene un perfil antiguo que puede no ser preciso."
+msgstr "Este perfil ya no es preciso."
 
 #: ../panels/color/color-calibrate.ui.h:1
-#, fuzzy
 #| msgid "Calibration"
 msgid "Display Calibration"
-msgstr "Calibración"
+msgstr "Calibración de la pantalla"
 
 #: ../panels/color/color-calibrate.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
@@ -586,24 +565,22 @@ msgstr "Calidad de la calibración"
 
 #: ../panels/color/color.ui.h:9
 msgid "Select the type of display that is connected."
-msgstr ""
+msgstr "Seleccionar el tipo de pantalla que está conectada."
 
 #: ../panels/color/color.ui.h:10
-#, fuzzy
 #| msgctxt "Device kind"
 #| msgid "Display"
 msgid "Display Type"
-msgstr "Pantalla"
+msgstr "Tipo de pantalla"
 
 #: ../panels/color/color.ui.h:11
 msgid "Select the sensor device you want to use for calibration."
-msgstr ""
+msgstr "Seleccione el sensor que quiere usar para la calibración."
 
 #: ../panels/color/color.ui.h:12
-#, fuzzy
 #| msgid "Calibration"
 msgid "Calibration Device"
-msgstr "Calibración"
+msgstr "Calibración del dispositivo"
 
 #: ../panels/color/color.ui.h:13
 msgid ""
@@ -628,10 +605,9 @@ msgid ""
 msgstr ""
 
 #: ../panels/color/color.ui.h:17
-#, fuzzy
 #| msgid "Brightness"
 msgid "Display Brightness"
-msgstr "Brillo"
+msgstr "Brillo de la pantalla"
 
 #: ../panels/color/color.ui.h:18
 msgid ""
@@ -640,16 +616,14 @@ msgid ""
 msgstr ""
 
 #: ../panels/color/color.ui.h:19
-#, fuzzy
 #| msgid "_Profile:"
 msgid "Profile Name:"
-msgstr "_Perfil:"
+msgstr "Nombre del perfil:"
 
 #: ../panels/color/color.ui.h:20
-#, fuzzy
 #| msgid "filename"
 msgid "Profile Name"
-msgstr "nombre de archivo"
+msgstr "Nombre del perfil"
 
 #: ../panels/color/color.ui.h:21
 msgid "Profile successfully created!"
@@ -834,51 +808,46 @@ msgstr "Configuración de gestión de color"
 msgid "Color;ICC;Profile;Calibrate;Printer;Display;"
 msgstr "Color;ICC;Perfil;Calibrado;Impresora;Pantalla;"
 
-#: ../panels/common/cc-common-language.c:638
+#: ../panels/common/cc-common-language.c:639
 msgid "British English"
 msgstr "Inglés británico"
 
-#: ../panels/common/cc-common-language.c:641
+#: ../panels/common/cc-common-language.c:642
 msgid "Spanish"
 msgstr "Español"
 
-#: ../panels/common/cc-common-language.c:642
+#: ../panels/common/cc-common-language.c:643
 msgid "Chinese (simplified)"
 msgstr "Chino (simplificado)"
 
 #. Add some common regions
-#: ../panels/common/cc-common-language.c:686
+#: ../panels/common/cc-common-language.c:687
 msgid "United States"
 msgstr "Estados Unidos"
 
-#: ../panels/common/cc-common-language.c:687
+#: ../panels/common/cc-common-language.c:688
 msgid "Germany"
 msgstr "Alemania"
 
-#: ../panels/common/cc-common-language.c:688
+#: ../panels/common/cc-common-language.c:689
 msgid "France"
 msgstr "Francia"
 
-#: ../panels/common/cc-common-language.c:689
+#: ../panels/common/cc-common-language.c:690
 msgid "Spain"
 msgstr "España"
 
-#: ../panels/common/cc-common-language.c:690
+#: ../panels/common/cc-common-language.c:691
 msgid "China"
 msgstr "China"
 
-#: ../panels/common/cc-language-chooser.c:121
-#| msgid "Other profile…"
+#: ../panels/common/cc-language-chooser.c:120
 msgid "Other…"
 msgstr "Otro…"
 
-#: ../panels/common/cc-language-chooser.c:293
+#: ../panels/common/cc-language-chooser.c:292
 msgid "Select a region"
 msgstr "Seleccionar una región"
-
-#: ../panels/common/gdm-languages.c:781
-msgid "Unspecified"
-msgstr "Sin especificar"
 
 #: ../panels/common/language-chooser.ui.h:1
 msgid "Select a language"
@@ -1322,7 +1291,6 @@ msgstr "Procesador"
 
 #. To translators: this field contains the distro name, version and type
 #: ../panels/info/info.ui.h:8
-#| msgid "File System"
 msgid "Base system"
 msgstr "Sistema base"
 
@@ -2307,7 +2275,6 @@ msgid "_Use as Hotspot…"
 msgstr "_Usar como «hotspot»…"
 
 #: ../panels/network/network-wifi.ui.h:5
-#| msgid "_Connect to Hidden Network..."
 msgid "_Connect to Hidden Network…"
 msgstr "Conectar a una red oculta…"
 
@@ -2670,11 +2637,10 @@ msgstr "Mostrar banners emergentes"
 
 #. TRANSLATORS: banners here refers to message tray notifications in the middle of the screen
 #: ../panels/notifications/cc-edit-dialog.c:43
-#, fuzzy
 #| msgid "_Show monitors in panel"
 msgctxt "notifications"
 msgid "Show Details in Banners"
-msgstr "_Mostrar pantallas en el panel"
+msgstr "Mostrar detalles en los banners"
 
 #: ../panels/notifications/cc-edit-dialog.c:44
 msgctxt "notifications"
@@ -2833,16 +2799,15 @@ msgstr[1] "minutos"
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #: ../panels/power/cc-power-panel.c:224
 #, c-format
-#| msgid "Charging - %s until fully charged"
 msgid "%s until fully charged"
 msgstr "%s hasta que se cargue del todo"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #: ../panels/power/cc-power-panel.c:231
-#, fuzzy, c-format
+#, c-format
 #| msgid "Caution low UPS, %s remaining"
 msgid "Caution: %s remaining"
-msgstr "SAI bajo, quedan %s"
+msgstr "Advertencia: quedan %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #: ../panels/power/cc-power-panel.c:236
@@ -3006,7 +2971,6 @@ msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
 #: ../panels/power/cc-power-panel.c:1553
-#| msgid "On battery power"
 msgid "When on battery power"
 msgstr "En modo batería"
 
@@ -3026,7 +2990,6 @@ msgid "_Automatic Suspend"
 msgstr "Automático"
 
 #: ../panels/power/cc-power-panel.c:1722
-#, fuzzy
 #| msgid "When power is _critically low"
 msgid "When Battery Power is _Critical"
 msgstr "_Cuando la carga está críticamente baja"
@@ -3099,16 +3062,14 @@ msgid "_Close"
 msgstr "_Cerrar"
 
 #: ../panels/power/power.ui.h:12
-#, fuzzy
 #| msgid "On battery power"
 msgid "When on _Battery Power"
-msgstr "Usando batería"
+msgstr "Usando _batería"
 
 #: ../panels/power/power.ui.h:13
-#, fuzzy
 #| msgid "When plugged in"
 msgid "When _Plugged In"
-msgstr "Cuando está conectado a la red"
+msgstr "Cuando está _enchufado"
 
 #: ../panels/power/power.ui.h:14
 msgid "Delay"
@@ -3280,13 +3241,11 @@ msgid "No suitable driver found"
 msgstr "No se ha encontrado ningún controlador adecuado"
 
 #: ../panels/printers/cc-printers-panel.c:2321
-#, fuzzy
 #| msgid "Searching for preferred drivers..."
 msgid "Searching for preferred drivers…"
 msgstr "Buscando controladores preferidos…"
 
 #: ../panels/printers/cc-printers-panel.c:2336
-#| msgid "Select from database..."
 msgid "Select from database…"
 msgstr "Seleccionar de la base de datos…"
 
@@ -3652,7 +3611,7 @@ msgstr "Trabajos"
 #. Translators: Opens a dialog containing printer's jobs
 #: ../panels/printers/printers.ui.h:11
 msgid "Show _Jobs"
-msgstr ""
+msgstr "Mostrar _tareas"
 
 #: ../panels/printers/printers.ui.h:12
 msgid "Model"
@@ -3703,7 +3662,6 @@ msgid "Visible"
 msgstr "Visible"
 
 #: ../panels/privacy/cc-privacy-panel.c:270 ../panels/privacy/privacy.ui.h:32
-#| msgid "Screenshots"
 msgid "Screen Lock"
 msgstr "Bloqueo de pantalla"
 
@@ -3717,7 +3675,7 @@ msgstr "Uso e histórico"
 
 #: ../panels/privacy/cc-privacy-panel.c:575 ../panels/privacy/privacy.ui.h:37
 msgid "Purge Trash & Temporary Files"
-msgstr ""
+msgstr "Vaciar papelera y archivos temporales"
 
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:1
 msgid "Privacy"
@@ -3737,10 +3695,9 @@ msgstr ""
 "nombre;red;identidad;"
 
 #: ../panels/privacy/privacy.ui.h:1
-#, fuzzy
 #| msgid "Screen turns off"
 msgid "Screen Turns Off"
-msgstr "que la pantalla se apague"
+msgstr "Se apaga la pantalla"
 
 #: ../panels/privacy/privacy.ui.h:2
 msgid "30 seconds"
@@ -3760,17 +3717,16 @@ msgstr ""
 
 #: ../panels/privacy/privacy.ui.h:13
 msgid "Display full name in _lock screen"
-msgstr ""
+msgstr "Mostrar el nombre completo en la pantalla de b_loqueo"
 
 #: ../panels/privacy/privacy.ui.h:14
-#, fuzzy
 #| msgid "Switch Modes"
 msgid "_Stealth Mode"
-msgstr "Cambiar modos"
+msgstr "Modo _silencioso"
 
 #: ../panels/privacy/privacy.ui.h:15
 msgid "Immediately"
-msgstr ""
+msgstr "Inmediatamente"
 
 #: ../panels/privacy/privacy.ui.h:16
 msgid "1 day"
@@ -3810,7 +3766,7 @@ msgstr "30 días"
 
 #: ../panels/privacy/privacy.ui.h:25
 msgid "Don't retain history"
-msgstr ""
+msgstr "No recordar el histórico"
 
 #: ../panels/privacy/privacy.ui.h:26
 msgid "Forever"
@@ -3824,7 +3780,7 @@ msgstr ""
 
 #: ../panels/privacy/privacy.ui.h:29
 msgid "Cl_ear Recent History"
-msgstr ""
+msgstr "Limpiar el histórico r_eciente"
 
 #: ../panels/privacy/privacy.ui.h:30
 msgid "_Recently Used"
@@ -3839,16 +3795,14 @@ msgid "The Screen Lock protects your privacy when you are away."
 msgstr ""
 
 #: ../panels/privacy/privacy.ui.h:34
-#, fuzzy
 #| msgid "A_utomatic Login"
 msgid "Automatic Screen _Lock"
-msgstr "_Inicio de sesión automático"
+msgstr "_Bloque de pantalla automático"
 
 #: ../panels/privacy/privacy.ui.h:35
-#, fuzzy
 #| msgid "_Lock screen after:"
 msgid "Lock Screen _After"
-msgstr "B_loquear pantalla después de:"
+msgstr "B_loquear pantalla después de"
 
 #: ../panels/privacy/privacy.ui.h:36
 msgid "Show _Notifications"
@@ -3859,10 +3813,9 @@ msgid "_Empty Trash"
 msgstr "_Vaciar papelera"
 
 #: ../panels/privacy/privacy.ui.h:39
-#, fuzzy
 #| msgid "_Keep Files"
 msgid "_Purge Temporary Files"
-msgstr "_Mantener archivos"
+msgstr "_Limpiar archivos temporales"
 
 #: ../panels/privacy/privacy.ui.h:40
 msgid ""
@@ -3872,11 +3825,11 @@ msgstr ""
 
 #: ../panels/privacy/privacy.ui.h:41
 msgid "Automatically Empty _Trash"
-msgstr ""
+msgstr "Vaciar la papelera automá_ticamente"
 
 #: ../panels/privacy/privacy.ui.h:42
 msgid "Automatically Purge Temporary _Files"
-msgstr ""
+msgstr "Li_mpiar los archivos temporales automáticamente"
 
 #: ../panels/privacy/privacy.ui.h:43
 msgid "Purge _After"
@@ -3892,29 +3845,27 @@ msgstr "Cambiar su configuración de región e idioma"
 
 #. Translators: those are keywords for the region control-center panel
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
-#, fuzzy
 #| msgid "Language;Layout;Keyboard;"
 msgid "Language;Layout;Keyboard;Input;"
-msgstr "Idioma;Distribución;Teclado;"
+msgstr "Idioma;Distribución;Teclado;Entrada;"
 
-#: ../panels/region/gnome-region-panel-formats.c:142
+#: ../panels/region/gnome-region-panel-formats.c:144
 msgid "Imperial"
 msgstr "Imperial"
 
-#: ../panels/region/gnome-region-panel-formats.c:144
+#: ../panels/region/gnome-region-panel-formats.c:146
 msgid "Metric"
 msgstr "Métrico"
 
 #: ../panels/region/gnome-region-panel-input-chooser.ui.h:1
-#, fuzzy
 #| msgid "Select an input source to add"
 msgid "Select an input source"
-msgstr "Seleccionar una fuente de entrada que añadir"
+msgstr "Seleccionar una fuente de entrada"
 
-#: ../panels/region/gnome-region-panel-lang.c:116
+#: ../panels/region/gnome-region-panel-lang.c:115
 #: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Log out for changes to take effect"
-msgstr ""
+msgstr "Cierre la sesión para aplicar los cambios"
 
 #: ../panels/region/gnome-region-panel-system.c:471
 msgid ""
@@ -3949,10 +3900,9 @@ msgid "Region and Language"
 msgstr "Región e idioma"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
-#, fuzzy
 #| msgid "Select a language"
 msgid "Select a display language"
-msgstr "Seleccionar un idioma"
+msgstr "Seleccionar un idioma que mostrar"
 
 #: ../panels/region/gnome-region-panel.ui.h:6
 msgid "Add Language"
@@ -4045,16 +3995,14 @@ msgid "Shortcut Settings"
 msgstr "Configuración de atajos"
 
 #: ../panels/region/gnome-region-panel.ui.h:31
-#, fuzzy
 #| msgid "Use the same layout for all windows"
 msgid "Use the same source for all windows"
-msgstr "Usar la misma distribución para todas las ventanas"
+msgstr "Usar la misma fuente para todas las ventanas"
 
 #: ../panels/region/gnome-region-panel.ui.h:32
-#, fuzzy
 #| msgid "Allow different layouts for individual windows"
 msgid "Allow different sources for each window"
-msgstr "Permitir diferentes distribuciones para cada ventana"
+msgstr "Permitir diferentes fuentes para cada ventana"
 
 #: ../panels/region/gnome-region-panel.ui.h:34
 msgid "Input Sources"
@@ -4116,10 +4064,9 @@ msgid "Search"
 msgstr "Buscar"
 
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:2
-#, fuzzy
 #| msgid "System settings"
 msgid "Search settings"
-msgstr "Configuración del sistema"
+msgstr "Configuración de la búsqueda"
 
 #. Translators: those are keywords for the search control-center panel
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:4
@@ -4127,7 +4074,6 @@ msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr "buscar;búsqueda;índice;ocultar;privacidad;resultados;"
 
 #: ../panels/search/search-locations-dialog.ui.h:1
-#| msgid "Location"
 msgid "Search Locations"
 msgstr "Buscar ubicaciones"
 
@@ -4175,16 +4121,16 @@ msgstr ""
 "multimedia;sonido:vídeo;imágenes;fotos;películas;servidor;renderizado;"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
-#, fuzzy
 #| msgid "Enable h_orizontal scrolling"
 msgid "Enable or disable remote login"
-msgstr "Activar desplazamiento _horizontal"
+msgstr "Activar o desactivar el inicio de sesión remota"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:2
-#, fuzzy
 #| msgid "Authentication is required to change user data"
 msgid "Authentication is required to enable or disable remote login"
-msgstr "Se requiere autenticación para cambiar los datos del usuario"
+msgstr ""
+"Se requiere autenticación para activar o desactivar el inicio de sesión "
+"remota"
 
 #: ../panels/sharing/sharing.ui.h:1
 msgid "Bluetooth Sharing"
@@ -4197,10 +4143,9 @@ msgid ""
 msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:3
-#, fuzzy
 #| msgid "Shared Folders"
 msgid "Share Public Folder"
-msgstr "Carpetas compartidas"
+msgstr "Compartir carpeta pública"
 
 #: ../panels/sharing/sharing.ui.h:4
 msgid "Only Receive From Trusted Devices"
@@ -4251,10 +4196,9 @@ msgid "Remove Folder"
 msgstr "Quitar carpeta"
 
 #: ../panels/sharing/sharing.ui.h:16
-#, fuzzy
 #| msgid "Personal digital assistant"
 msgid "Personal File Sharing"
-msgstr "Asistente digital personal"
+msgstr "Compartición de archivos personales"
 
 #: ../panels/sharing/sharing.ui.h:18
 #, no-c-format
@@ -6149,6 +6093,9 @@ msgstr "Preferencias;Configuración;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "Todas las configuraciones"
+
+#~ msgid "Unspecified"
+#~ msgstr "Sin especificar"
 
 #, fuzzy
 #~| msgid "<b>Locate Pointer</b>"
