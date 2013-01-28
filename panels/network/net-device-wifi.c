@@ -700,11 +700,9 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
         const GByteArray *ssid;
         const gchar *ssid_tmp;
         GSList *list, *l;
-        GSList *filtered;
         NMConnection *connection_activate = NULL;
         NMDevice *device;
         NMSettingWireless *setting_wireless;
-        NMRemoteSettings *remote_settings;
         NMClient *client;
 
         if (device_wifi->priv->updating_device)
@@ -721,12 +719,9 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
                  ssid_target, ap_object_path);
 
         /* look for an existing connection we can use */
-        remote_settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
-        list = nm_remote_settings_list_connections (remote_settings);
-        g_debug ("%i existing remote connections available", g_slist_length (list));
-        filtered = nm_device_filter_connections (device, list);
-        g_debug ("%i suitable remote connections to check", g_slist_length (filtered));
-        for (l = filtered; l; l = g_slist_next (l)) {
+        list = net_device_get_valid_connections (NET_DEVICE (device_wifi));
+        g_debug ("%i suitable remote connections to check", g_slist_length (list));
+        for (l = list; l; l = g_slist_next (l)) {
                 NMConnection *connection;
 
                 connection = NM_CONNECTION (l->data);
@@ -746,7 +741,6 @@ wireless_try_to_connect (NetDeviceWifi *device_wifi,
         }
 
         g_slist_free (list);
-        g_slist_free (filtered);
 
         /* activate the connection */
         client = net_object_get_client (NET_OBJECT (device_wifi));
@@ -974,27 +968,22 @@ start_shared_connection (NetDeviceWifi *device_wifi)
         const gchar *str_mac;
         struct ether_addr *bin_mac;
         GSList *connections;
-        GSList *filtered;
         GSList *l;
         NMClient *client;
-        NMRemoteSettings *remote_settings;
 
         device = net_device_get_nm_device (NET_DEVICE (device_wifi));
         g_assert (nm_device_get_device_type (device) == NM_DEVICE_TYPE_WIFI);
 
-        remote_settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
-        connections = nm_remote_settings_list_connections (remote_settings);
-        filtered = nm_device_filter_connections (device, connections);
-        g_slist_free (connections);
+        connections = net_device_get_valid_connections (NET_DEVICE (device_wifi));
         c = NULL;
-        for (l = filtered; l; l = l->next) {
+        for (l = connections; l; l = l->next) {
                 tmp = l->data;
                 if (is_hotspot_connection (tmp)) {
                         c = tmp;
                         break;
                 }
         }
-        g_slist_free (filtered);
+        g_slist_free (connections);
 
         client = net_object_get_client (NET_OBJECT (device_wifi));
         if (c != NULL) {
@@ -1680,9 +1669,7 @@ open_history (NetDeviceWifi *device_wifi)
         GtkWidget *button;
         GtkWidget *forget;
         GtkWidget *swin;
-        NMRemoteSettings *settings;
         GSList *connections;
-        GSList *filtered;
         GSList *l;
         const GPtrArray *aps;
         GPtrArray *aps_unique = NULL;
@@ -1743,15 +1730,13 @@ open_history (NetDeviceWifi *device_wifi)
 
         nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
 
-        settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
-        connections = nm_remote_settings_list_connections (settings);
-        filtered = nm_device_filter_connections (nm_device, connections);
+        connections = net_device_get_valid_connections (NET_DEVICE (device_wifi));
 
         aps = nm_device_wifi_get_access_points (NM_DEVICE_WIFI (nm_device));
         aps_unique = panel_get_strongest_unique_aps (aps);
         active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (nm_device));
 
-        for (l = filtered; l; l = l->next) {
+        for (l = connections; l; l = l->next) {
                 NMConnection *connection = l->data;
                 NMAccessPoint *ap = NULL;
                 NMSetting *setting;
@@ -1779,7 +1764,6 @@ open_history (NetDeviceWifi *device_wifi)
                 }
         }
         g_slist_free (connections);
-        g_slist_free (filtered);
 
         gtk_window_present (GTK_WINDOW (dialog));
 }
@@ -1792,9 +1776,7 @@ populate_ap_list (NetDeviceWifi *device_wifi)
         GtkSizeGroup *rows;
         GtkSizeGroup *icons;
         NMDevice *nm_device;
-        NMRemoteSettings *settings;
         GSList *connections;
-        GSList *filtered;
         GSList *l;
         const GPtrArray *aps;
         GPtrArray *aps_unique = NULL;
@@ -1819,9 +1801,7 @@ populate_ap_list (NetDeviceWifi *device_wifi)
 
         nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
 
-        settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
-        connections = nm_remote_settings_list_connections (settings);
-        filtered = nm_device_filter_connections (nm_device, connections);
+        connections = net_device_get_valid_connections (NET_DEVICE (device_wifi));
 
         aps = nm_device_wifi_get_access_points (NM_DEVICE_WIFI (nm_device));
         aps_unique = panel_get_strongest_unique_aps (aps);
@@ -1833,7 +1813,7 @@ populate_ap_list (NetDeviceWifi *device_wifi)
                 NMConnection *connection = NULL;
                 ap = NM_ACCESS_POINT (g_ptr_array_index (aps_unique, i));
                 ssid_ap = nm_access_point_get_ssid (ap);
-                for (l = filtered; l; l = l->next) {
+                for (l = connections; l; l = l->next) {
                         connection = l->data;
                         NMSetting *setting;
                         const GByteArray *ssid;
@@ -1858,7 +1838,6 @@ populate_ap_list (NetDeviceWifi *device_wifi)
         }
 
         g_slist_free (connections);
-        g_slist_free (filtered);
 }
 
 static void
