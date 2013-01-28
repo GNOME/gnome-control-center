@@ -6,6 +6,7 @@ uidir = $(pkgdatadir)/ui/sharing
 AM_CPPFLAGS =						\
 	$(PANEL_CFLAGS)					\
 	$(SHARING_PANEL_CFLAGS)				\
+	$(BLUETOOTH_CFLAGS)				\
 	-DLIBEXECDIR=\"$(libexecdir)\"			\
 	$(NULL)
 
@@ -38,7 +39,7 @@ cc-sharing-resources.h: sharing.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name cc_sharing $<
 
 
-libsharing_la_LIBADD = $(PANEL_LIBS) $(SHARING_PANEL_LIBS)
+libsharing_la_LIBADD = $(PANEL_LIBS) $(SHARING_PANEL_LIBS) $(BLUETOOTH_LIBS)
 libsharing_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 libexec_PROGRAMS = cc-remote-login-helper

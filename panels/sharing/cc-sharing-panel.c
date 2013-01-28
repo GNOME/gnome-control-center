@@ -30,6 +30,11 @@
 #include "cc-media-sharing.h"
 
 #include <glib/gi18n.h>
+#include <config.h>
+
+#ifdef HAVE_BLUETOOTH
+#include <bluetooth-killswitch.h>
+#endif
 
 CC_PANEL_REGISTER (CcSharingPanel, cc_sharing_panel)
 
@@ -66,12 +71,20 @@ struct _CcSharingPanelPrivate
   GtkWidget *personal_file_sharing_dialog;
   GtkWidget *remote_login_dialog;
   GtkWidget *screen_sharing_dialog;
+
+#ifdef HAVE_BLUETOOTH
+  BluetoothKillswitch *bluetooth_killswitch;
+#endif
 };
 
 static void
 cc_sharing_panel_dispose (GObject *object)
 {
   CcSharingPanelPrivate *priv = CC_SHARING_PANEL (object)->priv;
+
+#ifdef HAVE_BLUETOOTH
+  g_clear_object (&priv->bluetooth_killswitch);
+#endif
 
   g_clear_object (&priv->builder);
 
@@ -261,11 +274,43 @@ bluetooth_set_accept_files (const GValue       *value,
     return g_variant_new_string ("always");
 }
 
+#ifdef HAVE_BLUETOOTH
+
+static void
+bluetooth_state_changed (CcSharingPanel *self)
+{
+  CcSharingPanelPrivate *priv = self->priv;
+  BluetoothKillswitchState killswitch_state;
+
+  killswitch_state = BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER;
+
+  if (priv->bluetooth_killswitch)
+    killswitch_state = bluetooth_killswitch_get_state (priv->bluetooth_killswitch);
+
+  if (killswitch_state == BLUETOOTH_KILLSWITCH_STATE_NO_ADAPTER)
+    gtk_widget_hide (WID ("bluetooth-sharing-button"));
+  else
+    gtk_widget_show (WID ("bluetooth-sharing-button"));
+}
+
+#endif
+
 static void
 cc_sharing_panel_setup_bluetooth_sharing_dialog (CcSharingPanel *self)
 {
   CcSharingPanelPrivate *priv = self->priv;
   GSettings *settings;
+
+#ifdef HAVE_BLUETOOTH
+  priv->bluetooth_killswitch = bluetooth_killswitch_new ();
+
+  /* get the initial state */
+  bluetooth_state_changed (self);
+
+  g_signal_connect_swapped (priv->bluetooth_killswitch, "state-changed",
+                            G_CALLBACK (bluetooth_state_changed), self);
+#endif
+
 
   cc_sharing_panel_bind_switch_to_label (WID ("share-public-folder-switch"),
                                          WID ("bluetooth-sharing-status-label"));
