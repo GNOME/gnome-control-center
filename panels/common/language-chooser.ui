@@ -1,108 +1,68 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkDialog" id="dialog">
-    <property name="height_request">400</property>
-    <property name="border_width">5</property>
+  <object class="GtkDialog" id="language-dialog">
+    <property name="title" translatable="yes">Language</property>
     <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="type_hint">dialog</property>
-    <property name="title" translatable="yes">Select a language</property>
-    <property name="icon_name">system-users</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="resizable">False</property>
     <child internal-child="vbox">
-      <object class="GtkBox" id="content-area">
+      <object class="GtkBox" id="language-vbox">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
+        <property name="spacing">0</property>
         <child>
-          <object class="GtkBox" id="content-box">
+          <object class="GtkScrolledWindow" id="language-scrolledwindow">
             <property name="visible">True</property>
-            <property name="orientation">vertical</property>
-            <property name="border_width">5</property>
-            <property name="spacing">6</property>
+            <property name="hscrollbar-policy">never</property>
+            <property name="vscrollbar-policy">never</property>
+            <property name="shadow-type">in</property>
+            <property name="margin-left">6</property>
+            <property name="margin-right">6</property>
+            <property name="margin-top">6</property>
+            <property name="margin-bottom">6</property>
             <child>
-              <object class="GtkScrolledWindow" id="scrolledwindow1">
+              <object class="GtkViewport" id="language-viewport">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="hscrollbar_policy">never</property>
-                <property name="vscrollbar_policy">automatic</property>
-                <property name="shadow_type">in</property>
                 <child>
-                  <object class="GtkTreeView" id="language-list">
+                  <object class="EggListBox" id="language-list">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="headers_visible">False</property>
-                    <property name="headers_clickable">False</property>
-                    <property name="enable_search">False</property>
+                    <property name="can-focus">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="halign">fill</property>
+                    <property name="valign">fill</property>
                   </object>
                 </child>
               </object>
-              <packing>
-                <property name="position">0</property>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry" id="filter-entry">
-                <property name="visible">True</property>
-	        <property name="can_focus">True</property>
-	        <property name="secondary_icon_name">edit-find-symbolic</property>
-	        <property name="secondary_icon_activatable">False</property>
-	        <property name="secondary_icon_sensitive">False</property>
-              </object>
-              <packing>
-                <property name="position">1</property>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-              </packing>
             </child>
           </object>
         </child>
+        <child>
+          <object class="GtkSearchEntry" id="language-filter-entry">
+            <property name="visible">False</property>
+            <property name="hexpand">True</property>
+            <property name="margin-left">6</property>
+            <property name="margin-right">6</property>
+            <property name="margin-top">6</property>
+            <property name="margin-bottom">6</property>
+          </object>
+        </child>
         <child internal-child="action_area">
-          <object class="GtkButtonBox" id="action-area">
+          <object class="GtkButtonBox" id="language-action-area">
             <property name="visible">True</property>
-            <property name="layout_style">end</property>
-            <child>
-              <object class="GtkButton" id="cancel-button">
-                <property name="label" translatable="yes">_Cancel</property>
-                <property name="use_underline">True</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
+            <property name="orientation">horizontal</property>
             <child>
               <object class="GtkButton" id="ok-button">
-                <property name="label" translatable="yes">_Select</property>
-                <property name="use_underline">True</property>
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="receives_default">True</property>
+                <property name="label" translatable="yes">_Done</property>
+                <property name="use_underline" >True</property>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">1</property>
-              </packing>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
         </child>
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-6">cancel-button</action-widget>
       <action-widget response="-5">ok-button</action-widget>
     </action-widgets>
   </object>

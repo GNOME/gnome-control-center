@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
  *
- * Copyright 2009-2010  Red Hat, Inc,
+ * Copyright (C) 2013 Red Hat, Inc
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,14 +23,16 @@
 #define __CC_LANGUAGE_CHOOSER_H__
 
 #include <gtk/gtk.h>
+#include <glib-object.h>
 
 G_BEGIN_DECLS
 
-GtkWidget        *cc_language_chooser_new          (GtkWidget *parent,
-                                                    gboolean   regions);
-void              cc_language_chooser_clear_filter (GtkWidget *chooser);
-gchar            *cc_language_chooser_get_language (GtkWidget *chooser);
+GtkWidget   *cc_language_chooser_new          (GtkWidget   *parent);
+void         cc_language_chooser_clear_filter (GtkWidget   *chooser);
+const gchar *cc_language_chooser_get_language (GtkWidget   *chooser);
+void         cc_language_chooser_set_language (GtkWidget   *chooser,
+                                               const gchar *language);
 
 G_END_DECLS
 
-#endif
+#endif /* __CC_LANGUAGE_CHOOSER_H__ */
