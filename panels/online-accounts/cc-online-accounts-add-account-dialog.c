@@ -1,6 +1,6 @@
 /* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*-
  *
- * Copyright (C) 2012 Red Hat, Inc.
+ * Copyright (C) 2012, 2013 Red Hat, Inc.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -29,15 +29,28 @@
 #include <goabackend/goabackend.h>
 
 #include <egg-list-box/egg-list-box.h>
+#include <libgd/gd-stack.h>
+
 #include "cc-online-accounts-add-account-dialog.h"
+
+#define BRANDED_PAGE "_branded"
+#define OTHER_PAGE "_other"
 
 struct _GoaPanelAddAccountDialogPrivate
 {
-  EggListBox *list_box;
+  EggListBox *branded_list_box;
+  EggListBox *contacts_list_box;
+  EggListBox *mail_list_box;
+  EggListBox *ticketing_list_box;
   GError *error;
   GoaClient *client;
   GoaObject *object;
   GtkListStore *list_store;
+  GtkWidget *contacts_grid;
+  GtkWidget *mail_grid;
+  GtkWidget *ticketing_grid;
+  GtkWidget *stack;
+  gboolean add_other;
 };
 
 #define GOA_ADD_ACCOUNT_DIALOG_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GOA_TYPE_PANEL_ADD_ACCOUNT_DIALOG, GoaPanelAddAccountDialogPrivate))
@@ -91,6 +104,12 @@ list_box_child_activated_cb (GoaPanelAddAccountDialog *add_account, GtkWidget *c
   GoaProvider *provider;
 
   provider = g_object_get_data (G_OBJECT (child), "provider");
+  if (provider == NULL)
+    {
+      gd_stack_set_visible_child_name (GD_STACK (add_account->priv->stack), OTHER_PAGE);
+      return;
+    }
+
   add_account_dialog_add_account (add_account, provider);
   gtk_dialog_response (GTK_DIALOG (add_account), GTK_RESPONSE_OK);
 }
@@ -106,6 +125,88 @@ list_box_separator_cb (GtkWidget **separator, GtkWidget *child, GtkWidget *befor
       g_object_ref_sink (*separator);
       gtk_widget_show (*separator);
     }
+}
+
+static void
+add_account_dialog_create_group_ui (GoaPanelAddAccountDialog *add_account,
+                                    EggListBox **list_box,
+                                    GtkWidget **group_grid,
+                                    GtkWidget *page_grid,
+                                    const gchar *name)
+{
+  GtkWidget *label;
+  GtkWidget *sw;
+  gchar *markup;
+
+  *group_grid = gtk_grid_new ();
+  gtk_widget_set_no_show_all (*group_grid, TRUE);
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (*group_grid), GTK_ORIENTATION_VERTICAL);
+  gtk_grid_set_row_spacing (GTK_GRID (*group_grid), 6);
+  gtk_container_add (GTK_CONTAINER (page_grid), *group_grid);
+
+  markup = g_strdup_printf ("<b>%s</b>", name);
+  label = gtk_label_new (NULL);
+  gtk_widget_set_halign (label, GTK_ALIGN_START);
+  gtk_widget_set_hexpand (label, TRUE);
+  gtk_label_set_markup (GTK_LABEL (label), markup);
+  gtk_container_add (GTK_CONTAINER (*group_grid), label);
+  g_free (markup);
+
+  sw = gtk_scrolled_window_new (NULL, NULL);
+  gtk_widget_set_hexpand (sw, TRUE);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_IN);
+  gtk_container_add (GTK_CONTAINER (*group_grid), sw);
+
+  *list_box = egg_list_box_new ();
+  egg_list_box_add_to_scrolled (*list_box, GTK_SCROLLED_WINDOW (sw));
+  egg_list_box_set_selection_mode (*list_box, GTK_SELECTION_NONE);
+  egg_list_box_set_separator_funcs (*list_box, list_box_separator_cb, NULL, NULL);
+  g_signal_connect_swapped (*list_box, "child-activated",
+                            G_CALLBACK (list_box_child_activated_cb), add_account);
+}
+
+static void
+add_account_dialog_create_provider_ui (GoaPanelAddAccountDialog *add_account,
+                                       GoaProvider *provider,
+                                       EggListBox *list_box)
+{
+  GIcon *icon;
+  GtkWidget *row_grid;
+  GtkWidget *image;
+  GtkWidget *label;
+  gchar *markup;
+  gchar *name;
+
+  row_grid = gtk_grid_new ();
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (row_grid), GTK_ORIENTATION_HORIZONTAL);
+  gtk_grid_set_column_spacing (GTK_GRID (row_grid), 6);
+  gtk_container_add (GTK_CONTAINER (list_box), row_grid);
+
+  if (provider == NULL)
+    {
+      g_object_set_data (G_OBJECT (row_grid), "provider", NULL);
+      icon = g_themed_icon_new_with_default_fallbacks ("goa-account");
+      name = g_strdup (_("Other"));
+    }
+  else
+    {
+      g_object_set_data_full (G_OBJECT (row_grid), "provider", g_object_ref (provider), g_object_unref);
+      icon = goa_provider_get_provider_icon (provider, NULL);
+      name = goa_provider_get_provider_name (provider, NULL);
+    }
+
+  image = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
+  gtk_container_add (GTK_CONTAINER (row_grid), image);
+
+  markup = g_strdup_printf ("<b>%s</b>", name);
+  label = gtk_label_new (NULL);
+  gtk_label_set_markup (GTK_LABEL (label), markup);
+  gtk_container_add (GTK_CONTAINER (row_grid), label);
+  g_free (markup);
+
+  g_free (name);
+  g_object_unref (icon);
 }
 
 static void
@@ -199,19 +300,47 @@ goa_panel_add_account_dialog_init (GoaPanelAddAccountDialog *add_account)
 
   priv->list_store = gtk_list_store_new (N_COLUMNS, GOA_TYPE_PROVIDER, G_TYPE_ICON, G_TYPE_STRING);
 
+  priv->stack = gd_stack_new ();
+  gtk_container_add (GTK_CONTAINER (grid), priv->stack);
+
   sw = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
   gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_IN);
   gtk_widget_set_hexpand (sw, TRUE);
   gtk_widget_set_vexpand (sw, TRUE);
-  gtk_container_add (GTK_CONTAINER (grid), sw);
+  gd_stack_add_named (GD_STACK (priv->stack), sw, BRANDED_PAGE);
 
-  priv->list_box = egg_list_box_new ();
-  egg_list_box_add_to_scrolled (priv->list_box, GTK_SCROLLED_WINDOW (sw));
-  egg_list_box_set_selection_mode (priv->list_box, GTK_SELECTION_NONE);
-  egg_list_box_set_separator_funcs (priv->list_box, list_box_separator_cb, NULL, NULL);
-  g_signal_connect_swapped (priv->list_box, "child-activated",
+  priv->branded_list_box = egg_list_box_new ();
+  egg_list_box_add_to_scrolled (priv->branded_list_box, GTK_SCROLLED_WINDOW (sw));
+  egg_list_box_set_selection_mode (priv->branded_list_box, GTK_SELECTION_NONE);
+  egg_list_box_set_separator_funcs (priv->branded_list_box, list_box_separator_cb, NULL, NULL);
+  g_signal_connect_swapped (priv->branded_list_box, "child-activated",
                             G_CALLBACK (list_box_child_activated_cb), add_account);
+
+  grid = gtk_grid_new ();
+  gtk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_VERTICAL);
+  gtk_grid_set_row_spacing (GTK_GRID (grid), 12);
+  gd_stack_add_named (GD_STACK (priv->stack), grid, OTHER_PAGE);
+
+  add_account_dialog_create_group_ui (add_account,
+                                      &priv->mail_list_box,
+                                      &priv->mail_grid,
+                                      grid,
+                                      _("Mail"));
+
+  add_account_dialog_create_group_ui (add_account,
+                                      &priv->contacts_list_box,
+                                      &priv->contacts_grid,
+                                      grid,
+                                      _("Contacts"));
+
+  add_account_dialog_create_group_ui (add_account,
+                                      &priv->ticketing_list_box,
+                                      &priv->ticketing_grid,
+                                      grid,
+                                      _("Resources"));
+
+  gd_stack_set_visible_child_name (GD_STACK (priv->stack), BRANDED_PAGE);
 
   gtk_dialog_add_button (GTK_DIALOG (add_account), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
   gtk_dialog_set_default_response (GTK_DIALOG (add_account), GTK_RESPONSE_CANCEL);
@@ -252,31 +381,54 @@ void
 goa_panel_add_account_dialog_add_provider (GoaPanelAddAccountDialog *add_account, GoaProvider *provider)
 {
   GoaPanelAddAccountDialogPrivate *priv = add_account->priv;
-  GIcon *icon;
-  GtkWidget *grid;
-  GtkWidget *image;
-  GtkWidget *label;
-  gchar *markup;
-  gchar *name;
+  EggListBox *list_box;
+  GoaProviderGroup group;
+  GtkWidget *group_grid = NULL;
 
-  grid = gtk_grid_new ();
-  g_object_set_data_full (G_OBJECT (grid), "provider", g_object_ref (provider), g_object_unref);
-  gtk_orientable_set_orientation (GTK_ORIENTABLE (grid), GTK_ORIENTATION_HORIZONTAL);
-  gtk_grid_set_column_spacing (GTK_GRID (grid), 6);
-  gtk_container_add (GTK_CONTAINER (priv->list_box), grid);
+  g_return_if_fail (provider != NULL);
 
-  icon = goa_provider_get_provider_icon (provider, NULL);
-  image = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
-  gtk_container_add (GTK_CONTAINER (grid), image);
-  g_object_unref (icon);
+  group = goa_provider_get_provider_group (provider);
 
-  name = goa_provider_get_provider_name (provider, NULL);
-  markup = g_strdup_printf ("<b>%s</b>", name);
-  label = gtk_label_new (NULL);
-  gtk_label_set_markup (GTK_LABEL (label), markup);
-  gtk_container_add (GTK_CONTAINER (grid), label);
-  g_free (markup);
-  g_free (name);
+  /* The list of providers returned by GOA are sorted such that all
+   * the branded providers are at the beginning of the list, followed
+   * by the others. Since this is the order in which they are added,
+   * we can rely on this fact, which helps to simplify the code.
+   */
+  if (group != GOA_PROVIDER_GROUP_BRANDED && !priv->add_other)
+    {
+      add_account_dialog_create_provider_ui (add_account, NULL, priv->branded_list_box);
+      priv->add_other = TRUE;
+    }
+
+  switch (group)
+    {
+    case GOA_PROVIDER_GROUP_BRANDED:
+      list_box = priv->branded_list_box;
+      break;
+    case GOA_PROVIDER_GROUP_CONTACTS:
+      group_grid = priv->contacts_grid;
+      list_box = priv->contacts_list_box;
+      break;
+    case GOA_PROVIDER_GROUP_MAIL:
+      group_grid = priv->mail_grid;
+      list_box = priv->mail_list_box;
+      break;
+    case GOA_PROVIDER_GROUP_TICKETING:
+      group_grid = priv->ticketing_grid;
+      list_box = priv->ticketing_list_box;
+      break;
+    default:
+      g_assert_not_reached ();
+      break;
+    }
+
+  add_account_dialog_create_provider_ui (add_account, provider, list_box);
+
+  if (group_grid != NULL)
+    {
+      gtk_widget_set_no_show_all (group_grid, FALSE);
+      gtk_widget_show_all (group_grid);
+    }
 }
 
 GoaObject *

@@ -5,6 +5,7 @@ SUBDIRS = icons
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(ONLINE_ACCOUNTS_PANEL_CFLAGS)			\
+	-I$(top_srcdir)/libgd				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	$(NULL)
 
@@ -23,7 +24,12 @@ libonline_accounts_la_SOURCES =		\
 	cc-online-accounts-panel.c	\
 	cc-online-accounts-panel.h
 
-libonline_accounts_la_LIBADD = $(PANEL_LIBS) $(ONLINE_ACCOUNTS_PANEL_LIBS)
+libonline_accounts_la_LIBADD =				\
+	$(PANEL_LIBS)					\
+	$(ONLINE_ACCOUNTS_PANEL_LIBS)			\
+	$(top_builddir)/libgd/libgd.la			\
+	$(NULL)
+
 libonline_accounts_la_LDFLAGS = $(PANEL_LDFLAGS)
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/online-accounts.gresource.xml)
