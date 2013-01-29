@@ -4,7 +4,6 @@ cappletname = region
 INCLUDES =						\
 	$(PANEL_CFLAGS)					\
 	$(REGION_PANEL_CFLAGS)				\
-	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-I$(srcdir)/../common/				\
 	-I$(top_srcdir)/libgd/				\
 	$(NULL)
