@@ -1778,6 +1778,8 @@ open_history (NetDeviceWifi *device_wifi)
                         g_object_set_data (G_OBJECT (button), "row", row);
                 }
         }
+        g_slist_free (connections);
+        g_slist_free (filtered);
 
         gtk_window_present (GTK_WINDOW (dialog));
 }
@@ -1854,6 +1856,9 @@ populate_ap_list (NetDeviceWifi *device_wifi)
                         g_object_set_data (G_OBJECT (button), "row", row);
                 }
         }
+
+        g_slist_free (connections);
+        g_slist_free (filtered);
 }
 
 static void
