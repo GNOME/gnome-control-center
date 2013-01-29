@@ -815,6 +815,10 @@ cc_sharing_panel_init (CcSharingPanel *self)
     cc_sharing_panel_setup_screen_sharing_dialog (self);
   else
     gtk_widget_hide (WID ("screen-sharing-button"));
+
+  /* make sure the hostname entry isn't focused by default */
+  g_signal_connect_swapped (self, "map", G_CALLBACK (gtk_widget_grab_focus),
+                            WID ("main-list-box"));
 }
 
 CcSharingPanel *
