@@ -1202,6 +1202,7 @@ setup_main_window (CcUserPanelPrivate *d)
         GIcon *icon;
         GError *error = NULL;
         gchar *names[3];
+        gboolean loaded;
 
         userlist = get_widget (d, "list-treeview");
         store = gtk_list_store_new (NUM_USER_LIST_COLS,
@@ -1220,8 +1221,6 @@ setup_main_window (CcUserPanelPrivate *d)
         gtk_tree_view_set_search_equal_func (GTK_TREE_VIEW (userlist),
                                              match_user, NULL, NULL);
         g_object_unref (model);
-
-        g_signal_connect (d->um, "notify::is-loaded", G_CALLBACK (users_loaded), d);
 
         gtk_widget_style_get (userlist, "expander-size", &expander_size, NULL);
         gtk_tree_view_set_level_indentation (GTK_TREE_VIEW (userlist), - (expander_size + 6));
@@ -1326,6 +1325,12 @@ setup_main_window (CcUserPanelPrivate *d)
                                           "*",
                                           icon);
         g_object_unref (icon);
+
+        g_object_get (d->um, "is-loaded", &loaded, NULL);
+        if (loaded)
+                users_loaded (d->um, NULL, d);
+        else
+                g_signal_connect (d->um, "notify::is-loaded", G_CALLBACK (users_loaded), d);
 }
 
 static void
@@ -1359,13 +1364,13 @@ cc_user_panel_init (CcUserPanel *self)
                 return;
         }
 
-        setup_main_window (d);
         d->password_dialog = um_password_dialog_new ();
         button = get_widget (d, "user-icon-button");
         d->photo_dialog = um_photo_dialog_new (button);
         d->main_box = get_widget (d, "accounts-vbox");
         gtk_widget_reparent (d->main_box, GTK_WIDGET (self));
         d->history_dialog = um_history_dialog_new ();
+        setup_main_window (d);
 
         context = gtk_widget_get_style_context (get_widget (d, "list-scrolledwindow"));
         gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
