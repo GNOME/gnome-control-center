@@ -196,7 +196,6 @@ restart_now (CcRegionPanel *self)
 
         gd_notification_dismiss (GD_NOTIFICATION (self->priv->notification));
 
-        g_print ("Ta Da! Restarting...\n");
         bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
         g_dbus_connection_call (bus,
                                 "org.gnome.SessionManager",
@@ -308,7 +307,6 @@ update_region (CcRegionPanel *self,
         if (g_strcmp0 (region, priv->region) == 0)
                 return FALSE;
 
-        g_print ("update region to %s\n", region);
         g_settings_set_string (priv->locale_settings, KEY_REGION, region);
         return TRUE;
 }
@@ -436,7 +434,10 @@ update_language_label (CcRegionPanel *self)
                 language = priv->system_language;
         else
                 language = priv->language;
-        name = gnome_get_language_from_name (language, language);
+        if (language)
+                name = gnome_get_language_from_name (language, language);
+        else
+                name = g_strdup (C_("Language", "None"));
         gtk_label_set_label (GTK_LABEL (priv->language_label), name);
         g_free (name);
 }
@@ -1271,6 +1272,9 @@ add_input_sources_from_localed (CcRegionPanel *self)
         gchar **variants = NULL;
         gint i, n;
 
+        if (!priv->localed)
+                return;
+
         v = g_dbus_proxy_get_cached_property (priv->localed, "X11Layout");
         if (v) {
                 s = g_variant_get_string (v, NULL);
@@ -1288,8 +1292,10 @@ add_input_sources_from_localed (CcRegionPanel *self)
 
         if (variants && variants[0])
                 n = MIN (g_strv_length (layouts), g_strv_length (variants));
-        else
+        else if (layouts && layouts[0])
                 n = g_strv_length (layouts);
+        else
+                n = 0;
 
         for (i = 0; i < n && layouts[i][0]; i++) {
                 const gchar *name;
@@ -1302,9 +1308,12 @@ add_input_sources_from_localed (CcRegionPanel *self)
 
                 gnome_xkb_info_get_layout_info (priv->xkb_info, id, &name, NULL, NULL, NULL);
 
-                add_input_row (self, "xkb", id, name ? name : id, NULL);
+                add_input_row (self, INPUT_SOURCE_TYPE_XKB, id, name ? name : id, NULL);
 
                 g_free (id);
+        }
+        if (n == 0) {
+                add_input_row (self, "none", "none", C_("Input source", "None"), NULL);
         }
 
         g_strfreev (variants);
@@ -1407,6 +1416,8 @@ localed_proxy_ready (GObject      *source,
                 return;
         }
 
+        gtk_widget_set_sensitive (priv->login_button, TRUE);
+
         g_signal_connect (priv->localed, "g-properties-changed",
                           G_CALLBACK (on_localed_properties_changed), self);
         on_localed_properties_changed (priv->localed, NULL, NULL, self);
@@ -1416,19 +1427,19 @@ static void
 login_changed (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        gboolean insensitive;
+        gboolean can_acquire;
 
         priv->login = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->login_button));
         gtk_widget_set_visible (priv->formats_row, !priv->login);
         gtk_widget_set_visible (priv->login_label, priv->login);
         update_button_sensitivity (self);
 
+        can_acquire = priv->permission &&
+                (g_permission_get_allowed (priv->permission) ||
+                 g_permission_get_can_acquire (priv->permission));
         /* FIXME: insensitive doesn't look quite right for this */
-        insensitive = priv->login &&
-                !g_permission_get_allowed (priv->permission) &&
-                !g_permission_get_can_acquire (priv->permission);
-        gtk_widget_set_sensitive (priv->language_section, !insensitive);
-        gtk_widget_set_sensitive (priv->input_section, !insensitive);
+        gtk_widget_set_sensitive (priv->language_section, !priv->login || can_acquire);
+        gtk_widget_set_sensitive (priv->input_section, !priv->login || can_acquire);
 
         clear_input_sources (self);
         if (priv->login)
@@ -1461,6 +1472,8 @@ setup_login_button (CcRegionPanel *self)
 
         priv->login_label = WID ("login-label");
         priv->login_button = gtk_toggle_button_new_with_label (_("Login Screen"));
+
+        gtk_widget_set_sensitive (priv->login_button, FALSE);
 
         g_object_bind_property (priv->user_manager, "has-multiple-users",
                                 priv->login_button, "visible",
