@@ -1383,6 +1383,7 @@ add_power_saving_section (CcPowerPanel *self)
   GtkWidget *combo;
   GtkWidget *box2;
   GtkWidget *sw;
+  GtkWidget *w;
   int value;
   gchar *s;
 
@@ -1427,11 +1428,12 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_box_pack_start (GTK_BOX (box), label, FALSE, TRUE, 0);
   gtk_size_group_add_widget (priv->battery_sizegroup, label);
   box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  label = gtk_label_new ("");
-  gtk_box_pack_start (GTK_BOX (box2), label, FALSE, TRUE, 0);
-  gtk_size_group_add_widget (priv->charge_sizegroup, label);
+  w = gtk_label_new ("");
+  gtk_box_pack_start (GTK_BOX (box2), w, FALSE, TRUE, 0);
+  gtk_size_group_add_widget (priv->charge_sizegroup, w);
 
   priv->brightness_scale = scale = gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL, 0, 100, 1);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), scale);
   gtk_scale_set_draw_value (GTK_SCALE (scale), FALSE);
   gtk_widget_set_margin_left (scale, 20);
   gtk_widget_set_margin_right (scale, 20);
@@ -1444,7 +1446,7 @@ add_power_saving_section (CcPowerPanel *self)
 
   priv->dim_screen_row = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
 
-  label = gtk_label_new (_("Dim Screen when Inactive"));
+  label = gtk_label_new (_("_Dim Screen when Inactive"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_widget_set_margin_left (label, 20);
@@ -1467,7 +1469,7 @@ add_power_saving_section (CcPowerPanel *self)
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
 
-  label = gtk_label_new (_("Mark As Inactive After"));
+  label = gtk_label_new (_("_Mark As Inactive After"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_widget_set_margin_left (label, 20);
@@ -1507,10 +1509,10 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
 
-  label = gtk_label_new ("Turns off wireless devices");
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-  gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
+  w = gtk_label_new ("Turns off wireless devices");
+  gtk_misc_set_alignment (GTK_MISC (w), 0, 0.5);
+  gtk_style_context_add_class (gtk_widget_get_style_context (w), GTK_STYLE_CLASS_DIM_LABEL);
+  gtk_box_pack_start (GTK_BOX (box2), w, TRUE, TRUE, 0);
 
   priv->wifi_switch = sw = gtk_switch_new ();
   gtk_widget_set_margin_left (sw, 20);
@@ -1535,10 +1537,10 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
 
-  label = gtk_label_new ("Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices");
-  gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-  gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
+  w = gtk_label_new ("Turns off Mobile Broadband (3G, 4G, WiMax, etc.) devices");
+  gtk_misc_set_alignment (GTK_MISC (w), 0, 0.5);
+  gtk_style_context_add_class (gtk_widget_get_style_context (w), GTK_STYLE_CLASS_DIM_LABEL);
+  gtk_box_pack_start (GTK_BOX (box2), w, TRUE, TRUE, 0);
 
   priv->mobile_switch = sw = gtk_switch_new ();
   gtk_widget_set_margin_left (sw, 20);
@@ -1674,6 +1676,15 @@ activate_child (CcPowerPanel *self,
 }
 
 static gboolean
+automatic_suspend_activate (GtkWidget    *widget,
+                            gboolean      cycle,
+                            CcPowerPanel *self)
+{
+  activate_child (self, self->priv->automatic_suspend_row);
+  return TRUE;
+}
+
+static gboolean
 get_sleep_type (GValue   *value,
                 GVariant *variant,
                 gpointer  data)
@@ -1781,6 +1792,8 @@ add_automatic_suspend_section (CcPowerPanel *self)
 
   priv->automatic_suspend_label = sw = gtk_label_new ("");
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
+  g_signal_connect (sw, "mnemonic-activate",
+                    G_CALLBACK (automatic_suspend_activate), self);
   gtk_misc_set_alignment (GTK_MISC (sw), 1, 0.5);
   gtk_widget_set_margin_left (sw, 24);
   gtk_widget_set_margin_right (sw, 24);
@@ -1803,6 +1816,7 @@ add_automatic_suspend_section (CcPowerPanel *self)
     {
       model = (GtkTreeModel*)gtk_builder_get_object (priv->builder, "liststore_critical");
       priv->critical_battery_combo = sw = gtk_combo_box_new_with_model (model);
+      gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
       cell = gtk_cell_renderer_text_new ();
       gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (sw), cell, TRUE);
       gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (sw), cell, "text", 0);
