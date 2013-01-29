@@ -120,7 +120,7 @@ cc_mouse_panel_constructed (GObject *object)
   /* Add test area toggle to shell header. */
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
 
-  button = gtk_toggle_button_new_with_mnemonic (_("_Test Your Settings"));
+  button = gtk_toggle_button_new_with_mnemonic (_("Test Your _Settings"));
   gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
   gtk_widget_set_visible (button, TRUE);
 
