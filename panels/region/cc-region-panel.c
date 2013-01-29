@@ -44,6 +44,8 @@
 #include "cc-ibus-utils.h"
 #endif
 
+#include <act/act.h>
+
 #include "egg-list-box/egg-list-box.h"
 #include <libgd/gd-notification.h>
 
@@ -88,8 +90,9 @@ struct _CcRegionPanelPrivate {
         GtkWidget *formats_row;
         GtkWidget *formats_label;
 
-        GDBusProxy *user;
-        GSettings  *locale_settings;
+        ActUserManager *user_manager;
+        ActUser        *user;
+        GSettings      *locale_settings;
 
         gchar *language;
         gchar *region;
@@ -116,8 +119,9 @@ cc_region_panel_finalize (GObject *object)
 	CcRegionPanel *self = CC_REGION_PANEL (object);
 	CcRegionPanelPrivate *priv = self->priv;
 
+        priv->user_manager = NULL;
+        priv->user = NULL;
         g_clear_object (&priv->builder);
-        g_clear_object (&priv->user);
         g_clear_object (&priv->locale_settings);
         g_clear_object (&priv->input_settings);
         g_clear_object (&priv->xkb_info);
@@ -138,13 +142,11 @@ cc_region_panel_constructed (GObject *object)
 
         G_OBJECT_CLASS (cc_region_panel_parent_class)->constructed (object);
 
-#if 0
-        priv->login_button = gtk_button_new_with_label (_("Login Screen"));
+        priv->login_button = gtk_toggle_button_new_with_label (_("Login Screen"));
 
         cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (object)),
                                          priv->login_button);
-        gtk_widget_show_all (priv->login_button);
-#endif
+        gtk_widget_show (priv->login_button);
 }
 
 static const char *
@@ -239,27 +241,11 @@ update_language (CcRegionPanel *self,
                  const gchar   *language)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        gchar *name;
 
         if (g_strcmp0 (language, priv->language) == 0)
                 return FALSE;
 
-        g_free (priv->language);
-        priv->language = g_strdup (language);
-
-        name = gnome_get_language_from_name (language, language);
-        gtk_label_set_label (GTK_LABEL (priv->language_label), name);
-        g_free (name);
-
-        g_dbus_proxy_call (priv->user,
-                           "SetLanguage",
-                           g_variant_new ("(s)", priv->language),
-                           0,
-                           G_MAXINT,
-                           NULL,
-                           NULL,
-                           NULL);
-
+        act_user_set_language (priv->user, language);
         return TRUE;
 }
 
@@ -289,13 +275,13 @@ update_region (CcRegionPanel *self,
                const gchar   *region)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        const gchar *old_region;
-        old_region = g_settings_get_string (priv->locale_settings, KEY_REGION);
-        if (g_strcmp0 (region, old_region) != 0) {
-                g_settings_set_string (priv->locale_settings, KEY_REGION, region);
-                return TRUE;
-        }
-        return FALSE;
+
+        if (g_strcmp0 (region, priv->region) == 0)
+                return FALSE;
+
+        g_print ("update region to %s\n", region);
+        g_settings_set_string (priv->locale_settings, KEY_REGION, region);
+        return TRUE;
 }
 
 static void
@@ -343,17 +329,22 @@ activate_language_child (CcRegionPanel *self, GtkWidget *child)
 }
 
 static void
-set_initial_language (CcRegionPanel *self)
+update_language_from_user (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
-        GVariant *p;
-        gchar *lang;
+        const gchar *language;
+        gchar *name;
 
-        p = g_dbus_proxy_get_cached_property (priv->user, "Language");
-        lang = g_variant_dup_string (p, NULL);
-        update_language (self, lang);
-        g_free (lang);
-        g_variant_unref (p);
+        if (act_user_is_loaded (priv->user))
+                language = act_user_get_language (priv->user);
+        else
+                language = "en_US.utf-8";
+
+        g_free (priv->language);
+        priv->language = g_strdup (language);
+        name = gnome_get_language_from_name (language, language);
+        gtk_label_set_label (GTK_LABEL (priv->language_label), name);
+        g_free (name);
 }
 
 static void
@@ -364,6 +355,7 @@ update_region_from_setting (CcRegionPanel *self)
 
         g_free (priv->region);
         priv->region = g_settings_get_string (priv->locale_settings, KEY_REGION);
+        g_print ("set label to %s\n", priv->region);
         name = gnome_get_region_from_name (priv->region, priv->region);
         gtk_label_set_label (GTK_LABEL (priv->formats_label), name);
         g_free (name);
@@ -374,26 +366,13 @@ setup_language_section (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
         GtkWidget *widget;
-        gchar *path;
-        GError *error = NULL;
 
-        path = g_strdup_printf ("/org/freedesktop/Accounts/User%d", getuid ());
-        priv->user = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
-                                                    G_DBUS_PROXY_FLAGS_NONE,
-                                                    NULL,
-                                                    "org.freedesktop.Accounts",
-                                                    path,
-                                                    "org.freedesktop.Accounts.User",
-                                                     NULL,
-                                                     &error);
-        if (priv->user == NULL) {
-                g_warning ("Failed to get proxy for user '%s': %s",
-                           path, error->message);
-                g_error_free (error);
-                g_free (path);
-                return;
-        }
-        g_free (path);
+        priv->user_manager = act_user_manager_get_default ();
+        priv->user = act_user_manager_get_user_by_id (priv->user_manager, getuid ());
+        g_signal_connect_swapped (priv->user, "notify::language",
+                                  G_CALLBACK (update_language_from_user), self);
+        g_signal_connect_swapped (priv->user, "notify::is-loaded",
+                                  G_CALLBACK (update_language_from_user), self);
 
         priv->locale_settings = g_settings_new (GNOME_SYSTEM_LOCALE_DIR);
         g_signal_connect_swapped (priv->locale_settings, "changed::" KEY_REGION,
@@ -413,8 +392,8 @@ setup_language_section (CcRegionPanel *self)
         g_signal_connect_swapped (widget, "child-activated",
                                   G_CALLBACK (activate_language_child), self);
 
-        set_initial_language (self);
         update_region_from_setting (self);
+        update_language_from_user (self);
 }
 
 #ifdef HAVE_IBUS
