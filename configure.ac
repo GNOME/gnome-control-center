@@ -120,7 +120,7 @@ COMMON_MODULES="gtk+-3.0 >= $GTK_REQUIRED_VERSION
  gsettings-desktop-schemas >= $SCHEMAS_REQUIRED_VERSION
  libnotify >= $LIBNOTIFY_REQUIRED_VERSION"
 
-LIBGD_INIT([_view-common static])
+LIBGD_INIT([_view-common notification static])
 
 PKG_CHECK_MODULES(LIBLANGUAGE, $COMMON_MODULES gnome-desktop-3.0 fontconfig)
 PKG_CHECK_MODULES(LIBSHORTCUTS, $COMMON_MODULES x11)

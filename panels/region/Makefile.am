@@ -6,6 +6,7 @@ INCLUDES =						\
 	$(REGION_PANEL_CFLAGS)				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	-I$(srcdir)/../common/				\
+	-I$(top_srcdir)/libgd/				\
 	$(NULL)
 
 noinst_LTLIBRARIES = libregion.la
@@ -28,7 +29,11 @@ libregion_la_SOURCES =	\
 	cc-ibus-utils.h \
 	$(NULL)
 
-libregion_la_LIBADD = $(PANEL_LIBS) $(REGION_PANEL_LIBS) $(builddir)/../common/liblanguage.la
+libregion_la_LIBADD = \
+	$(PANEL_LIBS) \
+	$(REGION_PANEL_LIBS) \
+	$(top_builddir)/libgd/libgd.la \
+	$(builddir)/../common/liblanguage.la
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/region.gresource.xml)
 cc-region-resources.c: region.gresource.xml $(resource_files)

@@ -45,6 +45,7 @@
 #endif
 
 #include "egg-list-box/egg-list-box.h"
+#include <libgd/gd-notification.h>
 
 #define GNOME_DESKTOP_INPUT_SOURCES_DIR "org.gnome.desktop.input-sources"
 #define KEY_CURRENT_INPUT_SOURCE "current"
@@ -79,6 +80,8 @@ struct _CcRegionPanelPrivate {
 	GtkBuilder *builder;
 
         GtkWidget *login_button;
+        GtkWidget *overlay;
+        GtkWidget *notification;
 
         GtkWidget *language_row;
         GtkWidget *language_label;
@@ -165,6 +168,57 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
 }
 
 static void
+restart_now (CcRegionPanel *self)
+{
+        GDBusConnection *bus;
+
+        gd_notification_dismiss (GD_NOTIFICATION (self->priv->notification));
+
+        g_print ("Ta Da! Restarting...\n");
+        bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
+        g_dbus_connection_call (bus,
+                                "org.gnome.SessionManager",
+                                "/org/gnome/SessionManager",
+                                "org.gnome.SessionManager",
+                                "Logout",
+                                g_variant_new ("(u)", 0),
+                                NULL, 0, G_MAXINT,
+                                NULL, NULL, NULL);
+}
+
+static void
+show_restart_notification (CcRegionPanel *self)
+{
+	CcRegionPanelPrivate *priv = self->priv;
+        GtkWidget *box;
+        GtkWidget *label;
+        GtkWidget *button;
+
+        if (priv->notification)
+                return;
+
+        priv->notification = gd_notification_new ();
+        g_object_add_weak_pointer (G_OBJECT (priv->notification),
+                                   (gpointer *)&priv->notification);
+        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 24);
+        gtk_widget_set_margin_left (box, 12);
+        gtk_widget_set_margin_right (box, 12);
+        gtk_widget_set_margin_top (box, 6);
+        gtk_widget_set_margin_bottom (box, 6);
+        label = gtk_label_new (_("Your session needs to be restarted for changes to take effect"));
+        button = gtk_button_new_with_label (_("Restart Now"));
+        g_signal_connect_swapped (button, "clicked",
+                                  G_CALLBACK (restart_now), self);
+        gtk_box_pack_start (GTK_BOX (box), label, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (box), button, FALSE, FALSE, 0);
+        gtk_widget_show_all (box);
+
+        gtk_container_add (GTK_CONTAINER (priv->notification), box);
+        gtk_overlay_add_overlay (GTK_OVERLAY (self->priv->overlay), priv->notification);
+        gtk_widget_show (priv->notification);
+}
+
+static void
 update_separator_func (GtkWidget **separator,
                        GtkWidget  *child,
                        GtkWidget  *before,
@@ -180,12 +234,15 @@ update_separator_func (GtkWidget **separator,
         }
 }
 
-static void
+static gboolean
 update_language (CcRegionPanel *self,
                  const gchar   *language)
 {
 	CcRegionPanelPrivate *priv = self->priv;
         gchar *name;
+
+        if (g_strcmp0 (language, priv->language) == 0)
+                return FALSE;
 
         g_free (priv->language);
         priv->language = g_strdup (language);
@@ -193,12 +250,7 @@ update_language (CcRegionPanel *self,
         name = gnome_get_language_from_name (language, language);
         gtk_label_set_label (GTK_LABEL (priv->language_label), name);
         g_free (name);
-}
 
-static void
-store_language (CcRegionPanel *self)
-{
-	CcRegionPanelPrivate *priv = self->priv;
         g_dbus_proxy_call (priv->user,
                            "SetLanguage",
                            g_variant_new ("(s)", priv->language),
@@ -207,6 +259,8 @@ store_language (CcRegionPanel *self)
                            NULL,
                            NULL,
                            NULL);
+
+        return TRUE;
 }
 
 static void
@@ -215,11 +269,33 @@ language_response (GtkDialog     *chooser,
                    CcRegionPanel *self)
 {
         const gchar *language;
+        gboolean changed;
 
-        language = cc_language_chooser_get_language (GTK_WIDGET (chooser));
-        update_language (self, language);
-        store_language (self);
+        changed = FALSE;
+
+        if (response_id == GTK_RESPONSE_OK) {
+                language = cc_language_chooser_get_language (GTK_WIDGET (chooser));
+                changed = update_language (self, language);
+        }
+
         gtk_widget_destroy (GTK_WIDGET (chooser));
+
+        if (changed)
+                show_restart_notification (self);
+}
+
+static gboolean
+update_region (CcRegionPanel *self,
+               const gchar   *region)
+{
+	CcRegionPanelPrivate *priv = self->priv;
+        const gchar *old_region;
+        old_region = g_settings_get_string (priv->locale_settings, KEY_REGION);
+        if (g_strcmp0 (region, old_region) != 0) {
+                g_settings_set_string (priv->locale_settings, KEY_REGION, region);
+                return TRUE;
+        }
+        return FALSE;
 }
 
 static void
@@ -227,12 +303,20 @@ format_response (GtkDialog *chooser,
                  gint       response_id,
                  CcRegionPanel *self)
 {
-	CcRegionPanelPrivate *priv = self->priv;
         const gchar *region;
+        gboolean changed;
 
-        region = cc_format_chooser_get_region (GTK_WIDGET (chooser));
-        g_settings_set_string (priv->locale_settings, KEY_REGION, region);
+        changed = FALSE;
+
+        if (response_id == GTK_RESPONSE_OK) {
+                region = cc_format_chooser_get_region (GTK_WIDGET (chooser));
+                changed = update_region (self, region);
+        }
+
         gtk_widget_destroy (GTK_WIDGET (chooser));
+
+        if (changed)
+                show_restart_notification (self);
 }
 
 static void
@@ -273,7 +357,7 @@ set_initial_language (CcRegionPanel *self)
 }
 
 static void
-update_region (CcRegionPanel *self)
+update_region_from_setting (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
         gchar *name;
@@ -313,7 +397,7 @@ setup_language_section (CcRegionPanel *self)
 
         priv->locale_settings = g_settings_new (GNOME_SYSTEM_LOCALE_DIR);
         g_signal_connect_swapped (priv->locale_settings, "changed::" KEY_REGION,
-                                  G_CALLBACK (update_region), self);
+                                  G_CALLBACK (update_region_from_setting), self);
 
         priv->language_row = WID ("language_row");
         priv->language_label = WID ("language_label");
@@ -330,7 +414,7 @@ setup_language_section (CcRegionPanel *self)
                                   G_CALLBACK (activate_language_child), self);
 
         set_initial_language (self);
-        update_region (self);
+        update_region_from_setting (self);
 }
 
 #ifdef HAVE_IBUS
@@ -951,7 +1035,6 @@ static void
 cc_region_panel_init (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv;
-	GtkWidget *vbox;
 	GError *error = NULL;
 
 	priv = self->priv = REGION_PANEL_PRIVATE (self);
@@ -971,6 +1054,6 @@ cc_region_panel_init (CcRegionPanel *self)
         setup_language_section (self);
         setup_input_section (self);
 
-        vbox = GTK_WIDGET (gtk_builder_get_object (priv->builder, "vbox_region"));
-	gtk_widget_reparent (vbox, GTK_WIDGET (self));
+        priv->overlay = GTK_WIDGET (gtk_builder_get_object (priv->builder, "overlay"));
+	gtk_widget_reparent (priv->overlay, GTK_WIDGET (self));
 }
