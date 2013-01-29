@@ -146,7 +146,10 @@ cc_region_panel_constructed (GObject *object)
 
         cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (object)),
                                          priv->login_button);
-        gtk_widget_show (priv->login_button);
+
+        g_object_bind_property (priv->user_manager, "has-multiple-users",
+                                priv->login_button, "visible",
+                                G_BINDING_SYNC_CREATE);
 }
 
 static const char *
