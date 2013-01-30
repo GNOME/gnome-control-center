@@ -60,6 +60,6 @@ update-from-nma:
 	patch -p0 < $(srcdir)/nm-connection-editor-to-network-panel.patch ; \
 	git commit -m "network: Update wireless-security from network-manager-applet" $(WIRELESS_SECURITY_FILES)
 
-EXTRA_DIST = $(resource_files) nm-connection-editor-to-network-panel.patch
+EXTRA_DIST = $(resource_files) wireless-security.gresource.xml nm-connection-editor-to-network-panel.patch
 
 -include $(top_srcdir)/git.mk
