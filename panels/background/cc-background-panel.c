@@ -234,7 +234,7 @@ on_screenshot_finished (GObject *source,
                         gpointer user_data)
 {
   CcBackgroundPanel *panel = user_data;
-  CcBackgroundPanelPrivate *priv = panel->priv;
+  CcBackgroundPanelPrivate *priv;
   GError *error;
   GdkRectangle rect;
   GdkRectangle workarea_rect;
@@ -248,7 +248,7 @@ on_screenshot_finished (GObject *source,
   int primary;
 
   error = NULL;
-  result = g_dbus_connection_call_finish (panel->priv->connection,
+  result = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source),
                                           res,
                                           &error);
 
@@ -264,6 +264,8 @@ on_screenshot_finished (GObject *source,
     goto out;
   }
   g_variant_unref (result);
+
+  priv = panel->priv;
 
   pixbuf = gdk_pixbuf_new_from_file (panel->priv->screenshot_path, &error);
   if (pixbuf == NULL)
