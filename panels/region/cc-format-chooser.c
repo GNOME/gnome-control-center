@@ -38,7 +38,6 @@
 
 
 typedef struct {
-        GtkWidget *dialog;
         GtkWidget *no_results;
         GtkWidget *more_item;
         GtkWidget *filter_entry;
