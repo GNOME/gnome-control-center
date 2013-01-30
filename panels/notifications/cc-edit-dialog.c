@@ -43,7 +43,7 @@ static struct {
   /* TRANSLATORS: banners here refers to message tray notifications in the middle of the screen */
   { "force-expanded",          NC_("notifications", "Show Details in Banners"),     FALSE },
   { "show-in-lock-screen",     NC_("notifications", "View in Lock Screen"),         FALSE },
-  { "resident-in-lock-screen", NC_("notifications", "Show Details in Lock Screen"), FALSE }
+  { "details-in-lock-screen",  NC_("notifications", "Show Details in Lock Screen"), FALSE }
 };
 
 void
