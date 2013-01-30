@@ -86,8 +86,6 @@ struct _GnomeControlCenterPrivate
   GtkWidget *search_view;
   gchar *filter_string;
 
-  guint32 last_time;
-
   gchar *default_window_title;
   gchar *default_window_icon;
 
@@ -642,8 +640,6 @@ search_entry_key_press_event_cb (GtkEntry    *entry,
       GtkTreePath *path;
 
       path = gtk_tree_path_new_first ();
-
-      priv->last_time = event->time;
 
       gtk_icon_view_item_activated (GTK_ICON_VIEW (priv->search_view), path);
 
