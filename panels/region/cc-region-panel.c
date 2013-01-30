@@ -766,15 +766,17 @@ input_sources_changed (GSettings     *settings,
 {
 	CcRegionPanelPrivate *priv = self->priv;
         GtkWidget *selected;
-        const gchar *id = NULL;
+        gchar *id = NULL;
 
         selected = egg_list_box_get_selected_child (EGG_LIST_BOX (priv->input_list));
         if (selected)
-                id = (const gchar *)g_object_get_data (G_OBJECT (selected), "id");
+                id = g_strdup (g_object_get_data (G_OBJECT (selected), "id"));
         clear_input_sources (self);
         add_input_sources_from_settings (self);
-        if (id)
+        if (id) {
                 select_input (self, id);
+                g_free (id);
+        }
 }
 
 
