@@ -242,16 +242,17 @@ on_screenshot_finished (GObject *source,
   GdkPixbuf *pixbuf;
   cairo_surface_t *surface;
   cairo_t *cr;
+  GVariant *result;
   int width;
   int height;
   int primary;
 
   error = NULL;
-  g_dbus_connection_call_finish (panel->priv->connection,
-                                 res,
-                                 &error);
+  result = g_dbus_connection_call_finish (panel->priv->connection,
+                                          res,
+                                          &error);
 
-  if (error != NULL) {
+  if (result == NULL) {
     if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
       g_error_free (error);
       return;
@@ -262,9 +263,10 @@ on_screenshot_finished (GObject *source,
     /* fallback? */
     goto out;
   }
+  g_variant_unref (result);
 
   pixbuf = gdk_pixbuf_new_from_file (panel->priv->screenshot_path, &error);
-  if (error != NULL)
+  if (pixbuf == NULL)
     {
       g_debug ("Unable to use GNOME Shell's builtin screenshot interface: %s",
                error->message);
