@@ -638,11 +638,21 @@ search_entry_key_press_event_cb (GtkEntry    *entry,
   if (event->keyval == GDK_KEY_Return)
     {
       GtkTreePath *path;
+      GtkTreeSelection *selection;
 
       path = gtk_tree_path_new_first ();
 
-      gtk_icon_view_item_activated (GTK_ICON_VIEW (priv->search_view), path);
+      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->search_view));
+      gtk_tree_selection_select_path (selection, path);
 
+      if (!gtk_tree_selection_path_is_selected (selection, path))
+        {
+          gtk_tree_path_free (path);
+          return FALSE;
+        }
+
+      gtk_tree_view_row_activated (GTK_TREE_VIEW (priv->search_view), path,
+                                   gtk_tree_view_get_column (GTK_TREE_VIEW (priv->search_view), 0));
       gtk_tree_path_free (path);
       return TRUE;
     }
