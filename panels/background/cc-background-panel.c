@@ -243,7 +243,7 @@ on_screenshot_finished (GObject *source,
 {
   ScreenshotData *data = user_data;
   CcBackgroundPanel *panel = data->panel;
-  CcBackgroundPanelPrivate *priv = panel->priv;
+  CcBackgroundPanelPrivate *priv;
   GError *error;
   GdkPixbuf *pixbuf;
   cairo_surface_t *surface;
@@ -269,6 +269,8 @@ on_screenshot_finished (GObject *source,
     goto out;
   }
   g_variant_unref (result);
+
+  priv = panel->priv;
 
   pixbuf = gdk_pixbuf_new_from_file (panel->priv->screenshot_path, &error);
   if (pixbuf == NULL)
