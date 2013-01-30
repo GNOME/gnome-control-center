@@ -382,9 +382,9 @@ get_screenshot_async (CcBackgroundPanel *panel)
                                  panel->priv->screenshot_path);
 
   g_dbus_connection_call (panel->priv->connection,
-                          "org.gnome.Shell",
-                          "/org/gnome/Shell",
-                          "org.gnome.Shell",
+                          "org.gnome.Shell.Screenshot",
+                          "/org/gnome/Shell/Screenshot",
+                          "org.gnome.Shell.Screenshot",
                           method_name,
                           method_params,
                           NULL,
