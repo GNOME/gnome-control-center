@@ -32,6 +32,7 @@ libconnection_editor_la_SOURCES = 		\
 	vpn-helpers.c
 
 libconnection_editor_la_CPPFLAGS = 		\
+	$(PANEL_CFLAGS)				\
 	-I$(srcdir)/../wireless-security	\
 	$(NETWORK_PANEL_CFLAGS) 		\
         $(NETWORK_MANAGER_CFLAGS)		\
