@@ -129,7 +129,9 @@ nm_device_simple_refresh_ui (NetDeviceSimple *device_simple)
         if (state != NM_DEVICE_STATE_UNAVAILABLE)
                 speed = net_device_simple_get_speed (device_simple);
         if (speed) {
-                g_string_append_printf (status, " - %s", speed);
+                if (status->len)
+                        g_string_append (status, " - ");
+                g_string_append (status, speed);
                 g_free (speed);
         }
         gtk_label_set_label (GTK_LABEL (widget), status->str);

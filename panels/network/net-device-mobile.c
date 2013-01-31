@@ -272,7 +272,8 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
         widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->priv->builder, "label_status"));
         status = g_string_new (panel_device_state_to_localized_string (nm_device));
         if (speed  > 0) {
-                g_string_append (status, " - ");
+                if (status->len)
+                        g_string_append (status, " - ");
                 /* Translators: network device speed */
                 g_string_append_printf (status, _("%d Mb/s"), speed);
         }

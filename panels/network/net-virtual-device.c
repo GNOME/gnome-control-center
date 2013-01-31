@@ -179,7 +179,7 @@ net_virtual_device_refresh (NetObject *object)
                 status = panel_device_state_to_localized_string (nm_device);
                 tooltip = panel_device_state_reason_to_localized_string (nm_device);
         } else {
-                status = _("Disconnected");
+                status = "";
                 tooltip = NULL;
         }
         gtk_label_set_label (GTK_LABEL (widget), status);

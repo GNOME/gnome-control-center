@@ -234,8 +234,11 @@ device_ethernet_refresh_ui (NetDeviceEthernet *device)
         status = g_string_new (panel_device_state_to_localized_string (nm_device));
         if (state != NM_DEVICE_STATE_UNAVAILABLE)
                 speed = net_device_simple_get_speed (NET_DEVICE_SIMPLE (device));
-        if (speed)
-                g_string_append_printf (status, " - %s", speed);
+        if (speed) {
+                if (status->len)
+                        g_string_append (status, " - ");
+                g_string_append (status, speed);
+        }
         gtk_label_set_label (GTK_LABEL (widget), status->str);
         g_string_free (status, TRUE);
 

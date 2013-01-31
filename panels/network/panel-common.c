@@ -44,7 +44,7 @@ panel_device_to_icon_name (NMDevice *device)
         switch (nm_device_get_device_type (device)) {
         case NM_DEVICE_TYPE_ETHERNET:
                 state = nm_device_get_state (device);
-                if (state == NM_DEVICE_STATE_UNAVAILABLE) {
+                if (state <= NM_DEVICE_STATE_DISCONNECTED) {
                         value = "network-wired-disconnected-symbolic";
                 } else {
                         value = "network-wired-symbolic";
@@ -169,8 +169,7 @@ panel_device_state_to_localized_string (NMDevice *device)
                 }
                 break;
         case NM_DEVICE_STATE_DISCONNECTED:
-                /* TRANSLATORS: device status */
-                value = _("Disconnected");
+                value = "";
                 break;
         case NM_DEVICE_STATE_PREPARE:
         case NM_DEVICE_STATE_CONFIG:
