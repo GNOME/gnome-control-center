@@ -426,7 +426,8 @@ add_route_row (CEPageIP6   *page,
         widget = gtk_label_new (_("Gateway"));
         gtk_misc_set_alignment (GTK_MISC (widget), 1, 0.5);
         gtk_grid_attach (GTK_GRID (row), widget, 1, 3, 1, 1);
-        widget = gtk_label_new (_("Metric"));
+        /* Translators: Please see http://en.wikipedia.org/wiki/Metrics_(networking) */
+        widget = gtk_label_new (C_("network parameters", "Metric"));
         gtk_misc_set_alignment (GTK_MISC (widget), 1, 0.5);
         gtk_grid_attach (GTK_GRID (row), widget, 1, 4, 1, 1);
         widget = gtk_entry_new ();
