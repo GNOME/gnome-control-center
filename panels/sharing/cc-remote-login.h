@@ -24,7 +24,10 @@
 
 #include <gtk/gtk.h>
 
-void cc_remote_login_get_enabled (GtkSwitch *gtkswitch);
-void cc_remote_login_set_enabled (GtkSwitch *gtkswitch);
+void cc_remote_login_get_enabled (GCancellable *cancellable,
+                                  GtkSwitch    *gtkswitch,
+                                  GtkWidget    *button);
+void cc_remote_login_set_enabled (GCancellable *cancellable,
+                                  GtkSwitch    *gtkswitch);
 
 #endif /* __CC_REMOTE_LOGIN_H__ **/

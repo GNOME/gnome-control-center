@@ -70,6 +70,7 @@ struct _CcSharingPanelPrivate
   GtkWidget *media_sharing_dialog;
   GtkWidget *personal_file_sharing_dialog;
   GtkWidget *remote_login_dialog;
+  GCancellable *remote_login_cancellable;
   GtkWidget *screen_sharing_dialog;
 
 #ifdef HAVE_BLUETOOTH
@@ -106,10 +107,16 @@ cc_sharing_panel_dispose (GObject *object)
       priv->personal_file_sharing_dialog = NULL;
     }
 
+  if (priv->remote_login_cancellable)
+    {
+      g_cancellable_cancel (priv->remote_login_cancellable);
+      g_clear_object (&priv->remote_login_cancellable);
+    }
+
   if (priv->remote_login_dialog)
     {
-    gtk_widget_destroy (priv->remote_login_dialog);
-    priv->remote_login_dialog = NULL;
+      gtk_widget_destroy (priv->remote_login_dialog);
+      priv->remote_login_dialog = NULL;
     }
 
   if (priv->screen_sharing_dialog)
@@ -633,9 +640,10 @@ cc_sharing_panel_setup_personal_file_sharing_dialog (CcSharingPanel *self)
 
 static void
 remote_login_switch_activate (GtkSwitch      *remote_login_switch,
+                              GParamSpec     *pspec,
                               CcSharingPanel *self)
 {
-  cc_remote_login_set_enabled (remote_login_switch);
+  cc_remote_login_set_enabled (self->priv->remote_login_cancellable, remote_login_switch);
 }
 
 static void
@@ -652,8 +660,9 @@ cc_sharing_panel_setup_remote_login_dialog (CcSharingPanel *self)
                     G_CALLBACK (remote_login_switch_activate), self);
   gtk_widget_set_sensitive (WID ("remote-login-switch"), FALSE);
 
-  cc_remote_login_get_enabled (GTK_SWITCH (WID ("remote-login-switch")));
-
+  cc_remote_login_get_enabled (self->priv->remote_login_cancellable,
+                               GTK_SWITCH (WID ("remote-login-switch")),
+                               WID ("remote-login-button"));
 }
 
 static gboolean
@@ -773,6 +782,7 @@ cc_sharing_panel_init (CcSharingPanel *self)
   priv->media_sharing_dialog = WID ("media-sharing-dialog");
   priv->personal_file_sharing_dialog = WID ("personal-file-sharing-dialog");
   priv->remote_login_dialog = WID ("remote-login-dialog");
+  priv->remote_login_cancellable = g_cancellable_new ();
   priv->screen_sharing_dialog = WID ("screen-sharing-dialog");
 
   g_signal_connect (priv->bluetooth_sharing_dialog, "response",
