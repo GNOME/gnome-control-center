@@ -896,7 +896,7 @@ cc_background_item_dump (CcBackgroundItem *item)
 	if (priv->mime_type)
 		g_debug ("mime-type:\t\t%s", priv->mime_type);
 	g_debug ("dimensions:\t\t%d x %d", priv->width, priv->height);
-        g_debug ("modified: %u", priv->modified);
+        g_debug ("modified: %"G_GUINT64_FORMAT, priv->modified);
 	g_debug (" ");
 }
 
