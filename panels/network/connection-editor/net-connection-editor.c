@@ -234,7 +234,7 @@ net_connection_editor_error_dialog (NetConnectionEditor *editor,
                                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                          GTK_MESSAGE_ERROR,
                                          GTK_BUTTONS_OK,
-                                         primary_text);
+                                         "%s", primary_text);
 
         if (secondary_text) {
                 gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
