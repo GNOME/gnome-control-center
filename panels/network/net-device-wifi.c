@@ -1255,6 +1255,8 @@ net_device_wifi_constructed (GObject *object)
         NMClient *client;
         NMRemoteSettings *remote_settings;
         NMClientPermissionResult perm;
+        NMDevice *device;
+        NMDeviceWifiCapability caps;
         GtkWidget *widget;
 
         G_OBJECT_CLASS (net_device_wifi_parent_class)->constructed (object);
@@ -1263,12 +1265,22 @@ net_device_wifi_constructed (GObject *object)
         g_signal_connect (client, "notify::wireless-enabled",
                           G_CALLBACK (wireless_enabled_toggled), device_wifi);
 
-        /* only show the button if the user can create a hotspot */
-        perm = nm_client_get_permission_result (client, NM_CLIENT_PERMISSION_WIFI_SHARE_OPEN);
+        nm_device = net_device_get_nm_device (NET_DEVICE (device_wifi));
+
+        /* only enable the button if the user can create a hotspot */
         widget = GTK_WIDGET (gtk_builder_get_object (device_wifi->priv->builder,
                                                      "start_hotspot_button"));
-        gtk_widget_set_sensitive (widget, perm == NM_CLIENT_PERMISSION_RESULT_YES ||
-                                          perm == NM_CLIENT_PERMISSION_RESULT_AUTH);
+        perm = nm_client_get_permission_result (client, NM_CLIENT_PERMISSION_WIFI_SHARE_OPEN);
+        caps = nm_device_wifi_get_capabilities (NM_DEVICE_WIFI (nm_device));
+        if (perm != NM_CLIENT_PERMISSION_RESULT_YES &&
+            perm != NM_CLIENT_PERMISSION_RESULT_AUTH) {
+                gtk_widget_set_tooltip (widget, _("System policy prohibits use as a Hotspot"));
+                gtk_widget_set_sensitive (widget, FALSE);
+        } else if (!(caps & (NM_WIFI_DEVICE_CAP_AP | NM_WIFI_DEVICE_CAP_ADHOC))) {
+                gtk_widget_set_tooltip (widget, _("Wireless device does not support Hotspot mode"));
+                gtk_widget_set_sensitive (widget, FALSE);
+        } else
+                gtk_widget_set_sensitive (widget, TRUE);
 
         remote_settings = net_object_get_remote_settings (NET_OBJECT (device_wifi));
         g_signal_connect (remote_settings, "connections-read",
