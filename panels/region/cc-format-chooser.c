@@ -120,9 +120,9 @@ update_format_examples (GtkDialog *chooser)
 
         fmt = nl_langinfo (_NL_MEASUREMENT_MEASUREMENT);
         if (fmt && *fmt == 2)
-                gtk_label_set_text (GTK_LABEL (priv->measurement), _("Imperial"));
+                gtk_label_set_text (GTK_LABEL (priv->measurement), C_("measurement format", "Imperial"));
         else
-                gtk_label_set_text (GTK_LABEL (priv->measurement), _("Metric"));
+                gtk_label_set_text (GTK_LABEL (priv->measurement), C_("measurement format", "Metric"));
 
         setlocale (LC_MEASUREMENT, locale);
         g_free (locale);
