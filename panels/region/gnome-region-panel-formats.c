@@ -141,9 +141,9 @@ update_examples_cb (GtkTreeSelection *selection, gpointer user_data)
 
 	fmt = nl_langinfo (_NL_MEASUREMENT_MEASUREMENT);
 	if (fmt && *fmt == 2)
-		gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "measurement_format")), _("Imperial"));
+		gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "measurement_format")), C_("measurement format", "Imperial"));
 	else
-		gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "measurement_format")), _("Metric"));
+		gtk_label_set_text (GTK_LABEL (gtk_builder_get_object (builder, "measurement_format")), C_("measurement format", "Metric"));
 
 	setlocale (LC_MEASUREMENT, locale);
 	g_free (locale);
