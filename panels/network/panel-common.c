@@ -156,14 +156,17 @@ panel_device_state_to_localized_string (NMDevice *device)
                 value = _("Unmanaged");
                 break;
         case NM_DEVICE_STATE_UNAVAILABLE:
-                /* TRANSLATORS: device status */
-                if (nm_device_get_firmware_missing (device))
+                if (nm_device_get_firmware_missing (device)) {
+                        /* TRANSLATORS: device status */
                         value = _("Firmware missing");
-                else if (type == NM_DEVICE_TYPE_ETHERNET &&
-                         !nm_device_ethernet_get_carrier (NM_DEVICE_ETHERNET (device)))
+                } else if (type == NM_DEVICE_TYPE_ETHERNET &&
+                           !nm_device_ethernet_get_carrier (NM_DEVICE_ETHERNET (device))) {
+                        /* TRANSLATORS: device status */
                         value = _("Cable unplugged");
-                else
+                } else {
+                        /* TRANSLATORS: device status */
                         value = _("Unavailable");
+                }
                 break;
         case NM_DEVICE_STATE_DISCONNECTED:
                 /* TRANSLATORS: device status */
