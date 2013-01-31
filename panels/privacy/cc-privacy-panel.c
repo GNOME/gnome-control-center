@@ -44,6 +44,7 @@ struct _CcPrivacyPanelPrivate
   GSettings  *lockdown_settings;
   GSettings  *lock_settings;
   GSettings  *privacy_settings;
+  GSettings  *notification_settings;
 };
 
 static void
@@ -295,7 +296,7 @@ add_screen_lock (CcPrivacyPanel *self)
                     G_CALLBACK (lock_combo_changed_cb), self);
 
   w = GTK_WIDGET (gtk_builder_get_object (self->priv->builder, "show_notifications"));
-  g_settings_bind (self->priv->lock_settings, "show-notifications",
+  g_settings_bind (self->priv->notification_settings, "show-in-lock-screen",
                    w, "active",
                    G_SETTINGS_BIND_DEFAULT);
 }
@@ -613,6 +614,7 @@ cc_privacy_panel_finalize (GObject *object)
   g_clear_object (&priv->lockdown_settings);
   g_clear_object (&priv->lock_settings);
   g_clear_object (&priv->privacy_settings);
+  g_clear_object (&priv->notification_settings);
 
   G_OBJECT_CLASS (cc_privacy_panel_parent_class)->finalize (object);
 }
@@ -699,6 +701,7 @@ cc_privacy_panel_init (CcPrivacyPanel *self)
   self->priv->lockdown_settings = g_settings_new ("org.gnome.desktop.lockdown");
   self->priv->lock_settings = g_settings_new ("org.gnome.desktop.screensaver");
   self->priv->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
+  self->priv->notification_settings = g_settings_new ("org.gnome.desktop.notifications");
 
   add_screen_lock (self);
   add_name_visibility (self);
