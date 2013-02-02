@@ -287,7 +287,8 @@ update_info (CcBackgroundItem *item,
                         item->priv->name = g_strdup (g_file_info_get_display_name (info));
 
                 item->priv->mime_type = g_strdup (g_file_info_get_content_type (info));
-                item->priv->modified = g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_TIME_MODIFIED);
+                if (item->priv->modified == 0)
+                  item->priv->modified = g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_TIME_MODIFIED);
         }
 
         if (info != NULL)
@@ -506,6 +507,13 @@ cc_background_item_get_needs_download (CcBackgroundItem *item)
 	return item->priv->needs_download;
 }
 
+static void
+_set_modified (CcBackgroundItem *item,
+               guint64           value)
+{
+        item->priv->modified = value;
+}
+
 guint64
 cc_background_item_get_modified (CcBackgroundItem *item)
 {
@@ -557,6 +565,9 @@ cc_background_item_set_property (GObject      *object,
 		break;
 	case PROP_NEEDS_DOWNLOAD:
 		_set_needs_download (self, g_value_get_boolean (value));
+		break;
+	case PROP_MODIFIED:
+		_set_modified (self, g_value_get_uint64 (value));
 		break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -747,7 +758,7 @@ cc_background_item_class_init (CcBackgroundItemClass *klass)
                                                               0,
                                                               G_MAXUINT64,
                                                               0,
-                                                              G_PARAM_READABLE));
+                                                              G_PARAM_READWRITE));
 
 
         g_type_class_add_private (klass, sizeof (CcBackgroundItemPrivate));
