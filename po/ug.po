@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-01-25 18:34+0000\n"
-"PO-Revision-Date: 2013-01-26 13:05+0900\n"
+"POT-Creation-Date: 2013-01-31 19:29+0000\n"
+"PO-Revision-Date: 2013-02-02 11:55+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: \n"
@@ -82,22 +82,22 @@ msgstr "Flickr"
 msgid "Select"
 msgstr "تاللا"
 
-#: ../panels/background/cc-background-item.c:148
+#: ../panels/background/cc-background-item.c:150
 msgid "multiple sizes"
 msgstr "كۆپ خىل چوڭلۇق"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/cc-background-item.c:152
+#: ../panels/background/cc-background-item.c:154
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: ../panels/background/cc-background-item.c:281
+#: ../panels/background/cc-background-item.c:283
 msgid "No Desktop Background"
 msgstr "ئۈستەلئۈستى تەگلىك يوق"
 
-#: ../panels/background/cc-background-panel.c:449
+#: ../panels/background/cc-background-panel.c:453
 msgid "Current background"
 msgstr "نۆۋەتتىكى تەگلىك"
 
@@ -140,12 +140,18 @@ msgstr "ئۈسكۈنىنى چىقىرىۋەت"
 msgid "Connection"
 msgstr "باغلىنىش"
 
-#: ../panels/bluetooth/bluetooth.ui.h:6 ../panels/printers/printers.ui.h:14
+#: ../panels/bluetooth/bluetooth.ui.h:6
+#: ../panels/network/connection-editor/8021x-security-page.ui.h:2
+#: ../panels/network/connection-editor/security-page.ui.h:2
+#: ../panels/printers/printers.ui.h:14
 #: ../panels/region/gnome-region-panel.ui.h:3
 msgid "page 1"
 msgstr "1-بەت"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/printers/printers.ui.h:16
+#: ../panels/bluetooth/bluetooth.ui.h:7
+#: ../panels/network/connection-editor/8021x-security-page.ui.h:5
+#: ../panels/network/connection-editor/security-page.ui.h:5
+#: ../panels/printers/printers.ui.h:16
 #: ../panels/region/gnome-region-panel.ui.h:5
 msgid "page 2"
 msgstr "2-بەت"
@@ -159,6 +165,10 @@ msgid "Type"
 msgstr "تىپى"
 
 #: ../panels/bluetooth/bluetooth.ui.h:10
+#: ../panels/network/connection-editor/ce-page-ip4.c:180
+#: ../panels/network/connection-editor/ce-page-ip4.c:416
+#: ../panels/network/connection-editor/ce-page-ip6.c:182
+#: ../panels/network/connection-editor/ce-page-ip6.c:420
 msgid "Address"
 msgstr "ئادرېس"
 
@@ -176,15 +186,16 @@ msgid "Keyboard Settings"
 msgstr "ھەرپتاختا تەڭشەكلىرى‏"
 
 #: ../panels/bluetooth/bluetooth.ui.h:14
-#| msgid "Send Files..."
 msgid "Send Files…"
 msgstr "ھۆججەت يوللاش…"
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/network/wireless-security/nag-user-dialog.ui.h:3
 msgid "Yes"
 msgstr "ھەئە"
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/network/wireless-security/nag-user-dialog.ui.h:2
 msgid "No"
 msgstr "ياق"
 
@@ -222,7 +233,7 @@ msgstr "ئەگەر سىز بۇ ئۈسكىنىنى ئۆچۈرۈۋەتسىڭىز،
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: ../panels/color/cc-color-calibrate.c:360
 msgid "Place your calibration device over the square and press 'Start'"
-msgstr ""
+msgstr "تەڭشەيدىغان  ئۈسكۈنىنى تىك تۆتبۇلۇڭ ئۈستىگە قويۇپ ‹باشلا› نى بېسىڭ"
 
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
@@ -230,7 +241,7 @@ msgstr ""
 #: ../panels/color/cc-color-calibrate.c:366
 msgid ""
 "Move your calibration device to the calibrate position and press 'Continue'"
-msgstr ""
+msgstr "تەڭشەيدىغان ئۈسكۈنىنى تەڭشەيدىغان ئورۇنغا يۆتكەپ ‹داۋاملاشتۇر› نى بېسىڭ"
 
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
@@ -238,27 +249,26 @@ msgstr ""
 #: ../panels/color/cc-color-calibrate.c:372
 msgid ""
 "Move your calibration device to the surface position and press 'Continue'"
-msgstr ""
+msgstr "تەڭشەيدىغان ئۈسكۈنىنى سىرتقى يۈزدىكى ئورۇنغا يۆتكەپ ‹داۋاملاشتۇر› نى بېسىڭ"
 
 #. TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
 #. * is built into the palmrest and we need to fullscreen the
 #. * sample widget and shut the lid.
 #: ../panels/color/cc-color-calibrate.c:378
 msgid "Shut the laptop lid"
-msgstr ""
+msgstr "يان كومپيۇتېرنىڭ قېپىنى يېپىڭ"
 
 #. TRANSLATORS: We suck, the calibation failed and we have no
 #. * good idea why or any suggestions
 #: ../panels/color/cc-color-calibrate.c:409
-#| msgid "An internal error occurred."
 msgid "An internal error occurred that could not be recovered."
-msgstr ""
+msgstr "ئىچكى خاتالىق كۆرۈلۈپ، ئەسلىگە كەلتۈرگىلى بولمىدى."
 
 #. TRANSLATORS: Some required-at-runtime tools were not
 #. * installed, which should only affect insane distros
 #: ../panels/color/cc-color-calibrate.c:414
 msgid "Tools required for calibration are not installed."
-msgstr ""
+msgstr "تەڭشەشكە زۆرۈر بولغان قوراللار ئورنىتىلماپتۇ."
 
 #. TRANSLATORS: The profile failed for some reason
 #: ../panels/color/cc-color-calibrate.c:420
@@ -274,15 +284,12 @@ msgstr "نىشاندىكى ئاق نۇقتىغا ئېرىشكىلى بولماي
 
 #. TRANSLATORS: the display calibration process is finished
 #: ../panels/color/cc-color-calibrate.c:466
-#| msgctxt "print job"
-#| msgid "Completed"
 msgid "Complete!"
 msgstr "تامام!"
 
 #. TRANSLATORS: the display calibration failed, and we also show
 #. * the translated (or untranslated) error string after this
 #: ../panels/color/cc-color-calibrate.c:474
-#| msgid "Configuration failed"
 msgid "Calibration failed!"
 msgstr "تەڭشەش مەغلۇپ بولدى!"
 
@@ -296,17 +303,15 @@ msgstr "تەڭشەيدىغان ئۈسكۈنىنى چىقىرىۋەتسىڭىز �
 #. * detected early enough)
 #: ../panels/color/cc-color-calibrate.c:552
 msgid "Do not disturb the calibration device while in progress"
-msgstr ""
+msgstr "بىر تەرەپ قىلىۋاتقاندا تەڭشەيدىغان ئۈسكۈنىگە دەخلى قىلماڭ"
 
 #. TRANSLATORS: This refers to the TFT display on a laptop
 #: ../panels/color/cc-color-common.c:41
-#| msgid "Lock screen"
 msgid "Laptop Screen"
-msgstr ""
+msgstr "يان كومپيۇتېر ئېكرانى"
 
 #. TRANSLATORS: This refers to the embedded webcam on a laptop
 #: ../panels/color/cc-color-common.c:50
-#| msgid "Built-in"
 msgid "Built-in Webcam"
 msgstr "ئۆزىدىكى توركامېراسى"
 
@@ -314,45 +319,35 @@ msgstr "ئۆزىدىكى توركامېراسى"
 #. * model, vendor or ID, e.g. 'LP2480zx Monitor'
 #: ../panels/color/cc-color-common.c:65
 #, c-format
-#| msgid "Monitor"
 msgid "%s Monitor"
 msgstr "%s ئېكران"
 
 #. TRANSLATORS: a flatbed scanner device, e.g. 'Epson Scanner'
 #: ../panels/color/cc-color-common.c:69
 #, c-format
-#| msgctxt "Device kind"
-#| msgid "Scanner"
 msgid "%s Scanner"
 msgstr "%s شويلىلىغۇچ"
 
 #. TRANSLATORS: a camera device, e.g. 'Nikon D60 Camera'
 #: ../panels/color/cc-color-common.c:73
 #, c-format
-#| msgctxt "Device kind"
-#| msgid "Camera"
 msgid "%s Camera"
 msgstr "%s كامېرا"
 
 #. TRANSLATORS: a printer device, e.g. 'Epson Photosmart Printer'
 #: ../panels/color/cc-color-common.c:77
 #, c-format
-#| msgctxt "Device kind"
-#| msgid "Printer"
 msgid "%s Printer"
 msgstr "%s پرىنتېر"
 
 #. TRANSLATORS: a webcam device, e.g. 'Philips HiDef Camera'
 #: ../panels/color/cc-color-common.c:81
 #, c-format
-#| msgctxt "Device kind"
-#| msgid "Webcam"
 msgid "%s Webcam"
 msgstr "%s تور كامېراسى"
 
 #. not calibrated
 #: ../panels/color/cc-color-device.c:303
-#| msgid "Uncalibrated"
 msgid "Not calibrated"
 msgstr "تەڭشەلمىگەن"
 
@@ -390,18 +385,16 @@ msgstr "قوللايدىغان ICC سەپلىمە ھۆججەتلەر"
 
 #. TRANSLATORS: filter name on the file->open dialog
 #: ../panels/color/cc-color-panel.c:235
+#: ../panels/network/wireless-security/eap-method-fast.c:410
 msgid "All files"
 msgstr "ھەممە ھۆججەتلەر"
 
 #: ../panels/color/cc-color-panel.c:506
-#| msgctxt "Distance"
-#| msgid "¼ Screen"
 msgid "Screen"
 msgstr "ئېكران"
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
 #: ../panels/color/cc-color-panel.c:776
-#| msgid "Remove profile"
 msgid "Save Profile"
 msgstr "Profile نى ساقلاش"
 
@@ -430,15 +423,12 @@ msgstr "بۇ خىل ئۈسكۈنە تىپىنى نۆۋەتتە قوللىماي�
 #. TRANSLATORS: standard spaces are well known colorspaces like
 #. * sRGB, AdobeRGB and ProPhotoRGB
 #: ../panels/color/cc-color-profile.c:101
-#| msgctxt "Account type"
-#| msgid "Standard"
 msgid "Standard Space"
 msgstr "ئۆلچەملىك بوشلۇق"
 
 #. TRANSLATORS: test profiles do things like changing the screen
 #. * a different color, or swap the red and green channels
 #: ../panels/color/cc-color-profile.c:107
-#| msgid "Test profile: "
 msgid "Test Profile"
 msgstr "سىناق سەپلىمە ھۆججەت(Profile)"
 
@@ -447,8 +437,6 @@ msgstr "سىناق سەپلىمە ھۆججەت(Profile)"
 #. * for instance the default monitor profile is created from the
 #. * primaries specified in the monitor EDID
 #: ../panels/color/cc-color-profile.c:115
-#| msgctxt "proxy method"
-#| msgid "Automatic"
 msgctxt "Automatically generated profile"
 msgid "Automatic"
 msgstr "ئاپتوماتىك"
@@ -457,16 +445,12 @@ msgstr "ئاپتوماتىك"
 #. * much less time to generate but may be a poor reflection of the
 #. * device capability
 #: ../panels/color/cc-color-profile.c:125
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "Low Quality"
 msgstr "سۈپىتى تۆۋەن"
 
 #. TRANSLATORS: the profile quality
 #: ../panels/color/cc-color-profile.c:130
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "Medium Quality"
 msgstr "سۈپىتى نورمال"
@@ -475,8 +459,6 @@ msgstr "سۈپىتى نورمال"
 #. * a *long* time, and have the best calibration and
 #. * characterisation data.
 #: ../panels/color/cc-color-profile.c:137
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "High Quality"
 msgstr "سۈپىتى يۇقىرى"
@@ -504,21 +486,19 @@ msgstr "كۆڭۈلدىكى كۈلرەڭلىك"
 
 #: ../panels/color/cc-color-profile.c:192
 msgid "Vendor supplied factory calibration data"
-msgstr ""
+msgstr "ياسىغۇچى ئورۇن تەمىنلىگەن ئەسلىدىكى تەڭشەش سانلىق-مەلۇماتلار"
 
 #: ../panels/color/cc-color-profile.c:201
 msgid "Full-screen display correction not possible with this profile"
-msgstr ""
+msgstr "بۇ profile دا تولۇق ئېكراننى تەڭشەشكە مۇمكىن بولمايدۇ"
 
 #: ../panels/color/cc-color-profile.c:223
-#| msgid "This device has an old profile that may no longer be accurate."
 msgid "This profile may no longer be accurate"
 msgstr ""
 
 #: ../panels/color/color-calibrate.ui.h:1
-#| msgid "Calibration"
 msgid "Display Calibration"
-msgstr ""
+msgstr "ئېكراننى تەڭشەش"
 
 #: ../panels/color/color-calibrate.ui.h:2
 #: ../panels/printers/ppd-selection-dialog.ui.h:2
@@ -539,7 +519,6 @@ msgstr "داۋاملاشتۇر"
 
 #. This button returns the user back to the color control panel
 #: ../panels/color/color-calibrate.ui.h:8
-#| msgid "Done!"
 msgid "Done"
 msgstr "تامام"
 
@@ -558,41 +537,35 @@ msgstr ""
 #: ../panels/color/color.ui.h:3
 msgid ""
 "You will not be able to use your computer while calibration takes place."
-msgstr ""
+msgstr "تەڭشەش ئېلىپ بېرىۋاتقان چاغدا سىز باشقا مەشغۇلاتلارنى قىلالمايسىز."
 
 #. This is the approximate time it takes to calibrate the display.
 #: ../panels/color/color.ui.h:5
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgid "Quality"
 msgstr "سۈپەت"
 
 #. This is the approximate time it takes to calibrate the display.
 #: ../panels/color/color.ui.h:7
 msgid "Approximate Time"
-msgstr ""
+msgstr "تەخمىنىي ۋاقىت"
 
 #: ../panels/color/color.ui.h:8
-#| msgid "Calibration"
 msgid "Calibration Quality"
 msgstr "تەڭشەش سۈپىتى"
 
 #: ../panels/color/color.ui.h:9
 msgid "Select the type of display that is connected."
-msgstr ""
+msgstr "چېتىلغان كۆرسەتكۈچنىڭ تىپىنى تاللاڭ."
 
 #: ../panels/color/color.ui.h:10
-#| msgctxt "Device kind"
-#| msgid "Display"
 msgid "Display Type"
 msgstr "ئېكران تىپى"
 
 #: ../panels/color/color.ui.h:11
 msgid "Select the sensor device you want to use for calibration."
-msgstr ""
+msgstr "تەڭشەشتە ئىشلىتىدىغان سەزگۈچنى تاللاڭ."
 
 #: ../panels/color/color.ui.h:12
-#| msgid "Calibration"
 msgid "Calibration Device"
 msgstr "تەڭشەش ئۈسكۈنىسى"
 
@@ -619,7 +592,6 @@ msgid ""
 msgstr ""
 
 #: ../panels/color/color.ui.h:17
-#| msgid "Brightness:"
 msgid "Display Brightness"
 msgstr "ئېكران يورۇقلۇقى"
 
@@ -630,12 +602,10 @@ msgid ""
 msgstr ""
 
 #: ../panels/color/color.ui.h:19
-#| msgid "_Profile:"
 msgid "Profile Name:"
 msgstr "سەپلىمە ھۆججەت ئاتى:"
 
 #: ../panels/color/color.ui.h:20
-#| msgid "_Profile:"
 msgid "Profile Name"
 msgstr "سەپلىمە ھۆججەت ئاتى"
 
@@ -644,7 +614,6 @@ msgid "Profile successfully created!"
 msgstr "سەپلىمە ھۆججەت مۇۋەپپەقىيەتلىك ياسالدى."
 
 #: ../panels/color/color.ui.h:22
-#| msgid "_Import"
 msgid "Export"
 msgstr "ئېكسپورت قىلىش"
 
@@ -668,7 +637,7 @@ msgstr "ھۆججەت ئىمپورت قىلىش"
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
-msgstr ""
+msgstr "مەسىلە بايقالدى. بۇ profile نورمال ئىشلىمىگەندەك قىلىدۇ. <a href=\"\">تەپسىلاتى بۇ يەردە.</a>"
 
 #: ../panels/color/color.ui.h:27
 msgid "Device type:"
@@ -714,7 +683,6 @@ msgid "Set this profile for all users on this computer"
 msgstr "كومپيۇتېردىكى بارلىق ئىشلەتكۈچىدە مۇشۇ profile نى ئىشلەتسۇن"
 
 #: ../panels/color/color.ui.h:37
-#| msgid "Enabled"
 msgid "Enable"
 msgstr "قوزغات"
 
@@ -756,19 +724,15 @@ msgid "CRT"
 msgstr "CRT"
 
 #: ../panels/color/color.ui.h:47
-#| msgid "Co_nnector:"
 msgid "Projector"
 msgstr "پرويېكتور"
 
 #: ../panels/color/color.ui.h:48
-#| msgctxt "universal access, contrast"
-#| msgid "High"
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "يۇقىرى"
 
 #: ../panels/color/color.ui.h:49
-#| msgid "10 minutes"
 msgid "40 minutes"
 msgstr "40 مىنۇت"
 
@@ -783,24 +747,19 @@ msgid "30 minutes"
 msgstr "30 مىنۇت"
 
 #: ../panels/color/color.ui.h:52
-#| msgctxt "Battery power"
-#| msgid "Low"
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "تۆۋەن"
 
 #: ../panels/color/color.ui.h:53
-#| msgid "5 minutes"
 msgid "15 minutes"
 msgstr "15 مىنۇت"
 
 #: ../panels/color/color.ui.h:54
-#| msgid "Panel to display"
 msgid "Native to display"
 msgstr ""
 
 #: ../panels/color/color.ui.h:55
-#| msgid "Pointing and Clicking"
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (باسمىچىلىق ۋە نەشرىيات)"
 
@@ -813,7 +772,6 @@ msgid "D65 (Photography and graphics)"
 msgstr "D65 (سۈرەتچىلىك ۋە گرافىك)"
 
 #: ../panels/color/color.ui.h:58
-#| msgid "75%"
 msgid "D75"
 msgstr "D75"
 
@@ -1262,6 +1220,8 @@ msgid "Checking for Updates"
 msgstr "يېڭىلانمىلارنى تەكشۈرۈۋاتىدۇ"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
+#: ../panels/network/connection-editor/ce-page-details.c:238
+#: ../panels/network/network-wifi.ui.h:58
 msgid "Details"
 msgstr "تەپسىلاتلار"
 
@@ -1549,7 +1509,8 @@ msgstr "يۇقىرى پەرقنى ئاچ ياكى تاقا"
 #: ../panels/keyboard/cc-keyboard-option.c:304
 #: ../panels/keyboard/cc-keyboard-option.c:436
 #: ../panels/keyboard/keyboard-shortcuts.c:1160
-#: ../panels/sound/gvc/gvc-mixer-control.c:1828
+#: ../panels/network/network-wifi.ui.h:30
+#: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Disabled"
@@ -1788,8 +1749,9 @@ msgid "_Reassign"
 msgstr "قايتا تەيىنلە(_R)"
 
 #: ../panels/mouse/cc-mouse-panel.c:123
-msgid "_Test Your Settings"
-msgstr "تەڭشىكىڭىزنى سىناڭ(_T)"
+#| msgid "_Test Your Settings"
+msgid "Test Your _Settings"
+msgstr "تەڭشىكىمنى سىناپ كۆرەي(_S)"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse & Touchpad"
@@ -1907,23 +1869,588 @@ msgstr "يەككە چېكىش، ئىككىنچى توپچا"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:333
+#: ../panels/network/cc-network-panel.c:336
 msgid "Air_plane Mode"
 msgstr "ئايروپىلان ھالىتى(_P)"
 
-#: ../panels/network/cc-network-panel.c:836
+#: ../panels/network/cc-network-panel.c:869
 msgid "Network proxy"
 msgstr "تور ۋاكالەتچىسى"
 
-#: ../panels/network/cc-network-panel.c:1012 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1048 ../panels/network/net-vpn.c:280
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1076
+#: ../panels/network/cc-network-panel.c:1181
 msgid "The system network services are not compatible with this version."
 msgstr "سىستېمىنىڭ تور مۇلازىمىتى بۇ نەشرىدىكى تور باشقۇرغۇچ بىلەن ماسلاشمايدۇ."
+
+#: ../panels/network/connection-editor/8021x-security-page.ui.h:1
+#| msgid "Security"
+msgid "802.1x _Security"
+msgstr "802.1x بىخەتەرلىكى(_S)"
+
+#: ../panels/network/connection-editor/8021x-security-page.ui.h:3
+#: ../panels/network/connection-editor/security-page.ui.h:3
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:1
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:5
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
+msgid "Anony_mous identity"
+msgstr "ئاتسىز كىملىك(_M)"
+
+#: ../panels/network/connection-editor/8021x-security-page.ui.h:4
+#: ../panels/network/connection-editor/security-page.ui.h:4
+#| msgid "Authentication failed"
+msgid "Inner _authentication"
+msgstr "ئىچكى ئىسپات"
+
+#: ../panels/network/connection-editor/ce-page-8021x-security.c:108
+#: ../panels/network/connection-editor/ce-page-security.c:455
+#: ../panels/network/connection-editor/details-page.ui.h:3
+#: ../panels/network/network-wifi.ui.h:4
+msgid "Security"
+msgstr "بىخەتەرلىك"
+
+#. TRANSLATORS: this WEP WiFi security
+#: ../panels/network/connection-editor/ce-page-details.c:52
+#: ../panels/network/net-device-wifi.c:224
+#: ../panels/network/net-device-wifi.c:385
+msgid "WEP"
+msgstr "WEP"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/connection-editor/ce-page-details.c:56
+#: ../panels/network/net-device-wifi.c:228
+#: ../panels/network/net-device-wifi.c:390
+#: ../panels/network/network-wifi.ui.h:17
+msgid "WPA"
+msgstr "WPA"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/connection-editor/ce-page-details.c:60
+#: ../panels/network/net-device-wifi.c:232
+msgid "WPA2"
+msgstr "WPA2"
+
+#. TRANSLATORS: this Enterprise WiFi security
+#: ../panels/network/connection-editor/ce-page-details.c:65
+#: ../panels/network/net-device-wifi.c:237
+msgid "Enterprise"
+msgstr "كارخانا"
+
+#: ../panels/network/connection-editor/ce-page-details.c:70
+#: ../panels/network/net-device-wifi.c:242
+#: ../panels/network/net-device-wifi.c:375
+msgctxt "Wifi security"
+msgid "None"
+msgstr "يوق"
+
+#: ../panels/network/connection-editor/ce-page-details.c:91
+#: ../panels/power/power.ui.h:9
+msgid "Never"
+msgstr "ھەرگىز"
+
+#: ../panels/network/connection-editor/ce-page-details.c:102
+#: ../panels/user-accounts/um-utils.c:770
+msgid "Today"
+msgstr "بۈگۈن"
+
+#: ../panels/network/connection-editor/ce-page-details.c:104
+#: ../panels/user-accounts/um-utils.c:773
+msgid "Yesterday"
+msgstr "تۈنۈگۈن"
+
+#: ../panels/network/connection-editor/ce-page-details.c:106
+#: ../panels/network/net-device-ethernet.c:126
+#: ../panels/network/net-device-wifi.c:479
+#, c-format
+msgid "%i day ago"
+msgid_plural "%i days ago"
+msgstr[0] "%i  كۈن ئىلگىرى"
+
+#. Translators: network device speed
+#: ../panels/network/connection-editor/ce-page-details.c:155
+#: ../panels/network/net-device-ethernet.c:54
+#: ../panels/network/net-device-mobile.c:278
+#: ../panels/network/net-device-wifi.c:538
+#, c-format
+msgid "%d Mb/s"
+msgstr "%d مېگابايت/s"
+
+#: ../panels/network/connection-editor/ce-page-details.c:179
+#: ../panels/network/net-device-wifi.c:567
+msgctxt "Signal strength"
+msgid "None"
+msgstr "يوق"
+
+#: ../panels/network/connection-editor/ce-page-details.c:181
+#: ../panels/network/net-device-wifi.c:569
+msgctxt "Signal strength"
+msgid "Weak"
+msgstr "ئاجىز"
+
+#: ../panels/network/connection-editor/ce-page-details.c:183
+#: ../panels/network/net-device-wifi.c:571
+msgctxt "Signal strength"
+msgid "Ok"
+msgstr "تامام"
+
+#: ../panels/network/connection-editor/ce-page-details.c:185
+#: ../panels/network/net-device-wifi.c:573
+msgctxt "Signal strength"
+msgid "Good"
+msgstr "ياخشى"
+
+#: ../panels/network/connection-editor/ce-page-details.c:187
+#: ../panels/network/net-device-wifi.c:575
+msgctxt "Signal strength"
+msgid "Excellent"
+msgstr "ناھايىتى ياخشى"
+
+#: ../panels/network/connection-editor/ce-page-ethernet.c:200
+#: ../panels/network/connection-editor/ce-page-vpn.c:172
+#: ../panels/network/connection-editor/ce-page-wifi.c:243
+#: ../panels/network/network-wifi.ui.h:59
+msgid "Identity"
+msgstr "سالاھىيەت"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:183
+#: ../panels/network/connection-editor/ce-page-ip4.c:419
+msgid "Netmask"
+msgstr "تور ماسكىسى"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:186
+#: ../panels/network/connection-editor/ce-page-ip4.c:422
+#: ../panels/network/connection-editor/ce-page-ip6.c:188
+#: ../panels/network/connection-editor/ce-page-ip6.c:426
+#: ../panels/network/network-vpn.ui.h:3
+msgid "Gateway"
+msgstr "تور ئۆتكىلى"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:330
+#: ../panels/network/connection-editor/ce-page-ip6.c:334
+msgid "Server"
+msgstr "مۇلازىمېتىر"
+
+#. Translators: Please see http://en.wikipedia.org/wiki/Metrics_(networking)
+#: ../panels/network/connection-editor/ce-page-ip4.c:426
+#: ../panels/network/connection-editor/ce-page-ip6.c:430
+#| msgid "Metric"
+msgctxt "network parameters"
+msgid "Metric"
+msgstr "مېترىك"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:579
+#: ../panels/network/network-wifi.ui.h:26
+#| msgctxt "Automatically generated profile"
+#| msgid "Automatic"
+msgid "Automatic (DHCP)"
+msgstr "ئاپتوماتىك(DHCP)"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:583
+#: ../panels/network/connection-editor/ce-page-ip6.c:585
+#: ../panels/network/network-wifi.ui.h:25
+#| msgctxt "proxy method"
+#| msgid "Manual"
+msgid "Manual"
+msgstr "قولدا"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:587
+#: ../panels/network/connection-editor/ce-page-ip6.c:589
+msgid "Link-Local Only"
+msgstr "پەقەت Link-Local"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:888
+#: ../panels/network/network-wifi.ui.h:60
+msgid "IPv4"
+msgstr "IPv4"
+
+#: ../panels/network/connection-editor/ce-page-ip6.c:185
+#: ../panels/network/connection-editor/ce-page-ip6.c:423
+msgid "Prefix"
+msgstr "ئالدى قوشۇلغۇچى"
+
+#: ../panels/network/connection-editor/ce-page-ip6.c:577
+#: ../panels/network/connection-editor/ethernet-page.ui.h:1
+#: ../panels/network/connection-editor/ip4-page.ui.h:4
+#: ../panels/network/connection-editor/ip6-page.ui.h:4
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:2
+#| msgctxt "Automatically generated profile"
+#| msgid "Automatic"
+msgid "Automatic"
+msgstr "ئاپتوماتىك"
+
+#: ../panels/network/connection-editor/ce-page-ip6.c:581
+#| msgid "A_utomatic Login"
+msgid "Automatic, DHCP only"
+msgstr "ئاپتوماتىك، پەقەت DHCP"
+
+#: ../panels/network/connection-editor/ce-page-ip6.c:849
+#: ../panels/network/network-wifi.ui.h:61
+msgid "IPv6"
+msgstr "IPv6"
+
+#: ../panels/network/connection-editor/ce-page-reset.c:91
+#: ../panels/network/network-wifi.ui.h:63
+msgid "Reset"
+msgstr "ئەسلىگە قايتۇرۇش"
+
+#: ../panels/network/connection-editor/ce-page-security.c:250
+#| msgid "None"
+msgctxt "Wi-Fi/Ethernet security"
+msgid "None"
+msgstr "يوق"
+
+#: ../panels/network/connection-editor/ce-page-security.c:273
+msgid "WEP 40/128-bit Key (Hex or ASCII)"
+msgstr "WEP 40/128 بىتلىق ئاچقۇچ(16لىك ياكى ASCII)"
+
+#: ../panels/network/connection-editor/ce-page-security.c:283
+msgid "WEP 128-bit Passphrase"
+msgstr "WEP 128 بىتلىق شىفىر"
+
+#: ../panels/network/connection-editor/ce-page-security.c:296
+#: ../panels/network/wireless-security/wireless-security.c:409
+msgid "LEAP"
+msgstr "LEAP"
+
+#: ../panels/network/connection-editor/ce-page-security.c:309
+msgid "Dynamic WEP (802.1x)"
+msgstr "دىنامىكىلىق WEP (802.1x)"
+
+#: ../panels/network/connection-editor/ce-page-security.c:323
+msgid "WPA & WPA2 Personal"
+msgstr "WPA ۋە WPA2 كىشىلىك نۇسخىسى"
+
+#: ../panels/network/connection-editor/ce-page-security.c:337
+#| msgid "Enterprise"
+msgid "WPA & WPA2 Enterprise"
+msgstr "WPA ۋە WPA2 كارخانا نۇسخىسى"
+
+#: ../panels/network/connection-editor/ce-page.c:502
+#| msgctxt "Automatically generated profile"
+#| msgid "Automatic"
+msgid "automatic"
+msgstr "ئاپتوماتىك"
+
+#: ../panels/network/connection-editor/connection-editor.ui.h:1
+#| msgid "Supply"
+msgid "_Apply"
+msgstr "قوللان(_A)"
+
+#: ../panels/network/connection-editor/details-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:2
+#| msgid "Strength"
+msgid "Signal Strength"
+msgstr "سىگنال كۈچلۈكلۈكى"
+
+#: ../panels/network/connection-editor/details-page.ui.h:2
+#: ../panels/network/network-wifi.ui.h:3
+msgid "Link speed"
+msgstr "ئۇلىنىش تېزلىكى"
+
+#: ../panels/network/connection-editor/details-page.ui.h:4
+#: ../panels/network/net-device-ethernet.c:159
+#: ../panels/network/network-simple.ui.h:2
+#: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:643
+msgid "IPv4 Address"
+msgstr "‍‍IPv4 ئادرېس"
+
+#: ../panels/network/connection-editor/details-page.ui.h:5
+#: ../panels/network/net-device-ethernet.c:160
+#: ../panels/network/net-device-ethernet.c:164
+#: ../panels/network/network-mobile.ui.h:4
+#: ../panels/network/network-simple.ui.h:3
+#: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:644
+msgid "IPv6 Address"
+msgstr "‍IPv6 ئادرېس"
+
+#: ../panels/network/connection-editor/details-page.ui.h:6
+#: ../panels/network/net-device-ethernet.c:167
+#: ../panels/network/network-simple.ui.h:1
+#: ../panels/network/network-wifi.ui.h:7
+msgid "Hardware Address"
+msgstr "قاتتىق دېتال ئادرېسى"
+
+#: ../panels/network/connection-editor/details-page.ui.h:7
+#: ../panels/network/net-device-ethernet.c:171
+#: ../panels/network/network-mobile.ui.h:5
+#: ../panels/network/network-simple.ui.h:4
+#: ../panels/network/network-wifi.ui.h:8
+msgid "Default Route"
+msgstr "كۆڭۈلدىكى يېتەكلىگۈ"
+
+#: ../panels/network/connection-editor/details-page.ui.h:8
+#: ../panels/network/connection-editor/ip4-page.ui.h:3
+#: ../panels/network/connection-editor/ip6-page.ui.h:3
+#: ../panels/network/net-device-ethernet.c:173
+#: ../panels/network/network-mobile.ui.h:6
+#: ../panels/network/network-simple.ui.h:5
+#: ../panels/network/network-wifi.ui.h:9
+msgid "DNS"
+msgstr "DNS"
+
+#: ../panels/network/connection-editor/details-page.ui.h:9
+#| msgid "Last used"
+msgid "Last Used"
+msgstr "ئاخىرقى قېتىم ئىشلەتكەن"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:2
+msgid "Twisted Pair (TP)"
+msgstr "قوش پىلاستىك لىنىيە (TP)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:3
+msgid "Attachment Unit Interface (AUI)"
+msgstr "قوشۇلما بۆلۈم ئارايۈزى(AUI)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:4
+msgid "BNC"
+msgstr "BNC"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:5
+msgid "Media Independent Interface (MII)"
+msgstr "ۋاسىتە مۇستەقىل ئارايۈزى(MII)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:6
+#| msgid "%d Mb/s"
+msgid "10 Mb/s"
+msgstr "10 مېگابايت/s"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:7
+#| msgid "%d Mb/s"
+msgid "100 Mb/s"
+msgstr "100 مېگابايت/s"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:8
+msgid "1 Gb/s"
+msgstr "1 گىگابايت/s"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:9
+msgid "10 Gb/s"
+msgstr "10 گىگابايت/s"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:10
+#: ../panels/network/connection-editor/vpn-page.ui.h:1
+#| msgid "_Name:"
+msgid "_Name"
+msgstr "ئاتى(_N)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:11
+#: ../panels/network/connection-editor/wifi-page.ui.h:4
+#: ../panels/network/network-wifi.ui.h:49
+#| msgid "Address"
+msgid "_MAC Address"
+msgstr "MAC ئادرېس(_M)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:12
+msgid "M_TU"
+msgstr "M_TU"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:13
+#: ../panels/network/connection-editor/wifi-page.ui.h:5
+#| msgid "IP Address"
+msgid "_Cloned Address"
+msgstr "كۇلونلانغان ئادرېس(_C):"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:14
+#: ../panels/network/connection-editor/wifi-page.ui.h:6
+msgid "Connect _automatically"
+msgstr "ئاپتوماتىك باغلان(_A)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:15
+msgid "Make available to other _users"
+msgstr "باشقا ئىشلەتكۈچىلەرمۇ ئىشلىتەلەيدىغان بولسۇن(_U)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:16
+#| msgid "%u byte"
+#| msgid_plural "%u bytes"
+msgid "bytes"
+msgstr "بايت"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:23
+msgid "IPv_4"
+msgstr "IPv_4"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:2
+#: ../panels/network/connection-editor/ip6-page.ui.h:2
+#: ../panels/network/network-wifi.ui.h:24
+#| msgid "Address"
+msgid "_Addresses"
+msgstr "ئادرېسلار(_A)"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:5
+#: ../panels/network/connection-editor/ip6-page.ui.h:5
+#: ../panels/network/network-wifi.ui.h:39
+msgid "Routes"
+msgstr "يوللار"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:6
+#: ../panels/network/connection-editor/ip6-page.ui.h:6
+#: ../panels/network/network-wifi.ui.h:45
+msgid "Use this connection _only for resources on its network"
+msgstr ""
+
+#: ../panels/network/connection-editor/ip6-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:47
+msgid "IPv_6"
+msgstr "IPv_6"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:267
+#| msgid "Bluetooth connection failed"
+msgid "Unable to open connection editor"
+msgstr "باغلىنىش تەھرىرلىگۈچىنى ئاچقىلى بولمىدى"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:282
+#| msgid "Save Profile"
+msgid "New Profile"
+msgstr "يېڭى سەپلىمە ھۆججەت"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:502
+#: ../panels/printers/new-printer-dialog.ui.h:2
+#: ../panels/user-accounts/um-account-dialog.c:1068
+msgid "_Add"
+msgstr "قوش(_A)"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:583
+#: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
+msgid "VPN"
+msgstr "VPN"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:584
+msgid "Bond"
+msgstr ""
+
+#: ../panels/network/connection-editor/net-connection-editor.c:585
+msgid "Bridge"
+msgstr "كۆۋرۈك"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:586
+msgid "VLAN"
+msgstr "VLAN"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:736
+#| msgid "Could not load ui: %s"
+msgid "Could not load VPN plugins"
+msgstr "ۋ پ ن(VPN) قىستۇرمىلىرىنى ئوقۇغىلى بولمىدى"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:800
+#| msgid "Import File…"
+msgid "Import from file…"
+msgstr "ھۆججەتتىن ئەكىر…"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:867
+#| msgid "Add new connection"
+msgid "Add Network Connection"
+msgstr "تور باغلىنىشى قوشۇش"
+
+#: ../panels/network/connection-editor/reset-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:53
+msgid "_Reset"
+msgstr "ئەسلىگە قايتۇر(_R)"
+
+#: ../panels/network/connection-editor/reset-page.ui.h:2
+#: ../panels/network/net-device-wifi.c:1402
+#: ../panels/network/network-wifi.ui.h:54
+#| msgid "Forget"
+msgid "_Forget"
+msgstr "ئۇنتۇپ كەت(_F)"
+
+#: ../panels/network/connection-editor/reset-page.ui.h:3
+msgid ""
+"Reset the settings for this network, including passwords, but remember it as "
+"a preferred network"
+msgstr ""
+
+#: ../panels/network/connection-editor/reset-page.ui.h:4
+msgid ""
+"Remove all details relating to this network and do not try to automatically "
+"connect"
+msgstr ""
+
+#: ../panels/network/connection-editor/security-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:14
+#| msgid "Security"
+msgid "S_ecurity"
+msgstr "بىخەتەرلىك(_E)"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:205
+msgid "Cannot import VPN connection"
+msgstr "VPN باغلىنىشىنى ئىمپورت قىلالمىدى"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:207
+#, c-format
+msgid ""
+"The file '%s' could not be read or does not contain recognized VPN "
+"connection information\n"
+"\n"
+"Error: %s."
+msgstr "‹%s› ھۆججىتىنى ئوقۇيالمىدى ياكى تونۇلغان VPN باغلىنىش ئۇچۇرىنى ئۆز ئىچىگە ئالمىغان\n"
+"\n"
+"خاتالىق: %s."
+
+#: ../panels/network/connection-editor/vpn-helpers.c:242
+msgid "Select file to import"
+msgstr "ئىمپورت قىلىدىغان ھۆججەتنى تاللا"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:294
+#, c-format
+#| msgid "A user with name '%s' already exists."
+msgid "A file named \"%s\" already exists."
+msgstr "«%s» ئاتلىق بىر ھۆججەت ئەزەلدىن مەۋجۇت."
+
+#: ../panels/network/connection-editor/vpn-helpers.c:296
+msgid "_Replace"
+msgstr "ئالماشتۇر(_R)"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:298
+#, c-format
+msgid "Do you want to replace %s with the VPN connection you are saving?"
+msgstr "سىز ساقلىغان %s نى VPN باغلىنىشىغا ئالماشتۇرامسىز؟"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:334
+msgid "Cannot export VPN connection"
+msgstr "ۋ پ ن (VPN)  باغلىنىشىنى ئېكسپورت قىلغىلى بولمىدى"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:336
+#, c-format
+msgid ""
+"The VPN connection '%s' could not be exported to %s.\n"
+"\n"
+"Error: %s."
+msgstr "ۋ پ ن(VPN) باغلىنىشى ‹%s› نى %s گە ئېكسپورت قىلغىلى بولمىدى.\n"
+"\n"
+"خاتالىق: %s"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:371
+msgid "Export VPN connection..."
+msgstr "ۋ پ ن (VPN)  باغلىنىشىنى ئېكسپورت قىل..."
+
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
+msgid "(Error: unable to load VPN connection editor)"
+msgstr "(خاتالىق: ۋ پ ن (VPN) باغلىنىش تەھرىرلىگۈچىنى ئوقۇغىلى بولمىدى)"
+
+#: ../panels/network/connection-editor/wifi-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:12
+msgid "_SSID"
+msgstr "SSID (_S):"
+
+#: ../panels/network/connection-editor/wifi-page.ui.h:2
+#: ../panels/network/network-wifi.ui.h:13
+msgid "_BSSID"
+msgstr "BSSID (_B):"
+
+#: ../panels/network/connection-editor/wifi-page.ui.h:3
+#: ../panels/network/network-wifi.ui.h:16
+#| msgid "_Forget Network"
+msgid "My Home Network"
+msgstr "ئۆيۈمدىكى تور"
+
+#: ../panels/network/connection-editor/wifi-page.ui.h:7
+msgid "Make available to _other users"
+msgstr "باشقا ئىشلەتكۈچىلەرمۇ ئىشلىتەلەيدىغان بولسۇن(_O)"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 #: ../panels/network/network-mobile.ui.h:7
@@ -1939,139 +2466,96 @@ msgstr "تور تەڭشەك"
 msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
 msgstr "تور؛سىمسىز تور؛Wi-Fi؛Wifi؛IP؛LAN؛ۋاكالەتچى؛WAN؛يۆتكەلمە خەۋەرلىشىش؛مودېم؛كۆكچىش؛"
 
-#: ../panels/network/net-device-bond.c:131
+#: ../panels/network/net-device-bond.c:77
 msgid "Bond slaves"
 msgstr ""
 
-#. Translators: network device speed
-#: ../panels/network/net-device-ethernet.c:49
-#: ../panels/network/net-device-mobile.c:283
-#: ../panels/network/net-device-wifi.c:725
-#, c-format
-msgid "%d Mb/s"
-msgstr "%d مېگابايت/s"
+#: ../panels/network/net-device-bridge.c:77
+msgid "Bridge slaves"
+msgstr ""
 
-#: ../panels/network/net-device-mobile.c:225
-msgid "Add new connection"
-msgstr "يېڭى باغلىنىش قوشۇش"
-
-#. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/net-device-wifi.c:258
-#: ../panels/network/net-device-wifi.c:437
-msgid "WEP"
-msgstr "WEP"
-
-#. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:262
-#: ../panels/network/net-device-wifi.c:441
-msgid "WPA"
-msgstr "WPA"
-
-#. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:266
-msgid "WPA2"
-msgstr "WPA2"
-
-#. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/net-device-wifi.c:271
-msgid "Enterprise"
-msgstr "كارخانا"
-
-#: ../panels/network/net-device-wifi.c:276
-#: ../panels/network/net-device-wifi.c:432
-msgctxt "Wifi security"
-msgid "None"
-msgstr "يوق"
-
-#: ../panels/network/net-device-wifi.c:652
+#: ../panels/network/net-device-ethernet.c:112
+#: ../panels/network/net-device-wifi.c:465
 msgid "never"
 msgstr "ھەرگىز"
 
-#: ../panels/network/net-device-wifi.c:662
+#: ../panels/network/net-device-ethernet.c:122
+#: ../panels/network/net-device-wifi.c:475
 msgid "today"
 msgstr "بۈگۈن"
 
-#: ../panels/network/net-device-wifi.c:664
+#: ../panels/network/net-device-ethernet.c:124
+#: ../panels/network/net-device-wifi.c:477
 msgid "yesterday"
 msgstr "تۈنۈگۈن"
 
-#: ../panels/network/net-device-wifi.c:666
+#: ../panels/network/net-device-ethernet.c:162
+#: ../panels/network/network-mobile.ui.h:3
+#: ../panels/network/panel-common.c:646 ../panels/network/panel-common.c:648
+#: ../panels/printers/printers.ui.h:13
+msgid "IP Address"
+msgstr "‍IP ئادرېس:"
+
+#: ../panels/network/net-device-ethernet.c:178
+#: ../panels/network/network-wifi.ui.h:10
+msgid "Last used"
+msgstr "ئەڭ ئاخىرقى قېتىم ئىشلەتكىنى"
+
+#: ../panels/network/net-device-ethernet.c:477
 #, c-format
-msgid "%i day ago"
-msgid_plural "%i days ago"
-msgstr[0] "%i  كۈن ئىلگىرى"
+#| msgid "_Profile:"
+msgid "Profile %d"
+msgstr ""
 
-#. TRANSLATORS: VPN status
-#: ../panels/network/net-device-wifi.c:735
-#: ../panels/network/panel-common.c:235
-msgid "Not connected"
-msgstr "باغلانمىغان"
+#: ../panels/network/net-device-mobile.c:220
+msgid "Add new connection"
+msgstr "يېڭى باغلىنىش قوشۇش"
 
-#: ../panels/network/net-device-wifi.c:737
-#: ../panels/network/net-device-wifi.c:2101
-msgid "Out of range"
-msgstr "دائىرە سىرتىدا"
-
-#: ../panels/network/net-device-wifi.c:768
-msgctxt "Signal strength"
-msgid "None"
-msgstr "يوق"
-
-#: ../panels/network/net-device-wifi.c:770
-msgctxt "Signal strength"
-msgid "Weak"
-msgstr "ئاجىز"
-
-#: ../panels/network/net-device-wifi.c:772
-msgctxt "Signal strength"
-msgid "Ok"
-msgstr "تامام"
-
-#: ../panels/network/net-device-wifi.c:774
-msgctxt "Signal strength"
-msgid "Good"
-msgstr "ياخشى"
-
-#: ../panels/network/net-device-wifi.c:776
-msgctxt "Signal strength"
-msgid "Excellent"
-msgstr "ناھايىتى ياخشى"
-
-#: ../panels/network/net-device-wifi.c:960
-#, c-format
-msgid ""
-"Network details for %s including password and any custom configuration will "
-"be lost."
-msgstr "ئىم ۋە باشقا ئىختىيارىي سەپلىمە قاتارلىق %s نىڭ تور تەپسىلاتلىرى يوقىلىدۇ."
-
-#: ../panels/network/net-device-wifi.c:971
-msgid "Forget"
-msgstr "ئۇنتۇ"
-
-#: ../panels/network/net-device-wifi.c:1556
+#: ../panels/network/net-device-wifi.c:1123
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
 msgstr "ئەگەر سىزنىڭ سىمسىز توردىن باشقا ئىنتېرنېت باغلىنىشىڭىز بار بولسا، سىمسىز قىزىق نۇقتا قۇرۇپ، باغلىنىشىڭىزنى باشقىلار بىلەن ھەمبەھىر قىلالايسىز."
 
-#: ../panels/network/net-device-wifi.c:1560
+#: ../panels/network/net-device-wifi.c:1127
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "سىمسىز قىزىق نۇقتىغا ئالماشسىڭىز <b>%s</b> بىلەن بولغان باغلىنىش ئۈزۈلىدۇ."
 
-#: ../panels/network/net-device-wifi.c:1564
+#: ../panels/network/net-device-wifi.c:1131
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
 msgstr "سىمسىز قىزىق نۇقتا ئاكتىپ ھالەتتە تۇرۇۋاتقاندا، سىمسىز تورىڭىز ئارقىلىق ئىنتېرنېتنى زىيارەت قىلالمايسىز."
 
-#: ../panels/network/net-device-wifi.c:1630
+#: ../panels/network/net-device-wifi.c:1205
 msgid "Stop hotspot and disconnect any users?"
 msgstr "قىزىق نۇقتىنى توختىتىپ، ھەر قانداق ئىشلەتكۈچىنى ئۈزەمدۇ؟"
 
-#: ../panels/network/net-device-wifi.c:1633
+#: ../panels/network/net-device-wifi.c:1208
 msgid "_Stop Hotspot"
 msgstr "قىزىق نۇقتىنى توختات(_S)"
+
+#: ../panels/network/net-device-wifi.c:1398
+#| msgid ""
+#| "Network details for %s including password and any custom configuration "
+#| "will be lost."
+msgid ""
+"Network details for the selected networks, including passwords and any "
+"custom configuration will be lost."
+msgstr ""
+
+#: ../panels/network/net-device-wifi.c:1703
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
+msgid "History"
+msgstr "ئىز"
+
+#. translators: This is the label for the "Forget wireless network" functionality
+#: ../panels/network/net-device-wifi.c:1715
+#| msgid "Forget"
+msgctxt "Wi-Fi Network"
+msgid "_Forget"
+msgstr "ئۇنتۇپ كەت(_F)"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: ../panels/network/net-proxy.c:67
@@ -2091,6 +2575,11 @@ msgstr "ئىشەنچسىز ئاممىۋى تورغا نىسبەتەن بۇندا
 msgid "Proxy"
 msgstr "ۋاكالەتچى"
 
+#: ../panels/network/network-ethernet.ui.h:1
+#| msgid "Add profile"
+msgid "_Add Profile…"
+msgstr "سەپلىمە ھۆججەت قوش(_A)…"
+
 #: ../panels/network/network-mobile.ui.h:1
 msgid "IMEI"
 msgstr "IMEI"
@@ -2098,30 +2587,6 @@ msgstr "IMEI"
 #: ../panels/network/network-mobile.ui.h:2
 msgid "Provider"
 msgstr "تەمىنلىگۈچى"
-
-#: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:644 ../panels/network/panel-common.c:646
-#: ../panels/printers/printers.ui.h:13
-msgid "IP Address"
-msgstr "‍IP ئادرېس:"
-
-#: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-simple.ui.h:3
-#: ../panels/network/network-wifi.ui.h:14 ../panels/network/panel-common.c:642
-msgid "IPv6 Address"
-msgstr "‍IPv6 ئادرېس"
-
-#: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-simple.ui.h:4
-#: ../panels/network/network-wifi.ui.h:15
-msgid "Default Route"
-msgstr "كۆڭۈلدىكى يېتەكلىگۈ"
-
-#: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-simple.ui.h:5
-#: ../panels/network/network-wifi.ui.h:16
-msgid "DNS"
-msgstr "DNS"
 
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:6
@@ -2171,16 +2636,6 @@ msgstr "SOCKS مۇلازىمېتىر"
 msgid "_Ignore Hosts"
 msgstr "كومپيۇتېرلارغا پەرۋا قىلما(_I) "
 
-#: ../panels/network/network-simple.ui.h:1
-#: ../panels/network/network-wifi.ui.h:9
-msgid "Hardware Address"
-msgstr "قاتتىق دېتال ئادرېسى"
-
-#: ../panels/network/network-simple.ui.h:2
-#: ../panels/network/network-wifi.ui.h:13 ../panels/network/panel-common.c:641
-msgid "IPv4 Address"
-msgstr "‍‍IPv4 ئادرېس"
-
 #: ../panels/network/network.ui.h:1
 msgid "Select the interface to use for the new service"
 msgstr "يېڭى مۇلازىمەتكە ئىشلىتىدىغان ئېغىزنى تاللاڭ"
@@ -2193,10 +2648,6 @@ msgstr "قۇر(_R)…"
 msgid "_Interface"
 msgstr "ئارايۈز(_I)"
 
-#: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
-msgid "VPN"
-msgstr "VPN"
-
 #: ../panels/network/network.ui.h:8
 msgid "Add Device"
 msgstr "ئۈسكۈنە قوش"
@@ -2204,10 +2655,6 @@ msgstr "ئۈسكۈنە قوش"
 #: ../panels/network/network-vpn.ui.h:2
 msgid "VPN Type"
 msgstr "VPN تىپى"
-
-#: ../panels/network/network-vpn.ui.h:3
-msgid "Gateway"
-msgstr "تور ئۆتكىلى"
 
 #: ../panels/network/network-vpn.ui.h:4
 msgid "Group Name"
@@ -2221,79 +2668,176 @@ msgstr "گۇرۇپپا ئىم"
 msgid "Username"
 msgstr "ئىشلەتكۈچى ئاتى"
 
-#: ../panels/network/network-vpn.ui.h:7
-msgid "_Configure…"
-msgstr "سەپلە(_C)…"
-
 #: ../panels/network/network-wifi.ui.h:1
+#| msgid "A_utomatic Login"
+msgid "Automatic _Connect"
+msgstr "ئاپتوماتىك باغلانسۇن(_C)"
+
+#: ../panels/network/network-wifi.ui.h:11
+#| msgid "Details"
+msgid "details"
+msgstr "تەپسىلاتلار"
+
+#: ../panels/network/network-wifi.ui.h:15
+#: ../panels/network/wireless-security/eap-method-leap.ui.h:2
+#: ../panels/network/wireless-security/eap-method-simple.ui.h:2
+#: ../panels/network/wireless-security/ws-leap.ui.h:2
+#: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
+#: ../panels/user-accounts/data/account-dialog.ui.h:11
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "_Password"
+msgstr "ئىم(_P)"
+
+#: ../panels/network/network-wifi.ui.h:18
+#: ../panels/universal-access/uap.ui.h:8
+msgid "None"
+msgstr "يوق"
+
+#: ../panels/network/network-wifi.ui.h:19
+msgid "blablabla"
+msgstr ""
+
+#: ../panels/network/network-wifi.ui.h:20
+#| msgid "Show Password"
+msgid "Show P_assword"
+msgstr "ئىم كۆرسەت(_A)"
+
+#: ../panels/network/network-wifi.ui.h:21
+#| msgid "Failed to delete user"
+msgid "Make available to other users"
+msgstr "باشقا ئىشلەتكۈچىلەرمۇ ئىشلىتەلەيدىغان بولسۇن"
+
+#: ../panels/network/network-wifi.ui.h:22
+msgid "identity"
+msgstr "سالاھىيەت، كىملىك"
+
+#: ../panels/network/network-wifi.ui.h:27
+msgid "Automatic (DHCP) addresses only"
+msgstr "پەقەت ئاپتوماتىك(DHCP) ئادرېسلار"
+
+#: ../panels/network/network-wifi.ui.h:28
+msgid "Link-local only"
+msgstr "پەقەت Link-Local"
+
+#: ../panels/network/network-wifi.ui.h:29
+msgid "Shared with other computers"
+msgstr "باشقا كومپيۇتېرلار بىلەن ھەمبەھىرلەنگەن"
+
+#: ../panels/network/network-wifi.ui.h:31
+msgid ""
+"Address\n"
+"section\n"
+"goes\n"
+"here"
+msgstr ""
+
+#: ../panels/network/network-wifi.ui.h:35
+msgid ""
+"DNS\n"
+"section\n"
+"goes\n"
+"here"
+msgstr ""
+
+#: ../panels/network/network-wifi.ui.h:40
+msgid ""
+"Routes\n"
+"section\n"
+"goes\n"
+"here"
+msgstr ""
+
+#: ../panels/network/network-wifi.ui.h:44
+#| msgid "Cannot remove automatically added profile"
+msgid "_Ignore automatically obtained routes"
+msgstr ""
+
+#: ../panels/network/network-wifi.ui.h:46
+msgid "ipv4"
+msgstr "ipv4"
+
+#: ../panels/network/network-wifi.ui.h:48
+msgid "ipv6"
+msgstr "ipv6"
+
+#: ../panels/network/network-wifi.ui.h:50
+msgid "_Cloned MAC Address"
+msgstr "كۇلونلانغان MAC ئادرېسلار(_C)"
+
+#: ../panels/network/network-wifi.ui.h:51
+msgid "00:24:16:31:8G:7A"
+msgstr "00:24:16:31:8G:7A"
+
+#: ../panels/network/network-wifi.ui.h:52
+#| msgctxt "category"
+#| msgid "Hardware"
+msgid "hardware"
+msgstr "قاتتىق دېتال"
+
+#: ../panels/network/network-wifi.ui.h:55
+msgid ""
+"Reset the settings for this connection to their defaults, but remember as a "
+"preferred connection."
+msgstr ""
+
+#: ../panels/network/network-wifi.ui.h:56
+msgid ""
+"Remove all details relating to this network and do not try to automatically "
+"connect to it."
+msgstr ""
+
+#: ../panels/network/network-wifi.ui.h:57
+msgid "reset"
+msgstr "ئەسلىگە قايتۇر"
+
+#: ../panels/network/network-wifi.ui.h:62
+#| msgctxt "category"
+#| msgid "Hardware"
+msgid "Hardware"
+msgstr "قاتتىق دېتال"
+
+#: ../panels/network/network-wifi.ui.h:64
 msgid "Wi-Fi Hotspot"
 msgstr "Wi-Fi قىزىق نۇقتىسى"
 
-#: ../panels/network/network-wifi.ui.h:2
+#: ../panels/network/network-wifi.ui.h:65
 msgid "_Turn On"
 msgstr "ئاچ(_T)"
 
-#: ../panels/network/network-wifi.ui.h:3
+#: ../panels/network/network-wifi.ui.h:66
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: ../panels/network/network-wifi.ui.h:4
+#: ../panels/network/network-wifi.ui.h:67
 msgid "_Use as Hotspot…"
 msgstr "قىزىق نۇقتا سۈپىتىدە ئىشلەت(_U)…"
 
-#: ../panels/network/network-wifi.ui.h:5
+#: ../panels/network/network-wifi.ui.h:68
 msgid "_Connect to Hidden Network…"
 msgstr "يوشۇرۇن تورغا باغلا(_C)…"
 
-#: ../panels/network/network-wifi.ui.h:6
-msgid "_Disconnect"
-msgstr "ئۈز(_D)"
+#: ../panels/network/network-wifi.ui.h:69
+#| msgid "History"
+msgid "_History"
+msgstr "ئىز(_H)"
 
-#: ../panels/network/network-wifi.ui.h:7
-msgid "_Connect"
-msgstr "باغلا(_C)"
-
-#: ../panels/network/network-wifi.ui.h:8
-msgid "Last used"
-msgstr "ئەڭ ئاخىرقى قېتىم ئىشلەتكىنى"
-
-#: ../panels/network/network-wifi.ui.h:10
-msgid "Security"
-msgstr "بىخەتەرلىك"
-
-#: ../panels/network/network-wifi.ui.h:11
-msgid "Strength"
-msgstr "كۈچلۈكلۈك"
-
-#: ../panels/network/network-wifi.ui.h:12
-msgid "Link speed"
-msgstr "ئۇلىنىش تېزلىكى"
-
-#: ../panels/network/network-wifi.ui.h:17
-msgid "_Forget Network"
-msgstr "تورنى ئۇنتۇپ كەت(_F)"
-
-#: ../panels/network/network-wifi.ui.h:18
-msgid "_Settings…"
-msgstr "تەڭشەكلەر(_S)…"
-
-#: ../panels/network/network-wifi.ui.h:19
+#: ../panels/network/network-wifi.ui.h:70
 msgid "Switch off to connect to a Wi-Fi network"
 msgstr "Wi-Fi تورىغا باغلىنىشنى يېپىش"
 
-#: ../panels/network/network-wifi.ui.h:20
+#: ../panels/network/network-wifi.ui.h:71
 msgid "Network Name"
 msgstr "تور ئاتى"
 
-#: ../panels/network/network-wifi.ui.h:21
+#: ../panels/network/network-wifi.ui.h:72
 msgid "Connected Devices"
 msgstr "باغلانغان ئۈسكۈنىلەر"
 
-#: ../panels/network/network-wifi.ui.h:22
+#: ../panels/network/network-wifi.ui.h:73
 msgid "Security type"
 msgstr "بىخەتەرلىك تىپى"
 
-#: ../panels/network/network-wifi.ui.h:23
+#: ../panels/network/network-wifi.ui.h:74
 msgid "Security key"
 msgstr "بىخەتەرلىك ئاچقۇچى"
 
@@ -2309,7 +2853,7 @@ msgstr "قۇرۇلما"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:152 ../panels/network/panel-common.c:213
+#: ../panels/network/panel-common.c:152 ../panels/network/panel-common.c:215
 msgid "Status unknown"
 msgstr "ھالىتى نامەلۇم"
 
@@ -2318,317 +2862,583 @@ msgstr "ھالىتى نامەلۇم"
 msgid "Unmanaged"
 msgstr "باشقۇرۇلمىغان"
 
+#. TRANSLATORS: device status
 #: ../panels/network/panel-common.c:161
 msgid "Firmware missing"
 msgstr "مۇقىم دېتال كەم"
 
-#: ../panels/network/panel-common.c:164
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:165
 msgid "Cable unplugged"
 msgstr "كابېل چېتىلمىغان"
 
-#: ../panels/network/panel-common.c:166
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:168
 msgid "Unavailable"
 msgstr "ئىشلەتكىلى بولمايدۇ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:170
-msgid "Disconnected"
-msgstr "ئۈزۈلدى"
-
-#. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:177 ../panels/network/panel-common.c:219
+#: ../panels/network/panel-common.c:179 ../panels/network/panel-common.c:221
 msgid "Connecting"
 msgstr "باغلىنىۋاتىدۇ"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:181 ../panels/network/panel-common.c:223
+#: ../panels/network/panel-common.c:183 ../panels/network/panel-common.c:225
 msgid "Authentication required"
 msgstr "سالاھىيەت دەلىللەش زۆرۈر"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:185 ../panels/network/panel-common.c:227
+#: ../panels/network/panel-common.c:187 ../panels/network/panel-common.c:229
 msgid "Connected"
 msgstr "باغلاندى"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:189
+#: ../panels/network/panel-common.c:191
 msgid "Disconnecting"
 msgstr "ئۈزۈۋاتىدۇ"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:193 ../panels/network/panel-common.c:231
+#: ../panels/network/panel-common.c:195 ../panels/network/panel-common.c:233
 msgid "Connection failed"
 msgstr "باغلىنىش مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:197 ../panels/network/panel-common.c:239
+#: ../panels/network/panel-common.c:199 ../panels/network/panel-common.c:241
 msgid "Status unknown (missing)"
 msgstr "ھالىتى نامەلۇم (يوقالدى)"
 
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:237
+msgid "Not connected"
+msgstr "باغلانمىغان"
+
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:259
+#: ../panels/network/panel-common.c:261
 msgid "Configuration failed"
 msgstr "سەپلەش مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:263
+#: ../panels/network/panel-common.c:265
 msgid "IP configuration failed"
 msgstr "IP سەپلەش مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:267
+#: ../panels/network/panel-common.c:269
 msgid "IP configuration expired"
 msgstr "IP سەپلەشنىڭ قەرەلى توشتى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:271
+#: ../panels/network/panel-common.c:273
 msgid "Secrets were required, but not provided"
 msgstr "بىخەتەرلىك ئۇچۇرلىرى كېرەك ئىدى، بىراق تەمىنلەنمەپتۇ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:275
+#: ../panels/network/panel-common.c:277
 msgid "802.1x supplicant disconnected"
 msgstr "802.1x supplicant ئۈزۈلدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:279
+#: ../panels/network/panel-common.c:281
 msgid "802.1x supplicant configuration failed"
 msgstr "802.1x supplicant نى سەپلەش مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:283
+#: ../panels/network/panel-common.c:285
 msgid "802.1x supplicant failed"
 msgstr "802.1x supplicant مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:287
+#: ../panels/network/panel-common.c:289
 msgid "802.1x supplicant took too long to authenticate"
 msgstr "كىملىك دەلىللەشتە 802.1x supplicant جىق ۋاقىت ئالدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:291
+#: ../panels/network/panel-common.c:293
 msgid "PPP service failed to start"
 msgstr "PPP مۇلازىمىتىنى باشلاش مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:295
+#: ../panels/network/panel-common.c:297
 msgid "PPP service disconnected"
 msgstr "PPP مۇلازىمىتى ئۈزۈلدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:299
+#: ../panels/network/panel-common.c:301
 msgid "PPP failed"
 msgstr "PPP مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:303
+#: ../panels/network/panel-common.c:305
 msgid "DHCP client failed to start"
 msgstr "DHCP خېرىدارىنى باشلاش مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:307
+#: ../panels/network/panel-common.c:309
 msgid "DHCP client error"
 msgstr "DHCP خېرىدارىدا خاتالىق كۆرۈلدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:311
+#: ../panels/network/panel-common.c:313
 msgid "DHCP client failed"
 msgstr "DHCP خېرىدارى مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:315
+#: ../panels/network/panel-common.c:317
 msgid "Shared connection service failed to start"
 msgstr "ھەمبەھىر باغلىنىش مۇلازىمىتىنى باشلاش مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:319
+#: ../panels/network/panel-common.c:321
 msgid "Shared connection service failed"
 msgstr "ھەمبەھىر باغلىنىش مۇلازىمىتى مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:323
+#: ../panels/network/panel-common.c:325
 msgid "AutoIP service failed to start"
 msgstr "AutoIP مۇلازىمىتىنى باشلاش مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:327
+#: ../panels/network/panel-common.c:329
 msgid "AutoIP service error"
 msgstr "AutoIP مۇلازىمىتىدە خاتالىق كۆرۈلدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:331
+#: ../panels/network/panel-common.c:333
 msgid "AutoIP service failed"
 msgstr "AutoIP مۇلازىمىتى مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:335
+#: ../panels/network/panel-common.c:337
 msgid "Line busy"
 msgstr "ئالاقە يولى ئالدىراش"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:339
+#: ../panels/network/panel-common.c:341
 msgid "No dial tone"
 msgstr "نومۇر باسقاندىكى ئاۋاز يوق"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:343
+#: ../panels/network/panel-common.c:345
 msgid "No carrier could be established"
 msgstr ""
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:347
+#: ../panels/network/panel-common.c:349
 msgid "Dialing request timed out"
 msgstr "نومۇر بېسىشنىڭ قەرەلى توشتى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:351
+#: ../panels/network/panel-common.c:353
 msgid "Dialing attempt failed"
 msgstr "نومۇر بېسىش مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:355
+#: ../panels/network/panel-common.c:357
 msgid "Modem initialization failed"
 msgstr "مودېمنى دەسلەپلەشتۈرۈش مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:359
+#: ../panels/network/panel-common.c:361
 msgid "Failed to select the specified APN"
 msgstr "كۆرسىتىلگەن APN نى تاللاش مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:363
+#: ../panels/network/panel-common.c:365
 msgid "Not searching for networks"
 msgstr "تورنى ئىزدىمىدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:367
+#: ../panels/network/panel-common.c:369
 msgid "Network registration denied"
 msgstr "تورغا خەتلىتىش رەت قىلىندى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:371
+#: ../panels/network/panel-common.c:373
 msgid "Network registration timed out"
 msgstr "تورغا خەتلىتىشنىڭ قەرەلى توشتى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:375
+#: ../panels/network/panel-common.c:377
 msgid "Failed to register with the requested network"
 msgstr "تەلەپ قىلىنغان تورغا خەتلىتىش مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:379
+#: ../panels/network/panel-common.c:381
 msgid "PIN check failed"
 msgstr "PIN تەكشۈرۈش مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:383
+#: ../panels/network/panel-common.c:385
 msgid "Firmware for the device may be missing"
 msgstr "مەزكۇر ئۈسكۈنىنىڭ مۇقىم دېتالى يوقتەك قىلىدۇ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:387
+#: ../panels/network/panel-common.c:389
 msgid "Connection disappeared"
 msgstr "باغلىنىش غايىب بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:391
+#: ../panels/network/panel-common.c:393
 msgid "Carrier/link changed"
 msgstr "Carrier/ئۇلىنىش ئۆزگەرتىلدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:395
+#: ../panels/network/panel-common.c:397
 msgid "Existing connection was assumed"
 msgstr "مەۋجۇت باغلىنىش دەپ قارايدۇ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:399
+#: ../panels/network/panel-common.c:401
 msgid "Modem not found"
 msgstr "مودېم تېپىلمىدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:403
+#: ../panels/network/panel-common.c:405
 msgid "Bluetooth connection failed"
 msgstr "كۆكچىش باغلىنىشى مەغلۇپ بولدى"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:407
+#: ../panels/network/panel-common.c:409
 msgid "SIM Card not inserted"
 msgstr "SIM كارتىسى سېلىنمىغان"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:411
+#: ../panels/network/panel-common.c:413
 msgid "SIM Pin required"
 msgstr "SIM نىڭ Pin نومۇرى زۆرۈر"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:415
+#: ../panels/network/panel-common.c:417
 msgid "SIM Puk required"
 msgstr "SIM نىڭ Puk ئى زۆرۈر"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:419
+#: ../panels/network/panel-common.c:421
 msgid "SIM wrong"
 msgstr "SIM خاتا"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:423
+#: ../panels/network/panel-common.c:425
 msgid "InfiniBand device does not support connected mode"
 msgstr "InfiniBand ئۈسكۈنىسى باغلىنىش ھالىتىنى قوللىمايدۇ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:427
+#: ../panels/network/panel-common.c:429
 msgid "Connection dependency failed"
 msgstr "باغلىنىشقا كېرەكلىك ئۈسكۈنە تەييار بولمىدى"
 
+#: ../panels/network/wireless-security/eap-method-fast.c:261
+#: ../panels/network/wireless-security/eap-method-peap.c:280
+msgid "GTC"
+msgstr "GTC"
+
+#: ../panels/network/wireless-security/eap-method-fast.c:277
+#: ../panels/network/wireless-security/eap-method-peap.c:246
+#: ../panels/network/wireless-security/eap-method-ttls.c:263
+msgid "MSCHAPv2"
+msgstr "MSCHAPv2"
+
+#: ../panels/network/wireless-security/eap-method-fast.c:399
+#| msgid "Choose a Folder"
+msgid "Choose a PAC file..."
+msgstr "PAC ھۆججىتىنى تاللاڭ…"
+
+#: ../panels/network/wireless-security/eap-method-fast.c:406
+msgid "PAC files (*.pac)"
+msgstr "PAC ھۆججەتلىرى(*.pac)"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:2
+#| msgid "All files"
+msgid "PAC _file"
+msgstr "PAC ھۆججىتى(_F)"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:3
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:7
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
+#| msgid "Authentication failed"
+msgid "_Inner authentication"
+msgstr "ئىچكى ئىسپات(_I)"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:4
+msgid "PAC pro_visioning"
+msgstr ""
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:5
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:1
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:1
+#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:1
+#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:1
+#: ../panels/printers/jobs-dialog.ui.h:1
+#: ../panels/printers/options-dialog.ui.h:1
+#: ../panels/printers/ppd-selection-dialog.ui.h:1
+msgid " "
+msgstr " "
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:6
+msgid "Anonymous"
+msgstr "ئاتسىز"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:7
+#| msgid "Authentication failed"
+msgid "Authenticated"
+msgstr "سالاھىيىتى دەلىللەنگەن"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:8
+msgid "Both"
+msgstr "ئىككىلىسى"
+
+#: ../panels/network/wireless-security/eap-method-leap.ui.h:1
+#: ../panels/network/wireless-security/eap-method-simple.ui.h:1
+#: ../panels/network/wireless-security/ws-leap.ui.h:1
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
+msgid "_Username"
+msgstr "ئىشلەتكۈچى ئاتى(_U)"
+
+#: ../panels/network/wireless-security/eap-method-leap.ui.h:3
+#: ../panels/network/wireless-security/eap-method-simple.ui.h:4
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:6
+#: ../panels/network/wireless-security/ws-leap.ui.h:3
+#: ../panels/network/wireless-security/ws-wpa-psk.ui.h:3
+#| msgid "_Show password"
+msgid "Sho_w password"
+msgstr "ئىمنى كۆرسەت(_W)"
+
+#: ../panels/network/wireless-security/eap-method-peap.c:263
+#: ../panels/network/wireless-security/wireless-security.c:385
+#| msgid "D55"
+msgid "MD5"
+msgstr "MD5"
+
+#: ../panels/network/wireless-security/eap-method-peap.c:350
+#: ../panels/network/wireless-security/eap-method-tls.c:434
+#: ../panels/network/wireless-security/eap-method-ttls.c:350
+msgid "Choose a Certificate Authority certificate..."
+msgstr "بىر گۇۋاھنامە تەكشۈرۈش گۇۋاھنامىسى تاللا..."
+
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:3
+#| msgid "Version %s"
+msgid "Version 0"
+msgstr "نەشرى 0"
+
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:4
+#| msgid "Version %s"
+msgid "Version 1"
+msgstr "نەشرى 1"
+
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:6
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:3
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:3
+msgid "C_A certificate"
+msgstr "C_A گۇۋاھنامىسى"
+
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:8
+msgid "PEAP _version"
+msgstr "PEAP نەشرى(_V)"
+
+#: ../panels/network/wireless-security/eap-method-simple.ui.h:3
+msgid "As_k for this password every time"
+msgstr "بۇ ئىمنى ھەر ۋاقىت سورىسۇن(_K)"
+
+#: ../panels/network/wireless-security/eap-method-tls.c:260
+msgid "Unencrypted private keys are insecure"
+msgstr "شىفىرلانمىغان شەخسىي ئاچقۇچلار بىخەتەر ئەمەس"
+
+#: ../panels/network/wireless-security/eap-method-tls.c:263
+msgid ""
+"The selected private key does not appear to be protected by a password.  "
+"This could allow your security credentials to be compromised.  Please select "
+"a password-protected private key.\n"
+"\n"
+"(You can password-protect your private key with openssl)"
+msgstr "تاللىغان شەخسىي ئاچقۇچ بىر ئىم تەرىپىدىن قوغدالمىغاندەك قىلىدۇ. بۇ سىزنىڭ بىخەتەرلىك ئىسپاتنامىڭىزگە تەسىر قىلىدۇ. بىر ئىم تاللاپ شەخسىي ئاچقۇچىڭىزنى قوغداڭ.(شەخسىي ئاچقۇچىڭىزنى openssl ئارقىلىق ئىملىق قوغدىيالايسىز)"
+
+#: ../panels/network/wireless-security/eap-method-tls.c:428
+msgid "Choose your personal certificate..."
+msgstr "خۇسۇسىي گۇۋاھنامىڭىزنى تاللاڭ..."
+
+#: ../panels/network/wireless-security/eap-method-tls.c:440
+msgid "Choose your private key..."
+msgstr "شەخسىي ئاچقۇچىڭىزنى تاللاڭ:"
+
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:1
+msgid "I_dentity"
+msgstr "كىملىك(_I)"
+
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:2
+msgid "_User certificate"
+msgstr "ئىشلەتكۈچى ئىسپاتنامىسى(_U)"
+
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:4
+#| msgid "Privacy"
+msgid "Private _key"
+msgstr "شەخسىي ئاچقۇچ(_K)"
+
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:5
+#| msgid "_Generate a password"
+msgid "_Private key password"
+msgstr "شەخسىي ئاچقۇچ ئىمى(_P)"
+
+#: ../panels/network/wireless-security/eap-method-ttls.c:230
+#| msgid "WPA"
+msgid "PAP"
+msgstr "PAP"
+
+#: ../panels/network/wireless-security/eap-method-ttls.c:247
+msgid "MSCHAP"
+msgstr "MSCHAP"
+
+#: ../panels/network/wireless-security/eap-method-ttls.c:280
+msgid "CHAP"
+msgstr "CHAP"
+
+#: ../panels/network/wireless-security/eap-method.c:275
+msgid "No Certificate Authority certificate chosen"
+msgstr "گۇۋاھنامە تارقاتقان ئورگان گۇۋاھنامىسىنى تاللىمىدى"
+
+#: ../panels/network/wireless-security/eap-method.c:276
+msgid ""
+"Not using a Certificate Authority (CA) certificate can result in connections "
+"to insecure, rogue Wi-Fi networks.  Would you like to choose a Certificate "
+"Authority certificate?"
+msgstr "تەكشۈرۈش مەركىزى(CA)نىڭ گۇۋاھنامىسىنى ئىشلەتمەسلىك بىخەتەر بولمىغان، مۈجمەل سىمسىز تورغا(Wi-Fi) باغلاپ قويۇشى مۇمكىن. تەكشۈرۈش مەركىزىنىڭ گۇۋاھنامىسىنى تاللاشنى ئىستەمسىز؟"
+
+#: ../panels/network/wireless-security/eap-method.c:281
+#| msgid "_Ignore Hosts"
+msgid "Ignore"
+msgstr "پەرۋا قىلما"
+
+#: ../panels/network/wireless-security/eap-method.c:285
+msgid "Choose CA Certificate"
+msgstr "CA گۇۋاھنامىسى تاللا"
+
+#: ../panels/network/wireless-security/eap-method.c:645
+msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
+msgstr "DER، PEM ياكى PKCS#12 شەخسىي ئاچقۇچلار(*.der، *.pem،*.p12)"
+
+#: ../panels/network/wireless-security/eap-method.c:648
+msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
+msgstr "DER ياكى PEM گۇۋاھنامىسى(der.*، pem.*، crt.*، cer.*)"
+
+#: ../panels/network/wireless-security/nag-user-dialog.ui.h:1
+msgid "Don't _warn me again"
+msgstr "مېنى يەنە ئاگاھلاندۇرما(_W)"
+
+#: ../panels/network/wireless-security/wireless-security.c:397
+msgid "TLS"
+msgstr "TLS"
+
+#: ../panels/network/wireless-security/wireless-security.c:421
+msgid "FAST"
+msgstr "FAST"
+
+#: ../panels/network/wireless-security/wireless-security.c:432
+msgid "Tunneled TLS"
+msgstr "تونىل TLS"
+
+#: ../panels/network/wireless-security/wireless-security.c:443
+msgid "Protected EAP (PEAP)"
+msgstr "قوغدىلىدىغان EAP (PEAP)"
+
+#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:2
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:9
+#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:2
+#| msgid "Authentication failed"
+msgid "Au_thentication"
+msgstr "كىملىك دەلىللەش(_T)"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:1
+#| msgid "Default"
+msgid "1 (Default)"
+msgstr "1 (كۆڭۈلدىكى)"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:2
+msgid "2"
+msgstr "2"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:3
+msgid "3"
+msgstr "3"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
+msgid "4"
+msgstr "4"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:5
+#| msgid "System"
+msgid "Open System"
+msgstr "ئوچۇق سىستېما"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:6
+#| msgid "Shared Folders"
+msgid "Shared Key"
+msgstr "ھەمبەھىرلەنگەن ئاچقۇچ"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:7
+msgid "_Key"
+msgstr "ئاچقۇچ(_K)"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:8
+msgid "Sho_w key"
+msgstr "ئاچقۇچنى كۆرسەت(_W)"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:10
+msgid "WEP inde_x"
+msgstr "WEP ئىندېكسى(_X)"
+
+#: ../panels/network/wireless-security/ws-wpa-psk.ui.h:2
+#| msgid "_Type:"
+msgid "_Type"
+msgstr "تىپى(_T)"
+
 #. TRANSLATORS: this is the per application switch for message tray usage.
-#: ../panels/notifications/cc-edit-dialog.c:38
+#: ../panels/notifications/cc-edit-dialog.c:39
 msgctxt "notifications"
 msgid "Notifications"
 msgstr "ئۇقتۇرۇشلار"
 
 #. TRANSLATORS: this is the setting to configure sounds associated with notifications
-#: ../panels/notifications/cc-edit-dialog.c:40
+#: ../panels/notifications/cc-edit-dialog.c:41
 msgctxt "notifications"
 msgid "Sound Alerts"
-msgstr ""
+msgstr "ئاۋازلىق ئۇقتۇرۇشلار"
 
-#: ../panels/notifications/cc-edit-dialog.c:41
+#: ../panels/notifications/cc-edit-dialog.c:42
 msgctxt "notifications"
 msgid "Show Popup Banners"
 msgstr ""
 
 #. TRANSLATORS: banners here refers to message tray notifications in the middle of the screen
-#: ../panels/notifications/cc-edit-dialog.c:43
+#: ../panels/notifications/cc-edit-dialog.c:44
 msgctxt "notifications"
 msgid "Show Details in Banners"
 msgstr ""
 
-#: ../panels/notifications/cc-edit-dialog.c:44
+#: ../panels/notifications/cc-edit-dialog.c:45
 msgctxt "notifications"
 msgid "View in Lock Screen"
 msgstr ""
 
-#: ../panels/notifications/cc-edit-dialog.c:45
+#: ../panels/notifications/cc-edit-dialog.c:46
 msgctxt "notifications"
 msgid "Show Details in Lock Screen"
 msgstr ""
 
 #: ../panels/notifications/cc-notifications-panel.c:203
-#: ../panels/power/cc-power-panel.c:1557 ../panels/power/cc-power-panel.c:1564
-#: ../panels/privacy/cc-privacy-panel.c:77
-#: ../panels/privacy/cc-privacy-panel.c:144
+#: ../panels/power/cc-power-panel.c:1628 ../panels/power/cc-power-panel.c:1635
+#: ../panels/privacy/cc-privacy-panel.c:78
+#: ../panels/privacy/cc-privacy-panel.c:145
 msgid "On"
 msgstr "ئوچۇق"
 
 #: ../panels/notifications/cc-notifications-panel.c:203
-#: ../panels/power/cc-power-panel.c:1551 ../panels/power/cc-power-panel.c:1562
-#: ../panels/privacy/cc-privacy-panel.c:77
-#: ../panels/privacy/cc-privacy-panel.c:144
+#: ../panels/power/cc-power-panel.c:1622 ../panels/power/cc-power-panel.c:1633
+#: ../panels/privacy/cc-privacy-panel.c:78
+#: ../panels/privacy/cc-privacy-panel.c:145
 msgid "Off"
 msgstr "تاقا"
 
@@ -2654,7 +3464,7 @@ msgid "Show in Lock Screen"
 msgstr ""
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:253
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "ھېسابات قوشۇش"
@@ -2722,17 +3532,17 @@ msgid ""
 "contacts, calendar, chat and more."
 msgstr "تور ھېساباتى قوشۇلسا، پروگرامما تور ھېساباتىنىڭ پۈتۈكلىرىنى، ئېلخەت، ئالاقەداش، يىلنامە، سۆھبەت ۋە باشقىلارنى زىيارەت قىلالايدۇ."
 
-#: ../panels/power/cc-power-panel.c:177
+#: ../panels/power/cc-power-panel.c:184
 msgid "Unknown time"
 msgstr "نامەلۇم"
 
-#: ../panels/power/cc-power-panel.c:183
+#: ../panels/power/cc-power-panel.c:190
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i مىنۇت"
 
-#: ../panels/power/cc-power-panel.c:195
+#: ../panels/power/cc-power-panel.c:202
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -2740,217 +3550,218 @@ msgstr[0] "%i سائەت"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:203
+#: ../panels/power/cc-power-panel.c:210
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:204
+#: ../panels/power/cc-power-panel.c:211
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "سائەت"
 
-#: ../panels/power/cc-power-panel.c:205
+#: ../panels/power/cc-power-panel.c:212
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "مىنۇت"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:224
+#: ../panels/power/cc-power-panel.c:231
 #, c-format
 msgid "%s until fully charged"
 msgstr "تولۇق توكلىنىشقا %s بار"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:231
+#: ../panels/power/cc-power-panel.c:238
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "دىققەت: قالغىنى %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:236
+#: ../panels/power/cc-power-panel.c:243
 #, c-format
 msgid "%s remaining"
 msgstr "قالغىنى %s"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:241 ../panels/power/cc-power-panel.c:269
+#: ../panels/power/cc-power-panel.c:248 ../panels/power/cc-power-panel.c:276
 msgid "Fully charged"
 msgstr "تولۇق توكلاندى"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:245 ../panels/power/cc-power-panel.c:273
+#: ../panels/power/cc-power-panel.c:252 ../panels/power/cc-power-panel.c:280
 msgid "Empty"
 msgstr "بوش"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:260
+#: ../panels/power/cc-power-panel.c:267
 msgid "Charging"
 msgstr "توكلاۋاتىدۇ"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:265
+#: ../panels/power/cc-power-panel.c:272
 msgid "Discharging"
 msgstr "توكسىزلاۋاتىدۇ"
 
-#: ../panels/power/cc-power-panel.c:317
+#: ../panels/power/cc-power-panel.c:324
 #, c-format
 msgid "Estimated battery capacity: %s"
 msgstr "توكداننىڭ تەخمىنىي سىغىمى: %s"
 
-#: ../panels/power/cc-power-panel.c:393
+#: ../panels/power/cc-power-panel.c:400
 msgctxt "Battery name"
 msgid "Main"
 msgstr "ئاساس"
 
-#: ../panels/power/cc-power-panel.c:395
+#: ../panels/power/cc-power-panel.c:402
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "قوشۇمچە"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:477
+#: ../panels/power/cc-power-panel.c:484
 msgid "Wireless mouse"
 msgstr "سىمسىز چاشقىنەك"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:481
+#: ../panels/power/cc-power-panel.c:488
 msgid "Wireless keyboard"
 msgstr "سىمسىز ھەرپتاختا"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:485
+#: ../panels/power/cc-power-panel.c:492
 msgid "Uninterruptible power supply"
 msgstr "ئۈزۈلمەس توك مەنبەسى"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:490
+#: ../panels/power/cc-power-panel.c:497
 msgid "Personal digital assistant"
 msgstr "شەخسىي رەقەملىك ياردەمچى"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:494
+#: ../panels/power/cc-power-panel.c:501
 msgid "Cellphone"
 msgstr "يانفون"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:498
+#: ../panels/power/cc-power-panel.c:505
 msgid "Media player"
 msgstr "ۋاسىتە قويغۇ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:502
+#: ../panels/power/cc-power-panel.c:509
 msgid "Tablet"
 msgstr "سەزگۈر تاختا"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:506
+#: ../panels/power/cc-power-panel.c:513
 msgid "Computer"
 msgstr "كومپيۇتېر"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:510 ../panels/power/cc-power-panel.c:718
-#: ../panels/power/cc-power-panel.c:1844
+#: ../panels/power/cc-power-panel.c:517 ../panels/power/cc-power-panel.c:725
+#: ../panels/power/cc-power-panel.c:1929
 msgid "Battery"
 msgstr "توكدان"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:519
+#: ../panels/power/cc-power-panel.c:526
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "توكلاۋاتىدۇ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:526
+#: ../panels/power/cc-power-panel.c:533
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "دىققەت"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:531
+#: ../panels/power/cc-power-panel.c:538
 msgctxt "Battery power"
 msgid "Low"
 msgstr "تۆۋەن"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:536
+#: ../panels/power/cc-power-panel.c:543
 msgctxt "Battery power"
 msgid "Good"
 msgstr "ياخشى"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:541
+#: ../panels/power/cc-power-panel.c:548
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "تولۇق توكلاندى"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:545
+#: ../panels/power/cc-power-panel.c:552
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "بوش"
 
-#: ../panels/power/cc-power-panel.c:716
+#: ../panels/power/cc-power-panel.c:723
 msgid "Batteries"
 msgstr "توكدانلار"
 
-#: ../panels/power/cc-power-panel.c:1058
+#: ../panels/power/cc-power-panel.c:1065
 msgid "When _idle"
 msgstr "بوش ۋاقىتتا(_I)"
 
-#: ../panels/power/cc-power-panel.c:1324
+#: ../panels/power/cc-power-panel.c:1392
 msgid "Power Saving"
 msgstr "توك تېجەش"
 
-#: ../panels/power/cc-power-panel.c:1351
+#: ../panels/power/cc-power-panel.c:1421
 msgid "_Screen Brightness"
 msgstr "ئېكران يورۇقلۇقى(_S)"
 
-#: ../panels/power/cc-power-panel.c:1378
-msgid "Dim Screen when Inactive"
+#: ../panels/power/cc-power-panel.c:1449
+#| msgid "_Turn screen off when inactive for:"
+msgid "_Dim Screen when Inactive"
 msgstr ""
 
-#: ../panels/power/cc-power-panel.c:1401
-msgid "Mark As Inactive After"
+#: ../panels/power/cc-power-panel.c:1472
+msgid "_Mark As Inactive After"
 msgstr ""
 
-#: ../panels/power/cc-power-panel.c:1436
+#: ../panels/power/cc-power-panel.c:1507
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: ../panels/power/cc-power-panel.c:1464
+#: ../panels/power/cc-power-panel.c:1535
 msgid "_Mobile Broadband"
 msgstr "كۆچمە كەڭ بەلۋاغ(_M)"
 
-#: ../panels/power/cc-power-panel.c:1502
+#: ../panels/power/cc-power-panel.c:1573
 msgid "_Bluetooth"
 msgstr "كۆكچىش(_B)"
 
-#: ../panels/power/cc-power-panel.c:1553
+#: ../panels/power/cc-power-panel.c:1624
 msgid "When on battery power"
 msgstr "توكداندا ئىشلەۋاتقاندا"
 
-#: ../panels/power/cc-power-panel.c:1555
+#: ../panels/power/cc-power-panel.c:1626
 msgid "When plugged in"
 msgstr "توك مەنبەسى ئۇلانغاندا"
 
-#: ../panels/power/cc-power-panel.c:1673
+#: ../panels/power/cc-power-panel.c:1753
 msgid "Suspend & Power Off"
 msgstr "توڭلات ۋە توكنى ئۈز"
 
-#: ../panels/power/cc-power-panel.c:1702
+#: ../panels/power/cc-power-panel.c:1784
 msgid "_Automatic Suspend"
 msgstr "ئاپتوماتىك توڭلات(_A)"
 
-#: ../panels/power/cc-power-panel.c:1722
+#: ../panels/power/cc-power-panel.c:1806
 msgid "When Battery Power is _Critical"
 msgstr "توكداننىڭ توكى تۆۋەنلەپ خەتەرلىك ھالەتكە كەلگەندە(_C)"
 
-#: ../panels/power/cc-power-panel.c:1754
+#: ../panels/power/cc-power-panel.c:1839
 msgid "Power Off"
 msgstr "توكنى ئۈز"
 
-#: ../panels/power/cc-power-panel.c:1894
+#: ../panels/power/cc-power-panel.c:1981
 msgid "Devices"
 msgstr "ئۈسكۈنىلەر"
 
@@ -2964,7 +3775,6 @@ msgstr "توك مەنبە باشقۇرۇش تەڭشىكى"
 
 #. Translators: those are keywords for the power control-center panel
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
-#| msgid "Power;Sleep;Suspend;Hibernate;Battery;"
 msgid ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
 msgstr "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
@@ -2996,10 +3806,6 @@ msgstr "%1 مىنۇت"
 #: ../panels/power/power.ui.h:8 ../panels/privacy/privacy.ui.h:4
 msgid "2 minutes"
 msgstr "2 مىنۇت"
-
-#: ../panels/power/power.ui.h:9
-msgid "Never"
-msgstr "ھەرگىز"
 
 #: ../panels/power/power.ui.h:10
 msgid "Automatic Suspend"
@@ -3123,7 +3929,7 @@ msgstr "تەييار"
 #: ../panels/printers/cc-printers-panel.c:797
 msgctxt "printer state"
 msgid "Does not accept jobs"
-msgstr ""
+msgstr "ۋەزىپىنى قوبۇل قىلمايدۇ"
 
 #. Translators: Printer's state (jobs are processing)
 #: ../panels/printers/cc-printers-panel.c:802
@@ -3205,7 +4011,7 @@ msgstr "سىناق بەت"
 #: ../panels/printers/cc-printers-panel.c:2923
 #, c-format
 msgid "Could not load ui: %s"
-msgstr "كۆرۈنمەيۈز ئوقۇيالمىدى: %s"
+msgstr "كۆرۈنمەيۈزنى ئوقۇغىلى بولمىدى: %s"
 
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:1
 msgid "Printers"
@@ -3219,12 +4025,6 @@ msgstr "پرىنتېر تەڭشىكىنى ئۆزگەرت"
 #: ../panels/printers/gnome-printers-panel.desktop.in.in.h:4
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "پرىنتېر؛ئۆچىرەت؛بېسىش؛قەغەز؛سىياھ؛كۇكۇن؛"
-
-#: ../panels/printers/jobs-dialog.ui.h:1
-#: ../panels/printers/options-dialog.ui.h:1
-#: ../panels/printers/ppd-selection-dialog.ui.h:1
-msgid " "
-msgstr " "
 
 #: ../panels/printers/jobs-dialog.ui.h:2
 #: ../panels/printers/options-dialog.ui.h:4
@@ -3248,11 +4048,6 @@ msgstr "بېسىشنى ۋاقىتلىق توختىتىش"
 #: ../panels/printers/jobs-dialog.ui.h:7
 msgid "Cancel Print Job"
 msgstr "بېسىشتىن ۋاز كېچىش"
-
-#: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1068
-msgid "_Add"
-msgstr "قوش(_A)"
 
 #: ../panels/printers/new-printer-dialog.ui.h:3
 msgid "Add a New Printer"
@@ -3593,27 +4388,27 @@ msgid ""
 "doesn't seem to be available."
 msgstr "كەچۈرۈڭ! سىستېما بېسىش مۇلازىمىتىنى ئىشلەتكىلى بولمايدىغاندەك تۇرىدۇ."
 
-#: ../panels/privacy/cc-privacy-panel.c:104
+#: ../panels/privacy/cc-privacy-panel.c:105
 msgid "Hidden"
 msgstr "يوشۇرۇن"
 
-#: ../panels/privacy/cc-privacy-panel.c:104
+#: ../panels/privacy/cc-privacy-panel.c:105
 msgid "Visible"
 msgstr "كۆرۈنۈشچان"
 
-#: ../panels/privacy/cc-privacy-panel.c:270 ../panels/privacy/privacy.ui.h:32
+#: ../panels/privacy/cc-privacy-panel.c:271 ../panels/privacy/privacy.ui.h:32
 msgid "Screen Lock"
 msgstr "ئېكران قۇلۇپلاش"
 
-#: ../panels/privacy/cc-privacy-panel.c:337 ../panels/privacy/privacy.ui.h:9
+#: ../panels/privacy/cc-privacy-panel.c:338 ../panels/privacy/privacy.ui.h:9
 msgid "Name & Visibility"
 msgstr "ئاتى ۋە كۆرۈنۈشچانلىقى"
 
-#: ../panels/privacy/cc-privacy-panel.c:445 ../panels/privacy/privacy.ui.h:27
+#: ../panels/privacy/cc-privacy-panel.c:446 ../panels/privacy/privacy.ui.h:27
 msgid "Usage & History"
 msgstr "ئىشلىتىلىش ئەھۋالى ۋە ئىز"
 
-#: ../panels/privacy/cc-privacy-panel.c:575 ../panels/privacy/privacy.ui.h:37
+#: ../panels/privacy/cc-privacy-panel.c:576 ../panels/privacy/privacy.ui.h:37
 msgid "Purge Trash & Temporary Files"
 msgstr "ئەخلەتخانىنى پاكىزلاش ۋە ۋاقىتلىق ھۆججەتلەر"
 
@@ -3646,15 +4441,15 @@ msgstr "3 مىنۇت"
 
 #: ../panels/privacy/privacy.ui.h:11
 msgid "Control how you appear on the screen and the network."
-msgstr ""
+msgstr "ئېكران ۋە توردا قانداق كۆرۈنىدىغانلىقىنى تىزگىنلەيدۇ"
 
 #: ../panels/privacy/privacy.ui.h:12
 msgid "Display _full name in top bar"
-msgstr ""
+msgstr "ئۇستى بالداقتا تولۇق ئاتىنى كۆرسەتسۇن(_F)"
 
 #: ../panels/privacy/privacy.ui.h:13
 msgid "Display full name in _lock screen"
-msgstr ""
+msgstr "قۇلۇپلانغان ئېكراندا تولۇق ئاتىنى كۆرسەتسۇن(_F)"
 
 #: ../panels/privacy/privacy.ui.h:14
 msgid "_Stealth Mode"
@@ -3702,7 +4497,7 @@ msgstr "30 كۈن"
 
 #: ../panels/privacy/privacy.ui.h:25
 msgid "Don't retain history"
-msgstr ""
+msgstr "ئىزلارنى ساقلىما"
 
 #: ../panels/privacy/privacy.ui.h:26
 msgid "Forever"
@@ -3712,7 +4507,7 @@ msgstr "مەڭگۈ"
 msgid ""
 "Remembering your history makes things easier to find again. These items are "
 "never shared over the network."
-msgstr ""
+msgstr "ئىزلارنى ساقلاپ قويۇپ كېيىن ئىزدەشكە قۇلايلىق يارىتىدۇ. بۇلار توردا ھەرگىز ھەمبەھىرلەنمەيدۇ."
 
 #: ../panels/privacy/privacy.ui.h:29
 msgid "Cl_ear Recent History"
@@ -3724,11 +4519,11 @@ msgstr "يېقىندا ئىشلىتىلگەنلىرى(_R)"
 
 #: ../panels/privacy/privacy.ui.h:31
 msgid "Retain _History"
-msgstr ""
+msgstr "ئىزلارنى ساقلاپ قوي(_H)"
 
 #: ../panels/privacy/privacy.ui.h:33
 msgid "The Screen Lock protects your privacy when you are away."
-msgstr ""
+msgstr "ئېكران قۇلۇپلاش — سىز ئورنىڭىزدا يوق ۋاقىتتا سىزنىڭ شەخسىيىتىڭىزنى قوغدايدۇ."
 
 #: ../panels/privacy/privacy.ui.h:34
 msgid "Automatic Screen _Lock"
@@ -3754,7 +4549,7 @@ msgstr "ۋاقىتلىق ھۆججەتلەرنى تازىلا(_F)"
 msgid ""
 "Automatically purge the Trash and temporary files to help keep your computer "
 "free of unnecessary sensitive information."
-msgstr ""
+msgstr "ئەخلەتخانىنى ۋە ۋاقىتلىق ھۆججەتلەرنى تازىلاپ كومپيۇتېرىڭىزنى مۇھىم ئۇچۇرلاردىن خالىي قىلىپ تۇرىدۇ."
 
 #: ../panels/privacy/privacy.ui.h:41
 msgid "Automatically Empty _Trash"
@@ -3782,21 +4577,25 @@ msgid "Language;Layout;Keyboard;Input;"
 msgstr "Language؛Layout؛Keyboard؛Input؛تىل؛ھەرپتاختا؛كىرگۈزۈش؛"
 
 #: ../panels/region/gnome-region-panel-formats.c:144
+#| msgid "Imperial"
+msgctxt "measurement format"
 msgid "Imperial"
 msgstr "ئىمپېرىئال"
 
 #: ../panels/region/gnome-region-panel-formats.c:146
+#| msgid "Metric"
+msgctxt "measurement format"
 msgid "Metric"
 msgstr "مېترىك"
 
 #: ../panels/region/gnome-region-panel-input-chooser.ui.h:1
 msgid "Select an input source"
-msgstr ""
+msgstr "كىرگۈزۈش مەنبەسىنى تاللاڭ"
 
 #: ../panels/region/gnome-region-panel-lang.c:115
 #: ../panels/region/gnome-region-panel.ui.h:4
 msgid "Log out for changes to take effect"
-msgstr ""
+msgstr "ئۆزگىرىشلەرنى ئىناۋەتلىك قىلىش ئۈچۈن چىقىپ كەت"
 
 #: ../panels/region/gnome-region-panel-system.c:471
 msgid ""
@@ -4009,21 +4808,21 @@ msgstr "پەسكە"
 msgid "Preferences"
 msgstr "مايىللىق"
 
-#: ../panels/sharing/cc-sharing-panel.c:200
+#: ../panels/sharing/cc-sharing-panel.c:220
 msgctxt "service is enabled"
 msgid "On"
 msgstr "ئوچۇق"
 
-#: ../panels/sharing/cc-sharing-panel.c:202
+#: ../panels/sharing/cc-sharing-panel.c:222
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "تاقا"
 
-#: ../panels/sharing/cc-sharing-panel.c:310
+#: ../panels/sharing/cc-sharing-panel.c:362
 msgid "Choose a Folder"
 msgstr "قىسقۇچ تاللاڭ"
 
-#: ../panels/sharing/cc-sharing-panel.c:488
+#: ../panels/sharing/cc-sharing-panel.c:540
 msgid "Copy"
 msgstr "كۆچۈر"
 
@@ -4039,50 +4838,46 @@ msgid ""
 msgstr "share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;audio;video;pictures;photos;movies;server;renderer;"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
-#| msgid "Enable h_orizontal scrolling"
 msgid "Enable or disable remote login"
-msgstr ""
+msgstr "يىراقتىن كىرىشنى ئىناۋەتلىك ۋە ئىناۋەتسىز قىلىدۇ"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:2
-#| msgid "Authentication is required to change user data"
 msgid "Authentication is required to enable or disable remote login"
-msgstr ""
+msgstr "يىراقتىن كىرىشنى ئىناۋەتلىك ۋە ئىناۋەتسىز قىلىش ئۈچۈن سالاھىيەت دەلىللەش زۆرۈردۇر"
 
 #: ../panels/sharing/sharing.ui.h:1
 msgid "Bluetooth Sharing"
-msgstr ""
+msgstr "كۆكچىشتا ھەمبەھىرلەش"
 
 #: ../panels/sharing/sharing.ui.h:2
 msgid ""
 "Bluetooth Sharing allows you to share files with other Bluetooth enabled "
 "devices"
-msgstr ""
+msgstr "كۆكچىشتا ھەمبەھىرلەش — ھۆججەتلەرنى كۆكچىش بار ئۈسكۈنىلەر ئارىسىدا ھەمبەھىرلەشكە ئىمكان يارىتىدۇ."
 
 #: ../panels/sharing/sharing.ui.h:3
-#| msgid "Shared Folders"
 msgid "Share Public Folder"
-msgstr ""
+msgstr "ئاممىۋى قىسقۇچنى ھەمبەھىرلە"
 
 #: ../panels/sharing/sharing.ui.h:4
 msgid "Only Receive From Trusted Devices"
-msgstr ""
+msgstr "ئىشەنچلىك ئۈسكۈنىلەردىنلا قوبۇل قىلسۇن"
 
 #: ../panels/sharing/sharing.ui.h:5
 msgid "Save Received Files to Downloads Folder"
-msgstr ""
+msgstr "قوبۇل قىلغان ھۆججەتلەرنى چۈشۈرۈلمىلەر قىسقۇچىغا ساقلىسۇن"
 
 #: ../panels/sharing/sharing.ui.h:6
 msgid "Only share with Trusted Devices"
-msgstr ""
+msgstr "ئىشەنچلىك ئۈسكۈنىلەر بىلەنلا ھەمبەھىر قىلسۇن"
 
 #: ../panels/sharing/sharing.ui.h:7
-#| msgid "Computer"
 msgid "Computer Name"
 msgstr "كومپيۇتېر ئاتى"
 
 #: ../panels/sharing/sharing.ui.h:8
 msgid "Some services are disabled because of no network access."
-msgstr ""
+msgstr "تور بولمىغاچقا بىر قىسىم مۇلازىمەتلەر ئىناۋەتسىز قىلىندى."
 
 #: ../panels/sharing/sharing.ui.h:9
 msgid "Media Sharing"
@@ -4090,11 +4885,11 @@ msgstr "ۋاسىتە ھەمبەھىرلەش"
 
 #: ../panels/sharing/sharing.ui.h:10
 msgid "Share Music, Photos and Videos with others on the current network."
-msgstr ""
+msgstr "مەزكۇر توردا مۇزىكا، سۈرەت ۋە سىنلارنى باشقىلار بىلەن ھەمبەھىر قىلىپ ئىشلىتىدۇ."
 
 #: ../panels/sharing/sharing.ui.h:11
 msgid "Share Media On This Network"
-msgstr ""
+msgstr "مەزكۇر توردا ۋاسىتىلەرنى ھەمبەھىر قىلسۇن"
 
 #: ../panels/sharing/sharing.ui.h:12
 msgid "Shared Folders"
@@ -4125,7 +4920,7 @@ msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:19
 msgid "Share Public Folder On This Network"
-msgstr ""
+msgstr "مەزكۇر توردا ئاممىۋى قىسقۇچنى ھەمبەھىر قىلسۇن"
 
 #: ../panels/sharing/sharing.ui.h:20
 msgid "Require Password"
@@ -4144,35 +4939,33 @@ msgstr "يىراقتىن كىرىش"
 msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
-msgstr ""
+msgstr "يىرىقتىكى ئىشلەتكۈچىنىڭ بىخەتەر Shell بۇيرۇقىنى ئىشلىتىپ باغلىنىشىغا ئىجازەت بېرىدۇ:\n"
+"a href=\"ssh %s\">ssh %s</a>"
 
 #: ../panels/sharing/sharing.ui.h:26
 msgid "Screen Sharing"
-msgstr ""
+msgstr "ئېكراننى ھەمبەھىر قىلىش"
 
 #: ../panels/sharing/sharing.ui.h:28
 #, no-c-format
 msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
 "\"vnc://%s\">vnc://%s</a>"
-msgstr ""
+msgstr "يىرىقتىكى ئىشلەتكۈچىنىڭ باغلىنىپ ئېكراننى تىزگىنلىشىگە ئىجازەت بېرىدۇ: <a href=\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:29
-#| msgid "Remote Login"
 msgid "Remote View"
-msgstr ""
+msgstr "يىراقتا كۆرۈش"
 
 #: ../panels/sharing/sharing.ui.h:30
-#| msgid "Volume Control"
 msgid "Remote Control"
-msgstr ""
+msgstr "يىراقتا تىزگىنلەش"
 
 #: ../panels/sharing/sharing.ui.h:31
 msgid "Approve All Connections"
-msgstr ""
+msgstr "ھەممە باغلىنىشنى قوبۇل قىلسۇن"
 
 #: ../panels/sharing/sharing.ui.h:32
-#| msgid "_Show password"
 msgid "Show Password"
 msgstr "ئىم كۆرسەت"
 
@@ -4272,7 +5065,7 @@ msgstr "سەپلىمە ھۆججەت(_P):"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc/gvc-mixer-control.c:1835
+#: ../panels/sound/gvc/gvc-mixer-control.c:1837
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -4280,13 +5073,13 @@ msgstr[0] "%u چىقىرىلما"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc/gvc-mixer-control.c:1845
+#: ../panels/sound/gvc/gvc-mixer-control.c:1847
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u كىرگۈزۈلمە"
 
-#: ../panels/sound/gvc/gvc-mixer-control.c:2369
+#: ../panels/sound/gvc/gvc-mixer-control.c:2371
 msgid "System Sounds"
 msgstr "سىستېما ئاۋازى"
 
@@ -4454,10 +5247,6 @@ msgstr "GOK"
 #: ../panels/universal-access/uap.ui.h:7
 msgid "OnBoard"
 msgstr "تاختىدىكى"
-
-#: ../panels/universal-access/uap.ui.h:8
-msgid "None"
-msgstr "يوق"
 
 #: ../panels/universal-access/uap.ui.h:10
 #, no-c-format
@@ -4672,7 +5461,7 @@ msgstr "چاشقىنەك كۇنۇپكىلىرى"
 
 #: ../panels/universal-access/uap.ui.h:68
 msgid "Control the pointer using the keypad"
-msgstr "نۇر بەلگىنى كۇنۇپكا تاختىدا تىزگىنلىسۇن"
+msgstr "نۇربەلگىنى كۇنۇپكا تاختىدا تىزگىنلىسۇن"
 
 #: ../panels/universal-access/uap.ui.h:69
 msgid "Video Mouse"
@@ -4680,7 +5469,7 @@ msgstr "سىن چاشقىنەك"
 
 #: ../panels/universal-access/uap.ui.h:70
 msgid "Control the pointer using the video camera."
-msgstr "نۇر بەلگىنى سىن كامېرادا تىزگىنلەيدۇ."
+msgstr "نۇربەلگىنى سىن كامېرادا تىزگىنلەيدۇ."
 
 #: ../panels/universal-access/uap.ui.h:71
 msgid "Simulated Secondary Click"
@@ -4787,7 +5576,7 @@ msgstr "چوڭايتىش:"
 
 #: ../panels/universal-access/zoom-options.ui.h:9
 msgid "Follow mouse cursor"
-msgstr "چاشقىنەك نۇر بەلگىگە ئەگىشىش"
+msgstr "چاشقىنەك نۇربەلگىگە ئەگىشىش"
 
 #: ../panels/universal-access/zoom-options.ui.h:10
 msgid "Screen part:"
@@ -4803,11 +5592,11 @@ msgstr "چوڭايتقۇچنى ئوتتۇرىغا توغرىلايدۇ"
 
 #: ../panels/universal-access/zoom-options.ui.h:13
 msgid "Magnifier cursor pushes contents around"
-msgstr "چوڭايتقۇچ نۇر بەلگىسى مەزمۇنلارنى ئەتراپقا ئىتتىرىدۇ"
+msgstr "چوڭايتقۇچ نۇربەلگىسى مەزمۇنلارنى ئەتراپقا ئىتتىرىدۇ"
 
 #: ../panels/universal-access/zoom-options.ui.h:14
 msgid "Magnifier cursor moves with contents"
-msgstr "چوڭايتقۇچ نۇر بەلگىسى مەزمۇنغا ئەگىشىپ يۆتكىلىدۇ"
+msgstr "چوڭايتقۇچ نۇربەلگىسى مەزمۇنغا ئەگىشىپ يۆتكىلىدۇ"
 
 #: ../panels/universal-access/zoom-options.ui.h:15
 msgid "Magnifier Position:"
@@ -4845,7 +5634,7 @@ msgstr "كرېست:"
 
 #: ../panels/universal-access/zoom-options.ui.h:23
 msgid "Overlaps mouse cursor"
-msgstr "چاشقىنەك نۇر بەلگىسىنى قەۋەتلەيدۇ"
+msgstr "چاشقىنەك نۇربەلگىسىنى قەۋەتلەيدۇ"
 
 #: ../panels/universal-access/zoom-options.ui.h:24
 msgid "Crosshairs"
@@ -4917,10 +5706,6 @@ msgstr "يەرلىك ھېسابات(_L)"
 msgid "_Enterprise Login"
 msgstr "شىركەت ھېساباتى(_E)"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:6
-msgid "_Username"
-msgstr "ئىشلەتكۈچى ئاتى(_U)"
-
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
 msgid "_Full name"
 msgstr "تولۇق ئاتى(_F):"
@@ -4937,11 +5722,6 @@ msgstr "دائىرە(_D)"
 #: ../panels/user-accounts/data/account-dialog.ui.h:10
 msgid "_Login Name"
 msgstr "كىرىش ئاتى(_L)"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:11
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
-msgid "_Password"
-msgstr "ئىم(_P)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:12
 msgid "Tip: Enterprise domain or realm name"
@@ -5173,10 +5953,6 @@ msgstr "تىل(_L)"
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
 msgid "Last Login"
 msgstr "ئەڭ ئاخىرقى قېتىم كىرگەن ۋاقىت"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
-msgid "History"
-msgstr "ئىز"
 
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
@@ -5422,7 +6198,7 @@ msgstr "ئىم خاتا"
 
 #: ../panels/user-accounts/um-photo-dialog.c:443
 msgid "Disable image"
-msgstr "سۈرەتنى چەكلە"
+msgstr "سۈرەتنى ئىناۋەتسىز قىل"
 
 #: ../panels/user-accounts/um-photo-dialog.c:461
 msgid "Take a photo…"
@@ -5588,14 +6364,6 @@ msgstr "ئىشلەتكۈچى ئاتىنىڭ تەركىبىدە بولىدىغى�
 "  ئىنگلىزچە ئېلىپبەدىكى ھەرپلەر ➣\n"
 "  رەقەملەر ➣ \n"
 "  \"-\" خالىغان ھەرپ \".\"، \"_\"  ۋە ➣"
-
-#: ../panels/user-accounts/um-utils.c:770
-msgid "Today"
-msgstr "بۈگۈن"
-
-#: ../panels/user-accounts/um-utils.c:773
-msgid "Yesterday"
-msgstr "تۈنۈگۈن"
 
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
@@ -5935,7 +6703,7 @@ msgstr "%s\n"
 
 #: ../shell/control-center.c:133
 msgid "Available panels:"
-msgstr ""
+msgstr "ئىشلەتكىلى بولىدىغان تاختىلار:"
 
 #: ../shell/control-center.c:244
 msgid "Help"
@@ -5946,17 +6714,17 @@ msgid "Quit"
 msgstr "ئاخىرلاشتۇر"
 
 #. Add categories
-#: ../shell/gnome-control-center.c:881
+#: ../shell/gnome-control-center.c:887
 msgctxt "category"
 msgid "Personal"
 msgstr "شەخسىي"
 
-#: ../shell/gnome-control-center.c:882
+#: ../shell/gnome-control-center.c:888
 msgctxt "category"
 msgid "Hardware"
 msgstr "قاتتىق دېتال"
 
-#: ../shell/gnome-control-center.c:883
+#: ../shell/gnome-control-center.c:889
 msgctxt "category"
 msgid "System"
 msgstr "سىستېما"
@@ -5977,8 +6745,23 @@ msgstr "مايىللىق;تەڭشەكلەر;"
 msgid "All Settings"
 msgstr "بارلىق تەڭشەكلەر"
 
-#~ msgid "Cannot remove automatically added profile"
-#~ msgstr "ئۆزلۈكىدىن قوشۇلغان سەپلىمە ھۆججەتنى چىقىرىۋېتەلمەيدۇ"
+#~ msgid "Out of range"
+#~ msgstr "دائىرە سىرتىدا"
+
+#~ msgid "_Configure…"
+#~ msgstr "سەپلە(_C)…"
+
+#~ msgid "_Disconnect"
+#~ msgstr "ئۈز(_D)"
+
+#~ msgid "_Connect"
+#~ msgstr "باغلا(_C)"
+
+#~ msgid "_Settings…"
+#~ msgstr "تەڭشەكلەر(_S)…"
+
+#~ msgid "Disconnected"
+#~ msgstr "ئۈزۈلدى"
 
 #~ msgid "No profile"
 #~ msgstr "سەپلىمە ھۆججەت يوق"
@@ -6211,9 +6994,6 @@ msgstr "بارلىق تەڭشەكلەر"
 #~ msgid "_Dim screen to save power"
 #~ msgstr "ئېكراننى تۇتۇقلاشتۇرۇپ توك تېجىسۇن(_D)"
 
-#~ msgid "_Turn screen off when inactive for:"
-#~ msgstr "كۆرسىتىلگەن ۋاقىتچىلىك پاسسىپ تۇرسا ئېكراننى تاقا(_T):"
-
 #~ msgid "Don't lock when at home"
 #~ msgstr "ئۆيدىكى چاغدا قۇلۇپلىمىسۇن"
 
@@ -6261,9 +7041,6 @@ msgstr "بارلىق تەڭشەكلەر"
 
 #~ msgid "Browse for more pictures..."
 #~ msgstr "تېخىمۇ كۆپ رەسىمگە كۆز يۈگۈرت…"
-
-#~ msgid "A user with name '%s' already exists."
-#~ msgstr "‹%s› ئاتلىق ئىشلەتكۈچىدىن بىرى مەۋجۇت"
 
 #~| msgid "A user with the username '%s' already exists"
 #~ msgid "No user with the name '%s' exists."
@@ -6732,10 +7509,6 @@ msgstr "بارلىق تەڭشەكلەر"
 #~ msgstr ""
 #~ "سىستېما تاكتىكىسى ئۆزگەرتىشنى چەكلىگەن.\n"
 #~ "سىستېما باشقۇرغۇچىڭىز بىلەن ئالاقىلىشىڭ"
-
-#~ msgid "%u byte"
-#~ msgid_plural "%u bytes"
-#~ msgstr[0] "%u بايت"
 
 #~ msgid "%.1f KB"
 #~ msgstr "%.1f KB"
