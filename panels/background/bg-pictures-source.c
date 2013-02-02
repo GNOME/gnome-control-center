@@ -35,7 +35,8 @@ G_DEFINE_TYPE (BgPicturesSource, bg_pictures_source, BG_TYPE_SOURCE)
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), BG_TYPE_PICTURES_SOURCE, BgPicturesSourcePrivate))
 
 #define ATTRIBUTES G_FILE_ATTRIBUTE_STANDARD_NAME "," \
-	G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE
+	G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE "," \
+        G_FILE_ATTRIBUTE_TIME_MODIFIED
 
 struct _BgPicturesSourcePrivate
 {
@@ -136,36 +137,6 @@ bg_pictures_source_class_init (BgPicturesSourceClass *klass)
   object_class->finalize = bg_pictures_source_finalize;
 }
 
-static int
-sort_func (GtkTreeModel *model,
-           GtkTreeIter *a,
-           GtkTreeIter *b,
-           BgPicturesSource *bg_source)
-{
-  CcBackgroundItem *item_a;
-  CcBackgroundItem *item_b;
-  guint64 modified_a;
-  guint64 modified_b;
-  int retval;
-
-  gtk_tree_model_get (model, a,
-                      1, &item_a,
-                      -1);
-  gtk_tree_model_get (model, b,
-                      1, &item_b,
-                      -1);
-
-  modified_a = cc_background_item_get_modified (item_a);
-  modified_b = cc_background_item_get_modified (item_b);
-
-  retval = modified_b - modified_a;
-
-  g_object_unref (item_a);
-  g_object_unref (item_b);
-
-  return retval;
-}
-
 static void
 picture_scaled (GObject *source_object,
                 GAsyncResult *res,
@@ -197,16 +168,6 @@ picture_scaled (GObject *source_object,
   store = bg_source_get_liststore (BG_SOURCE (bg_source));
   item = g_object_get_data (source_object, "item");
 
-  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (store),
-                                   1,
-                                   (GtkTreeIterCompareFunc)sort_func,
-                                   bg_source,
-                                   NULL);
-
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store),
-                                        1,
-                                        GTK_SORT_ASCENDING);
-
   /* Ignore screenshots */
   software = gdk_pixbuf_get_option (pixbuf, "tEXt::Software");
   if (software != NULL &&
@@ -222,7 +183,7 @@ picture_scaled (GObject *source_object,
   cc_background_item_load (item, NULL);
 
   /* insert the item into the liststore */
-  gtk_list_store_insert_with_values (store, &iter, 0,
+  gtk_list_store_insert_with_values (store, &iter, -1,
                                      0, pixbuf,
                                      1, item,
                                      -1);
@@ -317,6 +278,7 @@ add_single_file (BgPicturesSource *bg_source,
   const gchar *content_type;
   CcBackgroundItem *item;
   char *uri;
+  guint64 mtime;
 
   /* find png and jpeg files */
   content_type = g_file_info_get_content_type (info);
@@ -328,17 +290,21 @@ add_single_file (BgPicturesSource *bg_source,
 
   /* create a new CcBackgroundItem */
   uri = g_file_get_uri (file);
+  mtime = g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_TIME_MODIFIED);
+
   item = cc_background_item_new (uri);
   g_free (uri);
   g_object_set (G_OBJECT (item),
 		"flags", CC_BACKGROUND_ITEM_HAS_URI | CC_BACKGROUND_ITEM_HAS_SHADING,
 		"shading", G_DESKTOP_BACKGROUND_SHADING_SOLID,
 		"placement", G_DESKTOP_BACKGROUND_STYLE_ZOOM,
+                "modified", mtime,
 		NULL);
   if (source_uri != NULL)
     g_object_set (G_OBJECT (item), "source-url", source_uri, NULL);
 
   g_object_set_data (G_OBJECT (file), "item", item);
+
   g_file_read_async (file, G_PRIORITY_DEFAULT,
                      bg_source->priv->cancellable,
                      picture_opened_for_read, bg_source);
@@ -408,6 +374,21 @@ bg_pictures_source_remove (BgPicturesSource *bg_source,
   return retval;
 }
 
+static int
+file_sort_func (gconstpointer a,
+                gconstpointer b)
+{
+  GFileInfo *file_a = G_FILE_INFO (a);
+  GFileInfo *file_b = G_FILE_INFO (b);
+  guint64 modified_a, modified_b;
+
+  modified_a = g_file_info_get_attribute_uint64 (file_a, G_FILE_ATTRIBUTE_TIME_MODIFIED);
+
+  modified_b = g_file_info_get_attribute_uint64 (file_b, G_FILE_ATTRIBUTE_TIME_MODIFIED);
+
+  return modified_b - modified_a;
+}
+
 static void
 file_info_async_ready (GObject      *source,
                        GAsyncResult *res,
@@ -417,10 +398,10 @@ file_info_async_ready (GObject      *source,
   GList *files, *l;
   GError *err = NULL;
   GFile *parent;
+
   files = g_file_enumerator_next_files_finish (G_FILE_ENUMERATOR (source),
                                                res,
                                                &err);
-
   if (err)
     {
       g_warning ("Could not get pictures file information: %s", err->message);
@@ -432,6 +413,8 @@ file_info_async_ready (GObject      *source,
     }
 
   parent = g_file_enumerator_get_container (G_FILE_ENUMERATOR (source));
+
+  files = g_list_sort (files, file_sort_func);
 
   /* iterate over the available files */
   for (l = files; l; l = g_list_next (l))
@@ -534,6 +517,36 @@ bg_pictures_source_is_known (BgPicturesSource *bg_source,
   return retval;
 }
 
+static int
+sort_func (GtkTreeModel *model,
+           GtkTreeIter *a,
+           GtkTreeIter *b,
+           BgPicturesSource *bg_source)
+{
+  CcBackgroundItem *item_a;
+  CcBackgroundItem *item_b;
+  guint64 modified_a;
+  guint64 modified_b;
+  int retval;
+
+  gtk_tree_model_get (model, a,
+                      1, &item_a,
+                      -1);
+  gtk_tree_model_get (model, b,
+                      1, &item_b,
+                      -1);
+
+  modified_a = cc_background_item_get_modified (item_a);
+  modified_b = cc_background_item_get_modified (item_b);
+
+  retval = modified_b - modified_a;
+
+  g_object_unref (item_a);
+  g_object_unref (item_b);
+
+  return retval;
+}
+
 static void
 bg_pictures_source_init (BgPicturesSource *self)
 {
@@ -541,6 +554,7 @@ bg_pictures_source_init (BgPicturesSource *self)
   BgPicturesSourcePrivate *priv;
   GFile *dir;
   char *cache_path;
+  GtkListStore *store;
 
   priv = self->priv = PICTURES_SOURCE_PRIVATE (self);
 
@@ -570,6 +584,18 @@ bg_pictures_source_init (BgPicturesSource *self)
 
   priv->thumb_factory =
     gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
+
+  store = bg_source_get_liststore (BG_SOURCE (self));
+
+  gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (store),
+                                   1,
+                                   (GtkTreeIterCompareFunc)sort_func,
+                                   self,
+                                   NULL);
+
+  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store),
+                                        1,
+                                        GTK_SORT_ASCENDING);
 }
 
 BgPicturesSource *
