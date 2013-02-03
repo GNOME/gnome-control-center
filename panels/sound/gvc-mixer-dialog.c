@@ -1115,14 +1115,12 @@ add_input_ui_entry (GvcMixerDialog *dialog,
         GtkTreeModel        *model;
         GtkTreeIter          iter;
         GIcon               *icon;
-        GvcMixerCard        *card;
 
         g_debug ("Add input ui entry with id :%u",
                   gvc_mixer_ui_device_get_id (input));
 
         g_object_get (G_OBJECT (input),
                      "stream-id", &stream_id,
-                     "card", &card,
                      "origin", &origin,
                      "description", &description,
                      "port-name", &port_name,
@@ -1138,7 +1136,9 @@ add_input_ui_entry (GvcMixerDialog *dialog,
         g_free (origin);
         g_free (description);
 
-        if (card == NULL) {
+        icon = gvc_mixer_ui_device_get_gicon (input);
+
+        if (icon == NULL) {
                 GvcMixerStream *stream;
                 g_debug ("just detected a network source");
                 stream = gvc_mixer_control_get_stream_from_device (dialog->priv->mixer_control, input);
@@ -1148,9 +1148,7 @@ add_input_ui_entry (GvcMixerDialog *dialog,
                         return;
                 }
                 icon = gvc_mixer_stream_get_gicon (stream);
-        } else
-                icon = gvc_mixer_card_get_gicon (card);
-
+        }
 
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->input_treeview));
         gtk_list_store_append (GTK_LIST_STORE (model), &iter);
@@ -1182,14 +1180,12 @@ add_output_ui_entry (GvcMixerDialog   *dialog,
         GtkTreeModel  *model;
         GtkTreeIter    iter;
         GIcon         *icon;
-        GvcMixerCard  *card;
 
         g_debug ("Add output ui entry with id :%u",
                   gvc_mixer_ui_device_get_id (output));
 
         g_object_get (G_OBJECT (output),
                      "stream-id", &sink_stream_id,
-                     "card", &card,
                      "origin", &origin,
                      "description", &description,
                      "port-name", &sink_port_name,
@@ -1205,7 +1201,9 @@ add_output_ui_entry (GvcMixerDialog   *dialog,
         g_free (origin);
         g_free (description);
 
-        if (card == NULL) {
+        icon = gvc_mixer_ui_device_get_gicon (output);
+
+        if (icon == NULL) {
                 GvcMixerStream *stream;
 
                 g_debug ("just detected a network sink");
@@ -1217,8 +1215,7 @@ add_output_ui_entry (GvcMixerDialog   *dialog,
                         return;
                 }
                 icon = gvc_mixer_stream_get_gicon (stream);
-        } else
-                icon = gvc_mixer_card_get_gicon (card);
+        }
 
         model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->priv->output_treeview));
         gtk_list_store_append (GTK_LIST_STORE (model), &iter);
