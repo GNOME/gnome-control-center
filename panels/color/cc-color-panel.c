@@ -690,6 +690,7 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
   GPtrArray *profile_array = NULL;
   GtkTreeIter iter;
   GtkListStore *list_store;
+  GtkWidget *widget;
   guint i;
   CcColorPanelPrivate *priv = prefs->priv;
 
@@ -703,6 +704,10 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
                                    GCM_PREFS_COMBO_COLUMN_TEXT,
                                    gcm_prefs_combo_sort_func_cb,
                                    list_store, NULL);
+
+  widget = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
+                                               "label_assign_warning"));
+  gtk_widget_hide (widget);
 
   /* get profiles */
   profile_array = cd_client_get_profiles_sync (priv->client,
