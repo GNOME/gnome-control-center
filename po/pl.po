@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-31 19:32+0100\n"
-"PO-Revision-Date: 2013-01-31 19:33+0100\n"
+"POT-Creation-Date: 2013-02-03 05:17+0100\n"
+"PO-Revision-Date: 2013-02-03 05:18+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -2023,7 +2023,7 @@ msgstr[2] "%i dni temu"
 #. Translators: network device speed
 #: ../panels/network/connection-editor/ce-page-details.c:155
 #: ../panels/network/net-device-ethernet.c:54
-#: ../panels/network/net-device-mobile.c:277
+#: ../panels/network/net-device-mobile.c:278
 #: ../panels/network/net-device-wifi.c:538
 #, c-format
 msgid "%d Mb/s"
@@ -2190,7 +2190,7 @@ msgstr "Prędkość połączenia"
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:159
 #: ../panels/network/network-simple.ui.h:2
-#: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:641
+#: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:643
 msgid "IPv4 Address"
 msgstr "Adres IPv4"
 
@@ -2199,7 +2199,7 @@ msgstr "Adres IPv4"
 #: ../panels/network/net-device-ethernet.c:164
 #: ../panels/network/network-mobile.ui.h:4
 #: ../panels/network/network-simple.ui.h:3
-#: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:642
+#: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:644
 msgid "IPv6 Address"
 msgstr "Adres IPv6"
 
@@ -2518,7 +2518,7 @@ msgstr "wczoraj"
 
 #: ../panels/network/net-device-ethernet.c:162
 #: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:644 ../panels/network/panel-common.c:646
+#: ../panels/network/panel-common.c:646 ../panels/network/panel-common.c:648
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "Adres IP"
@@ -2528,7 +2528,7 @@ msgstr "Adres IP"
 msgid "Last used"
 msgstr "Ostatnio użyta"
 
-#: ../panels/network/net-device-ethernet.c:474
+#: ../panels/network/net-device-ethernet.c:477
 #, c-format
 msgid "Profile %d"
 msgstr "Profil %d"
@@ -2606,12 +2606,6 @@ msgstr "Nie jest zalecane dla niezaufanych sieci publicznych."
 #: ../panels/network/net-proxy.c:406
 msgid "Proxy"
 msgstr "Pośrednik"
-
-#. TRANSLATORS: device status
-#: ../panels/network/net-virtual-device.c:182
-#: ../panels/network/panel-common.c:170
-msgid "Disconnected"
-msgstr "Rozłączone"
 
 #: ../panels/network/network-ethernet.ui.h:1
 msgid "_Add Profile…"
@@ -2896,7 +2890,7 @@ msgstr "Infrastruktura"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:152 ../panels/network/panel-common.c:213
+#: ../panels/network/panel-common.c:152 ../panels/network/panel-common.c:215
 msgid "Status unknown"
 msgstr "Stan nieznany"
 
@@ -2905,271 +2899,274 @@ msgstr "Stan nieznany"
 msgid "Unmanaged"
 msgstr "Niezarządzane"
 
+#. TRANSLATORS: device status
 #: ../panels/network/panel-common.c:161
 msgid "Firmware missing"
 msgstr "Brak oprogramowania sprzętowego"
 
-#: ../panels/network/panel-common.c:164
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:165
 msgid "Cable unplugged"
 msgstr "Kabel jest niepodłączony"
 
-#: ../panels/network/panel-common.c:166
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:168
 msgid "Unavailable"
 msgstr "Niedostępne"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:177 ../panels/network/panel-common.c:219
+#: ../panels/network/panel-common.c:179 ../panels/network/panel-common.c:221
 msgid "Connecting"
 msgstr "Łączenie"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:181 ../panels/network/panel-common.c:223
+#: ../panels/network/panel-common.c:183 ../panels/network/panel-common.c:225
 msgid "Authentication required"
 msgstr "Wymagane jest uwierzytelnienie"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:185 ../panels/network/panel-common.c:227
+#: ../panels/network/panel-common.c:187 ../panels/network/panel-common.c:229
 msgid "Connected"
 msgstr "Połączone"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:189
+#: ../panels/network/panel-common.c:191
 msgid "Disconnecting"
 msgstr "Rozłączanie"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:193 ../panels/network/panel-common.c:231
+#: ../panels/network/panel-common.c:195 ../panels/network/panel-common.c:233
 msgid "Connection failed"
 msgstr "Połączenie się nie powiodło"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:197 ../panels/network/panel-common.c:239
+#: ../panels/network/panel-common.c:199 ../panels/network/panel-common.c:241
 msgid "Status unknown (missing)"
 msgstr "Stan nieznany (brak)"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:235
+#: ../panels/network/panel-common.c:237
 msgid "Not connected"
 msgstr "Nie połączone"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:259
+#: ../panels/network/panel-common.c:261
 msgid "Configuration failed"
 msgstr "Konfiguracja się nie powiodła"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:263
+#: ../panels/network/panel-common.c:265
 msgid "IP configuration failed"
 msgstr "Konfiguracja adresu IP się nie powiodła"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:267
+#: ../panels/network/panel-common.c:269
 msgid "IP configuration expired"
 msgstr "Konfiguracja adresu IP wygasła"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:271
+#: ../panels/network/panel-common.c:273
 msgid "Secrets were required, but not provided"
 msgstr "Wymagane są hasła, których nie podano"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:275
+#: ../panels/network/panel-common.c:277
 msgid "802.1x supplicant disconnected"
 msgstr "Suplikant 802.1x się rozłączył"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:279
+#: ../panels/network/panel-common.c:281
 msgid "802.1x supplicant configuration failed"
 msgstr "Konfiguracja suplikanta 802.1x się nie powiodła"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:283
+#: ../panels/network/panel-common.c:285
 msgid "802.1x supplicant failed"
 msgstr "Suplikant 802.1x się nie powiódł"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:287
+#: ../panels/network/panel-common.c:289
 msgid "802.1x supplicant took too long to authenticate"
 msgstr "Suplikant 802.1x za długo się uwierzytelniał"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:291
+#: ../panels/network/panel-common.c:293
 msgid "PPP service failed to start"
 msgstr "Uruchomienie usługi PPP się nie powiodło"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:295
+#: ../panels/network/panel-common.c:297
 msgid "PPP service disconnected"
 msgstr "Usługa PPP została rozłączona"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:299
+#: ../panels/network/panel-common.c:301
 msgid "PPP failed"
 msgstr "Usługa PPP się nie powiodła"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:303
+#: ../panels/network/panel-common.c:305
 msgid "DHCP client failed to start"
 msgstr "Uruchomienie klienta DHCP się nie powiodło"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:307
+#: ../panels/network/panel-common.c:309
 msgid "DHCP client error"
 msgstr "Błąd klienta DHCP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:311
+#: ../panels/network/panel-common.c:313
 msgid "DHCP client failed"
 msgstr "Klient DHCP się nie powiódł"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:315
+#: ../panels/network/panel-common.c:317
 msgid "Shared connection service failed to start"
 msgstr "Uruchomienie usługi współdzielonego połączenie się nie powiodło"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:319
+#: ../panels/network/panel-common.c:321
 msgid "Shared connection service failed"
 msgstr "Usługa współdzielonego połączenia się nie powiodła"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:323
+#: ../panels/network/panel-common.c:325
 msgid "AutoIP service failed to start"
 msgstr ""
 "Uruchomienie usługi automatycznego wykrywania adresu IP się nie powiodło"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:327
+#: ../panels/network/panel-common.c:329
 msgid "AutoIP service error"
 msgstr "Błąd usługi automatycznego wykrywania adresu IP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:331
+#: ../panels/network/panel-common.c:333
 msgid "AutoIP service failed"
 msgstr "Usługa automatycznego wykrywania adresu IP się nie powiodła"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:335
+#: ../panels/network/panel-common.c:337
 msgid "Line busy"
 msgstr "Linia jest zajęta"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:339
+#: ../panels/network/panel-common.c:341
 msgid "No dial tone"
 msgstr "Brak wybierania tonowego"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:343
+#: ../panels/network/panel-common.c:345
 msgid "No carrier could be established"
 msgstr "Nie można ustanowić żadnego operatora"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:347
+#: ../panels/network/panel-common.c:349
 msgid "Dialing request timed out"
 msgstr "Żądanie wdzwonienia przekroczyło czas oczekiwania"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:351
+#: ../panels/network/panel-common.c:353
 msgid "Dialing attempt failed"
 msgstr "Próba wdzwonienia się nie powiodła"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:355
+#: ../panels/network/panel-common.c:357
 msgid "Modem initialization failed"
 msgstr "Zainicjowanie modemu się nie powiodło"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:359
+#: ../panels/network/panel-common.c:361
 msgid "Failed to select the specified APN"
 msgstr "Wybranie podanego APN się nie powiodło"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:363
+#: ../panels/network/panel-common.c:365
 msgid "Not searching for networks"
 msgstr "Sieci nie są wyszukiwane"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:367
+#: ../panels/network/panel-common.c:369
 msgid "Network registration denied"
 msgstr "Odmówiono rejestracji sieci"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:371
+#: ../panels/network/panel-common.c:373
 msgid "Network registration timed out"
 msgstr "Rejestracja sieci przekroczyła czas oczekiwania"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:375
+#: ../panels/network/panel-common.c:377
 msgid "Failed to register with the requested network"
 msgstr "Zarejestrowanie za pomocą żądanej sieci się nie powiodło"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:379
+#: ../panels/network/panel-common.c:381
 msgid "PIN check failed"
 msgstr "Sprawdzenie kodu PIN się nie powiodło"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:383
+#: ../panels/network/panel-common.c:385
 msgid "Firmware for the device may be missing"
 msgstr "Brak oprogramowania sprzętowego urządzenia"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:387
+#: ../panels/network/panel-common.c:389
 msgid "Connection disappeared"
 msgstr "Połączenie zniknęło"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:391
+#: ../panels/network/panel-common.c:393
 msgid "Carrier/link changed"
 msgstr "Operator/linia się zmieniła"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:395
+#: ../panels/network/panel-common.c:397
 msgid "Existing connection was assumed"
 msgstr "Przyjęto istniejące połączenie"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:399
+#: ../panels/network/panel-common.c:401
 msgid "Modem not found"
 msgstr "Nie odnaleziono modemu"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:403
+#: ../panels/network/panel-common.c:405
 msgid "Bluetooth connection failed"
 msgstr "Połączenie Bluetooth się nie powiodło"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:407
+#: ../panels/network/panel-common.c:409
 msgid "SIM Card not inserted"
 msgstr "Nie włożono karty SIM"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:411
+#: ../panels/network/panel-common.c:413
 msgid "SIM Pin required"
 msgstr "Wymagany jest PIN karty SIM"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:415
+#: ../panels/network/panel-common.c:417
 msgid "SIM Puk required"
 msgstr "Wymagany jest kod PUK karty SIM"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:419
+#: ../panels/network/panel-common.c:421
 msgid "SIM wrong"
 msgstr "Błędna karta SIM"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:423
+#: ../panels/network/panel-common.c:425
 msgid "InfiniBand device does not support connected mode"
 msgstr "Urządzenie InfiniBand nie obsługuje trybu połączonego"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:427
+#: ../panels/network/panel-common.c:429
 msgid "Connection dependency failed"
 msgstr "Zależność połączenia się nie powiodła"
 
@@ -5721,7 +5718,7 @@ msgstr "Celownik:"
 
 #: ../panels/universal-access/zoom-options.ui.h:23
 msgid "Overlaps mouse cursor"
-msgstr "Pokrywają się z kursorem myszy"
+msgstr "Pokrywanie kursora myszy"
 
 #: ../panels/universal-access/zoom-options.ui.h:24
 msgid "Crosshairs"
