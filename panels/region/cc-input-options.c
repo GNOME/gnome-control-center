@@ -165,6 +165,7 @@ cc_input_options_new (GtkWidget *parent)
         builder = gtk_builder_new ();
         gtk_builder_add_from_resource (builder, "/org/gnome/control-center/region/input-options.ui", &error);
         if (error) {
+                g_object_unref (builder);
                 g_warning ("failed to load input options: %s", error->message);
                 g_error_free (error);
                 return NULL;
@@ -173,6 +174,7 @@ cc_input_options_new (GtkWidget *parent)
         options = WID ("dialog");
         priv = g_new0 (CcInputOptionsPrivate, 1);
         g_object_set_data_full (G_OBJECT (options), "private", priv, cc_input_options_private_free);
+        g_object_set_data_full (G_OBJECT (options), "builder", builder, g_object_unref);
 
         priv->same_source = WID ("same-source");
         priv->per_window_source = WID ("per-window-source");
