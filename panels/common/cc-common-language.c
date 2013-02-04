@@ -574,55 +574,48 @@ add_other_users_language (GHashTable *ht)
         g_object_unref (proxy);
 }
 
-#define TRANSLATED_LANG(x) g_strdup(dgettext("iso_639", x))
-
 static void
 insert_language (GHashTable *ht,
-		 const char *short_lang,
-		 const char *long_lang,
-		 gboolean    in_iso_639,
-		 const char *lang_label)
+                 const char *lang)
 {
-	const char *lang;
-	char *old_lang;
-	char *label;
-	char *key;
+        gboolean has_translations;
+        char *label_own_lang;
+        char *label_current_lang;
+        char *label_untranslated;
+        char *key;
 
-	if (gnome_language_has_translations (long_lang))
-		lang = long_lang;
-	else if (short_lang != NULL && gnome_language_has_translations (short_lang))
-		lang = short_lang;
-	else {
-		g_warning ("%s lacks translations, why is it default?", long_lang);
-		return;
-	}
+        has_translations = gnome_language_has_translations (lang);
+        if (!has_translations) {
+                char *lang_code = g_strndup (lang, 2);
+                has_translations = gnome_language_has_translations (lang_code);
+                g_free (lang_code);
 
-	g_debug ("We have translations for %s", lang);
+                if (!has_translations)
+                        return;
+        }
 
-	key = g_strdup_printf ("%s.utf8", long_lang);
+        g_debug ("We have translations for %s", lang);
 
-	old_lang = g_strdup (setlocale (LC_MESSAGES, NULL));
-	setlocale (LC_MESSAGES, key);
-	g_debug ("Set new lang '%s' (old lang: %s)", key, old_lang);
-	if (in_iso_639)
-		label = dgettext ("iso_639", lang_label);
-	else
-		label = gettext (lang_label);
-	/* We don't have a translation for lang_label in
-	 * its own language? */
-	if (g_strcmp0 (label, lang_label) == 0 &&
-	    g_str_has_prefix (long_lang, "en_") == FALSE) {
-		g_warning ("No translation for %s in %s, trying in current language", lang_label, key);
-		setlocale (LC_MESSAGES, old_lang);
-		g_debug ("Resetting to old lang '%s'", old_lang);
-		label = _(lang_label);
-		g_hash_table_insert (ht, key, g_strdup (label));
-	} else {
-		g_hash_table_insert (ht, key, g_strdup (label));
-		setlocale (LC_MESSAGES, old_lang);
-		g_debug ("Resetting to old lang '%s'", old_lang);
-	}
-	g_free (old_lang);
+        key = g_strdup_printf ("%s.utf8", lang);
+
+        label_own_lang = gnome_get_language_from_locale (key, key);
+        label_current_lang = gnome_get_language_from_locale (key, NULL);
+        label_untranslated = gnome_get_language_from_locale (key, "C");
+
+        /* We don't have a translation for the label in
+         * its own language? */
+        if (g_strcmp0 (label_own_lang, label_untranslated) == 0) {
+                if (g_strcmp0 (label_current_lang, label_untranslated) == 0)
+                        g_hash_table_insert (ht, key, g_strdup (label_untranslated));
+                else
+                        g_hash_table_insert (ht, key, g_strdup (label_current_lang));
+        } else {
+                g_hash_table_insert (ht, key, g_strdup (label_own_lang));
+        }
+
+        g_free (label_own_lang);
+        g_free (label_current_lang);
+        g_free (label_untranslated);
 }
 
 GHashTable *
@@ -632,18 +625,15 @@ cc_common_language_get_initial_languages (void)
 
         ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
-        /* Add some common languages first,
-         * only the languages not listed in ISO-639 are
-         * marked for translation */
-        insert_language (ht, "en", "en_US", TRUE, "English");
-        insert_language (ht, NULL, "en_GB", FALSE, N_("British English"));
-        insert_language (ht, "de", "de_DE", TRUE, "German");
-        insert_language (ht, "fr", "fr_FR", TRUE, "French");
-        insert_language (ht, "es", "es_ES", FALSE, N_("Spanish"));
-        insert_language (ht, NULL, "zh_CN", FALSE, N_("Chinese (simplified)"));
-        insert_language (ht, "ja", "ja_JP", TRUE, "Japanese");
-        insert_language (ht, "ru", "ru_RU", FALSE, "Russian");
-        insert_language (ht, "ar", "ar_EG", TRUE, "Arabic");
+        insert_language (ht, "en_US");
+        insert_language (ht, "en_GB");
+        insert_language (ht, "de_DE");
+        insert_language (ht, "fr_FR");
+        insert_language (ht, "es_ES");
+        insert_language (ht, "zh_CN");
+        insert_language (ht, "ja_JP");
+        insert_language (ht, "ru_RU");
+        insert_language (ht, "ar_EG");
 
         return ht;
 }
