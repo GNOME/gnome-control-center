@@ -153,7 +153,6 @@ net_virtual_device_refresh (NetObject *object)
         NetVirtualDevice *virtual_device = NET_VIRTUAL_DEVICE (object);
         NetVirtualDevicePrivate *priv = virtual_device->priv;
         char *hwaddr;
-        const char *status, *tooltip;
         GtkWidget *widget;
         NMDevice *nm_device;
         NMDeviceState state;
@@ -174,16 +173,12 @@ net_virtual_device_refresh (NetObject *object)
         update_off_switch_from_device_state (GTK_SWITCH (widget), state, virtual_device);
 
         /* set device state, with status and optionally speed */
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_status"));
         if (nm_device) {
-                status = panel_device_state_to_localized_string (nm_device);
-                tooltip = panel_device_state_reason_to_localized_string (nm_device);
+                panel_set_device_status (priv->builder, "label_status", nm_device, NULL);
         } else {
-                status = "";
-                tooltip = NULL;
+                widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_status"));
+                gtk_label_set_label (GTK_LABEL (widget), "");
         }
-        gtk_label_set_label (GTK_LABEL (widget), status);
-        gtk_widget_set_tooltip_text (widget, tooltip);
 
         /* device MAC */
         if (nm_device) {

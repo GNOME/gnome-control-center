@@ -208,7 +208,6 @@ device_ethernet_refresh_ui (NetDeviceEthernet *device)
         NMDevice *nm_device;
         NMDeviceState state;
         GtkWidget *widget;
-        GString *status;
         gchar *speed = NULL;
 
         nm_device = net_device_get_nm_device (NET_DEVICE (device));
@@ -230,17 +229,9 @@ device_ethernet_refresh_ui (NetDeviceEthernet *device)
         gtk_switch_set_active (GTK_SWITCH (widget), device_state_to_off_switch (state));
         device->updating_device = FALSE;
 
-        widget = GTK_WIDGET (gtk_builder_get_object (device->builder, "label_status"));
-        status = g_string_new (panel_device_state_to_localized_string (nm_device));
         if (state != NM_DEVICE_STATE_UNAVAILABLE)
                 speed = net_device_simple_get_speed (NET_DEVICE_SIMPLE (device));
-        if (speed) {
-                if (status->len)
-                        g_string_append (status, " - ");
-                g_string_append (status, speed);
-        }
-        gtk_label_set_label (GTK_LABEL (widget), status->str);
-        g_string_free (status, TRUE);
+        panel_set_device_status (device->builder, "label_status", nm_device, speed);
 
         populate_ui (device);
 }

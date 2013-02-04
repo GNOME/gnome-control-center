@@ -93,13 +93,12 @@ update_off_switch_from_device_state (GtkSwitch *sw,
 static void
 nm_device_simple_refresh_ui (NetDeviceSimple *device_simple)
 {
+        NetDeviceSimplePrivate *priv = device_simple->priv;
         char *hwaddr;
-        GString *status;
         GtkWidget *widget;
         char *speed = NULL;
         NMDevice *nm_device;
         NMDeviceState state;
-        NetDeviceSimplePrivate *priv = device_simple->priv;
 
         nm_device = net_device_get_nm_device (NET_DEVICE (device_simple));
 
@@ -124,20 +123,9 @@ nm_device_simple_refresh_ui (NetDeviceSimple *device_simple)
         gtk_widget_set_visible (widget, state != NM_DEVICE_STATE_UNMANAGED);
 
         /* set device state, with status and optionally speed */
-        widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_status"));
-        status = g_string_new (panel_device_state_to_localized_string (nm_device));
         if (state != NM_DEVICE_STATE_UNAVAILABLE)
                 speed = net_device_simple_get_speed (device_simple);
-        if (speed) {
-                if (status->len)
-                        g_string_append (status, " - ");
-                g_string_append (status, speed);
-                g_free (speed);
-        }
-        gtk_label_set_label (GTK_LABEL (widget), status->str);
-        g_string_free (status, TRUE);
-        gtk_widget_set_tooltip_text (widget,
-                                     panel_device_state_reason_to_localized_string (nm_device));
+        panel_set_device_status (priv->builder, "label_status", nm_device, speed);
 
         /* device MAC */
         g_object_get (G_OBJECT (nm_device),

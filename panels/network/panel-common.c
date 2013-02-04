@@ -27,6 +27,7 @@
 #include <gtk/gtk.h>
 
 #include <nm-device-ethernet.h>
+#include <nm-device-infiniband.h>
 #include <nm-device-modem.h>
 #include <nm-utils.h>
 
@@ -180,19 +181,11 @@ panel_ap_mode_to_localized_string (NM80211Mode mode)
         return value;
 }
 
-/**
- * panel_device_state_to_localized_string:
- **/
-const gchar *
-panel_device_state_to_localized_string (NMDevice *device)
+static const gchar *
+device_state_to_localized_string (NMDeviceState state)
 {
-        NMDeviceType type;
-        NMDeviceState state;
-
-        type = nm_device_get_device_type (device);
-        state = nm_device_get_state (device);
-
         const gchar *value = NULL;
+
         switch (state) {
         case NM_DEVICE_STATE_UNKNOWN:
                 /* TRANSLATORS: device status */
@@ -203,20 +196,11 @@ panel_device_state_to_localized_string (NMDevice *device)
                 value = _("Unmanaged");
                 break;
         case NM_DEVICE_STATE_UNAVAILABLE:
-                if (nm_device_get_firmware_missing (device)) {
-                        /* TRANSLATORS: device status */
-                        value = _("Firmware missing");
-                } else if (type == NM_DEVICE_TYPE_ETHERNET &&
-                           !nm_device_ethernet_get_carrier (NM_DEVICE_ETHERNET (device))) {
-                        /* TRANSLATORS: device status */
-                        value = _("Cable unplugged");
-                } else {
-                        /* TRANSLATORS: device status */
-                        value = _("Unavailable");
-                }
+                /* TRANSLATORS: device status */
+                value = _("Unavailable");
                 break;
         case NM_DEVICE_STATE_DISCONNECTED:
-                value = "";
+                value = NULL;
                 break;
         case NM_DEVICE_STATE_PREPARE:
         case NM_DEVICE_STATE_CONFIG:
@@ -291,16 +275,17 @@ panel_vpn_state_to_localized_string (NMVPNConnectionState type)
         return value;
 }
 
-/**
- * panel_device_state_reason_to_localized_string:
- **/
-const gchar *
-panel_device_state_reason_to_localized_string (NMDevice *device)
+static const gchar *
+device_state_reason_to_localized_string (NMDevice *device)
 {
         const gchar *value = NULL;
         NMDeviceStateReason state_reason;
 
-        /* we only want the StateReason's we care about */
+        /* This only covers NMDeviceStateReasons that explain why a connection
+         * failed / can't be attempted, and aren't redundant with the state
+         * (eg, NM_DEVICE_STATE_REASON_CARRIER).
+         */
+
         nm_device_get_state_reason (device, &state_reason);
         switch (state_reason) {
         case NM_DEVICE_STATE_REASON_CONFIG_FAILED:
@@ -435,10 +420,6 @@ panel_device_state_reason_to_localized_string (NMDevice *device)
                 /* TRANSLATORS: device status reason */
                 value = _("Connection disappeared");
                 break;
-        case NM_DEVICE_STATE_REASON_CARRIER:
-                /* TRANSLATORS: device status reason */
-                value = _("Carrier/link changed");
-                break;
         case NM_DEVICE_STATE_REASON_CONNECTION_ASSUMED:
                 /* TRANSLATORS: device status reason */
                 value = _("Existing connection was assumed");
@@ -481,6 +462,69 @@ panel_device_state_reason_to_localized_string (NMDevice *device)
                 break;
         }
         return value;
+}
+
+static gchar *
+device_status_to_localized_string (NMDevice *nm_device,
+                                   const gchar *speed)
+{
+        NMDeviceState state;
+        GString *string;
+        const gchar *state_str = NULL, *reason_str = NULL;
+
+        string = g_string_new (NULL);
+
+        state = nm_device_get_state (nm_device);
+        if (state == NM_DEVICE_STATE_UNAVAILABLE) {
+                if (nm_device_get_firmware_missing (nm_device)) {
+                        /* TRANSLATORS: device status */
+                        state_str = _("Firmware missing");
+                } else if (NM_IS_DEVICE_ETHERNET (nm_device) &&
+                           !nm_device_ethernet_get_carrier (NM_DEVICE_ETHERNET (nm_device))) {
+                        /* TRANSLATORS: device status */
+                        state_str = _("Cable unplugged");
+                } else if (NM_IS_DEVICE_INFINIBAND (nm_device) &&
+                           !nm_device_infiniband_get_carrier (NM_DEVICE_INFINIBAND (nm_device))) {
+                        state_str = _("Cable unplugged");
+                }
+        }
+        if (!state_str)
+                state_str = device_state_to_localized_string (state);
+        if (state_str)
+                g_string_append (string, state_str);
+
+        if (state > NM_DEVICE_STATE_UNAVAILABLE && speed) {
+                if (string->len)
+                        g_string_append (string, " - ");
+                g_string_append (string, speed);
+        } else if (state == NM_DEVICE_STATE_UNAVAILABLE ||
+                   state == NM_DEVICE_STATE_DISCONNECTED ||
+                   state == NM_DEVICE_STATE_DEACTIVATING ||
+                   state == NM_DEVICE_STATE_FAILED) {
+                reason_str = device_state_reason_to_localized_string (nm_device);
+                if (*reason_str) {
+                        if (string->len)
+                                g_string_append (string, " - ");
+                        g_string_append (string, reason_str);
+                }
+        }
+
+        return g_string_free (string, FALSE);
+}
+
+void
+panel_set_device_status (GtkBuilder *builder,
+                         const gchar *label_name,
+                         NMDevice *nm_device,
+                         const gchar *speed)
+{
+        GtkLabel *label;
+        gchar *status;
+
+        label = GTK_LABEL (gtk_builder_get_object (builder, label_name));
+        status = device_status_to_localized_string (nm_device, speed);
+        gtk_label_set_label (label, status);
+        g_free (status);
 }
 
 gboolean

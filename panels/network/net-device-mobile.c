@@ -247,10 +247,8 @@ static void
 nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
 {
         gboolean is_connected;
-        GString *status;
         GtkListStore *liststore;
         GtkWidget *widget;
-        guint speed = 0;
         NetDeviceMobilePrivate *priv = device_mobile->priv;
         NMClient *client;
         NMDeviceModemCapabilities caps;
@@ -268,18 +266,8 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *device_mobile)
         client = net_object_get_client (NET_OBJECT (device_mobile));
         mobilebb_enabled_toggled (client, NULL, device_mobile);
 
-        /* set device state, with status and optionally speed */
-        widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->priv->builder, "label_status"));
-        status = g_string_new (panel_device_state_to_localized_string (nm_device));
-        if (speed  > 0) {
-                if (status->len)
-                        g_string_append (status, " - ");
-                /* Translators: network device speed */
-                g_string_append_printf (status, _("%d Mb/s"), speed);
-        }
-        gtk_label_set_label (GTK_LABEL (widget), status->str);
-        g_string_free (status, TRUE);
-        gtk_widget_set_tooltip_text (widget, panel_device_state_reason_to_localized_string (nm_device));
+        /* set device state, with status */
+        panel_set_device_status (device_mobile->priv->builder, "label_status", nm_device, NULL);
 
         /* sensitive for other connection types if the device is currently connected */
         widget = GTK_WIDGET (gtk_builder_get_object (device_mobile->priv->builder,

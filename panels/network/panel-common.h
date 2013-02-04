@@ -35,9 +35,11 @@ const gchar     *panel_device_to_icon_name                     (NMDevice *device
 const gchar     *panel_device_to_localized_string              (NMDevice *device);
 const gchar     *panel_device_to_sortable_string               (NMDevice *device);
 const gchar     *panel_ap_mode_to_localized_string             (NM80211Mode mode);
-const gchar     *panel_device_state_to_localized_string        (NMDevice *device);
 const gchar     *panel_vpn_state_to_localized_string           (NMVPNConnectionState type);
-const gchar     *panel_device_state_reason_to_localized_string (NMDevice *device);
+void             panel_set_device_status                       (GtkBuilder *builder,
+                                                                const gchar *label_name,
+                                                                NMDevice *nm_device,
+                                                                const gchar *speed);
 gboolean         panel_set_device_widget_details               (GtkBuilder *builder,
                                                                 const gchar *widget_suffix,
                                                                 const gchar *value);
