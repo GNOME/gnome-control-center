@@ -1,6 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
  *
  * Copyright (C) 2011-2012 Richard Hughes <richard@hughsie.com>
+ * Copyright (C) 2013 Aleksander Morgado <aleksander@gnu.org>
  *
  * Licensed under the GNU General Public License Version 2
  *
@@ -32,6 +33,8 @@
 #include "panel-common.h"
 #include "network-dialogs.h"
 
+#include <libmm-glib.h>
+
 #include "net-device-mobile.h"
 
 #define NET_DEVICE_MOBILE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), NET_TYPE_DEVICE_MOBILE, NetDeviceMobilePrivate))
@@ -42,13 +45,25 @@ struct _NetDeviceMobilePrivate
 {
         GtkBuilder *builder;
         gboolean    updating_device;
+
+        /* Old MM < 0.7 support */
         GDBusProxy *gsm_proxy;
+
+        /* New MM >= 0.7 support */
+        MMObject   *mm_object;
+        guint       operator_name_updated;
 };
 
 enum {
         COLUMN_ID,
         COLUMN_TITLE,
         COLUMN_LAST
+};
+
+enum {
+        PROP_0,
+        PROP_MODEM_OBJECT,
+        PROP_LAST
 };
 
 G_DEFINE_TYPE (NetDeviceMobile, net_device_mobile, NET_TYPE_DEVICE)
@@ -226,21 +241,63 @@ device_add_device_connections (NetDeviceMobile *device_mobile,
 static void
 device_mobile_refresh_equipment_id (NetDeviceMobile *device_mobile)
 {
-        const char *str;
+        const gchar *equipment_id = NULL;
 
-        str = g_object_get_data (G_OBJECT (device_mobile),
-                                 "ControlCenter::EquipmentIdentifier");
-        panel_set_device_widget_details (device_mobile->priv->builder, "imei", str);
+        if (device_mobile->priv->mm_object != NULL) {
+                MMModem *modem;
+
+                /* Modem interface should always be present */
+                modem = mm_object_peek_modem (device_mobile->priv->mm_object);
+                equipment_id = mm_modem_get_equipment_identifier (modem);
+
+                /* Set equipment ID */
+                if (equipment_id != NULL) {
+                        g_debug ("[%s] Equipment ID set to '%s'",
+                                 mm_object_get_path (device_mobile->priv->mm_object),
+                                 equipment_id);
+                }
+        } else {
+                /* Assume old MM handling */
+                equipment_id = g_object_get_data (G_OBJECT (device_mobile),
+                                                  "ControlCenter::EquipmentIdentifier");
+        }
+
+        panel_set_device_widget_details (device_mobile->priv->builder, "imei", equipment_id);
 }
 
 static void
 device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
 {
-        const char *str;
+        if (device_mobile->priv->mm_object != NULL) {
+                gchar *operator_name = NULL;
+                MMModem3gpp *modem_3gpp;
 
-        str = g_object_get_data (G_OBJECT (device_mobile),
-                                 "ControlCenter::OperatorName");
-        panel_set_device_widget_details (device_mobile->priv->builder, "provider", str);
+                modem_3gpp = mm_object_peek_modem_3gpp (device_mobile->priv->mm_object);
+                if (modem_3gpp != NULL) {
+                        const gchar *operator_name_unsafe;
+
+                        operator_name_unsafe = mm_modem_3gpp_get_operator_name (modem_3gpp);
+                        if (operator_name_unsafe != NULL && operator_name_unsafe[0] != '\0')
+                                operator_name = g_strescape (operator_name_unsafe, NULL);
+                }
+
+                /* Set operator name */
+                if (operator_name != NULL) {
+                        g_debug ("[%s] Operator name set to '%s'",
+                                 mm_object_get_path (device_mobile->priv->mm_object),
+                                 operator_name);
+                }
+
+                panel_set_device_widget_details (device_mobile->priv->builder, "provider", operator_name);
+                g_free (operator_name);
+        } else {
+                const char *str;
+
+                /* Assume old MM handling */
+                str = g_object_get_data (G_OBJECT (device_mobile),
+                                         "ControlCenter::OperatorName");
+                panel_set_device_widget_details (device_mobile->priv->builder, "provider", str);
+        }
 }
 
 static void
@@ -514,11 +571,13 @@ net_device_mobile_constructed (GObject *object)
         device = net_device_get_nm_device (NET_DEVICE (device_mobile));
         cancellable = net_object_get_cancellable (NET_OBJECT (device_mobile));
 
-        /* Only load proxies if we have broadband modems */
         caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
-        if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
-            (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) ||
-            (caps & NM_DEVICE_MODEM_CAPABILITY_LTE)) {
+
+        /* Only load proxies if we have broadband modems of the OLD ModemManager interface */
+        if (g_str_has_prefix (nm_device_get_udi (device), "/org/freedesktop/ModemManager/") &&
+            ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
+             (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) ||
+             (caps & NM_DEVICE_MODEM_CAPABILITY_LTE))) {
                 g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
                                           G_DBUS_PROXY_FLAGS_NONE,
                                           NULL,
@@ -528,15 +587,19 @@ net_device_mobile_constructed (GObject *object)
                                           cancellable,
                                           device_mobile_device_got_modem_manager_cb,
                                           device_mobile);
-                g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
-                                          G_DBUS_PROXY_FLAGS_NONE,
-                                          NULL,
-                                          "org.freedesktop.ModemManager",
-                                          nm_device_get_udi (device),
-                                          "org.freedesktop.ModemManager.Modem.Gsm.Network",
-                                          cancellable,
-                                          device_mobile_device_got_modem_manager_gsm_cb,
-                                          device_mobile);
+
+                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
+                    (caps & NM_DEVICE_MODEM_CAPABILITY_LTE)) {
+                        g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+                                                  G_DBUS_PROXY_FLAGS_NONE,
+                                                  NULL,
+                                                  "org.freedesktop.ModemManager",
+                                                  nm_device_get_udi (device),
+                                                  "org.freedesktop.ModemManager.Modem.Gsm.Network",
+                                                  cancellable,
+                                                  device_mobile_device_got_modem_manager_gsm_cb,
+                                                  device_mobile);
+                }
         }
 
         client = net_object_get_client (NET_OBJECT (device_mobile));
@@ -547,6 +610,75 @@ net_device_mobile_constructed (GObject *object)
 }
 
 static void
+operator_name_updated (MMModem3gpp     *modem_3gpp_iface,
+                       GParamSpec      *pspec,
+                       NetDeviceMobile *self)
+{
+        device_mobile_refresh_operator_name (self);
+}
+
+static void
+net_device_mobile_setup_modem_object (NetDeviceMobile *self)
+{
+        MMModem3gpp *modem_3gpp;
+
+        if (self->priv->mm_object == NULL)
+                return;
+
+        /* Load equipment ID initially */
+        device_mobile_refresh_equipment_id (self);
+
+        /* Follow changes in operator name and load initial values */
+        modem_3gpp = mm_object_peek_modem_3gpp (self->priv->mm_object);
+        if (modem_3gpp != NULL) {
+                g_assert (self->priv->operator_name_updated == 0);
+                self->priv->operator_name_updated = g_signal_connect (modem_3gpp,
+                                                                      "notify::operator-name",
+                                                                      G_CALLBACK (operator_name_updated),
+                                                                      self);
+                device_mobile_refresh_operator_name (self);
+        }
+}
+
+
+static void
+net_device_mobile_get_property (GObject    *device_,
+                                guint       prop_id,
+                                GValue     *value,
+                                GParamSpec *pspec)
+{
+        NetDeviceMobile *self = NET_DEVICE_MOBILE (device_);
+
+        switch (prop_id) {
+        case PROP_MODEM_OBJECT:
+                g_value_set_object (value, self->priv->mm_object);
+                break;
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (self, prop_id, pspec);
+                break;
+        }
+}
+
+static void
+net_device_mobile_set_property (GObject      *device_,
+                                guint         prop_id,
+                                const GValue *value,
+                                GParamSpec   *pspec)
+{
+        NetDeviceMobile *self = NET_DEVICE_MOBILE (device_);
+
+        switch (prop_id) {
+        case PROP_MODEM_OBJECT:
+                self->priv->mm_object = g_value_dup_object (value);
+                net_device_mobile_setup_modem_object (self);
+                break;
+        default:
+                G_OBJECT_WARN_INVALID_PROPERTY_ID (self, prop_id, pspec);
+                break;
+        }
+}
+
+static void
 net_device_mobile_dispose (GObject *object)
 {
         NetDeviceMobile *device_mobile = NET_DEVICE_MOBILE (object);
@@ -554,6 +686,13 @@ net_device_mobile_dispose (GObject *object)
 
         g_clear_object (&priv->builder);
         g_clear_object (&priv->gsm_proxy);
+
+        if (priv->operator_name_updated) {
+                g_assert (priv->mm_object != NULL);
+                g_signal_handler_disconnect (mm_object_peek_modem_3gpp (priv->mm_object), priv->operator_name_updated);
+                priv->operator_name_updated = 0;
+        }
+        g_clear_object (&priv->mm_object);
 
         G_OBJECT_CLASS (net_device_mobile_parent_class)->dispose (object);
 }
@@ -566,9 +705,20 @@ net_device_mobile_class_init (NetDeviceMobileClass *klass)
 
         object_class->dispose = net_device_mobile_dispose;
         object_class->constructed = net_device_mobile_constructed;
+        object_class->get_property = net_device_mobile_get_property;
+        object_class->set_property = net_device_mobile_set_property;
         parent_class->add_to_notebook = device_mobile_proxy_add_to_notebook;
         parent_class->refresh = device_mobile_refresh;
+
         g_type_class_add_private (klass, sizeof (NetDeviceMobilePrivate));
+
+        g_object_class_install_property (object_class,
+                                         PROP_MODEM_OBJECT,
+                                         g_param_spec_object ("mm-object",
+                                                              NULL,
+                                                              NULL,
+                                                              MM_TYPE_OBJECT,
+                                                              G_PARAM_READWRITE));
 }
 
 static void

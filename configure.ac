@@ -101,6 +101,7 @@ POLKIT_REQUIRED_VERSION=0.103
 GSD_REQUIRED_VERSION=3.7.3
 NETWORK_MANAGER_REQUIRED_VERSION=0.9.7.995
 NETWORK_MANAGER_APPLET_REQUIRED_VERSION=0.9.7.995
+MODEM_MANAGER_REQUIRED_VERSION=0.7
 LIBNOTIFY_REQUIRED_VERSION=0.7.3
 GNOME_DESKTOP_REQUIRED_VERSION=3.7.5
 SCHEMAS_REQUIRED_VERSION=3.7.2.2
@@ -183,10 +184,11 @@ PKG_CHECK_MODULES(NETWORK_MANAGER, NetworkManager >= $NETWORK_MANAGER_REQUIRED_V
                   libnm-glib >= $NETWORK_MANAGER_REQUIRED_VERSION
                   libnm-glib-vpn >= $NETWORK_MANAGER_REQUIRED_VERSION
                   libnm-util >= $NETWORK_MANAGER_REQUIRED_VERSION
-		  libnm-gtk >= $NETWORK_MANAGER_APPLET_REQUIRED_VERSION,
+                  libnm-gtk >= $NETWORK_MANAGER_APPLET_REQUIRED_VERSION
+                  mm-glib >= $MODEM_MANAGER_REQUIRED_VERSION,
                   [have_networkmanager=yes], have_networkmanager=no)
 if test "x$have_networkmanager" = xno ; then
-        AC_MSG_WARN(*** Network panel will not be built (NetworkManager $NETWORK_MANAGER_REQUIRED_VERSION or newer not found) ***)
+        AC_MSG_WARN(*** Network panel will not be built (NetworkManager or ModemManager not found) ***)
 else
 	AC_DEFINE(BUILD_NETWORK, 1, [Define to 1 to build the Network panel])
 fi

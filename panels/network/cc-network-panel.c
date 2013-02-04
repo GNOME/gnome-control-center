@@ -2,6 +2,7 @@
  *
  * Copyright (C) 2010-2012 Richard Hughes <richard@hughsie.com>
  * Copyright (C) 2012 Thomas Bechtold <thomasbechtold@jpberlin.de>
+ * Copyright (C) 2013 Aleksander Morgado <aleksander@gnu.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -50,6 +51,8 @@
 #include "network-dialogs.h"
 #include "connection-editor/net-connection-editor.h"
 
+#include <libmm-glib.h>
+
 CC_PANEL_REGISTER (CcNetworkPanel, cc_network_panel)
 
 #define NETWORK_PANEL_PRIVATE(o) \
@@ -70,6 +73,7 @@ struct _CcNetworkPanelPrivate
         GtkBuilder       *builder;
         GtkWidget        *treeview;
         NMClient         *client;
+        MMManager        *modem_manager;
         NMRemoteSettings *remote_settings;
         gboolean          updating_device;
         guint             nm_warning_idle;
@@ -212,6 +216,7 @@ cc_network_panel_dispose (GObject *object)
         g_clear_object (&priv->cancellable);
         g_clear_object (&priv->builder);
         g_clear_object (&priv->client);
+        g_clear_object (&priv->modem_manager);
         g_clear_object (&priv->remote_settings);
         g_clear_object (&priv->kill_switch_header);
         g_clear_object (&priv->rfkill);
@@ -680,6 +685,31 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                                    "nm-device", device,
                                    "id", nm_device_get_udi (device),
                                    NULL);
+
+        if (type == NM_DEVICE_TYPE_MODEM &&
+            g_str_has_prefix (nm_device_get_udi (device), "/org/freedesktop/ModemManager1/Modem/")) {
+                GDBusObject *modem_object;
+
+                if (priv->modem_manager == NULL) {
+                        g_warning ("Cannot grab information for modem at %s: No ModemManager support",
+                                   nm_device_get_udi (device));
+                        goto out;
+                }
+
+                modem_object = g_dbus_object_manager_get_object (G_DBUS_OBJECT_MANAGER (priv->modem_manager),
+                                                                 nm_device_get_udi (device));
+                if (modem_object == NULL) {
+                        g_warning ("Cannot grab information for modem at %s: Not found",
+                                   nm_device_get_udi (device));
+                        goto out;
+                }
+
+                /* Set the modem object in the NetDeviceMobile */
+                g_object_set (net_device,
+                              "mm-object", modem_object,
+                              NULL);
+                g_object_unref (modem_object);
+        }
 
         /* add as a panel */
         if (device_g_type != NET_TYPE_DEVICE) {
@@ -1295,6 +1325,7 @@ cc_network_panel_init (CcNetworkPanel *panel)
         GtkTreeSelection *selection;
         GtkWidget *widget;
         GtkWidget *toplevel;
+        GDBusConnection *system_bus;
 
         panel->priv = NETWORK_PANEL_PRIVATE (panel);
         g_resources_register (cc_network_get_resource ());
@@ -1343,6 +1374,25 @@ cc_network_panel_init (CcNetworkPanel *panel)
                           G_CALLBACK (device_added_cb), panel);
         g_signal_connect (panel->priv->client, "device-removed",
                           G_CALLBACK (device_removed_cb), panel);
+
+        /* Setup ModemManager client */
+        system_bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+        if (system_bus == NULL) {
+                g_warning ("Error connecting to system D-Bus: %s",
+                           error->message);
+                g_clear_error (&error);
+        } else {
+                panel->priv->modem_manager = mm_manager_new_sync (system_bus,
+                                                                  G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE,
+                                                                  NULL,
+                                                                  &error);
+                if (panel->priv->modem_manager == NULL) {
+                        g_warning ("Error connecting to ModemManager: %s",
+                                   error->message);
+                        g_clear_error (&error);
+                }
+                g_object_unref (system_bus);
+        }
 
         widget = GTK_WIDGET (gtk_builder_get_object (panel->priv->builder,
                                                      "add_toolbutton"));
