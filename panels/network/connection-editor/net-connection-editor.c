@@ -356,7 +356,7 @@ validate (NetConnectionEditor *editor)
 
         update_sensitivity (editor);
 done:
-        gtk_widget_set_sensitive (GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_apply_button")), valid);
+        gtk_widget_set_sensitive (GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_apply_button")), valid && editor->is_changed);
 }
 
 static void
@@ -364,6 +364,8 @@ page_changed (CEPage *page, gpointer user_data)
 {
         NetConnectionEditor *editor= user_data;
 
+        if (editor_is_initialized (editor))
+                editor->is_changed = TRUE;
         validate (editor);
 }
 
