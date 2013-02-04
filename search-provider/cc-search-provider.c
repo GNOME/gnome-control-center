@@ -28,7 +28,8 @@
 #include <shell/cc-panel.h>
 #include <shell/cc-shell-model.h>
 #include <shell/cc-panel-loader.h>
-#include <shell/cc-util.h>
+
+#include "cc-util.h"
 
 #include "control-center-search-provider.h"
 #include "cc-search-provider.h"

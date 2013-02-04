@@ -16,6 +16,7 @@ INCLUDES =					\
 	-DCC_PANEL_LOADER_NO_GTYPES		\
 	-I$(top_srcdir)				\
 	$(SHELL_CFLAGS)				\
+	-I$(top_srcdir)/panels/common/		\
 	-I$(top_srcdir)/libgd
 
 libexec_PROGRAMS = gnome-control-center-search-provider
@@ -32,6 +33,7 @@ gnome_control_center_search_provider_SOURCES =	\
 	cc-search-provider.h
 
 gnome_control_center_search_provider_LDADD =	\
+	$(top_builddir)/panels/common/liblanguage.la	\
 	$(top_builddir)/shell/libshell.la	\
 	$(SHELL_LIBS)
 

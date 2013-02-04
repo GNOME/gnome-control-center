@@ -13,6 +13,8 @@ BUILT_SOURCES =			\
 
 liblanguage_la_SOURCES =		\
 	$(BUILT_SOURCES)		\
+	cc-util.c			\
+	cc-util.h			\
 	cc-common-language.c		\
 	cc-common-language.h		\
 	cc-language-chooser.c		\

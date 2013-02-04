@@ -2,6 +2,7 @@ INCLUDES =					\
 	-I$(top_srcdir)				\
 	$(SHELL_CFLAGS)				\
 	$(CHEESE_CFLAGS)			\
+	-I$(top_srcdir)/panels/common/		\
 	-I$(top_srcdir)/libgd
 
 all-local: check-local
@@ -10,9 +11,7 @@ noinst_LTLIBRARIES = libshell.la
 
 libshell_la_SOURCES = \
 	cc-shell-model.c			\
-	cc-shell-model.h			\
-	cc-util.c				\
-	cc-util.h
+	cc-shell-model.h
 
 bin_PROGRAMS = gnome-control-center
 
@@ -50,6 +49,7 @@ gnome_control_center_LDADD =						\
 	$(SHELL_LIBS)							\
 	$(CHEESE_LIBS)							\
 	$(top_builddir)/libgd/libgd.la					\
+	$(top_builddir)/panels/common/liblanguage.la			\
 	$(top_builddir)/panels/background/libbackground.la		\
 	$(top_builddir)/panels/color/libcolor.la			\
 	$(top_builddir)/panels/datetime/libdate_time.la			\
