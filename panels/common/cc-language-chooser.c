@@ -225,6 +225,8 @@ add_all_languages (GtkDialog *chooser)
         locale_ids = gnome_get_all_locales ();
         initial = cc_common_language_get_initial_languages ();
         add_languages (chooser, locale_ids, initial);
+        g_hash_table_destroy (initial);
+        g_strfreev (locale_ids);
 }
 
 static gboolean
@@ -360,6 +362,7 @@ cc_language_chooser_new (GtkWidget *parent)
         builder = gtk_builder_new ();
         gtk_builder_add_from_resource (builder, "/org/gnome/control-center/common/language-chooser.ui", &error);
         if (error) {
+                g_object_unref (builder);
                 g_warning ("failed to load language chooser: %s", error->message);
                 g_error_free (error);
                 return NULL;
@@ -368,6 +371,7 @@ cc_language_chooser_new (GtkWidget *parent)
         chooser = WID ("language-dialog");
         priv = g_new0 (CcLanguageChooserPrivate, 1);
         g_object_set_data_full (G_OBJECT (chooser), "private", priv, cc_language_chooser_private_free);
+        g_object_set_data_full (G_OBJECT (chooser), "builder", builder, g_object_unref);
 
         priv->filter_entry = WID ("language-filter-entry");
         priv->language_list = WID ("language-list");
