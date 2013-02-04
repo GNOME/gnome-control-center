@@ -435,7 +435,7 @@ update_language_label (CcRegionPanel *self)
         else
                 language = priv->language;
         if (language)
-                name = gnome_get_language_from_name (language, language);
+                name = gnome_get_language_from_locale (language, language);
         else
                 name = g_strdup (C_("Language", "None"));
         gtk_label_set_label (GTK_LABEL (priv->language_label), name);
@@ -466,7 +466,7 @@ update_region_from_setting (CcRegionPanel *self)
 
         g_free (priv->region);
         priv->region = g_settings_get_string (priv->locale_settings, KEY_REGION);
-        name = gnome_get_region_from_name (priv->region, priv->region);
+        name = gnome_get_country_from_locale (priv->region, priv->region);
         gtk_label_set_label (GTK_LABEL (priv->formats_label), name);
         g_free (name);
 }

@@ -113,13 +113,13 @@ iter_for_language (GtkTreeModel *model,
                 g_free (l);
         } while (gtk_tree_model_iter_next (model, iter));
 
-        name = gnome_normalize_language_name (lang);
+        name = gnome_normalize_locale (lang);
         if (name != NULL) {
                 if (region) {
-                        language = gnome_get_region_from_name (name, NULL);
+                        language = gnome_get_country_from_locale (name, NULL);
                 }
                 else {
-                        language = gnome_get_language_from_name (name, NULL);
+                        language = gnome_get_language_from_locale (name, NULL);
                 }
 
                 gtk_list_store_insert_with_values (GTK_LIST_STORE (model),
@@ -167,7 +167,7 @@ cc_common_language_has_font (const gchar *locale)
         object_set = NULL;
         font_set = NULL;
 
-        if (!gnome_parse_language_name (locale, &language_code, NULL, NULL, NULL))
+        if (!gnome_parse_locale (locale, &language_code, NULL, NULL, NULL))
                 return FALSE;
 
         charset = FcLangGetCharSet ((FcChar8 *) language_code);
@@ -242,7 +242,7 @@ add_one_language (gpointer d)
     return FALSE;
   }
 
-  name = gnome_normalize_language_name (data->languages[data->position]);
+  name = gnome_normalize_locale (data->languages[data->position]);
   if (g_hash_table_lookup (data->user_langs, name) != NULL) {
     g_free (name);
     goto next;
@@ -254,10 +254,10 @@ add_one_language (gpointer d)
   }
 
   if (data->regions) {
-    language = gnome_get_region_from_name (name, NULL);
+    language = gnome_get_country_from_locale (name, NULL);
   }
   else {
-    language = gnome_get_language_from_name (name, NULL);
+    language = gnome_get_language_from_locale (name, NULL);
   }
   if (!language) {
     g_debug ("Ignoring '%s' as a locale, because we couldn't figure the language name", name);
@@ -292,7 +292,7 @@ cc_common_language_add_available_languages (GtkListStore *store,
 
   data->store = g_object_ref (store);
   data->user_langs = g_hash_table_ref (user_langs);
-  data->languages = gnome_get_all_language_names ();
+  data->languages = gnome_get_all_locales ();
   data->regions = regions;
   data->position = 0;
 
@@ -314,7 +314,7 @@ cc_common_language_get_current_language (void)
 
         locale = (const gchar *) setlocale (LC_MESSAGES, NULL);
         if (locale)
-                language = gnome_normalize_language_name (locale);
+                language = gnome_normalize_locale (locale);
         else
                 language = NULL;
 
@@ -467,10 +467,10 @@ user_language_has_translations (const char *locale)
         char *name, *language_code, *territory_code;
         gboolean ret;
 
-        gnome_parse_language_name (locale,
-                                   &language_code,
-                                   &territory_code,
-                                   NULL, NULL);
+        gnome_parse_locale (locale,
+                            &language_code,
+                            &territory_code,
+                            NULL, NULL);
         name = g_strdup_printf ("%s%s%s",
                                 language_code,
                                 territory_code != NULL? "_" : "",
@@ -557,9 +557,9 @@ add_other_users_language (GHashTable *ht)
                 if (lang != NULL && *lang != '\0' &&
                     cc_common_language_has_font (lang) &&
                     user_language_has_translations (lang)) {
-                        name = gnome_normalize_language_name (lang);
+                        name = gnome_normalize_locale (lang);
                         if (!g_hash_table_lookup (ht, name)) {
-                                language = gnome_get_language_from_name (name, NULL);
+                                language = gnome_get_language_from_locale (name, NULL);
                                 g_hash_table_insert (ht, name, language);
                         }
                         else {
@@ -663,7 +663,7 @@ cc_common_language_get_user_languages (void)
         /* Add current locale */
         name = cc_common_language_get_current_language ();
         if (g_hash_table_lookup (ht, name) == NULL) {
-                language = gnome_get_language_from_name (name, NULL);
+                language = gnome_get_language_from_locale (name, NULL);
                 g_hash_table_insert (ht, name, language);
         } else {
                 g_free (name);
@@ -691,14 +691,14 @@ cc_common_language_get_initial_regions (const gchar *lang)
         g_hash_table_insert (ht, g_strdup ("zh_CN.utf8"), g_strdup (_("China")));
 #endif
 
-        gnome_parse_language_name (lang, &language, NULL, NULL, NULL);
-        langs = gnome_get_all_language_names ();
+        gnome_parse_locale (lang, &language, NULL, NULL, NULL);
+        langs = gnome_get_all_locales ();
         for (i = 0; langs[i]; i++) {
                 gchar *l, *s;
-                gnome_parse_language_name (langs[i], &l, NULL, NULL, NULL);
+                gnome_parse_locale (langs[i], &l, NULL, NULL, NULL);
                 if (g_strcmp0 (language, l) == 0) {
                         if (!g_hash_table_lookup (ht, langs[i])) {
-                                s = gnome_get_region_from_name (langs[i], NULL);
+                                s = gnome_get_country_from_locale (langs[i], NULL);
                                 g_hash_table_insert (ht, g_strdup (langs[i]), s);
                         }
                 }
