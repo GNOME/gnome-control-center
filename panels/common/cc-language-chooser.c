@@ -142,7 +142,7 @@ language_widget_new (const gchar *locale_id,
         GtkWidget *widget;
         GtkWidget *check;
 
-        locale_name = gnome_get_language_from_name (locale_id, locale_id);
+        locale_name = gnome_get_language_from_locale (locale_id, locale_id);
 
         widget = padded_label_new (locale_name, is_extra);
 
@@ -222,7 +222,7 @@ add_all_languages (GtkDialog *chooser)
         gchar **locale_ids;
         GHashTable *initial;
 
-        locale_ids = gnome_get_all_language_names ();
+        locale_ids = gnome_get_all_locales ();
         initial = cc_common_language_get_initial_languages ();
         add_languages (chooser, locale_ids, initial);
 }
