@@ -601,12 +601,29 @@ gcm_prefs_is_profile_suitable_for_device (CdProfile *profile,
   CdColorspace device_colorspace = 0;
   gboolean ret = FALSE;
   CdDeviceKind device_kind;
+  CdStandardSpace standard_space;
 
   /* not the right colorspace */
   device_colorspace = cd_device_get_colorspace (device);
   profile_colorspace = cd_profile_get_colorspace (profile);
   if (device_colorspace != profile_colorspace)
     goto out;
+
+  /* if this is a display matching with one of the standard spaces that displays
+   * could emulate, also mark it as suitable */
+  if (cd_device_get_kind (device) == CD_DEVICE_KIND_DISPLAY &&
+      cd_profile_get_kind (profile) == CD_PROFILE_KIND_DISPLAY_DEVICE)
+      {
+        data_source = cd_profile_get_metadata_item (profile,
+                                                    CD_PROFILE_METADATA_STANDARD_SPACE);
+        standard_space = cd_standard_space_from_string (data_source);
+        if (standard_space == CD_STANDARD_SPACE_SRGB ||
+            standard_space == CD_STANDARD_SPACE_ADOBE_RGB)
+          {
+            ret = TRUE;
+            goto out;
+          }
+      }
 
   /* not the correct kind */
   device_kind = cd_device_get_kind (device);
