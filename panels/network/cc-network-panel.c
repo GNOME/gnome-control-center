@@ -489,7 +489,7 @@ panel_refresh_device_titles (CcNetworkPanel *panel)
 #ifdef HAVE_NM_UNSTABLE
         GPtrArray *ndarray, *nmdarray;
         NetDevice **devices;
-        NMDevice **nm_devices;
+        NMDevice **nm_devices, *nm_device;
         gchar **titles;
         gint i, num_devices;
 
@@ -500,8 +500,13 @@ panel_refresh_device_titles (CcNetworkPanel *panel)
         }
 
         nmdarray = g_ptr_array_new ();
-        for (i = 0; i < ndarray->len; i++)
-                g_ptr_array_add (nmdarray, net_device_get_nm_device (ndarray->pdata[i]));
+        for (i = 0; i < ndarray->len; i++) {
+                nm_device = net_device_get_nm_device (ndarray->pdata[i]);
+                if (nm_device)
+                        g_ptr_array_add (nmdarray, nm_device);
+                else
+                        g_ptr_array_remove_index (ndarray, i--);
+        }
 
         devices = (NetDevice **)ndarray->pdata;
         nm_devices = (NMDevice **)nmdarray->pdata;
