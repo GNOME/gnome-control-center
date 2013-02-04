@@ -94,8 +94,6 @@ sort_languages (gconstpointer a,
 {
         const gchar *la;
         const gchar *lb;
-        gboolean iea;
-        gboolean ieb;
 
         if (g_object_get_data (G_OBJECT (a), "locale-id") == NULL) {
                 return 1;
@@ -107,14 +105,7 @@ sort_languages (gconstpointer a,
         la = g_object_get_data (G_OBJECT (a), "locale-name");
         lb = g_object_get_data (G_OBJECT (b), "locale-name");
 
-        iea = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (a), "is-extra"));
-        ieb = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (b), "is-extra"));
-
-        if (iea != ieb) {
-                return ieb - iea;
-        } else {
-                return strcmp (la, lb);
-        }
+        return g_strcmp0 (la, lb);
 }
 
 static GtkWidget *
