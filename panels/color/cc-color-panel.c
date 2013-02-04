@@ -594,9 +594,7 @@ static gboolean
 gcm_prefs_is_profile_suitable_for_device (CdProfile *profile,
                                           CdDevice *device)
 {
-#if CD_CHECK_VERSION(0,1,14)
   const gchar *data_source;
-#endif
   CdProfileKind profile_kind_tmp;
   CdProfileKind profile_kind;
   CdColorspace profile_colorspace;
@@ -617,13 +615,11 @@ gcm_prefs_is_profile_suitable_for_device (CdProfile *profile,
   if (profile_kind_tmp != profile_kind)
     goto out;
 
-#if CD_CHECK_VERSION(0,1,14)
   /* ignore the colorspace profiles */
   data_source = cd_profile_get_metadata_item (profile,
                                               CD_PROFILE_METADATA_DATA_SOURCE);
   if (g_strcmp0 (data_source, CD_PROFILE_METADATA_DATA_SOURCE_STANDARD) == 0)
     goto out;
-#endif
 
   /* success */
   ret = TRUE;
