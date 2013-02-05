@@ -196,6 +196,9 @@ cc_input_options_new (GtkWidget *parent)
         g_settings_bind (priv->settings, "per-window",
                          priv->per_window_source, "active",
                          G_SETTINGS_BIND_DEFAULT);
+        g_settings_bind (priv->settings, "per-window",
+                         priv->same_source, "active",
+                         G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
 
         update_shortcuts (options);
 
