@@ -32,6 +32,7 @@
 #include "egg-list-box/egg-list-box.h"
 
 #include "cc-common-language.h"
+#include "cc-util.h"
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-languages.h>
@@ -223,10 +224,14 @@ region_widget_new (const gchar *locale_id,
                    gboolean     is_extra)
 {
         gchar *locale_name;
+        gchar *locale_current_name;
+        gchar *locale_untranslated_name;
         GtkWidget *widget;
         GtkWidget *check;
 
         locale_name = gnome_get_country_from_locale (locale_id, locale_id);
+        locale_current_name = gnome_get_country_from_locale (locale_id, NULL);
+        locale_untranslated_name = gnome_get_country_from_locale (locale_id, "C");
 
         widget = padded_label_new (locale_name, is_extra);
 
@@ -236,10 +241,10 @@ region_widget_new (const gchar *locale_id,
 
         g_object_set_data (G_OBJECT (widget), "check", check);
         g_object_set_data_full (G_OBJECT (widget), "locale-id", g_strdup (locale_id), g_free);
-        g_object_set_data_full (G_OBJECT (widget), "locale-name", g_strdup (locale_name), g_free);
+        g_object_set_data_full (G_OBJECT (widget), "locale-name", locale_name, g_free);
+        g_object_set_data_full (G_OBJECT (widget), "locale-current-name", locale_current_name, g_free);
+        g_object_set_data_full (G_OBJECT (widget), "locale-untranslated-name", locale_untranslated_name, g_free);
         g_object_set_data (G_OBJECT (widget), "is-extra", GUINT_TO_POINTER (is_extra));
-
-        g_free (locale_name);
 
         return widget;
 }
@@ -316,9 +321,12 @@ region_visible (GtkWidget *child,
 {
         GtkDialog *chooser = user_data;
         CcFormatChooserPrivate *priv = GET_PRIVATE (chooser);
-        gchar *locale_name;
-        const gchar *filter_contents;
+        gchar *locale_name = NULL;
+        gchar *locale_current_name = NULL;
+        gchar *locale_untranslated_name = NULL;
+        gchar *filter_contents = NULL;
         gboolean is_extra;
+        gboolean visible;
 
         if (child == priv->more_item)
                 return !priv->showing_extra;
@@ -328,16 +336,45 @@ region_visible (GtkWidget *child,
                 return TRUE;
 
         is_extra = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (child), "is-extra"));
-        locale_name = g_object_get_data (G_OBJECT (child), "locale-name");
-
-        filter_contents = gtk_entry_get_text (GTK_ENTRY (priv->filter_entry));
-        if (*filter_contents && strcasestr (locale_name, filter_contents) == NULL)
-        return FALSE;
 
         if (!priv->showing_extra && is_extra)
                 return FALSE;
 
-        return TRUE;
+        filter_contents =
+                cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (priv->filter_entry)));
+
+        if (!filter_contents)
+                return TRUE;
+
+        visible = FALSE;
+
+        locale_name =
+                cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (child), "locale-name"));
+        if (strstr (locale_name, filter_contents)) {
+                visible = TRUE;
+                goto out;
+        }
+
+        locale_current_name =
+                cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (child), "locale-current-name"));
+        if (strstr (locale_current_name, filter_contents)) {
+                visible = TRUE;
+                goto out;
+        }
+
+        locale_untranslated_name =
+                cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (child), "locale-untranslated-name"));
+        if (strstr (locale_untranslated_name, filter_contents)) {
+                visible = TRUE;
+                goto out;
+        }
+
+out:
+        g_free (filter_contents);
+        g_free (locale_untranslated_name);
+        g_free (locale_current_name);
+        g_free (locale_name);
+        return visible;
 }
 
 static void
