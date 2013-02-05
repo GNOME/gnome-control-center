@@ -54,6 +54,7 @@ typedef struct {
         gboolean adding;
         gboolean showing_extra;
         gchar *region;
+        gchar **filter_words;
 } CcFormatChooserPrivate;
 
 #define GET_PRIVATE(chooser) ((CcFormatChooserPrivate *) g_object_get_data (G_OBJECT (chooser), "private"))
@@ -316,6 +317,19 @@ add_all_regions (GtkDialog *chooser)
 }
 
 static gboolean
+match_all (gchar       **words,
+           const gchar  *str)
+{
+        gchar **w;
+
+        for (w = words; *w; ++w)
+                if (!strstr (str, *w))
+                        return FALSE;
+
+        return TRUE;
+}
+
+static gboolean
 region_visible (GtkWidget *child,
                 gpointer   user_data)
 {
@@ -324,7 +338,6 @@ region_visible (GtkWidget *child,
         gchar *locale_name = NULL;
         gchar *locale_current_name = NULL;
         gchar *locale_untranslated_name = NULL;
-        gchar *filter_contents = NULL;
         gboolean is_extra;
         gboolean visible;
 
@@ -340,41 +353,51 @@ region_visible (GtkWidget *child,
         if (!priv->showing_extra && is_extra)
                 return FALSE;
 
-        filter_contents =
-                cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (priv->filter_entry)));
-
-        if (!filter_contents)
+        if (!priv->filter_words)
                 return TRUE;
 
         visible = FALSE;
 
         locale_name =
                 cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (child), "locale-name"));
-        if (strstr (locale_name, filter_contents)) {
-                visible = TRUE;
-                goto out;
-        }
+        visible = match_all (priv->filter_words, locale_name);
+        if (visible)
+                 goto out;
 
         locale_current_name =
                 cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (child), "locale-current-name"));
-        if (strstr (locale_current_name, filter_contents)) {
-                visible = TRUE;
-                goto out;
-        }
+        visible = match_all (priv->filter_words, locale_current_name);
+        if (visible)
+                 goto out;
 
         locale_untranslated_name =
                 cc_util_normalize_casefold_and_unaccent (g_object_get_data (G_OBJECT (child), "locale-untranslated-name"));
-        if (strstr (locale_untranslated_name, filter_contents)) {
-                visible = TRUE;
-                goto out;
-        }
+        visible = match_all (priv->filter_words, locale_untranslated_name);
 
 out:
-        g_free (filter_contents);
         g_free (locale_untranslated_name);
         g_free (locale_current_name);
         g_free (locale_name);
         return visible;
+}
+
+static void
+filter_changed (GtkDialog *chooser)
+{
+        CcFormatChooserPrivate *priv = GET_PRIVATE (chooser);
+        gchar *filter_contents = NULL;
+
+        g_clear_pointer (&priv->filter_words, g_strfreev);
+
+        filter_contents =
+                cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (priv->filter_entry)));
+        if (!filter_contents) {
+                egg_list_box_refilter (EGG_LIST_BOX (priv->list));
+                return;
+        }
+        priv->filter_words = g_strsplit_set (g_strstrip (filter_contents), " ", 0);
+        g_free (filter_contents);
+        egg_list_box_refilter (EGG_LIST_BOX (priv->list));
 }
 
 static void
@@ -460,6 +483,7 @@ cc_format_chooser_private_free (gpointer data)
 {
         CcFormatChooserPrivate *priv = data;
 
+        g_strfreev (priv->filter_words);
         g_free (priv->region);
         g_free (priv);
 }
@@ -515,8 +539,7 @@ cc_format_chooser_new (GtkWidget *parent)
         add_all_regions (GTK_DIALOG (chooser));
 
         g_signal_connect_swapped (priv->filter_entry, "changed",
-                                  G_CALLBACK (egg_list_box_refilter),
-                                  priv->list);
+                                  G_CALLBACK (filter_changed), chooser);
 
         g_signal_connect (priv->list, "child-activated",
                           G_CALLBACK (child_activated), chooser);
