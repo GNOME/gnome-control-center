@@ -29,6 +29,7 @@
 #include <nm-device.h>
 #include <nm-device-modem.h>
 #include <nm-remote-connection.h>
+#include <nm-mobile-providers.h>
 
 #include "panel-common.h"
 #include "network-dialogs.h"
@@ -48,10 +49,13 @@ struct _NetDeviceMobilePrivate
 
         /* Old MM < 0.7 support */
         GDBusProxy *gsm_proxy;
+        GDBusProxy *cdma_proxy;
 
         /* New MM >= 0.7 support */
         MMObject   *mm_object;
         guint       operator_name_updated;
+
+        NMAMobileProvidersDatabase *mpd;
 };
 
 enum {
@@ -265,20 +269,76 @@ device_mobile_refresh_equipment_id (NetDeviceMobile *device_mobile)
         panel_set_device_widget_details (device_mobile->priv->builder, "imei", equipment_id);
 }
 
+static gchar *
+device_mobile_find_provider (NetDeviceMobile *device_mobile,
+                             const gchar     *mccmnc,
+                             guint32          sid)
+{
+        NMAMobileProvider *provider;
+        GString *name = NULL;
+
+        if (device_mobile->priv->mpd == NULL) {
+                GError *error = NULL;
+
+                /* Use defaults */
+                device_mobile->priv->mpd = nma_mobile_providers_database_new_sync (NULL, NULL, NULL, &error);
+                if (device_mobile->priv->mpd == NULL) {
+                        g_debug ("Couldn't load mobile providers database: %s",
+                                 error ? error->message : "");
+                        g_clear_error (&error);
+                        return NULL;
+                }
+        }
+
+        if (mccmnc != NULL) {
+                provider = nma_mobile_providers_database_lookup_3gpp_mcc_mnc (device_mobile->priv->mpd, mccmnc);
+                if (provider != NULL)
+                        name = g_string_new (nma_mobile_provider_get_name (provider));
+        }
+
+        if (sid != 0) {
+                provider = nma_mobile_providers_database_lookup_cdma_sid (device_mobile->priv->mpd, sid);
+                if (provider != NULL) {
+                        if (name == NULL)
+                                name = g_string_new (nma_mobile_provider_get_name (provider));
+                        else
+                                g_string_append_printf (name, ", %s", nma_mobile_provider_get_name (provider));
+                }
+        }
+
+        return (name != NULL ? g_string_free (name, FALSE) : NULL);
+}
+
 static void
 device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
 {
         if (device_mobile->priv->mm_object != NULL) {
                 gchar *operator_name = NULL;
                 MMModem3gpp *modem_3gpp;
+                MMModemCdma *modem_cdma;
 
                 modem_3gpp = mm_object_peek_modem_3gpp (device_mobile->priv->mm_object);
+                modem_cdma = mm_object_peek_modem_cdma (device_mobile->priv->mm_object);
+
                 if (modem_3gpp != NULL) {
                         const gchar *operator_name_unsafe;
 
                         operator_name_unsafe = mm_modem_3gpp_get_operator_name (modem_3gpp);
                         if (operator_name_unsafe != NULL && operator_name_unsafe[0] != '\0')
                                 operator_name = g_strescape (operator_name_unsafe, NULL);
+                }
+
+                /* If not directly given in the 3GPP interface, try to guess from
+                 * MCCMNC/SID */
+                if (operator_name == NULL) {
+                        const gchar *mccmnc = NULL;
+                        guint32 sid = 0;
+
+                        if (modem_3gpp != NULL)
+                                mccmnc = mm_modem_3gpp_get_operator_code (modem_3gpp);
+                        if (modem_cdma != NULL)
+                                sid = mm_modem_cdma_get_sid (modem_cdma);
+                        operator_name = device_mobile_find_provider (device_mobile, mccmnc, sid);
                 }
 
                 /* Set operator name */
@@ -291,12 +351,28 @@ device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
                 panel_set_device_widget_details (device_mobile->priv->builder, "provider", operator_name);
                 g_free (operator_name);
         } else {
-                const char *str;
+                const gchar *gsm;
+                const gchar *cdma;
 
                 /* Assume old MM handling */
-                str = g_object_get_data (G_OBJECT (device_mobile),
-                                         "ControlCenter::OperatorName");
-                panel_set_device_widget_details (device_mobile->priv->builder, "provider", str);
+                gsm = g_object_get_data (G_OBJECT (device_mobile),
+                                         "ControlCenter::OperatorNameGsm");
+                cdma = g_object_get_data (G_OBJECT (device_mobile),
+                                          "ControlCenter::OperatorNameCdma");
+
+                if (gsm != NULL && cdma != NULL) {
+                        gchar *both;
+
+                        both = g_strdup_printf ("%s, %s", gsm, cdma);
+                        panel_set_device_widget_details (device_mobile->priv->builder, "provider", both);
+                        g_free (both);
+                } else if (gsm != NULL) {
+                        panel_set_device_widget_details (device_mobile->priv->builder, "provider", gsm);
+                } else if (cdma != NULL) {
+                        panel_set_device_widget_details (device_mobile->priv->builder, "provider", cdma);
+                } else {
+                        panel_set_device_widget_details (device_mobile->priv->builder, "provider", NULL);
+                }
         }
 }
 
@@ -446,7 +522,8 @@ device_mobile_device_got_modem_manager_cb (GObject *source_object,
 
 static void
 device_mobile_save_operator_name (NetDeviceMobile *device_mobile,
-                                  const gchar *operator_name)
+                                  const gchar     *field,
+                                  const gchar     *operator_name)
 {
         gchar *operator_name_safe = NULL;
 
@@ -455,7 +532,7 @@ device_mobile_save_operator_name (NetDeviceMobile *device_mobile,
 
         /* save */
         g_object_set_data_full (G_OBJECT (device_mobile),
-                                "ControlCenter::OperatorName",
+                                field,
                                 operator_name_safe,
                                 g_free);
         /* refresh */
@@ -463,9 +540,9 @@ device_mobile_save_operator_name (NetDeviceMobile *device_mobile,
 }
 
 static void
-device_mobile_get_registration_info_cb (GObject *source_object,
+device_mobile_get_registration_info_cb (GObject      *source_object,
                                         GAsyncResult *res,
-                                        gpointer user_data)
+                                        gpointer      user_data)
 {
         gchar *operator_code = NULL;
         GError *error = NULL;
@@ -488,8 +565,16 @@ device_mobile_get_registration_info_cb (GObject *source_object,
                        &operator_code,
                        &operator_name);
 
+        /* If none give, try to guess it */
+        if (operator_name == NULL || operator_name[0] == '\0') {
+                g_free (operator_name);
+                operator_name = device_mobile_find_provider (device_mobile, operator_code, 0);
+        }
+
         /* save and refresh */
-        device_mobile_save_operator_name (device_mobile, operator_name);
+        device_mobile_save_operator_name (device_mobile,
+                                          "ControlCenter::OperatorNameGsm",
+                                          operator_name);
 
         g_free (operator_name);
         g_free (operator_code);
@@ -517,17 +602,25 @@ device_mobile_gsm_signal_cb (GDBusProxy *proxy,
                        &operator_code,
                        &operator_name);
 
+        /* If none given, try to guess it */
+        if (operator_name == NULL || operator_name[0] == '\0') {
+                g_free (operator_name);
+                operator_name = device_mobile_find_provider (device_mobile, operator_code, 0);
+        }
+
         /* save and refresh */
-        device_mobile_save_operator_name (device_mobile, operator_name);
+        device_mobile_save_operator_name (device_mobile,
+                                          "ControlCenter::OperatorNameGsm",
+                                          operator_name);
 
         g_free (operator_code);
         g_free (operator_name);
 }
 
 static void
-device_mobile_device_got_modem_manager_gsm_cb (GObject *source_object,
+device_mobile_device_got_modem_manager_gsm_cb (GObject      *source_object,
                                                GAsyncResult *res,
-                                               gpointer user_data)
+                                               gpointer      user_data)
 {
         GError *error = NULL;
         NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
@@ -554,6 +647,72 @@ device_mobile_device_got_modem_manager_gsm_cb (GObject *source_object,
                            -1,
                            NULL,
                            device_mobile_get_registration_info_cb,
+                           device_mobile);
+}
+
+static void
+device_mobile_get_serving_system_cb (GObject      *source_object,
+                                     GAsyncResult *res,
+                                     gpointer      user_data)
+{
+        NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
+        GVariant *result = NULL;
+        GError *error = NULL;
+
+        guint32 band_class;
+        gchar *band;
+        guint32 sid;
+        gchar *operator_name;
+
+        result = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object), res, &error);
+        if (result == NULL) {
+                g_warning ("Error getting serving system: %s\n",
+                           error->message);
+                g_error_free (error);
+                return;
+        }
+
+        /* get values */
+        g_variant_get (result, "((usu))",
+                       &band_class,
+                       &band,
+                       &sid);
+
+        operator_name = device_mobile_find_provider (device_mobile, NULL, sid);
+
+        /* save and refresh */
+        device_mobile_save_operator_name (device_mobile,
+                                          "ControlCenter::OperatorNameCdma",
+                                          operator_name);
+
+        g_free (band);
+        g_variant_unref (result);
+}
+
+static void
+device_mobile_device_got_modem_manager_cdma_cb (GObject      *source_object,
+                                                GAsyncResult *res,
+                                                gpointer      user_data)
+{
+        GError *error = NULL;
+        NetDeviceMobile *device_mobile = (NetDeviceMobile *)user_data;
+
+        device_mobile->priv->cdma_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+        if (device_mobile->priv->cdma_proxy == NULL) {
+                g_warning ("Error creating ModemManager CDMA proxy: %s\n",
+                           error->message);
+                g_error_free (error);
+                return;
+        }
+
+        /* Load initial value */
+        g_dbus_proxy_call (device_mobile->priv->cdma_proxy,
+                           "GetServingSystem",
+                           NULL,
+                           G_DBUS_CALL_FLAGS_NONE,
+                           -1,
+                           NULL,
+                           device_mobile_get_serving_system_cb,
                            device_mobile);
 }
 
@@ -598,6 +757,18 @@ net_device_mobile_constructed (GObject *object)
                                                   "org.freedesktop.ModemManager.Modem.Gsm.Network",
                                                   cancellable,
                                                   device_mobile_device_got_modem_manager_gsm_cb,
+                                                  device_mobile);
+                }
+
+                if (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) {
+                        g_dbus_proxy_new_for_bus (G_BUS_TYPE_SYSTEM,
+                                                  G_DBUS_PROXY_FLAGS_NONE,
+                                                  NULL,
+                                                  "org.freedesktop.ModemManager",
+                                                  nm_device_get_udi (device),
+                                                  "org.freedesktop.ModemManager.Modem.Cdma",
+                                                  cancellable,
+                                                  device_mobile_device_got_modem_manager_cdma_cb,
                                                   device_mobile);
                 }
         }
@@ -686,6 +857,7 @@ net_device_mobile_dispose (GObject *object)
 
         g_clear_object (&priv->builder);
         g_clear_object (&priv->gsm_proxy);
+        g_clear_object (&priv->cdma_proxy);
 
         if (priv->operator_name_updated) {
                 g_assert (priv->mm_object != NULL);
@@ -693,6 +865,7 @@ net_device_mobile_dispose (GObject *object)
                 priv->operator_name_updated = 0;
         }
         g_clear_object (&priv->mm_object);
+        g_clear_object (&priv->mpd);
 
         G_OBJECT_CLASS (net_device_mobile_parent_class)->dispose (object);
 }
