@@ -306,6 +306,8 @@ add_all_regions (GtkDialog *chooser)
         locale_ids = gnome_get_all_locales ();
         initial = cc_common_language_get_initial_languages ();
         add_regions (chooser, locale_ids, initial);
+        g_hash_table_destroy (initial);
+        g_strfreev (locale_ids);
 }
 
 static gboolean
@@ -419,7 +421,10 @@ end_refilter (EggListBox *list_box,
 static void
 cc_format_chooser_private_free (gpointer data)
 {
-        g_free (data);
+        CcFormatChooserPrivate *priv = data;
+
+        g_free (priv->region);
+        g_free (priv);
 }
 
 #define WID(name) ((GtkWidget *) gtk_builder_get_object (builder, name))
