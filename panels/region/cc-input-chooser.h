@@ -21,7 +21,6 @@
 #define __CC_INPUT_CHOOSER_H__
 
 #include <gtk/gtk.h>
-#include <glib-object.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-xkb-info.h>
@@ -32,6 +31,8 @@ G_BEGIN_DECLS
 GtkWidget   *cc_input_chooser_new          (GtkWindow    *parent,
                                             GnomeXkbInfo *xkb_info,
                                             GHashTable   *ibus_engines);
+void         cc_input_chooser_set_ibus_engines (GtkWidget *chooser,
+                                                GHashTable *ibus_engines);
 gboolean     cc_input_chooser_get_selected (GtkWidget    *chooser,
                                             gchar       **type,
                                             gchar       **id,

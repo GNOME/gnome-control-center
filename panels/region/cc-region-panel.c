@@ -527,6 +527,19 @@ update_ibus_active_sources (CcRegionPanel *self)
 }
 
 static void
+update_input_chooser (CcRegionPanel *self)
+{
+        CcRegionPanelPrivate *priv = self->priv;
+        GtkWidget *chooser;
+
+        chooser = g_object_get_data (G_OBJECT (self), "input-chooser");
+        if (!chooser)
+                return;
+
+        cc_input_chooser_set_ibus_engines (chooser, priv->ibus_engines);
+}
+
+static void
 fetch_ibus_engines_result (GObject       *object,
                            GAsyncResult  *result,
                            CcRegionPanel *self)
@@ -559,6 +572,7 @@ fetch_ibus_engines_result (GObject       *object,
         g_list_free (list);
 
         update_ibus_active_sources (self);
+        update_input_chooser (self);
 }
 
 static void
@@ -916,9 +930,6 @@ input_response (GtkWidget *chooser, gint response_id, gpointer data)
         if (response_id == GTK_RESPONSE_OK) {
                 if (cc_input_chooser_get_selected (chooser, &type, &id, &name) &&
                     !input_source_already_added (self, id)) {
-
-                        gtk_widget_destroy (chooser);
-
                         if (g_str_equal (type, INPUT_SOURCE_TYPE_IBUS)) {
                                 g_free (type);
                                 type = INPUT_SOURCE_TYPE_IBUS;
@@ -941,9 +952,9 @@ input_response (GtkWidget *chooser, gint response_id, gpointer data)
                         g_free (name);
                         g_clear_object (&app_info);
                 }
-        } else {
-                gtk_widget_destroy (chooser);
         }
+        gtk_widget_destroy (chooser);
+        g_object_set_data (G_OBJECT (self), "input-chooser", NULL);
 }
 
 static void
@@ -964,6 +975,9 @@ show_input_chooser (CcRegionPanel *self)
                 );
         g_signal_connect (chooser, "response",
                           G_CALLBACK (input_response), self);
+        gtk_window_present (GTK_WINDOW (chooser));
+
+        g_object_set_data (G_OBJECT (self), "input-chooser", chooser);
 }
 
 static void

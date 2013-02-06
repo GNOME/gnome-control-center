@@ -1,143 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="2.16"/>
-  <object class="GtkListStore" id="input_source_model">
-    <columns>
-      <!-- display name -->
-      <column type="gchararray"/>
-      <!-- input source type -->
-      <column type="gchararray"/>
-      <!-- type specific identifier -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkTreeModelFilter" id="filtered_input_source_model">
-    <property name="child_model">input_source_model</property>
-  </object>
-  <object class="GtkDialog" id="input_source_chooser">
-    <property name="visible">False</property>
-    <property name="can_focus">False</property>
-    <property name="border_width">5</property>
-    <property name="title" translatable="yes">Select an input source</property>
+  <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkDialog" id="input-dialog">
+    <property name="title" translatable="yes">Add an Input Source</property>
     <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="type_hint">dialog</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="resizable">True</property>
     <child internal-child="vbox">
-      <object class="GtkBox" id="dialog-vbox3">
+      <object class="GtkBox" id="vbox">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="hbtnBox">
+        <property name="spacing">0</property>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolledwindow">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
+            <property name="hscrollbar-policy">never</property>
+            <property name="vscrollbar-policy">never</property>
+            <property name="shadow-type">in</property>
+            <property name="margin-left">6</property>
+            <property name="margin-right">6</property>
+            <property name="margin-top">6</property>
+            <property name="margin-bottom">6</property>
             <child>
-              <object class="GtkButton" id="cancel-button">
-                <property name="label">gtk-cancel</property>
+              <object class="GtkViewport" id="viewport">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
-                <property name="use_stock">True</property>
+                <child>
+                  <object class="EggListBox" id="list">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="halign">fill</property>
+                    <property name="valign">fill</property>
+                  </object>
+                </child>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="pack_type">end</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="ok-button">
-                <property name="label">gtk-add</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
-                <property name="use_stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="pack_type">end</property>
-                <property name="position">2</property>
-              </packing>
             </child>
           </object>
         </child>
         <child>
-          <object class="GtkVBox" id="vbox40">
+          <object class="GtkSearchEntry" id="filter-entry">
+            <property name="visible">False</property>
+            <property name="hexpand">True</property>
+            <property name="margin-left">6</property>
+            <property name="margin-right">6</property>
+            <property name="margin-top">6</property>
+            <property name="margin-bottom">6</property>
+          </object>
+        </child>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="action-area">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="border_width">5</property>
-            <property name="spacing">6</property>
+            <property name="orientation">horizontal</property>
             <child>
-              <object class="GtkVBox" id="vbox1">
+              <object class="GtkButton" id="cancel-button">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="spacing">6</property>
-                <child>
-                  <object class="GtkScrolledWindow" id="scrolledwindow1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="hscrollbar_policy">never</property>
-                    <property name="shadow_type">etched-in</property>
-                    <property name="min_content_width">450</property>
-                    <property name="min_content_height">250</property>
-                    <child>
-                      <object class="GtkTreeView" id="filtered_input_source_list">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="model">filtered_input_source_model</property>
-                        <property name="headers_visible">False</property>
-                        <property name="search_column">0</property>
-                      </object>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
+                <property name="label">gtk-cancel</property>
+                <property name="use_stock">True</property>
+                <property name="use_underline" >True</property>
               </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="input_source_filter">
+              <object class="GtkButton" id="add-button">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="invisible_char">•</property>
-                <property name="secondary-icon-name">edit-find-symbolic</property>
-                <property name="secondary-icon-activatable">False</property>
-                <property name="secondary-icon-sensitive">False</property>
+                <property name="sensitive">False</property>
+                <property name="label">gtk-add</property>
+                <property name="use_stock">True</property>
+                <property name="use_underline" >True</property>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="pack_type">end</property>
-                <property name="position">1</property>
-              </packing>
             </child>
           </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-5">ok-button</action-widget>
+      <action-widget response="-5">add-button</action-widget>
       <action-widget response="-6">cancel-button</action-widget>
     </action-widgets>
   </object>
