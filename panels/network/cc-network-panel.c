@@ -625,7 +625,7 @@ state_changed_cb (NMDevice *device,
                                                         "liststore_devices"));
 
         gtk_list_store_set (store, &iter,
-                            PANEL_DEVICES_COLUMN_ICON, panel_device_to_icon_name (device),
+                            PANEL_DEVICES_COLUMN_ICON, panel_device_to_icon_name (device, TRUE),
                            -1);
 }
 
@@ -704,7 +704,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         gtk_list_store_append (liststore_devices, &iter);
         gtk_list_store_set (liststore_devices,
                             &iter,
-                            PANEL_DEVICES_COLUMN_ICON, panel_device_to_icon_name (device),
+                            PANEL_DEVICES_COLUMN_ICON, panel_device_to_icon_name (device, TRUE),
                             PANEL_DEVICES_COLUMN_SORT, panel_device_to_sortable_string (device),
                             PANEL_DEVICES_COLUMN_OBJECT, net_device,
                             -1);
@@ -1136,7 +1136,7 @@ panel_add_virtual_device (CcNetworkPanel *panel, NMConnection *connection)
         gtk_list_store_append (liststore_devices, &iter);
         gtk_list_store_set (liststore_devices,
                             &iter,
-                            PANEL_DEVICES_COLUMN_ICON, "network-wired",
+                            PANEL_DEVICES_COLUMN_ICON, "network-wired-symbolic",
                             PANEL_DEVICES_COLUMN_SORT, "2",
                             PANEL_DEVICES_COLUMN_OBJECT, net_virt,
                             -1);

@@ -398,7 +398,7 @@ net_proxy_init (NetProxy *proxy)
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
                                                      "image_proxy_device"));
         gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-                                      "preferences-system-network-symbolic",
+                                      "preferences-system-network",
                                       GTK_ICON_SIZE_DIALOG);
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
                                                      "label_proxy_device"));

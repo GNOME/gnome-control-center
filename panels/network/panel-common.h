@@ -30,7 +30,8 @@
 
 G_BEGIN_DECLS
 
-const gchar     *panel_device_to_icon_name                     (NMDevice *device);
+const gchar     *panel_device_to_icon_name                     (NMDevice *device,
+                                                                gboolean  symbolic);
 const gchar     *panel_device_to_localized_string              (NMDevice *device);
 const gchar     *panel_device_to_sortable_string               (NMDevice *device);
 const gchar     *panel_ap_mode_to_localized_string             (NM80211Mode mode);

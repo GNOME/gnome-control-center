@@ -36,7 +36,7 @@
  * panel_device_to_icon_name:
  **/
 const gchar *
-panel_device_to_icon_name (NMDevice *device)
+panel_device_to_icon_name (NMDevice *device, gboolean symbolic)
 {
         const gchar *value = NULL;
         NMDeviceState state;
@@ -45,25 +45,31 @@ panel_device_to_icon_name (NMDevice *device)
         case NM_DEVICE_TYPE_ETHERNET:
                 state = nm_device_get_state (device);
                 if (state <= NM_DEVICE_STATE_DISCONNECTED) {
-                        value = "network-wired-disconnected-symbolic";
+                        value = symbolic ? "network-wired-disconnected-symbolic"
+                                         : "network-wired-disconnected";
                 } else {
-                        value = "network-wired-symbolic";
+                        value = symbolic ? "network-wired-symbolic"
+                                         : "network-wired";
                 }
                 break;
         case NM_DEVICE_TYPE_WIFI:
         case NM_DEVICE_TYPE_BT:
         case NM_DEVICE_TYPE_OLPC_MESH:
-                value = "network-wireless-signal-excellent-symbolic";
+                value = symbolic ? "network-wireless-signal-excellent-symbolic"
+                                 : "network-wireless-signal-excellent";
                 break;
         case NM_DEVICE_TYPE_MODEM:
                 caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
                 if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
                     (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
-                        value = "network-wireless-signal-excellent-symbolic";
+                        value = symbolic ? "network-wireless-signal-excellent-symbolic"
+                                         : "network-wireless-signal-excellent";
+                        break;
                 }
-                break;
+                /* fall thru */
         default:
-                value = "network-idle-symbolic";
+                value = symbolic ? "network-idle-symbolic"
+                                 : "network-idle";
                 break;
         }
         return value;

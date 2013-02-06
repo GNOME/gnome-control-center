@@ -218,7 +218,7 @@ device_ethernet_refresh_ui (NetDeviceEthernet *device)
 
         widget = GTK_WIDGET (gtk_builder_get_object (device->builder, "image_device"));
         gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-                                      panel_device_to_icon_name (nm_device),
+                                      panel_device_to_icon_name (nm_device, FALSE),
                                       GTK_ICON_SIZE_DIALOG);
 
         widget = GTK_WIDGET (gtk_builder_get_object (device->builder, "device_off_switch"));

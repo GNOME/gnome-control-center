@@ -166,7 +166,7 @@ net_virtual_device_refresh (NetObject *object)
         /* set device kind */
         widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "image_device"));
         gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-                                      disconnected ? "network-wired-disconnected-symbolic" : "network-wired-symbolic",
+                                      disconnected ? "network-wired-disconnected" : "network-wired",
                                       GTK_ICON_SIZE_DIALOG);
 
         /* set up the device on/off switch */
