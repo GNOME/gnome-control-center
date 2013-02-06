@@ -330,8 +330,8 @@ set_values (GoaPanelAccountsModel  *model,
   icon = g_icon_new_for_string (goa_account_get_provider_icon (account), &error);
   if (icon == NULL)
     {
-      goa_warning ("Error creating GIcon for account: %s (%s, %d)",
-                   error->message, g_quark_to_string (error->domain), error->code);
+      g_warning ("Error creating GIcon for account: %s (%s, %d)",
+                 error->message, g_quark_to_string (error->domain), error->code);
       g_error_free (error);
     }
 
@@ -370,7 +370,7 @@ remove_account (GoaPanelAccountsModel  *model,
   GtkTreeIter iter;
   if (!find_iter_for_object (model, object, &iter))
     {
-      goa_warning ("Error removing object %s - not in tree", g_dbus_object_get_object_path (G_DBUS_OBJECT (object)));
+      g_warning ("Error removing object %s - not in tree", g_dbus_object_get_object_path (G_DBUS_OBJECT (object)));
     }
   else
     {
@@ -385,7 +385,7 @@ update_account (GoaPanelAccountsModel  *model,
   GtkTreeIter iter;
   if (!find_iter_for_object (model, object, &iter))
     {
-      goa_warning ("Error updating object %s - not in tree", g_dbus_object_get_object_path (G_DBUS_OBJECT (object)));
+      g_warning ("Error updating object %s - not in tree", g_dbus_object_get_object_path (G_DBUS_OBJECT (object)));
     }
   else
     {

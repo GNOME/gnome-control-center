@@ -153,8 +153,8 @@ cc_goa_panel_init (CcGoaPanel *panel)
                                      "/org/gnome/control-center/online-accounts/online-accounts.ui",
                                      &error) == 0)
     {
-      goa_warning ("Error loading UI file: %s (%s, %d)",
-                   error->message, g_quark_to_string (error->domain), error->code);
+      g_warning ("Error loading UI file: %s (%s, %d)",
+                 error->message, g_quark_to_string (error->domain), error->code);
       g_error_free (error);
       goto out;
     }
@@ -201,8 +201,8 @@ cc_goa_panel_init (CcGoaPanel *panel)
   panel->client = goa_client_new_sync (NULL /* GCancellable */, &error);
   if (panel->client == NULL)
     {
-      goa_warning ("Error getting a GoaClient: %s (%s, %d)",
-                   error->message, g_quark_to_string (error->domain), error->code);
+      g_warning ("Error getting a GoaClient: %s (%s, %d)",
+                 error->message, g_quark_to_string (error->domain), error->code);
       w = GTK_WIDGET (gtk_builder_get_object (panel->builder, "goa-top-widget"));
       gtk_widget_set_sensitive (w, FALSE);
       g_error_free (error);
