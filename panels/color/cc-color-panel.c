@@ -2037,6 +2037,23 @@ cc_color_panel_separator_func (GtkWidget **separator,
     }
 }
 
+static gboolean
+cc_color_panel_treeview_quality_default_cb (GtkTreeModel *model,
+                                            GtkTreePath *path,
+                                            GtkTreeIter *iter,
+                                            gpointer data)
+{
+  CdProfileQuality quality;
+  GtkTreeSelection *selection = GTK_TREE_SELECTION (data);
+
+  gtk_tree_model_get (model, iter,
+                      COLUMN_CALIB_QUALITY_VALUE, &quality,
+                      -1);
+  if (quality == CD_PROFILE_QUALITY_MEDIUM)
+    gtk_tree_selection_select_iter (selection, iter);
+  return FALSE;
+}
+
 static void
 cc_color_panel_init (CcColorPanel *prefs)
 {
@@ -2044,6 +2061,7 @@ cc_color_panel_init (CcColorPanel *prefs)
   GError *error = NULL;
   GtkCellRenderer *renderer;
   GtkStyleContext *context;
+  GtkTreeModel *model;
   GtkTreeSelection *selection;
   GtkTreeViewColumn *column;
   GtkWidget *widget;
@@ -2182,6 +2200,10 @@ cc_color_panel_init (CcColorPanel *prefs)
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "treeview_calib_quality"));
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
+  gtk_tree_model_foreach (model,
+                          cc_color_panel_treeview_quality_default_cb,
+                          selection);
   g_signal_connect (selection, "changed",
                     G_CALLBACK (gcm_prefs_calib_quality_treeview_clicked_cb),
                     prefs);
@@ -2210,8 +2232,6 @@ cc_color_panel_init (CcColorPanel *prefs)
   gtk_tree_view_column_set_expand (column, FALSE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (widget),
                                GTK_TREE_VIEW_COLUMN (column));
-  g_signal_connect (widget, "realize",
-                    G_CALLBACK (gcm_prefs_calib_treeview_realize_cb), prefs);
 
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "treeview_calib_sensor"));
