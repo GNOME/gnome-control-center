@@ -594,22 +594,6 @@ gcm_prefs_calibrate_display (CcColorPanel *prefs)
   gtk_widget_show (widget);
 }
 
-static gboolean
-gcm_prefs_calib_treeview_realize_idle_cb (gpointer user_data)
-{
-  GtkWidget *widget = GTK_WIDGET (user_data);
-  GtkTreeSelection *selection;
-  selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-  gtk_tree_selection_unselect_all (selection);
-  return FALSE;
-}
-
-static void
-gcm_prefs_calib_treeview_realize_cb (GtkWidget *widget, CcColorPanel *prefs)
-{
-  g_idle_add (gcm_prefs_calib_treeview_realize_idle_cb, widget);
-}
-
 static void
 gcm_prefs_title_entry_changed_cb (GtkWidget *widget,
                                   GParamSpec *param_spec,
@@ -2326,8 +2310,6 @@ cc_color_panel_init (CcColorPanel *prefs)
   gtk_tree_view_column_set_expand (column, TRUE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (widget),
                                GTK_TREE_VIEW_COLUMN (column));
-  g_signal_connect (widget, "realize",
-                    G_CALLBACK (gcm_prefs_calib_treeview_realize_cb), prefs);
 
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "treeview_calib_kind"));
@@ -2353,8 +2335,6 @@ cc_color_panel_init (CcColorPanel *prefs)
   gtk_tree_view_column_set_expand (column, TRUE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (widget),
                                GTK_TREE_VIEW_COLUMN (column));
-  g_signal_connect (widget, "realize",
-                    G_CALLBACK (gcm_prefs_calib_treeview_realize_cb), prefs);
 
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "treeview_calib_temp"));
@@ -2374,8 +2354,6 @@ cc_color_panel_init (CcColorPanel *prefs)
   gtk_tree_view_column_set_expand (column, TRUE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (widget),
                                GTK_TREE_VIEW_COLUMN (column));
-  g_signal_connect (widget, "realize",
-                    G_CALLBACK (gcm_prefs_calib_treeview_realize_cb), prefs);
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "entry_calib_title"));
   g_signal_connect (widget, "notify::text",
