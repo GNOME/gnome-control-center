@@ -79,7 +79,6 @@ cc_color_calibrate_set_kind (CcColorCalibrate *calibrate,
                              CdSensorCap kind)
 {
   g_return_if_fail (CC_IS_COLOR_CALIB (calibrate));
-  g_return_if_fail (kind != CD_SENSOR_CAP_UNKNOWN);
   calibrate->priv->device_kind = kind;
 }
 
@@ -854,7 +853,8 @@ cc_color_calibrate_setup (CcColorCalibrate *calibrate,
   gboolean ret = TRUE;
 
   g_return_val_if_fail (CC_IS_COLOR_CALIB (calibrate), FALSE);
- 
+  g_return_val_if_fail (calibrate->priv->device_kind != CD_SENSOR_CAP_UNKNOWN, FALSE);
+
   /* use logind to disable system state idle */
   priv->proxy_inhibit = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                        G_DBUS_PROXY_FLAGS_NONE,

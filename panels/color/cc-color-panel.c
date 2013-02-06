@@ -72,6 +72,7 @@ enum {
 enum {
   COLUMN_CALIB_KIND_DESCRIPTION,
   COLUMN_CALIB_KIND_CAP_VALUE,
+  COLUMN_CALIB_KIND_VISIBLE,
   COLUMN_CALIB_KIND_LAST
 };
 enum {
@@ -427,11 +428,84 @@ gcm_prefs_calib_quality_treeview_clicked_cb (GtkTreeSelection *selection,
   cc_color_calibrate_set_quality (priv->calibrate, quality);
 }
 
+static gboolean
+gcm_prefs_calib_set_sensor_cap_supported_cb (GtkTreeModel *model,
+                                             GtkTreePath *path,
+                                             GtkTreeIter *iter,
+                                             gpointer data)
+{
+  CdSensorCap cap;
+  CdSensor *sensor = CD_SENSOR (data);
+  gboolean supported;
+
+  gtk_tree_model_get (model, iter,
+                      COLUMN_CALIB_KIND_CAP_VALUE, &cap,
+                      -1);
+  supported = cd_sensor_has_cap (sensor, cap);
+  g_debug ("%s(%s) is %s",
+           cd_sensor_get_model (sensor),
+           cd_sensor_cap_to_string (cap),
+           supported ? "supported" : "not-supported");
+  gtk_list_store_set (GTK_LIST_STORE (model), iter,
+                      COLUMN_CALIB_KIND_VISIBLE, supported,
+                      -1);
+  return FALSE;
+}
+
+static guint8
+_cd_bitfield_popcount (guint64 bitfield)
+{
+  guint8 i;
+  guint8 tmp = 0;
+  for (i = 0; i < 64; i++)
+    tmp += cd_bitfield_contain (bitfield, i);
+  return tmp;
+}
+
+static void
+gcm_prefs_calib_set_sensor (CcColorPanel *prefs,
+                            CdSensor *sensor)
+{
+  CcColorPanelPrivate *priv = prefs->priv;
+  GtkTreeModel *model;
+  GtkWidget *page;
+  guint64 caps;
+  guint8 i;
+
+  /* use this sensor for calibration */
+  cc_color_calibrate_set_sensor (priv->calibrate, sensor);
+
+  /* hide display types the sensor does not support */
+  model = GTK_TREE_MODEL (gtk_builder_get_object (priv->builder,
+                                                  "liststore_calib_kind"));
+  gtk_tree_model_foreach (model,
+                          gcm_prefs_calib_set_sensor_cap_supported_cb,
+                          sensor);
+
+  /* if the sensor only supports one kind then do not show the panel at all */
+  page = GTK_WIDGET (gtk_builder_get_object (prefs->priv->builder,
+                                             "box_calib_kind"));
+  caps = cd_sensor_get_caps (sensor);
+  if (_cd_bitfield_popcount (caps) == 1)
+    {
+      gtk_widget_set_visible (page, FALSE);
+      for (i = 0; i < CD_SENSOR_CAP_LAST; i++)
+        {
+          if (cd_bitfield_contain (caps, i))
+            cc_color_calibrate_set_kind (priv->calibrate, i);
+        }
+    }
+  else
+    {
+      cc_color_calibrate_set_kind (priv->calibrate, CD_SENSOR_CAP_UNKNOWN);
+      gtk_widget_set_visible (page, TRUE);
+    }
+}
+
 static void
 gcm_prefs_calib_sensor_treeview_clicked_cb (GtkTreeSelection *selection,
                                              CcColorPanel *prefs)
 {
-  CcColorPanelPrivate *priv = prefs->priv;
   gboolean ret;
   GtkTreeIter iter;
   GtkTreeModel *model;
@@ -453,7 +527,7 @@ gcm_prefs_calib_sensor_treeview_clicked_cb (GtkTreeSelection *selection,
   gtk_tree_model_get (model, &iter,
                       COLUMN_CALIB_SENSOR_OBJECT, &sensor,
                       -1);
-  cc_color_calibrate_set_sensor (priv->calibrate, sensor);
+  gcm_prefs_calib_set_sensor (prefs, sensor);
   g_object_unref (sensor);
 }
 
@@ -494,7 +568,7 @@ gcm_prefs_calibrate_display (CcColorPanel *prefs)
   else
     {
       sensor_tmp = g_ptr_array_index (priv->sensors, 0);
-      cc_color_calibrate_set_sensor (priv->calibrate, sensor_tmp);
+      gcm_prefs_calib_set_sensor (prefs, sensor_tmp);
       gtk_widget_set_visible (page, FALSE);
     }
 
@@ -2062,6 +2136,7 @@ cc_color_panel_init (CcColorPanel *prefs)
   GtkCellRenderer *renderer;
   GtkStyleContext *context;
   GtkTreeModel *model;
+  GtkTreeModel *model_filter;
   GtkTreeSelection *selection;
   GtkTreeViewColumn *column;
   GtkWidget *widget;
@@ -2269,6 +2344,12 @@ cc_color_panel_init (CcColorPanel *prefs)
   gtk_tree_view_column_pack_start (column, renderer, TRUE);
   gtk_tree_view_column_add_attribute (column, renderer,
                                       "markup", COLUMN_CALIB_KIND_DESCRIPTION);
+  model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
+  model_filter = gtk_tree_model_filter_new (model, NULL);
+  gtk_tree_view_set_model (GTK_TREE_VIEW (widget), model_filter);
+  gtk_tree_model_filter_set_visible_column (GTK_TREE_MODEL_FILTER (model_filter),
+                                            COLUMN_CALIB_KIND_VISIBLE);
+
   gtk_tree_view_column_set_expand (column, TRUE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (widget),
                                GTK_TREE_VIEW_COLUMN (column));
