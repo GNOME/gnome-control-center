@@ -220,6 +220,7 @@ add_address_row (CEPageIP6   *page,
         gtk_grid_attach (GTK_GRID (row), delete_button, 3, 2, 1, 1);
         g_object_set_data (G_OBJECT (row), "delete-button", delete_button);
 
+        gtk_grid_set_row_spacing (GTK_GRID (row), 10);
         gtk_widget_set_margin_left (row, 10);
         gtk_widget_set_margin_right (row, 10);
         gtk_widget_set_margin_top (row, 10);
@@ -480,6 +481,7 @@ add_route_row (CEPageIP6   *page,
         gtk_grid_attach (GTK_GRID (row), delete_button, 3, 1, 1, 4);
         g_object_set_data (G_OBJECT (row), "delete-button", delete_button);
 
+        gtk_grid_set_row_spacing (GTK_GRID (row), 10);
         gtk_widget_set_margin_left (row, 10);
         gtk_widget_set_margin_right (row, 10);
         gtk_widget_set_margin_top (row, 10);
