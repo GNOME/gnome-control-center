@@ -76,7 +76,7 @@ char             *bg_pictures_source_get_unique_path(const char *uri);
 gboolean          bg_pictures_source_add            (BgPicturesSource *bg_source,
 						     const char       *uri);
 gboolean          bg_pictures_source_remove         (BgPicturesSource *bg_source,
-						     CcBackgroundItem *item);
+						     const char       *uri);
 gboolean          bg_pictures_source_is_known       (BgPicturesSource *bg_source,
 						     const char       *uri);
 

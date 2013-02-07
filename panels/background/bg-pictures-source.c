@@ -44,6 +44,9 @@ struct _BgPicturesSourcePrivate
 
   GnomeDesktopThumbnailFactory *thumb_factory;
 
+  GFileMonitor *picture_dir_monitor;
+  GFileMonitor *cache_dir_monitor;
+
   GHashTable *known_items;
 };
 
@@ -121,6 +124,9 @@ bg_pictures_source_finalize (GObject *object)
       bg_source->priv->known_items = NULL;
     }
 
+  g_clear_object (&bg_source->priv->picture_dir_monitor);
+  g_clear_object (&bg_source->priv->cache_dir_monitor);
+
   G_OBJECT_CLASS (bg_pictures_source_parent_class)->finalize (object);
 }
 
@@ -146,8 +152,8 @@ picture_scaled (GObject *source_object,
   CcBackgroundItem *item;
   GError *error = NULL;
   GdkPixbuf *pixbuf;
-  const char *source_url;
   const char *software;
+  const char *uri;
   GtkTreeIter iter;
   GtkListStore *store;
 
@@ -167,6 +173,7 @@ picture_scaled (GObject *source_object,
   bg_source = BG_PICTURES_SOURCE (user_data);
   store = bg_source_get_liststore (BG_SOURCE (bg_source));
   item = g_object_get_data (source_object, "item");
+  uri = cc_background_item_get_uri (item);
 
   /* Ignore screenshots */
   software = gdk_pixbuf_get_option (pixbuf, "tEXt::Software");
@@ -187,34 +194,11 @@ picture_scaled (GObject *source_object,
                                      0, pixbuf,
                                      1, item,
                                      -1);
-  source_url = cc_background_item_get_source_url (item);
-  if (source_url != NULL)
-    {
-      g_hash_table_insert (bg_source->priv->known_items,
-			   bg_pictures_source_get_unique_filename (source_url), GINT_TO_POINTER (TRUE));
-    }
-  else
-    {
-      char *cache_path;
-      GFile *file, *parent, *dir;
 
-      cache_path = bg_pictures_source_get_cache_path ();
-      dir = g_file_new_for_path (cache_path);
-      g_free (cache_path);
+  g_hash_table_insert (bg_source->priv->known_items,
+                       bg_pictures_source_get_unique_filename (uri),
+                       GINT_TO_POINTER (TRUE));
 
-      file = g_file_new_for_uri (cc_background_item_get_uri (item));
-      parent = g_file_get_parent (file);
-
-      if (g_file_equal (parent, dir))
-        {
-          char *basename;
-          basename = g_file_get_basename (file);
-	  g_hash_table_insert (bg_source->priv->known_items,
-			       basename, GINT_TO_POINTER (TRUE));
-	}
-      g_object_unref (file);
-      g_object_unref (parent);
-    }
 
   g_object_unref (pixbuf);
 }
@@ -332,17 +316,15 @@ bg_pictures_source_add (BgPicturesSource *bg_source,
 
 gboolean
 bg_pictures_source_remove (BgPicturesSource *bg_source,
-			   CcBackgroundItem *item)
+                           const char       *uri)
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
   gboolean cont;
-  const char *uri;
   gboolean retval;
 
   retval = FALSE;
   model = GTK_TREE_MODEL (bg_source_get_liststore (BG_SOURCE (bg_source)));
-  uri = cc_background_item_get_uri (item);
 
   cont = gtk_tree_model_get_iter_first (model, &iter);
   while (cont)
@@ -354,18 +336,13 @@ bg_pictures_source_remove (BgPicturesSource *bg_source,
       tmp_uri = cc_background_item_get_uri (tmp_item);
       if (g_str_equal (tmp_uri, uri))
         {
-          GFile *file;
           char *uuid;
-
-          file = g_file_new_for_uri (uri);
-          uuid = g_file_get_basename (file);
+          uuid = bg_pictures_source_get_unique_filename (uri);
           g_hash_table_insert (bg_source->priv->known_items,
 			       uuid, NULL);
 
           gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
           retval = TRUE;
-          g_file_trash (file, NULL, NULL);
-          g_object_unref (file);
           break;
         }
       g_object_unref (tmp_item);
@@ -548,6 +525,79 @@ sort_func (GtkTreeModel *model,
 }
 
 static void
+file_info_ready (GObject      *object,
+                 GAsyncResult *res,
+                 gpointer      user_data)
+{
+  GFileInfo *info;
+  GError *error = NULL;
+  GFile *file = G_FILE (object);
+
+  info = g_file_query_info_finish (file, res, &error);
+
+  if (!info)
+    {
+      g_warning ("Problem looking up file info: %s", error->message);
+      g_clear_error (&error);
+      return;
+    }
+
+  /* Up the ref count so we can re-use the add_single_item code path which
+   * reduces the ref count.
+   */
+  g_object_ref (file);
+  add_single_file (BG_PICTURES_SOURCE (user_data), file, info, NULL);
+}
+
+static void
+file_added (GFile            *file,
+            BgPicturesSource *self)
+{
+  char *uri;
+  uri = g_file_get_uri (file);
+
+  if (!bg_pictures_source_is_known (self, uri))
+    {
+      g_file_query_info_async (file,
+                               ATTRIBUTES,
+                               G_FILE_QUERY_INFO_NONE,
+                               G_PRIORITY_LOW,
+                               NULL,
+                               file_info_ready,
+                               self);
+    }
+
+  g_free (uri);
+}
+
+static void
+files_changed_cb (GFileMonitor      *monitor,
+                  GFile             *file,
+                  GFile             *other_file,
+                  GFileMonitorEvent  event_type,
+                  gpointer           user_data)
+{
+  BgPicturesSource *self = BG_PICTURES_SOURCE (user_data);
+  char *uri;
+
+  switch (event_type)
+    {
+      case G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT:
+        file_added (file, self);
+        break;
+
+      case G_FILE_MONITOR_EVENT_DELETED:
+        uri = g_file_get_uri (file);
+        bg_pictures_source_remove (self, uri);
+        g_free (uri);
+        break;
+
+      default:
+        return;
+    }
+}
+
+static void
 bg_pictures_source_init (BgPicturesSource *self)
 {
   const gchar *pictures_path;
@@ -571,6 +621,18 @@ bg_pictures_source_init (BgPicturesSource *self)
                                    G_FILE_QUERY_INFO_NONE,
                                    G_PRIORITY_LOW, priv->cancellable,
                                    dir_enum_async_ready, self);
+
+  priv->picture_dir_monitor = g_file_monitor_directory (dir,
+                                                        G_FILE_MONITOR_NONE,
+                                                        priv->cancellable,
+                                                        NULL);
+
+  if (priv->picture_dir_monitor)
+    g_signal_connect (priv->picture_dir_monitor,
+                      "changed",
+                      G_CALLBACK (files_changed_cb),
+                      self);
+
   g_object_unref (dir);
 
   cache_path = bg_pictures_source_get_cache_path ();
@@ -580,6 +642,17 @@ bg_pictures_source_init (BgPicturesSource *self)
                                    G_FILE_QUERY_INFO_NONE,
                                    G_PRIORITY_LOW, priv->cancellable,
                                    dir_enum_async_ready, self);
+
+  priv->cache_dir_monitor = g_file_monitor_directory (dir,
+                                                      G_FILE_MONITOR_NONE,
+                                                      priv->cancellable,
+                                                      NULL);
+  if (priv->cache_dir_monitor)
+    g_signal_connect (priv->cache_dir_monitor,
+                      "changed",
+                      G_CALLBACK (files_changed_cb),
+                      self);
+
   g_object_unref (dir);
 
   priv->thumb_factory =
