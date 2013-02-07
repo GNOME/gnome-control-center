@@ -61,10 +61,9 @@ layout_link_clicked (GtkLinkButton *button,
 {
   CcShell *shell;
   GError *error = NULL;
-  const char *argv[] = { "layouts", NULL };
 
   shell = cc_panel_get_shell (panel);
-  if (cc_shell_set_active_panel_from_id (shell, "region", argv, &error) == FALSE)
+  if (cc_shell_set_active_panel_from_id (shell, "region", NULL, &error) == FALSE)
     {
       g_warning ("Failed to activate Region panel: %s", error->message);
       g_error_free (error);
