@@ -334,6 +334,7 @@ add_row (NetDeviceEthernet *device, NMConnection *connection)
         image = gtk_image_new_from_icon_name ("emblem-system-symbolic", GTK_ICON_SIZE_MENU);
         gtk_widget_show (image);
         widget = gtk_button_new ();
+        gtk_style_context_add_class (gtk_widget_get_style_context (widget), "image-button");
         gtk_widget_set_margin_left (widget, 12);
         gtk_widget_set_margin_right (widget, 12);
         gtk_widget_set_margin_top (widget, 12);

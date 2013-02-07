@@ -5,6 +5,7 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="icon_name">emblem-system-symbolic</property>
+    <property name="icon_size">1</property>
   </object>
   <object class="GtkWindow" id="window_tmp">
     <property name="can_focus">False</property>
@@ -194,6 +195,9 @@
                 <property name="receives_default">True</property>
                 <property name="halign">end</property>
                 <property name="image">image1</property>
+                <style>
+                  <class name="image-button"/>
+                </style>
               </object>
               <packing>
                 <property name="expand">True</property>

@@ -1532,6 +1532,7 @@ make_row (GtkSizeGroup   *rows,
                 image = gtk_image_new_from_icon_name ("emblem-system-symbolic", GTK_ICON_SIZE_MENU);
                 gtk_widget_show (image);
                 widget = gtk_button_new ();
+                gtk_style_context_add_class (gtk_widget_get_style_context (widget), "image-button");
                 gtk_widget_set_no_show_all (widget, TRUE);
                 if (!connecting)
                         gtk_widget_show (widget);
