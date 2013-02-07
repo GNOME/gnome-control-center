@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-01-31 19:29+0000\n"
-"PO-Revision-Date: 2013-01-31 22:14+0100\n"
+"POT-Creation-Date: 2013-02-07 13:34+0000\n"
+"PO-Revision-Date: 2013-02-07 20:02+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -120,7 +120,9 @@ msgstr "Spremeni ozadje"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Slika ozadja;Zaslon;Namizje"
 
+#. TRANSLATORS: device type
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
+#: ../panels/network/panel-common.c:105
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -239,7 +241,7 @@ msgstr ""
 "ponovno nastaviti."
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
-#: ../panels/color/cc-color-calibrate.c:360
+#: ../panels/color/cc-color-calibrate.c:359
 msgid "Place your calibration device over the square and press 'Start'"
 msgstr ""
 "Postavite napravo za umerjanje na označen kvadrat in pritisnite tipko za "
@@ -248,7 +250,7 @@ msgstr ""
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
-#: ../panels/color/cc-color-calibrate.c:366
+#: ../panels/color/cc-color-calibrate.c:365
 msgid ""
 "Move your calibration device to the calibrate position and press 'Continue'"
 msgstr ""
@@ -258,7 +260,7 @@ msgstr ""
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
-#: ../panels/color/cc-color-calibrate.c:372
+#: ../panels/color/cc-color-calibrate.c:371
 msgid ""
 "Move your calibration device to the surface position and press 'Continue'"
 msgstr ""
@@ -268,54 +270,54 @@ msgstr ""
 #. TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
 #. * is built into the palmrest and we need to fullscreen the
 #. * sample widget and shut the lid.
-#: ../panels/color/cc-color-calibrate.c:378
+#: ../panels/color/cc-color-calibrate.c:377
 msgid "Shut the laptop lid"
 msgstr "Zapri pokrov prenosnika"
 
 #. TRANSLATORS: We suck, the calibation failed and we have no
 #. * good idea why or any suggestions
-#: ../panels/color/cc-color-calibrate.c:409
+#: ../panels/color/cc-color-calibrate.c:408
 msgid "An internal error occurred that could not be recovered."
 msgstr "Prišlo je do notranje napake, ki ne ni mogoče razrešiti."
 
 #. TRANSLATORS: Some required-at-runtime tools were not
 #. * installed, which should only affect insane distros
-#: ../panels/color/cc-color-calibrate.c:414
+#: ../panels/color/cc-color-calibrate.c:413
 msgid "Tools required for calibration are not installed."
 msgstr ""
 
 #. TRANSLATORS: The profile failed for some reason
-#: ../panels/color/cc-color-calibrate.c:420
+#: ../panels/color/cc-color-calibrate.c:419
 msgid "The profile could not be generated."
 msgstr "Profila ni mogoče ustvariti."
 
 #. TRANSLATORS: The user specified a whitepoint that was
 #. * unobtainable with the hardware they've got -- see
 #. * https://en.wikipedia.org/wiki/White_point for details
-#: ../panels/color/cc-color-calibrate.c:426
+#: ../panels/color/cc-color-calibrate.c:425
 msgid "The target whitepoint was not obtainable."
 msgstr ""
 
 #. TRANSLATORS: the display calibration process is finished
-#: ../panels/color/cc-color-calibrate.c:466
+#: ../panels/color/cc-color-calibrate.c:465
 msgid "Complete!"
 msgstr "Dokončano!"
 
 #. TRANSLATORS: the display calibration failed, and we also show
 #. * the translated (or untranslated) error string after this
-#: ../panels/color/cc-color-calibrate.c:474
+#: ../panels/color/cc-color-calibrate.c:473
 msgid "Calibration failed!"
 msgstr "Umerjanje je spodletelo!"
 
 #. TRANSLATORS: The user can now remove the sensor from the screen
-#: ../panels/color/cc-color-calibrate.c:481
+#: ../panels/color/cc-color-calibrate.c:480
 msgid "You can remove the calibration device."
 msgstr "Napravo za umerjanje je dovoljeno odstraniti."
 
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
-#: ../panels/color/cc-color-calibrate.c:552
+#: ../panels/color/cc-color-calibrate.c:551
 msgid "Do not disturb the calibration device while in progress"
 msgstr ""
 
@@ -367,58 +369,58 @@ msgstr "Ni umerjeno"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:131
+#: ../panels/color/cc-color-panel.c:132
 msgid "Default: "
 msgstr "Privzeto:"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:139
+#: ../panels/color/cc-color-panel.c:140
 msgid "Colorspace: "
 msgstr "Barvni prostor:"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:146
+#: ../panels/color/cc-color-panel.c:147
 msgid "Test profile: "
 msgstr "Preizkusni profil:"
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:214
+#: ../panels/color/cc-color-panel.c:215
 msgid "Select ICC Profile File"
 msgstr "Izbor datoteke profila ICC"
 
-#: ../panels/color/cc-color-panel.c:217
+#: ../panels/color/cc-color-panel.c:218
 msgid "_Import"
 msgstr "_Uvozi"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:228
+#: ../panels/color/cc-color-panel.c:229
 msgid "Supported ICC profiles"
 msgstr "Podprti profili ICC"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:235
+#: ../panels/color/cc-color-panel.c:236
 #: ../panels/network/wireless-security/eap-method-fast.c:410
 msgid "All files"
 msgstr "Vse datoteke"
 
-#: ../panels/color/cc-color-panel.c:506
+#: ../panels/color/cc-color-panel.c:580
 msgid "Screen"
 msgstr "Zaslon"
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:776
+#: ../panels/color/cc-color-panel.c:852
 msgid "Save Profile"
 msgstr "Shrani profil"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1137
+#: ../panels/color/cc-color-panel.c:1213
 msgid "Create a color profile for the selected device"
 msgstr "Ustvari barvni profil za izbrane naprave"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1152 ../panels/color/cc-color-panel.c:1176
+#: ../panels/color/cc-color-panel.c:1228 ../panels/color/cc-color-panel.c:1252
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -427,12 +429,12 @@ msgstr ""
 "na ustrezen način."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1186
+#: ../panels/color/cc-color-panel.c:1262
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Merilna naprava ne podpira profilliranja tiskalnika."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1197
+#: ../panels/color/cc-color-panel.c:1273
 msgid "The device type is not currently supported."
 msgstr "Vrsta naprave trenutno ni podprta."
 
@@ -570,20 +572,20 @@ msgid "Calibration Quality"
 msgstr "Kakovost umerjanja"
 
 #: ../panels/color/color.ui.h:9
-msgid "Select the type of display that is connected."
-msgstr ""
-
-#: ../panels/color/color.ui.h:10
-msgid "Display Type"
-msgstr "Vrsta zaslona"
-
-#: ../panels/color/color.ui.h:11
 msgid "Select the sensor device you want to use for calibration."
 msgstr ""
 
-#: ../panels/color/color.ui.h:12
+#: ../panels/color/color.ui.h:10
 msgid "Calibration Device"
 msgstr "Naprava za umerjanje"
+
+#: ../panels/color/color.ui.h:11
+msgid "Select the type of display that is connected."
+msgstr ""
+
+#: ../panels/color/color.ui.h:12
+msgid "Display Type"
+msgstr "Vrsta zaslona"
 
 #: ../panels/color/color.ui.h:13
 msgid ""
@@ -748,51 +750,54 @@ msgid "Projector"
 msgstr "Projektor"
 
 #: ../panels/color/color.ui.h:48
+msgid "Plasma"
+msgstr "Plazma"
+
+#: ../panels/color/color.ui.h:49
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Visoka"
 
-#: ../panels/color/color.ui.h:49
+#: ../panels/color/color.ui.h:50
 msgid "40 minutes"
 msgstr "40 minut"
 
-#: ../panels/color/color.ui.h:50
+#: ../panels/color/color.ui.h:51
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "srednja"
 
-#: ../panels/color/color.ui.h:51 ../panels/power/power.ui.h:5
+#: ../panels/color/color.ui.h:52 ../panels/power/power.ui.h:5
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 minut"
 
-#: ../panels/color/color.ui.h:52
+#: ../panels/color/color.ui.h:53
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Nizka"
 
-#: ../panels/color/color.ui.h:53
+#: ../panels/color/color.ui.h:54
 msgid "15 minutes"
 msgstr "15 minut"
 
-#: ../panels/color/color.ui.h:54
-#, fuzzy
-msgid "Native to display"
-msgstr "Zaslon X, ki naj bo uporabljen"
-
 #: ../panels/color/color.ui.h:55
+msgid "Native to display"
+msgstr "Lastno zaslonu"
+
+#: ../panels/color/color.ui.h:56
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (tisk in založništvo)"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:57
 msgid "D55"
 msgstr "D55"
 
-#: ../panels/color/color.ui.h:57
+#: ../panels/color/color.ui.h:58
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (fotografija in grafika)"
 
-#: ../panels/color/color.ui.h:58
+#: ../panels/color/color.ui.h:59
 msgid "D75"
 msgstr "D75"
 
@@ -1101,8 +1106,11 @@ msgstr "Spremeni ločljivost in položaj zaslonov in projektorjev"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Pult;Projektor;xrandr;Zaslon;Ločljivost;Osveževanje;"
 
+#. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:441 ../panels/network/panel-common.c:120
+#: ../panels/info/cc-info-panel.c:441
+#: ../panels/network/cc-network-panel.c:1132
+#: ../panels/network/panel-common.c:113 ../panels/network/panel-common.c:167
 msgid "Unknown"
 msgstr "Neznano"
 
@@ -1906,21 +1914,31 @@ msgstr "Enojni klik, drugi gumb"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:336
+#: ../panels/network/cc-network-panel.c:338
 msgid "Air_plane Mode"
 msgstr "_Letalski način"
 
-#: ../panels/network/cc-network-panel.c:869
+#: ../panels/network/cc-network-panel.c:879
 msgid "Network proxy"
 msgstr "Omrežni posredniški strežnik"
 
-#: ../panels/network/cc-network-panel.c:1048 ../panels/network/net-vpn.c:280
+#: ../panels/network/cc-network-panel.c:1058 ../panels/network/net-vpn.c:280
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
 
+#: ../panels/network/cc-network-panel.c:1128
+#: ../panels/network/connection-editor/net-connection-editor.c:586
+msgid "Bond"
+msgstr "Vez"
+
+#: ../panels/network/cc-network-panel.c:1130
+#: ../panels/network/connection-editor/net-connection-editor.c:590
+msgid "VLAN"
+msgstr "VLAN"
+
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1181
+#: ../panels/network/cc-network-panel.c:1202
 msgid "The system network services are not compatible with this version."
 msgstr "Sistemske omrežne storitve niso podprte s to različico."
 
@@ -2178,7 +2196,7 @@ msgstr "Hitrost povezave"
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:159
 #: ../panels/network/network-simple.ui.h:2
-#: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:643
+#: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:690
 msgid "IPv4 Address"
 msgstr "Naslov IPv4"
 
@@ -2187,7 +2205,7 @@ msgstr "Naslov IPv4"
 #: ../panels/network/net-device-ethernet.c:164
 #: ../panels/network/network-mobile.ui.h:4
 #: ../panels/network/network-simple.ui.h:3
-#: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:644
+#: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:691
 msgid "IPv6 Address"
 msgstr "Naslov IPv6"
 
@@ -2222,7 +2240,7 @@ msgstr "Nazadnje uporabljeno"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:2
 msgid "Twisted Pair (TP)"
-msgstr ""
+msgstr "Parica (TP)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:3
 msgid "Attachment Unit Interface (AUI)"
@@ -2279,7 +2297,7 @@ msgstr "_Samodejna povezava"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:15
 msgid "Make available to other _users"
-msgstr ""
+msgstr "Na voljo tudi _drugim uporabnikom"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:16
 msgid "bytes"
@@ -2300,7 +2318,7 @@ msgstr "_Naslovi"
 #: ../panels/network/connection-editor/ip6-page.ui.h:5
 #: ../panels/network/network-wifi.ui.h:39
 msgid "Routes"
-msgstr ""
+msgstr "Usmerjevanje"
 
 #: ../panels/network/connection-editor/ip4-page.ui.h:6
 #: ../panels/network/connection-editor/ip6-page.ui.h:6
@@ -2321,38 +2339,30 @@ msgstr "Ni mogoče odpreti urejevalnika povezav"
 msgid "New Profile"
 msgstr "Nov profil"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:502
+#: ../panels/network/connection-editor/net-connection-editor.c:504
 #: ../panels/printers/new-printer-dialog.ui.h:2
 #: ../panels/user-accounts/um-account-dialog.c:1068
 msgid "_Add"
 msgstr "_Dodaj"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:583
+#: ../panels/network/connection-editor/net-connection-editor.c:585
 #: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:584
-msgid "Bond"
-msgstr "Vez"
-
-#: ../panels/network/connection-editor/net-connection-editor.c:585
+#: ../panels/network/connection-editor/net-connection-editor.c:588
 msgid "Bridge"
 msgstr "Premoščanje"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:586
-msgid "VLAN"
-msgstr "VLAN"
-
-#: ../panels/network/connection-editor/net-connection-editor.c:736
+#: ../panels/network/connection-editor/net-connection-editor.c:740
 msgid "Could not load VPN plugins"
 msgstr "Ni mogoče naložiti vstavkov VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:800
+#: ../panels/network/connection-editor/net-connection-editor.c:804
 msgid "Import from file…"
 msgstr "Uvozi iz datoteke ..."
 
-#: ../panels/network/connection-editor/net-connection-editor.c:867
+#: ../panels/network/connection-editor/net-connection-editor.c:871
 msgid "Add Network Connection"
 msgstr "Dodaj omrežno povezavo"
 
@@ -2362,7 +2372,7 @@ msgid "_Reset"
 msgstr "_Ponastavi"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1402
+#: ../panels/network/net-device-wifi.c:1404
 #: ../panels/network/network-wifi.ui.h:54
 msgid "_Forget"
 msgstr "_Izbriši"
@@ -2461,7 +2471,7 @@ msgstr "Domače omrežje"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:7
 msgid "Make available to _other users"
-msgstr ""
+msgstr "Na voljo tudi _drugim uporabnikom"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 #: ../panels/network/network-mobile.ui.h:7
@@ -2483,7 +2493,7 @@ msgstr ""
 msgid "Bond slaves"
 msgstr "Podrejene vezi"
 
-#: ../panels/network/net-device-bridge.c:77
+#: ../panels/network/net-device-bridge.c:79
 msgid "Bridge slaves"
 msgstr "Podrejene vezi"
 
@@ -2504,7 +2514,7 @@ msgstr "včeraj"
 
 #: ../panels/network/net-device-ethernet.c:162
 #: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:646 ../panels/network/panel-common.c:648
+#: ../panels/network/panel-common.c:693 ../panels/network/panel-common.c:695
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "IP naslov"
@@ -2523,7 +2533,7 @@ msgstr "Profil %d"
 msgid "Add new connection"
 msgstr "Dodaj novo povezavo"
 
-#: ../panels/network/net-device-wifi.c:1123
+#: ../panels/network/net-device-wifi.c:1125
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2531,12 +2541,12 @@ msgstr ""
 "V kolikor imate povezavo v omrežje, ki ni brezžična, jo lahko delite kot "
 "vročo točko z drugimi uporabniki za dostop do interneta."
 
-#: ../panels/network/net-device-wifi.c:1127
+#: ../panels/network/net-device-wifi.c:1129
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Preklop na brezžično vročo točko bo prekinilo povezavo z <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1131
+#: ../panels/network/net-device-wifi.c:1133
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2544,17 +2554,17 @@ msgstr ""
 "Ni mogoč dostop do interneta preko brezžične povezave, kadar je vroča točka "
 "dejavna."
 
-#: ../panels/network/net-device-wifi.c:1205
+#: ../panels/network/net-device-wifi.c:1207
 msgid "Stop hotspot and disconnect any users?"
 msgstr ""
 "Ali naj se zaustavi vroča vstopna točka in se prekine povezava vseh "
 "uporabnikov?"
 
-#: ../panels/network/net-device-wifi.c:1208
+#: ../panels/network/net-device-wifi.c:1210
 msgid "_Stop Hotspot"
 msgstr "_Zaustavi vročo vstopno točko"
 
-#: ../panels/network/net-device-wifi.c:1398
+#: ../panels/network/net-device-wifi.c:1400
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2562,13 +2572,13 @@ msgstr ""
 "Omrežne podrobnosti o izbranem omrežju z nastavitvami po meri in "
 "pripadajočimi gesli bodo izgubljene."
 
-#: ../panels/network/net-device-wifi.c:1703
+#: ../panels/network/net-device-wifi.c:1705
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
 msgstr "Zgodovina"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1715
+#: ../panels/network/net-device-wifi.c:1717
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Izbriši"
@@ -2743,6 +2753,9 @@ msgid ""
 "goes\n"
 "here"
 msgstr ""
+"To je polje\n"
+"odseka\n"
+"naslova"
 
 #: ../panels/network/network-wifi.ui.h:35
 msgid ""
@@ -2751,6 +2764,10 @@ msgid ""
 "goes\n"
 "here"
 msgstr ""
+"To je polje\n"
+"odseka\n"
+"podatkov\n"
+"DNS"
 
 #: ../panels/network/network-wifi.ui.h:40
 msgid ""
@@ -2759,6 +2776,9 @@ msgid ""
 "goes\n"
 "here"
 msgstr ""
+"To je polje\n"
+"odseka\n"
+"prehodov"
 
 #: ../panels/network/network-wifi.ui.h:44
 msgid "_Ignore automatically obtained routes"
@@ -2812,7 +2832,8 @@ msgstr "Vroča točka Wi-Fi"
 msgid "_Turn On"
 msgstr "_Vklopi"
 
-#: ../panels/network/network-wifi.ui.h:66
+#. TRANSLATORS: device type
+#: ../panels/network/network-wifi.ui.h:66 ../panels/network/panel-common.c:93
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
@@ -2848,294 +2869,309 @@ msgstr "Varnostna vrsta"
 msgid "Security key"
 msgstr "Varnostni ključ"
 
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:89
+msgid "Wired"
+msgstr "Žično"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:100
+msgid "Mobile broadband"
+msgstr "Mobilni širokopasovni"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:109
+msgid "Mesh"
+msgstr "Mreža"
+
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:124
+#: ../panels/network/panel-common.c:171
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:128
+#: ../panels/network/panel-common.c:175
 msgid "Infrastructure"
 msgstr "Infrastruktura"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:152 ../panels/network/panel-common.c:215
+#: ../panels/network/panel-common.c:199 ../panels/network/panel-common.c:262
 msgid "Status unknown"
 msgstr "Neznano stanje"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:156
+#: ../panels/network/panel-common.c:203
 msgid "Unmanaged"
 msgstr "Neupravljano"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:161
+#: ../panels/network/panel-common.c:208
 msgid "Firmware missing"
 msgstr "Manjka strojna programska oprema"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:165
+#: ../panels/network/panel-common.c:212
 msgid "Cable unplugged"
 msgstr "Kabel ni priklopljen"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:168
+#: ../panels/network/panel-common.c:215
 msgid "Unavailable"
 msgstr "Nedostopno"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:179 ../panels/network/panel-common.c:221
+#: ../panels/network/panel-common.c:226 ../panels/network/panel-common.c:268
 msgid "Connecting"
 msgstr "V povezovanju"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:183 ../panels/network/panel-common.c:225
+#: ../panels/network/panel-common.c:230 ../panels/network/panel-common.c:272
 msgid "Authentication required"
 msgstr "Zahtevana je overitev"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:187 ../panels/network/panel-common.c:229
+#: ../panels/network/panel-common.c:234 ../panels/network/panel-common.c:276
 msgid "Connected"
 msgstr "Povezano"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:191
+#: ../panels/network/panel-common.c:238
 msgid "Disconnecting"
 msgstr "Prekinjanje povezave"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:195 ../panels/network/panel-common.c:233
+#: ../panels/network/panel-common.c:242 ../panels/network/panel-common.c:280
 msgid "Connection failed"
 msgstr "Povezovanje je spodletelo"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:199 ../panels/network/panel-common.c:241
+#: ../panels/network/panel-common.c:246 ../panels/network/panel-common.c:288
 msgid "Status unknown (missing)"
 msgstr "Stanje baterije ni znano (manjka)"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:237
+#: ../panels/network/panel-common.c:284
 msgid "Not connected"
 msgstr "Brez povezave"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:261
+#: ../panels/network/panel-common.c:308
 msgid "Configuration failed"
 msgstr "Nastavitev je spodletela"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:265
+#: ../panels/network/panel-common.c:312
 msgid "IP configuration failed"
 msgstr "Nastavljanje IP je spodletelo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:269
+#: ../panels/network/panel-common.c:316
 msgid "IP configuration expired"
 msgstr "Nastavitev IP je časovno poteklo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:273
+#: ../panels/network/panel-common.c:320
 msgid "Secrets were required, but not provided"
 msgstr "Zahtevana so bila ustrezna gesla, ki pa niso bila podana"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:277
+#: ../panels/network/panel-common.c:324
 msgid "802.1x supplicant disconnected"
 msgstr "Prosilnik 802.1X je odklopljen"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:281
+#: ../panels/network/panel-common.c:328
 msgid "802.1x supplicant configuration failed"
 msgstr "Nastavitev prosilnika 802.1X je spodletela"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:285
+#: ../panels/network/panel-common.c:332
 msgid "802.1x supplicant failed"
 msgstr "Prosilnik 802.1X je spodletel"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:289
+#: ../panels/network/panel-common.c:336
 msgid "802.1x supplicant took too long to authenticate"
 msgstr "Prosilnik 802.1X je potreboval preveč časa za overjanje"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:293
+#: ../panels/network/panel-common.c:340
 msgid "PPP service failed to start"
 msgstr "Storitev PPP ni uspešno zagnana"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:297
+#: ../panels/network/panel-common.c:344
 msgid "PPP service disconnected"
 msgstr "Storitev PPP je prekinjena"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:301
+#: ../panels/network/panel-common.c:348
 msgid "PPP failed"
 msgstr "PPP je spodletel"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:305
+#: ../panels/network/panel-common.c:352
 msgid "DHCP client failed to start"
 msgstr "Začenjanje odjemalca DHCP je spodletelo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:309
+#: ../panels/network/panel-common.c:356
 msgid "DHCP client error"
 msgstr "Napaka odjemalca DHCP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:313
+#: ../panels/network/panel-common.c:360
 msgid "DHCP client failed"
 msgstr "Odjemalec DHCP je spodletel"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:317
+#: ../panels/network/panel-common.c:364
 msgid "Shared connection service failed to start"
 msgstr "Začenjanje storitve souporabe povezave je spodletelo."
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:321
+#: ../panels/network/panel-common.c:368
 msgid "Shared connection service failed"
 msgstr "Storitev souporabe povezave je spodletela."
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:325
+#: ../panels/network/panel-common.c:372
 msgid "AutoIP service failed to start"
 msgstr "Začenjanje storitve AutoIP je spodletelo."
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:329
+#: ../panels/network/panel-common.c:376
 msgid "AutoIP service error"
 msgstr "Napaka storitve AutoIP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:333
+#: ../panels/network/panel-common.c:380
 msgid "AutoIP service failed"
 msgstr "Storitev AutoIP je spodletela"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:337
+#: ../panels/network/panel-common.c:384
 msgid "Line busy"
 msgstr "Povezava je zasedena"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:341
+#: ../panels/network/panel-common.c:388
 msgid "No dial tone"
 msgstr "Ni klicnega signala"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:345
+#: ../panels/network/panel-common.c:392
 msgid "No carrier could be established"
 msgstr "Ni mogoče vzpostaviti signala povezave"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:349
+#: ../panels/network/panel-common.c:396
 msgid "Dialing request timed out"
 msgstr "Zahteva klicanja je časovno potekla"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:353
+#: ../panels/network/panel-common.c:400
 msgid "Dialing attempt failed"
 msgstr "Poskus klicanja je spodletel"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:357
+#: ../panels/network/panel-common.c:404
 msgid "Modem initialization failed"
 msgstr "Začenjanje modema je spodletelo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:361
+#: ../panels/network/panel-common.c:408
 msgid "Failed to select the specified APN"
 msgstr "Izbor določenega APN je spodletel"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:365
+#: ../panels/network/panel-common.c:412
 msgid "Not searching for networks"
 msgstr "Iskanje omrežij ni dejavno"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:369
+#: ../panels/network/panel-common.c:416
 msgid "Network registration denied"
 msgstr "Vpis omrežja je zavrnjen"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:373
+#: ../panels/network/panel-common.c:420
 msgid "Network registration timed out"
 msgstr "Čas za vpis omrežja je potekel"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:377
+#: ../panels/network/panel-common.c:424
 msgid "Failed to register with the requested network"
 msgstr "Vpis v zahtevano omrežju je spodletela"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:381
+#: ../panels/network/panel-common.c:428
 msgid "PIN check failed"
 msgstr "Preverjanje PIN je spodletelo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:385
+#: ../panels/network/panel-common.c:432
 msgid "Firmware for the device may be missing"
 msgstr "Napravi morda manjka zahtevana strojna programska oprema"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:389
+#: ../panels/network/panel-common.c:436
 msgid "Connection disappeared"
 msgstr "Dejavna povezava je izginila"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:393
+#: ../panels/network/panel-common.c:440
 msgid "Carrier/link changed"
 msgstr "Signal/Povezava se je spremenila"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:397
+#: ../panels/network/panel-common.c:444
 msgid "Existing connection was assumed"
 msgstr "Predviden je bila obstoječa povezava"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:401
+#: ../panels/network/panel-common.c:448
 msgid "Modem not found"
 msgstr "Modema ni mogoče najti"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:405
+#: ../panels/network/panel-common.c:452
 msgid "Bluetooth connection failed"
 msgstr "Povezava Bluetooth je spodletela"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:409
+#: ../panels/network/panel-common.c:456
 msgid "SIM Card not inserted"
 msgstr "Kartica SIM ni vstavljena"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:413
+#: ../panels/network/panel-common.c:460
 msgid "SIM Pin required"
 msgstr "Zahtevana je šifra SIM PIN"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:417
+#: ../panels/network/panel-common.c:464
 msgid "SIM Puk required"
 msgstr "Zahtevana je šifra SIM PUK"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:421
+#: ../panels/network/panel-common.c:468
 msgid "SIM wrong"
 msgstr "Kartica SIM je neustrezna"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:425
+#: ../panels/network/panel-common.c:472
 msgid "InfiniBand device does not support connected mode"
 msgstr "Naprava InfiniBand ne podpira povezanega načina"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:429
+#: ../panels/network/panel-common.c:476
 msgid "Connection dependency failed"
 msgstr "Odvisnost povezave je spodletela"
 
@@ -3731,14 +3767,12 @@ msgid "_Screen Brightness"
 msgstr "_Svetlost zaslona"
 
 #: ../panels/power/cc-power-panel.c:1449
-#, fuzzy
 msgid "_Dim Screen when Inactive"
-msgstr "Ugasni zaslon ob nedejavnosti:"
+msgstr "_Izklopi zaslon ob nedejavnosti"
 
 #: ../panels/power/cc-power-panel.c:1472
-#, fuzzy
 msgid "_Mark As Inactive After"
-msgstr "LDAP pred SSL (opuščeno)"
+msgstr "_Označi kot nedejavno po"
 
 #: ../panels/power/cc-power-panel.c:1507
 msgid "_Wi-Fi"
@@ -3753,9 +3787,8 @@ msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
 #: ../panels/power/cc-power-panel.c:1624
-#, fuzzy
 msgid "When on battery power"
-msgstr "Pripravljaj kazalo med delovanjem na bateriji"
+msgstr "Med delovanjem na bateriji"
 
 #: ../panels/power/cc-power-panel.c:1626
 msgid "When plugged in"
@@ -3770,9 +3803,8 @@ msgid "_Automatic Suspend"
 msgstr "Samodejen prehod v _pripravljenost"
 
 #: ../panels/power/cc-power-panel.c:1806
-#, fuzzy
 msgid "When Battery Power is _Critical"
-msgstr "Ko je polnost baterije _kritično nizka:"
+msgstr "Ko je polnost baterije _kritično nizka"
 
 #: ../panels/power/cc-power-panel.c:1839
 msgid "Power Off"
@@ -3835,14 +3867,12 @@ msgid "_Close"
 msgstr "_Zapri"
 
 #: ../panels/power/power.ui.h:12
-#, fuzzy
 msgid "When on _Battery Power"
-msgstr "Pripravljaj kazalo med delovanjem na bateriji"
+msgstr "Med delovanjem na _bateriji"
 
 #: ../panels/power/power.ui.h:13
-#, fuzzy
 msgid "When _Plugged In"
-msgstr "Ob priklopu"
+msgstr "Med priklopom v omrežje"
 
 #: ../panels/power/power.ui.h:14
 msgid "Delay"
@@ -3948,10 +3978,9 @@ msgstr "Pripravljen"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
 #: ../panels/printers/cc-printers-panel.c:797
-#, fuzzy
 msgctxt "printer state"
 msgid "Does not accept jobs"
-msgstr "Program '%s' ne obstaja"
+msgstr "Ne sprejema poslov"
 
 #. Translators: Printer's state (jobs are processing)
 #: ../panels/printers/cc-printers-panel.c:802
@@ -4017,11 +4046,8 @@ msgid "No suitable driver found"
 msgstr "Ni mogoče najti ustreznega gonilnika"
 
 #: ../panels/printers/cc-printers-panel.c:2321
-#, fuzzy
 msgid "Searching for preferred drivers…"
-msgstr ""
-"Kartica;Mikrofon;Glasnost;Pojemanje;Uravnavanje;Bluetooth;Naglavne slušalke;"
-"Zvok;"
+msgstr "Iskanje prednostnih gonilnikov ..."
 
 #: ../panels/printers/cc-printers-panel.c:2336
 msgid "Select from database…"
@@ -4479,16 +4505,15 @@ msgstr ""
 
 #: ../panels/privacy/privacy.ui.h:12
 msgid "Display _full name in top bar"
-msgstr ""
+msgstr "Prikaži _polno ime v vrhnji vrstici"
 
 #: ../panels/privacy/privacy.ui.h:13
 msgid "Display full name in _lock screen"
-msgstr ""
+msgstr "Prikaži _polno ime na zaklenjenem  zaslonu"
 
 #: ../panels/privacy/privacy.ui.h:14
-#, fuzzy
 msgid "_Stealth Mode"
-msgstr "Premešani način"
+msgstr "_Prikriti način"
 
 #: ../panels/privacy/privacy.ui.h:15
 msgid "Immediately"
@@ -4760,7 +4785,7 @@ msgstr "Uporabi enak vir za vsa okna"
 
 #: ../panels/region/gnome-region-panel.ui.h:32
 msgid "Allow different sources for each window"
-msgstr ""
+msgstr "Dovoli različne vire za različna okna"
 
 #: ../panels/region/gnome-region-panel.ui.h:34
 msgid "Input Sources"
@@ -4901,7 +4926,7 @@ msgstr "Souporaba mape"
 
 #: ../panels/sharing/sharing.ui.h:4
 msgid "Only Receive From Trusted Devices"
-msgstr ""
+msgstr "Prejmi le od zaupljivih naprav"
 
 #: ../panels/sharing/sharing.ui.h:5
 msgid "Save Received Files to Downloads Folder"
