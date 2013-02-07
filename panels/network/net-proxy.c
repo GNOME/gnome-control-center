@@ -78,6 +78,8 @@ out:
         widget = GTK_WIDGET (gtk_builder_get_object (proxy->priv->builder,
                                                      "label_proxy_warning"));
         gtk_label_set_markup (GTK_LABEL (widget), string->str);
+        gtk_widget_set_visible (widget, (string->len > 0));
+
         g_free (autoconfig_url);
         g_string_free (string, TRUE);
 }
