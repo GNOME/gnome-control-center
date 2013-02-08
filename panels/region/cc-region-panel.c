@@ -144,11 +144,13 @@ cc_region_panel_finalize (GObject *object)
         g_clear_object (&priv->locale_settings);
         g_clear_object (&priv->input_settings);
         g_clear_object (&priv->xkb_info);
+#ifdef HAVE_IBUS
         g_clear_object (&priv->ibus);
         if (priv->ibus_cancellable)
                 g_cancellable_cancel (priv->ibus_cancellable);
         g_clear_object (&priv->ibus_cancellable);
         g_clear_pointer (&priv->ibus_engines, g_hash_table_destroy);
+#endif
         g_free (priv->language);
         g_free (priv->region);
         g_free (priv->system_language);
@@ -957,7 +959,12 @@ show_input_chooser (CcRegionPanel *self)
         toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
         chooser = cc_input_chooser_new (GTK_WINDOW (toplevel),
                                         priv->xkb_info,
-                                        priv->ibus_engines);
+#ifdef HAVE_IBUS
+                                        priv->ibus_engines
+#else
+                                        NULL
+#endif
+                );
         g_signal_connect (chooser, "response",
                           G_CALLBACK (input_response), self);
 }
