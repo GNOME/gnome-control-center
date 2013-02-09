@@ -41,7 +41,6 @@
 
 #ifdef HAVE_IBUS
 #include <ibus.h>
-#include "supported-ibus-engines.h"
 #include "cc-ibus-utils.h"
 #endif
 
@@ -59,19 +58,6 @@
 
 #define INPUT_SOURCE_TYPE_XKB "xkb"
 #define INPUT_SOURCE_TYPE_IBUS "ibus"
-
-
-static gboolean
-strv_contains (const gchar * const *strv,
-               const gchar         *str)
-{
-  const gchar * const *p = strv;
-  for (p = strv; *p; p++)
-    if (g_strcmp0 (*p, str) == 0)
-      return TRUE;
-
-  return FALSE;
-}
 
 CC_PANEL_REGISTER (CcRegionPanel, cc_region_panel)
 
@@ -546,7 +532,6 @@ fetch_ibus_engines_result (GObject       *object,
                            CcRegionPanel *self)
 {
         CcRegionPanelPrivate *priv = self->priv;
-        gboolean show_all_sources;
         GList *list, *l;
         GError *error;
 
@@ -559,8 +544,6 @@ fetch_ibus_engines_result (GObject       *object,
                 return;
         }
 
-        show_all_sources = g_settings_get_boolean (priv->input_settings, "show-all-sources");
-
         /* Maps engine ids to engine description objects */
         priv->ibus_engines = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, g_object_unref);
 
@@ -568,10 +551,10 @@ fetch_ibus_engines_result (GObject       *object,
                 IBusEngineDesc *engine = l->data;
                 const gchar *engine_id = ibus_engine_desc_get_name (engine);
 
-                if (show_all_sources || strv_contains (supported_ibus_engines, engine_id))
-                        g_hash_table_replace (priv->ibus_engines, (gpointer)engine_id, engine);
-                else
+                if (g_str_has_prefix (engine_id, "xkb:"))
                         g_object_unref (engine);
+                else
+                        g_hash_table_replace (priv->ibus_engines, (gpointer)engine_id, engine);
         }
         g_list_free (list);
 
