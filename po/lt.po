@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-02-02 21:07+0000\n"
-"PO-Revision-Date: 2013-02-03 17:12+0200\n"
+"POT-Creation-Date: 2013-02-06 21:06+0000\n"
+"PO-Revision-Date: 2013-02-09 22:23+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -127,7 +127,9 @@ msgstr "Pakeisti foną"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Fonas;Ekranas;Darbastalis;"
 
+#. TRANSLATORS: device type
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
+#: ../panels/network/panel-common.c:99
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -246,7 +248,7 @@ msgstr ""
 "nustatyti."
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
-#: ../panels/color/cc-color-calibrate.c:360
+#: ../panels/color/cc-color-calibrate.c:359
 msgid "Place your calibration device over the square and press 'Start'"
 msgstr ""
 "Pridėkite kalibravimo įrenginį prie stačiakampio ir spauskite „Pradėti“"
@@ -254,7 +256,7 @@ msgstr ""
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
-#: ../panels/color/cc-color-calibrate.c:366
+#: ../panels/color/cc-color-calibrate.c:365
 msgid ""
 "Move your calibration device to the calibrate position and press 'Continue'"
 msgstr ""
@@ -263,7 +265,7 @@ msgstr ""
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
-#: ../panels/color/cc-color-calibrate.c:372
+#: ../panels/color/cc-color-calibrate.c:371
 msgid ""
 "Move your calibration device to the surface position and press 'Continue'"
 msgstr "Perkelkite kalibravimo įrenginį prie paviršiaus ir spauskite „Tęsti“"
@@ -271,70 +273,64 @@ msgstr "Perkelkite kalibravimo įrenginį prie paviršiaus ir spauskite „Tęst
 #. TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
 #. * is built into the palmrest and we need to fullscreen the
 #. * sample widget and shut the lid.
-#: ../panels/color/cc-color-calibrate.c:378
+#: ../panels/color/cc-color-calibrate.c:377
 msgid "Shut the laptop lid"
 msgstr "Užverkite nešiojamą kompiuterį"
 
 #. TRANSLATORS: We suck, the calibation failed and we have no
 #. * good idea why or any suggestions
-#: ../panels/color/cc-color-calibrate.c:409
-#| msgid "An internal error occurred."
+#: ../panels/color/cc-color-calibrate.c:408
 msgid "An internal error occurred that could not be recovered."
 msgstr "Įvyko vidinė klaida, kurios negalima atstatyti."
 
 #. TRANSLATORS: Some required-at-runtime tools were not
 #. * installed, which should only affect insane distros
-#: ../panels/color/cc-color-calibrate.c:414
+#: ../panels/color/cc-color-calibrate.c:413
 msgid "Tools required for calibration are not installed."
 msgstr "Kalibravimui reikalingi įrankiai nėra įdiegti."
 
 #. TRANSLATORS: The profile failed for some reason
-#: ../panels/color/cc-color-calibrate.c:420
+#: ../panels/color/cc-color-calibrate.c:419
 msgid "The profile could not be generated."
 msgstr "Nepavyko sugeneruoti profilio."
 
 #. TRANSLATORS: The user specified a whitepoint that was
 #. * unobtainable with the hardware they've got -- see
 #. * https://en.wikipedia.org/wiki/White_point for details
-#: ../panels/color/cc-color-calibrate.c:426
+#: ../panels/color/cc-color-calibrate.c:425
 msgid "The target whitepoint was not obtainable."
 msgstr "Nepavyko gauti tikslo balto taško."
 
 #. TRANSLATORS: the display calibration process is finished
-#: ../panels/color/cc-color-calibrate.c:466
-#| msgctxt "print job"
-#| msgid "Completed"
+#: ../panels/color/cc-color-calibrate.c:465
 msgid "Complete!"
 msgstr "Atlikta!"
 
 #. TRANSLATORS: the display calibration failed, and we also show
 #. * the translated (or untranslated) error string after this
-#: ../panels/color/cc-color-calibrate.c:474
-#| msgid "Configuration failed"
+#: ../panels/color/cc-color-calibrate.c:473
 msgid "Calibration failed!"
 msgstr "Kalibracija nepavyko!"
 
 #. TRANSLATORS: The user can now remove the sensor from the screen
-#: ../panels/color/cc-color-calibrate.c:481
+#: ../panels/color/cc-color-calibrate.c:480
 msgid "You can remove the calibration device."
 msgstr "Galite pašalinti kalibravimo įrenginį."
 
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
-#: ../panels/color/cc-color-calibrate.c:552
+#: ../panels/color/cc-color-calibrate.c:551
 msgid "Do not disturb the calibration device while in progress"
 msgstr "Nelieskite kalibravimo įrenginio kol vykdoma"
 
 #. TRANSLATORS: This refers to the TFT display on a laptop
 #: ../panels/color/cc-color-common.c:41
-#| msgid "Lock screen"
 msgid "Laptop Screen"
 msgstr "Nešiojamo kompiuterio ekranas"
 
 #. TRANSLATORS: This refers to the embedded webcam on a laptop
 #: ../panels/color/cc-color-common.c:50
-#| msgid "Built-in"
 msgid "Built-in Webcam"
 msgstr "Vidinį kamera"
 
@@ -342,7 +338,6 @@ msgstr "Vidinį kamera"
 #. * model, vendor or ID, e.g. 'LP2480zx Monitor'
 #: ../panels/color/cc-color-common.c:65
 #, c-format
-#| msgid "Monitor"
 msgid "%s Monitor"
 msgstr "%s monitorius"
 
@@ -361,7 +356,6 @@ msgstr "%s kamera"
 #. TRANSLATORS: a printer device, e.g. 'Epson Photosmart Printer'
 #: ../panels/color/cc-color-common.c:77
 #, c-format
-#| msgid "Printers"
 msgid "%s Printer"
 msgstr "%s spausdintuvas"
 
@@ -373,67 +367,63 @@ msgstr "%s internetinė kamera"
 
 #. not calibrated
 #: ../panels/color/cc-color-device.c:303
-#| msgid "Uncalibrated"
 msgid "Not calibrated"
 msgstr "Nekalibruotas"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:131
+#: ../panels/color/cc-color-panel.c:132
 msgid "Default: "
 msgstr "Numatytasis: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:139
+#: ../panels/color/cc-color-panel.c:140
 msgid "Colorspace: "
 msgstr "Spalvų erdvė:"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:146
+#: ../panels/color/cc-color-panel.c:147
 msgid "Test profile: "
 msgstr "Bandomasis profilis: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:214
+#: ../panels/color/cc-color-panel.c:215
 msgid "Select ICC Profile File"
 msgstr "Pasirinkite ICC profilio failą"
 
-#: ../panels/color/cc-color-panel.c:217
+#: ../panels/color/cc-color-panel.c:218
 msgid "_Import"
 msgstr "_Importuoti"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:228
+#: ../panels/color/cc-color-panel.c:229
 msgid "Supported ICC profiles"
 msgstr "Palaikomi ICC profiliai"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:235
+#: ../panels/color/cc-color-panel.c:236
 #: ../panels/network/wireless-security/eap-method-fast.c:410
 msgid "All files"
 msgstr "Visi failai"
 
-#: ../panels/color/cc-color-panel.c:506
-#| msgctxt "Distance"
-#| msgid "¼ Screen"
+#: ../panels/color/cc-color-panel.c:580
 msgid "Screen"
 msgstr "Ekranas"
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:776
-#| msgid "Remove profile"
+#: ../panels/color/cc-color-panel.c:852
 msgid "Save Profile"
 msgstr "Įrašyti profilį"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1137
+#: ../panels/color/cc-color-panel.c:1213
 msgid "Create a color profile for the selected device"
 msgstr "Sukurti spalvų profilį pasirinktam įrenginiui"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1152 ../panels/color/cc-color-panel.c:1176
+#: ../panels/color/cc-color-panel.c:1228 ../panels/color/cc-color-panel.c:1252
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -442,27 +432,24 @@ msgstr ""
 "prijungtas."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1186
+#: ../panels/color/cc-color-panel.c:1262
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Matavimo prietaisas nepalaiko spausdintuvo profiliavimo."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1197
+#: ../panels/color/cc-color-panel.c:1273
 msgid "The device type is not currently supported."
 msgstr "Įrenginio tipas šiuo metu nepalaikomas."
 
 #. TRANSLATORS: standard spaces are well known colorspaces like
 #. * sRGB, AdobeRGB and ProPhotoRGB
 #: ../panels/color/cc-color-profile.c:101
-#| msgctxt "Account type"
-#| msgid "Standard"
 msgid "Standard Space"
 msgstr "Standartinė sritis"
 
 #. TRANSLATORS: test profiles do things like changing the screen
 #. * a different color, or swap the red and green channels
 #: ../panels/color/cc-color-profile.c:107
-#| msgid "Test profile: "
 msgid "Test Profile"
 msgstr "Bandomasis profilis"
 
@@ -471,8 +458,6 @@ msgstr "Bandomasis profilis"
 #. * for instance the default monitor profile is created from the
 #. * primaries specified in the monitor EDID
 #: ../panels/color/cc-color-profile.c:115
-#| msgctxt "proxy method"
-#| msgid "Automatic"
 msgctxt "Automatically generated profile"
 msgid "Automatic"
 msgstr "Automatinis"
@@ -481,16 +466,12 @@ msgstr "Automatinis"
 #. * much less time to generate but may be a poor reflection of the
 #. * device capability
 #: ../panels/color/cc-color-profile.c:125
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "Low Quality"
 msgstr "Žemos kokybės"
 
 #. TRANSLATORS: the profile quality
 #: ../panels/color/cc-color-profile.c:130
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "Medium Quality"
 msgstr "Vidutinės kokybės"
@@ -499,8 +480,6 @@ msgstr "Vidutinės kokybės"
 #. * a *long* time, and have the best calibration and
 #. * characterisation data.
 #: ../panels/color/cc-color-profile.c:137
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "High Quality"
 msgstr "Aukštos kokybės"
@@ -535,12 +514,10 @@ msgid "Full-screen display correction not possible with this profile"
 msgstr "Su šiuo profiliu negalima viso ekrano korekcija"
 
 #: ../panels/color/cc-color-profile.c:223
-#| msgid "This device has an old profile that may no longer be accurate."
 msgid "This profile may no longer be accurate"
 msgstr "Šis profilis gali nebebūti tikslus."
 
 #: ../panels/color/color-calibrate.ui.h:1
-#| msgid "Calibration"
 msgid "Display Calibration"
 msgstr "Vaizduoklio kalibravimas"
 
@@ -563,7 +540,6 @@ msgstr "Tęsti"
 
 #. This button returns the user back to the color control panel
 #: ../panels/color/color-calibrate.ui.h:8
-#| msgid "Done!"
 msgid "Done"
 msgstr "Atlikta"
 
@@ -588,8 +564,6 @@ msgstr "Negalėsite naudotis kompiuteriu, kol vyks kalibravimas."
 
 #. This is the approximate time it takes to calibrate the display.
 #: ../panels/color/color.ui.h:5
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgid "Quality"
 msgstr "Kokybė"
 
@@ -599,27 +573,24 @@ msgid "Approximate Time"
 msgstr "Apytikslis laikas"
 
 #: ../panels/color/color.ui.h:8
-#| msgid "Calibration"
 msgid "Calibration Quality"
 msgstr "Kalibravimo kokybė"
 
 #: ../panels/color/color.ui.h:9
-msgid "Select the type of display that is connected."
-msgstr "Pasirinkite prijungto vaizduoklio tipą."
-
-#: ../panels/color/color.ui.h:10
-#| msgid "Displays"
-msgid "Display Type"
-msgstr "Vaizduoklio tipas"
-
-#: ../panels/color/color.ui.h:11
 msgid "Select the sensor device you want to use for calibration."
 msgstr "Pasirinkite kalibravimui naudojamą sensorinį įrenginį."
 
-#: ../panels/color/color.ui.h:12
-#| msgid "Calibration"
+#: ../panels/color/color.ui.h:10
 msgid "Calibration Device"
 msgstr "Kalibravimo įrenginys"
+
+#: ../panels/color/color.ui.h:11
+msgid "Select the type of display that is connected."
+msgstr "Pasirinkite prijungto vaizduoklio tipą."
+
+#: ../panels/color/color.ui.h:12
+msgid "Display Type"
+msgstr "Vaizduoklio tipas"
 
 #: ../panels/color/color.ui.h:13
 msgid ""
@@ -650,7 +621,6 @@ msgstr ""
 "įrenginio profiliu."
 
 #: ../panels/color/color.ui.h:17
-#| msgid "Brightness:"
 msgid "Display Brightness"
 msgstr "Vaizduoklio ryškumas"
 
@@ -663,12 +633,10 @@ msgstr ""
 "profilius skirtingoms apšvietimo sąlygoms."
 
 #: ../panels/color/color.ui.h:19
-#| msgid "_Profile:"
 msgid "Profile Name:"
 msgstr "Profilio pavadinimas:"
 
 #: ../panels/color/color.ui.h:20
-#| msgid "_Profile:"
 msgid "Profile Name"
 msgstr "Profilio pavadinimas"
 
@@ -677,7 +645,6 @@ msgid "Profile successfully created!"
 msgstr "Profilis sėkmingai sukurtas!"
 
 #: ../panels/color/color.ui.h:22
-#| msgid "_Import"
 msgid "Export"
 msgstr "Eksportuoti"
 
@@ -756,7 +723,6 @@ msgid "Set this profile for all users on this computer"
 msgstr "Nustatyti šį profilį visiems šio kompiuterio naudotojams"
 
 #: ../panels/color/color.ui.h:37
-#| msgid "Enabled"
 msgid "Enable"
 msgstr "Įjungti"
 
@@ -802,59 +768,54 @@ msgid "Projector"
 msgstr "Projektorius"
 
 #: ../panels/color/color.ui.h:48
-#| msgctxt "universal access, contrast"
-#| msgid "High"
+msgid "Plasma"
+msgstr "Plazminis monitorius"
+
+#: ../panels/color/color.ui.h:49
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Aukšta"
 
-#: ../panels/color/color.ui.h:49
-#| msgid "10 minutes"
+#: ../panels/color/color.ui.h:50
 msgid "40 minutes"
 msgstr "40 minučių"
 
-#: ../panels/color/color.ui.h:50
+#: ../panels/color/color.ui.h:51
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Vidutinė"
 
-#: ../panels/color/color.ui.h:51 ../panels/power/power.ui.h:5
+#: ../panels/color/color.ui.h:52 ../panels/power/power.ui.h:5
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 minučių"
 
-#: ../panels/color/color.ui.h:52
-#| msgctxt "Battery power"
-#| msgid "Low"
+#: ../panels/color/color.ui.h:53
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Žema"
 
-#: ../panels/color/color.ui.h:53
-#| msgid "5 minutes"
+#: ../panels/color/color.ui.h:54
 msgid "15 minutes"
 msgstr "15 minučių"
 
-#: ../panels/color/color.ui.h:54
-#| msgid "Panel to display"
+#: ../panels/color/color.ui.h:55
 msgid "Native to display"
 msgstr "Kūrimo vaizduoklis"
 
-#: ../panels/color/color.ui.h:55
-#| msgid "Pointing and Clicking"
+#: ../panels/color/color.ui.h:56
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (spaudimas ir pateikimas)"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:57
 msgid "D55"
 msgstr "D55"
 
-#: ../panels/color/color.ui.h:57
+#: ../panels/color/color.ui.h:58
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (fotografija ir grafika)"
 
-#: ../panels/color/color.ui.h:58
-#| msgid "75%"
+#: ../panels/color/color.ui.h:59
 msgid "D75"
 msgstr "D75"
 
@@ -1162,8 +1123,11 @@ msgstr "Pakeisti ekranų ar projektorių raišką ir poziciją"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Skydelis;Projektorius;xrandr;Ekranas;Raiška;Atnaujinimas;"
 
+#. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:441 ../panels/network/panel-common.c:120
+#: ../panels/info/cc-info-panel.c:441
+#: ../panels/network/cc-network-panel.c:1132
+#: ../panels/network/panel-common.c:107 ../panels/network/panel-common.c:161
 msgid "Unknown"
 msgstr "Nežinomas"
 
@@ -1844,7 +1808,6 @@ msgid "_Reassign"
 msgstr "_Priskirti iš naujo"
 
 #: ../panels/mouse/cc-mouse-panel.c:123
-#| msgid "_Test Your Settings"
 msgid "Test Your _Settings"
 msgstr "Tikrinkite savo _nustatymus"
 
@@ -1966,26 +1929,35 @@ msgstr "Vienas paspaudimas, antraeilis mygtukas"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:336
+#: ../panels/network/cc-network-panel.c:338
 msgid "Air_plane Mode"
 msgstr "_Skrydžio veiksena"
 
-#: ../panels/network/cc-network-panel.c:869
+#: ../panels/network/cc-network-panel.c:879
 msgid "Network proxy"
 msgstr "Tarpinis tinklo serveris"
 
-#: ../panels/network/cc-network-panel.c:1048 ../panels/network/net-vpn.c:280
+#: ../panels/network/cc-network-panel.c:1058 ../panels/network/net-vpn.c:280
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
+#: ../panels/network/cc-network-panel.c:1128
+#: ../panels/network/connection-editor/net-connection-editor.c:584
+msgid "Bond"
+msgstr "Bond"
+
+#: ../panels/network/cc-network-panel.c:1130
+#: ../panels/network/connection-editor/net-connection-editor.c:588
+msgid "VLAN"
+msgstr "VLAN"
+
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1181
+#: ../panels/network/cc-network-panel.c:1202
 msgid "The system network services are not compatible with this version."
 msgstr "Sistemos tinklo tarnybos nesuderinamos su šia versija."
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:1
-#| msgid "Security"
 msgid "802.1x _Security"
 msgstr "802.1x _Sauga"
 
@@ -1999,7 +1971,6 @@ msgstr "Anoni_minė tapatybė"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:4
 #: ../panels/network/connection-editor/security-page.ui.h:4
-#| msgid "Authentication failed"
 msgid "Inner _authentication"
 msgstr "Vidinis t_apatybės patvirtinimas"
 
@@ -2136,23 +2107,18 @@ msgstr "Serveris"
 #. Translators: Please see http://en.wikipedia.org/wiki/Metrics_(networking)
 #: ../panels/network/connection-editor/ce-page-ip4.c:426
 #: ../panels/network/connection-editor/ce-page-ip6.c:430
-#| msgid "Metric"
 msgctxt "network parameters"
 msgid "Metric"
 msgstr "Metrinė"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:579
 #: ../panels/network/network-wifi.ui.h:26
-#| msgctxt "proxy method"
-#| msgid "Automatic"
 msgid "Automatic (DHCP)"
 msgstr "Automatinis (DHCP)"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:583
 #: ../panels/network/connection-editor/ce-page-ip6.c:585
 #: ../panels/network/network-wifi.ui.h:25
-#| msgctxt "proxy method"
-#| msgid "Manual"
 msgid "Manual"
 msgstr "Rankinis"
 
@@ -2176,13 +2142,10 @@ msgstr "Priešdėlis"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#| msgctxt "proxy method"
-#| msgid "Automatic"
 msgid "Automatic"
 msgstr "Automatinis"
 
 #: ../panels/network/connection-editor/ce-page-ip6.c:581
-#| msgid "A_utomatic Login"
 msgid "Automatic, DHCP only"
 msgstr "A_utomatinis, tik DHCP"
 
@@ -2197,7 +2160,6 @@ msgid "Reset"
 msgstr "Atstatyti"
 
 #: ../panels/network/connection-editor/ce-page-security.c:250
-#| msgid "None"
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Joks"
@@ -2224,24 +2186,19 @@ msgid "WPA & WPA2 Personal"
 msgstr "WPA & WPA2 asmeninis"
 
 #: ../panels/network/connection-editor/ce-page-security.c:337
-#| msgid "Enterprise"
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 kompanijos"
 
 #: ../panels/network/connection-editor/ce-page.c:502
-#| msgctxt "proxy method"
-#| msgid "Automatic"
 msgid "automatic"
 msgstr "automatinis"
 
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
-#| msgid "Supply"
 msgid "_Apply"
 msgstr "_Pritaikyti"
 
 #: ../panels/network/connection-editor/details-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:2
-#| msgid "Strength"
 msgid "Signal Strength"
 msgstr "Signalo stiprumas"
 
@@ -2253,7 +2210,7 @@ msgstr "Saito greitis"
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:159
 #: ../panels/network/network-simple.ui.h:2
-#: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:643
+#: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:684
 msgid "IPv4 Address"
 msgstr "IPv4 adresas"
 
@@ -2262,7 +2219,7 @@ msgstr "IPv4 adresas"
 #: ../panels/network/net-device-ethernet.c:164
 #: ../panels/network/network-mobile.ui.h:4
 #: ../panels/network/network-simple.ui.h:3
-#: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:644
+#: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:685
 msgid "IPv6 Address"
 msgstr "IPv6 adresas"
 
@@ -2292,7 +2249,6 @@ msgid "DNS"
 msgstr "DNS"
 
 #: ../panels/network/connection-editor/details-page.ui.h:9
-#| msgid "Last used"
 msgid "Last Used"
 msgstr "Paskutinį kartą naudota"
 
@@ -2313,12 +2269,10 @@ msgid "Media Independent Interface (MII)"
 msgstr "Nuo laikmenos nepriklausanti sąsaja (MII)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:6
-#| msgid "%d Mb/s"
 msgid "10 Mb/s"
 msgstr "10 Mb/s"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:7
-#| msgid "%d Mb/s"
 msgid "100 Mb/s"
 msgstr "100 Mb/s"
 
@@ -2332,14 +2286,12 @@ msgstr "10 Gb/s"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:10
 #: ../panels/network/connection-editor/vpn-page.ui.h:1
-#| msgid "_Name:"
 msgid "_Name"
 msgstr "_Pavadinimas"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:11
 #: ../panels/network/connection-editor/wifi-page.ui.h:4
 #: ../panels/network/network-wifi.ui.h:49
-#| msgid "Address"
 msgid "_MAC Address"
 msgstr "_MAC adresas"
 
@@ -2349,7 +2301,6 @@ msgstr "M_TU"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:13
 #: ../panels/network/connection-editor/wifi-page.ui.h:5
-#| msgid "IP Address"
 msgid "_Cloned Address"
 msgstr "_Klonuotas adresas"
 
@@ -2374,7 +2325,6 @@ msgstr "IPv_4"
 #: ../panels/network/connection-editor/ip4-page.ui.h:2
 #: ../panels/network/connection-editor/ip6-page.ui.h:2
 #: ../panels/network/network-wifi.ui.h:24
-#| msgid "Address"
 msgid "_Addresses"
 msgstr "_Adresai"
 
@@ -2396,12 +2346,10 @@ msgid "IPv_6"
 msgstr "IPv_6"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:267
-#| msgid "Bluetooth connection failed"
 msgid "Unable to open connection editor"
 msgstr "Nepavyko atverti ryšių redaktoriaus"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:282
-#| msgid "No profile"
 msgid "New Profile"
 msgstr "Nauja profilis"
 
@@ -2416,30 +2364,19 @@ msgstr "_Pridėti"
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:584
-msgid "Bond"
-msgstr "Bond"
-
-#: ../panels/network/connection-editor/net-connection-editor.c:585
+#: ../panels/network/connection-editor/net-connection-editor.c:586
 msgid "Bridge"
 msgstr "Bridge"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:586
-msgid "VLAN"
-msgstr "VLAN"
-
-#: ../panels/network/connection-editor/net-connection-editor.c:736
-#| msgid "Could not load ui: %s"
+#: ../panels/network/connection-editor/net-connection-editor.c:738
 msgid "Could not load VPN plugins"
 msgstr "Nepavyko įkelti VPN įskiepių"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:800
-#| msgid "Import File…"
+#: ../panels/network/connection-editor/net-connection-editor.c:802
 msgid "Import from file…"
 msgstr "Importuoti iš failo…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:867
-#| msgid "Add new connection"
+#: ../panels/network/connection-editor/net-connection-editor.c:869
 msgid "Add Network Connection"
 msgstr "Pridėti tinklo ryšį"
 
@@ -2449,9 +2386,8 @@ msgid "_Reset"
 msgstr "_Atstatyti"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1402
+#: ../panels/network/net-device-wifi.c:1404
 #: ../panels/network/network-wifi.ui.h:54
-#| msgid "Forget"
 msgid "_Forget"
 msgstr "_Pamiršti"
 
@@ -2473,7 +2409,6 @@ msgstr ""
 
 #: ../panels/network/connection-editor/security-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:14
-#| msgid "Security"
 msgid "S_ecurity"
 msgstr "S_auga"
 
@@ -2500,7 +2435,6 @@ msgstr "Pasirinkite failą importavimui"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:294
 #, c-format
-#| msgid "A user with the username '%s' already exists"
 msgid "A file named \"%s\" already exists."
 msgstr "Failas pavadinimu „%s“ jau yra."
 
@@ -2548,7 +2482,6 @@ msgstr "_BSSID"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:16
-#| msgid "_Forget Network"
 msgid "My Home Network"
 msgstr "Mano namų tinklas"
 
@@ -2575,8 +2508,7 @@ msgstr ""
 msgid "Bond slaves"
 msgstr "Prijungimai"
 
-#: ../panels/network/net-device-bridge.c:77
-#| msgid "Bond slaves"
+#: ../panels/network/net-device-bridge.c:79
 msgid "Bridge slaves"
 msgstr "Sujungti antraeilius"
 
@@ -2597,7 +2529,7 @@ msgstr "vakar"
 
 #: ../panels/network/net-device-ethernet.c:162
 #: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:646 ../panels/network/panel-common.c:648
+#: ../panels/network/panel-common.c:687 ../panels/network/panel-common.c:689
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "IP adresas"
@@ -2609,7 +2541,6 @@ msgstr "Paskutinį kartą naudota"
 
 #: ../panels/network/net-device-ethernet.c:477
 #, c-format
-#| msgid "_Profile:"
 msgid "Profile %d"
 msgstr "Profilis %d"
 
@@ -2617,7 +2548,7 @@ msgstr "Profilis %d"
 msgid "Add new connection"
 msgstr "Pridėti naują ryšį"
 
-#: ../panels/network/net-device-wifi.c:1123
+#: ../panels/network/net-device-wifi.c:1125
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2625,12 +2556,12 @@ msgstr ""
 "Jei turite kitokį interneto ryšį nei belaidis, galite nustatyti belaidį "
 "prieigos tašką ir dalintis interneto ryšiu su kitais."
 
-#: ../panels/network/net-device-wifi.c:1127
+#: ../panels/network/net-device-wifi.c:1129
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Persijungimas prie belaidžio prieigos taško atjungs jus nuo <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1131
+#: ../panels/network/net-device-wifi.c:1133
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2638,18 +2569,15 @@ msgstr ""
 "Neįmanoma pasiekti interneto per jūsų belaidį, kol prieigos taškas yra "
 "aktyvus."
 
-#: ../panels/network/net-device-wifi.c:1205
+#: ../panels/network/net-device-wifi.c:1207
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Stabdyti prieigos tašką ir atjungti visus naudotojus?"
 
-#: ../panels/network/net-device-wifi.c:1208
+#: ../panels/network/net-device-wifi.c:1210
 msgid "_Stop Hotspot"
 msgstr "_Stabdyti prieigos tašką"
 
-#: ../panels/network/net-device-wifi.c:1398
-#| msgid ""
-#| "Network details for %s including password and any custom configuration "
-#| "will be lost."
+#: ../panels/network/net-device-wifi.c:1400
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -2657,14 +2585,13 @@ msgstr ""
 "Tinklo nustatymai pasirinktiems tinklams įskaitant slaptažodžius ir bet "
 "kokius asmeninius nustatymus bus prarasti."
 
-#: ../panels/network/net-device-wifi.c:1703
+#: ../panels/network/net-device-wifi.c:1705
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
 msgstr "Istorija"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1715
-#| msgid "Forget"
+#: ../panels/network/net-device-wifi.c:1717
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Pamiršti"
@@ -2690,7 +2617,6 @@ msgid "Proxy"
 msgstr "Tarpinis serveris"
 
 #: ../panels/network/network-ethernet.ui.h:1
-#| msgid "Add profile"
 msgid "_Add Profile…"
 msgstr "_Pridėti profilį…"
 
@@ -2783,12 +2709,10 @@ msgid "Username"
 msgstr "Naudotojo vardas"
 
 #: ../panels/network/network-wifi.ui.h:1
-#| msgid "A_utomatic Login"
 msgid "Automatic _Connect"
 msgstr "A_utomatinis prisijungimas"
 
 #: ../panels/network/network-wifi.ui.h:11
-#| msgid "Details"
 msgid "details"
 msgstr "išsamiau"
 
@@ -2812,12 +2736,10 @@ msgid "blablabla"
 msgstr "blablabla"
 
 #: ../panels/network/network-wifi.ui.h:20
-#| msgid "_Show password"
 msgid "Show P_assword"
 msgstr "Rodyti sl_aptažodį"
 
 #: ../panels/network/network-wifi.ui.h:21
-#| msgid "Failed to delete user"
 msgid "Make available to other users"
 msgstr "Padaryti pasiekiamu kitiems naudotojams"
 
@@ -2871,7 +2793,6 @@ msgstr ""
 "čia"
 
 #: ../panels/network/network-wifi.ui.h:44
-#| msgid "Cannot remove automatically added profile"
 msgid "_Ignore automatically obtained routes"
 msgstr "_Nepaisyti automatiškai gaunamų kelių"
 
@@ -2892,8 +2813,6 @@ msgid "00:24:16:31:8G:7A"
 msgstr "00:24:16:31:8G:7A"
 
 #: ../panels/network/network-wifi.ui.h:52
-#| msgctxt "category"
-#| msgid "Hardware"
 msgid "hardware"
 msgstr "aparatinė įranga"
 
@@ -2918,8 +2837,6 @@ msgid "reset"
 msgstr "atstatyti"
 
 #: ../panels/network/network-wifi.ui.h:62
-#| msgctxt "category"
-#| msgid "Hardware"
 msgid "Hardware"
 msgstr "Aparatinė įranga"
 
@@ -2931,7 +2848,8 @@ msgstr "Belaidis prieigos taškas"
 msgid "_Turn On"
 msgstr "Į_jungti"
 
-#: ../panels/network/network-wifi.ui.h:66
+#. TRANSLATORS: device type
+#: ../panels/network/network-wifi.ui.h:66 ../panels/network/panel-common.c:87
 msgid "Wi-Fi"
 msgstr "Belaidis"
 
@@ -2944,7 +2862,6 @@ msgid "_Connect to Hidden Network…"
 msgstr "_Prisijungti prie paslėpto tinklo..."
 
 #: ../panels/network/network-wifi.ui.h:69
-#| msgid "History"
 msgid "_History"
 msgstr "_Istorija"
 
@@ -2968,294 +2885,311 @@ msgstr "Saugos tipas"
 msgid "Security key"
 msgstr "Saugos raktas"
 
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:83
+#| msgid "Paired"
+msgid "Wired"
+msgstr "Laidinis"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:94
+#| msgid "_Mobile Broadband"
+msgid "Mobile broadband"
+msgstr "Mobilus plačiajuostis"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:103
+msgid "Mesh"
+msgstr "Mesh"
+
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:124
+#: ../panels/network/panel-common.c:165
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:128
+#: ../panels/network/panel-common.c:169
 msgid "Infrastructure"
 msgstr "Infrastruktūra"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:152 ../panels/network/panel-common.c:215
+#: ../panels/network/panel-common.c:193 ../panels/network/panel-common.c:256
 msgid "Status unknown"
 msgstr "Būsena nežinoma"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:156
+#: ../panels/network/panel-common.c:197
 msgid "Unmanaged"
 msgstr "Nevaldomas"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:161
+#: ../panels/network/panel-common.c:202
 msgid "Firmware missing"
 msgstr "Trūksta aparatinės programinės įrangos"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:165
+#: ../panels/network/panel-common.c:206
 msgid "Cable unplugged"
 msgstr "Kabelis neįjungtas"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:168
+#: ../panels/network/panel-common.c:209
 msgid "Unavailable"
 msgstr "Nepasiekiamas"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:179 ../panels/network/panel-common.c:221
+#: ../panels/network/panel-common.c:220 ../panels/network/panel-common.c:262
 msgid "Connecting"
 msgstr "Jungiamasi"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:183 ../panels/network/panel-common.c:225
+#: ../panels/network/panel-common.c:224 ../panels/network/panel-common.c:266
 msgid "Authentication required"
 msgstr "Reikia patvirtinti tapatybę"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:187 ../panels/network/panel-common.c:229
+#: ../panels/network/panel-common.c:228 ../panels/network/panel-common.c:270
 msgid "Connected"
 msgstr "Prisijungta"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:191
+#: ../panels/network/panel-common.c:232
 msgid "Disconnecting"
 msgstr "Atsijungiama"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:195 ../panels/network/panel-common.c:233
+#: ../panels/network/panel-common.c:236 ../panels/network/panel-common.c:274
 msgid "Connection failed"
 msgstr "Prisijungti nepavyko"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:199 ../panels/network/panel-common.c:241
+#: ../panels/network/panel-common.c:240 ../panels/network/panel-common.c:282
 msgid "Status unknown (missing)"
 msgstr "Būsena nežinoma (trūkstama)"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:237
+#: ../panels/network/panel-common.c:278
 msgid "Not connected"
 msgstr "Neprisijungta"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:261
+#: ../panels/network/panel-common.c:302
 msgid "Configuration failed"
 msgstr "Konfigūracija nepavyko"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:265
+#: ../panels/network/panel-common.c:306
 msgid "IP configuration failed"
 msgstr "IP konfigūracija nepavyko"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:269
+#: ../panels/network/panel-common.c:310
 msgid "IP configuration expired"
 msgstr "IP konfigūracijos laikas baigėsi"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:273
+#: ../panels/network/panel-common.c:314
 msgid "Secrets were required, but not provided"
 msgstr "Buvo reikalingos paslaptys, bet nepateiktos"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:277
+#: ../panels/network/panel-common.c:318
 msgid "802.1x supplicant disconnected"
 msgstr "802.1x tiekėjas atjungtas"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:281
+#: ../panels/network/panel-common.c:322
 msgid "802.1x supplicant configuration failed"
 msgstr "802.1x tiekėjo konfigūracija nepavyko"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:285
+#: ../panels/network/panel-common.c:326
 msgid "802.1x supplicant failed"
 msgstr "802.1x tiekėjo klaida"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:289
+#: ../panels/network/panel-common.c:330
 msgid "802.1x supplicant took too long to authenticate"
 msgstr "802.1x per ilgai užtruko patvirtindamas tapatybę"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:293
+#: ../panels/network/panel-common.c:334
 msgid "PPP service failed to start"
 msgstr "Nepavyko paleisti PPP tarnybos"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:297
+#: ../panels/network/panel-common.c:338
 msgid "PPP service disconnected"
 msgstr "PPP tarnyba atsijungė"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:301
+#: ../panels/network/panel-common.c:342
 msgid "PPP failed"
 msgstr "PPP nepavyko"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:305
+#: ../panels/network/panel-common.c:346
 msgid "DHCP client failed to start"
 msgstr "Nepavyko paleisti DHCP kliento"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:309
+#: ../panels/network/panel-common.c:350
 msgid "DHCP client error"
 msgstr "DHCP kliento klaida"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:313
+#: ../panels/network/panel-common.c:354
 msgid "DHCP client failed"
 msgstr "DHCP klientas nebeveikia"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:317
+#: ../panels/network/panel-common.c:358
 msgid "Shared connection service failed to start"
 msgstr "Nepavyko paleisti bendrų ryšių tarnybos"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:321
+#: ../panels/network/panel-common.c:362
 msgid "Shared connection service failed"
 msgstr "Bendrų ryšių tarnyba nebeveikia"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:325
+#: ../panels/network/panel-common.c:366
 msgid "AutoIP service failed to start"
 msgstr "Nepavyko paleisti AutoIP tarnybos"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:329
+#: ../panels/network/panel-common.c:370
 msgid "AutoIP service error"
 msgstr "AutoIP tarnybos klaida"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:333
+#: ../panels/network/panel-common.c:374
 msgid "AutoIP service failed"
 msgstr "AutoIP tarnyba nebeveikia"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:337
+#: ../panels/network/panel-common.c:378
 msgid "Line busy"
 msgstr "Linija užimta"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:341
+#: ../panels/network/panel-common.c:382
 msgid "No dial tone"
 msgstr "Nėra skambinimo tono"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:345
+#: ../panels/network/panel-common.c:386
 msgid "No carrier could be established"
 msgstr "Nepavyko nustatyti pernešėjo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:349
+#: ../panels/network/panel-common.c:390
 msgid "Dialing request timed out"
 msgstr "Baigėsi skambinimo užklausos laikas"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:353
+#: ../panels/network/panel-common.c:394
 msgid "Dialing attempt failed"
 msgstr "Nepavyko prisiskambinti"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:357
+#: ../panels/network/panel-common.c:398
 msgid "Modem initialization failed"
 msgstr "Modemo iniciavimas nepavyko"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:361
+#: ../panels/network/panel-common.c:402
 msgid "Failed to select the specified APN"
 msgstr "Nepavyko pasirinkti nurodytų APN"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:365
+#: ../panels/network/panel-common.c:406
 msgid "Not searching for networks"
 msgstr "Neieškoma tinklų"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:369
+#: ../panels/network/panel-common.c:410
 msgid "Network registration denied"
 msgstr "Neleista registruoti tinklo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:373
+#: ../panels/network/panel-common.c:414
 msgid "Network registration timed out"
 msgstr "Baigėsi tinklo registravimo laikas"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:377
+#: ../panels/network/panel-common.c:418
 msgid "Failed to register with the requested network"
 msgstr "Nepavyko registruoti prašomo tinklo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:381
+#: ../panels/network/panel-common.c:422
 msgid "PIN check failed"
 msgstr "Nepavyko patikrinti PIN"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:385
+#: ../panels/network/panel-common.c:426
 msgid "Firmware for the device may be missing"
 msgstr "Gali būti, kad įrenginiui trūksta aparatinės programinės įrangos"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:389
+#: ../panels/network/panel-common.c:430
 msgid "Connection disappeared"
 msgstr "Ryšys dingo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:393
+#: ../panels/network/panel-common.c:434
 msgid "Carrier/link changed"
 msgstr "Pernešėjas/saitas pasikeitė"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:397
+#: ../panels/network/panel-common.c:438
 msgid "Existing connection was assumed"
 msgstr "Buvo panaudotas esamas ryšys"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:401
+#: ../panels/network/panel-common.c:442
 msgid "Modem not found"
 msgstr "Modemas nerastas"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:405
+#: ../panels/network/panel-common.c:446
 msgid "Bluetooth connection failed"
 msgstr "Bluetooth ryšys nepavyko"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:409
+#: ../panels/network/panel-common.c:450
 msgid "SIM Card not inserted"
 msgstr "SIM kortelė neįdėta"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:413
+#: ../panels/network/panel-common.c:454
 msgid "SIM Pin required"
 msgstr "Reikalingas SIM Pin"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:417
+#: ../panels/network/panel-common.c:458
 msgid "SIM Puk required"
 msgstr "Reikalingas SIM Puk"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:421
+#: ../panels/network/panel-common.c:462
 msgid "SIM wrong"
 msgstr "Neteisinga SIM"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:425
+#: ../panels/network/panel-common.c:466
 msgid "InfiniBand device does not support connected mode"
 msgstr "InfiniBand įrenginys nepalaiko ryšio veiksenos"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:429
+#: ../panels/network/panel-common.c:470
 msgid "Connection dependency failed"
 msgstr "Nepavyko ryšio priklausomybė"
 
@@ -3271,7 +3205,6 @@ msgid "MSCHAPv2"
 msgstr "MSCHAPv2"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:399
-#| msgid "Choose a Folder"
 msgid "Choose a PAC file..."
 msgstr "Pasirinkite PAC failą..."
 
@@ -3280,14 +3213,12 @@ msgid "PAC files (*.pac)"
 msgstr "PAC failai (*.pac)"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:2
-#| msgid "All files"
 msgid "PAC _file"
 msgstr "PAC _failas"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:3
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:7
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
-#| msgid "Authentication failed"
 msgid "_Inner authentication"
 msgstr "_Vidinis tapatybės patvirtinimas"
 
@@ -3311,7 +3242,6 @@ msgid "Anonymous"
 msgstr "Anonimas"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:7
-#| msgid "Authentication failed"
 msgid "Authenticated"
 msgstr "Tapatybė patvirtinta"
 
@@ -3331,7 +3261,6 @@ msgstr "_Naudotojo vardas"
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:6
 #: ../panels/network/wireless-security/ws-leap.ui.h:3
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:3
-#| msgid "_Show password"
 msgid "Sho_w password"
 msgstr "_Rodyti slaptažodį"
 
@@ -3347,12 +3276,10 @@ msgid "Choose a Certificate Authority certificate..."
 msgstr "Pasirinkite liudijimų įstaigos liudijimą..."
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:3
-#| msgid "Version %s"
 msgid "Version 0"
 msgstr "Versija 0"
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:4
-#| msgid "Version %s"
 msgid "Version 1"
 msgstr "Versija 1"
 
@@ -3405,17 +3332,14 @@ msgid "_User certificate"
 msgstr "Na_udotojo liudijimas"
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:4
-#| msgid "Privacy"
 msgid "Private _key"
 msgstr "Privatus ra_ktas"
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:5
-#| msgid "_Generate a password"
 msgid "_Private key password"
 msgstr "_Privataus rakto slaptažodis"
 
 #: ../panels/network/wireless-security/eap-method-ttls.c:230
-#| msgid "WPA"
 msgid "PAP"
 msgstr "PAP"
 
@@ -3442,7 +3366,6 @@ msgstr ""
 "liudijimą?"
 
 #: ../panels/network/wireless-security/eap-method.c:281
-#| msgid "_Ignore Hosts"
 msgid "Ignore"
 msgstr "Nepaisyti"
 
@@ -3481,12 +3404,10 @@ msgstr "Apsaugotas EAP (PEAP)"
 #: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:2
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:9
 #: ../panels/network/wireless-security/ws-wpa-eap.ui.h:2
-#| msgid "Authentication failed"
 msgid "Au_thentication"
 msgstr "_Tapatybės patvirtinimas"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:1
-#| msgid "Default"
 msgid "1 (Default)"
 msgstr "1 (numatyta)"
 
@@ -3503,12 +3424,10 @@ msgid "4"
 msgstr "4"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:5
-#| msgid "System"
 msgid "Open System"
 msgstr "Atvira sistema"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:6
-#| msgid "Shared Folders"
 msgid "Shared Key"
 msgstr "Bendrinami raktai"
 
@@ -3525,7 +3444,6 @@ msgid "WEP inde_x"
 msgstr "WEP _indeksas"
 
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:2
-#| msgid "_Type:"
 msgid "_Type"
 msgstr "_Tipas"
 
@@ -3863,12 +3781,10 @@ msgid "_Screen Brightness"
 msgstr "_Ekrano ryškumas"
 
 #: ../panels/power/cc-power-panel.c:1449
-#| msgid "Dim Screen when Inactive"
 msgid "_Dim Screen when Inactive"
 msgstr "_Pritemdyti ekraną, kai kompiuteris nenaudojamas"
 
 #: ../panels/power/cc-power-panel.c:1472
-#| msgid "Mark As Inactive After"
 msgid "_Mark As Inactive After"
 msgstr "_Žymėti neaktyviu po"
 
@@ -3922,7 +3838,6 @@ msgstr "Energijos valdymo nustatymai"
 
 #. Translators: those are keywords for the power control-center panel
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
-#| msgid "Power;Sleep;Suspend;Hibernate;Battery;"
 msgid ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
 msgstr ""
@@ -4739,13 +4654,11 @@ msgid "Language;Layout;Keyboard;Input;"
 msgstr "Kalba;Išdėstymas;Klaviatūra;Įvestis;"
 
 #: ../panels/region/gnome-region-panel-formats.c:144
-#| msgid "Imperial"
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Imperinė"
 
 #: ../panels/region/gnome-region-panel-formats.c:146
-#| msgid "Metric"
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Metrinė"
@@ -5030,7 +4943,6 @@ msgstr ""
 "gebančiais įrenginiais"
 
 #: ../panels/sharing/sharing.ui.h:3
-#| msgid "<b>Share Public Folder</b>"
 msgid "Share Public Folder"
 msgstr "Dalintis viešu aplanku"
 
@@ -5039,7 +4951,6 @@ msgid "Only Receive From Trusted Devices"
 msgstr "Priimti tik iš įrenginių, kuriais pasitikima"
 
 #: ../panels/sharing/sharing.ui.h:5
-#| msgid "<b>Save Received Files to Downloads Folder</b>"
 msgid "Save Received Files to Downloads Folder"
 msgstr "Įrašyti gautus failus parsiuntimų aplanke"
 
@@ -5048,7 +4959,6 @@ msgid "Only share with Trusted Devices"
 msgstr "Dalintis tik su įrenginiais, kuriais pasitikima"
 
 #: ../panels/sharing/sharing.ui.h:7
-#| msgid "<b>Computer Name</b>"
 msgid "Computer Name"
 msgstr "Kompiuterio pavadinimas"
 
@@ -5066,7 +4976,6 @@ msgstr ""
 "Dalintis muzika, nuotraukomis ir vaizdo įrašais su kitais vietiniame tinkle."
 
 #: ../panels/sharing/sharing.ui.h:11
-#| msgid "<b>Share Media On This Network</b>"
 msgid "Share Media On This Network"
 msgstr "Dalintis medija šiame tinkle"
 
@@ -5100,7 +5009,6 @@ msgstr ""
 "esamame tinkle naudojant: <a href=\"dav://%s\">dav://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:19
-#| msgid "<b>Share Public Folder On This Network</b>"
 msgid "Share Public Folder On This Network"
 msgstr "Dalintis viešų aplanku šiame tinkle"
 
@@ -5140,12 +5048,10 @@ msgstr ""
 "prie: <a href=\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:29
-#| msgid "<b>Remote View</b>"
 msgid "Remote View"
 msgstr "Nutolęs rodinys"
 
 #: ../panels/sharing/sharing.ui.h:30
-#| msgid "<b>Remote Control</b>"
 msgid "Remote Control"
 msgstr "Nutolęs valdymas"
 
@@ -5154,7 +5060,6 @@ msgid "Approve All Connections"
 msgstr "Patvirtinti visus ryšius"
 
 #: ../panels/sharing/sharing.ui.h:32
-#| msgid "_Show password"
 msgid "Show Password"
 msgstr "Rodyti slaptažodį"
 
@@ -6967,4 +6872,3 @@ msgstr "Nustatymai;Parinktys;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "Visi nustatymai"
-
