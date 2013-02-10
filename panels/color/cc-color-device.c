@@ -63,6 +63,8 @@ cc_color_device_refresh (CcColorDevice *color_device)
   CcColorDevicePrivate *priv = color_device->priv;
   gchar *title = NULL;
   GPtrArray *profiles = NULL;
+  AtkObject *accessible;
+  gchar *name = NULL;
 
   /* add switch and expander if there are profiles, otherwise use a label */
   profiles = cd_device_get_profiles (priv->device);
@@ -82,6 +84,17 @@ cc_color_device_refresh (CcColorDevice *color_device)
   gtk_widget_set_sensitive (priv->widget_button, cd_device_get_enabled (priv->device));
   gtk_switch_set_active (GTK_SWITCH (priv->widget_switch),
                          cd_device_get_enabled (priv->device));
+
+  accessible = gtk_widget_get_accessible (priv->widget_switch);
+  name = g_strdup_printf (_("Enable color management for %s"), title);
+  atk_object_set_name (accessible, name);
+  g_free (name);
+
+  name = g_strdup_printf (_("Show color profiles for %s"), title);
+  accessible = gtk_widget_get_accessible (priv->widget_button);
+  atk_object_set_name (accessible, name);
+  g_free (name);
+
 out:
   if (profiles != NULL)
     g_ptr_array_unref (profiles);
