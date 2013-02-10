@@ -56,6 +56,11 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <child internal-child="accessible">
+                      <object class="AtkObject" id="previous-button-atkobject">
+                        <property name="accessible-name" translatable="yes">Previous Week</property>
+                      </object>
+                    </child>
                     <child>
                       <object class="GtkArrow" id="arrow1">
                         <property name="visible">True</property>
@@ -89,10 +94,20 @@
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <child internal-child="accessible">
+                      <object class="AtkObject" id="next-button-atkobject">
+                        <property name="accessible-name" translatable="yes">Next Week</property>
+                      </object>
+                    </child>
                     <child>
                       <object class="GtkArrow" id="arrow2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <child internal-child="accessible">
+                          <object class="AtkObject" id="arrow2-atkobject">
+                            <property name="accessible-name" translatable="yes">Next week</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
