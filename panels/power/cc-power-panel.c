@@ -362,6 +362,10 @@ set_primary (CcPowerPanel *panel, UpDevice *device)
   gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
   gtk_box_pack_start (GTK_BOX (box2), label, FALSE, TRUE, 0);
 
+  atk_object_add_relationship (gtk_widget_get_accessible (levelbar),
+                               ATK_RELATION_LABELLED_BY,
+                               gtk_widget_get_accessible (label));
+
   gtk_container_add (GTK_CONTAINER (priv->battery_list), box);
   gtk_size_group_add_widget (priv->row_sizegroup, box);
   gtk_widget_show_all (box);
@@ -445,6 +449,11 @@ add_battery (CcPowerPanel *panel, UpDevice *device)
   gtk_box_pack_start (GTK_BOX (box2), levelbar, TRUE, TRUE, 0);
   gtk_size_group_add_widget (priv->level_sizegroup, levelbar);
   gtk_box_pack_start (GTK_BOX (box), box2, TRUE, TRUE, 0);
+
+  atk_object_add_relationship (gtk_widget_get_accessible (levelbar),
+                               ATK_RELATION_LABELLED_BY,
+                               gtk_widget_get_accessible (label));
+
 
   g_object_set_data (G_OBJECT (box), "kind", GINT_TO_POINTER (kind));
   gtk_container_add (GTK_CONTAINER (priv->battery_list), box);
