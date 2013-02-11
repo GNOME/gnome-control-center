@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-01-25 18:34+0000\n"
-"PO-Revision-Date: 2013-01-27 10:08+0000\n"
+"POT-Creation-Date: 2013-02-06 21:06+0000\n"
+"PO-Revision-Date: 2013-02-11 00:18+0000\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
 "Language: pa\n"
@@ -86,22 +86,22 @@ msgstr "ਫਲਿੱਕਰ"
 msgid "Select"
 msgstr "ਚੁਣੋ"
 
-#: ../panels/background/cc-background-item.c:148
+#: ../panels/background/cc-background-item.c:150
 msgid "multiple sizes"
 msgstr "ਕਈ ਸਾਈਜ਼"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: ../panels/background/cc-background-item.c:152
+#: ../panels/background/cc-background-item.c:154
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: ../panels/background/cc-background-item.c:281
+#: ../panels/background/cc-background-item.c:283
 msgid "No Desktop Background"
 msgstr "ਕੋਈ ਡੈਸਕਟਾਪ ਬੈਕਗਰਾਊਂਡ ਨਹੀਂ"
 
-#: ../panels/background/cc-background-panel.c:449
+#: ../panels/background/cc-background-panel.c:453
 msgid "Current background"
 msgstr "ਮੌਜੂਦਾ ਬੈਕਗਰਾਊਂਡ"
 
@@ -118,7 +118,9 @@ msgstr "ਬੈਕਗਰਾਊਂਡ ਬਦਲੋ"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "ਵਾਲਪੇਪਰ;ਸਕਰੀਨ;ਡੈਸਕਟਾਪ;Wallpaper;Screen;Desktop;"
 
+#. TRANSLATORS: device type
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
+#: ../panels/network/panel-common.c:99
 msgid "Bluetooth"
 msgstr "ਬਲਿਊਟੁੱਥ"
 
@@ -144,12 +146,18 @@ msgstr "ਜੰਤਰ ਹਟਾਓ"
 msgid "Connection"
 msgstr "ਕੁਨੈਕਸ਼ਨ"
 
-#: ../panels/bluetooth/bluetooth.ui.h:6 ../panels/printers/printers.ui.h:14
+#: ../panels/bluetooth/bluetooth.ui.h:6
+#: ../panels/network/connection-editor/8021x-security-page.ui.h:2
+#: ../panels/network/connection-editor/security-page.ui.h:2
+#: ../panels/printers/printers.ui.h:14
 #: ../panels/region/gnome-region-panel.ui.h:3
 msgid "page 1"
 msgstr "ਸਫ਼ਾ 1"
 
-#: ../panels/bluetooth/bluetooth.ui.h:7 ../panels/printers/printers.ui.h:16
+#: ../panels/bluetooth/bluetooth.ui.h:7
+#: ../panels/network/connection-editor/8021x-security-page.ui.h:5
+#: ../panels/network/connection-editor/security-page.ui.h:5
+#: ../panels/printers/printers.ui.h:16
 #: ../panels/region/gnome-region-panel.ui.h:5
 msgid "page 2"
 msgstr "ਸਫ਼ਾ 2"
@@ -163,11 +171,14 @@ msgid "Type"
 msgstr "ਕਿਸਮ"
 
 #: ../panels/bluetooth/bluetooth.ui.h:10
+#: ../panels/network/connection-editor/ce-page-ip4.c:180
+#: ../panels/network/connection-editor/ce-page-ip4.c:416
+#: ../panels/network/connection-editor/ce-page-ip6.c:182
+#: ../panels/network/connection-editor/ce-page-ip6.c:420
 msgid "Address"
 msgstr "ਐਡਰੈੱਸ"
 
 #: ../panels/bluetooth/bluetooth.ui.h:11
-#| msgid "Mouse and Touchpad Settings"
 msgid "Mouse & Touchpad Settings"
 msgstr "ਮਾਊਸ ਤੇ ਟੱਚਪੈਡ ਸੈਟਿੰਗ"
 
@@ -181,15 +192,16 @@ msgid "Keyboard Settings"
 msgstr "ਕੀਬੋਰਡ ਸੈਟਿੰਗ"
 
 #: ../panels/bluetooth/bluetooth.ui.h:14
-#| msgid "Send Files..."
 msgid "Send Files…"
 msgstr "...ਫਾਇਲਾਂ ਭੇਜੋ"
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/network/wireless-security/nag-user-dialog.ui.h:3
 msgid "Yes"
 msgstr "ਹਾਂ"
 
 #: ../panels/bluetooth/cc-bluetooth-panel.c:355
+#: ../panels/network/wireless-security/nag-user-dialog.ui.h:2
 msgid "No"
 msgstr "ਨਹੀਂ"
 
@@ -226,14 +238,14 @@ msgstr ""
 "ਜੇ ਤੁਸੀਂ ਜੰਤਰ ਹਟਾਇਆ ਤਾਂ ਤੁਹਾਨੂੰ ਇਸ ਨੂੰ ਅਗਲੀ ਵਾਰ ਵਰਤਣ ਸਮੇਂ ਸੈੱਟਅੱਪ ਕਰਨਾ ਪਵੇਗਾ।"
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
-#: ../panels/color/cc-color-calibrate.c:360
+#: ../panels/color/cc-color-calibrate.c:359
 msgid "Place your calibration device over the square and press 'Start'"
 msgstr ""
 
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
-#: ../panels/color/cc-color-calibrate.c:366
+#: ../panels/color/cc-color-calibrate.c:365
 msgid ""
 "Move your calibration device to the calibrate position and press 'Continue'"
 msgstr ""
@@ -241,7 +253,7 @@ msgstr ""
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
-#: ../panels/color/cc-color-calibrate.c:372
+#: ../panels/color/cc-color-calibrate.c:371
 msgid ""
 "Move your calibration device to the surface position and press 'Continue'"
 msgstr ""
@@ -249,71 +261,64 @@ msgstr ""
 #. TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
 #. * is built into the palmrest and we need to fullscreen the
 #. * sample widget and shut the lid.
-#: ../panels/color/cc-color-calibrate.c:378
+#: ../panels/color/cc-color-calibrate.c:377
 msgid "Shut the laptop lid"
 msgstr "ਲੈਪਟਾਪ ਢੱਕਣ ਬੰਦ"
 
 #. TRANSLATORS: We suck, the calibation failed and we have no
 #. * good idea why or any suggestions
-#: ../panels/color/cc-color-calibrate.c:409
-#| msgid "An internal error occurred."
+#: ../panels/color/cc-color-calibrate.c:408
 msgid "An internal error occurred that could not be recovered."
 msgstr "ਅੰਦਰੂਨੀ ਗਲਤੀ ਆਈ ਹੈ, ਜਿਸ ਤੋਂ ਉਭਰਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ।"
 
 #. TRANSLATORS: Some required-at-runtime tools were not
 #. * installed, which should only affect insane distros
-#: ../panels/color/cc-color-calibrate.c:414
+#: ../panels/color/cc-color-calibrate.c:413
 msgid "Tools required for calibration are not installed."
 msgstr ""
 
 #. TRANSLATORS: The profile failed for some reason
-#: ../panels/color/cc-color-calibrate.c:420
-#| msgid "Theme cannot be deleted"
+#: ../panels/color/cc-color-calibrate.c:419
 msgid "The profile could not be generated."
 msgstr "ਪਰੋਫਾਇਲ ਤਿਆਰ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।"
 
 #. TRANSLATORS: The user specified a whitepoint that was
 #. * unobtainable with the hardware they've got -- see
 #. * https://en.wikipedia.org/wiki/White_point for details
-#: ../panels/color/cc-color-calibrate.c:426
+#: ../panels/color/cc-color-calibrate.c:425
 msgid "The target whitepoint was not obtainable."
 msgstr ""
 
 #. TRANSLATORS: the display calibration process is finished
-#: ../panels/color/cc-color-calibrate.c:466
-#| msgctxt "print job"
-#| msgid "Completed"
+#: ../panels/color/cc-color-calibrate.c:465
 msgid "Complete!"
 msgstr "ਪੂਰੇ ਹੋਏ!"
 
 #. TRANSLATORS: the display calibration failed, and we also show
 #. * the translated (or untranslated) error string after this
-#: ../panels/color/cc-color-calibrate.c:474
-#| msgid "Configuration failed"
+#: ../panels/color/cc-color-calibrate.c:473
 msgid "Calibration failed!"
 msgstr "ਕੈਲੀਬਰੇਸ਼ਨ ਫੇਲ੍ਹ ਹੋਈ!"
 
 #. TRANSLATORS: The user can now remove the sensor from the screen
-#: ../panels/color/cc-color-calibrate.c:481
+#: ../panels/color/cc-color-calibrate.c:480
 msgid "You can remove the calibration device."
 msgstr ""
 
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
-#: ../panels/color/cc-color-calibrate.c:552
+#: ../panels/color/cc-color-calibrate.c:551
 msgid "Do not disturb the calibration device while in progress"
 msgstr ""
 
 #. TRANSLATORS: This refers to the TFT display on a laptop
 #: ../panels/color/cc-color-common.c:41
-#| msgid "Lock screen"
 msgid "Laptop Screen"
 msgstr "ਲੈਪਟਾਪ ਸਕਰੀਨ"
 
 #. TRANSLATORS: This refers to the embedded webcam on a laptop
 #: ../panels/color/cc-color-common.c:50
-#| msgid "Built-in"
 msgid "Built-in Webcam"
 msgstr "ਬਿਲਟ-ਇਨ ਵੈਬਕੈਮ"
 
@@ -321,104 +326,92 @@ msgstr "ਬਿਲਟ-ਇਨ ਵੈਬਕੈਮ"
 #. * model, vendor or ID, e.g. 'LP2480zx Monitor'
 #: ../panels/color/cc-color-common.c:65
 #, c-format
-#| msgid "Monitor"
 msgid "%s Monitor"
 msgstr "%s ਮਾਨੀਟਰ"
 
 #. TRANSLATORS: a flatbed scanner device, e.g. 'Epson Scanner'
 #: ../panels/color/cc-color-common.c:69
 #, c-format
-#| msgctxt "Device kind"
-#| msgid "Scanner"
 msgid "%s Scanner"
 msgstr "%s ਸਕੈਨਰ"
 
 #. TRANSLATORS: a camera device, e.g. 'Nikon D60 Camera'
 #: ../panels/color/cc-color-common.c:73
 #, c-format
-#| msgctxt "Device kind"
-#| msgid "Camera"
 msgid "%s Camera"
 msgstr "%s ਕੈਮਰਾ"
 
 #. TRANSLATORS: a printer device, e.g. 'Epson Photosmart Printer'
 #: ../panels/color/cc-color-common.c:77
 #, c-format
-#| msgctxt "Device kind"
-#| msgid "Printer"
 msgid "%s Printer"
 msgstr "%s ਪਰਿੰਟਰ"
 
 #. TRANSLATORS: a webcam device, e.g. 'Philips HiDef Camera'
 #: ../panels/color/cc-color-common.c:81
 #, c-format
-#| msgctxt "Device kind"
-#| msgid "Webcam"
 msgid "%s Webcam"
 msgstr "%s ਵੈੱਬਕੈਮ"
 
 #. not calibrated
 #: ../panels/color/cc-color-device.c:303
-#| msgid "Uncalibrated"
 msgid "Not calibrated"
 msgstr "ਕੈਲੀਬਰੇਟ ਨਹੀਂ"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:131
+#: ../panels/color/cc-color-panel.c:132
 msgid "Default: "
 msgstr "ਡਿਫਾਲਟ: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:139
+#: ../panels/color/cc-color-panel.c:140
 msgid "Colorspace: "
 msgstr "ਰੰਗ-ਸਪੇਸ: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:146
+#: ../panels/color/cc-color-panel.c:147
 msgid "Test profile: "
 msgstr "ਪਰੋਫਾਇਲ ਟੈਸਟ: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:214
+#: ../panels/color/cc-color-panel.c:215
 msgid "Select ICC Profile File"
 msgstr "ICC ਪਰੋਫਾਇਲ ਫਾਇਲ ਚੁਣੋ"
 
-#: ../panels/color/cc-color-panel.c:217
+#: ../panels/color/cc-color-panel.c:218
 msgid "_Import"
 msgstr "ਇੰਪੋਰਟ(_I)"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:228
+#: ../panels/color/cc-color-panel.c:229
 msgid "Supported ICC profiles"
 msgstr "ਸਹਾਇਕ ICC ਪਰੋਫਾਇਲ"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:235
+#: ../panels/color/cc-color-panel.c:236
+#: ../panels/network/wireless-security/eap-method-fast.c:410
 msgid "All files"
 msgstr "ਸਭ ਫਾਇਲਾਂ"
 
-#: ../panels/color/cc-color-panel.c:506
-#| msgctxt "Distance"
-#| msgid "¼ Screen"
+#: ../panels/color/cc-color-panel.c:580
 msgid "Screen"
 msgstr "ਸਕਰੀਨ"
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:776
-#| msgid "Save File"
+#: ../panels/color/cc-color-panel.c:852
 msgid "Save Profile"
 msgstr "ਪਰੋਫਾਇਲ ਸੰਭਾਲੋ"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1137
+#: ../panels/color/cc-color-panel.c:1213
 msgid "Create a color profile for the selected device"
 msgstr "ਚੁਣੇ ਜੰਤਰ ਲਈ ਇੱਕ ਰੰਗ ਪਰੋਫਾਇਲ ਬਣਾਉ"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1152 ../panels/color/cc-color-panel.c:1176
+#: ../panels/color/cc-color-panel.c:1228 ../panels/color/cc-color-panel.c:1252
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -427,27 +420,24 @@ msgstr ""
 "ਹੋਇਆ ਹੈ।"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1186
+#: ../panels/color/cc-color-panel.c:1262
 msgid "The measuring instrument does not support printer profiling."
 msgstr "ਮਾਪ ਜੰਤਰ ਪਰਿੰਟਿੰਗ ਪਰੋਫਾਇਲਿੰਗ ਲਈ ਸਹਾਇਕ ਨਹੀਂ।"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1197
+#: ../panels/color/cc-color-panel.c:1273
 msgid "The device type is not currently supported."
 msgstr "ਜੰਤਰ ਕਿਸਮ ਹਾਲੇ ਸਹਾਇਕ ਨਹੀਂ ਹੈ।"
 
 #. TRANSLATORS: standard spaces are well known colorspaces like
 #. * sRGB, AdobeRGB and ProPhotoRGB
 #: ../panels/color/cc-color-profile.c:101
-#| msgctxt "Experience"
-#| msgid "Standard"
 msgid "Standard Space"
 msgstr "ਸਟੈਂਡਰਡ ਥਾਂ"
 
 #. TRANSLATORS: test profiles do things like changing the screen
 #. * a different color, or swap the red and green channels
 #: ../panels/color/cc-color-profile.c:107
-#| msgid "Test profile: "
 msgid "Test Profile"
 msgstr "ਪਰੋਫਾਇਲ ਟੈਸਟ"
 
@@ -456,8 +446,6 @@ msgstr "ਪਰੋਫਾਇਲ ਟੈਸਟ"
 #. * for instance the default monitor profile is created from the
 #. * primaries specified in the monitor EDID
 #: ../panels/color/cc-color-profile.c:115
-#| msgctxt "proxy method"
-#| msgid "Automatic"
 msgctxt "Automatically generated profile"
 msgid "Automatic"
 msgstr "ਆਟੋਮੈਟਿਕ"
@@ -466,16 +454,12 @@ msgstr "ਆਟੋਮੈਟਿਕ"
 #. * much less time to generate but may be a poor reflection of the
 #. * device capability
 #: ../panels/color/cc-color-profile.c:125
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "Low Quality"
 msgstr "ਘੱਟ ਕੁਆਲਟੀ"
 
 #. TRANSLATORS: the profile quality
 #: ../panels/color/cc-color-profile.c:130
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "Medium Quality"
 msgstr "ਮੱਧਮ ਕੁਆਲਟੀ"
@@ -484,8 +468,6 @@ msgstr "ਮੱਧਮ ਕੁਆਲਟੀ"
 #. * a *long* time, and have the best calibration and
 #. * characterisation data.
 #: ../panels/color/cc-color-profile.c:137
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgctxt "Profile quality"
 msgid "High Quality"
 msgstr "ਵਧਿਆ ਕੁਆਲਟੀ"
@@ -520,12 +502,10 @@ msgid "Full-screen display correction not possible with this profile"
 msgstr ""
 
 #: ../panels/color/cc-color-profile.c:223
-#| msgid "This device has an old profile that may no longer be accurate."
 msgid "This profile may no longer be accurate"
 msgstr "ਇਹ ਪਰੋਫਾਇਲ ਹੁਣ ਠੀਕ ਨਹੀਂ ਰਿਹਾ ਹੋ ਸਕਦਾ ਹੈ"
 
 #: ../panels/color/color-calibrate.ui.h:1
-#| msgid "Calibration"
 msgid "Display Calibration"
 msgstr "ਡਿਸਪਲੇਅ ਕੈਲੀਬਰੇਸ਼ਨ"
 
@@ -548,7 +528,6 @@ msgstr "ਮੁੜ-ਪ੍ਰਾਪਤ"
 
 #. This button returns the user back to the color control panel
 #: ../panels/color/color-calibrate.ui.h:8
-#| msgid "Done!"
 msgid "Done"
 msgstr "ਮੁਕੰਮਲ"
 
@@ -571,8 +550,6 @@ msgstr ""
 
 #. This is the approximate time it takes to calibrate the display.
 #: ../panels/color/color.ui.h:5
-#| msgctxt "Printer Option Group"
-#| msgid "Image Quality"
 msgid "Quality"
 msgstr "ਕੁਆਲਟੀ"
 
@@ -582,28 +559,24 @@ msgid "Approximate Time"
 msgstr "ਲਗਭਗ ਸਮਾਂ"
 
 #: ../panels/color/color.ui.h:8
-#| msgid "Calibration"
 msgid "Calibration Quality"
 msgstr "ਕੈਲੀਬਰੇਸ਼ਨ ਕੁਆਲਟੀ"
 
 #: ../panels/color/color.ui.h:9
-msgid "Select the type of display that is connected."
-msgstr "ਕੁਨੈਕਟ ਕੀਤੇ ਗਏ ਡਿਸਪਲੇਅ ਦੀ ਕਿਸਮ ਚੁਣੋ।"
-
-#: ../panels/color/color.ui.h:10
-#| msgctxt "Device kind"
-#| msgid "Display"
-msgid "Display Type"
-msgstr "ਡਿਸਪਲੇਅ ਕਿਸਮ"
-
-#: ../panels/color/color.ui.h:11
 msgid "Select the sensor device you want to use for calibration."
 msgstr ""
 
-#: ../panels/color/color.ui.h:12
-#| msgid "Calibration"
+#: ../panels/color/color.ui.h:10
 msgid "Calibration Device"
 msgstr "ਕੈਲੀਬਰੇਸ਼ਨ ਜੰਤਰ"
+
+#: ../panels/color/color.ui.h:11
+msgid "Select the type of display that is connected."
+msgstr "ਕੁਨੈਕਟ ਕੀਤੇ ਗਏ ਡਿਸਪਲੇਅ ਦੀ ਕਿਸਮ ਚੁਣੋ।"
+
+#: ../panels/color/color.ui.h:12
+msgid "Display Type"
+msgstr "ਡਿਸਪਲੇਅ ਕਿਸਮ"
 
 #: ../panels/color/color.ui.h:13
 msgid ""
@@ -612,7 +585,6 @@ msgid ""
 msgstr ""
 
 #: ../panels/color/color.ui.h:14
-#| msgid "Large White Pointer"
 msgid "Profile Whitepoint"
 msgstr "ਪਰੋਫਾਇਲ ਪੁਆਇੰਟਰ"
 
@@ -629,7 +601,6 @@ msgid ""
 msgstr ""
 
 #: ../panels/color/color.ui.h:17
-#| msgid "Brightness"
 msgid "Display Brightness"
 msgstr "ਡਿਸਪਲੇਅ ਚਮਕ"
 
@@ -640,12 +611,10 @@ msgid ""
 msgstr ""
 
 #: ../panels/color/color.ui.h:19
-#| msgid "_Profile:"
 msgid "Profile Name:"
 msgstr "ਪਰੋਫਾਇਲ ਨਾਂ:"
 
 #: ../panels/color/color.ui.h:20
-#| msgid "filename"
 msgid "Profile Name"
 msgstr "ਫਾਇਲ ਨਾਂ"
 
@@ -654,7 +623,6 @@ msgid "Profile successfully created!"
 msgstr "ਪਰੋਫਾਇਲ ਠੀਕ ਤਰ੍ਹਾਂ ਬਣਾਇਆ ਗਿਆ!"
 
 #: ../panels/color/color.ui.h:22
-#| msgid "_Import"
 msgid "Export"
 msgstr "ਐਕਸਪੋਰਟ"
 
@@ -726,7 +694,6 @@ msgid "Set this profile for all users on this computer"
 msgstr "ਇਹ ਪਰੋਫਾਇਲ ਨੂੰ ਇਸ ਕੰਪਿਊਟਰ ਦੇ ਸਭ ਯੂਜ਼ਰ ਲਈ ਸੈੱਟ ਕਰੋ"
 
 #: ../panels/color/color.ui.h:37
-#| msgid "Enabled"
 msgid "Enable"
 msgstr "ਯੋਗ"
 
@@ -768,65 +735,58 @@ msgid "CRT"
 msgstr "CRT"
 
 #: ../panels/color/color.ui.h:47
-#| msgid "Co_nnector:"
 msgid "Projector"
 msgstr "ਪਰੋਜੈਕਟਰ"
 
 #: ../panels/color/color.ui.h:48
-#| msgctxt "universal access, contrast"
-#| msgid "High"
+msgid "Plasma"
+msgstr "ਪਲਾਜ਼ਮਾ"
+
+#: ../panels/color/color.ui.h:49
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "ਉੱਚ"
 
-#: ../panels/color/color.ui.h:49
-#| msgid "10 minutes"
+#: ../panels/color/color.ui.h:50
 msgid "40 minutes"
 msgstr "੪੦ ਮਿੰਟ"
 
-#: ../panels/color/color.ui.h:50
-#| msgid "_Medium"
+#: ../panels/color/color.ui.h:51
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "ਮੱਧਮ"
 
-#: ../panels/color/color.ui.h:51 ../panels/power/power.ui.h:5
+#: ../panels/color/color.ui.h:52 ../panels/power/power.ui.h:5
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "੩੦ ਮਿੰਟ"
 
-#: ../panels/color/color.ui.h:52
-#| msgctxt "Battery power"
-#| msgid "Low"
+#: ../panels/color/color.ui.h:53
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "ਘੱਟ"
 
-#: ../panels/color/color.ui.h:53
-#| msgid "5 minutes"
+#: ../panels/color/color.ui.h:54
 msgid "15 minutes"
 msgstr "੧੫ ਮਿੰਟ"
 
-#: ../panels/color/color.ui.h:54
-#| msgid "Panel to display"
+#: ../panels/color/color.ui.h:55
 msgid "Native to display"
 msgstr "ਡਿਸਪਲੇਅ ਲਈ ਨੇਟਿਵ"
 
-#: ../panels/color/color.ui.h:55
-#| msgid "Pointing and Clicking"
+#: ../panels/color/color.ui.h:56
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (ਪਰਿੰਟ ਤੇ ਪਬਲਿਸ਼ ਕਰਨ)"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:57
 msgid "D55"
 msgstr "D55"
 
-#: ../panels/color/color.ui.h:57
+#: ../panels/color/color.ui.h:58
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (ਫੋਟੋਗਰਾਫ਼ੀ ਅਤੇ ਗਰਾਫਿਕਸ)"
 
-#: ../panels/color/color.ui.h:58
-#| msgid "75%"
+#: ../panels/color/color.ui.h:59
 msgid "D75"
 msgstr "D75"
 
@@ -874,7 +834,6 @@ msgid "China"
 msgstr "ਚੀਨ"
 
 #: ../panels/common/cc-language-chooser.c:120
-#| msgid "Other profile…"
 msgid "Other…"
 msgstr "…ਹੋਰ"
 
@@ -1134,14 +1093,16 @@ msgstr "ਮਾਨੀਟਰਾਂ ਤੇ ਪਰੋਜੈਕਟਰ ਦਾ ਰੈ�
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "ਪੈਨਲ;ਪਰੋਜੈਕਟਰ;xrandr;ਸਕਰੀਨ;ਰੈਜ਼ੋਲੂਸ਼ਨ;ਤਾਜ਼ਾ;"
 
+#. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:441 ../panels/network/panel-common.c:120
+#: ../panels/info/cc-info-panel.c:441
+#: ../panels/network/cc-network-panel.c:1132
+#: ../panels/network/panel-common.c:107 ../panels/network/panel-common.c:161
 msgid "Unknown"
 msgstr "ਅਣਜਾਣ"
 
 #: ../panels/info/cc-info-panel.c:542
 #, c-format
-#| msgid "%d-bit"
 msgid "%s %d-bit"
 msgstr "%s %d-ਬਿੱਟ"
 
@@ -1278,6 +1239,8 @@ msgid "Checking for Updates"
 msgstr "ਅੱਪਡੇਟ ਲਈ ਚੈੱਕ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #: ../panels/info/gnome-info-panel.desktop.in.in.h:1
+#: ../panels/network/connection-editor/ce-page-details.c:238
+#: ../panels/network/network-wifi.ui.h:58
 msgid "Details"
 msgstr "ਵੇਰਵਾ"
 
@@ -1323,7 +1286,6 @@ msgstr "ਪਰੋਸੈਸਰ"
 
 #. To translators: this field contains the distro name, version and type
 #: ../panels/info/info.ui.h:8
-#| msgid "File System"
 msgid "Base system"
 msgstr "ਬੇਸ ਸਿਸਟਮ"
 
@@ -1332,7 +1294,6 @@ msgid "Disk"
 msgstr "ਡਿਸਕ"
 
 #: ../panels/info/info.ui.h:10
-#| msgid "Calculating..."
 msgid "Calculating…"
 msgstr "...ਗਿਣਤੀ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
 
@@ -1389,7 +1350,6 @@ msgid "_Software"
 msgstr "ਸਾਫਟਵੇਅਰ(_S)"
 
 #: ../panels/info/info.ui.h:26
-#| msgid "Other Media"
 msgid "_Other Media…"
 msgstr "...ਹੋਰ ਮੀਡਿਆ(_O)"
 
@@ -1482,7 +1442,6 @@ msgid "Home folder"
 msgstr "ਘਰ ਫੋਲਡਰ"
 
 #: ../panels/keyboard/01-launchers.xml.in.h:7
-#| msgid "Search"
 msgctxt "keybinding"
 msgid "Search"
 msgstr "ਖੋਜ"
@@ -1574,49 +1533,42 @@ msgstr "ਵੱਧ-ਗੂੜ੍ਹਾ ਕਰਨਾ ਚਾਲੂ ਜਾਂ ਬੰ�
 #: ../panels/keyboard/cc-keyboard-option.c:304
 #: ../panels/keyboard/cc-keyboard-option.c:436
 #: ../panels/keyboard/keyboard-shortcuts.c:1160
-#: ../panels/sound/gvc/gvc-mixer-control.c:1828
+#: ../panels/network/network-wifi.ui.h:30
+#: ../panels/sound/gvc/gvc-mixer-control.c:1830
 #: ../panels/user-accounts/um-fingerprint-dialog.c:215
 #: ../panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Disabled"
 msgstr "ਅਯੋਗ"
 
 #: ../panels/keyboard/cc-keyboard-option.c:255
-#| msgid "Left Half"
 msgid "Left Shift"
 msgstr "ਖੱਬਾ Shift"
 
 #: ../panels/keyboard/cc-keyboard-option.c:256
-#| msgid "Left Half"
 msgid "Left Alt"
 msgstr "ਖੱਬਾ Alt"
 
 #: ../panels/keyboard/cc-keyboard-option.c:257
-#| msgid "Left Half"
 msgid "Left Ctrl"
 msgstr "ਖੱਬਾ Ctrl"
 
 #: ../panels/keyboard/cc-keyboard-option.c:258
-#| msgid "Right Half"
 msgid "Right Shift"
 msgstr "ਸੱਜਾ Shift"
 
 #: ../panels/keyboard/cc-keyboard-option.c:259
-#| msgid "Right Half"
 msgid "Right Alt"
 msgstr "ਸੱਜਾ Alt"
 
 #: ../panels/keyboard/cc-keyboard-option.c:260
-#| msgid "Right Half"
 msgid "Right Ctrl"
 msgstr "ਸੱਜਾ Ctrl"
 
 #: ../panels/keyboard/cc-keyboard-option.c:261
-#| msgid "Left Half"
 msgid "Left Alt+Shift"
 msgstr "ਖੱਬਾ Alt+Shift"
 
 #: ../panels/keyboard/cc-keyboard-option.c:262
-#| msgid "Right Half"
 msgid "Right Alt+Shift"
 msgstr "ਸੱਜਾ Alt+Shift"
 
@@ -1625,7 +1577,6 @@ msgid "Left Ctrl+Shift"
 msgstr "ਖੱਬਾ Ctrl+Shift"
 
 #: ../panels/keyboard/cc-keyboard-option.c:264
-#| msgid "Right Half"
 msgid "Right Ctrl+Shift"
 msgstr "ਸੱਜਾ Ctrl+Shift"
 
@@ -1634,7 +1585,6 @@ msgid "Left+Right Shift"
 msgstr "ਖੱਬਾ+ਸੱਜਾ Shift"
 
 #: ../panels/keyboard/cc-keyboard-option.c:266
-#| msgid "Left Ring"
 msgid "Left+Right Alt"
 msgstr "ਖੱਬਾ+ਸੱਜਾ Alt"
 
@@ -1643,12 +1593,10 @@ msgid "Left+Right Ctrl"
 msgstr "Left+ਸੱਜਾ Ctrl"
 
 #: ../panels/keyboard/cc-keyboard-option.c:268
-#| msgid "Ctrl+Alt+Shift+Space"
 msgid "Alt+Shift"
 msgstr "Alt+Shift"
 
 #: ../panels/keyboard/cc-keyboard-option.c:269
-#| msgid "Ctrl+Alt+Shift+Space"
 msgid "Ctrl+Shift"
 msgstr "Ctrl+Shift"
 
@@ -1681,7 +1629,6 @@ msgid "Compose Key"
 msgstr "ਕੰਪੋਜ਼ ਸਵਿੱਚ"
 
 #: ../panels/keyboard/cc-keyboard-option.c:399
-#| msgid "Switch to next source"
 msgid "Modifiers-only switch to next source"
 msgstr "ਮਾਡੀਫਾਇਰ-ਕੇਵਲ ਅਗਲੇ ਸਰੋਤ ਲਈ ਬਦਲੋ"
 
@@ -1835,8 +1782,9 @@ msgid "_Reassign"
 msgstr "ਮੁੜ-ਜਾਰੀ(_R)"
 
 #: ../panels/mouse/cc-mouse-panel.c:123
-msgid "_Test Your Settings"
-msgstr "ਆਪਣੀ ਸੈਟਿੰਗ ਜਾਂਚੋ(_T)"
+#| msgid "_Test Your Settings"
+msgid "Test Your _Settings"
+msgstr "ਆਪਣੀ ਸੈਟਿੰਗ ਜਾਂਚੋ(_S)"
 
 #: ../panels/mouse/gnome-mouse-panel.desktop.in.in.h:1
 msgid "Mouse & Touchpad"
@@ -1957,23 +1905,598 @@ msgstr "ਇੱਕ ਵਾਰ ਕਲਿੱਕ, ਸੈਕੰਡਰੀ ਬਟਨ"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:333
+#: ../panels/network/cc-network-panel.c:338
 msgid "Air_plane Mode"
 msgstr "ਏਅਰਪਲੇਨ ਮੋਡ(_p)"
 
-#: ../panels/network/cc-network-panel.c:836
+#: ../panels/network/cc-network-panel.c:879
 msgid "Network proxy"
 msgstr "ਨੈੱਟਵਰਕ ਪਰਾਕਸੀ"
 
-#: ../panels/network/cc-network-panel.c:1012 ../panels/network/net-vpn.c:278
+#: ../panels/network/cc-network-panel.c:1058 ../panels/network/net-vpn.c:280
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPN"
 
+#: ../panels/network/cc-network-panel.c:1128
+#: ../panels/network/connection-editor/net-connection-editor.c:584
+msgid "Bond"
+msgstr "ਬੌਂਡ"
+
+#: ../panels/network/cc-network-panel.c:1130
+#: ../panels/network/connection-editor/net-connection-editor.c:588
+msgid "VLAN"
+msgstr "VLAN"
+
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1076
+#: ../panels/network/cc-network-panel.c:1202
 msgid "The system network services are not compatible with this version."
 msgstr "ਸਿਸਟਮ ਨੈੱਟਵਰਕ ਸਰਵਿਸ ਇਸ ਵਰਜਨ ਨਾਲ ਕੰਮ ਨਹੀਂ ਕਰਦੀ ਹੈ।"
+
+#: ../panels/network/connection-editor/8021x-security-page.ui.h:1
+#| msgid "Security"
+msgid "802.1x _Security"
+msgstr "802.1x ਸੁਰੱਖਿਆ(_S)"
+
+#: ../panels/network/connection-editor/8021x-security-page.ui.h:3
+#: ../panels/network/connection-editor/security-page.ui.h:3
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:1
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:5
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:2
+msgid "Anony_mous identity"
+msgstr "ਅਗਿਆਤ ਪਛਾਣ(_m)"
+
+#: ../panels/network/connection-editor/8021x-security-page.ui.h:4
+#: ../panels/network/connection-editor/security-page.ui.h:4
+#| msgid "Authenticating"
+msgid "Inner _authentication"
+msgstr "ਅੰਦਰੂਨੀ ਪਰਮਾਣਕਿਤਾ(_a)"
+
+#: ../panels/network/connection-editor/ce-page-8021x-security.c:108
+#: ../panels/network/connection-editor/ce-page-security.c:455
+#: ../panels/network/connection-editor/details-page.ui.h:3
+#: ../panels/network/network-wifi.ui.h:4
+msgid "Security"
+msgstr "ਸੁਰੱਖਿਆ"
+
+#. TRANSLATORS: this WEP WiFi security
+#: ../panels/network/connection-editor/ce-page-details.c:52
+#: ../panels/network/net-device-wifi.c:224
+#: ../panels/network/net-device-wifi.c:385
+msgid "WEP"
+msgstr "WEP"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/connection-editor/ce-page-details.c:56
+#: ../panels/network/net-device-wifi.c:228
+#: ../panels/network/net-device-wifi.c:390
+#: ../panels/network/network-wifi.ui.h:17
+msgid "WPA"
+msgstr "WPA"
+
+#. TRANSLATORS: this WPA WiFi security
+#: ../panels/network/connection-editor/ce-page-details.c:60
+#: ../panels/network/net-device-wifi.c:232
+msgid "WPA2"
+msgstr "WPA2"
+
+#. TRANSLATORS: this Enterprise WiFi security
+#: ../panels/network/connection-editor/ce-page-details.c:65
+#: ../panels/network/net-device-wifi.c:237
+msgid "Enterprise"
+msgstr "ਇੰਟਰਪ੍ਰਾਈਜ਼"
+
+#: ../panels/network/connection-editor/ce-page-details.c:70
+#: ../panels/network/net-device-wifi.c:242
+#: ../panels/network/net-device-wifi.c:375
+msgctxt "Wifi security"
+msgid "None"
+msgstr "ਕੋਈ ਨਹੀਂ"
+
+#: ../panels/network/connection-editor/ce-page-details.c:91
+#: ../panels/power/power.ui.h:9
+msgid "Never"
+msgstr "ਕਦੇ ਨਹੀਂ"
+
+#: ../panels/network/connection-editor/ce-page-details.c:102
+#: ../panels/user-accounts/um-utils.c:770
+msgid "Today"
+msgstr "ਅੱਜ"
+
+#: ../panels/network/connection-editor/ce-page-details.c:104
+#: ../panels/user-accounts/um-utils.c:773
+msgid "Yesterday"
+msgstr "ਕੱਲ੍ਹ"
+
+#: ../panels/network/connection-editor/ce-page-details.c:106
+#: ../panels/network/net-device-ethernet.c:126
+#: ../panels/network/net-device-wifi.c:479
+#, c-format
+msgid "%i day ago"
+msgid_plural "%i days ago"
+msgstr[0] "%i ਦਿਨ ਪਹਿਲਾਂ"
+msgstr[1] "%i ਦਿਨ ਪਹਿਲਾਂ"
+
+#. Translators: network device speed
+#: ../panels/network/connection-editor/ce-page-details.c:155
+#: ../panels/network/net-device-ethernet.c:54
+#: ../panels/network/net-device-mobile.c:278
+#: ../panels/network/net-device-wifi.c:538
+#, c-format
+msgid "%d Mb/s"
+msgstr "%d Mb/s"
+
+#: ../panels/network/connection-editor/ce-page-details.c:179
+#: ../panels/network/net-device-wifi.c:567
+msgctxt "Signal strength"
+msgid "None"
+msgstr "ਕੋਈ ਨਹੀਂ"
+
+#: ../panels/network/connection-editor/ce-page-details.c:181
+#: ../panels/network/net-device-wifi.c:569
+msgctxt "Signal strength"
+msgid "Weak"
+msgstr "ਕਮਜ਼ੋਰ"
+
+#: ../panels/network/connection-editor/ce-page-details.c:183
+#: ../panels/network/net-device-wifi.c:571
+msgctxt "Signal strength"
+msgid "Ok"
+msgstr "ਠੀਕ ਹੈ"
+
+#: ../panels/network/connection-editor/ce-page-details.c:185
+#: ../panels/network/net-device-wifi.c:573
+msgctxt "Signal strength"
+msgid "Good"
+msgstr "ਚੰਗਾ"
+
+#: ../panels/network/connection-editor/ce-page-details.c:187
+#: ../panels/network/net-device-wifi.c:575
+msgctxt "Signal strength"
+msgid "Excellent"
+msgstr "ਬਹੁਤ ਵਧੀਆ"
+
+#: ../panels/network/connection-editor/ce-page-ethernet.c:200
+#: ../panels/network/connection-editor/ce-page-vpn.c:172
+#: ../panels/network/connection-editor/ce-page-wifi.c:243
+#: ../panels/network/network-wifi.ui.h:59
+msgid "Identity"
+msgstr "ਪਛਾਣ"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:183
+#: ../panels/network/connection-editor/ce-page-ip4.c:419
+msgid "Netmask"
+msgstr "ਨੈੱਟਮਾਸਕ"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:186
+#: ../panels/network/connection-editor/ce-page-ip4.c:422
+#: ../panels/network/connection-editor/ce-page-ip6.c:188
+#: ../panels/network/connection-editor/ce-page-ip6.c:426
+#: ../panels/network/network-vpn.ui.h:3
+msgid "Gateway"
+msgstr "ਗੇਟਵੇ"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:330
+#: ../panels/network/connection-editor/ce-page-ip6.c:334
+msgid "Server"
+msgstr "ਸਰਵਰ"
+
+#. Translators: Please see http://en.wikipedia.org/wiki/Metrics_(networking)
+#: ../panels/network/connection-editor/ce-page-ip4.c:426
+#: ../panels/network/connection-editor/ce-page-ip6.c:430
+#| msgid "Metric"
+msgctxt "network parameters"
+msgid "Metric"
+msgstr "ਮੈਟਰਿਕ"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:579
+#: ../panels/network/network-wifi.ui.h:26
+#| msgctxt "Automatically generated profile"
+#| msgid "Automatic"
+msgid "Automatic (DHCP)"
+msgstr "ਆਟੋਮੈਟਿਕ (DHCP)"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:583
+#: ../panels/network/connection-editor/ce-page-ip6.c:585
+#: ../panels/network/network-wifi.ui.h:25
+#| msgctxt "proxy method"
+#| msgid "Manual"
+msgid "Manual"
+msgstr "ਦਸਤੀ"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:587
+#: ../panels/network/connection-editor/ce-page-ip6.c:589
+msgid "Link-Local Only"
+msgstr "ਕੇਵਲ ਲੋਕਲ-ਲਿੰਕ"
+
+#: ../panels/network/connection-editor/ce-page-ip4.c:888
+#: ../panels/network/network-wifi.ui.h:60
+msgid "IPv4"
+msgstr "ipv4"
+
+#: ../panels/network/connection-editor/ce-page-ip6.c:185
+#: ../panels/network/connection-editor/ce-page-ip6.c:423
+msgid "Prefix"
+msgstr "ਪ੍ਰੀ-ਫਿਕਸ"
+
+#: ../panels/network/connection-editor/ce-page-ip6.c:577
+#: ../panels/network/connection-editor/ethernet-page.ui.h:1
+#: ../panels/network/connection-editor/ip4-page.ui.h:4
+#: ../panels/network/connection-editor/ip6-page.ui.h:4
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:2
+#| msgctxt "Automatically generated profile"
+#| msgid "Automatic"
+msgid "Automatic"
+msgstr "ਆਟੋਮੈਟਿਕ"
+
+#: ../panels/network/connection-editor/ce-page-ip6.c:581
+#| msgid "A_utomatic Login"
+msgid "Automatic, DHCP only"
+msgstr "ਆਟੋਮੈਟਿਕ, ਕੇਵਲ DHCP"
+
+#: ../panels/network/connection-editor/ce-page-ip6.c:849
+#: ../panels/network/network-wifi.ui.h:61
+msgid "IPv6"
+msgstr "ipv6"
+
+#: ../panels/network/connection-editor/ce-page-reset.c:91
+#: ../panels/network/network-wifi.ui.h:63
+msgid "Reset"
+msgstr "ਮੁੜ-ਸੈੱਟ"
+
+#: ../panels/network/connection-editor/ce-page-security.c:250
+#| msgid "None"
+msgctxt "Wi-Fi/Ethernet security"
+msgid "None"
+msgstr "ਕੋਈ ਨਹੀਂ"
+
+#: ../panels/network/connection-editor/ce-page-security.c:273
+msgid "WEP 40/128-bit Key (Hex or ASCII)"
+msgstr "WEP 40/128-ਬਿੱਟ ਕੁੰਜੀ (Hex ਜਾਂ ASCII)"
+
+#: ../panels/network/connection-editor/ce-page-security.c:283
+msgid "WEP 128-bit Passphrase"
+msgstr "WEP 128-ਬਿੱਟ ਵਾਕ"
+
+#: ../panels/network/connection-editor/ce-page-security.c:296
+#: ../panels/network/wireless-security/wireless-security.c:409
+msgid "LEAP"
+msgstr "LEAP"
+
+#: ../panels/network/connection-editor/ce-page-security.c:309
+msgid "Dynamic WEP (802.1x)"
+msgstr "ਡਾਇਨੈਮਿਕ WEP (802.1x)"
+
+#: ../panels/network/connection-editor/ce-page-security.c:323
+msgid "WPA & WPA2 Personal"
+msgstr "WPA ਤੇ WPA੨ ਨਿੱਜੀ"
+
+#: ../panels/network/connection-editor/ce-page-security.c:337
+#| msgid "Enterprise"
+msgid "WPA & WPA2 Enterprise"
+msgstr "WPA ਤੇ WPA੨ ਇੰਟਰਪ੍ਰਾਈਜ"
+
+#: ../panels/network/connection-editor/ce-page.c:502
+#| msgctxt "Automatically generated profile"
+#| msgid "Automatic"
+msgid "automatic"
+msgstr "ਆਟੋਮੈਟਿਕ"
+
+#: ../panels/network/connection-editor/connection-editor.ui.h:1
+#| msgid "_Apply font"
+msgid "_Apply"
+msgstr "ਲਾਗੂ ਕਰੋ(_A)"
+
+#: ../panels/network/connection-editor/details-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:2
+#| msgid "Strength"
+msgid "Signal Strength"
+msgstr "ਸਿਗਨਲ ਮਜ਼ਬੂਤੀ"
+
+#: ../panels/network/connection-editor/details-page.ui.h:2
+#: ../panels/network/network-wifi.ui.h:3
+msgid "Link speed"
+msgstr "ਲਿੰਕ ਸਪੀਡ"
+
+#: ../panels/network/connection-editor/details-page.ui.h:4
+#: ../panels/network/net-device-ethernet.c:159
+#: ../panels/network/network-simple.ui.h:2
+#: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:684
+msgid "IPv4 Address"
+msgstr "IPv4 ਐਡਰੈੱਸ"
+
+#: ../panels/network/connection-editor/details-page.ui.h:5
+#: ../panels/network/net-device-ethernet.c:160
+#: ../panels/network/net-device-ethernet.c:164
+#: ../panels/network/network-mobile.ui.h:4
+#: ../panels/network/network-simple.ui.h:3
+#: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:685
+msgid "IPv6 Address"
+msgstr "IPv6 ਐਡਰੈੱਸ"
+
+#: ../panels/network/connection-editor/details-page.ui.h:6
+#: ../panels/network/net-device-ethernet.c:167
+#: ../panels/network/network-simple.ui.h:1
+#: ../panels/network/network-wifi.ui.h:7
+msgid "Hardware Address"
+msgstr "ਹਾਰਡਵੇਅਰ ਐਡਰੈੱਸ"
+
+#: ../panels/network/connection-editor/details-page.ui.h:7
+#: ../panels/network/net-device-ethernet.c:171
+#: ../panels/network/network-mobile.ui.h:5
+#: ../panels/network/network-simple.ui.h:4
+#: ../panels/network/network-wifi.ui.h:8
+msgid "Default Route"
+msgstr "ਡਿਫਾਲਟ ਰੂਟ"
+
+#: ../panels/network/connection-editor/details-page.ui.h:8
+#: ../panels/network/connection-editor/ip4-page.ui.h:3
+#: ../panels/network/connection-editor/ip6-page.ui.h:3
+#: ../panels/network/net-device-ethernet.c:173
+#: ../panels/network/network-mobile.ui.h:6
+#: ../panels/network/network-simple.ui.h:5
+#: ../panels/network/network-wifi.ui.h:9
+msgid "DNS"
+msgstr "DNS"
+
+#: ../panels/network/connection-editor/details-page.ui.h:9
+#| msgid "Last used"
+msgid "Last Used"
+msgstr "ਆਖਰੀ ਵਰਤੋਂ"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:2
+msgid "Twisted Pair (TP)"
+msgstr "ਟਵਿਸਟਡ ਪੇਅਰ (TP)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:3
+msgid "Attachment Unit Interface (AUI)"
+msgstr ""
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:4
+msgid "BNC"
+msgstr "BNC"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:5
+msgid "Media Independent Interface (MII)"
+msgstr "ਮੀਡਿਆ ਇਡੀਪੈਂਡੈਂਟ ਇੰਟਰਫੇਸ (MII)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:6
+#| msgid "%d Mb/s"
+msgid "10 Mb/s"
+msgstr "੧੦ Mb/s"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:7
+#| msgid "%d Mb/s"
+msgid "100 Mb/s"
+msgstr "੧੦੦ Mb/s"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:8
+#| msgid "%i Gb/s"
+msgid "1 Gb/s"
+msgstr "੧ Gb/s"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:9
+#| msgid "%i Gb/s"
+msgid "10 Gb/s"
+msgstr "੧੦ Gb/s"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:10
+#: ../panels/network/connection-editor/vpn-page.ui.h:1
+#| msgid "_Name:"
+msgid "_Name"
+msgstr "ਨਾਂ(_N)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:11
+#: ../panels/network/connection-editor/wifi-page.ui.h:4
+#: ../panels/network/network-wifi.ui.h:49
+#| msgid "_Address:"
+msgid "_MAC Address"
+msgstr "_MAC ਐਡਰੈਸ"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:12
+msgid "M_TU"
+msgstr "M_TU"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:13
+#: ../panels/network/connection-editor/wifi-page.ui.h:5
+#| msgid "_Address:"
+msgid "_Cloned Address"
+msgstr "ਕਨੋਲ ਕੀਤਾ  ਐਡਰੈੱਸ(_C)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:14
+#: ../panels/network/connection-editor/wifi-page.ui.h:6
+#| msgid "Set time automatically"
+msgid "Connect _automatically"
+msgstr "ਆਟੋਮੈਟਿਕ ਕੁਨੈਕਟ ਕਰੋ(_a)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:15
+msgid "Make available to other _users"
+msgstr "ਹੋਰ ਯੂਜ਼ਰ ਨੂੰ ਉਪਲੱਬਧ ਕਰਵਾਉ(_u)"
+
+#: ../panels/network/connection-editor/ethernet-page.ui.h:16
+#| msgid "%u byte"
+#| msgid_plural "%u bytes"
+msgid "bytes"
+msgstr "ਬਾਈਟ"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:23
+msgid "IPv_4"
+msgstr "IPv_4"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:2
+#: ../panels/network/connection-editor/ip6-page.ui.h:2
+#: ../panels/network/network-wifi.ui.h:24
+#| msgid "_Address:"
+msgid "_Addresses"
+msgstr "ਐਡਰੈੱਸ(_A)"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:5
+#: ../panels/network/connection-editor/ip6-page.ui.h:5
+#: ../panels/network/network-wifi.ui.h:39
+msgid "Routes"
+msgstr "ਰੂਟ"
+
+#: ../panels/network/connection-editor/ip4-page.ui.h:6
+#: ../panels/network/connection-editor/ip6-page.ui.h:6
+#: ../panels/network/network-wifi.ui.h:45
+msgid "Use this connection _only for resources on its network"
+msgstr "ਇਹ ਕੁਨੈਕਸ਼ਨ ਨੂੰ ਕੇਵਲ ਇਸ ਦੇ ਨੈੱਟਵਰਕ ਉੱਤੇ ਹੀ ਸਰੋਤਾਂ ਲਈ ਵਰਤੋਂ(_o)"
+
+#: ../panels/network/connection-editor/ip6-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:47
+msgid "IPv_6"
+msgstr "IPv_6"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:267
+#| msgid "Bluetooth connection failed"
+msgid "Unable to open connection editor"
+msgstr "ਕੁਨੈਕਸ਼ਨ ਐਡੀਟਰ ਖੋਲ੍ਹਣ ਲਈ ਅਸਮਰੱਥ"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:282
+#| msgid "Save Profile"
+msgid "New Profile"
+msgstr "ਨਵਾਂ ਪਰੋਫਾਇਲ"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:502
+#: ../panels/printers/new-printer-dialog.ui.h:2
+#: ../panels/user-accounts/um-account-dialog.c:1068
+msgid "_Add"
+msgstr "ਸ਼ਾਮਲ(_A)"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:583
+#: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
+msgid "VPN"
+msgstr "VPN"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:586
+msgid "Bridge"
+msgstr "ਬਰਿੱਜ਼"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:738
+#| msgid "Could not load ui: %s"
+msgid "Could not load VPN plugins"
+msgstr "VPN ਪਲੱਗਇਨ ਲੋਡ ਨਹੀਂ ਕੀਤੀਆਂ ਜਾ ਸਕੀਆਂ"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:802
+#| msgid "Import File…"
+msgid "Import from file…"
+msgstr "…ਫਾਇਲ ਤੋਂ ਇੰਪੋਰਟ ਕਰੋ"
+
+#: ../panels/network/connection-editor/net-connection-editor.c:869
+#| msgid "Add new connection"
+msgid "Add Network Connection"
+msgstr "ਨੈੱਟਵਰਕ ਕੁਨੈਕਸ਼ਨ ਸ਼ਾਮਲ"
+
+#: ../panels/network/connection-editor/reset-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:53
+msgid "_Reset"
+msgstr "ਮੁਡ਼-ਸੈੱਟ(_R)"
+
+#: ../panels/network/connection-editor/reset-page.ui.h:2
+#: ../panels/network/net-device-wifi.c:1404
+#: ../panels/network/network-wifi.ui.h:54
+#| msgid "Forget"
+msgid "_Forget"
+msgstr "ਭੁੱਲ ਜਾਓ(_F)"
+
+#: ../panels/network/connection-editor/reset-page.ui.h:3
+msgid ""
+"Reset the settings for this network, including passwords, but remember it as "
+"a preferred network"
+msgstr ""
+
+#: ../panels/network/connection-editor/reset-page.ui.h:4
+msgid ""
+"Remove all details relating to this network and do not try to automatically "
+"connect"
+msgstr ""
+
+#: ../panels/network/connection-editor/security-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:14
+#| msgid "Security"
+msgid "S_ecurity"
+msgstr "ਸੁਰੱਖਿਆ(_e)"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:205
+#| msgid "Configuring connection"
+msgid "Cannot import VPN connection"
+msgstr "VPN ਕੁਨੈਕਸ਼ਨ ਇੰਪੋਰਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:207
+#, c-format
+msgid ""
+"The file '%s' could not be read or does not contain recognized VPN "
+"connection information\n"
+"\n"
+"Error: %s."
+msgstr ""
+"ਫਾਇਲ '%s' ਪੜ੍ਹੀ ਨਹੀਂ ਜਾ ਸਕੀ ਜਾਂ ਪਛਾਣਯੋਗ VPN ਕੁਨੈਕਸ਼ਨ ਜਾਣਕਾਰੀ ਨਹੀਂ ਰੱਖਦੀ ਹੈ।\n"
+"\n"
+"ਗਲਤੀ: %s।"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:242
+#| msgid "Select your photo"
+msgid "Select file to import"
+msgstr "ਇੰਪੋਰਟ ਕਰਨ ਲਈ ਫਾਇਲ ਚੁਣੋ"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:294
+#, c-format
+#| msgid "A user with name '%s' already exists."
+msgid "A file named \"%s\" already exists."
+msgstr "\"%s\" ਫਾਇਲ ਨਾਂ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ।"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:296
+msgid "_Replace"
+msgstr "ਬਦਲੋ(_R)"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:298
+#, c-format
+msgid "Do you want to replace %s with the VPN connection you are saving?"
+msgstr "ਕੀ ਤੁਸੀਂ %s ਨੂੰ VPN, ਜੋ ਤੁਸੀਂ ਸੰਭਾਲ ਰਹੇ ਹੋ, ਨਾਲ ਬਦਲਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:334
+msgid "Cannot export VPN connection"
+msgstr "VPN ਕੁਨੈਕਸ਼ਨ ਐਕਸਪੋਰਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:336
+#, c-format
+msgid ""
+"The VPN connection '%s' could not be exported to %s.\n"
+"\n"
+"Error: %s."
+msgstr ""
+"VPN ਕੁਨੈਕਸ਼ਨ '%s' %s ਲਈ ਐਕਸਪੋਰਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ।\n"
+"\n"
+"ਗਲਤੀ: %s"
+
+#: ../panels/network/connection-editor/vpn-helpers.c:371
+msgid "Export VPN connection..."
+msgstr "...VPN ਕੁਨੈਕਸ਼ਨ ਐਕਸਪੋਰਟ ਕਰੋ"
+
+#: ../panels/network/connection-editor/vpn-page.ui.h:2
+msgid "(Error: unable to load VPN connection editor)"
+msgstr "(ਗਲਤੀ: VPC ਕੁਨੈਕਸ਼ਨ ਐਡੀਟਰ ਖੋਲ੍ਹਣ ਲਈ ਅਸਮਰੱਥ)"
+
+#: ../panels/network/connection-editor/wifi-page.ui.h:1
+#: ../panels/network/network-wifi.ui.h:12
+msgid "_SSID"
+msgstr "_SSID"
+
+#: ../panels/network/connection-editor/wifi-page.ui.h:2
+#: ../panels/network/network-wifi.ui.h:13
+msgid "_BSSID"
+msgstr "_BSSID"
+
+#: ../panels/network/connection-editor/wifi-page.ui.h:3
+#: ../panels/network/network-wifi.ui.h:16
+#| msgid "_Forget Network"
+msgid "My Home Network"
+msgstr "ਮੇਰਾ ਘਰ ਨੈੱਟਵਰਕ"
+
+#: ../panels/network/connection-editor/wifi-page.ui.h:7
+msgid "Make available to _other users"
+msgstr "ਹੋਰ ਯੂਜ਼ਰ ਨੂੰ ਉਪਲੱਬਧ ਕਰਵਾਉ(_o)"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 #: ../panels/network/network-mobile.ui.h:7
@@ -1992,119 +2515,53 @@ msgstr ""
 "IP;"
 "LAN;Proxy;WAN;Broadband;Modem;Bluetooth;"
 
-#: ../panels/network/net-device-bond.c:131
+#: ../panels/network/net-device-bond.c:77
 msgid "Bond slaves"
 msgstr "ਬੌਂਡ ਸਲੇਵ"
 
-#. Translators: network device speed
-#: ../panels/network/net-device-ethernet.c:49
-#: ../panels/network/net-device-mobile.c:283
-#: ../panels/network/net-device-wifi.c:725
-#, c-format
-msgid "%d Mb/s"
-msgstr "%d Mb/s"
+#: ../panels/network/net-device-bridge.c:79
+#| msgid "Bond slaves"
+msgid "Bridge slaves"
+msgstr "ਬਰਿੱਜ ਸਲੇਵ"
 
-#: ../panels/network/net-device-mobile.c:225
-msgid "Add new connection"
-msgstr "ਨਵਾਂ ਕੁਨੈਕਸ਼ਨ ਸ਼ਾਮਲ ਕਰੋ"
-
-#. TRANSLATORS: this WEP WiFi security
-#: ../panels/network/net-device-wifi.c:258
-#: ../panels/network/net-device-wifi.c:437
-msgid "WEP"
-msgstr "WEP"
-
-#. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:262
-#: ../panels/network/net-device-wifi.c:441
-msgid "WPA"
-msgstr "WPA"
-
-#. TRANSLATORS: this WPA WiFi security
-#: ../panels/network/net-device-wifi.c:266
-msgid "WPA2"
-msgstr "WPA2"
-
-#. TRANSLATORS: this Enterprise WiFi security
-#: ../panels/network/net-device-wifi.c:271
-msgid "Enterprise"
-msgstr "ਇੰਟਰਪ੍ਰਾਈਜ਼"
-
-#: ../panels/network/net-device-wifi.c:276
-#: ../panels/network/net-device-wifi.c:432
-msgctxt "Wifi security"
-msgid "None"
-msgstr "ਕੋਈ ਨਹੀਂ"
-
-#: ../panels/network/net-device-wifi.c:652
+#: ../panels/network/net-device-ethernet.c:112
+#: ../panels/network/net-device-wifi.c:465
 msgid "never"
 msgstr "ਕਦੇ ਨਹੀਂ"
 
-#: ../panels/network/net-device-wifi.c:662
+#: ../panels/network/net-device-ethernet.c:122
+#: ../panels/network/net-device-wifi.c:475
 msgid "today"
 msgstr "ਅੱਜ"
 
-#: ../panels/network/net-device-wifi.c:664
+#: ../panels/network/net-device-ethernet.c:124
+#: ../panels/network/net-device-wifi.c:477
 msgid "yesterday"
 msgstr "ਕੱਲ੍ਹ"
 
-#: ../panels/network/net-device-wifi.c:666
+#: ../panels/network/net-device-ethernet.c:162
+#: ../panels/network/network-mobile.ui.h:3
+#: ../panels/network/panel-common.c:687 ../panels/network/panel-common.c:689
+#: ../panels/printers/printers.ui.h:13
+msgid "IP Address"
+msgstr "IP ਐਡਰੈੱਸ"
+
+#: ../panels/network/net-device-ethernet.c:178
+#: ../panels/network/network-wifi.ui.h:10
+msgid "Last used"
+msgstr "ਆਖਰੀ ਵਰਤੋਂ"
+
+#: ../panels/network/net-device-ethernet.c:477
 #, c-format
-msgid "%i day ago"
-msgid_plural "%i days ago"
-msgstr[0] "%i ਦਿਨ ਪਹਿਲਾਂ"
-msgstr[1] "%i ਦਿਨ ਪਹਿਲਾਂ"
+#| msgid "_Profile:"
+msgid "Profile %d"
+msgstr "ਪਰੋਫਾਇਲ %d"
 
-#. TRANSLATORS: VPN status
-#: ../panels/network/net-device-wifi.c:735
-#: ../panels/network/panel-common.c:235
-msgid "Not connected"
-msgstr "ਕੁਨੈਕਟ ਨਹੀਂ ਹੈ"
+#: ../panels/network/net-device-mobile.c:220
+msgid "Add new connection"
+msgstr "ਨਵਾਂ ਕੁਨੈਕਸ਼ਨ ਸ਼ਾਮਲ ਕਰੋ"
 
-#: ../panels/network/net-device-wifi.c:737
-#: ../panels/network/net-device-wifi.c:2101
-msgid "Out of range"
-msgstr "ਹੱਦ ਤੋਂ ਬਾਹਰ"
-
-#: ../panels/network/net-device-wifi.c:768
-msgctxt "Signal strength"
-msgid "None"
-msgstr "ਕੋਈ ਨਹੀਂ"
-
-#: ../panels/network/net-device-wifi.c:770
-msgctxt "Signal strength"
-msgid "Weak"
-msgstr "ਕਮਜ਼ੋਰ"
-
-#: ../panels/network/net-device-wifi.c:772
-msgctxt "Signal strength"
-msgid "Ok"
-msgstr "ਠੀਕ ਹੈ"
-
-#: ../panels/network/net-device-wifi.c:774
-msgctxt "Signal strength"
-msgid "Good"
-msgstr "ਚੰਗਾ"
-
-#: ../panels/network/net-device-wifi.c:776
-msgctxt "Signal strength"
-msgid "Excellent"
-msgstr "ਬਹੁਤ ਵਧੀਆ"
-
-#: ../panels/network/net-device-wifi.c:960
-#, c-format
-msgid ""
-"Network details for %s including password and any custom configuration will "
-"be lost."
-msgstr ""
-"%s ਲਈ ਨੈੱਟਵਰਕ ਵੇਰਵਾ, ਜਿਸ ਵਿੱਚ ਪਾਸਵਰਡ ਅਤੇ ਹੋਰ ਪਸੰਦੀਦਾ ਸੰਰਚਨਾ ਦਿੱਤੀ ਸੀ, ਖਤਮ ਹੋ "
-"ਜਾਵੇਗਾ।"
-
-#: ../panels/network/net-device-wifi.c:971
-msgid "Forget"
-msgstr "ਭੁੱਲੋ"
-
-#: ../panels/network/net-device-wifi.c:1556
+#: ../panels/network/net-device-wifi.c:1125
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2113,26 +2570,50 @@ msgstr ""
 "ਨੂੰ ਹੋਰਾਂ ਨਾਲ ਆਪਣੇ ਇੰਟਰਨੈੱਟ "
 "ਕੁਨੈਕਸ਼ਨ ਨੂੰ ਸਾਂਝਾ ਕਰਨ ਲਈ ਵਰਤ ਸਕਦੇ ਹੋ।"
 
-#: ../panels/network/net-device-wifi.c:1560
+#: ../panels/network/net-device-wifi.c:1129
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr ""
 "ਬੇਤਾਰ ਹਾਟਸਪਾਟ ਚਾਲੂ ਕਰਨ ਨਾਲ ਤੁਹਾਨੂੰ <b>%s</b> ਤੋਂ ਡਿਸ-ਕੁਨੈਕਟ ਕੀਤਾ ਜਾਵੇਗਾ।"
 
-#: ../panels/network/net-device-wifi.c:1564
+#: ../panels/network/net-device-wifi.c:1133
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
 msgstr ""
 "ਤੁਹਾਡੇ ਬੇਤਾਰ ਰਾਹੀਂ ਇੰਟਰਨੈੱਟ ਵਰਤਣਾ ਸੰਭਵ ਨਹੀਂ ਹੈ, ਜਦੋਂ ਕਿ ਹਾਟਸਪਾਟ ਸਰਗਰਮ ਹੋਵੇ।"
 
-#: ../panels/network/net-device-wifi.c:1630
+#: ../panels/network/net-device-wifi.c:1207
 msgid "Stop hotspot and disconnect any users?"
 msgstr "ਕੀ ਹਾਟਸਪਾਟ ਰੋਕਣਾ ਹੈ ਅਤੇ ਯੂਜ਼ਰ ਨੂੰ ਡਿਸ-ਕੁਨੈਕਟ ਕਰਨਾ ਹੈ?"
 
-#: ../panels/network/net-device-wifi.c:1633
+#: ../panels/network/net-device-wifi.c:1210
 msgid "_Stop Hotspot"
 msgstr "ਹਾਟਸਪਾਟ ਰੋਕੋ(_S)"
+
+#: ../panels/network/net-device-wifi.c:1400
+#, fuzzy
+#| msgid ""
+#| "Network details for %s including password and any custom configuration "
+#| "will be lost."
+msgid ""
+"Network details for the selected networks, including passwords and any "
+"custom configuration will be lost."
+msgstr ""
+"%s ਲਈ ਨੈੱਟਵਰਕ ਵੇਰਵਾ, ਜਿਸ ਵਿੱਚ ਪਾਸਵਰਡ ਅਤੇ ਹੋਰ ਪਸੰਦੀਦਾ ਸੰਰਚਨਾ ਦਿੱਤੀ ਸੀ, ਖਤਮ ਹੋ "
+"ਜਾਵੇਗਾ।"
+
+#: ../panels/network/net-device-wifi.c:1705
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
+msgid "History"
+msgstr "ਅਤੀਤ"
+
+#. translators: This is the label for the "Forget wireless network" functionality
+#: ../panels/network/net-device-wifi.c:1717
+#| msgid "Forget"
+msgctxt "Wi-Fi Network"
+msgid "_Forget"
+msgstr "ਭੁੱਲ ਜਾਓ(_F)"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: ../panels/network/net-proxy.c:67
@@ -2153,6 +2634,11 @@ msgstr "ਇਹ ਪਬਲਿਕ ਨੈੱਟਵਰਕ ਬੇ-ਭਰੋਸੇਯ�
 msgid "Proxy"
 msgstr "ਪਰਾਕਸੀ"
 
+#: ../panels/network/network-ethernet.ui.h:1
+#| msgid "Add profile"
+msgid "_Add Profile…"
+msgstr "…ਪਰੋਫਾਇਲ ਸ਼ਾਮਲ(_A)"
+
 #: ../panels/network/network-mobile.ui.h:1
 msgid "IMEI"
 msgstr "IMEI"
@@ -2161,33 +2647,8 @@ msgstr "IMEI"
 msgid "Provider"
 msgstr "ਪਰੋਵਾਇਡਰ"
 
-#: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:644 ../panels/network/panel-common.c:646
-#: ../panels/printers/printers.ui.h:13
-msgid "IP Address"
-msgstr "IP ਐਡਰੈੱਸ"
-
-#: ../panels/network/network-mobile.ui.h:4
-#: ../panels/network/network-simple.ui.h:3
-#: ../panels/network/network-wifi.ui.h:14 ../panels/network/panel-common.c:642
-msgid "IPv6 Address"
-msgstr "IPv6 ਐਡਰੈੱਸ"
-
-#: ../panels/network/network-mobile.ui.h:5
-#: ../panels/network/network-simple.ui.h:4
-#: ../panels/network/network-wifi.ui.h:15
-msgid "Default Route"
-msgstr "ਡਿਫਾਲਟ ਰੂਟ"
-
-#: ../panels/network/network-mobile.ui.h:6
-#: ../panels/network/network-simple.ui.h:5
-#: ../panels/network/network-wifi.ui.h:16
-msgid "DNS"
-msgstr "DNS"
-
 #: ../panels/network/network-mobile.ui.h:8
 #: ../panels/network/network-simple.ui.h:6
-#| msgid "_Options"
 msgid "_Options…"
 msgstr "…ਚੋਣਾਂ(_O)"
 
@@ -2234,32 +2695,17 @@ msgstr "_Socks ਹੋਸਟ"
 msgid "_Ignore Hosts"
 msgstr "ਅਣਡਿੱਠੇ ਕੀਤੇ ਹੋਸਟ(_I)"
 
-#: ../panels/network/network-simple.ui.h:1
-#: ../panels/network/network-wifi.ui.h:9
-msgid "Hardware Address"
-msgstr "ਹਾਰਡਵੇਅਰ ਐਡਰੈੱਸ"
-
-#: ../panels/network/network-simple.ui.h:2
-#: ../panels/network/network-wifi.ui.h:13 ../panels/network/panel-common.c:641
-msgid "IPv4 Address"
-msgstr "IPv4 ਐਡਰੈੱਸ"
-
 #: ../panels/network/network.ui.h:1
 msgid "Select the interface to use for the new service"
 msgstr "ਨਵੀਂ ਸਰਵਿਸ ਲਈ ਵਰਤਣ ਵਾਸਤੇ ਇੰਟਰਫੇਸ ਚੁਣੋ"
 
 #: ../panels/network/network.ui.h:2
-#| msgid "C_reate"
 msgid "C_reate…"
 msgstr "…ਬਣਾਓ(_r)"
 
 #: ../panels/network/network.ui.h:3
 msgid "_Interface"
 msgstr "ਇੰਟਰਫੇਸ(_i)"
-
-#: ../panels/network/network.ui.h:4 ../panels/network/network-vpn.ui.h:1
-msgid "VPN"
-msgstr "VPN"
 
 #: ../panels/network/network.ui.h:8
 msgid "Add Device"
@@ -2268,10 +2714,6 @@ msgstr "ਜੰਤਰ ਸ਼ਾਮਲ"
 #: ../panels/network/network-vpn.ui.h:2
 msgid "VPN Type"
 msgstr "VPN ਕਿਸਮ"
-
-#: ../panels/network/network-vpn.ui.h:3
-msgid "Gateway"
-msgstr "ਗੇਟਵੇ"
 
 #: ../panels/network/network-vpn.ui.h:4
 msgid "Group Name"
@@ -2285,432 +2727,825 @@ msgstr "ਗਰੁੱਪ ਪਾਸਵਰਡ"
 msgid "Username"
 msgstr "ਯੂਜ਼ਰ ਨਾਂ"
 
-#: ../panels/network/network-vpn.ui.h:7
-#| msgid "_Configure..."
-msgid "_Configure…"
-msgstr "…ਸੰਰਚਨਾ(_C)"
-
 #: ../panels/network/network-wifi.ui.h:1
+#| msgid "A_utomatic Login"
+msgid "Automatic _Connect"
+msgstr "ਆਟੋਮੈਟਿਕ ਕੁਨੈਕਟ ਕਰੋ(_C)"
+
+#: ../panels/network/network-wifi.ui.h:11
+#| msgid "Details"
+msgid "details"
+msgstr "ਵੇਰਵਾ"
+
+#: ../panels/network/network-wifi.ui.h:15
+#: ../panels/network/wireless-security/eap-method-leap.ui.h:2
+#: ../panels/network/wireless-security/eap-method-simple.ui.h:2
+#: ../panels/network/wireless-security/ws-leap.ui.h:2
+#: ../panels/network/wireless-security/ws-wpa-psk.ui.h:1
+#: ../panels/user-accounts/data/account-dialog.ui.h:11
+#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
+msgid "_Password"
+msgstr "ਪਾਸਵਰਡ(_P)"
+
+#: ../panels/network/network-wifi.ui.h:18
+#: ../panels/universal-access/uap.ui.h:8
+msgid "None"
+msgstr "ਕੋਈ ਨਹੀਂ"
+
+#: ../panels/network/network-wifi.ui.h:19
+msgid "blablabla"
+msgstr "ਯਾਯਾ"
+
+#: ../panels/network/network-wifi.ui.h:20
+#| msgid "Show Password"
+msgid "Show P_assword"
+msgstr "ਪਾਸਵਰਡ ਵੇਖੋ(_a)"
+
+#: ../panels/network/network-wifi.ui.h:21
+#| msgid "Failed to delete user"
+msgid "Make available to other users"
+msgstr "ਹੋਰ ਯੂਜ਼ਰ ਨੂੰ ਉਪਲੱਬਧ ਕਰਵਾਉ"
+
+#: ../panels/network/network-wifi.ui.h:22
+msgid "identity"
+msgstr "ਪਛਾਣ"
+
+#: ../panels/network/network-wifi.ui.h:27
+msgid "Automatic (DHCP) addresses only"
+msgstr "ਆਟੋਮੈਟਿਕ (DHCP) ਐਡਰੈੱਸ ਹੀ"
+
+#: ../panels/network/network-wifi.ui.h:28
+msgid "Link-local only"
+msgstr "ਕੇਵਲ ਲੋਕਲ-ਲਿੰਕ"
+
+#: ../panels/network/network-wifi.ui.h:29
+#| msgid "Share with these users:"
+msgid "Shared with other computers"
+msgstr "ਹੋਰ ਕੰਪਿਊਟਰਾਂ ਨਾਲ ਸਾਂਝਾ ਕੀਤਾ"
+
+#: ../panels/network/network-wifi.ui.h:31
+msgid ""
+"Address\n"
+"section\n"
+"goes\n"
+"here"
+msgstr ""
+"ਐਡਰੈਸ\n"
+"ਭਾਗ\n"
+"ਇੱਥੇ\n"
+"ਆਵੇਗਾ"
+
+#: ../panels/network/network-wifi.ui.h:35
+msgid ""
+"DNS\n"
+"section\n"
+"goes\n"
+"here"
+msgstr ""
+"ਡੀਐਨਐਸ\n"
+"ਭਾਗ\n"
+"ਇੱਥੇ\n"
+"ਆਵੇਗਾ"
+
+#: ../panels/network/network-wifi.ui.h:40
+msgid ""
+"Routes\n"
+"section\n"
+"goes\n"
+"here"
+msgstr ""
+"ਰੂਟ\n"
+"ਭਾਗ\n"
+"ਇੱਥੇ\n"
+"ਆਵੇਗਾ"
+
+#: ../panels/network/network-wifi.ui.h:44
+#| msgid "Cannot remove automatically added profile"
+msgid "_Ignore automatically obtained routes"
+msgstr "ਆਟੋਮੈਟਿਕ ਲਏ ਰੂਟ ਅਣਡਿੱਠੇ ਕਰੋ(_i)"
+
+#: ../panels/network/network-wifi.ui.h:46
+msgid "ipv4"
+msgstr "ipv4"
+
+#: ../panels/network/network-wifi.ui.h:48
+msgid "ipv6"
+msgstr "ipv6"
+
+#: ../panels/network/network-wifi.ui.h:50
+msgid "_Cloned MAC Address"
+msgstr "ਕਨੋਲ ਕੀਤਾ MA_C ਐਡਰੈੱਸ"
+
+#: ../panels/network/network-wifi.ui.h:51
+msgid "00:24:16:31:8G:7A"
+msgstr "00:24:16:31:8G:7A"
+
+#: ../panels/network/network-wifi.ui.h:52
+#| msgctxt "category"
+#| msgid "Hardware"
+msgid "hardware"
+msgstr "ਹਾਰਡਵੇਅਰ"
+
+#: ../panels/network/network-wifi.ui.h:55
+msgid ""
+"Reset the settings for this connection to their defaults, but remember as a "
+"preferred connection."
+msgstr ""
+
+#: ../panels/network/network-wifi.ui.h:56
+msgid ""
+"Remove all details relating to this network and do not try to automatically "
+"connect to it."
+msgstr ""
+
+#: ../panels/network/network-wifi.ui.h:57
+msgid "reset"
+msgstr "ਮੁੜ-ਸੈੱਟ"
+
+#: ../panels/network/network-wifi.ui.h:62
+#| msgctxt "category"
+#| msgid "Hardware"
+msgid "Hardware"
+msgstr "ਹਾਰਡਵੇਅਰ"
+
+#: ../panels/network/network-wifi.ui.h:64
 msgid "Wi-Fi Hotspot"
 msgstr "ਵਾਈ-ਫਾਈ ਹਾਟਸਪਾਟ"
 
-#: ../panels/network/network-wifi.ui.h:2
+#: ../panels/network/network-wifi.ui.h:65
 msgid "_Turn On"
 msgstr "ਚਾਲੂ ਕਰੋ(_T)"
 
-#: ../panels/network/network-wifi.ui.h:3
+#. TRANSLATORS: device type
+#: ../panels/network/network-wifi.ui.h:66 ../panels/network/panel-common.c:87
 msgid "Wi-Fi"
 msgstr "ਵਾਈ-ਫਾਈ"
 
-#: ../panels/network/network-wifi.ui.h:4
-#| msgid "_Use as Hotspot..."
+#: ../panels/network/network-wifi.ui.h:67
 msgid "_Use as Hotspot…"
 msgstr "…ਹਾਟਸਪਾਟ ਵਜੋਂ ਵਰਤੋਂ(_U)"
 
-#: ../panels/network/network-wifi.ui.h:5
-#| msgid "_Connect to Hidden Network..."
+#: ../panels/network/network-wifi.ui.h:68
 msgid "_Connect to Hidden Network…"
 msgstr "…ਲੁਕਵੇਂ ਨੈੱਟਵਰਕ ਨਾਲ ਕੁਨੈਕਟ ਕਰੋ(_C)"
 
-#: ../panels/network/network-wifi.ui.h:6
-msgid "_Disconnect"
-msgstr "ਡਿਸ-ਕੁਨੈਕਟ ਕਰੋ(_D)"
+#: ../panels/network/network-wifi.ui.h:69
+#| msgid "History"
+msgid "_History"
+msgstr "ਅਤੀਤ(_H)"
 
-#: ../panels/network/network-wifi.ui.h:7
-msgid "_Connect"
-msgstr "ਕੁਨੈਕਸ਼ਨ ਕਰੋ(_C)"
-
-#: ../panels/network/network-wifi.ui.h:8
-msgid "Last used"
-msgstr "ਆਖਰੀ ਵਰਤੋਂ"
-
-#: ../panels/network/network-wifi.ui.h:10
-msgid "Security"
-msgstr "ਸੁਰੱਖਿਆ"
-
-#: ../panels/network/network-wifi.ui.h:11
-msgid "Strength"
-msgstr "ਤਾਕਤ"
-
-#: ../panels/network/network-wifi.ui.h:12
-msgid "Link speed"
-msgstr "ਲਿੰਕ ਸਪੀਡ"
-
-#: ../panels/network/network-wifi.ui.h:17
-msgid "_Forget Network"
-msgstr "ਨੈੱਟਵਰਕ ਭੁੱਲ ਜਾਓ(_F)"
-
-#: ../panels/network/network-wifi.ui.h:18
-#| msgid "Settings"
-msgid "_Settings…"
-msgstr "…ਸੈਟਿੰਗ(_S)"
-
-#: ../panels/network/network-wifi.ui.h:19
+#: ../panels/network/network-wifi.ui.h:70
 msgid "Switch off to connect to a Wi-Fi network"
 msgstr "ਵਾਈ-ਫਾਈ ਨੈੱਟਵਰਕ ਨਾਲ ਕੁਨੈਕਟ ਕਰਨ ਲਈ ਬੰਦ ਕਰੋ"
 
-#: ../panels/network/network-wifi.ui.h:20
+#: ../panels/network/network-wifi.ui.h:71
 msgid "Network Name"
 msgstr "ਨੈੱਟਵਰਕ ਨਾਂ"
 
-#: ../panels/network/network-wifi.ui.h:21
+#: ../panels/network/network-wifi.ui.h:72
 msgid "Connected Devices"
 msgstr "ਕੁਨੈਕਟ ਹੋਏ ਜੰਤਰ"
 
-#: ../panels/network/network-wifi.ui.h:22
+#: ../panels/network/network-wifi.ui.h:73
 msgid "Security type"
 msgstr "ਸੁਰੱਖਿਆ ਕਿਸਮ"
 
-#: ../panels/network/network-wifi.ui.h:23
+#: ../panels/network/network-wifi.ui.h:74
 msgid "Security key"
 msgstr "ਸੁਰੱਖਿਆ ਕੁੰਜੀ"
 
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:83
+msgid "Wired"
+msgstr "ਤਾਰ ਵਾਲਾ"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:94
+msgid "Mobile broadband"
+msgstr "ਮੋਬਾਇਲ ਬਰਾਡਬੈਂਡ"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:103
+msgid "Mesh"
+msgstr "ਮੇਸ਼"
+
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:124
+#: ../panels/network/panel-common.c:165
 msgid "Ad-hoc"
 msgstr "ਐਡ-ਹਾਕ"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:128
+#: ../panels/network/panel-common.c:169
 msgid "Infrastructure"
 msgstr "ਇੰਫਰਾਸਟੱਕਚਰ"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:152 ../panels/network/panel-common.c:213
+#: ../panels/network/panel-common.c:193 ../panels/network/panel-common.c:256
 msgid "Status unknown"
 msgstr "ਹਾਲਤ ਅਣਜਾਣ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:156
+#: ../panels/network/panel-common.c:197
 msgid "Unmanaged"
 msgstr "ਬਿਨ-ਪਰਬੰਧ"
 
-#: ../panels/network/panel-common.c:161
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:202
 msgid "Firmware missing"
 msgstr "ਫਿਰਮਵੇਅਰ ਮੌਜੂਦ ਨਹੀਂ ਹੈ"
 
-#: ../panels/network/panel-common.c:164
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:206
 msgid "Cable unplugged"
 msgstr "ਕੇਬਲ ਕੱਢੀ ਹੋਈ ਹੈ"
 
-#: ../panels/network/panel-common.c:166
+#. TRANSLATORS: device status
+#: ../panels/network/panel-common.c:209
 msgid "Unavailable"
 msgstr "ਨਾ-ਉਪਲੱਬਧ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:170
-msgid "Disconnected"
-msgstr "ਡਿਸ-ਕੁਨੈਕਟ ਹੈ"
-
-#. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:177 ../panels/network/panel-common.c:219
+#: ../panels/network/panel-common.c:220 ../panels/network/panel-common.c:262
 msgid "Connecting"
 msgstr "ਕੁਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:181 ../panels/network/panel-common.c:223
+#: ../panels/network/panel-common.c:224 ../panels/network/panel-common.c:266
 msgid "Authentication required"
 msgstr "ਪਰਮਾਣਕਿਤਾ ਚਾਹੀਦੀ ਹੈ"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:185 ../panels/network/panel-common.c:227
+#: ../panels/network/panel-common.c:228 ../panels/network/panel-common.c:270
 msgid "Connected"
 msgstr "ਕੁਨੈਕਟ ਹੈ"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:189
+#: ../panels/network/panel-common.c:232
 msgid "Disconnecting"
 msgstr "ਡਿਸ-ਕੁਨੈਕਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:193 ../panels/network/panel-common.c:231
+#: ../panels/network/panel-common.c:236 ../panels/network/panel-common.c:274
 msgid "Connection failed"
 msgstr "ਕੁਨੈਕਸ਼ਨ ਫੇਲ੍ਹ ਹੈ"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:197 ../panels/network/panel-common.c:239
+#: ../panels/network/panel-common.c:240 ../panels/network/panel-common.c:282
 msgid "Status unknown (missing)"
 msgstr "ਹਾਲਤ ਅਣਜਾਣ (ਗੁੰਮ)"
 
+#. TRANSLATORS: VPN status
+#: ../panels/network/panel-common.c:278
+msgid "Not connected"
+msgstr "ਕੁਨੈਕਟ ਨਹੀਂ ਹੈ"
+
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:259
+#: ../panels/network/panel-common.c:302
 msgid "Configuration failed"
 msgstr "ਸੰਰਚਨਾ ਫੇਲ੍ਹ ਹੋਈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:263
+#: ../panels/network/panel-common.c:306
 msgid "IP configuration failed"
 msgstr "IP ਸੰਰਚਨਾ ਫੇਲ੍ਹ ਹੋਈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:267
+#: ../panels/network/panel-common.c:310
 msgid "IP configuration expired"
 msgstr "IP ਸੰਰਚਨਾ ਦੀ ਮਿਆਦ ਪੁੱਗੀ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:271
+#: ../panels/network/panel-common.c:314
 msgid "Secrets were required, but not provided"
 msgstr "ਭੇਦ ਦੀ ਲੋੜ ਸੀ, ਪਰ ਦਿੱਤਾ ਨਹੀਂ ਗਿਆ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:275
+#: ../panels/network/panel-common.c:318
 msgid "802.1x supplicant disconnected"
 msgstr "802.1x ਸਪਲੀਮੈਂਟ ਡਿਸ-ਕੁਨੈਕਟ ਹੈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:279
+#: ../panels/network/panel-common.c:322
 msgid "802.1x supplicant configuration failed"
 msgstr "802.1x ਸਪਲੀਮੈਂਟ ਸੰਰਚਨਾ ਫੇਲ੍ਹ ਹੈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:283
+#: ../panels/network/panel-common.c:326
 msgid "802.1x supplicant failed"
 msgstr "802.1x ਸਪਲੀਮੈਂਟ ਫੇਲ੍ਹ ਹੈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:287
+#: ../panels/network/panel-common.c:330
 msgid "802.1x supplicant took too long to authenticate"
 msgstr "802.1x ਸਪਲੀਮੈਂਟ ਨੇ ਪਰਮਾਣਿਤ ਹੋਣ ਲਈ ਬਹੁਤ ਲੰਮਾ ਸਮਾਂ ਲੈ ਲਿਆ ਹੈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:291
+#: ../panels/network/panel-common.c:334
 msgid "PPP service failed to start"
 msgstr "PPP ਸਰਵਿਸ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:295
+#: ../panels/network/panel-common.c:338
 msgid "PPP service disconnected"
 msgstr "PPP ਸਰਵਿਸ ਡਿਸ-ਕੁਨੈਕਟ ਹੈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:299
+#: ../panels/network/panel-common.c:342
 msgid "PPP failed"
 msgstr "PPP ਫੇਲ੍ਹ ਹੈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:303
+#: ../panels/network/panel-common.c:346
 msgid "DHCP client failed to start"
 msgstr "DHCP ਕਲਾਇਟ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:307
+#: ../panels/network/panel-common.c:350
 msgid "DHCP client error"
 msgstr "DHCP ਕਲਾਇਟ ਗਲਤੀ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:311
+#: ../panels/network/panel-common.c:354
 msgid "DHCP client failed"
 msgstr "DHCP ਕਲਾਇਟ ਫੇਲ੍ਹ ਹੈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:315
+#: ../panels/network/panel-common.c:358
 msgid "Shared connection service failed to start"
 msgstr "ਸਾਂਝੀ ਕੀਤੀ ਕੁਨੈਕਸ਼ਨ ਸਰਵਿਸ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:319
+#: ../panels/network/panel-common.c:362
 msgid "Shared connection service failed"
 msgstr "ਸਾਂਝਾ ਕੀਤੀ ਕੁਨੈਕਸ਼ਨ ਸਰਵਿਸ ਫੇਲ੍ਹ ਹੈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:323
+#: ../panels/network/panel-common.c:366
 msgid "AutoIP service failed to start"
 msgstr "ਆਟੋ-IP ਸਰਵਿਸ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:327
+#: ../panels/network/panel-common.c:370
 msgid "AutoIP service error"
 msgstr "ਆਟੋ-IP ਸਰਵਿਸ ਗਲਤੀ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:331
+#: ../panels/network/panel-common.c:374
 msgid "AutoIP service failed"
 msgstr "ਆਟੋ-IP ਸਰਵਿਸ ਫੇਲ੍ਹ ਹੋਈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:335
+#: ../panels/network/panel-common.c:378
 msgid "Line busy"
 msgstr "ਲਾਈਨ ਰੁਝੀ ਹੋਈ ਹੈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:339
+#: ../panels/network/panel-common.c:382
 msgid "No dial tone"
 msgstr "ਕੋਈ ਡਾਇਲ ਟੋਨ ਨਹੀਂ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:343
+#: ../panels/network/panel-common.c:386
 msgid "No carrier could be established"
 msgstr "ਕੋਈ ਕੈਰੀਅਰ ਤਿਆਰ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:347
+#: ../panels/network/panel-common.c:390
 msgid "Dialing request timed out"
 msgstr "ਡਾਇਲ ਕਰਨ ਲਈ ਸਮਾਂ-ਸਮਾਪਤ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:351
+#: ../panels/network/panel-common.c:394
 msgid "Dialing attempt failed"
 msgstr "ਡਾਇਲ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਫੇਲ੍ਹ ਹੋਈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:355
+#: ../panels/network/panel-common.c:398
 msgid "Modem initialization failed"
 msgstr "ਮਾਡਮ ਸ਼ੁਰੂਆਤ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:359
+#: ../panels/network/panel-common.c:402
 msgid "Failed to select the specified APN"
 msgstr "ਦਿੱਤੇ APN ਨੂੰ ਚੁਣਨ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:363
+#: ../panels/network/panel-common.c:406
 msgid "Not searching for networks"
 msgstr "ਨੈੱਟਵਰਕ ਲਈ ਖੋਜ ਨਹੀਂ ਕੀਤੀ ਜਾ ਰਹੀ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:367
+#: ../panels/network/panel-common.c:410
 msgid "Network registration denied"
 msgstr "ਨੈੱਟਵਰਕ ਰਜਿਸਟਰੇਸ਼ਨ ਉੱਤੇ ਪਾਬੰਦੀ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:371
+#: ../panels/network/panel-common.c:414
 msgid "Network registration timed out"
 msgstr "ਨੈੱਟਵਰਕ ਰਜਿਸਟਰ ਲਈ ਸਮਾਂ-ਸਮਾਪਤ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:375
+#: ../panels/network/panel-common.c:418
 msgid "Failed to register with the requested network"
 msgstr "ਮੰਗੇ ਗਏ ਨੈੱਟਵਰਕ ਉੱਤੇ ਰਜਿਸਟਰ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:379
+#: ../panels/network/panel-common.c:422
 msgid "PIN check failed"
 msgstr "PIN ਚੈਕ ਫੇਲ੍ਹ ਹੈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:383
+#: ../panels/network/panel-common.c:426
 msgid "Firmware for the device may be missing"
 msgstr "ਜੰਤਰ ਲਈ ਫਿਰਮਵੇਅਰ ਸ਼ਾਇਦ ਮੌਜੂਦ ਨਹੀਂ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:387
+#: ../panels/network/panel-common.c:430
 msgid "Connection disappeared"
 msgstr "ਕੁਨੈਕਸ਼ਨ ਅਲੋਪ ਹੋਇਆ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:391
+#: ../panels/network/panel-common.c:434
 msgid "Carrier/link changed"
 msgstr "ਕੈਰੀਅਰ/ਲਿੰਕ ਬਦਲਿਆ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:395
+#: ../panels/network/panel-common.c:438
 msgid "Existing connection was assumed"
 msgstr "ਮੌਜੂਦਾ ਕੁਨੈਕਸ਼ਨ ਮੁੜ-ਪ੍ਰਾਪਤ ਕੀਤਾ ਗਿਆ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:399
+#: ../panels/network/panel-common.c:442
 msgid "Modem not found"
 msgstr "ਮਾਡਮ ਨਹੀਂ ਲੱਭਿਆ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:403
+#: ../panels/network/panel-common.c:446
 msgid "Bluetooth connection failed"
 msgstr "ਬਲਿਉਟੁੱਥ ਕੁਨੈਕਸ਼ਨ ਫੇਲ੍ਹ ਹੈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:407
+#: ../panels/network/panel-common.c:450
 msgid "SIM Card not inserted"
 msgstr "SIM ਕਾਰਡ ਨਹੀਂ ਪਾਇਆ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:411
+#: ../panels/network/panel-common.c:454
 msgid "SIM Pin required"
 msgstr "SIM ਪਿੰਨ ਚਾਹੀਦਾ ਹੈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:415
+#: ../panels/network/panel-common.c:458
 msgid "SIM Puk required"
 msgstr "SIM Puk ਦੀ ਲੋੜ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:419
+#: ../panels/network/panel-common.c:462
 msgid "SIM wrong"
 msgstr "SIM ਗਲਤ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:423
+#: ../panels/network/panel-common.c:466
 msgid "InfiniBand device does not support connected mode"
 msgstr "ਇੰਫੀਬੀਮ ਜੰਤਰ ਕੁਨੈਕਟ ਕੀਤੇ ਮੋਡ ਵਿੱਚ ਸਹਾਇਕ ਨਹੀਂ ਹੈ"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:427
+#: ../panels/network/panel-common.c:470
 msgid "Connection dependency failed"
 msgstr "ਕੁਨੈਕਸ਼ਨ ਨਿਰਭਰਤਾ ਫੇਲ੍ਹ ਹੋਈ"
 
+#: ../panels/network/wireless-security/eap-method-fast.c:261
+#: ../panels/network/wireless-security/eap-method-peap.c:280
+msgid "GTC"
+msgstr "GTC"
+
+#: ../panels/network/wireless-security/eap-method-fast.c:277
+#: ../panels/network/wireless-security/eap-method-peap.c:246
+#: ../panels/network/wireless-security/eap-method-ttls.c:263
+msgid "MSCHAPv2"
+msgstr "MSCHAPv2"
+
+#: ../panels/network/wireless-security/eap-method-fast.c:399
+#| msgid "Choose a Folder"
+msgid "Choose a PAC file..."
+msgstr "...PAC ਫਾਇਲ ਚੁਣੋ"
+
+#: ../panels/network/wireless-security/eap-method-fast.c:406
+msgid "PAC files (*.pac)"
+msgstr "PAC ਫਾਇਲਾਂ (*.pac)"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:2
+#| msgid "All files"
+msgid "PAC _file"
+msgstr "PAC ਫਾਇਲ(_f)"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:3
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:7
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
+#| msgid "<b>_Use authentication</b>"
+msgid "_Inner authentication"
+msgstr "ਅੰਦਰੂਨੀ ਪਰਮਾਣਕਿਤਾ(_I)"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:4
+msgid "PAC pro_visioning"
+msgstr "PAC ਪਰੋਵਿਜ਼ਨਿੰਗ(_v)"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:5
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:1
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:1
+#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:1
+#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:1
+#: ../panels/printers/jobs-dialog.ui.h:1
+#: ../panels/printers/options-dialog.ui.h:1
+#: ../panels/printers/ppd-selection-dialog.ui.h:1
+msgid " "
+msgstr " "
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:6
+msgid "Anonymous"
+msgstr "ਅਗਿਆਤ"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:7
+#| msgid "Authenticating"
+msgid "Authenticated"
+msgstr "ਪਰਮਾਣਿਤ ਕੀਤਾ"
+
+#: ../panels/network/wireless-security/eap-method-fast.ui.h:8
+msgid "Both"
+msgstr "ਦੋਵੇਂ"
+
+#: ../panels/network/wireless-security/eap-method-leap.ui.h:1
+#: ../panels/network/wireless-security/eap-method-simple.ui.h:1
+#: ../panels/network/wireless-security/ws-leap.ui.h:1
+#: ../panels/user-accounts/data/account-dialog.ui.h:6
+msgid "_Username"
+msgstr "ਯੂਜ਼ਰ ਨਾਂ(_U)"
+
+#: ../panels/network/wireless-security/eap-method-leap.ui.h:3
+#: ../panels/network/wireless-security/eap-method-simple.ui.h:4
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:6
+#: ../panels/network/wireless-security/ws-leap.ui.h:3
+#: ../panels/network/wireless-security/ws-wpa-psk.ui.h:3
+#| msgid "_Show password"
+msgid "Sho_w password"
+msgstr "ਪਾਸਵਰਡ ਵੇਖੋ(_w)"
+
+#: ../panels/network/wireless-security/eap-method-peap.c:263
+#: ../panels/network/wireless-security/wireless-security.c:385
+#| msgid "D55"
+msgid "MD5"
+msgstr "MD5"
+
+#: ../panels/network/wireless-security/eap-method-peap.c:350
+#: ../panels/network/wireless-security/eap-method-tls.c:434
+#: ../panels/network/wireless-security/eap-method-ttls.c:350
+msgid "Choose a Certificate Authority certificate..."
+msgstr "...ਸਰਟੀਫਿਕੇਟ ਅਥਾਰਟੀ ਸਰਫੀਟਿਕੇਟ ਚੁਣੋ"
+
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:3
+#| msgid "Version %s"
+msgid "Version 0"
+msgstr "ਵਰਜਨ 0"
+
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:4
+#| msgid "Version %s"
+msgid "Version 1"
+msgstr "ਵਰਜਨ 1"
+
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:6
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:3
+#: ../panels/network/wireless-security/eap-method-ttls.ui.h:3
+msgid "C_A certificate"
+msgstr "C_A ਸਰਟੀਫਿਕੇਟ"
+
+#: ../panels/network/wireless-security/eap-method-peap.ui.h:8
+msgid "PEAP _version"
+msgstr "PEAP ਵਰਜਨ(_v)"
+
+#: ../panels/network/wireless-security/eap-method-simple.ui.h:3
+msgid "As_k for this password every time"
+msgstr "ਹਰ ਵਾਰ ਇਹ ਪਾਸਵਰਡ ਪੁੱਛੋ(_k)"
+
+#: ../panels/network/wireless-security/eap-method-tls.c:260
+msgid "Unencrypted private keys are insecure"
+msgstr "ਬਿਨ-ਇੰਕ੍ਰਿਪਸ਼ਨ ਪ੍ਰਾਈਵੇਟ ਕੁੰਜੀਆਂ ਅਸੁਰੱਖਿਅਤ ਹਨ"
+
+#: ../panels/network/wireless-security/eap-method-tls.c:263
+msgid ""
+"The selected private key does not appear to be protected by a password.  "
+"This could allow your security credentials to be compromised.  Please select "
+"a password-protected private key.\n"
+"\n"
+"(You can password-protect your private key with openssl)"
+msgstr ""
+"ਚੁਣੀ ਗਈ ਪ੍ਰਾਈਵੇਟ ਕੁੰਜੀ ਪਾਸਵਰਡ ਨਾਲ ਸੁਰੱਖਿਅਤ ਨਹੀਂ ਜਾਪਦੀ ਹੈ। ਇਹ ਤੁਹਾਡੀ ਸੁਰੱਖਿਅਤ "
+"ਸਨਦ ਨੂੰ ਖਤਰਾ "
+"ਪੈਦਾ ਕਰ ਸਕਦੀ ਹੈ। ਪਾਸਵਰਡ ਨਾਲ ਸੁਰੱਖਿਅਤ ਪ੍ਰਾਈਵੇਟ ਕੁੰਜੀ ਚੁਣੋ ਜੀ।\n"
+"\n"
+"(ਤੁਸੀਂ openssl ਨਾਲ ਪ੍ਰਾਈਵੇਟ ਕੁੰਜੀ ਪਾਸਵਰਡ ਸੁਰੱਖਿਅਤ ਕਰ ਸਕਦੇ ਹੋ)"
+
+#: ../panels/network/wireless-security/eap-method-tls.c:428
+#| msgid "Set your personal information"
+msgid "Choose your personal certificate..."
+msgstr "...ਆਪਣਾ ਨਿੱਜੀ ਸਰਟੀਫਿਕੇਟ ਚੁਣੋ"
+
+#: ../panels/network/wireless-security/eap-method-tls.c:440
+msgid "Choose your private key..."
+msgstr "...ਆਪਣੀ ਪ੍ਰਾਈਵੇਟ ਕੁੰਜੀ ਚੁਣੋ"
+
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:1
+msgid "I_dentity"
+msgstr "ਪਛਾਣ(_d)"
+
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:2
+msgid "_User certificate"
+msgstr "ਯੂਜ਼ਰ ਸਰਟੀਫਿਕੇਟ(_U)"
+
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:4
+#| msgid "Privacy"
+msgid "Private _key"
+msgstr "ਪ੍ਰਾਈਵੇਟ ਕੁੰਜੀ(_k)"
+
+#: ../panels/network/wireless-security/eap-method-tls.ui.h:5
+#| msgid "_Generate a password"
+msgid "_Private key password"
+msgstr "ਪ੍ਰਾਈਵੇਟ ਕੁੰਜੀ ਪਾਸਵਰਡ(_P)"
+
+#: ../panels/network/wireless-security/eap-method-ttls.c:230
+#| msgid "WPA"
+msgid "PAP"
+msgstr "PAP"
+
+#: ../panels/network/wireless-security/eap-method-ttls.c:247
+msgid "MSCHAP"
+msgstr "MSCHAP"
+
+#: ../panels/network/wireless-security/eap-method-ttls.c:280
+msgid "CHAP"
+msgstr "CHAP"
+
+#: ../panels/network/wireless-security/eap-method.c:275
+msgid "No Certificate Authority certificate chosen"
+msgstr "ਕੋਈ ਸਰਟੀਫਿਕੇਟ ਅਥਾਰਟੀ ਸਰਟੀਫਿਕੇਟ ਨਹੀਂ ਚੁਣਿਆ"
+
+#: ../panels/network/wireless-security/eap-method.c:276
+msgid ""
+"Not using a Certificate Authority (CA) certificate can result in connections "
+"to insecure, rogue Wi-Fi networks.  Would you like to choose a Certificate "
+"Authority certificate?"
+msgstr ""
+"ਸਰਟੀਫਿਕੇਟ ਅਥਾਰਟੀ (CA) ਸਰਟੀਫਿਕੇਟ ਦੀ ਵਰਤੋਂ ਨਾ ਕਰਨ ਨਾਲ ਕੁਨੈਕਸ਼ਨ ਅਸੁਰੱਖਿਅਤ, ਠੱਗ "
+"ਵਾਈ-ਫਾਈ "
+"ਨੈੱਟਵਰਕ ਹੋ ਸਕਦੇ ਹਨ। ਕੀ ਤੁਸੀਂ ਸਰਟੀਫਿਕੇਟ ਅਥਾਰਟੀ ਸਰਟੀਫਿਕੇਟ ਚੁਣਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: ../panels/network/wireless-security/eap-method.c:281
+#| msgid "_Ignore Hosts"
+msgid "Ignore"
+msgstr "ਅਣਡਿੱਠਾ"
+
+#: ../panels/network/wireless-security/eap-method.c:285
+msgid "Choose CA Certificate"
+msgstr "CA ਸਰਟੀਫਿਕੇਟ ਚੁਣੋ"
+
+#: ../panels/network/wireless-security/eap-method.c:645
+msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
+msgstr "DER, PEM, ਜਾਂ PKCS#12 ਪ੍ਰਾਈਵੇਟ ਕੁੰਜੀਆਂ (*.der, *.pem, *.p12)"
+
+#: ../panels/network/wireless-security/eap-method.c:648
+msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
+msgstr "DER ਜਾਂ PEM ਸਰਟੀਫਿਕੇਟ (*.der, *.pem, *.crt, *.cer)"
+
+#: ../panels/network/wireless-security/nag-user-dialog.ui.h:1
+msgid "Don't _warn me again"
+msgstr "ਮੈਨੂੰ ਫੇਰ ਸਾਵਧਾਨ ਨਾ ਕਰੋ(_w)"
+
+#: ../panels/network/wireless-security/wireless-security.c:397
+msgid "TLS"
+msgstr "TLS"
+
+#: ../panels/network/wireless-security/wireless-security.c:421
+msgid "FAST"
+msgstr "FAST"
+
+#: ../panels/network/wireless-security/wireless-security.c:432
+msgid "Tunneled TLS"
+msgstr "ਟਨਲ TLS"
+
+#: ../panels/network/wireless-security/wireless-security.c:443
+msgid "Protected EAP (PEAP)"
+msgstr "ਸੁਰੱਖਿਅਤ EAP (PEAP)"
+
+#: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:2
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:9
+#: ../panels/network/wireless-security/ws-wpa-eap.ui.h:2
+#| msgid "Authenticating"
+msgid "Au_thentication"
+msgstr "ਪਰਮਾਣਿਕਤਾ(_t)"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:1
+#| msgid "Default"
+msgid "1 (Default)"
+msgstr "੧ (ਡਿਫਾਲਟ)"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:2
+#| msgid "22"
+msgid "2"
+msgstr "੨"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:3
+msgid "3"
+msgstr "੩"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:4
+#| msgid "45"
+msgid "4"
+msgstr "4"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:5
+#| msgid "System"
+msgid "Open System"
+msgstr "ਓਪਨ ਸਿਸਟਮ"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:6
+#| msgid "Shared Folders"
+msgid "Shared Key"
+msgstr "ਸਾਂਝੀ ਕੁੰਜੀ"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:7
+msgid "_Key"
+msgstr "ਕੁੰਜੀ(_K)"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:8
+msgid "Sho_w key"
+msgstr "ਕੁੰਜੀ ਵੇਖੋ(_w)"
+
+#: ../panels/network/wireless-security/ws-wep-key.ui.h:10
+msgid "WEP inde_x"
+msgstr "WEP ਇੰਡੈਕਸ(_x)"
+
+#: ../panels/network/wireless-security/ws-wpa-psk.ui.h:2
+#| msgid "_Type:"
+msgid "_Type"
+msgstr "ਕਿਸਮ(_T)"
+
 #. TRANSLATORS: this is the per application switch for message tray usage.
-#: ../panels/notifications/cc-edit-dialog.c:38
-#| msgid "Magnification:"
+#: ../panels/notifications/cc-edit-dialog.c:39
 msgctxt "notifications"
 msgid "Notifications"
 msgstr "ਸੂਚਨਾ"
 
 #. TRANSLATORS: this is the setting to configure sounds associated with notifications
-#: ../panels/notifications/cc-edit-dialog.c:40
-#| msgid "Sound files"
+#: ../panels/notifications/cc-edit-dialog.c:41
 msgctxt "notifications"
 msgid "Sound Alerts"
 msgstr "ਸਾਊਂਡ ਚੇਤਾਵਨੀਆਂ"
 
-#: ../panels/notifications/cc-edit-dialog.c:41
+#: ../panels/notifications/cc-edit-dialog.c:42
 msgctxt "notifications"
 msgid "Show Popup Banners"
 msgstr "ਪੋਪਅੱਪ ਬੈਨਰ ਵੇਖਾਓ"
 
 #. TRANSLATORS: banners here refers to message tray notifications in the middle of the screen
-#: ../panels/notifications/cc-edit-dialog.c:43
-#| msgid "_Show monitors in panel"
+#: ../panels/notifications/cc-edit-dialog.c:44
 msgctxt "notifications"
 msgid "Show Details in Banners"
 msgstr "ਬੈਨਰ ਵਿੱਚ ਵੇਰਵਾ ਵੇਖਾਓ"
 
-#: ../panels/notifications/cc-edit-dialog.c:44
-#| msgid "Lock screen"
+#: ../panels/notifications/cc-edit-dialog.c:45
 msgctxt "notifications"
 msgid "View in Lock Screen"
 msgstr "ਲਾਕ ਸਕਰੀਨ ਵਿੱਚ ਵੇਖਾਓ"
 
-#: ../panels/notifications/cc-edit-dialog.c:45
+#: ../panels/notifications/cc-edit-dialog.c:46
 msgctxt "notifications"
 msgid "Show Details in Lock Screen"
 msgstr "ਲਾਕ ਸਕਰੀਨ ਵਿੱਚ ਵੇਰਵਾ ਵੇਖਾਓ"
 
 #: ../panels/notifications/cc-notifications-panel.c:203
-#: ../panels/power/cc-power-panel.c:1557 ../panels/power/cc-power-panel.c:1564
-#: ../panels/privacy/cc-privacy-panel.c:77
-#: ../panels/privacy/cc-privacy-panel.c:144
+#: ../panels/power/cc-power-panel.c:1628 ../panels/power/cc-power-panel.c:1635
+#: ../panels/privacy/cc-privacy-panel.c:78
+#: ../panels/privacy/cc-privacy-panel.c:145
 msgid "On"
 msgstr "ਚਾਲੂ"
 
 #: ../panels/notifications/cc-notifications-panel.c:203
-#: ../panels/power/cc-power-panel.c:1551 ../panels/power/cc-power-panel.c:1562
-#: ../panels/privacy/cc-privacy-panel.c:77
-#: ../panels/privacy/cc-privacy-panel.c:144
+#: ../panels/power/cc-power-panel.c:1622 ../panels/power/cc-power-panel.c:1633
+#: ../panels/privacy/cc-privacy-panel.c:78
+#: ../panels/privacy/cc-privacy-panel.c:145
 msgid "Off"
 msgstr "ਬੰਦ"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:1
-#| msgid "Magnification:"
 msgid "Notifications"
 msgstr "ਸੂਚਨਾਵਾਂ"
 
 #: ../panels/notifications/gnome-notifications-panel.desktop.in.in.h:2
-#| msgid "Magnification:"
 msgid "Manage notifications"
 msgstr "ਸੂਚਨਾ ਪਰਬੰਧ"
 
@@ -2724,12 +3559,11 @@ msgid "Show Pop Up Banners"
 msgstr "ਪੋਪ ਅੱਪ ਬੈਨਰ ਵੇਖਾਓ"
 
 #: ../panels/notifications/notifications.ui.h:2
-#| msgid "Lock screen"
 msgid "Show in Lock Screen"
 msgstr "ਲਾਕ ਸਕਰੀਨ ਵਿੱਚ ਵੇਖਾਓ"
 
 #. translators: This is the title of the "Add Account" dialog.
-#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:253
+#: ../panels/online-accounts/cc-online-accounts-add-account-dialog.c:190
 #: ../panels/online-accounts/online-accounts.ui.h:2
 msgid "Add Account"
 msgstr "ਅਕਾਊਂਟ ਸ਼ਾਮਲ"
@@ -2803,18 +3637,18 @@ msgstr ""
 "ਚੈਟ ਅਤੇ ਹੋਰ ਚੀਜ਼ਾਂ "
 "ਵਰਤ ਸਕਦੀਆਂ ਹਨ।"
 
-#: ../panels/power/cc-power-panel.c:177
+#: ../panels/power/cc-power-panel.c:184
 msgid "Unknown time"
 msgstr "ਅਣਜਾਣ ਸਮਾਂ"
 
-#: ../panels/power/cc-power-panel.c:183
+#: ../panels/power/cc-power-panel.c:190
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i ਮਿੰਟ"
 msgstr[1] "%i ਮਿੰਟ"
 
-#: ../panels/power/cc-power-panel.c:195
+#: ../panels/power/cc-power-panel.c:202
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -2823,235 +3657,221 @@ msgstr[1] "%i ਘੰਟੇ"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../panels/power/cc-power-panel.c:203
+#: ../panels/power/cc-power-panel.c:210
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: ../panels/power/cc-power-panel.c:204
+#: ../panels/power/cc-power-panel.c:211
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "ਘੰਟਾ"
 msgstr[1] "ਘੰਟੇ"
 
-#: ../panels/power/cc-power-panel.c:205
+#: ../panels/power/cc-power-panel.c:212
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "ਮਿੰਟ"
 msgstr[1] "ਮਿੰਟ"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:224
+#: ../panels/power/cc-power-panel.c:231
 #, c-format
-#| msgid "Charging - %s until fully charged"
 msgid "%s until fully charged"
 msgstr "ਪੂਰਾ ਚਾਰਜ ਹੋਣ ਲਈ %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:231
+#: ../panels/power/cc-power-panel.c:238
 #, c-format
-#| msgid "Caution low UPS, %s remaining"
 msgid "Caution: %s remaining"
 msgstr "ਸਾਵਧਾਨ: %s ਬਾਕੀ"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: ../panels/power/cc-power-panel.c:236
+#: ../panels/power/cc-power-panel.c:243
 #, c-format
 msgid "%s remaining"
 msgstr "%s ਬਾਕੀ"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:241 ../panels/power/cc-power-panel.c:269
-#| msgid "Full Screen"
+#: ../panels/power/cc-power-panel.c:248 ../panels/power/cc-power-panel.c:276
 msgid "Fully charged"
 msgstr "ਪੂਰੀ ਚਾਰਜ"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:245 ../panels/power/cc-power-panel.c:273
+#: ../panels/power/cc-power-panel.c:252 ../panels/power/cc-power-panel.c:280
 msgid "Empty"
 msgstr "ਖਾਲੀ"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:260
+#: ../panels/power/cc-power-panel.c:267
 msgid "Charging"
 msgstr "ਚਾਰਜ ਹੋ ਰਹੀ ਹੈ"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:265
-#| msgid "UPS discharging"
+#: ../panels/power/cc-power-panel.c:272
 msgid "Discharging"
 msgstr "ਡਿਸਚਾਰਜ ਹੋ ਰਹੀ ਹੈ"
 
-#: ../panels/power/cc-power-panel.c:317
+#: ../panels/power/cc-power-panel.c:324
 #, c-format
 msgid "Estimated battery capacity: %s"
 msgstr "ਅੰਦਾਜ਼ਨ ਬੈਟਰੀ ਸਮੱਰਥਾ: %s"
 
-#: ../panels/power/cc-power-panel.c:393
+#: ../panels/power/cc-power-panel.c:400
 msgctxt "Battery name"
 msgid "Main"
 msgstr "ਮੁੱਖ"
 
-#: ../panels/power/cc-power-panel.c:395
+#: ../panels/power/cc-power-panel.c:402
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "ਵਾਧੂ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:477
+#: ../panels/power/cc-power-panel.c:484
 msgid "Wireless mouse"
 msgstr "ਬੇਤਾਰ ਮਾਊਸ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:481
+#: ../panels/power/cc-power-panel.c:488
 msgid "Wireless keyboard"
 msgstr "ਬੇਤਾਰ ਕੀ-ਬੋਰਡ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:485
+#: ../panels/power/cc-power-panel.c:492
 msgid "Uninterruptible power supply"
 msgstr "ਗ਼ੈਰ-ਰੁਕਾਵਟ-ਯੋਗ ਪਾਵਰ ਸਪਲਾਈ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:490
+#: ../panels/power/cc-power-panel.c:497
 msgid "Personal digital assistant"
 msgstr "ਨਿੱਜੀ ਡਿਜ਼ਿਟਲ ਸਹਾਇਕ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:494
+#: ../panels/power/cc-power-panel.c:501
 msgid "Cellphone"
 msgstr "ਸੈਲਫੋਨ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:498
+#: ../panels/power/cc-power-panel.c:505
 msgid "Media player"
 msgstr "ਮੀਡਿਆ ਪਲੇਅਰ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:502
+#: ../panels/power/cc-power-panel.c:509
 msgid "Tablet"
 msgstr "ਟੇਬਲੇਟ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:506
+#: ../panels/power/cc-power-panel.c:513
 msgid "Computer"
 msgstr "ਕੰਪਿਊਟਰ"
 
 #. TRANSLATORS: secondary battery, misc
-#: ../panels/power/cc-power-panel.c:510 ../panels/power/cc-power-panel.c:718
-#: ../panels/power/cc-power-panel.c:1844
+#: ../panels/power/cc-power-panel.c:517 ../panels/power/cc-power-panel.c:725
+#: ../panels/power/cc-power-panel.c:1929
 msgid "Battery"
 msgstr "ਬੈਟਰੀ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:519
+#: ../panels/power/cc-power-panel.c:526
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "ਚਾਰਜ ਹੋ ਰਹੀ ਹੈ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:526
+#: ../panels/power/cc-power-panel.c:533
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "ਸਾਵਧਾਨ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:531
+#: ../panels/power/cc-power-panel.c:538
 msgctxt "Battery power"
 msgid "Low"
 msgstr "ਘੱਟ"
 
 #. TRANSLATORS: secondary battery
-#: ../panels/power/cc-power-panel.c:536
+#: ../panels/power/cc-power-panel.c:543
 msgctxt "Battery power"
 msgid "Good"
 msgstr "ਚੰਗੀ"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:541
-#| msgid "Full Screen"
+#: ../panels/power/cc-power-panel.c:548
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "ਪੂਰੀ ਚਾਰਜ"
 
 #. TRANSLATORS: primary battery
-#: ../panels/power/cc-power-panel.c:545
+#: ../panels/power/cc-power-panel.c:552
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "ਖਾਲੀ"
 
-#: ../panels/power/cc-power-panel.c:716
-#| msgid "Battery"
+#: ../panels/power/cc-power-panel.c:723
 msgid "Batteries"
 msgstr "ਬੈਟਰੀਆਂ"
 
-#: ../panels/power/cc-power-panel.c:1058
+#: ../panels/power/cc-power-panel.c:1065
 msgid "When _idle"
 msgstr "ਜਦੋਂ ਵੇਹਲਾ ਹੈ(_i)"
 
-#: ../panels/power/cc-power-panel.c:1324
+#: ../panels/power/cc-power-panel.c:1392
 msgid "Power Saving"
 msgstr "ਪਾਵਰ ਬੱਚਤ"
 
-#: ../panels/power/cc-power-panel.c:1351
-#| msgid "Brightness"
+#: ../panels/power/cc-power-panel.c:1421
 msgid "_Screen Brightness"
 msgstr "ਸਕਰੀਨ ਚਮਕ(_S)"
 
-#: ../panels/power/cc-power-panel.c:1378
-#| msgid "Suspend when inactive for"
-msgid "Dim Screen when Inactive"
-msgstr "ਜਦੋਂ ਨਾ-ਸਰਗਰਮ ਹੋਵੇ ਤਾਂ ਸਕਰੀਨ ਡਿਮ ਕਰੋ"
+#: ../panels/power/cc-power-panel.c:1449
+#| msgid "Dim Screen when Inactive"
+msgid "_Dim Screen when Inactive"
+msgstr "ਨਾ-ਸਰਗਰਮ ਹੋਵੇ ਤਾਂ ਸਕਰੀਨ ਡਿਮ ਕਰੋ(_D)"
 
-#: ../panels/power/cc-power-panel.c:1401
-msgid "Mark As Inactive After"
-msgstr "ਇਸ ਦੇ ਬਾਅਦ ਵੇਹਲਾ ਬਣਾਉ"
+#: ../panels/power/cc-power-panel.c:1472
+#| msgid "Mark As Inactive After"
+msgid "_Mark As Inactive After"
+msgstr "ਇਸ ਦੇ ਬਾਅਦ ਨਾ-ਸਰਗਰਮ ਬਣਾਉ(_M)"
 
-#: ../panels/power/cc-power-panel.c:1436
-#| msgid "Wi-Fi"
+#: ../panels/power/cc-power-panel.c:1507
 msgid "_Wi-Fi"
 msgstr "ਵਾਈ-ਫਾਈ(_W)"
 
-#: ../panels/power/cc-power-panel.c:1464
-#| msgid "Mobile Broadband"
+#: ../panels/power/cc-power-panel.c:1535
 msgid "_Mobile Broadband"
 msgstr "ਮੋਬਾਇਲ ਬਰਾਡਬੈਂਡ(_M)"
 
-#: ../panels/power/cc-power-panel.c:1502
-#| msgid "Bluetooth"
+#: ../panels/power/cc-power-panel.c:1573
 msgid "_Bluetooth"
 msgstr "ਬਲਿਊਟੁੱਥ(_B)"
 
-#: ../panels/power/cc-power-panel.c:1553
-#| msgid "On battery power"
+#: ../panels/power/cc-power-panel.c:1624
 msgid "When on battery power"
 msgstr "ਜਦੋਂ ਬੈਟਰੀ ਪਾਵਰ ਉੱਤੇ ਹੋਵੇ"
 
-#: ../panels/power/cc-power-panel.c:1555
+#: ../panels/power/cc-power-panel.c:1626
 msgid "When plugged in"
 msgstr "ਜਦੋਂ ਪਲੱਗ ਲੱਗਾ ਹੋਵੇ"
 
-#: ../panels/power/cc-power-panel.c:1673
+#: ../panels/power/cc-power-panel.c:1753
 msgid "Suspend & Power Off"
 msgstr "ਸਸਪੈਂਡ ਅਤੇ ਬੰਦ"
 
-#: ../panels/power/cc-power-panel.c:1702
-#| msgctxt "proxy method"
-#| msgid "Automatic"
+#: ../panels/power/cc-power-panel.c:1784
 msgid "_Automatic Suspend"
 msgstr "ਆਟੋਮੈਟਿਕ ਸਸਪੈਂਡ(_A)"
 
-#: ../panels/power/cc-power-panel.c:1722
-#| msgid "When power is _critically low"
+#: ../panels/power/cc-power-panel.c:1806
 msgid "When Battery Power is _Critical"
 msgstr "ਜਦੋਂ ਬੈਟਰੀ ਪਾਵਰ ਨਾਜ਼ੁਕ ਰੂਪ 'ਚ ਘੱਟ ਹੋਵੇ (_C)"
 
-#: ../panels/power/cc-power-panel.c:1754
-#| msgid "Power off"
+#: ../panels/power/cc-power-panel.c:1839
 msgid "Power Off"
 msgstr "ਬੰਦ ਕਰੋ"
 
-#: ../panels/power/cc-power-panel.c:1894
+#: ../panels/power/cc-power-panel.c:1981
 msgid "Devices"
 msgstr "ਜੰਤਰ"
 
@@ -3065,7 +3885,6 @@ msgstr "ਪਾਵਰ ਮੈਨੇਜਮੈਂਟ ਸੈਟਿੰਗ"
 
 #. Translators: those are keywords for the power control-center panel
 #: ../panels/power/gnome-power-panel.desktop.in.in.h:4
-#| msgid "Power;Sleep;Suspend;Hibernate;Battery;"
 msgid ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
 msgstr ""
@@ -3100,34 +3919,23 @@ msgstr "੧ ਮਿੰਟ"
 msgid "2 minutes"
 msgstr "੨ ਮਿੰਟ"
 
-#: ../panels/power/power.ui.h:9
-#| msgid "never"
-msgid "Never"
-msgstr "ਕਦੇ ਨਹੀਂ"
-
 #: ../panels/power/power.ui.h:10
-#| msgctxt "proxy method"
-#| msgid "Automatic"
 msgid "Automatic Suspend"
 msgstr "ਆਟੋਮੈਟਿਕ ਸਸਪੈਂਡ"
 
 #: ../panels/power/power.ui.h:11 ../panels/privacy/privacy.ui.h:10
-#| msgid "Close"
 msgid "_Close"
 msgstr "ਬੰਦ ਕਰੋ(_C)"
 
 #: ../panels/power/power.ui.h:12
-#| msgid "On battery power"
 msgid "When on _Battery Power"
 msgstr "ਜਦੋਂ ਬੈਟਰੀ ਪਾਵਰ ਉੱਤੇ ਹੋਵੇ(_B)"
 
 #: ../panels/power/power.ui.h:13
-#| msgid "When plugged in"
 msgid "When _Plugged In"
 msgstr "ਜਦੋਂ ਪਲੱਗ ਲੱਗਾ ਹੋਵੇ(_P)"
 
 #: ../panels/power/power.ui.h:14
-#| msgid "_Delay:"
 msgid "Delay"
 msgstr "ਦੇਰੀ"
 
@@ -3296,17 +4104,14 @@ msgid "No suitable driver found"
 msgstr "ਕੋਈ ਢੁੱਕਵਾਂ ਡਰਾਇਵਰ ਨਹੀਂ ਲੱਭਿਆ"
 
 #: ../panels/printers/cc-printers-panel.c:2321
-#| msgid "Searching for preferred drivers..."
 msgid "Searching for preferred drivers…"
 msgstr "…ਢੁੱਕਵੇਂ ਡਰਾਇਵਰ ਲੱਭੇ ਜਾ ਰਹੇ ਹਨ"
 
 #: ../panels/printers/cc-printers-panel.c:2336
-#| msgid "Select from database..."
 msgid "Select from database…"
 msgstr "…ਡਾਟਾਬੇਸ ਵਿੱਚੋਂ ਚੁਣੋ"
 
 #: ../panels/printers/cc-printers-panel.c:2345
-#| msgid "Provide PPD File..."
 msgid "Provide PPD File…"
 msgstr "…PPD ਫਾਇਲ ਦਿਉ"
 
@@ -3335,12 +4140,6 @@ msgstr "ਪਰਿੰਟਰ ਸੈਟਿੰਗ ਬਦਲੋ"
 msgid "Printer;Queue;Print;Paper;Ink;Toner;"
 msgstr "Printer;Queue;Print;Paper;Ink;Toner;"
 
-#: ../panels/printers/jobs-dialog.ui.h:1
-#: ../panels/printers/options-dialog.ui.h:1
-#: ../panels/printers/ppd-selection-dialog.ui.h:1
-msgid " "
-msgstr " "
-
 #: ../panels/printers/jobs-dialog.ui.h:2
 #: ../panels/printers/options-dialog.ui.h:4
 #: ../panels/user-accounts/data/history-dialog.ui.h:1
@@ -3364,11 +4163,6 @@ msgstr "ਪਰਿੰਟਿੰਗ ਰੋਕੋ"
 msgid "Cancel Print Job"
 msgstr "ਪਰਿੰਟ ਜਾਬ ਰੱਦ ਕਰੋ"
 
-#: ../panels/printers/new-printer-dialog.ui.h:2
-#: ../panels/user-accounts/um-account-dialog.c:1068
-msgid "_Add"
-msgstr "ਸ਼ਾਮਲ(_A)"
-
 #: ../panels/printers/new-printer-dialog.ui.h:3
 msgid "Add a New Printer"
 msgstr "ਨਵਾਂ ਪਰਿੰਟਰ ਸ਼ਾਮਲ"
@@ -3383,7 +4177,6 @@ msgid "Options"
 msgstr "ਚੋਣਾਂ"
 
 #: ../panels/printers/options-dialog.ui.h:3
-#| msgid "Loading options..."
 msgid "Loading options…"
 msgstr "…ਚੋਣਾਂ ਲੋਡ ਕੀਤੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ"
 
@@ -3680,7 +4473,6 @@ msgid "label"
 msgstr "ਲੇਬਲ"
 
 #: ../panels/printers/printers.ui.h:17
-#| msgid "Setting new driver..."
 msgid "Setting new driver…"
 msgstr "…ਨਵਾਂ ਡਰਾਇਵਰ ਸੈਟਿੰਗ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
@@ -3712,30 +4504,27 @@ msgstr ""
 "ਅਫਸੋਸ! ਸਿਸਟਮ ਪਰਿੰਟਿਗ ਸੇਵ\n"
 "ਉਪਲੱਬਧ ਨਹੀਂ ਜਾਪਦੀ ਹੈ।"
 
-#: ../panels/privacy/cc-privacy-panel.c:104
+#: ../panels/privacy/cc-privacy-panel.c:105
 msgid "Hidden"
 msgstr "ਲੁਕਵਾਂ"
 
-#: ../panels/privacy/cc-privacy-panel.c:104
-#| msgid "Visibility"
+#: ../panels/privacy/cc-privacy-panel.c:105
 msgid "Visible"
 msgstr "ਦਿੱਖ"
 
-#: ../panels/privacy/cc-privacy-panel.c:270 ../panels/privacy/privacy.ui.h:32
-#| msgid "Screenshots"
+#: ../panels/privacy/cc-privacy-panel.c:271 ../panels/privacy/privacy.ui.h:32
 msgid "Screen Lock"
 msgstr "ਸਕਰੀਨ ਲਾਕ"
 
-#: ../panels/privacy/cc-privacy-panel.c:337 ../panels/privacy/privacy.ui.h:9
-#| msgid "Visibility"
+#: ../panels/privacy/cc-privacy-panel.c:338 ../panels/privacy/privacy.ui.h:9
 msgid "Name & Visibility"
 msgstr "ਨਾਂ ਤੇ ਦਿੱਖ"
 
-#: ../panels/privacy/cc-privacy-panel.c:445 ../panels/privacy/privacy.ui.h:27
+#: ../panels/privacy/cc-privacy-panel.c:446 ../panels/privacy/privacy.ui.h:27
 msgid "Usage & History"
 msgstr "ਵਰਤੋਂ ਤੇ ਅਤੀਤ"
 
-#: ../panels/privacy/cc-privacy-panel.c:575 ../panels/privacy/privacy.ui.h:37
+#: ../panels/privacy/cc-privacy-panel.c:576 ../panels/privacy/privacy.ui.h:37
 msgid "Purge Trash & Temporary Files"
 msgstr "ਰੱਦੀ ਅਤੇ ਆਰਜ਼ੀ ਫਾਇਲਾਂ ਨਸ਼ਟ ਕਰੋ"
 
@@ -3744,7 +4533,6 @@ msgid "Privacy"
 msgstr "ਪਰਾਈਵੇਸੀ"
 
 #: ../panels/privacy/gnome-privacy-panel.desktop.in.in.h:2
-#| msgid "Your settings"
 msgid "Privacy settings"
 msgstr "ਪਰਾਈਵੇਸੀ ਸੈਟਿੰਗ"
 
@@ -3755,11 +4543,10 @@ msgid ""
 "network;identity;"
 msgstr ""
 "ਸਕਰੀਨ;ਲਾਕ;ਜਾਂਚ;ਪੜਤਾਲ;ਪ੍ਰਾਈਵੇਟ;ਨਿੱਜੀ;ਆਰਜ਼ੀ;ਇੰਡੈਕਸ;ਨਾਂ;ਨੈੱਟਵਰਕ;ਪਛਾਣ;ਕਰੈਸ਼;ਤਾਜ਼ਾ;scr"
-"een;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
-"network;identity;"
+"een;lock;"
+"diagnostics;crash;private;recent;temporary;tmp;index;name;network;identity;"
 
 #: ../panels/privacy/privacy.ui.h:1
-#| msgid "Screen turns off"
 msgid "Screen Turns Off"
 msgstr "ਸਕਰੀਨ ਬੰਦ ਕਰੋ"
 
@@ -3784,7 +4571,6 @@ msgid "Display full name in _lock screen"
 msgstr "ਲਾਕ ਸਕਰੀਨ ਵਿੱਚ ਪੂਰਾ ਨਾਂ ਵੇਖਾਉ(_l)"
 
 #: ../panels/privacy/privacy.ui.h:14
-#| msgid "Switch Modes"
 msgid "_Stealth Mode"
 msgstr "ਲੁਕਵਾਂ ਮੋਡ(_S)"
 
@@ -3833,7 +4619,6 @@ msgid "Don't retain history"
 msgstr "ਅਤੀਤ ਨਾ ਰੱਖੋ"
 
 #: ../panels/privacy/privacy.ui.h:26
-#| msgid "never"
 msgid "Forever"
 msgstr "ਹਮੇਸ਼ਾ"
 
@@ -3843,8 +4628,8 @@ msgid ""
 "never shared over the network."
 msgstr ""
 "ਤੁਹਾਡੇ ਅਤੀਤ ਨੂੰ ਯਾਦ ਰੱਖਣ ਨਾਲ ਚੀਜ਼ਾਂ ਨੂੰ ਮੁੜ-ਲੱਭਣਾ ਸੌਖਾ ਹੋ ਜਾਂਦਾ ਹੈ। ਇਹ ਚੀਜ਼ਾਂ "
-"ਨੂੰ ਨੈੱਟਵਰਕ ਉੱਤੇ ਕਦੇ ਵੀ ਸਾਂਝਾ "
-"ਨਹੀਂ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।"
+"ਨੂੰ ਨੈੱਟਵਰਕ ਉੱਤੇ ਕਦੇ "
+"ਵੀ ਸਾਂਝਾ ਨਹੀਂ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।"
 
 #: ../panels/privacy/privacy.ui.h:29
 msgid "Cl_ear Recent History"
@@ -3863,17 +4648,14 @@ msgid "The Screen Lock protects your privacy when you are away."
 msgstr "ਸਕਰੀਨ ਲਾਕ ਤੁਹਾਡੀ ਪਰਾਈਵੇਸੀ ਨੂੰ ਬਚਾਉਂਦੀ ਹੈ, ਜਦੋਂ ਤੁਸੀਂ ਦੂਰ ਹੁੰਦੇ ਹੋ।"
 
 #: ../panels/privacy/privacy.ui.h:34
-#| msgid "A_utomatic Login"
 msgid "Automatic Screen _Lock"
 msgstr "ਆਟੋਮੈਟਿਕ ਸਕਰੀਨ ਲਾਕ ਕਰੋ(_L)"
 
 #: ../panels/privacy/privacy.ui.h:35
-#| msgid "_Lock screen after:"
 msgid "Lock Screen _After"
 msgstr "ਇਸ ਮਗਰੋਂ ਸਕਰੀਨ ਲਾਕ(_A)"
 
 #: ../panels/privacy/privacy.ui.h:36
-#| msgid "Show _notifications when locked"
 msgid "Show _Notifications"
 msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨ ਵੇਖਾਓ(_N)"
 
@@ -3882,7 +4664,6 @@ msgid "_Empty Trash"
 msgstr "ਰੱਦੀ ਖਾਲੀ ਕਰੋ(_E)"
 
 #: ../panels/privacy/privacy.ui.h:39
-#| msgid "_Keep Files"
 msgid "_Purge Temporary Files"
 msgstr "ਆਰਜ਼ੀ ਫਾਇਲਾਂ ਨੂੰ ਨਸ਼ਟ ਕਰੋ(_P)"
 
@@ -3892,8 +4673,8 @@ msgid ""
 "free of unnecessary sensitive information."
 msgstr ""
 "ਆਪਣੇ ਕੰਪਿਊਟਰ ਨੂੰ ਕਿਸੇ ਵੀ ਗ਼ੈਰ-ਜ਼ਰੂਰੀ ਸੰਵੇਦਨਸ਼ੀਲ ਜਾਣਕਾਰੀ ਤੋਂ ਮੁਕਤ ਰੱਖਣ ਲਈ ਮੱਦਦ "
-"ਵਾਸਤੇ ਰੱਦੀ ਅਤੇ ਆਰਜ਼ੀ"
-"ਫਾਇਲਾਂ ਨੂੰ ਆਪਣੇ-ਆਪ ਨਸ਼ਟ ਕਰੋ"
+"ਵਾਸਤੇ ਰੱਦੀ ਅਤੇ "
+"ਆਰਜ਼ੀਫਾਇਲਾਂ ਨੂੰ ਆਪਣੇ-ਆਪ ਨਸ਼ਟ ਕਰੋ"
 
 #: ../panels/privacy/privacy.ui.h:41
 msgid "Automatically Empty _Trash"
@@ -3917,20 +4698,22 @@ msgstr "ਆਪਣੀ ਖੇਤਰੀ ਅਤੇ ਭਾਸ਼ਾ ਸੈਟਿੰ�
 
 #. Translators: those are keywords for the region control-center panel
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:4
-#| msgid "Language;Layout;Keyboard;"
 msgid "Language;Layout;Keyboard;Input;"
 msgstr "ਭਾਸ਼ਾ;ਲੇਆਉਟ;ਕੀਬੋਰਡ;ਇੰਪੁੱਟ;Language;Layout;Keyboard;Input;"
 
 #: ../panels/region/gnome-region-panel-formats.c:144
+#| msgid "Imperial"
+msgctxt "measurement format"
 msgid "Imperial"
-msgstr "ਇੰਪੀਰੀਲ"
+msgstr "ਇੰਪਿਅਰਲ"
 
 #: ../panels/region/gnome-region-panel-formats.c:146
+#| msgid "Metric"
+msgctxt "measurement format"
 msgid "Metric"
-msgstr "ਮੀਟਰ"
+msgstr "ਮੈਟਰਿਕ"
 
 #: ../panels/region/gnome-region-panel-input-chooser.ui.h:1
-#| msgid "Select an input source to add"
 msgid "Select an input source"
 msgstr "ਇੰਪੁੱਟ ਸਰੋਤ ਚੁਣੋ"
 
@@ -3964,7 +4747,6 @@ msgstr "ਸੈਟਿੰਗ ਕਾਪੀ ਕਰੋ"
 
 #: ../panels/region/gnome-region-panel-system.c:482
 #: ../panels/region/gnome-region-panel.ui.h:42
-#| msgid "Copy Settings"
 msgid "Copy Settings…"
 msgstr "…ਸੈਟਿੰਗ ਕਾਪੀ"
 
@@ -3973,7 +4755,6 @@ msgid "Region and Language"
 msgstr "ਖੇਤਰ ਅਤੇ ਭਾਸ਼ਾ"
 
 #: ../panels/region/gnome-region-panel.ui.h:2
-#| msgid "Select a language"
 msgid "Select a display language"
 msgstr "ਵੇਖਾਉਣ ਲਈ ਭਾਸ਼ਾ ਚੁਣੋ"
 
@@ -4066,12 +4847,10 @@ msgid "Shortcut Settings"
 msgstr "ਸ਼ਾਰਟਕੱਟ ਸੈਟਿੰਗ"
 
 #: ../panels/region/gnome-region-panel.ui.h:31
-#| msgid "Use the same layout for all windows"
 msgid "Use the same source for all windows"
 msgstr "ਸਭ ਵਿੰਡੋਜ਼ ਲਈ ਇੱਕੋ ਸਰੋਤ ਵਰਤੋਂ"
 
 #: ../panels/region/gnome-region-panel.ui.h:32
-#| msgid "Allow different layouts for individual windows"
 msgid "Allow different sources for each window"
 msgstr "ਹਰੇਕ ਵਿੰਡੋ ਲਈ ਲਈ ਵੱਖਰਾ ਸਰੋਤ ਵਰਤਣ ਦਿਉ"
 
@@ -4113,17 +4892,14 @@ msgid "Bookmarks"
 msgstr "ਬੁੱਕਮਾਰਕ"
 
 #: ../panels/search/cc-search-locations-dialog.c:479
-#| msgid "Other..."
 msgid "Other"
 msgstr "ਹੋਰ"
 
 #: ../panels/search/cc-search-locations-dialog.c:675
-#| msgid "_Delete Location"
 msgid "Select Location"
 msgstr "ਟਿਕਾਣਾ ਚੁਣੋ"
 
 #: ../panels/search/cc-search-panel.c:193
-#| msgid "No local printers found"
 msgid "No applications found"
 msgstr "ਕੋਈ ਐਪਲੀਕੇਸ਼ਨ ਨਹੀਂ ਲੱਭੀ"
 
@@ -4138,7 +4914,6 @@ msgid "Search"
 msgstr "ਖੋਜ"
 
 #: ../panels/search/gnome-search-panel.desktop.in.in.h:2
-#| msgid "System settings"
 msgid "Search settings"
 msgstr "ਸੈਟਿੰਗ ਖੋਜ"
 
@@ -4150,7 +4925,6 @@ msgstr ""
 "lts;"
 
 #: ../panels/search/search-locations-dialog.ui.h:1
-#| msgid "Location"
 msgid "Search Locations"
 msgstr "ਟਿਕਾਣਾ ਖੋਜ"
 
@@ -4163,34 +4937,28 @@ msgid "Move Down"
 msgstr "ਹੇਠਾਂ ਭੇਜੋ"
 
 #: ../panels/search/search.ui.h:3
-#| msgid "Mouse Preferences"
 msgid "Preferences"
 msgstr "ਮੇਰੀ ਪਸੰਦ"
 
-#: ../panels/sharing/cc-sharing-panel.c:200
-#| msgid "On"
+#: ../panels/sharing/cc-sharing-panel.c:220
 msgctxt "service is enabled"
 msgid "On"
 msgstr "ਚਾਲੂ"
 
-#: ../panels/sharing/cc-sharing-panel.c:202
-#| msgid "Off"
+#: ../panels/sharing/cc-sharing-panel.c:222
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "ਬੰਦ"
 
-#: ../panels/sharing/cc-sharing-panel.c:310
-#| msgid "Choose a Layout"
+#: ../panels/sharing/cc-sharing-panel.c:362
 msgid "Choose a Folder"
 msgstr "ਫੋਲਡਰ ਚੁਣੋ"
 
-#: ../panels/sharing/cc-sharing-panel.c:488
-#| msgid "_Copy"
+#: ../panels/sharing/cc-sharing-panel.c:540
 msgid "Copy"
 msgstr "ਕਾਪੀ ਕਰੋ"
 
 #: ../panels/sharing/gnome-sharing-panel.desktop.in.in.h:1
-#| msgid "Hearing"
 msgid "Sharing"
 msgstr "ਸਾਂਝਾ"
 
@@ -4201,22 +4969,19 @@ msgid ""
 "pictures;photos;movies;server;renderer;"
 msgstr ""
 "ਸਾਂਝਾ;ਸਾਂਝਾ ਕਰਨਾ;ਸ਼ੇਅਰ;ਹੋਸਟ;ਨਾਂ;ਡੈਸਕਟਾਪ;ਰਿਮੋਟ;ਬਲਿਊਟੁੱਥ;ਮੀਡਿਆ;ਆਡੀਓ;ਵਿਡੀਓ;ਤਸਵੀਰ;ਫ"
-"ੋਟੋ;ਸਰਵਰ;ਮੂਵੀ;ਫਿਲਮਾਂ;share;sharing;ssh;host;name;remote;desktop;bluetooth;obex"
-";media;audio;video;"
-"pictures;photos;movies;server;renderer;"
+"ੋਟੋ;ਸਰਵਰ;"
+"ਮੂਵੀ;ਫਿਲਮਾਂ;share;sharing;ssh;host;name;remote;desktop;bluetooth;obex;media;"
+"audio;video;pictures;photos;movies;server;renderer;"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:1
-#| msgid "Enable h_orizontal scrolling"
 msgid "Enable or disable remote login"
 msgstr "ਰਿਮੋਟ ਲਾਗਇਨ ਚਾਲੂ ਜਾਂ ਬੰਦ"
 
 #: ../panels/sharing/org.gnome.controlcenter.remote-login-helper.policy.in.in.h:2
-#| msgid "Authentication is required to change user data"
 msgid "Authentication is required to enable or disable remote login"
 msgstr "ਰਿਮੋਟ ਲਾਗਇਨ ਨੂੰ ਬੰਦ ਜਾਂ ਚਾਲੂ ਕਰਨ ਲਈ ਪਰਮਾਣਕਿਤਾ ਚਾਹੀਦੀ ਹੈ"
 
 #: ../panels/sharing/sharing.ui.h:1
-#| msgid "Bluetooth Settings"
 msgid "Bluetooth Sharing"
 msgstr "ਬਲਿਊਟੁੱਥ ਸਾਂਝ"
 
@@ -4245,7 +5010,6 @@ msgid "Only share with Trusted Devices"
 msgstr "ਟਰਸਟ ਕੀਤੇ ਜੰਤਰਾਂ ਨਾਲ ਹੀ ਸਾਂਝਾ ਕਰੋ"
 
 #: ../panels/sharing/sharing.ui.h:7
-#| msgid "Computer"
 msgid "Computer Name"
 msgstr "ਕੰਪਿਊਟਰ ਨਾਂ"
 
@@ -4254,7 +5018,6 @@ msgid "Some services are disabled because of no network access."
 msgstr "ਕੁਝ ਸਰਵਿਸਾਂ ਬੰਦ ਹਨ, ਕਿਉਂਕਿ ਕੋਈ ਨੈੱਟਵਰਕ ਪਹੁੰਚ ਨਹੀਂ ਹੈ।"
 
 #: ../panels/sharing/sharing.ui.h:9
-#| msgid "Media player"
 msgid "Media Sharing"
 msgstr "ਮੀਡਿਆ ਸਾਂਝ"
 
@@ -4267,7 +5030,6 @@ msgid "Share Media On This Network"
 msgstr "ਇਹ ਨੈੱਟਵਰਕ ਉੱਤੇ ਮੀਡਿਆ ਸਾਂਝਾ ਕਰੋ"
 
 #: ../panels/sharing/sharing.ui.h:12
-#| msgid "Pictures Folder"
 msgid "Shared Folders"
 msgstr "ਸਾਂਝੇ ਕੀਤੇ ਫੋਲਡਰ"
 
@@ -4276,17 +5038,14 @@ msgid "column"
 msgstr "ਕਾਲਮ"
 
 #: ../panels/sharing/sharing.ui.h:14
-#| msgid "Add profile"
 msgid "Add Folder"
 msgstr "ਫੋਲਡਰ ਸ਼ਾਮਲ"
 
 #: ../panels/sharing/sharing.ui.h:15
-#| msgid "Remove User"
 msgid "Remove Folder"
 msgstr "ਫੋਲਡਰ ਹਟਾਓ"
 
 #: ../panels/sharing/sharing.ui.h:16
-#| msgid "Personal digital assistant"
 msgid "Personal File Sharing"
 msgstr "ਨਿੱਜੀ ਫਾਇਲ ਸਾਂਝ"
 
@@ -4302,7 +5061,6 @@ msgid "Share Public Folder On This Network"
 msgstr "ਇਹ ਨੈੱਟਵਰਕ ਉੱਤੇ ਪਬਲਿਕ ਫੋਲਡਰ ਸਾਂਝਾ ਕਰੋ"
 
 #: ../panels/sharing/sharing.ui.h:20
-#| msgid "Group Password"
 msgid "Require Password"
 msgstr "ਪਾਸਵਰਡ ਚਾਹੀਦਾ ਹੈ"
 
@@ -4311,7 +5069,6 @@ msgid "Password"
 msgstr "ਪਾਸਵਰਡ"
 
 #: ../panels/sharing/sharing.ui.h:22
-#| msgid "Remove Region"
 msgid "Remote Login"
 msgstr "ਰਿਮੋਟ ਲਾਗਇਨ"
 
@@ -4325,7 +5082,6 @@ msgstr ""
 "<a href=\"ssh %s\">ssh %s</a>"
 
 #: ../panels/sharing/sharing.ui.h:26
-#| msgid "Screen Settings"
 msgid "Screen Sharing"
 msgstr "ਸਕਰੀਨ ਸਾਂਝ"
 
@@ -4337,22 +5093,18 @@ msgid ""
 msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:29
-#| msgid "Remove Device"
 msgid "Remote View"
 msgstr "ਰਿਮੋਟ ਝਲਕ"
 
 #: ../panels/sharing/sharing.ui.h:30
-#| msgid "Volume Control"
 msgid "Remote Control"
 msgstr "ਰਿਮੋਟ ਕੰਟਰੋਲ"
 
 #: ../panels/sharing/sharing.ui.h:31
-#| msgid "Connection"
 msgid "Approve All Connections"
 msgstr "ਸਭ ਕੁਨੈਕਸ਼ਨ ਮਨਜ਼ੂਰ"
 
 #: ../panels/sharing/sharing.ui.h:32
-#| msgid "_Show password"
 msgid "Show Password"
 msgstr "ਪਾਸਵਰਡ ਵੇਖੋ"
 
@@ -4452,7 +5204,7 @@ msgstr "ਪਰੋਫਾਇਲ(_P):"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: ../panels/sound/gvc/gvc-mixer-control.c:1835
+#: ../panels/sound/gvc/gvc-mixer-control.c:1837
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -4461,14 +5213,14 @@ msgstr[1] "%u ਆਉਟਪੁੱਟ"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: ../panels/sound/gvc/gvc-mixer-control.c:1845
+#: ../panels/sound/gvc/gvc-mixer-control.c:1847
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u ਇੰਪੁੱਟ"
 msgstr[1] "%u ਇੰਪੁੱਟ"
 
-#: ../panels/sound/gvc/gvc-mixer-control.c:2369
+#: ../panels/sound/gvc/gvc-mixer-control.c:2371
 msgid "System Sounds"
 msgstr "ਸਿਸਟਮ ਸਾਊਂਡ"
 
@@ -4640,10 +5392,6 @@ msgstr "GOK"
 msgid "OnBoard"
 msgstr "ਆਨ-ਬੋਰਡ"
 
-#: ../panels/universal-access/uap.ui.h:8
-msgid "None"
-msgstr "ਕੋਈ ਨਹੀਂ"
-
 #: ../panels/universal-access/uap.ui.h:10
 #, no-c-format
 msgid "75%"
@@ -4693,7 +5441,6 @@ msgid "Beep on Caps and Num Lock"
 msgstr "ਬੀਪ ਕੈਪਸ ਤੇ ਨਮ ਲਾਕ ਸਮੇਂ"
 
 #: ../panels/universal-access/uap.ui.h:23
-#| msgid "Options"
 msgid "Options…"
 msgstr "…ਚੋਣਾਂ"
 
@@ -5103,10 +5850,6 @@ msgstr "ਲੋਕਲ ਅਕਾਊਂਟ(_L)"
 msgid "_Enterprise Login"
 msgstr "ਇੰਟਰਪਰਾਈਜ਼ ਲਾਗਇਨ(_E)"
 
-#: ../panels/user-accounts/data/account-dialog.ui.h:6
-msgid "_Username"
-msgstr "ਯੂਜ਼ਰ ਨਾਂ(_U)"
-
 #: ../panels/user-accounts/data/account-dialog.ui.h:7
 msgid "_Full name"
 msgstr "ਪੂਰਾ ਨਾਂ(_F)"
@@ -5123,11 +5866,6 @@ msgstr "ਡੋਮੇਨ(_D)"
 #: ../panels/user-accounts/data/account-dialog.ui.h:10
 msgid "_Login Name"
 msgstr "ਲਾਗਇਨ ਨਾਂ(_L)"
-
-#: ../panels/user-accounts/data/account-dialog.ui.h:11
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:8
-msgid "_Password"
-msgstr "ਪਾਸਵਰਡ(_P)"
 
 #: ../panels/user-accounts/data/account-dialog.ui.h:12
 msgid "Tip: Enterprise domain or realm name"
@@ -5218,7 +5956,6 @@ msgstr ""
 "ਕਰਨ ਦੇ ਯੋਗ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।"
 
 #: ../panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in.h:1
-#| msgid "Username"
 msgid "Users"
 msgstr "ਯੂਜ਼ਰ"
 
@@ -5367,13 +6104,8 @@ msgid "_Language"
 msgstr "ਭਾਸ਼ਾ(_L)"
 
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:13
-#| msgid "A_utomatic Login"
 msgid "Last Login"
 msgstr "ਆਖਰੀ ਲਾਗਇਨ"
-
-#: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
-msgid "History"
-msgstr "ਅਤੀਤ"
 
 #: ../panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in.h:1
 msgid "Manage user accounts"
@@ -5577,7 +6309,6 @@ msgid "This Week"
 msgstr "ਇਸ ਹਫ਼ਤੇ"
 
 #: ../panels/user-accounts/um-history-dialog.c:91
-#| msgid "Last used"
 msgid "Last Week"
 msgstr "ਪਿਛਲੇ ਹਫ਼ਤੇ"
 
@@ -5630,12 +6361,10 @@ msgid "Disable image"
 msgstr "ਚਿੱਤਰ ਹਟਾਓ"
 
 #: ../panels/user-accounts/um-photo-dialog.c:461
-#| msgid "Take a photo..."
 msgid "Take a photo…"
 msgstr "…ਫੋਟੋ ਲਵੋ"
 
 #: ../panels/user-accounts/um-photo-dialog.c:479
-#| msgid "Browse for more pictures"
 msgid "Browse for more pictures…"
 msgstr "…ਹੋਰ ਤਸਵੀਰਾਂ ਵੇਖੋ"
 
@@ -5804,16 +6533,6 @@ msgstr ""
 "  ➣ਅੰਕ\n"
 "  ➣ '.', '-' ਅਤੇ '_' ਵਿੱਚੋਂ ਕੋਈ ਵੀ"
 
-#: ../panels/user-accounts/um-utils.c:770
-#| msgid "today"
-msgid "Today"
-msgstr "ਅੱਜ"
-
-#: ../panels/user-accounts/um-utils.c:773
-#| msgid "yesterday"
-msgid "Yesterday"
-msgstr "ਕੱਲ੍ਹ"
-
 #: ../panels/wacom/button-mapping.ui.h:1
 msgid "Map Buttons"
 msgstr "ਬਟਨ ਮਿਲਾਉ"
@@ -5874,13 +6593,11 @@ msgid "Show On-Screen Help"
 msgstr "ਸਕਰੀਨ ਉੱਤੇ ਮੱਦਦ ਵੇਖਾਓ"
 
 #: ../panels/wacom/cc-wacom-page.c:621
-#| msgid "Up"
 msgctxt "Wacom tablet button"
 msgid "Up"
 msgstr "ਉੱਤੇ"
 
 #: ../panels/wacom/cc-wacom-page.c:621
-#| msgid "Down"
 msgctxt "Wacom tablet button"
 msgid "Down"
 msgstr "ਹੇਠਾਂ"
@@ -5941,12 +6658,10 @@ msgid "Bluetooth Settings"
 msgstr "ਬਲਿਊਟੁੱਥ ਸੈਟਿੰਗ"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:8
-#| msgid "Map to Monitor..."
 msgid "Map to Monitor…"
 msgstr "…ਮਾਨੀਟਰ ਲਈ ਮਿਲਾਉ"
 
 #: ../panels/wacom/gnome-wacom-properties.ui.h:9
-#| msgid "Map Buttons"
 msgid "Map Buttons…"
 msgstr "…ਬਟਨ ਮਿਲਾਉ"
 
@@ -6158,7 +6873,6 @@ msgstr ""
 "Run '%s --help' to see a full list of available command line options.\n"
 
 #: ../shell/control-center.c:133
-#| msgid "Available Profiles"
 msgid "Available panels:"
 msgstr "ਉਪਲੱਬਧ ਪੈਨਲ:"
 
@@ -6171,20 +6885,17 @@ msgid "Quit"
 msgstr "ਬਾਹਰ"
 
 #. Add categories
-#: ../shell/gnome-control-center.c:881
-#| msgid "Personal Info"
+#: ../shell/gnome-control-center.c:887
 msgctxt "category"
 msgid "Personal"
 msgstr "ਨਿੱਜੀ"
 
-#: ../shell/gnome-control-center.c:882
-#| msgid "Hardware"
+#: ../shell/gnome-control-center.c:888
 msgctxt "category"
 msgid "Hardware"
 msgstr "ਹਾਰਡਵੇਅਰ"
 
-#: ../shell/gnome-control-center.c:883
-#| msgid "System"
+#: ../shell/gnome-control-center.c:889
 msgctxt "category"
 msgid "System"
 msgstr "ਸਿਸਟਮ"
@@ -6204,6 +6915,26 @@ msgstr "ਮੇਰੀ ਪਸੰਦ;ਸੈਟਿੰਗ;"
 #: ../shell/shell.ui.h:2
 msgid "All Settings"
 msgstr "ਸਭ ਸੈਟਿੰਗ"
+
+#~ msgid "Out of range"
+#~ msgstr "ਹੱਦ ਤੋਂ ਬਾਹਰ"
+
+#~| msgid "_Configure..."
+#~ msgid "_Configure…"
+#~ msgstr "…ਸੰਰਚਨਾ(_C)"
+
+#~ msgid "_Disconnect"
+#~ msgstr "ਡਿਸ-ਕੁਨੈਕਟ ਕਰੋ(_D)"
+
+#~ msgid "_Connect"
+#~ msgstr "ਕੁਨੈਕਸ਼ਨ ਕਰੋ(_C)"
+
+#~| msgid "Settings"
+#~ msgid "_Settings…"
+#~ msgstr "…ਸੈਟਿੰਗ(_S)"
+
+#~ msgid "Disconnected"
+#~ msgstr "ਡਿਸ-ਕੁਨੈਕਟ ਹੈ"
 
 #~ msgid "Browse Files..."
 #~ msgstr "...ਫਾਇਲਾਂ ਦੀ ਝਲਕ"
@@ -6225,9 +6956,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ"
 
 #~ msgid "Available Profiles for Webcams"
 #~ msgstr "ਵੈੱਬਕੈਮ ਲਈ ਉਪਲੱਬਧ ਪਰੋਫਾਇਲ"
-
-#~ msgid "Cannot remove automatically added profile"
-#~ msgstr "ਆਟੋਮੈਟਿਕ ਸ਼ਾਮਲ ਕੀਤੇ ਪ੍ਰੋਫਾਇਲ ਨੂੰ ਹਟਾਇਆ ਨਹੀਂ ਜਾ ਸਕਦਾ"
 
 #~ msgid "No profile"
 #~ msgstr "ਕੋਈ ਪਰੋਫਾਇਲ ਨਹੀਂ"
@@ -6469,9 +7197,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ"
 #~ msgid "Browse for more pictures..."
 #~ msgstr "...ਹੋਰ ਤਸਵੀਰਾਂ ਦੀ ਝਲਕ"
 
-#~ msgid "A user with name '%s' already exists."
-#~ msgstr "'%s' ਨਾਂ ਨਾਲ ਯੂਜ਼ਰ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ।"
-
 #~ msgid "No user with the name '%s' exists."
 #~ msgstr "'%s' ਨਾਂ ਨਾਲ ਕੋਈ ਯੂਜ਼ਰ ਮੌਜੂਦ ਨਹੀਂ ਹੈ।"
 
@@ -6492,15 +7217,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ"
 
 #~ msgid "Wireless"
 #~ msgstr "ਬੇਤਾਰ"
-
-#~ msgid "Wired"
-#~ msgstr "ਤਾਰ ਵਾਲਾ"
-
-#~ msgid "Mobile broadband"
-#~ msgstr "ਮੋਬਾਇਲ ਬਰਾਡਬੈਂਡ"
-
-#~ msgid "Mesh"
-#~ msgstr "ਮੇਸ਼"
 
 #~ msgid "Remove Language"
 #~ msgstr "ਭਾਸ਼ਾ ਹਟਾਓ"
@@ -7032,11 +7748,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ"
 #~ msgid "Keyboard;Mouse;a11y;Accessibility;"
 #~ msgstr "ਕੀਬੋਰਡ;ਮਾਊਸ;a11y;ਅਸੈਸਬਿਲਟੀ;"
 
-#~ msgid "%u byte"
-#~ msgid_plural "%u bytes"
-#~ msgstr[0] "%u ਬਾਈਟ"
-#~ msgstr[1] "%u ਬਾਈਟ"
-
 #~ msgid "%.1f KB"
 #~ msgstr "%.1f KB"
 
@@ -7165,12 +7876,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ"
 #~ msgid "2010"
 #~ msgstr "੨੦੧੦"
 
-#~ msgid "22"
-#~ msgstr "੨੨"
-
-#~ msgid "45"
-#~ msgstr "੪੫"
-
 #~ msgid "AM"
 #~ msgstr "ਸਵੇਰ"
 
@@ -7201,12 +7906,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ"
 #~ msgid "Preparing connection"
 #~ msgstr "ਕੁਨੈਕਸ਼ਨ ਤਿਆਰ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
-#~ msgid "Configuring connection"
-#~ msgstr "ਕੁਨੈਕਸ਼ਨ ਸੰਰਚਨਾ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
-
-#~ msgid "Authenticating"
-#~ msgstr "ਪਰਮਾਣਿਕਤਾ"
-
 #~ msgid "Getting network address"
 #~ msgstr "ਨੈੱਟਵਰਕ ਐਡਰੈੱਸ ਲਿਆ ਜਾ ਰਿਹਾ ਹੈ"
 
@@ -7222,9 +7921,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ"
 
 #~ msgid "%i kb/s"
 #~ msgstr "%i kb/s"
-
-#~ msgid "%i Gb/s"
-#~ msgstr "%i Gb/s"
 
 #~ msgid "Ctrl+Alt+0"
 #~ msgstr "Ctrl+Alt+੦"
@@ -7297,9 +7993,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ"
 
 #~ msgid "Queue"
 #~ msgstr "ਕਤਾਰ"
-
-#~ msgid "Share with these users:"
-#~ msgstr "ਇਹ ਯੂਜ਼ਰ ਨਾਲ ਸਾਂਝਾ ਕਰੋ:"
 
 #~ msgid "Show / hide printer's jobs"
 #~ msgstr "ਪਰਿੰਟਰ ਦਾ ਕੰਮ ਵੇਖੋ / ਓਹਲੇ ਕਰੋ"
@@ -7631,9 +8324,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ"
 #~ msgid "Image missing"
 #~ msgstr "ਚਿੱਤਰ ਗੁੰਮ ਹੈ"
 
-#~ msgid "Set time automatically"
-#~ msgstr "ਸਮਾਂ ਆਟੋਮੈਟਿਕ ਹੀ ਸੈੱਟ ਕਰੋ"
-
 #~ msgid "_Detect monitors"
 #~ msgstr "ਮਾਨੀਟਰ ਖੋਜ(_D)"
 
@@ -7729,9 +8419,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ"
 
 #~ msgid "<b>_Manual proxy configuration</b>"
 #~ msgstr "<b>ਦਸਤੀ ਪਰਾਕਸੀ ਸੰਰਚਨਾ(_M)</b>"
-
-#~ msgid "<b>_Use authentication</b>"
-#~ msgstr "<b>ਪ੍ਰਮਾਣਿਕਤਾ ਵਰਤੋਂ(U)</b>"
 
 #~ msgid "Create New Location"
 #~ msgstr "ਨਵਾਂ ਟਿਕਾਣਾ ਬਣਾਓ"
@@ -8166,9 +8853,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ"
 #~ msgid "P._O. box:"
 #~ msgstr "P._O. ਬਾਕਸ:"
 
-#~ msgid "Select your photo"
-#~ msgstr "ਆਪਣੀ ਫੋਟੋ ਚੁਣੋ"
-
 #~ msgid "State/Pro_vince:"
 #~ msgstr "ਸੂਬਾ/ਖੇਤਰ(_v):"
 
@@ -8190,9 +8874,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ"
 #~ msgid "ZIP/_Postal code:"
 #~ msgstr "ਜ਼ਿਪ/ਡਾਕ ਕੋਡ(_P):"
 
-#~ msgid "_Address:"
-#~ msgstr "ਐਡਰੈੱਸ(_A):"
-
 #~ msgid "_Home page:"
 #~ msgstr "ਘਰ ਸਫ਼ਾ(_H):"
 
@@ -8210,9 +8891,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ"
 
 #~ msgid "_ZIP/Postal code:"
 #~ msgstr "ਜ਼ਿਪ/ਡਾਕ ਕੋਡ(_Z):"
-
-#~ msgid "Set your personal information"
-#~ msgstr "ਆਪਣੀ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਦਿਓ"
 
 #~ msgid "Swipe finger on reader"
 #~ msgstr "ਰੀਡਰ ਉੱਤੇ ਉਂਗਲ ਘਸਾਉ"
@@ -9682,9 +10360,6 @@ msgstr "ਸਭ ਸੈਟਿੰਗ"
 #~ "shown below."
 #~ msgstr ""
 #~ "ਥੀਮ, ਜੋ ਤੁਸੀਂ ਚੁਣਿਆ ਹੈ, ਉਹ ਨਵੇਂ ਫੋਂਟ ਸੁਝਾਅ ਰਿਹਾ ਹੈ। ਫੋਂਟ ਦੀ ਝਲਕ ਹੇਠ ਦਿੱਤੀ ਜਾ ਰਹੀ ਹੈ।"
-
-#~ msgid "_Apply font"
-#~ msgstr "ਫੋਂਟ ਲਾਗੂ(_A)"
 
 #~ msgid "Themes"
 #~ msgstr "ਥੀਮ"
