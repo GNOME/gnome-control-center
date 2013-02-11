@@ -766,7 +766,7 @@ input_sources_changed (GSettings     *settings,
 
 
 static void
-update_button_sensitivity (CcRegionPanel *self)
+update_buttons (CcRegionPanel *self)
 {
 	CcRegionPanelPrivate *priv = self->priv;
         GtkWidget *selected;
@@ -779,15 +779,15 @@ update_button_sensitivity (CcRegionPanel *self)
 
         selected = egg_list_box_get_selected_child (EGG_LIST_BOX (priv->input_list));
         if (selected == NULL) {
+                gtk_widget_set_visible (priv->show_config, FALSE);
                 gtk_widget_set_sensitive (priv->remove_input, FALSE);
-                gtk_widget_set_sensitive (priv->show_config, FALSE);
                 gtk_widget_set_sensitive (priv->show_layout, FALSE);
         } else {
                 GDesktopAppInfo *app_info;
 
                 app_info = (GDesktopAppInfo *)g_object_get_data (G_OBJECT (selected), "app-info");
 
-                gtk_widget_set_sensitive (priv->show_config, app_info != NULL);
+                gtk_widget_set_visible (priv->show_config, app_info != NULL);
                 gtk_widget_set_sensitive (priv->show_layout, TRUE);
                 gtk_widget_set_sensitive (priv->remove_input, multiple_sources);
         }
@@ -860,12 +860,6 @@ update_input (CcRegionPanel *self)
 }
 
 static void
-select_input_child (CcRegionPanel *self, GtkWidget *child)
-{
-        update_button_sensitivity (self);
-}
-
-static void
 apologize_for_no_ibus_login (CcRegionPanel *self)
 {
         GtkWidget *dialog;
@@ -920,7 +914,7 @@ input_response (GtkWidget *chooser, gint response_id, gpointer data)
                                 apologize_for_no_ibus_login (self);
                         } else {
                                 add_input_row (self, type, id, name, app_info);
-                                update_button_sensitivity (self);
+                                update_buttons (self);
                                 update_input (self);
                         }
                         g_free (id);
@@ -1015,7 +1009,7 @@ do_remove_selected_input (CcRegionPanel *self)
         gtk_container_remove (GTK_CONTAINER (priv->input_list), selected);
         egg_list_box_select_child (EGG_LIST_BOX (priv->input_list), sibling);
 
-        update_button_sensitivity (self);
+        update_buttons (self);
         update_input (self);
 }
 
@@ -1198,13 +1192,13 @@ setup_input_section (CcRegionPanel *self)
                                           update_separator_func,
                                           NULL, NULL);
         g_signal_connect_swapped (priv->input_list, "child-selected",
-                                  G_CALLBACK (select_input_child), self);
+                                  G_CALLBACK (update_buttons), self);
 
         g_signal_connect (priv->input_settings, "changed::" KEY_INPUT_SOURCES,
                           G_CALLBACK (input_sources_changed), self);
 
         add_input_sources_from_settings (self);
-        update_button_sensitivity (self);
+        update_buttons (self);
 }
 
 static void
@@ -1424,7 +1418,6 @@ login_changed (CcRegionPanel *self)
         priv->login = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->login_button));
         gtk_widget_set_visible (priv->formats_row, !priv->login);
         gtk_widget_set_visible (priv->login_label, priv->login);
-        update_button_sensitivity (self);
 
         can_acquire = priv->permission &&
                 (g_permission_get_allowed (priv->permission) ||
@@ -1440,7 +1433,7 @@ login_changed (CcRegionPanel *self)
                 add_input_sources_from_settings (self);
 
         update_language_label (self);
-        update_button_sensitivity (self);
+        update_buttons (self);
 }
 
 static void
