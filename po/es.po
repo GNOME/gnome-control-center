@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
 "control-center&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-02-02 21:07+0000\n"
-"PO-Revision-Date: 2013-02-04 17:36+0100\n"
+"POT-Creation-Date: 2013-02-06 21:06+0000\n"
+"PO-Revision-Date: 2013-02-11 14:34+0100\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español <gnome-es-list@gnome.org>\n"
 "Language: \n"
@@ -126,7 +126,9 @@ msgstr "Cambiar el fondo"
 msgid "Wallpaper;Screen;Desktop;"
 msgstr "Fondo de pantalla;Pantalla;Escritorio;"
 
+#. TRANSLATORS: device type
 #: ../panels/bluetooth/gnome-bluetooth-panel.desktop.in.in.h:1
+#: ../panels/network/panel-common.c:99
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -245,14 +247,14 @@ msgstr ""
 "nuevamente."
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
-#: ../panels/color/cc-color-calibrate.c:360
+#: ../panels/color/cc-color-calibrate.c:359
 msgid "Place your calibration device over the square and press 'Start'"
 msgstr ""
 
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
-#: ../panels/color/cc-color-calibrate.c:366
+#: ../panels/color/cc-color-calibrate.c:365
 msgid ""
 "Move your calibration device to the calibrate position and press 'Continue'"
 msgstr ""
@@ -260,7 +262,7 @@ msgstr ""
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
 #. * what to do...
-#: ../panels/color/cc-color-calibrate.c:372
+#: ../panels/color/cc-color-calibrate.c:371
 msgid ""
 "Move your calibration device to the surface position and press 'Continue'"
 msgstr ""
@@ -268,63 +270,62 @@ msgstr ""
 #. TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
 #. * is built into the palmrest and we need to fullscreen the
 #. * sample widget and shut the lid.
-#: ../panels/color/cc-color-calibrate.c:378
+#: ../panels/color/cc-color-calibrate.c:377
 msgid "Shut the laptop lid"
 msgstr "Apagar la tapa del portátil"
 
 #. TRANSLATORS: We suck, the calibation failed and we have no
 #. * good idea why or any suggestions
-#: ../panels/color/cc-color-calibrate.c:409
+#: ../panels/color/cc-color-calibrate.c:408
 msgid "An internal error occurred that could not be recovered."
 msgstr "Ocurrió un error interno y no se pudo recuperar."
 
 #. TRANSLATORS: Some required-at-runtime tools were not
 #. * installed, which should only affect insane distros
-#: ../panels/color/cc-color-calibrate.c:414
+#: ../panels/color/cc-color-calibrate.c:413
 msgid "Tools required for calibration are not installed."
 msgstr "Las herramientas requeridas para la calibración no están instaladas."
 
 #. TRANSLATORS: The profile failed for some reason
-#: ../panels/color/cc-color-calibrate.c:420
+#: ../panels/color/cc-color-calibrate.c:419
 msgid "The profile could not be generated."
 msgstr "No se puede generar el perfil"
 
 #. TRANSLATORS: The user specified a whitepoint that was
 #. * unobtainable with the hardware they've got -- see
 #. * https://en.wikipedia.org/wiki/White_point for details
-#: ../panels/color/cc-color-calibrate.c:426
+#: ../panels/color/cc-color-calibrate.c:425
 msgid "The target whitepoint was not obtainable."
 msgstr "No se pudo obtener el punto blanco del objetivo"
 
 #. TRANSLATORS: the display calibration process is finished
-#: ../panels/color/cc-color-calibrate.c:466
+#: ../panels/color/cc-color-calibrate.c:465
 msgid "Complete!"
 msgstr "Completado"
 
 #. TRANSLATORS: the display calibration failed, and we also show
 #. * the translated (or untranslated) error string after this
-#: ../panels/color/cc-color-calibrate.c:474
+#: ../panels/color/cc-color-calibrate.c:473
 msgid "Calibration failed!"
 msgstr "Falló la configuración."
 
 #. TRANSLATORS: The user can now remove the sensor from the screen
-#: ../panels/color/cc-color-calibrate.c:481
+#: ../panels/color/cc-color-calibrate.c:480
 msgid "You can remove the calibration device."
 msgstr "Puede quitar el dispositivo de calibración."
 
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
-#: ../panels/color/cc-color-calibrate.c:552
+#: ../panels/color/cc-color-calibrate.c:551
 msgid "Do not disturb the calibration device while in progress"
 msgstr ""
 
 #. TRANSLATORS: This refers to the TFT display on a laptop
 #: ../panels/color/cc-color-common.c:41
-#, fuzzy
 #| msgid "Lock screen"
 msgid "Laptop Screen"
-msgstr "Bloquear la pantalla"
+msgstr "Pantalla del portátil"
 
 #. TRANSLATORS: This refers to the embedded webcam on a laptop
 #: ../panels/color/cc-color-common.c:50
@@ -369,58 +370,58 @@ msgstr "Sin calibrar"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: ../panels/color/cc-color-panel.c:131
+#: ../panels/color/cc-color-panel.c:132
 msgid "Default: "
 msgstr "Predeterminado: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: ../panels/color/cc-color-panel.c:139
+#: ../panels/color/cc-color-panel.c:140
 msgid "Colorspace: "
 msgstr "Espacio de color: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: ../panels/color/cc-color-panel.c:146
+#: ../panels/color/cc-color-panel.c:147
 msgid "Test profile: "
 msgstr "Perfil de color: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: ../panels/color/cc-color-panel.c:214
+#: ../panels/color/cc-color-panel.c:215
 msgid "Select ICC Profile File"
 msgstr "Seleccionar archivo de perfil ICC"
 
-#: ../panels/color/cc-color-panel.c:217
+#: ../panels/color/cc-color-panel.c:218
 msgid "_Import"
 msgstr "_Importar"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:228
+#: ../panels/color/cc-color-panel.c:229
 msgid "Supported ICC profiles"
 msgstr "Perfiles ICC soportados"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: ../panels/color/cc-color-panel.c:235
+#: ../panels/color/cc-color-panel.c:236
 #: ../panels/network/wireless-security/eap-method-fast.c:410
 msgid "All files"
 msgstr "Todos los archivos"
 
-#: ../panels/color/cc-color-panel.c:506
+#: ../panels/color/cc-color-panel.c:580
 msgid "Screen"
 msgstr "Pantalla"
 
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: ../panels/color/cc-color-panel.c:776
+#: ../panels/color/cc-color-panel.c:852
 msgid "Save Profile"
 msgstr "Guardar perfil"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: ../panels/color/cc-color-panel.c:1137
+#: ../panels/color/cc-color-panel.c:1213
 msgid "Create a color profile for the selected device"
 msgstr "Crear un perfil de color para el dispositivo seleccionado"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1152 ../panels/color/cc-color-panel.c:1176
+#: ../panels/color/cc-color-panel.c:1228 ../panels/color/cc-color-panel.c:1252
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -429,12 +430,12 @@ msgstr ""
 "correctamente conectado."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1186
+#: ../panels/color/cc-color-panel.c:1262
 msgid "The measuring instrument does not support printer profiling."
 msgstr "El instrumento de medida no soporta perfilado de impresoras."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: ../panels/color/cc-color-panel.c:1197
+#: ../panels/color/cc-color-panel.c:1273
 msgid "The device type is not currently supported."
 msgstr "El tipo de dispositivo actualmente no está soportado."
 
@@ -572,20 +573,20 @@ msgid "Calibration Quality"
 msgstr "Calidad de la calibración"
 
 #: ../panels/color/color.ui.h:9
-msgid "Select the type of display that is connected."
-msgstr "Seleccionar el tipo de pantalla que está conectada."
-
-#: ../panels/color/color.ui.h:10
-msgid "Display Type"
-msgstr "Tipo de pantalla"
-
-#: ../panels/color/color.ui.h:11
 msgid "Select the sensor device you want to use for calibration."
 msgstr "Seleccione el sensor que quiere usar para la calibración."
 
-#: ../panels/color/color.ui.h:12
+#: ../panels/color/color.ui.h:10
 msgid "Calibration Device"
 msgstr "Calibración del dispositivo"
+
+#: ../panels/color/color.ui.h:11
+msgid "Select the type of display that is connected."
+msgstr "Seleccionar el tipo de pantalla que está conectada."
+
+#: ../panels/color/color.ui.h:12
+msgid "Display Type"
+msgstr "Tipo de pantalla"
 
 #: ../panels/color/color.ui.h:13
 msgid ""
@@ -750,53 +751,56 @@ msgid "Projector"
 msgstr "Proyector"
 
 #: ../panels/color/color.ui.h:48
+msgid "Plasma"
+msgstr "Plasma"
+
+#: ../panels/color/color.ui.h:49
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Alta"
 
-#: ../panels/color/color.ui.h:49
+#: ../panels/color/color.ui.h:50
 msgid "40 minutes"
 msgstr "40 minutos"
 
-#: ../panels/color/color.ui.h:50
+#: ../panels/color/color.ui.h:51
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Media"
 
-#: ../panels/color/color.ui.h:51 ../panels/power/power.ui.h:5
+#: ../panels/color/color.ui.h:52 ../panels/power/power.ui.h:5
 #: ../panels/privacy/privacy.ui.h:7
 msgid "30 minutes"
 msgstr "30 minutos"
 
-#: ../panels/color/color.ui.h:52
+#: ../panels/color/color.ui.h:53
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Baja"
 
-#: ../panels/color/color.ui.h:53
+#: ../panels/color/color.ui.h:54
 msgid "15 minutes"
 msgstr "15 minutos"
 
-#: ../panels/color/color.ui.h:54
+#: ../panels/color/color.ui.h:55
 #, fuzzy
 #| msgid "Panel to display"
 msgid "Native to display"
 msgstr "Panel que mostrar"
 
-#: ../panels/color/color.ui.h:55
-#| msgid "Pointing and Clicking"
+#: ../panels/color/color.ui.h:56
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (Impresiones y publicaciones)"
 
-#: ../panels/color/color.ui.h:56
+#: ../panels/color/color.ui.h:57
 msgid "D55"
 msgstr "D55"
 
-#: ../panels/color/color.ui.h:57
+#: ../panels/color/color.ui.h:58
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (Fotografía y gráficos)"
 
-#: ../panels/color/color.ui.h:58
+#: ../panels/color/color.ui.h:59
 msgid "D75"
 msgstr "D75"
 
@@ -1104,8 +1108,11 @@ msgstr "Cambiar la resolución y posición de los monitores y proyectores"
 msgid "Panel;Projector;xrandr;Screen;Resolution;Refresh;"
 msgstr "Panel;Proyector;xranrd;Pantalla;Resolución;Actualizar;"
 
+#. TRANSLATORS: device type
 #. TRANSLATORS: AP type
-#: ../panels/info/cc-info-panel.c:441 ../panels/network/panel-common.c:120
+#: ../panels/info/cc-info-panel.c:441
+#: ../panels/network/cc-network-panel.c:1132
+#: ../panels/network/panel-common.c:107 ../panels/network/panel-common.c:161
 msgid "Unknown"
 msgstr "Desconocido"
 
@@ -1358,10 +1365,9 @@ msgid "_Software"
 msgstr "Soft_ware"
 
 #: ../panels/info/info.ui.h:26
-#, fuzzy
 #| msgid "Other Media"
 msgid "_Other Media…"
-msgstr "Otros soportes"
+msgstr "_Otros soportes…"
 
 #: ../panels/info/info.ui.h:27
 msgid "_Never prompt or start programs on media insertion"
@@ -1551,76 +1557,66 @@ msgid "Disabled"
 msgstr "Desactivado"
 
 #: ../panels/keyboard/cc-keyboard-option.c:255
-#, fuzzy
 #| msgid "Left Half"
 msgid "Left Shift"
-msgstr "Mitad izquierda"
+msgstr "Mayús izquierda"
 
 #: ../panels/keyboard/cc-keyboard-option.c:256
-#, fuzzy
 #| msgid "Left Half"
 msgid "Left Alt"
-msgstr "Mitad izquierda"
+msgstr "Alt izquierda"
 
 #: ../panels/keyboard/cc-keyboard-option.c:257
-#, fuzzy
 #| msgid "Left Half"
 msgid "Left Ctrl"
-msgstr "Mitad izquierda"
+msgstr "Ctrl derecho"
 
 #: ../panels/keyboard/cc-keyboard-option.c:258
-#, fuzzy
 #| msgid "Right Half"
 msgid "Right Shift"
-msgstr "Mitad derecha"
+msgstr "Mayús derecha"
 
 #: ../panels/keyboard/cc-keyboard-option.c:259
-#, fuzzy
 #| msgid "Right Half"
 msgid "Right Alt"
-msgstr "Mitad derecha"
+msgstr "Alt derecha"
 
 #: ../panels/keyboard/cc-keyboard-option.c:260
-#, fuzzy
 #| msgid "Right Half"
 msgid "Right Ctrl"
-msgstr "Mitad derecha"
+msgstr "Ctrl derecha"
 
 #: ../panels/keyboard/cc-keyboard-option.c:261
-#, fuzzy
 #| msgid "Left Half"
 msgid "Left Alt+Shift"
-msgstr "Mitad izquierda"
+msgstr "Alt izquierda+Mayús"
 
 #: ../panels/keyboard/cc-keyboard-option.c:262
-#, fuzzy
 #| msgid "Right Half"
 msgid "Right Alt+Shift"
-msgstr "Mitad derecha"
+msgstr "Alt derecha+Mayús"
 
 #: ../panels/keyboard/cc-keyboard-option.c:263
 msgid "Left Ctrl+Shift"
-msgstr ""
+msgstr "Ctrl izquierdo +Mayús"
 
 #: ../panels/keyboard/cc-keyboard-option.c:264
-#, fuzzy
 #| msgid "Right Half"
 msgid "Right Ctrl+Shift"
-msgstr "Mitad derecha"
+msgstr "Ctrl derecha+Mayús"
 
 #: ../panels/keyboard/cc-keyboard-option.c:265
 msgid "Left+Right Shift"
-msgstr ""
+msgstr "Izquierda+Mayús derecha"
 
 #: ../panels/keyboard/cc-keyboard-option.c:266
-#, fuzzy
 #| msgid "Left Ring"
 msgid "Left+Right Alt"
-msgstr "Anillo izquierdo"
+msgstr "Izquierda+Alt derecha"
 
 #: ../panels/keyboard/cc-keyboard-option.c:267
 msgid "Left+Right Ctrl"
-msgstr ""
+msgstr "Izquierda+Ctrl derecho"
 
 #: ../panels/keyboard/cc-keyboard-option.c:268
 msgid "Alt+Shift"
@@ -1814,7 +1810,6 @@ msgid "_Reassign"
 msgstr "_Reasignar"
 
 #: ../panels/mouse/cc-mouse-panel.c:123
-#| msgid "_Test Your Settings"
 msgid "Test Your _Settings"
 msgstr "_Probar su configuración"
 
@@ -1934,26 +1929,35 @@ msgstr "Una sola pulsación, botón secundario"
 
 #. TRANSLATORS: this is to disable the radio hardware in the
 #. * network panel
-#: ../panels/network/cc-network-panel.c:336
+#: ../panels/network/cc-network-panel.c:338
 msgid "Air_plane Mode"
 msgstr "Modo a_vión"
 
-#: ../panels/network/cc-network-panel.c:869
+#: ../panels/network/cc-network-panel.c:879
 msgid "Network proxy"
 msgstr "Proxy de la red"
 
-#: ../panels/network/cc-network-panel.c:1048 ../panels/network/net-vpn.c:280
+#: ../panels/network/cc-network-panel.c:1058 ../panels/network/net-vpn.c:280
 #, c-format
 msgid "%s VPN"
 msgstr "VPN «%s»"
 
+#: ../panels/network/cc-network-panel.c:1128
+#: ../panels/network/connection-editor/net-connection-editor.c:584
+msgid "Bond"
+msgstr ""
+
+#: ../panels/network/cc-network-panel.c:1130
+#: ../panels/network/connection-editor/net-connection-editor.c:588
+msgid "VLAN"
+msgstr "VLAN"
+
 #. TRANSLATORS: the user is running a NM that is not API compatible
-#: ../panels/network/cc-network-panel.c:1181
+#: ../panels/network/cc-network-panel.c:1202
 msgid "The system network services are not compatible with this version."
 msgstr "Los servicios de red del sistema no son compatibles con esta versión."
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:1
-#| msgid "Security"
 msgid "802.1x _Security"
 msgstr "_Seguridad 802.1x"
 
@@ -1967,10 +1971,9 @@ msgstr "Identidad anóni_ma"
 
 #: ../panels/network/connection-editor/8021x-security-page.ui.h:4
 #: ../panels/network/connection-editor/security-page.ui.h:4
-#, fuzzy
 #| msgid "Authenticating"
 msgid "Inner _authentication"
-msgstr "Autenticando"
+msgstr "Autenticación i_nterna"
 
 #: ../panels/network/connection-editor/ce-page-8021x-security.c:108
 #: ../panels/network/connection-editor/ce-page-security.c:455
@@ -2081,7 +2084,7 @@ msgstr "Excelente"
 #: ../panels/network/connection-editor/ce-page-wifi.c:243
 #: ../panels/network/network-wifi.ui.h:59
 msgid "Identity"
-msgstr ""
+msgstr "Identidad"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:183
 #: ../panels/network/connection-editor/ce-page-ip4.c:419
@@ -2104,24 +2107,19 @@ msgstr "Servidor"
 #. Translators: Please see http://en.wikipedia.org/wiki/Metrics_(networking)
 #: ../panels/network/connection-editor/ce-page-ip4.c:426
 #: ../panels/network/connection-editor/ce-page-ip6.c:430
-#, fuzzy
 #| msgid "Metric"
 msgctxt "network parameters"
 msgid "Metric"
-msgstr "Métrico"
+msgstr "Métrica"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:579
 #: ../panels/network/network-wifi.ui.h:26
-#| msgctxt "Automatically generated profile"
-#| msgid "Automatic"
 msgid "Automatic (DHCP)"
 msgstr "Automático (DHCP)"
 
 #: ../panels/network/connection-editor/ce-page-ip4.c:583
 #: ../panels/network/connection-editor/ce-page-ip6.c:585
 #: ../panels/network/network-wifi.ui.h:25
-#| msgctxt "proxy method"
-#| msgid "Manual"
 msgid "Manual"
 msgstr "Manual"
 
@@ -2145,13 +2143,10 @@ msgstr "Prefijo"
 #: ../panels/network/connection-editor/ip4-page.ui.h:4
 #: ../panels/network/connection-editor/ip6-page.ui.h:4
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:2
-#| msgctxt "Automatically generated profile"
-#| msgid "Automatic"
 msgid "Automatic"
 msgstr "Automático"
 
 #: ../panels/network/connection-editor/ce-page-ip6.c:581
-#| msgid "A_utomatic Login"
 msgid "Automatic, DHCP only"
 msgstr "Automático, DHCP únicamente"
 
@@ -2166,7 +2161,6 @@ msgid "Reset"
 msgstr "Reiniciar"
 
 #: ../panels/network/connection-editor/ce-page-security.c:250
-#| msgid "None"
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Ninguna"
@@ -2193,24 +2187,19 @@ msgid "WPA & WPA2 Personal"
 msgstr "WPA y WPA2 personal"
 
 #: ../panels/network/connection-editor/ce-page-security.c:337
-#| msgid "Enterprise"
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA y WPA2 enterprise"
 
 #: ../panels/network/connection-editor/ce-page.c:502
-#| msgctxt "Automatically generated profile"
-#| msgid "Automatic"
 msgid "automatic"
 msgstr "automático"
 
 #: ../panels/network/connection-editor/connection-editor.ui.h:1
-#| msgid "Supply"
 msgid "_Apply"
 msgstr "_Aplicar"
 
 #: ../panels/network/connection-editor/details-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:2
-#| msgid "Strength"
 msgid "Signal Strength"
 msgstr "Fortaleza de la señal"
 
@@ -2222,7 +2211,7 @@ msgstr "Velocidad de conexión"
 #: ../panels/network/connection-editor/details-page.ui.h:4
 #: ../panels/network/net-device-ethernet.c:159
 #: ../panels/network/network-simple.ui.h:2
-#: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:643
+#: ../panels/network/network-wifi.ui.h:5 ../panels/network/panel-common.c:684
 msgid "IPv4 Address"
 msgstr "Dirección IPv4"
 
@@ -2231,7 +2220,7 @@ msgstr "Dirección IPv4"
 #: ../panels/network/net-device-ethernet.c:164
 #: ../panels/network/network-mobile.ui.h:4
 #: ../panels/network/network-simple.ui.h:3
-#: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:644
+#: ../panels/network/network-wifi.ui.h:6 ../panels/network/panel-common.c:685
 msgid "IPv6 Address"
 msgstr "Dirección IPv6"
 
@@ -2261,10 +2250,9 @@ msgid "DNS"
 msgstr "DNS"
 
 #: ../panels/network/connection-editor/details-page.ui.h:9
-#, fuzzy
 #| msgid "Last used"
 msgid "Last Used"
-msgstr "Usada última vez"
+msgstr "Usada por última vez"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:2
 msgid "Twisted Pair (TP)"
@@ -2283,35 +2271,29 @@ msgid "Media Independent Interface (MII)"
 msgstr "Interfaz independiente de medios (MII)"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:6
-#| msgid "%d Mb/s"
 msgid "10 Mb/s"
 msgstr "10 Mb/s"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:7
-#| msgid "%d Mb/s"
 msgid "100 Mb/s"
 msgstr "100 Mb/s"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:8
-#| msgid "%i Gb/s"
 msgid "1 Gb/s"
 msgstr "1 Gb/s"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:9
-#| msgid "%i Gb/s"
 msgid "10 Gb/s"
 msgstr "10 Gb/s"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:10
 #: ../panels/network/connection-editor/vpn-page.ui.h:1
-#| msgid "_Name:"
 msgid "_Name"
 msgstr "_Nombre"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:11
 #: ../panels/network/connection-editor/wifi-page.ui.h:4
 #: ../panels/network/network-wifi.ui.h:49
-#| msgid "_Address:"
 msgid "_MAC Address"
 msgstr "Dirección _MAC"
 
@@ -2321,13 +2303,11 @@ msgstr "M_TU"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:13
 #: ../panels/network/connection-editor/wifi-page.ui.h:5
-#| msgid "_Address:"
 msgid "_Cloned Address"
 msgstr "Dirección _clonada"
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:14
 #: ../panels/network/connection-editor/wifi-page.ui.h:6
-#| msgid "Set time automatically"
 msgid "Connect _automatically"
 msgstr "Conectar _automáticamente"
 
@@ -2336,8 +2316,6 @@ msgid "Make available to other _users"
 msgstr ""
 
 #: ../panels/network/connection-editor/ethernet-page.ui.h:16
-#| msgid "%u byte"
-#| msgid_plural "%u bytes"
 msgid "bytes"
 msgstr "bytes"
 
@@ -2349,7 +2327,6 @@ msgstr "IPv_4"
 #: ../panels/network/connection-editor/ip4-page.ui.h:2
 #: ../panels/network/connection-editor/ip6-page.ui.h:2
 #: ../panels/network/network-wifi.ui.h:24
-#| msgid "_Address:"
 msgid "_Addresses"
 msgstr "_Direcciones"
 
@@ -2371,13 +2348,11 @@ msgid "IPv_6"
 msgstr "IPv_6"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:267
-#, fuzzy
 #| msgid "Bluetooth connection failed"
 msgid "Unable to open connection editor"
-msgstr "Falló la conexión Bluetooth"
+msgstr "No se pudo abrir el editor de conexiones"
 
 #: ../panels/network/connection-editor/net-connection-editor.c:282
-#| msgid "Save Profile"
 msgid "New Profile"
 msgstr "Perfil nuevo"
 
@@ -2392,31 +2367,20 @@ msgstr "_Añadir"
 msgid "VPN"
 msgstr "VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:584
-msgid "Bond"
-msgstr ""
-
-#: ../panels/network/connection-editor/net-connection-editor.c:585
+#: ../panels/network/connection-editor/net-connection-editor.c:586
 msgid "Bridge"
 msgstr "Puente"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:586
-msgid "VLAN"
-msgstr "VLAN"
-
-#: ../panels/network/connection-editor/net-connection-editor.c:736
-#, fuzzy
+#: ../panels/network/connection-editor/net-connection-editor.c:738
 #| msgid "Could not load ui: %s"
 msgid "Could not load VPN plugins"
-msgstr "No se pudo cargar la IU: %s"
+msgstr "No se pudieron cargar los complementos de VPN"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:800
-#| msgid "Import File…"
+#: ../panels/network/connection-editor/net-connection-editor.c:802
 msgid "Import from file…"
 msgstr "Importar desde un archivo…"
 
-#: ../panels/network/connection-editor/net-connection-editor.c:867
-#| msgid "Add new connection"
+#: ../panels/network/connection-editor/net-connection-editor.c:869
 msgid "Add Network Connection"
 msgstr "Añadir conexión de red"
 
@@ -2426,9 +2390,8 @@ msgid "_Reset"
 msgstr "_Reiniciar"
 
 #: ../panels/network/connection-editor/reset-page.ui.h:2
-#: ../panels/network/net-device-wifi.c:1402
+#: ../panels/network/net-device-wifi.c:1404
 #: ../panels/network/network-wifi.ui.h:54
-#| msgid "Forget"
 msgid "_Forget"
 msgstr "_Olvidar"
 
@@ -2446,12 +2409,10 @@ msgstr ""
 
 #: ../panels/network/connection-editor/security-page.ui.h:1
 #: ../panels/network/network-wifi.ui.h:14
-#| msgid "Security"
 msgid "S_ecurity"
 msgstr "S_eguridad"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:205
-#| msgid "Configuring connection"
 msgid "Cannot import VPN connection"
 msgstr "No se puede importar la conexión VPN"
 
@@ -2465,19 +2426,17 @@ msgid ""
 msgstr ""
 
 #: ../panels/network/connection-editor/vpn-helpers.c:242
-#| msgid "Select your photo"
 msgid "Select file to import"
 msgstr "Seleccione el archivo que importar"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:294
 #, c-format
-#| msgid "A user with name '%s' already exists."
 msgid "A file named \"%s\" already exists."
 msgstr "Ya existe un archivo llamado «%s»."
 
 #: ../panels/network/connection-editor/vpn-helpers.c:296
 msgid "_Replace"
-msgstr ""
+msgstr "_Reemplazar"
 
 #: ../panels/network/connection-editor/vpn-helpers.c:298
 #, c-format
@@ -2516,14 +2475,13 @@ msgstr "_BSSID"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:3
 #: ../panels/network/network-wifi.ui.h:16
-#, fuzzy
 #| msgid "_Forget Network"
 msgid "My Home Network"
-msgstr "_Olvidar red"
+msgstr "Mi red privada"
 
 #: ../panels/network/connection-editor/wifi-page.ui.h:7
 msgid "Make available to _other users"
-msgstr ""
+msgstr "Hacer disponible para _otros usuarios"
 
 #: ../panels/network/gnome-network-panel.desktop.in.in.h:1
 #: ../panels/network/network-mobile.ui.h:7
@@ -2545,8 +2503,7 @@ msgstr ""
 msgid "Bond slaves"
 msgstr "Asociar esclavos"
 
-#: ../panels/network/net-device-bridge.c:77
-#, fuzzy
+#: ../panels/network/net-device-bridge.c:79
 #| msgid "Bond slaves"
 msgid "Bridge slaves"
 msgstr "Asociar esclavos"
@@ -2568,7 +2525,7 @@ msgstr "ayer"
 
 #: ../panels/network/net-device-ethernet.c:162
 #: ../panels/network/network-mobile.ui.h:3
-#: ../panels/network/panel-common.c:646 ../panels/network/panel-common.c:648
+#: ../panels/network/panel-common.c:687 ../panels/network/panel-common.c:689
 #: ../panels/printers/printers.ui.h:13
 msgid "IP Address"
 msgstr "Dirección IP"
@@ -2580,7 +2537,6 @@ msgstr "Usada última vez"
 
 #: ../panels/network/net-device-ethernet.c:477
 #, c-format
-#| msgid "_Profile:"
 msgid "Profile %d"
 msgstr "Perfil %d"
 
@@ -2588,7 +2544,7 @@ msgstr "Perfil %d"
 msgid "Add new connection"
 msgstr "Añadir una conexión nueva"
 
-#: ../panels/network/net-device-wifi.c:1123
+#: ../panels/network/net-device-wifi.c:1125
 msgid ""
 "If you have a connection to the Internet other than wireless, you can set up "
 "a wireless hotspot to share the connection with others."
@@ -2596,12 +2552,12 @@ msgstr ""
 "Si tiene otra conexión a Internet aparte de la inalámbrica, puede configurar "
 "un «hotspot» inalámbrico para compartir su conexión a Internet con otros."
 
-#: ../panels/network/net-device-wifi.c:1127
+#: ../panels/network/net-device-wifi.c:1129
 #, c-format
 msgid "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
 msgstr "Cambiar al «hotspot» inalámbrico le desconectará de <b>%s</b>."
 
-#: ../panels/network/net-device-wifi.c:1131
+#: ../panels/network/net-device-wifi.c:1133
 msgid ""
 "It is not possible to access the Internet through your wireless while the "
 "hotspot is active."
@@ -2609,16 +2565,15 @@ msgstr ""
 "No es posible acceder a Internet usando la conexión inalámbrica mientras el "
 "«hotspot» está activado."
 
-#: ../panels/network/net-device-wifi.c:1205
+#: ../panels/network/net-device-wifi.c:1207
 msgid "Stop hotspot and disconnect any users?"
 msgstr "¿Detener el «hotspot» y desconectar a los usuarios?"
 
-#: ../panels/network/net-device-wifi.c:1208
+#: ../panels/network/net-device-wifi.c:1210
 msgid "_Stop Hotspot"
 msgstr "_Detener «hotspot»"
 
-#: ../panels/network/net-device-wifi.c:1398
-#, fuzzy
+#: ../panels/network/net-device-wifi.c:1400
 #| msgid ""
 #| "Network details for %s including password and any custom configuration "
 #| "will be lost."
@@ -2626,17 +2581,16 @@ msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
 msgstr ""
-"Se perderán los detalles de la red %s, incluyendo la contraseña y cualquier "
-"configuración personalizada."
+"Se perderán los detalles de las redes seleccionadas, incluyendo la "
+"contraseña y cualquier configuración personalizada."
 
-#: ../panels/network/net-device-wifi.c:1703
+#: ../panels/network/net-device-wifi.c:1705
 #: ../panels/user-accounts/data/user-accounts-dialog.ui.h:14
 msgid "History"
 msgstr "Histórico"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: ../panels/network/net-device-wifi.c:1715
-#| msgid "Forget"
+#: ../panels/network/net-device-wifi.c:1717
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Olvidar"
@@ -2662,7 +2616,6 @@ msgid "Proxy"
 msgstr "Proxy"
 
 #: ../panels/network/network-ethernet.ui.h:1
-#| msgid "Add profile"
 msgid "_Add Profile…"
 msgstr "_Añadir perfil…"
 
@@ -2755,13 +2708,11 @@ msgid "Username"
 msgstr "Nombre de usuario"
 
 #: ../panels/network/network-wifi.ui.h:1
-#, fuzzy
 #| msgid "A_utomatic Login"
 msgid "Automatic _Connect"
-msgstr "_Inicio de sesión automático"
+msgstr "_Conectar automáticamente"
 
 #: ../panels/network/network-wifi.ui.h:11
-#| msgid "Details"
 msgid "details"
 msgstr "detalles"
 
@@ -2785,15 +2736,13 @@ msgid "blablabla"
 msgstr ""
 
 #: ../panels/network/network-wifi.ui.h:20
-#| msgid "Show Password"
 msgid "Show P_assword"
 msgstr "Mostrar contr_aseña"
 
 #: ../panels/network/network-wifi.ui.h:21
-#, fuzzy
 #| msgid "Failed to delete user"
 msgid "Make available to other users"
-msgstr "Falló al eliminar el usuario"
+msgstr "Hacer disponible para el resto de usuarios"
 
 #: ../panels/network/network-wifi.ui.h:22
 msgid "identity"
@@ -2808,7 +2757,6 @@ msgid "Link-local only"
 msgstr "Solo enlace local"
 
 #: ../panels/network/network-wifi.ui.h:29
-#| msgid "Share with these users:"
 msgid "Shared with other computers"
 msgstr "Compartir con estos usuarios"
 
@@ -2837,7 +2785,6 @@ msgid ""
 msgstr ""
 
 #: ../panels/network/network-wifi.ui.h:44
-#| msgid "Cannot remove automatically added profile"
 msgid "_Ignore automatically obtained routes"
 msgstr "_Ignorar rutas obtenidas automáticamente"
 
@@ -2858,8 +2805,6 @@ msgid "00:24:16:31:8G:7A"
 msgstr "00:24:16:31:8G:7A"
 
 #: ../panels/network/network-wifi.ui.h:52
-#| msgctxt "category"
-#| msgid "Hardware"
 msgid "hardware"
 msgstr "hardware"
 
@@ -2868,20 +2813,22 @@ msgid ""
 "Reset the settings for this connection to their defaults, but remember as a "
 "preferred connection."
 msgstr ""
+"Restablecer la configuración de esta conexión a sus valores predeterminados, "
+"pero recordarla como una conexión favorita."
 
 #: ../panels/network/network-wifi.ui.h:56
 msgid ""
 "Remove all details relating to this network and do not try to automatically "
 "connect to it."
 msgstr ""
+"Quitar todos los detalles relativos a esta red y no volver a intentar "
+"conectarse automáticamente a ella."
 
 #: ../panels/network/network-wifi.ui.h:57
 msgid "reset"
 msgstr ""
 
 #: ../panels/network/network-wifi.ui.h:62
-#| msgctxt "category"
-#| msgid "Hardware"
 msgid "Hardware"
 msgstr "Hardware"
 
@@ -2893,7 +2840,8 @@ msgstr "Punto de acceso Wi-Fi"
 msgid "_Turn On"
 msgstr "_Activar"
 
-#: ../panels/network/network-wifi.ui.h:66
+#. TRANSLATORS: device type
+#: ../panels/network/network-wifi.ui.h:66 ../panels/network/panel-common.c:87
 msgid "Wi-Fi"
 msgstr "Inalámbrica"
 
@@ -2906,7 +2854,6 @@ msgid "_Connect to Hidden Network…"
 msgstr "Conectar a una red oculta…"
 
 #: ../panels/network/network-wifi.ui.h:69
-#| msgid "History"
 msgid "_History"
 msgstr "_Histórico"
 
@@ -2930,294 +2877,309 @@ msgstr "Tipo de seguridad"
 msgid "Security key"
 msgstr "Clave de seguridad"
 
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:83
+msgid "Wired"
+msgstr "Cableada"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:94
+msgid "Mobile broadband"
+msgstr "Banda ancha móvil"
+
+#. TRANSLATORS: device type
+#: ../panels/network/panel-common.c:103
+msgid "Mesh"
+msgstr "Malla"
+
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:124
+#: ../panels/network/panel-common.c:165
 msgid "Ad-hoc"
 msgstr "Ad-hoc"
 
 #. TRANSLATORS: AP type
-#: ../panels/network/panel-common.c:128
+#: ../panels/network/panel-common.c:169
 msgid "Infrastructure"
 msgstr "Infraestructura"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:152 ../panels/network/panel-common.c:215
+#: ../panels/network/panel-common.c:193 ../panels/network/panel-common.c:256
 msgid "Status unknown"
 msgstr "Estado desconocido"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:156
+#: ../panels/network/panel-common.c:197
 msgid "Unmanaged"
 msgstr "Sin gestionar"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:161
+#: ../panels/network/panel-common.c:202
 msgid "Firmware missing"
 msgstr "falta el «firmware»"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:165
+#: ../panels/network/panel-common.c:206
 msgid "Cable unplugged"
 msgstr "Cable desconectado"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:168
+#: ../panels/network/panel-common.c:209
 msgid "Unavailable"
 msgstr "No disponible"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:179 ../panels/network/panel-common.c:221
+#: ../panels/network/panel-common.c:220 ../panels/network/panel-common.c:262
 msgid "Connecting"
 msgstr "Conectando"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:183 ../panels/network/panel-common.c:225
+#: ../panels/network/panel-common.c:224 ../panels/network/panel-common.c:266
 msgid "Authentication required"
 msgstr "Se necesita autenticación"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:187 ../panels/network/panel-common.c:229
+#: ../panels/network/panel-common.c:228 ../panels/network/panel-common.c:270
 msgid "Connected"
 msgstr "Conectado"
 
 #. TRANSLATORS: device status
-#: ../panels/network/panel-common.c:191
+#: ../panels/network/panel-common.c:232
 msgid "Disconnecting"
 msgstr "Desconectando"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:195 ../panels/network/panel-common.c:233
+#: ../panels/network/panel-common.c:236 ../panels/network/panel-common.c:274
 msgid "Connection failed"
 msgstr "Falló la conexión"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:199 ../panels/network/panel-common.c:241
+#: ../panels/network/panel-common.c:240 ../panels/network/panel-common.c:282
 msgid "Status unknown (missing)"
 msgstr "Estado desconocido (ausente)"
 
 #. TRANSLATORS: VPN status
-#: ../panels/network/panel-common.c:237
+#: ../panels/network/panel-common.c:278
 msgid "Not connected"
 msgstr "No conectado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:261
+#: ../panels/network/panel-common.c:302
 msgid "Configuration failed"
 msgstr "Falló la configuración"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:265
+#: ../panels/network/panel-common.c:306
 msgid "IP configuration failed"
 msgstr "Falló la configuración IP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:269
+#: ../panels/network/panel-common.c:310
 msgid "IP configuration expired"
 msgstr "La configuración IP ha expirado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:273
+#: ../panels/network/panel-common.c:314
 msgid "Secrets were required, but not provided"
 msgstr "Se necesitan secretos, pero no se han proporcionado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:277
+#: ../panels/network/panel-common.c:318
 msgid "802.1x supplicant disconnected"
 msgstr "Suplicante de 802.1x desconectado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:281
+#: ../panels/network/panel-common.c:322
 msgid "802.1x supplicant configuration failed"
 msgstr "Falló la configuración del suplicante de 802.1x"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:285
+#: ../panels/network/panel-common.c:326
 msgid "802.1x supplicant failed"
 msgstr "Falló el suplicante de 802.1x"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:289
+#: ../panels/network/panel-common.c:330
 msgid "802.1x supplicant took too long to authenticate"
 msgstr "El suplicante de 802.1x tardó mucho tiempo en autenticarse"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:293
+#: ../panels/network/panel-common.c:334
 msgid "PPP service failed to start"
 msgstr "Falló al iniciar el servicio de PPP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:297
+#: ../panels/network/panel-common.c:338
 msgid "PPP service disconnected"
 msgstr "Servicio PPP desconectado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:301
+#: ../panels/network/panel-common.c:342
 msgid "PPP failed"
 msgstr "PPP falló"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:305
+#: ../panels/network/panel-common.c:346
 msgid "DHCP client failed to start"
 msgstr "Falló al iniciar el cliente de DHCP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:309
+#: ../panels/network/panel-common.c:350
 msgid "DHCP client error"
 msgstr "Error del cliente de DHCP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:313
+#: ../panels/network/panel-common.c:354
 msgid "DHCP client failed"
 msgstr "Falló el cliente de DHCP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:317
+#: ../panels/network/panel-common.c:358
 msgid "Shared connection service failed to start"
 msgstr "Falló al iniciar el servicio de conexión compartida"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:321
+#: ../panels/network/panel-common.c:362
 msgid "Shared connection service failed"
 msgstr "Falló el servicio de conexión compartida"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:325
+#: ../panels/network/panel-common.c:366
 msgid "AutoIP service failed to start"
 msgstr "Falló al iniciar el servicio de AutoIP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:329
+#: ../panels/network/panel-common.c:370
 msgid "AutoIP service error"
 msgstr "Error del servicio de AutoIP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:333
+#: ../panels/network/panel-common.c:374
 msgid "AutoIP service failed"
 msgstr "Falló el servicio AutoIP"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:337
+#: ../panels/network/panel-common.c:378
 msgid "Line busy"
 msgstr "Línea ocupada"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:341
+#: ../panels/network/panel-common.c:382
 msgid "No dial tone"
 msgstr "No hay tono de llamada"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:345
+#: ../panels/network/panel-common.c:386
 msgid "No carrier could be established"
 msgstr "No se pudo establecer el portador"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:349
+#: ../panels/network/panel-common.c:390
 msgid "Dialing request timed out"
 msgstr "Expiró el tiempo de solicitud de llamada"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:353
+#: ../panels/network/panel-common.c:394
 msgid "Dialing attempt failed"
 msgstr "Intento de llamada fallido"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:357
+#: ../panels/network/panel-common.c:398
 msgid "Modem initialization failed"
 msgstr "Falló la inicialización del módem"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:361
+#: ../panels/network/panel-common.c:402
 msgid "Failed to select the specified APN"
 msgstr "Falló al seleccionar el NPA especificado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:365
+#: ../panels/network/panel-common.c:406
 msgid "Not searching for networks"
 msgstr "No se están buscando redes"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:369
+#: ../panels/network/panel-common.c:410
 msgid "Network registration denied"
 msgstr "Registro de la red denegado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:373
+#: ../panels/network/panel-common.c:414
 msgid "Network registration timed out"
 msgstr "Expiró el tiempo de registro de la red"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:377
+#: ../panels/network/panel-common.c:418
 msgid "Failed to register with the requested network"
 msgstr "Falló al registrarse con la red solicitada"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:381
+#: ../panels/network/panel-common.c:422
 msgid "PIN check failed"
 msgstr "Falló la comprobación de l PIN"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:385
+#: ../panels/network/panel-common.c:426
 msgid "Firmware for the device may be missing"
 msgstr "Es posible que falte el firmware del dispositivo"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:389
+#: ../panels/network/panel-common.c:430
 msgid "Connection disappeared"
 msgstr "La conexión ha desaparecido"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:393
+#: ../panels/network/panel-common.c:434
 msgid "Carrier/link changed"
 msgstr "Ha cambiado el portador/enlace"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:397
+#: ../panels/network/panel-common.c:438
 msgid "Existing connection was assumed"
 msgstr "Se asumió una conexión existente"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:401
+#: ../panels/network/panel-common.c:442
 msgid "Modem not found"
 msgstr "Módem no encontrado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:405
+#: ../panels/network/panel-common.c:446
 msgid "Bluetooth connection failed"
 msgstr "Falló la conexión Bluetooth"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:409
+#: ../panels/network/panel-common.c:450
 msgid "SIM Card not inserted"
 msgstr "Tarjeta SIM no insertada"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:413
+#: ../panels/network/panel-common.c:454
 msgid "SIM Pin required"
 msgstr "Se necesita el PIN de la SIM"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:417
+#: ../panels/network/panel-common.c:458
 msgid "SIM Puk required"
 msgstr "Se necesita el PUK de la SIM"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:421
+#: ../panels/network/panel-common.c:462
 msgid "SIM wrong"
 msgstr "SIM errónea"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:425
+#: ../panels/network/panel-common.c:466
 msgid "InfiniBand device does not support connected mode"
 msgstr "El dispositivo InfiniBand no soporta el modo conectado"
 
 #. TRANSLATORS: device status reason
-#: ../panels/network/panel-common.c:429
+#: ../panels/network/panel-common.c:470
 msgid "Connection dependency failed"
 msgstr "Falló la dependencia de la conexión"
 
@@ -3233,7 +3195,6 @@ msgid "MSCHAPv2"
 msgstr "MSCHAPv2"
 
 #: ../panels/network/wireless-security/eap-method-fast.c:399
-#| msgid "Choose a Folder"
 msgid "Choose a PAC file..."
 msgstr "Elegir un archivo PAC…"
 
@@ -3242,17 +3203,15 @@ msgid "PAC files (*.pac)"
 msgstr "Archivos PAC (*.pac)"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:2
-#| msgid "All files"
 msgid "PAC _file"
 msgstr "Archivo _PAC"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:3
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:7
 #: ../panels/network/wireless-security/eap-method-ttls.ui.h:4
-#, fuzzy
 #| msgid "<b>_Use authentication</b>"
 msgid "_Inner authentication"
-msgstr "<b>_Usar autenticación</b>"
+msgstr "Autenticación i_nterna"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:4
 msgid "PAC pro_visioning"
@@ -3271,16 +3230,15 @@ msgstr " "
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:6
 msgid "Anonymous"
-msgstr ""
+msgstr "Anónimo"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:7
-#| msgid "Authenticating"
 msgid "Authenticated"
 msgstr "Autenticado"
 
 #: ../panels/network/wireless-security/eap-method-fast.ui.h:8
 msgid "Both"
-msgstr ""
+msgstr "Ambos"
 
 #: ../panels/network/wireless-security/eap-method-leap.ui.h:1
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:1
@@ -3294,13 +3252,11 @@ msgstr "Nombre de _usuario"
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:6
 #: ../panels/network/wireless-security/ws-leap.ui.h:3
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:3
-#| msgid "_Show password"
 msgid "Sho_w password"
 msgstr "_Mostrar la contraseña"
 
 #: ../panels/network/wireless-security/eap-method-peap.c:263
 #: ../panels/network/wireless-security/wireless-security.c:385
-#| msgid "D55"
 msgid "MD5"
 msgstr "MD5"
 
@@ -3308,15 +3264,13 @@ msgstr "MD5"
 #: ../panels/network/wireless-security/eap-method-tls.c:434
 #: ../panels/network/wireless-security/eap-method-ttls.c:350
 msgid "Choose a Certificate Authority certificate..."
-msgstr ""
+msgstr "Elija un certificado CA…"
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:3
-#| msgid "Version %s"
 msgid "Version 0"
 msgstr "Versión 0"
 
 #: ../panels/network/wireless-security/eap-method-peap.ui.h:4
-#| msgid "Version %s"
 msgid "Version 1"
 msgstr "Versión 1"
 
@@ -3332,11 +3286,11 @@ msgstr "Versión _PEAP"
 
 #: ../panels/network/wireless-security/eap-method-simple.ui.h:3
 msgid "As_k for this password every time"
-msgstr ""
+msgstr "_Preguntar esta contraseña cada vez"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:260
 msgid "Unencrypted private keys are insecure"
-msgstr ""
+msgstr "Las claves privadas sin cifrar son inseguras"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:263
 msgid ""
@@ -3346,16 +3300,20 @@ msgid ""
 "\n"
 "(You can password-protect your private key with openssl)"
 msgstr ""
+"La clave privada seleccionada no parece estar protegida por una contraseña. "
+"Esto podría permitir que sus credenciales de seguridad se comprometiesen. "
+"Seleccione una clave privada protegida por contraseña.\n"
+"\n"
+"(Puede proteger su clave privada con una contraseña con openssl)"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:428
-#, fuzzy
 #| msgid "Set your personal information"
 msgid "Choose your personal certificate..."
-msgstr "Escriba su información personal"
+msgstr "Elija su certificado personal…"
 
 #: ../panels/network/wireless-security/eap-method-tls.c:440
 msgid "Choose your private key..."
-msgstr ""
+msgstr "Elija su clave privada…"
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:1
 msgid "I_dentity"
@@ -3363,20 +3321,17 @@ msgstr "I_dentidad"
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:2
 msgid "_User certificate"
-msgstr ""
+msgstr "Certificado del _usuario"
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:4
-#| msgid "Privacy"
 msgid "Private _key"
 msgstr "Clave pri_vada"
 
 #: ../panels/network/wireless-security/eap-method-tls.ui.h:5
-#| msgid "_Generate a password"
 msgid "_Private key password"
 msgstr "Contraseña de clave pri_vada"
 
 #: ../panels/network/wireless-security/eap-method-ttls.c:230
-#| msgid "WPA"
 msgid "PAP"
 msgstr "PAP"
 
@@ -3390,7 +3345,7 @@ msgstr "CHAP"
 
 #: ../panels/network/wireless-security/eap-method.c:275
 msgid "No Certificate Authority certificate chosen"
-msgstr ""
+msgstr "No se ha elegido ningún certificado CA"
 
 #: ../panels/network/wireless-security/eap-method.c:276
 msgid ""
@@ -3400,7 +3355,6 @@ msgid ""
 msgstr ""
 
 #: ../panels/network/wireless-security/eap-method.c:281
-#| msgid "_Ignore Hosts"
 msgid "Ignore"
 msgstr "Ignorar"
 
@@ -3410,7 +3364,7 @@ msgstr "Elija un certificado CA"
 
 #: ../panels/network/wireless-security/eap-method.c:645
 msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12)"
-msgstr ""
+msgstr "Claves privadas DER, PEM, o PKCS#12 (*.der, *.pem, *.p12)"
 
 #: ../panels/network/wireless-security/eap-method.c:648
 msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
@@ -3439,17 +3393,14 @@ msgstr "EAP protegido (PEAP)"
 #: ../panels/network/wireless-security/ws-dynamic-wep.ui.h:2
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:9
 #: ../panels/network/wireless-security/ws-wpa-eap.ui.h:2
-#| msgid "Authenticating"
 msgid "Au_thentication"
 msgstr "_Autenticación"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:1
-#| msgid "Default"
 msgid "1 (Default)"
 msgstr "1 (predeterminado)"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:2
-#| msgid "22"
 msgid "2"
 msgstr "2"
 
@@ -3458,23 +3409,20 @@ msgid "3"
 msgstr "3"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:4
-#| msgid "45"
 msgid "4"
 msgstr "4"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:5
-#| msgid "System"
 msgid "Open System"
 msgstr "Sistema abierto"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:6
-#| msgid "Shared Folders"
 msgid "Shared Key"
 msgstr "Clave compartida"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:7
 msgid "_Key"
-msgstr ""
+msgstr "_Clave"
 
 #: ../panels/network/wireless-security/ws-wep-key.ui.h:8
 msgid "Sho_w key"
@@ -3485,7 +3433,6 @@ msgid "WEP inde_x"
 msgstr "Ín_dice WEP"
 
 #: ../panels/network/wireless-security/ws-wpa-psk.ui.h:2
-#| msgid "_Type:"
 msgid "_Type"
 msgstr "_Tipo"
 
@@ -3818,10 +3765,9 @@ msgid "_Screen Brightness"
 msgstr "_Brillo de la pantalla"
 
 #: ../panels/power/cc-power-panel.c:1449
-#, fuzzy
 #| msgid "Suspend when inactive for"
 msgid "_Dim Screen when Inactive"
-msgstr "Suspender tras una inactividad de"
+msgstr "_Oscurecer la pantalla cuando esté inactiva"
 
 #: ../panels/power/cc-power-panel.c:1472
 msgid "_Mark As Inactive After"
@@ -3852,11 +3798,10 @@ msgid "Suspend & Power Off"
 msgstr "Suspender y apagar"
 
 #: ../panels/power/cc-power-panel.c:1784
-#, fuzzy
 #| msgctxt "proxy method"
 #| msgid "Automatic"
 msgid "_Automatic Suspend"
-msgstr "Automático"
+msgstr "Suspender _automáticamente"
 
 #: ../panels/power/cc-power-panel.c:1806
 msgid "When Battery Power is _Critical"
@@ -3915,11 +3860,10 @@ msgid "2 minutes"
 msgstr "2 minutos"
 
 #: ../panels/power/power.ui.h:10
-#, fuzzy
 #| msgctxt "proxy method"
 #| msgid "Automatic"
 msgid "Automatic Suspend"
-msgstr "Automático"
+msgstr "Suspender automáticamente"
 
 #: ../panels/power/power.ui.h:11 ../panels/privacy/privacy.ui.h:10
 msgid "_Close"
@@ -4562,7 +4506,7 @@ msgstr ""
 
 #: ../panels/privacy/privacy.ui.h:12
 msgid "Display _full name in top bar"
-msgstr ""
+msgstr "Mostrar el nombre _completo en la barra superior"
 
 #: ../panels/privacy/privacy.ui.h:13
 msgid "Display full name in _lock screen"
@@ -4625,6 +4569,8 @@ msgid ""
 "Remembering your history makes things easier to find again. These items are "
 "never shared over the network."
 msgstr ""
+"Recordar su histórico hace que sea más sencillo buscar las cosas de nuevo. "
+"Estos elementos nunca se comparten en la red."
 
 #: ../panels/privacy/privacy.ui.h:29
 msgid "Cl_ear Recent History"
@@ -4636,11 +4582,11 @@ msgstr "Usados _recientemente"
 
 #: ../panels/privacy/privacy.ui.h:31
 msgid "Retain _History"
-msgstr ""
+msgstr "Recordar _histórico"
 
 #: ../panels/privacy/privacy.ui.h:33
 msgid "The Screen Lock protects your privacy when you are away."
-msgstr ""
+msgstr "La pantalla de bloqueo protege"
 
 #: ../panels/privacy/privacy.ui.h:34
 msgid "Automatic Screen _Lock"
@@ -4678,7 +4624,7 @@ msgstr "Li_mpiar los archivos temporales automáticamente"
 
 #: ../panels/privacy/privacy.ui.h:43
 msgid "Purge _After"
-msgstr ""
+msgstr "Limpiar _después de"
 
 #: ../panels/region/gnome-region-panel.desktop.in.in.h:1
 msgid "Region & Language"
@@ -4694,18 +4640,16 @@ msgid "Language;Layout;Keyboard;Input;"
 msgstr "Idioma;Distribución;Teclado;Entrada;"
 
 #: ../panels/region/gnome-region-panel-formats.c:144
-#, fuzzy
 #| msgid "Imperial"
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Imperial"
 
 #: ../panels/region/gnome-region-panel-formats.c:146
-#, fuzzy
 #| msgid "Metric"
 msgctxt "measurement format"
 msgid "Metric"
-msgstr "Métrico"
+msgstr "Métrico"
 
 #: ../panels/region/gnome-region-panel-input-chooser.ui.h:1
 msgid "Select an input source"
@@ -4991,15 +4935,15 @@ msgstr "Compartir carpeta pública"
 
 #: ../panels/sharing/sharing.ui.h:4
 msgid "Only Receive From Trusted Devices"
-msgstr ""
+msgstr "Recibir sólo cde dispositivos de confianza"
 
 #: ../panels/sharing/sharing.ui.h:5
 msgid "Save Received Files to Downloads Folder"
-msgstr ""
+msgstr "Guardar los archivos recibidos en la carpeta de descargas"
 
 #: ../panels/sharing/sharing.ui.h:6
 msgid "Only share with Trusted Devices"
-msgstr ""
+msgstr "Compartir sólo con dispositivos de confianza"
 
 #: ../panels/sharing/sharing.ui.h:7
 msgid "Computer Name"
@@ -5015,11 +4959,11 @@ msgstr "Compartición multimedia"
 
 #: ../panels/sharing/sharing.ui.h:10
 msgid "Share Music, Photos and Videos with others on the current network."
-msgstr ""
+msgstr "Compartir música, fotos y vídeos con otros en la red actual."
 
 #: ../panels/sharing/sharing.ui.h:11
 msgid "Share Media On This Network"
-msgstr ""
+msgstr "Compartir multimedia en esta red"
 
 #: ../panels/sharing/sharing.ui.h:12
 msgid "Shared Folders"
@@ -5050,7 +4994,7 @@ msgstr ""
 
 #: ../panels/sharing/sharing.ui.h:19
 msgid "Share Public Folder On This Network"
-msgstr ""
+msgstr "Compartir la carpeta pública en esta red"
 
 #: ../panels/sharing/sharing.ui.h:20
 msgid "Require Password"
@@ -5070,6 +5014,8 @@ msgid ""
 "Allow remote users to connect using the Secure Shell command:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 msgstr ""
+"Permitir a los usuarios remotos conectar usando el comando de shell segura:\n"
+"<a href=\"ssh %s\">ssh %s</a>"
 
 #: ../panels/sharing/sharing.ui.h:26
 msgid "Screen Sharing"
@@ -5081,6 +5027,8 @@ msgid ""
 "Allow remote users to view or control your screen by connecting to: <a href="
 "\"vnc://%s\">vnc://%s</a>"
 msgstr ""
+"Permitir a los usuarios remotos ver o controlar su pantalla conectándose a: "
+"<a href=\"vnc://%s\">vnc://%s</a>"
 
 #: ../panels/sharing/sharing.ui.h:29
 msgid "Remote View"
@@ -6833,11 +6781,11 @@ msgstr "Mostrar la visión general"
 
 #: ../shell/control-center.c:68
 msgid "Search for the string"
-msgstr ""
+msgstr "Buscar la cadena"
 
 #: ../shell/control-center.c:69
 msgid "List possible panel names and exit"
-msgstr ""
+msgstr "Listar todos los nombres de paneles posibles y salir"
 
 #: ../shell/control-center.c:70 ../shell/control-center.c:71
 #: ../shell/control-center.c:72
@@ -7235,15 +7183,6 @@ msgstr "Todas las configuraciones"
 
 #~ msgid "Wireless"
 #~ msgstr "Inalámbrica"
-
-#~ msgid "Wired"
-#~ msgstr "Cableada"
-
-#~ msgid "Mobile broadband"
-#~ msgstr "Banda ancha móvil"
-
-#~ msgid "Mesh"
-#~ msgstr "Malla"
 
 #~ msgid "Remove Language"
 #~ msgstr "Quitar idioma"
