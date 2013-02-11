@@ -493,10 +493,8 @@ pp_jobs_dialog_new (GtkWindow            *parent,
   gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
 
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "jobs-title");
   title = g_strdup_printf (_("%s Active Jobs"), printer_name);
-  gtk_label_set_label (GTK_LABEL (widget), title);
+  gtk_window_set_title (GTK_WINDOW (dialog->dialog), title);
   g_free (title);
 
   populate_jobs_list (dialog);

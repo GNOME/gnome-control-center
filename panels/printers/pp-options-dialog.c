@@ -883,7 +883,6 @@ pp_options_dialog_new (GtkWindow            *parent,
                        gboolean              sensitive)
 {
   PpOptionsDialog *dialog;
-  GtkWidget       *widget;
   GError          *error = NULL;
   gchar           *objects[] = { "options-dialog", NULL };
   guint            builder_result;
@@ -930,11 +929,9 @@ pp_options_dialog_new (GtkWindow            *parent,
   g_signal_connect (dialog->dialog, "response", G_CALLBACK (options_dialog_response_cb), dialog);
   g_signal_connect (dialog->dialog, "size-allocate", G_CALLBACK (update_alignment_padding), dialog);
 
-  widget = (GtkWidget*)
-    gtk_builder_get_object (dialog->builder, "options-title");
   /* Translators: Options of given printer (e.g. "MyPrinter Options") */
   title = g_strdup_printf (_("%s Options"), printer_name);
-  gtk_label_set_label (GTK_LABEL (widget), title);
+  gtk_window_set_title (GTK_WINDOW (dialog->dialog), title);
   g_free (title);
 
   gtk_widget_show_all (GTK_WIDGET (dialog->dialog));
