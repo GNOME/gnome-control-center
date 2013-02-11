@@ -21,12 +21,28 @@ _gnome_control_center()
 			command_list="@PANELS@"
 		fi
 
-		# FIXME
-		# Add the argvs for some of the panels that
-		# support it, such as network
 		for i in --overview --version @PANELS@; do
 			if [ $i = $prev ]; then
-				command_list=""
+				case $i in
+				keyboard)
+					command_list="shortcuts typing"
+					;;
+				network)
+					# FIXME
+					# The first 3 commands need an object path like
+					# /org/freedesktop/NetworkManager/Devices/1
+					command_list="connect-3g connect-8021x-wifi show-device connect-hidden-wifi create-wifi"
+					;;
+				region)
+					command_list="formats language layouts system"
+					;;
+				sound)
+					command_list="applications effects hardware input outputs"
+					;;
+				*)
+					command_list=""
+					;;
+				esac
 			fi
 		done
 		;;
