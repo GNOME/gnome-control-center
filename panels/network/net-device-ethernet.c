@@ -334,6 +334,7 @@ add_row (NetDeviceEthernet *device, NMConnection *connection)
         gtk_container_add (GTK_CONTAINER (widget), image);
         gtk_widget_set_halign (widget, GTK_ALIGN_CENTER);
         gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
+        atk_object_set_name (gtk_widget_get_accessible (widget), _("Options…"));
         gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
         g_object_set_data (G_OBJECT (row), "edit", widget);
         g_object_set_data (G_OBJECT (widget), "row", row);
