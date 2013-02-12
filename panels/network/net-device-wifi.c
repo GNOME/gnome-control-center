@@ -1834,8 +1834,10 @@ populate_ap_list (NetDeviceWifi *device_wifi)
                         NMSetting *setting;
                         const GByteArray *ssid;
 
-                        if (connection_is_shared (connection))
+                        if (connection_is_shared (connection)) {
+                                connection = NULL;
                                 continue;
+                        }
 
                         setting = nm_connection_get_setting_by_name (connection, NM_SETTING_WIRELESS_SETTING_NAME);
                         ssid = nm_setting_wireless_get_ssid (NM_SETTING_WIRELESS (setting));
