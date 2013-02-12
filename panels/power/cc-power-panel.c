@@ -1478,7 +1478,7 @@ add_power_saving_section (CcPowerPanel *self)
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 50);
 
-  label = gtk_label_new (_("_Mark As Inactive After"));
+  label = gtk_label_new (_("_Blank Screen"));
   gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
   gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
   gtk_widget_set_margin_left (label, 20);
