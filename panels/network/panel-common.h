@@ -32,7 +32,6 @@ G_BEGIN_DECLS
 
 const gchar     *panel_device_to_icon_name                     (NMDevice *device,
                                                                 gboolean  symbolic);
-const gchar     *panel_device_to_localized_string              (NMDevice *device);
 const gchar     *panel_device_to_sortable_string               (NMDevice *device);
 const gchar     *panel_ap_mode_to_localized_string             (NM80211Mode mode);
 const gchar     *panel_vpn_state_to_localized_string           (NMVPNConnectionState type);
@@ -56,4 +55,3 @@ gchar           *panel_get_ip6_address_as_string               (NMIP6Config *con
 G_END_DECLS
 
 #endif /* PANEL_COMMON_H */
-

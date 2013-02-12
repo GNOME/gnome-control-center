@@ -30,9 +30,7 @@
 #include "nm-client.h"
 #include "nm-device.h"
 #include "nm-device-modem.h"
-#ifdef HAVE_NM_UNSTABLE
 #include "nm-ui-utils.h"
-#endif
 
 #include "net-device.h"
 #include "net-device-mobile.h"
@@ -486,7 +484,6 @@ cc_network_panel_get_devices (CcNetworkPanel *panel)
 static void
 panel_refresh_device_titles (CcNetworkPanel *panel)
 {
-#ifdef HAVE_NM_UNSTABLE
         GPtrArray *ndarray, *nmdarray;
         NetDevice **devices;
         NMDevice **nm_devices, *nm_device;
@@ -520,9 +517,7 @@ panel_refresh_device_titles (CcNetworkPanel *panel)
         g_free (titles);
         g_ptr_array_free (ndarray, TRUE);
         g_ptr_array_free (nmdarray, TRUE);
-#endif
 }
-
 
 static gboolean
 handle_argv_for_device (CcNetworkPanel *panel,
@@ -637,7 +632,6 @@ state_changed_cb (NMDevice *device,
 static gboolean
 panel_add_device (CcNetworkPanel *panel, NMDevice *device)
 {
-        const gchar *title;
         GtkListStore *liststore_devices;
         GtkTreeIter iter;
         NMDeviceType type;
@@ -668,9 +662,7 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                 device_g_type = NET_TYPE_DEVICE_WIFI;
                 break;
         case NM_DEVICE_TYPE_BOND:
-#ifdef HAVE_NM_UNSTABLE
         case NM_DEVICE_TYPE_BRIDGE:
-#endif
         case NM_DEVICE_TYPE_VLAN:
                 goto out;
         default:
@@ -679,7 +671,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
         }
 
         /* create device */
-        title = panel_device_to_localized_string (device);
         net_device = g_object_new (device_g_type,
                                    "panel", panel,
                                    "removable", FALSE,
@@ -688,7 +679,6 @@ panel_add_device (CcNetworkPanel *panel, NMDevice *device)
                                    "remote-settings", panel->priv->remote_settings,
                                    "nm-device", device,
                                    "id", nm_device_get_udi (device),
-                                   "title", title,
                                    NULL);
 
         /* add as a panel */
@@ -1097,10 +1087,8 @@ panel_add_virtual_device (CcNetworkPanel *panel, NMConnection *connection)
         connection_type = nm_setting_connection_get_connection_type (s_con);
         if (!strcmp (connection_type, NM_SETTING_BOND_SETTING_NAME))
                 device_g_type = NET_TYPE_DEVICE_BOND;
-#ifdef HAVE_NM_UNSTABLE
         else if (!strcmp (connection_type, NM_SETTING_BRIDGE_SETTING_NAME))
                 device_g_type = NET_TYPE_DEVICE_BRIDGE;
-#endif
         else
                 device_g_type = NET_TYPE_VIRTUAL_DEVICE;
 
@@ -1126,16 +1114,7 @@ panel_add_virtual_device (CcNetworkPanel *panel, NMConnection *connection)
 
         liststore_devices = GTK_LIST_STORE (gtk_builder_get_object (panel->priv->builder,
                                             "liststore_devices"));
-#ifdef HAVE_NM_UNSTABLE
         title = nma_utils_get_connection_device_name (connection);
-#else
-        if (!strcmp (connection_type, NM_SETTING_BOND_SETTING_NAME))
-                title = g_strdup (_("Bond"));
-        else if (!strcmp (connection_type, NM_SETTING_VLAN_SETTING_NAME))
-                title = g_strdup (_("VLAN"));
-        else
-                title = g_strdup (_("Unknown"));
-#endif
 
         net_object_set_title (NET_OBJECT (net_virt), title);
         gtk_list_store_append (liststore_devices, &iter);

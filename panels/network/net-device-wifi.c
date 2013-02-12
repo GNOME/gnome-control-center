@@ -1015,12 +1015,10 @@ start_shared_connection (NetDeviceWifi *device_wifi)
 
         sw = (NMSettingWireless *)nm_setting_wireless_new ();
 
-#ifdef HAVE_NM_UNSTABLE
 	/* Use real AP mode if the device supports it */
         if (nm_device_wifi_get_capabilities (NM_DEVICE_WIFI (device)) & NM_WIFI_DEVICE_CAP_AP)
 		mode = NM_SETTING_WIRELESS_MODE_AP;
         else
-#endif
                 mode = NM_SETTING_WIRELESS_MODE_ADHOC;
 
         g_object_set (sw,
