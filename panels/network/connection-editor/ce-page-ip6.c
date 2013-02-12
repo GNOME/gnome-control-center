@@ -174,21 +174,17 @@ add_address_row (CEPageIP6   *page,
                  const gchar *gateway)
 {
         GtkWidget *row;
+        GtkWidget *label;
         GtkWidget *widget;
         GtkWidget *delete_button;
         GtkWidget *image;
 
         row = gtk_grid_new ();
-        widget = gtk_label_new (_("Address"));
-        gtk_misc_set_alignment (GTK_MISC (widget), 1, 0.5);
-        gtk_grid_attach (GTK_GRID (row), widget, 1, 1, 1, 1);
-        widget = gtk_label_new (_("Prefix"));
-        gtk_misc_set_alignment (GTK_MISC (widget), 1, 0.5);
-        gtk_grid_attach (GTK_GRID (row), widget, 1, 2, 1, 1);
-        widget = gtk_label_new (_("Gateway"));
-        gtk_misc_set_alignment (GTK_MISC (widget), 1, 0.5);
-        gtk_grid_attach (GTK_GRID (row), widget, 1, 3, 1, 1);
+        label = gtk_label_new (_("Address"));
+        gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
+        gtk_grid_attach (GTK_GRID (row), label, 1, 1, 1, 1);
         widget = gtk_entry_new ();
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_object_set_data (G_OBJECT (row), "address", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), address);
@@ -196,7 +192,12 @@ add_address_row (CEPageIP6   *page,
         gtk_widget_set_margin_right (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_grid_attach (GTK_GRID (row), widget, 2, 1, 1, 1);
+
+        label = gtk_label_new (_("Prefix"));
+        gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
+        gtk_grid_attach (GTK_GRID (row), label, 1, 2, 1, 1);
         widget = gtk_entry_new ();
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_object_set_data (G_OBJECT (row), "prefix", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), network);
@@ -204,7 +205,12 @@ add_address_row (CEPageIP6   *page,
         gtk_widget_set_margin_right (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_grid_attach (GTK_GRID (row), widget, 2, 2, 1, 1);
+
+        label = gtk_label_new (_("Gateway"));
+        gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
+        gtk_grid_attach (GTK_GRID (row), label, 1, 3, 1, 1);
         widget = gtk_entry_new ();
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_object_set_data (G_OBJECT (row), "gateway", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), gateway);
@@ -328,15 +334,18 @@ add_dns_row (CEPageIP6   *page,
              const gchar *address)
 {
         GtkWidget *row;
+        GtkWidget *label;
         GtkWidget *widget;
         GtkWidget *delete_button;
         GtkWidget *image;
 
         row = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-        widget = gtk_label_new (_("Server"));
-        gtk_misc_set_alignment (GTK_MISC (widget), 1, 0.5);
-        gtk_box_pack_start (GTK_BOX (row), widget, FALSE, FALSE, 0);
+        gtk_widget_set_can_focus (row, FALSE);
+        label = gtk_label_new (_("Server"));
+        gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
+        gtk_box_pack_start (GTK_BOX (row), label, FALSE, FALSE, 0);
         widget = gtk_entry_new ();
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_object_set_data (G_OBJECT (row), "address", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), address);
@@ -415,25 +424,17 @@ add_route_row (CEPageIP6   *page,
                gint         metric)
 {
         GtkWidget *row;
+        GtkWidget *label;
         GtkWidget *widget;
         GtkWidget *delete_button;
         GtkWidget *image;
 
         row = gtk_grid_new ();
-        widget = gtk_label_new (_("Address"));
-        gtk_misc_set_alignment (GTK_MISC (widget), 1, 0.5);
-        gtk_grid_attach (GTK_GRID (row), widget, 1, 1, 1, 1);
-        widget = gtk_label_new (_("Prefix"));
-        gtk_misc_set_alignment (GTK_MISC (widget), 1, 0.5);
-        gtk_grid_attach (GTK_GRID (row), widget, 1, 2, 1, 1);
-        widget = gtk_label_new (_("Gateway"));
-        gtk_misc_set_alignment (GTK_MISC (widget), 1, 0.5);
-        gtk_grid_attach (GTK_GRID (row), widget, 1, 3, 1, 1);
-        /* Translators: Please see http://en.wikipedia.org/wiki/Metrics_(networking) */
-        widget = gtk_label_new (C_("network parameters", "Metric"));
-        gtk_misc_set_alignment (GTK_MISC (widget), 1, 0.5);
-        gtk_grid_attach (GTK_GRID (row), widget, 1, 4, 1, 1);
+        label = gtk_label_new (_("Address"));
+        gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
+        gtk_grid_attach (GTK_GRID (row), label, 1, 1, 1, 1);
         widget = gtk_entry_new ();
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_object_set_data (G_OBJECT (row), "address", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), address);
@@ -441,7 +442,12 @@ add_route_row (CEPageIP6   *page,
         gtk_widget_set_margin_right (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_grid_attach (GTK_GRID (row), widget, 2, 1, 1, 1);
+
+        label = gtk_label_new (_("Prefix"));
+        gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
+        gtk_grid_attach (GTK_GRID (row), label, 1, 2, 1, 1);
         widget = gtk_entry_new ();
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_object_set_data (G_OBJECT (row), "prefix", widget);
         if (prefix > 0) {
@@ -453,7 +459,12 @@ add_route_row (CEPageIP6   *page,
         gtk_widget_set_margin_right (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_grid_attach (GTK_GRID (row), widget, 2, 2, 1, 1);
+
+        label = gtk_label_new (_("Gateway"));
+        gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
+        gtk_grid_attach (GTK_GRID (row), label, 1, 3, 1, 1);
         widget = gtk_entry_new ();
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_object_set_data (G_OBJECT (row), "gateway", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), gateway);
@@ -461,7 +472,13 @@ add_route_row (CEPageIP6   *page,
         gtk_widget_set_margin_right (widget, 10);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_grid_attach (GTK_GRID (row), widget, 2, 3, 1, 1);
+
+        /* Translators: Please see https://en.wikipedia.org/wiki/Metrics_(networking) */
+        label = gtk_label_new (C_("network parameters", "Metric"));
+        gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
+        gtk_grid_attach (GTK_GRID (row), label, 1, 4, 1, 1);
         widget = gtk_entry_new ();
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
         g_signal_connect_swapped (widget, "changed", G_CALLBACK (ce_page_changed), page);
         g_object_set_data (G_OBJECT (row), "metric", widget);
         if (metric > 0) {
