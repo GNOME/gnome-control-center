@@ -116,6 +116,7 @@ manufacturer_selection_changed_cb (GtkTreeSelection *selection,
 
           gtk_tree_view_set_model (models_treeview, GTK_TREE_MODEL (store));
           g_object_unref (store);
+          gtk_tree_view_columns_autosize (models_treeview);
         }
 
       g_free (manufacturer_name);
@@ -220,16 +221,22 @@ populate_dialog (PpPPDSelectionDialog *dialog)
   GtkTreeView       *manufacturers_treeview;
   GtkTreeView       *models_treeview;
   GtkWidget         *widget;
+  GtkWidget         *header;
 
   manufacturers_treeview = (GtkTreeView*)
     gtk_builder_get_object (dialog->builder, "ppd-selection-manufacturers-treeview");
 
   renderer = gtk_cell_renderer_text_new ();
+  gtk_cell_renderer_set_padding (renderer, 10, 0);
 
   /* Translators: Name of column showing printer manufacturers */
-  column = gtk_tree_view_column_new_with_attributes (_("Manufacturers"), renderer,
+  column = gtk_tree_view_column_new_with_attributes (_("Manufacturer"), renderer,
                                                      "text", PPD_MANUFACTURERS_DISPLAY_NAMES_COLUMN, NULL);
   gtk_tree_view_column_set_expand (column, TRUE);
+  header = gtk_label_new (gtk_tree_view_column_get_title (column));
+  gtk_misc_set_padding (GTK_MISC (header), 10, 0);
+  gtk_tree_view_column_set_widget (column, header);
+  gtk_widget_show (header);
   gtk_tree_view_append_column (manufacturers_treeview, column);
 
 
@@ -237,11 +244,17 @@ populate_dialog (PpPPDSelectionDialog *dialog)
     gtk_builder_get_object (dialog->builder, "ppd-selection-models-treeview");
 
   renderer = gtk_cell_renderer_text_new ();
+  gtk_cell_renderer_set_padding (renderer, 10, 0);
 
   /* Translators: Name of column showing printer drivers */
-  column = gtk_tree_view_column_new_with_attributes (_("Drivers"), renderer,
-                                                     "text", PPD_DISPLAY_NAMES_COLUMN, NULL);
+  column = gtk_tree_view_column_new_with_attributes (_("Driver"), renderer,
+                                                     "text", PPD_DISPLAY_NAMES_COLUMN,
+                                                     NULL);
   gtk_tree_view_column_set_expand (column, TRUE);
+  header = gtk_label_new (gtk_tree_view_column_get_title (column));
+  gtk_misc_set_padding (GTK_MISC (header), 10, 0);
+  gtk_tree_view_column_set_widget (column, header);
+  gtk_widget_show (header);
   gtk_tree_view_append_column (models_treeview, column);
 
 
