@@ -652,6 +652,7 @@ add_input_row (CcRegionPanel   *self,
                 gtk_widget_set_margin_right (image, 20);
                 gtk_widget_set_margin_top (image, 6);
                 gtk_widget_set_margin_bottom (image, 6);
+                gtk_style_context_add_class (gtk_widget_get_style_context (image), "dim-label");
                 gtk_box_pack_start (GTK_BOX (row), image, FALSE, TRUE, 0);
         }
 

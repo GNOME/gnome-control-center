@@ -233,6 +233,7 @@ input_source_widget_new (GtkWidget   *chooser,
                                  FALSE);
       image = gtk_image_new_from_icon_name ("system-run-symbolic", GTK_ICON_SIZE_MENU);
       set_row_widget_margins (image);
+      gtk_style_context_add_class (gtk_widget_get_style_context (image), "dim-label");
       gtk_box_pack_start (GTK_BOX (widget), image, FALSE, TRUE, 0);
 
       g_object_set_data_full (G_OBJECT (widget), "name", display_name, g_free);
