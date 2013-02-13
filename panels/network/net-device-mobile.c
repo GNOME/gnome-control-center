@@ -34,7 +34,9 @@
 #include "panel-common.h"
 #include "network-dialogs.h"
 
+#if HAVE_MM_GLIB
 #include <libmm-glib.h>
+#endif /* HAVE_MM_GLIB */
 
 #include "net-device-mobile.h"
 
@@ -52,7 +54,7 @@ struct _NetDeviceMobilePrivate
         GDBusProxy *cdma_proxy;
 
         /* New MM >= 0.7 support */
-        MMObject   *mm_object;
+        gpointer    mm_object;
         guint       operator_name_updated;
 
         NMAMobileProvidersDatabase *mpd;
@@ -247,6 +249,7 @@ device_mobile_refresh_equipment_id (NetDeviceMobile *device_mobile)
 {
         const gchar *equipment_id = NULL;
 
+#if HAVE_MM_GLIB
         if (device_mobile->priv->mm_object != NULL) {
                 MMModem *modem;
 
@@ -261,10 +264,13 @@ device_mobile_refresh_equipment_id (NetDeviceMobile *device_mobile)
                                  equipment_id);
                 }
         } else {
+#endif /* HAVE_MM_GLIB */
                 /* Assume old MM handling */
                 equipment_id = g_object_get_data (G_OBJECT (device_mobile),
                                                   "ControlCenter::EquipmentIdentifier");
+#if HAVE_MM_GLIB
         }
+#endif /* HAVE_MM_GLIB */
 
         panel_set_device_widget_details (device_mobile->priv->builder, "imei", equipment_id);
 }
@@ -312,6 +318,7 @@ device_mobile_find_provider (NetDeviceMobile *device_mobile,
 static void
 device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
 {
+#if HAVE_MM_GLIB
         if (device_mobile->priv->mm_object != NULL) {
                 gchar *operator_name = NULL;
                 MMModem3gpp *modem_3gpp;
@@ -351,6 +358,7 @@ device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
                 panel_set_device_widget_details (device_mobile->priv->builder, "provider", operator_name);
                 g_free (operator_name);
         } else {
+#endif /* HAVE_MM_GLIB */
                 const gchar *gsm;
                 const gchar *cdma;
 
@@ -373,7 +381,9 @@ device_mobile_refresh_operator_name (NetDeviceMobile *device_mobile)
                 } else {
                         panel_set_device_widget_details (device_mobile->priv->builder, "provider", NULL);
                 }
+#if HAVE_MM_GLIB
         }
+#endif /* HAVE_MM_GLIB */
 }
 
 static void
@@ -780,6 +790,8 @@ net_device_mobile_constructed (GObject *object)
         nm_device_mobile_refresh_ui (device_mobile);
 }
 
+#if HAVE_MM_GLIB
+
 static void
 operator_name_updated (MMModem3gpp     *modem_3gpp_iface,
                        GParamSpec      *pspec,
@@ -811,6 +823,7 @@ net_device_mobile_setup_modem_object (NetDeviceMobile *self)
         }
 }
 
+#endif /* HAVE_MM_GLIB */
 
 static void
 net_device_mobile_get_property (GObject    *device_,
@@ -841,7 +854,9 @@ net_device_mobile_set_property (GObject      *device_,
         switch (prop_id) {
         case PROP_MODEM_OBJECT:
                 self->priv->mm_object = g_value_dup_object (value);
+#if HAVE_MM_GLIB
                 net_device_mobile_setup_modem_object (self);
+#endif /* HAVE_MM_GLIB */
                 break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (self, prop_id, pspec);
@@ -859,12 +874,16 @@ net_device_mobile_dispose (GObject *object)
         g_clear_object (&priv->gsm_proxy);
         g_clear_object (&priv->cdma_proxy);
 
+#if HAVE_MM_GLIB
         if (priv->operator_name_updated) {
                 g_assert (priv->mm_object != NULL);
                 g_signal_handler_disconnect (mm_object_peek_modem_3gpp (priv->mm_object), priv->operator_name_updated);
                 priv->operator_name_updated = 0;
         }
+#endif /* HAVE_MM_GLIB */
+
         g_clear_object (&priv->mm_object);
+
         g_clear_object (&priv->mpd);
 
         G_OBJECT_CLASS (net_device_mobile_parent_class)->dispose (object);
@@ -890,7 +909,7 @@ net_device_mobile_class_init (NetDeviceMobileClass *klass)
                                          g_param_spec_object ("mm-object",
                                                               NULL,
                                                               NULL,
-                                                              MM_TYPE_OBJECT,
+                                                              G_TYPE_OBJECT,
                                                               G_PARAM_READWRITE));
 }
 

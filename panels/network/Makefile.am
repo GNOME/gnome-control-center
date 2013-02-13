@@ -54,6 +54,11 @@ libnetwork_la_LIBADD = $(PANEL_LIBS) $(NETWORK_PANEL_LIBS) $(NETWORK_MANAGER_LIB
 
 libnetwork_la_LDFLAGS = $(PANEL_LDFLAGS)
 
+if HAVE_MM_GLIB
+libnetwork_la_CPPFLAGS = $(MM_GLIB_CFLAGS)
+libnetwork_la_LIBADD += $(MM_GLIB_LIBS)
+endif
+
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/network.gresource.xml)
 cc-network-resources.c: network.gresource.xml $(resource_files)
 	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_network $<
