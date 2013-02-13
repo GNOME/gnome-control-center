@@ -87,6 +87,14 @@ method_changed (GtkComboBox *combo, CEPageIP6 *page)
 }
 
 static void
+switch_toggled (GObject    *object,
+                GParamSpec *pspec,
+                CEPage     *page)
+{
+        ce_page_changed (page);
+}
+
+static void
 update_separator (GtkWidget **separator,
                   GtkWidget  *child,
                   GtkWidget  *before,
@@ -401,6 +409,7 @@ add_dns_section (CEPageIP6 *page)
         gtk_container_add (GTK_CONTAINER (frame), list);
         page->auto_dns = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "auto_dns_switch"));
         gtk_switch_set_active (page->auto_dns, !nm_setting_ip6_config_get_ignore_auto_dns (page->setting));
+        g_signal_connect (page->auto_dns, "notify::active", switch_toggled, page);
 
         add_section_toolbar (page, widget, G_CALLBACK (add_empty_dns_row));
 
@@ -543,6 +552,7 @@ add_routes_section (CEPageIP6 *page)
         gtk_container_add (GTK_CONTAINER (frame), list);
         page->auto_routes = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "auto_routes_switch"));
         gtk_switch_set_active (page->auto_routes, !nm_setting_ip6_config_get_ignore_auto_routes (page->setting));
+        g_signal_connect (page->auto_routes, "notify::active", switch_toggled, page);
 
         add_section_toolbar (page, widget, G_CALLBACK (add_empty_route_row));
 
@@ -586,6 +596,7 @@ connect_ip6_page (CEPageIP6 *page)
         add_routes_section (page);
 
         page->enabled = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "switch_enable"));
+        g_signal_connect (page->enabled, "notify::active", switch_toggled, page);
 
         str_method = nm_setting_ip6_config_get_method (page->setting);
         disabled = g_strcmp0 (str_method, NM_SETTING_IP6_CONFIG_METHOD_IGNORE) == 0;
