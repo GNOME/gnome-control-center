@@ -56,6 +56,7 @@ struct _CcColorCalibratePrivate
   guint            target_whitepoint;   /* in Kelvin */
   gdouble          target_gamma;
   gint             inhibit_fd;
+  gint             inhibit_cookie;
   CdSessionError   session_error_code;
 };
 
@@ -790,23 +791,43 @@ static void
 cc_color_calibrate_uninhibit (CcColorCalibrate *calibrate)
 {
   CcColorCalibratePrivate *priv = calibrate->priv;
+  GtkApplication *application;
+
   if (priv->inhibit_fd != -1)
     {
       close (priv->inhibit_fd);
       priv->inhibit_fd = -1;
     }
+
+  if (priv->inhibit_cookie != 0)
+    {
+      application = GTK_APPLICATION (g_application_get_default ());
+      gtk_application_uninhibit (application, priv->inhibit_cookie);
+      priv->inhibit_cookie = 0;
+    }
 }
 
 static void
-cc_color_calibrate_inhibit (CcColorCalibrate *calibrate)
+cc_color_calibrate_inhibit (CcColorCalibrate *calibrate, GtkWindow *window)
 {
   GError *error = NULL;
   gint idx;
   GUnixFDList *fd_list = NULL;
   GVariant *retval;
+  GtkApplication *application;
   CcColorCalibratePrivate *priv = calibrate->priv;
 
-  /* tell logind to basically disallow everything */
+  /* inhibit basically everything we can */
+  application = GTK_APPLICATION (g_application_get_default ());
+  priv->inhibit_cookie = gtk_application_inhibit (application,
+                                                  window,
+                                                  GTK_APPLICATION_INHIBIT_LOGOUT |
+                                                  GTK_APPLICATION_INHIBIT_SWITCH |
+                                                  GTK_APPLICATION_INHIBIT_SUSPEND |
+                                                  GTK_APPLICATION_INHIBIT_IDLE,
+                                                  "Display calibration in progress");
+
+  /* tell logind to disallow the lid switch */
   retval = g_dbus_proxy_call_with_unix_fd_list_sync (priv->proxy_inhibit,
                                                      "Inhibit",
                                                      g_variant_new ("(ssss)",
@@ -976,7 +997,7 @@ cc_color_calibrate_start (CcColorCalibrate *calibrate,
   gtk_widget_set_visible (widget, FALSE);
 
   /* stop the computer from auto-suspending or turning off the screen */
-  cc_color_calibrate_inhibit (calibrate);
+  cc_color_calibrate_inhibit (calibrate, parent);
 
   g_main_loop_run (priv->loop);
   gtk_widget_hide (GTK_WIDGET (window));
