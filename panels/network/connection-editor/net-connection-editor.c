@@ -502,6 +502,7 @@ net_connection_editor_set_connection (NetConnectionEditor *editor,
 
                 button = GTK_WIDGET (gtk_builder_get_object (editor->builder, "details_apply_button"));
                 gtk_button_set_label (GTK_BUTTON (button), _("_Add"));
+                editor->is_changed = TRUE;
         }
 
         editor->connection = nm_connection_duplicate (connection);
