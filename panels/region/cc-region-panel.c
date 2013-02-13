@@ -884,6 +884,25 @@ apologize_for_no_ibus_login (CcRegionPanel *self)
         gtk_widget_destroy (dialog);
 }
 
+static gboolean
+input_source_already_added (CcRegionPanel *self,
+                            const gchar   *id)
+{
+        CcRegionPanelPrivate *priv = self->priv;
+        GList *list, *l;
+        gboolean retval = FALSE;
+
+        list = gtk_container_get_children (GTK_CONTAINER (priv->input_list));
+        for (l = list; l; l = l->next)
+                if (g_str_equal (id, (const gchar *) g_object_get_data (G_OBJECT (l->data), "id"))) {
+                        retval = TRUE;
+                        break;
+                }
+        g_list_free (list);
+
+        return retval;
+}
+
 static void
 input_response (GtkWidget *chooser, gint response_id, gpointer data)
 {
@@ -895,7 +914,8 @@ input_response (GtkWidget *chooser, gint response_id, gpointer data)
         GDesktopAppInfo *app_info = NULL;
 
         if (response_id == GTK_RESPONSE_OK) {
-                if (cc_input_chooser_get_selected (chooser, &type, &id, &name)) {
+                if (cc_input_chooser_get_selected (chooser, &type, &id, &name) &&
+                    !input_source_already_added (self, id)) {
 
                         gtk_widget_destroy (chooser);
 
