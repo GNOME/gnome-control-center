@@ -296,6 +296,7 @@ cc_color_device_init (CcColorDevice *color_device)
 
   /* switch */
   priv->widget_switch = gtk_switch_new ();
+  gtk_widget_set_valign (priv->widget_switch, GTK_ALIGN_CENTER);
   gtk_box_pack_start (GTK_BOX (box), priv->widget_switch, FALSE, FALSE, 0);
 
   /* arrow button */
@@ -304,6 +305,7 @@ cc_color_device_init (CcColorDevice *color_device)
   g_signal_connect (priv->widget_button, "clicked",
                     G_CALLBACK (cc_color_device_clicked_expander_cb),
                     color_device);
+  gtk_widget_set_valign (priv->widget_button, GTK_ALIGN_CENTER);
   gtk_button_set_relief (GTK_BUTTON (priv->widget_button), GTK_RELIEF_NONE);
   gtk_container_add (GTK_CONTAINER (priv->widget_button), priv->widget_arrow);
   gtk_widget_set_visible (priv->widget_arrow, TRUE);
