@@ -340,6 +340,9 @@ gnome_mouse_test_init (GtkBuilder *dialog)
 {
 	mouse_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.mouse");
 
+	double_click_state = DOUBLE_CLICK_TEST_OFF;
+	button_state = 0;
+
 	setup_dialog (dialog);
 
 	return WID ("mouse_test_window");
