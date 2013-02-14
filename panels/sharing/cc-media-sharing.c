@@ -21,6 +21,15 @@
 
 #include "cc-media-sharing.h"
 
+#include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
+#include <glib/gstdio.h>
+
+#define BUS_NAME "org.gnome.Rygel1"
+#define OBJECT_PATH "/org/gnome/Rygel1"
+#define INTERFACE_NAME "org.gnome.Rygel1"
+#define RYGEL_DESKTOP_ID "rygel.desktop"
+
 static GKeyFile*
 cc_media_sharing_open_key_file (void)
 {
@@ -38,6 +47,69 @@ cc_media_sharing_open_key_file (void)
   g_free (path);
 
   return file;
+}
+
+static void
+cc_media_sharing_enable_autostart (void)
+{
+  const gchar *source;
+  gchar *destination;
+  GDesktopAppInfo *info;
+  GFile *file;
+
+  info = g_desktop_app_info_new (RYGEL_DESKTOP_ID);
+  if (!info)
+    return;
+
+  /* start rygel */
+  g_app_info_launch (info, NULL, NULL, NULL);
+
+  /* create a symbolic link to the rygel desktop file in the autostart
+   * directory */
+  source = g_desktop_app_info_get_filename (info);
+
+  destination = g_build_filename (g_get_user_config_dir (), "autostart",
+                                  RYGEL_DESKTOP_ID, NULL);
+  file = g_file_new_for_path (destination);
+  g_free (destination);
+
+  g_file_make_symbolic_link (file, source, NULL, NULL);
+
+  g_object_unref (info);
+  g_object_unref (file);
+}
+
+static void
+cc_media_sharing_bus_ready_callback (GObject      *object,
+                                     GAsyncResult *result,
+                                     gpointer      user_data)
+{
+  GDBusConnection *connection;
+
+  connection = g_bus_get_finish (result, NULL);
+
+  if (!connection)
+    return;
+
+  g_dbus_connection_call (connection, BUS_NAME, OBJECT_PATH, INTERFACE_NAME,
+                          "Shutdown", NULL, NULL, G_DBUS_CALL_FLAGS_NONE, -1,
+                          NULL, NULL, NULL);
+}
+
+static void
+cc_media_sharing_disable_autostart (void)
+{
+  gchar *path;
+
+  path = g_build_filename (g_get_user_config_dir (), "autostart",
+                           RYGEL_DESKTOP_ID, NULL);
+
+  g_unlink (path);
+  g_free (path);
+
+  /* stop rygel */
+  g_bus_get (G_BUS_TYPE_SESSION, NULL, cc_media_sharing_bus_ready_callback,
+             NULL);
 }
 
 void
@@ -98,6 +170,11 @@ cc_media_sharing_set_preferences (gboolean   enabled,
   gchar *data;
 
   file = cc_media_sharing_open_key_file ();
+
+  if (enabled)
+    cc_media_sharing_enable_autostart ();
+  else
+    cc_media_sharing_disable_autostart ();
 
   g_key_file_set_boolean (file, "general", "upnp-enabled", enabled);
 
