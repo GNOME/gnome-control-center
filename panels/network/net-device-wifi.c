@@ -1255,8 +1255,8 @@ net_device_wifi_constructed (GObject *object)
         NMClient *client;
         NMRemoteSettings *remote_settings;
         NMClientPermissionResult perm;
-        NMDevice *device;
-        NMDeviceWifiCapability caps;
+        NMDevice *nm_device;
+        NMDeviceWifiCapabilities caps;
         GtkWidget *widget;
 
         G_OBJECT_CLASS (net_device_wifi_parent_class)->constructed (object);
@@ -1274,10 +1274,10 @@ net_device_wifi_constructed (GObject *object)
         caps = nm_device_wifi_get_capabilities (NM_DEVICE_WIFI (nm_device));
         if (perm != NM_CLIENT_PERMISSION_RESULT_YES &&
             perm != NM_CLIENT_PERMISSION_RESULT_AUTH) {
-                gtk_widget_set_tooltip (widget, _("System policy prohibits use as a Hotspot"));
+                gtk_widget_set_tooltip_text (widget, _("System policy prohibits use as a Hotspot"));
                 gtk_widget_set_sensitive (widget, FALSE);
         } else if (!(caps & (NM_WIFI_DEVICE_CAP_AP | NM_WIFI_DEVICE_CAP_ADHOC))) {
-                gtk_widget_set_tooltip (widget, _("Wireless device does not support Hotspot mode"));
+                gtk_widget_set_tooltip_text (widget, _("Wireless device does not support Hotspot mode"));
                 gtk_widget_set_sensitive (widget, FALSE);
         } else
                 gtk_widget_set_sensitive (widget, TRUE);
