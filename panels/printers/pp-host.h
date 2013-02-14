@@ -35,10 +35,6 @@ G_BEGIN_DECLS
 #define PP_IS_HOST_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), PP_TYPE_HOST))
 #define PP_HOST_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), PP_TYPE_HOST, PpHostClass))
 
-typedef struct{
-  GList *devices;
-} PpDevicesList;
-
 typedef struct _PpHost        PpHost;
 typedef struct _PpHostClass   PpHostClass;
 typedef struct _PpHostPrivate PpHostPrivate;

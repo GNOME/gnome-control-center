@@ -52,7 +52,9 @@ enum
 {
   ACQUISITION_METHOD_DEFAULT_CUPS_SERVER = 0,
   ACQUISITION_METHOD_REMOTE_CUPS_SERVER,
-  ACQUISITION_METHOD_SNMP
+  ACQUISITION_METHOD_SNMP,
+  ACQUISITION_METHOD_SAMBA,
+  ACQUISITION_METHOD_SAMBA_HOST
 };
 
 typedef struct
@@ -75,6 +77,11 @@ typedef struct
   PPDManufacturerItem **manufacturers;
   gsize                 num_of_manufacturers;
 } PPDList;
+
+typedef struct
+{
+  GList *devices;
+} PpDevicesList;
 
 gchar      *get_tag_value (const gchar *tag_string,
                            const gchar *tag_name);

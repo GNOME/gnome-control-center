@@ -152,7 +152,8 @@ PKG_CHECK_MODULES(COLOR_PANEL, $COMMON_MODULES
                   colord-gtk >= $COLORD_GTK_REQUIRED_VERSION
                   gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION)
 PKG_CHECK_MODULES(PRINTERS_PANEL, $COMMON_MODULES
-                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION)
+                  polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
+                  smbclient)
 PKG_CHECK_MODULES(PRIVACY_PANEL, $COMMON_MODULES)
 PKG_CHECK_MODULES(REGION_PANEL, $COMMON_MODULES
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
