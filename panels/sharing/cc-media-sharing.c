@@ -62,7 +62,7 @@ cc_media_sharing_enable_autostart (void)
     return;
 
   /* start rygel */
-  g_app_info_launch (info, NULL, NULL, NULL);
+  g_app_info_launch (G_APP_INFO (info), NULL, NULL, NULL);
 
   /* create a symbolic link to the rygel desktop file in the autostart
    * directory */
