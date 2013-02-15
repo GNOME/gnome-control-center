@@ -1202,6 +1202,7 @@ notify_connections_read_cb (NMRemoteSettings *settings,
                 connection = NM_CONNECTION (iter->data);
                 add_connection (panel, connection);
         }
+        g_slist_free (list);
 }
 
 static gboolean

@@ -1790,6 +1790,7 @@ open_history (NetDeviceWifi *device_wifi)
                 }
         }
         g_slist_free (connections);
+        g_ptr_array_free (aps_unique, TRUE);
 
         gtk_window_present (GTK_WINDOW (dialog));
 }
@@ -1866,6 +1867,7 @@ populate_ap_list (NetDeviceWifi *device_wifi)
         }
 
         g_slist_free (connections);
+        g_ptr_array_free (aps_unique, TRUE);
 }
 
 static void

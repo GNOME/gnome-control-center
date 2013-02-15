@@ -420,6 +420,8 @@ populate_ui (NetDeviceEthernet *device)
                 gtk_widget_hide (device->details);
                 gtk_widget_hide (device->details_button);
         }
+
+        g_slist_free (connections);
 }
 
 static void

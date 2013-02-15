@@ -87,6 +87,7 @@ void
 net_object_set_id (NetObject *object, const gchar *id)
 {
         g_return_if_fail (NET_IS_OBJECT (object));
+        g_clear_pointer (&object->priv->id, g_free);
         object->priv->id = g_strdup (id);
         g_object_notify (G_OBJECT (object), "id");
 }
@@ -109,6 +110,7 @@ void
 net_object_set_title (NetObject *object, const gchar *title)
 {
         g_return_if_fail (NET_IS_OBJECT (object));
+        g_clear_pointer (&object->priv->title, g_free);
         object->priv->title = g_strdup (title);
         g_object_notify (G_OBJECT (object), "title");
 }
