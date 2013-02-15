@@ -31,14 +31,14 @@
 #include <cups/cups.h>
 
 #include "pp-new-printer-dialog.h"
+#include "pp-ppd-selection-dialog.h"
 #include "pp-utils.h"
 #include "pp-host.h"
 #include "pp-cups.h"
+#include "pp-samba.h"
 #include "pp-new-printer.h"
 
-#ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
-#endif
 
 #if (CUPS_VERSION_MAJOR > 1) || (CUPS_VERSION_MINOR > 5)
 #define HAVE_CUPS_1_6 1
@@ -48,18 +48,17 @@
 #define ippGetState(ipp) ipp->state
 #endif
 
-static void actualize_devices_list (PpNewPrinterDialog *dialog);
-static void populate_devices_list (PpNewPrinterDialog *dialog);
-static void search_address_cb2 (GtkEntry             *entry,
-                                GtkEntryIconPosition  icon_pos,
-                                GdkEvent             *event,
-                                gpointer              user_data);
-static void search_address_cb (GtkEntry *entry,
-                               gpointer  user_data);
-static void new_printer_dialog_response_cb (GtkDialog *_dialog,
-                                            gint       response_id,
-                                            gpointer   user_data);
-static void t_device_free (gpointer data);
+static void     actualize_devices_list (PpNewPrinterDialog *dialog);
+static void     populate_devices_list (PpNewPrinterDialog *dialog);
+static void     search_address_cb2 (GtkEntry             *entry,
+                                    GtkEntryIconPosition  icon_pos,
+                                    GdkEvent             *event,
+                                    gpointer              user_data);
+static void     search_address_cb (GtkEntry *entry,
+                                   gpointer  user_data);
+static void     new_printer_dialog_response_cb (GtkDialog *_dialog,
+                                                gint       response_id,
+                                                gpointer   user_data);
 
 enum
 {
@@ -87,6 +86,9 @@ typedef struct
   gboolean  show;
 } TDevice;
 
+static void     t_device_free (gpointer data);
+static TDevice *t_device_copy (TDevice *device);
+
 struct _PpNewPrinterDialogPrivate
 {
   GtkBuilder *builder;
@@ -102,11 +104,20 @@ struct _PpNewPrinterDialogPrivate
   gboolean  cups_searching;
   gboolean  remote_cups_searching;
   gboolean  snmp_searching;
+  gboolean  samba_host_searching;
+  gboolean  samba_searching;
 
   GtkCellRenderer *text_renderer;
   GtkCellRenderer *icon_renderer;
 
+  PpPPDSelectionDialog *ppd_selection_dialog;
+
+  TDevice *new_device;
+
+  PPDList *list;
+
   GtkWidget *dialog;
+  GtkWindow *parent;
 };
 
 #define PP_NEW_PRINTER_DIALOG_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), PP_TYPE_NEW_PRINTER_DIALOG, PpNewPrinterDialogPrivate))
@@ -166,7 +177,8 @@ pp_new_printer_dialog_class_init (PpNewPrinterDialogClass *klass)
 
 
 PpNewPrinterDialog *
-pp_new_printer_dialog_new (GtkWindow *parent)
+pp_new_printer_dialog_new (GtkWindow *parent,
+                           PPDList   *ppd_list)
 {
   PpNewPrinterDialogPrivate *priv;
   PpNewPrinterDialog        *dialog;
@@ -174,9 +186,24 @@ pp_new_printer_dialog_new (GtkWindow *parent)
   dialog = g_object_new (PP_TYPE_NEW_PRINTER_DIALOG, NULL);
   priv = dialog->priv;
 
+  priv->list = ppd_list_copy (ppd_list);
+  priv->parent = parent;
+
   gtk_window_set_transient_for (GTK_WINDOW (priv->dialog), GTK_WINDOW (parent));
 
   return PP_NEW_PRINTER_DIALOG (dialog);
+}
+
+void
+pp_new_printer_dialog_set_ppd_list (PpNewPrinterDialog *dialog,
+                                    PPDList            *list)
+{
+  PpNewPrinterDialogPrivate *priv = dialog->priv;
+
+  priv->list = ppd_list_copy (list);
+
+  if (priv->ppd_selection_dialog)
+    pp_ppd_selection_dialog_set_ppd_list (priv->ppd_selection_dialog, priv->list);
 }
 
 static void
@@ -211,7 +238,7 @@ update_alignment_padding (GtkWidget     *widget,
                           GtkAllocation *allocation,
                           gpointer       user_data)
 {
-  PpNewPrinterDialog        *dialog = (PpNewPrinterDialog*) user_data;
+  PpNewPrinterDialog        *dialog = (PpNewPrinterDialog *) user_data;
   PpNewPrinterDialogPrivate *priv = dialog->priv;
   GtkAllocation              allocation1, allocation2;
   GtkWidget                 *action_area;
@@ -279,16 +306,6 @@ pp_new_printer_dialog_init (PpNewPrinterDialog *dialog)
 
   /* GCancellable for cancelling of async operations */
   priv->cancellable = g_cancellable_new ();
-
-  priv->devices = NULL;
-  priv->new_devices = NULL;
-  priv->dests = NULL;
-  priv->num_of_dests = 0;
-  priv->cups_searching = FALSE;
-  priv->remote_cups_searching = FALSE;
-  priv->snmp_searching = FALSE;
-  priv->text_renderer = NULL;
-  priv->icon_renderer = NULL;
 
   /* Construct dialog */
   priv->dialog = (GtkWidget*) gtk_builder_get_object (priv->builder, "dialog");
@@ -400,7 +417,9 @@ add_device_to_list (PpNewPrinterDialog *dialog,
       if (device->device_id ||
           device->device_ppd ||
           (device->host_name &&
-           device->acquisition_method == ACQUISITION_METHOD_REMOTE_CUPS_SERVER))
+           device->acquisition_method == ACQUISITION_METHOD_REMOTE_CUPS_SERVER) ||
+           device->acquisition_method == ACQUISITION_METHOD_SAMBA_HOST ||
+           device->acquisition_method == ACQUISITION_METHOD_SAMBA)
         {
           network_device = FALSE;
 
@@ -567,6 +586,34 @@ t_device_free (gpointer data)
     }
 }
 
+static TDevice *
+t_device_copy (TDevice *device)
+{
+  TDevice *result = NULL;
+
+  if (device)
+    {
+      result = g_new0 (TDevice, 1);
+
+      result->display_name = g_strdup (device->display_name);
+      result->device_name = g_strdup (device->device_name);
+      result->device_original_name = g_strdup (device->device_original_name);
+      result->device_info = g_strdup (device->device_info);
+      result->device_location = g_strdup (device->device_location);
+      result->device_make_and_model = g_strdup (device->device_make_and_model);
+      result->device_uri = g_strdup (device->device_uri);
+      result->device_id = g_strdup (device->device_id);
+      result->device_ppd = g_strdup (device->device_ppd);
+      result->host_name = g_strdup (device->host_name);
+      result->host_port = device->host_port;
+      result->network_device = device->network_device;
+      result->acquisition_method = device->acquisition_method;
+      result->show = device->show;
+    }
+
+  return result;
+}
+
 static void
 update_spinner_state (PpNewPrinterDialog *dialog)
 {
@@ -575,7 +622,9 @@ update_spinner_state (PpNewPrinterDialog *dialog)
 
   if (priv->cups_searching ||
       priv->remote_cups_searching ||
-      priv->snmp_searching)
+      priv->snmp_searching ||
+      priv->samba_host_searching ||
+      priv->samba_searching)
     {
       spinner = (GtkWidget*)
         gtk_builder_get_object (priv->builder, "spinner");
@@ -769,7 +818,7 @@ get_cups_devices_cb (GList    *devices,
 
   if (!cancelled)
     {
-      dialog = (PpNewPrinterDialog*) user_data;
+      dialog = (PpNewPrinterDialog *) user_data;
       priv = dialog->priv;
 
       if (finished)
@@ -1014,6 +1063,116 @@ get_remote_cups_devices_cb (GObject      *source_object,
 }
 
 static void
+get_samba_host_devices_cb (GObject      *source_object,
+                           GAsyncResult *res,
+                           gpointer      user_data)
+{
+  PpNewPrinterDialogPrivate *priv;
+  PpNewPrinterDialog        *dialog;
+  PpDevicesList             *result;
+  PpSamba                   *samba = (PpSamba *) source_object;
+  GError                    *error = NULL;
+  GList                     *iter;
+
+  result = pp_samba_get_devices_finish (samba, res, &error);
+  g_object_unref (source_object);
+
+  if (result)
+    {
+      dialog = PP_NEW_PRINTER_DIALOG (user_data);
+      priv = dialog->priv;
+
+      priv->samba_host_searching = FALSE;
+      update_spinner_state (dialog);
+
+      if (result->devices)
+        {
+          add_devices_to_list (dialog,
+                               result->devices,
+                               FALSE);
+        }
+
+      actualize_devices_list (dialog);
+
+      for (iter = result->devices; iter; iter = iter->next)
+        pp_print_device_free ((PpPrintDevice *) iter->data);
+      g_list_free (result->devices);
+      g_free (result);
+    }
+  else
+    {
+      if (error->domain != G_IO_ERROR ||
+          error->code != G_IO_ERROR_CANCELLED)
+        {
+          dialog = PP_NEW_PRINTER_DIALOG (user_data);
+          priv = dialog->priv;
+
+          g_warning ("%s", error->message);
+
+          priv->samba_host_searching = FALSE;
+          update_spinner_state (dialog);
+        }
+
+      g_error_free (error);
+    }
+}
+
+static void
+get_samba_devices_cb (GObject      *source_object,
+                      GAsyncResult *res,
+                      gpointer      user_data)
+{
+  PpNewPrinterDialogPrivate *priv;
+  PpNewPrinterDialog        *dialog;
+  PpDevicesList             *result;
+  PpSamba                   *samba = (PpSamba *) source_object;
+  GError                    *error = NULL;
+  GList                     *iter;
+
+  result = pp_samba_get_devices_finish (samba, res, &error);
+  g_object_unref (source_object);
+
+  if (result)
+    {
+      dialog = PP_NEW_PRINTER_DIALOG (user_data);
+      priv = dialog->priv;
+
+      priv->samba_searching = FALSE;
+      update_spinner_state (dialog);
+
+      if (result->devices)
+        {
+          add_devices_to_list (dialog,
+                               result->devices,
+                               FALSE);
+        }
+
+      actualize_devices_list (dialog);
+
+      for (iter = result->devices; iter; iter = iter->next)
+        pp_print_device_free ((PpPrintDevice *) iter->data);
+      g_list_free (result->devices);
+      g_free (result);
+    }
+  else
+    {
+      if (error->domain != G_IO_ERROR ||
+          error->code != G_IO_ERROR_CANCELLED)
+        {
+          dialog = PP_NEW_PRINTER_DIALOG (user_data);
+          priv = dialog->priv;
+
+          g_warning ("%s", error->message);
+
+          priv->samba_searching = FALSE;
+          update_spinner_state (dialog);
+        }
+
+      g_error_free (error);
+    }
+}
+
+static void
 get_cups_devices (PpNewPrinterDialog *dialog)
 {
   PpNewPrinterDialogPrivate *priv = dialog->priv;
@@ -1142,7 +1301,8 @@ search_address_cb (GtkEntry *entry,
           device->show = TRUE;
 
           if (device->acquisition_method == ACQUISITION_METHOD_REMOTE_CUPS_SERVER ||
-              device->acquisition_method == ACQUISITION_METHOD_SNMP)
+              device->acquisition_method == ACQUISITION_METHOD_SNMP ||
+              device->acquisition_method == ACQUISITION_METHOD_SAMBA_HOST)
             {
               tmp = iter;
               iter = iter->next;
@@ -1159,7 +1319,8 @@ search_address_cb (GtkEntry *entry,
           device = iter->data;
 
           if (device->acquisition_method == ACQUISITION_METHOD_REMOTE_CUPS_SERVER ||
-              device->acquisition_method == ACQUISITION_METHOD_SNMP)
+              device->acquisition_method == ACQUISITION_METHOD_SNMP ||
+              device->acquisition_method == ACQUISITION_METHOD_SAMBA_HOST)
             {
               tmp = iter;
               iter = iter->next;
@@ -1181,12 +1342,16 @@ search_address_cb (GtkEntry *entry,
             {
               PpHost *snmp_host;
               PpHost *remote_cups_host;
+              PpSamba *samba_host;
 
               snmp_host = pp_host_new (host, port);
               remote_cups_host = g_object_ref (snmp_host);
+              samba_host = pp_samba_new (GTK_WINDOW (priv->dialog),
+                                         host);
 
               priv->remote_cups_searching = TRUE;
               priv->snmp_searching = TRUE;
+              priv->samba_host_searching = TRUE;
               update_spinner_state (dialog);
 
               pp_host_get_remote_cups_devices_async (snmp_host,
@@ -1198,6 +1363,11 @@ search_address_cb (GtkEntry *entry,
                                               priv->cancellable,
                                               get_snmp_devices_cb,
                                               dialog);
+
+              pp_samba_get_devices_async (samba_host,
+                                          priv->cancellable,
+                                          get_samba_host_devices_cb,
+                                          dialog);
 
               g_free (host);
             }
@@ -1246,7 +1416,9 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
           (device->device_id ||
            device->device_ppd ||
            (device->host_name &&
-            device->acquisition_method == ACQUISITION_METHOD_REMOTE_CUPS_SERVER)) &&
+            device->acquisition_method == ACQUISITION_METHOD_REMOTE_CUPS_SERVER) ||
+           device->acquisition_method == ACQUISITION_METHOD_SAMBA_HOST ||
+           device->acquisition_method == ACQUISITION_METHOD_SAMBA) &&
           device->show)
         {
           if (device->device_location)
@@ -1276,7 +1448,9 @@ actualize_devices_list (PpNewPrinterDialog *dialog)
   if (no_device &&
       !priv->cups_searching &&
       !priv->remote_cups_searching &&
-      !priv->snmp_searching)
+      !priv->snmp_searching &&
+      !priv->samba_host_searching &&
+      !priv->samba_searching)
     {
       if (priv->text_renderer)
         gtk_cell_renderer_set_alignment (priv->text_renderer, 0.5, yalign);
@@ -1367,6 +1541,7 @@ populate_devices_list (PpNewPrinterDialog *dialog)
   PpNewPrinterDialogPrivate *priv = dialog->priv;
   GtkTreeViewColumn         *column;
   GtkWidget                 *treeview;
+  PpSamba                   *samba;
   PpCups                    *cups;
 
   treeview = (GtkWidget*)
@@ -1391,6 +1566,12 @@ populate_devices_list (PpNewPrinterDialog *dialog)
 
   cups = pp_cups_new ();
   pp_cups_get_dests_async (cups, priv->cancellable, cups_get_dests_cb, dialog);
+
+  priv->samba_searching = TRUE;
+  update_spinner_state (dialog);
+
+  samba = pp_samba_new (GTK_WINDOW (priv->dialog), NULL);
+  pp_samba_get_devices_async (samba, priv->cancellable, get_samba_devices_cb, dialog);
 }
 
 static void
@@ -1432,11 +1613,66 @@ printer_add_async_cb (GObject      *source_object,
 }
 
 static void
+ppd_selection_cb (GtkDialog *_dialog,
+                  gint       response_id,
+                  gpointer   user_data)
+{
+  PpNewPrinterDialog        *dialog = (PpNewPrinterDialog *) user_data;
+  PpNewPrinterDialogPrivate *priv = dialog->priv;
+  PpNewPrinter              *new_printer;
+  gchar                     *ppd_name;
+  guint                      window_id = 0;
+
+  ppd_name = pp_ppd_selection_dialog_get_ppd_name (priv->ppd_selection_dialog);
+  pp_ppd_selection_dialog_free (priv->ppd_selection_dialog);
+  priv->ppd_selection_dialog = NULL;
+
+  if (ppd_name)
+    {
+      priv->new_device->device_ppd = ppd_name;
+
+      emit_pre_response (dialog,
+                         priv->new_device->device_name,
+                         priv->new_device->device_location,
+                         priv->new_device->device_make_and_model,
+                         priv->new_device->network_device);
+
+      window_id = GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (priv->dialog)));
+
+      new_printer = pp_new_printer_new ();
+      g_object_set (new_printer,
+                    "name", priv->new_device->device_name,
+                    "original-name""", priv->new_device->device_original_name,
+                    "device-uri", priv->new_device->device_uri,
+                    "device-id", priv->new_device->device_id,
+                    "ppd-name", priv->new_device->device_ppd,
+                    "ppd-file-name", priv->new_device->device_ppd,
+                    "info", priv->new_device->device_info,
+                    "location", priv->new_device->device_location,
+                    "make-and-model", priv->new_device->device_make_and_model,
+                    "host-name", priv->new_device->host_name,
+                    "host-port", priv->new_device->host_port,
+                    "is-network-device", priv->new_device->network_device,
+                    "window-id", window_id,
+                    NULL);
+      priv->cancellable = g_cancellable_new ();
+
+      pp_new_printer_add_async (new_printer,
+                                priv->cancellable,
+                                printer_add_async_cb,
+                                dialog);
+
+      t_device_free (priv->new_device);
+      priv->new_device = NULL;
+    }
+}
+
+static void
 new_printer_dialog_response_cb (GtkDialog *_dialog,
                                 gint       response_id,
                                 gpointer   user_data)
 {
-  PpNewPrinterDialog        *dialog = (PpNewPrinterDialog*) user_data;
+  PpNewPrinterDialog        *dialog = (PpNewPrinterDialog *) user_data;
   PpNewPrinterDialogPrivate *priv = dialog->priv;
   GtkTreeModel              *model;
   GtkTreeIter                iter;
@@ -1480,39 +1716,51 @@ new_printer_dialog_response_cb (GtkDialog *_dialog,
           PpNewPrinter *new_printer;
           guint         window_id = 0;
 
-          emit_pre_response (dialog,
-                             device->device_name,
-                             device->device_location,
-                             device->device_make_and_model,
-                             device->network_device);
+          if (device->acquisition_method == ACQUISITION_METHOD_SAMBA ||
+              device->acquisition_method == ACQUISITION_METHOD_SAMBA_HOST)
+            {
+              priv->new_device = t_device_copy (device);
+              priv->ppd_selection_dialog =
+                pp_ppd_selection_dialog_new (priv->parent,
+                                             priv->list,
+                                             NULL,
+                                             ppd_selection_cb,
+                                             dialog);
+            }
+          else
+            {
+              emit_pre_response (dialog,
+                                 device->device_name,
+                                 device->device_location,
+                                 device->device_make_and_model,
+                                 device->network_device);
 
-#ifdef GDK_WINDOWING_X11
-          window_id = GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (_dialog)));
-#endif
+              window_id = GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (_dialog)));
 
-          new_printer = pp_new_printer_new ();
-          g_object_set (new_printer,
-                        "name", device->device_name,
-                        "original-name""", device->device_original_name,
-                        "device-uri", device->device_uri,
-                        "device-id", device->device_id,
-                        "ppd-name", device->device_ppd,
-                        "ppd-file-name", device->device_ppd,
-                        "info", device->device_info,
-                        "location", device->device_location,
-                        "make-and-model", device->device_make_and_model,
-                        "host-name", device->host_name,
-                        "host-port", device->host_port,
-                        "is-network-device", device->network_device,
-                        "window-id", window_id,
-                        NULL);
+              new_printer = pp_new_printer_new ();
+              g_object_set (new_printer,
+                            "name", device->device_name,
+                            "original-name""", device->device_original_name,
+                            "device-uri", device->device_uri,
+                            "device-id", device->device_id,
+                            "ppd-name", device->device_ppd,
+                            "ppd-file-name", device->device_ppd,
+                            "info", device->device_info,
+                            "location", device->device_location,
+                            "make-and-model", device->device_make_and_model,
+                            "host-name", device->host_name,
+                            "host-port", device->host_port,
+                            "is-network-device", device->network_device,
+                            "window-id", window_id,
+                            NULL);
 
-          priv->cancellable = g_cancellable_new ();
+              priv->cancellable = g_cancellable_new ();
 
-          pp_new_printer_add_async (new_printer,
-                                    priv->cancellable,
-                                    printer_add_async_cb,
-                                    dialog);
+              pp_new_printer_add_async (new_printer,
+                                        priv->cancellable,
+                                        printer_add_async_cb,
+                                        dialog);
+            }
         }
     }
   else

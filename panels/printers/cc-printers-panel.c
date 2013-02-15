@@ -1792,7 +1792,9 @@ printer_add_cb (GtkToolButton *toolbutton,
   priv = PRINTERS_PANEL_PRIVATE (self);
 
   toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-  priv->pp_new_printer_dialog = PP_NEW_PRINTER_DIALOG (pp_new_printer_dialog_new (GTK_WINDOW (toplevel)));
+  priv->pp_new_printer_dialog = PP_NEW_PRINTER_DIALOG (
+    pp_new_printer_dialog_new (GTK_WINDOW (toplevel),
+                               priv->all_ppds_list));
 
   g_signal_connect (priv->pp_new_printer_dialog,
                     "pre-response",
@@ -2788,6 +2790,10 @@ get_all_ppds_async_cb (PPDList  *ppds,
   if (priv->pp_ppd_selection_dialog)
     pp_ppd_selection_dialog_set_ppd_list (priv->pp_ppd_selection_dialog,
                                           priv->all_ppds_list);
+
+  if (priv->pp_new_printer_dialog)
+    pp_new_printer_dialog_set_ppd_list (priv->pp_new_printer_dialog,
+                                        priv->all_ppds_list);
 
   g_object_unref (priv->get_all_ppds_cancellable);
   priv->get_all_ppds_cancellable = NULL;

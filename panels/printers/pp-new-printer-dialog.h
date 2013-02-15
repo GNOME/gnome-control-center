@@ -21,6 +21,8 @@
 #ifndef __PP_NEW_PRINTER_DIALOG_H__
 #define __PP_NEW_PRINTER_DIALOG_H__
 
+#include "pp-utils.h"
+
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
@@ -56,8 +58,11 @@ struct _PpNewPrinterDialogClass
                          gint                response_id);
 };
 
-GType               pp_new_printer_dialog_get_type (void) G_GNUC_CONST;
-PpNewPrinterDialog *pp_new_printer_dialog_new      (GtkWindow *parent);
+GType               pp_new_printer_dialog_get_type     (void) G_GNUC_CONST;
+PpNewPrinterDialog *pp_new_printer_dialog_new          (GtkWindow          *parent,
+                                                        PPDList            *ppd_list);
+void                pp_new_printer_dialog_set_ppd_list (PpNewPrinterDialog *dialog,
+                                                        PPDList            *list);
 
 G_END_DECLS
 
