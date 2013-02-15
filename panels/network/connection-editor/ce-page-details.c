@@ -156,6 +156,7 @@ connect_details_page (CEPageDetails *page)
         else
                 str = NULL;
         panel_set_device_widget_details (CE_PAGE (page)->builder, "speed", str);
+        g_clear_pointer (&str, g_free);
 
         if (NM_IS_DEVICE_WIFI (page->device))
                 str = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (page->device));
@@ -168,6 +169,7 @@ connect_details_page (CEPageDetails *page)
         if (device_is_active && active_ap)
                 str = get_ap_security_string (active_ap);
         panel_set_device_widget_details (CE_PAGE (page)->builder, "security", str);
+        g_clear_pointer (&str, g_free);
 
         strength = 0;
         if (page->ap != NULL)
