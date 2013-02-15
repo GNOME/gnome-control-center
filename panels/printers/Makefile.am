@@ -3,6 +3,7 @@ cappletname = printers
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(PRINTERS_PANEL_CFLAGS)			\
+	$(SMBCLIENT_CFLAGS)				\
 	-I$(top_srcdir)/shell/				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
 	$(NULL)
@@ -44,7 +45,7 @@ libprinters_la_SOURCES =		\
 	cc-printers-panel.c		\
 	cc-printers-panel.h
 
-libprinters_la_LIBADD = $(PRINTERS_PANEL_LIBS) $(PANEL_LIBS) $(CUPS_LIBS)
+libprinters_la_LIBADD = $(PRINTERS_PANEL_LIBS) $(PANEL_LIBS) $(CUPS_LIBS) $(SMBCLIENT_LIBS)
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/printers.gresource.xml)
 cc-printers-resources.c: printers.gresource.xml $(resource_files)
