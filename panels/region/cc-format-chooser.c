@@ -155,7 +155,7 @@ set_locale_id (GtkDialog   *chooser,
                 if (check == NULL || region == NULL)
                         continue;
 
-                if (strcmp (locale_id, region) == 0) {
+                if (g_strcmp0 (locale_id, region) == 0) {
                         gboolean is_extra;
 
                         /* mark as selected */

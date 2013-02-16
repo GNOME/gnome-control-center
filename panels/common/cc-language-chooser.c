@@ -67,7 +67,7 @@ set_locale_id (GtkDialog *chooser,
                 if (check == NULL || language == NULL)
                         continue;
 
-                if (strcmp (locale_id, language) == 0) {
+                if (g_strcmp0 (locale_id, language) == 0) {
                         gboolean is_extra;
                         gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
 
