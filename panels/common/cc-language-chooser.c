@@ -410,8 +410,7 @@ cc_language_chooser_new (GtkWidget *parent)
         g_resources_register (cc_common_get_resource ());
 
         builder = gtk_builder_new ();
-        gtk_builder_add_from_resource (builder, "/org/gnome/control-center/common/language-chooser.ui", &error);
-        if (error) {
+        if (gtk_builder_add_from_resource (builder, "/org/gnome/control-center/common/language-chooser.ui", &error) == 0) {
                 g_object_unref (builder);
                 g_warning ("failed to load language chooser: %s", error->message);
                 g_error_free (error);
