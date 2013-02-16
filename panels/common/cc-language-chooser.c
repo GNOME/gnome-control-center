@@ -97,12 +97,10 @@ sort_languages (gconstpointer a,
         const gchar *la;
         const gchar *lb;
 
-        if (g_object_get_data (G_OBJECT (a), "locale-id") == NULL) {
+        if (g_object_get_data (G_OBJECT (a), "locale-id") == NULL)
                 return 1;
-        }
-        if (g_object_get_data (G_OBJECT (b), "locale-id") == NULL) {
+        if (g_object_get_data (G_OBJECT (b), "locale-id") == NULL)
                 return -1;
-        }
 
         la = g_object_get_data (G_OBJECT (a), "locale-name");
         lb = g_object_get_data (G_OBJECT (b), "locale-name");
@@ -146,9 +144,8 @@ language_widget_new (const gchar *locale_id,
         check = gtk_image_new ();
         g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
         gtk_box_pack_start (GTK_BOX (widget), check, FALSE, FALSE, 0);
-        if (g_strcmp0 (locale_id, current_locale_id) == 0) {
+        if (g_strcmp0 (locale_id, current_locale_id) == 0)
                 gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
-        }
 
         g_object_set_data (G_OBJECT (widget), "check", check);
         g_object_set_data_full (G_OBJECT (widget), "locale-id", g_strdup (locale_id), g_free);
@@ -347,14 +344,16 @@ child_activated (EggListBox        *box,
 
         if (child == NULL)
                 return;
-        else if (child == priv->no_results)
+
+        if (child == priv->no_results)
                 return;
-        else if (child == priv->more_item)
+
+        if (child == priv->more_item) {
                 show_more (chooser);
-        else {
-                new_locale_id = g_object_get_data (G_OBJECT (child), "locale-id");
-                set_locale_id (chooser, new_locale_id);
+                return;
         }
+        new_locale_id = g_object_get_data (G_OBJECT (child), "locale-id");
+        set_locale_id (chooser, new_locale_id);
 }
 
 typedef struct {

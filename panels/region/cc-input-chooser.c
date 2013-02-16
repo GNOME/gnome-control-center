@@ -33,7 +33,7 @@
 #ifdef HAVE_IBUS
 #include <ibus.h>
 #include "cc-ibus-utils.h"
-#endif
+#endif  /* HAVE_IBUS */
 
 #define INPUT_SOURCE_TYPE_XKB "xkb"
 #define INPUT_SOURCE_TYPE_IBUS "ibus"
@@ -241,7 +241,7 @@ input_source_widget_new (GtkWidget   *chooser,
                               cc_util_normalize_casefold_and_unaccent (display_name), g_free);
 #else
       widget = NULL;
-#endif
+#endif  /* HAVE_IBUS */
     }
 
   if (widget)
@@ -573,7 +573,7 @@ strvs_differ (gchar **av,
     if (!g_str_equal (*a, *b))
       return TRUE;
 
-  if (!*a && !*b)
+  if (*a == NULL && *b == NULL)
     return FALSE;
 
   return TRUE;
@@ -883,7 +883,7 @@ get_ibus_locale_infos (GtkWidget *chooser)
       g_free (lang_code);
     }
 }
-#endif
+#endif  /* HAVE_IBUS */
 
 static void
 add_locale_to_table (GHashTable  *table,
@@ -1080,7 +1080,7 @@ cc_input_chooser_new (GtkWindow    *main_window,
   get_locale_infos (chooser);
 #ifdef HAVE_IBUS
   get_ibus_locale_infos (chooser);
-#endif
+#endif  /* HAVE_IBUS */
   show_locale_widgets (chooser);
 
   /* Try to come up with a sensible width */
@@ -1107,7 +1107,7 @@ cc_input_chooser_set_ibus_engines (GtkWidget  *chooser,
   priv->ibus_engines = ibus_engines;
   get_ibus_locale_infos (chooser);
   show_locale_widgets (chooser);
-#endif
+#endif  /* HAVE_IBUS */
 }
 
 gboolean

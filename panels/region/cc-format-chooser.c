@@ -106,9 +106,8 @@ update_format_examples (GtkDialog *chooser)
         setlocale (LC_MONETARY, priv->region);
 
         num_info = localeconv ();
-        if (num_info != NULL) {
+        if (num_info != NULL)
                 gtk_label_set_text (GTK_LABEL (priv->currency), num_info->currency_symbol);
-        }
 
         setlocale (LC_MONETARY, locale);
         g_free (locale);
@@ -191,12 +190,10 @@ sort_regions (gconstpointer a,
         const gchar *la;
         const gchar *lb;
 
-        if (g_object_get_data (G_OBJECT (a), "locale-id") == NULL) {
+        if (g_object_get_data (G_OBJECT (a), "locale-id") == NULL)
                 return 1;
-        }
-        if (g_object_get_data (G_OBJECT (b), "locale-id") == NULL) {
+        if (g_object_get_data (G_OBJECT (b), "locale-id") == NULL)
                 return -1;
-        }
 
         la = g_object_get_data (G_OBJECT (a), "locale-name");
         lb = g_object_get_data (G_OBJECT (b), "locale-name");
@@ -437,14 +434,16 @@ child_activated (EggListBox  *box,
 
         if (child == NULL)
                 return;
-        else if (child == priv->no_results)
+
+        if (child == priv->no_results)
                 return;
-        else if (child == priv->more_item)
+
+        if (child == priv->more_item) {
                 show_more (chooser);
-        else {
-                new_locale_id = g_object_get_data (G_OBJECT (child), "locale-id");
-                set_locale_id (chooser, new_locale_id);
+                return;
         }
+        new_locale_id = g_object_get_data (G_OBJECT (child), "locale-id");
+        set_locale_id (chooser, new_locale_id);
 }
 
 typedef struct {
