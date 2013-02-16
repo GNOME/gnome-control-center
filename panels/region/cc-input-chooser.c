@@ -1043,8 +1043,7 @@ cc_input_chooser_new (GtkWindow    *main_window,
   GError *error = NULL;
 
   builder = gtk_builder_new ();
-  gtk_builder_add_from_resource (builder, "/org/gnome/control-center/region/input-chooser.ui", &error);
-  if (error)
+  if (gtk_builder_add_from_resource (builder, "/org/gnome/control-center/region/input-chooser.ui", &error) == 0)
     {
       g_object_unref (builder);
       g_warning ("failed to load input chooser: %s", error->message);

@@ -498,8 +498,7 @@ cc_format_chooser_new (GtkWidget *parent)
         GError *error = NULL;
 
         builder = gtk_builder_new ();
-        gtk_builder_add_from_resource (builder, "/org/gnome/control-center/region/format-chooser.ui", &error);
-        if (error) {
+        if (gtk_builder_add_from_resource (builder, "/org/gnome/control-center/region/format-chooser.ui", &error) == 0) {
                 g_object_unref (builder);
                 g_warning ("failed to load format chooser: %s", error->message);
                 g_error_free (error);
