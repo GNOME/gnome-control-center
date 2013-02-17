@@ -31,6 +31,7 @@
 #include <gdk/gdkx.h>
 #include <string.h>
 #include <libgd/gd-styled-text-renderer.h>
+#include <libgd/gd-header-bar.h>
 
 #include "cc-panel.h"
 #include "cc-shell.h"
@@ -1371,36 +1372,11 @@ create_header (CcWindow *self)
 {
   CcWindowPrivate *priv = self->priv;
   GtkWidget *button;
-  GtkWidget *box;
   GtkWidget *image;
-  GtkWidget *frame;
-  GtkWidget *alignment;
-  GtkToolItem *item;
   AtkObject *accessible;
   GtkStyleContext *context;
 
-  priv->header = gtk_toolbar_new ();
-
-  context = gtk_widget_get_style_context (priv->header);
-  gtk_style_context_add_class (context, GTK_STYLE_CLASS_MENUBAR);
-
-  item = gtk_tool_item_new ();
-  gtk_toolbar_insert (GTK_TOOLBAR (priv->header), item, -1);
-  gtk_tool_item_set_expand (GTK_TOOL_ITEM (item), TRUE);
-
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_widget_set_margin_left (box, 10);
-  gtk_widget_set_margin_right (box, 5);
-  gtk_widget_set_margin_top (box, 5);
-  gtk_widget_set_margin_bottom (box, 5);
-  gtk_container_add (GTK_CONTAINER (item), box);
-
-  frame = gtk_aspect_frame_new (NULL, 0, 0.5, 1, FALSE);
-  gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
-  gtk_widget_set_hexpand (frame, TRUE);
-  gtk_container_add (GTK_CONTAINER (box), frame);
-  if (gtk_widget_get_direction (frame) == GTK_TEXT_DIR_RTL)
-    g_object_set (frame, "xalign", 1.0, NULL);
+  priv->header = gd_header_bar_new ();
 
   image = gtk_image_new_from_icon_name ("view-grid-symbolic", GTK_ICON_SIZE_MENU);
   gtk_widget_show (image);
@@ -1409,14 +1385,13 @@ create_header (CcWindow *self)
   gtk_widget_set_no_show_all (button, TRUE);
   accessible = gtk_widget_get_accessible (button);
   atk_object_set_name (accessible, _("All Settings"));
-  gtk_container_add (GTK_CONTAINER (frame), button);
+  gd_header_bar_pack_start (GD_HEADER_BAR (priv->header), button);
   g_signal_connect (button, "clicked", G_CALLBACK (home_button_clicked_cb), self);
-
-  alignment = gtk_alignment_new (0, 1, 0, 0);
-  gtk_container_add (GTK_CONTAINER (box), alignment);
+  context = gtk_widget_get_style_context (priv->home_button);
+  gtk_style_context_add_class (context, "raised");
 
   priv->top_right_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_container_add (GTK_CONTAINER (alignment), priv->top_right_box);
+  gd_header_bar_pack_end (GD_HEADER_BAR (priv->header), priv->top_right_box);
 
   priv->search_entry = gtk_search_entry_new ();
   gtk_container_add (GTK_CONTAINER (priv->top_right_box), priv->search_entry);
@@ -1428,6 +1403,8 @@ create_header (CcWindow *self)
   priv->lock_button = gtk_lock_button_new (NULL);
   gtk_widget_set_no_show_all (button, TRUE);
   gtk_container_add (GTK_CONTAINER (priv->top_right_box), priv->lock_button);
+  context = gtk_widget_get_style_context (priv->lock_button);
+  gtk_style_context_add_class (context, "raised");
 }
 
 static void
