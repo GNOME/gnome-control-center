@@ -22,7 +22,9 @@ BUILT_SOURCES =			\
 
 gnome_control_center_SOURCES =			\
 	$(BUILT_SOURCES)			\
-	control-center.c			\
+	main.c					\
+	cc-application.c			\
+	cc-application.h			\
 	cc-shell-log.c				\
 	cc-shell-log.h				\
 	gnome-control-center.c			\

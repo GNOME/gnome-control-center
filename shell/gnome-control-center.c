@@ -32,10 +32,6 @@
 #include <string.h>
 #include <libgd/gd-styled-text-renderer.h>
 
-#ifdef HAVE_CHEESE
-#include <clutter-gtk/clutter-gtk.h>
-#endif /* HAVE_CHEESE */
-
 #include "cc-panel.h"
 #include "cc-shell.h"
 #include "cc-shell-category-view.h"
