@@ -54,23 +54,22 @@ typedef struct _GnomeControlCenterPrivate GnomeControlCenterPrivate;
 
 struct _GnomeControlCenter
 {
-  CcShell parent;
-
+  GtkApplicationWindow parent;
   GnomeControlCenterPrivate *priv;
 };
 
 struct _GnomeControlCenterClass
 {
-  CcShellClass parent_class;
+  GtkApplicationWindowClass parent_class;
 };
 
 GType gnome_control_center_get_type (void) G_GNUC_CONST;
 
-GnomeControlCenter *gnome_control_center_new (void);
+GnomeControlCenter *gnome_control_center_new (GtkApplication *application);
 
 void gnome_control_center_present (GnomeControlCenter *center);
 
-void gnome_control_center_show (GnomeControlCenter *center, GtkApplication *app);
+void gnome_control_center_show (GnomeControlCenter *center);
 
 void gnome_control_center_set_overview_page (GnomeControlCenter *center);
 

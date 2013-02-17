@@ -166,7 +166,7 @@ cc_application_command_line (GApplication *application,
 
   cc_shell_log_set_debug (verbose);
 
-  gnome_control_center_show (self->priv->window, GTK_APPLICATION (application));
+  gnome_control_center_show (self->priv->window);
 
   if (search_str)
     {
@@ -222,7 +222,7 @@ cc_application_quit (GSimpleAction *simple,
 {
   CcApplication *self = CC_APPLICATION (user_data);
 
-  g_clear_object (&self->priv->window);
+  gtk_widget_destroy (GTK_WIDGET (self->priv->window));
 }
 
 
@@ -281,7 +281,7 @@ cc_application_startup (GApplication *application)
   gtk_application_add_accelerator (GTK_APPLICATION (application),
                                    "F1", "app.help", NULL);
 
-  self->priv->window = gnome_control_center_new ();
+  self->priv->window = gnome_control_center_new (GTK_APPLICATION (application));
 }
 
 static GObject *
