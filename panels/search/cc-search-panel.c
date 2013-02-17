@@ -548,9 +548,6 @@ cc_search_panel_constructed (GObject *object)
   search_box = WID ("search_vbox");
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
 
-  widget = gtk_label_new (_("Enabled"));
-  gtk_container_add (GTK_CONTAINER (box), widget);
-
   widget = gtk_switch_new ();
   gtk_container_add (GTK_CONTAINER (box), widget);
 
