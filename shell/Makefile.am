@@ -16,10 +16,6 @@ libshell_la_SOURCES = \
 
 bin_PROGRAMS = gnome-control-center
 
-BUILT_SOURCES =			\
-	cc-shell-resources.c	\
-	cc-shell-resources.h
-
 gnome_control_center_SOURCES =			\
 	$(BUILT_SOURCES)			\
 	main.c					\
@@ -96,12 +92,6 @@ menu_DATA = gnomecc.menu
 gnomecc.menu: gnomecc.menu.in
 	$(AM_V_GEN) cat $< | sed 's,@applicationsdir@,$(datadir)/applications/,' > $@
 
-resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/shell.gresource.xml)
-cc-shell-resources.c: shell.gresource.xml $(resource_files)
-	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-source --c-name cc_shell $<
-cc-shell-resources.h: shell.gresource.xml $(resource_files)
-	$(AM_V_GEN) glib-compile-resources --target=$@ --sourcedir=$(srcdir) --generate-header --c-name cc_shell $<
-
 sysdir = $(datadir)/applications
 sys_in_files = gnome-control-center.desktop.in
 sys_DATA = $(sys_in_files:.desktop.in=.desktop)
@@ -114,8 +104,6 @@ completions/gnome-control-center: completions/gnome-control-center.in list-panel
 	$(AM_V_GEN) mkdir -p `dirname $@` && cat $< | sed "s,@PANELS@,`$(srcdir)/list-panel.sh $(top_srcdir)`," > $@
 
 EXTRA_DIST =					\
-	$(resource_files)			\
-	shell.gresource.xml			\
 	gnome-control-center.desktop.in.in	\
 	$(completion_in_files)			\
 	list-panel.sh				\

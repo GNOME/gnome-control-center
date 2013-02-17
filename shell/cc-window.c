@@ -47,8 +47,6 @@ G_DEFINE_TYPE_WITH_CODE (CcWindow, cc_window, GTK_TYPE_APPLICATION_WINDOW,
 #define WINDOW_PRIVATE(o) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_WINDOW, CcWindowPrivate))
 
-#define W(b,x) GTK_WIDGET (gtk_builder_get_object (b, x))
-
 /* Use a fixed width for the shell, since resizing horizontally is more awkward
  * for the user than resizing vertically
  * Both sizes are defined in https://live.gnome.org/Design/SystemSettings/ */
@@ -69,16 +67,19 @@ typedef enum {
 
 struct _CcWindowPrivate
 {
-  GtkBuilder *builder;
   GtkWidget  *notebook;
+  GtkWidget  *header;
   GtkWidget  *main_vbox;
   GtkWidget  *scrolled_window;
   GtkWidget  *search_scrolled;
+  GtkWidget  *home_button;
+  GtkWidget  *top_right_box;
+  GtkWidget  *search_entry;
+  GtkWidget  *lock_button;
   GtkWidget  *current_panel_box;
   GtkWidget  *current_panel;
   char       *current_panel_id;
-  GtkWidget  *search_entry;
-  GtkWidget  *lock_button;
+
   GPtrArray  *custom_widgets;
 
   GtkListStore *store;
@@ -226,16 +227,14 @@ activate_panel (CcWindow           *self,
 static void
 _shell_remove_all_custom_widgets (CcWindowPrivate *priv)
 {
-  GtkBox *box;
   GtkWidget *widget;
   guint i;
 
   /* remove from the header */
-  box = GTK_BOX (W (priv->builder, "topright"));
   for (i = 0; i < priv->custom_widgets->len; i++)
     {
         widget = g_ptr_array_index (priv->custom_widgets, i);
-        gtk_container_remove (GTK_CONTAINER (box), widget);
+        gtk_container_remove (GTK_CONTAINER (priv->top_right_box), widget);
     }
   g_ptr_array_set_size (priv->custom_widgets, 0);
 }
@@ -639,8 +638,10 @@ search_entry_changed_cb (GtkEntry *entry,
 static gboolean
 search_entry_key_press_event_cb (GtkEntry        *entry,
                                  GdkEventKey     *event,
-                                 CcWindowPrivate *priv)
+                                 CcWindow        *self)
 {
+  CcWindowPrivate *priv = self->priv;
+
   if (event->keyval == GDK_KEY_Return)
     {
       GtkTreePath *path;
@@ -648,7 +649,7 @@ search_entry_key_press_event_cb (GtkEntry        *entry,
 
       path = gtk_tree_path_new_first ();
 
-      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->search_view));
+      selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (self->priv->search_view));
       gtk_tree_selection_select_path (selection, path);
 
       if (!gtk_tree_selection_path_is_selected (selection, path))
@@ -658,7 +659,7 @@ search_entry_key_press_event_cb (GtkEntry        *entry,
         }
 
       gtk_tree_view_row_activated (GTK_TREE_VIEW (priv->search_view), path,
-                                   gtk_tree_view_get_column (GTK_TREE_VIEW (priv->search_view), 0));
+                                   gtk_tree_view_get_column (GTK_TREE_VIEW (self->priv->search_view), 0));
       gtk_tree_path_free (path);
       return TRUE;
     }
@@ -746,7 +747,7 @@ on_search_button_press_event (GtkTreeView    *treeview,
 static void
 setup_search (CcWindow *shell)
 {
-  GtkWidget *search_view, *widget;
+  GtkWidget *search_view;
   GtkCellRenderer *renderer;
   GtkTreeViewColumn *column;
   CcWindowPrivate *priv = shell->priv;
@@ -801,7 +802,6 @@ setup_search (CcWindow *shell)
   gtk_tree_view_column_set_expand (column, TRUE);
   gtk_tree_view_append_column (GTK_TREE_VIEW (priv->search_view), column);
 
-  priv->search_scrolled = W (priv->builder, "search-scrolled-window");
   gtk_container_add (GTK_CONTAINER (priv->search_scrolled), search_view);
 
   g_signal_connect (priv->search_view, "row-activated",
@@ -809,25 +809,9 @@ setup_search (CcWindow *shell)
   g_signal_connect (priv->search_view, "button-press-event",
                     G_CALLBACK (on_search_button_press_event), shell);
 
-  /* setup the search entry widget */
-  widget = (GtkWidget*) gtk_builder_get_object (priv->builder, "search-entry");
-  priv->search_entry = widget;
   priv->filter_string = g_strdup ("");
 
-  g_signal_connect (widget, "changed", G_CALLBACK (search_entry_changed_cb),
-                    shell);
-  g_signal_connect (widget, "key-press-event",
-                    G_CALLBACK (search_entry_key_press_event_cb), priv);
-
   gtk_widget_show (priv->search_view);
-}
-
-static void
-setup_lock (CcWindow *shell)
-{
-  CcWindowPrivate *priv = shell->priv;
-
-  priv->lock_button = W (priv->builder, "lock-button");
 }
 
 static void
@@ -880,13 +864,6 @@ setup_model (CcWindow *shell)
 {
   CcWindowPrivate *priv = shell->priv;
 
-  gtk_widget_set_margin_top (shell->priv->main_vbox, 8);
-  gtk_widget_set_margin_bottom (shell->priv->main_vbox, 8);
-  gtk_widget_set_margin_left (shell->priv->main_vbox, 12);
-  gtk_widget_set_margin_right (shell->priv->main_vbox, 12);
-  gtk_container_set_focus_vadjustment (GTK_CONTAINER (shell->priv->main_vbox),
-                                       gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (shell->priv->scrolled_window)));
-
   priv->store = (GtkListStore *) cc_shell_model_new ();
 
   /* Add categories */
@@ -919,9 +896,9 @@ notebook_page_notify_cb (GtkNotebook *notebook,
 
   if (child == priv->scrolled_window || child == priv->search_scrolled)
     {
-      gtk_widget_hide (W (priv->builder, "home-button"));
-      gtk_widget_show (W (priv->builder, "search-entry"));
-      gtk_widget_hide (W (priv->builder, "lock-button"));
+      gtk_widget_hide (priv->home_button);
+      gtk_widget_show (priv->search_entry);
+      gtk_widget_hide (priv->lock_button);
 
       gtk_widget_get_preferred_height_for_width (GTK_WIDGET (priv->main_vbox),
                                                  FIXED_WIDTH, NULL, &nat_height);
@@ -930,8 +907,8 @@ notebook_page_notify_cb (GtkNotebook *notebook,
     }
   else
     {
-      gtk_widget_show (W (priv->builder, "home-button"));
-      gtk_widget_hide (W (priv->builder, "search-entry"));
+      gtk_widget_show (priv->home_button);
+      gtk_widget_hide (priv->search_entry);
       /* set the scrolled window small so that it doesn't force
          the window to be larger than this panel */
       gtk_widget_get_preferred_height_for_width (GTK_WIDGET (self),
@@ -949,11 +926,9 @@ _shell_embed_widget_in_header (CcShell      *shell,
                                GtkWidget    *widget)
 {
   CcWindowPrivate *priv = CC_WINDOW (shell)->priv;
-  GtkBox *box;
 
   /* add to header */
-  box = GTK_BOX (W (priv->builder, "topright"));
-  gtk_box_pack_end (box, widget, FALSE, FALSE, 0);
+  gtk_box_pack_end (GTK_BOX (priv->top_right_box), widget, FALSE, FALSE, 0);
   g_ptr_array_add (priv->custom_widgets, g_object_ref (widget));
 }
 
@@ -1115,6 +1090,7 @@ cc_window_dispose (GObject *object)
   CcWindowPrivate *priv = CC_WINDOW (object)->priv;
 
   g_free (priv->current_panel_id);
+  priv->current_panel_id = NULL;
 
   if (priv->custom_widgets)
     {
@@ -1122,24 +1098,9 @@ cc_window_dispose (GObject *object)
       priv->custom_widgets = NULL;
     }
 
-  if (priv->builder)
-    {
-      g_object_unref (priv->builder);
-      priv->builder = NULL;
-    }
-
-  if (priv->store)
-    {
-      g_object_unref (priv->store);
-      priv->store = NULL;
-    }
-
-  if (priv->search_filter)
-    {
-      g_object_unref (priv->search_filter);
-      priv->search_filter = NULL;
-    }
-
+  g_clear_object (&priv->store);
+  g_clear_object (&priv->search_filter);
+  g_clear_object (&priv->active_panel);
 
   G_OBJECT_CLASS (cc_window_parent_class)->dispose (object);
 }
@@ -1149,11 +1110,7 @@ cc_window_finalize (GObject *object)
 {
   CcWindowPrivate *priv = CC_WINDOW (object)->priv;
 
-  if (priv->filter_string)
-    {
-      g_free (priv->filter_string);
-      priv->filter_string = NULL;
-    }
+  g_free (priv->filter_string);
 
   G_OBJECT_CLASS (cc_window_parent_class)->finalize (object);
 }
@@ -1366,32 +1323,132 @@ gdk_window_set_cb (GObject    *object,
 }
 
 static void
-cc_window_init (CcWindow *self)
+create_main_page (CcWindow *self)
 {
-  GError *err = NULL;
-  CcWindowPrivate *priv;
-  GdkScreen *screen;
-  GtkWidget *frame;
+  CcWindowPrivate *priv = self->priv;
+  GtkStyleContext *context;
+
+  priv->scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+  context = gtk_widget_get_style_context (priv->scrolled_window);
+  gtk_style_context_add_class (context, "view");
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->scrolled_window),
+                                  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (priv->scrolled_window), GTK_SHADOW_IN);
+  gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), priv->scrolled_window, NULL);
+
+  priv->main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+  gtk_widget_set_margin_top (priv->main_vbox, 8);
+  gtk_widget_set_margin_bottom (priv->main_vbox, 8);
+  gtk_widget_set_margin_left (priv->main_vbox, 12);
+  gtk_widget_set_margin_right (priv->main_vbox, 12);
+  gtk_container_set_focus_vadjustment (GTK_CONTAINER (priv->main_vbox),
+                                       gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (priv->scrolled_window)));
+  gtk_container_add (GTK_CONTAINER (priv->scrolled_window), priv->main_vbox);
+
+  gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, -1);
+
+  /* load the available settings panels */
+  setup_model (self);
+}
+
+static void
+create_search_page (CcWindow *self)
+{
+  CcWindowPrivate *priv = self->priv;
+
+  priv->search_scrolled = gtk_scrolled_window_new (NULL, NULL);
+  gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->search_scrolled),
+                                  GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
+  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (priv->scrolled_window), GTK_SHADOW_IN);
+  gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), priv->search_scrolled, NULL);
+
+  /* setup search functionality */
+  setup_search (self);
+}
+
+static void
+create_header (CcWindow *self)
+{
+  CcWindowPrivate *priv = self->priv;
+  GtkWidget *button;
   GtkWidget *box;
+  GtkWidget *image;
+  GtkWidget *frame;
+  GtkWidget *alignment;
+  GtkToolItem *item;
+  AtkObject *accessible;
+  GtkStyleContext *context;
 
-  priv = self->priv = WINDOW_PRIVATE (self);
+  priv->header = gtk_toolbar_new ();
 
-  priv->monitor_num = -1;
-  self->priv->small_screen = SMALL_SCREEN_UNSET;
+  context = gtk_widget_get_style_context (priv->header);
+  gtk_style_context_add_class (context, GTK_STYLE_CLASS_MENUBAR);
 
-  /* load the user interface */
-  priv->builder = gtk_builder_new ();
+  item = gtk_tool_item_new ();
+  gtk_toolbar_insert (GTK_TOOLBAR (priv->header), item, -1);
+  gtk_tool_item_set_expand (GTK_TOOL_ITEM (item), TRUE);
 
-  if (!gtk_builder_add_from_resource (priv->builder, "/org/gnome/control-center/shell/shell.ui", &err))
-    {
-      g_critical ("Could not build interface: %s", err->message);
-      g_error_free (err);
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_widget_set_margin_left (box, 10);
+  gtk_widget_set_margin_right (box, 5);
+  gtk_widget_set_margin_top (box, 5);
+  gtk_widget_set_margin_bottom (box, 5);
+  gtk_container_add (GTK_CONTAINER (item), box);
 
-      return;
-    }
+  frame = gtk_aspect_frame_new (NULL, 0, 0.5, 1, FALSE);
+  gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
+  gtk_widget_set_hexpand (frame, TRUE);
+  gtk_container_add (GTK_CONTAINER (box), frame);
+  if (gtk_widget_get_direction (frame) == GTK_TEXT_DIR_RTL)
+    g_object_set (frame, "xalign", 1.0, NULL);
 
-  box = W(priv->builder, "vbox1");
-  gtk_widget_reparent (box, GTK_WIDGET (self));
+  image = gtk_image_new_from_icon_name ("view-grid-symbolic", GTK_ICON_SIZE_MENU);
+  gtk_widget_show (image);
+  priv->home_button = button = gtk_button_new ();
+  gtk_button_set_image (GTK_BUTTON (button), image);
+  gtk_widget_set_no_show_all (button, TRUE);
+  accessible = gtk_widget_get_accessible (button);
+  atk_object_set_name (accessible, _("All Settings"));
+  gtk_container_add (GTK_CONTAINER (frame), button);
+  g_signal_connect (button, "clicked", G_CALLBACK (home_button_clicked_cb), self);
+
+  alignment = gtk_alignment_new (0, 1, 0, 0);
+  gtk_container_add (GTK_CONTAINER (box), alignment);
+
+  priv->top_right_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_container_add (GTK_CONTAINER (alignment), priv->top_right_box);
+
+  priv->search_entry = gtk_search_entry_new ();
+  gtk_container_add (GTK_CONTAINER (priv->top_right_box), priv->search_entry);
+  gtk_entry_set_width_chars (GTK_ENTRY (priv->search_entry), 30);
+  gtk_entry_set_invisible_char (GTK_ENTRY (priv->search_entry), 9679);
+  g_signal_connect (priv->search_entry, "changed", G_CALLBACK (search_entry_changed_cb), self);
+  g_signal_connect (priv->search_entry, "key-press-event", G_CALLBACK (search_entry_key_press_event_cb), self);
+
+  priv->lock_button = gtk_lock_button_new (NULL);
+  gtk_widget_set_no_show_all (button, TRUE);
+  gtk_container_add (GTK_CONTAINER (priv->top_right_box), priv->lock_button);
+}
+
+static void
+create_window (CcWindow *self)
+{
+  CcWindowPrivate *priv = self->priv;
+  GtkWidget *box;
+  GdkScreen *screen;
+
+  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+  gtk_container_add (GTK_CONTAINER (self), box);
+
+  create_header (self);
+  gtk_box_pack_start (GTK_BOX (box), priv->header, FALSE, FALSE, 0);
+
+  priv->notebook = gtk_notebook_new ();
+  gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->notebook), FALSE);
+  gtk_box_pack_start (GTK_BOX (box), priv->notebook, TRUE, TRUE, 0);
+
+  create_main_page (self);
+  create_search_page (self);
 
   /* connect various signals */
   screen = gtk_widget_get_screen (GTK_WIDGET (self));
@@ -1403,34 +1460,26 @@ cc_window_init (CcWindow *self)
                           G_CALLBACK (window_key_press_event), self);
   g_signal_connect (self, "notify::window", G_CALLBACK (gdk_window_set_cb), self);
 
-  priv->notebook = W (priv->builder, "notebook");
-
-  /* Main scrolled window */
-  priv->scrolled_window = W (priv->builder, "scrolledwindow1");
-
-  gtk_widget_set_size_request (priv->scrolled_window, FIXED_WIDTH, -1);
-  priv->main_vbox = W (priv->builder, "main-vbox");
   g_signal_connect (priv->notebook, "notify::page",
                     G_CALLBACK (notebook_page_notify_cb), self);
 
-  /* Set the alignment for the home button */
-  frame = W(priv->builder, "home-aspect-frame");
-  if (gtk_widget_get_direction (frame) == GTK_TEXT_DIR_RTL)
-    g_object_set (frame, "xalign", 1.0, NULL);
+  gtk_widget_show_all (box);
+}
 
-  g_signal_connect (gtk_builder_get_object (priv->builder, "home-button"),
-                    "clicked", G_CALLBACK (home_button_clicked_cb), self);
+static void
+cc_window_init (CcWindow *self)
+{
+  CcWindowPrivate *priv;
+
+  priv = self->priv = WINDOW_PRIVATE (self);
+
+  priv->monitor_num = -1;
+  self->priv->small_screen = SMALL_SCREEN_UNSET;
+
+  create_window (self);
 
   /* keep a list of custom widgets to unload on panel change */
   priv->custom_widgets = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
-
-  /* load the available settings panels */
-  setup_model (self);
-
-  /* setup search functionality */
-  setup_search (self);
-
-  setup_lock (self);
 
   notebook_page_notify_cb (GTK_NOTEBOOK (priv->notebook), NULL, self);
 }
