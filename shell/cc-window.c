@@ -21,7 +21,7 @@
 
 #include <config.h>
 
-#include "gnome-control-center.h"
+#include "cc-window.h"
 
 #include <glib/gi18n.h>
 #include <gio/gio.h>
@@ -41,11 +41,11 @@
 
 static void     cc_shell_iface_init         (CcShellInterface      *iface);
 
-G_DEFINE_TYPE_WITH_CODE (GnomeControlCenter, gnome_control_center, GTK_TYPE_APPLICATION_WINDOW,
+G_DEFINE_TYPE_WITH_CODE (CcWindow, cc_window, GTK_TYPE_APPLICATION_WINDOW,
                          G_IMPLEMENT_INTERFACE (CC_TYPE_SHELL, cc_shell_iface_init))
 
-#define CONTROL_CENTER_PRIVATE(o) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((o), GNOME_TYPE_CONTROL_CENTER, GnomeControlCenterPrivate))
+#define WINDOW_PRIVATE(o) \
+  (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_WINDOW, CcWindowPrivate))
 
 #define W(b,x) GTK_WIDGET (gtk_builder_get_object (b, x))
 
@@ -67,7 +67,7 @@ typedef enum {
 	SMALL_SCREEN_FALSE
 } CcSmallScreen;
 
-struct _GnomeControlCenterPrivate
+struct _CcWindowPrivate
 {
   GtkBuilder *builder;
   GtkWidget  *notebook;
@@ -113,7 +113,7 @@ notebook_get_selected_page (GtkWidget *notebook)
 
 static void
 notebook_select_page (GtkWidget *notebook,
-		      GtkWidget *page)
+                      GtkWidget *page)
 {
   int i, num;
 
@@ -132,7 +132,7 @@ notebook_select_page (GtkWidget *notebook,
 
 static void
 notebook_remove_page (GtkWidget *notebook,
-		      GtkWidget *page)
+                      GtkWidget *page)
 {
   int i, num;
 
@@ -179,13 +179,13 @@ get_icon_name_from_g_icon (GIcon *gicon)
 }
 
 static gboolean
-activate_panel (GnomeControlCenter *self,
+activate_panel (CcWindow           *self,
                 const gchar        *id,
-		const gchar       **argv,
+                const gchar       **argv,
                 const gchar        *name,
                 GIcon              *gicon)
 {
-  GnomeControlCenterPrivate *priv = self->priv;
+  CcWindowPrivate *priv = self->priv;
   GtkWidget *box;
   const gchar *icon_name;
 
@@ -224,7 +224,7 @@ activate_panel (GnomeControlCenter *self,
 }
 
 static void
-_shell_remove_all_custom_widgets (GnomeControlCenterPrivate *priv)
+_shell_remove_all_custom_widgets (CcWindowPrivate *priv)
 {
   GtkBox *box;
   GtkWidget *widget;
@@ -241,9 +241,9 @@ _shell_remove_all_custom_widgets (GnomeControlCenterPrivate *priv)
 }
 
 static void
-shell_show_overview_page (GnomeControlCenter *self)
+shell_show_overview_page (CcWindow *self)
 {
-  GnomeControlCenterPrivate *priv = self->priv;
+  CcWindowPrivate *priv = self->priv;
 
   notebook_select_page (priv->notebook, priv->scrolled_window);
 
@@ -274,14 +274,14 @@ shell_show_overview_page (GnomeControlCenter *self)
 }
 
 void
-gnome_control_center_set_overview_page (GnomeControlCenter *center)
+cc_window_set_overview_page (CcWindow *center)
 {
   shell_show_overview_page (center);
 }
 
 void
-gnome_control_center_set_search_item (GnomeControlCenter *center,
-                                      const char         *search)
+cc_window_set_search_item (CcWindow   *center,
+                           const char *search)
 {
   shell_show_overview_page (center);
   gtk_entry_set_text (GTK_ENTRY (center->priv->search_entry), search);
@@ -292,15 +292,15 @@ static void
 item_activated_cb (CcShellCategoryView *view,
                    gchar               *name,
                    gchar               *id,
-                   GnomeControlCenter  *shell)
+                   CcWindow            *shell)
 {
   cc_shell_set_active_panel_from_id (CC_SHELL (shell), id, NULL, NULL);
 }
 
 static gboolean
-category_focus_out (GtkWidget          *view,
-                    GdkEventFocus      *event,
-                    GnomeControlCenter *shell)
+category_focus_out (GtkWidget     *view,
+                    GdkEventFocus *event,
+                    CcWindow      *shell)
 {
   gtk_icon_view_unselect_all (GTK_ICON_VIEW (view));
 
@@ -308,9 +308,9 @@ category_focus_out (GtkWidget          *view,
 }
 
 static gboolean
-category_focus_in (GtkWidget          *view,
-                   GdkEventFocus      *event,
-                   GnomeControlCenter *shell)
+category_focus_in (GtkWidget     *view,
+                   GdkEventFocus *event,
+                   CcWindow      *shell)
 {
   GtkTreePath *path;
 
@@ -327,7 +327,7 @@ category_focus_in (GtkWidget          *view,
 }
 
 static GList *
-get_item_views (GnomeControlCenter *shell)
+get_item_views (CcWindow *shell)
 {
   GList *list, *l;
   GList *res;
@@ -409,9 +409,9 @@ get_last_path (GtkIconView *view)
 }
 
 static gboolean
-categories_keynav_failed (GtkIconView        *current_view,
-                          GtkDirectionType    direction,
-                          GnomeControlCenter *shell)
+categories_keynav_failed (GtkIconView      *current_view,
+                          GtkDirectionType  direction,
+                          CcWindow         *shell)
 {
   GList *views, *v;
   GtkIconView *new_view;
@@ -578,9 +578,9 @@ out:
 }
 
 static gboolean
-model_filter_func (GtkTreeModel              *model,
-                   GtkTreeIter               *iter,
-                   GnomeControlCenterPrivate *priv)
+model_filter_func (GtkTreeModel    *model,
+                   GtkTreeIter     *iter,
+                   CcWindowPrivate *priv)
 {
   if (!priv->filter_string)
     return FALSE;
@@ -603,10 +603,10 @@ category_filter_func (GtkTreeModel    *model,
 }
 
 static void
-search_entry_changed_cb (GtkEntry           *entry,
-                         GnomeControlCenter *center)
+search_entry_changed_cb (GtkEntry *entry,
+                         CcWindow *center)
 {
-  GnomeControlCenterPrivate *priv = center->priv;
+  CcWindowPrivate *priv = center->priv;
   char *str;
 
   /* if the entry text was set manually (not by the user) */
@@ -637,9 +637,9 @@ search_entry_changed_cb (GtkEntry           *entry,
 }
 
 static gboolean
-search_entry_key_press_event_cb (GtkEntry    *entry,
-                                 GdkEventKey *event,
-                                 GnomeControlCenterPrivate   *priv)
+search_entry_key_press_event_cb (GtkEntry        *entry,
+                                 GdkEventKey     *event,
+                                 CcWindowPrivate *priv)
 {
   if (event->keyval == GDK_KEY_Return)
     {
@@ -676,7 +676,7 @@ static void
 on_search_row_activated (GtkTreeView       *treeview,
                          GtkTreePath       *path,
                          GtkTreeViewColumn *column,
-                         GnomeControlCenter *shell)
+                         CcWindow          *shell)
 {
   GtkTreeSelection *selection;
   GtkTreeModel *model;
@@ -701,9 +701,9 @@ on_search_row_activated (GtkTreeView       *treeview,
 }
 
 static gboolean
-on_search_button_press_event (GtkTreeView        *treeview,
-                              GdkEventButton     *event,
-                              GnomeControlCenter *shell)
+on_search_button_press_event (GtkTreeView    *treeview,
+                              GdkEventButton *event,
+                              CcWindow       *shell)
 {
   if (event->type == GDK_BUTTON_PRESS && event->button == 1)
     {
@@ -744,12 +744,12 @@ on_search_button_press_event (GtkTreeView        *treeview,
 }
 
 static void
-setup_search (GnomeControlCenter *shell)
+setup_search (CcWindow *shell)
 {
   GtkWidget *search_view, *widget;
   GtkCellRenderer *renderer;
   GtkTreeViewColumn *column;
-  GnomeControlCenterPrivate *priv = shell->priv;
+  CcWindowPrivate *priv = shell->priv;
 
   g_return_if_fail (priv->store != NULL);
 
@@ -823,17 +823,17 @@ setup_search (GnomeControlCenter *shell)
 }
 
 static void
-setup_lock (GnomeControlCenter *shell)
+setup_lock (CcWindow *shell)
 {
-  GnomeControlCenterPrivate *priv = shell->priv;
+  CcWindowPrivate *priv = shell->priv;
 
   priv->lock_button = W (priv->builder, "lock-button");
 }
 
 static void
-add_category_view (GnomeControlCenter *shell,
-                   CcPanelCategory     category,
-                   const char         *name)
+add_category_view (CcWindow        *shell,
+                   CcPanelCategory  category,
+                   const char      *name)
 {
   GtkTreeModel *filter;
   GtkWidget *categoryview;
@@ -876,9 +876,9 @@ add_category_view (GnomeControlCenter *shell,
 }
 
 static void
-setup_model (GnomeControlCenter *shell)
+setup_model (CcWindow *shell)
 {
-  GnomeControlCenterPrivate *priv = shell->priv;
+  CcWindowPrivate *priv = shell->priv;
 
   gtk_widget_set_margin_top (shell->priv->main_vbox, 8);
   gtk_widget_set_margin_bottom (shell->priv->main_vbox, 8);
@@ -899,17 +899,17 @@ setup_model (GnomeControlCenter *shell)
 
 static void
 home_button_clicked_cb (GtkButton *button,
-                        GnomeControlCenter *shell)
+                        CcWindow  *shell)
 {
   shell_show_overview_page (shell);
 }
 
 static void
-notebook_page_notify_cb (GtkNotebook        *notebook,
-			 GParamSpec         *spec,
-                         GnomeControlCenter *self)
+notebook_page_notify_cb (GtkNotebook *notebook,
+                         GParamSpec  *spec,
+                         CcWindow    *self)
 {
-  GnomeControlCenterPrivate *priv = self->priv;
+  CcWindowPrivate *priv = self->priv;
   int nat_height;
   GtkWidget *child;
 
@@ -948,7 +948,7 @@ static void
 _shell_embed_widget_in_header (CcShell      *shell,
                                GtkWidget    *widget)
 {
-  GnomeControlCenterPrivate *priv = GNOME_CONTROL_CENTER (shell)->priv;
+  CcWindowPrivate *priv = CC_WINDOW (shell)->priv;
   GtkBox *box;
 
   /* add to header */
@@ -961,14 +961,14 @@ _shell_embed_widget_in_header (CcShell      *shell,
 static gboolean
 _shell_set_active_panel_from_id (CcShell      *shell,
                                  const gchar  *start_id,
-				 const gchar **argv,
+                                 const gchar **argv,
                                  GError      **err)
 {
   GtkTreeIter iter;
   gboolean iter_valid;
   gchar *name = NULL;
   GIcon *gicon = NULL;
-  GnomeControlCenterPrivate *priv = GNOME_CONTROL_CENTER (shell)->priv;
+  CcWindowPrivate *priv = CC_WINDOW (shell)->priv;
   GtkWidget *old_panel;
 
   /* When loading the same panel again, just set the argv */
@@ -1004,8 +1004,8 @@ _shell_set_active_panel_from_id (CcShell      *shell,
         {
           g_free (id);
           g_free (name);
-	  if (gicon)
-	    g_object_unref (gicon);
+          if (gicon)
+            g_object_unref (gicon);
 
           name = NULL;
           id = NULL;
@@ -1022,7 +1022,7 @@ _shell_set_active_panel_from_id (CcShell      *shell,
     {
       g_warning ("Could not find settings panel \"%s\"", start_id);
     }
-  else if (activate_panel (GNOME_CONTROL_CENTER (shell), start_id, argv,
+  else if (activate_panel (CC_WINDOW (shell), start_id, argv,
                            name, gicon) == FALSE)
     {
       /* Failed to activate the panel for some reason,
@@ -1053,12 +1053,12 @@ _shell_get_toplevel (CcShell *shell)
 
 /* GObject Implementation */
 static void
-gnome_control_center_get_property (GObject    *object,
-                                   guint       property_id,
-                                   GValue     *value,
-                                   GParamSpec *pspec)
+cc_window_get_property (GObject    *object,
+                        guint       property_id,
+                        GValue     *value,
+                        GParamSpec *pspec)
 {
-  GnomeControlCenterPrivate *priv = GNOME_CONTROL_CENTER (object)->priv;
+  CcWindowPrivate *priv = CC_WINDOW (object)->priv;
 
   switch (property_id)
     {
@@ -1071,7 +1071,7 @@ gnome_control_center_get_property (GObject    *object,
 }
 
 static void
-set_active_panel (GnomeControlCenter *shell,
+set_active_panel (CcWindow *shell,
                   CcPanel *panel)
 {
   g_return_if_fail (CC_IS_SHELL (shell));
@@ -1092,12 +1092,12 @@ set_active_panel (GnomeControlCenter *shell,
 }
 
 static void
-gnome_control_center_set_property (GObject      *object,
-                                   guint         property_id,
-                                   const GValue *value,
-                                   GParamSpec   *pspec)
+cc_window_set_property (GObject      *object,
+                        guint         property_id,
+                        const GValue *value,
+                        GParamSpec   *pspec)
 {
-  GnomeControlCenter *shell = GNOME_CONTROL_CENTER (object);
+  CcWindow *shell = CC_WINDOW (object);
 
   switch (property_id)
     {
@@ -1110,9 +1110,9 @@ gnome_control_center_set_property (GObject      *object,
 }
 
 static void
-gnome_control_center_dispose (GObject *object)
+cc_window_dispose (GObject *object)
 {
-  GnomeControlCenterPrivate *priv = GNOME_CONTROL_CENTER (object)->priv;
+  CcWindowPrivate *priv = CC_WINDOW (object)->priv;
 
   g_free (priv->current_panel_id);
 
@@ -1141,13 +1141,13 @@ gnome_control_center_dispose (GObject *object)
     }
 
 
-  G_OBJECT_CLASS (gnome_control_center_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_window_parent_class)->dispose (object);
 }
 
 static void
-gnome_control_center_finalize (GObject *object)
+cc_window_finalize (GObject *object)
 {
-  GnomeControlCenterPrivate *priv = GNOME_CONTROL_CENTER (object)->priv;
+  CcWindowPrivate *priv = CC_WINDOW (object)->priv;
 
   if (priv->filter_string)
     {
@@ -1155,7 +1155,7 @@ gnome_control_center_finalize (GObject *object)
       priv->filter_string = NULL;
     }
 
-  G_OBJECT_CLASS (gnome_control_center_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_window_parent_class)->finalize (object);
 }
 
 static void
@@ -1167,24 +1167,24 @@ cc_shell_iface_init (CcShellInterface *iface)
 }
 
 static void
-gnome_control_center_class_init (GnomeControlCenterClass *klass)
+cc_window_class_init (CcWindowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GnomeControlCenterPrivate));
+  g_type_class_add_private (klass, sizeof (CcWindowPrivate));
 
-  object_class->get_property = gnome_control_center_get_property;
-  object_class->set_property = gnome_control_center_set_property;
-  object_class->dispose = gnome_control_center_dispose;
-  object_class->finalize = gnome_control_center_finalize;
+  object_class->get_property = cc_window_get_property;
+  object_class->set_property = cc_window_set_property;
+  object_class->dispose = cc_window_dispose;
+  object_class->finalize = cc_window_finalize;
 
   g_object_class_override_property (object_class, PROP_ACTIVE_PANEL, "active-panel");
 }
 
 static gboolean
-window_key_press_event (GtkWidget          *win,
-			GdkEventKey        *event,
-			GnomeControlCenter *self)
+window_key_press_event (GtkWidget   *win,
+                        GdkEventKey *event,
+                        CcWindow    *self)
 {
   GdkKeymap *keymap;
   gboolean retval;
@@ -1237,7 +1237,7 @@ window_key_press_event (GtkWidget          *win,
 }
 
 static gint
-get_monitor_height (GnomeControlCenter *self)
+get_monitor_height (CcWindow *self)
 {
   GdkScreen *screen;
   GdkRectangle rect;
@@ -1251,7 +1251,7 @@ get_monitor_height (GnomeControlCenter *self)
 }
 
 static gboolean
-update_monitor_number (GnomeControlCenter *self)
+update_monitor_number (CcWindow *self)
 {
   gboolean changed = FALSE;
   GtkWidget *widget;
@@ -1274,7 +1274,7 @@ update_monitor_number (GnomeControlCenter *self)
 }
 
 static CcSmallScreen
-is_small (GnomeControlCenter *self)
+is_small (CcWindow *self)
 {
   if (get_monitor_height (self) <= FIXED_HEIGHT)
     return SMALL_SCREEN_TRUE;
@@ -1282,7 +1282,7 @@ is_small (GnomeControlCenter *self)
 }
 
 static void
-update_small_screen_settings (GnomeControlCenter *self)
+update_small_screen_settings (CcWindow *self)
 {
   CcSmallScreen small;
 
@@ -1313,7 +1313,7 @@ update_small_screen_settings (GnomeControlCenter *self)
 static gboolean
 main_window_configure_cb (GtkWidget *widget,
                           GdkEvent  *event,
-                          GnomeControlCenter *self)
+                          CcWindow  *self)
 {
   update_small_screen_settings (self);
   return FALSE;
@@ -1322,7 +1322,7 @@ main_window_configure_cb (GtkWidget *widget,
 static void
 application_set_cb (GObject    *object,
                     GParamSpec *pspec,
-                    GnomeControlCenter *self)
+                    CcWindow   *self)
 {
   /* update small screen settings now - to avoid visible resizing, we want
    * to do it before showing the window, and GtkApplicationWindow cannot be
@@ -1336,7 +1336,7 @@ application_set_cb (GObject    *object,
 
 static void
 monitors_changed_cb (GdkScreen *screen,
-                     GnomeControlCenter *self)
+                     CcWindow  *self)
 {
   /* We reset small_screen_set to make sure that the
    * window gets maximised if need be, in update_small_screen_settings() */
@@ -1347,7 +1347,7 @@ monitors_changed_cb (GdkScreen *screen,
 static void
 gdk_window_set_cb (GObject    *object,
                    GParamSpec *pspec,
-                   GnomeControlCenter *self)
+                   CcWindow   *self)
 {
   GdkWindow *window;
   gchar *str;
@@ -1366,15 +1366,15 @@ gdk_window_set_cb (GObject    *object,
 }
 
 static void
-gnome_control_center_init (GnomeControlCenter *self)
+cc_window_init (CcWindow *self)
 {
   GError *err = NULL;
-  GnomeControlCenterPrivate *priv;
+  CcWindowPrivate *priv;
   GdkScreen *screen;
   GtkWidget *frame;
   GtkWidget *box;
 
-  priv = self->priv = CONTROL_CENTER_PRIVATE (self);
+  priv = self->priv = WINDOW_PRIVATE (self);
 
   priv->monitor_num = -1;
   self->priv->small_screen = SMALL_SCREEN_UNSET;
@@ -1435,12 +1435,12 @@ gnome_control_center_init (GnomeControlCenter *self)
   notebook_page_notify_cb (GTK_NOTEBOOK (priv->notebook), NULL, self);
 }
 
-GnomeControlCenter *
-gnome_control_center_new (GtkApplication *application)
+CcWindow *
+cc_window_new (GtkApplication *application)
 {
   g_return_val_if_fail (GTK_IS_APPLICATION (application), NULL);
 
-  return g_object_new (GNOME_TYPE_CONTROL_CENTER,
+  return g_object_new (CC_TYPE_WINDOW,
                        "application", application,
                        "hide-titlebar-when-maximized", TRUE,
                        "resizable", TRUE,
@@ -1451,13 +1451,13 @@ gnome_control_center_new (GtkApplication *application)
 }
 
 void
-gnome_control_center_present (GnomeControlCenter *center)
+cc_window_present (CcWindow *center)
 {
   gtk_window_present (GTK_WINDOW (center));
 }
 
 void
-gnome_control_center_show (GnomeControlCenter *center)
+cc_window_show (CcWindow *center)
 {
   gtk_widget_show (GTK_WIDGET (center));
 }

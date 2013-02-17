@@ -27,8 +27,8 @@ gnome_control_center_SOURCES =			\
 	cc-application.h			\
 	cc-shell-log.c				\
 	cc-shell-log.h				\
-	gnome-control-center.c			\
-	gnome-control-center.h			\
+	cc-window.c				\
+	cc-window.h				\
 	cc-shell-category-view.c		\
 	cc-shell-category-view.h		\
 	cc-shell-item-view.c			\

@@ -30,7 +30,7 @@
 #include "cc-application.h"
 #include "cc-panel-loader.h"
 #include "cc-shell-log.h"
-#include "gnome-control-center.h"
+#include "cc-window.h"
 
 #ifdef HAVE_CHEESE
 #include <cheese-gtk.h>
@@ -38,7 +38,7 @@
 
 struct _CcApplicationPrivate
 {
-  GnomeControlCenter *window;
+  CcWindow *window;
 };
 
 G_DEFINE_TYPE (CcApplication, cc_application, GTK_TYPE_APPLICATION)
@@ -166,15 +166,15 @@ cc_application_command_line (GApplication *application,
 
   cc_shell_log_set_debug (verbose);
 
-  gnome_control_center_show (self->priv->window);
+  cc_window_show (self->priv->window);
 
   if (search_str)
     {
-      gnome_control_center_set_search_item (self->priv->window, search_str);
+      cc_window_set_search_item (self->priv->window, search_str);
     }
   else if (show_overview)
     {
-      gnome_control_center_set_overview_page (self->priv->window);
+      cc_window_set_overview_page (self->priv->window);
     }
   else if (start_panels != NULL && start_panels[0] != NULL)
     {
@@ -231,7 +231,7 @@ cc_application_activate (GApplication *application)
 {
   CcApplication *self = CC_APPLICATION (application);
 
-  gnome_control_center_present (self->priv->window);
+  cc_window_present (self->priv->window);
 }
 
 static void
@@ -281,7 +281,7 @@ cc_application_startup (GApplication *application)
   gtk_application_add_accelerator (GTK_APPLICATION (application),
                                    "F1", "app.help", NULL);
 
-  self->priv->window = gnome_control_center_new (GTK_APPLICATION (application));
+  self->priv->window = cc_window_new (GTK_APPLICATION (application));
 }
 
 static GObject *
