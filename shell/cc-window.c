@@ -216,7 +216,7 @@ activate_panel (CcWindow           *self,
   icon_name = get_icon_name_from_g_icon (gicon);
 
   gtk_window_set_role (GTK_WINDOW (self), id);
-  gtk_window_set_title (GTK_WINDOW (self), name);
+  gd_header_bar_set_title (GD_HEADER_BAR (priv->header), name);
   gtk_window_set_default_icon_name (icon_name);
   gtk_window_set_icon_name (GTK_WINDOW (self), icon_name);
 
@@ -264,6 +264,7 @@ shell_show_overview_page (CcWindow *self)
   /* reset window title and icon */
   gtk_window_set_role (GTK_WINDOW (self), NULL);
   gtk_window_set_title (GTK_WINDOW (self), _(DEFAULT_WINDOW_TITLE));
+  gd_header_bar_set_title (GD_HEADER_BAR (priv->header), NULL);
   gtk_window_set_default_icon_name (DEFAULT_WINDOW_ICON_NAME);
   gtk_window_set_icon_name (GTK_WINDOW (self), DEFAULT_WINDOW_ICON_NAME);
 
