@@ -1376,7 +1376,7 @@ create_header (CcWindow *self)
 
   priv->header = gd_header_bar_new ();
 
-  image = gtk_image_new_from_icon_name ("view-grid-symbolic", GTK_ICON_SIZE_MENU);
+  image = gtk_image_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
   gtk_widget_show (image);
   priv->home_button = button = gtk_button_new ();
   gtk_button_set_image (GTK_BUTTON (button), image);
