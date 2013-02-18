@@ -1388,7 +1388,7 @@ create_header (CcWindow *self)
   gd_header_bar_pack_start (GD_HEADER_BAR (priv->header), button);
   g_signal_connect (button, "clicked", G_CALLBACK (home_button_clicked_cb), self);
   context = gtk_widget_get_style_context (priv->home_button);
-  gtk_style_context_add_class (context, "raised");
+  gtk_style_context_add_class (context, "image-button");
 
   priv->top_right_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
   gd_header_bar_pack_end (GD_HEADER_BAR (priv->header), priv->top_right_box);
@@ -1403,8 +1403,6 @@ create_header (CcWindow *self)
   priv->lock_button = gtk_lock_button_new (NULL);
   gtk_widget_set_no_show_all (button, TRUE);
   gtk_container_add (GTK_CONTAINER (priv->top_right_box), priv->lock_button);
-  context = gtk_widget_get_style_context (priv->lock_button);
-  gtk_style_context_add_class (context, "raised");
 }
 
 static void
