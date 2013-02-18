@@ -26,6 +26,8 @@
 
 #include "cc-panel-loader.h"
 
+#ifndef CC_PANEL_LOADER_NO_GTYPES
+
 /* Extension points */
 extern GType cc_background_panel_get_type (void);
 #ifdef BUILD_BLUETOOTH
@@ -57,42 +59,50 @@ extern GType cc_user_panel_get_type (void);
 extern GType cc_wacom_panel_get_type (void);
 #endif /* BUILD_WACOM */
 
+#define PANEL_TYPE(name, get_type) { name, get_type }
+
+#else /* CC_PANEL_LOADER_NO_GTYPES */
+
+#define PANEL_TYPE(name, get_type) { name }
+
+#endif
+
 static struct {
   const char *name;
+#ifndef CC_PANEL_LOADER_NO_GTYPES
   GType (*get_type)(void);
+#endif
 } all_panels[] = {
-  { "background",       cc_background_panel_get_type },
+  PANEL_TYPE("background",       cc_background_panel_get_type   ),
 #ifdef BUILD_BLUETOOTH
-  { "bluetooth",        cc_bluetooth_panel_get_type  },
+  PANEL_TYPE("bluetooth",        cc_bluetooth_panel_get_type    ),
 #endif
-  { "color",            cc_color_panel_get_type      },
-  { "datetime",         cc_date_time_panel_get_type  },
-  { "display",          cc_display_panel_get_type    },
-  { "info",             cc_info_panel_get_type       },
-  { "keyboard",         cc_keyboard_panel_get_type   },
-  { "mouse",            cc_mouse_panel_get_type      },
+  PANEL_TYPE("color",            cc_color_panel_get_type        ),
+  PANEL_TYPE("datetime",         cc_date_time_panel_get_type    ),
+  PANEL_TYPE("display",          cc_display_panel_get_type      ),
+  PANEL_TYPE("info",             cc_info_panel_get_type         ),
+  PANEL_TYPE("keyboard",         cc_keyboard_panel_get_type     ),
+  PANEL_TYPE("mouse",            cc_mouse_panel_get_type        ),
 #ifdef BUILD_NETWORK
-  { "network",          cc_network_panel_get_type    },
+  PANEL_TYPE("network",          cc_network_panel_get_type      ),
 #endif
-  { "notifications",    cc_notifications_panel_get_type },
-  { "online-accounts",  cc_goa_panel_get_type        },
-  { "power",            cc_power_panel_get_type      },
+  PANEL_TYPE("notifications",    cc_notifications_panel_get_type),
+  PANEL_TYPE("online-accounts",  cc_goa_panel_get_type          ),
+  PANEL_TYPE("power",            cc_power_panel_get_type        ),
 #ifdef BUILD_PRINTERS
-  { "printers",         cc_printers_panel_get_type   },
+  PANEL_TYPE("printers",         cc_printers_panel_get_type     ),
 #endif
-  { "privacy",          cc_privacy_panel_get_type    },
-  { "region",           cc_region_panel_get_type     },
-  { "search",           cc_search_panel_get_type     },
-  { "sharing",          cc_sharing_panel_get_type    },
-  { "sound",            cc_sound_panel_get_type      },
-  { "universal-access", cc_ua_panel_get_type         },
-  { "user-accounts",    cc_user_panel_get_type       },
+  PANEL_TYPE("privacy",          cc_privacy_panel_get_type      ),
+  PANEL_TYPE("region",           cc_region_panel_get_type       ),
+  PANEL_TYPE("search",           cc_search_panel_get_type       ),
+  PANEL_TYPE("sharing",          cc_sharing_panel_get_type      ),
+  PANEL_TYPE("sound",            cc_sound_panel_get_type        ),
+  PANEL_TYPE("universal-access", cc_ua_panel_get_type           ),
+  PANEL_TYPE("user-accounts",    cc_user_panel_get_type         ),
 #ifdef BUILD_WACOM
-  { "wacom",            cc_wacom_panel_get_type      },
+  PANEL_TYPE("wacom",            cc_wacom_panel_get_type        ),
 #endif
 };
-
-static GHashTable *panel_types;
 
 GList *
 cc_panel_loader_get_panels (void)
@@ -170,6 +180,10 @@ cc_panel_loader_fill_model (CcShellModel *model)
     }
 }
 
+#ifndef CC_PANEL_LOADER_NO_GTYPES
+
+static GHashTable *panel_types;
+
 static void
 ensure_panel_types (void)
 {
@@ -200,3 +214,5 @@ cc_panel_loader_load_by_name (CcShell     *shell,
                        "argv", argv,
                        NULL);
 }
+
+#endif /* CC_PANEL_LOADER_NO_GTYPES */
