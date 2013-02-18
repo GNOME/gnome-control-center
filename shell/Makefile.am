@@ -100,7 +100,7 @@ completions/gnome-control-center: completions/gnome-control-center.in list-panel
 EXTRA_DIST =					\
 	gnome-control-center.desktop.in.in	\
 	$(completion_in_files)			\
-	list-panel.sh				\
+	list-panel.sh
 
 CLEANFILES = $(BUILT_SOURCES) $(completion_DATA)
 DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in
