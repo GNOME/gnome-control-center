@@ -96,7 +96,6 @@ struct _CcInfoPanelPrivate
   char          *gnome_distributor;
   char          *gnome_date;
   UpdatesState   updates_state;
-  gboolean       is_fallback;
 
   /* Free space */
   GList         *primary_mounts;
