@@ -25,7 +25,6 @@
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <libnotify/notify.h>
-#include <clutter-gtk/clutter-gtk.h>
 
 #include "cc-application.h"
 #include "cc-panel-loader.h"
@@ -34,6 +33,7 @@
 
 #ifdef HAVE_CHEESE
 #include <cheese-gtk.h>
+#include <clutter-gtk/clutter-gtk.h>
 #endif /* HAVE_CHEESE */
 
 struct _CcApplicationPrivate
