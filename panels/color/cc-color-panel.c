@@ -58,6 +58,7 @@ struct _CcColorPanelPrivate
   guint          list_box_selected_id;
   GtkSizeGroup  *list_box_size;
   gboolean       is_live_cd;
+  gboolean       model_is_changing;
 };
 
 enum {
@@ -1640,6 +1641,10 @@ gcm_prefs_device_expanded_changed_cb (CcColorDevice *widget,
   GList *l;
   GList *list;
 
+  /* ignore internal changes */
+  if (prefs->priv->model_is_changing)
+    return;
+
   g_free (prefs->priv->list_box_filter);
   if (is_expanded)
     {
@@ -1647,6 +1652,7 @@ gcm_prefs_device_expanded_changed_cb (CcColorDevice *widget,
 
       /* unexpand other device widgets */
       list = gtk_container_get_children (GTK_CONTAINER (priv->list_box));
+      prefs->priv->model_is_changing = TRUE;
       for (l = list; l != NULL; l = l->next)
         {
           if (!CC_IS_COLOR_DEVICE (l->data))
@@ -1654,6 +1660,7 @@ gcm_prefs_device_expanded_changed_cb (CcColorDevice *widget,
           if (l->data != widget)
             cc_color_device_set_expanded (CC_COLOR_DEVICE (l->data), FALSE);
         }
+      prefs->priv->model_is_changing = FALSE;
       g_list_free (list);
     }
   else
@@ -1860,6 +1867,7 @@ gcm_prefs_list_box_child_selected_cb (EggListBox *list_box,
   if (CC_IS_COLOR_DEVICE (child))
     {
       gcm_prefs_device_clicked (panel, priv->current_device);
+      cc_color_device_set_expanded (CC_COLOR_DEVICE (child), TRUE);
     }
   else if (CC_IS_COLOR_PROFILE (child))
     {
