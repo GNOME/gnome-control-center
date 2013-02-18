@@ -168,7 +168,16 @@ cc_color_device_set_expanded (CcColorDevice *color_device,
                               gboolean expanded)
 {
   CcColorDevicePrivate *priv = color_device->priv;
-  priv->expanded = FALSE;
+
+  /* same as before */
+  if (priv->expanded == expanded)
+    return;
+
+  /* refresh */
+  priv->expanded = expanded;
+  g_signal_emit (color_device,
+                 signals[SIGNAL_EXPANDED_CHANGED], 0,
+                 priv->expanded);
   cc_color_device_refresh (color_device);
 }
 
@@ -195,12 +204,7 @@ cc_color_device_notify_enable_device_cb (GtkSwitch *sw,
     }
 
   /* if expanded, close */
-  if (priv->expanded)
-    {
-      cc_color_device_set_expanded (color_device, FALSE);
-      g_signal_emit (color_device, signals[SIGNAL_EXPANDED_CHANGED], 0,
-                     priv->expanded);
-    }
+  cc_color_device_set_expanded (color_device, FALSE);
 }
 
 static void
