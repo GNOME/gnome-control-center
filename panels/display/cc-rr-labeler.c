@@ -314,48 +314,17 @@ label_draw_background_and_frame (GtkWidget *widget, cairo_t *cr, gboolean for_sh
 	cairo_restore (cr);
 }
 
-static void
-maybe_update_shape (GtkWidget *widget)
-{
-	cairo_t *cr;
-	cairo_surface_t *surface;
-	cairo_region_t *region;
-
-	/* fallback to XShape only for non-composited clients */
-	if (gtk_widget_is_composited (widget)) {
-		gtk_widget_shape_combine_region (widget, NULL);
-		return;
-	}
-
-	surface = gdk_window_create_similar_surface (gtk_widget_get_window (widget),
-						     CAIRO_CONTENT_COLOR_ALPHA,
-						     gtk_widget_get_allocated_width (widget),
-						     gtk_widget_get_allocated_height (widget));
-
-	cr = cairo_create (surface);
-	label_draw_background_and_frame (widget, cr, TRUE);
-	cairo_destroy (cr);
-
-	region = gdk_cairo_region_create_from_surface (surface);
-	gtk_widget_shape_combine_region (widget, region);
-
-	cairo_surface_destroy (surface);
-	cairo_region_destroy (region);
-}
-
 static gboolean
 label_window_draw_event_cb (GtkWidget *widget, cairo_t *cr, gpointer data)
 {
-	if (gtk_widget_is_composited (widget)) {
-		/* clear any content */
-		cairo_save (cr);
-		cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
-		cairo_set_source_rgba (cr, 0, 0, 0, 0);
-		cairo_paint (cr);
-		cairo_restore (cr);
-	}
+	/* clear any content */
+	cairo_save (cr);
+	cairo_set_operator (cr, CAIRO_OPERATOR_SOURCE);
+	cairo_set_source_rgba (cr, 0, 0, 0, 0);
+	cairo_paint (cr);
+	cairo_restore (cr);
 
-	maybe_update_shape (widget);
+	gtk_widget_shape_combine_region (widget, NULL);
 	label_draw_background_and_frame (widget, cr, FALSE);
 
 	return FALSE;
@@ -391,14 +360,14 @@ label_window_realize_cb (GtkWidget *widget)
 	gtk_widget_input_shape_combine_region (widget, region);
 	cairo_region_destroy (region);
 
-	maybe_update_shape (widget);
+	gtk_widget_shape_combine_region (widget, NULL);
 }
 
 static void
 label_window_composited_changed_cb (GtkWidget *widget, CcRRLabeler *labeler)
 {
 	if (gtk_widget_get_realized (widget))
-		maybe_update_shape (widget);
+		gtk_widget_shape_combine_region (widget, NULL);
 }
 
 static GtkWidget *
