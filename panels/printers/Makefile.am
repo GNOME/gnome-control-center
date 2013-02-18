@@ -3,6 +3,7 @@ cappletname = printers
 INCLUDES = 						\
 	$(PANEL_CFLAGS)					\
 	$(PRINTERS_PANEL_CFLAGS)			\
+	$(CUPS_CFLAGS)					\
 	$(SMBCLIENT_CFLAGS)				\
 	-I$(top_srcdir)/shell/				\
 	-DGNOMELOCALEDIR="\"$(datadir)/locale\""	\
