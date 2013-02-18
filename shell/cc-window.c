@@ -1334,7 +1334,6 @@ create_main_page (CcWindow *self)
   gtk_style_context_add_class (context, "view");
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->scrolled_window),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (priv->scrolled_window), GTK_SHADOW_IN);
   gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), priv->scrolled_window, NULL);
 
   priv->main_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -1360,7 +1359,6 @@ create_search_page (CcWindow *self)
   priv->search_scrolled = gtk_scrolled_window_new (NULL, NULL);
   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (priv->search_scrolled),
                                   GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-  gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (priv->scrolled_window), GTK_SHADOW_IN);
   gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), priv->search_scrolled, NULL);
 
   /* setup search functionality */
