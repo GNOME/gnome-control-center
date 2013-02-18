@@ -1857,18 +1857,18 @@ add_automatic_suspend_section (CcPowerPanel *self)
   gtk_size_group_add_widget (priv->row_sizegroup, box);
   gtk_widget_show_all (widget);
 
-  dialog = GTK_WIDGET (gtk_builder_get_object (priv->builder, "automatic_suspend_dialog"));
-  sw = GTK_WIDGET (gtk_builder_get_object (priv->builder, "automatic_suspend_close"));
+  dialog = WID (priv->builder, "automatic_suspend_dialog");
+  sw = WID (priv->builder, "automatic_suspend_close");
   g_signal_connect_swapped (sw, "clicked", G_CALLBACK (gtk_widget_hide), dialog);
   g_signal_connect (dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
-  sw = GTK_WIDGET (gtk_builder_get_object (priv->builder, "suspend_on_battery_switch"));
+  sw = WID (priv->builder, "suspend_on_battery_switch");
   g_settings_bind_with_mapping (priv->gsd_settings, "sleep-inactive-battery-type",
                                 sw, "active",
                                 G_SETTINGS_BIND_DEFAULT,
                                 get_sleep_type, set_sleep_type, NULL, NULL);
 
-  combo = GTK_WIDGET (gtk_builder_get_object (priv->builder, "suspend_on_battery_delay_combo"));
+  combo = WID (priv->builder, "suspend_on_battery_delay_combo");
   g_object_set_data (G_OBJECT (combo), "_gsettings_key", "sleep-inactive-battery-timeout");
   value = g_settings_get_int (priv->gsd_settings, "sleep-inactive-battery-timeout");
   set_value_for_combo (GTK_COMBO_BOX (combo), value);
@@ -1877,13 +1877,13 @@ add_automatic_suspend_section (CcPowerPanel *self)
   g_object_bind_property (sw, "active", combo, "sensitive",
                           G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
 
-  sw = GTK_WIDGET (gtk_builder_get_object (priv->builder, "suspend_on_ac_switch"));
+  sw = WID (priv->builder, "suspend_on_ac_switch");
   g_settings_bind_with_mapping (priv->gsd_settings, "sleep-inactive-ac-type",
                                 sw, "active",
                                 G_SETTINGS_BIND_DEFAULT,
                                 get_sleep_type, set_sleep_type, NULL, NULL);
 
-  combo = GTK_WIDGET (gtk_builder_get_object (priv->builder, "suspend_on_ac_delay_combo"));
+  combo = WID (priv->builder, "suspend_on_ac_delay_combo");
   g_object_set_data (G_OBJECT (combo), "_gsettings_key", "sleep-inactive-ac-timeout");
   value = g_settings_get_int (priv->gsd_settings, "sleep-inactive-ac-timeout");
   set_value_for_combo (GTK_COMBO_BOX (combo), value);
