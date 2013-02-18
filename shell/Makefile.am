@@ -86,12 +86,6 @@ endif
 
 AM_CPPFLAGS = -DGNOMELOCALEDIR="\"$(datadir)/locale\""
 
-menudir = $(sysconfdir)/xdg/menus
-menu_DATA = gnomecc.menu
-
-gnomecc.menu: gnomecc.menu.in
-	$(AM_V_GEN) cat $< | sed 's,@applicationsdir@,$(datadir)/applications/,' > $@
-
 sysdir = $(datadir)/applications
 sys_in_files = gnome-control-center.desktop.in
 sys_DATA = $(sys_in_files:.desktop.in=.desktop)
@@ -107,10 +101,9 @@ EXTRA_DIST =					\
 	gnome-control-center.desktop.in.in	\
 	$(completion_in_files)			\
 	list-panel.sh				\
-	gnomecc.menu.in
 
 CLEANFILES = $(BUILT_SOURCES) $(completion_DATA)
-DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in gnomecc.menu
+DISTCLEANFILES = gnome-control-center.desktop gnome-control-center.desktop.in
 
 noinst_PROGRAMS = test-hostname
 test_hostname_SOURCES = hostname-helper.c hostname-helper.h test-hostname.c
