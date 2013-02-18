@@ -1880,13 +1880,13 @@ gcm_prefs_list_box_child_selected_cb (EggListBox *list_box,
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "toolbutton_device_default"));
   gtk_widget_set_visible (widget, !is_device && cc_color_profile_get_is_default (CC_COLOR_PROFILE (child)));
+  if (profile)
+    gtk_widget_set_sensitive (widget, !cd_profile_get_is_system_wide (profile));
 
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "toolbutton_device_enable"));
   gtk_widget_set_visible (widget, !is_device && !cc_color_profile_get_is_default (CC_COLOR_PROFILE (child)));
 
-  if (profile)
-    gtk_widget_set_sensitive (widget, !cd_profile_get_is_system_wide (profile));
   widget = GTK_WIDGET (gtk_builder_get_object (priv->builder,
                                                "toolbutton_device_calibrate"));
   gtk_widget_set_visible (widget, is_device);
