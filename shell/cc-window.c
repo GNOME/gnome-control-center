@@ -73,13 +73,14 @@ struct _CcWindowPrivate
   GtkWidget  *main_vbox;
   GtkWidget  *scrolled_window;
   GtkWidget  *search_scrolled;
-  GtkWidget  *home_button;
+  GtkWidget  *previous_button;
   GtkWidget  *top_right_box;
   GtkWidget  *search_entry;
   GtkWidget  *lock_button;
   GtkWidget  *current_panel_box;
   GtkWidget  *current_panel;
   char       *current_panel_id;
+  GQueue     *previous_panels;
 
   GPtrArray  *custom_widgets;
 
@@ -100,6 +101,11 @@ enum
   PROP_0,
   PROP_ACTIVE_PANEL
 };
+
+static gboolean cc_window_set_active_panel_from_id (CcShell      *shell,
+                                                    const gchar  *start_id,
+                                                    const gchar **argv,
+                                                    GError      **err);
 
 /* Notebook helpers */
 static GtkWidget *
@@ -241,6 +247,24 @@ _shell_remove_all_custom_widgets (CcWindowPrivate *priv)
 }
 
 static void
+add_current_panel_to_history (CcShell    *shell,
+                              const char *start_id)
+{
+  CcWindowPrivate *priv;
+
+  g_return_if_fail (start_id != NULL);
+
+  priv = CC_WINDOW (shell)->priv;
+
+  if (!priv->current_panel_id ||
+      g_strcmp0 (priv->current_panel_id, start_id) == 0)
+    return;
+
+  g_queue_push_head (priv->previous_panels, g_strdup (priv->current_panel_id));
+  g_debug ("Added '%s' to the previous panels", priv->current_panel_id);
+}
+
+static void
 shell_show_overview_page (CcWindow *self)
 {
   CcWindowPrivate *priv = self->priv;
@@ -252,6 +276,10 @@ shell_show_overview_page (CcWindow *self)
   priv->current_panel = NULL;
   priv->current_panel_box = NULL;
   g_clear_pointer (&priv->current_panel_id, g_free);
+
+  /* Clear the panel history */
+  g_queue_free_full (self->priv->previous_panels, g_free);
+  self->priv->previous_panels = g_queue_new ();
 
   /* clear the search text */
   g_free (priv->filter_string);
@@ -294,7 +322,7 @@ item_activated_cb (CcShellCategoryView *view,
                    gchar               *id,
                    CcWindow            *shell)
 {
-  cc_shell_set_active_panel_from_id (CC_SHELL (shell), id, NULL, NULL);
+  cc_window_set_active_panel_from_id (CC_SHELL (shell), id, NULL, NULL);
 }
 
 static gboolean
@@ -695,7 +723,7 @@ on_search_row_activated (GtkTreeView       *treeview,
                       -1);
 
   if (id)
-    cc_shell_set_active_panel_from_id (CC_SHELL (shell), id, NULL, NULL);
+    cc_window_set_active_panel_from_id (CC_SHELL (shell), id, NULL, NULL);
 
   gtk_tree_selection_unselect_all (selection);
 
@@ -876,10 +904,20 @@ setup_model (CcWindow *shell)
 }
 
 static void
-home_button_clicked_cb (GtkButton *button,
-                        CcWindow  *shell)
+previous_button_clicked_cb (GtkButton *button,
+                            CcWindow  *shell)
 {
-  shell_show_overview_page (shell);
+  g_debug ("Num previous panels? %d", g_queue_get_length (shell->priv->previous_panels));
+  if (g_queue_is_empty (shell->priv->previous_panels)) {
+    shell_show_overview_page (shell);
+  } else {
+    char *panel_name;
+
+    panel_name = g_queue_pop_head (shell->priv->previous_panels);
+    g_debug ("About to go to previous panel '%s'", panel_name);
+    cc_window_set_active_panel_from_id (CC_SHELL (shell), panel_name, NULL, NULL);
+    g_free (panel_name);
+  }
 }
 
 static void
@@ -897,7 +935,7 @@ notebook_page_notify_cb (GtkNotebook *notebook,
 
   if (child == priv->scrolled_window || child == priv->search_scrolled)
     {
-      gtk_widget_hide (priv->home_button);
+      gtk_widget_hide (priv->previous_button);
       gtk_widget_show (priv->search_entry);
       gtk_widget_hide (priv->lock_button);
 
@@ -908,7 +946,7 @@ notebook_page_notify_cb (GtkNotebook *notebook,
     }
   else
     {
-      gtk_widget_show (priv->home_button);
+      gtk_widget_show (priv->previous_button);
       gtk_widget_hide (priv->search_entry);
       /* set the scrolled window small so that it doesn't force
          the window to be larger than this panel */
@@ -935,10 +973,10 @@ _shell_embed_widget_in_header (CcShell      *shell,
 
 /* CcShell implementation */
 static gboolean
-_shell_set_active_panel_from_id (CcShell      *shell,
-                                 const gchar  *start_id,
-                                 const gchar **argv,
-                                 GError      **err)
+cc_window_set_active_panel_from_id (CcShell      *shell,
+                                    const gchar  *start_id,
+                                    const gchar **argv,
+                                    GError      **err)
 {
   GtkTreeIter iter;
   gboolean iter_valid;
@@ -1019,6 +1057,16 @@ _shell_set_active_panel_from_id (CcShell      *shell,
     g_object_unref (gicon);
 
   return TRUE;
+}
+
+static gboolean
+_shell_set_active_panel_from_id (CcShell      *shell,
+                                 const gchar  *start_id,
+                                 const gchar **argv,
+                                 GError      **err)
+{
+  add_current_panel_to_history (shell, start_id);
+  return cc_window_set_active_panel_from_id (shell, start_id, argv, err);
 }
 
 static GtkWidget *
@@ -1102,6 +1150,12 @@ cc_window_dispose (GObject *object)
   g_clear_object (&priv->store);
   g_clear_object (&priv->search_filter);
   g_clear_object (&priv->active_panel);
+
+  if (priv->previous_panels)
+    {
+      g_queue_free_full (priv->previous_panels, g_free);
+      priv->previous_panels = NULL;
+    }
 
   G_OBJECT_CLASS (cc_window_parent_class)->dispose (object);
 }
@@ -1378,14 +1432,14 @@ create_header (CcWindow *self)
 
   image = gtk_image_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
   gtk_widget_show (image);
-  priv->home_button = button = gtk_button_new ();
+  priv->previous_button = button = gtk_button_new ();
   gtk_button_set_image (GTK_BUTTON (button), image);
   gtk_widget_set_no_show_all (button, TRUE);
   accessible = gtk_widget_get_accessible (button);
   atk_object_set_name (accessible, _("All Settings"));
   gd_header_bar_pack_start (GD_HEADER_BAR (priv->header), button);
-  g_signal_connect (button, "clicked", G_CALLBACK (home_button_clicked_cb), self);
-  context = gtk_widget_get_style_context (priv->home_button);
+  g_signal_connect (button, "clicked", G_CALLBACK (previous_button_clicked_cb), self);
+  context = gtk_widget_get_style_context (priv->previous_button);
   gtk_style_context_add_class (context, "image-button");
 
   priv->top_right_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -1450,6 +1504,8 @@ cc_window_init (CcWindow *self)
   self->priv->small_screen = SMALL_SCREEN_UNSET;
 
   create_window (self);
+
+  self->priv->previous_panels = g_queue_new ();
 
   /* keep a list of custom widgets to unload on panel change */
   priv->custom_widgets = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
