@@ -64,6 +64,7 @@ struct _CcSharingPanelPrivate
 {
   GtkBuilder *builder;
 
+  GtkWidget *master_switch;
   GtkWidget *hostname_entry;
 
   GtkWidget *bluetooth_sharing_dialog;
@@ -77,6 +78,43 @@ struct _CcSharingPanelPrivate
   BluetoothKillswitch *bluetooth_killswitch;
 #endif
 };
+
+static void
+cc_sharing_panel_master_switch_notify (GtkSwitch      *gtkswitch,
+                                       GParamSpec     *pspec,
+                                       CcSharingPanel *self)
+{
+  CcSharingPanelPrivate *priv = self->priv;
+  gboolean active;
+
+  active = gtk_switch_get_active (gtkswitch);
+
+  if (!active)
+    {
+      /* disable all services if the master switch is not active */
+      gtk_switch_set_active (GTK_SWITCH (WID ("remote-view-switch")), FALSE);
+      gtk_switch_set_active (GTK_SWITCH (WID ("remote-login-switch")), FALSE);
+      gtk_switch_set_active (GTK_SWITCH (WID ("share-public-folder-on-network-switch")),
+                             FALSE);
+      gtk_switch_set_active (GTK_SWITCH (WID ("share-media-switch")), FALSE);
+      gtk_switch_set_active (GTK_SWITCH (WID ("share-public-folder-switch")),
+                             FALSE);
+    }
+
+  gtk_widget_set_sensitive (WID ("main-list-box"), active);
+}
+
+static void
+cc_sharing_panel_constructed (GObject *object)
+{
+  CcSharingPanelPrivate *priv = CC_SHARING_PANEL (object)->priv;
+
+  G_OBJECT_CLASS (cc_sharing_panel_parent_class)->constructed (object);
+
+  /* add the master switch */
+  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (object)),
+                                   priv->master_switch);
+}
 
 static void
 cc_sharing_panel_dispose (GObject *object)
@@ -135,6 +173,7 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
 
   g_type_class_add_private (klass, sizeof (CcSharingPanelPrivate));
 
+  object_class->constructed = cc_sharing_panel_constructed;
   object_class->dispose = cc_sharing_panel_dispose;
 }
 
@@ -201,10 +240,10 @@ cc_sharing_panel_main_list_box_update_separator (GtkWidget **separator,
 }
 
 static gboolean
-cc_sharing_panel_switch_to_label_transform_func (GBinding     *binding,
-                                                 const GValue *source_value,
-                                                 GValue       *target_value,
-                                                 gpointer      user_data)
+cc_sharing_panel_switch_to_label_transform_func (GBinding       *binding,
+                                                 const GValue   *source_value,
+                                                 GValue         *target_value,
+                                                 CcSharingPanel *self)
 {
   gboolean active;
 
@@ -221,17 +260,22 @@ cc_sharing_panel_switch_to_label_transform_func (GBinding     *binding,
   else
     g_value_set_string (target_value, C_("service is disabled", "Off"));
 
+  /* ensure the master switch is active if one of the services is active */
+  if (active)
+    gtk_switch_set_active (GTK_SWITCH (self->priv->master_switch), TRUE);
+
   return TRUE;
 }
 
 static void
-cc_sharing_panel_bind_switch_to_label (GtkWidget *gtkswitch,
-                                       GtkWidget *label)
+cc_sharing_panel_bind_switch_to_label (CcSharingPanel *self,
+                                       GtkWidget      *gtkswitch,
+                                       GtkWidget      *label)
 {
   g_object_bind_property_full (gtkswitch, "active", label, "label",
                                G_BINDING_SYNC_CREATE,
-                               cc_sharing_panel_switch_to_label_transform_func,
-                               NULL, NULL, NULL);
+                               (GBindingTransformFunc) cc_sharing_panel_switch_to_label_transform_func,
+                               NULL, self, NULL);
 }
 
 static void
@@ -319,7 +363,8 @@ cc_sharing_panel_setup_bluetooth_sharing_dialog (CcSharingPanel *self)
 #endif
 
 
-  cc_sharing_panel_bind_switch_to_label (WID ("share-public-folder-switch"),
+  cc_sharing_panel_bind_switch_to_label (self,
+                                         WID ("share-public-folder-switch"),
                                          WID ("bluetooth-sharing-status-label"));
 
   cc_sharing_panel_bind_switch_to_widgets (WID ("share-public-folder-switch"),
@@ -464,7 +509,7 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
     }
   g_free (path);
 
-  cc_sharing_panel_bind_switch_to_label (WID ("share-media-switch"),
+  cc_sharing_panel_bind_switch_to_label (self, WID ("share-media-switch"),
                                          WID ("media-sharing-status-label"));
 
 
@@ -602,7 +647,8 @@ cc_sharing_panel_setup_personal_file_sharing_dialog (CcSharingPanel *self)
   GSettings *settings;
 
 
-  cc_sharing_panel_bind_switch_to_label (WID ("share-public-folder-on-network-switch"),
+  cc_sharing_panel_bind_switch_to_label (self,
+                                         WID ("share-public-folder-on-network-switch"),
                                          WID ("personal-file-sharing-status-label"));
 
   cc_sharing_panel_bind_switch_to_widgets (WID ("share-public-folder-on-network-switch"),
@@ -651,7 +697,7 @@ cc_sharing_panel_setup_remote_login_dialog (CcSharingPanel *self)
 {
   CcSharingPanelPrivate *priv = self->priv;
 
-  cc_sharing_panel_bind_switch_to_label (WID ("remote-login-switch"),
+  cc_sharing_panel_bind_switch_to_label (self, WID ("remote-login-switch"),
                                          WID ("remote-login-status-label"));
 
   cc_sharing_panel_setup_label_with_hostname (self, WID ("remote-login-label"));
@@ -693,7 +739,7 @@ cc_sharing_panel_setup_screen_sharing_dialog (CcSharingPanel *self)
   CcSharingPanelPrivate *priv = self->priv;
   GSettings *settings;
 
-  cc_sharing_panel_bind_switch_to_label (WID ("remote-view-switch"),
+  cc_sharing_panel_bind_switch_to_label (self, WID ("remote-view-switch"),
                                          WID ("screen-sharing-status-label"));
 
   cc_sharing_panel_bind_switch_to_widgets (WID ("remote-view-switch"),
@@ -801,6 +847,17 @@ cc_sharing_panel_init (CcSharingPanel *self)
   egg_list_box_set_separator_funcs (EGG_LIST_BOX (WID ("main-list-box")),
                                     cc_sharing_panel_main_list_box_update_separator,
                                     NULL, NULL);
+
+  /* create the master switch */
+  priv->master_switch = gtk_switch_new ();
+  gtk_widget_show (priv->master_switch);
+
+  /* start the panel in the disabled state */
+  gtk_switch_set_active (GTK_SWITCH (priv->master_switch), FALSE);
+  gtk_widget_set_sensitive (WID ("main-list-box"), FALSE);
+  g_signal_connect (priv->master_switch, "notify::active",
+                    G_CALLBACK (cc_sharing_panel_master_switch_notify), self);
+
 
   /* bluetooth */
   if (cc_sharing_panel_check_schema_available (self, FILE_SHARING_SCHEMA_ID))
