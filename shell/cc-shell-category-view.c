@@ -128,7 +128,6 @@ cc_shell_category_view_constructed (GObject *object)
 
   renderer = gtk_cell_renderer_pixbuf_new ();
   g_object_set (renderer,
-                "follow-state", TRUE,
                 "stock-size", GTK_ICON_SIZE_DIALOG,
                 NULL);
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (iconview),
