@@ -1201,6 +1201,7 @@ window_key_press_event (GtkWidget   *win,
   GdkKeymap *keymap;
   gboolean retval;
   GdkModifierType state;
+  gboolean is_rtl;
 
   if (event->state == 0)
     return FALSE;
@@ -1210,6 +1211,7 @@ window_key_press_event (GtkWidget   *win,
   keymap = gdk_keymap_get_default ();
   gdk_keymap_add_virtual_modifiers (keymap, &state);
   state = state & gtk_accelerator_get_default_mod_mask ();
+  is_rtl = gtk_widget_get_direction (win) == GTK_TEXT_DIR_RTL;
 
   if (state == GDK_CONTROL_MASK)
     {
@@ -1238,11 +1240,17 @@ window_key_press_event (GtkWidget   *win,
             break;
         }
     }
-  else if ((state == GDK_MOD1_MASK && event->keyval == GDK_KEY_Up) ||
-           event->keyval == GDK_KEY_Back)
+  else if (state == GDK_MOD1_MASK && event->keyval == GDK_KEY_Up)
     {
       if (notebook_get_selected_page (self->priv->notebook) != self->priv->scrolled_window)
         shell_show_overview_page (self);
+      retval = TRUE;
+    }
+  else if ((!is_rtl && state == GDK_MOD1_MASK && event->keyval == GDK_KEY_Left) ||
+           (is_rtl && state == GDK_MOD1_MASK && event->keyval == GDK_KEY_Right) ||
+           event->keyval == GDK_KEY_Back)
+    {
+      previous_button_clicked_cb (NULL, self);
       retval = TRUE;
     }
   return retval;
