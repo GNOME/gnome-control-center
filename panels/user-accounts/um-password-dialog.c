@@ -289,6 +289,13 @@ update_sensitivity (UmPasswordDialog *um)
         password = gtk_entry_get_text (GTK_ENTRY (um->password_entry));
         verify = gtk_entry_get_text (GTK_ENTRY (um->verify_entry));
         old_password = gtk_entry_get_text (GTK_ENTRY (um->old_password_entry));
+
+        /* Don't update the password strength if we didn't enter anything */
+        if (password && *password == '\0' &&
+            verify && *verify == '\0' &&
+            old_password && *old_password == '\0')
+                return;
+
         strength_level = update_password_strength (um);
 
         if (strength_level < 1) {
